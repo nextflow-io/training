@@ -39,6 +39,10 @@ Let's move into the project directory.
 cd side-quests/metadata
 ```
 
+You can set VSCode to focus on this directory:
+
+```bash
+code .
 You'll find a `data` directory containing a samplesheet and a main workflow file.
 
 ```console title="Directory contents"
@@ -57,7 +61,7 @@ You'll find a `data` directory containing a samplesheet and a main workflow file
 └── nextflow.config
 ```
 
-The samplesheet contains information about different samples and some associated data that we will use in this exercise to tailor our analysis to each sample. Each data files contains greetings in different languages, but we don't know what language they are in. In particular, the samplesheet has 3 columns:
+The samplesheet contains information about different samples and some associated data that we will use in this exercise to tailor our analysis to each sample. Each data file contains greetings in different languages, but we don't know what language they are in. The samplesheet has 3 columns:
 
 - `id`: self-explanatory, an ID given to the sample
 - `character`: a character name, that we will use later to draw different creatures
@@ -122,7 +126,7 @@ my_map = {'id': 'sampleA', 'character': 'squirrel'}
 print(my_map['id'])  # Prints: sampleA
 ```
 
-The `header: true` option tells Nextflow to use the first row of the CSV file as the header row, which will be used as keys for the values. Let's see what Nextflow can see after reading with `splitCsv`. To do this, we can use the `view` operator.
+The `header: true` option tells Nextflow to use the first row of the CSV file as the header row, which will be used as keys for the values. Let's see what Nextflow can see after reading with `splitCsv`. Run the pipeline with the `view()` operator we added above:
 
 Run the pipeline:
 
@@ -153,23 +157,23 @@ Each map entry corresponds to a column in our samplesheet:
 
 This format makes it easy to access specific fields from each sample. For example, we could access the sample ID with `id` or the txt file path with `recording`. The output above shows each row from the CSV file converted into a map with keys matching the header row.
 
-Let's access a specific column, the `character` column, that we read in from the samplesheet, and print it. We can use the Nextflow `map` operator to iterate over each `row` in our samplesheet and return specific entry of our map object:
+Let's access a specific column, the `character` column, that we read in from the samplesheet, and print it. We can use the Nextflow `map` operator to iterate over each item in our channel and return specific entry of our map object:
 
 === "After"
 
     ```groovy title="main.nf" linenums="4" hl_lines="2-4"
-                            .splitCsv(header: true)
-                            .map{ row ->
-                              row.character
-                            }
-                            .view()
+            .splitCsv(header: true)
+            .map{ row ->
+                row.character
+            }
+            .view()
     ```
 
 === "Before"
 
     ```groovy title="main.nf" linenums="4" hl_lines="2-3"
-                            .splitCsv(header: true)
-                            .view()
+            .splitCsv(header: true)
+            .view()
     ```
 
 and rerun:
@@ -188,35 +192,42 @@ moose
 turtle
 ```
 
-Success, we can access individual entries or entire rows from our samplesheet.
+Success, we can use the map structures derived from our sample sheet to access the values from individual columns for each row.
 
 Now that we've successfully read in the samplesheet and have access to the data in each row, we can begin implementing our pipeline logic.
 
 ### 1.2. Separate meta data and data
 
-In the samplesheet, we have both the input files and data about the input files (`id`, `character`), the meta data.
+In the samplesheet, we have both the input files and data about the input files (`id`, `character`), the metadata.
 As we progress through the workflow, we generate more meta data about each sample.
-If we keep all fields as separate Channel elements, it quickly becomes messy: every time we add a new field, we’d have to update every downstream process to expect a different number of inputs, making the code brittle and hard to maintain.
+So far, every column from the sample sheet has become a separate item in the channel items we derived using `splitCsv()`. Every process that consumes this channel would need to be configured with this structure in mind:
 
-By grouping the metadata into its own key-value map, and keeping the file path as a distinct element, we make our workflow much more robust and flexible. We can add or remove metadata at any stage without having to rewrite process inputs. This approach also keeps process code cleaner and makes it easier to share and reuse code, both within a workflow and across different workflows.
+ ```groovy
+     input:
+     tuple val(id), val(character), file(recording)
+``` 
+
+This means that as soon as somebody added an extra column to the sample sheet, the workflow would start producing errors, because the shape of the channel would no longer match what the process expected. It also makes the process hard to share with others who might have slightly different input data, and we end up hard-coding variables into the process that aren't needed by the script block.
+
+To avoid this, we need to find a way of keeping the channel structure consistent however many columns that sample sheet contains, and we can do that by keeping all the metadata in a single part of the channel tuples we call simply the `meta map`.
 
 Let's use this and separate our metadata from the file path. We'll use the `map` operator to restructure our channel elements into a tuple consisting of the meta map and file:
 
 === "After"
 
     ```groovy title="main.nf" linenums="5" hl_lines="2"
-    .map { row ->
-      [ [id:row.id, character:row.character], row.recording ]
-    }
-    .view()
+            .map { row ->
+                [ [id:row.id, character:row.character], row.recording ]
+            }
+            .view()
     ```
 
 === "Before"
 
     ```groovy title="main.nf" linenums="5"
-    .map{ row ->
-      row.character
-    }
+            .map{ row ->
+                  row.character
+            }
     ```
 
 Let's run it:
@@ -239,7 +250,16 @@ Launching `main.nf` [lethal_booth] DSL2 - revision: 0d8f844c07
 [[id:sampleG, character:turtle], /workspaces/training/side-quests/metadata/data/ciao.txt]
 ```
 
-We have successfully separated our values into their own map to separate it from the file. Each of our channel elements now has the shape `[ meta,  file ]`. Each process that now uses the data can be of similar input shape even if we keep adding or removing fields.
+Now, each item in the channel has only two items, the metadata map (e.g. `[id:sampleA, character:squirrel]`) and the data file described by that metadata (e.g. `/workspaces/training/side-quests/metadata/data/bonjour.txt`).
+
+Now we can write processes to consume the channel without hard-coding the metadata items into the input specification:
+
+ ```groovy
+     input:
+     tuple val(meta), file(recording)
+``` 
+
+Additional columns in the sample sheet will make more properties available in the `meta` map, but won't change the channel shape.
 
 ### Takeaway
 
@@ -251,9 +271,9 @@ In this section, you've learned:
 
 ---
 
-## 2. Create new meta map keys
+## 2. Manipulating metadata
 
-### 2.1. Passing the meta map through a process
+### 2.1. Copying input metadata to output channels
 
 Now we want to process our samples with unidentified languages. Let's add a process definition before the `workflow` that can identify the language in each file:
 
@@ -343,7 +363,7 @@ output:
 
 This is a useful way to ensure the sample-specific information stays connected with any new information that is generated.
 
-### 2.2. Add the language prediction to the meta map
+### 2.2. Using process outputs to augment metadata
 
 Given that this is more data about the files, let's add it to our meta map. We can use the [`map` operator](https://www.nextflow.io/docs/latest/operator.html#map) again to create a new key `lang` and set the value to the predicted language:
 
@@ -365,6 +385,14 @@ Given that this is more data about the files, let's add it to our meta map. We c
       ch_prediction = IDENTIFY_LANGUAGE(ch_samplesheet)
     ```
 
+The `map` operator takes each channel element and processes it to create a modified version. Inside the closure `{ meta, file, lang -> ... }`, we then take the existing `meta` map, create a new map `[lang:lang]`, and merge both together using `+`.
+
+The `+` operator in Groovy merges two maps together. So if our original `meta` was `[id:sampleA, character:squirrel]`, then `meta + [lang:'fr']` creates a new map: `[id:sampleA, character:squirrel, lang:fr]`.
+
+!!! Note
+
+    The `+` notation with maps creates an entirely new map object, which is what we want. If we'd done something like `meta.lang = lang` we'd have been modifying the original object, which can lead to unpredictable effects. 
+
 ```bash title="View new meta map key"
 nextflow run main.nf -resume
 ```
@@ -385,25 +413,19 @@ Launching `main.nf` [cheeky_fermat] DSL2 - revision: d096281ee4
 [[id:sampleG, character:turtle, lang:it], /workspaces/training/side-quests/metadata/work/4e/f722fe47271ba7ebcd69afa42964ca/ciao.txt]
 ```
 
-Nice, we expanded our meta map with new information we gathered in the pipeline. Let's take a look at what happened here:
-
-After running the language prediction, each element in the output channel looks like this:
+Nice, we expanded our meta map with new information we gathered in the pipeline. After running the language prediction, each element in the output channel looks like this:
 
 ```console
 [meta, file, lang]  // e.g. [[id:sampleA, character:squirrel], bonjour.txt, fr]
 ```
 
-The `map` operator takes each channel element and processes it to create a modified version. Inside the closure `{ meta, file, lang -> ... }`, we then take the existing `meta` map, create a new map `[lang:lang]`, and merge both together using `+`.
-
-The `+` operator in Groovy merges two maps together. So if our original `meta` was `[id:sampleA, character:squirrel]`, then `meta + [lang:'fr']` creates a new map: `[id:sampleA, character:squirrel, lang:fr]`.
-
 <!-- TODO Should we also show how to remove a key using subMap?! -->
 
 ### 2.3. Assign a language group using conditionals
 
-Alright, now that we have our language predictions, let's use the information to assign them into new groups. In our example data, we have provided data sets that belong either to `germanic` (either English or German) or `romance` (French, Spanish, Italian) languages.
+Now that we have our language predictions, let's use the information to assign them into new groups. In our example data, we have provided data sets that belong either to `germanic` (either English or German) or `romance` (French, Spanish, Italian) languages.
 
-We can use the `map` operator to assign either group.
+We can add another `map` operator to assign either group (add this below your last map operation).
 
 === "After"
 
@@ -459,7 +481,7 @@ Here's what's happening step by step:
 - Create a new field `lang_group`: We set a default to `romance`
 - Extract existing metadata: We access `meta.lang` (the language we predicted earlier) from the existing meta map
 - Apply conditional logic: We use an if-clause to determine the language group based on the language: Is `meta.lang` either `de` or `en`, then we re-assign `lang_group` to `germanic`
-- Merge with existing metadata: We use `meta + [lang_group:lang_group]` to combine the existing meta map with our new field
+- Merge with existing metadata: We use `meta + [lang_group:lang_group]` in the same way as before to combine the existing meta map with our new field
 
 The resulting channel elements maintain their `[meta, file]` structure, but the meta map now includes this new classification.
 
@@ -467,15 +489,16 @@ The resulting channel elements maintain their `[meta, file]` structure, but the 
 
 In this section, you've learned how to :
 
+- **Apply input metadata to output channels**: Copying metadata in this way allows us to associate results later on based on metadata content.
 - **Create custom keys**: You created two new keys in your meta map, merging them with `meta + [new_key:value]` into the existing meta map. One based on a computed value from a process, and one based on a condition you set in the `map` operator.
 
 These allow you to associated new and existing meta data with files as you progress through your pipeline.
 
 ---
 
-## 3. Customize a process with meta map
+## 3. Use meta map properties in a process
 
-Let's let some fun characters say the phrases that we have passed in. In the [hello-nextflow training](../hello_nextflow/05_hello_containers.md), you already encountered the `cowpy` package, a python implementation of a tool called `cowsay` that generates ASCII art to display arbitrary text inputs in a fun way. We will re-use a process from there.
+Let's make some fun characters say the phrases from the files our channel. In the [hello-nextflow training](../hello_nextflow/05_hello_containers.md), you already encountered the `cowpy` package, a python implementation of a tool called `cowsay` that generates ASCII art to display arbitrary text inputs in a fun way. We will re-use a process from there.
 
 Copy in the process before your workflow block:
 
