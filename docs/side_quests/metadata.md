@@ -707,6 +707,9 @@ This example shows you what's possible when you have a meta map, but it's worth 
 ```
 
 This way, if we fail to provide the expected input to the process, Nextflow will be much clearer with us what the problem is.
+
+This highlights a careful balance: The meta map is excellent for keeping channel structure clean by preventing arbitrary channel structures with inputs that are not relevant for every process. However, for mandatory elements that are directly referenced in a process, extracting them as explicit inputs creates more robust code.
+
 ### Takeaway
 
 In this section, you've learned how to:
