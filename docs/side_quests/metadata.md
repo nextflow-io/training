@@ -54,6 +54,8 @@ You can set VSCode to focus on this directory:
 
 ```bash
 code .
+```
+
 You'll find a `data` directory containing a samplesheet and a main workflow file.
 
 ```console title="Directory contents"
@@ -564,7 +566,8 @@ Let's run our files through `COWPY` and remove our `view` statement:
         .view()
     ```
 
-We are still missing a publishing location. Given we have been trying to figure out what languages our files were in, let's group the files by language in the output directory. Earlier, we added the predicted language to the `meta` map. We can access this `key` in the process and use it in the `publishDir` directive:
+We also need to add a publishing location, so that we can view our comedy creatures saying our phrases. Given we have been trying to figure out what languages our samples were in, let's group the samples by language in the output directory.
+Earlier, we added the predicted language to the `meta` map. We can access this `key` in the process and use it in the `publishDir` directive:
 
 === "After"
 
