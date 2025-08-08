@@ -691,7 +691,7 @@ and take another look at our french phrase:
                ||     ||
 ```
 
-This is a subtle difference to other parameters that we have set in the pipelines in previous trainings. A parameter that is passed as part of the `params` object is generally applied to all datasets. When a more surgical approache is necessary, using the metadata is a good alternative.
+This approach differs from using pipeline parameters (`params`), which generally apply the same configuration to all files in your workflow. By leveraging metadata applied to each item in a channel, you can fine-tune process behavior on a per-file basis.
 
 ### Takeaway
 
