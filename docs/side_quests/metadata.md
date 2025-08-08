@@ -20,6 +20,17 @@ We'll explore how to handle metadata in workflows. Starting with a simple datash
 
 These skills will help you build more robust and flexible pipelines that can handle complex file relationships and processing requirements.
 
+In this tutorial, we'll tackle a common data processing scenario: handling multiple files where each file needs different processing based on its characteristics.
+
+We have greeting files in different languages (French, German, Spanish, Italian, English), but we don't know which language each file contains. Our challenge is to:
+
+1. **Identify** the language in each file automatically
+2. **Group** files by language family (Germanic vs Romance languages)
+3. **Customize** the processing for each file based on its language and metadata
+4. **Organize** outputs by language group
+
+This represents a typical workflow pattern where file-specific metadata drives processing decisions - exactly the kind of problem that metadata maps solve elegantly.
+
 Let's dive in!
 
 ## 0. Warmup
