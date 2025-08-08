@@ -100,8 +100,8 @@ workflow  {
 
     ```groovy title="main.nf" linenums="3" hl_lines="2-3"
     ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
-                            .splitCsv(header: true)
-                            .view()
+        .splitCsv(header: true)
+        .view()
     ```
 
 === "Before"
@@ -202,9 +202,9 @@ In the datasheet, we have both the input files and data about the input files (`
 As we progress through the workflow, we generate more metadata about each file.
 So far, every column from the datasheet has become a separate item in the channel items we derived using `splitCsv()`. Every process that consumes this channel would need to be configured with this structure in mind:
 
- ```groovy
-     input:
-     tuple val(id), val(character), file(recording)
+```groovy
+    input:
+    tuple val(id), val(character), file(recording)
 ```
 
 This means that as soon as somebody added an extra column to the datasheet, the workflow would start producing errors, because the shape of the channel would no longer match what the process expected. It also makes the process hard to share with others who might have slightly different input data, and we end up hard-coding variables into the process that aren't needed by the script block.
@@ -216,18 +216,17 @@ Let's use this and separate our metadata from the file path. We'll use the `map`
 === "After"
 
     ```groovy title="main.nf" linenums="5" hl_lines="2"
-            .map { row ->
-                [ [id:row.id, character:row.character], row.recording ]
-            }
-            .view()
+        .map { row ->
+            [[id: row.id, character: row.character], row.recording]
+        }
     ```
 
 === "Before"
 
     ```groovy title="main.nf" linenums="5"
-            .map{ row ->
-                  row.character
-            }
+        .map{ row ->
+              row.character
+        }
     ```
 
 Let's run it:
@@ -254,9 +253,9 @@ Now, each item in the channel has only two items, the metadata map (e.g. `[id:sa
 
 Now we can write processes to consume the channel without hard-coding the metadata items into the input specification:
 
- ```groovy
-     input:
-     tuple val(meta), file(recording)
+```groovy
+    input:
+    tuple val(meta), file(recording)
 ```
 
 Additional columns in the datasheet will make more properties available in the `meta` map, but won't change the channel shape.
@@ -312,20 +311,20 @@ Let's include the process, then run, and view it:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="25" hl_lines="3-5"
-                          [ [id:row.id, character:row.character], row.recording ]
-                      }
+    ```groovy title="main.nf" linenums="25" hl_lines="4-5"
+            [[id: row.id, character: row.character], row.recording]
+        }
 
-          ch_prediction = IDENTIFY_LANGUAGE(ch_samplesheet)
-          ch_prediction.view()
+    ch_prediction = IDENTIFY_LANGUAGE(ch_samplesheet)
+    ch_prediction.view()
     ```
 
 === "Before"
 
     ```groovy title="main.nf" linenums="25"
-                        [ [id:row.id, character:row.character], row.recording ]
-                    }
-                    .view()
+            [ [id:row.id, character:row.character], row.recording ]
+        }
+        .view()
     ```
 
 ```bash title="Identify languages"
@@ -358,7 +357,7 @@ You may have noticed something else: we kept the metadata of our files and assoc
 
 ```groovy title="main.nf" linenums="12"
 output:
-      tuple val(meta), path(file), stdout
+tuple val(meta), path(file), stdout
 ```
 
 This is a useful way to ensure the metadata stays connected with any new information that is generated.
@@ -371,18 +370,18 @@ Given that this is more data about the files, let's add it to our meta map. We c
 
     ```groovy title="main.nf" linenums="28" hl_lines="2-5"
       ch_prediction = IDENTIFY_LANGUAGE(ch_samplesheet)
-      ch_languages = ch_prediction.map { meta, file, lang ->
-                                      [ meta + [lang:lang], file ]
-                                  }
-                                  .view()
-
+      ch_languages = ch_prediction
+        .map { meta, file, lang ->
+            [meta + [lang: lang], file]
+        }
+        .view()
     }
     ```
 
 === "Before"
 
     ```groovy title="main.nf" linenums="28"
-      ch_prediction = IDENTIFY_LANGUAGE(ch_samplesheet)
+    ch_prediction = IDENTIFY_LANGUAGE(ch_samplesheet)
     ```
 
 The `map` operator takes each channel element and processes it to create a modified version. Inside the closure `{ meta, file, lang -> ... }`, we then take the existing `meta` map, create a new map `[lang:lang]`, and merge both together using `+`.
@@ -429,19 +428,19 @@ We can add another `map` operator to assign either group (add this below your la
 
 === "After"
 
-    ```groovy title="main.nf" linenums="31" hl_lines="4-10"
+    ```groovy title="main.nf" linenums="31" hl_lines="4-12"
     }
     .map { meta, file ->
 
-        if ( meta.lang.equals("de") || meta.lang.equals('en') ){
+        def lang_group = "unknown"
+        if (meta.lang.equals("de") || meta.lang.equals('en')) {
             lang_group = "germanic"
-        } else if ( meta.lang in ["fr", "es", "it"] ) {
+        }
+        else if (meta.lang in ["fr", "es", "it"]) {
             lang_group = "romance"
-        } else {
-            lang_group = "unknown"
         }
 
-        [ meta + [lang_group:lang_group], file ]
+        [meta + [lang_group: lang_group], file]
     }
     .view()
     ```
@@ -478,9 +477,9 @@ Let's understand how this transformation works. The `map` operator here again ta
 
 Here's what's happening step by step:
 
-- Create a new field `lang_group`: We set a default to `romance`
+- Create a new field `lang_group`: We set a default to `unknown`
 - Extract existing metadata: We access `meta.lang` (the language we predicted earlier) from the existing meta map
-- Apply conditional logic: We use an if-clause to determine the language group based on the language: Is `meta.lang` either `de` or `en`, then we re-assign `lang_group` to `germanic`
+- Apply conditional logic: We use an if-clause to determine the language group based on the language: Is `meta.lang` either `de` or `en`, we re-assign `lang_group` to `germanic`, if `fr`, `es`, or `it`, then we re-assign to `romance`
 - Merge with existing metadata: We use `meta + [lang_group:lang_group]` in the same way as before to combine the existing meta map with our new field
 
 The resulting channel elements maintain their `[meta, file]` structure, but the meta map now includes this new classification.
@@ -541,17 +540,17 @@ Let's run our files through `COWPY` and remove our `view` statement:
 === "After"
 
     ```groovy title="main.nf" linenums="59" hl_lines="3"
-                                      [ meta + [lang_group:lang_group], file ]
-                                  }
-    COWPY(ch_languages)
+            [meta + [lang_group: lang_group], file]
+        }
+    COWPY(ch_languages))
     ```
 
 === "Before"
 
     ```groovy title="main.nf" linenums="59"
-                                      [ meta + [lang_group:lang_group], file ]
-                                  }
-                                  .view()
+            [ meta + [lang_group:lang_group], file ]
+        }
+        .view()
     ```
 
 We are still missing a publishing location. Given we have been trying to figure out what languages our files were in, let's group the files by language in the output directory. Earlier, we added the predicted language to the `meta` map. We can access this `key` in the process and use it in the `publishDir` directive:

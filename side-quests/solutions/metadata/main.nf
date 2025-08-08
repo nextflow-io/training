@@ -34,31 +34,34 @@ process COWPY {
 
     script:
     """
-    cat $input_file | cowpy -c ${meta.character} > cowpy-${input_file}
+    cat ${input_file} | cowpy -c ${meta.character} > cowpy-${input_file}
     """
 }
 
-workflow  {
+workflow {
 
     ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
-                            .splitCsv(header: true)
-                            .map{ row ->
-                                [ [id:row.id, character:row.character], row.recording ]
-                            }
+        .splitCsv(header: true)
+        .map { row ->
+            [[id: row.id, character: row.character], row.recording]
+        }
 
     ch_prediction = IDENTIFY_LANGUAGE(ch_samplesheet)
-    ch_languages = ch_prediction.map { meta, file, lang ->
-                                        [ meta + [lang:lang], file ]
-                                    }
-                                    .map{ meta, file ->
+    ch_languages = ch_prediction
+        .map { meta, file, lang ->
+            [meta + [lang: lang], file]
+        }
+        .map { meta, file ->
 
-                                    def lang_group = 'romance'
-                                    if (meta.lang.equals('de') || meta.lang.equals('en') ){
-                                        lang_group = 'germanic'
-                                    }
+            def lang_group = "unknown"
+            if (meta.lang.equals("de") || meta.lang.equals('en')) {
+                lang_group = "germanic"
+            }
+            else if (meta.lang in ["fr", "es", "it"]) {
+                lang_group = "romance"
+            }
 
-                                    [ meta + [lang_group:lang_group], file ]
-                                }
+            [meta + [lang_group: lang_group], file]
+        }
     COWPY(ch_languages)
-
 }
