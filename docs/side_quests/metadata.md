@@ -377,6 +377,10 @@ tuple val(meta), path(file), stdout
 
 This is a useful way to ensure the metadata stays connected with any new information that is generated.
 
+Another compelling reason to use meta maps in this way is that they make it easier to associate related results that share the same identifiers. In modern Nextflow, it's considered best practice to keep different types of results in separate channels until you actually need to combine them. However, at some point, you'll inevitably reach a stage in your workflow where combining those results becomes necessary.
+
+As you learned in "Hello Nextflow", you can't rely on the order of items in channels to match results across them. Instead, you must use keys to align data correctly - and meta maps provide an ideal structure for this purpose. We explore this use case in detail in [Splitting & Grouping](./splitting_and_grouping.md).
+
 ### 2.2. Using process outputs to augment metadata
 
 Given that this is more data about the files, let's add it to our meta map. We can use the [`map` operator](https://www.nextflow.io/docs/latest/operator.html#map) again to create a new key `lang` and set the value to the predicted language:
