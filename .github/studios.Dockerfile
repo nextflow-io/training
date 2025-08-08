@@ -34,16 +34,16 @@ git clone --depth 1 --branch "${REPO_REF}" "${REPO_URL}" "${WORKSPACE_DIR}"
 mkdir -p "${WORKSPACE_DIR}/.vscode"
 cat > "${WORKSPACE_DIR}/.vscode/settings.json" << 'EOF'
 {
-  "workbench.colorTheme": "Default Dark Modern",
-  "terminal.integrated.defaultProfile.linux": "bash",
-  "terminal.integrated.cwd": "${workspaceFolder}",
-  "workbench.startupEditor": "none",
-  "workbench.panel.defaultLocation": "bottom",
-  "workbench.panel.opensMaximized": "never",
-  "terminal.integrated.hideOnStartup": "never",
-  "cSpell.diagnosticLevel": "Hint",
-  "nextflow.java.home": "/usr",
-  "nextflow.debug": false
+    "workbench.colorTheme": "Default Dark Modern",
+    "terminal.integrated.defaultProfile.linux": "bash",
+    "terminal.integrated.cwd": "${workspaceFolder}",
+    "workbench.startupEditor": "none",
+    "workbench.panel.defaultLocation": "bottom",
+    "workbench.panel.opensMaximized": "never",
+    "terminal.integrated.hideOnStartup": "never",
+    "cSpell.diagnosticLevel": "Hint",
+    "nextflow.java.home": "/usr",
+    "nextflow.debug": false
 }
 EOF
 
