@@ -29,19 +29,14 @@ WORKSPACE_DIR="/workspaces/${REPO_NAME}"
 
 # Check if repository already exists
 if [ -d "${WORKSPACE_DIR}/.git" ]; then
-    echo "Repository already exists at ${WORKSPACE_DIR}, skipping clone"
-    cd "${WORKSPACE_DIR}"
-    # Update to the specified ref if needed
-    git fetch origin "${REPO_REF}" || true
-    git checkout "${REPO_REF}" || true
+    echo "Repository already exists at ${WORKSPACE_DIR}, skipping setup"
 else
     # Clone the specified ref (branch or tag)
     git clone --depth 1 --branch "${REPO_REF}" "${REPO_URL}" "${WORKSPACE_DIR}"
-fi
 
-# VS Code settings scoped to the repo
-mkdir -p "${WORKSPACE_DIR}/.vscode"
-cat > "${WORKSPACE_DIR}/.vscode/settings.json" << 'EOF'
+    # VS Code settings scoped to the repo
+    mkdir -p "${WORKSPACE_DIR}/.vscode"
+    cat > "${WORKSPACE_DIR}/.vscode/settings.json" << 'EOF'
 {
     "workbench.colorTheme": "Default Dark Modern",
     "terminal.integrated.defaultProfile.linux": "bash",
@@ -56,15 +51,16 @@ cat > "${WORKSPACE_DIR}/.vscode/settings.json" << 'EOF'
 }
 EOF
 
-# Default folder points at the cloned repo
-sed -i "s|--default-folder '/workspace'|--default-folder '${WORKSPACE_DIR}'|g" /init
+    # Default folder points at the cloned repo
+    sed -i "s|--default-folder '/workspace'|--default-folder '${WORKSPACE_DIR}'|g" /init
 
-# Pre-warm Nextflow
-export NXF_OPTS="-XX:+UseContainerSupport -XX:MaxRAMPercentage=50.0"
-nextflow help > /dev/null 2>&1
-sleep 2
-nextflow info > /dev/null 2>&1
-sleep 2
+    # Pre-warm Nextflow
+    export NXF_OPTS="-XX:+UseContainerSupport -XX:MaxRAMPercentage=50.0"
+    nextflow help > /dev/null 2>&1
+    sleep 2
+    nextflow info > /dev/null 2>&1
+    sleep 2
+fi
 
 exec /init
 BASH
