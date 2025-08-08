@@ -27,8 +27,17 @@ echo "Cloning repository: ${REPO_URL}"
 REPO_NAME=$(basename "${REPO_URL}" .git)
 WORKSPACE_DIR="/workspaces/${REPO_NAME}"
 
-# Clone the specified ref (branch or tag)
-git clone --depth 1 --branch "${REPO_REF}" "${REPO_URL}" "${WORKSPACE_DIR}"
+# Check if repository already exists
+if [ -d "${WORKSPACE_DIR}/.git" ]; then
+    echo "Repository already exists at ${WORKSPACE_DIR}, skipping clone"
+    cd "${WORKSPACE_DIR}"
+    # Update to the specified ref if needed
+    git fetch origin "${REPO_REF}" || true
+    git checkout "${REPO_REF}" || true
+else
+    # Clone the specified ref (branch or tag)
+    git clone --depth 1 --branch "${REPO_REF}" "${REPO_URL}" "${WORKSPACE_DIR}"
+fi
 
 # VS Code settings scoped to the repo
 mkdir -p "${WORKSPACE_DIR}/.vscode"
