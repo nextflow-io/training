@@ -133,11 +133,13 @@ def my_map = [id:'sampleA', character:'squirrel']
 println my_map.id  // Prints: sampleA
 ```
 
-```python
-# Python equivalent dictionary
-my_map = {'id': 'sampleA', 'character': 'squirrel'}
-print(my_map['id'])  # Prints: sampleA
-```
+!!! example "Try it yourself"
+
+      You can run this example to see how maps look like with:
+
+      ```bash
+      nextflow run examples/map_demo.nf
+      ```
 
 The `header: true` option tells Nextflow to use the first row of the CSV file as the header row, which will be used as keys for the values. Let's see what Nextflow can see after reading with `splitCsv`. Run the pipeline with the `view()` operator we added above:
 
