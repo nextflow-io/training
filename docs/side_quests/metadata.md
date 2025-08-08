@@ -693,6 +693,20 @@ and take another look at our french phrase:
 
 This approach differs from using pipeline parameters (`params`), which generally apply the same configuration to all files in your workflow. By leveraging metadata applied to each item in a channel, you can fine-tune process behavior on a per-file basis.
 
+This example shows you what's possible when you have a meta map, but it's worth noting a limitation of this approach. By using a property of the meta map in the script block, we introduce a hard requirement on the properties that must be present. Anyone running with a sample sheet that did not contain the `character` property would encounter an error. We could set workflow-level validation to deal with that, but it's also better practice to define the process with such hard requirements as explicit inputs:
+
+```groovy
+    input:
+    tuple val(meta), val(character), path(input_file)
+```
+
+... then we extract the metadata property at the workflow level before running the process:
+
+```groovy
+        COWPY(ch_languages.map{meta, file -> [meta, meta.character, file] )
+```
+
+This way, if we fail to provide the expected input to the process, Nextflow will be much clearer with us what the problem is.
 ### Takeaway
 
 In this section, you've learned how to:
