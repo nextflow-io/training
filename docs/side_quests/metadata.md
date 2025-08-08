@@ -1,24 +1,24 @@
-# Working with sample-specific data
+# Working with metadata
 
-In any scientific analysis, we rarely work with just the raw data files. Each sample comes with its own additional information: what it is, where it came from, and what makes it special. This extra information is what we call sample-specific data.
+In any scientific analysis, we rarely work with just the raw data files. Each file comes with its own additional information: what it is, where it came from, and what makes it special. This extra information is what we call metadata.
 
-Instead of saying “sample-specific data” (which is a mouthful), it is often called "metadata" instead: data describing other data.
-Metadata tracks important details about samples and experimental conditions, and helps tailor analyses to each dataset’s unique characteristics.
+Metadata is data describing other data.
+Metadata tracks important details about files and experimental conditions, and helps tailor analyses to each dataset's unique characteristics.
 
 Think of it like a library catalog: while books contain the actual content (raw data), the catalog cards provide essential information about each book—when it was published, who wrote it, where to find it (metadata). In Nextflow pipelines, metadata can be used to:
 
-- Track sample-specific information throughout the workflow
-- Configure processes based on sample characteristics
-- Group related samples for joint analysis
+- Track file-specific information throughout the workflow
+- Configure processes based on file characteristics
+- Group related files for joint analysis
 
-We'll explore how to handle metadata in workflows. Starting with a simple samplesheet containing basic sample information, you'll learn how to:
+We'll explore how to handle metadata in workflows. Starting with a simple datasheet containing basic file information, you'll learn how to:
 
-- Read and parse sample metadata from CSV files
+- Read and parse file metadata from CSV files
 - Create and manipulate metadata maps
 - Add new metadata fields during workflow execution
 - Use metadata to customize process behavior
 
-These skills will help you build more robust and flexible pipelines that can handle complex sample relationships and processing requirements.
+These skills will help you build more robust and flexible pipelines that can handle complex file relationships and processing requirements.
 
 Let's dive in!
 
@@ -61,13 +61,13 @@ You'll find a `data` directory containing a samplesheet and a main workflow file
 └── nextflow.config
 ```
 
-The samplesheet contains information about different samples and some associated data that we will use in this exercise to tailor our analysis to each sample. Each data file contains greetings in different languages, but we don't know what language they are in. The samplesheet has 3 columns:
+The datasheet contains information about different files and some associated data that we will use in this exercise to tailor our analysis to each file. Each data file contains greetings in different languages, but we don't know what language they are in. The datasheet has 3 columns:
 
-- `id`: self-explanatory, an ID given to the sample
+- `id`: self-explanatory, an ID given to the file
 - `character`: a character name, that we will use later to draw different creatures
 - `data`: paths to `.txt` files that contain phrases in different languages
 
-```console title="samplesheet.csv"
+```console title="datasheet.csv"
 id,character,recording
 sampleA,squirrel,/workspaces/training/side-quests/metadata/data/bonjour.txt
 sampleB,tux,/workspaces/training/side-quests/metadata/data/guten_tag.txt
@@ -78,11 +78,11 @@ sampleF,moose,/workspaces/training/side-quests/metadata/data/salut.txt
 sampleG,turtle,/workspaces/training/side-quests/metadata/data/ciao.txt
 ```
 
-## 1. Read in samplesheet
+## 1. Read in datasheet
 
-### 1.1. Read in samplesheet with splitCsv
+### 1.1. Read in datasheet with splitCsv
 
-Let's start by reading in the samplesheet with `splitCsv`. In the main workflow file, you'll see that we've already started the workflow:
+Let's start by reading in the datasheet with `splitCsv`. In the main workflow file, you'll see that we've already started the workflow:
 
 ```groovy title="main.nf" linenums="1"
 workflow  {
@@ -110,7 +110,7 @@ workflow  {
     ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
     ```
 
-We can use the [`splitCsv` operator](https://www.nextflow.io/docs/latest/operator.html#splitcsv) to split the samplesheet into a channel of maps, where each map represents a row from the CSV file.
+We can use the [`splitCsv` operator](https://www.nextflow.io/docs/latest/operator.html#splitcsv) to split the datasheet into a channel of maps, where each map represents a row from the CSV file.
 
 A map is a key-value data structure similar to dictionaries in Python, objects in JavaScript, or hashes in Ruby. For example:
 
@@ -130,11 +130,11 @@ The `header: true` option tells Nextflow to use the first row of the CSV file as
 
 Run the pipeline:
 
-```bash title="Read the samplesheet"
+```bash title="Read the datasheet"
 nextflow run main.nf
 ```
 
-```console title="Read samplesheet with splitCsv"
+```console title="Read datasheet with splitCsv"
  N E X T F L O W   ~  version 24.10.4
 
 Launching `main.nf` [exotic_albattani] DSL2 - revision: c0d03cec83
@@ -149,15 +149,15 @@ Launching `main.nf` [exotic_albattani] DSL2 - revision: c0d03cec83
 ```
 
 We can see that each row from the CSV file has been converted into a map with keys matching the header row.
-Each map entry corresponds to a column in our samplesheet:
+Each map entry corresponds to a column in our datasheet:
 
 - `id`
 - `character`
 - `recording`
 
-This format makes it easy to access specific fields from each sample. For example, we could access the sample ID with `id` or the txt file path with `recording`. The output above shows each row from the CSV file converted into a map with keys matching the header row.
+This format makes it easy to access specific fields from each file. For example, we could access the file ID with `id` or the txt file path with `recording`. The output above shows each row from the CSV file converted into a map with keys matching the header row.
 
-Let's access a specific column, the `character` column, that we read in from the samplesheet, and print it. We can use the Nextflow `map` operator to iterate over each item in our channel and return specific entry of our map object:
+Let's access a specific column, the `character` column, that we read in from the datasheet, and print it. We can use the Nextflow `map` operator to iterate over each item in our channel and return specific entry of our map object:
 
 === "After"
 
@@ -192,24 +192,24 @@ moose
 turtle
 ```
 
-Success, we can use the map structures derived from our sample sheet to access the values from individual columns for each row.
+Success, we can use the map structures derived from our datasheet to access the values from individual columns for each row.
 
-Now that we've successfully read in the samplesheet and have access to the data in each row, we can begin implementing our pipeline logic.
+Now that we've successfully read in the datasheet and have access to the data in each row, we can begin implementing our pipeline logic.
 
-### 1.2. Separate meta data and data
+### 1.2. Separate metadata and data
 
-In the samplesheet, we have both the input files and data about the input files (`id`, `character`), the metadata.
-As we progress through the workflow, we generate more meta data about each sample.
-So far, every column from the sample sheet has become a separate item in the channel items we derived using `splitCsv()`. Every process that consumes this channel would need to be configured with this structure in mind:
+In the datasheet, we have both the input files and data about the input files (`id`, `character`), the metadata.
+As we progress through the workflow, we generate more metadata about each file.
+So far, every column from the datasheet has become a separate item in the channel items we derived using `splitCsv()`. Every process that consumes this channel would need to be configured with this structure in mind:
 
  ```groovy
      input:
      tuple val(id), val(character), file(recording)
-``` 
+```
 
-This means that as soon as somebody added an extra column to the sample sheet, the workflow would start producing errors, because the shape of the channel would no longer match what the process expected. It also makes the process hard to share with others who might have slightly different input data, and we end up hard-coding variables into the process that aren't needed by the script block.
+This means that as soon as somebody added an extra column to the datasheet, the workflow would start producing errors, because the shape of the channel would no longer match what the process expected. It also makes the process hard to share with others who might have slightly different input data, and we end up hard-coding variables into the process that aren't needed by the script block.
 
-To avoid this, we need to find a way of keeping the channel structure consistent however many columns that sample sheet contains, and we can do that by keeping all the metadata in a single part of the channel tuples we call simply the `meta map`.
+To avoid this, we need to find a way of keeping the channel structure consistent however many columns that datasheet contains, and we can do that by keeping all the metadata in a single part of the channel tuples we call simply the `meta map`.
 
 Let's use this and separate our metadata from the file path. We'll use the `map` operator to restructure our channel elements into a tuple consisting of the meta map and file:
 
@@ -257,16 +257,16 @@ Now we can write processes to consume the channel without hard-coding the metada
  ```groovy
      input:
      tuple val(meta), file(recording)
-``` 
+```
 
-Additional columns in the sample sheet will make more properties available in the `meta` map, but won't change the channel shape.
+Additional columns in the datasheet will make more properties available in the `meta` map, but won't change the channel shape.
 
 ### Takeaway
 
 In this section, you've learned:
 
-- **Why metadata is important**: Keeping metadata with your data preserves important sample information throughout the workflow.
-- **How to read in a samplesheet**: Using `splitCsv` to read CSV files with header information and transform rows into structured data
+- **Why metadata is important**: Keeping metadata with your data preserves important file information throughout the workflow.
+- **How to read in a datasheets**: Using `splitCsv` to read CSV files with header information and transform rows into structured data
 - **How to create a meta map**: Separating metadata from file data using tuple structure `[ [id:value, ...], file ]`
 
 ---
@@ -275,7 +275,7 @@ In this section, you've learned:
 
 ### 2.1. Copying input metadata to output channels
 
-Now we want to process our samples with unidentified languages. Let's add a process definition before the `workflow` that can identify the language in each file:
+Now we want to process our files with unidentified languages. Let's add a process definition before the `workflow` that can identify the language in each file:
 
 === "After"
 
@@ -348,20 +348,20 @@ executor >  local (7)
 [[id:sampleG, character:turtle], /workspaces/training/side-quests/metadata/work/4e/f722fe47271ba7ebcd69afa42964ca/ciao.txt, it]
 ```
 
-Neat, for each of our samples, we now have a language predicted.
+Neat, for each of our files, we now have a language predicted.
 
 !!! note
 
     "de" stands for "deutsch", the German word for "german"
 
-You may have noticed something else: we kept the meta data of our samples and associated it with our new piece of information. We achieved this by adding the `meta` map to the output tuple in the process:
+You may have noticed something else: we kept the metadata of our files and associated it with our new piece of information. We achieved this by adding the `meta` map to the output tuple in the process:
 
 ```groovy title="main.nf" linenums="12"
 output:
       tuple val(meta), path(file), stdout
 ```
 
-This is a useful way to ensure the sample-specific information stays connected with any new information that is generated.
+This is a useful way to ensure the metadata stays connected with any new information that is generated.
 
 ### 2.2. Using process outputs to augment metadata
 
@@ -391,7 +391,7 @@ The `+` operator in Groovy merges two maps together. So if our original `meta` w
 
 !!! Note
 
-    The `+` notation with maps creates an entirely new map object, which is what we want. If we'd done something like `meta.lang = lang` we'd have been modifying the original object, which can lead to unpredictable effects. 
+    The `+` notation with maps creates an entirely new map object, which is what we want. If we'd done something like `meta.lang = lang` we'd have been modifying the original object, which can lead to unpredictable effects.
 
 ```bash title="View new meta map key"
 nextflow run main.nf -resume
@@ -492,7 +492,7 @@ In this section, you've learned how to :
 - **Apply input metadata to output channels**: Copying metadata in this way allows us to associate results later on based on metadata content.
 - **Create custom keys**: You created two new keys in your meta map, merging them with `meta + [new_key:value]` into the existing meta map. One based on a computed value from a process, and one based on a condition you set in the `map` operator.
 
-These allow you to associated new and existing meta data with files as you progress through your pipeline.
+These allow you to associate new and existing metadata with files as you progress through your pipeline.
 
 ---
 
@@ -536,7 +536,7 @@ Copy in the process before your workflow block:
 
 ### 3.1. Add a custom publishing location
 
-Let's run our samples through `COWPY` and remove our `view` statement:
+Let's run our files through `COWPY` and remove our `view` statement:
 
 === "After"
 
@@ -554,7 +554,7 @@ Let's run our samples through `COWPY` and remove our `view` statement:
                                   .view()
     ```
 
-We are still missing a publishing location. Given we have been trying to figure out what languages our samples were in, let's group the samples by language in the output directory. Earlier, we added the predicted language to the `meta` map. We can access this `key` in the process and use it in the `publishDir` directive:
+We are still missing a publishing location. Given we have been trying to figure out what languages our files were in, let's group the files by language in the output directory. Earlier, we added the predicted language to the `meta` map. We can access this `key` in the process and use it in the `publishDir` directive:
 
 === "After"
 
@@ -622,11 +622,11 @@ Let's take a look at `cowpy-salut.txt`:
 
 Look through the other files. All phrases should be spoken by the fashionable stegosaurus.
 
-How did this work? The `publishDir` directive is evaluated at runtime when the process executes. Each process task gets its own meta map from the input tuple When the directive is evaluated, `${meta.lang_group}` is replaced with the actual group language value for that sample creating the dynamic paths like `results/romance`.
+How did this work? The `publishDir` directive is evaluated at runtime when the process executes. Each process task gets its own meta map from the input tuple When the directive is evaluated, `${meta.lang_group}` is replaced with the actual group language value for that dataset creating the dynamic paths like `results/romance`.
 
 ### 3.2. Customize the character
 
-In our samplesheet, we have another column: `character`. To tailor the tool parameters per sample, we can also access information from the `meta` map in the script section. This is really useful in cases were a tool should have different parameters for each sample.
+In our datasheet, we have another column: `character`. To tailor the tool parameters per file, we can also access information from the `meta` map in the script section. This is really useful in cases where a tool should have different parameters for each file.
 
 Let's customize the characters by changing the `cowpy` command:
 
@@ -670,15 +670,15 @@ and take another look at our french phrase:
                ||     ||
 ```
 
-This is a subtle difference to other parameters that we have set in the pipelines in previous trainings. A parameter that is passed as part of the `params` object is generally applied to all samples. When a more surgical approache is necessary, using the sample specific information is a good alternative.
+This is a subtle difference to other parameters that we have set in the pipelines in previous trainings. A parameter that is passed as part of the `params` object is generally applied to all datasets. When a more surgical approache is necessary, using the metadata is a good alternative.
 
 ### Takeaway
 
 In this section, you've learned how to:
 
-- **Tweak directives using meta values**: Using meta map values in `publishDir` directives to create dynamic output paths based on sample properties
+- **Tweak directives using meta values**: Using meta map values in `publishDir` directives to create dynamic output paths based on file properties
 
-- **Tweak the script section based on meta values**: Customizing tool parameters per sample using meta information in the `script` section
+- **Tweak the script section based on meta values**: Customizing tool parameters per file using meta information in the `script` section
 
 ---
 
@@ -692,18 +692,18 @@ Here's what you've learned:
 
 2. **Expanding Metadata During Workflow**: Adding new information to your metadata as your pipeline progresses by adding process outputs and deriving values through conditional logic
 
-3. **Customizing Process Behavior**: Using metadata to adapt how processes handle different samples
+3. **Customizing Process Behavior**: Using metadata to adapt how processes handle different files
 
-This approach offers several advantages over hardcoding sample information:
+This approach offers several advantages over hardcoding file information:
 
-- Sample metadata stays associated with files throughout the workflow
-- Process behavior can be customized per sample
-- Output organization can reflect sample properties
-- Sample information can be expanded during pipeline execution
+- File metadata stays associated with files throughout the workflow
+- Process behavior can be customized per file
+- Output organization can reflect file properties
+- File information can be expanded during pipeline execution
 
 ### Key Concepts
 
-- **Reading Samplesheets & creating meta maps**
+- **Reading Datasheets & creating meta maps**
 
   ```nextflow
   Channel.fromPath('samplesheet.csv')
@@ -743,7 +743,7 @@ This approach offers several advantages over hardcoding sample information:
   publishDir "results/${meta.lang_group}", mode: 'copy'
   ```
 
-- **Adapting tool parameters for individual samples**
+- **Adapting tool parameters for individual files**
 
   ```nextflow
   cat $input_file | cowpy -c ${meta.character} > cowpy-${input_file}
