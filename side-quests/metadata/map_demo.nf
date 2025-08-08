@@ -9,4 +9,3 @@ println "map: ${my_map}"
 // Access individual values using dot notation
 println "id: ${my_map.id}"
 println "character: ${my_map.character}"
-
