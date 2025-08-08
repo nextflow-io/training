@@ -24,9 +24,11 @@ If you run this inside `side-quests`, you should see the following output:
 
 ```console title="Directory contents"
 .
+├── metadata
 ├── nf-core
 ├── nf-test
 ├── solutions
+├── splitting_and_grouping
 └── workflows_of_workflows
 ```
 
