@@ -334,7 +334,7 @@ genotyped_bams = GenotypeOnInterval(combined_bams)
     .view { meta, bamfile -> "Meta is of ${meta.getClass()}" }
 ```
 
-To ensure that grouping is performed only on the relevant elements, we can convert the `groupKey` back into a plain Map using the `as Map` operator. This allows the `groupTuple` operator to group by just the keys present in the map, similar to how `subMap` works. This approach ensures that downstream grouping and merging steps operate on the intended sample attributes.
+To ensure that grouping is performed only on the relevant elements, we can unwrap the `groupKey` to return the underlying `Map` using the `getGroupTarget()` method available on groupKeys. This allows the `groupTuple` operator to group by just the keys present in the map, similar to how `subMap` works. This approach ensures that downstream grouping and merging steps operate on the intended sample attributes.
 
 ```groovy linenums="71" hl_lines="13"
 mapped_reads = MapReads( samples, reference )
@@ -349,7 +349,7 @@ combined_bams = CombineBams(mapped_reads)
     .combine( intervals )
 
 genotyped_bams = GenotypeOnInterval(combined_bams)
-    .map { groupKey, bamfile -> [groupKey as Map, bamfile] }
+    .map { groupKey, bamfile -> [groupKey.getGroupTarget(), bamfile] }
     .groupTuple()
 
 merged_bams = MergeGenotyped(genotyped_bams)
