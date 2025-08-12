@@ -493,15 +493,15 @@ Open `file_operations.nf` again and make changes like this:
 === "Before"
 
     ```groovy title="file_operations.nf" linenums="2" hl_lines="2"
-    // Create a file object from a string path
-    myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
+        // Create a file object from a string path
+        myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
 
-    // Print file attributes
-    println "File object class: ${myFile.class}"
-    println "File name: ${myFile.name}"
-    println "Simple name: ${myFile.simpleName}"
-    println "Extension: ${myFile.extension}"
-    println "Parent directory: ${myFile.parent}"
+        // Print file attributes
+        println "File object class: ${myFile.class}"
+        println "File name: ${myFile.name}"
+        println "Simple name: ${myFile.simpleName}"
+        println "Extension: ${myFile.extension}"
+        println "Parent directory: ${myFile.parent}"
     ```
 
 !!! note
@@ -563,31 +563,31 @@ Update your `file_operations.nf` file:
 === "After"
 
     ```groovy title="file_operations.nf" linenums="2" hl_lines="2"
-    // Reading files with Channel.fromPath
-    ch_fastq = Channel.fromPath('data/patientA_rep1_normal_R1_001.fastq.gz')
-    ch_fastq.view { "Found file: $it" }
+        // Reading files with Channel.fromPath
+        ch_fastq = Channel.fromPath('data/patientA_rep1_normal_R1_001.fastq.gz')
+        ch_fastq.view { "Found file: $it" }
 
-    // // Print file attributes
-    // Comment these out for now, we'll come back to them!
-    // println "File object class: ${myFile.class}"
-    // println "File name: ${myFile.name}"
-    // println "Simple name: ${myFile.simpleName}"
-    // println "Extension: ${myFile.extension}"
-    // println "Parent directory: ${myFile.parent}"
+        // // Print file attributes
+        // Comment these out for now, we'll come back to them!
+        // println "File object class: ${myFile.class}"
+        // println "File name: ${myFile.name}"
+        // println "Simple name: ${myFile.simpleName}"
+        // println "Extension: ${myFile.extension}"
+        // println "Parent directory: ${myFile.parent}"
     ```
 
 === "Before"
 
     ```groovy title="file_operations.nf" linenums="2" hl_lines="5-8"
     // Create a Path object from a string path
-    myFile = file('https://github.com/nextflow-io/training/blob/bb187e3bfdf4eec2c53b3b08d2b60fdd7003b763/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz')
+        myFile = file('https://github.com/nextflow-io/training/blob/bb187e3bfdf4eec2c53b3b08d2b60fdd7003b763/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz')
 
-    // Print file attributes
-    println "File object class: ${myFile.class}"
-    println "File name: ${myFile.name}"
-    println "Simple name: ${myFile.simpleName}"
-    println "Extension: ${myFile.extension}"
-    println "Parent directory: ${myFile.parent}"
+        // Print file attributes
+        println "File object class: ${myFile.class}"
+        println "File name: ${myFile.name}"
+        println "Simple name: ${myFile.simpleName}"
+        println "Extension: ${myFile.extension}"
+        println "Parent directory: ${myFile.parent}"
     ```
 
 Run the workflow:
@@ -614,30 +614,30 @@ In our first version, we use `.view()` to print the file name. Let's update our 
 === "After"
 
     ```groovy title="file_operations.nf" linenums="2" hl_lines="3-8"
-    // Reading files with Channel.fromPath
-    ch_fastq = Channel.fromPath('data/patientA_rep1_normal_R1_001.fastq.gz')
-    ch_fastq.view { myFile ->
-        println "File object class: ${myFile.class}"
-        println "File name: ${myFile.name}"
-        println "Simple name: ${myFile.simpleName}"
-        println "Extension: ${myFile.extension}"
-        println "Parent directory: ${myFile.parent}"
-    }
+        // Reading files with Channel.fromPath
+        ch_fastq = Channel.fromPath('data/patientA_rep1_normal_R1_001.fastq.gz')
+        ch_fastq.view { myFile ->
+            println "File object class: ${myFile.class}"
+            println "File name: ${myFile.name}"
+            println "Simple name: ${myFile.simpleName}"
+            println "Extension: ${myFile.extension}"
+            println "Parent directory: ${myFile.parent}"
+        }
     ```
 
 === "Before"
 
     ```groovy title="file_operations.nf" linenums="2" hl_lines="3"
-    // Reading files with Channel.fromPath
-    ch_fastq = Channel.fromPath('data/patientA_rep1_normal_R1_001.fastq.gz')
-    ch_fastq.view { myFile -> "Found file: $myFile" }
+        // Reading files with Channel.fromPath
+        ch_fastq = Channel.fromPath('data/patientA_rep1_normal_R1_001.fastq.gz')
+        ch_fastq.view { myFile -> "Found file: $myFile" }
 
-    // // Print file attributes
-    // Comment these out for now, we'll come back to them!
-    // println "File name: ${myFile.name}"
-    // println "Simple name: ${myFile.simpleName}"
-    // println "Extension: ${myFile.extension}"
-    // println "Parent directory: ${myFile.parent}"
+        // // Print file attributes
+        // Comment these out for now, we'll come back to them!
+        // println "File name: ${myFile.name}"
+        // println "Simple name: ${myFile.simpleName}"
+        // println "Extension: ${myFile.extension}"
+        // println "Parent directory: ${myFile.parent}"
     ```
 
 Run the workflow:
@@ -667,13 +667,13 @@ A glob pattern is a pattern that matches one or more characters in a string. The
 === "After"
 
     ```groovy title="file_operations.nf" linenums="3"
-    ch_fastq = Channel.fromPath('data/patientA_rep1_normal_R*_001.fastq.gz')
+        ch_fastq = Channel.fromPath('data/patientA_rep1_normal_R*_001.fastq.gz')
     ```
 
 === "Before"
 
     ```groovy title="file_operations.nf" linenums="3"
-    ch_fastq = Channel.fromPath('data/patientA_rep1_normal_R1_001.fastq.gz')
+        ch_fastq = Channel.fromPath('data/patientA_rep1_normal_R1_001.fastq.gz')
     ```
 
 Run the workflow:
@@ -728,21 +728,21 @@ First we will grab the simpleName of the file, which includes the metadata, and 
 === "After"
 
     ```groovy title="file_operations.nf" linenums="4"
-    ch_fastq.map { myFile ->
-        [ myFile.simpleName, myFile ]
-    }
-    .view()
+        ch_fastq.map { myFile ->
+            [ myFile.simpleName, myFile ]
+        }
+        .view()
     ```
 
 === "Before"
 
     ```groovy title="file_operations.nf" linenums="4"
-    ch_fastq.view {
-        println "File name: ${it.name}"
-        println "Simple name: ${it.simpleName}"
-        println "Extension: ${it.extension}"
-        println "Parent directory: ${it.parent}"
-    }
+        ch_fastq.view {
+            println "File name: ${it.name}"
+            println "Simple name: ${it.simpleName}"
+            println "Extension: ${it.extension}"
+            println "Parent directory: ${it.parent}"
+        }
     ```
 
 ```bash
@@ -769,17 +769,17 @@ Groovy includes a method called `tokenize()` which is perfect for this task.
 === "After"
 
     ```groovy title="file_operations.nf" linenums="4" hl_lines="2"
-    ch_fastq.map { myFile ->
-        [ myFile.simpleName.tokenize('_'), myFile ]
-    }
+        ch_fastq.map { myFile ->
+            [ myFile.simpleName.tokenize('_'), myFile ]
+        }
     ```
 
 === "Before"
 
     ```groovy title="file_operations.nf" linenums="4" hl_lines="2"
-    ch_fastq.map { myFile ->
-        [ myFile.simpleName, myFile ]
-    }
+        ch_fastq.map { myFile ->
+            [ myFile.simpleName, myFile ]
+        }
     ```
 
 Once we run this, we should see the patient metadata as a list of strings, and the Path object as the second element in the tuple.
@@ -824,27 +824,27 @@ Let's convert our flat list into a map now.
 === "After"
 
     ```groovy title="file_operations.nf" linenums="4" hl_lines="3-11"
-    ch_fastq.map { myFile ->
-        def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
-        [
-          [
-            id: sample,
-            replicate: replicate.replace('rep', ''),
-            type: type,
-            readNum: readNum.replace('rep', ''),
-          ],
-          myFile
-        ]
-    }
+        ch_fastq.map { myFile ->
+            def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
+            [
+              [
+                id: sample,
+                replicate: replicate.replace('rep', ''),
+                type: type,
+                readNum: readNum.replace('rep', ''),
+              ],
+              myFile
+            ]
+        }
     ```
 
 === "Before"
 
     ```groovy title="file_operations.nf" linenums="4" hl_lines="3"
-    ch_fastq.map { myFile ->
-        def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
-        [ sample, replicate, type, readNum.readNum, myFile ]
-    }
+        ch_fastq.map { myFile ->
+            def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
+            [ sample, replicate, type, readNum.readNum, myFile ]
+        }
     ```
 
 Notice that we're simplifying a couple of the meta data items as we go (e.g. `readNum.replace('rep', '')`).
@@ -888,27 +888,27 @@ Complete your `file_operations.nf` file with the following (we will comment out 
 === "After"
 
     ```groovy title="file_operations.nf" linenums="3" hl_lines="1"
-    ch_fastq = Channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
-                      .view()
+        ch_fastq = Channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
+            .view()
     ```
 
 === "Before"
 
     ```groovy title="file_operations.nf" linenums="3" hl_lines="1"
-    ch_fastq = Channel.fromPath('data/patientA_rep1_normal_R*_001.fastq.gz')
-    ch_fastq.map { myFile ->
-        def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
-        [
+        ch_fastq = Channel.fromPath('data/patientA_rep1_normal_R*_001.fastq.gz')
+        ch_fastq.map { myFile ->
+            def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
             [
-                id: sample,
-                replicate: replicate.replace('rep', ''),
-                type: type,
-                readNum: readNum,
-            ],
-            myFile
-        ]
-    }
-    .view()
+                [
+                    id: sample,
+                    replicate: replicate.replace('rep', ''),
+                    type: type,
+                    readNum: readNum,
+                ],
+                myFile
+            ]
+        }
+        .view()
     ```
 
 Run the workflow:
@@ -936,26 +936,26 @@ We still need the metadata. Our `map` operation from before won't work because i
 === "After"
 
     ```groovy title="file_operations.nf" linenums="3" hl_lines="2-13"
-    ch_fastq = Channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
-    ch_fastq.map { id, fastqs ->
-        def (sample, replicate, type, readNum) = id.tokenize('_')
-        [
+        ch_fastq = Channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
+        ch_fastq.map { id, fastqs ->
+            def (sample, replicate, type, readNum) = id.tokenize('_')
             [
-                id: sample,
-                replicate: replicate.replace('rep', ''),
-                type: type
-            ],
-            fastqs
-        ]
-    }
-    .view()
+                [
+                    id: sample,
+                    replicate: replicate.replace('rep', ''),
+                    type: type
+                ],
+                fastqs
+            ]
+        }
+        .view()
     ```
 
 === "Before"
 
     ```groovy title="file_operations.nf" linenums="3" hl_lines="3-11"
-    ch_fastq = Channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
-    .view()
+        ch_fastq = Channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
+            .view()
     ```
 
 ```bash
@@ -1105,7 +1105,7 @@ Remember Channel.fromPath() accepts a _glob_ as input, which means it can accept
 === "After"
 
     ```groovy title="file_operations.nf" linenums="27"
-    ch_fastq = Channel.fromFilePairs('data/*_R{1,2}_001.fastq.gz')
+        ch_fastq = Channel.fromFilePairs('data/*_R{1,2}_001.fastq.gz')
     ```
 
 === "Before"
@@ -1153,13 +1153,13 @@ Since we have access to the patient metadata, we can use it to make the output f
 === "After"
 
     ```groovy title="file_operations.nf" linenums="4"
-    publishDir "results/${meta.type}/${meta.id}/${meta.replicate}", mode: 'copy'
+        publishDir "results/${meta.type}/${meta.id}/${meta.replicate}", mode: 'copy'
     ```
 
 === "Before"
 
     ```groovy title="file_operations.nf" linenums="4"
-    publishDir "results/${id}", mode: 'copy'
+        publishDir "results/${id}", mode: 'copy'
     ```
 
 We have grabbed the metadata from the patients and used it to construct an output directory for each patient.
