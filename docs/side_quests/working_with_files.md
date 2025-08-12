@@ -103,7 +103,7 @@ data/patientA_rep1_normal_R1_001.fastq.gz
 
 ### 1.1. Creating Path Objects
 
-Let's start by understanding how to create Path objects in Nextflow. In our workflow, we have a string path `data/patientA_rep1_normal_R1_001.fastq.gz`. This is just a plain string - Nextflow doesn't automatically recognize it as representing a file. To work with files properly in Nextflow, we need to convert string paths into proper Path objects using the `file()` method, which provides access to file properties and operations.
+Let's start by understanding how to create [Path objects](https://www.nextflow.io/docs/latest/reference/stdlib-types.html#path) in Nextflow. In our workflow, we have a string path `data/patientA_rep1_normal_R1_001.fastq.gz`. This is just a plain string - Nextflow doesn't automatically recognize it as representing a file. To work with files properly in Nextflow, we need to convert string paths into proper Path objects using the `file()` method, which provides access to file properties and operations.
 
 Edit the `main.nf` file to include the following:
 
