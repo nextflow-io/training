@@ -209,6 +209,235 @@ Notice that the Path object class is `sun.nio.fs.UnixPath` - this is Nextflow's 
 - You can access file properties like `name`, `simpleName`, `extension`, and `parent` [using file attributes](https://www.nextflow.io/docs/latest/working-with-files.html#getting-file-attributes)
 - Using Path objects instead of strings allows Nextflow to properly manage files in your workflow
 
+### 1.3. Why This Matters in Processes
+
+The difference between strings and Path objects becomes critical when you start building actual workflows with processes. Let's work through this step by step to see what happens.
+
+First, let's create a process that takes a `val` input and see what happens when we pass it a string. We've provided this example in `count_lines.nf`:
+
+```groovy title="count_lines.nf" linenums="2" hl_lines="6"
+// This will cause problems!
+myFile = 'data/patientA_rep1_normal_R1_001.fastq.gz'
+
+process COUNT_LINES {
+    input:
+    val fastq_file
+
+    script:
+    """
+    echo "Processing file: $fastq_file"
+    gzip -dc $fastq_file | wc -l
+    """
+}
+
+workflow {
+    COUNT_LINES(myFile)
+}
+```
+
+Run this workflow to see the error:
+
+```bash
+nextflow run count_lines.nf
+```
+
+
+
+You'll get an error like this:
+
+```console title="Val input with string error"
+ N E X T F L O W   ~  version 24.10.2
+
+Launching `main.nf` [wise_poisson] DSL2 - revision: 9b7419747b
+
+executor >  local (1)
+[88/f8a197] COUNT_LINES [  0%] 0 of 1
+ERROR ~ Error executing process > 'COUNT_LINES'
+
+Caused by:
+  Process `COUNT_LINES` terminated with an error exit status (1)
+
+executor >  local (1)
+[88/f8a197] COUNT_LINES [100%] 1 of 1, failed: 1 ✘
+ERROR ~ Error executing process > 'COUNT_LINES'
+
+Caused by:
+  Process `COUNT_LINES` terminated with an error exit status (1)
+
+Command executed:
+
+  echo "Processing file: data/patientA_rep1_normal_R1_001.fastq.gz"
+  wc -l data/patientA_rep1_normal_R1_001.fastq.gz
+
+Command exit status:
+  1
+
+Command output:
+  Processing file: data/patientA_rep1_normal_R1_001.fastq.gz
+
+Command error:
+  Processing file: data/patientA_rep1_normal_R1_001.fastq.gz
+  wc: data/patientA_rep1_normal_R1_001.fastq.gz: open: No such file or directory
+
+Work dir:
+  /Users/jonathan.manning/projects/training/side-quests/working_with_files/work/88/f8a19731c43c834c819ffd146c5713
+
+Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
+```
+
+Now let's fix this by changing the process to use a `path` input:
+
+=== "After"
+
+    ```groovy title="main.nf" linenums="2" hl_lines="6"
+    // Now using path input
+    myFile = 'data/patientA_rep1_normal_R1_001.fastq.gz'
+
+    process COUNT_LINES {
+        debug true
+
+        input:
+        path fastq_file
+
+        script:
+        """
+        echo "Processing file: $fastq_file"
+        gzip -dc $fastq_file | wc -l
+        """
+    }
+
+    workflow {
+        COUNT_LINES(myFile)
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="main.nf" linenums="2" hl_lines="6"
+    // This will cause problems!
+    myFile = 'data/patientA_rep1_normal_R1_001.fastq.gz'
+
+    process COUNT_LINES {
+        debug true
+
+        input:
+        val fastq_file
+
+        script:
+        """
+        echo "Processing file: $fastq_file"
+        gzip -dc $fastq_file | wc -l
+        """
+    }
+
+    workflow {
+        COUNT_LINES(myFile)
+    }
+    ```
+
+Run this updated version and you'll get a different error:
+
+```console title="Path input with string error"
+ N E X T F L O W   ~  version 24.10.2
+
+Launching `main.nf` [mighty_poitras] DSL2 - revision: e996edfc53
+
+[-        ] COUNT_LINES -
+ERROR ~ Error executing process > 'COUNT_LINES'
+
+Caused by:
+  Not a valid path value: 'data/patientA_rep1_normal_R1_001.fastq.gz'
+
+Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
+```
+
+Now let's fix this properly by using the `file()` method to create a Path object:
+
+=== "After"
+
+    ```groovy title="main.nf" linenums="2" hl_lines="2"
+    // This works correctly!
+    myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
+
+    process COUNT_LINES {
+        debug true
+
+        input:
+        path fastq_file
+
+        script:
+        """
+        echo "Processing file: $fastq_file"
+        gzip -dc $fastq_file | wc -l
+        """
+    }
+
+    workflow {
+        COUNT_LINES(myFile)
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="main.nf" linenums="2" hl_lines="2"
+    // This will cause problems!
+    myFile = 'data/patientA_rep1_normal_R1_001.fastq.gz'
+
+    process COUNT_LINES {
+        debug true
+
+        input:
+        path fastq_file
+
+        script:
+        """
+        echo "Processing file: $fastq_file"
+        gzip -dc $fastq_file | wc -l
+        """
+    }
+
+    workflow {
+        COUNT_LINES(myFile)
+    }
+    ```
+
+Now when you run this, it should work correctly! The file will be staged into the process working directory and the `wc -l` command will succeed.
+
+```bash
+nextflow run count_lines.nf
+```
+
+You should see output like this:
+
+```console title="Successful execution"
+ N E X T F L O W   ~  version 24.10.2
+
+Launching `count_lines.nf` [astonishing_tesla] DSL2 - revision: ee38f96485
+
+executor >  local (1)
+[8a/3f23d5] COUNT_LINES [100%] 1 of 1 ✔
+Processing file: patientA_rep1_normal_R1_001.fastq.gz
+      40
+```
+
+The process successfully:
+- Staged the file into the working directory
+- Decompressed the .gz file
+- Counted the lines (40 lines in this case)
+- Completed without errors
+
+!!! note
+
+    **What we learned:**
+
+    **Step 1 (val input + string)**: The process runs but fails at runtime because the file isn't staged. You get a bash error about the file not existing.
+
+    **Step 2 (path input + string)**: Nextflow immediately detects the problem and fails with "Not a valid path value". This is better because it fails fast.
+
+    **Step 3 (path input + Path object)**: Everything works! Nextflow recognizes the Path object, stages the file, and your process can access it.
+
+    **Key takeaway**: Always use `file()` to create Path objects when working with files, and use `path` inputs in processes to get early validation and proper file staging.
+
 ---
 
 ## 2. Using Remote Files
