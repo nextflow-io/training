@@ -454,11 +454,11 @@ The process successfully:
 
 ### Takeaway
 
-- **Path strings vs Path objects**: Strings are just text, Path objects are smart file references
+- Path strings vs Path objects: Strings are just text, Path objects are smart file references
 - The `file()` method converts a string path into a Path object that Nextflow can work with
 - You can access file properties like `name`, `simpleName`, `extension`, and `parent` [using file attributes](https://www.nextflow.io/docs/latest/working-with-files.html#getting-file-attributes)
 - Using Path objects instead of strings allows Nextflow to properly manage files in your workflow
-- **Process Input Outcomes**: Proper file handling requires Path objects, not strings, to ensure files are correctly staged and accessible in processes.
+- Process Input Outcomes: Proper file handling requires Path objects, not strings, to ensure files are correctly staged and accessible in processes.
 
 ---
 
