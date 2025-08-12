@@ -1,4 +1,3 @@
-// This will cause problems!
 myFile = 'data/patientA_rep1_normal_R1_001.fastq.gz'
 
 process COUNT_LINES {
@@ -9,6 +8,7 @@ process COUNT_LINES {
 
     script:
     """
+    set -o pipefail
     echo "Processing file: $fastq_file"
     gzip -dc $fastq_file | wc -l
     """

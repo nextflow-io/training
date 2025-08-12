@@ -206,12 +206,11 @@ Parent directory: /workspaces/training/side-quests/working_with_files/data
 
 ### 1.3. Why proper file handling matters
 
-The difference between strings and Path objects becomes critical when you start building actual workflows with processes. Let's work through this step by step to see what happens.
+The difference between strings and Path objects becomes critical when you start building actual workflows with processes. Let's side-step for a moment to take a look at a workflow where this has been done wrong.
 
-First, let's create a process that takes a `val` input and see what happens when we pass it a string. We've provided this example in `count_lines.nf`:
+`count_lines.nf` contains a process that takes a `val` input and tries to treat it as a file:
 
-```groovy title="count_lines.nf" linenums="2" hl_lines="2 8"
-// This will cause problems!
+```groovy title="count_lines.nf" linenums="2" hl_lines="1 7"
 myFile = 'data/patientA_rep1_normal_R1_001.fastq.gz'
 
 process COUNT_LINES {
@@ -222,6 +221,7 @@ process COUNT_LINES {
 
     script:
     """
+    set -o pipefail
     echo "Processing file: $fastq_file"
     gzip -dc $fastq_file | wc -l
     """
@@ -308,6 +308,7 @@ Now let's fix this by changing the process to use a `path` input:
 
         script:
         """
+        set -o pipefail
         echo "Processing file: $fastq_file"
         gzip -dc $fastq_file | wc -l
         """
@@ -332,6 +333,7 @@ Now let's fix this by changing the process to use a `path` input:
 
         script:
         """
+        set -o pipefail
         echo "Processing file: $fastq_file"
         gzip -dc $fastq_file | wc -l
         """
@@ -378,6 +380,7 @@ Now let's fix this properly by using the `file()` method to create a Path object
 
         script:
         """
+        set -o pipefail
         echo "Processing file: $fastq_file"
         gzip -dc $fastq_file | wc -l
         """
@@ -402,6 +405,7 @@ Now let's fix this properly by using the `file()` method to create a Path object
 
         script:
         """
+        set -o pipefail
         echo "Processing file: $fastq_file"
         gzip -dc $fastq_file | wc -l
         """
