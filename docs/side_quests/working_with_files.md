@@ -550,7 +550,7 @@ In this way, you can replace local with remote data without changing any pipelin
 
 ---
 
-## 3. Using Channels for File Handling
+## 3. Reading files using the `fromPath()` channel factory
 
 The `file()` method is useful for simple file operations, and we can combine that with [`Channel.of()`](https://www.nextflow.io/docs/latest/reference/channel.html#of) to build channels from files like:
 
