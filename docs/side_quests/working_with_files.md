@@ -148,6 +148,7 @@ Let's update our workflow to print out the file attributes:
     myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
 
     // Print file attributes
+    println "File object class: ${myFile.class.name}"
     println "File name: ${myFile.name}"
     println "Simple name: ${myFile.simpleName}"
     println "Extension: ${myFile.extension}"
@@ -175,6 +176,7 @@ You'll see various file attributes printed to the console:
 
 Launching `main.nf` [ecstatic_ampere] DSL2 - revision: f3fa3dcb48
 
+File object class: sun.nio.fs.UnixPath
 File name: patientA_rep1_normal_R1_001.fastq.gz
 Simple name: patientA_rep1_normal_R1_001
 Extension: gz
@@ -182,6 +184,8 @@ Parent directory: /workspaces/training/side-quests/working_with_files/data
 ```
 
 When using a path as a string, Nextflow has no idea what it's looking at - it's just a series of characters. When we use the `file()` method, Nextflow understands this is a file and can access its properties such as name, extension, and parent directory. This also tells Nextflow exactly how to handle it in the workflow, which prevents common errors.
+
+Notice that the file object class is `sun.nio.fs.UnixPath` - this is Nextflow's way of representing local files. As we'll see later, remote files will have different class names (like `nextflow.file.http.XPath` for HTTP files), but they all work exactly the same way and can be used identically in your workflows.
 
 Despite their prevalence in bioinformatics, files are not strings! Nextflow needs to know it's working with a file object to properly manage it throughout your workflow.
 
@@ -218,6 +222,7 @@ In your workflow, you can replace the string path with an HTTPS one to download 
     ```groovy title="main.nf" linenums="2" hl_lines="2"
     // Using a remote file from the internet
     myFile = file('https://github.com/nextflow-io/training/blob/bb187e3bfdf4eec2c53b3b08d2b60fdd7003b763/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz')
+    println "File object class: ${myFile.class.name}"
     println "${myFile}"
     ```
 
@@ -243,6 +248,7 @@ nextflow run main.nf
 
 Launching `main.nf` [insane_swartz] DSL2 - revision: fff18abe6d
 
+File object class: nextflow.file.http.XPath
 https://github.com/nextflow-io/training/blob/bb187e3bfdf4eec2c53b3b08d2b60fdd7003b763/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz
 ```
 
@@ -257,6 +263,8 @@ In this way, you can replace local with remote data without changing any pipelin
 - Remote data is accessed using a URI
 - Nextflow will automatically download and stage the data to the right place
 - Do not write logic to download or upload remote files!
+
+**Note on Object Types**: Notice that local files produce `sun.nio.fs.UnixPath` objects while remote files produce `nextflow.file.http.XPath` objects. Despite these different class names, both work exactly the same way and can be used identically in your workflows. This is a key feature of Nextflow - you can seamlessly switch between local and remote data sources without changing your code logic.
 
 ---
 
@@ -323,6 +331,7 @@ In our first version, we use `.view()` to print the file name. Let's update our 
     // Reading files with Channel.fromPath
     ch_fastq = Channel.fromPath('data/patientA_rep1_normal_R1_001.fastq.gz')
     ch_fastq.view { myFile ->
+        println "File object class: ${myFile.class.name}"
         println "File name: ${myFile.name}"
         println "Simple name: ${myFile.simpleName}"
         println "Extension: ${myFile.extension}"
@@ -356,6 +365,7 @@ nextflow run main.nf
 
 Launching `main.nf` [furious_swanson] DSL2 - revision: c35c34950d
 
+File object class: sun.nio.fs.UnixPath
 File name: patientA_rep1_normal_R1_001.fastq.gz
 Simple name: patientA_rep1_normal_R1_001
 Extension: gz
@@ -395,10 +405,12 @@ nextflow run main.nf
 
 Launching `main.nf` [boring_sammet] DSL2 - revision: d2aa789c9a
 
+File object class: sun.nio.fs.UnixPath
 File name: patientA_rep1_normal_R1_001.fastq.gz
 Simple name: patientA_rep1_normal_R1_001
 Extension: gz
 Parent directory: /workspaces/training/side-quests/working_with_files/data
+File object class: sun.nio.fs.UnixPath
 File name: patientA_rep1_normal_R2_001.fastq.gz
 Simple name: patientA_rep1_normal_R2_001
 Extension: gz
