@@ -6,7 +6,7 @@ In this side quest, we'll explore how Nextflow handles files, from basic file op
 
 By the end of this side quest, you'll be able to:
 
-- Create file objects from strings
+- Create Path objects from file path strings using Nextflow's `file()` method
 - Get file attributes such as name, extension, and path
 - Use channels to automate file handling
 - Extract sample metadata from filenames
@@ -71,7 +71,7 @@ Take a look at the workflow file:
 
 ```groovy title="main.nf" linenums="1"
 workflow {
-    // Create a file object from a string path
+    // Create a Path object from a string path
     myFile = 'data/patientA_rep1_normal_R1_001.fastq.gz'
     println "${myFile}"
 }
@@ -93,20 +93,24 @@ Launching `main.nf` [romantic_chandrasekhar] DSL2 - revision: 5a4a89bc3a
 data/patientA_rep1_normal_R1_001.fastq.gz
 ```
 
+!!! note
+
+    We printed the string path exactly as we wrote it. This is just text output - Nextflow hasn't done anything special with it yet.
+
 ---
 
 ## 1. Basic File Operations
 
-### 1.1. Creating File Objects
+### 1.1. Creating Path Objects
 
-Let's start by understanding how to create file objects in Nextflow. In our workflow, we have a string path `data/patientA_rep1_normal_R1_001.fastq.gz`. This is just a plain string - Nextflow doesn't automatically recognize it as representing a file. To work with files properly in Nextflow, we need to convert string paths into proper file objects using the `file()` method, which provides access to file properties and operations.
+Let's start by understanding how to create Path objects in Nextflow. In our workflow, we have a string path `data/patientA_rep1_normal_R1_001.fastq.gz`. This is just a plain string - Nextflow doesn't automatically recognize it as representing a file. To work with files properly in Nextflow, we need to convert string paths into proper Path objects using the `file()` method, which provides access to file properties and operations.
 
 Edit the `main.nf` file to include the following:
 
 === "After"
 
     ```groovy title="main.nf" linenums="2" hl_lines="2"
-    // Create a file object from a string path
+    // Create a Path object from a string path
     myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
     println "${myFile}"
     ```
@@ -114,7 +118,7 @@ Edit the `main.nf` file to include the following:
 === "Before"
 
     ```groovy title="main.nf" linenums="2" hl_lines="2"
-    // Create a file object from a string path
+    // Create a Path object from a string path
     myFile = 'data/patientA_rep1_normal_R1_001.fastq.gz'
     println "${myFile}"
     ```
@@ -125,7 +129,7 @@ Run the workflow:
 nextflow run main.nf
 ```
 
-```console title="File object output"
+```console title="Path object output"
  N E X T F L O W   ~  version 24.10.4
 
 Launching `main.nf` [kickass_coulomb] DSL2 - revision: 5af44b1b59
@@ -133,18 +137,22 @@ Launching `main.nf` [kickass_coulomb] DSL2 - revision: 5af44b1b59
 /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz
 ```
 
-You should only see a single difference, the file path will now be absolute, like `/workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz`.
+!!! note
+
+    Now we see the full absolute path instead of the relative path we wrote. Nextflow has converted our string into a Path object and resolved it to the actual file location on the system.
+
+    You should only see a single difference, the file path will now be absolute, like `/workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz`.
 
 ### 1.2. File Attributes
 
-Why is this helpful? Well now Nextflow understands that `myFile` is a file object and not just a string, we can access the various attributes of the file object.
+Why is this helpful? Well now Nextflow understands that `myFile` is a Path object and not just a string, we can access the various attributes of the Path object.
 
 Let's update our workflow to print out the file attributes:
 
 === "After"
 
     ```groovy title="main.nf" linenums="2" hl_lines="5-9"
-    // Create a file object from a string path
+    // Create a Path object from a string path
     myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
 
     // Print file attributes
@@ -183,17 +191,23 @@ Extension: gz
 Parent directory: /workspaces/training/side-quests/working_with_files/data
 ```
 
-When using a path as a string, Nextflow has no idea what it's looking at - it's just a series of characters. When we use the `file()` method, Nextflow understands this is a file and can access its properties such as name, extension, and parent directory. This also tells Nextflow exactly how to handle it in the workflow, which prevents common errors.
+Notice that the Path object class is `sun.nio.fs.UnixPath` - this is Nextflow's way of representing local files. As we'll see later, remote files will have different class names (like `nextflow.file.http.XPath` for HTTP files), but they all work exactly the same way and can be used identically in your workflows.
 
-Notice that the file object class is `sun.nio.fs.UnixPath` - this is Nextflow's way of representing local files. As we'll see later, remote files will have different class names (like `nextflow.file.http.XPath` for HTTP files), but they all work exactly the same way and can be used identically in your workflows.
+!!! note
 
-Despite their prevalence in bioinformatics, files are not strings! Nextflow needs to know it's working with a file object to properly manage it throughout your workflow.
+    **The key difference:**
+
+    - **Path string**: Just text that Nextflow treats as characters
+    - **Path object**: A smart file reference that Nextflow can work with
+
+    Think of it like this: a path string is like writing an address on paper, while a Path object is like having a GPS device that knows how to navigate and can tell you details about the journey.
 
 ### Takeaway
 
-- The `file()` method creates a Path object from a string, which Nextflow understands as a file
+- Path strings vs Path objects: Strings are just text, Path objects are smart file references
+- The `file()` method converts a string path into a Path object that Nextflow can work with
 - You can access file properties like `name`, `simpleName`, `extension`, and `parent` [using file attributes](https://www.nextflow.io/docs/latest/working-with-files.html#getting-file-attributes)
-- Using file objects instead of strings allows Nextflow to properly manage files in your workflow
+- Using Path objects instead of strings allows Nextflow to properly manage files in your workflow
 
 ---
 
@@ -294,7 +308,7 @@ Update your `main.nf` file:
 === "Before"
 
     ```groovy title="main.nf" linenums="2" hl_lines="5-8"
-    // Create a file object from a string path
+    // Create a Path object from a string path
     myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
 
     // Print file attributes
@@ -498,7 +512,7 @@ Nextflow includes a method called `tokenize()` which is perfect for this task.
     }
     ```
 
-Once we run this, we should see the patient metadata as a list of strings, and the file object as the second element in the tuple.
+Once we run this, we should see the patient metadata as a list of strings, and the Path object as the second element in the tuple.
 
 ```bash
 nextflow run main.nf
@@ -698,7 +712,7 @@ Note the difference in data structure. Rather than being a list of results, we h
 
 ### 5.2. Extract metadata from file pairs
 
-We still need the metadata. Our `map` operation from before won't work because it doesn't match the data structure, but we can modify it to work. We already have access to the patient name in the `id` variable, so we can use that to extract the metadata without grabbing the `simpleName` from the file object like before.
+We still need the metadata. Our `map` operation from before won't work because it doesn't match the data structure, but we can modify it to work. We already have access to the patient name in the `id` variable, so we can use that to extract the metadata without grabbing the `simpleName` from the Path object like before.
 
 === "After"
 
@@ -998,7 +1012,7 @@ This pattern of keeping metadata explicit and attached to the data (rather than 
 
 In this side quest, you've learned how to work with files in Nextflow, from basic operations to more advanced techniques for handling collections of files. Here's a summary of what we covered:
 
-1. **Basic File Operations**: We created file objects with `file()` and accessed file attributes like name, path, and extension.
+1. **Basic File Operations**: We created Path objects with `file()` and accessed file attributes like name, path, and extension.
 
 2. **Using Remote Files**: We learned how to transparently switch between local and remote files using URIs, demonstrating Nextflow's ability to handle files from various sources.
 
@@ -1014,10 +1028,10 @@ These techniques will help you build more efficient and maintainable workflows, 
 
 ### Key Concepts
 
-- **File Object Creation**
+- **Path Object Creation**
 
   ```groovy
-  // Create a file object from a string path
+  // Create a Path object from a string path
   myFile = file('path/to/file.txt')
   ```
 
