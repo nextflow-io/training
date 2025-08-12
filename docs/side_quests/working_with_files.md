@@ -73,7 +73,7 @@ Take a look at the workflow file:
 workflow {
     // Create a Path object from a string path
     myFile = 'data/patientA_rep1_normal_R1_001.fastq.gz'
-    println "${myFile}"
+    println "${myFile} is of class ${myFile.class}"
 }
 ```
 
@@ -90,7 +90,7 @@ nextflow run main.nf
 
 Launching `main.nf` [romantic_chandrasekhar] DSL2 - revision: 5a4a89bc3a
 
-data/patientA_rep1_normal_R1_001.fastq.gz
+data/patientA_rep1_normal_R1_001.fastq.gz is of class class java.lang.String
 ```
 
 !!! note
@@ -112,7 +112,7 @@ Edit the `main.nf` file to include the following:
     ```groovy title="main.nf" linenums="2" hl_lines="2"
     // Create a Path object from a string path
     myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
-    println "${myFile}"
+    println "${myFile} is of class ${myFile.class}"
     ```
 
 === "Before"
@@ -120,8 +120,14 @@ Edit the `main.nf` file to include the following:
     ```groovy title="main.nf" linenums="2" hl_lines="2"
     // Create a Path object from a string path
     myFile = 'data/patientA_rep1_normal_R1_001.fastq.gz'
-    println "${myFile}"
+    println "${myFile} is of class ${myFile.class}"
     ```
+
+!!! note
+
+    **What is `.class`?**
+
+    In Groovy (the language Nextflow uses), `.class` tells us what type of object we're working with. It's like asking "what kind of thing is this?" - whether it's a string, a number, a file, or something else. This will help us see the difference between a plain string and a Path object.
 
 Run the workflow:
 
@@ -134,7 +140,7 @@ nextflow run main.nf
 
 Launching `main.nf` [kickass_coulomb] DSL2 - revision: 5af44b1b59
 
-/workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz
+/Users/jonathan.manning/projects/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz is of class class sun.nio.fs.UnixPath
 ```
 
 !!! note
@@ -168,7 +174,7 @@ Let's update our workflow to print out the file attributes:
     ```groovy title="main.nf" linenums="2" hl_lines="3"
     // Create a file object from a string path
     myFile = file('data/sampleA_rep1_normal_R1_001.fastq.gz')
-    println "${myFile}"
+    println "${myFile} is of class ${myFile.class}"
     ```
 
 Run the workflow:
