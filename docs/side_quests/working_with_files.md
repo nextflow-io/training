@@ -297,15 +297,13 @@ Tip: you can replicate the issue by changing to the process work dir and enterin
  -- Check '.nextflow.log' file for details
 ```
 
-**What this error means:**
-
-The process ran successfully, but the bash script failed because the file `data/patientA_rep1_normal_R1_001.fastq.gz` doesn't exist in the process working directory. When you use `val` input, Nextflow passes the string value through to your script, but it doesn't stage the actual file. The process tries to use the string as a file path, but the file isn't there.
+The process failed because the file `data/patientA_rep1_normal_R1_001.fastq.gz` doesn't exist in the process working directory. When you use `val` input, Nextflow passes the string value through to your script, but it doesn't stage the actual file. The process tries to use the string as a file path, but the file isn't there.
 
 Now let's fix this by changing the process to use a `path` input:
 
 === "After"
 
-    ```groovy title="file_operations.nf" linenums="2" hl_lines="5 16"
+    ```groovy title="file_operations.nf" linenums="1" hl_lines="5 16"
     process COUNT_LINES {
         debug true
 
@@ -328,7 +326,7 @@ Now let's fix this by changing the process to use a `path` input:
 
 === "Before"
 
-    ```groovy title="file_operations.nf" linenums="2" hl_lines="5 16"
+    ```groovy title="file_operations.nf" linenums="1" hl_lines="5 16"
     process COUNT_LINES {
         debug true
 
@@ -373,7 +371,7 @@ Now let's fix this properly by using the `file()` method to create a Path object
 
 === "After"
 
-    ```groovy title="file_operations.nf" linenums="2" hl_lines="5 16"
+    ```groovy title="file_operations.nf" linenums="1" hl_lines="5 16"
     process COUNT_LINES {
         debug true
 
@@ -396,7 +394,7 @@ Now let's fix this properly by using the `file()` method to create a Path object
 
 === "Before"
 
-    ```groovy title="file_operations.nf" linenums="2" hl_lines="5 16"
+    ```groovy title="file_operations.nf" linenums="1" hl_lines="5 16"
     process COUNT_LINES {
         debug true
 
@@ -455,7 +453,9 @@ The process successfully:
 
 ## 2. Using Remote Files
 
-One of the key features of Nextflow is the ability to transparently switch between local files (on the same machine) to remote files accessible over the internet. To do this, all you need to do as a user is switch the file path from a normal file path (e.g. `/path/to/data`) to a file path with a remote protocol at the start. For example, replacing `/path/to/data` with `s3://path/to/data` will switch to using the S3 protocol. Many different protocols are supported:
+One of the key features of Nextflow is the ability to transparently switch between local files (on the same machine) to remote files accessible over the internet. To do this, all you need to do as a user is switch the file path you supply to the workflow from a normal file path (e.g. `/path/to/data`) to a file path with a remote protocol at the start. Importantly, you should **never** have to change the workflow logic to accomodate files coming from different locations.
+
+For example, replacing `/path/to/data` with `s3://path/to/data` in your inputs will switch to using the S3 protocol. Many different protocols are supported:
 
 - HTTP(S)/FTP (http://, https://, ftp://)
 - Amazon S3 (s3://)
@@ -472,7 +472,7 @@ The key strength of this is we can switch between environments without changing 
 
     Accessing remote data requires an internet connection!
 
-In your workflow, you can replace the string path with an HTTPS one to download this file from the internet. We are going to swap the relative path of the FASTQ files with the remote one stored on the internet. This is the same data as we have been previously using.
+In your workflow, you can replace the string path with an HTTPS one to download this file from the internet. We are going to swap the relative path of the FASTQ files with the remote one. This is the same data as we have been previously using.
 
 Open `file_operations.nf` again and make changes like this:
 
@@ -604,6 +604,7 @@ You'll see each file path being emitted as a separate element in the channel:
 Launching `file_operations.nf` [grave_meucci] DSL2 - revision: b09964a583
 
 Found file: /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz
+```
 
 Note how Nextflow has grabbed the file we specified and turned it into a `Path` type object, in exactly the same way that `file()` would have done. `Channel.fromPath()` is just a convenient way of creating a new channel populated by a list of files.
 
