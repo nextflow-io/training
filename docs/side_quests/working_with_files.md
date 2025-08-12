@@ -565,7 +565,7 @@ Update your `file_operations.nf` file:
     ```groovy title="file_operations.nf" linenums="2" hl_lines="2"
         // Reading files with Channel.fromPath
         ch_fastq = Channel.fromPath('data/patientA_rep1_normal_R1_001.fastq.gz')
-        ch_fastq.view { "Found file: $it" }
+        ch_fastq.view { "Found file: $it of type ${it.class}" }
 
         // // Print file attributes
         // Comment these out for now, we'll come back to them!
@@ -603,7 +603,7 @@ You'll see each file path being emitted as a separate element in the channel:
 
 Launching `file_operations.nf` [grave_meucci] DSL2 - revision: b09964a583
 
-Found file: /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz
+Found file: /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz of type class sun.nio.fs.UnixPath
 ```
 
 Note how Nextflow has grabbed the file we specified and turned it into a `Path` type object, in exactly the same way that `file()` would have done. `Channel.fromPath()` is just a convenient way of creating a new channel populated by a list of files.
@@ -614,7 +614,7 @@ In our first version, we use `.view()` to print the file name. Let's update our 
 
 === "After"
 
-    ```groovy title="file_operations.nf" linenums="2" hl_lines="3-8"
+    ```groovy title="file_operations.nf" linenums="2" hl_lines="3-9"
         // Reading files with Channel.fromPath
         ch_fastq = Channel.fromPath('data/patientA_rep1_normal_R1_001.fastq.gz')
         ch_fastq.view { myFile ->
@@ -739,6 +739,7 @@ First we will grab the simpleName of the file, which includes the metadata, and 
 
     ```groovy title="file_operations.nf" linenums="4"
         ch_fastq.view {
+            println "File object class: ${myFile.class}"
             println "File name: ${it.name}"
             println "Simple name: ${it.simpleName}"
             println "Extension: ${it.extension}"
@@ -753,10 +754,10 @@ nextflow run file_operations.nf
 ```console title="Sample Metadata Output"
  N E X T F L O W   ~  version 25.04.3
 
-Launching `file_operations.nf` [furious_liskov] DSL2 - revision: dde7b5315e
+Launching `file_operations.nf` [suspicious_mahavira] DSL2 - revision: ae8edc4e48
 
-[patientA_rep1_normal_R1_001, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz]
 [patientA_rep1_normal_R2_001, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]
+[patientA_rep1_normal_R1_001, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz]
 ```
 
 Note how we have separated the patient `simpleName`, which includes the metadata, from the `file` object. This is useful if we want to use the patient metadata in a later process.
@@ -824,12 +825,12 @@ Let's convert our flat list into a map now.
 
 === "After"
 
-    ```groovy title="file_operations.nf" linenums="4" hl_lines="3-11"
+    ```groovy title="file_operations.nf" linenums="4" hl_lines="2-11"
         ch_fastq.map { myFile ->
-            def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
+            def (patient, replicate, type, readNum) = myFile.simpleName.tokenize('_')
             [
               [
-                id: sample,
+                id: patient,
                 replicate: replicate.replace('rep', ''),
                 type: type,
                 readNum: readNum.replace('rep', ''),
@@ -841,14 +842,15 @@ Let's convert our flat list into a map now.
 
 === "Before"
 
-    ```groovy title="file_operations.nf" linenums="4" hl_lines="3"
+    ```groovy title="file_operations.nf" linenums="4" hl_lines="2"
         ch_fastq.map { myFile ->
-            def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
-            [ sample, replicate, type, readNum.readNum, myFile ]
+            [ myFile.simpleName.tokenize('_'), myFile ]
         }
     ```
 
 Notice that we're simplifying a couple of the meta data items as we go (e.g. `readNum.replace('rep', '')`).
+
+Now re-run the workflow:
 
 ```bash
 nextflow run file_operations.nf
@@ -884,7 +886,7 @@ Nextflow provides a specialized channel factory method for working with paired f
 
 ### 5.1. Basic Usage of fromFilePairs
 
-Complete your `file_operations.nf` file with the following (we will comment out the map operation for now):
+Complete your `file_operations.nf` file with the following (deleting the map operation):
 
 === "After"
 
@@ -954,7 +956,7 @@ We still need the metadata. Our `map` operation from before won't work because i
 
 === "Before"
 
-    ```groovy title="file_operations.nf" linenums="3" hl_lines="3-11"
+    ```groovy title="file_operations.nf" linenums="2" hl_lines="3-11"
         ch_fastq = Channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
             .view()
     ```
@@ -987,7 +989,7 @@ Well done! We have grabbed the metadata from the filenames and used them as valu
 
 ## 6. Using File Operations in Processes
 
-Now let's put all this together in a simple process to demonstrate how to use file operations in a Nextflow process.
+Now let's put all this together in a simple process to reinforce how to use file operations in a Nextflow process.
 
 ### 6.1. Create the process
 
@@ -997,7 +999,7 @@ Add the following to the top of your `file_operations.nf` file:
 
 === "After"
 
-    ```groovy title="file_operations.nf - process example" linenums="1" hl_lines="1-23"
+    ```groovy title="file_operations.nf - process example" linenums="1" hl_lines="1-24"
     process ANALYZE_READS {
         tag "${meta.id}"
 
@@ -1026,7 +1028,7 @@ Add the following to the top of your `file_operations.nf` file:
 
 === "Before"
 
-    ```groovy title="file_operations.nf" linenums="1"
+    ```groovy title="file_operations.nf" linenums="1" hl_lines="1"
     workflow {
     ```
 
@@ -1040,7 +1042,7 @@ Then implement the process in the workflow:
 
 === "After"
 
-    ```groovy title="file_operations.nf" linenums="27" hl_lines="2 13"
+    ```groovy title="file_operations.nf" linenums="26" hl_lines="2 13"
         ch_fastq = Channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
         ch_samples = ch_fastq.map { id, fastqs ->
             def (sample, replicate, type, readNum) = id.tokenize('_')
@@ -1059,7 +1061,7 @@ Then implement the process in the workflow:
 
 === "Before"
 
-    ```groovy title="file_operations.nf" linenums="27"
+    ```groovy title="file_operations.nf" linenums="26" hl_lines="2 13"
         ch_fastq = Channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
         ch_fastq.map { id, fastqs ->
             def (sample, replicate, type, readNum) = id.tokenize('_')
@@ -1105,13 +1107,13 @@ Remember Channel.fromPath() accepts a _glob_ as input, which means it can accept
 
 === "After"
 
-    ```groovy title="file_operations.nf" linenums="27"
+    ```groovy title="file_operations.nf" linenums="26"
         ch_fastq = Channel.fromFilePairs('data/*_R{1,2}_001.fastq.gz')
     ```
 
 === "Before"
 
-    ```groovy title="file_operations.nf" linenums="27"
+    ```groovy title="file_operations.nf" linenums="26"
         ch_fastq = Channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
     ```
 
@@ -1235,17 +1237,17 @@ This pattern of keeping metadata explicit and attached to the data (rather than 
 
 In this side quest, you've learned how to work with files in Nextflow, from basic operations to more advanced techniques for handling collections of files. Here's a summary of what we covered:
 
-1. **Basic File Operations**: We created Path objects with `file()` and accessed file attributes like name, path, and extension.
+1. **Basic File Operations**: We created Path objects with `file()` and accessed file attributes like name, extension, and parent directory, learning the difference between strings and Path objects.
 
-2. **Using Remote Files**: We learned how to transparently switch between local and remote files using URIs, demonstrating Nextflow's ability to handle files from various sources.
+2. **Using Remote Files**: We learned how to transparently switch between local and remote files using URIs, demonstrating Nextflow's ability to handle files from various sources without changing workflow logic.
 
-3. **Using Channels for File Handling**: We created channels from file patterns with `Channel.fromPath()` and viewed their file attributes with `.view()`.
+3. **Reading files using the `fromPath()` channel factory**: We created channels from file patterns with `Channel.fromPath()` and viewed their file attributes, including object types.
 
-4. **Extracting Patient Metadata from Filenames**: We used `tokenize()` to extract patient metadata from filenames and use it in our workflow.
+4. **Extracting Patient Metadata from Filenames**: We used `tokenize()` and `replace()` to extract and structure metadata from filenames, converting them to organized maps.
 
-5. **Simplifying with Channel.fromFilePairs**: We used `Channel.fromFilePairs()` to automatically pair files with a common prefix and use it in our workflow.
+5. **Simplifying with Channel.fromFilePairs**: We used `Channel.fromFilePairs()` to automatically pair related files and extract metadata from paired file IDs.
 
-6. **Using File Operations in Processes**: We used `publishDir` to organize outputs based on patient metadata and `tuple` to pass metadata alongside data in our workflow.
+6. **Using File Operations in Processes**: We integrated file operations into Nextflow processes with proper input handling, using `publishDir` to organize outputs based on metadata.
 
 These techniques will help you build more efficient and maintainable workflows, especially when working with large numbers of files with complex naming conventions.
 
@@ -1286,7 +1288,7 @@ These techniques will help you build more efficient and maintainable workflows, 
   def patientId = name[0]
   def replicate = name[1].replace('rep', '')
   def type = name[2]
-  def readNum = name[3]
+  def readNum = name[3].replace('R', '')
   ```
 
 - **Using remote files**
