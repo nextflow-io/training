@@ -430,6 +430,7 @@ Processing file: patientA_rep1_normal_R1_001.fastq.gz
 ```
 
 The process successfully:
+
 - Staged the file into the working directory
 - Decompressed the .gz file
 - Counted the lines (40 lines in this case)
