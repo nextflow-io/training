@@ -133,7 +133,7 @@ Launching `main.nf` [kickass_coulomb] DSL2 - revision: 5af44b1b59
 /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz
 ```
 
-You should only see a single difference, the file path will now be absolute. Note that the full path will change based on where you are doing this training, but it is likely to be something like `/workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz`.
+You should only see a single difference, the file path will now be absolute, like `/workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz`.
 
 ### 1.2. File Attributes
 
@@ -193,11 +193,78 @@ Despite their prevalence in bioinformatics, files are not strings! Nextflow need
 
 ---
 
-## 2. Using Channels for File Handling
+## 2. Using Remote Files
+
+One of the key features of Nextflow is the ability to transparently switch between local files (on the same machine) to remote files accessible over the internet. To do this, all you need to do as a user is switch the file path from a normal file path (e.g. `/path/to/data`) to a file path with a remote protocol at the start. For example, replacing `/path/to/data` with `s3://path/to/data` will switch to using the S3 protocol. Many different protocols are supported:
+
+- HTTP(S)/FTP (http://, https://, ftp://)
+- Amazon S3 (s3://)
+- Azure Blob Storage (az://)
+- Google Cloud Storage (gs://)
+
+To use these, simply replace the string and Nextflow will handle authentication and staging the files to the right place, downloading or uploading and all other file operations you would expect. We call this string the Uniform Resource Identifier (URI).
+
+The key strength of this is we can switch between environments without changing any pipeline logic. For example, you can develop with a small, local test set before moving to a remote set of data by changing the URI.
+
+### 2.1. Using a file from the internet
+
+!!! warning
+Accessing remote data requires an internet connection!
+
+In your workflow, you can replace the string path with an HTTPS one to download this file from the internet. We are going to swap the relative path of the FASTQ files with the remote one stored on the internet. This is the same data as we have been previously using.
+
+=== "After"
+
+    ```groovy title="main.nf" linenums="2" hl_lines="2"
+    // Using a remote file from the internet
+    myFile = file('https://github.com/nextflow-io/training/blob/bb187e3bfdf4eec2c53b3b08d2b60fdd7003b763/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz')
+    println "${myFile}"
+    ```
+
+=== "Before"
+
+    ```groovy title="main.nf" linenums="2" hl_lines="2"
+    // Create a file object from a string path
+    myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
+    println "${myFile}"
+    ```
+
+!!! note
+HTTPS remote data does not accept globs because HTTPS cannot list multiple files, however other storage protocols such as blob storage (`s3://`, `az://`, `gs://`) can.
+
+Run the workflow and it will automatically pull the data from the internet:
+
+```bash
+nextflow run main.nf
+```
+
+```console title="Remote file output"
+ N E X T F L O W   ~  version 24.10.5
+
+Launching `main.nf` [insane_swartz] DSL2 - revision: fff18abe6d
+
+https://github.com/nextflow-io/training/blob/bb187e3bfdf4eec2c53b3b08d2b60fdd7003b763/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz
+```
+
+In this example very little has changed! This shows how easy it is to switch between local and remote data using Nextflow.
+
+To see the difference, check the working directory located at the hash value of the process. The file will be downloaded to a staging directory located within the work directory, then symlinked into the relevant process directory. If the file was used again, Nextflow would only download it once.
+
+In this way, you can replace local with remote data without changing any pipeline logic.
+
+### Takeaway
+
+- Remote data is accessed using a URI
+- Nextflow will automatically download and stage the data to the right place
+- Do not write logic to download or upload remote files!
+
+---
+
+## 3. Using Channels for File Handling
 
 While the `file()` method is useful for simple file operations, channels provide a more powerful way to handle multiple files in workflows. We could load our file into a channel using [`Channel.of()`](https://www.nextflow.io/docs/latest/reference/channel.html#of), but we have a much more convenient tool called [`Channel.fromPath()`](https://www.nextflow.io/docs/latest/reference/channel.html#frompath) which finds every file in a directory that matches a given pattern.
 
-### 2.1. Reading Files with Channel.fromPath
+### 3.1. Reading Files with Channel.fromPath
 
 Update your `main.nf` file:
 
@@ -246,7 +313,7 @@ Found file: /workspaces/training/side-quests/working_with_files/data/patientA_re
 
 Note how Nextflow has grabbed the file we specified and turned it into a `file` object. `Channel.fromPath()` is a convenient way of creating a new channel populated by a list of files.
 
-### 2.2. Viewing Channel Contents
+### 3.2. Viewing Channel Contents
 
 In our first version, we use `.view()` to print the file name. Let's update our workflow to print out the file attributes:
 
@@ -295,7 +362,7 @@ Extension: gz
 Parent directory: /workspaces/training/side-quests/working_with_files/data
 ```
 
-### 2.3. Using a glob to match multiple files
+### 3.3. Using a glob to match multiple files
 
 `Channel.fromPath()` can take a glob pattern as an argument, which will match all files in the directory that match the pattern. Let's grab both of the pair of FASTQs associated with this patient:
 
@@ -348,7 +415,7 @@ Using this method, we could grab as many or as few files as we want just by chan
 
 ---
 
-## 3. Extracting Sample Metadata from Filenames
+## 4. Extracting Patient Metadata from Filenames
 
 One of the most common tasks in bioinformatics workflows is extracting metadata from filenames. This is especially important when working with sequencing data, where filenames often contain information about the sample, condition, replicate, and read number.
 
@@ -356,7 +423,7 @@ This isn't ideal - metadata should never be embedded in filenames, but it's a co
 
 Let's explore how to extract metadata from our FASTQ filenames using Nextflow's powerful data transformation capabilities.
 
-### 3.1. Basic Metadata Extraction
+### 4.1. Basic Metadata Extraction
 
 First, let's modify our workflow to extract metadata from the filenames.
 
@@ -397,7 +464,7 @@ Launching `main.nf` [furious_liskov] DSL2 - revision: dde7b5315e
 
 Note how we have separated the patient `simpleName`, which includes the metadata, from the `file` object. This is useful if we want to use the patient metadata in a later process.
 
-### 3.2. Extracting Metadata from Filenames
+### 4.2. Extracting Metadata from Filenames
 
 Our metadata is embedded in the filename, but it's not in a standard format. We need to split up the filename into it's components which are separated by underscores.
 
@@ -436,7 +503,7 @@ Launching `main.nf` [gigantic_gauss] DSL2 - revision: a39baabb57
 
 Success! We've broken down our patient information from a single string into a list of strings. We can now handle each part of the patient information separately.
 
-### 3.3. Using a map to organise the data
+### 4.3. Using a map to organise the data
 
 Our meta data is just a flat list at the moment. It's easy to use but hard to read. What is the item at index 3? Can you tell without checking?
 
@@ -499,7 +566,7 @@ Launching `main.nf` [infallible_swartz] DSL2 - revision: 7f4e68c0cb
 
 We have converted our flat list into a map, and now we can refer to each bit of sample data by name instead of by index. This makes our code easier to read and more maintainable.
 
-### 3.4. Simplifying the metadata
+### 4.4. Simplifying the metadata
 
 The metadata includes a lot of redundant information such as "rep". Let's remove this so replicate is just a number.
 
@@ -565,11 +632,11 @@ Next up, we will look at how to handle paired-end reads.
 
 ---
 
-## 4. Simplifying with Channel.fromFilePairs
+## 5. Simplifying with Channel.fromFilePairs
 
 Nextflow provides a specialized channel factory method for working with paired files: `Channel.fromFilePairs()`. This method automatically groups files that share a common prefix. This is particularly useful for paired-end sequencing data, where you have two files (e.g., R1 and R2) for each sample.
 
-### 4.1. Basic Usage of fromFilePairs
+### 5.1. Basic Usage of fromFilePairs
 
 Complete your `main.nf` file with the following (we will comment out the map operation for now):
 
@@ -617,7 +684,7 @@ Launching `main.nf` [chaotic_cuvier] DSL2 - revision: 472265a440
 
 Note the difference in data structure. Rather than being a list of results, we have a single result in the format `id, [ fastq1, fastq2 ]`. Nextflow has done the hard work of extracting the patient name by examining the shared prefix and using it as a patient id.
 
-### 4.2. Extract metadata from file pairs
+### 5.2. Extract metadata from file pairs
 
 We still need the metadata. Our `map` operation from before won't work because it doesn't match the data structure, but we can modify it to work. We already have access to the patient name in the `id` variable, so we can use that to extract the metadata without grabbing the `simpleName` from the file object like before.
 
@@ -671,11 +738,11 @@ Well done! We have grabbed the metadata from the filenames and used them as valu
 
 ---
 
-## 5. Using File Operations in Processes
+## 6. Using File Operations in Processes
 
 Now let's put all this together in a simple process to demonstrate how to use file operations in a Nextflow process.
 
-### 5.1. Create the process
+### 6.1. Create the process
 
 We'll keep it simple and make a process called `ANALYZE_READS` that takes in a tuple of metadata and a pair of fastq files and analyses them. We could imagine this is an alignment, or variant calling or any other step.
 
@@ -720,7 +787,7 @@ Add the following to the top of your `main.nf` file:
 
     We are calling our map '`meta`'. For a more in-depth introduction to meta maps, see [Patient Specific Data in Workflows](./metadata.md).
 
-### 5.2. Implement the process in the workflow
+### 6.2. Implement the process in the workflow
 
 Then implement the process in the workflow:
 
@@ -785,7 +852,7 @@ results/patientA
 
 The process took our inputs and created a new file with the patient metadata. Based on what you learned in hello-nextflow, what occurred in the working directory?
 
-### 5.3. Include many more samples
+### 6.3. Include many more patients
 
 Remember Channel.fromPath() accepts a _glob_ as input, which means it can accept any number of files that match the pattern. Therefore if we want to include all the patients we can just modify the input string to include more patients.
 
@@ -833,7 +900,7 @@ See how we have analyzed all the patients in one go!
 
 Wait, we have a problem. We have 2 replicates for patientA, but only 1 output file! We are overwriting the output file each time.
 
-### 5.4. Make the published files unique
+### 6.4. Make the published files unique
 
 Since we have access to the patient metadata, we can use it to make the output files unique.
 
@@ -913,79 +980,7 @@ This pattern of keeping metadata explicit and attached to the data (rather than 
 - Metadata in tuples enables structured organization of results
 - This approach creates maintainable workflows with clear data provenance
 
----
 
-## 6. Using remote files
-
-One of the key features of Nextflow is the ability to transparently switch between local files (on the same machine) to remote files accessible over the internet. To do this, all you need to do as a user is switch the file path from a normal file path (e.g. `/path/to/data`) to a file path with a remote protocol at the start. For example, replacing `/path/to/data` with `s3://path/to/data` will switch to using the S3 protocol. Many different protocols are supported:
-
-- HTTP(S)/FTP (http://, https://, ftp://)
-- Amazon S3 (s3://)
-- Azure Blob Storage (az://)
-- Google Cloud Storage (gs://)
-
-To use these, simply replace the string and Nextflow will handle authentication and staging the files to the right place, downloading or uploading and all other file operations you would expect. We call this string the Uniform Resource Identifier (URI).
-
-The key strength of this is we can switch between environments without changing any pipeline logic. For example, you can develop with a small, local test set before moving to a remote set of data by changing the URI.
-
-### 6.1 Using a file from the internet
-
-!!! warning
-Accessing remote data requires an internet connection!
-
-In your workflow, replace the string path with an HTTPS one to download this file from the internet. We are going to swap the relative path of the FASTQ files with the remote one stored on the internet. This is the same data as we have been previously using.
-
-=== "After"
-
-    ```groovy title="main.nf" linenums="27"
-    ch_fastq = Channel.fromFilePairs('https://github.com/nextflow-io/training/blob/bb187e3bfdf4eec2c53b3b08d2b60fdd7003b763/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz')
-
-    ```
-
-=== "Before"
-
-    ```groovy title="main.nf" linenums="27"
-    ch_fastq = Channel.fromFilePairs('data/*_R{1,2}_001.fastq.gz')
-    ```
-
-!!! note
-HTTPS remote data does not accept globs because HTTPS cannot list multiple files, however other storage protocols such as blob storage (`s3://`, `az://`, `gs://`) can. This means we have to use a single read (R1) but the example will still work!
-
-Run the pipeline and it will automatically pull the data from the Github.
-
-```bash
-nextflow run main.nf
-```
-
-```console title="Remote data"
- N E X T F L O W   ~  version 24.10.5
-
-Launching `./main.nf` [insane_swartz] DSL2 - revision: fff18abe6d
-[32/06750a] process > ANALYZE_READS (patientC) [100%] 1 of 1 ✔
-```
-
-In this example very little has changed! This shows how easy it is to switch between local and remote data using Nextflow.
-
-To see the difference, check the working directory located at the hash value of the process. In the example above, it will be located at `./work/32/06750a...`:
-
-```console title="Working directory"
->  tree work/32/06750a7bffe2ed642d0e2e0c66a1e5
-work/32/06750a7bffe2ed642d0e2e0c66a1e5
-├── patientA_rep1_normal_R1_001.fastq.gz -> /workspaces/training/side-quests/working_with_files/work/stage-3db20ad3-3083-407a-b796-b3a415711c02/a9/c7081f2633e48d6d85b13560441e98/patientA_rep1_normal_R1_001.fastq.gz
-└── patientA_stats.txt
-```
-
-The file has been downloaded to staging directory located within the work directory, then symlinked into the relevant process directory. If the file was used again, Nextflow would only download it once. If process only had access to a specific working directory, it would be able to access the data fine.
-
-In this way, you can replace local with remote data without changing any pipeline logic.
-
-### Takeaway
-
-- Remote data is accessed using a URI
-- Nextflow will automatically download and stage the data to the right place
-- Do not write logic to download or upload remote files!
-
----
 
 ## Summary
 
@@ -993,15 +988,15 @@ In this side quest, you've learned how to work with files in Nextflow, from basi
 
 1. **Basic File Operations**: We created file objects with `file()` and accessed file attributes like name, path, and extension.
 
-2. **Using Channels for File Handling**: We created channels from file patterns with `Channel.fromPath()` and viewed their file attributes with `.view()`.
+2. **Using Remote Files**: We learned how to transparently switch between local and remote files using URIs, demonstrating Nextflow's ability to handle files from various sources.
 
-3. **Extracting Patient Metadata from Filenames**: We used `tokenize()` to extract patient metadata from filenames and use it in our workflow.
+3. **Using Channels for File Handling**: We created channels from file patterns with `Channel.fromPath()` and viewed their file attributes with `.view()`.
 
-4. **Simplifying with Channel.fromFilePairs**: We used `Channel.fromFilePairs()` to automatically pair files with a common prefix and use it in our workflow.
+4. **Extracting Patient Metadata from Filenames**: We used `tokenize()` to extract patient metadata from filenames and use it in our workflow.
 
-5. **Using File Operations in Processes**: We used `publishDir` to organize outputs based on patient metadata and `tuple` to pass metadata alongside data in our workflow.
+5. **Simplifying with Channel.fromFilePairs**: We used `Channel.fromFilePairs()` to automatically pair files with a common prefix and use it in our workflow.
 
-6. **Using remote files**: We used a remote URI to access data from the internet without changing any pipeline code.
+6. **Using File Operations in Processes**: We used `publishDir` to organize outputs based on patient metadata and `tuple` to pass metadata alongside data in our workflow.
 
 These techniques will help you build more efficient and maintainable workflows, especially when working with large numbers of files with complex naming conventions.
 
