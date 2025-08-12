@@ -69,11 +69,11 @@ You'll find a simple workflow file (`file_operations.nf`) and a data directory c
 2 directories, 18 files
 ```
 
-This directory contains paired-end sequencing data for three patients (A, B, C), with the typical `_R1_` and `_R2_` naming convention for forward and reverse reads. Each patient has normal and tumor tissue types, and patient A has two replicates.
+This directory contains paired-end sequencing data for three patients (A, B, C), with a typical `_R1_` and `_R2_` naming convention for what are known as 'forward' and 'reverse reads' (don't worry if you don't know what this means, it's not important for this session). Each patient has normal and tumor tissue types, and patient A has two replicates.
 
 ### 0.3. Running the Workflow
 
-Take a look at the workflow file:
+Take a look at the workflow file `file_operations.nf`:
 
 ```groovy title="file_operations.nf" linenums="1"
 workflow {
@@ -83,7 +83,13 @@ workflow {
 }
 ```
 
-We have a mini-workflow that refers to a single file path in it's workflow, then prints it to the console.
+We have a mini-workflow that refers to a single file path in it's workflow, then prints it to the console, along with its class.
+
+!!! note
+
+    **What is `.class`?**
+
+    In Groovy (the language Nextflow uses), `.class` tells us what type of object we're working with. It's like asking "what kind of thing is this?" - whether it's a string, a number, a file, or something else. This will help us see the difference between a plain string and a Path object in the next sections.
 
 Run the workflow:
 
@@ -96,22 +102,18 @@ nextflow run file_operations.nf
 
 Launching `file_operations.nf` [romantic_chandrasekhar] DSL2 - revision: 5a4a89bc3a
 
-data/patientA_rep1_normal_R1_001.fastq.gz is of class class java.lang.String
+data/patientA_rep1_normal_R1_001.fastq.gz is of class java.lang.String
 ```
 
-!!! note
-
-    We printed the string path exactly as we wrote it. This is just text output - Nextflow hasn't done anything special with it yet.
-
----
+We printed the string path exactly as we wrote it. This is just text output - Nextflow hasn't done anything special with it yet. We've also confirmed that, so far, to Nextflow this is only a string (of class `java.lang.String`), we haven't yet told Nextflow about its file nature.
 
 ## 1. Basic File Operations
 
 ### 1.1. Creating Path Objects
 
-Let's start by understanding how to create [Path objects](https://www.nextflow.io/docs/latest/reference/stdlib-types.html#path) in Nextflow. In our workflow, we have a string path `data/patientA_rep1_normal_R1_001.fastq.gz`. This is just a plain string - Nextflow doesn't automatically recognize it as representing a file. To work with files properly in Nextflow, we need to convert string paths into proper Path objects using the `file()` method, which provides access to file properties and operations.
+We can tell Nextflow how to handle files by creating [Path objects](https://www.nextflow.io/docs/latest/reference/stdlib-types.html#path) from path strings. In our workflow, we have a string path `data/patientA_rep1_normal_R1_001.fastq.gz`, and we covert that to a Path object using the `file()` method, which provides access to file properties and operations.
 
-Edit the `file_operations.nf` file to include the following:
+Edit the `file_operations.nf` to wrap the string with `file()` as follows:
 
 === "After"
 
@@ -129,12 +131,6 @@ Edit the `file_operations.nf` file to include the following:
     println "${myFile} is of class ${myFile.class}"
     ```
 
-!!! note
-
-    **What is `.class`?**
-
-    In Groovy (the language Nextflow uses), `.class` tells us what type of object we're working with. It's like asking "what kind of thing is this?" - whether it's a string, a number, a file, or something else. This will help us see the difference between a plain string and a Path object.
-
 Run the workflow:
 
 ```bash
@@ -146,14 +142,19 @@ nextflow run file_operations.nf
 
 Launching `file_operations.nf` [kickass_coulomb] DSL2 - revision: 5af44b1b59
 
-/Users/jonathan.manning/projects/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz is of class class sun.nio.fs.UnixPath
+/workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz is of class class sun.nio.fs.UnixPath
 ```
+
+Now we see the full absolute path instead of the relative path we wrote. Nextflow has converted our string into a Path object and resolved it to the actual file location on the system. The file path will now be absolute, like `/workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz`, and notice that the Path object class is `sun.nio.fs.UnixPath`, this is Nextflow's way of representing local files. As we'll see later, remote files will have different class names (like `nextflow.file.http.XPath` for HTTP files), but they all work exactly the same way and can be used identically in your workflows.
 
 !!! note
 
-    Now we see the full absolute path instead of the relative path we wrote. Nextflow has converted our string into a Path object and resolved it to the actual file location on the system.
+    **The key difference:**
 
-    You should only see a single difference, the file path will now be absolute, like `/workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz`.
+    - **Path string**: Just text that Nextflow treats as characters
+    - **Path object**: A smart file reference that Nextflow can work with
+
+    Think of it like this: a path string is like writing an address on paper, while a Path object is like having a GPS device that knows how to navigate and can tell you details about the journey.
 
 ### 1.2. File Attributes
 
@@ -202,17 +203,6 @@ Simple name: patientA_rep1_normal_R1_001
 Extension: gz
 Parent directory: /workspaces/training/side-quests/working_with_files/data
 ```
-
-Notice that the Path object class is `sun.nio.fs.UnixPath` - this is Nextflow's way of representing local files. As we'll see later, remote files will have different class names (like `nextflow.file.http.XPath` for HTTP files), but they all work exactly the same way and can be used identically in your workflows.
-
-!!! note
-
-    **The key difference:**
-
-    - **Path string**: Just text that Nextflow treats as characters
-    - **Path object**: A smart file reference that Nextflow can work with
-
-    Think of it like this: a path string is like writing an address on paper, while a Path object is like having a GPS device that knows how to navigate and can tell you details about the journey.
 
 ### 1.3. Why proper file handling matters
 
