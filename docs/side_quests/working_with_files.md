@@ -7,10 +7,13 @@ In this side quest, we'll explore how Nextflow handles files, from basic file op
 By the end of this side quest, you'll be able to:
 
 - Create Path objects from file path strings using Nextflow's `file()` method
-- Get file attributes such as name, extension, and path
-- Use channels to automate file handling
-- Extract sample metadata from filenames
-- Group related files using pattern matching
+- Access file attributes such as name, extension, and parent directory
+- Handle both local and remote files transparently using URIs
+- Use channels to automate file handling with `Channel.fromPath()` and `Channel.fromFilePairs()`
+- Extract and structure metadata from filenames using string manipulation
+- Group related files using pattern matching and glob expressions
+- Integrate file operations into Nextflow processes with proper input handling
+- Organize process outputs using metadata-driven directory structures
 
 ---
 
