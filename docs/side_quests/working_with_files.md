@@ -98,7 +98,7 @@ nextflow run file_operations.nf
 ```
 
 ```console title="Starting Output"
- N E X T F L O W   ~  version 24.10.4
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `file_operations.nf` [romantic_chandrasekhar] DSL2 - revision: 5a4a89bc3a
 
@@ -138,7 +138,7 @@ nextflow run file_operations.nf
 ```
 
 ```console title="Path object output"
- N E X T F L O W   ~  version 24.10.4
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `file_operations.nf` [kickass_coulomb] DSL2 - revision: 5af44b1b59
 
@@ -193,7 +193,7 @@ nextflow run file_operations.nf
 You'll see various file attributes printed to the console:
 
 ```console title="File Attributes Output"
- N E X T F L O W   ~  version 24.10.4
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `file_operations.nf` [ecstatic_ampere] DSL2 - revision: f3fa3dcb48
 
@@ -249,43 +249,53 @@ nextflow run count_lines.nf
 You'll get an error like this:
 
 ```console title="Val input with string error"
- N E X T F L O W   ~  version 24.10.2
+ N E X T F L O W   ~  version 25.04.3
 
-Launching `file_operations.nf` [wise_poisson] DSL2 - revision: 9b7419747b
+Launching `count_lines.nf` [goofy_koch] DSL2 - revision: 4d9e909d80
 
 executor >  local (1)
-[88/f8a197] COUNT_LINES [  0%] 0 of 1
+[7f/c22b7f] COUNT_LINES [  0%] 0 of 1
 ERROR ~ Error executing process > 'COUNT_LINES'
 
 Caused by:
   Process `COUNT_LINES` terminated with an error exit status (1)
 
-executor >  local (1)
-[88/f8a197] COUNT_LINES [100%] 1 of 1, failed: 1 ✘
-ERROR ~ Error executing process > 'COUNT_LINES'
-
-Caused by:
-  Process `COUNT_LINES` terminated with an error exit status (1)
 
 Command executed:
 
+executor >  local (1)
+[7f/c22b7f] COUNT_LINES [  0%] 0 of 1 ✘
+WARN: Got an interrupted exception while taking agent result | java.lang.InterruptedException
+ERROR ~ Error executing process > 'COUNT_LINES'
+
+Caused by:
+  Process `COUNT_LINES` terminated with an error exit status (1)
+
+
+Command executed:
+
+  set -o pipefail
   echo "Processing file: data/patientA_rep1_normal_R1_001.fastq.gz"
-  wc -l data/patientA_rep1_normal_R1_001.fastq.gz
+  gzip -dc data/patientA_rep1_normal_R1_001.fastq.gz | wc -l
 
 Command exit status:
   1
 
 Command output:
   Processing file: data/patientA_rep1_normal_R1_001.fastq.gz
+  0
 
 Command error:
   Processing file: data/patientA_rep1_normal_R1_001.fastq.gz
-  wc: data/patientA_rep1_normal_R1_001.fastq.gz: open: No such file or directory
+  gzip: data/patientA_rep1_normal_R1_001.fastq.gz: No such file or directory
+  0
 
 Work dir:
-  /workspaces/training/side-quests/working_with_files/work/88/f8a19731c43c834c819ffd146c5713
+  /workspaces/training/side-quests/working_with_files/work/7f/c22b7f6f86c81f14d53de15584fdd5
 
 Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
+
+ -- Check '.nextflow.log' file for details
 ```
 
 **What this error means:**
@@ -347,7 +357,7 @@ Now let's fix this by changing the process to use a `path` input:
 Run this updated version and you'll get a different error:
 
 ```console title="Path input with string error"
- N E X T F L O W   ~  version 24.10.2
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `file_operations.nf` [mighty_poitras] DSL2 - revision: e996edfc53
 
@@ -425,7 +435,7 @@ nextflow run count_lines.nf
 You should see output like this:
 
 ```console title="Successful execution"
- N E X T F L O W   ~  version 24.10.2
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `count_lines.nf` [astonishing_tesla] DSL2 - revision: ee38f96485
 
@@ -514,7 +524,7 @@ nextflow run file_operations.nf
 ```
 
 ```console title="Remote file output"
- N E X T F L O W   ~  version 24.10.5
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `file_operations.nf` [insane_swartz] DSL2 - revision: fff18abe6d
 
@@ -598,7 +608,7 @@ nextflow run file_operations.nf
 You'll see each file path being emitted as a separate element in the channel:
 
 ```console title="Channel.fromPath Output"
- N E X T F L O W   ~  version 24.10.4
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `file_operations.nf` [grave_meucci] DSL2 - revision: b09964a583
 
@@ -646,7 +656,7 @@ nextflow run file_operations.nf
 ```
 
 ```console title="Channel.fromPath Output"
- N E X T F L O W   ~  version 24.10.4
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `file_operations.nf` [furious_swanson] DSL2 - revision: c35c34950d
 
@@ -682,7 +692,7 @@ nextflow run file_operations.nf
 ```
 
 ```console title="Channel.fromPath Glob Output"
- N E X T F L O W   ~  version 24.10.4
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `file_operations.nf` [boring_sammet] DSL2 - revision: d2aa789c9a
 
@@ -749,7 +759,7 @@ nextflow run file_operations.nf
 ```
 
 ```console title="Sample Metadata Output"
- N E X T F L O W   ~  version 24.10.4
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `file_operations.nf` [furious_liskov] DSL2 - revision: dde7b5315e
 
@@ -788,7 +798,7 @@ nextflow run file_operations.nf
 ```
 
 ```console title="Sample Tokenize Output"
- N E X T F L O W   ~  version 24.10.4
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `file_operations.nf` [gigantic_gauss] DSL2 - revision: a39baabb57
 
@@ -853,7 +863,7 @@ nextflow run file_operations.nf
 ```
 
 ```console title="Map Output"
- N E X T F L O W   ~  version 24.10.5
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `file_operations.nf` [infallible_swartz] DSL2 - revision: 7f4e68c0cb
 
@@ -919,7 +929,7 @@ nextflow run file_operations.nf
 The output will show the paired files grouped together:
 
 ```console title="Channel.fromFilePairs Output"
- N E X T F L O W   ~  version 24.10.4
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `file_operations.nf` [chaotic_cuvier] DSL2 - revision: 472265a440
 
@@ -963,7 +973,7 @@ nextflow run file_operations.nf
 
 ```console title="File Pairs Output parsed"
 
- N E X T F L O W   ~  version 24.10.5
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `file_operations.nf` [prickly_stonebraker] DSL2 - revision: f62ab10a3f
 
@@ -1079,7 +1089,7 @@ nextflow run file_operations.nf
 ```
 
 ```console title="ANALYZE_READS Output"
- N E X T F L O W   ~  version 24.10.5
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `./file_operations.nf` [shrivelled_cori] DSL2 - revision: b546a31769
 
@@ -1120,7 +1130,7 @@ nextflow run file_operations.nf
 ```
 
 ```console title="ANALYZE_READS Multiple Samples"
- N E X T F L O W   ~  version 24.10.5
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `./file_operations.nf` [big_stonebraker] DSL2 - revision: f7f9b8a76c
 
@@ -1171,7 +1181,7 @@ nextflow run file_operations.nf
 ```
 
 ```console title="Results Directory"
- N E X T F L O W   ~  version 24.10.5
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `./file_operations.nf` [insane_swartz] DSL2 - revision: fff18abe6d
 
