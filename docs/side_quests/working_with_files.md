@@ -202,13 +202,6 @@ Notice that the Path object class is `sun.nio.fs.UnixPath` - this is Nextflow's 
 
     Think of it like this: a path string is like writing an address on paper, while a Path object is like having a GPS device that knows how to navigate and can tell you details about the journey.
 
-### Takeaway
-
-- Path strings vs Path objects: Strings are just text, Path objects are smart file references
-- The `file()` method converts a string path into a Path object that Nextflow can work with
-- You can access file properties like `name`, `simpleName`, `extension`, and `parent` [using file attributes](https://www.nextflow.io/docs/latest/working-with-files.html#getting-file-attributes)
-- Using Path objects instead of strings allows Nextflow to properly manage files in your workflow
-
 ### 1.3. Why This Matters in Processes
 
 The difference between strings and Path objects becomes critical when you start building actual workflows with processes. Let's work through this step by step to see what happens.
@@ -285,6 +278,10 @@ Work dir:
 Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
 ```
 
+**What this error means:**
+
+The process ran successfully, but the bash script failed because the file `data/patientA_rep1_normal_R1_001.fastq.gz` doesn't exist in the process working directory. When you use `val` input, Nextflow passes the string value through to your script, but it doesn't stage the actual file. The process tries to use the string as a file path, but the file isn't there.
+
 Now let's fix this by changing the process to use a `path` input:
 
 === "After"
@@ -350,6 +347,10 @@ Caused by:
 
 Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
 ```
+
+**What this error means:**
+
+This is much better! Nextflow immediately detected the problem and failed before even starting the process. When you use `path` input, Nextflow validates that you're passing actual file references, not just strings. It's telling you that `'data/patientA_rep1_normal_R1_001.fastq.gz'` is not a valid path value because it's a string, not a Path object.
 
 Now let's fix this properly by using the `file()` method to create a Path object:
 
@@ -437,6 +438,18 @@ The process successfully:
     **Step 3 (path input + Path object)**: Everything works! Nextflow recognizes the Path object, stages the file, and your process can access it.
 
     **Key takeaway**: Always use `file()` to create Path objects when working with files, and use `path` inputs in processes to get early validation and proper file staging.
+
+### Takeaway
+
+- **Path strings vs Path objects**: Strings are just text, Path objects are smart file references
+- The `file()` method converts a string path into a Path object that Nextflow can work with
+- You can access file properties like `name`, `simpleName`, `extension`, and `parent` [using file attributes](https://www.nextflow.io/docs/latest/working-with-files.html#getting-file-attributes)
+- Using Path objects instead of strings allows Nextflow to properly manage files in your workflow
+
+**Process Input Outcomes**:
+- **`val` input + string**: Process runs but fails at runtime when trying to access non-existent file
+- **`path` input + string**: Process fails immediately with validation error (fail fast)
+- **`path` input + Path object**: Process succeeds with proper file staging and execution
 
 ---
 
