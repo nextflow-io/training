@@ -451,11 +451,7 @@ The process successfully:
 - The `file()` method converts a string path into a Path object that Nextflow can work with
 - You can access file properties like `name`, `simpleName`, `extension`, and `parent` [using file attributes](https://www.nextflow.io/docs/latest/working-with-files.html#getting-file-attributes)
 - Using Path objects instead of strings allows Nextflow to properly manage files in your workflow
-
-**Process Input Outcomes**:
-- **`val` input + string**: Process runs but fails at runtime when trying to access non-existent file
-- **`path` input + string**: Process fails immediately with validation error (fail fast)
-- **`path` input + Path object**: Process succeeds with proper file staging and execution
+- **Process Input Outcomes**: Proper file handling requires Path objects, not strings, to ensure files are correctly staged and accessible in processes.
 
 ---
 
@@ -540,9 +536,11 @@ In this way, you can replace local with remote data without changing any pipelin
 
 ### Takeaway
 
-- Remote data is accessed using a URI
+- Remote data is accessed using a URI (HTTP, FTP, S3, Azure, Google Cloud)
 - Nextflow will automatically download and stage the data to the right place
 - Do not write logic to download or upload remote files!
+- Local and remote files produce different object types but work identically
+- You can seamlessly switch between local and remote data sources without changing code logic
 
 !!! note
 
@@ -710,6 +708,8 @@ Using this method, we could grab as many or as few files as we want just by chan
 - `Channel.fromPath()` creates a channel with files matching a pattern
 - Each file is emitted as a separate element in the channel
 - We can use a glob pattern to match multiple files
+- Files are automatically converted to Path objects with full attributes
+- The `.view()` method allows inspection of channel contents
 
 ---
 
@@ -872,6 +872,8 @@ We have converted our flat list into a map, and now we can refer to each bit of 
 - We can handle filenames in Nextflow with the power of a full programming language
 - We can treat the filenames as strings to extract relevant information
 - Use of methods like `tokenize()` and `replace()` allows us to manipulate strings in the filename
+- The `.map()` operation transforms channel elements while preserving structure
+- Structured metadata (maps) makes code more readable and maintainable than positional lists
 
 Next up, we will look at how to handle paired-end reads.
 
@@ -978,8 +980,9 @@ Well done! We have grabbed the metadata from the filenames and used them as valu
 ### Takeaway
 
 - [`Channel.fromFilePairs()` automatically finds and pairs related files](https://www.nextflow.io/docs/latest/reference/channel.html#fromfilepairs)
-- The closure defines how to extract patient IDs from filenames
 - This simplifies handling paired-end reads in your pipeline
+- Paired files can be grouped as `[id, [file1, file2]]` tuples
+- Metadata extraction can be done from the paired file ID rather than individual files
 
 ---
 
@@ -1223,6 +1226,9 @@ This pattern of keeping metadata explicit and attached to the data (rather than 
 - The `publishDir` directive can organize outputs based on metadata values
 - Metadata in tuples enables structured organization of results
 - This approach creates maintainable workflows with clear data provenance
+- Processes can take tuples of metadata and files as input
+- The `tag` directive provides process identification in execution logs
+- Workflow structure separates channel creation from process execution
 
 
 
