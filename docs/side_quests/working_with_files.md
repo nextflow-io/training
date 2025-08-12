@@ -1216,7 +1216,7 @@ See how using patient metadata as values gives us powerful flexibility in our pi
 2. Make decisions in processes based on patient properties
 3. Split, join, and recombine data based on metadata values
 
-This pattern of keeping metadata explicit and attached to the data (rather than encoded in filenames) is a core best practice in Nextflow that enables building robust, maintainable bioinformatics workflows.
+This pattern of keeping metadata explicit and attached to the data (rather than encoded in filenames) is a core best practice in Nextflow that enables building robust, maintainable bioinformatics workflows. Learn more about this in [Working with meatadata](./metadata.md)
 
 ### Takeaway
 
