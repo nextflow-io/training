@@ -32,32 +32,38 @@ Let's move into the project directory:
 cd side-quests/working_with_files
 ```
 
+You can set VSCode to focus on this directory:
+
+```bash
+code .
+```
+
 You'll find a simple workflow file (`main.nf`) and a data directory containing some example files.
 
 ```console title="Directory contents"
 > tree
 .
 ├── data
-│   ├── sampleA_rep1_normal_R1_001.fastq.gz
-│   ├── sampleA_rep1_normal_R2_001.fastq.gz
-│   ├── sampleA_rep1_tumor_R1_001.fastq.gz
-│   ├── sampleA_rep1_tumor_R2_001.fastq.gz
-│   ├── sampleA_rep2_normal_R1_001.fastq.gz
-│   ├── sampleA_rep2_normal_R2_001.fastq.gz
-│   ├── sampleA_rep2_tumor_R1_001.fastq.gz
-│   ├── sampleA_rep2_tumor_R2_001.fastq.gz
-│   ├── sampleB_rep1_normal_R1_001.fastq.gz
-│   ├── sampleB_rep1_normal_R2_001.fastq.gz
-│   ├── sampleB_rep1_tumor_R1_001.fastq.gz
-│   ├── sampleB_rep1_tumor_R2_001.fastq.gz
-│   ├── sampleC_rep1_normal_R1_001.fastq.gz
-│   ├── sampleC_rep1_normal_R2_001.fastq.gz
-│   ├── sampleC_rep1_tumor_R1_001.fastq.gz
-│   └── sampleC_rep1_tumor_R2_001.fastq.gz
+│   ├── patientA_rep1_normal_R1_001.fastq.gz
+│   ├── patientA_rep1_normal_R2_001.fastq.gz
+│   ├── patientA_rep1_tumor_R1_001.fastq.gz
+│   ├── patientA_rep1_tumor_R2_001.fastq.gz
+│   ├── patientA_rep2_normal_R1_001.fastq.gz
+│   ├── patientA_rep2_normal_R2_001.fastq.gz
+│   ├── patientA_rep2_tumor_R1_001.fastq.gz
+│   ├── patientA_rep2_tumor_R2_001.fastq.gz
+│   ├── patientB_rep1_normal_R1_001.fastq.gz
+│   ├── patientB_rep1_normal_R2_001.fastq.gz
+│   ├── patientB_rep1_tumor_R1_001.fastq.gz
+│   ├── patientB_rep1_tumor_R2_001.fastq.gz
+│   ├── patientC_rep1_normal_R1_001.fastq.gz
+│   ├── patientC_rep1_normal_R2_001.fastq.gz
+│   ├── patientC_rep1_tumor_R1_001.fastq.gz
+│   └── patientC_rep1_tumor_R2_001.fastq.gz
 └── main.nf
 ```
 
-This directory contains paired-end sequencing data for three samples (A, B, C), with the typical `_R1_` and `_R2_` naming convention for forward and reverse reads. Each sample has normal and tumor tissue types, and sample A has two replicates.
+This directory contains paired-end sequencing data for three patients (A, B, C), with the typical `_R1_` and `_R2_` naming convention for forward and reverse reads. Each patient has normal and tumor tissue types, and patient A has two replicates.
 
 ### 0.3. Running the Workflow
 
@@ -66,7 +72,7 @@ Take a look at the workflow file:
 ```groovy title="main.nf" linenums="1"
 workflow {
     // Create a file object from a string path
-    myFile = 'data/sampleA_rep1_normal_R1_001.fastq.gz'
+    myFile = 'data/patientA_rep1_normal_R1_001.fastq.gz'
     println "${myFile}"
 }
 ```
@@ -84,7 +90,7 @@ nextflow run main.nf
 
 Launching `main.nf` [romantic_chandrasekhar] DSL2 - revision: 5a4a89bc3a
 
-data/sampleA_rep1_normal_R1_001.fastq.gz
+data/patientA_rep1_normal_R1_001.fastq.gz
 ```
 
 ---
@@ -93,7 +99,7 @@ data/sampleA_rep1_normal_R1_001.fastq.gz
 
 ### 1.1. Creating File Objects
 
-Let's start by understanding how to create file objects in Nextflow. In our workflow, we have a string path `data/sampleA_rep1_normal_R1_001.fastq.gz`. This is just a plain string - Nextflow doesn't automatically recognize it as representing a file. To work with files properly in Nextflow, we need to convert string paths into proper file objects using the `file()` method, which provides access to file properties and operations.
+Let's start by understanding how to create file objects in Nextflow. In our workflow, we have a string path `data/patientA_rep1_normal_R1_001.fastq.gz`. This is just a plain string - Nextflow doesn't automatically recognize it as representing a file. To work with files properly in Nextflow, we need to convert string paths into proper file objects using the `file()` method, which provides access to file properties and operations.
 
 Edit the `main.nf` file to include the following:
 
@@ -101,7 +107,7 @@ Edit the `main.nf` file to include the following:
 
     ```groovy title="main.nf" linenums="2" hl_lines="2"
     // Create a file object from a string path
-    myFile = file('data/sampleA_rep1_normal_R1_001.fastq.gz')
+    myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
     println "${myFile}"
     ```
 
@@ -109,7 +115,7 @@ Edit the `main.nf` file to include the following:
 
     ```groovy title="main.nf" linenums="2" hl_lines="2"
     // Create a file object from a string path
-    myFile = 'data/sampleA_rep1_normal_R1_001.fastq.gz'
+    myFile = 'data/patientA_rep1_normal_R1_001.fastq.gz'
     println "${myFile}"
     ```
 
@@ -124,10 +130,10 @@ nextflow run main.nf
 
 Launching `main.nf` [kickass_coulomb] DSL2 - revision: 5af44b1b59
 
-/workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R1_001.fastq.gz
+/workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz
 ```
 
-You should only see a single difference, the file path will now be absolute. Note that the full path will change based on where you are doing this training, but it is likely to be something like `/workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R1_001.fastq.gz`.
+You should only see a single difference, the file path will now be absolute. Note that the full path will change based on where you are doing this training, but it is likely to be something like `/workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz`.
 
 ### 1.2. File Attributes
 
@@ -139,7 +145,7 @@ Let's update our workflow to print out the file attributes:
 
     ```groovy title="main.nf" linenums="2" hl_lines="5-9"
     // Create a file object from a string path
-    myFile = file('data/sampleA_rep1_normal_R1_001.fastq.gz')
+    myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
 
     // Print file attributes
     println "File name: ${myFile.name}"
@@ -169,8 +175,8 @@ You'll see various file attributes printed to the console:
 
 Launching `main.nf` [ecstatic_ampere] DSL2 - revision: f3fa3dcb48
 
-File name: sampleA_rep1_normal_R1_001.fastq.gz
-Simple name: sampleA_rep1_normal_R1_001
+File name: patientA_rep1_normal_R1_001.fastq.gz
+Simple name: patientA_rep1_normal_R1_001
 Extension: gz
 Parent directory: /workspaces/training/side-quests/working_with_files/data
 ```
@@ -199,7 +205,7 @@ Update your `main.nf` file:
 
     ```groovy title="main.nf" linenums="2" hl_lines="2"
     // Reading files with Channel.fromPath
-    ch_fastq = Channel.fromPath('data/sampleA_rep1_normal_R1_001.fastq.gz')
+    ch_fastq = Channel.fromPath('data/patientA_rep1_normal_R1_001.fastq.gz')
     ch_fastq.view { "Found file: $it" }
 
     // // Print file attributes
@@ -214,7 +220,7 @@ Update your `main.nf` file:
 
     ```groovy title="main.nf" linenums="2" hl_lines="5-8"
     // Create a file object from a string path
-    myFile = file('data/sampleA_rep1_normal_R1_001.fastq.gz')
+    myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
 
     // Print file attributes
     println "File name: ${myFile.name}"
@@ -236,8 +242,7 @@ You'll see each file path being emitted as a separate element in the channel:
 
 Launching `main.nf` [grave_meucci] DSL2 - revision: b09964a583
 
-Found file: /workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R1_001.fastq.gz
-```
+Found file: /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz
 
 Note how Nextflow has grabbed the file we specified and turned it into a `file` object. `Channel.fromPath()` is a convenient way of creating a new channel populated by a list of files.
 
@@ -249,7 +254,7 @@ In our first version, we use `.view()` to print the file name. Let's update our 
 
     ```groovy title="main.nf" linenums="2" hl_lines="3-8"
     // Reading files with Channel.fromPath
-    ch_fastq = Channel.fromPath('data/sampleA_rep1_normal_R1_001.fastq.gz')
+    ch_fastq = Channel.fromPath('data/patientA_rep1_normal_R1_001.fastq.gz')
     ch_fastq.view { myFile ->
         println "File name: ${myFile.name}"
         println "Simple name: ${myFile.simpleName}"
@@ -262,7 +267,7 @@ In our first version, we use `.view()` to print the file name. Let's update our 
 
     ```groovy title="main.nf" linenums="2" hl_lines="3"
     // Reading files with Channel.fromPath
-    ch_fastq = Channel.fromPath('data/sampleA_rep1_normal_R1_001.fastq.gz')
+    ch_fastq = Channel.fromPath('data/patientA_rep1_normal_R1_001.fastq.gz')
     ch_fastq.view { myFile -> "Found file: $myFile" }
 
     // // Print file attributes
@@ -284,15 +289,15 @@ nextflow run main.nf
 
 Launching `main.nf` [furious_swanson] DSL2 - revision: c35c34950d
 
-File name: sampleA_rep1_normal_R1_001.fastq.gz
-Simple name: sampleA_rep1_normal_R1_001
+File name: patientA_rep1_normal_R1_001.fastq.gz
+Simple name: patientA_rep1_normal_R1_001
 Extension: gz
 Parent directory: /workspaces/training/side-quests/working_with_files/data
 ```
 
 ### 2.3. Using a glob to match multiple files
 
-`Channel.fromPath()` can take a glob pattern as an argument, which will match all files in the directory that match the pattern. Let's grab both of the pair of FASTQs associated with this sample:
+`Channel.fromPath()` can take a glob pattern as an argument, which will match all files in the directory that match the pattern. Let's grab both of the pair of FASTQs associated with this patient:
 
 !!! note
 
@@ -303,13 +308,13 @@ To do this, we replace the full path with a `*` wildcard, which will match any c
 === "After"
 
     ```groovy title="main.nf" linenums="3"
-    ch_fastq = Channel.fromPath('data/sampleA_rep1_normal_R*_001.fastq.gz')
+    ch_fastq = Channel.fromPath('data/patientA_rep1_normal_R*_001.fastq.gz')
     ```
 
 === "Before"
 
     ```groovy title="main.nf" linenums="3"
-    ch_fastq = Channel.fromPath('data/sampleA_rep1_normal_R1_001.fastq.gz')
+    ch_fastq = Channel.fromPath('data/patientA_rep1_normal_R1_001.fastq.gz')
     ```
 
 Run the workflow:
@@ -323,12 +328,12 @@ nextflow run main.nf
 
 Launching `main.nf` [boring_sammet] DSL2 - revision: d2aa789c9a
 
-File name: sampleA_rep1_normal_R1_001.fastq.gz
-Simple name: sampleA_rep1_normal_R1_001
+File name: patientA_rep1_normal_R1_001.fastq.gz
+Simple name: patientA_rep1_normal_R1_001
 Extension: gz
 Parent directory: /workspaces/training/side-quests/working_with_files/data
-File name: sampleA_rep1_normal_R2_001.fastq.gz
-Simple name: sampleA_rep1_normal_R2_001
+File name: patientA_rep1_normal_R2_001.fastq.gz
+Simple name: patientA_rep1_normal_R2_001
 Extension: gz
 Parent directory: /workspaces/training/side-quests/working_with_files/data
 ```
@@ -386,11 +391,11 @@ nextflow run main.nf
 
 Launching `main.nf` [furious_liskov] DSL2 - revision: dde7b5315e
 
-[sampleA_rep1_normal_R1_001, /workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R1_001.fastq.gz]
-[sampleA_rep1_normal_R2_001, /workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R2_001.fastq.gz]
+[patientA_rep1_normal_R1_001, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz]
+[patientA_rep1_normal_R2_001, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]
 ```
 
-Note how we have separated the sample `simpleName`, which includes the metadata, from the `file` object. This is useful if we want to use the sample metadata in a later process.
+Note how we have separated the patient `simpleName`, which includes the metadata, from the `file` object. This is useful if we want to use the patient metadata in a later process.
 
 ### 3.2. Extracting Metadata from Filenames
 
@@ -414,7 +419,7 @@ Nextflow includes a method called `tokenize()` which is perfect for this task.
     }
     ```
 
-Once we run this, we should see the sample metadata as a list of strings, and the file object as the second element in the tuple.
+Once we run this, we should see the patient metadata as a list of strings, and the file object as the second element in the tuple.
 
 ```bash
 nextflow run main.nf
@@ -425,11 +430,11 @@ nextflow run main.nf
 
 Launching `main.nf` [gigantic_gauss] DSL2 - revision: a39baabb57
 
-[[sampleA, rep1, normal, R1, 001], /workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R1_001.fastq.gz]
-[[sampleA, rep1, normal, R2, 001], /workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R2_001.fastq.gz]
+[[patientA, rep1, normal, R1, 001], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz]
+[[patientA, rep1, normal, R2, 001], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]
 ```
 
-Success! We've broken down our sample information from a single string into a list of strings. We can now handle each part of the sample information separately.
+Success! We've broken down our patient information from a single string into a list of strings. We can now handle each part of the patient information separately.
 
 ### 3.3. Using a map to organise the data
 
@@ -438,7 +443,7 @@ Our meta data is just a flat list at the moment. It's easy to use but hard to re
 A [map](https://www.baeldung.com/groovy-maps) is Groovy's version of a key-value store. Every item has a key and a value and we can refer to each key to get the value. This will make our code much easier to read, i.e. we go from this:
 
 ```groovy
-data = [sampleA, 1, normal, R1]
+data = [patientA, 1, normal, R1]
 
 println data[3]
 ```
@@ -488,8 +493,8 @@ nextflow run main.nf
 
 Launching `main.nf` [infallible_swartz] DSL2 - revision: 7f4e68c0cb
 
-[[id:sampleA, replicate:rep1, type:normal, readNum:R2], /workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R2_001.fastq.gz]
-[[id:sampleA, replicate:rep1, type:normal, readNum:R1], /workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R1_001.fastq.gz]
+[[id:patientA, replicate:rep1, type:normal, readNum:R2], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]
+[[id:patientA, replicate:rep1, type:normal, readNum:R1], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz]
 ```
 
 We have converted our flat list into a map, and now we can refer to each bit of sample data by name instead of by index. This makes our code easier to read and more maintainable.
@@ -578,7 +583,7 @@ Complete your `main.nf` file with the following (we will comment out the map ope
 === "Before"
 
     ```groovy title="main.nf" linenums="3" hl_lines="1"
-    ch_fastq = Channel.fromPath('data/sampleA_rep1_normal_R*_001.fastq.gz')
+    ch_fastq = Channel.fromPath('data/patientA_rep1_normal_R*_001.fastq.gz')
     ch_fastq.map { myFile ->
         def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
         [
@@ -607,19 +612,19 @@ The output will show the paired files grouped together:
 
 Launching `main.nf` [chaotic_cuvier] DSL2 - revision: 472265a440
 
-[sampleA_rep1_normal_R, [/workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R1_001.fastq.gz, /workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R2_001.fastq.gz]]
+[patientA_rep1_normal_R, [/workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]]
 ```
 
-Note the difference in data structure. Rather than being a list of results, we have a single result in the format `id, [ fastq1, fastq2 ]`. Nextflow has done the hard work of extracting the sample name by examining the shared prefix and using it as a sample id.
+Note the difference in data structure. Rather than being a list of results, we have a single result in the format `id, [ fastq1, fastq2 ]`. Nextflow has done the hard work of extracting the patient name by examining the shared prefix and using it as a patient id.
 
 ### 4.2. Extract metadata from file pairs
 
-We still need the metadata. Our `map` operation from before won't work because it doesn't match the data structure, but we can modify it to work. We already have access to the sample name in the `id` variable, so we can use that to extract the metadata without grabbing the `simpleName` from the file object like before.
+We still need the metadata. Our `map` operation from before won't work because it doesn't match the data structure, but we can modify it to work. We already have access to the patient name in the `id` variable, so we can use that to extract the metadata without grabbing the `simpleName` from the file object like before.
 
 === "After"
 
     ```groovy title="main.nf" linenums="3" hl_lines="2-13"
-    ch_fastq = Channel.fromFilePairs('data/sampleA_rep1_normal_R{1,2}_001.fastq.gz')
+    ch_fastq = Channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
     ch_fastq.map { id, fastqs ->
         def (sample, replicate, type, readNum) = id.tokenize('_')
         [
@@ -651,7 +656,7 @@ nextflow run main.nf
 
 Launching `main.nf` [prickly_stonebraker] DSL2 - revision: f62ab10a3f
 
-[[id:sampleA, replicate:1, type:normal], [/workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R1_001.fastq.gz, /workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R2_001.fastq.gz]]
+[[id:patientA, replicate:1, type:normal], [/workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]]
 ```
 
 Notice, that this time we don't have a `readNum`. Because read 1 and read 2 are kept together, we do not need to track this in the meta data.
@@ -661,7 +666,7 @@ Well done! We have grabbed the metadata from the filenames and used them as valu
 ### Takeaway
 
 - [`Channel.fromFilePairs()` automatically finds and pairs related files](https://www.nextflow.io/docs/latest/reference/channel.html#fromfilepairs)
-- The closure defines how to extract sample IDs from filenames
+- The closure defines how to extract patient IDs from filenames
 - This simplifies handling paired-end reads in your pipeline
 
 ---
@@ -713,7 +718,7 @@ Add the following to the top of your `main.nf` file:
 
 !!! note
 
-    We are calling our map '`meta`'. For a more in-depth introduction to meta maps, see [Sample Specific Data in Workflows](./metadata.md).
+    We are calling our map '`meta`'. For a more in-depth introduction to meta maps, see [Patient Specific Data in Workflows](./metadata.md).
 
 ### 5.2. Implement the process in the workflow
 
@@ -722,7 +727,7 @@ Then implement the process in the workflow:
 === "After"
 
     ```groovy title="main.nf" linenums="27" hl_lines="2 13"
-        ch_fastq = Channel.fromFilePairs('data/sampleA_rep1_normal_R{1,2}_001.fastq.gz')
+        ch_fastq = Channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
         ch_samples = ch_fastq.map { id, fastqs ->
             def (sample, replicate, type, readNum) = id.tokenize('_')
             [
@@ -741,7 +746,7 @@ Then implement the process in the workflow:
 === "Before"
 
     ```groovy title="main.nf" linenums="27"
-        ch_fastq = Channel.fromFilePairs('data/sampleA_rep1_normal_R{1,2}_001.fastq.gz')
+        ch_fastq = Channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
         ch_fastq.map { id, fastqs ->
             def (sample, replicate, type, readNum) = id.tokenize('_')
             [
@@ -767,22 +772,22 @@ nextflow run main.nf
 Launching `./main.nf` [shrivelled_cori] DSL2 - revision: b546a31769
 
 executor >  local (1)
-[b5/110360] process > ANALYZE_READS (sampleA) [100%] 1 of 1 ✔
+[b5/110360] process > ANALYZE_READS (patientA) [100%] 1 of 1 ✔
 ```
 
-We should see the following files in the `results/sampleA` directory:
+We should see the following files in the `results/patientA` directory:
 
 ```console title="Results Directory"
-> tree results/sampleA
-results/sampleA
-└── sampleA_stats.txt
+> tree results/patientA
+results/patientA
+└── patientA_stats.txt
 ```
 
-The process took our inputs and created a new file with the sample metadata. Based on what you learned in hello-nextflow, what occurred in the working directory?
+The process took our inputs and created a new file with the patient metadata. Based on what you learned in hello-nextflow, what occurred in the working directory?
 
 ### 5.3. Include many more samples
 
-Remember Channel.fromPath() accepts a _glob_ as input, which means it can accept any number of files that match the pattern. Therefore if we want to include all the samples we can just modify the input string to include more samples.
+Remember Channel.fromPath() accepts a _glob_ as input, which means it can accept any number of files that match the pattern. Therefore if we want to include all the patients we can just modify the input string to include more patients.
 
 === "After"
 
@@ -793,7 +798,7 @@ Remember Channel.fromPath() accepts a _glob_ as input, which means it can accept
 === "Before"
 
     ```groovy title="main.nf" linenums="27"
-    ch_fastq = Channel.fromFilePairs('data/sampleA_rep1_normal_R{1,2}_001.fastq.gz')
+        ch_fastq = Channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
     ```
 
 Run the pipeline now and see all the results:
@@ -808,7 +813,7 @@ nextflow run main.nf
 Launching `./main.nf` [big_stonebraker] DSL2 - revision: f7f9b8a76c
 
 executor >  local (8)
-[d5/441891] process > ANALYZE_READS (sampleC) [100%] 8 of 8 ✔
+[d5/441891] process > ANALYZE_READS (patientC) [100%] 8 of 8 ✔
 ```
 
 Check the results directory now:
@@ -816,21 +821,21 @@ Check the results directory now:
 ```console title="Results Directory"
 > tree results
 results
-├── sampleA
-│   └── sampleA_stats.txt
-├── sampleB
-│   └── sampleB_stats.txt
-└── sampleC
-    └── sampleC_stats.txt
+├── patientA
+│   └── patientA_stats.txt
+├── patientB
+│   └── patientB_stats.txt
+└── patientC
+    └── patientC_stats.txt
 ```
 
-See how we have analyzed all the samples in one go!
+See how we have analyzed all the patients in one go!
 
-Wait, we have a problem. We have 2 replicates for sampleA, but only 1 output file! We are overwriting the output file each time.
+Wait, we have a problem. We have 2 replicates for patientA, but only 1 output file! We are overwriting the output file each time.
 
 ### 5.4. Make the published files unique
 
-Since we have access to the sample metadata, we can use it to make the output files unique.
+Since we have access to the patient metadata, we can use it to make the output files unique.
 
 === "After"
 
@@ -844,7 +849,7 @@ Since we have access to the sample metadata, we can use it to make the output fi
     publishDir "results/${id}", mode: 'copy'
     ```
 
-We have grabbed the metadata from the samples and used it to construct an output directory for each sample.
+We have grabbed the metadata from the patients and used it to construct an output directory for each patient.
 
 Run the pipeline now and see all the results. Remove the results directory first to give yourself a clean workspace:
 
@@ -859,7 +864,7 @@ nextflow run main.nf
 Launching `./main.nf` [insane_swartz] DSL2 - revision: fff18abe6d
 
 executor >  local (8)
-[e3/449081] process > ANALYZE_READS (sampleC) [100%] 8 of 8 ✔
+[e3/449081] process > ANALYZE_READS (patientC) [100%] 8 of 8 ✔
 ```
 
 Check the results directory now:
@@ -868,35 +873,35 @@ Check the results directory now:
 > tree results
 results/
 ├── normal
-│   ├── sampleA
+│   ├── patientA
 │   │   ├── 1
-│   │   │   └── sampleA_stats.txt
+│   │   │   └── patientA_stats.txt
 │   │   └── 2
-│   │       └── sampleA_stats.txt
-│   ├── sampleB
+│   │       └── patientA_stats.txt
+│   ├── patientB
 │   │   └── 1
-│   │       └── sampleB_stats.txt
-│   └── sampleC
+│   │       └── patientB_stats.txt
+│   └── patientC
 │       └── 1
-│           └── sampleC_stats.txt
+│           └── patientC_stats.txt
 └── tumor
-    ├── sampleA
+    ├── patientA
     │   ├── 1
-    │   │   └── sampleA_stats.txt
+    │   │   └── patientA_stats.txt
     │   └── 2
-    │       └── sampleA_stats.txt
-    ├── sampleB
+    │       └── patientA_stats.txt
+    ├── patientB
     │   └── 1
-    │       └── sampleB_stats.txt
-    └── sampleC
+    │       └── patientB_stats.txt
+    └── patientC
         └── 1
-            └── sampleC_stats.txt
+            └── patientC_stats.txt
 ```
 
-See how using sample metadata as values gives us powerful flexibility in our pipeline. By propagating metadata alongside our data in tuples, we can:
+See how using patient metadata as values gives us powerful flexibility in our pipeline. By propagating metadata alongside our data in tuples, we can:
 
-1. Create organized output directories based on sample attributes
-2. Make decisions in processes based on sample properties
+1. Create organized output directories based on patient attributes
+2. Make decisions in processes based on patient properties
 3. Split, join, and recombine data based on metadata values
 
 This pattern of keeping metadata explicit and attached to the data (rather than encoded in filenames) is a core best practice in Nextflow that enables building robust, maintainable bioinformatics workflows.
@@ -933,7 +938,7 @@ In your workflow, replace the string path with an HTTPS one to download this fil
 === "After"
 
     ```groovy title="main.nf" linenums="27"
-    ch_fastq = Channel.fromFilePairs('https://github.com/nextflow-io/training/blob/bb187e3bfdf4eec2c53b3b08d2b60fdd7003b763/side-quests/working_with_files/data/sampleA_rep1_normal_R1_001.fastq.gz')
+    ch_fastq = Channel.fromFilePairs('https://github.com/nextflow-io/training/blob/bb187e3bfdf4eec2c53b3b08d2b60fdd7003b763/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz')
 
     ```
 
@@ -956,7 +961,7 @@ nextflow run main.nf
  N E X T F L O W   ~  version 24.10.5
 
 Launching `./main.nf` [insane_swartz] DSL2 - revision: fff18abe6d
-[32/06750a] process > ANALYZE_READS (sampleC) [100%] 1 of 1 ✔
+[32/06750a] process > ANALYZE_READS (patientC) [100%] 1 of 1 ✔
 ```
 
 In this example very little has changed! This shows how easy it is to switch between local and remote data using Nextflow.
@@ -966,8 +971,8 @@ To see the difference, check the working directory located at the hash value of 
 ```console title="Working directory"
 >  tree work/32/06750a7bffe2ed642d0e2e0c66a1e5
 work/32/06750a7bffe2ed642d0e2e0c66a1e5
-├── sampleA_rep1_normal_R1_001.fastq.gz -> /workspaces/training/side-quests/working_with_files/work/stage-3db20ad3-3083-407a-b796-b3a415711c02/a9/c7081f2633e48d6d85b13560441e98/sampleA_rep1_normal_R1_001.fastq.gz
-└── sampleA_stats.txt
+├── patientA_rep1_normal_R1_001.fastq.gz -> /workspaces/training/side-quests/working_with_files/work/stage-3db20ad3-3083-407a-b796-b3a415711c02/a9/c7081f2633e48d6d85b13560441e98/patientA_rep1_normal_R1_001.fastq.gz
+└── patientA_stats.txt
 ```
 
 The file has been downloaded to staging directory located within the work directory, then symlinked into the relevant process directory. If the file was used again, Nextflow would only download it once. If process only had access to a specific working directory, it would be able to access the data fine.
@@ -990,11 +995,11 @@ In this side quest, you've learned how to work with files in Nextflow, from basi
 
 2. **Using Channels for File Handling**: We created channels from file patterns with `Channel.fromPath()` and viewed their file attributes with `.view()`.
 
-3. **Extracting Sample Metadata from Filenames**: We used `tokenize()` to extract sample metadata from filenames and use it in our workflow.
+3. **Extracting Patient Metadata from Filenames**: We used `tokenize()` to extract patient metadata from filenames and use it in our workflow.
 
 4. **Simplifying with Channel.fromFilePairs**: We used `Channel.fromFilePairs()` to automatically pair files with a common prefix and use it in our workflow.
 
-5. **Using File Operations in Processes**: We used `publishDir` to organize outputs based on sample metadata and `tuple` to pass metadata alongside data in our workflow.
+5. **Using File Operations in Processes**: We used `publishDir` to organize outputs based on patient metadata and `tuple` to pass metadata alongside data in our workflow.
 
 6. **Using remote files**: We used a remote URI to access data from the internet without changing any pipeline code.
 
@@ -1034,7 +1039,7 @@ These techniques will help you build more efficient and maintainable workflows, 
   ```groovy
   // Extract metadata with tokenize
   def name = file.name.tokenize('_')
-  def sampleId = name[0]
+  def patientId = name[0]
   def replicate = name[1].replace('rep', '')
   def type = name[2]
   def readNum = name[3]
