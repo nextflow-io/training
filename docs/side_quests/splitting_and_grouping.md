@@ -1038,8 +1038,7 @@ Let's now group the samples by this new grouping element, using the [`groupTuple
             }
             .groupTuple()
             .view()
-
-````
+    ```
 
 === "Before"
 
@@ -1059,7 +1058,7 @@ Simple, huh? We just added a single line of code. Let's see what happens when we
 
 ```bash title="View grouped samples"
 nextflow run main.nf
-````
+```
 
 ```console title="View grouped samples"
  N E X T F L O W   ~  version 24.10.5
