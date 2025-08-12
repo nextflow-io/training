@@ -456,7 +456,8 @@ The key strength of this is we can switch between environments without changing 
 ### 2.1. Using a file from the internet
 
 !!! warning
-Accessing remote data requires an internet connection!
+
+    Accessing remote data requires an internet connection!
 
 In your workflow, you can replace the string path with an HTTPS one to download this file from the internet. We are going to swap the relative path of the FASTQ files with the remote one stored on the internet. This is the same data as we have been previously using.
 
