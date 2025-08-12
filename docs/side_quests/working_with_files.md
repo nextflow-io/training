@@ -286,11 +286,9 @@ Work dir:
 Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
 ```
 
-!!! note
+**What this error means:**
 
-    **What this error means:**
-
-    The process ran successfully, but the bash script failed because the file `data/patientA_rep1_normal_R1_001.fastq.gz` doesn't exist in the process working directory. When you use `val` input, Nextflow passes the string value through to your script, but it doesn't stage the actual file. The process tries to use the string as a file path, but the file isn't there.
+The process ran successfully, but the bash script failed because the file `data/patientA_rep1_normal_R1_001.fastq.gz` doesn't exist in the process working directory. When you use `val` input, Nextflow passes the string value through to your script, but it doesn't stage the actual file. The process tries to use the string as a file path, but the file isn't there.
 
 Now let's fix this by changing the process to use a `path` input:
 
@@ -358,11 +356,9 @@ Caused by:
 Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
 ```
 
-!!! note
+**What this error means:**
 
-    **What this error means:**
-
-    This is much better! Nextflow immediately detected the problem and failed before even starting the process. When you use `path` input, Nextflow validates that you're passing actual file references, not just strings. It's telling you that `'data/patientA_rep1_normal_R1_001.fastq.gz'` is not a valid path value because it's a string, not a Path object.
+This is much better! Nextflow immediately detected the problem and failed before even starting the process. When you use `path` input, Nextflow validates that you're passing actual file references, not just strings. It's telling you that `'data/patientA_rep1_normal_R1_001.fastq.gz'` is not a valid path value because it's a string, not a Path object.
 
 Now let's fix this properly by using the `file()` method to create a Path object:
 
