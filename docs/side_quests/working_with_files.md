@@ -281,7 +281,7 @@ Command error:
   wc: data/patientA_rep1_normal_R1_001.fastq.gz: open: No such file or directory
 
 Work dir:
-  /Users/jonathan.manning/projects/training/side-quests/working_with_files/work/88/f8a19731c43c834c819ffd146c5713
+  /workspaces/training/side-quests/working_with_files/work/88/f8a19731c43c834c819ffd146c5713
 
 Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
 ```
