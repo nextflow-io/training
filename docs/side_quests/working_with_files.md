@@ -431,18 +431,6 @@ The process successfully:
 - Counted the lines (40 lines in this case)
 - Completed without errors
 
-!!! note
-
-    **What we learned:**
-
-    **Step 1 (val input + string)**: The process runs but fails at runtime because the file isn't staged. You get a bash error about the file not existing.
-
-    **Step 2 (path input + string)**: Nextflow immediately detects the problem and fails with "Not a valid path value". This is better because it fails fast.
-
-    **Step 3 (path input + Path object)**: Everything works! Nextflow recognizes the Path object, stages the file, and your process can access it.
-
-    **Key takeaway**: Always use `file()` to create Path objects when working with files, and use `path` inputs in processes to get early validation and proper file staging.
-
 ### Takeaway
 
 - **Path strings vs Path objects**: Strings are just text, Path objects are smart file references
