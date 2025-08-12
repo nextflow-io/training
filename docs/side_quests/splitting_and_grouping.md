@@ -602,7 +602,7 @@ To do so, first we define the closure as a new variable:
                 [[id:row.id, repeat:row.repeat, type:row.type], row.bam]
             }
 
-        getSampleIdAndReplicate = { meta, file -> [ meta.subMap(['id', 'repeat']), meta, file ] }
+        getSampleIdAndReplicate = { meta, bam -> [ meta.subMap(['id', 'repeat']), meta, file(bam) ] }
 
         ch_normal_samples = ch_samples
             .filter { meta, file -> meta.type == 'normal' }
@@ -620,7 +620,9 @@ To do so, first we define the closure as a new variable:
             .filter { meta, file -> meta.type == 'normal' }
     ```
 
-We have taken the map we used previously and defined it as a named variable we can call later. Let's implement it in our workflow:
+We have taken the map we used previously and defined it as a named variable we can call later. We can also use this to convert the file path to a Path object using `file()` so that any process we passed the channel to could handle the file correctly (for more information see [Working with files](./working_with_files.md)).
+
+Let's implement the closure in our workflow:
 
 === "After"
 
@@ -696,13 +698,13 @@ Since the `id` and `repeat` fields are available in the grouping key, let's remo
 === "After"
 
     ```groovy title="main.nf" linenums="5" hl_lines="3-5"
-    getSampleIdAndReplicate = { meta, file -> [ meta.subMap(['id', 'repeat']), meta.subMap(['type']), file ] }
+    getSampleIdAndReplicate = { meta, bam -> [ meta.subMap(['id', 'repeat']), meta.subMap(['type']), file(bam) ] }
     ```
 
 === "Before"
 
     ```groovy title="main.nf" linenums="5"
-        getSampleIdAndReplicate = { meta, file -> [ meta.subMap(['id', 'repeat']), meta, file ] }
+        getSampleIdAndReplicate = { meta, bam -> [ meta.subMap(['id', 'repeat']), meta, file(bam) ] }
     ```
 
 Now, when the closure returns the tuple, the first element is the `id` and `repeat` fields and the second element is the `type` field. We have effectively removed the `id` and `repeat` fields from the sample data and uniquely store them in the grouping key. This approach eliminates redundancy while maintaining all necessary information.
