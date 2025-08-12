@@ -165,7 +165,7 @@ Let's update our workflow to print out the file attributes:
     myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
 
     // Print file attributes
-    println "File object class: ${myFile.class.name}"
+    println "File object class: ${myFile.class}"
     println "File name: ${myFile.name}"
     println "Simple name: ${myFile.simpleName}"
     println "Extension: ${myFile.extension}"
@@ -480,13 +480,20 @@ The key strength of this is we can switch between environments without changing 
 
 In your workflow, you can replace the string path with an HTTPS one to download this file from the internet. We are going to swap the relative path of the FASTQ files with the remote one stored on the internet. This is the same data as we have been previously using.
 
+Open `file_operations.nf` again and make changes like this:
+
 === "After"
 
     ```groovy title="file_operations.nf" linenums="2" hl_lines="2"
     // Using a remote file from the internet
     myFile = file('https://github.com/nextflow-io/training/blob/bb187e3bfdf4eec2c53b3b08d2b60fdd7003b763/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz')
-    println "File object class: ${myFile.class.name}"
-    println "${myFile}"
+
+    // Print file attributes
+    println "File object class: ${myFile.class}"
+    println "File name: ${myFile.name}"
+    println "Simple name: ${myFile.simpleName}"
+    println "Extension: ${myFile.extension}"
+    println "Parent directory: ${myFile.parent}"
     ```
 
 === "Before"
@@ -494,7 +501,13 @@ In your workflow, you can replace the string path with an HTTPS one to download 
     ```groovy title="file_operations.nf" linenums="2" hl_lines="2"
     // Create a file object from a string path
     myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
-    println "${myFile}"
+
+    // Print file attributes
+    println "File object class: ${myFile.class}"
+    println "File name: ${myFile.name}"
+    println "Simple name: ${myFile.simpleName}"
+    println "Extension: ${myFile.extension}"
+    println "Parent directory: ${myFile.parent}"
     ```
 
 !!! note
@@ -512,8 +525,11 @@ nextflow run file_operations.nf
 
 Launching `file_operations.nf` [insane_swartz] DSL2 - revision: fff18abe6d
 
-File object class: nextflow.file.http.XPath
-https://github.com/nextflow-io/training/blob/bb187e3bfdf4eec2c53b3b08d2b60fdd7003b763/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz
+File object class: class nextflow.file.http.XPath
+File name: patientA_rep1_normal_R1_001.fastq.gz
+Simple name: patientA_rep1_normal_R1_001
+Extension: gz
+Parent directory: /nextflow-io/training/blob/bb187e3bfdf4eec2c53b3b08d2b60fdd7003b763/side-quests/working_with_files/data
 ```
 
 In this example very little has changed! This shows how easy it is to switch between local and remote data using Nextflow.
@@ -551,6 +567,7 @@ Update your `file_operations.nf` file:
 
     // // Print file attributes
     // Comment these out for now, we'll come back to them!
+    // println "File object class: ${myFile.class}"
     // println "File name: ${myFile.name}"
     // println "Simple name: ${myFile.simpleName}"
     // println "Extension: ${myFile.extension}"
@@ -561,9 +578,10 @@ Update your `file_operations.nf` file:
 
     ```groovy title="file_operations.nf" linenums="2" hl_lines="5-8"
     // Create a Path object from a string path
-    myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
+    myFile = file('https://github.com/nextflow-io/training/blob/bb187e3bfdf4eec2c53b3b08d2b60fdd7003b763/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz')
 
     // Print file attributes
+    println "File object class: ${myFile.class}"
     println "File name: ${myFile.name}"
     println "Simple name: ${myFile.simpleName}"
     println "Extension: ${myFile.extension}"
@@ -597,7 +615,7 @@ In our first version, we use `.view()` to print the file name. Let's update our 
     // Reading files with Channel.fromPath
     ch_fastq = Channel.fromPath('data/patientA_rep1_normal_R1_001.fastq.gz')
     ch_fastq.view { myFile ->
-        println "File object class: ${myFile.class.name}"
+        println "File object class: ${myFile.class}"
         println "File name: ${myFile.name}"
         println "Simple name: ${myFile.simpleName}"
         println "Extension: ${myFile.extension}"
