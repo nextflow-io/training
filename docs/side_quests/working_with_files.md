@@ -208,11 +208,13 @@ The difference between strings and Path objects becomes critical when you start 
 
 First, let's create a process that takes a `val` input and see what happens when we pass it a string. We've provided this example in `count_lines.nf`:
 
-```groovy title="count_lines.nf" linenums="2" hl_lines="6"
+```groovy title="count_lines.nf" linenums="2" hl_lines="2 8"
 // This will cause problems!
 myFile = 'data/patientA_rep1_normal_R1_001.fastq.gz'
 
 process COUNT_LINES {
+    debug true
+
     input:
     val fastq_file
 
@@ -233,8 +235,6 @@ Run this workflow to see the error:
 ```bash
 nextflow run count_lines.nf
 ```
-
-
 
 You'll get an error like this:
 
@@ -288,7 +288,7 @@ Now let's fix this by changing the process to use a `path` input:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="6"
+    ```groovy title="main.nf" linenums="2" hl_lines="2 8"
     // Now using path input
     myFile = 'data/patientA_rep1_normal_R1_001.fastq.gz'
 
@@ -312,7 +312,7 @@ Now let's fix this by changing the process to use a `path` input:
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="6"
+    ```groovy title="main.nf" linenums="2" hl_lines="2 8"
     // This will cause problems!
     myFile = 'data/patientA_rep1_normal_R1_001.fastq.gz'
 
@@ -360,7 +360,7 @@ Now let's fix this properly by using the `file()` method to create a Path object
 
 === "After"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="2"
+    ```groovy title="main.nf" linenums="2" hl_lines="2 8"
     // This works correctly!
     myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
 
@@ -384,7 +384,7 @@ Now let's fix this properly by using the `file()` method to create a Path object
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="2"
+    ```groovy title="main.nf" linenums="2" hl_lines="2 8"
     // This will cause problems!
     myFile = 'data/patientA_rep1_normal_R1_001.fastq.gz'
 
