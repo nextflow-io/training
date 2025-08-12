@@ -38,7 +38,7 @@ You can set VSCode to focus on this directory:
 code .
 ```
 
-You'll find a simple workflow file (`main.nf`) and a data directory containing some example files.
+You'll find a simple workflow file (`file_operations.nf`) and a data directory containing some example files.
 
 ```console title="Directory contents"
 > tree
@@ -60,7 +60,7 @@ You'll find a simple workflow file (`main.nf`) and a data directory containing s
 │   ├── patientC_rep1_normal_R2_001.fastq.gz
 │   ├── patientC_rep1_tumor_R1_001.fastq.gz
 │   └── patientC_rep1_tumor_R2_001.fastq.gz
-└── main.nf
+└── file_operations.nf
 ```
 
 This directory contains paired-end sequencing data for three patients (A, B, C), with the typical `_R1_` and `_R2_` naming convention for forward and reverse reads. Each patient has normal and tumor tissue types, and patient A has two replicates.
@@ -69,7 +69,7 @@ This directory contains paired-end sequencing data for three patients (A, B, C),
 
 Take a look at the workflow file:
 
-```groovy title="main.nf" linenums="1"
+```groovy title="file_operations.nf" linenums="1"
 workflow {
     // Create a Path object from a string path
     myFile = 'data/patientA_rep1_normal_R1_001.fastq.gz'
@@ -82,13 +82,13 @@ We have a mini-workflow that refers to a single file path in it's workflow, then
 Run the workflow:
 
 ```bash
-nextflow run main.nf
+nextflow run file_operations.nf
 ```
 
 ```console title="Starting Output"
  N E X T F L O W   ~  version 24.10.4
 
-Launching `main.nf` [romantic_chandrasekhar] DSL2 - revision: 5a4a89bc3a
+Launching `file_operations.nf` [romantic_chandrasekhar] DSL2 - revision: 5a4a89bc3a
 
 data/patientA_rep1_normal_R1_001.fastq.gz is of class class java.lang.String
 ```
@@ -105,11 +105,11 @@ data/patientA_rep1_normal_R1_001.fastq.gz is of class class java.lang.String
 
 Let's start by understanding how to create [Path objects](https://www.nextflow.io/docs/latest/reference/stdlib-types.html#path) in Nextflow. In our workflow, we have a string path `data/patientA_rep1_normal_R1_001.fastq.gz`. This is just a plain string - Nextflow doesn't automatically recognize it as representing a file. To work with files properly in Nextflow, we need to convert string paths into proper Path objects using the `file()` method, which provides access to file properties and operations.
 
-Edit the `main.nf` file to include the following:
+Edit the `file_operations.nf` file to include the following:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="2"
+    ```groovy title="file_operations.nf" linenums="2" hl_lines="2"
     // Create a Path object from a string path
     myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
     println "${myFile} is of class ${myFile.class}"
@@ -117,7 +117,7 @@ Edit the `main.nf` file to include the following:
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="2"
+    ```groovy title="file_operations.nf" linenums="2" hl_lines="2"
     // Create a Path object from a string path
     myFile = 'data/patientA_rep1_normal_R1_001.fastq.gz'
     println "${myFile} is of class ${myFile.class}"
@@ -132,13 +132,13 @@ Edit the `main.nf` file to include the following:
 Run the workflow:
 
 ```bash
-nextflow run main.nf
+nextflow run file_operations.nf
 ```
 
 ```console title="Path object output"
  N E X T F L O W   ~  version 24.10.4
 
-Launching `main.nf` [kickass_coulomb] DSL2 - revision: 5af44b1b59
+Launching `file_operations.nf` [kickass_coulomb] DSL2 - revision: 5af44b1b59
 
 /Users/jonathan.manning/projects/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz is of class class sun.nio.fs.UnixPath
 ```
@@ -157,7 +157,7 @@ Let's update our workflow to print out the file attributes:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="5-9"
+    ```groovy title="file_operations.nf" linenums="2" hl_lines="5-9"
     // Create a Path object from a string path
     myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
 
@@ -171,7 +171,7 @@ Let's update our workflow to print out the file attributes:
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="3"
+    ```groovy title="file_operations.nf" linenums="2" hl_lines="3"
     // Create a file object from a string path
     myFile = file('data/sampleA_rep1_normal_R1_001.fastq.gz')
     println "${myFile} is of class ${myFile.class}"
@@ -180,7 +180,7 @@ Let's update our workflow to print out the file attributes:
 Run the workflow:
 
 ```bash
-nextflow run main.nf
+nextflow run file_operations.nf
 ```
 
 You'll see various file attributes printed to the console:
@@ -188,7 +188,7 @@ You'll see various file attributes printed to the console:
 ```console title="File Attributes Output"
  N E X T F L O W   ~  version 24.10.4
 
-Launching `main.nf` [ecstatic_ampere] DSL2 - revision: f3fa3dcb48
+Launching `file_operations.nf` [ecstatic_ampere] DSL2 - revision: f3fa3dcb48
 
 File object class: sun.nio.fs.UnixPath
 File name: patientA_rep1_normal_R1_001.fastq.gz
@@ -255,7 +255,7 @@ You'll get an error like this:
 ```console title="Val input with string error"
  N E X T F L O W   ~  version 24.10.2
 
-Launching `main.nf` [wise_poisson] DSL2 - revision: 9b7419747b
+Launching `file_operations.nf` [wise_poisson] DSL2 - revision: 9b7419747b
 
 executor >  local (1)
 [88/f8a197] COUNT_LINES [  0%] 0 of 1
@@ -300,7 +300,7 @@ Now let's fix this by changing the process to use a `path` input:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="2 8"
+    ```groovy title="file_operations.nf" linenums="2" hl_lines="2 8"
     // Now using path input
     myFile = 'data/patientA_rep1_normal_R1_001.fastq.gz'
 
@@ -324,7 +324,7 @@ Now let's fix this by changing the process to use a `path` input:
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="2 8"
+    ```groovy title="file_operations.nf" linenums="2" hl_lines="2 8"
     // This will cause problems!
     myFile = 'data/patientA_rep1_normal_R1_001.fastq.gz'
 
@@ -351,7 +351,7 @@ Run this updated version and you'll get a different error:
 ```console title="Path input with string error"
  N E X T F L O W   ~  version 24.10.2
 
-Launching `main.nf` [mighty_poitras] DSL2 - revision: e996edfc53
+Launching `file_operations.nf` [mighty_poitras] DSL2 - revision: e996edfc53
 
 [-        ] COUNT_LINES -
 ERROR ~ Error executing process > 'COUNT_LINES'
@@ -370,7 +370,7 @@ Now let's fix this properly by using the `file()` method to create a Path object
 
 === "After"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="2 8"
+    ```groovy title="file_operations.nf" linenums="2" hl_lines="2 8"
     // This works correctly!
     myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
 
@@ -394,7 +394,7 @@ Now let's fix this properly by using the `file()` method to create a Path object
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="2 8"
+    ```groovy title="file_operations.nf" linenums="2" hl_lines="2 8"
     // This will cause problems!
     myFile = 'data/patientA_rep1_normal_R1_001.fastq.gz'
 
@@ -479,7 +479,7 @@ In your workflow, you can replace the string path with an HTTPS one to download 
 
 === "After"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="2"
+    ```groovy title="file_operations.nf" linenums="2" hl_lines="2"
     // Using a remote file from the internet
     myFile = file('https://github.com/nextflow-io/training/blob/bb187e3bfdf4eec2c53b3b08d2b60fdd7003b763/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz')
     println "File object class: ${myFile.class.name}"
@@ -488,7 +488,7 @@ In your workflow, you can replace the string path with an HTTPS one to download 
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="2"
+    ```groovy title="file_operations.nf" linenums="2" hl_lines="2"
     // Create a file object from a string path
     myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
     println "${myFile}"
@@ -501,13 +501,13 @@ In your workflow, you can replace the string path with an HTTPS one to download 
 Run the workflow and it will automatically pull the data from the internet:
 
 ```bash
-nextflow run main.nf
+nextflow run file_operations.nf
 ```
 
 ```console title="Remote file output"
  N E X T F L O W   ~  version 24.10.5
 
-Launching `main.nf` [insane_swartz] DSL2 - revision: fff18abe6d
+Launching `file_operations.nf` [insane_swartz] DSL2 - revision: fff18abe6d
 
 File object class: nextflow.file.http.XPath
 https://github.com/nextflow-io/training/blob/bb187e3bfdf4eec2c53b3b08d2b60fdd7003b763/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz
@@ -537,11 +537,11 @@ While the `file()` method is useful for simple file operations, channels provide
 
 ### 3.1. Reading Files with Channel.fromPath
 
-Update your `main.nf` file:
+Update your `file_operations.nf` file:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="2"
+    ```groovy title="file_operations.nf" linenums="2" hl_lines="2"
     // Reading files with Channel.fromPath
     ch_fastq = Channel.fromPath('data/patientA_rep1_normal_R1_001.fastq.gz')
     ch_fastq.view { "Found file: $it" }
@@ -556,7 +556,7 @@ Update your `main.nf` file:
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="5-8"
+    ```groovy title="file_operations.nf" linenums="2" hl_lines="5-8"
     // Create a Path object from a string path
     myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
 
@@ -570,7 +570,7 @@ Update your `main.nf` file:
 Run the workflow:
 
 ```bash
-nextflow run main.nf
+nextflow run file_operations.nf
 ```
 
 You'll see each file path being emitted as a separate element in the channel:
@@ -578,7 +578,7 @@ You'll see each file path being emitted as a separate element in the channel:
 ```console title="Channel.fromPath Output"
  N E X T F L O W   ~  version 24.10.4
 
-Launching `main.nf` [grave_meucci] DSL2 - revision: b09964a583
+Launching `file_operations.nf` [grave_meucci] DSL2 - revision: b09964a583
 
 Found file: /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz
 
@@ -590,7 +590,7 @@ In our first version, we use `.view()` to print the file name. Let's update our 
 
 === "After"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="3-8"
+    ```groovy title="file_operations.nf" linenums="2" hl_lines="3-8"
     // Reading files with Channel.fromPath
     ch_fastq = Channel.fromPath('data/patientA_rep1_normal_R1_001.fastq.gz')
     ch_fastq.view { myFile ->
@@ -604,7 +604,7 @@ In our first version, we use `.view()` to print the file name. Let's update our 
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="3"
+    ```groovy title="file_operations.nf" linenums="2" hl_lines="3"
     // Reading files with Channel.fromPath
     ch_fastq = Channel.fromPath('data/patientA_rep1_normal_R1_001.fastq.gz')
     ch_fastq.view { myFile -> "Found file: $myFile" }
@@ -620,13 +620,13 @@ In our first version, we use `.view()` to print the file name. Let's update our 
 Run the workflow:
 
 ```bash
-nextflow run main.nf
+nextflow run file_operations.nf
 ```
 
 ```console title="Channel.fromPath Output"
  N E X T F L O W   ~  version 24.10.4
 
-Launching `main.nf` [furious_swanson] DSL2 - revision: c35c34950d
+Launching `file_operations.nf` [furious_swanson] DSL2 - revision: c35c34950d
 
 File object class: sun.nio.fs.UnixPath
 File name: patientA_rep1_normal_R1_001.fastq.gz
@@ -643,26 +643,26 @@ A glob pattern is a pattern that matches one or more characters in a string. The
 
 === "After"
 
-    ```groovy title="main.nf" linenums="3"
+    ```groovy title="file_operations.nf" linenums="3"
     ch_fastq = Channel.fromPath('data/patientA_rep1_normal_R*_001.fastq.gz')
     ```
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="3"
+    ```groovy title="file_operations.nf" linenums="3"
     ch_fastq = Channel.fromPath('data/patientA_rep1_normal_R1_001.fastq.gz')
     ```
 
 Run the workflow:
 
 ```bash
-nextflow run main.nf
+nextflow run file_operations.nf
 ```
 
 ```console title="Channel.fromPath Glob Output"
  N E X T F L O W   ~  version 24.10.4
 
-Launching `main.nf` [boring_sammet] DSL2 - revision: d2aa789c9a
+Launching `file_operations.nf` [boring_sammet] DSL2 - revision: d2aa789c9a
 
 File object class: sun.nio.fs.UnixPath
 File name: patientA_rep1_normal_R1_001.fastq.gz
@@ -702,7 +702,7 @@ First we will grab the simpleName of the file, which includes the metadata, and 
 
 === "After"
 
-    ```groovy title="main.nf" linenums="4"
+    ```groovy title="file_operations.nf" linenums="4"
     ch_fastq.map { myFile ->
         [ myFile.simpleName, myFile ]
     }
@@ -711,7 +711,7 @@ First we will grab the simpleName of the file, which includes the metadata, and 
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="4"
+    ```groovy title="file_operations.nf" linenums="4"
     ch_fastq.view {
         println "File name: ${it.name}"
         println "Simple name: ${it.simpleName}"
@@ -721,13 +721,13 @@ First we will grab the simpleName of the file, which includes the metadata, and 
     ```
 
 ```bash
-nextflow run main.nf
+nextflow run file_operations.nf
 ```
 
 ```console title="Sample Metadata Output"
  N E X T F L O W   ~  version 24.10.4
 
-Launching `main.nf` [furious_liskov] DSL2 - revision: dde7b5315e
+Launching `file_operations.nf` [furious_liskov] DSL2 - revision: dde7b5315e
 
 [patientA_rep1_normal_R1_001, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz]
 [patientA_rep1_normal_R2_001, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]
@@ -743,7 +743,7 @@ Nextflow includes a method called `tokenize()` which is perfect for this task.
 
 === "After"
 
-    ```groovy title="main.nf" linenums="4" hl_lines="2"
+    ```groovy title="file_operations.nf" linenums="4" hl_lines="2"
     ch_fastq.map { myFile ->
         [ myFile.simpleName.tokenize('_'), myFile ]
     }
@@ -751,7 +751,7 @@ Nextflow includes a method called `tokenize()` which is perfect for this task.
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="4" hl_lines="2"
+    ```groovy title="file_operations.nf" linenums="4" hl_lines="2"
     ch_fastq.map { myFile ->
         [ myFile.simpleName, myFile ]
     }
@@ -760,13 +760,13 @@ Nextflow includes a method called `tokenize()` which is perfect for this task.
 Once we run this, we should see the patient metadata as a list of strings, and the Path object as the second element in the tuple.
 
 ```bash
-nextflow run main.nf
+nextflow run file_operations.nf
 ```
 
 ```console title="Sample Tokenize Output"
  N E X T F L O W   ~  version 24.10.4
 
-Launching `main.nf` [gigantic_gauss] DSL2 - revision: a39baabb57
+Launching `file_operations.nf` [gigantic_gauss] DSL2 - revision: a39baabb57
 
 [[patientA, rep1, normal, R1, 001], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz]
 [[patientA, rep1, normal, R2, 001], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]
@@ -798,7 +798,7 @@ Let's convert our flat list into a map now.
 
 === "After"
 
-    ```groovy title="main.nf" linenums="4" hl_lines="3-11"
+    ```groovy title="file_operations.nf" linenums="4" hl_lines="3-11"
     ch_fastq.map { myFile ->
         def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
         [
@@ -815,7 +815,7 @@ Let's convert our flat list into a map now.
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="4" hl_lines="3"
+    ```groovy title="file_operations.nf" linenums="4" hl_lines="3"
     ch_fastq.map { myFile ->
         def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
         [ sample, replicate, type, readNum.readNum, myFile ]
@@ -823,13 +823,13 @@ Let's convert our flat list into a map now.
     ```
 
 ```bash
-nextflow run main.nf
+nextflow run file_operations.nf
 ```
 
 ```console title="Map Output"
  N E X T F L O W   ~  version 24.10.5
 
-Launching `main.nf` [infallible_swartz] DSL2 - revision: 7f4e68c0cb
+Launching `file_operations.nf` [infallible_swartz] DSL2 - revision: 7f4e68c0cb
 
 [[id:patientA, replicate:rep1, type:normal, readNum:R2], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]
 [[id:patientA, replicate:rep1, type:normal, readNum:R1], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz]
@@ -845,7 +845,7 @@ We can simplify the metadata by using the `.replace()` method on the replicate s
 
 === "After"
 
-    ```groovy title="main.nf" linenums="4" hl_lines="6 8"
+    ```groovy title="file_operations.nf" linenums="4" hl_lines="6 8"
     ch_fastq.map { myFile ->
         def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
         [
@@ -862,7 +862,7 @@ We can simplify the metadata by using the `.replace()` method on the replicate s
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="4"
+    ```groovy title="file_operations.nf" linenums="4"
     ch_fastq.map { myFile ->
         def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
         [
@@ -879,13 +879,13 @@ We can simplify the metadata by using the `.replace()` method on the replicate s
     ```
 
 ```bash
-nextflow run main.nf
+nextflow run file_operations.nf
 ```
 
 ```console title="Simplified Metadata Output"
  N E X T F L O W   ~  version 24.10.4
 
-Launching `main.nf` [reverent_volta] DSL2 - revision: b3aac71fea
+Launching `file_operations.nf` [reverent_volta] DSL2 - revision: b3aac71fea
 
 [[sample:sampleA, replicate:1, type:normal, readNum:2], /workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R2_001.fastq.gz]
 [[sample:sampleA, replicate:1, type:normal, readNum:1], /workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R1_001.fastq.gz]
@@ -909,18 +909,18 @@ Nextflow provides a specialized channel factory method for working with paired f
 
 ### 5.1. Basic Usage of fromFilePairs
 
-Complete your `main.nf` file with the following (we will comment out the map operation for now):
+Complete your `file_operations.nf` file with the following (we will comment out the map operation for now):
 
 === "After"
 
-    ```groovy title="main.nf" linenums="3" hl_lines="1"
+    ```groovy title="file_operations.nf" linenums="3" hl_lines="1"
     ch_fastq = Channel.fromFilePairs('data/sampleA_rep1_normal_R{1,2}_001.fastq.gz')
                       .view()
     ```
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="3" hl_lines="1"
+    ```groovy title="file_operations.nf" linenums="3" hl_lines="1"
     ch_fastq = Channel.fromPath('data/patientA_rep1_normal_R*_001.fastq.gz')
     ch_fastq.map { myFile ->
         def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
@@ -940,7 +940,7 @@ Complete your `main.nf` file with the following (we will comment out the map ope
 Run the workflow:
 
 ```bash
-nextflow run main.nf
+nextflow run file_operations.nf
 ```
 
 The output will show the paired files grouped together:
@@ -948,7 +948,7 @@ The output will show the paired files grouped together:
 ```console title="Channel.fromFilePairs Output"
  N E X T F L O W   ~  version 24.10.4
 
-Launching `main.nf` [chaotic_cuvier] DSL2 - revision: 472265a440
+Launching `file_operations.nf` [chaotic_cuvier] DSL2 - revision: 472265a440
 
 [patientA_rep1_normal_R, [/workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]]
 ```
@@ -961,7 +961,7 @@ We still need the metadata. Our `map` operation from before won't work because i
 
 === "After"
 
-    ```groovy title="main.nf" linenums="3" hl_lines="2-13"
+    ```groovy title="file_operations.nf" linenums="3" hl_lines="2-13"
     ch_fastq = Channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
     ch_fastq.map { id, fastqs ->
         def (sample, replicate, type, readNum) = id.tokenize('_')
@@ -979,20 +979,20 @@ We still need the metadata. Our `map` operation from before won't work because i
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="3" hl_lines="3-11"
+    ```groovy title="file_operations.nf" linenums="3" hl_lines="3-11"
     ch_fastq = Channel.fromFilePairs('data/sampleA_rep1_normal_R{1,2}_001.fastq.gz')
     .view()
     ```
 
 ```bash
-nextflow run main.nf
+nextflow run file_operations.nf
 ```
 
 ```console title="File Pairs Output parsed"
 
  N E X T F L O W   ~  version 24.10.5
 
-Launching `main.nf` [prickly_stonebraker] DSL2 - revision: f62ab10a3f
+Launching `file_operations.nf` [prickly_stonebraker] DSL2 - revision: f62ab10a3f
 
 [[id:patientA, replicate:1, type:normal], [/workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]]
 ```
@@ -1017,11 +1017,11 @@ Now let's put all this together in a simple process to demonstrate how to use fi
 
 We'll keep it simple and make a process called `ANALYZE_READS` that takes in a tuple of metadata and a pair of fastq files and analyses them. We could imagine this is an alignment, or variant calling or any other step.
 
-Add the following to the top of your `main.nf` file:
+Add the following to the top of your `file_operations.nf` file:
 
 === "After"
 
-    ```groovy title="main.nf - process example" linenums="1" hl_lines="1-23"
+    ```groovy title="file_operations.nf - process example" linenums="1" hl_lines="1-23"
     process ANALYZE_READS {
         tag "${meta.id}"
 
@@ -1050,7 +1050,7 @@ Add the following to the top of your `main.nf` file:
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="1"
+    ```groovy title="file_operations.nf" linenums="1"
     workflow {
     ```
 
@@ -1064,7 +1064,7 @@ Then implement the process in the workflow:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="27" hl_lines="2 13"
+    ```groovy title="file_operations.nf" linenums="27" hl_lines="2 13"
         ch_fastq = Channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
         ch_samples = ch_fastq.map { id, fastqs ->
             def (sample, replicate, type, readNum) = id.tokenize('_')
@@ -1083,7 +1083,7 @@ Then implement the process in the workflow:
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="27"
+    ```groovy title="file_operations.nf" linenums="27"
         ch_fastq = Channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
         ch_fastq.map { id, fastqs ->
             def (sample, replicate, type, readNum) = id.tokenize('_')
@@ -1101,13 +1101,13 @@ Then implement the process in the workflow:
     ```
 
 ```bash
-nextflow run main.nf
+nextflow run file_operations.nf
 ```
 
 ```console title="ANALYZE_READS Output"
  N E X T F L O W   ~  version 24.10.5
 
-Launching `./main.nf` [shrivelled_cori] DSL2 - revision: b546a31769
+Launching `./file_operations.nf` [shrivelled_cori] DSL2 - revision: b546a31769
 
 executor >  local (1)
 [b5/110360] process > ANALYZE_READS (patientA) [100%] 1 of 1 ✔
@@ -1129,26 +1129,26 @@ Remember Channel.fromPath() accepts a _glob_ as input, which means it can accept
 
 === "After"
 
-    ```groovy title="main.nf" linenums="27"
+    ```groovy title="file_operations.nf" linenums="27"
     ch_fastq = Channel.fromFilePairs('data/*_R{1,2}_001.fastq.gz')
     ```
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="27"
+    ```groovy title="file_operations.nf" linenums="27"
         ch_fastq = Channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
     ```
 
 Run the pipeline now and see all the results:
 
 ```bash
-nextflow run main.nf
+nextflow run file_operations.nf
 ```
 
 ```console title="ANALYZE_READS Multiple Samples"
  N E X T F L O W   ~  version 24.10.5
 
-Launching `./main.nf` [big_stonebraker] DSL2 - revision: f7f9b8a76c
+Launching `./file_operations.nf` [big_stonebraker] DSL2 - revision: f7f9b8a76c
 
 executor >  local (8)
 [d5/441891] process > ANALYZE_READS (patientC) [100%] 8 of 8 ✔
@@ -1177,13 +1177,13 @@ Since we have access to the patient metadata, we can use it to make the output f
 
 === "After"
 
-    ```groovy title="main.nf" linenums="4"
+    ```groovy title="file_operations.nf" linenums="4"
     publishDir "results/${meta.type}/${meta.id}/${meta.replicate}", mode: 'copy'
     ```
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="4"
+    ```groovy title="file_operations.nf" linenums="4"
     publishDir "results/${id}", mode: 'copy'
     ```
 
@@ -1193,13 +1193,13 @@ Run the pipeline now and see all the results. Remove the results directory first
 
 ```bash
 rm -r results
-nextflow run main.nf
+nextflow run file_operations.nf
 ```
 
 ```console title="Results Directory"
  N E X T F L O W   ~  version 24.10.5
 
-Launching `./main.nf` [insane_swartz] DSL2 - revision: fff18abe6d
+Launching `./file_operations.nf` [insane_swartz] DSL2 - revision: fff18abe6d
 
 executor >  local (8)
 [e3/449081] process > ANALYZE_READS (patientC) [100%] 8 of 8 ✔
