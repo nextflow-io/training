@@ -202,7 +202,7 @@ Notice that the Path object class is `sun.nio.fs.UnixPath` - this is Nextflow's 
 
     Think of it like this: a path string is like writing an address on paper, while a Path object is like having a GPS device that knows how to navigate and can tell you details about the journey.
 
-### 1.3. Why This Matters in Processes
+### 1.3. Why proper file handling matters
 
 The difference between strings and Path objects becomes critical when you start building actual workflows with processes. Let's work through this step by step to see what happens.
 
