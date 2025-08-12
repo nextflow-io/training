@@ -526,7 +526,9 @@ In this way, you can replace local with remote data without changing any pipelin
 - Nextflow will automatically download and stage the data to the right place
 - Do not write logic to download or upload remote files!
 
-**Note on Object Types**: Notice that local files produce `sun.nio.fs.UnixPath` objects while remote files produce `nextflow.file.http.XPath` objects. Despite these different class names, both work exactly the same way and can be used identically in your workflows. This is a key feature of Nextflow - you can seamlessly switch between local and remote data sources without changing your code logic.
+!!! note
+
+    **Note on Object Types**: Notice that local files produce `sun.nio.fs.UnixPath` objects while remote files produce `nextflow.file.http.XPath` objects. Despite these different class names, both work exactly the same way and can be used identically in your workflows. This is a key feature of Nextflow - you can seamlessly switch between local and remote data sources without changing your code logic.
 
 ---
 
@@ -636,13 +638,9 @@ Parent directory: /workspaces/training/side-quests/working_with_files/data
 
 ### 3.3. Using a glob to match multiple files
 
-`Channel.fromPath()` can take a glob pattern as an argument, which will match all files in the directory that match the pattern. Let's grab both of the pair of FASTQs associated with this patient:
+`Channel.fromPath()` can take a glob pattern as an argument, which will match all files in the directory that match the pattern. Let's grab both of the pair of FASTQs associated with this patient.
 
-!!! note
-
-    A glob pattern is a pattern that matches one or more characters in a string. The `*` wildcard is the most common glob pattern, which will match any character in it's place.
-
-To do this, we replace the full path with a `*` wildcard, which will match any character in it's place. In this case, we will replace the read number from `R1` to `R*`.
+A glob pattern is a pattern that matches one or more characters in a string. The `*` wildcard is the most common glob pattern, which will match any character in it's place. To do this, we replace the full path with a `*` wildcard, which will match any character in it's place. In this case, we will replace the read number from `R1` to `R*`.
 
 === "After"
 
