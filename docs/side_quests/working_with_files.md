@@ -176,7 +176,7 @@ Let's update our workflow to print out the file attributes:
 
     ```groovy title="file_operations.nf" linenums="2" hl_lines="3"
     // Create a file object from a string path
-    myFile = file('data/sampleA_rep1_normal_R1_001.fastq.gz')
+    myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
     println "${myFile} is of class ${myFile.class}"
     ```
 
@@ -553,7 +553,7 @@ In this way, you can replace local with remote data without changing any pipelin
 The `file()` method is useful for simple file operations, and we can combine that with [`Channel.of()`](https://www.nextflow.io/docs/latest/reference/channel.html#of) to build channels from files like:
 
 ```groovy title="Channel.of() with file()"
-    ch_fastq = Channel.of([file('data/sampleA_rep1_normal_R1_001.fastq.gz')])
+    ch_fastq = Channel.of([file('data/patientA_rep1_normal_R1_001.fastq.gz')])
 ```
 
 But we have a much more convenient tool called [`Channel.fromPath()`](https://www.nextflow.io/docs/latest/reference/channel.html#frompath) which generates a channel from static file strings as well as glob patterns.
@@ -816,7 +816,7 @@ println data[3]
 to this:
 
 ```groovy
-data = [sample: sampleA, replicate: 1, type: normal, readNum: 1]
+data = [id: patientA, replicate: 1, type: normal, readNum: 1]
 
 println data.readNum
 ```
@@ -890,7 +890,7 @@ Complete your `file_operations.nf` file with the following (we will comment out 
 === "After"
 
     ```groovy title="file_operations.nf" linenums="3" hl_lines="1"
-    ch_fastq = Channel.fromFilePairs('data/sampleA_rep1_normal_R{1,2}_001.fastq.gz')
+    ch_fastq = Channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
                       .view()
     ```
 
@@ -956,7 +956,7 @@ We still need the metadata. Our `map` operation from before won't work because i
 === "Before"
 
     ```groovy title="file_operations.nf" linenums="3" hl_lines="3-11"
-    ch_fastq = Channel.fromFilePairs('data/sampleA_rep1_normal_R{1,2}_001.fastq.gz')
+    ch_fastq = Channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
     .view()
     ```
 
