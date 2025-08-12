@@ -1,5 +1,3 @@
-myFile = 'data/patientA_rep1_normal_R1_001.fastq.gz'
-
 process COUNT_LINES {
     debug true
 
@@ -15,5 +13,6 @@ process COUNT_LINES {
 }
 
 workflow {
+    myFile = 'data/patientA_rep1_normal_R1_001.fastq.gz'
     COUNT_LINES(myFile)
 }

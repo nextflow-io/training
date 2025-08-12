@@ -119,16 +119,16 @@ Edit the `file_operations.nf` to wrap the string with `file()` as follows:
 
     ```groovy title="file_operations.nf" linenums="2" hl_lines="2"
     // Create a Path object from a string path
-    myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
-    println "${myFile} is of class ${myFile.class}"
+        myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
+        println "${myFile} is of class ${myFile.class}"
     ```
 
 === "Before"
 
     ```groovy title="file_operations.nf" linenums="2" hl_lines="2"
     // Create a Path object from a string path
-    myFile = 'data/patientA_rep1_normal_R1_001.fastq.gz'
-    println "${myFile} is of class ${myFile.class}"
+        myFile = 'data/patientA_rep1_normal_R1_001.fastq.gz'
+        println "${myFile} is of class ${myFile.class}"
     ```
 
 Run the workflow:
@@ -165,23 +165,23 @@ Let's update our workflow to print out the file attributes:
 === "After"
 
     ```groovy title="file_operations.nf" linenums="2" hl_lines="5-9"
-    // Create a Path object from a string path
-    myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
+        // Create a Path object from a string path
+        myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
 
-    // Print file attributes
-    println "File object class: ${myFile.class}"
-    println "File name: ${myFile.name}"
-    println "Simple name: ${myFile.simpleName}"
-    println "Extension: ${myFile.extension}"
-    println "Parent directory: ${myFile.parent}"
+        // Print file attributes
+        println "File object class: ${myFile.class}"
+        println "File name: ${myFile.name}"
+        println "Simple name: ${myFile.simpleName}"
+        println "Extension: ${myFile.extension}"
+        println "Parent directory: ${myFile.parent}"
     ```
 
 === "Before"
 
     ```groovy title="file_operations.nf" linenums="2" hl_lines="3"
-    // Create a file object from a string path
-    myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
-    println "${myFile} is of class ${myFile.class}"
+        // Create a file object from a string path
+        myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
+        println "${myFile} is of class ${myFile.class}"
     ```
 
 Run the workflow:
@@ -210,9 +210,7 @@ The difference between strings and Path objects becomes critical when you start 
 
 `count_lines.nf` contains a process that takes a `val` input and tries to treat it as a file:
 
-```groovy title="count_lines.nf" linenums="2" hl_lines="1 7"
-myFile = 'data/patientA_rep1_normal_R1_001.fastq.gz'
-
+```groovy title="count_lines.nf" linenums="1" hl_lines="5 16"
 process COUNT_LINES {
     debug true
 
@@ -228,6 +226,7 @@ process COUNT_LINES {
 }
 
 workflow {
+    myFile = 'data/patientA_rep1_normal_R1_001.fastq.gz'
     COUNT_LINES(myFile)
 }
 ```
@@ -306,10 +305,7 @@ Now let's fix this by changing the process to use a `path` input:
 
 === "After"
 
-    ```groovy title="file_operations.nf" linenums="2" hl_lines="2 8"
-    // Now using path input
-    myFile = 'data/patientA_rep1_normal_R1_001.fastq.gz'
-
+    ```groovy title="file_operations.nf" linenums="2" hl_lines="5 16"
     process COUNT_LINES {
         debug true
 
@@ -325,16 +321,14 @@ Now let's fix this by changing the process to use a `path` input:
     }
 
     workflow {
+        myFile = 'data/patientA_rep1_normal_R1_001.fastq.gz'
         COUNT_LINES(myFile)
     }
     ```
 
 === "Before"
 
-    ```groovy title="file_operations.nf" linenums="2" hl_lines="2 8"
-    // This will cause problems!
-    myFile = 'data/patientA_rep1_normal_R1_001.fastq.gz'
-
+    ```groovy title="file_operations.nf" linenums="2" hl_lines="5 16"
     process COUNT_LINES {
         debug true
 
@@ -350,6 +344,7 @@ Now let's fix this by changing the process to use a `path` input:
     }
 
     workflow {
+        myFile = 'data/patientA_rep1_normal_R1_001.fastq.gz'
         COUNT_LINES(myFile)
     }
     ```
@@ -378,10 +373,7 @@ Now let's fix this properly by using the `file()` method to create a Path object
 
 === "After"
 
-    ```groovy title="file_operations.nf" linenums="2" hl_lines="2 8"
-    // This works correctly!
-    myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
-
+    ```groovy title="file_operations.nf" linenums="2" hl_lines="5 16"
     process COUNT_LINES {
         debug true
 
@@ -397,16 +389,14 @@ Now let's fix this properly by using the `file()` method to create a Path object
     }
 
     workflow {
+        myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
         COUNT_LINES(myFile)
     }
     ```
 
 === "Before"
 
-    ```groovy title="file_operations.nf" linenums="2" hl_lines="2 8"
-    // This will cause problems!
-    myFile = 'data/patientA_rep1_normal_R1_001.fastq.gz'
-
+    ```groovy title="file_operations.nf" linenums="2" hl_lines="5 16"
     process COUNT_LINES {
         debug true
 
@@ -422,6 +412,7 @@ Now let's fix this properly by using the `file()` method to create a Path object
     }
 
     workflow {
+        myFile = 'data/patientA_rep1_normal_R1_001.fastq.gz'
         COUNT_LINES(myFile)
     }
     ```
@@ -489,14 +480,14 @@ Open `file_operations.nf` again and make changes like this:
 
     ```groovy title="file_operations.nf" linenums="2" hl_lines="2"
     // Using a remote file from the internet
-    myFile = file('https://github.com/nextflow-io/training/blob/bb187e3bfdf4eec2c53b3b08d2b60fdd7003b763/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz')
+        myFile = file('https://github.com/nextflow-io/training/blob/bb187e3bfdf4eec2c53b3b08d2b60fdd7003b763/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz')
 
-    // Print file attributes
-    println "File object class: ${myFile.class}"
-    println "File name: ${myFile.name}"
-    println "Simple name: ${myFile.simpleName}"
-    println "Extension: ${myFile.extension}"
-    println "Parent directory: ${myFile.parent}"
+        // Print file attributes
+        println "File object class: ${myFile.class}"
+        println "File name: ${myFile.name}"
+        println "Simple name: ${myFile.simpleName}"
+        println "Extension: ${myFile.extension}"
+        println "Parent directory: ${myFile.parent}"
     ```
 
 === "Before"
