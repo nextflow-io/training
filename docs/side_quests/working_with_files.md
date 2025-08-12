@@ -867,7 +867,6 @@ Launching `file_operations.nf` [infallible_swartz] DSL2 - revision: 7f4e68c0cb
 
 We have converted our flat list into a map, and now we can refer to each bit of sample data by name instead of by index. This makes our code easier to read and more maintainable.
 
-
 ### Takeaway
 
 - We can handle filenames in Nextflow with the power of a full programming language
@@ -1230,8 +1229,6 @@ This pattern of keeping metadata explicit and attached to the data (rather than 
 - Processes can take tuples of metadata and files as input
 - The `tag` directive provides process identification in execution logs
 - Workflow structure separates channel creation from process execution
-
-
 
 ## Summary
 
