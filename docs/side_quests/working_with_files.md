@@ -43,6 +43,7 @@ You'll find a simple workflow file (`file_operations.nf`) and a data directory c
 ```console title="Directory contents"
 > tree
 .
+├── count_lines.nf
 ├── data
 │   ├── patientA_rep1_normal_R1_001.fastq.gz
 │   ├── patientA_rep1_normal_R2_001.fastq.gz
@@ -61,6 +62,8 @@ You'll find a simple workflow file (`file_operations.nf`) and a data directory c
 │   ├── patientC_rep1_tumor_R1_001.fastq.gz
 │   └── patientC_rep1_tumor_R2_001.fastq.gz
 └── file_operations.nf
+
+2 directories, 18 files
 ```
 
 This directory contains paired-end sequencing data for three patients (A, B, C), with the typical `_R1_` and `_R2_` naming convention for forward and reverse reads. Each patient has normal and tumor tissue types, and patient A has two replicates.
@@ -242,7 +245,7 @@ workflow {
 
     The `debug = true` directive in the process definition causes Nextflow to print the output from your script (like the line count "40") directly in the execution log. Without this, you would only see the process execution status but not the actual output from your script.
 
-    For more information on debugging Nextflow processes, see the [Debugging Nextflow Workflows](../debugging.md) side quest.
+    For more information on debugging Nextflow processes, see the [Debugging Nextflow Workflows](./debugging.md) side quest.
 
 Run this workflow to see the error:
 
