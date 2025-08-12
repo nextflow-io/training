@@ -552,7 +552,13 @@ In this way, you can replace local with remote data without changing any pipelin
 
 ## 3. Using Channels for File Handling
 
-While the `file()` method is useful for simple file operations, channels provide a more powerful way to handle multiple files in workflows. We could load our file into a channel using [`Channel.of()`](https://www.nextflow.io/docs/latest/reference/channel.html#of), but we have a much more convenient tool called [`Channel.fromPath()`](https://www.nextflow.io/docs/latest/reference/channel.html#frompath) which finds every file in a directory that matches a given pattern.
+The `file()` method is useful for simple file operations, and we can combine that with [`Channel.of()`](https://www.nextflow.io/docs/latest/reference/channel.html#of) to build channels from files like:
+
+```groovy title="Channel.of() with file()"
+    ch_fastq = Channel.of([file('data/sampleA_rep1_normal_R1_001.fastq.gz')])
+```
+
+But we have a much more convenient tool called [`Channel.fromPath()`](https://www.nextflow.io/docs/latest/reference/channel.html#frompath) which generates a channel from static file strings as well as glob patterns.
 
 ### 3.1. Reading Files with Channel.fromPath
 
@@ -603,7 +609,7 @@ Launching `file_operations.nf` [grave_meucci] DSL2 - revision: b09964a583
 
 Found file: /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz
 
-Note how Nextflow has grabbed the file we specified and turned it into a `file` object. `Channel.fromPath()` is a convenient way of creating a new channel populated by a list of files.
+Note how Nextflow has grabbed the file we specified and turned it into a `Path` type object, in exactly the same way that `file()` would have done. `Channel.fromPath()` is just a convenient way of creating a new channel populated by a list of files.
 
 ### 3.2. Viewing Channel Contents
 
@@ -709,7 +715,7 @@ Using this method, we could grab as many or as few files as we want just by chan
 
 ## 4. Extracting Patient Metadata from Filenames
 
-One of the most common tasks in bioinformatics workflows is extracting metadata from filenames. This is especially important when working with sequencing data, where filenames often contain information about the sample, condition, replicate, and read number.
+One of the most common tasks in bioinformatics workflows is extracting metadata from filenames. This is usually feasible when working with sequencing data, where filenames often contain information about the sample, condition, replicate, and read number.
 
 This isn't ideal - metadata should never be embedded in filenames, but it's a common reality. We want to extract that metadata in a standardised manner so we can use it later.
 
@@ -760,7 +766,7 @@ Note how we have separated the patient `simpleName`, which includes the metadata
 
 Our metadata is embedded in the filename, but it's not in a standard format. We need to split up the filename into it's components which are separated by underscores.
 
-Nextflow includes a method called `tokenize()` which is perfect for this task.
+Groovy includes a method called `tokenize()` which is perfect for this task.
 
 === "After"
 
@@ -825,9 +831,9 @@ Let's convert our flat list into a map now.
         [
           [
             id: sample,
-            replicate: replicate,
+            replicate: replicate.replace('rep', ''),
             type: type,
-            readNum: readNum,
+            readNum: readNum.replace('rep', ''),
           ],
           myFile
         ]
@@ -842,6 +848,8 @@ Let's convert our flat list into a map now.
         [ sample, replicate, type, readNum.readNum, myFile ]
     }
     ```
+
+Notice that we're simplifying a couple of the meta data items as we go (e.g. `readNum.replace('rep', '')`).
 
 ```bash
 nextflow run file_operations.nf
@@ -858,61 +866,6 @@ Launching `file_operations.nf` [infallible_swartz] DSL2 - revision: 7f4e68c0cb
 
 We have converted our flat list into a map, and now we can refer to each bit of sample data by name instead of by index. This makes our code easier to read and more maintainable.
 
-### 4.4. Simplifying the metadata
-
-The metadata includes a lot of redundant information such as "rep". Let's remove this so replicate is just a number.
-
-We can simplify the metadata by using the `.replace()` method on the replicate string to remove the "rep" prefix, and similarly remove the "R" prefix from the readNum value.
-
-=== "After"
-
-    ```groovy title="file_operations.nf" linenums="4" hl_lines="6 8"
-    ch_fastq.map { myFile ->
-        def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
-        [
-          [
-            id: sample,
-            replicate: replicate.replace('rep', ''),
-            type: type,
-            readNum: readNum.replace('R', ''),
-          ],
-          myFile
-        ]
-    }
-    ```
-
-=== "Before"
-
-    ```groovy title="file_operations.nf" linenums="4"
-    ch_fastq.map { myFile ->
-        def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
-        [
-          [
-            id: sample,
-            replicate: replicate,
-            type: type,
-            readNum: readNum,
-          ],
-          myFile
-        ]
-    }
-    .view()
-    ```
-
-```bash
-nextflow run file_operations.nf
-```
-
-```console title="Simplified Metadata Output"
- N E X T F L O W   ~  version 24.10.4
-
-Launching `file_operations.nf` [reverent_volta] DSL2 - revision: b3aac71fea
-
-[[sample:sampleA, replicate:1, type:normal, readNum:2], /workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R2_001.fastq.gz]
-[[sample:sampleA, replicate:1, type:normal, readNum:1], /workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R1_001.fastq.gz]
-```
-
-Nice! we have removed the "rep" from the replicate string.
 
 ### Takeaway
 
@@ -1267,8 +1220,7 @@ This pattern of keeping metadata explicit and attached to the data (rather than 
 
 ### Takeaway
 
-- Processes can take files as input and produce new files as output
-- The `publishDir` directive organizes outputs based on metadata values
+- The `publishDir` directive can organize outputs based on metadata values
 - Metadata in tuples enables structured organization of results
 - This approach creates maintainable workflows with clear data provenance
 
