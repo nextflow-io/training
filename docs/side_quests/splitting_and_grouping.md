@@ -258,23 +258,27 @@ The `filter` operator takes a closure that is applied to each element in the cha
 
 In this case, we want to keep only the samples where `meta.type == 'normal'`.
 
-In the closure, we use the tuple `meta,file` to refer to each sample in the channel. We can then:
+In the closure, we use the tuple `meta,file` to refer to each sample in the channel.
+
+We can then:
 
 - Access the type of the particular sample with `meta.type`
 - Check if it equals `'normal'`
 - Include the sample if it matches, exclude it if it doesn't
 
-```groovy title="main.nf" linenums="4"
+All that done via the single closure we introduded above:
+
+```groovy title="main.nf" linenums="7"
     .filter { meta, file -> meta.type == 'normal' }
 ```
 
-### 2.2. Filter to just the tumor samples
+### 2.2. Filter in multiple ways
 
 Currently we're applying the filter to the channel created directly from the CSV, but we want to filter this in more ways than one, so let's re-write the logic to create a separate filtered channel for normal samples:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="6 7"
+    ```groovy title="main.nf" linenums="2" hl_lines="6 8"
         ch_samples = Channel.fromPath("./data/samplesheet.csv")
             .splitCsv(header: true)
             .map{ row ->
@@ -282,7 +286,8 @@ Currently we're applying the filter to the channel created directly from the CSV
             }
         ch_normal_samples = ch_samples
             .filter { meta, file -> meta.type == 'normal' }
-        ch_normal_samples.view()
+        ch_normal_samples
+            .view()
     ```
 
 === "Before"
@@ -290,6 +295,9 @@ Currently we're applying the filter to the channel created directly from the CSV
     ```groovy title="main.nf" linenums="2"
         ch_samples = Channel.fromPath("./data/samplesheet.csv")
             .splitCsv(header: true)
+            .map{ row ->
+              [[id:row.id, repeat:row.repeat, type:row.type], row.bam]
+            }
             .filter { meta, file -> meta.type == 'normal' }
             .view()
     ```
