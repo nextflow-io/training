@@ -1,20 +1,23 @@
 # Splitting and Grouping
 
-Nextflow helps you work with your data in flexible ways. One of the most useful things you can do is split your data into different streams and then group related items back together. This capability is particularly valuable in bioinformatics workflows where you often need to process sub-groups of input data separately before combining results for comparison or joint analysis.
+Nextflow provides powerful tools for working with data flexibly. A key capability is splitting data into different streams and then grouping related items back together. This is especially valuable in bioinformatics workflows where you need to process different types of samples separately before combining results for analysis.
 
-Think of it like sorting mail: you might first separate letters by their destination, process each pile differently, and then recombine items going to the same person. In Nextflow, we use special operators to do this with our scientific data.
+Think of it like sorting mail: you separate letters by destination, process each pile differently, then recombine items going to the same person. Nextflow uses special operators to accomplish this with scientific data.
 
 Nextflow's channel system is at the heart of this flexibility. Channels connect different parts of your workflow, allowing data to flow through your analysis. You can create multiple channels from a single data source, process each channel differently, and then merge channels back together when needed. This approach lets you design workflows that naturally mirror the branching and converging paths of complex bioinformatics analyses.
 
-In this side quest, we'll explore how to split and group data using Nextflow's powerful channel operators. We'll start with a CSV file containing information about different samples and their associated data, which we'll read and manipulate. By the end of this side quest, you'll be able to separate and combine data streams effectively, making your workflows more efficient and easier to understand.
+In this side quest, you'll learn to split and group data using Nextflow's channel operators. We'll start with a CSV file containing sample information and associated data files, then manipulate and reorganize this data. By the end, you'll be able to separate and combine data streams effectively, creating more efficient and understandable workflows.
 
 You will:
 
 - Read data from files using `splitCsv`
 - Filter and transform data with `filter` and `map`
 - Combine related data using `join` and `groupTuple`
+- Create data combinations with `combine` for parallel processing
+- Optimize data structure using `subMap` and deduplication strategies
+- Build reusable functions with named closures
 
-These skills will help you build workflows that can handle multiple input files and different types of data efficiently.
+These skills will help you build workflows that can handle multiple input files and different types of data efficiently, while maintaining clean, maintainable code structure.
 
 ---
 
@@ -910,18 +913,18 @@ nextflow run main.nf
 
 Launching `main.nf` [sad_hawking] DSL2 - revision: 1f6f6250cd
 
-[[id:patientA, repeat:1, interval:chr1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
-[[id:patientA, repeat:1, interval:chr2], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
-[[id:patientA, repeat:1, interval:chr3], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
-[[id:patientA, repeat:2, interval:chr2], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
-[[id:patientA, repeat:2, interval:chr1], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
-[[id:patientA, repeat:2, interval:chr3], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
-[[id:patientB, repeat:1, interval:chr1], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]
-[[id:patientB, repeat:1, interval:chr2], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]
-[[id:patientB, repeat:1, interval:chr3], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]
-[[id:patientC, repeat:1, interval:chr1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
-[[id:patientC, repeat:1, interval:chr2], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
-[[id:patientC, repeat:1, interval:chr3], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
+[[id:patientA, interval:chr1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
+[[id:patientA, interval:chr2], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
+[[id:patientA, interval:chr3], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
+[[id:patientA, interval:chr1], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
+[[id:patientA, interval:chr2], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
+[[id:patientA, interval:chr3], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
+[[id:patientB, interval:chr1], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]
+[[id:patientB, interval:chr2], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]
+[[id:patientB, interval:chr3], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]
+[[id:patientC, interval:chr1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
+[[id:patientC, interval:chr2], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
+[[id:patientC, interval:chr3], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
 ```
 
 Using `map` to coerce your data into the correct structure can be tricky, but it's crucial to correctly splitting and grouping effectively.
