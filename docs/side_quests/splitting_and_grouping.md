@@ -362,7 +362,7 @@ tumor sample: [[id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
 tumor sample: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
 ```
 
-We've separated out the normal and tumor samples into two different channels, and used a closure supplied to to `view()` to label them differently in the output: `ch_tumor_samples.view{'tumor sample: ' + it}`.
+We've separated out the normal and tumor samples into two different channels, and used a closure supplied to `view()` to label them differently in the output: `ch_tumor_samples.view{'tumor sample: ' + it}`.
 
 ### Takeaway
 
@@ -411,26 +411,30 @@ To isolate the `id` field, we can use the [`map` operator](https://www.nextflow.
 
 === "After"
 
-    ```groovy title="main.nf" linenums="8" hl_lines="3 6"
-        ch_normal_samples = ch_samplesheet
+    ```groovy title="main.nf" linenums="7" hl_lines="3 6"
+        ch_normal_samples = ch_samples
             .filter { meta, file -> meta.type == 'normal' }
             .map { meta, file -> [meta.id, meta, file] }
-        ch_tumor_samples = ch_samplesheet
+        ch_tumor_samples = ch_samples
             .filter { meta, file -> meta.type == 'tumor' }
             .map { meta, file -> [meta.id, meta, file] }
-        ch_normal_samples.view{'Normal sample: ' + it}
-        ch_tumor_samples.view{'tumor sample: ' + it}
+        ch_normal_samples
+            .view{'Normal sample: ' + it}
+        ch_tumor_samples
+            .view{'tumor sample: ' + it}
     ```
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="8"
+    ```groovy title="main.nf" linenums="7"
         ch_normal_samples = ch_samples
             .filter { meta, file -> meta.type == 'normal' }
         ch_tumor_samples = ch_samples
             .filter { meta, file -> meta.type == 'tumor' }
-        ch_normal_samples.view{'Normal sample: ' + it}
-        ch_tumor_samples.view{'tumor sample: ' + it}
+        ch_normal_samples
+            .view{'Normal sample: ' + it}
+        ch_tumor_samples
+            .view{'tumor sample: ' + it}
     ```
 
 ```bash title="View normal and tumor samples with ID as element 0"
@@ -440,16 +444,16 @@ nextflow run main.nf
 ```console title="View normal and tumor samples with ID as element 0"
  N E X T F L O W   ~  version 25.04.3
 
-Launching `main.nf` [dreamy_sax] DSL2 - revision: 882ae9add4
+Launching `main.nf` [mad_lagrange] DSL2 - revision: 9940b3f23d
 
-tumor sample: [patientA, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
-tumor sample: [patientA, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
-tumor sample: [patientB, [id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
-tumor sample: [patientC, [id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
-'Normal sample: [patientA, [id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
-'Normal sample: [patientA, [id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
-'Normal sample: [patientB, [id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]
-'Normal sample: [patientC, [id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
+Tumour sample: [patientA, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
+Tumour sample: [patientA, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
+Normal sample: [patientA, [id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
+Normal sample: [patientA, [id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
+Tumour sample: [patientB, [id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
+Tumour sample: [patientC, [id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
+Normal sample: [patientB, [id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]
+Normal sample: [patientC, [id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
 ```
 
 It might be subtle, but you should be able to see the first element in each tuple is the `id` field. Now we can use the `join` operator to combine the two channels based on the `id` field.
@@ -457,29 +461,32 @@ It might be subtle, but you should be able to see the first element in each tupl
 Once again, we will use `view` to print the joined outputs.
 
 === "After"
-    ```groovy title="main.nf" linenums="11" hl_lines="7-9"
-        ch_normal_samples = ch_samplesheet
+
+    ```groovy title="main.nf" linenums="7" hl_lines="7-9"
+        ch_normal_samples = ch_samples
             .filter { meta, file -> meta.type == 'normal' }
             .map { meta, file -> [meta.id, meta, file] }
-        ch_tumor_samples = ch_samplesheet
+        ch_tumor_samples = ch_sample
             .filter { meta, file -> meta.type == 'tumor' }
             .map { meta, file -> [meta.id, meta, file] }
         ch_joined_samples = ch_normal_samples
-            .join(ch_tumor_patients)
+            .join(ch_tumor_samples)
         ch_joined_samples.view()
     ```
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="3 6"
-        ch_normal_samples = ch_samplesheet
+    ```groovy title="main.nf" linenums="7" hl_lines="7-10"
+        ch_normal_samples = ch_samples
             .filter { meta, file -> meta.type == 'normal' }
             .map { meta, file -> [meta.id, meta, file] }
-        ch_tumor_samples = ch_samplesheet
+        ch_tumor_samples = ch_samples
             .filter { meta, file -> meta.type == 'tumor' }
             .map { meta, file -> [meta.id, meta, file] }
-        ch_normal_samples.view{'Normal sample: ' + it}
-        ch_tumor_samples.view{'tumor sample: ' + it}
+        ch_normal_samples
+            .view{'Normal sample: ' + it}
+        ch_tumor_samples
+            .view{'tumor sample: ' + it}
     ```
 
 ```bash title="View normal and tumor samples"
@@ -489,7 +496,7 @@ nextflow run main.nf
 ```console title="View joined normal and tumor samples"
  N E X T F L O W   ~  version 25.04.3
 
-Launching `main.nf` [elegant_waddington] DSL2 - revision: c552f22069
+Launching `main.nf` [soggy_wiles] DSL2 - revision: 3bc1979889
 
 [patientA, [id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
 [patientA, [id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
@@ -529,10 +536,10 @@ Let's start by creating a new joining key. We can do this in the same way as bef
 === "After"
 
     ```groovy title="main.nf" linenums="8" hl_lines="3 6"
-        ch_normal_samples = ch_samplesheet
+        ch_normal_samples = ch_samples
             .filter { meta, file -> meta.type == 'normal' }
             .map { meta, file -> [[meta.id, meta.repeat], meta, file] }
-        ch_tumor_samples = ch_samplesheet
+        ch_tumor_samples = ch_samples
             .filter { meta, file -> meta.type == 'tumor' }
             .map { meta, file -> [[meta.id, meta.repeat], meta, file] }
     ```
@@ -540,10 +547,10 @@ Let's start by creating a new joining key. We can do this in the same way as bef
 === "Before"
 
     ```groovy title="main.nf" linenums="8"
-        ch_normal_samples = ch_samplesheet
+        ch_normal_samples = ch_samples
             .filter { meta, file -> meta.type == 'normal' }
             .map { meta, file -> [meta.id, meta, file] }
-        ch_tumor_samples = ch_samplesheet
+        ch_tumor_samples = ch_samples
             .filter { meta, file -> meta.type == 'tumor' }
             .map { meta, file -> [meta.id, meta, file] }
     ```
@@ -578,10 +585,10 @@ The `subMap` method takes a map and returns a new map with only the key-value pa
 === "After"
 
     ```groovy title="main.nf" linenums="4" hl_lines="3 6"
-        ch_normal_samples = ch_samplesheet
+        ch_normal_samples = ch_samples
             .filter { meta, file -> meta.type == 'normal' }
             .map { meta, file -> [meta.subMap(['id', 'repeat'], meta, file] }
-        ch_tumor_samples = ch_samplesheet
+        ch_tumor_samples = ch_samples
             .filter { meta, file -> meta.type == 'tumor' }
             .map { meta, file -> [meta.subMap(['id', 'repeat'], meta, file] }
     ```
@@ -589,10 +596,10 @@ The `subMap` method takes a map and returns a new map with only the key-value pa
 === "Before"
 
     ```groovy title="main.nf" linenums="4" hl_lines="3 6"
-        ch_normal_samples = ch_samplesheet
+        ch_normal_samples = ch_samples
             .filter { meta, file -> meta.type == 'normal' }
             .map { meta, file -> [[meta.id, meta.repeat], meta, file] }
-        ch_tumor_samples = ch_samplesheet
+        ch_tumor_samples = ch_samples
             .filter { meta, file -> meta.type == 'tumor' }
             .map { meta, file -> [[meta.id, meta.repeat], meta, file] }
     ```
@@ -654,10 +661,10 @@ Let's implement the closure in our workflow:
 === "After"
 
     ```groovy title="main.nf" linenums="7" hl_lines="3 6"
-        ch_normal_samples = ch_samplesheet
+        ch_normal_samples = ch_samples
             .filter { meta, file -> meta.type == 'normal' }
              .map ( getSampleIdAndReplicate )
-        ch_tumor_samples = ch_samplesheet
+        ch_tumor_samples = ch_samples
             .filter { meta, file -> meta.type == 'tumor' }
              .map ( getSampleIdAndReplicate )
 
@@ -666,10 +673,10 @@ Let's implement the closure in our workflow:
 === "Before"
 
     ```groovy title="main.nf" linenums="3 6"
-        ch_normal_samples = ch_samplesheet
+        ch_normal_samples = ch_samples
             .filter { meta, file -> meta.type == 'normal' }
             .map { meta, file -> [meta.subMap(['id', 'repeat'], meta, file] }
-        ch_tumor_samples = ch_samplesheet
+        ch_tumor_samples = ch_samples
             .filter { meta, file -> meta.type == 'tumor' }
             .map { meta, file -> [meta.subMap(['id', 'repeat'], meta, file] }
     ```
