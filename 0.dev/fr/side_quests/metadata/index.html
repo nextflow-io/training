@@ -1,0 +1,4426 @@
+
+<!doctype html>
+<html lang="fr" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://training.nextflow.io/0.dev/fr/side_quests/metadata/">
+      
+      
+        <link rel="prev" href="../ide_features/">
+      
+      
+        <link rel="next" href="../working_with_files/">
+      
+      
+      <link rel="icon" href="../../../assets/img/nextflow-icon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.16">
+    
+    
+      
+        <title>Working with metadata - training.nextflow.io</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/fonts.css">
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-244N3GEN75"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-244N3GEN75",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-244N3GEN75",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>if("undefined"!=typeof __md_analytics){var consent=__md_get("__consent");consent&&consent.analytics&&__md_analytics()}</script>
+  
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#working-with-metadata" class="md-skip">
+          Aller au contenu
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-banner">
+          <div class="md-banner__inner md-grid md-typeset">
+            
+            
+<div style="text-align: center">
+  Nextflow Training Week (2025-Q1):
+  <strong>March 10-14, 2025</strong>
+  <a
+    class="md-button"
+    href="https://community.seqera.io/t/nextflow-training-week-2025-q1/1775/6"
+    target="_blank"
+  >
+    More info
+    <span class="twemoji"
+      ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path
+          d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"
+        ></path></svg
+    ></span>
+  </a>
+</div>
+<style type="text/css">
+  .md-banner {
+    display: none;
+  }
+</style>
+
+<script>
+  (function () {
+    function hideAnnouncement() {
+      var announcementDate = new Date(
+        "2025-03-15T00:00:00Z",
+      );
+      var currentDate = new Date();
+      var banner = document.querySelector(".md-banner");
+      if (banner && currentDate <= announcementDate) {
+        banner.style.display = "block";
+      }
+    }
+
+    // Run on initial load
+    hideAnnouncement();
+
+    // Hook into XHR to run after each page update
+    var originalOpen = XMLHttpRequest.prototype.open;
+    XMLHttpRequest.prototype.open = function () {
+      this.addEventListener("load", function () {
+        setTimeout(hideAnnouncement, 0); // Ensure it runs after the request completes
+      });
+      return originalOpen.apply(this, arguments);
+    };
+  })();
+</script>
+ 
+          </div>
+          
+        </aside>
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="En-tête">
+    <a href="../../" title="training.nextflow.io" class="md-header__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
+      
+  <img src="../../../assets/img/nextflow_logo_dark.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            training.nextflow.io
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Working with metadata
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="Sélectionner la langue">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="../../../side_quests/metadata/" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="../../../pt/side_quests/metadata/" hreflang="pt" class="md-select__link">
+              Português
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="../../../es/side_quests/metadata/" hreflang="es" class="md-select__link">
+              Español
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="./" hreflang="fr" class="md-select__link">
+              Français
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="../../../it/side_quests/metadata/" hreflang="it" class="md-select__link">
+              Italiano
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="../../../ko/side_quests/metadata/" hreflang="ko" class="md-select__link">
+              Korean
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Rechercher" placeholder="Rechercher" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Recherche">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Partager" aria-label="Partager" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Effacer" aria-label="Effacer" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initialisation de la recherche
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/nextflow-io/training" title="Aller au dépôt" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    nextflow-io/training
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../" title="training.nextflow.io" class="md-nav__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
+      
+  <img src="../../../assets/img/nextflow_logo_dark.png" alt="logo">
+
+    </a>
+    training.nextflow.io
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/nextflow-io/training" title="Aller au dépôt" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    nextflow-io/training
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Environment setup
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Environment setup
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../envsetup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Environment Setup
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../envsetup/01_setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    GitHub Codespaces
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../envsetup/02_local/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Local installation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../envsetup/03_devcontainer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Local installation using VSCode Devcontainers extension
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Nextflow Run
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Nextflow Run
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nextflow_run/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Nextflow Run
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nextflow_run/00_orientation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Orientation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nextflow_run/01_basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 1: Run basic operations
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nextflow_run/02_pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 2: Run pipelines
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nextflow_run/03_config/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 3: Configuration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Hello Nextflow
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Hello Nextflow
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hello_nextflow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Hello Nextflow
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hello_nextflow/00_orientation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Orientation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hello_nextflow/01_hello_world/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 1: Hello World
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hello_nextflow/02_hello_channels/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 2: Hello Channels
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hello_nextflow/03_hello_workflow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 3: Hello Workflow
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hello_nextflow/04_hello_modules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 4: Hello Modules
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hello_nextflow/05_hello_containers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 5: Hello Containers
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hello_nextflow/06_hello_config/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 6: Hello Config
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hello_nextflow/survey/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Feedback survey
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hello_nextflow/next_steps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Next Steps
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Hello nf-core
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Hello nf-core
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hello_nf-core/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Hello nf-core
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hello_nf-core/00_orientation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Orientation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hello_nf-core/01_run_demo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 1: Run a demo pipeline
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hello_nf-core/02_rewrite_hello/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 2: Rewrite Hello for nf-core
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hello_nf-core/survey/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Feedback survey
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hello_nf-core/next_steps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Next Steps
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Nextflow for Genomics
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Nextflow for Genomics
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nf4_science/genomics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Nextflow for Genomics
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nf4_science/genomics/00_orientation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Orientation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nf4_science/genomics/01_per_sample_variant_calling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 1: Per-sample variant calling
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nf4_science/genomics/02_joint_calling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 2: Joint calling on a cohort
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nf4_science/genomics/03_modules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 3: Moving code into modules
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nf4_science/genomics/04_testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 4: Adding tests
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nf4_science/genomics/survey/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Feedback survey
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nf4_science/genomics/next_steps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Next Steps
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Nextflow for RNAseq
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Nextflow for RNAseq
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nf4_science/rnaseq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Nextflow for RNAseq
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nf4_science/rnaseq/00_orientation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Orientation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nf4_science/rnaseq/01_method/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 1: Method overview and manual testing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nf4_science/rnaseq/02_single-sample/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 2: Single-sample implementation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nf4_science/rnaseq/03_multi-sample/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 3: Multi-sample paired-end implementation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nf4_science/rnaseq/survey/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Feedback survey
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nf4_science/rnaseq/next_steps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Next Steps
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Side Quests
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Side Quests
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Side Quests
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../orientation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Orientation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ide_features/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Nextflow Development Environment Walkthrough
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Working with metadata
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Working with metadata
+    
+  </span>
+  
+
+      </a>
+      
+          
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+       
+  <label class="md-nav__title" for="__toc">
+    <span class="md-nav__icon md-icon"></span>
+    On this page
+  </label>
+  <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+     <li class="md-nav__item">
+  <a href="#0-warmup" class="md-nav__link">
+    <span class="md-ellipsis">
+      0. Warmup
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="0. Warmup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#01-prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.1. Prerequisites
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#02-starting-point" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.2. Starting Point
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>  <li class="md-nav__item">
+  <a href="#1-read-in-datasheet" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Read in datasheet
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Read in datasheet">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-read-in-datasheet-with-splitcsv" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1. Read in datasheet with splitCsv
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-separate-metadata-and-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2. Separate metadata and data
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takeaway" class="md-nav__link">
+    <span class="md-ellipsis">
+      Takeaway
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>  <li class="md-nav__item">
+  <a href="#2-manipulating-metadata" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Manipulating metadata
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Manipulating metadata">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-copying-input-metadata-to-output-channels" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1. Copying input metadata to output channels
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-using-process-outputs-to-augment-metadata" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2. Using process outputs to augment metadata
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-assign-a-language-group-using-conditionals" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3. Assign a language group using conditionals
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takeaway_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Takeaway
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>  <li class="md-nav__item">
+  <a href="#3-use-meta-map-information-in-a-process" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Use meta map information in a process
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Use meta map information in a process">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-use-meta-map-information-in-the-process-definition" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1. Use meta map information in the process definition
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-customize-the-character" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2. Customize the character
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takeaway_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Takeaway
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>  <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Summary">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Concepts
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>  <li class="md-nav__item">
+  <a href="#resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resources
+    </span>
+  </a>
+  
+</li> 
+  </ul>
+  
+</nav>
+<nav class="md-nav md-nav--secondary sidebar_resources" aria-label="Resources">
+  <label class="md-nav__title">Resources</label>
+  <ul class="md-nav__list">
+    <li class="md-nav__item">
+      <a
+        href="https://nextflow.io/docs/latest/index.html"
+        target="_blank"
+        rel="noopener"
+        class="md-nav__link"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path
+            d="M17.5 14.33c.79 0 1.63.08 2.5.24v1.5c-.62-.16-1.46-.24-2.5-.24-1.9 0-3.39.33-4.5.99v-1.69c1.17-.53 2.67-.8 4.5-.8M13 12.46c1.29-.53 2.79-.79 4.5-.79.79 0 1.63.07 2.5.23v1.5c-.62-.16-1.46-.24-2.5-.24-1.9 0-3.39.34-4.5.99m4.5-3.65c-1.9 0-3.39.32-4.5 1V9.84c1.23-.56 2.73-.84 4.5-.84.79 0 1.63.08 2.5.23v1.55c-.74-.19-1.59-.28-2.5-.28m3.5 8V7c-1.04-.33-2.21-.5-3.5-.5-2.05 0-3.88.5-5.5 1.5v11.5c1.62-1 3.45-1.5 5.5-1.5 1.19 0 2.36.16 3.5.5m-3.5-14c2.35 0 4.19.5 5.5 1.5v14.56c0 .12-.05.24-.16.35-.11.09-.23.17-.34.17-.11 0-.19-.02-.25-.05-1.28-.69-2.87-1.03-4.75-1.03-2.05 0-3.88.5-5.5 1.5-1.34-1-3.17-1.5-5.5-1.5-1.66 0-3.25.36-4.75 1.07-.03.01-.07.01-.12.03-.04.01-.08.02-.13.02-.11 0-.23-.04-.34-.12a.475.475 0 0 1-.16-.35V6c1.34-1 3.18-1.5 5.5-1.5 2.33 0 4.16.5 5.5 1.5 1.34-1 3.17-1.5 5.5-1.5Z"
+          ></path>
+        </svg>
+        Nextflow Docs
+      </a>
+    </li>
+    <li class="md-nav__item">
+      <a
+        href="https://www.nextflow.io/slack-invite.html"
+        target="_blank"
+        rel="noopener"
+        class="md-nav__link"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path
+            d="M6 15a2 2 0 0 1-2 2 2 2 0 0 1-2-2 2 2 0 0 1 2-2h2v2m1 0a2 2 0 0 1 2-2 2 2 0 0 1 2 2v5a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-5m2-8a2 2 0 0 1-2-2 2 2 0 0 1 2-2 2 2 0 0 1 2 2v2H9m0 1a2 2 0 0 1 2 2 2 2 0 0 1-2 2H4a2 2 0 0 1-2-2 2 2 0 0 1 2-2h5m8 2a2 2 0 0 1 2-2 2 2 0 0 1 2 2 2 2 0 0 1-2 2h-2v-2m-1 0a2 2 0 0 1-2 2 2 2 0 0 1-2-2V5a2 2 0 0 1 2-2 2 2 0 0 1 2 2v5m-2 8a2 2 0 0 1 2 2 2 2 0 0 1-2 2 2 2 0 0 1-2-2v-2h2m0-1a2 2 0 0 1-2-2 2 2 0 0 1 2-2h5a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-5Z"
+          ></path>
+        </svg>
+        Nextflow Slack
+      </a>
+    </li>
+    <li class="md-nav__item">
+      <a
+        href="https://nextflow.io/"
+        target="_blank"
+        rel="noopener"
+        class="md-nav__link"
+      >
+        <svg
+          version="1.1"
+          id="Layer_1"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="80 50 350 350"
+        >
+          <style type="text/css">
+            .st0 {
+              fill: "gray";
+            }
+          </style>
+          <path
+            class="st0"
+            d="M124.5,171.5c39.4,2.6,71.1,34.3,73.5,73.8h46.1c-2.6-65-54.7-117.2-119.6-119.9V171.5z"
+          />
+          <path
+            class="st0"
+            d="M198.3,255.8c-2.6,39.5-34.3,71.1-73.8,73.5v46.1c65-2.6,117.2-54.7,119.9-119.6H198.3z"
+          />
+          <path
+            class="st0"
+            d="M300.7,245c2.6-39.5,34.3-71.1,73.8-73.5v-46.1c-65,2.6-117.2,54.7-119.9,119.6H300.7z"
+          />
+          <path
+            class="st0"
+            d="M374.5,329.3c-39.4-2.6-71.1-34.3-73.5-73.8h-46.1c2.6,65,54.7,117.2,119.6,119.9V329.3z"
+          />
+        </svg>
+        Nextflow Homepage
+      </a>
+    </li>
+    <li class="md-nav__item">
+      <a
+        href="https://seqera.io/"
+        target="_blank"
+        rel="noopener"
+        class="md-nav__link"
+      >
+        <?xml version="1.0" encoding="utf-8"?>
+        <!-- Generator: Adobe Illustrator 28.3.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+        <svg
+          version="1.1"
+          id="Layer_1"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          x="0px"
+          y="0px"
+          viewBox="80 50 350 350"
+          style="enable-background: new 0 0 500 500"
+          xml:space="preserve"
+        >
+          <style type="text/css">
+            .st0 {
+              clip-path: url(#SVGID_00000006699037935518914080000000086571810102047141_);
+            }
+            .st1 {
+              fill: "gray";
+            }
+          </style>
+          <g>
+            <defs>
+              <rect id="SVGID_1_" x="125" y="125" width="250" height="250" />
+            </defs>
+            <clipPath
+              id="SVGID_00000183214694142566821210000012389151436317298101_"
+            >
+              <use xlink:href="#SVGID_1_" style="overflow: visible" />
+            </clipPath>
+            <g
+              style="
+                clip-path: url(#SVGID_00000183214694142566821210000012389151436317298101_);
+              "
+            >
+              <path
+                class="st1"
+                d="M375,333l-0.1-0.9l-0.1-0.8l-0.1-0.9l-0.1-0.9l-0.1-0.8l-0.1-0.9l-0.1-0.8l-0.2-0.9l-0.2-0.8l-0.2-0.8
+                      l-0.2-0.8l-0.2-0.8l-0.2-0.8l-0.3-0.8l-0.3-0.8l-0.3-0.8l-0.3-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8
+                      l-0.4-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7L365,308l-0.6-0.6l-0.6-0.6l-0.6-0.6l-0.6-0.6L362,305
+                      l-0.6-0.6l-0.7-0.6l-0.6-0.5l-1.2,0.7l-0.8,0.5l-0.8,0.4l-0.8,0.4l-0.8,0.4l-0.8,0.4l-0.9,0.4l-0.9,0.4l-0.9,0.3l-0.9,0.3
+                      l-0.9,0.3l-0.9,0.3l-0.9,0.3l-0.9,0.3l-0.9,0.2l-0.9,0.2l-0.9,0.2l-0.9,0.2l-0.9,0.2l-0.9,0.1l-0.9,0.1l-0.9,0.1l-0.9,0.1
+                      l-0.9,0.1l-0.9,0.1l-0.9,0.1l-0.9,0l-0.9,0h-57.5l59.7,16.4l0.4,0.1l0.4,0.1l0.4,0.1l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.2
+                      l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.1,0.3l0.1,0.3l0.1,0.4l0.1,0.4
+                      l0.1,0.4l0.1,0.4l0,0.4l0,0.4l0,0.4l0,0.4l0,0.4l0,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.3l-0.1,0.4l-0.1,0.3l-0.2,0.3l-0.2,0.3
+                      l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.3,0.3l-0.3,0.3l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.3,0.2
+                      l-0.3,0.1l-0.4,0.2l-0.4,0.1l-0.3,0.1l-0.4,0.1l-0.4,0.1l-0.4,0.1l-0.4,0l-0.4,0l-0.4,0H125V375h209.7l0.9,0l0.9,0l0.9,0l0.8-0.1
+                      l0.9-0.1l0.8-0.1l0.9-0.1l0.8-0.1l0.8-0.1l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.3l0.8-0.3l0.8-0.3l0.8-0.3l0.8-0.3
+                      l0.8-0.4l0.8-0.4l0.8-0.4l0.8-0.4l0.8-0.4l0.7-0.4l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5
+                      l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.4-0.7
+                      l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.3-0.8l0.3-0.8l0.3-0.8l0.3-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8
+                      l0.2-0.8l0.1-0.8l0.1-0.9l0.1-0.9l0.1-0.8l0.1-0.9l0.1-0.9l0.1-0.8l0-0.9l0-0.9l0-0.8L375,333z"
+              />
+              <path
+                class="st1"
+                d="M375,260.4l-0.1-0.9l-0.1-0.9l-0.1-0.8l-0.1-0.9l-0.1-0.8l-0.1-0.8l-0.1-0.8l-0.2-0.8l-0.2-0.8l-0.2-0.8
+                      l-0.2-0.8l-0.2-0.8l-0.2-0.8l-0.3-0.8l-0.3-0.8l-0.3-0.8l-0.3-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.7
+                      l-0.4-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.2-0.2h0h-89.8l59.7,16.4l0.4,0.1l0.4,0.1l0.4,0.1l0.3,0.2l0.3,0.2l0.3,0.2
+                      l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.1,0.4l0.1,0.3
+                      l0.1,0.4l0.1,0.4l0.1,0.4l0.1,0.4l0,0.4l0,0.4l0,0.4l0,0.4l0,0.4l0,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.3l-0.1,0.4
+                      l-0.2,0.4l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.3,0.3l-0.3,0.3l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.3,0.2
+                      l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.4,0.2l-0.4,0.1l-0.3,0.1l-0.4,0.1l-0.4,0.1l-0.4,0.1l-0.4,0l-0.4,0l-0.4,0h-82.5h-111H125v32.2
+                      h122.8h86.9h0.9l0.9,0l0.9-0.1l0.8-0.1l0.9-0.1l0.8-0.1l0.9-0.1l0.8-0.1l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.3
+                      l0.8-0.3l0.8-0.3l0.8-0.3l0.8-0.3l0.8-0.4l0.8-0.4l0.2-0.1l0.6-0.3l0.8-0.4l0.8-0.4l0.7-0.4l0.7-0.4l0.7-0.5l0.7-0.5l0.7-0.5
+                      l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.5-0.7l0.5-0.7l0.5-0.7
+                      l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.4-0.7l0.4-0.7l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.3-0.8l0.3-0.8l0.3-0.8l0.3-0.8
+                      l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.1-0.8l0.1-0.9l0.1-0.8l0.1-0.9l0.1-0.8l0.1-0.9l0.1-0.9l0-0.8l0-0.9l0-0.9
+                      L375,260.4z"
+              />
+              <path
+                class="st1"
+                d="M165.3,197.6l-0.9,0l-0.8,0l-0.9,0l-0.9,0.1l-0.8,0.1l-0.9,0.1l-0.8,0.1l-0.8,0.1l-0.8,0.2l-0.8,0.2l-0.8,0.2
+                      l-0.8,0.2l-0.8,0.2l-0.8,0.2l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.4l-0.8,0.4l-0.2,0.1l-0.6,0.3l-0.8,0.4
+                      l-0.8,0.4l-0.8,0.4l-0.7,0.4l-0.7,0.5l-0.7,0.5L142,205l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.6l-0.6,0.6l-0.6,0.6l-0.6,0.6
+                      l-0.6,0.6l-0.6,0.6l-0.6,0.6l-0.6,0.6l-0.5,0.6l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.4,0.7l-0.5,0.7l-0.4,0.7
+                      l-0.4,0.8l-0.4,0.8l-0.4,0.8l-0.4,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.2,0.8l-0.2,0.8l-0.2,0.8
+                      l-0.2,0.8l-0.2,0.8l-0.2,0.8l-0.1,0.9l-0.1,0.9l-0.1,0.8l-0.1,0.9l-0.1,0.9l0,0.9l0,0.9v0.9v0.9l0,0.8l0,0.9l0.1,0.8l0.1,0.8
+                      l0.1,0.9l0.1,0.9l0.1,0.8l0.2,0.9l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8
+                      l0.4,0.8l0.4,0.8l0.4,0.8l0.4,0.8l0.4,0.7l0.5,0.7l0.4,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.2,0.2h89.8l-59.7-16.4l-0.4-0.1l-0.3-0.1
+                      l-0.4-0.1l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3
+                      l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.1-0.4l-0.1-0.4l-0.1-0.3l-0.1-0.4l-0.1-0.4l-0.1-0.4l0-0.4l0-0.4l0-0.4l0-0.4l0-0.4
+                      l0-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3
+                      l0.3-0.3l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.4-0.2l0.3-0.1l0.4-0.1l0.4-0.1l0.4-0.1l0.4-0.1l0.4,0l0.4,0
+                      h0.4h82.5h111H375v-32.3H252.2H165.3z"
+              />
+              <path
+                class="st1"
+                d="M165.3,125l-0.9,0l-0.8,0l-0.9,0.1l-0.9,0.1l-0.8,0.1l-0.9,0.1l-0.8,0.1l-0.8,0.1l-0.8,0.2l-0.8,0.2l-0.8,0.2
+                      l-0.8,0.2l-0.8,0.2l-0.8,0.2l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.4l-0.8,0.4l-0.8,0.4l-0.8,0.4
+                      l-0.8,0.4l-0.7,0.5l-0.7,0.4l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.6l-0.7,0.6l-0.6,0.6l-0.6,0.6l-0.6,0.6
+                      l-0.6,0.6l-0.6,0.6l-0.6,0.6l-0.6,0.6l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.4,0.7l-0.5,0.7l-0.4,0.7
+                      l-0.4,0.8l-0.4,0.8l-0.4,0.8l-0.4,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.2,0.8l-0.2,0.8l-0.2,0.8
+                      l-0.2,0.8l-0.2,0.8l-0.2,0.8l-0.1,0.9l-0.1,0.8l-0.1,0.9l-0.1,0.8l-0.1,0.9l0,0.9l0,0.9v0.9v0.9l0,0.9l0,0.8l0.1,0.9l0.1,0.9
+                      l0.1,0.8l0.1,0.8l0.1,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8
+                      l0.4,0.8l0.4,0.8l0.4,0.8l0.4,0.8l0.4,0.7l0.5,0.7l0.4,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.6,0.6l0.6,0.6
+                      l0.6,0.6l0.6,0.6l0.6,0.6l0.6,0.6l0.6,0.6l0.7,0.6l0.6,0.5h0l1.1-0.7l0.8-0.5l0.8-0.5l0.8-0.4l0.8-0.4l0.9-0.4l0.9-0.4l0.9-0.4
+                      l0.9-0.3l0.9-0.3l0.9-0.3l0.9-0.3l0.9-0.3l0.9-0.3l0.9-0.2l0.9-0.2l0.9-0.2l0.9-0.2l0.9-0.2l0.9-0.1l0.9-0.1l0.9-0.1l0.9-0.1
+                      l0.9-0.1l0.9-0.1l0.9,0l0.9,0l0.9,0h57.5l-59.7-16.4l-0.4-0.1l-0.3-0.1l-0.4-0.1l-0.3-0.1l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2
+                      l-0.3-0.2l-0.3-0.2l-0.3-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.1-0.3l-0.1-0.4
+                      l-0.1-0.3l-0.1-0.4l-0.1-0.4l-0.1-0.4l0-0.4l0-0.4l0-0.4l0-0.4l0-0.4l0-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.3
+                      l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2
+                      l0.3-0.2l0.4-0.1l0.3-0.1l0.4-0.1l0.4-0.1l0.4-0.1l0.4-0.1l0.4,0l0.4,0l0.4,0H375V125H165.3z"
+              />
+            </g>
+          </g>
+        </svg>
+        Seqera
+      </a>
+    </li>
+    <li class="md-nav__item">
+      <a
+        href="https://github.com/nextflow-io/training"
+        target="_blank"
+        rel="noopener"
+        class="md-nav__link"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path
+            d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"
+          ></path>
+        </svg>
+        Training on GitHub
+      </a>
+    </li>
+  </ul>
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../working_with_files/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Working with Files
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../splitting_and_grouping/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Splitting and Grouping
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../workflows_of_workflows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Workflows of Workflows
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../debugging/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Debugging Workflows
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nf-test/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Testing with nf-test
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nf-core/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction to nf-core
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nf-test/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Testing with nf-test
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Fundamentals Training
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            Fundamentals Training
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basic_training/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basic_training/orientation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Orientation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basic_training/intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Intro
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basic_training/rnaseq_pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Rnaseq pipeline
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basic_training/containers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Dependencies and containers
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basic_training/channels/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Channels
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basic_training/processes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Processes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basic_training/operators/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Operators
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basic_training/groovy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Groovy introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basic_training/modules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Modularization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basic_training/config/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Configuration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basic_training/executors/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Executors
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basic_training/seqera_platform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Seqera platform
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basic_training/cache_and_resume/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cache and resume
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basic_training/debugging/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Debugging
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Advanced Training
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            Advanced Training
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advanced/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Advanced Training
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advanced/orientation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Orientation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advanced/operators/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Operator Tour
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advanced/metadata/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Metadata Propagation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advanced/grouping/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Grouping and Splitting
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advanced/groovy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Groovy Imports
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advanced/structure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Workflow Structure
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advanced/configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Configuration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advanced/summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Summary
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advanced/support/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Support
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../help/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Help
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                      
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+       
+  <label class="md-nav__title" for="__toc">
+    <span class="md-nav__icon md-icon"></span>
+    On this page
+  </label>
+  <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+     <li class="md-nav__item">
+  <a href="#0-warmup" class="md-nav__link">
+    <span class="md-ellipsis">
+      0. Warmup
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="0. Warmup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#01-prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.1. Prerequisites
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#02-starting-point" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.2. Starting Point
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>  <li class="md-nav__item">
+  <a href="#1-read-in-datasheet" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Read in datasheet
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Read in datasheet">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-read-in-datasheet-with-splitcsv" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1. Read in datasheet with splitCsv
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-separate-metadata-and-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2. Separate metadata and data
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takeaway" class="md-nav__link">
+    <span class="md-ellipsis">
+      Takeaway
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>  <li class="md-nav__item">
+  <a href="#2-manipulating-metadata" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Manipulating metadata
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Manipulating metadata">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-copying-input-metadata-to-output-channels" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1. Copying input metadata to output channels
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-using-process-outputs-to-augment-metadata" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2. Using process outputs to augment metadata
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-assign-a-language-group-using-conditionals" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3. Assign a language group using conditionals
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takeaway_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Takeaway
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>  <li class="md-nav__item">
+  <a href="#3-use-meta-map-information-in-a-process" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Use meta map information in a process
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Use meta map information in a process">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-use-meta-map-information-in-the-process-definition" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1. Use meta map information in the process definition
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-customize-the-character" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2. Customize the character
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takeaway_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Takeaway
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>  <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Summary">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Concepts
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>  <li class="md-nav__item">
+  <a href="#resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resources
+    </span>
+  </a>
+  
+</li> 
+  </ul>
+  
+</nav>
+<nav class="md-nav md-nav--secondary sidebar_resources" aria-label="Resources">
+  <label class="md-nav__title">Resources</label>
+  <ul class="md-nav__list">
+    <li class="md-nav__item">
+      <a
+        href="https://nextflow.io/docs/latest/index.html"
+        target="_blank"
+        rel="noopener"
+        class="md-nav__link"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path
+            d="M17.5 14.33c.79 0 1.63.08 2.5.24v1.5c-.62-.16-1.46-.24-2.5-.24-1.9 0-3.39.33-4.5.99v-1.69c1.17-.53 2.67-.8 4.5-.8M13 12.46c1.29-.53 2.79-.79 4.5-.79.79 0 1.63.07 2.5.23v1.5c-.62-.16-1.46-.24-2.5-.24-1.9 0-3.39.34-4.5.99m4.5-3.65c-1.9 0-3.39.32-4.5 1V9.84c1.23-.56 2.73-.84 4.5-.84.79 0 1.63.08 2.5.23v1.55c-.74-.19-1.59-.28-2.5-.28m3.5 8V7c-1.04-.33-2.21-.5-3.5-.5-2.05 0-3.88.5-5.5 1.5v11.5c1.62-1 3.45-1.5 5.5-1.5 1.19 0 2.36.16 3.5.5m-3.5-14c2.35 0 4.19.5 5.5 1.5v14.56c0 .12-.05.24-.16.35-.11.09-.23.17-.34.17-.11 0-.19-.02-.25-.05-1.28-.69-2.87-1.03-4.75-1.03-2.05 0-3.88.5-5.5 1.5-1.34-1-3.17-1.5-5.5-1.5-1.66 0-3.25.36-4.75 1.07-.03.01-.07.01-.12.03-.04.01-.08.02-.13.02-.11 0-.23-.04-.34-.12a.475.475 0 0 1-.16-.35V6c1.34-1 3.18-1.5 5.5-1.5 2.33 0 4.16.5 5.5 1.5 1.34-1 3.17-1.5 5.5-1.5Z"
+          ></path>
+        </svg>
+        Nextflow Docs
+      </a>
+    </li>
+    <li class="md-nav__item">
+      <a
+        href="https://www.nextflow.io/slack-invite.html"
+        target="_blank"
+        rel="noopener"
+        class="md-nav__link"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path
+            d="M6 15a2 2 0 0 1-2 2 2 2 0 0 1-2-2 2 2 0 0 1 2-2h2v2m1 0a2 2 0 0 1 2-2 2 2 0 0 1 2 2v5a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-5m2-8a2 2 0 0 1-2-2 2 2 0 0 1 2-2 2 2 0 0 1 2 2v2H9m0 1a2 2 0 0 1 2 2 2 2 0 0 1-2 2H4a2 2 0 0 1-2-2 2 2 0 0 1 2-2h5m8 2a2 2 0 0 1 2-2 2 2 0 0 1 2 2 2 2 0 0 1-2 2h-2v-2m-1 0a2 2 0 0 1-2 2 2 2 0 0 1-2-2V5a2 2 0 0 1 2-2 2 2 0 0 1 2 2v5m-2 8a2 2 0 0 1 2 2 2 2 0 0 1-2 2 2 2 0 0 1-2-2v-2h2m0-1a2 2 0 0 1-2-2 2 2 0 0 1 2-2h5a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-5Z"
+          ></path>
+        </svg>
+        Nextflow Slack
+      </a>
+    </li>
+    <li class="md-nav__item">
+      <a
+        href="https://nextflow.io/"
+        target="_blank"
+        rel="noopener"
+        class="md-nav__link"
+      >
+        <svg
+          version="1.1"
+          id="Layer_1"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="80 50 350 350"
+        >
+          <style type="text/css">
+            .st0 {
+              fill: "gray";
+            }
+          </style>
+          <path
+            class="st0"
+            d="M124.5,171.5c39.4,2.6,71.1,34.3,73.5,73.8h46.1c-2.6-65-54.7-117.2-119.6-119.9V171.5z"
+          />
+          <path
+            class="st0"
+            d="M198.3,255.8c-2.6,39.5-34.3,71.1-73.8,73.5v46.1c65-2.6,117.2-54.7,119.9-119.6H198.3z"
+          />
+          <path
+            class="st0"
+            d="M300.7,245c2.6-39.5,34.3-71.1,73.8-73.5v-46.1c-65,2.6-117.2,54.7-119.9,119.6H300.7z"
+          />
+          <path
+            class="st0"
+            d="M374.5,329.3c-39.4-2.6-71.1-34.3-73.5-73.8h-46.1c2.6,65,54.7,117.2,119.6,119.9V329.3z"
+          />
+        </svg>
+        Nextflow Homepage
+      </a>
+    </li>
+    <li class="md-nav__item">
+      <a
+        href="https://seqera.io/"
+        target="_blank"
+        rel="noopener"
+        class="md-nav__link"
+      >
+        <?xml version="1.0" encoding="utf-8"?>
+        <!-- Generator: Adobe Illustrator 28.3.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+        <svg
+          version="1.1"
+          id="Layer_1"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          x="0px"
+          y="0px"
+          viewBox="80 50 350 350"
+          style="enable-background: new 0 0 500 500"
+          xml:space="preserve"
+        >
+          <style type="text/css">
+            .st0 {
+              clip-path: url(#SVGID_00000006699037935518914080000000086571810102047141_);
+            }
+            .st1 {
+              fill: "gray";
+            }
+          </style>
+          <g>
+            <defs>
+              <rect id="SVGID_1_" x="125" y="125" width="250" height="250" />
+            </defs>
+            <clipPath
+              id="SVGID_00000183214694142566821210000012389151436317298101_"
+            >
+              <use xlink:href="#SVGID_1_" style="overflow: visible" />
+            </clipPath>
+            <g
+              style="
+                clip-path: url(#SVGID_00000183214694142566821210000012389151436317298101_);
+              "
+            >
+              <path
+                class="st1"
+                d="M375,333l-0.1-0.9l-0.1-0.8l-0.1-0.9l-0.1-0.9l-0.1-0.8l-0.1-0.9l-0.1-0.8l-0.2-0.9l-0.2-0.8l-0.2-0.8
+                      l-0.2-0.8l-0.2-0.8l-0.2-0.8l-0.3-0.8l-0.3-0.8l-0.3-0.8l-0.3-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8
+                      l-0.4-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7L365,308l-0.6-0.6l-0.6-0.6l-0.6-0.6l-0.6-0.6L362,305
+                      l-0.6-0.6l-0.7-0.6l-0.6-0.5l-1.2,0.7l-0.8,0.5l-0.8,0.4l-0.8,0.4l-0.8,0.4l-0.8,0.4l-0.9,0.4l-0.9,0.4l-0.9,0.3l-0.9,0.3
+                      l-0.9,0.3l-0.9,0.3l-0.9,0.3l-0.9,0.3l-0.9,0.2l-0.9,0.2l-0.9,0.2l-0.9,0.2l-0.9,0.2l-0.9,0.1l-0.9,0.1l-0.9,0.1l-0.9,0.1
+                      l-0.9,0.1l-0.9,0.1l-0.9,0.1l-0.9,0l-0.9,0h-57.5l59.7,16.4l0.4,0.1l0.4,0.1l0.4,0.1l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.2
+                      l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.1,0.3l0.1,0.3l0.1,0.4l0.1,0.4
+                      l0.1,0.4l0.1,0.4l0,0.4l0,0.4l0,0.4l0,0.4l0,0.4l0,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.3l-0.1,0.4l-0.1,0.3l-0.2,0.3l-0.2,0.3
+                      l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.3,0.3l-0.3,0.3l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.3,0.2
+                      l-0.3,0.1l-0.4,0.2l-0.4,0.1l-0.3,0.1l-0.4,0.1l-0.4,0.1l-0.4,0.1l-0.4,0l-0.4,0l-0.4,0H125V375h209.7l0.9,0l0.9,0l0.9,0l0.8-0.1
+                      l0.9-0.1l0.8-0.1l0.9-0.1l0.8-0.1l0.8-0.1l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.3l0.8-0.3l0.8-0.3l0.8-0.3l0.8-0.3
+                      l0.8-0.4l0.8-0.4l0.8-0.4l0.8-0.4l0.8-0.4l0.7-0.4l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5
+                      l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.4-0.7
+                      l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.3-0.8l0.3-0.8l0.3-0.8l0.3-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8
+                      l0.2-0.8l0.1-0.8l0.1-0.9l0.1-0.9l0.1-0.8l0.1-0.9l0.1-0.9l0.1-0.8l0-0.9l0-0.9l0-0.8L375,333z"
+              />
+              <path
+                class="st1"
+                d="M375,260.4l-0.1-0.9l-0.1-0.9l-0.1-0.8l-0.1-0.9l-0.1-0.8l-0.1-0.8l-0.1-0.8l-0.2-0.8l-0.2-0.8l-0.2-0.8
+                      l-0.2-0.8l-0.2-0.8l-0.2-0.8l-0.3-0.8l-0.3-0.8l-0.3-0.8l-0.3-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.7
+                      l-0.4-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.2-0.2h0h-89.8l59.7,16.4l0.4,0.1l0.4,0.1l0.4,0.1l0.3,0.2l0.3,0.2l0.3,0.2
+                      l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.1,0.4l0.1,0.3
+                      l0.1,0.4l0.1,0.4l0.1,0.4l0.1,0.4l0,0.4l0,0.4l0,0.4l0,0.4l0,0.4l0,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.3l-0.1,0.4
+                      l-0.2,0.4l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.3,0.3l-0.3,0.3l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.3,0.2
+                      l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.4,0.2l-0.4,0.1l-0.3,0.1l-0.4,0.1l-0.4,0.1l-0.4,0.1l-0.4,0l-0.4,0l-0.4,0h-82.5h-111H125v32.2
+                      h122.8h86.9h0.9l0.9,0l0.9-0.1l0.8-0.1l0.9-0.1l0.8-0.1l0.9-0.1l0.8-0.1l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.3
+                      l0.8-0.3l0.8-0.3l0.8-0.3l0.8-0.3l0.8-0.4l0.8-0.4l0.2-0.1l0.6-0.3l0.8-0.4l0.8-0.4l0.7-0.4l0.7-0.4l0.7-0.5l0.7-0.5l0.7-0.5
+                      l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.5-0.7l0.5-0.7l0.5-0.7
+                      l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.4-0.7l0.4-0.7l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.3-0.8l0.3-0.8l0.3-0.8l0.3-0.8
+                      l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.1-0.8l0.1-0.9l0.1-0.8l0.1-0.9l0.1-0.8l0.1-0.9l0.1-0.9l0-0.8l0-0.9l0-0.9
+                      L375,260.4z"
+              />
+              <path
+                class="st1"
+                d="M165.3,197.6l-0.9,0l-0.8,0l-0.9,0l-0.9,0.1l-0.8,0.1l-0.9,0.1l-0.8,0.1l-0.8,0.1l-0.8,0.2l-0.8,0.2l-0.8,0.2
+                      l-0.8,0.2l-0.8,0.2l-0.8,0.2l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.4l-0.8,0.4l-0.2,0.1l-0.6,0.3l-0.8,0.4
+                      l-0.8,0.4l-0.8,0.4l-0.7,0.4l-0.7,0.5l-0.7,0.5L142,205l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.6l-0.6,0.6l-0.6,0.6l-0.6,0.6
+                      l-0.6,0.6l-0.6,0.6l-0.6,0.6l-0.6,0.6l-0.5,0.6l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.4,0.7l-0.5,0.7l-0.4,0.7
+                      l-0.4,0.8l-0.4,0.8l-0.4,0.8l-0.4,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.2,0.8l-0.2,0.8l-0.2,0.8
+                      l-0.2,0.8l-0.2,0.8l-0.2,0.8l-0.1,0.9l-0.1,0.9l-0.1,0.8l-0.1,0.9l-0.1,0.9l0,0.9l0,0.9v0.9v0.9l0,0.8l0,0.9l0.1,0.8l0.1,0.8
+                      l0.1,0.9l0.1,0.9l0.1,0.8l0.2,0.9l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8
+                      l0.4,0.8l0.4,0.8l0.4,0.8l0.4,0.8l0.4,0.7l0.5,0.7l0.4,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.2,0.2h89.8l-59.7-16.4l-0.4-0.1l-0.3-0.1
+                      l-0.4-0.1l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3
+                      l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.1-0.4l-0.1-0.4l-0.1-0.3l-0.1-0.4l-0.1-0.4l-0.1-0.4l0-0.4l0-0.4l0-0.4l0-0.4l0-0.4
+                      l0-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3
+                      l0.3-0.3l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.4-0.2l0.3-0.1l0.4-0.1l0.4-0.1l0.4-0.1l0.4-0.1l0.4,0l0.4,0
+                      h0.4h82.5h111H375v-32.3H252.2H165.3z"
+              />
+              <path
+                class="st1"
+                d="M165.3,125l-0.9,0l-0.8,0l-0.9,0.1l-0.9,0.1l-0.8,0.1l-0.9,0.1l-0.8,0.1l-0.8,0.1l-0.8,0.2l-0.8,0.2l-0.8,0.2
+                      l-0.8,0.2l-0.8,0.2l-0.8,0.2l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.4l-0.8,0.4l-0.8,0.4l-0.8,0.4
+                      l-0.8,0.4l-0.7,0.5l-0.7,0.4l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.6l-0.7,0.6l-0.6,0.6l-0.6,0.6l-0.6,0.6
+                      l-0.6,0.6l-0.6,0.6l-0.6,0.6l-0.6,0.6l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.4,0.7l-0.5,0.7l-0.4,0.7
+                      l-0.4,0.8l-0.4,0.8l-0.4,0.8l-0.4,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.2,0.8l-0.2,0.8l-0.2,0.8
+                      l-0.2,0.8l-0.2,0.8l-0.2,0.8l-0.1,0.9l-0.1,0.8l-0.1,0.9l-0.1,0.8l-0.1,0.9l0,0.9l0,0.9v0.9v0.9l0,0.9l0,0.8l0.1,0.9l0.1,0.9
+                      l0.1,0.8l0.1,0.8l0.1,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8
+                      l0.4,0.8l0.4,0.8l0.4,0.8l0.4,0.8l0.4,0.7l0.5,0.7l0.4,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.6,0.6l0.6,0.6
+                      l0.6,0.6l0.6,0.6l0.6,0.6l0.6,0.6l0.6,0.6l0.7,0.6l0.6,0.5h0l1.1-0.7l0.8-0.5l0.8-0.5l0.8-0.4l0.8-0.4l0.9-0.4l0.9-0.4l0.9-0.4
+                      l0.9-0.3l0.9-0.3l0.9-0.3l0.9-0.3l0.9-0.3l0.9-0.3l0.9-0.2l0.9-0.2l0.9-0.2l0.9-0.2l0.9-0.2l0.9-0.1l0.9-0.1l0.9-0.1l0.9-0.1
+                      l0.9-0.1l0.9-0.1l0.9,0l0.9,0l0.9,0h57.5l-59.7-16.4l-0.4-0.1l-0.3-0.1l-0.4-0.1l-0.3-0.1l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2
+                      l-0.3-0.2l-0.3-0.2l-0.3-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.1-0.3l-0.1-0.4
+                      l-0.1-0.3l-0.1-0.4l-0.1-0.4l-0.1-0.4l0-0.4l0-0.4l0-0.4l0-0.4l0-0.4l0-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.3
+                      l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2
+                      l0.3-0.2l0.4-0.1l0.3-0.1l0.4-0.1l0.4-0.1l0.4-0.1l0.4-0.1l0.4,0l0.4,0l0.4,0H375V125H165.3z"
+              />
+            </g>
+          </g>
+        </svg>
+        Seqera
+      </a>
+    </li>
+    <li class="md-nav__item">
+      <a
+        href="https://github.com/nextflow-io/training"
+        target="_blank"
+        rel="noopener"
+        class="md-nav__link"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path
+            d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"
+          ></path>
+        </svg>
+        Training on GitHub
+      </a>
+    </li>
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/nextflow-io/training/edit/master/docs/side_quests/metadata.md" title="Editer cette page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="working-with-metadata">Working with metadata<a class="headerlink" href="#working-with-metadata" title="Permanent link">&para;</a></h1>
+<p>In any scientific analysis, we rarely work with just the raw data files. Each file comes with its own additional information: what it is, where it came from, and what makes it special. This extra information is what we call metadata.</p>
+<p>Metadata is data describing other data.
+Metadata tracks important details about files and experimental conditions, and helps tailor analyses to each dataset's unique characteristics.</p>
+<p>Think of it like a library catalog: while books contain the actual content (raw data), the catalog cards provide essential information about each book—when it was published, who wrote it, where to find it (metadata). In Nextflow pipelines, metadata can be used to:</p>
+<ul>
+<li>Track file-specific information throughout the workflow</li>
+<li>Configure processes based on file characteristics</li>
+<li>Group related files for joint analysis</li>
+</ul>
+<p>We'll explore how to handle metadata in workflows. Starting with a simple datasheet containing basic file information, you'll learn how to:</p>
+<ul>
+<li>Read and parse file metadata from CSV files</li>
+<li>Create and manipulate metadata maps</li>
+<li>Add new metadata fields during workflow execution</li>
+<li>Use metadata to customize process behavior</li>
+</ul>
+<p>These skills will help you build more robust and flexible pipelines that can handle complex file relationships and processing requirements.</p>
+<p>In this tutorial, we'll tackle a common data processing scenario: handling multiple files where each file needs different processing based on its characteristics.</p>
+<p>We have greeting files in different languages (French, German, Spanish, Italian, English), but we don't know which language each file contains. Our challenge is to:</p>
+<ol>
+<li><strong>Identify</strong> the language in each file automatically</li>
+<li><strong>Group</strong> files by language family (Germanic vs Romance languages)</li>
+<li><strong>Customize</strong> the processing for each file based on its language and metadata</li>
+<li><strong>Organize</strong> outputs by language group</li>
+</ol>
+<p>This represents a typical workflow pattern where file-specific metadata drives processing decisions - exactly the kind of problem that metadata maps solve elegantly.</p>
+<p>Let's dive in!</p>
+<h2 id="0-warmup">0. Warmup<a class="headerlink" href="#0-warmup" title="Permanent link">&para;</a></h2>
+<h3 id="01-prerequisites">0.1. Prerequisites<a class="headerlink" href="#01-prerequisites" title="Permanent link">&para;</a></h3>
+<p>Before taking on this side quest you should:</p>
+<ul>
+<li>Complete the <a href="../hello_nextflow/README.md">Hello Nextflow</a> tutorial</li>
+<li>Understand basic Nextflow concepts (processes, channels, operators)</li>
+</ul>
+<h3 id="02-starting-point">0.2. Starting Point<a class="headerlink" href="#02-starting-point" title="Permanent link">&para;</a></h3>
+<p>Let's move into the project directory.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">cd</span><span class="w"> </span>side-quests/metadata
+</code></pre></div>
+<p>You can set VSCode to focus on this directory:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>code<span class="w"> </span>.
+</code></pre></div>
+<p>You'll find a <code>data</code> directory containing a samplesheet and a main workflow file.</p>
+<div class="highlight"><span class="filename">Directory contents</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="go">&gt; tree</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="go">.</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="go">├── data</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="go">│   ├── bonjour.txt</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="go">│   ├── ciao.txt</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="go">│   ├── guten_tag.txt</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="go">│   ├── hallo.txt</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="go">│   ├── hello.txt</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="go">│   ├── hola.txt</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="go">│   ├── salut.txt</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="go">│   └── samplesheet.csv</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="go">├── main.nf</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="go">└── nextflow.config</span>
+</code></pre></div>
+<p>The datasheet contains information about different files and some associated data that we will use in this exercise to tailor our analysis to each file. Each data file contains greetings in different languages, but we don't know what language they are in. The datasheet has 3 columns:</p>
+<ul>
+<li><code>id</code>: self-explanatory, an ID given to the file</li>
+<li><code>character</code>: a character name, that we will use later to draw different creatures</li>
+<li><code>data</code>: paths to <code>.txt</code> files that contain phrases in different languages</li>
+</ul>
+<div class="highlight"><span class="filename">datasheet.csv</span><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="go">id,character,recording</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="go">sampleA,squirrel,/workspaces/training/side-quests/metadata/data/bonjour.txt</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="go">sampleB,tux,/workspaces/training/side-quests/metadata/data/guten_tag.txt</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="go">sampleC,sheep,/workspaces/training/side-quests/metadata/data/hallo.txt</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="go">sampleD,turkey,/workspaces/training/side-quests/metadata/data/hello.txt</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="go">sampleE,stegosaurus,/workspaces/training/side-quests/metadata/data/hola.txt</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="go">sampleF,moose,/workspaces/training/side-quests/metadata/data/salut.txt</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="go">sampleG,turtle,/workspaces/training/side-quests/metadata/data/ciao.txt</span>
+</code></pre></div>
+<h2 id="1-read-in-datasheet">1. Read in datasheet<a class="headerlink" href="#1-read-in-datasheet" title="Permanent link">&para;</a></h2>
+<h3 id="11-read-in-datasheet-with-splitcsv">1.1. Read in datasheet with splitCsv<a class="headerlink" href="#11-read-in-datasheet-with-splitcsv" title="Permanent link">&para;</a></h3>
+<p>Let's start by reading in the datasheet with <code>splitCsv</code>. In the main workflow file, you'll see that we've already started the workflow:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
+<span class="normal"><a href="#__codelineno-4-2">2</a></span>
+<span class="normal"><a href="#__codelineno-4-3">3</a></span>
+<span class="normal"><a href="#__codelineno-4-4">4</a></span>
+<span class="normal"><a href="#__codelineno-4-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="n">workflow</span><span class="w">  </span><span class="o">{</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a>
+<a id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="w">    </span><span class="n">ch_samplesheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">&quot;./data/samplesheet.csv&quot;</span><span class="o">)</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4"></a>
+<a id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Throughout this tutorial, we'll use the <code>ch_</code> prefix for all channel variables to clearly indicate they are Nextflow channels.</p>
+</div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">After</label><label for="__tabbed_1_2">Before</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-3">3</a></span>
+<span class="normal"><a href="#__codelineno-5-4">4</a></span>
+<span class="normal"><a href="#__codelineno-5-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="n">ch_samplesheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">&quot;./data/samplesheet.csv&quot;</span><span class="o">)</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="hll"><span class="w">    </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="nl">header:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
+</span><a id="__codelineno-5-5" name="__codelineno-5-5"></a><span class="hll"><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+</span></code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="n">ch_samplesheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">&quot;./data/samplesheet.csv&quot;</span><span class="o">)</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<p>We can use the <a href="https://www.nextflow.io/docs/latest/operator.html#splitcsv"><code>splitCsv</code> operator</a> to split the datasheet into a channel of maps, where each map represents a row from the CSV file.</p>
+<p>A map is a key-value data structure similar to dictionaries in Python, objects in JavaScript, or hashes in Ruby. For example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1">// Groovy map</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="kt">def</span><span class="w"> </span><span class="n">my_map</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="nl">id:</span><span class="s1">&#39;sampleA&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">character:</span><span class="s1">&#39;squirrel&#39;</span><span class="o">]</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="n">println</span><span class="w"> </span><span class="n">my_map</span><span class="o">.</span><span class="na">id</span><span class="w">  </span><span class="c1">// Prints: sampleA</span>
+</code></pre></div>
+<div class="admonition example">
+<p class="admonition-title">Try it yourself</p>
+<p>You can run this example to see how maps look like with:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>examples/map_demo.nf
+</code></pre></div>
+</div>
+<p>The <code>header: true</code> option tells Nextflow to use the first row of the CSV file as the header row, which will be used as keys for the values. Let's see what Nextflow can see after reading with <code>splitCsv</code>. Run the pipeline with the <code>view()</code> operator we added above:</p>
+<p>Run the pipeline:</p>
+<div class="highlight"><span class="filename">Read the datasheet</span><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
+</code></pre></div>
+<div class="highlight"><span class="filename">Read datasheet with splitCsv</span><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="go"> N E X T F L O W   ~  version 24.10.4</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="go">Launching `main.nf` [exotic_albattani] DSL2 - revision: c0d03cec83</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="go">[id:sampleA, character:squirrel, recording:/workspaces/training/side-quests/metadata/data/bonjour.txt]</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="go">[id:sampleB, character:tux, recording:/workspaces/training/side-quests/metadata/data/guten_tag.txt]</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="go">[id:sampleC, character:sheep, recording:/workspaces/training/side-quests/metadata/data/hallo.txt]</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="go">[id:sampleD, character:turkey, recording:/workspaces/training/side-quests/metadata/data/hello.txt]</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="go">[id:sampleE, character:stegosaurus, recording:/workspaces/training/side-quests/metadata/data/hola.txt]</span>
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="go">[id:sampleF, character:moose, recording:/workspaces/training/side-quests/metadata/data/salut.txt]</span>
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="go">[id:sampleG, character:turtle, recording:/workspaces/training/side-quests/metadata/data/ciao.txt]</span>
+</code></pre></div>
+<p>We can see that each row from the CSV file has been converted into a map with keys matching the header row.
+Each map entry corresponds to a column in our datasheet:</p>
+<ul>
+<li><code>id</code></li>
+<li><code>character</code></li>
+<li><code>recording</code></li>
+</ul>
+<p>This format makes it easy to access specific fields from each file. For example, we could access the file ID with <code>id</code> or the txt file path with <code>recording</code>. The output above shows each row from the CSV file converted into a map with keys matching the header row.</p>
+<p>Let's access a specific column, the <code>character</code> column, that we read in from the datasheet, and print it. We can use the Nextflow <code>map</code> operator to iterate over each item in our channel and return specific entry of our map object:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">After</label><label for="__tabbed_2_2">Before</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-4">4</a></span>
+<span class="normal"><a href="#__codelineno-11-5">5</a></span>
+<span class="normal"><a href="#__codelineno-11-6">6</a></span>
+<span class="normal"><a href="#__codelineno-11-7">7</a></span>
+<span class="normal"><a href="#__codelineno-11-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-4" name="__codelineno-11-4"></a><span class="w">        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="nl">header:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5"></a><span class="hll"><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span>
+</span><a id="__codelineno-11-6" name="__codelineno-11-6"></a><span class="hll"><span class="w">            </span><span class="n">row</span><span class="o">.</span><span class="na">character</span>
+</span><a id="__codelineno-11-7" name="__codelineno-11-7"></a><span class="hll"><span class="w">        </span><span class="o">}</span>
+</span><a id="__codelineno-11-8" name="__codelineno-11-8"></a><span class="w">        </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-4">4</a></span>
+<span class="normal"><a href="#__codelineno-12-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-12-4" name="__codelineno-12-4"></a><span class="w">        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="nl">header:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5"></a><span class="hll"><span class="w">        </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+</span></code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<p>and rerun:</p>
+<div class="highlight"><span class="filename">Print the creatures</span><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
+</code></pre></div>
+<div class="highlight"><span class="filename">Print the creatures</span><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="go">squirrel</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="go">tux</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="go">sheep</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="go">turkey</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="go">stegosaurus</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="go">moose</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="go">turtle</span>
+</code></pre></div>
+<p>Success, we can use the map structures derived from our datasheet to access the values from individual columns for each row.</p>
+<p>Now that we've successfully read in the datasheet and have access to the data in each row, we can begin implementing our pipeline logic.</p>
+<h3 id="12-separate-metadata-and-data">1.2. Separate metadata and data<a class="headerlink" href="#12-separate-metadata-and-data" title="Permanent link">&para;</a></h3>
+<p>In the datasheet, we have both the input files and data about the input files (<code>id</code>, <code>character</code>), the metadata.
+As we progress through the workflow, we generate more metadata about each file.
+So far, every column from the datasheet has become a separate item in the channel items we derived using <code>splitCsv()</code>. Every process that consumes this channel would need to be configured with this structure in mind:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">id</span><span class="o">),</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">character</span><span class="o">),</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="n">recording</span><span class="o">)</span>
+</code></pre></div>
+<p>This means that as soon as somebody added an extra column to the datasheet, the workflow would start producing errors, because the shape of the channel would no longer match what the process expected. It also makes the process hard to share with others who might have slightly different input data, and we end up hard-coding variables into the process that aren't needed by the script block.</p>
+<p>To avoid this, we need to find a way of keeping the channel structure consistent however many columns that datasheet contains, and we can do that by keeping all the metadata in a single part of the channel tuples we call simply the <code>meta map</code>.</p>
+<p>Let's use this and separate our metadata from the file path. We'll use the <code>map</code> operator to restructure our channel elements into a tuple consisting of the meta map and file:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">After</label><label for="__tabbed_3_2">Before</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-5">5</a></span>
+<span class="normal"><a href="#__codelineno-16-6">6</a></span>
+<span class="normal"><a href="#__codelineno-16-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-16-5" name="__codelineno-16-5"></a><span class="w">    </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6"></a><span class="hll"><span class="w">        </span><span class="o">[[</span><span class="nl">id:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">id</span><span class="o">,</span><span class="w"> </span><span class="nl">character:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">character</span><span class="o">],</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">recording</span><span class="o">]</span>
+</span><a id="__codelineno-16-7" name="__codelineno-16-7"></a><span class="w">    </span><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-5">5</a></span>
+<span class="normal"><a href="#__codelineno-17-6">6</a></span>
+<span class="normal"><a href="#__codelineno-17-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-17-5" name="__codelineno-17-5"></a><span class="w">    </span><span class="o">.</span><span class="na">map</span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span>
+<a id="__codelineno-17-6" name="__codelineno-17-6"></a><span class="w">          </span><span class="n">row</span><span class="o">.</span><span class="na">character</span>
+<a id="__codelineno-17-7" name="__codelineno-17-7"></a><span class="w">    </span><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<p>Let's run it:</p>
+<div class="highlight"><span class="filename">View meta map</span><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
+</code></pre></div>
+<div class="highlight"><span class="filename">View meta map</span><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="go"> N E X T F L O W   ~  version 24.10.4</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="go">Launching `main.nf` [lethal_booth] DSL2 - revision: 0d8f844c07</span>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="go">[[id:sampleA, character:squirrel], /workspaces/training/side-quests/metadata/data/bonjour.txt]</span>
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="go">[[id:sampleB, character:tux], /workspaces/training/side-quests/metadata/data/guten_tag.txt]</span>
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="go">[[id:sampleC, character:sheep], /workspaces/training/side-quests/metadata/data/hallo.txt]</span>
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="go">[[id:sampleD, character:turkey], /workspaces/training/side-quests/metadata/data/hello.txt]</span>
+<a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a><span class="go">[[id:sampleE, character:stegosaurus], /workspaces/training/side-quests/metadata/data/hola.txt]</span>
+<a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a><span class="go">[[id:sampleF, character:moose], /workspaces/training/side-quests/metadata/data/salut.txt]</span>
+<a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a><span class="go">[[id:sampleG, character:turtle], /workspaces/training/side-quests/metadata/data/ciao.txt]</span>
+</code></pre></div>
+<p>Now, each item in the channel has only two items, the metadata map (e.g. <code>[id:sampleA, character:squirrel]</code>) and the data file described by that metadata (e.g. <code>/workspaces/training/side-quests/metadata/data/bonjour.txt</code>).</p>
+<p>Now we can write processes to consume the channel without hard-coding the metadata items into the input specification:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="n">recording</span><span class="o">)</span>
+</code></pre></div>
+<p>Additional columns in the datasheet will make more metadata available in the <code>meta</code> map, but won't change the channel shape.</p>
+<h3 id="takeaway">Takeaway<a class="headerlink" href="#takeaway" title="Permanent link">&para;</a></h3>
+<p>In this section, you've learned:</p>
+<ul>
+<li><strong>Why metadata is important</strong>: Keeping metadata with your data preserves important file information throughout the workflow.</li>
+<li><strong>How to read in a datasheets</strong>: Using <code>splitCsv</code> to read CSV files with header information and transform rows into structured data</li>
+<li><strong>How to create a meta map</strong>: Separating metadata from file data using tuple structure <code>[ [id:value, ...], file ]</code></li>
+</ul>
+<hr />
+<h2 id="2-manipulating-metadata">2. Manipulating metadata<a class="headerlink" href="#2-manipulating-metadata" title="Permanent link">&para;</a></h2>
+<h3 id="21-copying-input-metadata-to-output-channels">2.1. Copying input metadata to output channels<a class="headerlink" href="#21-copying-input-metadata-to-output-channels" title="Permanent link">&para;</a></h3>
+<p>Now we want to process our files with unidentified languages. Let's add a process definition before the <code>workflow</code> that can identify the language in each file:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">After</label><label for="__tabbed_4_2">Before</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-21-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-21-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-21-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-21-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-21-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-21-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-21-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-21-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-21-10">10</a></span>
+<span class="normal"><a href="#__codelineno-21-11">11</a></span>
+<span class="normal"><a href="#__codelineno-21-12">12</a></span>
+<span class="normal"><a href="#__codelineno-21-13">13</a></span>
+<span class="normal"><a href="#__codelineno-21-14">14</a></span>
+<span class="normal"><a href="#__codelineno-21-15">15</a></span>
+<span class="normal"><a href="#__codelineno-21-16">16</a></span>
+<span class="normal"><a href="#__codelineno-21-17">17</a></span>
+<span class="normal"><a href="#__codelineno-21-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1"></a><span class="cm">/*</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2"></a><span class="cm"> * Use langid to predict the language of each input file</span>
+<a id="__codelineno-21-3" name="__codelineno-21-3"></a><span class="cm"> */</span>
+<a id="__codelineno-21-4" name="__codelineno-21-4"></a><span class="n">process</span><span class="w"> </span><span class="n">IDENTIFY_LANGUAGE</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-21-5" name="__codelineno-21-5"></a>
+<a id="__codelineno-21-6" name="__codelineno-21-6"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s1">&#39;community.wave.seqera.io/library/pip_langid:b2269f456a5629ff&#39;</span>
+<a id="__codelineno-21-7" name="__codelineno-21-7"></a>
+<a id="__codelineno-21-8" name="__codelineno-21-8"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-21-9" name="__codelineno-21-9"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">file</span><span class="o">)</span>
+<a id="__codelineno-21-10" name="__codelineno-21-10"></a>
+<a id="__codelineno-21-11" name="__codelineno-21-11"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-21-12" name="__codelineno-21-12"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">file</span><span class="o">),</span><span class="w"> </span><span class="n">stdout</span>
+<a id="__codelineno-21-13" name="__codelineno-21-13"></a>
+<a id="__codelineno-21-14" name="__codelineno-21-14"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-21-15" name="__codelineno-21-15"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-21-16" name="__codelineno-21-16"></a><span class="s2">    langid &lt; ${file} -l en,de,fr,es,it | sed -E &quot;s/.*\\(&#39;([a-z]+)&#39;.*/\\1/&quot; | tr -d &#39;\\n&#39;</span>
+<a id="__codelineno-21-17" name="__codelineno-21-17"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-21-18" name="__codelineno-21-18"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-22-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1"></a><span class="n">workflow</span><span class="w">  </span><span class="o">{</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<p>The tool <a href="https://github.com/saffsd/langid.py">langid</a> is used for language identification. It comes pre-trained on a set of languages. For a given phrase, it outputs a language prediction and a probability score for each guess to the console. In the <code>script</code> section, we remove the probability score, clean up the string by removing newline characters, and return only the language prediction. Since the output is printed directly to the console, we use Nextflow’s <a href="https://www.nextflow.io/docs/latest/process.html#outputs"><code>stdout</code> output qualifier</a> to capture and pass the string as output.</p>
+<p>Let's include the process, then run, and view it:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">After</label><label for="__tabbed_5_2">Before</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-25">25</a></span>
+<span class="normal"><a href="#__codelineno-23-26">26</a></span>
+<span class="normal"><a href="#__codelineno-23-27">27</a></span>
+<span class="normal"><a href="#__codelineno-23-28">28</a></span>
+<span class="normal"><a href="#__codelineno-23-29">29</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-23-25" name="__codelineno-23-25"></a><span class="w">        </span><span class="o">[[</span><span class="nl">id:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">id</span><span class="o">,</span><span class="w"> </span><span class="nl">character:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">character</span><span class="o">],</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">recording</span><span class="o">]</span>
+<a id="__codelineno-23-26" name="__codelineno-23-26"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-23-27" name="__codelineno-23-27"></a>
+<a id="__codelineno-23-28" name="__codelineno-23-28"></a><span class="hll"><span class="n">ch_prediction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">IDENTIFY_LANGUAGE</span><span class="o">(</span><span class="n">ch_samplesheet</span><span class="o">)</span>
+</span><a id="__codelineno-23-29" name="__codelineno-23-29"></a><span class="hll"><span class="n">ch_prediction</span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+</span></code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-25">25</a></span>
+<span class="normal"><a href="#__codelineno-24-26">26</a></span>
+<span class="normal"><a href="#__codelineno-24-27">27</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-24-25" name="__codelineno-24-25"></a><span class="w">        </span><span class="o">[</span><span class="w"> </span><span class="o">[</span><span class="nl">id:</span><span class="n">row</span><span class="o">.</span><span class="na">id</span><span class="o">,</span><span class="w"> </span><span class="nl">character:</span><span class="n">row</span><span class="o">.</span><span class="na">character</span><span class="o">],</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">recording</span><span class="w"> </span><span class="o">]</span>
+<a id="__codelineno-24-26" name="__codelineno-24-26"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-24-27" name="__codelineno-24-27"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<div class="highlight"><span class="filename">Identify languages</span><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
+</code></pre></div>
+<div class="highlight"><span class="filename">Identify languages</span><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="go"> N E X T F L O W   ~  version 24.10.4</span>
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>
+<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="go">Launching `main.nf` [voluminous_mcnulty] DSL2 - revision: f9bcfebabb</span>
+<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a>
+<a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a><span class="go">executor &gt;  local (7)</span>
+<a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a><span class="go">[4e/f722fe] IDENTIFY_LANGUAGE (7) [100%] 7 of 7 ✔</span>
+<a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a><span class="go">[[id:sampleA, character:squirrel], /workspaces/training/side-quests/metadata/work/eb/f7148ebdd898fbe1136bec6a714acb/bonjour.txt, fr]</span>
+<a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a><span class="go">[[id:sampleB, character:tux], /workspaces/training/side-quests/metadata/work/16/71d72410952c22cd0086d9bca03680/guten_tag.txt, de]</span>
+<a id="__codelineno-26-9" name="__codelineno-26-9" href="#__codelineno-26-9"></a><span class="go">[[id:sampleD, character:turkey], /workspaces/training/side-quests/metadata/work/c4/b7562adddc1cc0b7d414ec45d436eb/hello.txt, en]</span>
+<a id="__codelineno-26-10" name="__codelineno-26-10" href="#__codelineno-26-10"></a><span class="go">[[id:sampleC, character:sheep], /workspaces/training/side-quests/metadata/work/ea/04f5d979429e4455e14b9242fb3b45/hallo.txt, de]</span>
+<a id="__codelineno-26-11" name="__codelineno-26-11" href="#__codelineno-26-11"></a><span class="go">[[id:sampleF, character:moose], /workspaces/training/side-quests/metadata/work/5a/6c2b84bf8fadb98e28e216426be079/salut.txt, fr]</span>
+<a id="__codelineno-26-12" name="__codelineno-26-12" href="#__codelineno-26-12"></a><span class="go">[[id:sampleE, character:stegosaurus], /workspaces/training/side-quests/metadata/work/af/ee7c69bcab891c40d0529305f6b9e7/hola.txt, es]</span>
+<a id="__codelineno-26-13" name="__codelineno-26-13" href="#__codelineno-26-13"></a><span class="go">[[id:sampleG, character:turtle], /workspaces/training/side-quests/metadata/work/4e/f722fe47271ba7ebcd69afa42964ca/ciao.txt, it]</span>
+</code></pre></div>
+<p>Neat, for each of our files, we now have a language predicted.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>"de" stands for "deutsch", the German word for "german"</p>
+</div>
+<p>You may have noticed something else: we kept the metadata of our files and associated it with our new piece of information. We achieved this by adding the <code>meta</code> map to the output tuple in the process:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-27-12">12</a></span>
+<span class="normal"><a href="#__codelineno-27-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-27-12" name="__codelineno-27-12"></a><span class="nl">output:</span>
+<a id="__codelineno-27-13" name="__codelineno-27-13"></a><span class="n">tuple</span><span class="w"> </span><span class="nf">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">file</span><span class="o">),</span><span class="w"> </span><span class="n">stdout</span>
+</code></pre></div></td></tr></table></div>
+<p>This is a useful way to ensure the metadata stays connected with any new information that is generated.</p>
+<p>Another compelling reason to use meta maps in this way is that they make it easier to associate related results that share the same identifiers. In modern Nextflow, it's considered best practice to keep different types of results in separate channels until you actually need to combine them. However, at some point, you'll inevitably reach a stage in your workflow where combining those results becomes necessary.</p>
+<p>As you learned in "Hello Nextflow", you can't rely on the order of items in channels to match results across them. Instead, you must use keys to align data correctly - and meta maps provide an ideal structure for this purpose. We explore this use case in detail in <a href="../splitting_and_grouping/">Splitting &amp; Grouping</a>.</p>
+<h3 id="22-using-process-outputs-to-augment-metadata">2.2. Using process outputs to augment metadata<a class="headerlink" href="#22-using-process-outputs-to-augment-metadata" title="Permanent link">&para;</a></h3>
+<p>Given that this is more data about the files, let's add it to our meta map. We can use the <a href="https://www.nextflow.io/docs/latest/operator.html#map"><code>map</code> operator</a> again to create a new key <code>lang</code> and set the value to the predicted language:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">After</label><label for="__tabbed_6_2">Before</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-28">28</a></span>
+<span class="normal"><a href="#__codelineno-28-29">29</a></span>
+<span class="normal"><a href="#__codelineno-28-30">30</a></span>
+<span class="normal"><a href="#__codelineno-28-31">31</a></span>
+<span class="normal"><a href="#__codelineno-28-32">32</a></span>
+<span class="normal"><a href="#__codelineno-28-33">33</a></span>
+<span class="normal"><a href="#__codelineno-28-34">34</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-28-28" name="__codelineno-28-28"></a><span class="w">  </span><span class="n">ch_prediction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">IDENTIFY_LANGUAGE</span><span class="o">(</span><span class="n">ch_samplesheet</span><span class="o">)</span>
+<a id="__codelineno-28-29" name="__codelineno-28-29"></a><span class="hll"><span class="w">  </span><span class="n">ch_languages</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ch_prediction</span>
+</span><a id="__codelineno-28-30" name="__codelineno-28-30"></a><span class="hll"><span class="w">    </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="o">,</span><span class="w"> </span><span class="n">lang</span><span class="w"> </span><span class="o">-&gt;</span>
+</span><a id="__codelineno-28-31" name="__codelineno-28-31"></a><span class="hll"><span class="w">        </span><span class="o">[</span><span class="n">meta</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">[</span><span class="nl">lang:</span><span class="w"> </span><span class="n">lang</span><span class="o">],</span><span class="w"> </span><span class="n">file</span><span class="o">]</span>
+</span><a id="__codelineno-28-32" name="__codelineno-28-32"></a><span class="hll"><span class="w">    </span><span class="o">}</span>
+</span><a id="__codelineno-28-33" name="__codelineno-28-33"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+<a id="__codelineno-28-34" name="__codelineno-28-34"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-29-28">28</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-29-28" name="__codelineno-29-28"></a><span class="n">ch_prediction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">IDENTIFY_LANGUAGE</span><span class="o">(</span><span class="n">ch_samplesheet</span><span class="o">)</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<p>The <code>map</code> operator takes each channel element and processes it to create a modified version. Inside the closure <code>{ meta, file, lang -&gt; ... }</code>, we then take the existing <code>meta</code> map, create a new map <code>[lang:lang]</code>, and merge both together using <code>+</code>.</p>
+<p>The <code>+</code> operator in Groovy merges two maps together. So if our original <code>meta</code> was <code>[id:sampleA, character:squirrel]</code>, then <code>meta + [lang:'fr']</code> creates a new map: <code>[id:sampleA, character:squirrel, lang:fr]</code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code>+</code> notation with maps creates an entirely new map object, which is what we want. If we'd done something like <code>meta.lang = lang</code> we'd have been modifying the original object, which can lead to unpredictable effects.</p>
+</div>
+<div class="highlight"><span class="filename">View new meta map key</span><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf<span class="w"> </span>-resume
+</code></pre></div>
+<div class="highlight"><span class="filename">View new meta map key</span><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="go"> N E X T F L O W   ~  version 24.10.4</span>
+<a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>
+<a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="go">Launching `main.nf` [cheeky_fermat] DSL2 - revision: d096281ee4</span>
+<a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a>
+<a id="__codelineno-31-5" name="__codelineno-31-5" href="#__codelineno-31-5"></a><span class="go">[4e/f722fe] IDENTIFY_LANGUAGE (7) [100%] 7 of 7, cached: 7 ✔</span>
+<a id="__codelineno-31-6" name="__codelineno-31-6" href="#__codelineno-31-6"></a><span class="go">[[id:sampleA, character:squirrel, lang:fr], /workspaces/training/side-quests/metadata/work/eb/f7148ebdd898fbe1136bec6a714acb/bonjour.txt]</span>
+<a id="__codelineno-31-7" name="__codelineno-31-7" href="#__codelineno-31-7"></a><span class="go">[[id:sampleB, character:tux, lang:de], /workspaces/training/side-quests/metadata/work/16/71d72410952c22cd0086d9bca03680/guten_tag.txt]</span>
+<a id="__codelineno-31-8" name="__codelineno-31-8" href="#__codelineno-31-8"></a><span class="go">[[id:sampleC, character:sheep, lang:de], /workspaces/training/side-quests/metadata/work/ea/04f5d979429e4455e14b9242fb3b45/hallo.txt]</span>
+<a id="__codelineno-31-9" name="__codelineno-31-9" href="#__codelineno-31-9"></a><span class="go">[[id:sampleD, character:turkey, lang:en], /workspaces/training/side-quests/metadata/work/c4/b7562adddc1cc0b7d414ec45d436eb/hello.txt]</span>
+<a id="__codelineno-31-10" name="__codelineno-31-10" href="#__codelineno-31-10"></a><span class="go">[[id:sampleF, character:moose, lang:fr], /workspaces/training/side-quests/metadata/work/5a/6c2b84bf8fadb98e28e216426be079/salut.txt]</span>
+<a id="__codelineno-31-11" name="__codelineno-31-11" href="#__codelineno-31-11"></a><span class="go">[[id:sampleE, character:stegosaurus, lang:es], /workspaces/training/side-quests/metadata/work/af/ee7c69bcab891c40d0529305f6b9e7/hola.txt]</span>
+<a id="__codelineno-31-12" name="__codelineno-31-12" href="#__codelineno-31-12"></a><span class="go">[[id:sampleG, character:turtle, lang:it], /workspaces/training/side-quests/metadata/work/4e/f722fe47271ba7ebcd69afa42964ca/ciao.txt]</span>
+</code></pre></div>
+<p>Nice, we expanded our meta map with new information we gathered in the pipeline. After running the language prediction, each element in the output channel looks like this:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="go">[meta, file, lang]  // e.g. [[id:sampleA, character:squirrel], bonjour.txt, fr]</span>
+</code></pre></div>
+<!-- TODO Should we also show how to remove a key using subMap?! -->
+
+<h3 id="23-assign-a-language-group-using-conditionals">2.3. Assign a language group using conditionals<a class="headerlink" href="#23-assign-a-language-group-using-conditionals" title="Permanent link">&para;</a></h3>
+<p>Now that we have our language predictions, let's use the information to assign them into new groups. In our example data, we have provided data sets that belong either to <code>germanic</code> (either English or German) or <code>romance</code> (French, Spanish, Italian) languages.</p>
+<p>We can add another <code>map</code> operator to assign either group (add this below your last map operation).</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">After</label><label for="__tabbed_7_2">Before</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-33-31">31</a></span>
+<span class="normal"><a href="#__codelineno-33-32">32</a></span>
+<span class="normal"><a href="#__codelineno-33-33">33</a></span>
+<span class="normal"><a href="#__codelineno-33-34">34</a></span>
+<span class="normal"><a href="#__codelineno-33-35">35</a></span>
+<span class="normal"><a href="#__codelineno-33-36">36</a></span>
+<span class="normal"><a href="#__codelineno-33-37">37</a></span>
+<span class="normal"><a href="#__codelineno-33-38">38</a></span>
+<span class="normal"><a href="#__codelineno-33-39">39</a></span>
+<span class="normal"><a href="#__codelineno-33-40">40</a></span>
+<span class="normal"><a href="#__codelineno-33-41">41</a></span>
+<span class="normal"><a href="#__codelineno-33-42">42</a></span>
+<span class="normal"><a href="#__codelineno-33-43">43</a></span>
+<span class="normal"><a href="#__codelineno-33-44">44</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-33-31" name="__codelineno-33-31"></a><span class="o">}</span>
+<a id="__codelineno-33-32" name="__codelineno-33-32"></a><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span>
+<a id="__codelineno-33-33" name="__codelineno-33-33"></a>
+<a id="__codelineno-33-34" name="__codelineno-33-34"></a><span class="hll"><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">lang_group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;unknown&quot;</span>
+</span><a id="__codelineno-33-35" name="__codelineno-33-35"></a><span class="hll"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">(</span><span class="n">meta</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s2">&quot;de&quot;</span><span class="o">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s1">&#39;en&#39;</span><span class="o">))</span><span class="w"> </span><span class="o">{</span>
+</span><a id="__codelineno-33-36" name="__codelineno-33-36"></a><span class="hll"><span class="w">        </span><span class="n">lang_group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;germanic&quot;</span>
+</span><a id="__codelineno-33-37" name="__codelineno-33-37"></a><span class="hll"><span class="w">    </span><span class="o">}</span>
+</span><a id="__codelineno-33-38" name="__codelineno-33-38"></a><span class="hll"><span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="o">(</span><span class="n">meta</span><span class="o">.</span><span class="na">lang</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">[</span><span class="s2">&quot;fr&quot;</span><span class="o">,</span><span class="w"> </span><span class="s2">&quot;es&quot;</span><span class="o">,</span><span class="w"> </span><span class="s2">&quot;it&quot;</span><span class="o">])</span><span class="w"> </span><span class="o">{</span>
+</span><a id="__codelineno-33-39" name="__codelineno-33-39"></a><span class="hll"><span class="w">        </span><span class="n">lang_group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;romance&quot;</span>
+</span><a id="__codelineno-33-40" name="__codelineno-33-40"></a><span class="hll"><span class="w">    </span><span class="o">}</span>
+</span><a id="__codelineno-33-41" name="__codelineno-33-41"></a><span class="hll">
+</span><a id="__codelineno-33-42" name="__codelineno-33-42"></a><span class="hll"><span class="w">    </span><span class="o">[</span><span class="n">meta</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">[</span><span class="nl">lang_group:</span><span class="w"> </span><span class="n">lang_group</span><span class="o">],</span><span class="w"> </span><span class="n">file</span><span class="o">]</span>
+</span><a id="__codelineno-33-43" name="__codelineno-33-43"></a><span class="o">}</span>
+<a id="__codelineno-33-44" name="__codelineno-33-44"></a><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-34-31">31</a></span>
+<span class="normal"><a href="#__codelineno-34-32">32</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-34-31" name="__codelineno-34-31"></a><span class="o">}</span>
+<a id="__codelineno-34-32" name="__codelineno-34-32"></a><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<p>Let's rerun it</p>
+<div class="highlight"><span class="filename">View language groups</span><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf<span class="w"> </span>-resume
+</code></pre></div>
+<div class="highlight"><span class="filename">View language groups</span><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="go"> N E X T F L O W   ~  version 24.10.4</span>
+<a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a>
+<a id="__codelineno-36-3" name="__codelineno-36-3" href="#__codelineno-36-3"></a><span class="go">Launching `main.nf` [wise_almeida] DSL2 - revision: 46778c3cd0</span>
+<a id="__codelineno-36-4" name="__codelineno-36-4" href="#__codelineno-36-4"></a>
+<a id="__codelineno-36-5" name="__codelineno-36-5" href="#__codelineno-36-5"></a><span class="go">[da/652cc6] IDENTIFY_LANGUAGE (7) [100%] 7 of 7, cached: 7 ✔</span>
+<a id="__codelineno-36-6" name="__codelineno-36-6" href="#__codelineno-36-6"></a><span class="go">[[id:sampleA, character:squirrel, lang:fr, lang_group:romance], /workspaces/training/side-quests/metadata/data/bonjour.txt]</span>
+<a id="__codelineno-36-7" name="__codelineno-36-7" href="#__codelineno-36-7"></a><span class="go">[[id:sampleB, character:tux, lang:de, lang_group:germanic], /workspaces/training/side-quests/metadata/data/guten_tag.txt]</span>
+<a id="__codelineno-36-8" name="__codelineno-36-8" href="#__codelineno-36-8"></a><span class="go">[[id:sampleC, character:sheep, lang:de, lang_group:germanic], /workspaces/training/side-quests/metadata/data/hallo.txt]</span>
+<a id="__codelineno-36-9" name="__codelineno-36-9" href="#__codelineno-36-9"></a><span class="go">[[id:sampleD, character:turkey, lang:en, lang_group:germanic], /workspaces/training/side-quests/metadata/data/hello.txt]</span>
+<a id="__codelineno-36-10" name="__codelineno-36-10" href="#__codelineno-36-10"></a><span class="go">[[id:sampleE, character:stegosaurus, lang:es, lang_group:romance], /workspaces/training/side-quests/metadata/data/hola.txt]</span>
+<a id="__codelineno-36-11" name="__codelineno-36-11" href="#__codelineno-36-11"></a><span class="go">[[id:sampleF, character:moose, lang:fr, lang_group:romance], /workspaces/training/side-quests/metadata/data/salut.txt]</span>
+<a id="__codelineno-36-12" name="__codelineno-36-12" href="#__codelineno-36-12"></a><span class="go">[[id:sampleG, character:turtle, lang:it, lang_group:romance], /workspaces/training/side-quests/metadata/data/ciao.txt]</span>
+</code></pre></div>
+<p>Let's understand how this transformation works. The <code>map</code> operator here again takes a closure that processes each element in the channel. Inside the closure, we're using an if-clause to create a new language group classification.</p>
+<p>Here's what's happening step by step:</p>
+<ul>
+<li>Create a new field <code>lang_group</code>: We set a default to <code>unknown</code></li>
+<li>Extract existing metadata: We access <code>meta.lang</code> (the language we predicted earlier) from the existing meta map</li>
+<li>Apply conditional logic: We use an if-clause to determine the language group based on the language: Is <code>meta.lang</code> either <code>de</code> or <code>en</code>, we re-assign <code>lang_group</code> to <code>germanic</code>, if <code>fr</code>, <code>es</code>, or <code>it</code>, then we re-assign to <code>romance</code></li>
+<li>Merge with existing metadata: We use <code>meta + [lang_group:lang_group]</code> in the same way as before to combine the existing meta map with our new field</li>
+</ul>
+<p>The resulting channel elements maintain their <code>[meta, file]</code> structure, but the meta map now includes this new classification.</p>
+<h3 id="takeaway_1">Takeaway<a class="headerlink" href="#takeaway_1" title="Permanent link">&para;</a></h3>
+<p>In this section, you've learned how to :</p>
+<ul>
+<li><strong>Apply input metadata to output channels</strong>: Copying metadata in this way allows us to associate results later on based on metadata content.</li>
+<li><strong>Create custom keys</strong>: You created two new keys in your meta map, merging them with <code>meta + [new_key:value]</code> into the existing meta map. One based on a computed value from a process, and one based on a condition you set in the <code>map</code> operator.</li>
+</ul>
+<p>These allow you to associate new and existing metadata with files as you progress through your pipeline.</p>
+<hr />
+<h2 id="3-use-meta-map-information-in-a-process">3. Use meta map information in a process<a class="headerlink" href="#3-use-meta-map-information-in-a-process" title="Permanent link">&para;</a></h2>
+<p>Let's make some fun characters say the phrases from the files our channel. In the <a href="../../hello_nextflow/05_hello_containers/">hello-nextflow training</a>, you already encountered the <code>cowpy</code> package, a python implementation of a tool called <code>cowsay</code> that generates ASCII art to display arbitrary text inputs in a fun way. We will re-use a process from there.</p>
+<p>Copy in the process before your workflow block:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="8:2"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">After</label><label for="__tabbed_8_2">Before</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-37-20">20</a></span>
+<span class="normal"><a href="#__codelineno-37-21">21</a></span>
+<span class="normal"><a href="#__codelineno-37-22">22</a></span>
+<span class="normal"><a href="#__codelineno-37-23">23</a></span>
+<span class="normal"><a href="#__codelineno-37-24">24</a></span>
+<span class="normal"><a href="#__codelineno-37-25">25</a></span>
+<span class="normal"><a href="#__codelineno-37-26">26</a></span>
+<span class="normal"><a href="#__codelineno-37-27">27</a></span>
+<span class="normal"><a href="#__codelineno-37-28">28</a></span>
+<span class="normal"><a href="#__codelineno-37-29">29</a></span>
+<span class="normal"><a href="#__codelineno-37-30">30</a></span>
+<span class="normal"><a href="#__codelineno-37-31">31</a></span>
+<span class="normal"><a href="#__codelineno-37-32">32</a></span>
+<span class="normal"><a href="#__codelineno-37-33">33</a></span>
+<span class="normal"><a href="#__codelineno-37-34">34</a></span>
+<span class="normal"><a href="#__codelineno-37-35">35</a></span>
+<span class="normal"><a href="#__codelineno-37-36">36</a></span>
+<span class="normal"><a href="#__codelineno-37-37">37</a></span>
+<span class="normal"><a href="#__codelineno-37-38">38</a></span>
+<span class="normal"><a href="#__codelineno-37-39">39</a></span>
+<span class="normal"><a href="#__codelineno-37-40">40</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-37-20" name="__codelineno-37-20"></a><span class="cm">/*</span>
+<a id="__codelineno-37-21" name="__codelineno-37-21"></a><span class="cm"> * Generate ASCII art with cowpy</span>
+<a id="__codelineno-37-22" name="__codelineno-37-22"></a><span class="cm">*/</span>
+<a id="__codelineno-37-23" name="__codelineno-37-23"></a><span class="n">process</span><span class="w"> </span><span class="n">COWPY</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-37-24" name="__codelineno-37-24"></a>
+<a id="__codelineno-37-25" name="__codelineno-37-25"></a><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="s2">&quot;results/&quot;</span><span class="o">,</span><span class="w"> </span><span class="nl">mode:</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+<a id="__codelineno-37-26" name="__codelineno-37-26"></a>
+<a id="__codelineno-37-27" name="__codelineno-37-27"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s1">&#39;community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273&#39;</span>
+<a id="__codelineno-37-28" name="__codelineno-37-28"></a>
+<a id="__codelineno-37-29" name="__codelineno-37-29"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-37-30" name="__codelineno-37-30"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">input_file</span><span class="o">)</span>
+<a id="__codelineno-37-31" name="__codelineno-37-31"></a>
+<a id="__codelineno-37-32" name="__codelineno-37-32"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-37-33" name="__codelineno-37-33"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">&quot;cowpy-${input_file}&quot;</span><span class="o">)</span>
+<a id="__codelineno-37-34" name="__codelineno-37-34"></a>
+<a id="__codelineno-37-35" name="__codelineno-37-35"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-37-36" name="__codelineno-37-36"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-37-37" name="__codelineno-37-37"></a><span class="s2">    cat $input_file | cowpy -c &quot;stegosaurus&quot; &gt; cowpy-${input_file}</span>
+<a id="__codelineno-37-38" name="__codelineno-37-38"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-37-39" name="__codelineno-37-39"></a>
+<a id="__codelineno-37-40" name="__codelineno-37-40"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-38-20">20</a></span>
+<span class="normal"><a href="#__codelineno-38-21">21</a></span>
+<span class="normal"><a href="#__codelineno-38-22">22</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-38-20" name="__codelineno-38-20"></a><span class="n">workflow</span><span class="o">{</span>
+<a id="__codelineno-38-21" name="__codelineno-38-21"></a><span class="w">  </span><span class="o">...</span>
+<a id="__codelineno-38-22" name="__codelineno-38-22"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<h3 id="31-use-meta-map-information-in-the-process-definition">3.1. Use meta map information in the process definition<a class="headerlink" href="#31-use-meta-map-information-in-the-process-definition" title="Permanent link">&para;</a></h3>
+<p>Let's run our files through <code>COWPY</code> and remove our <code>view</code> statement:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="9:2"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">After</label><label for="__tabbed_9_2">Before</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-39-59">59</a></span>
+<span class="normal"><a href="#__codelineno-39-60">60</a></span>
+<span class="normal"><a href="#__codelineno-39-61">61</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-39-59" name="__codelineno-39-59"></a><span class="w">        </span><span class="o">[</span><span class="n">meta</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">[</span><span class="nl">lang_group:</span><span class="w"> </span><span class="n">lang_group</span><span class="o">],</span><span class="w"> </span><span class="n">file</span><span class="o">]</span>
+<a id="__codelineno-39-60" name="__codelineno-39-60"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-39-61" name="__codelineno-39-61"></a><span class="hll"><span class="n">COWPY</span><span class="o">(</span><span class="n">ch_languages</span><span class="o">))</span>
+</span></code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-40-59">59</a></span>
+<span class="normal"><a href="#__codelineno-40-60">60</a></span>
+<span class="normal"><a href="#__codelineno-40-61">61</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-40-59" name="__codelineno-40-59"></a><span class="w">        </span><span class="o">[</span><span class="w"> </span><span class="n">meta</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">[</span><span class="nl">lang_group:</span><span class="n">lang_group</span><span class="o">],</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">]</span>
+<a id="__codelineno-40-60" name="__codelineno-40-60"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-40-61" name="__codelineno-40-61"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<p>At the moment, all our comedy creatures are published into the <code>results</code> folder. Given we have been trying to figure out what languages our samples were in, let's group the samples by language in the output directory.
+Earlier, we added the predicted language to the <code>meta</code> map. We can access this <code>key</code> in the process and use it in the <code>publishDir</code> directive:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="10:2"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><input id="__tabbed_10_2" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">After</label><label for="__tabbed_10_2">Before</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-41-23">23</a></span>
+<span class="normal"><a href="#__codelineno-41-24">24</a></span>
+<span class="normal"><a href="#__codelineno-41-25">25</a></span>
+<span class="normal"><a href="#__codelineno-41-26">26</a></span>
+<span class="normal"><a href="#__codelineno-41-27">27</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-41-23" name="__codelineno-41-23"></a><span class="n">process</span><span class="w"> </span><span class="n">COWPY</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-41-24" name="__codelineno-41-24"></a>
+<a id="__codelineno-41-25" name="__codelineno-41-25"></a><span class="hll"><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="s2">&quot;results/${meta.lang_group}&quot;</span><span class="o">,</span><span class="w"> </span><span class="nl">mode:</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+</span><a id="__codelineno-41-26" name="__codelineno-41-26"></a>
+<a id="__codelineno-41-27" name="__codelineno-41-27"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s1">&#39;community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273&#39;</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-42-23">23</a></span>
+<span class="normal"><a href="#__codelineno-42-24">24</a></span>
+<span class="normal"><a href="#__codelineno-42-25">25</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-42-23" name="__codelineno-42-23"></a><span class="n">process</span><span class="w"> </span><span class="n">COWPY</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-42-24" name="__codelineno-42-24"></a>
+<a id="__codelineno-42-25" name="__codelineno-42-25"></a><span class="w">  </span><span class="n">container</span><span class="w"> </span><span class="s1">&#39;community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273&#39;</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<p>Let's run this:</p>
+<div class="highlight"><span class="filename">Use cowpy</span><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
+</code></pre></div>
+<p>You should now see a new folder called <code>results</code>:</p>
+<div class="highlight"><span class="filename">Results folder</span><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a><span class="go">results/</span>
+<a id="__codelineno-44-2" name="__codelineno-44-2" href="#__codelineno-44-2"></a><span class="go">├── germanic</span>
+<a id="__codelineno-44-3" name="__codelineno-44-3" href="#__codelineno-44-3"></a><span class="go">│   ├── cowpy-guten_tag.txt</span>
+<a id="__codelineno-44-4" name="__codelineno-44-4" href="#__codelineno-44-4"></a><span class="go">│   ├── cowpy-hallo.txt</span>
+<a id="__codelineno-44-5" name="__codelineno-44-5" href="#__codelineno-44-5"></a><span class="go">│   └── cowpy-hello.txt</span>
+<a id="__codelineno-44-6" name="__codelineno-44-6" href="#__codelineno-44-6"></a><span class="go">└── romance</span>
+<a id="__codelineno-44-7" name="__codelineno-44-7" href="#__codelineno-44-7"></a><span class="go">    ├── cowpy-bonjour.txt</span>
+<a id="__codelineno-44-8" name="__codelineno-44-8" href="#__codelineno-44-8"></a><span class="go">    ├── cowpy-ciao.txt</span>
+<a id="__codelineno-44-9" name="__codelineno-44-9" href="#__codelineno-44-9"></a><span class="go">    ├── cowpy-hola.txt</span>
+<a id="__codelineno-44-10" name="__codelineno-44-10" href="#__codelineno-44-10"></a><span class="go">    └── cowpy-salut.txt</span>
+</code></pre></div>
+<p>Success! All our phrases are correctly sorted and we now see which of them correspond to which language.</p>
+<p>Let's take a look at <code>cowpy-salut.txt</code>:</p>
+<div class="highlight"><span class="filename">cowpy-salut.txt</span><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a><span class="go"> ____________________</span>
+<a id="__codelineno-45-2" name="__codelineno-45-2" href="#__codelineno-45-2"></a><span class="go">/ Salut, ça va?      \</span>
+<a id="__codelineno-45-3" name="__codelineno-45-3" href="#__codelineno-45-3"></a><span class="go">\ à plus dans le bus /</span>
+<a id="__codelineno-45-4" name="__codelineno-45-4" href="#__codelineno-45-4"></a><span class="go"> --------------------</span>
+<a id="__codelineno-45-5" name="__codelineno-45-5" href="#__codelineno-45-5"></a><span class="go">\                             .       .</span>
+<a id="__codelineno-45-6" name="__codelineno-45-6" href="#__codelineno-45-6"></a><span class="go"> \                           / `.   .&#39; &quot;</span>
+<a id="__codelineno-45-7" name="__codelineno-45-7" href="#__codelineno-45-7"></a><span class="go">  \                  .---.  &lt;    &gt; &lt;    &gt;  .---.</span>
+<a id="__codelineno-45-8" name="__codelineno-45-8" href="#__codelineno-45-8"></a><span class="go">   \                 |    \  \ - ~ ~ - /  /    |</span>
+<a id="__codelineno-45-9" name="__codelineno-45-9" href="#__codelineno-45-9"></a><span class="go">         _____          ..-~             ~-..-~</span>
+<a id="__codelineno-45-10" name="__codelineno-45-10" href="#__codelineno-45-10"></a><span class="go">        |     |   \~~~\.&#39;                    `./~~~/</span>
+<a id="__codelineno-45-11" name="__codelineno-45-11" href="#__codelineno-45-11"></a><span class="go">       ---------   \__/                        \__/</span>
+<a id="__codelineno-45-12" name="__codelineno-45-12" href="#__codelineno-45-12"></a><span class="go">      .&#39;  O    \     /               /       \  &quot;</span>
+<a id="__codelineno-45-13" name="__codelineno-45-13" href="#__codelineno-45-13"></a><span class="go">     (_____,    `._.&#39;               |         }  \/~~~/</span>
+<a id="__codelineno-45-14" name="__codelineno-45-14" href="#__codelineno-45-14"></a><span class="go">      `----.          /       }     |        /    \__/</span>
+<a id="__codelineno-45-15" name="__codelineno-45-15" href="#__codelineno-45-15"></a><span class="go">            `-.      |       /      |       /      `. ,~~|</span>
+<a id="__codelineno-45-16" name="__codelineno-45-16" href="#__codelineno-45-16"></a><span class="go">                ~-.__|      /_ - ~ ^|      /- _      `..-&#39;</span>
+<a id="__codelineno-45-17" name="__codelineno-45-17" href="#__codelineno-45-17"></a><span class="go">                     |     /        |     /     ~-.     `-. _  _  _</span>
+<a id="__codelineno-45-18" name="__codelineno-45-18" href="#__codelineno-45-18"></a><span class="go">                     |_____|        |_____|         ~ - . _ _ _ _ _&gt;</span>
+</code></pre></div>
+<p>Look through the other files. All phrases should be spoken by the fashionable stegosaurus.</p>
+<p>How did this work? The <code>publishDir</code> directive is evaluated at runtime when the process executes. Each process task gets its own meta map from the input tuple When the directive is evaluated, <code>${meta.lang_group}</code> is replaced with the actual group language value for that dataset creating the dynamic paths like <code>results/romance</code>.</p>
+<h3 id="32-customize-the-character">3.2. Customize the character<a class="headerlink" href="#32-customize-the-character" title="Permanent link">&para;</a></h3>
+<p>In our datasheet, we have another column: <code>character</code>. To tailor the tool parameters per file, we can also access information from the <code>meta</code> map in the script section. This is really useful in cases where a tool should have different parameters for each file.</p>
+<p>Let's customize the characters by changing the <code>cowpy</code> command:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="11:2"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><input id="__tabbed_11_2" name="__tabbed_11" type="radio" /><div class="tabbed-labels"><label for="__tabbed_11_1">After</label><label for="__tabbed_11_2">Before</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-46-37">37</a></span>
+<span class="normal"><a href="#__codelineno-46-38">38</a></span>
+<span class="normal"><a href="#__codelineno-46-39">39</a></span>
+<span class="normal"><a href="#__codelineno-46-40">40</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-46-37" name="__codelineno-46-37"></a><span class="nl">script:</span>
+<a id="__codelineno-46-38" name="__codelineno-46-38"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-46-39" name="__codelineno-46-39"></a><span class="hll"><span class="s2">cat $input_file | cowpy -c ${meta.character} &gt; cowpy-${input_file}</span>
+</span><a id="__codelineno-46-40" name="__codelineno-46-40"></a><span class="s2">&quot;&quot;&quot;</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-47-37">37</a></span>
+<span class="normal"><a href="#__codelineno-47-38">38</a></span>
+<span class="normal"><a href="#__codelineno-47-39">39</a></span>
+<span class="normal"><a href="#__codelineno-47-40">40</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-47-37" name="__codelineno-47-37"></a><span class="nl">script:</span>
+<a id="__codelineno-47-38" name="__codelineno-47-38"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-47-39" name="__codelineno-47-39"></a><span class="s2">cat $input_file | cowpy -c &quot;stegosaurus&quot; &gt; cowpy-${input_file}</span>
+<a id="__codelineno-47-40" name="__codelineno-47-40"></a><span class="s2">&quot;&quot;&quot;</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<p>Let's run this:</p>
+<div class="highlight"><span class="filename">Use cowpy</span><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf<span class="w"> </span>-resume
+</code></pre></div>
+<p>and take another look at our french phrase:</p>
+<div class="highlight"><span class="filename">romance/cowpy-salut.txt</span><pre><span></span><code><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a><span class="go"> ____________________</span>
+<a id="__codelineno-49-2" name="__codelineno-49-2" href="#__codelineno-49-2"></a><span class="go">/ Salut, ça va?      \</span>
+<a id="__codelineno-49-3" name="__codelineno-49-3" href="#__codelineno-49-3"></a><span class="go">\ à plus dans le bus /</span>
+<a id="__codelineno-49-4" name="__codelineno-49-4" href="#__codelineno-49-4"></a><span class="go"> --------------------</span>
+<a id="__codelineno-49-5" name="__codelineno-49-5" href="#__codelineno-49-5"></a><span class="go">  \</span>
+<a id="__codelineno-49-6" name="__codelineno-49-6" href="#__codelineno-49-6"></a><span class="go">   \   \_\_    _/_/</span>
+<a id="__codelineno-49-7" name="__codelineno-49-7" href="#__codelineno-49-7"></a><span class="go">    \      \__/</span>
+<a id="__codelineno-49-8" name="__codelineno-49-8" href="#__codelineno-49-8"></a><span class="go">           (oo)\_______</span>
+<a id="__codelineno-49-9" name="__codelineno-49-9" href="#__codelineno-49-9"></a><span class="go">           (__)\       )\/\</span>
+<a id="__codelineno-49-10" name="__codelineno-49-10" href="#__codelineno-49-10"></a><span class="go">               ||----w |</span>
+<a id="__codelineno-49-11" name="__codelineno-49-11" href="#__codelineno-49-11"></a><span class="go">               ||     ||</span>
+</code></pre></div>
+<p>This approach differs from using pipeline parameters (<code>params</code>), which generally apply the same configuration to all files in your workflow. By leveraging metadata applied to each item in a channel, you can fine-tune process behavior on a per-file basis.</p>
+<p>This example shows you what's possible when you have a meta map, but it's worth noting a limitation of this approach. By using a property of the meta map in the script block, we introduce a hard requirement on the properties that must be present. Anyone running with a sample sheet that did not contain the <code>character</code> property would encounter an error. We could set workflow-level validation to deal with that, but it's also better practice to define the process with such hard requirements as explicit inputs:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-50-2" name="__codelineno-50-2" href="#__codelineno-50-2"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">character</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">input_file</span><span class="o">)</span>
+</code></pre></div>
+<p>... then we extract the metadata property at the workflow level before running the process:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a><span class="w">        </span><span class="n">COWPY</span><span class="o">(</span><span class="n">ch_languages</span><span class="o">.</span><span class="na">map</span><span class="o">{</span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="o">[</span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">character</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="o">]</span><span class="w"> </span><span class="o">)</span>
+</code></pre></div>
+<p>This way, if we fail to provide the expected input to the process, Nextflow will be much clearer with us what the problem is.</p>
+<p>This highlights a careful balance: The meta map is excellent for keeping channel structure clean by preventing arbitrary channel structures with inputs that are not relevant for every process. However, for mandatory elements that are directly referenced in a process, extracting them as explicit inputs creates more robust code.</p>
+<h3 id="takeaway_2">Takeaway<a class="headerlink" href="#takeaway_2" title="Permanent link">&para;</a></h3>
+<p>In this section, you've learned how to:</p>
+<ul>
+<li>
+<p><strong>Tweak directives using meta values</strong>: Using meta map values in <code>publishDir</code> directives to create dynamic output paths based on the file's metadata</p>
+</li>
+<li>
+<p><strong>Tweak the script section based on meta values</strong>: Customizing tool parameters per file using meta information in the <code>script</code> section</p>
+</li>
+</ul>
+<hr />
+<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
+<p>In this side quest, you've explored how to effectively work with metadata in Nextflow workflows. This pattern of keeping metadata explicit and attached to the data is a core best practice in Nextflow that enables building robust, maintainable bioinformatics workflows.</p>
+<p>Here's what you've learned:</p>
+<ol>
+<li>
+<p><strong>Reading and Structuring Metadata</strong>: Reading CSV files and creating organized metadata maps that stay associated with your data files</p>
+</li>
+<li>
+<p><strong>Expanding Metadata During Workflow</strong>: Adding new information to your metadata as your pipeline progresses by adding process outputs and deriving values through conditional logic</p>
+</li>
+<li>
+<p><strong>Customizing Process Behavior</strong>: Using metadata to adapt how processes handle different files</p>
+</li>
+</ol>
+<p>This approach offers several advantages over hardcoding file information:</p>
+<ul>
+<li>File metadata stays associated with files throughout the workflow</li>
+<li>Process behavior can be customized per file</li>
+<li>Output organization can reflect file metadata</li>
+<li>File information can be expanded during pipeline execution</li>
+</ul>
+<h3 id="key-concepts">Key Concepts<a class="headerlink" href="#key-concepts" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Reading Datasheets &amp; creating meta maps</strong></li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a>Channel.fromPath(&#39;samplesheet.csv&#39;)
+<a id="__codelineno-52-2" name="__codelineno-52-2" href="#__codelineno-52-2"></a>  .splitCsv(header: true)
+<a id="__codelineno-52-3" name="__codelineno-52-3" href="#__codelineno-52-3"></a>  .map { row -&gt;
+<a id="__codelineno-52-4" name="__codelineno-52-4" href="#__codelineno-52-4"></a>      [ [id:row.id, character:row.character], row.recording ]
+<a id="__codelineno-52-5" name="__codelineno-52-5" href="#__codelineno-52-5"></a>  }
+</code></pre></div>
+<ul>
+<li>
+<p><strong>Adding new keys to the meta map</strong></p>
+</li>
+<li>
+<p>based on process output:</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a>.map { meta, file, lang -&gt;
+<a id="__codelineno-53-2" name="__codelineno-53-2" href="#__codelineno-53-2"></a>  [ meta + [lang:lang], file ]
+<a id="__codelineno-53-3" name="__codelineno-53-3" href="#__codelineno-53-3"></a>}
+</code></pre></div>
+<ol>
+<li>and using a conditional clause</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1" href="#__codelineno-54-1"></a>.map{ meta, file -&gt;
+<a id="__codelineno-54-2" name="__codelineno-54-2" href="#__codelineno-54-2"></a>    if ( meta.lang.equals(&quot;de&quot;) || meta.lang.equals(&#39;en&#39;) ){
+<a id="__codelineno-54-3" name="__codelineno-54-3" href="#__codelineno-54-3"></a>        lang_group = &quot;germanic&quot;
+<a id="__codelineno-54-4" name="__codelineno-54-4" href="#__codelineno-54-4"></a>    } else if ( meta.lang in [&quot;fr&quot;, &quot;es&quot;, &quot;it&quot;] ) {
+<a id="__codelineno-54-5" name="__codelineno-54-5" href="#__codelineno-54-5"></a>        lang_group = &quot;romance&quot;
+<a id="__codelineno-54-6" name="__codelineno-54-6" href="#__codelineno-54-6"></a>    } else {
+<a id="__codelineno-54-7" name="__codelineno-54-7" href="#__codelineno-54-7"></a>        lang_group = &quot;unknown&quot;
+<a id="__codelineno-54-8" name="__codelineno-54-8" href="#__codelineno-54-8"></a>    }
+<a id="__codelineno-54-9" name="__codelineno-54-9" href="#__codelineno-54-9"></a>}
+</code></pre></div>
+<ul>
+<li><strong>Using meta values in Process Directives</strong></li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-55-1" name="__codelineno-55-1" href="#__codelineno-55-1"></a>publishDir &quot;results/${meta.lang_group}&quot;, mode: &#39;copy&#39;
+</code></pre></div>
+<ul>
+<li><strong>Adapting tool parameters for individual files</strong></li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-56-1" name="__codelineno-56-1" href="#__codelineno-56-1"></a>cat $input_file | cowpy -c ${meta.character} &gt; cowpy-${input_file}
+</code></pre></div>
+<h2 id="resources">Resources<a class="headerlink" href="#resources" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://www.nextflow.io/docs/latest/operator.html#map">map</a></li>
+<li><a href="https://www.nextflow.io/docs/latest/process.html#outputs">stdout</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Retour en haut de la page
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Pied de page" >
+        
+          
+          <a href="../ide_features/" class="md-footer__link md-footer__link--prev" aria-label="Précédent: Nextflow Development Environment Walkthrough">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Précédent
+              </span>
+              <div class="md-ellipsis">
+                Nextflow Development Environment Walkthrough
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../working_with_files/" class="md-footer__link md-footer__link--next" aria-label="Suivant: Working with Files">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Suivant
+              </span>
+              <div class="md-ellipsis">
+                Working with Files
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  <div>
+    Copyright &copy; 2020-2025,
+    <a href="https://seqera.io" target="_blank" rel="noopener">Seqera</a>.
+  </div>
+  <div class="footer_cc_link">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512">
+      <!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.-->
+      <path
+        d="m245.83 214.87-33.22 17.28c-9.43-19.58-25.24-19.93-27.46-19.93-22.13 0-33.22 14.61-33.22 43.84 0 23.57 9.21 43.84 33.22 43.84 14.47 0 24.65-7.09 30.57-21.26l30.55 15.5c-6.17 11.51-25.69 38.98-65.1 38.98-22.6 0-73.96-10.32-73.96-77.05 0-58.69 43-77.06 72.63-77.06 30.72-.01 52.7 11.95 65.99 35.86zm143.05 0-32.78 17.28c-9.5-19.77-25.72-19.93-27.9-19.93-22.14 0-33.22 14.61-33.22 43.84 0 23.55 9.23 43.84 33.22 43.84 14.45 0 24.65-7.09 30.54-21.26l31 15.5c-2.1 3.75-21.39 38.98-65.09 38.98-22.69 0-73.96-9.87-73.96-77.05 0-58.67 42.97-77.06 72.63-77.06 30.71-.01 52.58 11.95 65.56 35.86zM247.56 8.05C104.74 8.05 0 123.11 0 256.05c0 138.49 113.6 248 247.56 248 129.93 0 248.44-100.87 248.44-248 0-137.87-106.62-248-248.44-248zm.87 450.81c-112.54 0-203.7-93.04-203.7-202.81 0-105.42 85.43-203.27 203.72-203.27 112.53 0 202.82 89.46 202.82 203.26-.01 121.69-99.68 202.82-202.84 202.82z"
+      ></path>
+    </svg>
+    <a
+      href="https://creativecommons.org/licenses/by-nc-nd/4.0/"
+      target="_blank"
+      rel="noopener"
+      title="Creative Commons CC BY-NC-ND 4.0"
+    >
+      Creative Commons BY-NC-ND 4.0</a
+    >.
+  </div>
+   Made with
+  <a
+    href="https://squidfunk.github.io/mkdocs-material/"
+    target="_blank"
+    rel="noopener"
+  >
+    Material for MkDocs
+  </a>
+  
+</div>
+      
+        <div class="md-social">
+  <a
+    href="https://seqera.io"
+    target="_blank"
+    rel="noopener"
+    class="footer_seqera_logo"
+  >
+    <img src="/assets/img/seqera_logo_white.png" />
+  </a>
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+      <div class="md-consent" data-md-component="consent" id="__consent" hidden>
+        <div class="md-consent__overlay"></div>
+        <aside class="md-consent__inner">
+          <form class="md-consent__form md-grid md-typeset" name="consent">
+            
+
+
+  
+
+
+<h4>Cookie consent</h4>
+<p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our training materials better. Find out more on <a href="https://seqera.io/privacy-policy/#cookies" target="_blank" rel="noopener">how we use cookies</a>.</p>
+<input class="md-toggle" type="checkbox" id="__settings" >
+<div class="md-consent__settings">
+  <ul class="task-list">
+    
+    
+      
+        
+  
+  
+    
+    
+  
+  <li class="task-list-item">
+    <label class="task-list-control">
+      <input type="checkbox" name="analytics" checked>
+      <span class="task-list-indicator"></span>
+      Google Analytics
+    </label>
+  </li>
+
+      
+    
+    
+      
+        
+  
+  
+    
+    
+  
+  <li class="task-list-item">
+    <label class="task-list-control">
+      <input type="checkbox" name="github" checked>
+      <span class="task-list-indicator"></span>
+      GitHub
+    </label>
+  </li>
+
+      
+    
+    
+      
+        
+  
+  
+    
+    
+  
+  <li class="task-list-item">
+    <label class="task-list-control">
+      <input type="checkbox" name="posthog" checked>
+      <span class="task-list-indicator"></span>
+      PostHog Analytics
+    </label>
+  </li>
+
+      
+    
+  </ul>
+</div>
+<div class="md-consent__controls">
+  
+    
+      <button class="md-button md-button--primary">Accepter</button>
+    
+    
+    
+  
+    
+    
+    
+      <label class="md-button" for="__settings">Paramétrer vos choix</label>
+    
+  
+</div>
+          </form>
+        </aside>
+      </div>
+      <script>var consent=__md_get("__consent");if(consent)for(var input of document.forms.consent.elements)input.name&&(input.checked=consent[input.name]||!1);else"file:"!==location.protocol&&setTimeout((function(){document.querySelector("[data-md-component=consent]").hidden=!1}),250);var form=document.forms.consent;for(var action of["submit","reset"])form.addEventListener(action,(function(e){if(e.preventDefault(),"reset"===e.type)for(var n of document.forms.consent.elements)n.name&&(n.checked=!1);__md_set("__consent",Object.fromEntries(Array.from(new FormData(form).keys()).map((function(e){return[e,!0]})))),location.hash="",location.reload()}))</script>
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}, "version": {"alias": true, "provider": "mike"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.50899def.min.js"></script>
+      
+        <script src="../../../assets/javascripts/posthog.js"></script>
+      
+    
+  </body>
+</html>
