@@ -1131,13 +1131,11 @@ In this side quest, you've learned how to split and group data using channels. B
 
 2. **Use filter (and/or map) to manipulate into 2 separate channels**: We used `filter` to split the data into two channels based on the `type` field.
 
-3. **Join on ID**: We used `join` to join the two channels on the `id` field.
+3. **Join on ID and repeat**: We used `join` to join the two channels on the `id` and `repeat` fields.
 
-4. **Use groupTuple to group up samples by ID**: We used `groupTuple` to group the samples by the `id` field.
+4. **Combine by intervals**: We used `combine` to create Cartesian products of samples with genomic intervals.
 
-5. **Combine by intervals**: We used `combine` to combine the two channels on the `interval` field.
-
-6. **Group after intervals**: We used `groupTuple` to group the samples by the `interval` field.
+5. **Group by ID and interval**: We used `groupTuple` to group samples by the `id` and `interval` fields, aggregating technical replicates.
 
 This approach offers several advantages over writing a pipeline as more standard code, such as using for and while loops:
 
@@ -1169,13 +1167,19 @@ By mastering these channel operations, you can build flexible, scalable pipeline
 - **Joining Channels**
 
   ```nextflow
-  // Join two channels by key
+  // Join two channels by key (first element of tuple)
   tumor_ch.join(normal_ch)
 
-  // Extract a key and join by this value
-  tumor_ch.map { [it.patient_id, it] }
+  // Extract joining key and join by this value
+  tumor_ch.map { meta, file -> [meta.id, meta, file] }
       .join(
-         normal_ch.map { [it.patient_id, it] }
+         normal_ch.map { meta, file -> [meta.id, meta, file] }
+       )
+
+  // Join on multiple fields using subMap
+  tumor_ch.map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
+      .join(
+         normal_ch.map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
        )
   ```
 
@@ -1191,6 +1195,17 @@ By mastering these channel operations, you can build flexible, scalable pipeline
   ```nextflow
   // Combine with Cartesian product
   samples_ch.combine(intervals_ch)
+  ```
+
+- **Data Structure Optimization**
+
+  ```nextflow
+  // Extract specific fields using subMap
+  meta.subMap(['id', 'repeat'])
+
+  // Named closures for reusable transformations
+  getSampleIdAndReplicate = { meta, file -> [meta.subMap(['id', 'repeat']), file] }
+  channel.map(getSampleIdAndReplicate)
   ```
 
 ## Resources
