@@ -97,7 +97,6 @@ We can use the [`splitCsv` operator](https://www.nextflow.io/docs/latest/operato
 
     We'll clarify which one we mean in context, but this distinction is important to understand when working with Nextflow.
 
-
 Apply these changes to `main.nf`:
 
 === "After"
