@@ -15,7 +15,7 @@ You will:
 - Combine related data using `join` and `groupTuple`
 - Create data combinations with `combine` for parallel processing
 - Optimize data structure using `subMap` and deduplication strategies
-- Build reusable functions with named closures
+- Build reusable functions with named closures to help you manipulate channel structures
 
 These skills will help you build workflows that can handle multiple input files and different types of data efficiently, while maintaining clean, maintainable code structure.
 
@@ -29,7 +29,8 @@ Before taking on this side quest you should:
 
 - Complete the [Hello Nextflow](../hello_nextflow/README.md) tutorial
 - Understand basic Nextflow concepts (processes, channels, operators, working with files, meta data)
-- Basic understanding of using sample-specific data (meta data): [Working with metadata](./metadata.md)
+
+You may also find it useful to review [Working with metadata](./metadata.md) before starting here, as it covers in detail how to work with metadata associated with files in your workflows.
 
 ### 0.2. Starting Point
 
@@ -49,7 +50,7 @@ You'll find a `data` directory containing a samplesheet and a main workflow file
 └── main.nf
 ```
 
-samplesheet.csv contains information about samples taken from different patients and their associated data. In particular, it contains information about the patient's ID, the sample's repeat number and type (normal or tumor), and the paths to the BAM files (which don't actually exist, but we will pretend they do).
+`samplesheet.csv` contains information about samples from different patients, including the patient ID, sample repeat number, type (normal or tumor), and paths to BAM files (which don't actually exist, but we will pretend they do).
 
 ```console title="samplesheet.csv"
 id,repeat,type,bam
@@ -65,7 +66,7 @@ patientC,1,tumor,patientC_rep1_tumor.bam
 
 Note there are 8 samples in total from 3 patients (patientA has 2 repeats), 4 normal and 4 tumor.
 
-We're going to read in samplesheet.csv, then group and split the patients based on their data.
+We're going to read in samplesheet.csv, then group and split the samples based on their data.
 
 ---
 
@@ -73,9 +74,9 @@ We're going to read in samplesheet.csv, then group and split the patients based 
 
 ### 1.1. Read in sample data with splitCsv
 
-Let's start by reading in the sample data with `splitCsv`. In the main workflow file, you'll see that we've already started the workflow.
+Let's start by reading in the sample data with `splitCsv`. In the `main.nf`, you'll see that we've already started the workflow.
 
-```groovy title="main.nf" linenums="1"
+```groovy title="main.nf" linenums="1" hl_lines="2"
 workflow {
     ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
 }
@@ -85,12 +86,16 @@ workflow {
 
     Throughout this tutorial, we'll use the `ch_` prefix for all channel variables to clearly indicate they are Nextflow channels.
 
+We can use the [`splitCsv` operator](https://www.nextflow.io/docs/latest/operator.html#splitcsv) to split the data into a channel of maps (key/ value pairs), where each map represents a row from the CSV file.
+
+Apply these changes to `main.nf`:
+
 === "After"
 
     ```groovy title="main.nf" linenums="2" hl_lines="1-3"
-      ch_samples = Channel.fromPath("./data/samplesheet.csv")
-          .splitCsv(header: true)
-          .view()
+        ch_samples = Channel.fromPath("./data/samplesheet.csv")
+            .splitCsv(header: true)
+            .view()
     ```
 
 === "Before"
@@ -99,9 +104,7 @@ workflow {
         ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
     ```
 
-We can use the [`splitCsv` operator](https://www.nextflow.io/docs/latest/operator.html#splitcsv) to split the data into a channel of maps, where each map represents a row from the CSV file.
-
-The `header: true` option tells Nextflow to use the first row of the CSV file as the header row, which will be used as keys for the values. Let's see what Nextflow can see after reading with splitCsv. To do this, we can use the `view` operator.
+The `header: true` option tells Nextflow to use the first row of the CSV file as the header row, which will be used as keys for the values. Let's see what Nextflow can see after reading with splitCsv. We're using the `view` operator you should have encountered before to examine the output this gives us.
 
 Run the pipeline:
 
@@ -124,7 +127,7 @@ Launching `main.nf` [deadly_mercator] DSL2 - revision: bd6b0224e9
 [id:patientC, repeat:1, type:tumor, bam:patientD_rep1_tumor.bam]
 ```
 
-Each row from the CSV file has been converted into a map with keys matching the header row.
+Each row from the CSV file has become a single-item in the channel, a map with keys matching the header row.
 Each map contains:
 
 - `id`: The patient identifier (patientA, patientB, patientC)
