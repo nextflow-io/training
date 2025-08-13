@@ -152,7 +152,7 @@ This format makes it easy to access specific fields from each sample via their k
 
     For a more extensive introduction on working with metadatadata, you can work through the training [Working with metadata](./metadata.md)
 
-Let's separate the metadata from the files. We can do this with a `map` operation.
+Let's separate the metadata from the files. We can do this with a `map` operation:
 
 === "After"
 
@@ -173,7 +173,7 @@ Let's separate the metadata from the files. We can do this with a `map` operatio
             .view()
     ```
 
-and re-run the pipeline:
+Apply that change and re-run the pipeline:
 
 ```bash title="Convert the sample information into a map"
 nextflow run main.nf
@@ -203,7 +203,6 @@ In this section, you've learned:
 
 - **Reading in a data sheet**: How to read in data sheet with `splitCsv`
 - **Combining patient-specific information**: Using groovy maps to hold information about a patient
-- **Viewing data**: How to use `view` to print the data
 
 ---
 
@@ -236,6 +235,8 @@ We can use the [`filter` operator](https://www.nextflow.io/docs/latest/operator.
             .view()
     ```
 
+Run the workflow again to see the filtered result:
+
 ```bash title="View normal samples"
 nextflow run main.nf
 ```
@@ -251,9 +252,17 @@ Launching `main.nf` [admiring_brown] DSL2 - revision: 194d61704d
 [[id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
 ```
 
-We have successfully filtered the data to only include normal samples. Let's recap how this works. The `filter` operator takes a closure that is applied to each element in the channel. If the closure returns `true`, the element is included in the output channel. If the closure returns `false`, the element is excluded from the output channel.
+We have successfully filtered the data to only include normal samples. Let's recap how this works.
 
-In this case, we want to keep only the samples where `meta.type == 'normal'`. In the closure, we use the tuple `meta,file` to refer to each sample in the channel. We can then access the type of the particular sample with `meta.type` and check if it is equal to `'normal'`. If it is, the sample is included in the output channel. If it is not, the sample is excluded from the output channel.
+The `filter` operator takes a closure that is applied to each element in the channel. If the closure returns `true`, the element is included in the output channel. If the closure returns `false`, the element is excluded from the output channel.
+
+In this case, we want to keep only the samples where `meta.type == 'normal'`.
+
+In the closure, we use the tuple `meta,file` to refer to each sample in the channel. We can then:
+
+- Access the type of the particular sample with `meta.type`
+- Check if it equals `'normal'`
+- Include the sample if it matches, exclude it if it doesn't
 
 ```groovy title="main.nf" linenums="4"
     .filter { meta, file -> meta.type == 'normal' }
