@@ -323,12 +323,7 @@ Success! We have filtered the data to only include normal samples, and saved tha
 
 === "After"
 
-    ```groovy title="main.nf" linenums="8" hl_lines="8-13"
-        ch_samples = Channel.fromPath("./data/samplesheet.csv")
-            .splitCsv(header: true)
-            .map{ row ->
-                [[id:row.id, repeat:row.repeat, type:row.type], row.bam]
-            }
+    ```groovy title="main.nf" linenums="7" hl_lines="3-8"
         ch_normal_samples = ch_samples
             .filter { meta, file -> meta.type == 'normal' }
         ch_tumor_samples = ch_samples
@@ -341,12 +336,7 @@ Success! We have filtered the data to only include normal samples, and saved tha
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="8 9"
-        ch_samples = Channel.fromPath("./data/samplesheet.csv")
-            .splitCsv(header: true)
-            .map{ row ->
-                [[id:row.id, repeat:row.repeat, type:row.type], row.bam]
-            }
+    ```groovy title="main.nf" linenums="7" hl_lines="3 4"
         ch_normal_samples = ch_samples
             .filter { meta, file -> meta.type == 'normal' }
         ch_normal_samples
@@ -386,7 +376,7 @@ We've now separated out the normal and tumor samples into two different channels
 
 ---
 
-## 3. Join on patient ID
+## 3. Joining channels by identfiers
 
 In the previous section, we separated out the normal and tumor samples into two different channels. These could be processed independently using specific processes or workflows based on their type. But what happens when we want to compare the normal and tumor samples from the same patient? At this point, we need to join them back together making sure to match the samples based on their `id` field.
 
@@ -403,16 +393,16 @@ nextflow run main.nf
 ```console title="View normal and tumor samples"
  N E X T F L O W   ~  version 25.04.3
 
-Launching `main.nf` [loving_bardeen] DSL2 - revision: 012d38e59f
+Launching `main.nf` [maniac_boltzmann] DSL2 - revision: 3636b6576b
 
-tumor sample: [[id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
+Tumour sample: [[id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
+Tumour sample: [[id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
 Normal sample: [[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
-tumor sample: [[id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
 Normal sample: [[id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
 Normal sample: [[id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]
 Normal sample: [[id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
-tumor sample: [[id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
-tumor sample: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
+Tumour sample: [[id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
+Tumour sample: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
 ```
 
 We can see that the `id` field is the first element in each meta map. For `join` to work, we should isolate the `id` field in each tuple. After that, we can simply use the `join` operator to combine the two channels.
