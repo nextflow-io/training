@@ -762,13 +762,11 @@ We can see we only state the `id` and `repeat` fields once in the grouping key a
 
 ### 3.6. Remove redundant information
 
-We removed duplicated information above, but we have some other redundant information in our channels.
-In the beginning, we separated the normal and tumor samples using `filter`.
-We then joined them based on `id` and `repeat` keys.
-The `join` operator preserves the order in which a tuple is merged. In this example, we are using the normal on the left side and tumor on the right with the `id` as the join key.
-The resulting channel preserves this order with `id, <elements normal>, <elements tumor>`.
-Therefore, we know where in our current channel each element is.
-We can simplify our channel structure further by dropping `[type:normal]` and `[type:tumor]`.
+We removed duplicated information above, but we still have some other redundant information in our channels.
+
+In the beginning, we separated the normal and tumor samples using `filter`, then joined them based on `id` and `repeat` keys. The `join` operator preserves the order in which tuples are merged, so in our case, with normal samples on the left side and tumor samples on the right, the resulting channel maintains this structure: `id, <normal elements>, <tumor elements>`.
+
+Since we know the position of each element in our channel, we can simplify the structure further by dropping the `[type:normal]` and `[type:tumor]` metadata.
 
 === "After"
 
@@ -782,6 +780,8 @@ We can simplify our channel structure further by dropping `[type:normal]` and `[
         getSampleIdAndReplicate = { meta, file -> [ meta.subMap(['id', 'repeat']), meta.subMap(['type']), file ] }
     ```
 
+Run again to see the result:
+
 ```bash title="Remove redundant information"
 nextflow run main.nf
 ```
@@ -789,7 +789,7 @@ nextflow run main.nf
 ```console title="Remove redundant information"
  N E X T F L O W   ~  version 25.04.3
 
-Launching `main.nf` [trusting_pike] DSL2 - revision: 09d3c7a81b
+Launching `main.nf` [confident_leavitt] DSL2 - revision: a2303895bd
 
 [[id:patientA, repeat:1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
 [[id:patientA, repeat:2], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
