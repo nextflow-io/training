@@ -137,7 +137,7 @@ Launching `main.nf` [deadly_mercator] DSL2 - revision: bd6b0224e9
 [id:patientC, repeat:1, type:tumor, bam:patientD_rep1_tumor.bam]
 ```
 
-Each row from the CSV file has become a single item in the channel, with each item being map with keys matching the header row.
+Each row from the CSV file has become a single item in the channel, with each item being a map with keys matching the header row.
 
 You should be able to see that each map contains:
 
@@ -150,7 +150,7 @@ This format makes it easy to access specific fields from each sample via their k
 
 !!!Note
 
-    For a more extensive introduction on working with metadatadata, you can work through the training [Working with metadata](./metadata.md)
+    For a more extensive introduction on working with metadata, you can work through the training [Working with metadata](./metadata.md)
 
 Let's separate the metadata from the files. We can do this with a `map` operation:
 
@@ -254,25 +254,17 @@ Launching `main.nf` [admiring_brown] DSL2 - revision: 194d61704d
 
 We have successfully filtered the data to only include normal samples. Let's recap how this works.
 
-The `filter` operator takes a closure that is applied to each element in the channel. If the closure returns `true`, the element is included in the output channel. If the closure returns `false`, the element is excluded from the output channel.
+The `filter` operator takes a closure that is applied to each element in the channel. If the closure returns `true`, the element is included; if it returns `false`, the element is excluded.
 
-In this case, we want to keep only the samples where `meta.type == 'normal'`.
+In our case, we want to keep only samples where `meta.type == 'normal'`. The closure uses the tuple `meta,file` to refer to each sample, accesses the sample type with `meta.type`, and checks if it equals `'normal'`.
 
-In the closure, we use the tuple `meta,file` to refer to each sample in the channel.
-
-We can then:
-
-- Access the type of the particular sample with `meta.type`
-- Check if it equals `'normal'`
-- Include the sample if it matches, exclude it if it doesn't
-
-All that done via the single closure we introduded above:
+This is accomplished with the single closure we introduced above:
 
 ```groovy title="main.nf" linenums="7"
     .filter { meta, file -> meta.type == 'normal' }
 ```
 
-### 2.2. Filter in multiple ways
+### 2.2. Create separate filtered channels
 
 Currently we're applying the filter to the channel created directly from the CSV, but we want to filter this in more ways than one, so let's re-write the logic to create a separate filtered channel for normal samples:
 
@@ -319,7 +311,7 @@ Launching `main.nf` [trusting_poisson] DSL2 - revision: 639186ee74
 [[id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
 ```
 
-Success! We have filtered the data to only include normal samples, and saved that in a new channel, without removing the tumor samples from the `ch_samples` channel. Let's create a filtered channel for the tumor samples as well:
+We've successfully filtered the data and created a separate channel for normal samples. Let's create a filtered channel for the tumor samples as well:
 
 === "After"
 
@@ -377,7 +369,7 @@ We've now separated out the normal and tumor samples into two different channels
 
 ---
 
-## 3. Joining channels by identfiers
+## 3. Joining channels by identifiers
 
 In the previous section, we separated out the normal and tumor samples into two different channels. These could be processed independently using specific processes or workflows based on their type. But what happens when we want to compare the normal and tumor samples from the same patient? At this point, we need to join them back together making sure to match the samples based on their `id` field.
 
@@ -528,7 +520,7 @@ With this knowledge, we can successfully combine channels based on a shared fiel
 
 ### 3.2. Join on multiple fields
 
-We have 2 replicates for sampleA, but only 1 for sampleB and sampleC. In this case we were able to join them effectively by using the `id` field, but what would happen if they were out of sync? We could mix up the normal and tumor samples from different replicates! This could be disastrous!
+We have 2 replicates for sampleA, but only 1 for sampleB and sampleC. In this case we were able to join them effectively by using the `id` field, but what would happen if they were out of sync? We could mix up the normal and tumor samples from different replicates!
 
 To avoid this, we can join on multiple fields. There are actually multiple ways to achieve this but we are going to focus on creating a new joining key which includes both the sample `id` and `replicate` number.
 
@@ -579,9 +571,9 @@ If you want to explore more ways to join on different keys, check out the [join 
 
 ### 3.3. Use subMap to create a new joining key
 
-We have an issue from the above example. We have lost the field names from the original joining key, i.e. the `id` and `repeat` fields are just a list of two values. If we want to retain the field names so we can access them later by name we can use the [`subMap` method](<https://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/Map.html#subMap(java.util.Collection)>).
+The previous approach loses the field names from our joining key - the `id` and `repeat` fields become just a list of values. To retain the field names for later access, we can use the [`subMap` method](<https://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/Map.html#subMap(java.util.Collection)>).
 
-The `subMap` method takes a map and returns a new map with only the key-value pairs specified in the argument. In this case we want to specify the `id` and `repeat` fields.
+The `subMap` method extracts only the specified key-value pairs from a map. Here we'll extract just the `id` and `repeat` fields to create our joining key.
 
 === "After"
 
@@ -624,7 +616,7 @@ Now we have a new joining key that not only includes the `id` and `repeat` field
 
 ### 3.4. Use a named closure in map
 
-Since we are re-using the same map in multiple places, we run the risk of introducing errors if we accidentally change the map in one place but not the other. To avoid this, we can use a named closure in the map. A named closure allows us to make a reusable function we can call later within a map.
+To avoid duplication and reduce errors, we can use a named closure. A named closure allows us to create a reusable function that we can call in multiple places.
 
 To do so, first we define the closure as a new variable:
 
@@ -655,7 +647,7 @@ To do so, first we define the closure as a new variable:
             .filter { meta, file -> meta.type == 'normal' }
     ```
 
-We have taken the map we used previously and defined it as a named variable we can call later. We can also use this to convert the file path to a Path object using `file()` so that any process we passed the channel to could handle the file correctly (for more information see [Working with files](./working_with_files.md)).
+We've defined the map transformation as a named variable that we can reuse. Note that we also convert the file path to a Path object using `file()` so that any process receiving this channel can handle the file correctly (for more information see [Working with files](./working_with_files.md)).
 
 Let's implement the closure in our workflow:
 
@@ -703,7 +695,7 @@ Launching `main.nf` [angry_meninsky] DSL2 - revision: 2edc226b1d
 [[id:patientC, repeat:1], [id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam, [id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
 ```
 
-Using a named closure in the map allows us to reuse the same map in multiple places which reduces our risk of introducing errors. It also makes the code more readable and easier to maintain.
+Using a named closure allows us to reuse the same transformation in multiple places, reducing the risk of errors and making the code more readable and maintainable.
 
 ### 3.5. Reduce duplication of data
 
@@ -744,7 +736,7 @@ Since the `id` and `repeat` fields are available in the grouping key, let's remo
         getSampleIdAndReplicate = { meta, bam -> [ meta.subMap(['id', 'repeat']), meta, file(bam) ] }
     ```
 
-Now, when the closure returns the tuple, the first element is the `id` and `repeat` fields and the second element is the `type` field. We have effectively removed the `id` and `repeat` fields from the sample data and uniquely store them in the grouping key. This approach eliminates redundancy while maintaining all necessary information.
+Now the closure returns a tuple where the first element contains the `id` and `repeat` fields, and the second element contains only the `type` field. This eliminates redundancy by storing the `id` and `repeat` information once in the grouping key, while maintaining all necessary information.
 
 Run the workflow to see what this looks like:
 
@@ -909,21 +901,21 @@ We can use the `map` operator to tidy and refactor our sample data so it's easie
             .view()
     ```
 
-Wait? What did we do here? Let's go over it piece by piece.
+Let's break down what this map operation does step by step.
 
-First, we use a map operator to iterate over every item in the channel. By using the names `grouping_key` ,`normal`, `tumor` and `interval`, we can refer to the elements in the tuple by name instead of by index. This makes the code more readable and easier to understand.
+First, we use named parameters to make the code more readable. By using the names `grouping_key`, `normal`, `tumor` and `interval`, we can refer to the elements in the tuple by name instead of by index:
 
 ```groovy
         .map { grouping_key, normal, tumor, interval ->
 ```
 
-Next, create a new map by combining the `grouping_key` with the `interval` field. Remember, the `grouping_key` is the first element of the tuple, which is a map of `id` and `repeat` fields. The `interval` is just a string, but we make it into a new map with the key `interval` and value the string. By 'adding' them (`+`), Groovy will merge them together to produce the union of the two maps.
+Next, we combine the `grouping_key` with the `interval` field. The `grouping_key` is a map containing `id` and `repeat` fields. We create a new map with the `interval` and merge them using Groovy's map addition (`+`):
 
 ```groovy
                 grouping_key + [interval: interval],
 ```
 
-Finally, we return all of this as one tuple of the 3 elements, the new map, the normal sample data and the tumor sample data.
+Finally, we return this as a tuple with three elements: the combined metadata map, the normal sample file, and the tumor sample file:
 
 ```groovy
             [
@@ -1092,7 +1084,7 @@ Let's now group the samples by this new grouping element, using the [`groupTuple
               .view()
     ```
 
-Simple, huh? We just added a single line of code. Let's see what happens when we run it:
+That's all there is to it! We just added a single line of code. Let's see what happens when we run it:
 
 ```bash title="View grouped samples"
 nextflow run main.nf
