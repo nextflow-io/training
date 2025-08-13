@@ -74,7 +74,7 @@ Let's start by reading in the sample data with `splitCsv`. In the main workflow 
 
 ```groovy title="main.nf" linenums="1"
 workflow {
-    ch_samplesheet = Channel.fromPath("./data/data.csv")
+    ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
 }
 ```
 
@@ -85,7 +85,7 @@ workflow {
 === "After"
 
     ```groovy title="main.nf" linenums="2" hl_lines="1-3"
-      ch_samples = Channel.fromPath("./data/data.csv")
+      ch_samples = Channel.fromPath("./data/samplesheet.csv")
           .splitCsv(header: true)
           .view()
     ```
@@ -93,7 +93,7 @@ workflow {
 === "Before"
 
     ```groovy title="main.nf" linenums="2" hl_lines="1"
-        ch_samplesheet = Channel.fromPath("./data/data.csv")
+        ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
     ```
 
 We can use the [`splitCsv` operator](https://www.nextflow.io/docs/latest/operator.html#splitcsv) to split the data into a channel of maps, where each map represents a row from the CSV file.
@@ -107,7 +107,7 @@ nextflow run main.nf
 ```
 
 ```console title="Read data with splitCsv"
- N E X T F L O W   ~  version 24.10.5
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `main.nf` [deadly_mercator] DSL2 - revision: bd6b0224e9
 
@@ -163,7 +163,7 @@ nextflow run main.nf
 ```
 
 ```console title="Convert the sample information into a map"
- N E X T F L O W   ~  version 24.10.5
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `main.nf` [deadly_mercator] DSL2 - revision: bd6b0224e9
 
@@ -224,7 +224,7 @@ nextflow run main.nf
 ```
 
 ```console title="View normal samples"
- N E X T F L O W   ~  version 24.10.5
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `main.nf` [admiring_brown] DSL2 - revision: 194d61704d
 
@@ -275,7 +275,7 @@ nextflow run main.nf
 ```
 
 ```console title="View normal samples"
- N E X T F L O W   ~  version 24.10.5
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `main.nf` [trusting_poisson] DSL2 - revision: 639186ee74
 
@@ -321,7 +321,7 @@ nextflow run main.nf
 ```
 
 ```console title="View tumor samples"
- N E X T F L O W   ~  version 24.10.5
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `main.nf` [big_bernard] DSL2 - revision: 897c9e44cc
 
@@ -364,7 +364,7 @@ nextflow run main.nf
 ```
 
 ```console title="View normal and tumor samples"
- N E X T F L O W   ~  version 24.10.5
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `main.nf` [loving_bardeen] DSL2 - revision: 012d38e59f
 
@@ -411,7 +411,7 @@ nextflow run main.nf
 ```
 
 ```console title="View normal and tumor samples with ID as element 0"
- N E X T F L O W   ~  version 24.10.5
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `main.nf` [dreamy_sax] DSL2 - revision: 882ae9add4
 
@@ -460,7 +460,7 @@ nextflow run main.nf
 ```
 
 ```console title="View joined normal and tumor samples"
- N E X T F L O W   ~  version 24.10.5
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `main.nf` [elegant_waddington] DSL2 - revision: c552f22069
 
@@ -528,7 +528,7 @@ nextflow run main.nf
 ```
 
 ```console title="View normal and tumor samples"
- N E X T F L O W   ~  version 24.10.5
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `main.nf` [prickly_wing] DSL2 - revision: 3bebf22dee
 
@@ -575,7 +575,7 @@ nextflow run main.nf
 ```
 
 ```console title="View normal and tumor samples"
- N E X T F L O W   ~  version 24.10.5
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `main.nf` [curious_hopper] DSL2 - revision: 90283e523d
 
@@ -656,7 +656,7 @@ nextflow run main.nf
 ```
 
 ```console title="View normal and tumor samples"
- N E X T F L O W   ~  version 24.10.5
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `main.nf` [angry_meninsky] DSL2 - revision: 2edc226b1d
 
@@ -714,7 +714,7 @@ nextflow run main.nf
 ```
 
 ```console title="View deduplicated data"
- N E X T F L O W   ~  version 24.10.5
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `main.nf` [trusting_pike] DSL2 - revision: 09d3c7a81b
 
@@ -755,7 +755,7 @@ nextflow run main.nf
 ```
 
 ```console title="Remove redundant information"
- N E X T F L O W   ~  version 24.10.5
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `main.nf` [trusting_pike] DSL2 - revision: 09d3c7a81b
 
@@ -828,7 +828,7 @@ nextflow run main.nf
 ```
 
 ```console title="View combined samples"
- N E X T F L O W   ~  version 24.10.5
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `main.nf` [soggy_fourier] DSL2 - revision: fa8f5edb22
 
@@ -906,7 +906,7 @@ nextflow run main.nf
 ```
 
 ```console title="View combined samples"
- N E X T F L O W   ~  version 24.10.5
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `main.nf` [sad_hawking] DSL2 - revision: 1f6f6250cd
 
@@ -1001,7 +1001,7 @@ nextflow run main.nf
 ```
 
 ```console title="View grouped samples"
- N E X T F L O W   ~  version 24.10.5
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `main.nf` [loving_escher] DSL2 - revision: 3adccba898
 
@@ -1063,7 +1063,7 @@ nextflow run main.nf
 ```
 
 ```console title="View grouped samples"
- N E X T F L O W   ~  version 24.10.5
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `main.nf` [festering_almeida] DSL2 - revision: 78988949e3
 
