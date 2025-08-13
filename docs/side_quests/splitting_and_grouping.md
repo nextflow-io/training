@@ -88,6 +88,16 @@ workflow {
 
 We can use the [`splitCsv` operator](https://www.nextflow.io/docs/latest/operator.html#splitcsv) to split the data into a channel of maps (key/ value pairs), where each map represents a row from the CSV file.
 
+!!!Note
+
+    We'll encounter two different concepts called `map` in this training:
+
+    - **Data structure**: The Groovy map (equivalent to dictionaries/hashes in other languages) that stores key-value pairs
+    - **Channel operator**: The `.map()` operator that transforms items in a channel
+
+    We'll clarify which one we mean in context, but this distinction is important to understand when working with Nextflow.
+
+
 Apply these changes to `main.nf`:
 
 === "After"
@@ -104,7 +114,7 @@ Apply these changes to `main.nf`:
         ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
     ```
 
-The `header: true` option tells Nextflow to use the first row of the CSV file as the header row, which will be used as keys for the values. Let's see what Nextflow can see after reading with splitCsv. We're using the `view` operator you should have encountered before to examine the output this gives us.
+`splitCsv` takes the file passed to it from the channel factory and the `header: true` option tells Nextflow to use the first row of the CSV file as the header row, which will be used as keys for the values. We're using the `view` operator you should have encountered before to examine the output this gives us.
 
 Run the pipeline:
 
@@ -127,8 +137,9 @@ Launching `main.nf` [deadly_mercator] DSL2 - revision: bd6b0224e9
 [id:patientC, repeat:1, type:tumor, bam:patientD_rep1_tumor.bam]
 ```
 
-Each row from the CSV file has become a single-item in the channel, a map with keys matching the header row.
-Each map contains:
+Each row from the CSV file has become a single item in the channel, with each item being map with keys matching the header row.
+
+You should be able to see that each map contains:
 
 - `id`: The patient identifier (patientA, patientB, patientC)
 - `repeat`: The replicate number (1 or 2)
@@ -141,7 +152,7 @@ This format makes it easy to access specific fields from each sample via their k
 
     For a more extensive introduction on working with metadatadata, you can work through the training [Working with metadata](./metadata.md)
 
-Let's separate the metadata from the files:
+Let's separate the metadata from the files. We can do this with a `map` operation.
 
 === "After"
 
