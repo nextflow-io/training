@@ -118,7 +118,7 @@ Apply these changes to `main.nf`:
 
 Run the pipeline:
 
-```bash title="Read the data"
+```bash title="Test the splitCsv operation"
 nextflow run main.nf
 ```
 
@@ -175,11 +175,11 @@ Let's separate the metadata from the files. We can do this with a `map` operatio
 
 Apply that change and re-run the pipeline:
 
-```bash title="Convert the sample information into a map"
+```bash title="Test the metadata separation"
 nextflow run main.nf
 ```
 
-```console title="Convert the sample information into a map"
+```console title="Sample data with separated metadata"
  N E X T F L O W   ~  version 25.04.3
 
 Launching `main.nf` [deadly_mercator] DSL2 - revision: bd6b0224e9
@@ -237,11 +237,11 @@ We can use the [`filter` operator](https://www.nextflow.io/docs/latest/operator.
 
 Run the workflow again to see the filtered result:
 
-```bash title="View normal samples"
+```bash title="Test the filter operation"
 nextflow run main.nf
 ```
 
-```console title="View normal samples"
+```console title="Filtered normal samples"
  N E X T F L O W   ~  version 25.04.3
 
 Launching `main.nf` [admiring_brown] DSL2 - revision: 194d61704d
@@ -296,11 +296,11 @@ Currently we're applying the filter to the channel created directly from the CSV
 
 Once again, run the pipeline to see the results:
 
-```bash title="View normal samples"
+```bash title="Test separate channel creation"
 nextflow run main.nf
 ```
 
-```console title="View normal samples"
+```console title="Filtered normal samples"
  N E X T F L O W   ~  version 25.04.3
 
 Launching `main.nf` [trusting_poisson] DSL2 - revision: 639186ee74
@@ -335,11 +335,11 @@ We've successfully filtered the data and created a separate channel for normal s
             .view()
     ```
 
-```bash title="View tumor samples"
+```bash title="Test filtering both sample types"
 nextflow run main.nf
 ```
 
-```console title="View tumor samples"
+```console title="Normal and tumor samples"
  N E X T F L O W   ~  version 25.04.3
 
 Launching `main.nf` [maniac_boltzmann] DSL2 - revision: 3636b6576b
@@ -379,11 +379,11 @@ Nextflow includes many methods for combining channels, but in this case the most
 
 If we check the [`join`](https://www.nextflow.io/docs/latest/operator.html#join) documentation, we can see that by default it joins two channels based on the first item in each tuple. If you don't have the console output still available, let's run the pipeline to check our data structure and see how we need to modify it to join on the `id` field.
 
-```bash title="View normal and tumor samples"
+```bash title="Check current data structure"
 nextflow run main.nf
 ```
 
-```console title="View normal and tumor samples"
+```console title="Normal and tumor samples"
  N E X T F L O W   ~  version 25.04.3
 
 Launching `main.nf` [maniac_boltzmann] DSL2 - revision: 3636b6576b
@@ -430,11 +430,11 @@ To isolate the `id` field, we can use the [`map` operator](https://www.nextflow.
             .view{'tumor sample: ' + it}
     ```
 
-```bash title="View normal and tumor samples with ID as element 0"
+```bash title="Test the map transformation"
 nextflow run main.nf
 ```
 
-```console title="View normal and tumor samples with ID as element 0"
+```console title="Samples with ID as first element"
  N E X T F L O W   ~  version 25.04.3
 
 Launching `main.nf` [mad_lagrange] DSL2 - revision: 9940b3f23d
@@ -482,11 +482,11 @@ Once again, we will use `view` to print the joined outputs.
             .view{'tumor sample: ' + it}
     ```
 
-```bash title="View normal and tumor samples"
+```bash title="Test the join operation"
 nextflow run main.nf
 ```
 
-```console title="View joined normal and tumor samples"
+```console title="Joined normal and tumor samples"
  N E X T F L O W   ~  version 25.04.3
 
 Launching `main.nf` [soggy_wiles] DSL2 - revision: 3bc1979889
@@ -550,11 +550,11 @@ Let's start by creating a new joining key. We can do this in the same way as bef
 
 Now we should see the join is occurring but using both the `id` and `repeat` fields. Run the workflow:
 
-```bash title="View normal and tumor samples"
+```bash title="Test multi-field joining"
 nextflow run main.nf
 ```
 
-```console title="View normal and tumor samples"
+```console title="Samples joined on multiple fields"
  N E X T F L O W   ~  version 25.04.3
 
 Launching `main.nf` [prickly_wing] DSL2 - revision: 3bebf22dee
@@ -597,11 +597,11 @@ The `subMap` method extracts only the specified key-value pairs from a map. Here
             .map { meta, file -> [[meta.id, meta.repeat], meta, file] }
     ```
 
-```bash title="View normal and tumor samples"
+```bash title="Test subMap joining keys"
 nextflow run main.nf
 ```
 
-```console title="View normal and tumor samples"
+```console title="Samples with subMap joining keys"
  N E X T F L O W   ~  version 25.04.3
 
 Launching `main.nf` [reverent_wing] DSL2 - revision: 847016c3b7
@@ -680,11 +680,11 @@ Let's implement the closure in our workflow:
 
 Just run the workflow once more to check everything is still working:
 
-```bash title="View normal and tumor samples"
+```bash title="Test the named closure"
 nextflow run main.nf
 ```
 
-```console title="View normal and tumor samples"
+```console title="Samples using named closure"
  N E X T F L O W   ~  version 25.04.3
 
 Launching `main.nf` [angry_meninsky] DSL2 - revision: 2edc226b1d
@@ -740,11 +740,11 @@ Now the closure returns a tuple where the first element contains the `id` and `r
 
 Run the workflow to see what this looks like:
 
-```bash title="View deduplicated data"
+```bash title="Test data deduplication"
 nextflow run main.nf
 ```
 
-```console title="View deduplicated data"
+```console title="Deduplicated sample data"
 [[id:patientA, repeat:1], [type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep1_normal.bam, [type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep1_tumor.bam]
 [[id:patientA, repeat:2], [type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep2_normal.bam, [type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep2_tumor.bam]
 [[id:patientB, repeat:1], [type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientB_rep1_normal.bam, [type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientB_rep1_tumor.bam]
@@ -775,11 +775,11 @@ Since we know the position of each element in our channel, we can simplify the s
 
 Run again to see the result:
 
-```bash title="Remove redundant information"
+```bash title="Test streamlined data structure"
 nextflow run main.nf
 ```
 
-```console title="Remove redundant information"
+```console title="Streamlined sample data"
  N E X T F L O W   ~  version 25.04.3
 
 Launching `main.nf` [confident_leavitt] DSL2 - revision: a2303895bd
@@ -849,11 +849,11 @@ Now remember, we want to repeat each sample for each interval. This is sometimes
 
 Now let's run it and see what happens:
 
-```bash title="View combined samples"
+```bash title="Test the combine operation"
 nextflow run main.nf
 ```
 
-```console title="View combined samples"
+```console title="Samples combined with intervals"
  N E X T F L O W   ~  version 25.04.3
 
 Launching `main.nf` [mighty_tesla] DSL2 - revision: ae013ab70b
@@ -927,11 +927,11 @@ Finally, we return this as a tuple with three elements: the combined metadata ma
 
 Let's run it again and check the channel contents:
 
-```bash title="View combined samples"
+```bash title="Test the reorganized structure"
 nextflow run main.nf
 ```
 
-```console title="View combined samples"
+```console title="Samples combined with intervals"
  N E X T F L O W   ~  version 25.04.3
 
 Launching `main.nf` [sad_hawking] DSL2 - revision: 1f6f6250cd
@@ -1024,11 +1024,11 @@ We can reuse the `subMap` method from before to isolate our `id` and `interval` 
 
 Let's run it again and check the channel contents:
 
-```bash title="View grouped samples"
+```bash title="Test grouping key isolation"
 nextflow run main.nf
 ```
 
-```console title="View grouped samples"
+```console title="Samples prepared for grouping"
  N E X T F L O W   ~  version 25.04.3
 
 Launching `main.nf` [hopeful_brenner] DSL2 - revision: 7f4f7fea76
@@ -1086,11 +1086,11 @@ Let's now group the samples by this new grouping element, using the [`groupTuple
 
 That's all there is to it! We just added a single line of code. Let's see what happens when we run it:
 
-```bash title="View grouped samples"
+```bash title="Test the groupTuple operation"
 nextflow run main.nf
 ```
 
-```console title="View grouped samples"
+```console title="Grouped samples by ID and interval"
  N E X T F L O W   ~  version 25.04.3
 
 Launching `main.nf` [friendly_jang] DSL2 - revision: a1bee1c55d
