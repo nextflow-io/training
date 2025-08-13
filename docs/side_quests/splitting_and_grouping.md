@@ -323,7 +323,7 @@ Success! We have filtered the data to only include normal samples, and saved tha
 
 === "After"
 
-    ```groovy title="main.nf" linenums="8" hl_lines="10-13"
+    ```groovy title="main.nf" linenums="8" hl_lines="8-13"
         ch_samples = Channel.fromPath("./data/samplesheet.csv")
             .splitCsv(header: true)
             .map{ row ->
@@ -372,7 +372,7 @@ Tumour sample: [[id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
 Tumour sample: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
 ```
 
-We've managed to separate out the normal and tumor samples into two different channels, and note the closure we supplied to `view()` to label them differently: `ch_tumor_samples.view{'Tumour sample: ' + it}`.
+We've separated out the normal and tumor samples into two different channels, and used a closure supplied to to `view()` to label them differently in the output: `ch_tumor_samples.view{'Tumour sample: ' + it}`.
 
 ### Takeaway
 
