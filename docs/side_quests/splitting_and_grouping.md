@@ -371,6 +371,7 @@ In this section, you've learned:
 - **Filtering data**: How to filter data with `filter`
 - **Splitting data**: How to split data into different channels based on a condition
 - **Viewing data**: How to use `view` to print the data and label output from different channels
+- **Creating separate channels**: How to maintain multiple filtered channels for different data types
 
 We've now separated out the normal and tumor samples into two different channels. Next, we'll join the normal and tumor samples on the `id` field.
 
@@ -805,7 +806,8 @@ In this section, you've learned:
 - **Joining Tuples**: How to use `join` to combine tuples based on the first field
 - **Creating Joining Keys**: How to use `subMap` to create a new joining key
 - **Named Closures**: How to use a named closure in map
-- **Deduplicating Data**: How to remove duplicate data from the channel
+- **Multiple Field Joining**: How to join on multiple fields for more precise matching
+- **Data Structure Optimization**: How to streamline channel structure by removing redundant information
 
 You now have a workflow that can split a samplesheet, filter the normal and tumor samples, join them together by sample ID and replicate number, then print the results.
 
@@ -963,6 +965,9 @@ Using `map` to coerce your data into the correct structure can be tricky, but it
 In this section, you've learned:
 
 - **Spreading samples over intervals**: How to use `combine` to repeat samples over intervals
+- **Creating Cartesian products**: How to generate all combinations of samples and intervals
+- **Organizing channel structure**: How to use `map` to restructure data for better readability
+- **Parallel processing preparation**: How to set up data for distributed analysis
 
 ## 5. Aggregating samples using `groupTuple`
 
@@ -1114,6 +1119,17 @@ Note our data has changed structure and within each channel element the files no
 !!! note
 
     [`transpose`](https://www.nextflow.io/docs/latest/reference/operator.html#transpose) is the opposite of groupTuple. It unpacks the items in a channel and flattens them. Try and add `transpose` and undo the grouping we performed above!
+
+### Takeaway
+
+In this section, you've learned:
+
+- **Grouping related samples**: How to use `groupTuple` to aggregate samples by common attributes
+- **Isolating grouping keys**: How to use `subMap` to extract specific fields for grouping
+- **Handling grouped data structures**: How to work with the nested structure created by `groupTuple`
+- **Technical replicate handling**: How to group samples that share the same experimental conditions
+
+---
 
 ## Summary
 
