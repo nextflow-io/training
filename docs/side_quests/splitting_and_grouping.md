@@ -323,7 +323,7 @@ Success! We have filtered the data to only include normal samples, and saved tha
 
 === "After"
 
-    ```groovy title="main.nf" linenums="8" hl_lines="8-11"
+    ```groovy title="main.nf" linenums="8" hl_lines="10-13"
         ch_samples = Channel.fromPath("./data/samplesheet.csv")
             .splitCsv(header: true)
             .map{ row ->
