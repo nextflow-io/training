@@ -319,7 +319,7 @@ Launching `main.nf` [trusting_poisson] DSL2 - revision: 639186ee74
 [[id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
 ```
 
-Success! We have filtered the data to only include normal samples. Note that we can use view and save the new channel. If we wanted, we still have access to the tumor samples within the `ch_samples` channel. Since we managed it for the normal samples, let's do it for the tumor samples as well:
+Success! We have filtered the data to only include normal samples, and saved that in a new channel, without removing the tumour samples from the `ch_samples` channel. Let's create a filtered channel for the tumor samples as well:
 
 === "After"
 
@@ -331,15 +331,15 @@ Success! We have filtered the data to only include normal samples. Note that we 
             }
         ch_normal_samples = ch_samples
             .filter { meta, file -> meta.type == 'normal' }
-        ch_tumor_samples = ch_samples
-            .filter { meta, file -> meta.type == 'tumor' }
-        ch_normal_samples.view{'Normal sample: ' + it}
-        ch_tumor_samples.view{'Tumour sample: ' + it}
+        ch_normal_samples
+            .view{'Normal sample: ' + it}
+        ch_tumor_samples
+            .view{'Tumour sample: ' + it}
     ```
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="2"
+    ```groovy title="main.nf" linenums="2" hl_lines="8 9"
         ch_samples = Channel.fromPath("./data/samplesheet.csv")
             .splitCsv(header: true)
             .map{ row ->
@@ -347,7 +347,8 @@ Success! We have filtered the data to only include normal samples. Note that we 
             }
         ch_normal_samples = ch_samples
             .filter { meta, file -> meta.type == 'normal' }
-        ch_normal_samples.view()
+        ch_normal_samples
+            .view()
     ```
 
 ```bash title="View tumor samples"
