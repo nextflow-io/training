@@ -331,6 +331,8 @@ Success! We have filtered the data to only include normal samples, and saved tha
             }
         ch_normal_samples = ch_samples
             .filter { meta, file -> meta.type == 'normal' }
+        ch_tumor_samples = ch_samples
+            .filter { meta, file -> meta.type == 'tumor' }
         ch_normal_samples
             .view{'Normal sample: ' + it}
         ch_tumor_samples
@@ -358,11 +360,11 @@ nextflow run main.nf
 ```console title="View tumor samples"
  N E X T F L O W   ~  version 25.04.3
 
-Launching `main.nf` [big_bernard] DSL2 - revision: 897c9e44cc
+Launching `main.nf` [maniac_boltzmann] DSL2 - revision: 3636b6576b
 
 Tumour sample: [[id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
-Normal sample: [[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
 Tumour sample: [[id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
+Normal sample: [[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
 Normal sample: [[id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
 Normal sample: [[id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]
 Normal sample: [[id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
