@@ -535,7 +535,7 @@ Let's start by creating a new joining key. We can do this in the same way as bef
 
 === "After"
 
-    ```groovy title="main.nf" linenums="8" hl_lines="3 6"
+    ```groovy title="main.nf" linenums="7" hl_lines="3 6"
         ch_normal_samples = ch_samples
             .filter { meta, file -> meta.type == 'normal' }
             .map { meta, file -> [[meta.id, meta.repeat], meta, file] }
@@ -546,16 +546,16 @@ Let's start by creating a new joining key. We can do this in the same way as bef
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="8"
+    ```groovy title="main.nf" linenums="7" hl_lines="3 6"
         ch_normal_samples = ch_samples
             .filter { meta, file -> meta.type == 'normal' }
             .map { meta, file -> [meta.id, meta, file] }
-        ch_tumor_samples = ch_samples
+        ch_tumor_samples = ch_sample
             .filter { meta, file -> meta.type == 'tumor' }
             .map { meta, file -> [meta.id, meta, file] }
     ```
 
-Now we should see the join is occurring but using both the `id` and `repeat` fields.
+Now we should see the join is occurring but using both the `id` and `repeat` fields. Run the workflow:
 
 ```bash title="View normal and tumor samples"
 nextflow run main.nf
@@ -584,18 +584,18 @@ The `subMap` method takes a map and returns a new map with only the key-value pa
 
 === "After"
 
-    ```groovy title="main.nf" linenums="4" hl_lines="3 6"
+    ```groovy title="main.nf" linenums="7" hl_lines="3 6"
         ch_normal_samples = ch_samples
             .filter { meta, file -> meta.type == 'normal' }
-            .map { meta, file -> [meta.subMap(['id', 'repeat'], meta, file] }
+            .map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
         ch_tumor_samples = ch_samples
             .filter { meta, file -> meta.type == 'tumor' }
-            .map { meta, file -> [meta.subMap(['id', 'repeat'], meta, file] }
+            .map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
     ```
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="4" hl_lines="3 6"
+    ```groovy title="main.nf" linenums="7" hl_lines="3 6"
         ch_normal_samples = ch_samples
             .filter { meta, file -> meta.type == 'normal' }
             .map { meta, file -> [[meta.id, meta.repeat], meta, file] }
@@ -611,7 +611,7 @@ nextflow run main.nf
 ```console title="View normal and tumor samples"
  N E X T F L O W   ~  version 25.04.3
 
-Launching `main.nf` [curious_hopper] DSL2 - revision: 90283e523d
+Launching `main.nf` [reverent_wing] DSL2 - revision: 847016c3b7
 
 [[id:patientA, repeat:1], [id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
 [[id:patientA, repeat:2], [id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
@@ -644,7 +644,7 @@ To do so, first we define the closure as a new variable:
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="6"
+    ```groovy title="main.nf" linenums="2"
         ch_samples = Channel.fromPath("./data/samplesheet.csv")
             .splitCsv(header: true)
             .map{ row ->
@@ -660,7 +660,7 @@ Let's implement the closure in our workflow:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="7" hl_lines="3 6"
+    ```groovy title="main.nf" linenums="10" hl_lines="3 6"
         ch_normal_samples = ch_samples
             .filter { meta, file -> meta.type == 'normal' }
              .map ( getSampleIdAndReplicate )
@@ -672,7 +672,7 @@ Let's implement the closure in our workflow:
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="3 6"
+    ```groovy title="main.nf" linenums="10" hl_lines="3 6"
         ch_normal_samples = ch_samples
             .filter { meta, file -> meta.type == 'normal' }
             .map { meta, file -> [meta.subMap(['id', 'repeat'], meta, file] }
@@ -684,6 +684,8 @@ Let's implement the closure in our workflow:
 !!! note
 
     The `map` operator has switched from using `{ }` to using `( )` to pass the closure as an argument. This is because the `map` operator expects a closure as an argument and `{ }` is used to define an anonymous closure. When calling a named closure, use the `( )` syntax.
+
+Just run the workflow once more to check everything is still working:
 
 ```bash title="View normal and tumor samples"
 nextflow run main.nf
@@ -727,35 +729,33 @@ We have a lot of duplicated data in our workflow. Each item in the joined sample
 ]
 ```
 
-Since the `id` and `repeat` fields are available in the grouping key, let's remove them from the patient data to avoid duplication. We can do this by using the `subMap` method to create a new map with only the `type` field. This approach allows us to maintain all necessary information while eliminating redundancy in our data structure.
+Since the `id` and `repeat` fields are available in the grouping key, let's remove them from the rest of each channel item to avoid duplication. We can do this by using the `subMap` method to create a new map with only the `type` field. This approach allows us to maintain all necessary information while eliminating redundancy in our data structure.
 
 === "After"
 
-    ```groovy title="main.nf" linenums="5" hl_lines="3-5"
-    getSampleIdAndReplicate = { meta, bam -> [ meta.subMap(['id', 'repeat']), meta.subMap(['type']), file(bam) ] }
+    ```groovy title="main.nf" linenums="8" hl_lines="1"
+        getSampleIdAndReplicate = { meta, bam -> [ meta.subMap(['id', 'repeat']), meta.subMap(['type']), file(bam) ] }
     ```
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="5"
+    ```groovy title="main.nf" linenums="8" hl_lines="1"
         getSampleIdAndReplicate = { meta, bam -> [ meta.subMap(['id', 'repeat']), meta, file(bam) ] }
     ```
 
 Now, when the closure returns the tuple, the first element is the `id` and `repeat` fields and the second element is the `type` field. We have effectively removed the `id` and `repeat` fields from the sample data and uniquely store them in the grouping key. This approach eliminates redundancy while maintaining all necessary information.
+
+Run the workflow to see what this looks like:
 
 ```bash title="View deduplicated data"
 nextflow run main.nf
 ```
 
 ```console title="View deduplicated data"
- N E X T F L O W   ~  version 25.04.3
-
-Launching `main.nf` [trusting_pike] DSL2 - revision: 09d3c7a81b
-
-[[id:patientA, repeat:1], [type:normal], patientA_rep1_normal.bam, [type:tumor], patientA_rep1_tumor.bam]
-[[id:patientA, repeat:2], [type:normal], patientA_rep2_normal.bam, [type:tumor], patientA_rep2_tumor.bam]
-[[id:patientB, repeat:1], [type:normal], patientB_rep1_normal.bam, [type:tumor], patientB_rep1_tumor.bam]
-[[id:patientC, repeat:1], [type:normal], patientC_rep1_normal.bam, [type:tumor], patientC_rep1_tumor.bam]
+[[id:patientA, repeat:1], [type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep1_normal.bam, [type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep1_tumor.bam]
+[[id:patientA, repeat:2], [type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep2_normal.bam, [type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep2_tumor.bam]
+[[id:patientB, repeat:1], [type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientB_rep1_normal.bam, [type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientB_rep1_tumor.bam]
+[[id:patientC, repeat:1], [type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientC_rep1_normal.bam, [type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientC_rep1_tumor.bam]
 ```
 
 We can see we only state the `id` and `repeat` fields once in the grouping key and we have the `type` field in the sample data. We haven't lost any information but we managed to make our channel contents more succinct.
@@ -772,16 +772,14 @@ We can simplify our channel structure further by dropping `[type:normal]` and `[
 
 === "After"
 
-    ```groovy title="main.nf" linenums="5" hl_lines="3-4"
-    getSampleIdAndReplicate = { meta, file -> [ meta.subMap(['id', 'repeat']), file ] }
-
+    ```groovy title="main.nf" linenums="8" hl_lines="1"
+        getSampleIdAndReplicate = { meta, file -> [ meta.subMap(['id', 'repeat']), file ] }
     ```
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="5"
-    getSampleIdAndReplicate = { meta, file -> [ meta.subMap(['id', 'repeat']), meta.subMap(['type']), file ] }
-
+    ```groovy title="main.nf" linenums="8" hl_lines="1"
+        getSampleIdAndReplicate = { meta, file -> [ meta.subMap(['id', 'repeat']), meta.subMap(['type']), file ] }
     ```
 
 ```bash title="Remove redundant information"
