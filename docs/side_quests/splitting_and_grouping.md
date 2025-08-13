@@ -950,7 +950,9 @@ Launching `main.nf` [sad_hawking] DSL2 - revision: 1f6f6250cd
 [[id:patientC, interval:chr3], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
 ```
 
-Using `map` to coerce your data into the correct structure can be tricky, but it's crucial to correctly splitting and grouping effectively.
+Using `map` to coerce your data into the correct structure can be tricky, but it's crucial for effective data manipulation.
+
+We now have every sample repeated across all genomic intervals, creating multiple independent analysis units that can be processed in parallel. But what if we want to bring related samples back together? In the next section, we'll learn how to group samples that share common attributes.
 
 ### Takeaway
 
@@ -963,7 +965,7 @@ In this section, you've learned:
 
 ## 5. Aggregating samples using `groupTuple`
 
-In the previous section, we learned how to split data from an input file and filter by specific fields (in our case normal and tumor samples). But this only covers a single type of joining. What if we want to group samples by a specific attribute? For example, instead of joining matched normal-tumor pairs, we might want to process all samples from "sampleA" together regardless of their type. This pattern is common in bioinformatics workflows where you may want to process related samples separately for efficiency reasons before comparing or combining the results at the end.
+In the previous sections, we learned how to split data from an input file and filter by specific fields (in our case normal and tumor samples). But this only covers a single type of joining. What if we want to group samples by a specific attribute? For example, instead of joining matched normal-tumor pairs, we might want to process all samples from "sampleA" together regardless of their type. This pattern is common in bioinformatics workflows where you may want to process related samples separately for efficiency reasons before comparing or combining the results at the end.
 
 Nextflow includes built in methods to do this, the main one we will look at is `groupTuple`.
 
