@@ -51,7 +51,7 @@ This should run without error.
   <summary>Command output</summary>
 
 ```console linenums="1"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.04.6
 
 Launching `2a-inputs.nf` [mighty_sammet] DSL2 - revision: 29fb5352b3
 
@@ -141,7 +141,7 @@ This time we see all three process runs and their associated work subdirectories
   <summary>Command output</summary>
 
 ```console linenums="1"
-N E X T F L O W  ~  version 25.04.3
+N E X T F L O W  ~  version 25.04.6
 Launching `2a-inputs.nf` [pedantic_hamilton] DSL2 - revision: 6bbc42e49f
 [ab/1a8ece] Submitted process > sayHello (1)
 [0d/2cae24] Submitted process > sayHello (2)
@@ -357,7 +357,7 @@ Once again this should run successfully.
   <summary>Command output</summary>
 
 ```console linenums="1"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.04.6
 
 Launching `2b-multistep.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
 
@@ -696,7 +696,7 @@ Once again this should run successfully.
   <summary>Command output</summary>
 
 ```console linenums="1"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.04.6
 
 Launching `2c-modules.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
 
@@ -1073,7 +1073,7 @@ This should work without error.
   <summary>Command output</summary>
 
 ```console linenums="1"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.04.6
 
 Launching `2d-container.nf` [elegant_brattain] DSL2 - revision: 028a841db1
 
