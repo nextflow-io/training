@@ -823,15 +823,15 @@ Let's start by creating a channel of intervals. To keep life simple, we will jus
 
 === "After"
 
-    ```groovy title="main.nf" linenums="24" hl_lines="3"
-            .join(ch_tumor_patients)
+    ```groovy title="main.nf" linenums="17" hl_lines="3"
+            .join(ch_tumor_samples)
         ch_intervals = Channel.of('chr1', 'chr2', 'chr3')
     ```
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="24" hl_lines="2"
-            .join(ch_tumor_patients)
+    ```groovy title="main.nf" linenums="17" hl_lines="2"
+            .join(ch_tumor_samples)
         ch_joined_samples.view()
     ```
 
@@ -839,7 +839,7 @@ Now remember, we want to repeat each sample for each interval. This is sometimes
 
 === "After"
 
-    ```groovy title="main.nf" linenums="26" hl_lines="3-4"
+    ```groovy title="main.nf" linenums="18" hl_lines="3-5"
         ch_intervals = Channel.of('chr1', 'chr2', 'chr3')
 
         ch_combined_samples = ch_joined_samples
@@ -849,7 +849,7 @@ Now remember, we want to repeat each sample for each interval. This is sometimes
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="26"
+    ```groovy title="main.nf" linenums="18"
         ch_intervals = Channel.of('chr1', 'chr2', 'chr3')
     ```
 
@@ -862,7 +862,7 @@ nextflow run main.nf
 ```console title="View combined samples"
  N E X T F L O W   ~  version 25.04.3
 
-Launching `main.nf` [soggy_fourier] DSL2 - revision: fa8f5edb22
+Launching `main.nf` [mighty_tesla] DSL2 - revision: ae013ab70b
 
 [[id:patientA, repeat:1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam, chr1]
 [[id:patientA, repeat:1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam, chr2]
@@ -886,7 +886,7 @@ We can use the `map` operator to tidy and refactor our sample data so it's easie
 
 === "After"
 
-    ```groovy title="main.nf" linenums="25" hl_lines="3-9"
+    ```groovy title="main.nf" linenums="20" hl_lines="3-9"
         ch_combined_samples = ch_joined_samples
             .combine(ch_intervals)
             .map { grouping_key, normal, tumor, interval ->
@@ -901,7 +901,7 @@ We can use the `map` operator to tidy and refactor our sample data so it's easie
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="28"
+    ```groovy title="main.nf" linenums="20"
         ch_combined_samples = ch_joined_samples
             .combine(ch_intervals)
             .view()
@@ -988,7 +988,7 @@ We can reuse the `subMap` method from before to isolate our `id` and `interval` 
 
 === "After"
 
-    ```groovy title="main.nf" linenums="28" hl_lines="11-20"
+    ```groovy title="main.nf" linenums="20" hl_lines="11-19"
         ch_combined_samples = ch_joined_samples
             .combine(ch_intervals)
             .map { grouping_key, normal, tumor, interval ->
@@ -998,9 +998,8 @@ We can reuse the `subMap` method from before to isolate our `id` and `interval` 
                     tumor
                 ]
             }
-            .view()
 
-        ch_grouped_samples = ch_combined_patients
+        ch_grouped_samples = ch_combined_samples
             .map { grouping_key, normal, tumor ->
                 [
                     grouping_key.subMap('id', 'interval'),
@@ -1013,7 +1012,7 @@ We can reuse the `subMap` method from before to isolate our `id` and `interval` 
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="25"
+    ```groovy title="main.nf" linenums="20" hl_lines="10"
         ch_combined_samples = ch_joined_samples
             .combine(ch_intervals)
             .map { grouping_key, normal, tumor, interval ->
@@ -1035,20 +1034,20 @@ nextflow run main.nf
 ```console title="View grouped samples"
  N E X T F L O W   ~  version 25.04.3
 
-Launching `main.nf` [loving_escher] DSL2 - revision: 3adccba898
+Launching `main.nf` [hopeful_brenner] DSL2 - revision: 7f4f7fea76
 
-[[id:sampleA, interval:chr1], sampleA_rep1_normal.bam, sampleA_rep1_tumor.bam]
-[[id:sampleA, interval:chr2], sampleA_rep1_normal.bam, sampleA_rep1_tumor.bam]
-[[id:sampleA, interval:chr3], sampleA_rep1_normal.bam, sampleA_rep1_tumor.bam]
-[[id:sampleA, interval:chr1], sampleA_rep2_normal.bam, sampleA_rep2_tumor.bam]
-[[id:sampleA, interval:chr2], sampleA_rep2_normal.bam, sampleA_rep2_tumor.bam]
-[[id:sampleA, interval:chr3], sampleA_rep2_normal.bam, sampleA_rep2_tumor.bam]
-[[id:sampleB, interval:chr1], sampleB_rep1_normal.bam, sampleB_rep1_tumor.bam]
-[[id:sampleB, interval:chr2], sampleB_rep1_normal.bam, sampleB_rep1_tumor.bam]
-[[id:sampleB, interval:chr3], sampleB_rep1_normal.bam, sampleB_rep1_tumor.bam]
-[[id:sampleC, interval:chr1], sampleC_rep1_normal.bam, sampleC_rep1_tumor.bam]
-[[id:sampleC, interval:chr2], sampleC_rep1_normal.bam, sampleC_rep1_tumor.bam]
-[[id:sampleC, interval:chr3], sampleC_rep1_normal.bam, sampleC_rep1_tumor.bam]
+[[id:patientA, interval:chr1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
+[[id:patientA, interval:chr2], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
+[[id:patientA, interval:chr3], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
+[[id:patientA, interval:chr1], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
+[[id:patientA, interval:chr2], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
+[[id:patientA, interval:chr3], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
+[[id:patientB, interval:chr1], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]
+[[id:patientB, interval:chr2], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]
+[[id:patientB, interval:chr3], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]
+[[id:patientC, interval:chr1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
+[[id:patientC, interval:chr2], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
+[[id:patientC, interval:chr3], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
 ```
 
 We can see that we have successfully isolated the `id` and `interval` fields, but not grouped the samples yet.
@@ -1061,31 +1060,31 @@ Let's now group the samples by this new grouping element, using the [`groupTuple
 
 === "After"
 
-    ```groovy title="main.nf" linenums="39" hl_lines="8"
-        ch_grouped_samples = ch_combined_patients
+    ```groovy title="main.nf" linenums="30" hl_lines="9"
+        ch_grouped_samples = ch_combined_samples
             .map { grouping_key, normal, tumor ->
                 [
                     grouping_key.subMap('id', 'interval'),
                     normal,
                     tumor
                 ]
-            }
-            .groupTuple()
-            .view()
+              }
+              .groupTuple()
+              .view()
     ```
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="39"
-        ch_grouped_samples = ch_combined_patients
+    ```groovy title="main.nf" linenums="30"
+        ch_grouped_samples = ch_combined_samples
             .map { grouping_key, normal, tumor ->
                 [
                     grouping_key.subMap('id', 'interval'),
                     normal,
                     tumor
                 ]
-            }
-            .view()
+              }
+              .view()
     ```
 
 Simple, huh? We just added a single line of code. Let's see what happens when we run it:
@@ -1097,7 +1096,7 @@ nextflow run main.nf
 ```console title="View grouped samples"
  N E X T F L O W   ~  version 25.04.3
 
-Launching `main.nf` [festering_almeida] DSL2 - revision: 78988949e3
+Launching `main.nf` [friendly_jang] DSL2 - revision: a1bee1c55d
 
 [[id:patientA, interval:chr1], [patientA_rep1_normal.bam, patientA_rep2_normal.bam], [patientA_rep1_tumor.bam, patientA_rep2_tumor.bam]]
 [[id:patientA, interval:chr2], [patientA_rep1_normal.bam, patientA_rep2_normal.bam], [patientA_rep1_tumor.bam, patientA_rep2_tumor.bam]]
@@ -1110,7 +1109,7 @@ Launching `main.nf` [festering_almeida] DSL2 - revision: 78988949e3
 [[id:patientC, interval:chr3], [patientC_rep1_normal.bam], [patientC_rep1_tumor.bam]]
 ```
 
-Note our data has changed structure. What was previously a list of tuples is now a list of lists of tuples. This is because when we use `groupTuple`, Nextflow creates a new list for each group. This is important to remember when trying to handle the data downstream.
+Note our data has changed structure and within each channel element the files now contained in tuples like `[patientA_rep1_normal.bam, patientA_rep2_normal.bam]`. This is because when we use `groupTuple`, Nextflow combines the single files for each sample of a group. This is important to remember when trying to handle the data downstream.
 
 !!! note
 
