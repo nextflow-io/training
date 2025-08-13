@@ -319,7 +319,7 @@ Launching `main.nf` [trusting_poisson] DSL2 - revision: 639186ee74
 [[id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
 ```
 
-Success! We have filtered the data to only include normal samples, and saved that in a new channel, without removing the tumour samples from the `ch_samples` channel. Let's create a filtered channel for the tumor samples as well:
+Success! We have filtered the data to only include normal samples, and saved that in a new channel, without removing the tumor samples from the `ch_samples` channel. Let's create a filtered channel for the tumor samples as well:
 
 === "After"
 
@@ -336,7 +336,7 @@ Success! We have filtered the data to only include normal samples, and saved tha
         ch_normal_samples
             .view{'Normal sample: ' + it}
         ch_tumor_samples
-            .view{'Tumour sample: ' + it}
+            .view{'tumor sample: ' + it}
     ```
 
 === "Before"
@@ -362,17 +362,17 @@ nextflow run main.nf
 
 Launching `main.nf` [maniac_boltzmann] DSL2 - revision: 3636b6576b
 
-Tumour sample: [[id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
-Tumour sample: [[id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
+tumor sample: [[id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
+tumor sample: [[id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
 Normal sample: [[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
 Normal sample: [[id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
 Normal sample: [[id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]
 Normal sample: [[id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
-Tumour sample: [[id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
-Tumour sample: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
+tumor sample: [[id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
+tumor sample: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
 ```
 
-We've separated out the normal and tumor samples into two different channels, and used a closure supplied to to `view()` to label them differently in the output: `ch_tumor_samples.view{'Tumour sample: ' + it}`.
+We've separated out the normal and tumor samples into two different channels, and used a closure supplied to to `view()` to label them differently in the output: `ch_tumor_samples.view{'tumor sample: ' + it}`.
 
 ### Takeaway
 
@@ -405,14 +405,14 @@ nextflow run main.nf
 
 Launching `main.nf` [loving_bardeen] DSL2 - revision: 012d38e59f
 
-Tumour sample: [[id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
+tumor sample: [[id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
 Normal sample: [[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
-Tumour sample: [[id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
+tumor sample: [[id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
 Normal sample: [[id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
 Normal sample: [[id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]
 Normal sample: [[id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
-Tumour sample: [[id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
-Tumour sample: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
+tumor sample: [[id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
+tumor sample: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
 ```
 
 We can see that the `id` field is the first element in each meta map. For `join` to work, we should isolate the `id` field in each tuple. After that, we can simply use the `join` operator to combine the two channels.
@@ -429,7 +429,7 @@ To isolate the `id` field, we can use the [`map` operator](https://www.nextflow.
             .filter { meta, file -> meta.type == 'tumor' }
             .map { meta, file -> [meta.id, meta, file] }
         ch_normal_samples.view{'Normal sample: ' + it}
-        ch_tumor_samples.view{'Tumour sample: ' + it}
+        ch_tumor_samples.view{'tumor sample: ' + it}
     ```
 
 === "Before"
@@ -440,7 +440,7 @@ To isolate the `id` field, we can use the [`map` operator](https://www.nextflow.
         ch_tumor_samples = ch_samples
             .filter { meta, file -> meta.type == 'tumor' }
         ch_normal_samples.view{'Normal sample: ' + it}
-        ch_tumor_samples.view{'Tumour sample: ' + it}
+        ch_tumor_samples.view{'tumor sample: ' + it}
     ```
 
 ```bash title="View normal and tumor samples with ID as element 0"
@@ -452,10 +452,10 @@ nextflow run main.nf
 
 Launching `main.nf` [dreamy_sax] DSL2 - revision: 882ae9add4
 
-Tumour sample: [patientA, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
-Tumour sample: [patientA, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
-Tumour sample: [patientB, [id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
-Tumour sample: [patientC, [id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
+tumor sample: [patientA, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
+tumor sample: [patientA, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
+tumor sample: [patientB, [id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
+tumor sample: [patientC, [id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
 'Normal sample: [patientA, [id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
 'Normal sample: [patientA, [id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
 'Normal sample: [patientB, [id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]
@@ -489,7 +489,7 @@ Once again, we will use `view` to print the joined outputs.
             .filter { meta, file -> meta.type == 'tumor' }
             .map { meta, file -> [meta.id, meta, file] }
         ch_normal_samples.view{'Normal sample: ' + it}
-        ch_tumor_samples.view{'Tumour sample: ' + it}
+        ch_tumor_samples.view{'tumor sample: ' + it}
     ```
 
 ```bash title="View normal and tumor samples"
