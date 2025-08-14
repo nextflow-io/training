@@ -332,8 +332,8 @@ Let's include the process, then run, and view it:
             [[id: row.id, character: row.character], row.recording]
         }
 
-    ch_prediction = IDENTIFY_LANGUAGE(ch_samplesheet)
-    ch_prediction.view()
+        ch_prediction = IDENTIFY_LANGUAGE(ch_samplesheet)
+        ch_prediction.view()
     ```
 
 === "Before"
