@@ -232,7 +232,7 @@ Let's use this and separate our metadata from the file path. We'll use the `map`
 
     ```groovy title="main.nf" linenums="5" hl_lines="2"
         .map { row ->
-            [[id: row.id, character: row.character], row.recording]
+            [ [id: row.id, character: row.character], row.recording ]
         }
     ```
 
@@ -329,7 +329,7 @@ Let's include the process, then run, and view it:
 === "After"
 
     ```groovy title="main.nf" linenums="25" hl_lines="4-5"
-            [[id: row.id, character: row.character], row.recording]
+            [ [id: row.id, character: row.character], row.recording ]
         }
 
         ch_prediction = IDENTIFY_LANGUAGE(ch_samplesheet)
