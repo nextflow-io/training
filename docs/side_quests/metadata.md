@@ -46,13 +46,13 @@ Before taking on this side quest you should:
 
 Let's move into the project directory.
 
-```bash
+```bash title="Navigate to the project directory"
 cd side-quests/metadata
 ```
 
 You can set VSCode to focus on this directory:
 
-```bash
+```bash title="Open VSCode in current directory"
 code .
 ```
 
@@ -137,7 +137,7 @@ println my_map.id  // Prints: sampleA
 
       You can run this example to see how maps look like with:
 
-      ```bash
+      ```bash title="Run map demo example"
       nextflow run examples/map_demo.nf
       ```
 
