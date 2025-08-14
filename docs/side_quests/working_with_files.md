@@ -532,17 +532,70 @@ To see the difference, check the working directory located at the hash value of 
 
 In this way, you can replace local with remote data without changing any pipeline logic.
 
+#### Cloud Storage with Glob Patterns
+
+While HTTP doesn't support globs, cloud storage protocols do. Here's how you could use glob patterns with cloud storage:
+
+```groovy title="Cloud storage examples (not runnable in this environment)"
+// S3 with glob patterns - would match multiple files
+ch_s3_files = Channel.fromPath('s3://my-bucket/data/*.fastq.gz')
+
+// Azure Blob Storage with glob patterns
+ch_azure_files = Channel.fromPath('az://container/data/patient*_R{1,2}.fastq.gz')
+
+// Google Cloud Storage with glob patterns
+ch_gcs_files = Channel.fromPath('gs://bucket/data/sample_*.fastq.gz')
+```
+
+These examples show the power of Nextflow's unified file handling - the same code works whether files are local or in the cloud, as long as the protocol supports the operations you need.
+
 ### Takeaway
 
 - Remote data is accessed using a URI (HTTP, FTP, S3, Azure, Google Cloud)
 - Nextflow will automatically download and stage the data to the right place
 - Do not write logic to download or upload remote files!
 - Local and remote files produce different object types but work identically
-- You can seamlessly switch between local and remote data sources without changing code logic
+- **Important**: HTTP/HTTPS only work with single files (no glob patterns)
+- Cloud storage (S3, Azure, GCS) supports both single files and glob patterns
+- You can seamlessly switch between local and remote data sources without changing code logic (as long as the protocol supports your required operations)
 
 !!! note
 
     **Note on Object Types**: Notice that local files produce `sun.nio.fs.UnixPath` objects while remote files produce `nextflow.file.http.XPath` objects. Despite these different class names, both work exactly the same way and can be used identically in your workflows. This is a key feature of Nextflow - you can seamlessly switch between local and remote data sources without changing your code logic.
+
+### 2.2. Switching Back to Local Files
+
+For the remainder of this side quest, we'll use local files in our examples. This allows us to demonstrate powerful features like glob patterns and batch processing that aren't available with HTTP URLs. Remember: the same concepts apply to cloud storage (S3, Azure, GCS) where glob patterns are fully supported.
+
+Let's update our workflow to use local files again:
+
+=== "After"
+
+    ```groovy title="file_operations.nf" linenums="2" hl_lines="2"
+        // Create a file object from a string path
+        myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
+
+        // Print file attributes
+        println "File object class: ${myFile.class}"
+        println "File name: ${myFile.name}"
+        println "Simple name: ${myFile.simpleName}"
+        println "Extension: ${myFile.extension}"
+        println "Parent directory: ${myFile.parent}"
+    ```
+
+=== "Before"
+
+    ```groovy title="file_operations.nf" linenums="2" hl_lines="5-8"
+        // Create a Path object from a string path
+        myFile = file('https://github.com/nextflow-io/training/blob/bb187e3bfdf4eec2c53b3b08d2b60fdd7003b763/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz')
+
+        // Print file attributes
+        println "File object class: ${myFile.class}"
+        println "File name: ${myFile.name}"
+        println "Simple name: ${myFile.simpleName}"
+        println "Extension: ${myFile.extension}"
+        println "Parent directory: ${myFile.parent}"
+    ```
 
 ---
 
@@ -580,7 +633,8 @@ Update your `file_operations.nf` file:
 
     ```groovy title="file_operations.nf" linenums="2" hl_lines="5-8"
     // Create a Path object from a string path
-        myFile = file('https://github.com/nextflow-io/training/blob/bb187e3bfdf4eec2c53b3b08d2b60fdd7003b763/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz')
+        // Create a file object from a string path
+        myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
 
         // Print file attributes
         println "File object class: ${myFile.class}"
@@ -1033,7 +1087,7 @@ Add the following to the top of your `file_operations.nf` file:
 
 !!! note
 
-    We are calling our map '`meta`'. For a more in-depth introduction to meta maps, see [Patient Specific Data in Workflows](./metadata.md).
+    We are calling our map '`meta`'. For a more in-depth introduction to meta maps, see [Working with metadata](./metadata.md).
 
 ### 6.2. Implement the process in the workflow
 
