@@ -31,13 +31,13 @@ Before taking on this side quest you should:
 
 Let's move into the project directory:
 
-```bash
+```bash title="Navigate to project directory"
 cd side-quests/working_with_files
 ```
 
 You can set VSCode to focus on this directory:
 
-```bash
+```bash title="Open directory in VSCode"
 code .
 ```
 
@@ -93,7 +93,7 @@ We have a mini-workflow that refers to a single file path in it's workflow, then
 
 Run the workflow:
 
-```bash
+```bash title="Run the workflow"
 nextflow run file_operations.nf
 ```
 
@@ -133,7 +133,7 @@ Edit the `file_operations.nf` to wrap the string with `file()` as follows:
 
 Run the workflow:
 
-```bash
+```bash title="Test Path object creation"
 nextflow run file_operations.nf
 ```
 
@@ -186,7 +186,7 @@ Let's update our workflow to print out the file attributes:
 
 Run the workflow:
 
-```bash
+```bash title="Test file attributes"
 nextflow run file_operations.nf
 ```
 
@@ -241,7 +241,7 @@ workflow {
 
 Run this workflow to see the error:
 
-```bash
+```bash title="Test val input with string error"
 nextflow run count_lines.nf
 ```
 
@@ -417,7 +417,7 @@ Now let's fix this properly by using the `file()` method to create a Path object
 
 Now when you run this, it should work correctly! The file will be staged into the process working directory and the `wc -l` command will succeed.
 
-```bash
+```bash title="Test successful execution"
 nextflow run count_lines.nf
 ```
 
@@ -510,7 +510,7 @@ Open `file_operations.nf` again and make changes like this:
 
 Run the workflow and it will automatically pull the data from the internet:
 
-```bash
+```bash title="Test remote file access"
 nextflow run file_operations.nf
 ```
 
@@ -646,7 +646,7 @@ Update your `file_operations.nf` file:
 
 Run the workflow:
 
-```bash
+```bash title="Test Channel.fromPath"
 nextflow run file_operations.nf
 ```
 
@@ -697,7 +697,7 @@ In our first version, we use `.view()` to print the file name. Let's update our 
 
 Run the workflow:
 
-```bash
+```bash title="Test file attributes with Channel.fromPath"
 nextflow run file_operations.nf
 ```
 
@@ -733,7 +733,7 @@ A glob pattern is a pattern that matches one or more characters in a string. The
 
 Run the workflow:
 
-```bash
+```bash title="Test glob pattern matching"
 nextflow run file_operations.nf
 ```
 
@@ -801,7 +801,7 @@ First we will grab the simpleName of the file, which includes the metadata, and 
         }
     ```
 
-```bash
+```bash title="Test filename metadata extraction"
 nextflow run file_operations.nf
 ```
 
@@ -840,7 +840,7 @@ Groovy includes a method called `tokenize()` which is perfect for this task.
 
 Once we run this, we should see the patient metadata as a list of strings, and the Path object as the second element in the tuple.
 
-```bash
+```bash title="Test filename tokenization"
 nextflow run file_operations.nf
 ```
 
@@ -906,7 +906,7 @@ Notice that we're simplifying a couple of the meta data items as we go (e.g. `re
 
 Now re-run the workflow:
 
-```bash
+```bash title="Test metadata map structure"
 nextflow run file_operations.nf
 ```
 
@@ -969,7 +969,7 @@ Complete your `file_operations.nf` file with the following (deleting the map ope
 
 Run the workflow:
 
-```bash
+```bash title="Test Channel.fromFilePairs"
 nextflow run file_operations.nf
 ```
 
@@ -1014,7 +1014,7 @@ We still need the metadata. Our `map` operation from before won't work because i
             .view()
     ```
 
-```bash
+```bash title="Test file pairs metadata extraction"
 nextflow run file_operations.nf
 ```
 
@@ -1131,7 +1131,7 @@ Then implement the process in the workflow:
     }
     ```
 
-```bash
+```bash title="Test ANALYZE_READS process"
 nextflow run file_operations.nf
 ```
 
@@ -1172,7 +1172,7 @@ Remember Channel.fromPath() accepts a _glob_ as input, which means it can accept
 
 Run the pipeline now and see all the results:
 
-```bash
+```bash title="Test processing multiple samples"
 nextflow run file_operations.nf
 ```
 
@@ -1222,7 +1222,7 @@ We have grabbed the metadata from the patients and used it to construct an outpu
 
 Run the pipeline now and see all the results. Remove the results directory first to give yourself a clean workspace:
 
-```bash
+```bash title="Test unique published files"
 rm -r results
 nextflow run file_operations.nf
 ```
