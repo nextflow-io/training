@@ -563,7 +563,7 @@ Let's run our files through `COWPY` and remove our `view` statement:
 === "After"
 
     ```groovy title="main.nf" linenums="59" hl_lines="3"
-            [meta + [lang_group: lang_group], file]
+            [ meta + [lang_group: lang_group], file ]
         }
         COWPY(ch_languages))
     ```
