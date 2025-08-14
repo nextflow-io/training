@@ -28,6 +28,7 @@ Otherwise, select a side quest from the menu below.
 
 ## Menu of Side Quests
 
+- [Groovy Essentials for Nextflow](./groovy_essentials.md)
 - [Introduction to nf-core](./nf-core.md)
 - [Sample-specific data](./metadata.md)
 - [Splitting and Grouping](./splitting_and_grouping.md)

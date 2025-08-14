@@ -1,0 +1,25 @@
+analysis:
+  quality:
+    min_score: 30
+    trim_adapters: true
+    remove_duplicates: false
+
+  alignment:
+    reference: "GRCh38"
+    aligner: "STAR"
+    max_mismatches: 2
+
+  quantification:
+    method: "featureCounts"
+    feature_type: "exon"
+    count_overlaps: false
+
+resources:
+  max_cpus: 8
+  max_memory: "16GB"
+  temp_dir: "/tmp"
+
+output:
+  publish_mode: "copy"
+  compress: true
+  formats: ["bam", "counts", "qc_report"]
