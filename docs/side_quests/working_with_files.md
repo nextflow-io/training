@@ -506,7 +506,7 @@ Open `file_operations.nf` again and make changes like this:
 
 !!! note
 
-    HTTPS remote data does not accept globs because HTTPS cannot list multiple files, however other storage protocols such as blob storage (`s3://`, `az://`, `gs://`) can.
+    HTTPS remote data does not accept globs because HTTPS cannot list multiple files, and similarly cannot be used with directory paths (you must specify exact file URLs). However, other storage protocols such as blob storage (`s3://`, `az://`, `gs://`) can use both globs and directory paths.
 
 Run the workflow and it will automatically pull the data from the internet:
 
