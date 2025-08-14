@@ -2,7 +2,7 @@
 
 Nextflow provides powerful tools for working with data flexibly. A key capability is splitting data into different streams and then grouping related items back together. This is especially valuable in bioinformatics workflows where you need to process different types of samples separately before combining results for analysis.
 
-Think of it like sorting mail: you separate letters by destination, process each pile differently, then recombine items going to the same person. Nextflow uses special operators to accomplish this with scientific data.
+Think of it like sorting mail: you separate letters by destination, process each pile differently, then recombine items going to the same person. Nextflow uses special operators to accomplish this with scientific data. This approach is also commonly known as the **scatter/gather** pattern in distributed computing and bioinformatics workflows.
 
 Nextflow's channel system is at the heart of this flexibility. Channels connect different parts of your workflow, allowing data to flow through your analysis. You can create multiple channels from a single data source, process each channel differently, and then merge channels back together when needed. This approach lets you design workflows that naturally mirror the branching and converging paths of complex bioinformatics analyses.
 

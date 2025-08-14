@@ -46,13 +46,13 @@ Before taking on this side quest you should:
 
 Let's move into the project directory.
 
-```bash
+```bash title="Navigate to the project directory"
 cd side-quests/metadata
 ```
 
 You can set VSCode to focus on this directory:
 
-```bash
+```bash title="Open VSCode in current directory"
 code .
 ```
 
@@ -137,7 +137,7 @@ println my_map.id  // Prints: sampleA
 
       You can run this example to see how maps look like with:
 
-      ```bash
+      ```bash title="Run map demo example"
       nextflow run examples/map_demo.nf
       ```
 
@@ -232,7 +232,7 @@ Let's use this and separate our metadata from the file path. We'll use the `map`
 
     ```groovy title="main.nf" linenums="5" hl_lines="2"
         .map { row ->
-            [[id: row.id, character: row.character], row.recording]
+            [ [id: row.id, character: row.character], row.recording ]
         }
     ```
 
@@ -312,6 +312,8 @@ Now we want to process our files with unidentified languages. Let's add a proces
         langid < ${file} -l en,de,fr,es,it | sed -E "s/.*\\('([a-z]+)'.*/\\1/" | tr -d '\\n'
         """
     }
+
+    workflow {
     ```
 
 === "Before"
@@ -320,18 +322,18 @@ Now we want to process our files with unidentified languages. Let's add a proces
     workflow  {
     ```
 
-The tool [langid](https://github.com/saffsd/langid.py) is used for language identification. It comes pre-trained on a set of languages. For a given phrase, it outputs a language prediction and a probability score for each guess to the console. In the `script` section, we remove the probability score, clean up the string by removing newline characters, and return only the language prediction. Since the output is printed directly to the console, we use Nextflow’s [`stdout` output qualifier](https://www.nextflow.io/docs/latest/process.html#outputs) to capture and pass the string as output.
+The tool [langid](https://github.com/saffsd/langid.py) is used for language identification. It comes pre-trained on a set of languages. For a given phrase, it outputs a language prediction and a probability score for each guess to the console. In the `script` section, we use sed to remove the probability score, clean up the string by removing newline characters, and return only the language prediction. Since the output is printed directly to the console, we use Nextflow’s [`stdout` output qualifier](https://www.nextflow.io/docs/latest/process.html#outputs) to capture and pass the string as output.
 
 Let's include the process, then run, and view it:
 
 === "After"
 
     ```groovy title="main.nf" linenums="25" hl_lines="4-5"
-            [[id: row.id, character: row.character], row.recording]
+            [ [id: row.id, character: row.character], row.recording ]
         }
 
-    ch_prediction = IDENTIFY_LANGUAGE(ch_samplesheet)
-    ch_prediction.view()
+        ch_prediction = IDENTIFY_LANGUAGE(ch_samplesheet)
+        ch_prediction.view()
     ```
 
 === "Before"
@@ -388,19 +390,19 @@ Given that this is more data about the files, let's add it to our meta map. We c
 === "After"
 
     ```groovy title="main.nf" linenums="28" hl_lines="2-5"
-      ch_prediction = IDENTIFY_LANGUAGE(ch_samplesheet)
-      ch_languages = ch_prediction
-        .map { meta, file, lang ->
-            [meta + [lang: lang], file]
-        }
-        .view()
+        ch_prediction = IDENTIFY_LANGUAGE(ch_samplesheet)
+        ch_languages = ch_prediction
+          .map { meta, file, lang ->
+              [meta + [lang: lang], file]
+          }
+          .view()
     }
     ```
 
 === "Before"
 
     ```groovy title="main.nf" linenums="28"
-    ch_prediction = IDENTIFY_LANGUAGE(ch_samplesheet)
+        ch_prediction = IDENTIFY_LANGUAGE(ch_samplesheet)
     ```
 
 The `map` operator takes each channel element and processes it to create a modified version. Inside the closure `{ meta, file, lang -> ... }`, we then take the existing `meta` map, create a new map `[lang:lang]`, and merge both together using `+`.
@@ -448,27 +450,27 @@ We can add another `map` operator to assign either group (add this below your la
 === "After"
 
     ```groovy title="main.nf" linenums="31" hl_lines="4-12"
-    }
-    .map { meta, file ->
-
-        def lang_group = "unknown"
-        if (meta.lang.equals("de") || meta.lang.equals('en')) {
-            lang_group = "germanic"
         }
-        else if (meta.lang in ["fr", "es", "it"]) {
-            lang_group = "romance"
-        }
+        .map { meta, file ->
 
-        [meta + [lang_group: lang_group], file]
-    }
-    .view()
+            def lang_group = "unknown"
+            if (meta.lang.equals("de") || meta.lang.equals('en')) {
+                lang_group = "germanic"
+            }
+            else if (meta.lang in ["fr", "es", "it"]) {
+                lang_group = "romance"
+            }
+
+            [meta + [lang_group: lang_group], file]
+        }
+        .view()
     ```
 
 === "Before"
 
     ```groovy title="main.nf" linenums="31"
-    }
-    .view()
+        }
+        .view()
     ```
 
 Let's rerun it
@@ -544,14 +546,14 @@ Copy in the process before your workflow block:
         """
 
     }
+
+    workflow{}
     ```
 
 === "Before"
 
     ```groovy title="main.nf" linenums="20"
     workflow{
-      ...
-    }
     ```
 
 ### 3.1. Use meta map information in the process definition
@@ -561,9 +563,9 @@ Let's run our files through `COWPY` and remove our `view` statement:
 === "After"
 
     ```groovy title="main.nf" linenums="59" hl_lines="3"
-            [meta + [lang_group: lang_group], file]
+            [ meta + [lang_group: lang_group], file ]
         }
-    COWPY(ch_languages))
+        COWPY(ch_languages))
     ```
 
 === "Before"
@@ -592,7 +594,7 @@ Earlier, we added the predicted language to the `meta` map. We can access this `
     ```groovy title="main.nf" linenums="23"
     process COWPY {
 
-      container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
+        container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
     ```
 
 Let's run this:
@@ -654,19 +656,19 @@ Let's customize the characters by changing the `cowpy` command:
 === "After"
 
     ```groovy title="main.nf" linenums="37" hl_lines="3"
-    script:
-    """
-    cat $input_file | cowpy -c ${meta.character} > cowpy-${input_file}
-    """
+        script:
+        """
+        cat $input_file | cowpy -c ${meta.character} > cowpy-${input_file}
+        """
     ```
 
 === "Before"
 
     ```groovy title="main.nf" linenums="37"
-    script:
-    """
-    cat $input_file | cowpy -c "stegosaurus" > cowpy-${input_file}
-    """
+        script:
+        """
+        cat $input_file | cowpy -c "stegosaurus" > cowpy-${input_file}
+        """
     ```
 
 Let's run this:

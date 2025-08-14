@@ -31,13 +31,13 @@ Before taking on this side quest you should:
 
 Let's move into the project directory:
 
-```bash
+```bash title="Navigate to project directory"
 cd side-quests/working_with_files
 ```
 
 You can set VSCode to focus on this directory:
 
-```bash
+```bash title="Open directory in VSCode"
 code .
 ```
 
@@ -93,7 +93,7 @@ We have a mini-workflow that refers to a single file path in it's workflow, then
 
 Run the workflow:
 
-```bash
+```bash title="Run the workflow"
 nextflow run file_operations.nf
 ```
 
@@ -133,7 +133,7 @@ Edit the `file_operations.nf` to wrap the string with `file()` as follows:
 
 Run the workflow:
 
-```bash
+```bash title="Test Path object creation"
 nextflow run file_operations.nf
 ```
 
@@ -186,7 +186,7 @@ Let's update our workflow to print out the file attributes:
 
 Run the workflow:
 
-```bash
+```bash title="Test file attributes"
 nextflow run file_operations.nf
 ```
 
@@ -241,7 +241,7 @@ workflow {
 
 Run this workflow to see the error:
 
-```bash
+```bash title="Test val input with string error"
 nextflow run count_lines.nf
 ```
 
@@ -417,7 +417,7 @@ Now let's fix this properly by using the `file()` method to create a Path object
 
 Now when you run this, it should work correctly! The file will be staged into the process working directory and the `wc -l` command will succeed.
 
-```bash
+```bash title="Test successful execution"
 nextflow run count_lines.nf
 ```
 
@@ -506,11 +506,11 @@ Open `file_operations.nf` again and make changes like this:
 
 !!! note
 
-    HTTPS remote data does not accept globs because HTTPS cannot list multiple files, however other storage protocols such as blob storage (`s3://`, `az://`, `gs://`) can.
+    HTTPS remote data does not accept globs because HTTPS cannot list multiple files, and similarly cannot be used with directory paths (you must specify exact file URLs). However, other storage protocols such as blob storage (`s3://`, `az://`, `gs://`) can use both globs and directory paths.
 
 Run the workflow and it will automatically pull the data from the internet:
 
-```bash
+```bash title="Test remote file access"
 nextflow run file_operations.nf
 ```
 
@@ -532,17 +532,70 @@ To see the difference, check the working directory located at the hash value of 
 
 In this way, you can replace local with remote data without changing any pipeline logic.
 
+#### Cloud Storage with Glob Patterns
+
+While HTTP doesn't support globs, cloud storage protocols do. Here's how you could use glob patterns with cloud storage:
+
+```groovy title="Cloud storage examples (not runnable in this environment)"
+// S3 with glob patterns - would match multiple files
+ch_s3_files = Channel.fromPath('s3://my-bucket/data/*.fastq.gz')
+
+// Azure Blob Storage with glob patterns
+ch_azure_files = Channel.fromPath('az://container/data/patient*_R{1,2}.fastq.gz')
+
+// Google Cloud Storage with glob patterns
+ch_gcs_files = Channel.fromPath('gs://bucket/data/sample_*.fastq.gz')
+```
+
+These examples show the power of Nextflow's unified file handling - the same code works whether files are local or in the cloud, as long as the protocol supports the operations you need.
+
 ### Takeaway
 
 - Remote data is accessed using a URI (HTTP, FTP, S3, Azure, Google Cloud)
 - Nextflow will automatically download and stage the data to the right place
 - Do not write logic to download or upload remote files!
 - Local and remote files produce different object types but work identically
-- You can seamlessly switch between local and remote data sources without changing code logic
+- **Important**: HTTP/HTTPS only work with single files (no glob patterns)
+- Cloud storage (S3, Azure, GCS) supports both single files and glob patterns
+- You can seamlessly switch between local and remote data sources without changing code logic (as long as the protocol supports your required operations)
 
 !!! note
 
     **Note on Object Types**: Notice that local files produce `sun.nio.fs.UnixPath` objects while remote files produce `nextflow.file.http.XPath` objects. Despite these different class names, both work exactly the same way and can be used identically in your workflows. This is a key feature of Nextflow - you can seamlessly switch between local and remote data sources without changing your code logic.
+
+### 2.2. Switching Back to Local Files
+
+For the remainder of this side quest, we'll use local files in our examples. This allows us to demonstrate powerful features like glob patterns and batch processing that aren't available with HTTP URLs. Remember: the same concepts apply to cloud storage (S3, Azure, GCS) where glob patterns are fully supported.
+
+Let's update our workflow to use local files again:
+
+=== "After"
+
+    ```groovy title="file_operations.nf" linenums="2" hl_lines="2"
+        // Create a file object from a string path
+        myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
+
+        // Print file attributes
+        println "File object class: ${myFile.class}"
+        println "File name: ${myFile.name}"
+        println "Simple name: ${myFile.simpleName}"
+        println "Extension: ${myFile.extension}"
+        println "Parent directory: ${myFile.parent}"
+    ```
+
+=== "Before"
+
+    ```groovy title="file_operations.nf" linenums="2" hl_lines="5-8"
+        // Create a Path object from a string path
+        myFile = file('https://github.com/nextflow-io/training/blob/bb187e3bfdf4eec2c53b3b08d2b60fdd7003b763/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz')
+
+        // Print file attributes
+        println "File object class: ${myFile.class}"
+        println "File name: ${myFile.name}"
+        println "Simple name: ${myFile.simpleName}"
+        println "Extension: ${myFile.extension}"
+        println "Parent directory: ${myFile.parent}"
+    ```
 
 ---
 
@@ -580,7 +633,8 @@ Update your `file_operations.nf` file:
 
     ```groovy title="file_operations.nf" linenums="2" hl_lines="5-8"
     // Create a Path object from a string path
-        myFile = file('https://github.com/nextflow-io/training/blob/bb187e3bfdf4eec2c53b3b08d2b60fdd7003b763/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz')
+        // Create a file object from a string path
+        myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
 
         // Print file attributes
         println "File object class: ${myFile.class}"
@@ -592,7 +646,7 @@ Update your `file_operations.nf` file:
 
 Run the workflow:
 
-```bash
+```bash title="Test Channel.fromPath"
 nextflow run file_operations.nf
 ```
 
@@ -643,7 +697,7 @@ In our first version, we use `.view()` to print the file name. Let's update our 
 
 Run the workflow:
 
-```bash
+```bash title="Test file attributes with Channel.fromPath"
 nextflow run file_operations.nf
 ```
 
@@ -679,7 +733,7 @@ A glob pattern is a pattern that matches one or more characters in a string. The
 
 Run the workflow:
 
-```bash
+```bash title="Test glob pattern matching"
 nextflow run file_operations.nf
 ```
 
@@ -747,7 +801,7 @@ First we will grab the simpleName of the file, which includes the metadata, and 
         }
     ```
 
-```bash
+```bash title="Test filename metadata extraction"
 nextflow run file_operations.nf
 ```
 
@@ -786,7 +840,7 @@ Groovy includes a method called `tokenize()` which is perfect for this task.
 
 Once we run this, we should see the patient metadata as a list of strings, and the Path object as the second element in the tuple.
 
-```bash
+```bash title="Test filename tokenization"
 nextflow run file_operations.nf
 ```
 
@@ -852,7 +906,7 @@ Notice that we're simplifying a couple of the meta data items as we go (e.g. `re
 
 Now re-run the workflow:
 
-```bash
+```bash title="Test metadata map structure"
 nextflow run file_operations.nf
 ```
 
@@ -915,7 +969,7 @@ Complete your `file_operations.nf` file with the following (deleting the map ope
 
 Run the workflow:
 
-```bash
+```bash title="Test Channel.fromFilePairs"
 nextflow run file_operations.nf
 ```
 
@@ -960,7 +1014,7 @@ We still need the metadata. Our `map` operation from before won't work because i
             .view()
     ```
 
-```bash
+```bash title="Test file pairs metadata extraction"
 nextflow run file_operations.nf
 ```
 
@@ -1033,7 +1087,7 @@ Add the following to the top of your `file_operations.nf` file:
 
 !!! note
 
-    We are calling our map '`meta`'. For a more in-depth introduction to meta maps, see [Patient Specific Data in Workflows](./metadata.md).
+    We are calling our map '`meta`'. For a more in-depth introduction to meta maps, see [Working with metadata](./metadata.md).
 
 ### 6.2. Implement the process in the workflow
 
@@ -1077,7 +1131,7 @@ Then implement the process in the workflow:
     }
     ```
 
-```bash
+```bash title="Test ANALYZE_READS process"
 nextflow run file_operations.nf
 ```
 
@@ -1118,7 +1172,7 @@ Remember Channel.fromPath() accepts a _glob_ as input, which means it can accept
 
 Run the pipeline now and see all the results:
 
-```bash
+```bash title="Test processing multiple samples"
 nextflow run file_operations.nf
 ```
 
@@ -1168,7 +1222,7 @@ We have grabbed the metadata from the patients and used it to construct an outpu
 
 Run the pipeline now and see all the results. Remove the results directory first to give yourself a clean workspace:
 
-```bash
+```bash title="Test unique published files"
 rm -r results
 nextflow run file_operations.nf
 ```
@@ -1219,7 +1273,7 @@ See how using patient metadata as values gives us powerful flexibility in our pi
 2. Make decisions in processes based on patient properties
 3. Split, join, and recombine data based on metadata values
 
-This pattern of keeping metadata explicit and attached to the data (rather than encoded in filenames) is a core best practice in Nextflow that enables building robust, maintainable bioinformatics workflows. Learn more about this in [Working with meatadata](./metadata.md)
+This pattern of keeping metadata explicit and attached to the data (rather than encoded in filenames) is a core best practice in Nextflow that enables building robust, maintainable bioinformatics workflows. Learn more about this in [Working with metadata](./metadata.md)
 
 ### Takeaway
 
