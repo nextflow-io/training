@@ -1,0 +1,4 @@
+sample_id,organism,tissue_type,sequencing_depth,file_path,quality_score
+SAMPLE_001,human,liver,30000000,data/sequences/sample_001.fastq,38.5
+SAMPLE_002,mouse,brain,25000000,data/sequences/sample_002.fastq,35.2
+SAMPLE_003,human,kidney,45000000,data/sequences/sample_003.fastq,42.1
