@@ -1,4 +1,4 @@
-# Working with metadata
+# Metadata handling in workflows
 
 In any scientific analysis, we rarely work with just the raw data files. Each file comes with its own additional information: what it is, where it came from, and what makes it special. This extra information is what we call metadata.
 
