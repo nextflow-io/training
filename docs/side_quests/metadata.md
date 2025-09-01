@@ -239,7 +239,7 @@ Let's use this and separate our metadata from the file path. We'll use the `map`
 === "Before"
 
     ```groovy title="main.nf" linenums="5" hl_lines="2"
-        .map{ row ->
+        .map { row ->
                 row.character
         }
     ```
