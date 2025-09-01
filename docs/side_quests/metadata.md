@@ -702,7 +702,7 @@ and take another look at our french phrase:
 
 This approach differs from using pipeline parameters (`params`), which generally apply the same configuration to all files in your workflow. By leveraging metadata applied to each item in a channel, you can fine-tune process behavior on a per-file basis.
 
-#### 3.2.1. Exploiting metadata in the workflow
+#### 3.2.1. Exploiting metadata at the workflow level
 
 In the example above, by using a property of the meta map in the script block, we introduce a hard requirement on the properties that must be present. Anyone running with a sample sheet that did not contain the `character` property would encounter an error. The process `input:` only says that the `meta` map is required, so someone trying to use this process in another workflow might not notice immediately that the `character` property was required.
 
