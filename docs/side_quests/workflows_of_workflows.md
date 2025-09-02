@@ -24,7 +24,7 @@ In this side quest, we'll create a pipeline that demonstrates these benefits by:
 
 ## 0. Warmup
 
-### 0.1 Prerequisites
+### 0.1. Prerequisites
 
 Before taking on this side quest you should:
 
