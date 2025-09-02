@@ -324,7 +324,7 @@ We've successfully filtered the data and created a separate channel for normal s
         ch_normal_samples
             .view{'Normal sample: ' + it}
         ch_tumor_samples
-            .view{'tumor sample: ' + it}
+            .view{'Tumor sample: ' + it}
     ```
 
 === "Before"
@@ -345,17 +345,17 @@ nextflow run main.nf
 
 Launching `main.nf` [maniac_boltzmann] DSL2 - revision: 3636b6576b
 
-tumor sample: [[id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
-tumor sample: [[id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
+Tumor sample: [[id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
+Tumor sample: [[id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
 Normal sample: [[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
 Normal sample: [[id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
 Normal sample: [[id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]
 Normal sample: [[id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
-tumor sample: [[id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
-tumor sample: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
+Tumor sample: [[id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
+Tumor sample: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
 ```
 
-We've separated out the normal and tumor samples into two different channels, and used a closure supplied to `view()` to label them differently in the output: `ch_tumor_samples.view{'tumor sample: ' + it}`.
+We've separated out the normal and tumor samples into two different channels, and used a closure supplied to `view()` to label them differently in the output: `ch_tumor_samples.view{'Tumor sample: ' + it}`.
 
 ### Takeaway
 
@@ -364,7 +364,6 @@ In this section, you've learned:
 - **Filtering data**: How to filter data with `filter`
 - **Splitting data**: How to split data into different channels based on a condition
 - **Viewing data**: How to use `view` to print the data and label output from different channels
-- **Creating separate channels**: How to maintain multiple filtered channels for different data types
 
 We've now separated out the normal and tumor samples into two different channels. Next, we'll join the normal and tumor samples on the `id` field.
 
@@ -415,7 +414,7 @@ To isolate the `id` field, we can use the [`map` operator](https://www.nextflow.
         ch_normal_samples
             .view{'Normal sample: ' + it}
         ch_tumor_samples
-            .view{'tumor sample: ' + it}
+            .view{'Tumor sample: ' + it}
     ```
 
 === "Before"
@@ -428,7 +427,7 @@ To isolate the `id` field, we can use the [`map` operator](https://www.nextflow.
         ch_normal_samples
             .view{'Normal sample: ' + it}
         ch_tumor_samples
-            .view{'tumor sample: ' + it}
+            .view{'Tumor sample: ' + it}
     ```
 
 ```bash title="Test the map transformation"
@@ -480,7 +479,7 @@ Once again, we will use `view` to print the joined outputs.
         ch_normal_samples
             .view{'Normal sample: ' + it}
         ch_tumor_samples
-            .view{'tumor sample: ' + it}
+            .view{'Tumor sample: ' + it}
     ```
 
 ```bash title="Test the join operation"
