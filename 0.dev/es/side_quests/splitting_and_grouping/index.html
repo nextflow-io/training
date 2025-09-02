@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="../../../assets/img/nextflow-icon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.16">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.18">
     
     
       
@@ -1711,7 +1711,7 @@
   
   
   <span class="md-ellipsis">
-    Working with metadata
+    Metadata in workflows
     
   </span>
   
@@ -3921,7 +3921,7 @@ We now have a channel of maps and files, each representing a row from the input 
 </span><a id="__codelineno-21-11" name="__codelineno-21-11"></a><span class="hll"><span class="w">    </span><span class="n">ch_normal_samples</span>
 </span><a id="__codelineno-21-12" name="__codelineno-21-12"></a><span class="hll"><span class="w">        </span><span class="o">.</span><span class="na">view</span><span class="o">{</span><span class="s1">&#39;Normal sample: &#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">it</span><span class="o">}</span>
 </span><a id="__codelineno-21-13" name="__codelineno-21-13"></a><span class="hll"><span class="w">    </span><span class="n">ch_tumor_samples</span>
-</span><a id="__codelineno-21-14" name="__codelineno-21-14"></a><span class="hll"><span class="w">        </span><span class="o">.</span><span class="na">view</span><span class="o">{</span><span class="s1">&#39;tumor sample: &#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">it</span><span class="o">}</span>
+</span><a id="__codelineno-21-14" name="__codelineno-21-14"></a><span class="hll"><span class="w">        </span><span class="o">.</span><span class="na">view</span><span class="o">{</span><span class="s1">&#39;Tumor sample: &#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">it</span><span class="o">}</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -3942,23 +3942,22 @@ We now have a channel of maps and files, each representing a row from the input 
 <a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>
 <a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="go">Launching `main.nf` [maniac_boltzmann] DSL2 - revision: 3636b6576b</span>
 <a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a>
-<a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a><span class="go">tumor sample: [[id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]</span>
-<a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a><span class="go">tumor sample: [[id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]</span>
+<a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a><span class="go">Tumor sample: [[id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]</span>
+<a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a><span class="go">Tumor sample: [[id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]</span>
 <a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a><span class="go">Normal sample: [[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]</span>
 <a id="__codelineno-24-8" name="__codelineno-24-8" href="#__codelineno-24-8"></a><span class="go">Normal sample: [[id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]</span>
 <a id="__codelineno-24-9" name="__codelineno-24-9" href="#__codelineno-24-9"></a><span class="go">Normal sample: [[id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]</span>
 <a id="__codelineno-24-10" name="__codelineno-24-10" href="#__codelineno-24-10"></a><span class="go">Normal sample: [[id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]</span>
-<a id="__codelineno-24-11" name="__codelineno-24-11" href="#__codelineno-24-11"></a><span class="go">tumor sample: [[id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]</span>
-<a id="__codelineno-24-12" name="__codelineno-24-12" href="#__codelineno-24-12"></a><span class="go">tumor sample: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]</span>
+<a id="__codelineno-24-11" name="__codelineno-24-11" href="#__codelineno-24-11"></a><span class="go">Tumor sample: [[id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]</span>
+<a id="__codelineno-24-12" name="__codelineno-24-12" href="#__codelineno-24-12"></a><span class="go">Tumor sample: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]</span>
 </code></pre></div>
-<p>We've separated out the normal and tumor samples into two different channels, and used a closure supplied to <code>view()</code> to label them differently in the output: <code>ch_tumor_samples.view{'tumor sample: ' + it}</code>.</p>
+<p>We've separated out the normal and tumor samples into two different channels, and used a closure supplied to <code>view()</code> to label them differently in the output: <code>ch_tumor_samples.view{'Tumor sample: ' + it}</code>.</p>
 <h3 id="takeaway_1">Takeaway<a class="headerlink" href="#takeaway_1" title="Permanent link">&para;</a></h3>
 <p>In this section, you've learned:</p>
 <ul>
 <li><strong>Filtering data</strong>: How to filter data with <code>filter</code></li>
 <li><strong>Splitting data</strong>: How to split data into different channels based on a condition</li>
 <li><strong>Viewing data</strong>: How to use <code>view</code> to print the data and label output from different channels</li>
-<li><strong>Creating separate channels</strong>: How to maintain multiple filtered channels for different data types</li>
 </ul>
 <p>We've now separated out the normal and tumor samples into two different channels. Next, we'll join the normal and tumor samples on the <code>id</code> field.</p>
 <hr />
@@ -4005,7 +4004,7 @@ We now have a channel of maps and files, each representing a row from the input 
 </span><a id="__codelineno-27-13" name="__codelineno-27-13"></a><span class="w">    </span><span class="n">ch_normal_samples</span>
 <a id="__codelineno-27-14" name="__codelineno-27-14"></a><span class="w">        </span><span class="o">.</span><span class="na">view</span><span class="o">{</span><span class="s1">&#39;Normal sample: &#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">it</span><span class="o">}</span>
 <a id="__codelineno-27-15" name="__codelineno-27-15"></a><span class="w">    </span><span class="n">ch_tumor_samples</span>
-<a id="__codelineno-27-16" name="__codelineno-27-16"></a><span class="w">        </span><span class="o">.</span><span class="na">view</span><span class="o">{</span><span class="s1">&#39;tumor sample: &#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">it</span><span class="o">}</span>
+<a id="__codelineno-27-16" name="__codelineno-27-16"></a><span class="w">        </span><span class="o">.</span><span class="na">view</span><span class="o">{</span><span class="s1">&#39;Tumor sample: &#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">it</span><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -4023,7 +4022,7 @@ We now have a channel of maps and files, each representing a row from the input 
 <a id="__codelineno-28-11" name="__codelineno-28-11"></a><span class="w">    </span><span class="n">ch_normal_samples</span>
 <a id="__codelineno-28-12" name="__codelineno-28-12"></a><span class="w">        </span><span class="o">.</span><span class="na">view</span><span class="o">{</span><span class="s1">&#39;Normal sample: &#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">it</span><span class="o">}</span>
 <a id="__codelineno-28-13" name="__codelineno-28-13"></a><span class="w">    </span><span class="n">ch_tumor_samples</span>
-<a id="__codelineno-28-14" name="__codelineno-28-14"></a><span class="w">        </span><span class="o">.</span><span class="na">view</span><span class="o">{</span><span class="s1">&#39;tumor sample: &#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">it</span><span class="o">}</span>
+<a id="__codelineno-28-14" name="__codelineno-28-14"></a><span class="w">        </span><span class="o">.</span><span class="na">view</span><span class="o">{</span><span class="s1">&#39;Tumor sample: &#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">it</span><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -4086,7 +4085,7 @@ We now have a channel of maps and files, each representing a row from the input 
 <a id="__codelineno-32-13" name="__codelineno-32-13"></a><span class="hll"><span class="w">    </span><span class="n">ch_normal_samples</span>
 </span><a id="__codelineno-32-14" name="__codelineno-32-14"></a><span class="hll"><span class="w">        </span><span class="o">.</span><span class="na">view</span><span class="o">{</span><span class="s1">&#39;Normal sample: &#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">it</span><span class="o">}</span>
 </span><a id="__codelineno-32-15" name="__codelineno-32-15"></a><span class="hll"><span class="w">    </span><span class="n">ch_tumor_samples</span>
-</span><a id="__codelineno-32-16" name="__codelineno-32-16"></a><span class="hll"><span class="w">        </span><span class="o">.</span><span class="na">view</span><span class="o">{</span><span class="s1">&#39;tumor sample: &#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">it</span><span class="o">}</span>
+</span><a id="__codelineno-32-16" name="__codelineno-32-16"></a><span class="hll"><span class="w">        </span><span class="o">.</span><span class="na">view</span><span class="o">{</span><span class="s1">&#39;Tumor sample: &#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">it</span><span class="o">}</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -5038,10 +5037,10 @@ We now have a channel of maps and files, each representing a row from the input 
     
     
       
-      <script id="__config" type="application/json">{"base": "../../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": {"alias": true, "provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": {"alias": true, "provider": "mike"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.50899def.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.92b07e13.min.js"></script>
       
         <script src="../../../assets/javascripts/posthog.js"></script>
       
