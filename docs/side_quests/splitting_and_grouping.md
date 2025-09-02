@@ -362,7 +362,6 @@ In this section, you've learned:
 - **Filtering data**: How to filter data with `filter`
 - **Splitting data**: How to split data into different channels based on a condition
 - **Viewing data**: How to use `view` to print the data and label output from different channels
-- **Creating separate channels**: How to maintain multiple filtered channels for different data types
 
 We've now separated out the normal and tumor samples into two different channels. Next, we'll join the normal and tumor samples on the `id` field.
 
