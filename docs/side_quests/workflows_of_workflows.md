@@ -1,5 +1,7 @@
 # Workflows of Workflows
 
+**Approximate teaching time: 30 mins**
+
 One of the most powerful features of Nextflow is its ability to compose complex pipelines from smaller, reusable workflow modules. This modular approach makes pipelines easier to develop, test, and maintain.
 
 Let's explore why workflow composition is so important. When you're developing a pipeline, you often find yourself creating similar sequences of processes for different data types or analysis steps. Without workflow composition, you might end up copying and pasting these process sequences, leading to duplicated code that's hard to maintain. Or you might create one massive workflow that's difficult to understand and modify.

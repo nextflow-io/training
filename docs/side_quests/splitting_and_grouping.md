@@ -1,5 +1,7 @@
 # Splitting and Grouping
 
+**Approximate teaching time: 45 mins**
+
 Nextflow provides powerful tools for working with data flexibly. A key capability is splitting data into different streams and then grouping related items back together. This is especially valuable in bioinformatics workflows where you need to process different types of samples separately before combining results for analysis.
 
 Think of it like sorting mail: you separate letters by destination, process each pile differently, then recombine items going to the same person. Nextflow uses special operators to accomplish this with scientific data. This approach is also commonly known as the **scatter/gather** pattern in distributed computing and bioinformatics workflows.
