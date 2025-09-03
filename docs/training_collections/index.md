@@ -14,7 +14,7 @@ Let's get started! Click on the "Open in GitHub Codespaces" button below to laun
 
 ## Prerequisites
 
-Each collection has specific prerequisites documented in its orientation page. However, most collections assume:
+Each collection has specific prerequisites documented in its index page. However, most collections assume:
 
 - Experience with the command line
 - Foundational Nextflow concepts and tooling covered in the [Hello Nextflow](../../hello_nextflow/) beginner training course

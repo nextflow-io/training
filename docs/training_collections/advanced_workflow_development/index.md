@@ -43,4 +43,28 @@ This collection consists of four modules that cover complementary advanced topic
 3. **[Sample-specific Data Management](../../../side_quests/metadata.md)** - Handling sample-specific data throughout workflows
 4. **[Splitting and Grouping](../../../side_quests/splitting_and_grouping.md)** - Advanced data processing patterns
 
-Each module is self-contained and covers independent concepts, but we recommend completing them in the order listed above for a logical progression through the topics.
+Each module is self-contained and covers independent concepts, but we recommend completing them in the order listed above for a logical progression through the topics during training sessions.
+
+## How to use this collection
+
+This collection provides a curated learning path through existing training materials. To work through this collection:
+
+1. **Start with the first module link above** - Begin with Workflows of Workflows
+2. **Complete each module** - Follow the training content in the recommended order
+3. **Return to this page** - Use it as a navigation hub to find the next module
+4. **Take the [survey](./survey.md)** - Provide feedback when you complete the collection
+
+This approach allows you to follow a structured learning path while accessing the detailed training materials.
+
+## What you'll build
+
+By the end of this collection, you'll have experience with:
+
+- **Complex workflow architectures** - Combining multiple workflows into cohesive pipelines
+- **Comprehensive testing strategies** - Ensuring your workflows are reliable and maintainable
+- **Metadata management** - Handling sample-specific data throughout your workflows
+- **Advanced data processing** - Implementing efficient splitting and grouping patterns
+
+These skills will enable you to build robust, scalable, and maintainable Nextflow workflows for real-world applications.
+
+Ready to begin? Start with the first module above!
