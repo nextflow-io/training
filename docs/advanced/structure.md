@@ -5,6 +5,14 @@ description: Advanced Nextflow Training Workshop
 
 # Workflow Structure
 
+Nextflow includes a specific directory structure for workflows which can provide some features that can facilitate or enhance your code. In this section we will explore them.
+
+First, let's move into the right directory:
+
+```bash
+cd structure
+```
+
 There are three directories in a Nextflow workflow repository that have a special purpose:
 
 ## `./bin`
@@ -31,8 +39,8 @@ process PlotCars {
     container 'rocker/tidyverse:latest'
 
     output:
-    path("*.png"), emit: "plot"
-    path("*.tsv"), emit: "table"
+    path("*.png"), emit: plot
+    path("*.tsv"), emit: table
 
     script:
     """
@@ -43,14 +51,14 @@ process PlotCars {
 workflow {
     PlotCars()
 
-    PlotCars.out.table | view { "Found a tsv: $it" }
-    PlotCars.out.plot | view { "Found a png: $it" }
+    PlotCars.out.table.view { myfile -> "Found a tsv: $myfile" }
+    PlotCars.out.plot.view { myfile -> "Found a png: $myfile" }
 }
 ```
 
-To do this, we can create the bin directory, write our R script into the directory. Finally, and crucially, we make the script executable:
+To do this, we can create the bin directory, write our R script into the directory. Finally, and crucially, we make the script executable. This is the code we used to create the `cars.R` script, no need to run it:
 
-```bash linenums="1"
+```bash
 mkdir -p bin
 cat << EOF > bin/cars.R
 #!/usr/bin/env Rscript
@@ -70,15 +78,7 @@ chmod +x bin/cars.R
 Let's run the script and see what Nextflow is doing for us behind the scenes:
 
 ```bash linenums="1"
-cat << EOF > nextflow.config
-profiles {
-    docker {
-        docker.enabled = true
-    }
-}
-EOF
-rm -r work
-nextflow run . -profile docker
+nextflow run .
 ```
 
 and then inspect the `.command.run` file that Nextflow has generated
@@ -89,7 +89,7 @@ code work/*/*/.command.run
 
 You'll notice a `nxf_container_env` bash function that appends our bin directory to `$PATH`:
 
-```bash
+```bash linenums="14"
 nxf_container_env() {
 cat << EOF
 export PATH="\$PATH:/workspaces/training/nf-training-advanced/structure/bin"
@@ -113,7 +113,7 @@ If a process script block is becoming too long, it can be moved to a template fi
 
 The structure directory already contains an example template - a very simple python script. We can add a new process that uses this template:
 
-```groovy linenums="1"
+```groovy linenums="14"
 process SayHiTemplate {
     debug true
     input: val(name)
@@ -125,17 +125,14 @@ process SayHiTemplate {
 
 In the previous chapter, we saw the addition of small helper Groovy functions to the `main.nf` file. It may at times be helpful to bundle functionality into a new Groovy class. Any classes defined in the `lib` directory are available for use in the workflow - both `main.nf` and any imported modules.
 
-Classes defined in `lib` directory can be used for a variety of purposes. For example, the [nf-core/rnaseq](https://github.com/nf-core/rnaseq/tree/master/lib) workflow uses five custom classes:
-
-1. `NfcoreSchema.groovy` for parsing the schema.json file and validating the workflow parameters.
-2. `NfcoreTemplate.groovy` for email templating and nf-core utility functions.
-3. `Utils.groovy` for provision of a single `checkCondaChannels` method.
-4. `WorkflowMain.groovy` for workflow setup and to call the `NfcoreTemplate` class.
-5. `WorkflowRnaseq.groovy` for the workflow-specific functions.
-
-The classes listed above all provide utility executed at the beginning of a workflow, and are generally used to "set up" the workflow. However, classes defined in `lib` can also be used to provide functionality to the workflow itself.
-
 ### Making a Metadata Class
+
+!!! note
+Using custom Groovy is considered a very advanced use case and you should not need it for the majority of workflows. The language server will complain about this but you can safely ignore it.
+
+!!! exercise
+
+    Create a new class in `./lib/Metadata.groovy` that extends the `HashMap` class and adds a `hi` method.
 
 Let's consider an example where we create our own custom class to handle metadata. We can create a new class in `./lib/Metadata.groovy`. We'll extend the built-in `HashMap` class, and add a simple method to return a value:
 
@@ -152,24 +149,24 @@ We can then use this class in our workflow:
 ```groovy linenums="1"
 workflow {
     Channel.of("Montreal")
-    | map { new Metadata() }
-    | view
+        .map { new Metadata() }
+        .view()
 }
 ```
 
 We can use the new `hi` method in the workflow:
 
-```groovy linenums="1"
+```groovy linenums="1" hl_lines="3"
 workflow {
     Channel.of("Montreal")
-    | map { new Metadata() }
-    | view { it.hi() }
+        .map { new Metadata() }
+        .view { metadata -> metadata.hi() }
 }
 ```
 
 At the moment, the `Metadata` class is not making use of the "Montreal" being passed into the closure. Let's change that by adding a constructor to the class:
 
-```groovy linenums="1"
+```groovy linenums="1" hl_lines="3 7"
 class Metadata extends HashMap {
     Metadata(String location) {
         this.location = location
@@ -183,11 +180,11 @@ class Metadata extends HashMap {
 
 Which we can use like so:
 
-```groovy linenums="1"
+```groovy linenums="1" hl_lines="3"
 workflow {
     Channel.of("Montreal")
-    | map { place -> new Metadata(place) }
-    | view { it.hi() }
+        .map { place -> new Metadata(place) }
+        .view { metadata -> metadata.hi() }
 }
 ```
 
@@ -201,16 +198,17 @@ process UseMeta {
 }
 
 workflow {
-    Channel.of("Montreal")
-    | map { place -> new Metadata(place) }
-    | UseMeta
-    | view
+    place_ch = Channel.of("Montreal")
+        .map { place -> new Metadata(place) }
+
+    UseMeta(place_ch)
+        .view()
 }
 ```
 
-Why might this be helpful? You can add extra classes to the metadata which can be computed from the existing metadata. For example, we might want to grab the adapter prefix:
+Why might this be helpful? You can add extra classes to the metadata which can be computed from the existing metadata. For example, we might want to add a method to get the adapter prefix into our Metadata class:
 
-```groovy linenums="1"
+```groovy linenums="10"
 def getAdapterStart() {
     this.adapter?.substring(0, 3)
 }
@@ -218,7 +216,7 @@ def getAdapterStart() {
 
 Which we might use like so:
 
-```groovy linenums="1"
+```groovy linenums="1" hl_lines="4 10"
 process UseMeta {
     input: val(meta)
     output: path("out.txt")
@@ -226,17 +224,18 @@ process UseMeta {
 }
 
 workflow {
-    Channel.of("Montreal")
-    | map { place -> new Metadata(place) }
-    | map { it + [adapter:"AACGTAGCTTGAC"] }
-    | UseMeta
-    | view
+    place_ch = Channel.of("Montreal")
+        .map { place -> new Metadata(place) }
+        .map { metadata -> metadata + [adapter:"AACGTAGCTTGAC"] }
+
+    UseMeta(place_ch)
+        .view()
 }
 ```
 
 You might even want to reach out to external services such as a LIMS or the E-utilities API. Here we add a dummy "getSampleName()" method that reaches out to a public API:
 
-```groovy linenums="1"
+```groovy linenums="13"
 def getSampleName() {
     def get = new URL('https://postman-echo.com/get?sampleName=Fido').openConnection()
     def getRC = get.getResponseCode();
@@ -246,6 +245,12 @@ def getSampleName() {
         return json.args.sampleName
     }
 }
+```
+
+This relies on jsonSlurper which isn't included by default. Import this by adding the following to the top of the file:
+
+```groovy linenums="1"
+import groovy.json.JsonSlurper
 ```
 
 Which we can use like so:
@@ -271,7 +276,7 @@ process UseMeta {
 
         We might increase the length of the adapter prefix to 5 characters:
 
-        ```groovy linenums="1"
+        ```groovy linenums="12"
             def getAdapterStart() {
                 this.adapter?.substring(0, 5)
             }
@@ -290,20 +295,20 @@ class Dog {
 
 We can create a new dog at the beginning of the workflow:
 
-```groovy linenums="1"
+```groovy linenums="1" hl_lines="3"
 workflow {
-    dog = new Dog(name: "fido")
-    log.info "Found a new dog: $dog"
+    def dog = new Dog(name: "fido")
+    log.info "Found a new dog: ${dog.name}"
 }
 ```
 
 We can pass objects of our class through channels. Here we take a channel of dog names and create a channel of dogs:
 
-```groovy linenums="1"
+```groovy linenums="1" hl_lines="2-4"
 workflow {
     Channel.of("Argente", "Absolon", "Chowne")
-    | map { new Dog(name: it) }
-    | view
+        .map { name -> new Dog(name: name) }
+        .view { dog -> "Found a new dog: ${dog.name}" }
 }
 ```
 
@@ -331,10 +336,9 @@ class Dog {
 
 Lastly, we will need to register the class with Kryo, the Java serialization framework. Again, Nextflow provides a helper method to do this. We can add the following to the `main.nf` file:
 
-```groovy linenums="1"
-import nextflow.util.KryoHelper
-
-KryoHelper.register(Dog)
+```groovy linenums="1" hl_lines="2"
+workflow {
+    nextflow.util.KryoHelper.register(Dog)
 ```
 
 !!! exercise
