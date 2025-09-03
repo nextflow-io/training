@@ -348,7 +348,7 @@ The `output` definition includes the `path` qualifier, which tells Nextflow this
     This is necessary for verifying that the command was executed successfully and for passing the output to downstream processes if needed.
     Output produced that doesn't match what is declared in the output block will not be passed to downstream processes.
 
-In a real-world pipeline, a process usually contains additional information uch as process directives, which we'll introduce in a little bit.
+In a real-world pipeline, a process usually contains additional information such as process directives, which we'll introduce in a little bit.
 
 ### 2.3. The `workflow` definition
 
