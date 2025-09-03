@@ -950,7 +950,7 @@ Complete your `file_operations.nf` file with the following (deleting the map ope
 
 === "Before"
 
-    ```groovy title="file_operations.nf" linenums="3" hl_lines="1"
+    ```groovy title="file_operations.nf" linenums="3" hl_lines="1-13"
         ch_fastq = Channel.fromPath('data/patientA_rep1_normal_R*_001.fastq.gz')
         ch_fastq.map { myFile ->
             def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
