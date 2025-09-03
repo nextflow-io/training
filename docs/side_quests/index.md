@@ -24,17 +24,19 @@ For technical requirements and environment setup, see the [Environment Setup](..
 
 **If this is the first time you delve into the Side Quests, make sure to check out the [Orientation](./orientation.md) page first!**
 
-Otherwise, select a side quest from the menu below.
+Otherwise, select a side quest from the table below.
 
-## Menu of Side Quests
+## Side Quests
 
-- [Nextflow development environment walkthrough](./ide_features.md)
-- [Introduction to nf-core](./nf-core.md)
-- [Metadata in workflows](./metadata.md)
-- [Splitting and Grouping](./splitting_and_grouping.md)
-- [Testing with nf-test](./nf-test.md)
-- [Workflows of workflows](./workflows_of_workflows.md)
-- [Working with files](./working_with_files.md)
-- [Debugging workflows](./debugging.md)
+| Side Quest                                                        | Time Estimate for Teaching |
+| ----------------------------------------------------------------- | -------------------------- |
+| [Nextflow development environment walkthrough](./ide_features.md) | 45 mins                    |
+| [Introduction to nf-core](./nf-core.md)                           | -                          |
+| [Metadata in workflows](./metadata.md)                            | 45 mins                    |
+| [Splitting and Grouping](./splitting_and_grouping.md)             | 45 mins                    |
+| [Testing with nf-test](./nf-test.md)                              | 1 hour                     |
+| [Workflows of workflows](./workflows_of_workflows.md)             | 30 mins                    |
+| [Working with files](./working_with_files.md)                     | 45 mins                    |
+| [Debugging workflows](./debugging.md)                             | -                          |
 
 Let us know what other domains and use cases you'd like to see covered here by posting in the [Training section](https://community.seqera.io/c/training/) of the community forum.
