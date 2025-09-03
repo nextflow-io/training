@@ -1,7 +1,5 @@
 # Nextflow Development Environment Walkthrough
 
-**Approximate teaching time: 45 mins**
-
 Modern Integrated Development Environments (IDEs) can dramatically transform your Nextflow development experience. This side quest focuses specifically on leveraging VS Code and its Nextflow extension to write code faster, catch errors early, and navigate complex workflows efficiently.
 
 !!! note "This isn't a traditional tutorial"

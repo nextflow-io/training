@@ -1,7 +1,5 @@
 # Testing with nf-test
 
-**Approximate teaching time: 1 hour**
-
 Being able to systematically test that every part of your workflow is doing what it's supposed to do is critical for reproducibility and long-term maintenance, and can be a huge help during the development process.
 
 Let's take a minute to talk about why testing is so important. If you're developing a workflow, one of the first things you will do is grab some test data that you know is valid and should produce a result. You add the first process to the pipeline and wire it up to your inputs to make it work. Then, to check it's all working, so you run it on the test data. Assuming that works, you move on to the next process and run the test data again. You repeat this process until you have a pipeline that you're happy with.
