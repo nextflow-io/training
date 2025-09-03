@@ -64,6 +64,11 @@ nav:
       - side_quests/nf-core.md
       - side_quests/nf-test.md
 
+  - Training Collections:
+      - training_collections/index.md
+      - training_collections/advanced_workflow_development/index.md
+      - training_collections/advanced_workflow_development/survey.md
+
   - Fundamentals Training:
       - basic_training/index.md
       - basic_training/orientation.md
@@ -221,6 +226,8 @@ plugins:
         - nf4_science/genomics/*.md
         - nf4_science/rnaseq/*.md
         - side_quests/*.md
+        - training_collections/index.md
+        - training_collections/advanced_workflow_development/index.md
         - basic_training/index.md
         - basic_training/orientation.md
         - advanced/index.md
