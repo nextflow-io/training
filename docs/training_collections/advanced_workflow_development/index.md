@@ -40,7 +40,7 @@ This collection consists of four modules that cover complementary advanced topic
 
 1. **[Workflows of Workflows](../../../side_quests/workflows_of_workflows)** - Complex workflow architecture and composition
 2. **[Testing with nf-test](../../../side_quests/nf-test)** - Testing strategies for Nextflow workflows
-3. **[Sample-specific Data Management](../../../side_quests/metadata)** - Handling sample-specific data throughout workflows
+3. **[Metadata](../../../side_quests/metadata)** - Handling metadata for items in Nextflow channels
 4. **[Splitting and Grouping](../../../side_quests/splitting_and_grouping)** - Advanced data processing patterns
 
 Each module is self-contained and covers independent concepts, but we recommend completing them in the order listed above for a logical progression through the topics during training sessions.
