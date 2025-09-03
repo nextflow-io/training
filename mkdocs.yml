@@ -66,8 +66,9 @@ nav:
 
   - Training Collections:
       - training_collections/index.md
-      - training_collections/advanced_workflow_development/index.md
-      - training_collections/advanced_workflow_development/survey.md
+      - Advanced Workflow Development:
+          - training_collections/advanced_workflow_development/index.md
+          - training_collections/advanced_workflow_development/survey.md
 
   - Fundamentals Training:
       - basic_training/index.md
