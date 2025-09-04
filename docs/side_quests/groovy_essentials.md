@@ -4,13 +4,9 @@ Nextflow is built on Apache Groovy, a powerful dynamic language that runs on the
 
 Understanding where Nextflow ends and Groovy begins is crucial for effective workflow development. Nextflow provides channels, processes, and workflow orchestration, while Groovy handles data manipulation, string processing, conditional logic, and general programming tasks within your workflow scripts.
 
-Think of it like cooking: Nextflow is your kitchen setup - the stove, pans, and organization system that lets you cook efficiently. Groovy is your knife skills, ingredient preparation techniques, and recipe adaptation abilities that make the actual cooking successful. You need both to create great meals, but knowing which tool to reach for when is essential.
-
 Many Nextflow developers struggle with distinguishing when to use Nextflow versus Groovy features, processing file names and configurations, and handling errors gracefully. This side quest will bridge that gap by taking you on a journey from basic workflow concepts to production-ready pipeline mastery.
 
-**Our Mission**: Transform a simple CSV-reading workflow into a sophisticated, production-ready bioinformatics pipeline that can handle any dataset thrown at it.
-
-Starting with a basic workflow that processes sample metadata, we'll evolve it step-by-step through realistic challenges you'll face in production:
+We'll transform a simple CSV-reading workflow into a sophisticated, production-ready bioinformatics pipeline that can handle any dataset thrown at it. Starting with a basic workflow that processes sample metadata, we'll evolve it step-by-step through realistic challenges you'll face in production:
 
 - **Messy data?** We'll add robust parsing and null-safe operators
 - **Complex file naming schemes?** We'll master regex patterns and string manipulation
@@ -18,8 +14,6 @@ Starting with a basic workflow that processes sample metadata, we'll evolve it s
 - **Worried about failures?** We'll add comprehensive error handling and validation
 - **Code getting repetitive?** We'll learn functional programming with closures and composition
 - **Processing thousands of samples?** We'll leverage powerful collection operations
-
-Each section builds on the previous, showing you how Groovy transforms simple workflows into powerful, production-ready pipelines that can handle the complexities of real-world bioinformatics data.
 
 You will learn:
 
@@ -31,8 +25,6 @@ You will learn:
 - Essential Groovy operators: safe navigation, Elvis, and Groovy Truth
 - Advanced closures and functional programming techniques
 - Collection operations and file path manipulations
-
-These skills will help you write cleaner, more maintainable workflows that handle different input types appropriately and provide useful feedback when things go wrong.
 
 ---
 
