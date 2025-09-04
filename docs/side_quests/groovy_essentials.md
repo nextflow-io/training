@@ -8,23 +8,12 @@ Many Nextflow developers struggle with distinguishing when to use Nextflow versu
 
 We'll transform a simple CSV-reading workflow into a sophisticated, production-ready bioinformatics pipeline that can handle any dataset thrown at it. Starting with a basic workflow that processes sample metadata, we'll evolve it step-by-step through realistic challenges you'll face in production:
 
-- **Messy data?** We'll add robust parsing and null-safe operators
-- **Complex file naming schemes?** We'll master regex patterns and string manipulation
-- **Need intelligent sample routing?** We'll implement conditional logic and strategy selection
-- **Worried about failures?** We'll add comprehensive error handling and validation
-- **Code getting repetitive?** We'll learn functional programming with closures and composition
-- **Processing thousands of samples?** We'll leverage powerful collection operations
-
-You will learn:
-
-- How to distinguish between Nextflow and Groovy constructs in your workflows
-- String processing and pattern matching for bioinformatics file names
-- Transforming file collections into command-line arguments
-- Conditional logic for controlling process execution
-- Basic validation and error handling patterns
-- Essential Groovy operators: safe navigation, Elvis, and Groovy Truth
-- Advanced closures and functional programming techniques
-- Collection operations and file path manipulations
+- **Messy data?** We'll add robust parsing and null-safe operators, learning to distinguish between Nextflow and Groovy constructs
+- **Complex file naming schemes?** We'll master regex patterns and string manipulation for bioinformatics file names
+- **Need intelligent sample routing?** We'll implement conditional logic and strategy selection, transforming file collections into command-line arguments
+- **Worried about failures?** We'll add comprehensive error handling and validation patterns
+- **Code getting repetitive?** We'll learn functional programming with closures and composition, mastering essential Groovy operators like safe navigation and Elvis
+- **Processing thousands of samples?** We'll leverage powerful collection operations for file path manipulations
 
 ---
 
