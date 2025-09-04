@@ -163,14 +163,15 @@ You'll see the same output as before, because we're simply returning the input u
 
 #### Step 3: Creating a Map Data Structure
 
-Now let's add some Groovy code inside our closure to create a **map data structure** (different from the map operator) to organize our sample metadata.
+Now we're going to write **pure Groovy code** inside our closure. Everything from this point forward is Groovy syntax and methods, not Nextflow operators.
 
 === "After"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="5-12"
+    ```groovy title="main.nf" linenums="2" hl_lines="5-13"
         ch_samples = Channel.fromPath("./data/samplesheet.csv")
             .splitCsv(header: true)
             .map { row ->
+                // This is all Groovy code now!
                 def sample_meta = [
                     id: row.sample_id.toLowerCase(),
                     organism: row.organism,
@@ -194,7 +195,7 @@ Now let's add some Groovy code inside our closure to create a **map data structu
             .view()
     ```
 
-A map is a key-value data structure similar to dictionaries in Python, objects in JavaScript, or hashes in Ruby. It lets us store related pieces of information together. In this map, we're storing the sample ID, organism, tissue type, sequencing depth, and quality score.
+Notice how we've left Nextflow syntax behind and are now writing pure Groovy code. A map is a key-value data structure similar to dictionaries in Python, objects in JavaScript, or hashes in Ruby. It lets us store related pieces of information together. In this map, we're storing the sample ID, organism, tissue type, sequencing depth, and quality score.
 
 We use Groovy's string manipulation methods like `.toLowerCase()` and `.replaceAll()` to clean up our data, and type conversion methods like `.toInteger()` and `.toDouble()` to convert string data from the CSV into the appropriate numeric types.
 
@@ -214,7 +215,7 @@ You should see the refined map output like:
 
 #### Step 4: Adding Conditional Logic
 
-Now let's add a ternary operator to make decisions based on data values.
+Now let's add more Groovy logic - this time using a ternary operator to make decisions based on data values.
 
 === "After"
 
@@ -272,7 +273,7 @@ You should see output like:
 
 #### Step 5: Combining Maps and Returning Results
 
-Finally, let's return both the metadata and the file path as a tuple, which is the standard Nextflow pattern.
+Finally, let's use Groovy's map addition operator to combine our metadata, then return a tuple that follows Nextflow's standard pattern.
 
 === "After"
 
