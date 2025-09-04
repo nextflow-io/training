@@ -11,6 +11,7 @@ Many Nextflow developers struggle with distinguishing when to use Nextflow versu
 **Our Mission**: Transform a simple CSV-reading workflow into a sophisticated, production-ready bioinformatics pipeline that can handle any dataset thrown at it.
 
 Starting with a basic workflow that processes sample metadata, we'll evolve it step-by-step through realistic challenges you'll face in production:
+
 - **Messy data?** We'll add robust parsing and null-safe operators
 - **Complex file naming schemes?** We'll master regex patterns and string manipulation
 - **Need intelligent sample routing?** We'll implement conditional logic and strategy selection
