@@ -148,7 +148,7 @@ Now we're going to write **pure Groovy code** inside our closure. Everything fro
 
 === "After"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="5-13"
+    ```groovy title="main.nf" linenums="2" hl_lines="4-12"
         ch_samples = Channel.fromPath("./data/samplesheet.csv")
             .splitCsv(header: true)
             .map { row ->
@@ -167,7 +167,7 @@ Now we're going to write **pure Groovy code** inside our closure. Everything fro
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="5"
+    ```groovy title="main.nf" linenums="2" hl_lines="4"
         ch_samples = Channel.fromPath("./data/samplesheet.csv")
             .splitCsv(header: true)
             .map { row ->
