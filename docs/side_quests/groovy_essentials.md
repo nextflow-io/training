@@ -45,13 +45,13 @@ Before taking on this side quest you should:
 - Understand basic Nextflow concepts (processes, channels, workflows)
 - Have basic familiarity with Groovy syntax (variables, maps, lists)
 
-You may also find it helpful to review [Basic Groovy](../basic_training/groovy.md) if you need a refresher on fundamental concepts.
+This tutorial will explain Groovy concepts as we encounter them, so you don't need extensive prior Groovy knowledge. We'll start with fundamental concepts and build up to advanced patterns.
 
 ### 0.2. Starting Point
 
 Let's move into the project directory and explore our working materials.
 
-```bash
+```bash title="Navigate to project directory"
 cd side-quests/groovy_essentials
 ```
 
@@ -60,19 +60,21 @@ You'll find a `data` directory with sample files and a main workflow file that w
 ```console title="Directory contents"
 > tree
 .
-├── data/
+├── data
+│   ├── metadata
+│   │   └── analysis_parameters.yaml
 │   ├── samples.csv
-│   ├── sequences/
-│   │   ├── sample_001.fastq
-│   │   ├── sample_002.fastq
-│   │   └── sample_003.fastq
-│   └── metadata/
-│       └── analysis_parameters.yaml
-├── templates/
-│   └── analysis_script.sh
+│   └── sequences
+│       ├── sample_001.fastq
+│       ├── sample_002.fastq
+│       └── sample_003.fastq
 ├── main.nf
 ├── nextflow.config
-└── README.md
+├── README.md
+└── templates
+    └── analysis_script.sh
+
+5 directories, 9 files
 ```
 
 Our sample CSV contains information about biological samples that need different processing based on their characteristics:
@@ -92,79 +94,267 @@ We'll use this realistic dataset to explore practical Groovy techniques that you
 
 ### 1.1. Identifying What's What
 
-One of the most common sources of confusion for Nextflow developers is understanding when they're working with Nextflow constructs versus Groovy language features. Let's start by examining a typical workflow and identifying the boundaries:
+One of the most common sources of confusion for Nextflow developers is understanding when they're working with Nextflow constructs versus Groovy language features. Let's build a workflow step by step to see how they work together.
+
+#### Step 1: Basic Nextflow Workflow
+
+Start with a simple workflow that just reads the CSV file:
 
 ```groovy title="main.nf" linenums="1"
 workflow {
-    // Nextflow: Channel factory and operator
     ch_samples = Channel.fromPath("./data/samples.csv")
         .splitCsv(header: true)
-        .map { row ->
-            // Groovy: Map operations and string manipulation
-            def sample_meta = [
-                id: row.sample_id.toLowerCase(),
-                organism: row.organism,
-                tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
-                depth: row.sequencing_depth.toInteger(),
-                quality: row.quality_score.toDouble()
-            ]
-
-            // Groovy: Conditional logic and string interpolation
-            def priority = sample_meta.quality > 40 ? 'high' : 'normal'
-
-            // Nextflow: Return tuple for channel
-            return [sample_meta + [priority: priority], file(row.file_path)]
-        }
         .view()
 }
 ```
 
-Let's break this down:
+The `workflow` block defines our pipeline structure, while `Channel.fromPath()` creates a channel from a file path. The `.splitCsv()` operator processes the CSV file and converts each row into a map data structure.
 
-**Nextflow constructs:**
-- `workflow { }` - Nextflow workflow definition
-- `Channel.fromPath()` - Nextflow channel factory
-- `.splitCsv()`, `.map()`, `.view()` - Nextflow channel operators
-- `file()` - Nextflow file object factory
+Run this workflow to see the raw CSV data:
 
-**Groovy constructs:**
-- `def sample_meta = [:]` - Groovy map definition
-- `.toLowerCase()`, `.replaceAll()` - Groovy string methods
-- `.toInteger()`, `.toDouble()` - Groovy type conversion
-- Ternary operator `? :` - Groovy conditional expression
-- Map addition `+` operator - Groovy map operations
-
-Run this workflow to see the processed output:
-
-```bash title="Test the initial processing"
+```bash title="Test basic workflow"
 nextflow run main.nf
 ```
 
-```console title="Processed sample data"
-N E X T F L O W   ~  version 25.04.3
-
-Launching `main.nf` [fervent_darwin] DSL2 - revision: 8a9c4f8e21
-
-[[id:sample_001, organism:human, tissue:liver, depth:30000000, quality:38.5, priority:normal], data/sequences/sample_001.fastq]
-[[id:sample_002, organism:mouse, tissue:brain, depth:25000000, quality:35.2, priority:normal], data/sequences/sample_002.fastq]
-[[id:sample_003, organism:human, tissue:kidney, depth:45000000, quality:42.1, priority:high], data/sequences/sample_003.fastq]
+You should see output like:
+```console title="Raw CSV data"
+[id:sample_001, organism:human, tissue_type:liver, sequencing_depth:30000000, file_path:data/sequences/sample_001.fastq, quality_score:38.5]
+[id:sample_002, organism:mouse, tissue_type:brain, sequencing_depth:25000000, file_path:data/sequences/sample_002.fastq, quality_score:35.2]
+[id:sample_003, organism:human, tissue_type:kidney, sequencing_depth:45000000, file_path:data/sequences/sample_003.fastq, quality_score:42.1]
 ```
 
+#### Step 2: Adding the Map Operator
+
+Now let's add the `.map()` operator, which is a **Nextflow channel operator** (not to be confused with the map data structure we'll see below). This operator takes a closure where we can write Groovy code to transform each item.
+
+A **closure** is a block of code that can be passed around and executed later. Think of it as a function that you define inline. In Groovy, closures are written with curly braces `{ }` and can take parameters. They're fundamental to how Nextflow operators work.
+
+=== "After"
+
+    ```groovy title="main.nf" linenums="2" hl_lines="3-6"
+        ch_samples = Channel.fromPath("./data/samplesheet.csv")
+            .splitCsv(header: true)
+            .map { row ->
+                return row
+            }
+            .view()
+    ```
+
+=== "Before"
+
+    ```groovy title="main.nf" linenums="2" hl_lines="3"
+        ch_samples = Channel.fromPath("./data/samplesheet.csv")
+            .splitCsv(header: true)
+            .view()
+    ```
+
+The `.map { row -> ... }` operator takes a closure where `row` represents each item from the channel. This is a named parameter - you can call it anything you want. For example, you could write `.map { item -> ... }` or `.map { sample -> ... }` and it would work exactly the same way.
+
+When Nextflow processes each item in the channel, it passes that item to your closure as the parameter you named. So if your channel contains CSV rows, `row` will hold one complete row at a time.
+
+Apply this change and run the workflow:
+
+```bash title="Test map operator"
+nextflow run main.nf
+```
+
+You'll see the same output as before, because we're simply returning the input unchanged. This confirms that the map operator is working correctly. Now let's start transforming the data.
+
+#### Step 3: Creating a Map Data Structure
+
+Now let's add some Groovy code inside our closure to create a **map data structure** (different from the map operator) to organize our sample metadata.
+
+=== "After"
+
+    ```groovy title="main.nf" linenums="2" hl_lines="5-12"
+        ch_samples = Channel.fromPath("./data/samplesheet.csv")
+            .splitCsv(header: true)
+            .map { row ->
+                def sample_meta = [
+                    id: row.sample_id.toLowerCase(),
+                    organism: row.organism,
+                    tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+                    depth: row.sequencing_depth.toInteger(),
+                    quality: row.quality_score.toDouble()
+                ]
+                return sample_meta
+            }
+            .view()
+    ```
+
+=== "Before"
+
+    ```groovy title="main.nf" linenums="2" hl_lines="5"
+        ch_samples = Channel.fromPath("./data/samplesheet.csv")
+            .splitCsv(header: true)
+            .map { row ->
+                return row
+            }
+            .view()
+    ```
+
+A map is a key-value data structure similar to dictionaries in Python, objects in JavaScript, or hashes in Ruby. It lets us store related pieces of information together. In this map, we're storing the sample ID, organism, tissue type, sequencing depth, and quality score.
+
+We use Groovy's string manipulation methods like `.toLowerCase()` and `.replaceAll()` to clean up our data, and type conversion methods like `.toInteger()` and `.toDouble()` to convert string data from the CSV into the appropriate numeric types.
+
+Apply this change and run the workflow:
+
+```bash title="Test map data structure"
+nextflow run main.nf
+```
+
+You should see the refined map output like:
+
+```console title="Transformed metadata"
+[id:sample_001, organism:human, tissue:liver, depth:30000000, quality:38.5]
+[id:sample_002, organism:mouse, tissue:brain, depth:25000000, quality:35.2]
+[id:sample_003, organism:human, tissue:kidney, depth:45000000, quality:42.1]
+```
+
+#### Step 4: Adding Conditional Logic
+
+Now let's add a ternary operator to make decisions based on data values.
+
+=== "After"
+
+    ```groovy title="main.nf" linenums="2" hl_lines="11-12"
+        ch_samples = Channel.fromPath("./data/samplesheet.csv")
+            .splitCsv(header: true)
+            .map { row ->
+                def sample_meta = [
+                    id: row.sample_id.toLowerCase(),
+                    organism: row.organism,
+                    tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+                    depth: row.sequencing_depth.toInteger(),
+                    quality: row.quality_score.toDouble()
+                ]
+                def priority = sample_meta.quality > 40 ? 'high' : 'normal'
+                return sample_meta + [priority: priority]
+            }
+            .view()
+    ```
+
+=== "Before"
+
+    ```groovy title="main.nf" linenums="2" hl_lines="11"
+        ch_samples = Channel.fromPath("./data/samplesheet.csv")
+            .splitCsv(header: true)
+            .map { row ->
+                def sample_meta = [
+                    id: row.sample_id.toLowerCase(),
+                    organism: row.organism,
+                    tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+                    depth: row.sequencing_depth.toInteger(),
+                    quality: row.quality_score.toDouble()
+                ]
+                return sample_meta
+            }
+            .view()
+    ```
+
+The ternary operator is a shorthand for an if/else statement that follows the pattern `condition ? value_if_true : value_if_false`. This line means: "If the quality is greater than 40, use 'high', otherwise use 'normal'".
+
+The map addition operator `+` creates a **new map** rather than modifying the existing one. This line creates a new map that contains all the key-value pairs from `sample_meta` plus the new `priority` key.
+
+Apply this change and run the workflow:
+
+```bash title="Test conditional logic"
+nextflow run main.nf
+```
+
+You should see output like:
+```console title="Metadata with priority"
+[id:sample_001, organism:human, tissue:liver, depth:30000000, quality:38.5, priority:normal]
+[id:sample_002, organism:mouse, tissue:brain, depth:25000000, quality:35.2, priority:normal]
+[id:sample_003, organism:human, tissue:kidney, depth:45000000, quality:42.1, priority:high]
+```
+
+#### Step 5: Combining Maps and Returning Results
+
+Finally, let's return both the metadata and the file path as a tuple, which is the standard Nextflow pattern.
+
+=== "After"
+
+    ```groovy title="main.nf" linenums="2" hl_lines="12"
+        ch_samples = Channel.fromPath("./data/samplesheet.csv")
+            .splitCsv(header: true)
+            .map { row ->
+                def sample_meta = [
+                    id: row.sample_id.toLowerCase(),
+                    organism: row.organism,
+                    tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+                    depth: row.sequencing_depth.toInteger(),
+                    quality: row.quality_score.toDouble()
+                ]
+                def priority = sample_meta.quality > 40 ? 'high' : 'normal'
+                return [sample_meta + [priority: priority], file(row.file_path)]
+            }
+            .view()
+    ```
+
+=== "Before"
+
+    ```groovy title="main.nf" linenums="2" hl_lines="12"
+        ch_samples = Channel.fromPath("./data/samplesheet.csv")
+            .splitCsv(header: true)
+            .map { row ->
+                def sample_meta = [
+                    id: row.sample_id.toLowerCase(),
+                    organism: row.organism,
+                    tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+                    depth: row.sequencing_depth.toInteger(),
+                    quality: row.quality_score.toDouble()
+                ]
+                def priority = sample_meta.quality > 40 ? 'high' : 'normal'
+                return sample_meta + [priority: priority]
+            }
+            .view()
+    ```
+
+This returns a tuple containing the enriched metadata and the file path, which is the standard pattern for passing data to processes in Nextflow.
+
+Apply this change and run the workflow:
+
+```bash title="Test complete workflow"
+nextflow run main.nf
+```
+
+You should see output like:
+```console title="Complete workflow output"
+[[id:sample_001, organism:human, tissue:liver, depth:30000000, quality:38.5, priority:normal], /workspaces/training/side-quests/groovy_essentials/data/sequences/sample_001.fastq]
+[[id:sample_002, organism:mouse, tissue:brain, depth:25000000, quality:35.2, priority:normal], /workspaces/training/side-quests/groovy_essentials/data/sequences/sample_002.fastq]
+[[id:sample_003, organism:human, tissue:kidney, depth:45000000, quality:42.1, priority:high], /workspaces/training/side-quests/groovy_essentials/data/sequences/sample_003.fastq]
+```
+
+!!! note
+
+    **Key Pattern**: Nextflow operators often take closures `{ ... }` as parameters. Everything inside these closures is **Groovy code**. This is how Nextflow orchestrates workflows while Groovy handles the data processing logic.
+
+!!! note
+
+    **Maps and Metadata**: Maps are fundamental to working with metadata in Nextflow. For a more detailed explanation of working with metadata maps, see the [Working with metadata](./metadata.md) side quest.
+
 ### 1.2. The Collect Confusion: Nextflow vs Groovy
+
+!!! warning
+
+    The `collect` operation exists in both Nextflow and Groovy but does completely different things. This is one of the most common sources of confusion for developers.
 
 A perfect example of Nextflow/Groovy confusion is the `collect` operation, which exists in both contexts but does completely different things:
 
 **Groovy's `collect`** (transforms each element):
-```groovy
+```groovy title="Groovy collect example"
 // Groovy collect - transforms each item in a list
+// The { it * it } is a closure (anonymous function) where 'it' refers to each element
 def numbers = [1, 2, 3, 4]
 def squared = numbers.collect { it * it }
 // Result: [1, 4, 9, 16]
 ```
 
 **Nextflow's `collect`** (gathers all channel elements):
-```groovy
+```groovy title="Nextflow collect example"
 // Nextflow collect - gathers all channel items into a list
+// This waits for all items to arrive before emitting a single list
 Channel.of(1, 2, 3, 4)
     .collect()
     .view()
@@ -176,7 +366,6 @@ Let's demonstrate this with our sample data:
 === "After"
 
     ```groovy title="main.nf" linenums="25" hl_lines="1-15"
-
     // Demonstrate Groovy vs Nextflow collect
     def sample_ids = ['sample_001', 'sample_002', 'sample_003']
 
@@ -238,7 +427,6 @@ Let's start with a simple example of extracting sample information from file nam
 === "After"
 
     ```groovy title="main.nf" linenums="40" hl_lines="1-15"
-
     // Pattern matching for sample file names
     def sample_files = [
         'Human_Liver_001.fastq',
@@ -261,14 +449,14 @@ Let's start with a simple example of extracting sample information from file nam
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="40"
+    ```groovy title="main.nf" linenums="25"
     ```
 
 This demonstrates key Groovy string processing concepts:
 
-1. **Regular expression literals** using `~/pattern/` syntax
-2. **Pattern matching** with the `=~` operator
-3. **Matcher objects** that capture groups with `[0][1]`, `[0][2]`, etc.
+1. **Regular expression literals** using `~/pattern/` syntax - this creates a regex pattern without needing to escape backslashes
+2. **Pattern matching** with the `=~` operator - this attempts to match a string against a regex pattern
+3. **Matcher objects** that capture groups with `[0][1]`, `[0][2]`, etc. - `[0]` refers to the entire match, `[1]`, `[2]`, etc. refer to captured groups in parentheses
 
 Run this to see the pattern matching in action:
 
@@ -324,14 +512,14 @@ Let's create a simple function to parse sample names and return structured metad
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="60"
+    ```groovy title="main.nf" linenums="40"
     ```
 
 This demonstrates key Groovy function patterns:
 
-- **Function definitions** with `def functionName(parameters)`
-- **Map creation and return** for structured data
-- **Conditional returns** based on pattern matching success
+- **Function definitions** with `def functionName(parameters)` - similar to other languages but with dynamic typing
+- **Map creation and return** for structured data - maps are Groovy's primary data structure for returning multiple values
+- **Conditional returns** based on pattern matching success - functions can return different data structures based on conditions
 
 ### 2.3. Dynamic Script Logic in Processes
 
@@ -652,11 +840,11 @@ Now that our pipeline can extract comprehensive sample metadata, we can use this
 
 This demonstrates several Groovy patterns commonly used in Nextflow workflows:
 
-- **Numeric literals** with underscores for readability (`10_000_000`)
-- **Switch statements** for multi-way branching
-- **List concatenation** with `+` operator
-- **Elvis operator** `?:` for null handling
-- **Map merging** to combine metadata with strategy
+- **Numeric literals** with underscores for readability (`10_000_000`) - underscores can be used in numbers to improve readability
+- **Switch statements** for multi-way branching - cleaner than multiple if/else statements
+- **List concatenation** with `+` operator - combines two lists into one
+- **Elvis operator** `?:` for null handling - provides a default value if the left side is null or false
+- **Map merging** to combine metadata with strategy - the `+` operator merges two maps, with the right map taking precedence
 
 ### 3.2. Conditional Process Execution
 
@@ -1081,7 +1269,14 @@ With our pipeline now handling complex conditional logic, we need to make it mor
 
 ### 5.1. Safe Navigation and Elvis Operators in Workflows
 
+!!! note
+
+    **Safe Navigation (`?.`) and Elvis (`?:`) Operators**: These are essential for null-safe programming. Safe navigation returns null instead of throwing an exception if the object is null, while the Elvis operator provides a default value if the left side is null, empty, or false.
+
 The safe navigation operator (`?.`) and Elvis operator (`?:`) are essential for null-safe programming when processing real-world biological data:
+
+- **Safe navigation (`?.`)** - returns null instead of throwing an exception if the object is null
+- **Elvis operator (`?:`)** - provides a default value if the left side is null, empty, or false
 
 === "After"
 
@@ -1136,8 +1331,9 @@ Groovy provides powerful string features for parsing filenames and generating dy
     workflow {
         // Demonstrate slashy strings for regex (no need to escape backslashes)
         def parseFilename = { filename ->
-            // Slashy string - compare to regular string: "^(\\w+)_(\\w+)_(\\d+)\\.fastq$"
-            def pattern = /^(\w+)_(\w+)_(\d+)\.fastq$/
+                    // Slashy string - compare to regular string: "^(\\w+)_(\\w+)_(\\d+)\\.fastq$"
+        // Slashy strings don't require escaping backslashes, making regex patterns much cleaner
+        def pattern = /^(\w+)_(\w+)_(\d+)\.fastq$/
             def matcher = filename =~ pattern
 
             if (matcher) {
@@ -1229,7 +1425,11 @@ In this section, you've learned:
 
 - **Safe navigation operator** (`?.`) for null-safe property access
 - **Elvis operator** (`?:`) for default values and null coalescing
-- **Groovy Truth** - how null, empty strings, and empty collections evaluate to false
+!!! note
+
+    **Groovy Truth**: In Groovy, null, empty strings, empty collections, and zero are all considered "false" in boolean contexts. This is different from many other languages and is essential to understand for proper conditional logic.
+
+- **Groovy Truth** - how null, empty strings, and empty collections evaluate to false - in Groovy, null, empty strings, empty collections, and zero are all considered "false" in boolean contexts
 - **Slashy strings** (`/pattern/`) for regex patterns without escaping
 - **Multi-line string interpolation** for command templates
 - **Numeric literals with underscores** for improved readability
@@ -1244,7 +1444,13 @@ Our pipeline now handles missing data gracefully and processes complex input for
 
 ### 6.1. Named Closures for Reusability
 
+!!! note
+
+    **Closures**: A closure is a block of code that can be assigned to a variable and executed later. Think of it as a function that can be passed around and reused. They're fundamental to Groovy's functional programming capabilities.
+
 So far we've used anonymous closures defined inline within channel operations. When you find yourself repeating the same transformation logic across multiple processes or workflows, named closures can eliminate duplication and improve readability:
+
+A **closure** is a block of code that can be assigned to a variable and executed later. Think of it as a function that can be passed around and reused.
 
 === "After"
 
@@ -1294,6 +1500,8 @@ So far we've used anonymous closures defined inline within channel operations. W
 
 Groovy closures can be composed together using the `>>` operator, allowing you to build complex transformations from simple, reusable pieces:
 
+**Function composition** means chaining functions together so the output of one becomes the input of the next. The `>>` operator creates a new closure that applies multiple transformations in sequence.
+
 === "After"
 
     ```groovy title="main.nf" linenums="390" hl_lines="1-25"
@@ -1339,6 +1547,8 @@ Groovy closures can be composed together using the `>>` operator, allowing you t
 ### 6.3. Currying for Specialized Functions
 
 Currying allows you to create specialized versions of general-purpose closures by fixing some of their parameters:
+
+**Currying** is a technique where you take a function with multiple parameters and create a new function with some of those parameters "fixed" or "pre-filled". This creates specialized versions of general-purpose functions.
 
 === "After"
 
@@ -1431,6 +1641,8 @@ The functional programming patterns we just learned work beautifully with Groovy
 ### 7.1. Common Collection Methods in Channel Operations
 
 When processing large datasets, channel operations often need to organize and analyze sample collections. Groovy's collection methods integrate seamlessly with Nextflow channels to provide powerful data processing capabilities:
+
+Groovy provides many built-in methods for working with collections (lists, maps, etc.) that make data processing much more expressive than traditional loops.
 
 === "After"
 
@@ -1545,6 +1757,8 @@ Working with file paths is essential in bioinformatics workflows. Groovy provide
 
 The spread operator (`*.`) is a powerful Groovy feature for calling methods on all elements in a collection:
 
+The **spread operator** (`*.`) is a shorthand way to call the same method on every element in a collection. It's equivalent to using `.collect { it.methodName() }` but more concise.
+
 === "After"
 
     ```groovy title="main.nf" linenums="590" hl_lines="1-20"
@@ -1646,7 +1860,7 @@ Continue practicing these patterns in your own workflows, and refer to the [Groo
 ### Key Concepts Reference
 
 - **Language Boundaries**
-  ```groovy
+  ```groovy title="Nextflow vs Groovy examples"
   // Nextflow: workflow orchestration
   Channel.fromPath('*.fastq').splitCsv(header: true)
 
@@ -1655,7 +1869,7 @@ Continue practicing these patterns in your own workflows, and refer to the [Groo
   ```
 
 - **String Processing**
-  ```groovy
+  ```groovy title="String processing examples"
   // Pattern matching
   filename =~ ~/^(\w+)_(\w+)_(\d+)\.fastq$/
 
@@ -1674,7 +1888,7 @@ Continue practicing these patterns in your own workflows, and refer to the [Groo
   ```
 
 - **Error Handling**
-  ```groovy
+  ```groovy title="Error handling patterns"
   try {
       def errors = validateSample(sample)
       if (errors) throw new RuntimeException("Invalid: ${errors.join(', ')}")
@@ -1684,7 +1898,7 @@ Continue practicing these patterns in your own workflows, and refer to the [Groo
   ```
 
 - **Essential Groovy Operators**
-  ```groovy
+  ```groovy title="Essential operators examples"
   // Safe navigation and Elvis operators
   def id = data?.sample?.id ?: 'unknown'
   if (sample.files) println "Has files"  // Groovy Truth
@@ -1698,7 +1912,7 @@ Continue practicing these patterns in your own workflows, and refer to the [Groo
   ```
 
 - **Advanced Closures**
-  ```groovy
+  ```groovy title="Advanced closure patterns"
   // Named closures and composition
   def enrichData = normalizeId >> addQualityCategory >> addFlags
   def processor = generalFunction.curry(fixedParam)
@@ -1708,7 +1922,7 @@ Continue practicing these patterns in your own workflows, and refer to the [Groo
   ```
 
 - **Collection Operations**
-  ```groovy
+  ```groovy title="Collection operations examples"
   // Filter, group, and organize data
   def high_quality = samples.findAll { it.quality > 40 }
   def by_organism = samples.groupBy { it.organism }
