@@ -52,8 +52,8 @@ Once your environment is running, work through the collection as follows:
 1. In this tab: Navigate to the first Side Quest listed above, which describes step-by-step development exercises.
 2. In your Codespaces tab: Work through the exercises for the Side Quest.
 3. When you complete a Side Quest, return to this page and navigate to the next one in the list above.
-4. When you have completed the collection, click the button below to fill out the survey. Your feedback allows us to continue improving the training materials for everyone.
+4. When you have completed the collection, click the button below to fill out a very short survey. Your feedback allows us to continue improving the training materials for everyone.
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](survey_at1.md)
+[![Take the survey](https://github.com/codespaces/badge.svg)](https://seqera.typeform.com/to/Q9pc2YKw)
 
 Ready to begin? Start with the first module above!
