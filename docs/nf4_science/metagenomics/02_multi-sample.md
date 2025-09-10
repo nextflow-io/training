@@ -1,9 +1,9 @@
 # Part 2: Process parallelization and multi-sample
 
-In this part, we are going to rely on same pipeline structure we built in Part 1 to extend it for: 
+In this part, we are going to rely on same pipeline structure we built in Part 1 to extend it for:
 
 1. Multi-sample analysis
-2. Use of a Nextflow operator 
+2. Use of a Nextflow operator
 3. Control the execution of the workflow according to the input
 4. Include a process that runs a customized script
 
@@ -17,8 +17,8 @@ You can think of this as a sort of "integrated _for_ loop" that will process all
 
 To achieve this purpose, there are two possibilities:
 
-* The use of wildcards in the input (this can be tricky and requires to take into account particular folder structures).
-* Create a file that points out to the sample files regardless of their location in the file system. 
+- The use of wildcards in the input (this can be tricky and requires to take into account particular folder structures).
+- Create a file that points out to the sample files regardless of their location in the file system.
 
 In this course, we will target the second input option, albeit you are welcome to explore how you can use the first option by checking the [Nextflow documentation](https://www.nextflow.io/docs/latest/working-with-files.html).
 
@@ -61,13 +61,13 @@ Being so, it is necessary to use one of the two forms of input; if we use both a
 Do not worry now for the way in which channel is created using the `.csv` file, this declaration is quite stantard and you can just copy and paste for other pipelines in which you would like to use it; however, you can learn more about this [here](https://nextflow-io.github.io/patterns/process-per-csv-record/).
 
 Now, we would be ready to re-run the pipeline to process all the samples in a single call.
-Notwithstanding, the inclusion of additional samples has the advantage that we can expand the analysis to estimate β-diversity and compare them to extract important insights. 
+Notwithstanding, the inclusion of additional samples has the advantage that we can expand the analysis to estimate β-diversity and compare them to extract important insights.
 
 ---
 
 ## 2. Additional processes
 
-### 2.1 Kraken-biom
+### 2.1. Kraken-biom
 
 Let's create a new module that is going to handle the Bracken output to produce a Biological Observation Matrix (BIOM) file that concatenates the species abundance in each sample.
 The `kraken_biom.nf` file will be located in the **modules** directory:
@@ -96,7 +96,7 @@ process KRAKEN_BIOM {
 This process will _collect_ each output from the Bracken files to build a single `*.biom` file that contains the abundance species data of all the samples.
 In the `script` statement we find three tasks to execute, the first two lines are for variable manipulation required to handle the type of input this process receives (more about this when modifying `workflow.nf` below), and the second line executes the kraken-biom command that is available thanks to specified container.
 
-### 2.1.1 Operator _collect()_ and conditional execution
+#### 2.1.1. Operator _collect()_ and conditional execution
 
 Nextflow provides a high number of operators that smooth data handling and orchestrates the workflow to do exactly what we want.
 In this case, the process `KRAKEN_BIOM` requires all the files produced by Bracken belonging to each sample, which means that `KRAKEN_BIOM` can not be triggered until all Bracken processes are finished.
@@ -116,9 +116,9 @@ include { KRAKEN_BIOM               }   from './modules/kraken_biom.nf'
 
 Here, you can see that we have added the operator _collect()_ to capture all the output files from `BRACKEN`, and this is happening only if we are using as input `--sheet_csv`.
 This operator is going to return a list of the elements specified in the output of the process (`BRACKEN`), and, for instance, we are interested in each "second" (indices 1,4,7...) element of the list to run the _kraken-biom_ command; this is the reason why within the `script` statement in `kraken_biom.nf` we have incluced two codelines to obtain the paths to these files.
-If this is not entirely clear, please check the [Nextflow documentation](https://www.nextflow.io/docs/latest/reference/operator.html#collect).    
+If this is not entirely clear, please check the [Nextflow documentation](https://www.nextflow.io/docs/latest/reference/operator.html#collect).
 
-## 2.2 Phyloseq
+### 2.2. Phyloseq
 
 ### 2.2.1 Including a customized script
 
@@ -222,7 +222,7 @@ Likewise, in the **output** folder you will see the file `report.html` which is 
 
 ### Takeaway
 
-You just learnt how control workflow execution by including conditionals and operators, process multiple samples simultaneously and running a customized script to perform a metagenomics data analysis at read level. 
+You just learnt how control workflow execution by including conditionals and operators, process multiple samples simultaneously and running a customized script to perform a metagenomics data analysis at read level.
 
 ### What's next?
 

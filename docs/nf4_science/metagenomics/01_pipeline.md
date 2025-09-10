@@ -2,7 +2,7 @@
 
 In the field of metagenomics data analysis, there is an endless universe of pipelines or methodologies you can follow to explore and characterize your samples.
 We recommend this comprehensive [review](https://www.sciencedirect.com/science/article/pii/S2001037021004931) for you to explore the different existing approaches.
-For this course, we propose to wrap with Nextflow the protocol published by [Jennifer Lu et al. (2022)](https://www.nature.com/articles/s41596-022-00738-y). 
+For this course, we propose to wrap with Nextflow the protocol published by [Jennifer Lu et al. (2022)](https://www.nature.com/articles/s41596-022-00738-y).
 
 ---
 
@@ -16,21 +16,20 @@ The workflow is designed as follows:
 
 </div>
 
-
 As you can see from the picture, the pipeline will undergo as follows:
 
 1. The input is **FASTQ** files from one or multiple samples.
    For this course, we will be using only paired-end reads recovered from an oligotrophic, phosphorus-deficient pond in Cuatro Ciénegas, Mexico ([Okie et al.,2020](https://elifesciences.org/articles/49816)); the BioProject accesion number is [PRJEB22811](https://www.ncbi.nlm.nih.gov/bioproject/PRJEB22811).
-3. **Host removal** with [**Bowtie2**](https://bowtie-bio.sourceforge.net/bowtie2/manual.shtml) by aligning the reads against an indexed reference genome.
+2. **Host removal** with [**Bowtie2**](https://bowtie-bio.sourceforge.net/bowtie2/manual.shtml) by aligning the reads against an indexed reference genome.
    In this case, we are using the indexed genome of yeast given the storage limitations we have in this codespace, although you can use any organism of your interest by building [your own index](https://www.metagenomics.wiki/tools/bowtie2/index) or downloading a [precomputed](https://benlangmead.github.io/aws-indexes/bowtie) one.
-5. **Taxonomic classification** with [**Kraken2**](https://ccb.jhu.edu/software/kraken2/). This tools relies on a indexed database that can be [downloaded](https://benlangmead.github.io/aws-indexes/k2) or you can build your customized version following specific [instructions](https://avilpage.com/2024/07/mastering-kraken2-build-custom-db.html).
+3. **Taxonomic classification** with [**Kraken2**](https://ccb.jhu.edu/software/kraken2/). This tools relies on a indexed database that can be [downloaded](https://benlangmead.github.io/aws-indexes/k2) or you can build your customized version following specific [instructions](https://avilpage.com/2024/07/mastering-kraken2-build-custom-db.html).
    We will be using the Viral database given the storage limitations (I know, it's a bit annoying), therefore this methodology is pointing at "viral metagenomics"; however, by just switching to any other database you can analyze your samples to annotate bacteria, archaea and more.
-7. **Bayesian species abundance re-estimation** with [**Bracken**](https://ccb.jhu.edu/software/bracken/index.shtml?t=manual).
+4. **Bayesian species abundance re-estimation** with [**Bracken**](https://ccb.jhu.edu/software/bracken/index.shtml?t=manual).
    This software is designed to compute species abundance using Kraken classification results as stated in the reference paper, and it also uses some files contained in the dabatase folders such as the kmer distribution files (don't worry about this now, you can learn about how the method works afterwards).
-9. [**Krona**](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-12-385) plots are generated using the Bracken output to visualize interactively the relative abundance of each annotated species.
-10. If multiple samples are used as input to the pipeline, the bracken reports will be concatenated and converted into a Biological Observation Matrix ([**BIOM**](https://biom-format.org/)) file.
-11. Finally, the BIOM file will be first converted in a [**Phyloseq**](https://joey711.github.io/phyloseq/index.html) object, and this object will be further processed to generate absolute plots, estimate both α and β-diversity and perform a network analysis; this information will be presented in a final `report.html`.
-    If you can to follow the code to generate the plots and metrics, you can check this Phyloseq [tutorial](https://vaulot.github.io/tutorials/Phyloseq_tutorial.html). 
+5. [**Krona**](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-12-385) plots are generated using the Bracken output to visualize interactively the relative abundance of each annotated species.
+6. If multiple samples are used as input to the pipeline, the bracken reports will be concatenated and converted into a Biological Observation Matrix ([**BIOM**](https://biom-format.org/)) file.
+7. Finally, the BIOM file will be first converted in a [**Phyloseq**](https://joey711.github.io/phyloseq/index.html) object, and this object will be further processed to generate absolute plots, estimate both α and β-diversity and perform a network analysis; this information will be presented in a final `report.html`.
+   If you can to follow the code to generate the plots and metrics, you can check this Phyloseq [tutorial](https://vaulot.github.io/tutorials/Phyloseq_tutorial.html).
 
 !!!tip
 
@@ -42,7 +41,7 @@ As you can see from the picture, the pipeline will undergo as follows:
 
 Once we have a clear overview of what we want to achieve, we can start developing the modules that are going to perform each task; you can think of them as building blocks that we can stack up to construct a big tower (this is valid for this pipeline as it is linear).
 
-### 2.1 Bowtie2
+### 2.1. Bowtie2
 
 As previously mentioned, the objective with this module is to clean the reads by aligning them against a reference genome to remove the ones that map with it.
 Let's create then the `bowtie2.nf` file inside the **modules** folder to write the following code:
@@ -82,7 +81,7 @@ Let's take a moment to break down what we are seeing here:
   This former file contains basically the overall information about the alignment of the sequences against the reference indexed genome; to learn more about this format, please check this [material](https://samtools.github.io/hts-specs/SAMv1.pdf).
 - Finally, the `script` statement contains two commands: _i)_ an environment variable is exported pointing to the directory where the indexed genome is stored (this is required by Bowtie2 for some reason, don't worry about it, just keep in mind if you plan to use another reference genome though); and _ii)_ the Bowtie2 command that includes again the path to the indexed genome, `-1` and `-2` capture the path to forward and reverse reads, respectively, `-S` provides the information about the desired format output, and `--un-conc-gz` is used to write the paired-end that fail to align concordantly to the reference genome (if this former parameter does not make sense to you, don't worry it took me a week to understand what it means, just check the [Bowtie2](https://bowtie-bio.sourceforge.net/bowtie2/manual.shtml) manual 😉).
 
-### 2.2 Kraken2
+### 2.2. Kraken2
 
 Now, let's create the module for our taxonomic classifier.
 Following the Bowtie2 process, we are going to create `kraken2.nf` file inside the **modules** folder to write this code:
@@ -116,11 +115,11 @@ process KRAKEN2 {
 At a first glimpse, you can see that it follows the same structure as the previous process.
 The directives `tag`, `publishDir` and `container` play the same role as in Bowtie2, the `input` in this case is a tuple containing the `sample id`, the cleaned reads and the `*.sam` file (this one is declared just to maintain the correspondence between the output from Bowtie2 and the Kraken2 input).
 Also, the path to the kraken database is declared; more about this when writing the `main.nf` file.
-The output from this process will be a tuple containing the `sample id`, the path to the `.k2report` file, as well as the path to the `.kraken2` file. 
+The output from this process will be a tuple containing the `sample id`, the path to the `.k2report` file, as well as the path to the `.kraken2` file.
 
 The `script` statement will run the Kraken2 command along with a series of flags that include the path to the database, the number of threads to use, the path to the reports Kraken2 generates, the minimum number of 'hit groups' needed to make a classification call, the flag to report the minimizers and distinct minimizer count, the parameters that indicate that the received reads are paired-end and compressed in a _.gz_ format. You are strongly encouraged to check both the [protocol](https://www.nature.com/articles/s41596-022-00738-y) that documents this methodology, as well as the [source publication](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-019-1891-0) to understand how Kraken2 works and the type of files it generates; this [article](https://homolog.us/blogs/bioinfo/2017/10/25/intro-minimizer/) about minimimzers is also useful.
 
-### 2.3 Bracken
+### 2.3. Bracken
 
 Following the same procedure as with the two previous processes, let's create the file `bracken.nf` inside **modules**:
 
@@ -148,13 +147,13 @@ process BRACKEN {
 ```
 
 For this and the following process, we will focused only on the features that differ from the Bowtie2 and Kraken2 explanations.
-As expected, the declared `input` for this Bracken process matches the output generated by Kraken2, receiving a tuple containing the `sample id` and the paths to `.k2report` and `kraken2` reports. 
+As expected, the declared `input` for this Bracken process matches the output generated by Kraken2, receiving a tuple containing the `sample id` and the paths to `.k2report` and `kraken2` reports.
 
-Similarly, the `output` establishes that this process will generate a tuple with the `sample id` and the two types of `reports` Bracken produces; more information about these reports can be found at the GitHub [repository](https://github.com/jenniferlu717/Bracken). 
+Similarly, the `output` establishes that this process will generate a tuple with the `sample id` and the two types of `reports` Bracken produces; more information about these reports can be found at the GitHub [repository](https://github.com/jenniferlu717/Bracken).
 
 The `script` statement runs Bracken specifying the path to the database, the input represented by the Kraken2 report, the length of the reads, the taxonomic level at which we want to re-estimate the abundance (species in this case), the required number of reads before abundance estimation to perform re-estimation, and the format for the reports afore-mentioned.
 
-### 2.4 Krona
+### 2.4. Krona
 
 To generate the Krona plots (this interactive pie charts especially common in the metagenomics field), we will need 2 processes.
 The first one is going to execute the script `kreport2krona.py`, provided as part of [KrakenTools](https://github.com/jenniferlu717/KrakenTools), using the Bracken report as input to produce a plain text file that contains the species abundance information.
@@ -268,7 +267,7 @@ In the block `main`, you see the names of the processes with one or more paramet
 We are getting closer to run the pipeline, let's create the `main.nf` file.
 Within this file, we create banner with the pipeline name to be shown when the execution starts.
 `log.info` is a method call on a logging object, and it is used to write informational messages to the Nextflow log during a pipeline's execution.
-You can learn more about this [here](https://carpentries-incubator.github.io/workflows-nextflow/11-Simple_Rna-Seq_pipeline.html#define-the-pipeline-parameters). 
+You can learn more about this [here](https://carpentries-incubator.github.io/workflows-nextflow/11-Simple_Rna-Seq_pipeline.html#define-the-pipeline-parameters).
 
 ```groovy title="main.nf" linenums="1"
 #!/usr/bin/env nextflow
@@ -292,7 +291,7 @@ log.info """\
 The other part of this `main.nf` file is to invoke the workflow from the './workflow.nf' file, and then stating the order of the execution:
 
 1. Creating a channel for the paired-end reads using the channel factory [`fromFilePairs`](https://nextflow.io/docs/latest/reference/channel.html#fromfilepairs).
-2. Running the workflow using the reference indexed genome, the Kraken2 database and the channel created for the reads. 
+2. Running the workflow using the reference indexed genome, the Kraken2 database and the channel created for the reads.
 
 ```groovy title="main.nf" linenums="18"
 include { kraken2Flow } from './workflow.nf'
@@ -339,6 +338,7 @@ That's it, we are all set to run the pipeline, let's just use one of the samples
 ```bash
 nextflow run main.nf --reads 'data/samples/ERR2143758/ERR2143768_{1,2}.fastq'
 ```
+
 On the output of the command line, you will see:
 
 ```console title="Output"
@@ -371,6 +371,7 @@ Now, it's your time to analyze the results, you can find all the ouput files in 
 ```bash
 tree output
 ```
+
 And you will see the following:
 
 ```console title="Output contents"
