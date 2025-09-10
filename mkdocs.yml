@@ -53,6 +53,9 @@ nav:
           - nf4_science/rnaseq/03_multi-sample.md
           - nf4_science/rnaseq/survey.md
           - nf4_science/rnaseq/next_steps.md
+  - Training Collections:
+      - training_collections/index.md
+      - training_collections/architects_toolkit_1.md
   - Side Quests:
       - side_quests/index.md
       - side_quests/orientation.md
@@ -65,38 +68,34 @@ nav:
       - side_quests/nf-test.md
       - side_quests/nf-core.md
       - side_quests/nf-test.md
-
-  - Training Collections:
-      - training_collections/index.md
-      - training_collections/architects_toolkit_1.md
-
-  - Fundamentals Training:
-      - basic_training/index.md
-      - basic_training/orientation.md
-      - basic_training/intro.md
-      - basic_training/rnaseq_pipeline.md
-      - basic_training/containers.md
-      - basic_training/channels.md
-      - basic_training/processes.md
-      - basic_training/operators.md
-      - basic_training/groovy.md
-      - basic_training/modules.md
-      - basic_training/config.md
-      - basic_training/executors.md
-      - basic_training/seqera_platform.md
-      - basic_training/cache_and_resume.md
-      - basic_training/debugging.md
-  - Advanced Training:
-      - advanced/index.md
-      - advanced/orientation.md
-      - advanced/operators.md
-      - advanced/metadata.md
-      - advanced/grouping.md
-      - advanced/groovy.md
-      - advanced/structure.md
-      - advanced/configuration.md
-      - advanced/summary.md
-      - advanced/support.md
+  - Archived Materials:
+      - Fundamentals Training:
+          - basic_training/index.md
+          - basic_training/orientation.md
+          - basic_training/intro.md
+          - basic_training/rnaseq_pipeline.md
+          - basic_training/containers.md
+          - basic_training/channels.md
+          - basic_training/processes.md
+          - basic_training/operators.md
+          - basic_training/groovy.md
+          - basic_training/modules.md
+          - basic_training/config.md
+          - basic_training/executors.md
+          - basic_training/seqera_platform.md
+          - basic_training/cache_and_resume.md
+          - basic_training/debugging.md
+      - Advanced Training:
+          - advanced/index.md
+          - advanced/orientation.md
+          - advanced/operators.md
+          - advanced/metadata.md
+          - advanced/grouping.md
+          - advanced/groovy.md
+          - advanced/structure.md
+          - advanced/configuration.md
+          - advanced/summary.md
+          - advanced/support.md
   - Help: help.md
 
 theme:
