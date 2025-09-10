@@ -317,68 +317,68 @@ You should see output like:
 
     **Maps and Metadata**: Maps are fundamental to working with metadata in Nextflow. For a more detailed explanation of working with metadata maps, see the [Working with metadata](./metadata.md) side quest.
 
-### 1.2. The Collect Confusion: Nextflow vs Groovy
+Our workflow demonstrates the core pattern: **Nextflow constructs** (`workflow`, `Channel.fromPath()`, `.splitCsv()`, `.map()`, `.view()`) orchestrate data flow, while **basic Groovy constructs** (maps `[key: value]`, string methods, type conversions, ternary operators) handle the data processing logic inside the `.map()` closure.
 
-!!! warning
+### 1.2. Distinguishing Nextflow operators from Groovy functions
 
-    The `collect` operation exists in both Nextflow and Groovy but does completely different things. This is one of the most common sources of confusion for developers.
+Having a clear understanding of which parts of your code are using basic Groovy is especially important when syntax overlaps between the two languages.
 
-A perfect example of Nextflow/Groovy confusion is the `collect` operation, which exists in both contexts but does completely different things:
+A perfect example of this confusion is the `collect` operation, which exists in both contexts but does completely different things. Groovy's `collect` transforms each element, while Nextflow's `collect` gathers all channel elements into a single-item channel.
 
-**Groovy's `collect`** (transforms each element):
-```groovy title="Groovy collect example"
-// Groovy collect - transforms each item in a list
-// The { it * it } is a closure (anonymous function) where 'it' refers to each element
-def numbers = [1, 2, 3, 4]
-def squared = numbers.collect { it * it }
-// Result: [1, 4, 9, 16]
+Let's demonstrate this with some sample data. Check out `collect.nf`:
+
+```groovy title="collect.nf" linenums="1"
+// Demonstrate Groovy vs Nextflow collect
+def sample_ids = ['sample_001', 'sample_002', 'sample_003']
+
+println "=== GROOVY COLLECT (transforms each item, keeps same structure) ==="
+// Groovy collect: transforms each element but maintains list structure
+def formatted_ids = sample_ids.collect { id ->
+    id.toUpperCase().replace('SAMPLE_', 'SPECIMEN_')
+}
+println "Original list: ${sample_ids}"
+println "Groovy collect result: ${formatted_ids}"
+println "Groovy collect maintains structure: ${formatted_ids.size} items (same as original)"
+println ""
+
+println "\n=== NEXTFLOW COLLECT (groups multiple items into single emission) ==="
+// Nextflow collect: groups channel elements into a single emission
+ch_input = Channel.of('sample_001', 'sample_002', 'sample_003')
+
+// Show individual items before collect
+ch_input.view { "Individual channel item: ${it}" }
+
+// Collect groups all items into a single emission
+ch_collected = ch_input.collect()
+ch_collected.view { "Nextflow collect result: ${it} (${it.size()} items grouped together)" }
 ```
-
-**Nextflow's `collect`** (gathers all channel elements):
-```groovy title="Nextflow collect example"
-// Nextflow collect - gathers all channel items into a list
-// This waits for all items to arrive before emitting a single list
-Channel.of(1, 2, 3, 4)
-    .collect()
-    .view()
-// Result: [1, 2, 3, 4] (single channel emission)
-```
-
-Let's demonstrate this with our sample data:
-
-=== "After"
-
-    ```groovy title="main.nf" linenums="25" hl_lines="1-15"
-    // Demonstrate Groovy vs Nextflow collect
-    def sample_ids = ['sample_001', 'sample_002', 'sample_003']
-
-    // Groovy collect: transform each element
-    def formatted_ids = sample_ids.collect { id ->
-        id.toUpperCase().replace('SAMPLE_', 'SPECIMEN_')
-    }
-    println "Groovy collect result: ${formatted_ids}"
-
-    // Nextflow collect: gather channel elements
-    ch_collected = Channel.of('sample_001', 'sample_002', 'sample_003')
-        .collect()
-    ch_collected.view { "Nextflow collect result: ${it}" }
-    ```
-
-=== "Before"
-
-    ```groovy title="main.nf" linenums="25"
-    ```
 
 Run the workflow to see both collect operations in action:
 
 ```bash title="Test collect operations"
-nextflow run main.nf
+nextflow run collect.nf
 ```
 
 ```console title="Different collect behaviors"
+ N E X T F L O W   ~  version 25.04.6
+
+Launching `collect.nf` [silly_bhaskara] DSL2 - revision: 5ef004224c
+
+=== GROOVY COLLECT (transforms each item, keeps same structure) ===
+Original list: [sample_001, sample_002, sample_003]
 Groovy collect result: [SPECIMEN_001, SPECIMEN_002, SPECIMEN_003]
-Nextflow collect result: [sample_001, sample_002, sample_003]
+Groovy collect maintains structure: 3 items (same as original)
+
+=== NEXTFLOW COLLECT (groups multiple items into single emission) ===
+Individual channel item: sample_001
+Individual channel item: sample_002
+Individual channel item: sample_003
+Nextflow collect result: [sample_001, sample_002, sample_003] (3 items grouped together)
 ```
+
+The key difference: **Groovy's `collect`** transforms items but preserves structure (like Nextflow's `map`), while **Nextflow's `collect()`** groups multiple channel emissions into a single list.
+
+But `collect` really isn't the main point. The key lesson: always distinguish between **Groovy constructs** (data structures) and **Nextflow constructs** (channels/workflows). Operations can share names but behave completely differently.
 
 ### Takeaway
 
