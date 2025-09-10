@@ -6,7 +6,7 @@ hide:
 
 # The Architect's Toolkit I
 
-Our Training Collections provide curated learning paths through our advanced training materials (called [Side Quests](../../side_quests/index.md)). This collection covers four essential topics that are frequently used together for building robust and scalable workflows.
+Our Training Collections provide curated learning paths through our advanced training materials (called [Side Quests](../../side_quests)). This collection covers four essential topics that are frequently used together for building robust and scalable workflows.
 
 ## Learning objectives
 
@@ -25,7 +25,7 @@ This collection is designed for users who have completed the basic Nextflow trai
 
 **Prerequisites**
 
-- Completion of [Hello Nextflow](../../../hello_nextflow/) training or equivalent experience
+- Completion of [Hello Nextflow](../../hello_nextflow/) training or equivalent experience
 - Basic familiarity with Nextflow syntax and concepts
 - Understanding of basic workflow development patterns
 - Experience with command-line tools
@@ -34,10 +34,10 @@ This collection is designed for users who have completed the basic Nextflow trai
 
 This collection consists of four Side Quests that cover complementary workflow engineering topics:
 
-1. **[Workflows of Workflows](../../../side_quests/workflows_of_workflows)** - Complex workflow architecture and composition
-2. **[Testing with nf-test](../../../side_quests/nf-test)** - Testing strategies for Nextflow workflows
-3. **[Metadata](../../../side_quests/metadata)** - Handling metadata for items in Nextflow channels
-4. **[Splitting and Grouping](../../../side_quests/splitting_and_grouping)** - Advanced data processing patterns
+1. **[Workflows of Workflows](../../side_quests/workflows_of_workflows)** - Complex workflow architecture and composition
+2. **[Testing with nf-test](../../side_quests/nf-test)** - Testing strategies for Nextflow workflows
+3. **[Metadata](../../side_quests/metadata)** - Handling metadata for items in Nextflow channels
+4. **[Splitting and Grouping](../../side_quests/splitting_and_grouping)** - Advanced data processing patterns
 
 Each Side Quest is self-contained and covers independent concepts, but we recommend completing them in the order listed above for a logical progression through the topics.
 
