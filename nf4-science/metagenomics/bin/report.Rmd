@@ -4,13 +4,13 @@ author: "User"
 date: "2025"
 output:
     rmdformats::downcute:
-      self_contained: true
-      thumbnails: false
-      lightbox: true
-      gallery: true
-      toc_depth: 2
-      highlight: tango
-      code_folding: hide
+        self_contained: true
+        thumbnails: false
+        lightbox: true
+        gallery: true
+        toc_depth: 2
+        highlight: tango
+        code_folding: hide
 params:
     args: ''
 ---
@@ -41,15 +41,15 @@ library(ggplot2)
 data_biom <- import_biom(file)
 colnames(data_biom@tax_table@.Data)<- c("Kingdom", "Phylum", "Class", "Order", "Family", "Genus", "Species")
 plot_bar(data_biom, fill = "Genus")+
-  theme_bw()+
-  theme(text = element_text(size = 14),
+    theme_bw()+
+    theme(text = element_text(size = 14),
         panel.background = element_blank(),
         plot.title = element_text(size=14,hjust=0.5),
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
-        axis.text.x = element_text(angle = 45, vjust = 1, 
-                                   size = 12, hjust = 1))+
-  labs(y = "Absolute abundance")
+        axis.text.x = element_text(angle = 45, vjust = 1,
+                                    size = 12, hjust = 1))+
+    labs(y = "Absolute abundance")
 ```
 
 ## Relative abundance
@@ -61,17 +61,17 @@ df_per <- psmelt(percentages)
 df_per$Genus <- as.character(df_per$Genus)
 df_per$Genus <- as.factor(df_per$Genus)
 
-ggplot(data=df_per, aes(x=Sample, y=Abundance, fill=Genus))+ 
-  geom_bar(aes(), stat="identity", position="stack", color = "black")+
-  theme_bw()+
-  theme(text = element_text(size = 14),
+ggplot(data=df_per, aes(x=Sample, y=Abundance, fill=Genus))+
+    geom_bar(aes(), stat="identity", position="stack", color = "black")+
+    theme_bw()+
+    theme(text = element_text(size = 14),
         panel.background = element_blank(),
         plot.title = element_text(size=14,hjust=0.5),
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
-        axis.text.x = element_text(angle = 45, vjust = 1, 
-                                   size = 12, hjust = 1))+
-  labs(y = "Relative abundance")
+        axis.text.x = element_text(angle = 45, vjust = 1,
+                                    size = 12, hjust = 1))+
+    labs(y = "Relative abundance")
 ```
 
 # α-Diversity
@@ -81,11 +81,11 @@ Next, Let’s explore the α-diversity among samples using two indeces, Chao1 an
 ```{r alpha_plot, echo=TRUE}
 p = plot_richness(data_biom, measures=c("Chao1", "Shannon"), color = "samples")+
     theme_bw()+
-    theme(axis.text.x = element_text(angle = 45, vjust = 1, 
-                                   size = 12, hjust = 1),
+    theme(axis.text.x = element_text(angle = 45, vjust = 1,
+                                    size = 12, hjust = 1),
         axis.text.y = element_text(size = 14),
         axis.title = element_text(size = 14),
-        panel.grid.major = element_blank(), 
+        panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         panel.border = element_blank(),
         strip.text.x = element_text(size = 14),
@@ -93,9 +93,9 @@ p = plot_richness(data_biom, measures=c("Chao1", "Shannon"), color = "samples")+
         legend.title = element_text(size = 14),
         axis.line = element_line(colour = "black"),
         )+
-  labs(x = "Sample",
-       color = "Sample")
-  
+    labs(x = "Sample",
+        color = "Sample")
+
 p + geom_point(size=5, alpha=0.7)
 ```
 
@@ -105,13 +105,14 @@ p + geom_point(size=5, alpha=0.7)
 
 ```{r heatmap, echo=TRUE}
 plot_heatmap(data_biom, method = "PCoA", distance = "bray",
-             taxa.label = "Genus", taxa.order = "Genus",
-             trans=NULL, low="beige", high="red", na.value="beige")+    theme_bw()+
-    theme(axis.text.x = element_text(angle = 45, vjust = 1, 
-                                   size = 12, hjust = 1),
+            taxa.label = "Genus", taxa.order = "Genus",
+            trans=NULL, low="beige", high="red", na.value="beige")+
+        theme_bw()+
+        theme(axis.text.x = element_text(angle = 45, vjust = 1,
+                                            size = 12, hjust = 1),
         axis.text.y = element_text(size = 14),
         axis.title = element_text(size = 14),
-        panel.grid.major = element_blank(), 
+        panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         strip.text.x = element_text(size = 14),
         legend.text = element_text(size = 10),
@@ -137,14 +138,14 @@ plot_ordination(data_biom, data.ord, type="split", color="Genus",
         panel.grid.minor = element_blank(),
         axis.line = element_line(colour = "black"),
         panel.background = element_blank())+
-  geom_point(size=5, alpha=0.7)+
-  labs(title="Biplot")
+    geom_point(size=5, alpha=0.7)+
+    labs(title="Biplot")
 ```
 
 # Network Analysis
 
 ```{r network, echo=TRUE}
 plot_net(data_biom, distance = "bray", type = "taxa",
-         maxdist = 0.9, color="Genus")+
-  guides(color = guide_legend(ncol = 2))
+            maxdist = 0.9, color="Genus")+
+        guides(color = guide_legend(ncol = 2))
 ```

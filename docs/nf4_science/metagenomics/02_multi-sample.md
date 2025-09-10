@@ -120,7 +120,7 @@ If this is not entirely clear, please check the [Nextflow documentation](https:/
 
 ### 2.2. Phyloseq
 
-### 2.2.1 Including a customized script
+#### 2.2.1. Including a customized script
 
 We are at the last step of the pipeline execution, and now we need to process the `*.biom` file by transforming it into a Phyloseq object, which is easier to use, more intuitive to understand, and is equipped with multiple tools and methods to plot.
 Another amazing feature by Nextflow is the possibility to run the so-called _Scripts à la carte_, which means that a process does not necessarily requires an external tool to execute, and hence you can develop your own analysis with customized scripts, i.e., R or Python.

@@ -1,5 +1,5 @@
 process KNIT_PHYLOSEQ {
-	tag "knit_phyloseq"
+    tag "knit_phyloseq"
     publishDir "$params.outdir", mode:'copy'
     container "community.wave.seqera.io/library/bioconductor-phyloseq_knit_r-base_r-ggplot2_r-rmdformats:6efceb52eb05eb44"
 
