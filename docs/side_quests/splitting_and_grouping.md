@@ -803,7 +803,7 @@ You now have a workflow that can split a samplesheet, filter the normal and tumo
 
 This is a common pattern in bioinformatics workflows where you need to match up samples or other types of data after processing independently, so it is a useful skill. Next, we will look at repeating a sample multiple times.
 
-## 4. Spread patients over intervals
+## 4. Spread samples intervals
 
 A key pattern in bioinformatics workflows is distributing analysis across genomic regions. For instance, variant calling can be parallelized by dividing the genome into intervals (like chromosomes or smaller regions). This parallelization strategy significantly improves pipeline efficiency by distributing computational load across multiple cores or nodes, reducing overall execution time.
 
