@@ -54,6 +54,6 @@ Once your environment is running, work through the collection as follows:
 3. When you complete a Side Quest, return to this page and navigate to the next one in the list above.
 4. When you have completed the collection, click the button below to fill out a very short survey. Your feedback allows us to continue improving the training materials for everyone.
 
-[![Take the survey](https://github.com/codespaces/badge.svg)](https://seqera.typeform.com/to/Q9pc2YKw)
+[![Take the survey](https://img.shields.io/badge/Take%20the-Survey-blue?style=flat-square)](https://seqera.typeform.com/to/Q9pc2YKw)
 
 Ready to begin? Start with the first module above!
