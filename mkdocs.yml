@@ -36,7 +36,7 @@ nav:
       - hello_nf-core/next_steps.md
   - Nextflow for Science:
       - nf4_science/index.md
-      - Nextflow for Genomics:
+      - Genomics:
           - nf4_science/genomics/index.md
           - nf4_science/genomics/00_orientation.md
           - nf4_science/genomics/01_per_sample_variant_calling.md
@@ -45,7 +45,7 @@ nav:
           - nf4_science/genomics/04_testing.md
           - nf4_science/genomics/survey.md
           - nf4_science/genomics/next_steps.md
-      - Nextflow for RNAseq:
+      - RNAseq:
           - nf4_science/rnaseq/index.md
           - nf4_science/rnaseq/00_orientation.md
           - nf4_science/rnaseq/01_method.md
