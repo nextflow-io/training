@@ -39,7 +39,7 @@ For any topics that's not covered there yet, **browse the [Fundamentals Training
 It is a cloud-based platform developed by the creators of Nextflow that you can connect to your own compute infrastructure (whether local, HPC or cloud) to make it much easier to launch and manage your workflows, as well as manage your data and run analyses interactively in a cloud environment.
 
 The Free Tier is available for free use by everyone (with usage quotas).
-Qualifying academics can get free Pro-level access (no usage limitations) through the [Academic Program](https://seqera.typeform.com/to/SRB8Ci3n).
+Qualifying academics can get free Pro-level access (no usage limitations) through the [Academic Program](https://seqera.io/academic/program/).
 
 Have a look at the [Seqera Platform tutorials](https://docs.seqera.io/platform/latest/getting-started/quickstart-demo/comm-showcase) to see if this might be useful to you.
 

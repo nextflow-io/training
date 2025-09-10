@@ -10,6 +10,12 @@ nav:
       - envsetup/01_setup.md
       - envsetup/02_local.md
       - envsetup/03_devcontainer.md
+  - Nextflow Run:
+      - nextflow_run/index.md
+      - nextflow_run/00_orientation.md
+      - nextflow_run/01_basics.md
+      - nextflow_run/02_pipeline.md
+      - nextflow_run/03_config.md
   - Hello Nextflow:
       - hello_nextflow/index.md
       - hello_nextflow/00_orientation.md
@@ -53,10 +59,16 @@ nav:
   - Side Quests:
       - side_quests/index.md
       - side_quests/orientation.md
-      - side_quests/workflows_of_workflows.md
+      - side_quests/ide_features.md
+      - side_quests/metadata.md
+      - side_quests/working_with_files.md
       - side_quests/splitting_and_grouping.md
+      - side_quests/workflows_of_workflows.md
+      - side_quests/debugging.md
       - side_quests/nf-test.md
       - side_quests/nf-core.md
+      - side_quests/nf-test.md
+
   - Fundamentals Training:
       - basic_training/index.md
       - basic_training/orientation.md
@@ -124,6 +136,9 @@ extra_css:
   - assets/stylesheets/fonts.css
   - assets/stylesheets/extra.css
 
+extra_javascript:
+  - assets/javascripts/posthog.js
+
 # Set in docs/assets/overrides/partials/copyright.html
 # so that we can have links and stuff
 # copyright: Seqera
@@ -148,6 +163,10 @@ extra:
       as to measure the effectiveness of our documentation and whether users
       find what they're searching for. With your consent, you're helping us to
       make our training materials better.
+      Find out more on
+      <a href="https://seqera.io/privacy-policy/#cookies" target="_blank" rel="noopener">how we use cookies</a>.
+    cookies:
+      posthog: PostHog Analytics
   # Overridden in docs/assets/overrides/partials/social.html
   # Still needs to be set to something here so that the partial is used
   social:
@@ -188,6 +207,7 @@ plugins:
   - enumerate-headings:
       restart_increment_after:
         - envsetup/01_setup.md
+        - nextflow_run/00_orientation.md
         - hello_nextflow/00_orientation.md
         - hello_nf-core/00_orientation.md
         - nf4_science/genomics/00_orientation.md
@@ -201,6 +221,7 @@ plugins:
         - index*.md
         - help*.md
         - envsetup/*.md
+        - nextflow_run/*.md
         - hello_nextflow/*.md
         - hello_nf-core/*.md
         - nf4_science/genomics/*.md

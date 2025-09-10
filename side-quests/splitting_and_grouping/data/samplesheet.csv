@@ -1,9 +1,9 @@
 id,repeat,type,bam
-sampleA,1,normal,sampleA_rep1_normal.bam
-sampleA,1,tumor,sampleA_rep1_tumor.bam
-sampleA,2,normal,sampleA_rep2_normal.bam
-sampleA,2,tumor,sampleA_rep2_tumor.bam
-sampleB,1,normal,sampleB_rep1_normal.bam
-sampleB,1,tumor,sampleB_rep1_tumor.bam
-sampleC,1,normal,sampleC_rep1_normal.bam
-sampleC,1,tumor,sampleC_rep1_tumor.bam
+patientA,1,normal,patientA_rep1_normal.bam
+patientA,1,tumor,patientA_rep1_tumor.bam
+patientA,2,normal,patientA_rep2_normal.bam
+patientA,2,tumor,patientA_rep2_tumor.bam
+patientB,1,normal,patientB_rep1_normal.bam
+patientB,1,tumor,patientB_rep1_tumor.bam
+patientC,1,normal,patientC_rep1_normal.bam
+patientC,1,tumor,patientC_rep1_tumor.bam
