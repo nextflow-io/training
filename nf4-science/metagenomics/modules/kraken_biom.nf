@@ -1,5 +1,5 @@
 process KRAKEN_BIOM {
-	tag "merge_samples"
+    tag "merge_samples"
     publishDir "$params.outdir", mode:'copy'
     container "community.wave.seqera.io/library/kraken-biom:1.2.0--f040ab91c9691136"
 
