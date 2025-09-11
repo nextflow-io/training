@@ -336,7 +336,7 @@ docker.enabled = true
 That's it, we are all set to run the pipeline, let's just use one of the samples provided, you can choose any of them and the run the following command:
 
 ```bash
-nextflow run main.nf --reads 'data/samples/ERR2143758/ERR2143768_{1,2}.fastq'
+nextflow run main.nf --reads 'data/samples/ERR2143768/ERR2143768_{1,2}.fastq'
 ```
 
 On the output of the command line, you will see:
