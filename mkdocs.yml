@@ -67,7 +67,6 @@ nav:
       - side_quests/debugging.md
       - side_quests/nf-test.md
       - side_quests/nf-core.md
-      - side_quests/nf-test.md
   - Archive:
       - Fundamentals Training:
           - archive/basic_training/index.md
