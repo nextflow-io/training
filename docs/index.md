@@ -122,7 +122,7 @@ These are materials that cover advanced concepts and mechanisms for developing a
 
         :material-compass:{.nextflow-primary} Collections of Side Questions grouped around a particular theme or use case.
 
-    Training Collections combine multiple Side Quests in order to provide a comprehensive learning experience around a common theme or use case.
+    Training Collections combine multiple Side Quests in order to provide a comprehensive learning experience around a particular theme or use case.
 
     [Browse the Training Collections :material-arrow-right:](training_collections/){ .md-button .md-button--primary }
 
