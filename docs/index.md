@@ -124,7 +124,7 @@ These are materials that cover advanced concepts and mechanisms for developing a
 
     Training Collections combine multiple Side Quests in order to provide a comprehensive learning experience around a particular around a common theme or use case.
 
-    [Start the Side Quests training :material-arrow-right:](side_quests/){ .md-button .md-button--primary }
+    [Start the Side Quests training :material-arrow-right:](training_collections/){ .md-button .md-button--primary }
 
 ## Archived materials
 
