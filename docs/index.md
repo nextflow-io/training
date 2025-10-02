@@ -114,7 +114,7 @@ These are materials that cover advanced concepts and mechanisms for developing a
 
     Side Quests are individual training modules intended for Nextflow developers who wish to widen their range and/or deepen their skills on particular topics. Although the modules are presented linearly, learners are welcome to pick and choose topics in any order. Any dependencies on components/skills that go beyond the scope of the 'Hello Nextflow' course are indicated in the corresponding module overview. For structured learning paths combining multiple Side Quests, see Training Collections below.
 
-    [Start the Side Quests training :material-arrow-right:](side_quests/){ .md-button .md-button--primary }
+    [Start the Side Quests training :material-arrow-right:](training_collections/){ .md-button .md-button--primary }
 
 !!! exercise "Training Collections"
 
