@@ -1,12 +1,21 @@
 # Groovy Essentials for Nextflow Developers
 
-Nextflow is built on Apache Groovy, a powerful dynamic language that runs on the Java Virtual Machine. While Nextflow provides the workflow orchestration framework, Groovy provides the programming language foundations that make your workflows flexible, maintainable, and powerful.
+Nextflow is built on Apache Groovy, a powerful dynamic language that runs on the Java Virtual Machine. This foundation gives Nextflow its flexibility and expressiveness, but it also creates a common source of confusion for developers.
+
+**Here's the challenge:** Most Nextflow tutorials focus on the workflow orchestration - channels, processes, and data flow - but when you need to manipulate data, parse filenames, implement conditional logic, or handle errors gracefully, you're actually writing Groovy code. Many developers don't realize when they've crossed this boundary.
+
+**Why does this matter?** The difference between a brittle workflow that breaks on unexpected input and a robust pipeline that adapts gracefully often comes down to understanding and leveraging Groovy's powerful features within your Nextflow workflows.
+
+**The common struggle:** Most Nextflow developers can write basic workflows, but they hit walls when they need to:
+- Process messy, real-world data with missing fields or inconsistent formats
+- Extract metadata from complex file naming schemes
+- Route samples through different analysis strategies based on their characteristics
+- Handle errors gracefully instead of crashing on invalid input
+- Build reusable, maintainable code that doesn't repeat the same patterns everywhere
 
 Understanding where Nextflow ends and Groovy begins is crucial for effective workflow development. Nextflow provides channels, processes, and workflow orchestration, while Groovy handles data manipulation, string processing, conditional logic, and general programming tasks within your workflow scripts.
 
-Many Nextflow developers struggle with distinguishing when to use Nextflow versus Groovy features, processing file names and configurations, and handling errors gracefully. This side quest will bridge that gap by taking you on a journey from basic workflow concepts to production-ready pipeline mastery.
-
-We'll transform a simple CSV-reading workflow into a sophisticated, production-ready bioinformatics pipeline that can handle any dataset thrown at it. Starting with a basic workflow that processes sample metadata, we'll evolve it step-by-step through realistic challenges you'll face in production:
+This side quest will bridge that gap by taking you on a hands-on journey from basic concepts to production-ready mastery. We'll transform a simple CSV-reading workflow into a sophisticated, production-ready bioinformatics pipeline that can handle any dataset thrown at it. Starting with a basic workflow that processes sample metadata, we'll evolve it step-by-step through realistic challenges you'll face in production:
 
 - **Messy data?** We'll add robust parsing and null-safe operators, learning to distinguish between Nextflow and Groovy constructs
 - **Complex file naming schemes?** We'll master regex patterns and string manipulation for bioinformatics file names
@@ -23,7 +32,7 @@ We'll transform a simple CSV-reading workflow into a sophisticated, production-r
 
 Before taking on this side quest you should:
 
-- Complete the [Hello Nextflow](../hello_nextflow/README.md) tutorial
+- Complete the [Hello Nextflow](../hello_nextflow/README.md) tutorial or have equivalent experience
 - Understand basic Nextflow concepts (processes, channels, workflows)
 - Have basic familiarity with Groovy syntax (variables, maps, lists)
 
@@ -80,7 +89,7 @@ One of the most common sources of confusion for Nextflow developers is understan
 
 #### Step 1: Basic Nextflow Workflow
 
-Start with a simple workflow that just reads the CSV file:
+Start with a simple workflow that just reads the CSV file (we've already done this for you in `main.nf`):
 
 ```groovy title="main.nf" linenums="1"
 workflow {
@@ -107,9 +116,13 @@ You should see output like:
 
 #### Step 2: Adding the Map Operator
 
-Now let's add the `.map()` operator, which is a **Nextflow channel operator** (not to be confused with the map data structure we'll see below). This operator takes a closure where we can write Groovy code to transform each item.
+Now we're going to use some Groovy code to transform the data, using the `.map()` operator you will probably already be familiar with. This operator takes a 'closure' where we can write Groovy code to transform each item.
 
-A **closure** is a block of code that can be passed around and executed later. Think of it as a function that you define inline. In Groovy, closures are written with curly braces `{ }` and can take parameters. They're fundamental to how Nextflow operators work.
+!!! note
+
+    A **closure** is a block of code that can be passed around and executed later. Think of it as a function that you define inline. In Groovy, closures are written with curly braces `{ }` and can take parameters. They're fundamental to how Nextflow operators work and if you've been writing Nextflow for a while, you may already have been using them without realizing it!
+
+Here's what that map operation looks like:
 
 === "After"
 
@@ -130,7 +143,7 @@ A **closure** is a block of code that can be passed around and executed later. T
             .view()
     ```
 
-The `.map { row -> ... }` operator takes a closure where `row` represents each item from the channel. This is a named parameter - you can call it anything you want. For example, you could write `.map { item -> ... }` or `.map { sample -> ... }` and it would work exactly the same way.
+The closure we've added is `{ row -> return row }`. We've named the parameter `row`, but it could be called anything, so you could write `.map { item -> ... }` or `.map { sample -> ... }` and it would work exactly the same way. It's also possible not to name the parameter at all and just use the implicit variable `it`, like `.map { return it }`, but naming it makes the code clearer.
 
 When Nextflow processes each item in the channel, it passes that item to your closure as the parameter you named. So if your channel contains CSV rows, `row` will hold one complete row at a time.
 
@@ -198,6 +211,8 @@ You should see the refined map output like:
 
 Now let's add more Groovy logic - this time using a ternary operator to make decisions based on data values.
 
+Make the following change:
+
 === "After"
 
     ```groovy title="main.nf" linenums="2" hl_lines="11-12"
@@ -235,31 +250,40 @@ Now let's add more Groovy logic - this time using a ternary operator to make dec
             .view()
     ```
 
-The ternary operator is a shorthand for an if/else statement that follows the pattern `condition ? value_if_true : value_if_false`. This line means: "If the quality is greater than 40, use 'high', otherwise use 'normal'".
+The ternary operator is a shorthand for an if/else statement that follows the pattern `condition ? value_if_true : value_if_false`. This line means: "If the quality is greater than 40, use 'high', otherwise use 'normal'". Its cousin, the **Elvis operator** (`?:`), provides default values when something is null or empty - we'll explore that pattern later in this tutorial.
 
 The map addition operator `+` creates a **new map** rather than modifying the existing one. This line creates a new map that contains all the key-value pairs from `sample_meta` plus the new `priority` key.
 
-Apply this change and run the workflow:
+!!! Note
+
+    Using the addition operator `+` creates a new map rather than modifying the existing one, which is a useful practice to adopt. Never directly modify maps passed into closures, as this can lead to unexpected behavior in Nextflow. This is especially important because in Nextflow workflows, the same data often flows through multiple channel operations or gets processed by different processes simultaneously. When multiple operations reference the same map object, modifying it in-place can cause unpredictable side effects - one operation might change data that another operation is still using. By creating new maps instead of modifying existing ones, you ensure that each operation works with its own clean copy of the data, making your workflows more predictable and easier to debug.
+
+Run the modified workflow:
 
 ```bash title="Test conditional logic"
 nextflow run main.nf
 ```
 
 You should see output like:
+
 ```console title="Metadata with priority"
 [id:sample_001, organism:human, tissue:liver, depth:30000000, quality:38.5, priority:normal]
 [id:sample_002, organism:mouse, tissue:brain, depth:25000000, quality:35.2, priority:normal]
 [id:sample_003, organism:human, tissue:kidney, depth:45000000, quality:42.1, priority:high]
 ```
 
+We've successfully added conditional logic to enrich our metadata with a priority level based on quality scores.
+
 #### Step 5: Combining Maps and Returning Results
 
-Finally, let's use Groovy's map addition operator to combine our metadata, then return a tuple that follows Nextflow's standard pattern.
+So far, we've only been returning what Nextflow community calls the 'meta map', and we've been ignoring the files those metadata relate to. But if you're writing Nextflow workflows, you probably want to do something with those files.
+
+Let's output a channel structure comprising a tuple of 2 elements: the enriched metadata map and the corresponding file path. This is a common pattern in Nextflow for passing data to processes.
 
 === "After"
 
     ```groovy title="main.nf" linenums="2" hl_lines="12"
-        ch_samples = Channel.fromPath("./data/samplesheet.csv")
+        ch_samples = Channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row ->
                 def sample_meta = [
@@ -294,8 +318,6 @@ Finally, let's use Groovy's map addition operator to combine our metadata, then 
             .view()
     ```
 
-This returns a tuple containing the enriched metadata and the file path, which is the standard pattern for passing data to processes in Nextflow.
-
 Apply this change and run the workflow:
 
 ```bash title="Test complete workflow"
@@ -309,9 +331,7 @@ You should see output like:
 [[id:sample_003, organism:human, tissue:kidney, depth:45000000, quality:42.1, priority:high], /workspaces/training/side-quests/groovy_essentials/data/sequences/sample_003.fastq]
 ```
 
-!!! note
-
-    **Key Pattern**: Nextflow operators often take closures `{ ... }` as parameters. Everything inside these closures is **Groovy code**. This is how Nextflow orchestrates workflows while Groovy handles the data processing logic.
+This `[meta, file]` tuple structure is a common pattern in Nextflow for passing both metadata and associated files to processes.
 
 !!! note
 
@@ -321,39 +341,25 @@ Our workflow demonstrates the core pattern: **Nextflow constructs** (`workflow`,
 
 ### 1.2. Distinguishing Nextflow operators from Groovy functions
 
-Having a clear understanding of which parts of your code are using basic Groovy is especially important when syntax overlaps between the two languages.
+So far, so good, we can distinguish between Nextflow constructs and basic Groovy constructs. But what about when the syntax overlaps?
 
 A perfect example of this confusion is the `collect` operation, which exists in both contexts but does completely different things. Groovy's `collect` transforms each element, while Nextflow's `collect` gathers all channel elements into a single-item channel.
 
-Let's demonstrate this with some sample data. Check out `collect.nf`:
+Let's demonstrate this with some sample data, starting by refreshing ourselves on what the Nextflow `collect()` operator does. Check out `collect.nf`:
 
 ```groovy title="collect.nf" linenums="1"
-// Demonstrate Groovy vs Nextflow collect
 def sample_ids = ['sample_001', 'sample_002', 'sample_003']
 
-println "=== GROOVY COLLECT (transforms each item, keeps same structure) ==="
-// Groovy collect: transforms each element but maintains list structure
-def formatted_ids = sample_ids.collect { id ->
-    id.toUpperCase().replace('SAMPLE_', 'SPECIMEN_')
-}
-println "Original list: ${sample_ids}"
-println "Groovy collect result: ${formatted_ids}"
-println "Groovy collect maintains structure: ${formatted_ids.size} items (same as original)"
-println ""
-
-println "\n=== NEXTFLOW COLLECT (groups multiple items into single emission) ==="
-// Nextflow collect: groups channel elements into a single emission
-ch_input = Channel.of('sample_001', 'sample_002', 'sample_003')
-
-// Show individual items before collect
+// Nextflow collect() - groups multiple channel emissions into one
+ch_input = Channel.fromList(sample_ids)
 ch_input.view { "Individual channel item: ${it}" }
-
-// Collect groups all items into a single emission
 ch_collected = ch_input.collect()
-ch_collected.view { "Nextflow collect result: ${it} (${it.size()} items grouped together)" }
+ch_collected.view { "Nextflow collect() result: ${it} (${it.size()} items grouped into 1)" }
 ```
 
-Run the workflow to see both collect operations in action:
+We're using the `fromList()` channel factory to create a channel that emits each sample ID as a separate item, and we use `view()` to print each item as it flows through the channel.Then we apply Nextflow's `collect()` operator to gather all items into a single list and use a second `view()` to print the collected result which appears as a single item containing a list of all sample IDs. We've changed the structure of the channel, but we haven't changed the data itself.
+
+Run the workflow to confirm this:
 
 ```bash title="Test collect operations"
 nextflow run collect.nf
@@ -362,42 +368,83 @@ nextflow run collect.nf
 ```console title="Different collect behaviors"
  N E X T F L O W   ~  version 25.04.6
 
-Launching `collect.nf` [silly_bhaskara] DSL2 - revision: 5ef004224c
+Launching `collect.nf` [loving_mendel] DSL2 - revision: e8d054a46e
 
-=== GROOVY COLLECT (transforms each item, keeps same structure) ===
-Original list: [sample_001, sample_002, sample_003]
-Groovy collect result: [SPECIMEN_001, SPECIMEN_002, SPECIMEN_003]
-Groovy collect maintains structure: 3 items (same as original)
-
-=== NEXTFLOW COLLECT (groups multiple items into single emission) ===
 Individual channel item: sample_001
 Individual channel item: sample_002
 Individual channel item: sample_003
-Nextflow collect result: [sample_001, sample_002, sample_003] (3 items grouped together)
+Nextflow collect() result: [sample_001, sample_002, sample_003] (3 items grouped into 1)
 ```
 
-The key difference: **Groovy's `collect`** transforms items but preserves structure (like Nextflow's `map`), while **Nextflow's `collect()`** groups multiple channel emissions into a single list.
+Now let's see Groovy's `collect` method in action. Modify `collect.nf` to apply Groovy's `collect` method to the original list of sample IDs:
 
-But `collect` really isn't the main point. The key lesson: always distinguish between **Groovy constructs** (data structures) and **Nextflow constructs** (channels/workflows). Operations can share names but behave completely differently.
+=== "After"
+
+    ```groovy title="main.nf" linenums="1" hl_lines="9-13"
+        def sample_ids = ['sample_001', 'sample_002', 'sample_003']
+
+        // Nextflow collect() - groups multiple channel emissions into one
+        ch_input = Channel.fromList(sample_ids)
+        ch_input.view { "Individual channel item: ${it}" }
+        ch_collected = ch_input.collect()
+        ch_collected.view { "Nextflow collect() result: ${it} (${it.size()} items grouped into 1)" }
+
+        // Groovy collect - transforms each element, preserves structure
+        def formatted_ids = sample_ids.collect { id ->
+            id.toUpperCase().replace('SAMPLE_', 'SPECIMEN_')
+        }
+        println "Groovy collect result: ${formatted_ids} (${sample_ids.size()} items transformed into ${formatted_ids.size()})"
+    ```
+
+=== "Before"
+
+    ```groovy title="main.nf" linenums="1"
+        def sample_ids = ['sample_001', 'sample_002', 'sample_003']
+
+        // Nextflow collect() - groups multiple channel emissions into one
+        ch_input = Channel.fromList(sample_ids)
+        ch_input.view { "Individual channel item: ${it}" }
+        ch_collected = ch_input.collect()
+        ch_collected.view { "Nextflow collect() result: ${it} (${it.size()} items grouped into 1)" }
+    ```
+
+Run the modified workflow:
+
+```bash title="Test Groovy collect"
+nextflow run collect.nf
+```
+
+```console title="Groovy collect results" hl_lines="9"
+ N E X T F L O W   ~  version 25.04.6
+
+Launching `collect.nf` [cheeky_stonebraker] DSL2 - revision: 2d5039fb47
+
+Groovy collect result: [SPECIMEN_001, SPECIMEN_002, SPECIMEN_003] (3 items transformed into 3)
+Individual channel item: sample_001
+Individual channel item: sample_002
+Individual channel item: sample_003
+Nextflow collect() result: [sample_001, sample_002, sample_003] (3 items grouped into 1)
+```
+
+This time, have NOT changed the structure of the data, we still have 3 items in the list, but we HAVE transformed each item using Groovy's `collect` method to produce a new list with modified values. This is sort of like using the `map` operator in Nextflow, but it's pure Groovy code operating on a standard Groovy list.
+
+`collect` is an extreme case we're using here to make a point. The key lesson is that when you're writing workflows always distinguish between **Groovy constructs** (data structures) and **Nextflow constructs** (channels/workflows). Operations can share names but behave completely differently.
 
 ### Takeaway
 
 In this section, you've learned:
 
-- **Distinguishing Nextflow from Groovy**: How to identify which language construct you're using
+- **It takes both Nextflow and Groovy**: Nextflow provides the workflow structure and data flow, while Groovy provides the data manipulation and logic
+- **Distinguishing Nextflow from Groovy**: How to identify which language construct you're using given the context
 - **Context matters**: The same operation name can have completely different behaviors
-- **Workflow structure**: Nextflow provides the orchestration, Groovy provides the logic
-- **Data transformation patterns**: When to use Groovy methods vs Nextflow operators
 
 Understanding these boundaries is essential for debugging, documentation, and writing maintainable workflows.
 
-Now that we can distinguish between Nextflow and Groovy constructs, let's enhance our sample processing pipeline with more sophisticated data handling capabilities.
+Next we'll dive deeper into Groovy's powerful string processing capabilities, which are essential for handling real-world data.
 
 ---
 
 ## 2. Advanced String Processing for Bioinformatics
-
-Our basic pipeline processes CSV metadata well, but this is just the beginning. In production bioinformatics, you'll encounter files from different sequencing centers with varying naming conventions, legacy datasets with non-standard formats, and the need to extract critical information from filenames themselves.
 
 The difference between a brittle workflow that breaks on unexpected input and a robust pipeline that adapts gracefully often comes down to mastering Groovy's string processing capabilities. Let's transform our pipeline to handle the messy realities of real-world bioinformatics data.
 
@@ -405,34 +452,53 @@ The difference between a brittle workflow that breaks on unexpected input and a 
 
 Many bioinformatics workflows encounter files with complex naming conventions that encode important metadata. Let's see how Groovy's pattern matching can extract this information automatically.
 
-Let's start with a simple example of extracting sample information from file names:
+We're going to return to our `main.nf` workflow and add some pattern matching logic to extract additional sample information from file names. The FASTQ files in our dataset follow Illumina-style naming conventions with names like `SAMPLE_001_S1_L001_R1_001.fastq.gz`. These might look cryptic, but they actually encode useful metadata like sample ID, lane number, and read direction. We're going to use Groovy's regex capabilities to parse these names.
+
+Make the following change to your existing `main.nf` workflow:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="40" hl_lines="1-15"
-    // Pattern matching for sample file names
-    def sample_files = [
-        'Human_Liver_001.fastq',
-        'mouse_brain_002.fastq',
-        'SRR12345678.fastq'
-    ]
+    ```groovy title="main.nf" linenums="2" hl_lines="9-19,21"
+            .map { row ->
+                def sample_meta = [
+                    id: row.sample_id.toLowerCase(),
+                    organism: row.organism,
+                    tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+                    depth: row.sequencing_depth.toInteger(),
+                    quality: row.quality_score.toDouble()
+                ]
+                def fastq_path = file(row.file_path)
 
-    // Simple pattern to extract organism and tissue
-    def pattern = ~/^(\w+)_(\w+)_(\d+)\.fastq$/
+                def m = (fastq_path.name =~ /^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$/)
+                def file_meta = m ? [
+                    sample_num: m[0][2].toInteger(),
+                    lane: m[0][3],
+                    read: m[0][4],
+                    chunk: m[0][5]
+                ] : [:]
 
-    sample_files.each { filename ->
-        def matcher = filename =~ pattern
-        if (matcher) {
-            println "${filename} -> Organism: ${matcher[0][1]}, Tissue: ${matcher[0][2]}, ID: ${matcher[0][3]}"
-        } else {
-            println "${filename} -> No standard pattern match"
-        }
-    }
+                def priority = sample_meta.quality > 40 ? 'high' : 'normal'
+                return [sample_meta + file_meta + [priority: priority], fastq_path]
+            }
     ```
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="25"
+    ```groovy title="main.nf" linenums="2"
+        ch_samples = Channel.fromPath("./data/samples.csv")
+            .splitCsv(header: true)
+            .map { row ->
+                def sample_meta = [
+                    id: row.sample_id.toLowerCase(),
+                    organism: row.organism,
+                    tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+                    depth: row.sequencing_depth.toInteger(),
+                    quality: row.quality_score.toDouble()
+                ]
+                def priority = sample_meta.quality > 40 ? 'high' : 'normal'
+                return [sample_meta + [priority: priority], file(row.file_path)]
+            }
+            .view()
     ```
 
 This demonstrates key Groovy string processing concepts:
@@ -441,622 +507,448 @@ This demonstrates key Groovy string processing concepts:
 2. **Pattern matching** with the `=~` operator - this attempts to match a string against a regex pattern
 3. **Matcher objects** that capture groups with `[0][1]`, `[0][2]`, etc. - `[0]` refers to the entire match, `[1]`, `[2]`, etc. refer to captured groups in parentheses
 
-Run this to see the pattern matching in action:
+The regex pattern `^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$` is designed to match the Illumina-style naming convention and capture key components, namely the sample number, lane number, read direction, and chunk number.
+
+Run the modified workflow:
 
 ```bash title="Test pattern matching"
 nextflow run main.nf
 ```
 
-```console title="Pattern matching results"
-Human_Liver_001.fastq -> Organism: Human, Tissue: Liver, ID: 001
-mouse_brain_002.fastq -> Organism: mouse, Tissue: brain, ID: 002
-SRR12345678.fastq -> No standard pattern match
+You should see output with metadata enriched from the file names, like
+
+```console title="Metadata with file parsing"
+ N E X T F L O W   ~  version 25.04.6
+
+Launching `main.nf` [clever_pauling] DSL2 - revision: 605d2058b4
+
+[[id:sample_001, organism:human, tissue:liver, depth:30000000, quality:38.5, sample_num:1, lane:001, read:R1, chunk:001, priority:normal], /Users/jonathan.manning/projects/training/side-quests/groovy_essentials/data/sequences/SAMPLE_001_S1_L001_R1_001.fastq.gz]
+[[id:sample_002, organism:mouse, tissue:brain, depth:25000000, quality:35.2, sample_num:2, lane:001, read:R1, chunk:001, priority:normal], /Users/jonathan.manning/projects/training/side-quests/groovy_essentials/data/sequences/SAMPLE_002_S2_L001_R1_001.fastq.gz]
+[[id:sample_003, organism:human, tissue:kidney, depth:45000000, quality:42.1, sample_num:3, lane:001, read:R1, chunk:001, priority:high], /Users/jonathan.manning/projects/training/side-quests/groovy_essentials/data/sequences/SAMPLE_003_S3_L001_R1_001.fastq.gz]
 ```
 
-### 2.2. Creating Reusable Parsing Functions
+### 2.2. Creating Reusable closures
 
-Let's create a simple function to parse sample names and return structured metadata:
+You may have noticed that the content of our map operation is getting quite long and complex. To keep our workflow maintainable, it's a good idea to break out complex logic into reusable functions or closures.
+
+To do that we simply define a closure using the assignment operator `=` and the `{}` syntax, within the `workflow{}`. Then we can call that closure by name inside our map operation using standard function call syntax (not the curly braces).
+
+Make that change like so:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="60" hl_lines="1-20"
+    ```groovy title="main.nf" linenums="1" hl_lines="3-23,27"
+        workflow {
 
-    // Function to extract sample metadata from filename
-    def parseSampleName(String filename) {
-        def pattern = ~/^(\w+)_(\w+)_(\d+)\.fastq$/
-        def matcher = filename =~ pattern
+            separateMetadata = { row ->
+                def sample_meta = [
+                    id: row.sample_id.toLowerCase(),
+                    organism: row.organism,
+                    tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+                    depth: row.sequencing_depth.toInteger(),
+                    quality: row.quality_score.toDouble()
+                ]
+                def fastq_path = file(row.file_path)
 
-        if (matcher) {
-            return [
-                organism: matcher[0][1].toLowerCase(),
-                tissue: matcher[0][2].toLowerCase(),
-                sample_id: matcher[0][3],
-                valid: true
-            ]
-        } else {
-            return [
-                filename: filename,
-                valid: false
-            ]
+                def m = (fastq_path.name =~ /^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$/)
+                def file_meta = m ? [
+                    sample_num: m[0][2].toInteger(),
+                    lane: m[0][3],
+                    read: m[0][4],
+                    chunk: m[0][5]
+                ] : [:]
+
+                def priority = sample_meta.quality > 40 ? 'high' : 'normal'
+                return [sample_meta + file_meta + [priority: priority], fastq_path]
+            }
+
+            ch_samples = Channel.fromPath("./data/samples.csv")
+                .splitCsv(header: true)
+                    .map(separateMetadata)
+                    .view()
         }
-    }
-
-    // Test the parser
-    sample_files.each { filename ->
-        def parsed = parseSampleName(filename)
-        println "File: ${filename}"
-        if (parsed.valid) {
-            println "  Organism: ${parsed.organism}, Tissue: ${parsed.tissue}, ID: ${parsed.sample_id}"
-        } else {
-            println "  Could not parse filename"
-        }
-    }
     ```
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="40"
+    ```groovy title="main.nf" linenums="1" hl_lines="4-24"
+        workflow {
+            ch_samples = Channel.fromPath("./data/samples.csv")
+                .splitCsv(header: true)
+                    .map { row ->
+                        def sample_meta = [
+                            id: row.sample_id.toLowerCase(),
+                            organism: row.organism,
+                            tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+                            depth: row.sequencing_depth.toInteger(),
+                            quality: row.quality_score.toDouble()
+                        ]
+                        def fastq_path = file(row.file_path)
+
+                        def m = (fastq_path.name =~ /^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$/)
+                        def file_meta = m ? [
+                            sample_num: m[0][2].toInteger(),
+                            lane: m[0][3],
+                            read: m[0][4],
+                            chunk: m[0][5]
+                        ] : [:]
+
+                        def priority = sample_meta.quality > 40 ? 'high' : 'normal'
+                        return [sample_meta + file_meta + [priority: priority], fastq_path]
+                    }
+                    .view()
+        }
     ```
 
-This demonstrates key Groovy function patterns:
+By doing this we've reduced the actual workflow logic down to something really trivial:
 
-- **Function definitions** with `def functionName(parameters)` - similar to other languages but with dynamic typing
-- **Map creation and return** for structured data - maps are Groovy's primary data structure for returning multiple values
-- **Conditional returns** based on pattern matching success - functions can return different data structures based on conditions
+```groovy title="minimal workflow"
+            ch_samples = Channel.fromPath("./data/samples.csv")
+                .splitCsv(header: true)
+                    .map(separateMetadata)
+                    .view()
+```
+
+... which makes the logic much easier to read and understand at a glance. The closure `separateMetadata` encapsulates all the complex logic for parsing and enriching metadata, making it reusable and testable.
+
+You can run that to make sure it still works:
+
+```bash title="Test reusable closure"
+nextflow run main.nf
+```
+
+```console title="Closure results"
+ N E X T F L O W   ~  version 25.04.6
+
+Launching `main.nf` [tender_archimedes] DSL2 - revision: 8bfb9b2485
+
+[[id:sample_001, organism:human, tissue:liver, depth:30000000, quality:38.5, sample_num:1, lane:001, read:R1, chunk:001, priority:normal], /Users/jonathan.manning/projects/training/side-quests/groovy_essentials/data/sequences/SAMPLE_001_S1_L001_R1_001.fastq.gz]
+[[id:sample_002, organism:mouse, tissue:brain, depth:25000000, quality:35.2, sample_num:2, lane:001, read:R1, chunk:001, priority:normal], /Users/jonathan.manning/projects/training/side-quests/groovy_essentials/data/sequences/SAMPLE_002_S2_L001_R1_001.fastq.gz]
+[[id:sample_003, organism:human, tissue:kidney, depth:45000000, quality:42.1, sample_num:3, lane:001, read:R1, chunk:001, priority:high], /Users/jonathan.manning/projects/training/side-quests/groovy_essentials/data/sequences/SAMPLE_003_S3_L001_R1_001.fastq.gz]
+```
 
 ### 2.3. Dynamic Script Logic in Processes
 
-In Nextflow, dynamic behavior comes from using Groovy logic within process script blocks, not generating script strings. Here are realistic patterns:
+Another place you'll find it very useful to break out your Groovy toolbox is in process script blocks. You can use Groovy logic to make your scripts dynamic and adaptable to different input conditions.
+
+To illustrate what we mean, let's add some processes to our existing `main.nf` workflow that demonstrate common patterns for dynamic script generation. Open `modules/fastp.nf` and take a look:
+
+```groovtitle="modules/fastp.nf" linenums="1"
+process FASTP {
+    container 'community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690'
+
+    input:
+    tuple val(meta), path(reads)
+
+    output:
+    tuple val(sample_id), path("*_trimmed*.fastq.gz"), emit: reads
+
+    script:
+    """
+    fastp \\
+        --in1 ${reads[0]} \\
+        --in2 ${reads[1]} \\
+        --out1 ${meta.id}_trimmed_R1.fastq.gz \\
+        --out2 ${meta.id}_trimmed_R2.fastq.gz \\
+        --json ${meta.id}.fastp.json \\
+        --html ${meta.id}.fastp.html \\
+        --thread $task.cpus
+    """
+}
+```
+
+The process takes FASTQ files as input and runs the `fastp` tool to trim adapters and filter low-quality reads. Unfortunately, the person who wrote this process didn't allow for the single-end reads we have in our example dataset. Let's add it to our workflow and see what happens:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="115" hl_lines="1-40"
+    ```groovy title="main.nf" linenums="1" hl_lines="1,31"
+        include { FASTP } from './modules/fastp.nf'
 
-    // Process with conditional script logic
-    process QUALITY_FILTER {
-        input:
-        tuple val(meta), path(reads)
+        workflow {
 
-        output:
-        tuple val(meta), path("${meta.id}_filtered.fastq")
+            separateMetadata = { row ->
+                def sample_meta = [
+                    id: row.sample_id.toLowerCase(),
+                    organism: row.organism,
+                    tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+                    depth: row.sequencing_depth.toInteger(),
+                    quality: row.quality_score.toDouble()
+                ]
+                def fastq_path = file(row.file_path)
 
+                def m = (fastq_path.name =~ /^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$/)
+                def file_meta = m ? [
+                    sample_num: m[0][2].toInteger(),
+                    lane: m[0][3],
+                    read: m[0][4],
+                    chunk: m[0][5]
+                ] : [:]
+
+                def priority = sample_meta.quality > 40 ? 'high' : 'normal'
+                return [sample_meta + file_meta + [priority: priority], fastq_path]
+            }
+
+            ch_samples = Channel.fromPath("./data/samples.csv")
+                .splitCsv(header: true)
+                    .map(separateMetadata)
+
+            ch_fastp = FASTP(ch_samples)
+        }
+    ```
+
+=== "Before"
+
+    ```groovy title="main.nf" linenums="1" hl_lines="4-24"
+        workflow {
+
+            separateMetadata = { row ->
+                def sample_meta = [
+                    id: row.sample_id.toLowerCase(),
+                    organism: row.organism,
+                    tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+                    depth: row.sequencing_depth.toInteger(),
+                    quality: row.quality_score.toDouble()
+                ]
+                def fastq_path = file(row.file_path)
+
+                def m = (fastq_path.name =~ /^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$/)
+                def file_meta = m ? [
+                    sample_num: m[0][2].toInteger(),
+                    lane: m[0][3],
+                    read: m[0][4],
+                    chunk: m[0][5]
+                ] : [:]
+
+                def priority = sample_meta.quality > 40 ? 'high' : 'normal'
+                return [sample_meta + file_meta + [priority: priority], fastq_path]
+            }
+
+            ch_samples = Channel.fromPath("./data/samples.csv")
+                .splitCsv(header: true)
+                    .map(separateMetadata)
+                    .view()
+        }
+    ```
+
+Run this modified workflow:
+
+```bash title="Test fastp process"
+nextflow run main.nf
+```
+
+You'll see a long error trace with some content like:
+
+```console title="Process error"
+ERROR ~ Error executing process > 'FASTP (3)'
+
+Caused by:
+  Process `FASTP (3)` terminated with an error exit status (255)
+
+
+Command executed:
+
+  fastp \
+      --in1 SAMPLE_003_S3_L001_R1_001.fastq \
+      --in2 null \
+      --out1 sample_003_trimmed_R1.fastq.gz \
+      --out2 sample_003_trimmed_R2.fastq.gz \
+      --json sample_003.fastp.json \
+      --html sample_003.fastp.html \
+      --thread 2
+
+Command exit status:
+  255
+
+Command output:
+  (empty)
+```
+
+You can see that the process is trying to run `fastp` with a `null` value for the second input file, which is causing it to fail. This is because our dataset contains single-end reads, but the process is hardcoded to expect paired-end reads (two input files at a time).
+
+Let's fix this by adding some Groovy logic to the `script:` block of the `FASTP` process to handle both single-end and paired-end reads dynamically. We'll use an if/else statement to check how many read files are are present and adjust the command accordingly.
+
+=== "After"
+
+    ```groovy title="main.nf" linenums="11" hl_lines="3,5,15"
         script:
-        // Groovy logic to determine parameters based on metadata
-        def quality_threshold = meta.organism == 'human' ? 30 :
-                               meta.organism == 'mouse' ? 28 : 25
-        def min_length = meta.priority == 'high' ? 75 : 50
+        // Simple single-end vs paired-end detection
+        def is_single = reads instanceof List ? reads.size() == 1 : true
 
-        // Conditional script sections
-        def extra_qc = meta.priority == 'high' ? '--strict-quality' : ''
-
-        """
-        echo "Processing ${meta.id} (${meta.organism}, priority: ${meta.priority})"
-
-        # Dynamic quality filtering based on sample characteristics
-        fastp \\
-            --in1 ${reads} \\
-            --out1 ${meta.id}_filtered.fastq \\
-            --qualified_quality_phred ${quality_threshold} \\
-            --length_required ${min_length} \\
-            ${extra_qc}
-
-        echo "Applied quality threshold: ${quality_threshold}"
-        echo "Applied length threshold: ${min_length}"
-        """
-    }
-
-    // Process with completely different scripts based on organism
-    process ALIGN_READS {
-        input:
-        tuple val(meta), path(reads)
-
-        output:
-        tuple val(meta), path("${meta.id}.bam")
-
-        script:
-        if (meta.organism == 'human') {
+        if (is_single) {
+            def input_file = reads instanceof List ? reads[0] : reads
             """
-            echo "Using human-specific STAR alignment"
-            STAR --runMode alignReads \\
-                --genomeDir /refs/human/STAR \\
-                --readFilesIn ${reads} \\
-                --outSAMtype BAM SortedByCoordinate \\
-                --outFileNamePrefix ${meta.id}
-            mv ${meta.id}Aligned.sortedByCoord.out.bam ${meta.id}.bam
-            """
-        } else if (meta.organism == 'mouse') {
-            """
-            echo "Using mouse-specific bowtie2 alignment"
-            bowtie2 -x /refs/mouse/genome \\
-                -U ${reads} \\
-                --sensitive \\
-                | samtools sort -o ${meta.id}.bam -
+            fastp \\
+                --in1 ${input_file} \\
+                --out1 ${meta.id}_trimmed.fastq.gz \\
+                --json ${meta.id}.fastp.json \\
+                --html ${meta.id}.fastp.html \\
+                --thread $task.cpus
             """
         } else {
             """
-            echo "Using generic alignment for ${meta.organism}"
-            minimap2 -ax sr /refs/generic/genome.fa ${reads} \\
-                | samtools sort -o ${meta.id}.bam -
+            fastp \\
+                --in1 ${reads[0]} \\
+                --in2 ${reads[1]} \\
+                --out1 ${meta.id}_trimmed_R1.fastq.gz \\
+                --out2 ${meta.id}_trimmed_R2.fastq.gz \\
+                --json ${meta.id}.fastp.json \\
+                --html ${meta.id}.fastp.html \\
+                --thread $task.cpus
             """
         }
-    }
-
-    // Using templates (Nextflow's built-in templating)
-    process GENERATE_REPORT {
-        input:
-        tuple val(meta), path(results)
-
-        output:
-        path("${meta.id}_report.html")
-
-        script:
-        template 'report_template.sh'
-    }
     ```
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="115"
+    ```groovy title="main.nf" linenums="11"
+            script:
+            """
+            fastp \\
+                --in1 ${reads[0]} \\
+                --in2 ${reads[1]} \\
+                --out1 ${meta.id}_trimmed_R1.fastq.gz \\
+                --out2 ${meta.id}_trimmed_R2.fastq.gz \\
+                --json ${meta.id}.fastp.json \\
+                --html ${meta.id}.fastp.html \\
+                --thread $task.cpus
+            """
+        }
     ```
 
-Now let's look at the template file that would go with this:
+Now the workflow can handle both single-end and paired-end reads gracefully. The Groovy logic checks the number of input files and constructs the appropriate command for `fastp`. Let's see if it works:
 
-=== "After"
+```bash title="Test dynamic fastp"
+nextflow run main.nf
+```
 
-    ```bash title="templates/report_template.sh" linenums="1" hl_lines="1-25"
-    #!/bin/bash
+```console title="Successful run"
+ N E X T F L O W   ~  version 25.04.6
 
-    # This template has access to all variables from the process input
-    # Groovy expressions are evaluated at runtime
+Launching `main.nf` [adoring_rosalind] DSL2 - revision: 04b1cd93e9
 
-    echo "Generating report for sample: ${meta.id}"
-    echo "Organism: ${meta.organism}"
-    echo "Quality score: ${meta.quality}"
+executor >  local (3)
+[31/a8ad4d] process > FASTP (3) [100%] 3 of 3 ✔
+```
 
-    # Conditional logic in template
-    <% if (meta.organism == 'human') { %>
-    echo "Including human-specific quality metrics"
-    human_qc_script.py --input ${results} --output ${meta.id}_report.html
-    <% } else { %>
-    echo "Using standard quality metrics for ${meta.organism}"
-    generic_qc_script.py --input ${results} --output ${meta.id}_report.html
-    <% } %>
+Looks good! If we check the actual commands that were run (customise for your task hash):
 
-    # Groovy variables can be used for calculations
-    <%
-    def priority_bonus = meta.priority == 'high' ? 0.1 : 0.0
-    def adjusted_score = (meta.quality + priority_bonus).round(2)
-    %>
+```console title="Check commands executed"
+cat work/31/a8ad4d95749e685a6d842d3007957f/.command.sh
+```
 
-    echo "Adjusted quality score: ${adjusted_score}"
-    echo "Report generation complete"
-    ```
+We can see that Nextflow correctly picked the right command for single-end reads:
 
-=== "Before"
+```bash title=".command.sh"
+#!/bin/bash -ue
+fastp \
+    --in1 SAMPLE_003_S3_L001_R1_001.fastq \
+    --out1 sample_003_trimmed.fastq.gz \
+    --json sample_003.fastp.json \
+    --html sample_003.fastp.html \
+    --thread 2
+```
 
-    ```bash title="templates/report_template.sh"
-    ```
+Another common one can be seen in [the Nextflow for Science Genomics module](../nf4science/genomics/02_joint_calling.md). In that module, the GATK process being called can take multiple input files, but each must be prefixed with `-V` to form a correct command line. The process uses Groovy logic to transform a collection of input files (`all_gvcfs`) into the correct command arguments:
 
-This demonstrates realistic Nextflow patterns:
+```groovy title="command line manipulation for GATK" linenums="1"
+    script:
+    def gvcfs_line = all_gvcfs.collect { gvcf -> "-V ${gvcf}" }.join(' ')
+    """
+    gatk GenomicsDBImport \
+        ${gvcfs_line} \
+        -L ${interval_list} \
+        --genomicsdb-workspace-path ${cohort_name}_gdb
+    """
+```
 
-- **Conditional script blocks** using Groovy if/else in the script section
-- **Variable interpolation** directly in script blocks
-- **Template files** with Groovy expressions (using `<% %>` and `${}`)
-- **Dynamic parameter calculation** based on metadata
-
-### 2.4. Transforming File Collections into Command Arguments
-
-A particularly powerful pattern is using Groovy logic in the script block to transform collections of files into properly formatted command-line arguments. This is essential when tools expect multiple files as separate arguments:
-
-=== "After"
-
-    ```groovy title="main.nf" linenums="200" hl_lines="1-35"
-
-    // Process that needs to handle multiple input files
-    process JOINT_ANALYSIS {
-        input:
-        path sample_files  // This will be a list of files
-        path reference
-
-        output:
-        path "joint_results.txt"
-
-        script:
-        // Transform file list into command arguments
-        def file_args = sample_files.collect { file -> "--input ${file}" }.join(' ')
-        def sample_names = sample_files.collect { file ->
-            file.baseName.replaceAll(/\..*$/, '')
-        }.join(',')
-
-        """
-        echo "Processing ${sample_files.size()} samples"
-        echo "Sample names: ${sample_names}"
-
-        # Use the transformed arguments in the actual command
-        analysis_tool \\
-            ${file_args} \\
-            --reference ${reference} \\
-            --output joint_results.txt \\
-            --samples ${sample_names}
-        """
-    }
-
-    // Process that builds complex command based on file characteristics
-    process VARIABLE_COMMAND {
-        input:
-        tuple val(meta), path(files)
-
-        output:
-        path "${meta.id}_processed.txt"
-
-        script:
-        // Complex command building based on file types and metadata
-        def input_flags = files.collect { file ->
-            def extension = file.getExtension()
-            switch(extension) {
-                case 'bam':
-                    return "--bam-input ${file}"
-                case 'vcf':
-                    return "--vcf-input ${file}"
-                case 'bed':
-                    return "--intervals ${file}"
-                default:
-                    return "--data-input ${file}"
-            }
-        }.join(' ')
-
-        // Additional flags based on metadata
-        def extra_flags = meta.quality > 35 ? '--high-quality' : ''
-
-        """
-        echo "Building command for ${meta.id}"
-
-        variant_caller \\
-            ${input_flags} \\
-            ${extra_flags} \\
-            --output ${meta.id}_processed.txt
-        """
-    }
-    ```
-
-=== "Before"
-
-    ```groovy title="main.nf" linenums="200"
-    ```
-
-Key patterns demonstrated:
-
-- **File collection transformation**: Using `.collect{}` to transform each file into a command argument
-- **String joining**: Using `.join(' ')` to combine arguments with spaces
-- **File name manipulation**: Using `.baseName` and `.replaceAll()` for sample names
-- **Conditional argument building**: Using switch statements or conditionals to build different arguments based on file types
-- **Multiple transformations**: Building both file arguments and sample name lists from the same collection
+These patterns of using Groovy logic in process script blocks are extremely powerful and can be applied in many scenarios - from handling variable input types to building complex command-line arguments from file collections, making your processes truly adaptable to the diverse requirements of real-world data.
 
 ### Takeaway
 
 In this section, you've learned:
 
-- **Regular expression patterns** for bioinformatics file name parsing
-- **Reusable parsing functions** that return structured metadata
-- **Process script logic** with conditional parameter selection
-- **File collection transformation** into command-line arguments using `.collect{}` and `.join()`
-- **Command building patterns** based on file types and metadata
+- **Regular expressions for file parsing**: Using Groovy's `=~` operator and regex patterns to extract metadata from complex bioinformatics file naming conventions
+- **Reusable closures**: Extracting complex logic into named closures that can be passed to channel operators, making workflows more readable and maintainable
+- **Dynamic script generation**: Using Groovy conditional logic within process script blocks to adapt commands based on input characteristics (like single-end vs paired-end reads)
+- **Command-line argument construction**: Transforming file collections into properly formatted command arguments using `collect()` and `join()` methods
 
-These string processing techniques form the foundation for handling complex data pipelines that need to adapt to different input formats and generate appropriate commands for bioinformatics tools.
+These string processing patterns are essential for handling the diverse file formats and naming conventions you'll encounter in real-world bioinformatics workflows.
 
-With our pipeline now capable of extracting rich metadata from both CSV files and file names, we can make intelligent decisions about how to process different samples. Let's add conditional logic to route samples through appropriate analysis strategies.
 
 ---
 
 ## 3. Conditional Logic and Process Control
 
-### 3.1. Strategy Selection Based on Sample Characteristics
+Earlier on, we discussed how to use the `.map()` operator to use snippets of Groovy code to transform data flowing through channels. The counterpart to that is using Groovy to not just transform data, but to control which processes get executed based on the data itself. This is essential for building flexible workflows that can adapt to different sample types and analysis requirements.
 
-Now that our pipeline can extract comprehensive sample metadata, we can use this information to automatically select the most appropriate analysis strategy for each sample. Different organisms, sequencing depths, and quality scores require different processing approaches.
+Nextflow has several [operators](https://www.nextflow.io/docs/latest/reference/operator.html) that control process flow, including, many of which take closures as arguments, meanint their content is evaluated at run time, allowing us to use Groovy logic to drive workflow decisions based on channel content.
+
+For example, let's pretend that our sequencing samples need to be trimmed with FASTP only if they're human samples with a coverage above a certain threshold. Mouse samples or low-coverage samples should be run with Trimgalore instead (this is a contrived example, but it illustrates the point).
+
+Add a new process for Trimgalore in `modules/trimgalore.nf`:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="175" hl_lines="1-40"
-
-    // Dynamic process selection based on sample characteristics
-    def selectAnalysisStrategy(Map sample_meta) {
-        def strategy = [:]
-
-        // Sequencing depth determines processing approach
-        if (sample_meta.depth < 10_000_000) {
-            strategy.approach = 'low_depth'
-            strategy.processes = ['quality_check', 'simple_alignment']
-            strategy.sensitivity = 'high'
-        } else if (sample_meta.depth < 50_000_000) {
-            strategy.approach = 'standard'
-            strategy.processes = ['quality_check', 'trimming', 'alignment', 'variant_calling']
-            strategy.sensitivity = 'standard'
-        } else {
-            strategy.approach = 'high_depth'
-            strategy.processes = ['quality_check', 'trimming', 'alignment', 'variant_calling', 'structural_variants']
-            strategy.sensitivity = 'sensitive'
-        }
-
-        // Organism-specific adjustments
-        switch(sample_meta.organism) {
-            case 'human':
-                strategy.reference = 'GRCh38'
-                strategy.known_variants = 'dbSNP'
-                break
-            case 'mouse':
-                strategy.reference = 'GRCm39'
-                strategy.known_variants = 'mgp_variants'
-                break
-            default:
-                strategy.reference = 'custom'
-                strategy.known_variants = null
-        }
-
-        // Quality-based modifications
-        if (sample_meta.quality < 30) {
-            strategy.extra_qc = true
-            strategy.processes = ['extensive_qc'] + strategy.processes
-        }
-
-        return strategy
-    }
-
-    // Test strategy selection
-    ch_samples
-        .map { meta, file ->
-            def strategy = selectAnalysisStrategy(meta)
-            println "\nSample: ${meta.id}"
-            println "  Strategy: ${strategy.approach}"
-            println "  Processes: ${strategy.processes.join(' -> ')}"
-            println "  Reference: ${strategy.reference}"
-            println "  Extra QC: ${strategy.extra_qc ?: false}"
-
-            return [meta + strategy, file]
-        }
-        .view { meta, file -> "Ready for processing: ${meta.id} (${meta.approach})" }
+    ```groovy title="main.nf" linenums="1" hl_lines="2"
+    include { FASTP } from './modules/fastp.nf'
+    include { TRIMGALORE } from './modules/trimgalore.nf'
     ```
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="175"
+    ```groovy title="main.nf" linenums="1"
+    include { FASTP } from './modules/fastp.nf'
     ```
 
-This demonstrates several Groovy patterns commonly used in Nextflow workflows:
-
-- **Numeric literals** with underscores for readability (`10_000_000`) - underscores can be used in numbers to improve readability
-- **Switch statements** for multi-way branching - cleaner than multiple if/else statements
-- **List concatenation** with `+` operator - combines two lists into one
-- **Elvis operator** `?:` for null handling - provides a default value if the left side is null or false
-- **Map merging** to combine metadata with strategy - the `+` operator merges two maps, with the right map taking precedence
-
-### 3.2. Conditional Process Execution
-
-In Nextflow, you control which processes run for which samples using `when` conditions and channel routing:
+... and then modify your `main.nf` workflow to branch samples based on their metadata and route them through the appropriate trimming process, like this:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="225" hl_lines="1-60"
+    ```groovy title="branched workflow" linenums="28" hl_lines="5-12"
+            ch_samples = Channel.fromPath("./data/samples.csv")
+                .splitCsv(header: true)
+                    .map(separateMetadata)
 
-    // Different processes for different strategies
-    process BASIC_QC {
-        input:
-        tuple val(meta), path(reads)
-
-        output:
-        tuple val(meta), path("${meta.id}_basic_qc.html")
-
-        when:
-        meta.approach == 'low_depth'
-
-        script:
-        """
-        fastqc --quiet ${reads} -o ./
-        mv *_fastqc.html ${meta.id}_basic_qc.html
-        """
-    }
-
-    process COMPREHENSIVE_QC {
-        input:
-        tuple val(meta), path(reads)
-
-        output:
-        tuple val(meta), path("${meta.id}_comprehensive_qc.html")
-
-        when:
-        meta.approach in ['standard', 'high_depth']
-
-        script:
-        def sensitivity = meta.sensitivity == 'high' ? '--strict' : ''
-        """
-        fastqc ${sensitivity} ${reads} -o ./
-        # Additional QC for comprehensive analysis
-        seqtk fqchk ${reads} > sequence_stats.txt
-        mv *_fastqc.html ${meta.id}_comprehensive_qc.html
-        """
-    }
-
-    process SIMPLE_ALIGNMENT {
-        input:
-        tuple val(meta), path(reads)
-
-        output:
-        tuple val(meta), path("${meta.id}.bam")
-
-        when:
-        meta.approach == 'low_depth'
-
-        script:
-        """
-        minimap2 -ax sr ${meta.reference} ${reads} \\
-            | samtools sort -o ${meta.id}.bam -
-        """
-    }
-
-    process SENSITIVE_ALIGNMENT {
-        input:
-        tuple val(meta), path(reads)
-
-        output:
-        tuple val(meta), path("${meta.id}.bam")
-
-        when:
-        meta.approach in ['standard', 'high_depth']
-
-        script:
-        def params = meta.sensitivity == 'sensitive' ? '--very-sensitive' : '--sensitive'
-        """
-        bowtie2 ${params} -x ${meta.reference} -U ${reads} \\
-            | samtools sort -o ${meta.id}.bam -
-        """
-    }
-
-    // Workflow logic that routes to appropriate processes
-    workflow ANALYSIS_PIPELINE {
-        take:
-        samples_ch
-
-        main:
-        // All samples go through appropriate QC
-        basic_qc_results = BASIC_QC(samples_ch)
-        comprehensive_qc_results = COMPREHENSIVE_QC(samples_ch)
-
-        // Combine QC results
-        qc_results = basic_qc_results.mix(comprehensive_qc_results)
-
-        // All samples go through appropriate alignment
-        simple_alignment_results = SIMPLE_ALIGNMENT(samples_ch)
-        sensitive_alignment_results = SENSITIVE_ALIGNMENT(samples_ch)
-
-        // Combine alignment results
-        alignment_results = simple_alignment_results.mix(sensitive_alignment_results)
-
-        emit:
-        qc = qc_results
-        alignments = alignment_results
-    }
-    ```
-
-=== "Before"
-
-    ```groovy title="main.nf" linenums="225"
-    ```
-
-This shows realistic Nextflow patterns:
-
-- **Separate processes** for different strategies rather than dynamic generation
-- **When conditions** to control which processes run for which samples
-- **Mix operator** to combine results from different conditional processes
-- **Process parameterization** using metadata in script blocks
-
-### 3.3. Channel-based Workflow Routing
-
-The realistic way to handle conditional workflow assembly is through channel routing and filtering:
-
-=== "After"
-
-    ```groovy title="main.nf" linenums="285" hl_lines="1-50"
-
-    workflow {
-        // Read and enrich sample data with strategy
-        ch_samples = Channel.fromPath(params.input)
-            .splitCsv(header: true)
-            .map { row ->
-                def meta = [
-                    id: row.sample_id,
-                    organism: row.organism,
-                    depth: row.sequencing_depth.toInteger(),
-                    quality: row.quality_score.toDouble()
-                ]
-
-                // Add strategy information using our selectAnalysisStrategy function
-                def strategy = selectAnalysisStrategy(meta)
-
-                return [meta + strategy, file(row.file_path)]
-            }
-
-        // Split channel based on strategy requirements
-        ch_samples
-            .branch { meta, reads ->
-                low_depth: meta.approach == 'low_depth'
-                    return [meta, reads]
-                standard: meta.approach == 'standard'
-                    return [meta, reads]
-                high_depth: meta.approach == 'high_depth'
-                    return [meta, reads]
-            }
-            .set { samples_by_strategy }
-
-        // Route each strategy through appropriate processes
-        ANALYSIS_PIPELINE(samples_by_strategy.low_depth)
-        ANALYSIS_PIPELINE(samples_by_strategy.standard)
-        ANALYSIS_PIPELINE(samples_by_strategy.high_depth)
-
-        // For high-depth samples, also run structural variant calling
-        high_depth_alignments = ANALYSIS_PIPELINE.out.alignments
-            .filter { meta, bam -> meta.approach == 'high_depth' }
-
-        STRUCTURAL_VARIANTS(high_depth_alignments)
-
-        // Collect and organize all results
-        all_qc = ANALYSIS_PIPELINE.out.qc.collect()
-        all_alignments = ANALYSIS_PIPELINE.out.alignments.collect()
-
-        // Generate summary report based on what was actually run
-        all_alignments
-            .map { alignments ->
-                def strategies = alignments.collect { meta, bam -> meta.approach }.unique()
-                def total_samples = alignments.size()
-
-                println "Pipeline Summary:"
-                println "  Total samples processed: ${total_samples}"
-                println "  Strategies used: ${strategies.join(', ')}"
-
-                strategies.each { strategy ->
-                    def count = alignments.count { meta, bam -> meta.approach == strategy }
-                    println "    ${strategy}: ${count} samples"
+            trim_branches = ch_samples
+                .branch { meta, reads ->
+                    fastp: meta.organism == 'human' && meta.depth >= 30000000
+                    trimgalore: true
                 }
-            }
-            .view()
-    }
 
-    // Additional process for high-depth samples
-    process STRUCTURAL_VARIANTS {
-        input:
-        tuple val(meta), path(bam)
-
-        output:
-        tuple val(meta), path("${meta.id}.vcf")
-
-        script:
-        """
-        delly call -g ${meta.reference} ${bam} -o ${meta.id}.vcf
-        """
-    }
-    ```
+            ch_fastp = FASTP(trim_branches.fastp)
+            ch_trimgalore = TRIMGALORE(trim_branches.trimgalore)
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="285"
-    ```
+    ```groovy title="branched workflow" linenums="28" hl_lines="5-12"
+            ch_samples = Channel.fromPath("./data/samples.csv")
+                .splitCsv(header: true)
+                    .map(separateMetadata)
 
-Key Nextflow patterns demonstrated:
+            ch_fastp = FASTP(ch_samples)
 
-- **Channel branching** with `.branch{}` to split samples by strategy
-- **Conditional process execution** using `when:` directives and filtering
-- **Channel routing** to send different samples through different processes
-- **Result collection** and summary generation
-- **Process reuse** - the same workflow processes different sample types
+
+Run this modified workflow:
+
+```bash title="Test conditional trimming"
+nextflow run main.nf
+```
+
+```console title="Conditional trimming results"
+ N E X T F L O W   ~  version 25.04.6
+
+Launching `main.nf` [boring_koch] DSL2 - revision: 68a6bc7bd8
+
+executor >  local (3)
+[3d/bb1e90] process > FASTP (2)      [100%] 2 of 2 ✔
+[4c/455334] process > TRIMGALORE (1) [100%] 1 of 1 ✔
+```
+
+Here, we've used small but mighty Groovy expressions inside the `.branch{}` operator to route samples based on their metadata. Human samples with high coverage go through `FASTP`, while all other samples go through `TRIMGALORE`. Combined with other closure-taking operators such as `.filter{}`, this allows us to build complex conditional workflows that adapt to the data itself.
 
 ### Takeaway
 
-In this section, you've learned:
-
-- **Strategy selection** using Groovy conditional logic
-- **Process control** with `when` conditions and channel routing
-- **Workflow branching** using channel operators like `.branch()` and `.filter()`
-- **Metadata enrichment** to drive process selection
-
-These patterns help you write workflows that process different sample types appropriately while keeping your code organized and maintainable.
+In this section, you've learned to use Groovy logic to control workflow execution with using the closure interfaces of Nextflow opearators.
 
 Our pipeline now intelligently routes samples through appropriate processes, but production workflows need to handle invalid data gracefully. Let's add validation and error handling to make our pipeline robust enough for real-world use.
 
@@ -1423,7 +1315,7 @@ These patterns make your code more resilient to missing data and easier to read,
 
 ## 6. Advanced Closures and Functional Programming
 
-Our pipeline now handles missing data gracefully and processes complex input formats robustly. But as our workflow grows more sophisticated, we start seeing repeated patterns in our data transformation code. Instead of copy-pasting similar closures across different channel operations, let's learn how to create reusable, composable functions that make our code cleaner and more maintainable.
+Our pipeline now handles missing data gracefully and processes complex input formats robustly. But as our workflow grows more sophisticated, we start seeing repeated patterns in our data transformation code. Instead of copy-pasting similar closures across different processes or workflows, let's learn how to create reusable, composable functions that make our code cleaner and more maintainable.
 
 ### 6.1. Named Closures for Reusability
 
@@ -1810,7 +1702,7 @@ Here's how we progressively enhanced our pipeline:
 
 ### Key Benefits
 
-- **Clearer code**: Understanding when to use Nextflow vs Groovy helps you write more organized workflows
+- **Clearer code**: Understanding when to use Nextflow and Groovy helps you write more organized workflows
 - **Better error handling**: Basic validation and try-catch patterns help your workflows handle problems gracefully
 - **Flexible processing**: Conditional logic lets your workflows process different sample types appropriately
 - **Configuration management**: Using defaults and simple validation makes your workflows easier to use
