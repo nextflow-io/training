@@ -5,7 +5,7 @@ process FASTP {
     tuple val(meta), path(reads)
 
     output:
-    tuple val(sample_id), path("*_trimmed*.fastq.gz"), emit: reads
+    tuple val(meta), path("*_trimmed*.fastq.gz"), emit: reads
 
     script:
     """
