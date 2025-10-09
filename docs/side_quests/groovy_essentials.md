@@ -400,6 +400,7 @@ nextflow run main.nf
 ```
 
 You should see output like:
+
 ```console title="Complete workflow output"
 [[id:sample_001, organism:human, tissue:liver, depth:30000000, quality:38.5, priority:normal], /workspaces/training/side-quests/groovy_essentials/data/sequences/SAMPLE_001_S1_L001_R1_001.fastq]
 [[id:sample_002, organism:mouse, tissue:brain, depth:25000000, quality:35.2, priority:normal], /workspaces/training/side-quests/groovy_essentials/data/sequences/SAMPLE_002_S2_L001_R1_001.fastq]
@@ -479,7 +480,7 @@ Now let's see Groovy's `collect` method in action. Modify `collect.nf` to apply 
         id.toUpperCase().replace('SAMPLE_', 'SPECIMEN_')
     }
     println "Groovy collect result: ${formatted_ids} (${sample_ids.size()} items transformed into ${formatted_ids.size()})"
-```
+    ```
 
 === "Before"
 
@@ -491,7 +492,7 @@ Now let's see Groovy's `collect` method in action. Modify `collect.nf` to apply 
     ch_input.view { "Individual channel item: ${it}" }
     ch_collected = ch_input.collect()
     ch_collected.view { "Nextflow collect() result: ${it} (${it.size()} items grouped into 1)" }
-```
+    ```
 
 In this new snippet we:
 
@@ -845,7 +846,6 @@ include { FASTP } from './modules/fastp.nf'
 
 Then modify the `workflow` block to connect the `ch_samples` channel to the `FASTP` process:
 
-
 === "After"
 
     ```groovy title="main.nf" linenums="30" hl_lines="6"
@@ -1153,6 +1153,7 @@ echo "Date: \$(date)" >> ${meta.id}_report.txt
 ```
 
 Now you can see all three types together:
+
 - `${report_type}`, `${meta.id}`, `${meta.quality}`: Groovy variables (no backslash)
 - `\${USER}`: Shell environment variable (backslash)
 - `\$(hostname)`, `\$(date)`: Shell command substitution (backslash)
@@ -1170,7 +1171,6 @@ In this section, you've learned:
 - **Variable interpolation**: Understanding the difference between Nextflow/Groovy variables (`${var}`), shell environment variables (`\${var}`), and shell command substitution (`\$(cmd)`)
 
 These string processing patterns are essential for handling the diverse file formats and naming conventions you'll encounter in real-world bioinformatics workflows.
-
 
 ---
 
@@ -1230,6 +1230,7 @@ process FASTP {
 ```
 
 Now if the process fails due to insufficient memory, Nextflow will retry with more memory:
+
 - First attempt: 512 MB (task.attempt = 1)
 - Second attempt: 1024 MB (task.attempt = 2)
 
@@ -1257,6 +1258,7 @@ process QUALITY_CONTROL {
 ```
 
 This demonstrates several advanced patterns:
+
 - Creating intermediate Groovy variables (`base_mem`, `base_cpus`)
 - Using Groovy math functions (`Math.min`) to set limits
 - Combining metadata with retry logic
@@ -1265,6 +1267,7 @@ This demonstrates several advanced patterns:
 ### Takeaway
 
 Dynamic directives with closures let you:
+
 - Allocate resources based on input characteristics
 - Implement automatic retry strategies with increasing resources
 - Combine multiple factors (metadata, attempt number, priorities)
@@ -1423,6 +1426,7 @@ Our `separateMetadata` function currently assumes all CSV fields are present and
 ### 4.1. The Problem: Null Pointer Crashes
 
 Add a row with missing data to your `data/samples.csv`:
+
 ```csv
 SAMPLE_004,,unknown_tissue,20000000,data/sequences/SAMPLE_004_S4_L001_R1_001.fastq,
 ```
@@ -1902,6 +1906,7 @@ Continue practicing these patterns in your own workflows, and refer to the [Groo
 ### Key Concepts Reference
 
 - **Language Boundaries**
+
   ```groovy title="Nextflow vs Groovy examples"
   // Nextflow: workflow orchestration
   Channel.fromPath('*.fastq').splitCsv(header: true)
@@ -1911,6 +1916,7 @@ Continue practicing these patterns in your own workflows, and refer to the [Groo
   ```
 
 - **String Processing**
+
   ```groovy title="String processing examples"
   // Pattern matching
   filename =~ ~/^(\w+)_(\w+)_(\d+)\.fastq$/
@@ -1930,6 +1936,7 @@ Continue practicing these patterns in your own workflows, and refer to the [Groo
   ```
 
 - **Error Handling**
+
   ```groovy title="Error handling patterns"
   try {
       def errors = validateSample(sample)
@@ -1940,6 +1947,7 @@ Continue practicing these patterns in your own workflows, and refer to the [Groo
   ```
 
 - **Essential Groovy Operators**
+
   ```groovy title="Essential operators examples"
   // Safe navigation and Elvis operators
   def id = data?.sample?.id ?: 'unknown'
@@ -1954,6 +1962,7 @@ Continue practicing these patterns in your own workflows, and refer to the [Groo
   ```
 
 - **Advanced Closures**
+
   ```groovy title="Advanced closure patterns"
   // Named closures and composition
   def enrichData = normalizeId >> addQualityCategory >> addFlags
