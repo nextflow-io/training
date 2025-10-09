@@ -803,6 +803,8 @@ Launching `main.nf` [admiring_panini] DSL2 - revision: 8cc832e32f
 [[id:sample_003, organism:human, tissue:kidney, depth:45000000, quality:42.1, sample_num:3, lane:001, read:R1, chunk:001, priority:high], /Users/jonathan.manning/projects/training/side-quests/groovy_essentials/data/sequences/SAMPLE_003_S3_L001_R1_001.fastq]
 ```
 
+Hopefully there are no changes to the output, but the workflow is now much cleaner and easier to maintain.
+
 ### 2.3. Dynamic Script Logic in Processes
 
 Another place you'll find it very useful to break out your Groovy toolbox is in process script blocks. You can use Groovy logic to make your scripts dynamic and adaptable to different input conditions.
