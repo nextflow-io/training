@@ -1,21 +1,10 @@
 # Groovy Essentials for Nextflow Developers
 
-Nextflow is built on Apache Groovy, a powerful dynamic language that runs on the Java Virtual Machine. This foundation gives Nextflow its flexibility and expressiveness, but it also creates a common source of confusion for developers.
+Nextflow is built on Groovy, a powerful dynamic language that runs on the Java Virtual Machine. Most Nextflow tutorials focus on workflow orchestration - channels, processes, and data flow - but when you need to manipulate data, parse filenames, or implement conditional logic, you're actually writing Groovy code.
 
-**Here's the challenge:** Most Nextflow tutorials focus on the workflow orchestration - channels, processes, and data flow - but when you need to manipulate data, parse filenames, implement conditional logic, or handle errors gracefully, you're actually writing Groovy code. Many developers don't realize when they've crossed this boundary.
+Understanding where Nextflow ends and Groovy begins is crucial for effective workflow development. Nextflow provides channels, processes, and workflow orchestration, while Groovy handles data manipulation, string processing, and conditional logic within your workflow scripts.
 
-**Why does this matter?** The difference between a brittle workflow that breaks on unexpected input and a robust pipeline that adapts gracefully often comes down to understanding and leveraging Groovy's powerful features within your Nextflow workflows.
-
-**The common struggle:** Most Nextflow developers can write basic workflows, but they hit walls when they need to:
-- Process messy, real-world data with missing fields or inconsistent formats
-- Extract metadata from complex file naming schemes
-- Route samples through different analysis strategies based on their characteristics
-- Handle errors gracefully instead of crashing on invalid input
-- Build reusable, maintainable code that doesn't repeat the same patterns everywhere
-
-Understanding where Nextflow ends and Groovy begins is crucial for effective workflow development. Nextflow provides channels, processes, and workflow orchestration, while Groovy handles data manipulation, string processing, conditional logic, and general programming tasks within your workflow scripts.
-
-This side quest will bridge that gap by taking you on a hands-on journey from basic concepts to production-ready patterns. We'll transform a simple CSV-reading workflow into a sophisticated bioinformatics pipeline that handles real-world complexity. Starting with a basic workflow that processes sample metadata, we'll evolve it step-by-step through realistic challenges you'll face in production:
+This side quest takes you on a hands-on journey from basic concepts to production-ready patterns. We'll transform a simple CSV-reading workflow into a sophisticated bioinformatics pipeline, evolving it step-by-step through realistic challenges:
 
 - **Understanding boundaries:** Distinguish between Nextflow operators and Groovy methods, and master when to use each
 - **Data manipulation:** Extract, transform, and subset maps and collections using Groovy's powerful operators
@@ -1368,7 +1357,7 @@ Our `separateMetadata` function currently assumes all CSV fields are present and
 
 ### 4.1. The Problem: Null Pointer Crashes
 
-Add a row with missing data to your `data/samples.csv`: 
+Add a row with missing data to your `data/samples.csv`:
 ```csv
 SAMPLE_004,,unknown_tissue,20000000,data/sequences/SAMPLE_004_S4_L001_R1_001.fastq,
 ```
