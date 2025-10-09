@@ -635,7 +635,7 @@ Make the following change to your existing `main.nf` workflow:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="4" hl_lines="10-22"
+    ```groovy title="main.nf" linenums="4" hl_lines="10-21"
             .map { row ->
                 // This is all Groovy code now!
                 def sample_meta = [
@@ -713,27 +713,64 @@ Make that change like so:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="1" hl_lines="1-3,7"
+    ```groovy title="main.nf" linenums="1" hl_lines="1-2 27"
         def separateMetadata(row) {
-            // ... all the metadata processing logic ...
+            def sample_meta = [
+                id: row.sample_id.toLowerCase(),
+                organism: row.organism,
+                tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+                depth: row.sequencing_depth.toInteger(),
+                quality: row.quality_score.toDouble()
+            ]
+            def fastq_path = file(row.file_path)
+
+            def m = (fastq_path.name =~ /^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$/)
+            def file_meta = m ? [
+                sample_num: m[0][2].toInteger(),
+                lane: m[0][3],
+                read: m[0][4],
+                chunk: m[0][5]
+            ] : [:]
+
+            def priority = sample_meta.quality > 40 ? 'high' : 'normal'
+            return [sample_meta + file_meta + [priority: priority], fastq_path]
         }
 
         workflow {
             ch_samples = Channel.fromPath("./data/samples.csv")
                 .splitCsv(header: true)
-                .map(separateMetadata)
+                .map{ row -> separateMetadata(row) }
                 .view()
         }
     ```
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="1"
+    ```groovy title="main.nf" linenums="1" hl_lines="4-26"
         workflow {
             ch_samples = Channel.fromPath("./data/samples.csv")
                 .splitCsv(header: true)
                 .map { row ->
-                    // ... all the inline metadata processing logic ...
+                    // This is all Groovy code now!
+                    def sample_meta = [
+                        id: row.sample_id.toLowerCase(),
+                        organism: row.organism,
+                        tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+                        depth: row.sequencing_depth.toInteger(),
+                        quality: row.quality_score.toDouble()
+                    ]
+                    def fastq_path = file(row.file_path)
+
+                    def m = (fastq_path.name =~ /^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$/)
+                    def file_meta = m ? [
+                        sample_num: m[0][2].toInteger(),
+                        lane: m[0][3],
+                        read: m[0][4],
+                        chunk: m[0][5]
+                    ] : [:]
+
+                    def priority = sample_meta.quality > 40 ? 'high' : 'normal'
+                    return [sample_meta + file_meta + [priority: priority], fastq_path]
                 }
                 .view()
         }
@@ -752,18 +789,18 @@ By doing this we've reduced the actual workflow logic down to something really t
 
 You can run that to make sure it still works:
 
-```bash title="Test reusable closure"
+```bash title="Test reusable function"
 nextflow run main.nf
 ```
 
-```console title="Closure results"
+```console title="Function results"
  N E X T F L O W   ~  version 25.04.6
 
-Launching `main.nf` [tender_archimedes] DSL2 - revision: 8bfb9b2485
+Launching `main.nf` [admiring_panini] DSL2 - revision: 8cc832e32f
 
-[[id:sample_001, organism:human, tissue:liver, depth:30000000, quality:38.5, sample_num:1, lane:001, read:R1, chunk:001, priority:normal], /workspaces/training/side-quests/groovy_essentials/data/sequences/SAMPLE_001_S1_L001_R1_001.fastq]
-[[id:sample_002, organism:mouse, tissue:brain, depth:25000000, quality:35.2, sample_num:2, lane:001, read:R1, chunk:001, priority:normal], /workspaces/training/side-quests/groovy_essentials/data/sequences/SAMPLE_002_S2_L001_R1_001.fastq]
-[[id:sample_003, organism:human, tissue:kidney, depth:45000000, quality:42.1, sample_num:3, lane:001, read:R1, chunk:001, priority:high], /workspaces/training/side-quests/groovy_essentials/data/sequences/SAMPLE_003_S3_L001_R1_001.fastq]
+[[id:sample_001, organism:human, tissue:liver, depth:30000000, quality:38.5, sample_num:1, lane:001, read:R1, chunk:001, priority:normal], /Users/jonathan.manning/projects/training/side-quests/groovy_essentials/data/sequences/SAMPLE_001_S1_L001_R1_001.fastq]
+[[id:sample_002, organism:mouse, tissue:brain, depth:25000000, quality:35.2, sample_num:2, lane:001, read:R1, chunk:001, priority:normal], /Users/jonathan.manning/projects/training/side-quests/groovy_essentials/data/sequences/SAMPLE_002_S2_L001_R1_001.fastq]
+[[id:sample_003, organism:human, tissue:kidney, depth:45000000, quality:42.1, sample_num:3, lane:001, read:R1, chunk:001, priority:high], /Users/jonathan.manning/projects/training/side-quests/groovy_essentials/data/sequences/SAMPLE_003_S3_L001_R1_001.fastq]
 ```
 
 ### 2.3. Dynamic Script Logic in Processes
