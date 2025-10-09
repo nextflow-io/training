@@ -1,4 +1,4 @@
-# Working with metadata
+# Metadata in workflows
 
 In any scientific analysis, we rarely work with just the raw data files. Each file comes with its own additional information: what it is, where it came from, and what makes it special. This extra information is what we call metadata.
 
@@ -112,15 +112,15 @@ workflow  {
 === "After"
 
     ```groovy title="main.nf" linenums="3" hl_lines="2-3"
-    ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
-        .splitCsv(header: true)
-        .view()
+        ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
+            .splitCsv(header: true)
+            .view()
     ```
 
 === "Before"
 
     ```groovy title="main.nf" linenums="3"
-    ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
+        ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
     ```
 
 We can use the [`splitCsv` operator](https://www.nextflow.io/docs/latest/operator.html#splitcsv) to split the datasheet into a channel of maps, where each map represents a row from the CSV file.
@@ -176,7 +176,7 @@ Let's access a specific column, the `character` column, that we read in from the
 
 === "After"
 
-    ```groovy title="main.nf" linenums="4" hl_lines="2-4"
+    ```groovy title="main.nf" linenums="4" hl_lines="2-5"
             .splitCsv(header: true)
             .map{ row ->
                 row.character
@@ -232,15 +232,15 @@ Let's use this and separate our metadata from the file path. We'll use the `map`
 
     ```groovy title="main.nf" linenums="5" hl_lines="2"
         .map { row ->
-            [ [id: row.id, character: row.character], row.recording ]
+                [ [id: row.id, character: row.character], row.recording ]
         }
     ```
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="5"
-        .map{ row ->
-              row.character
+    ```groovy title="main.nf" linenums="5" hl_lines="2"
+        .map { row ->
+                row.character
         }
     ```
 
@@ -329,8 +329,8 @@ Let's include the process, then run, and view it:
 === "After"
 
     ```groovy title="main.nf" linenums="25" hl_lines="4-5"
-            [ [id: row.id, character: row.character], row.recording ]
-        }
+                [ [id: row.id, character: row.character], row.recording ]
+            }
 
         ch_prediction = IDENTIFY_LANGUAGE(ch_samplesheet)
         ch_prediction.view()
@@ -338,10 +338,10 @@ Let's include the process, then run, and view it:
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="25"
-            [ [id:row.id, character:row.character], row.recording ]
-        }
-        .view()
+    ```groovy title="main.nf" linenums="25" hl_lines="3"
+                [ [id:row.id, character:row.character], row.recording ]
+            }
+            .view()
     ```
 
 ```bash title="Identify languages"
@@ -379,9 +379,9 @@ tuple val(meta), path(file), stdout
 
 This is a useful way to ensure the metadata stays connected with any new information that is generated.
 
-Another compelling reason to use meta maps in this way is that they make it easier to associate related results that share the same identifiers. In modern Nextflow, it's considered best practice to keep different types of results in separate channels until you actually need to combine them. However, at some point, you'll inevitably reach a stage in your workflow where combining those results becomes necessary.
+!!! note
 
-As you learned in "Hello Nextflow", you can't rely on the order of items in channels to match results across them. Instead, you must use keys to align data correctly - and meta maps provide an ideal structure for this purpose. We explore this use case in detail in [Splitting & Grouping](./splitting_and_grouping.md).
+    Another compelling reason to use meta maps in this way is that they make it easier to associate related results that share the same identifiers. As you learned in "Hello Nextflow", you can't rely on the order of items in channels to match results across them. Instead, you must use keys to associate data correctly - and meta maps provide an ideal structure for this purpose. We explore this use case in detail in [Splitting & Grouping](./splitting_and_grouping.md).
 
 ### 2.2. Using process outputs to augment metadata
 
@@ -389,20 +389,21 @@ Given that this is more data about the files, let's add it to our meta map. We c
 
 === "After"
 
-    ```groovy title="main.nf" linenums="28" hl_lines="2-5"
+    ```groovy title="main.nf" linenums="28" hl_lines="2-6"
         ch_prediction = IDENTIFY_LANGUAGE(ch_samplesheet)
         ch_languages = ch_prediction
-          .map { meta, file, lang ->
-              [meta + [lang: lang], file]
-          }
-          .view()
+            .map { meta, file, lang ->
+                [meta + [lang: lang], file]
+            }
+            .view()
     }
     ```
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="28"
+    ```groovy title="main.nf" linenums="28" hl_lines="2"
         ch_prediction = IDENTIFY_LANGUAGE(ch_samplesheet)
+        ch_prediction.view()
     ```
 
 The `map` operator takes each channel element and processes it to create a modified version. Inside the closure `{ meta, file, lang -> ... }`, we then take the existing `meta` map, create a new map `[lang:lang]`, and merge both together using `+`.
@@ -449,28 +450,32 @@ We can add another `map` operator to assign either group (add this below your la
 
 === "After"
 
-    ```groovy title="main.nf" linenums="31" hl_lines="4-12"
-        }
-        .map { meta, file ->
-
-            def lang_group = "unknown"
-            if (meta.lang.equals("de") || meta.lang.equals('en')) {
-                lang_group = "germanic"
+    ```groovy title="main.nf" linenums="31" hl_lines="4-15"
+            .map { meta, file, lang ->
+                [meta + [lang: lang], file]
             }
-            else if (meta.lang in ["fr", "es", "it"]) {
-                lang_group = "romance"
-            }
+            .map { meta, file ->
 
-            [meta + [lang_group: lang_group], file]
-        }
-        .view()
+                def lang_group = "unknown"
+                if (meta.lang.equals("de") || meta.lang.equals('en')) {
+                    lang_group = "germanic"
+                }
+                else if (meta.lang in ["fr", "es", "it"]) {
+                    lang_group = "romance"
+                }
+
+                [meta + [lang_group: lang_group], file]
+            }
+            .view()
     ```
 
 === "Before"
 
     ```groovy title="main.nf" linenums="31"
-        }
-        .view()
+            .map { meta, file, lang ->
+                [meta + [lang: lang], file]
+            }
+            .view()
     ```
 
 Let's rerun it
@@ -563,20 +568,20 @@ Let's run our files through `COWPY` and remove our `view` statement:
 === "After"
 
     ```groovy title="main.nf" linenums="59" hl_lines="3"
-            [ meta + [lang_group: lang_group], file ]
-        }
-        COWPY(ch_languages))
+                [ meta + [lang_group: lang_group], file ]
+            }
+        COWPY(ch_languages)
     ```
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="59"
-            [ meta + [lang_group:lang_group], file ]
-        }
-        .view()
+    ```groovy title="main.nf" linenums="59" hl_lines="3"
+                [meta + [lang_group: lang_group], file]
+            }
+            .view()
     ```
 
-At the moment, all our comedy creatures are published into the `results` folder. Given we have been trying to figure out what languages our samples were in, let's group the samples by language in the output directory.
+The process definition as provided would direct results to the `results` folder, but let's make a tweak to be a little smarter. Given we have been trying to figure out what languages our samples were in, let's group the samples by language in the output directory.
 Earlier, we added the predicted language to the `meta` map. We can access this `key` in the process and use it in the `publishDir` directive:
 
 === "After"
@@ -591,8 +596,10 @@ Earlier, we added the predicted language to the `meta` map. We can access this `
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="23"
+    ```groovy title="main.nf" linenums="23" hl_lines="3"
     process COWPY {
+
+        publishDir "results/", mode: 'copy'
 
         container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
     ```
@@ -600,7 +607,7 @@ Earlier, we added the predicted language to the `meta` map. We can access this `
 Let's run this:
 
 ```bash title="Use cowpy"
-nextflow run main.nf
+nextflow run main.nf -resume
 ```
 
 You should now see a new folder called `results`:
@@ -695,22 +702,48 @@ and take another look at our french phrase:
 
 This approach differs from using pipeline parameters (`params`), which generally apply the same configuration to all files in your workflow. By leveraging metadata applied to each item in a channel, you can fine-tune process behavior on a per-file basis.
 
-This example shows you what's possible when you have a meta map, but it's worth noting a limitation of this approach. By using a property of the meta map in the script block, we introduce a hard requirement on the properties that must be present. Anyone running with a sample sheet that did not contain the `character` property would encounter an error. We could set workflow-level validation to deal with that, but it's also better practice to define the process with such hard requirements as explicit inputs:
+#### 3.2.1. Exploiting metadata at the workflow level
 
-```groovy
-    input:
-    tuple val(meta), val(character), path(input_file)
-```
+In the example above, by using a property of the meta map in the script block, we introduce a hard requirement on the properties that must be present. Anyone running with a sample sheet that did not contain the `character` property would encounter an error. The process `input:` only says that the `meta` map is required, so someone trying to use this process in another workflow might not notice immediately that the `character` property was required.
 
-... then we extract the metadata property at the workflow level before running the process:
+A better approach is to make the required metadata property an explicit input rather than accessing it from within the meta map. This makes the requirement clear and provides better error messages. Here's how to refactor the COWPY process:
 
-```groovy
+=== "After"
+
+    ```groovy title="main.nf" linenums="30" hl_lines="2"
+        input:
+        tuple val(meta), val(character), path(input_file)
+    ```
+
+=== "Before"
+
+    ```groovy title="main.nf" linenums="30" hl_lines="2"
+        input:
+        tuple val(meta), path(input_file)
+    ```
+
+Then, at the workflow level, we extract the `character` property from the metadata and pass it as a separate input:
+
+=== "After"
+
+    ```groovy title="main.nf" linenums="61" hl_lines="1"
         COWPY(ch_languages.map{meta, file -> [meta, meta.character, file] )
-```
+    ```
 
-This way, if we fail to provide the expected input to the process, Nextflow will be much clearer with us what the problem is.
+=== "Before"
 
-This highlights a careful balance: The meta map is excellent for keeping channel structure clean by preventing arbitrary channel structures with inputs that are not relevant for every process. However, for mandatory elements that are directly referenced in a process, extracting them as explicit inputs creates more robust code.
+    ```groovy title="main.nf" linenums="61" hl_lines="1"
+        COWPY(ch_languages)
+    ```
+
+**Why this approach is better:**
+
+1. **Clear Requirements**: The process input explicitly shows that `character` is required
+2. **Better Error Messages**: If `character` is missing, Nextflow will fail at the input stage with a clear error
+3. **Self-Documenting**: Anyone using this process can immediately see what inputs are needed
+4. **Reusable**: The process is easier to redeploy in other contexts
+
+This highlights an important design principle: Use the meta map for optional, descriptive information, but extract required values as explicit inputs. The meta map is excellent for keeping channel structures clean and preventing arbitrary channel structures, but for mandatory elements that are directly referenced in a process, extracting them as explicit inputs creates more robust and maintainable code.
 
 ### Takeaway
 
