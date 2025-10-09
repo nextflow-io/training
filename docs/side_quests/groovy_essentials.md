@@ -714,7 +714,7 @@ Make that change like so:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="1" hl_lines="1-2 27"
+    ```groovy title="main.nf" linenums="1" hl_lines="1-22 26"
         def separateMetadata(row) {
             def sample_meta = [
                 id: row.sample_id.toLowerCase(),
@@ -782,8 +782,8 @@ By doing this we've reduced the actual workflow logic down to something really t
 ```groovy title="minimal workflow"
             ch_samples = Channel.fromPath("./data/samples.csv")
                 .splitCsv(header: true)
-                    .map{row -> separateMetadata(row)}
-                    .view()
+                .map{row -> separateMetadata(row)}
+                .view()
 ```
 
 ... which makes the logic much easier to read and understand at a glance. The function `separateMetadata` encapsulates all the complex logic for parsing and enriching metadata, making it reusable and testable.
@@ -812,7 +812,7 @@ Another place you'll find it very useful to break out your Groovy toolbox is in 
 
 To illustrate what we mean, let's add some processes to our existing `main.nf` workflow that demonstrate common patterns for dynamic script generation. Open `modules/fastp.nf` and take a look:
 
-```groovtitle="modules/fastp.nf" linenums="1"
+```groovy title="modules/fastp.nf" linenums="1"
 process FASTP {
     container 'community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690'
 
@@ -848,26 +848,27 @@ Then modify the `workflow` block to connect the `ch_samples` channel to the `FAS
 
 === "After"
 
-    ```groovy title="main.nf" linenums="30" hl_lines="6"
-        workflow {
+    ```groovy title="main.nf" linenums="25" hl_lines="7"
+    workflow {
 
-            ch_samples = Channel.fromPath("./data/samples.csv")
-                .splitCsv(header: true)
-                    .map(separateMetadata)
+        ch_samples = Channel.fromPath("./data/samples.csv")
+            .splitCsv(header: true)
+            .map{ row -> separateMetadata(row) }
 
-            ch_fastp = FASTP(ch_samples)
-        }
+        ch_fastp = FASTP(ch_samples)
+    }
     ```
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="30" hl_lines="6"
-        workflow {
+    ```groovy title="main.nf" linenums="25" hl_lines="6"
+    workflow {
 
-            ch_samples = Channel.fromPath("./data/samples.csv")
-                .splitCsv(header: true)
-                    .map(separateMetadata)
-        }
+        ch_samples = Channel.fromPath("./data/samples.csv")
+            .splitCsv(header: true)
+            .map{ row -> separateMetadata(row) }
+            .view()
+    }
     ```
 
 Run this modified workflow:
@@ -909,7 +910,7 @@ Let's fix this by adding some Groovy logic to the `script:` block of the `FASTP`
 
 === "After"
 
-    ```groovy title="main.nf" linenums="11" hl_lines="3,5,15"
+    ```groovy title="main.nf" linenums="10" hl_lines="3 5 15"
         script:
         // Simple single-end vs paired-end detection
         def is_single = reads instanceof List ? reads.size() == 1 : true
@@ -940,7 +941,7 @@ Let's fix this by adding some Groovy logic to the `script:` block of the `FASTP`
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="11"
+    ```groovy title="main.nf" linenums="10"
             script:
             """
             fastp \\
@@ -988,7 +989,7 @@ fastp \
     --thread 2
 ```
 
-Another common one can be seen in [the Nextflow for Science Genomics module](../nf4science/genomics/02_joint_calling.md). In that module, the GATK process being called can take multiple input files, but each must be prefixed with `-V` to form a correct command line. The process uses Groovy logic to transform a collection of input files (`all_gvcfs`) into the correct command arguments:
+Another common usage of dynamic script logic can be seen in [the Nextflow for Science Genomics module](../../nf4science/genomics/02_joint_calling.md). In that module, the GATK process being called can take multiple input files, but each must be prefixed with `-V` to form a correct command line. The process uses Groovy logic to transform a collection of input files (`all_gvcfs`) into the correct command arguments:
 
 ```groovy title="command line manipulation for GATK" linenums="1"
     script:
