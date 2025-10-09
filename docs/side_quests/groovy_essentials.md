@@ -1,8 +1,8 @@
 # Groovy Essentials for Nextflow Developers
 
-Nextflow is built on Groovy, a powerful dynamic language that runs on the Java Virtual Machine. Most Nextflow tutorials focus on workflow orchestration - channels, processes, and data flow - but when you need to manipulate data, parse filenames, or implement conditional logic, you're actually writing Groovy code.
+Nextflow is built on Groovy, a powerful dynamic language that runs on the Java Virtual Machine. You can write a lot of Nextflow without ever feeling like you've learned Groovy - many workflows use only basic syntax for variables, maps, and lists. Most Nextflow tutorials focus on workflow orchestration (channels, processes, and data flow), and you can go surprisingly far with just that.
 
-Understanding where Nextflow ends and Groovy begins is crucial for effective workflow development. Nextflow provides channels, processes, and workflow orchestration, while Groovy handles data manipulation, string processing, and conditional logic within your workflow scripts.
+However, when you need to manipulate data, parse complex filenames, implement conditional logic, or build robust production workflows, you're writing Groovy code - and knowing a few key Groovy concepts can dramatically improve your ability to solve real-world problems efficiently. Understanding where Nextflow ends and Groovy begins helps you write clearer, more maintainable workflows.
 
 This side quest takes you on a hands-on journey from basic concepts to production-ready patterns. We'll transform a simple CSV-reading workflow into a sophisticated bioinformatics pipeline, evolving it step-by-step through realistic challenges:
 
@@ -24,7 +24,7 @@ Before taking on this side quest you should:
 
 - Complete the [Hello Nextflow](../hello_nextflow/README.md) tutorial or have equivalent experience
 - Understand basic Nextflow concepts (processes, channels, workflows)
-- Have basic familiarity with Groovy syntax (variables, maps, lists)
+- Have basic familiarity with common programming constructs used in Groovy syntax (variables, maps, lists)
 
 This tutorial will explain Groovy concepts as we encounter them, so you don't need extensive prior Groovy knowledge. We'll start with fundamental concepts and build up to advanced patterns.
 
@@ -41,21 +41,21 @@ You'll find a `data` directory with sample files and a main workflow file that w
 ```console title="Directory contents"
 > tree
 .
+├── collect.nf
 ├── data
-│   ├── metadata
-│   │   └── analysis_parameters.yaml
 │   ├── samples.csv
 │   └── sequences
 │       ├── SAMPLE_001_S1_L001_R1_001.fastq
 │       ├── SAMPLE_002_S2_L001_R1_001.fastq
 │       └── SAMPLE_003_S3_L001_R1_001.fastq
 ├── main.nf
-├── nextflow.config
-├── README.md
-└── templates
-    └── analysis_script.sh
+├── modules
+│   ├── fastp.nf
+│   ├── generate_report.nf
+│   └── trimgalore.nf
+└── nextflow.config
 
-5 directories, 9 files
+4 directories, 10 files
 ```
 
 Our sample CSV contains information about biological samples that need different processing based on their characteristics:
@@ -75,7 +75,7 @@ We'll use this realistic dataset to explore practical Groovy techniques that you
 
 ### 1.1. Identifying What's What
 
-One of the most common sources of confusion for Nextflow developers is understanding when they're working with Nextflow constructs versus Groovy language features. Let's build a workflow step by step to see how they work together.
+One of the most common sources of confusion for Nextflow developers is understanding when they're working with Nextflow constructs versus Groovy language features. Let's build a workflow step by step to see a common example of how they work together.
 
 #### Step 1: Basic Nextflow Workflow
 
@@ -98,7 +98,10 @@ nextflow run main.nf
 ```
 
 You should see output like:
+
 ```console title="Raw CSV data"
+Launching `main.nf` [marvelous_tuckerman] DSL2 - revision: 6113e05c17
+
 [sample_id:SAMPLE_001, organism:human, tissue_type:liver, sequencing_depth:30000000, file_path:data/sequences/SAMPLE_001_S1_L001_R1_001.fastq, quality_score:38.5]
 [sample_id:SAMPLE_002, organism:mouse, tissue_type:brain, sequencing_depth:25000000, file_path:data/sequences/SAMPLE_002_S2_L001_R1_001.fastq, quality_score:35.2]
 [sample_id:SAMPLE_003, organism:human, tissue_type:kidney, sequencing_depth:45000000, file_path:data/sequences/SAMPLE_003_S3_L001_R1_001.fastq, quality_score:42.1]
@@ -147,7 +150,7 @@ You'll see the same output as before, because we're simply returning the input u
 
 #### Step 3: Creating a Map Data Structure
 
-Now we're going to write **pure Groovy code** inside our closure. Everything from this point forward is Groovy syntax and methods, not Nextflow operators.
+Now we're going to write **pure Groovy code** inside our closure. Everything from this point forward in this section is Groovy syntax and methods, not Nextflow operators.
 
 === "After"
 
@@ -246,7 +249,7 @@ The map addition operator `+` creates a **new map** rather than modifying the ex
 
 !!! Note
 
-    Using the addition operator `+` creates a new map rather than modifying the existing one, which is a useful practice to adopt. Never directly modify maps passed into closures, as this can lead to unexpected behavior in Nextflow. This is especially important because in Nextflow workflows, the same data often flows through multiple channel operations or gets processed by different processes simultaneously. When multiple operations reference the same map object, modifying it in-place can cause unpredictable side effects - one operation might change data that another operation is still using. By creating new maps instead of modifying existing ones, you ensure that each operation works with its own clean copy of the data, making your workflows more predictable and easier to debug.
+    Never modify maps passed into closures - always create new ones using `+` (for example). In Nextflow, the same data often flows through multiple operations simultaneously. Modifying a map in-place can cause unpredictable side effects when other operations reference that same object. Creating new maps ensures each operation has its own clean copy.
 
 Run the modified workflow:
 
@@ -272,10 +275,11 @@ Let's add a line to create a simplified version of our metadata that only contai
 
 === "After"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="12-13"
+    ```groovy title="main.nf" linenums="2" hl_lines="12-15"
         ch_samples = Channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row ->
+                // This is all Groovy code now!
                 def sample_meta = [
                     id: row.sample_id.toLowerCase(),
                     organism: row.organism,
@@ -283,21 +287,22 @@ Let's add a line to create a simplified version of our metadata that only contai
                     depth: row.sequencing_depth.toInteger(),
                     quality: row.quality_score.toDouble()
                 ]
-                def priority = sample_meta.quality > 40 ? 'high' : 'normal'
                 def id_only = sample_meta.subMap(['id', 'organism', 'tissue'])
-                println "Full metadata: ${sample_meta + [priority: priority]}"
                 println "ID fields only: ${id_only}"
-                return [sample_meta + [priority: priority], file(row.file_path)]
+
+                def priority = sample_meta.quality > 40 ? 'high' : 'normal'
+                return sample_meta + [priority: priority]
             }
             .view()
     ```
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="11"
+    ```groovy title="main.nf" linenums="2" hl_lines="12"
         ch_samples = Channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row ->
+                // This is all Groovy code now!
                 def sample_meta = [
                     id: row.sample_id.toLowerCase(),
                     organism: row.organism,
@@ -317,11 +322,19 @@ Run the modified workflow:
 nextflow run main.nf
 ```
 
-You should see output showing both the full metadata and the extracted subset:
+You should see output showing both the full metadata displayed by the `view()` operation and the extracted subset we printed with `println`:
 
 ```console title="SubMap results"
-Full metadata: [id:sample_001, organism:human, tissue:liver, depth:30000000, quality:38.5, priority:normal]
+ N E X T F L O W   ~  version 25.04.6
+
+Launching `main.nf` [peaceful_cori] DSL2 - revision: 4cc4a8340f
+
 ID fields only: [id:sample_001, organism:human, tissue:liver]
+ID fields only: [id:sample_002, organism:mouse, tissue:brain]
+ID fields only: [id:sample_003, organism:human, tissue:kidney]
+[id:sample_001, organism:human, tissue:liver, depth:30000000, quality:38.5, priority:normal]
+[id:sample_002, organism:mouse, tissue:brain, depth:25000000, quality:35.2, priority:normal]
+[id:sample_003, organism:human, tissue:kidney, depth:45000000, quality:42.1, priority:high]
 ```
 
 The `.subMap()` method takes a list of keys and returns a new map containing only those keys. If a key doesn't exist in the original map, it's simply not included in the result.
@@ -356,7 +369,7 @@ Let's output a channel structure comprising a tuple of 2 elements: the enriched 
                     quality: row.quality_score.toDouble()
                 ]
                 def priority = sample_meta.quality > 40 ? 'high' : 'normal'
-                return [sample_meta + [priority: priority], file(row.file_path)]
+                return [sample_meta + [priority: priority], file(row.file_path) ]
             }
             .view()
     ```
@@ -419,7 +432,15 @@ ch_collected = ch_input.collect()
 ch_collected.view { "Nextflow collect() result: ${it} (${it.size()} items grouped into 1)" }
 ```
 
-We're using the `fromList()` channel factory to create a channel that emits each sample ID as a separate item, and we use `view()` to print each item as it flows through the channel.Then we apply Nextflow's `collect()` operator to gather all items into a single list and use a second `view()` to print the collected result which appears as a single item containing a list of all sample IDs. We've changed the structure of the channel, but we haven't changed the data itself.
+We are:
+
+- Defining a (Groovy) list
+- Using the `fromList()` channel factory to create a channel that emits each sample ID as a separate item
+- Using `view()` to print each item as it flows through the channel
+- Applying Nextflow's `collect()` operator to gather all items into a single list
+- Using a second `view()` to print the collected result which appears as a single item containing a list of all sample IDs
+
+We've changed the structure of the channel, but we haven't changed the data itself.
 
 Run the workflow to confirm this:
 
@@ -438,37 +459,44 @@ Individual channel item: sample_003
 Nextflow collect() result: [sample_001, sample_002, sample_003] (3 items grouped into 1)
 ```
 
+`view()` returns an output for every channel emission, so we know that this single output contains all 3 original items grouped into one list.
+
 Now let's see Groovy's `collect` method in action. Modify `collect.nf` to apply Groovy's `collect` method to the original list of sample IDs:
 
 === "After"
 
     ```groovy title="main.nf" linenums="1" hl_lines="9-13"
-        def sample_ids = ['sample_001', 'sample_002', 'sample_003']
+    def sample_ids = ['sample_001', 'sample_002', 'sample_003']
 
-        // Nextflow collect() - groups multiple channel emissions into one
-        ch_input = Channel.fromList(sample_ids)
-        ch_input.view { "Individual channel item: ${it}" }
-        ch_collected = ch_input.collect()
-        ch_collected.view { "Nextflow collect() result: ${it} (${it.size()} items grouped into 1)" }
+    // Nextflow collect() - groups multiple channel emissions into one
+    ch_input = Channel.fromList(sample_ids)
+    ch_input.view { "Individual channel item: ${it}" }
+    ch_collected = ch_input.collect()
+    ch_collected.view { "Nextflow collect() result: ${it} (${it.size()} items grouped into 1)" }
 
-        // Groovy collect - transforms each element, preserves structure
-        def formatted_ids = sample_ids.collect { id ->
-            id.toUpperCase().replace('SAMPLE_', 'SPECIMEN_')
-        }
-        println "Groovy collect result: ${formatted_ids} (${sample_ids.size()} items transformed into ${formatted_ids.size()})"
-    ```
+    // Groovy collect - transforms each element, preserves structure
+    def formatted_ids = sample_ids.collect { id ->
+        id.toUpperCase().replace('SAMPLE_', 'SPECIMEN_')
+    }
+    println "Groovy collect result: ${formatted_ids} (${sample_ids.size()} items transformed into ${formatted_ids.size()})"
+```
 
 === "Before"
 
     ```groovy title="main.nf" linenums="1"
-        def sample_ids = ['sample_001', 'sample_002', 'sample_003']
+    def sample_ids = ['sample_001', 'sample_002', 'sample_003']
 
-        // Nextflow collect() - groups multiple channel emissions into one
-        ch_input = Channel.fromList(sample_ids)
-        ch_input.view { "Individual channel item: ${it}" }
-        ch_collected = ch_input.collect()
-        ch_collected.view { "Nextflow collect() result: ${it} (${it.size()} items grouped into 1)" }
-    ```
+    // Nextflow collect() - groups multiple channel emissions into one
+    ch_input = Channel.fromList(sample_ids)
+    ch_input.view { "Individual channel item: ${it}" }
+    ch_collected = ch_input.collect()
+    ch_collected.view { "Nextflow collect() result: ${it} (${it.size()} items grouped into 1)" }
+```
+
+In this new snippet we:
+
+- Define a new variable `formatted_ids` that uses Groovy's `collect` method to transform each sample ID in the original list
+- Print the result using `println`
 
 Run the modified workflow:
 
@@ -476,7 +504,7 @@ Run the modified workflow:
 nextflow run collect.nf
 ```
 
-```console title="Groovy collect results" hl_lines="9"
+```console title="Groovy collect results" hl_lines="5"
  N E X T F L O W   ~  version 25.04.6
 
 Launching `collect.nf` [cheeky_stonebraker] DSL2 - revision: 2d5039fb47
@@ -574,11 +602,10 @@ def names = files.collect { it.getName() }
 
 The spread operator is particularly useful when you need to extract a single property from a list of objects - it's more readable than writing out the full `collect` closure.
 
-!!! tip "When to Use Spread vs Collect"
+!!! tip "When to Use Groovy's Spread vs Collect"
 
     - **Use spread (`*.`)** for simple property access: `samples*.id`, `files*.name`
-    - **Use collect** for transformations: `samples.collect { it.id.toUpperCase() }`
-    - **Use collect** for complex logic: `samples.collect { [it.id, it.quality > 40] }`
+    - **Use collect** for transformations or complex logic: `samples.collect { it.id.toUpperCase() }`, `samples.collect { [it.id, it.quality > 40] }`
 
 ### Takeaway
 
@@ -608,8 +635,9 @@ Make the following change to your existing `main.nf` workflow:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="9-19,21"
+    ```groovy title="main.nf" linenums="4" hl_lines="10-22"
             .map { row ->
+                // This is all Groovy code now!
                 def sample_meta = [
                     id: row.sample_id.toLowerCase(),
                     organism: row.organism,
@@ -634,10 +662,9 @@ Make the following change to your existing `main.nf` workflow:
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="2"
-        ch_samples = Channel.fromPath("./data/samples.csv")
-            .splitCsv(header: true)
+    ```groovy title="main.nf" linenums="4" "hl_lines="11"
             .map { row ->
+                // This is all Groovy code now!
                 def sample_meta = [
                     id: row.sample_id.toLowerCase(),
                     organism: row.organism,
@@ -648,7 +675,6 @@ Make the following change to your existing `main.nf` workflow:
                 def priority = sample_meta.quality > 40 ? 'high' : 'normal'
                 return [sample_meta + [priority: priority], file(row.file_path)]
             }
-            .view()
     ```
 
 This demonstrates key Groovy string processing concepts:
