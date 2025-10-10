@@ -556,4 +556,42 @@ You know how parameter validation works and how to add parameter definitions to 
 
 ### What's next?
 
-Continue to the next section of the training, or explore the [nf-schema documentation](https://nextflow-io.github.io/nf-schema/latest/) to learn about advanced features like metadata maps, multi-file samples, and custom validation rules.
+You can explore the [nf-schema documentation](https://nextflow-io.github.io/nf-schema/latest/) to learn about advanced features like metadata maps, multi-file samples, and custom validation rules.
+
+---
+
+## Congratulations!
+
+You've completed the Hello nf-core training course! 🎉
+
+Throughout this course, you've learned how to:
+
+- **Run nf-core pipelines** using test profiles and understand their structure
+- **Create nf-core-style pipelines** from scratch using the nf-core template
+- **Make workflows composable** with `take`, `main`, and `emit` blocks
+- **Integrate nf-core modules** from the community repository
+- **Implement robust input validation** using JSON schemas and the nf-schema plugin
+- **Follow nf-core conventions** for code organization, configuration, and documentation
+
+You now have the foundational knowledge to develop production-ready Nextflow pipelines that follow nf-core best practices. Your pipeline includes proper module organization, input validation, and is ready to be extended with additional features.
+
+### Where to go from here
+
+Ready to take your skills further? Here are some recommended next steps:
+
+- **[nf-core website](https://nf-co.re/)**: Explore the full catalog of nf-core pipelines and modules
+- **[nf-core documentation](https://nf-co.re/docs/)**: Deep dive into pipeline development guidelines and best practices
+- **[nf-schema documentation](https://nextflow-io.github.io/nf-schema/latest/)**: Learn advanced validation techniques
+- **[nf-test](https://www.nf-test.com/)**: Add comprehensive testing to your pipeline
+- **[Nextflow patterns](https://nextflow-io.github.io/patterns/)**: Discover common workflow patterns and solutions
+- **[Side Quests](../side_quests/index.md)**: Explore advanced Nextflow topics like metadata handling, debugging, and workflow composition
+
+### Get involved with the community
+
+The nf-core community is welcoming and always happy to help:
+
+- **[nf-core Slack](https://nf-co.re/join/slack)**: Join the community to ask questions and share your work
+- **[GitHub Discussions](https://github.com/nf-core/modules/discussions)**: Participate in discussions about modules and pipelines
+- **[Contribute](https://nf-co.re/docs/contributing/overview)**: Consider contributing your own modules or improvements back to the community
+
+Thank you for completing this training. We hope you enjoyed learning about nf-core and feel confident building your own pipelines. Happy pipelining! 🚀
