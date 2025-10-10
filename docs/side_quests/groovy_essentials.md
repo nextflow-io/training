@@ -666,7 +666,7 @@ Make the following change to your existing `main.nf` workflow:
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="4" "hl_lines="11"
+    ```groovy title="main.nf" linenums="4" hl_lines="11"
             .map { row ->
                 // This is all Groovy code now!
                 def sample_meta = [
