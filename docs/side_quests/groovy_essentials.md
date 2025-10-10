@@ -689,13 +689,13 @@ This demonstrates key **Groovy string processing concepts**:
 
 Let's break down the regex pattern `^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$`:
 
-| Pattern | Matches | Captures |
-|---------|---------|----------|
-| `^(.+)` | Sample name from start | Group 1: sample name |
-| `_S(\d+)` | Sample number `_S1`, `_S2`, etc. | Group 2: sample number |
-| `_L(\d{3})` | Lane number `_L001` | Group 3: lane (3 digits) |
-| `_(R[12])` | Read direction `_R1` or `_R2` | Group 4: read direction |
-| `_(\d{3})` | Chunk number `_001` | Group 5: chunk (3 digits) |
+| Pattern             | Matches                                | Captures                           |
+| ------------------- | -------------------------------------- | ---------------------------------- |
+| `^(.+)`             | Sample name from start                 | Group 1: sample name               |
+| `_S(\d+)`           | Sample number `_S1`, `_S2`, etc.       | Group 2: sample number             |
+| `_L(\d{3})`         | Lane number `_L001`                    | Group 3: lane (3 digits)           |
+| `_(R[12])`          | Read direction `_R1` or `_R2`          | Group 4: read direction            |
+| `_(\d{3})`          | Chunk number `_001`                    | Group 5: chunk (3 digits)          |
 | `\.fastq(?:\.gz)?$` | File extension `.fastq` or `.fastq.gz` | Not captured (?: is non-capturing) |
 
 This parses Illumina-style naming conventions to extract metadata automatically.
@@ -1019,7 +1019,7 @@ ERROR ~ Module compilation error
 1 error
 ```
 
- We need to escape it so Bash can handle it instead.
+We need to escape it so Bash can handle it instead.
 
 Fix this by escaping the shell variables and command substitutions with a backslash (`\`):
 
@@ -1678,8 +1678,7 @@ Also add a `view()` operator in the workflow to see the results:
             .map{ row -> separateMetadata(row) }
     ```
 
-
- and run the workflow:
+and run the workflow:
 
 ```bash
 nextflow run main.nf
