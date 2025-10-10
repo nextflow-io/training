@@ -9,10 +9,11 @@ This side quest takes you on a hands-on journey from basic concepts to productio
 - **Understanding boundaries:** Distinguish between Nextflow operators and Groovy methods, and master when to use each
 - **Data manipulation:** Extract, transform, and subset maps and collections using Groovy's powerful operators
 - **String processing:** Parse complex file naming schemes with regex patterns and master variable interpolation
+- **Reusable functions:** Extract complex logic into named functions for cleaner, more maintainable workflows
 - **Dynamic logic:** Build processes that adapt to different input types and use closures for dynamic resource allocation
 - **Conditional routing:** Intelligently route samples through different processes based on their metadata characteristics
 - **Safe operations:** Handle missing data gracefully with null-safe operators and validate inputs with clear error messages
-- **Reusable code:** Create maintainable workflows with functions and configuration-based event handlers
+- **Configuration-based handlers:** Use workflow event handlers for logging, notifications, and lifecycle management
 
 ---
 
@@ -622,9 +623,9 @@ Next we'll dive deeper into Groovy's powerful string processing capabilities, wh
 
 ---
 
-## 2. Advanced String Processing for Bioinformatics
+## 2. String Processing and Dynamic Script Generation
 
-The difference between a brittle workflow that breaks on unexpected input and a robust pipeline that adapts gracefully often comes down to mastering Groovy's string processing capabilities. Let's transform our pipeline to handle the messy realities of real-world bioinformatics data.
+The difference between a brittle workflow that breaks on unexpected input and a robust pipeline that adapts gracefully often comes down to mastering Groovy's string processing capabilities. In this section, we'll explore how to parse complex file names, generate process scripts dynamically based on input characteristics, and properly interpolate variables in different contexts.
 
 ### 2.1. Pattern Matching and Regular Expressions
 
@@ -704,111 +705,9 @@ Launching `main.nf` [clever_pauling] DSL2 - revision: 605d2058b4
 [[id:sample_003, organism:human, tissue:kidney, depth:45000000, quality:42.1, sample_num:3, lane:001, read:R1, chunk:001, priority:high], /workspaces/training/side-quests/groovy_essentials/data/sequences/SAMPLE_003_S3_L001_R1_001.fastq]
 ```
 
-### 2.2. Creating Reusable functions
+### 2.2. Dynamic Script Generation in Processes
 
-You may have noticed that the content of our map operation is getting quite long and complex. To keep our workflow maintainable, it's a good idea to break out complex logic into reusable functions.
-
-To illustrate what that looks like with our existing workflow, make the modification below, using `def` to define a reusable function called `separateMetadata`.
-
-Make that change like so:
-
-=== "After"
-
-    ```groovy title="main.nf" linenums="1" hl_lines="1-22 26"
-        def separateMetadata(row) {
-            def sample_meta = [
-                id: row.sample_id.toLowerCase(),
-                organism: row.organism,
-                tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
-                depth: row.sequencing_depth.toInteger(),
-                quality: row.quality_score.toDouble()
-            ]
-            def fastq_path = file(row.file_path)
-
-            def m = (fastq_path.name =~ /^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$/)
-            def file_meta = m ? [
-                sample_num: m[0][2].toInteger(),
-                lane: m[0][3],
-                read: m[0][4],
-                chunk: m[0][5]
-            ] : [:]
-
-            def priority = sample_meta.quality > 40 ? 'high' : 'normal'
-            return [sample_meta + file_meta + [priority: priority], fastq_path]
-        }
-
-        workflow {
-            ch_samples = Channel.fromPath("./data/samples.csv")
-                .splitCsv(header: true)
-                .map{ row -> separateMetadata(row) }
-                .view()
-        }
-    ```
-
-=== "Before"
-
-    ```groovy title="main.nf" linenums="1" hl_lines="4-26"
-        workflow {
-            ch_samples = Channel.fromPath("./data/samples.csv")
-                .splitCsv(header: true)
-                .map { row ->
-                    // This is all Groovy code now!
-                    def sample_meta = [
-                        id: row.sample_id.toLowerCase(),
-                        organism: row.organism,
-                        tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
-                        depth: row.sequencing_depth.toInteger(),
-                        quality: row.quality_score.toDouble()
-                    ]
-                    def fastq_path = file(row.file_path)
-
-                    def m = (fastq_path.name =~ /^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$/)
-                    def file_meta = m ? [
-                        sample_num: m[0][2].toInteger(),
-                        lane: m[0][3],
-                        read: m[0][4],
-                        chunk: m[0][5]
-                    ] : [:]
-
-                    def priority = sample_meta.quality > 40 ? 'high' : 'normal'
-                    return [sample_meta + file_meta + [priority: priority], fastq_path]
-                }
-                .view()
-        }
-    ```
-
-By doing this we've reduced the actual workflow logic down to something really trivial:
-
-```groovy title="minimal workflow"
-            ch_samples = Channel.fromPath("./data/samples.csv")
-                .splitCsv(header: true)
-                .map{row -> separateMetadata(row)}
-                .view()
-```
-
-... which makes the logic much easier to read and understand at a glance. The function `separateMetadata` encapsulates all the complex logic for parsing and enriching metadata, making it reusable and testable.
-
-You can run that to make sure it still works:
-
-```bash title="Test reusable function"
-nextflow run main.nf
-```
-
-```console title="Function results"
- N E X T F L O W   ~  version 25.04.6
-
-Launching `main.nf` [admiring_panini] DSL2 - revision: 8cc832e32f
-
-[[id:sample_001, organism:human, tissue:liver, depth:30000000, quality:38.5, sample_num:1, lane:001, read:R1, chunk:001, priority:normal], /Users/jonathan.manning/projects/training/side-quests/groovy_essentials/data/sequences/SAMPLE_001_S1_L001_R1_001.fastq]
-[[id:sample_002, organism:mouse, tissue:brain, depth:25000000, quality:35.2, sample_num:2, lane:001, read:R1, chunk:001, priority:normal], /Users/jonathan.manning/projects/training/side-quests/groovy_essentials/data/sequences/SAMPLE_002_S2_L001_R1_001.fastq]
-[[id:sample_003, organism:human, tissue:kidney, depth:45000000, quality:42.1, sample_num:3, lane:001, read:R1, chunk:001, priority:high], /Users/jonathan.manning/projects/training/side-quests/groovy_essentials/data/sequences/SAMPLE_003_S3_L001_R1_001.fastq]
-```
-
-Hopefully there are no changes to the output, but the workflow is now much cleaner and easier to maintain.
-
-### 2.3. Dynamic Script Logic in Processes
-
-Another place you'll find it very useful to break out your Groovy toolbox is in process script blocks. You can use Groovy logic to make your scripts dynamic and adaptable to different input conditions.
+Process script blocks are essentially multi-line strings that get passed to the shell. You can use Groovy logic to dynamically generate different script strings based on input characteristics, making your processes adaptable to different input conditions.
 
 To illustrate what we mean, let's add some processes to our existing `main.nf` workflow that demonstrate common patterns for dynamic script generation. Open `modules/fastp.nf` and take a look:
 
@@ -1004,7 +903,7 @@ Another common usage of dynamic script logic can be seen in [the Nextflow for Sc
 
 These patterns of using Groovy logic in process script blocks are extremely powerful and can be applied in many scenarios - from handling variable input types to building complex command-line arguments from file collections, making your processes truly adaptable to the diverse requirements of real-world data.
 
-### 2.4. Variable Interpolation: Groovy, Bash, and Shell Variables
+### 2.3. Variable Interpolation: Groovy, Bash, and Shell Variables
 
 When writing process scripts, you're actually working with three different types of variables, and using the wrong syntax is a common source of errors. Let's add a process that creates a processing report to demonstrate the differences.
 
@@ -1144,15 +1043,139 @@ Now it works! The backslash (`\`) tells Nextflow "don't interpret this, pass it 
 In this section, you've learned:
 
 - **Regular expressions for file parsing**: Using Groovy's `=~` operator and regex patterns to extract metadata from complex bioinformatics file naming conventions
-- **Reusable functions**: Extracting complex logic into named functions that can be called from channel operators, making workflows more readable and maintainable
-- **Dynamic script generation**: Using Groovy conditional logic within process script blocks to adapt commands based on input characteristics (like single-end vs paired-end reads)
+- **Dynamic script generation**: Using Groovy conditional logic to generate different script strings based on input characteristics (like single-end vs paired-end reads)
 - **Variable interpolation**: Understanding the difference between Nextflow/Groovy variables (`${var}`), shell environment variables (`\${var}`), and shell command substitution (`\$(cmd)`)
 
-These string processing patterns are essential for handling the diverse file formats and naming conventions you'll encounter in real-world bioinformatics workflows.
+These string processing and generation patterns are essential for handling the diverse file formats and naming conventions you'll encounter in real-world bioinformatics workflows.
 
 ---
 
-### 2.5. Dynamic Resource Directives with Closures
+## 3. Creating Reusable Functions
+
+As your workflow logic becomes more complex, keeping everything inline in channel operators or process definitions can make your code hard to read and maintain. Groovy functions let you extract complex logic into named, reusable components that can be called from anywhere in your workflow.
+
+You may have noticed that the content of our map operation is getting quite long and complex. To keep our workflow maintainable, it's a good idea to break out complex logic into reusable functions.
+
+To illustrate what that looks like with our existing workflow, make the modification below, using `def` to define a reusable function called `separateMetadata`:
+
+=== "After"
+
+    ```groovy title="main.nf" linenums="1" hl_lines="3-25 28-32"
+    include { FASTP } from './modules/fastp.nf'
+    include { GENERATE_REPORT } from './modules/generate_report.nf'
+
+    def separateMetadata(row) {
+        def sample_meta = [
+            id: row.sample_id.toLowerCase(),
+            organism: row.organism,
+            tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+            depth: row.sequencing_depth.toInteger(),
+            quality: row.quality_score.toDouble()
+        ]
+        def fastq_path = file(row.file_path)
+
+        def m = (fastq_path.name =~ /^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$/)
+        def file_meta = m ? [
+            sample_num: m[0][2].toInteger(),
+            lane: m[0][3],
+            read: m[0][4],
+            chunk: m[0][5]
+        ] : [:]
+
+        def priority = sample_meta.quality > 40 ? 'high' : 'normal'
+        return [sample_meta + file_meta + [priority: priority], fastq_path]
+    }
+
+    workflow {
+        ch_samples = Channel.fromPath("./data/samples.csv")
+            .splitCsv(header: true)
+            .map{ row -> separateMetadata(row) }
+
+        ch_fastp = FASTP(ch_samples)
+        GENERATE_REPORT(ch_samples)
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="main.nf" linenums="1" hl_lines="5-28"
+    include { FASTP } from './modules/fastp.nf'
+    include { GENERATE_REPORT } from './modules/generate_report.nf'
+
+    workflow {
+        ch_samples = Channel.fromPath("./data/samples.csv")
+            .splitCsv(header: true)
+            .map { row ->
+                def sample_meta = [
+                    id: row.sample_id.toLowerCase(),
+                    organism: row.organism,
+                    tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+                    depth: row.sequencing_depth.toInteger(),
+                    quality: row.quality_score.toDouble()
+                ]
+                def fastq_path = file(row.file_path)
+
+                def m = (fastq_path.name =~ /^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$/)
+                def file_meta = m ? [
+                    sample_num: m[0][2].toInteger(),
+                    lane: m[0][3],
+                    read: m[0][4],
+                    chunk: m[0][5]
+                ] : [:]
+
+                def priority = sample_meta.quality > 40 ? 'high' : 'normal'
+                return [sample_meta + file_meta + [priority: priority], fastq_path]
+            }
+
+        ch_fastp = FASTP(ch_samples)
+        GENERATE_REPORT(ch_samples)
+    }
+    ```
+
+By extracting this logic into a function, we've reduced the actual workflow logic down to something much cleaner:
+
+```groovy title="minimal workflow"
+    ch_samples = Channel.fromPath("./data/samples.csv")
+        .splitCsv(header: true)
+        .map{ row -> separateMetadata(row) }
+
+    ch_fastp = FASTP(ch_samples)
+    GENERATE_REPORT(ch_samples)
+```
+
+This makes the workflow logic much easier to read and understand at a glance. The function `separateMetadata` encapsulates all the complex logic for parsing and enriching metadata, making it reusable and testable.
+
+Run the workflow to make sure it still works:
+
+```bash title="Test reusable function"
+nextflow run main.nf
+```
+
+```console title="Function results"
+ N E X T F L O W   ~  version 25.04.6
+
+Launching `main.nf` [admiring_panini] DSL2 - revision: 8cc832e32f
+
+executor >  local (6)
+[8c/2e3f91] process > FASTP (3)           [100%] 3 of 3 ✔
+[7a/1b4c92] process > GENERATE_REPORT (3) [100%] 3 of 3 ✔
+```
+
+The output should show both processes completing successfully. The workflow is now much cleaner and easier to maintain, with all the complex metadata processing logic encapsulated in the `separateMetadata` function.
+
+### Takeaway
+
+In this section, you've learned:
+
+- **Extracting functions**: Moving complex logic from inline closures into named functions
+- **Function scope**: Functions defined at the script level can be called from anywhere in your workflow
+- **Cleaner workflows**: Using functions makes your workflow blocks more concise and readable
+
+Next, we'll explore how to use Groovy closures in process directives for dynamic resource allocation.
+
+---
+
+## 4. Dynamic Resource Directives with Closures
 
 So far we've used Groovy in the `script` block of processes. But Groovy closures are also incredibly useful in process directives, especially for dynamic resource allocation. Let's add resource directives to our FASTP process that adapt based on the sample characteristics.
 
@@ -1255,11 +1278,13 @@ This makes your workflows both more efficient (not over-allocating) and more rob
 
 ---
 
-## 3. Conditional Logic and Process Control
+## 5. Conditional Logic and Process Control
 
 Earlier on, we discussed how to use the `.map()` operator to use snippets of Groovy code to transform data flowing through channels. The counterpart to that is using Groovy to not just transform data, but to control which processes get executed based on the data itself. This is essential for building flexible workflows that can adapt to different sample types and analysis requirements.
 
 Nextflow has several [operators](https://www.nextflow.io/docs/latest/reference/operator.html) that control process flow, including, many of which take closures as arguments, meanint their content is evaluated at run time, allowing us to use Groovy logic to drive workflow decisions based on channel content.
+
+### 5.1. Routing with `.branch()`
 
 For example, let's pretend that our sequencing samples need to be trimmed with FASTP only if they're human samples with a coverage above a certain threshold. Mouse samples or low-coverage samples should be run with Trimgalore instead (this is a contrived example, but it illustrates the point).
 
@@ -1325,7 +1350,7 @@ executor >  local (3)
 
 Here, we've used small but mighty Groovy expressions inside the `.branch{}` operator to route samples based on their metadata. Human samples with high coverage go through `FASTP`, while all other samples go through `TRIMGALORE`.
 
-### 3.1. Using `.filter()` with Groovy Truth
+### 5.2. Using `.filter()` with Groovy Truth
 
 Another powerful pattern for controlling workflow execution is the `.filter()` operator, which uses a closure to determine which items should continue down the pipeline. Let's add a validation step to filter out samples that don't meet our quality requirements.
 
@@ -1397,11 +1422,11 @@ Our pipeline now intelligently routes samples through appropriate processes, but
 
 ---
 
-## 4. Safe Navigation and Elvis Operators
+## 6. Safe Navigation and Elvis Operators
 
 Our `separateMetadata` function currently assumes all CSV fields are present and valid. But what happens with incomplete data? Let's find out.
 
-### 4.1. The Problem: Null Pointer Crashes
+### 6.1. The Problem: Null Pointer Crashes
 
 Add a row with missing data to your `data/samples.csv`:
 
@@ -1417,7 +1442,7 @@ nextflow run main.nf
 
 It crashes with a NullPointerException! This is where Groovy's safe operators save the day.
 
-### 4.2. Safe Navigation Operator (`?.`)
+### 6.2. Safe Navigation Operator (`?.`)
 
 The safe navigation operator (`?.`) returns null instead of throwing an exception. Update your `separateMetadata` function:
 
@@ -1457,7 +1482,7 @@ nextflow run main.nf
 
 No crash! But SAMPLE_004 now has `null` values which could cause problems downstream.
 
-### 4.3. Elvis Operator (`?:`) for Defaults
+### 6.3. Elvis Operator (`?:`) for Defaults
 
 The Elvis operator (`?:`) provides default values. Update again:
 
@@ -1497,7 +1522,7 @@ nextflow run main.nf
 
 Perfect! SAMPLE_004 now has safe defaults: 'unknown' for organism/tissue, 0.0 for quality.
 
-### 4.4. Filtering with Safe Operators
+### 6.4. Filtering with Safe Operators
 
 Now let's filter out samples with missing data. Update your workflow:
 
@@ -1543,7 +1568,9 @@ SAMPLE_004 is now filtered out! Only valid samples proceed.
 
 These operators make workflows resilient to incomplete data - essential for real-world bioinformatics.
 
-### 4.5. Validation with `error()` and `log.warn`
+---
+
+## 7. Validation with `error()` and `log.warn`
 
 Sometimes you need to stop the workflow immediately if input parameters are invalid. Nextflow provides `error()` for this. Let's add validation to our workflow.
 
@@ -1635,25 +1662,24 @@ def separateMetadata(row) {
 }
 ```
 
-### Takeaway (Updated)
+### Takeaway
 
-- **Safe navigation (`?.`)**: Prevents crashes on null values - returns null instead of throwing exception
-- **Elvis operator (`?:`)**: Provides defaults - `value ?: 'default'`
 - **`error()`**: Stops workflow immediately with clear message
 - **`log.warn`**: Issues warnings without stopping workflow
 - **Early validation**: Check inputs before processing to fail fast with helpful errors
+- **Validation functions**: Create reusable validation logic that can be called at workflow start
 
-These operators make workflows resilient to incomplete data - essential for real-world bioinformatics.
+Proper validation makes workflows more robust and user-friendly by catching problems early with clear error messages.
 
 ---
 
-## 5. Groovy in Configuration: Workflow Event Handlers
+## 8. Groovy in Configuration: Workflow Event Handlers
 
 Up until now, we've been writing Groovy code in our workflow scripts and process definitions. But there's one more important place where Groovy is essential: workflow event handlers in your `nextflow.config` file.
 
 Event handlers are Groovy closures that run at specific points in your workflow's lifecycle. They're perfect for adding logging, notifications, or cleanup operations without cluttering your main workflow code.
 
-### 5.1. The `onComplete` Handler
+### 8.1. The `onComplete` Handler
 
 The most commonly used event handler is `onComplete`, which runs when your workflow finishes (whether it succeeded or failed). Let's add one to summarize our pipeline results.
 
@@ -1754,7 +1780,7 @@ workflow.onComplete = {
 }
 ```
 
-### 5.2. Other Useful Event Handlers
+### 8.2. Other Useful Event Handlers
 
 Besides `onComplete`, there are other event handlers you can use:
 
@@ -1838,13 +1864,19 @@ Here's how we progressively enhanced our pipeline:
 
 1. **Nextflow vs Groovy Boundaries**: You learned to distinguish between workflow orchestration (Nextflow) and programming logic (Groovy), including the crucial differences between constructs like `collect`.
 
-2. **Advanced String Processing**: You mastered regular expressions, parsing functions, reusable functions, variable interpolation (Groovy vs Bash vs Shell), dynamic script generation in processes, and dynamic resource directives with closures.
+2. **Advanced String Processing**: You mastered regular expressions for parsing file names, dynamic script generation in processes, and variable interpolation (Groovy vs Bash vs Shell).
 
-3. **Conditional Logic and Process Control**: You added intelligent routing using `.branch()` and `.filter()` operators, leveraging Groovy Truth for concise conditional expressions.
+3. **Creating Reusable Functions**: You learned to extract complex logic into named functions that can be called from channel operators, making workflows more readable and maintainable.
 
-4. **Safe Navigation and Elvis Operators**: You made the pipeline robust against missing data using `?.` for null-safe property access, `?:` for providing default values, and `error()` for input validation.
+4. **Dynamic Resource Directives with Closures**: You explored using Groovy closures in process directives for adaptive resource allocation based on input characteristics.
 
-5. **Groovy in Configuration**: You learned to use workflow event handlers (`onComplete`, `onStart`, `onError`) for logging, notifications, and lifecycle management.
+5. **Conditional Logic and Process Control**: You added intelligent routing using `.branch()` and `.filter()` operators, leveraging Groovy Truth for concise conditional expressions.
+
+6. **Safe Navigation and Elvis Operators**: You made the pipeline robust against missing data using `?.` for null-safe property access and `?:` for providing default values.
+
+7. **Validation with error() and log.warn**: You learned to validate inputs early and fail fast with clear error messages.
+
+8. **Groovy in Configuration**: You learned to use workflow event handlers (`onComplete`, `onStart`, `onError`) for logging, notifications, and lifecycle management.
 
 ### Key Benefits
 
@@ -1858,10 +1890,12 @@ Here's how we progressively enhanced our pipeline:
 The pipeline journey you completed demonstrates the evolution from basic data processing to production-ready bioinformatics workflows:
 
 1. **Started simple**: Basic CSV processing and metadata extraction with clear Nextflow vs Groovy boundaries
-2. **Added intelligence**: Dynamic file name parsing with regex patterns, variable interpolation mastery, and conditional routing based on sample characteristics
-3. **Made it efficient**: Dynamic resource allocation with closures in directives and retry strategies
-4. **Made it robust**: Safe navigation and Elvis operators for handling missing data gracefully
-5. **Added observability**: Workflow event handlers for logging, notifications, and lifecycle management
+2. **Added intelligence**: Dynamic file name parsing with regex patterns, variable interpolation mastery, and dynamic script generation based on input types
+3. **Made it maintainable**: Extracted complex logic into reusable functions for cleaner, more testable code
+4. **Made it efficient**: Dynamic resource allocation with closures in directives and retry strategies
+5. **Added routing**: Conditional logic to route samples through appropriate processes based on their characteristics
+6. **Made it robust**: Safe navigation and Elvis operators for handling missing data gracefully, plus validation for early error detection
+7. **Added observability**: Workflow event handlers for logging, notifications, and lifecycle management
 
 This progression mirrors the real-world evolution of bioinformatics pipelines - from research prototypes handling a few samples to production systems processing thousands of samples across laboratories and institutions. Every challenge you solved and pattern you learned reflects actual problems developers face when scaling Nextflow workflows.
 
