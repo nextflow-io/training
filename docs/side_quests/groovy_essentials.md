@@ -31,13 +31,13 @@ This tutorial will explain Groovy concepts as we encounter them, so you don't ne
 
 ### 0.2. Starting Point
 
-Let's move into the project directory and explore our working materials.
+Navigate to the project directory:
 
 ```bash title="Navigate to project directory"
 cd side-quests/groovy_essentials
 ```
 
-You'll find a `data` directory with sample files and a main workflow file that we'll evolve throughout this tutorial.
+The `data` directory contains sample files and a main workflow file we'll evolve throughout.
 
 ```console title="Directory contents"
 > tree
@@ -76,7 +76,7 @@ We'll use this realistic dataset to explore practical Groovy techniques that you
 
 ### 1.1. Identifying What's What
 
-One of the most common sources of confusion for Nextflow developers is understanding when they're working with Nextflow constructs versus Groovy language features. Let's build a workflow step by step to see a common example of how they work together.
+Nextflow developers often confuse Nextflow constructs with Groovy language features. Let's build a workflow demonstrating how they work together.
 
 #### Step 1: Basic Nextflow Workflow
 
@@ -137,9 +137,11 @@ Here's what that map operation looks like:
             .view()
     ```
 
-The closure we've added is `{ row -> return row }`. We've named the parameter `row`, but it could be called anything, so you could write `.map { item -> ... }` or `.map { sample -> ... }` and it would work exactly the same way. It's also possible not to name the parameter at all and just use the implicit variable `it`, like `.map { return it }`, but naming it makes the code clearer.
+This is our first **Groovy closure**—an anonymous function you can pass as an argument. Closures are a core Groovy concept (similar to lambdas in Python or arrow functions in JavaScript) and are essential for working with Nextflow operators.
 
-When Nextflow processes each item in the channel, it passes that item to your closure as the parameter you named. So if your channel contains CSV rows, `row` will hold one complete row at a time.
+The closure `{ row -> return row }` takes a parameter `row` (could be any name: `item`, `sample`, etc.). You can also use the implicit variable `it` instead: `.map { return it }`, though naming parameters improves clarity.
+
+When Nextflow processes each channel item, it passes that item to your closure. Here, `row` holds one CSV row at a time.
 
 Apply this change and run the workflow:
 
@@ -183,7 +185,7 @@ Now we're going to write **pure Groovy code** inside our closure. Everything fro
             .view()
     ```
 
-Notice how we've left Nextflow syntax behind and are now writing pure Groovy code. A map is a key-value data structure similar to dictionaries in Python, objects in JavaScript, or hashes in Ruby. It lets us store related pieces of information together. In this map, we're storing the sample ID, organism, tissue type, sequencing depth, and quality score.
+This is pure Groovy code. The `sample_meta` map is a key-value data structure (like dictionaries in Python, objects in JavaScript, or hashes in Ruby) storing related information: sample ID, organism, tissue type, sequencing depth, and quality score.
 
 We use Groovy's string manipulation methods like `.toLowerCase()` and `.replaceAll()` to clean up our data, and type conversion methods like `.toInteger()` and `.toDouble()` to convert string data from the CSV into the appropriate numeric types.
 
@@ -434,13 +436,13 @@ ch_collected = ch_input.collect()
 ch_collected.view { "Nextflow collect() result: ${it} (${it.size()} items grouped into 1)" }
 ```
 
-We are:
+Steps:
 
-- Defining a (Groovy) list
-- Using the `fromList()` channel factory to create a channel that emits each sample ID as a separate item
-- Using `view()` to print each item as it flows through the channel
-- Applying Nextflow's `collect()` operator to gather all items into a single list
-- Using a second `view()` to print the collected result which appears as a single item containing a list of all sample IDs
+- Define a Groovy list
+- Create a channel with `fromList()` that emits each sample ID separately
+- Print each item with `view()` as it flows through
+- Gather all items into a single list with Nextflow's `collect()` operator
+- Print the collected result (single item containing all sample IDs) with a second `view()`
 
 We've changed the structure of the channel, but we haven't changed the data itself.
 
@@ -625,11 +627,11 @@ Next we'll dive deeper into Groovy's powerful string processing capabilities, wh
 
 ## 2. String Processing and Dynamic Script Generation
 
-The difference between a brittle workflow that breaks on unexpected input and a robust pipeline that adapts gracefully often comes down to mastering Groovy's string processing capabilities. In this section, we'll explore how to parse complex file names, generate process scripts dynamically based on input characteristics, and properly interpolate variables in different contexts.
+Mastering Groovy's string processing separates brittle workflows from robust pipelines. This section covers parsing complex file names, dynamic script generation, and variable interpolation.
 
 ### 2.1. Pattern Matching and Regular Expressions
 
-Many bioinformatics workflows encounter files with complex naming conventions that encode important metadata. Let's see how Groovy's pattern matching can extract this information automatically.
+Bioinformatics files often have complex naming conventions encoding metadata. Let's extract this automatically with Groovy's pattern matching.
 
 We're going to return to our `main.nf` workflow and add some pattern matching logic to extract additional sample information from file names. The FASTQ files in our dataset follow Illumina-style naming conventions with names like `SAMPLE_001_S1_L001_R1_001.fastq.gz`. These might look cryptic, but they actually encode useful metadata like sample ID, lane number, and read direction. We're going to use Groovy's regex capabilities to parse these names.
 
@@ -679,13 +681,24 @@ Make the following change to your existing `main.nf` workflow:
             }
     ```
 
-This demonstrates key Groovy string processing concepts:
+This demonstrates key **Groovy string processing concepts**:
 
 1. **Regular expression literals** using `~/pattern/` syntax - this creates a regex pattern without needing to escape backslashes
 2. **Pattern matching** with the `=~` operator - this attempts to match a string against a regex pattern
 3. **Matcher objects** that capture groups with `[0][1]`, `[0][2]`, etc. - `[0]` refers to the entire match, `[1]`, `[2]`, etc. refer to captured groups in parentheses
 
-The regex pattern `^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$` is designed to match the Illumina-style naming convention and capture key components, namely the sample number, lane number, read direction, and chunk number.
+Let's break down the regex pattern `^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$`:
+
+| Pattern | Matches | Captures |
+|---------|---------|----------|
+| `^(.+)` | Sample name from start | Group 1: sample name |
+| `_S(\d+)` | Sample number `_S1`, `_S2`, etc. | Group 2: sample number |
+| `_L(\d{3})` | Lane number `_L001` | Group 3: lane (3 digits) |
+| `_(R[12])` | Read direction `_R1` or `_R2` | Group 4: read direction |
+| `_(\d{3})` | Chunk number `_001` | Group 5: chunk (3 digits) |
+| `\.fastq(?:\.gz)?$` | File extension `.fastq` or `.fastq.gz` | Not captured (?: is non-capturing) |
+
+This parses Illumina-style naming conventions to extract metadata automatically.
 
 Run the modified workflow:
 
@@ -707,9 +720,9 @@ Launching `main.nf` [clever_pauling] DSL2 - revision: 605d2058b4
 
 ### 2.2. Dynamic Script Generation in Processes
 
-Process script blocks are essentially multi-line strings that get passed to the shell. You can use Groovy logic to dynamically generate different script strings based on input characteristics, making your processes adaptable to different input conditions.
+Process script blocks are essentially multi-line strings that get passed to the shell. You can use **Groovy conditional logic** (if/else, ternary operators) to dynamically generate different script strings based on input characteristics. This is essential for handling diverse input types—like single-end vs paired-end sequencing reads—without duplicating process definitions.
 
-To illustrate what we mean, let's add some processes to our existing `main.nf` workflow that demonstrate common patterns for dynamic script generation. Open `modules/fastp.nf` and take a look:
+Let's add a process to our workflow that demonstrates this pattern. Open `modules/fastp.nf` and take a look:
 
 ```groovy title="modules/fastp.nf" linenums="1"
 process FASTP {
@@ -805,7 +818,7 @@ Command output:
 
 You can see that the process is trying to run `fastp` with a `null` value for the second input file, which is causing it to fail. This is because our dataset contains single-end reads, but the process is hardcoded to expect paired-end reads (two input files at a time).
 
-Let's fix this by adding some Groovy logic to the `script:` block of the `FASTP` process to handle both single-end and paired-end reads dynamically. We'll use an if/else statement to check how many read files are present and adjust the command accordingly.
+Fix this by adding Groovy logic to the `FASTP` process `script:` block. An if/else statement checks read file count and adjusts the command accordingly.
 
 === "After"
 
@@ -905,7 +918,7 @@ These patterns of using Groovy logic in process script blocks are extremely powe
 
 ### 2.3. Variable Interpolation: Groovy, Bash, and Shell Variables
 
-When writing process scripts, you're actually working with three different types of variables, and using the wrong syntax is a common source of errors. Let's add a process that creates a processing report to demonstrate the differences.
+Process scripts mix Nextflow variables, shell variables, and command substitutions, each with different interpolation syntax. Using the wrong syntax causes errors. Let's explore these with a process that creates a processing report.
 
 Take a look a the module file `modules/generate_report.nf`:
 
@@ -1040,11 +1053,14 @@ Now it works! The backslash (`\`) tells Nextflow "don't interpret this, pass it 
 
 ### Takeaway
 
-In this section, you've learned:
+In this section, you've learned **Groovy string processing** techniques:
 
-- **Regular expressions for file parsing**: Using Groovy's `=~` operator and regex patterns to extract metadata from complex bioinformatics file naming conventions
-- **Dynamic script generation**: Using Groovy conditional logic to generate different script strings based on input characteristics (like single-end vs paired-end reads)
-- **Variable interpolation**: Understanding the difference between Nextflow/Groovy variables (`${var}`), shell environment variables (`\${var}`), and shell command substitution (`\$(cmd)`)
+- **Regular expressions for file parsing**: Using Groovy's `=~` operator and regex patterns (`~/pattern/`) to extract metadata from complex file naming conventions
+- **Dynamic script generation**: Using Groovy conditional logic (if/else, ternary operators) to generate different script strings based on input characteristics
+- **Variable interpolation**: Understanding when Nextflow interprets strings vs when the shell does
+  - `${var}` - Groovy/Nextflow variables (interpolated by Nextflow at workflow compile time)
+  - `\${var}` - Shell environment variables (escaped, passed to bash at runtime)
+  - `\$(cmd)` - Shell command substitution (escaped, executed by bash at runtime)
 
 These string processing and generation patterns are essential for handling the diverse file formats and naming conventions you'll encounter in real-world bioinformatics workflows.
 
@@ -1052,9 +1068,9 @@ These string processing and generation patterns are essential for handling the d
 
 ## 3. Creating Reusable Functions
 
-As your workflow logic becomes more complex, keeping everything inline in channel operators or process definitions can make your code hard to read and maintain. Groovy functions let you extract complex logic into named, reusable components that can be called from anywhere in your workflow.
+Complex workflow logic inline in channel operators or process definitions reduces readability and maintainability. **Groovy functions** let you extract this logic into named, reusable components—this is core Groovy programming, not Nextflow-specific syntax.
 
-You may have noticed that the content of our map operation is getting quite long and complex. To keep our workflow maintainable, it's a good idea to break out complex logic into reusable functions.
+Our map operation has grown long and complex. Let's extract it into a reusable Groovy function using the `def` keyword.
 
 To illustrate what that looks like with our existing workflow, make the modification below, using `def` to define a reusable function called `separateMetadata`:
 
@@ -1165,11 +1181,12 @@ The output should show both processes completing successfully. The workflow is n
 
 ### Takeaway
 
-In this section, you've learned:
+In this section, you've learned core **Groovy programming concepts**:
 
-- **Extracting functions**: Moving complex logic from inline closures into named functions
-- **Function scope**: Functions defined at the script level can be called from anywhere in your workflow
-- **Cleaner workflows**: Using functions makes your workflow blocks more concise and readable
+- **Defining functions with `def`**: Groovy's keyword for creating named functions (like `def` in Python or `function` in JavaScript)
+- **Function scope**: Functions defined at the script level are accessible throughout your Nextflow workflow
+- **Return values**: Functions automatically return the last expression, or use explicit `return`
+- **Cleaner code**: Extracting complex logic into functions is a fundamental software engineering practice in any language, including Groovy
 
 Next, we'll explore how to use Groovy closures in process directives for dynamic resource allocation.
 
@@ -1177,7 +1194,7 @@ Next, we'll explore how to use Groovy closures in process directives for dynamic
 
 ## 4. Dynamic Resource Directives with Closures
 
-So far we've used Groovy in the `script` block of processes. But Groovy closures are also incredibly useful in process directives, especially for dynamic resource allocation. Let's add resource directives to our FASTP process that adapt based on the sample characteristics.
+So far we've used Groovy in the `script` block of processes. But **Groovy closures** (introduced in Section 1.1) are also incredibly useful in process directives, especially for dynamic resource allocation. Let's add resource directives to our FASTP process that adapt based on the sample characteristics.
 
 Currently, our FASTP process uses default resources. Let's make it smarter by allocating more CPUs for high-depth samples. Edit `modules/fastp.nf` to include a dynamic `cpus` directive and a static `memory` directive:
 
@@ -1204,7 +1221,7 @@ Currently, our FASTP process uses default resources. Let's make it smarter by al
         tuple val(meta), path(reads)
     ```
 
-The closure `{ meta.depth > 40000000 ? 4 : 2 }` is evaluated for each task, allowing per-sample resource allocation. High-depth samples (>40M reads) get 4 CPUs, while others get 2 CPUs.
+The closure `{ meta.depth > 40000000 ? 4 : 2 }` uses the **Groovy ternary operator** (covered in Section 1.1) and is evaluated for each task, allowing per-sample resource allocation. High-depth samples (>40M reads) get 4 CPUs, while others get 2 CPUs.
 
 !!! note "Accessing Input Variables in Directives"
 
@@ -1345,9 +1362,9 @@ This makes your workflows both more efficient (not over-allocating) and more rob
 
 ## 5. Conditional Logic and Process Control
 
-Earlier on, we discussed how to use the `.map()` operator to use snippets of Groovy code to transform data flowing through channels. The counterpart to that is using Groovy to not just transform data, but to control which processes get executed based on the data itself. This is essential for building flexible workflows that can adapt to different sample types and analysis requirements.
+Previously, we used `.map()` with Groovy to transform channel data. Now we'll use Groovy to control which processes execute based on data—essential for flexible workflows adapting to different sample types.
 
-Nextflow has several [operators](https://www.nextflow.io/docs/latest/reference/operator.html) that control process flow, many of which take closures as arguments, meaning their content is evaluated at run time, allowing us to use Groovy logic to drive workflow decisions based on channel content.
+Nextflow's [flow control operators](https://www.nextflow.io/docs/latest/reference/operator.html) take closures evaluated at runtime, enabling Groovy logic to drive workflow decisions based on channel content.
 
 ### 5.1. Routing with `.branch()`
 
@@ -1422,7 +1439,14 @@ Here, we've used small but mighty Groovy expressions inside the `.branch{}` oper
 
 ### 5.2. Using `.filter()` with Groovy Truth
 
-Another powerful pattern for controlling workflow execution is the `.filter()` operator, which uses a closure to determine which items should continue down the pipeline. Let's add a validation step to filter out samples that don't meet our quality requirements.
+Another powerful pattern for controlling workflow execution is the `.filter()` operator, which uses a closure to determine which items should continue down the pipeline. Inside the filter closure, you'll write **Groovy boolean expressions** that decide which items pass through.
+
+Groovy has a concept called **"Groovy Truth"** that determines what values evaluate to `true` or `false` in boolean contexts:
+
+- **Truthy**: Non-null values, non-empty strings, non-zero numbers, non-empty collections
+- **Falsy**: `null`, empty strings `""`, zero `0`, empty collections `[]` or `[:]`, `false`
+
+This means `meta.id` alone (without explicit `!= null`) checks if the ID exists and isn't empty. Let's use this to filter out samples that don't meet our quality requirements.
 
 Add the following before the branch operation:
 
@@ -1479,12 +1503,10 @@ executor >  local (5)
 [07/ef53af] process > GENERATE_REPORT (3) [100%] 3 of 3 ✔
 ```
 
-This filter uses **Groovy Truth** - Groovy's way of evaluating expressions in boolean contexts:
+The filter expression `meta.id && meta.organism && meta.depth >= 25000000` combines Groovy Truth with explicit comparisons:
 
-- `null`, empty strings, empty collections, and zero are all "false"
-- Non-null values, non-empty strings, and non-zero numbers are "true"
-
-So `meta.id && meta.organism` checks that both fields exist and are non-empty, while `meta.depth >= 25000000` ensures we have sufficient sequencing depth.
+- `meta.id && meta.organism` checks that both fields exist and are non-empty (using Groovy Truth)
+- `meta.depth >= 25000000` ensures sufficient sequencing depth with an explicit comparison
 
 !!! note "Groovy Truth in Practice"
 
@@ -1677,14 +1699,14 @@ Take out the `.view()` operator now that we've confirmed it works.
 
 !!! tip "Combining Safe Navigation and Elvis"
 
-    The pattern `value?.method() ?: 'default'` is extremely common in production Nextflow:
+    The pattern `value?.method() ?: 'default'` is common in production Nextflow:
 
-    - `value?.method()` - Safely call method, returns `null` if `value` is `null`
-    - `?: 'default'` - Provide fallback if the result is `null`
+    - `value?.method()` - Safely calls method, returns `null` if `value` is `null`
+    - `?: 'default'` - Provides fallback if result is `null`
 
-    This makes your code resilient to missing or incomplete data.
+    This pattern handles missing/incomplete data gracefully.
 
-Get in the habit of using these operators everywhere you write Groovy code - in functions, operator closures (`.map{}`, `.filter{}`), process scripts, and config files. They're lightweight and will save you from countless crashes when handling real-world data.
+Use these operators consistently in functions, operator closures (`.map{}`, `.filter{}`), process scripts, and config files. They prevent crashes when handling real-world data.
 
 ### Takeaway
 
@@ -1698,7 +1720,7 @@ These operators make workflows resilient to incomplete data - essential for real
 
 ## 7. Validation with `error()` and `log.warn`
 
-Sometimes you need to stop the workflow immediately if input parameters are invalid. Nextflow provides `error()` and `log.warn` for this, but the validation logic itself is pure Groovy - using conditionals, string operations, and file checking methods. Let's add validation to our workflow.
+Sometimes you need to stop the workflow immediately if input parameters are invalid. While `error()` and `log.warn` are Nextflow-provided functions, the **validation logic itself is pure Groovy**—using conditionals (`if`, `!`), boolean logic, and methods like `.exists()`. Let's add validation to our workflow.
 
 Create a validation function before your workflow block, call it from the workflow, and change the channel creation to use a parameter for the CSV file path. If the parameter is missing or the file doesn't exist, call `error()` to stop execution with a clear message.
 
@@ -2071,15 +2093,15 @@ Here's how we progressively enhanced our pipeline:
 
 ### From Simple to Sophisticated
 
-The pipeline journey you completed demonstrates the evolution from basic data processing to production-ready bioinformatics workflows:
+This pipeline evolved from basic data processing to production-ready workflows:
 
-1. **Started simple**: Basic CSV processing and metadata extraction with clear Nextflow vs Groovy boundaries
-2. **Added intelligence**: Dynamic file name parsing with regex patterns, variable interpolation mastery, and dynamic script generation based on input types
-3. **Made it maintainable**: Extracted complex logic into reusable functions for cleaner, more testable code
-4. **Made it efficient**: Dynamic resource allocation with closures in directives and retry strategies
-5. **Added routing**: Conditional logic to route samples through appropriate processes based on their characteristics
-6. **Made it robust**: Safe navigation and Elvis operators for handling missing data gracefully, plus validation for early error detection
-7. **Added observability**: Workflow event handlers for logging, notifications, and lifecycle management
+1. **Simple**: CSV processing and metadata extraction (Nextflow vs Groovy boundaries)
+2. **Intelligent**: Regex parsing, variable interpolation, dynamic script generation
+3. **Maintainable**: Reusable functions for cleaner, testable code
+4. **Efficient**: Dynamic resource allocation and retry strategies
+5. **Adaptive**: Conditional routing based on sample characteristics
+6. **Robust**: Safe navigation, Elvis operators, early validation
+7. **Observable**: Event handlers for logging and lifecycle management
 
 This progression mirrors the real-world evolution of bioinformatics pipelines - from research prototypes handling a few samples to production systems processing thousands of samples across laboratories and institutions. Every challenge you solved and pattern you learned reflects actual problems developers face when scaling Nextflow workflows.
 
