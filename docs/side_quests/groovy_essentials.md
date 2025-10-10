@@ -1507,43 +1507,15 @@ Our pipeline now intelligently routes samples through appropriate processes, but
 
 Our `separateMetadata` function currently assumes all CSV fields are present and valid. But what happens with incomplete data? Let's find out.
 
-### 6.1. The Problem: Null Pointer Crashes
+### 6.1. The Problem: Accessing Properties That Don't Exist
 
-Add a row with missing data to your `data/samples.csv`:
+Let's say we want to add support for optional sequencing run information. In some labs, samples might have an additional field for the sequencing run ID or batch number, but our current CSV doesn't have this column. Let's try to access it anyway.
 
-```csv
-SAMPLE_004,,unknown_tissue,20000000,data/sequences/SAMPLE_004_S4_L001_R1_001.fastq,
-```
-
-Notice the empty organism field and missing quality_score. Now try running the workflow:
-
-```bash
-nextflow run main.nf
-```
-
-It crashes with a NullPointerException! This is where Groovy's safe operators save the day.
-
-### 6.2. Safe Navigation Operator (`?.`)
-
-The safe navigation operator (`?.`) returns null instead of throwing an exception. Update your `separateMetadata` function:
+Modify the `separateMetadata` function to include a run_id field:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="4" hl_lines="6-8"
-    def separateMetadata(row) {
-        def sample_meta = [
-            id: row.sample_id.toLowerCase(),
-            organism: row.organism?.toLowerCase(),
-            tissue: row.tissue_type?.replaceAll('_', ' ')?.toLowerCase(),
-            depth: row.sequencing_depth.toInteger(),
-            quality: row.quality_score?.toDouble()
-        ]
-        // ... rest unchanged
-    ```
-
-=== "Before"
-
-    ```groovy title="main.nf" linenums="4"
+    ```groovy title="main.nf" linenums="5" hl_lines="9"
     def separateMetadata(row) {
         def sample_meta = [
             id: row.sample_id.toLowerCase(),
@@ -1552,7 +1524,74 @@ The safe navigation operator (`?.`) returns null instead of throwing an exceptio
             depth: row.sequencing_depth.toInteger(),
             quality: row.quality_score.toDouble()
         ]
-        // ... rest unchanged
+        def run_id = row.run_id.toUpperCase()
+    ```
+
+=== "Before"
+
+    ```groovy title="main.nf" linenums="5"
+    def separateMetadata(row) {
+        def sample_meta = [
+            id: row.sample_id.toLowerCase(),
+            organism: row.organism,
+            tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+            depth: row.sequencing_depth.toInteger(),
+            quality: row.quality_score.toDouble()
+        ]
+    ```
+
+Now run the workflow:
+
+```bash
+nextflow run main.nf
+```
+
+It crashes with a NullPointerException:
+
+```console title="Null pointer error"
+ N E X T F L O W   ~  version 25.04.6
+
+Launching `main.nf` [trusting_torvalds] DSL2 - revision: b56fbfbce2
+
+ERROR ~ Cannot invoke method toUpperCase() on null object
+
+ -- Check script 'main.nf' at line: 13 or see '.nextflow.log' file for more details
+```
+
+The problem is that `row.run_id` returns `null` because the `run_id` column doesn't exist in our CSV. When we try to call `.toUpperCase()` on `null`, it crashes. This is where Groovy's safe navigation operator saves the day.
+
+### 6.2. Safe Navigation Operator (`?.`)
+
+The safe navigation operator (`?.`) returns `null` instead of throwing an exception when called on a `null` value. If the object before `?.` is `null`, the entire expression evaluates to `null` without executing the method.
+
+Update the function to use safe navigation:
+
+=== "After"
+
+    ```groovy title="main.nf" linenums="4" hl_lines="9"
+    def separateMetadata(row) {
+        def sample_meta = [
+            id: row.sample_id.toLowerCase(),
+            organism: row.organism,
+            tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+            depth: row.sequencing_depth.toInteger(),
+            quality: row.quality_score.toDouble()
+        ]
+        def run_id = row.run_id?.toUpperCase()
+    ```
+
+=== "Before"
+
+    ```groovy title="main.nf" linenums="4" hl_lines="9"
+    def separateMetadata(row) {
+        def sample_meta = [
+            id: row.sample_id.toLowerCase(),
+            organism: row.organism,
+            tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+            depth: row.sequencing_depth.toInteger(),
+            quality: row.quality_score.toDouble()
+        ]
+        def run_id = row.run_id.toUpperCase()
     ```
 
 Run again:
@@ -1561,91 +1600,97 @@ Run again:
 nextflow run main.nf
 ```
 
-No crash! But SAMPLE_004 now has `null` values which could cause problems downstream.
+No crash! The workflow now handles the missing field gracefully. When `row.run_id` is `null`, the `?.` operator prevents the `.toUpperCase()` call, and `run_id` becomes `null` instead of causing an exception.
 
 ### 6.3. Elvis Operator (`?:`) for Defaults
 
-The Elvis operator (`?:`) provides default values. Update again:
+The Elvis operator (`?:`) provides default values when the left side is `null` (or empty, in Groovy's "truth" evaluation). It's named after Elvis Presley because `?:` looks like his famous hair and eyes when viewed sideways!
+
+Now that we're using safe navigation, `run_id` will be `null` for samples without that field. Let's use the Elvis operator to provide a default value and add it to our `sample_meta` map:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="4" hl_lines="6-8"
+    ```groovy title="main.nf" linenums="5" hl_lines="9-10"
     def separateMetadata(row) {
         def sample_meta = [
             id: row.sample_id.toLowerCase(),
-            organism: row.organism?.toLowerCase() ?: 'unknown',
-            tissue: row.tissue_type?.replaceAll('_', ' ')?.toLowerCase() ?: 'unknown',
+            organism: row.organism,
+            tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
             depth: row.sequencing_depth.toInteger(),
-            quality: row.quality_score?.toDouble() ?: 0.0
+            quality: row.quality_score.toDouble()
         ]
-        // ... rest unchanged
+        def run_id = row.run_id?.toUpperCase() ?: 'UNSPECIFIED'
+        sample_meta.run = run_id
     ```
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="4"
+    ```groovy title="main.nf" linenums="5" hl_lines="9"
     def separateMetadata(row) {
         def sample_meta = [
             id: row.sample_id.toLowerCase(),
-            organism: row.organism?.toLowerCase(),
-            tissue: row.tissue_type?.replaceAll('_', ' ')?.toLowerCase(),
+            organism: row.organism,
+            tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
             depth: row.sequencing_depth.toInteger(),
-            quality: row.quality_score?.toDouble()
+            quality: row.quality_score.toDouble()
         ]
-        // ... rest unchanged
+        def run_id = row.run_id?.toUpperCase()
     ```
 
-Run once more:
+Also add a `view()` operator in the workflow to see the results:
+
+=== "After"
+
+    ```groovy title="main.nf" linenums="30" hl_lines="4"
+        ch_samples = Channel.fromPath("./data/samples.csv")
+            .splitCsv(header: true)
+            .map{ row -> separateMetadata(row) }
+            .view()
+    ```
+
+=== "Before"
+
+    ```groovy title="main.nf" linenums="30"
+        ch_samples = Channel.fromPath("./data/samples.csv")
+            .splitCsv(header: true)
+            .map{ row -> separateMetadata(row) }
+    ```
+
+
+ and run the workflow:
 
 ```bash
 nextflow run main.nf
 ```
 
-Perfect! SAMPLE_004 now has safe defaults: 'unknown' for organism/tissue, 0.0 for quality.
+You'll see output like this:
 
-### 6.4. Filtering with Safe Operators
-
-Now let's filter out samples with missing data. Update your workflow:
-
-=== "After"
-
-    ```groovy title="main.nf" linenums="28" hl_lines="4-7"
-    workflow {
-        ch_samples = Channel.fromPath("./data/samples.csv")
-            .splitCsv(header: true)
-            .map(separateMetadata)
-            .filter { meta, reads ->
-                meta.organism != 'unknown' && (meta.quality ?: 0) > 0
-            }
-
-        // ... rest of workflow
-    ```
-
-=== "Before"
-
-    ```groovy title="main.nf" linenums="28"
-    workflow {
-        ch_samples = Channel.fromPath("./data/samples.csv")
-            .splitCsv(header: true)
-            .map(separateMetadata)
-
-        // ... rest of workflow
-    ```
-
-Run the workflow:
-
-```bash
-nextflow run main.nf
+```console title="View output with run field"
+[[id:sample_001, organism:human, tissue:liver, depth:30000000, quality:38.5, run:UNSPECIFIED, sample_num:1, lane:001, read:R1, chunk:001, priority:normal], /workspaces/training/side-quests/groovy_essentials/data/sequences/SAMPLE_001_S1_L001_R1_001.fastq]
+[[id:sample_002, organism:mouse, tissue:brain, depth:25000000, quality:35.2, run:UNSPECIFIED, sample_num:2, lane:001, read:R1, chunk:001, priority:normal], /workspaces/training/side-quests/groovy_essentials/data/sequences/SAMPLE_002_S2_L001_R1_001.fastq]
+[[id:sample_003, organism:human, tissue:kidney, depth:45000000, quality:42.1, run:UNSPECIFIED, sample_num:3, lane:001, read:R1, chunk:001, priority:high], /workspaces/training/side-quests/groovy_essentials/data/sequences/SAMPLE_003_S3_L001_R1_001.fastq]
 ```
 
-SAMPLE_004 is now filtered out! Only valid samples proceed.
+Perfect! Now all samples have a `run` field with either their actual run ID (in uppercase) or the default value 'UNSPECIFIED'. The combination of `?.` and `?:` provides both safety (no crashes) and sensible defaults.
+
+Take out the `.view()` operator now that we've confirmed it works.
+
+!!! tip "Combining Safe Navigation and Elvis"
+
+    The pattern `value?.method() ?: 'default'` is extremely common in production Nextflow:
+
+    - `value?.method()` - Safely call method, returns `null` if `value` is `null`
+    - `?: 'default'` - Provide fallback if the result is `null`
+
+    This makes your code resilient to missing or incomplete data.
+
+Get in the habit of using these operators everywhere you write Groovy code - in functions, operator closures (`.map{}`, `.filter{}`), process scripts, and config files. They're lightweight and will save you from countless crashes when handling real-world data.
 
 ### Takeaway
 
 - **Safe navigation (`?.`)**: Prevents crashes on null values - returns null instead of throwing exception
 - **Elvis operator (`?:`)**: Provides defaults - `value ?: 'default'`
 - **Combining**: `value?.method() ?: 'default'` is the common pattern
-- **In filters**: Use to handle missing data: `(meta.quality ?: 0) > threshold`
 
 These operators make workflows resilient to incomplete data - essential for real-world bioinformatics.
 
@@ -1653,44 +1698,32 @@ These operators make workflows resilient to incomplete data - essential for real
 
 ## 7. Validation with `error()` and `log.warn`
 
-Sometimes you need to stop the workflow immediately if input parameters are invalid. Nextflow provides `error()` for this. Let's add validation to our workflow.
+Sometimes you need to stop the workflow immediately if input parameters are invalid. Nextflow provides `error()` and `log.warn` for this, but the validation logic itself is pure Groovy - using conditionals, string operations, and file checking methods. Let's add validation to our workflow.
 
-Create a validation function before your workflow block:
+Create a validation function before your workflow block, call it from the workflow, and change the channel creation to use a parameter for the CSV file path. If the parameter is missing or the file doesn't exist, call `error()` to stop execution with a clear message.
 
 === "After"
 
-    ```groovy title="main.nf" linenums="1" hl_lines="3-18"
+    ```groovy title="main.nf" linenums="1" hl_lines="5-20 23-24"
     include { FASTP } from './modules/fastp.nf'
     include { TRIMGALORE } from './modules/trimgalore.nf'
     include { GENERATE_REPORT } from './modules/generate_report.nf'
 
     def validateInputs() {
+        // Check input parameter is provided
+        if (!params.input) {
+            error("Input CSV file path not provided. Please specify --input <file.csv>")
+        }
+
         // Check CSV file exists
-        if (!file(params.input ?: './data/samples.csv').exists()) {
-            error("Input CSV file not found: ${params.input ?: './data/samples.csv'}")
-        }
-
-        // Warn if output directory already exists
-        if (file(params.outdir ?: 'results').exists()) {
-            log.warn "Output directory already exists: ${params.outdir ?: 'results'}"
-        }
-
-        // Check for required genome parameter
-        if (params.run_gatk && !params.genome) {
-            error("Genome reference required when running GATK. Please provide --genome")
+        if (!file(params.input).exists()) {
+            error("Input CSV file not found: ${params.input}")
         }
     }
-
-    // ... separateMetadata function ...
-
+    ...
     workflow {
-        validateInputs()  // Call validation first
-
-        ch_samples = Channel.fromPath("./data/samples.csv")
-            .splitCsv(header: true)
-            .map(separateMetadata)
-        // ... rest of workflow
-    }
+        validateInputs()
+        ch_samples = Channel.fromPath(params.input)
     ```
 
 === "Before"
@@ -1700,47 +1733,71 @@ Create a validation function before your workflow block:
     include { TRIMGALORE } from './modules/trimgalore.nf'
     include { GENERATE_REPORT } from './modules/generate_report.nf'
 
-    // ... separateMetadata function ...
-
+    ...
     workflow {
         ch_samples = Channel.fromPath("./data/samples.csv")
-            .splitCsv(header: true)
-            .map(separateMetadata)
-        // ... rest of workflow
-    }
     ```
 
 Now try running without the CSV file:
 
 ```bash
-mv data/samples.csv data/samples.csv.bak
 nextflow run main.nf
 ```
 
 The workflow stops immediately with a clear error message instead of failing mysteriously later!
 
-You can also add validation within the `separateMetadata` function:
+```console title="Validation error output"
+ N E X T F L O W   ~  version 25.04.6
 
-```groovy title="main.nf - Validation in function"
-def separateMetadata(row) {
-    // Validate required fields
-    if (!row.sample_id) {
-        error("Missing sample_id in CSV row: ${row}")
+Launching `main.nf` [confident_coulomb] DSL2 - revision: 07059399ed
+
+WARN: Access to undefined parameter `input` -- Initialise it to a default value eg. `params.input = some_value`
+Input CSV file path not provided. Please specify --input <file.csv>
+```
+
+You can also add validation within the `separateMetadata` function. Let's use the non-fatal `log.warn` to issue warnings for samples with low sequencing depth, but still allow the workflow to continue:
+
+=== "After"
+
+    ```groovy title="main.nf" linenums="1" hl_lines="3-6"
+        def priority = sample_meta.quality > 40 ? 'high' : 'normal'
+
+        // Validate data makes sense
+        if (sample_meta.depth < 30000000) {
+            log.warn "Low sequencing depth for ${sample_meta.id}: ${sample_meta.depth}"
+        }
+
+        return [sample_meta + file_meta + [priority: priority], fastq_path]
     }
+    ```
 
-    def sample_meta = [
-        id: row.sample_id.toLowerCase(),
-        organism: row.organism?.toLowerCase() ?: 'unknown',
-        // ... rest of fields
-    ]
+=== "Before"
 
-    // Validate data makes sense
-    if (sample_meta.depth < 1000000) {
-        log.warn "Low sequencing depth for ${sample_meta.id}: ${sample_meta.depth}"
+    ```groovy title="main.nf" linenums="1"
+        def priority = sample_meta.quality > 40 ? 'high' : 'normal'
+
+        return [sample_meta + file_meta + [priority: priority], fastq_path]
     }
+    ```
 
-    return [sample_meta, file(row.file_path)]
-}
+Run the workflow again with the original CSV:
+
+```bash
+nextflow run main.nf --input ./data/samples.csv
+```
+
+... and you'll see a warning about low sequencing depth for one of the samples:
+
+```console title="Warning output"
+ N E X T F L O W   ~  version 25.04.6
+
+Launching `main.nf` [awesome_goldwasser] DSL2 - revision: a31662a7c1
+
+executor >  local (5)
+[ce/df5eeb] process > FASTP (2)           [100%] 2 of 2 ✔
+[-        ] process > TRIMGALORE          -
+[d1/7d2b4b] process > GENERATE_REPORT (3) [100%] 3 of 3 ✔
+WARN: Low sequencing depth for sample_002: 25000000
 ```
 
 ### Takeaway
@@ -1756,7 +1813,7 @@ Proper validation makes workflows more robust and user-friendly by catching prob
 
 ## 8. Groovy in Configuration: Workflow Event Handlers
 
-Up until now, we've been writing Groovy code in our workflow scripts and process definitions. But there's one more important place where Groovy is essential: workflow event handlers in your `nextflow.config` file.
+Up until now, we've been writing Groovy code in our workflow scripts and process definitions. But there's one more important place where Groovy is essential: workflow event handlers in your `nextflow.config` file (or other places you write configuration).
 
 Event handlers are Groovy closures that run at specific points in your workflow's lifecycle. They're perfect for adding logging, notifications, or cleanup operations without cluttering your main workflow code.
 
@@ -1797,6 +1854,29 @@ Your `nextflow.config` file already has Docker enabled. Add an event handler aft
 This is a Groovy closure being assigned to `workflow.onComplete`. Inside, you have access to the `workflow` object which provides useful properties about the execution.
 
 Run your workflow and you'll see this summary appear at the end!
+
+```bash title="Run with onComplete handler"
+nextflow run main.nf --input ./data/samples.csv -no-ansi-log
+```
+
+```console title="onComplete output"
+N E X T F L O W  ~  version 25.04.6
+Launching `main.nf` [marvelous_boltzmann] DSL2 - revision: a31662a7c1
+WARN: Low sequencing depth for sample_002: 25000000
+[9b/d48e40] Submitted process > FASTP (2)
+[6a/73867a] Submitted process > GENERATE_REPORT (2)
+[79/ad0ac5] Submitted process > GENERATE_REPORT (1)
+[f3/bda6cb] Submitted process > FASTP (1)
+[34/d5b52f] Submitted process > GENERATE_REPORT (3)
+
+Pipeline execution summary:
+==========================
+Completed at: 2025-10-10T12:14:24.885384+01:00
+Duration    : 2.9s
+Success     : true
+workDir     : /Users/jonathan.manning/projects/training/side-quests/groovy_essentials/work
+exit status : 0
+```
 
 Let's make it more useful by adding conditional logic:
 
@@ -1839,6 +1919,29 @@ Let's make it more useful by adding conditional logic:
         println ""
     }
     ```
+
+Now we get an even more informative summary, including a success/failure message and the output directory if specified:
+
+```console title="Enhanced onComplete output"
+N E X T F L O W  ~  version 25.04.6
+Launching `main.nf` [boring_linnaeus] DSL2 - revision: a31662a7c1
+WARN: Low sequencing depth for sample_002: 25000000
+[e5/242efc] Submitted process > FASTP (2)
+[3b/74047c] Submitted process > GENERATE_REPORT (3)
+[8a/7a57e6] Submitted process > GENERATE_REPORT (1)
+[a8/b1a31f] Submitted process > GENERATE_REPORT (2)
+[40/648429] Submitted process > FASTP (1)
+
+Pipeline execution summary:
+==========================
+Completed at: 2025-10-10T12:16:00.522569+01:00
+Duration    : 3.6s
+Success     : true
+workDir     : /Users/jonathan.manning/projects/training/side-quests/groovy_essentials/work
+exit status : 0
+
+✅ Pipeline completed successfully!
+```
 
 You can also write the summary to a file using Groovy file operations:
 

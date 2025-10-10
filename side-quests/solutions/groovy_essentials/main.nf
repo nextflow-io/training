@@ -3,30 +3,27 @@ include { TRIMGALORE } from './modules/trimgalore.nf'
 include { GENERATE_REPORT } from './modules/generate_report.nf'
 
 def validateInputs() {
+    // Check input parameter is provided
+    if (!params.input) {
+        error("Input CSV file path not provided. Please specify --input <file.csv>")
+    }
+
     // Check CSV file exists
-    if (!file(params.input ?: './data/samples.csv').exists()) {
-        error("Input CSV file not found: ${params.input ?: './data/samples.csv'}")
-    }
-
-    // Warn if output directory already exists
-    if (file(params.outdir ?: 'results').exists()) {
-        log.warn "Output directory already exists: ${params.outdir ?: 'results'}"
-    }
-
-    // Check for required genome parameter
-    if (params.run_gatk && !params.genome) {
-        error("Genome reference required when running GATK. Please provide --genome")
+    if (!file(params.input).exists()) {
+        error("Input CSV file not found: ${params.input}")
     }
 }
 
 def separateMetadata(row) {
     def sample_meta = [
         id: row.sample_id.toLowerCase(),
-        organism: row.organism?.toLowerCase() ?: 'unknown',
-        tissue: row.tissue_type?.replaceAll('_', ' ')?.toLowerCase() ?: 'unknown',
+        organism: row.organism,
+        tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
         depth: row.sequencing_depth.toInteger(),
-        quality: row.quality_score?.toDouble() ?: 0.0
+        quality: row.quality_score?.toDouble()
     ]
+    def run_id = row.run_id?.toUpperCase() ?: 'UNSPECIFIED'
+    sample_meta.run = run_id
     def fastq_path = file(row.file_path)
 
     def m = (fastq_path.name =~ /^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$/)
@@ -38,22 +35,29 @@ def separateMetadata(row) {
     ] : [:]
 
     def priority = sample_meta.quality > 40 ? 'high' : 'normal'
+
+    // Validate data makes sense
+    if (sample_meta.depth < 30000000) {
+        log.warn "Low sequencing depth for ${sample_meta.id}: ${sample_meta.depth}"
+    }
+
     return [sample_meta + file_meta + [priority: priority], fastq_path]
 }
 
 workflow {
     validateInputs()
 
-    ch_samples = Channel.fromPath("./data/samples.csv")
+    ch_samples = Channel.fromPath(params.input)
         .splitCsv(header: true)
-        .map(separateMetadata)
+        .map{ row -> separateMetadata(row) }
+
+    // Filter out invalid or low-quality samples
+    ch_valid_samples = ch_samples
         .filter { meta, reads ->
-            meta.organism != 'unknown' && (meta.quality ?: 0) > 0
+            meta.id && meta.organism && meta.depth > 25000000
         }
 
-    GENERATE_REPORT(ch_samples)
-
-    trim_branches = ch_samples
+    trim_branches = ch_valid_samples
         .branch { meta, reads ->
             fastp: meta.organism == 'human' && meta.depth >= 30000000
             trimgalore: true
@@ -61,4 +65,5 @@ workflow {
 
     ch_fastp = FASTP(trim_branches.fastp)
     ch_trimgalore = TRIMGALORE(trim_branches.trimgalore)
+    GENERATE_REPORT(ch_samples)
 }
