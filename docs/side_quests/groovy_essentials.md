@@ -518,7 +518,7 @@ Individual channel item: sample_003
 Nextflow collect() result: [sample_001, sample_002, sample_003] (3 items grouped into 1)
 ```
 
-This time, have NOT changed the structure of the data, we still have 3 items in the list, but we HAVE transformed each item using Groovy's `collect` method to produce a new list with modified values. This is sort of like using the `map` operator in Nextflow, but it's pure Groovy code operating on a standard Groovy list.
+This time, we have NOT changed the structure of the data, we still have 3 items in the list, but we HAVE transformed each item using Groovy's `collect` method to produce a new list with modified values. This is sort of like using the `map` operator in Nextflow, but it's pure Groovy code operating on a standard Groovy list.
 
 `collect` is an extreme case we're using here to make a point. The key lesson is that when you're writing workflows always distinguish between **Groovy constructs** (data structures) and **Nextflow constructs** (channels/workflows). Operations can share names but behave completely differently.
 
@@ -805,7 +805,7 @@ Command output:
 
 You can see that the process is trying to run `fastp` with a `null` value for the second input file, which is causing it to fail. This is because our dataset contains single-end reads, but the process is hardcoded to expect paired-end reads (two input files at a time).
 
-Let's fix this by adding some Groovy logic to the `script:` block of the `FASTP` process to handle both single-end and paired-end reads dynamically. We'll use an if/else statement to check how many read files are are present and adjust the command accordingly.
+Let's fix this by adding some Groovy logic to the `script:` block of the `FASTP` process to handle both single-end and paired-end reads dynamically. We'll use an if/else statement to check how many read files are present and adjust the command accordingly.
 
 === "After"
 
@@ -1247,7 +1247,7 @@ Another powerful pattern is using `task.attempt` for retry strategies. To show w
 
 === "After"
 
-    ```groovy title="modules/fastp.nf" linenums="1" hl_lines="4-5"
+    ```groovy title="modules/fastp.nf" linenums="1" hl_lines="5"
     process FASTP {
         container 'community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690'
 
@@ -1260,7 +1260,7 @@ Another powerful pattern is using `task.attempt` for retry strategies. To show w
 
 === "Before"
 
-    ```groovy title="modules/fastp.nf" linenums="1"
+    ```groovy title="modules/fastp.nf" linenums="1" hl_lines="5"
     process FASTP {
         container 'community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690'
 
@@ -1347,13 +1347,15 @@ This makes your workflows both more efficient (not over-allocating) and more rob
 
 Earlier on, we discussed how to use the `.map()` operator to use snippets of Groovy code to transform data flowing through channels. The counterpart to that is using Groovy to not just transform data, but to control which processes get executed based on the data itself. This is essential for building flexible workflows that can adapt to different sample types and analysis requirements.
 
-Nextflow has several [operators](https://www.nextflow.io/docs/latest/reference/operator.html) that control process flow, including, many of which take closures as arguments, meanint their content is evaluated at run time, allowing us to use Groovy logic to drive workflow decisions based on channel content.
+Nextflow has several [operators](https://www.nextflow.io/docs/latest/reference/operator.html) that control process flow, many of which take closures as arguments, meaning their content is evaluated at run time, allowing us to use Groovy logic to drive workflow decisions based on channel content.
 
 ### 5.1. Routing with `.branch()`
 
 For example, let's pretend that our sequencing samples need to be trimmed with FASTP only if they're human samples with a coverage above a certain threshold. Mouse samples or low-coverage samples should be run with Trimgalore instead (this is a contrived example, but it illustrates the point).
 
-Add a new process for Trimgalore in `modules/trimgalore.nf`:
+We've provided a simple Trimgalore process in `modules/trimgalore.nf`, take a look if you like, but the details aren't important for this exercise. The key point is that we want to route samples based on their metadata.
+
+Include the new from in `modules/trimgalore.nf`:
 
 === "After"
 
@@ -1385,16 +1387,18 @@ Add a new process for Trimgalore in `modules/trimgalore.nf`:
 
         ch_fastp = FASTP(trim_branches.fastp)
         ch_trimgalore = TRIMGALORE(trim_branches.trimgalore)
+        GENERATE_REPORT(ch_samples)
     ```
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="28"
+    ```groovy title="main.nf" linenums="28" hl_lines="5"
         ch_samples = Channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map(separateMetadata)
 
         ch_fastp = FASTP(ch_samples)
+        GENERATE_REPORT(ch_samples)
     ```
 
 Run this modified workflow:
@@ -1406,11 +1410,12 @@ nextflow run main.nf
 ```console title="Conditional trimming results"
  N E X T F L O W   ~  version 25.04.6
 
-Launching `main.nf` [boring_koch] DSL2 - revision: 68a6bc7bd8
+Launching `main.nf` [adoring_galileo] DSL2 - revision: c9e83aaef1
 
-executor >  local (3)
-[3d/bb1e90] process > FASTP (2)      [100%] 2 of 2 ✔
-[4c/455334] process > TRIMGALORE (1) [100%] 1 of 1 ✔
+executor >  local (6)
+[1d/0747ac] process > FASTP (2)           [100%] 2 of 2 ✔
+[cc/c44caf] process > TRIMGALORE (1)      [100%] 1 of 1 ✔
+[34/bd5a9f] process > GENERATE_REPORT (1) [100%] 3 of 3 ✔
 ```
 
 Here, we've used small but mighty Groovy expressions inside the `.branch{}` operator to route samples based on their metadata. Human samples with high coverage go through `FASTP`, while all other samples go through `TRIMGALORE`.
@@ -1421,22 +1426,57 @@ Another powerful pattern for controlling workflow execution is the `.filter()` o
 
 Add the following before the branch operation:
 
-```groovy title="main.nf - Adding filter" hl_lines="5-9"
-    ch_samples = Channel.fromPath("./data/samples.csv")
-        .splitCsv(header: true)
+=== "After"
+
+    ```groovy title="main.nf" linenums="28" hl_lines="11"
+        ch_samples = Channel.fromPath("./data/samples.csv")
+            .splitCsv(header: true)
             .map(separateMetadata)
 
-    // Filter out invalid or low-quality samples
-    ch_valid_samples = ch_samples
-        .filter { meta, reads ->
-            meta.id && meta.organism && meta.depth >= 1000000
-        }
+        // Filter out invalid or low-quality samples
+        ch_valid_samples = ch_samples
+            .filter { meta, reads ->
+                meta.id && meta.organism && meta.depth >= 25000000
+            }
 
-    trim_branches = ch_valid_samples
-        .branch { meta, reads ->
-            fastp: meta.organism == 'human' && meta.depth >= 30000000
-            trimgalore: true
-        }
+        trim_branches = ch_valid_samples
+            .branch { meta, reads ->
+                fastp: meta.organism == 'human' && meta.depth >= 30000000
+                trimgalore: true
+            }
+    ```
+
+=== "Before"
+
+    ```groovy title="main.nf" linenums="28" hl_lines="5"
+        ch_samples = Channel.fromPath("./data/samples.csv")
+            .splitCsv(header: true)
+            .map(separateMetadata)
+
+        trim_branches = ch_samples
+            .branch { meta, reads ->
+                fastp: meta.organism == 'human' && meta.depth >= 30000000
+                trimgalore: true
+            }
+    ```
+
+Run the workflow again:
+
+```bash title="Test filtering samples"
+nextflow run main.nf
+```
+
+Because we've chosen a filter that excludes some samples, you should see fewer tasks executed:
+
+```console title="Filtered samples results"
+ N E X T F L O W   ~  version 25.04.6
+
+Launching `main.nf` [deadly_woese] DSL2 - revision: 9a6044a969
+
+executor >  local (5)
+[01/7b1483] process > FASTP (2)           [100%] 2 of 2 ✔
+[-        ] process > TRIMGALORE          -
+[07/ef53af] process > GENERATE_REPORT (3) [100%] 3 of 3 ✔
 ```
 
 This filter uses **Groovy Truth** - Groovy's way of evaluating expressions in boolean contexts:
@@ -1444,7 +1484,7 @@ This filter uses **Groovy Truth** - Groovy's way of evaluating expressions in bo
 - `null`, empty strings, empty collections, and zero are all "false"
 - Non-null values, non-empty strings, and non-zero numbers are "true"
 
-So `meta.id && meta.organism` checks that both fields exist and are non-empty, while `meta.depth >= 1000000` ensures we have sufficient sequencing depth.
+So `meta.id && meta.organism` checks that both fields exist and are non-empty, while `meta.depth >= 25000000` ensures we have sufficient sequencing depth.
 
 !!! note "Groovy Truth in Practice"
 
@@ -1454,30 +1494,6 @@ So `meta.id && meta.organism` checks that both fields exist and are non-empty, w
     ```
 
     This makes filtering logic much cleaner and easier to read.
-
-You could also combine `.filter()` with more complex Groovy logic:
-
-```groovy title="Complex filtering examples"
-// Filter using safe navigation and Elvis operators
-ch_samples
-    .filter { meta, reads ->
-        (meta.quality ?: 0) > 30 && meta.organism?.toLowerCase() in ['human', 'mouse']
-    }
-
-// Filter using regular expressions
-ch_samples
-    .filter { meta, reads ->
-        meta.id =~ /^SAMPLE_\d+$/ && reads.exists()
-    }
-
-// Filter using multiple conditions with Groovy Truth
-ch_samples
-    .filter { meta, reads ->
-        meta.files          // Non-empty file list
-        && meta.paired      // Boolean flag is true
-        && !meta.failed     // Negative check
-    }
-```
 
 ### Takeaway
 
