@@ -989,9 +989,9 @@ fastp \
     --thread 2
 ```
 
-Another common usage of dynamic script logic can be seen in [the Nextflow for Science Genomics module](../../nf4science/genomics/02_joint_calling.md). In that module, the GATK process being called can take multiple input files, but each must be prefixed with `-V` to form a correct command line. The process uses Groovy logic to transform a collection of input files (`all_gvcfs`) into the correct command arguments:
+Another common usage of dynamic script logic can be seen in [the Nextflow for Science Genomics module](../../nf4science/genomics/02_joint_calling). In that module, the GATK process being called can take multiple input files, but each must be prefixed with `-V` to form a correct command line. The process uses Groovy logic to transform a collection of input files (`all_gvcfs`) into the correct command arguments:
 
-```groovy title="command line manipulation for GATK" linenums="1"
+```groovy title="command line manipulation for GATK" linenums="1" hl_lines="2 5"
     script:
     def gvcfs_line = all_gvcfs.collect { gvcf -> "-V ${gvcf}" }.join(' ')
     """
@@ -1008,7 +1008,7 @@ These patterns of using Groovy logic in process script blocks are extremely powe
 
 When writing process scripts, you're actually working with three different types of variables, and using the wrong syntax is a common source of errors. Let's add a process that creates a processing report to demonstrate the differences.
 
-Create a new process file `modules/generate_report.nf`:
+Take a look a the module file `modules/generate_report.nf`:
 
 ```groovy title="modules/generate_report.nf" linenums="1"
 process GENERATE_REPORT {
@@ -1035,9 +1035,8 @@ Include the process in your `main.nf` and add it to the workflow:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="1" hl_lines="3 11"
+    ```groovy title="main.nf" linenums="1" hl_lines="2 12"
     include { FASTP } from './modules/fastp.nf'
-    include { TRIMGALORE } from './modules/trimgalore.nf'
     include { GENERATE_REPORT } from './modules/generate_report.nf'
 
     // ... separateMetadata function ...
@@ -1045,34 +1044,32 @@ Include the process in your `main.nf` and add it to the workflow:
     workflow {
         ch_samples = Channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
-                .map(separateMetadata)
+            .map{ row -> separateMetadata(row) }
 
+        ch_fastp = FASTP(ch_samples)
         GENERATE_REPORT(ch_samples)
-
-        // ... rest of workflow ...
     }
     ```
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="1"
+    ```groovy title="main.nf" linenums="1" hl_lines="1 10"
     include { FASTP } from './modules/fastp.nf'
-    include { TRIMGALORE } from './modules/trimgalore.nf'
 
     // ... separateMetadata function ...
 
     workflow {
         ch_samples = Channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
-                .map(separateMetadata)
+            .map{ row -> separateMetadata(row) }
 
-        // ... rest of workflow ...
+        ch_fastp = FASTP(ch_samples)
     }
     ```
 
 Now run the workflow and check the generated reports in `results/reports/`. They should contain basic information about each sample.
 
-But what if we want to add information about when and where the processing occurred? Let's modify the process to include shell environment variables:
+But what if we want to add information about when and where the processing occurred? Let's modify the process to use **shell** variables and a bit of command substitution to include the current user, hostname, and date in the report:
 
 === "After"
 
@@ -1097,9 +1094,22 @@ But what if we want to add information about when and where the processing occur
     """
     ```
 
-If you run this, you'll notice an error or unexpected behavior - Nextflow tries to interpret `${USER}` as a Groovy variable that doesn't exist! We need to escape it so Bash can handle it instead.
+If you run this, you'll notice an error or unexpected behavior - Nextflow tries to interpret `$(hostname)` as a Groovy variable that doesn't exist:
 
-Fix this by escaping the shell variables:
+```console title="Error with shell variables"
+unknown recognition error type: groovyjarjarantlr4.v4.runtime.LexerNoViableAltException
+ERROR ~ Module compilation error
+- file : /workspaces/training/side-quests/groovy_essentials/modules/generate_report.nf
+- cause: token recognition error at: '(' @ line 16, column 22.
+       echo "Hostname: $(hostname)" >> ${meta.id}_report.txt
+                        ^
+
+1 error
+```
+
+ We need to escape it so Bash can handle it instead.
+
+Fix this by escaping the shell variables and command substitutions with a backslash (`\`):
 
 === "After - Fixed"
 
@@ -1129,38 +1139,6 @@ Fix this by escaping the shell variables:
 
 Now it works! The backslash (`\`) tells Nextflow "don't interpret this, pass it through to Bash."
 
-!!! note "Three Types of Variables in Process Scripts"
-
-    - **Nextflow/Groovy variables**: Use `${variable}` - evaluated before the script runs
-    - **Shell environment variables**: Use `\${variable}` - passed through to Bash
-    - **Shell command substitution**: Use `\$(command)` - executed by Bash
-
-Let's add one more feature - a Groovy variable for the report type:
-
-```groovy title="modules/generate_report.nf - Complete" linenums="10"
-script:
-def report_type = meta.priority == 'high' ? 'PRIORITY' : 'STANDARD'
-"""
-echo "=== ${report_type} SAMPLE REPORT ===" > ${meta.id}_report.txt
-echo "Processing ${reads}" >> ${meta.id}_report.txt
-echo "Sample: ${meta.id}" >> ${meta.id}_report.txt
-echo "Quality: ${meta.quality}" >> ${meta.id}_report.txt
-echo "Priority: ${meta.priority}" >> ${meta.id}_report.txt
-echo "---" >> ${meta.id}_report.txt
-echo "Processed by: \${USER}" >> ${meta.id}_report.txt
-echo "Hostname: \$(hostname)" >> ${meta.id}_report.txt
-echo "Date: \$(date)" >> ${meta.id}_report.txt
-"""
-```
-
-Now you can see all three types together:
-
-- `${report_type}`, `${meta.id}`, `${meta.quality}`: Groovy variables (no backslash)
-- `\${USER}`: Shell environment variable (backslash)
-- `\$(hostname)`, `\$(date)`: Shell command substitution (backslash)
-
-Run the workflow again and check the reports - high-priority samples will have "PRIORITY" in their header!
-
 ### Takeaway
 
 In this section, you've learned:
@@ -1168,7 +1146,6 @@ In this section, you've learned:
 - **Regular expressions for file parsing**: Using Groovy's `=~` operator and regex patterns to extract metadata from complex bioinformatics file naming conventions
 - **Reusable functions**: Extracting complex logic into named functions that can be called from channel operators, making workflows more readable and maintainable
 - **Dynamic script generation**: Using Groovy conditional logic within process script blocks to adapt commands based on input characteristics (like single-end vs paired-end reads)
-- **Command-line argument construction**: Transforming file collections into properly formatted command arguments using `collect()` and `join()` methods
 - **Variable interpolation**: Understanding the difference between Nextflow/Groovy variables (`${var}`), shell environment variables (`\${var}`), and shell command substitution (`\$(cmd)`)
 
 These string processing patterns are essential for handling the diverse file formats and naming conventions you'll encounter in real-world bioinformatics workflows.
