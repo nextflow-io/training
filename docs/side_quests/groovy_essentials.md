@@ -1179,7 +1179,71 @@ Next, we'll explore how to use Groovy closures in process directives for dynamic
 
 So far we've used Groovy in the `script` block of processes. But Groovy closures are also incredibly useful in process directives, especially for dynamic resource allocation. Let's add resource directives to our FASTP process that adapt based on the sample characteristics.
 
-Currently, our FASTP process uses default resources. Let's make it smarter by allocating more CPUs for high-depth samples:
+Currently, our FASTP process uses default resources. Let's make it smarter by allocating more CPUs for high-depth samples. Edit `modules/fastp.nf` to include a dynamic `cpus` directive and a static `memory` directive:
+
+=== "After"
+
+    ```groovy title="modules/fastp.nf" linenums="1" hl_lines="4-5"
+    process FASTP {
+        container 'community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690'
+
+        cpus { meta.depth > 40000000 ? 4 : 2 }
+        memory '2 GB'
+
+        input:
+        tuple val(meta), path(reads)
+    ```
+
+=== "Before"
+
+    ```groovy title="modules/fastp.nf" linenums="1"
+    process FASTP {
+        container 'community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690'
+
+        input:
+        tuple val(meta), path(reads)
+    ```
+
+The closure `{ meta.depth > 40000000 ? 4 : 2 }` is evaluated for each task, allowing per-sample resource allocation. High-depth samples (>40M reads) get 4 CPUs, while others get 2 CPUs.
+
+!!! note "Accessing Input Variables in Directives"
+
+    The closure can access any input variables (like `meta` here) because Nextflow evaluates these closures in the context of each task execution.
+
+Run the workflow again:
+
+```bash title="Test resource allocation"
+nextflow run main.nf -no-ansi-log
+```
+
+We're using the `-no-ansi-log` option to make it easier to see the task hashes.
+
+```console title="Resource allocation output"
+N E X T F L O W  ~  version 25.04.6
+Launching `main.nf` [fervent_albattani] DSL2 - revision: fa8f249759
+[bd/ff3d41] Submitted process > FASTP (2)
+[a4/a3aab2] Submitted process > FASTP (1)
+[48/6db0c9] Submitted process > FASTP (3)
+[ec/83439d] Submitted process > GENERATE_REPORT (3)
+[bd/15d7cc] Submitted process > GENERATE_REPORT (2)
+[42/699357] Submitted process > GENERATE_REPORT (1)
+```
+
+You can check the exact `docker` command that was run to see the CPU allocation for any given task:
+
+```console title="Check docker command"
+cat work/48/6db0c9e9d8aa65e4bb4936cd3bd59e/.command.run | grep "docker run"
+```
+
+You should see something like:
+
+```bash title="docker command"
+    docker run -i --cpu-shares 4096 --memory 2048m -e "NXF_TASK_WORKDIR" -v /workspaces/training/side-quests/groovy_essentials:/workspaces/training/side-quests/groovy_essentials -w "$NXF_TASK_WORKDIR" --name $NXF_BOXID community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690 /bin/bash -ue /workspaces/training/side-quests/groovy_essentials/work/48/6db0c9e9d8aa65e4bb4936cd3bd59e/.command.sh
+```
+
+In this example we've chosen an example that requested 4 CPUs (`--cpu-shares 4096`), because it was a high-depth sample, but you should see different CPU allocations depending on the sample depth. Try this for the other tasks as well.
+
+Another powerful pattern is using `task.attempt` for retry strategies. To show why this is useful, we're going to start by reducing the memory allocation to FASTP to less than it needs. Change the `memory` directive in `modules/fastp.nf` to `1.GB`:
 
 === "After"
 
@@ -1192,8 +1256,6 @@ Currently, our FASTP process uses default resources. Let's make it smarter by al
 
         input:
         tuple val(meta), path(reads)
-
-        // ... rest of process ...
     ```
 
 === "Before"
@@ -1202,72 +1264,75 @@ Currently, our FASTP process uses default resources. Let's make it smarter by al
     process FASTP {
         container 'community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690'
 
+        cpus { meta.depth > 40000000 ? 4 : 2 }
+        memory '2 GB'
+
         input:
         tuple val(meta), path(reads)
-
-        // ... rest of process ...
     ```
 
-The closure `{ meta.depth > 40000000 ? 4 : 2 }` is evaluated for each task, allowing per-sample resource allocation. High-depth samples (>40M reads) get 4 CPUs, while others get 2 CPUs.
+... and run the workflow again:
 
-!!! note "Accessing Input Variables in Directives"
-
-    The closure can access any input variables (like `meta` here) because Nextflow evaluates these closures in the context of each task execution.
-
-Another powerful pattern is using `task.attempt` for retry strategies. Let's add error retry with increasing resources:
-
-```groovy title="modules/fastp.nf - With retry" linenums="1" hl_lines="4-6"
-process FASTP {
-    container 'community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690'
-
-    errorStrategy 'retry'
-    maxRetries 2
-    memory { 512.MB * task.attempt }
-
-    input:
-    tuple val(meta), path(reads)
-
-    // ... rest of process ...
+```bash title="Test insufficient memory"
+nextflow run main.nf
 ```
+
+You'll see an error indicating that the process was killed for exceeding memory limits:
+
+```console title="Memory error output" hl_lines="2 11"
+Command exit status:
+  137
+
+Command output:
+  (empty)
+
+Command error:
+  Detecting adapter sequence for read1...
+  No adapter detected for read1
+
+  .command.sh: line 7:   101 Killed                  fastp --in1 SAMPLE_002_S2_L001_R1_001.fastq --out1 sample_002_trimmed.fastq.gz --json sample_002.fastp.json --html sample_002.fastp.html --thread 2
+```
+
+This is a very common scenario in real-world workflows - sometimes you just don't know how much memory a task will need until you run it. To make our workflow more robust, we can implement a retry strategy that increases memory allocation on each attempt, once again using a Groovy closure. Modify the `memory` directive to multiply the base memory by `task.attempt`, and add `errorStrategy 'retry'` and `maxRetries 2` directives:
+
+=== "After"
+
+    ```groovy title="modules/fastp.nf" linenums="1" hl_lines="5-7"
+    process FASTP {
+        container 'community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690'
+
+        cpus { meta.depth > 40000000 ? 4 : 2 }
+        memory { '1 GB' * task.attempt }
+        errorStrategy 'retry'
+        maxRetries 2
+
+        input:
+        tuple val(meta), path(reads)
+    ```
+
+=== "Before"
+
+    ```groovy title="modules/fastp.nf" linenums="1" hl_lines="5"
+    process FASTP {
+        container 'community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690'
+
+        cpus { meta.depth > 40000000 ? 4 : 2 }
+        memory '2 GB'
+
+        input:
+        tuple val(meta), path(reads)
+    ```
 
 Now if the process fails due to insufficient memory, Nextflow will retry with more memory:
 
-- First attempt: 512 MB (task.attempt = 1)
-- Second attempt: 1024 MB (task.attempt = 2)
+- First attempt: 1 GB (task.attempt = 1)
+- Second attempt: 2 GB (task.attempt = 2)
 
-You can combine multiple factors:
-
-```groovy title="Complex resource allocation"
-process QUALITY_CONTROL {
-
-    memory {
-        def base_mem = meta.depth > 30000000 ? 1.GB : 512.MB
-        base_mem * task.attempt
-    }
-
-    cpus {
-        def base_cpus = meta.organism == 'human' ? 4 : 2
-        Math.min(base_cpus, 8)  // Cap at 8 CPUs for Codespaces
-    }
-
-    time {
-        meta.priority == 'high' ? '30.m' : '1.h'
-    }
-
-    // ... rest of process ...
-}
-```
-
-This demonstrates several advanced patterns:
-
-- Creating intermediate Groovy variables (`base_mem`, `base_cpus`)
-- Using Groovy math functions (`Math.min`) to set limits
-- Combining metadata with retry logic
-- Using Nextflow's duration syntax (`30.m`, `1.h`)
+... and so on, up to the `maxRetries` limit.
 
 ### Takeaway
 
-Dynamic directives with closures let you:
+Dynamic directives with Groovy closures let you:
 
 - Allocate resources based on input characteristics
 - Implement automatic retry strategies with increasing resources
