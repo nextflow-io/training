@@ -1060,7 +1060,7 @@ To illustrate what that looks like with our existing workflow, make the modifica
 
 === "After"
 
-    ```groovy title="main.nf" linenums="1" hl_lines="3-25 28-32"
+    ```groovy title="main.nf" linenums="1" hl_lines="4-24 29"
     include { FASTP } from './modules/fastp.nf'
     include { GENERATE_REPORT } from './modules/generate_report.nf'
 
@@ -1098,7 +1098,7 @@ To illustrate what that looks like with our existing workflow, make the modifica
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="1" hl_lines="5-28"
+    ```groovy title="main.nf" linenums="1" hl_lines="7-27"
     include { FASTP } from './modules/fastp.nf'
     include { GENERATE_REPORT } from './modules/generate_report.nf'
 
