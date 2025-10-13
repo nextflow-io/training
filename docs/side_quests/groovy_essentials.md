@@ -760,12 +760,32 @@ Then modify the `workflow` block to connect the `ch_samples` channel to the `FAS
 
 === "After"
 
-    ```groovy title="main.nf" linenums="25" hl_lines="7"
+    ```groovy title="main.nf" linenums="25" hl_lines="7-26"
     workflow {
 
         ch_samples = Channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
-            .map{ row -> separateMetadata(row) }
+            .map { row ->
+                def sample_meta = [
+                    id: row.sample_id.toLowerCase(),
+                    organism: row.organism,
+                    tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+                    depth: row.sequencing_depth.toInteger(),
+                    quality: row.quality_score.toDouble()
+                ]
+                def fastq_path = file(row.file_path)
+
+                def m = (fastq_path.name =~ /^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$/)
+                def file_meta = m ? [
+                    sample_num: m[0][2].toInteger(),
+                    lane: m[0][3],
+                    read: m[0][4],
+                    chunk: m[0][5]
+                ] : [:]
+
+                def priority = sample_meta.quality > 40 ? 'high' : 'normal'
+                return [sample_meta + file_meta + [priority: priority], fastq_path]
+            }
 
         ch_fastp = FASTP(ch_samples)
     }
@@ -773,12 +793,32 @@ Then modify the `workflow` block to connect the `ch_samples` channel to the `FAS
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="25" hl_lines="6"
+    ```groovy title="main.nf" linenums="25" hl_lines="6-25"
     workflow {
 
         ch_samples = Channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
-            .map{ row -> separateMetadata(row) }
+            .map { row ->
+                def sample_meta = [
+                    id: row.sample_id.toLowerCase(),
+                    organism: row.organism,
+                    tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+                    depth: row.sequencing_depth.toInteger(),
+                    quality: row.quality_score.toDouble()
+                ]
+                def fastq_path = file(row.file_path)
+
+                def m = (fastq_path.name =~ /^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$/)
+                def file_meta = m ? [
+                    sample_num: m[0][2].toInteger(),
+                    lane: m[0][3],
+                    read: m[0][4],
+                    chunk: m[0][5]
+                ] : [:]
+
+                def priority = sample_meta.quality > 40 ? 'high' : 'normal'
+                return [sample_meta + file_meta + [priority: priority], file(row.file_path)]
+            }
             .view()
     }
     ```
@@ -822,7 +862,7 @@ Fix this by adding Groovy logic to the `FASTP` process `script:` block. An if/el
 
 === "After"
 
-    ```groovy title="main.nf" linenums="10" hl_lines="3 5 15"
+    ```groovy title="main.nf" linenums="10" hl_lines="3-26"
         script:
         // Simple single-end vs paired-end detection
         def is_single = reads instanceof List ? reads.size() == 1 : true
@@ -853,7 +893,7 @@ Fix this by adding Groovy logic to the `FASTP` process `script:` block. An if/el
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="10"
+    ```groovy title="main.nf" linenums="10" hl_lines="2-11"
             script:
             """
             fastp \\
@@ -916,7 +956,7 @@ Another common usage of dynamic script logic can be seen in [the Nextflow for Sc
 
 These patterns of using Groovy logic in process script blocks are extremely powerful and can be applied in many scenarios - from handling variable input types to building complex command-line arguments from file collections, making your processes truly adaptable to the diverse requirements of real-world data.
 
-### 2.3. Variable Interpolation: Groovy, Bash, and Shell Variables
+### 2.3. Variable Interpolation: Groovy and Shell Variables
 
 Process scripts mix Nextflow variables, shell variables, and command substitutions, each with different interpolation syntax. Using the wrong syntax causes errors. Let's explore these with a process that creates a processing report.
 
@@ -947,16 +987,34 @@ Include the process in your `main.nf` and add it to the workflow:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="1" hl_lines="2 12"
+    ```groovy title="main.nf" linenums="1" hl_lines="2 12-31"
     include { FASTP } from './modules/fastp.nf'
     include { GENERATE_REPORT } from './modules/generate_report.nf'
-
-    // ... separateMetadata function ...
 
     workflow {
         ch_samples = Channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
-            .map{ row -> separateMetadata(row) }
+            .map { row ->
+                def sample_meta = [
+                    id: row.sample_id.toLowerCase(),
+                    organism: row.organism,
+                    tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+                    depth: row.sequencing_depth.toInteger(),
+                    quality: row.quality_score.toDouble()
+                ]
+                def fastq_path = file(row.file_path)
+
+                def m = (fastq_path.name =~ /^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$/)
+                def file_meta = m ? [
+                    sample_num: m[0][2].toInteger(),
+                    lane: m[0][3],
+                    read: m[0][4],
+                    chunk: m[0][5]
+                ] : [:]
+
+                def priority = sample_meta.quality > 40 ? 'high' : 'normal'
+                return [sample_meta + file_meta + [priority: priority], fastq_path]
+            }
 
         ch_fastp = FASTP(ch_samples)
         GENERATE_REPORT(ch_samples)
@@ -965,15 +1023,33 @@ Include the process in your `main.nf` and add it to the workflow:
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="1" hl_lines="1 10"
+    ```groovy title="main.nf" linenums="1" hl_lines="1 10-29"
     include { FASTP } from './modules/fastp.nf'
-
-    // ... separateMetadata function ...
 
     workflow {
         ch_samples = Channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
-            .map{ row -> separateMetadata(row) }
+            .map { row ->
+                def sample_meta = [
+                    id: row.sample_id.toLowerCase(),
+                    organism: row.organism,
+                    tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+                    depth: row.sequencing_depth.toInteger(),
+                    quality: row.quality_score.toDouble()
+                ]
+                def fastq_path = file(row.file_path)
+
+                def m = (fastq_path.name =~ /^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$/)
+                def file_meta = m ? [
+                    sample_num: m[0][2].toInteger(),
+                    lane: m[0][3],
+                    read: m[0][4],
+                    chunk: m[0][5]
+                ] : [:]
+
+                def priority = sample_meta.quality > 40 ? 'high' : 'normal'
+                return [sample_meta + file_meta + [priority: priority], fastq_path]
+            }
 
         ch_fastp = FASTP(ch_samples)
     }
@@ -986,24 +1062,24 @@ But what if we want to add information about when and where the processing occur
 === "After"
 
     ```groovy title="modules/generate_report.nf" linenums="10" hl_lines="5-7"
-    script:
-    """
-    echo "Processing ${reads}" > ${meta.id}_report.txt
-    echo "Sample: ${meta.id}" >> ${meta.id}_report.txt
-    echo "Processed by: ${USER}" >> ${meta.id}_report.txt
-    echo "Hostname: $(hostname)" >> ${meta.id}_report.txt
-    echo "Date: $(date)" >> ${meta.id}_report.txt
-    """
+        script:
+        """
+        echo "Processing ${reads}" > ${meta.id}_report.txt
+        echo "Sample: ${meta.id}" >> ${meta.id}_report.txt
+        echo "Processed by: ${USER}" >> ${meta.id}_report.txt
+        echo "Hostname: $(hostname)" >> ${meta.id}_report.txt
+        echo "Date: $(date)" >> ${meta.id}_report.txt
+        """
     ```
 
 === "Before"
 
     ```groovy title="modules/generate_report.nf" linenums="10"
-    script:
-    """
-    echo "Processing ${reads}" > ${meta.id}_report.txt
-    echo "Sample: ${meta.id}" >> ${meta.id}_report.txt
-    """
+        script:
+        """
+        echo "Processing ${reads}" > ${meta.id}_report.txt
+        echo "Sample: ${meta.id}" >> ${meta.id}_report.txt
+        """
     ```
 
 If you run this, you'll notice an error or unexpected behavior - Nextflow tries to interpret `$(hostname)` as a Groovy variable that doesn't exist:
@@ -1023,30 +1099,30 @@ We need to escape it so Bash can handle it instead.
 
 Fix this by escaping the shell variables and command substitutions with a backslash (`\`):
 
-=== "After - Fixed"
+=== "After"
 
     ```groovy title="modules/generate_report.nf" linenums="10" hl_lines="5-7"
-    script:
-    """
-    echo "Processing ${reads}" > ${meta.id}_report.txt
-    echo "Sample: ${meta.id}" >> ${meta.id}_report.txt
-    echo "Processed by: \${USER}" >> ${meta.id}_report.txt
-    echo "Hostname: \$(hostname)" >> ${meta.id}_report.txt
-    echo "Date: \$(date)" >> ${meta.id}_report.txt
-    """
+        script:
+        """
+        echo "Processing ${reads}" > ${meta.id}_report.txt
+        echo "Sample: ${meta.id}" >> ${meta.id}_report.txt
+        echo "Processed by: \${USER}" >> ${meta.id}_report.txt
+        echo "Hostname: \$(hostname)" >> ${meta.id}_report.txt
+        echo "Date: \$(date)" >> ${meta.id}_report.txt
+        """
     ```
 
-=== "Before - Broken"
+=== "Before"
 
     ```groovy title="modules/generate_report.nf" linenums="10"
-    script:
-    """
-    echo "Processing ${reads}" > ${meta.id}_report.txt
-    echo "Sample: ${meta.id}" >> ${meta.id}_report.txt
-    echo "Processed by: ${USER}" >> ${meta.id}_report.txt
-    echo "Hostname: $(hostname)" >> ${meta.id}_report.txt
-    echo "Date: $(date)" >> ${meta.id}_report.txt
-    """
+        script:
+        """
+        echo "Processing ${reads}" > ${meta.id}_report.txt
+        echo "Sample: ${meta.id}" >> ${meta.id}_report.txt
+        echo "Processed by: ${USER}" >> ${meta.id}_report.txt
+        echo "Hostname: $(hostname)" >> ${meta.id}_report.txt
+        echo "Date: $(date)" >> ${meta.id}_report.txt
+        """
     ```
 
 Now it works! The backslash (`\`) tells Nextflow "don't interpret this, pass it through to Bash."
