@@ -894,7 +894,7 @@ nextflow run bad_number_inputs.nf
 
 More commonly than this example, you might add additional inputs to a process and forget to update the workflow call accordingly, which can lead to this type of error. Fortunately, this is one of the easier-to-understand and fix errors, as the error message is quite clear about the mismatch.
 
-### 2.2. Mismatched channel arity
+### 2.2. Channel Exhaustion (Process Runs Fewer Times Than Expected)
 
 Some channel structure errors are much more subtle and produce no errors at all. Probably the most common of these reflects a challenge that new Nextflow users face in understanding that queue channels can be exhausted and run out of items, meaning the workflow finishes prematurely.
 
@@ -1164,7 +1164,7 @@ To fix this, if the process requires both inputs we could adjust the process to 
 
     === "After"
 
-        ```groovy title="bad_channel_shape.nf" hl_lines="10" linenums="16"
+        ```groovy title="bad_channel_shape.nf" hl_lines="9" linenums="16"
         workflow {
 
             // Channel emits tuples, but process expects single values
