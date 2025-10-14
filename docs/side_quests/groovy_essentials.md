@@ -1280,8 +1280,8 @@ Currently, our FASTP process uses default resources. Let's make it smarter by al
     process FASTP {
         container 'community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690'
 
-        cpus { meta.depth > 40000000 ? 4 : 2 }
-        memory '2 GB'
+        cpus { meta.depth > 40000000 ? 2 : 1 }
+        memory 2.GB
 
         input:
         tuple val(meta), path(reads)
@@ -1297,7 +1297,7 @@ Currently, our FASTP process uses default resources. Let's make it smarter by al
         tuple val(meta), path(reads)
     ```
 
-The closure `{ meta.depth > 40000000 ? 4 : 2 }` uses the **Groovy ternary operator** (covered in Section 1.1) and is evaluated for each task, allowing per-sample resource allocation. High-depth samples (>40M reads) get 4 CPUs, while others get 2 CPUs.
+The closure `{ meta.depth > 40000000 ? 2 : 1 }` uses the **Groovy ternary operator** (covered in Section 1.1) and is evaluated for each task, allowing per-sample resource allocation. High-depth samples (>40M reads) get 2 CPUs, while others get 1 CPU.
 
 !!! note "Accessing Input Variables in Directives"
 
@@ -1306,10 +1306,10 @@ The closure `{ meta.depth > 40000000 ? 4 : 2 }` uses the **Groovy ternary operat
 Run the workflow again:
 
 ```bash title="Test resource allocation"
-nextflow run main.nf -no-ansi-log
+nextflow run main.nf -ansi-log false
 ```
 
-We're using the `-no-ansi-log` option to make it easier to see the task hashes.
+We're using the `-ansi-log false` option to make it easier to see the task hashes.
 
 ```console title="Resource allocation output"
 N E X T F L O W  ~  version 25.04.6
@@ -1345,7 +1345,7 @@ Another powerful pattern is using `task.attempt` for retry strategies. To show w
         container 'community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690'
 
         cpus { meta.depth > 40000000 ? 4 : 2 }
-        memory '1 GB'
+        memory 1.GB
 
         input:
         tuple val(meta), path(reads)
@@ -1358,7 +1358,7 @@ Another powerful pattern is using `task.attempt` for retry strategies. To show w
         container 'community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690'
 
         cpus { meta.depth > 40000000 ? 4 : 2 }
-        memory '2 GB'
+        memory 2.GB
 
         input:
         tuple val(meta), path(reads)
@@ -1395,7 +1395,7 @@ This is a very common scenario in real-world workflows - sometimes you just don'
         container 'community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690'
 
         cpus { meta.depth > 40000000 ? 4 : 2 }
-        memory { '1 GB' * task.attempt }
+        memory { 1.GB * task.attempt }
         errorStrategy 'retry'
         maxRetries 2
 
@@ -1410,7 +1410,7 @@ This is a very common scenario in real-world workflows - sometimes you just don'
         container 'community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690'
 
         cpus { meta.depth > 40000000 ? 4 : 2 }
-        memory '2 GB'
+        memory 2.GB
 
         input:
         tuple val(meta), path(reads)
@@ -1419,7 +1419,7 @@ This is a very common scenario in real-world workflows - sometimes you just don'
 Now if the process fails due to insufficient memory, Nextflow will retry with more memory:
 
 - First attempt: 1 GB (task.attempt = 1)
-- Second attempt: 2 GB (task.attempt = 2)
+- Second attempt: 2.GB (task.attempt = 2)
 
 ... and so on, up to the `maxRetries` limit.
 
@@ -1953,7 +1953,7 @@ This is a Groovy closure being assigned to `workflow.onComplete`. Inside, you ha
 Run your workflow and you'll see this summary appear at the end!
 
 ```bash title="Run with onComplete handler"
-nextflow run main.nf --input ./data/samples.csv -no-ansi-log
+nextflow run main.nf --input ./data/samples.csv -ansi-log false
 ```
 
 ```console title="onComplete output"
