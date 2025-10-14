@@ -1934,47 +1934,49 @@ Proper validation makes workflows more robust and user-friendly by catching prob
 
 ---
 
-## 8. Configuration and Workflow Event Handlers
+## 8. Workflow Event Handlers
 
-Up until now, we've been writing code in our workflow scripts and process definitions. But there's one more important place where you can add logic: workflow event handlers in your `nextflow.config` file (or other places you write configuration).
+Up until now, we've been writing code in our workflow scripts and process definitions. But there's one more important feature you should know about: workflow event handlers.
 
-Event handlers are closures that run at specific points in your workflow's lifecycle. They're perfect for adding logging, notifications, or cleanup operations without cluttering your main workflow code.
+Event handlers are closures that run at specific points in your workflow's lifecycle. They're perfect for adding logging, notifications, or cleanup operations. These handlers should be defined in your workflow script alongside your workflow definition.
 
 ### 8.1. The `onComplete` Handler
 
 The most commonly used event handler is `onComplete`, which runs when your workflow finishes (whether it succeeded or failed). Let's add one to summarize our pipeline results.
 
-Your `nextflow.config` file already has Docker enabled. Add an event handler after the existing configuration:
+Add the event handler to your `main.nf` file, inside your workflow definition:
 
 === "After"
 
-    ```groovy title="nextflow.config" linenums="1" hl_lines="5-15"
-    // Nextflow configuration for Groovy Essentials side quest
+    ```groovy title="main.nf" linenums="66" hl_lines="5-16"
+        ch_fastp = FASTP(trim_branches.fastp)
+        ch_trimgalore = TRIMGALORE(trim_branches.trimgalore)
+        GENERATE_REPORT(ch_samples)
 
-    docker.enabled = true
-
-    workflow.onComplete = {
-        println ""
-        println "Pipeline execution summary:"
-        println "=========================="
-        println "Completed at: ${workflow.complete}"
-        println "Duration    : ${workflow.duration}"
-        println "Success     : ${workflow.success}"
-        println "workDir     : ${workflow.workDir}"
-        println "exit status : ${workflow.exitStatus}"
-        println ""
+        workflow.onComplete = {
+            println ""
+            println "Pipeline execution summary:"
+            println "=========================="
+            println "Completed at: ${workflow.complete}"
+            println "Duration    : ${workflow.duration}"
+            println "Success     : ${workflow.success}"
+            println "workDir     : ${workflow.workDir}"
+            println "exit status : ${workflow.exitStatus}"
+            println ""
+        }
     }
     ```
 
 === "Before"
 
-    ```groovy title="nextflow.config" linenums="1"
-    // Nextflow configuration for Groovy Essentials side quest
-
-    docker.enabled = true
+    ```groovy title="main.nf" linenums="66" hl_lines="4"
+        ch_fastp = FASTP(trim_branches.fastp)
+        ch_trimgalore = TRIMGALORE(trim_branches.trimgalore)
+        GENERATE_REPORT(ch_samples)
+    }
     ```
 
-This is a closure being assigned to `workflow.onComplete`. Inside, you have access to the `workflow` object which provides useful properties about the execution.
+This closure runs when the workflow completes. Inside, you have access to the `workflow` object which provides useful properties about the execution.
 
 Run your workflow and you'll see this summary appear at the end!
 
@@ -1997,7 +1999,7 @@ Pipeline execution summary:
 Completed at: 2025-10-10T12:14:24.885384+01:00
 Duration    : 2.9s
 Success     : true
-workDir     : /Users/jonathan.manning/projects/training/side-quests/essential_scripting_patterns/work
+workDir     : /workspaces/training/side-quests/essential_scripting_patterns/work
 exit status : 0
 ```
 
@@ -2005,41 +2007,50 @@ Let's make it more useful by adding conditional logic:
 
 === "After"
 
-    ```groovy title="nextflow.config" linenums="5" hl_lines="12-18"
-    workflow.onComplete = {
-        println ""
-        println "Pipeline execution summary:"
-        println "=========================="
-        println "Completed at: ${workflow.complete}"
-        println "Duration    : ${workflow.duration}"
-        println "Success     : ${workflow.success}"
-        println "workDir     : ${workflow.workDir}"
-        println "exit status : ${workflow.exitStatus}"
-        println ""
+    ```groovy title="main.nf" linenums="66" hl_lines="5-22"
+        ch_fastp = FASTP(trim_branches.fastp)
+        ch_trimgalore = TRIMGALORE(trim_branches.trimgalore)
+        GENERATE_REPORT(ch_samples)
 
-        if (workflow.success) {
-            println "✅ Pipeline completed successfully!"
-            println "Results are in: ${params.outdir ?: 'results'}"
-        } else {
-            println "❌ Pipeline failed!"
-            println "Error: ${workflow.errorMessage}"
+        workflow.onComplete = {
+            println ""
+            println "Pipeline execution summary:"
+            println "=========================="
+            println "Completed at: ${workflow.complete}"
+            println "Duration    : ${workflow.duration}"
+            println "Success     : ${workflow.success}"
+            println "workDir     : ${workflow.workDir}"
+            println "exit status : ${workflow.exitStatus}"
+            println ""
+
+            if (workflow.success) {
+                println "✅ Pipeline completed successfully!"
+            } else {
+                println "❌ Pipeline failed!"
+                println "Error: ${workflow.errorMessage}"
+            }
         }
     }
     ```
 
 === "Before"
 
-    ```groovy title="nextflow.config" linenums="5"
-    workflow.onComplete = {
-        println ""
-        println "Pipeline execution summary:"
-        println "=========================="
-        println "Completed at: ${workflow.complete}"
-        println "Duration    : ${workflow.duration}"
-        println "Success     : ${workflow.success}"
-        println "workDir     : ${workflow.workDir}"
-        println "exit status : ${workflow.exitStatus}"
-        println ""
+    ```groovy title="main.nf" linenums="66" hl_lines="5-16"
+        ch_fastp = FASTP(trim_branches.fastp)
+        ch_trimgalore = TRIMGALORE(trim_branches.trimgalore)
+        GENERATE_REPORT(ch_samples)
+
+        workflow.onComplete = {
+            println ""
+            println "Pipeline execution summary:"
+            println "=========================="
+            println "Completed at: ${workflow.complete}"
+            println "Duration    : ${workflow.duration}"
+            println "Success     : ${workflow.success}"
+            println "workDir     : ${workflow.workDir}"
+            println "exit status : ${workflow.exitStatus}"
+            println ""
+        }
     }
     ```
 
@@ -2060,7 +2071,7 @@ Pipeline execution summary:
 Completed at: 2025-10-10T12:16:00.522569+01:00
 Duration    : 3.6s
 Success     : true
-workDir     : /Users/jonathan.manning/projects/training/side-quests/essential_scripting_patterns/work
+workDir     : /workspaces/training/side-quests/essential_scripting_patterns/work
 exit status : 0
 
 ✅ Pipeline completed successfully!
@@ -2068,67 +2079,77 @@ exit status : 0
 
 You can also write the summary to a file using file operations:
 
-```groovy title="nextflow.config - Writing summary to file"
-workflow.onComplete = {
-    def summary = """
-    Pipeline Execution Summary
-    ===========================
-    Completed: ${workflow.complete}
-    Duration : ${workflow.duration}
-    Success  : ${workflow.success}
-    Command  : ${workflow.commandLine}
-    """
+```groovy title="main.nf - Writing summary to file"
+workflow {
+    // ... your workflow code ...
 
-    println summary
+    workflow.onComplete = {
+        def summary = """
+        Pipeline Execution Summary
+        ===========================
+        Completed: ${workflow.complete}
+        Duration : ${workflow.duration}
+        Success  : ${workflow.success}
+        Command  : ${workflow.commandLine}
+        """
 
-    // Write to a log file
-    def log_file = new File("${workflow.launchDir}/pipeline_summary.txt")
-    log_file.text = summary
+        println summary
+
+        // Write to a log file
+        def log_file = file("${workflow.launchDir}/pipeline_summary.txt")
+        log_file.text = summary
+    }
 }
 ```
 
-### 8.2. Other Useful Event Handlers
+### 8.2. The `onError` Handler
 
-Besides `onComplete`, there are other event handlers you can use:
+Besides `onComplete`, there is one other event handler you can use: `onError`, which runs only if the workflow fails:
 
-**`onError`** - Runs only if the workflow fails:
+```groovy title="main.nf - onError handler"
+workflow {
+    // ... your workflow code ...
 
-```groovy title="nextflow.config - onError handler"
-workflow.onError = {
-    println "="* 50
-    println "Pipeline execution failed!"
-    println "Error message: ${workflow.errorMessage}"
-    println "="* 50
+    workflow.onError = {
+        println "="* 50
+        println "Pipeline execution failed!"
+        println "Error message: ${workflow.errorMessage}"
+        println "="* 50
 
-    // Write detailed error log
-    def error_file = new File("${workflow.launchDir}/error.log")
-    error_file.text = """
-    Workflow Error Report
-    =====================
-    Time: ${new Date()}
-    Error: ${workflow.errorMessage}
-    Error report: ${workflow.errorReport ?: 'No detailed report available'}
-    """
+        // Write detailed error log
+        def error_file = file("${workflow.launchDir}/error.log")
+        error_file.text = """
+        Workflow Error Report
+        =====================
+        Time: ${new Date()}
+        Error: ${workflow.errorMessage}
+        Error report: ${workflow.errorReport ?: 'No detailed report available'}
+        """
 
-    println "Error details written to: ${error_file}"
+        println "Error details written to: ${error_file}"
+    }
 }
 ```
 
-You can use multiple handlers together:
+You can use multiple handlers together in your workflow script:
 
-```groovy title="nextflow.config - Combined handlers"
-workflow.onError = {
-    println "Workflow failed: ${workflow.errorMessage}"
-}
+```groovy title="main.nf - Combined handlers"
+workflow {
+    // ... your workflow code ...
 
-workflow.onComplete = {
-    def duration_mins = workflow.duration.toMinutes().round(2)
-    def status = workflow.success ? "SUCCESS ✅" : "FAILED ❌"
+    workflow.onError = {
+        println "Workflow failed: ${workflow.errorMessage}"
+    }
 
-    println """
-    Pipeline finished: ${status}
-    Duration: ${duration_mins} minutes
-    """
+    workflow.onComplete = {
+        def duration_mins = workflow.duration.toMinutes().round(2)
+        def status = workflow.success ? "SUCCESS ✅" : "FAILED ❌"
+
+        println """
+        Pipeline finished: ${status}
+        Duration: ${duration_mins} minutes
+        """
+    }
 }
 ```
 
@@ -2136,12 +2157,12 @@ workflow.onComplete = {
 
 In this section, you've learned:
 
-- **Event handler closures**: Closures in `nextflow.config` that run at different lifecycle points
+- **Event handler closures**: Closures in your workflow script that run at different lifecycle points
 - **`onComplete` handler**: For execution summaries and result reporting
 - **`onError` handler**: For error handling and logging failures
 - **Workflow object properties**: Accessing `workflow.success`, `workflow.duration`, `workflow.errorMessage`, etc.
 
-Event handlers show how you can use the full power of the Nextflow language within your config files to add sophisticated logging and notification capabilities.
+Event handlers show how you can use the full power of the Nextflow language within your workflow scripts to add sophisticated logging and notification capabilities.
 
 ---
 

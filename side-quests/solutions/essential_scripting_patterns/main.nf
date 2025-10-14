@@ -66,4 +66,23 @@ workflow {
     ch_fastp = FASTP(trim_branches.fastp)
     ch_trimgalore = TRIMGALORE(trim_branches.trimgalore)
     GENERATE_REPORT(ch_samples)
+
+    workflow.onComplete = {
+        println ""
+        println "Pipeline execution summary:"
+        println "=========================="
+        println "Completed at: ${workflow.complete}"
+        println "Duration    : ${workflow.duration}"
+        println "Success     : ${workflow.success}"
+        println "workDir     : ${workflow.workDir}"
+        println "exit status : ${workflow.exitStatus}"
+        println ""
+
+        if (workflow.success) {
+            println "✅ Pipeline completed successfully!"
+        } else {
+            println "❌ Pipeline failed!"
+            println "Error: ${workflow.errorMessage}"
+        }
+    }
 }
