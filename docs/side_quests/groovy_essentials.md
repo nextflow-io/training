@@ -760,7 +760,7 @@ Then modify the `workflow` block to connect the `ch_samples` channel to the `FAS
 
 === "After"
 
-    ```groovy title="main.nf" linenums="25" hl_lines="7-26"
+    ```groovy title="main.nf" linenums="25" hl_lines="27"
     workflow {
 
         ch_samples = Channel.fromPath("./data/samples.csv")
@@ -793,7 +793,7 @@ Then modify the `workflow` block to connect the `ch_samples` channel to the `FAS
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="25" hl_lines="6-25"
+    ```groovy title="main.nf" linenums="25" hl_lines="26"
     workflow {
 
         ch_samples = Channel.fromPath("./data/samples.csv")
@@ -987,7 +987,7 @@ Include the process in your `main.nf` and add it to the workflow:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="1" hl_lines="2 12-31"
+    ```groovy title="main.nf" linenums="1" hl_lines="2 30"
     include { FASTP } from './modules/fastp.nf'
     include { GENERATE_REPORT } from './modules/generate_report.nf'
 
