@@ -6,11 +6,11 @@ ch_input.view { sample -> "Individual channel item: ${sample}" }
 ch_collected = ch_input.collect()
 ch_collected.view { list -> "channel.collect() result: ${list} (${list.size()} items grouped into 1)" }
 
-// Iterable.collect() - transforms each element, preserves structure
+// List.collect() - transforms each element, preserves structure
 def formatted_ids = sample_ids.collect { id ->
     id.toUpperCase().replace('SAMPLE_', 'SPECIMEN_')
 }
-println "Iterable.collect() result: ${formatted_ids} (${sample_ids.size()} items transformed into ${formatted_ids.size()})"
+println "List.collect() result: ${formatted_ids} (${sample_ids.size()} items transformed into ${formatted_ids.size()})"
 
 // Spread operator - concise property access
 def sample_data = [[id: 's1', quality: 38.5], [id: 's2', quality: 42.1], [id: 's3', quality: 35.2]]

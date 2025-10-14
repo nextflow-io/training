@@ -420,11 +420,11 @@ This `[meta, file]` tuple structure is a common pattern in Nextflow for passing 
 
 Our workflow demonstrates the core pattern: **dataflow operations** (`workflow`, `channel.fromPath()`, `.splitCsv()`, `.map()`, `.view()`) orchestrate how data moves through the pipeline, while **scripting** (maps `[key: value]`, string methods, type conversions, ternary operators) inside the `.map()` closure handles the transformation of individual data items.
 
-### 1.2. Understanding Different Types: Channel vs Iterable
+### 1.2. Understanding Different Types: Channel vs List
 
 So far, so good, we can distinguish between dataflow operations and scripting. But what about when the same method name exists in both contexts?
 
-A perfect example is the `collect` method, which exists for both Channel types and Iterable types (like Lists) in the Nextflow standard library. The `collect()` method on an Iterable transforms each element, while the `collect()` operator on a Channel gathers all channel emissions into a single-item channel.
+A perfect example is the `collect` method, which exists for both Channel types and List types in the Nextflow standard library. The `collect()` method on a List transforms each element, while the `collect()` operator on a Channel gathers all channel emissions into a single-item channel.
 
 Let's demonstrate this with some sample data, starting by refreshing ourselves on what the Channel `collect()` operator does. Check out `collect.nf`:
 
@@ -467,7 +467,7 @@ channel.collect() result: [sample_001, sample_002, sample_003] (3 items grouped 
 
 `view()` returns an output for every channel emission, so we know that this single output contains all 3 original items grouped into one list.
 
-Now let's see the `collect` method on an Iterable type in action. Modify `collect.nf` to apply the Iterable's `collect` method to the original list of sample IDs:
+Now let's see the `collect` method on a List in action. Modify `collect.nf` to apply the List's `collect` method to the original list of sample IDs:
 
 === "After"
 
@@ -480,11 +480,11 @@ Now let's see the `collect` method on an Iterable type in action. Modify `collec
     ch_collected = ch_input.collect()
     ch_collected.view { list -> "channel.collect() result: ${list} (${list.size()} items grouped into 1)" }
 
-    // Iterable.collect() - transforms each element, preserves structure
+    // List.collect() - transforms each element, preserves structure
     def formatted_ids = sample_ids.collect { id ->
         id.toUpperCase().replace('SAMPLE_', 'SPECIMEN_')
     }
-    println "Iterable.collect() result: ${formatted_ids} (${sample_ids.size()} items transformed into ${formatted_ids.size()})"
+    println "List.collect() result: ${formatted_ids} (${sample_ids.size()} items transformed into ${formatted_ids.size()})"
     ```
 
 === "Before"
@@ -506,29 +506,29 @@ In this new snippet we:
 
 Run the modified workflow:
 
-```bash title="Test Iterable collect"
+```bash title="Test List collect"
 nextflow run collect.nf
 ```
 
-```console title="Iterable collect results" hl_lines="5"
+```console title="List collect results" hl_lines="5"
  N E X T F L O W   ~  version 25.04.3
 
 Launching `collect.nf` [cheeky_stonebraker] DSL2 - revision: 2d5039fb47
 
-Iterable.collect() result: [SPECIMEN_001, SPECIMEN_002, SPECIMEN_003] (3 items transformed into 3)
+List.collect() result: [SPECIMEN_001, SPECIMEN_002, SPECIMEN_003] (3 items transformed into 3)
 Individual channel item: sample_001
 Individual channel item: sample_002
 Individual channel item: sample_003
 channel.collect() result: [sample_001, sample_002, sample_003] (3 items grouped into 1)
 ```
 
-This time, we have NOT changed the structure of the data, we still have 3 items in the list, but we HAVE transformed each item using the Iterable's `collect` method to produce a new list with modified values. This is similar to using the `map` operator on a Channel, but it's operating on a List data structure rather than a channel.
+This time, we have NOT changed the structure of the data, we still have 3 items in the list, but we HAVE transformed each item using the List's `collect` method to produce a new list with modified values. This is similar to using the `map` operator on a Channel, but it's operating on a List data structure rather than a channel.
 
 `collect` is an extreme case we're using here to make a point. The key lesson is that when you're writing workflows, always distinguish between **data structures** (Lists, Maps, etc.) and **channels** (dataflow constructs). Operations can share names but behave completely differently depending on the type they're called on.
 
 ### 1.3. The Spread Operator (`*.`) - Shorthand for Property Extraction
 
-Related to the Iterable's `collect` method is the spread operator (`*.`), which provides a concise way to extract properties from collections. It's essentially syntactic sugar for a common `collect` pattern.
+Related to the List's `collect` method is the spread operator (`*.`), which provides a concise way to extract properties from collections. It's essentially syntactic sugar for a common `collect` pattern.
 
 Let's add a demonstration to our `collect.nf` file:
 
@@ -543,11 +543,11 @@ Let's add a demonstration to our `collect.nf` file:
     ch_collected = ch_input.collect()
     ch_collected.view { list -> "channel.collect() result: ${list} (${list.size()} items grouped into 1)" }
 
-    // Iterable.collect() - transforms each element, preserves structure
+    // List.collect() - transforms each element, preserves structure
     def formatted_ids = sample_ids.collect { id ->
         id.toUpperCase().replace('SAMPLE_', 'SPECIMEN_')
     }
-    println "Iterable.collect() result: ${formatted_ids} (${sample_ids.size()} items transformed into ${formatted_ids.size()})"
+    println "List.collect() result: ${formatted_ids} (${sample_ids.size()} items transformed into ${formatted_ids.size()})"
 
     // Spread operator - concise property access
     def sample_data = [[id: 's1', quality: 38.5], [id: 's2', quality: 42.1], [id: 's3', quality: 35.2]]
@@ -566,11 +566,11 @@ Let's add a demonstration to our `collect.nf` file:
     ch_collected = ch_input.collect()
     ch_collected.view { list -> "channel.collect() result: ${list} (${list.size()} items grouped into 1)" }
 
-    // Iterable.collect() - transforms each element, preserves structure
+    // List.collect() - transforms each element, preserves structure
     def formatted_ids = sample_ids.collect { id ->
         id.toUpperCase().replace('SAMPLE_', 'SPECIMEN_')
     }
-    println "Iterable.collect() result: ${formatted_ids} (${sample_ids.size()} items transformed into ${formatted_ids.size()})"
+    println "List.collect() result: ${formatted_ids} (${sample_ids.size()} items transformed into ${formatted_ids.size()})"
     ```
 
 Run the updated workflow:
@@ -586,7 +586,7 @@ You should see output like:
 
 Launching `collect.nf` [cranky_galileo] DSL2 - revision: 5f3c8b2a91
 
-Iterable.collect() result: [SPECIMEN_001, SPECIMEN_002, SPECIMEN_003] (3 items transformed into 3)
+List.collect() result: [SPECIMEN_001, SPECIMEN_002, SPECIMEN_003] (3 items transformed into 3)
 Spread operator result: [s1, s2, s3]
 Individual channel item: sample_001
 Individual channel item: sample_002
@@ -618,7 +618,7 @@ The spread operator is particularly useful when you need to extract a single pro
 In this section, you've learned:
 
 - **Dataflow vs scripting**: Channel operators orchestrate how data flows through your pipeline, while scripting transforms individual data items
-- **Understanding types**: The same method name (like `collect`) can behave differently depending on the type it's called on (Channel vs Iterable)
+- **Understanding types**: The same method name (like `collect`) can behave differently depending on the type it's called on (Channel vs List)
 - **Context matters**: Always be aware of whether you're working with channels (dataflow) or data structures (scripting)
 
 Understanding these boundaries is essential for debugging, documentation, and writing maintainable workflows.
@@ -2151,7 +2151,7 @@ Throughout this side quest, you've built a comprehensive sample processing pipel
 
 Here's how we progressively enhanced our pipeline:
 
-1. **Dataflow vs Scripting**: You learned to distinguish between dataflow operations (channel orchestration) and scripting (code that manipulates data), including the crucial differences between operations on different types like `collect` on Channel vs Iterable.
+1. **Dataflow vs Scripting**: You learned to distinguish between dataflow operations (channel orchestration) and scripting (code that manipulates data), including the crucial differences between operations on different types like `collect` on Channel vs List.
 
 2. **Advanced String Processing**: You mastered regular expressions for parsing file names, dynamic script generation in processes, and variable interpolation (Nextflow vs Bash vs Shell).
 
