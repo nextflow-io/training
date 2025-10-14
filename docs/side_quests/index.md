@@ -38,6 +38,6 @@ Otherwise, select a side quest from the table below.
 | [Testing with nf-test](./nf-test.md)                                       | 1 hour                     |
 | [Workflows of workflows](./workflows_of_workflows.md)                      | 30 mins                    |
 | [Working with files](./working_with_files.md)                              | 45 mins                    |
-| [Debugging workflows](./debugging.md)                                      | -                          |
+| [Debugging workflows](./debugging.md)                                      | 1 hour                     |
 
 Let us know what other domains and use cases you'd like to see covered here by posting in the [Training section](https://community.seqera.io/c/training/) of the community forum.
