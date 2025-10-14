@@ -864,7 +864,7 @@ Fix this by adding conditional logic to the `FASTP` process `script:` block. An 
 
 === "After"
 
-    ```groovy title="main.nf" linenums="10" hl_lines="3-26"
+    ```groovy title="main.nf" linenums="10" hl_lines="3-27"
         script:
         // Simple single-end vs paired-end detection
         def is_single = reads instanceof List ? reads.size() == 1 : true
