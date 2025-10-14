@@ -328,7 +328,7 @@ nextflow run main.nf
 You should see output showing both the full metadata displayed by the `view()` operation and the extracted subset we printed with `println`:
 
 ```console title="SubMap results"
- N E X T F L O W   ~  version 25.04.6
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `main.nf` [peaceful_cori] DSL2 - revision: 4cc4a8340f
 
@@ -453,7 +453,7 @@ nextflow run collect.nf
 ```
 
 ```console title="Different collect behaviors"
- N E X T F L O W   ~  version 25.04.6
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `collect.nf` [loving_mendel] DSL2 - revision: e8d054a46e
 
@@ -509,7 +509,7 @@ nextflow run collect.nf
 ```
 
 ```console title="Groovy collect results" hl_lines="5"
- N E X T F L O W   ~  version 25.04.6
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `collect.nf` [cheeky_stonebraker] DSL2 - revision: 2d5039fb47
 
@@ -580,7 +580,7 @@ nextflow run collect.nf
 You should see output like:
 
 ```console title="Spread operator output" hl_lines="6"
- N E X T F L O W   ~  version 25.04.6
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `collect.nf` [cranky_galileo] DSL2 - revision: 5f3c8b2a91
 
@@ -709,7 +709,7 @@ nextflow run main.nf
 You should see output with metadata enriched from the file names, like
 
 ```console title="Metadata with file parsing"
- N E X T F L O W   ~  version 25.04.6
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `main.nf` [clever_pauling] DSL2 - revision: 605d2058b4
 
@@ -915,7 +915,7 @@ nextflow run main.nf
 ```
 
 ```console title="Successful run"
- N E X T F L O W   ~  version 25.04.6
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `main.nf` [adoring_rosalind] DSL2 - revision: 04b1cd93e9
 
@@ -1244,7 +1244,7 @@ nextflow run main.nf
 ```
 
 ```console title="Function results"
- N E X T F L O W   ~  version 25.04.6
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `main.nf` [admiring_panini] DSL2 - revision: 8cc832e32f
 
@@ -1312,7 +1312,7 @@ nextflow run main.nf -ansi-log false
 We're using the `-ansi-log false` option to make it easier to see the task hashes.
 
 ```console title="Resource allocation output"
-N E X T F L O W  ~  version 25.04.6
+N E X T F L O W  ~  version 25.04.3
 Launching `main.nf` [fervent_albattani] DSL2 - revision: fa8f249759
 [bd/ff3d41] Submitted process > FASTP (2)
 [a4/a3aab2] Submitted process > FASTP (1)
@@ -1501,7 +1501,7 @@ nextflow run main.nf
 ```
 
 ```console title="Conditional trimming results"
- N E X T F L O W   ~  version 25.04.6
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `main.nf` [adoring_galileo] DSL2 - revision: c9e83aaef1
 
@@ -1569,7 +1569,7 @@ nextflow run main.nf
 Because we've chosen a filter that excludes some samples, you should see fewer tasks executed:
 
 ```console title="Filtered samples results"
- N E X T F L O W   ~  version 25.04.6
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `main.nf` [deadly_woese] DSL2 - revision: 9a6044a969
 
@@ -1647,7 +1647,7 @@ nextflow run main.nf
 It crashes with a NullPointerException:
 
 ```console title="Null pointer error"
- N E X T F L O W   ~  version 25.04.6
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `main.nf` [trusting_torvalds] DSL2 - revision: b56fbfbce2
 
@@ -1844,13 +1844,37 @@ nextflow run main.nf
 The workflow stops immediately with a clear error message instead of failing mysteriously later!
 
 ```console title="Validation error output"
- N E X T F L O W   ~  version 25.04.6
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `main.nf` [confident_coulomb] DSL2 - revision: 07059399ed
 
 WARN: Access to undefined parameter `input` -- Initialise it to a default value eg. `params.input = some_value`
 Input CSV file path not provided. Please specify --input <file.csv>
 ```
+
+Now run it with a non-existent file:
+
+```bash
+nextflow run main.nf --input ./data/nonexistent.csv
+```
+
+Observe the error:
+
+```console title="File not found error output"
+ N E X T F L O W   ~  version 25.04.3
+
+Launching `main.nf` [cranky_gates] DSL2 - revision: 26839ae3eb
+
+Input CSV file not found: ./data/nonexistent.csv
+```
+
+Finally, run it with the correct file:
+
+```bash
+nextflow run main.nf --input ./data/samples.csv
+```
+
+This time it runs successfully.
 
 You can also add validation within the `separateMetadata` function. Let's use the non-fatal `log.warn` to issue warnings for samples with low sequencing depth, but still allow the workflow to continue:
 
@@ -1886,7 +1910,7 @@ nextflow run main.nf --input ./data/samples.csv
 ... and you'll see a warning about low sequencing depth for one of the samples:
 
 ```console title="Warning output"
- N E X T F L O W   ~  version 25.04.6
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `main.nf` [awesome_goldwasser] DSL2 - revision: a31662a7c1
 
@@ -1957,7 +1981,7 @@ nextflow run main.nf --input ./data/samples.csv -ansi-log false
 ```
 
 ```console title="onComplete output"
-N E X T F L O W  ~  version 25.04.6
+N E X T F L O W  ~  version 25.04.3
 Launching `main.nf` [marvelous_boltzmann] DSL2 - revision: a31662a7c1
 WARN: Low sequencing depth for sample_002: 25000000
 [9b/d48e40] Submitted process > FASTP (2)
@@ -1979,7 +2003,7 @@ Let's make it more useful by adding conditional logic:
 
 === "After"
 
-    ```groovy title="nextflow.config" linenums="5" hl_lines="11-18"
+    ```groovy title="nextflow.config" linenums="5" hl_lines="12-18"
     workflow.onComplete = {
         println ""
         println "Pipeline execution summary:"
@@ -2020,7 +2044,7 @@ Let's make it more useful by adding conditional logic:
 Now we get an even more informative summary, including a success/failure message and the output directory if specified:
 
 ```console title="Enhanced onComplete output"
-N E X T F L O W  ~  version 25.04.6
+N E X T F L O W  ~  version 25.04.3
 Launching `main.nf` [boring_linnaeus] DSL2 - revision: a31662a7c1
 WARN: Low sequencing depth for sample_002: 25000000
 [e5/242efc] Submitted process > FASTP (2)
@@ -2056,7 +2080,7 @@ workflow.onComplete = {
     println summary
 
     // Write to a log file
-    def log_file = file("${workflow.launchDir}/pipeline_summary.txt")
+    def log_file = new File("${workflow.launchDir}/pipeline_summary.txt")
     log_file.text = summary
 }
 ```
@@ -2064,19 +2088,6 @@ workflow.onComplete = {
 ### 8.2. Other Useful Event Handlers
 
 Besides `onComplete`, there are other event handlers you can use:
-
-**`onStart`** - Runs when the workflow begins:
-
-```groovy title="nextflow.config - onStart handler"
-workflow.onStart = {
-    println "="* 50
-    println "Starting pipeline: ${workflow.runName}"
-    println "Project directory: ${workflow.projectDir}"
-    println "Launch directory: ${workflow.launchDir}"
-    println "Work directory: ${workflow.workDir}"
-    println "="* 50
-}
-```
 
 **`onError`** - Runs only if the workflow fails:
 
@@ -2088,7 +2099,7 @@ workflow.onError = {
     println "="* 50
 
     // Write detailed error log
-    def error_file = file("${workflow.launchDir}/error.log")
+    def error_file = new File("${workflow.launchDir}/error.log")
     error_file.text = """
     Workflow Error Report
     =====================
@@ -2104,10 +2115,6 @@ workflow.onError = {
 You can use multiple handlers together:
 
 ```groovy title="nextflow.config - Combined handlers"
-workflow.onStart = {
-    println "Starting ${workflow.runName} at ${workflow.start}"
-}
-
 workflow.onError = {
     println "Workflow failed: ${workflow.errorMessage}"
 }
@@ -2129,7 +2136,6 @@ In this section, you've learned:
 
 - **Event handler closures**: Groovy closures in `nextflow.config` that run at different lifecycle points
 - **`onComplete` handler**: For execution summaries and result reporting
-- **`onStart` handler**: For logging pipeline initialization
 - **`onError` handler**: For error handling and logging failures
 - **Workflow object properties**: Accessing `workflow.success`, `workflow.duration`, `workflow.errorMessage`, etc.
 
@@ -2157,7 +2163,7 @@ Here's how we progressively enhanced our pipeline:
 
 7. **Validation with error() and log.warn**: You learned to validate inputs early and fail fast with clear error messages.
 
-8. **Groovy in Configuration**: You learned to use workflow event handlers (`onComplete`, `onStart`, `onError`) for logging, notifications, and lifecycle management.
+8. **Groovy in Configuration**: You learned to use workflow event handlers (`onComplete` and `onError`) for logging, notifications, and lifecycle management.
 
 ### Key Benefits
 
