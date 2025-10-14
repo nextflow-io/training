@@ -31,7 +31,7 @@ Otherwise, select a side quest from the table below.
 | Side Quest                                                        | Time Estimate for Teaching |
 | ----------------------------------------------------------------- | -------------------------- |
 | [Nextflow development environment walkthrough](./ide_features.md) | 45 mins                    |
-| [Groovy Essentials for Nextflow](./groovy_essentials.md)          | 90 mins                    |
+| [Essential Scripting Patterns for Nextflow](./essential_scripting_patterns.md) | 90 mins                    |
 | [Introduction to nf-core](./nf-core.md)                           | -                          |
 | [Metadata in workflows](./metadata.md)                            | 45 mins                    |
 | [Splitting and Grouping](./splitting_and_grouping.md)             | 45 mins                    |
