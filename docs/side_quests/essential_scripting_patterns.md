@@ -1,6 +1,6 @@
 # Essential Nextflow Scripting Patterns
 
-Nextflow is a programming language that runs on the Java Virtual Machine. While Nextflow was originally built on Groovy and shares much of its syntax, the [Nextflow language specification](https://nextflow.io/docs/latest/reference/index.html) defines Nextflow as a standalone language—making it easier to understand Nextflow on its own terms rather than as "Groovy with extensions."
+Nextflow is a programming language that runs on the Java Virtual Machine. While Nextflow is built on [Groovy](http://groovy-lang.org/) and shares much of its syntax, Nextflow is more than just "Groovy with extensions" -- it is a standalone language with a fully-specified [syntax](https://nextflow.io/docs/latest/reference/syntax.html) and [standard library](https://nextflow.io/docs/latest/reference/stdlib.html).
 
 You can write a lot of Nextflow without venturing beyond basic syntax for variables, maps, and lists. Most Nextflow tutorials focus on workflow orchestration (channels, processes, and data flow), and you can go surprisingly far with just that.
 
@@ -27,9 +27,9 @@ Before taking on this side quest you should:
 
 - Complete the [Hello Nextflow](../hello_nextflow/README.md) tutorial or have equivalent experience
 - Understand basic Nextflow concepts (processes, channels, workflows)
-- Have basic familiarity with common programming constructs used in Groovy syntax (variables, maps, lists)
+- Have basic familiarity with common programming constructs (variables, maps, lists)
 
-This tutorial will explain Groovy concepts as we encounter them, so you don't need extensive prior Groovy knowledge. We'll start with fundamental concepts and build up to advanced patterns.
+This tutorial will explain programming concepts as we encounter them, so you don't need extensive programming experience. We'll start with fundamental concepts and build up to advanced patterns.
 
 ### 0.2. Starting Point
 
@@ -86,7 +86,7 @@ Start with a simple workflow that just reads the CSV file (we've already done th
 
 ```groovy title="main.nf" linenums="1"
 workflow {
-    ch_samples = Channel.fromPath("./data/samples.csv")
+    ch_samples = channel.fromPath("./data/samples.csv")
         .splitCsv(header: true)
         .view()
 }
@@ -141,7 +141,7 @@ Here's what that map operation looks like:
 
 This is our first **closure**—an anonymous function you can pass as an argument (similar to lambdas in Python or arrow functions in JavaScript). Closures are essential for working with Nextflow operators.
 
-The closure `{ row -> return row }` takes a parameter `row` (could be any name: `item`, `sample`, etc.). You can also use the implicit variable `it` instead: `.map { return it }`, though naming parameters improves clarity.
+The closure `{ row -> return row }` takes a parameter `row` (could be any name: `item`, `sample`, etc.).
 
 When the `.map()` operator processes each channel item, it passes that item to your closure. Here, `row` holds one CSV row at a time.
 
@@ -155,7 +155,7 @@ You'll see the same output as before, because we're simply returning the input u
 
 #### Step 3: Creating a Map Data Structure
 
-Now we're going to write **scripting** inside our closure to transform each row of data. This is where we process individual data items rather than orchestrating data flow.
+Now we're going to write **scripting** logic inside our closure to transform each row of data. This is where we process individual data items rather than orchestrating data flow.
 
 === "After"
 
@@ -356,7 +356,7 @@ Now remove those println statements to restore your workflow to its previous sta
 
 #### Step 5: Combining Maps and Returning Results
 
-So far, we've only been returning what Nextflow community calls the 'meta map', and we've been ignoring the files those metadata relate to. But if you're writing Nextflow workflows, you probably want to do something with those files.
+So far, we've only been returning what the Nextflow community calls the 'meta map', and we've been ignoring the files those metadata relate to. But if you're writing Nextflow workflows, you probably want to do something with those files.
 
 Let's output a channel structure comprising a tuple of 2 elements: the enriched metadata map and the corresponding file path. This is a common pattern in Nextflow for passing data to processes.
 
@@ -374,7 +374,7 @@ Let's output a channel structure comprising a tuple of 2 elements: the enriched 
                     quality: row.quality_score.toDouble()
                 ]
                 def priority = sample_meta.quality > 40 ? 'high' : 'normal'
-                return [sample_meta + [priority: priority], file(row.file_path) ]
+                return tuple( sample_meta + [priority: priority], file(row.file_path) )
             }
             .view()
     ```
@@ -1084,7 +1084,7 @@ But what if we want to add information about when and where the processing occur
         """
     ```
 
-If you run this, you'll notice an error or unexpected behavior - Nextflow tries to interpret `$(hostname)` as a Groovy variable that doesn't exist:
+If you run this, you'll notice an error or unexpected behavior - Nextflow tries to interpret `$(hostname)` as a Nextflow variable that doesn't exist:
 
 ```console title="Error with shell variables"
 unknown recognition error type: groovyjarjarantlr4.v4.runtime.LexerNoViableAltException
@@ -1442,7 +1442,7 @@ This makes your workflows both more efficient (not over-allocating) and more rob
 
 Previously, we used `.map()` with scripting to transform channel data. Now we'll use conditional logic to control which processes execute based on data—essential for flexible workflows adapting to different sample types.
 
-Nextflow's [flow control operators](https://www.nextflow.io/docs/latest/reference/operator.html) take closures evaluated at runtime, enabling conditional logic to drive workflow decisions based on channel content.
+Nextflow's [dataflow operators](https://www.nextflow.io/docs/latest/reference/operator.html) take closures evaluated at runtime, enabling conditional logic to drive workflow decisions based on channel content.
 
 ### 5.1. Routing with `.branch()`
 
@@ -1658,7 +1658,7 @@ ERROR ~ Cannot invoke method toUpperCase() on null object
  -- Check script 'main.nf' at line: 13 or see '.nextflow.log' file for more details
 ```
 
-The problem is that `row.run_id` returns `null` because the `run_id` column doesn't exist in our CSV. When we try to call `.toUpperCase()` on `null`, it crashes. This is where Groovy's safe navigation operator saves the day.
+The problem is that `row.run_id` returns `null` because the `run_id` column doesn't exist in our CSV. When we try to call `.toUpperCase()` on `null`, it crashes. This is where the safe navigation operator saves the day.
 
 ### 6.2. Safe Navigation Operator (`?.`)
 
@@ -1704,7 +1704,7 @@ No crash! The workflow now handles the missing field gracefully. When `row.run_i
 
 ### 6.3. Elvis Operator (`?:`) for Defaults
 
-The Elvis operator (`?:`) provides default values when the left side is `null` (or empty, in Groovy's "truth" evaluation). It's named after Elvis Presley because `?:` looks like his famous hair and eyes when viewed sideways!
+The Elvis operator (`?:`) provides default values when the left side is "falsy" (as explained previously). It's named after Elvis Presley because `?:` looks like his famous hair and eyes when viewed sideways!
 
 Now that we're using safe navigation, `run_id` will be `null` for samples without that field. Let's use the Elvis operator to provide a default value and add it to our `sample_meta` map:
 
@@ -1797,7 +1797,7 @@ These operators make workflows resilient to incomplete data - essential for real
 
 ## 7. Validation with `error()` and `log.warn`
 
-Sometimes you need to stop the workflow immediately if input parameters are invalid. While `error()` and `log.warn` are Nextflow-provided functions, the **validation logic itself uses standard programming constructs**—conditionals (`if`, `!`), boolean logic, and methods like `.exists()`. Let's add validation to our workflow.
+Sometimes you need to stop the workflow immediately if input parameters are invalid. In Nextflow, you can use built-in functions like `error()` and `log.warn`, as well as standard programming constructs like `if` statements and boolean logic, to implement validation logic. Let's add validation to our workflow.
 
 Create a validation function before your workflow block, call it from the workflow, and change the channel creation to use a parameter for the CSV file path. If the parameter is missing or the file doesn't exist, call `error()` to stop execution with a clear message.
 
@@ -2247,7 +2247,7 @@ Continue practicing these patterns in your own workflows, and refer to the [Next
   }
   ```
 
-- **Essential Groovy Operators**
+- **Essential Operators**
 
   ```groovy title="Essential operators examples"
   // Safe navigation and Elvis operators
@@ -2284,7 +2284,7 @@ Continue practicing these patterns in your own workflows, and refer to the [Next
 
 ## Resources
 
-- [Nextflow Language Reference](https://nextflow.io/docs/latest/reference/index.html)
+- [Nextflow Language Reference](https://nextflow.io/docs/latest/reference/syntax.html)
 - [Nextflow Operators](https://www.nextflow.io/docs/latest/operator.html)
 - [Nextflow Script Syntax](https://www.nextflow.io/docs/latest/script.html)
-- [Groovy Documentation](http://groovy-lang.org/documentation.html) (for deeper understanding of underlying language features)
+- [Nextflow Standard Library](https://nextflow.io/docs/latest/reference/stdlib.html)
