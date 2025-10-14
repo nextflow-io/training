@@ -58,7 +58,7 @@ The `data` directory contains sample files and a main workflow file we'll evolve
 │   └── trimgalore.nf
 └── nextflow.config
 
-4 directories, 10 files
+3 directories, 10 files
 ```
 
 Our sample CSV contains information about biological samples that need different processing based on their characteristics:
@@ -139,7 +139,7 @@ Here's what that map operation looks like:
             .view()
     ```
 
-This is our first **closure**—an anonymous function you can pass as an argument (similar to lambdas in Python or arrow functions in JavaScript). Closures are essential for working with Nextflow operators.
+This is our first **closure** - an anonymous function you can pass as an argument (similar to lambdas in Python or arrow functions in JavaScript). Closures are essential for working with Nextflow operators.
 
 The closure `{ row -> return row }` takes a parameter `row` (could be any name: `item`, `sample`, etc.).
 
@@ -668,7 +668,7 @@ Make the following change to your existing `main.nf` workflow:
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="4" hl_lines="11"
+    ```groovy title="main.nf" linenums="4" hl_lines="10-11"
             .map { row ->
                 // Scripting for data transformation
                 def sample_meta = [
@@ -1336,7 +1336,7 @@ You should see something like:
     docker run -i --cpu-shares 4096 --memory 2048m -e "NXF_TASK_WORKDIR" -v /workspaces/training/side-quests/essential_scripting_patterns:/workspaces/training/side-quests/essential_scripting_patterns -w "$NXF_TASK_WORKDIR" --name $NXF_BOXID community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690 /bin/bash -ue /workspaces/training/side-quests/essential_scripting_patterns/work/48/6db0c9e9d8aa65e4bb4936cd3bd59e/.command.sh
 ```
 
-In this example we've chosen an example that requested 4 CPUs (`--cpu-shares 4096`), because it was a high-depth sample, but you should see different CPU allocations depending on the sample depth. Try this for the other tasks as well.
+In this example we've chosen an example that requested 2 CPUs (`--cpu-shares 2048`), because it was a high-depth sample, but you should see different CPU allocations depending on the sample depth. Try this for the other tasks as well.
 
 Another powerful pattern is using `task.attempt` for retry strategies. To show why this is useful, we're going to start by reducing the memory allocation to FASTP to less than it needs. Change the `memory` directive in `modules/fastp.nf` to `1.GB`:
 
@@ -1530,7 +1530,7 @@ Add the following before the branch operation:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="28" hl_lines="11"
+    ```groovy title="main.nf" linenums="28" hl_lines="5-11"
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map(separateMetadata)
@@ -1571,14 +1571,18 @@ nextflow run main.nf
 Because we've chosen a filter that excludes some samples, you should see fewer tasks executed:
 
 ```console title="Filtered samples results"
- N E X T F L O W   ~  version 25.04.3
-
-Launching `main.nf` [deadly_woese] DSL2 - revision: 9a6044a969
-
-executor >  local (5)
-[01/7b1483] process > FASTP (2)           [100%] 2 of 2 ✔
-[-        ] process > TRIMGALORE          -
-[07/ef53af] process > GENERATE_REPORT (3) [100%] 3 of 3 ✔
+N E X T F L O W  ~  version 25.04.3
+Launching `main.nf` [lonely_williams] DSL2 - revision: d0b3f121ec
+[94/b48eac] Submitted process > FASTP (2)
+[2c/d2b28f] Submitted process > GENERATE_REPORT (2)
+[65/2e3be4] Submitted process > GENERATE_REPORT (1)
+[94/b48eac] NOTE: Process `FASTP (2)` terminated with an error exit status (137) -- Execution is retried (1)
+[3e/0d8664] Submitted process > TRIMGALORE (1)
+[6a/9137b0] Submitted process > FASTP (1)
+[6a/9137b0] NOTE: Process `FASTP (1)` terminated with an error exit status (137) -- Execution is retried (1)
+[83/577ac0] Submitted process > GENERATE_REPORT (3)
+[a2/5117de] Re-submitted process > FASTP (1)
+[1f/a1a4ca] Re-submitted process > FASTP (2)
 ```
 
 The filter expression `meta.id && meta.organism && meta.depth >= 25000000` combines truthiness with explicit comparisons:
