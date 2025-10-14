@@ -92,7 +92,7 @@ workflow {
 }
 ```
 
-The `workflow` block defines our pipeline structure, while `Channel.fromPath()` creates a channel from a file path. The `.splitCsv()` operator processes the CSV file and converts each row into a map data structure.
+The `workflow` block defines our pipeline structure, while `channel.fromPath()` creates a channel from a file path. The `.splitCsv()` operator processes the CSV file and converts each row into a map data structure.
 
 Run this workflow to see the raw CSV data:
 
@@ -123,7 +123,7 @@ Here's what that map operation looks like:
 === "After"
 
     ```groovy title="main.nf" linenums="2" hl_lines="3-6"
-        ch_samples = Channel.fromPath("./data/samples.csv")
+        ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row ->
                 return row
@@ -134,7 +134,7 @@ Here's what that map operation looks like:
 === "Before"
 
     ```groovy title="main.nf" linenums="2" hl_lines="3"
-        ch_samples = Channel.fromPath("./data/samples.csv")
+        ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .view()
     ```
@@ -160,7 +160,7 @@ Now we're going to write **scripting** logic inside our closure to transform eac
 === "After"
 
     ```groovy title="main.nf" linenums="2" hl_lines="4-12"
-        ch_samples = Channel.fromPath("./data/samples.csv")
+        ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row ->
                 // Scripting for data transformation
@@ -179,7 +179,7 @@ Now we're going to write **scripting** logic inside our closure to transform eac
 === "Before"
 
     ```groovy title="main.nf" linenums="2" hl_lines="4"
-        ch_samples = Channel.fromPath("./data/samples.csv")
+        ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row ->
                 return row
@@ -214,7 +214,7 @@ Make the following change:
 === "After"
 
     ```groovy title="main.nf" linenums="2" hl_lines="11-12"
-        ch_samples = Channel.fromPath("./data/samples.csv")
+        ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row ->
                 def sample_meta = [
@@ -233,7 +233,7 @@ Make the following change:
 === "Before"
 
     ```groovy title="main.nf" linenums="2" hl_lines="11"
-        ch_samples = Channel.fromPath("./data/samples.csv")
+        ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row ->
                 def sample_meta = [
@@ -281,7 +281,7 @@ Let's add a line to create a simplified version of our metadata that only contai
 === "After"
 
     ```groovy title="main.nf" linenums="2" hl_lines="12-15"
-        ch_samples = Channel.fromPath("./data/samples.csv")
+        ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row ->
                 // Scripting for data transformation
@@ -304,7 +304,7 @@ Let's add a line to create a simplified version of our metadata that only contai
 === "Before"
 
     ```groovy title="main.nf" linenums="2" hl_lines="12"
-        ch_samples = Channel.fromPath("./data/samples.csv")
+        ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row ->
                 // Scripting for data transformation
@@ -363,7 +363,7 @@ Let's output a channel structure comprising a tuple of 2 elements: the enriched 
 === "After"
 
     ```groovy title="main.nf" linenums="2" hl_lines="12"
-        ch_samples = Channel.fromPath("./data/samples.csv")
+        ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row ->
                 def sample_meta = [
@@ -382,7 +382,7 @@ Let's output a channel structure comprising a tuple of 2 elements: the enriched 
 === "Before"
 
     ```groovy title="main.nf" linenums="2" hl_lines="12"
-        ch_samples = Channel.fromPath("./data/samples.csv")
+        ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row ->
                 def sample_meta = [
@@ -418,7 +418,7 @@ This `[meta, file]` tuple structure is a common pattern in Nextflow for passing 
 
     **Maps and Metadata**: Maps are fundamental to working with metadata in Nextflow. For a more detailed explanation of working with metadata maps, see the [Working with metadata](./metadata.md) side quest.
 
-Our workflow demonstrates the core pattern: **dataflow operations** (`workflow`, `Channel.fromPath()`, `.splitCsv()`, `.map()`, `.view()`) orchestrate how data moves through the pipeline, while **scripting** (maps `[key: value]`, string methods, type conversions, ternary operators) inside the `.map()` closure handles the transformation of individual data items.
+Our workflow demonstrates the core pattern: **dataflow operations** (`workflow`, `channel.fromPath()`, `.splitCsv()`, `.map()`, `.view()`) orchestrate how data moves through the pipeline, while **scripting** (maps `[key: value]`, string methods, type conversions, ternary operators) inside the `.map()` closure handles the transformation of individual data items.
 
 ### 1.2. Understanding Different Types: Channel vs Iterable
 
@@ -431,11 +431,11 @@ Let's demonstrate this with some sample data, starting by refreshing ourselves o
 ```groovy title="collect.nf" linenums="1"
 def sample_ids = ['sample_001', 'sample_002', 'sample_003']
 
-// Channel.collect() - groups multiple channel emissions into one
-ch_input = Channel.fromList(sample_ids)
-ch_input.view { "Individual channel item: ${it}" }
+// channel.collect() - groups multiple channel emissions into one
+ch_input = channel.fromList(sample_ids)
+ch_input.view { sample -> "Individual channel item: ${sample}" }
 ch_collected = ch_input.collect()
-ch_collected.view { "Channel.collect() result: ${it} (${it.size()} items grouped into 1)" }
+ch_collected.view { list -> "channel.collect() result: ${list} (${list.size()} items grouped into 1)" }
 ```
 
 Steps:
@@ -462,7 +462,7 @@ Launching `collect.nf` [loving_mendel] DSL2 - revision: e8d054a46e
 Individual channel item: sample_001
 Individual channel item: sample_002
 Individual channel item: sample_003
-Channel.collect() result: [sample_001, sample_002, sample_003] (3 items grouped into 1)
+channel.collect() result: [sample_001, sample_002, sample_003] (3 items grouped into 1)
 ```
 
 `view()` returns an output for every channel emission, so we know that this single output contains all 3 original items grouped into one list.
@@ -474,11 +474,11 @@ Now let's see the `collect` method on an Iterable type in action. Modify `collec
     ```groovy title="main.nf" linenums="1" hl_lines="9-13"
     def sample_ids = ['sample_001', 'sample_002', 'sample_003']
 
-    // Channel.collect() - groups multiple channel emissions into one
-    ch_input = Channel.fromList(sample_ids)
-    ch_input.view { "Individual channel item: ${it}" }
+    // channel.collect() - groups multiple channel emissions into one
+    ch_input = channel.fromList(sample_ids)
+    ch_input.view { sample -> "Individual channel item: ${sample}" }
     ch_collected = ch_input.collect()
-    ch_collected.view { "Channel.collect() result: ${it} (${it.size()} items grouped into 1)" }
+    ch_collected.view { list -> "channel.collect() result: ${list} (${list.size()} items grouped into 1)" }
 
     // Iterable.collect() - transforms each element, preserves structure
     def formatted_ids = sample_ids.collect { id ->
@@ -492,11 +492,11 @@ Now let's see the `collect` method on an Iterable type in action. Modify `collec
     ```groovy title="main.nf" linenums="1"
     def sample_ids = ['sample_001', 'sample_002', 'sample_003']
 
-    // Channel.collect() - groups multiple channel emissions into one
-    ch_input = Channel.fromList(sample_ids)
-    ch_input.view { "Individual channel item: ${it}" }
+    // channel.collect() - groups multiple channel emissions into one
+    ch_input = channel.fromList(sample_ids)
+    ch_input.view { sample -> "Individual channel item: ${sample}" }
     ch_collected = ch_input.collect()
-    ch_collected.view { "Channel.collect() result: ${it} (${it.size()} items grouped into 1)" }
+    ch_collected.view { list -> "channel.collect() result: ${list} (${list.size()} items grouped into 1)" }
     ```
 
 In this new snippet we:
@@ -519,7 +519,7 @@ Iterable.collect() result: [SPECIMEN_001, SPECIMEN_002, SPECIMEN_003] (3 items t
 Individual channel item: sample_001
 Individual channel item: sample_002
 Individual channel item: sample_003
-Channel.collect() result: [sample_001, sample_002, sample_003] (3 items grouped into 1)
+channel.collect() result: [sample_001, sample_002, sample_003] (3 items grouped into 1)
 ```
 
 This time, we have NOT changed the structure of the data, we still have 3 items in the list, but we HAVE transformed each item using the Iterable's `collect` method to produce a new list with modified values. This is similar to using the `map` operator on a Channel, but it's operating on a List data structure rather than a channel.
@@ -537,11 +537,11 @@ Let's add a demonstration to our `collect.nf` file:
     ```groovy title="collect.nf" linenums="1" hl_lines="15-18"
     def sample_ids = ['sample_001', 'sample_002', 'sample_003']
 
-    // Channel.collect() - groups multiple channel emissions into one
-    ch_input = Channel.fromList(sample_ids)
-    ch_input.view { "Individual channel item: ${it}" }
+    // channel.collect() - groups multiple channel emissions into one
+    ch_input = channel.fromList(sample_ids)
+    ch_input.view { sample -> "Individual channel item: ${sample}" }
     ch_collected = ch_input.collect()
-    ch_collected.view { "Channel.collect() result: ${it} (${it.size()} items grouped into 1)" }
+    ch_collected.view { list -> "channel.collect() result: ${list} (${list.size()} items grouped into 1)" }
 
     // Iterable.collect() - transforms each element, preserves structure
     def formatted_ids = sample_ids.collect { id ->
@@ -560,11 +560,11 @@ Let's add a demonstration to our `collect.nf` file:
     ```groovy title="collect.nf" linenums="1"
     def sample_ids = ['sample_001', 'sample_002', 'sample_003']
 
-    // Channel.collect() - groups multiple channel emissions into one
-    ch_input = Channel.fromList(sample_ids)
-    ch_input.view { "Individual channel item: ${it}" }
+    // channel.collect() - groups multiple channel emissions into one
+    ch_input = channel.fromList(sample_ids)
+    ch_input.view { sample -> "Individual channel item: ${sample}" }
     ch_collected = ch_input.collect()
-    ch_collected.view { "Channel.collect() result: ${it} (${it.size()} items grouped into 1)" }
+    ch_collected.view { list -> "channel.collect() result: ${list} (${list.size()} items grouped into 1)" }
 
     // Iterable.collect() - transforms each element, preserves structure
     def formatted_ids = sample_ids.collect { id ->
@@ -591,7 +591,7 @@ Spread operator result: [s1, s2, s3]
 Individual channel item: sample_001
 Individual channel item: sample_002
 Individual channel item: sample_003
-Channel.collect() result: [sample_001, sample_002, sample_003] (3 items grouped into 1)
+channel.collect() result: [sample_001, sample_002, sample_003] (3 items grouped into 1)
 ```
 
 The spread operator `*.` is a shorthand for a common collect pattern:
@@ -662,7 +662,7 @@ Make the following change to your existing `main.nf` workflow:
                 ] : [:]
 
                 def priority = sample_meta.quality > 40 ? 'high' : 'normal'
-                return [sample_meta + file_meta + [priority: priority], fastq_path]
+                return tuple(sample_meta + file_meta + [priority: priority], fastq_path)
             }
     ```
 
@@ -679,7 +679,7 @@ Make the following change to your existing `main.nf` workflow:
                     quality: row.quality_score.toDouble()
                 ]
                 def priority = sample_meta.quality > 40 ? 'high' : 'normal'
-                return [sample_meta + [priority: priority], file(row.file_path)]
+                return tuple(sample_meta + [priority: priority], file(row.file_path))
             }
     ```
 
@@ -765,7 +765,7 @@ Then modify the `workflow` block to connect the `ch_samples` channel to the `FAS
     ```groovy title="main.nf" linenums="25" hl_lines="27"
     workflow {
 
-        ch_samples = Channel.fromPath("./data/samples.csv")
+        ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row ->
                 def sample_meta = [
@@ -786,7 +786,7 @@ Then modify the `workflow` block to connect the `ch_samples` channel to the `FAS
                 ] : [:]
 
                 def priority = sample_meta.quality > 40 ? 'high' : 'normal'
-                return [sample_meta + file_meta + [priority: priority], fastq_path]
+                return tuple(sample_meta + file_meta + [priority: priority], fastq_path)
             }
 
         ch_fastp = FASTP(ch_samples)
@@ -798,7 +798,7 @@ Then modify the `workflow` block to connect the `ch_samples` channel to the `FAS
     ```groovy title="main.nf" linenums="25" hl_lines="26"
     workflow {
 
-        ch_samples = Channel.fromPath("./data/samples.csv")
+        ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row ->
                 def sample_meta = [
@@ -994,7 +994,7 @@ Include the process in your `main.nf` and add it to the workflow:
     include { GENERATE_REPORT } from './modules/generate_report.nf'
 
     workflow {
-        ch_samples = Channel.fromPath("./data/samples.csv")
+        ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row ->
                 def sample_meta = [
@@ -1015,7 +1015,7 @@ Include the process in your `main.nf` and add it to the workflow:
                 ] : [:]
 
                 def priority = sample_meta.quality > 40 ? 'high' : 'normal'
-                return [sample_meta + file_meta + [priority: priority], fastq_path]
+                return tuple(sample_meta + file_meta + [priority: priority], fastq_path)
             }
 
         ch_fastp = FASTP(ch_samples)
@@ -1029,7 +1029,7 @@ Include the process in your `main.nf` and add it to the workflow:
     include { FASTP } from './modules/fastp.nf'
 
     workflow {
-        ch_samples = Channel.fromPath("./data/samples.csv")
+        ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row ->
                 def sample_meta = [
@@ -1050,7 +1050,7 @@ Include the process in your `main.nf` and add it to the workflow:
                 ] : [:]
 
                 def priority = sample_meta.quality > 40 ? 'high' : 'normal'
-                return [sample_meta + file_meta + [priority: priority], fastq_path]
+                return tuple(sample_meta + file_meta + [priority: priority], fastq_path)
             }
 
         ch_fastp = FASTP(ch_samples)
@@ -1177,11 +1177,11 @@ To illustrate what that looks like with our existing workflow, make the modifica
         ] : [:]
 
         def priority = sample_meta.quality > 40 ? 'high' : 'normal'
-        return [sample_meta + file_meta + [priority: priority], fastq_path]
+        return tuple(sample_meta + file_meta + [priority: priority], fastq_path)
     }
 
     workflow {
-        ch_samples = Channel.fromPath("./data/samples.csv")
+        ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map{ row -> separateMetadata(row) }
 
@@ -1197,7 +1197,7 @@ To illustrate what that looks like with our existing workflow, make the modifica
     include { GENERATE_REPORT } from './modules/generate_report.nf'
 
     workflow {
-        ch_samples = Channel.fromPath("./data/samples.csv")
+        ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row ->
                 def sample_meta = [
@@ -1218,7 +1218,7 @@ To illustrate what that looks like with our existing workflow, make the modifica
                 ] : [:]
 
                 def priority = sample_meta.quality > 40 ? 'high' : 'normal'
-                return [sample_meta + file_meta + [priority: priority], fastq_path]
+                return tuple(sample_meta + file_meta + [priority: priority], fastq_path)
             }
 
         ch_fastp = FASTP(ch_samples)
@@ -1229,7 +1229,7 @@ To illustrate what that looks like with our existing workflow, make the modifica
 By extracting this logic into a function, we've reduced the actual workflow logic down to something much cleaner:
 
 ```groovy title="minimal workflow"
-    ch_samples = Channel.fromPath("./data/samples.csv")
+    ch_samples = channel.fromPath("./data/samples.csv")
         .splitCsv(header: true)
         .map{ row -> separateMetadata(row) }
 
@@ -1470,7 +1470,7 @@ Include the new from in `modules/trimgalore.nf`:
 === "After"
 
     ```groovy title="main.nf" linenums="28" hl_lines="5-12"
-        ch_samples = Channel.fromPath("./data/samples.csv")
+        ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map(separateMetadata)
 
@@ -1488,7 +1488,7 @@ Include the new from in `modules/trimgalore.nf`:
 === "Before"
 
     ```groovy title="main.nf" linenums="28" hl_lines="5"
-        ch_samples = Channel.fromPath("./data/samples.csv")
+        ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map(separateMetadata)
 
@@ -1531,7 +1531,7 @@ Add the following before the branch operation:
 === "After"
 
     ```groovy title="main.nf" linenums="28" hl_lines="11"
-        ch_samples = Channel.fromPath("./data/samples.csv")
+        ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map(separateMetadata)
 
@@ -1551,7 +1551,7 @@ Add the following before the branch operation:
 === "Before"
 
     ```groovy title="main.nf" linenums="28" hl_lines="5"
-        ch_samples = Channel.fromPath("./data/samples.csv")
+        ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map(separateMetadata)
 
@@ -1742,7 +1742,7 @@ Also add a `view()` operator in the workflow to see the results:
 === "After"
 
     ```groovy title="main.nf" linenums="30" hl_lines="4"
-        ch_samples = Channel.fromPath("./data/samples.csv")
+        ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map{ row -> separateMetadata(row) }
             .view()
@@ -1751,7 +1751,7 @@ Also add a `view()` operator in the workflow to see the results:
 === "Before"
 
     ```groovy title="main.nf" linenums="30"
-        ch_samples = Channel.fromPath("./data/samples.csv")
+        ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map{ row -> separateMetadata(row) }
     ```
@@ -1822,7 +1822,7 @@ Create a validation function before your workflow block, call it from the workfl
     ...
     workflow {
         validateInputs()
-        ch_samples = Channel.fromPath(params.input)
+        ch_samples = channel.fromPath(params.input)
     ```
 
 === "Before"
@@ -1834,7 +1834,7 @@ Create a validation function before your workflow block, call it from the workfl
 
     ...
     workflow {
-        ch_samples = Channel.fromPath("./data/samples.csv")
+        ch_samples = channel.fromPath("./data/samples.csv")
     ```
 
 Now try running without the CSV file:
@@ -1890,7 +1890,7 @@ You can also add validation within the `separateMetadata` function. Let's use th
             log.warn "Low sequencing depth for ${sample_meta.id}: ${sample_meta.depth}"
         }
 
-        return [sample_meta + file_meta + [priority: priority], fastq_path]
+        return tuple(sample_meta + file_meta + [priority: priority], fastq_path)
     }
     ```
 
@@ -1899,7 +1899,7 @@ You can also add validation within the `separateMetadata` function. Let's use th
     ```groovy title="main.nf" linenums="1"
         def priority = sample_meta.quality > 40 ? 'high' : 'normal'
 
-        return [sample_meta + file_meta + [priority: priority], fastq_path]
+        return tuple(sample_meta + file_meta + [priority: priority], fastq_path)
     }
     ```
 
@@ -2210,7 +2210,7 @@ Continue practicing these patterns in your own workflows, and refer to the [Next
 
   ```groovy title="Dataflow vs Scripting examples"
   // Dataflow: channel orchestration
-  Channel.fromPath('*.fastq').splitCsv(header: true)
+  channel.fromPath('*.fastq').splitCsv(header: true)
 
   // Scripting: data processing on collections
   sample_data.collect { it.toUpperCase() }

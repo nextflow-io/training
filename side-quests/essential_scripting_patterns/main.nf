@@ -1,5 +1,5 @@
 workflow {
-    ch_samples = Channel.fromPath("./data/samples.csv")
+    ch_samples = channel.fromPath("./data/samples.csv")
         .splitCsv(header: true)
         .view()
 }

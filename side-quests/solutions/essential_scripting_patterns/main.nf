@@ -41,13 +41,13 @@ def separateMetadata(row) {
         log.warn "Low sequencing depth for ${sample_meta.id}: ${sample_meta.depth}"
     }
 
-    return [sample_meta + file_meta + [priority: priority], fastq_path]
+    return tuple(sample_meta + file_meta + [priority: priority], fastq_path)
 }
 
 workflow {
     validateInputs()
 
-    ch_samples = Channel.fromPath(params.input)
+    ch_samples = channel.fromPath(params.input)
         .splitCsv(header: true)
         .map{ row -> separateMetadata(row) }
 
