@@ -1321,6 +1321,17 @@
         <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/0.devpt/side_quests/dev_environment/"/>
     </url>
     <url>
+        <loc>https://training.nextflow.io/0.dev/side_quests/essential_scripting_patterns/</loc>
+        <lastmod>2025-10-15</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/0.dev/side_quests/essential_scripting_patterns/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/0.deves/side_quests/essential_scripting_patterns/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/0.devfr/side_quests/essential_scripting_patterns/"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://training.nextflow.io/0.devit/side_quests/essential_scripting_patterns/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://training.nextflow.io/0.devko/side_quests/essential_scripting_patterns/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/0.devpt/side_quests/essential_scripting_patterns/"/>
+    </url>
+    <url>
         <loc>https://training.nextflow.io/0.dev/side_quests/if_else/</loc>
         <lastmod>2025-10-15</lastmod>
         <changefreq>daily</changefreq>
@@ -2758,6 +2769,17 @@
         <xhtml:link rel="alternate" hreflang="ko" href="https://training.nextflow.io/0.devko/side_quests/dev_environment/"/>
     </url>
     <url>
+        <loc>https://training.nextflow.io/0.dev/pt/side_quests/essential_scripting_patterns/</loc>
+        <lastmod>2025-10-15</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/0.dev/pt/side_quests/essential_scripting_patterns/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/0.devside_quests/essential_scripting_patterns/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/0.deves/side_quests/essential_scripting_patterns/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/0.devfr/side_quests/essential_scripting_patterns/"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://training.nextflow.io/0.devit/side_quests/essential_scripting_patterns/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://training.nextflow.io/0.devko/side_quests/essential_scripting_patterns/"/>
+    </url>
+    <url>
         <loc>https://training.nextflow.io/0.dev/pt/side_quests/if_else/</loc>
         <lastmod>2025-10-15</lastmod>
         <changefreq>daily</changefreq>
@@ -4186,6 +4208,17 @@
         <xhtml:link rel="alternate" hreflang="it" href="https://training.nextflow.io/0.devit/side_quests/dev_environment/"/>
         <xhtml:link rel="alternate" hreflang="ko" href="https://training.nextflow.io/0.devko/side_quests/dev_environment/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/0.devpt/side_quests/dev_environment/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/0.dev/es/side_quests/essential_scripting_patterns/</loc>
+        <lastmod>2025-10-15</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/0.dev/es/side_quests/essential_scripting_patterns/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/0.devside_quests/essential_scripting_patterns/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/0.devfr/side_quests/essential_scripting_patterns/"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://training.nextflow.io/0.devit/side_quests/essential_scripting_patterns/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://training.nextflow.io/0.devko/side_quests/essential_scripting_patterns/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/0.devpt/side_quests/essential_scripting_patterns/"/>
     </url>
     <url>
         <loc>https://training.nextflow.io/0.dev/es/side_quests/if_else/</loc>
@@ -5625,6 +5658,17 @@
         <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/0.devpt/side_quests/dev_environment/"/>
     </url>
     <url>
+        <loc>https://training.nextflow.io/0.dev/fr/side_quests/essential_scripting_patterns/</loc>
+        <lastmod>2025-10-15</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/0.dev/fr/side_quests/essential_scripting_patterns/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/0.devside_quests/essential_scripting_patterns/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/0.deves/side_quests/essential_scripting_patterns/"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://training.nextflow.io/0.devit/side_quests/essential_scripting_patterns/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://training.nextflow.io/0.devko/side_quests/essential_scripting_patterns/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/0.devpt/side_quests/essential_scripting_patterns/"/>
+    </url>
+    <url>
         <loc>https://training.nextflow.io/0.dev/fr/side_quests/if_else/</loc>
         <lastmod>2025-10-15</lastmod>
         <changefreq>daily</changefreq>
@@ -7055,6 +7099,17 @@
         <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/0.devpt/side_quests/dev_environment/"/>
     </url>
     <url>
+        <loc>https://training.nextflow.io/0.dev/it/side_quests/essential_scripting_patterns/</loc>
+        <lastmod>2025-10-15</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="it" href="https://training.nextflow.io/0.dev/it/side_quests/essential_scripting_patterns/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/0.devside_quests/essential_scripting_patterns/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/0.deves/side_quests/essential_scripting_patterns/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/0.devfr/side_quests/essential_scripting_patterns/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://training.nextflow.io/0.devko/side_quests/essential_scripting_patterns/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/0.devpt/side_quests/essential_scripting_patterns/"/>
+    </url>
+    <url>
         <loc>https://training.nextflow.io/0.dev/it/side_quests/if_else/</loc>
         <lastmod>2025-10-15</lastmod>
         <changefreq>daily</changefreq>
@@ -8483,6 +8538,17 @@
         <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/0.devfr/side_quests/dev_environment/"/>
         <xhtml:link rel="alternate" hreflang="it" href="https://training.nextflow.io/0.devit/side_quests/dev_environment/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/0.devpt/side_quests/dev_environment/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/0.dev/ko/side_quests/essential_scripting_patterns/</loc>
+        <lastmod>2025-10-15</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://training.nextflow.io/0.dev/ko/side_quests/essential_scripting_patterns/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/0.devside_quests/essential_scripting_patterns/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/0.deves/side_quests/essential_scripting_patterns/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/0.devfr/side_quests/essential_scripting_patterns/"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://training.nextflow.io/0.devit/side_quests/essential_scripting_patterns/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/0.devpt/side_quests/essential_scripting_patterns/"/>
     </url>
     <url>
         <loc>https://training.nextflow.io/0.dev/ko/side_quests/if_else/</loc>
