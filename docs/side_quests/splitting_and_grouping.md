@@ -100,7 +100,7 @@ Apply these changes to `main.nf`:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="3-5"
+    ```groovy title="main.nf" linenums="2" hl_lines="2-6"
         ch_samples = Channel.fromPath("./data/samplesheet.csv")
             .splitCsv(header: true)
             .map{ row ->
