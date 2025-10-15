@@ -29,8 +29,7 @@ Before taking on this side quest you should:
 
 - Complete the [Hello Nextflow](../hello_nextflow/README.md) tutorial
 - Understand basic Nextflow concepts (processes, channels, operators, working with files, meta data)
-
-You may also find it useful to review [Working with metadata](./metadata.md) before starting here, as it covers in detail how to work with metadata associated with files in your workflows.
+- **Recommended:** Complete [Metadata in workflows](./metadata.md) first, as it teaches the fundamentals of reading CSV files with `splitCsv` and creating meta maps - patterns we'll build upon here
 
 ### 0.2. Starting Point
 
@@ -72,9 +71,9 @@ We're going to read in samplesheet.csv, then group and split the samples based o
 
 ## 1. Read in sample data
 
-### 1.1. Read in sample data with splitCsv
+### 1.1. Read in sample data with splitCsv and create meta maps
 
-Let's start by reading in the sample data with `splitCsv`. In the `main.nf`, you'll see that we've already started the workflow.
+Let's start by reading in the sample data with `splitCsv` and organizing it into the meta map pattern. In the `main.nf`, you'll see that we've already started the workflow.
 
 ```groovy title="main.nf" linenums="1" hl_lines="2"
 workflow {
@@ -86,7 +85,7 @@ workflow {
 
     Throughout this tutorial, we'll use the `ch_` prefix for all channel variables to clearly indicate they are Nextflow channels.
 
-We can use the [`splitCsv` operator](https://www.nextflow.io/docs/latest/operator.html#splitcsv) to split the data into a channel of maps (key/ value pairs), where each map represents a row from the CSV file.
+If you completed the [Metadata in workflows](./metadata.md) side quest, you'll recognize this pattern. We'll use `splitCsv` to read the CSV and immediately structure the data with a meta map to separate metadata from file paths.
 
 !!!Note
 
@@ -101,60 +100,6 @@ Apply these changes to `main.nf`:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="1-3"
-        ch_samples = Channel.fromPath("./data/samplesheet.csv")
-            .splitCsv(header: true)
-            .view()
-    ```
-
-=== "Before"
-
-    ```groovy title="main.nf" linenums="2" hl_lines="1"
-        ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
-    ```
-
-`splitCsv` takes the file passed to it from the channel factory and the `header: true` option tells Nextflow to use the first row of the CSV file as the header row, which will be used as keys for the values. We're using the `view` operator you should have encountered before to examine the output this gives us.
-
-Run the pipeline:
-
-```bash title="Test the splitCsv operation"
-nextflow run main.nf
-```
-
-```console title="Read data with splitCsv"
- N E X T F L O W   ~  version 25.04.3
-
-Launching `main.nf` [deadly_mercator] DSL2 - revision: bd6b0224e9
-
-[id:patientA, repeat:1, type:normal, bam:patientA_rep1_normal.bam]
-[id:patientA, repeat:1, type:tumor, bam:patientA_rep1_tumor.bam]
-[id:patientA, repeat:2, type:normal, bam:patientB_rep1_normal.bam]
-[id:patientA, repeat:2, type:tumor, bam:patientB_rep1_tumor.bam]
-[id:patientB, repeat:1, type:normal, bam:patientC_rep1_normal.bam]
-[id:patientB, repeat:1, type:tumor, bam:patientC_rep1_tumor.bam]
-[id:patientC, repeat:1, type:normal, bam:patientD_rep1_normal.bam]
-[id:patientC, repeat:1, type:tumor, bam:patientD_rep1_tumor.bam]
-```
-
-Each row from the CSV file has become a single item in the channel, with each item being a map with keys matching the header row.
-
-You should be able to see that each map contains:
-
-- `id`: The patient identifier (patientA, patientB, patientC)
-- `repeat`: The replicate number (1 or 2)
-- `type`: The sample type (normal or tumor)
-- `bam`: Path to the BAM file
-
-This format makes it easy to access specific fields from each sample via their keys in the map. We can access the BAM file path with the `bam` key, but also any of the 'metadata' fields that describe the file via `id`, `repeat`, `type`.
-
-!!!Note
-
-    For a more extensive introduction on working with metadata, you can work through the training [Working with metadata](./metadata.md)
-
-Let's separate the metadata from the files. We can do this with a `map` operation:
-
-=== "After"
-
     ```groovy title="main.nf" linenums="2" hl_lines="3-5"
         ch_samples = Channel.fromPath("./data/samplesheet.csv")
             .splitCsv(header: true)
@@ -166,19 +111,17 @@ Let's separate the metadata from the files. We can do this with a `map` operatio
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="2"
-        ch_samples = Channel.fromPath("./data/samplesheet.csv")
-            .splitCsv(header: true)
-            .view()
+    ```groovy title="main.nf" linenums="2" hl_lines="1"
+        ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
     ```
 
-Apply that change and re-run the pipeline:
+This combines the `splitCsv` operation (reading the CSV with headers) and the `map` operation (structuring data as `[meta, file]` tuples) in one step. Apply that change and run the pipeline:
 
-```bash title="Test the metadata separation"
+```bash title="Verify the data structure"
 nextflow run main.nf
 ```
 
-```console title="Sample data with separated metadata"
+```console title="Sample data with meta maps"
  N E X T F L O W   ~  version 25.04.3
 
 Launching `main.nf` [deadly_mercator] DSL2 - revision: bd6b0224e9
@@ -193,15 +136,7 @@ Launching `main.nf` [deadly_mercator] DSL2 - revision: bd6b0224e9
 [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
 ```
 
-We separated the sample meta data from the files into a map.
-We now have a channel of maps and files, each representing a row from the input sample sheet, which we will use in this training to split and group our workload.
-
-### Takeaway
-
-In this section, you've learned:
-
-- **Reading in a data sheet**: How to read in data sheet with `splitCsv`
-- **Combining patient-specific information**: Using groovy maps to hold information about a patient
+We now have a channel where each item is a `[meta, file]` tuple - metadata separated from file paths. This structure allows us to split and group our workload based on metadata fields.
 
 ---
 
@@ -386,14 +321,14 @@ nextflow run main.nf
 
 Launching `main.nf` [maniac_boltzmann] DSL2 - revision: 3636b6576b
 
-Tumour sample: [[id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
-Tumour sample: [[id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
+Tumor sample: [[id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
+Tumor sample: [[id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
 Normal sample: [[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
 Normal sample: [[id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
 Normal sample: [[id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]
 Normal sample: [[id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
-Tumour sample: [[id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
-Tumour sample: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
+Tumor sample: [[id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
+Tumor sample: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
 ```
 
 We can see that the `id` field is the first element in each meta map. For `join` to work, we should isolate the `id` field in each tuple. After that, we can simply use the `join` operator to combine the two channels.
@@ -437,12 +372,12 @@ nextflow run main.nf
 
 Launching `main.nf` [mad_lagrange] DSL2 - revision: 9940b3f23d
 
-Tumour sample: [patientA, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
-Tumour sample: [patientA, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
+Tumor sample: [patientA, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
+Tumor sample: [patientA, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
 Normal sample: [patientA, [id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
 Normal sample: [patientA, [id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
-Tumour sample: [patientB, [id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
-Tumour sample: [patientC, [id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
+Tumor sample: [patientB, [id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
+Tumor sample: [patientC, [id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
 Normal sample: [patientB, [id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]
 Normal sample: [patientC, [id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
 ```
@@ -457,7 +392,7 @@ Once again, we will use `view` to print the joined outputs.
         ch_normal_samples = ch_samples
             .filter { meta, file -> meta.type == 'normal' }
             .map { meta, file -> [meta.id, meta, file] }
-        ch_tumor_samples = ch_sample
+        ch_tumor_samples = ch_samples
             .filter { meta, file -> meta.type == 'tumor' }
             .map { meta, file -> [meta.id, meta, file] }
         ch_joined_samples = ch_normal_samples
@@ -541,7 +476,7 @@ Let's start by creating a new joining key. We can do this in the same way as bef
         ch_normal_samples = ch_samples
             .filter { meta, file -> meta.type == 'normal' }
             .map { meta, file -> [meta.id, meta, file] }
-        ch_tumor_samples = ch_sample
+        ch_tumor_samples = ch_samples
             .filter { meta, file -> meta.type == 'tumor' }
             .map { meta, file -> [meta.id, meta, file] }
     ```
@@ -666,10 +601,10 @@ Let's implement the closure in our workflow:
     ```groovy title="main.nf" linenums="10" hl_lines="3 6"
         ch_normal_samples = ch_samples
             .filter { meta, file -> meta.type == 'normal' }
-            .map { meta, file -> [meta.subMap(['id', 'repeat'], meta, file] }
+            .map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
         ch_tumor_samples = ch_samples
             .filter { meta, file -> meta.type == 'tumor' }
-            .map { meta, file -> [meta.subMap(['id', 'repeat'], meta, file] }
+            .map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
     ```
 
 !!! note
@@ -1127,15 +1062,15 @@ In this section, you've learned:
 
 In this side quest, you've learned how to split and group data using channels. By modifying the data as it flows through the pipeline, you can construct a pipeline that handles as many items as possible with no loops or while statements. It gracefully scales to large numbers of items. Here's what we achieved:
 
-1. **Read in samplesheet with splitCsv**: We read in a CSV file with sample data and viewed the contents.
+1. **Created structured input data**: Starting from a CSV file with meta maps (building on patterns from [Metadata in workflows](./metadata.md))
 
-2. **Use filter (and/or map) to manipulate into 2 separate channels**: We used `filter` to split the data into two channels based on the `type` field.
+2. **Split data into separate channels**: We used `filter` to divide data into independent streams based on the `type` field
 
-3. **Join on ID and repeat**: We used `join` to join the two channels on the `id` and `repeat` fields.
+3. **Joined matched samples**: We used `join` to recombine related samples based on `id` and `repeat` fields
 
-4. **Combine by intervals**: We used `combine` to create Cartesian products of samples with genomic intervals.
+4. **Distributed across intervals**: We used `combine` to create Cartesian products of samples with genomic intervals for parallel processing
 
-5. **Group by ID and interval**: We used `groupTuple` to group samples by the `id` and `interval` fields, aggregating technical replicates.
+5. **Aggregated by grouping keys**: We used `groupTuple` to collect samples sharing `id` and `interval` fields, merging technical replicates
 
 This approach offers several advantages over writing a pipeline as more standard code, such as using for and while loops:
 
@@ -1148,14 +1083,6 @@ This approach offers several advantages over writing a pipeline as more standard
 By mastering these channel operations, you can build flexible, scalable pipelines that handle complex data relationships without resorting to loops or iterative programming. This declarative approach allows Nextflow to optimize execution and parallelize independent operations automatically.
 
 ### Key Concepts
-
-- **Reading data sheets**
-
-  ```nextflow
-  // Read CSV with header
-  Channel.fromPath('samplesheet.csv')
-      .splitCsv(header: true)
-  ```
 
 - **Filtering**
 
