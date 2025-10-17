@@ -291,7 +291,7 @@ Now update the channel creation code:
         ch_samplesheet = Channel.fromList(samplesheetToList(params.input, "${projectDir}/assets/schema_input.json"))
             .map { row ->
                 // Extract just the greeting string from each row
-                row.greeting
+                row[0]
             }
 
         emit:
@@ -318,7 +318,7 @@ Let's break down what changed:
 
 1. **`samplesheetToList(params.input, "${projectDir}/assets/schema_input.json")`**: Validates the input file against our schema and returns a list
 2. **`Channel.fromList(...)`**: Converts the list into a Nextflow channel
-3. **`.map { row -> row.greeting }`**: Extracts just the greeting string from each validated row
+3. **`.map { row -> row[0] }`**: Extracts just the greeting string from each validated row (accessing the first column by index)
 
 ### 3.3. Enable parameter validation
 
@@ -386,7 +386,7 @@ executor >  local (7)
 
 Great! The pipeline runs successfully and validation passes silently.
 
-### 4.2. Test with invalid input (empty greeting)
+### 4.2. Test with invalid input (whitespace-only greeting)
 
 Now let's test that validation catches errors. Create a test file with an invalid entry:
 
@@ -399,7 +399,7 @@ Holà
 EOF
 ```
 
-This file has an empty second row (just whitespace), which should fail our validation rule.
+This file has a second row with only whitespace, which should fail our validation rule.
 
 Try running the pipeline with this invalid input:
 
@@ -412,19 +412,26 @@ nextflow run core-hello --input /tmp/invalid_greetings.csv --outdir test-results
 
 Launching `core-hello/main.nf` [silly_cuvier] DSL2 - revision: c31b966b36
 
-ERROR ~ Validation of '/tmp/invalid_greetings.csv' file failed!
-
- -- Check '/tmp/invalid_greetings.csv' --
-   -> Entry 2: Greeting must be provided and cannot be empty or start with whitespace
+ERROR ~ Validation of pipeline parameters failed!
 
  -- Check '.nextflow.log' file for details
+The following invalid input values have been detected:
+
+* --input (/tmp/invalid_greetings.csv): Validation of file failed:
+	-> Entry 2: Missing required field(s): greeting
+
+ -- Check script 'subworkflows/nf-core/utils_nfschema_plugin/main.nf' at line: 39 or see '.nextflow.log' file for more details
 ```
 
 Perfect! The validation caught the error and provided a clear, helpful error message pointing to:
 
 - Which file failed validation
 - Which entry (row 2) has the problem
-- What the specific problem is
+- What the specific problem is (missing required field)
+
+!!! note "Empty lines in CSV files"
+
+    Empty lines (with no content at all) are filtered out during CSV parsing and won't trigger validation errors. Only lines with content that fails validation rules (like whitespace-only entries) will be caught.
 
 ### 4.3. Test with missing required field
 
