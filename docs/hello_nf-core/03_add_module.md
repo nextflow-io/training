@@ -18,6 +18,10 @@ First, let's learn how to find, install, and use an existing nf-core module in o
 
 The `collectGreetings` process in our pipeline uses the Unix `cat` command to concatenate multiple greeting files into one. This is a perfect use case for the nf-core `cat/cat` module, which is designed specifically for concatenating files.
 
+!!! note "Module naming convention"
+
+    nf-core modules follow the naming convention `software/command`. The `cat/cat` module wraps the `cat` command from the `cat` software package. Other examples include `fastqc/fastqc` (FastQC software, fastqc command) or `samtools/view` (samtools software, view command).
+
 ### 1.1. Browse available modules on the nf-core website
 
 The nf-core project maintains a centralized catalog of modules at [https://nf-co.re/modules](https://nf-co.re/modules).
