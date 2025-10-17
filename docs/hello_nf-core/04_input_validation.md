@@ -46,37 +46,37 @@ cat core-hello/assets/schema_input.json
 
 ```json title="core-hello/assets/schema_input.json" linenums="1"
 {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "https://raw.githubusercontent.com/core/hello/main/assets/schema_input.json",
-    "title": "core/hello pipeline - params.input schema",
-    "description": "Schema for the file provided with params.input",
-    "type": "array",
-    "items": {
-        "type": "object",
-        "properties": {
-            "sample": {
-                "type": "string",
-                "pattern": "^\\S+$",
-                "errorMessage": "Sample name must be provided and cannot contain spaces",
-                "meta": ["id"]
-            },
-            "fastq_1": {
-                "type": "string",
-                "format": "file-path",
-                "exists": true,
-                "pattern": "^\\S+\\.f(ast)?q\\.gz$",
-                "errorMessage": "FastQ file for reads 1 must be provided, cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
-            },
-            "fastq_2": {
-                "type": "string",
-                "format": "file-path",
-                "exists": true,
-                "pattern": "^\\S+\\.f(ast)?q\\.gz$",
-                "errorMessage": "FastQ file for reads 2 cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
-            }
-        },
-        "required": ["sample", "fastq_1"]
-    }
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/core/hello/main/assets/schema_input.json",
+  "title": "core/hello pipeline - params.input schema",
+  "description": "Schema for the file provided with params.input",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "sample": {
+        "type": "string",
+        "pattern": "^\\S+$",
+        "errorMessage": "Sample name must be provided and cannot contain spaces",
+        "meta": ["id"]
+      },
+      "fastq_1": {
+        "type": "string",
+        "format": "file-path",
+        "exists": true,
+        "pattern": "^\\S+\\.f(ast)?q\\.gz$",
+        "errorMessage": "FastQ file for reads 1 must be provided, cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
+      },
+      "fastq_2": {
+        "type": "string",
+        "format": "file-path",
+        "exists": true,
+        "pattern": "^\\S+\\.f(ast)?q\\.gz$",
+        "errorMessage": "FastQ file for reads 2 cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
+      }
+    },
+    "required": ["sample", "fastq_1"]
+  }
 }
 ```
 
@@ -119,6 +119,7 @@ Holà
 ```
 
 This is a simple CSV with:
+
 - One column (no header)
 - One greeting per line
 - Text strings with no special format requirements
@@ -140,22 +141,22 @@ Replace the contents of [core-hello/assets/schema_input.json](core-hello/assets/
 
 ```json title="core-hello/assets/schema_input.json" linenums="1"
 {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "https://raw.githubusercontent.com/core/hello/main/assets/schema_input.json",
-    "title": "core/hello pipeline - params.input schema",
-    "description": "Schema for the greetings file provided with params.input",
-    "type": "array",
-    "items": {
-        "type": "object",
-        "properties": {
-            "greeting": {
-                "type": "string",
-                "pattern": "^\\S.*$",
-                "errorMessage": "Greeting must be provided and cannot be empty or start with whitespace"
-            }
-        },
-        "required": ["greeting"]
-    }
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/core/hello/main/assets/schema_input.json",
+  "title": "core/hello pipeline - params.input schema",
+  "description": "Schema for the greetings file provided with params.input",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "greeting": {
+        "type": "string",
+        "pattern": "^\\S.*$",
+        "errorMessage": "Greeting must be provided and cannot be empty or start with whitespace"
+      }
+    },
+    "required": ["greeting"]
+  }
 }
 ```
 
