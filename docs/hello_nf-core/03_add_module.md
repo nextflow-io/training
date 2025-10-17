@@ -20,7 +20,7 @@ The `collectGreetings` process in our pipeline uses the Unix `cat` command to co
 
 The nf-core project maintains a centralized catalog of modules at [https://nf-co.re/modules](https://nf-co.re/modules).
 
-Navigate to the modules page in your web browser and use the search bar to search for "cat".
+Navigate to the modules page in your web browser and use the search bar to search for "cat_cat".
 
 You should see `cat/cat` in the search results. Click on it to view the module documentation.
 
@@ -75,9 +75,14 @@ Now that we've identified the `cat/cat` module as a suitable replacement for our
 
 ### 2.1. Install the cat/cat module
 
-From your `core-hello` directory, run the following command:
+!!! note
+
+    Make sure you are in the `core-hello` directory (your pipeline root) in your terminal before running the module installation command.
+
+Navigate to your pipeline directory and run the installation command:
 
 ```bash
+cd core-hello
 nf-core modules install cat/cat
 ```
 
@@ -241,7 +246,100 @@ The main differences are:
 - `CAT_CAT` outputs a tuple, while `collectGreetings` outputs a simple path
 - `CAT_CAT` requires a filename prefix via the `meta.id` field
 
-### 3.3. Adapt the workflow to use CAT_CAT
+### 3.3. Understanding metadata maps
+
+You've just seen that `CAT_CAT` expects inputs and outputs structured as tuples with metadata:
+
+```groovy
+input:
+tuple val(meta), path(files_in)
+
+output:
+tuple val(meta), path("${prefix}"), emit: file_out
+```
+
+This pattern is standard across all nf-core modules. The metadata map (commonly called `meta`) is a Groovy-style map containing information about a sample or dataset, with `id` being the required field used for naming outputs and tracking samples.
+
+Why use metadata maps?
+
+- **Sample tracking**: Keep sample information with data throughout the workflow
+- **Standardization**: All nf-core modules follow this pattern
+- **Flexibility**: Easy to add custom metadata fields
+- **Output naming**: Consistent file naming based on sample IDs
+
+!!! note "Learn more about metadata"
+
+    For a comprehensive introduction to working with metadata in Nextflow workflows, including how to read metadata from samplesheets and use it to customize processing, see the [Metadata in workflows](../side_quests/metadata) side quest.
+
+Rather than extracting the file from the tuple and losing the metadata when passing it to `cowpy`, let's update the `cowpy` module to accept and use metadata maps. This follows nf-core best practices and makes our module more consistent with community standards.
+
+### 3.4. Update the cowpy module to use metadata
+
+Open [core-hello/modules/local/cowpy.nf](core-hello/modules/local/cowpy.nf) and modify it to accept and propagate metadata:
+
+=== "After"
+
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="11 12 15 16"
+    #!/usr/bin/env nextflow
+
+    // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
+    process cowpy {
+
+        publishDir 'results', mode: 'copy'
+
+        container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
+        conda 'conda-forge::cowpy==1.1.5'
+
+        input:
+            tuple val(meta), path(input_file)
+            val character
+
+        output:
+            tuple val(meta), path("cowpy-${input_file}"), emit: cowpy_output
+
+        script:
+        """
+        cat $input_file | cowpy -c "$character" > cowpy-${input_file}
+        """
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1"
+    #!/usr/bin/env nextflow
+
+    // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
+    process cowpy {
+
+        publishDir 'results', mode: 'copy'
+
+        container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
+        conda 'conda-forge::cowpy==1.1.5'
+
+        input:
+            path input_file
+            val character
+
+        output:
+            path "cowpy-${input_file}"
+
+        script:
+        """
+        cat $input_file | cowpy -c "$character" > cowpy-${input_file}
+        """
+    }
+    ```
+
+Key changes:
+
+1. **Input**: Changed from `path input_file` to `tuple val(meta), path(input_file)` to accept metadata
+2. **Output**: Changed to emit a tuple with metadata: `tuple val(meta), path("cowpy-${input_file}"), emit: cowpy_output`
+3. **Named emit**: Added `emit: cowpy_output` to give the output channel a descriptive name
+
+Now our `cowpy` module follows the same metadata pattern as `CAT_CAT`, allowing metadata to flow through our entire workflow.
+
+### 3.5. Adapt the workflow to use CAT_CAT and updated cowpy
 
 We need to modify our workflow code to:
 
@@ -254,7 +352,7 @@ Open [core-hello/workflows/hello.nf](core-hello/workflows/hello.nf) and modify t
 
 === "After"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="11-14"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="7-15"
         // emit a greeting
         sayHello(ch_samplesheet)
 
@@ -269,12 +367,12 @@ Open [core-hello/workflows/hello.nf](core-hello/workflows/hello.nf) and modify t
         CAT_CAT(ch_for_cat)
 
         // generate ASCII art of the greetings with cowpy
-        cowpy(CAT_CAT.out.file_out.map{ meta, file -> file }, params.character)
+        cowpy(CAT_CAT.out.file_out, params.character)
     ```
 
 === "Before"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="26"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="7-14"
         // emit a greeting
         sayHello(ch_samplesheet)
 
@@ -293,25 +391,25 @@ Open [core-hello/workflows/hello.nf](core-hello/workflows/hello.nf) and modify t
 
 Let's break down what we changed:
 
-1. **Created metadata**: `def meta = [ id: params.batch ]` creates a map with an ID field set to our batch name
+1. **Created metadata**: `def meta = [ id: params.batch ]` creates a Groovy-style map with an `id` field set to our batch name
 2. **Created a tuple channel**: `ch_for_cat = convertToUpper.out.collect().map { files -> tuple(meta, files) }` combines the metadata and collected files into the tuple format expected by `CAT_CAT`
 3. **Called CAT_CAT**: Replaced `collectGreetings(...)` with `CAT_CAT(ch_for_cat)`
-4. **Extracted file from tuple**: Modified the cowpy call to extract just the file from the output tuple using `.map{ meta, file -> file }`
+4. **Passed tuple to cowpy**: Since we updated `cowpy` to accept metadata tuples, we can now pass `CAT_CAT.out.file_out` directly without extracting the file. The metadata flows through!
 5. **Removed count view**: The `cat/cat` module doesn't emit a count, so we removed that line
 
 !!! note
 
     We removed the `collectGreetings.out.count.view { ... }` line because the nf-core `cat/cat` module doesn't provide a count of files. If you want to keep this functionality, you would need to count the files before calling `CAT_CAT`.
 
-### 3.4. Update the emit block
+### 3.6. Update the emit block
 
-Update the `emit` block to reflect the new output:
+Update the `emit` block to use the named emit channel from our updated cowpy module:
 
 === "After"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="52" hl_lines="2"
         emit:
-        cowpy_hellos   = cowpy.out
+        cowpy_hellos   = cowpy.out.cowpy_output
         versions       = ch_versions                 // channel: [ path(versions.yml) ]
     ```
 
@@ -323,9 +421,9 @@ Update the `emit` block to reflect the new output:
         versions       = ch_versions                 // channel: [ path(versions.yml) ]
     ```
 
-In this case, the emit block doesn't need to change because we're still emitting the cowpy output.
+Since we added a named emit (`emit: cowpy_output`) to the cowpy module, we now reference it explicitly as `cowpy.out.cowpy_output`.
 
-### 3.5. Test the updated workflow
+### 3.7. Test the updated workflow
 
 Let's test that our workflow still works with the nf-core module:
 
@@ -366,7 +464,7 @@ executor >  local (7)
 
 Notice that `CAT_CAT` now appears in the process execution list instead of `collectGreetings`.
 
-### 3.6. Verify the outputs
+### 3.8. Verify the outputs
 
 Check that the outputs look correct:
 
@@ -378,7 +476,13 @@ You should still see the concatenated and cowpy output files, though the naming 
 
 ### Takeaway
 
-You know how to adapt your workflow to use an nf-core module, including creating the appropriate metadata structures and handling tuple-based inputs and outputs.
+You know how to:
+
+- Adapt your workflow to use an nf-core module
+- Understand and work with metadata maps
+- Update local modules to follow nf-core patterns with metadata tuples
+- Create metadata structures and pass them through your workflow
+- Use named emit channels for clearer output references
 
 ### What's next?
 
