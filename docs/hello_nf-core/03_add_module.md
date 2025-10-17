@@ -180,7 +180,7 @@ head -30 modules/nf-core/cat/cat/main.nf
 
 The key parts of the module are:
 
-```groovy title="modules/nf-core/cat/cat/main.nf (excerpt)" linenums="1"
+```groovy title="modules/nf-core/cat/cat/main.nf (excerpt)" linenums="1" hl_lines="6 9"
 process CAT_CAT {
     tag "$meta.id"
     label 'process_single'
@@ -273,12 +273,13 @@ Open [core-hello/workflows/hello.nf](core-hello/workflows/hello.nf) and modify t
 
         // generate ASCII art of the greetings with cowpy
         // Extract the file from the tuple since cowpy doesn't use metadata yet
-        cowpy(CAT_CAT.out.file_out.map{ meta, file -> file }, params.character)
+        ch_for_cowpy = CAT_CAT.out.file_out.map{ meta, file -> file }
+        cowpy(ch_for_cowpy, params.character)
     ```
 
 === "Before"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="7-14"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="7-15"
         // emit a greeting
         sayHello(ch_samplesheet)
 
@@ -300,8 +301,9 @@ Let's break down what we changed:
 1. **Created metadata**: `def meta = [ id: params.batch ]` creates a Groovy-style map with an `id` field set to our batch name
 2. **Created a tuple channel**: `ch_for_cat = convertToUpper.out.collect().map { files -> tuple(meta, files) }` combines the metadata and collected files into the tuple format expected by `CAT_CAT`
 3. **Called CAT_CAT**: Replaced `collectGreetings(...)` with `CAT_CAT(ch_for_cat)`
-4. **Extracted file for cowpy**: Since `cowpy` doesn't accept metadata tuples yet, we extract just the file: `.map{ meta, file -> file }`
-5. **Removed count view**: The `cat/cat` module doesn't emit a count, so we removed that line
+4. **Extracted file for cowpy**: Since `cowpy` doesn't accept metadata tuples yet, we extract just the file from the tuple using `.map{ meta, file -> file }` and store it in `ch_for_cowpy`
+5. **Called cowpy**: Pass the extracted file channel to `cowpy` along with the character parameter
+6. **Removed count view**: The `cat/cat` module doesn't emit a count, so we removed that line
 
 !!! note
 
