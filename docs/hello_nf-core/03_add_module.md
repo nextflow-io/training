@@ -12,10 +12,10 @@ In this section, we'll replace the custom `collectGreetings` module with the `ca
 
 !!! tip "Starting from a clean slate"
 
-    If you didn't complete Part 2 or want to start fresh for this section, you can use the `core-hello-end` solution as your starting point:
+    If you didn't complete Part 2 or want to start fresh for this section, you can use the `core-hello-part2` solution as your starting point:
 
     ```bash
-    cp -r hello-nf-core/solutions/core-hello-end core-hello
+    cp -r hello-nf-core/solutions/core-hello-part2 core-hello
     cd core-hello
     ```
 
