@@ -61,7 +61,7 @@ nf-core modules info cat/cat
 
 This displays documentation about the module, including its inputs, outputs, and basic usage information.
 
-### 1.4. Install the cat/cat module
+### 1.4. Install and verify the cat/cat module
 
 !!! note
 
@@ -86,8 +86,6 @@ The command automatically:
 - Downloads the module files to `modules/nf-core/cat/cat/`
 - Updates `modules.json` to track the installed module
 - Provides you with the correct `include` statement to use in your workflow
-
-### 2.2. Verify the module installation
 
 Let's check that the module was installed correctly:
 
