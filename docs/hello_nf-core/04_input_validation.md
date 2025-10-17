@@ -483,10 +483,11 @@ Note that we no longer need `--validate_params false` since validation is workin
 ```console title="Output"
  N E X T F L O W   ~  version 25.04.3
 
-Launching `core-hello/main.nf` [serene_volta] DSL2 - revision: c31b966b36
+Launching `./main.nf` [nasty_kalman] DSL2 - revision: c31b966b36
 
 Input/output options
-  input                     : core-hello/assets/greetings.csv
+  input                     : /private/tmp/core-hello-test/assets/greetings.csv
+  batch                     : test
   outdir                    : core-hello-results
 
 Institutional config options
@@ -494,17 +495,17 @@ Institutional config options
   config_profile_description: Minimal test dataset to check pipeline function
 
 Core Nextflow options
-  runName                   : serene_volta
+  runName                   : nasty_kalman
   containerEngine           : docker
   profile                   : test,docker
 
 !! Only displaying parameters that differ from the pipeline defaults !!
 ------------------------------------------------------
 executor >  local (7)
-[5a/1c3d8b] CORE_HELLO:HELLO:sayHello (1)       | 3 of 3 ✔
-[2b/9f4a2c] CORE_HELLO:HELLO:convertToUpper (3) | 3 of 3 ✔
-[8c/3e7d1a] CORE_HELLO:HELLO:CAT_CAT (test)     | 1 of 1 ✔
-[4d/6b2f8e] CORE_HELLO:HELLO:cowpy              | 1 of 1 ✔
+[cc/cc800d] CORE_HELLO:HELLO:sayHello (1)       | 3 of 3 ✔
+[d6/46ab71] CORE_HELLO:HELLO:convertToUpper (1) | 3 of 3 ✔
+[b2/3def99] CORE_HELLO:HELLO:CAT_CAT (test)     | 1 of 1 ✔
+[a3/f82e41] CORE_HELLO:HELLO:cowpy              | 1 of 1 ✔
 -[core/hello] Pipeline completed successfully-
 ```
 
@@ -523,7 +524,7 @@ Holà
 EOF
 ```
 
-This file has a second row with only whitespace, which should fail our validation rule.
+This file has a second row with only whitespace (three spaces), which should fail our validation rule.
 
 Try running the pipeline with this invalid input:
 
@@ -534,8 +535,19 @@ nextflow run core-hello --input /tmp/invalid_greetings.csv --outdir test-results
 ```console title="Output"
  N E X T F L O W   ~  version 25.04.3
 
-Launching `core-hello/main.nf` [silly_cuvier] DSL2 - revision: c31b966b36
+Launching `./main.nf` [stupefied_poincare] DSL2 - revision: c31b966b36
 
+Input/output options
+  input              : /tmp/invalid_greetings.csv
+  outdir             : test-results
+
+Core Nextflow options
+  runName            : stupefied_poincare
+  containerEngine    : docker
+  profile            : docker
+
+!! Only displaying parameters that differ from the pipeline defaults !!
+------------------------------------------------------
 ERROR ~ Validation of pipeline parameters failed!
 
  -- Check '.nextflow.log' file for details
