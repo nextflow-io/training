@@ -10,8 +10,6 @@ In this section, we'll replace the custom `collectGreetings` module with the `ca
 
     This section assumes you have completed [Part 2: Rewrite Hello for nf-core](./02_rewrite_hello.md) and have a working `core-hello` pipeline.
 
-!!! tip "Starting from a clean slate"
-
     If you didn't complete Part 2 or want to start fresh for this section, you can use the `core-hello-part2` solution as your starting point:
 
     ```bash
