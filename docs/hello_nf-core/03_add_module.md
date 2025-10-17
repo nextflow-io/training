@@ -279,7 +279,7 @@ Open [core-hello/modules/local/cowpy.nf](core-hello/modules/local/cowpy.nf) and 
 
 === "After"
 
-    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="11 14 17 19"
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="11 14 17 18 19 20"
     #!/usr/bin/env nextflow
 
     // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
@@ -294,12 +294,13 @@ Open [core-hello/modules/local/cowpy.nf](core-hello/modules/local/cowpy.nf) and 
             tuple val(meta), path(input_file)
 
         output:
-            tuple val(meta), path("cowpy-${input_file}"), emit: cowpy_output
+            tuple val(meta), path("${prefix}.txt"), emit: cowpy_output
 
         script:
         def args = task.ext.args ?: ''
+        prefix = task.ext.prefix ?: "${meta.id}"
         """
-        cat $input_file | cowpy $args > cowpy-${input_file}
+        cat $input_file | cowpy $args > ${prefix}.txt
         """
     }
     ```
@@ -334,26 +335,38 @@ Open [core-hello/modules/local/cowpy.nf](core-hello/modules/local/cowpy.nf) and 
 Key changes:
 
 1. **Simplified input**: Changed from two inputs (`path input_file` and `val character`) to just one: `tuple val(meta), path(input_file)`
-2. **Output**: Changed to emit a tuple with metadata: `tuple val(meta), path("cowpy-${input_file}"), emit: cowpy_output`
+2. **Output**: Changed to emit a tuple with metadata using a configurable prefix: `tuple val(meta), path("${prefix}.txt"), emit: cowpy_output`
 3. **Named emit**: Added `emit: cowpy_output` to give the output channel a descriptive name
-4. **Added ext.args pattern**: `def args = task.ext.args ?: ''` allows configuration via the `ext` directive
+4. **Added ext.args pattern**: `def args = task.ext.args ?: ''` allows configuration of tool arguments
+5. **Added ext.prefix pattern**: `prefix = task.ext.prefix ?: "${meta.id}"` provides configurable output file naming
 
-Notice how the module interface is now much simpler - it only declares the essential input (metadata + file). The `character` parameter and other optional arguments are now handled through `task.ext.args`.
+Notice how the module interface is now much simpler - it only declares the essential input (metadata + file). The `character` parameter and other optional arguments are now handled through `task.ext.args` and `task.ext.prefix`.
 
-#### Understanding ext.args
+#### Understanding ext.args and ext.prefix
 
-The `task.ext.args` pattern is an nf-core convention for passing optional command-line arguments to tools. Instead of adding multiple input parameters for every possible tool option, nf-core modules accept optional arguments through the `ext.args` configuration directive.
+These are key nf-core conventions for keeping module interfaces minimal while providing flexibility:
+
+**ext.args** - For passing optional command-line arguments to tools:
+
+- Instead of adding multiple input parameters for every possible tool option, nf-core modules accept optional arguments through the `ext.args` configuration directive
+- The pattern `def args = task.ext.args ?: ''` uses the Elvis operator (`?:`) to provide an empty string as default
+- Users can specify any tool arguments via configuration without changing the module interface
+
+**ext.prefix** - For configurable output file naming:
+
+- Output filenames are typically based on the sample ID from the metadata: `prefix = task.ext.prefix ?: "${meta.id}"`
+- Users can override the default naming if needed (e.g., to add custom prefixes or suffixes)
+- This standardizes naming across all nf-core modules while remaining flexible
 
 Benefits of this approach:
 
 - **Minimal interface**: The module only requires essential inputs (metadata and files)
-- **Flexibility**: Users can specify any tool arguments via configuration
-- **Consistency**: All nf-core modules follow this pattern
+- **Flexibility**: Users can specify tool arguments and output naming via configuration
+- **Consistency**: All nf-core modules follow these patterns
 - **No workflow changes**: Adding new tool options doesn't require updating workflow code
+- **Predictable naming**: Output files are named using sample IDs by default
 
-The line `def args = task.ext.args ?: ''` uses the Elvis operator (`?:`) to provide an empty string as default if `task.ext.args` is not set.
-
-Now our `cowpy` module follows the same patterns as nf-core modules, with metadata tuples and a simplified interface that uses `ext.args` for optional parameters.
+Now our `cowpy` module follows the same patterns as nf-core modules, with metadata tuples and a simplified interface that uses `ext.args` and `ext.prefix` for configuration.
 
 ### 3.5. Configure ext.args for cowpy
 
@@ -377,6 +390,7 @@ Open [core-hello/conf/modules.config](core-hello/conf/modules.config) and add th
 
         withName: 'CORE_HELLO:HELLO:cowpy' {
             ext.args = { "-c ${params.character}" }
+            ext.prefix = { "cowpy-${meta.id}" }
         }
     }
     ```
@@ -397,18 +411,21 @@ Open [core-hello/conf/modules.config](core-hello/conf/modules.config) and add th
     }
     ```
 
-This configuration passes the `params.character` value to cowpy's `-c` flag. Note that we use a closure (`{ "-c ${params.character}" }`) to allow the parameter to be evaluated at runtime.
+This configuration passes the `params.character` value to cowpy's `-c` flag and sets a custom output prefix. Note that we use closures (wrapped in `{ }`) to allow the parameters to be evaluated at runtime, giving us access to `meta` and pipeline parameters.
 
 Key points:
 
 - The **module interface stays simple** - it only accepts the essential metadata and file inputs
 - The **pipeline still exposes `params.character`** - users can configure it as before
 - The **module is now portable** - it can be reused in other pipelines without expecting a specific parameter name
+- **Output naming is configurable** - here we use `ext.prefix = { "cowpy-${meta.id}" }` to maintain the original naming pattern
 - Configuration is **centralized** in `modules.config`, keeping workflow logic clean
 
 !!! note
 
     The `modules.config` file is where nf-core pipelines centralize per-module configuration. This separation of concerns makes modules more reusable across different pipelines.
+
+    The `ext.prefix` closure has access to `meta` because the configuration is evaluated in the context of the process execution, where metadata is available.
 
 ### 3.6. Adapt the workflow to use CAT_CAT and updated cowpy
 
@@ -545,7 +562,9 @@ Check that the outputs look correct:
 ls results/
 ```
 
-You should still see the concatenated and cowpy output files, though the naming may be slightly different since `CAT_CAT` uses the metadata ID for the output filename.
+You should see the cowpy output files with the same naming as before: `cowpy-test.txt` (based on the batch name). This demonstrates how `ext.prefix` allows you to maintain your preferred naming convention while keeping the module interface flexible.
+
+If you wanted to change the naming (for example, to just `test.txt`), you would only need to modify the `ext.prefix` configuration - no changes to the module or workflow code would be required.
 
 ### Takeaway
 
@@ -556,6 +575,7 @@ You know how to:
 - Update local modules to follow nf-core patterns with metadata tuples
 - Create metadata structures and pass them through your workflow
 - Use the `ext.args` pattern to keep module interfaces simple and portable
+- Use the `ext.prefix` pattern for configurable, standardized output file naming
 - Configure process-specific parameters through `modules.config`
 - Use named emit channels for clearer output references
 
