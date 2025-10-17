@@ -8,7 +8,18 @@ In this section, we'll add proper input validation to our pipeline using the nf-
 
 !!! note
 
-    This section assumes you have completed [Part 2: Rewrite Hello for nf-core](./02_rewrite_hello.md) and have a working `core-hello` pipeline.
+    This section assumes you have completed [Part 3: Add an existing nf-core module](./03_add_module.md) and have a working `core-hello` pipeline with nf-core modules.
+
+!!! tip "Starting from a clean slate"
+
+    If you didn't complete Part 3 or want to start fresh for this section, you can use the `core-hello-part3` solution as your starting point:
+
+    ```bash
+    cp -r hello-nf-core/solutions/core-hello-part3 core-hello
+    cd core-hello
+    ```
+
+    This gives you a fully functional nf-core pipeline with modules ready for adding input validation.
 
 ---
 
