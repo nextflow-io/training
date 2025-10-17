@@ -561,83 +561,9 @@ Perfect! The validation caught the error and provided a clear, helpful error mes
 
 You now know how to implement and test both parameter validation and input data validation. Your pipeline validates inputs before execution, providing fast feedback and clear error messages.
 
-### What's next?
+!!! tip "Further reading"
 
-Learn about validation best practices and advanced features.
-
----
-
-## 4. Validation best practices
-
-Now that you have validation working, let's cover some best practices and understand the key benefits validation provides.
-
-### 4.1. Benefits of validation
-
-Input validation provides several important benefits:
-
-1. **Early error detection**: Problems are caught before any processing begins, saving compute time and resources
-2. **Clear error messages**: Users get specific, actionable feedback about what's wrong and how to fix it
-3. **Reduced debugging time**: No need to trace cryptic errors through log files
-4. **Self-documentation**: The schema serves as documentation of expected input formats
-5. **Type safety**: Ensures data types match expectations throughout the pipeline
-6. **Reproducibility**: Consistent validation rules across all pipeline runs
-
-### 4.2. When to validate
-
-**Parameter validation (`nextflow_schema.json`)** should include:
-
-- All command-line parameters the pipeline accepts
-- Required vs. optional parameters
-- File path parameters with existence checks
-- Enum values for parameters with specific allowed values
-- Type specifications (string, integer, boolean, number)
-
-**Input data validation (`schema_input.json`)** should cover:
-
-- Column structure and naming
-- Required vs. optional fields
-- Data types for each field
-- File path validation (for paths within the CSV)
-- Pattern matching (e.g., file extensions, sample ID formats)
-- Custom error messages for common mistakes
-
-### 4.3. Common validation patterns
-
-**File existence checking:**
-
-```json
-"input_file": {
-    "type": "string",
-    "format": "file-path",
-    "exists": true,
-    "pattern": "^\\S+\\.fastq\\.gz$"
-}
-```
-
-**Enum (allowed values):**
-
-```json
-"strandedness": {
-    "type": "string",
-    "enum": ["unstranded", "forward", "reverse"]
-}
-```
-
-**Conditional requirements:**
-Use `dependentRequired` for fields that depend on other fields being present.
-
-**Unique values:**
-Add `"unique": true` to ensure no duplicates (like sample IDs).
-
-### 4.4. Tools for schema management
-
-- **`nf-core pipelines schema build`**: Interactive GUI for managing `nextflow_schema.json`
-- **`nf-core pipelines schema lint`**: Validate schema syntax
-- **`nf-core pipelines schema docs`**: Generate markdown documentation from schema
-
-### Takeaway
-
-You understand the benefits of validation, when to apply it, and common patterns for both parameter and input data validation.
+    To learn more about advanced validation features and patterns, check out the [nf-schema documentation](https://nextflow-io.github.io/nf-schema/latest/). The `nf-core pipelines schema build` command provides an interactive GUI for managing complex schemas.
 
 ---
 
