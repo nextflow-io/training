@@ -56,8 +56,6 @@ Both types of validation happen **before** the pipeline executes any processes, 
 
     This section assumes you have completed [Part 3: Add an existing nf-core module](./03_add_module.md) and have a working `core-hello` pipeline with nf-core modules.
 
-!!! tip "Starting from a clean slate"
-
     If you didn't complete Part 3 or want to start fresh for this section, you can use the `core-hello-part3` solution as your starting point:
 
     ```bash
