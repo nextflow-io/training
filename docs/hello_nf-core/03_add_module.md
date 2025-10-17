@@ -816,13 +816,11 @@ Clean up by optionally removing the now-unused local module.
 
 ---
 
-## 3. Optional: Clean up unused local modules
+### 2.4. Optional: Clean up unused local modules
 
 Now that we're using the nf-core `cat/cat` module, the local `collectGreetings` module is no longer needed.
 
-### 3.1. Remove the collectGreetings import
-
-Remove or comment out the import line for `collectGreetings`:
+Remove or comment out the import line for `collectGreetings` in [core-hello/workflows/hello.nf](core-hello/workflows/hello.nf):
 
 ```groovy title="core-hello/workflows/hello.nf" linenums="10"
 include { sayHello               } from '../modules/local/sayHello.nf'
@@ -832,8 +830,6 @@ include { cowpy                  } from '../modules/local/cowpy.nf'
 include { CAT_CAT                } from '../modules/nf-core/cat/cat/main'
 ```
 
-### 3.2. Optionally remove the module file
-
 You can optionally delete the `collectGreetings.nf` file:
 
 ```bash
@@ -842,10 +838,18 @@ rm modules/local/collectGreetings.nf
 
 However, you might want to keep it as a reference for understanding the differences between local and nf-core modules.
 
-### Takeaway
+---
 
-You know how to replace custom local modules with nf-core modules and clean up unused code.
+## Takeaway
 
-### What's next?
+You now know how to:
+
+- Find, install, and use nf-core modules in your pipeline
+- Update local modules to use metadata tuples following nf-core patterns
+- Simplify module interfaces with `ext.args` for configurable arguments
+- Use `ext.prefix` for standardized output file naming
+- Replace custom local modules with nf-core modules and clean up unused code
+
+## What's next?
 
 Continue to [Part 4: Input validation](./04_input_validation.md) to learn how to add schema-based input validation to your pipeline, or explore other nf-core modules you might add to enhance your pipeline further.
