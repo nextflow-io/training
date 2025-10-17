@@ -840,9 +840,44 @@ However, you might want to keep it as a reference for understanding the differen
 
 ---
 
+## 3. Contributing modules back to nf-core
+
+Now that you've learned how to create modules following nf-core conventions, you might develop modules that could benefit the wider community. The [nf-core/modules](https://github.com/nf-core/modules) repository welcomes contributions of well-tested, standardized modules.
+
+### Why contribute?
+
+Contributing your modules to nf-core:
+
+- Makes your tools available to the entire nf-core community through the modules catalog at [nf-co.re/modules](https://nf-co.re/modules)
+- Ensures ongoing community maintenance and improvements
+- Provides quality assurance through code review and automated testing
+- Gives your work visibility and recognition
+
+### Getting started
+
+Before contributing a new module:
+
+1. Check if it already exists at [nf-co.re/modules](https://nf-co.re/modules) or in [open PRs](https://github.com/nf-core/modules/pulls)
+2. Create an issue on [nf-core/modules](https://github.com/nf-core/modules/issues) to notify the community of your plans
+3. Use `nf-core modules create <tool>/<subtool>` in the nf-core/modules repository to generate the module structure
+4. Follow the patterns you've learned: metadata tuples, `ext.args`, `ext.prefix`, and comprehensive testing
+5. Submit a pull request and request review from `@nf-core/modules-team`
+
+### Resources
+
+- **Comprehensive guide**: [nf-core components tutorial](https://nf-co.re/docs/tutorials/nf-core_components/components)
+- **Module specifications**: [Module guidelines](https://nf-co.re/docs/guidelines/components/modules)
+- **Community support**: Join the `#modules` channel on [nf-core Slack](https://nf-co.re/join)
+
+Contributing to nf-core is a rewarding way to give back to the community while ensuring your tools follow best practices and reach researchers worldwide.
+
+---
+
 ## Takeaway
 
 You now know how to leverage pre-built nf-core modules in your pipeline and adapt your local modules to follow nf-core conventions. You learned how to use metadata tuples to track sample information through the workflow, simplify module interfaces with `ext.args` for configurable arguments, and use `ext.prefix` for standardized output file naming. These patterns keep modules portable and reusable while centralizing configuration in `modules.config`, making your pipeline more maintainable and consistent with nf-core best practices.
+
+Finally, you learned how to contribute your modules back to the nf-core community, making them available to researchers worldwide and ensuring they benefit from ongoing community maintenance.
 
 ## What's next?
 
