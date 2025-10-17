@@ -44,6 +44,7 @@ nf-core pipelines validate two different kinds of input:
    - Defined in `nextflow_schema.json`
 
 2. **Input data validation**: Validates the contents of input files (like sample sheets or CSV files)
+
    - Checks column structure and data types
    - Validates file references within the input file
    - Ensures required fields are present
