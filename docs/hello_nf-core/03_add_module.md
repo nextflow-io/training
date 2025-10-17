@@ -273,13 +273,13 @@ Why use metadata maps?
 
 Rather than extracting the file from the tuple and losing the metadata when passing it to `cowpy`, let's update the `cowpy` module to accept and use metadata maps. This follows nf-core best practices and makes our module more consistent with community standards.
 
-### 3.4. Update the cowpy module to use metadata
+### 3.4. Update the cowpy module to use metadata and ext.args
 
-Open [core-hello/modules/local/cowpy.nf](core-hello/modules/local/cowpy.nf) and modify it to accept and propagate metadata:
+Open [core-hello/modules/local/cowpy.nf](core-hello/modules/local/cowpy.nf) and modify it to follow nf-core patterns with metadata and simplified inputs:
 
 === "After"
 
-    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="11 12 15 16"
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="11 14 17 19"
     #!/usr/bin/env nextflow
 
     // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
@@ -292,14 +292,14 @@ Open [core-hello/modules/local/cowpy.nf](core-hello/modules/local/cowpy.nf) and 
 
         input:
             tuple val(meta), path(input_file)
-            val character
 
         output:
             tuple val(meta), path("cowpy-${input_file}"), emit: cowpy_output
 
         script:
+        def args = task.ext.args ?: ''
         """
-        cat $input_file | cowpy -c "$character" > cowpy-${input_file}
+        cat $input_file | cowpy $args > cowpy-${input_file}
         """
     }
     ```
@@ -333,20 +333,91 @@ Open [core-hello/modules/local/cowpy.nf](core-hello/modules/local/cowpy.nf) and 
 
 Key changes:
 
-1. **Input**: Changed from `path input_file` to `tuple val(meta), path(input_file)` to accept metadata
+1. **Simplified input**: Changed from two inputs (`path input_file` and `val character`) to just one: `tuple val(meta), path(input_file)`
 2. **Output**: Changed to emit a tuple with metadata: `tuple val(meta), path("cowpy-${input_file}"), emit: cowpy_output`
 3. **Named emit**: Added `emit: cowpy_output` to give the output channel a descriptive name
+4. **Added ext.args pattern**: `def args = task.ext.args ?: ''` allows configuration via the `ext` directive
 
-Now our `cowpy` module follows the same metadata pattern as `CAT_CAT`, allowing metadata to flow through our entire workflow.
+Notice how the module interface is now much simpler - it only declares the essential input (metadata + file). The `character` parameter and other optional arguments are now handled through `task.ext.args`.
 
-### 3.5. Adapt the workflow to use CAT_CAT and updated cowpy
+#### Understanding ext.args
 
-We need to modify our workflow code to:
+The `task.ext.args` pattern is an nf-core convention for passing optional command-line arguments to tools. Instead of adding multiple input parameters for every possible tool option, nf-core modules accept optional arguments through the `ext.args` configuration directive.
+
+Benefits of this approach:
+
+- **Minimal interface**: The module only requires essential inputs (metadata and files)
+- **Flexibility**: Users can specify any tool arguments via configuration
+- **Consistency**: All nf-core modules follow this pattern
+- **No workflow changes**: Adding new tool options doesn't require updating workflow code
+
+The line `def args = task.ext.args ?: ''` uses the Elvis operator (`?:`) to provide an empty string as default if `task.ext.args` is not set.
+
+Now our `cowpy` module follows the same patterns as nf-core modules, with metadata tuples and a simplified interface that uses `ext.args` for optional parameters.
+
+### 3.5. Configure ext.args for cowpy
+
+Before updating the workflow, we need to configure the `ext.args` for the cowpy process. This allows us to keep the module interface simple while still providing the character option at the pipeline level.
+
+Open [core-hello/conf/modules.config](core-hello/conf/modules.config) and add the cowpy configuration:
+
+=== "After"
+
+    ```groovy title="core-hello/conf/modules.config" linenums="1" hl_lines="10-14"
+    /*
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        Config file for defining DSL2 per module options and publishing paths
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    */
+
+    process {
+        publishDir = [
+            path: { "${params.outdir}/${task.process.tokenize(':')[-1].tokenize('_')[0].toLowerCase()}" },
+        ]
+
+        withName: 'CORE_HELLO:HELLO:cowpy' {
+            ext.args = { "-c ${params.character}" }
+        }
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="core-hello/conf/modules.config" linenums="1"
+    /*
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        Config file for defining DSL2 per module options and publishing paths
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    */
+
+    process {
+        publishDir = [
+            path: { "${params.outdir}/${task.process.tokenize(':')[-1].tokenize('_')[0].toLowerCase()}" },
+        ]
+    }
+    ```
+
+This configuration passes the `params.character` value to cowpy's `-c` flag. Note that we use a closure (`{ "-c ${params.character}" }`) to allow the parameter to be evaluated at runtime.
+
+Key points:
+
+- The **module interface stays simple** - it only accepts the essential metadata and file inputs
+- The **pipeline still exposes `params.character`** - users can configure it as before
+- The **module is now portable** - it can be reused in other pipelines without expecting a specific parameter name
+- Configuration is **centralized** in `modules.config`, keeping workflow logic clean
+
+!!! note
+
+    The `modules.config` file is where nf-core pipelines centralize per-module configuration. This separation of concerns makes modules more reusable across different pipelines.
+
+### 3.6. Adapt the workflow to use CAT_CAT and updated cowpy
+
+Now we need to modify our workflow code to:
 
 1. Create a metadata map with an appropriate ID
 2. Combine the metadata with the collected files into a tuple
 3. Call `CAT_CAT` instead of `collectGreetings`
-4. Adapt downstream processes to handle the tuple output
+4. Call `cowpy` with just the metadata tuple (configuration handled via `ext.args`)
 
 Open [core-hello/workflows/hello.nf](core-hello/workflows/hello.nf) and modify the workflow logic in the `main` block:
 
@@ -367,7 +438,7 @@ Open [core-hello/workflows/hello.nf](core-hello/workflows/hello.nf) and modify t
         CAT_CAT(ch_for_cat)
 
         // generate ASCII art of the greetings with cowpy
-        cowpy(CAT_CAT.out.file_out, params.character)
+        cowpy(CAT_CAT.out.file_out)
     ```
 
 === "Before"
@@ -394,14 +465,16 @@ Let's break down what we changed:
 1. **Created metadata**: `def meta = [ id: params.batch ]` creates a Groovy-style map with an `id` field set to our batch name
 2. **Created a tuple channel**: `ch_for_cat = convertToUpper.out.collect().map { files -> tuple(meta, files) }` combines the metadata and collected files into the tuple format expected by `CAT_CAT`
 3. **Called CAT_CAT**: Replaced `collectGreetings(...)` with `CAT_CAT(ch_for_cat)`
-4. **Passed tuple to cowpy**: Since we updated `cowpy` to accept metadata tuples, we can now pass `CAT_CAT.out.file_out` directly without extracting the file. The metadata flows through!
+4. **Simplified cowpy call**: Now `cowpy` only takes one input (the metadata tuple). The character option is configured via `ext.args` in `modules.config`, which references `params.character`
 5. **Removed count view**: The `cat/cat` module doesn't emit a count, so we removed that line
+
+Notice how the workflow code is now cleaner - we don't need to pass `params.character` directly to the process. The module interface is kept minimal, making it more portable, while the pipeline still provides the explicit option through configuration.
 
 !!! note
 
     We removed the `collectGreetings.out.count.view { ... }` line because the nf-core `cat/cat` module doesn't provide a count of files. If you want to keep this functionality, you would need to count the files before calling `CAT_CAT`.
 
-### 3.6. Update the emit block
+### 3.7. Update the emit block
 
 Update the `emit` block to use the named emit channel from our updated cowpy module:
 
@@ -423,7 +496,7 @@ Update the `emit` block to use the named emit channel from our updated cowpy mod
 
 Since we added a named emit (`emit: cowpy_output`) to the cowpy module, we now reference it explicitly as `cowpy.out.cowpy_output`.
 
-### 3.7. Test the updated workflow
+### 3.8. Test the updated workflow
 
 Let's test that our workflow still works with the nf-core module:
 
@@ -464,7 +537,7 @@ executor >  local (7)
 
 Notice that `CAT_CAT` now appears in the process execution list instead of `collectGreetings`.
 
-### 3.8. Verify the outputs
+### 3.9. Verify the outputs
 
 Check that the outputs look correct:
 
@@ -482,6 +555,8 @@ You know how to:
 - Understand and work with metadata maps
 - Update local modules to follow nf-core patterns with metadata tuples
 - Create metadata structures and pass them through your workflow
+- Use the `ext.args` pattern to keep module interfaces simple and portable
+- Configure process-specific parameters through `modules.config`
 - Use named emit channels for clearer output references
 
 ### What's next?
