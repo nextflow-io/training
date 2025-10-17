@@ -1137,7 +1137,7 @@ Now we can update the `test.config` file as follows:
             config_profile_description = 'Minimal test dataset to check pipeline function'
 
             // Input data
-            input  = 'core-hello/assets/greetings.csv'
+            input  = "${projectDir}/assets/greetings.csv"
 
             // Other parameters
             batch     = 'test'
@@ -1158,6 +1158,12 @@ Now we can update the `test.config` file as follows:
             input  = params.pipelines_testdata_base_path + 'viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv'
         }
     ```
+
+Key points:
+
+- **Using `${projectDir}`**: This is a Nextflow implicit variable that points to the directory where the main workflow script is located (the pipeline root). Using it ensures the path works regardless of where the pipeline is run from.
+- **Absolute paths**: By using `${projectDir}`, we create an absolute path, which is important for test data that ships with the pipeline.
+- **Test data location**: nf-core pipelines typically store test data in the `assets/` directory within the pipeline repository for small test files, or reference external test datasets for larger files.
 
 And while we're at it, let's lower the default resource limitations:
 
