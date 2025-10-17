@@ -37,6 +37,7 @@ The pipeline fails immediately with clear, actionable error messages. This saves
 nf-core pipelines validate two different kinds of input:
 
 1. **Parameter validation**: Validates command-line parameters (flags like `--outdir`, `--batch`, `--input`)
+
    - Checks parameter types, ranges, and formats
    - Ensures required parameters are provided
    - Validates file paths exist
@@ -87,10 +88,10 @@ nf-schema is the successor to the deprecated nf-validation plugin and uses stand
 
 An nf-core pipeline uses two schema files for validation:
 
-| Schema File | Purpose | Validates |
-|-------------|---------|-----------|
-| `nextflow_schema.json` | Parameter validation | Command-line flags: `--input`, `--outdir`, `--batch` |
-| `assets/schema_input.json` | Input data validation | Contents of sample sheets and input files |
+| Schema File                | Purpose               | Validates                                            |
+| -------------------------- | --------------------- | ---------------------------------------------------- |
+| `nextflow_schema.json`     | Parameter validation  | Command-line flags: `--input`, `--outdir`, `--batch` |
+| `assets/schema_input.json` | Input data validation | Contents of sample sheets and input files            |
 
 Both schemas use JSON Schema format, a widely-adopted standard for describing and validating data structures.
 
@@ -177,6 +178,7 @@ nf-core pipelines schema build
 ```
 
 This command launches an interactive web interface where you can:
+
 - Add new parameters
 - Set validation rules
 - Organize parameters into groups
@@ -601,6 +603,7 @@ Input validation provides several important benefits:
 ### 4.3. Common validation patterns
 
 **File existence checking:**
+
 ```json
 "input_file": {
     "type": "string",
@@ -611,6 +614,7 @@ Input validation provides several important benefits:
 ```
 
 **Enum (allowed values):**
+
 ```json
 "strandedness": {
     "type": "string",
