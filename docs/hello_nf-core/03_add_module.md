@@ -257,7 +257,7 @@ Open [core-hello/workflows/hello.nf](core-hello/workflows/hello.nf) and modify t
 
 === "After"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="7-15"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="7-16"
         // emit a greeting
         sayHello(ch_samplesheet)
 
@@ -266,8 +266,8 @@ Open [core-hello/workflows/hello.nf](core-hello/workflows/hello.nf) and modify t
 
         // collect all the greetings into one file using nf-core cat/cat module
         // create metadata map with batch name as the ID
-        def meta = [ id: params.batch ]
-        ch_for_cat = convertToUpper.out.collect().map { files -> tuple(meta, files) }
+        def cat_meta = [ id: params.batch ]
+        ch_for_cat = convertToUpper.out.collect().map { files -> tuple(cat_meta, files) }
 
         CAT_CAT(ch_for_cat)
 
@@ -313,19 +313,19 @@ Let's break down what we changed:
 
 ### 1.10. Test the workflow
 
-Let's test that the workflow works with metadata tuples:
+Let's test that the workflow works with the `cat/cat` module:
 
 ```bash
-nextflow run core-hello --outdir core-hello-results -profile test,docker --validate_params false
+nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
 ```
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.10.4
+ N E X T F L O W   ~  version 25.04.3
 
-Launching `core-hello/main.nf` [curious_davinci] DSL2 - revision: c31b966b36
+Launching `./main.nf` [extravagant_volhard] DSL2 - revision: 6aa79210e6
 
 Input/output options
-  input                     : core-hello/assets/greetings.csv
+  input                     : /workspaces/training/hello-nf-core/nf-core-hello/assets/greetings.csv
   outdir                    : core-hello-results
 
 Institutional config options
@@ -334,20 +334,26 @@ Institutional config options
 
 Generic options
   validate_params           : false
+  trace_report_suffix       : 2025-10-17_19-51-31
 
 Core Nextflow options
-  runName                   : curious_davinci
+  runName                   : extravagant_volhard
   containerEngine           : docker
+  launchDir                 : /workspaces/training/hello-nf-core/nf-core-hello
+  workDir                   : /workspaces/training/hello-nf-core/nf-core-hello/work
+  projectDir                : /workspaces/training/hello-nf-core/nf-core-hello
+  userName                  : root
   profile                   : test,docker
+  configFiles               : /workspaces/training/hello-nf-core/nf-core-hello/nextflow.config
 
 !! Only displaying parameters that differ from the pipeline defaults !!
 ------------------------------------------------------
-executor >  local (7)
-[a1/2f8d9c] CORE_HELLO:HELLO:sayHello (1)       | 3 of 3 ✔
-[e2/9a8b3d] CORE_HELLO:HELLO:convertToUpper (2) | 3 of 3 ✔
-[c4/7e1b2a] CORE_HELLO:HELLO:CAT_CAT             | 1 of 1 ✔
-[f5/3d9c8b] CORE_HELLO:HELLO:cowpy              | 1 of 1 ✔
--[core/hello] Pipeline completed successfully-
+executor >  local (8)
+[60/3ac109] NFCORE_HELLO:HELLO:sayHello (3)       [100%] 3 of 3 ✔
+[58/073077] NFCORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔
+[00/4f3d32] NFCORE_HELLO:HELLO:CAT_CAT (test)     [100%] 1 of 1 ✔
+[98/afab8b] NFCORE_HELLO:HELLO:cowpy              [100%] 1 of 1 ✔
+-[nf-core/hello] Pipeline completed successfully-
 ```
 
 Notice that `CAT_CAT` now appears in the process execution list instead of `collectGreetings`.
@@ -383,7 +389,7 @@ Open [core-hello/modules/local/cowpy.nf](core-hello/modules/local/cowpy.nf) and 
 
 === "After"
 
-    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1"
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="13 17"
     #!/usr/bin/env nextflow
 
     // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
@@ -410,7 +416,7 @@ Open [core-hello/modules/local/cowpy.nf](core-hello/modules/local/cowpy.nf) and 
 
 === "Before"
 
-    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1"
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="13 17"
     #!/usr/bin/env nextflow
 
     // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
@@ -445,24 +451,25 @@ Now update the workflow to pass the tuple directly instead of extracting the fil
 
 === "After"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="39"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="39" hl_lines="2"
         // generate ASCII art of the greetings with cowpy
         cowpy(CAT_CAT.out.file_out, params.character)
     ```
 
 === "Before"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="39"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="39" hl_lines="2-4"
         // generate ASCII art of the greetings with cowpy
         // Extract the file from the tuple since cowpy doesn't use metadata yet
-        cowpy(CAT_CAT.out.file_out.map{ meta, file -> file }, params.character)
+        ch_for_cowpy = CAT_CAT.out.file_out.map{ meta, file -> file }
+        cowpy(ch_for_cowpy, params.character)
     ```
 
 Also update the emit block to use the named emit:
 
 === "After"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="52"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="58" hl_lines="2"
         emit:
         cowpy_hellos   = cowpy.out.cowpy_output
         versions       = ch_versions                 // channel: [ path(versions.yml) ]
@@ -470,7 +477,7 @@ Also update the emit block to use the named emit:
 
 === "Before"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="52"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="58" hl_lines="2"
         emit:
         cowpy_hellos   = cowpy.out
         versions       = ch_versions                 // channel: [ path(versions.yml) ]
@@ -479,7 +486,7 @@ Also update the emit block to use the named emit:
 Test the workflow to ensure metadata flows through correctly:
 
 ```bash
-nextflow run core-hello --outdir core-hello-results -profile test,docker --validate_params false
+nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
 ```
 
 The pipeline should run successfully with metadata now flowing from `CAT_CAT` through `cowpy`.
@@ -510,7 +517,7 @@ Open [core-hello/modules/local/cowpy.nf](core-hello/modules/local/cowpy.nf):
 
 === "After"
 
-    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="11 14 16 17"
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="18 20"
     #!/usr/bin/env nextflow
 
     // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
@@ -537,7 +544,7 @@ Open [core-hello/modules/local/cowpy.nf](core-hello/modules/local/cowpy.nf):
 
 === "Before"
 
-    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1"
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="13"
     #!/usr/bin/env nextflow
 
     // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
@@ -578,19 +585,13 @@ Open [core-hello/conf/modules.config](core-hello/conf/modules.config) and add th
 
 === "After"
 
-    ```groovy title="core-hello/conf/modules.config" linenums="1" hl_lines="10-12"
-    /*
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        Config file for defining DSL2 per module options and publishing paths
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    */
-
+    ```groovy title="core-hello/conf/modules.config" linenums="13" hl_lines="7-9"
     process {
         publishDir = [
             path: { "${params.outdir}/${task.process.tokenize(':')[-1].tokenize('_')[0].toLowerCase()}" },
         ]
 
-        withName: 'CORE_HELLO:HELLO:cowpy' {
+        withName: 'cowpy' {
             ext.args = { "-c ${params.character}" }
         }
     }
@@ -598,13 +599,7 @@ Open [core-hello/conf/modules.config](core-hello/conf/modules.config) and add th
 
 === "Before"
 
-    ```groovy title="core-hello/conf/modules.config" linenums="1"
-    /*
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        Config file for defining DSL2 per module options and publishing paths
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    */
-
+    ```groovy title="core-hello/conf/modules.config" linenums="13"
     process {
         publishDir = [
             path: { "${params.outdir}/${task.process.tokenize(':')[-1].tokenize('_')[0].toLowerCase()}" },
@@ -640,7 +635,7 @@ Open [core-hello/workflows/hello.nf](core-hello/workflows/hello.nf) and update t
 
 === "Before"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="39"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="39" hl_lines="2"
         // generate ASCII art of the greetings with cowpy
         cowpy(CAT_CAT.out.file_out, params.character)
     ```
@@ -649,13 +644,33 @@ The workflow code is now cleaner - we don't need to pass `params.character` dire
 
 #### Test
 
-Test that the workflow still works with the ext.args configuration:
+Test that the workflow still works with the ext.args configuration. Let's specify a different character to verify the configuration is working:
 
 ```bash
-nextflow run core-hello --outdir core-hello-results -profile test,docker --validate_params false
+nextflow run . --outdir core-hello-results -profile test,docker --validate_params false --character cow
 ```
 
-The pipeline should run successfully, producing the same cowpy output as before.
+The pipeline should run successfully. In the output, look for the cowpy process execution line which will show something like:
+
+```console title="Output (excerpt)"
+[f3/abc123] process > CORE_HELLO:HELLO:cowpy [100%] 1 of 1 ✔
+```
+
+Now let's verify that the `ext.args` configuration actually passed the character argument to the cowpy command. Use the task hash (the `f3/abc123` part) to inspect the `.command.sh` file in the work directory:
+
+```bash
+cat work/f3/abc123*/command.sh
+```
+
+You should see the cowpy command with the `-c cow` argument:
+
+```console title="Output"
+#!/usr/bin/env bash
+...
+cat test.txt | cowpy -c cow > cowpy-test.txt
+```
+
+This confirms that `task.ext.args` successfully passed the character parameter through the configuration rather than requiring it as a process input.
 
 ### 2.3. Add configurable output naming with ext.prefix
 
@@ -748,7 +763,7 @@ Update [core-hello/conf/modules.config](core-hello/conf/modules.config):
 === "After"
 
     ```groovy title="core-hello/conf/modules.config" linenums="11" hl_lines="3"
-        withName: 'CORE_HELLO:HELLO:cowpy' {
+        withName: 'cowpy' {
             ext.args = { "-c ${params.character}" }
             ext.prefix = { "cowpy-${meta.id}" }
         }
@@ -757,7 +772,7 @@ Update [core-hello/conf/modules.config](core-hello/conf/modules.config):
 === "Before"
 
     ```groovy title="core-hello/conf/modules.config" linenums="11"
-        withName: 'CORE_HELLO:HELLO:cowpy' {
+        withName: 'cowpy' {
             ext.args = { "-c ${params.character}" }
         }
     ```
@@ -773,7 +788,7 @@ Note that we use a closure (`{ "cowpy-${meta.id}" }`) which has access to `meta`
 Test the workflow once more:
 
 ```bash
-nextflow run core-hello --outdir core-hello-results -profile test,docker --validate_params false
+nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
 ```
 
 Check the outputs:
