@@ -842,13 +842,7 @@ However, you might want to keep it as a reference for understanding the differen
 
 ## Takeaway
 
-You now know how to:
-
-- Find, install, and use nf-core modules in your pipeline
-- Update local modules to use metadata tuples following nf-core patterns
-- Simplify module interfaces with `ext.args` for configurable arguments
-- Use `ext.prefix` for standardized output file naming
-- Replace custom local modules with nf-core modules and clean up unused code
+You now know how to leverage pre-built nf-core modules in your pipeline and adapt your local modules to follow nf-core conventions. You learned how to use metadata tuples to track sample information through the workflow, simplify module interfaces with `ext.args` for configurable arguments, and use `ext.prefix` for standardized output file naming. These patterns keep modules portable and reusable while centralizing configuration in `modules.config`, making your pipeline more maintainable and consistent with nf-core best practices.
 
 ## What's next?
 
