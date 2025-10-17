@@ -257,7 +257,7 @@ Open [core-hello/workflows/hello.nf](core-hello/workflows/hello.nf) and modify t
 
 === "After"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="7-16"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="7-17"
         // emit a greeting
         sayHello(ch_samplesheet)
 
@@ -389,7 +389,7 @@ Open [core-hello/modules/local/cowpy.nf](core-hello/modules/local/cowpy.nf) and 
 
 === "After"
 
-    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="13 17"
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="12 16"
     #!/usr/bin/env nextflow
 
     // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
@@ -416,7 +416,7 @@ Open [core-hello/modules/local/cowpy.nf](core-hello/modules/local/cowpy.nf) and 
 
 === "Before"
 
-    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="13 17"
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="12 16"
     #!/usr/bin/env nextflow
 
     // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
@@ -585,7 +585,7 @@ Open [core-hello/conf/modules.config](core-hello/conf/modules.config) and add th
 
 === "After"
 
-    ```groovy title="core-hello/conf/modules.config" linenums="13" hl_lines="7-9"
+    ```groovy title="core-hello/conf/modules.config" linenums="13" hl_lines="6-8"
     process {
         publishDir = [
             path: { "${params.outdir}/${task.process.tokenize(':')[-1].tokenize('_')[0].toLowerCase()}" },
@@ -695,7 +695,7 @@ Open [core-hello/modules/local/cowpy.nf](core-hello/modules/local/cowpy.nf):
 
 === "After"
 
-    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="16 19 22"
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="15 19 21"
     #!/usr/bin/env nextflow
 
     // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
@@ -723,7 +723,7 @@ Open [core-hello/modules/local/cowpy.nf](core-hello/modules/local/cowpy.nf):
 
 === "Before"
 
-    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="16 21"
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="15 20"
     #!/usr/bin/env nextflow
 
     // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
