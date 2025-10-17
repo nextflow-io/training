@@ -1,10 +1,54 @@
 # Part 4: Input validation
 
-In this fourth part of the Hello nf-core training course, we show you how to use the nf-schema plugin to validate inputs.
+In this fourth part of the Hello nf-core training course, we show you how to use the nf-schema plugin to validate pipeline inputs and parameters.
 
-One of the key features of nf-core pipelines is robust input validation. The nf-schema plugin provides automated validation of pipeline parameters and sample sheets against JSON schemas, helping catch errors early and provide clear feedback to users.
+## Why validation matters
 
-In this section, we'll add proper input validation to our pipeline using the nf-schema plugin.
+Imagine running your pipeline for two hours, only to have it crash because a user provided a file with the wrong extension. Or spending hours debugging cryptic errors, only to discover that a parameter was misspelled. Without input validation, these scenarios are common.
+
+Consider this example:
+
+```console title="Without validation"
+$ nextflow run my-pipeline --input data.txt --output results
+
+...2 hours later...
+
+ERROR ~ No such file: 'data.fq.gz'
+  Expected FASTQ format but received TXT
+```
+
+The pipeline accepted invalid inputs and ran for hours before failing. With proper validation:
+
+```console title="With validation"
+$ nextflow run my-pipeline --input data.txt --output results
+
+ERROR ~ Validation of pipeline parameters failed!
+
+ * --input (data.txt): File extension '.txt' does not match required pattern '.fq.gz' or '.fastq.gz'
+ * --output: required parameter is missing (expected: --outdir)
+
+Pipeline failed before execution - please fix the errors above
+```
+
+The pipeline fails immediately with clear, actionable error messages. This saves time, compute resources, and frustration.
+
+## Two types of validation
+
+nf-core pipelines validate two different kinds of input:
+
+1. **Parameter validation**: Validates command-line parameters (flags like `--outdir`, `--batch`, `--input`)
+   - Checks parameter types, ranges, and formats
+   - Ensures required parameters are provided
+   - Validates file paths exist
+   - Defined in `nextflow_schema.json`
+
+2. **Input data validation**: Validates the contents of input files (like sample sheets or CSV files)
+   - Checks column structure and data types
+   - Validates file references within the input file
+   - Ensures required fields are present
+   - Defined in `assets/schema_input.json`
+
+Both types of validation happen **before** the pipeline executes any processes, ensuring fast failure with clear error messages.
 
 !!! note
 
@@ -23,99 +67,192 @@ In this section, we'll add proper input validation to our pipeline using the nf-
 
 ---
 
-## 1. Understand schema-based validation
+## 1. The nf-schema plugin
 
-Before we implement validation, let's understand how nf-schema works and what schema files do.
+The [nf-schema plugin](https://nextflow-io.github.io/nf-schema/latest/) is a Nextflow plugin that provides comprehensive validation capabilities for nf-core pipelines.
 
-### 1.1. What is nf-schema?
+### 1.1. Core functionality
 
-The [nf-schema plugin](https://nextflow-io.github.io/nf-schema/latest/) is a Nextflow plugin that provides functionality for:
+nf-schema provides several key functions:
 
-- **Parameter validation**: Validating pipeline parameters against a JSON schema
-- **Sample sheet validation**: Validating input sample sheets and converting them to channels
-- **Help text generation**: Automatically generating help text from schema definitions
-- **Parameter summary**: Displaying which parameters differ from defaults
+- **Parameter validation**: Validates pipeline parameters against `nextflow_schema.json`
+- **Sample sheet validation**: Validates input files against `assets/schema_input.json`
+- **Channel conversion**: Converts validated sample sheets to Nextflow channels
+- **Help text generation**: Automatically generates `--help` output from schema definitions
+- **Parameter summary**: Displays which parameters differ from defaults
 
-nf-schema is the successor to the deprecated nf-validation plugin and uses standard JSON Schema Draft 2020-12 for validation.
+nf-schema is the successor to the deprecated nf-validation plugin and uses standard [JSON Schema Draft 2020-12](https://json-schema.org/) for validation.
 
 ### 1.2. The two schema files
 
-An nf-core pipeline typically uses two schema files:
+An nf-core pipeline uses two schema files for validation:
 
-1. **`nextflow_schema.json`**: Defines and validates pipeline parameters (e.g., `--input`, `--outdir`, `--batch`)
-2. **`assets/schema_input.json`**: Defines the structure and validates the contents of input sample sheets
+| Schema File | Purpose | Validates |
+|-------------|---------|-----------|
+| `nextflow_schema.json` | Parameter validation | Command-line flags: `--input`, `--outdir`, `--batch` |
+| `assets/schema_input.json` | Input data validation | Contents of sample sheets and input files |
 
-Both files use [JSON Schema](https://json-schema.org/) format, a standard for describing and validating JSON data structures.
+Both schemas use JSON Schema format, a widely-adopted standard for describing and validating data structures.
 
-### 1.3. Examine an existing schema
+### 1.3. When validation occurs
 
-Let's look at the `schema_input.json` file that was created with our pipeline template:
-
-```bash
-cat core-hello/assets/schema_input.json
+```mermaid
+graph LR
+    A[User runs pipeline] --> B[Parameter validation]
+    B -->|✓ Valid| C[Input data validation]
+    B -->|✗ Invalid| D[Error: Fix parameters]
+    C -->|✓ Valid| E[Pipeline executes]
+    C -->|✗ Invalid| F[Error: Fix input data]
 ```
 
-```json title="core-hello/assets/schema_input.json" linenums="1"
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://raw.githubusercontent.com/core/hello/main/assets/schema_input.json",
-  "title": "core/hello pipeline - params.input schema",
-  "description": "Schema for the file provided with params.input",
-  "type": "array",
-  "items": {
-    "type": "object",
-    "properties": {
-      "sample": {
-        "type": "string",
-        "pattern": "^\\S+$",
-        "errorMessage": "Sample name must be provided and cannot contain spaces",
-        "meta": ["id"]
-      },
-      "fastq_1": {
-        "type": "string",
-        "format": "file-path",
-        "exists": true,
-        "pattern": "^\\S+\\.f(ast)?q\\.gz$",
-        "errorMessage": "FastQ file for reads 1 must be provided, cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
-      },
-      "fastq_2": {
-        "type": "string",
-        "format": "file-path",
-        "exists": true,
-        "pattern": "^\\S+\\.f(ast)?q\\.gz$",
-        "errorMessage": "FastQ file for reads 2 cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
-      }
-    },
-    "required": ["sample", "fastq_1"]
-  }
-}
-```
-
-This schema defines:
-
-- The input is an array of objects (one per sample)
-- Each object has fields: `sample`, `fastq_1`, and `fastq_2`
-- Field types and validation rules (e.g., file paths must exist and match certain patterns)
-- Which fields are required
-- Custom error messages for validation failures
-
-This schema is appropriate for FASTQ sequencing data but doesn't match our simple greetings CSV format.
+Validation happens **before** any pipeline processes run, providing fast feedback and preventing wasted compute time.
 
 ### Takeaway
 
-You now know what nf-schema is, what it does, and how schema files define validation rules for pipeline inputs.
+You now understand what nf-schema does, the two types of validation it provides, and when validation occurs in the pipeline execution lifecycle.
 
 ### What's next?
 
-Create a custom schema file for our greetings input format.
+Start by implementing parameter validation for command-line flags.
 
 ---
 
-## 2. Create a schema for the greetings input
+## 2. Parameter validation (nextflow_schema.json)
 
-Our `greetings.csv` file is very simple - it just contains one greeting per line. Let's create a schema that validates this format.
+Let's start by adding parameter validation to our pipeline. This validates command-line flags like `--input`, `--outdir`, and `--batch`.
 
-### 2.1. Understand the greetings.csv format
+### 2.1. Examine the parameter schema
+
+Let's look at a section of the `nextflow_schema.json` file that came with our pipeline template:
+
+```bash
+grep -A 20 '"input_output_options"' core-hello/nextflow_schema.json
+```
+
+The parameter schema is organized into groups. Here's the `input_output_options` group (simplified):
+
+```json title="core-hello/nextflow_schema.json (excerpt)"
+"input_output_options": {
+    "title": "Input/output options",
+    "type": "object",
+    "description": "Define where the pipeline should find input data and save output data.",
+    "required": ["input", "outdir"],
+    "properties": {
+        "input": {
+            "type": "string",
+            "format": "file-path",
+            "exists": true,
+            "mimetype": "text/csv",
+            "pattern": "^\\S+\\.csv$",
+            "description": "Path to comma-separated file containing greetings.",
+            "help_text": "You will need to create a design file with information about the samples in your experiment before running the pipeline."
+        },
+        "outdir": {
+            "type": "string",
+            "format": "directory-path",
+            "description": "The output directory where the results will be saved.",
+            "fa_icon": "fas fa-folder-open"
+        }
+    }
+}
+```
+
+Key validation features:
+
+- **`type`**: Data type (string, integer, boolean, number)
+- **`format`**: Special formats like `file-path` or `directory-path`
+- **`exists`**: For file paths, check if the file exists
+- **`pattern`**: Regular expression the value must match
+- **`required`**: Array of parameter names that must be provided
+- **`mimetype`**: Expected file mimetype for validation
+
+Notice the `batch` parameter we've been using isn't defined yet in the schema!
+
+### 2.2. Add the batch parameter
+
+The parameter schema can be edited manually, but nf-core provides a helpful GUI tool:
+
+```bash
+nf-core pipelines schema build
+```
+
+This command launches an interactive web interface where you can:
+- Add new parameters
+- Set validation rules
+- Organize parameters into groups
+- Generate help text
+
+For our simple case, we'll edit the JSON directly. Open `core-hello/nextflow_schema.json` and find the `"input_output_options"` section. Add the `batch` parameter:
+
+```json title="core-hello/nextflow_schema.json (excerpt)" hl_lines="13-17"
+"input_output_options": {
+    "title": "Input/output options",
+    "type": "object",
+    "description": "Define where the pipeline should find input data and save output data.",
+    "required": ["input", "outdir"],
+    "properties": {
+        "input": {
+            "type": "string",
+            "format": "file-path",
+            "exists": true,
+            "description": "Path to comma-separated file containing greetings."
+        },
+        "batch": {
+            "type": "string",
+            "default": "batch-01",
+            "description": "Name for this batch of greetings"
+        },
+        "outdir": {
+            "type": "string",
+            "format": "directory-path",
+            "description": "The output directory where the results will be saved."
+        }
+    }
+}
+```
+
+### 2.3. Test parameter validation
+
+Now let's test that parameter validation works correctly.
+
+First, try running without the required `input` parameter:
+
+```bash
+nextflow run core-hello --outdir test-results -profile docker
+```
+
+```console title="Output"
+ERROR ~ Validation of pipeline parameters failed!
+
+ -- Check '.nextflow.log' file for details
+ * --input: required property is missing
+```
+
+Perfect! The validation catches the missing required parameter before the pipeline runs.
+
+Now try with a valid set of parameters:
+
+```bash
+nextflow run core-hello --input assets/greetings.csv --outdir results --batch my-batch -profile test,docker
+```
+
+The pipeline should run successfully, and the `batch` parameter is now validated.
+
+### Takeaway
+
+You now know how to add parameters to `nextflow_schema.json` and test parameter validation. The nf-core schema build tool makes it easy to manage complex parameter schemas interactively.
+
+### What's next?
+
+Now that parameter validation is working, let's add validation for the input data file contents.
+
+---
+
+## 3. Input data validation (schema_input.json)
+
+Now let's add validation for the contents of our input CSV file. While parameter validation checks command-line flags, input data validation ensures the data inside the CSV file is structured correctly.
+
+### 3.1. Understand the greetings.csv format
 
 Let's remind ourselves what our input looks like:
 
@@ -135,18 +272,18 @@ This is a simple CSV with:
 - One greeting per line
 - Text strings with no special format requirements
 
-### 2.2. Design the schema structure
+### 3.2. Design the schema structure
 
 For our use case, we want to:
 
 1. Accept CSV input with one column
 2. Treat each row as a greeting string
 3. Ensure greetings are not empty
-4. Optionally, ensure no whitespace-only entries
+4. Ensure no whitespace-only entries
 
 We'll structure this as an array of objects, where each object has a `greeting` field.
 
-### 2.3. Create the schema file
+### 3.3. Create the schema file
 
 Replace the contents of [core-hello/assets/schema_input.json](core-hello/assets/schema_input.json) with the following:
 
@@ -181,16 +318,11 @@ Let's break down the key parts:
   - **`errorMessage`**: Custom error message shown if validation fails
 - **`required: ["greeting"]`**: The `greeting` field is mandatory
 
-### 2.4. Understand the samplesheet structure expectation
+### 3.4. Add a header to the greetings.csv file
 
-When nf-schema reads a CSV file, it expects either:
+When nf-schema reads a CSV file, it expects the first row to contain column headers that match the field names in the schema.
 
-1. A **headerless CSV**: Each row becomes an object with fields named by column position (column1, column2, etc.)
-2. A **CSV with headers**: The first row defines field names
-
-For our simple case, we'll add a header to our greetings file to match the schema.
-
-### 2.5. Update the greetings.csv file
+For our simple case, we need to add a `greeting` header to our greetings file:
 
 Add a header line to the greetings file:
 
@@ -215,19 +347,15 @@ Now the CSV file has a header that matches the field name in our schema.
 
 ### Takeaway
 
-You know how to create a JSON schema that defines validation rules for a simple sample sheet input.
+You've created a JSON schema for the greetings input file and added the required header to the CSV file.
 
 ### What's next?
 
-Implement the validation in the pipeline code.
+Implement the validation in the pipeline code using `samplesheetToList`.
 
----
-
-## 3. Implement input validation with samplesheetToList
+### 3.5. Implement samplesheetToList in the pipeline
 
 Now we need to replace our simple CSV parsing with nf-schema's `samplesheetToList` function, which validates and converts the sample sheet.
-
-### 3.1. Understand samplesheetToList
 
 The `samplesheetToList` function:
 
@@ -236,15 +364,7 @@ The `samplesheetToList` function:
 3. Returns a Groovy list where each entry corresponds to a row
 4. Throws helpful error messages if validation fails
 
-Basic usage:
-
-```groovy
-include { samplesheetToList } from 'plugin/nf-schema'
-
-def input_list = samplesheetToList(params.input, "assets/schema_input.json")
-```
-
-### 3.2. Update the input handling code
+Let's update the input handling code:
 
 Open [core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf](core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf) and locate the section where we create the input channel (around line 64).
 
@@ -331,41 +451,31 @@ Let's break down what changed:
 2. **`Channel.fromList(...)`**: Converts the list into a Nextflow channel
 3. **`.map { row -> row[0] }`**: Extracts just the greeting string from each validated row (accessing the first column by index)
 
-### 3.3. Enable parameter validation
+!!! note "Parameter validation is enabled by default"
 
-The pipeline template already includes code to validate parameters, but we had it disabled with `--validate_params false`. Now that we have proper schema validation set up, let's enable it.
-
-The validation is controlled by the `params.validate_params` parameter in [core-hello/nextflow.config](core-hello/nextflow.config). Let's check that it's set to `true` (the default):
-
-```groovy title="core-hello/nextflow.config" linenums="35"
-    validate_params            = true
-```
-
-This should already be the default. The validation is performed by the `UTILS_NFSCHEMA_PLUGIN` subworkflow, which is called during pipeline initialization.
+    The pipeline template already includes parameter validation enabled via `params.validate_params = true` in `nextflow.config`. The validation is performed by the `UTILS_NFSCHEMA_PLUGIN` subworkflow during pipeline initialization.
 
 ### Takeaway
 
-You know how to use the `samplesheetToList` function to validate and parse input sample sheets using JSON schemas.
+You've successfully implemented input data validation using `samplesheetToList` and JSON schemas.
 
 ### What's next?
 
-Test that the validation works correctly.
+Test both parameter and input data validation to see them in action.
 
----
-
-## 4. Test input validation
+### 3.6. Test input validation
 
 Let's verify that our validation works by testing both valid and invalid inputs.
 
-### 4.1. Test with valid input
+**Test with valid input:**
 
-First, let's confirm the pipeline still runs successfully with valid input:
+First, confirm the pipeline runs successfully with valid input:
 
 ```bash
 nextflow run core-hello --outdir core-hello-results -profile test,docker
 ```
 
-Note that we no longer need `--validate_params false`!
+Note that we no longer need `--validate_params false` since validation is working!
 
 ```console title="Output"
  N E X T F L O W   ~  version 24.10.4
@@ -390,14 +500,14 @@ Core Nextflow options
 executor >  local (7)
 [5a/1c3d8b] CORE_HELLO:HELLO:sayHello (1)       | 3 of 3 ✔
 [2b/9f4a2c] CORE_HELLO:HELLO:convertToUpper (3) | 3 of 3 ✔
-[8c/3e7d1a] CORE_HELLO:HELLO:collectGreetings   | 1 of 1 ✔
+[8c/3e7d1a] CORE_HELLO:HELLO:CAT_CAT (test)     | 1 of 1 ✔
 [4d/6b2f8e] CORE_HELLO:HELLO:cowpy              | 1 of 1 ✔
 -[core/hello] Pipeline completed successfully-
 ```
 
 Great! The pipeline runs successfully and validation passes silently.
 
-### 4.2. Test with invalid input (whitespace-only greeting)
+**Test with invalid input:**
 
 Now let's test that validation catches errors. Create a test file with an invalid entry:
 
@@ -444,138 +554,85 @@ Perfect! The validation caught the error and provided a clear, helpful error mes
 
     Empty lines (with no content at all) are filtered out during CSV parsing and won't trigger validation errors. Only lines with content that fails validation rules (like whitespace-only entries) will be caught.
 
-### 4.3. Test with missing required field
-
-Let's create another invalid file, this time missing the header:
-
-```bash
-cat > /tmp/no_header.csv << 'EOF'
-Hello
-Bonjour
-Holà
-EOF
-```
-
-Try running with this file:
-
-```bash
-nextflow run core-hello --input /tmp/no_header.csv --outdir test-results -profile docker
-```
-
-The validation will fail because the first row is treated as a header, but then the actual data rows don't have a `greeting` field defined.
-
-### 4.4. Understanding validation benefits
-
-Input validation provides several important benefits:
-
-1. **Early error detection**: Problems are caught before any processing begins
-2. **Clear error messages**: Users get specific, actionable feedback about what's wrong
-3. **Reduced debugging time**: No need to trace cryptic errors through the pipeline
-4. **Documentation**: The schema serves as documentation of expected input format
-5. **Type safety**: Ensures data types match expectations throughout the pipeline
-
 ### Takeaway
 
-You know how to test input validation and understand the benefits it provides for pipeline usability and robustness.
+You now know how to implement and test both parameter validation and input data validation. Your pipeline validates inputs before execution, providing fast feedback and clear error messages.
 
 ### What's next?
 
-Explore additional validation features and parameter schema validation.
+Learn about validation best practices and advanced features.
 
 ---
 
-## 5. Optional: Explore parameter validation
+## 4. Validation best practices
 
-In addition to sample sheet validation, nf-schema also validates pipeline parameters against `nextflow_schema.json`.
+Now that you have validation working, let's cover some best practices and understand the key benefits validation provides.
 
-### 5.1. Examine the parameter schema
+### 4.1. Benefits of validation
 
-Let's look at a section of the parameter schema:
+Input validation provides several important benefits:
 
-```bash
-grep -A 10 '"batch"' core-hello/nextflow_schema.json
-```
+1. **Early error detection**: Problems are caught before any processing begins, saving compute time and resources
+2. **Clear error messages**: Users get specific, actionable feedback about what's wrong and how to fix it
+3. **Reduced debugging time**: No need to trace cryptic errors through log files
+4. **Self-documentation**: The schema serves as documentation of expected input formats
+5. **Type safety**: Ensures data types match expectations throughout the pipeline
+6. **Reproducibility**: Consistent validation rules across all pipeline runs
 
-You might notice that the `batch` parameter isn't defined yet in the schema. Let's add it.
+### 4.2. When to validate
 
-### 5.2. Add the batch parameter to the schema
+**Parameter validation (`nextflow_schema.json`)** should include:
 
-The parameter schema can be edited manually, but nf-core provides a tool to help:
+- All command-line parameters the pipeline accepts
+- Required vs. optional parameters
+- File path parameters with existence checks
+- Enum values for parameters with specific allowed values
+- Type specifications (string, integer, boolean, number)
 
-```bash
-nf-core pipelines schema build
-```
+**Input data validation (`schema_input.json`)** should cover:
 
-This launches an interactive tool that helps you add and configure parameters. However, for our simple case, we can edit the JSON directly.
+- Column structure and naming
+- Required vs. optional fields
+- Data types for each field
+- File path validation (for paths within the CSV)
+- Pattern matching (e.g., file extensions, sample ID formats)
+- Custom error messages for common mistakes
 
-Open [core-hello/nextflow_schema.json](core-hello/nextflow_schema.json) and find the `"input_output_options"` section. Add the `batch` parameter:
+### 4.3. Common validation patterns
 
-```json title="core-hello/nextflow_schema.json (excerpt)" linenums="30" hl_lines="17-22"
-"input_output_options": {
-    "title": "Input/output options",
-    "type": "object",
-    "fa_icon": "fas fa-terminal",
-    "description": "Define where the pipeline should find input data and save output data.",
-    "required": ["input", "outdir"],
-    "properties": {
-        "input": {
-            "type": "string",
-            "format": "file-path",
-            "exists": true,
-            "schema": "assets/schema_input.json",
-            "mimetype": "text/csv",
-            "pattern": "^\\S+\\.csv$",
-            "description": "Path to comma-separated file containing greetings.",
-            "fa_icon": "fas fa-file-csv"
-        },
-        "batch": {
-            "type": "string",
-            "default": "batch-01",
-            "description": "Name for this batch of greetings",
-            "fa_icon": "fas fa-tag"
-        },
-        "outdir": {
-            "type": "string",
-            "format": "directory-path",
-            "description": "The output directory where the results will be saved.",
-            "fa_icon": "fas fa-folder-open"
-        }
-    }
+**File existence checking:**
+```json
+"input_file": {
+    "type": "string",
+    "format": "file-path",
+    "exists": true,
+    "pattern": "^\\S+\\.fastq\\.gz$"
 }
 ```
 
-### 5.3. Test parameter validation
-
-Now try running with an invalid parameter type:
-
-```bash
-nextflow run core-hello --batch 12345 --outdir test-results -profile test,docker
+**Enum (allowed values):**
+```json
+"strandedness": {
+    "type": "string",
+    "enum": ["unstranded", "forward", "reverse"]
+}
 ```
 
-The pipeline should run fine because `12345` will be converted to the string `"12345"`. Parameter validation is more useful for catching missing required parameters or invalid file paths.
+**Conditional requirements:**
+Use `dependentRequired` for fields that depend on other fields being present.
 
-Try running without the required `input` parameter:
+**Unique values:**
+Add `"unique": true` to ensure no duplicates (like sample IDs).
 
-```bash
-nextflow run core-hello --outdir test-results -profile docker
-```
+### 4.4. Tools for schema management
 
-```console title="Output"
-ERROR ~ Validation of pipeline parameters failed!
-
- -- Check '.nextflow.log' file for details
- * --input: required property is missing
-```
-
-Excellent! The validation catches missing required parameters.
+- **`nf-core pipelines schema build`**: Interactive GUI for managing `nextflow_schema.json`
+- **`nf-core pipelines schema lint`**: Validate schema syntax
+- **`nf-core pipelines schema docs`**: Generate markdown documentation from schema
 
 ### Takeaway
 
-You know how parameter validation works and how to add parameter definitions to the schema.
-
-### What's next?
-
-You can explore the [nf-schema documentation](https://nextflow-io.github.io/nf-schema/latest/) to learn about advanced features like metadata maps, multi-file samples, and custom validation rules.
+You understand the benefits of validation, when to apply it, and common patterns for both parameter and input data validation.
 
 ---
 
@@ -589,10 +646,12 @@ Throughout this course, you've learned how to:
 - **Create nf-core-style pipelines** from scratch using the nf-core template
 - **Make workflows composable** with `take`, `main`, and `emit` blocks
 - **Integrate nf-core modules** from the community repository
-- **Implement robust input validation** using JSON schemas and the nf-schema plugin
+- **Implement parameter validation** to catch configuration errors before pipeline execution
+- **Implement input data validation** to ensure sample sheets and input files are properly formatted
+- **Use nf-schema tools** to manage validation schemas and test validation rules
 - **Follow nf-core conventions** for code organization, configuration, and documentation
 
-You now have the foundational knowledge to develop production-ready Nextflow pipelines that follow nf-core best practices. Your pipeline includes proper module organization, input validation, and is ready to be extended with additional features.
+You now have the foundational knowledge to develop production-ready Nextflow pipelines that follow nf-core best practices. Your pipeline includes proper module organization, comprehensive validation, and is ready to be extended with additional features.
 
 ### Where to go from here
 
