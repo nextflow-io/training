@@ -695,7 +695,7 @@ Open [core-hello/modules/local/cowpy.nf](core-hello/modules/local/cowpy.nf):
 
 === "After"
 
-    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="15 17 18 20"
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="16 19 22"
     #!/usr/bin/env nextflow
 
     // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
@@ -723,7 +723,7 @@ Open [core-hello/modules/local/cowpy.nf](core-hello/modules/local/cowpy.nf):
 
 === "Before"
 
-    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1"
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="16 21"
     #!/usr/bin/env nextflow
 
     // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
@@ -762,7 +762,7 @@ Update [core-hello/conf/modules.config](core-hello/conf/modules.config):
 
 === "After"
 
-    ```groovy title="core-hello/conf/modules.config" linenums="11" hl_lines="3"
+    ```groovy title="core-hello/conf/modules.config" linenums="21" hl_lines="3"
         withName: 'cowpy' {
             ext.args = { "-c ${params.character}" }
             ext.prefix = { "cowpy-${meta.id}" }
@@ -771,7 +771,7 @@ Update [core-hello/conf/modules.config](core-hello/conf/modules.config):
 
 === "Before"
 
-    ```groovy title="core-hello/conf/modules.config" linenums="11"
+    ```groovy title="core-hello/conf/modules.config" linenums="21"
         withName: 'cowpy' {
             ext.args = { "-c ${params.character}" }
         }
