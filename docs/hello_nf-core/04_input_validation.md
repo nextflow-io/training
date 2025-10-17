@@ -38,17 +38,17 @@ nf-core pipelines validate two different kinds of input:
 
 1. **Parameter validation**: Validates command-line parameters (flags like `--outdir`, `--batch`, `--input`)
 
-    - Checks parameter types, ranges, and formats
-    - Ensures required parameters are provided
-    - Validates file paths exist
-    - Defined in `nextflow_schema.json`
+   - Checks parameter types, ranges, and formats
+   - Ensures required parameters are provided
+   - Validates file paths exist
+   - Defined in `nextflow_schema.json`
 
 2. **Input data validation**: Validates the contents of input files (like sample sheets or CSV files)
 
-    - Checks column structure and data types
-    - Validates file references within the input file
-    - Ensures required fields are present
-    - Defined in `assets/schema_input.json`
+   - Checks column structure and data types
+   - Validates file references within the input file
+   - Ensures required fields are present
+   - Defined in `assets/schema_input.json`
 
 Both types of validation happen **before** the pipeline executes any processes, ensuring fast failure with clear error messages.
 
