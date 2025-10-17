@@ -481,7 +481,7 @@ nextflow run core-hello --outdir core-hello-results -profile test,docker
 Note that we no longer need `--validate_params false` since validation is working!
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.10.4
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `core-hello/main.nf` [serene_volta] DSL2 - revision: c31b966b36
 
@@ -532,7 +532,7 @@ nextflow run core-hello --input /tmp/invalid_greetings.csv --outdir test-results
 ```
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.10.4
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `core-hello/main.nf` [silly_cuvier] DSL2 - revision: c31b966b36
 
