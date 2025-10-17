@@ -10,6 +10,17 @@ In this section, we'll replace the custom `collectGreetings` module with the `ca
 
     This section assumes you have completed [Part 2: Rewrite Hello for nf-core](./02_rewrite_hello.md) and have a working `core-hello` pipeline.
 
+!!! tip "Starting from a clean slate"
+
+    If you didn't complete Part 2 or want to start fresh for this section, you can use the `core-hello-end` solution as your starting point:
+
+    ```bash
+    cp -r hello-nf-core/solutions/core-hello-end core-hello
+    cd core-hello
+    ```
+
+    This gives you a fully functional nf-core pipeline ready for adding modules.
+
 ---
 
 ## 1. Use an nf-core module
