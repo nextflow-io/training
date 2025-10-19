@@ -60,6 +60,7 @@ process {
 ```
 
 This minimal config:
+
 - Enables Docker containers
 - Sets Docker run options to avoid permission issues
 - Caps resource requests at 2 CPUs and 7 GB (for GitHub Codespaces)
@@ -108,6 +109,7 @@ profiles {
 ```
 
 Common container profiles:
+
 - `docker`: Use Docker containers (most common for local development)
 - `singularity`: Use Singularity/Apptainer (common on HPC)
 - `conda`: Use Conda environments
@@ -140,6 +142,7 @@ process {
 ```
 
 Test profiles:
+
 - `test`: Small dataset with fast parameters for quick testing
 - `test_full`: More comprehensive test with larger data
 
@@ -160,6 +163,7 @@ nextflow run nf-core/molkart -profile docker,test --outdir results
 ```
 
 This combines:
+
 - `docker`: Enable Docker containers
 - `test`: Use test dataset and parameters
 
@@ -181,6 +185,7 @@ Learn how to create your own custom profiles for different computing environment
 ### 3.1. Create profiles for switching between local development and execution on HPC
 
 Let's create custom profiles for two scenarios:
+
 1. Local development with Docker
 2. University HPC with Slurm scheduler and Singularity
 
@@ -234,6 +239,7 @@ nextflow config -profile local_dev
 ```
 
 This is extremely useful for:
+
 - Debugging configuration issues
 - Understanding what values will actually be used
 - Checking how multiple profiles interact
@@ -451,6 +457,7 @@ These configuration skills are transferable to any Nextflow pipeline and will he
 Congratulations on completing the Nextflow for Bioimaging course!
 
 Next steps:
+
 - Fill out the course survey to provide feedback
 - Check out [Hello Nextflow](../hello_nextflow/index.md) to learn more about developing workflows
 - Explore [Hello nf-core](../hello_nf-core/index.md) to dive deeper into nf-core tooling

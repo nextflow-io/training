@@ -2,11 +2,6 @@
 
 In this first part of the Nextflow for Bioimaging training course, we'll use a very basic domain-agnostic Hello World example to demonstrate essential operations and point out the corresponding Nextflow code components.
 
-!!! Tip
-
-    A "Hello World!" is a minimalist example that is meant to demonstrate the basic syntax and structure of a programming language or software framework.
-    The example typically consists of printing the phrase "Hello, World!" to the output device, such as the console or terminal, or writing it to a file.
-
 ## 1. Run the workflow
 
 We provide you with a workflow script named `hello-world.nf` that takes an input via a command-line argument named `--greeting` and produces a text file containing that greeting.

@@ -12,19 +12,17 @@ If not, please do so now, ideally in a second browser window or tab so you can r
 ## GitHub Codespaces
 
 The GitHub Codespaces environment contains all the software, code and data necessary to work through this training course, so you don't need to install anything yourself.
-However, you do need a (free) GitHub account to log in, and you should take a few minutes to familiarize yourself with the interface.
-
-If you have not yet done so, please go through the [Environment Setup](../../envsetup/) mini-course before going any further.
+However, you do need a (free) GitHub account to log in, and if you are unfamiliar with the interface you should take a few minutes to familiarize yourself with it by completing the [GitHub Codespaces Orientation](../../envsetup/index.md) mini-course.
 
 ## Pre-download Docker images
 
-Before we begin, let's pre-download all the Docker images we'll need for this training course.
+Once you've opened your Codespace, let's pre-download all the Docker images we'll need for this training course.
 This will save time later and ensure smooth execution of the workflows.
 
 Open a new terminal tab and run the following command:
 
 ```bash
-nextflow run nf-core/molkart -profile docker,test -stub -resume --outdir results -r dev
+nextflow run nf-core/molkart -profile docker,test -stub -resume --outdir results
 ```
 
 This command will download all necessary Docker images in the background.
@@ -51,45 +49,5 @@ cd nf4-science/imaging/
     ```bash
     cd /workspaces/training/nf4-science/imaging
     ```
-
-Now let's have a look at the contents of this directory.
-
-## Materials provided
-
-You can explore the contents of this directory by using the file explorer on the left-hand side of the training workspace.
-Alternatively, you can use the `tree` command.
-
-Throughout the course, we use the output of `tree` to represent directory structure and contents in a readable form, sometimes with minor modifications for clarity.
-
-Here we generate a table of contents to the second level down:
-
-```bash
-tree . -L 2
-```
-
-If you run this inside `nf4-science/imaging`, you should see the following output:
-
-```console title="Directory contents"
-.
-├── data
-│   └── samplesheet.csv
-├── hello-world.nf
-├── nextflow.config
-└── test-params.yaml
-
-1 directory, 4 files
-```
-
-**Here's a summary of what you should know to get started:**
-
-- **The `hello-world.nf` file** is a simple workflow script we'll use for Part 1 (Run Basic Operations).
-
-- **The file `nextflow.config`** is a configuration file that sets minimal environment properties.
-
-- **The `data/` directory** contains example data files:
-
-  - `samplesheet.csv` - An example samplesheet for nf-core/molkart that we'll use in later parts.
-
-- **The file `test-params.yaml`** is a parameter file we'll use to configure pipeline execution.
 
 **Now, to begin the course, click on the arrow in the bottom right corner of this page.**

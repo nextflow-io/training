@@ -25,6 +25,8 @@ Key features of nf-core pipelines:
 
 ### 1.2. The molkart pipeline
 
+![nf-core/molkart pipeline](img/molkart.png)
+
 The [nf-core/molkart](https://nf-co.re/molkart) pipeline processes spatial transcriptomics imaging data through several stages:
 
 1. **Image preprocessing**: Grid pattern filling and optional contrast enhancement
@@ -42,9 +44,6 @@ The key outputs are:
 
 ## 2. Run molkart with test data
 
-nf-core pipelines include built-in test profiles that use small datasets hosted on GitHub.
-This lets you verify the pipeline works without providing your own data.
-
 Before we begin, let's clone the molkart repository locally so we can inspect its code:
 
 ```bash
@@ -54,7 +53,7 @@ git clone https://github.com/nf-core/molkart
 
 This creates a `molkart/` directory containing the complete pipeline source code.
 
-### 2.0. Understanding container requirements
+### 2.1. Understanding container requirements
 
 Before running the full pipeline, let's learn why containers are essential for nf-core pipelines.
 
@@ -67,7 +66,7 @@ nextflow run ./molkart \
   --mindagap_boxsize 7 \
   --mindagap_loopnum 100 \
   --clahe_pyramid_tile 368 \
-  --segmentation_method "cellpose" \
+  --segmentation_method "mesmer,cellpose,stardist" \
   --outdir results
 ```
 
@@ -76,7 +75,7 @@ Let's break down these parameters:
 - `--input`: URL to the test samplesheet containing sample metadata
 - `--mindagap_tilesize`, `--mindagap_boxsize`, `--mindagap_loopnum`: Parameters for grid pattern filling
 - `--clahe_pyramid_tile`: Kernel size for contrast enhancement
-- `--segmentation_method`: Which algorithm to use for cell segmentation (we're using Cellpose)
+- `--segmentation_method`: Which algorithm(s) to use for cell segmentation
 - `--outdir`: Where to save the results
 
 !!! Warning "This command will fail - that's intentional!"
@@ -136,7 +135,7 @@ However, Nextflow only uses these containers if you tell it to!
 
 **The solution: Enable Docker in the configuration**
 
-### 2.1. Configure Docker and launch the pipeline
+### 2.2. Configure Docker and launch the pipeline
 
 To enable Docker, we need to add `docker.enabled = true` to the `nextflow.config` file.
 
@@ -164,7 +163,7 @@ nextflow run ./molkart \
   --mindagap_boxsize 7 \
   --mindagap_loopnum 100 \
   --clahe_pyramid_tile 368 \
-  --segmentation_method "cellpose" \
+  --segmentation_method "cellpose,mesmer,stardist" \
   --outdir results
 ```
 
@@ -185,9 +184,7 @@ This time, Nextflow will:
 
     For more details about containers in Nextflow, see [Hello Containers](../../hello_nextflow/05_hello_containers.md) from the Hello Nextflow training.
 
-
-
-### 2.2. Monitor execution
+### 2.3. Monitor execution
 
 As the pipeline runs, you'll see output similar to this:
 
@@ -216,11 +213,6 @@ Image preprocessing
   clahe_kernel              : 25
   mindagap_tilesize         : 90
   clahe_pyramid_tile        : 368
-
-Training subset options
-  crop_size_x               : 30
-  crop_size_y               : 30
-  crop_amount               : 2
 
 Input/output options
   input                     : https://raw.githubusercontent.com/nf-core/test-datasets/molkart/test_data/samplesheets/samplesheet_membrane.csv
@@ -269,8 +261,8 @@ executor >  local (22)
 [77/aed558] NFCORE_MOLKART:MOLKART:MOLKARTQC (mem_only)                [100%] 3 of 3 ✔
 [e6/b81475] NFCORE_MOLKART:MOLKART:MULTIQC                             [100%] 1 of 1 ✔
 -[nf-core/molkart] Pipeline completed successfully-
-Completed at: 18-Oct-2025 22:23:26
-Duration    : 1m 4s
+Completed at: 19-Oct-2025 22:23:01
+Duration    : 2m 52s
 CPU hours   : 0.1
 Succeeded   : 22
 ```
@@ -282,7 +274,7 @@ Notice how this output is more detailed than our Hello World example:
 - Multiple processes run in parallel (indicated by multiple process lines)
 - Process names include the full module path (e.g., `NFCORE_MOLKART:MOLKART:MINDAGAP_MINDAGAP`)
 
-### 2.3. Understanding process execution
+### 2.4. Understanding process execution
 
 The executor line `executor > local (22)` tells you:
 
@@ -382,11 +374,8 @@ You'll find files like:
 - `cellxgene_mem_only_mesmer.csv`: Cell-by-transcript table using Mesmer segmentation
 - `cellxgene_mem_only_stardist.csv`: Cell-by-transcript table using Stardist segmentation
 
-
-!!! Note
-
-    The pipeline ran multiple segmentation algorithms because that was specified in the test profile.
-    You can choose which algorithm(s) to use via parameters (covered in Part 3).
+We only ran 1 sample in this test dataset, but in a real experiment we would have these tables for each sample.
+Notice how Nextflow is able to process multiple segmentation methods in parallel, making it easy to compare results.
 
 ### 3.4. View execution reports
 

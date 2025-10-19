@@ -1,4 +1,4 @@
-# Part 3: Understanding Inputs
+# Part 3: Organizing inputs
 
 In Part 2, we ran molkart with multiple parameters on the command line.
 Now we'll learn two better approaches for managing inputs: **parameter files** and **samplesheets**.
@@ -29,8 +29,8 @@ What if a collaborator wants to use your exact settings?
 Create a file called `params.yaml`:
 
 ```yaml title="params.yaml"
-input: 'data/samplesheet.csv'
-outdir: 'results'
+input: "data/samplesheet.csv"
+outdir: "results"
 mindagap_tilesize: 90
 mindagap_boxsize: 7
 mindagap_loopnum: 100
@@ -55,7 +55,6 @@ nextflow run ./molkart -params-file params.yaml --outdir test_results
 ```
 
 This is useful for quick tests without editing the file.
-
 
 ### Takeaway
 
@@ -105,7 +104,17 @@ You can mix path types in the same samplesheet.
 
 ### 2.3. Creating your own samplesheet
 
-Let's modify the samplesheet to reference the local files we downloaded earlier.:
+First, let's download the test data files locally:
+
+```bash
+cd /workspaces/training/nf4-science/imaging/data
+curl -O https://raw.githubusercontent.com/nf-core/test-datasets/molkart/test_data/input_data/nuclear.tiff
+curl -O https://raw.githubusercontent.com/nf-core/test-datasets/molkart/test_data/input_data/spots.txt
+curl -O https://raw.githubusercontent.com/nf-core/test-datasets/molkart/test_data/input_data/membrane.tiff
+cd ..
+```
+
+Now let's modify the samplesheet to reference these local files:
 
 ```csv title="samplesheet.csv"
 sample,nuclear_image,spot_table,membrane_image
@@ -156,8 +165,8 @@ For time purposes, and to showcase how parameter files help manage inputs, we'll
 Create a parameter file for generating training images:
 
 ```yaml title="params-training-subset.yaml"
-input: 'data/samplesheet.csv'
-outdir: 'results-training-crops'
+input: "data/samplesheet.csv"
+outdir: "results-training-crops"
 
 # Preprocessing (same as before)
 mindagap_tilesize: 90
@@ -180,7 +189,7 @@ nextflow run ./molkart -params-file params-training-subset.yaml -resume
 
 This creates small image crops in your output directory that you can load into Cellpose for annotation and training.
 
-### 3.5. Next steps (outside this course)
+### 3.4. Next steps (outside this course)
 
 If you were to continue, the next steps would be:
 
