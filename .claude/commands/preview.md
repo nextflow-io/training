@@ -4,10 +4,19 @@ description: Start local preview server to view training materials
 
 Start the local MkDocs preview server to view changes to training materials.
 
-The recommended approach is to use Docker, which will start the server in the background:
+**First, check if a server is already running:**
 
 ```bash
-docker run --rm -p 8000:8000 -v ${PWD}:/docs ghcr.io/nextflow-io/training-mkdocs:latest
+docker ps --filter "ancestor=ghcr.io/nextflow-io/training-mkdocs:latest" --format "{{.ID}}"
+```
+
+- If a container ID is returned, the server is already running at http://127.0.0.1:8000/
+- If no output, proceed to start a new server
+
+**Start the server using Docker (recommended):**
+
+```bash
+docker run --rm -d -p 8000:8000 -v ${PWD}:/docs ghcr.io/nextflow-io/training-mkdocs:latest
 ```
 
 **Alternative options:**
