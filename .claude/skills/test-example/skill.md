@@ -5,32 +5,38 @@ Test a Nextflow example script and verify it matches the documentation.
 ## Tasks to Perform
 
 1. **Identify the Script**
+
    - Ask user which script to test (or find recently modified .nf files)
    - Read the script to understand what it does
    - Note any `params.` definitions for testing
 
 2. **Find Related Documentation**
+
    - Search docs/ for markdown files referencing this script
    - Identify what the documentation claims about outputs and behavior
 
 3. **Run the Script**
+
    - Change to the script's directory
    - Run: `nextflow run [script.nf]`
    - Capture console output
    - Note the work directory hash
 
 4. **Verify Outputs**
+
    - Check work directory for outputs
    - If publishDir used, check results/ directory
    - Compare actual output files with what documentation describes
    - Verify file contents match expectations
 
 5. **Test with Resume**
+
    - Run: `nextflow run [script.nf] -resume`
    - Verify processes show as "cached"
    - Confirm work directory hash is reused
 
 6. **Test with Parameters** (if applicable)
+
    - Identify parameters from script
    - Run with different parameter values
    - Verify outputs change appropriately

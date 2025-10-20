@@ -5,21 +5,25 @@ Search the training materials codebase for TODO and FIXME comments to identify p
 ## Tasks to Perform
 
 1. **Search Markdown Files**
+
    - Use Grep to find TODO and FIXME in `docs/**/*.md`
    - Capture file path, line number, and full comment
    - Note context (which module/lesson)
 
 2. **Search Nextflow Scripts**
+
    - Find TODO/FIXME in `**/*.nf` files
    - Distinguish between training examples and solution code
    - Note if in core examples or side-quests
 
 3. **Search Configuration Files**
+
    - Check `mkdocs.yml`
    - Check `.github/**/*.yml` and `.github/**/*.py`
    - Check `CONTRIBUTING.md`
 
 4. **Categorize Results**
+
    - **High Priority**: Marked as FIXME, TODO(urgent), or blocking
    - **Documentation**: TODOs in markdown files
    - **Code**: TODOs in .nf or .py files
@@ -33,7 +37,7 @@ Search the training materials codebase for TODO and FIXME comments to identify p
 
 Provide an organized report:
 
-```
+````
 # TODO/FIXME Report
 
 ## Summary
@@ -48,23 +52,27 @@ Provide an organized report:
 ### docs/hello_nextflow/03_hello_workflow.md:156
 ```markdown
 <!-- FIXME: Update this example for DSL2 syntax -->
-```
+````
 
 ## Documentation TODOs
 
 ### By File
+
 **docs/side_quests/debugging.md** (5 items)
+
 - Line 45: TODO: Add example of common error message
 - Line 89: TODO: Include screenshot of trace report
 - ...
 
 **docs/nf4_science/genomics/01_per_sample_variant_calling.md** (3 items)
+
 - Line 234: TODO: Verify this command works with latest GATK
 - ...
 
 ## Code TODOs
 
 ### nf-training/script7.nf:23
+
 ```groovy
 // TODO: Add error handling for missing files
 ```
@@ -72,15 +80,18 @@ Provide an organized report:
 ## Configuration TODOs
 
 ### CONTRIBUTING.md:204
+
 Known limitation documented - needs upstream fix in mkdocs plugin
 
 ## Recommendations
 
 1. **Immediate attention** (3 items):
+
    - Fix blocking issues in hello_nextflow
    - Update genomics examples for latest tools
 
 2. **Next sprint** (8 items):
+
    - Complete debugging module exercises
    - Add missing screenshots
 
@@ -89,9 +100,11 @@ Known limitation documented - needs upstream fix in mkdocs plugin
    - Nice-to-have features
 
 ## Files with Most TODOs
+
 1. docs/side_quests/debugging.md (5)
 2. docs/nf4_science/genomics/01_per_sample_variant_calling.md (3)
 3. nf-training/script7.nf (2)
+
 ```
 
 ## Notes
@@ -100,3 +113,4 @@ Known limitation documented - needs upstream fix in mkdocs plugin
 - Show enough context to understand what needs doing
 - Distinguish between legitimate TODOs and example comments in training materials
 - Provide actionable priorities, not just a list
+```

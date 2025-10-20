@@ -5,11 +5,13 @@ Run comprehensive validation checks on training materials to ensure quality and 
 ## Tasks to Perform
 
 1. **Check Heading Numbering**
+
    - Run: `uv run .github/check_headings.py docs/**/*.md`
    - Report any heading numbering issues found
    - If errors exist, ask if user wants to auto-fix with `--fix` flag
 
 2. **Find TODO/FIXME Comments**
+
    - Search markdown files: `docs/**/*.md`
    - Search Nextflow scripts: `**/*.nf`
    - Search config files: `mkdocs.yml`, `.github/**/*.yml`
@@ -17,12 +19,14 @@ Run comprehensive validation checks on training materials to ensure quality and 
    - Report files with most TODOs
 
 3. **Check Nextflow Script Conventions**
+
    - Find all .nf files
    - Verify they start with `#!/usr/bin/env nextflow`
    - Check for DSL2 syntax
    - Report any that don't follow conventions
 
 4. **Find Orphaned Files**
+
    - Search for markdown files in docs/ not referenced in mkdocs.yml
    - Look for solution files without corresponding exercise documentation
    - Report any orphaned files
