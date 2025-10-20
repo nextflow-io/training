@@ -122,9 +122,9 @@ These are materials that cover advanced concepts and mechanisms for developing a
 
         :material-compass:{.nextflow-primary} Collections of Side Questions grouped around a particular theme or use case.
 
-    Training Collections combine multiple Side Quests in order to provide a comprehensive learning experience around a particular around a common theme or use case.
+    Training Collections combine multiple Side Quests in order to provide a comprehensive learning experience around a particular theme or use case.
 
-    [Start the Side Quests training :material-arrow-right:](side_quests/){ .md-button .md-button--primary }
+    [Browse the Training Collections :material-arrow-right:](training_collections/){ .md-button .md-button--primary }
 
 ## Archived materials
 
@@ -138,7 +138,7 @@ These are the original Nextflow training materials that were developed at the st
 
     The fundamentals training material covers all things Nextflow. Intended as a reference material for anyone looking to build complex workflows with Nextflow.
 
-    [Start the Fundamentals Training :material-arrow-right:](basic_training/index.md){ .md-button .md-button--primary }
+    [Start the Fundamentals Training :material-arrow-right:](archive/basic_training){ .md-button .md-button--primary }
 
 !!! exercise "Advanced Training"
 
@@ -148,7 +148,7 @@ These are the original Nextflow training materials that were developed at the st
 
     Advanced material exploring the more advanced features of the Nextflow language and runtime, and how to use them to write efficient and scalable data-intensive workflows.
 
-    [Start the Advanced Training :material-arrow-right:](advanced/index.md){ .md-button .md-button--primary }
+    [Start the Advanced Training :material-arrow-right:](archive/advanced){ .md-button .md-button--primary }
 
 ## Other/Experimental
 

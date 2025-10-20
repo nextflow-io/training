@@ -28,15 +28,16 @@ Otherwise, select a side quest from the table below.
 
 ## Side Quests
 
-| Side Quest                                                        | Time Estimate for Teaching |
-| ----------------------------------------------------------------- | -------------------------- |
-| [Nextflow development environment walkthrough](./ide_features.md) | 45 mins                    |
-| [Introduction to nf-core](./nf-core.md)                           | -                          |
-| [Metadata in workflows](./metadata.md)                            | 45 mins                    |
-| [Splitting and Grouping](./splitting_and_grouping.md)             | 45 mins                    |
-| [Testing with nf-test](./nf-test.md)                              | 1 hour                     |
-| [Workflows of workflows](./workflows_of_workflows.md)             | 30 mins                    |
-| [Working with files](./working_with_files.md)                     | 45 mins                    |
-| [Debugging workflows](./debugging.md)                             | -                          |
+| Side Quest                                                                 | Time Estimate for Teaching |
+| -------------------------------------------------------------------------- | -------------------------- |
+| [Nextflow development environment walkthrough](./ide_features.md)          | 45 mins                    |
+| [Essential Nextflow Scripting Patterns](./essential_scripting_patterns.md) | 90 mins                    |
+| [Introduction to nf-core](./nf-core.md)                                    | -                          |
+| [Metadata in workflows](./metadata.md)                                     | 45 mins                    |
+| [Splitting and Grouping](./splitting_and_grouping.md)                      | 45 mins                    |
+| [Testing with nf-test](./nf-test.md)                                       | 1 hour                     |
+| [Workflows of workflows](./workflows_of_workflows.md)                      | 30 mins                    |
+| [Working with files](./working_with_files.md)                              | 45 mins                    |
+| [Debugging workflows](./debugging.md)                                      | 1 hour                     |
 
 Let us know what other domains and use cases you'd like to see covered here by posting in the [Training section](https://community.seqera.io/c/training/) of the community forum.
