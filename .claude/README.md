@@ -5,183 +5,194 @@ This directory contains Claude AI assistant configuration to help developers cre
 ## Files Overview
 
 ### `.clinerules`
-
-Core rules and conventions for this repository. Claude will automatically follow these guidelines when helping with:
-
-- Nextflow script development
-- Markdown documentation formatting
+Core rules and conventions for this repository. Claude automatically follows these guidelines for:
+- Nextflow script development (DSL2, process naming, params)
+- Markdown documentation formatting (heading numbering, admonitions, code blocks)
 - Repository structure and organization
 - Content style and best practices
 
 ### `commands/` Directory
+Slash commands for interactive content creation tasks that use templates and require user input.
 
-Custom slash commands for common development tasks.
+### `skills/` Directory
+Skills for autonomous multi-step tasks like validation, testing, and analysis.
+
+## Commands vs Skills: Design Rationale
+
+### Commands (Interactive, Template-Based)
+Commands are used for **content creation** tasks that:
+- Follow a template or standard structure
+- Need user questions/answers for customization
+- Benefit from showing the full prompt/checklist to the user
+- Are step-by-step guided workflows
+
+### Skills (Autonomous, Multi-Step)
+Skills are used for **validation and testing** tasks that:
+- Require searching across multiple files
+- Need to run commands and analyze outputs
+- Make decisions based on what they find
+- Can work independently without constant user input
 
 ## Available Commands
 
-### Content Creation
+### `/new-module`
+**Why a command**: Template-based scaffolding requiring user input about module name, location, and content.
 
-- **`/new-module`** - Scaffold a complete new training module with all standard files (index, orientation, lessons, survey, next_steps)
-- **`/new-lesson`** - Create a new lesson page within an existing module following template structure
-- **`/add-exercise`** - Add an exercise with solution to an existing lesson
+Creates a complete training module with standard structure:
+- index.md (overview)
+- 00_orientation.md (prerequisites and intro)
+- Numbered lesson files
+- survey.md and next_steps.md
+- solutions/ directory
 
-### Quality Assurance
+### `/new-lesson`
+**Why a command**: Guided workflow that asks questions and fills in a template structure.
 
-- **`/validate`** - Run all validation checks (heading numbering, TODO comments, Nextflow syntax, orphaned files)
-- **`/review-lesson`** - Comprehensive review of a lesson for structure, formatting, content, and teaching effectiveness
-- **`/test-example`** - Test a Nextflow script and verify it matches documentation
+Creates a new lesson page within an existing module with:
+- Proper heading numbering (1., 1.1., etc.)
+- Takeaway and What's next? sections
+- Placeholder code blocks with proper formatting
+- Standard structure
 
-### Development Workflow
+### `/add-exercise`
+**Why a command**: Interactive insertion requiring decisions about placement, content, and difficulty level.
 
-- **`/preview`** - Start local MkDocs preview server (Docker or Python)
-- **`/update-nav`** - Update mkdocs.yml navigation after adding or reorganizing content
-- **`/find-todos`** - Search for TODO and FIXME comments across the codebase
+Adds an exercise with solution to an existing lesson:
+- Uses `??? exercise` and `??? solution` admonitions
+- Creates corresponding solution files if needed
+- Proper formatting and structure
 
-## Quick Start
+### `/review-lesson`
+**Why a command**: The comprehensive checklist prompt is valuable for users to see what's being checked.
 
-### Creating New Content
+Comprehensive lesson review checking:
+- Structure (heading numbering, Takeaway sections)
+- Formatting (code blocks, admonitions, line-by-line sentences)
+- Content accuracy (Nextflow syntax, command correctness)
+- Teaching effectiveness (clear explanations, logical flow)
 
+## Available Skills
+
+### `validate`
+**Why a skill**: Autonomous multi-step validation requiring searches, tool execution, and analysis.
+
+Runs comprehensive validation checks:
+- Heading numbering validation (runs check_headings.py)
+- TODO/FIXME comment search and categorization
+- Nextflow script convention checking
+- Orphaned file detection
+- Admonition syntax verification
+
+Outputs structured report with actionable recommendations.
+
+### `test-example`
+**Why a skill**: Complex autonomous task requiring script execution, output verification, and comparison with docs.
+
+Tests a Nextflow script and verifies documentation accuracy:
+- Runs the script and captures output
+- Tests resume functionality
+- Tests with different parameters
+- Compares actual behavior with documented behavior
+- Reports discrepancies and suggests fixes
+
+### `find-todos`
+**Why a skill**: Search and analysis task that works autonomously across the codebase.
+
+Searches for TODO/FIXME comments:
+- Markdown files, Nextflow scripts, config files
+- Categorizes by priority (high, medium, low)
+- Groups by file and provides context
+- Recommends prioritization
+
+## Quick Examples
+
+**Create content:**
 ```
-User: /new-lesson
+/new-lesson
+/add-exercise
+/new-module
 ```
 
-Claude will guide you through creating a properly formatted lesson page.
-
+**Review quality:**
 ```
-User: /new-module
-```
-
-Claude will scaffold a complete module with all necessary files.
-
-### Quality Checks
-
-Before committing, run validation:
-
-```
-User: /validate
+/review-lesson
 ```
 
-To review a specific lesson:
-
+**Run validation:**
 ```
-User: /review-lesson
-```
-
-### Preview Changes
-
-```
-User: /preview
+@validate
+@test-example
+@find-todos
 ```
 
-Claude will provide commands to start the local preview server.
-
-## Repository Conventions
+## Key Repository Conventions
 
 ### Markdown Files
-
 - Each sentence on new line (cleaner git diffs)
-- Numbered headings with trailing periods (1., 1.1., 1.2.)
-- Use admonitions for notes, tips, warnings, exercises
+- Numbered headings with trailing periods: `## 1. Section`, `### 1.1. Subsection`
 - Takeaway and What's next? sections at end of major sections
+- Use admonitions: `!!! note`, `!!! tip`, `!!! warning`, `??? exercise`, `??? solution`
 
 ### Nextflow Scripts
-
 - DSL2 syntax only
 - UPPERCASE process names
-- Shebang: `#!/usr/bin/env nextflow`
-- Use params for configurable values
-- Educational and simple examples
+- Always include shebang: `#!/usr/bin/env nextflow`
+- Use params for configurable values: `params.input = 'default'`
 
 ### Code Blocks
-
-```groovy title="filename.nf" linenums="1" hl_lines="3"
+Include line numbers, titles, and highlighting:
+```groovy title="example.nf" linenums="1" hl_lines="3"
 #!/usr/bin/env nextflow
-// Line 3 will be highlighted
-params.example = 'value'
+
+params.greeting = 'Hello'  // highlighted
 ```
 
-### Admonitions
+## Hooks
 
-```markdown
-!!! note
-Informational content
-
-!!! tip
-Helpful suggestions
-
-!!! warning
-Important warnings
-
-??? exercise "Title"
-Exercise content (collapsible)
-
-??? solution
-Solution content (collapsible)
-```
+### User Prompt Submit Hook
+Automatically runs heading validation when you submit a prompt:
+- Executes: `uv run .github/check_headings.py docs/**/*.md`
+- Provides immediate feedback on heading numbering issues
+- Non-blocking (allows operation to continue even if issues found)
 
 ## Development Workflow
 
 1. **Create/Edit Content**
-
    - Use `/new-lesson` or `/new-module` for structure
    - Follow conventions in `.clinerules`
    - Add exercises with `/add-exercise`
 
-2. **Preview Locally**
+2. **Review Quality**
+   - Use `/review-lesson` for comprehensive checks
+   - Use `@validate` skill for automated validation
 
-   - Use `/preview` to start server
-   - View at http://127.0.0.1:8000/
-   - Check formatting and navigation
-
-3. **Validate**
-
-   - Run `/validate` to check all files
-   - Fix heading numbering if needed
-   - Ensure no broken links
-
-4. **Test Examples**
-
-   - Use `/test-example` to verify Nextflow scripts work
+3. **Test Examples**
+   - Use `@test-example` skill to verify Nextflow scripts
    - Confirm outputs match documentation
 
-5. **Update Navigation**
+4. **Update Navigation**
+   - Manually edit mkdocs.yml to add new content
+   - Or just ask Claude to update it
 
-   - Use `/update-nav` to add new content to mkdocs.yml
-   - Verify in preview
+5. **Preview Locally**
+   - Run: `mkdocs serve` or use Docker (see CONTRIBUTING.md)
+   - View at http://127.0.0.1:8000/
 
-6. **Review**
-
-   - Use `/review-lesson` for thorough quality check
-   - Address any issues found
-
-7. **Commit**
+6. **Commit**
+   - Heading validation runs automatically
    - Write clear commit message
-   - Push to fork
-   - Open pull request
+   - Push to fork and open PR
+
+## Additional Tools
+
+Consider also using:
+- **Vale**: Linting for docs (can be added as separate PR/hook)
+- **Prettier**: Markdown formatting (install VSCode extension)
+- **Todo Tree**: VSCode extension to track TODO comments
+- **Excalidraw**: VSCode extension for editing diagrams
 
 ## Additional Resources
 
 - **CONTRIBUTING.md** - Full contribution guidelines
 - **Training Site** - https://training.nextflow.io
-- **MkDocs Material** - https://squidfunk.github.io/mkdocs-material/
 - **Nextflow Docs** - https://www.nextflow.io/docs/latest/
-
-## Tips
-
-- Use the Todo Tree VSCode extension to track TODO comments
-- Install Prettier VSCode extension for auto-formatting
-- Install Excalidraw VSCode extension for editing diagrams
-- Test Nextflow examples before documenting them
-- Each sentence on a new line makes git diffs cleaner
-- Preview frequently to catch formatting issues early
-
-## Getting Help
-
-If you're unsure about conventions or best practices, ask Claude:
-
-- "How should I format this code example?"
-- "What admonition type should I use here?"
-- "Is this Nextflow syntax correct for training?"
-- "Review this section for consistency"
-
-Claude has been configured with all the repository-specific knowledge needed to help you create high-quality training materials.
