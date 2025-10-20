@@ -48,25 +48,25 @@ workflow {
 ### Markdown Documentation
 
 1. **Formatting**:
-   - Use Prettier for formatting (format on save recommended)
-   - Start each sentence on a new line (cleaner diffs, still renders as paragraph)
-   - Use numbered headings with trailing periods: `## 1. Section Name`
-   - Ensure heading levels match numbering depth (## for 1., ### for 1.1.)
+    - Use Prettier for formatting (format on save recommended)
+    - Start each sentence on a new line (cleaner diffs, still renders as paragraph)
+    - Use numbered headings with trailing periods: `## 1. Section Name`
+    - Ensure heading levels match numbering depth (## for 1., ### for 1.1.)
 
 2. **Structure**:
-   - Each section should end with:
-     - "### Takeaway" - summarize what was learned
-     - "### What's next?" - preview next section
-   - Use orientation pages (00_orientation.md) to introduce modules
-   - Include survey.md and next_steps.md at end of modules
+    - Each section should end with:
+        - "### Takeaway" - summarize what was learned
+        - "### What's next?" - preview next section
+    - Use orientation pages (00_orientation.md) to introduce modules
+    - Include survey.md and next_steps.md at end of modules
 
 3. **Admonitions** (special callout boxes):
-   - `!!! note` - informational notes
-   - `!!! tip` - helpful tips
-   - `!!! warning` - important warnings
-   - `??? exercise` - collapsible exercise (custom type)
-   - `??? result` or `??? solution` - collapsible solutions (custom types)
-   - Always indent content properly (4 spaces)
+    - `!!! note` - informational notes
+    - `!!! tip` - helpful tips
+    - `!!! warning` - important warnings
+    - `??? exercise` - collapsible exercise (custom type)
+    - `??? result` or `??? solution` - collapsible solutions (custom types)
+    - Always indent content properly (4 spaces)
 
 4. **Code Blocks**:
    - Use `linenums="1"` for line numbers
@@ -75,34 +75,34 @@ workflow {
    - For before/after comparisons, use tabbed blocks with `=== "After"` and `=== "Before"`
 
 5. **Excalidraw Diagrams**:
-   - Create diagrams with .excalidraw.svg extension
-   - Use VSCode Excalidraw extension for editing
-   - Embed with:
-     ```html
-     <figure class="excalidraw">
-     --8<-- "docs/path/to/diagram.excalidraw.svg"
-     </figure>
-     ```
-   - Path is from repo root, not markdown file location
+    - Create diagrams with .excalidraw.svg extension
+    - Use VSCode Excalidraw extension for editing
+    - Embed with:
+        ```html
+        <figure class="excalidraw">
+        --8<-- "docs/path/to/diagram.excalidraw.svg"
+        </figure>
+        ```
+    - Path is from repo root, not markdown file location
 
 ### File Organization
 
 1. **Solutions**:
-   - Place solution files in corresponding `solutions/` subdirectories
-   - Mirror the structure of exercise files
-   - Solution files should be complete, working examples
+    - Place solution files in corresponding `solutions/` subdirectories
+    - Mirror the structure of exercise files
+    - Solution files should be complete, working examples
 
 2. **Module Structure**:
-   ```
-   module_name/
-   ├── index.md (overview)
-   ├── 00_orientation.md (introduction)
-   ├── 01_topic.md (numbered lessons)
-   ├── 02_topic.md
-   ├── survey.md (feedback form)
-   ├── next_steps.md (what to learn next)
-   └── solutions/ (working code)
-   ```
+    ```
+    module_name/
+    ├── index.md (overview)
+    ├── 00_orientation.md (introduction)
+    ├── 01_topic.md (numbered lessons)
+    ├── 02_topic.md
+    ├── survey.md (feedback form)
+    ├── next_steps.md (what to learn next)
+    └── solutions/ (working code)
+    ```
 
 3. **Assets**:
    - Images go in `docs/*/img/` directories
