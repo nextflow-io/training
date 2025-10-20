@@ -9,16 +9,18 @@ Create a new lesson page within an existing training module.
 Follow these steps:
 
 1. Ask the user:
+
    - Which module to add the lesson to (e.g., hello_nextflow, side_quests, nf4_science/genomics)
    - Lesson number (e.g., 01, 02, 03)
    - Lesson title (e.g., "Hello World", "Working with Channels")
 
 2. Create the markdown file following the naming convention: `[number]_[title_with_underscores].md`
+
    - Example: `03_hello_workflow.md`
 
 3. Use this lesson template structure:
 
-```markdown
+````markdown
 # Part [N]: [Title]
 
 [Introduction paragraph explaining what this lesson covers]
@@ -36,6 +38,7 @@ Follow these steps:
 ```bash
 command example
 ```
+````
 
 ```console title="Output"
 expected output
@@ -74,6 +77,7 @@ process EXAMPLE {
 ### What's next?
 
 [Next steps or move to next lesson]
+
 ```
 
 4. Include appropriate elements:
@@ -90,3 +94,4 @@ process EXAMPLE {
    - Test any Nextflow examples before committing
    - Run heading validation: `uv run .github/check_headings.py --fix docs/**/*.md`
    - Preview locally with `mkdocs serve` or Docker to verify formatting
+```

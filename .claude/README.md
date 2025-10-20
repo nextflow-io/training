@@ -5,13 +5,16 @@ This directory contains Claude AI assistant configuration to help developers cre
 ## Files Overview
 
 ### `.clinerules`
+
 Core rules and conventions for this repository. Claude will automatically follow these guidelines when helping with:
+
 - Nextflow script development
 - Markdown documentation formatting
 - Repository structure and organization
 - Content style and best practices
 
 ### `commands/` Directory
+
 Custom slash commands for common development tasks.
 
 ## Available Commands
@@ -41,21 +44,25 @@ Custom slash commands for common development tasks.
 ```
 User: /new-lesson
 ```
+
 Claude will guide you through creating a properly formatted lesson page.
 
 ```
 User: /new-module
 ```
+
 Claude will scaffold a complete module with all necessary files.
 
 ### Quality Checks
 
 Before committing, run validation:
+
 ```
 User: /validate
 ```
 
 To review a specific lesson:
+
 ```
 User: /review-lesson
 ```
@@ -65,17 +72,20 @@ User: /review-lesson
 ```
 User: /preview
 ```
+
 Claude will provide commands to start the local preview server.
 
 ## Repository Conventions
 
 ### Markdown Files
+
 - Each sentence on new line (cleaner git diffs)
 - Numbered headings with trailing periods (1., 1.1., 1.2.)
 - Use admonitions for notes, tips, warnings, exercises
 - Takeaway and What's next? sections at end of major sections
 
 ### Nextflow Scripts
+
 - DSL2 syntax only
 - UPPERCASE process names
 - Shebang: `#!/usr/bin/env nextflow`
@@ -83,6 +93,7 @@ Claude will provide commands to start the local preview server.
 - Educational and simple examples
 
 ### Code Blocks
+
 ```groovy title="filename.nf" linenums="1" hl_lines="3"
 #!/usr/bin/env nextflow
 // Line 3 will be highlighted
@@ -90,49 +101,56 @@ params.example = 'value'
 ```
 
 ### Admonitions
+
 ```markdown
 !!! note
-    Informational content
+Informational content
 
 !!! tip
-    Helpful suggestions
+Helpful suggestions
 
 !!! warning
-    Important warnings
+Important warnings
 
 ??? exercise "Title"
-    Exercise content (collapsible)
+Exercise content (collapsible)
 
 ??? solution
-    Solution content (collapsible)
+Solution content (collapsible)
 ```
 
 ## Development Workflow
 
 1. **Create/Edit Content**
+
    - Use `/new-lesson` or `/new-module` for structure
    - Follow conventions in `.clinerules`
    - Add exercises with `/add-exercise`
 
 2. **Preview Locally**
+
    - Use `/preview` to start server
    - View at http://127.0.0.1:8000/
    - Check formatting and navigation
 
 3. **Validate**
+
    - Run `/validate` to check all files
    - Fix heading numbering if needed
    - Ensure no broken links
 
 4. **Test Examples**
+
    - Use `/test-example` to verify Nextflow scripts work
    - Confirm outputs match documentation
 
 5. **Update Navigation**
+
    - Use `/update-nav` to add new content to mkdocs.yml
    - Verify in preview
 
 6. **Review**
+
    - Use `/review-lesson` for thorough quality check
    - Address any issues found
 
@@ -160,6 +178,7 @@ params.example = 'value'
 ## Getting Help
 
 If you're unsure about conventions or best practices, ask Claude:
+
 - "How should I format this code example?"
 - "What admonition type should I use here?"
 - "Is this Nextflow syntax correct for training?"

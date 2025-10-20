@@ -5,11 +5,13 @@ description: Scaffold a new complete training module with all standard files
 Create a new training module in this repository. Follow these steps:
 
 1. Ask the user for:
+
    - Module name and location (under docs/)
    - Module title for display
    - Brief description of what the module covers
 
 2. Create the complete module structure:
+
    ```
    docs/[module_name]/
    ├── index.md (overview with learning objectives)
@@ -22,6 +24,7 @@ Create a new training module in this repository. Follow these steps:
    ```
 
 3. Each file should follow repository conventions:
+
    - Proper heading numbering with trailing periods
    - Takeaway and What's next? sections
    - Appropriate use of admonitions
