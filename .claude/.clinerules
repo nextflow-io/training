@@ -105,9 +105,9 @@ workflow {
     ```
 
 3. **Assets**:
-   - Images go in `docs/*/img/` directories
-   - Use Excalidraw for editable diagrams
-   - Keep static assets organized by module
+    - Images go in `docs/*/img/` directories
+    - Use Excalidraw for editable diagrams
+    - Keep static assets organized by module
 
 ## Development Workflow
 
