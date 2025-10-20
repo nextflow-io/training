@@ -71,6 +71,14 @@ Comprehensive lesson review checking:
 - Content accuracy (Nextflow syntax, command correctness)
 - Teaching effectiveness (clear explanations, logical flow)
 
+### `/preview`
+**Why a command**: One-command convenience to start the preview server.
+
+Starts the Docker-based MkDocs preview server:
+- Runs the training-specific Docker image
+- Serves on http://0.0.0.0:8000/
+- Auto-refreshes on file changes
+
 ## Available Skills
 
 ### `validate`
@@ -116,6 +124,11 @@ Searches for TODO/FIXME comments:
 **Review quality:**
 ```
 /review-lesson
+```
+
+**Preview locally:**
+```
+/preview
 ```
 
 **Run validation:**
