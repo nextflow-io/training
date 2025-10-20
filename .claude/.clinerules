@@ -69,10 +69,10 @@ workflow {
     - Always indent content properly (4 spaces)
 
 4. **Code Blocks**:
-   - Use `linenums="1"` for line numbers
-   - Use `hl_lines` to highlight specific lines
-   - Use `title="filename"` to show filenames
-   - For before/after comparisons, use tabbed blocks with `=== "After"` and `=== "Before"`
+    - Use `linenums="1"` for line numbers
+    - Use `hl_lines` to highlight specific lines
+    - Use `title="filename"` to show filenames
+    - For before/after comparisons, use tabbed blocks with `=== "After"` and `=== "Before"`
 
 5. **Excalidraw Diagrams**:
     - Create diagrams with .excalidraw.svg extension
@@ -134,18 +134,18 @@ CARDS=false mkdocs serve
 ### Content Validation
 
 1. **Heading validation**: Run before committing
-   ```bash
-   uv run .github/check_headings.py docs/**/*.md
-   uv run .github/check_headings.py --fix docs/**/*.md  # auto-fix
-   ```
+    ```bash
+    uv run .github/check_headings.py docs/**/*.md
+    uv run .github/check_headings.py --fix docs/**/*.md  # auto-fix
+    ```
 
 2. **Prettier formatting**: Should run automatically on save
-   - Install VSCode Prettier extension
-   - Or run: `prettier --write docs/**/*.md`
+    - Install VSCode Prettier extension
+    - Or run: `prettier --write docs/**/*.md`
 
 3. **TODO tracking**: Use TODO comments for future work
-   - Recommended: Todo Tree VSCode extension
-   - Pattern: `// TODO: description of what needs to be done`
+    - Recommended: Todo Tree VSCode extension
+    - Pattern: `// TODO: description of what needs to be done`
 
 ### Testing Nextflow Examples
 
@@ -153,10 +153,10 @@ CARDS=false mkdocs serve
 2. Verify outputs are as documented
 3. Check that error examples actually produce the expected errors
 4. Test with resume functionality where applicable:
-   ```bash
-   nextflow run example.nf
-   nextflow run example.nf -resume
-   ```
+    ```bash
+    nextflow run example.nf
+    nextflow run example.nf -resume
+    ```
 
 ## Common Patterns and Conventions
 
