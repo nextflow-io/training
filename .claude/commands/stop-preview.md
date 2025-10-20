@@ -1,6 +1,5 @@
 ---
 description: Stop the running MkDocs preview server
-tags: [project]
 ---
 
 Stop the MkDocs preview server that is running in the background.
