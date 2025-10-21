@@ -12,18 +12,21 @@ This repository contains training materials for Nextflow, built with Material fo
 ## Common Commands
 
 ### Preview locally
+
 ```bash
 docker run --rm -it -p 8000:8000 -v ${PWD}:/docs ghcr.io/nextflow-io/training-mkdocs:latest
 # View at http://0.0.0.0:8000/
 ```
 
 ### Validate heading numbering
+
 ```bash
 uv run .github/check_headings.py docs/**/*.md
 uv run .github/check_headings.py --fix docs/**/*.md  # auto-fix
 ```
 
 ### Format markdown
+
 ```bash
 prettier --write docs/**/*.md
 ```
@@ -42,19 +45,23 @@ prettier --write docs/**/*.md
 ## Important Conventions
 
 ### Markdown Files
+
 - **Heading numbering**: Must use `## 1.`, `### 1.1.` with trailing periods
 - **One sentence per line**: For cleaner git diffs
 - **Takeaway sections**: Each major section ends with "### Takeaway" and "### What's next?"
 - **Admonitions**: Use `!!! note`, `!!! tip`, `!!! warning`, `??? exercise`, `??? solution`
 
 ### Nextflow Scripts
+
 - **DSL2 only**: All examples use DSL2 syntax
 - **UPPERCASE processes**: Process names like `PROCESS_NAME`
 - **Shebang required**: `#!/usr/bin/env nextflow`
 - **Educational focus**: Keep examples simple and well-commented
 
 ### Module Structure
+
 Standard pattern for training modules:
+
 ```
 module_name/
 ├── index.md (overview)
@@ -76,6 +83,7 @@ module_name/
 ## Testing Nextflow Examples
 
 Always test examples before documenting:
+
 ```bash
 cd [example-directory]
 nextflow run example.nf
