@@ -4,7 +4,7 @@ This directory contains Claude AI assistant configuration to help developers cre
 
 ## Files Overview
 
-### `.clinerules`
+### `CLAUDE.md` (in repository root)
 
 Core rules and conventions for this repository. Claude automatically follows these guidelines for:
 
@@ -12,6 +12,7 @@ Core rules and conventions for this repository. Claude automatically follows the
 - Markdown documentation formatting (heading numbering, admonitions, code blocks)
 - Repository structure and organization
 - Content style and best practices
+- Common commands and gotchas
 
 ### `commands/` Directory
 
@@ -192,7 +193,7 @@ Automatically runs heading validation when you submit a prompt:
 1. **Create/Edit Content**
 
    - Use `/new-lesson` or `/new-module` for structure
-   - Follow conventions in `.clinerules`
+   - Follow conventions in `CLAUDE.md`
    - Add exercises with `/add-exercise`
 
 2. **Review Quality**
