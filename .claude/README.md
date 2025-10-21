@@ -76,17 +76,6 @@ Adds an exercise with solution to an existing lesson:
 - Creates corresponding solution files if needed
 - Proper formatting and structure
 
-### `/review-lesson`
-
-**Why a command**: The comprehensive checklist prompt is valuable for users to see what's being checked.
-
-Comprehensive lesson review checking:
-
-- Structure (heading numbering, Takeaway sections)
-- Formatting (code blocks, admonitions, line-by-line sentences)
-- Content accuracy (Nextflow syntax, command correctness)
-- Teaching effectiveness (clear explanations, logical flow)
-
 ### `/preview`
 
 **Why a command**: One-command convenience to start the preview server.
@@ -103,15 +92,16 @@ Starts the Docker-based MkDocs preview server:
 
 **Why a skill**: Autonomous multi-step validation requiring searches, tool execution, and analysis.
 
-Runs comprehensive validation checks:
+Runs comprehensive validation and review checks:
 
 - Heading numbering validation (runs check_headings.py)
 - TODO/FIXME comment search and categorization
 - Nextflow script convention checking
 - Orphaned file detection
 - Admonition syntax verification
+- Deep lesson review (structure, formatting, content accuracy, teaching effectiveness)
 
-Outputs structured report with actionable recommendations.
+Outputs structured report with actionable recommendations. Includes lesson review functionality.
 
 ### `test-example`
 
@@ -146,23 +136,18 @@ Searches for TODO/FIXME comments:
 /new-module
 ```
 
-**Review quality:**
-
-```
-/review-lesson
-```
-
 **Preview locally:**
 
 ```
 /preview
 ```
 
-**Run validation (skills - Claude invokes these automatically when relevant):**
+**Validate and review (skills - Claude invokes these automatically when relevant):**
 
 Claude will automatically use these skills when appropriate, or you can mention them by name:
 - "Can you validate the training materials?"
-- "Please test the example script"
+- "Please review this lesson for quality"
+- "Test the example script"
 - "Find all the TODOs in the codebase"
 
 ## Key Repository Conventions
@@ -211,13 +196,13 @@ Automatically runs heading validation when you submit a prompt:
 
 2. **Review Quality**
 
-   - Use `/review-lesson` for comprehensive checks
-   - Use `@validate` skill for automated validation
+   - Ask Claude to validate and review: "Can you review this lesson?"
+   - The validate skill runs automated checks and deep lesson reviews
 
 3. **Test Examples**
 
-   - Use `@test-example` skill to verify Nextflow scripts
-   - Confirm outputs match documentation
+   - Ask Claude to test scripts: "Can you test this Nextflow example?"
+   - The test-example skill verifies scripts and compares with documentation
 
 4. **Update Navigation**
 

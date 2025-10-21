@@ -7,6 +7,16 @@ description: Search markdown files, Nextflow scripts, and config files for TODO/
 
 Search the training materials codebase for TODO and FIXME comments to identify pending work.
 
+## Working Directory
+
+**IMPORTANT**: All commands in this skill must be executed from the repository root directory.
+
+- The repository root is the directory containing `mkdocs.yml`, `docs/`, and `.github/`
+- Verify you are in the correct directory before running any commands (check for these files/folders)
+- All file paths in this skill are relative to the repository root
+- Do not change directories during skill execution
+- Use paths relative to repository root only
+
 ## Tasks to Perform
 
 1. **Search Markdown Files**
