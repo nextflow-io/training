@@ -12,6 +12,7 @@ Test a Nextflow example script and verify it matches the documentation.
 **IMPORTANT**: This skill works with directories in two phases:
 
 1. **Initial phase** - Start from repository root
+
    - Repository root is the directory containing `mkdocs.yml`, `docs/`, and `.github/`
    - Verify you are in the correct directory (check for these files/folders)
    - Use this for finding scripts and reading documentation

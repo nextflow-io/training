@@ -145,6 +145,7 @@ Searches for TODO/FIXME comments:
 **Validate and review (skills - Claude invokes these automatically when relevant):**
 
 Claude will automatically use these skills when appropriate, or you can mention them by name:
+
 - "Can you validate the training materials?"
 - "Please review this lesson for quality"
 - "Test the example script"

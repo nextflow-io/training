@@ -32,11 +32,13 @@ If the user provides a path or module name, **only validate that specific conten
 Based on the user's request, determine the scope:
 
 1. **Specific side quest** (e.g., "debugging"):
+
    - Documentation file: `docs/side_quests/{name}.md`
    - Example scripts: `side-quests/{name}/**/*.nf`
    - Solution files: `side-quests/solutions/{name}/**/*.nf`
 
 2. **Specific module** (e.g., "hello_nextflow"):
+
    - Documentation files: `docs/{module}/**/*.md`
    - Example scripts: `{module}/**/*.nf` or `nf-training/**/*.nf`
    - Solution files: `{module}/solutions/**/*.nf`
@@ -75,6 +77,7 @@ Perform the following checks **only on files within the determined scope**:
    - Report any orphaned files within scope
 
 5. **Verify Admonition Syntax**
+
    - Search for common admonition formatting errors in scoped files
    - Check for proper indentation (4 spaces)
    - Report any malformed admonitions
@@ -84,49 +87,55 @@ Perform the following checks **only on files within the determined scope**:
    If the user asks to review a specific lesson, perform this comprehensive checklist:
 
    a. **Structure Check**:
-      - [ ] Proper heading numbering with trailing periods
-      - [ ] Heading levels match numbering depth (## for 1., ### for 1.1.)
-      - [ ] Each major section has "### Takeaway"
-      - [ ] Each major section has "### What's next?"
-      - [ ] Logical flow from simple to complex
-      - [ ] Clear learning objectives stated or implied
+
+   - [ ] Proper heading numbering with trailing periods
+   - [ ] Heading levels match numbering depth (## for 1., ### for 1.1.)
+   - [ ] Each major section has "### Takeaway"
+   - [ ] Each major section has "### What's next?"
+   - [ ] Logical flow from simple to complex
+   - [ ] Clear learning objectives stated or implied
 
    b. **Formatting Check**:
-      - [ ] Code blocks have proper titles, line numbers, and highlighting
-      - [ ] Console output properly formatted with `console title="Output"`
-      - [ ] File paths use proper markdown formatting
-      - [ ] Before/After comparisons use tabbed blocks
-      - [ ] Admonitions properly formatted and indented
-      - [ ] Each sentence on new line (for clean diffs)
+
+   - [ ] Code blocks have proper titles, line numbers, and highlighting
+   - [ ] Console output properly formatted with `console title="Output"`
+   - [ ] File paths use proper markdown formatting
+   - [ ] Before/After comparisons use tabbed blocks
+   - [ ] Admonitions properly formatted and indented
+   - [ ] Each sentence on new line (for clean diffs)
 
    c. **Content Check**:
-      - [ ] Technical accuracy of Nextflow code
-      - [ ] Commands are correct and runnable
-      - [ ] Parameter syntax correct (-- for pipeline, - for Nextflow)
-      - [ ] Examples progress logically
-      - [ ] Common pitfalls addressed
-      - [ ] Edge cases explained
+
+   - [ ] Technical accuracy of Nextflow code
+   - [ ] Commands are correct and runnable
+   - [ ] Parameter syntax correct (-- for pipeline, - for Nextflow)
+   - [ ] Examples progress logically
+   - [ ] Common pitfalls addressed
+   - [ ] Edge cases explained
 
    d. **Teaching Effectiveness**:
-      - [ ] Clear explanations for beginners
-      - [ ] Concepts introduced before use
-      - [ ] Examples are relevant and motivating
-      - [ ] Exercises appropriate for skill level
-      - [ ] Solutions available for exercises
-      - [ ] Good use of tips and warnings
+
+   - [ ] Clear explanations for beginners
+   - [ ] Concepts introduced before use
+   - [ ] Examples are relevant and motivating
+   - [ ] Exercises appropriate for skill level
+   - [ ] Solutions available for exercises
+   - [ ] Good use of tips and warnings
 
    e. **Cross-References**:
-      - [ ] Links to related lessons work
-      - [ ] References to files/scripts are correct
-      - [ ] External links are valid
-      - [ ] Prerequisites clearly stated
+
+   - [ ] Links to related lessons work
+   - [ ] References to files/scripts are correct
+   - [ ] External links are valid
+   - [ ] Prerequisites clearly stated
 
    f. **Examples & Code**:
-      - [ ] All Nextflow examples are syntactically correct
-      - [ ] Variable names are clear and consistent
-      - [ ] Comments explain non-obvious code
-      - [ ] Examples can be run as shown
-      - [ ] Output examples match what code produces
+
+   - [ ] All Nextflow examples are syntactically correct
+   - [ ] Variable names are clear and consistent
+   - [ ] Comments explain non-obvious code
+   - [ ] Examples can be run as shown
+   - [ ] Output examples match what code produces
 
 ## Output Format
 
