@@ -1,3 +1,8 @@
+---
+name: Validate Training Materials
+description: Run comprehensive validation checks including heading numbering, TODO/FIXME comments, Nextflow script conventions, orphaned files, and admonition syntax. Use when checking training materials quality or before committing changes.
+---
+
 # Validate Training Materials
 
 Run comprehensive validation checks on training materials to ensure quality and consistency.

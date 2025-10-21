@@ -1,3 +1,8 @@
+---
+name: Test Nextflow Example Script
+description: Test a Nextflow script by running it, verifying outputs, testing resume functionality, and comparing results with documentation. Use when validating that example scripts work correctly and match their documentation.
+---
+
 # Test Nextflow Example Script
 
 Test a Nextflow example script and verify it matches the documentation.

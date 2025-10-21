@@ -1,3 +1,8 @@
+---
+name: Find TODO and FIXME Comments
+description: Search markdown files, Nextflow scripts, and config files for TODO/FIXME comments, categorize by priority, and provide actionable recommendations. Use when you need to identify pending work or track technical debt.
+---
+
 # Find TODO and FIXME Comments
 
 Search the training materials codebase for TODO and FIXME comments to identify pending work.

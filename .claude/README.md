@@ -158,13 +158,12 @@ Searches for TODO/FIXME comments:
 /preview
 ```
 
-**Run validation:**
+**Run validation (skills - Claude invokes these automatically when relevant):**
 
-```
-@validate
-@test-example
-@find-todos
-```
+Claude will automatically use these skills when appropriate, or you can mention them by name:
+- "Can you validate the training materials?"
+- "Please test the example script"
+- "Find all the TODOs in the codebase"
 
 ## Key Repository Conventions
 
