@@ -78,7 +78,7 @@ process EXAMPLE {
 
 [Next steps or move to next lesson]
 
-```
+````
 
 4. Include appropriate elements:
    - Code blocks with proper formatting (linenums, titles, highlighting)
@@ -104,4 +104,4 @@ process EXAMPLE {
    - Test any Nextflow examples before committing
    - Run heading validation: `uv run .github/check_headings.py --fix docs/**/*.md`
    - Preview locally with `mkdocs serve` or Docker to verify formatting
-```
+````
