@@ -51,7 +51,7 @@ prettier --write docs/**/*.md
 - **Takeaway sections**: Each major section ends with "### Takeaway" and "### What's next?"
 - **Admonitions**: Use `!!! note`, `!!! tip`, `!!! warning`, `??? exercise`, `??? solution`
 - **Before/After comparisons**: Use tabbed blocks with highlighting to show code fixes (see debugging side quest):
-  ````markdown
+  ```markdown
   === "After"
   `groovy title="fixed.nf" hl_lines="14" linenums="1"
       // corrected code with line 14 highlighted
@@ -60,7 +60,7 @@ prettier --write docs/**/*.md
   `groovy title="fixed.nf" hl_lines="14" linenums="1"
       // broken code with line 14 highlighted
       `
-  ````
+  ```
 
 ### Nextflow Scripts
 
