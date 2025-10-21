@@ -82,7 +82,17 @@ process EXAMPLE {
 
 4. Include appropriate elements:
    - Code blocks with proper formatting (linenums, titles, highlighting)
-   - Before/After comparisons using tabbed blocks where relevant
+   - Before/After comparisons using tabbed blocks where relevant:
+     ```markdown
+     === "After"
+         ```groovy title="example.nf" hl_lines="5" linenums="1"
+         // corrected code
+         ```
+     === "Before"
+         ```groovy title="example.nf" hl_lines="5" linenums="1"
+         // broken code
+         ```
+     ```
    - Admonitions: `!!! note`, `!!! tip`, `!!! warning`, `??? exercise`
    - Console output examples
    - Clear explanations for beginners

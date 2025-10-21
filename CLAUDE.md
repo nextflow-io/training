@@ -50,6 +50,17 @@ prettier --write docs/**/*.md
 - **One sentence per line**: For cleaner git diffs
 - **Takeaway sections**: Each major section ends with "### Takeaway" and "### What's next?"
 - **Admonitions**: Use `!!! note`, `!!! tip`, `!!! warning`, `??? exercise`, `??? solution`
+- **Before/After comparisons**: Use tabbed blocks with highlighting to show code fixes (see debugging side quest):
+  ```markdown
+  === "After"
+      ```groovy title="fixed.nf" hl_lines="14" linenums="1"
+      // corrected code with line 14 highlighted
+      ```
+  === "Before"
+      ```groovy title="fixed.nf" hl_lines="14" linenums="1"
+      // broken code with line 14 highlighted
+      ```
+  ```
 
 ### Nextflow Scripts
 
