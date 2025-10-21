@@ -87,7 +87,7 @@ nextflow run example.nf -resume  # verify caching works
 1. Create lesson/module using Claude commands: `/new-lesson`, `/new-module`
 2. Add to `mkdocs.yml` nav section
 3. Test locally with `/preview`
-4. Validate with `@validate` skill
+4. Validate by asking Claude to check quality (uses skills automatically)
 5. Run heading check (happens automatically via hook)
 
 ## DO NOT
