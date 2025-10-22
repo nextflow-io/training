@@ -271,35 +271,35 @@ For now, we'll pass the output from `CAT_CAT` to `cowpy` with the character para
 
 ### 1.9. Wire up CAT_CAT in the workflow
 
-Now we need to modify our workflow code to use `CAT_CAT` instead of `collectGreetings`. Since `CAT_CAT` requires metadata tuples, we need to create a metadata map and combine it with our files.
+Now we need to modify our workflow code to use `CAT_CAT` instead of `collectGreetings`. Since `CAT_CAT` requires metadata tuples, we'll do this in several steps to make it clear how to work with metadata.
 
-Open [core-hello/workflows/hello.nf](core-hello/workflows/hello.nf) and modify the workflow logic in the `main` block:
+Open [core-hello/workflows/hello.nf](core-hello/workflows/hello.nf) and make the following changes to the workflow logic in the `main` block.
+
+#### Step 1: Create a metadata map
+
+First, we need to create a metadata map for `CAT_CAT`. Remember that nf-core modules require metadata with at least an `id` field.
+
+Add these lines after the `convertToUpper` call, removing the `collectGreetings` call:
 
 === "After"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="7-17"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="8-10"
         // emit a greeting
         sayHello(ch_samplesheet)
 
         // convert the greeting to uppercase
         convertToUpper(sayHello.out)
 
-        // collect all the greetings into one file using nf-core cat/cat module
         // create metadata map with batch name as the ID
         def cat_meta = [ id: params.batch ]
-        ch_for_cat = convertToUpper.out.collect().map { files -> tuple(cat_meta, files) }
-
-        CAT_CAT(ch_for_cat)
 
         // generate ASCII art of the greetings with cowpy
-        // Extract the file from the tuple since cowpy doesn't use metadata yet
-        ch_for_cowpy = CAT_CAT.out.file_out.map{ meta, file -> file }
-        cowpy(ch_for_cowpy, params.character)
+        cowpy(collectGreetings.out.outfile, params.character)
     ```
 
 === "Before"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="7-12"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="7-9"
         // emit a greeting
         sayHello(ch_samplesheet)
 
@@ -313,17 +313,140 @@ Open [core-hello/workflows/hello.nf](core-hello/workflows/hello.nf) and modify t
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
-Let's break down what we changed:
+This creates a simple metadata map where the `id` is set to our batch name (which will be "test" when using the test profile).
 
-1. **Created metadata**: `def cat_meta = [ id: params.batch ]` creates a Groovy-style map with an `id` field set to our batch name
-2. **Created a tuple channel**: `ch_for_cat = convertToUpper.out.collect().map { files -> tuple(cat_meta, files) }` combines the metadata and collected files into the tuple format expected by `CAT_CAT`
-3. **Called CAT_CAT**: Replaced `collectGreetings(...)` with `CAT_CAT(ch_for_cat)`
-4. **Extracted file for cowpy**: Since `cowpy` doesn't accept metadata tuples yet, we extract just the file from the tuple using `.map{ meta, file -> file }` and store it in `ch_for_cowpy`
-5. **Called cowpy**: Pass the extracted file channel to `cowpy` along with the character parameter
+#### Step 2: Create a channel with metadata tuples
+
+Next, transform the channel of files into a channel of tuples containing metadata and files:
+
+=== "After"
+
+    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="8-11"
+        // emit a greeting
+        sayHello(ch_samplesheet)
+
+        // convert the greeting to uppercase
+        convertToUpper(sayHello.out)
+
+        // create metadata map with batch name as the ID
+        def cat_meta = [ id: params.batch ]
+        // create a channel with metadata and files in tuple format
+        ch_for_cat = convertToUpper.out.collect().map { files -> tuple(cat_meta, files) }
+
+        // generate ASCII art of the greetings with cowpy
+        cowpy(collectGreetings.out.outfile, params.character)
+    ```
+
+=== "Before"
+
+    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="8-9"
+        // emit a greeting
+        sayHello(ch_samplesheet)
+
+        // convert the greeting to uppercase
+        convertToUpper(sayHello.out)
+
+        // create metadata map with batch name as the ID
+        def cat_meta = [ id: params.batch ]
+
+        // generate ASCII art of the greetings with cowpy
+        cowpy(collectGreetings.out.outfile, params.character)
+    ```
+
+This line does two things:
+- `.collect()` gathers all files from the `convertToUpper` output into a single list
+- `.map { files -> tuple(cat_meta, files) }` creates a tuple of `[metadata, files]` in the format `CAT_CAT` expects
+
+#### Step 3: Call CAT_CAT
+
+Now call `CAT_CAT` with the properly formatted channel:
+
+=== "After"
+
+    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="11-13"
+        // emit a greeting
+        sayHello(ch_samplesheet)
+
+        // convert the greeting to uppercase
+        convertToUpper(sayHello.out)
+
+        // create metadata map with batch name as the ID
+        def cat_meta = [ id: params.batch ]
+        ch_for_cat = convertToUpper.out.collect().map { files -> tuple(cat_meta, files) }
+
+        // concatenate files using the nf-core cat/cat module
+        CAT_CAT(ch_for_cat)
+
+        // generate ASCII art of the greetings with cowpy
+        cowpy(collectGreetings.out.outfile, params.character)
+    ```
+
+=== "Before"
+
+    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="10"
+        // emit a greeting
+        sayHello(ch_samplesheet)
+
+        // convert the greeting to uppercase
+        convertToUpper(sayHello.out)
+
+        // create metadata map with batch name as the ID
+        def cat_meta = [ id: params.batch ]
+        ch_for_cat = convertToUpper.out.collect().map { files -> tuple(cat_meta, files) }
+
+        // generate ASCII art of the greetings with cowpy
+        cowpy(collectGreetings.out.outfile, params.character)
+    ```
+
+#### Step 4: Update cowpy to use CAT_CAT output
+
+Finally, update the `cowpy` call to use the output from `CAT_CAT`. Since `cowpy` doesn't accept metadata tuples yet (we'll fix this in the next section), we need to extract just the file:
+
+=== "After"
+
+    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="13-17"
+        // emit a greeting
+        sayHello(ch_samplesheet)
+
+        // convert the greeting to uppercase
+        convertToUpper(sayHello.out)
+
+        // create metadata map with batch name as the ID
+        def cat_meta = [ id: params.batch ]
+        ch_for_cat = convertToUpper.out.collect().map { files -> tuple(cat_meta, files) }
+
+        CAT_CAT(ch_for_cat)
+
+        // generate ASCII art of the greetings with cowpy
+        // extract the file from the tuple since cowpy doesn't use metadata yet
+        ch_for_cowpy = CAT_CAT.out.file_out.map{ meta, file -> file }
+        cowpy(ch_for_cowpy, params.character)
+    ```
+
+=== "Before"
+
+    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="13-14"
+        // emit a greeting
+        sayHello(ch_samplesheet)
+
+        // convert the greeting to uppercase
+        convertToUpper(sayHello.out)
+
+        // create metadata map with batch name as the ID
+        def cat_meta = [ id: params.batch ]
+        ch_for_cat = convertToUpper.out.collect().map { files -> tuple(cat_meta, files) }
+
+        CAT_CAT(ch_for_cat)
+
+        // generate ASCII art of the greetings with cowpy
+        cowpy(collectGreetings.out.outfile, params.character)
+    ```
+
+The `.map{ meta, file -> file }` operation extracts just the file from the `[metadata, file]` tuple that `CAT_CAT` outputs.
 
 !!! note
 
-    Notice that we're extracting just the file from `CAT_CAT`'s output tuple to pass to `cowpy`. In the next section, we'll update `cowpy` to work with metadata tuples directly.
+    We're extracting just the file from `CAT_CAT`'s output tuple to pass to `cowpy`. In the next section, we'll update `cowpy` to work with metadata tuples directly, so this extraction step won't be necessary.
 
 ### 1.10. Test the workflow
 
