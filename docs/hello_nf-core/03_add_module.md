@@ -222,7 +222,6 @@ process collectGreetings {
 
     output:
         path "COLLECTED-${batch_name}-output.txt" , emit: outfile
-        val count_greetings , emit: count
 ```
 
 The main differences are:
@@ -300,7 +299,7 @@ Open [core-hello/workflows/hello.nf](core-hello/workflows/hello.nf) and modify t
 
 === "Before"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="7-15"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="7-12"
         // emit a greeting
         sayHello(ch_samplesheet)
 
@@ -310,25 +309,19 @@ Open [core-hello/workflows/hello.nf](core-hello/workflows/hello.nf) and modify t
         // collect all the greetings into one file
         collectGreetings(convertToUpper.out.collect(), params.batch)
 
-        // emit a message about the size of the batch
-        collectGreetings.out.count.view { "There were $it greetings in this batch" }
-
         // generate ASCII art of the greetings with cowpy
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
 Let's break down what we changed:
 
-1. **Created metadata**: `def meta = [ id: params.batch ]` creates a Groovy-style map with an `id` field set to our batch name
-2. **Created a tuple channel**: `ch_for_cat = convertToUpper.out.collect().map { files -> tuple(meta, files) }` combines the metadata and collected files into the tuple format expected by `CAT_CAT`
+1. **Created metadata**: `def cat_meta = [ id: params.batch ]` creates a Groovy-style map with an `id` field set to our batch name
+2. **Created a tuple channel**: `ch_for_cat = convertToUpper.out.collect().map { files -> tuple(cat_meta, files) }` combines the metadata and collected files into the tuple format expected by `CAT_CAT`
 3. **Called CAT_CAT**: Replaced `collectGreetings(...)` with `CAT_CAT(ch_for_cat)`
 4. **Extracted file for cowpy**: Since `cowpy` doesn't accept metadata tuples yet, we extract just the file from the tuple using `.map{ meta, file -> file }` and store it in `ch_for_cowpy`
 5. **Called cowpy**: Pass the extracted file channel to `cowpy` along with the character parameter
-6. **Removed count view**: The `cat/cat` module doesn't emit a count, so we removed that line
 
 !!! note
-
-    We removed the `collectGreetings.out.count.view { ... }` line because the nf-core `cat/cat` module doesn't provide a count of files. If you want to keep this functionality, you would need to count the files before calling `CAT_CAT`.
 
     Notice that we're extracting just the file from `CAT_CAT`'s output tuple to pass to `cowpy`. In the next section, we'll update `cowpy` to work with metadata tuples directly.
 
