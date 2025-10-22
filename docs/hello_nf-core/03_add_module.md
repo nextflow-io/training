@@ -520,19 +520,26 @@ Benefits of this approach:
 
 #### Update the module
 
-Let's update the cowpy module to use `ext.args` instead of the `character` input parameter.
+Let's update the cowpy module to use `ext.args` instead of the `character` input parameter. We'll also remove the local `publishDir` directive to rely on the centralized configuration in `modules.config`.
+
+!!! note "Why remove the local publishDir?"
+
+    nf-core modules should not contain hardcoded `publishDir` directives. Instead, publishing is configured centrally in `conf/modules.config`. This provides several benefits:
+
+    - **Single source of truth**: All output paths are configured in one place
+    - **Flexibility**: Users can easily customize where outputs are published
+    - **Consistency**: All modules follow the same publishing pattern
+    - **No conflicts**: Avoids having two separate publishing locations (local and centralized)
 
 Open [core-hello/modules/local/cowpy.nf](core-hello/modules/local/cowpy.nf):
 
 === "After"
 
-    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="18 20"
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="16 18"
     #!/usr/bin/env nextflow
 
     // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
     process cowpy {
-
-        publishDir 'results', mode: 'copy'
 
         container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
         conda 'conda-forge::cowpy==1.1.5'
@@ -553,7 +560,7 @@ Open [core-hello/modules/local/cowpy.nf](core-hello/modules/local/cowpy.nf):
 
 === "Before"
 
-    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="13"
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="6 13"
     #!/usr/bin/env nextflow
 
     // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
@@ -581,10 +588,11 @@ Open [core-hello/modules/local/cowpy.nf](core-hello/modules/local/cowpy.nf):
 Key changes:
 
 1. **Removed character input**: The module no longer requires `character` as a separate input
-2. **Added ext.args**: The line `def args = task.ext.args ?: ''` uses the Elvis operator (`?:`) to provide an empty string as default if `task.ext.args` is not set
-3. **Updated command**: Changed from hardcoded `-c "$character"` to using the configurable `$args`
+2. **Removed local publishDir**: Deleted the `publishDir 'results', mode: 'copy'` directive to rely on centralized configuration
+3. **Added ext.args**: The line `def args = task.ext.args ?: ''` uses the Elvis operator (`?:`) to provide an empty string as default if `task.ext.args` is not set
+4. **Updated command**: Changed from hardcoded `-c "$character"` to using the configurable `$args`
 
-The module interface is now simpler - it only accepts the essential metadata and file inputs.
+The module interface is now simpler - it only accepts the essential metadata and file inputs. By removing the local `publishDir`, we follow the nf-core convention of centralizing all publishing configuration in `modules.config`.
 
 #### Configure ext.args
 
@@ -704,13 +712,11 @@ Open [core-hello/modules/local/cowpy.nf](core-hello/modules/local/cowpy.nf):
 
 === "After"
 
-    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="15 19 21"
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="13 17 19"
     #!/usr/bin/env nextflow
 
     // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
     process cowpy {
-
-        publishDir 'results', mode: 'copy'
 
         container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
         conda 'conda-forge::cowpy==1.1.5'
@@ -732,13 +738,11 @@ Open [core-hello/modules/local/cowpy.nf](core-hello/modules/local/cowpy.nf):
 
 === "Before"
 
-    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="15 20"
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="13 18"
     #!/usr/bin/env nextflow
 
     // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
     process cowpy {
-
-        publishDir 'results', mode: 'copy'
 
         container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
         conda 'conda-forge::cowpy==1.1.5'
@@ -762,6 +766,8 @@ Key changes:
 1. **Added ext.prefix**: `prefix = task.ext.prefix ?: "${meta.id}"` provides a configurable prefix with a sensible default (the sample ID)
 2. **Updated output**: Changed from hardcoded `cowpy-${input_file}` to `${prefix}.txt`
 3. **Updated command**: Uses the configured prefix for the output filename
+
+Note that the local `publishDir` has already been removed in the previous step, so we're continuing with the centralized configuration approach.
 
 #### Configure ext.prefix
 
