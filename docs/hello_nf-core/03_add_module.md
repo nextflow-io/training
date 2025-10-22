@@ -2,7 +2,7 @@
 
 In this third part of the Hello nf-core training course, we show you how to add an existing nf-core module to your pipeline and adapt your local modules to follow nf-core conventions.
 
-One of the great advantages of nf-core pipelines is the ability to leverage pre-built, tested modules from the nf-core/modules repository. Rather than writing every process from scratch, you can install and use community-maintained modules that follow best practices.
+One of the great advantages of nf-core pipelines is the ability to leverage pre-built, tested modules from the [nf-core/modules](https://github.com/nf-core/modules) repository. Rather than writing every process from scratch, you can install and use community-maintained modules that follow best practices. You can browse available modules at [nf-co.re/modules](https://nf-co.re/modules).
 
 In this section, we'll replace the custom `collectGreetings` module with the `cat/cat` module from nf-core/modules, then progressively adapt our `cowpy` module to follow nf-core patterns.
 
