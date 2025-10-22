@@ -245,6 +245,18 @@ tuple val(meta), path("${prefix}"), emit: file_out
 
 This pattern is standard across all nf-core modules. The metadata map (commonly called `meta`) is a Groovy-style map containing information about a sample or dataset, with `id` being the required field used for naming outputs and tracking samples.
 
+For example, a typical metadata map might look like:
+
+```groovy
+[id: 'sample1', single_end: false, strandedness: 'forward']
+```
+
+In this tutorial, we use a simple metadata map with just the batch name:
+
+```groovy
+[id: 'test']
+```
+
 Why use metadata maps?
 
 - **Sample tracking**: Keep sample information with data throughout the workflow
