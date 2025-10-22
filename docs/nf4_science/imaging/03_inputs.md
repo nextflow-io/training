@@ -41,7 +41,7 @@ segmentation_method: "cellpose"
 Now your command becomes:
 
 ```bash
-nextflow run ./molkart -params-file params.yaml
+nextflow run ./molkart -params-file params.yaml -resume
 ```
 
 That's it! The parameter file documents your exact configuration and makes it easy to rerun or share.
@@ -51,10 +51,12 @@ That's it! The parameter file documents your exact configuration and makes it ea
 You can still override specific parameters from the command line:
 
 ```bash
-nextflow run ./molkart -params-file params.yaml --outdir test_results
+nextflow run ./molkart -params-file params.yaml --segmentation_method "stardist" --outdir stardist_results -resume
 ```
 
-This is useful for quick tests without editing the file.
+The above line changes the `segmentation_method` to be `stardist` and the `--outdir` name to be `stardist_results` instead of the params in the `params.yaml` file.
+Additionally, you can see that the `-resume` flag allowed us to reuse the pre-processing results from the previous run, saving time.
+You can use this pattern to quickly test different variations of the pipeline.
 
 ### Takeaway
 
@@ -129,81 +131,6 @@ mem_only,data/nuclear.tiff,data/spots.txt,data/membrane.tiff
 
 Samplesheets organize multi-sample datasets in a way that allows you to explicitly define your metadata along with the file paths.
 Most nf-core pipelines use this pattern.
-
-### What's next?
-
-Learn how to create training data for custom cell segmentation models.
-
----
-
-## 3. Training custom segmentation models
-
-### 3.1. Why custom models?
-
-The molkart pipeline uses pre-trained machine learning models (like Cellpose) to segment cells.
-These pre-trained models work well for common cell types, but your cells might look different:
-
-- Unusual cell morphology
-- Different staining patterns
-- Non-standard imaging conditions
-
-nf-core/molkart contains functionality for creating training subsets to help you train a **custom cellpose model** on your specific data.
-
-### 3.2. The training workflow
-
-Here's the process for training a custom model:
-
-1. **Generate training images**: Use molkart's `create_training_subset` to create small cropped images
-2. **Annotate in Cellpose**: Load crops into Cellpose GUI and manually outline cells
-3. **Train custom model**: Let Cellpose learn from your annotations
-4. **Use custom model**: Run molkart with your trained model
-
-For time purposes, and to showcase how parameter files help manage inputs, we'll only focus on Step 1 here.
-
-### 3.3. Creating training crops
-
-Create a parameter file for generating training images:
-
-```yaml title="params-training-subset.yaml"
-input: "data/samplesheet.csv"
-outdir: "results-training-crops"
-
-# Preprocessing (same as before)
-mindagap_tilesize: 90
-mindagap_boxsize: 7
-mindagap_loopnum: 100
-clahe_pyramid_tile: 368
-
-# Training subset parameters
-create_training_subset: true
-crop_size_x: 30
-crop_size_y: 30
-crop_amount: 4
-```
-
-Run it:
-
-```bash
-nextflow run ./molkart -params-file params-training-subset.yaml -resume
-```
-
-This creates small image crops in your output directory that you can load into Cellpose for annotation and training.
-
-### 3.4. Next steps (outside this course)
-
-If you were to continue, the next steps would be:
-
-1. Install Cellpose on your local machine
-2. Load the cropped images into the Cellpose GUI
-3. Manually draw cell outlines on ~50-100 cells
-4. Train a custom model using Cellpose's training function
-5. Run molkart with `--cellpose_model /path/to/your/custom/model`
-
-Importantly you can continue using nextflow's `-resume` functionality in between executions so that all the pre-processing steps are re-used between executions.
-
-### Takeaway
-
-When running Nextflow pipelines the combination of parameter files, samplesheets, and resume functionality makes it easy to manage complex iterative research patterns with a minimal amount of overhead.
 
 ### What's next?
 

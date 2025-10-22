@@ -48,7 +48,7 @@ results
 └── output.txt
 ```
 
-Open the file; the contents should match the string you specified on the command line.
+Open the file; the contents should match the greeting you specified on the command line.
 
 <details>
   <summary>File contents</summary>
@@ -91,7 +91,7 @@ That is a truncated form of the task directory path for that one process call, a
 You can find the full path by typing the following command (replacing `a3/7be2fa` with what you see in your own terminal) and pressing the tab key to autocomplete the path or adding an asterisk:
 
 ```bash
-ls work/a3/7be2fa*
+tree work/a3/7be2fa*
 ```
 
 This should yield the full path directory path: `work/a3/7be2fa7be2fad5e71e5f49998f795677fd68`
@@ -132,7 +132,7 @@ You should immediately recognize the `output.txt` file, which is in fact the ori
 If you open it, you will find the `Hello World!` greeting again.
 
 <details>
-  <summary>File contents</summary>
+  <summary>File contents of output.txt</summary>
 
 ```console title="work/a3/7be2fa7be2fad5e71e5f49998f795677fd68/output.txt" linenums="1"
 Hello World!

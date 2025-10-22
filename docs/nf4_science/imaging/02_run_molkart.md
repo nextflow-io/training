@@ -23,6 +23,11 @@ Key features of nf-core pipelines:
 - **Quality control**: Automated QC reports using MultiQC
 - **Container support**: Pre-built containers for reproducibility
 
+!!! tip "Want to learn more about nf-core?"
+
+    For an in-depth introduction to nf-core pipeline development, check out the [Hello nf-core](../../hello_nf-core/index.md) training course.
+    It covers how to create and customize nf-core pipelines from scratch.
+
 ### 1.2. The molkart pipeline
 
 ![nf-core/molkart pipeline](img/molkart.png)
@@ -267,7 +272,7 @@ CPU hours   : 0.1
 Succeeded   : 22
 ```
 
-Notice how this output is more detailed than our Hello World example:
+Notice how this output is more detailed than our Hello World example because of the nf-core conventions the pipeline follows:
 
 - Pipeline shows its version and logo
 - Configuration parameters are displayed
@@ -309,7 +314,7 @@ By default, nf-core pipelines write outputs to a directory specified by the `out
 List the contents:
 
 ```bash
-ls -lh results/
+tree results/
 ```
 
 You should see several subdirectories:

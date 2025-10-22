@@ -34,7 +34,7 @@ Configuration files control:
 Nextflow loads configuration from multiple sources, with later sources overriding earlier ones:
 
 1. **Pipeline config**: `nextflow.config` in the pipeline repository
-2. **Directory config**: `nextflow.config` in your working directory
+2. **Directory config**: `nextflow.config` in your present working directory
 3. **User config**: `~/.nextflow/config`
 4. **Command-line**: Parameters and options passed directly
 
@@ -79,8 +79,8 @@ Learn about the built-in profiles that come with every nf-core pipeline.
 
 ### 2.1. What are profiles?
 
-Profiles are named sets of configuration that can be activated with `-profile`.
-They make it easy to switch between different scenarios without editing config files.
+Profiles are named sets of configuration that can be activated with the `-profile` flag via the `nextflow run` command.
+They make it easy to switch between different compute scenarios without editing config files.
 
 All nf-core pipelines come with standard profiles built in.
 
@@ -260,7 +260,7 @@ Learn how to customize resource requests for individual processes using nf-core'
 ### 4.1. Understanding process labels in nf-core pipelines
 
 nf-core pipelines use **process labels** to standardize resource allocation across all pipelines.
-Each process is tagged with a label like `process_low`, `process_medium`, or `process_high`.
+Each process is tagged with a label like `process_low`, `process_medium`, or `process_high` to describe low, medium, or high compute resource requirements, respectively.
 
 Here are the standard labels from molkart:
 
