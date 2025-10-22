@@ -283,7 +283,7 @@ Add these lines after the `convertToUpper` call, removing the `collectGreetings`
 
 === "After"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="8-10"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="7-8"
         // emit a greeting
         sayHello(ch_samplesheet)
 
@@ -299,7 +299,7 @@ Add these lines after the `convertToUpper` call, removing the `collectGreetings`
 
 === "Before"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="7-9"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="7-8"
         // emit a greeting
         sayHello(ch_samplesheet)
 
@@ -321,7 +321,7 @@ Next, transform the channel of files into a channel of tuples containing metadat
 
 === "After"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="8-11"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="8-10"
         // emit a greeting
         sayHello(ch_samplesheet)
 
@@ -339,7 +339,7 @@ Next, transform the channel of files into a channel of tuples containing metadat
 
 === "Before"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="8-9"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="8"
         // emit a greeting
         sayHello(ch_samplesheet)
 
@@ -363,7 +363,7 @@ Now call `CAT_CAT` with the properly formatted channel:
 
 === "After"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="11-13"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="11-12"
         // emit a greeting
         sayHello(ch_samplesheet)
 
