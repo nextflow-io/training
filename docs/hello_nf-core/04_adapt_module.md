@@ -23,12 +23,9 @@ Now that we've successfully integrated the nf-core `CAT_CAT` module in [Part 3](
 
 ---
 
+## 1. Adapt local modules to nf-core conventions
 
-1. First, we'll update `cowpy` to accept and propagate metadata tuples
-2. Then, we'll simplify its interface using `ext.args`
-3. Finally, we'll add configurable output naming with `ext.prefix`
-
-### 1. Update cowpy to use metadata tuples
+### 1.1. Update cowpy to use metadata tuples
 
 Currently, we're extracting the file from `CAT_CAT`'s output tuple to pass to `cowpy`. It would be better to have `cowpy` accept metadata tuples directly, allowing metadata to flow through the entire workflow.
 
@@ -138,7 +135,7 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
 
 The pipeline should run successfully with metadata now flowing from `CAT_CAT` through `cowpy`.
 
-### 2. Simplify the interface with ext.args
+### 1.2. Simplify the interface with ext.args
 
 Now let's address another nf-core pattern: simplifying module interfaces by using `ext.args` for optional command-line arguments.
 
@@ -327,7 +324,7 @@ cat test.txt | cowpy -c cow > cowpy-test.txt
 
 This confirms that `task.ext.args` successfully passed the character parameter through the configuration rather than requiring it as a process input.
 
-### 3. Add configurable output naming with ext.prefix
+### 1.3. Add configurable output naming with ext.prefix
 
 There's one more nf-core pattern we can apply: using `ext.prefix` for configurable output file naming.
 
@@ -469,7 +466,7 @@ Clean up by optionally removing the now-unused local module.
 
 ---
 
-### 4. Optional: Clean up unused local modules
+### 1.4. Optional: Clean up unused local modules
 
 Now that we're using the nf-core `cat/cat` module, the local `collectGreetings` module is no longer needed.
 
