@@ -510,6 +510,7 @@ nf-core modules create cowpy
 ```
 
 The command will interactively ask for:
+
 - Tool name and optional subtool/subcommand
 - Author information
 - Resource requirements (CPU/memory estimates)
