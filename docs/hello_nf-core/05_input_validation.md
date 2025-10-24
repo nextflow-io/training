@@ -405,35 +405,43 @@ First, add the import at the top of the file:
 
     ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="1" hl_lines="13"
     //
-    // Subworkflow with functionality that may be useful for any Nextflow pipeline
+    // Subworkflow with functionality specific to the core/hello pipeline
     //
 
-    import org.yaml.snakeyaml.Yaml
-    import groovy.json.JsonOutput
+    /*
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        IMPORT FUNCTIONS / MODULES / SUBWORKFLOWS
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    */
 
-    include { UTILS_NFSCHEMA_PLUGIN  } from '../../nf-core/utils_nfschema_plugin'
-    include { UTILS_NEXTFLOW_PIPELINE } from '../../nf-core/utils_nextflow_pipeline'
-    include { UTILS_NFCORE_PIPELINE   } from '../../nf-core/utils_nfcore_pipeline'
-
+    include { UTILS_NFSCHEMA_PLUGIN     } from '../../nf-core/utils_nfschema_plugin'
     include { paramsSummaryMap          } from 'plugin/nf-schema'
     include { samplesheetToList         } from 'plugin/nf-schema'
+    include { paramsHelp                } from 'plugin/nf-schema'
+    include { completionSummary         } from '../../nf-core/utils_nfcore_pipeline'
+    include { UTILS_NFCORE_PIPELINE     } from '../../nf-core/utils_nfcore_pipeline'
+    include { UTILS_NEXTFLOW_PIPELINE   } from '../../nf-core/utils_nextflow_pipeline'
     ```
 
 === "Before"
 
     ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="1"
     //
-    // Subworkflow with functionality that may be useful for any Nextflow pipeline
+    // Subworkflow with functionality specific to the core/hello pipeline
     //
 
-    import org.yaml.snakeyaml.Yaml
-    import groovy.json.JsonOutput
+    /*
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        IMPORT FUNCTIONS / MODULES / SUBWORKFLOWS
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    */
 
-    include { UTILS_NFSCHEMA_PLUGIN  } from '../../nf-core/utils_nfschema_plugin'
-    include { UTILS_NEXTFLOW_PIPELINE } from '../../nf-core/utils_nextflow_pipeline'
-    include { UTILS_NFCORE_PIPELINE   } from '../../nf-core/utils_nfcore_pipeline'
-
+    include { UTILS_NFSCHEMA_PLUGIN     } from '../../nf-core/utils_nfschema_plugin'
     include { paramsSummaryMap          } from 'plugin/nf-schema'
+    include { paramsHelp                } from 'plugin/nf-schema'
+    include { completionSummary         } from '../../nf-core/utils_nfcore_pipeline'
+    include { UTILS_NFCORE_PIPELINE     } from '../../nf-core/utils_nfcore_pipeline'
+    include { UTILS_NEXTFLOW_PIPELINE   } from '../../nf-core/utils_nextflow_pipeline'
     ```
 
 Now update the channel creation code:
