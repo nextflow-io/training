@@ -632,14 +632,14 @@ In the workflow block, make the following code change:
 
     ```groovy title="hello-world.nf" linenums="24" hl_lines="2"
     // emit a greeting
-    sayHello(params.greeting)
+    ch_output = sayHello(params.greeting)
     ```
 
 === "Before"
 
     ```groovy title="hello-world.nf" linenums="24"
     // emit a greeting
-    sayHello()
+    ch_output = sayHello()
     ```
 
 This tells Nextflow to run the `sayHello` process on the value provided through the `--greeting` parameter.
