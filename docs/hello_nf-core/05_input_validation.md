@@ -520,18 +520,18 @@ Great! The pipeline runs successfully and validation passes silently.
 
 **Test with invalid input:**
 
-Now let's test that validation catches errors. Create a test file with an invalid entry:
+Now let's test that validation catches errors. Create a test file with an invalid column name:
 
 ```bash
 cat > /tmp/invalid_greetings.csv << 'EOF'
-greeting
+message
 Hello
-
+Bonjour
 Holà
 EOF
 ```
 
-This file has a second row with only whitespace (three spaces), which should fail our validation rule.
+This file uses `message` as the column name instead of `greeting`, which doesn't match our schema.
 
 Try running the pipeline with this invalid input:
 
@@ -561,7 +561,7 @@ ERROR ~ Validation of pipeline parameters failed!
 The following invalid input values have been detected:
 
 * --input (/tmp/invalid_greetings.csv): Validation of file failed:
-	-> Entry 2: Missing required field(s): greeting
+	-> Entry 1: Missing required field(s): greeting
 
  -- Check script 'subworkflows/nf-core/utils_nfschema_plugin/main.nf' at line: 39 or see '.nextflow.log' file for more details
 ```
@@ -569,12 +569,10 @@ The following invalid input values have been detected:
 Perfect! The validation caught the error and provided a clear, helpful error message pointing to:
 
 - Which file failed validation
-- Which entry (row 2) has the problem
-- What the specific problem is (missing required field)
+- Which entry (row 1, the first data row) has the problem
+- What the specific problem is (missing required field `greeting`)
 
-!!! note "Empty lines in CSV files"
-
-    Empty lines (with no content at all) are filtered out during CSV parsing and won't trigger validation errors. Only lines with content that fails validation rules (like whitespace-only entries) will be caught.
+The schema validation ensures that input files have the correct structure before the pipeline runs, saving time and preventing confusing errors later in execution.
 
 ### Takeaway
 
