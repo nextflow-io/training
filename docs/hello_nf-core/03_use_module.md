@@ -22,7 +22,7 @@ In this section, we'll replace the custom `collectGreetings` module with the `ca
 ---
 
 
-## Use an nf-core module
+## 1. Use an nf-core module
 
 First, let's learn how to find, install, and use an existing nf-core module in our pipeline.
 
@@ -32,7 +32,7 @@ The `collectGreetings` process in our pipeline uses the Unix `cat` command to co
 
     nf-core modules follow the naming convention `software/command`. The `cat/cat` module wraps the `cat` command from the `cat` software package. Other examples include `fastqc/fastqc` (FastQC software, fastqc command) or `samtools/view` (samtools software, view command).
 
-### 1. Browse available modules on the nf-core website
+### 1.1. Browse available modules on the nf-core website
 
 The nf-core project maintains a centralized catalog of modules at [https://nf-co.re/modules](https://nf-co.re/modules).
 
@@ -47,7 +47,7 @@ The module page shows:
 - Input and output channel structure
 - Available parameters
 
-### 2. List available modules from the command line
+### 1.2. List available modules from the command line
 
 You can also search for modules directly from the command line using nf-core tools.
 
@@ -65,7 +65,7 @@ nf-core modules list remote | grep cat
 cat/cat
 ```
 
-### 3. Get detailed information about the module
+### 1.3. Get detailed information about the module
 
 To see detailed information about a specific module, use the `info` command:
 
@@ -75,7 +75,7 @@ nf-core modules info cat/cat
 
 This displays documentation about the module, including its inputs, outputs, and basic usage information.
 
-### 4. Install and verify the cat/cat module
+### 1.4. Install and verify the cat/cat module
 
 !!! note
 
@@ -136,7 +136,7 @@ INFO     Modules installed in '.':
 └────────────────────────────┴─────────────────────────────┘
 ```
 
-### 5. Add the import statement to your workflow
+### 1.5. Add the import statement to your workflow
 
 Open [core-hello/workflows/hello.nf](core-hello/workflows/hello.nf) and add the `include` statement for the `CAT_CAT` module in the imports section.
 
@@ -180,7 +180,7 @@ Note how the path for the nf-core module differs from the local modules:
 - **nf-core module**: `'../modules/nf-core/cat/cat/main'` (includes the tool name twice and references `main.nf`)
 - **Local module**: `'../modules/local/collectGreetings.nf'` (single file reference)
 
-### 6. Examine the cat/cat module interface
+### 1.6. Examine the cat/cat module interface
 
 Let's look at the `cat/cat` module's main.nf file to understand its interface:
 
@@ -208,7 +208,7 @@ The module expects:
 - **Input**: A tuple containing metadata (`meta`) and input file(s) (`files_in`)
 - **Output**: A tuple containing metadata and the concatenated output file, plus a versions file
 
-### 7. Compare with collectGreetings interface
+### 1.7. Compare with collectGreetings interface
 
 Our custom `collectGreetings` module has a simpler interface:
 
@@ -231,7 +231,7 @@ The main differences are:
 - `CAT_CAT` outputs a tuple, while `collectGreetings` outputs a simple path
 - `CAT_CAT` requires a filename prefix via the `meta.id` field
 
-### 8. Understanding metadata maps
+### 1.8. Understanding metadata maps
 
 You've just seen that `CAT_CAT` expects inputs and outputs structured as tuples with metadata:
 
@@ -270,7 +270,7 @@ Why use metadata maps?
 
 For now, we'll pass the output from `CAT_CAT` to `cowpy` with the character parameter. In the next section, we'll adapt `cowpy` to follow nf-core conventions.
 
-### 9. Wire up CAT_CAT in the workflow
+### 1.9. Wire up CAT_CAT in the workflow
 
 Now we need to modify our workflow code to use `CAT_CAT` instead of `collectGreetings`. Since `CAT_CAT` requires metadata tuples, we'll do this in several steps to make it clear how to work with metadata.
 
@@ -449,7 +449,7 @@ The `.map{ meta, file -> file }` operation extracts just the file from the `[met
 
     We're extracting just the file from `CAT_CAT`'s output tuple to pass to `cowpy`. In the next section, we'll update `cowpy` to work with metadata tuples directly, so this extraction step won't be necessary.
 
-### 10. Test the workflow
+### 1.10. Test the workflow
 
 Let's test that the workflow works with the `cat/cat` module:
 
