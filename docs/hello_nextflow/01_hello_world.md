@@ -324,7 +324,7 @@ In the workflow script file `hello-world.nf`, make the following code modificati
 
 === "After"
 
-    ```groovy title="hello-world.nf" linenums="1" hl_lines="4 5 9 10 11 12"
+    ```groovy title="hello-world.nf" linenums="1" hl_lines="17-27"
     #!/usr/bin/env nextflow
 
     process sayHello {
@@ -356,7 +356,7 @@ In the workflow script file `hello-world.nf`, make the following code modificati
 
 === "Before"
 
-    ```groovy title="hello-world.nf" linenums="1"
+    ```groovy title="hello-world.nf" linenums="1" hl_lines="17"
     #!/usr/bin/env nextflow
 
     process sayHello {
