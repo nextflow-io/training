@@ -356,7 +356,7 @@ In the workflow script file `hello-world.nf`, make the following code modificati
 
 === "Before"
 
-    ```groovy title="hello-world.nf" linenums="1" hl_lines="17"
+    ```groovy title="hello-world.nf" linenums="1" hl_lines="17-18"
     #!/usr/bin/env nextflow
 
     process sayHello {
