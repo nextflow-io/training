@@ -36,7 +36,9 @@ workflow HELLO {
     CAT_CAT(ch_for_cat)
 
     // generate ASCII art of the greetings with cowpy
-    cowpy(CAT_CAT.out.file_out)
+    // extract the file from the tuple since cowpy doesn't use metadata yet
+    ch_for_cowpy = CAT_CAT.out.file_out.map{ meta, file -> file }
+    cowpy(ch_for_cowpy, params.character)
 
     ch_versions = Channel.empty()
 
@@ -53,7 +55,7 @@ workflow HELLO {
 
 
     emit:
-    cowpy_hellos   = cowpy.out.cowpy_output
+    cowpy_hellos   = cowpy.out
     versions       = ch_versions                 // channel: [ path(versions.yml) ]
 
 }

@@ -1305,4 +1305,4 @@ You know how to convert a regular Nextflow pipeline into an nf-core style pipeli
 
 ### What's next?
 
-Take a break, that was hard work! When you're ready, move on to [Part 3: Add an existing nf-core module](./03_add_module.md) to learn how to leverage community-maintained modules from the nf-core/modules repository.
+Take a break, that was hard work! When you're ready, move on to [Part 3: Use an nf-core module](./03_use_module.md) to learn how to leverage community-maintained modules from the nf-core/modules repository.
