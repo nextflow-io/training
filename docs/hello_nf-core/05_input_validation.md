@@ -126,7 +126,7 @@ Let's start by adding parameter validation to our pipeline. This validates comma
 Let's look at a section of the `nextflow_schema.json` file that came with our pipeline template:
 
 ```bash
-grep -A 20 '"input_output_options"' core-hello/nextflow_schema.json
+grep -A 20 '"input_output_options"' nextflow_schema.json
 ```
 
 The parameter schema is organized into groups. Here's the `input_output_options` group (simplified):
