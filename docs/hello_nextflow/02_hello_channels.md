@@ -88,7 +88,7 @@ In the workflow block, add the channel factory code:
         greeting_ch = Channel.of('Hello Channels!')
 
         // emit a greeting
-        sayHello(params.greeting)
+        ch_output = sayHello(params.greeting)
     }
     ```
 
@@ -98,7 +98,7 @@ In the workflow block, add the channel factory code:
     workflow {
 
         // emit a greeting
-        sayHello(params.greeting)
+        ch_output = sayHello(params.greeting)
     }
     ```
 
@@ -119,7 +119,7 @@ In the workflow block, make the following code change:
         greeting_ch = Channel.of('Hello Channels!')
 
         // emit a greeting
-        sayHello(greeting_ch)
+        ch_output = sayHello(greeting_ch)
     }
     ```
 
@@ -132,7 +132,7 @@ In the workflow block, make the following code change:
         greeting_ch = Channel.of('Hello Channels!')
 
         // emit a greeting
-        sayHello(params.greeting)
+        ch_output = sayHello(params.greeting)
     }
     ```
 
