@@ -40,7 +40,7 @@ nextflow run hello-containers.nf
 This should produce the following output:
 
 ```console title="Output"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.04.6
 
 Launching `hello-containers.nf` [tender_becquerel] DSL2 - revision: f7cat8e223
 
@@ -500,7 +500,7 @@ nextflow run hello-containers.nf -resume
 Oh no, there's an error!
 
 ```console title="Output"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.04.6
 
 Launching `hello-containers.nf` [special_lovelace] DSL2 - revision: 028a841db1
 
@@ -601,7 +601,7 @@ nextflow run hello-containers.nf -resume
 This time it does indeed work.
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.04.6
 
 Launching `hello-containers.nf` [elegant_brattain] DSL2 - revision: 028a841db1
 
