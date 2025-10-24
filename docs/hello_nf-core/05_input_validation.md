@@ -225,7 +225,7 @@ Now let's test that parameter validation works correctly.
 First, try running without the required `input` parameter:
 
 ```bash
-nextflow run core-hello --outdir test-results -profile docker
+nextflow run . --outdir test-results -profile docker
 ```
 
 ```console title="Output"
@@ -240,8 +240,10 @@ Perfect! The validation catches the missing required parameter before the pipeli
 Now try with a valid set of parameters:
 
 ```bash
-nextflow run core-hello --input assets/greetings.csv --outdir results --batch my-batch -profile test,docker
+nextflow run . --input assets/greetings.csv --outdir results --batch my-batch -profile test,docker --validationSchemaIgnoreParams input
 ```
+
+Note: We use `--validationSchemaIgnoreParams input` to skip input data validation at this stage since we haven't configured the input schema yet (we'll do that in the next section).
 
 The pipeline should run successfully, and the `batch` parameter is now validated.
 
