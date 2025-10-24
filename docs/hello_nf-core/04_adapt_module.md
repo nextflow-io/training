@@ -493,7 +493,7 @@ However, you might want to keep it as a reference for understanding the differen
 
 ---
 
-## 3. Contributing modules back to nf-core
+## 2. Contributing modules back to nf-core
 
 Now that you've learned how to create modules following nf-core conventions, you might develop modules that could benefit the wider community. The [nf-core/modules](https://github.com/nf-core/modules) repository welcomes contributions of well-tested, standardized modules.
 
