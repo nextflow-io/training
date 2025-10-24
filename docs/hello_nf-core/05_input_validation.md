@@ -381,6 +381,24 @@ We need to:
 2. Use it to validate and parse the input
 3. Extract just the greeting strings for our workflow
 
+!!! note "What are Nextflow plugins?"
+
+    Plugins are extensions that add new functionality to the Nextflow language itself. They're installed via a `plugins{}` block in `nextflow.config` and can provide:
+
+    - New functions and classes that can be imported (like `samplesheetToList`)
+    - New DSL features and operators
+    - Integration with external services
+
+    The nf-schema plugin is specified in `nextflow.config`:
+
+    ```groovy
+    plugins {
+        id 'nf-schema@2.1.1'
+    }
+    ```
+
+    Once installed, you can import functions from plugins using `include { functionName } from 'plugin/plugin-name'` syntax.
+
 First, add the import at the top of the file:
 
 === "After"
@@ -460,7 +478,7 @@ Let's break down what changed:
 
 !!! note "Parameter validation is enabled by default"
 
-    The pipeline template already includes parameter validation enabled via `params.validate_params = true` in `nextflow.config`. The validation is performed by the `UTILS_NFSCHEMA_PLUGIN` subworkflow during pipeline initialization.
+    The nf-schema plugin is installed via the `plugins{}` block in `nextflow.config`, and the pipeline template already includes parameter validation enabled via `params.validate_params = true`. The validation is performed by the `UTILS_NFSCHEMA_PLUGIN` subworkflow during pipeline initialization.
 
 ### Takeaway
 
