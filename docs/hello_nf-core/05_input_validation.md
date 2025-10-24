@@ -377,8 +377,8 @@ Open [core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf](core-he
 
 We need to:
 
-1. Import the `samplesheetToList` function
-2. Use it to validate and parse the input
+1. Use the `samplesheetToList` function (already imported in the template)
+2. Validate and parse the input
 3. Extract just the greeting strings for our workflow
 
 !!! note "What are Nextflow plugins?"
@@ -399,50 +399,27 @@ We need to:
 
     Once installed, you can import functions from plugins using `include { functionName } from 'plugin/plugin-name'` syntax.
 
-First, add the import at the top of the file:
+First, note that the `samplesheetToList` function is already imported at the top of the file (the nf-core template includes this by default):
 
-=== "After"
+```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="1" hl_lines="13"
+//
+// Subworkflow with functionality specific to the core/hello pipeline
+//
 
-    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="1" hl_lines="13"
-    //
-    // Subworkflow with functionality specific to the core/hello pipeline
-    //
+/*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    IMPORT FUNCTIONS / MODULES / SUBWORKFLOWS
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/
 
-    /*
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        IMPORT FUNCTIONS / MODULES / SUBWORKFLOWS
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    */
-
-    include { UTILS_NFSCHEMA_PLUGIN     } from '../../nf-core/utils_nfschema_plugin'
-    include { paramsSummaryMap          } from 'plugin/nf-schema'
-    include { samplesheetToList         } from 'plugin/nf-schema'
-    include { paramsHelp                } from 'plugin/nf-schema'
-    include { completionSummary         } from '../../nf-core/utils_nfcore_pipeline'
-    include { UTILS_NFCORE_PIPELINE     } from '../../nf-core/utils_nfcore_pipeline'
-    include { UTILS_NEXTFLOW_PIPELINE   } from '../../nf-core/utils_nextflow_pipeline'
-    ```
-
-=== "Before"
-
-    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="1"
-    //
-    // Subworkflow with functionality specific to the core/hello pipeline
-    //
-
-    /*
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        IMPORT FUNCTIONS / MODULES / SUBWORKFLOWS
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    */
-
-    include { UTILS_NFSCHEMA_PLUGIN     } from '../../nf-core/utils_nfschema_plugin'
-    include { paramsSummaryMap          } from 'plugin/nf-schema'
-    include { paramsHelp                } from 'plugin/nf-schema'
-    include { completionSummary         } from '../../nf-core/utils_nfcore_pipeline'
-    include { UTILS_NFCORE_PIPELINE     } from '../../nf-core/utils_nfcore_pipeline'
-    include { UTILS_NEXTFLOW_PIPELINE   } from '../../nf-core/utils_nextflow_pipeline'
-    ```
+include { UTILS_NFSCHEMA_PLUGIN     } from '../../nf-core/utils_nfschema_plugin'
+include { paramsSummaryMap          } from 'plugin/nf-schema'
+include { samplesheetToList         } from 'plugin/nf-schema'
+include { paramsHelp                } from 'plugin/nf-schema'
+include { completionSummary         } from '../../nf-core/utils_nfcore_pipeline'
+include { UTILS_NFCORE_PIPELINE     } from '../../nf-core/utils_nfcore_pipeline'
+include { UTILS_NEXTFLOW_PIPELINE   } from '../../nf-core/utils_nextflow_pipeline'
+```
 
 Now update the channel creation code:
 
