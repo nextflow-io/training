@@ -53,6 +53,15 @@ nav:
           - nf4_science/rnaseq/03_multi-sample.md
           - nf4_science/rnaseq/survey.md
           - nf4_science/rnaseq/next_steps.md
+      - Imaging:
+          - nf4_science/imaging/index.md
+          - nf4_science/imaging/00_orientation.md
+          - nf4_science/imaging/01_basics.md
+          - nf4_science/imaging/02_run_molkart.md
+          - nf4_science/imaging/03_inputs.md
+          - nf4_science/imaging/04_config.md
+          - nf4_science/imaging/survey.md
+          - nf4_science/imaging/next_steps.md
   - Training Collections:
       - training_collections/index.md
       - training_collections/architects_toolkit_1.md
@@ -225,6 +234,7 @@ plugins:
         - hello_nf-core/*.md
         - nf4_science/genomics/*.md
         - nf4_science/rnaseq/*.md
+        - nf4_science/imaging/*.md
         - side_quests/*.md
         - training_collections/index.md
         - training_collections/advanced_workflow_development/index.md
