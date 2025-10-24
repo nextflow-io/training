@@ -277,10 +277,10 @@ Now let's add validation for the contents of our input CSV file. While parameter
 Let's remind ourselves what our input looks like:
 
 ```bash
-cat core-hello/assets/greetings.csv
+cat assets/greetings.csv
 ```
 
-```csv title="core-hello/assets/greetings.csv"
+```csv title="assets/greetings.csv"
 Hello
 Bonjour
 Holà
@@ -305,9 +305,9 @@ We'll structure this as an array of objects, where each object has a `greeting` 
 
 ### 3.3. Create the schema file
 
-Replace the contents of [core-hello/assets/schema_input.json](core-hello/assets/schema_input.json) with the following:
+Replace the contents of `assets/schema_input.json` with the following:
 
-```json title="core-hello/assets/schema_input.json" linenums="1"
+```json title="assets/schema_input.json" linenums="1"
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://raw.githubusercontent.com/core/hello/main/assets/schema_input.json",
@@ -348,7 +348,7 @@ Add a header line to the greetings file:
 
 === "After"
 
-    ```csv title="core-hello/assets/greetings.csv" linenums="1"
+    ```csv title="assets/greetings.csv" linenums="1"
     greeting
     Hello
     Bonjour
@@ -357,7 +357,7 @@ Add a header line to the greetings file:
 
 === "Before"
 
-    ```csv title="core-hello/assets/greetings.csv" linenums="1"
+    ```csv title="assets/greetings.csv" linenums="1"
     Hello
     Bonjour
     Holà
