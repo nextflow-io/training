@@ -42,7 +42,7 @@ nextflow run hello-workflow.nf
 ```
 
 ```console title="Output"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.10.0
 
 Launching `hello-workflow.nf` [stupefied_sammet] DSL2 - revision: b9e466930b
 
@@ -50,7 +50,7 @@ executor >  local (3)
 [2a/324ce6] sayHello (3) | 3 of 3 ✔
 ```
 
-As previously, you will find the output files in the `results` directory (specified by the `publishDir` directive).
+As previously, you will find the output files in the `results` directory (specified by the workflow outputs).
 
 ```console title="Directory contents"
 results
@@ -111,8 +111,6 @@ Add the following process definition to the workflow script:
  * Use a text replacement tool to convert the greeting to uppercase
  */
 process convertToUpper {
-
-    publishDir 'results', mode: 'copy'
 
     input:
         path input_file
@@ -199,7 +197,7 @@ nextflow run hello-workflow.nf -resume
 You should see the following output:
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.10.0
 
 Launching `hello-workflow.nf` [disturbed_darwin] DSL2 - revision: 4e252c048f
 
@@ -224,7 +222,7 @@ The output of the first process is in there because Nextflow staged it there in 
 However, it is actually a symbolic link pointing to the the original file in the subdirectory of the first process call.
 By default, when running on a single machine as we're doing here, Nextflow uses symbolic links rather than copies to stage input and intermediate files.
 
-You'll also find the final outputs in the `results` directory since we used the `publishDir` directive in the second process too.
+You'll also find the final outputs in the `results` directory, as we'll configure next.
 
 ```console title="Directory contents"
 results
@@ -240,6 +238,61 @@ Think about how all we did was connect the output of `sayHello` to the input of 
 Nextflow did the hard work of handling individual input and output files and passing them between the two commands for us.
 
 This is one of the reasons Nextflow channels are so powerful: they take care of the busywork involved in connecting workflow steps together.
+
+### 1.6. Update workflow outputs to publish both processes
+
+Now let's update our workflow outputs to publish the results from both processes.
+
+In the workflow and output blocks, make the following code change:
+
+=== "After"
+
+    ```groovy title="hello-workflow.nf" linenums="53" hl_lines="4 7 8 9 10 11 12 13 14 15 16 17"
+        // emit a greeting
+        ch_hello = sayHello(greeting_ch)
+
+        // convert the greeting to uppercase
+        ch_upper = convertToUpper(ch_hello)
+
+        publish:
+        greetings = ch_hello
+        uppercase = ch_upper
+    }
+
+    output {
+        greetings {
+            path '.'
+        }
+        uppercase {
+            path '.'
+        }
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="hello-workflow.nf" linenums="53"
+        // emit a greeting
+        ch_output = sayHello(greeting_ch)
+
+        publish:
+        greetings = ch_output
+    }
+
+    output {
+        greetings {
+            path '.'
+        }
+    }
+    ```
+
+Here we:
+
+1. Assigned the output of `sayHello()` to `ch_hello` and `convertToUpper()` to `ch_upper`
+2. Added both channels to the `publish:` section
+3. Declared both outputs in the `output` block, with both publishing to the `results` directory
+
+Now when you run the workflow, both the original greetings and the uppercase versions will be published to the `results` directory.
 
 ### Takeaway
 
@@ -296,8 +349,6 @@ Add the following process definition to the workflow script:
  * Collect uppercase greetings into a single output file
  */
 process collectGreetings {
-
-    publishDir 'results', mode: 'copy'
 
     input:
         ???
@@ -422,7 +473,7 @@ nextflow run hello-workflow.nf -resume
 It runs successfully, including the third step:
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.10.0
 
 Launching `hello-workflow.nf` [mad_gilbert] DSL2 - revision: 6acfd5e28d
 
@@ -513,7 +564,7 @@ nextflow run hello-workflow.nf -resume
 It runs successfully, although the log output may look a little messier than this (we cleaned it up for readability).
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.10.0
 
 Launching `hello-workflow.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
 
@@ -693,7 +744,7 @@ nextflow run hello-workflow.nf -resume --batch trio
 It runs successfully:
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.10.0
 
 Launching `hello-workflow.nf` [confident_rutherford] DSL2 - revision: bc58af409c
 
@@ -844,7 +895,7 @@ nextflow run hello-workflow.nf -resume --batch trio
 This runs successfully:
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.10.0
 
 Launching `hello-workflow.nf` [evil_sinoussi] DSL2 - revision: eeca64cdb1
 

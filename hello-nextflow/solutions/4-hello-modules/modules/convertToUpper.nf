@@ -5,8 +5,6 @@
  */
 process convertToUpper {
 
-    publishDir 'results', mode: 'copy'
-
     input:
         path input_file
 

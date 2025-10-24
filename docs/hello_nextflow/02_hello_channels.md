@@ -37,7 +37,7 @@ nextflow run hello-channels.nf --greeting 'Hello Channels!'
 ```
 
 ```console title="Output"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.10.0
 
 Launching `hello-channels.nf` [insane_lichterman] DSL2 - revision: c33d41f479
 
@@ -45,7 +45,7 @@ executor >  local (1)
 [86/9efa08] sayHello | 1 of 1 ✔
 ```
 
-As previously, you will find the output file named `output.txt` in the `results` directory (specified by the `publishDir` directive).
+As previously, you will find the output file named `output.txt` in the `results` directory (specified by the workflow outputs).
 
 ```console title="results/output.txt" linenums="1"
 Hello Channels!
@@ -151,7 +151,7 @@ nextflow run hello-channels.nf
 If you made both edits correctly, you should get another successful execution:
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.10.0
 
 Launching `hello-channels.nf` [nice_heisenberg] DSL2 - revision: 41b4aeb7e9
 
@@ -221,7 +221,7 @@ nextflow run hello-channels.nf
 It certainly seems to run just fine:
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.10.0
 
 Launching `hello-channels.nf` [suspicious_lamport] DSL2 - revision: 778deadaea
 
@@ -246,7 +246,7 @@ nextflow run hello-channels.nf -ansi-log false
 This time we see all three process runs and their associated work subdirectories listed in the output:
 
 ```console title="Output" linenums="1"
-N E X T F L O W  ~  version 25.04.3
+N E X T F L O W  ~  version 25.10.0
 Launching `hello-channels.nf` [pensive_poitras] DSL2 - revision: 778deadaea
 [76/f61695] Submitted process > sayHello (1)
 [6e/d12e35] Submitted process > sayHello (3)
@@ -282,7 +282,7 @@ You may recall that we hardcoded the output file name for the `sayHello` process
 You can check the work subdirectories for each of the three processes; each of them contains a file called `output.txt` as expected.
 
 As long as the output files stay there, isolated from the other processes, that is okay.
-But when the `publishDir` directive copies each of them to the same `results` directory, whichever got copied there first gets overwritten by the next one, and so on.
+But when the workflow outputs publish each of them to the same `results` directory, whichever got published there first gets overwritten by the next one, and so on.
 
 ### 2.2. Ensure the output file names will be unique
 
@@ -299,10 +299,8 @@ In the process block, make the following code changes:
 
 === "After"
 
-    ```groovy title="hello-channels.nf" linenums="6" hl_lines="9 13"
+    ```groovy title="hello-channels.nf" linenums="6" hl_lines="7 11"
     process sayHello {
-
-        publishDir 'results', mode: 'copy'
 
         input:
             val greeting
@@ -321,8 +319,6 @@ In the process block, make the following code changes:
 
     ```groovy title="hello-channels.nf" linenums="6"
     process sayHello {
-
-        publishDir 'results', mode: 'copy'
 
         input:
             val greeting
@@ -356,7 +352,7 @@ nextflow run hello-channels.nf
 Reverting back to the summary view, the output looks like this again:
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.10.0
 
 Launching `hello-channels.nf` [astonishing_bell] DSL2 - revision: f57ff44a69
 
@@ -480,7 +476,7 @@ nextflow run hello-channels.nf
 Oh no! Nextflow throws an error that starts like this:
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.10.0
 
 Launching `hello-channels.nf` [friendly_koch] DSL2 - revision: 97256837a7
 
@@ -582,7 +578,7 @@ nextflow run hello-channels.nf
 This time it works AND gives us the additional insight into what the contents of the channel look like before and after we run the `flatten()` operator:
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.10.0
 
 Launching `hello-channels.nf` [tiny_elion] DSL2 - revision: 1d834f23d2
 
@@ -699,7 +695,7 @@ nextflow run hello-channels.nf
 Oh no, it doesn't work. Here's the start of the console output and error message:
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.10.0
 
 Launching `hello-channels.nf` [adoring_bhabha] DSL2 - revision: 8ce25edc39
 
@@ -766,7 +762,7 @@ nextflow run hello-channels.nf
 Interestingly, this fails too, but with a different error. The console output and error starts like this:
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.10.0
 
 Launching `hello-channels.nf` [stoic_ride] DSL2 - revision: a0e5de507e
 
@@ -854,7 +850,7 @@ nextflow run hello-channels.nf
 This time it should run without error.
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.10.0
 
 Launching `hello-channels.nf` [tiny_heisenberg] DSL2 - revision: 845b471427
 

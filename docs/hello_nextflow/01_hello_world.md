@@ -212,7 +212,7 @@ nextflow run hello-world.nf
 You console output should look something like this:
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.10.0
 
 Launching `hello-world.nf` [goofy_torvalds] DSL2 - revision: c33d41f479
 
@@ -305,7 +305,7 @@ Learn how to manage your workflow executions conveniently.
 
 Knowing how to launch workflows and retrieve outputs is great, but you'll quickly find there are a few other aspects of workflow management that will make your life easier, especially if you're developing your own workflows.
 
-Here we show you how to use the `publishDir` directive to store in an output folder all the main results from your pipeline run, the `resume` feature for when you need to re-launch the same workflow, and how to delete older work directories with `nextflow clean`.
+Here we show you how to use workflow outputs to store in an output folder all the main results from your pipeline run, the `resume` feature for when you need to re-launch the same workflow, and how to delete older work directories with `nextflow clean`.
 
 ### 3.1. Publish outputs
 
@@ -314,33 +314,73 @@ This is done on purpose; Nextflow is in control of this directory and we are not
 
 However, that makes it inconvenient to retrieve outputs that we care about.
 
-Fortunately, Nextflow provides a way to manage this more conveniently, called the `publishDir` directive, which acts at the process level.
-This directive tells Nextflow to publish the output(s) of the process to a designated output directory. By default, the outputs are published as symbolic links from the `work` directory.
-It allows us to retrieve the desired output file without having to dig down into the work directory.
+Fortunately, Nextflow provides a way to manage this more conveniently using **workflow outputs**.
+Workflow outputs allow you to declare which outputs from your workflow should be published to a designated output directory.
+This approach centralizes output publishing at the workflow level rather than at individual processes.
 
-#### 3.1.1. Add a `publishDir` directive to the `sayHello` process
+#### 3.1.1. Add workflow outputs to publish results
 
-In the workflow script file `hello-world.nf`, make the following code modification:
+In the workflow script file `hello-world.nf`, make the following code modification to add a `publish:` section to the workflow and an `output` block:
 
 === "After"
 
-    ```groovy title="hello-world.nf" linenums="6" hl_lines="3"
-    process sayHello {
+    ```groovy title="hello-world.nf" linenums="1" hl_lines="4 5 9 10 11 12"
+    #!/usr/bin/env nextflow
 
-        publishDir 'results', mode: 'copy'
+    process sayHello {
 
         output:
             path 'output.txt'
+
+        script:
+        """
+        echo 'Hello World!' > output.txt
+        """
+    }
+
+    workflow {
+
+        // emit a greeting
+        ch_output = sayHello()
+
+        publish:
+        greetings = ch_output
+    }
+
+    output {
+        greetings {
+            path '.'
+        }
+    }
     ```
 
 === "Before"
 
-    ```groovy title="hello-world.nf" linenums="6"
+    ```groovy title="hello-world.nf" linenums="1"
+    #!/usr/bin/env nextflow
+
     process sayHello {
 
         output:
             path 'output.txt'
+
+        script:
+        """
+        echo 'Hello World!' > output.txt
+        """
+    }
+
+    workflow {
+
+        // emit a greeting
+        sayHello()
+    }
     ```
+
+Let's break down what we added:
+
+1. **`publish:` section in the workflow**: This assigns the output channel from `sayHello()` to a named output called `greetings`
+2. **`output` block**: This declares how the `greetings` output should be published. The `path '.'` means files will be published to the root of the output directory (which defaults to `results`)
 
 #### 3.1.2. Run the workflow again
 
@@ -353,7 +393,7 @@ nextflow run hello-world.nf
 The log output should look very familiar:
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.10.0
 
 Launching `hello-world.nf` [jovial_mayer] DSL2 - revision: 35bd3425e5
 
@@ -366,14 +406,46 @@ Our `output.txt` file is in this directory.
 If you check the contents it should match the output in the work subdirectory.
 This is how we publish results files outside of the working directories conveniently.
 
-When you're dealing with very large files that you don't need to retain for long, you may prefer to set the `publishDir` directive to make a symbolic link to the file instead of copying it.
-However, if you delete the work directory as part of a cleanup operation, you will lose access to the file, so always make sure you have actual copies of everything you care about before deleting anything.
+By default, Nextflow creates symbolic links from the output directory to files in the work directory.
+This is efficient because it doesn't duplicate files, but it means if you delete the work directory, you'll lose access to the outputs.
+You can change this behavior to copy files instead using the `mode` directive in the output block or by setting `workflow.output.mode = 'copy'` in your configuration file.
 
-!!! note
+!!! tip
 
-    A newer syntax option documented [here](https://www.nextflow.io/docs/latest/workflow.html#publishing-outputs) has been proposed to make it possible to declare and publish workflow-level outputs.
-    This will eventually make using `publishDir` at the process level redundant for completed pipelines.
-    However, we expect that `publishDir` will still remain very useful during pipeline development.
+    You can change the output directory name by using the `-output-dir` command-line option:
+    ```bash
+    nextflow run hello-world.nf -output-dir my-results
+    ```
+
+#### 3.1.3. Understanding workflow outputs vs. publishDir
+
+Workflow outputs are the modern approach to publishing results in Nextflow.
+They provide several advantages:
+
+- **Centralized**: All publishing logic is in one place rather than scattered across process definitions
+- **Flexible**: You can easily control what gets published from the workflow level
+- **Cleaner modules**: Processes don't need to know where their outputs should be published
+
+However, you will still encounter the older `publishDir` directive when reading existing pipelines and working with nf-core modules.
+The `publishDir` directive is applied at the process level and looks like this:
+
+```groovy
+process sayHello {
+
+    publishDir 'results', mode: 'copy'
+
+    output:
+        path 'output.txt'
+
+    script:
+    """
+    echo 'Hello World!' > output.txt
+    """
+}
+```
+
+The `publishDir` directive is still supported but is being phased out in favor of workflow outputs.
+Understanding both approaches will help you work with both modern and legacy Nextflow code.
 
 ### 3.2. Re-launch a workflow with `-resume`
 
@@ -397,7 +469,7 @@ nextflow run hello-world.nf -resume
 The console output should look similar.
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.10.0
 
 Launching `hello-world.nf` [golden_cantor] DSL2 - revision: 35bd3425e5
 
@@ -411,7 +483,7 @@ Nextflow is literally pointing you to the previous execution and saying "I alrea
 
 !!! note
 
-    When your re-run a pipeline with `resume`, Nextflow does not overwrite any files written to a `publishDir` directory by any process call that was previously run successfully.
+    When you re-run a pipeline with `resume`, Nextflow does not overwrite any files written to the output directory by any process call that was previously run successfully.
 
 ### 3.3. Delete older work directories
 
@@ -454,7 +526,8 @@ Removed /workspaces/training/hello-nextflow/work/a3/7be2fad5e71e5f49998f795677fd
     Deleting work subdirectories from past runs removes them from Nextflow's cache and deletes any outputs that were stored in those directories.
     That means it breaks Nextflow's ability to resume execution without re-running the corresponding processes.
 
-    You are responsible for saving any outputs that you care about or plan to rely on! If you're using the `publishDir` directive for that purpose, make sure to use the `copy` mode, not the `symlink` mode.
+    You are responsible for saving any outputs that you care about or plan to rely on by publishing them to the output directory!
+    Make sure your workflow outputs use the `copy` mode (the default), not the `symlink` mode.
 
 ### Takeaway
 
@@ -489,10 +562,8 @@ In the process block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-world.nf" linenums="6" hl_lines="5 6"
+    ```groovy title="hello-world.nf" linenums="3" hl_lines="3 4"
     process sayHello {
-
-        publishDir 'results', mode: 'copy'
 
         input:
             val greeting
@@ -503,10 +574,8 @@ In the process block, make the following code change:
 
 === "Before"
 
-    ```groovy title="hello-world.nf" linenums="6"
+    ```groovy title="hello-world.nf" linenums="3"
     process sayHello {
-
-        publishDir 'results', mode: 'copy'
 
         output:
             path 'output.txt'
@@ -586,7 +655,7 @@ nextflow run hello-world.nf --greeting 'Bonjour le monde!'
 If you made all three edits correctly, you should get another successful execution:
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.10.0
 
 Launching `hello-world.nf` [elated_lavoisier] DSL2 - revision: 7c031b42ea
 
@@ -639,7 +708,7 @@ nextflow run hello-world.nf
 The console output should look the same.
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.10.0
 
 Launching `hello-world.nf` [determined_edison] DSL2 - revision: 3539118582
 
@@ -668,7 +737,7 @@ nextflow run hello-world.nf --greeting 'Konnichiwa!'
 The console output should look the same.
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.10.0
 
 Launching `hello-world.nf` [elegant_faraday] DSL2 - revision: 3539118582
 

@@ -44,7 +44,7 @@ nextflow run hello-config.nf
 ```
 
 ```console title="Output"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.10.0
 
 Launching `hello-config.nf` [reverent_heisenberg] DSL2 - revision: 028a841db1
 
@@ -115,13 +115,11 @@ Now we add the URI to the `cowpy` process definition using the `conda` directive
 
 === "After"
 
-    ```console title="modules/cowpy.nf" linenums="4" hl_lines="4"
+    ```console title="modules/cowpy.nf" linenums="4" hl_lines="3"
     process cowpy {
 
         container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
         conda 'conda-forge::cowpy==1.1.5'
-
-        publishDir 'results', mode: 'copy'
     ```
 
 === "Before"
@@ -130,8 +128,6 @@ Now we add the URI to the `cowpy` process definition using the `conda` directive
     process cowpy {
 
         container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
-
-        publishDir 'results', mode: 'copy'
     ```
 
 To be clear, we're not _replacing_ the `docker` directive, we're _adding_ an alternative option.
@@ -147,7 +143,7 @@ nextflow run hello-config.nf
 This should work without issue.
 
 ```console title="Output"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.10.0
 
 Launching `hello-config.nf` [trusting_lovelace] DSL2 - revision: 028a841db1
 
@@ -362,7 +358,7 @@ nextflow run hello-config.nf -params-file test-params.json
 It works! And as expected, this produces the same outputs as previously.
 
 ```console title="Output"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.10.0
 
 Launching `hello-config.nf` [disturbed_sammet] DSL2 - revision: ede9037d02
 
@@ -511,7 +507,7 @@ nextflow run hello-config.nf -profile my_laptop
 This still produces the following output:
 
 ```
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.10.0
 
 Launching `hello-config.nf` [gigantic_brazil] DSL2 - revision: ede9037d02
 
@@ -593,7 +589,7 @@ nextflow run hello-config.nf -profile my_laptop,test
 This should produce the following:
 
 ```console title="Output"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.10.0
 
 Launching `hello-config.nf` [gigantic_brazil] DSL2 - revision: ede9037d02
 

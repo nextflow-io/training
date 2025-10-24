@@ -40,7 +40,7 @@ nextflow run hello-containers.nf
 This should produce the following output:
 
 ```console title="Output"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.10.0
 
 Launching `hello-containers.nf` [tender_becquerel] DSL2 - revision: f7cat8e223
 
@@ -50,7 +50,7 @@ executor >  local (7)
 [7d/f7961c] collectGreetings     [100%] 1 of 1 ✔
 ```
 
-As previously, you will find the output files in the `results` directory (specified by the `publishDir` directive).
+As previously, you will find the output files in the `results` directory (specified by the workflow outputs).
 
 ```console title="Directory contents"
 results
@@ -378,8 +378,6 @@ We can model our `cowpy` process on the other processes we've written previously
 // Generate ASCII art with cowpy
 process cowpy {
 
-    publishDir 'results', mode: 'copy'
-
     input:
         path input_file
         val character
@@ -500,7 +498,7 @@ nextflow run hello-containers.nf -resume
 Oh no, there's an error!
 
 ```console title="Output"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.10.0
 
 Launching `hello-containers.nf` [special_lovelace] DSL2 - revision: 028a841db1
 
@@ -545,10 +543,9 @@ Edit the `cowpy.nf` module to add the `container` directive to the process defin
 
 === "After"
 
-    ```groovy title="modules/cowpy.nf" linenums="4" hl_lines="4"
+    ```groovy title="modules/cowpy.nf" linenums="4" hl_lines="3"
     process cowpy {
 
-        publishDir 'containers/results', mode: 'copy'
         container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
     ```
 
@@ -556,8 +553,6 @@ Edit the `cowpy.nf` module to add the `container` directive to the process defin
 
     ```groovy title="modules/cowpy.nf" linenums="4"
     process cowpy {
-
-        publishDir 'containers/results', mode: 'copy'
     ```
 
 This tells Nextflow that if the use of Docker is enabled, it should use the container image specified here to execute the process.
@@ -601,7 +596,7 @@ nextflow run hello-containers.nf -resume
 This time it does indeed work.
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.10.0
 
 Launching `hello-containers.nf` [elegant_brattain] DSL2 - revision: 028a841db1
 
