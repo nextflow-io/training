@@ -189,6 +189,17 @@ This command launches an interactive web interface where you can:
 - Organize parameters into groups
 - Generate help text
 
+!!! warning "Schema validation errors"
+
+    If you run `nf-core pipelines schema build` at this stage, you may see an error like:
+
+    ```
+    [✗] Invalid default parameters found:
+      input: Not in pipeline parameters. Check `nextflow.config`.
+    ```
+
+    This happens because the template's schema includes an `input` parameter, but it's not yet defined in `nextflow.config`. You can safely ignore this for now - we're using the `--input` parameter as a command-line argument rather than setting a default in the config.
+
 For our simple case, we'll edit the JSON directly. Open `core-hello/nextflow_schema.json` and find the `"input_output_options"` section. Add the `batch` parameter:
 
 ```json title="core-hello/nextflow_schema.json (excerpt)" hl_lines="13-17"
