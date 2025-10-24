@@ -21,7 +21,6 @@ In this section, we'll replace the custom `collectGreetings` module with the `ca
 
 ---
 
-
 ## 1. Use an nf-core module
 
 First, let's learn how to find, install, and use an existing nf-core module in our pipeline.
@@ -355,6 +354,7 @@ Next, transform the channel of files into a channel of tuples containing metadat
     ```
 
 This line does two things:
+
 - `.collect()` gathers all files from the `convertToUpper` output into a single list
 - `.map { files -> tuple(cat_meta, files) }` creates a tuple of `[metadata, files]` in the format `CAT_CAT` expects
 
