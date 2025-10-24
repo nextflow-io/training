@@ -5,8 +5,6 @@
  */
 process sayHello {
 
-    publishDir 'results', mode: 'copy'
-
     input:
         val greeting
 
@@ -24,8 +22,6 @@ process sayHello {
  */
 process convertToUpper {
 
-    publishDir 'results', mode: 'copy'
-
     input:
         path input_file
 
@@ -42,8 +38,6 @@ process convertToUpper {
  * Collect uppercase greetings into a single output file
  */
 process collectGreetings {
-
-    publishDir 'results', mode: 'copy'
 
     input:
         path input_files
@@ -70,15 +64,32 @@ workflow {
                         .map { line -> line[0] }
 
     // emit a greeting
-    sayHello(greeting_ch)
+    ch_hello = sayHello(greeting_ch)
 
     // convert the greeting to uppercase
-    convertToUpper(sayHello.out)
+    ch_upper = convertToUpper(ch_hello)
 
     // collect all the greetings into one file
-    collectGreetings(convertToUpper.out.collect())
+    ch_collected = collectGreetings(ch_upper.collect())
 
     // optional view statements
-    convertToUpper.out.view { "Before collect: $it" }
-    convertToUpper.out.collect().view { "After collect: $it" }
+    ch_upper.view { "Before collect: $it" }
+    ch_upper.collect().view { "After collect: $it" }
+
+    publish:
+    greetings = ch_hello
+    uppercase = ch_upper
+    collected = ch_collected
+}
+
+output {
+    greetings {
+        path '.'
+    }
+    uppercase {
+        path '.'
+    }
+    collected {
+        path '.'
+    }
 }

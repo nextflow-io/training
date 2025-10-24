@@ -5,8 +5,6 @@
  */
 process collectGreetings {
 
-    publishDir 'results', mode: 'copy'
-
     input:
         path input_files
         val batch_name
@@ -40,14 +38,31 @@ workflow {
                         .map { line -> line[0] }
 
     // emit a greeting
-    sayHello(greeting_ch)
+    ch_hello = sayHello(greeting_ch)
 
     // convert the greeting to uppercase
-    convertToUpper(sayHello.out)
+    ch_upper = convertToUpper(ch_hello)
 
     // collect all the greetings into one file
-    collectGreetings(convertToUpper.out.collect(), params.batch)
+    ch_collected = collectGreetings(ch_upper.collect(), params.batch)
 
     // emit a message about the size of the batch
-    collectGreetings.out.count.view { "There were $it greetings in this batch" }
+    ch_collected.count.view { "There were $it greetings in this batch" }
+
+    publish:
+    greetings = ch_hello
+    uppercase = ch_upper
+    collected = ch_collected.outfile
+}
+
+output {
+    greetings {
+        path '.'
+    }
+    uppercase {
+        path '.'
+    }
+    collected {
+        path '.'
+    }
 }

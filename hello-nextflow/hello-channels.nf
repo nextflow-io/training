@@ -5,8 +5,6 @@
  */
 process sayHello {
 
-    publishDir 'results', mode: 'copy'
-
     input:
         val greeting
 
@@ -27,5 +25,14 @@ params.greeting = 'Holà mundo!'
 workflow {
 
     // emit a greeting
-    sayHello(params.greeting)
+    ch_output = sayHello(params.greeting)
+
+    publish:
+    greetings = ch_output
+}
+
+output {
+    greetings {
+        path '.'
+    }
 }

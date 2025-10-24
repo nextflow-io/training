@@ -17,5 +17,14 @@ process sayHello {
 workflow {
 
     // emit a greeting
-    sayHello()
+    ch_output = sayHello()
+
+    publish:
+    greetings = ch_output
+}
+
+output {
+    greetings {
+        path '.'
+    }
 }

@@ -5,8 +5,6 @@
  */
 process sayHello {
 
-    publishDir 'results', mode: 'copy'
-
     input:
         val greeting
 
@@ -30,5 +28,14 @@ workflow {
     greeting_ch = Channel.of('Hello Channels!')
 
     // emit a greeting
-    sayHello(greeting_ch)
+    ch_output = sayHello(greeting_ch)
+
+    publish:
+    greetings = ch_output
+}
+
+output {
+    greetings {
+        path '.'
+    }
 }
