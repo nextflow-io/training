@@ -20,7 +20,7 @@ First, we create the scaffold for the new pipeline.
 
 !!! note
 
-    Make sure you are in the `hello_nf-core` directory in your terminal.
+    Make sure you are in the `hello-nf-core` directory in your terminal.
 
 ### 1.1. Run the template-based pipeline creation tool
 
@@ -1147,7 +1147,7 @@ Now we can update the `test.config` file as follows:
 
 === "Before"
 
-    ```groovy title="core-hello/config/test.config" linenums="21"
+    ```groovy title="core-hello/conf/test.config" linenums="21"
         params {
             config_profile_name        = 'Test profile'
             config_profile_description = 'Minimal test dataset to check pipeline function'
@@ -1169,7 +1169,7 @@ And while we're at it, let's lower the default resource limitations:
 
 === "After"
 
-    ```groovy title="core-hello/config/test.config" linenums="13"
+    ```groovy title="core-hello/conf/test.config" linenums="13"
     process {
         resourceLimits = [
             cpus: 2,
@@ -1181,7 +1181,7 @@ And while we're at it, let's lower the default resource limitations:
 
 === "Before"
 
-    ```groovy title="core-hello/config/test.config" linenums="13"
+    ```groovy title="core-hello/conf/test.config" linenums="13"
     process {
         resourceLimits = [
             cpus: 4,
