@@ -514,7 +514,7 @@ In the workflow block, make the following code change:
     ```groovy title="hello-channels.nf" linenums="31" hl_lines="3"
         // create a channel for inputs
         greeting_ch = Channel.of(greetings_array)
-                             .flatten()
+            .flatten()
     ```
 
 === "Before"
@@ -539,9 +539,9 @@ In the workflow block, make the following code change:
     ```groovy title="hello-channels.nf" linenums="31" hl_lines="3-5"
         // create a channel for inputs
         greeting_ch = Channel.of(greetings_array)
-                             .view { greeting -> "Before flatten: $greeting" }
-                             .flatten()
-                             .view { greeting -> "After flatten: $greeting" }
+            .view { greeting -> "Before flatten: $greeting" }
+            .flatten()
+            .view { greeting -> "After flatten: $greeting" }
     ```
 
 === "Before"
@@ -549,7 +549,7 @@ In the workflow block, make the following code change:
     ```groovy title="hello-channels.nf" linenums="31"
         // create a channel for inputs
         greeting_ch = Channel.of(greetings_array)
-                             .flatten()
+            .flatten()
     ```
 
 We are using an operator _closure_ here - the curly brackets.
@@ -602,7 +602,7 @@ Importantly, this means each item can now be processed separately by the workflo
     ```groovy title="hello-channels.nf" linenums="31"
     // create a channel for inputs
     greeting_ch = Channel.of(greetings_array)
-                         .flatten()
+        .flatten()
     ```
 
     We left them in the `hello-channels-3.nf` solution file for reference purposes.
@@ -681,7 +681,7 @@ In the workflow block, make the following code change:
     ```groovy title="hello-channels.nf" linenums="31"
         // create a channel for inputs
         greeting_ch = Channel.of(greetings_array)
-                             .flatten()
+            .flatten()
     ```
 
 #### 4.1.3. Run the workflow
@@ -736,9 +736,9 @@ In the workflow block, make the following code change:
     ```groovy title="hello-channels.nf" linenums="31" hl_lines="3-5"
     // create a channel for inputs from a CSV file
     greeting_ch = Channel.fromPath(params.greeting)
-                         .view { csv -> "Before splitCsv: $csv" }
-                         .splitCsv()
-                         .view { csv -> "After splitCsv: $csv" }
+        .view { csv -> "Before splitCsv: $csv" }
+        .splitCsv()
+        .view { csv -> "After splitCsv: $csv" }
     ```
 
 === "Before"
@@ -819,11 +819,11 @@ In the workflow block, make the following code change:
     ```groovy title="hello-channels.nf" linenums="31" hl_lines="6-8"
     // create a channel for inputs from a CSV file
     greeting_ch = Channel.fromPath(params.greeting)
-                         .view { csv -> "Before splitCsv: $csv" }
-                         .splitCsv()
-                         .view { csv -> "After splitCsv: $csv" }
-                         .map { item -> item[0] }
-                         .view { csv -> "After map: $csv" }
+        .view { csv -> "Before splitCsv: $csv" }
+        .splitCsv()
+        .view { csv -> "After splitCsv: $csv" }
+        .map { item -> item[0] }
+        .view { csv -> "After map: $csv" }
     ```
 
 === "Before"
@@ -831,9 +831,9 @@ In the workflow block, make the following code change:
     ```groovy title="hello-channels.nf" linenums="31"
     // create a channel for inputs from a CSV file
     greeting_ch = Channel.fromPath(params.greeting)
-                         .view { csv -> "Before splitCsv: $csv" }
-                         .splitCsv()
-                         .view { csv -> "After splitCsv: $csv" }
+        .view { csv -> "Before splitCsv: $csv" }
+        .splitCsv()
+        .view { csv -> "After splitCsv: $csv" }
 
     ```
 
