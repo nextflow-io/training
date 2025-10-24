@@ -286,11 +286,13 @@ In the workflow and output blocks, make the following code change:
     }
     ```
 
-Here we:
+Here we made several changes:
 
-1. Assigned the output of `sayHello()` to `ch_hello` and `convertToUpper()` to `ch_upper`
-2. Added both channels to the `publish:` section
-3. Declared both outputs in the `output` block, with both publishing to the `results` directory
+1. **Assigned outputs to named channels**: Changed from using `sayHello.out` to `ch_hello = sayHello()` and similarly for `convertToUpper()`. This gives us named channels that we can reference in the publish section.
+2. **Added both channels to the `publish:` section**: This tells Nextflow which outputs we want to publish.
+3. **Declared both outputs in the `output` block**: Specifies that both should be published to the root of the output directory.
+
+By assigning process outputs to named channels, we can easily reference them when declaring what to publish. This is cleaner than using the `.out` notation, especially when working with multiple outputs.
 
 Now when you run the workflow, both the original greetings and the uppercase versions will be published to the `results` directory.
 
