@@ -211,7 +211,7 @@ The module expects:
 
 Our custom `collectGreetings` module has a simpler interface:
 
-```groovy title="modules/local/collectGreetings.nf (excerpt)" linenums="1"
+```groovy title="modules/local/collectGreetings.nf (excerpt)" linenums="1" hl_lines="6-7 10"
 process collectGreetings {
 
     publishDir 'results', mode: 'copy'
@@ -226,9 +226,9 @@ process collectGreetings {
 
 The main differences are:
 
-- `CAT_CAT` requires a metadata map, while `collectGreetings` doesn't
-- `CAT_CAT` outputs a tuple, while `collectGreetings` outputs a simple path
-- `CAT_CAT` requires a filename prefix via the `meta.id` field
+- `CAT_CAT` requires a metadata map (`tuple val(meta), path(files_in)`), while `collectGreetings` takes separate `path` and `val` inputs
+- `CAT_CAT` outputs a tuple with metadata, while `collectGreetings` outputs a simple path
+- `CAT_CAT` uses `meta.id` for the filename prefix, while `collectGreetings` uses the `batch_name` parameter
 
 ### 1.8. Understanding metadata maps
 
