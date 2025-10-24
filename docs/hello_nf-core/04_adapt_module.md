@@ -490,11 +490,83 @@ However, you might want to keep it as a reference for understanding the differen
 
 ---
 
-## 2. Contributing modules back to nf-core
+## 2. Creating modules with nf-core tooling
 
-Now that you've learned how to create modules following nf-core conventions, you might develop modules that could benefit the wider community. The [nf-core/modules](https://github.com/nf-core/modules) repository welcomes contributions of well-tested, standardized modules.
+In this tutorial, we manually adapted the `cowpy` module step-by-step to teach the nf-core conventions. However, **in practice, you'd use the nf-core tooling to generate properly structured modules from the start**.
 
-### Why contribute?
+### 2.1. Using nf-core modules create
+
+The `nf-core modules create` command generates a module template that already follows all the conventions you've learned:
+
+```bash
+# In the nf-core/modules repository
+nf-core modules create tool/subtool
+```
+
+For example, to create the `cowpy` module:
+
+```bash
+nf-core modules create cowpy
+```
+
+The command will interactively ask for:
+- Tool name and optional subtool/subcommand
+- Author information
+- Resource requirements (CPU/memory estimates)
+
+#### What gets generated
+
+The tool creates a complete module structure:
+
+```console
+modules/nf-core/cowpy/
+├── main.nf                 # Process definition with TODO comments
+├── meta.yml                # Module documentation
+├── environment.yml         # Conda environment
+└── tests/
+    ├── main.nf.test       # nf-test test cases
+    └── tags.yml           # Test tags
+```
+
+The generated `main.nf` includes all the patterns automatically:
+
+```groovy
+process COWPY {
+    tag "$meta.id"
+    label 'process_single'
+
+    conda "${moduleDir}/environment.yml"
+    container "..."
+
+    input:
+    tuple val(meta), path(input_file)      // Metadata tuples ✓
+
+    output:
+    tuple val(meta), path("${prefix}.*"), emit: output  // Metadata propagation ✓
+    path "versions.yml"                   , emit: versions
+
+    script:
+    def args = task.ext.args ?: ''                    // ext.args pattern ✓
+    def prefix = task.ext.prefix ?: "${meta.id}"    // ext.prefix pattern ✓
+    """
+    # TODO: Add your command here
+    cowpy $args < $input_file > ${prefix}.txt
+
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+        cowpy: \$(cowpy --version | sed 's/cowpy //')
+    END_VERSIONS
+    """
+}
+```
+
+You fill in the command logic and the module is ready to test!
+
+### 2.2. Contributing modules back to nf-core
+
+The [nf-core/modules](https://github.com/nf-core/modules) repository welcomes contributions of well-tested, standardized modules.
+
+#### Why contribute?
 
 Contributing your modules to nf-core:
 
@@ -503,31 +575,40 @@ Contributing your modules to nf-core:
 - Provides quality assurance through code review and automated testing
 - Gives your work visibility and recognition
 
-### Getting started
+#### Contributing workflow
 
-Before contributing a new module:
+To contribute a module to nf-core:
 
-1. Check if it already exists at [nf-co.re/modules](https://nf-co.re/modules) or in [open PRs](https://github.com/nf-core/modules/pulls)
-2. Create an issue on [nf-core/modules](https://github.com/nf-core/modules/issues) to notify the community of your plans
-3. Use `nf-core modules create <tool>/<subtool>` in the nf-core/modules repository to generate the module structure
-4. Follow the patterns you've learned: metadata tuples, `ext.args`, `ext.prefix`, and comprehensive testing
-5. Submit a pull request and request review from `@nf-core/modules-team`
+1. Check if it already exists at [nf-co.re/modules](https://nf-co.re/modules)
+2. Fork the [nf-core/modules](https://github.com/nf-core/modules) repository
+3. Use `nf-core modules create` to generate the template
+4. Fill in the module logic and tests
+5. Test with `nf-core modules test tool/subtool`
+6. Lint with `nf-core modules lint tool/subtool`
+7. Submit a pull request
 
-### Resources
+For detailed instructions, see the [nf-core components tutorial](https://nf-co.re/docs/tutorials/nf-core_components/components).
 
-- **Comprehensive guide**: [nf-core components tutorial](https://nf-co.re/docs/tutorials/nf-core_components/components)
-- **Module specifications**: [Module guidelines](https://nf-co.re/docs/guidelines/components/modules)
-- **Community support**: Join the `#modules` channel on [nf-core Slack](https://nf-co.re/join)
+#### Resources
 
-Contributing to nf-core is a rewarding way to give back to the community while ensuring your tools follow best practices and reach researchers worldwide.
+- **Components tutorial**: [Complete guide to creating and contributing modules](https://nf-co.re/docs/tutorials/nf-core_components/components)
+- **Module specifications**: [Technical requirements and guidelines](https://nf-co.re/docs/guidelines/components/modules)
+- **Community support**: [nf-core Slack](https://nf-co.re/join) - Join the `#modules` channel
 
 ---
 
 ## Takeaway
 
-You now know how to leverage pre-built nf-core modules in your pipeline and adapt your local modules to follow nf-core conventions. You learned how to use metadata tuples to track sample information through the workflow, simplify module interfaces with `ext.args` for configurable arguments, and use `ext.prefix` for standardized output file naming. These patterns keep modules portable and reusable while centralizing configuration in `modules.config`, making your pipeline more maintainable and consistent with nf-core best practices.
+You now understand the key patterns that make nf-core modules portable and maintainable:
 
-Finally, you learned how to contribute your modules back to the nf-core community, making them available to researchers worldwide and ensuring they benefit from ongoing community maintenance.
+- **Metadata tuples** track sample information through the workflow
+- **`ext.args`** simplifies module interfaces by handling optional arguments via configuration
+- **`ext.prefix`** standardizes output file naming
+- **Centralized configuration** in `modules.config` keeps modules reusable
+
+You learned these patterns by manually adapting a local module, which gives you the foundation to understand and debug modules. In practice, you'll use `nf-core modules create` to generate properly structured modules from the start.
+
+Finally, you learned how to contribute modules to the nf-core community, making tools available to researchers worldwide while benefiting from ongoing community maintenance.
 
 ## What's next?
 
