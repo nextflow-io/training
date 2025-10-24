@@ -166,6 +166,12 @@ Key validation features:
 - **`required`**: Array of parameter names that must be provided
 - **`mimetype`**: Expected file mimetype for validation
 
+!!! note "Where do schema parameters come from?"
+
+    The schema validation uses `nextflow.config` as the base for parameter definitions. Parameters declared elsewhere in your workflow scripts (like in `main.nf` or module files) are **not** automatically picked up by the schema validator.
+
+    This means you should always declare your pipeline parameters in `nextflow.config`, and then define their validation rules in `nextflow_schema.json`.
+
 Notice the `batch` parameter we've been using isn't defined yet in the schema!
 
 ### 2.2. Add the batch parameter
