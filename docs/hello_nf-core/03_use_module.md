@@ -57,7 +57,7 @@ nf-core modules list remote
 This will display a list of all available modules in the nf-core/modules repository. You can scroll through or pipe to `grep` to find specific modules:
 
 ```bash
-nf-core modules list remote | grep cat
+nf-core modules list remote | grep 'cat/cat'
 ```
 
 ```console title="Output"
