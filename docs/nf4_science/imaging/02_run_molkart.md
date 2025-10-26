@@ -411,7 +411,7 @@ Key files:
 Open the execution report to see resource usage:
 
 ```bash
-open results/pipeline_info/execution_report.html
+code results/pipeline_info/execution_report.html
 ```
 
 This shows:

@@ -127,6 +127,12 @@ mem_only,data/nuclear.tiff,data/spots.txt,data/membrane.tiff
 
     Notice the paths in the samplesheet are relative to where you **run** Nextflow, not where the samplesheet is located.
 
+Finally, let's execute nf-core/molkart one more time with the samplesheet with local file paths:
+
+`nextflow run ./molkart -params-file params.yaml -resume`
+
+As you can see, Nextflow executes this run similar to when the files were downloaded from Github. This is one of the great features of Nextflow, it stages the data properly for you, regardless of where it is located.
+
 ### Takeaway
 
 Samplesheets organize multi-sample datasets in a way that allows you to explicitly define your metadata along with the file paths.
