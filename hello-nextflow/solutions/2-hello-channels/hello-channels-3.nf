@@ -24,6 +24,7 @@ params.greeting = 'Holà mundo'
 
 workflow {
 
+    main:
     greetings_array = ['Hello','Bonjour','Holà']
 
     // create a channel for inputs

@@ -24,6 +24,7 @@ params.greeting = 'greetings.csv'
 
 workflow {
 
+    main:
     greetings_array = ['Hello','Bonjour','Holà']
 
     // create a channel for inputs from a CSV file

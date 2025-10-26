@@ -247,7 +247,8 @@ In the workflow and output blocks, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-workflow.nf" linenums="53" hl_lines="4 7 8 9 10 11 12 13 14 15 16 17"
+    ```groovy title="hello-workflow.nf" linenums="53" hl_lines="3 6 9 10 11 12 13 14 15 16 17 18 19"
+        main:
         // emit a greeting
         ch_hello = sayHello(greeting_ch)
 
@@ -272,6 +273,7 @@ In the workflow and output blocks, make the following code change:
 === "Before"
 
     ```groovy title="hello-workflow.nf" linenums="53"
+        main:
         // emit a greeting
         ch_output = sayHello(greeting_ch)
 

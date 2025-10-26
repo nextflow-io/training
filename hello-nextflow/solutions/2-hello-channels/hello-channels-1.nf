@@ -24,6 +24,7 @@ params.greeting = 'Holà mundo!'
 
 workflow {
 
+    main:
     // create a channel for inputs
     greeting_ch = Channel.of('Hello Channels!')
 

@@ -16,6 +16,7 @@ process sayHello {
 
 workflow {
 
+    main:
     // emit a greeting
     ch_output = sayHello()
 

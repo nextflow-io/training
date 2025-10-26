@@ -24,6 +24,7 @@ params.greeting = 'Holà mundo!'
 
 workflow {
 
+    main:
     // emit a greeting
     ch_output = sayHello(params.greeting)
 

@@ -340,6 +340,7 @@ In the workflow script file `hello-world.nf`, make the following code modificati
 
     workflow {
 
+        main:
         // emit a greeting
         ch_output = sayHello()
 
@@ -379,8 +380,9 @@ In the workflow script file `hello-world.nf`, make the following code modificati
 
 Let's break down what we added:
 
-1. **`publish:` section in the workflow**: This assigns the output channel from `sayHello()` to a named output called `greetings`
-2. **`output` block**: This declares how the `greetings` output should be published. The `path '.'` means files will be published to the root of the output directory (which defaults to `results`)
+1. **`main:` section in the workflow**: When using `publish:`, we need to explicitly mark the main workflow logic with `main:`
+2. **`publish:` section in the workflow**: This assigns the output channel from `sayHello()` to a named output called `greetings`
+3. **`output` block**: This declares how the `greetings` output should be published. The `path '.'` means files will be published to the root of the output directory (which defaults to `results`)
 
 #### 3.1.2. Run the workflow again
 
