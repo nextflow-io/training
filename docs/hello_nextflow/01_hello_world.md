@@ -324,7 +324,7 @@ In the workflow script file `hello-world.nf`, make the following code modificati
 
 === "After"
 
-    ```groovy title="hello-world.nf" linenums="1" hl_lines="17-27"
+    ```groovy title="hello-world.nf" linenums="1" hl_lines="16-28"
     #!/usr/bin/env nextflow
 
     process sayHello {
@@ -419,35 +419,35 @@ You can change this behavior to copy files instead using the `mode` directive in
     nextflow run hello-world.nf -output-dir my-results
     ```
 
-#### 3.1.3. Understanding workflow outputs vs. publishDir
+!!! note "Understanding workflow outputs vs. publishDir (legacy syntax)"
 
-Workflow outputs are the modern approach to publishing results in Nextflow.
-They provide several advantages:
+    Workflow outputs are the modern approach to publishing results in Nextflow.
+    They provide several advantages:
 
-- **Centralized**: All publishing logic is in one place rather than scattered across process definitions
-- **Flexible**: You can easily control what gets published from the workflow level
-- **Cleaner modules**: Processes don't need to know where their outputs should be published
+    - **Centralized**: All publishing logic is in one place rather than scattered across process definitions
+    - **Flexible**: You can easily control what gets published from the workflow level
+    - **Cleaner modules**: Processes don't need to know where their outputs should be published
 
-However, you will still encounter the older `publishDir` directive when reading existing pipelines and working with nf-core modules.
-The `publishDir` directive is applied at the process level and looks like this:
+    However, you will still encounter the older `publishDir` directive when reading existing pipelines and working with nf-core modules.
+    The `publishDir` directive is applied at the process level and looks like this:
 
-```groovy
-process sayHello {
+    ```groovy
+    process sayHello {
 
-    publishDir 'results', mode: 'copy'
+        publishDir 'results', mode: 'copy'
 
-    output:
-        path 'output.txt'
+        output:
+            path 'output.txt'
 
-    script:
-    """
-    echo 'Hello World!' > output.txt
-    """
-}
-```
+        script:
+        """
+        echo 'Hello World!' > output.txt
+        """
+    }
+    ```
 
-The `publishDir` directive is still supported but is being phased out in favor of workflow outputs.
-Understanding both approaches will help you work with both modern and legacy Nextflow code.
+    The `publishDir` directive is still supported but is being phased out in favor of workflow outputs.
+    Understanding both approaches will help you work with both modern and legacy Nextflow code.
 
 ### 3.2. Re-launch a workflow with `-resume`
 
