@@ -120,6 +120,9 @@ In the workflow block, make the following code change:
 
         // emit a greeting
         ch_output = sayHello(greeting_ch)
+
+        publish:
+        greetings = ch_output
     }
     ```
 
@@ -133,6 +136,9 @@ In the workflow block, make the following code change:
 
         // emit a greeting
         ch_output = sayHello(params.greeting)
+
+        publish:
+        greetings = ch_output
     }
     ```
 
