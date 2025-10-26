@@ -53,10 +53,16 @@ Before we begin, let's clone the molkart repository locally so we can inspect it
 
 ```bash
 cd /workspaces/training/nf4-science/imaging
-git clone https://github.com/nf-core/molkart
+git clone --branch 1.2.0 --depth 1 https://github.com/nf-core/molkart
 ```
 
 This creates a `molkart/` directory containing the complete pipeline source code.
+
+!!! note "Why are we cloning locally?"
+
+    Typically, you would run nf-core pipelines directly from GitHub using `nextflow run nf-core/molkart -r 1.2.0`.
+    Nextflow automatically downloads the requested pipeline version for you to `$HOME/.nextflow/assets/nf-core/molkart` and runs it from there.
+    However, for this training, we're cloning the pipeline to a different local directory so we can more easily inspect the code.
 
 ### 2.1. Understanding container requirements
 
@@ -77,7 +83,7 @@ nextflow run ./molkart \
 
 Let's break down these parameters:
 
-- `--input`: URL to the test samplesheet containing sample metadata
+- `--input`: Path to the samplesheet containing sample metadata
 - `--mindagap_tilesize`, `--mindagap_boxsize`, `--mindagap_loopnum`: Parameters for grid pattern filling
 - `--clahe_pyramid_tile`: Kernel size for contrast enhancement
 - `--segmentation_method`: Which algorithm(s) to use for cell segmentation
@@ -142,7 +148,7 @@ However, Nextflow only uses these containers if you tell it to!
 
 ### 2.2. Configure Docker and launch the pipeline
 
-To enable Docker, we need to add `docker.enabled = true` to the `nextflow.config` file.
+To enable Docker, we need to change `docker.enabled` from `false` to `true` in the `nextflow.config` file.
 
 Open the config file:
 
@@ -150,12 +156,15 @@ Open the config file:
 code nextflow.config
 ```
 
-Modify the following line inside the `docker` block to say `enabled = true`:
+Change `docker.enabled = false` to `docker.enabled = true`:
 
 ```groovy
-docker {
-    enabled = true
-    runOptions = '-u $(id -u):$(id -g) --entrypoint ""'
+docker.enabled = true
+process {
+    resourceLimits = [
+        cpus: 2,
+        memory: '7.GB',
+    ]
 }
 ```
 

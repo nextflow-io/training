@@ -100,6 +100,16 @@ These are courses that demonstrate how to apply the concepts and components pres
 
     [Start the Nextflow for RNAseq training :material-arrow-right:](nf4_science/rnaseq/){ .md-button .md-button--primary }
 
+!!! exercise "Nextflow for Imaging"
+
+    !!! tip inline end ""
+
+        :material-microscope:{.nextflow-primary} Learn to run pipelines for spatial transcriptomics imaging data in Nextflow.
+
+    This is a course for researchers in imaging and spatial omics who wish to learn how to run and customize analysis pipelines. The course uses the nf-core/molkart pipeline to provide a biologically-relevant pipeline demonstrate how to run, configure, and manage inputs for Nextflow pipelines workflows.
+
+    [Start the Nextflow for Imaging training :material-arrow-right:](nf4_science/imaging/){ .md-button .md-button--primary }
+
 Let us know what other domains and use cases you'd like to see covered here by posting in the [Training section](https://community.seqera.io/c/training/) of the community forum.
 
 ## Advanced Nextflow Training

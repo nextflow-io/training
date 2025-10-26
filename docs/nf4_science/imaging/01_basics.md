@@ -15,7 +15,7 @@ In the terminal, run the following command:
 nextflow run hello-world.nf --greeting 'Hello World!'
 ```
 
-You console output should look something like this:
+Your console output should look something like this:
 
 ```console title="Output" linenums="1"
  N E X T F L O W   ~  version 25.04.3
@@ -65,7 +65,7 @@ However, be aware that the 'published' result is a copy (or in some cases a syml
 
 So now, we are going to peek under the hood to see where Nextflow actually executed the work.
 
-!!! Warning
+!!! warning
 
     Not all workflows will be set up to publish outputs to a results directory, and/or the directory name may be different.
     A little further in this section, we will show you how to find out where this behavior is specified.
@@ -157,7 +157,7 @@ The `.command.sh` file is especially useful because it shows you the main comman
 <details>
   <summary>File contents</summary>
 
-```console title="work/a3/7be2fa7be2fad5e71e5f49998f795677fd68/command.sh" linenums="1"
+```console title="work/a3/7be2fa7be2fad5e71e5f49998f795677fd68/.command.sh" linenums="1"
 #!/bin/bash -ue
 echo 'Hello World!' > output.txt
 

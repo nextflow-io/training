@@ -6,9 +6,9 @@ We would greatly appreciate your feedback to help us improve this training mater
 
 Please take a few minutes to complete our brief survey:
 
-!TODO Add link to survey form
+<!-- TODO: Add complete survey URL - current placeholder needs to be replaced with actual Typeform survey link -->
 
-[**Training Survey**](https://seqera.typeform.com/to/)
+[**Training Survey**](https://seqera.typeform.com/to/SURVEY_ID_HERE)
 
 Your responses will help us understand what worked well and what we can improve for future learners.
 

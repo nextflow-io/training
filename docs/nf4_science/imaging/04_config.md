@@ -1,6 +1,6 @@
 # Part 4: Configuration
 
-In Parts 1-3, we learned how to run molkart, manage inputs with parameter files and samplesheets, and train custom segmentation models.
+In Parts 1-3, we learned how to run Nextflow, run an nf-core pipeline, and manage inputs with parameter files and samplesheets.
 Now we'll explore how to configure pipelines for different computing environments using **configuration files** and **profiles**.
 
 ## Learning objectives
@@ -44,49 +44,39 @@ This layered approach lets you keep defaults in the pipeline, override with user
 
 Let's look at the configuration we've been using:
 
-```bash
-cat nextflow.config
-```
-
 ```groovy title="nextflow.config"
-docker {
-    enabled          = true
-    runOptions       = '-u $(id -u):$(id -g) --entrypoint ""'
+docker.enabled = true
+process {
+    resourceLimits = [
+        cpus: 2,
+        memory: '7.GB',
+    ]
 }
 
-process {
-    resourceLimits = [ cpus: 2, memory: 7.GB]
-}
 ```
 
-This minimal config:
-
-- Enables Docker containers
-- Sets Docker run options to avoid permission issues
-- Caps resource requests at 2 CPUs and 7 GB (for GitHub Codespaces)
-
-### Takeaway
-
-Configuration files separate execution settings from workflow code, allowing you to adapt pipelines to different environments without modifying the workflow itself.
-
-### What's next?
-
-Learn about the built-in profiles that come with every nf-core pipeline.
+Let's comment out or change back the `docker.enabled = true` line from Part 2, and figure out how we can achieve the same result using a profile in molkart instead.
 
 ---
 
-## 2. nf-core built-in profiles
+## 2. Using profiles
 
 ### 2.1. What are profiles?
 
 Profiles are named sets of configuration that can be activated with the `-profile` flag via the `nextflow run` command.
 They make it easy to switch between different compute scenarios without editing config files.
 
-All nf-core pipelines come with standard profiles built in.
+All nf-core pipelines come with a number of default profiles we can take use.
 
-### 2.2. Container engine profiles
+### 2.2. Inspecting built-in profiles
 
-nf-core pipelines support multiple container engines:
+Let's inspect them in the `molkart/nextflow.config` file associated with the pipeline codebase:
+
+```bash
+code molkart/nextflow.config
+```
+
+Search for the `profiles` block:
 
 ```groovy title="molkart/nextflow.config (excerpt)"
 profiles {
@@ -115,9 +105,58 @@ Common container profiles:
 - `conda`: Use Conda environments
 - `apptainer`: Use Apptainer containers
 
-### 2.3. Test profiles
+### 2.3. Re-running with profiles instead of nextflow.config
 
-Test profiles provide quick ways to verify the pipeline works:
+Now that we've disabled the docker configuration in our local `nextflow.config` file and understand profiles, let's re-run the pipeline using the `-profile` flag.
+
+Previously in Part 3, we created a `params.yaml` file with our custom parameters.
+We can now combine that with the built-in Docker profile:
+
+```bash
+nextflow run ./molkart \
+  -profile docker \
+  -params-file params.yaml \
+  -resume
+```
+
+Let's break down what each flag does:
+
+- `-profile docker`: Activates the Docker profile from molkart's `nextflow.config`, which sets `docker.enabled = true`
+- `-params-file params.yaml`: Loads all pipeline parameters from our YAML file
+- `-resume`: Reuses cached results from previous runs
+
+Because we're using `-resume`, Nextflow will check if anything changed since the last run.
+If the parameters, inputs, and code are the same, all tasks will be retrieved from cache and the pipeline will complete almost instantly.
+
+```console title="Output (excerpt)"
+executor >  local (12)
+...
+[1a/2b3c4d] NFCORE_MOLKART:MOLKART:MINDAGAP_MINDAGAP (mem_only)   [100%] 2 of 2, cached: 2 ✔
+[5e/6f7g8h] NFCORE_MOLKART:MOLKART:CLAHE (mem_only)               [100%] 2 of 2, cached: 2 ✔
+...
+-[nf-core/molkart] Pipeline completed successfully-
+```
+
+Notice all processes show `cached: 2` or `cached: 1` - nothing was re-executed!
+
+### 2.4. Test profiles
+
+Test profiles provide quick ways to specify default input parameters adn datafiles to let you verify the pipeline works.
+nf-core pipelines will always include at least two test profiles:
+
+- `test`: Small dataset with fast parameters for quick testing
+- `test_full`: More comprehensive test with larger data
+
+Let's take a closer look at the `test` profile in molkart which is included using the `includeConfig` directive:
+
+```groovy title="molkart/nextflow.config (excerpt)"
+profiles {
+  ...
+    test      { includeConfig 'conf/test.config'      }
+}
+```
+
+This means whenever we run the pipeline with `-profile test`, Nextflow will load the configuration from `conf/test.config`.
 
 ```groovy title="molkart/conf/test.config (excerpt)"
 params {
@@ -141,25 +180,13 @@ process {
 }
 ```
 
-Test profiles:
+Notice that this profile contains the same parameters we used in our `params.yaml` file earlier.
 
-- `test`: Small dataset with fast parameters for quick testing
-- `test_full`: More comprehensive test with larger data
-
-### 2.4. Utility profiles
-
-Additional profiles for specific use cases:
-
-- `debug`: Enable detailed debugging information
-- `wave`: Use Wave containers for on-demand container building
-- `gitpod`: Optimized for Gitpod cloud development environment
-
-### 2.5. Combining profiles
-
-You can activate multiple profiles by separating them with commas:
+You can activate multiple profiles by separating them with commas.
+Let's use that to test our pipeline without needing our params file:
 
 ```bash
-nextflow run nf-core/molkart -profile docker,test --outdir results
+nextflow run ./molkart -profile docker,test --outdir results -resume
 ```
 
 This combines:
@@ -201,7 +228,7 @@ profiles {
     hpc_cluster {
         singularity.enabled = true
         process.executor = 'slurm'
-        process.queue = 'batch'
+        process.queue = 'standard_queue'
         singularity.cacheDir = '/shared/containers'
     }
 }
@@ -229,13 +256,13 @@ The `nextflow config` command shows the fully resolved configuration without run
 View the default configuration:
 
 ```bash
-nextflow config
+nextflow config ./molkart
 ```
 
 View configuration with a specific profile:
 
 ```bash
-nextflow config -profile local_dev
+nextflow config -profile local_dev ./molkart
 ```
 
 This is extremely useful for:
@@ -259,16 +286,19 @@ Learn how to customize resource requests for individual processes using nf-core'
 
 ### 4.1. Understanding process labels in nf-core pipelines
 
-nf-core pipelines use **process labels** to standardize resource allocation across all pipelines.
+For simplicity, nf-core pipelines use [**process labels**](https://www.nextflow.io/docs/latest/reference/process.html#process-label) to standardize resource allocation across all pipelines.
 Each process is tagged with a label like `process_low`, `process_medium`, or `process_high` to describe low, medium, or high compute resource requirements, respectively.
-
-Here are the standard labels from molkart:
+These labels get converted into specific resource requests in one of the configuration files located in the `conf/` directory of the pipeline.
 
 ```groovy title="molkart/conf/base.config (excerpt)"
 process {
-    cpus   = { 1    * task.attempt }
-    memory = { 6.GB * task.attempt }
-    time   = { 4.h  * task.attempt }
+    cpus   = { 1      * task.attempt }
+    memory = { 6.GB   * task.attempt }
+    time   = { 4.h    * task.attempt }
+
+    errorStrategy = { task.exitStatus in ((130..145) + 104) ? 'retry' : 'finish' }
+    maxRetries    = 1
+    maxErrors     = '-1'
 
     withLabel:process_single {
         cpus   = { 1                   }
@@ -293,60 +323,29 @@ process {
 }
 ```
 
-Notice the `task.attempt` multiplier - this allows automatic retries with increased resources if a process fails.
+Notice the `task.attempt` multiplier - this allows subsequent task retries to request more resources, if the pipeline is set with `process.maxRetries > 1`.
 
-### 4.2. Overriding resources by label
-
-You can override all processes with a specific label:
-
-```groovy title="nextflow.config"
-process {
-    withLabel:process_medium {
-        cpus   = 4
-        memory = 16.GB
-    }
-}
-```
-
-This changes resource requests for all `process_medium` processes at once.
-
-### 4.3. Overriding resources for specific processes
+### 4.2. Overriding resources for specific processes
 
 For fine-grained control, target individual processes by name:
 
 ```groovy title="nextflow.config"
 process {
     withName: 'NFCORE_MOLKART:MOLKART:CELLPOSE' {
-        cpus   = 8
+        cpus   = 16
         memory = 32.GB
     }
 }
 ```
+
+If we try to run this pipeline with the above override, the `CELLPOSE` process will request 16 CPUs and 32 GB memory instead of the default defined by its label.
+This will cause the pipeline to fail in our current environment since we don't have that much RAM available.
+We'll learn how to prevent these types of failures in the next section.
 
 !!! Tip
 
     To find process names, look at the pipeline execution output or check `.nextflow.log`.
     Process names follow the pattern `WORKFLOW:SUBWORKFLOW:PROCESS`.
-
-### 4.4. Combining label and name selectors
-
-You can use both approaches together:
-
-```groovy title="nextflow.config"
-process {
-    // Set defaults for all high-resource processes
-    withLabel:process_high {
-        cpus   = 8
-        memory = 32.GB
-    }
-
-    // Override specific process
-    withName: 'NFCORE_MOLKART:MOLKART:CELLPOSE' {
-        cpus   = 12
-        memory = 64.GB
-    }
-}
-```
 
 ### Takeaway
 
@@ -363,11 +362,10 @@ Learn how to manage resource limits in constrained environments like GitHub Code
 
 ### 5.1. The resource limits problem
 
-When we first ran molkart in GitHub Codespaces, we encountered a problem:
+If we tried to run molkart with a process requesting 16 CPUs and 32 GB memory (as shown in section 4.2), it would fail in our current environment because we don't have that many resources available.
+In a cluster environment with larger nodes, such requests would be submitted to the scheduler.
 
-Some molkart processes request 12 GB or more of memory, but Codespaces only has ~8 GB available.
-
-Without limits, Nextflow would refuse to run processes that exceed available resources.
+In constrained environments like GitHub Codespaces, without limits, Nextflow would refuse to run processes that exceed available resources.
 
 ### 5.2. Setting resource limits
 
@@ -379,19 +377,7 @@ process {
 }
 ```
 
-This tells Nextflow: "If any process requests more than 2 CPUs or 7 GB memory, cap it at these limits."
-
-This is why the test profile includes resourceLimits:
-
-```groovy title="molkart/conf/test.config"
-process {
-    resourceLimits = [
-        cpus: 4,
-        memory: '15.GB',
-        time: '1.h'
-    ]
-}
-```
+This tells Nextflow: "If any process requests more than 2 CPUs or 7 GB memory, cap it at these limits instead."
 
 ### 5.3. Adding resource limits to custom profiles
 
