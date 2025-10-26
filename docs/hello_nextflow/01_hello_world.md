@@ -421,15 +421,8 @@ You can change this behavior to copy files instead using the `mode` directive in
 
 !!! note "Understanding workflow outputs vs. publishDir (legacy syntax)"
 
-    Workflow outputs are the modern approach to publishing results in Nextflow.
-    They provide several advantages:
-
-    - **Centralized**: All publishing logic is in one place rather than scattered across process definitions
-    - **Flexible**: You can easily control what gets published from the workflow level
-    - **Cleaner modules**: Processes don't need to know where their outputs should be published
-
-    However, you will still encounter the older `publishDir` directive when reading existing pipelines and working with nf-core modules.
-    The `publishDir` directive is applied at the process level and looks like this:
+    Before workflow outputs were introduced, Nextflow used a different approach to publishing results called the `publishDir` directive.
+    This directive was applied at the process level and looked like this:
 
     ```groovy
     process sayHello {
@@ -446,8 +439,17 @@ You can change this behavior to copy files instead using the `mode` directive in
     }
     ```
 
+    The `publishDir` directive tells Nextflow to copy (or symlink) the process outputs to the specified directory.
+    You can set options like `mode: 'copy'` to control how files are published.
+
+    The modern **workflow outputs** approach you just learned provides several advantages over `publishDir`:
+
+    - **Centralized**: All publishing logic is in one place at the workflow level, rather than scattered across individual process definitions
+    - **Flexible**: You can easily control what gets published from the workflow level without modifying process code
+    - **Cleaner modules**: Processes don't need to know where their outputs should be published, making them more reusable
+
     The `publishDir` directive is still supported but is being phased out in favor of workflow outputs.
-    Understanding both approaches will help you work with both modern and legacy Nextflow code.
+    You will encounter `publishDir` frequently when reading existing Nextflow pipelines and working with nf-core modules, so it's important to understand both approaches.
 
 ### 3.2. Re-launch a workflow with `-resume`
 
