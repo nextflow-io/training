@@ -28,4 +28,14 @@ These are courses that demonstrate how to apply the concepts and components pres
 
     [Start the Nextflow for RNAseq training :material-arrow-right:](rnaseq/){ .md-button .md-button--primary }
 
+!!! exercise "Nextflow for Bioimaging"
+
+    !!! tip inline end ""
+
+        :material-run-fast: Learn to run pipelines for imaging data in Nextflow.
+
+    This is a course for researchers who wish to learn how to run and configure bioimaging pipelines. The course uses nf-core/molkart to demonstrate essential Nextflow usage patterns applicable to any pipeline.
+
+    [Start the Nextflow for Bioimaging training :material-arrow-right:](imaging/){ .md-button .md-button--primary }
+
 Let us know what other domains and use cases you'd like to see covered here by posting in the [Training section](https://community.seqera.io/c/training/) of the community forum.

@@ -40,7 +40,10 @@
     "onCreateCommand": "bash .devcontainer/setup.sh",
     "customizations": {
         "vscode": {
-            "extensions": ["nf-core.nf-core-extensionpack"],
+            "extensions": [
+                "nf-core.nf-core-extensionpack",
+                "ms-vscode.live-server"
+            ],
             // Use Python from conda
             "settings": {
                 "python.defaultInterpreterPath": "/opt/conda/bin/python"
