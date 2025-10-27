@@ -48,14 +48,14 @@ workflow {
                         .map { line -> line[0] }
 
     // emit a greeting
-    ch_hello = sayHello(greeting_ch)
+    sayHello(greeting_ch)
 
     // convert the greeting to uppercase
-    ch_upper = convertToUpper(ch_hello)
+    convertToUpper(sayHello.out)
 
     publish:
-    greetings = ch_hello
-    uppercase = ch_upper
+    greetings = sayHello.out
+    uppercase = convertToUpper.out
 }
 
 output {

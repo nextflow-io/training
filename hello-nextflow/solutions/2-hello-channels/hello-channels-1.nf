@@ -29,10 +29,10 @@ workflow {
     greeting_ch = Channel.of('Hello Channels!')
 
     // emit a greeting
-    ch_output = sayHello(greeting_ch)
+    sayHello(greeting_ch)
 
     publish:
-    greetings = ch_output
+    greetings = sayHello.out
 }
 
 output {

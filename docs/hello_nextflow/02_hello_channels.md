@@ -81,14 +81,16 @@ In the workflow block, add the channel factory code:
 
 === "After"
 
-    ```groovy title="hello-channels.nf" linenums="27" hl_lines="3 4"
+    ```groovy title="hello-channels.nf" linenums="27" hl_lines="5 6"
     workflow {
+
+        main:
 
         // create a channel for inputs
         greeting_ch = Channel.of('Hello Channels!')
 
         // emit a greeting
-        ch_output = sayHello(params.greeting)
+        sayHello(params.greeting)
     }
     ```
 
@@ -97,9 +99,9 @@ In the workflow block, add the channel factory code:
     ```groovy title="hello-channels.nf" linenums="27"
     workflow {
 
+        main:
         // emit a greeting
-        ch_output = sayHello(params.greeting)
-    }
+        sayHello(params.greeting)
     ```
 
 This is not yet functional since we haven't yet switched the input to the process call.
@@ -112,17 +114,19 @@ In the workflow block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-channels.nf" linenums="27" hl_lines="7"
+    ```groovy title="hello-channels.nf" linenums="27" hl_lines="9"
     workflow {
+
+        main:
 
         // create a channel for inputs
         greeting_ch = Channel.of('Hello Channels!')
 
         // emit a greeting
-        ch_output = sayHello(greeting_ch)
+        sayHello(greeting_ch)
 
         publish:
-        greetings = ch_output
+        greetings = sayHello.out
     }
     ```
 
@@ -131,14 +135,16 @@ In the workflow block, make the following code change:
     ```groovy title="hello-channels.nf" linenums="27"
     workflow {
 
+        main:
+
         // create a channel for inputs
         greeting_ch = Channel.of('Hello Channels!')
 
         // emit a greeting
-        ch_output = sayHello(params.greeting)
+        sayHello(params.greeting)
 
         publish:
-        greetings = ch_output
+        greetings = sayHello.out
     }
     ```
 

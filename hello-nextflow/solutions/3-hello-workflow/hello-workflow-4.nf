@@ -62,31 +62,32 @@ params.batch = 'test-batch'
 
 workflow {
 
+    main:
     // create a channel for inputs from a CSV file
     greeting_ch = Channel.fromPath(params.greeting)
                         .splitCsv()
                         .map { line -> line[0] }
 
     // emit a greeting
-    ch_hello = sayHello(greeting_ch)
+    sayHello(greeting_ch)
 
     // convert the greeting to uppercase
-    ch_upper = convertToUpper(ch_hello)
+    convertToUpper(sayHello.out)
 
     // collect all the greetings into one file
-    ch_collected = collectGreetings(ch_upper.collect(), params.batch)
+    collectGreetings(convertToUpper.out.collect(), params.batch)
 
     // emit a message about the size of the batch
-    ch_collected.count.view { "There were $it greetings in this batch" }
+    collectGreetings.out.count.view { "There were $it greetings in this batch" }
 
     // optional view statements
-    //ch_upper.view { "Before collect: $it" }
-    //ch_upper.collect().view { "After collect: $it" }
+    //convertToUpper.out.view { "Before collect: $it" }
+    //convertToUpper.out.collect().view { "After collect: $it" }
 
     publish:
-    greetings = ch_hello
-    uppercase = ch_upper
-    collected = ch_collected.outfile
+    greetings = sayHello.out
+    uppercase = convertToUpper.out
+    collected = collectGreetings.out.outfile
 }
 
 output {

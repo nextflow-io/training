@@ -342,10 +342,10 @@ In the workflow script file `hello-world.nf`, make the following code modificati
 
         main:
         // emit a greeting
-        ch_output = sayHello()
+        sayHello()
 
         publish:
-        greetings = ch_output
+        greetings = sayHello.out
     }
 
     output {
@@ -410,7 +410,9 @@ This is how we publish results files outside of the working directories convenie
 
 By default, Nextflow creates symbolic links from the output directory to files in the work directory.
 This is efficient because it doesn't duplicate files, but it means if you delete the work directory, you'll lose access to the outputs.
-You can change this behavior to copy files instead using the `mode` directive in the output block or by setting `workflow.output.mode = 'copy'` in your configuration file.
+
+In this training environment, we've configured Nextflow to copy files instead of creating symlinks, which is safer for learning purposes.
+You can configure this behavior in your own pipelines using the `workflow.output.mode` setting (covered later in this training).
 
 !!! tip
 
@@ -636,14 +638,14 @@ In the workflow block, make the following code change:
 
     ```groovy title="hello-world.nf" linenums="24" hl_lines="2"
     // emit a greeting
-    ch_output = sayHello(params.greeting)
+    sayHello(params.greeting)
     ```
 
 === "Before"
 
     ```groovy title="hello-world.nf" linenums="24"
     // emit a greeting
-    ch_output = sayHello()
+    sayHello()
     ```
 
 This tells Nextflow to run the `sayHello` process on the value provided through the `--greeting` parameter.

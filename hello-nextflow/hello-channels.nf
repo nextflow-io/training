@@ -26,10 +26,10 @@ workflow {
 
     main:
     // emit a greeting
-    ch_output = sayHello(params.greeting)
+    sayHello(params.greeting)
 
     publish:
-    greetings = ch_output
+    greetings = sayHello.out
 }
 
 output {

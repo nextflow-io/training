@@ -65,22 +65,22 @@ workflow {
                         .map { line -> line[0] }
 
     // emit a greeting
-    ch_hello = sayHello(greeting_ch)
+    sayHello(greeting_ch)
 
     // convert the greeting to uppercase
-    ch_upper = convertToUpper(ch_hello)
+    convertToUpper(sayHello.out)
 
     // collect all the greetings into one file
-    ch_collected = collectGreetings(ch_upper.collect())
+    collectGreetings(convertToUpper.out.collect())
 
     // optional view statements
-    ch_upper.view { "Before collect: $it" }
-    ch_upper.collect().view { "After collect: $it" }
+    convertToUpper.out.view { "Before collect: $it" }
+    convertToUpper.out.collect().view { "After collect: $it" }
 
     publish:
-    greetings = ch_hello
-    uppercase = ch_upper
-    collected = ch_collected
+    greetings = sayHello.out
+    uppercase = convertToUpper.out
+    collected = collectGreetings.out
 }
 
 output {

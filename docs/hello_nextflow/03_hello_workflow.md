@@ -140,21 +140,25 @@ In the workflow block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-workflow.nf" linenums="53" hl_lines="4 5"
+    ```groovy title="hello-workflow.nf" linenums="58" hl_lines="4 5"
         // emit a greeting
         sayHello(greeting_ch)
 
         // convert the greeting to uppercase
         convertToUpper()
-    }
+
+        publish:
+        greetings = sayHello.out
     ```
 
 === "Before"
 
-    ```groovy title="hello-workflow.nf" linenums="53"
+    ```groovy title="hello-workflow.nf" linenums="58"
         // emit a greeting
         sayHello(greeting_ch)
-    }
+
+        publish:
+        greetings = sayHello.out
     ```
 
 This is not yet functional because we have not specified what should be input to the `convertToUpper()` process.
@@ -170,18 +174,28 @@ In the workflow block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-workflow.nf" linenums="56" hl_lines="2"
+    ```groovy title="hello-workflow.nf" linenums="58" hl_lines="2 5"
+        // emit a greeting
+        sayHello(greeting_ch)
+
         // convert the greeting to uppercase
         convertToUpper(sayHello.out)
-    }
+
+        publish:
+        greetings = sayHello.out
     ```
 
 === "Before"
 
-    ```groovy title="hello-workflow.nf" linenums="56"
+    ```groovy title="hello-workflow.nf" linenums="58" hl_lines="2 5"
+        // emit a greeting
+        sayHello(greeting_ch)
+
         // convert the greeting to uppercase
         convertToUpper()
-    }
+
+        publish:
+        greetings = sayHello.out
     ```
 
 For a simple case like this (one output to one input), that's all we need to do to connect two processes!
@@ -247,17 +261,16 @@ In the workflow and output blocks, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-workflow.nf" linenums="53" hl_lines="3 6 9 10 11 12 13 14 15 16 17 18 19"
-        main:
+    ```groovy title="hello-workflow.nf" linenums="53" hl_lines="5 16-18"
         // emit a greeting
-        ch_hello = sayHello(greeting_ch)
+        sayHello(greeting_ch)
 
         // convert the greeting to uppercase
-        ch_upper = convertToUpper(ch_hello)
+        convertToUpper(sayHello.out)
 
         publish:
-        greetings = ch_hello
-        uppercase = ch_upper
+        greetings = sayHello.out
+        uppercase = convertToUpper.out
     }
 
     output {
@@ -272,13 +285,15 @@ In the workflow and output blocks, make the following code change:
 
 === "Before"
 
-    ```groovy title="hello-workflow.nf" linenums="53"
-        main:
+    ```groovy title="hello-workflow.nf" linenums="53" hl_lines=5"
         // emit a greeting
-        ch_output = sayHello(greeting_ch)
+        sayHello(greeting_ch)
+
+        // convert the greeting to uppercase
+        convertToUpper(sayHello.out)
 
         publish:
-        greetings = ch_output
+        greetings = sayHello.out
     }
 
     output {
@@ -290,11 +305,8 @@ In the workflow and output blocks, make the following code change:
 
 Here we made several changes:
 
-1. **Assigned outputs to named channels**: Changed from using `sayHello.out` to `ch_hello = sayHello()` and similarly for `convertToUpper()`. This gives us named channels that we can reference in the publish section.
-2. **Added both channels to the `publish:` section**: This tells Nextflow which outputs we want to publish.
-3. **Declared both outputs in the `output` block**: Specifies that both should be published to the root of the output directory.
-
-By assigning process outputs to named channels, we can easily reference them when declaring what to publish. This is cleaner than using the `.out` notation, especially when working with multiple outputs.
+1. **Added the second process output to the `publish:` section**: Added `uppercase = convertToUpper.out` to publish the uppercase greetings alongside the original greetings.
+2. **Declared both outputs in the `output` block**: Added an `uppercase` section to specify that the uppercase files should also be published to the root of the output directory.
 
 Now when you run the workflow, both the original greetings and the uppercase versions will be published to the `results` directory.
 

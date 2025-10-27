@@ -18,10 +18,10 @@ workflow {
 
     main:
     // emit a greeting
-    ch_output = sayHello()
+    sayHello()
 
     publish:
-    greetings = ch_output
+    greetings = sayHello.out
 }
 
 output {
