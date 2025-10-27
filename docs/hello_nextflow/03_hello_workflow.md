@@ -465,7 +465,10 @@ In the workflow block, make the following code change:
 
         // collect all the greetings into one file
         collectGreetings(convertToUpper.out)
-    }
+
+        publish:
+        greetings = sayHello.out
+        uppercase = convertToUpper.out
     ```
 
 === "Before"
@@ -473,7 +476,10 @@ In the workflow block, make the following code change:
     ```groovy title="hello-workflow.nf" linenums="75"
         // convert the greeting to uppercase
         convertToUpper(sayHello.out)
-    }
+
+        publish:
+        greetings = sayHello.out
+        uppercase = convertToUpper.out
     ```
 
 This connects the output of `convertToUpper()` to the input of `collectGreetings()`.
@@ -532,7 +538,10 @@ In the workflow block, make the following code change:
     ```groovy title="hello-workflow.nf" linenums="78" hl_lines="2"
         // collect all the greetings into one file
         collectGreetings(convertToUpper.out.collect())
-    }
+
+        publish:
+        greetings = sayHello.out
+        uppercase = convertToUpper.out
     ```
 
 === "Before"
@@ -540,7 +549,10 @@ In the workflow block, make the following code change:
     ```groovy title="hello-workflow.nf" linenums="78"
         // collect all the greetings into one file
         collectGreetings(convertToUpper.out)
-    }
+
+        publish:
+        greetings = sayHello.out
+        uppercase = convertToUpper.out
     ```
 
 #### 2.4.2. Add some `view()` statements
@@ -556,7 +568,10 @@ Let's also include a couple of `view()` statements to visualize the before and a
         // optional view statements
         convertToUpper.out.view { greeting -> "Before collect: $greeting" }
         convertToUpper.out.collect().view { greeting -> "After collect: $greeting" }
-    }
+
+        publish:
+        greetings = sayHello.out
+        uppercase = convertToUpper.out
     ```
 
 === "Before"
@@ -564,7 +579,10 @@ Let's also include a couple of `view()` statements to visualize the before and a
     ```groovy title="hello-workflow.nf" linenums="78"
         // collect all the greetings into one file
         collectGreetings(convertToUpper.out.collect())
-    }
+
+        publish:
+        greetings = sayHello.out
+        uppercase = convertToUpper.out
     ```
 
 The `view()` statements can go anywhere you want; we put them after the call for readability.
@@ -736,6 +754,10 @@ In the workflow block, make the following code change:
     ```groovy title="hello-workflow.nf" linenums="80" hl_lines="2"
         // collect all the greetings into one file
         collectGreetings(convertToUpper.out.collect(), params.batch)
+
+        publish:
+        greetings = sayHello.out
+        uppercase = convertToUpper.out
     ```
 
 === "Before"
@@ -743,6 +765,10 @@ In the workflow block, make the following code change:
     ```groovy title="hello-workflow.nf" linenums="80"
         // collect all the greetings into one file
         collectGreetings(convertToUpper.out.collect())
+
+        publish:
+        greetings = sayHello.out
+        uppercase = convertToUpper.out
     ```
 
 !!! warning
@@ -868,25 +894,32 @@ In the process block, make the following code change:
 The `emit:` tags are optional, and we could have added a tag to only one of the outputs.
 But as the saying goes, why not both?
 
-### 4.2. Report the output at the end of the workflow
+### 4.2. Report the output and update publishing
 
 Now that we have two outputs coming out of the `collectGreetings` process, the `collectGreetings.out` output contains two channels:
 
 - `collectGreetings.out.outfile` contains the final output file
 - `collectGreetings.out.count` contains the count of greetings
 
-We could send either or both of these to another process for further work. However, in the interest of wrapping this up, we're just going to use `view()` to demonstrate that we can access and report the count of greetings.
+We could send either or both of these to another process for further work. Here, we're going to use `view()` to demonstrate that we can access and report the count of greetings.
+
+We also need to update the `publish:` block to publish the collected output file. Since `collectGreetings` now has multiple outputs, we must use the named output `collectGreetings.out.outfile` to specify which output we want to publish.
 
 In the workflow block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-workflow.nf" linenums="82" hl_lines="4 5"
+    ```groovy title="hello-workflow.nf" linenums="82" hl_lines="4 5 10"
         // collect all the greetings into one file
         collectGreetings(convertToUpper.out.collect(), params.batch)
 
         // emit a message about the size of the batch
         collectGreetings.out.count.view { num_greetings -> "There were $num_greetings greetings in this batch" }
+
+        publish:
+        greetings = sayHello.out
+        uppercase = convertToUpper.out
+        collected = collectGreetings.out.outfile
     ```
 
 === "Before"
@@ -894,6 +927,10 @@ In the workflow block, make the following code change:
     ```groovy title="hello-workflow.nf" linenums="82"
         // collect all the greetings into one file
         collectGreetings(convertToUpper.out.collect(), params.batch)
+
+        publish:
+        greetings = sayHello.out
+        uppercase = convertToUpper.out
     ```
 
 !!! note
