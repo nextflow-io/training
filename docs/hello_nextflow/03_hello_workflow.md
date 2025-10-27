@@ -174,7 +174,7 @@ In the workflow block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-workflow.nf" linenums="58" hl_lines="2 5"
+    ```groovy title="hello-workflow.nf" linenums="58" hl_lines="5"
         // emit a greeting
         sayHello(greeting_ch)
 
@@ -187,7 +187,7 @@ In the workflow block, make the following code change:
 
 === "Before"
 
-    ```groovy title="hello-workflow.nf" linenums="58" hl_lines="2 5"
+    ```groovy title="hello-workflow.nf" linenums="58" hl_lines="5"
         // emit a greeting
         sayHello(greeting_ch)
 
@@ -261,7 +261,7 @@ In the workflow and output blocks, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-workflow.nf" linenums="53" hl_lines="5 16-18"
+    ```groovy title="hello-workflow.nf" linenums="53" hl_lines="5 9 16-18"
         // emit a greeting
         sayHello(greeting_ch)
 
@@ -285,7 +285,7 @@ In the workflow and output blocks, make the following code change:
 
 === "Before"
 
-    ```groovy title="hello-workflow.nf" linenums="53" hl_lines=5"
+    ```groovy title="hello-workflow.nf" linenums="53" hl_lines="5"
         // emit a greeting
         sayHello(greeting_ch)
 
