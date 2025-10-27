@@ -27,14 +27,29 @@ By learning to utilize these configuration options effectively, you can enhance 
 
 ## 0. Warmup: Check that Docker is enabled and run the Hello Config workflow
 
-First, a quick check. There is a `nextflow.config` file in the current directory that contains the line `docker.enabled = <setting>`, where `<setting>` is either `true` or `false` depending on whether or not you've worked through Part 5 of this course in the same environment.
+First, a quick check. There is a `nextflow.config` file in the current directory that should contain basic configuration settings from earlier parts of the training.
 
-If it is set to `true`, you don't need to do anything.
+You can view the current config file:
 
-If it is set to `false`, switch it to `true` now.
+```bash
+cat nextflow.config
+```
 
-```console title="nextflow.config" linenums="1"
+It should look something like this:
+
+```groovy title="nextflow.config" linenums="1"
+docker.enabled = false
+workflow.output.mode = 'copy'
+```
+
+The `docker.enabled` setting controls whether Docker containers are used (covered in Part 5).
+The `workflow.output.mode` setting controls how output files are published - `'copy'` means files are copied to the output directory, while the default `'symlink'` creates symbolic links instead.
+
+For this part of the training, make sure `docker.enabled` is set to `true`:
+
+```groovy title="nextflow.config" linenums="1"
 docker.enabled = true
+workflow.output.mode = 'copy'
 ```
 
 Once you've done that, verify that the initial workflow runs properly:
@@ -90,13 +105,14 @@ To do so, we switch the value of `docker.enabled` to `false`, and add a directiv
     ```groovy title="nextflow.config" linenums="1" hl_lines="1-2"
     docker.enabled = false
     conda.enabled = true
+    workflow.output.mode = 'copy'
     ```
 
 === "Before"
 
     ```groovy title="nextflow.config" linenums="1"
-
     docker.enabled = true
+    workflow.output.mode = 'copy'
     ```
 
 This will allow Nextflow to create and utilize Conda environments for processes that have Conda packages specified.
