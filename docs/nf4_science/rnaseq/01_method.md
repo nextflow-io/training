@@ -304,7 +304,7 @@ We're going to pull a container image that has `multiqc` installed, spin it up i
 ### 3.1. Pull the `multiqc` container
 
 ```bash
-docker pull community.wave.seqera.io/library/pip_multiqc:ad8f247edb55897c
+docker pull community.wave.seqera.io/library/pip_multiqc:a3c26f6199d64b7c
 ```
 
 ```console title="Output"
@@ -323,14 +323,14 @@ bb36d6c3110d: Already exists
 3f229294c69a: Pull complete
 5a5ad47fd84c: Pull complete
 Digest: sha256:0ebb1d9605395a7df49ad0eb366b21f46afd96a5090376b0d8941cf5294a895a
-Status: Downloaded newer image for community.wave.seqera.io/library/pip_multiqc:ad8f247edb55897c
-community.wave.seqera.io/library/pip_multiqc:ad8f247edb55897c
+Status: Downloaded newer image for community.wave.seqera.io/library/pip_multiqc:a3c26f6199d64b7c
+community.wave.seqera.io/library/pip_multiqc:a3c26f6199d64b7c
 ```
 
 ### 3.2. Spin up the `multiqc` container interactively
 
 ```bash
-docker run -it -v ./data:/data community.wave.seqera.io/library/pip_multiqc:ad8f247edb55897c
+docker run -it -v ./data:/data community.wave.seqera.io/library/pip_multiqc:a3c26f6199d64b7c
 ```
 
 ### 3.3. Run the `multiqc` command
