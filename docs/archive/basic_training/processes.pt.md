@@ -243,7 +243,7 @@ input:
 O qualificador `val` permite receber dados de qualquer tipo como entrada. Ele pode ser acessado no script do processo usando o nome de entrada especificado, conforme mostrado no exemplo a seguir:
 
 ```groovy linenums="1"
-num = Channel.of(1, 2, 3)
+num = channel.of(1, 2, 3)
 
 process EXEMPLOBASICO {
     debug true
@@ -279,7 +279,7 @@ tarefa 2 do processo
 O qualificador `path` permite a manipulação de arquivos no contexto de execução do processo. Isso significa que o Nextflow irá mover os arquivos necessários para o diretório de execução do processo e estes poderão ser acessados no script usando o nome especificado na declaração de entrada.
 
 ```groovy linenums="1"
-leituras = Channel.fromPath('data/ggal/*.fq')
+leituras = channel.fromPath('data/ggal/*.fq')
 
 process FOO {
     debug true
@@ -301,7 +301,7 @@ workflow {
 O nome do arquivo de entrada também pode ser definido usando uma referência de variável conforme mostrado abaixo:
 
 ```groovy linenums="1"
-leituras = Channel.fromPath('data/ggal/*.fq')
+leituras = channel.fromPath('data/ggal/*.fq')
 
 process FOO {
     debug true
@@ -323,7 +323,7 @@ workflow {
 A mesma sintaxe também é capaz de lidar com mais de um arquivo de entrada na mesma execução e requer apenas a alteração da composição do canal.
 
 ```groovy linenums="1"
-leituras = Channel.fromPath('data/ggal/*.fq')
+leituras = channel.fromPath('data/ggal/*.fq')
 
 process FOO {
     debug true
@@ -344,7 +344,7 @@ workflow {
 
 !!! warning
 
-    No passado, o qualificador `file` era usado para arquivos, mas o qualificador `path` deve ser preferido ao `file` para lidar com arquivos de entrada de processo ao usar o Nextflow 19.10.0 ou posterior. Quando um processo declara um arquivo de entrada, os elementos de canal correspondentes devem ser objetos **file** criados com a função auxiliar de arquivo das fábricas de canal específicas de arquivo (por exemplo, `Channel.fromPath` ou `Channel.fromFilePairs`).
+    No passado, o qualificador `file` era usado para arquivos, mas o qualificador `path` deve ser preferido ao `file` para lidar com arquivos de entrada de processo ao usar o Nextflow 19.10.0 ou posterior. Quando um processo declara um arquivo de entrada, os elementos de canal correspondentes devem ser objetos **file** criados com a função auxiliar de arquivo das fábricas de canal específicas de arquivo (por exemplo, `channel.fromPath` ou `channel.fromFilePairs`).
 
 !!! exercise
 
@@ -389,8 +389,8 @@ Uma característica fundamental dos processos é a capacidade de lidar com entra
 Considere o seguinte exemplo:
 
 ```groovy linenums="1"
-canal1 = Channel.of(1, 2, 3)
-canal2 = Channel.of('a', 'b', 'c')
+canal1 = channel.of(1, 2, 3)
+canal2 = channel.of('a', 'b', 'c')
 
 process FOO {
     debug true
@@ -427,8 +427,8 @@ Isso significa que os valores do canal são consumidos serialmente um após o ou
 Por exemplo:
 
 ```groovy linenums="1"
-entrada1 = Channel.of(1, 2)
-entrada2 = Channel.of('a', 'b', 'c', 'd')
+entrada1 = channel.of(1, 2)
+entrada2 = channel.of('a', 'b', 'c', 'd')
 
 process FOO {
     debug true
@@ -455,8 +455,8 @@ No entanto, o que acontece se você substituir o valor `x` por um canal de valor
 Compare o exemplo anterior com o seguinte:
 
 ```groovy linenums="1"
-entrada1 = Channel.value(1)
-entrada2 = Channel.of('a', 'b', 'c')
+entrada1 = channel.value(1)
+entrada2 = channel.of('a', 'b', 'c')
 
 process BAR {
     debug true
@@ -525,7 +525,7 @@ Isso ocorre porque os canais de valor podem ser consumidos várias vezes e não 
 O qualificador `each` permite que você repita a execução de um processo para cada item em uma coleção toda vez que novos dados são recebidos. Por exemplo:
 
 ```groovy linenums="1"
-sequencias = Channel.fromPath('data/prots/*.tfa')
+sequencias = channel.fromPath('data/prots/*.tfa')
 metodos = ['regular', 'espresso', 'psicoffee']
 
 process ALINHESEQUENCIAS {
@@ -618,7 +618,7 @@ process FOO {
 }
 
 workflow {
-    canal_de_recebimento = FOO(Channel.of(metodos))
+    canal_de_recebimento = FOO(channel.of(metodos))
     canal_de_recebimento.view { "Recebido: $it" }
 }
 ```
@@ -737,7 +737,7 @@ Até agora, vimos como declarar vários canais de entrada e saída que podem lid
 As declarações de entrada e saída para tuplas devem ser declaradas com um qualificador `tuple` seguido pela definição de cada elemento na tupla.
 
 ```groovy linenums="1"
-canal_leituras = Channel.fromFilePairs('data/ggal/*_{1,2}.fq')
+canal_leituras = channel.fromFilePairs('data/ggal/*_{1,2}.fq')
 
 process FOO {
     input:
@@ -769,7 +769,7 @@ workflow {
     ??? solution
 
         ```groovy linenums="1"
-        canal_leituras = Channel.fromFilePairs('data/ggal/*_{1,2}.fq')
+        canal_leituras = channel.fromFilePairs('data/ggal/*_{1,2}.fq')
 
         process FOO {
             input:
@@ -799,7 +799,7 @@ A declaração `when` permite que você defina uma condição que deve ser verif
 ```groovy linenums="1"
 params.tipo_banco = 'nr'
 params.prot = 'data/prots/*.tfa'
-proteinas = Channel.fromPath(params.prot)
+proteinas = channel.fromPath(params.prot)
 
 process ENCONTRAR {
     debug true
@@ -870,7 +870,7 @@ Para armazenar nossos arquivos de resultado do fluxo de trabalho, precisamos mar
 ```groovy linenums="1"
 params.diretorio_saida = 'meus-resultados'
 params.prot = 'data/prots/*.tfa'
-proteinas = Channel.fromPath(params.prot)
+proteinas = channel.fromPath(params.prot)
 
 
 process BLASTSEQ {
@@ -908,7 +908,7 @@ Você pode usar mais de um `publishDir` para manter saídas diferentes em diret�
 params.leituras = 'data/reads/*_{1,2}.fq.gz'
 params.diretorio_saida = 'meus-resultados'
 
-canal_amostras = Channel.fromFilePairs(params.leituras, flat: true)
+canal_amostras = channel.fromFilePairs(params.leituras, flat: true)
 
 process FOO {
     publishDir "$params.diretorio_saida/$id_amostra/", pattern: '*.fq'

@@ -85,6 +85,6 @@ workflow {
 
     heavy_ch = heavyProcess(sample_ids)
 
-    file_ch = Channel.fromPath("*.txt")
+    file_ch = channel.fromPath("*.txt")
     handleFiles(file_ch)
 }

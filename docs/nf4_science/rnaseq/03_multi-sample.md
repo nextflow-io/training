@@ -44,7 +44,7 @@ We're going to want to load the contents of the file into the channel instead of
 
 ```groovy title="rnaseq.nf" linenums="16"
     // Create input channel from the contents of a CSV file
-    read_ch = Channel.fromPath(params.input_csv)
+    read_ch = channel.fromPath(params.input_csv)
         .splitCsv(header:true)
         .map { row -> file(row.fastq_path) }
 ```
@@ -184,7 +184,7 @@ In the context of the full workflow block, it ends up looking like this:
 ```groovy title="rnaseq.nf" linenums="18"
 workflow {
     // Create input channel from the contents of a CSV file
-    read_ch = Channel.fromPath(params.input_csv)
+    read_ch = channel.fromPath(params.input_csv)
         .splitCsv(header:true)
         .map { row -> file(row.fastq_path) }
 
@@ -313,7 +313,7 @@ So `row -> file(row.fastq_path)` becomes `row -> [file(row.fastq_1), file(row.fa
 
 ```groovy title="rnaseq_pe.nf" linenums="19"
     // Create input channel from the contents of a CSV file
-    read_ch = Channel.fromPath(params.input_csv)
+    read_ch = channel.fromPath(params.input_csv)
         .splitCsv(header:true)
         .map { row -> [file(row.fastq_1), file(row.fastq_2)] }
 ```

@@ -225,7 +225,7 @@ workflow HELLO {
     ch_samplesheet // channel: samplesheet read in from --input
     main:
 
-    ch_versions = Channel.empty()
+    ch_versions = channel.empty()
 
     //
     // Collate and save software versions
@@ -332,7 +332,7 @@ include { cowpy } from './modules/cowpy.nf'
 workflow {
 
   // create a channel for inputs from a CSV file
-  greeting_ch = Channel.fromPath(params.greeting)
+  greeting_ch = channel.fromPath(params.greeting)
                       .splitCsv()
                       .map { line -> line[0] }
 
@@ -389,7 +389,7 @@ Now, replace the channel construction with a simple `take` statement declaring e
 
     ```groovy title="original-hello/hello.nf" linenums="18"
         // create a channel for inputs from a CSV file
-        greeting_ch = Channel.fromPath(params.greeting)
+        greeting_ch = channel.fromPath(params.greeting)
                             .splitCsv()
                             .map { line -> line[0] }
     ```
@@ -529,7 +529,7 @@ params.greeting = 'greetings.csv'
 
 workflow {
   // create a channel for inputs from a CSV file
-  greeting_ch = Channel.fromPath(params.greeting)
+  greeting_ch = channel.fromPath(params.greeting)
                       .splitCsv()
                       .map { line -> line[0] }
 
@@ -629,7 +629,7 @@ workflow HELLO {
     ch_samplesheet // channel: samplesheet read in from --input
     main:
 
-    ch_versions = Channel.empty()
+    ch_versions = channel.empty()
 
     //
     // Collate and save software versions
@@ -801,7 +801,7 @@ There is already some code in there that has to do with capturing the versions o
         // generate ASCII art of the greetings with cowpy
         cowpy(collectGreetings.out.outfile, params.character)
 
-        ch_versions = Channel.empty()
+        ch_versions = channel.empty()
 
         //
         // Collate and save software versions
@@ -821,7 +821,7 @@ There is already some code in there that has to do with capturing the versions o
     ```groovy title="core-hello/workflows/hello.nf" linenums="23"
         main:
 
-        ch_versions = Channel.empty()
+        ch_versions = channel.empty()
 
         //
         // Collate and save software versions
@@ -1032,13 +1032,13 @@ It is quite complex because it does a lot of parsing and validation work.
     The syntax above is a little different from what we've used previously, but basically this:
 
     ```groovy
-    Channel.<...>.set { ch_samplesheet }
+    channel.<...>.set { ch_samplesheet }
     ```
 
     is equivalent to this:
 
     ```groovy
-    ch_samplesheet = Channel.<...>
+    ch_samplesheet = channel.<...>
     ```
 
 ### 4.2. Replace the templated input channel code
@@ -1049,7 +1049,7 @@ As a reminder, this is what the channel construction looked like (as seen in the
 
 ```groovy title="solutions/composable-hello/main.nf" linenums="10" hl_lines="4"
     // create a channel for inputs from a CSV file
-    greeting_ch = Channel.fromPath(params.greeting)
+    greeting_ch = channel.fromPath(params.greeting)
                         .splitCsv()
                         .map { line -> line[0] }
 ```
@@ -1062,7 +1062,7 @@ So we just need to plug that into the initialisation workflow, with minor change
         //
         // Create channel from input file provided through params.input
         //
-        ch_samplesheet = Channel.fromPath(params.input)
+        ch_samplesheet = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
 

@@ -62,7 +62,7 @@ There are a handful of different channel factories that Nextflow has, to create 
 
 Notice that when I hover over these words in VS Code, the Nextflow extension is giving me a popup explaining what this syntax does, and there's also a read more text at the bottom of that popup window.
 
-If I click that, it'll open the Nextflow docs. In a new tab and take me straight to the documentation for this specific thing. In this case for Channel.of.
+If I click that, it'll open the Nextflow docs. In a new tab and take me straight to the documentation for this specific thing. In this case for channel.of.
 
 ## 1.2. Add the channel as input to the process call
 
@@ -142,7 +142,7 @@ Let's work through this with an example. Let's say that we want to take these in
 
 So I'm going to take these and do that as a new line above and say, greetings, array.
 
-There we go. I'm going to take that array variable and put it into the Channel.of, and hit save.
+There we go. I'm going to take that array variable and put it into the channel.of, and hit save.
 
 ## 3.1.3. Run the workflow
 

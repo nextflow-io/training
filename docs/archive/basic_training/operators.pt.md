@@ -30,7 +30,7 @@ Existem sete grupos de operadores descritos em detalhe na Documentação do Next
     Clique no ícone :material-plus-circle: para ver explicações do código.
 
 ```groovy linenums="1"
-nums = Channel.of(1, 2, 3, 4) // (1)!
+nums = channel.of(1, 2, 3, 4) // (1)!
 quadrados = nums.map { it -> it * it } // (2)!
 quadrados.view() // (3)!
 ```
@@ -127,9 +127,9 @@ Channel
 O operador `mix` combina os itens emitidos por dois (ou mais) canais em um único canal.
 
 ```groovy linenums="1"
-meu_canal_1 = Channel.of(1, 2, 3)
-meu_canal_2 = Channel.of('a', 'b')
-meu_canal_3 = Channel.of('z')
+meu_canal_1 = channel.of(1, 2, 3)
+meu_canal_2 = channel.of('a', 'b')
+meu_canal_3 = channel.of('z')
 
 meu_canal_1
     .mix(meu_canal_2, meu_canal_3)
@@ -234,8 +234,8 @@ O operador `join` cria um canal que combina os itens emitidos por dois canais qu
 em cada item emitido.
 
 ```groovy linenums="1"
-esquerda = Channel.of(['X', 1], ['Y', 2], ['Z', 3], ['P', 7])
-direita = Channel.of(['Z', 6], ['Y', 5], ['X', 4])
+esquerda = channel.of(['X', 1], ['Y', 2], ['Z', 3], ['P', 7])
+direita = channel.of(['Z', 6], ['Y', 5], ['X', 4])
 esquerda.join(direita).view()
 ```
 

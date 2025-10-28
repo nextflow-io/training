@@ -302,7 +302,7 @@ There are [several input qualifiers](https://www.nextflow.io/docs/latest/process
 The `val` qualifier allows you to receive data of any type as input. It can be accessed in the process script by using the specified input name. For example:
 
 ```groovy linenums="1" title="snippet.nf"
-num = Channel.of(1, 2, 3)
+num = channel.of(1, 2, 3)
 
 process BASICEXAMPLE {
     debug true
@@ -338,7 +338,7 @@ process job 3
 The `path` qualifier allows the handling of file values in the process execution context. This means that Nextflow will stage it in the process execution directory, and it can be accessed by the script using the name specified in the input declaration. For example:
 
 ```groovy linenums="1" title="snippet.nf"
-reads = Channel.fromPath('data/ggal/*.fq')
+reads = channel.fromPath('data/ggal/*.fq')
 
 process FOO {
     debug true
@@ -371,7 +371,7 @@ sample.fastq
 The input file name can also be defined using a variable reference as shown below:
 
 ```groovy linenums="1" title="snippet.nf"
-reads = Channel.fromPath('data/ggal/*.fq')
+reads = channel.fromPath('data/ggal/*.fq')
 
 process FOO {
     debug true
@@ -404,7 +404,7 @@ gut_1.fq
 The same syntax is also able to handle more than one input file in the same execution and only requires changing the channel composition using an operator (e.g., `collect`).
 
 ```groovy linenums="1" title="snippet.nf"
-reads = Channel.fromPath('data/ggal/*.fq')
+reads = channel.fromPath('data/ggal/*.fq')
 
 process FOO {
     debug true
@@ -436,7 +436,7 @@ gut_1.fq
 
 !!! warning
 
-    In the past, the `file` qualifier was used for files, but the `path` qualifier should be preferred over file to handle process input files when using Nextflow 19.10.0 or later. When a process declares an input file, the corresponding channel elements must be **file** objects created with the file helper function from the file specific channel factories (e.g., `Channel.fromPath` or `Channel.fromFilePairs`).
+    In the past, the `file` qualifier was used for files, but the `path` qualifier should be preferred over file to handle process input files when using Nextflow 19.10.0 or later. When a process declares an input file, the corresponding channel elements must be **file** objects created with the file helper function from the file specific channel factories (e.g., `channel.fromPath` or `channel.fromFilePairs`).
 
 ### Combine input channels
 
@@ -445,8 +445,8 @@ A key feature of processes is the ability to handle inputs from multiple channel
 Consider the following example:
 
 ```groovy linenums="1" title="snippet.nf"
-ch1 = Channel.of(1, 2, 3)
-ch2 = Channel.of('a', 'b', 'c')
+ch1 = channel.of(1, 2, 3)
+ch2 = channel.of('a', 'b', 'c')
 
 process FOO {
     debug true
@@ -483,8 +483,8 @@ This means channel values are consumed serially one after another and the first 
 What happens when channels do not have the same cardinality (i.e., they emit a different number of elements)?
 
 ```groovy linenums="1" title="snippet.nf"
-ch1 = Channel.of(1, 2, 3)
-ch2 = Channel.of('a')
+ch1 = channel.of(1, 2, 3)
+ch2 = channel.of('a')
 
 process FOO {
     debug true
@@ -513,8 +513,8 @@ In the above example, the process is only executed once because the process stop
 However, replacing `ch2` with a `value` channel will cause the process to be executed three times, each time with the same value of `a`:
 
 ```groovy linenums="1" title="snippet.nf"
-ch1 = Channel.of(1, 2, 3)
-ch2 = Channel.value('a')
+ch1 = channel.of(1, 2, 3)
+ch2 = channel.value('a')
 
 process FOO {
     debug true
@@ -583,7 +583,7 @@ As `ch2` is now a _value_ channel, it can be consumed multiple times and does no
 The `each` qualifier allows you to repeat the execution of a process for each item in a collection every time new data is received. For example:
 
 ```groovy linenums="1" title="snippet.nf"
-sequences = Channel.fromPath("$projectDir/data/ggal/*_1.fq")
+sequences = channel.fromPath("$projectDir/data/ggal/*_1.fq")
 methods = ['regular', 'espresso']
 
 process ALIGNSEQUENCES {
@@ -624,7 +624,7 @@ In the above example, every time a file of sequences is received as an input by 
         Modify the methods list and add another coffee type:
 
         ```groovy linenums="1" title="snippet.nf"
-        sequences = Channel.fromPath("$projectDir/data/ggal/*_1.fq")
+        sequences = channel.fromPath("$projectDir/data/ggal/*_1.fq")
         methods = ['regular', 'espresso', 'cappuccino']
 
         process ALIGNSEQUENCES {
@@ -699,7 +699,7 @@ process FOO {
 }
 
 workflow {
-    FOO(Channel.of(greeting))
+    FOO(channel.of(greeting))
         .view()
 }
 ```
@@ -837,7 +837,7 @@ So far you have seen how to declare multiple input and output channels that can 
 The `input` and `output` declarations for tuples must be declared with a `tuple` qualifier followed by the definition of each element in the tuple.
 
 ```groovy linenums="1" title="snippet.nf"
-reads_ch = Channel.fromFilePairs('data/ggal/*_{1,2}.fq')
+reads_ch = channel.fromFilePairs('data/ggal/*_{1,2}.fq')
 
 process FOO {
     input:
@@ -873,7 +873,7 @@ The output will looks something like this:
     ??? solution
 
         ```groovy linenums="1" title="snippet.nf"
-        reads_ch = Channel.fromFilePairs('data/ggal/*_{1,2}.fq')
+        reads_ch = channel.fromFilePairs('data/ggal/*_{1,2}.fq')
 
         process FOO {
             input:
@@ -901,7 +901,7 @@ Nextflow allows the use of alternative output definitions within workflows to si
 You can also explicitly define the output of a channel using the `.out` attribute:
 
 ```groovy linenums="1" title="snippet.nf"
-reads_ch = Channel.fromFilePairs('data/ggal/*_{1,2}.fq')
+reads_ch = channel.fromFilePairs('data/ggal/*_{1,2}.fq')
 
 process FOO {
     input:
@@ -929,7 +929,7 @@ This command will produce an error message, because `.view()` operates on single
 If a process defines two or more output channels, each channel can be accessed by indexing the `.out` attribute, e.g., `.out[0]`, `.out[1]`, etc. In this example you only have the `[0]'th` output:
 
 ```groovy linenums="1" title="snippet.nf"
-reads_ch = Channel.fromFilePairs('data/ggal/*_{1,2}.fq')
+reads_ch = channel.fromFilePairs('data/ggal/*_{1,2}.fq')
 
 process FOO {
     input:
@@ -955,7 +955,7 @@ workflow {
 Alternatively, the process `output` definition allows the use of the `emit` statement to define a named identifier that can be used to reference the channel in the external scope.
 
 ```groovy linenums="1" title="snippet.nf"
-reads_ch = Channel.fromFilePairs('data/ggal/*_{1,2}.fq')
+reads_ch = channel.fromFilePairs('data/ggal/*_{1,2}.fq')
 
 process FOO {
     input:
@@ -987,7 +987,7 @@ workflow {
         Your workflow will look something like this:
 
         ```groovy linenums="1" title="snippet.nf"
-        reads_ch = Channel.fromFilePairs('data/ggal/*_{1,2}.fq')
+        reads_ch = channel.fromFilePairs('data/ggal/*_{1,2}.fq')
 
         process FOO {
             input:
@@ -1035,7 +1035,7 @@ It is useful to enable/disable the process execution depending on the state of v
 ```groovy linenums="1" title="snippet.nf"
 params.dbtype = 'nr'
 params.prot = 'data/prots/*.tfa'
-proteins = Channel.fromPath(params.prot)
+proteins = channel.fromPath(params.prot)
 
 process FIND {
     debug true
@@ -1121,7 +1121,7 @@ Given each task is being executed in separate temporary `work/` folder (e.g., `w
 To store our workflow result files, you need to explicitly mark them using the directive [publishDir](https://www.nextflow.io/docs/latest/process.html#publishdir) in the process that’s creating the files. For example:
 
 ```groovy linenums="1" title="snippet.nf"
-reads_ch = Channel.fromFilePairs('data/ggal/*_{1,2}.fq')
+reads_ch = channel.fromFilePairs('data/ggal/*_{1,2}.fq')
 
 process FOO {
     publishDir "results", pattern: "*.bam"
@@ -1154,7 +1154,7 @@ The above example will copy all BAM files created by the `FOO` process into the 
 You can use more than one `publishDir` to keep different outputs in separate directories. For example:
 
 ```groovy linenums="1" title="snippet.nf"
-reads_ch = Channel.fromFilePairs('data/ggal/*_{1,2}.fq')
+reads_ch = channel.fromFilePairs('data/ggal/*_{1,2}.fq')
 
 process FOO {
     publishDir "results/bam", pattern: "*.bam"
@@ -1188,7 +1188,7 @@ workflow {
         Your solution could look something like this:
 
         ```groovy linenums="1" title="snippet.nf"
-        reads_ch = Channel.fromFilePairs('data/ggal/*_{1,2}.fq')
+        reads_ch = channel.fromFilePairs('data/ggal/*_{1,2}.fq')
 
         process FOO {
             publishDir "results/$sample_id", pattern: "*.{bam,bai}"

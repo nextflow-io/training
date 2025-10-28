@@ -31,7 +31,7 @@ Um canal de _fila_ é uma fila assíncrona unidirecional FIFO (First-in-First-ou
 - _unidirecional_ significa que os dados fluem do gerador para o consumidor.
 - _FIFO_ significa que os dados são entregues na mesma ordem em que são produzidos. Primeiro a entrar, primeiro a sair.
 
-Um canal de fila é criado implicitamente por definições de saída de um processo ou usando fábricas de canal, como o [Channel.of](https://www.nextflow.io/docs/latest/channel.html#of) ou [Channel.fromPath](https://www.nextflow.io/docs/latest/channel.html#frompath).
+Um canal de fila é criado implicitamente por definições de saída de um processo ou usando fábricas de canal, como o [channel.of](https://www.nextflow.io/docs/latest/channel.html#of) ou [channel.fromPath](https://www.nextflow.io/docs/latest/channel.html#frompath).
 
 Tente os seguintes trechos de código:
 
@@ -40,7 +40,7 @@ Tente os seguintes trechos de código:
     Clique no ícone :material-plus-circle: no código para ver explicações.
 
 ```groovy linenums="1"
-canal = Channel.of(1, 2, 3)
+canal = channel.of(1, 2, 3)
 println(canal) // (1)!
 canal.view() // (2)!
 ```
@@ -53,7 +53,7 @@ canal.view() // (2)!
     Tente executar este trecho de código. Você pode fazer isso criando um novo arquivo `.nf` ou editando um arquivo `.nf` já existente.
 
     ```groovy linenums="1"
-    canal = Channel.of(1, 2, 3)
+    canal = channel.of(1, 2, 3)
     canal.view()
     ```
 
@@ -64,8 +64,8 @@ Um canal de **valor** (também conhecido como canal singleton), por definição,
 Para entender melhor a diferença entre canais de valor e de fila, salve o trecho abaixo como `exemplo.nf`.
 
 ```groovy linenums="1" title="exemplo.nf" linenums="1"
-canal1 = Channel.of(1, 2, 3)
-canal2 = Channel.of(1)
+canal1 = channel.of(1, 2, 3)
+canal2 = channel.of(1)
 
 process SUM {
     input:
@@ -94,11 +94,11 @@ Ao rodar o script, ele imprime apenas 2, como você pode ver abaixo:
 
 Um processo só instanciará uma tarefa quando houver elementos a serem consumidos de _todos_ os canais fornecidos como entrada para ele. Como `canal1` e `canal2` são canais de fila, e o único elemento de `canal2` foi consumido, nenhuma nova instância de processo será iniciada, mesmo se houver outros elementos a serem consumidos em `canal1`.
 
-Para usar o único elemento em `canal2` várias vezes, podemos usar `Channel.value` como mencionado acima, ou usar um operador de canal que retorna um único elemento como `first()` abaixo:
+Para usar o único elemento em `canal2` várias vezes, podemos usar `channel.value` como mencionado acima, ou usar um operador de canal que retorna um único elemento como `first()` abaixo:
 
 ```groovy linenums="1"
-canal1 = Channel.of(1, 2, 3)
-canal2 = Channel.of(1)
+canal1 = channel.of(1, 2, 3)
+canal2 = channel.of(1)
 
 process SUM {
     input:
@@ -138,9 +138,9 @@ Estes são comandos do Nextflow para criar canais que possuem entradas e funçõ
 A fábrica de canal `value` é utilizada para criar um canal de _valor_. Um argumento opcional não `nulo` pode ser especificado para vincular o canal a um valor específico. Por exemplo:
 
 ```groovy linenums="1"
-canal1 = Channel.value() // (1)!
-canal2 = Channel.value('Olá, você!') // (2)!
-canal3 = Channel.value([1, 2, 3, 4, 5]) // (3)!
+canal1 = channel.value() // (1)!
+canal2 = channel.value('Olá, você!') // (2)!
+canal3 = channel.value([1, 2, 3, 4, 5]) // (3)!
 ```
 
 1. Cria um canal de valor _vazio_
@@ -149,10 +149,10 @@ canal3 = Channel.value([1, 2, 3, 4, 5]) // (3)!
 
 ### `of()`
 
-A fábrica `Channel.of` permite a criação de um canal de fila com os valores especificados como argumentos.
+A fábrica `channel.of` permite a criação de um canal de fila com os valores especificados como argumentos.
 
 ```groovy linenums="1"
-canal = Channel.of(1, 3, 5, 7)
+canal = channel.of(1, 3, 5, 7)
 canal.view { "numero: $it" }
 ```
 
@@ -165,7 +165,7 @@ numero: 5
 numero: 7
 ```
 
-A fábrica de canal `Channel.of` funciona de maneira semelhante ao `Channel.from` (que foi [descontinuado](https://www.nextflow.io/docs/latest/channel.html#of)), corrigindo alguns comportamentos inconsistentes do último e fornecendo um melhor manuseio quando um intervalo de valores é especificado. Por exemplo, o seguinte funciona com um intervalo de 1 a 23:
+A fábrica de canal `channel.of` funciona de maneira semelhante ao `channel.from` (que foi [descontinuado](https://www.nextflow.io/docs/latest/channel.html#of)), corrigindo alguns comportamentos inconsistentes do último e fornecendo um melhor manuseio quando um intervalo de valores é especificado. Por exemplo, o seguinte funciona com um intervalo de 1 a 23:
 
 ```groovy linenums="1"
 Channel
@@ -175,7 +175,7 @@ Channel
 
 ### `fromList()`
 
-A fábrica de canal `Channel.fromList` cria um canal emitindo os elementos fornecidos por um objeto de lista especificado como um argumento:
+A fábrica de canal `channel.fromList` cria um canal emitindo os elementos fornecidos por um objeto de lista especificado como um argumento:
 
 ```groovy linenums="1"
 list = ['olá', 'mundo']
@@ -190,7 +190,7 @@ Channel
 A fábrica de canal `fromPath` cria um canal de fila emitindo um ou mais arquivos correspondentes ao padrão glob especificado.
 
 ```groovy linenums="1"
-Channel.fromPath('./data/meta/*.csv')
+channel.fromPath('./data/meta/*.csv')
 ```
 
 Este exemplo cria um canal e emite tantos itens quanto arquivos com extensão `csv` existirem na pasta `./data/meta`. Cada elemento é um objeto de arquivo implementando a interface [Path](https://docs.oracle.com/javase/8/docs/api/java/nio/file/Paths.html) do Java.
@@ -213,7 +213,7 @@ Saiba mais sobre a sintaxe dos padrões glob [neste link](https://docs.oracle.co
 
 !!! exercise
 
-    Use a fábrica de canal `Channel.fromPath` para criar um canal emitindo todos os arquivos com o sufixo `.fq` no diretório `data/ggal/` e qualquer subdiretório, além dos arquivos ocultos. Em seguida, imprima os nomes dos arquivos.
+    Use a fábrica de canal `channel.fromPath` para criar um canal emitindo todos os arquivos com o sufixo `.fq` no diretório `data/ggal/` e qualquer subdiretório, além dos arquivos ocultos. Em seguida, imprima os nomes dos arquivos.
 
     ??? solution
 
@@ -273,7 +273,7 @@ Ele produzirá uma saída semelhante à seguinte:
 
 ### `fromSRA()`
 
-A fábrica de canal `Channel.fromSRA` permite consultar o banco de dados [NCBI SRA](https://www.ncbi.nlm.nih.gov/sra) e retorna um canal que emite os arquivos FASTQ correspondentes aos critérios de seleção especificados.
+A fábrica de canal `channel.fromSRA` permite consultar o banco de dados [NCBI SRA](https://www.ncbi.nlm.nih.gov/sra) e retorna um canal que emite os arquivos FASTQ correspondentes aos critérios de seleção especificados.
 
 A consulta pode ser ID(s) de projeto(s) ou número(s) de acesso suportado(s) pela API do [NCBI ESearch](https://www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.ESearch).
 
@@ -357,7 +357,7 @@ process FASTQC {
 }
 
 workflow {
-    leituras = Channel.fromSRA(params.accession, apiKey: params.ncbi_chave_api)
+    leituras = channel.fromSRA(params.accession, apiKey: params.ncbi_chave_api)
     FASTQC(leituras)
 }
 ```

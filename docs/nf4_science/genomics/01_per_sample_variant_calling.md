@@ -228,7 +228,7 @@ In the `workflow` block, we need to set up a **channel** to feed the input to th
 workflow {
 
     // Create input channel (single file via CLI parameter)
-    reads_ch = Channel.fromPath(params.reads_bam)
+    reads_ch = channel.fromPath(params.reads_bam)
 
     // Create index file for input BAM file
     SAMTOOLS_INDEX(reads_ch)
@@ -763,14 +763,14 @@ _Before:_
 
 ```groovy title="genomics-1.nf" linenums="68"
 // Create input channel (single file via CLI parameter)
-reads_ch = Channel.fromPath(params.reads_bam)
+reads_ch = channel.fromPath(params.reads_bam)
 ```
 
 _After:_
 
 ```groovy title="genomics-1.nf" linenums="68"
 // Create input channel from a text file listing input file paths
-reads_ch = Channel.fromPath(params.reads_bam).splitText()
+reads_ch = channel.fromPath(params.reads_bam).splitText()
 ```
 
 !!! tip

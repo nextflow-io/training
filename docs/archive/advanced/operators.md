@@ -10,7 +10,7 @@ Map is certainly the most commonly used of the operators covered here. It's a wa
 
 ```groovy linenums="1"
 workflow {
-    Channel.of( 1, 2, 3, 4, 5 )
+    channel.of( 1, 2, 3, 4, 5 )
         .map { num -> num * num }
         .view()
 }
@@ -31,7 +31,7 @@ Groovy is an optionally typed language, and it is possible to specify the type o
 
 ```groovy linenums="1" hl_lines="3"
 workflow {
-    Channel.of( 1, 2, 3, 4, 5 )
+    channel.of( 1, 2, 3, 4, 5 )
         .map { Integer num -> num * num }
         .view()
 }
@@ -45,7 +45,7 @@ If you find yourself re-using the same closure multiple times in your pipeline, 
 workflow {
     def squareIt = { Integer num -> num * num }
 
-    Channel.of( 1, 2, 3, 4, 5 )
+    channel.of( 1, 2, 3, 4, 5 )
         .map( squareIt )
         .view()
 }
@@ -58,7 +58,7 @@ workflow {
     def squareIt = { num -> num * num }
     def addTwo = { num -> num + 2 }
 
-    Channel.of( 1, 2, 3, 4, 5 )
+    channel.of( 1, 2, 3, 4, 5 )
         .map( squareIt >> addTwo )
         .view()
 }
@@ -81,7 +81,7 @@ workflow {
     def squareIt = { num -> num * num }
     def addTwo = { num -> num + 2 }
 
-    Channel.of( 1, 2, 3, 4, 5 )
+    channel.of( 1, 2, 3, 4, 5 )
         .map( squareIt )
         .map( addTwo )
         .view()
@@ -95,7 +95,7 @@ workflow {
     def timesN = { multiplier, num -> num * multiplier }
     def timesTen = timesN.curry(10)
 
-    Channel.of( 1, 2, 3, 4, 5 )
+    channel.of( 1, 2, 3, 4, 5 )
         .map( timesTen )
         .view()
 }
@@ -110,7 +110,7 @@ workflow {
     def timesN = { multiplier, num -> num * multiplier }
     def timesTen = timesN.curry(10)
 
-    Channel.of( 1, 2, 3, 4, 5 )
+    channel.of( 1, 2, 3, 4, 5 )
         .map( timesTen )
         .view { value -> "Found '$value' (${value.getClass()})"}
 }
@@ -126,7 +126,7 @@ A common Nextflow pattern is for a simple samplesheet to be passed as primary in
 
 ```groovy linenums="1" hl_lines="2"
 workflow {
-    Channel.fromPath("data/samplesheet.csv")
+    channel.fromPath("data/samplesheet.csv")
         .splitCsv( header: true )
         .view()
 }
@@ -148,7 +148,7 @@ workflow {
 
         ```groovy linenums="1" hl_lines="4-6"
         workflow {
-            Channel.fromPath("data/samplesheet.csv")
+            channel.fromPath("data/samplesheet.csv")
                 .splitCsv( header: true )
                 .map { row ->
                     [row.id, [file(row.fastq1), file(row.fastq2)]]
@@ -167,7 +167,7 @@ workflow {
 
         ```groovy linenums="1" hl_lines="4-7"
         workflow {
-            Channel.fromPath("data/samplesheet.csv")
+            channel.fromPath("data/samplesheet.csv")
                 .splitCsv( header: true )
                 .map { row ->
                     def metaMap = [id: row.id, type: row.type, repeat: row.repeat]
@@ -194,7 +194,7 @@ Using the `splitCsv` operator would give us one entry that would contain all fou
 
 ```groovy linenums="1" hl_lines="4-11"
 workflow {
-    Channel.fromPath("data/samplesheet.ugly.csv")
+    channel.fromPath("data/samplesheet.ugly.csv")
         .splitCsv( header: true )
         .multiMap { row ->
             tumor:
@@ -223,7 +223,7 @@ In the example above, the `multiMap` operator was necessary because we were supp
 
 ```groovy linenums="1" hl_lines="5-8"
 workflow {
-    Channel.fromPath("data/samplesheet.csv")
+    channel.fromPath("data/samplesheet.csv")
         .splitCsv( header: true )
         .map { row -> [[id: row.id, repeat: row.repeat, type: row.type], [file(row.fastq1), file(row.fastq2)]] }
         .branch { meta, _reads ->
@@ -284,7 +284,7 @@ Certain Nextflow operators, such as `multiMap` and `branch`, return special obje
 
 ```groovy linenums="1" hl_lines="3-6"
 workflow {
-    numbers = Channel.of( 1, 2, 3, 4, 5 )
+    numbers = channel.of( 1, 2, 3, 4, 5 )
         .multiMap { num ->
             small: num
             large: num * 10
@@ -316,7 +316,7 @@ The following will be kept synchronous, allowing you to supply multiple channel 
 
 ```groovy linenums="11" hl_lines="8"
 workflow {
-    numbers = Channel.of( 1, 2, 3, 4, 5 )
+    numbers = channel.of( 1, 2, 3, 4, 5 )
         .multiMap { num ->
             small: num
             large: num * 10
@@ -344,7 +344,7 @@ A common operation is to group elements from a _single_ channel where those elem
 
 ```groovy linenums="1" hl_lines="6"
 workflow {
-    Channel.fromPath("data/samplesheet.csv")
+    channel.fromPath("data/samplesheet.csv")
         .splitCsv(header: true)
         .map { row ->
             def meta = [id: row.id, type: row.type]
@@ -360,7 +360,7 @@ The `groupTuple` operator allows us to combine elements that share a common key:
 
 ```groovy linenums="1" hl_lines="8"
 workflow {
-    Channel.fromPath("data/samplesheet.csv")
+    channel.fromPath("data/samplesheet.csv")
         .splitCsv(header: true)
         .map { row ->
             def meta = [id: row.id, type: row.type]
@@ -379,7 +379,7 @@ Given a workflow that returns one element per sample, where we have grouped the 
 
 ```groovy linenums="1"
 workflow {
-    Channel.fromPath("data/samplesheet.csv")
+    channel.fromPath("data/samplesheet.csv")
         .splitCsv(header: true)
         .map { row ->
             def meta = [id: row.id, type: row.type]
@@ -405,7 +405,7 @@ If we add in a `transpose`, each repeat number is matched back to the appropriat
 
 ```groovy linenums="1" hl_lines="9"
 workflow {
-    Channel.fromPath("data/samplesheet.csv")
+    channel.fromPath("data/samplesheet.csv")
         .splitCsv(header: true)
         .map { row ->
             def meta = [id: row.id, type: row.type]
@@ -436,7 +436,7 @@ As the name suggests, the `flatMap` operator allows you to modify the elements i
 
 ```groovy linenums="1" hl_lines="5"
 workflow {
-    numbers = Channel.of(1, 2)
+    numbers = channel.of(1, 2)
 
     numbers
         .flatMap { n -> [ n, n*10, n*100 ] }
@@ -461,7 +461,7 @@ The input channel has two elements. For each element in the input channel, we re
 
     ```
     workflow {
-        numbers = Channel.of(1, 2)
+        numbers = channel.of(1, 2)
 
         numbers
             .flatMap { n -> [ n, [n*10, n*100] ] }
@@ -484,7 +484,7 @@ The input channel has two elements. For each element in the input channel, we re
 
     ```groovy linenums="1" hl_lines="3-4"
     workflow {
-        Channel.fromPath("data/datfiles/sample*/*.dat", checkIfExists: true)
+        channel.fromPath("data/datfiles/sample*/*.dat", checkIfExists: true)
             .map { myfile -> [myfile.getParent().name, myfile] }
             .groupTuple()
             .view()
@@ -519,7 +519,7 @@ The input channel has two elements. For each element in the input channel, we re
 
         ```groovy linenums="1" hl_lines="6-11"
         workflow {
-            Channel.fromPath("data/datfiles/sample*/*.dat", checkIfExists: true)
+            channel.fromPath("data/datfiles/sample*/*.dat", checkIfExists: true)
                 .map { myfile -> [myfile.getParent().name, myfile] }
                 .groupTuple()
                 .flatMap { id, files ->
@@ -542,7 +542,7 @@ At its most basic, this operator writes the contents of the elements of a channe
 
 ```groovy linenums="1"
 workflow {
-    characters = Channel.of(
+    characters = channel.of(
         ['name': 'Jake', 'title': 'Detective'],
         ['name': 'Rosa', 'title': 'Detective'],
         ['name': 'Terry', 'title': 'Sergeant'],
@@ -632,7 +632,7 @@ process WriteBio {
 }
 
 workflow {
-    characters = Channel.of(
+    characters = channel.of(
         ['name': 'Jake', 'title': 'Detective'],
         ['name': 'Rosa', 'title': 'Detective'],
         ['name': 'Terry', 'title': 'Sergeant'],

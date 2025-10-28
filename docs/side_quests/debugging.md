@@ -150,7 +150,7 @@ process PROCESS_FILES {
 workflow {
 
     // Create input channel
-    input_ch = Channel.of('sample1', 'sample2', 'sample3')
+    input_ch = channel.of('sample1', 'sample2', 'sample3')
 
     // Call the process with the input channel
     PROCESS_FILES(input_ch)
@@ -192,7 +192,7 @@ Replace the comment with the missing closing brace:
     workflow {
 
         // Create input channel
-        input_ch = Channel.of('sample1', 'sample2', 'sample3')
+        input_ch = channel.of('sample1', 'sample2', 'sample3')
 
         // Call the process with the input channel
         PROCESS_FILES(input_ch)
@@ -220,7 +220,7 @@ Replace the comment with the missing closing brace:
     workflow {
 
         // Create input channel
-        input_ch = Channel.of('sample1', 'sample2', 'sample3')
+        input_ch = channel.of('sample1', 'sample2', 'sample3')
 
         // Call the process with the input channel
         PROCESS_FILES(input_ch)
@@ -287,7 +287,7 @@ process PROCESS_FILES {
 workflow {
 
     // Create input channel
-    input_ch = Channel.of('sample1', 'sample2', 'sample3')
+    input_ch = channel.of('sample1', 'sample2', 'sample3')
 
     // Call the process with the input channel
     PROCESS_FILES(input_ch)
@@ -323,7 +323,7 @@ Replace the incorrect keyword with the correct one by referencing [the documenta
     workflow {
 
         // Create input channel
-        input_ch = Channel.of('sample1', 'sample2', 'sample3')
+        input_ch = channel.of('sample1', 'sample2', 'sample3')
 
         // Call the process with the input channel
         PROCESS_FILES(input_ch)
@@ -351,7 +351,7 @@ Replace the incorrect keyword with the correct one by referencing [the documenta
     workflow {
 
         // Create input channel
-        input_ch = Channel.of('sample1', 'sample2', 'sample3')
+        input_ch = channel.of('sample1', 'sample2', 'sample3')
 
         // Call the process with the input channel
         PROCESS_FILES(input_ch)
@@ -424,7 +424,7 @@ process PROCESS_FILES {
 }
 
 workflow {
-    input_ch = Channel.of('sample1', 'sample2', 'sample3')
+    input_ch = channel.of('sample1', 'sample2', 'sample3')
     PROCESS_FILES(input_ch)
 }
 ```
@@ -458,7 +458,7 @@ If you get a 'No such variable' error, you can fix it by either defining the var
     }
 
     workflow {
-        input_ch = Channel.of('sample1', 'sample2', 'sample3')
+        input_ch = channel.of('sample1', 'sample2', 'sample3')
         PROCESS_FILES(input_ch)
     }
     ```
@@ -487,7 +487,7 @@ If you get a 'No such variable' error, you can fix it by either defining the var
     }
 
     workflow {
-        input_ch = Channel.of('sample1', 'sample2', 'sample3')
+        input_ch = channel.of('sample1', 'sample2', 'sample3')
         PROCESS_FILES(input_ch)
     }
     ```
@@ -568,7 +568,7 @@ If you want to use a Bash variable, you must escape the dollar sign like this:
     }
 
     workflow {
-        input_ch = Channel.of('sample1', 'sample2', 'sample3')
+        input_ch = channel.of('sample1', 'sample2', 'sample3')
         PROCESS_FILES(input_ch)
     }
     ```
@@ -646,7 +646,7 @@ Let's examine `badpractice_syntax.nf` to see what the VSCode extension is warnin
 ```groovy title="badpractice_syntax.nf" hl_lines="3" linenums="1"
 #!/usr/bin/env nextflow
 
-input_ch = Channel.of('sample1', 'sample2', 'sample3')  # WARNING: Channel defined outside workflow
+input_ch = channel.of('sample1', 'sample2', 'sample3')  # WARNING: Channel defined outside workflow
 
 process PROCESS_FILES {
     input:
@@ -703,7 +703,7 @@ Follow the VSCode extension's recommendation by moving the channel definition in
     }
 
     workflow {
-        input_ch = Channel.of('sample1', 'sample2', 'sample3')  # Moved inside workflow block
+        input_ch = channel.of('sample1', 'sample2', 'sample3')  # Moved inside workflow block
         PROCESS_FILES(input_ch)
     }
     ```
@@ -713,7 +713,7 @@ Follow the VSCode extension's recommendation by moving the channel definition in
     ```groovy title="badpractice_syntax.nf" hl_lines="3" linenums="1"
     #!/usr/bin/env nextflow
 
-    input_ch = Channel.of('sample1', 'sample2', 'sample3')  # WARNING: Channel defined outside workflow
+    input_ch = channel.of('sample1', 'sample2', 'sample3')  # WARNING: Channel defined outside workflow
 
     process PROCESS_FILES {
         input:
@@ -812,8 +812,8 @@ process PROCESS_FILES {
 workflow {
 
     // Create two separate channels
-    samples_ch = Channel.of('sample1', 'sample2', 'sample3')
-    files_ch = Channel.of('file1.txt', 'file2.txt', 'file3.txt')
+    samples_ch = channel.of('sample1', 'sample2', 'sample3')
+    files_ch = channel.of('file1.txt', 'file2.txt', 'file3.txt')
 
     // ERROR: Passing 2 channels but process expects only 1
     PROCESS_FILES(samples_ch, files_ch)
@@ -849,8 +849,8 @@ For this specific example, the process expects a single channel and doesn't requ
     workflow {
 
         // Create two separate channels
-        samples_ch = Channel.of('sample1', 'sample2', 'sample3')
-        files_ch = Channel.of('file1.txt', 'file2.txt', 'file3.txt')
+        samples_ch = channel.of('sample1', 'sample2', 'sample3')
+        files_ch = channel.of('file1.txt', 'file2.txt', 'file3.txt')
 
         // Fixed: Pass only the channel the process expects
         PROCESS_FILES(samples_ch)
@@ -878,8 +878,8 @@ For this specific example, the process expects a single channel and doesn't requ
     workflow {
 
         // Create two separate channels
-        samples_ch = Channel.of('sample1', 'sample2', 'sample3')
-        files_ch = Channel.of('file1.txt', 'file2.txt', 'file3.txt')
+        samples_ch = channel.of('sample1', 'sample2', 'sample3')
+        files_ch = channel.of('file1.txt', 'file2.txt', 'file3.txt')
 
         // ERROR: Passing 2 channels but process expects only 1
         PROCESS_FILES(samples_ch, files_ch)
@@ -942,8 +942,8 @@ process PROCESS_FILES {
 
 workflow {
 
-    reference_ch = Channel.of('baseline_reference')
-    input_ch = Channel.of('sample1', 'sample2', 'sample3')
+    reference_ch = channel.of('baseline_reference')
+    input_ch = channel.of('sample1', 'sample2', 'sample3')
 
     PROCESS_FILES(reference_ch, input_ch)
 }
@@ -959,12 +959,12 @@ There are a couple of ways to address this depending on how many files are affec
 
 **Option 1**: You have a single reference file that you are re-using a lot. You can simply create a value channel type, which can be used over and over again. There are three ways to do this:
 
-**1.** Use `Channel.value()`:
+**1.** Use `channel.value()`:
 
 ```groovy title="exhausted.nf (fixed - Option 1a)" hl_lines="2" linenums="21"
 workflow {
-    reference_ch = Channel.value('baseline_reference')  // Value channel can be reused
-    input_ch = Channel.of('sample1', 'sample2', 'sample3')
+    reference_ch = channel.value('baseline_reference')  // Value channel can be reused
+    input_ch = channel.of('sample1', 'sample2', 'sample3')
 
     PROCESS_FILES(reference_ch, input_ch)
 }
@@ -974,8 +974,8 @@ workflow {
 
 ```groovy title="exhausted.nf (fixed - Option 1b)" hl_lines="2" linenums="21"
 workflow {
-    reference_ch = Channel.of('baseline_reference').first()  // Convert to value channel
-    input_ch = Channel.of('sample1', 'sample2', 'sample3')
+    reference_ch = channel.of('baseline_reference').first()  // Convert to value channel
+    input_ch = channel.of('sample1', 'sample2', 'sample3')
 
     PROCESS_FILES(reference_ch, input_ch)
 }
@@ -985,8 +985,8 @@ workflow {
 
 ```groovy title="exhausted.nf (fixed - Option 1c)" hl_lines="2" linenums="21"
 workflow {
-    reference_ch = Channel.of('baseline_reference').collect()  // Convert to value channel
-    input_ch = Channel.of('sample1', 'sample2', 'sample3')
+    reference_ch = channel.of('baseline_reference').collect()  // Convert to value channel
+    input_ch = channel.of('sample1', 'sample2', 'sample3')
 
     PROCESS_FILES(reference_ch, input_ch)
 }
@@ -996,8 +996,8 @@ workflow {
 
 ```groovy title="exhausted.nf (fixed - Option 2)" hl_lines="4" linenums="21"
 workflow {
-    reference_ch = Channel.of('baseline_reference')
-    input_ch = Channel.of('sample1', 'sample2', 'sample3')
+    reference_ch = channel.of('baseline_reference')
+    input_ch = channel.of('sample1', 'sample2', 'sample3')
     combined_ch = reference_ch.combine(input_ch)  // Creates cartesian product
 
     PROCESS_FILES(combined_ch)
@@ -1083,7 +1083,7 @@ process PROCESS_FILES {
 workflow {
 
     // Channel emits tuples, but process expects single values
-    input_ch = Channel.of(
+    input_ch = channel.of(
       ['sample1', 'file1.txt'],
       ['sample2', 'file2.txt'],
       ['sample3', 'file3.txt']
@@ -1121,7 +1121,7 @@ To fix this, if the process requires both inputs we could adjust the process to 
         workflow {
 
             // Channel emits tuples, but process expects single values
-            input_ch = Channel.of(
+            input_ch = channel.of(
               ['sample1', 'file1.txt'],
               ['sample2', 'file2.txt'],
               ['sample3', 'file3.txt']
@@ -1151,7 +1151,7 @@ To fix this, if the process requires both inputs we could adjust the process to 
         workflow {
 
             // Channel emits tuples, but process expects single values
-            input_ch = Channel.of(
+            input_ch = channel.of(
               ['sample1', 'file1.txt'],
               ['sample2', 'file2.txt'],
               ['sample3', 'file3.txt']
@@ -1168,7 +1168,7 @@ To fix this, if the process requires both inputs we could adjust the process to 
         workflow {
 
             // Channel emits tuples, but process expects single values
-            input_ch = Channel.of(
+            input_ch = channel.of(
               ['sample1', 'file1.txt'],
               ['sample2', 'file2.txt'],
               ['sample3', 'file3.txt']
@@ -1183,7 +1183,7 @@ To fix this, if the process requires both inputs we could adjust the process to 
         workflow {
 
             // Channel emits tuples, but process expects single values
-            input_ch = Channel.of(
+            input_ch = channel.of(
               ['sample1', 'file1.txt'],
               ['sample2', 'file2.txt'],
               ['sample3', 'file3.txt']
@@ -1239,7 +1239,7 @@ Let's examine `bad_channel_shape_viewed.nf` to see how `.view()` is used:
 workflow {
 
     // Channel emits tuples, but process expects single values
-    input_ch = Channel.of(
+    input_ch = channel.of(
       ['sample1', 'file1.txt'],
       ['sample2', 'file2.txt'],
       ['sample3', 'file3.txt']
@@ -1260,7 +1260,7 @@ To save you from using `.view()` operations excessively in future to understand 
 workflow {
 
     // Channel emits tuples, but process expects single values
-    input_ch = Channel.of(
+    input_ch = channel.of(
             ['sample1', 'file1.txt'],
             ['sample2', 'file2.txt'],
             ['sample3', 'file3.txt'],
@@ -2153,7 +2153,7 @@ Now it's time to put the systematic debugging approach into practice. The workfl
 
         **Error 10: Output File Name Mismatch**
         ```groovy linenums="88"
-        file_ch = Channel.fromPath("*.txt") // Error: attempting to take input from the pwd rather than a process
+        file_ch = channel.fromPath("*.txt") // Error: attempting to take input from the pwd rather than a process
         handleFiles(file_ch)
         ```
         **Fix:** Take the output from the previous process

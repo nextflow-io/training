@@ -25,7 +25,7 @@ A **queue** channel is an _asynchronous_ unidirectional _FIFO_ queue that connec
 - _unidirectional_ means that data flows from a producer to a consumer.
 - _FIFO_ means that the data is guaranteed to be delivered in the same order as it is produced. First In, First Out.
 
-A queue channel is implicitly created by process output definitions or using channel factories such as [Channel.of](https://www.nextflow.io/docs/latest/channel.html#of) or [Channel.fromPath](https://www.nextflow.io/docs/latest/channel.html#frompath).
+A queue channel is implicitly created by process output definitions or using channel factories such as [channel.of](https://www.nextflow.io/docs/latest/channel.html#of) or [channel.fromPath](https://www.nextflow.io/docs/latest/channel.html#frompath).
 
 Try the following snippets:
 
@@ -34,7 +34,7 @@ Try the following snippets:
     Click the :material-plus-circle: icons in the code for explanations.
 
 ```groovy linenums="1" title="snippet.nf"
-ch = Channel.of(1, 2, 3)
+ch = channel.of(1, 2, 3)
 ch.view() // (1)!
 ```
 
@@ -67,8 +67,8 @@ A **value** channel (a.k.a. a singleton channel) is bound to a single value and 
 To see the difference between value and queue channels, you can modify `snippet.nf` to the following:
 
 ```groovy linenums="1" title="snippet.nf"
-ch1 = Channel.of(1, 2, 3)
-ch2 = Channel.of(1)
+ch1 = channel.of(1, 2, 3)
+ch2 = channel.of(1)
 
 process SUM {
     input:
@@ -99,11 +99,11 @@ When you run this script, it only prints `2`, as you can see below:
 
 A process will only instantiate a task when there are elements to be consumed from _all_ the channels provided as input to it. Because `ch1` and `ch2` are queue channels, and the single element of `ch2` has been consumed, no new process instances will be launched, even if there are other elements to be consumed in `ch1`.
 
-To use the single element in `ch2` multiple times, you can either use the `Channel.value` channel factory, or use a channel operator that returns a single element, such as `first()`:
+To use the single element in `ch2` multiple times, you can either use the `channel.value` channel factory, or use a channel operator that returns a single element, such as `first()`:
 
 ```groovy linenums="1" title="snippet.nf"
-ch1 = Channel.of(1, 2, 3)
-ch2 = Channel.value(1)
+ch1 = channel.of(1, 2, 3)
+ch2 = channel.value(1)
 
 process SUM {
     input:
@@ -135,7 +135,7 @@ In many situations, Nextflow will implicitly convert variables to value channels
 For example, when you invoke a process with a workflow parameter (`params.ch2`) which has a string value, it is automatically cast into a value channel:
 
 ```groovy linenums="1" title="snippet.nf"
-ch1 = Channel.of(1, 2, 3)
+ch1 = channel.of(1, 2, 3)
 params.ch2 = "1"
 
 process SUM {
@@ -170,8 +170,8 @@ As you can see, the output is the same as the previous example when the `first()
     Use the `.first()` operator to create a value channel from `ch2` so that all 3 elements of `ch1` are consumed.
 
     ```groovy linenums="1" title="snippet.nf"
-    ch1 = Channel.of(1, 2, 3)
-    ch2 = Channel.of(1)
+    ch1 = channel.of(1, 2, 3)
+    ch2 = channel.of(1)
 
     process SUM {
         input:
@@ -215,16 +215,16 @@ Channel factories are Nextflow commands for creating channels that have implicit
 
 !!! tip
 
-    New in version 20.07.0: channel was introduced as an alias of Channel, allowing factory methods to be specified as `channel.of()` or `Channel.of()`, and so on.
+    New in version 20.07.0: channel was introduced as an alias of Channel, allowing factory methods to be specified as `channel.of()` or `channel.of()`, and so on.
 
 ### `value()`
 
 The `value` channel factory is used to create a _value_ channel. An optional not `null` argument can be specified to bind the channel to a specific value. For example:
 
 ```groovy linenums="1" title="snippet.nf"
-ch1 = Channel.value() // (1)!
-ch2 = Channel.value('Hello there') // (2)!
-ch3 = Channel.value([1, 2, 3, 4, 5]) // (3)!
+ch1 = channel.value() // (1)!
+ch2 = channel.value('Hello there') // (2)!
+ch3 = channel.value([1, 2, 3, 4, 5]) // (3)!
 ```
 
 1. Creates an _empty_ value channel
@@ -233,7 +233,7 @@ ch3 = Channel.value([1, 2, 3, 4, 5]) // (3)!
 
 ### `of()`
 
-The factory `Channel.of` allows the creation of a queue channel with the values specified as arguments.
+The factory `channel.of` allows the creation of a queue channel with the values specified as arguments.
 
 ```groovy linenums="1" title="snippet.nf"
 Channel
@@ -250,7 +250,7 @@ This example creates a channel that emits the values specified as a parameter in
 7
 ```
 
-The `Channel.of` channel factory works in a similar manner to `Channel.from` (which is now [deprecated](https://www.nextflow.io/docs/latest/channel.html#of)), fixing some inconsistent behaviors of the latter and providing better handling when specifying a range of values. For example, the following works with a range from 1 to 23:
+The `channel.of` channel factory works in a similar manner to `channel.from` (which is now [deprecated](https://www.nextflow.io/docs/latest/channel.html#of)), fixing some inconsistent behaviors of the latter and providing better handling when specifying a range of values. For example, the following works with a range from 1 to 23:
 
 ```groovy linenums="1" title="snippet.nf"
 Channel
@@ -260,7 +260,7 @@ Channel
 
 ### `fromList()`
 
-The `Channel.fromList` channel factory creates a channel emitting the elements provided by a list object specified as an argument:
+The `channel.fromList` channel factory creates a channel emitting the elements provided by a list object specified as an argument:
 
 ```groovy linenums="1" title="snippet.nf"
 list = ['hello', 'world']
@@ -301,7 +301,7 @@ Learn more about the glob patterns syntax at [this link](https://docs.oracle.com
 
 !!! question "Exercise"
 
-    Use the `Channel.fromPath` channel factory to create a channel emitting all files with the suffix `.fq` in the `data/ggal/` directory and any subdirectory. Include any hidden files and print the file names with the `view` operator.
+    Use the `channel.fromPath` channel factory to create a channel emitting all files with the suffix `.fq` in the `data/ggal/` directory and any subdirectory. Include any hidden files and print the file names with the `view` operator.
 
     ??? solution
 
@@ -370,7 +370,7 @@ The `fromFilePairs` channel factory also has options to help you control its beh
 
 ### `fromSRA()`
 
-The `Channel.fromSRA` channel factory makes it possible to query the [NCBI SRA](https://www.ncbi.nlm.nih.gov/sra) archive and returns a channel emitting the FASTQ files matching the specified selection criteria.
+The `channel.fromSRA` channel factory makes it possible to query the [NCBI SRA](https://www.ncbi.nlm.nih.gov/sra) archive and returns a channel emitting the FASTQ files matching the specified selection criteria.
 
 The query can be project ID(s) or accession number(s) supported by the [NCBI ESearch API](https://www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.ESearch).
 
@@ -455,7 +455,7 @@ process FASTQC {
 }
 
 workflow {
-    reads = Channel.fromSRA(params.accession, apiKey: params.ncbi_api_key)
+    reads = channel.fromSRA(params.accession, apiKey: params.ncbi_api_key)
     FASTQC(reads)
 }
 ```
