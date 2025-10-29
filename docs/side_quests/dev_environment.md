@@ -178,7 +178,7 @@ The auto-completion options vary depending on where you are in your code:
 
 #### Channel Operations
 
-Open `basic_workflow.nf` again and try typing `Channel.` in the workflow block:
+Open `basic_workflow.nf` again and try typing `channel.` in the workflow block:
 
 ![Channel auto-completion](img/autocomplete_channel.png)
 
@@ -446,7 +446,7 @@ Proper code formatting is essential not only for aesthetics but also for enhanci
 Open `basic_workflow.nf` and deliberately mess up the formatting:
 
 - Remove some indentation: Highlight the entire document and press `shift+tab` lots of times to remove as many indentations as possible.
-- Add extra spaces in random places: the `Channel.fromPath` statement, add 30 spaces after the `(`.
+- Add extra spaces in random places: the `channel.fromPath` statement, add 30 spaces after the `(`.
 - Break some lines awkwardly: Add a new line between the the `.view {` operator and the `Processing sample:` string but do not add a corresponding newline before the closing parenthesis `}`.
 
 Now press `Shift+Alt+F` (or `Shift+Option+F` on MacOS) to auto-format:
@@ -470,7 +470,7 @@ Select a block of code in your workflow and press **Ctrl+/** (or **Cmd+/**) to c
 
 ```groovy
 // workflow {
-//     ch_input = Channel.fromPath(params.input)
+//     ch_input = channel.fromPath(params.input)
 //         .splitCsv(header: true)
 //         .map { row -> [row.sample_id, file(row.fastq_path)] }
 //

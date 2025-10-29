@@ -1,5 +1,5 @@
 workflow {
-    ch_samples = Channel.fromPath("./data/samplesheet.csv")
+    ch_samples = channel.fromPath("./data/samplesheet.csv")
         .splitCsv(header: true)
         .map{ row ->
             [[id:row.id, repeat:row.repeat, type:row.type], row.bam]
@@ -15,7 +15,7 @@ workflow {
         .map ( getSampleIdAndReplicate )
     ch_joined_samples = ch_normal_samples
         .join(ch_tumor_samples)
-    ch_intervals = Channel.of('chr1', 'chr2', 'chr3')
+    ch_intervals = channel.of('chr1', 'chr2', 'chr3')
 
     ch_combined_samples = ch_joined_samples
         .combine(ch_intervals)

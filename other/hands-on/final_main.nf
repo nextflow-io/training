@@ -371,7 +371,7 @@ process ASE_knownSNPs {
 
 
 workflow {
-    reads_ch =  Channel.fromFilePairs(params.reads)
+    reads_ch =  channel.fromFilePairs(params.reads)
 
     prepare_genome_samtools(params.genome)
     prepare_genome_picard(params.genome)

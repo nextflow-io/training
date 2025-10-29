@@ -148,7 +148,7 @@ We can then use this class in our workflow:
 
 ```groovy linenums="1"
 workflow {
-    Channel.of("Montreal")
+    channel.of("Montreal")
         .map { new Metadata() }
         .view()
 }
@@ -158,7 +158,7 @@ We can use the new `hi` method in the workflow:
 
 ```groovy linenums="1" hl_lines="3"
 workflow {
-    Channel.of("Montreal")
+    channel.of("Montreal")
         .map { new Metadata() }
         .view { metadata -> metadata.hi() }
 }
@@ -182,7 +182,7 @@ Which we can use like so:
 
 ```groovy linenums="1" hl_lines="3"
 workflow {
-    Channel.of("Montreal")
+    channel.of("Montreal")
         .map { place -> new Metadata(place) }
         .view { metadata -> metadata.hi() }
 }
@@ -198,7 +198,7 @@ process UseMeta {
 }
 
 workflow {
-    place_ch = Channel.of("Montreal")
+    place_ch = channel.of("Montreal")
         .map { place -> new Metadata(place) }
 
     UseMeta(place_ch)
@@ -224,7 +224,7 @@ process UseMeta {
 }
 
 workflow {
-    place_ch = Channel.of("Montreal")
+    place_ch = channel.of("Montreal")
         .map { place -> new Metadata(place) }
         .map { metadata -> metadata + [adapter:"AACGTAGCTTGAC"] }
 
@@ -306,7 +306,7 @@ We can pass objects of our class through channels. Here we take a channel of dog
 
 ```groovy linenums="1" hl_lines="2-4"
 workflow {
-    Channel.of("Argente", "Absolon", "Chowne")
+    channel.of("Argente", "Absolon", "Chowne")
         .map { name -> new Dog(name: name) }
         .view { dog -> "Found a new dog: ${dog.name}" }
 }

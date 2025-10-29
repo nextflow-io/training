@@ -77,7 +77,7 @@ Let's start by reading in the sample data with `splitCsv` and organizing it into
 
 ```groovy title="main.nf" linenums="1" hl_lines="2"
 workflow {
-    ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
+    ch_samplesheet = channel.fromPath("./data/samplesheet.csv")
 }
 ```
 
@@ -101,7 +101,7 @@ Apply these changes to `main.nf`:
 === "After"
 
     ```groovy title="main.nf" linenums="2" hl_lines="2-6"
-        ch_samples = Channel.fromPath("./data/samplesheet.csv")
+        ch_samples = channel.fromPath("./data/samplesheet.csv")
             .splitCsv(header: true)
             .map{ row ->
               [[id:row.id, repeat:row.repeat, type:row.type], row.bam]
@@ -112,7 +112,7 @@ Apply these changes to `main.nf`:
 === "Before"
 
     ```groovy title="main.nf" linenums="2" hl_lines="1"
-        ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
+        ch_samplesheet = channel.fromPath("./data/samplesheet.csv")
     ```
 
 This combines the `splitCsv` operation (reading the CSV with headers) and the `map` operation (structuring data as `[meta, file]` tuples) in one step. Apply that change and run the pipeline:
@@ -149,7 +149,7 @@ We can use the [`filter` operator](https://www.nextflow.io/docs/latest/operator.
 === "After"
 
     ```groovy title="main.nf" linenums="2" hl_lines="6"
-        ch_samples = Channel.fromPath("./data/samplesheet.csv")
+        ch_samples = channel.fromPath("./data/samplesheet.csv")
             .splitCsv(header: true)
             .map{ row ->
               [[id:row.id, repeat:row.repeat, type:row.type], row.bam]
@@ -161,7 +161,7 @@ We can use the [`filter` operator](https://www.nextflow.io/docs/latest/operator.
 === "Before"
 
     ```groovy title="main.nf" linenums="2"
-        ch_samples = Channel.fromPath("./data/samplesheet.csv")
+        ch_samples = channel.fromPath("./data/samplesheet.csv")
             .splitCsv(header: true)
             .map{ row ->
               [[id:row.id, repeat:row.repeat, type:row.type], row.bam]
@@ -205,7 +205,7 @@ Currently we're applying the filter to the channel created directly from the CSV
 === "After"
 
     ```groovy title="main.nf" linenums="2" hl_lines="6 8"
-        ch_samples = Channel.fromPath("./data/samplesheet.csv")
+        ch_samples = channel.fromPath("./data/samplesheet.csv")
             .splitCsv(header: true)
             .map{ row ->
                 [[id:row.id, repeat:row.repeat, type:row.type], row.bam]
@@ -219,7 +219,7 @@ Currently we're applying the filter to the channel created directly from the CSV
 === "Before"
 
     ```groovy title="main.nf" linenums="2"
-        ch_samples = Channel.fromPath("./data/samplesheet.csv")
+        ch_samples = channel.fromPath("./data/samplesheet.csv")
             .splitCsv(header: true)
             .map{ row ->
               [[id:row.id, repeat:row.repeat, type:row.type], row.bam]
@@ -556,7 +556,7 @@ To do so, first we define the closure as a new variable:
 === "After"
 
     ```groovy title="main.nf" linenums="2" hl_lines="7"
-        ch_samples = Channel.fromPath("./data/samplesheet.csv")
+        ch_samples = channel.fromPath("./data/samplesheet.csv")
             .splitCsv(header: true)
             .map{ row ->
                 [[id:row.id, repeat:row.repeat, type:row.type], row.bam]
@@ -571,7 +571,7 @@ To do so, first we define the closure as a new variable:
 === "Before"
 
     ```groovy title="main.nf" linenums="2"
-        ch_samples = Channel.fromPath("./data/samplesheet.csv")
+        ch_samples = channel.fromPath("./data/samplesheet.csv")
             .splitCsv(header: true)
             .map{ row ->
                 [[id:row.id, repeat:row.repeat, type:row.type], row.bam]
@@ -752,7 +752,7 @@ Let's start by creating a channel of intervals. To keep life simple, we will jus
 
     ```groovy title="main.nf" linenums="17" hl_lines="3"
             .join(ch_tumor_samples)
-        ch_intervals = Channel.of('chr1', 'chr2', 'chr3')
+        ch_intervals = channel.of('chr1', 'chr2', 'chr3')
     ```
 
 === "Before"
@@ -767,7 +767,7 @@ Now remember, we want to repeat each sample for each interval. This is sometimes
 === "After"
 
     ```groovy title="main.nf" linenums="18" hl_lines="3-5"
-        ch_intervals = Channel.of('chr1', 'chr2', 'chr3')
+        ch_intervals = channel.of('chr1', 'chr2', 'chr3')
 
         ch_combined_samples = ch_joined_samples
             .combine(ch_intervals)
@@ -777,7 +777,7 @@ Now remember, we want to repeat each sample for each interval. This is sometimes
 === "Before"
 
     ```groovy title="main.nf" linenums="18"
-        ch_intervals = Channel.of('chr1', 'chr2', 'chr3')
+        ch_intervals = channel.of('chr1', 'chr2', 'chr3')
     ```
 
 Now let's run it and see what happens:

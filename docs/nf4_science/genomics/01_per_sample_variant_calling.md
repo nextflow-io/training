@@ -228,7 +228,7 @@ In the `workflow` block, we need to set up a **channel** to feed the input to th
 workflow {
 
     // Create input channel (single file via CLI parameter)
-    reads_ch = Channel.fromPath(params.reads_bam)
+    reads_ch = channel.fromPath(params.reads_bam)
 
     // Create index file for input BAM file
     SAMTOOLS_INDEX(reads_ch)
@@ -539,7 +539,7 @@ Pay particular attention to the names of the BAM file and the BAM index that are
 
 What the heck? Nextflow has staged an index file in this process call's work directory, but it's the wrong one. How could this have happened?
 
-#### 3.2.1. Use the [view() operator](https://www.nextflow.io/docs/latest/reference/operator.html#view) to inspect channel contents
+#### 3.2.2. Use the [view() operator](https://www.nextflow.io/docs/latest/reference/operator.html#view) to inspect channel contents
 
 Add these two lines in the workflow body before the `GATK_HAPLOTYPER` process call:
 
@@ -763,14 +763,14 @@ _Before:_
 
 ```groovy title="genomics-1.nf" linenums="68"
 // Create input channel (single file via CLI parameter)
-reads_ch = Channel.fromPath(params.reads_bam)
+reads_ch = channel.fromPath(params.reads_bam)
 ```
 
 _After:_
 
 ```groovy title="genomics-1.nf" linenums="68"
 // Create input channel from a text file listing input file paths
-reads_ch = Channel.fromPath(params.reads_bam).splitText()
+reads_ch = channel.fromPath(params.reads_bam).splitText()
 ```
 
 !!! tip

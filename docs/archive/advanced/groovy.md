@@ -15,7 +15,7 @@ params.input = "https://raw.githubusercontent.com/nf-core/test-datasets/rnaseq/s
 
 workflow {
 
-    Channel.fromPath(params.input)
+    channel.fromPath(params.input)
         .splitCsv(header: true)
         .view()
 }
@@ -26,7 +26,7 @@ Let's write a small closure to parse each row into the now-familiar map + files 
 ```groovy linenums="5" hl_lines="5-8"
 workflow {
 
-    samples = Channel.fromPath(params.input)
+    samples = channel.fromPath(params.input)
         .splitCsv(header: true)
         .map { row ->
             def meta = row.subMap('sample', 'strandedness')
@@ -103,7 +103,7 @@ This is now able to be passed through to our FASTP process:
 ```groovy linenums="5" hl_lines="15 17"
 workflow {
 
-    samples = Channel.fromPath(params.input)
+    samples = channel.fromPath(params.input)
         .splitCsv(header: true)
         .map { row ->
             def (readKeys, metaKeys) = row.keySet().split { key -> key =~ /^fastq/ }
@@ -166,7 +166,7 @@ Now let's create a second entrypoint to quickly pass these JSON files through so
 
 ```groovy linenums="5"
 workflow Jsontest {
-    Channel.fromPath("results/fastp/json/*.json")
+    channel.fromPath("results/fastp/json/*.json")
         .view()
 }
 ```
@@ -185,7 +185,7 @@ def getFilteringResult(json_file) {
 }
 
 workflow Jsontest {
-    Channel.fromPath("results/fastp/json/*.json")
+    channel.fromPath("results/fastp/json/*.json")
         .view()
 }
 ```

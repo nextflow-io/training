@@ -503,7 +503,7 @@ Agora que o nosso processo espera uma entrada, precisamos configurar essa entrad
 É aqui que entram os canais: o Nextflow usa canais para alimentar as entradas dos processos e transportar dados entre os processos que estão conectados entre si.
 Há várias maneiras de fazer isso, mas, por enquanto, usaremos apenas o canal mais simples possível, contendo um único valor.
 
-Vamos criar o canal usando a fábrica `Channel.of()`, que configura um canal de valor simples, e fornecer a ele uma string codificada para ser usada como saudação, declarando `greeting_ch = Channel.of('Hello world!')`.
+Vamos criar o canal usando a fábrica `channel.of()`, que configura um canal de valor simples, e fornecer a ele uma string codificada para ser usada como saudação, declarando `greeting_ch = channel.of('Hello world!')`.
 
 _Antes:_
 
@@ -521,7 +521,7 @@ _Depois:_
 workflow {
 
     // cria um canal para os inputs
-    greeting_ch = Channel.of('Hello world!')
+    greeting_ch = channel.of('Hello world!')
 
     // emite uma saudação
     sayHello()
@@ -591,14 +591,14 @@ _Antes:_
 
 ```groovy title="hello-world.nf" linenums="23"
 // criar um canal para os inputs
-greeting_ch = Channel.of('Hello world!')
+greeting_ch = channel.of('Hello world!')
 ```
 
 _Depois:_
 
 ```groovy title="hello-world.nf" linenums="23"
 // criar um canal para os inputs
-greeting_ch = Channel.of(params.greeting)
+greeting_ch = channel.of(params.greeting)
 ```
 
 Isso cria automaticamente um parâmetro chamado `greeting` que você pode usar para fornecer um valor na linha de comando.
@@ -766,7 +766,7 @@ Não se esqueça de que precisamos dizer ao Nextflow para realmente chamar o pro
 ```groovy title="hello-world.nf" linenums="44"
 workflow {
     // criar um canal para entradas
-    greeting_ch = Channel.of(params.greeting)
+    greeting_ch = channel.of(params.greeting)
     // emite uma saudação
     sayHello(greeting_ch)
     // converter a saudação em maiúsculas
@@ -833,7 +833,7 @@ Saiba como fazer com que o fluxo de trabalho seja executado em um lote de valore
 
 Os fluxos de trabalho normalmente são executados em lotes de entradas que devem ser processados em massa, portanto, queremos atualizar o fluxo de trabalho para aceitar vários valores de entrada.
 
-Convenientemente, a fábrica `Channel.of()` que estamos usando aceita de bom grado mais de um valor, portanto, não precisamos modificá-la; basta carregar mais valores no canal.
+Convenientemente, a fábrica `channel.of()` que estamos usando aceita de bom grado mais de um valor, portanto, não precisamos modificá-la; basta carregar mais valores no canal.
 
 ### 7.1. Carregando várias saudações no canal de entrada
 
@@ -842,14 +842,14 @@ _Antes:_
 
 ```groovy title="hello-world.nf" linenums="46"
 // criar um canal para entradas
-greeting_ch = Channel.of(params.greeting)
+greeting_ch = channel.of(params.greeting)
 ```
 
 _Depois:_
 
 ```groovy title="hello-world.nf" linenums="46"
 // criar um canal para entradas
-greeting_ch = Channel.of('Hello','Bonjour','Holà')
+greeting_ch = channel.of('Hello','Bonjour','Holà')
 ```
 
 A documentação nos diz que isso deve funcionar. Será que realmente pode ser tão simples?
@@ -1050,12 +1050,12 @@ params.input_file = "data/greetings.csv"
 
 ### 8.2. Atualizando a declaração do canal para lidar com o arquivo de entrada
 
-Neste ponto, apresentamos uma nova fábrica de canais, `Channel.fromPath()`, que tem algumas funcionalidades integradas para lidar com caminhos de arquivos.
+Neste ponto, apresentamos uma nova fábrica de canais, `channel.fromPath()`, que tem algumas funcionalidades integradas para lidar com caminhos de arquivos.
 
-Vamos usá-la em vez da fábrica `Channel.of()` que usamos anteriormente; a sintaxe básica é a seguinte:
+Vamos usá-la em vez da fábrica `channel.of()` que usamos anteriormente; a sintaxe básica é a seguinte:
 
 ```groovy title="channel construction syntax"
-Channel.fromPath(input_file)
+channel.fromPath(input_file)
 ```
 
 Agora, vamos implantar um novo conceito, um “operador” para transformar esse arquivo CSV em conteúdo de canal. Você aprenderá mais sobre operadores mais tarde, mas, por enquanto, basta entendê-los como formas de transformar canais de várias maneiras.
@@ -1064,7 +1064,7 @@ Como nosso objetivo é ler o conteúdo de um arquivo `.csv`, adicionaremos o ope
 Portanto, a instrução de construção do canal passa a ser:
 
 ```groovy title="channel construction syntax"
-Channel.fromPath(input_file)
+channel.fromPath(input_file)
        .splitCsv()
        .flatten()
 ```
@@ -1075,14 +1075,14 @@ _Antes:_
 
 ```groovy title="hello-world.nf" linenums="46"
 // criar um canal para entradas
-greeting_ch = Channel.of('Hello','Bonjour','Holà')
+greeting_ch = channel.of('Hello','Bonjour','Holà')
 ```
 
 _Depois:_
 
 ```groovy title="hello-world.nf" linenums="46"
 // criar um canal para entradas de um arquivo CSV
-greeting_ch = Channel.fromPath(params.input_file)
+greeting_ch = channel.fromPath(params.input_file)
                      .splitCsv()
                      .flatten()
 ```
@@ -1112,13 +1112,13 @@ Durante o desenvolvimento do pipeline, você pode inspecionar o conteúdo de qua
 Por exemplo, se você adicionar `greeting_ch.view()` em qualquer lugar do corpo do fluxo de trabalho, ao executar o script, o Nextflow imprimirá o conteúdo do canal na saída padrão.
 Você também pode usar isso para inspecionar o efeito dos operadores.
 
-    Por exemplo, a saída de `Channel.fromPath(params.input_file).splitCsv().view()` terá a seguinte aparência:
+    Por exemplo, a saída de `channel.fromPath(params.input_file).splitCsv().view()` terá a seguinte aparência:
 
     ```console title="Output"
     [Hello, Bonjour, Holà]
     ```
 
-    Enquanto a saída de `Channel.fromPath(params.input_file).splitCsv().flatten().view()` terá a seguinte aparência:
+    Enquanto a saída de `channel.fromPath(params.input_file).splitCsv().flatten().view()` terá a seguinte aparência:
 
     ```console title="Output”
     Olá

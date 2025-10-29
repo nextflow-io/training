@@ -2,7 +2,7 @@ include { GREETING_WORKFLOW } from './workflows/greeting'
 include { TRANSFORM_WORKFLOW } from './workflows/transform'
 
 workflow {
-    names = Channel.from('Alice', 'Bob', 'Charlie')
+    names = channel.from('Alice', 'Bob', 'Charlie')
 
     // Run the greeting workflow
     GREETING_WORKFLOW(names)

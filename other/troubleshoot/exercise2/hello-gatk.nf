@@ -105,7 +105,7 @@ process GATK_JOINTGENOTYPING {
 workflow {
 
     // Create input channel from samplesheet in CSV format (via CLI parameter)
-    reads_ch = Channel.fromPath(params.reads_bam)
+    reads_ch = channel.fromPath(params.reads_bam)
                         .splitCsv(header: true)
                         .map{row -> [row.id, file(row.reads_bam)]}
 
@@ -115,10 +115,10 @@ workflow {
     // Call variants from the indexed BAM file
     GATK_HAPLOTYPECALLER(
         SAMTOOLS_INDEX.out,
-        Channel.of(params.genome_reference),
-        Channel.of(params.genome_reference_index),
-        Channel.of(params.genome_reference_dict),
-        Channel.of(params.calling_intervals)
+        channel.of(params.genome_reference),
+        channel.of(params.genome_reference_index),
+        channel.of(params.genome_reference_dict),
+        channel.of(params.calling_intervals)
     )
 
     // Create a sample map of the output GVCFs

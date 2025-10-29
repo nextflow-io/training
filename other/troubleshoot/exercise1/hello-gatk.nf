@@ -105,7 +105,7 @@ process GATK_JOINTGENOTYPING {
 workflow {
 
     // Create input channel from samplesheet in CSV format (via CLI parameter)
-    reads_ch = Channel.fromPath(params.reads_bam)
+    reads_ch = channel.fromPath(params.reads_bam)
                         .splitCsv(header: true)
                         .map{row -> [row.id, file(row.reads_bam)]}
 

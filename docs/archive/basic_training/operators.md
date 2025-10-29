@@ -26,7 +26,7 @@ The `map` operator applies a function of your choosing to every item emitted by 
     Click the :material-plus-circle: icons in the code for explanations.
 
 ```groovy linenums="1" title="snippet.nf"
-nums = Channel.of(1, 2, 3, 4) // (1)!
+nums = channel.of(1, 2, 3, 4) // (1)!
 square = nums.map { it -> it * it } // (2)!
 square.view() // (3)!
 ```
@@ -148,9 +148,9 @@ Channel
 The `mix` operator combines the items emitted by two (or more) channels.
 
 ```groovy linenums="1" title="snippet.nf"
-my_channel_1 = Channel.of(1, 2, 3)
-my_channel_2 = Channel.of('a', 'b')
-my_channel_3 = Channel.of('z')
+my_channel_1 = channel.of(1, 2, 3)
+my_channel_2 = channel.of('a', 'b')
+my_channel_3 = channel.of('z')
 
 my_channel_1
     .mix(my_channel_2, my_channel_3)
@@ -260,8 +260,8 @@ This operator is especially useful to process a group together with all the elem
 The `join` operator creates a channel that joins together the items emitted by two channels with a matching key. The key is defined, by default, as the first element in each item emitted.
 
 ```groovy linenums="1" title="snippet.nf"
-left = Channel.of(['X', 1], ['Y', 2], ['Z', 3], ['P', 7])
-right = Channel.of(['Z', 6], ['Y', 5], ['X', 4])
+left = channel.of(['X', 1], ['Y', 2], ['Z', 3], ['P', 7])
+right = channel.of(['Z', 6], ['Y', 5], ['X', 4])
 left.join(right).view()
 ```
 
