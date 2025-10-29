@@ -15,6 +15,7 @@ include { cowpy } from './modules/cowpy.nf'
 
 workflow {
 
+    main:
     // create a channel for inputs from a CSV file
     greeting_ch = Channel.fromPath(params.greeting)
                         .splitCsv()
@@ -34,4 +35,25 @@ workflow {
 
     // generate ASCII art of the greetings with cowpy
     cowpy(collectGreetings.out.outfile, params.character)
+
+    publish:
+    greetings = sayHello.out
+    uppercase = convertToUpper.out
+    collected = collectGreetings.out.outfile
+    ascii_art = cowpy.out
+}
+
+output {
+    greetings {
+        path '.'
+    }
+    uppercase {
+        path '.'
+    }
+    collected {
+        path '.'
+    }
+    ascii_art {
+        path '.'
+    }
 }

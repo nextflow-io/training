@@ -13,6 +13,7 @@ include { collectGreetings } from './modules/collectGreetings.nf'
 
 workflow {
 
+    main:
     // create a channel for inputs from a CSV file
     greeting_ch = Channel.fromPath(params.greeting)
                         .splitCsv()
@@ -29,4 +30,21 @@ workflow {
 
     // emit a message about the size of the batch
     collectGreetings.out.count.view { "There were $it greetings in this batch" }
+
+    publish:
+    greetings = sayHello.out
+    uppercase = convertToUpper.out
+    collected = collectGreetings.out.outfile
+}
+
+output {
+    greetings {
+        path '.'
+    }
+    uppercase {
+        path '.'
+    }
+    collected {
+        path '.'
+    }
 }

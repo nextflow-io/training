@@ -3,8 +3,6 @@
  */
 process collectGreetings {
 
-    publishDir 'results', mode: 'copy'
-
     input:
         path input_files
         val batch_name

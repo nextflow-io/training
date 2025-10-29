@@ -5,8 +5,6 @@
  */
 process sayHello {
 
-    publishDir 'results', mode: 'copy'
-
     input:
         val greeting
 
@@ -23,8 +21,6 @@ process sayHello {
  * Use a text replacement tool to convert the greeting to uppercase
  */
 process convertToUpper {
-
-    publishDir 'results', mode: 'copy'
 
     input:
         path input_file
@@ -45,6 +41,7 @@ params.greeting = 'greetings.csv'
 
 workflow {
 
+    main:
     // create a channel for inputs from a CSV file
     greeting_ch = Channel.fromPath(params.greeting)
                         .splitCsv()
@@ -55,4 +52,17 @@ workflow {
 
     // convert the greeting to uppercase
     convertToUpper(sayHello.out)
+
+    publish:
+    greetings = sayHello.out
+    uppercase = convertToUpper.out
+}
+
+output {
+    greetings {
+        path '.'
+    }
+    uppercase {
+        path '.'
+    }
 }

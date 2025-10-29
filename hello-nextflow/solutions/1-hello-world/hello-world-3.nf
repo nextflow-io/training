@@ -5,8 +5,6 @@
  */
 process sayHello {
 
-    publishDir 'results', mode: 'copy'
-
     output:
         path 'output.txt'
 
@@ -18,6 +16,16 @@ process sayHello {
 
 workflow {
 
+    main:
     // emit a greeting
     sayHello()
+
+    publish:
+    greetings = sayHello.out
+}
+
+output {
+    greetings {
+        path '.'
+    }
 }

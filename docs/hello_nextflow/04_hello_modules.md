@@ -39,7 +39,7 @@ nextflow run hello-modules.nf
 ```
 
 ```console title="Output"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.10.0
 
 Launching `hello-modules.nf` [festering_nobel] DSL2 - revision: eeca64cdb1
 
@@ -50,7 +50,7 @@ executor >  local (7)
 There were 3 greetings in this batch
 ```
 
-As previously, you will find the output files in the `results` directory (specified by the `publishDir` directive).
+As previously, you will find the output files in the `results` directory (specified by the workflow outputs).
 
 ```console title="Directory contents"
 results
@@ -117,8 +117,6 @@ Copy the whole process definition over from the workflow file to the module file
  */
 process sayHello {
 
-    publishDir 'results', mode: 'copy'
-
     input:
         val greeting
 
@@ -170,7 +168,7 @@ nextflow run hello-modules.nf -resume
 This runs quickly very quickly because everything is cached.
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.10.0
 
 Launching `hello-modules.nf` [romantic_poisson] DSL2 - revision: 96edfa9ad3
 
@@ -215,8 +213,6 @@ Copy the whole process definition over from the workflow file to the module file
  * Use a text replacement tool to convert the greeting to uppercase
  */
 process convertToUpper {
-
-    publishDir 'results', mode: 'copy'
 
     input:
         path input_file
@@ -267,7 +263,7 @@ nextflow run hello-modules.nf -resume
 This should still produce the same output as previously.
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.10.0
 
 Launching `hello-modules.nf` [nauseous_heisenberg] DSL2 - revision: a04a9f2da0
 
@@ -302,8 +298,6 @@ Copy the whole process definition over from the workflow file to the module file
  * Collect uppercase greetings into a single output file
  */
 process collectGreetings {
-
-    publishDir 'results', mode: 'copy'
 
     input:
         path input_files
@@ -359,7 +353,7 @@ nextflow run hello-modules.nf -resume
 This should still produce the same output as previously.
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.10.0
 
 Launching `hello-modules.nf` [friendly_coulomb] DSL2 - revision: 7aa2b9bc0f
 

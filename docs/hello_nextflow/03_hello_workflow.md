@@ -42,7 +42,7 @@ nextflow run hello-workflow.nf
 ```
 
 ```console title="Output"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.10.0
 
 Launching `hello-workflow.nf` [stupefied_sammet] DSL2 - revision: b9e466930b
 
@@ -50,7 +50,7 @@ executor >  local (3)
 [2a/324ce6] sayHello (3) | 3 of 3 ✔
 ```
 
-As previously, you will find the output files in the `results` directory (specified by the `publishDir` directive).
+As previously, you will find the output files in the `results` directory (specified by the workflow outputs).
 
 ```console title="Directory contents"
 results
@@ -112,8 +112,6 @@ Add the following process definition to the workflow script:
  */
 process convertToUpper {
 
-    publishDir 'results', mode: 'copy'
-
     input:
         path input_file
 
@@ -142,21 +140,25 @@ In the workflow block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-workflow.nf" linenums="53" hl_lines="4 5"
+    ```groovy title="hello-workflow.nf" linenums="58" hl_lines="4 5"
         // emit a greeting
         sayHello(greeting_ch)
 
         // convert the greeting to uppercase
         convertToUpper()
-    }
+
+        publish:
+        greetings = sayHello.out
     ```
 
 === "Before"
 
-    ```groovy title="hello-workflow.nf" linenums="53"
+    ```groovy title="hello-workflow.nf" linenums="58"
         // emit a greeting
         sayHello(greeting_ch)
-    }
+
+        publish:
+        greetings = sayHello.out
     ```
 
 This is not yet functional because we have not specified what should be input to the `convertToUpper()` process.
@@ -172,18 +174,28 @@ In the workflow block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-workflow.nf" linenums="56" hl_lines="2"
+    ```groovy title="hello-workflow.nf" linenums="58" hl_lines="5"
+        // emit a greeting
+        sayHello(greeting_ch)
+
         // convert the greeting to uppercase
         convertToUpper(sayHello.out)
-    }
+
+        publish:
+        greetings = sayHello.out
     ```
 
 === "Before"
 
-    ```groovy title="hello-workflow.nf" linenums="56"
+    ```groovy title="hello-workflow.nf" linenums="58" hl_lines="5"
+        // emit a greeting
+        sayHello(greeting_ch)
+
         // convert the greeting to uppercase
         convertToUpper()
-    }
+
+        publish:
+        greetings = sayHello.out
     ```
 
 For a simple case like this (one output to one input), that's all we need to do to connect two processes!
@@ -199,7 +211,7 @@ nextflow run hello-workflow.nf -resume
 You should see the following output:
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.10.0
 
 Launching `hello-workflow.nf` [disturbed_darwin] DSL2 - revision: 4e252c048f
 
@@ -224,7 +236,7 @@ The output of the first process is in there because Nextflow staged it there in 
 However, it is actually a symbolic link pointing to the the original file in the subdirectory of the first process call.
 By default, when running on a single machine as we're doing here, Nextflow uses symbolic links rather than copies to stage input and intermediate files.
 
-You'll also find the final outputs in the `results` directory since we used the `publishDir` directive in the second process too.
+You'll also find the final outputs in the `results` directory, as we'll configure next.
 
 ```console title="Directory contents"
 results
@@ -240,6 +252,63 @@ Think about how all we did was connect the output of `sayHello` to the input of 
 Nextflow did the hard work of handling individual input and output files and passing them between the two commands for us.
 
 This is one of the reasons Nextflow channels are so powerful: they take care of the busywork involved in connecting workflow steps together.
+
+### 1.6. Update workflow outputs to publish both processes
+
+Now let's update our workflow outputs to publish the results from both processes.
+
+In the workflow and output blocks, make the following code change:
+
+=== "After"
+
+    ```groovy title="hello-workflow.nf" linenums="53" hl_lines="5 9 16-18"
+        // emit a greeting
+        sayHello(greeting_ch)
+
+        // convert the greeting to uppercase
+        convertToUpper(sayHello.out)
+
+        publish:
+        greetings = sayHello.out
+        uppercase = convertToUpper.out
+    }
+
+    output {
+        greetings {
+            path '.'
+        }
+        uppercase {
+            path '.'
+        }
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="hello-workflow.nf" linenums="53" hl_lines="5"
+        // emit a greeting
+        sayHello(greeting_ch)
+
+        // convert the greeting to uppercase
+        convertToUpper(sayHello.out)
+
+        publish:
+        greetings = sayHello.out
+    }
+
+    output {
+        greetings {
+            path '.'
+        }
+    }
+    ```
+
+Here we made several changes:
+
+1. **Added the second process output to the `publish:` section**: Added `uppercase = convertToUpper.out` to publish the uppercase greetings alongside the original greetings.
+2. **Declared both outputs in the `output` block**: Added an `uppercase` section to specify that the uppercase files should also be published to the root of the output directory.
+
+Now when you run the workflow, both the original greetings and the uppercase versions will be published to the `results` directory.
 
 ### Takeaway
 
@@ -296,8 +365,6 @@ Add the following process definition to the workflow script:
  * Collect uppercase greetings into a single output file
  */
 process collectGreetings {
-
-    publishDir 'results', mode: 'copy'
 
     input:
         ???
@@ -398,7 +465,10 @@ In the workflow block, make the following code change:
 
         // collect all the greetings into one file
         collectGreetings(convertToUpper.out)
-    }
+
+        publish:
+        greetings = sayHello.out
+        uppercase = convertToUpper.out
     ```
 
 === "Before"
@@ -406,7 +476,10 @@ In the workflow block, make the following code change:
     ```groovy title="hello-workflow.nf" linenums="75"
         // convert the greeting to uppercase
         convertToUpper(sayHello.out)
-    }
+
+        publish:
+        greetings = sayHello.out
+        uppercase = convertToUpper.out
     ```
 
 This connects the output of `convertToUpper()` to the input of `collectGreetings()`.
@@ -422,7 +495,7 @@ nextflow run hello-workflow.nf -resume
 It runs successfully, including the third step:
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.10.0
 
 Launching `hello-workflow.nf` [mad_gilbert] DSL2 - revision: 6acfd5e28d
 
@@ -465,7 +538,10 @@ In the workflow block, make the following code change:
     ```groovy title="hello-workflow.nf" linenums="78" hl_lines="2"
         // collect all the greetings into one file
         collectGreetings(convertToUpper.out.collect())
-    }
+
+        publish:
+        greetings = sayHello.out
+        uppercase = convertToUpper.out
     ```
 
 === "Before"
@@ -473,7 +549,10 @@ In the workflow block, make the following code change:
     ```groovy title="hello-workflow.nf" linenums="78"
         // collect all the greetings into one file
         collectGreetings(convertToUpper.out)
-    }
+
+        publish:
+        greetings = sayHello.out
+        uppercase = convertToUpper.out
     ```
 
 #### 2.4.2. Add some `view()` statements
@@ -489,7 +568,10 @@ Let's also include a couple of `view()` statements to visualize the before and a
         // optional view statements
         convertToUpper.out.view { greeting -> "Before collect: $greeting" }
         convertToUpper.out.collect().view { greeting -> "After collect: $greeting" }
-    }
+
+        publish:
+        greetings = sayHello.out
+        uppercase = convertToUpper.out
     ```
 
 === "Before"
@@ -497,7 +579,10 @@ Let's also include a couple of `view()` statements to visualize the before and a
     ```groovy title="hello-workflow.nf" linenums="78"
         // collect all the greetings into one file
         collectGreetings(convertToUpper.out.collect())
-    }
+
+        publish:
+        greetings = sayHello.out
+        uppercase = convertToUpper.out
     ```
 
 The `view()` statements can go anywhere you want; we put them after the call for readability.
@@ -513,7 +598,7 @@ nextflow run hello-workflow.nf -resume
 It runs successfully, although the log output may look a little messier than this (we cleaned it up for readability).
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.10.0
 
 Launching `hello-workflow.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
 
@@ -669,6 +754,10 @@ In the workflow block, make the following code change:
     ```groovy title="hello-workflow.nf" linenums="80" hl_lines="2"
         // collect all the greetings into one file
         collectGreetings(convertToUpper.out.collect(), params.batch)
+
+        publish:
+        greetings = sayHello.out
+        uppercase = convertToUpper.out
     ```
 
 === "Before"
@@ -676,6 +765,10 @@ In the workflow block, make the following code change:
     ```groovy title="hello-workflow.nf" linenums="80"
         // collect all the greetings into one file
         collectGreetings(convertToUpper.out.collect())
+
+        publish:
+        greetings = sayHello.out
+        uppercase = convertToUpper.out
     ```
 
 !!! warning
@@ -693,7 +786,7 @@ nextflow run hello-workflow.nf -resume --batch trio
 It runs successfully:
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.10.0
 
 Launching `hello-workflow.nf` [confident_rutherford] DSL2 - revision: bc58af409c
 
@@ -801,25 +894,32 @@ In the process block, make the following code change:
 The `emit:` tags are optional, and we could have added a tag to only one of the outputs.
 But as the saying goes, why not both?
 
-### 4.2. Report the output at the end of the workflow
+### 4.2. Report the output and update publishing
 
 Now that we have two outputs coming out of the `collectGreetings` process, the `collectGreetings.out` output contains two channels:
 
 - `collectGreetings.out.outfile` contains the final output file
 - `collectGreetings.out.count` contains the count of greetings
 
-We could send either or both of these to another process for further work. However, in the interest of wrapping this up, we're just going to use `view()` to demonstrate that we can access and report the count of greetings.
+We could send either or both of these to another process for further work. Here, we're going to use `view()` to demonstrate that we can access and report the count of greetings.
+
+We also need to update the `publish:` block to publish the collected output file. Since `collectGreetings` now has multiple outputs, we must use the named output `collectGreetings.out.outfile` to specify which output we want to publish.
 
 In the workflow block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-workflow.nf" linenums="82" hl_lines="4 5"
+    ```groovy title="hello-workflow.nf" linenums="82" hl_lines="4 5 10"
         // collect all the greetings into one file
         collectGreetings(convertToUpper.out.collect(), params.batch)
 
         // emit a message about the size of the batch
         collectGreetings.out.count.view { num_greetings -> "There were $num_greetings greetings in this batch" }
+
+        publish:
+        greetings = sayHello.out
+        uppercase = convertToUpper.out
+        collected = collectGreetings.out.outfile
     ```
 
 === "Before"
@@ -827,6 +927,10 @@ In the workflow block, make the following code change:
     ```groovy title="hello-workflow.nf" linenums="82"
         // collect all the greetings into one file
         collectGreetings(convertToUpper.out.collect(), params.batch)
+
+        publish:
+        greetings = sayHello.out
+        uppercase = convertToUpper.out
     ```
 
 !!! note
@@ -844,7 +948,7 @@ nextflow run hello-workflow.nf -resume --batch trio
 This runs successfully:
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.10.0
 
 Launching `hello-workflow.nf` [evil_sinoussi] DSL2 - revision: eeca64cdb1
 

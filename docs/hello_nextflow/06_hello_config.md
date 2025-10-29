@@ -27,14 +27,29 @@ By learning to utilize these configuration options effectively, you can enhance 
 
 ## 0. Warmup: Check that Docker is enabled and run the Hello Config workflow
 
-First, a quick check. There is a `nextflow.config` file in the current directory that contains the line `docker.enabled = <setting>`, where `<setting>` is either `true` or `false` depending on whether or not you've worked through Part 5 of this course in the same environment.
+First, a quick check. There is a `nextflow.config` file in the current directory that should contain basic configuration settings from earlier parts of the training.
 
-If it is set to `true`, you don't need to do anything.
+You can view the current config file:
 
-If it is set to `false`, switch it to `true` now.
+```bash
+cat nextflow.config
+```
 
-```console title="nextflow.config" linenums="1"
+It should look something like this:
+
+```groovy title="nextflow.config" linenums="1"
+docker.enabled = false
+workflow.output.mode = 'copy'
+```
+
+The `docker.enabled` setting controls whether Docker containers are used (covered in Part 5).
+The `workflow.output.mode` setting controls how output files are published - `'copy'` means files are copied to the output directory, while the default `'symlink'` creates symbolic links instead.
+
+For this part of the training, make sure `docker.enabled` is set to `true`:
+
+```groovy title="nextflow.config" linenums="1"
 docker.enabled = true
+workflow.output.mode = 'copy'
 ```
 
 Once you've done that, verify that the initial workflow runs properly:
@@ -44,7 +59,7 @@ nextflow run hello-config.nf
 ```
 
 ```console title="Output"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.10.0
 
 Launching `hello-config.nf` [reverent_heisenberg] DSL2 - revision: 028a841db1
 
@@ -90,13 +105,14 @@ To do so, we switch the value of `docker.enabled` to `false`, and add a directiv
     ```groovy title="nextflow.config" linenums="1" hl_lines="1-2"
     docker.enabled = false
     conda.enabled = true
+    workflow.output.mode = 'copy'
     ```
 
 === "Before"
 
     ```groovy title="nextflow.config" linenums="1"
-
     docker.enabled = true
+    workflow.output.mode = 'copy'
     ```
 
 This will allow Nextflow to create and utilize Conda environments for processes that have Conda packages specified.
@@ -115,13 +131,11 @@ Now we add the URI to the `cowpy` process definition using the `conda` directive
 
 === "After"
 
-    ```console title="modules/cowpy.nf" linenums="4" hl_lines="4"
+    ```console title="modules/cowpy.nf" linenums="4" hl_lines="3"
     process cowpy {
 
         container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
         conda 'conda-forge::cowpy==1.1.5'
-
-        publishDir 'results', mode: 'copy'
     ```
 
 === "Before"
@@ -130,8 +144,6 @@ Now we add the URI to the `cowpy` process definition using the `conda` directive
     process cowpy {
 
         container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
-
-        publishDir 'results', mode: 'copy'
     ```
 
 To be clear, we're not _replacing_ the `docker` directive, we're _adding_ an alternative option.
@@ -147,7 +159,7 @@ nextflow run hello-config.nf
 This should work without issue.
 
 ```console title="Output"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.10.0
 
 Launching `hello-config.nf` [trusting_lovelace] DSL2 - revision: 028a841db1
 
@@ -362,7 +374,7 @@ nextflow run hello-config.nf -params-file test-params.json
 It works! And as expected, this produces the same outputs as previously.
 
 ```console title="Output"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.10.0
 
 Launching `hello-config.nf` [disturbed_sammet] DSL2 - revision: ede9037d02
 
@@ -511,7 +523,7 @@ nextflow run hello-config.nf -profile my_laptop
 This still produces the following output:
 
 ```
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.10.0
 
 Launching `hello-config.nf` [gigantic_brazil] DSL2 - revision: ede9037d02
 
@@ -593,7 +605,7 @@ nextflow run hello-config.nf -profile my_laptop,test
 This should produce the following:
 
 ```console title="Output"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.10.0
 
 Launching `hello-config.nf` [gigantic_brazil] DSL2 - revision: ede9037d02
 
