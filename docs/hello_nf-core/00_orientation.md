@@ -9,7 +9,7 @@ If you have not yet done so, please go through the [Environment Setup](../../env
 
 !!! warning
 
-    This training is designed for nf-core tools version 3.2.1, which should be the version installed in the codespace. If you use a different version of nf-core tooling you may have difficulty following along.
+    This training is designed for nf-core tools version 3.4.1, which should be the version installed in the codespace. If you use a different version of nf-core tooling you may have difficulty following along.
 
     You can check what version is installed using the command`nf-core --version`.
 
@@ -56,9 +56,13 @@ If you run this inside `hello-nf-core`, you should see the following output:
 │   ├── modules
 │   └── nextflow.config
 └── solutions
-    └── composable-hello
+    ├── composable-hello
+    ├── core-hello-part2
+    ├── core-hello-part3
+    ├── core-hello-part4
+    └── core-hello-start
 
-4 directories, 3 files
+8 directories, 3 files
 ```
 
 **Here's a summary of what you should know to get started:**

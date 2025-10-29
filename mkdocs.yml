@@ -32,6 +32,9 @@ nav:
       - hello_nf-core/00_orientation.md
       - hello_nf-core/01_run_demo.md
       - hello_nf-core/02_rewrite_hello.md
+      - hello_nf-core/03_use_module.md
+      - hello_nf-core/04_adapt_module.md
+      - hello_nf-core/05_input_validation.md
       - hello_nf-core/survey.md
       - hello_nf-core/next_steps.md
   - Nextflow for Science:
@@ -203,6 +206,10 @@ markdown_extensions:
   - pymdownx.snippets
   - pymdownx.superfences:
       preserve_tabs: true
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.tabbed:
       alternate_style: true
   - pymdownx.tasklist:
