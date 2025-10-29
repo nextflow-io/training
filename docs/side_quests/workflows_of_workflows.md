@@ -74,7 +74,7 @@ include { TIMESTAMP_GREETING } from '../modules/timestamp_greeting'
 
 workflow {
 
-    names_ch = channel.from('Alice', 'Bob', 'Charlie')
+    names_ch = channel.of('Alice', 'Bob', 'Charlie')
 
     // Chain processes: validate -> create greeting -> add timestamp
     validated_ch = VALIDATE_NAME(names_ch)
@@ -191,7 +191,7 @@ Create `main.nf`:
 include { GREETING_WORKFLOW } from './workflows/greeting'
 
 workflow {
-    names = channel.from('Alice', 'Bob', 'Charlie')
+    names = channel.of('Alice', 'Bob', 'Charlie')
     GREETING_WORKFLOW(names)
 
     GREETING_WORKFLOW.out.greetings.view { "Original: $it" }
@@ -291,7 +291,7 @@ include { GREETING_WORKFLOW } from './workflows/greeting'
 include { TRANSFORM_WORKFLOW } from './workflows/transform'
 
 workflow {
-    names = channel.from('Alice', 'Bob', 'Charlie')
+    names = channel.of('Alice', 'Bob', 'Charlie')
 
     // Run the greeting workflow
     GREETING_WORKFLOW(names)
