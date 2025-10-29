@@ -3994,7 +3994,7 @@ Metadata tracks important details about files and experimental conditions, and h
 <span class="normal"><a href="#__codelineno-4-4">4</a></span>
 <span class="normal"><a href="#__codelineno-4-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="n">workflow</span><span class="w">  </span><span class="o">{</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2"></a>
-<a id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="w">    </span><span class="n">ch_samplesheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">&quot;./data/samplesheet.csv&quot;</span><span class="o">)</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="w">    </span><span class="n">ch_samplesheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">&quot;./data/samplesheet.csv&quot;</span><span class="o">)</span>
 <a id="__codelineno-4-4" name="__codelineno-4-4"></a>
 <a id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
@@ -4007,13 +4007,13 @@ Metadata tracks important details about files and experimental conditions, and h
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-3">3</a></span>
 <span class="normal"><a href="#__codelineno-5-4">4</a></span>
-<span class="normal"><a href="#__codelineno-5-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="w">    </span><span class="n">ch_samplesheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">&quot;./data/samplesheet.csv&quot;</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-5-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="w">    </span><span class="n">ch_samplesheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">&quot;./data/samplesheet.csv&quot;</span><span class="o">)</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="hll"><span class="w">        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="nl">header:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
 </span><a id="__codelineno-5-5" name="__codelineno-5-5"></a><span class="hll"><span class="w">        </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="w">    </span><span class="n">ch_samplesheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">&quot;./data/samplesheet.csv&quot;</span><span class="o">)</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="w">    </span><span class="n">ch_samplesheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">&quot;./data/samplesheet.csv&quot;</span><span class="o">)</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -4666,7 +4666,7 @@ Earlier, we added the predicted language to the <code>meta</code> map. We can ac
 <ul>
 <li><strong>Reading Datasheets &amp; creating meta maps</strong></li>
 </ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1" href="#__codelineno-54-1"></a>Channel.fromPath(&#39;samplesheet.csv&#39;)
+<div class="highlight"><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1" href="#__codelineno-54-1"></a>channel.fromPath(&#39;samplesheet.csv&#39;)
 <a id="__codelineno-54-2" name="__codelineno-54-2" href="#__codelineno-54-2"></a>  .splitCsv(header: true)
 <a id="__codelineno-54-3" name="__codelineno-54-3" href="#__codelineno-54-3"></a>  .map { row -&gt;
 <a id="__codelineno-54-4" name="__codelineno-54-4" href="#__codelineno-54-4"></a>      [ [id:row.id, character:row.character], row.recording ]

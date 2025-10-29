@@ -5188,7 +5188,7 @@ Agora, vamos adicionar alguma flexibilidade usando uma variável de entrada, par
 <p>Agora que o nosso processo espera uma entrada, precisamos configurar essa entrada no corpo do fluxo de trabalho.</p>
 <p>É aqui que entram os canais: o Nextflow usa canais para alimentar as entradas dos processos e transportar dados entre os processos que estão conectados entre si.
 Há várias maneiras de fazer isso, mas, por enquanto, usaremos apenas o canal mais simples possível, contendo um único valor.</p>
-<p>Vamos criar o canal usando a fábrica <code>Channel.of()</code>, que configura um canal de valor simples, e fornecer a ele uma string codificada para ser usada como saudação, declarando <code>greeting_ch = Channel.of('Hello world!')</code>.</p>
+<p>Vamos criar o canal usando a fábrica <code>channel.of()</code>, que configura um canal de valor simples, e fornecer a ele uma string codificada para ser usada como saudação, declarando <code>greeting_ch = channel.of('Hello world!')</code>.</p>
 <p><em>Antes:</em></p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-world.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-30-21">21</a></span>
 <span class="normal"><a href="#__codelineno-30-22">22</a></span>
@@ -5211,7 +5211,7 @@ Há várias maneiras de fazer isso, mas, por enquanto, usaremos apenas o canal m
 <span class="normal"><a href="#__codelineno-31-28">28</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-31-21" name="__codelineno-31-21"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-31-22" name="__codelineno-31-22"></a>
 <a id="__codelineno-31-23" name="__codelineno-31-23"></a><span class="w">    </span><span class="c1">// cria um canal para os inputs</span>
-<a id="__codelineno-31-24" name="__codelineno-31-24"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Hello world!&#39;</span><span class="o">)</span>
+<a id="__codelineno-31-24" name="__codelineno-31-24"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Hello world!&#39;</span><span class="o">)</span>
 <a id="__codelineno-31-25" name="__codelineno-31-25"></a>
 <a id="__codelineno-31-26" name="__codelineno-31-26"></a><span class="w">    </span><span class="c1">// emite uma saudação</span>
 <a id="__codelineno-31-27" name="__codelineno-31-27"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">()</span>
@@ -5255,12 +5255,12 @@ Há várias maneiras de fazer isso, mas, por enquanto, usaremos apenas o canal m
 <p><em>Antes:</em></p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-world.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-36-23">23</a></span>
 <span class="normal"><a href="#__codelineno-36-24">24</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-36-23" name="__codelineno-36-23"></a><span class="c1">// criar um canal para os inputs</span>
-<a id="__codelineno-36-24" name="__codelineno-36-24"></a><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Hello world!&#39;</span><span class="o">)</span>
+<a id="__codelineno-36-24" name="__codelineno-36-24"></a><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Hello world!&#39;</span><span class="o">)</span>
 </code></pre></div></td></tr></table></div>
 <p><em>Depois:</em></p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-world.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-37-23">23</a></span>
 <span class="normal"><a href="#__codelineno-37-24">24</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-37-23" name="__codelineno-37-23"></a><span class="c1">// criar um canal para os inputs</span>
-<a id="__codelineno-37-24" name="__codelineno-37-24"></a><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">greeting</span><span class="o">)</span>
+<a id="__codelineno-37-24" name="__codelineno-37-24"></a><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">greeting</span><span class="o">)</span>
 </code></pre></div></td></tr></table></div>
 <p>Isso cria automaticamente um parâmetro chamado <code>greeting</code> que você pode usar para fornecer um valor na linha de comando.</p>
 <h3 id="52-executar-o-fluxo-de-trabalho-novamente-com-o-parametro-greeting">5.2. Executar o fluxo de trabalho novamente com o parâmetro <code>--greeting</code><a class="headerlink" href="#52-executar-o-fluxo-de-trabalho-novamente-com-o-parametro-greeting" title="Permanent link">&para;</a></h3>
@@ -5401,7 +5401,7 @@ O valor do parâmetro que passamos na linha de comando substituiu o valor que de
 <span class="normal"><a href="#__codelineno-50-50">50</a></span>
 <span class="normal"><a href="#__codelineno-50-51">51</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-50-44" name="__codelineno-50-44"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-50-45" name="__codelineno-50-45"></a><span class="w">    </span><span class="c1">// criar um canal para entradas</span>
-<a id="__codelineno-50-46" name="__codelineno-50-46"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">greeting</span><span class="o">)</span>
+<a id="__codelineno-50-46" name="__codelineno-50-46"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">greeting</span><span class="o">)</span>
 <a id="__codelineno-50-47" name="__codelineno-50-47"></a><span class="w">    </span><span class="c1">// emite uma saudação</span>
 <a id="__codelineno-50-48" name="__codelineno-50-48"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
 <a id="__codelineno-50-49" name="__codelineno-50-49"></a><span class="w">    </span><span class="c1">// converter a saudação em maiúsculas</span>
@@ -5448,18 +5448,18 @@ No entanto, recomendamos que você seja gentil com seus colaboradores e com seu 
 <hr />
 <h2 id="7-modificando-o-fluxo-de-trabalho-para-ser-executado-em-um-lote-de-valores-de-entrada">7. Modificando o fluxo de trabalho para ser executado em um lote de valores de entrada<a class="headerlink" href="#7-modificando-o-fluxo-de-trabalho-para-ser-executado-em-um-lote-de-valores-de-entrada" title="Permanent link">&para;</a></h2>
 <p>Os fluxos de trabalho normalmente são executados em lotes de entradas que devem ser processados em massa, portanto, queremos atualizar o fluxo de trabalho para aceitar vários valores de entrada.</p>
-<p>Convenientemente, a fábrica <code>Channel.of()</code> que estamos usando aceita de bom grado mais de um valor, portanto, não precisamos modificá-la; basta carregar mais valores no canal.</p>
+<p>Convenientemente, a fábrica <code>channel.of()</code> que estamos usando aceita de bom grado mais de um valor, portanto, não precisamos modificá-la; basta carregar mais valores no canal.</p>
 <h3 id="71-carregando-varias-saudacoes-no-canal-de-entrada">7.1. Carregando várias saudações no canal de entrada<a class="headerlink" href="#71-carregando-varias-saudacoes-no-canal-de-entrada" title="Permanent link">&para;</a></h3>
 <p>Para manter as coisas simples, voltamos a codificar as saudações na fábrica do canal em vez de usar um parâmetro para a entrada, mas melhoraremos isso em breve.
 <em>Antes:</em></p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-world.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-54-46">46</a></span>
 <span class="normal"><a href="#__codelineno-54-47">47</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-54-46" name="__codelineno-54-46"></a><span class="c1">// criar um canal para entradas</span>
-<a id="__codelineno-54-47" name="__codelineno-54-47"></a><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">greeting</span><span class="o">)</span>
+<a id="__codelineno-54-47" name="__codelineno-54-47"></a><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">greeting</span><span class="o">)</span>
 </code></pre></div></td></tr></table></div>
 <p><em>Depois:</em></p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-world.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-55-46">46</a></span>
 <span class="normal"><a href="#__codelineno-55-47">47</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-55-46" name="__codelineno-55-46"></a><span class="c1">// criar um canal para entradas</span>
-<a id="__codelineno-55-47" name="__codelineno-55-47"></a><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Holà&#39;</span><span class="o">)</span>
+<a id="__codelineno-55-47" name="__codelineno-55-47"></a><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Holà&#39;</span><span class="o">)</span>
 </code></pre></div></td></tr></table></div>
 <p>A documentação nos diz que isso deve funcionar. Será que realmente pode ser tão simples?</p>
 <h3 id="72-executando-o-comando-e-vendo-a-saida-do-registro">7.2. Executando o comando e vendo a saída do registro<a class="headerlink" href="#72-executando-o-comando-e-vendo-a-saida-do-registro" title="Permanent link">&para;</a></h3>
@@ -5623,14 +5623,14 @@ Mostraremos a você como fazer isso mais adiante neste curso de treinamento.</p>
 <a id="__codelineno-67-9" name="__codelineno-67-9"></a><span class="n">params</span><span class="o">.</span><span class="na">input_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;data/greetings.csv&quot;</span>
 </code></pre></div></td></tr></table></div>
 <h3 id="82-atualizando-a-declaracao-do-canal-para-lidar-com-o-arquivo-de-entrada">8.2. Atualizando a declaração do canal para lidar com o arquivo de entrada<a class="headerlink" href="#82-atualizando-a-declaracao-do-canal-para-lidar-com-o-arquivo-de-entrada" title="Permanent link">&para;</a></h3>
-<p>Neste ponto, apresentamos uma nova fábrica de canais, <code>Channel.fromPath()</code>, que tem algumas funcionalidades integradas para lidar com caminhos de arquivos.</p>
-<p>Vamos usá-la em vez da fábrica <code>Channel.of()</code> que usamos anteriormente; a sintaxe básica é a seguinte:</p>
-<div class="highlight"><span class="filename">channel construction syntax</span><pre><span></span><code><a id="__codelineno-68-1" name="__codelineno-68-1" href="#__codelineno-68-1"></a><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">input_file</span><span class="o">)</span>
+<p>Neste ponto, apresentamos uma nova fábrica de canais, <code>channel.fromPath()</code>, que tem algumas funcionalidades integradas para lidar com caminhos de arquivos.</p>
+<p>Vamos usá-la em vez da fábrica <code>channel.of()</code> que usamos anteriormente; a sintaxe básica é a seguinte:</p>
+<div class="highlight"><span class="filename">channel construction syntax</span><pre><span></span><code><a id="__codelineno-68-1" name="__codelineno-68-1" href="#__codelineno-68-1"></a><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">input_file</span><span class="o">)</span>
 </code></pre></div>
 <p>Agora, vamos implantar um novo conceito, um “operador” para transformar esse arquivo CSV em conteúdo de canal. Você aprenderá mais sobre operadores mais tarde, mas, por enquanto, basta entendê-los como formas de transformar canais de várias maneiras.</p>
 <p>Como nosso objetivo é ler o conteúdo de um arquivo <code>.csv</code>, adicionaremos o operador <code>.splitCsv()</code> para fazer com que o Nextflow analise o conteúdo do arquivo adequadamente, bem como o operador <code>.flatten()</code> para transformar o elemento de matriz produzido por <code>.splitCsv()</code> em um canal de elementos individuais.
 Portanto, a instrução de construção do canal passa a ser:</p>
-<div class="highlight"><span class="filename">channel construction syntax</span><pre><span></span><code><a id="__codelineno-69-1" name="__codelineno-69-1" href="#__codelineno-69-1"></a><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">input_file</span><span class="o">)</span>
+<div class="highlight"><span class="filename">channel construction syntax</span><pre><span></span><code><a id="__codelineno-69-1" name="__codelineno-69-1" href="#__codelineno-69-1"></a><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">input_file</span><span class="o">)</span>
 <a id="__codelineno-69-2" name="__codelineno-69-2" href="#__codelineno-69-2"></a><span class="w">       </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">()</span>
 <a id="__codelineno-69-3" name="__codelineno-69-3" href="#__codelineno-69-3"></a><span class="w">       </span><span class="o">.</span><span class="na">flatten</span><span class="o">()</span>
 </code></pre></div>
@@ -5638,14 +5638,14 @@ Portanto, a instrução de construção do canal passa a ser:</p>
 <p><em>Antes:</em></p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-world.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-70-46">46</a></span>
 <span class="normal"><a href="#__codelineno-70-47">47</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-70-46" name="__codelineno-70-46"></a><span class="c1">// criar um canal para entradas</span>
-<a id="__codelineno-70-47" name="__codelineno-70-47"></a><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Holà&#39;</span><span class="o">)</span>
+<a id="__codelineno-70-47" name="__codelineno-70-47"></a><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Holà&#39;</span><span class="o">)</span>
 </code></pre></div></td></tr></table></div>
 <p><em>Depois:</em></p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-world.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-71-46">46</a></span>
 <span class="normal"><a href="#__codelineno-71-47">47</a></span>
 <span class="normal"><a href="#__codelineno-71-48">48</a></span>
 <span class="normal"><a href="#__codelineno-71-49">49</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-71-46" name="__codelineno-71-46"></a><span class="c1">// criar um canal para entradas de um arquivo CSV</span>
-<a id="__codelineno-71-47" name="__codelineno-71-47"></a><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input_file</span><span class="o">)</span>
+<a id="__codelineno-71-47" name="__codelineno-71-47"></a><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input_file</span><span class="o">)</span>
 <a id="__codelineno-71-48" name="__codelineno-71-48"></a><span class="w">                     </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">()</span>
 <a id="__codelineno-71-49" name="__codelineno-71-49"></a><span class="w">                     </span><span class="o">.</span><span class="na">flatten</span><span class="o">()</span>
 </code></pre></div></td></tr></table></div>
@@ -5668,13 +5668,13 @@ Portanto, a instrução de construção do canal passa a ser:</p>
 <p>Durante o desenvolvimento do pipeline, você pode inspecionar o conteúdo de qualquer canal adicionando o operador <code>.view()</code> ao nome do canal.
 Por exemplo, se você adicionar <code>greeting_ch.view()</code> em qualquer lugar do corpo do fluxo de trabalho, ao executar o script, o Nextflow imprimirá o conteúdo do canal na saída padrão.
 Você também pode usar isso para inspecionar o efeito dos operadores.</p>
-<div class="highlight"><pre><span></span><code>Por exemplo, a saída de `Channel.fromPath(params.input_file).splitCsv().view()` terá a seguinte aparência:
+<div class="highlight"><pre><span></span><code>Por exemplo, a saída de `channel.fromPath(params.input_file).splitCsv().view()` terá a seguinte aparência:
 
 ```console title=&quot;Output&quot;
 [Hello, Bonjour, Holà]
 ```
 
-Enquanto a saída de `Channel.fromPath(params.input_file).splitCsv().flatten().view()` terá a seguinte aparência:
+Enquanto a saída de `channel.fromPath(params.input_file).splitCsv().flatten().view()` terá a seguinte aparência:
 
 ```console title=&quot;Output”
 Olá

@@ -4330,7 +4330,7 @@ This is a placeholder workflow for our workflow of interest, with some nf-core f
 </span><a id="__codelineno-8-18" name="__codelineno-8-18"></a><span class="w">    </span><span class="n">ch_samplesheet</span><span class="w"> </span><span class="c1">// channel: samplesheet read in from --input</span>
 <a id="__codelineno-8-19" name="__codelineno-8-19"></a><span class="hll"><span class="w">    </span><span class="nl">main:</span>
 </span><a id="__codelineno-8-20" name="__codelineno-8-20"></a>
-<a id="__codelineno-8-21" name="__codelineno-8-21"></a><span class="w">    </span><span class="n">ch_versions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">empty</span><span class="o">()</span>
+<a id="__codelineno-8-21" name="__codelineno-8-21"></a><span class="w">    </span><span class="n">ch_versions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">empty</span><span class="o">()</span>
 <a id="__codelineno-8-22" name="__codelineno-8-22"></a>
 <a id="__codelineno-8-23" name="__codelineno-8-23"></a><span class="w">    </span><span class="c1">//</span>
 <a id="__codelineno-8-24" name="__codelineno-8-24"></a><span class="w">    </span><span class="c1">// Collate and save software versions</span>
@@ -4452,7 +4452,7 @@ The first step for that is to make our original workflow composable.</p>
 <a id="__codelineno-13-16" name="__codelineno-13-16"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-13-17" name="__codelineno-13-17"></a>
 <a id="__codelineno-13-18" name="__codelineno-13-18"></a><span class="w">  </span><span class="c1">// create a channel for inputs from a CSV file</span>
-<a id="__codelineno-13-19" name="__codelineno-13-19"></a><span class="w">  </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">greeting</span><span class="o">)</span>
+<a id="__codelineno-13-19" name="__codelineno-13-19"></a><span class="w">  </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">greeting</span><span class="o">)</span>
 <a id="__codelineno-13-20" name="__codelineno-13-20"></a><span class="w">                      </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">()</span>
 <a id="__codelineno-13-21" name="__codelineno-13-21"></a><span class="w">                      </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">line</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-13-22" name="__codelineno-13-22"></a>
@@ -4505,7 +4505,7 @@ The first step for that is to make our original workflow composable.</p>
 <span class="normal"><a href="#__codelineno-17-19">19</a></span>
 <span class="normal"><a href="#__codelineno-17-20">20</a></span>
 <span class="normal"><a href="#__codelineno-17-21">21</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-17-18" name="__codelineno-17-18"></a><span class="w">    </span><span class="c1">// create a channel for inputs from a CSV file</span>
-<a id="__codelineno-17-19" name="__codelineno-17-19"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">greeting</span><span class="o">)</span>
+<a id="__codelineno-17-19" name="__codelineno-17-19"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">greeting</span><span class="o">)</span>
 <a id="__codelineno-17-20" name="__codelineno-17-20"></a><span class="w">                        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">()</span>
 <a id="__codelineno-17-21" name="__codelineno-17-21"></a><span class="w">                        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">line</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
@@ -4712,7 +4712,7 @@ That is going to be defined in the parent workflow, also called the <strong>entr
 <a id="__codelineno-23-8" name="__codelineno-23-8"></a>
 <a id="__codelineno-23-9" name="__codelineno-23-9"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-23-10" name="__codelineno-23-10"></a><span class="w">  </span><span class="c1">// create a channel for inputs from a CSV file</span>
-<a id="__codelineno-23-11" name="__codelineno-23-11"></a><span class="w">  </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">greeting</span><span class="o">)</span>
+<a id="__codelineno-23-11" name="__codelineno-23-11"></a><span class="w">  </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">greeting</span><span class="o">)</span>
 <a id="__codelineno-23-12" name="__codelineno-23-12"></a><span class="w">                      </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">()</span>
 <a id="__codelineno-23-13" name="__codelineno-23-13"></a><span class="w">                      </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">line</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-23-14" name="__codelineno-23-14"></a>
@@ -4835,7 +4835,7 @@ Overall this code does very little aside from some housekeeping that has to do w
 <a id="__codelineno-26-18" name="__codelineno-26-18"></a><span class="w">    </span><span class="n">ch_samplesheet</span><span class="w"> </span><span class="c1">// channel: samplesheet read in from --input</span>
 <a id="__codelineno-26-19" name="__codelineno-26-19"></a><span class="w">    </span><span class="nl">main:</span>
 <a id="__codelineno-26-20" name="__codelineno-26-20"></a>
-<a id="__codelineno-26-21" name="__codelineno-26-21"></a><span class="w">    </span><span class="n">ch_versions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">empty</span><span class="o">()</span>
+<a id="__codelineno-26-21" name="__codelineno-26-21"></a><span class="w">    </span><span class="n">ch_versions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">empty</span><span class="o">()</span>
 <a id="__codelineno-26-22" name="__codelineno-26-22"></a>
 <a id="__codelineno-26-23" name="__codelineno-26-23"></a><span class="w">    </span><span class="c1">//</span>
 <a id="__codelineno-26-24" name="__codelineno-26-24"></a><span class="w">    </span><span class="c1">// Collate and save software versions</span>
@@ -5042,7 +5042,7 @@ Since that is essentially what our <code>greetings.csv</code> file is, we'll kee
 <a id="__codelineno-35-37" name="__codelineno-35-37"></a><span class="w">    </span><span class="c1">// generate ASCII art of the greetings with cowpy</span>
 <a id="__codelineno-35-38" name="__codelineno-35-38"></a><span class="w">    </span><span class="n">cowpy</span><span class="o">(</span><span class="n">collectGreetings</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">outfile</span><span class="o">,</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">character</span><span class="o">)</span>
 <a id="__codelineno-35-39" name="__codelineno-35-39"></a>
-<a id="__codelineno-35-40" name="__codelineno-35-40"></a><span class="w">    </span><span class="n">ch_versions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">empty</span><span class="o">()</span>
+<a id="__codelineno-35-40" name="__codelineno-35-40"></a><span class="w">    </span><span class="n">ch_versions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">empty</span><span class="o">()</span>
 <a id="__codelineno-35-41" name="__codelineno-35-41"></a>
 <a id="__codelineno-35-42" name="__codelineno-35-42"></a><span class="w">    </span><span class="c1">//</span>
 <a id="__codelineno-35-43" name="__codelineno-35-43"></a><span class="w">    </span><span class="c1">// Collate and save software versions</span>
@@ -5072,7 +5072,7 @@ Since that is essentially what our <code>greetings.csv</code> file is, we'll kee
 <span class="normal"><a href="#__codelineno-36-35">35</a></span>
 <span class="normal"><a href="#__codelineno-36-36">36</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-36-23" name="__codelineno-36-23"></a><span class="w">    </span><span class="nl">main:</span>
 <a id="__codelineno-36-24" name="__codelineno-36-24"></a>
-<a id="__codelineno-36-25" name="__codelineno-36-25"></a><span class="w">    </span><span class="n">ch_versions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">empty</span><span class="o">()</span>
+<a id="__codelineno-36-25" name="__codelineno-36-25"></a><span class="w">    </span><span class="n">ch_versions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">empty</span><span class="o">()</span>
 <a id="__codelineno-36-26" name="__codelineno-36-26"></a>
 <a id="__codelineno-36-27" name="__codelineno-36-27"></a><span class="w">    </span><span class="c1">//</span>
 <a id="__codelineno-36-28" name="__codelineno-36-28"></a><span class="w">    </span><span class="c1">// Collate and save software versions</span>
@@ -5370,10 +5370,10 @@ It is quite complex because it does a lot of parsing and validation work.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The syntax above is a little different from what we've used previously, but basically this:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a><span class="n">Channel</span><span class="o">.&lt;...&gt;.</span><span class="na">set</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">ch_samplesheet</span><span class="w"> </span><span class="o">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a><span class="n">channel</span><span class="o">.&lt;...&gt;.</span><span class="na">set</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">ch_samplesheet</span><span class="w"> </span><span class="o">}</span>
 </code></pre></div>
 <p>is equivalent to this:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a><span class="n">ch_samplesheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.&lt;...&gt;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a><span class="n">ch_samplesheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.&lt;...&gt;</span>
 </code></pre></div>
 </div>
 <h3 id="42-replace-the-templated-input-channel-code">4.2. Replace the templated input channel code<a class="headerlink" href="#42-replace-the-templated-input-channel-code" title="Permanent link">&para;</a></h3>
@@ -5383,7 +5383,7 @@ It is quite complex because it does a lot of parsing and validation work.</p>
 <span class="normal"><a href="#__codelineno-45-11">11</a></span>
 <span class="normal"><a href="#__codelineno-45-12">12</a></span>
 <span class="normal"><a href="#__codelineno-45-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-45-10" name="__codelineno-45-10"></a><span class="w">    </span><span class="c1">// create a channel for inputs from a CSV file</span>
-<a id="__codelineno-45-11" name="__codelineno-45-11"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">greeting</span><span class="o">)</span>
+<a id="__codelineno-45-11" name="__codelineno-45-11"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">greeting</span><span class="o">)</span>
 <a id="__codelineno-45-12" name="__codelineno-45-12"></a><span class="w">                        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">()</span>
 <a id="__codelineno-45-13" name="__codelineno-45-13"></a><span class="hll"><span class="w">                        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">line</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
 </span></code></pre></div></td></tr></table></div>
@@ -5403,7 +5403,7 @@ It is quite complex because it does a lot of parsing and validation work.</p>
 <span class="normal"><a href="#__codelineno-46-73">73</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-46-64" name="__codelineno-46-64"></a><span class="w">    </span><span class="c1">//</span>
 <a id="__codelineno-46-65" name="__codelineno-46-65"></a><span class="w">    </span><span class="c1">// Create channel from input file provided through params.input</span>
 <a id="__codelineno-46-66" name="__codelineno-46-66"></a><span class="w">    </span><span class="c1">//</span>
-<a id="__codelineno-46-67" name="__codelineno-46-67"></a><span class="hll"><span class="w">    </span><span class="n">ch_samplesheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
+<a id="__codelineno-46-67" name="__codelineno-46-67"></a><span class="hll"><span class="w">    </span><span class="n">ch_samplesheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
 </span><a id="__codelineno-46-68" name="__codelineno-46-68"></a><span class="w">                        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">()</span>
 <a id="__codelineno-46-69" name="__codelineno-46-69"></a><span class="w">                        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">line</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-46-70" name="__codelineno-46-70"></a>

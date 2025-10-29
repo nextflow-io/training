@@ -2133,7 +2133,7 @@
 <span class="normal"><a href="#__codelineno-16-14">14</a></span>
 <span class="normal"><a href="#__codelineno-16-15">15</a></span>
 <span class="normal"><a href="#__codelineno-16-16">16</a></span>
-<span class="normal"><a href="#__codelineno-16-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1"></a><span class="n">num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="w"> </span><span class="mi">2</span><span class="o">,</span><span class="w"> </span><span class="mi">3</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-16-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1"></a><span class="n">num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="w"> </span><span class="mi">2</span><span class="o">,</span><span class="w"> </span><span class="mi">3</span><span class="o">)</span>
 <a id="__codelineno-16-2" name="__codelineno-16-2"></a>
 <a id="__codelineno-16-3" name="__codelineno-16-3"></a><span class="n">process</span><span class="w"> </span><span class="n">BASICEXAMPLE</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-16-4" name="__codelineno-16-4"></a><span class="w">    </span><span class="n">debug</span><span class="w"> </span><span class="kc">true</span>
@@ -2178,7 +2178,7 @@
 <span class="normal"><a href="#__codelineno-18-14">14</a></span>
 <span class="normal"><a href="#__codelineno-18-15">15</a></span>
 <span class="normal"><a href="#__codelineno-18-16">16</a></span>
-<span class="normal"><a href="#__codelineno-18-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1"></a><span class="n">reads</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">'data/ggal/*.fq'</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-18-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1"></a><span class="n">reads</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">'data/ggal/*.fq'</span><span class="o">)</span>
 <a id="__codelineno-18-2" name="__codelineno-18-2"></a>
 <a id="__codelineno-18-3" name="__codelineno-18-3"></a><span class="n">process</span><span class="w"> </span><span class="n">FOO</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-18-4" name="__codelineno-18-4"></a><span class="w">    </span><span class="n">debug</span><span class="w"> </span><span class="kc">true</span>
@@ -2221,7 +2221,7 @@
 <span class="normal"><a href="#__codelineno-20-14">14</a></span>
 <span class="normal"><a href="#__codelineno-20-15">15</a></span>
 <span class="normal"><a href="#__codelineno-20-16">16</a></span>
-<span class="normal"><a href="#__codelineno-20-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="n">reads</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">'data/ggal/*.fq'</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-20-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="n">reads</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">'data/ggal/*.fq'</span><span class="o">)</span>
 <a id="__codelineno-20-2" name="__codelineno-20-2"></a>
 <a id="__codelineno-20-3" name="__codelineno-20-3"></a><span class="n">process</span><span class="w"> </span><span class="n">FOO</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-20-4" name="__codelineno-20-4"></a><span class="w">    </span><span class="n">debug</span><span class="w"> </span><span class="kc">true</span>
@@ -2264,7 +2264,7 @@
 <span class="normal"><a href="#__codelineno-22-14">14</a></span>
 <span class="normal"><a href="#__codelineno-22-15">15</a></span>
 <span class="normal"><a href="#__codelineno-22-16">16</a></span>
-<span class="normal"><a href="#__codelineno-22-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1"></a><span class="n">reads</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">'data/ggal/*.fq'</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-22-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1"></a><span class="n">reads</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">'data/ggal/*.fq'</span><span class="o">)</span>
 <a id="__codelineno-22-2" name="__codelineno-22-2"></a>
 <a id="__codelineno-22-3" name="__codelineno-22-3"></a><span class="n">process</span><span class="w"> </span><span class="n">FOO</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-22-4" name="__codelineno-22-4"></a><span class="w">    </span><span class="n">debug</span><span class="w"> </span><span class="kc">true</span>
@@ -2292,7 +2292,7 @@
 </code></pre></div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>In the past, the <code>file</code> qualifier was used for files, but the <code>path</code> qualifier should be preferred over file to handle process input files when using Nextflow 19.10.0 or later. When a process declares an input file, the corresponding channel elements must be <strong>file</strong> objects created with the file helper function from the file specific channel factories (e.g., <code>Channel.fromPath</code> or <code>Channel.fromFilePairs</code>).</p>
+<p>In the past, the <code>file</code> qualifier was used for files, but the <code>path</code> qualifier should be preferred over file to handle process input files when using Nextflow 19.10.0 or later. When a process declares an input file, the corresponding channel elements must be <strong>file</strong> objects created with the file helper function from the file specific channel factories (e.g., <code>channel.fromPath</code> or <code>channel.fromFilePairs</code>).</p>
 </div>
 <h3 id="combine-input-channels"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.2.3</span> Combine input channels<a class="headerlink" href="#combine-input-channels" title="Permanent link">¶</a></h3>
 <p>A key feature of processes is the ability to handle inputs from multiple channels. However, it’s important to understand how channel contents and their semantics affect the execution of a process.</p>
@@ -2315,8 +2315,8 @@
 <span class="normal"><a href="#__codelineno-24-16">16</a></span>
 <span class="normal"><a href="#__codelineno-24-17">17</a></span>
 <span class="normal"><a href="#__codelineno-24-18">18</a></span>
-<span class="normal"><a href="#__codelineno-24-19">19</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1"></a><span class="n">ch1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="w"> </span><span class="mi">2</span><span class="o">,</span><span class="w"> </span><span class="mi">3</span><span class="o">)</span>
-<a id="__codelineno-24-2" name="__codelineno-24-2"></a><span class="n">ch2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">'a'</span><span class="o">,</span><span class="w"> </span><span class="s1">'b'</span><span class="o">,</span><span class="w"> </span><span class="s1">'c'</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-24-19">19</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1"></a><span class="n">ch1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="w"> </span><span class="mi">2</span><span class="o">,</span><span class="w"> </span><span class="mi">3</span><span class="o">)</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2"></a><span class="n">ch2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">'a'</span><span class="o">,</span><span class="w"> </span><span class="s1">'b'</span><span class="o">,</span><span class="w"> </span><span class="s1">'c'</span><span class="o">)</span>
 <a id="__codelineno-24-3" name="__codelineno-24-3"></a>
 <a id="__codelineno-24-4" name="__codelineno-24-4"></a><span class="n">process</span><span class="w"> </span><span class="n">FOO</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-24-5" name="__codelineno-24-5"></a><span class="w">    </span><span class="n">debug</span><span class="w"> </span><span class="kc">true</span>
@@ -2362,8 +2362,8 @@
 <span class="normal"><a href="#__codelineno-26-16">16</a></span>
 <span class="normal"><a href="#__codelineno-26-17">17</a></span>
 <span class="normal"><a href="#__codelineno-26-18">18</a></span>
-<span class="normal"><a href="#__codelineno-26-19">19</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1"></a><span class="n">ch1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="w"> </span><span class="mi">2</span><span class="o">,</span><span class="w"> </span><span class="mi">3</span><span class="o">)</span>
-<a id="__codelineno-26-2" name="__codelineno-26-2"></a><span class="n">ch2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">'a'</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-26-19">19</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1"></a><span class="n">ch1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="w"> </span><span class="mi">2</span><span class="o">,</span><span class="w"> </span><span class="mi">3</span><span class="o">)</span>
+<a id="__codelineno-26-2" name="__codelineno-26-2"></a><span class="n">ch2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">'a'</span><span class="o">)</span>
 <a id="__codelineno-26-3" name="__codelineno-26-3"></a>
 <a id="__codelineno-26-4" name="__codelineno-26-4"></a><span class="n">process</span><span class="w"> </span><span class="n">FOO</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-26-5" name="__codelineno-26-5"></a><span class="w">    </span><span class="n">debug</span><span class="w"> </span><span class="kc">true</span>
@@ -2404,8 +2404,8 @@
 <span class="normal"><a href="#__codelineno-28-16">16</a></span>
 <span class="normal"><a href="#__codelineno-28-17">17</a></span>
 <span class="normal"><a href="#__codelineno-28-18">18</a></span>
-<span class="normal"><a href="#__codelineno-28-19">19</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1"></a><span class="n">ch1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="w"> </span><span class="mi">2</span><span class="o">,</span><span class="w"> </span><span class="mi">3</span><span class="o">)</span>
-<a id="__codelineno-28-2" name="__codelineno-28-2"></a><span class="n">ch2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">value</span><span class="o">(</span><span class="s1">'a'</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-28-19">19</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1"></a><span class="n">ch1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="w"> </span><span class="mi">2</span><span class="o">,</span><span class="w"> </span><span class="mi">3</span><span class="o">)</span>
+<a id="__codelineno-28-2" name="__codelineno-28-2"></a><span class="n">ch2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">value</span><span class="o">(</span><span class="s1">'a'</span><span class="o">)</span>
 <a id="__codelineno-28-3" name="__codelineno-28-3"></a>
 <a id="__codelineno-28-4" name="__codelineno-28-4"></a><span class="n">process</span><span class="w"> </span><span class="n">FOO</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-28-5" name="__codelineno-28-5"></a><span class="w">    </span><span class="n">debug</span><span class="w"> </span><span class="kc">true</span>
@@ -2504,7 +2504,7 @@
 <span class="normal"><a href="#__codelineno-31-16">16</a></span>
 <span class="normal"><a href="#__codelineno-31-17">17</a></span>
 <span class="normal"><a href="#__codelineno-31-18">18</a></span>
-<span class="normal"><a href="#__codelineno-31-19">19</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1"></a><span class="n">sequences</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"$projectDir/data/ggal/*_1.fq"</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-31-19">19</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1"></a><span class="n">sequences</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"$projectDir/data/ggal/*_1.fq"</span><span class="o">)</span>
 <a id="__codelineno-31-2" name="__codelineno-31-2"></a><span class="n">methods</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">'regular'</span><span class="o">,</span><span class="w"> </span><span class="s1">'espresso'</span><span class="o">]</span>
 <a id="__codelineno-31-3" name="__codelineno-31-3"></a>
 <a id="__codelineno-31-4" name="__codelineno-31-4"></a><span class="n">process</span><span class="w"> </span><span class="n">ALIGNSEQUENCES</span><span class="w"> </span><span class="o">{</span>
@@ -2556,7 +2556,7 @@
 <span class="normal"><a href="#__codelineno-33-16">16</a></span>
 <span class="normal"><a href="#__codelineno-33-17">17</a></span>
 <span class="normal"><a href="#__codelineno-33-18">18</a></span>
-<span class="normal"><a href="#__codelineno-33-19">19</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1"></a><span class="n">sequences</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"$projectDir/data/ggal/*_1.fq"</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-33-19">19</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1"></a><span class="n">sequences</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"$projectDir/data/ggal/*_1.fq"</span><span class="o">)</span>
 <a id="__codelineno-33-2" name="__codelineno-33-2"></a><span class="n">methods</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">'regular'</span><span class="o">,</span><span class="w"> </span><span class="s1">'espresso'</span><span class="o">,</span><span class="w"> </span><span class="s1">'cappuccino'</span><span class="o">]</span>
 <a id="__codelineno-33-3" name="__codelineno-33-3"></a>
 <a id="__codelineno-33-4" name="__codelineno-33-4"></a><span class="n">process</span><span class="w"> </span><span class="n">ALIGNSEQUENCES</span><span class="w"> </span><span class="o">{</span>
@@ -2641,7 +2641,7 @@
 <a id="__codelineno-36-14" name="__codelineno-36-14"></a><span class="o">}</span>
 <a id="__codelineno-36-15" name="__codelineno-36-15"></a>
 <a id="__codelineno-36-16" name="__codelineno-36-16"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-36-17" name="__codelineno-36-17"></a><span class="w">    </span><span class="n">FOO</span><span class="o">(</span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">greeting</span><span class="o">))</span>
+<a id="__codelineno-36-17" name="__codelineno-36-17"></a><span class="w">    </span><span class="n">FOO</span><span class="o">(</span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">greeting</span><span class="o">))</span>
 <a id="__codelineno-36-18" name="__codelineno-36-18"></a><span class="w">        </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
 <a id="__codelineno-36-19" name="__codelineno-36-19"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
@@ -2832,7 +2832,7 @@
 <span class="normal"><a href="#__codelineno-43-16">16</a></span>
 <span class="normal"><a href="#__codelineno-43-17">17</a></span>
 <span class="normal"><a href="#__codelineno-43-18">18</a></span>
-<span class="normal"><a href="#__codelineno-43-19">19</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1"></a><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">'data/ggal/*_{1,2}.fq'</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-43-19">19</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1"></a><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">'data/ggal/*_{1,2}.fq'</span><span class="o">)</span>
 <a id="__codelineno-43-2" name="__codelineno-43-2"></a>
 <a id="__codelineno-43-3" name="__codelineno-43-3"></a><span class="n">process</span><span class="w"> </span><span class="n">FOO</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-43-4" name="__codelineno-43-4"></a><span class="w">    </span><span class="nl">input:</span>
@@ -2880,7 +2880,7 @@
 <span class="normal"><a href="#__codelineno-45-16">16</a></span>
 <span class="normal"><a href="#__codelineno-45-17">17</a></span>
 <span class="normal"><a href="#__codelineno-45-18">18</a></span>
-<span class="normal"><a href="#__codelineno-45-19">19</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1"></a><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">'data/ggal/*_{1,2}.fq'</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-45-19">19</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1"></a><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">'data/ggal/*_{1,2}.fq'</span><span class="o">)</span>
 <a id="__codelineno-45-2" name="__codelineno-45-2"></a>
 <a id="__codelineno-45-3" name="__codelineno-45-3"></a><span class="n">process</span><span class="w"> </span><span class="n">FOO</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-45-4" name="__codelineno-45-4"></a><span class="w">    </span><span class="nl">input:</span>
@@ -2925,7 +2925,7 @@
 <span class="normal"><a href="#__codelineno-46-18">18</a></span>
 <span class="normal"><a href="#__codelineno-46-19">19</a></span>
 <span class="normal"><a href="#__codelineno-46-20">20</a></span>
-<span class="normal"><a href="#__codelineno-46-21">21</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1"></a><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">'data/ggal/*_{1,2}.fq'</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-46-21">21</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1"></a><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">'data/ggal/*_{1,2}.fq'</span><span class="o">)</span>
 <a id="__codelineno-46-2" name="__codelineno-46-2"></a>
 <a id="__codelineno-46-3" name="__codelineno-46-3"></a><span class="n">process</span><span class="w"> </span><span class="n">FOO</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-46-4" name="__codelineno-46-4"></a><span class="w">    </span><span class="nl">input:</span>
@@ -2969,7 +2969,7 @@
 <span class="normal"><a href="#__codelineno-47-18">18</a></span>
 <span class="normal"><a href="#__codelineno-47-19">19</a></span>
 <span class="normal"><a href="#__codelineno-47-20">20</a></span>
-<span class="normal"><a href="#__codelineno-47-21">21</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-47-1" name="__codelineno-47-1"></a><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">'data/ggal/*_{1,2}.fq'</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-47-21">21</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-47-1" name="__codelineno-47-1"></a><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">'data/ggal/*_{1,2}.fq'</span><span class="o">)</span>
 <a id="__codelineno-47-2" name="__codelineno-47-2"></a>
 <a id="__codelineno-47-3" name="__codelineno-47-3"></a><span class="n">process</span><span class="w"> </span><span class="n">FOO</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-47-4" name="__codelineno-47-4"></a><span class="w">    </span><span class="nl">input:</span>
@@ -3012,7 +3012,7 @@
 <span class="normal"><a href="#__codelineno-48-18">18</a></span>
 <span class="normal"><a href="#__codelineno-48-19">19</a></span>
 <span class="normal"><a href="#__codelineno-48-20">20</a></span>
-<span class="normal"><a href="#__codelineno-48-21">21</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1"></a><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">'data/ggal/*_{1,2}.fq'</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-48-21">21</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1"></a><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">'data/ggal/*_{1,2}.fq'</span><span class="o">)</span>
 <a id="__codelineno-48-2" name="__codelineno-48-2"></a>
 <a id="__codelineno-48-3" name="__codelineno-48-3"></a><span class="n">process</span><span class="w"> </span><span class="n">FOO</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-48-4" name="__codelineno-48-4"></a><span class="w">    </span><span class="nl">input:</span>
@@ -3060,7 +3060,7 @@
 <span class="normal"><a href="#__codelineno-49-18">18</a></span>
 <span class="normal"><a href="#__codelineno-49-19">19</a></span>
 <span class="normal"><a href="#__codelineno-49-20">20</a></span>
-<span class="normal"><a href="#__codelineno-49-21">21</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-49-1" name="__codelineno-49-1"></a><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">'data/ggal/*_{1,2}.fq'</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-49-21">21</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-49-1" name="__codelineno-49-1"></a><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">'data/ggal/*_{1,2}.fq'</span><span class="o">)</span>
 <a id="__codelineno-49-2" name="__codelineno-49-2"></a>
 <a id="__codelineno-49-3" name="__codelineno-49-3"></a><span class="n">process</span><span class="w"> </span><span class="n">FOO</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-49-4" name="__codelineno-49-4"></a><span class="w">    </span><span class="nl">input:</span>
@@ -3128,7 +3128,7 @@
 <span class="normal"><a href="#__codelineno-50-22">22</a></span>
 <span class="normal"><a href="#__codelineno-50-23">23</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1"></a><span class="n">params</span><span class="o">.</span><span class="na">dbtype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'nr'</span>
 <a id="__codelineno-50-2" name="__codelineno-50-2"></a><span class="n">params</span><span class="o">.</span><span class="na">prot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'data/prots/*.tfa'</span>
-<a id="__codelineno-50-3" name="__codelineno-50-3"></a><span class="n">proteins</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">prot</span><span class="o">)</span>
+<a id="__codelineno-50-3" name="__codelineno-50-3"></a><span class="n">proteins</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">prot</span><span class="o">)</span>
 <a id="__codelineno-50-4" name="__codelineno-50-4"></a>
 <a id="__codelineno-50-5" name="__codelineno-50-5"></a><span class="n">process</span><span class="w"> </span><span class="n">FIND</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-50-6" name="__codelineno-50-6"></a><span class="w">    </span><span class="n">debug</span><span class="w"> </span><span class="kc">true</span>
@@ -3257,7 +3257,7 @@
 <span class="normal"><a href="#__codelineno-53-19">19</a></span>
 <span class="normal"><a href="#__codelineno-53-20">20</a></span>
 <span class="normal"><a href="#__codelineno-53-21">21</a></span>
-<span class="normal"><a href="#__codelineno-53-22">22</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1"></a><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">'data/ggal/*_{1,2}.fq'</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-53-22">22</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1"></a><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">'data/ggal/*_{1,2}.fq'</span><span class="o">)</span>
 <a id="__codelineno-53-2" name="__codelineno-53-2"></a>
 <a id="__codelineno-53-3" name="__codelineno-53-3"></a><span class="n">process</span><span class="w"> </span><span class="n">FOO</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-53-4" name="__codelineno-53-4"></a><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="s2">"results"</span><span class="o">,</span><span class="w"> </span><span class="nl">pattern:</span><span class="w"> </span><span class="s2">"*.bam"</span>
@@ -3308,7 +3308,7 @@
 <span class="normal"><a href="#__codelineno-54-20">20</a></span>
 <span class="normal"><a href="#__codelineno-54-21">21</a></span>
 <span class="normal"><a href="#__codelineno-54-22">22</a></span>
-<span class="normal"><a href="#__codelineno-54-23">23</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1"></a><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">'data/ggal/*_{1,2}.fq'</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-54-23">23</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1"></a><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">'data/ggal/*_{1,2}.fq'</span><span class="o">)</span>
 <a id="__codelineno-54-2" name="__codelineno-54-2"></a>
 <a id="__codelineno-54-3" name="__codelineno-54-3"></a><span class="n">process</span><span class="w"> </span><span class="n">FOO</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-54-4" name="__codelineno-54-4"></a><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="s2">"results/bam"</span><span class="o">,</span><span class="w"> </span><span class="nl">pattern:</span><span class="w"> </span><span class="s2">"*.bam"</span>
@@ -3344,7 +3344,7 @@
 <span class="normal"><a href="#__codelineno-55-4">4</a></span>
 <span class="normal"><a href="#__codelineno-55-5">5</a></span>
 <span class="normal"><a href="#__codelineno-55-6">6</a></span>
-<span class="normal"><a href="#__codelineno-55-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-55-1" name="__codelineno-55-1"></a><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">'data/ggal/*_{1,2}.fq'</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-55-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-55-1" name="__codelineno-55-1"></a><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">'data/ggal/*_{1,2}.fq'</span><span class="o">)</span>
 <a id="__codelineno-55-2" name="__codelineno-55-2"></a>
 <a id="__codelineno-55-3" name="__codelineno-55-3"></a><span class="n">process</span><span class="w"> </span><span class="n">FOO</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-55-4" name="__codelineno-55-4"></a><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="s2">"results/$sample_id"</span><span class="o">,</span><span class="w"> </span><span class="nl">pattern:</span><span class="w"> </span><span class="s2">"*.{bam,bai}"</span>

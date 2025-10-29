@@ -3518,7 +3518,7 @@
 <p>What we've just used is something called a "Channel Factory" in Nextflow language. This is this thing here, we're setting this variable to a new channel, and this channel factory here is creating a channel for us in a particular way.</p>
 <p>There are a handful of different channel factories that Nextflow has, to create channels from different types of inputs. Dot of is the simplest one, and just takes any strings that we give it.</p>
 <p>Notice that when I hover over these words in VS Code, the Nextflow extension is giving me a popup explaining what this syntax does, and there's also a read more text at the bottom of that popup window.</p>
-<p>If I click that, it'll open the Nextflow docs. In a new tab and take me straight to the documentation for this specific thing. In this case for Channel.of.</p>
+<p>If I click that, it'll open the Nextflow docs. In a new tab and take me straight to the documentation for this specific thing. In this case for channel.of.</p>
 <h2 id="12-add-the-channel-as-input-to-the-process-call">1.2. Add the channel as input to the process call<a class="headerlink" href="#12-add-the-channel-as-input-to-the-process-call" title="Permanent link">&para;</a></h2>
 <p>Note that the extension is also giving us a warning, saying that we've created a new channel here, but it's not being used by anything.</p>
 <p>So, let's fix that. I'm going to take the new channel name and I'm going to replace this params.greeting with our new channel.</p>
@@ -3558,7 +3558,7 @@
 <p>Let's work through this with an example. Let's say that we want to take these input strings, but instead of just putting them directly into a channel factory, we want to define them as an array.</p>
 <h2 id="311-set-up-the-input-variable">3.1.1. Set up the input variable<a class="headerlink" href="#311-set-up-the-input-variable" title="Permanent link">&para;</a></h2>
 <p>So I'm going to take these and do that as a new line above and say, greetings, array.</p>
-<p>There we go. I'm going to take that array variable and put it into the Channel.of, and hit save.</p>
+<p>There we go. I'm going to take that array variable and put it into the channel.of, and hit save.</p>
 <h2 id="313-run-the-workflow">3.1.3. Run the workflow<a class="headerlink" href="#313-run-the-workflow" title="Permanent link">&para;</a></h2>
 <p>Now, let's see what happens. Go back to my terminal. I'm just going to clear up all those temporary files again. And let's run the workflow.</p>
 <p>Not good. Okay. It broke. That's okay. I expected it to break this time. Debugging what goes wrong when an Nextflow workflow fails is a key part of being an Nextflow developer. This will happen a lot and it's important to understand what the error message says and how to deal with it.</p>

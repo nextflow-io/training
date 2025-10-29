@@ -1690,9 +1690,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#321-use-the-view-operator-to-inspect-channel-contents" class="md-nav__link">
+  <a href="#322-use-the-view-operator-to-inspect-channel-contents" class="md-nav__link">
     <span class="md-ellipsis">
-      3.2.1. Use the view() operator to inspect channel contents
+      3.2.2. Use the view() operator to inspect channel contents
     </span>
   </a>
   
@@ -4087,9 +4087,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#321-use-the-view-operator-to-inspect-channel-contents" class="md-nav__link">
+  <a href="#322-use-the-view-operator-to-inspect-channel-contents" class="md-nav__link">
     <span class="md-ellipsis">
-      3.2.1. Use the view() operator to inspect channel contents
+      3.2.2. Use the view() operator to inspect channel contents
     </span>
   </a>
   
@@ -4656,7 +4656,7 @@ That way, we can be lazy and not specify the input when we type the command to l
 <span class="normal"><a href="#__codelineno-12-37">37</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-12-30" name="__codelineno-12-30"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-12-31" name="__codelineno-12-31"></a>
 <a id="__codelineno-12-32" name="__codelineno-12-32"></a><span class="w">    </span><span class="c1">// Create input channel (single file via CLI parameter)</span>
-<a id="__codelineno-12-33" name="__codelineno-12-33"></a><span class="w">    </span><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads_bam</span><span class="o">)</span>
+<a id="__codelineno-12-33" name="__codelineno-12-33"></a><span class="w">    </span><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads_bam</span><span class="o">)</span>
 <a id="__codelineno-12-34" name="__codelineno-12-34"></a>
 <a id="__codelineno-12-35" name="__codelineno-12-35"></a><span class="w">    </span><span class="c1">// Create index file for input BAM file</span>
 <a id="__codelineno-12-36" name="__codelineno-12-36"></a><span class="w">    </span><span class="n">SAMTOOLS_INDEX</span><span class="o">(</span><span class="n">reads_ch</span><span class="o">)</span>
@@ -4927,7 +4927,7 @@ If your workflow run succeeded, run it again until you get an error like this:</
 </code></pre></div>
 <p>Pay particular attention to the names of the BAM file and the BAM index that are listed in this directory: <code>reads_son.bam</code> and <code>reads_father.bam.bai</code>.</p>
 <p>What the heck? Nextflow has staged an index file in this process call's work directory, but it's the wrong one. How could this have happened?</p>
-<h4 id="321-use-the-view-operator-to-inspect-channel-contents">3.2.1. Use the <a href="https://www.nextflow.io/docs/latest/reference/operator.html#view">view() operator</a> to inspect channel contents<a class="headerlink" href="#321-use-the-view-operator-to-inspect-channel-contents" title="Permanent link">&para;</a></h4>
+<h4 id="322-use-the-view-operator-to-inspect-channel-contents">3.2.2. Use the <a href="https://www.nextflow.io/docs/latest/reference/operator.html#view">view() operator</a> to inspect channel contents<a class="headerlink" href="#322-use-the-view-operator-to-inspect-channel-contents" title="Permanent link">&para;</a></h4>
 <p>Add these two lines in the workflow body before the <code>GATK_HAPLOTYPER</code> process call:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">genomics-1.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-31-84">84</a></span>
 <span class="normal"><a href="#__codelineno-31-85">85</a></span>
@@ -5083,12 +5083,12 @@ Since we're now giving it a file that lists input file paths, we need to change 
 <p><em>Before:</em></p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">genomics-1.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-47-68">68</a></span>
 <span class="normal"><a href="#__codelineno-47-69">69</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-47-68" name="__codelineno-47-68"></a><span class="c1">// Create input channel (single file via CLI parameter)</span>
-<a id="__codelineno-47-69" name="__codelineno-47-69"></a><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads_bam</span><span class="o">)</span>
+<a id="__codelineno-47-69" name="__codelineno-47-69"></a><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads_bam</span><span class="o">)</span>
 </code></pre></div></td></tr></table></div>
 <p><em>After:</em></p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">genomics-1.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-48-68">68</a></span>
 <span class="normal"><a href="#__codelineno-48-69">69</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-48-68" name="__codelineno-48-68"></a><span class="c1">// Create input channel from a text file listing input file paths</span>
-<a id="__codelineno-48-69" name="__codelineno-48-69"></a><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads_bam</span><span class="o">).</span><span class="na">splitText</span><span class="o">()</span>
+<a id="__codelineno-48-69" name="__codelineno-48-69"></a><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads_bam</span><span class="o">).</span><span class="na">splitText</span><span class="o">()</span>
 </code></pre></div></td></tr></table></div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>

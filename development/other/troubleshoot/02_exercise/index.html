@@ -3274,8 +3274,8 @@
 </ul>
 <p>It is likely that one or more channel type has been converted to a <em>queue</em> channel and is only being read once.</p>
 <p>In this example, the <code>GATK_HAPLOTYPECALLER</code> process is only executing one task.</p>
-<p>You can see that the channel factory <code>Channel.of</code> has been used.</p>
-<p>While parameters are treated as value channels, the <code>Channel.of</code> channel factory has converted these inputs to <code>queue</code> channels and are only being read once.</p>
+<p>You can see that the channel factory <code>channel.of</code> has been used.</p>
+<p>While parameters are treated as value channels, the <code>channel.of</code> channel factory has converted these inputs to <code>queue</code> channels and are only being read once.</p>
 <p>By removing these the inputs will be read multiple times.</p>
 <p>Currently:
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-gatk.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-111">111</a></span>
@@ -3286,10 +3286,10 @@
 <span class="normal"><a href="#__codelineno-2-116">116</a></span>
 <span class="normal"><a href="#__codelineno-2-117">117</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-111" name="__codelineno-2-111"></a><span class="go">GATK_HAPLOTYPECALLER(</span>
 <a id="__codelineno-2-112" name="__codelineno-2-112"></a><span class="go">    SAMTOOLS_INDEX.out,</span>
-<a id="__codelineno-2-113" name="__codelineno-2-113"></a><span class="go">    Channel.of(params.genome_reference),</span>
-<a id="__codelineno-2-114" name="__codelineno-2-114"></a><span class="go">    Channel.of(params.genome_reference_index),</span>
-<a id="__codelineno-2-115" name="__codelineno-2-115"></a><span class="go">    Channel.of(params.genome_reference_dict),</span>
-<a id="__codelineno-2-116" name="__codelineno-2-116"></a><span class="go">    Channel.of(params.calling_intervals)</span>
+<a id="__codelineno-2-113" name="__codelineno-2-113"></a><span class="go">    channel.of(params.genome_reference),</span>
+<a id="__codelineno-2-114" name="__codelineno-2-114"></a><span class="go">    channel.of(params.genome_reference_index),</span>
+<a id="__codelineno-2-115" name="__codelineno-2-115"></a><span class="go">    channel.of(params.genome_reference_dict),</span>
+<a id="__codelineno-2-116" name="__codelineno-2-116"></a><span class="go">    channel.of(params.calling_intervals)</span>
 <a id="__codelineno-2-117" name="__codelineno-2-117"></a><span class="go">)</span>
 </code></pre></div></td></tr></table></div></p>
 <p>After:

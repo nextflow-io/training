@@ -3483,7 +3483,7 @@
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span>
 <span class="normal"><a href="#__codelineno-6-2">2</a></span>
 <span class="normal"><a href="#__codelineno-6-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="hll"><span class="w">    </span><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads</span><span class="o">)</span><span class="w"> </span><span class="c1">// (1)!</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="hll"><span class="w">    </span><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads</span><span class="o">)</span><span class="w"> </span><span class="c1">// (1)!</span>
 </span><a id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <ol>
@@ -3547,7 +3547,7 @@
 <a id="__codelineno-7-18" name="__codelineno-7-18"></a><span class="o">}</span>
 <a id="__codelineno-7-19" name="__codelineno-7-19"></a>
 <a id="__codelineno-7-20" name="__codelineno-7-20"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-7-21" name="__codelineno-7-21"></a><span class="w">    </span><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads</span><span class="o">)</span>
+<a id="__codelineno-7-21" name="__codelineno-7-21"></a><span class="w">    </span><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads</span><span class="o">)</span>
 <a id="__codelineno-7-22" name="__codelineno-7-22"></a>
 <a id="__codelineno-7-23" name="__codelineno-7-23"></a><span class="hll"><span class="w">    </span><span class="n">BLANK</span>
 </span><a id="__codelineno-7-24" name="__codelineno-7-24"></a><span class="o">}</span>
@@ -3608,7 +3608,7 @@
 <a id="__codelineno-8-18" name="__codelineno-8-18"></a><span class="o">}</span>
 <a id="__codelineno-8-19" name="__codelineno-8-19"></a>
 <a id="__codelineno-8-20" name="__codelineno-8-20"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-8-21" name="__codelineno-8-21"></a><span class="w">    </span><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads</span><span class="o">)</span>
+<a id="__codelineno-8-21" name="__codelineno-8-21"></a><span class="w">    </span><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads</span><span class="o">)</span>
 <a id="__codelineno-8-22" name="__codelineno-8-22"></a>
 <a id="__codelineno-8-23" name="__codelineno-8-23"></a><span class="hll"><span class="w">    </span><span class="n">prepare_genome_samtools</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">genome</span><span class="o">)</span><span class="w"> </span><span class="c1">// (1)!</span>
 </span><a id="__codelineno-8-24" name="__codelineno-8-24"></a><span class="o">}</span>
@@ -3691,7 +3691,7 @@
 <a id="__codelineno-11-18" name="__codelineno-11-18"></a><span class="o">}</span>
 <a id="__codelineno-11-19" name="__codelineno-11-19"></a>
 <a id="__codelineno-11-20" name="__codelineno-11-20"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-11-21" name="__codelineno-11-21"></a><span class="w">    </span><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads</span><span class="o">)</span>
+<a id="__codelineno-11-21" name="__codelineno-11-21"></a><span class="w">    </span><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads</span><span class="o">)</span>
 <a id="__codelineno-11-22" name="__codelineno-11-22"></a>
 <a id="__codelineno-11-23" name="__codelineno-11-23"></a><span class="w">    </span><span class="n">prepare_genome_samtools</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">genome</span><span class="o">)</span>
 <a id="__codelineno-11-24" name="__codelineno-11-24"></a><span class="hll"><span class="w">    </span><span class="n">BLANK</span>
@@ -3747,7 +3747,7 @@
 <a id="__codelineno-12-18" name="__codelineno-12-18"></a><span class="o">}</span>
 <a id="__codelineno-12-19" name="__codelineno-12-19"></a>
 <a id="__codelineno-12-20" name="__codelineno-12-20"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-12-21" name="__codelineno-12-21"></a><span class="w">    </span><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads</span><span class="o">)</span>
+<a id="__codelineno-12-21" name="__codelineno-12-21"></a><span class="w">    </span><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads</span><span class="o">)</span>
 <a id="__codelineno-12-22" name="__codelineno-12-22"></a>
 <a id="__codelineno-12-23" name="__codelineno-12-23"></a><span class="w">    </span><span class="n">prepare_genome_samtools</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">genome</span><span class="o">)</span>
 <a id="__codelineno-12-24" name="__codelineno-12-24"></a><span class="hll"><span class="w">    </span><span class="n">prepare_genome_picard</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">genome</span><span class="o">)</span><span class="w"> </span><span class="c1">// (1)!</span>
@@ -3825,7 +3825,7 @@
 <a id="__codelineno-13-23" name="__codelineno-13-23"></a><span class="o">}</span>
 <a id="__codelineno-13-24" name="__codelineno-13-24"></a>
 <a id="__codelineno-13-25" name="__codelineno-13-25"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-13-26" name="__codelineno-13-26"></a><span class="w">    </span><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads</span><span class="o">)</span>
+<a id="__codelineno-13-26" name="__codelineno-13-26"></a><span class="w">    </span><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads</span><span class="o">)</span>
 <a id="__codelineno-13-27" name="__codelineno-13-27"></a>
 <a id="__codelineno-13-28" name="__codelineno-13-28"></a><span class="w">    </span><span class="n">prepare_genome_samtools</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">genome</span><span class="o">)</span>
 <a id="__codelineno-13-29" name="__codelineno-13-29"></a><span class="w">    </span><span class="n">prepare_genome_picard</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">genome</span><span class="o">)</span>
@@ -3897,7 +3897,7 @@
 <a id="__codelineno-14-23" name="__codelineno-14-23"></a><span class="o">}</span>
 <a id="__codelineno-14-24" name="__codelineno-14-24"></a>
 <a id="__codelineno-14-25" name="__codelineno-14-25"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-14-26" name="__codelineno-14-26"></a><span class="w">    </span><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads</span><span class="o">)</span>
+<a id="__codelineno-14-26" name="__codelineno-14-26"></a><span class="w">    </span><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads</span><span class="o">)</span>
 <a id="__codelineno-14-27" name="__codelineno-14-27"></a>
 <a id="__codelineno-14-28" name="__codelineno-14-28"></a><span class="w">    </span><span class="n">prepare_genome_samtools</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">genome</span><span class="o">)</span>
 <a id="__codelineno-14-29" name="__codelineno-14-29"></a><span class="w">    </span><span class="n">prepare_genome_picard</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">genome</span><span class="o">)</span>
@@ -3988,7 +3988,7 @@
 <a id="__codelineno-15-25" name="__codelineno-15-25"></a><span class="o">}</span>
 <a id="__codelineno-15-26" name="__codelineno-15-26"></a>
 <a id="__codelineno-15-27" name="__codelineno-15-27"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-15-28" name="__codelineno-15-28"></a><span class="w">    </span><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads</span><span class="o">)</span>
+<a id="__codelineno-15-28" name="__codelineno-15-28"></a><span class="w">    </span><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads</span><span class="o">)</span>
 <a id="__codelineno-15-29" name="__codelineno-15-29"></a>
 <a id="__codelineno-15-30" name="__codelineno-15-30"></a><span class="w">    </span><span class="n">prepare_genome_samtools</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">genome</span><span class="o">)</span>
 <a id="__codelineno-15-31" name="__codelineno-15-31"></a><span class="w">    </span><span class="n">prepare_genome_picard</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">genome</span><span class="o">)</span>
@@ -4075,7 +4075,7 @@
 <a id="__codelineno-17-25" name="__codelineno-17-25"></a><span class="o">}</span>
 <a id="__codelineno-17-26" name="__codelineno-17-26"></a>
 <a id="__codelineno-17-27" name="__codelineno-17-27"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-17-28" name="__codelineno-17-28"></a><span class="w">    </span><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads</span><span class="o">)</span>
+<a id="__codelineno-17-28" name="__codelineno-17-28"></a><span class="w">    </span><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads</span><span class="o">)</span>
 <a id="__codelineno-17-29" name="__codelineno-17-29"></a>
 <a id="__codelineno-17-30" name="__codelineno-17-30"></a><span class="w">    </span><span class="n">prepare_genome_samtools</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">genome</span><span class="o">)</span>
 <a id="__codelineno-17-31" name="__codelineno-17-31"></a><span class="w">    </span><span class="n">prepare_genome_picard</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">genome</span><span class="o">)</span>
@@ -4220,7 +4220,7 @@
 <a id="__codelineno-19-51" name="__codelineno-19-51"></a><span class="o">}</span>
 <a id="__codelineno-19-52" name="__codelineno-19-52"></a>
 <a id="__codelineno-19-53" name="__codelineno-19-53"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-19-54" name="__codelineno-19-54"></a><span class="w">    </span><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads</span><span class="o">)</span>
+<a id="__codelineno-19-54" name="__codelineno-19-54"></a><span class="w">    </span><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads</span><span class="o">)</span>
 <a id="__codelineno-19-55" name="__codelineno-19-55"></a>
 <a id="__codelineno-19-56" name="__codelineno-19-56"></a><span class="w">    </span><span class="n">prepare_genome_samtools</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">genome</span><span class="o">)</span>
 <a id="__codelineno-19-57" name="__codelineno-19-57"></a><span class="w">    </span><span class="n">prepare_genome_picard</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">genome</span><span class="o">)</span>
@@ -4391,7 +4391,7 @@
 <a id="__codelineno-21-51" name="__codelineno-21-51"></a><span class="o">}</span>
 <a id="__codelineno-21-52" name="__codelineno-21-52"></a>
 <a id="__codelineno-21-53" name="__codelineno-21-53"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-21-54" name="__codelineno-21-54"></a><span class="w">    </span><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads</span><span class="o">)</span>
+<a id="__codelineno-21-54" name="__codelineno-21-54"></a><span class="w">    </span><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads</span><span class="o">)</span>
 <a id="__codelineno-21-55" name="__codelineno-21-55"></a>
 <a id="__codelineno-21-56" name="__codelineno-21-56"></a><span class="w">    </span><span class="n">prepare_genome_samtools</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">genome</span><span class="o">)</span>
 <a id="__codelineno-21-57" name="__codelineno-21-57"></a><span class="w">    </span><span class="n">prepare_genome_picard</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">genome</span><span class="o">)</span>
@@ -4499,7 +4499,7 @@
 <a id="__codelineno-22-28" name="__codelineno-22-28"></a><span class="o">}</span>
 <a id="__codelineno-22-29" name="__codelineno-22-29"></a>
 <a id="__codelineno-22-30" name="__codelineno-22-30"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-22-31" name="__codelineno-22-31"></a><span class="w">    </span><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads</span><span class="o">)</span>
+<a id="__codelineno-22-31" name="__codelineno-22-31"></a><span class="w">    </span><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads</span><span class="o">)</span>
 <a id="__codelineno-22-32" name="__codelineno-22-32"></a>
 <a id="__codelineno-22-33" name="__codelineno-22-33"></a><span class="w">    </span><span class="n">prepare_genome_samtools</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">genome</span><span class="o">)</span>
 <a id="__codelineno-22-34" name="__codelineno-22-34"></a><span class="w">    </span><span class="n">prepare_genome_picard</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">genome</span><span class="o">)</span>
@@ -4623,7 +4623,7 @@
 <a id="__codelineno-24-29" name="__codelineno-24-29"></a><span class="o">}</span>
 <a id="__codelineno-24-30" name="__codelineno-24-30"></a>
 <a id="__codelineno-24-31" name="__codelineno-24-31"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-24-32" name="__codelineno-24-32"></a><span class="w">    </span><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads</span><span class="o">)</span>
+<a id="__codelineno-24-32" name="__codelineno-24-32"></a><span class="w">    </span><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads</span><span class="o">)</span>
 <a id="__codelineno-24-33" name="__codelineno-24-33"></a>
 <a id="__codelineno-24-34" name="__codelineno-24-34"></a><span class="w">    </span><span class="n">prepare_genome_samtools</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">genome</span><span class="o">)</span>
 <a id="__codelineno-24-35" name="__codelineno-24-35"></a><span class="w">    </span><span class="n">prepare_genome_picard</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">genome</span><span class="o">)</span>
@@ -4778,7 +4778,7 @@
 <a id="__codelineno-25-48" name="__codelineno-25-48"></a><span class="o">}</span>
 <a id="__codelineno-25-49" name="__codelineno-25-49"></a>
 <a id="__codelineno-25-50" name="__codelineno-25-50"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-25-51" name="__codelineno-25-51"></a><span class="w">    </span><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads</span><span class="o">)</span>
+<a id="__codelineno-25-51" name="__codelineno-25-51"></a><span class="w">    </span><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads</span><span class="o">)</span>
 <a id="__codelineno-25-52" name="__codelineno-25-52"></a>
 <a id="__codelineno-25-53" name="__codelineno-25-53"></a><span class="w">    </span><span class="n">prepare_genome_samtools</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">genome</span><span class="o">)</span>
 <a id="__codelineno-25-54" name="__codelineno-25-54"></a><span class="w">    </span><span class="n">prepare_genome_picard</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">genome</span><span class="o">)</span>
@@ -4955,7 +4955,7 @@
 <a id="__codelineno-27-48" name="__codelineno-27-48"></a><span class="o">}</span>
 <a id="__codelineno-27-49" name="__codelineno-27-49"></a>
 <a id="__codelineno-27-50" name="__codelineno-27-50"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-27-51" name="__codelineno-27-51"></a><span class="w">    </span><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads</span><span class="o">)</span>
+<a id="__codelineno-27-51" name="__codelineno-27-51"></a><span class="w">    </span><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads</span><span class="o">)</span>
 <a id="__codelineno-27-52" name="__codelineno-27-52"></a>
 <a id="__codelineno-27-53" name="__codelineno-27-53"></a><span class="w">    </span><span class="n">prepare_genome_samtools</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">genome</span><span class="o">)</span>
 <a id="__codelineno-27-54" name="__codelineno-27-54"></a><span class="w">    </span><span class="n">prepare_genome_picard</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">genome</span><span class="o">)</span>
@@ -5099,7 +5099,7 @@
 <a id="__codelineno-28-35" name="__codelineno-28-35"></a><span class="o">}</span>
 <a id="__codelineno-28-36" name="__codelineno-28-36"></a>
 <a id="__codelineno-28-37" name="__codelineno-28-37"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-28-38" name="__codelineno-28-38"></a><span class="w">    </span><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads</span><span class="o">)</span>
+<a id="__codelineno-28-38" name="__codelineno-28-38"></a><span class="w">    </span><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads</span><span class="o">)</span>
 <a id="__codelineno-28-39" name="__codelineno-28-39"></a>
 <a id="__codelineno-28-40" name="__codelineno-28-40"></a><span class="w">    </span><span class="n">prepare_genome_samtools</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">genome</span><span class="o">)</span>
 <a id="__codelineno-28-41" name="__codelineno-28-41"></a><span class="w">    </span><span class="n">prepare_genome_picard</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">genome</span><span class="o">)</span>
@@ -5260,7 +5260,7 @@
 <a id="__codelineno-30-35" name="__codelineno-30-35"></a><span class="o">}</span>
 <a id="__codelineno-30-36" name="__codelineno-30-36"></a>
 <a id="__codelineno-30-37" name="__codelineno-30-37"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-30-38" name="__codelineno-30-38"></a><span class="w">    </span><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads</span><span class="o">)</span>
+<a id="__codelineno-30-38" name="__codelineno-30-38"></a><span class="w">    </span><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads</span><span class="o">)</span>
 <a id="__codelineno-30-39" name="__codelineno-30-39"></a>
 <a id="__codelineno-30-40" name="__codelineno-30-40"></a><span class="w">    </span><span class="n">prepare_genome_samtools</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">genome</span><span class="o">)</span>
 <a id="__codelineno-30-41" name="__codelineno-30-41"></a><span class="w">    </span><span class="n">prepare_genome_picard</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">genome</span><span class="o">)</span>
@@ -5485,7 +5485,7 @@
 <a id="__codelineno-31-61" name="__codelineno-31-61"></a><span class="o">}</span>
 <a id="__codelineno-31-62" name="__codelineno-31-62"></a>
 <a id="__codelineno-31-63" name="__codelineno-31-63"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-31-64" name="__codelineno-31-64"></a><span class="w">    </span><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads</span><span class="o">)</span>
+<a id="__codelineno-31-64" name="__codelineno-31-64"></a><span class="w">    </span><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads</span><span class="o">)</span>
 <a id="__codelineno-31-65" name="__codelineno-31-65"></a>
 <a id="__codelineno-31-66" name="__codelineno-31-66"></a><span class="w">    </span><span class="n">prepare_genome_samtools</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">genome</span><span class="o">)</span>
 <a id="__codelineno-31-67" name="__codelineno-31-67"></a><span class="w">    </span><span class="n">prepare_genome_picard</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">genome</span><span class="o">)</span>
@@ -5686,7 +5686,7 @@
 <a id="__codelineno-32-61" name="__codelineno-32-61"></a><span class="o">}</span>
 <a id="__codelineno-32-62" name="__codelineno-32-62"></a>
 <a id="__codelineno-32-63" name="__codelineno-32-63"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-32-64" name="__codelineno-32-64"></a><span class="w">    </span><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads</span><span class="o">)</span>
+<a id="__codelineno-32-64" name="__codelineno-32-64"></a><span class="w">    </span><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads</span><span class="o">)</span>
 <a id="__codelineno-32-65" name="__codelineno-32-65"></a>
 <a id="__codelineno-32-66" name="__codelineno-32-66"></a><span class="w">    </span><span class="n">prepare_genome_samtools</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">genome</span><span class="o">)</span>
 <a id="__codelineno-32-67" name="__codelineno-32-67"></a><span class="w">    </span><span class="n">prepare_genome_picard</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">genome</span><span class="o">)</span>
@@ -5799,7 +5799,7 @@
 <span class="normal"><a href="#__codelineno-37-40">40</a></span>
 <span class="normal"><a href="#__codelineno-37-41">41</a></span>
 <span class="normal"><a href="#__codelineno-37-42">42</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-37-2" name="__codelineno-37-2"></a><span class="w">    </span><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads</span><span class="o">)</span>
+<a id="__codelineno-37-2" name="__codelineno-37-2"></a><span class="w">    </span><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads</span><span class="o">)</span>
 <a id="__codelineno-37-3" name="__codelineno-37-3"></a>
 <a id="__codelineno-37-4" name="__codelineno-37-4"></a><span class="w">    </span><span class="n">prepare_genome_samtools</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">genome</span><span class="o">)</span>
 <a id="__codelineno-37-5" name="__codelineno-37-5"></a><span class="w">    </span><span class="n">prepare_genome_picard</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">genome</span><span class="o">)</span>
@@ -5982,7 +5982,7 @@
 </span><a id="__codelineno-39-29" name="__codelineno-39-29"></a><span class="hll"><span class="o">}</span>
 </span><a id="__codelineno-39-30" name="__codelineno-39-30"></a>
 <a id="__codelineno-39-31" name="__codelineno-39-31"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-39-32" name="__codelineno-39-32"></a><span class="w">    </span><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads</span><span class="o">)</span>
+<a id="__codelineno-39-32" name="__codelineno-39-32"></a><span class="w">    </span><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads</span><span class="o">)</span>
 <a id="__codelineno-39-33" name="__codelineno-39-33"></a>
 <a id="__codelineno-39-34" name="__codelineno-39-34"></a><span class="w">    </span><span class="n">prepare_genome_samtools</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">genome</span><span class="o">)</span>
 <a id="__codelineno-39-35" name="__codelineno-39-35"></a><span class="w">    </span><span class="n">prepare_genome_picard</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">genome</span><span class="o">)</span>

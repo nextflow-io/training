@@ -2320,7 +2320,7 @@
           <li class="md-nav__item">
   <a href="#31-reading-files-with-channelfrompath" class="md-nav__link">
     <span class="md-ellipsis">
-      3.1. Reading Files with Channel.fromPath
+      3.1. Reading Files with channel.fromPath
     </span>
   </a>
   
@@ -2408,11 +2408,11 @@
 </li>  <li class="md-nav__item">
   <a href="#5-simplifying-with-channelfromfilepairs" class="md-nav__link">
     <span class="md-ellipsis">
-      5. Simplifying with Channel.fromFilePairs
+      5. Simplifying with channel.fromFilePairs
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="5. Simplifying with Channel.fromFilePairs">
+    <nav class="md-nav" aria-label="5. Simplifying with channel.fromFilePairs">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -3802,7 +3802,7 @@
           <li class="md-nav__item">
   <a href="#31-reading-files-with-channelfrompath" class="md-nav__link">
     <span class="md-ellipsis">
-      3.1. Reading Files with Channel.fromPath
+      3.1. Reading Files with channel.fromPath
     </span>
   </a>
   
@@ -3890,11 +3890,11 @@
 </li>  <li class="md-nav__item">
   <a href="#5-simplifying-with-channelfromfilepairs" class="md-nav__link">
     <span class="md-ellipsis">
-      5. Simplifying with Channel.fromFilePairs
+      5. Simplifying with channel.fromFilePairs
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="5. Simplifying with Channel.fromFilePairs">
+    <nav class="md-nav" aria-label="5. Simplifying with channel.fromFilePairs">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -4251,7 +4251,7 @@
 <li>Create Path objects from file path strings using Nextflow's <code>file()</code> method</li>
 <li>Access file attributes such as name, extension, and parent directory</li>
 <li>Handle both local and remote files transparently using URIs</li>
-<li>Use channels to automate file handling with <code>Channel.fromPath()</code> and <code>Channel.fromFilePairs()</code></li>
+<li>Use channels to automate file handling with <code>channel.fromPath()</code> and <code>channel.fromFilePairs()</code></li>
 <li>Extract and structure metadata from filenames using string manipulation</li>
 <li>Group related files using pattern matching and glob expressions</li>
 <li>Integrate file operations into Nextflow processes with proper input handling</li>
@@ -4808,13 +4808,13 @@
 <h4 id="cloud-storage-with-glob-patterns">Cloud Storage with Glob Patterns<a class="headerlink" href="#cloud-storage-with-glob-patterns" title="Permanent link">&para;</a></h4>
 <p>While HTTP doesn't support globs, cloud storage protocols do. Here's how you could use glob patterns with cloud storage:</p>
 <div class="highlight"><span class="filename">Cloud storage examples (not runnable in this environment)</span><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="c1">// S3 with glob patterns - would match multiple files</span>
-<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="n">ch_s3_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">&#39;s3://my-bucket/data/*.fastq.gz&#39;</span><span class="o">)</span>
+<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="n">ch_s3_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">&#39;s3://my-bucket/data/*.fastq.gz&#39;</span><span class="o">)</span>
 <a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a>
 <a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a><span class="c1">// Azure Blob Storage with glob patterns</span>
-<a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a><span class="n">ch_azure_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">&#39;az://container/data/patient*_R{1,2}.fastq.gz&#39;</span><span class="o">)</span>
+<a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a><span class="n">ch_azure_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">&#39;az://container/data/patient*_R{1,2}.fastq.gz&#39;</span><span class="o">)</span>
 <a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a>
 <a id="__codelineno-28-7" name="__codelineno-28-7" href="#__codelineno-28-7"></a><span class="c1">// Google Cloud Storage with glob patterns</span>
-<a id="__codelineno-28-8" name="__codelineno-28-8" href="#__codelineno-28-8"></a><span class="n">ch_gcs_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">&#39;gs://bucket/data/sample_*.fastq.gz&#39;</span><span class="o">)</span>
+<a id="__codelineno-28-8" name="__codelineno-28-8" href="#__codelineno-28-8"></a><span class="n">ch_gcs_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">&#39;gs://bucket/data/sample_*.fastq.gz&#39;</span><span class="o">)</span>
 </code></pre></div>
 <p>These examples show the power of Nextflow's unified file handling - the same code works whether files are local or in the cloud, as long as the protocol supports the operations you need.</p>
 <h3 id="takeaway_1">Takeaway<a class="headerlink" href="#takeaway_1" title="Permanent link">&para;</a></h3>
@@ -4880,11 +4880,11 @@
 </div>
 <hr />
 <h2 id="3-reading-files-using-the-frompath-channel-factory">3. Reading files using the <code>fromPath()</code> channel factory<a class="headerlink" href="#3-reading-files-using-the-frompath-channel-factory" title="Permanent link">&para;</a></h2>
-<p>The <code>file()</code> method is useful for simple file operations, and we can combine that with <a href="https://www.nextflow.io/docs/latest/reference/channel.html#of"><code>Channel.of()</code></a> to build channels from files like:</p>
-<div class="highlight"><span class="filename">Channel.of() with file()</span><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="w">    </span><span class="n">ch_fastq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">([</span><span class="n">file</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R1_001.fastq.gz&#39;</span><span class="o">)])</span>
+<p>The <code>file()</code> method is useful for simple file operations, and we can combine that with <a href="https://www.nextflow.io/docs/latest/reference/channel.html#of"><code>channel.of()</code></a> to build channels from files like:</p>
+<div class="highlight"><span class="filename">channel.of() with file()</span><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="w">    </span><span class="n">ch_fastq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">([</span><span class="n">file</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R1_001.fastq.gz&#39;</span><span class="o">)])</span>
 </code></pre></div>
-<p>But we have a much more convenient tool called <a href="https://www.nextflow.io/docs/latest/reference/channel.html#frompath"><code>Channel.fromPath()</code></a> which generates a channel from static file strings as well as glob patterns.</p>
-<h3 id="31-reading-files-with-channelfrompath">3.1. Reading Files with Channel.fromPath<a class="headerlink" href="#31-reading-files-with-channelfrompath" title="Permanent link">&para;</a></h3>
+<p>But we have a much more convenient tool called <a href="https://www.nextflow.io/docs/latest/reference/channel.html#frompath"><code>channel.fromPath()</code></a> which generates a channel from static file strings as well as glob patterns.</p>
+<h3 id="31-reading-files-with-channelfrompath">3.1. Reading Files with channel.fromPath<a class="headerlink" href="#31-reading-files-with-channelfrompath" title="Permanent link">&para;</a></h3>
 <p>Update your <code>file_operations.nf</code> file:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">After</label><label for="__tabbed_7_2">Before</label></div>
 <div class="tabbed-content">
@@ -4899,8 +4899,8 @@
 <span class="normal"><a href="#__codelineno-32-9"> 9</a></span>
 <span class="normal"><a href="#__codelineno-32-10">10</a></span>
 <span class="normal"><a href="#__codelineno-32-11">11</a></span>
-<span class="normal"><a href="#__codelineno-32-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-32-2" name="__codelineno-32-2"></a><span class="w">    </span><span class="c1">// Reading files with Channel.fromPath</span>
-<a id="__codelineno-32-3" name="__codelineno-32-3"></a><span class="hll"><span class="w">    </span><span class="n">ch_fastq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R1_001.fastq.gz&#39;</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-32-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-32-2" name="__codelineno-32-2"></a><span class="w">    </span><span class="c1">// Reading files with channel.fromPath</span>
+<a id="__codelineno-32-3" name="__codelineno-32-3"></a><span class="hll"><span class="w">    </span><span class="n">ch_fastq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R1_001.fastq.gz&#39;</span><span class="o">)</span>
 </span><a id="__codelineno-32-4" name="__codelineno-32-4"></a><span class="w">    </span><span class="n">ch_fastq</span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">&quot;Found file: $it of type ${it.class}&quot;</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-32-5" name="__codelineno-32-5"></a>
 <a id="__codelineno-32-6" name="__codelineno-32-6"></a><span class="w">    </span><span class="c1">// // Print file attributes</span>
@@ -4937,16 +4937,16 @@
 </div>
 </div>
 <p>Run the workflow:</p>
-<div class="highlight"><span class="filename">Test Channel.fromPath</span><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>file_operations.nf
+<div class="highlight"><span class="filename">Test channel.fromPath</span><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>file_operations.nf
 </code></pre></div>
 <p>You'll see each file path being emitted as a separate element in the channel:</p>
-<div class="highlight"><span class="filename">Channel.fromPath Output</span><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="go"> N E X T F L O W   ~  version 25.04.3</span>
+<div class="highlight"><span class="filename">channel.fromPath Output</span><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="go"> N E X T F L O W   ~  version 25.04.3</span>
 <a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>
 <a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a><span class="go">Launching `file_operations.nf` [grave_meucci] DSL2 - revision: b09964a583</span>
 <a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a>
 <a id="__codelineno-35-5" name="__codelineno-35-5" href="#__codelineno-35-5"></a><span class="go">Found file: /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz of type class sun.nio.fs.UnixPath</span>
 </code></pre></div>
-<p>Note how Nextflow has grabbed the file we specified and turned it into a <code>Path</code> type object, in exactly the same way that <code>file()</code> would have done. <code>Channel.fromPath()</code> is just a convenient way of creating a new channel populated by a list of files.</p>
+<p>Note how Nextflow has grabbed the file we specified and turned it into a <code>Path</code> type object, in exactly the same way that <code>file()</code> would have done. <code>channel.fromPath()</code> is just a convenient way of creating a new channel populated by a list of files.</p>
 <h3 id="32-viewing-channel-contents">3.2. Viewing Channel Contents<a class="headerlink" href="#32-viewing-channel-contents" title="Permanent link">&para;</a></h3>
 <p>In our first version, we use <code>.view()</code> to print the file name. Let's update our workflow to print out the file attributes:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="8:2"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">After</label><label for="__tabbed_8_2">Before</label></div>
@@ -4960,8 +4960,8 @@
 <span class="normal"><a href="#__codelineno-36-7"> 7</a></span>
 <span class="normal"><a href="#__codelineno-36-8"> 8</a></span>
 <span class="normal"><a href="#__codelineno-36-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-36-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-36-2" name="__codelineno-36-2"></a><span class="w">    </span><span class="c1">// Reading files with Channel.fromPath</span>
-<a id="__codelineno-36-3" name="__codelineno-36-3"></a><span class="w">    </span><span class="n">ch_fastq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R1_001.fastq.gz&#39;</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-36-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-36-2" name="__codelineno-36-2"></a><span class="w">    </span><span class="c1">// Reading files with channel.fromPath</span>
+<a id="__codelineno-36-3" name="__codelineno-36-3"></a><span class="w">    </span><span class="n">ch_fastq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R1_001.fastq.gz&#39;</span><span class="o">)</span>
 <a id="__codelineno-36-4" name="__codelineno-36-4"></a><span class="hll"><span class="w">    </span><span class="n">ch_fastq</span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">myFile</span><span class="w"> </span><span class="o">-&gt;</span>
 </span><a id="__codelineno-36-5" name="__codelineno-36-5"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;File object class: ${myFile.class}&quot;</span>
 </span><a id="__codelineno-36-6" name="__codelineno-36-6"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;File name: ${myFile.name}&quot;</span>
@@ -4981,8 +4981,8 @@
 <span class="normal"><a href="#__codelineno-37-8"> 8</a></span>
 <span class="normal"><a href="#__codelineno-37-9"> 9</a></span>
 <span class="normal"><a href="#__codelineno-37-10">10</a></span>
-<span class="normal"><a href="#__codelineno-37-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-37-2" name="__codelineno-37-2"></a><span class="w">    </span><span class="c1">// Reading files with Channel.fromPath</span>
-<a id="__codelineno-37-3" name="__codelineno-37-3"></a><span class="w">    </span><span class="n">ch_fastq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R1_001.fastq.gz&#39;</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-37-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-37-2" name="__codelineno-37-2"></a><span class="w">    </span><span class="c1">// Reading files with channel.fromPath</span>
+<a id="__codelineno-37-3" name="__codelineno-37-3"></a><span class="w">    </span><span class="n">ch_fastq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R1_001.fastq.gz&#39;</span><span class="o">)</span>
 <a id="__codelineno-37-4" name="__codelineno-37-4"></a><span class="hll"><span class="w">    </span><span class="n">ch_fastq</span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">myFile</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;Found file: $myFile&quot;</span><span class="w"> </span><span class="o">}</span>
 </span><a id="__codelineno-37-5" name="__codelineno-37-5"></a>
 <a id="__codelineno-37-6" name="__codelineno-37-6"></a><span class="w">    </span><span class="c1">// // Print file attributes</span>
@@ -4996,9 +4996,9 @@
 </div>
 </div>
 <p>Run the workflow:</p>
-<div class="highlight"><span class="filename">Test file attributes with Channel.fromPath</span><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>file_operations.nf
+<div class="highlight"><span class="filename">Test file attributes with channel.fromPath</span><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>file_operations.nf
 </code></pre></div>
-<div class="highlight"><span class="filename">Channel.fromPath Output</span><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="go"> N E X T F L O W   ~  version 25.04.3</span>
+<div class="highlight"><span class="filename">channel.fromPath Output</span><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="go"> N E X T F L O W   ~  version 25.04.3</span>
 <a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a>
 <a id="__codelineno-39-3" name="__codelineno-39-3" href="#__codelineno-39-3"></a><span class="go">Launching `file_operations.nf` [furious_swanson] DSL2 - revision: c35c34950d</span>
 <a id="__codelineno-39-4" name="__codelineno-39-4" href="#__codelineno-39-4"></a>
@@ -5009,16 +5009,16 @@
 <a id="__codelineno-39-9" name="__codelineno-39-9" href="#__codelineno-39-9"></a><span class="go">Parent directory: /workspaces/training/side-quests/working_with_files/data</span>
 </code></pre></div>
 <h3 id="33-using-a-glob-to-match-multiple-files">3.3. Using a glob to match multiple files<a class="headerlink" href="#33-using-a-glob-to-match-multiple-files" title="Permanent link">&para;</a></h3>
-<p><code>Channel.fromPath()</code> can take a glob pattern as an argument, which will match all files in the directory that match the pattern. Let's grab both of the pair of FASTQs associated with this patient.</p>
+<p><code>channel.fromPath()</code> can take a glob pattern as an argument, which will match all files in the directory that match the pattern. Let's grab both of the pair of FASTQs associated with this patient.</p>
 <p>A glob pattern is a pattern that matches one or more characters in a string. The <code>*</code> wildcard is the most common glob pattern, which will match any character in it's place. To do this, we replace the full path with a <code>*</code> wildcard, which will match any character in it's place. In this case, we will replace the read number from <code>R1</code> to <code>R*</code>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="9:2"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">After</label><label for="__tabbed_9_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">file_operations.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-40-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-40-3" name="__codelineno-40-3"></a><span class="w">    </span><span class="n">ch_fastq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R*_001.fastq.gz&#39;</span><span class="o">)</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">file_operations.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-40-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-40-3" name="__codelineno-40-3"></a><span class="w">    </span><span class="n">ch_fastq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R*_001.fastq.gz&#39;</span><span class="o">)</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">file_operations.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-41-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-41-3" name="__codelineno-41-3"></a><span class="w">    </span><span class="n">ch_fastq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R1_001.fastq.gz&#39;</span><span class="o">)</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">file_operations.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-41-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-41-3" name="__codelineno-41-3"></a><span class="w">    </span><span class="n">ch_fastq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R1_001.fastq.gz&#39;</span><span class="o">)</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -5026,7 +5026,7 @@
 <p>Run the workflow:</p>
 <div class="highlight"><span class="filename">Test glob pattern matching</span><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>file_operations.nf
 </code></pre></div>
-<div class="highlight"><span class="filename">Channel.fromPath Glob Output</span><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a><span class="go"> N E X T F L O W   ~  version 25.04.3</span>
+<div class="highlight"><span class="filename">channel.fromPath Glob Output</span><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a><span class="go"> N E X T F L O W   ~  version 25.04.3</span>
 <a id="__codelineno-43-2" name="__codelineno-43-2" href="#__codelineno-43-2"></a>
 <a id="__codelineno-43-3" name="__codelineno-43-3" href="#__codelineno-43-3"></a><span class="go">Launching `file_operations.nf` [boring_sammet] DSL2 - revision: d2aa789c9a</span>
 <a id="__codelineno-43-4" name="__codelineno-43-4" href="#__codelineno-43-4"></a>
@@ -5044,7 +5044,7 @@
 <p>Using this method, we could grab as many or as few files as we want just by changing the glob pattern. If we made it more generous, we could grab all the files in the <code>data</code> directory, but we'll come back to that later.</p>
 <h3 id="takeaway_2">Takeaway<a class="headerlink" href="#takeaway_2" title="Permanent link">&para;</a></h3>
 <ul>
-<li><code>Channel.fromPath()</code> creates a channel with files matching a pattern</li>
+<li><code>channel.fromPath()</code> creates a channel with files matching a pattern</li>
 <li>Each file is emitted as a separate element in the channel</li>
 <li>We can use a glob pattern to match multiple files</li>
 <li>Files are automatically converted to Path objects with full attributes</li>
@@ -5205,15 +5205,15 @@
 </ul>
 <p>Next up, we will look at how to handle paired-end reads.</p>
 <hr />
-<h2 id="5-simplifying-with-channelfromfilepairs">5. Simplifying with Channel.fromFilePairs<a class="headerlink" href="#5-simplifying-with-channelfromfilepairs" title="Permanent link">&para;</a></h2>
-<p>Nextflow provides a specialized channel factory method for working with paired files: <code>Channel.fromFilePairs()</code>. This method automatically groups files that share a common prefix. This is particularly useful for paired-end sequencing data, where you have two files (e.g., R1 and R2) for each sample.</p>
+<h2 id="5-simplifying-with-channelfromfilepairs">5. Simplifying with channel.fromFilePairs<a class="headerlink" href="#5-simplifying-with-channelfromfilepairs" title="Permanent link">&para;</a></h2>
+<p>Nextflow provides a specialized channel factory method for working with paired files: <code>channel.fromFilePairs()</code>. This method automatically groups files that share a common prefix. This is particularly useful for paired-end sequencing data, where you have two files (e.g., R1 and R2) for each sample.</p>
 <h3 id="51-basic-usage-of-fromfilepairs">5.1. Basic Usage of fromFilePairs<a class="headerlink" href="#51-basic-usage-of-fromfilepairs" title="Permanent link">&para;</a></h3>
 <p>Complete your <code>file_operations.nf</code> file with the following (deleting the map operation):</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="13:2"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><input id="__tabbed_13_2" name="__tabbed_13" type="radio" /><div class="tabbed-labels"><label for="__tabbed_13_1">After</label><label for="__tabbed_13_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">file_operations.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-58-3">3</a></span>
-<span class="normal"><a href="#__codelineno-58-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-58-3" name="__codelineno-58-3"></a><span class="hll"><span class="w">    </span><span class="n">ch_fastq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R{1,2}_001.fastq.gz&#39;</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-58-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-58-3" name="__codelineno-58-3"></a><span class="hll"><span class="w">    </span><span class="n">ch_fastq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R{1,2}_001.fastq.gz&#39;</span><span class="o">)</span>
 </span><a id="__codelineno-58-4" name="__codelineno-58-4"></a><span class="w">        </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -5231,7 +5231,7 @@
 <span class="normal"><a href="#__codelineno-59-13">13</a></span>
 <span class="normal"><a href="#__codelineno-59-14">14</a></span>
 <span class="normal"><a href="#__codelineno-59-15">15</a></span>
-<span class="normal"><a href="#__codelineno-59-16">16</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-59-3" name="__codelineno-59-3"></a><span class="hll"><span class="w">    </span><span class="n">ch_fastq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R*_001.fastq.gz&#39;</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-59-16">16</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-59-3" name="__codelineno-59-3"></a><span class="hll"><span class="w">    </span><span class="n">ch_fastq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R*_001.fastq.gz&#39;</span><span class="o">)</span>
 </span><a id="__codelineno-59-4" name="__codelineno-59-4"></a><span class="hll"><span class="w">    </span><span class="n">ch_fastq</span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">myFile</span><span class="w"> </span><span class="o">-&gt;</span>
 </span><a id="__codelineno-59-5" name="__codelineno-59-5"></a><span class="hll"><span class="w">        </span><span class="kt">def</span><span class="w"> </span><span class="o">(</span><span class="n">sample</span><span class="o">,</span><span class="w"> </span><span class="n">replicate</span><span class="o">,</span><span class="w"> </span><span class="n">type</span><span class="o">,</span><span class="w"> </span><span class="n">readNum</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">myFile</span><span class="o">.</span><span class="na">simpleName</span><span class="o">.</span><span class="na">tokenize</span><span class="o">(</span><span class="s1">&#39;_&#39;</span><span class="o">)</span>
 </span><a id="__codelineno-59-6" name="__codelineno-59-6"></a><span class="hll"><span class="w">        </span><span class="o">[</span>
@@ -5250,10 +5250,10 @@
 </div>
 </div>
 <p>Run the workflow:</p>
-<div class="highlight"><span class="filename">Test Channel.fromFilePairs</span><pre><span></span><code><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>file_operations.nf
+<div class="highlight"><span class="filename">Test channel.fromFilePairs</span><pre><span></span><code><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>file_operations.nf
 </code></pre></div>
 <p>The output will show the paired files grouped together:</p>
-<div class="highlight"><span class="filename">Channel.fromFilePairs Output</span><pre><span></span><code><a id="__codelineno-61-1" name="__codelineno-61-1" href="#__codelineno-61-1"></a><span class="go"> N E X T F L O W   ~  version 25.04.3</span>
+<div class="highlight"><span class="filename">channel.fromFilePairs Output</span><pre><span></span><code><a id="__codelineno-61-1" name="__codelineno-61-1" href="#__codelineno-61-1"></a><span class="go"> N E X T F L O W   ~  version 25.04.3</span>
 <a id="__codelineno-61-2" name="__codelineno-61-2" href="#__codelineno-61-2"></a>
 <a id="__codelineno-61-3" name="__codelineno-61-3" href="#__codelineno-61-3"></a><span class="go">Launching `file_operations.nf` [chaotic_cuvier] DSL2 - revision: 472265a440</span>
 <a id="__codelineno-61-4" name="__codelineno-61-4" href="#__codelineno-61-4"></a>
@@ -5277,7 +5277,7 @@
 <span class="normal"><a href="#__codelineno-62-12">12</a></span>
 <span class="normal"><a href="#__codelineno-62-13">13</a></span>
 <span class="normal"><a href="#__codelineno-62-14">14</a></span>
-<span class="normal"><a href="#__codelineno-62-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-62-3" name="__codelineno-62-3"></a><span class="w">    </span><span class="n">ch_fastq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R{1,2}_001.fastq.gz&#39;</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-62-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-62-3" name="__codelineno-62-3"></a><span class="w">    </span><span class="n">ch_fastq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R{1,2}_001.fastq.gz&#39;</span><span class="o">)</span>
 <a id="__codelineno-62-4" name="__codelineno-62-4"></a><span class="hll"><span class="w">    </span><span class="n">ch_fastq</span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">id</span><span class="o">,</span><span class="w"> </span><span class="n">fastqs</span><span class="w"> </span><span class="o">-&gt;</span>
 </span><a id="__codelineno-62-5" name="__codelineno-62-5"></a><span class="hll"><span class="w">        </span><span class="kt">def</span><span class="w"> </span><span class="o">(</span><span class="n">sample</span><span class="o">,</span><span class="w"> </span><span class="n">replicate</span><span class="o">,</span><span class="w"> </span><span class="n">type</span><span class="o">,</span><span class="w"> </span><span class="n">readNum</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">id</span><span class="o">.</span><span class="na">tokenize</span><span class="o">(</span><span class="s1">&#39;_&#39;</span><span class="o">)</span>
 </span><a id="__codelineno-62-6" name="__codelineno-62-6"></a><span class="hll"><span class="w">        </span><span class="o">[</span>
@@ -5294,7 +5294,7 @@
 </div>
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">file_operations.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-63-2">2</a></span>
-<span class="normal"><a href="#__codelineno-63-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-63-2" name="__codelineno-63-2"></a><span class="w">    </span><span class="n">ch_fastq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R{1,2}_001.fastq.gz&#39;</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-63-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-63-2" name="__codelineno-63-2"></a><span class="w">    </span><span class="n">ch_fastq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R{1,2}_001.fastq.gz&#39;</span><span class="o">)</span>
 <a id="__codelineno-63-3" name="__codelineno-63-3"></a><span class="w">        </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -5312,7 +5312,7 @@
 <p>Well done! We have grabbed the metadata from the filenames and used them as values in the tuple.</p>
 <h3 id="takeaway_4">Takeaway<a class="headerlink" href="#takeaway_4" title="Permanent link">&para;</a></h3>
 <ul>
-<li><a href="https://www.nextflow.io/docs/latest/reference/channel.html#fromfilepairs"><code>Channel.fromFilePairs()</code> automatically finds and pairs related files</a></li>
+<li><a href="https://www.nextflow.io/docs/latest/reference/channel.html#fromfilepairs"><code>channel.fromFilePairs()</code> automatically finds and pairs related files</a></li>
 <li>This simplifies handling paired-end reads in your pipeline</li>
 <li>Paired files can be grouped as <code>[id, [file1, file2]]</code> tuples</li>
 <li>Metadata extraction can be done from the paired file ID rather than individual files</li>
@@ -5403,7 +5403,7 @@
 <span class="normal"><a href="#__codelineno-68-36">36</a></span>
 <span class="normal"><a href="#__codelineno-68-37">37</a></span>
 <span class="normal"><a href="#__codelineno-68-38">38</a></span>
-<span class="normal"><a href="#__codelineno-68-39">39</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-68-26" name="__codelineno-68-26"></a><span class="w">    </span><span class="n">ch_fastq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R{1,2}_001.fastq.gz&#39;</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-68-39">39</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-68-26" name="__codelineno-68-26"></a><span class="w">    </span><span class="n">ch_fastq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R{1,2}_001.fastq.gz&#39;</span><span class="o">)</span>
 <a id="__codelineno-68-27" name="__codelineno-68-27"></a><span class="hll"><span class="w">    </span><span class="n">ch_samples</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ch_fastq</span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">id</span><span class="o">,</span><span class="w"> </span><span class="n">fastqs</span><span class="w"> </span><span class="o">-&gt;</span>
 </span><a id="__codelineno-68-28" name="__codelineno-68-28"></a><span class="w">        </span><span class="kt">def</span><span class="w"> </span><span class="o">(</span><span class="n">sample</span><span class="o">,</span><span class="w"> </span><span class="n">replicate</span><span class="o">,</span><span class="w"> </span><span class="n">type</span><span class="o">,</span><span class="w"> </span><span class="n">readNum</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">id</span><span class="o">.</span><span class="na">tokenize</span><span class="o">(</span><span class="s1">&#39;_&#39;</span><span class="o">)</span>
 <a id="__codelineno-68-29" name="__codelineno-68-29"></a><span class="w">        </span><span class="o">[</span>
@@ -5433,7 +5433,7 @@
 <span class="normal"><a href="#__codelineno-69-36">36</a></span>
 <span class="normal"><a href="#__codelineno-69-37">37</a></span>
 <span class="normal"><a href="#__codelineno-69-38">38</a></span>
-<span class="normal"><a href="#__codelineno-69-39">39</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-69-26" name="__codelineno-69-26"></a><span class="w">    </span><span class="n">ch_fastq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R{1,2}_001.fastq.gz&#39;</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-69-39">39</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-69-26" name="__codelineno-69-26"></a><span class="w">    </span><span class="n">ch_fastq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R{1,2}_001.fastq.gz&#39;</span><span class="o">)</span>
 <a id="__codelineno-69-27" name="__codelineno-69-27"></a><span class="hll"><span class="w">    </span><span class="n">ch_fastq</span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">id</span><span class="o">,</span><span class="w"> </span><span class="n">fastqs</span><span class="w"> </span><span class="o">-&gt;</span>
 </span><a id="__codelineno-69-28" name="__codelineno-69-28"></a><span class="w">        </span><span class="kt">def</span><span class="w"> </span><span class="o">(</span><span class="n">sample</span><span class="o">,</span><span class="w"> </span><span class="n">replicate</span><span class="o">,</span><span class="w"> </span><span class="n">type</span><span class="o">,</span><span class="w"> </span><span class="n">readNum</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">id</span><span class="o">.</span><span class="na">tokenize</span><span class="o">(</span><span class="s1">&#39;_&#39;</span><span class="o">)</span>
 <a id="__codelineno-69-29" name="__codelineno-69-29"></a><span class="w">        </span><span class="o">[</span>
@@ -5467,15 +5467,15 @@
 </code></pre></div>
 <p>The process took our inputs and created a new file with the patient metadata. Based on what you learned in hello-nextflow, what occurred in the working directory?</p>
 <h3 id="63-include-many-more-patients">6.3. Include many more patients<a class="headerlink" href="#63-include-many-more-patients" title="Permanent link">&para;</a></h3>
-<p>Remember Channel.fromPath() accepts a <em>glob</em> as input, which means it can accept any number of files that match the pattern. Therefore if we want to include all the patients we can just modify the input string to include more patients.</p>
+<p>Remember channel.fromPath() accepts a <em>glob</em> as input, which means it can accept any number of files that match the pattern. Therefore if we want to include all the patients we can just modify the input string to include more patients.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="17:2"><input checked="checked" id="__tabbed_17_1" name="__tabbed_17" type="radio" /><input id="__tabbed_17_2" name="__tabbed_17" type="radio" /><div class="tabbed-labels"><label for="__tabbed_17_1">After</label><label for="__tabbed_17_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">file_operations.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-73-26">26</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-73-26" name="__codelineno-73-26"></a><span class="w">    </span><span class="n">ch_fastq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">&#39;data/*_R{1,2}_001.fastq.gz&#39;</span><span class="o">)</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">file_operations.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-73-26">26</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-73-26" name="__codelineno-73-26"></a><span class="w">    </span><span class="n">ch_fastq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">&#39;data/*_R{1,2}_001.fastq.gz&#39;</span><span class="o">)</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">file_operations.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-74-26">26</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-74-26" name="__codelineno-74-26"></a><span class="w">    </span><span class="n">ch_fastq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R{1,2}_001.fastq.gz&#39;</span><span class="o">)</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">file_operations.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-74-26">26</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-74-26" name="__codelineno-74-26"></a><span class="w">    </span><span class="n">ch_fastq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R{1,2}_001.fastq.gz&#39;</span><span class="o">)</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -5582,13 +5582,13 @@
 <p><strong>Using Remote Files</strong>: We learned how to transparently switch between local and remote files using URIs, demonstrating Nextflow's ability to handle files from various sources without changing workflow logic.</p>
 </li>
 <li>
-<p><strong>Reading files using the <code>fromPath()</code> channel factory</strong>: We created channels from file patterns with <code>Channel.fromPath()</code> and viewed their file attributes, including object types.</p>
+<p><strong>Reading files using the <code>fromPath()</code> channel factory</strong>: We created channels from file patterns with <code>channel.fromPath()</code> and viewed their file attributes, including object types.</p>
 </li>
 <li>
 <p><strong>Extracting Patient Metadata from Filenames</strong>: We used <code>tokenize()</code> and <code>replace()</code> to extract and structure metadata from filenames, converting them to organized maps.</p>
 </li>
 <li>
-<p><strong>Simplifying with Channel.fromFilePairs</strong>: We used <code>Channel.fromFilePairs()</code> to automatically pair related files and extract metadata from paired file IDs.</p>
+<p><strong>Simplifying with channel.fromFilePairs</strong>: We used <code>channel.fromFilePairs()</code> to automatically pair related files and extract metadata from paired file IDs.</p>
 </li>
 <li>
 <p><strong>Using File Operations in Processes</strong>: We integrated file operations into Nextflow processes with proper input handling, using <code>publishDir</code> to organize outputs based on metadata.</p>
@@ -5615,10 +5615,10 @@
 <li><strong>Channel Creation from Files</strong></li>
 </ul>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-85-1" name="__codelineno-85-1" href="#__codelineno-85-1"></a><span class="c1">// Create a channel from a file pattern</span>
-<a id="__codelineno-85-2" name="__codelineno-85-2" href="#__codelineno-85-2"></a><span class="n">ch_fastq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">&#39;data/*.fastq.gz&#39;</span><span class="o">)</span>
+<a id="__codelineno-85-2" name="__codelineno-85-2" href="#__codelineno-85-2"></a><span class="n">ch_fastq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">&#39;data/*.fastq.gz&#39;</span><span class="o">)</span>
 <a id="__codelineno-85-3" name="__codelineno-85-3" href="#__codelineno-85-3"></a>
 <a id="__codelineno-85-4" name="__codelineno-85-4" href="#__codelineno-85-4"></a><span class="c1">// Create a channel from paired files</span>
-<a id="__codelineno-85-5" name="__codelineno-85-5" href="#__codelineno-85-5"></a><span class="n">ch_pairs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">&#39;data/*_R{1,2}_001.fastq.gz&#39;</span><span class="o">)</span>
+<a id="__codelineno-85-5" name="__codelineno-85-5" href="#__codelineno-85-5"></a><span class="n">ch_pairs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">&#39;data/*_R{1,2}_001.fastq.gz&#39;</span><span class="o">)</span>
 </code></pre></div>
 <ul>
 <li><strong>Extracting Metadata</strong></li>
@@ -5654,8 +5654,8 @@
 <h2 id="resources">Resources<a class="headerlink" href="#resources" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="https://www.nextflow.io/docs/latest/working-with-files.html">Nextflow Documentation: Working with Files</a></li>
-<li><a href="https://www.nextflow.io/docs/latest/channel.html#frompath">Channel.fromPath</a></li>
-<li><a href="https://www.nextflow.io/docs/latest/channel.html#fromfilepairs">Channel.fromFilePairs</a></li>
+<li><a href="https://www.nextflow.io/docs/latest/channel.html#frompath">channel.fromPath</a></li>
+<li><a href="https://www.nextflow.io/docs/latest/channel.html#fromfilepairs">channel.fromFilePairs</a></li>
 </ul>
 
 

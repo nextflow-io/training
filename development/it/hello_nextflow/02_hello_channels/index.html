@@ -4398,12 +4398,12 @@ Imparerai anche a usare <strong>operatori</strong> per trasformare i contenuti d
 <p>Creeremo un <strong>canale</strong> per passare l'input variabile al processo <code>sayHello()</code> invece di fare affidamento sulla gestione implicita, che ha alcune limitazioni.</p>
 <h3 id="11-crea-un-canale-di-input">1.1. Crea un canale di input<a class="headerlink" href="#11-crea-un-canale-di-input" title="Permanent link">&para;</a></h3>
 <p>Ci sono una varietà di <strong>fabbriche di canali</strong> che possiamo utilizzare per creare un canale.
-Per mantenere le cose semplici per ora, useremo la fabbrica di canale più semplice, chiamata <code>Channel.of</code>, che creerà un canale contenente un singolo valore.
+Per mantenere le cose semplici per ora, useremo la fabbrica di canale più semplice, chiamata <code>channel.of</code>, che creerà un canale contenente un singolo valore.
 Funzionalmente questo sarà simile a come lo avevamo impostato prima, ma invece di avere Nextflow a creare implicitamente un canale, lo stiamo facendo esplicitamente ora.</p>
 <p>Questa è la riga di codice che useremo:</p>
-<div class="highlight"><span class="filename">Syntax</span><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="go">greeting_ch = Channel.of(&#39;Hello Channels!&#39;)</span>
+<div class="highlight"><span class="filename">Syntax</span><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="go">greeting_ch = channel.of(&#39;Hello Channels!&#39;)</span>
 </code></pre></div>
-<p>Questo crea un canale chiamato <code>greeting_ch</code> usando la fabbrica del canale <code>Channel.of()</code>, che imposta un semplice canale di coda e carica la stringa <code>'Hello Channels!'</code> da usare come valore di saluto.</p>
+<p>Questo crea un canale chiamato <code>greeting_ch</code> usando la fabbrica del canale <code>channel.of()</code>, che imposta un semplice canale di coda e carica la stringa <code>'Hello Channels!'</code> da usare come valore di saluto.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Stiamo temporaneamente tornando alle stringhe codificate invece di utilizzare un parametro CLI per motivi di leggibilità. Torneremo a utilizzare i parametri CLI una volta che avremo coperto ciò che sta accadendo a livello del canale.</p>
@@ -4422,7 +4422,7 @@ Funzionalmente questo sarà simile a come lo avevamo impostato prima, ma invece 
 <span class="normal"><a href="#__codelineno-4-34">34</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-27" name="__codelineno-4-27"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-4-28" name="__codelineno-4-28"></a>
 <a id="__codelineno-4-29" name="__codelineno-4-29"></a><span class="hll"><span class="w">    </span><span class="c1">// create a channel for inputs</span>
-</span><a id="__codelineno-4-30" name="__codelineno-4-30"></a><span class="hll"><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Hello Channels!&#39;</span><span class="o">)</span>
+</span><a id="__codelineno-4-30" name="__codelineno-4-30"></a><span class="hll"><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Hello Channels!&#39;</span><span class="o">)</span>
 </span><a id="__codelineno-4-31" name="__codelineno-4-31"></a>
 <a id="__codelineno-4-32" name="__codelineno-4-32"></a><span class="w">    </span><span class="c1">// emit a greeting</span>
 <a id="__codelineno-4-33" name="__codelineno-4-33"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">greeting</span><span class="o">)</span>
@@ -4460,7 +4460,7 @@ Funzionalmente questo sarà simile a come lo avevamo impostato prima, ma invece 
 <span class="normal"><a href="#__codelineno-6-34">34</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-27" name="__codelineno-6-27"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-6-28" name="__codelineno-6-28"></a>
 <a id="__codelineno-6-29" name="__codelineno-6-29"></a><span class="w">    </span><span class="c1">// create a channel for inputs</span>
-<a id="__codelineno-6-30" name="__codelineno-6-30"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Hello Channels!&#39;</span><span class="o">)</span>
+<a id="__codelineno-6-30" name="__codelineno-6-30"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Hello Channels!&#39;</span><span class="o">)</span>
 <a id="__codelineno-6-31" name="__codelineno-6-31"></a>
 <a id="__codelineno-6-32" name="__codelineno-6-32"></a><span class="w">    </span><span class="c1">// emit a greeting</span>
 <a id="__codelineno-6-33" name="__codelineno-6-33"></a><span class="hll"><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
@@ -4478,7 +4478,7 @@ Funzionalmente questo sarà simile a come lo avevamo impostato prima, ma invece 
 <span class="normal"><a href="#__codelineno-7-34">34</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-27" name="__codelineno-7-27"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-7-28" name="__codelineno-7-28"></a>
 <a id="__codelineno-7-29" name="__codelineno-7-29"></a><span class="w">    </span><span class="c1">// create a channel for inputs</span>
-<a id="__codelineno-7-30" name="__codelineno-7-30"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Hello Channels!&#39;</span><span class="o">)</span>
+<a id="__codelineno-7-30" name="__codelineno-7-30"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Hello Channels!&#39;</span><span class="o">)</span>
 <a id="__codelineno-7-31" name="__codelineno-7-31"></a>
 <a id="__codelineno-7-32" name="__codelineno-7-32"></a><span class="w">    </span><span class="c1">// emit a greeting</span>
 <a id="__codelineno-7-33" name="__codelineno-7-33"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">greeting</span><span class="o">)</span>
@@ -4522,7 +4522,7 @@ Funzionalmente questo sarà simile a come lo avevamo impostato prima, ma invece 
 <h2 id="2-modifica-il-workflow-per-eseguire-su-piu-valori-di-input">2. Modifica il workflow per eseguire su più valori di input<a class="headerlink" href="#2-modifica-il-workflow-per-eseguire-su-piu-valori-di-input" title="Permanent link">&para;</a></h2>
 <p>I workflows in genere vengono eseguiti su lotti di input che devono essere elaborati in blocco, quindi vogliamo aggiornare il workflow per accettare più valori di input.</p>
 <h3 id="21-carica-piu-saluti-nel-canale-di-input">2.1. Carica più saluti nel canale di input<a class="headerlink" href="#21-carica-piu-saluti-nel-canale-di-input" title="Permanent link">&para;</a></h3>
-<p>Convenientemente, la fabbrica di canali <code>Channel.of()</code> che abbiamo utilizzato è abbastanza felice di accettare più di un valore, quindi non abbiamo affatto bisogno di modificarlo.</p>
+<p>Convenientemente, la fabbrica di canali <code>channel.of()</code> che abbiamo utilizzato è abbastanza felice di accettare più di un valore, quindi non abbiamo affatto bisogno di modificarlo.</p>
 <p>Dobbiamo solo caricare più valori nel canale.</p>
 <h4 id="211-aggiungi-altri-saluti">2.1.1. Aggiungi altri saluti<a class="headerlink" href="#211-aggiungi-altri-saluti" title="Permanent link">&para;</a></h4>
 <p>Nel blocco del workflow, apportare la seguente modifica del codice:</p>
@@ -4531,13 +4531,13 @@ Funzionalmente questo sarà simile a come lo avevamo impostato prima, ma invece 
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-channels.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-29">29</a></span>
 <span class="normal"><a href="#__codelineno-11-30">30</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-29" name="__codelineno-11-29"></a><span class="c1">// create a channel for inputs</span>
-<a id="__codelineno-11-30" name="__codelineno-11-30"></a><span class="hll"><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Holà&#39;</span><span class="o">)</span>
+<a id="__codelineno-11-30" name="__codelineno-11-30"></a><span class="hll"><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Holà&#39;</span><span class="o">)</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-channels.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-29">29</a></span>
 <span class="normal"><a href="#__codelineno-12-30">30</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-12-29" name="__codelineno-12-29"></a><span class="c1">// create a channel for inputs</span>
-<a id="__codelineno-12-30" name="__codelineno-12-30"></a><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Hello Channels&#39;</span><span class="o">)</span>
+<a id="__codelineno-12-30" name="__codelineno-12-30"></a><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Hello Channels&#39;</span><span class="o">)</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -4752,7 +4752,7 @@ E se volessimo fornire quegli input multipli in una forma diversa?</p>
 </span><a id="__codelineno-27-30" name="__codelineno-27-30"></a><span class="hll"><span class="w">    </span><span class="n">greetings_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Holà&#39;</span><span class="o">]</span>
 </span><a id="__codelineno-27-31" name="__codelineno-27-31"></a>
 <a id="__codelineno-27-32" name="__codelineno-27-32"></a><span class="w">    </span><span class="c1">// create a channel for inputs</span>
-<a id="__codelineno-27-33" name="__codelineno-27-33"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Holà&#39;</span><span class="o">)</span>
+<a id="__codelineno-27-33" name="__codelineno-27-33"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Holà&#39;</span><span class="o">)</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -4762,7 +4762,7 @@ E se volessimo fornire quegli input multipli in una forma diversa?</p>
 <span class="normal"><a href="#__codelineno-28-30">30</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-28-27" name="__codelineno-28-27"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-28-28" name="__codelineno-28-28"></a>
 <a id="__codelineno-28-29" name="__codelineno-28-29"></a><span class="w">    </span><span class="c1">// create a channel for inputs</span>
-<a id="__codelineno-28-30" name="__codelineno-28-30"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Holà&#39;</span><span class="o">)</span>
+<a id="__codelineno-28-30" name="__codelineno-28-30"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Holà&#39;</span><span class="o">)</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -4775,13 +4775,13 @@ E se volessimo fornire quegli input multipli in una forma diversa?</p>
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-channels.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-29-32">32</a></span>
 <span class="normal"><a href="#__codelineno-29-33">33</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-29-32" name="__codelineno-29-32"></a><span class="w">    </span><span class="c1">// create a channel for inputs</span>
-<a id="__codelineno-29-33" name="__codelineno-29-33"></a><span class="hll"><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">greetings_array</span><span class="o">)</span>
+<a id="__codelineno-29-33" name="__codelineno-29-33"></a><span class="hll"><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">greetings_array</span><span class="o">)</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-channels.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-30-32">32</a></span>
 <span class="normal"><a href="#__codelineno-30-33">33</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-30-32" name="__codelineno-30-32"></a><span class="w">    </span><span class="c1">// create a channel for inputs</span>
-<a id="__codelineno-30-33" name="__codelineno-30-33"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Holà&#39;</span><span class="o">)</span>
+<a id="__codelineno-30-33" name="__codelineno-30-33"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Holà&#39;</span><span class="o">)</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -4818,7 +4818,7 @@ E se volessimo fornire quegli input multipli in una forma diversa?</p>
 <p>Se sfogli <a href="https://www.nextflow.io/docs/latest/reference/operator.html">elenco di operatori</a> nella documentazione di Nextflow, troverai <a href="https://www.nextflow.io/docs/latest/reference/operator.html#flatten"><code>flatten()</code></a>, che fa esattamente ciò di cui abbiamo bisogno: decomprimere il contenuto di un array e li emette come singoli elementi.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>È tecnicamente possibile ottenere gli stessi risultati utilizzando una fabbrica di canali diversa, <a href="https://nextflow.io/docs/latest/reference/channel.html#fromlist"><code>Channel.fromList</code></a>, che include una fase di mappatura implicita nella sua operazione.
+<p>È tecnicamente possibile ottenere gli stessi risultati utilizzando una fabbrica di canali diversa, <a href="https://nextflow.io/docs/latest/reference/channel.html#fromlist"><code>channel.fromList</code></a>, che include una fase di mappatura implicita nella sua operazione.
 Qui abbiamo scelto di non usarlo per dimostrare l'uso di un operatore su un caso d'uso abbastanza semplice.</p>
 </div>
 <h4 id="321-aggiungi-loperatore-flatten">3.2.1. Aggiungi l'operatore <code>flatten()</code><a class="headerlink" href="#321-aggiungi-loperatore-flatten" title="Permanent link">&para;</a></h4>
@@ -4830,19 +4830,19 @@ Qui abbiamo scelto di non usarlo per dimostrare l'uso di un operatore su un caso
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-channels.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-33-31">31</a></span>
 <span class="normal"><a href="#__codelineno-33-32">32</a></span>
 <span class="normal"><a href="#__codelineno-33-33">33</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-33-31" name="__codelineno-33-31"></a><span class="w">    </span><span class="c1">// create a channel for inputs</span>
-<a id="__codelineno-33-32" name="__codelineno-33-32"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">greetings_array</span><span class="o">)</span>
+<a id="__codelineno-33-32" name="__codelineno-33-32"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">greetings_array</span><span class="o">)</span>
 <a id="__codelineno-33-33" name="__codelineno-33-33"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">flatten</span><span class="o">()</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-channels.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-34-31">31</a></span>
 <span class="normal"><a href="#__codelineno-34-32">32</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-34-31" name="__codelineno-34-31"></a><span class="w">    </span><span class="c1">// create a channel for inputs</span>
-<a id="__codelineno-34-32" name="__codelineno-34-32"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">greetings_array</span><span class="o">)</span>
+<a id="__codelineno-34-32" name="__codelineno-34-32"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">greetings_array</span><span class="o">)</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
 </div>
-<p>Qui abbiamo aggiunto l'operatore sulla riga successiva per la leggibilità, ma puoi aggiungere operatori sulla stessa riga della fabbrica del canale se preferisci, come questo: <code>greeting_ch = Channel.of(greetings_array).flatten()</code></p>
+<p>Qui abbiamo aggiunto l'operatore sulla riga successiva per la leggibilità, ma puoi aggiungere operatori sulla stessa riga della fabbrica del canale se preferisci, come questo: <code>greeting_ch = channel.of(greetings_array).flatten()</code></p>
 <h4 id="322-aggiungi-view-per-ispezionare-i-contenuti-del-canale">3.2.2. Aggiungi <code>view()</code> per ispezionare i contenuti del canale<a class="headerlink" href="#322-aggiungi-view-per-ispezionare-i-contenuti-del-canale" title="Permanent link">&para;</a></h4>
 <p>Potremmo eseguirlo subito per verificare se funziona, ma già che ci siamo, aggiungeremo anche un paio di operatori <a href="https://www.nextflow.io/docs/latest/reference/operator.html#view"><code>view()</code></a>, che ci consentono di ispezionare il contenuto di un canale.
 Puoi pensare a <code>view()</code> come a uno strumento di debug, come un'istruzione <code>print()</code> in Python, o il suo equivalente in altre lingue.</p>
@@ -4855,7 +4855,7 @@ Puoi pensare a <code>view()</code> come a uno strumento di debug, come un'istruz
 <span class="normal"><a href="#__codelineno-35-33">33</a></span>
 <span class="normal"><a href="#__codelineno-35-34">34</a></span>
 <span class="normal"><a href="#__codelineno-35-35">35</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-35-31" name="__codelineno-35-31"></a><span class="w">    </span><span class="c1">// create a channel for inputs</span>
-<a id="__codelineno-35-32" name="__codelineno-35-32"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">greetings_array</span><span class="o">)</span>
+<a id="__codelineno-35-32" name="__codelineno-35-32"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">greetings_array</span><span class="o">)</span>
 <a id="__codelineno-35-33" name="__codelineno-35-33"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">greeting</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;Before flatten: $greeting&quot;</span><span class="w"> </span><span class="o">}</span>
 </span><a id="__codelineno-35-34" name="__codelineno-35-34"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">flatten</span><span class="o">()</span>
 </span><a id="__codelineno-35-35" name="__codelineno-35-35"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">greeting</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;After flatten: $greeting&quot;</span><span class="w"> </span><span class="o">}</span>
@@ -4865,7 +4865,7 @@ Puoi pensare a <code>view()</code> come a uno strumento di debug, come un'istruz
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-channels.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-36-31">31</a></span>
 <span class="normal"><a href="#__codelineno-36-32">32</a></span>
 <span class="normal"><a href="#__codelineno-36-33">33</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-36-31" name="__codelineno-36-31"></a><span class="w">    </span><span class="c1">// create a channel for inputs</span>
-<a id="__codelineno-36-32" name="__codelineno-36-32"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">greetings_array</span><span class="o">)</span>
+<a id="__codelineno-36-32" name="__codelineno-36-32"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">greetings_array</span><span class="o">)</span>
 <a id="__codelineno-36-33" name="__codelineno-36-33"></a><span class="w">                         </span><span class="o">.</span><span class="na">flatten</span><span class="o">()</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -4917,7 +4917,7 @@ Quindi otteniamo tre istruzioni separate <code>Dopo appiattire:</code>, una per 
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-channels.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-39-31">31</a></span>
 <span class="normal"><a href="#__codelineno-39-32">32</a></span>
 <span class="normal"><a href="#__codelineno-39-33">33</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-39-31" name="__codelineno-39-31"></a><span class="c1">// crea un canale per gli input</span>
-<a id="__codelineno-39-32" name="__codelineno-39-32"></a><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">greetings_array</span><span class="o">)</span>
+<a id="__codelineno-39-32" name="__codelineno-39-32"></a><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">greetings_array</span><span class="o">)</span>
 <a id="__codelineno-39-33" name="__codelineno-39-33"></a><span class="w">                     </span><span class="o">.</span><span class="na">flatten</span><span class="o">()</span>
 </code></pre></div></td></tr></table></div>
 <p>Li abbiamo lasciati nel file di soluzione <code>hello-channels-3.nf</code> a scopo di riferimento.</p>
@@ -4972,22 +4972,22 @@ Lo aggiorneremo per puntare al file CSV contenente i nostri saluti.</p>
 </div>
 </div>
 <h4 id="412-passa-a-una-fabbrica-di-canali-progettata-per-gestire-un-file">4.1.2. Passa a una fabbrica di canali progettata per gestire un file<a class="headerlink" href="#412-passa-a-una-fabbrica-di-canali-progettata-per-gestire-un-file" title="Permanent link">&para;</a></h4>
-<p>Dal momento che ora vogliamo usare un file invece di semplici stringhe come input, non possiamo usare la fabbrica di canali <code>Channel.of()</code> di prima.
-Dobbiamo passare all'utilizzo di una nuova fabbrica di canali, <a href="https://www.nextflow.io/docs/latest/reference/channel.html#channel-path"><code>Channel.fromPath()</code></a>, che ha alcune funzionalità integrate per la gestione dei percorsi dei file.</p>
+<p>Dal momento che ora vogliamo usare un file invece di semplici stringhe come input, non possiamo usare la fabbrica di canali <code>channel.of()</code> di prima.
+Dobbiamo passare all'utilizzo di una nuova fabbrica di canali, <a href="https://www.nextflow.io/docs/latest/reference/channel.html#channel-path"><code>channel.fromPath()</code></a>, che ha alcune funzionalità integrate per la gestione dei percorsi dei file.</p>
 <p>Nel blocco del flusso di lavoro, apportare la seguente modifica del codice:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="10:2"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><input id="__tabbed_10_2" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">Dopo</label><label for="__tabbed_10_2">Prima</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-channels.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-43-31">31</a></span>
 <span class="normal"><a href="#__codelineno-43-32">32</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-43-31" name="__codelineno-43-31"></a><span class="hll"><span class="w">    </span><span class="c1">// create a channel for inputs from a CSV file</span>
-</span><a id="__codelineno-43-32" name="__codelineno-43-32"></a><span class="hll"><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">greeting</span><span class="o">)</span>
+</span><a id="__codelineno-43-32" name="__codelineno-43-32"></a><span class="hll"><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">greeting</span><span class="o">)</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-channels.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-44-31">31</a></span>
 <span class="normal"><a href="#__codelineno-44-32">32</a></span>
 <span class="normal"><a href="#__codelineno-44-33">33</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-44-31" name="__codelineno-44-31"></a><span class="w">    </span><span class="c1">// create a channel for inputs</span>
-<a id="__codelineno-44-32" name="__codelineno-44-32"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">greetings_array</span><span class="o">)</span>
+<a id="__codelineno-44-32" name="__codelineno-44-32"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">greetings_array</span><span class="o">)</span>
 <a id="__codelineno-44-33" name="__codelineno-44-33"></a><span class="w">                         </span><span class="o">.</span><span class="na">flatten</span><span class="o">()</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -5045,7 +5045,7 @@ Quindi ha risolto correttamente il percorso del file, ma in realtà non ha anali
 <span class="normal"><a href="#__codelineno-47-33">33</a></span>
 <span class="normal"><a href="#__codelineno-47-34">34</a></span>
 <span class="normal"><a href="#__codelineno-47-35">35</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-47-31" name="__codelineno-47-31"></a><span class="c1">// create a channel for inputs from a CSV file</span>
-<a id="__codelineno-47-32" name="__codelineno-47-32"></a><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">greeting</span><span class="o">)</span>
+<a id="__codelineno-47-32" name="__codelineno-47-32"></a><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">greeting</span><span class="o">)</span>
 <a id="__codelineno-47-33" name="__codelineno-47-33"></a><span class="hll"><span class="w">                     </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">csv</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;Before splitCsv: $csv&quot;</span><span class="w"> </span><span class="o">}</span>
 </span><a id="__codelineno-47-34" name="__codelineno-47-34"></a><span class="hll"><span class="w">                     </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">()</span>
 </span><a id="__codelineno-47-35" name="__codelineno-47-35"></a><span class="hll"><span class="w">                     </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">csv</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;After splitCsv: $csv&quot;</span><span class="w"> </span><span class="o">}</span>
@@ -5054,7 +5054,7 @@ Quindi ha risolto correttamente il percorso del file, ma in realtà non ha anali
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-channels.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-48-31">31</a></span>
 <span class="normal"><a href="#__codelineno-48-32">32</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-48-31" name="__codelineno-48-31"></a><span class="c1">// create a channel for inputs from a CSV file</span>
-<a id="__codelineno-48-32" name="__codelineno-48-32"></a><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">greeting</span><span class="o">)</span>
+<a id="__codelineno-48-32" name="__codelineno-48-32"></a><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">greeting</span><span class="o">)</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -5132,7 +5132,7 @@ Ecco come appare la sintassi:</p>
 <span class="normal"><a href="#__codelineno-52-35">35</a></span>
 <span class="normal"><a href="#__codelineno-52-36">36</a></span>
 <span class="normal"><a href="#__codelineno-52-37">37</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-52-31" name="__codelineno-52-31"></a><span class="c1">// create a channel for inputs from a CSV file</span>
-<a id="__codelineno-52-32" name="__codelineno-52-32"></a><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">greeting</span><span class="o">)</span>
+<a id="__codelineno-52-32" name="__codelineno-52-32"></a><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">greeting</span><span class="o">)</span>
 <a id="__codelineno-52-33" name="__codelineno-52-33"></a><span class="w">                     </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">csv</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;Before splitCsv: $csv&quot;</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-52-34" name="__codelineno-52-34"></a><span class="w">                     </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">()</span>
 <a id="__codelineno-52-35" name="__codelineno-52-35"></a><span class="w">                     </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">csv</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;After splitCsv: $csv&quot;</span><span class="w"> </span><span class="o">}</span>
@@ -5146,7 +5146,7 @@ Ecco come appare la sintassi:</p>
 <span class="normal"><a href="#__codelineno-53-33">33</a></span>
 <span class="normal"><a href="#__codelineno-53-34">34</a></span>
 <span class="normal"><a href="#__codelineno-53-35">35</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-53-31" name="__codelineno-53-31"></a><span class="c1">// create a channel for inputs from a CSV file</span>
-<a id="__codelineno-53-32" name="__codelineno-53-32"></a><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">greeting</span><span class="o">)</span>
+<a id="__codelineno-53-32" name="__codelineno-53-32"></a><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">greeting</span><span class="o">)</span>
 <a id="__codelineno-53-33" name="__codelineno-53-33"></a><span class="w">                     </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">csv</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;Before splitCsv: $csv&quot;</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-53-34" name="__codelineno-53-34"></a><span class="w">                     </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">()</span>
 <a id="__codelineno-53-35" name="__codelineno-53-35"></a><span class="w">                     </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">csv</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;After splitCsv: $csv&quot;</span><span class="w"> </span><span class="o">}</span>

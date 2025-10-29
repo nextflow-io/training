@@ -1639,13 +1639,13 @@
 <li><em>unidirectional</em> means that data flows from a producer to a consumer.</li>
 <li><em>FIFO</em> means that the data is guaranteed to be delivered in the same order as it is produced. First In, First Out.</li>
 </ul>
-<p>A queue channel is implicitly created by process output definitions or using channel factories such as <a href="https://www.nextflow.io/docs/latest/channel.html#of">Channel.of</a> or <a href="https://www.nextflow.io/docs/latest/channel.html#frompath">Channel.fromPath</a>.</p>
+<p>A queue channel is implicitly created by process output definitions or using channel factories such as <a href="https://www.nextflow.io/docs/latest/channel.html#of">channel.of</a> or <a href="https://www.nextflow.io/docs/latest/channel.html#frompath">channel.fromPath</a>.</p>
 <p>Try the following snippets:</p>
 <div class="admonition info">
 <p>Click the <span class="twemoji"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17 13h-4v4h-2v-4H7v-2h4V7h2v4h4m-5-9A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2"></path></svg></span> icons in the code for explanations.</p>
 </div>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
-<span class="normal"><a href="#__codelineno-0-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="n">ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="w"> </span><span class="mi">2</span><span class="o">,</span><span class="w"> </span><span class="mi">3</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-0-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="n">ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="w"> </span><span class="mi">2</span><span class="o">,</span><span class="w"> </span><span class="mi">3</span><span class="o">)</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="n">ch</span><span class="o">.</span><span class="na">view</span><span class="o">()</span><span class="w"> </span><span class="c1">// (1)!</span>
 </code></pre></div></td></tr></table></div>
 <ol>
@@ -1688,8 +1688,8 @@
 <span class="normal"><a href="#__codelineno-3-17">17</a></span>
 <span class="normal"><a href="#__codelineno-3-18">18</a></span>
 <span class="normal"><a href="#__codelineno-3-19">19</a></span>
-<span class="normal"><a href="#__codelineno-3-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="n">ch1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="w"> </span><span class="mi">2</span><span class="o">,</span><span class="w"> </span><span class="mi">3</span><span class="o">)</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="n">ch2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-3-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="n">ch1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="w"> </span><span class="mi">2</span><span class="o">,</span><span class="w"> </span><span class="mi">3</span><span class="o">)</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="n">ch2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3"></a>
 <a id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="n">process</span><span class="w"> </span><span class="n">SUM</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="w">    </span><span class="nl">input:</span>
@@ -1714,7 +1714,7 @@
 <div class="highlight"><span class="filename">Output</span><pre><span></span><code><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="go">2</span>
 </code></pre></div>
 <p>A process will only instantiate a task when there are elements to be consumed from <em>all</em> the channels provided as input to it. Because <code>ch1</code> and <code>ch2</code> are queue channels, and the single element of <code>ch2</code> has been consumed, no new process instances will be launched, even if there are other elements to be consumed in <code>ch1</code>.</p>
-<p>To use the single element in <code>ch2</code> multiple times, you can either use the <code>Channel.value</code> channel factory, or use a channel operator that returns a single element, such as <code>first()</code>:</p>
+<p>To use the single element in <code>ch2</code> multiple times, you can either use the <code>channel.value</code> channel factory, or use a channel operator that returns a single element, such as <code>first()</code>:</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-5-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-5-3"> 3</a></span>
@@ -1734,8 +1734,8 @@
 <span class="normal"><a href="#__codelineno-5-17">17</a></span>
 <span class="normal"><a href="#__codelineno-5-18">18</a></span>
 <span class="normal"><a href="#__codelineno-5-19">19</a></span>
-<span class="normal"><a href="#__codelineno-5-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="n">ch1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="w"> </span><span class="mi">2</span><span class="o">,</span><span class="w"> </span><span class="mi">3</span><span class="o">)</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="n">ch2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">value</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-5-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="n">ch1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="w"> </span><span class="mi">2</span><span class="o">,</span><span class="w"> </span><span class="mi">3</span><span class="o">)</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="n">ch2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">value</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3"></a>
 <a id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="n">process</span><span class="w"> </span><span class="n">SUM</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-5-5" name="__codelineno-5-5"></a><span class="w">    </span><span class="nl">input:</span>
@@ -1780,7 +1780,7 @@
 <span class="normal"><a href="#__codelineno-7-17">17</a></span>
 <span class="normal"><a href="#__codelineno-7-18">18</a></span>
 <span class="normal"><a href="#__codelineno-7-19">19</a></span>
-<span class="normal"><a href="#__codelineno-7-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="n">ch1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="w"> </span><span class="mi">2</span><span class="o">,</span><span class="w"> </span><span class="mi">3</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-7-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="n">ch1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="w"> </span><span class="mi">2</span><span class="o">,</span><span class="w"> </span><span class="mi">3</span><span class="o">)</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="n">params</span><span class="o">.</span><span class="na">ch2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"1"</span>
 <a id="__codelineno-7-3" name="__codelineno-7-3"></a>
 <a id="__codelineno-7-4" name="__codelineno-7-4"></a><span class="n">process</span><span class="w"> </span><span class="n">SUM</span><span class="w"> </span><span class="o">{</span>
@@ -1828,8 +1828,8 @@
 <span class="normal"><a href="#__codelineno-9-17">17</a></span>
 <span class="normal"><a href="#__codelineno-9-18">18</a></span>
 <span class="normal"><a href="#__codelineno-9-19">19</a></span>
-<span class="normal"><a href="#__codelineno-9-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="n">ch1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="w"> </span><span class="mi">2</span><span class="o">,</span><span class="w"> </span><span class="mi">3</span><span class="o">)</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="n">ch2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-9-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="n">ch1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="w"> </span><span class="mi">2</span><span class="o">,</span><span class="w"> </span><span class="mi">3</span><span class="o">)</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="n">ch2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span>
 <a id="__codelineno-9-3" name="__codelineno-9-3"></a>
 <a id="__codelineno-9-4" name="__codelineno-9-4"></a><span class="n">process</span><span class="w"> </span><span class="n">SUM</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-9-5" name="__codelineno-9-5"></a><span class="w">    </span><span class="nl">input:</span>
@@ -1872,15 +1872,15 @@
 <p>Channel factories are Nextflow commands for creating channels that have implicit expected inputs and functions. There are several different Channel factories which are useful for different situations. The following sections will cover the most common channel factories.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>New in version 20.07.0: channel was introduced as an alias of Channel, allowing factory methods to be specified as <code>channel.of()</code> or <code>Channel.of()</code>, and so on.</p>
+<p>New in version 20.07.0: channel was introduced as an alias of Channel, allowing factory methods to be specified as <code>channel.of()</code> or <code>channel.of()</code>, and so on.</p>
 </div>
 <h3 id="value"><span class="enumerate-headings-plugin enumerate-heading-plugin">8.2.1</span> <code>value()</code><a class="headerlink" href="#value" title="Permanent link">¶</a></h3>
 <p>The <code>value</code> channel factory is used to create a <em>value</em> channel. An optional not <code>null</code> argument can be specified to bind the channel to a specific value. For example:</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1">1</a></span>
 <span class="normal"><a href="#__codelineno-11-2">2</a></span>
-<span class="normal"><a href="#__codelineno-11-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="n">ch1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">value</span><span class="o">()</span><span class="w"> </span><span class="c1">// (1)!</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2"></a><span class="n">ch2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">value</span><span class="o">(</span><span class="s1">'Hello there'</span><span class="o">)</span><span class="w"> </span><span class="c1">// (2)!</span>
-<a id="__codelineno-11-3" name="__codelineno-11-3"></a><span class="n">ch3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">value</span><span class="o">([</span><span class="mi">1</span><span class="o">,</span><span class="w"> </span><span class="mi">2</span><span class="o">,</span><span class="w"> </span><span class="mi">3</span><span class="o">,</span><span class="w"> </span><span class="mi">4</span><span class="o">,</span><span class="w"> </span><span class="mi">5</span><span class="o">])</span><span class="w"> </span><span class="c1">// (3)!</span>
+<span class="normal"><a href="#__codelineno-11-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="n">ch1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">value</span><span class="o">()</span><span class="w"> </span><span class="c1">// (1)!</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2"></a><span class="n">ch2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">value</span><span class="o">(</span><span class="s1">'Hello there'</span><span class="o">)</span><span class="w"> </span><span class="c1">// (2)!</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3"></a><span class="n">ch3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">value</span><span class="o">([</span><span class="mi">1</span><span class="o">,</span><span class="w"> </span><span class="mi">2</span><span class="o">,</span><span class="w"> </span><span class="mi">3</span><span class="o">,</span><span class="w"> </span><span class="mi">4</span><span class="o">,</span><span class="w"> </span><span class="mi">5</span><span class="o">])</span><span class="w"> </span><span class="c1">// (3)!</span>
 </code></pre></div></td></tr></table></div>
 <ol>
 <li>Creates an <em>empty</em> value channel</li>
@@ -1888,7 +1888,7 @@
 <li>Creates a value channel and binds a list object to it that will be emitted as a sole emission</li>
 </ol>
 <h3 id="of"><span class="enumerate-headings-plugin enumerate-heading-plugin">8.2.2</span> <code>of()</code><a class="headerlink" href="#of" title="Permanent link">¶</a></h3>
-<p>The factory <code>Channel.of</code> allows the creation of a queue channel with the values specified as arguments.</p>
+<p>The factory <code>channel.of</code> allows the creation of a queue channel with the values specified as arguments.</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1">1</a></span>
 <span class="normal"><a href="#__codelineno-12-2">2</a></span>
 <span class="normal"><a href="#__codelineno-12-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="n">Channel</span>
@@ -1901,7 +1901,7 @@
 <a href="#__codelineno-13-3" id="__codelineno-13-3" name="__codelineno-13-3"></a><span class="go">5</span>
 <a href="#__codelineno-13-4" id="__codelineno-13-4" name="__codelineno-13-4"></a><span class="go">7</span>
 </code></pre></div>
-<p>The <code>Channel.of</code> channel factory works in a similar manner to <code>Channel.from</code> (which is now <a href="https://www.nextflow.io/docs/latest/channel.html#of">deprecated</a>), fixing some inconsistent behaviors of the latter and providing better handling when specifying a range of values. For example, the following works with a range from 1 to 23:</p>
+<p>The <code>channel.of</code> channel factory works in a similar manner to <code>channel.from</code> (which is now <a href="https://www.nextflow.io/docs/latest/channel.html#of">deprecated</a>), fixing some inconsistent behaviors of the latter and providing better handling when specifying a range of values. For example, the following works with a range from 1 to 23:</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1">1</a></span>
 <span class="normal"><a href="#__codelineno-14-2">2</a></span>
 <span class="normal"><a href="#__codelineno-14-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1"></a><span class="n">Channel</span>
@@ -1909,7 +1909,7 @@
 <a id="__codelineno-14-3" name="__codelineno-14-3"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
 </code></pre></div></td></tr></table></div>
 <h3 id="fromlist"><span class="enumerate-headings-plugin enumerate-heading-plugin">8.2.3</span> <code>fromList()</code><a class="headerlink" href="#fromlist" title="Permanent link">¶</a></h3>
-<p>The <code>Channel.fromList</code> channel factory creates a channel emitting the elements provided by a list object specified as an argument:</p>
+<p>The <code>channel.fromList</code> channel factory creates a channel emitting the elements provided by a list object specified as an argument:</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1">1</a></span>
 <span class="normal"><a href="#__codelineno-15-2">2</a></span>
 <span class="normal"><a href="#__codelineno-15-3">3</a></span>
@@ -1973,7 +1973,7 @@
 <p>Learn more about the glob patterns syntax at <a href="https://docs.oracle.com/javase/tutorial/essential/io/fileOps.html#glob">this link</a>.</p>
 <div class="admonition question">
 <p class="admonition-title">Exercise</p>
-<p>Use the <code>Channel.fromPath</code> channel factory to create a channel emitting all files with the suffix <code>.fq</code> in the <code>data/ggal/</code> directory and any subdirectory. Include any hidden files and print the file names with the <code>view</code> operator.</p>
+<p>Use the <code>channel.fromPath</code> channel factory to create a channel emitting all files with the suffix <code>.fq</code> in the <code>data/ggal/</code> directory and any subdirectory. Include any hidden files and print the file names with the <code>view</code> operator.</p>
 <details class="solution">
 <summary>Solution</summary>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1">1</a></span>
@@ -2063,7 +2063,7 @@ Check the square brackets around the file names, to see the difference with <cod
 </details>
 </div>
 <h3 id="fromsra"><span class="enumerate-headings-plugin enumerate-heading-plugin">8.2.6</span> <code>fromSRA()</code><a class="headerlink" href="#fromsra" title="Permanent link">¶</a></h3>
-<p>The <code>Channel.fromSRA</code> channel factory makes it possible to query the <a href="https://www.ncbi.nlm.nih.gov/sra">NCBI SRA</a> archive and returns a channel emitting the FASTQ files matching the specified selection criteria.</p>
+<p>The <code>channel.fromSRA</code> channel factory makes it possible to query the <a href="https://www.ncbi.nlm.nih.gov/sra">NCBI SRA</a> archive and returns a channel emitting the FASTQ files matching the specified selection criteria.</p>
 <p>The query can be project ID(s) or accession number(s) supported by the <a href="https://www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.ESearch">NCBI ESearch API</a>.</p>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
@@ -2161,7 +2161,7 @@ Check the square brackets around the file names, to see the difference with <cod
 <a id="__codelineno-26-17" name="__codelineno-26-17"></a><span class="o">}</span>
 <a id="__codelineno-26-18" name="__codelineno-26-18"></a>
 <a id="__codelineno-26-19" name="__codelineno-26-19"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-26-20" name="__codelineno-26-20"></a><span class="w">    </span><span class="n">reads</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromSRA</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">accession</span><span class="o">,</span><span class="w"> </span><span class="nl">apiKey:</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">ncbi_api_key</span><span class="o">)</span>
+<a id="__codelineno-26-20" name="__codelineno-26-20"></a><span class="w">    </span><span class="n">reads</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromSRA</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">accession</span><span class="o">,</span><span class="w"> </span><span class="nl">apiKey:</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">ncbi_api_key</span><span class="o">)</span>
 <a id="__codelineno-26-21" name="__codelineno-26-21"></a><span class="w">    </span><span class="n">FASTQC</span><span class="o">(</span><span class="n">reads</span><span class="o">)</span>
 <a id="__codelineno-26-22" name="__codelineno-26-22"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
