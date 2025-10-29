@@ -14,7 +14,7 @@
         <link rel="prev" href="../01_run_demo/">
       
       
-        <link rel="next" href="../survey/">
+        <link rel="next" href="../03_use_module/">
       
       
       <link rel="icon" href="../../assets/img/nextflow-icon.png">
@@ -1635,6 +1635,75 @@
   </ul>
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_use_module/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 3: Use an nf-core module
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_adapt_module/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 4: Adapt local modules to nf-core conventions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_input_validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 5: Input validation
+    
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -4110,7 +4179,7 @@ If you are using a different environment, you need to check whether the package 
 <p>First, we create the scaffold for the new pipeline.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Make sure you are in the <code>hello_nf-core</code> directory in your terminal.</p>
+<p>Make sure you are in the <code>hello-nf-core</code> directory in your terminal.</p>
 </div>
 <h3 id="11-run-the-template-based-pipeline-creation-tool">1.1. Run the template-based pipeline creation tool<a class="headerlink" href="#11-run-the-template-based-pipeline-creation-tool" title="Permanent link">&para;</a></h3>
 <p>Let's start by creating a new pipeline with the <code>nf-core pipelines create</code> command.
@@ -4153,7 +4222,7 @@ This will create a new pipeline scaffold using the nf-core base template, custom
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="go">    | \| |       \__, \__/ |  \ |___     \`-._,-`-,</span>
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="go">                                          `._,._,&#39;</span>
 <a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="go">    nf-core/tools version 3.2.1 - https://nf-co.re</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="go">    nf-core/tools version 3.4.1 - https://nf-co.re</span>
 <a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>
 <a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>
 <a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="go">INFO     Launching interactive nf-core pipeline creation tool.</span>
@@ -4363,6 +4432,10 @@ This is a placeholder workflow for our workflow of interest, with some nf-core f
 <li>Outputs are declared using the <code>emit:</code> keyword</li>
 </ul>
 <p>These are optional features of Nextflow that make the workflow <strong>composable</strong>, meaning that it can be called from within another workflow.</p>
+<div class="admonition note">
+<p class="admonition-title">Composable workflows in depth</p>
+<p>The <a href="../side_quests/workflows_of_workflows">Workflows of Workflows</a> side quest explores workflow composition in much greater depth, including how to compose multiple workflows together and manage complex data flows between them. We're introducing composability here because it's a fundamental requirement of the nf-core template architecture, which uses nested workflows to organize pipeline initialization, the main analysis workflow, and completion tasks into separate, reusable components.</p>
+</div>
 <p>We are going to need to plug the relevant logic from our workflow of interest into that structure.
 The first step for that is to make our original workflow composable.</p>
 <h3 id="takeaway">Takeaway<a class="headerlink" href="#takeaway" title="Permanent link">&para;</a></h3>
@@ -5501,7 +5574,7 @@ Typically small test files are stored in the <code>assets</code> directory, so l
 <a id="__codelineno-49-23" name="__codelineno-49-23"></a><span class="w">        </span><span class="n">config_profile_description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Minimal test dataset to check pipeline function&#39;</span>
 <a id="__codelineno-49-24" name="__codelineno-49-24"></a>
 <a id="__codelineno-49-25" name="__codelineno-49-25"></a><span class="hll"><span class="w">        </span><span class="c1">// Input data</span>
-</span><a id="__codelineno-49-26" name="__codelineno-49-26"></a><span class="hll"><span class="w">        </span><span class="n">input</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;core-hello/assets/greetings.csv&#39;</span>
+</span><a id="__codelineno-49-26" name="__codelineno-49-26"></a><span class="hll"><span class="w">        </span><span class="n">input</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${projectDir}/assets/greetings.csv&quot;</span>
 </span><a id="__codelineno-49-27" name="__codelineno-49-27"></a><span class="hll">
 </span><a id="__codelineno-49-28" name="__codelineno-49-28"></a><span class="hll"><span class="w">        </span><span class="c1">// Other parameters</span>
 </span><a id="__codelineno-49-29" name="__codelineno-49-29"></a><span class="hll"><span class="w">        </span><span class="n">batch</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;test&#39;</span>
@@ -5510,7 +5583,7 @@ Typically small test files are stored in the <code>assets</code> directory, so l
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/config/test.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-50-21">21</a></span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/conf/test.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-50-21">21</a></span>
 <span class="normal"><a href="#__codelineno-50-22">22</a></span>
 <span class="normal"><a href="#__codelineno-50-23">23</a></span>
 <span class="normal"><a href="#__codelineno-50-24">24</a></span>
@@ -5531,11 +5604,17 @@ Typically small test files are stored in the <code>assets</code> directory, so l
 </div>
 </div>
 </div>
+<p>Key points:</p>
+<ul>
+<li><strong>Using <code>${projectDir}</code></strong>: This is a Nextflow implicit variable that points to the directory where the main workflow script is located (the pipeline root). Using it ensures the path works regardless of where the pipeline is run from.</li>
+<li><strong>Absolute paths</strong>: By using <code>${projectDir}</code>, we create an absolute path, which is important for test data that ships with the pipeline.</li>
+<li><strong>Test data location</strong>: nf-core pipelines typically store test data in the <code>assets/</code> directory within the pipeline repository for small test files, or reference external test datasets for larger files.</li>
+</ul>
 <p>And while we're at it, let's lower the default resource limitations:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="10:2"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><input id="__tabbed_10_2" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">After</label><label for="__tabbed_10_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/config/test.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-51-13">13</a></span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/conf/test.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-51-13">13</a></span>
 <span class="normal"><a href="#__codelineno-51-14">14</a></span>
 <span class="normal"><a href="#__codelineno-51-15">15</a></span>
 <span class="normal"><a href="#__codelineno-51-16">16</a></span>
@@ -5551,7 +5630,7 @@ Typically small test files are stored in the <code>assets</code> directory, so l
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/config/test.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-52-13">13</a></span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/conf/test.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-52-13">13</a></span>
 <span class="normal"><a href="#__codelineno-52-14">14</a></span>
 <span class="normal"><a href="#__codelineno-52-15">15</a></span>
 <span class="normal"><a href="#__codelineno-52-16">16</a></span>
@@ -5655,7 +5734,7 @@ This includes the various reports produced by the nf-core utility subworkflows, 
 <h3 id="takeaway_3">Takeaway<a class="headerlink" href="#takeaway_3" title="Permanent link">&para;</a></h3>
 <p>You know how to convert a regular Nextflow pipeline into an nf-core style pipeline using the nf-core template. As part of that, you learned how to make a workflow composable, and identify the most common elements of the nf-core template that need to be adapted when developing a custom nf-core style pipeline.</p>
 <h3 id="whats-next_3">What's next?<a class="headerlink" href="#whats-next_3" title="Permanent link">&para;</a></h3>
-<p>Take a big break, that was hard work! Your brain deserves to chill out and you could probably use some hydration and a bit of stretching. When you're ready, move on to the next section to learn how to add an nf-core module to an existing nf-core style pipeline. (COMING SOON)</p>
+<p>Take a break, that was hard work! When you're ready, move on to <a href="../03_use_module/">Part 3: Use an nf-core module</a> to learn how to leverage community-maintained modules from the nf-core/modules repository.</p>
 
 
 
@@ -5710,13 +5789,13 @@ This includes the various reports produced by the nf-core utility subworkflows, 
         
         
           
-          <a href="../survey/" class="md-footer__link md-footer__link--next" aria-label="Next: Feedback survey">
+          <a href="../03_use_module/" class="md-footer__link md-footer__link--next" aria-label="Next: Part 3: Use an nf-core module">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Feedback survey
+                Part 3: Use an nf-core module
               </div>
             </div>
             <div class="md-footer__button md-icon">

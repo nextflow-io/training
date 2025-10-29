@@ -617,26 +617,37 @@
         <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/0.devpt/hello_nf-core/02_rewrite_hello/"/>
     </url>
     <url>
-        <loc>https://training.nextflow.io/0.dev/hello_nf-core/03_add_module/</loc>
+        <loc>https://training.nextflow.io/0.dev/hello_nf-core/03_use_module/</loc>
         <lastmod>2025-10-29</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/0.dev/hello_nf-core/03_add_module/"/>
-        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/0.deves/hello_nf-core/03_add_module/"/>
-        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/0.devfr/hello_nf-core/03_add_module/"/>
-        <xhtml:link rel="alternate" hreflang="it" href="https://training.nextflow.io/0.devit/hello_nf-core/03_add_module/"/>
-        <xhtml:link rel="alternate" hreflang="ko" href="https://training.nextflow.io/0.devko/hello_nf-core/03_add_module/"/>
-        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/0.devpt/hello_nf-core/03_add_module/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/0.dev/hello_nf-core/03_use_module/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/0.deves/hello_nf-core/03_use_module/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/0.devfr/hello_nf-core/03_use_module/"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://training.nextflow.io/0.devit/hello_nf-core/03_use_module/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://training.nextflow.io/0.devko/hello_nf-core/03_use_module/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/0.devpt/hello_nf-core/03_use_module/"/>
     </url>
     <url>
-        <loc>https://training.nextflow.io/0.dev/hello_nf-core/04_input_validation/</loc>
+        <loc>https://training.nextflow.io/0.dev/hello_nf-core/04_adapt_module/</loc>
         <lastmod>2025-10-29</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/0.dev/hello_nf-core/04_input_validation/"/>
-        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/0.deves/hello_nf-core/04_input_validation/"/>
-        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/0.devfr/hello_nf-core/04_input_validation/"/>
-        <xhtml:link rel="alternate" hreflang="it" href="https://training.nextflow.io/0.devit/hello_nf-core/04_input_validation/"/>
-        <xhtml:link rel="alternate" hreflang="ko" href="https://training.nextflow.io/0.devko/hello_nf-core/04_input_validation/"/>
-        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/0.devpt/hello_nf-core/04_input_validation/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/0.dev/hello_nf-core/04_adapt_module/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/0.deves/hello_nf-core/04_adapt_module/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/0.devfr/hello_nf-core/04_adapt_module/"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://training.nextflow.io/0.devit/hello_nf-core/04_adapt_module/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://training.nextflow.io/0.devko/hello_nf-core/04_adapt_module/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/0.devpt/hello_nf-core/04_adapt_module/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/0.dev/hello_nf-core/05_input_validation/</loc>
+        <lastmod>2025-10-29</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/0.dev/hello_nf-core/05_input_validation/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/0.deves/hello_nf-core/05_input_validation/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/0.devfr/hello_nf-core/05_input_validation/"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://training.nextflow.io/0.devit/hello_nf-core/05_input_validation/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://training.nextflow.io/0.devko/hello_nf-core/05_input_validation/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/0.devpt/hello_nf-core/05_input_validation/"/>
     </url>
     <url>
         <loc>https://training.nextflow.io/0.dev/hello_nf-core/next_steps/</loc>
@@ -2175,26 +2186,37 @@
         <xhtml:link rel="alternate" hreflang="ko" href="https://training.nextflow.io/0.devko/hello_nf-core/02_rewrite_hello/"/>
     </url>
     <url>
-        <loc>https://training.nextflow.io/0.dev/pt/hello_nf-core/03_add_module/</loc>
+        <loc>https://training.nextflow.io/0.dev/pt/hello_nf-core/03_use_module/</loc>
         <lastmod>2025-10-29</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/0.dev/pt/hello_nf-core/03_add_module/"/>
-        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/0.devhello_nf-core/03_add_module/"/>
-        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/0.deves/hello_nf-core/03_add_module/"/>
-        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/0.devfr/hello_nf-core/03_add_module/"/>
-        <xhtml:link rel="alternate" hreflang="it" href="https://training.nextflow.io/0.devit/hello_nf-core/03_add_module/"/>
-        <xhtml:link rel="alternate" hreflang="ko" href="https://training.nextflow.io/0.devko/hello_nf-core/03_add_module/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/0.dev/pt/hello_nf-core/03_use_module/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/0.devhello_nf-core/03_use_module/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/0.deves/hello_nf-core/03_use_module/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/0.devfr/hello_nf-core/03_use_module/"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://training.nextflow.io/0.devit/hello_nf-core/03_use_module/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://training.nextflow.io/0.devko/hello_nf-core/03_use_module/"/>
     </url>
     <url>
-        <loc>https://training.nextflow.io/0.dev/pt/hello_nf-core/04_input_validation/</loc>
+        <loc>https://training.nextflow.io/0.dev/pt/hello_nf-core/04_adapt_module/</loc>
         <lastmod>2025-10-29</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/0.dev/pt/hello_nf-core/04_input_validation/"/>
-        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/0.devhello_nf-core/04_input_validation/"/>
-        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/0.deves/hello_nf-core/04_input_validation/"/>
-        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/0.devfr/hello_nf-core/04_input_validation/"/>
-        <xhtml:link rel="alternate" hreflang="it" href="https://training.nextflow.io/0.devit/hello_nf-core/04_input_validation/"/>
-        <xhtml:link rel="alternate" hreflang="ko" href="https://training.nextflow.io/0.devko/hello_nf-core/04_input_validation/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/0.dev/pt/hello_nf-core/04_adapt_module/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/0.devhello_nf-core/04_adapt_module/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/0.deves/hello_nf-core/04_adapt_module/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/0.devfr/hello_nf-core/04_adapt_module/"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://training.nextflow.io/0.devit/hello_nf-core/04_adapt_module/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://training.nextflow.io/0.devko/hello_nf-core/04_adapt_module/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/0.dev/pt/hello_nf-core/05_input_validation/</loc>
+        <lastmod>2025-10-29</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/0.dev/pt/hello_nf-core/05_input_validation/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/0.devhello_nf-core/05_input_validation/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/0.deves/hello_nf-core/05_input_validation/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/0.devfr/hello_nf-core/05_input_validation/"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://training.nextflow.io/0.devit/hello_nf-core/05_input_validation/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://training.nextflow.io/0.devko/hello_nf-core/05_input_validation/"/>
     </url>
     <url>
         <loc>https://training.nextflow.io/0.dev/pt/hello_nf-core/next_steps/</loc>
@@ -3726,26 +3748,37 @@
         <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/0.devpt/hello_nf-core/02_rewrite_hello/"/>
     </url>
     <url>
-        <loc>https://training.nextflow.io/0.dev/es/hello_nf-core/03_add_module/</loc>
+        <loc>https://training.nextflow.io/0.dev/es/hello_nf-core/03_use_module/</loc>
         <lastmod>2025-10-29</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/0.dev/es/hello_nf-core/03_add_module/"/>
-        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/0.devhello_nf-core/03_add_module/"/>
-        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/0.devfr/hello_nf-core/03_add_module/"/>
-        <xhtml:link rel="alternate" hreflang="it" href="https://training.nextflow.io/0.devit/hello_nf-core/03_add_module/"/>
-        <xhtml:link rel="alternate" hreflang="ko" href="https://training.nextflow.io/0.devko/hello_nf-core/03_add_module/"/>
-        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/0.devpt/hello_nf-core/03_add_module/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/0.dev/es/hello_nf-core/03_use_module/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/0.devhello_nf-core/03_use_module/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/0.devfr/hello_nf-core/03_use_module/"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://training.nextflow.io/0.devit/hello_nf-core/03_use_module/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://training.nextflow.io/0.devko/hello_nf-core/03_use_module/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/0.devpt/hello_nf-core/03_use_module/"/>
     </url>
     <url>
-        <loc>https://training.nextflow.io/0.dev/es/hello_nf-core/04_input_validation/</loc>
+        <loc>https://training.nextflow.io/0.dev/es/hello_nf-core/04_adapt_module/</loc>
         <lastmod>2025-10-29</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/0.dev/es/hello_nf-core/04_input_validation/"/>
-        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/0.devhello_nf-core/04_input_validation/"/>
-        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/0.devfr/hello_nf-core/04_input_validation/"/>
-        <xhtml:link rel="alternate" hreflang="it" href="https://training.nextflow.io/0.devit/hello_nf-core/04_input_validation/"/>
-        <xhtml:link rel="alternate" hreflang="ko" href="https://training.nextflow.io/0.devko/hello_nf-core/04_input_validation/"/>
-        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/0.devpt/hello_nf-core/04_input_validation/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/0.dev/es/hello_nf-core/04_adapt_module/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/0.devhello_nf-core/04_adapt_module/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/0.devfr/hello_nf-core/04_adapt_module/"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://training.nextflow.io/0.devit/hello_nf-core/04_adapt_module/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://training.nextflow.io/0.devko/hello_nf-core/04_adapt_module/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/0.devpt/hello_nf-core/04_adapt_module/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/0.dev/es/hello_nf-core/05_input_validation/</loc>
+        <lastmod>2025-10-29</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/0.dev/es/hello_nf-core/05_input_validation/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/0.devhello_nf-core/05_input_validation/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/0.devfr/hello_nf-core/05_input_validation/"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://training.nextflow.io/0.devit/hello_nf-core/05_input_validation/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://training.nextflow.io/0.devko/hello_nf-core/05_input_validation/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/0.devpt/hello_nf-core/05_input_validation/"/>
     </url>
     <url>
         <loc>https://training.nextflow.io/0.dev/es/hello_nf-core/next_steps/</loc>
@@ -5284,26 +5317,37 @@
         <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/0.devpt/hello_nf-core/02_rewrite_hello/"/>
     </url>
     <url>
-        <loc>https://training.nextflow.io/0.dev/fr/hello_nf-core/03_add_module/</loc>
+        <loc>https://training.nextflow.io/0.dev/fr/hello_nf-core/03_use_module/</loc>
         <lastmod>2025-10-29</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/0.dev/fr/hello_nf-core/03_add_module/"/>
-        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/0.devhello_nf-core/03_add_module/"/>
-        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/0.deves/hello_nf-core/03_add_module/"/>
-        <xhtml:link rel="alternate" hreflang="it" href="https://training.nextflow.io/0.devit/hello_nf-core/03_add_module/"/>
-        <xhtml:link rel="alternate" hreflang="ko" href="https://training.nextflow.io/0.devko/hello_nf-core/03_add_module/"/>
-        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/0.devpt/hello_nf-core/03_add_module/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/0.dev/fr/hello_nf-core/03_use_module/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/0.devhello_nf-core/03_use_module/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/0.deves/hello_nf-core/03_use_module/"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://training.nextflow.io/0.devit/hello_nf-core/03_use_module/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://training.nextflow.io/0.devko/hello_nf-core/03_use_module/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/0.devpt/hello_nf-core/03_use_module/"/>
     </url>
     <url>
-        <loc>https://training.nextflow.io/0.dev/fr/hello_nf-core/04_input_validation/</loc>
+        <loc>https://training.nextflow.io/0.dev/fr/hello_nf-core/04_adapt_module/</loc>
         <lastmod>2025-10-29</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/0.dev/fr/hello_nf-core/04_input_validation/"/>
-        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/0.devhello_nf-core/04_input_validation/"/>
-        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/0.deves/hello_nf-core/04_input_validation/"/>
-        <xhtml:link rel="alternate" hreflang="it" href="https://training.nextflow.io/0.devit/hello_nf-core/04_input_validation/"/>
-        <xhtml:link rel="alternate" hreflang="ko" href="https://training.nextflow.io/0.devko/hello_nf-core/04_input_validation/"/>
-        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/0.devpt/hello_nf-core/04_input_validation/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/0.dev/fr/hello_nf-core/04_adapt_module/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/0.devhello_nf-core/04_adapt_module/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/0.deves/hello_nf-core/04_adapt_module/"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://training.nextflow.io/0.devit/hello_nf-core/04_adapt_module/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://training.nextflow.io/0.devko/hello_nf-core/04_adapt_module/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/0.devpt/hello_nf-core/04_adapt_module/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/0.dev/fr/hello_nf-core/05_input_validation/</loc>
+        <lastmod>2025-10-29</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/0.dev/fr/hello_nf-core/05_input_validation/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/0.devhello_nf-core/05_input_validation/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/0.deves/hello_nf-core/05_input_validation/"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://training.nextflow.io/0.devit/hello_nf-core/05_input_validation/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://training.nextflow.io/0.devko/hello_nf-core/05_input_validation/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/0.devpt/hello_nf-core/05_input_validation/"/>
     </url>
     <url>
         <loc>https://training.nextflow.io/0.dev/fr/hello_nf-core/next_steps/</loc>
@@ -6835,26 +6879,37 @@
         <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/0.devpt/hello_nf-core/02_rewrite_hello/"/>
     </url>
     <url>
-        <loc>https://training.nextflow.io/0.dev/it/hello_nf-core/03_add_module/</loc>
+        <loc>https://training.nextflow.io/0.dev/it/hello_nf-core/03_use_module/</loc>
         <lastmod>2025-10-29</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="it" href="https://training.nextflow.io/0.dev/it/hello_nf-core/03_add_module/"/>
-        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/0.devhello_nf-core/03_add_module/"/>
-        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/0.deves/hello_nf-core/03_add_module/"/>
-        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/0.devfr/hello_nf-core/03_add_module/"/>
-        <xhtml:link rel="alternate" hreflang="ko" href="https://training.nextflow.io/0.devko/hello_nf-core/03_add_module/"/>
-        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/0.devpt/hello_nf-core/03_add_module/"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://training.nextflow.io/0.dev/it/hello_nf-core/03_use_module/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/0.devhello_nf-core/03_use_module/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/0.deves/hello_nf-core/03_use_module/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/0.devfr/hello_nf-core/03_use_module/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://training.nextflow.io/0.devko/hello_nf-core/03_use_module/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/0.devpt/hello_nf-core/03_use_module/"/>
     </url>
     <url>
-        <loc>https://training.nextflow.io/0.dev/it/hello_nf-core/04_input_validation/</loc>
+        <loc>https://training.nextflow.io/0.dev/it/hello_nf-core/04_adapt_module/</loc>
         <lastmod>2025-10-29</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="it" href="https://training.nextflow.io/0.dev/it/hello_nf-core/04_input_validation/"/>
-        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/0.devhello_nf-core/04_input_validation/"/>
-        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/0.deves/hello_nf-core/04_input_validation/"/>
-        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/0.devfr/hello_nf-core/04_input_validation/"/>
-        <xhtml:link rel="alternate" hreflang="ko" href="https://training.nextflow.io/0.devko/hello_nf-core/04_input_validation/"/>
-        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/0.devpt/hello_nf-core/04_input_validation/"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://training.nextflow.io/0.dev/it/hello_nf-core/04_adapt_module/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/0.devhello_nf-core/04_adapt_module/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/0.deves/hello_nf-core/04_adapt_module/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/0.devfr/hello_nf-core/04_adapt_module/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://training.nextflow.io/0.devko/hello_nf-core/04_adapt_module/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/0.devpt/hello_nf-core/04_adapt_module/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/0.dev/it/hello_nf-core/05_input_validation/</loc>
+        <lastmod>2025-10-29</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="it" href="https://training.nextflow.io/0.dev/it/hello_nf-core/05_input_validation/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/0.devhello_nf-core/05_input_validation/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/0.deves/hello_nf-core/05_input_validation/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/0.devfr/hello_nf-core/05_input_validation/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://training.nextflow.io/0.devko/hello_nf-core/05_input_validation/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/0.devpt/hello_nf-core/05_input_validation/"/>
     </url>
     <url>
         <loc>https://training.nextflow.io/0.dev/it/hello_nf-core/next_steps/</loc>
@@ -8386,26 +8441,37 @@
         <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/0.devpt/hello_nf-core/02_rewrite_hello/"/>
     </url>
     <url>
-        <loc>https://training.nextflow.io/0.dev/ko/hello_nf-core/03_add_module/</loc>
+        <loc>https://training.nextflow.io/0.dev/ko/hello_nf-core/03_use_module/</loc>
         <lastmod>2025-10-29</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="ko" href="https://training.nextflow.io/0.dev/ko/hello_nf-core/03_add_module/"/>
-        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/0.devhello_nf-core/03_add_module/"/>
-        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/0.deves/hello_nf-core/03_add_module/"/>
-        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/0.devfr/hello_nf-core/03_add_module/"/>
-        <xhtml:link rel="alternate" hreflang="it" href="https://training.nextflow.io/0.devit/hello_nf-core/03_add_module/"/>
-        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/0.devpt/hello_nf-core/03_add_module/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://training.nextflow.io/0.dev/ko/hello_nf-core/03_use_module/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/0.devhello_nf-core/03_use_module/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/0.deves/hello_nf-core/03_use_module/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/0.devfr/hello_nf-core/03_use_module/"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://training.nextflow.io/0.devit/hello_nf-core/03_use_module/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/0.devpt/hello_nf-core/03_use_module/"/>
     </url>
     <url>
-        <loc>https://training.nextflow.io/0.dev/ko/hello_nf-core/04_input_validation/</loc>
+        <loc>https://training.nextflow.io/0.dev/ko/hello_nf-core/04_adapt_module/</loc>
         <lastmod>2025-10-29</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="ko" href="https://training.nextflow.io/0.dev/ko/hello_nf-core/04_input_validation/"/>
-        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/0.devhello_nf-core/04_input_validation/"/>
-        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/0.deves/hello_nf-core/04_input_validation/"/>
-        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/0.devfr/hello_nf-core/04_input_validation/"/>
-        <xhtml:link rel="alternate" hreflang="it" href="https://training.nextflow.io/0.devit/hello_nf-core/04_input_validation/"/>
-        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/0.devpt/hello_nf-core/04_input_validation/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://training.nextflow.io/0.dev/ko/hello_nf-core/04_adapt_module/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/0.devhello_nf-core/04_adapt_module/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/0.deves/hello_nf-core/04_adapt_module/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/0.devfr/hello_nf-core/04_adapt_module/"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://training.nextflow.io/0.devit/hello_nf-core/04_adapt_module/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/0.devpt/hello_nf-core/04_adapt_module/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/0.dev/ko/hello_nf-core/05_input_validation/</loc>
+        <lastmod>2025-10-29</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://training.nextflow.io/0.dev/ko/hello_nf-core/05_input_validation/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/0.devhello_nf-core/05_input_validation/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/0.deves/hello_nf-core/05_input_validation/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/0.devfr/hello_nf-core/05_input_validation/"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://training.nextflow.io/0.devit/hello_nf-core/05_input_validation/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/0.devpt/hello_nf-core/05_input_validation/"/>
     </url>
     <url>
         <loc>https://training.nextflow.io/0.dev/ko/hello_nf-core/next_steps/</loc>

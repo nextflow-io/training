@@ -1373,6 +1373,75 @@
   
   
     <li class="md-nav__item">
+      <a href="../03_use_module/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 3: Use an nf-core module
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_adapt_module/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 4: Adapt local modules to nf-core conventions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_input_validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 5: Input validation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../survey/" class="md-nav__link">
         
   
@@ -3554,7 +3623,7 @@ However, you do need a (free) GitHub account to log in, and you should take a fe
 <p>If you have not yet done so, please go through the <a href="../../envsetup/">Environment Setup</a> mini-course before going any further.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>This training is designed for nf-core tools version 3.2.1, which should be the version installed in the codespace. If you use a different version of nf-core tooling you may have difficulty following along.</p>
+<p>This training is designed for nf-core tools version 3.4.1, which should be the version installed in the codespace. If you use a different version of nf-core tooling you may have difficulty following along.</p>
 <p>You can check what version is installed using the command<code>nf-core --version</code>.</p>
 </div>
 <h2 id="working-directory">Working directory<a class="headerlink" href="#working-directory" title="Permanent link">&para;</a></h2>
@@ -3584,9 +3653,13 @@ Alternatively, you can use the <code>tree</code> command.</p>
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="go">│   ├── modules</span>
 <a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="go">│   └── nextflow.config</span>
 <a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="go">└── solutions</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="go">    └── composable-hello</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="go">4 directories, 3 files</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="go">    ├── composable-hello</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="go">    ├── core-hello-part2</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="go">    ├── core-hello-part3</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="go">    ├── core-hello-part4</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="go">    └── core-hello-start</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="go">8 directories, 3 files</span>
 </code></pre></div>
 <p><strong>Here's a summary of what you should know to get started:</strong></p>
 <ul>
