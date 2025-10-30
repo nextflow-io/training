@@ -1700,18 +1700,18 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#16-move-the-output-files-to-the-filesystem-outside-the-container" class="md-nav__link">
+  <a href="#15-move-the-output-files-to-the-filesystem-outside-the-container" class="md-nav__link">
     <span class="md-ellipsis">
-      1.6. Move the output files to the filesystem outside the container
+      1.5. Move the output files to the filesystem outside the container
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#17-exit-the-container" class="md-nav__link">
+  <a href="#16-exit-the-container" class="md-nav__link">
     <span class="md-ellipsis">
-      1.7. Exit the container
+      1.6. Exit the container
     </span>
   </a>
   
@@ -1758,27 +1758,27 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#25-run-the-hisat2-command" class="md-nav__link">
+  <a href="#24-run-the-hisat2-command" class="md-nav__link">
     <span class="md-ellipsis">
-      2.5. Run the hisat2 command
+      2.4. Run the hisat2 command
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#26-move-the-output-files-to-the-filesystem-outside-the-container" class="md-nav__link">
+  <a href="#25-move-the-output-files-to-the-filesystem-outside-the-container" class="md-nav__link">
     <span class="md-ellipsis">
-      2.6. Move the output files to the filesystem outside the container
+      2.5. Move the output files to the filesystem outside the container
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#27-exit-the-container" class="md-nav__link">
+  <a href="#26-exit-the-container" class="md-nav__link">
     <span class="md-ellipsis">
-      2.7. Exit the container
+      2.6. Exit the container
     </span>
   </a>
   
@@ -3604,18 +3604,18 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#16-move-the-output-files-to-the-filesystem-outside-the-container" class="md-nav__link">
+  <a href="#15-move-the-output-files-to-the-filesystem-outside-the-container" class="md-nav__link">
     <span class="md-ellipsis">
-      1.6. Move the output files to the filesystem outside the container
+      1.5. Move the output files to the filesystem outside the container
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#17-exit-the-container" class="md-nav__link">
+  <a href="#16-exit-the-container" class="md-nav__link">
     <span class="md-ellipsis">
-      1.7. Exit the container
+      1.6. Exit the container
     </span>
   </a>
   
@@ -3662,27 +3662,27 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#25-run-the-hisat2-command" class="md-nav__link">
+  <a href="#24-run-the-hisat2-command" class="md-nav__link">
     <span class="md-ellipsis">
-      2.5. Run the hisat2 command
+      2.4. Run the hisat2 command
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#26-move-the-output-files-to-the-filesystem-outside-the-container" class="md-nav__link">
+  <a href="#25-move-the-output-files-to-the-filesystem-outside-the-container" class="md-nav__link">
     <span class="md-ellipsis">
-      2.6. Move the output files to the filesystem outside the container
+      2.5. Move the output files to the filesystem outside the container
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#27-exit-the-container" class="md-nav__link">
+  <a href="#26-exit-the-container" class="md-nav__link">
     <span class="md-ellipsis">
-      2.7. Exit the container
+      2.6. Exit the container
     </span>
   </a>
   
@@ -4108,12 +4108,12 @@ The tools we need are not installed in the GitHub Codespaces environment, so we'
 <div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="go">ENCSR000COQ1_1.fastq.gz_trimming_report.txt  ENCSR000COQ1_1_trimmed_fastqc.html</span>
 <a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="go">ENCSR000COQ1_1_trimmed.fq.gz                 ENCSR000COQ1_1_trimmed_fastqc.zip</span>
 </code></pre></div>
-<h3 id="16-move-the-output-files-to-the-filesystem-outside-the-container">1.6. Move the output files to the filesystem outside the container<a class="headerlink" href="#16-move-the-output-files-to-the-filesystem-outside-the-container" title="Permanent link">&para;</a></h3>
+<h3 id="15-move-the-output-files-to-the-filesystem-outside-the-container">1.5. Move the output files to the filesystem outside the container<a class="headerlink" href="#15-move-the-output-files-to-the-filesystem-outside-the-container" title="Permanent link">&para;</a></h3>
 <p>Anything that remains inside the container will be inaccessible to future work so let's move these to a new directory.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>mkdir<span class="w"> </span>/data/trimmed
 <a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>mv<span class="w"> </span>ENCSR000COQ1_1*<span class="w"> </span>/data/trimmed
 </code></pre></div>
-<h3 id="17-exit-the-container">1.7. Exit the container<a class="headerlink" href="#17-exit-the-container" title="Permanent link">&para;</a></h3>
+<h3 id="16-exit-the-container">1.6. Exit the container<a class="headerlink" href="#16-exit-the-container" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nb">exit</span>
 </code></pre></div>
 <hr />
@@ -4164,7 +4164,7 @@ The tools we need are not installed in the GitHub Codespaces environment, so we'
 <div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>tar<span class="w"> </span>-czvf<span class="w"> </span>/data/genome_index.tar.gz<span class="w"> </span>genome_index.*
 </code></pre></div>
 <p>This stores a <code>genome_index.tar.gz</code> tarball containing the genome index files in the <code>data/</code> directory on our filesystem, which wil come in handy in Part 2 of this course.</p>
-<h3 id="25-run-the-hisat2-command">2.5. Run the <code>hisat2</code> command<a class="headerlink" href="#25-run-the-hisat2-command" title="Permanent link">&para;</a></h3>
+<h3 id="24-run-the-hisat2-command">2.4. Run the <code>hisat2</code> command<a class="headerlink" href="#24-run-the-hisat2-command" title="Permanent link">&para;</a></h3>
 <p>Now we can run the alignment command, which performs the alignment step with <code>hisat2</code> then pipes the output to <code>samtools</code> to write the output out as a BAM file.</p>
 <p>The read data input is the <code>/data/trimmed/ENCSR000COQ1_1_trimmed.fq.gz</code> file we generated with <code>trim_galore</code> in the previous step.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>hisat2<span class="w"> </span>-x<span class="w"> </span>genome_index<span class="w"> </span>-U<span class="w"> </span>/data/trimmed/ENCSR000COQ1_1_trimmed.fq.gz<span class="w"> </span><span class="se">\</span>
@@ -4185,18 +4185,18 @@ At real scale this could take a lot longer.</p>
 </code></pre></div>
 <div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="go">ENCSR000COQ1_1_trimmed.bam  ENCSR000COQ1_1_trimmed.hisat2.log</span>
 </code></pre></div>
-<h3 id="26-move-the-output-files-to-the-filesystem-outside-the-container">2.6. Move the output files to the filesystem outside the container<a class="headerlink" href="#26-move-the-output-files-to-the-filesystem-outside-the-container" title="Permanent link">&para;</a></h3>
+<h3 id="25-move-the-output-files-to-the-filesystem-outside-the-container">2.5. Move the output files to the filesystem outside the container<a class="headerlink" href="#25-move-the-output-files-to-the-filesystem-outside-the-container" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>mkdir<span class="w"> </span>/data/aligned
 <a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>mv<span class="w"> </span>ENCSR000COQ1_1*<span class="w"> </span>/data/aligned
 </code></pre></div>
-<h3 id="27-exit-the-container">2.7. Exit the container<a class="headerlink" href="#27-exit-the-container" title="Permanent link">&para;</a></h3>
+<h3 id="26-exit-the-container">2.6. Exit the container<a class="headerlink" href="#26-exit-the-container" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="nb">exit</span>
 </code></pre></div>
 <hr />
 <h2 id="3-generate-a-comprehensive-qc-report">3. Generate a comprehensive QC report<a class="headerlink" href="#3-generate-a-comprehensive-qc-report" title="Permanent link">&para;</a></h2>
 <p>We're going to pull a container image that has <code>multiqc</code> installed, spin it up interactively and run a report generation command on the before/after FastQC report files.</p>
 <h3 id="31-pull-the-multiqc-container">3.1. Pull the <code>multiqc</code> container<a class="headerlink" href="#31-pull-the-multiqc-container" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>docker<span class="w"> </span>pull<span class="w"> </span>community.wave.seqera.io/library/pip_multiqc:ad8f247edb55897c
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>docker<span class="w"> </span>pull<span class="w"> </span>community.wave.seqera.io/library/pip_multiqc:a3c26f6199d64b7c
 </code></pre></div>
 <div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="go">ad8f247edb55897c: Pulling from library/pip_multiqc</span>
 <a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="go">dafa2b0c44d2: Already exists</span>
@@ -4213,11 +4213,11 @@ At real scale this could take a lot longer.</p>
 <a id="__codelineno-30-13" name="__codelineno-30-13" href="#__codelineno-30-13"></a><span class="go">3f229294c69a: Pull complete</span>
 <a id="__codelineno-30-14" name="__codelineno-30-14" href="#__codelineno-30-14"></a><span class="go">5a5ad47fd84c: Pull complete</span>
 <a id="__codelineno-30-15" name="__codelineno-30-15" href="#__codelineno-30-15"></a><span class="go">Digest: sha256:0ebb1d9605395a7df49ad0eb366b21f46afd96a5090376b0d8941cf5294a895a</span>
-<a id="__codelineno-30-16" name="__codelineno-30-16" href="#__codelineno-30-16"></a><span class="go">Status: Downloaded newer image for community.wave.seqera.io/library/pip_multiqc:ad8f247edb55897c</span>
-<a id="__codelineno-30-17" name="__codelineno-30-17" href="#__codelineno-30-17"></a><span class="go">community.wave.seqera.io/library/pip_multiqc:ad8f247edb55897c</span>
+<a id="__codelineno-30-16" name="__codelineno-30-16" href="#__codelineno-30-16"></a><span class="go">Status: Downloaded newer image for community.wave.seqera.io/library/pip_multiqc:a3c26f6199d64b7c</span>
+<a id="__codelineno-30-17" name="__codelineno-30-17" href="#__codelineno-30-17"></a><span class="go">community.wave.seqera.io/library/pip_multiqc:a3c26f6199d64b7c</span>
 </code></pre></div>
 <h3 id="32-spin-up-the-multiqc-container-interactively">3.2. Spin up the <code>multiqc</code> container interactively<a class="headerlink" href="#32-spin-up-the-multiqc-container-interactively" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>-v<span class="w"> </span>./data:/data<span class="w"> </span>community.wave.seqera.io/library/pip_multiqc:ad8f247edb55897c
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>-v<span class="w"> </span>./data:/data<span class="w"> </span>community.wave.seqera.io/library/pip_multiqc:a3c26f6199d64b7c
 </code></pre></div>
 <h3 id="33-run-the-multiqc-command">3.3. Run the <code>multiqc</code> command<a class="headerlink" href="#33-run-the-multiqc-command" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>multiqc<span class="w"> </span>/data/reads<span class="w"> </span>/data/trimmed<span class="w"> </span>/data/aligned<span class="w"> </span>-n<span class="w"> </span>ENCSR000COQ1_1_QC
