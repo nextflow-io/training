@@ -1172,7 +1172,7 @@ And while we're at it, let's lower the default resource limitations:
 
 === "After"
 
-    ```groovy title="core-hello/conf/test.config" linenums="13"
+    ```groovy title="core-hello/conf/test.config" linenums="13" hl_lines="3 4"
     process {
         resourceLimits = [
             cpus: 2,
@@ -1184,7 +1184,7 @@ And while we're at it, let's lower the default resource limitations:
 
 === "Before"
 
-    ```groovy title="core-hello/conf/test.config" linenums="13"
+    ```groovy title="core-hello/conf/test.config" linenums="13" hl_lines="3 4"
     process {
         resourceLimits = [
             cpus: 4,
