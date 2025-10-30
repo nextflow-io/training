@@ -337,6 +337,7 @@ tree -L 1 pipelines/nf-core/demo
 
 ```console title="Output (top-level only)"
 pipelines/nf-core/demo
+pipelines/nf-core/demo
 ├── assets
 ├── CHANGELOG.md
 ├── CITATIONS.md
@@ -347,10 +348,13 @@ pipelines/nf-core/demo
 ├── main.nf
 ├── modules
 ├── modules.json
-├── nextflow_schema.json
 ├── nextflow.config
+├── nextflow_schema.json
+├── nf-test.config
 ├── README.md
+├── ro-crate-metadata.json
 ├── subworkflows
+├── tests
 ├── tower.yml
 └── workflows
 ```
