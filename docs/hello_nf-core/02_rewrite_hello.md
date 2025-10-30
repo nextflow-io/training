@@ -262,7 +262,7 @@ These are optional features of Nextflow that make the workflow **composable**, m
 
 !!! note "Composable workflows in depth"
 
-    The [Workflows of Workflows](../side_quests/workflows_of_workflows) side quest explores workflow composition in much greater depth, including how to compose multiple workflows together and manage complex data flows between them. We're introducing composability here because it's a fundamental requirement of the nf-core template architecture, which uses nested workflows to organize pipeline initialization, the main analysis workflow, and completion tasks into separate, reusable components.
+    The [Workflows of Workflows](../side_quests/workflows_of_workflows/) Side Quest explores workflow composition in much greater depth, including how to compose multiple workflows together and manage complex data flows between them. We're introducing composability here because it's a fundamental requirement of the nf-core template architecture, which uses nested workflows to organize pipeline initialization, the main analysis workflow, and completion tasks into separate, reusable components.
 
 We are going to need to plug the relevant logic from our workflow of interest into that structure.
 The first step for that is to make our original workflow composable.
@@ -512,7 +512,8 @@ That is going to be defined in the parent workflow, also called the **entrypoint
 
 ### 2.6. Make a dummy entrypoint workflow
 
-We can make a dummy entrypoint workflow to test the composable workflow without yet having to deal with the rest of the complexity of the nf-core pipeline scaffold.
+Before integrating our composable workflow into the complex nf-core scaffold, let's verify it works correctly with a simple test harness.
+We can make a dummy entrypoint workflow to test the composable workflow in isolation.
 
 Create a blank file named `main.nf` in the same`original-hello` directory.
 
@@ -547,7 +548,7 @@ workflow {
 
 There are two important observations to make here:
 
-- The syntax for calling the imported workflow (line 16) is essentially the same as the syntax for calling modules.
+- The syntax for calling the imported workflow is essentially the same as the syntax for calling modules.
 - Everything that is related to pulling the inputs into the workflow (input parameter and channel construction) is now declared in this parent workflow.
 
 !!! note
@@ -594,10 +595,6 @@ This means we've successfully upgraded our HELLO workflow to be composable.
 ### Takeaway
 
 You know how to make a workflow composable by giving it a name and adding `take`, `main` and `emit` statements, and how to call it from an entrypoint workflow.
-
-!!! note
-
-    If you're interested in digging deeper into options for composing workflows of workflows, check out the [Workflow of Workflows](https://training.nextflow.io/latest/side_quests/workflows_of_workflows) (a.k.a. WoW) side quest.
 
 ### What's next?
 
@@ -885,9 +882,12 @@ You know how to fit the core pieces of a composable workflow into an nf-core pla
 
 ### What's next?
 
-Learn how to adapt how the inputs are handle in the nf-core pipeline scaffold.
+Learn how to adapt how the inputs are handled in the nf-core pipeline scaffold.
 
 ---
+
+Now that we've successfully integrated our workflow logic into the nf-core scaffold, we need to address one more critical piece: ensuring that our input data is processed correctly.
+The nf-core template comes with sophisticated input handling designed for complex genomics datasets, but we can adapt it to work with our simpler greeting data.
 
 ## 4. Adapt the input handling
 
@@ -1116,7 +1116,7 @@ For now, we're focused on keeping it as simple as possible to get to something w
 
 Speaking of test data and parameters, let's update the test profile for this pipeline to use the `greetings.csv` mini-samplesheet instead of the example samplesheet provided in the template.
 
-Under `core-hello/config`, we find two templated test profiles: `test.config` and `test_full.config`, which are meant to test a small data sample and a full-size one.
+Under `core-hello/conf`, we find two templated test profiles: `test.config` and `test_full.config`, which are meant to test a small data sample and a full-size one.
 Given the purpose of our pipeline, there's not really a point to setting up a full-size test profile, so feel free to ignore or delete `test_full.config`.
 We're going to focus on setting up `test.config` to run on our `greetings.csv` file with a few default parameters.
 
