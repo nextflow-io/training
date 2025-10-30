@@ -1000,7 +1000,7 @@ A bit of poking around reveals that the input handling is done by the `PIPELINE_
 
 If we open up `core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf` and scroll down, we come to this chunk of code:
 
-```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="64"
+```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="76"
     //
     // Create channel from input file provided through params.input
     //
