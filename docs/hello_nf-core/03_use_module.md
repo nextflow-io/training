@@ -291,7 +291,7 @@ The main differences are:
 
 You've just seen that `CAT_CAT` expects inputs and outputs structured as tuples with metadata:
 
-```groovy name="modules/nf-core/cat/cat/main.nf (excerpt)" linenums="1" hl_lines="2 5"
+```groovy title="modules/nf-core/cat/cat/main.nf (excerpt)" linenums="1" hl_lines="2 5"
 input:
 tuple val(meta), path(files_in)
 
@@ -456,7 +456,44 @@ Now call `CAT_CAT` with the properly formatted channel:
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
-#### Step 4: Update cowpy to use CAT_CAT output
+#### Step 4: Remove the legacy collectGreetings import
+
+Since we're no longer using the `collectGreetings` module, remove its import statement from the top of the file:
+
+=== "After"
+
+    ```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="10"
+    /*
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    */
+    include { paramsSummaryMap       } from 'plugin/nf-schema'
+    include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
+    include { sayHello               } from '../modules/local/sayHello.nf'
+    include { convertToUpper         } from '../modules/local/convertToUpper.nf'
+    include { cowpy                  } from '../modules/local/cowpy.nf'
+    include { CAT_CAT                } from '../modules/nf-core/cat/cat/main'
+    ```
+
+=== "Before"
+
+    ```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="10"
+    /*
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    */
+    include { paramsSummaryMap       } from 'plugin/nf-schema'
+    include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
+    include { sayHello               } from '../modules/local/sayHello.nf'
+    include { convertToUpper         } from '../modules/local/convertToUpper.nf'
+    include { collectGreetings       } from '../modules/local/collectGreetings.nf'
+    include { cowpy                  } from '../modules/local/cowpy.nf'
+    include { CAT_CAT                } from '../modules/nf-core/cat/cat/main'
+    ```
+
+#### Step 5: Update cowpy to use CAT_CAT output
 
 Finally, update the `cowpy` call to use the output from `CAT_CAT`. Since `cowpy` doesn't accept metadata tuples yet (we'll fix this in the next section), we need to extract just the file:
 
