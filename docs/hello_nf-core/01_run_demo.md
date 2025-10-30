@@ -194,6 +194,12 @@ Based on the usage example in the test profile, we know we need to specify `--ou
 
 We're also going to specify `-profile docker,test`, which by nf-core convention enables the use of Docker containers, and of course, invokes the test profile.
 
+!!! note "Understanding container profiles"
+
+    The `-profile docker` option tells Nextflow to use Docker containers for running processes.
+    nf-core pipelines are designed to work with containers (Docker, Singularity, etc.) to ensure reproducibility and eliminate software installation issues.
+    The profile system allows you to easily switch between different container engines or execution environments.
+
 Let's try it!
 
 ```bash
@@ -257,7 +263,7 @@ executor >  local (7)
 -[nf-core/demo] Pipeline completed successfully-
 ```
 
-You see that there is more console output than when you run a basic Netxflow pipeline.
+You see that there is more console output than when you run a basic Nextflow pipeline.
 There's a header that includes a summary of the pipeline's version, inputs and outputs, and a few elements of configuration.
 
 Moving on to the execution output, let's have a look at the lines that tell us what processes were run:
@@ -337,7 +343,6 @@ tree -L 1 pipelines/nf-core/demo
 
 ```console title="Output (top-level only)"
 pipelines/nf-core/demo
-pipelines/nf-core/demo
 ├── assets
 ├── CHANGELOG.md
 ├── CITATIONS.md
@@ -375,7 +380,7 @@ The pipeline code organization follows a modular structure that is designed to m
 !!! note
 
     We won't go over the actual code for how these modular components are connected, because there is some additional complexity associated with the use of subworkflows that can be confusing, and understanding that is not necessary at this stage of the training.
-    For now, we're going to focus on the logic of this modular organization. If you'd like to learn more about composing workflows with subworkflows, check out the [Workflows of Workflows](../side_quests/workflows_of_workflows/) Side Quest.
+    For now, we're going to focus on the logic of this modular organization.
 
 #### 3.1.1. Overall organization and `main.nf` script
 
@@ -485,7 +490,7 @@ Other pipelines may also use subworkflows as part of the main workflow of intere
 
 !!! note
 
-    If you would like to learn how to compose workflows with subworkflows, see the [Workflows of Workflows](https://training.nextflow.io/latest/side_quests/workflows_of_workflows/) Side Quest (also known as 'the WoW side quest').
+    If you would like to learn how to compose workflows with subworkflows, see the [Workflows of Workflows](../side_quests/workflows_of_workflows/) Side Quest.
 
 ### 3.2. Configuration
 
