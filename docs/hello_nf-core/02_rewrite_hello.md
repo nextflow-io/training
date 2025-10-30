@@ -602,10 +602,13 @@ Learn how to graft a basic composable workflow onto the nf-core scaffold.
 
 ## 3. Fit the updated workflow logic into the placeholder workflow
 
-This is the current content of the `HELLO` workflow in `core-hello/workflows/hello.nf`.
+Now that we've verified our composable workflow works correctly, let's return to the nf-core pipeline scaffold we created in section 1.
+We're going to integrate the composable workflow we just developed into the nf-core template structure.
+
+This is the current content of the `HELLO` workflow in `core-hello/workflows/hello.nf` (the nf-core scaffold).
 Overall this code does very little aside from some housekeeping that has to do with capturing the version of any software tools that get run in the pipeline.
 
-We need to add the relevant code from the version of the original workflow that we made composable.
+We need to add the relevant code from the composable version of the original workflow that we developed in section 2.
 
 ```groovy title="core-hello/workflows/hello.nf" linenums="1"
 /*
@@ -667,9 +670,10 @@ We're going to tackle this in the following stages:
 
 ### 3.1. Copy the modules and set up module imports
 
-In the original workflow, the four processes are stored in modules, so we need to copy those over to this new project (into a new `local` directory) and add import statements to the workflow file.
+The four processes from our Hello Nextflow workflow are stored as modules in `original-hello/modules/`.
+We need to copy those modules into the nf-core project structure (under `core-hello/modules/local/`) and add import statements to the nf-core workflow file.
 
-First let's copy the module files over:
+First let's copy the module files from `original-hello/` to `core-hello/`:
 
 ```bash
 mkdir -p core-hello/modules/local/
