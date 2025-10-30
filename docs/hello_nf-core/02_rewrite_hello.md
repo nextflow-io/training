@@ -160,9 +160,9 @@ nextflow run ./core-hello -profile docker,test --outdir core-hello-results
 ```console title="Output"
  N E X T F L O W   ~  version 25.04.3
 
-Launching `core-hello/main.nf` [special_ride] DSL2 - revision: c31b966b36
+Launching `./core-hello/main.nf` [insane_davinci] DSL2 - revision: b9e9b3b8de
 
-Downloading plugin nf-schema@2.2.0
+Downloading plugin nf-schema@2.5.1
 Input/output options
   input                     : https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv
   outdir                    : core-hello-results
@@ -172,21 +172,21 @@ Institutional config options
   config_profile_description: Minimal test dataset to check pipeline function
 
 Generic options
-  trace_report_suffix       : 2025-05-14_10-01-18
+  trace_report_suffix       : 2025-10-30_15-45-16
 
 Core Nextflow options
-  runName                   : special_ride
+  runName                   : insane_davinci
   containerEngine           : docker
   launchDir                 : /workspaces/training/hello-nf-core
   workDir                   : /workspaces/training/hello-nf-core/work
   projectDir                : /workspaces/training/hello-nf-core/core-hello
   userName                  : root
   profile                   : docker,test
-  configFiles               :
+  configFiles               : /workspaces/training/hello-nf-core/core-hello/nextflow.config
 
 !! Only displaying parameters that differ from the pipeline defaults !!
 ------------------------------------------------------
--[core/hello] Pipeline completed successfully
+-[core/hello] Pipeline completed successfully-
 ```
 
 This shows you that all the basic wiring is in place.
