@@ -291,7 +291,7 @@ The main differences are:
 
 You've just seen that `CAT_CAT` expects inputs and outputs structured as tuples with metadata:
 
-```groovy
+```groovy name="modules/nf-core/cat/cat/main.nf (excerpt)" linenums="1" hl_lines="2 5"
 input:
 tuple val(meta), path(files_in)
 
@@ -517,10 +517,10 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
 ```console title="Output"
  N E X T F L O W   ~  version 25.04.3
 
-Launching `./main.nf` [extravagant_volhard] DSL2 - revision: 6aa79210e6
+Launching `./main.nf` [evil_pike] DSL2 - revision: b9e9b3b8de
 
 Input/output options
-  input                     : /workspaces/training/hello-nf-core/nf-core-hello/assets/greetings.csv
+  input                     : /workspaces/training/hello-nf-core/core-hello/assets/greetings.csv
   outdir                    : core-hello-results
 
 Institutional config options
@@ -529,26 +529,26 @@ Institutional config options
 
 Generic options
   validate_params           : false
-  trace_report_suffix       : 2025-10-17_19-51-31
+  trace_report_suffix       : 2025-10-30_18-50-58
 
 Core Nextflow options
-  runName                   : extravagant_volhard
+  runName                   : evil_pike
   containerEngine           : docker
-  launchDir                 : /workspaces/training/hello-nf-core/nf-core-hello
-  workDir                   : /workspaces/training/hello-nf-core/nf-core-hello/work
-  projectDir                : /workspaces/training/hello-nf-core/nf-core-hello
+  launchDir                 : /workspaces/training/hello-nf-core/core-hello
+  workDir                   : /workspaces/training/hello-nf-core/core-hello/work
+  projectDir                : /workspaces/training/hello-nf-core/core-hello
   userName                  : root
   profile                   : test,docker
-  configFiles               : /workspaces/training/hello-nf-core/nf-core-hello/nextflow.config
+  configFiles               : /workspaces/training/hello-nf-core/core-hello/nextflow.config
 
 !! Only displaying parameters that differ from the pipeline defaults !!
 ------------------------------------------------------
 executor >  local (8)
-[60/3ac109] NFCORE_HELLO:HELLO:sayHello (3)       [100%] 3 of 3 ✔
-[58/073077] NFCORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔
-[00/4f3d32] NFCORE_HELLO:HELLO:CAT_CAT (test)     [100%] 1 of 1 ✔
-[98/afab8b] NFCORE_HELLO:HELLO:cowpy              [100%] 1 of 1 ✔
--[nf-core/hello] Pipeline completed successfully-
+[b3/f005fd] CORE_HELLO:HELLO:sayHello (3)       [100%] 3 of 3 ✔
+[08/f923d0] CORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔
+[34/3729a9] CORE_HELLO:HELLO:CAT_CAT (test)     [100%] 1 of 1 ✔
+[24/df918a] CORE_HELLO:HELLO:cowpy              [100%] 1 of 1 ✔
+-[core/hello] Pipeline completed successfully-
 ```
 
 Notice that `CAT_CAT` now appears in the process execution list instead of `collectGreetings`.
