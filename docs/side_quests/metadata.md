@@ -727,7 +727,7 @@ Then, at the workflow level, we extract the `character` property from the metada
 === "After"
 
     ```groovy title="main.nf" linenums="61" hl_lines="1"
-        COWPY(ch_languages.map{meta, file -> [meta, meta.character, file] )
+        COWPY(ch_languages.map{meta, file -> [meta, meta.character, file]})
     ```
 
 === "Before"
