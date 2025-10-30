@@ -93,7 +93,7 @@ Open the file in the code editor and copy the following code into it:
 
 process MULTIQC {
 
-    container "community.wave.seqera.io/library/pip_multiqc:ad8f247edb55897c"
+    container "community.wave.seqera.io/library/pip_multiqc:a3c26f6199d64b7c"
     publishDir "results/multiqc", mode: 'symlink'
 
     input:
