@@ -1056,21 +1056,22 @@ As a reminder, this is what the channel construction looked like (as seen in the
 ```groovy title="solutions/composable-hello/main.nf" linenums="10" hl_lines="4"
     // create a channel for inputs from a CSV file
     greeting_ch = channel.fromPath(params.greeting)
-                        .splitCsv()
-                        .map { line -> line[0] }
+        .splitCsv()
+        .map { line -> line[0] }
 ```
 
 So we just need to plug that into the initialisation workflow, with minor changes: we update the channel name from `greeting_ch` to `ch_samplesheet`, and the parameter name from `params.greeting` to `params.input` (see highlighted line).
 
 === "After"
 
-    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="64" hl_lines="4"
+    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="76" hl_lines="5-7"
         //
         // Create channel from input file provided through params.input
         //
+
         ch_samplesheet = channel.fromPath(params.input)
-                            .splitCsv()
-                            .map { line -> line[0] }
+            .splitCsv()
+            .map { line -> line[0] }
 
         emit:
         samplesheet = ch_samplesheet
@@ -1079,7 +1080,7 @@ So we just need to plug that into the initialisation workflow, with minor change
 
 === "Before"
 
-    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="64"
+    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="76" hl_lines="4-26"
         //
         // Create channel from input file provided through params.input
         //
