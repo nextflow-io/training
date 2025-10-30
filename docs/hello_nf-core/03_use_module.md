@@ -25,7 +25,9 @@ In this section, we'll replace the custom `collectGreetings` module with the `ca
 
 First, let's learn how to find, install, and use an existing nf-core module in our pipeline.
 
-The `collectGreetings` process in our pipeline uses the Unix `cat` command to concatenate multiple greeting files into one. This is a perfect use case for the nf-core `cat/cat` module, which is designed specifically for concatenating files.
+The `collectGreetings` process in our pipeline uses the Unix `cat` command to concatenate multiple greeting files into one.
+This is a perfect use case for the nf-core `cat/cat` module, which is designed specifically for concatenating files.
+Replacing our custom module with an nf-core module gives us the benefit of community testing and maintenance, while also demonstrating the module system.
 
 !!! note "Module naming convention"
 
