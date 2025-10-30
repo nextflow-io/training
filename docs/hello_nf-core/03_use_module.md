@@ -29,7 +29,7 @@ The `collectGreetings` process in our pipeline uses the Unix `cat` command to co
 
 !!! note "Module naming convention"
 
-    nf-core modules follow the naming convention `software/command`. The `cat/cat` module wraps the `cat` command from the `cat` software package. Other examples include `fastqc/fastqc` (FastQC software, fastqc command) or `samtools/view` (samtools software, view command).
+    nf-core modules follow the naming convention `software/command` when a tool provides multiple commands, like `samtools/view` (samtools package, view command) or `gatk/haplotypecaller` (GATK package, HaplotypeCaller command). For tools that provide only one main command, modules use a single level like `fastqc` or `multiqc`. The `cat/cat` naming reflects the organizational structure in the modules repository.
 
 ### 1.1. Browse available modules on the nf-core website
 
