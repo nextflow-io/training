@@ -421,7 +421,7 @@ In the nf-core project, modules are organized using a nested structure that refe
 The module code file describing the process is always called `main.nf`, and is accompanied by tests and `.yml` files.
 
 ```bash
-tree -L 4 pipelines/nf-core/demo/modules
+tree -L 3 pipelines/nf-core/demo/modules
 ```
 
 ```console title="Output"
