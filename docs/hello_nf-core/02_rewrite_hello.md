@@ -1270,7 +1270,7 @@ results
 ```
 
 Anything that is hooked up to the nf-core template code gets put into a directory generated automatically, called `core-hello-results/`.
-This includes the various reports produced by the nf-core utility subworkflows, which you can find under `core-hello-results/pipeline_info`.
+This includes various execution reports and metadata that you can find under `core-hello-results/pipeline_info`.
 
 ```bash
 tree core-hello-results
