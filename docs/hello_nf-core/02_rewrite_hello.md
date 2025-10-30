@@ -780,6 +780,7 @@ As a reminder, this is the relevant code in the original workflow, which didn't 
 ```
 
 We need to copy this code into the new version of the workflow, with a few modifications:
+
 - Omit the `main:` keyword (it's already there)
 - Remove the `.view` line (line 776 above) - this was just for console output in the standalone version
 
