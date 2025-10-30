@@ -577,11 +577,13 @@ The nf-core project provides the `nf-core modules create` command that generates
 
 The `nf-core modules create` command generates a module template that already follows all the conventions you've learned.
 
-For example, to create the `cowpy` module:
+For example, to create the `cowpy` module with a minimal template:
 
 ```bash
-nf-core modules create cowpy
+nf-core modules create --empty-template cowpy
 ```
+
+The `--empty-template` flag creates a clean starter template without extra boilerplate, making it easier to see the essential structure.
 
 The command runs interactively, guiding you through the setup. It automatically looks up tool information from package repositories like Bioconda and bio.tools to pre-populate metadata.
 
@@ -598,12 +600,12 @@ The tool handles the complexity of finding package information and setting up th
 The tool creates a complete module structure in `modules/local/` (or `modules/nf-core/` if you're in the nf-core/modules repository):
 
 ```console
-INFO     Created component template: 'cowpy'
-INFO     Created following files:
-           modules/local/cowpy/main.nf
-           modules/local/cowpy/meta.yml
-           modules/local/cowpy/environment.yml
-           modules/local/cowpy/tests/main.nf.test
+modules/local/cowpy
+├── environment.yml
+├── main.nf
+├── meta.yml
+└── tests
+    └── main.nf.test
 ```
 
 Each file serves a specific purpose:
