@@ -54,7 +54,7 @@ Both types of validation happen **before** the pipeline executes any processes, 
 
 !!! note
 
-    This section assumes you have completed [Part 4: Adapt local modules to nf-core conventions](./04_adapt_module.md) and have a working `core-hello` pipeline with adapted nf-core modules.
+    This section assumes you have completed [Part 4: Make an nf-core module](./04_make_module.md) and have a working `core-hello` pipeline with nf-core-style modules.
 
     If you didn't complete Part 4 or want to start fresh for this section, you can use the `core-hello-part4` solution as your starting point:
 

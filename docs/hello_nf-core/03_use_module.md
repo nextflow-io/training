@@ -607,4 +607,4 @@ Adapt your local modules to follow nf-core conventions.
 
 ---
 
-In [Part 4](./04_adapt_module.md), we'll adapt your local `cowpy` module to follow nf-core conventions.
+In [Part 4](./04_make_module.md), we'll show you how to make an nf-core module.

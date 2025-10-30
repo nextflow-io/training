@@ -1,12 +1,18 @@
-# Part 4: Adapt local modules to nf-core conventions
+# Part 4: Make an nf-core module
 
-In this fourth part of the Hello nf-core training course, we show you how to adapt your local modules to follow nf-core conventions.
+In this fourth part of the Hello nf-core training course, we show you how to create an nf-core module by learning the key conventions that make modules portable and maintainable.
 
-Now that we've successfully integrated the nf-core `CAT_CAT` module in [Part 3](./03_use_module.md), let's adapt our local `cowpy` module to follow the same nf-core patterns. We'll do this incrementally, introducing one pattern at a time:
+The nf-core project provides a command (`nf-core modules create`) that generates properly structured module templates automatically.
+However, for teaching purposes, we're going to **learn by doing**: transforming our local `cowpy` module into an nf-core-style module step-by-step.
+This hands-on approach will help you understand the patterns deeply, making you better equipped to work with nf-core modules in practice.
 
-1. First, we'll update `cowpy` to accept and propagate metadata tuples
-2. Then, we'll simplify its interface using `ext.args`
-3. Finally, we'll add configurable output naming with `ext.prefix`
+We'll apply three essential nf-core patterns incrementally:
+
+1. **Metadata tuples**: Accept and propagate sample metadata through the workflow
+2. **`ext.args`**: Simplify the module interface by handling optional arguments via configuration
+3. **`ext.prefix`**: Standardize output file naming with configurable prefixes
+
+Once you understand these patterns, we'll show you how to use the official nf-core tooling to create modules efficiently.
 
 !!! note
 
@@ -23,7 +29,9 @@ Now that we've successfully integrated the nf-core `CAT_CAT` module in [Part 3](
 
 ---
 
-## 1. Adapt local modules to nf-core conventions
+## 1. Transform cowpy into an nf-core module
+
+In this section, we'll apply nf-core conventions to our local `cowpy` module, transforming it into a module that follows community standards.
 
 ### 1.1. Update cowpy to use metadata tuples
 
@@ -490,9 +498,10 @@ However, you might want to keep it as a reference for understanding the differen
 
 ---
 
-## 2. Creating modules with nf-core tooling
+## 2. Use nf-core tooling to create modules
 
-In this tutorial, we manually adapted the `cowpy` module step-by-step to teach the nf-core conventions. However, **in practice, you'd use the nf-core tooling to generate properly structured modules from the start**.
+Now that you understand the nf-core module patterns by applying them manually, let's look at how you'd create modules in practice.
+The nf-core project provides the `nf-core modules create` command that generates properly structured module templates with all these patterns built in from the start.
 
 ### 2.1. Using nf-core modules create
 
@@ -529,7 +538,7 @@ modules/nf-core/cowpy/
     └── tags.yml           # Test tags
 ```
 
-The generated `main.nf` includes all the patterns automatically:
+The generated `main.nf` includes all the patterns you just learned:
 
 ```groovy
 process COWPY {
@@ -540,15 +549,15 @@ process COWPY {
     container "..."
 
     input:
-    tuple val(meta), path(input_file)      // Metadata tuples ✓
+    tuple val(meta), path(input_file)      // Pattern 1: Metadata tuples ✓
 
     output:
     tuple val(meta), path("${prefix}.*"), emit: output  // Metadata propagation ✓
     path "versions.yml"                   , emit: versions
 
     script:
-    def args = task.ext.args ?: ''                    // ext.args pattern ✓
-    def prefix = task.ext.prefix ?: "${meta.id}"    // ext.prefix pattern ✓
+    def args = task.ext.args ?: ''                    // Pattern 2: ext.args ✓
+    def prefix = task.ext.prefix ?: "${meta.id}"    // Pattern 3: ext.prefix ✓
     """
     # TODO: Add your command here
     cowpy $args < $input_file > ${prefix}.txt
@@ -561,7 +570,8 @@ process COWPY {
 }
 ```
 
-You fill in the command logic and the module is ready to test!
+Notice how all three patterns you applied manually are already there!
+You just fill in the command logic and the module is ready to test.
 
 ### 2.2. Contributing modules back to nf-core
 
@@ -600,14 +610,15 @@ For detailed instructions, see the [nf-core components tutorial](https://nf-co.r
 
 ## Takeaway
 
-You now understand the key patterns that make nf-core modules portable and maintainable:
+You now know how to create nf-core modules! You learned the three key patterns that make modules portable and maintainable:
 
 - **Metadata tuples** track sample information through the workflow
 - **`ext.args`** simplifies module interfaces by handling optional arguments via configuration
 - **`ext.prefix`** standardizes output file naming
 - **Centralized configuration** in `modules.config` keeps modules reusable
 
-You learned these patterns by manually adapting a local module, which gives you the foundation to understand and debug modules. In practice, you'll use `nf-core modules create` to generate properly structured modules from the start.
+By transforming `cowpy` step-by-step, you developed a deep understanding of these patterns—making you equipped to work with, debug, and create nf-core modules.
+In practice, you'll use `nf-core modules create` to generate properly structured modules with these patterns built in from the start.
 
 Finally, you learned how to contribute modules to the nf-core community, making tools available to researchers worldwide while benefiting from ongoing community maintenance.
 
