@@ -266,6 +266,10 @@ executor >  local (7)
 You see that there is more console output than when you run a basic Nextflow pipeline.
 There's a header that includes a summary of the pipeline's version, inputs and outputs, and a few elements of configuration.
 
+!!! note
+
+    Your output will show different timestamps, execution names, and file paths, but the overall structure and process execution should be similar.
+
 Moving on to the execution output, let's have a look at the lines that tell us what processes were run:
 
 ```console title="Output (subset)"
@@ -330,6 +334,9 @@ Learn how the pipeline code is organized.
 
 ---
 
+Now that we've successfully run the pipeline as users, let's shift our perspective to understand how nf-core pipelines are structured internally.
+Understanding this organization will prepare you for developing your own nf-core-compatible pipelines in the upcoming parts of this course.
+
 ## 3. Examine the pipeline code structure
 
 The nf-core project enforces strong guidelines for how pipelines are structured, and how the code is organized, configured and documented.
@@ -371,7 +378,7 @@ We're going to look at the following categories:
 2. Configuration, parameters and inputs
 3. Documentation and related assets
 
-Let's start with the code proper, though note that for now, we're going to focus on how everything is organized, without looking at the actual code just yet.
+Let's start with the code proper, though note that for now, we're going to focus on the file hierarchy and structural organization, rather than diving into the code syntax within individual files.
 
 ### 3.1. Pipeline code components
 
