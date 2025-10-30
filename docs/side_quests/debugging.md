@@ -646,7 +646,7 @@ Let's examine `badpractice_syntax.nf` to see what the VSCode extension is warnin
 ```groovy title="badpractice_syntax.nf" hl_lines="3" linenums="1"
 #!/usr/bin/env nextflow
 
-input_ch = channel.of('sample1', 'sample2', 'sample3')  # WARNING: Channel defined outside workflow
+input_ch = channel.of('sample1', 'sample2', 'sample3')  // WARNING: Channel defined outside workflow
 
 process PROCESS_FILES {
     input:
@@ -703,7 +703,7 @@ Follow the VSCode extension's recommendation by moving the channel definition in
     }
 
     workflow {
-        input_ch = channel.of('sample1', 'sample2', 'sample3')  # Moved inside workflow block
+        input_ch = channel.of('sample1', 'sample2', 'sample3')  // Moved inside workflow block
         PROCESS_FILES(input_ch)
     }
     ```
@@ -713,7 +713,7 @@ Follow the VSCode extension's recommendation by moving the channel definition in
     ```groovy title="badpractice_syntax.nf" hl_lines="3" linenums="1"
     #!/usr/bin/env nextflow
 
-    input_ch = channel.of('sample1', 'sample2', 'sample3')  # WARNING: Channel defined outside workflow
+    input_ch = channel.of('sample1', 'sample2', 'sample3')  // WARNING: Channel defined outside workflow
 
     process PROCESS_FILES {
         input:
@@ -959,7 +959,7 @@ There are a couple of ways to address this depending on how many files are affec
 
 **Option 1**: You have a single reference file that you are re-using a lot. You can simply create a value channel type, which can be used over and over again. There are three ways to do this:
 
-**1.** Use `channel.value()`:
+**1a** Use `channel.value()`:
 
 ```groovy title="exhausted.nf (fixed - Option 1a)" hl_lines="2" linenums="21"
 workflow {
@@ -970,7 +970,7 @@ workflow {
 }
 ```
 
-**2.** Use the `first()` [operator](https://www.nextflow.io/docs/latest/reference/operator.html#first):
+**1b** Use the `first()` [operator](https://www.nextflow.io/docs/latest/reference/operator.html#first):
 
 ```groovy title="exhausted.nf (fixed - Option 1b)" hl_lines="2" linenums="21"
 workflow {
@@ -981,7 +981,7 @@ workflow {
 }
 ```
 
-**3.** Use the `collect()` [operator](https://www.nextflow.io/docs/latest/reference/operator.html#collect):
+**1c.** Use the `collect()` [operator](https://www.nextflow.io/docs/latest/reference/operator.html#collect):
 
 ```groovy title="exhausted.nf (fixed - Option 1c)" hl_lines="2" linenums="21"
 workflow {
@@ -996,7 +996,7 @@ workflow {
 
 ```groovy title="exhausted.nf (fixed - Option 2)" hl_lines="4" linenums="21"
 workflow {
-    reference_ch = channel.of('baseline_reference')
+    reference_ch = channel.of('baseline_reference','other_reference')
     input_ch = channel.of('sample1', 'sample2', 'sample3')
     combined_ch = reference_ch.combine(input_ch)  // Creates cartesian product
 
@@ -1004,9 +1004,19 @@ workflow {
 }
 ```
 
-`.combine()` generates a cartesian product of the two channels, so each item in `reference_ch` will be paired with each item in `input_ch`. This allows the process to run for each sample while still using the reference.
+The `.combine()` operator generates a cartesian product of the two channels, so each item in `reference_ch` will be paired with each item in `input_ch`. This allows the process to run for each sample while still using the reference.
 
-> Note: This requires the process input to be adjusted and therefore is not suitable in all situations.
+This requires the process input to be adjusted. In our example, the start of the process definition would need to be adjusted as follows:
+
+```groovy title="exhausted.nf (fixed - Option 2)" hl_lines="5" linenums="1"
+#!/usr/bin/env nextflow
+
+process PROCESS_FILES {
+    input:
+        tuple val(reference), val(sample_name)
+```
+
+This approach may not be suitable in all situations.
 
 #### Run the pipeline
 
