@@ -152,7 +152,7 @@ This is a minimal set of configuration settings for the pipeline to run using a 
 It's good practice to check what a pipeline's test profile specifies before running it.
 The `test` profile for `nf-core/demo` is shown below:
 
-```groovy title="conf/test.config" linenums="1" hl_lines="26"
+```groovy title="conf/test.config" linenums="1" hl_lines="8 26"
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Nextflow config file for running minimal tests
@@ -183,12 +183,14 @@ params {
 }
 ```
 
-This tells us that the `nf-core/demo` test profile already specifies the input parameter, so you don't have to provide any input yourself.
-However, the `outdir` parameter is not included in the test profile, so we will have to add it to the execution command using the `--outdir` flag.
+The test profile shows us what has been pre-configured for testing: most notably, the `input` parameter is already set to point to a test dataset, so we don't need to provide our own data.
+
+The comment block at the top also includes a usage example showing how to run with this test profile.
+Notice that it includes `--outdir <OUTDIR>` - this tells us we'll need to specify an output directory when we run the pipeline.
 
 ### 2.2. Run the pipeline
 
-Our examination of the test profile above told us what pipeline argument(s) we need to specify: just `--outdir`.
+Based on the usage example in the test profile, we know we need to specify `--outdir` to tell the pipeline where to save results.
 
 We're also going to specify `-profile docker,test`, which by nf-core convention enables the use of Docker containers, and of course, invokes the test profile.
 
