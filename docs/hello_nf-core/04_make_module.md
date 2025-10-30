@@ -354,7 +354,8 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
 The pipeline should run successfully. In the output, look for the cowpy process execution line which will show something like:
 
 ```console title="Output (excerpt)"
-[bd/0abaf8] CORE_HELLO:HELLO:cowpy              [100%] 1 of 1 ✔```
+[bd/0abaf8] CORE_HELLO:HELLO:cowpy              [100%] 1 of 1 ✔
+```
 
 Now let's verify that the `ext.args` configuration actually passed the character argument to the cowpy command. Use the task hash (the `bd/0abaf8` part) to inspect the `.command.sh` file in the work directory:
 
@@ -399,7 +400,6 @@ cat work/bd/0abaf8*/cowpy-test.txt
 |                         |
 |                         |
 ```
-
 
 ### 1.3. Add configurable output naming with ext.prefix
 
