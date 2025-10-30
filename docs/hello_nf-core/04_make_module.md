@@ -615,33 +615,52 @@ Each file serves a specific purpose:
 - **`environment.yml`**: Conda environment specification for dependencies
 - **`tests/main.nf.test`**: nf-test test cases to validate the module works
 
-The generated `main.nf` includes all the patterns you just learned:
+The generated `main.nf` includes all the patterns you just learned, plus some additional features:
 
-```groovy
+```groovy title="modules/local/cowpy/main.nf" hl_lines="10-11 19 25-26 40-41"
 process COWPY {
     tag "$meta.id"
     label 'process_single'
 
     conda "${moduleDir}/environment.yml"
-    container "..."
+    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+        'https://depot.galaxyproject.org/singularity/YOUR-TOOL-HERE':
+        'biocontainers/YOUR-TOOL-HERE' }"
 
     input:
-    tuple val(meta), path(input_file)      // Pattern 1: Metadata tuples ✓
+    tuple val(meta), path(input)        // Pattern 1: Metadata tuples ✓
 
     output:
-    tuple val(meta), path("${prefix}.*"), emit: output  // Metadata propagation ✓
-    path "versions.yml"                   , emit: versions
+    tuple val(meta), path("*"), emit: output
+    path "versions.yml"           , emit: versions
+
+    when:
+    task.ext.when == null || task.ext.when
 
     script:
-    def args = task.ext.args ?: ''                    // Pattern 2: ext.args ✓
-    def prefix = task.ext.prefix ?: "${meta.id}"    // Pattern 3: ext.prefix ✓
+    def args = task.ext.args ?: ''              // Pattern 2: ext.args ✓
+    def prefix = task.ext.prefix ?: "${meta.id}"  // Pattern 3: ext.prefix ✓
+
     """
-    # TODO: Add your command here
-    cowpy $args < $input_file > ${prefix}.txt
+    // Add your tool command here
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        cowpy: \$(cowpy --version | sed 's/cowpy //')
+        cowpy: \$(cowpy --version)
+    END_VERSIONS
+    """
+
+    stub:
+    def args = task.ext.args ?: ''
+    def prefix = task.ext.prefix ?: "${meta.id}"
+
+    """
+    echo $args
+    touch ${prefix}.txt
+
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+        cowpy: \$(cowpy --version)
     END_VERSIONS
     """
 }
@@ -652,8 +671,10 @@ The template also includes several additional nf-core conventions that we didn't
 
 - **`tag "$meta.id"`**: Adds sample ID to process names in logs for easier tracking
 - **`label 'process_single'`**: Resource label for configuring CPU/memory requirements
+- **`when:` block**: Allows conditional execution via `task.ext.when` configuration
+- **`stub:` block**: Provides a fast mock implementation for testing pipeline logic without running the actual tool
 - **`versions.yml` output**: Captures software version information for reproducibility
-- **Process name `COWPY`**: Uppercase naming convention for nf-core modules
+- **Container placeholders**: Template structure for Singularity and Docker containers
 
 These additional conventions make modules more maintainable and provide better visibility into pipeline execution.
 
