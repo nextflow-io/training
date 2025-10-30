@@ -45,7 +45,7 @@ In this section, we'll apply nf-core conventions to the local `cowpy` module in 
 
 Currently, we're extracting the file from `CAT_CAT`'s output tuple to pass to `cowpy`. It would be better to have `cowpy` accept metadata tuples directly, allowing metadata to flow through the entire workflow.
 
-Open [core-hello/modules/local/cowpy.nf](core-hello/modules/local/cowpy.nf) and modify it to accept metadata tuples:
+Open `core-hello/modules/local/cowpy.nf` and modify it to accept metadata tuples:
 
 === "After"
 
@@ -107,7 +107,7 @@ Key changes:
 2. **Output**: Changed to emit a tuple with metadata: `tuple val(meta), path("cowpy-${input_file}"), emit: cowpy_output`
 3. **Named emit**: Added `emit: cowpy_output` to give the output channel a descriptive name
 
-Now update the workflow to pass the tuple directly instead of extracting the file. Open [core-hello/workflows/hello.nf](core-hello/workflows/hello.nf):
+Now update the workflow to pass the tuple directly instead of extracting the file. Open `core-hello/workflows/hello.nf`:
 
 === "After"
 
