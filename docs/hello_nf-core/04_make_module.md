@@ -3,7 +3,7 @@
 In this fourth part of the Hello nf-core training course, we show you how to create an nf-core module by learning the key conventions that make modules portable and maintainable.
 
 The nf-core project provides a command (`nf-core modules create`) that generates properly structured module templates automatically.
-However, for teaching purposes, we're going to **learn by doing**: transforming our local `cowpy` module into an nf-core-style module step-by-step.
+However, for teaching purposes, we're going to **learn by doing**: transforming the local `cowpy` module in your `core-hello` pipeline into an nf-core-style module step-by-step.
 This hands-on approach will help you understand the patterns deeply, making you better equipped to work with nf-core modules in practice.
 
 We'll apply three essential nf-core patterns incrementally:
@@ -31,7 +31,15 @@ Once you understand these patterns, we'll show you how to use the official nf-co
 
 ## 1. Transform cowpy into an nf-core module
 
-In this section, we'll apply nf-core conventions to our local `cowpy` module, transforming it into a module that follows community standards.
+In this section, we'll apply nf-core conventions to the local `cowpy` module in your `core-hello` pipeline, transforming it into a module that follows community standards.
+
+!!! tip "Working directory"
+
+    Make sure you're in the `core-hello` directory (your pipeline root) for all the commands and file edits in this section.
+
+    ```bash
+    cd core-hello
+    ```
 
 ### 1.1. Update cowpy to use metadata tuples
 
