@@ -779,13 +779,15 @@ As a reminder, this is the relevant code in the original workflow, which didn't 
     cowpy(collectGreetings.out.outfile, params.character)
 ```
 
-We need to copy this code into the new version of the workflow (minus the `main:` keyword which is already there).
+We need to copy this code into the new version of the workflow, with a few modifications:
+- Omit the `main:` keyword (it's already there)
+- Remove the `.view` line (line 776 above) - this was just for console output in the standalone version
 
 There is already some code in there that has to do with capturing the versions of the tools that get run by the workflow. We're going to leave that alone for now (we'll deal with the tool versions later). We'll keep the `ch_versions = channel.empty()` initialization at the top, then insert our workflow logic, keeping the version collation code at the end. This ordering makes sense because in a real pipeline, the processes would emit version information that would be mixed into the `ch_versions` channel as the workflow runs.
 
 === "After"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="23" hl_lines="5-18"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="23" hl_lines="5-16"
 
         main:
 
@@ -799,9 +801,6 @@ There is already some code in there that has to do with capturing the versions o
 
         // collect all the greetings into one file
         collectGreetings(convertToUpper.out.collect(), params.batch)
-
-        // emit a message about the size of the batch
-        collectGreetings.out.count.view { "There were $it greetings in this batch" }
 
         // generate ASCII art of the greetings with cowpy
         cowpy(collectGreetings.out.outfile, params.character)
@@ -1210,10 +1209,10 @@ If you've done all of the modifications correctly, it should run to completion.
 ```console title="Output"
  N E X T F L O W   ~  version 25.04.3
 
-Launching `core-hello/main.nf` [agitated_noyce] DSL2 - revision: c31b966b36
+Launching `core-hello/main.nf` [small_torvalds] DSL2 - revision: b9e9b3b8de
 
 Input/output options
-  input                     : core-hello/assets/greetings.csv
+  input                     : /workspaces/training/hello-nf-core/core-hello/assets/greetings.csv
   outdir                    : core-hello-results
 
 Institutional config options
@@ -1222,25 +1221,25 @@ Institutional config options
 
 Generic options
   validate_params           : false
-  trace_report_suffix       : 2025-05-14_11-10-22
+  trace_report_suffix       : 2025-10-30_18-05-47
 
 Core Nextflow options
-  runName                   : agitated_noyce
+  runName                   : small_torvalds
   containerEngine           : docker
   launchDir                 : /workspaces/training/hello-nf-core
   workDir                   : /workspaces/training/hello-nf-core/work
   projectDir                : /workspaces/training/hello-nf-core/core-hello
   userName                  : root
   profile                   : test,docker
-  configFiles               :
+  configFiles               : /workspaces/training/hello-nf-core/core-hello/nextflow.config
 
 !! Only displaying parameters that differ from the pipeline defaults !!
 ------------------------------------------------------
 executor >  local (8)
-[d6/b59dca] CORE_HELLO:HELLO:sayHello (1)       | 3 of 3 ✔
-[0b/42f9a1] CORE_HELLO:HELLO:convertToUpper (2) | 3 of 3 ✔
-[73/bec621] CORE_HELLO:HELLO:collectGreetings   | 1 of 1 ✔
-[3f/e0a67a] CORE_HELLO:HELLO:cowpy              | 1 of 1 ✔
+[da/fe2e20] COR…LLO:sayHello (1) | 3 of 3 ✔
+[f5/4e47cf] COR…nvertToUpper (2) | 3 of 3 ✔
+[22/61caea] COR…collectGreetings | 1 of 1 ✔
+[a8/de5051] COR…ELLO:HELLO:cowpy | 1 of 1 ✔
 -[core/hello] Pipeline completed successfully-
 ```
 
