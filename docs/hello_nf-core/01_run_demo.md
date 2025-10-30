@@ -455,7 +455,7 @@ As noted above, subworkflows function as wrappers that call two or more modules.
 In an nf-core pipeline, the subworkflows are divided into `local` and `nf-core` directories, and each subworkflow has its own nested directory structure with its own `main.nf` script.
 
 ```bash
-tree -L 4 pipelines/nf-core/demo/subworkflows
+tree -L 3 pipelines/nf-core/demo/subworkflows
 ```
 
 ```console title="Output"
@@ -512,7 +512,7 @@ In addition to these human-readable documents, there are two JSON files that pro
 The `nextflow_schema.json` is a file used to store information about the pipeline parameters including type, description and help text in a machine readable format.
 The schema is used for various purposes, including automated parameter validation, help text generation, and interactive parameter form rendering in UI interfaces.
 
-```json title="assets/nextflow_schema.json (not showing full file)" linenums="1"
+```json title="nextflow_schema.json (not showing full file)" linenums="1"
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "$id": "https://raw.githubusercontent.com/nf-core/demo/master/nextflow_schema.json",
@@ -532,8 +532,7 @@ The schema is used for various purposes, including automated parameter validatio
                     "format": "file-path",
                     "exists": true,
                     "schema": "assets/schema_input.json",
-                    "mimetype": "text/csv",
-                    "pattern": "^\\S+\\.csv$",
+                    "pattern": "^\\S+\\.(csv|tsv|json|yaml|yml)$",
                     "description": "Path to comma-separated file containing information about the samples in the experiment.",
                     "help_text": "You will need to create a design file with information about the samples in your experiment before running the pipeline. Use this parameter to specify its location. It has to be a comma-separated file with 3 columns, and a header row. See [usage docs](https://nf-co.re/demo/usage#samplesheet-input).",
                     "fa_icon": "fas fa-file-csv"
