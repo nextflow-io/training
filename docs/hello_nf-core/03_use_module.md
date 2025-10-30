@@ -138,7 +138,9 @@ The tool will prompt you to confirm the installation. Press Enter to accept the 
 
 ```console title="Output"
 INFO     Installing 'cat/cat'
-INFO     Include statement: include { CAT_CAT } from '../modules/nf-core/cat/cat/main'
+INFO     Use the following statement to include this module:
+
+ include { CAT_CAT } from '../modules/nf-core/cat/cat/main'
 ```
 
 The command automatically:
@@ -162,8 +164,10 @@ modules/nf-core/cat
     └── tests
         ├── main.nf.test
         ├── main.nf.test.snap
-        ├── nextflow.config
-        └── tags.yml
+        ├── nextflow_unzipped_zipped.config
+        └── nextflow_zipped_unzipped.config
+
+2 directories, 7 files
 ```
 
 You can also verify the installation by listing locally installed modules:
