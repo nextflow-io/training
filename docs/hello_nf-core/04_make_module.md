@@ -379,6 +379,7 @@ cat work/bd/0abaf8*/cowpy-test.txt
 ```
 
 ```console title="Output"
+ _________
 / HELLO   \
 | HOLà    |
 \ BONJOUR /
@@ -419,7 +420,7 @@ Benefits:
 
 Let's update the cowpy module to use `ext.prefix` for output file naming.
 
-Open [core-hello/modules/local/cowpy.nf](core-hello/modules/local/cowpy.nf):
+Open `modules/local/cowpy.nf` and change as follows:
 
 === "After"
 
@@ -484,7 +485,7 @@ Note that the local `publishDir` has already been removed in the previous step, 
 
 To maintain the same output file naming as before (`cowpy-<id>.txt`), we can configure `ext.prefix` in modules.config.
 
-Update [core-hello/conf/modules.config](core-hello/conf/modules.config):
+Update `conf/modules.config`:
 
 === "After"
 
@@ -514,13 +515,14 @@ Note that we use a closure (`{ "cowpy-${meta.id}" }`) which has access to `meta`
 Test the workflow once more:
 
 ```bash
+rm -rf core-hello-results
 nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
 ```
 
 Check the outputs:
 
 ```bash
-ls results/
+ls core-hello-results/cowpy/
 ```
 
 You should see the cowpy output files with the same naming as before: `cowpy-test.txt` (based on the batch name). This demonstrates how `ext.prefix` allows you to maintain your preferred naming convention while keeping the module interface flexible.
@@ -546,7 +548,7 @@ Clean up by optionally removing the now-unused local module.
 
 Now that we're using the nf-core `cat/cat` module, the local `collectGreetings` module is no longer needed.
 
-Remove or comment out the import line for `collectGreetings` in [core-hello/workflows/hello.nf](core-hello/workflows/hello.nf):
+Remove or comment out the import line for `collectGreetings` in `workflows/hello.nf`:
 
 ```groovy title="core-hello/workflows/hello.nf" linenums="10"
 include { sayHello               } from '../modules/local/sayHello.nf'
@@ -573,12 +575,7 @@ The nf-core project provides the `nf-core modules create` command that generates
 
 ### 2.1. Using nf-core modules create
 
-The `nf-core modules create` command generates a module template that already follows all the conventions you've learned:
-
-```bash
-# In the nf-core/modules repository
-nf-core modules create tool/subtool
-```
+The `nf-core modules create` command generates a module template that already follows all the conventions you've learned.
 
 For example, to create the `cowpy` module:
 
@@ -586,25 +583,35 @@ For example, to create the `cowpy` module:
 nf-core modules create cowpy
 ```
 
-The command will interactively ask for:
+The command runs interactively, guiding you through the setup. It automatically looks up tool information from package repositories like Bioconda and bio.tools to pre-populate metadata.
 
-- Tool name and optional subtool/subcommand
-- Author information
-- Resource requirements (CPU/memory estimates)
+You'll be prompted for:
+
+- **Author information**: Your GitHub username for attribution
+- **Resource label**: The computational requirements (e.g., `process_single` for lightweight tools, `process_high` for demanding ones)
+- **Metadata requirement**: Whether the module needs sample-specific information via a `meta` map (usually yes for data processing modules)
+
+The tool handles the complexity of finding package information and setting up the structure, allowing you to focus on implementing the tool's specific logic.
 
 #### What gets generated
 
-The tool creates a complete module structure:
+The tool creates a complete module structure in `modules/local/` (or `modules/nf-core/` if you're in the nf-core/modules repository):
 
 ```console
-modules/nf-core/cowpy/
-├── main.nf                 # Process definition with TODO comments
-├── meta.yml                # Module documentation
-├── environment.yml         # Conda environment
-└── tests/
-    ├── main.nf.test       # nf-test test cases
-    └── tags.yml           # Test tags
+INFO     Created component template: 'cowpy'
+INFO     Created following files:
+           modules/local/cowpy/main.nf
+           modules/local/cowpy/meta.yml
+           modules/local/cowpy/environment.yml
+           modules/local/cowpy/tests/main.nf.test
 ```
+
+Each file serves a specific purpose:
+
+- **`main.nf`**: Process definition with all the nf-core patterns built in
+- **`meta.yml`**: Module documentation describing inputs, outputs, and the tool
+- **`environment.yml`**: Conda environment specification for dependencies
+- **`tests/main.nf.test`**: nf-test test cases to validate the module works
 
 The generated `main.nf` includes all the patterns you just learned:
 
@@ -647,7 +654,34 @@ The template also includes several additional nf-core conventions that we didn't
 - **Process name `COWPY`**: Uppercase naming convention for nf-core modules
 
 These additional conventions make modules more maintainable and provide better visibility into pipeline execution.
-You just fill in the command logic and the module is ready to test!
+
+#### Completing the environment and container setup
+
+In the case of cowpy, the tool warned that it couldn't find the package in Bioconda (the primary channel for bioinformatics tools).
+However, cowpy is available in conda-forge, so you would complete the `environment.yml` like this:
+
+```yaml title="modules/local/cowpy/environment.yml"
+name: cowpy
+channels:
+  - conda-forge
+dependencies:
+  - cowpy=1.1.5
+```
+
+For the container, you can use [Seqera Containers](https://seqera.io/containers/) to automatically build a container from any Conda package, including conda-forge packages:
+
+```groovy
+container "community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273"
+```
+
+!!! tip "Bioconda vs conda-forge packages"
+
+    - **Bioconda packages**: Automatically get BioContainers built, providing ready-to-use containers
+    - **conda-forge packages**: Can use Seqera Containers to build containers on-demand from the Conda recipe
+
+    Most bioinformatics tools are in Bioconda, but for conda-forge tools, Seqera Containers provides an easy solution for containerization.
+
+Once you've completed the environment setup and filled in the command logic, the module is ready to test!
 
 ### 2.2. Contributing modules back to nf-core
 
