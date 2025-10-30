@@ -1080,7 +1080,7 @@ So we just need to plug that into the initialisation workflow, with minor change
 
 === "Before"
 
-    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="76" hl_lines="4-26"
+    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="76" hl_lines="5-23"
         //
         // Create channel from input file provided through params.input
         //
@@ -1134,7 +1134,7 @@ Now we can update the `test.config` file as follows:
 
 === "After"
 
-    ```groovy title="core-hello/conf/test.config" linenums="21" hl_lines="5-10"
+    ```groovy title="core-hello/conf/test.config" linenums="21" hl_lines="6-10"
         params {
             config_profile_name        = 'Test profile'
             config_profile_description = 'Minimal test dataset to check pipeline function'
@@ -1150,7 +1150,7 @@ Now we can update the `test.config` file as follows:
 
 === "Before"
 
-    ```groovy title="core-hello/conf/test.config" linenums="21"
+    ```groovy title="core-hello/conf/test.config" linenums="21" hl_lines="6-8"
         params {
             config_profile_name        = 'Test profile'
             config_profile_description = 'Minimal test dataset to check pipeline function'
