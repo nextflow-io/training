@@ -214,7 +214,7 @@ Launching `https://github.com/nf-core/demo` [maniac_jones] DSL2 - revision: 0406
   |\ | |__  __ /  ` /  \ |__) |__         }  {
   | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                         `._,._,'
-  nf-core/demo 1.0.1
+  nf-core/demo 1.0.2
 ------------------------------------------------------
 Input/output options
   input                     : https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv
@@ -306,7 +306,7 @@ demo-results/
     └── pipeline_dag_2025-03-05_09-44-26.html
 ```
 
-If you're curious about the specifics what that all means, check out [the nf-core/demo pipeline documentation page](https://nf-co.re/demo/1.0.1/).
+If you're curious about the specifics what that all means, check out [the nf-core/demo pipeline documentation page](https://nf-co.re/demo/1.0.2/).
 
 At this stage, what's important to observe is that the results are organized by module, and there is additionally a directory called `pipeline_info` containing various timestamped reports about the pipeline execution.
 This is standard for nf-core pipelines.
