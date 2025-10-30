@@ -375,13 +375,13 @@ The pipeline code organization follows a modular structure that is designed to m
 !!! note
 
     We won't go over the actual code for how these modular components are connected, because there is some additional complexity associated with the use of subworkflows that can be confusing, and understanding that is not necessary at this stage of the training.
-    For now, we're going to focus on the logic of this modular organization.
+    For now, we're going to focus on the logic of this modular organization. If you'd like to learn more about composing workflows with subworkflows, check out the [Workflows of Workflows](../side_quests/workflows_of_workflows/) Side Quest.
 
 #### 3.1.1. Overall organization and `main.nf` script
 
 At the top level, there is the `main.nf` script, which is the entrypoint Nextflow starts from when we execute `nextflow run nf-core/demo`. That means when you run `nextflow run nf-core/demo` to run the pipeline, Nextflow automatically finds and executes the `main.nf` script, and everything else will flow from there.
 
-In practice, the `main.nf` script calls the actual workflow of interest, stored inside the `workflows` folder, called `demo.nf`. It also calls a few 'housekeeping' subworkflows that we're going to ignore for now.
+The central logic of the pipeline is stored inside the `workflows` folder, in a file called `demo.nf`, which is called from `main.nf`.
 
 ```bash
 tree pipelines/nf-core/demo/workflows
@@ -391,6 +391,8 @@ tree pipelines/nf-core/demo/workflows
 pipelines/nf-core/demo/workflows
 └── demo.nf
 ```
+
+`main.nf` also calls a few 'housekeeping' subworkflows that we're going to ignore for now.
 
 The `demo.nf` workflow itself calls out to various script components, namely, modules and subworkflows, stored in the corresponding `modules` and `subworkflows` folders.
 
