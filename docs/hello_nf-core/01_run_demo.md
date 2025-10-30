@@ -18,7 +18,7 @@ In your web browser, go to https://nf-co.re/pipelines/ and type `demo` in the se
 
 ![search results](./img/search-results.png)
 
-Click on the pipeline name, `demo`, to access the pipeline details page.
+Click on the pipeline name, `demo`, to access the pipeline documentation page.
 
 Each released pipeline has a dedicated page that includes the following documentation sections:
 
@@ -61,10 +61,10 @@ Let's retrieve the code so we can examine this structure.
 
 ### 1.2. Retrieve the pipeline code
 
-Once we've determined the pipeline appears to be suitable for our purposes, we're going to want to try it out.
-Fortunately Nextflow makes it easy to retrieve pipeline from correctly-formatted repositories without having to download anything manually.
+Once we've determined the pipeline appears to be suitable for our purposes, let's try it out.
+Fortunately Nextflow makes it easy to retrieve pipelines from correctly-formatted repositories without having to download anything manually.
 
-Return to your terminal and run the following:
+Let's return to the terminal and run the following:
 
 ```bash
 nextflow pull nf-core/demo
@@ -91,7 +91,7 @@ nf-core/demo
 ```
 
 You'll notice that the files are not in your current work directory.
-By default, they are saved to `$NXF_HOME/assets`.
+By default, Nextflow saves them to `$NXF_HOME/assets`.
 
 ```bash
 tree -L 2 $NXF_HOME/assets/
@@ -107,9 +107,9 @@ tree -L 2 $NXF_HOME/assets/
 
     The full path may differ on your system if you're not using our training environment.
 
-The location of the downloaded source code is intentionally 'out of the way' on the principle that these pipelines should be used more like libraries than code that you would directly interact with.
+Nextflow keeps the downloaded source code intentionally 'out of the way' on the principle that these pipelines should be used more like libraries than code that you would directly interact with.
 
-However, for the purposes of this training, we'd like to be able to poke around and see what's in there.
+However, for the purposes of this training, we want to be able to poke around and see what's in there.
 So to make that easier, let's create a symbolic link to that location from our current working directory.
 
 ```bash
@@ -313,7 +313,7 @@ demo-results/
     └── pipeline_dag_2025-03-05_09-44-26.html
 ```
 
-If you're curious about the specifics what that all means, check out [the nf-core/demo pipeline documentation page](https://nf-co.re/demo/1.0.2/).
+If you're curious about the specifics of what that all means, check out [the nf-core/demo pipeline documentation page](https://nf-co.re/demo/1.0.2/).
 
 At this stage, what's important to observe is that the results are organized by module, and there is additionally a directory called `pipeline_info` containing various timestamped reports about the pipeline execution.
 This is standard for nf-core pipelines.
