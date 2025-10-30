@@ -263,9 +263,9 @@ There's a header that includes a summary of the pipeline's version, inputs and o
 Moving on to the execution output, let's have a look at the lines that tell us what processes were run:
 
 ```console title="Output (subset)"
-[3c/a00024] NFC…_DEMO:DEMO:FASTQC (SAMPLE2_PE) | 3 of 3 ✔
-[94/d1d602] NFC…O:DEMO:SEQTK_TRIM (SAMPLE2_PE) | 3 of 3 ✔
-[ab/460670] NFCORE_DEMO:DEMO:MULTIQC           | 1 of 1 ✔
+[db/fae3ff] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE)     [100%] 3 of 3 ✔
+[d0/f6ea55] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE1_PE) [100%] 3 of 3 ✔
+[af/e6da56] NFCORE_DEMO:DEMO:MULTIQC                 [100%] 1 of 1 ✔
 ```
 
 This tells us that three processes were run, corresponding to the three tools shown in the pipeline documentation page on the nf-core website: FASTQC, SEQTK_TRIM and MULTIQC.
