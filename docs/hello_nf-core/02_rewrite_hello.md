@@ -117,8 +117,7 @@ core-hello/
 │       │       ├── main.function.nf.test
 │       │       ├── main.function.nf.test.snap
 │       │       ├── main.workflow.nf.test
-│       │       ├── nextflow.config
-│       │       └── tags.yml
+│       │       └── nextflow.config
 │       ├── utils_nfcore_pipeline
 │       │   ├── main.nf
 │       │   ├── meta.yml
@@ -127,8 +126,7 @@ core-hello/
 │       │       ├── main.function.nf.test.snap
 │       │       ├── main.workflow.nf.test
 │       │       ├── main.workflow.nf.test.snap
-│       │       ├── nextflow.config
-│       │       └── tags.yml
+│       │       └── nextflow.config
 │       └── utils_nfschema_plugin
 │           ├── main.nf
 │           ├── meta.yml
@@ -139,7 +137,7 @@ core-hello/
 └── workflows
     └── hello.nf
 
-14 directories, 36 files
+14 directories, 34 files
 ```
 
 That's a lot of files!
