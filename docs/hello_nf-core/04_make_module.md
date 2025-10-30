@@ -182,18 +182,38 @@ Benefits of this approach:
 - **Portability**: Modules can be reused without hardcoded tool options
 - **No workflow changes**: Adding or changing tool options doesn't require updating workflow code
 
+#### Centralized publishing configuration
+
+Before we update the module to use `ext.args`, let's address an important nf-core convention: **modules should not contain hardcoded `publishDir` directives**.
+
+Currently, our `cowpy` module has `publishDir 'results', mode: 'copy'` which hardcodes the output location.
+In nf-core pipelines, publishing is instead configured in `conf/modules.config`.
+
+The nf-core template includes a **default publishDir configuration** that applies to all processes:
+
+```groovy
+process {
+    publishDir = [
+        path: { "${params.outdir}/${task.process.tokenize(':')[-1].tokenize('_')[0].toLowerCase()}" },
+        mode: params.publish_dir_mode,
+        saveAs: { filename -> filename.equals('versions.yml') ? null : filename }
+    ]
+}
+```
+
+This default automatically publishes outputs to `${params.outdir}/<process_name>/` for every process.
+Individual processes can customize their publishing using `withName:` blocks in the same config file.
+
+Benefits of this approach:
+
+- **Single source of truth**: All publishing configuration lives in `modules.config`
+- **Useful default**: Processes work out-of-the-box without per-module configuration
+- **Easy customization**: Override publishing behavior in config, not in module code
+- **Portable modules**: Modules don't hardcode output locations
+
 #### Update the module
 
-Let's update the cowpy module to use `ext.args` instead of the `character` input parameter. We'll also remove the local `publishDir` directive to rely on the centralized configuration in `modules.config`.
-
-!!! note "Why remove the local publishDir?"
-
-    nf-core modules should not contain hardcoded `publishDir` directives. Instead, publishing is configured centrally in `conf/modules.config`. This provides several benefits:
-
-    - **Single source of truth**: All output paths are configured in one place
-    - **Flexibility**: Users can easily customize where outputs are published
-    - **Consistency**: All modules follow the same publishing pattern
-    - **No conflicts**: Avoids having two separate publishing locations (local and centralized)
+Now let's update the cowpy module to use `ext.args` and remove the local `publishDir`.
 
 Open `modules/local/cowpy.nf`:
 
