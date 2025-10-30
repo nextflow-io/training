@@ -646,7 +646,7 @@ Let's examine `badpractice_syntax.nf` to see what the VSCode extension is warnin
 ```groovy title="badpractice_syntax.nf" hl_lines="3" linenums="1"
 #!/usr/bin/env nextflow
 
-input_ch = channel.of('sample1', 'sample2', 'sample3')  # WARNING: Channel defined outside workflow
+input_ch = channel.of('sample1', 'sample2', 'sample3')  // WARNING: Channel defined outside workflow
 
 process PROCESS_FILES {
     input:
@@ -703,7 +703,7 @@ Follow the VSCode extension's recommendation by moving the channel definition in
     }
 
     workflow {
-        input_ch = channel.of('sample1', 'sample2', 'sample3')  # Moved inside workflow block
+        input_ch = channel.of('sample1', 'sample2', 'sample3')  // Moved inside workflow block
         PROCESS_FILES(input_ch)
     }
     ```
@@ -713,7 +713,7 @@ Follow the VSCode extension's recommendation by moving the channel definition in
     ```groovy title="badpractice_syntax.nf" hl_lines="3" linenums="1"
     #!/usr/bin/env nextflow
 
-    input_ch = channel.of('sample1', 'sample2', 'sample3')  # WARNING: Channel defined outside workflow
+    input_ch = channel.of('sample1', 'sample2', 'sample3')  // WARNING: Channel defined outside workflow
 
     process PROCESS_FILES {
         input:
