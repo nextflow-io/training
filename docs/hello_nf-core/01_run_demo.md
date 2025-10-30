@@ -168,7 +168,7 @@ The `test` profile for `nf-core/demo` is shown below:
 process {
     resourceLimits = [
         cpus: 4,
-        memory: '15.GB',
+        memory: '4.GB',
         time: '1.h'
     ]
 }
