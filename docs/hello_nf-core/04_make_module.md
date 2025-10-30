@@ -111,14 +111,14 @@ Now update the workflow to pass the tuple directly instead of extracting the fil
 
 === "After"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="39" hl_lines="2"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="2"
         // generate ASCII art of the greetings with cowpy
         cowpy(CAT_CAT.out.file_out, params.character)
     ```
 
 === "Before"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="39" hl_lines="2-4"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="2-4"
         // generate ASCII art of the greetings with cowpy
         // Extract the file from the tuple since cowpy doesn't use metadata yet
         ch_for_cowpy = CAT_CAT.out.file_out.map{ meta, file -> file }
@@ -129,7 +129,7 @@ Also update the emit block to use the named emit:
 
 === "After"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="58" hl_lines="2"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="60" hl_lines="2"
         emit:
         cowpy_hellos   = cowpy.out.cowpy_output
         versions       = ch_versions                 // channel: [ path(versions.yml) ]
@@ -137,7 +137,7 @@ Also update the emit block to use the named emit:
 
 === "Before"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="58" hl_lines="2"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="60" hl_lines="2"
         emit:
         cowpy_hellos   = cowpy.out
         versions       = ch_versions                 // channel: [ path(versions.yml) ]
@@ -149,7 +149,16 @@ Test the workflow to ensure metadata flows through correctly:
 nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
 ```
 
-The pipeline should run successfully with metadata now flowing from `CAT_CAT` through `cowpy`.
+The pipeline should run successfully with metadata now flowing from `CAT_CAT` through `cowpy`:
+
+```console title="Output (excerpt)"
+executor >  local (8)
+[b2/4cf633] CORE_HELLO:HELLO:sayHello (2)       [100%] 3 of 3 ✔
+[ed/ef4d69] CORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔
+[2d/32c93e] CORE_HELLO:HELLO:CAT_CAT (test)     [100%] 1 of 1 ✔
+[da/6f3246] CORE_HELLO:HELLO:cowpy              [100%] 1 of 1 ✔
+-[core/hello] Pipeline completed successfully-
+```
 
 ### 1.2. Simplify the interface with ext.args
 
@@ -182,11 +191,11 @@ Let's update the cowpy module to use `ext.args` instead of the `character` input
     - **Consistency**: All modules follow the same publishing pattern
     - **No conflicts**: Avoids having two separate publishing locations (local and centralized)
 
-Open [core-hello/modules/local/cowpy.nf](core-hello/modules/local/cowpy.nf):
+Open `modules/local/cowpy.nf`:
 
 === "After"
 
-    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="16 18"
+    ```groovy title="modules/local/cowpy.nf" linenums="1" hl_lines="16 18"
     #!/usr/bin/env nextflow
 
     // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
