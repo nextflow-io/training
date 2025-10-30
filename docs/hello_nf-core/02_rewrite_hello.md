@@ -781,13 +781,15 @@ As a reminder, this is the relevant code in the original workflow, which didn't 
 
 We need to copy this code into the new version of the workflow (minus the `main:` keyword which is already there).
 
-There is already some code in there that has to do with capturing the versions of the tools that get run by the workflow. We're going to leave that alone for now (we'll deal with the tool versions later) and simply insert our code right after the `main:` line.
+There is already some code in there that has to do with capturing the versions of the tools that get run by the workflow. We're going to leave that alone for now (we'll deal with the tool versions later). We'll keep the `ch_versions = channel.empty()` initialization at the top, then insert our workflow logic, keeping the version collation code at the end. This ordering makes sense because in a real pipeline, the processes would emit version information that would be mixed into the `ch_versions` channel as the workflow runs.
 
 === "After"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="23" hl_lines="3-16"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="23" hl_lines="5-18"
 
         main:
+
+        ch_versions = channel.empty()
 
         // emit a greeting
         sayHello(greeting_ch)
@@ -803,8 +805,6 @@ There is already some code in there that has to do with capturing the versions o
 
         // generate ASCII art of the greetings with cowpy
         cowpy(collectGreetings.out.outfile, params.character)
-
-        ch_versions = channel.empty()
 
         //
         // Collate and save software versions
