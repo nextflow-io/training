@@ -241,7 +241,7 @@ head -30 modules/nf-core/cat/cat/main.nf
 
 The key parts of the module are:
 
-```groovy title="modules/nf-core/cat/cat/main.nf (excerpt)" linenums="1" hl_lines="12 25"
+```groovy title="modules/nf-core/cat/cat/main.nf (excerpt)" linenums="1" hl_lines="11 14"
 process CAT_CAT {
     tag "$meta.id"
     label 'process_low'
