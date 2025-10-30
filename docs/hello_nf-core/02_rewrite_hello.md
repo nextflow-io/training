@@ -785,7 +785,7 @@ There is already some code in there that has to do with capturing the versions o
 
 === "After"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="23"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="23" hl_lines="3-16"
 
         main:
 
