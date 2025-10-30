@@ -571,7 +571,15 @@ process COWPY {
 ```
 
 Notice how all three patterns you applied manually are already there!
-You just fill in the command logic and the module is ready to test.
+The template also includes several additional nf-core conventions that we didn't cover in the hands-on section:
+
+- **`tag "$meta.id"`**: Adds sample ID to process names in logs for easier tracking
+- **`label 'process_single'`**: Resource label for configuring CPU/memory requirements
+- **`versions.yml` output**: Captures software version information for reproducibility
+- **Process name `COWPY`**: Uppercase naming convention for nf-core modules
+
+These additional conventions make modules more maintainable and provide better visibility into pipeline execution.
+You just fill in the command logic and the module is ready to test!
 
 ### 2.2. Contributing modules back to nf-core
 
