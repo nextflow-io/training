@@ -888,11 +888,9 @@ Learn how to adapt how the inputs are handled in the nf-core pipeline scaffold.
 ---
 
 Now that we've successfully integrated our workflow logic into the nf-core scaffold, we need to address one more critical piece: ensuring that our input data is processed correctly.
-The nf-core template comes with sophisticated input handling designed for complex genomics datasets, but we can adapt it to work with our simpler greeting data.
+The nf-core template comes with sophisticated input handling designed for complex genomics datasets, but we can adapt it to work with our simpler `greetings.csv` file.
 
 ## 4. Adapt the input handling
-
-Now that the HELLO workflow is ready to go, we need to adapt how the inputs are handled to make sure our `greetings.csv` will be handled appropriately.
 
 ### 4.1. Identify where inputs are handled
 
