@@ -177,13 +177,14 @@ nf-core modules list local
 ```
 
 ```console title="Output"
+INFO     Repository type: pipeline
 INFO     Modules installed in '.':
 
-┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-┃ Module Name                ┃ Repository                  ┃
-┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
-│ cat/cat                    │ nf-core/modules             │
-└────────────────────────────┴─────────────────────────────┘
+┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓
+┃ Module Name ┃ Repository      ┃ Version SHA ┃ Message                                ┃ Date       ┃
+┡━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩
+│ cat/cat     │ nf-core/modules │ 41dfa3f     │ update meta.yml of all modules (#8747) │ 2025-07-07 │
+└─────────────┴─────────────────┴─────────────┴────────────────────────────────────────┴────────────┘
 ```
 
 ### 1.5. Add the import statement to your workflow
@@ -240,17 +241,22 @@ head -30 modules/nf-core/cat/cat/main.nf
 
 The key parts of the module are:
 
-```groovy title="modules/nf-core/cat/cat/main.nf (excerpt)" linenums="1" hl_lines="6 9"
+```groovy title="modules/nf-core/cat/cat/main.nf (excerpt)" linenums="1" hl_lines="12 25"
 process CAT_CAT {
     tag "$meta.id"
-    label 'process_single'
+    label 'process_low'
+
+    conda "${moduleDir}/environment.yml"
+    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+        'https://depot.galaxyproject.org/singularity/pigz:2.3.4' :
+        'biocontainers/pigz:2.3.4' }"
 
     input:
     tuple val(meta), path(files_in)
 
     output:
     tuple val(meta), path("${prefix}"), emit: file_out
-    path "versions.yml"           , emit: versions
+    path "versions.yml"               , emit: versions
 ```
 
 The module expects:
