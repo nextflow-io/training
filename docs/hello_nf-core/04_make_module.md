@@ -621,7 +621,7 @@ Each file serves a specific purpose:
 
 The generated `main.nf` includes all the patterns you just learned, plus some additional features:
 
-```groovy title="modules/local/cowpy/main.nf" hl_lines="12 21 22"
+```groovy title="modules/local/cowpy/main.nf" hl_lines="11 21 22"
 process COWPY {
     tag "$meta.id"
     label 'process_single'
