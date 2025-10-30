@@ -164,7 +164,7 @@ executor >  local (8)
 
 Now let's address another nf-core pattern: simplifying module interfaces by using `ext.args` for optional command-line arguments.
 
-Currently, our `cowpy` module requires the `character` parameter to be passed as a separate input. While this works, nf-core modules use a different approach for **optional tool arguments**: instead of adding input parameters for every possible tool option, they use `ext.args` to pass these via configuration. This keeps the module interface focused on essential data inputs (metadata and files), while tool-specific options are handled through configuration.
+Currently, our `cowpy` module requires the `character` parameter to be passed as a separate input. While this works, nf-core modules use a different approach for **optional tool arguments**: instead of adding input parameters for every possible tool option, they use `ext.args` to pass these via configuration. This keeps the module interface focused on essential data inputs (metadata plus mandatory value and file inputs), while tool-specific options are handled through configuration.
 
 #### Understanding ext.args
 
