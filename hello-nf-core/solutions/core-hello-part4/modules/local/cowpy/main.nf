@@ -21,9 +21,9 @@ process COWPY {
     script:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
-    
+
     """
-    
+
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
@@ -34,10 +34,10 @@ process COWPY {
     stub:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
-    
+
     """
     echo $args
-    
+
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
