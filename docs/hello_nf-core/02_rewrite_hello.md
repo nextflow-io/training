@@ -1135,31 +1135,31 @@ Now we can update the `test.config` file as follows:
 === "After"
 
     ```groovy title="core-hello/conf/test.config" linenums="21" hl_lines="6-10"
-        params {
-            config_profile_name        = 'Test profile'
-            config_profile_description = 'Minimal test dataset to check pipeline function'
+    params {
+        config_profile_name        = 'Test profile'
+        config_profile_description = 'Minimal test dataset to check pipeline function'
 
-            // Input data
-            input  = "${projectDir}/assets/greetings.csv"
+        // Input data
+        input  = "${projectDir}/assets/greetings.csv"
 
-            // Other parameters
-            batch     = 'test'
-            character = 'tux'
-        }
+        // Other parameters
+        batch     = 'test'
+        character = 'tux'
+    }
     ```
 
 === "Before"
 
     ```groovy title="core-hello/conf/test.config" linenums="21" hl_lines="6-8"
-        params {
-            config_profile_name        = 'Test profile'
-            config_profile_description = 'Minimal test dataset to check pipeline function'
+    params {
+        config_profile_name        = 'Test profile'
+        config_profile_description = 'Minimal test dataset to check pipeline function'
 
-            // Input data
-            // TODO nf-core: Specify the paths to your test data on nf-core/test-datasets
-            // TODO nf-core: Give any required params for the test so that command line flags are not needed
-            input  = params.pipelines_testdata_base_path + 'viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv'
-        }
+        // Input data
+        // TODO nf-core: Specify the paths to your test data on nf-core/test-datasets
+        // TODO nf-core: Give any required params for the test so that command line flags are not needed
+        input  = params.pipelines_testdata_base_path + 'viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv'
+    }
     ```
 
 Key points:
