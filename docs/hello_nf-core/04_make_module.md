@@ -164,19 +164,23 @@ executor >  local (8)
 
 Now let's address another nf-core pattern: simplifying module interfaces by using `ext.args` for optional command-line arguments.
 
-Currently, our `cowpy` module requires the `character` parameter to be passed as a separate input. While this works, nf-core modules follow a convention of keeping interfaces minimal - only essential inputs (metadata and files) should be declared. Optional tool arguments are instead passed via configuration.
+Currently, our `cowpy` module requires the `character` parameter to be passed as a separate input. While this works, nf-core modules use a different approach for **optional tool arguments**: instead of adding input parameters for every possible tool option, they use `ext.args` to pass these via configuration. This keeps the module interface focused on essential data inputs (metadata and files), while tool-specific options are handled through configuration.
 
 #### Understanding ext.args
 
-The `task.ext.args` pattern is an nf-core convention for passing optional command-line arguments to tools. Instead of adding multiple input parameters for every possible tool option, nf-core modules accept optional arguments through the `ext.args` configuration directive.
+The `task.ext.args` pattern is an nf-core convention for passing command-line arguments to tools through configuration rather than as process inputs. Instead of adding input parameters for tool options, nf-core modules accept arguments through the `ext.args` configuration directive.
+
+!!! note "ext.args can be dynamic"
+
+    While `ext.args` is configured outside the module, it can access metadata to provide sample-specific values using closures. For example: `ext.args = { meta.single_end ? '--single' : '--paired' }`
 
 Benefits of this approach:
 
-- **Minimal interface**: The module only requires essential inputs (metadata and files)
-- **Flexibility**: Users can specify any tool arguments via configuration
+- **Clean interface**: The module focuses on essential data inputs (metadata and files)
+- **Flexibility**: Users can specify tool arguments via configuration, including sample-specific values
 - **Consistency**: All nf-core modules follow this pattern
-- **Portability**: Modules can be reused in other pipelines without expecting specific parameter names
-- **No workflow changes**: Adding new tool options doesn't require updating workflow code
+- **Portability**: Modules can be reused without hardcoded tool options
+- **No workflow changes**: Adding or changing tool options doesn't require updating workflow code
 
 #### Update the module
 
