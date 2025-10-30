@@ -166,7 +166,7 @@ mkdir /data/trimmed
 mv ENCSR000COQ1_1* /data/trimmed
 ```
 
-### 1.7. Exit the container
+### 1.6. Exit the container
 
 ```bash
 exit
