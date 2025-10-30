@@ -160,7 +160,7 @@ nextflow run ./core-hello -profile docker,test --outdir core-hello-results
 ```
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.10.4
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `core-hello/main.nf` [special_ride] DSL2 - revision: c31b966b36
 
@@ -303,7 +303,7 @@ nextflow run original-hello/hello.nf
 ```
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.10.4
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `original-hello/hello.nf` [goofy_babbage] DSL2 - revision: e9e72441e9
 
@@ -576,7 +576,7 @@ nextflow run ./original-hello
 If you made all the changes correctly, this should run to completion.
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.10.4
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `original-hello/main.nf` [friendly_wright] DSL2 - revision: 1ecd2d9c0a
 
@@ -1205,7 +1205,7 @@ nextflow run core-hello --outdir core-hello-results -profile test,docker --valid
 If you've done all of the modifications correctly, it should run to completion.
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.10.4
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `core-hello/main.nf` [agitated_noyce] DSL2 - revision: c31b966b36
 

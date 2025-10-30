@@ -203,7 +203,7 @@ nextflow run nf-core/demo -profile docker,test --outdir demo-results
 Here's the console output from the pipeline:
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `https://github.com/nf-core/demo` [maniac_jones] DSL2 - revision: 04060b4644 [master]
 
