@@ -282,7 +282,7 @@ The module interface is now simpler - it only accepts the essential metadata and
 
 Now we need to configure the `ext.args` to pass the character option. This allows us to keep the module interface simple while still providing the character option at the pipeline level.
 
-Open [core-hello/conf/modules.config](core-hello/conf/modules.config) and add the cowpy configuration:
+Open `conf/modules.config` and add the cowpy configuration:
 
 === "After"
 
@@ -325,7 +325,7 @@ Key points:
 
 Since the cowpy module no longer requires the `character` parameter as an input, we need to update the workflow call.
 
-Open [core-hello/workflows/hello.nf](core-hello/workflows/hello.nf) and update the cowpy call:
+Open `workflows/hello.nf` and update the cowpy call:
 
 === "After"
 
@@ -345,22 +345,21 @@ The workflow code is now cleaner - we don't need to pass `params.character` dire
 
 #### Test
 
-Test that the workflow still works with the ext.args configuration. Let's specify a different character to verify the configuration is working:
+Test that the workflow still works with the ext.args configuration. Let's specify a different character to verify the configuration is working (using `kosh`, one of the more... enigmatic options):
 
 ```bash
-nextflow run . --outdir core-hello-results -profile test,docker --validate_params false --character cow
+nextflow run . --outdir core-hello-results -profile test,docker --validate_params false --character kosh
 ```
 
 The pipeline should run successfully. In the output, look for the cowpy process execution line which will show something like:
 
 ```console title="Output (excerpt)"
-[f3/abc123] process > CORE_HELLO:HELLO:cowpy [100%] 1 of 1 ✔
-```
+[bd/0abaf8] CORE_HELLO:HELLO:cowpy              [100%] 1 of 1 ✔```
 
-Now let's verify that the `ext.args` configuration actually passed the character argument to the cowpy command. Use the task hash (the `f3/abc123` part) to inspect the `.command.sh` file in the work directory:
+Now let's verify that the `ext.args` configuration actually passed the character argument to the cowpy command. Use the task hash (the `bd/0abaf8` part) to inspect the `.command.sh` file in the work directory:
 
 ```bash
-cat work/f3/abc123*/command.sh
+cat work/bd/0abaf8*/.command.sh
 ```
 
 You should see the cowpy command with the `-c cow` argument:
@@ -368,10 +367,38 @@ You should see the cowpy command with the `-c cow` argument:
 ```console title="Output"
 #!/usr/bin/env bash
 ...
-cat test.txt | cowpy -c cow > cowpy-test.txt
+cat test.txt | cowpy -c kosh > cowpy-test.txt
 ```
 
 This confirms that `task.ext.args` successfully passed the character parameter through the configuration rather than requiring it as a process input.
+
+We can also check the output:
+
+```bash
+cat work/bd/0abaf8*/cowpy-test.txt
+```
+
+```console title="Output"
+/ HELLO   \
+| HOLà    |
+\ BONJOUR /
+ ---------
+    \
+     \
+      \
+  ___       _____     ___
+ /   \     /    /|   /   \
+|     |   /    / |  |     |
+|     |  /____/  |  |     |
+|     |  |    |  |  |     |
+|     |  | {} | /   |     |
+|     |  |____|/    |     |
+|     |    |==|     |     |
+|      \___________/      |
+|                         |
+|                         |
+```
+
 
 ### 1.3. Add configurable output naming with ext.prefix
 
