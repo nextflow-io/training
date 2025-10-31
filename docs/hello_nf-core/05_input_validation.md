@@ -374,40 +374,82 @@ For our use case, we want to:
 
 We'll structure this as an array of objects, where each object has a `greeting` field.
 
-### 3.3. Create the schema file
+### 3.3. Update the schema file
 
-Replace the contents of `assets/schema_input.json` with the following:
+The nf-core pipeline template includes a default `assets/schema_input.json` designed for paired-end sequencing data.
+We need to replace it with a simpler schema for our greetings use case.
 
-```json title="assets/schema_input.json" linenums="1"
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://raw.githubusercontent.com/core/hello/main/assets/schema_input.json",
-  "title": "core/hello pipeline - params.input schema",
-  "description": "Schema for the greetings file provided with params.input",
-  "type": "array",
-  "items": {
-    "type": "object",
-    "properties": {
-      "greeting": {
-        "type": "string",
-        "pattern": "^\\S.*$",
-        "errorMessage": "Greeting must be provided and cannot be empty or start with whitespace"
-      }
-    },
-    "required": ["greeting"]
-  }
-}
-```
+Open `assets/schema_input.json` and replace the `properties` and `required` sections:
 
-Let's break down the key parts:
+=== "After"
 
-- **`type: "array"`**: The input is parsed as an array (list) of items
-- **`items.type: "object"`**: Each item in the array is an object
-- **`properties.greeting`**: Defines a field called `greeting`
+    ```json title="assets/schema_input.json" linenums="1" hl_lines="10-14 16"
+    {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "$id": "https://raw.githubusercontent.com/core/hello/main/assets/schema_input.json",
+        "title": "core/hello pipeline - params.input schema",
+        "description": "Schema for the greetings file provided with params.input",
+        "type": "array",
+        "items": {
+            "type": "object",
+            "properties": {
+                "greeting": {
+                    "type": "string",
+                    "pattern": "^\\S.*$",
+                    "errorMessage": "Greeting must be provided and cannot be empty or start with whitespace"
+                }
+            },
+            "required": ["greeting"]
+        }
+    }
+    ```
+
+=== "Before"
+
+    ```json title="assets/schema_input.json" linenums="1" hl_lines="10-29 31"
+    {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "$id": "https://raw.githubusercontent.com/core/hello/main/assets/schema_input.json",
+        "title": "core/hello pipeline - params.input schema",
+        "description": "Schema for the file provided with params.input",
+        "type": "array",
+        "items": {
+            "type": "object",
+            "properties": {
+                "sample": {
+                    "type": "string",
+                    "pattern": "^\\S+$",
+                    "errorMessage": "Sample name must be provided and cannot contain spaces",
+                    "meta": ["id"]
+                },
+                "fastq_1": {
+                    "type": "string",
+                    "format": "file-path",
+                    "exists": true,
+                    "pattern": "^([\\S\\s]*\\/)?[^\\s\\/]+\\.f(ast)?q\\.gz$",
+                    "errorMessage": "FastQ file for reads 1 must be provided, cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
+                },
+                "fastq_2": {
+                    "type": "string",
+                    "format": "file-path",
+                    "exists": true,
+                    "pattern": "^([\\S\\s]*\\/)?[^\\s\\/]+\\.f(ast)?q\\.gz$",
+                    "errorMessage": "FastQ file for reads 2 cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
+                }
+            },
+            "required": ["sample", "fastq_1"]
+        }
+    }
+    ```
+
+The key changes:
+
+- **`description`**: Updated to mention "greetings file"
+- **`properties`**: Replaced `sample`, `fastq_1`, and `fastq_2` with a single `greeting` field
   - **`type: "string"`**: Must be a text string
   - **`pattern: "^\\S.*$"`**: Must start with a non-whitespace character (but can contain spaces after that)
   - **`errorMessage`**: Custom error message shown if validation fails
-- **`required: ["greeting"]`**: The `greeting` field is mandatory
+- **`required`**: Changed from `["sample", "fastq_1"]` to `["greeting"]`
 
 ### 3.4. Add a header to the greetings.csv file
 
@@ -419,7 +461,7 @@ Add a header line to the greetings file:
 
 === "After"
 
-    ```csv title="assets/greetings.csv" linenums="1"
+    ```csv title="assets/greetings.csv" linenums="1" hl_lines="1"
     greeting
     Hello
     Bonjour
