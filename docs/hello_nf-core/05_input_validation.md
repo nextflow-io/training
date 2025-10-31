@@ -499,7 +499,7 @@ The `samplesheetToList` function:
 
 Let's update the input handling code:
 
-Open [core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf](core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf) and locate the section where we create the input channel (around line 64).
+Open `core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf` and locate the section where we create the input channel (around line 64).
 
 We need to:
 
