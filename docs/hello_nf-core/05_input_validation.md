@@ -258,11 +258,11 @@ To add the `batch` parameter:
 1. Click the **"Add parameter"** button at the top
 2. Use the drag handle (⋮⋮) to move the new parameter up into the "Input/output options" group, below the `input` parameter
 3. Fill in the parameter details:
-    - **ID**: `batch`
-    - **Description**: `Name for this batch of greetings`
-    - **Type**: `string`
-    - Check the **Required** checkbox
-    - Optionally, select an icon from the icon picker (e.g., `fas fa-layer-group`)
+   - **ID**: `batch`
+   - **Description**: `Name for this batch of greetings`
+   - **Type**: `string`
+   - Check the **Required** checkbox
+   - Optionally, select an icon from the icon picker (e.g., `fas fa-layer-group`)
 
 ![Adding the batch parameter](./img/schema_add.png)
 
