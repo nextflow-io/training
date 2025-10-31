@@ -277,7 +277,9 @@ INFO     Writing schema with 18 params: 'nextflow_schema.json'
 
 Press `Ctrl+C` to exit the schema builder.
 
-The tool has now updated your `nextflow_schema.json` file with the new `batch` parameter, handling all the JSON Schema syntax correctly. You can verify this by checking the file:
+The tool has now updated your `nextflow_schema.json` file with the new `batch` parameter, handling all the JSON Schema syntax correctly.
+
+**Verify the changes:**
 
 ```bash
 grep -A 25 '"input_output_options"' nextflow_schema.json
@@ -605,7 +607,7 @@ Re-enable input validation in the config and test both parameter and input data 
 
 ### 3.6. Re-enable input validation
 
-Now that we've configured the input data schema, we can remove the temporary ignore setting we added in section 2.3.
+Now that we've configured the input data schema, we can remove the temporary ignore setting we added in section 1.4.
 
 Open `nextflow.config` and remove the `ignoreParams` line from the `validation` block:
 
@@ -639,41 +641,27 @@ Let's verify that our validation works by testing both valid and invalid inputs.
 First, confirm the pipeline runs successfully with valid input:
 
 ```bash
-nextflow run core-hello --outdir core-hello-results -profile test,docker
+nextflow run . --outdir core-hello-results -profile test,docker
 ```
 
 Note that we no longer need `--validate_params false` since validation is working!
 
 ```console title="Output"
- N E X T F L O W   ~  version 25.04.3
-
-Launching `./main.nf` [nasty_kalman] DSL2 - revision: c31b966b36
-
-Input/output options
-  input                     : /private/tmp/core-hello-test/assets/greetings.csv
-  batch                     : test
-  outdir                    : core-hello-results
-
-Institutional config options
-  config_profile_name       : Test profile
-  config_profile_description: Minimal test dataset to check pipeline function
-
-Core Nextflow options
-  runName                   : nasty_kalman
-  containerEngine           : docker
-  profile                   : test,docker
-
-!! Only displaying parameters that differ from the pipeline defaults !!
 ------------------------------------------------------
-executor >  local (7)
-[cc/cc800d] CORE_HELLO:HELLO:sayHello (1)       | 3 of 3 ✔
-[d6/46ab71] CORE_HELLO:HELLO:convertToUpper (1) | 3 of 3 ✔
-[b2/3def99] CORE_HELLO:HELLO:CAT_CAT (test)     | 1 of 1 ✔
-[a3/f82e41] CORE_HELLO:HELLO:cowpy              | 1 of 1 ✔
+WARN: The following invalid input values have been detected:
+
+* --character: tux
+
+
+executor >  local (10)
+[c1/39f64a] CORE_HELLO:HELLO:sayHello (1)       | 4 of 4 ✔
+[44/c3fb82] CORE_HELLO:HELLO:convertToUpper (4) | 4 of 4 ✔
+[62/80fab2] CORE_HELLO:HELLO:CAT_CAT (test)     | 1 of 1 ✔
+[e1/4db4fd] CORE_HELLO:HELLO:cowpy              | 1 of 1 ✔
 -[core/hello] Pipeline completed successfully-
 ```
 
-Great! The pipeline runs successfully and validation passes silently.
+Great! The pipeline runs successfully and validation passes silently. The warning about `--character` is just informational since it's not defined in the schema. If you want, use what you've learned to add validation for that parameter too!
 
 **Test with invalid input:**
 
@@ -693,34 +681,22 @@ This file uses `message` as the column name instead of `greeting`, which doesn't
 Try running the pipeline with this invalid input:
 
 ```bash
-nextflow run core-hello --input /tmp/invalid_greetings.csv --outdir test-results -profile docker
+nextflow run . --input /tmp/invalid_greetings.csv --outdir test-results -profile docker
 ```
 
 ```console title="Output"
- N E X T F L O W   ~  version 25.04.3
-
-Launching `./main.nf` [stupefied_poincare] DSL2 - revision: c31b966b36
-
-Input/output options
-  input              : /tmp/invalid_greetings.csv
-  outdir             : test-results
-
-Core Nextflow options
-  runName            : stupefied_poincare
-  containerEngine    : docker
-  profile            : docker
-
-!! Only displaying parameters that differ from the pipeline defaults !!
-------------------------------------------------------
 ERROR ~ Validation of pipeline parameters failed!
 
  -- Check '.nextflow.log' file for details
 The following invalid input values have been detected:
 
+* Missing required parameter(s): batch
 * --input (/tmp/invalid_greetings.csv): Validation of file failed:
-	-> Entry 1: Missing required field(s): greeting
+        -> Entry 1: Missing required field(s): greeting
+        -> Entry 2: Missing required field(s): greeting
+        -> Entry 3: Missing required field(s): greeting
 
- -- Check script 'subworkflows/nf-core/utils_nfschema_plugin/main.nf' at line: 39 or see '.nextflow.log' file for more details
+ -- Check script 'subworkflows/nf-core/utils_nfschema_plugin/main.nf' at line: 68 or see '.nextflow.log' file for more details
 ```
 
 Perfect! The validation caught the error and provided a clear, helpful error message pointing to:
