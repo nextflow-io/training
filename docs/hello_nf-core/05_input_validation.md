@@ -50,8 +50,6 @@ nf-core pipelines validate two different kinds of input:
 - Ensures required fields are present
 - Defined in `assets/schema_input.json`
 
-Both types of validation happen **before** the pipeline executes any processes, ensuring fast failure with clear error messages.
-
 !!! note
 
     This section assumes you have completed [Part 4: Make an nf-core module](./04_make_module.md) and have a working `core-hello` pipeline with nf-core-style modules.
