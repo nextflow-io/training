@@ -170,7 +170,7 @@ tree modules/nf-core/cat
             ├── main.nf.test.snap
             ├── nextflow_unzipped_zipped.config
             └── nextflow_zipped_unzipped.config
-    
+
     2 directories, 7 files
     ```
 

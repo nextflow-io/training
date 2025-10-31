@@ -138,7 +138,7 @@ tree core-hello
     │               └── nextflow_schema.json
     └── workflows
         └── hello.nf
-    
+
     14 directories, 34 files
     ```
 
