@@ -336,7 +336,7 @@ Now we need to modify our workflow code to use `CAT_CAT` instead of `collectGree
 
 Open [core-hello/workflows/hello.nf](core-hello/workflows/hello.nf) and make the following changes to the workflow logic in the `main` block.
 
-#### Step 1: Create a metadata map
+#### 1.9.1. Create a metadata map
 
 First, we need to create a metadata map for `CAT_CAT`. Remember that nf-core modules require metadata with at least an `id` field.
 
@@ -376,7 +376,7 @@ Add these lines after the `convertToUpper` call, removing the `collectGreetings`
 
 This creates a simple metadata map where the `id` is set to our batch name (which will be "test" when using the test profile).
 
-#### Step 2: Create a channel with metadata tuples
+#### 1.9.2. Create a channel with metadata tuples
 
 Next, transform the channel of files into a channel of tuples containing metadata and files:
 
@@ -419,7 +419,7 @@ This line does two things:
 - `.collect()` gathers all files from the `convertToUpper` output into a single list
 - `.map { files -> tuple(cat_meta, files) }` creates a tuple of `[metadata, files]` in the format `CAT_CAT` expects
 
-#### Step 3: Call CAT_CAT
+#### 1.9.3. Call CAT_CAT
 
 Now call `CAT_CAT` with the properly formatted channel:
 
@@ -460,7 +460,7 @@ Now call `CAT_CAT` with the properly formatted channel:
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
-#### Step 4: Remove the legacy collectGreetings import
+#### 1.9.4. Remove the legacy collectGreetings import
 
 Since we're no longer using the `collectGreetings` module, remove its import statement from the top of the file:
 
@@ -497,7 +497,7 @@ Since we're no longer using the `collectGreetings` module, remove its import sta
     include { CAT_CAT                } from '../modules/nf-core/cat/cat/main'
     ```
 
-#### Step 5: Update cowpy to use CAT_CAT output
+#### 1.9.5. Update cowpy to use CAT_CAT output
 
 Finally, update the `cowpy` call to use the output from `CAT_CAT`. Since `cowpy` doesn't accept metadata tuples yet (we'll fix this in the next section), we need to extract just the file:
 

@@ -166,7 +166,7 @@ Now let's address another nf-core pattern: simplifying module interfaces by usin
 
 Currently, our `cowpy` module requires the `character` parameter to be passed as a separate input. While this works, nf-core modules use a different approach for **tool configuration arguments**: instead of adding input parameters for every tool option, they use `ext.args` to pass these via configuration. This keeps the module interface focused on essential data (files, metadata, and any mandatory per-sample parameters), while tool configuration options are handled through `ext.args`.
 
-#### Understanding ext.args
+#### 1.2.1. Understanding ext.args
 
 The `task.ext.args` pattern is an nf-core convention for passing command-line arguments to tools through configuration rather than as process inputs. Instead of adding input parameters for tool options, nf-core modules accept arguments through the `ext.args` configuration directive.
 
@@ -182,7 +182,7 @@ Benefits of this approach:
 - **Portability**: Modules can be reused without hardcoded tool options
 - **No workflow changes**: Adding or changing tool options doesn't require updating workflow code
 
-#### Centralized publishing configuration
+#### 1.2.2. Centralized publishing configuration
 
 Before we update the module to use `ext.args`, let's address an important nf-core convention: **modules should not contain hardcoded `publishDir` directives**.
 
@@ -211,7 +211,7 @@ Benefits of this approach:
 - **Easy customization**: Override publishing behavior in config, not in module code
 - **Portable modules**: Modules don't hardcode output locations
 
-#### Update the module
+#### 1.2.3. Update the module
 
 Now let's update the cowpy module to use `ext.args` and remove the local `publishDir`.
 
@@ -278,7 +278,7 @@ Key changes:
 
 The module interface is now simpler - it only accepts the essential metadata and file inputs. By removing the local `publishDir`, we follow the nf-core convention of centralizing all publishing configuration in `modules.config`.
 
-#### Configure ext.args
+#### 1.2.4. Configure ext.args
 
 Now we need to configure the `ext.args` to pass the character option. This allows us to keep the module interface simple while still providing the character option at the pipeline level.
 
@@ -321,7 +321,7 @@ Key points:
 
     The `modules.config` file is where nf-core pipelines centralize per-module configuration. This separation of concerns makes modules more reusable across different pipelines.
 
-#### Update the workflow
+#### 1.2.5. Update the workflow
 
 Since the cowpy module no longer requires the `character` parameter as an input, we need to update the workflow call.
 
@@ -343,7 +343,7 @@ Open `workflows/hello.nf` and update the cowpy call:
 
 The workflow code is now cleaner - we don't need to pass `params.character` directly to the process. The module interface is kept minimal, making it more portable, while the pipeline still provides the explicit option through configuration.
 
-#### Test
+#### 1.2.6. Test
 
 Test that the workflow still works with the ext.args configuration. Let's specify a different character to verify the configuration is working (using `kosh`, one of the more... enigmatic options):
 
@@ -405,7 +405,7 @@ cat work/bd/0abaf8*/cowpy-test.txt
 
 There's one more nf-core pattern we can apply: using `ext.prefix` for configurable output file naming.
 
-#### Understanding ext.prefix
+#### 1.3.1. Understanding ext.prefix
 
 The `task.ext.prefix` pattern is another nf-core convention for standardizing output file naming across modules while keeping it configurable.
 
@@ -416,7 +416,7 @@ Benefits:
 - **Consistent**: All nf-core modules follow this pattern
 - **Predictable**: Easy to know what output files will be called
 
-#### Update the module
+#### 1.3.2. Update the module
 
 Let's update the cowpy module to use `ext.prefix` for output file naming.
 
@@ -481,7 +481,7 @@ Key changes:
 
 Note that the local `publishDir` has already been removed in the previous step, so we're continuing with the centralized configuration approach.
 
-#### Configure ext.prefix
+#### 1.3.3. Configure ext.prefix
 
 To maintain the same output file naming as before (`cowpy-<id>.txt`), we can configure `ext.prefix` in modules.config.
 
@@ -510,7 +510,7 @@ Note that we use a closure (`{ "cowpy-${meta.id}" }`) which has access to `meta`
 
     The `ext.prefix` closure has access to `meta` because the configuration is evaluated in the context of the process execution, where metadata is available.
 
-#### Test and verify
+#### 1.3.4. Test and verify
 
 Test the workflow once more:
 
@@ -595,7 +595,7 @@ You'll be prompted for:
 
 The tool handles the complexity of finding package information and setting up the structure, allowing you to focus on implementing the tool's specific logic.
 
-#### What gets generated
+#### 2.1.1. What gets generated
 
 The tool creates a complete module structure in `modules/local/` (or `modules/nf-core/` if you're in the nf-core/modules repository):
 
@@ -684,7 +684,7 @@ The template also includes several additional nf-core conventions that we didn't
 
 These additional conventions make modules more maintainable and provide better visibility into pipeline execution.
 
-#### Completing the environment and container setup
+#### 2.1.2. Completing the environment and container setup
 
 In the case of cowpy, the tool warned that it couldn't find the package in Bioconda (the primary channel for bioinformatics tools).
 However, cowpy is available in conda-forge, so you would complete the `environment.yml` like this:
@@ -716,7 +716,7 @@ Once you've completed the environment setup and filled in the command logic, the
 
 The [nf-core/modules](https://github.com/nf-core/modules) repository welcomes contributions of well-tested, standardized modules.
 
-#### Why contribute?
+#### 2.2.1. Why contribute?
 
 Contributing your modules to nf-core:
 
@@ -725,7 +725,7 @@ Contributing your modules to nf-core:
 - Provides quality assurance through code review and automated testing
 - Gives your work visibility and recognition
 
-#### Contributing workflow
+#### 2.2.2. Contributing workflow
 
 To contribute a module to nf-core:
 
@@ -739,7 +739,7 @@ To contribute a module to nf-core:
 
 For detailed instructions, see the [nf-core components tutorial](https://nf-co.re/docs/tutorials/nf-core_components/components).
 
-#### Resources
+#### 2.2.3. Resources
 
 - **Components tutorial**: [Complete guide to creating and contributing modules](https://nf-co.re/docs/tutorials/nf-core_components/components)
 - **Module specifications**: [Technical requirements and guidelines](https://nf-co.re/docs/guidelines/components/modules)

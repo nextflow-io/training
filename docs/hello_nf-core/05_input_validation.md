@@ -36,14 +36,18 @@ The pipeline fails immediately with clear, actionable error messages. This saves
 
 nf-core pipelines validate two different kinds of input:
 
-**Parameter validation**: Validates command-line parameters (flags like `--outdir`, `--batch`, `--input`)
+### Parameter validation
+
+This validates command-line parameters (flags like `--outdir`, `--batch`, `--input`):
 
 - Checks parameter types, ranges, and formats
 - Ensures required parameters are provided
 - Validates file paths exist
 - Defined in `nextflow_schema.json`
 
-**Input data validation**: Validates the contents of input files (like sample sheets or CSV files)
+### Input data validation
+
+This validates the contents of input files (like sample sheets or CSV files)
 
 - Checks column structure and data types
 - Validates file references within the input file
@@ -279,7 +283,7 @@ Press `Ctrl+C` to exit the schema builder.
 
 The tool has now updated your `nextflow_schema.json` file with the new `batch` parameter, handling all the JSON Schema syntax correctly.
 
-**Verify the changes:**
+#### 2.2.1. Verify the changes
 
 ```bash
 grep -A 25 '"input_output_options"' nextflow_schema.json
@@ -636,7 +640,7 @@ Now nf-schema will validate both parameter types AND the input file contents.
 
 Let's verify that our validation works by testing both valid and invalid inputs.
 
-**Test with valid input:**
+#### 3.7.1. Test with valid input
 
 First, confirm the pipeline runs successfully with valid input:
 
@@ -663,7 +667,7 @@ executor >  local (10)
 
 Great! The pipeline runs successfully and validation passes silently. The warning about `--character` is just informational since it's not defined in the schema. If you want, use what you've learned to add validation for that parameter too!
 
-**Test with invalid input:**
+#### 3.7.2. Test with invalid input
 
 Now let's test that validation catches errors. Create a test file with an invalid column name:
 
