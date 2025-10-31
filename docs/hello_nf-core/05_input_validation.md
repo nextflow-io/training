@@ -67,7 +67,8 @@ nf-core pipelines validate two different kinds of input:
 
 ## 1. The nf-schema plugin
 
-The [nf-schema plugin](https://nextflow-io.github.io/nf-schema/latest/) is a Nextflow plugin that provides comprehensive validation capabilities for nf-core pipelines.
+The [nf-schema plugin](https://nextflow-io.github.io/nf-schema/latest/) is a Nextflow plugin that provides comprehensive validation capabilities for any Nextflow pipeline.
+While nf-schema is a standalone tool that can be used in any Nextflow workflow, it's heavily integrated into the nf-core ecosystem and is the standard validation solution for all nf-core pipelines.
 
 ### 1.1. Core functionality
 
