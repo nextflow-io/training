@@ -125,35 +125,38 @@ Let's start by adding parameter validation to our pipeline. This validates comma
 Let's look at a section of the `nextflow_schema.json` file that came with our pipeline template:
 
 ```bash
-grep -A 20 '"input_output_options"' nextflow_schema.json
+grep -A 25 '"input_output_options"' nextflow_schema.json
 ```
 
-The parameter schema is organized into groups. Here's the `input_output_options` group (simplified):
+The parameter schema is organized into groups. Here's the `input_output_options` group:
 
 ```json title="core-hello/nextflow_schema.json (excerpt)"
-"input_output_options": {
-    "title": "Input/output options",
-    "type": "object",
-    "description": "Define where the pipeline should find input data and save output data.",
-    "required": ["input", "outdir"],
-    "properties": {
-        "input": {
-            "type": "string",
-            "format": "file-path",
-            "exists": true,
-            "mimetype": "text/csv",
-            "pattern": "^\\S+\\.csv$",
-            "description": "Path to comma-separated file containing greetings.",
-            "help_text": "You will need to create a design file with information about the samples in your experiment before running the pipeline."
+        "input_output_options": {
+            "title": "Input/output options",
+            "type": "object",
+            "fa_icon": "fas fa-terminal",
+            "description": "Define where the pipeline should find input data and save output data.",
+            "required": ["input", "outdir"],
+            "properties": {
+                "input": {
+                    "type": "string",
+                    "format": "file-path",
+                    "exists": true,
+                    "schema": "assets/schema_input.json",
+                    "mimetype": "text/csv",
+                    "pattern": "^\\S+\\.csv$",
+                    "description": "Path to comma-separated file containing information about the samples in the experiment.",
+                    "help_text": "You will need to create a design file with information about the samples in your experiment before running the pipeline. Use this parameter to specify its location. It has to be a comma-separated file with 3 columns, and a header row.",
+                    "fa_icon": "fas fa-file-csv"
+                },
+                "outdir": {
+                    "type": "string",
+                    "format": "directory-path",
+                    "description": "The output directory where the results will be saved. You have to use absolute paths to storage on Cloud infrastructure.",
+                    "fa_icon": "fas fa-folder-open"
+                }
+            }
         },
-        "outdir": {
-            "type": "string",
-            "format": "directory-path",
-            "description": "The output directory where the results will be saved.",
-            "fa_icon": "fas fa-folder-open"
-        }
-    }
-}
 ```
 
 Key validation features:
@@ -175,58 +178,61 @@ Notice the `batch` parameter we've been using isn't defined yet in the schema!
 
 ### 2.2. Add the batch parameter
 
-The parameter schema can be edited manually, but nf-core provides a helpful GUI tool:
+While the schema is a JSON file that can be edited manually, **manual editing is error-prone and not recommended**.
+Instead, nf-core provides an interactive GUI tool that handles the JSON Schema syntax for you and validates your changes:
 
 ```bash
 nf-core pipelines schema build
 ```
 
-This command launches an interactive web interface where you can:
+You'll see output like:
 
-- Add new parameters
-- Set validation rules
-- Organize parameters into groups
-- Generate help text
+```console
+                                      ,--./,-.
+      ___     __   __   __   ___     /,-._.--\
+|\ | |__  __ /  ` /  \ |__) |__         }  {
+| \| |       \__, \__/ |  \ |___     \`-._,-`-,
+                                      `._,._,'
 
-!!! warning "Schema validation errors"
+nf-core/tools version 3.4.1 - https://nf-co.re
 
-    If you run `nf-core pipelines schema build` at this stage, you may see an error like:
-
-    ```
-    [✗] Invalid default parameters found:
-      input: Not in pipeline parameters. Check `nextflow.config`.
-    ```
-
-    This happens because the template's schema includes an `input` parameter, but it's not yet defined in `nextflow.config`. You can safely ignore this for now - we're using the `--input` parameter as a command-line argument rather than setting a default in the config.
-
-For our simple case, we'll edit the JSON directly. Open `core-hello/nextflow_schema.json` and find the `"input_output_options"` section. Add the `batch` parameter:
-
-```json title="core-hello/nextflow_schema.json (excerpt)" hl_lines="13-17"
-"input_output_options": {
-    "title": "Input/output options",
-    "type": "object",
-    "description": "Define where the pipeline should find input data and save output data.",
-    "required": ["input", "outdir"],
-    "properties": {
-        "input": {
-            "type": "string",
-            "format": "file-path",
-            "exists": true,
-            "description": "Path to comma-separated file containing greetings."
-        },
-        "batch": {
-            "type": "string",
-            "default": "batch-01",
-            "description": "Name for this batch of greetings"
-        },
-        "outdir": {
-            "type": "string",
-            "format": "directory-path",
-            "description": "The output directory where the results will be saved."
-        }
-    }
-}
+INFO     [✓] Default parameters match schema validation
+INFO     [✓] Pipeline schema looks valid (found 17 params)
+INFO     Writing schema with 17 params: 'nextflow_schema.json'
+🚀  Launch web builder for customisation and editing? [y/n]:
 ```
+
+Type `y` and press Enter to launch the interactive web interface.
+
+Your browser will open showing the Parameter schema builder:
+
+![Schema builder interface](../img/hello_nf-core/schema_build.png)
+
+To add the `batch` parameter:
+
+1. Click the **"Add parameter"** button at the top
+2. Use the drag handle (⋮⋮) to move the new parameter up into the "Input/output options" group, below the `input` parameter
+3. Fill in the parameter details:
+    - **ID**: `batch`
+    - **Description**: `Name for this batch of greetings`
+    - **Type**: `string`
+    - Check the **Required** checkbox
+    - Optionally, select an icon from the icon picker (e.g., `fas fa-layer-group`)
+
+![Adding the batch parameter](../img/hello_nf-core/schema_add.png)
+
+When you're done, click the **"Finished"** button at the top right.
+
+Back in your terminal, you'll see:
+
+```console
+INFO     Writing schema with 18 params: 'nextflow_schema.json'
+⣾ Use ctrl+c to stop waiting and force exit.
+```
+
+Press `Ctrl+C` to exit the schema builder.
+
+The tool has now updated your `nextflow_schema.json` file with the new `batch` parameter, handling all the JSON Schema syntax correctly.
 
 ### 2.3. Test parameter validation
 
@@ -259,7 +265,8 @@ The pipeline should run successfully, and the `batch` parameter is now validated
 
 ### Takeaway
 
-You now know how to add parameters to `nextflow_schema.json` and test parameter validation. The nf-core schema build tool makes it easy to manage complex parameter schemas interactively.
+You now know how to use the interactive `nf-core pipelines schema build` tool to add parameters to `nextflow_schema.json` and test parameter validation.
+The web interface handles all the JSON Schema syntax for you, making it easy to manage complex parameter schemas without error-prone manual JSON editing.
 
 ### What's next?
 
