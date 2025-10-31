@@ -35,6 +35,7 @@ nav:
       - hello_nf-core/03_use_module.md
       - hello_nf-core/04_make_module.md
       - hello_nf-core/05_input_validation.md
+      - hello_nf-core/summary.md
       - hello_nf-core/survey.md
       - hello_nf-core/next_steps.md
   - Nextflow for Science:
