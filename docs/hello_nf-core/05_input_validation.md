@@ -264,7 +264,42 @@ grep -A 25 '"input_output_options"' nextflow_schema.json
         },
 ```
 
-### 2.3. Test parameter validation
+You should see that the `batch` parameter has been added to the schema with the "required" field now showing `["input", "outdir", "batch"]`.
+
+### 2.3. Configure validation to skip input file validation
+
+Since we haven't configured the input data schema yet (that comes in section 3), we need to temporarily tell nf-schema to ignore validation of the `input` parameter's file contents.
+
+Open `nextflow.config` and find the `validation` block (around line 246). Add `ignoreParams` to skip input file validation:
+
+=== "After"
+
+    ```groovy title="nextflow.config" hl_lines="3" linenums="246"
+    validation {
+        defaultIgnoreParams = ["genomes"]
+        ignoreParams = ['input']
+        monochromeLogs = params.monochrome_logs
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="nextflow.config" linenums="246"
+    validation {
+        defaultIgnoreParams = ["genomes"]
+        monochromeLogs = params.monochrome_logs
+    }
+    ```
+
+This tells nf-schema to skip validating the contents of the file provided via `--input`, while still validating all other parameters.
+
+!!! note "Why ignore the input parameter?"
+
+    The `input` parameter in `nextflow_schema.json` has `"schema": "assets/schema_input.json"` which tells nf-schema to validate the *contents* of the input CSV file against that schema.
+    Since we haven't configured that schema yet, we temporarily ignore this validation.
+    We'll remove this in section 3 after setting up the input data schema.
+
+### 2.4. Test parameter validation
 
 Now let's test that parameter validation works correctly.
 
@@ -288,10 +323,8 @@ Perfect! The validation catches the missing required parameter before the pipeli
 Now try with a valid set of parameters:
 
 ```bash
-nextflow run . --input assets/greetings.csv --outdir results --batch my-batch -profile test,docker --validationSchemaIgnoreParams input
+nextflow run . --input assets/greetings.csv --outdir results --batch my-batch -profile test,docker
 ```
-
-Note: We use `--validationSchemaIgnoreParams input` to skip input data validation at this stage since we haven't configured the input schema yet (we'll do that in the next section).
 
 The pipeline should run successfully, and the `batch` parameter is now validated.
 
@@ -522,9 +555,36 @@ You've successfully implemented input data validation using `samplesheetToList` 
 
 ### What's next?
 
-Test both parameter and input data validation to see them in action.
+Re-enable input validation in the config and test both parameter and input data validation to see them in action.
 
-### 3.6. Test input validation
+### 3.6. Re-enable input validation
+
+Now that we've configured the input data schema, we can remove the temporary ignore setting we added in section 2.3.
+
+Open `nextflow.config` and remove the `ignoreParams` line from the `validation` block:
+
+=== "After"
+
+    ```groovy title="nextflow.config" linenums="246"
+    validation {
+        defaultIgnoreParams = ["genomes"]
+        monochromeLogs = params.monochrome_logs
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="nextflow.config" hl_lines="3" linenums="246"
+    validation {
+        defaultIgnoreParams = ["genomes"]
+        ignoreParams = ['input']
+        monochromeLogs = params.monochrome_logs
+    }
+    ```
+
+Now nf-schema will validate both parameter types AND the input file contents.
+
+### 3.7. Test input validation
 
 Let's verify that our validation works by testing both valid and invalid inputs.
 
