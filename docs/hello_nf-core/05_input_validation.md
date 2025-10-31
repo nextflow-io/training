@@ -130,7 +130,7 @@ grep -A 25 '"input_output_options"' nextflow_schema.json
 
 The parameter schema is organized into groups. Here's the `input_output_options` group:
 
-```json title="core-hello/nextflow_schema.json (excerpt)"
+```json title="core-hello/nextflow_schema.json (excerpt)" linenums="8"
         "input_output_options": {
             "title": "Input/output options",
             "type": "object",
@@ -206,7 +206,7 @@ Type `y` and press Enter to launch the interactive web interface.
 
 Your browser will open showing the Parameter schema builder:
 
-![Schema builder interface](../img/hello_nf-core/schema_build.png)
+![Schema builder interface](./img/hello_nf-core/schema_build.png)
 
 To add the `batch` parameter:
 
@@ -219,7 +219,7 @@ To add the `batch` parameter:
     - Check the **Required** checkbox
     - Optionally, select an icon from the icon picker (e.g., `fas fa-layer-group`)
 
-![Adding the batch parameter](../img/hello_nf-core/schema_add.png)
+![Adding the batch parameter](./img/hello_nf-core/schema_add.png)
 
 When you're done, click the **"Finished"** button at the top right.
 
@@ -232,7 +232,37 @@ INFO     Writing schema with 18 params: 'nextflow_schema.json'
 
 Press `Ctrl+C` to exit the schema builder.
 
-The tool has now updated your `nextflow_schema.json` file with the new `batch` parameter, handling all the JSON Schema syntax correctly.
+The tool has now updated your `nextflow_schema.json` file with the new `batch` parameter, handling all the JSON Schema syntax correctly. You can verify this by checking the file:
+
+```bash
+grep -A 25 '"input_output_options"' nextflow_schema.json
+```
+
+```json title="core-hello/nextflow_schema.json (excerpt)" linenums="8" hl_lines="19-23"
+    "input_output_options": {
+      "title": "Input/output options",
+      "type": "object",
+      "fa_icon": "fas fa-terminal",
+      "description": "Define where the pipeline should find input data and save output data.",
+      "required": ["input", "outdir", "batch"],
+      "properties": {
+        "input": {
+          "type": "string",
+          "format": "file-path",
+          "exists": true,
+          "schema": "assets/schema_input.json",
+          "mimetype": "text/csv",
+          "pattern": "^\\S+\\.csv$",
+          "description": "Path to comma-separated file containing information about the samples in the experiment.",
+          "help_text": "You will need to create a design file with information about the samples in your experiment before running the pipeline. Use this parameter to specify its location. It has to be a comma-separated file with 3 columns, and a header row.",
+          "fa_icon": "fas fa-file-csv"
+        },
+        "batch": {
+          "type": "string",
+          "description": "Name for this batch of greetings",
+          "fa_icon": "fas fa-layer-group"
+        },
+```
 
 ### 2.3. Test parameter validation
 
