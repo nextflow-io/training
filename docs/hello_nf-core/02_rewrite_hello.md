@@ -285,12 +285,12 @@ A composable workflow must be called from a parent workflow—it cannot run on i
 If you haven't completed the [Hello Nextflow](../hello_nextflow/index.md) training, here's a quick overview of what this simple workflow does:
 
 1. **Reads greetings** from a CSV file (e.g., "Hello", "Bonjour", "Holà")
-2. **Says hello** by adding "world!" to each greeting
-3. **Converts to uppercase** (e.g., "HELLO WORLD!")
-4. **Collects results** into a single file
-5. **Adds ASCII art** using cowpy to display the final output with a fun character
+2. **Writes each greeting** to its own output file (e.g., "Hello-output.txt")
+3. **Converts to uppercase** (e.g., "HELLO")
+4. **Collects all uppercase greetings** into a single batch file
+5. **Adds ASCII art** using cowpy to display the collected greetings with a fun character
 
-The workflow uses four Nextflow processes organized into separate module files, takes an input CSV file of greetings, and produces a whimsical output file.
+The workflow uses four Nextflow processes (`sayHello`, `convertToUpper`, `collectGreetings`, and `cowpy`) organized into separate module files, takes an input CSV file of greetings, and produces a whimsical ASCII art output file.
 
 We provide you with a clean, fully functional copy of the completed Hello Nextflow workflow in the directory `original-hello` along with its modules and the default CSV file it expects to use as input.
 
