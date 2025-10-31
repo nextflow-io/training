@@ -206,7 +206,7 @@ Type `y` and press Enter to launch the interactive web interface.
 
 Your browser will open showing the Parameter schema builder:
 
-![Schema builder interface](./img/hello_nf-core/schema_build.png)
+![Schema builder interface](./img/schema_build.png)
 
 To add the `batch` parameter:
 
@@ -219,7 +219,7 @@ To add the `batch` parameter:
     - Check the **Required** checkbox
     - Optionally, select an icon from the icon picker (e.g., `fas fa-layer-group`)
 
-![Adding the batch parameter](./img/hello_nf-core/schema_add.png)
+![Adding the batch parameter](./img/schema_add.png)
 
 When you're done, click the **"Finished"** button at the top right.
 
@@ -278,7 +278,9 @@ nextflow run . --outdir test-results -profile docker
 ERROR ~ Validation of pipeline parameters failed!
 
  -- Check '.nextflow.log' file for details
- * --input: required property is missing
+The following invalid input values have been detected:
+
+* Missing required parameter(s): input, batch
 ```
 
 Perfect! The validation catches the missing required parameter before the pipeline runs.
