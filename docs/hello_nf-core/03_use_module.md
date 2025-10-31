@@ -157,20 +157,22 @@ Let's check that the module was installed correctly:
 tree modules/nf-core/cat
 ```
 
-```console title="Output"
-modules/nf-core/cat
-└── cat
-    ├── environment.yml
-    ├── main.nf
-    ├── meta.yml
-    └── tests
-        ├── main.nf.test
-        ├── main.nf.test.snap
-        ├── nextflow_unzipped_zipped.config
-        └── nextflow_zipped_unzipped.config
+??? example "Directory contents"
 
-2 directories, 7 files
-```
+    ```console
+    modules/nf-core/cat
+    └── cat
+        ├── environment.yml
+        ├── main.nf
+        ├── meta.yml
+        └── tests
+            ├── main.nf.test
+            ├── main.nf.test.snap
+            ├── nextflow_unzipped_zipped.config
+            └── nextflow_zipped_unzipped.config
+    
+    2 directories, 7 files
+    ```
 
 You can also verify the installation by listing locally installed modules:
 

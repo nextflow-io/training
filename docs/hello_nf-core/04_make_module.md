@@ -599,14 +599,16 @@ The tool handles the complexity of finding package information and setting up th
 
 The tool creates a complete module structure in `modules/local/` (or `modules/nf-core/` if you're in the nf-core/modules repository):
 
-```console
-modules/local/cowpy
-├── environment.yml
-├── main.nf
-├── meta.yml
-└── tests
-    └── main.nf.test
-```
+??? example "Directory contents"
+
+    ```console
+    modules/local/cowpy
+    ├── environment.yml
+    ├── main.nf
+    ├── meta.yml
+    └── tests
+        └── main.nf.test
+    ```
 
 Each file serves a specific purpose:
 

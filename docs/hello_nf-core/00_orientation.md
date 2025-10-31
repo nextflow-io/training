@@ -71,22 +71,24 @@ tree . -L 2
 
 If you run this inside `hello-nf-core`, you should see the following output:
 
-```console title="Directory contents"
-.
-├── greetings.csv
-├── original-hello
-│   ├── hello.nf
-│   ├── modules
-│   └── nextflow.config
-└── solutions
-    ├── composable-hello
-    ├── core-hello-part2
-    ├── core-hello-part3
-    ├── core-hello-part4
-    └── core-hello-start
+??? example "Directory contents"
 
-8 directories, 3 files
-```
+    ```console
+    .
+    ├── greetings.csv
+    ├── original-hello
+    │   ├── hello.nf
+    │   ├── modules
+    │   └── nextflow.config
+    └── solutions
+        ├── composable-hello
+        ├── core-hello-part2
+        ├── core-hello-part3
+        ├── core-hello-part4
+        └── core-hello-start
+
+    8 directories, 3 files
+    ```
 
 **Here's a summary of what you should know to get started:**
 

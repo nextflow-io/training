@@ -86,59 +86,61 @@ View the contents of the new directory to see how much work you saved yourself b
 tree core-hello
 ```
 
-```console title="Output"
-core-hello/
-├── assets
-│   ├── samplesheet.csv
-│   └── schema_input.json
-├── conf
-│   ├── base.config
-│   ├── modules.config
-│   ├── test.config
-│   └── test_full.config
-├── docs
-│   ├── output.md
-│   ├── README.md
-│   └── usage.md
-├── main.nf
-├── modules.json
-├── nextflow.config
-├── nextflow_schema.json
-├── README.md
-├── subworkflows
-│   ├── local
-│   │   └── utils_nfcore_hello_pipeline
-│   │       └── main.nf
-│   └── nf-core
-│       ├── utils_nextflow_pipeline
-│       │   ├── main.nf
-│       │   ├── meta.yml
-│       │   └── tests
-│       │       ├── main.function.nf.test
-│       │       ├── main.function.nf.test.snap
-│       │       ├── main.workflow.nf.test
-│       │       └── nextflow.config
-│       ├── utils_nfcore_pipeline
-│       │   ├── main.nf
-│       │   ├── meta.yml
-│       │   └── tests
-│       │       ├── main.function.nf.test
-│       │       ├── main.function.nf.test.snap
-│       │       ├── main.workflow.nf.test
-│       │       ├── main.workflow.nf.test.snap
-│       │       └── nextflow.config
-│       └── utils_nfschema_plugin
-│           ├── main.nf
-│           ├── meta.yml
-│           └── tests
-│               ├── main.nf.test
-│               ├── nextflow.config
-│               └── nextflow_schema.json
-└── workflows
-    └── hello.nf
+??? example "Directory contents"
 
-14 directories, 34 files
-```
+    ```console
+    core-hello/
+    ├── assets
+    │   ├── samplesheet.csv
+    │   └── schema_input.json
+    ├── conf
+    │   ├── base.config
+    │   ├── modules.config
+    │   ├── test.config
+    │   └── test_full.config
+    ├── docs
+    │   ├── output.md
+    │   ├── README.md
+    │   └── usage.md
+    ├── main.nf
+    ├── modules.json
+    ├── nextflow.config
+    ├── nextflow_schema.json
+    ├── README.md
+    ├── subworkflows
+    │   ├── local
+    │   │   └── utils_nfcore_hello_pipeline
+    │   │       └── main.nf
+    │   └── nf-core
+    │       ├── utils_nextflow_pipeline
+    │       │   ├── main.nf
+    │       │   ├── meta.yml
+    │       │   └── tests
+    │       │       ├── main.function.nf.test
+    │       │       ├── main.function.nf.test.snap
+    │       │       ├── main.workflow.nf.test
+    │       │       └── nextflow.config
+    │       ├── utils_nfcore_pipeline
+    │       │   ├── main.nf
+    │       │   ├── meta.yml
+    │       │   └── tests
+    │       │       ├── main.function.nf.test
+    │       │       ├── main.function.nf.test.snap
+    │       │       ├── main.workflow.nf.test
+    │       │       ├── main.workflow.nf.test.snap
+    │       │       └── nextflow.config
+    │       └── utils_nfschema_plugin
+    │           ├── main.nf
+    │           ├── meta.yml
+    │           └── tests
+    │               ├── main.nf.test
+    │               ├── nextflow.config
+    │               └── nextflow_schema.json
+    └── workflows
+        └── hello.nf
+    
+    14 directories, 34 files
+    ```
 
 That's a lot of files!
 
@@ -298,16 +300,18 @@ We provide you with a clean, fully functional copy of the completed Hello Nextfl
 tree original-hello/
 ```
 
-```console title="Output"
-original-hello/
-├── hello.nf
-├── modules
-│   ├── collectGreetings.nf
-│   ├── convertToUpper.nf
-│   ├── cowpy.nf
-│   └── sayHello.nf
-└── nextflow.config
-```
+??? example "Directory contents"
+
+    ```console
+    original-hello/
+    ├── hello.nf
+    ├── modules
+    │   ├── collectGreetings.nf
+    │   ├── convertToUpper.nf
+    │   ├── cowpy.nf
+    │   └── sayHello.nf
+    └── nextflow.config
+    ```
 
 Feel free to run it to satisfy yourself that it works:
 
@@ -701,14 +705,16 @@ You should now see the directory of modules listed under `core-hello/`.
 tree core-hello/modules
 ```
 
-```console title="Output"
-core-hello/modules
-└── local
-    ├── collectGreetings.nf
-    ├── convertToUpper.nf
-    ├── cowpy.nf
-    └── sayHello.nf
-```
+??? example "Directory contents"
+
+    ```console
+    core-hello/modules
+    └── local
+        ├── collectGreetings.nf
+        ├── convertToUpper.nf
+        ├── cowpy.nf
+        └── sayHello.nf
+    ```
 
 Now let's set up the module import statements.
 
@@ -1270,19 +1276,21 @@ We didn't change anything to the modules themselves, so the outputs handled by m
 tree results
 ```
 
-```console title="Output"
-results
-├── Bonjour-output.txt
-├── COLLECTED-test-batch-output.txt
-├── COLLECTED-test-output.txt
-├── cowpy-COLLECTED-test-batch-output.txt
-├── cowpy-COLLECTED-test-output.txt
-├── Hello-output.txt
-├── Holà-output.txt
-├── UPPER-Bonjour-output.txt
-├── UPPER-Hello-output.txt
-└── UPPER-Holà-output.txt
-```
+??? example "Directory contents"
+
+    ```console
+    results
+    ├── Bonjour-output.txt
+    ├── COLLECTED-test-batch-output.txt
+    ├── COLLECTED-test-output.txt
+    ├── cowpy-COLLECTED-test-batch-output.txt
+    ├── cowpy-COLLECTED-test-output.txt
+    ├── Hello-output.txt
+    ├── Holà-output.txt
+    ├── UPPER-Bonjour-output.txt
+    ├── UPPER-Hello-output.txt
+    └── UPPER-Holà-output.txt
+    ```
 
 Anything that is hooked up to the nf-core template code gets put into a directory generated automatically, called `core-hello-results/`.
 This includes various execution reports and metadata that you can find under `core-hello-results/pipeline_info`.
@@ -1291,23 +1299,25 @@ This includes various execution reports and metadata that you can find under `co
 tree core-hello-results
 ```
 
-```console title="Output"
-core-hello-results
-└── pipeline_info
-    ├── execution_report_2025-06-03_18-22-28.html
-    ├── execution_report_2025-06-03_20-11-39.html
-    ├── execution_timeline_2025-06-03_18-22-28.html
-    ├── execution_timeline_2025-06-03_20-11-39.html
-    ├── execution_trace_2025-06-03_18-22-28.txt
-    ├── execution_trace_2025-06-03_20-10-11.txt
-    ├── execution_trace_2025-06-03_20-11-39.txt
-    ├── hello_software_versions.yml
-    ├── params_2025-06-03_18-22-32.json
-    ├── params_2025-06-03_20-10-15.json
-    ├── params_2025-06-03_20-11-43.json
-    ├── pipeline_dag_2025-06-03_18-22-28.html
-    └── pipeline_dag_2025-06-03_20-11-39.html
-```
+??? example "Directory contents"
+
+    ```console
+    core-hello-results
+    └── pipeline_info
+        ├── execution_report_2025-06-03_18-22-28.html
+        ├── execution_report_2025-06-03_20-11-39.html
+        ├── execution_timeline_2025-06-03_18-22-28.html
+        ├── execution_timeline_2025-06-03_20-11-39.html
+        ├── execution_trace_2025-06-03_18-22-28.txt
+        ├── execution_trace_2025-06-03_20-10-11.txt
+        ├── execution_trace_2025-06-03_20-11-39.txt
+        ├── hello_software_versions.yml
+        ├── params_2025-06-03_18-22-32.json
+        ├── params_2025-06-03_20-10-15.json
+        ├── params_2025-06-03_20-11-43.json
+        ├── pipeline_dag_2025-06-03_18-22-28.html
+        └── pipeline_dag_2025-06-03_20-11-39.html
+    ```
 
 In our case, we didn't explicitly mark anything else as an output, so there's nothing else there.
 
