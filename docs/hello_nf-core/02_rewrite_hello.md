@@ -280,6 +280,18 @@ Learn how to make a simple workflow composable as a prelude to making it nf-core
 Before we can integrate our workflow into the nf-core scaffold, we need to make it **composable**.
 A composable workflow must be called from a parent workflow—it cannot run on its own—which is exactly how the nf-core template is structured.
 
+### What does the Hello Nextflow workflow do?
+
+If you haven't completed the [Hello Nextflow](../hello_nextflow/index.md) training, here's a quick overview of what this simple workflow does:
+
+1. **Reads greetings** from a CSV file (e.g., "Hello", "Bonjour", "Holà")
+2. **Says hello** by adding "world!" to each greeting
+3. **Converts to uppercase** (e.g., "HELLO WORLD!")
+4. **Collects results** into a single file
+5. **Adds ASCII art** using cowpy to display the final output with a fun character
+
+The workflow uses four Nextflow processes organized into separate module files, takes an input CSV file of greetings, and produces a whimsical output file.
+
 We provide you with a clean, fully functional copy of the completed Hello Nextflow workflow in the directory `original-hello` along with its modules and the default CSV file it expects to use as input.
 
 ```bash
