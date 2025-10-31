@@ -106,9 +106,54 @@ graph LR
 
 Validation happens **before** any pipeline processes run, providing fast feedback and preventing wasted compute time.
 
+### 1.4. Configure validation to skip input file validation
+
+The nf-core pipeline template comes with nf-schema already installed and configured:
+
+- The nf-schema plugin is installed via the `plugins{}` block in `nextflow.config`
+- Parameter validation is enabled by default via `params.validate_params = true`
+- The validation is performed by the `UTILS_NFSCHEMA_PLUGIN` subworkflow during pipeline initialization
+
+The validation behavior is controlled through the `validation{}` scope in `nextflow.config`.
+
+Since we'll be working on parameter validation first (section 2) and won't configure the input data schema until section 3, we need to temporarily tell nf-schema to skip validating the `input` parameter's file contents.
+
+Open `nextflow.config` and find the `validation` block (around line 246). Add `ignoreParams` to skip input file validation:
+
+=== "After"
+
+    ```groovy title="nextflow.config" hl_lines="3" linenums="246"
+    validation {
+        defaultIgnoreParams = ["genomes"]
+        ignoreParams = ['input']
+        monochromeLogs = params.monochrome_logs
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="nextflow.config" linenums="246"
+    validation {
+        defaultIgnoreParams = ["genomes"]
+        monochromeLogs = params.monochrome_logs
+    }
+    ```
+
+This configuration tells nf-schema to:
+
+- **`defaultIgnoreParams`**: Skip validation of complex parameters like `genomes` (set by template developers)
+- **`ignoreParams`**: Skip validation of the `input` parameter's file contents (temporary - we'll remove this in section 3)
+- **`monochromeLogs`**: Control colored output in validation messages
+
+!!! note "Why ignore the input parameter?"
+
+    The `input` parameter in `nextflow_schema.json` has `"schema": "assets/schema_input.json"` which tells nf-schema to validate the *contents* of the input CSV file against that schema.
+    Since we haven't configured that schema yet, we temporarily ignore this validation.
+    We'll remove this setting in section 3 after configuring the input data schema.
+
 ### Takeaway
 
-You now understand what nf-schema does, the two types of validation it provides, and when validation occurs in the pipeline execution lifecycle.
+You now understand what nf-schema does, the two types of validation it provides, when validation occurs, and how to configure validation behavior. You've also temporarily disabled input file validation so we can focus on parameter validation first.
 
 ### What's next?
 
@@ -266,40 +311,7 @@ grep -A 25 '"input_output_options"' nextflow_schema.json
 
 You should see that the `batch` parameter has been added to the schema with the "required" field now showing `["input", "outdir", "batch"]`.
 
-### 2.3. Configure validation to skip input file validation
-
-Since we haven't configured the input data schema yet (that comes in section 3), we need to temporarily tell nf-schema to ignore validation of the `input` parameter's file contents.
-
-Open `nextflow.config` and find the `validation` block (around line 246). Add `ignoreParams` to skip input file validation:
-
-=== "After"
-
-    ```groovy title="nextflow.config" hl_lines="3" linenums="246"
-    validation {
-        defaultIgnoreParams = ["genomes"]
-        ignoreParams = ['input']
-        monochromeLogs = params.monochrome_logs
-    }
-    ```
-
-=== "Before"
-
-    ```groovy title="nextflow.config" linenums="246"
-    validation {
-        defaultIgnoreParams = ["genomes"]
-        monochromeLogs = params.monochrome_logs
-    }
-    ```
-
-This tells nf-schema to skip validating the contents of the file provided via `--input`, while still validating all other parameters.
-
-!!! note "Why ignore the input parameter?"
-
-    The `input` parameter in `nextflow_schema.json` has `"schema": "assets/schema_input.json"` which tells nf-schema to validate the *contents* of the input CSV file against that schema.
-    Since we haven't configured that schema yet, we temporarily ignore this validation.
-    We'll remove this in section 3 after setting up the input data schema.
-
-### 2.4. Test parameter validation
+### 2.3. Test parameter validation
 
 Now let's test that parameter validation works correctly.
 
@@ -499,7 +511,7 @@ The `samplesheetToList` function:
 
 Let's update the input handling code:
 
-Open `core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf` and locate the section where we create the input channel (around line 64).
+Open `subworkflows/local/utils_nfcore_hello_pipeline/main.nf` and locate the section where we create the input channel (around line 80).
 
 We need to:
 
@@ -551,15 +563,12 @@ Now update the channel creation code:
 
 === "After"
 
-    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="64" hl_lines="4-8"
+    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="80" hl_lines="4"
         //
         // Create channel from input file provided through params.input
         //
-        ch_samplesheet = Channel.fromList(samplesheetToList(params.input, "${projectDir}/assets/schema_input.json"))
-            .map { row ->
-                // Extract just the greeting string from each row
-                row[0]
-            }
+        ch_samplesheet = channel.fromList(samplesheetToList(params.input, "${projectDir}/assets/schema_input.json"))
+            .map { line -> line[0] }
 
         emit:
         samplesheet = ch_samplesheet
@@ -568,13 +577,13 @@ Now update the channel creation code:
 
 === "Before"
 
-    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="64"
+    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="80" hl_lines="4 5"
         //
         // Create channel from input file provided through params.input
         //
-        ch_samplesheet = Channel.fromPath(params.input)
-                            .splitCsv()
-                            .map { line -> line[0] }
+        ch_samplesheet = channel.fromPath(params.input)
+            .splitCsv()
+            .map { line -> line[0] }
 
         emit:
         samplesheet = ch_samplesheet
@@ -585,11 +594,6 @@ Let's break down what changed:
 
 1. **`samplesheetToList(params.input, "${projectDir}/assets/schema_input.json")`**: Validates the input file against our schema and returns a list
 2. **`Channel.fromList(...)`**: Converts the list into a Nextflow channel
-3. **`.map { row -> row[0] }`**: Extracts just the greeting string from each validated row (accessing the first column by index)
-
-!!! note "Parameter validation is enabled by default"
-
-    The nf-schema plugin is installed via the `plugins{}` block in `nextflow.config`, and the pipeline template already includes parameter validation enabled via `params.validate_params = true`. The validation is performed by the `UTILS_NFSCHEMA_PLUGIN` subworkflow during pipeline initialization.
 
 ### Takeaway
 
