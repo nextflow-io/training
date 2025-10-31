@@ -18,7 +18,7 @@ In your web browser, go to https://nf-co.re/pipelines/ and type `demo` in the se
 
 ![search results](./img/search-results.png)
 
-Click on the pipeline name, `demo`, to access the pipeline details page.
+Click on the pipeline name, `demo`, to access the pipeline documentation page.
 
 Each released pipeline has a dedicated page that includes the following documentation sections:
 
@@ -61,10 +61,10 @@ Let's retrieve the code so we can examine this structure.
 
 ### 1.2. Retrieve the pipeline code
 
-Once we've determined the pipeline appears to be suitable for our purposes, we're going to want to try it out.
-Fortunately Nextflow makes it easy to retrieve pipeline from correctly-formatted repositories without having to download anything manually.
+Once we've determined the pipeline appears to be suitable for our purposes, let's try it out.
+Fortunately Nextflow makes it easy to retrieve pipelines from correctly-formatted repositories without having to download anything manually.
 
-Return to your terminal and run the following:
+Let's return to the terminal and run the following:
 
 ```bash
 nextflow pull nf-core/demo
@@ -91,25 +91,27 @@ nf-core/demo
 ```
 
 You'll notice that the files are not in your current work directory.
-By default, they are saved to `$NXF_HOME/assets`.
+By default, Nextflow saves them to `$NXF_HOME/assets`.
 
 ```bash
 tree -L 2 $NXF_HOME/assets/
 ```
 
-```console title="Output"
-/workspaces/.nextflow/assets/
-└── nf-core
-    └── demo
-```
+??? example "Directory contents"
+
+    ```console
+    /workspaces/.nextflow/assets/
+    └── nf-core
+        └── demo
+    ```
 
 !!! note
 
     The full path may differ on your system if you're not using our training environment.
 
-The location of the downloaded source code is intentionally 'out of the way' on the principle that these pipelines should be used more like libraries than code that you would directly interact with.
+Nextflow keeps the downloaded source code intentionally 'out of the way' on the principle that these pipelines should be used more like libraries than code that you would directly interact with.
 
-However, for the purposes of this training, we'd like to be able to poke around and see what's in there.
+However, for the purposes of this training, we want to be able to poke around and see what's in there.
 So to make that easier, let's create a symbolic link to that location from our current working directory.
 
 ```bash
@@ -122,11 +124,13 @@ This creates a shortcut that makes it easier to explore the code we just downloa
 tree -L 2 pipelines
 ```
 
-```console title="Output"
-pipelines
-└── nf-core
-    └── demo
-```
+??? example "Directory contents"
+
+    ```console
+    pipelines
+    └── nf-core
+        └── demo
+    ```
 
 Now we can more easily peek into the source code as needed.
 
@@ -152,7 +156,7 @@ This is a minimal set of configuration settings for the pipeline to run using a 
 It's good practice to check what a pipeline's test profile specifies before running it.
 The `test` profile for `nf-core/demo` is shown below:
 
-```groovy title="conf/test.config" linenums="1" hl_lines="26"
+```groovy title="conf/test.config" linenums="1" hl_lines="8 26"
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Nextflow config file for running minimal tests
@@ -168,7 +172,7 @@ The `test` profile for `nf-core/demo` is shown below:
 process {
     resourceLimits = [
         cpus: 4,
-        memory: '15.GB',
+        memory: '4.GB',
         time: '1.h'
     ]
 }
@@ -183,14 +187,22 @@ params {
 }
 ```
 
-This tells us that the `nf-core/demo` test profile already specifies the input parameter, so you don't have to provide any input yourself.
-However, the `outdir` parameter is not included in the test profile, so we will have to add it to the execution command using the `--outdir` flag.
+The test profile shows us what has been pre-configured for testing: most notably, the `input` parameter is already set to point to a test dataset, so we don't need to provide our own data.
+
+The comment block at the top also includes a usage example showing how to run with this test profile.
+Notice that it includes `--outdir <OUTDIR>` - this tells us we'll need to specify an output directory when we run the pipeline.
 
 ### 2.2. Run the pipeline
 
-Our examination of the test profile above told us what pipeline argument(s) we need to specify: just `--outdir`.
+Based on the usage example in the test profile, we know we need to specify `--outdir` to tell the pipeline where to save results.
 
 We're also going to specify `-profile docker,test`, which by nf-core convention enables the use of Docker containers, and of course, invokes the test profile.
+
+!!! note "Understanding container profiles"
+
+    The `-profile docker` option tells Nextflow to use Docker containers for running processes.
+    nf-core pipelines are designed to work with containers (Docker, Singularity, etc.) to ensure reproducibility and eliminate software installation issues.
+    The profile system allows you to easily switch between different container engines or execution environments.
 
 Let's try it!
 
@@ -201,9 +213,9 @@ nextflow run nf-core/demo -profile docker,test --outdir demo-results
 Here's the console output from the pipeline:
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  version 25.04.3
 
-Launching `https://github.com/nf-core/demo` [maniac_jones] DSL2 - revision: 04060b4644 [master]
+Launching `https://github.com/nf-core/demo` [happy_varahamihira] DSL2 - revision: db7f526ce1 [master]
 
 
 ------------------------------------------------------
@@ -212,30 +224,34 @@ Launching `https://github.com/nf-core/demo` [maniac_jones] DSL2 - revision: 0406
   |\ | |__  __ /  ` /  \ |__) |__         }  {
   | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                         `._,._,'
-  nf-core/demo 1.0.1
+  nf-core/demo 1.0.2
 ------------------------------------------------------
 Input/output options
   input                     : https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv
-  outdir                    : results
+  outdir                    : demo-results
 
 Institutional config options
   config_profile_name       : Test profile
   config_profile_description: Minimal test dataset to check pipeline function
 
+Generic options
+  trace_report_suffix       : 2025-10-30_13-22-01
+
 Core Nextflow options
   revision                  : master
-  runName                   : maniac_jones
+  runName                   : happy_varahamihira
   containerEngine           : docker
-  launchDir                 : /workspaces/training/side-quests/nf-core/nf-core-demo
-  workDir                   : /workspaces/training/side-quests/nf-core/nf-core-demo/work
+  launchDir                 : /workspaces/training/hello-nf-core
+  workDir                   : /workspaces/training/hello-nf-core/work
   projectDir                : /workspaces/.nextflow/assets/nf-core/demo
-  userName                  : gitpod
+  userName                  : root
   profile                   : docker,test
-  configFiles               :
+  configFiles               : /workspaces/.nextflow/assets/nf-core/demo/nextflow.config
 
 !! Only displaying parameters that differ from the pipeline defaults !!
-------------------------------------------------------* The pipeline
-  https://doi.org/10.5281/zenodo.12192442
+------------------------------------------------------
+* The pipeline
+    https://doi.org/10.5281/zenodo.12192442
 
 * The nf-core framework
     https://doi.org/10.1038/s41587-020-0439-x
@@ -243,26 +259,27 @@ Core Nextflow options
 * Software dependencies
     https://github.com/nf-core/demo/blob/master/CITATIONS.md
 
+
 executor >  local (7)
-[3c/a00024] NFC…_DEMO:DEMO:FASTQC (SAMPLE2_PE) | 3 of 3 ✔
-[94/d1d602] NFC…O:DEMO:SEQTK_TRIM (SAMPLE2_PE) | 3 of 3 ✔
-[ab/460670] NFCORE_DEMO:DEMO:MULTIQC           | 1 of 1 ✔
+[db/fae3ff] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE)     [100%] 3 of 3 ✔
+[d0/f6ea55] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE1_PE) [100%] 3 of 3 ✔
+[af/e6da56] NFCORE_DEMO:DEMO:MULTIQC                 [100%] 1 of 1 ✔
 -[nf-core/demo] Pipeline completed successfully-
-Completed at: 05-Mar-2025 09:46:21
-Duration    : 1m 54s
-CPU hours   : (a few seconds)
-Succeeded   : 7
 ```
 
-You see that there is more console output than when you run a basic Netxflow pipeline.
+You see that there is more console output than when you run a basic Nextflow pipeline.
 There's a header that includes a summary of the pipeline's version, inputs and outputs, and a few elements of configuration.
+
+!!! note
+
+    Your output will show different timestamps, execution names, and file paths, but the overall structure and process execution should be similar.
 
 Moving on to the execution output, let's have a look at the lines that tell us what processes were run:
 
 ```console title="Output (subset)"
-[3c/a00024] NFC…_DEMO:DEMO:FASTQC (SAMPLE2_PE) | 3 of 3 ✔
-[94/d1d602] NFC…O:DEMO:SEQTK_TRIM (SAMPLE2_PE) | 3 of 3 ✔
-[ab/460670] NFCORE_DEMO:DEMO:MULTIQC           | 1 of 1 ✔
+[db/fae3ff] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE)     [100%] 3 of 3 ✔
+[d0/f6ea55] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE1_PE) [100%] 3 of 3 ✔
+[af/e6da56] NFCORE_DEMO:DEMO:MULTIQC                 [100%] 1 of 1 ✔
 ```
 
 This tells us that three processes were run, corresponding to the three tools shown in the pipeline documentation page on the nf-core website: FASTQC, SEQTK_TRIM and MULTIQC.
@@ -281,30 +298,32 @@ Finally, let's have a look at the `demo-results` directory produced by the pipel
 tree -L 2 demo-results
 ```
 
-```console title="Output"
-demo-results/
-├── fastqc
-│   ├── SAMPLE1_PE
-│   ├── SAMPLE2_PE
-│   └── SAMPLE3_SE
-├── fq
-│   ├── SAMPLE1_PE
-│   ├── SAMPLE2_PE
-│   └── SAMPLE3_SE
-├── multiqc
-│   ├── multiqc_data
-│   ├── multiqc_plots
-│   └── multiqc_report.html
-└── pipeline_info
-    ├── execution_report_2025-03-05_09-44-26.html
-    ├── execution_timeline_2025-03-05_09-44-26.html
-    ├── execution_trace_2025-03-05_09-44-26.txt
-    ├── nf_core_pipeline_software_mqc_versions.yml
-    ├── params_2025-03-05_09-44-29.json
-    └── pipeline_dag_2025-03-05_09-44-26.html
-```
+??? example "Directory contents"
 
-If you're curious about the specifics what that all means, check out [the nf-core/demo pipeline documentation page](https://nf-co.re/demo/1.0.1/).
+    ```console
+    demo-results/
+    ├── fastqc
+    │   ├── SAMPLE1_PE
+    │   ├── SAMPLE2_PE
+    │   └── SAMPLE3_SE
+    ├── fq
+    │   ├── SAMPLE1_PE
+    │   ├── SAMPLE2_PE
+    │   └── SAMPLE3_SE
+    ├── multiqc
+    │   ├── multiqc_data
+    │   ├── multiqc_plots
+    │   └── multiqc_report.html
+    └── pipeline_info
+        ├── execution_report_2025-03-05_09-44-26.html
+        ├── execution_timeline_2025-03-05_09-44-26.html
+        ├── execution_trace_2025-03-05_09-44-26.txt
+        ├── nf_core_pipeline_software_mqc_versions.yml
+        ├── params_2025-03-05_09-44-29.json
+        └── pipeline_dag_2025-03-05_09-44-26.html
+    ```
+
+If you're curious about the specifics of what that all means, check out [the nf-core/demo pipeline documentation page](https://nf-co.re/demo/1.0.2/).
 
 At this stage, what's important to observe is that the results are organized by module, and there is additionally a directory called `pipeline_info` containing various timestamped reports about the pipeline execution.
 This is standard for nf-core pipelines.
@@ -321,6 +340,9 @@ Learn how the pipeline code is organized.
 
 ---
 
+Now that we've successfully run the pipeline as users, let's shift our perspective to understand how nf-core pipelines are structured internally.
+Understanding this organization will prepare you for developing your own nf-core-compatible pipelines in the upcoming parts of this course.
+
 ## 3. Examine the pipeline code structure
 
 The nf-core project enforces strong guidelines for how pipelines are structured, and how the code is organized, configured and documented.
@@ -332,25 +354,30 @@ You can either use `tree` or use the file explorer in your IDE.
 tree -L 1 pipelines/nf-core/demo
 ```
 
-```console title="Output (top-level only)"
-pipelines/nf-core/demo
-├── assets
-├── CHANGELOG.md
-├── CITATIONS.md
-├── CODE_OF_CONDUCT.md
-├── conf
-├── docs
-├── LICENSE
-├── main.nf
-├── modules
-├── modules.json
-├── nextflow_schema.json
-├── nextflow.config
-├── README.md
-├── subworkflows
-├── tower.yml
-└── workflows
-```
+??? example "Directory contents"
+
+    ```console
+    pipelines/nf-core/demo
+    ├── assets
+    ├── CHANGELOG.md
+    ├── CITATIONS.md
+    ├── CODE_OF_CONDUCT.md
+    ├── conf
+    ├── docs
+    ├── LICENSE
+    ├── main.nf
+    ├── modules
+    ├── modules.json
+    ├── nextflow.config
+    ├── nextflow_schema.json
+    ├── nf-test.config
+    ├── README.md
+    ├── ro-crate-metadata.json
+    ├── subworkflows
+    ├── tests
+    ├── tower.yml
+    └── workflows
+    ```
 
 There's a lot going on in there, so we'll tackle this in stages.
 We're going to look at the following categories:
@@ -359,7 +386,7 @@ We're going to look at the following categories:
 2. Configuration, parameters and inputs
 3. Documentation and related assets
 
-Let's start with the code proper, though note that for now, we're going to focus on how everything is organized, without looking at the actual code just yet.
+Let's start with the code proper, though note that for now, we're going to focus on the file hierarchy and structural organization, rather than diving into the code syntax within individual files.
 
 ### 3.1. Pipeline code components
 
@@ -374,16 +401,20 @@ The pipeline code organization follows a modular structure that is designed to m
 
 At the top level, there is the `main.nf` script, which is the entrypoint Nextflow starts from when we execute `nextflow run nf-core/demo`. That means when you run `nextflow run nf-core/demo` to run the pipeline, Nextflow automatically finds and executes the `main.nf` script, and everything else will flow from there.
 
-In practice, the `main.nf` script calls the actual workflow of interest, stored inside the `workflows` folder, called `demo.nf`. It also calls a few 'housekeeping' subworkflows that we're going to ignore for now.
+The central logic of the pipeline is stored inside the `workflows` folder, in a file called `demo.nf`, which is called from `main.nf`.
 
 ```bash
 tree pipelines/nf-core/demo/workflows
 ```
 
-```console title="Output"
-pipelines/nf-core/demo/workflows
-└── demo.nf
-```
+??? example "Directory contents"
+
+    ```console
+    pipelines/nf-core/demo/workflows
+    └── demo.nf
+    ```
+
+`main.nf` also calls a few 'housekeeping' subworkflows that we're going to ignore for now.
 
 The `demo.nf` workflow itself calls out to various script components, namely, modules and subworkflows, stored in the corresponding `modules` and `subworkflows` folders.
 
@@ -412,29 +443,31 @@ In the nf-core project, modules are organized using a nested structure that refe
 The module code file describing the process is always called `main.nf`, and is accompanied by tests and `.yml` files.
 
 ```bash
-tree -L 4 pipelines/nf-core/demo/modules
+tree -L 3 pipelines/nf-core/demo/modules
 ```
 
-```console title="Output"
-pipelines/nf-core/demo/modules
-└── nf-core
-    ├── fastqc
-    │   ├── environment.yml
-    │   ├── main.nf
-    │   ├── meta.yml
-    │   └── tests
-    ├── multiqc
-    │   ├── environment.yml
-    │   ├── main.nf
-    │   ├── meta.yml
-    │   └── tests
-    └── seqtk
-        └── trim
-            ├── environment.yml
-            ├── main.nf
+??? example "Directory contents"
+
+    ```console
+    pipelines/nf-core/demo/modules
+    └── nf-core
+        ├── fastqc
+        │   ├── environment.yml
+        │   ├── main.nf
+        │   ├── meta.yml
+        │   └── tests
+        ├── multiqc
+        │   ├── environment.yml
+        │   ├── main.nf
+        │   ├── meta.yml
+        │   └── tests
+        └── seqtk
+            └── trim
+                ├── environment.yml
+                ├── main.nf
             ├── meta.yml
             └── tests
-```
+    ```
 
 Here you see that the `fastqc` and `multiqc` modules sit at the top level within the `nf-core` modules, whereas the `trim` module sits under the toolkit that it belongs to, `seqtk`.
 In this case there are no `local` modules.
@@ -446,28 +479,30 @@ As noted above, subworkflows function as wrappers that call two or more modules.
 In an nf-core pipeline, the subworkflows are divided into `local` and `nf-core` directories, and each subworkflow has its own nested directory structure with its own `main.nf` script.
 
 ```bash
-tree -L 4 pipelines/nf-core/demo/subworkflows
+tree -L 3 pipelines/nf-core/demo/subworkflows
 ```
 
-```console title="Output"
-pipelines/nf-core/demo/subworkflows
-├── local
-│   └── utils_nfcore_demo_pipeline
-│       └── main.nf
-└── nf-core
-    ├── utils_nextflow_pipeline
-    │   ├── main.nf
-    │   ├── meta.yml
-    │   └── tests
-    ├── utils_nfcore_pipeline
-    │   ├── main.nf
-    │   ├── meta.yml
-    │   └── tests
-    └── utils_nfschema_plugin
-        ├── main.nf
-        ├── meta.yml
+??? example "Directory contents"
+
+    ```console
+    pipelines/nf-core/demo/subworkflows
+    ├── local
+    │   └── utils_nfcore_demo_pipeline
+    │       └── main.nf
+    └── nf-core
+        ├── utils_nextflow_pipeline
+        │   ├── main.nf
+        │   ├── meta.yml
+        │   └── tests
+        ├── utils_nfcore_pipeline
+        │   ├── main.nf
+        │   ├── meta.yml
+        │   └── tests
+        └── utils_nfschema_plugin
+            ├── main.nf
+            ├── meta.yml
         └── tests
-```
+    ```
 
 In the case of the `nf-core/demo` pipeline, the subworkflows involved are all 'utility' or housekeeping subworkflows, as denoted by the `utils_` prefix in their names.
 These subworkflows are what produces the fancy nf-core header in the console output, among other accessory functions.
@@ -476,7 +511,7 @@ Other pipelines may also use subworkflows as part of the main workflow of intere
 
 !!! note
 
-    If you would like to learn how to compose workflows with subworkflows, see the [Workflows of Workflows](https://training.nextflow.io/latest/side_quests/workflows_of_workflows/) Side Quest (also known as 'the WoW side quest').
+    If you would like to learn how to compose workflows with subworkflows, see the [Workflows of Workflows](../side_quests/workflows_of_workflows/) Side Quest.
 
 ### 3.2. Configuration
 
@@ -503,7 +538,7 @@ In addition to these human-readable documents, there are two JSON files that pro
 The `nextflow_schema.json` is a file used to store information about the pipeline parameters including type, description and help text in a machine readable format.
 The schema is used for various purposes, including automated parameter validation, help text generation, and interactive parameter form rendering in UI interfaces.
 
-```json title="assets/nextflow_schema.json (not showing full file)" linenums="1"
+```json title="nextflow_schema.json (not showing full file)" linenums="1"
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "$id": "https://raw.githubusercontent.com/nf-core/demo/master/nextflow_schema.json",
@@ -523,8 +558,7 @@ The schema is used for various purposes, including automated parameter validatio
                     "format": "file-path",
                     "exists": true,
                     "schema": "assets/schema_input.json",
-                    "mimetype": "text/csv",
-                    "pattern": "^\\S+\\.csv$",
+                    "pattern": "^\\S+\\.(csv|tsv|json|yaml|yml)$",
                     "description": "Path to comma-separated file containing information about the samples in the experiment.",
                     "help_text": "You will need to create a design file with information about the samples in your experiment before running the pipeline. Use this parameter to specify its location. It has to be a comma-separated file with 3 columns, and a header row. See [usage docs](https://nf-co.re/demo/usage#samplesheet-input).",
                     "fa_icon": "fas fa-file-csv"

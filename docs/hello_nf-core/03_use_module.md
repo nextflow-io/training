@@ -25,11 +25,13 @@ In this section, we'll replace the custom `collectGreetings` module with the `ca
 
 First, let's learn how to find, install, and use an existing nf-core module in our pipeline.
 
-The `collectGreetings` process in our pipeline uses the Unix `cat` command to concatenate multiple greeting files into one. This is a perfect use case for the nf-core `cat/cat` module, which is designed specifically for concatenating files.
+The `collectGreetings` process in our pipeline uses the Unix `cat` command to concatenate multiple greeting files into one.
+This is a perfect use case for the nf-core `cat/cat` module, which is designed specifically for concatenating files.
+Replacing our custom module with an nf-core module gives us the benefit of community testing and maintenance, while also demonstrating the module system.
 
 !!! note "Module naming convention"
 
-    nf-core modules follow the naming convention `software/command`. The `cat/cat` module wraps the `cat` command from the `cat` software package. Other examples include `fastqc/fastqc` (FastQC software, fastqc command) or `samtools/view` (samtools software, view command).
+    nf-core modules follow the naming convention `software/command` when a tool provides multiple commands, like `samtools/view` (samtools package, view command) or `gatk/haplotypecaller` (GATK package, HaplotypeCaller command). For tools that provide only one main command, modules use a single level like `fastqc` or `multiqc`. The `cat/cat` naming reflects the organizational structure in the modules repository.
 
 ### 1.1. Browse available modules on the nf-core website
 
@@ -72,7 +74,54 @@ To see detailed information about a specific module, use the `info` command:
 nf-core modules info cat/cat
 ```
 
-This displays documentation about the module, including its inputs, outputs, and basic usage information.
+This displays documentation about the module, including its inputs, outputs, and basic usage information:
+
+```console title="Output"
+
+                                          ,--./,-.
+          ___     __   __   __   ___     /,-._.--~\
+    |\ | |__  __ /  ` /  \ |__) |__         }  {
+    | \| |       \__, \__/ |  \ |___     \`-._,-`-,
+                                          `._,._,'
+
+    nf-core/tools version 3.4.1 - https://nf-co.re
+
+
+╭─ Module: cat/cat  ─────────────────────────────────────────────────╮
+│ 🌐 Repository: https://github.com/nf-core/modules.git              │
+│ 🔧 Tools: cat                                                      │
+│ 📖 Description: A module for concatenation of gzipped or           │
+│ uncompressed files                                                 │
+╰────────────────────────────────────────────────────────────────────╯
+                  ╷                                          ╷
+ 📥 Inputs        │Description                               │Pattern
+╺━━━━━━━━━━━━━━━━━┿━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┿━━━━━━━╸
+ input[0]         │                                          │
+╶─────────────────┼──────────────────────────────────────────┼───────╴
+  meta  (map)     │Groovy Map containing sample information  │
+                  │e.g. [ id:'test', single_end:false ]      │
+╶─────────────────┼──────────────────────────────────────────┼───────╴
+  files_in  (file)│List of compressed / uncompressed files   │      *
+                  ╵                                          ╵
+                      ╷                                 ╷
+ 📥 Outputs           │Description                      │     Pattern
+╺━━━━━━━━━━━━━━━━━━━━━┿━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┿━━━━━━━━━━━━╸
+ file_out             │                                 │
+╶─────────────────────┼─────────────────────────────────┼────────────╴
+  meta  (map)         │Groovy Map containing sample     │
+                      │information                      │
+╶─────────────────────┼─────────────────────────────────┼────────────╴
+  ${prefix}  (file)   │Concatenated file. Will be       │ ${file_out}
+                      │gzipped if file_out ends with    │
+                      │".gz"                            │
+╶─────────────────────┼─────────────────────────────────┼────────────╴
+ versions             │                                 │
+╶─────────────────────┼─────────────────────────────────┼────────────╴
+  versions.yml  (file)│File containing software versions│versions.yml
+                      ╵                                 ╵
+
+ 💻  Installation command: nf-core modules install cat/cat
+```
 
 ### 1.4. Install and verify the cat/cat module
 
@@ -91,7 +140,9 @@ The tool will prompt you to confirm the installation. Press Enter to accept the 
 
 ```console title="Output"
 INFO     Installing 'cat/cat'
-INFO     Include statement: include { CAT_CAT } from '../modules/nf-core/cat/cat/main'
+INFO     Use the following statement to include this module:
+
+ include { CAT_CAT } from '../modules/nf-core/cat/cat/main'
 ```
 
 The command automatically:
@@ -106,18 +157,22 @@ Let's check that the module was installed correctly:
 tree modules/nf-core/cat
 ```
 
-```console title="Output"
-modules/nf-core/cat
-└── cat
-    ├── environment.yml
-    ├── main.nf
-    ├── meta.yml
-    └── tests
-        ├── main.nf.test
-        ├── main.nf.test.snap
-        ├── nextflow.config
-        └── tags.yml
-```
+??? example "Directory contents"
+
+    ```console
+    modules/nf-core/cat
+    └── cat
+        ├── environment.yml
+        ├── main.nf
+        ├── meta.yml
+        └── tests
+            ├── main.nf.test
+            ├── main.nf.test.snap
+            ├── nextflow_unzipped_zipped.config
+            └── nextflow_zipped_unzipped.config
+
+    2 directories, 7 files
+    ```
 
 You can also verify the installation by listing locally installed modules:
 
@@ -126,13 +181,14 @@ nf-core modules list local
 ```
 
 ```console title="Output"
+INFO     Repository type: pipeline
 INFO     Modules installed in '.':
 
-┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-┃ Module Name                ┃ Repository                  ┃
-┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
-│ cat/cat                    │ nf-core/modules             │
-└────────────────────────────┴─────────────────────────────┘
+┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓
+┃ Module Name ┃ Repository      ┃ Version SHA ┃ Message                                ┃ Date       ┃
+┡━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩
+│ cat/cat     │ nf-core/modules │ 41dfa3f     │ update meta.yml of all modules (#8747) │ 2025-07-07 │
+└─────────────┴─────────────────┴─────────────┴────────────────────────────────────────┴────────────┘
 ```
 
 ### 1.5. Add the import statement to your workflow
@@ -189,17 +245,22 @@ head -30 modules/nf-core/cat/cat/main.nf
 
 The key parts of the module are:
 
-```groovy title="modules/nf-core/cat/cat/main.nf (excerpt)" linenums="1" hl_lines="6 9"
+```groovy title="modules/nf-core/cat/cat/main.nf (excerpt)" linenums="1" hl_lines="11 14"
 process CAT_CAT {
     tag "$meta.id"
-    label 'process_single'
+    label 'process_low'
+
+    conda "${moduleDir}/environment.yml"
+    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+        'https://depot.galaxyproject.org/singularity/pigz:2.3.4' :
+        'biocontainers/pigz:2.3.4' }"
 
     input:
     tuple val(meta), path(files_in)
 
     output:
     tuple val(meta), path("${prefix}"), emit: file_out
-    path "versions.yml"           , emit: versions
+    path "versions.yml"               , emit: versions
 ```
 
 The module expects:
@@ -234,7 +295,7 @@ The main differences are:
 
 You've just seen that `CAT_CAT` expects inputs and outputs structured as tuples with metadata:
 
-```groovy
+```groovy title="modules/nf-core/cat/cat/main.nf (excerpt)" linenums="1" hl_lines="2 5"
 input:
 tuple val(meta), path(files_in)
 
@@ -275,7 +336,7 @@ Now we need to modify our workflow code to use `CAT_CAT` instead of `collectGree
 
 Open [core-hello/workflows/hello.nf](core-hello/workflows/hello.nf) and make the following changes to the workflow logic in the `main` block.
 
-#### Step 1: Create a metadata map
+#### 1.9.1. Create a metadata map
 
 First, we need to create a metadata map for `CAT_CAT`. Remember that nf-core modules require metadata with at least an `id` field.
 
@@ -315,7 +376,7 @@ Add these lines after the `convertToUpper` call, removing the `collectGreetings`
 
 This creates a simple metadata map where the `id` is set to our batch name (which will be "test" when using the test profile).
 
-#### Step 2: Create a channel with metadata tuples
+#### 1.9.2. Create a channel with metadata tuples
 
 Next, transform the channel of files into a channel of tuples containing metadata and files:
 
@@ -358,7 +419,7 @@ This line does two things:
 - `.collect()` gathers all files from the `convertToUpper` output into a single list
 - `.map { files -> tuple(cat_meta, files) }` creates a tuple of `[metadata, files]` in the format `CAT_CAT` expects
 
-#### Step 3: Call CAT_CAT
+#### 1.9.3. Call CAT_CAT
 
 Now call `CAT_CAT` with the properly formatted channel:
 
@@ -399,7 +460,44 @@ Now call `CAT_CAT` with the properly formatted channel:
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
-#### Step 4: Update cowpy to use CAT_CAT output
+#### 1.9.4. Remove the legacy collectGreetings import
+
+Since we're no longer using the `collectGreetings` module, remove its import statement from the top of the file:
+
+=== "After"
+
+    ```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="10"
+    /*
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    */
+    include { paramsSummaryMap       } from 'plugin/nf-schema'
+    include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
+    include { sayHello               } from '../modules/local/sayHello.nf'
+    include { convertToUpper         } from '../modules/local/convertToUpper.nf'
+    include { cowpy                  } from '../modules/local/cowpy.nf'
+    include { CAT_CAT                } from '../modules/nf-core/cat/cat/main'
+    ```
+
+=== "Before"
+
+    ```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="10"
+    /*
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    */
+    include { paramsSummaryMap       } from 'plugin/nf-schema'
+    include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
+    include { sayHello               } from '../modules/local/sayHello.nf'
+    include { convertToUpper         } from '../modules/local/convertToUpper.nf'
+    include { collectGreetings       } from '../modules/local/collectGreetings.nf'
+    include { cowpy                  } from '../modules/local/cowpy.nf'
+    include { CAT_CAT                } from '../modules/nf-core/cat/cat/main'
+    ```
+
+#### 1.9.5. Update cowpy to use CAT_CAT output
 
 Finally, update the `cowpy` call to use the output from `CAT_CAT`. Since `cowpy` doesn't accept metadata tuples yet (we'll fix this in the next section), we need to extract just the file:
 
@@ -460,10 +558,10 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
 ```console title="Output"
  N E X T F L O W   ~  version 25.04.3
 
-Launching `./main.nf` [extravagant_volhard] DSL2 - revision: 6aa79210e6
+Launching `./main.nf` [evil_pike] DSL2 - revision: b9e9b3b8de
 
 Input/output options
-  input                     : /workspaces/training/hello-nf-core/nf-core-hello/assets/greetings.csv
+  input                     : /workspaces/training/hello-nf-core/core-hello/assets/greetings.csv
   outdir                    : core-hello-results
 
 Institutional config options
@@ -472,26 +570,26 @@ Institutional config options
 
 Generic options
   validate_params           : false
-  trace_report_suffix       : 2025-10-17_19-51-31
+  trace_report_suffix       : 2025-10-30_18-50-58
 
 Core Nextflow options
-  runName                   : extravagant_volhard
+  runName                   : evil_pike
   containerEngine           : docker
-  launchDir                 : /workspaces/training/hello-nf-core/nf-core-hello
-  workDir                   : /workspaces/training/hello-nf-core/nf-core-hello/work
-  projectDir                : /workspaces/training/hello-nf-core/nf-core-hello
+  launchDir                 : /workspaces/training/hello-nf-core/core-hello
+  workDir                   : /workspaces/training/hello-nf-core/core-hello/work
+  projectDir                : /workspaces/training/hello-nf-core/core-hello
   userName                  : root
   profile                   : test,docker
-  configFiles               : /workspaces/training/hello-nf-core/nf-core-hello/nextflow.config
+  configFiles               : /workspaces/training/hello-nf-core/core-hello/nextflow.config
 
 !! Only displaying parameters that differ from the pipeline defaults !!
 ------------------------------------------------------
 executor >  local (8)
-[60/3ac109] NFCORE_HELLO:HELLO:sayHello (3)       [100%] 3 of 3 ✔
-[58/073077] NFCORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔
-[00/4f3d32] NFCORE_HELLO:HELLO:CAT_CAT (test)     [100%] 1 of 1 ✔
-[98/afab8b] NFCORE_HELLO:HELLO:cowpy              [100%] 1 of 1 ✔
--[nf-core/hello] Pipeline completed successfully-
+[b3/f005fd] CORE_HELLO:HELLO:sayHello (3)       [100%] 3 of 3 ✔
+[08/f923d0] CORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔
+[34/3729a9] CORE_HELLO:HELLO:CAT_CAT (test)     [100%] 1 of 1 ✔
+[24/df918a] CORE_HELLO:HELLO:cowpy              [100%] 1 of 1 ✔
+-[core/hello] Pipeline completed successfully-
 ```
 
 Notice that `CAT_CAT` now appears in the process execution list instead of `collectGreetings`.
@@ -511,4 +609,4 @@ Adapt your local modules to follow nf-core conventions.
 
 ---
 
-In [Part 4](./04_adapt_module.md), we'll adapt your local `cowpy` module to follow nf-core conventions.
+In [Part 4](./04_make_module.md), we'll show you how to make an nf-core module.
