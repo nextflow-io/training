@@ -69,12 +69,18 @@ nf-core pipelines validate two different kinds of input:
 - Validates file paths exist
 - Defined in `nextflow_schema.json`
 
-**Input data validation** validates the contents of input files (like sample sheets or CSV files):
+**Input data validation** validates the structure of sample sheets and manifest files (CSV/TSV files that describe your data):
 
 - Checks column structure and data types
-- Validates file references within the input file
+- Validates that file paths referenced in the sample sheet exist
 - Ensures required fields are present
 - Defined in `assets/schema_input.json`
+
+!!! note "What input data validation does NOT do"
+
+    Input data validation checks the structure of *manifest files* (sample sheets, CSV files), not the contents of your actual data files (FASTQ, BAM, VCF, etc.).
+
+    For large-scale data, validating file contents (like checking BAM integrity) should happen in pipeline processes running on worker nodes, not during the validation stage on the orchestrating machine.
 
 ### When validation occurs
 
