@@ -831,7 +831,7 @@ It must produce the same output files as the script block:
 
 === "After"
 
-    ```groovy title="modules/local/cowpy/main.nf" linenums="27" hl_lines="3 5"
+    ```groovy title="modules/local/cowpy/main.nf" linenums="27" hl_lines="3 6"
     stub:
     def args = task.ext.args ?: ''
     prefix = task.ext.prefix ?: "${meta.id}"
