@@ -190,7 +190,7 @@ params {
 The test profile shows us what has been pre-configured for testing: most notably, the `input` parameter is already set to point to a test dataset, so we don't need to provide our own data.
 
 The comment block at the top also includes a usage example showing how to run with this test profile.
-Notice that it includes `--outdir <OUTDIR>` - this tells us we'll need to specify an output directory when we run the pipeline.
+Notice that it includes `--outdir <OUTDIR>`. This tells us we'll need to specify an output directory when we run the pipeline.
 
 ### 2.2. Run the pipeline
 

@@ -529,8 +529,8 @@ That is going to be defined in the parent workflow, also called the **entrypoint
 
 ### 2.6. Make a dummy entrypoint workflow
 
-Before integrating our composable workflow into the complex nf-core scaffold, let's verify it works correctly with a simple test harness.
-We can make a dummy entrypoint workflow to test the composable workflow in isolation.
+Before integrating our composable workflow into the complex nf-core scaffold, let's verify it works correctly.
+We can make a simple dummy entrypoint workflow to test the composable workflow in isolation.
 
 Create a blank file named `main.nf` in the same`original-hello` directory.
 

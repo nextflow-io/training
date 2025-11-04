@@ -1,15 +1,15 @@
 # Part 4: Make an nf-core module
 
-In this fourth part of the Hello nf-core training course, we show you how to create an nf-core module by learning the key conventions that make modules portable and maintainable.
+In this fourth part of the Hello nf-core training course, we show you how to create an nf-core module by applying the key conventions that make modules portable and maintainable.
 
 The nf-core project provides a command (`nf-core modules create`) that generates properly structured module templates automatically.
-However, for teaching purposes, we're going to **learn by doing**: transforming the local `cowpy` module in your `core-hello` pipeline into an nf-core-style module step-by-step.
-This hands-on approach will help you understand the patterns deeply, making you better equipped to work with nf-core modules in practice.
+However, for teaching purposes, we're going to start by doing it manually: transforming the local `cowpy` module in your `core-hello` pipeline into an nf-core-style module step-by-step.
+After that, we'll show you how to use the template-based module creation to work more efficiently in the future.
 
 We'll apply three essential nf-core patterns incrementally:
 
 1. **Metadata tuples**: Accept and propagate sample metadata through the workflow
-2. **`ext.args`**: Simplify the module interface by handling optional arguments via configuration
+2. **`ext.args`**: Keep the module interface minimal by handling optional tool arguments via configuration rather than as inputs
 3. **`ext.prefix`**: Standardize output file naming with configurable prefixes
 
 Once you understand these patterns, we'll show you how to use the official nf-core tooling to create modules efficiently.
@@ -164,15 +164,20 @@ executor >  local (8)
 
 Now let's address another nf-core pattern: simplifying module interfaces by using `ext.args` for optional command-line arguments.
 
-Currently, our `cowpy` module requires the `character` parameter to be passed as a separate input. While this works, nf-core modules use a different approach for **tool configuration arguments**: instead of adding input parameters for every tool option, they use `ext.args` to pass these via configuration. This keeps the module interface focused on essential data (files, metadata, and any mandatory per-sample parameters), while tool configuration options are handled through `ext.args`.
+Currently, our `cowpy` module requires the `character` parameter to be passed as an input via the process `input:` block.
+This works, but it forces us to provide a value for `character` every time we call the process, even if we're happy with a default.
+For tools with many optional parameters, having to provide values for all of them gets annoying fast.
+
+nf-core modules use a different approach for **tool configuration arguments**: instead of declaring inputs for every tool option, they use `ext.args` to pass these via configuration.
+This keeps the module interface focused on essential data (files, metadata, and any mandatory per-sample parameters), while tool configuration options are handled through `ext.args`.
 
 #### 1.2.1. Understanding ext.args
 
-The `task.ext.args` pattern is an nf-core convention for passing command-line arguments to tools through configuration rather than as process inputs. Instead of adding input parameters for tool options, nf-core modules accept arguments through the `ext.args` configuration directive.
+The `task.ext.args` pattern is an nf-core convention for passing command-line arguments to tools through configuration rather than as process inputs.
 
-!!! note "ext.args can be dynamic"
+!!! note "ext.args can do more"
 
-    While `ext.args` is configured outside the module, it can access metadata to provide sample-specific values using closures. For example: `ext.args = { meta.single_end ? '--single' : '--paired' }`
+    The `ext.args` system has powerful additional capabilities not covered here, including switching argument values dynamically based on metadata. See the [nf-core module specifications](https://nf-co.re/docs/guidelines/components/modules) for more details.
 
 Benefits of this approach:
 
