@@ -204,6 +204,8 @@ We're also going to specify `-profile docker,test`, which by nf-core convention 
     nf-core pipelines are designed to work with containers (Docker, Singularity, etc.) to ensure reproducibility and eliminate software installation issues.
     The profile system allows you to easily switch between different container engines or execution environments.
 
+    For more details on how configuration profiles work in Nextflow, see [Hello Nextflow Part 6: Configuration](../hello_nextflow/06_hello_configuration.md).
+
 Let's try it!
 
 ```bash

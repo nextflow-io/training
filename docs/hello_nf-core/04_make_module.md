@@ -12,8 +12,6 @@ We'll apply three essential nf-core patterns incrementally:
 2. **`ext.args`**: Keep the module interface minimal by handling optional tool arguments via configuration rather than as inputs
 3. **`ext.prefix`**: Standardize output file naming with configurable prefixes
 
-Once you understand these patterns, we'll show you how to use the official nf-core tooling to create modules efficiently.
-
 !!! note
 
     This section assumes you have completed [Part 3: Use an nf-core module](./03_use_module.md) and have integrated the `CAT_CAT` module into your pipeline.
@@ -160,24 +158,30 @@ executor >  local (8)
 -[core/hello] Pipeline completed successfully-
 ```
 
-### 1.2. Simplify the interface with ext.args
+### 1.2. Control module behavior via configuration
 
-Now let's address another nf-core pattern: simplifying module interfaces by using `ext.args` for optional command-line arguments.
+Currently, our `cowpy` module hardcodes two aspects of its behavior:
 
-Currently, our `cowpy` module requires the `character` parameter to be passed as an input via the process `input:` block.
-This works, but it forces us to provide a value for `character` every time we call the process, even if we're happy with a default.
-For tools with many optional parameters, having to provide values for all of them gets annoying fast.
+1. **Tool arguments**: The `character` parameter is passed as a process input, so we must provide a value every time we call the process
+2. **Output publishing**: The module contains a `publishDir` directive, making publishing decisions at the module level
 
-nf-core modules use a different approach for **tool configuration arguments**: instead of declaring inputs for every tool option, they use `ext.args` to pass these via configuration.
-This keeps the module interface focused on essential data (files, metadata, and any mandatory per-sample parameters), while tool configuration options are handled through `ext.args`.
+This makes the module less flexible.
+For tool arguments, we're forced to provide values even when we'd be happy with defaults, which gets cumbersome for tools with many optional parameters.
+For output publishing, we can't control where outputs go at the workflow level - each module makes its own publishing decisions.
 
-#### 1.2.1. Understanding ext.args
+nf-core modules handle both of these differently, controlling tool arguments and output publishing through configuration files.
+This centralizes control at the workflow level and makes modules more reusable.
 
-The `task.ext.args` pattern is an nf-core convention for passing command-line arguments to tools through configuration rather than as process inputs.
+Let's update our module to follow both of these nf-core configuration patterns.
 
-!!! note "ext.args can do more"
+#### 1.2.1. Tool arguments with ext.args
 
-    The `ext.args` system has powerful additional capabilities not covered here, including switching argument values dynamically based on metadata. See the [nf-core module specifications](https://nf-co.re/docs/guidelines/components/modules) for more details.
+For tool arguments, nf-core modules use a special configuration variable called `task.ext.args`.
+Instead of declaring process inputs for every tool option, you write the module to reference `task.ext.args` in its command line.
+This variable can be set in configuration files to pass arguments to the tool.
+When you configure a module to use `task.ext.args`, it checks if the variable is defined and includes those arguments in the tool's command line.
+
+This approach keeps the module interface focused on essential data (files, metadata, and any mandatory per-sample parameters), while tool configuration options are handled separately through configuration.
 
 Benefits of this approach:
 
@@ -187,9 +191,13 @@ Benefits of this approach:
 - **Portability**: Modules can be reused without hardcoded tool options
 - **No workflow changes**: Adding or changing tool options doesn't require updating workflow code
 
+!!! note "ext.args can do more"
+
+    The `ext.args` system has powerful additional capabilities not covered here, including switching argument values dynamically based on metadata. See the [nf-core module specifications](https://nf-co.re/docs/guidelines/components/modules) for more details.
+
 #### 1.2.2. Centralized publishing configuration
 
-Before we update the module to use `ext.args`, let's address an important nf-core convention: **modules should not contain hardcoded `publishDir` directives**.
+For output publishing, nf-core pipelines centralize control at the workflow level by configuring `publishDir` in `conf/modules.config` rather than in individual modules.
 
 Currently, our `cowpy` module has `publishDir 'results', mode: 'copy'` which hardcodes the output location.
 In nf-core pipelines, publishing is instead configured in `conf/modules.config`.

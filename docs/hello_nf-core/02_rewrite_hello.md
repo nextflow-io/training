@@ -292,7 +292,8 @@ If you haven't completed the [Hello Nextflow](../hello_nextflow/index.md) traini
 4. **Collects all uppercase greetings** into a single batch file
 5. **Adds ASCII art** using cowpy to display the collected greetings with a fun character
 
-The workflow uses four Nextflow processes (`sayHello`, `convertToUpper`, `collectGreetings`, and `cowpy`) organized into separate module files, takes an input CSV file of greetings, and produces a whimsical ASCII art output file.
+The workflow takes a CSV file containing greetings, runs four consecutive steps to transform the greetings, and writes them out as part of an ASCII picture.
+These four steps are implemented as modularized Nextflow processes (`sayHello`, `convertToUpper`, `collectGreetings`, and `cowpy`) organized into separate module files.
 
 We provide you with a clean, fully functional copy of the completed Hello Nextflow workflow in the directory `original-hello` along with its modules and the default CSV file it expects to use as input.
 
