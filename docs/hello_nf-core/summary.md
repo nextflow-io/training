@@ -4,7 +4,7 @@ Congratulations on completing the Hello nf-core training course! 🎉
 
 ## Your journey
 
-You started with a simple Nextflow workflow from the Hello Nextflow course—a straightforward pipeline that processed greetings through a few steps and added some ASCII art.
+You started with a simple Nextflow workflow from the Hello Nextflow course: a straightforward pipeline that processed greetings through a few steps and added some ASCII art.
 Through five parts, you've transformed that basic workflow into a production-ready nf-core pipeline.
 
 ### What you built

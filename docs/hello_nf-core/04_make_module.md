@@ -761,7 +761,7 @@ You now know how to create nf-core modules! You learned the three key patterns t
 - **`ext.prefix`** standardizes output file naming
 - **Centralized configuration** in `modules.config` keeps modules reusable
 
-By transforming `cowpy` step-by-step, you developed a deep understanding of these patterns—making you equipped to work with, debug, and create nf-core modules.
+By transforming `cowpy` step-by-step, you developed a deep understanding of these patterns, making you equipped to work with, debug, and create nf-core modules.
 In practice, you'll use `nf-core modules create` to generate properly structured modules with these patterns built in from the start.
 
 Finally, you learned how to contribute modules to the nf-core community, making tools available to researchers worldwide while benefiting from ongoing community maintenance.

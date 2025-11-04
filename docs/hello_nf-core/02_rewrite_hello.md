@@ -280,7 +280,7 @@ Learn how to make a simple workflow composable as a prelude to making it nf-core
 ## 2. Make the original Hello Nextflow workflow composable
 
 Before we can integrate our workflow into the nf-core scaffold, we need to make it **composable**.
-A composable workflow must be called from a parent workflow—it cannot run on its own—which is exactly how the nf-core template is structured.
+A composable workflow must be called from a parent workflow. It cannot run on its own, which is exactly how the nf-core template is structured.
 
 ### What does the Hello Nextflow workflow do?
 
