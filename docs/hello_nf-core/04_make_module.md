@@ -909,7 +909,7 @@ You now know how to create nf-core modules! You learned the four key patterns th
 - **Metadata tuples** track sample information through the workflow
 - **`ext.args`** simplifies module interfaces by handling optional arguments via configuration
 - **`ext.prefix`** standardizes output file naming
-- **Centralized configuration** in `modules.config` keeps modules reusable
+- **Centralized publishing** via `publishDir` configured in `modules.config` rather than hardcoded in modules
 
 By transforming `cowpy` step-by-step, you developed a deep understanding of these patterns, making you equipped to work with, debug, and create nf-core modules.
 In practice, you'll use `nf-core modules create` to generate properly structured modules with these patterns built in from the start.
