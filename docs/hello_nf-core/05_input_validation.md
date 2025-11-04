@@ -145,7 +145,7 @@ This configuration tells nf-schema to:
 
 - **`defaultIgnoreParams`**: Skip validation of complex parameters like `genomes` (set by template developers)
 - **`ignoreParams`**: Skip validation of the `input` parameter's file contents (temporary - we'll remove this in section 2)
-- **`monochromeLogs`**: Control colored output in validation messages
+- **`monochromeLogs`**: Disable colored output in validation messages when set to `true` (controlled by `params.monochrome_logs`)
 
 !!! note "Why ignore the input parameter?"
 
