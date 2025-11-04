@@ -211,7 +211,7 @@ Benefits of this approach:
 
 !!! note "Default publishDir configuration"
 
-    The nf-core template includes a default publishDir configuration that applies to all processes:
+    The nf-core template includes a default `publishDir` configuration that applies to all processes:
 
     ```groovy
     process {
