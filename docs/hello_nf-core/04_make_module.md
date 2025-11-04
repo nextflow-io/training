@@ -695,16 +695,25 @@ process COWPY {
 ```
 
 Notice how all three patterns you applied manually are already there!
-The template also includes several additional nf-core conventions that we didn't cover in the hands-on section:
+The template also includes several additional nf-core conventions.
+Some of these work out of the box, while others are placeholders we'll need to fill in:
+
+**Features that work as-is:**
 
 - **`tag "$meta.id"`**: Adds sample ID to process names in logs for easier tracking
 - **`label 'process_single'`**: Resource label for configuring CPU/memory requirements
 - **`when:` block**: Allows conditional execution via `task.ext.when` configuration
-- **`stub:` block**: Provides a fast mock implementation for testing pipeline logic without running the actual tool
-- **`versions.yml` output**: Captures software version information for reproducibility
-- **Container placeholders**: Template structure for Singularity and Docker containers
 
-These additional conventions make modules more maintainable and provide better visibility into pipeline execution.
+These features are already functional and make modules more maintainable.
+
+**Placeholders we'll customize below:**
+
+- **`input:` and `output:` blocks**: Generic declarations we'll update to match our tool
+- **`script:` block**: Contains a comment where we'll add the cowpy command
+- **`stub:` block**: Template we'll update to produce the correct outputs
+- **Container and environment**: Placeholders we'll fill with package information
+
+The next sections walk through completing these customizations.
 
 #### 2.1.2. Completing the environment and container setup
 
@@ -732,7 +741,131 @@ container "community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273"
 
     Most bioinformatics tools are in Bioconda, but for conda-forge tools, Seqera Containers provides an easy solution for containerization.
 
-Once you've completed the environment setup and filled in the command logic, the module is ready to test!
+#### 2.1.3. Defining inputs and outputs
+
+The generated template includes generic input and output declarations that you'll need to customize for your specific tool.
+Looking back at our manual cowpy module from section 1, we can use that as a guide.
+
+Update the input and output blocks:
+
+=== "After"
+
+    ```groovy title="modules/local/cowpy/main.nf" linenums="8" hl_lines="2 5"
+    input:
+    tuple val(meta), path(input_file)
+
+    output:
+    tuple val(meta), path("${prefix}.txt"), emit: cowpy_output
+    path "versions.yml"           , emit: versions
+    ```
+
+=== "Before"
+
+    ```groovy title="modules/local/cowpy/main.nf" linenums="8" hl_lines="2 5"
+    input:
+    tuple val(meta), path(input)
+
+    output:
+    tuple val(meta), path("*"), emit: output
+    path "versions.yml"           , emit: versions
+    ```
+
+This specifies:
+- The input file parameter name (`input_file` instead of generic `input`)
+- The output filename using the configurable prefix pattern (`${prefix}.txt` instead of wildcard `*`)
+- A descriptive emit name (`cowpy_output` instead of generic `output`)
+
+#### 2.1.4. Writing the script block
+
+The template provides a comment placeholder where you add the actual tool command.
+We can reference our manual module from section 1.3.2 for the command logic:
+
+=== "After"
+
+    ```groovy title="modules/local/cowpy/main.nf" linenums="15" hl_lines="3 6"
+    script:
+    def args = task.ext.args ?: ''
+    prefix = task.ext.prefix ?: "${meta.id}"
+
+    """
+    cat $input_file | cowpy $args > ${prefix}.txt
+
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+        cowpy: \$(cowpy --version)
+    END_VERSIONS
+    """
+    ```
+
+=== "Before"
+
+    ```groovy title="modules/local/cowpy/main.nf" linenums="15" hl_lines="6"
+    script:
+    def args = task.ext.args ?: ''
+    def prefix = task.ext.prefix ?: "${meta.id}"
+
+    """
+    // Add your tool command here
+
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+        cowpy: \$(cowpy --version)
+    END_VERSIONS
+    """
+    ```
+
+Key changes:
+- Change `def prefix` to just `prefix` (without `def`) so it's accessible in the output block
+- Replace the comment with the actual cowpy command that uses both `$args` and `${prefix}.txt`
+
+#### 2.1.5. Implementing the stub block
+
+The stub block provides a fast mock implementation for testing pipeline logic without running the actual tool.
+It must produce the same output files as the script block:
+
+=== "After"
+
+    ```groovy title="modules/local/cowpy/main.nf" linenums="27" hl_lines="3 5"
+    stub:
+    def args = task.ext.args ?: ''
+    prefix = task.ext.prefix ?: "${meta.id}"
+
+    """
+    touch ${prefix}.txt
+
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+        cowpy: \$(cowpy --version)
+    END_VERSIONS
+    """
+    ```
+
+=== "Before"
+
+    ```groovy title="modules/local/cowpy/main.nf" linenums="27" hl_lines="5-6"
+    stub:
+    def args = task.ext.args ?: ''
+    def prefix = task.ext.prefix ?: "${meta.id}"
+
+    """
+    echo $args
+    touch ${prefix}.txt
+
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+        cowpy: \$(cowpy --version)
+    END_VERSIONS
+    """
+    ```
+
+Key changes:
+- Change `def prefix` to just `prefix` to match the script block
+- Remove the `echo $args` line (which was just template placeholder code)
+- The stub creates an empty `${prefix}.txt` file matching what the script block produces
+
+This allows you to test workflow logic and file handling without waiting for the actual tool to run.
+
+Once you've completed the environment setup (section 2.1.2), inputs/outputs (section 2.1.3), script block (section 2.1.4), and stub block (section 2.1.5), the module is ready to test!
 
 ### 2.2. Contributing modules back to nf-core
 
