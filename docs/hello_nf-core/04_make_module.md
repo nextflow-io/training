@@ -379,23 +379,7 @@ The pipeline should run successfully. In the output, look for the cowpy process 
 [bd/0abaf8] CORE_HELLO:HELLO:cowpy              [100%] 1 of 1 ✔
 ```
 
-Now let's verify that the `ext.args` configuration actually passed the character argument to the cowpy command. Use the task hash (the `bd/0abaf8` part) to inspect the `.command.sh` file in the work directory:
-
-```bash
-cat work/bd/0abaf8*/.command.sh
-```
-
-You should see the cowpy command with the `-c cow` argument:
-
-```console title="Output"
-#!/usr/bin/env bash
-...
-cat test.txt | cowpy -c kosh > cowpy-test.txt
-```
-
-This confirms that `task.ext.args` successfully passed the character parameter through the configuration rather than requiring it as a process input.
-
-We can also check the output:
+Let's verify that the `ext.args` configuration worked by checking the output. Use the task hash (the `bd/0abaf8` part) to look at the output file:
 
 ```bash
 cat work/bd/0abaf8*/cowpy-test.txt
@@ -422,6 +406,26 @@ cat work/bd/0abaf8*/cowpy-test.txt
 |                         |
 |                         |
 ```
+
+You should see the ASCII art displayed with the kosh character, confirming that the `ext.args` configuration worked!
+
+!!! note "Optional: Inspect the command file"
+
+    If you want to see exactly how the configuration was applied, you can inspect the `.command.sh` file:
+
+    ```bash
+    cat work/bd/0abaf8*/.command.sh
+    ```
+
+    You'll see the cowpy command with the `-c kosh` argument:
+
+    ```console
+    #!/usr/bin/env bash
+    ...
+    cat test.txt | cowpy -c kosh > cowpy-test.txt
+    ```
+
+    This shows that the `.command.sh` file was generated correctly based on the `ext.args` configuration.
 
 ### 1.3. Add configurable output naming with ext.prefix
 
