@@ -592,7 +592,7 @@ However, you might want to keep it as a reference for understanding the differen
 
 ## 2. Use nf-core tooling to create modules
 
-Now that you understand the nf-core module patterns by applying them manually, let's look at how you'd create modules in practice.
+Now that you've learned the nf-core module patterns by applying them manually, let's look at how you'd create modules in practice.
 The nf-core project provides the `nf-core modules create` command that generates properly structured module templates with all these patterns built in from the start.
 
 ### 2.1. Using nf-core modules create
@@ -605,14 +605,14 @@ For example, to create the `cowpy` module with a minimal template:
 nf-core modules create --empty-template cowpy
 ```
 
-The `--empty-template` flag creates a clean starter template without extra boilerplate, making it easier to see the essential structure.
+The `--empty-template` flag creates a clean starter template without extra code, making it easier to see the essential structure.
 
 The command runs interactively, guiding you through the setup. It automatically looks up tool information from package repositories like Bioconda and bio.tools to pre-populate metadata.
 
-You'll be prompted for:
+You'll be prompted for several configuration options:
 
 - **Author information**: Your GitHub username for attribution
-- **Resource label**: The computational requirements (e.g., `process_single` for lightweight tools, `process_high` for demanding ones)
+- **Resource label**: A predefined set of computational requirements. nf-core provides standard labels like `process_single` for lightweight tools and `process_high` for demanding ones. These labels help manage resource allocation across different execution environments.
 - **Metadata requirement**: Whether the module needs sample-specific information via a `meta` map (usually yes for data processing modules)
 
 The tool handles the complexity of finding package information and setting up the structure, allowing you to focus on implementing the tool's specific logic.
@@ -771,7 +771,7 @@ For detailed instructions, see the [nf-core components tutorial](https://nf-co.r
 
 ## Takeaway
 
-You now know how to create nf-core modules! You learned the three key patterns that make modules portable and maintainable:
+You now know how to create nf-core modules! You learned the four key patterns that make modules portable and maintainable:
 
 - **Metadata tuples** track sample information through the workflow
 - **`ext.args`** simplifies module interfaces by handling optional arguments via configuration
