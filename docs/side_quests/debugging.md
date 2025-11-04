@@ -12,23 +12,13 @@ This guide focuses on debugging techniques and workflows. For comprehensive cove
 
 This guide focuses on **systematic debugging techniques** for Nextflow workflows:
 
-- **Common error patterns**: Understanding the most frequent types of errors and how to identify them
 - **Syntax error debugging**: Using IDE features and Nextflow error messages effectively
 - **Channel debugging**: Diagnosing data flow issues and channel structure problems
 - **Process debugging**: Investigating execution failures and resource issues
-- **Built-in debugging tools**: Leveraging Nextflow's trace, timeline, and reporting features
-- **Advanced debugging techniques**: Using resume, stub running, and other advanced approaches
+- **Built-in debugging tools**: Leveraging Nextflow's preview mode, stub running, and work directories
+- **Systematic approaches**: A four-phase methodology for efficient debugging
 
-You'll encounter various types of errors when developing Nextflow workflows:
-
-- **Syntax errors**: Code that doesn't conform to Nextflow DSL rules
-- **Channel handling errors**: Wrong data shapes or channel operations
-- **Process input/output mismatches**: Incompatible data types between processes
-- **Configuration errors**: Invalid parameters or resource specifications
-- **Resource requirement issues**: Insufficient memory, CPU, or storage
-- **Container and software issues**: Missing dependencies or version conflicts
-
-While these errors can initially seem overwhelming, this guide will teach you systematic approaches to quickly identify, understand, and resolve each type. By the end, you'll have a robust debugging methodology that transforms frustrating error messages into clear roadmaps for solutions.
+By the end, you'll have a robust debugging methodology that transforms frustrating error messages into clear roadmaps for solutions.
 
 ---
 
@@ -160,7 +150,7 @@ process PROCESS_FILES {
 workflow {
 
     // Create input channel
-    input_ch = Channel.of('sample1', 'sample2', 'sample3')
+    input_ch = channel.of('sample1', 'sample2', 'sample3')
 
     // Call the process with the input channel
     PROCESS_FILES(input_ch)
@@ -181,31 +171,61 @@ For the purpose of this example we've left a comment for you to show where the e
 
 Replace the comment with the missing closing brace:
 
-```groovy title="bad_syntax.nf (fixed)" hl_lines="14" linenums="1"
-#!/usr/bin/env nextflow
+=== "After"
 
-process PROCESS_FILES {
-    input:
-    val sample_name
+    ```groovy title="bad_syntax.nf" hl_lines="14" linenums="1"
+    #!/usr/bin/env nextflow
 
-    output:
-    path "${sample_name}_output.txt"
+    process PROCESS_FILES {
+        input:
+        val sample_name
 
-    script:
-    """
-    echo "Processing ${sample_name}" > ${sample_name}_output.txt
-    """
-}  // Add the missing closing brace
+        output:
+        path "${sample_name}_output.txt"
 
-workflow {
+        script:
+        """
+        echo "Processing ${sample_name}" > ${sample_name}_output.txt
+        """
+    }  // Add the missing closing brace
 
-    // Create input channel
-    input_ch = Channel.of('sample1', 'sample2', 'sample3')
+    workflow {
 
-    // Call the process with the input channel
-    PROCESS_FILES(input_ch)
-}
-```
+        // Create input channel
+        input_ch = channel.of('sample1', 'sample2', 'sample3')
+
+        // Call the process with the input channel
+        PROCESS_FILES(input_ch)
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="bad_syntax.nf" hl_lines="14" linenums="1"
+    #!/usr/bin/env nextflow
+
+    process PROCESS_FILES {
+        input:
+        val sample_name
+
+        output:
+        path "${sample_name}_output.txt"
+
+        script:
+        """
+        echo "Processing ${sample_name}" > ${sample_name}_output.txt
+        """
+    // Missing closing brace for the process
+
+    workflow {
+
+        // Create input channel
+        input_ch = channel.of('sample1', 'sample2', 'sample3')
+
+        // Call the process with the input channel
+        PROCESS_FILES(input_ch)
+    }
+    ```
 
 #### Run the pipeline
 
@@ -267,7 +287,7 @@ process PROCESS_FILES {
 workflow {
 
     // Create input channel
-    input_ch = Channel.of('sample1', 'sample2', 'sample3')
+    input_ch = channel.of('sample1', 'sample2', 'sample3')
 
     // Call the process with the input channel
     PROCESS_FILES(input_ch)
@@ -282,31 +302,61 @@ The error message was quite straightforward - we're using `inputs` instead of th
 
 Replace the incorrect keyword with the correct one by referencing [the documentation](https://www.nextflow.io/docs/latest/process.html#):
 
-```groovy title="invalid_process.nf (fixed)" hl_lines="4" linenums="1"
-#!/usr/bin/env nextflow
+=== "After"
 
-process PROCESS_FILES {
-    input:  // Fixed: Changed 'inputs' to 'input'
-    val sample_name
+    ```groovy title="invalid_process.nf" hl_lines="4" linenums="1"
+    #!/usr/bin/env nextflow
 
-    output:
-    path "${sample_name}_output.txt"
+    process PROCESS_FILES {
+        input:  // Fixed: Changed 'inputs' to 'input'
+        val sample_name
 
-    script:
-    """
-    echo "Processing ${sample_name}" > ${sample_name}_output.txt
-    """
-}
+        output:
+        path "${sample_name}_output.txt"
 
-workflow {
+        script:
+        """
+        echo "Processing ${sample_name}" > ${sample_name}_output.txt
+        """
+    }
 
-    // Create input channel
-    input_ch = Channel.of('sample1', 'sample2', 'sample3')
+    workflow {
 
-    // Call the process with the input channel
-    PROCESS_FILES(input_ch)
-}
-```
+        // Create input channel
+        input_ch = channel.of('sample1', 'sample2', 'sample3')
+
+        // Call the process with the input channel
+        PROCESS_FILES(input_ch)
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="invalid_process.nf" hl_lines="4" linenums="1"
+    #!/usr/bin/env nextflow
+
+    process PROCESS_FILES {
+        inputs:  // ERROR: Should be 'input' not 'inputs'
+        val sample_name
+
+        output:
+        path "${sample_name}_output.txt"
+
+        script:
+        """
+        echo "Processing ${sample_name}" > ${sample_name}_output.txt
+        """
+    }
+
+    workflow {
+
+        // Create input channel
+        input_ch = channel.of('sample1', 'sample2', 'sample3')
+
+        // Call the process with the input channel
+        PROCESS_FILES(input_ch)
+    }
+    ```
 
 #### Run the pipeline
 
@@ -374,7 +424,7 @@ process PROCESS_FILES {
 }
 
 workflow {
-    input_ch = Channel.of('sample1', 'sample2', 'sample3')
+    input_ch = channel.of('sample1', 'sample2', 'sample3')
     PROCESS_FILES(input_ch)
 }
 ```
@@ -385,31 +435,62 @@ The error message indicates that the variable is not recognized in the script te
 
 If you get a 'No such variable' error, you can fix it by either defining the variable (by correcting input variable names or editing groovy code before the script), or by removing it from the script block if it's not needed:
 
-```groovy title="no_such_var.nf (fixed)" hl_lines="15-17" linenums="1"
-#!/usr/bin/env nextflow
+=== "After"
 
-process PROCESS_FILES {
-    input:
-    val sample_name
+    ```groovy title="no_such_var.nf" hl_lines="15-17" linenums="1"
+    #!/usr/bin/env nextflow
 
-    output:
-    path "${sample_name}_output.txt"
+    process PROCESS_FILES {
+        input:
+        val sample_name
 
-    script:
-    // Define variables in Groovy code before the script
-    def output_prefix = "${sample_name}_processed"
-    def timestamp = new Date().format("yyyy-MM-dd")
+        output:
+        path "${sample_name}_output.txt"
 
-    """
-    echo "Processing ${sample_name} on ${timestamp}" > ${output_prefix}.txt
-    """  // Removed the line with undefined_var
-}
+        script:
+        // Define variables in Groovy code before the script
+        def output_prefix = "${sample_name}_processed"
+        def timestamp = new Date().format("yyyy-MM-dd")
 
-workflow {
-    input_ch = Channel.of('sample1', 'sample2', 'sample3')
-    PROCESS_FILES(input_ch)
-}
-```
+        """
+        echo "Processing ${sample_name} on ${timestamp}" > ${output_prefix}.txt
+        """  // Removed the line with undefined_var
+    }
+
+    workflow {
+        input_ch = channel.of('sample1', 'sample2', 'sample3')
+        PROCESS_FILES(input_ch)
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="no_such_var.nf" hl_lines="17" linenums="1"
+    #!/usr/bin/env nextflow
+
+    process PROCESS_FILES {
+        input:
+        val sample_name
+
+        output:
+        path "${sample_name}_output.txt"
+
+        script:
+        // Define variables in Groovy code before the script
+        def output_prefix = "${sample_name}_processed"
+        def timestamp = new Date().format("yyyy-MM-dd")
+
+        """
+        echo "Processing ${sample_name} on ${timestamp}" > ${output_prefix}.txt
+        echo "Using undefined variable: ${undefined_var}" >> ${output_prefix}.txt  // ERROR: undefined_var not defined
+        """
+    }
+
+    workflow {
+        input_ch = channel.of('sample1', 'sample2', 'sample3')
+        PROCESS_FILES(input_ch)
+    }
+    ```
 
 #### Run the pipeline
 
@@ -467,28 +548,50 @@ In this example, we're defining the `prefix` variable in Bash, but in a Nexflow 
 
 If you want to use a Bash variable, you must escape the dollar sign like this:
 
-```groovy title="bad_bash_var.nf (fixed)" hl_lines="13" linenums="1"
-#!/usr/bin/env nextflow
+=== "After"
 
-process PROCESS_FILES {
-    input:
-    val sample_name
+    ```groovy title="bad_bash_var.nf" hl_lines="13" linenums="1"
+    #!/usr/bin/env nextflow
 
-    output:
-    path "${sample_name}_output.txt"
+    process PROCESS_FILES {
+        input:
+        val sample_name
 
-    script:
-    """
-    prefix="${sample_name}_output"
-    echo "Processing ${sample_name}" > \${prefix}.txt  # Fixed: Escaped the dollar sign
-    """
-}
+        output:
+        path "${sample_name}_output.txt"
 
-workflow {
-    input_ch = Channel.of('sample1', 'sample2', 'sample3')
-    PROCESS_FILES(input_ch)
-}
-```
+        script:
+        """
+        prefix="${sample_name}_output"
+        echo "Processing ${sample_name}" > \${prefix}.txt  # Fixed: Escaped the dollar sign
+        """
+    }
+
+    workflow {
+        input_ch = channel.of('sample1', 'sample2', 'sample3')
+        PROCESS_FILES(input_ch)
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="bad_bash_var.nf" hl_lines="13" linenums="1"
+    #!/usr/bin/env nextflow
+
+    process PROCESS_FILES {
+        input:
+        val sample_name
+
+        output:
+        path "${sample_name}_output.txt"
+
+        script:
+        """
+        prefix="${sample_name}_output"
+        echo "Processing ${sample_name}" > ${prefix}.txt  # ERROR: ${prefix} is Groovy syntax, not Bash
+        """
+    }
+    ```
 
 This tells Nextflow to interpret this as a Bash variable.
 
@@ -515,9 +618,9 @@ nextflow run bad_bash_var.nf
 
     This approach avoids the need to escape dollar signs and makes the code easier to read and maintain.
 
-### 1.5. Bad practice syntax errors when using the VSCode extension
+### 1.5. Non-Fatal Syntax Warnings
 
-The Nextflow VSCode extension sometimes highlights issues that are not (yet) fatal errors in Nextflow. For example, it's currently possible to define processes outside of the `workflow {` block, but it's not good practice and the extension will highlight this as a potential issue.
+The Nextflow VSCode extension sometimes highlights issues that won't prevent execution but represent bad practices. For example, it's currently possible to define channels outside of the `workflow {}` block, but it's not good practice and the extension will highlight this as a potential issue. These warnings help you write better code even though they're not fatal errors.
 
 #### Run the pipeline
 
@@ -543,7 +646,7 @@ Let's examine `badpractice_syntax.nf` to see what the VSCode extension is warnin
 ```groovy title="badpractice_syntax.nf" hl_lines="3" linenums="1"
 #!/usr/bin/env nextflow
 
-input_ch = Channel.of('sample1', 'sample2', 'sample3')  # WARNING: Channel defined outside workflow
+input_ch = channel.of('sample1', 'sample2', 'sample3')  // WARNING: Channel defined outside workflow
 
 process PROCESS_FILES {
     input:
@@ -577,31 +680,62 @@ This won't prevent execution but could lead to confusion or unexpected behavior 
 
 Follow the VSCode extension's recommendation by moving the channel definition inside the workflow block:
 
-```groovy title="badpractice_syntax.nf (fixed)" hl_lines="21" linenums="1"
-#!/usr/bin/env nextflow
+=== "After"
 
-process PROCESS_FILES {
-    input:
-    val sample_name
+    ```groovy title="badpractice_syntax.nf" hl_lines="21" linenums="1"
+    #!/usr/bin/env nextflow
 
-    output:
-    path "${sample_name}_processed.txt"
+    process PROCESS_FILES {
+        input:
+        val sample_name
 
-    script:
-    // Define variables in Groovy code before the script
-    def output_prefix = "${sample_name}_processed"
-    def timestamp = new Date().format("yyyy-MM-dd")
+        output:
+        path "${sample_name}_processed.txt"
 
-    """
-    echo "Processing ${sample_name} on ${timestamp}" > ${output_prefix}.txt
-    """
-}
+        script:
+        // Define variables in Groovy code before the script
+        def output_prefix = "${sample_name}_processed"
+        def timestamp = new Date().format("yyyy-MM-dd")
 
-workflow {
-    input_ch = Channel.of('sample1', 'sample2', 'sample3')  # Moved inside workflow block
-    PROCESS_FILES(input_ch)
-}
-```
+        """
+        echo "Processing ${sample_name} on ${timestamp}" > ${output_prefix}.txt
+        """
+    }
+
+    workflow {
+        input_ch = channel.of('sample1', 'sample2', 'sample3')  // Moved inside workflow block
+        PROCESS_FILES(input_ch)
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="badpractice_syntax.nf" hl_lines="3" linenums="1"
+    #!/usr/bin/env nextflow
+
+    input_ch = channel.of('sample1', 'sample2', 'sample3')  // WARNING: Channel defined outside workflow
+
+    process PROCESS_FILES {
+        input:
+        val sample_name
+
+        output:
+        path "${sample_name}_processed.txt"
+
+        script:
+        // Define variables in Groovy code before the script
+        def output_prefix = "${sample_name}_processed"
+        def timestamp = new Date().format("yyyy-MM-dd")
+
+        """
+        echo "Processing ${sample_name} on ${timestamp}" > ${output_prefix}.txt
+        """
+    }
+
+    workflow {
+        PROCESS_FILES(input_ch)
+    }
+    ```
 
 #### Run the pipeline
 
@@ -626,6 +760,14 @@ Learn to debug more complex channel structure errors that occur even when syntax
 ## 2. Channel Structure Errors
 
 Channel structure errors are more subtle than syntax errors because the code is syntactically correct, but the data shapes don't match what processes expect. Nextflow will try to run the pipeline, but might find that the number of inputs doesn't match what it expects and fail. These errors typically only appear at runtime and require an understanding of the data flowing through your workflow.
+
+!!! tip "Debugging Channels with `.view()`"
+
+    Throughout this section, remember that you can use the `.view()` operator to inspect channel content at any point in your workflow. This is one of the most powerful debugging tools for understanding channel structure issues. We'll explore this technique in detail in section 2.4, but feel free to use it as you work through the examples.
+
+    ```groovy
+    my_channel.view()  // Shows what's flowing through the channel
+    ```
 
 ### 2.1. Wrong Number of Input Channels
 
@@ -670,8 +812,8 @@ process PROCESS_FILES {
 workflow {
 
     // Create two separate channels
-    samples_ch = Channel.of('sample1', 'sample2', 'sample3')
-    files_ch = Channel.of('file1.txt', 'file2.txt', 'file3.txt')
+    samples_ch = channel.of('sample1', 'sample2', 'sample3')
+    files_ch = channel.of('file1.txt', 'file2.txt', 'file3.txt')
 
     // ERROR: Passing 2 channels but process expects only 1
     PROCESS_FILES(samples_ch, files_ch)
@@ -686,32 +828,63 @@ You should see the mismatched `PROCESS_FILES` call, supplying multiple input cha
 
 For this specific example, the process expects a single channel and doesn't require the second channel, so we can fix it by passing only the `samples_ch` channel:
 
-```groovy title="bad_number_inputs.nf (fixed)" hl_lines="23" linenums="1"
-#!/usr/bin/env nextflow
+=== "After"
 
-process PROCESS_FILES {
-    input:
-        val sample_name  // Process expects only 1 input
+    ```groovy title="bad_number_inputs.nf" hl_lines="23" linenums="1"
+    #!/usr/bin/env nextflow
 
-    output:
-        path "${sample_name}_output.txt"
+    process PROCESS_FILES {
+        input:
+            val sample_name  // Process expects only 1 input
 
-    script:
-    """
-    echo "Processing ${sample_name}" > ${sample_name}_output.txt
-    """
-}
+        output:
+            path "${sample_name}_output.txt"
 
-workflow {
+        script:
+        """
+        echo "Processing ${sample_name}" > ${sample_name}_output.txt
+        """
+    }
 
-    // Create two separate channels
-    samples_ch = Channel.of('sample1', 'sample2', 'sample3')
-    files_ch = Channel.of('file1.txt', 'file2.txt', 'file3.txt')
+    workflow {
 
-    // Fixed: Pass only the channel the process expects
-    PROCESS_FILES(samples_ch)
-}
-```
+        // Create two separate channels
+        samples_ch = channel.of('sample1', 'sample2', 'sample3')
+        files_ch = channel.of('file1.txt', 'file2.txt', 'file3.txt')
+
+        // Fixed: Pass only the channel the process expects
+        PROCESS_FILES(samples_ch)
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="bad_number_inputs.nf" hl_lines="5 23" linenums="1"
+    #!/usr/bin/env nextflow
+
+    process PROCESS_FILES {
+        input:
+            val sample_name  // Process expects only 1 input
+
+        output:
+            path "${sample_name}_output.txt"
+
+        script:
+        """
+        echo "Processing ${sample_name}" > ${sample_name}_output.txt
+        """
+    }
+
+    workflow {
+
+        // Create two separate channels
+        samples_ch = channel.of('sample1', 'sample2', 'sample3')
+        files_ch = channel.of('file1.txt', 'file2.txt', 'file3.txt')
+
+        // ERROR: Passing 2 channels but process expects only 1
+        PROCESS_FILES(samples_ch, files_ch)
+    }
+    ```
 
 #### Run the pipeline
 
@@ -721,7 +894,7 @@ nextflow run bad_number_inputs.nf
 
 More commonly than this example, you might add additional inputs to a process and forget to update the workflow call accordingly, which can lead to this type of error. Fortunately, this is one of the easier-to-understand and fix errors, as the error message is quite clear about the mismatch.
 
-### 2.2. Mismatched channel arity
+### 2.2. Channel Exhaustion (Process Runs Fewer Times Than Expected)
 
 Some channel structure errors are much more subtle and produce no errors at all. Probably the most common of these reflects a challenge that new Nextflow users face in understanding that queue channels can be exhausted and run out of items, meaning the workflow finishes prematurely.
 
@@ -769,8 +942,8 @@ process PROCESS_FILES {
 
 workflow {
 
-    reference_ch = Channel.of('baseline_reference')
-    input_ch = Channel.of('sample1', 'sample2', 'sample3')
+    reference_ch = channel.of('baseline_reference')
+    input_ch = channel.of('sample1', 'sample2', 'sample3')
 
     PROCESS_FILES(reference_ch, input_ch)
 }
@@ -786,34 +959,34 @@ There are a couple of ways to address this depending on how many files are affec
 
 **Option 1**: You have a single reference file that you are re-using a lot. You can simply create a value channel type, which can be used over and over again. There are three ways to do this:
 
-**1.** Use `Channel.value()`:
+**1a** Use `channel.value()`:
 
 ```groovy title="exhausted.nf (fixed - Option 1a)" hl_lines="2" linenums="21"
 workflow {
-    reference_ch = Channel.value('baseline_reference')  // Value channel can be reused
-    input_ch = Channel.of('sample1', 'sample2', 'sample3')
+    reference_ch = channel.value('baseline_reference')  // Value channel can be reused
+    input_ch = channel.of('sample1', 'sample2', 'sample3')
 
     PROCESS_FILES(reference_ch, input_ch)
 }
 ```
 
-**2.** Use the `first()` [operator](https://www.nextflow.io/docs/latest/reference/operator.html#first):
+**1b** Use the `first()` [operator](https://www.nextflow.io/docs/latest/reference/operator.html#first):
 
 ```groovy title="exhausted.nf (fixed - Option 1b)" hl_lines="2" linenums="21"
 workflow {
-    reference_ch = Channel.of('baseline_reference').first()  // Convert to value channel
-    input_ch = Channel.of('sample1', 'sample2', 'sample3')
+    reference_ch = channel.of('baseline_reference').first()  // Convert to value channel
+    input_ch = channel.of('sample1', 'sample2', 'sample3')
 
     PROCESS_FILES(reference_ch, input_ch)
 }
 ```
 
-**3.** Use the `collect()` [operator](https://www.nextflow.io/docs/latest/reference/operator.html#collect):
+**1c.** Use the `collect()` [operator](https://www.nextflow.io/docs/latest/reference/operator.html#collect):
 
 ```groovy title="exhausted.nf (fixed - Option 1c)" hl_lines="2" linenums="21"
 workflow {
-    reference_ch = Channel.of('baseline_reference').collect()  // Convert to value channel
-    input_ch = Channel.of('sample1', 'sample2', 'sample3')
+    reference_ch = channel.of('baseline_reference').collect()  // Convert to value channel
+    input_ch = channel.of('sample1', 'sample2', 'sample3')
 
     PROCESS_FILES(reference_ch, input_ch)
 }
@@ -823,17 +996,27 @@ workflow {
 
 ```groovy title="exhausted.nf (fixed - Option 2)" hl_lines="4" linenums="21"
 workflow {
-    reference_ch = Channel.of('baseline_reference')
-    input_ch = Channel.of('sample1', 'sample2', 'sample3')
+    reference_ch = channel.of('baseline_reference','other_reference')
+    input_ch = channel.of('sample1', 'sample2', 'sample3')
     combined_ch = reference_ch.combine(input_ch)  // Creates cartesian product
 
     PROCESS_FILES(combined_ch)
 }
 ```
 
-`.combine()` generates a cartesian product of the two channels, so each item in `reference_ch` will be paired with each item in `input_ch`. This allows the process to run for each sample while still using the reference.
+The `.combine()` operator generates a cartesian product of the two channels, so each item in `reference_ch` will be paired with each item in `input_ch`. This allows the process to run for each sample while still using the reference.
 
-> Note: This requires the process input to be adjusted and therefore is not suitable in all situations.
+This requires the process input to be adjusted. In our example, the start of the process definition would need to be adjusted as follows:
+
+```groovy title="exhausted.nf (fixed - Option 2)" hl_lines="5" linenums="1"
+#!/usr/bin/env nextflow
+
+process PROCESS_FILES {
+    input:
+        tuple val(reference), val(sample_name)
+```
+
+This approach may not be suitable in all situations.
 
 #### Run the pipeline
 
@@ -910,7 +1093,7 @@ process PROCESS_FILES {
 workflow {
 
     // Channel emits tuples, but process expects single values
-    input_ch = Channel.of(
+    input_ch = channel.of(
       ['sample1', 'file1.txt'],
       ['sample2', 'file2.txt'],
       ['sample3', 'file3.txt']
@@ -925,48 +1108,99 @@ You can see that we're generating a channel composed of tuples: `['sample1', 'fi
 
 To fix this, if the process requires both inputs we could adjust the process to accept a tuple:
 
-```groovy title="bad_channel_shape.nf (fixed - Option 1)" hl_lines="5"  linenums="1"
-#!/usr/bin/env nextflow
+=== "Option 1: Accept tuple in process"
 
-process PROCESS_FILES {
-    input:
-        tuple val(sample_name), path(file_name)  // Fixed: Accept tuple
+    === "After"
 
-    output:
-        path "${sample_name}_output.txt"
+        ```groovy title="bad_channel_shape.nf" hl_lines="5"  linenums="1"
+        #!/usr/bin/env nextflow
 
-    script:
-    """
-    echo "Processing ${sample_name}" > ${sample_name}_output.txt
-    """
-}
+        process PROCESS_FILES {
+            input:
+                tuple val(sample_name), path(file_name)  // Fixed: Accept tuple
 
-workflow {
+            output:
+                path "${sample_name}_output.txt"
 
-    // Channel emits tuples, but process expects single values
-    input_ch = Channel.of(
-      ['sample1', 'file1.txt'],
-      ['sample2', 'file2.txt'],
-      ['sample3', 'file3.txt']
-    )
-    PROCESS_FILES(input_ch)
-}
-```
+            script:
+            """
+            echo "Processing ${sample_name}" > ${sample_name}_output.txt
+            """
+        }
 
-Or if, as in this example the process only needs the sample name, we can extract the first element of the tuple before passing it to the process:
+        workflow {
 
-```groovy title="bad_channel_shape.nf (fixed - Option 2)" hl_lines="24" linenums="31"
-workflow {
+            // Channel emits tuples, but process expects single values
+            input_ch = channel.of(
+              ['sample1', 'file1.txt'],
+              ['sample2', 'file2.txt'],
+              ['sample3', 'file3.txt']
+            )
+            PROCESS_FILES(input_ch)
+        }
+        ```
 
-    // Channel emits tuples, but process expects single values
-    input_ch = Channel.of(
-      ['sample1', 'file1.txt'],
-      ['sample2', 'file2.txt'],
-      ['sample3', 'file3.txt']
-    )
-    PROCESS_FILES(input_ch.map { it[0] })  // Fixed: Extract first element
-}
-```
+    === "Before"
+
+        ```groovy title="bad_channel_shape.nf" hl_lines="5" linenums="1"
+        #!/usr/bin/env nextflow
+
+        process PROCESS_FILES {
+            input:
+                val sample_name  // Expects single value, gets tuple
+
+            output:
+                path "${sample_name}_output.txt"
+
+            script:
+            """
+            echo "Processing ${sample_name}" > ${sample_name}_output.txt
+            """
+        }
+
+        workflow {
+
+            // Channel emits tuples, but process expects single values
+            input_ch = channel.of(
+              ['sample1', 'file1.txt'],
+              ['sample2', 'file2.txt'],
+              ['sample3', 'file3.txt']
+            )
+            PROCESS_FILES(input_ch)
+        }
+        ```
+
+=== "Option 2: Extract first element"
+
+    === "After"
+
+        ```groovy title="bad_channel_shape.nf" hl_lines="9" linenums="16"
+        workflow {
+
+            // Channel emits tuples, but process expects single values
+            input_ch = channel.of(
+              ['sample1', 'file1.txt'],
+              ['sample2', 'file2.txt'],
+              ['sample3', 'file3.txt']
+            )
+            PROCESS_FILES(input_ch.map { it[0] })  // Fixed: Extract first element
+        }
+        ```
+
+    === "Before"
+
+        ```groovy title="bad_channel_shape.nf" hl_lines="9" linenums="16"
+        workflow {
+
+            // Channel emits tuples, but process expects single values
+            input_ch = channel.of(
+              ['sample1', 'file1.txt'],
+              ['sample2', 'file2.txt'],
+              ['sample3', 'file3.txt']
+            )
+            PROCESS_FILES(input_ch)
+        }
+        ```
 
 #### Run the pipeline
 
@@ -1015,7 +1249,7 @@ Let's examine `bad_channel_shape_viewed.nf` to see how `.view()` is used:
 workflow {
 
     // Channel emits tuples, but process expects single values
-    input_ch = Channel.of(
+    input_ch = channel.of(
       ['sample1', 'file1.txt'],
       ['sample2', 'file2.txt'],
       ['sample3', 'file3.txt']
@@ -1036,7 +1270,7 @@ To save you from using `.view()` operations excessively in future to understand 
 workflow {
 
     // Channel emits tuples, but process expects single values
-    input_ch = Channel.of(
+    input_ch = channel.of(
             ['sample1', 'file1.txt'],
             ['sample2', 'file2.txt'],
             ['sample3', 'file3.txt'],
@@ -1134,7 +1368,7 @@ process PROCESS_FILES {
 
 You should see that there is a mismatch between the output file name in the `output:` block, and the one used in the script. This mismatch causes the process to fail. If you encounter this sort of error, go back and check that the outputs match between your process definition and your output block.
 
-If the problem still isn't clear, check the process directory itself to identify the actual output files created. You can do this by looking in the work directory for the process:
+If the problem still isn't clear, check the work directory itself to identify the actual output files created:
 
 ```bash
 ❯ ls -h work/02/9604d49fb8200a74d737c72a6c98ed
@@ -1147,20 +1381,39 @@ For this example this would highlight to us that a `_output` suffix is being inc
 
 Fix the mismatch by making the output filename consistent:
 
-```groovy title="missing_output.nf (fixed)" hl_lines="6 10" linenums="3"
-process PROCESS_FILES {
-    input:
-    val sample_name
+=== "After"
 
-    output:
-    path "${sample_name}_output.txt"  // Fixed: Match the script output
+    ```groovy title="missing_output.nf" hl_lines="6 10" linenums="3"
+    process PROCESS_FILES {
+        input:
+        val sample_name
 
-    script:
-    """
-    echo "Processing ${sample_name}" > ${sample_name}_output.txt
-    """
-}
-```
+        output:
+        path "${sample_name}_output.txt"  // Fixed: Match the script output
+
+        script:
+        """
+        echo "Processing ${sample_name}" > ${sample_name}_output.txt
+        """
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="missing_output.nf" hl_lines="6 10" linenums="3"
+    process PROCESS_FILES {
+        input:
+        val sample_name
+
+        output:
+        path "${sample_name}.txt"  // Expects: sample3.txt
+
+        script:
+        """
+        echo "Processing ${sample_name}" > ${sample_name}_output.txt  // Creates: sample3_output.txt
+        """
+    }
+    ```
 
 #### Run the pipeline
 
@@ -1203,7 +1456,7 @@ Command error:
 Work dir:
   /workspaces/training/side-quests/debugging/work/82/42a5bfb60c9c6ee63ebdbc2d51aa6e
 
-Tip: you can try to figure out what's wrong by changing to the process work dir and showing the script file named `.command.sh`
+Tip: you can try to figure out what's wrong by changing to the process work directory and showing the script file named `.command.sh`
 
  -- Check '.nextflow.log' file for details
 ```
@@ -1300,24 +1553,47 @@ We know the process will take longer than a second (we've added a sleep in there
 
 Increase the time limit to a realistic value:
 
-```groovy title="bad_resources.nf (fixed)" hl_lines="3" linenums="3"
-process PROCESS_FILES {
+=== "After"
 
-    time '100 s'  // Fixed: Realistic time limit
+    ```groovy title="bad_resources.nf" hl_lines="3" linenums="3"
+    process PROCESS_FILES {
 
-    input:
-    val sample_name
+        time '100 s'  // Fixed: Realistic time limit
 
-    output:
-    path "${sample_name}_output.txt"
+        input:
+        val sample_name
 
-    script:
-    """
-    sleep 1
-    cowpy ${sample_name} > ${sample_name}_output.txt
-    """
-}
-```
+        output:
+        path "${sample_name}_output.txt"
+
+        script:
+        """
+        sleep 1
+        cowpy ${sample_name} > ${sample_name}_output.txt
+        """
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="bad_resources.nf" hl_lines="3" linenums="3"
+    process PROCESS_FILES {
+
+        time '1 ms'  // ERROR: Unrealistic time limit
+
+        input:
+        val sample_name
+
+        output:
+        path "${sample_name}_output.txt"
+
+        script:
+        """
+        sleep 1  // Takes 1 second, but time limit is 1ms
+        cowpy ${sample_name} > ${sample_name}_output.txt
+        """
+    }
+    ```
 
 #### Run the pipeline
 
@@ -1449,18 +1725,9 @@ In our example earlier, this confirmed to us that while our expected `sample3.tx
 sample3_output.txt
 ```
 
-#### Systematic Process Debugging Approach
-
-1. **Check the error message** - it often points directly to the problem
-2. **Examine `.command.sh`** - verify the command structure and variables
-3. **Check `.command.err`** - understand the specific error
-4. **Verify file existence** - ensure inputs/outputs are where expected
-5. **Test the command manually** - run `.command.run` in the work directory
-6. **Check resource limits** - verify memory/time allocations are appropriate
-
 ### Takeaway
 
-Process debugging requires systematic examination of work directories and understanding of error patterns. Key techniques include inspecting `.command.sh` for variable substitution issues, checking `.command.err` for specific error messages, and verifying file existence to identify naming mismatches. Exit codes like 127 (command not found) and 137 (process killed) provide immediate diagnostic clues.
+Process debugging requires examining work directories to understand what went wrong. Key files include `.command.sh` (the executed script), `.command.err` (error messages), and `.command.out` (standard output). Exit codes like 127 (command not found) and 137 (process killed) provide immediate diagnostic clues about the type of failure.
 
 ### What's next?
 
@@ -1471,16 +1738,6 @@ Learn about Nextflow's built-in debugging tools and systematic approaches to tro
 ## 4. Built-in Debugging Tools and Advanced Techniques
 
 Nextflow provides several powerful built-in tools for debugging and analyzing workflow execution. These tools help you understand what went wrong, where it went wrong, and how to fix it efficiently.
-
-In [Hello Nextflow](../hello_nextflow/01_hello_world.md) you already saw the log and error files that nextflow produces for each task in the work directory:
-
-- **`.command.sh`**: The exact script that was executed
-- **`.command.run`**: The command wrapper used to run the task. This includes environment variables and other settings, for example the container image used.
-- **`.command.err`**: Standard error output (most important for debugging)
-- **`.command.out`**: Standard output from the command
-- **`.command.log`**: Nextflow's execution log
-
-We will use these files to debug the workflow.
 
 ### 4.1. Real-time Process Output
 
@@ -1617,7 +1874,7 @@ Command error:
 Work dir:
   /workspaces/training/side-quests/debugging/work/82/42a5bfb60c9c6ee63ebdbc2d51aa6e
 
-Tip: you can try to figure out what's wrong by changing to the process work dir and showing the script file named `.command.sh`
+Tip: you can try to figure out what's wrong by changing to the process work directory and showing the script file named `.command.sh`
 
  -- Check '.nextflow.log' file for details
 ```
@@ -1666,31 +1923,7 @@ The `touch` command we're using here doesn't depend on any software or appropria
 - Parameter propagation
 - Workflow logic without software dependencies
 
-### 4.4. Note on resume and Incremental Debugging
-
-Once you've identified a problem using the techniques above, you need an efficient way to test your fixes without wasting time re-running successful parts of your workflow. This is where Nextflow's resume functionality becomes invaluable for debugging.
-
-You will have encountered `-resume` if you've worked through [Hello Nextflow](../hello_nextflow/), and it's important that you make good use of it when debugging to save yourself waiting while the proccesses before your problem process run.
-
-**Resume debugging strategy:**
-
-1. Run workflow until failure
-2. Examine work directory for failed task
-3. Fix the specific issue
-4. Resume to test only the fix
-5. Repeat until workflow completes
-
-### 4.5. Note on resource and Memory Debugging
-
-Not all workflow failures are due to syntax or logic errors. Many stem from system resource constraints - processes that run out of memory, exceed time limits, or compete for system resources. These resource problems often manifest as specific exit codes that give you immediate clues about what went wrong:
-
-- **Exit 130**: Process killed (often CTRL+C)
-- **Exit 137**: Process killed by system (usually out of memory)
-- **Exit 127**: Command not found
-
-When a Nextflow pipeline fails, check whether the error originates from Nextflow itself or from the underlying tool. Nextflow propagates host system errors directly, so exit codes and error messages from your processes will appear in the Nextflow output.
-
-### 4.6. Systematic Debugging Approach
+### 4.4. Systematic Debugging Approach
 
 Now that you've learned individual debugging techniques - from trace files and work directories to preview mode, stub running, and resource monitoring - let's tie them together into a systematic methodology. Having a structured approach prevents you from getting overwhelmed by complex errors and ensures you don't miss important clues.
 
@@ -1724,6 +1957,20 @@ This methodology combines all the tools we've covered into an efficient workflow
 2. Test with resume: `nextflow run workflow.nf -resume`
 3. Verify complete workflow execution
 
+!!! tip "Using Resume for Efficient Debugging"
+
+    Once you've identified a problem, you need an efficient way to test your fixes without wasting time re-running successful parts of your workflow. Nextflow's `-resume` functionality is invaluable for debugging.
+
+    You will have encountered `-resume` if you've worked through [Hello Nextflow](../hello_nextflow/), and it's important that you make good use of it when debugging to save yourself waiting while the processes before your problem process run.
+
+    **Resume debugging strategy:**
+
+    1. Run workflow until failure
+    2. Examine work directory for failed task
+    3. Fix the specific issue
+    4. Resume to test only the fix
+    5. Repeat until workflow completes
+
 #### Debugging Configuration Profile
 
 To make this systematic approach even more efficient, you can create a dedicated debugging configuration that automatically enables all the tools you need:
@@ -1750,7 +1997,7 @@ Then you can run the pipeline with this profile enabled:
 nextflow run workflow.nf -profile debug
 ```
 
-### 4.7. Practical Debugging Exercise
+### 4.5. Practical Debugging Exercise
 
 Now it's time to put the systematic debugging approach into practice. The workflow `buggy_workflow.nf` contains several common errors that represent the types of issues you'll encounter in real-world development.
 
@@ -1916,7 +2163,7 @@ Now it's time to put the systematic debugging approach into practice. The workfl
 
         **Error 10: Output File Name Mismatch**
         ```groovy linenums="88"
-        file_ch = Channel.fromPath("*.txt") // Error: attempting to take input from the pwd rather than a process
+        file_ch = channel.fromPath("*.txt") // Error: attempting to take input from the pwd rather than a process
         handleFiles(file_ch)
         ```
         **Fix:** Take the output from the previous process
@@ -2034,10 +2281,6 @@ Now it's time to put the systematic debugging approach into practice. The workfl
 3. **Understand data flow** - channel structure errors are often the most subtle
 4. **Check work directories** - when processes fail, the logs tell you exactly what went wrong
 
-### Takeaway
-
-Effective Nextflow debugging combines understanding error messages, using built-in tools (trace files, work directories, preview mode), and applying systematic approaches. Practice with these examples builds the experience needed to debug real-world workflow issues efficiently.
-
 ---
 
 ## Summary
@@ -2065,20 +2308,30 @@ In this side quest, we've learned:
 - Investigating work directories and command files
 - Configuring resources appropriately
 
-**4.How to use Nextflow's built-in debugging tools**:
+**4. How to use Nextflow's built-in debugging tools**:
 
 - Leveraging preview mode and real-time debugging
 - Implementing stub running for logic testing
 - Applying resume for efficient debugging cycles
 - Following a four-phase systematic debugging methodology
 
-Debugging is a critical part of pipeline development that helps ensure:
+---
 
-- Your code works as expected
-- Problems can be identified and fixed quickly
-- Workflows run reliably in different environments
-- Development time is spent efficiently
-- Issues are resolved systematically rather than through trial and error
+!!! tip "Quick Debugging Reference"
+
+    **Syntax errors?** → Check VSCode warnings, run `nextflow run workflow.nf -preview`
+
+    **Channel issues?** → Use `.view()` to inspect content: `my_channel.view()`
+
+    **Process failures?** → Check work directory files:
+
+    - `.command.sh` - the executed script
+    - `.command.err` - error messages
+    - `.exitcode` - exit status (127 = command not found, 137 = killed)
+
+    **Mysterious behavior?** → Run with `-stub-run` to test workflow logic
+
+    **Made fixes?** → Use `-resume` to save time testing: `nextflow run workflow.nf -resume`
 
 ### What's next?
 

@@ -24,7 +24,7 @@ process ANALYZE_READS {
 workflow {
     // Create a file object from a string path
 
-    ch_fastq = Channel.fromFilePairs('data/sampleA_rep1_normal_R{1,2}_001.fastq.gz')
+    ch_fastq = channel.fromFilePairs('data/sampleA_rep1_normal_R{1,2}_001.fastq.gz')
     ch_samples = ch_fastq.map { id, fastqs ->
         def (sample, replicate, type, readNum) = id.tokenize('_')
         [

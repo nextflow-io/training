@@ -20,7 +20,7 @@ First, we create the scaffold for the new pipeline.
 
 !!! note
 
-    Make sure you are in the `hello_nf-core` directory in your terminal.
+    Make sure you are in the `hello-nf-core` directory in your terminal.
 
 ### 1.1. Run the template-based pipeline creation tool
 
@@ -72,7 +72,7 @@ Once the TUI closes, you should see the following console output.
     | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                           `._,._,'
 
-    nf-core/tools version 3.2.1 - https://nf-co.re
+    nf-core/tools version 3.4.1 - https://nf-co.re
 
 
 INFO     Launching interactive nf-core pipeline creation tool.
@@ -225,7 +225,7 @@ workflow HELLO {
     ch_samplesheet // channel: samplesheet read in from --input
     main:
 
-    ch_versions = Channel.empty()
+    ch_versions = channel.empty()
 
     //
     // Collate and save software versions
@@ -259,6 +259,10 @@ Compared to a basic Nextflow workflow like the one developed in Hello Nextflow, 
 - Outputs are declared using the `emit:` keyword
 
 These are optional features of Nextflow that make the workflow **composable**, meaning that it can be called from within another workflow.
+
+!!! note "Composable workflows in depth"
+
+    The [Workflows of Workflows](../side_quests/workflows_of_workflows) side quest explores workflow composition in much greater depth, including how to compose multiple workflows together and manage complex data flows between them. We're introducing composability here because it's a fundamental requirement of the nf-core template architecture, which uses nested workflows to organize pipeline initialization, the main analysis workflow, and completion tasks into separate, reusable components.
 
 We are going to need to plug the relevant logic from our workflow of interest into that structure.
 The first step for that is to make our original workflow composable.
@@ -332,7 +336,7 @@ include { cowpy } from './modules/cowpy.nf'
 workflow {
 
   // create a channel for inputs from a CSV file
-  greeting_ch = Channel.fromPath(params.greeting)
+  greeting_ch = channel.fromPath(params.greeting)
                       .splitCsv()
                       .map { line -> line[0] }
 
@@ -389,7 +393,7 @@ Now, replace the channel construction with a simple `take` statement declaring e
 
     ```groovy title="original-hello/hello.nf" linenums="18"
         // create a channel for inputs from a CSV file
-        greeting_ch = Channel.fromPath(params.greeting)
+        greeting_ch = channel.fromPath(params.greeting)
                             .splitCsv()
                             .map { line -> line[0] }
     ```
@@ -529,7 +533,7 @@ params.greeting = 'greetings.csv'
 
 workflow {
   // create a channel for inputs from a CSV file
-  greeting_ch = Channel.fromPath(params.greeting)
+  greeting_ch = channel.fromPath(params.greeting)
                       .splitCsv()
                       .map { line -> line[0] }
 
@@ -629,7 +633,7 @@ workflow HELLO {
     ch_samplesheet // channel: samplesheet read in from --input
     main:
 
-    ch_versions = Channel.empty()
+    ch_versions = channel.empty()
 
     //
     // Collate and save software versions
@@ -801,7 +805,7 @@ There is already some code in there that has to do with capturing the versions o
         // generate ASCII art of the greetings with cowpy
         cowpy(collectGreetings.out.outfile, params.character)
 
-        ch_versions = Channel.empty()
+        ch_versions = channel.empty()
 
         //
         // Collate and save software versions
@@ -821,7 +825,7 @@ There is already some code in there that has to do with capturing the versions o
     ```groovy title="core-hello/workflows/hello.nf" linenums="23"
         main:
 
-        ch_versions = Channel.empty()
+        ch_versions = channel.empty()
 
         //
         // Collate and save software versions
@@ -1032,13 +1036,13 @@ It is quite complex because it does a lot of parsing and validation work.
     The syntax above is a little different from what we've used previously, but basically this:
 
     ```groovy
-    Channel.<...>.set { ch_samplesheet }
+    channel.<...>.set { ch_samplesheet }
     ```
 
     is equivalent to this:
 
     ```groovy
-    ch_samplesheet = Channel.<...>
+    ch_samplesheet = channel.<...>
     ```
 
 ### 4.2. Replace the templated input channel code
@@ -1049,7 +1053,7 @@ As a reminder, this is what the channel construction looked like (as seen in the
 
 ```groovy title="solutions/composable-hello/main.nf" linenums="10" hl_lines="4"
     // create a channel for inputs from a CSV file
-    greeting_ch = Channel.fromPath(params.greeting)
+    greeting_ch = channel.fromPath(params.greeting)
                         .splitCsv()
                         .map { line -> line[0] }
 ```
@@ -1062,7 +1066,7 @@ So we just need to plug that into the initialisation workflow, with minor change
         //
         // Create channel from input file provided through params.input
         //
-        ch_samplesheet = Channel.fromPath(params.input)
+        ch_samplesheet = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
 
@@ -1133,7 +1137,7 @@ Now we can update the `test.config` file as follows:
             config_profile_description = 'Minimal test dataset to check pipeline function'
 
             // Input data
-            input  = 'core-hello/assets/greetings.csv'
+            input  = "${projectDir}/assets/greetings.csv"
 
             // Other parameters
             batch     = 'test'
@@ -1143,7 +1147,7 @@ Now we can update the `test.config` file as follows:
 
 === "Before"
 
-    ```groovy title="core-hello/config/test.config" linenums="21"
+    ```groovy title="core-hello/conf/test.config" linenums="21"
         params {
             config_profile_name        = 'Test profile'
             config_profile_description = 'Minimal test dataset to check pipeline function'
@@ -1155,11 +1159,17 @@ Now we can update the `test.config` file as follows:
         }
     ```
 
+Key points:
+
+- **Using `${projectDir}`**: This is a Nextflow implicit variable that points to the directory where the main workflow script is located (the pipeline root). Using it ensures the path works regardless of where the pipeline is run from.
+- **Absolute paths**: By using `${projectDir}`, we create an absolute path, which is important for test data that ships with the pipeline.
+- **Test data location**: nf-core pipelines typically store test data in the `assets/` directory within the pipeline repository for small test files, or reference external test datasets for larger files.
+
 And while we're at it, let's lower the default resource limitations:
 
 === "After"
 
-    ```groovy title="core-hello/config/test.config" linenums="13"
+    ```groovy title="core-hello/conf/test.config" linenums="13"
     process {
         resourceLimits = [
             cpus: 2,
@@ -1171,7 +1181,7 @@ And while we're at it, let's lower the default resource limitations:
 
 === "Before"
 
-    ```groovy title="core-hello/config/test.config" linenums="13"
+    ```groovy title="core-hello/conf/test.config" linenums="13"
     process {
         resourceLimits = [
             cpus: 4,
@@ -1295,4 +1305,4 @@ You know how to convert a regular Nextflow pipeline into an nf-core style pipeli
 
 ### What's next?
 
-Take a big break, that was hard work! Your brain deserves to chill out and you could probably use some hydration and a bit of stretching. When you're ready, move on to the next section to learn how to add an nf-core module to an existing nf-core style pipeline. (COMING SOON)
+Take a break, that was hard work! When you're ready, move on to [Part 3: Use an nf-core module](./03_use_module.md) to learn how to leverage community-maintained modules from the nf-core/modules repository.

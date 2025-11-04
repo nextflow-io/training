@@ -18,7 +18,7 @@ workflow HELLO {
     ch_samplesheet // channel: samplesheet read in from --input
     main:
 
-    ch_versions = Channel.empty()
+    ch_versions = channel.empty()
 
     //
     // Collate and save software versions

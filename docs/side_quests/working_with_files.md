@@ -9,7 +9,7 @@ By the end of this side quest, you'll be able to:
 - Create Path objects from file path strings using Nextflow's `file()` method
 - Access file attributes such as name, extension, and parent directory
 - Handle both local and remote files transparently using URIs
-- Use channels to automate file handling with `Channel.fromPath()` and `Channel.fromFilePairs()`
+- Use channels to automate file handling with `channel.fromPath()` and `channel.fromFilePairs()`
 - Extract and structure metadata from filenames using string manipulation
 - Group related files using pattern matching and glob expressions
 - Integrate file operations into Nextflow processes with proper input handling
@@ -538,13 +538,13 @@ While HTTP doesn't support globs, cloud storage protocols do. Here's how you cou
 
 ```groovy title="Cloud storage examples (not runnable in this environment)"
 // S3 with glob patterns - would match multiple files
-ch_s3_files = Channel.fromPath('s3://my-bucket/data/*.fastq.gz')
+ch_s3_files = channel.fromPath('s3://my-bucket/data/*.fastq.gz')
 
 // Azure Blob Storage with glob patterns
-ch_azure_files = Channel.fromPath('az://container/data/patient*_R{1,2}.fastq.gz')
+ch_azure_files = channel.fromPath('az://container/data/patient*_R{1,2}.fastq.gz')
 
 // Google Cloud Storage with glob patterns
-ch_gcs_files = Channel.fromPath('gs://bucket/data/sample_*.fastq.gz')
+ch_gcs_files = channel.fromPath('gs://bucket/data/sample_*.fastq.gz')
 ```
 
 These examples show the power of Nextflow's unified file handling - the same code works whether files are local or in the cloud, as long as the protocol supports the operations you need.
@@ -601,23 +601,23 @@ Let's update our workflow to use local files again:
 
 ## 3. Reading files using the `fromPath()` channel factory
 
-The `file()` method is useful for simple file operations, and we can combine that with [`Channel.of()`](https://www.nextflow.io/docs/latest/reference/channel.html#of) to build channels from files like:
+The `file()` method is useful for simple file operations, and we can combine that with [`channel.of()`](https://www.nextflow.io/docs/latest/reference/channel.html#of) to build channels from files like:
 
-```groovy title="Channel.of() with file()"
-    ch_fastq = Channel.of([file('data/patientA_rep1_normal_R1_001.fastq.gz')])
+```groovy title="channel.of() with file()"
+    ch_fastq = channel.of([file('data/patientA_rep1_normal_R1_001.fastq.gz')])
 ```
 
-But we have a much more convenient tool called [`Channel.fromPath()`](https://www.nextflow.io/docs/latest/reference/channel.html#frompath) which generates a channel from static file strings as well as glob patterns.
+But we have a much more convenient tool called [`channel.fromPath()`](https://www.nextflow.io/docs/latest/reference/channel.html#frompath) which generates a channel from static file strings as well as glob patterns.
 
-### 3.1. Reading Files with Channel.fromPath
+### 3.1. Reading Files with channel.fromPath
 
 Update your `file_operations.nf` file:
 
 === "After"
 
     ```groovy title="file_operations.nf" linenums="2" hl_lines="2"
-        // Reading files with Channel.fromPath
-        ch_fastq = Channel.fromPath('data/patientA_rep1_normal_R1_001.fastq.gz')
+        // Reading files with channel.fromPath
+        ch_fastq = channel.fromPath('data/patientA_rep1_normal_R1_001.fastq.gz')
         ch_fastq.view { "Found file: $it of type ${it.class}" }
 
         // // Print file attributes
@@ -646,13 +646,13 @@ Update your `file_operations.nf` file:
 
 Run the workflow:
 
-```bash title="Test Channel.fromPath"
+```bash title="Test channel.fromPath"
 nextflow run file_operations.nf
 ```
 
 You'll see each file path being emitted as a separate element in the channel:
 
-```console title="Channel.fromPath Output"
+```console title="channel.fromPath Output"
  N E X T F L O W   ~  version 25.04.3
 
 Launching `file_operations.nf` [grave_meucci] DSL2 - revision: b09964a583
@@ -660,7 +660,7 @@ Launching `file_operations.nf` [grave_meucci] DSL2 - revision: b09964a583
 Found file: /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz of type class sun.nio.fs.UnixPath
 ```
 
-Note how Nextflow has grabbed the file we specified and turned it into a `Path` type object, in exactly the same way that `file()` would have done. `Channel.fromPath()` is just a convenient way of creating a new channel populated by a list of files.
+Note how Nextflow has grabbed the file we specified and turned it into a `Path` type object, in exactly the same way that `file()` would have done. `channel.fromPath()` is just a convenient way of creating a new channel populated by a list of files.
 
 ### 3.2. Viewing Channel Contents
 
@@ -669,8 +669,8 @@ In our first version, we use `.view()` to print the file name. Let's update our 
 === "After"
 
     ```groovy title="file_operations.nf" linenums="2" hl_lines="3-9"
-        // Reading files with Channel.fromPath
-        ch_fastq = Channel.fromPath('data/patientA_rep1_normal_R1_001.fastq.gz')
+        // Reading files with channel.fromPath
+        ch_fastq = channel.fromPath('data/patientA_rep1_normal_R1_001.fastq.gz')
         ch_fastq.view { myFile ->
             println "File object class: ${myFile.class}"
             println "File name: ${myFile.name}"
@@ -683,8 +683,8 @@ In our first version, we use `.view()` to print the file name. Let's update our 
 === "Before"
 
     ```groovy title="file_operations.nf" linenums="2" hl_lines="3"
-        // Reading files with Channel.fromPath
-        ch_fastq = Channel.fromPath('data/patientA_rep1_normal_R1_001.fastq.gz')
+        // Reading files with channel.fromPath
+        ch_fastq = channel.fromPath('data/patientA_rep1_normal_R1_001.fastq.gz')
         ch_fastq.view { myFile -> "Found file: $myFile" }
 
         // // Print file attributes
@@ -697,11 +697,11 @@ In our first version, we use `.view()` to print the file name. Let's update our 
 
 Run the workflow:
 
-```bash title="Test file attributes with Channel.fromPath"
+```bash title="Test file attributes with channel.fromPath"
 nextflow run file_operations.nf
 ```
 
-```console title="Channel.fromPath Output"
+```console title="channel.fromPath Output"
  N E X T F L O W   ~  version 25.04.3
 
 Launching `file_operations.nf` [furious_swanson] DSL2 - revision: c35c34950d
@@ -715,20 +715,20 @@ Parent directory: /workspaces/training/side-quests/working_with_files/data
 
 ### 3.3. Using a glob to match multiple files
 
-`Channel.fromPath()` can take a glob pattern as an argument, which will match all files in the directory that match the pattern. Let's grab both of the pair of FASTQs associated with this patient.
+`channel.fromPath()` can take a glob pattern as an argument, which will match all files in the directory that match the pattern. Let's grab both of the pair of FASTQs associated with this patient.
 
 A glob pattern is a pattern that matches one or more characters in a string. The `*` wildcard is the most common glob pattern, which will match any character in it's place. To do this, we replace the full path with a `*` wildcard, which will match any character in it's place. In this case, we will replace the read number from `R1` to `R*`.
 
 === "After"
 
     ```groovy title="file_operations.nf" linenums="3"
-        ch_fastq = Channel.fromPath('data/patientA_rep1_normal_R*_001.fastq.gz')
+        ch_fastq = channel.fromPath('data/patientA_rep1_normal_R*_001.fastq.gz')
     ```
 
 === "Before"
 
     ```groovy title="file_operations.nf" linenums="3"
-        ch_fastq = Channel.fromPath('data/patientA_rep1_normal_R1_001.fastq.gz')
+        ch_fastq = channel.fromPath('data/patientA_rep1_normal_R1_001.fastq.gz')
     ```
 
 Run the workflow:
@@ -737,7 +737,7 @@ Run the workflow:
 nextflow run file_operations.nf
 ```
 
-```console title="Channel.fromPath Glob Output"
+```console title="channel.fromPath Glob Output"
  N E X T F L O W   ~  version 25.04.3
 
 Launching `file_operations.nf` [boring_sammet] DSL2 - revision: d2aa789c9a
@@ -758,7 +758,7 @@ Using this method, we could grab as many or as few files as we want just by chan
 
 ### Takeaway
 
-- `Channel.fromPath()` creates a channel with files matching a pattern
+- `channel.fromPath()` creates a channel with files matching a pattern
 - Each file is emitted as a separate element in the channel
 - We can use a glob pattern to match multiple files
 - Files are automatically converted to Path objects with full attributes
@@ -933,9 +933,9 @@ Next up, we will look at how to handle paired-end reads.
 
 ---
 
-## 5. Simplifying with Channel.fromFilePairs
+## 5. Simplifying with channel.fromFilePairs
 
-Nextflow provides a specialized channel factory method for working with paired files: `Channel.fromFilePairs()`. This method automatically groups files that share a common prefix. This is particularly useful for paired-end sequencing data, where you have two files (e.g., R1 and R2) for each sample.
+Nextflow provides a specialized channel factory method for working with paired files: `channel.fromFilePairs()`. This method automatically groups files that share a common prefix. This is particularly useful for paired-end sequencing data, where you have two files (e.g., R1 and R2) for each sample.
 
 ### 5.1. Basic Usage of fromFilePairs
 
@@ -944,14 +944,14 @@ Complete your `file_operations.nf` file with the following (deleting the map ope
 === "After"
 
     ```groovy title="file_operations.nf" linenums="3" hl_lines="1"
-        ch_fastq = Channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
+        ch_fastq = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
             .view()
     ```
 
 === "Before"
 
     ```groovy title="file_operations.nf" linenums="3" hl_lines="1-13"
-        ch_fastq = Channel.fromPath('data/patientA_rep1_normal_R*_001.fastq.gz')
+        ch_fastq = channel.fromPath('data/patientA_rep1_normal_R*_001.fastq.gz')
         ch_fastq.map { myFile ->
             def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
             [
@@ -969,13 +969,13 @@ Complete your `file_operations.nf` file with the following (deleting the map ope
 
 Run the workflow:
 
-```bash title="Test Channel.fromFilePairs"
+```bash title="Test channel.fromFilePairs"
 nextflow run file_operations.nf
 ```
 
 The output will show the paired files grouped together:
 
-```console title="Channel.fromFilePairs Output"
+```console title="channel.fromFilePairs Output"
  N E X T F L O W   ~  version 25.04.3
 
 Launching `file_operations.nf` [chaotic_cuvier] DSL2 - revision: 472265a440
@@ -992,7 +992,7 @@ We still need the metadata. Our `map` operation from before won't work because i
 === "After"
 
     ```groovy title="file_operations.nf" linenums="3" hl_lines="2-13"
-        ch_fastq = Channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
+        ch_fastq = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
         ch_fastq.map { id, fastqs ->
             def (sample, replicate, type, readNum) = id.tokenize('_')
             [
@@ -1010,7 +1010,7 @@ We still need the metadata. Our `map` operation from before won't work because i
 === "Before"
 
     ```groovy title="file_operations.nf" linenums="2" hl_lines="3-11"
-        ch_fastq = Channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
+        ch_fastq = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
             .view()
     ```
 
@@ -1033,7 +1033,7 @@ Well done! We have grabbed the metadata from the filenames and used them as valu
 
 ### Takeaway
 
-- [`Channel.fromFilePairs()` automatically finds and pairs related files](https://www.nextflow.io/docs/latest/reference/channel.html#fromfilepairs)
+- [`channel.fromFilePairs()` automatically finds and pairs related files](https://www.nextflow.io/docs/latest/reference/channel.html#fromfilepairs)
 - This simplifies handling paired-end reads in your pipeline
 - Paired files can be grouped as `[id, [file1, file2]]` tuples
 - Metadata extraction can be done from the paired file ID rather than individual files
@@ -1096,7 +1096,7 @@ Then implement the process in the workflow:
 === "After"
 
     ```groovy title="file_operations.nf" linenums="26" hl_lines="2 13"
-        ch_fastq = Channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
+        ch_fastq = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
         ch_samples = ch_fastq.map { id, fastqs ->
             def (sample, replicate, type, readNum) = id.tokenize('_')
             [
@@ -1115,7 +1115,7 @@ Then implement the process in the workflow:
 === "Before"
 
     ```groovy title="file_operations.nf" linenums="26" hl_lines="2 13"
-        ch_fastq = Channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
+        ch_fastq = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
         ch_fastq.map { id, fastqs ->
             def (sample, replicate, type, readNum) = id.tokenize('_')
             [
@@ -1156,18 +1156,18 @@ The process took our inputs and created a new file with the patient metadata. Ba
 
 ### 6.3. Include many more patients
 
-Remember Channel.fromPath() accepts a _glob_ as input, which means it can accept any number of files that match the pattern. Therefore if we want to include all the patients we can just modify the input string to include more patients.
+Remember channel.fromPath() accepts a _glob_ as input, which means it can accept any number of files that match the pattern. Therefore if we want to include all the patients we can just modify the input string to include more patients.
 
 === "After"
 
     ```groovy title="file_operations.nf" linenums="26"
-        ch_fastq = Channel.fromFilePairs('data/*_R{1,2}_001.fastq.gz')
+        ch_fastq = channel.fromFilePairs('data/*_R{1,2}_001.fastq.gz')
     ```
 
 === "Before"
 
     ```groovy title="file_operations.nf" linenums="26"
-        ch_fastq = Channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
+        ch_fastq = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
     ```
 
 Run the pipeline now and see all the results:
@@ -1292,11 +1292,11 @@ In this side quest, you've learned how to work with files in Nextflow, from basi
 
 2. **Using Remote Files**: We learned how to transparently switch between local and remote files using URIs, demonstrating Nextflow's ability to handle files from various sources without changing workflow logic.
 
-3. **Reading files using the `fromPath()` channel factory**: We created channels from file patterns with `Channel.fromPath()` and viewed their file attributes, including object types.
+3. **Reading files using the `fromPath()` channel factory**: We created channels from file patterns with `channel.fromPath()` and viewed their file attributes, including object types.
 
 4. **Extracting Patient Metadata from Filenames**: We used `tokenize()` and `replace()` to extract and structure metadata from filenames, converting them to organized maps.
 
-5. **Simplifying with Channel.fromFilePairs**: We used `Channel.fromFilePairs()` to automatically pair related files and extract metadata from paired file IDs.
+5. **Simplifying with channel.fromFilePairs**: We used `channel.fromFilePairs()` to automatically pair related files and extract metadata from paired file IDs.
 
 6. **Using File Operations in Processes**: We integrated file operations into Nextflow processes with proper input handling, using `publishDir` to organize outputs based on metadata.
 
@@ -1325,10 +1325,10 @@ These techniques will help you build more efficient and maintainable workflows, 
 
   ```groovy
   // Create a channel from a file pattern
-  ch_fastq = Channel.fromPath('data/*.fastq.gz')
+  ch_fastq = channel.fromPath('data/*.fastq.gz')
 
   // Create a channel from paired files
-  ch_pairs = Channel.fromFilePairs('data/*_R{1,2}_001.fastq.gz')
+  ch_pairs = channel.fromFilePairs('data/*_R{1,2}_001.fastq.gz')
   ```
 
 - **Extracting Metadata**
@@ -1367,5 +1367,5 @@ These techniques will help you build more efficient and maintainable workflows, 
 ## Resources
 
 - [Nextflow Documentation: Working with Files](https://www.nextflow.io/docs/latest/working-with-files.html)
-- [Channel.fromPath](https://www.nextflow.io/docs/latest/channel.html#frompath)
-- [Channel.fromFilePairs](https://www.nextflow.io/docs/latest/channel.html#fromfilepairs)
+- [channel.fromPath](https://www.nextflow.io/docs/latest/channel.html#frompath)
+- [channel.fromFilePairs](https://www.nextflow.io/docs/latest/channel.html#fromfilepairs)

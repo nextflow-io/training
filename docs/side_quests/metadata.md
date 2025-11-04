@@ -100,7 +100,7 @@ Let's start by reading in the datasheet with `splitCsv`. In the main workflow fi
 ```groovy title="main.nf" linenums="1"
 workflow  {
 
-    ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
+    ch_samplesheet = channel.fromPath("./data/samplesheet.csv")
 
 }
 ```
@@ -112,7 +112,7 @@ workflow  {
 === "After"
 
     ```groovy title="main.nf" linenums="3" hl_lines="2-3"
-        ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
+        ch_samplesheet = channel.fromPath("./data/samplesheet.csv")
             .splitCsv(header: true)
             .view()
     ```
@@ -120,7 +120,7 @@ workflow  {
 === "Before"
 
     ```groovy title="main.nf" linenums="3"
-        ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
+        ch_samplesheet = channel.fromPath("./data/samplesheet.csv")
     ```
 
 We can use the [`splitCsv` operator](https://www.nextflow.io/docs/latest/operator.html#splitcsv) to split the datasheet into a channel of maps, where each map represents a row from the CSV file.
@@ -727,7 +727,7 @@ Then, at the workflow level, we extract the `character` property from the metada
 === "After"
 
     ```groovy title="main.nf" linenums="61" hl_lines="1"
-        COWPY(ch_languages.map{meta, file -> [meta, meta.character, file] )
+        COWPY(ch_languages.map{meta, file -> [meta, meta.character, file]})
     ```
 
 === "Before"
@@ -779,7 +779,7 @@ This approach offers several advantages over hardcoding file information:
 - **Reading Datasheets & creating meta maps**
 
   ```nextflow
-  Channel.fromPath('samplesheet.csv')
+  channel.fromPath('samplesheet.csv')
     .splitCsv(header: true)
     .map { row ->
         [ [id:row.id, character:row.character], row.recording ]

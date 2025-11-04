@@ -40,7 +40,7 @@ process COWPY {
 
 workflow {
 
-    ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
+    ch_samplesheet = channel.fromPath("./data/samplesheet.csv")
         .splitCsv(header: true)
         .map { row ->
             [[id: row.id, character: row.character], row.recording]
