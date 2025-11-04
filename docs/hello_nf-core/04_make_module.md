@@ -223,8 +223,13 @@ Benefits of this approach:
     }
     ```
 
-    This default automatically publishes outputs to `${params.outdir}/<process_name>/` for every process.
-    Individual processes can customize their publishing using `withName:` blocks in the same config file.
+    This looks complicated, but it breaks down into three parts:
+
+    - **path**: Determines the output directory based on the process name. When processes run, their full name includes the workflow hierarchy (like `CORE_HELLO:HELLO:SAMTOOLS_SORT`). The `tokenize` operations strip away that hierarchy to get just the process name, then take the first part before any underscore, and convert it to lowercase. So `SAMTOOLS_SORT` would publish to `${params.outdir}/samtools/`.
+    - **mode**: Controls how files are published (copy, symlink, etc.), configurable via the `params.publish_dir_mode` parameter.
+    - **saveAs**: Filters which files to publish. This example excludes `versions.yml` files by returning `null` for them, preventing them from being published.
+
+    Individual processes can override this default using `withName:` blocks in the same config file.
 
     For more details, see the [nf-core modules specifications](https://nf-co.re/docs/guidelines/components/modules).
 
