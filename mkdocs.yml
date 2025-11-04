@@ -61,7 +61,8 @@ nav:
           - nf4_science/metagenomics/index.md
           - nf4_science/metagenomics/00_orientation.md
           - nf4_science/metagenomics/01_pipeline.md
-          - nf4_science/metagenomics/02_multi-sample.md
+          - nf4_science/metagenomics/02_single-sample.md
+          - nf4_science/metagenomics/03_multi-sample.md
       - RNAseq:
           - nf4_science/rnaseq/index.md
           - nf4_science/rnaseq/00_orientation.md
