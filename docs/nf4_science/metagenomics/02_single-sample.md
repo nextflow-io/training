@@ -1,4 +1,4 @@
-# Part 2: Single-sample implementation
+# Part 2: Single-sample analysis
 
 Now that we have a clear overview of what we want to achieve, we can start writing code!
 We are going to do this in four steps:

@@ -1,17 +1,18 @@
-# Part 2: Process parallelization and multi-sample
+# Part 3: Multi-sample analysis
 
-In this part, we are going to rely on same pipeline structure we built in Part 1 to extend it for:
+In this part, we are going to start from the pipeline structure we built in the previous part and extend it for multi-sample analysis.
 
-1. Multi-sample analysis
-2. Use of a Nextflow operator
-3. Control the execution of the workflow according to the input
-4. Include a process that runs a customized script
+This will give us the opportunity to practice using the following Nextflow features:
+
+1. Using a Nextflow operator to control the flow of data
+2. Controlling the execution of modules according to an input condition
+3. Including a process that runs a customized script
 
 ---
 
 ## 1. Multi-sample input
 
-With our shining brand-new pipeline, we are at this moment able to analyze each sample individually by running the workflow multiple times.
+With our shiny brand-new pipeline, we are at this moment able to analyze each sample individually by running the workflow multiple times.
 Nonetheless, one of the most powerful capabilities by Nextflow is its native parallel execution according to the available resources the executor finds.
 You can think of this as a sort of "integrated _for_ loop" that will process all the samples in parallel in a single run without the need of re-running the pipeline.
 
@@ -20,9 +21,9 @@ To achieve this purpose, there are two possibilities:
 - The use of wildcards in the input (this can be tricky and requires to take into account particular folder structures).
 - Create a file that points out to the sample files regardless of their location in the file system.
 
-In this course, we will target the second input option, albeit you are welcome to explore how you can use the first option by checking the [Nextflow documentation](https://www.nextflow.io/docs/latest/working-with-files.html).
+In this course, we will target the second input option, but you are welcome to explore how you can use the first option by checking out the [Nextflow documentation](https://www.nextflow.io/docs/latest/working-with-files.html).
 
-To move forward, let's create then the file `samplesheet.csv` inside the folder **data**:
+To move forward, let's create the file `samplesheet.csv` inside the folder `data/`:
 
 ```csv title="data/samplesheet.csv" linenums="1"
 sample_id,fastq_1,fastq_2
@@ -33,17 +34,18 @@ ERR2143774,/workspaces/training/nf4-science/metagenomics/data/samples/ERR2143774
 ```
 
 Here, we have provided the `sample id` and the absolute paths to both forward and reverse reads per sample.
-Please notice that the files are not required to be stored in the directory; however, it is recommend to maintain a consistent folder structure.
+Please notice that the files are not required to be stored in the directory; however, this is recommended in order to maintain a consistent fodirectorylder structure.
 
-Now, we can not use this file as input in the current state of the pipeline given that it expects only a path to create a paire-end channel.
-Let's include then an additional parameter (we can use any name, feel creative!) in the `nextflow.config` file (notice that it would go inside the parameter block, keeping the same structure):
+However, we cannot use this file as input in the current state of the pipeline, given that it expects only a path to create a paired-end channel.
+So let's include an additional parameter in the `nextflow.config` file (inside the parameter block, keeping the same structure):
 
 ```groovy title="nextflow.config" linenums="10"
     sheet_csv                             = null
 ```
 
 We initialize this parameter as `null` since it can be used or not.
-Now, we need to modify the `main.nf` file to state how the input should be handled depending of the type of input:
+
+Now, we need to modify the `main.nf` file to state how the input should be handled depending on the type of input:
 
 ```groovy title="main.nf" linenums="22"
 	    if(params.reads){
@@ -57,6 +59,7 @@ Now, we need to modify the `main.nf` file to state how the input should be handl
 
 This modified declaration states that if we use the parameter `--reads` when we invoke the `nextflow run main.nf`, the _reads_ channel will be created using only the path to paired-end files.
 Otherwise, we must include the parameter `--sheet_csv` with the corresponding file containing the sample information.
+
 Being so, it is necessary to use one of the two forms of input; if we use both at the same time, the `--reads` will predominate or if none of them is indicated, the pipeline will fail.
 Do not worry now for the way in which channel is created using the `.csv` file, this declaration is quite stantard and you can just copy and paste for other pipelines in which you would like to use it; however, you can learn more about this [here](https://nextflow-io.github.io/patterns/process-per-csv-record/).
 
@@ -70,7 +73,8 @@ Notwithstanding, the inclusion of additional samples has the advantage that we c
 ### 2.1. Kraken-biom
 
 Let's create a new module that is going to handle the Bracken output to produce a Biological Observation Matrix (BIOM) file that concatenates the species abundance in each sample.
-The `kraken_biom.nf` file will be located in the **modules** directory:
+
+The `kraken_biom.nf` file will be located in the `modules/` directory:
 
 ```groovy title="modules/kraken_biom.nf" linenums="1"
 process KRAKEN_BIOM {
