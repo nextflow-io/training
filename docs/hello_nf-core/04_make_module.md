@@ -775,6 +775,7 @@ Update the input and output blocks:
     ```
 
 This specifies:
+
 - The input file parameter name (`input_file` instead of generic `input`)
 - The output filename using the configurable prefix pattern (`${prefix}.txt` instead of wildcard `*`)
 - A descriptive emit name (`cowpy_output` instead of generic `output`)
@@ -819,6 +820,7 @@ We can reference our manual module from section 1.3.2 for the command logic:
     ```
 
 Key changes:
+
 - Change `def prefix` to just `prefix` (without `def`) so it's accessible in the output block
 - Replace the comment with the actual cowpy command that uses both `$args` and `${prefix}.txt`
 
@@ -863,6 +865,7 @@ It must produce the same output files as the script block:
     ```
 
 Key changes:
+
 - Change `def prefix` to just `prefix` to match the script block
 - Remove the `echo $args` line (which was just template placeholder code)
 - The stub creates an empty `${prefix}.txt` file matching what the script block produces
