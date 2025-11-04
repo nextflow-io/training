@@ -594,7 +594,7 @@ However, you might want to keep it as a reference for understanding the differen
 
 ---
 
-## 2. Use nf-core tooling to create modules
+## 2. Generate modules with nf-core tools
 
 Now that you've learned the nf-core module patterns by applying them manually, let's look at how you'd create modules in practice.
 The nf-core project provides the `nf-core modules create` command that generates properly structured module templates with all these patterns built in from the start.
