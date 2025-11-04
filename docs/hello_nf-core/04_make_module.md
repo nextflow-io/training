@@ -202,27 +202,31 @@ For output publishing, nf-core pipelines centralize control at the workflow leve
 Currently, our `cowpy` module has `publishDir 'results', mode: 'copy'` which hardcodes the output location.
 In nf-core pipelines, publishing is instead configured in `conf/modules.config`.
 
-The nf-core template includes a **default publishDir configuration** that applies to all processes:
-
-```groovy
-process {
-    publishDir = [
-        path: { "${params.outdir}/${task.process.tokenize(':')[-1].tokenize('_')[0].toLowerCase()}" },
-        mode: params.publish_dir_mode,
-        saveAs: { filename -> filename.equals('versions.yml') ? null : filename }
-    ]
-}
-```
-
-This default automatically publishes outputs to `${params.outdir}/<process_name>/` for every process.
-Individual processes can customize their publishing using `withName:` blocks in the same config file.
-
 Benefits of this approach:
 
 - **Single source of truth**: All publishing configuration lives in `modules.config`
 - **Useful default**: Processes work out-of-the-box without per-module configuration
 - **Easy customization**: Override publishing behavior in config, not in module code
 - **Portable modules**: Modules don't hardcode output locations
+
+!!! note "Default publishDir configuration"
+
+    The nf-core template includes a default publishDir configuration that applies to all processes:
+
+    ```groovy
+    process {
+        publishDir = [
+            path: { "${params.outdir}/${task.process.tokenize(':')[-1].tokenize('_')[0].toLowerCase()}" },
+            mode: params.publish_dir_mode,
+            saveAs: { filename -> filename.equals('versions.yml') ? null : filename }
+        ]
+    }
+    ```
+
+    This default automatically publishes outputs to `${params.outdir}/<process_name>/` for every process.
+    Individual processes can customize their publishing using `withName:` blocks in the same config file.
+
+    For more details, see the [nf-core modules specifications](https://nf-co.re/docs/guidelines/components/modules).
 
 #### 1.2.3. Update the module
 
