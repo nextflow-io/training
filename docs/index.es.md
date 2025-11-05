@@ -64,9 +64,9 @@ Referencia rápida a algunos enlaces útiles:
 
 ## Créditos y contribuciones
 
-[![Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0](assets/img/cc_by-nc-nd.svg){ align=right }](https://creativecommons.org/licenses/by-nc-nd/4.0/)
+[![Creative Commons Attribution 4.0 International (CC BY 4.0](assets/img/cc_by.svg){ align=right }](https://creativecommons.org/licenses/by/4.0/)
 
-Todo el material de capacitación fue escrito originalmente por [Seqera](https://seqera.io) pero se ha hecho de código abierto ([CC BY-NC-ND](https://creativecommons.org/licenses/by-nc -nd/4.0/)) para la comunidad.
+Todo el material de capacitación fue escrito originalmente por [Seqera](https://seqera.io) pero se ha hecho de código abierto ([CC BY](https://creativecommons.org/licenses/by/4.0/)) para la comunidad.
 
 Damos la bienvenida a las correcciones y mejoras de la comunidad.
 Cada página tiene un ícono :material-file-edit-outline: en la parte superior derecha de la página, que te llevará a GitHub, donde puedes editar el material a través de un Pull Request.

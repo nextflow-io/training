@@ -162,9 +162,9 @@ Vous ne savez pas où aller ? Consultez la page [Obtenir de l'aide](help.fr.md).
 
 ## Crédits et contributions
 
-[![Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0](assets/img/cc_by-nc-nd.svg){ align=right }](https://creativecommons.org/licenses/by-nc-nd/4.0/)
+[![Creative Commons Attribution 4.0 International (CC BY 4.0](assets/img/cc_by.svg){ align=right }](https://creativecommons.org/licenses/by/4.0/)
 
-Ce matériel de formation est développé et maintenu par [Seqera](https://seqera.io) et publié sous une licence open source ([CC BY-NC-ND](https://creativecommons.org/licenses/by-nc-nd/4.0/)) au bénéfice de la communauté. Vous êtes libre de réutiliser ces ressources conformément aux conditions de la licence. Si vous êtes formateur·trice et que vous organisez vos propres sessions, nous serions ravis d’avoir votre retour sur votre expérience et de savoir ce que nous pourrions faire pour vous faciliter la tâche.
+Ce matériel de formation est développé et maintenu par [Seqera](https://seqera.io) et publié sous une licence open source ([CC BY](https://creativecommons.org/licenses/by/4.0/)) au bénéfice de la communauté. Vous êtes libre de réutiliser ces ressources conformément aux conditions de la licence. Si vous êtes formateur·trice et que vous organisez vos propres sessions, nous serions ravis d’avoir votre retour sur votre expérience et de savoir ce que nous pourrions faire pour vous faciliter la tâche.
 
 Nous accueillons avec plaisir les corrections et améliorations proposées par la communauté. Chaque page comporte une icône :material-file-edit-outline: en haut à droite qui vous redirige vers GitHub, où vous pouvez proposer des modifications du contenu via une pull request.
 
