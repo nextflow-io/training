@@ -148,9 +148,9 @@ Nextflow 커뮤니티 교육 포털에 오신 것을 환영합니다!
 
 ## 크레딧 및 기여
 
-[![크리에이티브 커먼즈 라이선스: CC BY-NC-SA 4.0](assets/img/cc_by-nc-nd.svg){ align=right }](https://creativecommons.org/licenses/by-nc-nd/4.0/)
+[![크리에이티브 커먼즈 라이선스: CC BY 4.0](assets/img/cc_by.svg){ align=right }](https://creativecommons.org/licenses/by/4.0/)
 
-이 교육 자료는 [Seqera](https://seqera.io)에서 개발 및 유지 관리하고 있으며, 커뮤니티의 이익을 위해 오픈소스 라이선스([CC BY-NC-ND](https://creativecommons.org/licenses/by-nc-nd/4.0/)) 하에 배포됩니다. 라이선스 조건에 따라 자유롭게 재사용하실 수 있습니다. 교육을 진행하는 강사분이라면, 사용 경험과 개선점을 저희에게 알려주시면 감사하겠습니다.
+이 교육 자료는 [Seqera](https://seqera.io)에서 개발 및 유지 관리하고 있으며, 커뮤니티의 이익을 위해 오픈소스 라이선스([CC BY](https://creativecommons.org/licenses/by/4.0/)) 하에 배포됩니다. 라이선스 조건에 따라 자유롭게 재사용하실 수 있습니다. 교육을 진행하는 강사분이라면, 사용 경험과 개선점을 저희에게 알려주시면 감사하겠습니다.
 
 커뮤니티의 수정 및 개선 제안을 언제든지 환영합니다. 각 페이지 오른쪽 상단의 :material-file-edit-outline: 아이콘을 클릭하면 GitHub에서 Pull Request를 통해 제안할 수 있습니다.
 
