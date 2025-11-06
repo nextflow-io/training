@@ -22,7 +22,7 @@ If you are working through this course by yourself, please go through the [Envir
 
     You can check what version is installed using the command`nf-core --version`.
 
-## Get ready to work!
+## Get ready to work
 
 Once your codespace is running, there are two things you need to do before diving into the training: set your working directory for this specific course, and take a look at the materials provided.
 
@@ -46,7 +46,7 @@ cd hello-nf-core/
 
 Now let's have a look at the contents of this directory.
 
-### Materials provided
+### Check out the materials provided
 
 You can explore the contents of this directory by using the file explorer on the left-hand side of the training workspace.
 Alternatively, you can use the `tree` command.
@@ -83,7 +83,7 @@ If you run this inside `hello-nf-core`, you should see the following output.
 !!! note
 
     We use collapsible sections like this to include expected command output in a concise way.
-    Click on the header (here, 'Directory contents') to expand the section and view its contents.
+    Click on the colored box to expand the section and view its contents.
 
 **Content guide:**
 
@@ -102,6 +102,6 @@ Think you're ready to dive in?
 - [ ] My codespace is up and running
 - [ ] I've set my working directory appropriately
 
-If you checked all the boxes, you're good to go.
+If you can check all the boxes, you're good to go.
 
 **To continue to Part 1, click on the arrow in the bottom right corner of this page.**
