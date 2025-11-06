@@ -131,9 +131,9 @@ Não sabe para onde ir? Confira a página [Obtendo ajuda](help.md).
 
 ## Créditos e contribuições
 
-[![Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0](assets/img/cc_by-nc-nd.svg){ align=right }](https://creativecommons.org/licenses/by-nc-nd/4.0/)
+[![Creative Commons Attribution 4.0 International (CC BY 4.0](assets/img/cc_by.svg){ align=right }](https://creativecommons.org/licenses/by/4.0/)
 
-Este material de treinamento é desenvolvido e mantido pela [Seqera](https://seqera.io) e lançado sob uma licença de código aberto ([CC BY-NC-ND](https://creativecommons.org/licenses/by-nc-nd/4.0/)) para o benefício da comunidade. Sinta-se à vontade para reutilizar esses materiais de acordo com os termos da licença. Se você administra seus próprios treinamentos, ensinando terceiros, adoraríamos saber como está indo e o que poderíamos fazer para facilitar.
+Este material de treinamento é desenvolvido e mantido pela [Seqera](https://seqera.io) e lançado sob uma licença de código aberto ([CC BY](https://creativecommons.org/licenses/by/4.0/)) para o benefício da comunidade. Sinta-se à vontade para reutilizar esses materiais de acordo com os termos da licença. Se você administra seus próprios treinamentos, ensinando terceiros, adoraríamos saber como está indo e o que poderíamos fazer para facilitar.
 
 Aceitamos correções e melhorias da comunidade. Cada página tem um ícone :material-file-edit-outline: no canto superior direito da página, que te levará ao GitHub, onde você pode propor alterações no material de treinamento por meio de uma solicitação de _pull_.
 
