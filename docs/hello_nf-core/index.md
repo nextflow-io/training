@@ -50,37 +50,34 @@ This training course aims to teach you the core concepts for running nf-core-sty
 We won't cover everything there is to know about nf-core pipelines, because nf-core encompasses many features and conventions developed by the community over years.
 Instead, we will focus on the essential concepts that will help you get started and understand how nf-core works.
 
-### Part 1: Run a demo pipeline
+#### Part 1: Run a demo pipeline
 
 First, you'll **run an existing nf-core pipeline** and examine its code structure to get a sense of what makes these pipelines different from basic Nextflow workflows.
 The elaborate directory structure, configuration system, and standardized conventions might seem like a lot at first, but the benefits will become clear as you learn to decode and utilize these resources effectively.
 
-### Part 2: Rewrite Hello for nf-core
+#### Part 2: Rewrite Hello for nf-core
 
 Next, you'll **adapt an existing workflow to the nf-core template scaffold**, starting from the simple workflow produced in the [Hello Nextflow](../hello_nextflow/index.md) course.
 Many pipeline development efforts start from existing code, so learning how to restructure an existing workflow to leverage nf-core's nested workflow system is a practical skill you're likely to use repeatedly in your work.
 
-### Part 3: Use an nf-core module
+#### Part 3: Use an nf-core module
 
 Then you'll discover one of nf-core's biggest advantages: the **community modules library**.
 Instead of writing every process from scratch, you'll learn to integrate pre-built, tested modules that wrap common bioinformatics tools.
 This approach saves time and ensures consistency across pipelines.
 
-### Part 4: Make an nf-core module
+#### Part 4: Make an nf-core module
 
 Of course, the modules library doesn't have everything, so you'll also learn to **create your own nf-core-style module**.
 You'll learn to work with the specific structure, naming conventions, and metadata requirements that make modules shareable and maintainable by the community.
 
-### Part 5: Add input validation
+#### Part 5: Add input validation
 
 Finally, you'll implement **input validation** for both command-line parameters and input data files using nf-schema.
 This catches errors before pipelines start to run, providing fast feedback and clear error messages. This type of upfront validation makes pipelines more robust and easier to use.
 
-By the end of the course, you'll have transformed a basic Nextflow workflow into an nf-core-style pipeline with standardized structure, reusable components, and robust validation.
+**By the end of the course, you'll have transformed a basic Nextflow workflow into an nf-core-style pipeline with standardized structure, reusable components, and robust validation.**
 
-## Getting started
+Ready to take the course?
 
-Ready to go?
-Launch the training environment in a separate browser tab or window using the "Open in GitHub Codespaces" button below, then navigate to the next section and read on while the environment loads.
-
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master){:target="\_blank"}
+[TODO: big green start button]
