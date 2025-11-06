@@ -33,29 +33,6 @@ cd hello-nf-core/
 
 Now let's have a look at the contents of this directory.
 
-## What you'll learn
-
-This training course teaches you the core concepts for building nf-core-style pipelines.
-We can't cover everything. nf-core pipelines have many features and conventions developed by the community over years. However, we focus on the essential concepts that will help you get started and understand how nf-core works.
-
-First, you'll **run an existing nf-core pipeline** to see what makes them different from basic Nextflow workflows.
-The extensive directory structure, configuration system, and standardized conventions might seem overwhelming at first, but understanding them is essential for working within the template.
-
-Next, you'll **adapt a simple workflow to the nf-core template scaffold**.
-Many pipeline development efforts start from existing code, so learning how to restructure workflows to work within nf-core's nested workflow system is a practical skill you'll use repeatedly.
-
-Then you'll discover one of nf-core's biggest advantages: the **community modules library**.
-Instead of writing every process from scratch, you'll learn to integrate pre-built, tested modules that wrap common bioinformatics tools.
-This approach saves time and ensures consistency across pipelines.
-
-Of course, the modules library doesn't have everything, so you'll **create your own nf-core-style module**.
-You'll learn the specific structure, naming conventions, and metadata requirements that make modules shareable and maintainable by the community.
-
-Finally, you'll implement **comprehensive validation** for both command-line parameters and input data files using nf-schema.
-This catches errors before pipelines run, providing fast feedback and clear error messages. This type of upfront validation makes pipelines more robust and easier to use.
-
-By the end, you'll have transformed a basic Nextflow workflow into an nf-core-style pipeline with standardized structure, reusable components, and robust validation.
-
 ## Materials provided
 
 You can explore the contents of this directory by using the file explorer on the left-hand side of the training workspace.
