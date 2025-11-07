@@ -80,4 +80,4 @@ This catches errors before pipelines start to run, providing fast feedback and c
 
 Ready to take the course?
 
-[TODO: big green start button]
+[Start learning :material-arrow-right:](00_orientation.md){ .md-button .md-button--primary }
