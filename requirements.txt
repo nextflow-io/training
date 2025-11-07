@@ -6,3 +6,4 @@ pillow
 cairosvg
 mkdocs-enumerate-headings-plugin>=0.6.0
 mike
+mkdocs_quiz
