@@ -242,61 +242,62 @@ nextflow run nf-core/demo -profile docker,test --outdir demo-results
 
 Here's the console output from the pipeline:
 
-```
 ??? example "Output"
- N E X T F L O W   ~  version 25.04.3
 
-Launching `https://github.com/nf-core/demo` [happy_varahamihira] DSL2 - revision: db7f526ce1 [master]
+    ```console
+    N E X T F L O W   ~  version 25.04.3
 
-
-------------------------------------------------------
-                                        ,--./,-.
-        ___     __   __   __   ___     /,-._.--~'
-  |\ | |__  __ /  ` /  \ |__) |__         }  {
-  | \| |       \__, \__/ |  \ |___     \`-._,-`-,
-                                        `._,._,'
-  nf-core/demo 1.0.2
-------------------------------------------------------
-Input/output options
-  input                     : https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv
-  outdir                    : demo-results
-
-Institutional config options
-  config_profile_name       : Test profile
-  config_profile_description: Minimal test dataset to check pipeline function
-
-Generic options
-  trace_report_suffix       : 2025-10-30_13-22-01
-
-Core Nextflow options
-  revision                  : master
-  runName                   : happy_varahamihira
-  containerEngine           : docker
-  launchDir                 : /workspaces/training/hello-nf-core
-  workDir                   : /workspaces/training/hello-nf-core/work
-  projectDir                : /workspaces/.nextflow/assets/nf-core/demo
-  userName                  : root
-  profile                   : docker,test
-  configFiles               : /workspaces/.nextflow/assets/nf-core/demo/nextflow.config
-
-!! Only displaying parameters that differ from the pipeline defaults !!
-------------------------------------------------------
-* The pipeline
-    https://doi.org/10.5281/zenodo.12192442
-
-* The nf-core framework
-    https://doi.org/10.1038/s41587-020-0439-x
-
-* Software dependencies
-    https://github.com/nf-core/demo/blob/master/CITATIONS.md
+    Launching `https://github.com/nf-core/demo` [happy_varahamihira] DSL2 - revision: db7f526ce1 [master]
 
 
-executor >  local (7)
-[db/fae3ff] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE)     [100%] 3 of 3 ✔
-[d0/f6ea55] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE1_PE) [100%] 3 of 3 ✔
-[af/e6da56] NFCORE_DEMO:DEMO:MULTIQC                 [100%] 1 of 1 ✔
--[nf-core/demo] Pipeline completed successfully-
-```
+    ------------------------------------------------------
+                                            ,--./,-.
+            ___     __   __   __   ___     /,-._.--~'
+      |\ | |__  __ /  ` /  \ |__) |__         }  {
+      | \| |       \__, \__/ |  \ |___     \`-._,-`-,
+                                            `._,._,'
+      nf-core/demo 1.0.2
+    ------------------------------------------------------
+    Input/output options
+      input                     : https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv
+      outdir                    : demo-results
+
+    Institutional config options
+      config_profile_name       : Test profile
+      config_profile_description: Minimal test dataset to check pipeline function
+
+    Generic options
+      trace_report_suffix       : 2025-10-30_13-22-01
+
+    Core Nextflow options
+      revision                  : master
+      runName                   : happy_varahamihira
+      containerEngine           : docker
+      launchDir                 : /workspaces/training/hello-nf-core
+      workDir                   : /workspaces/training/hello-nf-core/work
+      projectDir                : /workspaces/.nextflow/assets/nf-core/demo
+      userName                  : root
+      profile                   : docker,test
+      configFiles               : /workspaces/.nextflow/assets/nf-core/demo/nextflow.config
+
+    !! Only displaying parameters that differ from the pipeline defaults !!
+    ------------------------------------------------------
+    * The pipeline
+        https://doi.org/10.5281/zenodo.12192442
+
+    * The nf-core framework
+        https://doi.org/10.1038/s41587-020-0439-x
+
+    * Software dependencies
+        https://github.com/nf-core/demo/blob/master/CITATIONS.md
+
+
+    executor >  local (7)
+    [db/fae3ff] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE)     [100%] 3 of 3 ✔
+    [d0/f6ea55] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE1_PE) [100%] 3 of 3 ✔
+    [af/e6da56] NFCORE_DEMO:DEMO:MULTIQC                 [100%] 1 of 1 ✔
+    -[nf-core/demo] Pipeline completed successfully-
+    ```
 
 If your output matches that, congratulations! You've just run your first nf-core pipeline.
 
