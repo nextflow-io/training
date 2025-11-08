@@ -5,678 +5,610 @@ But, did it stick?
 
 Test yourself with the quiz below to see how many Nextflow fundamentals you can remember :think:
 
-<?quiz?>
-
-question: Are you ready?
-answer-correct: Yes!
-answer: No!
-answer: Maybe!
-content:
-
-<?/quiz?>
-
 ## Part 1: Hello World
 
 <?quiz?>
 
-question: What is the minimum requirement for a Nextflow process?
-answer: Input and output blocks
-answer-correct: Output and script blocks
-answer: Only a script block
-answer: Input block
-content:
+What is the minimum requirement for a Nextflow process?
 
+- [ ] Input and output blocks
+- [x] Output and script blocks
+- [ ] Only a script block
+- [ ] Input block
 <?/quiz?>
 
 <?quiz?>
 
-question: What does the output block in a process do?
-answer: Creates the output files automatically
-answer-correct: Declares what output files to expect from the process
-answer: Determines the format of the output
-answer: Publishes outputs to a directory
-content:
+What does the output block in a process do?
 
+- [ ] Creates the output files automatically
+- [x] Declares what output files to expect from the process
+- [ ] Determines the format of the output
+- [ ] Publishes outputs to a directory
 <?/quiz?>
 
 <?quiz?>
 
-question: What command is used to run a Nextflow workflow?
-answer: `nextflow execute script.nf`
-answer-correct: `nextflow run script.nf`
-answer: `nextflow start script.nf`
-answer: `nextflow launch script.nf`
-content:
+What command is used to run a Nextflow workflow?
 
+- [ ] `nextflow execute script.nf`
+- [x] `nextflow run script.nf`
+- [ ] `nextflow start script.nf`
+- [ ] `nextflow launch script.nf`
 <?/quiz?>
 
 <?quiz?>
 
-question: What is stored in the `work/` directory?
-answer: Only the final output files
-answer: Configuration files
-answer-correct: Temporary files for each process execution
-answer-correct: Execution metadata like `.command.sh` and `.exitcode`
-answer-correct: Output files from processes
-answer: Container images
-content:
+What is stored in the `work/` directory?
 
+- [ ] Only the final output files
+- [ ] Configuration files
+- [x] Temporary files for each process execution
+- [x] Execution metadata like `.command.sh` and `.exitcode`
+- [x] Output files from processes
+- [ ] Container images
 <?/quiz?>
 
 <?quiz?>
 
-question: What does the `-resume` flag do?
-answer: Restarts the entire workflow from scratch
-answer-correct: Skips processes that already ran with the same code, settings, and inputs
-answer: Resumes only failed processes
-answer: Saves the workflow state for later
-content:
+What does the `-resume` flag do?
 
+- [ ] Restarts the entire workflow from scratch
+- [x] Skips processes that already ran with the same code, settings, and inputs
+- [ ] Resumes only failed processes
+- [ ] Saves the workflow state for later
 <?/quiz?>
 
 <?quiz?>
 
-question: What is the default mode for the `publishDir` directive?
-answer: copy
-answer-correct: symlink
-answer: move
-answer: hardlink
-content:
+What is the default mode for the `publishDir` directive?
 
+- [ ] copy
+- [x] symlink
+- [ ] move
+- [ ] hardlink
 <?/quiz?>
 
 <?quiz?>
 
-question: How do you pass a parameter to a Nextflow workflow from the command line?
-answer: `-parameter value`
-answer-correct: `--parameter value`
-answer: `params.parameter = value`
-answer: `-p parameter=value`
-content:
+How do you pass a parameter to a Nextflow workflow from the command line?
 
+- [ ] `-parameter value`
+- [x] `--parameter value`
+- [ ] `params.parameter = value`
+- [ ] `-p parameter=value`
 <?/quiz?>
 
 <?quiz?>
 
-question: Which quote type is required for variable interpolation in Nextflow?
-answer-correct: Double quotes `"`
-answer: Single quotes `'`
-answer: Backticks `` ` ``
-answer: Triple quotes `"""`
-content:
+Which quote type is required for variable interpolation in Nextflow?
 
+- [x] Double quotes `"`
+- [ ] Single quotes `'`
+- [ ] Backticks `` ` ``
+- [ ] Triple quotes `"""`
 <?/quiz?>
 
 ## Part 2: Hello Channels
 
 <?quiz?>
 
-question: What is a channel in Nextflow?
-answer: A file directory
-answer-correct: A queue-based mechanism for passing data between processes
-answer: A configuration parameter
-answer: A container registry
-content:
+What is a channel in Nextflow?
 
+- [ ] A file directory
+- [x] A queue-based mechanism for passing data between processes
+- [ ] A configuration parameter
+- [ ] A container registry
 <?/quiz?>
 
 <?quiz?>
 
-question: Which channel factory creates a simple queue channel with values?
-answer: `channel.fromPath()`
-answer-correct: `channel.of()`
-answer: `channel.from()`
-answer: `channel.create()`
-content:
+Which channel factory creates a simple queue channel with values?
 
+- [ ] `channel.fromPath()`
+- [x] `channel.of()`
+- [ ] `channel.from()`
+- [ ] `channel.create()`
 <?/quiz?>
 
 <?quiz?>
 
-question: What happens when you pass a channel with multiple values to a process?
-answer: Only the first value is processed
-answer-correct: The process is called once for each value in the channel
-answer: All values are processed together in a single call
-answer: The workflow fails with an error
-content:
+What happens when you pass a channel with multiple values to a process?
 
+- [ ] Only the first value is processed
+- [x] The process is called once for each value in the channel
+- [ ] All values are processed together in a single call
+- [ ] The workflow fails with an error
 <?/quiz?>
 
 <?quiz?>
 
-question: What does the `flatten()` operator do?
-answer-correct: Unpacks array contents into individual items
-answer: Removes duplicate items from a channel
-answer: Sorts channel contents alphabetically
-answer: Converts items to lowercase
-content:
+What does the `flatten()` operator do?
 
+- [x] Unpacks array contents into individual items
+- [ ] Removes duplicate items from a channel
+- [ ] Sorts channel contents alphabetically
+- [ ] Converts items to lowercase
 <?/quiz?>
 
 <?quiz?>
 
-question: What is the purpose of the `view()` operator?
-answer: To visualize the workflow structure
-answer-correct: To inspect and print channel contents for debugging
-answer: To create graphical output
-answer: To validate channel data types
-content:
+What is the purpose of the `view()` operator?
 
+- [ ] To visualize the workflow structure
+- [x] To inspect and print channel contents for debugging
+- [ ] To create graphical output
+- [ ] To validate channel data types
 <?/quiz?>
 
 <?quiz?>
 
-question: What does the `splitCsv()` operator do?
-answer: Creates a CSV file from channel data
-answer-correct: Parses CSV-formatted content, reading each line into an array
-answer: Splits a channel into multiple channels
-answer: Validates CSV formatting
-content:
+What does the `splitCsv()` operator do?
 
+- [ ] Creates a CSV file from channel data
+- [x] Parses CSV-formatted content, reading each line into an array
+- [ ] Splits a channel into multiple channels
+- [ ] Validates CSV formatting
 <?/quiz?>
 
 <?quiz?>
 
-question: Which operator transforms channel contents element-by-element?
-answer: `transform()`
-answer: `apply()`
-answer-correct: `map()`
-answer: `modify()`
-content:
+Which operator transforms channel contents element-by-element?
 
+- [ ] `transform()`
+- [ ] `apply()`
+- [x] `map()`
+- [ ] `modify()`
 <?/quiz?>
 
 <?quiz?>
 
-question: Why do you need dynamic filenames when processing multiple inputs?
-answer: To save disk space
-answer: To improve performance
-answer-correct: To prevent output files from overwriting each other
-answer: To make resume work correctly
-content:
+Why do you need dynamic filenames when processing multiple inputs?
 
+- [ ] To save disk space
+- [ ] To improve performance
+- [x] To prevent output files from overwriting each other
+- [ ] To make resume work correctly
 <?/quiz?>
 
 ## Part 3: Hello Workflow
 
 <?quiz?>
 
-question: How do you access the output of a process in Nextflow?
-answer: `processName.output`
-answer-correct: `processName.out`
-answer: `processName.result`
-answer: `output.processName`
-content:
+How do you access the output of a process in Nextflow?
 
+- [ ] `processName.output`
+- [x] `processName.out`
+- [ ] `processName.result`
+- [ ] `output.processName`
 <?/quiz?>
 
 <?quiz?>
 
-question: What determines the execution order of processes in a workflow?
-answer: The order they are defined in the file
-answer: Alphabetical order by process name
-answer-correct: The dependencies between processes (output → input)
-answer: The order they are called in the workflow block
-content:
+What determines the execution order of processes in a workflow?
 
+- [ ] The order they are defined in the file
+- [ ] Alphabetical order by process name
+- [x] The dependencies between processes (output → input)
+- [ ] The order they are called in the workflow block
 <?/quiz?>
 
 <?quiz?>
 
-question: What does the `collect()` operator do?
-answer: Unpacks arrays into individual items
-answer-correct: Packages many channel items into a single array element
-answer: Removes null values from a channel
-answer: Collects error messages
-content:
+What does the `collect()` operator do?
 
+- [ ] Unpacks arrays into individual items
+- [x] Packages many channel items into a single array element
+- [ ] Removes null values from a channel
+- [ ] Collects error messages
 <?/quiz?>
 
 <?quiz?>
 
-question: When should you use the `collect()` operator?
-answer: Before processing items individually in parallel
-answer-correct: Before a process that needs all results at once
-answer: To speed up channel operations
-answer: When publishing outputs
-content:
+When should you use the `collect()` operator?
 
+- [ ] Before processing items individually in parallel
+- [x] Before a process that needs all results at once
+- [ ] To speed up channel operations
+- [ ] When publishing outputs
 <?/quiz?>
 
 <?quiz?>
 
-question: How do you access named outputs from a process?
-answer: `processName.out[outputname]`
-answer-correct: `processName.out.outputname`
-answer: `processName.outputname`
-answer: `output.processName.outputname`
-content:
+How do you access named outputs from a process?
 
+- [ ] `processName.out[outputname]`
+- [x] `processName.out.outputname`
+- [ ] `processName.outputname`
+- [ ] `output.processName.outputname`
 <?/quiz?>
 
 <?quiz?>
 
-question: What is the syntax for naming a process output?
-answer-correct: `output: path "file.txt", emit: myoutput`
-answer: `output: path "file.txt", name: myoutput`
-answer: `output: path "file.txt" as myoutput`
-answer: `output: path "file.txt" -> myoutput`
-content:
+What is the syntax for naming a process output?
 
+- [x] `output: path "file.txt", emit: myoutput`
+- [ ] `output: path "file.txt", name: myoutput`
+- [ ] `output: path "file.txt" as myoutput`
+- [ ] `output: path "file.txt" -> myoutput`
 <?/quiz?>
 
 <?quiz?>
 
-question: When passing multiple inputs to a process, what must match?
-answer-correct: The order of inputs in the workflow call must match the input block order
-answer: The data types must all be the same
-answer: The variable names must match exactly
-answer: The number of inputs must equal the number of outputs
-content:
+When passing multiple inputs to a process, what must match?
 
+- [x] The order of inputs in the workflow call must match the input block order
+- [ ] The data types must all be the same
+- [ ] The variable names must match exactly
+- [ ] The number of inputs must equal the number of outputs
 <?/quiz?>
 
 ## Part 4: Hello Modules
 
 <?quiz?>
 
-question: What is a Nextflow module?
-answer: A configuration file
-answer: A workflow definition
-answer-correct: A standalone file containing a single process definition
-answer: A container image
-content:
+What is a Nextflow module?
 
+- [ ] A configuration file
+- [ ] A workflow definition
+- [x] A standalone file containing a single process definition
+- [ ] A container image
 <?/quiz?>
 
 <?quiz?>
 
-question: What is the recommended filename convention for modules?
-answer: `module_processName.nf`
-answer-correct: `processName.nf`
-answer: `processName.module`
-answer: `processName_module.nf`
-content:
+What is the recommended filename convention for modules?
 
+- [ ] `module_processName.nf`
+- [x] `processName.nf`
+- [ ] `processName.module`
+- [ ] `processName_module.nf`
 <?/quiz?>
 
 <?quiz?>
 
-question: Where should module files typically be stored?
-answer: In the root directory
-answer: In the `lib/` directory
-answer-correct: In the `modules/` directory
-answer: In the `processes/` directory
-content:
+Where should module files typically be stored?
 
+- [ ] In the root directory
+- [ ] In the `lib/` directory
+- [x] In the `modules/` directory
+- [ ] In the `processes/` directory
 <?/quiz?>
 
 <?quiz?>
 
-question: What is the correct syntax to import a module?
-answer: `import { processName } from './modules/processName.nf'`
-answer-correct: `include { processName } from './modules/processName.nf'`
-answer: `require { processName } from './modules/processName.nf'`
-answer: `use { processName } from './modules/processName.nf'`
-content:
+What is the correct syntax to import a module?
 
+- [ ] `import { processName } from './modules/processName.nf'`
+- [x] `include { processName } from './modules/processName.nf'`
+- [ ] `require { processName } from './modules/processName.nf'`
+- [ ] `use { processName } from './modules/processName.nf'`
 <?/quiz?>
 
 <?quiz?>
 
-question: What happens to resume functionality when you convert processes to modules?
-answer: Resume stops working
-answer: Resume only works for the main workflow
-answer-correct: Resume continues to work normally
-answer: Resume works but cache is reset
-content:
+What happens to resume functionality when you convert processes to modules?
 
+- [ ] Resume stops working
+- [ ] Resume only works for the main workflow
+- [x] Resume continues to work normally
+- [ ] Resume works but cache is reset
 <?/quiz?>
 
 <?quiz?>
 
-question: What are key benefits of using modules?
-answer: Faster execution time
-answer: Reduced memory usage
-answer-correct: Reuse processes in multiple workflows without duplication
-answer-correct: Easier maintenance - improve module once, all workflows benefit
-answer-correct: Better code organization
-answer: Automatic parallelization
-content:
+What are key benefits of using modules?
 
+- [ ] Faster execution time
+- [ ] Reduced memory usage
+- [x] Reuse processes in multiple workflows without duplication
+- [x] Easier maintenance - improve module once, all workflows benefit
+- [x] Better code organization
+- [ ] Automatic parallelization
 <?/quiz?>
 
 ## Part 5: Hello Containers
 
 <?quiz?>
 
-question: What is a container?
-answer: A directory structure for organizing code
-answer-correct: A lightweight, standalone executable unit with application and dependencies
-answer: A Nextflow configuration file
-answer: A type of channel
-content:
+What is a container?
 
+- [ ] A directory structure for organizing code
+- [x] A lightweight, standalone executable unit with application and dependencies
+- [ ] A Nextflow configuration file
+- [ ] A type of channel
 <?/quiz?>
 
 <?quiz?>
 
-question: What is the difference between a container image and instance?
-answer: They are the same thing
-answer-correct: Image is a template; instance is a running container created from the image
-answer: Image is local; instance is remote
-answer: Instance is smaller than image
-content:
+What is the difference between a container image and instance?
 
+- [ ] They are the same thing
+- [x] Image is a template; instance is a running container created from the image
+- [ ] Image is local; instance is remote
+- [ ] Instance is smaller than image
 <?/quiz?>
 
 <?quiz?>
 
-question: What does the `-v` flag do in Docker?
-answer: Enables verbose output
-answer: Sets the Docker version
-answer-correct: Mounts a volume to share directories between host and container
-answer: Validates the container image
-content:
+What does the `-v` flag do in Docker?
 
+- [ ] Enables verbose output
+- [ ] Sets the Docker version
+- [x] Mounts a volume to share directories between host and container
+- [ ] Validates the container image
 <?/quiz?>
 
 <?quiz?>
 
-question: Why do you need to mount volumes when using containers?
-answer: To improve performance
-answer: To reduce disk space usage
-answer-correct: Because containers are isolated from the host filesystem by default
-answer: To enable networking
-content:
+Why do you need to mount volumes when using containers?
 
+- [ ] To improve performance
+- [ ] To reduce disk space usage
+- [x] Because containers are isolated from the host filesystem by default
+- [ ] To enable networking
 <?/quiz?>
 
 <?quiz?>
 
-question: How do you specify a container for a Nextflow process?
-answer: `docker 'image_uri'` directive
-answer-correct: `container 'image_uri'` directive
-answer: `image 'image_uri'` directive
-answer: `containerImage 'image_uri'` directive
-content:
+How do you specify a container for a Nextflow process?
 
+- [ ] `docker 'image_uri'` directive
+- [x] `container 'image_uri'` directive
+- [ ] `image 'image_uri'` directive
+- [ ] `containerImage 'image_uri'` directive
 <?/quiz?>
 
 <?quiz?>
 
-question: How do you enable Docker in a Nextflow workflow?
-answer: Use the `-with-docker` flag only
-answer-correct: Set `docker.enabled = true` in the config file
-answer: Docker is enabled by default
-answer: Use the `--docker` parameter
-content:
+How do you enable Docker in a Nextflow workflow?
 
+- [ ] Use the `-with-docker` flag only
+- [x] Set `docker.enabled = true` in the config file
+- [ ] Docker is enabled by default
+- [ ] Use the `--docker` parameter
 <?/quiz?>
 
 <?quiz?>
 
-question: What does Nextflow automatically do when using containers?
-answer: Builds the container from a Dockerfile
-answer-correct: Pulls the image if not already local
-answer-correct: Mounts the work directory into the container
-answer-correct: Runs the process script inside the container
-answer-correct: Handles cleanup after execution
-answer: Installs Docker on the system
-answer: Creates a new container image
-content:
+What does Nextflow automatically do when using containers?
 
+- [ ] Builds the container from a Dockerfile
+- [x] Pulls the image if not already local
+- [x] Mounts the work directory into the container
+- [x] Runs the process script inside the container
+- [x] Handles cleanup after execution
+- [ ] Installs Docker on the system
+- [ ] Creates a new container image
 <?/quiz?>
 
 ## Part 6: Hello Config
 
 <?quiz?>
 
-question: What file does Nextflow automatically load for configuration?
-answer: `config.nf`
-answer: `workflow.config`
-answer-correct: `nextflow.config`
-answer: `settings.config`
-content:
+What file does Nextflow automatically load for configuration?
 
+- [ ] `config.nf`
+- [ ] `workflow.config`
+- [x] `nextflow.config`
+- [ ] `settings.config`
 <?/quiz?>
 
 <?quiz?>
 
-question: What is the configuration precedence in Nextflow?
-answer: Config file overrides CLI arguments
-answer-correct: CLI arguments override config file values
-answer: Default values override everything
-answer: Profile settings always take precedence
-content:
+What is the configuration precedence in Nextflow?
 
+- [ ] Config file overrides CLI arguments
+- [x] CLI arguments override config file values
+- [ ] Default values override everything
+- [ ] Profile settings always take precedence
 <?/quiz?>
 
 <?quiz?>
 
-question: Can you enable both Docker and Conda in the same configuration?
-answer: No, only one can be enabled at a time
-answer-correct: Yes, both can be enabled simultaneously
-answer: Only if using different profiles
-answer: Only on certain operating systems
-content:
+Can you enable both Docker and Conda in the same configuration?
 
+- [ ] No, only one can be enabled at a time
+- [x] Yes, both can be enabled simultaneously
+- [ ] Only if using different profiles
+- [ ] Only on certain operating systems
 <?/quiz?>
 
 <?quiz?>
 
-question: What happens when both Docker and Conda are enabled for a process that has both directives?
-answer: Conda is prioritized
-answer-correct: Docker is prioritized
-answer: The workflow fails with an error
-answer: The first one defined is used
-content:
+What happens when both Docker and Conda are enabled for a process that has both directives?
 
+- [ ] Conda is prioritized
+- [x] Docker is prioritized
+- [ ] The workflow fails with an error
+- [ ] The first one defined is used
 <?/quiz?>
 
 <?quiz?>
 
-question: What is the default memory allocation for a Nextflow process?
-answer: 1.GB
-answer-correct: 2.GB
-answer: 4.GB
-answer: It depends on the system
-content:
+What is the default memory allocation for a Nextflow process?
 
+- [ ] 1.GB
+- [x] 2.GB
+- [ ] 4.GB
+- [ ] It depends on the system
 <?/quiz?>
 
 <?quiz?>
 
-question: How do you set resources for a specific process in the config?
-answer-correct: `process { withName: 'processName' { cpus = 4 } }`
-answer: `process.processName.cpus = 4`
-answer: `processName { cpus = 4 }`
-answer: `resources.processName.cpus = 4`
-content:
+How do you set resources for a specific process in the config?
 
+- [x] `process { withName: 'processName' { cpus = 4 } }`
+- [ ] `process.processName.cpus = 4`
+- [ ] `processName { cpus = 4 }`
+- [ ] `resources.processName.cpus = 4`
 <?/quiz?>
 
 <?quiz?>
 
-question: What command generates a resource profiling report?
-answer: `nextflow run script.nf -profile`
-answer: `nextflow run script.nf -report`
-answer-correct: `nextflow run script.nf -with-report filename.html`
-answer: `nextflow run script.nf --resource-report`
-content:
+What command generates a resource profiling report?
 
+- [ ] `nextflow run script.nf -profile`
+- [ ] `nextflow run script.nf -report`
+- [x] `nextflow run script.nf -with-report filename.html`
+- [ ] `nextflow run script.nf --resource-report`
 <?/quiz?>
 
 <?quiz?>
 
-question: What is the purpose of `resourceLimits` in the configuration?
-answer: To set minimum resource requirements
-answer-correct: To cap the maximum resources that can be requested
-answer: To automatically allocate optimal resources
-answer: To track resource usage over time
-content:
+What is the purpose of `resourceLimits` in the configuration?
 
+- [ ] To set minimum resource requirements
+- [x] To cap the maximum resources that can be requested
+- [ ] To automatically allocate optimal resources
+- [ ] To track resource usage over time
 <?/quiz?>
 
 <?quiz?>
 
-question: What is the default executor in Nextflow?
-answer: `slurm`
-answer-correct: `local`
-answer: `cloud`
-answer: `batch`
-content:
+What is the default executor in Nextflow?
 
+- [ ] `slurm`
+- [x] `local`
+- [ ] `cloud`
+- [ ] `batch`
 <?/quiz?>
 
 <?quiz?>
 
-question: How do you use a parameter file with Nextflow?
-answer: `nextflow run script.nf -config file.json`
-answer-correct: `nextflow run script.nf -params-file file.json`
-answer: `nextflow run script.nf --parameters file.json`
-answer: Parameter files are loaded automatically
-content:
+How do you use a parameter file with Nextflow?
 
+- [ ] `nextflow run script.nf -config file.json`
+- [x] `nextflow run script.nf -params-file file.json`
+- [ ] `nextflow run script.nf --parameters file.json`
+- [ ] Parameter files are loaded automatically
 <?/quiz?>
 
 <?quiz?>
 
-question: What can profiles be used for in Nextflow?
-answer: User account settings
-answer-correct: Grouping infrastructure settings (executor, container technology)
-answer-correct: Setting different resource limits for different environments
-answer-correct: Providing test parameter values
-answer: Performance benchmarking
-answer: Container registry authentication
-content:
+What can profiles be used for in Nextflow?
 
+- [ ] User account settings
+- [x] Grouping infrastructure settings (executor, container technology)
+- [x] Setting different resource limits for different environments
+- [x] Providing test parameter values
+- [ ] Performance benchmarking
+- [ ] Container registry authentication
 <?/quiz?>
 
 <?quiz?>
 
-question: How do you use multiple profiles simultaneously?
-answer: You can only use one profile at a time
-answer: `nextflow run script.nf -profile profile1 -profile profile2`
-answer-correct: `nextflow run script.nf -profile profile1,profile2`
-answer: Profiles are automatically merged
-content:
+How do you use multiple profiles simultaneously?
 
+- [ ] You can only use one profile at a time
+- [ ] `nextflow run script.nf -profile profile1 -profile profile2`
+- [x] `nextflow run script.nf -profile profile1,profile2`
+- [ ] Profiles are automatically merged
 <?/quiz?>
 
 ## General Concepts
 
 <?quiz?>
 
-question: Which of these is part of the Nextflow language?
-answer-correct: Process
-answer: Rule
-answer-correct: Workflow
-answer-correct: Module
-answer: Switch
-answer-correct: Channel
-answer-correct: Include
-content:
+Which of these is part of the Nextflow language?
 
+- [x] Process
+- [ ] Rule
+- [x] Workflow
+- [x] Module
+- [ ] Switch
+- [x] Channel
+- [x] Include
 <?/quiz?>
 
 <?quiz?>
 
-question: What does DSL2 refer to?
-answer: Docker Specification Language version 2
-answer-correct: Domain-Specific Language version 2
-answer: Data Structure Library version 2
-answer: Distributed System Layer version 2
-content:
+What does DSL2 refer to?
 
+- [ ] Docker Specification Language version 2
+- [x] Domain-Specific Language version 2
+- [ ] Data Structure Library version 2
+- [ ] Distributed System Layer version 2
 <?/quiz?>
 
 <?quiz?>
 
-question: What is the shebang required for Nextflow scripts?
-answer: `#!/bin/bash`
-answer-correct: `#!/usr/bin/env nextflow`
-answer: `#!/usr/bin/nextflow`
-answer: No shebang is required
-content:
+What is the shebang required for Nextflow scripts?
 
+- [ ] `#!/bin/bash`
+- [x] `#!/usr/bin/env nextflow`
+- [ ] `#!/usr/bin/nextflow`
+- [ ] No shebang is required
 <?/quiz?>
 
 <?quiz?>
 
-question: What is the naming convention for process names in DSL2?
-answer: lowercase
-answer: camelCase
-answer-correct: UPPERCASE
-answer: snake_case
-content:
+What is the naming convention for process names in DSL2?
 
+- [ ] lowercase
+- [ ] camelCase
+- [x] UPPERCASE
+- [ ] snake_case
 <?/quiz?>
 
 <?quiz?>
 
-question: Which tool can generate container images from Conda packages?
-answer: DockerHub
-answer-correct: Seqera Containers
-answer: BioContainers
-answer: Conda Cloud
-content:
+Which tool can generate container images from Conda packages?
 
+- [ ] DockerHub
+- [x] Seqera Containers
+- [ ] BioContainers
+- [ ] Conda Cloud
 <?/quiz?>
 
 <?quiz?>
 
-question: What type of quotes should be used for multi-line script blocks?
-answer: Single quotes `'...'`
-answer: Double quotes `"..."`
-answer-correct: Triple quotes `"""..."""`
-answer: Backticks `` `...` ``
-content:
+What type of quotes should be used for multi-line script blocks?
 
+- [ ] Single quotes `'...'`
+- [ ] Double quotes `"..."`
+- [x] Triple quotes `"""..."""`
+- [ ] Backticks `` `...` ``
 <?/quiz?>
 
 <?quiz?>
 
-question: What is the file extension for Nextflow scripts?
-answer: `.nextflow`
-answer-correct: `.nf`
-answer: `.nx`
-answer: `.workflow`
-content:
+What is the file extension for Nextflow scripts?
 
+- [ ] `.nextflow`
+- [x] `.nf`
+- [ ] `.nx`
+- [ ] `.workflow`
 <?/quiz?>
 
 <?quiz?>
 
-question: Which files in the work directory are useful for debugging? (Select all that apply)
-answer-correct: `.command.sh` - shows the actual command executed
-answer-correct: `.command.err` - shows stderr output
-answer-correct: `.command.out` - shows stdout output
-answer-correct: `.command.log` - shows complete log
-answer-correct: `.exitcode` - shows the exit status
-answer: `.command.config` - shows process configuration
-content:
+Which files in the work directory are useful for debugging? (Select all that apply)
 
+- [x] `.command.sh` - shows the actual command executed
+- [x] `.command.err` - shows stderr output
+- [x] `.command.out` - shows stdout output
+- [x] `.command.log` - shows complete log
+- [x] `.exitcode` - shows the exit status
+- [ ] `.command.config` - shows process configuration
 <?/quiz?>
 
 <?quiz?>
 
-question: What happens if you use single quotes for a string that needs variable interpolation?
-answer: Nextflow automatically converts them to double quotes
-answer-correct: The variable name appears literally; interpolation doesn't work
-answer: The workflow fails with a syntax error
-answer: The variable is interpolated anyway
-content:
+What happens if you use single quotes for a string that needs variable interpolation?
 
+- [ ] Nextflow automatically converts them to double quotes
+- [x] The variable name appears literally; interpolation doesn't work
+- [ ] The workflow fails with a syntax error
+- [ ] The variable is interpolated anyway
 <?/quiz?>
 
 <?quiz?>
 
-question: What does the `nextflow clean` command do?
-answer: Cleans up container images
-answer-correct: Removes work subdirectories from past runs
-answer: Deletes configuration files
-answer: Clears the Nextflow cache
-content:
+What does the `nextflow clean` command do?
 
+- [ ] Cleans up container images
+- [x] Removes work subdirectories from past runs
+- [ ] Deletes configuration files
+- [ ] Clears the Nextflow cache
 <?/quiz?>
