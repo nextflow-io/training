@@ -1164,7 +1164,7 @@ Under `core-hello/conf`, we find two templated test profiles: `test.config` and 
 Given the purpose of our pipeline, there's not really a point to setting up a full-size test profile, so feel free to ignore or delete `test_full.config`.
 We're going to focus on setting up `test.config` to run on our `greetings.csv` file with a few default parameters.
 
-### 4.3.1. Copy over the `greetings.csv` file
+#### 4.3.1. Copy over the `greetings.csv` file
 
 First we need to copy the `greetings.csv` file to an appropriate place in our pipeline project.
 Typically small test files are stored in the `assets` directory, so let's copy the file over from our working directory.
@@ -1175,7 +1175,7 @@ cp greetings.csv core-hello/assets/.
 
 Now the `greetings.csv` file is ready to be used as test input.
 
-### 4.3.2. Update the `test.config` file
+#### 4.3.2. Update the `test.config` file
 
 Now we can update the `test.config` file as follows:
 
