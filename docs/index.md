@@ -186,9 +186,9 @@ Not sure where to go? Check out the [Getting help](help.md) page.
 
 ## Credits and contributions
 
-[![Creative Commons Attribution 4.0 International (CC BY 4.0](assets/img/cc_by.svg){ align=right }](https://creativecommons.org/licenses/by/4.0/)
+[![Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0](assets/img/cc_by-nc-nd.svg){ align=right }](https://creativecommons.org/licenses/by-nc-nd/4.0/)
 
-This training material is developed and maintained by [Seqera](https://seqera.io) and released under an open-source license ([CC BY](https://creativecommons.org/licenses/by/4.0/)) for the benefit of the community. You are welcome to reuse these materials according to the terms of the license. If you are an instructor running your own trainings, we'd love to hear about how it goes and what we could do to make it easier.
+This training material is developed and maintained by [Seqera](https://seqera.io) and released under an open-source license ([CC BY-NC-ND](https://creativecommons.org/licenses/by-nc-nd/4.0/)) for the benefit of the community. You are welcome to reuse these materials according to the terms of the license. If you are an instructor running your own trainings, we'd love to hear about how it goes and what we could do to make it easier.
 
 We welcome fixes and improvements from the community. Every page has a :material-file-edit-outline: icon in the top right of the page, which will take you to GitHub where you can propose changes to the training source material via a pull request.
 
