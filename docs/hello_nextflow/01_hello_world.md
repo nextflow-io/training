@@ -697,3 +697,95 @@ More generally, you know how to interpret a simple Nextflow workflow, manage its
 
 Take a little break, you've earned it!
 When you're ready, move on to Part 2 to learn how to use channels to feed inputs into your workflow, which will allow you to take advantage of Nextflow's built-in dataflow parallelism and other powerful features.
+
+## Quiz
+
+Test your knowledge of the concepts covered in Part 1 with this short quiz:
+
+!!! info
+
+    <!-- mkdocs-quiz intro -->
+
+<quiz>
+What is the minimum requirement for a Nextflow process?
+
+- [ ] Input and output blocks
+- [x] Output and script blocks
+- [ ] Only a script block
+- [ ] Input block
+
+</quiz>
+
+<quiz>
+What does the output block in a process do?
+
+- [ ] Creates the output files automatically
+- [x] Declares what output files to expect from the process
+- [ ] Determines the format of the output
+- [ ] Publishes outputs to a directory
+
+</quiz>
+
+<quiz>
+What command is used to run a Nextflow workflow?
+
+- [ ] `nextflow execute script.nf`
+- [x] `nextflow run script.nf`
+- [ ] `nextflow start script.nf`
+- [ ] `nextflow launch script.nf`
+
+</quiz>
+
+<quiz>
+What is stored in the `work/` directory?
+
+- [ ] Only the final output files
+- [ ] Configuration files
+- [x] Temporary files for each process execution
+- [x] Execution metadata like `.command.sh` and `.exitcode`
+- [x] Output files from processes
+- [ ] Container images
+
+</quiz>
+
+<quiz>
+What does the `-resume` flag do?
+
+- [ ] Restarts the entire workflow from scratch
+- [x] Skips processes that already ran with the same code, settings, and inputs
+- [ ] Resumes only failed processes
+- [ ] Saves the workflow state for later
+
+</quiz>
+
+<quiz>
+What is the default mode for the `publishDir` directive?
+
+- [ ] copy
+- [x] symlink
+- [ ] move
+- [ ] hardlink
+
+</quiz>
+
+<quiz>
+How do you pass a parameter to a Nextflow workflow from the command line?
+
+- [ ] `-parameter value`
+- [x] `--parameter value`
+- [ ] `params.parameter = value`
+- [ ] `-p parameter=value`
+
+</quiz>
+
+<quiz>
+Which quote type is required for variable interpolation in Nextflow?
+
+- [x] Double quotes `"`
+- [ ] Single quotes `'`
+- [ ] Backticks `` ` ``
+- [ ] Triple quotes `"""`
+
+</quiz>
+
+<!-- mkdocs-quiz results -->

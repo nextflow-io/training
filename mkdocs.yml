@@ -25,7 +25,6 @@ nav:
       - hello_nextflow/04_hello_modules.md
       - hello_nextflow/05_hello_containers.md
       - hello_nextflow/06_hello_config.md
-      - hello_nextflow/07_hello_quiz.md
       - hello_nextflow/survey.md
       - hello_nextflow/next_steps.md
   - Hello nf-core:

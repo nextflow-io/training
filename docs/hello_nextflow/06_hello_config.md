@@ -623,3 +623,135 @@ You know how to use profiles to select a preset configuration at runtime with mi
 Celebrate and give yourself a big pat on the back! You have completed your very first Nextflow developer course.
 
 Next, we ask you to complete a very short survey about your experience with this training course, then we'll take you to a page with links to further training resources and helpful links.
+
+## Quiz
+
+Test your knowledge of the concepts covered in Part 6 with this short quiz:
+
+!!! info
+
+    <!-- mkdocs-quiz intro -->
+
+<quiz>
+What file does Nextflow automatically load for configuration?
+
+- [ ] `config.nf`
+- [ ] `workflow.config`
+- [x] `nextflow.config`
+- [ ] `settings.config`
+
+</quiz>
+
+<quiz>
+What is the configuration precedence in Nextflow?
+
+- [ ] Config file overrides CLI arguments
+- [x] CLI arguments override config file values
+- [ ] Default values override everything
+- [ ] Profile settings always take precedence
+
+</quiz>
+
+<quiz>
+Can you enable both Docker and Conda in the same configuration?
+
+- [ ] No, only one can be enabled at a time
+- [x] Yes, both can be enabled simultaneously
+- [ ] Only if using different profiles
+- [ ] Only on certain operating systems
+
+</quiz>
+
+<quiz>
+What happens when both Docker and Conda are enabled for a process that has both directives?
+
+- [ ] Conda is prioritized
+- [x] Docker is prioritized
+- [ ] The workflow fails with an error
+- [ ] The first one defined is used
+
+</quiz>
+
+<quiz>
+What is the default memory allocation for a Nextflow process?
+
+- [ ] 1.GB
+- [x] 2.GB
+- [ ] 4.GB
+- [ ] It depends on the system
+
+</quiz>
+
+<quiz>
+How do you set resources for a specific process in the config?
+
+- [x] `process { withName: 'processName' { cpus = 4 } }`
+- [ ] `process.processName.cpus = 4`
+- [ ] `processName { cpus = 4 }`
+- [ ] `resources.processName.cpus = 4`
+
+</quiz>
+
+<quiz>
+What command generates a resource profiling report?
+
+- [ ] `nextflow run script.nf -profile`
+- [ ] `nextflow run script.nf -report`
+- [x] `nextflow run script.nf -with-report filename.html`
+- [ ] `nextflow run script.nf --resource-report`
+
+</quiz>
+
+<quiz>
+What is the purpose of `resourceLimits` in the configuration?
+
+- [ ] To set minimum resource requirements
+- [x] To cap the maximum resources that can be requested
+- [ ] To automatically allocate optimal resources
+- [ ] To track resource usage over time
+
+</quiz>
+
+<quiz>
+What is the default executor in Nextflow?
+
+- [ ] `slurm`
+- [x] `local`
+- [ ] `cloud`
+- [ ] `batch`
+
+</quiz>
+
+<quiz>
+How do you use a parameter file with Nextflow?
+
+- [ ] `nextflow run script.nf -config file.json`
+- [x] `nextflow run script.nf -params-file file.json`
+- [ ] `nextflow run script.nf --parameters file.json`
+- [ ] Parameter files are loaded automatically
+
+</quiz>
+
+<quiz>
+What can profiles be used for in Nextflow?
+
+- [ ] User account settings
+- [x] Grouping infrastructure settings (executor, container technology)
+- [x] Setting different resource limits for different environments
+- [x] Providing test parameter values
+- [ ] Performance benchmarking
+- [ ] Container registry authentication
+
+</quiz>
+
+<quiz>
+How do you use multiple profiles simultaneously?
+
+- [ ] You can only use one profile at a time
+- [ ] `nextflow run script.nf -profile profile1 -profile profile2`
+- [x] `nextflow run script.nf -profile profile1,profile2`
+- [ ] Profiles are automatically merged
+
+</quiz>
+
+<!-- mkdocs-quiz results -->
