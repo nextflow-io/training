@@ -617,4 +617,6 @@ What does the `nextflow clean` command do?
 
 </quiz>
 
+## Results
+
 <!-- mkdocs-quiz results -->
