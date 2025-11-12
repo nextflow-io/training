@@ -92,7 +92,7 @@ This displays documentation about the module, including its inputs, outputs, and
 
 ??? example "Output"
 
-````console
+    ```console
 
                                               ,--./,-.
               ___     __   __   __   ___     /,-._.--~\
@@ -137,6 +137,7 @@ This displays documentation about the module, including its inputs, outputs, and
                           ╵                                 ╵
 
     💻  Installation command: nf-core modules install cat/cat
+
     ```
 
 This is the exact same information you can find on the website.
@@ -153,13 +154,13 @@ Navigate to your pipeline directory and run the installation command:
 ```bash
 cd core-hello
 nf-core modules install cat/cat
-````
+```
 
 The tool will first prompt you to specify a repository type.
 
 ??? example "Output"
 
-````console
+    ```console
 
                                           ,--./,-.
           ___     __   __   __   ___     /,-._.--~\
@@ -174,16 +175,18 @@ The tool will first prompt you to specify a repository type.
     ? Is this repository a pipeline or a modules repository? (Use arrow keys)
     » Pipeline
       Modules repository
+    ```
 
 Press enter to accept the default response (`Pipeline`) and continue.
 
 The tool will then offer to amend the configuration of your project to avoid this prompt in the future.
 
 ??? example "Output"
-`console
-    INFO     To avoid this prompt in the future, add the 'repository_type' key to your .nf-core.yml file.
-    ? Would you like me to add this config now? [y/n] (y):
-    `
+
+    ```console
+        INFO     To avoid this prompt in the future, add the 'repository_type' key to your .nf-core.yml file.
+        ? Would you like me to add this config now? [y/n] (y):
+    ```
 
 Might as well take advantage of this convenient tooling!
 Press enter to accept the default response (yes).
@@ -191,13 +194,14 @@ Press enter to accept the default response (yes).
 Finally, the tool will proceed to install the module.
 
 ??? example "Output"
-```console
-INFO Config added to '.nf-core.yml'
-INFO Reinstalling modules found in 'modules.json' but missing from directory:
-INFO Installing 'cat/cat'
-INFO Use the following statement to include this module:
 
-    include { CAT_CAT } from '../modules/nf-core/cat/cat/main'
+    ```console
+    INFO Config added to '.nf-core.yml'
+    INFO Reinstalling modules found in 'modules.json' but missing from directory:
+    INFO Installing 'cat/cat'
+    INFO Use the following statement to include this module:
+
+        include { CAT_CAT } from '../modules/nf-core/cat/cat/main'
     ```
 
 The command automatically:
@@ -214,7 +218,7 @@ Let's check that the module was installed correctly:
 
 ```bash
 tree -L 4 modules
-````
+```
 
 ??? example "Directory contents"
 
@@ -260,6 +264,16 @@ However, to actually use the new module, we need to import it into our pipeline.
 ### 1.5. Update the module imports
 
 Let's replace the `include` statement for the `collectGreetings` module with the one for `CAT_CAT` in the imports section of the `workflows/hello.nf` workflow.
+
+!!! note
+
+    You can optionally delete the `collectGreetings.nf` file:
+
+    ```bash
+    rm modules/local/collectGreetings.nf
+    ```
+
+    However, you might want to keep it as a reference for understanding the differences between local and nf-core modules.
 
 As a reminder, the module install tool gave us the exact statement to use:
 
@@ -726,43 +740,43 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
 
 This should run reasonably quickly.
 
-??? example title="Output"
+??? example "Output"
 
-````console
-N E X T F L O W ~ version 25.04.3
+    ```console
+    N E X T F L O W ~ version 25.04.3
 
-    Launching `./main.nf` [evil_pike] DSL2 - revision: b9e9b3b8de
+        Launching `./main.nf` [evil_pike] DSL2 - revision: b9e9b3b8de
 
-    Input/output options
-      input                     : /workspaces/training/hello-nf-core/core-hello/assets/greetings.csv
-      outdir                    : core-hello-results
+        Input/output options
+          input                     : /workspaces/training/hello-nf-core/core-hello/assets/greetings.csv
+          outdir                    : core-hello-results
 
-    Institutional config options
-      config_profile_name       : Test profile
-      config_profile_description: Minimal test dataset to check pipeline function
+        Institutional config options
+          config_profile_name       : Test profile
+          config_profile_description: Minimal test dataset to check pipeline function
 
-    Generic options
-      validate_params           : false
-      trace_report_suffix       : 2025-10-30_18-50-58
+        Generic options
+          validate_params           : false
+          trace_report_suffix       : 2025-10-30_18-50-58
 
-    Core Nextflow options
-      runName                   : evil_pike
-      containerEngine           : docker
-      launchDir                 : /workspaces/training/hello-nf-core/core-hello
-      workDir                   : /workspaces/training/hello-nf-core/core-hello/work
-      projectDir                : /workspaces/training/hello-nf-core/core-hello
-      userName                  : root
-      profile                   : test,docker
-      configFiles               : /workspaces/training/hello-nf-core/core-hello/nextflow.config
+        Core Nextflow options
+          runName                   : evil_pike
+          containerEngine           : docker
+          launchDir                 : /workspaces/training/hello-nf-core/core-hello
+          workDir                   : /workspaces/training/hello-nf-core/core-hello/work
+          projectDir                : /workspaces/training/hello-nf-core/core-hello
+          userName                  : root
+          profile                   : test,docker
+          configFiles               : /workspaces/training/hello-nf-core/core-hello/nextflow.config
 
-    !! Only displaying parameters that differ from the pipeline defaults !!
-    ------------------------------------------------------
-    executor >  local (8)
-    [b3/f005fd] CORE_HELLO:HELLO:sayHello (3)       [100%] 3 of 3 ✔
-    [08/f923d0] CORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔
-    [34/3729a9] CORE_HELLO:HELLO:CAT_CAT (test)     [100%] 1 of 1 ✔
-    [24/df918a] CORE_HELLO:HELLO:cowpy              [100%] 1 of 1 ✔
-    -[core/hello] Pipeline completed successfully-
+        !! Only displaying parameters that differ from the pipeline defaults !!
+        ------------------------------------------------------
+        executor >  local (8)
+        [b3/f005fd] CORE_HELLO:HELLO:sayHello (3)       [100%] 3 of 3 ✔
+        [08/f923d0] CORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔
+        [34/3729a9] CORE_HELLO:HELLO:CAT_CAT (test)     [100%] 1 of 1 ✔
+        [24/df918a] CORE_HELLO:HELLO:cowpy              [100%] 1 of 1 ✔
+        -[core/hello] Pipeline completed successfully-
     ```
 
 Notice that `CAT_CAT` now appears in the process execution list instead of `collectGreetings`.
@@ -782,4 +796,7 @@ You now know how to:
 
 Learn to adapt your local modules to follow nf-core conventions.
 We'll also show you how to create new nf-core modules from a template using the nf-core tooling.
-````
+
+```
+
+```
