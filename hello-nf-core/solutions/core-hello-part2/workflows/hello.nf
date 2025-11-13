@@ -20,7 +20,10 @@ workflow HELLO {
 
     take:
     ch_samplesheet // channel: samplesheet read in from --input
+
     main:
+
+    ch_versions = Channel.empty()
 
     // emit a greeting
     sayHello(ch_samplesheet)
@@ -33,8 +36,6 @@ workflow HELLO {
 
     // generate ASCII art of the greetings with cowpy
     cowpy(collectGreetings.out.outfile, params.character)
-
-    ch_versions = Channel.empty()
 
     //
     // Collate and save software versions

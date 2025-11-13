@@ -33,8 +33,9 @@ nav:
       - hello_nf-core/01_run_demo.md
       - hello_nf-core/02_rewrite_hello.md
       - hello_nf-core/03_use_module.md
-      - hello_nf-core/04_adapt_module.md
+      - hello_nf-core/04_make_module.md
       - hello_nf-core/05_input_validation.md
+      - hello_nf-core/summary.md
       - hello_nf-core/survey.md
       - hello_nf-core/next_steps.md
   - Nextflow for Science:
@@ -79,7 +80,6 @@ nav:
       - side_quests/debugging.md
       - side_quests/essential_scripting_patterns.md
       - side_quests/nf-test.md
-      - side_quests/nf-core.md
   - Archive:
       - Fundamentals Training:
           - archive/basic_training/index.md
