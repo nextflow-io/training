@@ -32,7 +32,7 @@ We'll apply the following nf-core conventions incrementally:
 3. **Standardize output naming with `ext.prefix`** to promote consistency.
 4. **Centralize the publishing configuration** to promote consistency.
 
-<!-- TODO: any additional comment? -->
+After each step, we'll run the pipeline to test that everything works as expected.
 
 !!! tip "Working directory"
 
@@ -56,8 +56,6 @@ To the end, we'll need to make the following changes:
 3. Update the emit block in the workflow
 
 Once we've done all that, we'll run the pipeline to test that everything still works as before.
-
-<!-- TODO: outline steps -->
 
 #### 1.1.1. Update the input and output definitions
 
@@ -125,7 +123,7 @@ Now that we've changed what the process expects, we need to update what we provi
 
 #### 1.1.2. Update the process call in the workflow
 
-The good news is that this change simplifies the process call.
+The good news is that this change will simplify the process call.
 Now that the output of `CAT_CAT` and the input of `cowpy` are the same 'shape', i.e. they both consist of a `tuple val(meta), path(input_file)` structure, we can simply connect them directly instead of having to extract the file explicitly from the output of the `CAT_CAT` process.
 
 Open the `hello.nf` workflow file (under `core-hello/workflows/`) and update the call to `cowpy` as shown below.
@@ -147,7 +145,9 @@ Open the `hello.nf` workflow file (under `core-hello/workflows/`) and update the
         cowpy(ch_for_cowpy, params.character)
     ```
 
-You can see that we no longer need to construct the `ch_for_cowpy` channel, so that line (and its comment line) can be deleted entirely.
+We now call `cowpy` on `CAT_CAT.out.file_out` directly.
+
+As a result, we no longer need to construct the `ch_for_cowpy` channel, so that line (and its comment line) can be deleted entirely.
 
 #### 1.1.3. Update the emit block in the workflow
 
@@ -191,7 +191,7 @@ executor >  local (8)
 ```
 
 That completes what we needed to do to make `cowpy` handle metadata tuples.
-Now let's look at what else we can do to take advantage of nf-core module patterns.
+Now, let's look at what else we can do to take advantage of nf-core module patterns.
 
 ### 1.2. Centralize tool argument configuration with `ext.args`
 
@@ -199,26 +199,25 @@ In its current state, the `cowpy` process expects to receive a value for the `ch
 As a result, we have to provide a value every time we call the process, even if we'd be happy with the defaults set by the tool.
 For `cowpy` this is admittedly not a big problem, but for tools with many optional parameters, it can get quite cumbersome.
 
-The nf-core project recommends using a Nextflow feature called `ext.args`, which makes it possible to manage tool arguments more conveniently. <!-- TODO: add URL to doc -->
-Specifically, nf-core modules use a special configuration variable called `task.ext.args`.
+The nf-core project recommends using a Nextflow feature called `ext.args` to manage tool arguments more conveniently via configuration files. <!-- TODO: add URL to doc -->
 
-Instead of declaring process inputs for every tool option, you write the module to reference `task.ext.args` in its command line.
-Then it's just a matter of adding the arguments and values you want to use in the `modules.config` file, which consolidates configuration details for all modules.
+Instead of declaring process inputs for every tool option, you write the module to reference `ext.args` in the construction of its command line.
+Then it's just a matter of setting up the `ext.args` variable to hold the arguments and values you want to use in the `modules.config` file, which consolidates configuration details for all modules.
 Nextflow will add those arguments with their values into the tool command line at runtime.
 
-Let's apply it to the `cowpy` module.
+Let's apply this approach to the `cowpy` module.
 We're going to need to make the following changes:
 
 1. Update the `cowpy` module
-2. Add the character parameter to `ext.args`
+2. Configure `ext.args` in the `modules.config` file
 3. Update the `hello.nf` workflow
 
 Once we've done all that, we'll run the pipeline to test that everything still works as before.
 
 #### 1.2.1. Update the `cowpy` module
 
-Let's get started!
-Open the `cowpy.nf` module file (under `core-hello/modules/local/`) and modify it to use `ext.args` as shown below.
+Let's do it.
+Open the `cowpy.nf` module file (under `core-hello/modules/local/`) and modify it to reference `ext.args` as shown below.
 
 === "After"
 
@@ -277,27 +276,28 @@ Open the `cowpy.nf` module file (under `core-hello/modules/local/`) and modify i
 You can see we made three changes.
 
 1. **In the `input:` block, we removed the `val character` input.**
-   Going forward, we'll supply that argument via the `task.ext.args` configuration (see next step).
+   Going forward, we'll supply that argument via the `ext.args` configuration as described further below.
 
 2. **In the `script:` block, we added the line `def args = task.ext.args ?: ''`.**
    That line uses the `?:` operator to determine the value of the `args` variable: the content of `task.ext.args` if it is not empty, or an empty string if it is.
+   Note that while we generally refer to `ext.args`, this code must reference `task.ext.args` to pull out the module-level `ext.args` configuration. <!-- TODO: check that this is correctly phrased -->
 
 3. **In the command line, we replaced `-c "$character"` with `$args`.**
-   This is where Nextflow will inject any tool arguments set in `task.ext.args`.
+   This is where Nextflow will inject any tool arguments set in `ext.args` in the `modules.config` file.
 
-The module interface is now simpler - it only accepts the essential metadata and file inputs. By removing the local `publishDir`, we follow the nf-core convention of centralizing all publishing configuration in `modules.config`.
+As a result, the module interface is now simpler: it only expects the essential metadata and file inputs.
 
 !!! note
 
     The `?:` operator is often called the 'Elvis operator' because it looks like a sideways Elvis Presley face, with the `?` character symbolizing the wave in his hair.
 
-#### 1.2.2. Add the `character` parameter to `ext.args`
+#### 1.2.2. Configure `ext.args` in the `modules.config` file
 
 Now that we've taken the `character` declaration out of the module, we've got to add it to `ext.args` in the `modules.config` configuration file.
 
 Specifically, we're going to add this little chunk of code to the `process {}` block:
 
-```groovy title="Configuration syntax"
+```groovy title="Code to add"
 withName: 'cowpy' {
     ext.args = { "-c ${params.character}" }
 }
@@ -345,9 +345,9 @@ By using the `modules.config` file as the place where all pipelines centralize p
 
 #### 1.2.3. Update the `hello.nf` workflow
 
-Since the cowpy module no longer requires the `character` parameter as an input, we need to update the workflow call.
+Since the cowpy module no longer requires the `character` parameter as an input, we need to update the workflow call accordingly.
 
-Open `workflows/hello.nf` and update the cowpy call:
+Open the `hello.nf` workflow file (under `core-hello/workflows/`) and update the call to `cowpy` as shown below.
 
 === "After"
 
@@ -363,51 +363,59 @@ Open `workflows/hello.nf` and update the cowpy call:
         cowpy(CAT_CAT.out.file_out, params.character)
     ```
 
-The workflow code is now cleaner - we don't need to pass `params.character` directly to the process. The module interface is kept minimal, making it more portable, while the pipeline still provides the explicit option through configuration.
+The workflow code is now cleaner: we don't need to pass `params.character` directly to the process.
+The module interface is kept minimal, making it more portable, while the pipeline still provides the explicit option through configuration.
 
 #### 1.2.4. Run the pipeline to test it
 
-Test that the workflow still works with the ext.args configuration. Let's specify a different character to verify the configuration is working (using `kosh`, one of the more... enigmatic options):
+Let's test that the workflow still works as expected, specifying a different character to verify that the `ext.args` configuration is working.
+
+Run this command using `kosh`, one of the more... enigmatic options:
 
 ```bash
 nextflow run . --outdir core-hello-results -profile test,docker --validate_params false --character kosh
 ```
 
-The pipeline should run successfully. In the output, look for the cowpy process execution line which will show something like:
+The pipeline should run successfully.
+In the output, look for the cowpy process execution line, which will show something like this:
 
 ```console title="Output (excerpt)"
 [bd/0abaf8] CORE_HELLO:HELLO:cowpy              [100%] 1 of 1 ✔
 ```
 
-Let's verify that the `ext.args` configuration worked by checking the output. Use the task hash (the `bd/0abaf8` part) to look at the output file:
+So it ran successfully, great!
+Now let's verify that the `ext.args` configuration worked by checking the output.
+Find the output in the file browser or use the task hash (the `bd/0abaf8` part in the example above) to look at the output file:
 
 ```bash
 cat work/bd/0abaf8*/cowpy-test.txt
 ```
 
-```console title="Output"
- _________
-/ HELLO   \
-| HOLà    |
-\ BONJOUR /
- ---------
-    \
-     \
-      \
-  ___       _____     ___
- /   \     /    /|   /   \
-|     |   /    / |  |     |
-|     |  /____/  |  |     |
-|     |  |    |  |  |     |
-|     |  | {} | /   |     |
-|     |  |____|/    |     |
-|     |    |==|     |     |
-|      \___________/      |
-|                         |
-|                         |
-```
+??? example "Output"
 
-You should see the ASCII art displayed with the kosh character, confirming that the `ext.args` configuration worked!
+    ```console
+    _________
+    / HELLO   \
+    | HOLà    |
+    \ BONJOUR /
+    ---------
+        \
+        \
+          \
+      ___       _____     ___
+    /   \     /    /|   /   \
+    |     |   /    / |  |     |
+    |     |  /____/  |  |     |
+    |     |  |    |  |  |     |
+    |     |  | {} | /   |     |
+    |     |  |____|/    |     |
+    |     |    |==|     |     |
+    |      \___________/      |
+    |                         |
+    |                         |
+    ```
+
+You should see the ASCII art displayed with the `kosh` character, confirming that the `ext.args` configuration worked!
 
 !!! note "Optional: Inspect the command file"
 
@@ -417,7 +425,7 @@ You should see the ASCII art displayed with the kosh character, confirming that 
     cat work/bd/0abaf8*/.command.sh
     ```
 
-    You'll see the cowpy command with the `-c kosh` argument:
+    You'll see the `cowpy` command with the `-c kosh` argument:
 
     ```console
     #!/usr/bin/env bash
@@ -427,12 +435,12 @@ You should see the ASCII art displayed with the kosh character, confirming that 
 
     This shows that the `.command.sh` file was generated correctly based on the `ext.args` configuration.
 
-<!-- TODO: commentary -->
-
-It may seem unnecessary for a simple tool like `cowpy`, but it can make a big difference for data analysis tools that have a lot of optional arguments.
+Take a moment to think about what we achieved here.
 This approach keeps the module interface focused on essential data (files, metadata, and any mandatory per-sample parameters), while options that control the behavior of the tool are handled separately through configuration.
 
-To summarize the benefits:
+This may seem unnecessary for a simple tool like `cowpy`, but it can make a big difference for data analysis tools that have a lot of optional arguments.
+
+To summarize the benefits of this approach:
 
 - **Clean interface**: The module focuses on essential data inputs (metadata and files)
 - **Flexibility**: Users can specify tool arguments via configuration, including sample-specific values
@@ -440,38 +448,42 @@ To summarize the benefits:
 - **Portability**: Modules can be reused without hardcoded tool options
 - **No workflow changes**: Adding or changing tool options doesn't require updating workflow code
 
-!!! note "ext.args can do more"
+!!! note
 
     The `ext.args` system has powerful additional capabilities not covered here, including switching argument values dynamically based on metadata. See the [nf-core module specifications](https://nf-co.re/docs/guidelines/components/modules) for more details.
 
 ### 1.3. Standardize output naming with `ext.prefix`
 
-There's one more nf-core pattern we can apply: using `ext.prefix` for configurable output file naming.
+Now that we've given the `cowpy` process access to the metamap, we can start taking advantage of another useful nf-core pattern: naming output files based on metadata.
 
-Currently, the `cowpy` module includes a `publishDir` directive, making publishing decisions at the module level. We can't control where outputs go at the workflow level - each module makes its own publishing decisions.
+Here we're going to use a Nextflow feature called `ext.prefix` that will allow us to standardize output file naming across modules using `meta.id` (the identifier included in the metamap), while still being able to configure modules individually if desired.
 
-The `task.ext.prefix` pattern is another nf-core convention for standardizing output file naming across modules while keeping it configurable.
+This will be similar to what we did with `ext.args`, with a few differences that we'll detail as we go.
 
-Benefits:
+Let's apply this approach to the `cowpy` module.
+We're going to need to make the following changes:
 
-- **Standardized naming**: Output files are typically named using sample IDs from metadata
-- **Configurable**: Users can override the default naming if needed
-- **Consistent**: All nf-core modules follow this pattern
-- **Predictable**: Easy to know what output files will be called
+1. Update the `cowpy` module
+2. Configure `ext.prefix` in the `modules.config` file
 
-#### 1.3.1. Update the module
+(No changes need to the workflow.)
 
-Let's update the cowpy module to use `ext.prefix` for output file naming.
+Once we've done that, we'll run the pipeline to test that everything still works as before.
 
-Open `modules/local/cowpy.nf` and change as follows:
+#### 1.3.1. Update the `cowpy` module
+
+Let's do it.
+Open the `cowpy.nf` module file (under `core-hello/modules/local/`) and modify it to reference `ext.prefix` as shown below.
 
 === "After"
 
-    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="13 17 19"
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="15 19 21"
     #!/usr/bin/env nextflow
 
     // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
     process cowpy {
+
+        publishDir 'results', mode: 'copy'
 
         container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
         conda 'conda-forge::cowpy==1.1.5'
@@ -493,11 +505,13 @@ Open `modules/local/cowpy.nf` and change as follows:
 
 === "Before"
 
-    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="13 18"
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="15 20"
     #!/usr/bin/env nextflow
 
     // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
     process cowpy {
+
+        publishDir 'results', mode: 'copy'
 
         container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
         conda 'conda-forge::cowpy==1.1.5'
@@ -516,19 +530,36 @@ Open `modules/local/cowpy.nf` and change as follows:
     }
     ```
 
-Key changes:
+You can see we made three changes.
 
-1. **Added ext.prefix**: `prefix = task.ext.prefix ?: "${meta.id}"` provides a configurable prefix with a sensible default (the sample ID)
-2. **Updated output**: Changed from hardcoded `cowpy-${input_file}` to `${prefix}.txt`
-3. **Updated command**: Uses the configured prefix for the output filename
+1. **In the `script:` block, we added the line `prefix = task.ext.prefix ?: "${meta.id}"`.**
+   That line uses the `?:` operator to determine the value of the `prefix` variable: the content of `task.ext.prefix` if it is not empty, or the identifier from the metamap (`meta.id`) if it is.
+   Note that while we generally refer to `ext.prefix`, this code must reference `task.ext.prefix` to pull out the module-level `ext.prefix` configuration. <!-- TODO: check that this is correctly phrased -->
 
-Note that the local `publishDir` has already been removed in the previous step, so we're continuing with the centralized configuration approach.
+2. **In the command line, we replaced `cowpy-${input_file}` with `${prefix}.txt`.**
+   This is where Nextflow will inject the value of `prefix` determined by the line above.
 
-#### 1.3.2. Configure ext.prefix
+3. **In the `output:` block, we replaced `path("cowpy-${input_file}")` with `path("${prefix}.txt")`.\*\***
+   This simply reiterates what the file path will be according to what is written in the command line.
 
-To maintain the same output file naming as before (`cowpy-<id>.txt`), we can configure `ext.prefix` in modules.config.
+As a result, the output file name is now constructed using a sensible default (the identifier from the metamap) combined with the appropriate file format extension.
 
-Update `conf/modules.config`:
+#### 1.3.2. Configure `ext.prefix` in the `modules.config` file
+
+In this case the sensible default is not sufficiently expressive for our taste; we want to use a custom naming pattern that includes the tool name, `cowpy-<id>.txt`, like we had before.
+
+We'll do that by configuring `ext.prefix` in `modules.config`, just like we did for the `character` parameter with `ext.args`, except this time the `withName: 'cowpy' {}` block already exists, and we just need to add the following line:
+
+```groovy title="Code to add"
+ext.prefix = { "cowpy-${meta.id}" }
+```
+
+This will compose the string we want.
+Note that once again we use curly braces, this time to tell Nextflow to evaluate the value of `meta.id` at runtime.
+
+Let's add it in.
+
+Open `conf/modules.config` and add the configuration code inside the `process {}` block as shown below.
 
 === "After"
 
@@ -547,50 +578,126 @@ Update `conf/modules.config`:
         }
     ```
 
-Note that we use a closure (`{ "cowpy-${meta.id}" }`) which has access to `meta` because it's evaluated in the context of the process execution.
+In case you're wondering, the `ext.prefix` closure has access to the correct piece of metadata because the configuration is evaluated in the context of the process execution, where metadata is available.
 
-!!! note
+#### 1.3.3. Run the pipeline to test it
 
-    The `ext.prefix` closure has access to `meta` because the configuration is evaluated in the context of the process execution, where metadata is available.
-
-#### 1.3.3. Test and verify
-
-Test the workflow once more:
+Let's test that the workflow still works as expected.
 
 ```bash
-rm -rf core-hello-results
 nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
 ```
+
+<!-- TODO: include the console outputs (full or snippet folded under an example block?) -->
 
 Check the outputs:
 
 ```bash
-ls core-hello-results/cowpy/
+ls results/
 ```
 
-You should see the cowpy output files with the same naming as before: `cowpy-test.txt` (based on the batch name). This demonstrates how `ext.prefix` allows you to maintain your preferred naming convention while keeping the module interface flexible.
+You should see the cowpy output file with the same naming as before: `cowpy-test.txt`, based on the default batch name.
+Feel free to change the `ext.prefix` configuration to satisfy yourself that you can change the naming pattern without having to make any changes to the module or workflow code.
 
-If you wanted to change the naming (for example, to just `test.txt`), you would only need to modify the `ext.prefix` configuration - no changes to the module or workflow code would be required.
+Alternatively, you can also try running this again with a different `--batch` parameter specified on the command line to satisfy yourself that that part is still customizable on the fly.
+
+This demonstrates how `ext.prefix` allows you to maintain your preferred naming convention while keeping the module interface flexible.
+
+To summarize the benefits of this approach:
+
+- **Standardized naming**: Output files are typically named using sample IDs from metadata
+- **Configurable**: Users can override the default naming if needed
+- **Consistent**: All nf-core modules follow this pattern
+- **Predictable**: Easy to know what output files will be called
+
+Pretty good, right?
+Well, there's one more important change we need to make to improve our module to fit the nf-core guidelines.
 
 ### 1.4. Centralize the publishing configuration
 
-For output publishing, nf-core pipelines centralize control at the workflow level by configuring `publishDir` in `conf/modules.config` rather than in individual modules.
+You may have noticed that we've been publishing outputs to two different directories:
 
-Currently, our `cowpy` module has `publishDir 'results', mode: 'copy'` which hardcodes the output location.
-In nf-core pipelines, publishing is instead configured in `conf/modules.config`.
+- **`results`** — The original output directory we've been using from the beginning for our local modules, set individually using per-module `publishDir` directives;
+- **`core-hello-results`** — The output directory set with `--outdir` on the command line, which has been receiving the nf-core logs and the results published by `CAT_CAT`.
 
-#### 1.4.1. Update the module
+This is messy and suboptimal; it would be better to have one location for everything.
+Of course, we could go into each of our local modules and update the `publishDir` directive manually to use the `core-hello-results` directory, but what about next time we decide to change the output directory?
 
-<!-- TODO: show removing the publishDir -->
+Having individual modules make publishing decisions is clearly not the way to go, especially in a world where the same module might be used in a lot of different pipelines, by people who have different needs or preferences.
+We want to be able to control where outputs get published at the level of the workflow configuration.
+
+"Hey," you might say, "`CAT_CAT` is sending its outputs to the `--outdir`. Maybe we should copy its `publishDir` directive?"
+
+Yes, that's a great idea.
+
+Except it doesn't have a `publishDir` directive. (Go ahead, look at the module code.)
+
+That's because nf-core pipelines centralize control at the workflow level by configuring `publishDir` in `conf/modules.config` rather than in individual modules.
+Specifically, the nf-core template declares a default `publishDir` directive (with a predefined directory structure) that applies to all modules unless an overriding directive is provide.
+
+Doesn't that sound awesome? Could it be that to take advantage of this default directive, all we need to do is remove the current `publishDir` directive from our local modules?
+
+Let's try that out on `cowpy` to see what happens, then we'll look at the code for the default configuration to understand how it works.
+
+Finally, we'll demonstrate how to override the default behavior if desired.
+
+#### 1.4.1. Remove the `publishDir` directive from `cowpy`
+
+Let's do this.
+Open the `cowpy.nf` module file (under `core-hello/modules/local/`) and remove the `publishDir` directive as shown below.
+
+=== "After"
+
+    ```groovy title="core-hello/modules/local/cowpy.nf (excerpt)" linenums="1"
+    #!/usr/bin/env nextflow
+
+    // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
+    process cowpy {
+
+        container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
+        conda 'conda-forge::cowpy==1.1.5'
+    ```
+
+=== "Before"
+
+    ```groovy title="core-hello/modules/local/cowpy.nf (excerpt)" linenums="1" hl_lines="6"
+    #!/usr/bin/env nextflow
+
+    // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
+    process cowpy {
 
         publishDir 'results', mode: 'copy'
 
+        container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
+        conda 'conda-forge::cowpy==1.1.5'
+
+    ```
+
+That's it!
+
 #### 1.4.2. Run the pipeline to see what happens
 
-<!-- TODO: show where the results end up -->
-<!-- TODO: then show how that comes from the default configuration -->
+Let's have a look at what happens if we run the pipeline now.
 
-The nf-core template includes a default `publishDir` configuration that applies to all processes:
+```bash
+nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
+```
+
+<!-- TODO: include the console outputs (folded under an example block) -->
+
+Have a look at your current working directory.
+Now the `core-hello-results` also contains the outputs of the `cowpy` module.
+
+```bash
+tree core-hello-results/
+```
+
+<!-- TODO: show tree output -->
+
+You can see that Nextflow created this hierarchy of directories based on the names of the workflow and of the module.
+
+The code responsible lives in the `conf/modules.config` file.
+This is the default `publishDir` configuration that is part of the nf-core template and applies to all processes.
 
 ```groovy
 process {
@@ -602,41 +709,72 @@ process {
 }
 ```
 
-This looks complicated, but it breaks down into three parts:
+<!-- TODO: check the actual code, the mode and saveAs are not shown in the earlier code snippet -->
 
-- **path**: Determines the output directory based on the process name. When processes run, their full name includes the workflow hierarchy (like `CORE_HELLO:HELLO:SAMTOOLS_SORT`). The `tokenize` operations strip away that hierarchy to get just the process name, then take the first part before any underscore, and convert it to lowercase. So `SAMTOOLS_SORT` would publish to `${params.outdir}/samtools/`.
-- **mode**: Controls how files are published (copy, symlink, etc.), configurable via the `params.publish_dir_mode` parameter.
-- **saveAs**: Filters which files to publish. This example excludes `versions.yml` files by returning `null` for them, preventing them from being published.
+This may look complicated, so let's look at each of the three components:
 
-Individual processes can override this default using `withName:` blocks in the same config file.
+- **`path:`** Determines the output directory based on the process name.
+  The full name of a process contained in `task.process` includes the hierarchy of workflow and module imports (such as `CORE_HELLO:HELLO:CAT_CAT`).
+  The `tokenize` operations strip away that hierarchy to get just the process name, then take the first part before any underscore (if applicable), and convert it to lowercase.
+  This is what determines that the results of `CAT_CAT` get published to `${params.outdir}/cat/`.
+- **`mode:`** Controls how files are published (copy, symlink, etc.).
+  This is configurable via the `params.publish_dir_mode` parameter.
+- **`saveAs:`** Filters which files to publish.
+  This example excludes `versions.yml` files by returning `null` for them, preventing them from being published.
+
+This provides a consistent logic for organizing outputs.
+
+The output looks even better when all the modules in a pipeline adopt this convention, so feel free to go delete the `publishDir` directives from the other modules in your pipeline.
+This default will be applied even to modules that we didn't explicitly modify to follow nf-core guidelines.
+
+That being said, you may decide you want to organize your inputs differently, and the good news is that it's easy to do so.
 
 #### 1.4.3. Override the default
 
-<!-- TODO: show how to override -->
+To override the default `publishDir` directive, you can simply add your own directives to the `conf/modules.config` file.
 
-<!-- TODO: wrap-up commentary -->
+For example, you could override the default for a single process using the `withName:` selector, as in this example where we add a custom `publishDir` directive for the 'cowpy' process.
 
-Benefits of this approach:
+```groovy title="core-hello/conf/modules.config" linenums="13" hl_lines="6-8"
+process {
+    publishDir = [
+        path: { "${params.outdir}/${task.process.tokenize(':')[-1].tokenize('_')[0].toLowerCase()}" },
+    ]
+
+    withName: 'cowpy' {
+        ext.args = { "-c ${params.character}" }
+        publishDir = [
+            path: 'my_custom_results'
+        ]
+    }
+}
+```
+
+We're not actually going to make that change, but feel free to play with this and see what logic you can implement.
+
+The point is that this system allows gives you the best of both worlds: consistency by default and the flexibility to customize the configuration on demand.
+
+To summarize, you get:
 
 - **Single source of truth**: All publishing configuration lives in `modules.config`
 - **Useful default**: Processes work out-of-the-box without per-module configuration
 - **Easy customization**: Override publishing behavior in config, not in module code
 - **Portable modules**: Modules don't hardcode output locations
 
-For more details, see the [nf-core modules specifications](https://nf-co.re/docs/guidelines/components/modules).
+This completes the set of nf-core module features you should absolutely learn to use, but there are others which you can read about in the [nf-core modules specifications](https://nf-co.re/docs/guidelines/components/modules).
 
 ### Takeaway
 
 You now know how to adapt local modules to follow nf-core conventions:
 
-- Update modules to accept and propagate metadata tuples
-- Use `ext.args` to keep module interfaces minimal and portable
-- Use `ext.prefix` for configurable, standardized output file naming
-- Configure process-specific parameters through `modules.config`
+- Design your modules to accept and propagate metadata tuples;
+- Use `ext.args` to keep module interfaces minimal and portable;
+- Use `ext.prefix` for configurable, standardized output file naming;
+- Adopt the default centralized `publishDir` directive for a consistent results directory structure.
 
 ### What's next?
 
-<!-- TODO: update this -->
+Learn how to use nf-core's built-in template-based tools to create modules the easy way.
 
 ---
 
@@ -657,13 +795,16 @@ nf-core modules create --empty-template cowpy
 
 The `--empty-template` flag creates a clean starter template without extra code, making it easier to see the essential structure.
 
-The command runs interactively, guiding you through the setup. It automatically looks up tool information from package repositories like Bioconda and bio.tools to pre-populate metadata.
+The command runs interactively, guiding you through the setup.
+It automatically looks up tool information from package repositories like Bioconda and bio.tools to pre-populate metadata.
 
 You'll be prompted for several configuration options:
 
 - **Author information**: Your GitHub username for attribution
-- **Resource label**: A predefined set of computational requirements. nf-core provides standard labels like `process_single` for lightweight tools and `process_high` for demanding ones. These labels help manage resource allocation across different execution environments.
-- **Metadata requirement**: Whether the module needs sample-specific information via a `meta` map (usually yes for data processing modules)
+- **Resource label**: A predefined set of computational requirements.
+  The nf-core project provides standard labels like `process_single` for lightweight tools and `process_high` for demanding ones.
+  These labels help manage resource allocation across different execution environments.
+- **Metadata requirement**: Whether the module needs sample-specific information via a `meta` map (usually yes for data processing modules).
 
 The tool handles the complexity of finding package information and setting up the structure, allowing you to focus on implementing the tool's specific logic.
 
@@ -744,9 +885,9 @@ process COWPY {
 }
 ```
 
-Notice how all three patterns you applied manually are already there!
+Notice how all the patterns you applied manually above are already there!
 The template also includes several additional nf-core conventions.
-Some of these work out of the box, while others are placeholders we'll need to fill in:
+Some of these work out of the box, while others are placeholders we'll need to fill in, as described below.
 
 **Features that work as-is:**
 
@@ -794,7 +935,7 @@ container "community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273"
 ### 2.4. Defining inputs and outputs
 
 The generated template includes generic input and output declarations that you'll need to customize for your specific tool.
-Looking back at our manual cowpy module from section 1, we can use that as a guide.
+Looking back at our manual `cowpy` module from section 1, we can use that as a guide.
 
 Update the input and output blocks:
 
@@ -829,7 +970,7 @@ This specifies:
 ### 2.5. Writing the script block
 
 The template provides a comment placeholder where you add the actual tool command.
-We can reference our manual module from section 1.3.2 for the command logic:
+We can reference our manual module from earlier for the command logic:
 
 === "After"
 
@@ -922,11 +1063,11 @@ Once you've completed the environment setup (section 2.1.2), inputs/outputs (sec
 
 ### Takeaway
 
-<!-- TODO: update this -->
+You now know how to use the built-in nf-core tooling to create modules efficiently using templates rather than writing everything from scratch.
 
 ### What's next?
 
-<!-- TODO: update this -->
+Learn what are the benefits of contributing modules to nf-core and what are the main steps and requirements involved.
 
 ---
 
@@ -943,9 +1084,9 @@ Contributing your modules to nf-core:
 - Provides quality assurance through code review and automated testing
 - Gives your work visibility and recognition
 
-### 3.2. Contributing workflow
+### 3.2. Contributor's checklist
 
-To contribute a module to nf-core:
+To contribute a module to nf-core, you will need to go through the following steps:
 
 1. Check if it already exists at [nf-co.re/modules](https://nf-co.re/modules)
 2. Fork the [nf-core/modules](https://github.com/nf-core/modules) repository
@@ -967,7 +1108,7 @@ For detailed instructions, see the [nf-core components tutorial](https://nf-co.r
 
 You now know how to create nf-core modules! You learned the four key patterns that make modules portable and maintainable:
 
-- **Metadata tuples** track sample information through the workflow
+- **Metadata tuples** propagate metadata through the workflow
 - **`ext.args`** simplifies module interfaces by handling optional arguments via configuration
 - **`ext.prefix`** standardizes output file naming
 - **Centralized publishing** via `publishDir` configured in `modules.config` rather than hardcoded in modules
@@ -979,4 +1120,4 @@ Finally, you learned how to contribute modules to the nf-core community, making 
 
 ## What's next?
 
-Continue to [Part 5: Input validation](./05_input_validation.md) to learn how to add schema-based input validation to your pipeline, or explore other nf-core modules you might add to enhance your pipeline further.
+When you're ready, continue to [Part 5: Input validation](./05_input_validation.md) to learn how to add schema-based input validation to your pipeline.
