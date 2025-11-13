@@ -796,7 +796,3 @@ You now know how to:
 
 Learn to adapt your local modules to follow nf-core conventions.
 We'll also show you how to create new nf-core modules from a template using the nf-core tooling.
-
-```
-
-```
