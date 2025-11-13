@@ -6,4 +6,4 @@ pillow
 cairosvg
 mkdocs-enumerate-headings-plugin>=0.6.0
 mike
-git+https://github.com/ewels/mkdocs-quiz#egg=mkdocs_quiz
+mkdocs-quiz>=1
