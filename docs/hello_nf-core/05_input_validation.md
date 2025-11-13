@@ -47,6 +47,24 @@ nf-schema provides several key functions:
 
 nf-schema is the successor to the deprecated nf-validation plugin and uses standard [JSON Schema Draft 2020-12](https://json-schema.org/) for validation.
 
+!!! note "What are Nextflow plugins?"
+
+    Plugins are extensions that add new functionality to the Nextflow language itself. They're installed via a `plugins{}` block in `nextflow.config` and can provide:
+
+    - New functions and classes that can be imported (like `samplesheetToList`)
+    - New DSL features and operators
+    - Integration with external services
+
+    The nf-schema plugin is specified in `nextflow.config`:
+
+    ```groovy
+    plugins {
+        id 'nf-schema@2.1.1'
+    }
+    ```
+
+    Once installed, you can import functions from plugins using `include { functionName } from 'plugin/plugin-name'` syntax.
+
 ## Two schema files
 
 An nf-core pipeline uses two schema files for validation:
@@ -273,7 +291,7 @@ Press `Ctrl+C` to exit the schema builder.
 
 The tool has now updated your `nextflow_schema.json` file with the new `batch` parameter, handling all the JSON Schema syntax correctly.
 
-#### 2.2.1. Verify the changes
+### 1.4. Verify the changes
 
 ```bash
 grep -A 25 '"input_output_options"' nextflow_schema.json
@@ -307,7 +325,7 @@ grep -A 25 '"input_output_options"' nextflow_schema.json
 
 You should see that the `batch` parameter has been added to the schema with the "required" field now showing `["input", "outdir", "batch"]`.
 
-### 1.4. Test parameter validation
+### 1.5. Test parameter validation
 
 Now let's test that parameter validation works correctly.
 
@@ -486,15 +504,9 @@ Add a header line to the greetings file:
 
 Now the CSV file has a header that matches the field name in our schema.
 
-### Takeaway
+The final step is to implement the validation in the pipeline code using `samplesheetToList`.
 
-You've created a JSON schema for the greetings input file and added the required header to the CSV file.
-
-### What's next?
-
-Implement the validation in the pipeline code using `samplesheetToList`.
-
-### 2.5. Implement samplesheetToList in the pipeline
+### 2.5. Implement `samplesheetToList` in the pipeline
 
 Now we need to replace our simple CSV parsing with nf-schema's `samplesheetToList` function, which validates and converts the sample sheet.
 
@@ -514,24 +526,6 @@ We need to:
 1. Use the `samplesheetToList` function (already imported in the template)
 2. Validate and parse the input
 3. Extract just the greeting strings for our workflow
-
-!!! note "What are Nextflow plugins?"
-
-    Plugins are extensions that add new functionality to the Nextflow language itself. They're installed via a `plugins{}` block in `nextflow.config` and can provide:
-
-    - New functions and classes that can be imported (like `samplesheetToList`)
-    - New DSL features and operators
-    - Integration with external services
-
-    The nf-schema plugin is specified in `nextflow.config`:
-
-    ```groovy
-    plugins {
-        id 'nf-schema@2.1.1'
-    }
-    ```
-
-    Once installed, you can import functions from plugins using `include { functionName } from 'plugin/plugin-name'` syntax.
 
 First, note that the `samplesheetToList` function is already imported at the top of the file (the nf-core template includes this by default):
 
@@ -591,17 +585,11 @@ Let's break down what changed:
 1. **`samplesheetToList(params.input, "${projectDir}/assets/schema_input.json")`**: Validates the input file against our schema and returns a list
 2. **`Channel.fromList(...)`**: Converts the list into a Nextflow channel
 
-### Takeaway
+This completes the implementation of input data validation using `samplesheetToList` and JSON schemas.
 
-You've successfully implemented input data validation using `samplesheetToList` and JSON schemas.
-
-### What's next?
-
-Re-enable input validation in the config and test both parameter and input data validation to see them in action.
+Now that we've configured the input data schema, we can remove the temporary ignore setting we added earlier.
 
 ### 2.6. Re-enable input validation
-
-Now that we've configured the input data schema, we can remove the temporary ignore setting we added in section 1.4.
 
 Open `nextflow.config` and remove the `ignoreParams` line from the `validation` block:
 
@@ -630,7 +618,7 @@ Now nf-schema will validate both parameter types AND the input file contents.
 
 Let's verify that our validation works by testing both valid and invalid inputs.
 
-#### 3.7.1. Test with valid input
+#### 2.7.1. Test with valid input
 
 First, confirm the pipeline runs successfully with valid input:
 
@@ -657,7 +645,7 @@ executor >  local (10)
 
 Great! The pipeline runs successfully and validation passes silently. The warning about `--character` is just informational since it's not defined in the schema. If you want, use what you've learned to add validation for that parameter too!
 
-#### 3.7.2. Test with invalid input
+#### 2.7.2. Test with invalid input
 
 Now let's test that validation catches errors. Create a test file with an invalid column name:
 
