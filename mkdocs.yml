@@ -282,4 +282,5 @@ plugins:
       reconfigure_material: true
       reconfigure_search: true
   - search
-  - mkdocs_quiz
+  - mkdocs_quiz:
+      progress_sidebar_position: bottom
