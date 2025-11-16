@@ -1,0 +1,12 @@
+name: metaclip
+channels:
+  - pytorch
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - pytorch
+  - pillow
+  - pip
+  - pip:
+    - open-clip-torch>=2.20.0
