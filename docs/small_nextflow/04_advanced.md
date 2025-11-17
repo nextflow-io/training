@@ -6,15 +6,170 @@ In this final part, we'll explore version control integration, cloud execution, 
 
 ## 1. Version control
 
-TODO: Create git repository at project root
+One of Nextflow's most powerful features is its deep integration with version control systems.
+This allows you to share workflows, track changes, and ensure reproducibility by pinning to specific versions.
 
-TODO: Commit current state, create git tag, and create branch, and then change and re-commit.
+### 1.1. Create a GitHub repository
 
-TODO: Change directories and then run using revision argument, pointing to branch, tag, and then specific commit.
+First, let's create a new repository on GitHub to store your workflow.
+
+1. Go to [github.com](https://github.com) and log in
+2. Click the "+" icon in the top right and select "New repository"
+3. Name it something like `cat-classifier` (or any name you prefer)
+4. Make it **public** (so Nextflow can access it easily)
+5. **Don't** initialize with a README, .gitignore, or license
+6. Click "Create repository"
+
+GitHub will show you some commands to push an existing repository.
+Keep this page open - we'll use those commands in a moment.
+
+### 1.2. Initialize and push your workflow
+
+Now let's version control your workflow.
+From your workshop directory:
+
+```bash
+# Initialize a git repository
+git init
+
+# Add your workflow files
+git add main.nf
+git add bin/
+
+# If you have a nextflow.config, add that too
+git add nextflow.config
+
+# Create your first commit
+git commit -m "Initial commit of cat classifier workflow"
+
+# Connect to your GitHub repository (replace with your username and repo name)
+git remote add origin https://github.com/YOUR-USERNAME/cat-classifier.git
+
+# Push to GitHub
+git branch -M main
+git push -u origin main
+```
+
+Your workflow is now on GitHub!
+Visit your repository URL to see your code online.
+
+### 1.3. Running remote workflows
+
+Here's where it gets interesting: **you don't need a local copy of a workflow to run it**.
+
+Nextflow can pull workflows directly from GitHub and run them.
+For example, to run the nf-core RNA-seq pipeline:
+
+```bash
+nextflow run nf-core/rnaseq --help
+```
+
+This command pulls the workflow from `github.com/nf-core/rnaseq` (the `nf-core` organization, `rnaseq` repository), downloads it to `$HOME/.nextflow/assets/`, and runs it.
+
+Let's try a simpler example:
+
+```bash
+nextflow run hello
+```
+
+This pulls and runs `github.com/nextflow-io/hello`.
+Notice we didn't specify the full path - Nextflow uses sensible defaults:
+
+- If no provider is specified, it defaults to `github.com`
+- If no organization is specified, it defaults to `nextflow-io`
+
+!!! tip "Other Git providers"
+
+    Nextflow also supports:
+
+    - **GitLab**: `nextflow run gitlab.com/user/repo`
+    - **Bitbucket**: `nextflow run bitbucket.org/user/repo`
+    - **Gitea**: With custom configuration
+    - **Azure Repos**: With custom configuration
+    - **AWS CodeCommit**: With custom configuration
+
+### 1.4. Running specific versions with revisions
+
+Now you can run your own workflow from anywhere:
+
+```bash
+# Run from GitHub (replace with your username and repo name)
+nextflow run YOUR-USERNAME/cat-classifier
+```
+
+But what about version control?
+What if you want to continue developing while also maintaining a stable version?
+
+Nextflow allows you to specify a **revision** - a specific branch, tag, or commit:
+
+```bash
+# Run a specific branch
+nextflow run YOUR-USERNAME/cat-classifier -revision dev-branch
+
+# Or use the short form
+nextflow run YOUR-USERNAME/cat-classifier -r dev-branch
+```
+
+### 1.5. Using Git tags for stable versions
+
+**Git tags** are named references to specific commits, typically used to mark release versions.
+They're like bookmarks in your repository's history - they don't change, making them perfect for reproducible pipelines.
+
+Let's create a `1.0` tag for your workflow:
+
+```bash
+# Create an annotated tag
+git tag -a 1.0 -m "First stable release of cat classifier"
+
+# Push the tag to GitHub
+git push origin 1.0
+```
+
+Now you can run this exact version forever:
+
+```bash
+nextflow run YOUR-USERNAME/cat-classifier -r 1.0
+```
+
+This will always run the code as it existed when you created the tag, even if you continue developing on the `main` branch.
+
+### 1.6. Testing with different revisions
+
+Let's see this in action.
+Create a new branch and make a change:
+
+```bash
+# Create and switch to a new branch
+git checkout -b experimental
+
+# Make a small change (e.g., modify a parameter default in main.nf)
+# Then commit it
+git add main.nf
+git commit -m "Experimental feature"
+git push origin experimental
+```
+
+Now you can run different versions:
+
+```bash
+# Run the stable 1.0 release
+nextflow run YOUR-USERNAME/cat-classifier -r 1.0
+
+# Run the main branch
+nextflow run YOUR-USERNAME/cat-classifier -r main
+
+# Run the experimental branch
+nextflow run YOUR-USERNAME/cat-classifier -r experimental
+
+# Run a specific commit (use any commit hash from git log)
+nextflow run YOUR-USERNAME/cat-classifier -r abc123def
+```
+
+This is incredibly powerful: you can have a stable, reproducible pipeline (using a tag) while actively developing new features (on branches), all from the same repository.
 
 ### Takeaway
 
-Nextflow's git integration allows you to version your workflows and run specific commits, branches, or tags from anywhere.
+Nextflow's git integration allows you to version your workflows, share them easily, and run specific commits, branches, or tags from anywhere - no local copy required.
 
 ### What's next?
 
