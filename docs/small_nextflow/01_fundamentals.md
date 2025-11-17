@@ -192,9 +192,97 @@ Let's explore how Nextflow executes each task in isolation.
 
 ## 3. Investigate task execution
 
-TODO: Explain that each task is run in a separate directory. This is to ensure independence of each of the tasks - they can't interfere with each other.
+Every task in Nextflow is executed in its own unique work directory.
+This directory isolation is a fundamental feature that ensures tasks cannot interfere with each other, even when running in parallel.
 
-TODO: Show the contents of one of the task work directories.
+### 3.1. Understanding work directories
+
+The work directory path is calculated by constructing a hash of all task inputs.
+This means that if you run the same task with the same inputs, Nextflow will recognize it and can reuse the cached results (we'll explore this with `-resume` later).
+
+Let's explore where Nextflow actually ran our tasks.
+Look at the output from your last workflow run - you'll see something like:
+
+```console
+executor >  local (4)
+[a0/e7b2d4] Resize (1) | 4 of 4 ✔
+```
+
+That `a0/e7b2d4` is the hash prefix for the task directory.
+Let's explore what's inside:
+
+```bash
+tree work
+```
+
+You'll see a directory structure like:
+
+```console
+work
+└── a0
+    └── e7b2d4a1f3c8e9b0a7f6d5c4b3a2e1f0
+        ├── resized-5n4MTAC6ld0bVeCe.png
+        └── ...
+```
+
+### 3.2. Exploring task files
+
+Each work directory contains several hidden files that Nextflow uses to track task execution.
+Let's see them all:
+
+```bash
+tree -a work
+```
+
+Now you'll see additional files:
+
+```console
+work
+└── a0
+    └── e7b2d4a1f3c8e9b0a7f6d5c4b3a2e1f0
+        ├── .command.begin
+        ├── .command.err
+        ├── .command.log
+        ├── .command.out
+        ├── .command.run
+        ├── .command.sh
+        ├── .exitcode
+        └── resized-5n4MTAC6ld0bVeCe.png
+```
+
+These files serve different purposes:
+
+- `.command.sh` - The actual script that was executed (with all variables resolved)
+- `.command.run` - The wrapper script that Nextflow uses to execute the task
+- `.command.out` - Standard output from the task
+- `.command.err` - Standard error from the task
+- `.command.log` - Combined stdout and stderr
+- `.exitcode` - The exit code from the task (0 = success)
+- `.command.begin` - Setup instructions run before the task
+
+The most useful file for debugging is `.command.sh`.
+Let's look at one:
+
+```bash
+cat work/a0/*/command.sh
+```
+
+You'll see the actual bash script that was executed with all Nextflow variables resolved:
+
+```bash
+magick 5n4MTAC6ld0bVeCe.jpg -resize 400x resized-5n4MTAC6ld0bVeCe.png
+```
+
+### 3.3. Task isolation and idempotence
+
+This isolation serves two critical purposes:
+
+1. **Independence**: Tasks running in parallel cannot accidentally overwrite each other's files or interfere with each other's execution
+2. **Idempotence**: Running the same task with the same inputs will produce the same outputs in the same location
+
+**Idempotence** means that executing a task multiple times with identical inputs produces identical results.
+This is crucial for reproducibility and for Nextflow's caching system.
+Because the work directory is determined by hashing the inputs, identical inputs always map to the same directory, allowing Nextflow to detect when work can be reused.
 
 ### Takeaway
 
