@@ -161,7 +161,7 @@ gatk HaplotypeCaller \
         -ERC GVCF
 ```
 
-Once this completes, you should have three files ending in `.g.vcf` in your work directory (one per sample) and their respective index files ending in `.g.vcf.idx`.
+Once this completes, you should have three files ending in `.g.vcf` in your current directory (one per sample) and their respective index files ending in `.g.vcf.idx`.
 
 ### 0.3. Run joint genotyping
 
