@@ -36,7 +36,7 @@ def classify_image(image_path: Path, labels: list[str], model_path: Path,
         weights_only=False  # Trust MetaCLIP checkpoint from Facebook Research
     )
     tokenizer = open_clip.get_tokenizer(architecture)
-    
+
     # Prepare text labels
     text = tokenizer(labels)
 
