@@ -180,7 +180,7 @@ Let's learn how to manage computational resources for our processes.
 
 ---
 
-## 8. Resources
+## 2. Resources
 
 Our processes are currently composed of the `input:`, `output:`, and `script:` blocks.
 In addition to these blocks, processes can use "process directives" which are optional annotations which modify the behaviour of the processes.
@@ -235,7 +235,7 @@ Let's learn how to combine related data using the join and groupTuple operators.
 
 ---
 
-## 9. Grouping
+## 3. Grouping
 
 Now we want to combine our classification results with our resized images.
 We can use the `join` operator, which finds pairs of items (one from each channel) that share a key.
@@ -315,7 +315,7 @@ Let's create visual collages for each group of classified images.
 
 ---
 
-## 10. Collage
+## 4. Collage
 
 Let's create a `Collage` process that takes this channel and produces a collage of all of the images for each label.
 The script block here is a little involved, but it uses ImageMagick's montage command to arrange images into a grid.

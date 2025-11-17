@@ -218,7 +218,7 @@ Let's make our workflow portable across different storage systems.
 
 ---
 
-## 12. Filesystem independence
+## 2. Filesystem independence
 
 Nextflow speaks many different communication protocols, allowing you to seamlessly move from using data on a local or shared filesystem, to `http://`/`https://`, to object storage protocols like `s3://`, `az://`, `gs://` or even older `ftp://` protocols.
 You can provide support for new protocols yourself via Nextflow's plugin system.
@@ -265,7 +265,7 @@ Let's containerize our workflow to ensure it runs reliably anywhere.
 
 ---
 
-## 13. Containerization
+## 3. Containerization
 
 All of our Nextflow tasks are currently using the software installed on the host operating system.
 This practice can quickly become a problem for you for a number of reasons:

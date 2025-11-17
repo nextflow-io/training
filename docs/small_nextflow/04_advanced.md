@@ -22,7 +22,7 @@ Let's explore running workflows on cloud infrastructure.
 
 ---
 
-## 15. Cloud executors
+## 2. Cloud executors
 
 Nextflow supports running workflows on cloud infrastructure through various executors including AWS Batch, Google Cloud Batch, and Azure Batch.
 
@@ -81,7 +81,7 @@ Try the extension exercises to practice your new skills!
 
 ---
 
-## 16. Extension Exercise 1: Find extreme scores
+## 3. Extension Exercise 1: Find extreme scores
 
 Our team is interested in which cat is the cutest cat and which cat is the ugliest cat.
 Can you extend the workflow to identify (for each label) which picture scores the highest?
@@ -115,7 +115,7 @@ Try making the classification labels configurable!
 
 ---
 
-## 17. Extension Exercise 2: Configurable labels
+## 4. Extension Exercise 2: Configurable labels
 
 We've decided that "bad" and "good" are too cruel a classification system for the cats.
 Can you modify the workflow to add a `--labels` parameter?
@@ -161,7 +161,7 @@ Congratulations! You've completed the Small Nextflow workshop.
 
 ---
 
-## 18. Final notes
+## 5. Final notes
 
 ### 18.1. Additional topics to explore
 
