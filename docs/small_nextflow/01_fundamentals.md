@@ -1,0 +1,438 @@
+# Part 1: Fundamentals
+
+In this first part, we'll learn the building blocks of Nextflow by creating channels, defining our first process, and working with parameters and metadata.
+We're going to build a workflow that produces a gallery of classified cat images, starting from the very beginning.
+
+---
+
+## 1. Introduction
+
+Nextflow offers you a way to iterate over a collection of files, so let's grab some files to iterate over.
+We're going to write a workflow which produces a gallery of good and bad cats.
+First things we're going to need are some cats.
+
+We're starting with a (nearly) empty directory.
+There is a `.stuff` directory that contains some bits and pieces to help us along during the workshop, but you can imagine that we're essentially starting from scratch.
+
+### 1.1. Fetch some cat images
+
+The first thing we're going to need is some data.
+I've created a small script that pulls from the Cat-As-A-Service API to give us some random cats.
+
+Let's see what the script can do:
+
+```bash
+.stuff/cat_me.sh --help
+```
+
+To start, let's grab 4 cats.
+By default, the script will save the images to `./data/pics`:
+
+```bash
+.stuff/cat_me.sh --count 4 --prefix data/pics
+```
+
+This will generate some example data.
+It will look something like this:
+
+```console title="Directory structure"
+data
+└── pics
+    ├── 5n4MTAC6ld0bVeCe.jpg
+    ├── 5n4MTAC6ld0bVeCe.txt
+    ├── IOSNx33kkgkiPfaP.jpg
+    ├── IOSNx33kkgkiPfaP.txt
+    ├── IRuDgdPJZFA39dyf.jpg
+    ├── IRuDgdPJZFA39dyf.txt
+    ├── uq5KqqiF0qpgTQVA.jpg
+    └── uq5KqqiF0qpgTQVA.txt
+```
+
+### 1.2. Create a channel of images
+
+Now let's iterate over those images in Nextflow.
+To start, we'll just create a channel of those images.
+We're not going to do anything with them, but to make sure that everything is working, we connect the channel to the `view` operator which takes the things in the channel (files in our case) and prints a String representation of those things to the command line.
+
+Open `main.nf` and add the following:
+
+```groovy title="main.nf" linenums="1"
+#!/usr/bin/env nextflow
+
+workflow {
+    channel.fromPath("data/pics/*.{png,gif,jpg}")
+    | view
+}
+```
+
+Now run the workflow:
+
+```bash
+nextflow run main.nf
+```
+
+You should see output showing the paths to your cat images.
+
+!!! tip "Glob patterns"
+
+    The `{png,gif,jpg}` syntax is called brace expansion.
+    It's a glob pattern that matches any file ending in `.png`, `.gif`, or `.jpg`.
+    This is equivalent to writing three separate patterns: `*.png`, `*.gif`, and `*.jpg`.
+    Using brace expansion keeps our code concise when we need to match multiple file extensions.
+
+### Takeaway
+
+You now know how to create a channel from files using glob patterns and view its contents.
+
+### What's next?
+
+Let's actually do something with those images by creating our first process.
+
+---
+
+## 2. Channels and processes
+
+Let's try actually doing something with those images.
+We'll start with something simple - resizing images.
+We'll need to download some software to do so.
+Eventually, we'll talk about containers and reproducibility, but just to start, let's download the software to our machine:
+
+```bash
+sudo apt update
+sudo apt-get install -y imagemagick
+```
+
+### 2.1. Understanding process structure
+
+We'll create a new "process" for our resize operation.
+You can think of these processes as templates, or classes.
+We'll connect the process to a channel and fire off a new "task" for each thing in the channel.
+
+In our Resize process definition (indeed in most process definitions), there are three blocks - `input`, `output`, and `script`.
+We connect these processes by channels and these blocks describe what we expect to get, what we expect to emit, and the work we want to do in-between.
+
+### 2.2. Create the Resize process
+
+Update your `main.nf` to add a Resize process:
+
+```groovy title="main.nf" linenums="1"
+#!/usr/bin/env nextflow
+
+workflow {
+    images = channel.fromPath("data/pics/*.{png,gif,jpg}")
+
+    images
+    | Resize
+    | view
+}
+
+process Resize {
+    input: path(img)
+    output: path("resized-*")
+    script: "magick ${img} -resize 400x resized-${img.baseName}.png"
+}
+```
+
+### 2.3. Understanding the input block
+
+The input block describes what we expect to take from the input channel.
+The "things" in the channel can have a type.
+The most common "types" are:
+
+- `val` (values like Strings, integers, Maps, complex objects),
+- `path` (paths like directories or files), or
+- `tuple` (a collection of values and paths).
+
+We'll see more of those later, but for the moment, the channel we created in the `workflow` block is a channel of files, so in our process definition, we'll say "I'm going to supply a channel of paths to this process, and as our process takes things from that channel to spawn a new task, we'll call the thing in the channel `img`."
+
+### 2.4. Understanding the output block
+
+The output block describes what we want to emit into the process' output channel.
+Again, we can describe the "type" of thing emitted - `val`, `path`, `tuple` and others.
+For now, we'll promise to produce a file (or directory) that matches the glob pattern `resized-*`.
+
+### 2.5. Understanding the script block
+
+The script block describes what work we want to do on each of the things in the channel - how we're going to transform each of the things we pull from the input channel into the files or values we promised to emit into the output channel.
+
+By default, the script block will be rendered into a bash script, but you can use any interpreted language that makes sense to you - python, ruby, R, zsh, closure, whatever.
+In this introductory workshop, we'll stick with the default bash.
+
+We run the `magick` command from imagemagick which performs many types of manipulation.
+In our case, we'll use the `-resize` argument to resize the image to a width of 400 pixels.
+We also supply an output filename.
+You'll notice that we use the `${img}` variable twice in our script block.
+This `${img}` is the variable we defined in the input block.
+For each iteration of our process (each task), the variable will be the path to our individual image.
+
+For example, if the "thing" in the channel is the image `kitten.jpg`, then when Nextflow creates a new Resize task for this file, it will "render" our script block into bash, replacing the `${img}` variables with the path to produce this valid bash:
+
+```bash
+magick kitten.jpg -resize 400x resized-kitten.jpg
+```
+
+### 2.6. Run the workflow
+
+Now let's run our workflow!
+We'll iterate over all of the images in `data/pics` (relative to our current location) and produce a channel of resized pictures that we then pipe into the `view` operator to print the channel contents to stdout.
+
+```bash
+nextflow run main.nf
+```
+
+### Takeaway
+
+You now understand the three-part structure of a Nextflow process: input, output, and script blocks work together to transform data flowing through channels.
+
+### What's next?
+
+Let's explore how Nextflow executes each task in isolation.
+
+---
+
+## 3. Investigate task execution
+
+TODO: Explain that each task is run in a separate directory. This is to ensure independence of each of the tasks - they can't interfere with each other.
+
+TODO: Show the contents of one of the task work directories.
+
+### Takeaway
+
+Each task runs in its own isolated directory to prevent interference between parallel executions.
+
+### What's next?
+
+Let's learn some convenient methods for working with file paths.
+
+---
+
+## 4. Harmonization
+
+One of the nice features of the `magick` utility is that it will also do file format conversion for us.
+It will infer the format from the extension of the final argument.
+For example, if we execute:
+
+```bash
+magick kitten.jpg -resize 400x resized-kitten.png
+```
+
+The `magick` utility will both resize the image and convert the jpg to png format.
+Let's say we want to ensure that downstream in our workflow, we'd like to ensure all images are in the png format.
+How might we modify our `script` block to replace the extension or pull out the file basename so that we can append the `.png` extension?
+
+### 4.1. The bash way (harder)
+
+If you're a bash wizard, you might know that if you have a variable `$myFile` with the path to our file, you can replace the extension with this arcane incantation:
+
+```bash
+file=kitten.jpg
+magick "$file" -resize 400x "${file%.*}.png"
+```
+
+Or perhaps you use the `basename` utility:
+
+```bash
+magick "$file" -resize 400x "$(basename "$file" .${file##*.}).png"
+```
+
+I love bash, but it's easy to forget this syntax or mistype it.
+
+### 4.2. The Nextflow way (easier)
+
+Fortunately for us, when inside the script block the `img` variable is not a bash variable - it's a Nextflow variable, and Nextflow provides some convenience methods for operating on those path objects.
+The full list is available in the [Nextflow stdlib documentation](https://www.nextflow.io/docs/latest/reference/stdlib-types.html#stdlib-types-path), but one handy method is `baseName`.
+
+We can simply call `${img.baseName}` to return the file base name.
+For example:
+
+```groovy title="main.nf" hl_lines="14" linenums="1"
+#!/usr/bin/env nextflow
+
+workflow {
+    images = channel.fromPath("data/pics/*.{png,gif,jpg}")
+
+    images
+    | Resize
+    | view
+}
+
+process Resize {
+    input: path(img)
+    output: path("resized-*")
+    script: "magick ${img} -resize 400x resized-${img.baseName}.png"
+}
+```
+
+Update your workflow with this change and run it again:
+
+```bash
+nextflow run main.nf
+```
+
+### Takeaway
+
+Nextflow path objects provide convenient methods like `baseName` that make file manipulation easier than bash string operations.
+
+### What's next?
+
+Let's make our workflow more flexible by adding parameters.
+
+---
+
+## 5. Parameters
+
+What if we want to make our workflow a little more flexible?
+Let's pull out the width and expose it as a parameter to the user.
+
+### 5.1. Using parameters directly in the script
+
+We could reference a parameter directly in the script block:
+
+```groovy title="main.nf" hl_lines="14" linenums="1"
+#!/usr/bin/env nextflow
+
+workflow {
+    images = channel.fromPath("data/pics/*.{png,gif,jpg}")
+
+    images
+    | Resize
+    | view
+}
+
+process Resize {
+    input: path(img)
+    output: path("resized-*")
+    script: "magick $img -resize ${params.width}x resized-${img.baseName}.png"
+}
+```
+
+Now we can run with:
+
+```bash
+nextflow run main.nf --width 300
+```
+
+### 5.2. Making inputs explicit (best practice)
+
+This works, but it's considered best practice (and we'll see why in a bit) to make the inputs to a process explicit.
+We can do this by adding a second input channel:
+
+```groovy title="main.nf" hl_lines="8 16-17" linenums="1"
+#!/usr/bin/env nextflow
+
+workflow {
+    images = channel.fromPath("data/pics/*.{png,gif,jpg}")
+
+    Resize(images, params.width)
+    | view
+}
+
+process Resize {
+    input:
+      path(img)
+      val(width)
+    output: path("resized-*")
+    script: "magick $img -resize ${width}x resized-${img.baseName}.png"
+}
+```
+
+The params object still works in the same way:
+
+```bash
+nextflow run main.nf --width 500
+```
+
+### Takeaway
+
+Exposing parameters as explicit process inputs makes workflows more flexible and clearer about their dependencies.
+
+### What's next?
+
+Let's learn how to attach metadata to our files using tuples and maps.
+
+---
+
+## 6. Extracting an ID
+
+Great, but I'd like a way of retaining the original IDs.
+
+### 6.1. Understanding the map operator
+
+The `map` operator is one of the most powerful tools in Nextflow.
+It takes a collection of items in a channel and transforms them into a new collection of items.
+The transformation is defined by a closure - a small piece of code that is evaluated "later" - during workflow execution.
+Each item in the new channel is the result of applying the closure to the corresponding item in the original channel.
+
+A closure is written as `{ input -> output }` where you define how to transform the input into the output.
+
+Let's use `map` to extract the ID from each filename:
+
+```groovy title="main.nf" hl_lines="5-6" linenums="1"
+#!/usr/bin/env nextflow
+
+workflow {
+    images = channel.fromPath("data/pics/*.{png,gif,jpg}")
+    | map { img -> [img.baseName, img] }
+    | view
+}
+```
+
+Run this to see the structure:
+
+```bash
+nextflow run main.nf
+```
+
+### 6.2. Using a metadata map
+
+Better - we have the id extracted as a String.
+What if we want to add other metadata later?
+Let's turn it into a Map:
+
+```groovy title="main.nf" hl_lines="5" linenums="1"
+#!/usr/bin/env nextflow
+
+workflow {
+    images = channel.fromPath("data/pics/*.{png,gif,jpg}")
+    | map { img -> [[id: img.baseName], img] }
+    | view
+}
+```
+
+### 6.3. Update the process to handle tuples
+
+Now we've changed the "shape" of the items in the channel, so we'll update the downstream process:
+
+```groovy title="main.nf" hl_lines="8 13" linenums="1"
+#!/usr/bin/env nextflow
+
+workflow {
+    images = channel.fromPath("data/pics/*.{png,gif,jpg}")
+    | map { img -> [[id: img.baseName], img] }
+
+    Resize(images, params.width)
+    | view
+}
+
+process Resize {
+    input:
+        tuple val(meta), path(img)
+        val(width)
+    output: path("resized-*")
+    script: "magick $img -resize ${width}x resized-${img.baseName}.png"
+}
+```
+
+Run the workflow and view the output:
+
+```bash
+nextflow run main.nf
+```
+
+### Takeaway
+
+Using tuples with metadata maps allows you to carry important information alongside your files as they flow through the workflow.
+
+### What's next?
+
+Now that we understand the fundamentals, let's build a more complex workflow with classification and grouping operations.

@@ -27,6 +27,15 @@ nav:
       - hello_nextflow/06_hello_config.md
       - hello_nextflow/survey.md
       - hello_nextflow/next_steps.md
+  - Small Nextflow:
+      - small_nextflow/index.md
+      - small_nextflow/00_orientation.md
+      - small_nextflow/01_fundamentals.md
+      - small_nextflow/02_data_transformation.md
+      - small_nextflow/03_publishing_portability.md
+      - small_nextflow/04_advanced.md
+      - small_nextflow/survey.md
+      - small_nextflow/next_steps.md
   - Hello nf-core:
       - hello_nf-core/index.md
       - hello_nf-core/00_orientation.md
