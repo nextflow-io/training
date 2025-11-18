@@ -5,7 +5,7 @@ We're going to build a workflow that produces a gallery of classified cat images
 
 ---
 
-## 1. Introduction
+## Introduction
 
 Nextflow offers you a way to iterate over a collection of files, so let's grab some files to iterate over.
 We're going to write a workflow which produces a gallery of good and bad cats.
@@ -14,7 +14,7 @@ First things we're going to need are some cats.
 We're starting with a (nearly) empty directory.
 There is a `.stuff` directory that contains some bits and pieces to help us along during the workshop, but you can imagine that we're essentially starting from scratch.
 
-### 1.1. Fetch some cat images
+### Fetch some cat images
 
 The first thing we're going to need is some data.
 I've created a small script that pulls from the Cat-As-A-Service API to give us some random cats.
@@ -48,7 +48,7 @@ data
     └── uq5KqqiF0qpgTQVA.txt
 ```
 
-### 1.2. Create a channel of images
+### Create a channel of images
 
 Now let's iterate over those images in Nextflow.
 To start, we'll just create a channel of those images.
@@ -90,7 +90,7 @@ Let's actually do something with those images by creating our first process.
 
 ---
 
-## 2. Channels and processes
+## Channels and processes
 
 Let's try actually doing something with those images.
 We'll start with something simple - resizing images.
@@ -102,7 +102,7 @@ sudo apt update
 sudo apt-get install -y imagemagick
 ```
 
-### 2.1. Understanding process structure
+### Understanding process structure
 
 We'll create a new "process" for our resize operation.
 You can think of these processes as templates, or classes.
@@ -111,7 +111,7 @@ We'll connect the process to a channel and fire off a new "task" for each thing 
 In our Resize process definition (indeed in most process definitions), there are three blocks - `input`, `output`, and `script`.
 We connect these processes by channels and these blocks describe what we expect to get, what we expect to emit, and the work we want to do in-between.
 
-### 2.2. Create the Resize process
+### Create the Resize process
 
 Update your `main.nf` to add a Resize process:
 
@@ -133,7 +133,7 @@ process Resize {
 }
 ```
 
-### 2.3. Understanding the input block
+### Understanding the input block
 
 The input block describes what we expect to take from the input channel.
 The "things" in the channel can have a type.
@@ -145,13 +145,13 @@ The most common "types" are:
 
 We'll see more of those later, but for the moment, the channel we created in the `workflow` block is a channel of files, so in our process definition, we'll say "I'm going to supply a channel of paths to this process, and as our process takes things from that channel to spawn a new task, we'll call the thing in the channel `img`."
 
-### 2.4. Understanding the output block
+### Understanding the output block
 
 The output block describes what we want to emit into the process' output channel.
 Again, we can describe the "type" of thing emitted - `val`, `path`, `tuple` and others.
 For now, we'll promise to produce a file (or directory) that matches the glob pattern `resized-*`.
 
-### 2.5. Understanding the script block
+### Understanding the script block
 
 The script block describes what work we want to do on each of the things in the channel - how we're going to transform each of the things we pull from the input channel into the files or values we promised to emit into the output channel.
 
@@ -171,7 +171,7 @@ For example, if the "thing" in the channel is the image `kitten.jpg`, then when 
 magick kitten.jpg -resize 400x resized-kitten.jpg
 ```
 
-### 2.6. Run the workflow
+### Run the workflow
 
 Now let's run our workflow!
 We'll iterate over all of the images in `data/pics` (relative to our current location) and produce a channel of resized pictures that we then pipe into the `view` operator to print the channel contents to stdout.
@@ -190,12 +190,12 @@ Let's explore how Nextflow executes each task in isolation.
 
 ---
 
-## 3. Investigate task execution
+## Investigate task execution
 
 Every task in Nextflow is executed in its own unique work directory.
 This directory isolation is a fundamental feature that ensures tasks cannot interfere with each other, even when running in parallel.
 
-### 3.1. Understanding work directories
+### Understanding work directories
 
 The work directory path is calculated by constructing a hash of all task inputs.
 This means that if you run the same task with the same inputs, Nextflow will recognize it and can reuse the cached results (we'll explore this with `-resume` later).
@@ -225,7 +225,7 @@ work
         └── ...
 ```
 
-### 3.2. Exploring task files
+### Exploring task files
 
 Each work directory contains several hidden files that Nextflow uses to track task execution.
 Let's see them all:
@@ -273,7 +273,7 @@ You'll see the actual bash script that was executed with all Nextflow variables 
 magick 5n4MTAC6ld0bVeCe.jpg -resize 400x resized-5n4MTAC6ld0bVeCe.png
 ```
 
-### 3.3. Task isolation and idempotence
+### Task isolation and idempotence
 
 This isolation serves two critical purposes:
 
@@ -294,7 +294,7 @@ Let's learn some convenient methods for working with file paths.
 
 ---
 
-## 4. Harmonization
+## Harmonization
 
 One of the nice features of the `magick` utility is that it will also do file format conversion for us.
 It will infer the format from the extension of the final argument.
@@ -308,7 +308,7 @@ The `magick` utility will both resize the image and convert the jpg to png forma
 Let's say we want to ensure that downstream in our workflow, we'd like to ensure all images are in the png format.
 How might we modify our `script` block to replace the extension or pull out the file basename so that we can append the `.png` extension?
 
-### 4.1. The bash way (harder)
+### The bash way (harder)
 
 If you're a bash wizard, you might know that if you have a variable `$myFile` with the path to our file, you can replace the extension with this arcane incantation:
 
@@ -325,7 +325,7 @@ magick "$file" -resize 400x "$(basename "$file" .${file##*.}).png"
 
 I love bash, but it's easy to forget this syntax or mistype it.
 
-### 4.2. The Nextflow way (easier)
+### The Nextflow way (easier)
 
 Fortunately for us, when inside the script block the `img` variable is not a bash variable - it's a Nextflow variable, and Nextflow provides some convenience methods for operating on those path objects.
 The full list is available in the [Nextflow stdlib documentation](https://www.nextflow.io/docs/latest/reference/stdlib-types.html#stdlib-types-path), but one handy method is `baseName`.
@@ -367,12 +367,12 @@ Let's make our workflow more flexible by adding parameters.
 
 ---
 
-## 5. Parameters
+## Parameters
 
 What if we want to make our workflow a little more flexible?
 Let's pull out the width and expose it as a parameter to the user.
 
-### 5.1. Using parameters directly in the script
+### Using parameters directly in the script
 
 We could reference a parameter directly in the script block:
 
@@ -400,7 +400,7 @@ Now we can run with:
 nextflow run main.nf --width 300
 ```
 
-### 5.2. Making inputs explicit (best practice)
+### Making inputs explicit (best practice)
 
 This works, but it's considered best practice (and we'll see why in a bit) to make the inputs to a process explicit.
 We can do this by adding a second input channel:
@@ -440,11 +440,11 @@ Let's learn how to attach metadata to our files using tuples and maps.
 
 ---
 
-## 6. Extracting an ID
+## Extracting an ID
 
 Great, but I'd like a way of retaining the original IDs.
 
-### 6.1. Understanding the map operator
+### Understanding the map operator
 
 The `map` operator is one of the most powerful tools in Nextflow.
 It takes a collection of items in a channel and transforms them into a new collection of items.
@@ -471,7 +471,7 @@ Run this to see the structure:
 nextflow run main.nf
 ```
 
-### 6.2. Using a metadata map
+### Using a metadata map
 
 Better - we have the id extracted as a String.
 What if we want to add other metadata later?
@@ -487,7 +487,7 @@ workflow {
 }
 ```
 
-### 6.3. Update the process to handle tuples
+### Update the process to handle tuples
 
 Now we've changed the "shape" of the items in the channel, so we'll update the downstream process:
 

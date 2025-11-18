@@ -4,12 +4,12 @@ In this final part, we'll explore version control integration, cloud execution, 
 
 ---
 
-## 1. Version control
+## Version control
 
 One of Nextflow's most powerful features is its deep integration with version control systems.
 This allows you to share workflows, track changes, and ensure reproducibility by pinning to specific versions.
 
-### 1.1. Create a GitHub repository
+### Create a GitHub repository
 
 First, let's create a new repository on GitHub to store your workflow.
 
@@ -23,7 +23,7 @@ First, let's create a new repository on GitHub to store your workflow.
 GitHub will show you some commands to push an existing repository.
 Keep this page open - we'll use those commands in a moment.
 
-### 1.2. Initialize and push your workflow
+### Initialize and push your workflow
 
 Now let's version control your workflow.
 From your workshop directory:
@@ -53,7 +53,7 @@ git push -u origin main
 Your workflow is now on GitHub!
 Visit your repository URL to see your code online.
 
-### 1.3. Running remote workflows
+### Running remote workflows
 
 Here's where it gets interesting: **you don't need a local copy of a workflow to run it**.
 
@@ -88,7 +88,7 @@ Notice we didn't specify the full path - Nextflow uses sensible defaults:
     - **Azure Repos**: With custom configuration
     - **AWS CodeCommit**: With custom configuration
 
-### 1.4. Running specific versions with revisions
+### Running specific versions with revisions
 
 Now you can run your own workflow from anywhere:
 
@@ -110,7 +110,7 @@ nextflow run YOUR-USERNAME/cat-classifier -revision dev-branch
 nextflow run YOUR-USERNAME/cat-classifier -r dev-branch
 ```
 
-### 1.5. Using Git tags for stable versions
+### Using Git tags for stable versions
 
 **Git tags** are named references to specific commits, typically used to mark release versions.
 They're like bookmarks in your repository's history - they don't change, making them perfect for reproducible pipelines.
@@ -133,7 +133,7 @@ nextflow run YOUR-USERNAME/cat-classifier -r 1.0
 
 This will always run the code as it existed when you created the tag, even if you continue developing on the `main` branch.
 
-### 1.6. Testing with different revisions
+### Testing with different revisions
 
 Let's see this in action.
 Create a new branch and make a change:
@@ -177,11 +177,11 @@ Let's explore running workflows on cloud infrastructure.
 
 ---
 
-## 2. Cloud executors
+## Cloud executors
 
 Nextflow supports running workflows on cloud infrastructure through various executors including AWS Batch, Google Cloud Batch, and Azure Batch.
 
-### 15.1. Benefits of cloud execution
+### Benefits of cloud execution
 
 Running workflows in the cloud offers several advantages:
 
@@ -190,7 +190,7 @@ Running workflows in the cloud offers several advantages:
 - **No local infrastructure**: No need to maintain local HPC clusters
 - **Global accessibility**: Run workflows from anywhere with internet access
 
-### 15.2. Cloud executor configuration
+### Cloud executor configuration
 
 Each cloud provider has its own executor configuration.
 Here's a basic example for AWS Batch:
@@ -210,7 +210,7 @@ aws {
 }
 ```
 
-### 15.3. Data staging with cloud storage
+### Data staging with cloud storage
 
 When running in the cloud, you'll typically stage your data in cloud storage:
 
@@ -236,12 +236,12 @@ Try the extension exercises to practice your new skills!
 
 ---
 
-## 3. Extension Exercise 1: Find extreme scores
+## Extension Exercise 1: Find extreme scores
 
 Our team is interested in which cat is the cutest cat and which cat is the ugliest cat.
 Can you extend the workflow to identify (for each label) which picture scores the highest?
 
-### 16.1. Hints
+### Hints
 
 **Hint 1:** You can use the `--json` flag on the `classify.py` script to output structured data instead of plain text.
 
@@ -253,7 +253,7 @@ Can you extend the workflow to identify (for each label) which picture scores th
 
 **Hint 3:** You can use the `min` and `max` operators to return a channel containing the minimum or maximum item, and you can pass a closure to those operators to describe how the elements in the channel should be compared ([docs](https://www.nextflow.io/docs/latest/reference/operator.html#min)).
 
-### 16.2. Exercise goals
+### Exercise goals
 
 - Modify the Classify process to output JSON
 - Parse the JSON to extract scores
@@ -270,19 +270,19 @@ Try making the classification labels configurable!
 
 ---
 
-## 4. Extension Exercise 2: Configurable labels
+## Extension Exercise 2: Configurable labels
 
 We've decided that "bad" and "good" are too cruel a classification system for the cats.
 Can you modify the workflow to add a `--labels` parameter?
 The parameter should take a comma-separated list of labels and use those labels in preference to the default "good cat" and "bad cat".
 
-### 17.1. Example usage
+### Example usage
 
 ```bash
 nextflow run main.nf --labels 'red cat','orange cat','black cat'
 ```
 
-### 17.2. Hints
+### Hints
 
 **Hint 1:** You'll need to modify how the labels are passed to the `classify.py` script.
 
@@ -299,7 +299,7 @@ params.labels = 'good cat,bad cat'
 labels = params.labels.split(',')
 ```
 
-### 17.3. Exercise goals
+### Exercise goals
 
 - Add a `--labels` parameter to the workflow
 - Parse the comma-separated labels
@@ -316,15 +316,15 @@ Congratulations! You've completed the Small Nextflow workshop.
 
 ---
 
-## 5. Final notes
+## Final notes
 
-### 18.1. Additional topics to explore
+### Additional topics to explore
 
 TODO: explain difference between `path(img)` and `path("inputs/*.png")`
 
 TODO: Add in resources directive memory, cpus, etc. (note: this is partially covered in section 8)
 
-### 18.2. What you've learned
+### What you've learned
 
 Congratulations on completing the Small Nextflow workshop!
 You've built a complete image classification workflow from scratch and learned:
@@ -335,7 +335,7 @@ You've built a complete image classification workflow from scratch and learned:
 - **Portability**: Filesystem independence and containerization
 - **Advanced patterns**: Version control and cloud execution
 
-### 18.3. Where to go from here
+### Where to go from here
 
 Now that you understand the basics, you can:
 

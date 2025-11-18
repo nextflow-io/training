@@ -59,7 +59,7 @@ options:
                         Model architecture (auto-detected from filename if not specified)
 ```
 
-### 7.2. Download the classification model
+### Download the classification model
 
 The script takes images, a model, and a set of labels and classifies each of the images according to the labels.
 To run the script outside of Nextflow, we'll need to download one of the models.
@@ -70,7 +70,7 @@ mkdir -p data/models
 (cd data/models && wget https://dl.fbaipublicfiles.com/MMPT/metaclip/b32_400m.pt)
 ```
 
-### 7.3. Create the Classify process
+### Create the Classify process
 
 Now let's create a `Classify` process that will take two channels - one channel of images and one channel that supplies the model:
 
@@ -88,7 +88,7 @@ Note here that we're calling the `classify.py` script directly, even though we c
 This is because Nextflow automatically adds the `bin` directory (relative to the main.nf) to the `$PATH` for all Nextflow tasks.
 This is a very convenient way to bundle accessory scripts and snippets with your workflow.
 
-### 7.4. Understanding queue vs. value channels
+### Understanding queue vs. value channels
 
 Processes can have multiple channels as input or as output.
 A process will continue to emit tasks as long as it can pull an item from each of the input channels.
@@ -117,7 +117,7 @@ Queue channels are exhaustible - they have a set number of items in the channel 
 The second type of channel is a value channel, which is a channel of only a single item.
 This item is emitted without exhaustion.
 
-### 7.5. Using value channels
+### Using value channels
 
 There are some operators which will always return a value channel.
 Examples are `first`, `collect`, `count`, etc.
@@ -139,7 +139,7 @@ workflow {
 Note here that we're wrapping the params.model value (a String) in the `file()` function, which turns an ordinary String into an object that Nextflow can use as a path.
 We've not needed to use this until now because the `channel.fromPath` factory necessarily returns paths, so it automatically does this conversion for us.
 
-### 7.6. Implicit value channels
+### Implicit value channels
 
 An even simpler solution is to provide the path object directly when calling the process.
 Any non-channel object will automatically be converted into a value channel for you:
@@ -180,13 +180,13 @@ Let's learn how to manage computational resources for our processes.
 
 ---
 
-## 2. Resources
+## Resources
 
 Our processes are currently composed of the `input:`, `output:`, and `script:` blocks.
 In addition to these blocks, processes can use "process directives" which are optional annotations which modify the behaviour of the processes.
 There are many directives ([documentation](https://www.nextflow.io/docs/latest/reference/process.html#directives)), but we can introduce the concept with two important process directives - `memory` and `cpus`.
 
-### 8.1. Understanding executors
+### Understanding executors
 
 So far, we've been using the local executor to run Nextflow - running on the local machine.
 There are many other executors targeting different backends, from HPC executors like SLURM and PBS to cloud executors like AWS Batch, Google Batch, and Azure Batch.
@@ -194,7 +194,7 @@ There are more than a dozen supported executors ([documentation](https://www.nex
 
 Each of these have a concept of the resources a particular task will require - resources such as cpus, memory, gpus, disk, etc.
 
-### 8.2. Resource defaults and management
+### Resource defaults and management
 
 If not otherwise specified, the defaults are to request 1 cpu, 1 GB of RAM and 0 GPUs for each task.
 
@@ -203,7 +203,7 @@ It will ensure that (given the resources specified or defaults applied) the runn
 If the system has 16 GB of RAM, for example, and a particular process requires 6 GB of ram, Nextflow will ensure that _at most_ 2 of those tasks are running at any one time.
 As a task finishes, Nextflow begins the next task in line.
 
-### 8.3. Add resource directives
+### Add resource directives
 
 Update your Classify process to request more memory:
 
@@ -235,14 +235,14 @@ Let's learn how to combine related data using the join and groupTuple operators.
 
 ---
 
-## 3. Grouping
+## Grouping
 
 Now we want to combine our classification results with our resized images.
 We can use the `join` operator, which finds pairs of items (one from each channel) that share a key.
 By default, the `join` operator will use the first element of each item in the channel as the key.
 In our case, that first item was the image metadata, which occupies the first position in both the Classify process output and the Resize process output.
 
-### 9.1. Join classification results with images
+### Join classification results with images
 
 Update your workflow to join the channels:
 
@@ -272,7 +272,7 @@ This produces a channel like:
 [metadata, label, img]
 ```
 
-### 9.2. Group items by label
+### Group items by label
 
 In order to make a picture of just the good cats and a second picture of just the bad cats, we'll need to group the items in the channel based on the label.
 We can do this with the `groupTuple` operator.
@@ -315,12 +315,12 @@ Let's create visual collages for each group of classified images.
 
 ---
 
-## 4. Collage
+## Collage
 
 Let's create a `Collage` process that takes this channel and produces a collage of all of the images for each label.
 The script block here is a little involved, but it uses ImageMagick's montage command to arrange images into a grid.
 
-### 10.1. Create the Collage process
+### Create the Collage process
 
 ```groovy title="Collage process" linenums="1"
 process Collage {
@@ -344,7 +344,7 @@ process Collage {
 }
 ```
 
-### 10.2. Connect to the workflow
+### Connect to the workflow
 
 We can then hook this into our channel chain:
 
@@ -367,7 +367,7 @@ workflow {
 }
 ```
 
-### 10.3. Optimize with resized images
+### Optimize with resized images
 
 Those collage tasks are taking a little too long, but that might be because we're collaging the original full-sized images and not our resized images.
 Because the `images` channel and the output channel from the `Resize` process both have the same shape, we can simply replace them in the workflow:
@@ -391,7 +391,7 @@ workflow {
 }
 ```
 
-### 10.4. Combine all collages
+### Combine all collages
 
 For our final process, let's combine these two collages together into a single final image.
 We'll create a process that takes a collection of images (we don't care what they are called) and produces a final `collage_all.png` image:
@@ -414,7 +414,7 @@ process CombineImages {
 }
 ```
 
-### 10.5. Transform the channel
+### Transform the channel
 
 The channel coming from the Collage process looks like:
 
@@ -461,7 +461,7 @@ Run the complete workflow:
 nextflow run main.nf
 ```
 
-### 10.6. Scaling up without code changes
+### Scaling up without code changes
 
 One of Nextflow's key strengths is automatic scalability.
 Let's see this in action by adding more data to our analysis!

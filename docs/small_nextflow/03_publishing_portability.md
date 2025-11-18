@@ -4,13 +4,13 @@ In this part, we'll make our workflow production-ready by publishing organized o
 
 ---
 
-## 1. Workflow outputs
+## Workflow outputs
 
 Great! We have a workflow that (arguably cruelly) collects our cats into "good" and "bad" groupings!
 Unfortunately, the final output file is still deep in the work directory in a hostile-looking hash-addressed directory.
 We'd like to define some final workflow outputs that should be published somewhere safe, outside of the work directory.
 
-### 11.1. Understanding workflow output blocks
+### Understanding workflow output blocks
 
 To define the workflow outputs, we'll need to define a `publish:` block in the workflow.
 We'll also need to put the existing workflow in a `main:` block as shown below:
@@ -38,7 +38,7 @@ workflow {
 }
 ```
 
-### 11.2. Publishing the collage
+### Publishing the collage
 
 In the `publish:` block, we define channels that we'd like to publish:
 
@@ -76,7 +76,7 @@ Now when we run, the final collage will be copied into `results/collage_all.png`
 We can control the publication mechanism by adding arguments.
 The `mode 'copy'` directive tells Nextflow to copy the output file rather than create a symlink (the default).
 
-### 11.3. Publishing the classifications
+### Publishing the classifications
 
 The more interesting outputs might be those with more metadata associated with them.
 For example, we might want to record the classification for each image ID.
@@ -131,7 +131,7 @@ results
 └── resized-wfMCf1lHc9YPw455.png
 ```
 
-### 11.4. Organizing outputs with path directives
+### Organizing outputs with path directives
 
 Let's bring a little bit of order by organizing images into subdirectories by their label:
 
@@ -161,7 +161,7 @@ results
         └── resized-wfMCf1lHc9YPw455.png
 ```
 
-### 11.5. Creating index files
+### Creating index files
 
 Now we sanitized the label names so that they'd be in more sensibly named directories (no spaces, etc), but this risks corrupting that metadata.
 Let's ask Nextflow to publish a more digestible samplesheet or "index" of the published outputs, that includes the real, unsanitized labels:
@@ -218,12 +218,12 @@ Let's make our workflow portable across different storage systems.
 
 ---
 
-## 2. Filesystem independence
+## Filesystem independence
 
 Nextflow speaks many different communication protocols, allowing you to seamlessly move from using data on a local or shared filesystem, to `http://`/`https://`, to object storage protocols like `s3://`, `az://`, `gs://` or even older `ftp://` protocols.
 You can provide support for new protocols yourself via Nextflow's plugin system.
 
-### 12.1. Using remote files
+### Using remote files
 
 For example, our current workflow uses a local model file.
 But we can easily switch to using a remote model from the web:
@@ -235,7 +235,7 @@ nextflow run main.nf --model https://dl.fbaipublicfiles.com/MMPT/metaclip/b32_40
 Nextflow will automatically download the file and make it available to the process.
 This works for input files too - you could provide image URLs instead of local paths!
 
-### 12.2. Cloud storage support
+### Cloud storage support
 
 Similarly, if you're working in the cloud, you can use cloud storage URLs:
 
@@ -265,7 +265,7 @@ Let's containerize our workflow to ensure it runs reliably anywhere.
 
 ---
 
-## 3. Containerization
+## Containerization
 
 All of our Nextflow tasks are currently using the software installed on the host operating system.
 This practice can quickly become a problem for you for a number of reasons:
@@ -274,7 +274,7 @@ This practice can quickly become a problem for you for a number of reasons:
 - The analysis becomes tied to a very specific machine or infrastructure, difficult to reproduce in exactly the same way elsewhere (by yourself or by a colleague).
 - Managing software is a thankless and boring task.
 
-### 13.1. Understanding containerization
+### Understanding containerization
 
 Containers are lightweight, standalone packages that include everything needed to run a piece of software: code, runtime, system tools, and libraries.
 Docker is the most popular container technology, and it works by packaging your software and dependencies into an "image" that can run consistently anywhere Docker is installed.
@@ -282,7 +282,7 @@ Docker is the most popular container technology, and it works by packaging your 
 When you run a containerized task, Docker creates an isolated environment with exactly the software versions specified in the container image, completely independent of what's installed on the host system.
 This ensures that your workflow produces identical results whether you run it on your laptop, an HPC cluster, or in the cloud.
 
-### 13.2. Container technologies in Nextflow
+### Container technologies in Nextflow
 
 Nextflow provides the opportunity to run each task in an isolated software environment, and can do so via a variety of technologies, including:
 
@@ -292,7 +292,7 @@ Nextflow provides the opportunity to run each task in an isolated software envir
 
 Let's improve the reproducibility and portability of our workflow.
 
-### 13.3. Containerizing processes
+### Containerizing processes
 
 You'll remember that we manually installed software two different ways:
 
@@ -329,7 +329,7 @@ process CombineImages {
 }
 ```
 
-### 13.4. Building custom containers
+### Building custom containers
 
 Our `classify.py` process includes three specific python packages (torch, pillow, and openclip-torch) at specific versions.
 It's unlikely that there is an existing container that provides these specific packages.
@@ -355,7 +355,7 @@ process Classify {
 }
 ```
 
-### 13.5. Enable container execution
+### Enable container execution
 
 To actually use containers, you need to enable Docker (or another container engine) in your Nextflow configuration.
 Create or update `nextflow.config`:
