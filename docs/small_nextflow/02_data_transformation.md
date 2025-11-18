@@ -4,14 +4,14 @@ In this part, we'll build a multi-step workflow that classifies images using mac
 
 ---
 
-## 1. Classification
+## Classification
 
 Let's get to the fun part - the cat sorting!
 We have a little classification script - `classify.py` that I've provided in the `.stuff` directory.
 In your research sometimes you have small accessory scripts that are useful for your pipelines.
 We're using a python script here in this workshop example, but this pattern will hold for scripts written in perl, ruby, R, python, closurescript, or any of the other interpreted languages.
 
-### 7.1. Set up the classification script
+### Set up the classification script
 
 Let's pull the file out into a new `bin` directory:
 
