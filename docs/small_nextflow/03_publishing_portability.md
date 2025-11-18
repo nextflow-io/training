@@ -315,7 +315,7 @@ process Resize {
         tuple val(meta), path(img)
         val(width)
     output: tuple val(meta), path("resized-*")
-    script: "magick ${img} -resize ${width}x resized-${img.baseName}.png"
+    script: "convert ${img} -resize ${width}x resized-${img.baseName}.png"
 }
 
 process Collage {

@@ -129,7 +129,7 @@ workflow {
 process Resize {
     input: path(img)
     output: path("resized-*")
-    script: "magick ${img} -resize 400x resized-${img.baseName}.png"
+    script: "convert ${img} -resize 400x resized-${img.baseName}.png"
 }
 ```
 
@@ -168,7 +168,7 @@ For each iteration of our process (each task), the variable will be the path to 
 For example, if the "thing" in the channel is the image `kitten.jpg`, then when Nextflow creates a new Resize task for this file, it will "render" our script block into bash, replacing the `${img}` variables with the path to produce this valid bash:
 
 ```bash
-magick kitten.jpg -resize 400x resized-kitten.jpg
+convert kitten.jpg -resize 400x resized-kitten.jpg
 ```
 
 ### Run the workflow
@@ -270,7 +270,7 @@ cat work/a0/*/command.sh
 You'll see the actual bash script that was executed with all Nextflow variables resolved:
 
 ```bash
-magick 5n4MTAC6ld0bVeCe.jpg -resize 400x resized-5n4MTAC6ld0bVeCe.png
+convert 5n4MTAC6ld0bVeCe.jpg -resize 400x resized-5n4MTAC6ld0bVeCe.png
 ```
 
 ### Task isolation and idempotence
@@ -301,7 +301,7 @@ It will infer the format from the extension of the final argument.
 For example, if we execute:
 
 ```bash
-magick kitten.jpg -resize 400x resized-kitten.png
+convert kitten.jpg -resize 400x resized-kitten.png
 ```
 
 The `magick` utility will both resize the image and convert the jpg to png format.
@@ -314,13 +314,13 @@ If you're a bash wizard, you might know that if you have a variable `$myFile` wi
 
 ```bash
 file=kitten.jpg
-magick "$file" -resize 400x "${file%.*}.png"
+convert "$file" -resize 400x "${file%.*}.png"
 ```
 
 Or perhaps you use the `basename` utility:
 
 ```bash
-magick "$file" -resize 400x "$(basename "$file" .${file##*.}).png"
+convert "$file" -resize 400x "$(basename "$file" .${file##*.}).png"
 ```
 
 I love bash, but it's easy to forget this syntax or mistype it.
@@ -347,7 +347,7 @@ workflow {
 process Resize {
     input: path(img)
     output: path("resized-*")
-    script: "magick ${img} -resize 400x resized-${img.baseName}.png"
+    script: "convert ${img} -resize 400x resized-${img.baseName}.png"
 }
 ```
 
@@ -390,7 +390,7 @@ workflow {
 process Resize {
     input: path(img)
     output: path("resized-*")
-    script: "magick $img -resize ${params.width}x resized-${img.baseName}.png"
+    script: "convert $img -resize ${params.width}x resized-${img.baseName}.png"
 }
 ```
 
@@ -420,7 +420,7 @@ process Resize {
       path(img)
       val(width)
     output: path("resized-*")
-    script: "magick $img -resize ${width}x resized-${img.baseName}.png"
+    script: "convert $img -resize ${width}x resized-${img.baseName}.png"
 }
 ```
 
@@ -507,7 +507,7 @@ process Resize {
         tuple val(meta), path(img)
         val(width)
     output: path("resized-*")
-    script: "magick $img -resize ${width}x resized-${img.baseName}.png"
+    script: "convert $img -resize ${width}x resized-${img.baseName}.png"
 }
 ```
 
