@@ -461,9 +461,54 @@ Run the complete workflow:
 nextflow run main.nf
 ```
 
+### 10.6. Scaling up without code changes
+
+One of Nextflow's key strengths is automatic scalability.
+Let's see this in action by adding more data to our analysis!
+
+While your workflow is still running (or right after it completes), open a new terminal and add more cat images:
+
+```bash
+# Add 20 more cats to our dataset
+.stuff/cat_me.sh --count 20 --prefix data/pics
+```
+
+This brings our total from 4 cats to 24 cats.
+Now run the workflow again with `-resume`:
+
+```bash
+nextflow run main.nf -resume
+```
+
+Notice what happens in the output:
+
+- Tasks for the original 4 images show as **[cached]** in gray
+- Only the 20 new images are processed through Resize and Classify
+- The groupTuple, Collage, and CombineImages steps run again (because their inputs changed)
+- The final collage now includes all 24 cats
+
+**You didn't change a single line of code** - the workflow automatically:
+
+- Detected the new input files via the glob pattern `data/pics/*.{png,gif,jpg}`
+- Processed only the new images that hadn't been seen before
+- Reused cached results for the original 4 images
+- Scaled the grouping and collage operations to handle more data
+
+This is the power of Nextflow's declarative approach: you describe **what** you want to do, and Nextflow figures out **how** to do it efficiently, whether you have 4 files or 4,000 files.
+
+!!! tip "Scalability in practice"
+
+    This same pattern works at any scale:
+
+    - **Local development**: Test with 4 samples
+    - **Pilot study**: Scale to 24 samples with no code changes
+    - **Production**: Process thousands of samples with the same workflow
+    - **HPC/Cloud**: Nextflow automatically distributes tasks across available resources
+
 ### Takeaway
 
 You can chain together multiple processes and operators to build sophisticated multi-step workflows that transform and aggregate data.
+Nextflow automatically scales your workflow as your data grows, without requiring any code changes.
 
 ### What's next?
 

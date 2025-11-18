@@ -3,7 +3,7 @@
 This orientation assumes you have already opened the training environment by clicking on the "Open in GitHub Codespaces" button.
 If not, please do so now, ideally in a second browser window or tab so you can refer back to these instructions.
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training/tree/smol-nextflow?quickstart=1&ref=master)
 
 ## GitHub Codespaces
 
