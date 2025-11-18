@@ -451,7 +451,7 @@ It takes a collection of items in a channel and transforms them into a new colle
 The transformation is defined by a closure - a small piece of code that is evaluated "later" - during workflow execution.
 Each item in the new channel is the result of applying the closure to the corresponding item in the original channel.
 
-A closure is written as `{ input -> output }` where you define how to transform the input into the output.
+A closure is written as `{ input -> <expression> }` where to the left of the "stabby operator" `->`, you define the variable used to refer to the closure input, and then an expression or series of expressions. The last expression will be the return value of the closure. For map, the items in the resulting output channel are the collection of values returned by each invocation of the closure.
 
 Let's use `map` to extract the ID from each filename:
 
@@ -506,7 +506,8 @@ process Resize {
     input:
         tuple val(meta), path(img)
         val(width)
-    output: path("resized-*")
+    output: 
+        tuple val(meta), path("resized-*")
     script: "convert $img -resize ${width}x resized-${img.baseName}.png"
 }
 ```

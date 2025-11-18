@@ -328,13 +328,13 @@ process Collage {
     output: tuple val(label), path("collage.png")
     script:
     """
-    magick montage inputs/* \\
+    montage inputs/* \\
         -geometry +10+10 \\
         -background black \\
         +polaroid \\
         -background '#ffbe76' \\
         collage_nolabel.png
-    magick montage \\
+    montage \\
         -pointsize 48 \\
         -label '$label' \\
         -geometry +0+0 \\
@@ -402,7 +402,7 @@ process CombineImages {
     output: path "collage_all.png"
     script:
     """
-    magick montage \\
+    montage \\
         -geometry +10+10 \\
         -quality 05 \\
         -background '#ffbe76' \\
