@@ -318,12 +318,6 @@ Congratulations! You've completed the Small Nextflow workshop.
 
 ## Final notes
 
-### Additional topics to explore
-
-TODO: explain difference between `path(img)` and `path("inputs/*.png")`
-
-TODO: Add in resources directive memory, cpus, etc. (note: this is partially covered in section 8)
-
 ### What you've learned
 
 Congratulations on completing the Small Nextflow workshop!
