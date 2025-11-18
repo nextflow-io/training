@@ -146,7 +146,7 @@ Any non-channel object will automatically be converted into a value channel for 
 
 ```groovy title="main.nf" hl_lines="8" linenums="1"
 #!/usr/bin/env nextflow
-
+params.width = 400
 params.model = "${projectDir}/data/models/b32_400m.pt"
 
 workflow {
@@ -248,7 +248,7 @@ Update your workflow to join the channels:
 
 ```groovy title="Workflow with join" hl_lines="12-14" linenums="1"
 #!/usr/bin/env nextflow
-
+params.width = 400
 params.model = "${projectDir}/data/models/b32_400m.pt"
 
 workflow {
@@ -282,7 +282,7 @@ To ask Nextflow to group on the item with index 1, we add a `by: 1` argument to 
 
 ```groovy title="Workflow with grouping" hl_lines="13-15" linenums="1"
 #!/usr/bin/env nextflow
-
+params.width = 400
 params.model = "${projectDir}/data/models/b32_400m.pt"
 
 workflow {
@@ -350,7 +350,7 @@ We can then hook this into our channel chain:
 
 ```groovy title="Workflow with Collage" hl_lines="13-15" linenums="1"
 #!/usr/bin/env nextflow
-
+params.width = 400
 params.model = "${projectDir}/data/models/b32_400m.pt"
 
 workflow {
@@ -374,7 +374,7 @@ Because the `images` channel and the output channel from the `Resize` process bo
 
 ```groovy title="Optimized workflow" hl_lines="12" linenums="1"
 #!/usr/bin/env nextflow
-
+params.width = 400
 params.model = "${projectDir}/data/models/b32_400m.pt"
 
 workflow {
@@ -433,7 +433,7 @@ So we'll drop the labels and collect all images:
 
 ```groovy title="Final workflow" hl_lines="14-18" linenums="1"
 #!/usr/bin/env nextflow
-
+params.width = 400
 params.model = "${projectDir}/data/models/b32_400m.pt"
 
 workflow {
