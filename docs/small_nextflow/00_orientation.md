@@ -48,19 +48,15 @@ If you run this inside `small_nextflow`, you should see a minimal directory stru
 ```console title="Directory contents"
 .
 ├── .stuff/
-│   ├── cat_me.sh
-│   ├── classify.py
-│   └── pyproject.toml
-└── main.nf
+    ├── cat_me.sh
+    ├── classify.py
+    └── pyproject.toml
 ```
 
 **Here's a summary of what you should know to get started:**
 
 - **The `.stuff/` directory** contains helper scripts and configuration files we'll use throughout the workshop.
   You can think of this as a toolbox we'll pull from as we build our workflow.
-
-- **The file `main.nf`** is where we'll write our Nextflow workflow.
-  It starts nearly empty, and we'll build it up step by step.
 
 - **The `cat_me.sh` script** fetches random cat images from an API for our workflow to process.
 
@@ -69,5 +65,11 @@ If you run this inside `small_nextflow`, you should see a minimal directory stru
 - **The `pyproject.toml` file** describes the Python dependencies needed for the classification script.
 
 Throughout this workshop, we'll start with this minimal setup and progressively build a complete image classification workflow.
+
+Let's get started by creating a fresh, empty `main.nf`:
+
+```bash
+code main.nf
+```
 
 **Now, to begin the course, click on the arrow in the bottom right corner of this page.**
