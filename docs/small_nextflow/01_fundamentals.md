@@ -506,7 +506,7 @@ process Resize {
     input:
         tuple val(meta), path(img)
         val(width)
-    output: 
+    output:
         tuple val(meta), path("resized-*")
     script: "convert $img -resize ${width}x resized-${img.baseName}.png"
 }
