@@ -344,8 +344,8 @@ Once you have your container image, add it to the Classify process:
 
 ```groovy title="Classify with custom container" hl_lines="2" linenums="1"
 process Classify {
-    container 'your-registry/your-classify-container:latest'
-    memory '4 GB'
+    container 'community.wave.seqera.io/library/pip_open-clip-torch_pillow_torch:83edd876e95b9a8e'
+    memory '13 GB'
 
     input:
         tuple val(meta), path(img)
