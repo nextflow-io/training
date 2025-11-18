@@ -15,7 +15,7 @@ By starting with an empty directory and building up piece by piece, you'll gain 
 
 Let's get started!
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training/tree/smol-nextflow?quickstart=1&ref=master)
 
 ## Learning objectives
 
