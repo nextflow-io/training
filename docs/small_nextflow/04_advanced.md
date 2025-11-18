@@ -279,7 +279,7 @@ The parameter should take a comma-separated list of labels and use those labels 
 ### Example usage
 
 ```bash
-nextflow run main.nf --labels 'red cat','orange cat','black cat'
+nextflow run main.nf --labels 'red cat,orange cat,black cat'
 ```
 
 ### Hints
