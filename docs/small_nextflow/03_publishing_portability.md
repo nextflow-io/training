@@ -107,7 +107,7 @@ workflow {
 
     publish:
         collage = CombineImages.out
-        classification = classifiedMaps
+        classified = classifiedMaps
 }
 
 output {
