@@ -95,7 +95,8 @@ sampleG,turtle,/workspaces/training/side-quests/metadata/data/ciao.txt
 
 ### 1.1. Read in datasheet with splitCsv
 
-Let's start by reading in the datasheet with `splitCsv`. In the main workflow file, you'll see that we've already started the workflow:
+Let's start by reading in the datasheet with `splitCsv`.
+In the main workflow file, you'll see that we've already started the workflow:
 
 ```groovy title="main.nf" linenums="1"
 workflow  {
@@ -123,27 +124,59 @@ workflow  {
         ch_samplesheet = channel.fromPath("./data/samplesheet.csv")
     ```
 
-We can use the [`splitCsv` operator](https://www.nextflow.io/docs/latest/operator.html#splitcsv) to split the datasheet into a channel of maps, where each map represents a row from the CSV file.
+Here we use the [`splitCsv` operator](https://www.nextflow.io/docs/latest/operator.html#splitcsv) with the `header: true` option to tell Nextflow to read the first row of the CSV file as the header row.
+This will parse the datasheet into a channel of maps, i.e. key-value pairs, where each map represents a row from the CSV file, with the column headers as keys for the corresponding values.
 
-A map is a key-value data structure similar to dictionaries in Python, objects in JavaScript, or hashes in Ruby. For example:
+??? example "(Optional) More about maps"
 
-```groovy
-// Groovy map
-def my_map = [id:'sampleA', character:'squirrel']
-println my_map.id  // Prints: sampleA
-```
+    In Groovy, the programming language that Nextflow is built on, a map is a key-value data structure similar to dictionaries in Python, objects in JavaScript, or hashes in Ruby.
 
-!!! example "Try it yourself"
+    For example:
 
-      You can run this example to see how maps look like with:
+    ```groovy title="Groovy map"
+    def my_map = [id:'sampleA', character:'squirrel']
+    println my_map.id  // Prints: sampleA
+    ```
 
-      ```bash title="Run map demo example"
-      nextflow run examples/map_demo.nf
-      ```
+    And here's a runnable script that applies this in practice:
 
-The `header: true` option tells Nextflow to use the first row of the CSV file as the header row, which will be used as keys for the values. Let's see what Nextflow can see after reading with `splitCsv`. Run the pipeline with the `view()` operator we added above:
+    ```groovy title="examples/map_demo.nf"
+    #!/usr/bin/env nextflow
 
-Run the pipeline:
+    // Create a simple map
+    def my_map = [id:'sampleA', character:'squirrel']
+
+    // Print the whole map
+    println "map: ${my_map}"
+
+    // Access individual values using dot notation
+    println "id: ${my_map.id}"
+    println "character: ${my_map.character}"
+    ```
+
+    Even though it doesn't have a proper `workflow` block, Nextflow can run this as if it were a workflow:
+
+    ```bash title="Run map demo example"
+    nextflow run examples/map_demo.nf
+    ```
+
+    And here's what you can expect to see in the output:
+
+    ```console title="Output"
+    Nextflow 25.10.0 is available - Please consider updating your version to it
+
+    N E X T F L O W   ~  version 25.04.3
+
+    Launching `map_demo.nf` [cheesy_plateau] DSL2 - revision: fae5b8496e
+
+    map: [id:sampleA, character:squirrel]
+    id: sampleA
+    character: squirrel
+    ```
+
+Let's see what Nextflow can see after reading with `splitCsv`.
+
+Run the pipeline with the `view()` operator we added above:
 
 ```bash title="Read the datasheet"
 nextflow run main.nf
