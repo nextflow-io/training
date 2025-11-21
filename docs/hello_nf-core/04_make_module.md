@@ -10,10 +10,11 @@ After that, we'll show you how to use the template-based module creation to work
 
     This section assumes you have completed [Part 3: Use an nf-core module](./03_use_module.md) and have integrated the `CAT_CAT` module into your pipeline.
 
-    If you didn't complete Part 3 or want to start fresh for this section, you can use the `core-hello-part3` solution as your starting point:
+    If you did not complete Part 3 or want to start fresh for this part, you can use the `core-hello-part3` solution as your starting point.
+    Run these commands from inside the `hello-nf-core/` directory:
 
     ```bash
-    cp -r hello-nf-core/solutions/core-hello-part3 core-hello
+    cp -r solutions/core-hello-part3 core-hello
     cd core-hello
     ```
 

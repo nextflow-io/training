@@ -10,8 +10,8 @@ To demonstrate how this works, we'll replace the custom `collectGreetings` modul
 !!! note
 
     This part of the course assumes you have completed [Part 2: Rewrite Hello for nf-core](./02_rewrite_hello.md) and have a working `core-hello` pipeline.
-    If you did not complete Part 2 or want to start fresh for this part, you can use the `core-hello-part2` solution as your starting point.
 
+    If you did not complete Part 2 or want to start fresh for this part, you can use the `core-hello-part2` solution as your starting point.
     Run this command from within the `hello-nf-core/` directory:
 
     ```bash
