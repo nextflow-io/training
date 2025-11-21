@@ -38,7 +38,7 @@ workflow HELLO {
     // generate ASCII art of the greetings with cowpy
     cowpy(CAT_CAT.out.file_out)
 
-    ch_versions = Channel.empty()
+    ch_versions = channel.empty()
 
     //
     // Collate and save software versions

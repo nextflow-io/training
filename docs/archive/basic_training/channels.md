@@ -211,11 +211,11 @@ As you can see, the output is the same as the previous example when the `first()
 
 ## Channel factories
 
-Channel factories are Nextflow commands for creating channels that have implicit expected inputs and functions. There are several different Channel factories which are useful for different situations. The following sections will cover the most common channel factories.
+Channel factories are Nextflow commands for creating channels that have implicit expected inputs and functions. There are several different channel factories which are useful for different situations. The following sections will cover the most common channel factories.
 
 !!! tip
 
-    New in version 20.07.0: channel was introduced as an alias of Channel, allowing factory methods to be specified as `channel.of()` or `channel.of()`, and so on.
+    New in version 20.07.0: channel was introduced as an alias of channel, allowing factory methods to be specified as `channel.of()` or `channel.of()`, and so on.
 
 ### `value()`
 
@@ -236,7 +236,7 @@ ch3 = channel.value([1, 2, 3, 4, 5]) // (3)!
 The factory `channel.of` allows the creation of a queue channel with the values specified as arguments.
 
 ```groovy linenums="1" title="snippet.nf"
-Channel
+channel
     .of(1, 3, 5, 7)
     .view()
 ```
@@ -253,7 +253,7 @@ This example creates a channel that emits the values specified as a parameter in
 The `channel.of` channel factory works in a similar manner to `channel.from` (which is now [deprecated](https://www.nextflow.io/docs/latest/channel.html#of)), fixing some inconsistent behaviors of the latter and providing better handling when specifying a range of values. For example, the following works with a range from 1 to 23:
 
 ```groovy linenums="1" title="snippet.nf"
-Channel
+channel
     .of(1..23, 'X', 'Y')
     .view()
 ```
@@ -265,7 +265,7 @@ The `channel.fromList` channel factory creates a channel emitting the elements p
 ```groovy linenums="1" title="snippet.nf"
 list = ['hello', 'world']
 
-Channel
+channel
     .fromList(list)
     .view()
 ```
@@ -275,7 +275,7 @@ Channel
 The `fromPath` channel factory creates a queue channel emitting one or more files matching the specified glob pattern.
 
 ```groovy linenums="1" title="snippet.nf"
-Channel
+channel
     .fromPath('./data/meta/*.csv')
 ```
 
@@ -306,7 +306,7 @@ Learn more about the glob patterns syntax at [this link](https://docs.oracle.com
     ??? solution
 
         ```groovy linenums="1" title="snippet.nf"
-        Channel
+        channel
             .fromPath('./data/ggal/**.fq', hidden: true)
             .view()
         ```
@@ -316,7 +316,7 @@ Learn more about the glob patterns syntax at [this link](https://docs.oracle.com
 The `fromFilePairs` channel factory creates a channel emitting the file pairs matching a glob pattern provided by the user. The matching files are emitted as tuples, in which the first element is the grouping key of the matching pair and the second element is the list of files (sorted in lexicographical order).
 
 ```groovy linenums="1" title="snippet.nf"
-Channel
+channel
     .fromFilePairs('./data/ggal/*_{1,2}.fq')
     .view()
 ```
@@ -354,7 +354,7 @@ The `fromFilePairs` channel factory also has options to help you control its beh
         Use the following with the `flat` option equaling true:
 
         ```groovy linenums="1" title="snippet.nf"
-        Channel
+        channel
             .fromFilePairs('./data/ggal/*_{1,2}.fq', flat: true)
             .view()
         ```
@@ -362,7 +362,7 @@ The `fromFilePairs` channel factory also has options to help you control its beh
         And false:
 
         ```groovy linenums="1" title="snippet.nf"
-        Channel
+        channel
             .fromFilePairs('./data/ggal/*_{1,2}.fq', flat: false)
             .view()
         ```
@@ -393,7 +393,7 @@ The following snippet will print the contents of an NCBI project ID:
 ```groovy linenums="1" title="snippet.nf"
 params.ncbi_api_key = '<Your API key here>'
 
-Channel
+channel
     .fromSRA(['SRP073307'], apiKey: params.ncbi_api_key)
     .view()
 ```
@@ -416,7 +416,7 @@ Multiple accession IDs can be specified using a list object:
 
 ```groovy linenums="1" title="snippet.nf"
 ids = ['ERR908507', 'ERR908506', 'ERR908505']
-Channel
+channel
     .fromSRA(ids, apiKey: params.ncbi_api_key)
     .view()
 ```
