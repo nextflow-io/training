@@ -1212,7 +1212,7 @@ So we just need to plug that into the initialisation workflow, with minor change
         // Create channel from input file provided through params.input
         //
 
-        Channel
+        channel
             .fromList(samplesheetToList(params.input, "${projectDir}/assets/schema_input.json"))
             .map {
                 meta, fastq_1, fastq_2 ->

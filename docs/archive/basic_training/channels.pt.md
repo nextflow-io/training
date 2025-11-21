@@ -168,7 +168,7 @@ numero: 7
 A fábrica de canal `channel.of` funciona de maneira semelhante ao `channel.from` (que foi [descontinuado](https://www.nextflow.io/docs/latest/channel.html#of)), corrigindo alguns comportamentos inconsistentes do último e fornecendo um melhor manuseio quando um intervalo de valores é especificado. Por exemplo, o seguinte funciona com um intervalo de 1 a 23:
 
 ```groovy linenums="1"
-Channel
+channel
     .of(1..23, 'X', 'Y')
     .view()
 ```
@@ -180,7 +180,7 @@ A fábrica de canal `channel.fromList` cria um canal emitindo os elementos forne
 ```groovy linenums="1"
 list = ['olá', 'mundo']
 
-Channel
+channel
     .fromList(list)
     .view()
 ```
@@ -218,7 +218,7 @@ Saiba mais sobre a sintaxe dos padrões glob [neste link](https://docs.oracle.co
     ??? solution
 
         ```groovy linenums="1"
-        Channel
+        channel
             .fromPath('./data/ggal/**.fq', hidden: true)
             .view()
         ```
@@ -228,7 +228,7 @@ Saiba mais sobre a sintaxe dos padrões glob [neste link](https://docs.oracle.co
 A fábrica de canal `fromFilePairs` cria um canal emitindo os pares de arquivos correspondentes a um padrão glob fornecido pelo usuário. Os arquivos correspondentes são emitidos como tuplas, nas quais o primeiro elemento é a chave de agrupamento do par correspondente e o segundo elemento é a lista de arquivos (classificados em ordem lexicográfica).
 
 ```groovy linenums="1"
-Channel
+channel
     .fromFilePairs('./data/ggal/*_{1,2}.fq')
     .view()
 ```
@@ -264,7 +264,7 @@ Ele produzirá uma saída semelhante à seguinte:
         Use o seguinte, com ou sem `flat: true`:
 
         ```groovy linenums="1"
-        Channel
+        channel
             .fromFilePairs('./data/ggal/*_{1,2}.fq', flat: true)
             .view()
         ```
@@ -296,7 +296,7 @@ Por exemplo, o trecho a seguir imprimirá o conteúdo de um ID de projeto NCBI:
 ```groovy linenums="1"
 params.ncbi_api_key = '<Sua chave da API aqui>'
 
-Channel
+channel
     .fromSRA(['SRP073307'], apiKey: params.ncbi_api_key)
     .view()
 ```
@@ -319,7 +319,7 @@ Vários IDs de acesso podem ser especificados usando um objeto lista:
 
 ```groovy linenums="1"
 ids = ['ERR908507', 'ERR908506', 'ERR908505']
-Channel
+channel
     .fromSRA(ids, apiKey: params.ncbi_api_key)
     .view()
 ```
@@ -369,7 +369,7 @@ Se você deseja executar o fluxo de trabalho acima e não possui o fastqc instal
 O operador `splitText` permite dividir strings de várias linhas ou itens de arquivo de texto, emitidos por um canal de origem em blocos contendo n linhas, que serão emitidos pelo canal resultante. Veja:
 
 ```groovy linenums="1"
-Channel
+channel
     .fromPath('data/meta/random.txt') // (1)!
     .splitText() // (2)!
     .view() // (3)!
@@ -382,7 +382,7 @@ Channel
 Você pode definir o número de linhas em cada bloco usando o parâmetro `by`, conforme mostrado no exemplo a seguir:
 
 ```groovy linenums="1"
-Channel
+channel
     .fromPath('data/meta/random.txt')
     .splitText(by: 2)
     .subscribe {
@@ -398,7 +398,7 @@ Channel
 Uma clausura opcional pode ser especificada para transformar os blocos de texto produzidos pelo operador. O exemplo a seguir mostra como dividir arquivos de texto em blocos de 10 linhas e transformá-los em letras maiúsculas:
 
 ```groovy linenums="1"
-Channel
+channel
     .fromPath('data/meta/random.txt')
     .splitText(by: 10) { it.toUpperCase() }
     .view()
@@ -409,7 +409,7 @@ Você também pode fazer contagens para cada linha:
 ```groovy linenums="1"
 contador = 0
 
-Channel
+channel
     .fromPath('data/meta/random.txt')
     .splitText()
     .view { "${contador++}: ${it.toUpperCase().trim()}" }
@@ -435,7 +435,7 @@ Em seguida, ele os divide em registros ou os agrupa como uma lista de registros 
 No caso mais simples, basta aplicar o operador `splitCsv` a um canal que emite arquivos de texto ou entradas de texto no formato CSV. Por exemplo, para visualizar apenas a primeira e a quarta colunas:
 
 ```groovy linenums="1"
-Channel
+channel
     .fromPath("data/meta/patients_1.csv")
     .splitCsv()
     // linha é um objeto de lista
@@ -445,7 +445,7 @@ Channel
 Quando o CSV começa com uma linha de cabeçalho definindo os nomes das colunas, você pode especificar o parâmetro `header: true` que permite referenciar cada valor pelo nome da coluna, conforme mostrado no exemplo a seguir:
 
 ```groovy linenums="1"
-Channel
+channel
     .fromPath("data/meta/patients_1.csv")
     .splitCsv(header: true)
     // linha é um objeto de lista
@@ -455,7 +455,7 @@ Channel
 Como alternativa, você pode fornecer nomes de cabeçalho personalizados especificando uma lista de strings no parâmetro de cabeçalho, conforme mostrado abaixo:
 
 ```groovy linenums="1"
-Channel
+channel
     .fromPath("data/meta/patients_1.csv")
     .splitCsv(header: ['col1', 'col2', 'col3', 'col4', 'col5'])
     // linha é um objeto de lista
@@ -465,7 +465,7 @@ Channel
 Você também pode processar vários arquivos CSV ao mesmo tempo:
 
 ```groovy linenums="1"
-Channel
+channel
     .fromPath("data/meta/patients_*.csv") // <-- use um padrão de captura
     .splitCsv(header: true)
     .view { linha -> "${linha.patient_id}\t${linha.num_samples}" }
@@ -500,7 +500,7 @@ for (List linha : linhas) {
         Em seguida, substitua o canal de entrada para as leituras em `script7.nf`, alterando as seguintes linhas:
 
         ```groovy linenums="1"
-        Channel
+        channel
             .fromFilePairs(params.reads, checkIfExists: true)
             .set { read_pairs_ch }
         ```
@@ -508,7 +508,7 @@ for (List linha : linhas) {
         Para uma entrada de fábrica de canal splitCsv:
 
         ```groovy linenums="1" hl_lines="2 3 4"
-        Channel
+        channel
             .fromPath("fastq.csv")
             .splitCsv()
             .view { linha -> "${linha[0]}, ${linha[1]}, ${linha[2]}" }
@@ -582,7 +582,7 @@ for (List linha : linhas) {
 A análise de arquivos TSV funciona de maneira semelhante, basta adicionar a opção `sep: '\t'` no contexto do `splitCsv`:
 
 ```groovy linenums="1"
-Channel
+channel
     .fromPath("data/meta/regions.tsv", checkIfExists: true)
     // Use a opção `sep` para analisar arquivos com tabulação como separador
     .splitCsv(sep: '\t')
@@ -597,7 +597,7 @@ Channel
     ??? solution
 
         ```groovy linenums="1"
-        Channel
+        channel
             .fromPath("data/meta/regions.tsv", checkIfExists: true)
             // Use a opção `sep` para analisar arquivos com tabulação como separador
             .splitCsv(sep: '\t', header: true)
@@ -616,7 +616,7 @@ O operador `splitJson` suporta arranjos JSON:
 === "Código-fonte"
 
     ```groovy linenums="1"
-    Channel
+    channel
         .of('["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"]')
         .splitJson()
         .view { "Item: ${it}" }
@@ -639,7 +639,7 @@ Objetos JSON:
 === "Código-fonte"
 
     ```groovy linenums="1"
-    Channel
+    channel
         .of('{"jogador": {"nome": "Bob", "altura": 180, "venceu_campeonato": false}}')
         .splitJson()
         .view { "Item: ${it}" }
@@ -656,7 +656,7 @@ E inclusive arranjos JSON com objetos JSON!
 === "Código-fonte"
 
     ```groovy linenums="1"
-    Channel
+    channel
         .of('[{"nome": "Bob", "altura": 180, "venceu_campeonato": false}, \
             {"nome": "Alice", "height": 170, "venceu_campeonato": false}]')
         .splitJson()
@@ -675,7 +675,7 @@ Arquivos contendo dados em formato JSON também podem ser analisados:
 === "Código-fonte"
 
     ```groovy linenums="1"
-    Channel
+    channel
         .fromPath('arquivo.json')
         .splitJson()
         .view { "Item: ${it}" }
@@ -762,7 +762,7 @@ Digamos que não temos um operador de canal JSON, mas criamos uma função para 
     }
 
     workflow {
-        Channel
+        channel
             .fromPath('data/meta/regions*.json')
             | flatMap { parseArquivoJson(it) }
             | map { registro -> [registro.patient_id, registro.feature] }
