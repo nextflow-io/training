@@ -221,7 +221,7 @@ Open the `cowpy.nf` module file (under `core-hello/modules/local/`) and modify i
 
 === "After"
 
-    ```groovy title="modules/local/cowpy.nf" linenums="1" hl_lines="16 18"
+    ```groovy title="modules/local/cowpy.nf" linenums="1" hl_lines="18 20"
     #!/usr/bin/env nextflow
 
     // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
@@ -248,7 +248,7 @@ Open the `cowpy.nf` module file (under `core-hello/modules/local/`) and modify i
 
 === "Before"
 
-    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="6 13"
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="13 20"
     #!/usr/bin/env nextflow
 
     // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
@@ -1018,7 +1018,7 @@ It must produce the same output files as the script block:
 
 === "After"
 
-    ```groovy title="modules/local/cowpy/main.nf" linenums="27" hl_lines="3 6"
+    ```groovy title="modules/local/cowpy/main.nf" linenums="27" hl_lines="3"
     stub:
     def args = task.ext.args ?: ''
     prefix = task.ext.prefix ?: "${meta.id}"
@@ -1035,7 +1035,7 @@ It must produce the same output files as the script block:
 
 === "Before"
 
-    ```groovy title="modules/local/cowpy/main.nf" linenums="27" hl_lines="5-6"
+    ```groovy title="modules/local/cowpy/main.nf" linenums="27" hl_lines="3 6"
     stub:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"

@@ -485,6 +485,8 @@ For our simple case, we need to add a `greeting` header to our greetings file:
 
 Add a header line to the greetings file:
 
+<!-- TODO: update to match multi-column version of greetings.csv -->
+
 === "After"
 
     ```csv title="assets/greetings.csv" linenums="1" hl_lines="1"

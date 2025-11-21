@@ -27,7 +27,7 @@ Through this hands-on course, you've learned to:
 4. **Create custom modules** following nf-core standards for naming, structure, and metadata
 5. **Implement validation** using nf-schema to catch errors early with clear feedback
 
-## From research script to production pipeline
+## From research script to robust pipeline
 
 The transformation you've made illustrates the difference between a research script and a production pipeline.
 Your original Hello Nextflow workflow worked fine for its purpose, but the nf-core version you've built is:
@@ -40,4 +40,7 @@ Your original Hello Nextflow workflow worked fine for its purpose, but the nf-co
 
 You're now equipped with the foundational knowledge to build production-ready nf-core pipelines that follow community best practices.
 
-**Thank you for completing this training. Happy pipelining!** 🚀
+Thank you for completing this training.
+Please take a minute to complete the feedback survey on the next page.
+
+**Happy pipelining!** 🚀
