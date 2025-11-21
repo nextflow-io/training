@@ -40,7 +40,7 @@ workflow HELLO {
     ch_for_cowpy = CAT_CAT.out.file_out.map{ meta, file -> file }
     cowpy(ch_for_cowpy, params.character)
 
-    ch_versions = Channel.empty()
+    ch_versions = channel.empty()
 
     //
     // Collate and save software versions

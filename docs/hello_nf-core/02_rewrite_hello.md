@@ -1003,7 +1003,7 @@ If we open up `core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf
     // Create channel from input file provided through params.input
     //
 
-    Channel
+    channel
         .fromList(samplesheetToList(params.input, "${projectDir}/assets/schema_input.json"))
         .map {
             meta, fastq_1, fastq_2 ->
@@ -1082,7 +1082,7 @@ So we just need to plug that into the initialisation workflow, with minor change
         // Create channel from input file provided through params.input
         //
 
-        Channel
+        channel
             .fromList(samplesheetToList(params.input, "${projectDir}/assets/schema_input.json"))
             .map {
                 meta, fastq_1, fastq_2 ->

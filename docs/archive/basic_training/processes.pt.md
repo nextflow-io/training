@@ -356,7 +356,7 @@ workflow {
         ```groovy linenums="1"
         params.leituras = "$projectDir/data/ggal/*_1.fq"
 
-        Channel
+        channel
             .fromPath(params.leituras)
             .set { canal_leituras }
 
@@ -494,7 +494,7 @@ Isso ocorre porque os canais de valor podem ser consumidos várias vezes e não 
         params.leituras = "$projectDir/data/ggal/*_1.fq"
         params.arquivo_transcriptoma = "$projectDir/data/ggal/transcriptome.fa"
 
-        Channel
+        channel
             .fromPath(params.leituras)
             .set { canal_leituras }
 
@@ -559,7 +559,7 @@ No exemplo acima, toda vez que um arquivo de sequências é recebido como entrad
         params.arquivo_transcriptoma = "$projectDir/data/ggal/transcriptome.fa"
         metodos= ['salmon', 'kallisto']
 
-        Channel
+        channel
             .fromPath(params.leituras)
             .set { canal_leituras }
 
@@ -704,7 +704,7 @@ Quando um nome de arquivo de saída precisa ser expresso dinamicamente, é poss�
 especies = ['gato', 'cachorro', 'preguiça']
 sequencias = ['AGATAG', 'ATGCTCT', 'ATCCCAA']
 
-Channel
+channel
     .fromList(especies)
     .set { canal_especies }
 

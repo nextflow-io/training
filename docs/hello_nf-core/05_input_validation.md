@@ -442,7 +442,7 @@ Now update the channel creation code:
         //
         // Create channel from input file provided through params.input
         //
-        ch_samplesheet = Channel.fromList(samplesheetToList(params.input, "${projectDir}/assets/schema_input.json"))
+        ch_samplesheet = channel.fromList(samplesheetToList(params.input, "${projectDir}/assets/schema_input.json"))
             .map { row ->
                 // Extract just the greeting string from each row
                 row[0]
@@ -459,7 +459,7 @@ Now update the channel creation code:
         //
         // Create channel from input file provided through params.input
         //
-        ch_samplesheet = Channel.fromPath(params.input)
+        ch_samplesheet = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
 
@@ -471,7 +471,7 @@ Now update the channel creation code:
 Let's break down what changed:
 
 1. **`samplesheetToList(params.input, "${projectDir}/assets/schema_input.json")`**: Validates the input file against our schema and returns a list
-2. **`Channel.fromList(...)`**: Converts the list into a Nextflow channel
+2. **`channel.fromList(...)`**: Converts the list into a Nextflow channel
 3. **`.map { row -> row[0] }`**: Extracts just the greeting string from each validated row (accessing the first column by index)
 
 !!! note "Parameter validation is enabled by default"

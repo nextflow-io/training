@@ -46,7 +46,7 @@ quadrados.view() // (3)!
 Para implementar funcionalidades específicas operadores também podem ser encadeados. Então, o código anterior também pode ser escrito assim:
 
 ```groovy linenums="1"
-Channel
+channel
     .of(1, 2, 3, 4)
     .map { it -> it * it }
     .view()
@@ -61,7 +61,7 @@ Agora iremos explorar alguns dos operadores mais comuns.
 O operador `view` imprime os itens emitidos por um canal para o terminal, acrescentando um caractere de _quebra de linha_ após cada item. Por exemplo:
 
 ```groovy linenums="1"
-Channel
+channel
     .of('foo', 'bar', 'baz')
     .view()
 ```
@@ -75,7 +75,7 @@ baz
 Você também pode especificar uma _clausura_ para personalizar como os itens são impressos. Por exemplo:
 
 ```groovy linenums="1"
-Channel
+channel
     .of('foo', 'bar', 'baz')
     .view { "- $it" }
 ```
@@ -93,7 +93,7 @@ e retorna os items obtidos como um novo canal. A função aplicada é chamada de
 de _mapeamento_ e é expressa com uma _clausura_, como demonstrado no exemplo abaixo:
 
 ```groovy linenums="1"
-Channel
+channel
     .of('olá', 'mundo')
     .map { it -> it.reverse() }
     .view()
@@ -103,7 +103,7 @@ Um `map` pode associar uma _tupla_ genérica a cada elemento e pode conter qualq
 tipo de dado.
 
 ```groovy linenums="1"
-Channel
+channel
     .of('olá', 'mundo')
     .map { palavra -> [palavra, palavra.size()] }
     .view { palavra, comprimento -> "$palavra contém $comprimento letras" }
@@ -116,7 +116,7 @@ Channel
     ??? solution
 
         ```groovy linenums="1"
-        Channel
+        channel
             .fromPath('data/ggal/*.fq')
             .map { arquivo -> [arquivo.name, arquivo] }
             .view { nome, arquivo -> "> $nome : $arquivo" }
@@ -157,7 +157,7 @@ O operador `flatten` transforma um canal de maneira que cada _tupla_ é achatada
 foo = [1, 2, 3]
 bar = [4, 5, 6]
 
-Channel
+channel
     .of(foo, bar)
     .flatten()
     .view()
@@ -177,7 +177,7 @@ Channel
 O operador `collect` coleta todos os itens emitidos por um canal em uma lista e retorna o objeto como uma única emissão.
 
 ```groovy linenums="1"
-Channel
+channel
     .of(1, 2, 3, 4)
     .collect()
     .view()
@@ -200,7 +200,7 @@ O operador `groupTuple` coleta as tuplas (ou listas) de valores emitidos pelo ca
 Por exemplo:
 
 ```groovy linenums="1"
-Channel
+channel
     .of([1, 'A'], [1, 'B'], [2, 'C'], [3, 'B'], [1, 'C'], [2, 'A'], [3, 'D'])
     .groupTuple()
     .view()
@@ -221,7 +221,7 @@ Esse operador é útil para processar um grupo, juntando elementos que possuem u
     ??? solution
 
         ```groovy linenums="1"
-        Channel
+        channel
             .fromPath('data/meta/*')
             .map { arquivo -> tuple(arquivo.baseName, arquivo) }
             .groupTuple()
@@ -256,7 +256,7 @@ O operador `branch` permite que você envie os itens emitidos por um canal de en
 O critério de seleção de cada canal de saída é definido especificando uma clausura que forneça uma ou mais expressões booleanas, cada uma das quais é identificada por um rótulo único. Para a primeira expressão verdadeira, o item é ligado a um canal nomeado com o rótulo. Por exemplo:
 
 ```groovy linenums="1"
-Channel
+channel
     .of(1, 2, 3, 40, 50)
     .branch {
         pequeno: it < 10
