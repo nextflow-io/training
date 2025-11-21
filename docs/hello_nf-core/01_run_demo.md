@@ -101,13 +101,11 @@ By default, Nextflow saves them to `$NXF_HOME/assets`.
 tree -L 2 $NXF_HOME/assets/
 ```
 
-??? example "Directory contents"
-
-    ```console
-    /workspaces/.nextflow/assets/
-    └── nf-core
-        └── demo
-    ```
+```console title="Directory contents"
+/workspaces/.nextflow/assets/
+└── nf-core
+    └── demo
+```
 
 !!! note
 
@@ -128,13 +126,11 @@ This creates a shortcut that makes it easier to explore the code we just downloa
 tree -L 2 pipelines
 ```
 
-??? example "Directory contents"
-
-    ```console
-    pipelines
-    └── nf-core
-        └── demo
-    ```
+```console title="Directory contents"
+pipelines
+└── nf-core
+    └── demo
+```
 
 Now we can more easily peek into the source code as needed.
 
@@ -330,36 +326,35 @@ Finally, let's have a look at the `demo-results` directory produced by the pipel
 tree -L 2 demo-results
 ```
 
-??? example "Directory contents"
-
-    ```console
-    demo-results/
-    ├── fastqc
-    │   ├── SAMPLE1_PE
-    │   ├── SAMPLE2_PE
-    │   └── SAMPLE3_SE
-    ├── fq
-    │   ├── SAMPLE1_PE
-    │   ├── SAMPLE2_PE
-    │   └── SAMPLE3_SE
-    ├── multiqc
-    │   ├── multiqc_data
-    │   ├── multiqc_plots
-    │   └── multiqc_report.html
-    └── pipeline_info
-        ├── execution_report_2025-03-05_09-44-26.html
-        ├── execution_timeline_2025-03-05_09-44-26.html
-        ├── execution_trace_2025-03-05_09-44-26.txt
-        ├── nf_core_pipeline_software_mqc_versions.yml
-        ├── params_2025-03-05_09-44-29.json
-        └── pipeline_dag_2025-03-05_09-44-26.html
-    ```
+```console title="Directory contents"
+demo-results
+├── fastqc
+│   ├── SAMPLE1_PE
+│   ├── SAMPLE2_PE
+│   └── SAMPLE3_SE
+├── fq
+│   ├── SAMPLE1_PE
+│   ├── SAMPLE2_PE
+│   └── SAMPLE3_SE
+├── multiqc
+│   ├── multiqc_data
+│   ├── multiqc_plots
+│   └── multiqc_report.html
+└── pipeline_info
+    ├── execution_report_2025-11-21_04-25-49.html
+    ├── execution_timeline_2025-11-21_04-25-49.html
+    ├── execution_trace_2025-11-21_04-25-49.txt
+    ├── nf_core_demo_software_mqc_versions.yml
+    ├── params_2025-11-21_04-25-55.json
+    └── pipeline_dag_2025-11-21_04-25-49.html
+```
 
 That might seem like a lot.
-At this stage, what's important to observe is that the results are organized by module, and there is additionally a directory called `pipeline_info` containing various timestamped reports about the pipeline execution.
-This is standard for nf-core pipelines.
-
 To learn more about the `nf-core/demo` pipeline's outputs, check out its [documentation page](https://nf-co.re/demo/1.0.2/docs/output/).
+
+At this stage, what's important to observe is that the results are organized by module, and there is additionally a directory called `pipeline_info` containing various timestamped reports about the pipeline execution.
+
+This is standard for nf-core pipelines; we'll examine how it all works later in this course.
 
 ### Takeaway
 
@@ -420,8 +415,8 @@ All of this content is used to generate the web pages on the nf-core website pro
 Now, for the rest, we're going to divide our exploration in three stages:
 
 1. Pipeline code components (`main.nf`, `workflows`, `subworkflows`, `modules`)
-2. Configuration, parameters and inputs
-3. Input validation
+2. Pipeline configuration
+3. Inputs and validation
 
 Let's start with the pipeline code components.
 We're going to focus on the file hierarchy and structural organization, rather than diving into the code within individual files.
@@ -509,8 +504,8 @@ tree -L 3 pipelines/nf-core/demo/modules
             └── trim
                 ├── environment.yml
                 ├── main.nf
-            ├── meta.yml
-            └── tests
+                ├── meta.yml
+                └── tests
     ```
 
 Here you see that the `fastqc` and `multiqc` modules sit at the top level within the `nf-core` modules, whereas the `trim` module sits under the toolkit that it belongs to, `seqtk`.
@@ -548,7 +543,7 @@ tree -L 3 pipelines/nf-core/demo/subworkflows
         └── utils_nfschema_plugin
             ├── main.nf
             ├── meta.yml
-        └── tests
+            └── tests
     ```
 
 As noted above, the `nf-core/demo` pipeline does not include any analysis-specific subworkflows, so all the subworkflows we see here are so-called 'housekeeping' or 'utility' workflows, as denoted by the `utils_` prefix in their names.
