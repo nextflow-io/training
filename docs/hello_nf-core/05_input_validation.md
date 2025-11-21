@@ -2,7 +2,25 @@
 
 In this fifth part of the Hello nf-core training course, we show you how to use the nf-schema plugin to validate pipeline inputs and parameters.
 
-## Why validation matters
+!!! note
+
+    This section assumes you have completed [Part 4: Make an nf-core module](./04_make_module.md) and have updated the `COWPY` module to nf-core standards in your pipeline.
+
+    If you did not complete Part 4 or want to start fresh for this part, you can use the `core-hello-part4` solution as your starting point.
+    Run these commands from inside the `hello-nf-core/` directory:
+
+    ```bash
+    cp -r solutions/core-hello-part4 core-hello
+    cd core-hello
+    ```
+
+    This gives you a pipeline with the `CAT_CAT` module already integrated.
+
+---
+
+## 0. Warmup: A bit of background
+
+### 0.1. Why validation matters
 
 Imagine running your pipeline for two hours, only to have it crash because a user provided a file with the wrong extension. Or spending hours debugging cryptic errors, only to discover that a parameter was misspelled. Without input validation, these scenarios are common.
 
@@ -32,7 +50,7 @@ Pipeline failed before execution - please fix the errors above
 
 The pipeline fails immediately with clear, actionable error messages. This saves time, compute resources, and frustration.
 
-## The nf-schema plugin
+### 0.2. The nf-schema plugin
 
 The [nf-schema plugin](https://nextflow-io.github.io/nf-schema/latest/) is a Nextflow plugin that provides comprehensive validation capabilities for Nextflow pipelines.
 While nf-schema works with any Nextflow workflow, it's the standard validation solution for all nf-core pipelines.
@@ -65,20 +83,16 @@ nf-schema is the successor to the deprecated nf-validation plugin and uses stand
 
     Once installed, you can import functions from plugins using `include { functionName } from 'plugin/plugin-name'` syntax.
 
-## Two schema files
+### 0.3. Two schema files for two types of validation
 
-An nf-core pipeline uses two schema files for validation:
+An nf-core pipeline will utilize two separate schema files, which correspond to two types of validation:
 
 | Schema File                | Purpose               | Validates                                            |
 | -------------------------- | --------------------- | ---------------------------------------------------- |
 | `nextflow_schema.json`     | Parameter validation  | Command-line flags: `--input`, `--outdir`, `--batch` |
 | `assets/schema_input.json` | Input data validation | Contents of sample sheets and input files            |
 
-Both schemas use JSON Schema format, a widely-adopted standard for describing and validating data structures.
-
-### Two types of validation
-
-nf-core pipelines validate two different kinds of input:
+Both schemas use the JSON Schema format, a widely-adopted standard for describing and validating data structures.
 
 **Parameter validation** validates command-line parameters (flags like `--outdir`, `--batch`, `--input`):
 
@@ -100,7 +114,7 @@ nf-core pipelines validate two different kinds of input:
 
     For large-scale data, validating file contents (like checking BAM integrity) should happen in pipeline processes running on worker nodes, not during the validation stage on the orchestrating machine.
 
-### When validation occurs
+### 0.4. When should validation occur?
 
 ```mermaid
 graph LR
@@ -111,20 +125,9 @@ graph LR
     C -->|✗ Invalid| F[Error: Fix input data]
 ```
 
-Validation happens **before** any pipeline processes run, providing fast feedback and preventing wasted compute time.
+Validation should happen **before** any pipeline processes run, to provide fast feedback and prevent wasted compute time.
 
-!!! note
-
-    This section assumes you have completed [Part 4: Make an nf-core module](./04_make_module.md) and have a working `core-hello` pipeline with nf-core-style modules.
-
-    If you didn't complete Part 4 or want to start fresh for this section, you can use the `core-hello-part4` solution as your starting point:
-
-    ```bash
-    cp -r hello-nf-core/solutions/core-hello-part4 core-hello
-    cd core-hello
-    ```
-
-    This gives you a fully functional nf-core pipeline with modules ready for adding input validation.
+Now let's apply it in practice, starting with parameter validation.
 
 ---
 
@@ -383,6 +386,8 @@ Bonjour
 Holà
 ```
 
+<!-- TODO: Update this to the three-column version -->
+
 This is a simple CSV with:
 
 - One column (no header)
@@ -484,8 +489,6 @@ When nf-schema reads a CSV file, it expects the first row to contain column head
 For our simple case, we need to add a `greeting` header to our greetings file:
 
 Add a header line to the greetings file:
-
-<!-- TODO: update to match multi-column version of greetings.csv -->
 
 === "After"
 
