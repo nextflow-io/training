@@ -16,5 +16,5 @@ workflow {
     HELLO(greeting_ch)
 
     // view the outputs emitted by the workflow
-    HELLO.out.view { "Outputs: $it" }
+    HELLO.out.view { output -> "Output: $output" }
 }

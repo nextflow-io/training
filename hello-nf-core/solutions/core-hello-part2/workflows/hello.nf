@@ -23,9 +23,9 @@ workflow HELLO {
 
     main:
 
-    ch_versions = Channel.empty()
+    ch_versions = channel.empty()
 
-    // emit a greeting
+        // emit a greeting
     sayHello(ch_samplesheet)
 
     // convert the greeting to uppercase
@@ -50,7 +50,6 @@ workflow HELLO {
 
 
     emit:
-    cowpy_hellos   = cowpy.out
     versions       = ch_versions                 // channel: [ path(versions.yml) ]
 
 }

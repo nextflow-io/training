@@ -29,9 +29,6 @@ workflow {
     // collect all the greetings into one file
     collectGreetings(convertToUpper.out.collect(), params.batch)
 
-    // emit a message about the size of the batch
-    collectGreetings.out.count.view { "There were $it greetings in this batch" }
-
     // generate ASCII art of the greetings with cowpy
     cowpy(collectGreetings.out.outfile, params.character)
 }

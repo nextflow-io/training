@@ -195,12 +195,32 @@ nextflow run ./core-hello -profile docker,test --outdir core-hello-results
     ```
 
 This shows you that all the basic wiring is in place.
+So where are the outputs? Are there any?
 
-You can take a look at the reports in the `pipeline_info` directory to see what was run: nothing at all, according to the execution timeline report!
+In fact, a new directory of results called `core-hello-results` was created containing the standard execution reports:
+
+```bash
+tree core-hello-results
+```
+
+??? example "Directory contents"
+
+    ```console
+    core-hello-results
+    └── pipeline_info
+        ├── execution_report_2025-11-21_04-47-18.html
+        ├── execution_timeline_2025-11-21_04-47-18.html
+        ├── execution_trace_2025-11-21_04-47-18.txt
+        ├── hello_software_versions.yml
+        ├── params_2025-11-21_04-47-18.json
+        └── pipeline_dag_2025-11-21_04-47-18.html
+    ```
+
+You can take a peek at the reports to see what was run, and the answer is: nothing at all!
 
 ![empty execution timeline report](./img/execution_timeline_empty.png)
 
-Let's have a look at what is actually in there.
+Let's have a look at what is actually in the code.
 
 ### 1.3. Examine the placeholder workflow
 
@@ -286,10 +306,6 @@ Learn how to make a simple workflow composable as a prelude to making it nf-core
 Now it's time to get to work integrating our workflow into the nf-core scaffold.
 As a reminder, we're working with the workflow featured in our [Hello Nextflow](../hello_nextflow/index.md) training course.
 
-<figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello_pipeline_complete.svg"
-</figure>
-
 ??? example "What does the Hello Nextflow workflow do?"
 
     If you haven't done the [Hello Nextflow](../hello_nextflow/index.md) training, here's a quick overview of what this simple workflow does.
@@ -334,6 +350,10 @@ As a reminder, we're working with the workflow featured in our [Hello Nextflow](
                           ^^^ ^^ ^^^ ^
     ```
 
+<figure class="excalidraw">
+--8<-- "docs/hello_nextflow/img/hello_pipeline_complete.svg"
+</figure>
+
 We provide you with a clean, fully functional copy of the completed Hello Nextflow workflow in the directory `original-hello` along with its modules and the default CSV file it expects to use as input.
 
 ```bash
@@ -371,7 +391,6 @@ nextflow run original-hello/hello.nf
     [e7/7e9058] convertToUpper (3) | 3 of 3 ✔
     [0c/17263b] collectGreetings   | 1 of 1 ✔
     [94/542280] cowpy              | 1 of 1 ✔
-    There were 3 greetings in this batch
     ```
 
 Let's open the `hello.nf` workflow file to inspect the code, which is shown in full below (not counting the processes, which are in modules):
@@ -407,9 +426,6 @@ workflow {
 
   // collect all the greetings into one file
   collectGreetings(convertToUpper.out.collect(), params.batch)
-
-  // emit a message about the size of the batch
-  collectGreetings.out.count.view { "There were $it greetings in this batch" }
 
   // generate ASCII art of the greetings with cowpy
   cowpy(collectGreetings.out.outfile, params.character)
@@ -462,8 +478,38 @@ Now, replace the channel construction with a simple `take` statement declaring e
 
 This leaves the details of how the inputs are provided up to the parent workflow.
 
-As part of this change, you should also delete the line `params.greeting = 'greetings.csv'` from the block of parameter definitions (line 6).
-That will also be left to the parent workflow to declare.
+While we're at it, we can also comment out the line
+
+=== "After"
+
+    ```groovy title="original-hello/hello.nf" linenums="3" hl_lines="4"
+        /*
+        * Pipeline parameters
+        */
+        params.greeting = 'greetings.csv'
+        params.batch = 'test-batch'
+        params.character = 'turkey'
+    ```
+
+=== "Before"
+
+    ```groovy title="original-hello/hello.nf" linenums="3" hl_lines="4"
+        /*
+        * Pipeline parameters
+        */
+        // params.greeting = 'greetings.csv'
+        params.batch = 'test-batch'
+        params.character = 'turkey'
+    ```
+
+params.greeting = 'greetings.csv'
+
+!!! note
+
+    If you have the Nextflow language server extension installed, the syntax checker will light up your code with red squiggles.
+    That's because if you put in a `take:` statement, you have to also have a `main:`.
+
+    We'll add that in the next step.
 
 ### 2.3. Preface workflow operations with `main` statement
 
@@ -471,7 +517,7 @@ Next, add a `main` statement before the rest of the operations called in the bod
 
 === "After"
 
-    ```groovy title="original-hello/hello.nf" linenums="21" hl_lines="1"
+    ```groovy title="original-hello/hello.nf" linenums="22" hl_lines="1"
         main:
 
         // emit a greeting
@@ -482,9 +528,6 @@ Next, add a `main` statement before the rest of the operations called in the bod
 
         // collect all the greetings into one file
         collectGreetings(convertToUpper.out.collect(), params.batch)
-
-        // emit a message about the size of the batch
-        collectGreetings.out.count.view { "There were $it greetings in this batch" }
 
         // generate ASCII art of the greetings with cowpy
         cowpy(collectGreetings.out.outfile, params.character)
@@ -502,9 +545,6 @@ Next, add a `main` statement before the rest of the operations called in the bod
         // collect all the greetings into one file
         collectGreetings(convertToUpper.out.collect(), params.batch)
 
-        // emit a message about the size of the batch
-        collectGreetings.out.count.view { "There were $it greetings in this batch" }
-
         // generate ASCII art of the greetings with cowpy
         cowpy(collectGreetings.out.outfile, params.character)
     ```
@@ -515,7 +555,7 @@ This basically says 'this is what this workflow _does_'.
 
 Finally, add an `emit` statement declaring what are the final outputs of the workflow.
 
-```groovy title="original-hello/hello.nf" linenums="37"
+```groovy title="original-hello/hello.nf" linenums="35"
     emit:
     cowpy_hellos = cowpy.out
 ```
@@ -532,6 +572,7 @@ If you've done all the changes as described, your workflow should now look like 
 /*
 * Pipeline parameters
 */
+// params.greeting = 'greetings.csv'
 params.batch = 'test-batch'
 params.character = 'turkey'
 
@@ -557,9 +598,6 @@ workflow HELLO {
 
     // collect all the greetings into one file
     collectGreetings(convertToUpper.out.collect(), params.batch)
-
-    // emit a message about the size of the batch
-    collectGreetings.out.count.view { "There were $it greetings in this batch" }
 
     // generate ASCII art of the greetings with cowpy
     cowpy(collectGreetings.out.outfile, params.character)
@@ -604,7 +642,7 @@ workflow {
   HELLO(greeting_ch)
 
   // view the outputs emitted by the workflow
-  HELLO.out.view { "Output: $it" }
+  HELLO.out.view { output -> "Output: $output" }
 }
 ```
 
@@ -626,15 +664,14 @@ There are two important observations to make here:
 ### 2.7. Test that the workflow runs
 
 We finally have all the pieces we need to verify that the composable workflow works.
+Let's run it!
 
 ```bash
 nextflow run ./original-hello
 ```
 
-!!! note
-
-    Here you see the advantage of using the `main.nf` naming convention.
-    If we had named the entrypoint workflow `something_else.nf`, we would have had to do `nextflow run original-hello/something_else.nf`.
+Here you see the advantage of using the `main.nf` naming convention.
+If we had named the entrypoint workflow `something_else.nf`, we would have had to do `nextflow run original-hello/something_else.nf`.
 
 If you made all the changes correctly, this should run to completion.
 
@@ -650,7 +687,6 @@ If you made all the changes correctly, this should run to completion.
     [dc/721042] HELLO:convertToUpper (3) | 3 of 3 ✔
     [48/5ab2df] HELLO:collectGreetings   | 1 of 1 ✔
     [e3/693b7e] HELLO:cowpy              | 1 of 1 ✔
-    There were 3 greetings in this batch
     Output: /workspaces/training/hello-nf-core/work/e3/693b7e48dc119d0c54543e0634c2e7/cowpy-COLLECTED-test-batch-output.txt
     ```
 
@@ -671,7 +707,9 @@ Learn how to graft a basic composable workflow onto the nf-core scaffold.
 Now that we've verified our composable workflow works correctly, let's return to the nf-core pipeline scaffold we created in section 1.
 We want to integrate the composable workflow we just developed into the nf-core template structure, so the end result should look something like this.
 
-<!-- Add diagram of what we're aiming for based on the one in Part 1 -->
+<figure class="excalidraw">
+--8<-- "docs/hello_nf-core/img/core-hello.svg"
+</figure>
 
 So how do we make that happen? Let's have a look at the current content of the `HELLO` workflow in `core-hello/workflows/hello.nf` (the nf-core scaffold).
 
@@ -735,7 +773,7 @@ We're going to tackle this in the following stages:
 
 !!! note
 
-    We're going to ignore the version capture for this first pass and will look at how to wire that up in a later section.
+    We're going to ignore the version capture for this first pass and will look at how to wire that up in a later part of this training.
 
 ### 3.1. Copy the modules and set up module imports
 
@@ -831,7 +869,7 @@ Now that our modules are available to the workflow, we can plug the workflow log
 
 As a reminder, this is the relevant code in the original workflow, which didn't change much when we made it composable (we just added the `main:` line):
 
-```groovy title="original-hello/hello.nf" linenums="21"
+```groovy title="original-hello/hello.nf" linenums="22"
     main:
 
     // emit a greeting
@@ -843,17 +881,11 @@ As a reminder, this is the relevant code in the original workflow, which didn't 
     // collect all the greetings into one file
     collectGreetings(convertToUpper.out.collect(), params.batch)
 
-    // emit a message about the size of the batch
-    collectGreetings.out.count.view { "There were $it greetings in this batch" }
-
     // generate ASCII art of the greetings with cowpy
     cowpy(collectGreetings.out.outfile, params.character)
 ```
 
-We need to copy this code into the new version of the workflow, with a few modifications:
-
-- Omit the `main:` keyword (it's already there)
-- Remove the `.view` line (line 776 above) - this was just for console output in the standalone version
+We need to copy the code that comes after `main:` into the new version of the workflow.
 
 There is already some code in there that has to do with capturing the versions of the tools that get run by the workflow. We're going to leave that alone for now (we'll deal with the tool versions later).
 We'll keep the `ch_versions = channel.empty()` initialization at the top, then insert our workflow logic, keeping the version collation code at the end.
@@ -861,11 +893,15 @@ This ordering makes sense because in a real pipeline, the processes would emit v
 
 === "After"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="23" hl_lines="5-16"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="19" hl_lines="10-20"
+    workflow HELLO {
+
+        take:
+        ch_samplesheet // channel: samplesheet read in from --input
 
         main:
 
-        ch_versions = channel.empty()
+        ch_versions = Channel.empty()
 
         // emit a greeting
         sayHello(greeting_ch)
@@ -890,14 +926,23 @@ This ordering makes sense because in a real pipeline, the processes would emit v
                 newLine: true
             ).set { ch_collated_versions }
 
+
+        emit:
+        versions       = ch_versions                 // channel: [ path(versions.yml) ]
+
+    }
     ```
 
 === "Before"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="23"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="19"
+    workflow HELLO {
+
+        take:
+        ch_samplesheet // channel: samplesheet read in from --input
         main:
 
-        ch_versions = channel.empty()
+        ch_versions = Channel.empty()
 
         //
         // Collate and save software versions
@@ -910,9 +955,16 @@ This ordering makes sense because in a real pipeline, the processes would emit v
                 newLine: true
             ).set { ch_collated_versions }
 
+
+        emit:
+        versions       = ch_versions                 // channel: [ path(versions.yml) ]
+
+    }
     ```
 
-This looks great, but we still need to update the name of the channel we're passing to the `sayHello()` process from `greeting_ch` to `ch_samplesheet` (see highlighted lines), to match what is written under the `take:` keyword.
+You'll notice that we also added a blank line before `main:` to make the code more readable.
+
+This looks great, but we still need to update the name of the channel we're passing to the `sayHello()` process from `greeting_ch` to `ch_samplesheet` as shown below, to match what is written under the `take:` keyword.
 
 === "After"
 
@@ -951,8 +1003,6 @@ Finally, we need to update the `emit` block to include the declaration of the wo
 
 This concludes the modifications we need to make to the HELLO workflow itself.
 At this point, we have achieved the overall code structure we set out to implement.
-
-<!-- Add diagram with specifics filled in? -->
 
 ### Takeaway
 
@@ -1067,6 +1117,8 @@ What matters here is that there are two workflows defined:
 
 - `CORE_HELLO` is a thin wrapper for running the HELLO workflow we just finished adapting in `core-hello/workflows/hello.nf`.
 - An unnamed workflow that calls `CORE_HELLO` as well as two other subworkflows, `PIPELINE_INITIALISATION` and `PIPELINE_COMPLETION`.
+
+<!-- TODO: diagram of how main.nf wraps the second-order workflows -->
 
 Importantly, we cannot find any code constructing an input channel at this level, only references to a samplesheet provided via the `--input` parameter.
 
@@ -1249,32 +1301,6 @@ Key points:
 - **Absolute paths**: By using `${projectDir}`, we create an absolute path, which is important for test data that ships with the pipeline.
 - **Test data location**: nf-core pipelines typically store test data in the `assets/` directory within the pipeline repository for small test files, or reference external test datasets for larger files.
 
-And while we're at it, let's lower the default resource limitations:
-
-=== "After"
-
-    ```groovy title="core-hello/conf/test.config" linenums="13" hl_lines="3 4"
-    process {
-        resourceLimits = [
-            cpus: 2,
-            memory: '4.GB',
-            time: '1.h'
-        ]
-    }
-    ```
-
-=== "Before"
-
-    ```groovy title="core-hello/conf/test.config" linenums="13" hl_lines="3 4"
-    process {
-        resourceLimits = [
-            cpus: 4,
-            memory: '15.GB',
-            time: '1.h'
-        ]
-    }
-    ```
-
 This completes the code modifications we need to do.
 
 ### 4.4. Run the pipeline with the test profile
@@ -1291,9 +1317,9 @@ If you've done all of the modifications correctly, it should run to completion.
 ??? example "Output"
 
     ```console
-    N E X T F L O W   ~  version 25.04.3
+     N E X T F L O W   ~  version 25.04.3
 
-    Launching `core-hello/main.nf` [small_torvalds] DSL2 - revision: b9e9b3b8de
+    Launching `core-hello/main.nf` [condescending_allen] DSL2 - revision: b9e9b3b8de
 
     Input/output options
       input                     : /workspaces/training/hello-nf-core/core-hello/assets/greetings.csv
@@ -1305,10 +1331,10 @@ If you've done all of the modifications correctly, it should run to completion.
 
     Generic options
       validate_params           : false
-      trace_report_suffix       : 2025-10-30_18-05-47
+      trace_report_suffix       : 2025-11-21_07-29-37
 
     Core Nextflow options
-      runName                   : small_torvalds
+      runName                   : condescending_allen
       containerEngine           : docker
       launchDir                 : /workspaces/training/hello-nf-core
       workDir                   : /workspaces/training/hello-nf-core/work
@@ -1319,11 +1345,11 @@ If you've done all of the modifications correctly, it should run to completion.
 
     !! Only displaying parameters that differ from the pipeline defaults !!
     ------------------------------------------------------
-    executor >  local (8)
-    [da/fe2e20] COR…LLO:sayHello (1) | 3 of 3 ✔
-    [f5/4e47cf] COR…nvertToUpper (2) | 3 of 3 ✔
-    [22/61caea] COR…collectGreetings | 1 of 1 ✔
-    [a8/de5051] COR…ELLO:HELLO:cowpy | 1 of 1 ✔
+    executor >  local (1)
+    [ed/727b7e] CORE_HELLO:HELLO:sayHello (3)       [100%] 3 of 3 ✔
+    [45/bb6096] CORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔
+    [81/7e2e34] CORE_HELLO:HELLO:collectGreetings   [100%] 1 of 1 ✔
+    [96/9442a1] CORE_HELLO:HELLO:cowpy              [100%] 1 of 1 ✔
     -[core/hello] Pipeline completed successfully-
     ```
 
@@ -1334,7 +1360,43 @@ As you can see, this produced the typical nf-core summary at the start thanks to
 The question now is: where are the outputs of the pipeline?
 And the answer is quite interesting: there are now two different places to look for the results.
 
-We didn't change anything to the modules themselves, so the outputs handled by module-level `publishDir` directives are still going to a `results` directory as specified in the original pipeline.
+As you may recall from earlier, our first run of the newly created workflow produced a directory called `core-hello-results/` that contained various execution reports and metadata.
+
+```bash
+tree core-hello-results
+```
+
+??? example "Directory contents"
+
+    ```console
+    core-hello-results
+    └── pipeline_info
+        ├── execution_report_2025-11-21_04-47-18.html
+        ├── execution_report_2025-11-21_07-29-37.html
+        ├── execution_timeline_2025-11-21_04-47-18.html
+        ├── execution_timeline_2025-11-21_07-29-37.html
+        ├── execution_trace_2025-11-21_04-47-18.txt
+        ├── execution_trace_2025-11-21_07-29-37.txt
+        ├── hello_software_versions.yml
+        ├── params_2025-11-21_04-47-13.json
+        ├── params_2025-11-21_07-29-41.json
+        └── pipeline_dag_2025-11-21_04-47-18.html
+        └── pipeline_dag_2025-11-21_07-29-37.html
+    ```
+
+You see we got another set of execution reports in addition to the ones we got from the first run, when the workflow was still just a placeholder.
+This time you see all the tasks that were run as expected.
+
+![execution timeline report for the Hello pipeline](./img/execution_timeline_hello.png)
+
+!!! note
+
+    Once again the tasks were not run in parallel because we are running on a minimalist machine in Github Codespaces.
+    To see these run in parallel, try increasing the CPU allocation of your codespace and the resource limits in the test configuration.
+
+That's great, but our actual pipeline results are not there!
+
+Here's what happened: we didn't change anything to the modules themselves, so the outputs handled by module-level `publishDir` directives are still going to a `results` directory as specified in the original pipeline.
 
 ```bash
 tree results
@@ -1356,34 +1418,10 @@ tree results
     └── UPPER-Holà-output.txt
     ```
 
-Anything that is hooked up to the nf-core template code gets put into a directory generated automatically, called `core-hello-results/`.
-This includes various execution reports and metadata that you can find under `core-hello-results/pipeline_info`.
+Ah, there they are, mixed in with the outputs of earlier runs of the original Hello pipeline.
 
-```bash
-tree core-hello-results
-```
-
-??? example "Directory contents"
-
-    ```console
-    core-hello-results
-    └── pipeline_info
-        ├── execution_report_2025-06-03_18-22-28.html
-        ├── execution_report_2025-06-03_20-11-39.html
-        ├── execution_timeline_2025-06-03_18-22-28.html
-        ├── execution_timeline_2025-06-03_20-11-39.html
-        ├── execution_trace_2025-06-03_18-22-28.txt
-        ├── execution_trace_2025-06-03_20-10-11.txt
-        ├── execution_trace_2025-06-03_20-11-39.txt
-        ├── hello_software_versions.yml
-        ├── params_2025-06-03_18-22-32.json
-        ├── params_2025-06-03_20-10-15.json
-        ├── params_2025-06-03_20-11-43.json
-        ├── pipeline_dag_2025-06-03_18-22-28.html
-        └── pipeline_dag_2025-06-03_20-11-39.html
-    ```
-
-In our case, we didn't explicitly mark anything else as an output, so there's nothing else there.
+If we want them to be neatly organized like the outputs of the demo pipeline were, we'll need to change how we set up the outputs to be published.
+We'll show you how to do that later in this training course.
 
 <!-- TODO: Update this once we've updated Hello Nextflow to use workflow-level outputs -->
 
@@ -1393,7 +1431,8 @@ And there it is! It may seem like a lot of work to accomplish the same result as
 
 ### Takeaway
 
-You know how to convert a regular Nextflow pipeline into an nf-core style pipeline using the nf-core template. As part of that, you learned how to make a workflow composable, and identify the most common elements of the nf-core template that need to be adapted when developing a custom nf-core style pipeline.
+You know how to convert a regular Nextflow pipeline into an nf-core style pipeline using the nf-core template.
+As part of that, you learned how to make a workflow composable, and how to identify the elements of the nf-core template that most commonly need to be adapted when developing a custom nf-core style pipeline.
 
 ### What's next?
 

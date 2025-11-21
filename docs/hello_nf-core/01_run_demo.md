@@ -360,7 +360,8 @@ For example, the `execution_timeline_*` file shows you what processes were run, 
 
 !!! note
 
-    Here the tasks were not run in parallel because the default resource limits are set very low in the test profile compared to the modules' resource allocations.
+    Here the tasks were not run in parallel because we are running on a minimalist machine in Github Codespaces.
+    To see these run in parallel, try increasing the CPU allocation of your codespace and the resource limits in the test configuration.
 
 These reports are generated automatically for all nf-core pipelines.
 
