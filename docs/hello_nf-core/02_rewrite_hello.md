@@ -286,6 +286,10 @@ Learn how to make a simple workflow composable as a prelude to making it nf-core
 Now it's time to get to work integrating our workflow into the nf-core scaffold.
 As a reminder, we're working with the workflow featured in our [Hello Nextflow](../hello_nextflow/index.md) training course.
 
+<figure class="excalidraw">
+--8<-- "docs/hello_nextflow/img/hello_pipeline_complete.svg"
+</figure>
+
 ??? example "What does the Hello Nextflow workflow do?"
 
     If you haven't done the [Hello Nextflow](../hello_nextflow/index.md) training, here's a quick overview of what this simple workflow does.
@@ -294,17 +298,41 @@ As a reminder, we're working with the workflow featured in our [Hello Nextflow](
 
     The four steps are implemented as Nextflow processes (`sayHello`, `convertToUpper`, `collectGreetings`, and `cowpy`) stored in separate module files.
 
-    <figure class="excalidraw">
-    --8<-- "docs/hello_nextflow/img/hello_pipeline_complete.svg"
-    </figure>
-
     1. **`sayHello`:** Writes each greeting to its own output file (e.g., "Hello-output.txt")
     2. **`convertToUpper`:** Converts each greeting to uppercase (e.g., "HELLO")
     3. **`collectGreetings`:** Collects all uppercase greetings into a single batch file
     4. **`cowpy`:** Generates ASCII art using the `cowpy` tool
 
-Importantly, the original Hello Nextflow was written as a simple unnamed workflow that can be run on its own.
-In order to make it runnable from within a parent workflow as the nf-core template requires, we need to make it **composable**.
+    The results are published to a directory called `results/`, and the final output of the pipeline (when run with default parameters) is a plain text file containing ASCII art of a turkey saying the uppercased greetings.
+
+    ```txt title="results/cowpy-COLLECTED-test-batch-output.txt"
+     _________
+    / BONJOUR \
+    | HELLO   |
+    \ HOLà    /
+    ---------
+      \                                  ,+*^^*+___+++_
+      \                           ,*^^^^              )
+        \                       _+*                     ^**+_
+        \                    +^       _ _++*+_+++_,         )
+                  _+^^*+_    (     ,+*^ ^          \+_        )
+                {       )  (    ,(    ,_+--+--,      ^)      ^\
+                { (\@)    } f   ,(  ,+-^ __*_*_  ^^\_   ^\       )
+              {:;-/    (_+*-+^^^^^+*+*<_ _++_)_    )    )      /
+              ( /  (    (        ,___    ^*+_+* )   <    <      \
+              U _/     )    *--<  ) ^\-----++__)   )    )       )
+                (      )  _(^)^^))  )  )\^^^^^))^*+/    /       /
+              (      /  (_))_^)) )  )  ))^^^^^))^^^)__/     +^^
+            (     ,/    (^))^))  )  ) ))^^^^^^^))^^)       _)
+              *+__+*       (_))^)  ) ) ))^^^^^^))^^^^^)____*^
+              \             \_)^)_)) ))^^^^^^^^^^))^^^^)
+              (_             ^\__^^^^^^^^^^^^))^^^^^^^)
+                ^\___            ^\__^^^^^^))^^^^^^^^)\\
+                      ^^^^^\uuu/^^\uuu/^^^^\^\^\^\^\^\^\^\
+                        ___) >____) >___   ^\_\_\_\_\_\_\)
+                        ^^^//\\_^^//\\_^       ^(\_\_\_\)
+                          ^^^ ^^ ^^^ ^
+    ```
 
 We provide you with a clean, fully functional copy of the completed Hello Nextflow workflow in the directory `original-hello` along with its modules and the default CSV file it expects to use as input.
 
@@ -346,7 +374,7 @@ nextflow run original-hello/hello.nf
     There were 3 greetings in this batch
     ```
 
-Now let's open the `hello.nf` workflow file to inspect the code, which is shown in full below (not counting the processes, which are in modules):
+Let's open the `hello.nf` workflow file to inspect the code, which is shown in full below (not counting the processes, which are in modules):
 
 ```groovy title="original-hello/hello.nf" linenums="1"
 #!/usr/bin/env nextflow
@@ -387,6 +415,9 @@ workflow {
   cowpy(collectGreetings.out.outfile, params.character)
 }
 ```
+
+As you can see, this workflow was written as a simple unnamed workflow that can be run on its own.
+In order to make it runnable from within a parent workflow as the nf-core template requires, we need to make it **composable**.
 
 Let's walk through the necessary changes one by one.
 
