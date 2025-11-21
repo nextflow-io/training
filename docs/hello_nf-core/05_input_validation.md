@@ -418,7 +418,7 @@ Open `assets/schema_input.json` and replace the `properties` and `required` sect
 
 === "After"
 
-    ```json title="assets/schema_input.json" linenums="1" hl_lines="10-24 26"
+    ```json title="assets/schema_input.json" linenums="1" hl_lines="10-25 27"
     {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "$id": "https://raw.githubusercontent.com/core/hello/main/assets/schema_input.json",
@@ -669,20 +669,35 @@ If you want, use what you've learned to add validation for that parameter too!
 
 #### 2.7.2. Test with invalid input
 
-Now let's test that validation catches errors.
+Passing validation is always a good feeling, but let's make sure that the validation will actually catch errors.
 
-Create a test file with an invalid column name:
+To create a test file with an invalid column name, start by making a temporary copy of the `greetings.csv` file:
 
 ```bash
-cat > /tmp/invalid_greetings.csv << 'EOF'
-message
-Hello
-Bonjour
-Holà
-EOF
+cp assets/greetings.csv tmp_invalid_greetings.csv
 ```
 
-This file uses `message` as the column name instead of `greeting`, which doesn't match our schema.
+Now open the file and change the name of the first column, in the header line, from `greeting` to `message`:
+
+=== "After"
+
+    ```csv title="tmp_invalid_greetings.csv" hl_lines="1" linenums="1"
+    message,language,score
+    Hello,en,87
+    Bonjour,fr,96
+    Holà,es,98
+    ```
+
+=== "Before"
+
+    ```csv title="tmp_invalid_greetings.csv" hl_lines="1" linenums="1"
+    greeting,language,score
+    Hello,en,87
+    Bonjour,fr,96
+    Holà,es,98
+    ```
+
+This doesn't match our schema, so the validation should throw an error.
 
 Try running the pipeline with this invalid input:
 

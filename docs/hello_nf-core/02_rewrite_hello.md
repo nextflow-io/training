@@ -1301,6 +1301,32 @@ Key points:
 - **Absolute paths**: By using `${projectDir}`, we create an absolute path, which is important for test data that ships with the pipeline.
 - **Test data location**: nf-core pipelines typically store test data in the `assets/` directory within the pipeline repository for small test files, or reference external test datasets for larger files.
 
+And while we're at it, let's tighten the default resource limits to ensure this will run on very basic machines (like the minimal VMs in Github Codespaces):
+
+=== "After"
+
+    ```groovy title="core-hello/config/test.config" linenums="13"
+    process {
+        resourceLimits = [
+            cpus: 2,
+            memory: '4.GB',
+            time: '1.h'
+        ]
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="core-hello/config/test.config" linenums="13"
+    process {
+        resourceLimits = [
+            cpus: 4,
+            memory: '15.GB',
+            time: '1.h'
+        ]
+    }
+    ```
+
 This completes the code modifications we need to do.
 
 ### 4.4. Run the pipeline with the test profile
