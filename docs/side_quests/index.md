@@ -32,7 +32,6 @@ Otherwise, select a side quest from the table below.
 | -------------------------------------------------------------------------- | -------------------------- |
 | [Nextflow development environment walkthrough](./ide_features.md)          | 45 mins                    |
 | [Essential Nextflow Scripting Patterns](./essential_scripting_patterns.md) | 90 mins                    |
-| [Introduction to nf-core](./nf-core.md)                                    | -                          |
 | [Metadata in workflows](./metadata.md)                                     | 45 mins                    |
 | [Splitting and Grouping](./splitting_and_grouping.md)                      | 45 mins                    |
 | [Testing with nf-test](./nf-test.md)                                       | 1 hour                     |

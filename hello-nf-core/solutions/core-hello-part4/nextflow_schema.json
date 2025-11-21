@@ -2,7 +2,7 @@
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "$id": "https://raw.githubusercontent.com/core/hello/main/nextflow_schema.json",
     "title": "core/hello pipeline parameters",
-    "description": "basic nf-core style version of Hello Nextflow",
+    "description": "A basic nf-core style version of Hello Nextflow",
     "type": "object",
     "$defs": {
         "input_output_options": {
@@ -22,11 +22,6 @@
                     "description": "Path to comma-separated file containing information about the samples in the experiment.",
                     "help_text": "You will need to create a design file with information about the samples in your experiment before running the pipeline. Use this parameter to specify its location. It has to be a comma-separated file with 3 columns, and a header row.",
                     "fa_icon": "fas fa-file-csv"
-                },
-                "batch": {
-                    "type": "string",
-                    "default": "batch-01",
-                    "description": "Name for this batch of greetings"
                 },
                 "outdir": {
                     "type": "string",
@@ -138,6 +133,18 @@
                     "fa_icon": "far calendar",
                     "description": "Suffix to add to the trace report filename. Default is the date and time in the format yyyy-MM-dd_HH-mm-ss.",
                     "hidden": true
+                },
+                "help": {
+                    "type": ["boolean", "string"],
+                    "description": "Display the help message."
+                },
+                "help_full": {
+                    "type": "boolean",
+                    "description": "Display the full detailed help message."
+                },
+                "show_hidden": {
+                    "type": "boolean",
+                    "description": "Display hidden parameters in the help message (only works when --help or --help_full are provided)."
                 }
             }
         }
