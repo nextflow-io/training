@@ -33,10 +33,11 @@ workflow HELLO {
 
     // create metadata map with batch name as the ID
     def cat_meta = [ id: params.batch ]
+
     // create a channel with metadata and files in tuple format
     ch_for_cat = convertToUpper.out.collect().map { files -> tuple(cat_meta, files) }
 
-    // concatenate files using the nf-core cat/cat module
+    // concatenate the greetings
     CAT_CAT(ch_for_cat)
 
     // generate ASCII art of the greetings with cowpy

@@ -9,8 +9,8 @@ To demonstrate how this works, we'll replace the custom `collectGreetings` modul
 
 !!! note
 
-    This section assumes you have completed [Part 2: Rewrite Hello for nf-core](./02_rewrite_hello.md) and have a working `core-hello` pipeline.
-    If you did not complete Part 2 or want to start fresh for this section, you can use the `core-hello-part2` solution as your starting point.
+    This part of the course assumes you have completed [Part 2: Rewrite Hello for nf-core](./02_rewrite_hello.md) and have a working `core-hello` pipeline.
+    If you did not complete Part 2 or want to start fresh for this part, you can use the `core-hello-part2` solution as your starting point.
 
     Run this command from within the `hello-nf-core/` directory:
 
@@ -265,16 +265,6 @@ However, to actually use the new module, we need to import it into our pipeline.
 
 Let's replace the `include` statement for the `collectGreetings` module with the one for `CAT_CAT` in the imports section of the `workflows/hello.nf` workflow.
 
-!!! note
-
-    You can optionally delete the `collectGreetings.nf` file:
-
-    ```bash
-    rm modules/local/collectGreetings.nf
-    ```
-
-    However, you might want to keep it as a reference for understanding the differences between local and nf-core modules.
-
 As a reminder, the module install tool gave us the exact statement to use:
 
 ```groovy title="Import statement produced by install command"
@@ -329,6 +319,16 @@ Not so fast.
 At this point, you might be tempted to dive in and start editing code, but it's worth taking a moment to examine carefully what the new module expects and what it produces.
 
 We're going to tackle that as a separate section because it involves a new mechanism we haven't covered yet: metadata maps.
+
+!!! note
+
+    You can optionally delete the `collectGreetings.nf` file:
+
+    ```bash
+    rm modules/local/collectGreetings.nf
+    ```
+
+    However, you might want to keep it as a reference for understanding the differences between local and nf-core modules.
 
 ### Takeaway
 
@@ -579,7 +579,7 @@ Next, transform the channel of files into a channel of tuples containing metadat
 
 === "After"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="8-10"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="10-11"
         // emit a greeting
         sayHello(ch_samplesheet)
 
@@ -598,7 +598,7 @@ Next, transform the channel of files into a channel of tuples containing metadat
 
 === "Before"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="8"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="26"
         // emit a greeting
         sayHello(ch_samplesheet)
 
@@ -625,7 +625,7 @@ Now call `CAT_CAT` on the newly created channel:
 
 === "After"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="11-12"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="13-14"
         // emit a greeting
         sayHello(ch_samplesheet)
 
@@ -647,7 +647,7 @@ Now call `CAT_CAT` on the newly created channel:
 
 === "Before"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="10"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="26"
         // emit a greeting
         sayHello(ch_samplesheet)
 
@@ -671,11 +671,11 @@ This completes the trickiest part of this substitution, but we're not quite done
 Previously, the `collectGreetings` process just produced a file that we could pass to `cowpy` directly.
 However, the `CAT_CAT` process produces a tuple that includes the metamap in addition to the output file.
 
-Since `cowpy` doesn't accept metadata tuples yet (we'll fix this in the next section), we need to extract the output file from the tuple produced by `CAT_CAT` before handing it to `cowpy`:
+Since `cowpy` doesn't accept metadata tuples yet (we'll fix this in the next part of the course), we need to extract the output file from the tuple produced by `CAT_CAT` before handing it to `cowpy`:
 
 === "After"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="13-17"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="16-17"
         // emit a greeting
         sayHello(ch_samplesheet)
 
@@ -700,7 +700,7 @@ Since `cowpy` doesn't accept metadata tuples yet (we'll fix this in the next sec
 
 === "Before"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="13-14"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="26"
         // emit a greeting
         sayHello(ch_samplesheet)
 
@@ -720,15 +720,13 @@ Since `cowpy` doesn't accept metadata tuples yet (we'll fix this in the next sec
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
-<!-- TODO: update the line numbers on all of the above and update code files (because of added spacing/ comments -->
-
 The `.map{ meta, file -> file }` operation extracts the file from the `[metadata, file]` tuple produced by `CAT_CAT` into a new channel, `ch_for_cowpy`.
 
 Then it's just a matter of passing `ch_for_cowpy` to `cowpy` instead of `collectGreetings.out.outfile`.
 
 !!! note
 
-    In the next section, we'll update `cowpy` to work with metadata tuples directly, so this extraction step will no longer be necessary.
+    In the next part of the course, we'll update `cowpy` to work with metadata tuples directly, so this extraction step will no longer be necessary.
 
 ### 3.5. Test the workflow
 
