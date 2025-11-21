@@ -424,9 +424,9 @@ Our workflow demonstrates the core pattern: **dataflow operations** (`workflow`,
 
 So far, so good, we can distinguish between dataflow operations and scripting. But what about when the same method name exists in both contexts?
 
-A perfect example is the `collect` method, which exists for both Channel types and List types in the Nextflow standard library. The `collect()` method on a List transforms each element, while the `collect()` operator on a Channel gathers all channel emissions into a single-item channel.
+A perfect example is the `collect` method, which exists for both channel types and List types in the Nextflow standard library. The `collect()` method on a List transforms each element, while the `collect()` operator on a channel gathers all channel emissions into a single-item channel.
 
-Let's demonstrate this with some sample data, starting by refreshing ourselves on what the Channel `collect()` operator does. Check out `collect.nf`:
+Let's demonstrate this with some sample data, starting by refreshing ourselves on what the channel `collect()` operator does. Check out `collect.nf`:
 
 ```groovy title="collect.nf" linenums="1"
 def sample_ids = ['sample_001', 'sample_002', 'sample_003']
@@ -443,7 +443,7 @@ Steps:
 - Define a List of sample IDs
 - Create a channel with `fromList()` that emits each sample ID separately
 - Print each item with `view()` as it flows through
-- Gather all items into a single list with the Channel's `collect()` operator
+- Gather all items into a single list with the channel's `collect()` operator
 - Print the collected result (single item containing all sample IDs) with a second `view()`
 
 We've changed the structure of the channel, but we haven't changed the data itself.
@@ -522,7 +522,7 @@ Individual channel item: sample_003
 channel.collect() result: [sample_001, sample_002, sample_003] (3 items grouped into 1)
 ```
 
-This time, we have NOT changed the structure of the data, we still have 3 items in the list, but we HAVE transformed each item using the List's `collect` method to produce a new list with modified values. This is similar to using the `map` operator on a Channel, but it's operating on a List data structure rather than a channel.
+This time, we have NOT changed the structure of the data, we still have 3 items in the list, but we HAVE transformed each item using the List's `collect` method to produce a new list with modified values. This is similar to using the `map` operator on a channel, but it's operating on a List data structure rather than a channel.
 
 `collect` is an extreme case we're using here to make a point. The key lesson is that when you're writing workflows, always distinguish between **data structures** (Lists, Maps, etc.) and **channels** (dataflow constructs). Operations can share names but behave completely differently depending on the type they're called on.
 

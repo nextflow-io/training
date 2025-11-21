@@ -554,7 +554,7 @@ As `ch2` is now a _value_ channel, it can be consumed multiple times and does no
         params.reads = "$projectDir/data/ggal/*_1.fq"
         params.transcriptome_file = "$projectDir/data/ggal/transcriptome.fa"
 
-        Channel
+        channel
             .fromPath(params.reads)
             .set { read_ch }
 
@@ -576,7 +576,7 @@ As `ch2` is now a _value_ channel, it can be consumed multiple times and does no
         }
         ```
 
-        You may also consider using other Channel factories or operators to create your input channels.
+        You may also consider using other channel factories or operators to create your input channels.
 
 ### Input repeaters
 
@@ -804,7 +804,7 @@ When an output file name needs to be expressed dynamically, it is possible to de
 species = ['cat', 'dog', 'sloth']
 sequences = ['AGATAG', 'ATGCTCT', 'ATCCCAA']
 
-Channel
+channel
     .fromList(species)
     .set { species_ch }
 

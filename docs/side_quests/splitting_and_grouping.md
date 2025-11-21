@@ -1117,7 +1117,7 @@ By mastering these channel operations, you can build flexible, scalable pipeline
   channel.groupTuple()
   ```
 
-- **Combining Channels**
+- **Combining channels**
 
   ```nextflow
   // Combine with Cartesian product
