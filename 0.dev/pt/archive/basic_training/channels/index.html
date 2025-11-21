@@ -2472,7 +2472,7 @@ In the meantime, please try to work through the English-language material if you
 <p>A fábrica de canal <code>channel.of</code> funciona de maneira semelhante ao <code>channel.from</code> (que foi <a href="https://www.nextflow.io/docs/latest/channel.html#of">descontinuado</a>), corrigindo alguns comportamentos inconsistentes do último e fornecendo um melhor manuseio quando um intervalo de valores é especificado. Por exemplo, o seguinte funciona com um intervalo de 1 a 23:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span>
 <span class="normal"><a href="#__codelineno-9-2">2</a></span>
-<span class="normal"><a href="#__codelineno-9-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="n">Channel</span>
+<span class="normal"><a href="#__codelineno-9-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="n">channel</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="w">    </span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">1</span><span class="o">..</span><span class="mi">23</span><span class="o">,</span><span class="w"> </span><span class="s1">'X'</span><span class="o">,</span><span class="w"> </span><span class="s1">'Y'</span><span class="o">)</span>
 <a id="__codelineno-9-3" name="__codelineno-9-3"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
 </code></pre></div></td></tr></table></div>
@@ -2484,7 +2484,7 @@ In the meantime, please try to work through the English-language material if you
 <span class="normal"><a href="#__codelineno-10-4">4</a></span>
 <span class="normal"><a href="#__codelineno-10-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">'olá'</span><span class="o">,</span><span class="w"> </span><span class="s1">'mundo'</span><span class="o">]</span>
 <a id="__codelineno-10-2" name="__codelineno-10-2"></a>
-<a id="__codelineno-10-3" name="__codelineno-10-3"></a><span class="n">Channel</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3"></a><span class="n">channel</span>
 <a id="__codelineno-10-4" name="__codelineno-10-4"></a><span class="w">    </span><span class="o">.</span><span class="na">fromList</span><span class="o">(</span><span class="n">list</span><span class="o">)</span>
 <a id="__codelineno-10-5" name="__codelineno-10-5"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
 </code></pre></div></td></tr></table></div>
@@ -2543,7 +2543,7 @@ In the meantime, please try to work through the English-language material if you
 <summary>Solution</summary>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1">1</a></span>
 <span class="normal"><a href="#__codelineno-12-2">2</a></span>
-<span class="normal"><a href="#__codelineno-12-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="n">Channel</span>
+<span class="normal"><a href="#__codelineno-12-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="n">channel</span>
 <a id="__codelineno-12-2" name="__codelineno-12-2"></a><span class="w">    </span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">'./data/ggal/**.fq'</span><span class="o">,</span><span class="w"> </span><span class="nl">hidden:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
 <a id="__codelineno-12-3" name="__codelineno-12-3"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
 </code></pre></div></td></tr></table></div>
@@ -2553,7 +2553,7 @@ In the meantime, please try to work through the English-language material if you
 <p>A fábrica de canal <code>fromFilePairs</code> cria um canal emitindo os pares de arquivos correspondentes a um padrão glob fornecido pelo usuário. Os arquivos correspondentes são emitidos como tuplas, nas quais o primeiro elemento é a chave de agrupamento do par correspondente e o segundo elemento é a lista de arquivos (classificados em ordem lexicográfica).</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1">1</a></span>
 <span class="normal"><a href="#__codelineno-13-2">2</a></span>
-<span class="normal"><a href="#__codelineno-13-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1"></a><span class="n">Channel</span>
+<span class="normal"><a href="#__codelineno-13-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1"></a><span class="n">channel</span>
 <a id="__codelineno-13-2" name="__codelineno-13-2"></a><span class="w">    </span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">'./data/ggal/*_{1,2}.fq'</span><span class="o">)</span>
 <a id="__codelineno-13-3" name="__codelineno-13-3"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
 </code></pre></div></td></tr></table></div>
@@ -2612,7 +2612,7 @@ In the meantime, please try to work through the English-language material if you
 <p>Use o seguinte, com ou sem <code>flat: true</code>:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1">1</a></span>
 <span class="normal"><a href="#__codelineno-15-2">2</a></span>
-<span class="normal"><a href="#__codelineno-15-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1"></a><span class="n">Channel</span>
+<span class="normal"><a href="#__codelineno-15-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1"></a><span class="n">channel</span>
 <a id="__codelineno-15-2" name="__codelineno-15-2"></a><span class="w">    </span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">'./data/ggal/*_{1,2}.fq'</span><span class="o">,</span><span class="w"> </span><span class="nl">flat:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
 <a id="__codelineno-15-3" name="__codelineno-15-3"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
 </code></pre></div></td></tr></table></div>
@@ -2645,7 +2645,7 @@ In the meantime, please try to work through the English-language material if you
 <span class="normal"><a href="#__codelineno-16-4">4</a></span>
 <span class="normal"><a href="#__codelineno-16-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1"></a><span class="n">params</span><span class="o">.</span><span class="na">ncbi_api_key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'&lt;Sua chave da API aqui&gt;'</span>
 <a id="__codelineno-16-2" name="__codelineno-16-2"></a>
-<a id="__codelineno-16-3" name="__codelineno-16-3"></a><span class="n">Channel</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3"></a><span class="n">channel</span>
 <a id="__codelineno-16-4" name="__codelineno-16-4"></a><span class="w">    </span><span class="o">.</span><span class="na">fromSRA</span><span class="o">([</span><span class="s1">'SRP073307'</span><span class="o">],</span><span class="w"> </span><span class="nl">apiKey:</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">ncbi_api_key</span><span class="o">)</span>
 <a id="__codelineno-16-5" name="__codelineno-16-5"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
 </code></pre></div></td></tr></table></div>
@@ -2664,7 +2664,7 @@ In the meantime, please try to work through the English-language material if you
 <span class="normal"><a href="#__codelineno-18-2">2</a></span>
 <span class="normal"><a href="#__codelineno-18-3">3</a></span>
 <span class="normal"><a href="#__codelineno-18-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1"></a><span class="n">ids</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">'ERR908507'</span><span class="o">,</span><span class="w"> </span><span class="s1">'ERR908506'</span><span class="o">,</span><span class="w"> </span><span class="s1">'ERR908505'</span><span class="o">]</span>
-<a id="__codelineno-18-2" name="__codelineno-18-2"></a><span class="n">Channel</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2"></a><span class="n">channel</span>
 <a id="__codelineno-18-3" name="__codelineno-18-3"></a><span class="w">    </span><span class="o">.</span><span class="na">fromSRA</span><span class="o">(</span><span class="n">ids</span><span class="o">,</span><span class="w"> </span><span class="nl">apiKey:</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">ncbi_api_key</span><span class="o">)</span>
 <a id="__codelineno-18-4" name="__codelineno-18-4"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
 </code></pre></div></td></tr></table></div>
@@ -2728,7 +2728,7 @@ duas amostras de um estudo SRA público e executa o FASTQC nos arquivos resultan
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1">1</a></span>
 <span class="normal"><a href="#__codelineno-21-2">2</a></span>
 <span class="normal"><a href="#__codelineno-21-3">3</a></span>
-<span class="normal"><a href="#__codelineno-21-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1"></a><span class="n">Channel</span>
+<span class="normal"><a href="#__codelineno-21-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1"></a><span class="n">channel</span>
 <a id="__codelineno-21-2" name="__codelineno-21-2"></a><span class="w">    </span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">'data/meta/random.txt'</span><span class="o">)</span><span class="w"> </span><span class="c1">// (1)!</span>
 <a id="__codelineno-21-3" name="__codelineno-21-3"></a><span class="w">    </span><span class="o">.</span><span class="na">splitText</span><span class="o">()</span><span class="w"> </span><span class="c1">// (2)!</span>
 <a id="__codelineno-21-4" name="__codelineno-21-4"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="o">()</span><span class="w"> </span><span class="c1">// (3)!</span>
@@ -2745,7 +2745,7 @@ duas amostras de um estudo SRA público e executa o FASTQC nos arquivos resultan
 <span class="normal"><a href="#__codelineno-22-4">4</a></span>
 <span class="normal"><a href="#__codelineno-22-5">5</a></span>
 <span class="normal"><a href="#__codelineno-22-6">6</a></span>
-<span class="normal"><a href="#__codelineno-22-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1"></a><span class="n">Channel</span>
+<span class="normal"><a href="#__codelineno-22-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1"></a><span class="n">channel</span>
 <a id="__codelineno-22-2" name="__codelineno-22-2"></a><span class="w">    </span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">'data/meta/random.txt'</span><span class="o">)</span>
 <a id="__codelineno-22-3" name="__codelineno-22-3"></a><span class="w">    </span><span class="o">.</span><span class="na">splitText</span><span class="o">(</span><span class="nl">by:</span><span class="w"> </span><span class="mi">2</span><span class="o">)</span>
 <a id="__codelineno-22-4" name="__codelineno-22-4"></a><span class="w">    </span><span class="o">.</span><span class="na">subscribe</span><span class="w"> </span><span class="o">{</span>
@@ -2761,7 +2761,7 @@ duas amostras de um estudo SRA público e executa o FASTQC nos arquivos resultan
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1">1</a></span>
 <span class="normal"><a href="#__codelineno-23-2">2</a></span>
 <span class="normal"><a href="#__codelineno-23-3">3</a></span>
-<span class="normal"><a href="#__codelineno-23-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1"></a><span class="n">Channel</span>
+<span class="normal"><a href="#__codelineno-23-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1"></a><span class="n">channel</span>
 <a id="__codelineno-23-2" name="__codelineno-23-2"></a><span class="w">    </span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">'data/meta/random.txt'</span><span class="o">)</span>
 <a id="__codelineno-23-3" name="__codelineno-23-3"></a><span class="w">    </span><span class="o">.</span><span class="na">splitText</span><span class="o">(</span><span class="nl">by:</span><span class="w"> </span><span class="mi">10</span><span class="o">)</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">it</span><span class="o">.</span><span class="na">toUpperCase</span><span class="o">()</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-23-4" name="__codelineno-23-4"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
@@ -2774,7 +2774,7 @@ duas amostras de um estudo SRA público e executa o FASTQC nos arquivos resultan
 <span class="normal"><a href="#__codelineno-24-5">5</a></span>
 <span class="normal"><a href="#__codelineno-24-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1"></a><span class="n">contador</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
 <a id="__codelineno-24-2" name="__codelineno-24-2"></a>
-<a id="__codelineno-24-3" name="__codelineno-24-3"></a><span class="n">Channel</span>
+<a id="__codelineno-24-3" name="__codelineno-24-3"></a><span class="n">channel</span>
 <a id="__codelineno-24-4" name="__codelineno-24-4"></a><span class="w">    </span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">'data/meta/random.txt'</span><span class="o">)</span>
 <a id="__codelineno-24-5" name="__codelineno-24-5"></a><span class="w">    </span><span class="o">.</span><span class="na">splitText</span><span class="o">()</span>
 <a id="__codelineno-24-6" name="__codelineno-24-6"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">"${contador++}: ${it.toUpperCase().trim()}"</span><span class="w"> </span><span class="o">}</span>
@@ -2800,7 +2800,7 @@ duas amostras de um estudo SRA público e executa o FASTQC nos arquivos resultan
 <span class="normal"><a href="#__codelineno-26-2">2</a></span>
 <span class="normal"><a href="#__codelineno-26-3">3</a></span>
 <span class="normal"><a href="#__codelineno-26-4">4</a></span>
-<span class="normal"><a href="#__codelineno-26-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1"></a><span class="n">Channel</span>
+<span class="normal"><a href="#__codelineno-26-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1"></a><span class="n">channel</span>
 <a id="__codelineno-26-2" name="__codelineno-26-2"></a><span class="w">    </span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"data/meta/patients_1.csv"</span><span class="o">)</span>
 <a id="__codelineno-26-3" name="__codelineno-26-3"></a><span class="w">    </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">()</span>
 <a id="__codelineno-26-4" name="__codelineno-26-4"></a><span class="w">    </span><span class="c1">// linha é um objeto de lista</span>
@@ -2811,7 +2811,7 @@ duas amostras de um estudo SRA público e executa o FASTQC nos arquivos resultan
 <span class="normal"><a href="#__codelineno-27-2">2</a></span>
 <span class="normal"><a href="#__codelineno-27-3">3</a></span>
 <span class="normal"><a href="#__codelineno-27-4">4</a></span>
-<span class="normal"><a href="#__codelineno-27-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1"></a><span class="n">Channel</span>
+<span class="normal"><a href="#__codelineno-27-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1"></a><span class="n">channel</span>
 <a id="__codelineno-27-2" name="__codelineno-27-2"></a><span class="w">    </span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"data/meta/patients_1.csv"</span><span class="o">)</span>
 <a id="__codelineno-27-3" name="__codelineno-27-3"></a><span class="w">    </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="nl">header:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
 <a id="__codelineno-27-4" name="__codelineno-27-4"></a><span class="w">    </span><span class="c1">// linha é um objeto de lista</span>
@@ -2822,7 +2822,7 @@ duas amostras de um estudo SRA público e executa o FASTQC nos arquivos resultan
 <span class="normal"><a href="#__codelineno-28-2">2</a></span>
 <span class="normal"><a href="#__codelineno-28-3">3</a></span>
 <span class="normal"><a href="#__codelineno-28-4">4</a></span>
-<span class="normal"><a href="#__codelineno-28-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1"></a><span class="n">Channel</span>
+<span class="normal"><a href="#__codelineno-28-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1"></a><span class="n">channel</span>
 <a id="__codelineno-28-2" name="__codelineno-28-2"></a><span class="w">    </span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"data/meta/patients_1.csv"</span><span class="o">)</span>
 <a id="__codelineno-28-3" name="__codelineno-28-3"></a><span class="w">    </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="nl">header:</span><span class="w"> </span><span class="o">[</span><span class="s1">'col1'</span><span class="o">,</span><span class="w"> </span><span class="s1">'col2'</span><span class="o">,</span><span class="w"> </span><span class="s1">'col3'</span><span class="o">,</span><span class="w"> </span><span class="s1">'col4'</span><span class="o">,</span><span class="w"> </span><span class="s1">'col5'</span><span class="o">])</span>
 <a id="__codelineno-28-4" name="__codelineno-28-4"></a><span class="w">    </span><span class="c1">// linha é um objeto de lista</span>
@@ -2832,7 +2832,7 @@ duas amostras de um estudo SRA público e executa o FASTQC nos arquivos resultan
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-29-1">1</a></span>
 <span class="normal"><a href="#__codelineno-29-2">2</a></span>
 <span class="normal"><a href="#__codelineno-29-3">3</a></span>
-<span class="normal"><a href="#__codelineno-29-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1"></a><span class="n">Channel</span>
+<span class="normal"><a href="#__codelineno-29-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1"></a><span class="n">channel</span>
 <a id="__codelineno-29-2" name="__codelineno-29-2"></a><span class="w">    </span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"data/meta/patients_*.csv"</span><span class="o">)</span><span class="w"> </span><span class="c1">// &lt;-- use um padrão de captura</span>
 <a id="__codelineno-29-3" name="__codelineno-29-3"></a><span class="w">    </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="nl">header:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
 <a id="__codelineno-29-4" name="__codelineno-29-4"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">linha</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">"${linha.patient_id}\t${linha.num_samples}"</span><span class="w"> </span><span class="o">}</span>
@@ -2863,7 +2863,7 @@ duas amostras de um estudo SRA público e executa o FASTQC nos arquivos resultan
 <p>Em seguida, substitua o canal de entrada para as leituras em <code>script7.nf</code>, alterando as seguintes linhas:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-32-1">1</a></span>
 <span class="normal"><a href="#__codelineno-32-2">2</a></span>
-<span class="normal"><a href="#__codelineno-32-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1"></a><span class="n">Channel</span>
+<span class="normal"><a href="#__codelineno-32-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1"></a><span class="n">channel</span>
 <a id="__codelineno-32-2" name="__codelineno-32-2"></a><span class="w">    </span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads</span><span class="o">,</span><span class="w"> </span><span class="nl">checkIfExists:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
 <a id="__codelineno-32-3" name="__codelineno-32-3"></a><span class="w">    </span><span class="o">.</span><span class="na">set</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">read_pairs_ch</span><span class="w"> </span><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
@@ -2872,7 +2872,7 @@ duas amostras de um estudo SRA público e executa o FASTQC nos arquivos resultan
 <span class="normal"><a href="#__codelineno-33-2">2</a></span>
 <span class="normal"><a href="#__codelineno-33-3">3</a></span>
 <span class="normal"><a href="#__codelineno-33-4">4</a></span>
-<span class="normal"><a href="#__codelineno-33-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1"></a><span class="n">Channel</span>
+<span class="normal"><a href="#__codelineno-33-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1"></a><span class="n">channel</span>
 <a id="__codelineno-33-2" name="__codelineno-33-2"></a><span class="hll"><span class="w">    </span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"fastq.csv"</span><span class="o">)</span>
 </span><a id="__codelineno-33-3" name="__codelineno-33-3"></a><span class="hll"><span class="w">    </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">()</span>
 </span><a id="__codelineno-33-4" name="__codelineno-33-4"></a><span class="hll"><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">linha</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">"${linha[0]}, ${linha[1]}, ${linha[2]}"</span><span class="w"> </span><span class="o">}</span>
@@ -2980,7 +2980,7 @@ duas amostras de um estudo SRA público e executa o FASTQC nos arquivos resultan
 <span class="normal"><a href="#__codelineno-37-2">2</a></span>
 <span class="normal"><a href="#__codelineno-37-3">3</a></span>
 <span class="normal"><a href="#__codelineno-37-4">4</a></span>
-<span class="normal"><a href="#__codelineno-37-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1"></a><span class="n">Channel</span>
+<span class="normal"><a href="#__codelineno-37-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1"></a><span class="n">channel</span>
 <a id="__codelineno-37-2" name="__codelineno-37-2"></a><span class="w">    </span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"data/meta/regions.tsv"</span><span class="o">,</span><span class="w"> </span><span class="nl">checkIfExists:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
 <a id="__codelineno-37-3" name="__codelineno-37-3"></a><span class="w">    </span><span class="c1">// Use a opção `sep` para analisar arquivos com tabulação como separador</span>
 <a id="__codelineno-37-4" name="__codelineno-37-4"></a><span class="w">    </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="nl">sep:</span><span class="w"> </span><span class="s1">'\t'</span><span class="o">)</span>
@@ -2996,7 +2996,7 @@ duas amostras de um estudo SRA público e executa o FASTQC nos arquivos resultan
 <span class="normal"><a href="#__codelineno-38-3">3</a></span>
 <span class="normal"><a href="#__codelineno-38-4">4</a></span>
 <span class="normal"><a href="#__codelineno-38-5">5</a></span>
-<span class="normal"><a href="#__codelineno-38-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1"></a><span class="n">Channel</span>
+<span class="normal"><a href="#__codelineno-38-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1"></a><span class="n">channel</span>
 <a id="__codelineno-38-2" name="__codelineno-38-2"></a><span class="w">    </span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"data/meta/regions.tsv"</span><span class="o">,</span><span class="w"> </span><span class="nl">checkIfExists:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
 <a id="__codelineno-38-3" name="__codelineno-38-3"></a><span class="w">    </span><span class="c1">// Use a opção `sep` para analisar arquivos com tabulação como separador</span>
 <a id="__codelineno-38-4" name="__codelineno-38-4"></a><span class="w">    </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="nl">sep:</span><span class="w"> </span><span class="s1">'\t'</span><span class="o">,</span><span class="w"> </span><span class="nl">header:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
@@ -3015,7 +3015,7 @@ duas amostras de um estudo SRA público e executa o FASTQC nos arquivos resultan
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-39-1">1</a></span>
 <span class="normal"><a href="#__codelineno-39-2">2</a></span>
 <span class="normal"><a href="#__codelineno-39-3">3</a></span>
-<span class="normal"><a href="#__codelineno-39-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1"></a><span class="n">Channel</span>
+<span class="normal"><a href="#__codelineno-39-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1"></a><span class="n">channel</span>
 <a id="__codelineno-39-2" name="__codelineno-39-2"></a><span class="w">    </span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">'["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"]'</span><span class="o">)</span>
 <a id="__codelineno-39-3" name="__codelineno-39-3"></a><span class="w">    </span><span class="o">.</span><span class="na">splitJson</span><span class="o">()</span>
 <a id="__codelineno-39-4" name="__codelineno-39-4"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">"Item: ${it}"</span><span class="w"> </span><span class="o">}</span>
@@ -3040,7 +3040,7 @@ duas amostras de um estudo SRA público e executa o FASTQC nos arquivos resultan
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-41-1">1</a></span>
 <span class="normal"><a href="#__codelineno-41-2">2</a></span>
 <span class="normal"><a href="#__codelineno-41-3">3</a></span>
-<span class="normal"><a href="#__codelineno-41-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1"></a><span class="n">Channel</span>
+<span class="normal"><a href="#__codelineno-41-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1"></a><span class="n">channel</span>
 <a id="__codelineno-41-2" name="__codelineno-41-2"></a><span class="w">    </span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">'{"jogador": {"nome": "Bob", "altura": 180, "venceu_campeonato": false}}'</span><span class="o">)</span>
 <a id="__codelineno-41-3" name="__codelineno-41-3"></a><span class="w">    </span><span class="o">.</span><span class="na">splitJson</span><span class="o">()</span>
 <a id="__codelineno-41-4" name="__codelineno-41-4"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">"Item: ${it}"</span><span class="w"> </span><span class="o">}</span>
@@ -3060,7 +3060,7 @@ duas amostras de um estudo SRA público e executa o FASTQC nos arquivos resultan
 <span class="normal"><a href="#__codelineno-43-2">2</a></span>
 <span class="normal"><a href="#__codelineno-43-3">3</a></span>
 <span class="normal"><a href="#__codelineno-43-4">4</a></span>
-<span class="normal"><a href="#__codelineno-43-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1"></a><span class="n">Channel</span>
+<span class="normal"><a href="#__codelineno-43-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1"></a><span class="n">channel</span>
 <a id="__codelineno-43-2" name="__codelineno-43-2"></a><span class="w">    </span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">'[{"nome": "Bob", "altura": 180, "venceu_campeonato": false}, \</span>
 <a id="__codelineno-43-3" name="__codelineno-43-3"></a><span class="s1">        {"nome": "Alice", "height": 170, "venceu_campeonato": false}]'</span><span class="o">)</span>
 <a id="__codelineno-43-4" name="__codelineno-43-4"></a><span class="w">    </span><span class="o">.</span><span class="na">splitJson</span><span class="o">()</span>
@@ -3081,7 +3081,7 @@ duas amostras de um estudo SRA público e executa o FASTQC nos arquivos resultan
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-45-1">1</a></span>
 <span class="normal"><a href="#__codelineno-45-2">2</a></span>
 <span class="normal"><a href="#__codelineno-45-3">3</a></span>
-<span class="normal"><a href="#__codelineno-45-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1"></a><span class="n">Channel</span>
+<span class="normal"><a href="#__codelineno-45-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1"></a><span class="n">channel</span>
 <a id="__codelineno-45-2" name="__codelineno-45-2"></a><span class="w">    </span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">'arquivo.json'</span><span class="o">)</span>
 <a id="__codelineno-45-3" name="__codelineno-45-3"></a><span class="w">    </span><span class="o">.</span><span class="na">splitJson</span><span class="o">()</span>
 <a id="__codelineno-45-4" name="__codelineno-45-4"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">"Item: ${it}"</span><span class="w"> </span><span class="o">}</span>
@@ -3243,7 +3243,7 @@ duas amostras de um estudo SRA público e executa o FASTQC nos arquivos resultan
 <a id="__codelineno-51-14" name="__codelineno-51-14"></a><span class="o">}</span>
 <a id="__codelineno-51-15" name="__codelineno-51-15"></a>
 <a id="__codelineno-51-16" name="__codelineno-51-16"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-51-17" name="__codelineno-51-17"></a><span class="w">    </span><span class="n">Channel</span>
+<a id="__codelineno-51-17" name="__codelineno-51-17"></a><span class="w">    </span><span class="n">channel</span>
 <a id="__codelineno-51-18" name="__codelineno-51-18"></a><span class="w">        </span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">'data/meta/regions*.json'</span><span class="o">)</span>
 <a id="__codelineno-51-19" name="__codelineno-51-19"></a><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">flatMap</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">parseArquivoJson</span><span class="o">(</span><span class="n">it</span><span class="o">)</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-51-20" name="__codelineno-51-20"></a><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">registro</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="o">[</span><span class="n">registro</span><span class="o">.</span><span class="na">patient_id</span><span class="o">,</span><span class="w"> </span><span class="n">registro</span><span class="o">.</span><span class="na">feature</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>

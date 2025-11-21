@@ -2450,7 +2450,7 @@
 <summary>Solution</summary>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">script3.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-18">18</a></span>
 <span class="normal"><a href="#__codelineno-19-19">19</a></span>
-<span class="normal"><a href="#__codelineno-19-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-19-18" name="__codelineno-19-18"></a><span class="n">Channel</span>
+<span class="normal"><a href="#__codelineno-19-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-19-18" name="__codelineno-19-18"></a><span class="n">channel</span>
 <a id="__codelineno-19-19" name="__codelineno-19-19"></a><span class="w">    </span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads</span><span class="o">)</span>
 <a id="__codelineno-19-20" name="__codelineno-19-20"></a><span class="w">    </span><span class="o">.</span><span class="na">set</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">read_pairs_ch</span><span class="w"> </span><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
@@ -2464,7 +2464,7 @@
 <summary>Solution</summary>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">script3.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-18">18</a></span>
 <span class="normal"><a href="#__codelineno-20-19">19</a></span>
-<span class="normal"><a href="#__codelineno-20-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-20-18" name="__codelineno-20-18"></a><span class="n">Channel</span>
+<span class="normal"><a href="#__codelineno-20-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-20-18" name="__codelineno-20-18"></a><span class="n">channel</span>
 <a id="__codelineno-20-19" name="__codelineno-20-19"></a><span class="w">    </span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads</span><span class="o">,</span><span class="w"> </span><span class="nl">checkIfExists:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
 <a id="__codelineno-20-20" name="__codelineno-20-20"></a><span class="w">    </span><span class="o">.</span><span class="na">set</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">read_pairs_ch</span><span class="w"> </span><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
@@ -2582,7 +2582,7 @@
 <span class="normal"><a href="#__codelineno-28-90">90</a></span>
 <span class="normal"><a href="#__codelineno-28-91">91</a></span>
 <span class="normal"><a href="#__codelineno-28-92">92</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-28-83" name="__codelineno-28-83"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-28-84" name="__codelineno-28-84"></a><span class="w">    </span><span class="n">Channel</span>
+<a id="__codelineno-28-84" name="__codelineno-28-84"></a><span class="w">    </span><span class="n">channel</span>
 <a id="__codelineno-28-85" name="__codelineno-28-85"></a><span class="w">        </span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads</span><span class="o">,</span><span class="w"> </span><span class="nl">checkIfExists:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
 <a id="__codelineno-28-86" name="__codelineno-28-86"></a><span class="w">        </span><span class="o">.</span><span class="na">set</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">read_pairs_ch</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-28-87" name="__codelineno-28-87"></a>

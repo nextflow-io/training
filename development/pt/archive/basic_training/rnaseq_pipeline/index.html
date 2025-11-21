@@ -2619,7 +2619,7 @@ In the meantime, please try to work through the English-language material if you
 <p>Use o operador <a href="https://www.nextflow.io/docs/latest/operator.html#set">set</a> no lugar da atribuição <code>=</code> para definir o canal <code>read_pairs_ch</code>.</p>
 <details class="solution">
 <summary>Solution</summary>
-<div class="highlight"><pre><span></span><code><a href="#__codelineno-17-1" id="__codelineno-17-1" name="__codelineno-17-1"></a><span class="n">Channel</span>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-17-1" id="__codelineno-17-1" name="__codelineno-17-1"></a><span class="n">channel</span>
 <a href="#__codelineno-17-2" id="__codelineno-17-2" name="__codelineno-17-2"></a><span class="w">    </span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads</span><span class="o">)</span>
 <a href="#__codelineno-17-3" id="__codelineno-17-3" name="__codelineno-17-3"></a><span class="w">    </span><span class="o">.</span><span class="na">set</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">read_pairs_ch</span><span class="w"> </span><span class="o">}</span>
 </code></pre></div>
@@ -2630,7 +2630,7 @@ In the meantime, please try to work through the English-language material if you
 <p>Use a opção <code>checkIfExists</code> para a fábrica de canal <a href="https://www.nextflow.io/docs/latest/channel.html#fromfilepairs">fromFilePairs</a> para checar se o caminho especificado contém os pares de arquivos.</p>
 <details class="solution">
 <summary>Solution</summary>
-<div class="highlight"><pre><span></span><code><a href="#__codelineno-18-1" id="__codelineno-18-1" name="__codelineno-18-1"></a><span class="n">Channel</span>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-18-1" id="__codelineno-18-1" name="__codelineno-18-1"></a><span class="n">channel</span>
 <a href="#__codelineno-18-2" id="__codelineno-18-2" name="__codelineno-18-2"></a><span class="w">    </span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads</span><span class="o">,</span><span class="w"> </span><span class="nl">checkIfExists:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
 <a href="#__codelineno-18-3" id="__codelineno-18-3" name="__codelineno-18-3"></a><span class="w">    </span><span class="o">.</span><span class="na">set</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">read_pairs_ch</span><span class="w"> </span><span class="o">}</span>
 </code></pre></div>

@@ -2415,10 +2415,10 @@
 </ol>
 </div>
 <h2 id="channel-factories"><span class="enumerate-headings-plugin enumerate-heading-plugin">8.2</span> Channel factories<a class="headerlink" href="#channel-factories" title="Permanent link">¶</a></h2>
-<p>Channel factories are Nextflow commands for creating channels that have implicit expected inputs and functions. There are several different Channel factories which are useful for different situations. The following sections will cover the most common channel factories.</p>
+<p>Channel factories are Nextflow commands for creating channels that have implicit expected inputs and functions. There are several different channel factories which are useful for different situations. The following sections will cover the most common channel factories.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>New in version 20.07.0: channel was introduced as an alias of Channel, allowing factory methods to be specified as <code>channel.of()</code> or <code>channel.of()</code>, and so on.</p>
+<p>New in version 20.07.0: channel was introduced as an alias of channel, allowing factory methods to be specified as <code>channel.of()</code> or <code>channel.of()</code>, and so on.</p>
 </div>
 <h3 id="value"><span class="enumerate-headings-plugin enumerate-heading-plugin">8.2.1</span> <code>value()</code><a class="headerlink" href="#value" title="Permanent link">¶</a></h3>
 <p>The <code>value</code> channel factory is used to create a <em>value</em> channel. An optional not <code>null</code> argument can be specified to bind the channel to a specific value. For example:</p>
@@ -2437,7 +2437,7 @@
 <p>The factory <code>channel.of</code> allows the creation of a queue channel with the values specified as arguments.</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1">1</a></span>
 <span class="normal"><a href="#__codelineno-12-2">2</a></span>
-<span class="normal"><a href="#__codelineno-12-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="n">Channel</span>
+<span class="normal"><a href="#__codelineno-12-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="n">channel</span>
 <a id="__codelineno-12-2" name="__codelineno-12-2"></a><span class="w">    </span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="w"> </span><span class="mi">3</span><span class="o">,</span><span class="w"> </span><span class="mi">5</span><span class="o">,</span><span class="w"> </span><span class="mi">7</span><span class="o">)</span>
 <a id="__codelineno-12-3" name="__codelineno-12-3"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
 </code></pre></div></td></tr></table></div>
@@ -2450,7 +2450,7 @@
 <p>The <code>channel.of</code> channel factory works in a similar manner to <code>channel.from</code> (which is now <a href="https://www.nextflow.io/docs/latest/channel.html#of">deprecated</a>), fixing some inconsistent behaviors of the latter and providing better handling when specifying a range of values. For example, the following works with a range from 1 to 23:</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1">1</a></span>
 <span class="normal"><a href="#__codelineno-14-2">2</a></span>
-<span class="normal"><a href="#__codelineno-14-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1"></a><span class="n">Channel</span>
+<span class="normal"><a href="#__codelineno-14-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1"></a><span class="n">channel</span>
 <a id="__codelineno-14-2" name="__codelineno-14-2"></a><span class="w">    </span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">1</span><span class="o">..</span><span class="mi">23</span><span class="o">,</span><span class="w"> </span><span class="s1">'X'</span><span class="o">,</span><span class="w"> </span><span class="s1">'Y'</span><span class="o">)</span>
 <a id="__codelineno-14-3" name="__codelineno-14-3"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
 </code></pre></div></td></tr></table></div>
@@ -2462,14 +2462,14 @@
 <span class="normal"><a href="#__codelineno-15-4">4</a></span>
 <span class="normal"><a href="#__codelineno-15-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1"></a><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">'hello'</span><span class="o">,</span><span class="w"> </span><span class="s1">'world'</span><span class="o">]</span>
 <a id="__codelineno-15-2" name="__codelineno-15-2"></a>
-<a id="__codelineno-15-3" name="__codelineno-15-3"></a><span class="n">Channel</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3"></a><span class="n">channel</span>
 <a id="__codelineno-15-4" name="__codelineno-15-4"></a><span class="w">    </span><span class="o">.</span><span class="na">fromList</span><span class="o">(</span><span class="n">list</span><span class="o">)</span>
 <a id="__codelineno-15-5" name="__codelineno-15-5"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
 </code></pre></div></td></tr></table></div>
 <h3 id="frompath"><span class="enumerate-headings-plugin enumerate-heading-plugin">8.2.4</span> <code>fromPath()</code><a class="headerlink" href="#frompath" title="Permanent link">¶</a></h3>
 <p>The <code>fromPath</code> channel factory creates a queue channel emitting one or more files matching the specified glob pattern.</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-1">1</a></span>
-<span class="normal"><a href="#__codelineno-16-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1"></a><span class="n">Channel</span>
+<span class="normal"><a href="#__codelineno-16-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1"></a><span class="n">channel</span>
 <a id="__codelineno-16-2" name="__codelineno-16-2"></a><span class="w">    </span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">'./data/meta/*.csv'</span><span class="o">)</span>
 </code></pre></div></td></tr></table></div>
 <p>This example creates a channel and emits as many items as there are files with a <code>csv</code> extension in the <code>./data/meta</code> folder. Each element is a file object implementing the <a href="https://docs.oracle.com/javase/8/docs/api/java/nio/file/Paths.html">Path</a> interface.</p>
@@ -2524,7 +2524,7 @@
 <summary>Solution</summary>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1">1</a></span>
 <span class="normal"><a href="#__codelineno-17-2">2</a></span>
-<span class="normal"><a href="#__codelineno-17-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1"></a><span class="n">Channel</span>
+<span class="normal"><a href="#__codelineno-17-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1"></a><span class="n">channel</span>
 <a id="__codelineno-17-2" name="__codelineno-17-2"></a><span class="w">    </span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">'./data/ggal/**.fq'</span><span class="o">,</span><span class="w"> </span><span class="nl">hidden:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
 <a id="__codelineno-17-3" name="__codelineno-17-3"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
 </code></pre></div></td></tr></table></div>
@@ -2534,7 +2534,7 @@
 <p>The <code>fromFilePairs</code> channel factory creates a channel emitting the file pairs matching a glob pattern provided by the user. The matching files are emitted as tuples, in which the first element is the grouping key of the matching pair and the second element is the list of files (sorted in lexicographical order).</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1">1</a></span>
 <span class="normal"><a href="#__codelineno-18-2">2</a></span>
-<span class="normal"><a href="#__codelineno-18-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1"></a><span class="n">Channel</span>
+<span class="normal"><a href="#__codelineno-18-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1"></a><span class="n">channel</span>
 <a id="__codelineno-18-2" name="__codelineno-18-2"></a><span class="w">    </span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">'./data/ggal/*_{1,2}.fq'</span><span class="o">)</span>
 <a id="__codelineno-18-3" name="__codelineno-18-3"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
 </code></pre></div></td></tr></table></div>
@@ -2594,14 +2594,14 @@
 <p>Use the following with the <code>flat</code> option equaling true:</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1">1</a></span>
 <span class="normal"><a href="#__codelineno-20-2">2</a></span>
-<span class="normal"><a href="#__codelineno-20-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="n">Channel</span>
+<span class="normal"><a href="#__codelineno-20-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="n">channel</span>
 <a id="__codelineno-20-2" name="__codelineno-20-2"></a><span class="w">    </span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">'./data/ggal/*_{1,2}.fq'</span><span class="o">,</span><span class="w"> </span><span class="nl">flat:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
 <a id="__codelineno-20-3" name="__codelineno-20-3"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
 </code></pre></div></td></tr></table></div>
 <p>And false:</p>
 <p><div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1">1</a></span>
 <span class="normal"><a href="#__codelineno-21-2">2</a></span>
-<span class="normal"><a href="#__codelineno-21-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1"></a><span class="n">Channel</span>
+<span class="normal"><a href="#__codelineno-21-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1"></a><span class="n">channel</span>
 <a id="__codelineno-21-2" name="__codelineno-21-2"></a><span class="w">    </span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">'./data/ggal/*_{1,2}.fq'</span><span class="o">,</span><span class="w"> </span><span class="nl">flat:</span><span class="w"> </span><span class="kc">false</span><span class="o">)</span>
 <a id="__codelineno-21-3" name="__codelineno-21-3"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
 </code></pre></div></td></tr></table></div>
@@ -2634,7 +2634,7 @@ Check the square brackets around the file names, to see the difference with <cod
 <span class="normal"><a href="#__codelineno-22-4">4</a></span>
 <span class="normal"><a href="#__codelineno-22-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1"></a><span class="n">params</span><span class="o">.</span><span class="na">ncbi_api_key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'&lt;Your API key here&gt;'</span>
 <a id="__codelineno-22-2" name="__codelineno-22-2"></a>
-<a id="__codelineno-22-3" name="__codelineno-22-3"></a><span class="n">Channel</span>
+<a id="__codelineno-22-3" name="__codelineno-22-3"></a><span class="n">channel</span>
 <a id="__codelineno-22-4" name="__codelineno-22-4"></a><span class="w">    </span><span class="o">.</span><span class="na">fromSRA</span><span class="o">([</span><span class="s1">'SRP073307'</span><span class="o">],</span><span class="w"> </span><span class="nl">apiKey:</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">ncbi_api_key</span><span class="o">)</span>
 <a id="__codelineno-22-5" name="__codelineno-22-5"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
 </code></pre></div></td></tr></table></div>
@@ -2653,7 +2653,7 @@ Check the square brackets around the file names, to see the difference with <cod
 <span class="normal"><a href="#__codelineno-24-2">2</a></span>
 <span class="normal"><a href="#__codelineno-24-3">3</a></span>
 <span class="normal"><a href="#__codelineno-24-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1"></a><span class="n">ids</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">'ERR908507'</span><span class="o">,</span><span class="w"> </span><span class="s1">'ERR908506'</span><span class="o">,</span><span class="w"> </span><span class="s1">'ERR908505'</span><span class="o">]</span>
-<a id="__codelineno-24-2" name="__codelineno-24-2"></a><span class="n">Channel</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2"></a><span class="n">channel</span>
 <a id="__codelineno-24-3" name="__codelineno-24-3"></a><span class="w">    </span><span class="o">.</span><span class="na">fromSRA</span><span class="o">(</span><span class="n">ids</span><span class="o">,</span><span class="w"> </span><span class="nl">apiKey:</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">ncbi_api_key</span><span class="o">)</span>
 <a id="__codelineno-24-4" name="__codelineno-24-4"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
 </code></pre></div></td></tr></table></div>

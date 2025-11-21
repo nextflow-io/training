@@ -5241,7 +5241,7 @@
 <span class="normal"><a href="#__codelineno-18-75">75</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-18-64" name="__codelineno-18-64"></a><span class="w">    </span><span class="c1">//</span>
 <a id="__codelineno-18-65" name="__codelineno-18-65"></a><span class="w">    </span><span class="c1">// Create channel from input file provided through params.input</span>
 <a id="__codelineno-18-66" name="__codelineno-18-66"></a><span class="w">    </span><span class="c1">//</span>
-<a id="__codelineno-18-67" name="__codelineno-18-67"></a><span class="hll"><span class="w">    </span><span class="n">ch_samplesheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromList</span><span class="o">(</span><span class="n">samplesheetToList</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">,</span><span class="w"> </span><span class="s2">&quot;${projectDir}/assets/schema_input.json&quot;</span><span class="o">))</span>
+<a id="__codelineno-18-67" name="__codelineno-18-67"></a><span class="hll"><span class="w">    </span><span class="n">ch_samplesheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromList</span><span class="o">(</span><span class="n">samplesheetToList</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">,</span><span class="w"> </span><span class="s2">&quot;${projectDir}/assets/schema_input.json&quot;</span><span class="o">))</span>
 </span><a id="__codelineno-18-68" name="__codelineno-18-68"></a><span class="hll"><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span>
 </span><a id="__codelineno-18-69" name="__codelineno-18-69"></a><span class="hll"><span class="w">            </span><span class="c1">// Extract just the greeting string from each row</span>
 </span><a id="__codelineno-18-70" name="__codelineno-18-70"></a><span class="hll"><span class="w">            </span><span class="n">row</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span>
@@ -5265,7 +5265,7 @@
 <span class="normal"><a href="#__codelineno-19-73">73</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-19-64" name="__codelineno-19-64"></a><span class="w">    </span><span class="c1">//</span>
 <a id="__codelineno-19-65" name="__codelineno-19-65"></a><span class="w">    </span><span class="c1">// Create channel from input file provided through params.input</span>
 <a id="__codelineno-19-66" name="__codelineno-19-66"></a><span class="w">    </span><span class="c1">//</span>
-<a id="__codelineno-19-67" name="__codelineno-19-67"></a><span class="w">    </span><span class="n">ch_samplesheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
+<a id="__codelineno-19-67" name="__codelineno-19-67"></a><span class="w">    </span><span class="n">ch_samplesheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
 <a id="__codelineno-19-68" name="__codelineno-19-68"></a><span class="w">                        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">()</span>
 <a id="__codelineno-19-69" name="__codelineno-19-69"></a><span class="w">                        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">line</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-19-70" name="__codelineno-19-70"></a>
@@ -5279,7 +5279,7 @@
 <p>Let's break down what changed:</p>
 <ol>
 <li><strong><code>samplesheetToList(params.input, "${projectDir}/assets/schema_input.json")</code></strong>: Validates the input file against our schema and returns a list</li>
-<li><strong><code>Channel.fromList(...)</code></strong>: Converts the list into a Nextflow channel</li>
+<li><strong><code>channel.fromList(...)</code></strong>: Converts the list into a Nextflow channel</li>
 <li><strong><code>.map { row -&gt; row[0] }</code></strong>: Extracts just the greeting string from each validated row (accessing the first column by index)</li>
 </ol>
 <div class="admonition note">

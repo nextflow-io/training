@@ -5675,8 +5675,8 @@
 <p>Our workflow demonstrates the core pattern: <strong>dataflow operations</strong> (<code>workflow</code>, <code>channel.fromPath()</code>, <code>.splitCsv()</code>, <code>.map()</code>, <code>.view()</code>) orchestrate how data moves through the pipeline, while <strong>scripting</strong> (maps <code>[key: value]</code>, string methods, type conversions, ternary operators) inside the <code>.map()</code> closure handles the transformation of individual data items.</p>
 <h3 id="12-understanding-different-types-channel-vs-list">1.2. Understanding Different Types: Channel vs List<a class="headerlink" href="#12-understanding-different-types-channel-vs-list" title="Permanent link">&para;</a></h3>
 <p>So far, so good, we can distinguish between dataflow operations and scripting. But what about when the same method name exists in both contexts?</p>
-<p>A perfect example is the <code>collect</code> method, which exists for both Channel types and List types in the Nextflow standard library. The <code>collect()</code> method on a List transforms each element, while the <code>collect()</code> operator on a Channel gathers all channel emissions into a single-item channel.</p>
-<p>Let's demonstrate this with some sample data, starting by refreshing ourselves on what the Channel <code>collect()</code> operator does. Check out <code>collect.nf</code>:</p>
+<p>A perfect example is the <code>collect</code> method, which exists for both channel types and List types in the Nextflow standard library. The <code>collect()</code> method on a List transforms each element, while the <code>collect()</code> operator on a channel gathers all channel emissions into a single-item channel.</p>
+<p>Let's demonstrate this with some sample data, starting by refreshing ourselves on what the channel <code>collect()</code> operator does. Check out <code>collect.nf</code>:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">collect.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-1">1</a></span>
 <span class="normal"><a href="#__codelineno-25-2">2</a></span>
 <span class="normal"><a href="#__codelineno-25-3">3</a></span>
@@ -5696,7 +5696,7 @@
 <li>Define a List of sample IDs</li>
 <li>Create a channel with <code>fromList()</code> that emits each sample ID separately</li>
 <li>Print each item with <code>view()</code> as it flows through</li>
-<li>Gather all items into a single list with the Channel's <code>collect()</code> operator</li>
+<li>Gather all items into a single list with the channel's <code>collect()</code> operator</li>
 <li>Print the collected result (single item containing all sample IDs) with a second <code>view()</code></li>
 </ul>
 <p>We've changed the structure of the channel, but we haven't changed the data itself.</p>
@@ -5780,7 +5780,7 @@
 <a id="__codelineno-31-8" name="__codelineno-31-8" href="#__codelineno-31-8"></a><span class="go">Individual channel item: sample_003</span>
 <a id="__codelineno-31-9" name="__codelineno-31-9" href="#__codelineno-31-9"></a><span class="go">channel.collect() result: [sample_001, sample_002, sample_003] (3 items grouped into 1)</span>
 </code></pre></div>
-<p>This time, we have NOT changed the structure of the data, we still have 3 items in the list, but we HAVE transformed each item using the List's <code>collect</code> method to produce a new list with modified values. This is similar to using the <code>map</code> operator on a Channel, but it's operating on a List data structure rather than a channel.</p>
+<p>This time, we have NOT changed the structure of the data, we still have 3 items in the list, but we HAVE transformed each item using the List's <code>collect</code> method to produce a new list with modified values. This is similar to using the <code>map</code> operator on a channel, but it's operating on a List data structure rather than a channel.</p>
 <p><code>collect</code> is an extreme case we're using here to make a point. The key lesson is that when you're writing workflows, always distinguish between <strong>data structures</strong> (Lists, Maps, etc.) and <strong>channels</strong> (dataflow constructs). Operations can share names but behave completely differently depending on the type they're called on.</p>
 <h3 id="13-the-spread-operator-shorthand-for-property-extraction">1.3. The Spread Operator (<code>*.</code>) - Shorthand for Property Extraction<a class="headerlink" href="#13-the-spread-operator-shorthand-for-property-extraction" title="Permanent link">&para;</a></h3>
 <p>Related to the List's <code>collect</code> method is the spread operator (<code>*.</code>), which provides a concise way to extract properties from collections. It's essentially syntactic sugar for a common <code>collect</code> pattern.</p>

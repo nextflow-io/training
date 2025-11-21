@@ -6135,7 +6135,7 @@ So let's have a look at the top level <code>main.nf</code> entrypoint workflow t
 <a id="__codelineno-42-65" name="__codelineno-42-65"></a><span class="w">    </span><span class="c1">// Create channel from input file provided through params.input</span>
 <a id="__codelineno-42-66" name="__codelineno-42-66"></a><span class="w">    </span><span class="c1">//</span>
 <a id="__codelineno-42-67" name="__codelineno-42-67"></a>
-<a id="__codelineno-42-68" name="__codelineno-42-68"></a><span class="w">    </span><span class="n">Channel</span>
+<a id="__codelineno-42-68" name="__codelineno-42-68"></a><span class="w">    </span><span class="n">channel</span>
 <a id="__codelineno-42-69" name="__codelineno-42-69"></a><span class="w">        </span><span class="o">.</span><span class="na">fromList</span><span class="o">(</span><span class="n">samplesheetToList</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">,</span><span class="w"> </span><span class="s2">&quot;${projectDir}/assets/schema_input.json&quot;</span><span class="o">))</span>
 <a id="__codelineno-42-70" name="__codelineno-42-70"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-42-71" name="__codelineno-42-71"></a><span class="w">            </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">fastq_1</span><span class="o">,</span><span class="w"> </span><span class="n">fastq_2</span><span class="w"> </span><span class="o">-&gt;</span>
@@ -6237,7 +6237,7 @@ It is quite complex because it does a lot of parsing and validation work.</p>
 <a id="__codelineno-47-65" name="__codelineno-47-65"></a><span class="w">    </span><span class="c1">// Create channel from input file provided through params.input</span>
 <a id="__codelineno-47-66" name="__codelineno-47-66"></a><span class="w">    </span><span class="c1">//</span>
 <a id="__codelineno-47-67" name="__codelineno-47-67"></a>
-<a id="__codelineno-47-68" name="__codelineno-47-68"></a><span class="w">    </span><span class="n">Channel</span>
+<a id="__codelineno-47-68" name="__codelineno-47-68"></a><span class="w">    </span><span class="n">channel</span>
 <a id="__codelineno-47-69" name="__codelineno-47-69"></a><span class="w">        </span><span class="o">.</span><span class="na">fromList</span><span class="o">(</span><span class="n">samplesheetToList</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">,</span><span class="w"> </span><span class="s2">&quot;${projectDir}/assets/schema_input.json&quot;</span><span class="o">))</span>
 <a id="__codelineno-47-70" name="__codelineno-47-70"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-47-71" name="__codelineno-47-71"></a><span class="w">            </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">fastq_1</span><span class="o">,</span><span class="w"> </span><span class="n">fastq_2</span><span class="w"> </span><span class="o">-&gt;</span>
