@@ -195,6 +195,7 @@ nextflow run ./core-hello -profile docker,test --outdir core-hello-results
     ```
 
 This shows you that all the basic wiring is in place.
+
 You can take a look at the reports in the `pipeline_info` directory to see what was run: nothing at all, according to the execution timeline report!
 
 ![empty execution timeline report](./img/execution_timeline_empty.png)
