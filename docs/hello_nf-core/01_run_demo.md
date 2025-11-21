@@ -241,9 +241,9 @@ Here's the console output from the pipeline:
 ??? example "Output"
 
     ```console
-    N E X T F L O W   ~  version 25.04.3
+     N E X T F L O W   ~  version 25.04.3
 
-    Launching `https://github.com/nf-core/demo` [happy_varahamihira] DSL2 - revision: db7f526ce1 [master]
+    Launching `https://github.com/nf-core/demo` [magical_pauling] DSL2 - revision: db7f526ce1 [master]
 
 
     ------------------------------------------------------
@@ -263,11 +263,11 @@ Here's the console output from the pipeline:
       config_profile_description: Minimal test dataset to check pipeline function
 
     Generic options
-      trace_report_suffix       : 2025-10-30_13-22-01
+      trace_report_suffix       : 2025-11-21_04-57-41
 
     Core Nextflow options
       revision                  : master
-      runName                   : happy_varahamihira
+      runName                   : magical_pauling
       containerEngine           : docker
       launchDir                 : /workspaces/training/hello-nf-core
       workDir                   : /workspaces/training/hello-nf-core/work
@@ -289,9 +289,9 @@ Here's the console output from the pipeline:
 
 
     executor >  local (7)
-    [db/fae3ff] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE)     [100%] 3 of 3 ✔
-    [d0/f6ea55] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE1_PE) [100%] 3 of 3 ✔
-    [af/e6da56] NFCORE_DEMO:DEMO:MULTIQC                 [100%] 1 of 1 ✔
+    [ff/a6976b] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE)     | 3 of 3 ✔
+    [39/731ab7] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE3_SE) | 3 of 3 ✔
+    [7c/78d96e] NFCORE_DEMO:DEMO:MULTIQC                 | 1 of 1 ✔
     -[nf-core/demo] Pipeline completed successfully-
     ```
 
@@ -307,9 +307,9 @@ There's a header that includes a summary of the pipeline's version, inputs and o
 Moving on to the execution output, let's have a look at the lines that tell us what processes were run:
 
 ```console title="Output (subset)"
-[db/fae3ff] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE)     [100%] 3 of 3 ✔
-[d0/f6ea55] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE1_PE) [100%] 3 of 3 ✔
-[af/e6da56] NFCORE_DEMO:DEMO:MULTIQC                 [100%] 1 of 1 ✔
+    [ff/a6976b] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE)     | 3 of 3 ✔
+    [39/731ab7] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE3_SE) | 3 of 3 ✔
+    [7c/78d96e] NFCORE_DEMO:DEMO:MULTIQC                 | 1 of 1 ✔
 ```
 
 This tells us that three processes were run, corresponding to the three tools shown in the pipeline documentation page on the nf-core website: FASTQC, SEQTK_TRIM and MULTIQC.
@@ -341,12 +341,12 @@ demo-results
 │   ├── multiqc_plots
 │   └── multiqc_report.html
 └── pipeline_info
-    ├── execution_report_2025-11-21_04-25-49.html
-    ├── execution_timeline_2025-11-21_04-25-49.html
-    ├── execution_trace_2025-11-21_04-25-49.txt
+    ├── execution_report_2025-11-21_04-57-41.html
+    ├── execution_timeline_2025-11-21_04-57-41.html
+    ├── execution_trace_2025-11-21_04-57-41.txt
     ├── nf_core_demo_software_mqc_versions.yml
-    ├── params_2025-11-21_04-25-55.json
-    └── pipeline_dag_2025-11-21_04-25-49.html
+    ├── params_2025-11-21_04-57-46.json
+    └── pipeline_dag_2025-11-21_04-57-41.html
 ```
 
 That might seem like a lot.
@@ -354,7 +354,15 @@ To learn more about the `nf-core/demo` pipeline's outputs, check out its [docume
 
 At this stage, what's important to observe is that the results are organized by module, and there is additionally a directory called `pipeline_info` containing various timestamped reports about the pipeline execution.
 
-This is standard for nf-core pipelines; we'll examine how it all works later in this course.
+For example, the `execution_timeline_*` file shows you what processes were run, in what order and how long they took to run:
+
+![execution timeline report](./img/execution_timeline.png)
+
+!!! note
+
+    Here the tasks were not run in parallel because the default resource limits are set very low in the test profile compared to the modules' resource allocations.
+
+These reports are generated automatically for all nf-core pipelines.
 
 ### Takeaway
 

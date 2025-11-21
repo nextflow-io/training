@@ -53,11 +53,11 @@ This TUI will ask you to provide basic information about your pipeline and will 
 - On the Template features screen, set `Toggle all features` to **off**, then selectively **enable** the following. Check your selections and click **Continue**.
 
 ```
-[ ] Add configuration files
+[ ] Add testing profiles
 [ ] Use nf-core components
 [ ] Use nf-schema
+[ ] Add configuration files
 [ ] Add documentation
-[ ] Add testing profiles
 ```
 
 - On the `Final details` screen, click **Finish**. Wait for the pipeline to be created, then click **Continue**.
@@ -165,7 +165,7 @@ nextflow run ./core-hello -profile docker,test --outdir core-hello-results
     ```console
     N E X T F L O W   ~  version 25.04.3
 
-    Launching `./core-hello/main.nf` [insane_davinci] DSL2 - revision: b9e9b3b8de
+    Launching `./core-hello/main.nf` [scruffy_marconi] DSL2 - revision: b9e9b3b8de
 
     Downloading plugin nf-schema@2.5.1
     Input/output options
@@ -177,10 +177,10 @@ nextflow run ./core-hello -profile docker,test --outdir core-hello-results
       config_profile_description: Minimal test dataset to check pipeline function
 
     Generic options
-      trace_report_suffix       : 2025-10-30_15-45-16
+      trace_report_suffix       : 2025-11-21_04-47-18
 
     Core Nextflow options
-      runName                   : insane_davinci
+      runName                   : scruffy_marconi
       containerEngine           : docker
       launchDir                 : /workspaces/training/hello-nf-core
       workDir                   : /workspaces/training/hello-nf-core/work
@@ -195,12 +195,11 @@ nextflow run ./core-hello -profile docker,test --outdir core-hello-results
     ```
 
 This shows you that all the basic wiring is in place.
-You can take a look at the reports in the `pipeline_info` directory to see what was run; not much at all!
+You can take a look at the reports in the `pipeline_info` directory to see what was run: nothing at all, according to the execution timeline report!
 
-!!! note
+![empty execution timeline report](./img/execution_timeline_empty.png)
 
-    The nf-core pipeline template includes an example samplesheet, but at time of writing it is very domain-specific.
-    Future work will aim to produce something more generic.
+Let's have a look at what is actually in there.
 
 ### 1.3. Examine the placeholder workflow
 
@@ -294,7 +293,9 @@ As a reminder, we're working with the workflow featured in our [Hello Nextflow](
 
     The four steps are implemented as Nextflow processes (`sayHello`, `convertToUpper`, `collectGreetings`, and `cowpy`) stored in separate module files.
 
-    <!-- TODO: Add diagram -->
+    <figure class="excalidraw">
+    --8<-- "docs/hello_nextflow/img/hello_pipeline_complete.svg"
+    </figure>
 
     1. **`sayHello`:** Writes each greeting to its own output file (e.g., "Hello-output.txt")
     2. **`convertToUpper`:** Converts each greeting to uppercase (e.g., "HELLO")
@@ -1046,7 +1047,7 @@ If we open up `core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf
     // Create channel from input file provided through params.input
     //
 
-    Channel
+    channel
         .fromList(samplesheetToList(params.input, "${projectDir}/assets/schema_input.json"))
         .map {
             meta, fastq_1, fastq_2 ->
@@ -1072,7 +1073,6 @@ If we open up `core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf
 ```
 
 This is the channel factory that parses the samplesheet and passes it on in a form that is ready to be consumed by the HELLO workflow.
-It is quite complex because it does a lot of parsing and validation work.
 
 !!! note
 
@@ -1087,6 +1087,8 @@ It is quite complex because it does a lot of parsing and validation work.
     ```groovy
     ch_samplesheet = channel.<...>
     ```
+
+This code involves some parsing and validation steps that are highly specific to the example samplesheet included with the nf-core pipeline template, which at time of writing is very domain-specific and not suitable for our simple pipeline project.
 
 ### 4.2. Replace the templated input channel code
 
