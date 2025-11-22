@@ -671,10 +671,10 @@ If you want, use what you've learned to add validation for that parameter too!
 
 Passing validation is always a good feeling, but let's make sure that the validation will actually catch errors.
 
-To create a test file with an invalid column name, start by making a temporary copy of the `greetings.csv` file:
+To create a test file with an invalid column name, start by making a copy of the `greetings.csv` file:
 
 ```bash
-cp assets/greetings.csv tmp_invalid_greetings.csv
+cp assets/greetings.csv assets/invalid_greetings.csv
 ```
 
 Now open the file and change the name of the first column, in the header line, from `greeting` to `message`:
@@ -702,10 +702,10 @@ This doesn't match our schema, so the validation should throw an error.
 Try running the pipeline with this invalid input:
 
 ```bash
-nextflow run . --input /tmp/invalid_greetings.csv --outdir test-results -profile docker
+nextflow run . --input assets/invalid_greetings.csv --outdir test-results -profile docker
 ```
 
-```console title="Output"
+```console title="Output (subset)"
 ERROR ~ Validation of pipeline parameters failed!
 
  -- Check '.nextflow.log' file for details
