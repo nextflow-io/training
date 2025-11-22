@@ -486,7 +486,7 @@ While we're at it, we can also comment out the line
         /*
         * Pipeline parameters
         */
-        params.greeting = 'greetings.csv'
+        //params.greeting = 'greetings.csv'
         params.batch = 'test-batch'
         params.character = 'turkey'
     ```
@@ -497,7 +497,7 @@ While we're at it, we can also comment out the line
         /*
         * Pipeline parameters
         */
-        // params.greeting = 'greetings.csv'
+        params.greeting = 'greetings.csv'
         params.batch = 'test-batch'
         params.character = 'turkey'
     ```
@@ -566,7 +566,7 @@ This is a net new addition to the code compared to the original workflow.
 
 If you've done all the changes as described, your workflow should now look like this:
 
-```groovy title="original-hello/hello.nf" linenums="1" hl_lines="15 17-19 21 37-38"
+```groovy title="original-hello/hello.nf" linenums="1" hl_lines="16 18-20 22 36-37"
 #!/usr/bin/env nextflow
 
 /*
