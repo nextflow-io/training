@@ -14,7 +14,7 @@ In this fifth part of the Hello nf-core training course, we show you how to use 
     cd core-hello
     ```
 
-    This gives you a pipeline with the `CAT_CAT` module already integrated.
+    This gives you a pipeline with the `COWPY` module already upgraded to follow nf-core standards.
 
 ---
 
