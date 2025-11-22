@@ -736,7 +736,7 @@ To override the default `publishDir` directive, you can simply add your own dire
 
 For example, you could override the default for a single process using the `withName:` selector, as in this example where we add a custom `publishDir` directive for the 'cowpy' process.
 
-```groovy title="core-hello/conf/modules.config" linenums="13" hl_lines="6-8"
+```groovy title="core-hello/conf/modules.config" linenums="13" hl_lines="8-10"
 process {
     publishDir = [
         path: { "${params.outdir}/${task.process.tokenize(':')[-1].tokenize('_')[0].toLowerCase()}" },

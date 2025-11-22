@@ -486,7 +486,7 @@ While we're at it, we can also comment out the line
         /*
         * Pipeline parameters
         */
-        params.greeting = 'greetings.csv'
+        //params.greeting = 'greetings.csv'
         params.batch = 'test-batch'
         params.character = 'turkey'
     ```
@@ -497,7 +497,7 @@ While we're at it, we can also comment out the line
         /*
         * Pipeline parameters
         */
-        // params.greeting = 'greetings.csv'
+        params.greeting = 'greetings.csv'
         params.batch = 'test-batch'
         params.character = 'turkey'
     ```
@@ -566,7 +566,7 @@ This is a net new addition to the code compared to the original workflow.
 
 If you've done all the changes as described, your workflow should now look like this:
 
-```groovy title="original-hello/hello.nf" linenums="1" hl_lines="15 17-19 21 37-38"
+```groovy title="original-hello/hello.nf" linenums="1" hl_lines="16 18-20 22 36-37"
 #!/usr/bin/env nextflow
 
 /*
@@ -1300,6 +1300,32 @@ Key points:
 - **Using `${projectDir}`**: This is a Nextflow implicit variable that points to the directory where the main workflow script is located (the pipeline root). Using it ensures the path works regardless of where the pipeline is run from.
 - **Absolute paths**: By using `${projectDir}`, we create an absolute path, which is important for test data that ships with the pipeline.
 - **Test data location**: nf-core pipelines typically store test data in the `assets/` directory within the pipeline repository for small test files, or reference external test datasets for larger files.
+
+And while we're at it, let's tighten the default resource limits to ensure this will run on very basic machines (like the minimal VMs in Github Codespaces):
+
+=== "After"
+
+    ```groovy title="core-hello/config/test.config" linenums="13" hl_lines="3-4"
+    process {
+        resourceLimits = [
+            cpus: 2,
+            memory: '4.GB',
+            time: '1.h'
+        ]
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="core-hello/config/test.config" linenums="13" hl_lines="3-4"
+    process {
+        resourceLimits = [
+            cpus: 4,
+            memory: '15.GB',
+            time: '1.h'
+        ]
+    }
+    ```
 
 This completes the code modifications we need to do.
 

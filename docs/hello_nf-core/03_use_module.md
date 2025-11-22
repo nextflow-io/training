@@ -675,7 +675,7 @@ Since `cowpy` doesn't accept metadata tuples yet (we'll fix this in the next par
 
 === "After"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="16-17"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="16-17 20"
         // emit a greeting
         sayHello(ch_samplesheet)
 
@@ -700,7 +700,7 @@ Since `cowpy` doesn't accept metadata tuples yet (we'll fix this in the next par
 
 === "Before"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="26"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="17"
         // emit a greeting
         sayHello(ch_samplesheet)
 
@@ -722,7 +722,7 @@ Since `cowpy` doesn't accept metadata tuples yet (we'll fix this in the next par
 
 The `.map{ meta, file -> file }` operation extracts the file from the `[metadata, file]` tuple produced by `CAT_CAT` into a new channel, `ch_for_cowpy`.
 
-Then it's just a matter of passing `ch_for_cowpy` to `cowpy` instead of `collectGreetings.out.outfile`.
+Then it's just a matter of passing `ch_for_cowpy` to `cowpy` instead of `collectGreetings.out.outfile` in that last line.
 
 !!! note
 
