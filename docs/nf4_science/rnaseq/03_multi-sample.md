@@ -15,7 +15,7 @@ We'll do this in three stages:
 
 We're going to need to change how we manage the input.
 
-## 1.1. Change the primary input to be a CSV of file paths instead of a single file
+### 1.1. Change the primary input to be a CSV of file paths instead of a single file
 
 We provide a CSV file containing sample IDs and FASTQ file paths in the `data/` directory.
 This CSV file includes a header line.
@@ -38,18 +38,18 @@ Let's rename the primary input parameter to `input_csv` and change the default t
 params.input_csv = "data/single-end.csv"
 ```
 
-## 1.2. Update the input channel factory to handle a CSV as input
+### 1.2. Update the input channel factory to handle a CSV as input
 
 We're going to want to load the contents of the file into the channel instead of just the file path itself, so we use the `.splitCsv()` operator to parse the CSV format, then the `.map()` operator to grab the specific piece of information we want (the FASTQ file path).
 
 ```groovy title="rnaseq.nf" linenums="16"
     // Create input channel from the contents of a CSV file
-    read_ch = Channel.fromPath(params.input_csv)
+    read_ch = channel.fromPath(params.input_csv)
         .splitCsv(header:true)
         .map { row -> file(row.fastq_path) }
 ```
 
-## 1.3. Run the workflow to test that it works
+### 1.3. Run the workflow to test that it works
 
 ```bash
 nextflow run rnaseq.nf
@@ -93,7 +93,7 @@ Open the file in the code editor and copy the following code into it:
 
 process MULTIQC {
 
-    container "community.wave.seqera.io/library/pip_multiqc:ad8f247edb55897c"
+    container "community.wave.seqera.io/library/pip_multiqc:a3c26f6199d64b7c"
     publishDir "results/multiqc", mode: 'symlink'
 
     input:
@@ -184,7 +184,7 @@ In the context of the full workflow block, it ends up looking like this:
 ```groovy title="rnaseq.nf" linenums="18"
 workflow {
     // Create input channel from the contents of a CSV file
-    read_ch = Channel.fromPath(params.input_csv)
+    read_ch = channel.fromPath(params.input_csv)
         .splitCsv(header:true)
         .map { row -> file(row.fastq_path) }
 
@@ -313,7 +313,7 @@ So `row -> file(row.fastq_path)` becomes `row -> [file(row.fastq_1), file(row.fa
 
 ```groovy title="rnaseq_pe.nf" linenums="19"
     // Create input channel from the contents of a CSV file
-    read_ch = Channel.fromPath(params.input_csv)
+    read_ch = channel.fromPath(params.input_csv)
         .splitCsv(header:true)
         .map { row -> [file(row.fastq_1), file(row.fastq_2)] }
 ```

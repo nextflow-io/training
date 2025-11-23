@@ -8,7 +8,7 @@ params.greeting = 'greetings.csv'
 
 workflow {
     // create a channel for inputs from a CSV file
-    greeting_ch = Channel.fromPath(params.greeting)
+    greeting_ch = channel.fromPath(params.greeting)
                         .splitCsv()
                         .map { line -> line[0] }
 
@@ -16,5 +16,5 @@ workflow {
     HELLO(greeting_ch)
 
     // view the outputs emitted by the workflow
-    HELLO.out.view { "Outputs: $it" }
+    HELLO.out.view { output -> "Output: $output" }
 }

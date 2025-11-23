@@ -76,7 +76,7 @@ process handleFiles {
 workflow {
 
     // Channel with incorrect usage
-    input_ch = Channel
+    input_ch = channel
         .fromPath(params.input)
         .splitCsv(header: true)
         .map { row -> row.sample_id }
@@ -85,6 +85,6 @@ workflow {
 
     heavy_ch = heavyProcess(sample_ids)
 
-    file_ch = Channel.fromPath("*.txt")
+    file_ch = channel.fromPath("*.txt")
     handleFiles(file_ch)
 }

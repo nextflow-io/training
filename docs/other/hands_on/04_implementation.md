@@ -105,7 +105,7 @@ Launching `main.nf` [elated_davinci] DSL2 - revision: 5187dd3166
 
         ```groovy linenums="1" hl_lines="2"
         workflow {
-            reads_ch = Channel.fromFilePairs(params.reads) // (1)!
+            reads_ch = channel.fromFilePairs(params.reads) // (1)!
         }
         ```
 
@@ -149,7 +149,7 @@ The first process has the following structure:
     }
 
     workflow {
-        reads_ch = Channel.fromFilePairs(params.reads)
+        reads_ch = channel.fromFilePairs(params.reads)
 
         BLANK
     }
@@ -188,7 +188,7 @@ The first process has the following structure:
         }
 
         workflow {
-            reads_ch = Channel.fromFilePairs(params.reads)
+            reads_ch = channel.fromFilePairs(params.reads)
 
             prepare_genome_samtools(params.genome) // (1)!
         }
@@ -254,7 +254,7 @@ The next process should have the following structure:
     }
 
     workflow {
-        reads_ch = Channel.fromFilePairs(params.reads)
+        reads_ch = channel.fromFilePairs(params.reads)
 
         prepare_genome_samtools(params.genome)
         BLANK
@@ -288,7 +288,7 @@ The next process should have the following structure:
         }
 
         workflow {
-            reads_ch = Channel.fromFilePairs(params.reads)
+            reads_ch = channel.fromFilePairs(params.reads)
 
             prepare_genome_samtools(params.genome)
             prepare_genome_picard(params.genome) // (1)!
@@ -338,7 +338,7 @@ The next process has the following structure:
     }
 
     workflow {
-        reads_ch = Channel.fromFilePairs(params.reads)
+        reads_ch = channel.fromFilePairs(params.reads)
 
         prepare_genome_samtools(params.genome)
         prepare_genome_picard(params.genome)
@@ -381,7 +381,7 @@ The next process has the following structure:
         }
 
         workflow {
-            reads_ch = Channel.fromFilePairs(params.reads)
+            reads_ch = channel.fromFilePairs(params.reads)
 
             prepare_genome_samtools(params.genome)
             prepare_genome_picard(params.genome)
@@ -442,7 +442,7 @@ The next process has the following structure:
     }
 
     workflow {
-        reads_ch = Channel.fromFilePairs(params.reads)
+        reads_ch = channel.fromFilePairs(params.reads)
 
         prepare_genome_samtools(params.genome)
         prepare_genome_picard(params.genome)
@@ -499,7 +499,7 @@ The next process has the following structure:
         }
 
         workflow {
-            reads_ch = Channel.fromFilePairs(params.reads)
+            reads_ch = channel.fromFilePairs(params.reads)
 
             prepare_genome_samtools(params.genome)
             prepare_genome_picard(params.genome)
@@ -592,7 +592,7 @@ The process has the following structure:
     }
 
     workflow {
-        reads_ch = Channel.fromFilePairs(params.reads)
+        reads_ch = channel.fromFilePairs(params.reads)
 
         prepare_genome_samtools(params.genome)
         prepare_genome_picard(params.genome)
@@ -704,7 +704,7 @@ The process has the following structure:
         }
 
         workflow {
-            reads_ch = Channel.fromFilePairs(params.reads)
+            reads_ch = channel.fromFilePairs(params.reads)
 
             prepare_genome_samtools(params.genome)
             prepare_genome_picard(params.genome)
@@ -776,7 +776,7 @@ The next process has the following structure:
     }
 
     workflow {
-        reads_ch = Channel.fromFilePairs(params.reads)
+        reads_ch = channel.fromFilePairs(params.reads)
 
         prepare_genome_samtools(params.genome)
         prepare_genome_picard(params.genome)
@@ -859,7 +859,7 @@ The next process has the following structure:
         }
 
         workflow {
-            reads_ch = Channel.fromFilePairs(params.reads)
+            reads_ch = channel.fromFilePairs(params.reads)
 
             prepare_genome_samtools(params.genome)
             prepare_genome_picard(params.genome)
@@ -952,7 +952,7 @@ The next process has the following structure:
     }
 
     workflow {
-        reads_ch = Channel.fromFilePairs(params.reads)
+        reads_ch = channel.fromFilePairs(params.reads)
 
         prepare_genome_samtools(params.genome)
         prepare_genome_picard(params.genome)
@@ -1062,7 +1062,7 @@ The next process has the following structure:
         }
 
         workflow {
-            reads_ch = Channel.fromFilePairs(params.reads)
+            reads_ch = channel.fromFilePairs(params.reads)
 
             prepare_genome_samtools(params.genome)
             prepare_genome_picard(params.genome)
@@ -1151,7 +1151,7 @@ The next process has the following structure:
     }
 
     workflow {
-        reads_ch = Channel.fromFilePairs(params.reads)
+        reads_ch = channel.fromFilePairs(params.reads)
 
         prepare_genome_samtools(params.genome)
         prepare_genome_picard(params.genome)
@@ -1247,7 +1247,7 @@ The next process has the following structure:
         }
 
         workflow {
-            reads_ch = Channel.fromFilePairs(params.reads)
+            reads_ch = channel.fromFilePairs(params.reads)
 
             prepare_genome_samtools(params.genome)
             prepare_genome_picard(params.genome)
@@ -1376,7 +1376,7 @@ You should implement two processes having the following structure:
     }
 
     workflow {
-        reads_ch = Channel.fromFilePairs(params.reads)
+        reads_ch = channel.fromFilePairs(params.reads)
 
         prepare_genome_samtools(params.genome)
         prepare_genome_picard(params.genome)
@@ -1481,7 +1481,7 @@ You should implement two processes having the following structure:
         }
 
         workflow {
-            reads_ch = Channel.fromFilePairs(params.reads)
+            reads_ch = channel.fromFilePairs(params.reads)
 
             prepare_genome_samtools(params.genome)
             prepare_genome_picard(params.genome)
@@ -1566,7 +1566,7 @@ The final step is the GATK ASEReadCounter.
 
         ```groovy linenums="1" hl_lines="38-41"
         workflow {
-            reads_ch = Channel.fromFilePairs(params.reads)
+            reads_ch = channel.fromFilePairs(params.reads)
 
             prepare_genome_samtools(params.genome)
             prepare_genome_picard(params.genome)
@@ -1672,7 +1672,7 @@ The next process has the following structure:
         }
 
         workflow {
-            reads_ch = Channel.fromFilePairs(params.reads)
+            reads_ch = channel.fromFilePairs(params.reads)
 
             prepare_genome_samtools(params.genome)
             prepare_genome_picard(params.genome)

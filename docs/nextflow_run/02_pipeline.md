@@ -220,7 +220,7 @@ process sayHello {
 workflow {
 
     // create a channel for inputs from a CSV file
-    greeting_ch = Channel.fromPath(params.input)
+    greeting_ch = channel.fromPath(params.input)
                         .splitCsv()
                         .map { line -> line[0] }
 
@@ -243,7 +243,7 @@ Let's break it down.
 workflow {
 
     // create a channel for inputs from a CSV file
-    greeting_ch = Channel.fromPath(params.input)
+    greeting_ch = channel.fromPath(params.input)
                         .splitCsv()
                         .map { line -> line[0] }
 ```
@@ -479,7 +479,7 @@ process collectGreetings {
 workflow {
 
     // create a channel for inputs from a CSV file
-    greeting_ch = Channel.fromPath(params.input)
+    greeting_ch = channel.fromPath(params.input)
                         .splitCsv()
                         .map { line -> line[0] }
 
@@ -517,7 +517,7 @@ The really interesting thing to look at here is how the process calls are chaine
 workflow {
 
     // create a channel for inputs from a CSV file
-    greeting_ch = Channel.fromPath(params.input)
+    greeting_ch = channel.fromPath(params.input)
                         .splitCsv()
                         .map { line -> line[0] }
 
@@ -959,7 +959,7 @@ include { cowpy } from './modules/cowpy.nf'
 workflow {
 
     // create a channel for inputs from a CSV file
-    greeting_ch = Channel.fromPath(params.input)
+    greeting_ch = channel.fromPath(params.input)
                         .splitCsv()
                         .map { line -> line[0] }
 

@@ -97,7 +97,7 @@ process convertToUpper {
 workflow {
 
     // create a channel for inputs from a CSV file
-    greeting_ch = Channel.fromPath(params.input_file).splitCsv().flatten()
+    greeting_ch = channel.fromPath(params.input_file).splitCsv().flatten()
 
     // emit a greeting
     sayHello(greeting_ch)
@@ -169,7 +169,7 @@ Project configured. Configuration is stored in nf-test.config
 
 It also creates a `tests` directory containing a configuration file stub.
 
-## 1.1. Generate an nf-test
+### 1.1. Generate an nf-test
 
 `nf-test` comes with a set of tools for building nf-test files, saving us the majority of the work. These come under the subcommand `generate`. Let's generate a test for the pipeline:
 
@@ -254,7 +254,7 @@ Good test names should:
 
 As we add more assertions and specific test cases later, we'll use these more descriptive names to make it clear what each test is verifying.
 
-## 1.2. Run the test
+### 1.2. Run the test
 
 Let's run the test to see what happens.
 
@@ -400,7 +400,7 @@ Test Workflow main.nf
 SUCCESS: Executed 1 tests in 5.239s
 ```
 
-## 1.3. Add assertions
+### 1.3. Add assertions
 
 A simple check is to ensure our pipeline is running all the processes we expect and not skipping any silently. Remember our pipeline runs 6 processes, one called `sayHello` and one called `convertToUpper` for each of the 3 greetings.
 
@@ -467,7 +467,7 @@ SUCCESS: Executed 1 tests in 1.588s
 
 Success! The pipeline runs successfully and the test passes. Now we have began to test the details of the pipeline, as well as the overall status.
 
-## 1.4. Test the output
+### 1.4. Test the output
 
 Let's add an assertion to our test to check the output file was created. We'll add it as a separate test, with an informative name, to make the results easier to interpret.
 
@@ -793,7 +793,7 @@ SUCCESS: Executed 1 tests in 1.685s
 
 Success! The test passes because the `sayHello` process ran successfully and the output matched the snapshot.
 
-### 2.3 Alternative to Snapshots: Direct Content Assertions
+### 2.3. Alternative to Snapshots: Direct Content Assertions
 
 While snapshots are great for catching any changes in output, sometimes you want to verify specific content without being so strict about the entire file matching. For example:
 

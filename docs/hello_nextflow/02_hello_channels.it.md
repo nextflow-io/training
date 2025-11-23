@@ -62,16 +62,16 @@ Creeremo un **canale** per passare l'input variabile al processo `sayHello()` in
 ### 1.1. Crea un canale di input
 
 Ci sono una varietà di **fabbriche di canali** che possiamo utilizzare per creare un canale.
-Per mantenere le cose semplici per ora, useremo la fabbrica di canale più semplice, chiamata `Channel.of`, che creerà un canale contenente un singolo valore.
+Per mantenere le cose semplici per ora, useremo la fabbrica di canale più semplice, chiamata `channel.of`, che creerà un canale contenente un singolo valore.
 Funzionalmente questo sarà simile a come lo avevamo impostato prima, ma invece di avere Nextflow a creare implicitamente un canale, lo stiamo facendo esplicitamente ora.
 
 Questa è la riga di codice che useremo:
 
 ```console title="Syntax"
-greeting_ch = Channel.of('Hello Channels!')
+greeting_ch = channel.of('Hello Channels!')
 ```
 
-Questo crea un canale chiamato `greeting_ch` usando la fabbrica del canale `Channel.of()`, che imposta un semplice canale di coda e carica la stringa `'Hello Channels!' ` da usare come valore di saluto.
+Questo crea un canale chiamato `greeting_ch` usando la fabbrica del canale `channel.of()`, che imposta un semplice canale di coda e carica la stringa `'Hello Channels!' ` da usare come valore di saluto.
 
 !!! note
 
@@ -85,7 +85,7 @@ Nel blocco del workflow, aggiungi il codice di fabbrica del canale:
     workflow {
 
         // create a channel for inputs
-        greeting_ch = Channel.of('Hello Channels!')
+        greeting_ch = channel.of('Hello Channels!')
 
         // emit a greeting
         sayHello(params.greeting)
@@ -116,7 +116,7 @@ Nel blocco del workflow, apportare la seguente modifica del codice:
     workflow {
 
         // create a channel for inputs
-        greeting_ch = Channel.of('Hello Channels!')
+        greeting_ch = channel.of('Hello Channels!')
 
         // emit a greeting
         sayHello(greeting_ch)
@@ -129,7 +129,7 @@ Nel blocco del workflow, apportare la seguente modifica del codice:
     workflow {
 
         // create a channel for inputs
-        greeting_ch = Channel.of('Hello Channels!')
+        greeting_ch = channel.of('Hello Channels!')
 
         // emit a greeting
         sayHello(params.greeting)
@@ -187,7 +187,7 @@ I workflows in genere vengono eseguiti su lotti di input che devono essere elabo
 
 ### 2.1. Carica più saluti nel canale di input
 
-Convenientemente, la fabbrica di canali `Channel.of()` che abbiamo utilizzato è abbastanza felice di accettare più di un valore, quindi non abbiamo affatto bisogno di modificarlo.
+Convenientemente, la fabbrica di canali `channel.of()` che abbiamo utilizzato è abbastanza felice di accettare più di un valore, quindi non abbiamo affatto bisogno di modificarlo.
 
 Dobbiamo solo caricare più valori nel canale.
 
@@ -199,14 +199,14 @@ Nel blocco del workflow, apportare la seguente modifica del codice:
 
     ```groovy title="hello-channels.nf" linenums="29" hl_lines="2"
     // create a channel for inputs
-    greeting_ch = Channel.of('Hello','Bonjour','Holà')
+    greeting_ch = channel.of('Hello','Bonjour','Holà')
     ```
 
 === "Prima"
 
     ```groovy title="hello-channels.nf" linenums="29"
     // create a channel for inputs
-    greeting_ch = Channel.of('Hello Channels')
+    greeting_ch = channel.of('Hello Channels')
     ```
 
 La documentazione ci dice che questo dovrebbe funzionare. Può davvero essere così semplice?
@@ -438,7 +438,7 @@ Prendiamo la variabile `greetings_array` che abbiamo appena immaginato e rendiam
         greetings_array = ['Hello','Bonjour','Holà']
 
         // create a channel for inputs
-        greeting_ch = Channel.of('Hello','Bonjour','Holà')
+        greeting_ch = channel.of('Hello','Bonjour','Holà')
     ```
 
 === "Prima"
@@ -447,7 +447,7 @@ Prendiamo la variabile `greetings_array` che abbiamo appena immaginato e rendiam
     workflow {
 
         // create a channel for inputs
-        greeting_ch = Channel.of('Hello','Bonjour','Holà')
+        greeting_ch = channel.of('Hello','Bonjour','Holà')
     ```
 
 #### 3.1.2. Imposta l'array di saluti come input alla fabbrica del canale
@@ -460,14 +460,14 @@ Nel blocco del workflow, apportare la seguente modifica:
 
     ```groovy title="hello-channels.nf" linenums="32" hl_lines="2"
         // create a channel for inputs
-        greeting_ch = Channel.of(greetings_array)
+        greeting_ch = channel.of(greetings_array)
     ```
 
 === "Prima"
 
     ```groovy title="hello-channels.nf" linenums="32"
         // create a channel for inputs
-        greeting_ch = Channel.of('Hello','Bonjour','Holà')
+        greeting_ch = channel.of('Hello','Bonjour','Holà')
     ```
 
 #### 3.1.3. Esegui il workflow
@@ -505,7 +505,7 @@ Se sfogli [elenco di operatori](https://www.nextflow.io/docs/latest/reference/op
 
 !!! note
 
-    È tecnicamente possibile ottenere gli stessi risultati utilizzando una fabbrica di canali diversa, [`Channel.fromList`](https://nextflow.io/docs/latest/reference/channel.html#fromlist), che include una fase di mappatura implicita nella sua operazione.
+    È tecnicamente possibile ottenere gli stessi risultati utilizzando una fabbrica di canali diversa, [`channel.fromList`](https://nextflow.io/docs/latest/reference/channel.html#fromlist), che include una fase di mappatura implicita nella sua operazione.
     Qui abbiamo scelto di non usarlo per dimostrare l'uso di un operatore su un caso d'uso abbastanza semplice.
 
 #### 3.2.1. Aggiungi l'operatore `flatten()`
@@ -518,7 +518,7 @@ Nel blocco del workflow, apportare la seguente modifica del codice:
 
     ```groovy title="hello-channels.nf" linenums="31" hl_lines="3"
         // create a channel for inputs
-        greeting_ch = Channel.of(greetings_array)
+        greeting_ch = channel.of(greetings_array)
                              .flatten()
     ```
 
@@ -526,11 +526,11 @@ Nel blocco del workflow, apportare la seguente modifica del codice:
 
     ```groovy title="hello-channels.nf" linenums="31"
         // create a channel for inputs
-        greeting_ch = Channel.of(greetings_array)
+        greeting_ch = channel.of(greetings_array)
 
     ```
 
-Qui abbiamo aggiunto l'operatore sulla riga successiva per la leggibilità, ma puoi aggiungere operatori sulla stessa riga della fabbrica del canale se preferisci, come questo: `greeting_ch = Channel.of(greetings_array).flatten()`
+Qui abbiamo aggiunto l'operatore sulla riga successiva per la leggibilità, ma puoi aggiungere operatori sulla stessa riga della fabbrica del canale se preferisci, come questo: `greeting_ch = channel.of(greetings_array).flatten()`
 
 #### 3.2.2. Aggiungi `view()` per ispezionare i contenuti del canale
 
@@ -543,7 +543,7 @@ Nel blocco del workflow, apportare la seguente modifica del codice:
 
     ```groovy title="hello-channels.nf" linenums="31" hl_lines="3-5"
         // create a channel for inputs
-        greeting_ch = Channel.of(greetings_array)
+        greeting_ch = channel.of(greetings_array)
                              .view { greeting -> "Before flatten: $greeting" }
                              .flatten()
                              .view { greeting -> "After flatten: $greeting" }
@@ -553,7 +553,7 @@ Nel blocco del workflow, apportare la seguente modifica del codice:
 
     ```groovy title="hello-channels.nf" linenums="31"
         // create a channel for inputs
-        greeting_ch = Channel.of(greetings_array)
+        greeting_ch = channel.of(greetings_array)
                              .flatten()
     ```
 
@@ -606,7 +606,7 @@ Quindi otteniamo tre istruzioni separate `Dopo appiattire:`, una per ogni saluto
 
     ```groovy title="hello-channels.nf" linenums="31"
     // crea un canale per gli input
-    greeting_ch = Channel.of(greetings_array)
+    greeting_ch = channel.of(greetings_array)
                          .flatten()
     ```
 
@@ -669,8 +669,8 @@ Nel blocco del workflow, apportare la seguente modifica del codice:
 
 #### 4.1.2. Passa a una fabbrica di canali progettata per gestire un file
 
-Dal momento che ora vogliamo usare un file invece di semplici stringhe come input, non possiamo usare la fabbrica di canali `Channel.of()` di prima.
-Dobbiamo passare all'utilizzo di una nuova fabbrica di canali, [`Channel.fromPath()`](https://www.nextflow.io/docs/latest/reference/channel.html#channel-path), che ha alcune funzionalità integrate per la gestione dei percorsi dei file.
+Dal momento che ora vogliamo usare un file invece di semplici stringhe come input, non possiamo usare la fabbrica di canali `channel.of()` di prima.
+Dobbiamo passare all'utilizzo di una nuova fabbrica di canali, [`channel.fromPath()`](https://www.nextflow.io/docs/latest/reference/channel.html#channel-path), che ha alcune funzionalità integrate per la gestione dei percorsi dei file.
 
 Nel blocco del flusso di lavoro, apportare la seguente modifica del codice:
 
@@ -678,7 +678,7 @@ Nel blocco del flusso di lavoro, apportare la seguente modifica del codice:
 
     ```groovy title="hello-channels.nf" linenums="31" hl_lines="1 2"
         // create a channel for inputs from a CSV file
-        greeting_ch = Channel.fromPath(params.greeting)
+        greeting_ch = channel.fromPath(params.greeting)
 
     ```
 
@@ -686,7 +686,7 @@ Nel blocco del flusso di lavoro, apportare la seguente modifica del codice:
 
     ```groovy title="hello-channels.nf" linenums="31"
         // create a channel for inputs
-        greeting_ch = Channel.of(greetings_array)
+        greeting_ch = channel.of(greetings_array)
                              .flatten()
     ```
 
@@ -741,7 +741,7 @@ Nel blocco del workflow, apportare la seguente modifica del codice:
 
     ```groovy title="hello-channels.nf" linenums="31" hl_lines="3-5"
     // create a channel for inputs from a CSV file
-    greeting_ch = Channel.fromPath(params.greeting)
+    greeting_ch = channel.fromPath(params.greeting)
                          .view { csv -> "Before splitCsv: $csv" }
                          .splitCsv()
                          .view { csv -> "After splitCsv: $csv" }
@@ -751,7 +751,7 @@ Nel blocco del workflow, apportare la seguente modifica del codice:
 
     ```groovy title="hello-channels.nf" linenums="31"
     // create a channel for inputs from a CSV file
-    greeting_ch = Channel.fromPath(params.greeting)
+    greeting_ch = channel.fromPath(params.greeting)
 
     ```
 
@@ -824,7 +824,7 @@ Nel blocco del workflow, apportare la seguente modifica del codice:
 
     ```groovy title="hello-channels.nf" linenums="31" hl_lines="6-8"
     // create a channel for inputs from a CSV file
-    greeting_ch = Channel.fromPath(params.greeting)
+    greeting_ch = channel.fromPath(params.greeting)
                          .view { csv -> "Before splitCsv: $csv" }
                          .splitCsv()
                          .view { csv -> "After splitCsv: $csv" }
@@ -836,7 +836,7 @@ Nel blocco del workflow, apportare la seguente modifica del codice:
 
     ```groovy title="hello-channels.nf" linenums="31"
     // create a channel for inputs from a CSV file
-    greeting_ch = Channel.fromPath(params.greeting)
+    greeting_ch = channel.fromPath(params.greeting)
                          .view { csv -> "Before splitCsv: $csv" }
                          .splitCsv()
                          .view { csv -> "After splitCsv: $csv" }

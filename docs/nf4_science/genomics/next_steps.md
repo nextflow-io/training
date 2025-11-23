@@ -16,7 +16,7 @@ If you don't see your domain represented by a relatable use case, let us know in
 
 ### 1.2. Get started with nf-core
 
-**[nf-core](https://nf-co.re/)** is a worldwide collaborative effort to develop standardized open-source pipelines for a wide range of scientific research applications.\*\*
+**[nf-core](https://nf-co.re/)** is a worldwide collaborative effort to develop standardized open-source pipelines for a wide range of scientific research applications.
 The project includes [over 100 pipelines](https://nf-co.re/pipelines/) that are available for use out of the box and [well over 1400 process modules](https://nf-co.re/modules/) that can be integrated into your own projects, as well as a rich set of developer tools.
 
 The **[Hello nf-core](../../hello_nf-core/index.md)** training course will introduce you to the nf-core community-curated pipelines and development framework, designed to help you write reproducible, scalable, and standardized workflows. You’ll learn how to use existing nf-core pipelines, contribute to their development, and even start building your own, supported by best practices and a vibrant community. If you’re ready to apply your Nextflow skills in real-world projects, this is the perfect next step.
@@ -26,7 +26,7 @@ The **[Hello nf-core](../../hello_nf-core/index.md)** training course will intro
 In the Hello courses, we keep the level of technical complexity low on purpose to avoid overloading you with information you don't need in order to get started with Nextflow.
 As you move forward with your work, you're going to want to learn how to use the full feature set and power of Nextflow.
 
-To that end, we are currently working on a **collection of [Side Quests](../side_quests/index.md)**, which are meant to be short standalone courses that go deep into specific topics like testing, metadata handling, using conditional statements and the differences between working on HPC _vs._ cloud.
+To that end, we are currently working on a **collection of [Side Quests](../side_quests/index.md)**, which are meant to be short standalone courses that go deep into specific topics like testing and metadata handling.
 
 For any topics that's not covered there yet, **browse the [Fundamentals Training](../basic_training/index.md) and [Advanced Training](../advanced/index.md)** to find training materials about the topics that interest you.
 
@@ -39,7 +39,7 @@ For any topics that's not covered there yet, **browse the [Fundamentals Training
 It is a cloud-based platform developed by the creators of Nextflow that you can connect to your own compute infrastructure (whether local, HPC or cloud) to make it much easier to launch and manage your workflows, as well as manage your data and run analyses interactively in a cloud environment.
 
 The Free Tier is available for free use by everyone (with usage quotas).
-Qualifying academics can get free Pro-level access (no usage limitations) through the [Academic Program](https://seqera.typeform.com/to/SRB8Ci3n).
+Qualifying academics can get free Pro-level access (no usage limitations) through the [Academic Program](https://seqera.io/academic/program/).
 
 Have a look at the [Seqera Platform tutorials](https://docs.seqera.io/platform/latest/getting-started/quickstart-demo/comm-showcase) to see if this might be useful to you.
 

@@ -31,9 +31,9 @@ nextflow run hello-gatk.nf
 
     In this example, the `GATK_HAPLOTYPECALLER` process is only executing one task.
 
-    You can see that the channel factory `Channel.of` has been used.
+    You can see that the channel factory `channel.of` has been used.
 
-    While parameters are treated as value channels, the `Channel.of` channel factory has converted these inputs to `queue` channels and are only being read once.
+    While parameters are treated as value channels, the `channel.of` channel factory has converted these inputs to `queue` channels and are only being read once.
 
     By removing these the inputs will be read multiple times.
 
@@ -41,10 +41,10 @@ nextflow run hello-gatk.nf
     ```console title="hello-gatk.nf" linenums="111"
     GATK_HAPLOTYPECALLER(
         SAMTOOLS_INDEX.out,
-        Channel.of(params.genome_reference),
-        Channel.of(params.genome_reference_index),
-        Channel.of(params.genome_reference_dict),
-        Channel.of(params.calling_intervals)
+        channel.of(params.genome_reference),
+        channel.of(params.genome_reference_index),
+        channel.of(params.genome_reference_dict),
+        channel.of(params.calling_intervals)
     )
     ```
 

@@ -27,7 +27,7 @@ params.greeting = 'Holà mundo!'
 workflow {
 
     // create a channel for inputs
-    greeting_ch = Channel.of('Hello','Bonjour','Holà')
+    greeting_ch = channel.of('Hello','Bonjour','Holà')
 
     // emit a greeting
     sayHello(greeting_ch)
