@@ -102,7 +102,7 @@ This should work without error.
   <summary>Command output</summary>
 
 ```console title="Output"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.04.6
 
 Launching `3-main.nf` [trusting_lovelace] DSL2 - revision: 028a841db1
 
@@ -441,7 +441,7 @@ This will produce the same output, but is more convenient to type, especially wh
   <summary>Command output</summary>
 
 ```console linenums="1"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.04.6
 
 Launching `3-main.nf` [wise_mahavira] DSL2 - revision: 356df0818d
 
@@ -533,7 +533,7 @@ This will create a new set of directories under `tux-run/` including `tux-run/wo
   <summary>Command output</summary>
 
 ```console linenums="1"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.04.6
 
 Launching `../3-main.nf` [trusting_escher] DSL2 - revision: 356df0818d
 
@@ -612,7 +612,7 @@ This should run without error.
   <summary>Command output</summary>
 
 ```console title="Output"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.04.6
 
 Launching `3-main.nf` [disturbed_sammet] DSL2 - revision: ede9037d02
 
@@ -719,7 +719,7 @@ This should run without error and produce the same results as previously.
   <summary>Command output</summary>
 
 ```console
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.04.6
 
 Launching `3-main.nf` [gigantic_brazil] DSL2 - revision: ede9037d02
 
@@ -804,7 +804,7 @@ This should run without error.
   <summary>Command output</summary>
 
 ```console
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.04.6
 
 Launching `3-main.nf` [gigantic_brazil] DSL2 - revision: ede9037d02
 
