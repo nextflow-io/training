@@ -64,6 +64,18 @@ These are foundational, domain-agnostic courses intended for those who are compl
 
     [Start the Nextflow Run training :material-arrow-right:](nextflow_run/index.md){ .md-button .md-button--primary }
 
+!!! exercise "Small Nextflow"
+
+    !!! tip inline end ""
+
+        :material-cat:{.nextflow-primary} Build a complete workflow from scratch.
+
+    This is a hands-on workshop where you build a real-world image classification workflow from the ground up. You'll learn Nextflow fundamentals by creating channels, defining processes, working with operators, and making your workflow reproducible and portable. Perfect for learners who prefer building something concrete while learning core concepts.
+
+    The course is calibrated to take a half day to cover in group trainings.
+
+    [Start the Small Nextflow workshop :material-arrow-right:](small_nextflow/index.md){ .md-button .md-button--primary }
+
 !!! exercise "Hello nf-core"
 
     !!! tip inline end ""
