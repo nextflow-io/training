@@ -18,7 +18,7 @@ You can think of this as a sort of "integrated _for_ loop" that will process all
 
 To achieve this purpose, there are two possibilities:
 
-- The use of wildcards in the input (this can be tricky and requires to take into account particular folder structures).
+- The use of wildcards in the input (this can be tricky and requires taking into account particular folder structures).
 - Create a file that points out to the sample files regardless of their location in the file system.
 
 In this course, we will target the second input option, but you are welcome to explore how you can use the first option by checking out the [Nextflow documentation](https://www.nextflow.io/docs/latest/working-with-files.html).
@@ -61,7 +61,7 @@ This modified declaration states that if we use the parameter `--reads` when we 
 Otherwise, we must include the parameter `--sheet_csv` with the corresponding file containing the sample information.
 
 Being so, it is necessary to use one of the two forms of input; if we use both at the same time, the `--reads` will predominate or if none of them is indicated, the pipeline will fail.
-Do not worry now for the way in which channel is created using the `.csv` file, this declaration is quite stantard and you can just copy and paste for other pipelines in which you would like to use it; however, you can learn more about this [here](https://nextflow-io.github.io/patterns/process-per-csv-record/).
+Do not worry now for the way in which channel is created using the `.csv` file, this declaration is quite standard and you can just copy and paste for other pipelines in which you would like to use it; however, you can learn more about this [here](https://nextflow-io.github.io/patterns/process-per-csv-record/).
 
 Now, we would be ready to re-run the pipeline to process all the samples in a single call.
 Notwithstanding, the inclusion of additional samples has the advantage that we can expand the analysis to estimate β-diversity and compare them to extract important insights.
@@ -118,8 +118,8 @@ include { KRAKEN_BIOM               }   from './modules/kraken_biom.nf'
 		}
 ```
 
-Here, you can see that we have added the operator _collect()_ to capture all the output files from `BRACKEN`, and this is happening only if we are using as input `--sheet_csv`.
-This operator is going to return a list of the elements specified in the output of the process (`BRACKEN`), and, for instance, we are interested in each "second" (indices 1,4,7...) element of the list to run the _kraken-biom_ command; this is the reason why within the `script` statement in `kraken_biom.nf` we have incluced two codelines to obtain the paths to these files.
+Here, you can see that we have added the operator _collect()_ to capture all the output files from `BRACKEN`, and this is happening only if we are using `--sheet_csv` as input.
+This operator is going to return a list of the elements specified in the output of the process (`BRACKEN`), and, for instance, we are interested in each "second" (indices 1,4,7...) element of the list to run the _kraken-biom_ command; this is the reason why within the `script` statement in `kraken_biom.nf` we have included two codelines to obtain the paths to these files.
 If this is not entirely clear, please check the [Nextflow documentation](https://www.nextflow.io/docs/latest/reference/operator.html#collect).
 
 ### 2.2. Phyloseq
@@ -127,8 +127,8 @@ If this is not entirely clear, please check the [Nextflow documentation](https:/
 #### 2.2.1. Including a customized script
 
 We are at the last step of the pipeline execution, and now we need to process the `*.biom` file by transforming it into a Phyloseq object, which is easier to use, more intuitive to understand, and is equipped with multiple tools and methods to plot.
-Another amazing feature by Nextflow is the possibility to run the so-called _Scripts à la carte_, which means that a process does not necessarily requires an external tool to execute, and hence you can develop your own analysis with customized scripts, i.e., R or Python.
-Here, we will run an R script inside the module `knit_phyloseq.nf` to create and process the Phyloseq object taking as input the ouput from `kraken_biom.nf`:
+Another amazing feature by Nextflow is the possibility to run the so-called _Scripts à la carte_, which means that a process does not necessarily require an external tool to execute, and hence you can develop your own analysis with customized scripts, i.e., R or Python.
+Here, we will run an R script inside the module `knit_phyloseq.nf` to create and process the Phyloseq object taking as input the output from `kraken_biom.nf`:
 
 ```groovy title="modules/kraken_biom.nf" linenums="1"
 process KNIT_PHYLOSEQ {
@@ -153,10 +153,10 @@ process KNIT_PHYLOSEQ {
 }
 ```
 
-As you can see, we are declaring some variables both in Nextflow and bash to able to call the script.
+As you can see, we are declaring some variables both in Nextflow and bash to be able to call the script.
 This is a special case since this type of scripts can be stored in the **bin** directory for Nextflow to find them directly.
-Nevertheless, as we are not "running the script" directly but we are calling `Rscript` to render a final `*.html` report, Nextflow is not able to automatically find the customized script nor detect when report is rendered.
-As a result the ouput from this process is just a standard/command-line ouput, and we have to include an additional parameter in the `nextflow.config` file:
+Nevertheless, as we are not "running the script" directly but we are calling `Rscript` to render a final `*.html` report, Nextflow is not able to automatically find the customized script nor detect when the report is rendered.
+As a result the output from this process is just a standard/command-line output, and we have to include an additional parameter in the `nextflow.config` file:
 
 ```groovy title="nextflow.config" linenums="11"
     report                             = "/workspaces/training/nf4-science/metagenomics/bin/report.Rmd"
@@ -217,7 +217,7 @@ executor >  local (22)
 ```
 
 Keep in mind that since the execution is in parallel, the order in which the samples are processed is random and the order in which `sample ids` appear will differ among executions.
-Also, during while the pipeline is running you will see that `KRAKEN_BIOM`, and hence `KNIT_PHYLOSEQ`, will not be triggered until all the samples are processed by the previous processes.
+Also, while the pipeline is running you will see that `KRAKEN_BIOM`, and hence `KNIT_PHYLOSEQ`, will not be triggered until all the samples are processed by the previous processes.
 
 Finally, inside the **output** directory, you will see multiple folders with the exact `sample ids`, and within these all the output files, including the files to visualize the Krona plots.
 Likewise, in the **output** folder you will see the file `report.html` which is ready to be opened and explored. It's your time to analyze it!
@@ -226,7 +226,7 @@ Likewise, in the **output** folder you will see the file `report.html` which is 
 
 ### Takeaway
 
-You just learnt how control workflow execution by including conditionals and operators, process multiple samples simultaneously and running a customized script to perform a metagenomics data analysis at read level.
+You just learnt how to control workflow execution by including conditionals and operators, processing multiple samples simultaneously and running a customized script to perform a metagenomics data analysis at read level.
 
 ### What's next?
 
