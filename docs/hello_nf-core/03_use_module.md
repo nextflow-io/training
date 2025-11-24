@@ -156,7 +156,8 @@ cd core-hello
 nf-core modules install cat/cat
 ```
 
-The tool will first prompt you to specify a repository type.
+The tool may first prompt you to specify a repository type.
+(If not, skip down to "Finally, the tool will proceed to install the module.")
 
 ??? example "Output"
 
@@ -177,7 +178,7 @@ The tool will first prompt you to specify a repository type.
       Modules repository
     ```
 
-Press enter to accept the default response (`Pipeline`) and continue.
+If so, press enter to accept the default response (`Pipeline`) and continue.
 
 The tool will then offer to amend the configuration of your project to avoid this prompt in the future.
 
