@@ -465,8 +465,10 @@ Feel free to explore each of the files to understand each process and how data w
 The file we are most interested in is the `*.html` file containing the Krona plot.
 You can either download it and open it in your browser, or install the [preview](https://marketplace.visualstudio.com/items?itemName=ms-vscode.live-server) extension for Visual Studio.
 
-Keep in mind that we used the viral database, so you will only see information about the viruses contained in the sample.
-To perform the analysis with bacteria and beyond you have to download a different database or build your own.
+!!!note
+
+    Keep in mind that we used the viral database **(only for an educational purpose)**, so you will see information about the viruses contained in the sample.
+    To perform the analysis with bacteria and beyond you have to download a different database from [here](https://benlangmead.github.io/aws-indexes/k2) or build your own.
 
 ---
 
