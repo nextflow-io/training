@@ -630,4 +630,4 @@ Take a break! That was a lot. When you're feeling refreshed and ready, move on t
 
 !!! tip
 
-    If you would like to learn how to compose workflows with subworkflows before moving on to the next part, check out the [Workflows of Workflows](../side_quests/workflows_of_workflows/) Side Quest.
+    If you would like to learn how to compose workflows with subworkflows before moving on to the next part, check out the [Workflows of Workflows](../side_quests/workflows_of_workflows.md) Side Quest.

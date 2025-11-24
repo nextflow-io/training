@@ -288,7 +288,7 @@ These are optional features of Nextflow that make the workflow **composable**, m
 
 !!! note "Composable workflows in depth"
 
-    The [Workflows of Workflows](../side_quests/workflows_of_workflows/) Side Quest explores workflow composition in much greater depth, including how to compose multiple workflows together and manage complex data flows between them. We're introducing composability here because it's a fundamental requirement of the nf-core template architecture, which uses nested workflows to organize pipeline initialization, the main analysis workflow, and completion tasks into separate, reusable components.
+    The [Workflows of Workflows](../side_quests/workflows_of_workflows.md) Side Quest explores workflow composition in much greater depth, including how to compose multiple workflows together and manage complex data flows between them. We're introducing composability here because it's a fundamental requirement of the nf-core template architecture, which uses nested workflows to organize pipeline initialization, the main analysis workflow, and completion tasks into separate, reusable components.
 
 We are going to need to plug the relevant logic from our workflow of interest into that structure.
 The first step for that is to make our original workflow composable.
