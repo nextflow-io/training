@@ -75,7 +75,7 @@ nf-core modules list remote | grep 'cat/cat'
 ```
 
 ```console title="Output"
-cat/cat
+│ cat/cat
 ```
 
 Just keep in mind the that `grep` approach will only pull out results with the search term in their name, which would not work for `cat_cat`.
