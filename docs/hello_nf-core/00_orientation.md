@@ -75,9 +75,10 @@ If you run this inside `hello-nf-core`, you should see the following output.
         ├── core-hello-part2
         ├── core-hello-part3
         ├── core-hello-part4
+        ├── core-hello-part5
         └── core-hello-start
 
-    8 directories, 3 files
+    9 directories, 3 files
     ```
 
 !!! note
