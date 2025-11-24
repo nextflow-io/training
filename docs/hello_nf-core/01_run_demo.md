@@ -14,7 +14,7 @@ Let's start by locating the nf-core/demo pipeline on the project website at [nf-
 
 ### 1.1. Find the pipeline on the website
 
-In your web browser, go to https://nf-co.re/pipelines/ and type `demo` in the search bar.
+In your web browser, go to [https://nf-co.re/pipelines/](https://nf-co.re/pipelines/) and type `demo` in the search bar.
 
 ![search results](./img/search-results.png)
 
@@ -105,6 +105,8 @@ tree -L 2 $NXF_HOME/assets/
 /workspaces/.nextflow/assets/
 └── nf-core
     └── demo
+
+2 directories, 0 files
 ```
 
 !!! note
@@ -130,6 +132,8 @@ tree -L 2 pipelines
 pipelines
 └── nf-core
     └── demo
+
+2 directories, 0 files
 ```
 
 Now we can more easily peek into the source code as needed.
@@ -297,7 +301,7 @@ Here's the console output from the pipeline:
 
 If your output matches that, congratulations! You've just run your first nf-core pipeline.
 
-You'll notice that there is more a lot more console output than when you run a basic Nextflow pipeline.
+You'll notice that there is a lot more console output than when you run a basic Nextflow pipeline.
 There's a header that includes a summary of the pipeline's version, inputs and outputs, and a few elements of configuration.
 
 !!! note
@@ -500,21 +504,19 @@ tree -L 3 pipelines/nf-core/demo/modules
     pipelines/nf-core/demo/modules
     └── nf-core
         ├── fastqc
-        │   ├── environment.yml
-        │   ├── main.nf
-        │   ├── meta.yml
-        │   └── tests
+        │   ├── environment.yml
+        │   ├── main.nf
+        │   ├── meta.yml
+        │   └── tests
         ├── multiqc
-        │   ├── environment.yml
-        │   ├── main.nf
-        │   ├── meta.yml
-        │   └── tests
+        │   ├── environment.yml
+        │   ├── main.nf
+        │   ├── meta.yml
+        │   └── tests
         └── seqtk
             └── trim
-                ├── environment.yml
-                ├── main.nf
-                ├── meta.yml
-                └── tests
+
+    7 directories, 6 files
     ```
 
 Here you see that the `fastqc` and `multiqc` modules sit at the top level within the `nf-core` modules, whereas the `trim` module sits under the toolkit that it belongs to, `seqtk`.
@@ -553,6 +555,8 @@ tree -L 3 pipelines/nf-core/demo/subworkflows
             ├── main.nf
             ├── meta.yml
             └── tests
+
+    9 directories, 7 files
     ```
 
 As noted above, the `nf-core/demo` pipeline does not include any analysis-specific subworkflows, so all the subworkflows we see here are so-called 'housekeeping' or 'utility' workflows, as denoted by the `utils_` prefix in their names.
@@ -626,4 +630,4 @@ Take a break! That was a lot. When you're feeling refreshed and ready, move on t
 
 !!! tip
 
-    If you would like to learn how to compose workflows with subworkflows before moving on to the next part, check out the [Workflows of Workflows](../side_quests/workflows_of_workflows/) Side Quest.
+    If you would like to learn how to compose workflows with subworkflows before moving on to the next part, check out the [Workflows of Workflows](../side_quests/workflows_of_workflows.md) Side Quest.

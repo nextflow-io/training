@@ -75,7 +75,7 @@ nf-core modules list remote | grep 'cat/cat'
 ```
 
 ```console title="Output"
-cat/cat
+│ cat/cat
 ```
 
 Just keep in mind the that `grep` approach will only pull out results with the search term in their name, which would not work for `cat_cat`.
@@ -156,7 +156,8 @@ cd core-hello
 nf-core modules install cat/cat
 ```
 
-The tool will first prompt you to specify a repository type.
+The tool may first prompt you to specify a repository type.
+(If not, skip down to "Finally, the tool will proceed to install the module.")
 
 ??? example "Output"
 
@@ -177,7 +178,7 @@ The tool will first prompt you to specify a repository type.
       Modules repository
     ```
 
-Press enter to accept the default response (`Pipeline`) and continue.
+If so, press enter to accept the default response (`Pipeline`) and continue.
 
 The tool will then offer to amend the configuration of your project to avoid this prompt in the future.
 
@@ -675,7 +676,7 @@ Since `cowpy` doesn't accept metadata tuples yet (we'll fix this in the next par
 
 === "After"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="16-17"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="16-17 20"
         // emit a greeting
         sayHello(ch_samplesheet)
 
@@ -700,7 +701,7 @@ Since `cowpy` doesn't accept metadata tuples yet (we'll fix this in the next par
 
 === "Before"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="26"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="17"
         // emit a greeting
         sayHello(ch_samplesheet)
 
@@ -722,7 +723,7 @@ Since `cowpy` doesn't accept metadata tuples yet (we'll fix this in the next par
 
 The `.map{ meta, file -> file }` operation extracts the file from the `[metadata, file]` tuple produced by `CAT_CAT` into a new channel, `ch_for_cowpy`.
 
-Then it's just a matter of passing `ch_for_cowpy` to `cowpy` instead of `collectGreetings.out.outfile`.
+Then it's just a matter of passing `ch_for_cowpy` to `cowpy` instead of `collectGreetings.out.outfile` in that last line.
 
 !!! note
 
