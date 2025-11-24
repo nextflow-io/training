@@ -4728,7 +4728,7 @@ For tools that provide only one main command, modules use a single level like <c
 However, if you do, you can pipe the list to <code>grep</code> to find specific modules:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>nf-core<span class="w"> </span>modules<span class="w"> </span>list<span class="w"> </span>remote<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s1">&#39;cat/cat&#39;</span>
 </code></pre></div>
-<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="go">cat/cat</span>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="go">│ cat/cat</span>
 </code></pre></div>
 <p>Just keep in mind the that <code>grep</code> approach will only pull out results with the search term in their name, which would not work for <code>cat_cat</code>.</p>
 <h3 id="13-get-detailed-information-about-the-module">1.3. Get detailed information about the module<a class="headerlink" href="#13-get-detailed-information-about-the-module" title="Permanent link">&para;</a></h3>
@@ -4792,7 +4792,8 @@ Specifically, the <code>nf-core modules install</code> command makes it possible
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nb">cd</span><span class="w"> </span>core-hello
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>nf-core<span class="w"> </span>modules<span class="w"> </span>install<span class="w"> </span>cat/cat
 </code></pre></div>
-<p>The tool will first prompt you to specify a repository type.</p>
+<p>The tool may first prompt you to specify a repository type.
+(If not, skip down to "Finally, the tool will proceed to install the module.")</p>
 <details class="example">
 <summary>Output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="go">                                      ,--./,-.</span>
@@ -4810,7 +4811,7 @@ Specifically, the <code>nf-core modules install</code> command makes it possible
 <a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="go">  Modules repository</span>
 </code></pre></div>
 </details>
-<p>Press enter to accept the default response (<code>Pipeline</code>) and continue.</p>
+<p>If so, press enter to accept the default response (<code>Pipeline</code>) and continue.</p>
 <p>The tool will then offer to amend the configuration of your project to avoid this prompt in the future.</p>
 <details class="example">
 <summary>Output</summary>
@@ -5359,8 +5360,8 @@ However, the <code>CAT_CAT</code> process produces a tuple that includes the met
 </span><a id="__codelineno-34-42" name="__codelineno-34-42"></a><span class="hll"><span class="w">    </span><span class="n">ch_for_cowpy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CAT_CAT</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">file_out</span><span class="o">.</span><span class="na">map</span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">}</span>
 </span><a id="__codelineno-34-43" name="__codelineno-34-43"></a>
 <a id="__codelineno-34-44" name="__codelineno-34-44"></a><span class="w">    </span><span class="c1">// generate ASCII art of the greetings with cowpy</span>
-<a id="__codelineno-34-45" name="__codelineno-34-45"></a><span class="w">    </span><span class="n">cowpy</span><span class="o">(</span><span class="n">ch_for_cowpy</span><span class="o">,</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">character</span><span class="o">)</span>
-</code></pre></div></td></tr></table></div>
+<a id="__codelineno-34-45" name="__codelineno-34-45"></a><span class="hll"><span class="w">    </span><span class="n">cowpy</span><span class="o">(</span><span class="n">ch_for_cowpy</span><span class="o">,</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">character</span><span class="o">)</span>
+</span></code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/workflows/hello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-35-26">26</a></span>
@@ -5395,13 +5396,13 @@ However, the <code>CAT_CAT</code> process produces a tuple that includes the met
 <a id="__codelineno-35-39" name="__codelineno-35-39"></a><span class="w">    </span><span class="n">CAT_CAT</span><span class="o">(</span><span class="n">ch_for_cat</span><span class="o">)</span>
 <a id="__codelineno-35-40" name="__codelineno-35-40"></a>
 <a id="__codelineno-35-41" name="__codelineno-35-41"></a><span class="w">    </span><span class="c1">// generate ASCII art of the greetings with cowpy</span>
-<a id="__codelineno-35-42" name="__codelineno-35-42"></a><span class="w">    </span><span class="n">cowpy</span><span class="o">(</span><span class="n">collectGreetings</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">outfile</span><span class="o">,</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">character</span><span class="o">)</span>
-</code></pre></div></td></tr></table></div>
+<a id="__codelineno-35-42" name="__codelineno-35-42"></a><span class="hll"><span class="w">    </span><span class="n">cowpy</span><span class="o">(</span><span class="n">collectGreetings</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">outfile</span><span class="o">,</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">character</span><span class="o">)</span>
+</span></code></pre></div></td></tr></table></div>
 </div>
 </div>
 </div>
 <p>The <code>.map{ meta, file -&gt; file }</code> operation extracts the file from the <code>[metadata, file]</code> tuple produced by <code>CAT_CAT</code> into a new channel, <code>ch_for_cowpy</code>.</p>
-<p>Then it's just a matter of passing <code>ch_for_cowpy</code> to <code>cowpy</code> instead of <code>collectGreetings.out.outfile</code>.</p>
+<p>Then it's just a matter of passing <code>ch_for_cowpy</code> to <code>cowpy</code> instead of <code>collectGreetings.out.outfile</code> in that last line.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>In the next part of the course, we'll update <code>cowpy</code> to work with metadata tuples directly, so this extraction step will no longer be necessary.</p>

@@ -5820,12 +5820,12 @@ This default will be applied even to modules that we didn't explicitly modify to
 <a id="__codelineno-35-15" name="__codelineno-35-15"></a><span class="w">        </span><span class="nl">path:</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">&quot;${params.outdir}/${task.process.tokenize(&#39;:&#39;)[-1].tokenize(&#39;_&#39;)[0].toLowerCase()}&quot;</span><span class="w"> </span><span class="o">},</span>
 <a id="__codelineno-35-16" name="__codelineno-35-16"></a><span class="w">    </span><span class="o">]</span>
 <a id="__codelineno-35-17" name="__codelineno-35-17"></a>
-<a id="__codelineno-35-18" name="__codelineno-35-18"></a><span class="hll"><span class="w">    </span><span class="nl">withName:</span><span class="w"> </span><span class="s1">&#39;cowpy&#39;</span><span class="w"> </span><span class="o">{</span>
-</span><a id="__codelineno-35-19" name="__codelineno-35-19"></a><span class="hll"><span class="w">        </span><span class="n">ext</span><span class="o">.</span><span class="na">args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">&quot;-c ${params.character}&quot;</span><span class="w"> </span><span class="o">}</span>
-</span><a id="__codelineno-35-20" name="__codelineno-35-20"></a><span class="hll"><span class="w">        </span><span class="n">publishDir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>
-</span><a id="__codelineno-35-21" name="__codelineno-35-21"></a><span class="w">            </span><span class="nl">path:</span><span class="w"> </span><span class="s1">&#39;my_custom_results&#39;</span>
-<a id="__codelineno-35-22" name="__codelineno-35-22"></a><span class="w">        </span><span class="o">]</span>
-<a id="__codelineno-35-23" name="__codelineno-35-23"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-35-18" name="__codelineno-35-18"></a><span class="w">    </span><span class="nl">withName:</span><span class="w"> </span><span class="s1">&#39;cowpy&#39;</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-35-19" name="__codelineno-35-19"></a><span class="w">        </span><span class="n">ext</span><span class="o">.</span><span class="na">args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">&quot;-c ${params.character}&quot;</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-35-20" name="__codelineno-35-20"></a><span class="hll"><span class="w">        </span><span class="n">publishDir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>
+</span><a id="__codelineno-35-21" name="__codelineno-35-21"></a><span class="hll"><span class="w">            </span><span class="nl">path:</span><span class="w"> </span><span class="s1">&#39;my_custom_results&#39;</span>
+</span><a id="__codelineno-35-22" name="__codelineno-35-22"></a><span class="hll"><span class="w">        </span><span class="o">]</span>
+</span><a id="__codelineno-35-23" name="__codelineno-35-23"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-35-24" name="__codelineno-35-24"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>We're not actually going to make that change, but feel free to play with this and see what logic you can implement.</p>
@@ -5890,7 +5890,7 @@ It automatically looks up tool information from package repositories like Biocon
 </ul>
 <div class="admonition tip">
 <p class="admonition-title">Learn more about testing</p>
-<p>The generated test file uses nf-test, a testing framework for Nextflow pipelines and modules. To learn how to write and run these tests, see the <a href="../../side_quests/nf_test/">nf-test side quest</a>.</p>
+<p>The generated test file uses nf-test, a testing framework for Nextflow pipelines and modules. To learn how to write and run these tests, see the <a href="../side_quests/nf_test.md">nf-test side quest</a>.</p>
 </div>
 <p>The generated <code>main.nf</code> includes all the patterns you just learned, plus some additional features:</p>
 <div class="highlight"><span class="filename">modules/local/cowpy/main.nf</span><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="n">process</span><span class="w"> </span><span class="n">COWPY</span><span class="w"> </span><span class="o">{</span>

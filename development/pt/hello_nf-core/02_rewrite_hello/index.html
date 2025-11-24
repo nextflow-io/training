@@ -5123,6 +5123,8 @@ So where are the outputs? Are there any?</p>
 <a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="go">    ├── hello_software_versions.yml</span>
 <a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="go">    ├── params_2025-11-21_04-47-18.json</span>
 <a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="go">    └── pipeline_dag_2025-11-21_04-47-18.html</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="go">1 directory, 6 files</span>
 </code></pre></div>
 </details>
 <p>You can take a peek at the reports to see what was run, and the answer is: nothing at all!</p>
@@ -5219,7 +5221,7 @@ So where are the outputs? Are there any?</p>
 <a id="__codelineno-10-43" name="__codelineno-10-43"></a><span class="cm">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
 <a id="__codelineno-10-44" name="__codelineno-10-44"></a><span class="cm">*/</span>
 </code></pre></div></td></tr></table></div>
-<p>Compared to a basic Nextflow workflow like the one developed in Hello Nextflow, you'll notice a few things that are new here (highlighted lines above):</p>
+<p>Compared to a basic Nextflow workflow like the one developed in <a href="../../hello_nextflow/">Hello Nextflow</a>, you'll notice a few things that are new here (highlighted lines above):</p>
 <ul>
 <li>The workflow block has a name</li>
 <li>Workflow inputs are declared using the <code>take:</code> keyword and the channel construction is moved up to the parent workflow</li>
@@ -5229,7 +5231,7 @@ So where are the outputs? Are there any?</p>
 <p>These are optional features of Nextflow that make the workflow <strong>composable</strong>, meaning that it can be called from within another workflow.</p>
 <div class="admonition note">
 <p class="admonition-title">Composable workflows in depth</p>
-<p>The <a href="../side_quests/workflows_of_workflows/">Workflows of Workflows</a> Side Quest explores workflow composition in much greater depth, including how to compose multiple workflows together and manage complex data flows between them. We're introducing composability here because it's a fundamental requirement of the nf-core template architecture, which uses nested workflows to organize pipeline initialization, the main analysis workflow, and completion tasks into separate, reusable components.</p>
+<p>The <a href="../../side_quests/workflows_of_workflows/">Workflows of Workflows</a> Side Quest explores workflow composition in much greater depth, including how to compose multiple workflows together and manage complex data flows between them. We're introducing composability here because it's a fundamental requirement of the nf-core template architecture, which uses nested workflows to organize pipeline initialization, the main analysis workflow, and completion tasks into separate, reusable components.</p>
 </div>
 <p>We are going to need to plug the relevant logic from our workflow of interest into that structure.
 The first step for that is to make our original workflow composable.</p>
@@ -5302,6 +5304,8 @@ As a reminder, we're working with the workflow featured in our <a href="../../he
 <a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="go">│   ├── cowpy.nf</span>
 <a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="go">│   └── sayHello.nf</span>
 <a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="go">└── nextflow.config</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="go">1 directory, 6 files</span>
 </code></pre></div>
 </details>
 <p>Feel free to run it to satisfy yourself that it works:</p>
@@ -5432,7 +5436,7 @@ In order to make it runnable from within a parent workflow as the nf-core templa
 </div>
 </div>
 <p>This leaves the details of how the inputs are provided up to the parent workflow.</p>
-<p>While we're at it, we can also comment out the line</p>
+<p>While we're at it, we can also comment out the line <code>params.greeting = 'greetings.csv'</code></p>
 <div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">After</label><label for="__tabbed_3_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -5444,7 +5448,7 @@ In order to make it runnable from within a parent workflow as the nf-core templa
 <span class="normal"><a href="#__codelineno-21-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-21-3" name="__codelineno-21-3"></a><span class="w">    </span><span class="cm">/*</span>
 <a id="__codelineno-21-4" name="__codelineno-21-4"></a><span class="cm">    * Pipeline parameters</span>
 <a id="__codelineno-21-5" name="__codelineno-21-5"></a><span class="cm">    */</span>
-<a id="__codelineno-21-6" name="__codelineno-21-6"></a><span class="hll"><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">greeting</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;greetings.csv&#39;</span>
+<a id="__codelineno-21-6" name="__codelineno-21-6"></a><span class="hll"><span class="w">    </span><span class="c1">//params.greeting = &#39;greetings.csv&#39;</span>
 </span><a id="__codelineno-21-7" name="__codelineno-21-7"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">batch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;test-batch&#39;</span>
 <a id="__codelineno-21-8" name="__codelineno-21-8"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">character</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;turkey&#39;</span>
 </code></pre></div></td></tr></table></div>
@@ -5458,14 +5462,13 @@ In order to make it runnable from within a parent workflow as the nf-core templa
 <span class="normal"><a href="#__codelineno-22-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-22-3" name="__codelineno-22-3"></a><span class="w">    </span><span class="cm">/*</span>
 <a id="__codelineno-22-4" name="__codelineno-22-4"></a><span class="cm">    * Pipeline parameters</span>
 <a id="__codelineno-22-5" name="__codelineno-22-5"></a><span class="cm">    */</span>
-<a id="__codelineno-22-6" name="__codelineno-22-6"></a><span class="hll"><span class="w">    </span><span class="c1">// params.greeting = &#39;greetings.csv&#39;</span>
+<a id="__codelineno-22-6" name="__codelineno-22-6"></a><span class="hll"><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">greeting</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;greetings.csv&#39;</span>
 </span><a id="__codelineno-22-7" name="__codelineno-22-7"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">batch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;test-batch&#39;</span>
 <a id="__codelineno-22-8" name="__codelineno-22-8"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">character</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;turkey&#39;</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
 </div>
-<p>params.greeting = 'greetings.csv'</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>If you have the Nextflow language server extension installed, the syntax checker will light up your code with red squiggles.
@@ -5591,15 +5594,15 @@ That's because if you put in a <code>take:</code> statement, you have to also ha
 <a id="__codelineno-26-12" name="__codelineno-26-12"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">convertToUpper</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/convertToUpper.nf&#39;</span>
 <a id="__codelineno-26-13" name="__codelineno-26-13"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">collectGreetings</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/collectGreetings.nf&#39;</span>
 <a id="__codelineno-26-14" name="__codelineno-26-14"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">cowpy</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/cowpy.nf&#39;</span>
-<a id="__codelineno-26-15" name="__codelineno-26-15"></a><span class="hll">
-</span><a id="__codelineno-26-16" name="__codelineno-26-16"></a><span class="n">workflow</span><span class="w"> </span><span class="n">HELLO</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-26-17" name="__codelineno-26-17"></a><span class="hll">
-</span><a id="__codelineno-26-18" name="__codelineno-26-18"></a><span class="hll"><span class="w">    </span><span class="nl">take:</span>
+<a id="__codelineno-26-15" name="__codelineno-26-15"></a>
+<a id="__codelineno-26-16" name="__codelineno-26-16"></a><span class="hll"><span class="n">workflow</span><span class="w"> </span><span class="n">HELLO</span><span class="w"> </span><span class="o">{</span>
+</span><a id="__codelineno-26-17" name="__codelineno-26-17"></a>
+<a id="__codelineno-26-18" name="__codelineno-26-18"></a><span class="hll"><span class="w">    </span><span class="nl">take:</span>
 </span><a id="__codelineno-26-19" name="__codelineno-26-19"></a><span class="hll"><span class="w">    </span><span class="c1">// channel of greetings</span>
-</span><a id="__codelineno-26-20" name="__codelineno-26-20"></a><span class="w">    </span><span class="n">greeting_ch</span>
-<a id="__codelineno-26-21" name="__codelineno-26-21"></a><span class="hll">
-</span><a id="__codelineno-26-22" name="__codelineno-26-22"></a><span class="w">    </span><span class="nl">main:</span>
-<a id="__codelineno-26-23" name="__codelineno-26-23"></a>
+</span><a id="__codelineno-26-20" name="__codelineno-26-20"></a><span class="hll"><span class="w">    </span><span class="n">greeting_ch</span>
+</span><a id="__codelineno-26-21" name="__codelineno-26-21"></a>
+<a id="__codelineno-26-22" name="__codelineno-26-22"></a><span class="hll"><span class="w">    </span><span class="nl">main:</span>
+</span><a id="__codelineno-26-23" name="__codelineno-26-23"></a>
 <a id="__codelineno-26-24" name="__codelineno-26-24"></a><span class="w">    </span><span class="c1">// emit a greeting</span>
 <a id="__codelineno-26-25" name="__codelineno-26-25"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
 <a id="__codelineno-26-26" name="__codelineno-26-26"></a>
@@ -5612,10 +5615,10 @@ That's because if you put in a <code>take:</code> statement, you have to also ha
 <a id="__codelineno-26-33" name="__codelineno-26-33"></a><span class="w">    </span><span class="c1">// generate ASCII art of the greetings with cowpy</span>
 <a id="__codelineno-26-34" name="__codelineno-26-34"></a><span class="w">    </span><span class="n">cowpy</span><span class="o">(</span><span class="n">collectGreetings</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">outfile</span><span class="o">,</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">character</span><span class="o">)</span>
 <a id="__codelineno-26-35" name="__codelineno-26-35"></a>
-<a id="__codelineno-26-36" name="__codelineno-26-36"></a><span class="w">    </span><span class="nl">emit:</span>
-<a id="__codelineno-26-37" name="__codelineno-26-37"></a><span class="hll"><span class="w">    </span><span class="n">cowpy_hellos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cowpy</span><span class="o">.</span><span class="na">out</span>
-</span><a id="__codelineno-26-38" name="__codelineno-26-38"></a><span class="hll"><span class="o">}</span>
-</span></code></pre></div></td></tr></table></div>
+<a id="__codelineno-26-36" name="__codelineno-26-36"></a><span class="hll"><span class="w">    </span><span class="nl">emit:</span>
+</span><a id="__codelineno-26-37" name="__codelineno-26-37"></a><span class="hll"><span class="w">    </span><span class="n">cowpy_hellos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cowpy</span><span class="o">.</span><span class="na">out</span>
+</span><a id="__codelineno-26-38" name="__codelineno-26-38"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
 <p>This describes everything Nextflow needs EXCEPT what to feed into the input channel.
 That is going to be defined in the parent workflow, also called the <strong>entrypoint</strong> workflow.</p>
 <h3 id="26-make-a-dummy-entrypoint-workflow">2.6. Make a dummy entrypoint workflow<a class="headerlink" href="#26-make-a-dummy-entrypoint-workflow" title="Permanent link">&para;</a></h3>
@@ -5837,6 +5840,8 @@ We need to copy those modules into the nf-core project structure (under <code>co
 <a id="__codelineno-34-4" name="__codelineno-34-4" href="#__codelineno-34-4"></a><span class="go">    ├── convertToUpper.nf</span>
 <a id="__codelineno-34-5" name="__codelineno-34-5" href="#__codelineno-34-5"></a><span class="go">    ├── cowpy.nf</span>
 <a id="__codelineno-34-6" name="__codelineno-34-6" href="#__codelineno-34-6"></a><span class="go">    └── sayHello.nf</span>
+<a id="__codelineno-34-7" name="__codelineno-34-7" href="#__codelineno-34-7"></a>
+<a id="__codelineno-34-8" name="__codelineno-34-8" href="#__codelineno-34-8"></a><span class="go">1 directory, 4 files</span>
 </code></pre></div>
 </details>
 <p>Now let's set up the module import statements.</p>
@@ -6531,49 +6536,86 @@ Typically small test files are stored in the <code>assets</code> directory, so l
 <li><strong>Absolute paths</strong>: By using <code>${projectDir}</code>, we create an absolute path, which is important for test data that ships with the pipeline.</li>
 <li><strong>Test data location</strong>: nf-core pipelines typically store test data in the <code>assets/</code> directory within the pipeline repository for small test files, or reference external test datasets for larger files.</li>
 </ul>
+<p>And while we're at it, let's tighten the default resource limits to ensure this will run on very basic machines (like the minimal VMs in Github Codespaces):</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="11:2"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><input id="__tabbed_11_2" name="__tabbed_11" type="radio" /><div class="tabbed-labels"><label for="__tabbed_11_1">After</label><label for="__tabbed_11_2">Before</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/config/test.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-56-13">13</a></span>
+<span class="normal"><a href="#__codelineno-56-14">14</a></span>
+<span class="normal"><a href="#__codelineno-56-15">15</a></span>
+<span class="normal"><a href="#__codelineno-56-16">16</a></span>
+<span class="normal"><a href="#__codelineno-56-17">17</a></span>
+<span class="normal"><a href="#__codelineno-56-18">18</a></span>
+<span class="normal"><a href="#__codelineno-56-19">19</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-56-13" name="__codelineno-56-13"></a><span class="n">process</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-56-14" name="__codelineno-56-14"></a><span class="w">    </span><span class="n">resourceLimits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>
+<a id="__codelineno-56-15" name="__codelineno-56-15"></a><span class="hll"><span class="w">        </span><span class="nl">cpus:</span><span class="w"> </span><span class="mi">2</span><span class="o">,</span>
+</span><a id="__codelineno-56-16" name="__codelineno-56-16"></a><span class="hll"><span class="w">        </span><span class="nl">memory:</span><span class="w"> </span><span class="s1">&#39;4.GB&#39;</span><span class="o">,</span>
+</span><a id="__codelineno-56-17" name="__codelineno-56-17"></a><span class="w">        </span><span class="nl">time:</span><span class="w"> </span><span class="s1">&#39;1.h&#39;</span>
+<a id="__codelineno-56-18" name="__codelineno-56-18"></a><span class="w">    </span><span class="o">]</span>
+<a id="__codelineno-56-19" name="__codelineno-56-19"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/config/test.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-57-13">13</a></span>
+<span class="normal"><a href="#__codelineno-57-14">14</a></span>
+<span class="normal"><a href="#__codelineno-57-15">15</a></span>
+<span class="normal"><a href="#__codelineno-57-16">16</a></span>
+<span class="normal"><a href="#__codelineno-57-17">17</a></span>
+<span class="normal"><a href="#__codelineno-57-18">18</a></span>
+<span class="normal"><a href="#__codelineno-57-19">19</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-57-13" name="__codelineno-57-13"></a><span class="n">process</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-57-14" name="__codelineno-57-14"></a><span class="w">    </span><span class="n">resourceLimits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>
+<a id="__codelineno-57-15" name="__codelineno-57-15"></a><span class="hll"><span class="w">        </span><span class="nl">cpus:</span><span class="w"> </span><span class="mi">4</span><span class="o">,</span>
+</span><a id="__codelineno-57-16" name="__codelineno-57-16"></a><span class="hll"><span class="w">        </span><span class="nl">memory:</span><span class="w"> </span><span class="s1">&#39;15.GB&#39;</span><span class="o">,</span>
+</span><a id="__codelineno-57-17" name="__codelineno-57-17"></a><span class="w">        </span><span class="nl">time:</span><span class="w"> </span><span class="s1">&#39;1.h&#39;</span>
+<a id="__codelineno-57-18" name="__codelineno-57-18"></a><span class="w">    </span><span class="o">]</span>
+<a id="__codelineno-57-19" name="__codelineno-57-19"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
 <p>This completes the code modifications we need to do.</p>
 <h3 id="44-run-the-pipeline-with-the-test-profile">4.4. Run the pipeline with the test profile<a class="headerlink" href="#44-run-the-pipeline-with-the-test-profile" title="Permanent link">&para;</a></h3>
 <p>That was a lot, but we can finally try running the pipeline!
 Note that we have to add <code>--validate_params false</code> to the command line because we didn't set up the validation yet (that will come later).</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-56-1" name="__codelineno-56-1" href="#__codelineno-56-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>core-hello<span class="w"> </span>--outdir<span class="w"> </span>core-hello-results<span class="w"> </span>-profile<span class="w"> </span>test,docker<span class="w"> </span>--validate_params<span class="w"> </span><span class="nb">false</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-58-1" name="__codelineno-58-1" href="#__codelineno-58-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>core-hello<span class="w"> </span>--outdir<span class="w"> </span>core-hello-results<span class="w"> </span>-profile<span class="w"> </span>test,docker<span class="w"> </span>--validate_params<span class="w"> </span><span class="nb">false</span>
 </code></pre></div>
 <p>If you've done all of the modifications correctly, it should run to completion.</p>
 <details class="example">
 <summary>Output</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-57-1" name="__codelineno-57-1" href="#__codelineno-57-1"></a><span class="go"> N E X T F L O W   ~  version 25.04.3</span>
-<a id="__codelineno-57-2" name="__codelineno-57-2" href="#__codelineno-57-2"></a>
-<a id="__codelineno-57-3" name="__codelineno-57-3" href="#__codelineno-57-3"></a><span class="go">Launching `core-hello/main.nf` [condescending_allen] DSL2 - revision: b9e9b3b8de</span>
-<a id="__codelineno-57-4" name="__codelineno-57-4" href="#__codelineno-57-4"></a>
-<a id="__codelineno-57-5" name="__codelineno-57-5" href="#__codelineno-57-5"></a><span class="go">Input/output options</span>
-<a id="__codelineno-57-6" name="__codelineno-57-6" href="#__codelineno-57-6"></a><span class="go">  input                     : /workspaces/training/hello-nf-core/core-hello/assets/greetings.csv</span>
-<a id="__codelineno-57-7" name="__codelineno-57-7" href="#__codelineno-57-7"></a><span class="go">  outdir                    : core-hello-results</span>
-<a id="__codelineno-57-8" name="__codelineno-57-8" href="#__codelineno-57-8"></a>
-<a id="__codelineno-57-9" name="__codelineno-57-9" href="#__codelineno-57-9"></a><span class="go">Institutional config options</span>
-<a id="__codelineno-57-10" name="__codelineno-57-10" href="#__codelineno-57-10"></a><span class="go">  config_profile_name       : Test profile</span>
-<a id="__codelineno-57-11" name="__codelineno-57-11" href="#__codelineno-57-11"></a><span class="go">  config_profile_description: Minimal test dataset to check pipeline function</span>
-<a id="__codelineno-57-12" name="__codelineno-57-12" href="#__codelineno-57-12"></a>
-<a id="__codelineno-57-13" name="__codelineno-57-13" href="#__codelineno-57-13"></a><span class="go">Generic options</span>
-<a id="__codelineno-57-14" name="__codelineno-57-14" href="#__codelineno-57-14"></a><span class="go">  validate_params           : false</span>
-<a id="__codelineno-57-15" name="__codelineno-57-15" href="#__codelineno-57-15"></a><span class="go">  trace_report_suffix       : 2025-11-21_07-29-37</span>
-<a id="__codelineno-57-16" name="__codelineno-57-16" href="#__codelineno-57-16"></a>
-<a id="__codelineno-57-17" name="__codelineno-57-17" href="#__codelineno-57-17"></a><span class="go">Core Nextflow options</span>
-<a id="__codelineno-57-18" name="__codelineno-57-18" href="#__codelineno-57-18"></a><span class="go">  runName                   : condescending_allen</span>
-<a id="__codelineno-57-19" name="__codelineno-57-19" href="#__codelineno-57-19"></a><span class="go">  containerEngine           : docker</span>
-<a id="__codelineno-57-20" name="__codelineno-57-20" href="#__codelineno-57-20"></a><span class="go">  launchDir                 : /workspaces/training/hello-nf-core</span>
-<a id="__codelineno-57-21" name="__codelineno-57-21" href="#__codelineno-57-21"></a><span class="go">  workDir                   : /workspaces/training/hello-nf-core/work</span>
-<a id="__codelineno-57-22" name="__codelineno-57-22" href="#__codelineno-57-22"></a><span class="go">  projectDir                : /workspaces/training/hello-nf-core/core-hello</span>
-<a id="__codelineno-57-23" name="__codelineno-57-23" href="#__codelineno-57-23"></a><span class="go">  userName                  : root</span>
-<a id="__codelineno-57-24" name="__codelineno-57-24" href="#__codelineno-57-24"></a><span class="go">  profile                   : test,docker</span>
-<a id="__codelineno-57-25" name="__codelineno-57-25" href="#__codelineno-57-25"></a><span class="go">  configFiles               : /workspaces/training/hello-nf-core/core-hello/nextflow.config</span>
-<a id="__codelineno-57-26" name="__codelineno-57-26" href="#__codelineno-57-26"></a>
-<a id="__codelineno-57-27" name="__codelineno-57-27" href="#__codelineno-57-27"></a><span class="go">!! Only displaying parameters that differ from the pipeline defaults !!</span>
-<a id="__codelineno-57-28" name="__codelineno-57-28" href="#__codelineno-57-28"></a><span class="go">------------------------------------------------------</span>
-<a id="__codelineno-57-29" name="__codelineno-57-29" href="#__codelineno-57-29"></a><span class="go">executor &gt;  local (1)</span>
-<a id="__codelineno-57-30" name="__codelineno-57-30" href="#__codelineno-57-30"></a><span class="go">[ed/727b7e] CORE_HELLO:HELLO:sayHello (3)       [100%] 3 of 3 ✔</span>
-<a id="__codelineno-57-31" name="__codelineno-57-31" href="#__codelineno-57-31"></a><span class="go">[45/bb6096] CORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔</span>
-<a id="__codelineno-57-32" name="__codelineno-57-32" href="#__codelineno-57-32"></a><span class="go">[81/7e2e34] CORE_HELLO:HELLO:collectGreetings   [100%] 1 of 1 ✔</span>
-<a id="__codelineno-57-33" name="__codelineno-57-33" href="#__codelineno-57-33"></a><span class="go">[96/9442a1] CORE_HELLO:HELLO:cowpy              [100%] 1 of 1 ✔</span>
-<a id="__codelineno-57-34" name="__codelineno-57-34" href="#__codelineno-57-34"></a><span class="go">-[core/hello] Pipeline completed successfully-</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-59-1" name="__codelineno-59-1" href="#__codelineno-59-1"></a><span class="go"> N E X T F L O W   ~  version 25.04.3</span>
+<a id="__codelineno-59-2" name="__codelineno-59-2" href="#__codelineno-59-2"></a>
+<a id="__codelineno-59-3" name="__codelineno-59-3" href="#__codelineno-59-3"></a><span class="go">Launching `core-hello/main.nf` [condescending_allen] DSL2 - revision: b9e9b3b8de</span>
+<a id="__codelineno-59-4" name="__codelineno-59-4" href="#__codelineno-59-4"></a>
+<a id="__codelineno-59-5" name="__codelineno-59-5" href="#__codelineno-59-5"></a><span class="go">Input/output options</span>
+<a id="__codelineno-59-6" name="__codelineno-59-6" href="#__codelineno-59-6"></a><span class="go">  input                     : /workspaces/training/hello-nf-core/core-hello/assets/greetings.csv</span>
+<a id="__codelineno-59-7" name="__codelineno-59-7" href="#__codelineno-59-7"></a><span class="go">  outdir                    : core-hello-results</span>
+<a id="__codelineno-59-8" name="__codelineno-59-8" href="#__codelineno-59-8"></a>
+<a id="__codelineno-59-9" name="__codelineno-59-9" href="#__codelineno-59-9"></a><span class="go">Institutional config options</span>
+<a id="__codelineno-59-10" name="__codelineno-59-10" href="#__codelineno-59-10"></a><span class="go">  config_profile_name       : Test profile</span>
+<a id="__codelineno-59-11" name="__codelineno-59-11" href="#__codelineno-59-11"></a><span class="go">  config_profile_description: Minimal test dataset to check pipeline function</span>
+<a id="__codelineno-59-12" name="__codelineno-59-12" href="#__codelineno-59-12"></a>
+<a id="__codelineno-59-13" name="__codelineno-59-13" href="#__codelineno-59-13"></a><span class="go">Generic options</span>
+<a id="__codelineno-59-14" name="__codelineno-59-14" href="#__codelineno-59-14"></a><span class="go">  validate_params           : false</span>
+<a id="__codelineno-59-15" name="__codelineno-59-15" href="#__codelineno-59-15"></a><span class="go">  trace_report_suffix       : 2025-11-21_07-29-37</span>
+<a id="__codelineno-59-16" name="__codelineno-59-16" href="#__codelineno-59-16"></a>
+<a id="__codelineno-59-17" name="__codelineno-59-17" href="#__codelineno-59-17"></a><span class="go">Core Nextflow options</span>
+<a id="__codelineno-59-18" name="__codelineno-59-18" href="#__codelineno-59-18"></a><span class="go">  runName                   : condescending_allen</span>
+<a id="__codelineno-59-19" name="__codelineno-59-19" href="#__codelineno-59-19"></a><span class="go">  containerEngine           : docker</span>
+<a id="__codelineno-59-20" name="__codelineno-59-20" href="#__codelineno-59-20"></a><span class="go">  launchDir                 : /workspaces/training/hello-nf-core</span>
+<a id="__codelineno-59-21" name="__codelineno-59-21" href="#__codelineno-59-21"></a><span class="go">  workDir                   : /workspaces/training/hello-nf-core/work</span>
+<a id="__codelineno-59-22" name="__codelineno-59-22" href="#__codelineno-59-22"></a><span class="go">  projectDir                : /workspaces/training/hello-nf-core/core-hello</span>
+<a id="__codelineno-59-23" name="__codelineno-59-23" href="#__codelineno-59-23"></a><span class="go">  userName                  : root</span>
+<a id="__codelineno-59-24" name="__codelineno-59-24" href="#__codelineno-59-24"></a><span class="go">  profile                   : test,docker</span>
+<a id="__codelineno-59-25" name="__codelineno-59-25" href="#__codelineno-59-25"></a><span class="go">  configFiles               : /workspaces/training/hello-nf-core/core-hello/nextflow.config</span>
+<a id="__codelineno-59-26" name="__codelineno-59-26" href="#__codelineno-59-26"></a>
+<a id="__codelineno-59-27" name="__codelineno-59-27" href="#__codelineno-59-27"></a><span class="go">!! Only displaying parameters that differ from the pipeline defaults !!</span>
+<a id="__codelineno-59-28" name="__codelineno-59-28" href="#__codelineno-59-28"></a><span class="go">------------------------------------------------------</span>
+<a id="__codelineno-59-29" name="__codelineno-59-29" href="#__codelineno-59-29"></a><span class="go">executor &gt;  local (1)</span>
+<a id="__codelineno-59-30" name="__codelineno-59-30" href="#__codelineno-59-30"></a><span class="go">[ed/727b7e] CORE_HELLO:HELLO:sayHello (3)       [100%] 3 of 3 ✔</span>
+<a id="__codelineno-59-31" name="__codelineno-59-31" href="#__codelineno-59-31"></a><span class="go">[45/bb6096] CORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔</span>
+<a id="__codelineno-59-32" name="__codelineno-59-32" href="#__codelineno-59-32"></a><span class="go">[81/7e2e34] CORE_HELLO:HELLO:collectGreetings   [100%] 1 of 1 ✔</span>
+<a id="__codelineno-59-33" name="__codelineno-59-33" href="#__codelineno-59-33"></a><span class="go">[96/9442a1] CORE_HELLO:HELLO:cowpy              [100%] 1 of 1 ✔</span>
+<a id="__codelineno-59-34" name="__codelineno-59-34" href="#__codelineno-59-34"></a><span class="go">-[core/hello] Pipeline completed successfully-</span>
 </code></pre></div>
 </details>
 <p>As you can see, this produced the typical nf-core summary at the start thanks to the initialisation subworkflow, and the lines for each module now show the full PIPELINE:WORKFLOW:module names.</p>
@@ -6581,23 +6623,25 @@ Note that we have to add <code>--validate_params false</code> to the command lin
 <p>The question now is: where are the outputs of the pipeline?
 And the answer is quite interesting: there are now two different places to look for the results.</p>
 <p>As you may recall from earlier, our first run of the newly created workflow produced a directory called <code>core-hello-results/</code> that contained various execution reports and metadata.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-58-1" name="__codelineno-58-1" href="#__codelineno-58-1"></a>tree<span class="w"> </span>core-hello-results
+<div class="highlight"><pre><span></span><code><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a>tree<span class="w"> </span>core-hello-results
 </code></pre></div>
 <details class="example">
 <summary>Directory contents</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-59-1" name="__codelineno-59-1" href="#__codelineno-59-1"></a><span class="go">core-hello-results</span>
-<a id="__codelineno-59-2" name="__codelineno-59-2" href="#__codelineno-59-2"></a><span class="go">└── pipeline_info</span>
-<a id="__codelineno-59-3" name="__codelineno-59-3" href="#__codelineno-59-3"></a><span class="go">    ├── execution_report_2025-11-21_04-47-18.html</span>
-<a id="__codelineno-59-4" name="__codelineno-59-4" href="#__codelineno-59-4"></a><span class="go">    ├── execution_report_2025-11-21_07-29-37.html</span>
-<a id="__codelineno-59-5" name="__codelineno-59-5" href="#__codelineno-59-5"></a><span class="go">    ├── execution_timeline_2025-11-21_04-47-18.html</span>
-<a id="__codelineno-59-6" name="__codelineno-59-6" href="#__codelineno-59-6"></a><span class="go">    ├── execution_timeline_2025-11-21_07-29-37.html</span>
-<a id="__codelineno-59-7" name="__codelineno-59-7" href="#__codelineno-59-7"></a><span class="go">    ├── execution_trace_2025-11-21_04-47-18.txt</span>
-<a id="__codelineno-59-8" name="__codelineno-59-8" href="#__codelineno-59-8"></a><span class="go">    ├── execution_trace_2025-11-21_07-29-37.txt</span>
-<a id="__codelineno-59-9" name="__codelineno-59-9" href="#__codelineno-59-9"></a><span class="go">    ├── hello_software_versions.yml</span>
-<a id="__codelineno-59-10" name="__codelineno-59-10" href="#__codelineno-59-10"></a><span class="go">    ├── params_2025-11-21_04-47-13.json</span>
-<a id="__codelineno-59-11" name="__codelineno-59-11" href="#__codelineno-59-11"></a><span class="go">    ├── params_2025-11-21_07-29-41.json</span>
-<a id="__codelineno-59-12" name="__codelineno-59-12" href="#__codelineno-59-12"></a><span class="go">    └── pipeline_dag_2025-11-21_04-47-18.html</span>
-<a id="__codelineno-59-13" name="__codelineno-59-13" href="#__codelineno-59-13"></a><span class="go">    └── pipeline_dag_2025-11-21_07-29-37.html</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-61-1" name="__codelineno-61-1" href="#__codelineno-61-1"></a><span class="go">core-hello-results</span>
+<a id="__codelineno-61-2" name="__codelineno-61-2" href="#__codelineno-61-2"></a><span class="go">└── pipeline_info</span>
+<a id="__codelineno-61-3" name="__codelineno-61-3" href="#__codelineno-61-3"></a><span class="go">    ├── execution_report_2025-11-21_04-47-18.html</span>
+<a id="__codelineno-61-4" name="__codelineno-61-4" href="#__codelineno-61-4"></a><span class="go">    ├── execution_report_2025-11-21_07-29-37.html</span>
+<a id="__codelineno-61-5" name="__codelineno-61-5" href="#__codelineno-61-5"></a><span class="go">    ├── execution_timeline_2025-11-21_04-47-18.html</span>
+<a id="__codelineno-61-6" name="__codelineno-61-6" href="#__codelineno-61-6"></a><span class="go">    ├── execution_timeline_2025-11-21_07-29-37.html</span>
+<a id="__codelineno-61-7" name="__codelineno-61-7" href="#__codelineno-61-7"></a><span class="go">    ├── execution_trace_2025-11-21_04-47-18.txt</span>
+<a id="__codelineno-61-8" name="__codelineno-61-8" href="#__codelineno-61-8"></a><span class="go">    ├── execution_trace_2025-11-21_07-29-37.txt</span>
+<a id="__codelineno-61-9" name="__codelineno-61-9" href="#__codelineno-61-9"></a><span class="go">    ├── hello_software_versions.yml</span>
+<a id="__codelineno-61-10" name="__codelineno-61-10" href="#__codelineno-61-10"></a><span class="go">    ├── params_2025-11-21_04-47-13.json</span>
+<a id="__codelineno-61-11" name="__codelineno-61-11" href="#__codelineno-61-11"></a><span class="go">    ├── params_2025-11-21_07-29-41.json</span>
+<a id="__codelineno-61-12" name="__codelineno-61-12" href="#__codelineno-61-12"></a><span class="go">    └── pipeline_dag_2025-11-21_04-47-18.html</span>
+<a id="__codelineno-61-13" name="__codelineno-61-13" href="#__codelineno-61-13"></a><span class="go">    └── pipeline_dag_2025-11-21_07-29-37.html</span>
+<a id="__codelineno-61-14" name="__codelineno-61-14" href="#__codelineno-61-14"></a>
+<a id="__codelineno-61-15" name="__codelineno-61-15" href="#__codelineno-61-15"></a><span class="go">1 directory, 12 files</span>
 </code></pre></div>
 </details>
 <p>You see we got another set of execution reports in addition to the ones we got from the first run, when the workflow was still just a placeholder.
@@ -6610,21 +6654,23 @@ To see these run in parallel, try increasing the CPU allocation of your codespac
 </div>
 <p>That's great, but our actual pipeline results are not there!</p>
 <p>Here's what happened: we didn't change anything to the modules themselves, so the outputs handled by module-level <code>publishDir</code> directives are still going to a <code>results</code> directory as specified in the original pipeline.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a>tree<span class="w"> </span>results
+<div class="highlight"><pre><span></span><code><a id="__codelineno-62-1" name="__codelineno-62-1" href="#__codelineno-62-1"></a>tree<span class="w"> </span>results
 </code></pre></div>
 <details class="example">
 <summary>Directory contents</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-61-1" name="__codelineno-61-1" href="#__codelineno-61-1"></a><span class="go">results</span>
-<a id="__codelineno-61-2" name="__codelineno-61-2" href="#__codelineno-61-2"></a><span class="go">├── Bonjour-output.txt</span>
-<a id="__codelineno-61-3" name="__codelineno-61-3" href="#__codelineno-61-3"></a><span class="go">├── COLLECTED-test-batch-output.txt</span>
-<a id="__codelineno-61-4" name="__codelineno-61-4" href="#__codelineno-61-4"></a><span class="go">├── COLLECTED-test-output.txt</span>
-<a id="__codelineno-61-5" name="__codelineno-61-5" href="#__codelineno-61-5"></a><span class="go">├── cowpy-COLLECTED-test-batch-output.txt</span>
-<a id="__codelineno-61-6" name="__codelineno-61-6" href="#__codelineno-61-6"></a><span class="go">├── cowpy-COLLECTED-test-output.txt</span>
-<a id="__codelineno-61-7" name="__codelineno-61-7" href="#__codelineno-61-7"></a><span class="go">├── Hello-output.txt</span>
-<a id="__codelineno-61-8" name="__codelineno-61-8" href="#__codelineno-61-8"></a><span class="go">├── Holà-output.txt</span>
-<a id="__codelineno-61-9" name="__codelineno-61-9" href="#__codelineno-61-9"></a><span class="go">├── UPPER-Bonjour-output.txt</span>
-<a id="__codelineno-61-10" name="__codelineno-61-10" href="#__codelineno-61-10"></a><span class="go">├── UPPER-Hello-output.txt</span>
-<a id="__codelineno-61-11" name="__codelineno-61-11" href="#__codelineno-61-11"></a><span class="go">└── UPPER-Holà-output.txt</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-63-1" name="__codelineno-63-1" href="#__codelineno-63-1"></a><span class="go">results</span>
+<a id="__codelineno-63-2" name="__codelineno-63-2" href="#__codelineno-63-2"></a><span class="go">├── Bonjour-output.txt</span>
+<a id="__codelineno-63-3" name="__codelineno-63-3" href="#__codelineno-63-3"></a><span class="go">├── COLLECTED-test-batch-output.txt</span>
+<a id="__codelineno-63-4" name="__codelineno-63-4" href="#__codelineno-63-4"></a><span class="go">├── COLLECTED-test-output.txt</span>
+<a id="__codelineno-63-5" name="__codelineno-63-5" href="#__codelineno-63-5"></a><span class="go">├── cowpy-COLLECTED-test-batch-output.txt</span>
+<a id="__codelineno-63-6" name="__codelineno-63-6" href="#__codelineno-63-6"></a><span class="go">├── cowpy-COLLECTED-test-output.txt</span>
+<a id="__codelineno-63-7" name="__codelineno-63-7" href="#__codelineno-63-7"></a><span class="go">├── Hello-output.txt</span>
+<a id="__codelineno-63-8" name="__codelineno-63-8" href="#__codelineno-63-8"></a><span class="go">├── Holà-output.txt</span>
+<a id="__codelineno-63-9" name="__codelineno-63-9" href="#__codelineno-63-9"></a><span class="go">├── UPPER-Bonjour-output.txt</span>
+<a id="__codelineno-63-10" name="__codelineno-63-10" href="#__codelineno-63-10"></a><span class="go">├── UPPER-Hello-output.txt</span>
+<a id="__codelineno-63-11" name="__codelineno-63-11" href="#__codelineno-63-11"></a><span class="go">└── UPPER-Holà-output.txt</span>
+<a id="__codelineno-63-12" name="__codelineno-63-12" href="#__codelineno-63-12"></a>
+<a id="__codelineno-63-13" name="__codelineno-63-13" href="#__codelineno-63-13"></a><span class="go">0 directories, 10 files</span>
 </code></pre></div>
 </details>
 <p>Ah, there they are, mixed in with the outputs of earlier runs of the original Hello pipeline.</p>

@@ -4755,7 +4755,7 @@
 <h2 id="1-find-and-retrieve-the-nf-coredemo-pipeline">1. Find and retrieve the nf-core/demo pipeline<a class="headerlink" href="#1-find-and-retrieve-the-nf-coredemo-pipeline" title="Permanent link">&para;</a></h2>
 <p>Let's start by locating the nf-core/demo pipeline on the project website at <a href="https://nf-co.re">nf-co.re</a>, which centralizes all information such as: general documentation and help articles, documentation for each of the pipelines, blog posts, event announcements and so forth.</p>
 <h3 id="11-find-the-pipeline-on-the-website">1.1. Find the pipeline on the website<a class="headerlink" href="#11-find-the-pipeline-on-the-website" title="Permanent link">&para;</a></h3>
-<p>In your web browser, go to https://nf-co.re/pipelines/ and type <code>demo</code> in the search bar.</p>
+<p>In your web browser, go to <a href="https://nf-co.re/pipelines/">https://nf-co.re/pipelines/</a> and type <code>demo</code> in the search bar.</p>
 <p><img alt="search results" src="../img/search-results.png" /></p>
 <p>Click on the pipeline name, <code>demo</code>, to access the pipeline documentation page.</p>
 <p>Each released pipeline has a dedicated page that includes the following documentation sections:</p>
@@ -4816,6 +4816,8 @@ By default, Nextflow saves them to <code>$NXF_HOME/assets</code>.</p>
 <div class="highlight"><span class="filename">Directory contents</span><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="go">/workspaces/.nextflow/assets/</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="go">└── nf-core</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="go">    └── demo</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="go">2 directories, 0 files</span>
 </code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -4832,6 +4834,8 @@ So to make that easier, let's create a symbolic link to that location from our c
 <div class="highlight"><span class="filename">Directory contents</span><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="go">pipelines</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="go">└── nf-core</span>
 <a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="go">    └── demo</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="go">2 directories, 0 files</span>
 </code></pre></div>
 <p>Now we can more easily peek into the source code as needed.</p>
 <p>But first, let's try running our first nf-core pipeline!</p>
@@ -4995,7 +4999,7 @@ If you follow the link to the pre-configured input, you'll see it is a csv file 
 </code></pre></div>
 </details>
 <p>If your output matches that, congratulations! You've just run your first nf-core pipeline.</p>
-<p>You'll notice that there is more a lot more console output than when you run a basic Nextflow pipeline.
+<p>You'll notice that there is a lot more console output than when you run a basic Nextflow pipeline.
 There's a header that includes a summary of the pipeline's version, inputs and outputs, and a few elements of configuration.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -5148,21 +5152,19 @@ If the tool belongs to a toolkit (i.e. a package containing multiple tools) then
 <div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="go">pipelines/nf-core/demo/modules</span>
 <a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="go">└── nf-core</span>
 <a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="go">    ├── fastqc</span>
-<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="go">    │   ├── environment.yml</span>
-<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="go">    │   ├── main.nf</span>
-<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a><span class="go">    │   ├── meta.yml</span>
-<a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a><span class="go">    │   └── tests</span>
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="go">    │   ├── environment.yml</span>
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="go">    │   ├── main.nf</span>
+<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a><span class="go">    │   ├── meta.yml</span>
+<a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a><span class="go">    │   └── tests</span>
 <a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a><span class="go">    ├── multiqc</span>
-<a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a><span class="go">    │   ├── environment.yml</span>
-<a id="__codelineno-21-10" name="__codelineno-21-10" href="#__codelineno-21-10"></a><span class="go">    │   ├── main.nf</span>
-<a id="__codelineno-21-11" name="__codelineno-21-11" href="#__codelineno-21-11"></a><span class="go">    │   ├── meta.yml</span>
-<a id="__codelineno-21-12" name="__codelineno-21-12" href="#__codelineno-21-12"></a><span class="go">    │   └── tests</span>
+<a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a><span class="go">    │   ├── environment.yml</span>
+<a id="__codelineno-21-10" name="__codelineno-21-10" href="#__codelineno-21-10"></a><span class="go">    │   ├── main.nf</span>
+<a id="__codelineno-21-11" name="__codelineno-21-11" href="#__codelineno-21-11"></a><span class="go">    │   ├── meta.yml</span>
+<a id="__codelineno-21-12" name="__codelineno-21-12" href="#__codelineno-21-12"></a><span class="go">    │   └── tests</span>
 <a id="__codelineno-21-13" name="__codelineno-21-13" href="#__codelineno-21-13"></a><span class="go">    └── seqtk</span>
 <a id="__codelineno-21-14" name="__codelineno-21-14" href="#__codelineno-21-14"></a><span class="go">        └── trim</span>
-<a id="__codelineno-21-15" name="__codelineno-21-15" href="#__codelineno-21-15"></a><span class="go">            ├── environment.yml</span>
-<a id="__codelineno-21-16" name="__codelineno-21-16" href="#__codelineno-21-16"></a><span class="go">            ├── main.nf</span>
-<a id="__codelineno-21-17" name="__codelineno-21-17" href="#__codelineno-21-17"></a><span class="go">            ├── meta.yml</span>
-<a id="__codelineno-21-18" name="__codelineno-21-18" href="#__codelineno-21-18"></a><span class="go">            └── tests</span>
+<a id="__codelineno-21-15" name="__codelineno-21-15" href="#__codelineno-21-15"></a>
+<a id="__codelineno-21-16" name="__codelineno-21-16" href="#__codelineno-21-16"></a><span class="go">7 directories, 6 files</span>
 </code></pre></div>
 </details>
 <p>Here you see that the <code>fastqc</code> and <code>multiqc</code> modules sit at the top level within the <code>nf-core</code> modules, whereas the <code>trim</code> module sits under the toolkit that it belongs to, <code>seqtk</code>.
@@ -5193,6 +5195,8 @@ However, we know there are also housekeeping subworkflows in there, so let's loo
 <a id="__codelineno-23-15" name="__codelineno-23-15" href="#__codelineno-23-15"></a><span class="go">        ├── main.nf</span>
 <a id="__codelineno-23-16" name="__codelineno-23-16" href="#__codelineno-23-16"></a><span class="go">        ├── meta.yml</span>
 <a id="__codelineno-23-17" name="__codelineno-23-17" href="#__codelineno-23-17"></a><span class="go">        └── tests</span>
+<a id="__codelineno-23-18" name="__codelineno-23-18" href="#__codelineno-23-18"></a>
+<a id="__codelineno-23-19" name="__codelineno-23-19" href="#__codelineno-23-19"></a><span class="go">9 directories, 7 files</span>
 </code></pre></div>
 </details>
 <p>As noted above, the <code>nf-core/demo</code> pipeline does not include any analysis-specific subworkflows, so all the subworkflows we see here are so-called 'housekeeping' or 'utility' workflows, as denoted by the <code>utils_</code> prefix in their names.
@@ -5245,7 +5249,7 @@ The schema is used for various purposes, including automated validation, and pro
 <p>Take a break! That was a lot. When you're feeling refreshed and ready, move on to the next section to apply what you've learned to write an nf-core compatible pipeline.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>If you would like to learn how to compose workflows with subworkflows before moving on to the next part, check out the <a href="../side_quests/workflows_of_workflows/">Workflows of Workflows</a> Side Quest.</p>
+<p>If you would like to learn how to compose workflows with subworkflows before moving on to the next part, check out the <a href="../../side_quests/workflows_of_workflows/">Workflows of Workflows</a> Side Quest.</p>
 </div>
 
 

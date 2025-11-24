@@ -1598,10 +1598,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#25-implement-samplesheettolist-in-the-pipeline" class="md-nav__link">
+  <a href="#25-implement-validation-in-the-pipeline" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.5. Implement samplesheetToList in the pipeline
+        2.5. Implement validation in the pipeline
       
     </span>
   </a>
@@ -4440,10 +4440,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#25-implement-samplesheettolist-in-the-pipeline" class="md-nav__link">
+  <a href="#25-implement-validation-in-the-pipeline" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.5. Implement samplesheetToList in the pipeline
+        2.5. Implement validation in the pipeline
       
     </span>
   </a>
@@ -4763,7 +4763,7 @@ Run these commands from inside the <code>hello-nf-core/</code> directory:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>cp<span class="w"> </span>-r<span class="w"> </span>solutions/core-hello-part4<span class="w"> </span>core-hello
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">cd</span><span class="w"> </span>core-hello
 </code></pre></div>
-<p>This gives you a pipeline with the <code>CAT_CAT</code> module already integrated.</p>
+<p>This gives you a pipeline with the <code>COWPY</code> module already upgraded to follow nf-core standards.</p>
 </div>
 <hr />
 <h2 id="0-warmup-a-bit-of-background">0. Warmup: A bit of background<a class="headerlink" href="#0-warmup-a-bit-of-background" title="Permanent link">&para;</a></h2>
@@ -4855,7 +4855,7 @@ While nf-schema works with any Nextflow workflow, it's the standard validation s
 </ul>
 <div class="admonition note">
 <p class="admonition-title">What input data validation does NOT do</p>
-<p>Input data validation checks the structure of <em>manifest files</em> (sample sheets, CSV files), not the contents of your actual data files (FASTQ, BAM, VCF, etc.).</p>
+<p>Input data validation checks the structure of <em>manifest files</em> (sample sheets, CSV files), NOT the contents of your actual data files (FASTQ, BAM, VCF, etc.).</p>
 <p>For large-scale data, validating file contents (like checking BAM integrity) should happen in pipeline processes running on worker nodes, not during the validation stage on the orchestrating machine.</p>
 </div>
 <h3 id="04-when-should-validation-occur">0.4. When should validation occur?<a class="headerlink" href="#04-when-should-validation-occur" title="Permanent link">&para;</a></h3>
@@ -4866,7 +4866,7 @@ While nf-schema works with any Nextflow workflow, it's the standard validation s
     C --&gt;|✓ Valid| E[Pipeline executes]
     C --&gt;|✗ Invalid| F[Error: Fix input data]</code></pre>
 <p>Validation should happen <strong>before</strong> any pipeline processes run, to provide fast feedback and prevent wasted compute time.</p>
-<p>Now let's apply it in practice, starting with parameter validation.</p>
+<p>Now let's apply these principles in practice, starting with parameter validation.</p>
 <hr />
 <h2 id="1-parameter-validation-nextflow_schemajson">1. Parameter validation (nextflow_schema.json)<a class="headerlink" href="#1-parameter-validation-nextflow_schemajson" title="Permanent link">&para;</a></h2>
 <p>Let's start by adding parameter validation to our pipeline. This validates command-line flags like <code>--input</code>, <code>--outdir</code>, and <code>--batch</code>.</p>
@@ -4909,7 +4909,7 @@ While nf-schema works with any Nextflow workflow, it's the standard validation s
 <p>This configuration tells nf-schema to:</p>
 <ul>
 <li><strong><code>defaultIgnoreParams</code></strong>: Skip validation of complex parameters like <code>genomes</code> (set by template developers)</li>
-<li><strong><code>ignoreParams</code></strong>: Skip validation of the <code>input</code> parameter's file contents (temporary - we'll remove this in section 2)</li>
+<li><strong><code>ignoreParams</code></strong>: Skip validation of the <code>input</code> parameter's file contents (temporary; we'll re-enable this in section 2)</li>
 <li><strong><code>monochromeLogs</code></strong>: Disable colored output in validation messages when set to <code>true</code> (controlled by <code>params.monochrome_logs</code>)</li>
 </ul>
 <div class="admonition note">
@@ -4986,7 +4986,8 @@ We'll remove this setting in section 2 after configuring the input data schema.<
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Where do schema parameters come from?</p>
-<p>The schema validation uses <code>nextflow.config</code> as the base for parameter definitions. Parameters declared elsewhere in your workflow scripts (like in <code>main.nf</code> or module files) are <strong>not</strong> automatically picked up by the schema validator.</p>
+<p>The schema validation uses <code>nextflow.config</code> as the base for parameter definitions.
+Parameters declared elsewhere in your workflow scripts (like in <code>main.nf</code> or module files) are <strong>not</strong> automatically picked up by the schema validator.</p>
 <p>This means you should always declare your pipeline parameters in <code>nextflow.config</code>, and then define their validation rules in <code>nextflow_schema.json</code>.</p>
 </div>
 <p>Notice the <code>batch</code> parameter we've been using isn't defined yet in the schema!</p>
@@ -4995,7 +4996,7 @@ We'll remove this setting in section 2 after configuring the input data schema.<
 Instead, nf-core provides an interactive GUI tool that handles the JSON Schema syntax for you and validates your changes:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>nf-core<span class="w"> </span>pipelines<span class="w"> </span>schema<span class="w"> </span>build
 </code></pre></div>
-<p>You'll see output like:</p>
+<p>You should see something like this:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="go">                                      ,--./,-.</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="go">      ___     __   __   __   ___     /,-._.--\</span>
 <a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="go">|\ | |__  __ /  ` /  \ |__) |__         }  {</span>
@@ -5020,7 +5021,7 @@ Instead, nf-core provides an interactive GUI tool that handles the JSON Schema s
 <li><strong>ID</strong>: <code>batch</code></li>
 <li><strong>Description</strong>: <code>Name for this batch of greetings</code></li>
 <li><strong>Type</strong>: <code>string</code></li>
-<li>Check the <strong>Required</strong> checkbox</li>
+<li><strong>Required</strong>: tick the checkbox</li>
 <li>Optionally, select an icon from the icon picker (e.g., <code>fas fa-layer-group</code>)</li>
 </ol>
 <p><img alt="Adding the batch parameter" src="../../../hello_nf-core/img/schema_add.png" /></p>
@@ -5105,32 +5106,34 @@ The web interface handles all the JSON Schema syntax for you, making it easy to 
 <p>Now that parameter validation is working, let's add validation for the input data file contents.</p>
 <hr />
 <h2 id="2-input-data-validation-schema_inputjson">2. Input data validation (schema_input.json)<a class="headerlink" href="#2-input-data-validation-schema_inputjson" title="Permanent link">&para;</a></h2>
-<p>Now let's add validation for the contents of our input CSV file. While parameter validation checks command-line flags, input data validation ensures the data inside the CSV file is structured correctly.</p>
+<p>We're going to add validation for the contents of our input CSV file.
+Whereas parameter validation checks command-line flags, input data validation ensures the data inside the CSV file is structured correctly.</p>
 <h3 id="21-understand-the-greetingscsv-format">2.1. Understand the greetings.csv format<a class="headerlink" href="#21-understand-the-greetingscsv-format" title="Permanent link">&para;</a></h3>
 <p>Let's remind ourselves what our input looks like:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>cat<span class="w"> </span>assets/greetings.csv
 </code></pre></div>
-<div class="highlight"><span class="filename">assets/greetings.csv</span><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>Hello
-<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>Bonjour
-<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>Holà
+<div class="highlight"><span class="filename">assets/greetings.csv</span><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>Hello,en,87
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>Bonjour,fr,96
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>Holà,es,98
 </code></pre></div>
-<!-- TODO: Update this to the three-column version -->
-
 <p>This is a simple CSV with:</p>
 <ul>
-<li>One column (no header)</li>
-<li>One greeting per line</li>
-<li>Text strings with no special format requirements</li>
+<li>Three columns (no header)</li>
+<li>On each line: a greeting, a language, and a score</li>
+<li>The first two columns are text strings with no special format requirements</li>
+<li>The third column is an integer</li>
 </ul>
+<p>For our pipeline, only the first column is required.</p>
 <h3 id="22-design-the-schema-structure">2.2. Design the schema structure<a class="headerlink" href="#22-design-the-schema-structure" title="Permanent link">&para;</a></h3>
 <p>For our use case, we want to:</p>
 <ol>
-<li>Accept CSV input with one column</li>
-<li>Treat each row as a greeting string</li>
-<li>Ensure greetings are not empty</li>
-<li>Ensure no whitespace-only entries</li>
+<li>Accept CSV input with at least one column</li>
+<li>Treat the first element of each row as a greeting string</li>
+<li>Ensure greetings are not empty and do not start with whitespace</li>
+<li>Ensure the language field matches one of the supported language codes (en, fr, es, it, de)</li>
+<li>Ensure the score field is an integer with a value between 0 and 100</li>
 </ol>
-<p>We'll structure this as an array of objects, where each object has a <code>greeting</code> field.</p>
+<p>We'll structure this as an array of objects, where each object has at least a <code>greeting</code> field.</p>
 <h3 id="23-update-the-schema-file">2.3. Update the schema file<a class="headerlink" href="#23-update-the-schema-file" title="Permanent link">&para;</a></h3>
 <p>The nf-core pipeline template includes a default <code>assets/schema_input.json</code> designed for paired-end sequencing data.
 We need to replace it with a simpler schema for our greetings use case.</p>
@@ -5155,7 +5158,18 @@ We need to replace it with a simpler schema for our greetings use case.</p>
 <span class="normal"><a href="#__codelineno-18-15">15</a></span>
 <span class="normal"><a href="#__codelineno-18-16">16</a></span>
 <span class="normal"><a href="#__codelineno-18-17">17</a></span>
-<span class="normal"><a href="#__codelineno-18-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1"></a><span class="p">{</span>
+<span class="normal"><a href="#__codelineno-18-18">18</a></span>
+<span class="normal"><a href="#__codelineno-18-19">19</a></span>
+<span class="normal"><a href="#__codelineno-18-20">20</a></span>
+<span class="normal"><a href="#__codelineno-18-21">21</a></span>
+<span class="normal"><a href="#__codelineno-18-22">22</a></span>
+<span class="normal"><a href="#__codelineno-18-23">23</a></span>
+<span class="normal"><a href="#__codelineno-18-24">24</a></span>
+<span class="normal"><a href="#__codelineno-18-25">25</a></span>
+<span class="normal"><a href="#__codelineno-18-26">26</a></span>
+<span class="normal"><a href="#__codelineno-18-27">27</a></span>
+<span class="normal"><a href="#__codelineno-18-28">28</a></span>
+<span class="normal"><a href="#__codelineno-18-29">29</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1"></a><span class="p">{</span>
 <a id="__codelineno-18-2" name="__codelineno-18-2"></a><span class="w">    </span><span class="nt">&quot;$schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://json-schema.org/draft/2020-12/schema&quot;</span><span class="p">,</span>
 <a id="__codelineno-18-3" name="__codelineno-18-3"></a><span class="w">    </span><span class="nt">&quot;$id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://raw.githubusercontent.com/core/hello/main/assets/schema_input.json&quot;</span><span class="p">,</span>
 <a id="__codelineno-18-4" name="__codelineno-18-4"></a><span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;core/hello pipeline - params.input schema&quot;</span><span class="p">,</span>
@@ -5168,11 +5182,22 @@ We need to replace it with a simpler schema for our greetings use case.</p>
 </span><a id="__codelineno-18-11" name="__codelineno-18-11"></a><span class="hll"><span class="w">                </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
 </span><a id="__codelineno-18-12" name="__codelineno-18-12"></a><span class="hll"><span class="w">                </span><span class="nt">&quot;pattern&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;^\\S.*$&quot;</span><span class="p">,</span>
 </span><a id="__codelineno-18-13" name="__codelineno-18-13"></a><span class="hll"><span class="w">                </span><span class="nt">&quot;errorMessage&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Greeting must be provided and cannot be empty or start with whitespace&quot;</span>
-</span><a id="__codelineno-18-14" name="__codelineno-18-14"></a><span class="hll"><span class="w">            </span><span class="p">}</span>
-</span><a id="__codelineno-18-15" name="__codelineno-18-15"></a><span class="w">        </span><span class="p">},</span>
-<a id="__codelineno-18-16" name="__codelineno-18-16"></a><span class="hll"><span class="w">        </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;greeting&quot;</span><span class="p">]</span>
-</span><a id="__codelineno-18-17" name="__codelineno-18-17"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-18-18" name="__codelineno-18-18"></a><span class="p">}</span>
+</span><a id="__codelineno-18-14" name="__codelineno-18-14"></a><span class="hll"><span class="w">            </span><span class="p">},</span>
+</span><a id="__codelineno-18-15" name="__codelineno-18-15"></a><span class="hll"><span class="w">            </span><span class="nt">&quot;language&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><a id="__codelineno-18-16" name="__codelineno-18-16"></a><span class="hll"><span class="w">                </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+</span><a id="__codelineno-18-17" name="__codelineno-18-17"></a><span class="hll"><span class="w">                </span><span class="nt">&quot;enum&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;en&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;fr&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;es&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;it&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;de&quot;</span><span class="p">],</span>
+</span><a id="__codelineno-18-18" name="__codelineno-18-18"></a><span class="hll"><span class="w">                </span><span class="nt">&quot;errorMessage&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Language must be one of: en, fr, es, it, de&quot;</span>
+</span><a id="__codelineno-18-19" name="__codelineno-18-19"></a><span class="hll"><span class="w">            </span><span class="p">},</span>
+</span><a id="__codelineno-18-20" name="__codelineno-18-20"></a><span class="hll"><span class="w">            </span><span class="nt">&quot;score&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><a id="__codelineno-18-21" name="__codelineno-18-21"></a><span class="hll"><span class="w">                </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span><span class="p">,</span>
+</span><a id="__codelineno-18-22" name="__codelineno-18-22"></a><span class="hll"><span class="w">                </span><span class="nt">&quot;minimum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+</span><a id="__codelineno-18-23" name="__codelineno-18-23"></a><span class="hll"><span class="w">                </span><span class="nt">&quot;maximum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span>
+</span><a id="__codelineno-18-24" name="__codelineno-18-24"></a><span class="hll"><span class="w">                </span><span class="nt">&quot;errorMessage&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Score must be an integer with a value between 0 and 100&quot;</span>
+</span><a id="__codelineno-18-25" name="__codelineno-18-25"></a><span class="hll"><span class="w">            </span><span class="p">}</span>
+</span><a id="__codelineno-18-26" name="__codelineno-18-26"></a><span class="w">        </span><span class="p">},</span>
+<a id="__codelineno-18-27" name="__codelineno-18-27"></a><span class="hll"><span class="w">        </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;greeting&quot;</span><span class="p">]</span>
+</span><a id="__codelineno-18-28" name="__codelineno-18-28"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-18-29" name="__codelineno-18-29"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -5248,42 +5273,43 @@ We need to replace it with a simpler schema for our greetings use case.</p>
 <p>The key changes:</p>
 <ul>
 <li><strong><code>description</code></strong>: Updated to mention "greetings file"</li>
-<li><strong><code>properties</code></strong>: Replaced <code>sample</code>, <code>fastq_1</code>, and <code>fastq_2</code> with a single <code>greeting</code> field</li>
-<li><strong><code>type: "string"</code></strong>: Must be a text string</li>
-<li><strong><code>pattern: "^\\S.*$"</code></strong>: Must start with a non-whitespace character (but can contain spaces after that)</li>
+<li><strong><code>properties</code></strong>: Replaced <code>sample</code>, <code>fastq_1</code>, and <code>fastq_2</code> with <code>greeting</code>, <code>language</code>, and <code>score</code></li>
+<li><strong><code>type:</code></strong> Enforce either string (<code>greeting</code>, <code>language</code>) or integer (<code>score</code>)</li>
+<li><strong><code>pattern: "^\\S.*$"</code></strong>: Greeting must start with a non-whitespace character (but can contain spaces after that)</li>
+<li><strong><code>"enum": ["en", "fr", "es", "it", "de"]</code></strong>: Language code must be in the supported set</li>
+<li><strong><code>"minimum": 0</code> and <code>"maximum": 100</code></strong>: Score value must be between 0 and 100</li>
 <li><strong><code>errorMessage</code></strong>: Custom error message shown if validation fails</li>
 <li><strong><code>required</code></strong>: Changed from <code>["sample", "fastq_1"]</code> to <code>["greeting"]</code></li>
 </ul>
 <h3 id="24-add-a-header-to-the-greetingscsv-file">2.4. Add a header to the greetings.csv file<a class="headerlink" href="#24-add-a-header-to-the-greetingscsv-file" title="Permanent link">&para;</a></h3>
 <p>When nf-schema reads a CSV file, it expects the first row to contain column headers that match the field names in the schema.</p>
-<p>For our simple case, we need to add a <code>greeting</code> header to our greetings file:</p>
-<p>Add a header line to the greetings file:</p>
+<p>For our simple case, we need to add a header line to our greetings file:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">After</label><label for="__tabbed_3_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">assets/greetings.csv</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1">1</a></span>
 <span class="normal"><a href="#__codelineno-20-2">2</a></span>
 <span class="normal"><a href="#__codelineno-20-3">3</a></span>
-<span class="normal"><a href="#__codelineno-20-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="hll">greeting
-</span><a id="__codelineno-20-2" name="__codelineno-20-2"></a>Hello
-<a id="__codelineno-20-3" name="__codelineno-20-3"></a>Bonjour
-<a id="__codelineno-20-4" name="__codelineno-20-4"></a>Holà
+<span class="normal"><a href="#__codelineno-20-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="hll">greeting,language,score
+</span><a id="__codelineno-20-2" name="__codelineno-20-2"></a>Hello,en,87
+<a id="__codelineno-20-3" name="__codelineno-20-3"></a>Bonjour,fr,96
+<a id="__codelineno-20-4" name="__codelineno-20-4"></a>Holà,es,98
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">assets/greetings.csv</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1">1</a></span>
 <span class="normal"><a href="#__codelineno-21-2">2</a></span>
-<span class="normal"><a href="#__codelineno-21-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1"></a>Hello
-<a id="__codelineno-21-2" name="__codelineno-21-2"></a>Bonjour
-<a id="__codelineno-21-3" name="__codelineno-21-3"></a>Holà
+<span class="normal"><a href="#__codelineno-21-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1"></a>Hello,en,87
+<a id="__codelineno-21-2" name="__codelineno-21-2"></a>Bonjour,fr,96
+<a id="__codelineno-21-3" name="__codelineno-21-3"></a>Holà,es,98
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
 </div>
-<p>Now the CSV file has a header that matches the field name in our schema.</p>
+<p>Now the CSV file has a header line that matches the field names in our schema.</p>
 <p>The final step is to implement the validation in the pipeline code using <code>samplesheetToList</code>.</p>
-<h3 id="25-implement-samplesheettolist-in-the-pipeline">2.5. Implement <code>samplesheetToList</code> in the pipeline<a class="headerlink" href="#25-implement-samplesheettolist-in-the-pipeline" title="Permanent link">&para;</a></h3>
-<p>Now we need to replace our simple CSV parsing with nf-schema's <code>samplesheetToList</code> function, which validates and converts the sample sheet.</p>
+<h3 id="25-implement-validation-in-the-pipeline">2.5. Implement validation in the pipeline<a class="headerlink" href="#25-implement-validation-in-the-pipeline" title="Permanent link">&para;</a></h3>
+<p>Now we need to replace our simple CSV parsing with nf-schema's <code>samplesheetToList</code> function, which will validate and parse the samplesheet.</p>
 <p>The <code>samplesheetToList</code> function:</p>
 <ol>
 <li>Reads the input sample sheet (CSV, TSV, JSON, or YAML)</li>
@@ -5437,32 +5463,55 @@ We need to replace it with a simpler schema for our greetings use case.</p>
 <a id="__codelineno-28-11" name="__codelineno-28-11" href="#__codelineno-28-11"></a><span class="go">[e1/4db4fd] CORE_HELLO:HELLO:cowpy              | 1 of 1 ✔</span>
 <a id="__codelineno-28-12" name="__codelineno-28-12" href="#__codelineno-28-12"></a><span class="go">-[core/hello] Pipeline completed successfully-</span>
 </code></pre></div>
-<p>Great! The pipeline runs successfully and validation passes silently. The warning about <code>--character</code> is just informational since it's not defined in the schema. If you want, use what you've learned to add validation for that parameter too!</p>
+<p>Great! The pipeline runs successfully and validation passes silently.
+The warning about <code>--character</code> is just informational since it's not defined in the schema.
+If you want, use what you've learned to add validation for that parameter too!</p>
 <h4 id="272-test-with-invalid-input">2.7.2. Test with invalid input<a class="headerlink" href="#272-test-with-invalid-input" title="Permanent link">&para;</a></h4>
-<p>Now let's test that validation catches errors. Create a test file with an invalid column name:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>cat<span class="w"> </span>&gt;<span class="w"> </span>/tmp/invalid_greetings.csv<span class="w"> </span><span class="s">&lt;&lt; &#39;EOF&#39;</span>
-<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="s">message</span>
-<a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a><span class="s">Hello</span>
-<a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a><span class="s">Bonjour</span>
-<a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a><span class="s">Holà</span>
-<a id="__codelineno-29-6" name="__codelineno-29-6" href="#__codelineno-29-6"></a><span class="s">EOF</span>
+<p>Passing validation is always a good feeling, but let's make sure that the validation will actually catch errors.</p>
+<p>To create a test file with an invalid column name, start by making a copy of the <code>greetings.csv</code> file:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>cp<span class="w"> </span>assets/greetings.csv<span class="w"> </span>assets/invalid_greetings.csv
 </code></pre></div>
-<p>This file uses <code>message</code> as the column name instead of <code>greeting</code>, which doesn't match our schema.</p>
+<p>Now open the file and change the name of the first column, in the header line, from <code>greeting</code> to <code>message</code>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">After</label><label for="__tabbed_6_2">Before</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">tmp_invalid_greetings.csv</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-30-1">1</a></span>
+<span class="normal"><a href="#__codelineno-30-2">2</a></span>
+<span class="normal"><a href="#__codelineno-30-3">3</a></span>
+<span class="normal"><a href="#__codelineno-30-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1"></a><span class="hll">message,language,score
+</span><a id="__codelineno-30-2" name="__codelineno-30-2"></a>Hello,en,87
+<a id="__codelineno-30-3" name="__codelineno-30-3"></a>Bonjour,fr,96
+<a id="__codelineno-30-4" name="__codelineno-30-4"></a>Holà,es,98
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">tmp_invalid_greetings.csv</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-31-1">1</a></span>
+<span class="normal"><a href="#__codelineno-31-2">2</a></span>
+<span class="normal"><a href="#__codelineno-31-3">3</a></span>
+<span class="normal"><a href="#__codelineno-31-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1"></a><span class="hll">greeting,language,score
+</span><a id="__codelineno-31-2" name="__codelineno-31-2"></a>Hello,en,87
+<a id="__codelineno-31-3" name="__codelineno-31-3"></a>Bonjour,fr,96
+<a id="__codelineno-31-4" name="__codelineno-31-4"></a>Holà,es,98
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<p>This doesn't match our schema, so the validation should throw an error.</p>
 <p>Try running the pipeline with this invalid input:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>.<span class="w"> </span>--input<span class="w"> </span>/tmp/invalid_greetings.csv<span class="w"> </span>--outdir<span class="w"> </span>test-results<span class="w"> </span>-profile<span class="w"> </span>docker
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>.<span class="w"> </span>--input<span class="w"> </span>assets/invalid_greetings.csv<span class="w"> </span>--outdir<span class="w"> </span>test-results<span class="w"> </span>-profile<span class="w"> </span>docker
 </code></pre></div>
-<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="go">ERROR ~ Validation of pipeline parameters failed!</span>
-<a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>
-<a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="go"> -- Check &#39;.nextflow.log&#39; file for details</span>
-<a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a><span class="go">The following invalid input values have been detected:</span>
-<a id="__codelineno-31-5" name="__codelineno-31-5" href="#__codelineno-31-5"></a>
-<a id="__codelineno-31-6" name="__codelineno-31-6" href="#__codelineno-31-6"></a><span class="go">* Missing required parameter(s): batch</span>
-<a id="__codelineno-31-7" name="__codelineno-31-7" href="#__codelineno-31-7"></a><span class="go">* --input (/tmp/invalid_greetings.csv): Validation of file failed:</span>
-<a id="__codelineno-31-8" name="__codelineno-31-8" href="#__codelineno-31-8"></a><span class="go">        -&gt; Entry 1: Missing required field(s): greeting</span>
-<a id="__codelineno-31-9" name="__codelineno-31-9" href="#__codelineno-31-9"></a><span class="go">        -&gt; Entry 2: Missing required field(s): greeting</span>
-<a id="__codelineno-31-10" name="__codelineno-31-10" href="#__codelineno-31-10"></a><span class="go">        -&gt; Entry 3: Missing required field(s): greeting</span>
-<a id="__codelineno-31-11" name="__codelineno-31-11" href="#__codelineno-31-11"></a>
-<a id="__codelineno-31-12" name="__codelineno-31-12" href="#__codelineno-31-12"></a><span class="go"> -- Check script &#39;subworkflows/nf-core/utils_nfschema_plugin/main.nf&#39; at line: 68 or see &#39;.nextflow.log&#39; file for more details</span>
+<div class="highlight"><span class="filename">Output (subset)</span><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="go">ERROR ~ Validation of pipeline parameters failed!</span>
+<a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a>
+<a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a><span class="go"> -- Check &#39;.nextflow.log&#39; file for details</span>
+<a id="__codelineno-33-4" name="__codelineno-33-4" href="#__codelineno-33-4"></a><span class="go">The following invalid input values have been detected:</span>
+<a id="__codelineno-33-5" name="__codelineno-33-5" href="#__codelineno-33-5"></a>
+<a id="__codelineno-33-6" name="__codelineno-33-6" href="#__codelineno-33-6"></a><span class="go">* Missing required parameter(s): batch</span>
+<a id="__codelineno-33-7" name="__codelineno-33-7" href="#__codelineno-33-7"></a><span class="go">* --input (/tmp/invalid_greetings.csv): Validation of file failed:</span>
+<a id="__codelineno-33-8" name="__codelineno-33-8" href="#__codelineno-33-8"></a><span class="go">        -&gt; Entry 1: Missing required field(s): greeting</span>
+<a id="__codelineno-33-9" name="__codelineno-33-9" href="#__codelineno-33-9"></a><span class="go">        -&gt; Entry 2: Missing required field(s): greeting</span>
+<a id="__codelineno-33-10" name="__codelineno-33-10" href="#__codelineno-33-10"></a><span class="go">        -&gt; Entry 3: Missing required field(s): greeting</span>
+<a id="__codelineno-33-11" name="__codelineno-33-11" href="#__codelineno-33-11"></a>
+<a id="__codelineno-33-12" name="__codelineno-33-12" href="#__codelineno-33-12"></a><span class="go"> -- Check script &#39;subworkflows/nf-core/utils_nfschema_plugin/main.nf&#39; at line: 68 or see &#39;.nextflow.log&#39; file for more details</span>
 </code></pre></div>
 <p>Perfect! The validation caught the error and provided a clear, helpful error message pointing to:</p>
 <ul>
@@ -5471,6 +5520,7 @@ We need to replace it with a simpler schema for our greetings use case.</p>
 <li>What the specific problem is (missing required field <code>greeting</code>)</li>
 </ul>
 <p>The schema validation ensures that input files have the correct structure before the pipeline runs, saving time and preventing confusing errors later in execution.</p>
+<p>If you'd like to practice this, feel free to create other greetings input files that violate the schema in other fun ways.</p>
 <h3 id="takeaway_1">Takeaway<a class="headerlink" href="#takeaway_1" title="Permanent link">&para;</a></h3>
 <p>You've implemented and tested both parameter validation and input data validation. Your pipeline now validates inputs before execution, providing fast feedback and clear error messages.</p>
 <div class="admonition tip">
