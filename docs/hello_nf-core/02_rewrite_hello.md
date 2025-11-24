@@ -214,6 +214,8 @@ tree core-hello-results
         ├── hello_software_versions.yml
         ├── params_2025-11-21_04-47-18.json
         └── pipeline_dag_2025-11-21_04-47-18.html
+
+    1 directory, 6 files
     ```
 
 You can take a peek at the reports to see what was run, and the answer is: nothing at all!
@@ -275,7 +277,7 @@ workflow HELLO {
 */
 ```
 
-Compared to a basic Nextflow workflow like the one developed in Hello Nextflow, you'll notice a few things that are new here (highlighted lines above):
+Compared to a basic Nextflow workflow like the one developed in [Hello Nextflow](../hello_nextflow/index.md), you'll notice a few things that are new here (highlighted lines above):
 
 - The workflow block has a name
 - Workflow inputs are declared using the `take:` keyword and the channel construction is moved up to the parent workflow
@@ -371,6 +373,8 @@ tree original-hello/
     │   ├── cowpy.nf
     │   └── sayHello.nf
     └── nextflow.config
+
+    1 directory, 6 files
     ```
 
 Feel free to run it to satisfy yourself that it works:
@@ -478,7 +482,7 @@ Now, replace the channel construction with a simple `take` statement declaring e
 
 This leaves the details of how the inputs are provided up to the parent workflow.
 
-While we're at it, we can also comment out the line
+While we're at it, we can also comment out the line `params.greeting = 'greetings.csv'`
 
 === "After"
 
@@ -501,8 +505,6 @@ While we're at it, we can also comment out the line
         params.batch = 'test-batch'
         params.character = 'turkey'
     ```
-
-params.greeting = 'greetings.csv'
 
 !!! note
 
@@ -802,6 +804,8 @@ tree core-hello/modules
         ├── convertToUpper.nf
         ├── cowpy.nf
         └── sayHello.nf
+
+    1 directory, 4 files
     ```
 
 Now let's set up the module import statements.
@@ -1408,6 +1412,8 @@ tree core-hello-results
         ├── params_2025-11-21_07-29-41.json
         └── pipeline_dag_2025-11-21_04-47-18.html
         └── pipeline_dag_2025-11-21_07-29-37.html
+
+    1 directory, 12 files
     ```
 
 You see we got another set of execution reports in addition to the ones we got from the first run, when the workflow was still just a placeholder.
@@ -1442,6 +1448,8 @@ tree results
     ├── UPPER-Bonjour-output.txt
     ├── UPPER-Hello-output.txt
     └── UPPER-Holà-output.txt
+
+    0 directories, 10 files
     ```
 
 Ah, there they are, mixed in with the outputs of earlier runs of the original Hello pipeline.
