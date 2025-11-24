@@ -22,7 +22,7 @@ Our goal is to develop a workflow that takes **FASTQ** files from one or multipl
 To perform these steps, we will use the following tools:
 
 1. **Host removal** with [**Bowtie2**](https://bowtie-bio.sourceforge.net/bowtie2/manual.shtml) by aligning the reads against an indexed reference genome.
-   Here, we are using the indexed genome of yeast, but you can use any organism you are interested in by building [your own index](https://www.metagenomics.wiki/tools/bowtie2/index) or downloading a [precomputed one](https://benlangmead.github.io/aws-indexes/bowtie).
+   **Here, we are using the indexed genome of yeast given the computational limitations we have on GitHub Codespaces and only for educational purposes**. Nonetheless, you can use any organism you are interested in by building [your own index](https://www.metagenomics.wiki/tools/bowtie2/index) or downloading a [precomputed one](https://benlangmead.github.io/aws-indexes/bowtie).
 2. **Taxonomic classification** with [**Kraken2**](https://ccb.jhu.edu/software/kraken2/).
    This tool relies on an indexed database that can be [downloaded](https://benlangmead.github.io/aws-indexes/k2).
    Alternatively, you can build your customized version following [these instructions](https://avilpage.com/2024/07/mastering-kraken2-build-custom-db.html).
