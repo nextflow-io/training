@@ -3,7 +3,7 @@
 The training environment contains all the software, code and data necessary to work through this training course, so you don't need to install anything yourself.
 However, you do need a (free) account to log in, and you should take a few minutes to familiarize yourself with the interface.
 
-If you have not yet done so, please the [Environment Setup](../../envsetup/) mini-course before going any further.
+If you have not yet done so, please follow the [Environment Setup](../../envsetup/) mini-course before going any further.
 
 ## Materials provided
 
@@ -87,7 +87,7 @@ Here you should see the following directory structure:
 - **`bin`** is the directory where we store customized scripts that can be run within a given process.
 - **`data`** contains input data and related resources:
   - An indexed genome within the `yeast` folder representing the host genome to which we want to map the reads for contamination removal.
-  - _viral_db_ is a directory that contains Kraken2 database necessary for both taxonomic annotation and species abundance re-estimation.
+  - _viral_db_ is a directory that contains the Kraken2 database necessary for both taxonomic annotation and species abundance re-estimation.
   - _samplesheet.csv_ lists the IDs and paths of the example data files, for processing in batches.
   - _samples_ directory is where the raw sequences are stored.
     The names correspond to accession numbers that you can search on the [Sequence Read Archive](https://www.ncbi.nlm.nih.gov/sra)
