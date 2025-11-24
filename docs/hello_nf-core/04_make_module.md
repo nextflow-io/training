@@ -833,7 +833,7 @@ Each file serves a specific purpose:
 
 !!! tip "Learn more about testing"
 
-    The generated test file uses nf-test, a testing framework for Nextflow pipelines and modules. To learn how to write and run these tests, see the [nf-test side quest](../../side_quests/nf_test/).
+    The generated test file uses nf-test, a testing framework for Nextflow pipelines and modules. To learn how to write and run these tests, see the [nf-test side quest](../side_quests/nf_test.md).
 
 The generated `main.nf` includes all the patterns you just learned, plus some additional features:
 
