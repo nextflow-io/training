@@ -865,7 +865,9 @@ This pattern of keeping metadata explicit and attached to the data is a core bes
 
 Here's what you've learned:
 
-1. **Reading and Structuring Metadata**: Reading CSV files and creating organized metadata maps that stay associated with your data files
+1. **Reading and Structuring Metadata**
+
+   Reading CSV files and creating organized metadata maps that stay associated with your data files
 
    ```nextflow
    channel.fromPath('samplesheet.csv')
@@ -875,43 +877,47 @@ Here's what you've learned:
      }
    ```
 
-2. **Expanding Metadata During Workflow**: Adding new information to your metadata as your pipeline progresses by adding process outputs and deriving values through conditional logic
+2. **Expanding Metadata During Workflow**
 
-   - Adding new keys based on process output:
+   Adding new information to your metadata as your pipeline progresses by adding process outputs and deriving values through conditional logic
 
-     ```nextflow
-     .map { meta, file, lang ->
-       [ meta + [lang:lang], file ]
-     }
-     ```
+   ```nextflow
+   // Adding new keys based on process output
 
-   - Adding new keys using a conditional clause
+   .map { meta, file, lang ->
+     [ meta + [lang:lang], file ]
+   }
+   ```
 
-     ```nextflow
-     .map{ meta, file ->
-         if ( meta.lang.equals("de") || meta.lang.equals('en') ){
-             lang_group = "germanic"
-         } else if ( meta.lang in ["fr", "es", "it"] ) {
-             lang_group = "romance"
-         } else {
-             lang_group = "unknown"
-         }
-     }
-     ```
+   ```nextflow
+   // Adding new keys using a conditional clause
 
-3. **Customizing Process Behavior**: Using metadata to adapt how processes handle different files
+   .map{ meta, file ->
+       if ( meta.lang.equals("de") || meta.lang.equals('en') ){
+           lang_group = "germanic"
+       } else if ( meta.lang in ["fr", "es", "it"] ) {
+           lang_group = "romance"
+       } else {
+           lang_group = "unknown"
+       }
+   }
+   ```
 
-   - Using meta values in Process Directives
+3. **Customizing Process Behavior**
 
-     ```nextflow
-     publishDir "results/${meta.lang_group}", mode: 'copy'
-     ```
+   Using metadata to adapt how processes handle different files
 
-   - Adapting tool parameters for individual files
+   ```nextflow
+   // Using meta values in Process Directives
 
-     ```nextflow
-     cat $input_file | cowpy -c ${meta.character} > cowpy-${input_file}
-     ```
+   publishDir "results/${meta.lang_group}", mode: 'copy'
+   ```
+
+   ```nextflow
+   // Adapting tool parameters for individual files
+
+   cat $input_file | cowpy -c ${meta.character} > cowpy-${input_file}
+   ```
 
 This approach offers several advantages over hardcoding file information:
 
