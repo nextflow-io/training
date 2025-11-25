@@ -870,53 +870,53 @@ Applying this pattern in your own work will enable you to build robust, maintain
 
 ### Key patterns
 
-1.  **Reading and Structuring Metadata:** Reading CSV files and creating organized metadata maps that stay associated with your data files.
+1. **Reading and Structuring Metadata:** Reading CSV files and creating organized metadata maps that stay associated with your data files.
 
-    ```groovy
-    channel.fromPath('samplesheet.csv')
-      .splitCsv(header: true)
-      .map { row ->
-          [ [id:row.id, character:row.character], row.recording ]
-      }
-    ```
+   ```groovy
+   channel.fromPath('samplesheet.csv')
+     .splitCsv(header: true)
+     .map { row ->
+         [ [id:row.id, character:row.character], row.recording ]
+     }
+   ```
 
-2.  **Expanding Metadata During Workflow** Adding new information to your metadata as your pipeline progresses by adding process outputs and deriving values through conditional logic
+2. **Expanding Metadata During Workflow** Adding new information to your metadata as your pipeline progresses by adding process outputs and deriving values through conditional logic
 
-    - Adding new keys based on process output
+   - Adding new keys based on process output
 
-    ```groovy
-    .map { meta, file, lang ->
-      [ meta + [lang:lang], file ]
-    }
-    ```
+   ```groovy
+   .map { meta, file, lang ->
+     [ meta + [lang:lang], file ]
+   }
+   ```
 
-    - Adding new keys using a conditional clause
+   - Adding new keys using a conditional clause
 
-    ```groovy
-    .map{ meta, file ->
-        if ( meta.lang.equals("de") || meta.lang.equals('en') ){
-            lang_group = "germanic"
-        } else if ( meta.lang in ["fr", "es", "it"] ) {
-            lang_group = "romance"
-        } else {
-            lang_group = "unknown"
-        }
-    }
-    ```
+   ```groovy
+   .map{ meta, file ->
+       if ( meta.lang.equals("de") || meta.lang.equals('en') ){
+           lang_group = "germanic"
+       } else if ( meta.lang in ["fr", "es", "it"] ) {
+           lang_group = "romance"
+       } else {
+           lang_group = "unknown"
+       }
+   }
+   ```
 
-3.  **Customizing Process Behavior:** Using metadata to adapt how processes handle different files
+3. **Customizing Process Behavior:** Using metadata to adapt how processes handle different files
 
-    - Using meta values in Process Directives
+   - Using meta values in Process Directives
 
-    ```groovy
-    publishDir "results/${meta.lang_group}", mode: 'copy'
-    ```
+   ```groovy
+   publishDir "results/${meta.lang_group}", mode: 'copy'
+   ```
 
-    - Adapting tool parameters for individual files
+   - Adapting tool parameters for individual files
 
-    ```groovy
-    cat $input_file | cowpy -c ${meta.character} > cowpy-${input_file}
-    ```
+   ```groovy
+   cat $input_file | cowpy -c ${meta.character} > cowpy-${input_file}
+   ```
 
 ### Additional resources
 

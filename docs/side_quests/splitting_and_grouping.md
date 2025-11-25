@@ -1110,7 +1110,7 @@ Mastering these channel operations will enable you to build flexible, scalable p
 
 ### Key patterns
 
-1. **Creating structured input data**: Starting from a CSV file with meta maps (building on patterns from [Metadata in workflows](./metadata.md))
+1. **Creating structured input data:** Starting from a CSV file with meta maps (building on patterns from [Metadata in workflows](./metadata.md))
 
    ```groovy
    ch_samples = channel.fromPath("./data/samplesheet.csv")
@@ -1120,14 +1120,13 @@ Mastering these channel operations will enable you to build flexible, scalable p
        }
    ```
 
-2. **Splitting data into separate channels**: We used `filter` to divide data into independent streams based on the `type` field
+2. **Splitting data into separate channels:** We used `filter` to divide data into independent streams based on the `type` field
 
    ```groovy
-   // Filter channel based on condition
    channel.filter { it.type == 'tumor' }
    ```
 
-3. **Joining matched samples**: We used `join` to recombine related samples based on `id` and `repeat` fields
+3. **Joining matched samples:** We used `join` to recombine related samples based on `id` and `repeat` fields
 
    - Join two channels by key (first element of tuple)
 
@@ -1153,33 +1152,32 @@ Mastering these channel operations will enable you to build flexible, scalable p
        )
    ```
 
-4. **Distributing across intervals**: We used `combine` to create Cartesian products of samples with genomic intervals for parallel processing
+4. **Distributing across intervals:** We used `combine` to create Cartesian products of samples with genomic intervals for parallel processing
 
    ```groovy
    samples_ch.combine(intervals_ch)
    ```
 
-5. **Aggregating by grouping keys**: We used `groupTuple` to group by the first element in each tuple, thereby collecting samples sharing `id` and `interval` fields and merging technical replicates
+5. **Aggregating by grouping keys:** We used `groupTuple` to group by the first element in each tuple, thereby collecting samples sharing `id` and `interval` fields and merging technical replicates
 
    ```groovy
-   //
    channel.groupTuple()
    ```
 
-- **Optimizing the data structure:** We used `subMap` to extract specific fields and created a named closure for making transformations reusable
+6. **Optimizing the data structure:** We used `subMap` to extract specific fields and created a named closure for making transformations reusable
 
-  - Extract specific fields from a map
+   - Extract specific fields from a map
 
-  ```groovy
-  meta.subMap(['id', 'repeat'])
-  ```
+   ```groovy
+   meta.subMap(['id', 'repeat'])
+   ```
 
-  - Named closure for reusable transformations
+   - Named closure for reusable transformations
 
-  ```groovy
-  getSampleIdAndReplicate = { meta, file -> [meta.subMap(['id', 'repeat']), file] }
-  channel.map(getSampleIdAndReplicate)
-  ```
+   ```groovy
+   getSampleIdAndReplicate = { meta, file -> [meta.subMap(['id', 'repeat']), file] }
+   channel.map(getSampleIdAndReplicate)
+   ```
 
 ## Additional resources
 
