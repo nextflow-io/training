@@ -14,7 +14,9 @@ In Nextflow pipelines, metadata can be used to:
 - Configure processes based on file characteristics
 - Group related files for joint analysis
 
-We'll explore how to handle metadata in workflows.
+### Learning goals
+
+In this side quest, we'll explore how to handle metadata in workflows.
 Starting with a simple datasheet containing basic file information, you'll learn how to:
 
 - Read and parse file metadata from CSV files
@@ -24,32 +26,26 @@ Starting with a simple datasheet containing basic file information, you'll learn
 
 These skills will help you build more robust and flexible pipelines that can handle complex file relationships and processing requirements.
 
-In this tutorial, we'll tackle a common data processing scenario: handling multiple files where each file needs different processing based on its characteristics.
+### Prerequisites
 
-We have greeting files in different languages (French, German, Spanish, Italian, English), but we don't know which language each file contains.
-Our challenge is to:
+Before taking on this side quest, you should:
 
-1. **Identify** the language in each file automatically
-2. **Group** files by language family (Germanic vs Romance languages)
-3. **Customize** the processing for each file based on its language and metadata
-4. **Organize** outputs by language group
-
-This represents a typical workflow pattern where file-specific metadata drives processing decisions - exactly the kind of problem that metadata maps solve elegantly.
-
-Let's dive in!
+- Have completed the [Hello Nextflow](../hello_nextflow/README.md) tutorial or equivalent beginner's course.
+- Be comfortable using basic Nextflow concepts and mechanisms (processes, channels, operators)
 
 ---
 
-## 0. Warmup
+## 0. Get started
 
-### 0.1. Prerequisites
+Before we dive in, let's make sure you have everything you need.
 
-Before taking on this side quest you should:
+### 0.1. Open the training codespace
 
-- Complete the [Hello Nextflow](../hello_nextflow/README.md) tutorial
-- Understand basic Nextflow concepts (processes, channels, operators)
+If you haven't yet done so, make sure to open the training environment as described in the [Environment Setup](../envsetup/index.md).
 
-### 0.2. Starting Point
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
+
+### 0.2. Move into the project directory
 
 Let's move into the project directory.
 
@@ -63,7 +59,9 @@ You can set VSCode to focus on this directory:
 code .
 ```
 
-You'll find a `data` directory containing a samplesheet and a main workflow file.
+### 0.3. Explore the materials
+
+You'll find a main workflow file and a `data` directory containing a samplesheet and a handful of data files.
 
 ```console title="Directory contents"
 > tree
@@ -81,14 +79,13 @@ You'll find a `data` directory containing a samplesheet and a main workflow file
 └── nextflow.config
 ```
 
-The datasheet contains information about different files and some associated data that we will use in this exercise to tailor our analysis to each file.
-Each data file contains greetings in different languages, but we don't know what language they are in.
+Each data file contains some greeting text in one of five languages (French, German, Spanish, Italian, English).
 
-The datasheet has 3 columns:
+The datasheet list the paths to the data files and some associated metadata, organized in 3 columns:
 
 - `id`: self-explanatory, an ID given to the file
 - `character`: a character name, that we will use later to draw different creatures
-- `data`: paths to `.txt` files that contain phrases in different languages
+- `data`: paths to `.txt` files that contain greetings in different languages
 
 ```console title="datasheet.csv"
 id,character,recording
@@ -100,6 +97,30 @@ sampleE,stegosaurus,/workspaces/training/side-quests/metadata/data/hola.txt
 sampleF,moose,/workspaces/training/side-quests/metadata/data/salut.txt
 sampleG,turtle,/workspaces/training/side-quests/metadata/data/ciao.txt
 ```
+
+We will also provide you with a containerized language analysis tool called `langid`.
+
+### 0.4. Scenario
+
+Your challenge is to write a Nextflow workflow that will:
+
+1. **Identify** the language in each file automatically
+2. **Group** files by language family (Germanic vs Romance languages)
+3. **Customize** the processing for each file based on its language and metadata
+4. **Organize** outputs by language group
+
+This represents a typical workflow pattern where file-specific metadata drives processing decisions; exactly the kind of problem that metadata maps solve elegantly.
+
+### 0.5. Readiness checklist
+
+Think you're ready to dive in?
+
+- [ ] I understand the goal of this course and its prerequisites
+- [ ] My codespace is up and running
+- [ ] I've set my working directory appropriately
+- [ ] I understand the scenario
+
+If you can check all the boxes, you're good to go.
 
 ---
 
@@ -846,9 +867,51 @@ Here's what you've learned:
 
 1. **Reading and Structuring Metadata**: Reading CSV files and creating organized metadata maps that stay associated with your data files
 
+   ```nextflow
+   channel.fromPath('samplesheet.csv')
+     .splitCsv(header: true)
+     .map { row ->
+         [ [id:row.id, character:row.character], row.recording ]
+     }
+   ```
+
 2. **Expanding Metadata During Workflow**: Adding new information to your metadata as your pipeline progresses by adding process outputs and deriving values through conditional logic
 
+   - Adding new keys based on process output:
+
+     ```nextflow
+     .map { meta, file, lang ->
+       [ meta + [lang:lang], file ]
+     }
+     ```
+
+   - Adding new keys using a conditional clause
+
+     ```nextflow
+     .map{ meta, file ->
+         if ( meta.lang.equals("de") || meta.lang.equals('en') ){
+             lang_group = "germanic"
+         } else if ( meta.lang in ["fr", "es", "it"] ) {
+             lang_group = "romance"
+         } else {
+             lang_group = "unknown"
+         }
+     }
+     ```
+
 3. **Customizing Process Behavior**: Using metadata to adapt how processes handle different files
+
+   - Using meta values in Process Directives
+
+     ```nextflow
+     publishDir "results/${meta.lang_group}", mode: 'copy'
+     ```
+
+   - Adapting tool parameters for individual files
+
+     ```nextflow
+     cat $input_file | cowpy -c ${meta.character} > cowpy-${input_file}
+     ```
 
 This approach offers several advantages over hardcoding file information:
 
@@ -857,55 +920,11 @@ This approach offers several advantages over hardcoding file information:
 - Output organization can reflect file metadata
 - File information can be expanded during pipeline execution
 
-### Key Concepts
-
-- **Reading Datasheets & creating meta maps**
-
-  ```nextflow
-  channel.fromPath('samplesheet.csv')
-    .splitCsv(header: true)
-    .map { row ->
-        [ [id:row.id, character:row.character], row.recording ]
-    }
-  ```
-
-- **Adding new keys to the meta map**
-
-  1.  based on process output:
-
-```nextflow
-.map { meta, file, lang ->
-  [ meta + [lang:lang], file ]
-}
-```
-
-2.  and using a conditional clause
-
-```nextflow
-.map{ meta, file ->
-    if ( meta.lang.equals("de") || meta.lang.equals('en') ){
-        lang_group = "germanic"
-    } else if ( meta.lang in ["fr", "es", "it"] ) {
-        lang_group = "romance"
-    } else {
-        lang_group = "unknown"
-    }
-}
-```
-
-- **Using meta values in Process Directives**
-
-  ```nextflow
-  publishDir "results/${meta.lang_group}", mode: 'copy'
-  ```
-
-- **Adapting tool parameters for individual files**
-
-  ```nextflow
-  cat $input_file | cowpy -c ${meta.character} > cowpy-${input_file}
-  ```
-
-## Resources
+## Additional resources
 
 - [map](https://www.nextflow.io/docs/latest/operator.html#map)
 - [stdout](https://www.nextflow.io/docs/latest/process.html#outputs)
+
+## What's next?
+
+Return to the [menu of Side Quests](./index.md) or click the button in the bottom right of the page to move on to the next topic in the list.
