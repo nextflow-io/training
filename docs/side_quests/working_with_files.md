@@ -1340,7 +1340,7 @@ Applying these techniques in your own work will enable you to build more efficie
 
 1.  **Basic File Operations:** We created Path objects with `file()` and accessed file attributes like name, extension, and parent directory, learning the difference between strings and Path objects.
 
-    - Created a Path object with `file()`
+    - Create a Path object with `file()`
 
     ```groovy
     myFile = file('path/to/file.txt')
@@ -1357,31 +1357,60 @@ Applying these techniques in your own work will enable you to build more efficie
 
 2.  **Using Remote Files**: We learned how to transparently switch between local and remote files using URIs, demonstrating Nextflow's ability to handle files from various sources without changing workflow logic.
 
+    - Use a local file
+
     ```groovy
-    // Use a local file
     myFile = file('path/to/file.txt')
+    ```
 
-    // Use a file on FTP
+    - Use a file on FTP
+
+    ```groovy
     myFile = file('ftp://path/to/file.txt')
+    ```
 
-    // Use a file on HTTPS
+    - Use a file on HTTPS
+
+    ```groovy
     myFile = file('https://path/to/file.txt')
+    ```
 
-    // Use a file on S3
+    - Use a file on S3
+
+    ```groovy
     myFile = file('s3://path/to/file.txt')
+    ```
 
-    // Use a file on Azure Blob Storage
+    - Use a file on Azure Blob Storage
+
+    ```groovy
     myFile = file('az://path/to/file.txt')
+    ```
 
-    // Use a file on Google Cloud Storage
+    - Use a file on Google Cloud Storage
+
+    ```groovy
     myFile = file('gs://path/to/file.txt')
     ```
 
 3.  **Reading files using the `fromPath()` channel factory:** We created channels from file patterns with `channel.fromPath()` and viewed their file attributes, including object types.
 
+    - Create a channel from a file pattern
+
     ```groovy
-    // Create a channel from a file pattern
     ch_fastq = channel.fromPath('data/*.fastq.gz')
+    ```
+
+    - Get file attributes
+
+    ```groovy
+    ch_fastq.view { myFile ->
+        println "File object class: ${myFile.class}"
+        println "File name: ${myFile.name}"
+        println "Simple name: ${myFile.simpleName}"
+        println "Extension: ${myFile.extension}"
+        println "Parent directory: ${myFile.parent}"
+    }
     ```
 
 4.  **Extracting Patient Metadata from Filenames:** We used `tokenize()` and `replace()` to extract and structure metadata from filenames, converting them to organized maps.
