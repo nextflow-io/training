@@ -863,7 +863,14 @@ In this section, you've learned how to:
 In this side quest, you've explored how to effectively work with metadata in Nextflow workflows.
 This pattern of keeping metadata explicit and attached to the data is a core best practice in Nextflow that enables building robust, maintainable bioinformatics workflows.
 
-Here's what you've learned:
+This approach offers several advantages over hardcoding file information:
+
+- File metadata stays associated with files throughout the workflow
+- Process behavior can be customized per file
+- Output organization can reflect file metadata
+- File information can be expanded during pipeline execution
+
+### Key learnings
 
 1.  **Reading and Structuring Metadata:** Reading CSV files and creating organized metadata maps that stay associated with your data files.
 
@@ -903,28 +910,23 @@ Here's what you've learned:
 
     - Using meta values in Process Directives
 
-      ```groovy
-      publishDir "results/${meta.lang_group}", mode: 'copy'
-      ```
+    ```groovy
+    publishDir "results/${meta.lang_group}", mode: 'copy'
+    ```
 
     - Adapting tool parameters for individual files
 
-      ```groovy
-      cat $input_file | cowpy -c ${meta.character} > cowpy-${input_file}
-      ```
-
-This approach offers several advantages over hardcoding file information:
-
-- File metadata stays associated with files throughout the workflow
-- Process behavior can be customized per file
-- Output organization can reflect file metadata
-- File information can be expanded during pipeline execution
+    ```groovy
+    cat $input_file | cowpy -c ${meta.character} > cowpy-${input_file}
+    ```
 
 ### Additional resources
 
 - [map](https://www.nextflow.io/docs/latest/operator.html#map)
 - [stdout](https://www.nextflow.io/docs/latest/process.html#outputs)
 
-### What's next?
+---
+
+## What's next?
 
 Return to the [menu of Side Quests](./index.md) or click the button in the bottom right of the page to move on to the next topic in the list.
