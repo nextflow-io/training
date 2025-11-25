@@ -872,13 +872,13 @@ Applying this pattern in your own work will enable you to build robust, maintain
 
 1.  **Reading and Structuring Metadata:** Reading CSV files and creating organized metadata maps that stay associated with your data files.
 
-        ```groovy
-        channel.fromPath('samplesheet.csv')
-          .splitCsv(header: true)
-          .map { row ->
-              [ [id:row.id, character:row.character], row.recording ]
-          }
-        ```
+    ```groovy
+    channel.fromPath('samplesheet.csv')
+      .splitCsv(header: true)
+      .map { row ->
+          [ [id:row.id, character:row.character], row.recording ]
+      }
+    ```
 
 2.  **Expanding Metadata During Workflow** Adding new information to your metadata as your pipeline progresses by adding process outputs and deriving values through conditional logic.
 
