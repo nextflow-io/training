@@ -920,11 +920,11 @@ This approach offers several advantages over hardcoding file information:
 - Output organization can reflect file metadata
 - File information can be expanded during pipeline execution
 
-## Additional resources
+### Additional resources
 
 - [map](https://www.nextflow.io/docs/latest/operator.html#map)
 - [stdout](https://www.nextflow.io/docs/latest/process.html#outputs)
 
-## What's next?
+### What's next?
 
 Return to the [menu of Side Quests](./index.md) or click the button in the bottom right of the page to move on to the next topic in the list.
