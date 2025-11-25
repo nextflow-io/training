@@ -1112,19 +1112,19 @@ Mastering these channel operations will enable you to build flexible, scalable p
 
 1.  **Creating structured input data:** Starting from a CSV file with meta maps (building on patterns from [Metadata in workflows](./metadata.md))
 
-        ```groovy
-        ch_samples = channel.fromPath("./data/samplesheet.csv")
-            .splitCsv(header: true)
-            .map{ row ->
-              [[id:row.id, repeat:row.repeat, type:row.type], row.bam]
-            }
-        ```
+    ```groovy
+    ch_samples = channel.fromPath("./data/samplesheet.csv")
+        .splitCsv(header: true)
+        .map{ row ->
+          [[id:row.id, repeat:row.repeat, type:row.type], row.bam]
+        }
+    ```
 
 2.  **Splitting data into separate channels:** We used `filter` to divide data into independent streams based on the `type` field
 
-        ```groovy
-        channel.filter { it.type == 'tumor' }
-        ```
+    ```groovy
+    channel.filter { it.type == 'tumor' }
+    ```
 
 3.  **Joining matched samples:** We used `join` to recombine related samples based on `id` and `repeat` fields
 
