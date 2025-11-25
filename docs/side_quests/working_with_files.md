@@ -1357,37 +1357,37 @@ Applying these techniques in your own work will enable you to build more efficie
 
 2.  **Using Remote Files**: We learned how to transparently switch between local and remote files using URIs, demonstrating Nextflow's ability to handle files from various sources without changing workflow logic.
 
-    - Use a local file
+    - Local file
 
     ```groovy
     myFile = file('path/to/file.txt')
     ```
 
-    - Use a file on FTP
+    - FTP
 
     ```groovy
     myFile = file('ftp://path/to/file.txt')
     ```
 
-    - Use a file on HTTPS
+    - HTTPS
 
     ```groovy
     myFile = file('https://path/to/file.txt')
     ```
 
-    - Use a file on S3
+    - Amazon S3
 
     ```groovy
     myFile = file('s3://path/to/file.txt')
     ```
 
-    - Use a file on Azure Blob Storage
+    - Azure Blob Storage
 
     ```groovy
     myFile = file('az://path/to/file.txt')
     ```
 
-    - Use a file on Google Cloud Storage
+    - Google Cloud Storage
 
     ```groovy
     myFile = file('gs://path/to/file.txt')
