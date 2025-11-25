@@ -858,14 +858,15 @@ In this section, you've learned how to:
 ## Summary
 
 In this side quest, you've explored how to effectively work with metadata in Nextflow workflows.
-This pattern of keeping metadata explicit and attached to the data is a core best practice in Nextflow that enables building robust, maintainable bioinformatics workflows.
 
-This approach offers several advantages over hardcoding file information:
+This pattern of keeping metadata explicit and attached to the data is a core best practice in Nextflow, offering several advantages over hardcoding file information:
 
 - File metadata stays associated with files throughout the workflow
 - Process behavior can be customized per file
 - Output organization can reflect file metadata
 - File information can be expanded during pipeline execution
+
+Applying this pattern in your own work will enable you to build robust, maintainable bioinformatics workflows.
 
 ### Key learnings
 
