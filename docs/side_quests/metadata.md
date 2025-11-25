@@ -867,37 +867,37 @@ Here's what you've learned:
 
 1.  **Reading and Structuring Metadata:** Reading CSV files and creating organized metadata maps that stay associated with your data files.
 
-        ```nextflow
-        channel.fromPath('samplesheet.csv')
-          .splitCsv(header: true)
-          .map { row ->
-              [ [id:row.id, character:row.character], row.recording ]
-          }
-        ```
+    ```nextflow
+    channel.fromPath('samplesheet.csv')
+      .splitCsv(header: true)
+      .map { row ->
+          [ [id:row.id, character:row.character], row.recording ]
+      }
+    ```
 
 2.  **Expanding Metadata During Workflow** Adding new information to your metadata as your pipeline progresses by adding process outputs and deriving values through conditional logic
 
-        ```nextflow
-        // Adding new keys based on process output
+- Adding new keys based on process output
 
+        ```nextflow
         .map { meta, file, lang ->
           [ meta + [lang:lang], file ]
         }
         ```
 
-        ```nextflow
-        // Adding new keys using a conditional clause
+- Adding new keys using a conditional clause
 
-        .map{ meta, file ->
-            if ( meta.lang.equals("de") || meta.lang.equals('en') ){
-                lang_group = "germanic"
-            } else if ( meta.lang in ["fr", "es", "it"] ) {
-                lang_group = "romance"
-            } else {
-                lang_group = "unknown"
-            }
-        }
-        ```
+          ```nextflow
+          .map{ meta, file ->
+              if ( meta.lang.equals("de") || meta.lang.equals('en') ){
+                  lang_group = "germanic"
+              } else if ( meta.lang in ["fr", "es", "it"] ) {
+                  lang_group = "romance"
+              } else {
+                  lang_group = "unknown"
+              }
+          }
+          ```
 
 3.  **Customizing Process Behavior:** Using metadata to adapt how processes handle different files
 
