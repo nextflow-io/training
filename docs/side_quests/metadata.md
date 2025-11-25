@@ -882,27 +882,27 @@ Applying this pattern in your own work will enable you to build robust, maintain
 
 2.  **Expanding Metadata During Workflow** Adding new information to your metadata as your pipeline progresses by adding process outputs and deriving values through conditional logic.
 
-        - Adding new keys based on process output
+    - Adding new keys based on process output
 
-        ```groovy
-        .map { meta, file, lang ->
-          [ meta + [lang:lang], file ]
+    ```groovy
+    .map { meta, file, lang ->
+      [ meta + [lang:lang], file ]
+    }
+    ```
+
+    - Adding new keys using a conditional clause
+
+    ```groovy
+    .map{ meta, file ->
+        if ( meta.lang.equals("de") || meta.lang.equals('en') ){
+            lang_group = "germanic"
+        } else if ( meta.lang in ["fr", "es", "it"] ) {
+            lang_group = "romance"
+        } else {
+            lang_group = "unknown"
         }
-        ```
-
-        - Adding new keys using a conditional clause
-
-        ```groovy
-        .map{ meta, file ->
-            if ( meta.lang.equals("de") || meta.lang.equals('en') ){
-                lang_group = "germanic"
-            } else if ( meta.lang in ["fr", "es", "it"] ) {
-                lang_group = "romance"
-            } else {
-                lang_group = "unknown"
-            }
-        }
-        ```
+    }
+    ```
 
 3.  **Customizing Process Behavior:** Using metadata to adapt how processes handle different files.
 
