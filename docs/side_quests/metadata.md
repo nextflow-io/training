@@ -37,8 +37,6 @@ Before taking on this side quest, you should:
 
 ## 0. Get started
 
-Before we dive in, let's make sure you have everything you need.
-
 #### Open the training codespace
 
 If you haven't yet done so, make sure to open the training environment as described in the [Environment Setup](../envsetup/index.md).
@@ -47,15 +45,15 @@ If you haven't yet done so, make sure to open the training environment as descri
 
 #### Move into the project directory
 
-Let's move into the project directory.
+Let's move into the directory where the files for this tutorial are located.
 
-```bash title="Navigate to the project directory"
+```bash
 cd side-quests/metadata
 ```
 
 You can set VSCode to focus on this directory:
 
-```bash title="Open VSCode in current directory"
+```bash
 code .
 ```
 
@@ -64,7 +62,6 @@ code .
 You'll find a main workflow file and a `data` directory containing a samplesheet and a handful of data files.
 
 ```console title="Directory contents"
-> tree
 .
 ├── data
 │   ├── bonjour.txt
@@ -78,8 +75,6 @@ You'll find a main workflow file and a `data` directory containing a samplesheet
 ├── main.nf
 └── nextflow.config
 ```
-
-Each data file contains some greeting text in one of five languages (French, German, Spanish, Italian, English).
 
 The datasheet list the paths to the data files and some associated metadata, organized in 3 columns:
 
@@ -97,6 +92,8 @@ sampleE,stegosaurus,/workspaces/training/side-quests/metadata/data/hola.txt
 sampleF,moose,/workspaces/training/side-quests/metadata/data/salut.txt
 sampleG,turtle,/workspaces/training/side-quests/metadata/data/ciao.txt
 ```
+
+Each data file contains some greeting text in one of five languages (French, German, Spanish, Italian, English).
 
 We will also provide you with a containerized language analysis tool called `langid`.
 
