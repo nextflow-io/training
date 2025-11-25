@@ -19,6 +19,8 @@ By the end of this side quest, you'll be able to:
 - Integrate file operations into Nextflow processes with proper input handling
 - Organize process outputs using metadata-driven directory structures
 
+These skills will help you build workflows that can handle different kinds of file inputs with great flexibility.
+
 ### Prerequisites
 
 Before taking on this side quest, you should:
@@ -92,7 +94,7 @@ The sequencing data files are named with a typical `_R1_` and `_R2_` convention 
 
     Don't worry if you're not familiar with this experimental design, it's not critical for understanding this tutorial.
 
-#### Review the objective
+#### Review the assignment
 
 Your challenge is to write a Nextflow workflow that will parse the samplesheet, extract basic metadata from the file naming structure, and use that metadata to organize the analysis and outputs appropriately.
 
@@ -105,7 +107,7 @@ Think you're ready to dive in?
 - [ ] I understand the goal of this course and its prerequisites
 - [ ] My codespace is up and running
 - [ ] I've set my working directory appropriately
-- [ ] I understand the scenario
+- [ ] I understand the assignment
 
 If you can check all the boxes, you're good to go.
 

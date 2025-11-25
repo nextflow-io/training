@@ -97,7 +97,7 @@ Each data file contains some greeting text in one of five languages (French, Ger
 
 We will also provide you with a containerized language analysis tool called `langid`.
 
-#### Review the objective
+#### Review the assignment
 
 Your challenge is to write a Nextflow workflow that will:
 
@@ -115,7 +115,7 @@ Think you're ready to dive in?
 - [ ] I understand the goal of this course and its prerequisites
 - [ ] My codespace is up and running
 - [ ] I've set my working directory appropriately
-- [ ] I understand the scenario
+- [ ] I understand the assignment
 
 If you can check all the boxes, you're good to go.
 

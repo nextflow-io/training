@@ -10,9 +10,8 @@ Nextflow's channel system is at the heart of this flexibility. Channels connect 
 
 In this side quest, you'll learn to split and group data using Nextflow's channel operators.
 We'll start with a CSV file containing sample information and associated data files, then manipulate and reorganize this data.
-By the end, you'll be able to separate and combine data streams effectively, creating more efficient and understandable workflows.
 
-You will:
+By the end of this side quest, you'll be able to separate and combine data streams effectively, using the following techniques:
 
 - Read data from files using `splitCsv`
 - Filter and transform data with `filter` and `map`
@@ -93,7 +92,7 @@ For patient A specifically, we have two sets of technical replicates (repeats).
 
     Don't worry if you're not familiar with this experimental design, it's not critical for understanding this tutorial.
 
-#### Review the objective
+#### Review the assignment
 
 Your challenge is to write a Nextflow workflow that will group and split the samples based on the associated metadata.
 
@@ -106,7 +105,7 @@ Think you're ready to dive in?
 - [ ] I understand the goal of this course and its prerequisites
 - [ ] My codespace is up and running
 - [ ] I've set my working directory appropriately
-- [ ] I understand the stated objective
+- [ ] I understand the assignment
 
 If you can check all the boxes, you're good to go.
 
