@@ -1110,76 +1110,76 @@ Mastering these channel operations will enable you to build flexible, scalable p
 
 ### Key patterns
 
-1. **Creating structured input data:** Starting from a CSV file with meta maps (building on patterns from [Metadata in workflows](./metadata.md))
+1.  **Creating structured input data:** Starting from a CSV file with meta maps (building on patterns from [Metadata in workflows](./metadata.md))
 
-   ```groovy
-   ch_samples = channel.fromPath("./data/samplesheet.csv")
-       .splitCsv(header: true)
-       .map{ row ->
-         [[id:row.id, repeat:row.repeat, type:row.type], row.bam]
-       }
-   ```
+        ```groovy
+        ch_samples = channel.fromPath("./data/samplesheet.csv")
+            .splitCsv(header: true)
+            .map{ row ->
+              [[id:row.id, repeat:row.repeat, type:row.type], row.bam]
+            }
+        ```
 
-2. **Splitting data into separate channels:** We used `filter` to divide data into independent streams based on the `type` field
+2.  **Splitting data into separate channels:** We used `filter` to divide data into independent streams based on the `type` field
 
-   ```groovy
-   channel.filter { it.type == 'tumor' }
-   ```
+        ```groovy
+        channel.filter { it.type == 'tumor' }
+        ```
 
-3. **Joining matched samples:** We used `join` to recombine related samples based on `id` and `repeat` fields
+3.  **Joining matched samples:** We used `join` to recombine related samples based on `id` and `repeat` fields
 
-   - Join two channels by key (first element of tuple)
+        - Join two channels by key (first element of tuple)
 
-   ```groovy
-   tumor_ch.join(normal_ch)
-   ```
+        ```groovy
+        tumor_ch.join(normal_ch)
+        ```
 
-   - Extract joining key and join by this value
+        - Extract joining key and join by this value
 
-   ```groovy
-   tumor_ch.map { meta, file -> [meta.id, meta, file] }
-       .join(
-         normal_ch.map { meta, file -> [meta.id, meta, file] }
-       )
-   ```
+        ```groovy
+        tumor_ch.map { meta, file -> [meta.id, meta, file] }
+            .join(
+              normal_ch.map { meta, file -> [meta.id, meta, file] }
+            )
+        ```
 
-   - Join on multiple fields using subMap
+        - Join on multiple fields using subMap
 
-   ```groovy
-   tumor_ch.map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
-       .join(
-         normal_ch.map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
-       )
-   ```
+        ```groovy
+        tumor_ch.map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
+            .join(
+              normal_ch.map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
+            )
+        ```
 
-4. **Distributing across intervals:** We used `combine` to create Cartesian products of samples with genomic intervals for parallel processing.
+4.  **Distributing across intervals:** We used `combine` to create Cartesian products of samples with genomic intervals for parallel processing.
 
-   ```groovy
-   samples_ch.combine(intervals_ch)
-   ```
+        ```groovy
+        samples_ch.combine(intervals_ch)
+        ```
 
-5. **Aggregating by grouping keys:** We used `groupTuple` to group by the first element in each tuple, thereby collecting samples sharing `id` and `interval` fields and merging technical replicates.
+5.  **Aggregating by grouping keys:** We used `groupTuple` to group by the first element in each tuple, thereby collecting samples sharing `id` and `interval` fields and merging technical replicates.
 
-   ```groovy
-   channel.groupTuple()
-   ```
+        ```groovy
+        channel.groupTuple()
+        ```
 
-6. **Optimizing the data structure:** We used `subMap` to extract specific fields and created a named closure for making transformations reusable.
+6.  **Optimizing the data structure:** We used `subMap` to extract specific fields and created a named closure for making transformations reusable.
 
-   - Extract specific fields from a map
+        - Extract specific fields from a map
 
-   ```groovy
-   meta.subMap(['id', 'repeat'])
-   ```
+        ```groovy
+        meta.subMap(['id', 'repeat'])
+        ```
 
-   - Use named closure for reusable transformations
+        - Use named closure for reusable transformations
 
-   ```groovy
-   getSampleIdAndReplicate = { meta, file -> [meta.subMap(['id', 'repeat']), file] }
-   channel.map(getSampleIdAndReplicate)
-   ```
+        ```groovy
+        getSampleIdAndReplicate = { meta, file -> [meta.subMap(['id', 'repeat']), file] }
+        channel.map(getSampleIdAndReplicate)
+        ```
 
-## Additional resources
+### Additional resources
 
 - [filter](https://www.nextflow.io/docs/latest/operator.html#filter)
 - [map](https://www.nextflow.io/docs/latest/operator.html#map)
