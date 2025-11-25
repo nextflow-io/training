@@ -879,39 +879,39 @@ Here's what you've learned:
 
     - Adding new keys based on process output
 
-            ```groovy
-            .map { meta, file, lang ->
-              [ meta + [lang:lang], file ]
-            }
-            ```
+    ```groovy
+    .map { meta, file, lang ->
+      [ meta + [lang:lang], file ]
+    }
+    ```
 
     - Adding new keys using a conditional clause
 
-            ```groovy
-            .map{ meta, file ->
-                if ( meta.lang.equals("de") || meta.lang.equals('en') ){
-                    lang_group = "germanic"
-                } else if ( meta.lang in ["fr", "es", "it"] ) {
-                    lang_group = "romance"
-                } else {
-                    lang_group = "unknown"
-                }
-            }
-            ```
+    ```groovy
+    .map{ meta, file ->
+        if ( meta.lang.equals("de") || meta.lang.equals('en') ){
+            lang_group = "germanic"
+        } else if ( meta.lang in ["fr", "es", "it"] ) {
+            lang_group = "romance"
+        } else {
+            lang_group = "unknown"
+        }
+    }
+    ```
 
 3.  **Customizing Process Behavior:** Using metadata to adapt how processes handle different files
 
-        ```groovy
-        // Using meta values in Process Directives
+    - Using meta values in Process Directives
 
-        publishDir "results/${meta.lang_group}", mode: 'copy'
-        ```
+      ```groovy
+      publishDir "results/${meta.lang_group}", mode: 'copy'
+      ```
 
-        ```groovy
-        // Adapting tool parameters for individual files
+    - Adapting tool parameters for individual files
 
-        cat $input_file | cowpy -c ${meta.character} > cowpy-${input_file}
-        ```
+      ```groovy
+      cat $input_file | cowpy -c ${meta.character} > cowpy-${input_file}
+      ```
 
 This approach offers several advantages over hardcoding file information:
 
