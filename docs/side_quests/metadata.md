@@ -57,7 +57,7 @@ You can set VSCode to focus on this directory:
 code .
 ```
 
-#### Explore the materials
+#### Review the materials
 
 You'll find a main workflow file and a `data` directory containing a samplesheet and a handful of data files.
 
@@ -97,7 +97,7 @@ Each data file contains some greeting text in one of five languages (French, Ger
 
 We will also provide you with a containerized language analysis tool called `langid`.
 
-#### Scenario
+#### Review the objective
 
 Your challenge is to write a Nextflow workflow that will:
 

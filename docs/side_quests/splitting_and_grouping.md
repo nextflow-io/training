@@ -57,7 +57,7 @@ You can set VSCode to focus on this directory:
 code .
 ```
 
-#### Explore the materials
+#### Review the materials
 
 You'll find a main workflow file and a `data` directory containing a samplesheet named `samplesheet.csv`.
 
@@ -82,11 +82,18 @@ patientC,1,normal,patientC_rep1_normal.bam
 patientC,1,tumor,patientC_rep1_tumor.bam
 ```
 
-Note there are 8 samples in total from 3 patients (patientA has 2 technical repeats), consisting of 4 `tumor` samples (typically originating from tumor biopsies) and 4 `normal` samples (taken from healthy tissue or blood).
+This samplesheet lists eight samples from three patients (A, B, C).
 
-If you're not familiar with cancer analysis, just know that this refers to an experimental model that uses paired tumor/normal samples to perform contrastive analyses.
+For each patient, we have samples that are of type `tumor` (typically originating from tumor biopsies) or `normal` (taken from healthy tissue or blood).
+If you're not familiar with cancer analysis, just know that this corresponds to an experimental model that uses paired tumor/normal samples to perform contrastive analyses.
 
-#### Scenario
+For patient A specifically, we have two sets of technical replicates (repeats).
+
+!!! note
+
+    Don't worry if you're not familiar with this experimental design, it's not critical for understanding this tutorial.
+
+#### Review the objective
 
 Your challenge is to write a Nextflow workflow that will group and split the samples based on the associated metadata.
 
@@ -99,7 +106,7 @@ Think you're ready to dive in?
 - [ ] I understand the goal of this course and its prerequisites
 - [ ] My codespace is up and running
 - [ ] I've set my working directory appropriately
-- [ ] I understand the scenario
+- [ ] I understand the stated objective
 
 If you can check all the boxes, you're good to go.
 
