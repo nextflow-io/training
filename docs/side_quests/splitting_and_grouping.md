@@ -37,17 +37,15 @@ That covers the fundamentals of reading CSV files with `splitCsv` and creating m
 
 ## 0. Get started
 
-Before we dive in, let's make sure you have everything you need.
-
-### 0.1. Open the training codespace
+#### Open the training codespace
 
 If you haven't yet done so, make sure to open the training environment as described in the [Environment Setup](../envsetup/index.md).
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
-### 0.2. Move into the project directory
+#### Move into the project directory
 
-Let's move into the project directory.
+Let's move into the directory where the files for this tutorial are located.
 
 ```bash
 cd side-quests/splitting_and_grouping
@@ -55,23 +53,22 @@ cd side-quests/splitting_and_grouping
 
 You can set VSCode to focus on this directory:
 
-```bash title="Open VSCode in current directory"
+```bash
 code .
 ```
 
-### 0.3. Explore the materials
+#### Explore the materials
 
-You'll find a main workflow file and a `data` directory containing a samplesheet, `samplesheet.csv`.
+You'll find a main workflow file and a `data` directory containing a samplesheet named `samplesheet.csv`.
 
 ```console title="Directory contents"
-> tree
 .
 ├── data
 │   └── samplesheet.csv
 └── main.nf
 ```
 
-The samplesheet contains information about samples from different patients, including the patient ID, sample repeat number, type (normal or tumor), and paths to BAM files (which don't actually exist, but we will pretend they do).
+The samplesheet contains information about samples from different patients, including the patient ID, sample repeat number, type (normal or tumor), and paths to hypothetical data files (which don't actually exist, but we will pretend they do).
 
 ```console title="samplesheet.csv"
 id,repeat,type,bam
@@ -85,15 +82,17 @@ patientC,1,normal,patientC_rep1_normal.bam
 patientC,1,tumor,patientC_rep1_tumor.bam
 ```
 
-Note there are 8 samples in total from 3 patients (patientA has 2 repeats), 4 normal and 4 tumor.
+Note there are 8 samples in total from 3 patients (patientA has 2 technical repeats), consisting of 4 `tumor` samples (typically originating from tumor biopsies) and 4 `normal` samples (taken from healthy tissue or blood).
 
-### 0.4. Scenario
+If you're not familiar with cancer analysis, just know that this refers to an experimental model that uses paired tumor/normal samples to perform contrastive analyses.
+
+#### Scenario
 
 Your challenge is to write a Nextflow workflow that will group and split the samples based on the associated metadata.
 
 <!-- TODO: give a bit more details, similar to how it's done in the Metadata side quest -->
 
-### 0.5. Readiness checklist
+#### Readiness checklist
 
 Think you're ready to dive in?
 
@@ -1097,19 +1096,9 @@ In this section, you've learned:
 
 ## Summary
 
-In this side quest, you've learned how to split and group data using channels. By modifying the data as it flows through the pipeline, you can construct a pipeline that handles as many items as possible with no loops or while statements. It gracefully scales to large numbers of items. Here's what we achieved:
+In this side quest, you've learned how to split and group data using channels.
 
-1. **Created structured input data**: Starting from a CSV file with meta maps (building on patterns from [Metadata in workflows](./metadata.md))
-
-2. **Split data into separate channels**: We used `filter` to divide data into independent streams based on the `type` field
-
-3. **Joined matched samples**: We used `join` to recombine related samples based on `id` and `repeat` fields
-
-4. **Distributed across intervals**: We used `combine` to create Cartesian products of samples with genomic intervals for parallel processing
-
-5. **Aggregated by grouping keys**: We used `groupTuple` to collect samples sharing `id` and `interval` fields, merging technical replicates
-
-This approach offers several advantages over writing a pipeline as more standard code, such as using for and while loops:
+By modifying the data as it flows through the pipeline, you can construct a scalable pipeline without using loops or while statements, offering several advantages over more traditional approaches:
 
 - We can scale to as many or as few inputs as we want with no additional code
 - We focus on handling the flow of data through the pipeline, instead of iteration
@@ -1117,65 +1106,91 @@ This approach offers several advantages over writing a pipeline as more standard
 - The pipeline becomes more declarative, focusing on what should happen rather than how it should happen
 - Nextflow will optimize execution for us by running independent operations in parallel
 
-By mastering these channel operations, you can build flexible, scalable pipelines that handle complex data relationships without resorting to loops or iterative programming. This declarative approach allows Nextflow to optimize execution and parallelize independent operations automatically.
+Mastering these channel operations will enable you to build flexible, scalable pipelines that handle complex data relationships without resorting to loops or iterative programming, allowing Nextflow to optimize execution and parallelize independent operations automatically.
 
-### Key Patterns
+### Key patterns
 
-- **Filtering**
+1. **Creating structured input data**: Starting from a CSV file with meta maps (building on patterns from [Metadata in workflows](./metadata.md))
 
-  ```nextflow
-  // Filter channel based on condition
-  channel.filter { it.type == 'tumor' }
-  ```
+   ```groovy
+   ch_samples = channel.fromPath("./data/samplesheet.csv")
+       .splitCsv(header: true)
+       .map{ row ->
+         [[id:row.id, repeat:row.repeat, type:row.type], row.bam]
+       }
+   ```
 
-- **Joining Channels**
+2. **Splitting data into separate channels**: We used `filter` to divide data into independent streams based on the `type` field
 
-  ```nextflow
-  // Join two channels by key (first element of tuple)
-  tumor_ch.join(normal_ch)
+   ```groovy
+   // Filter channel based on condition
+   channel.filter { it.type == 'tumor' }
+   ```
 
-  // Extract joining key and join by this value
-  tumor_ch.map { meta, file -> [meta.id, meta, file] }
-      .join(
+3. **Joining matched samples**: We used `join` to recombine related samples based on `id` and `repeat` fields
+
+   - Join two channels by key (first element of tuple)
+
+   ```groovy
+   tumor_ch.join(normal_ch)
+   ```
+
+   - Extract joining key and join by this value
+
+   ```groovy
+   tumor_ch.map { meta, file -> [meta.id, meta, file] }
+       .join(
          normal_ch.map { meta, file -> [meta.id, meta, file] }
        )
+   ```
 
-  // Join on multiple fields using subMap
-  tumor_ch.map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
-      .join(
+   - Join on multiple fields using subMap
+
+   ```groovy
+   tumor_ch.map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
+       .join(
          normal_ch.map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
        )
-  ```
+   ```
 
-- **Grouping Data**
+4. **Distributing across intervals**: We used `combine` to create Cartesian products of samples with genomic intervals for parallel processing
 
-  ```nextflow
-  // Group by the first element in each tuple
-  channel.groupTuple()
-  ```
+   ```groovy
+   samples_ch.combine(intervals_ch)
+   ```
 
-- **Combining channels**
+5. **Aggregating by grouping keys**: We used `groupTuple` to group by the first element in each tuple, thereby collecting samples sharing `id` and `interval` fields and merging technical replicates
 
-  ```nextflow
-  // Combine with Cartesian product
-  samples_ch.combine(intervals_ch)
-  ```
+   ```groovy
+   //
+   channel.groupTuple()
+   ```
 
-- **Data Structure Optimization**
+- **Optimizing the data structure:** We used `subMap` to extract specific fields and created a named closure for making transformations reusable
 
-  ```nextflow
-  // Extract specific fields using subMap
+  - Extract specific fields from a map
+
+  ```groovy
   meta.subMap(['id', 'repeat'])
+  ```
 
-  // Named closures for reusable transformations
+  - Named closure for reusable transformations
+
+  ```groovy
   getSampleIdAndReplicate = { meta, file -> [meta.subMap(['id', 'repeat']), file] }
   channel.map(getSampleIdAndReplicate)
   ```
 
-## Resources
+## Additional resources
 
 - [filter](https://www.nextflow.io/docs/latest/operator.html#filter)
 - [map](https://www.nextflow.io/docs/latest/operator.html#map)
 - [join](https://www.nextflow.io/docs/latest/operator.html#join)
 - [groupTuple](https://www.nextflow.io/docs/latest/operator.html#grouptuple)
 - [combine](https://www.nextflow.io/docs/latest/operator.html#combine)
+
+---
+
+## What's next?
+
+Return to the [menu of Side Quests](./index.md) or click the button in the bottom right of the page to move on to the next topic in the list.

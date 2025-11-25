@@ -76,13 +76,13 @@ You'll find a main workflow file and a `data` directory containing a samplesheet
 └── nextflow.config
 ```
 
-The datasheet list the paths to the data files and some associated metadata, organized in 3 columns:
+The samplesheet list the paths to the data files and some associated metadata, organized in 3 columns:
 
 - `id`: self-explanatory, an ID given to the file
 - `character`: a character name, that we will use later to draw different creatures
 - `data`: paths to `.txt` files that contain greetings in different languages
 
-```console title="datasheet.csv"
+```console title="samplesheet.csv"
 id,character,recording
 sampleA,squirrel,/workspaces/training/side-quests/metadata/data/bonjour.txt
 sampleB,tux,/workspaces/training/side-quests/metadata/data/guten_tag.txt
@@ -868,7 +868,7 @@ This pattern of keeping metadata explicit and attached to the data is a core bes
 
 Applying this pattern in your own work will enable you to build robust, maintainable bioinformatics workflows.
 
-### Key learnings
+### Key patterns
 
 1.  **Reading and Structuring Metadata:** Reading CSV files and creating organized metadata maps that stay associated with your data files.
 
