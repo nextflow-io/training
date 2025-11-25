@@ -1152,19 +1152,19 @@ Mastering these channel operations will enable you to build flexible, scalable p
        )
    ```
 
-4. **Distributing across intervals:** We used `combine` to create Cartesian products of samples with genomic intervals for parallel processing
+4. **Distributing across intervals:** We used `combine` to create Cartesian products of samples with genomic intervals for parallel processing.
 
    ```groovy
    samples_ch.combine(intervals_ch)
    ```
 
-5. **Aggregating by grouping keys:** We used `groupTuple` to group by the first element in each tuple, thereby collecting samples sharing `id` and `interval` fields and merging technical replicates
+5. **Aggregating by grouping keys:** We used `groupTuple` to group by the first element in each tuple, thereby collecting samples sharing `id` and `interval` fields and merging technical replicates.
 
    ```groovy
    channel.groupTuple()
    ```
 
-6. **Optimizing the data structure:** We used `subMap` to extract specific fields and created a named closure for making transformations reusable
+6. **Optimizing the data structure:** We used `subMap` to extract specific fields and created a named closure for making transformations reusable.
 
    - Extract specific fields from a map
 
@@ -1172,7 +1172,7 @@ Mastering these channel operations will enable you to build flexible, scalable p
    meta.subMap(['id', 'repeat'])
    ```
 
-   - Named closure for reusable transformations
+   - Use named closure for reusable transformations
 
    ```groovy
    getSampleIdAndReplicate = { meta, file -> [meta.subMap(['id', 'repeat']), file] }
