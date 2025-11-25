@@ -39,13 +39,13 @@ Before taking on this side quest, you should:
 
 Before we dive in, let's make sure you have everything you need.
 
-### 0.1. Open the training codespace
+#### Open the training codespace
 
 If you haven't yet done so, make sure to open the training environment as described in the [Environment Setup](../envsetup/index.md).
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
-### 0.2. Move into the project directory
+#### Move into the project directory
 
 Let's move into the project directory.
 
@@ -59,7 +59,7 @@ You can set VSCode to focus on this directory:
 code .
 ```
 
-### 0.3. Explore the materials
+#### Explore the materials
 
 You'll find a main workflow file and a `data` directory containing a samplesheet and a handful of data files.
 
@@ -100,7 +100,7 @@ sampleG,turtle,/workspaces/training/side-quests/metadata/data/ciao.txt
 
 We will also provide you with a containerized language analysis tool called `langid`.
 
-### 0.4. Scenario
+#### Scenario
 
 Your challenge is to write a Nextflow workflow that will:
 
@@ -111,7 +111,7 @@ Your challenge is to write a Nextflow workflow that will:
 
 This represents a typical workflow pattern where file-specific metadata drives processing decisions; exactly the kind of problem that metadata maps solve elegantly.
 
-### 0.5. Readiness checklist
+#### Readiness checklist
 
 Think you're ready to dive in?
 
