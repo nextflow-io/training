@@ -6,7 +6,10 @@ You can write a lot of Nextflow without venturing beyond basic syntax for variab
 
 However, when you need to manipulate data, parse complex filenames, implement conditional logic, or build robust production workflows, it helps to think about two distinct aspects of your code: **dataflow** (channels, operators, processes, and workflows) and **scripting** (the code inside closures, functions, and process scripts). While this distinction is somewhat arbitrary—it's all Nextflow code—it provides a useful mental model for understanding when you're orchestrating your pipeline versus when you're manipulating data. Mastering both dramatically improves your ability to write clear, maintainable workflows.
 
-This side quest takes you on a hands-on journey from basic concepts to production-ready patterns. We'll transform a simple CSV-reading workflow into a sophisticated bioinformatics pipeline, evolving it step-by-step through realistic challenges:
+### Learning goals
+
+This side quest takes you on a hands-on journey from basic concepts to production-ready patterns.
+We'll transform a simple CSV-reading workflow into a sophisticated bioinformatics pipeline, evolving it step-by-step through realistic challenges:
 
 - **Understanding boundaries:** Distinguish between dataflow operations and scripting, and understand how they work together
 - **Data manipulation:** Extract, transform, and subset maps and collections using powerful operators
@@ -17,32 +20,40 @@ This side quest takes you on a hands-on journey from basic concepts to productio
 - **Safe operations:** Handle missing data gracefully with null-safe operators and validate inputs with clear error messages
 - **Configuration-based handlers:** Use workflow event handlers for logging, notifications, and lifecycle management
 
----
+### Prerequisites
 
-## 0. Warmup
+Before taking on this side quest, you should:
 
-### 0.1. Prerequisites
-
-Before taking on this side quest you should:
-
-- Complete the [Hello Nextflow](../hello_nextflow/README.md) tutorial or have equivalent experience
-- Understand basic Nextflow concepts (processes, channels, workflows)
+- Have completed the [Hello Nextflow](../hello_nextflow/README.md) tutorial or equivalent beginner's course.
+- Be comfortable using basic Nextflow concepts and mechanisms (processes, channels, operators, working with files, meta data)
 - Have basic familiarity with common programming constructs (variables, maps, lists)
 
-This tutorial will explain programming concepts as we encounter them, so you don't need extensive programming experience. We'll start with fundamental concepts and build up to advanced patterns.
+This tutorial will explain programming concepts as we encounter them, so you don't need extensive programming experience.
+We'll start with fundamental concepts and build up to advanced patterns.
 
-### 0.2. Starting Point
+---
 
-Navigate to the project directory:
+## 0. Get started
 
-```bash title="Navigate to project directory"
+#### Open the training codespace
+
+If you haven't yet done so, make sure to open the training environment as described in the [Environment Setup](../envsetup/index.md).
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
+
+#### Move into the project directory
+
+Let's move into the directory where the files for this tutorial are located.
+
+```bash
 cd side-quests/essential_scripting_patterns
 ```
 
-The `data` directory contains sample files and a main workflow file we'll evolve throughout.
+#### Review the materials
+
+You'll find a main workflow file and a `data` directory containing example data files.
 
 ```console title="Directory contents"
-> tree
 .
 ├── collect.nf
 ├── data
@@ -57,8 +68,6 @@ The `data` directory contains sample files and a main workflow file we'll evolve
 │   ├── generate_report.nf
 │   └── trimgalore.nf
 └── nextflow.config
-
-3 directories, 10 files
 ```
 
 Our sample CSV contains information about biological samples that need different processing based on their characteristics:
@@ -71,6 +80,21 @@ SAMPLE_003,human,kidney,45000000,data/sequences/SAMPLE_003_S3_L001_R1_001.fastq,
 ```
 
 We'll use this realistic dataset to explore practical programming techniques that you'll encounter in real bioinformatics workflows.
+
+<!-- TODO: Can we make this more domain-agnostic? -->
+
+<!-- TODO: add an assignment statement? #### Review the assignment -->
+
+#### Readiness checklist
+
+Think you're ready to dive in?
+
+- [ ] I understand the goal of this course and its prerequisites
+- [ ] My codespace is up and running
+- [ ] I've set my working directory appropriately
+<!-- - [ ] I understand the assignment -->
+
+If you can check all the boxes, you're good to go.
 
 ---
 
