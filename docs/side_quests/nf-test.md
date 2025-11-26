@@ -27,89 +27,145 @@ Testing individual processes is analogous to unit tests in other languages. Test
 
 [**nf-test**](https://www.nf-test.com/) is a tool that allows you to write module, workflow and pipeline level test. In short, it allows you to systematically check every individual part of the pipeline is working as expected, _in isolation_.
 
-In this part of the training, we're going to show you how to use nf-test to write module-level tests for the three processes in our pipeline.
+### Learning goals
+
+In this side quest, you'll learn to use nf-test to write a workflow-level test for the pipeline as well as module-level tests for the three processes it calls on.
+
+By the end of this side quest, you'll be able to use the following techniques effectively:
+
+- Initialize nf-test in your project
+- Generate module-level and workflow-level tests
+- Add common types of assertions
+- Understand when to use snapshots vs. content assertions
+- Run tests for an entire project
+
+These skills will help you implement a comprehensive testing strategy in your pipeline projects, ensuring they are more robust and maintainable.
+
+### Prerequisites
+
+Before taking on this side quest, you should:
+
+- Have completed the [Hello Nextflow](../hello_nextflow/README.md) tutorial or equivalent beginner's course.
+- Be comfortable using basic Nextflow concepts and mechanisms (processes, channels, operators, working with files, meta data)
 
 ---
 
-## 0. Warmup
+## 0. Get started
 
-Let's move into the project directory.
+#### Open the training codespace
+
+If you haven't yet done so, make sure to open the training environment as described in the [Environment Setup](../envsetup/index.md).
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
+
+#### Move into the project directory
+
+Let's move into the directory where the files for this tutorial are located.
 
 ```bash
 cd side-quests/nf-test
 ```
 
-The `nf-test` directory has the file content like:
+You can set VSCode to focus on this directory:
+
+```bash
+code .
+```
+
+#### Review the materials
+
+You'll find a main workflow file and a CSV file called `greetings.csv` that contains the input to the pipeline.
 
 ```console title="Directory contents"
-nf-test
+.
 ├── greetings.csv
-└──main.nf
+└── main.nf
 ```
 
 For a detailed description of the files, see the [warmup from Hello Nextflow](../hello_nextflow/00_orientation.md).
-The workflow we'll be testing is part of the workflow built in [Hello Workflow](../hello_nextflow/03_hello_workflow.md), and is composed of two processes: `sayHello` and `convertToUpper`:
 
-```bash title="Workflow code"
-/*
- * Pipeline parameters
- */
-params.input_file = "greetings.csv"
+The workflow we'll be testing is a subset of the Hello workflow built in [Hello Workflow](../hello_nextflow/03_hello_workflow.md).
 
-/*
- * Use echo to print 'Hello World!' to standard out
- */
-process sayHello {
+??? example "What does the Hello Nextflow workflow do?"
 
-    publishDir 'results', mode: 'copy'
+    If you haven't done the [Hello Nextflow](../hello_nextflow/index.md) training, here's a quick overview of what this simple workflow does.
 
-    input:
-        val greeting
+    The workflow takes a CSV file containing greetings, runs four consecutive transformation steps on them, and outputs a single text file containing an ASCII picture of a fun character saying the greetings.
 
-    output:
-        path "${greeting}-output.txt"
+    The four steps are implemented as Nextflow processes (`sayHello`, `convertToUpper`, `collectGreetings`, and `cowpy`) stored in separate module files.
 
-    script:
-    """
-    echo '$greeting' > '$greeting-output.txt'
-    """
-}
+    1. **`sayHello`:** Writes each greeting to its own output file (e.g., "Hello-output.txt")
+    2. **`convertToUpper`:** Converts each greeting to uppercase (e.g., "HELLO")
+    3. **`collectGreetings`:** Collects all uppercase greetings into a single batch file
+    4. **`cowpy`:** Generates ASCII art using the `cowpy` tool
 
-/*
- * Use a text replace utility to convert the greeting to uppercase
- */
-process convertToUpper {
+    The results are published to a directory called `results/`, and the final output of the pipeline (when run with default parameters) is a plain text file containing ASCII art of a character saying the uppercased greetings.
 
-    publishDir 'results', mode: 'copy'
+    In this side quest, we use an intermediate form of the Hello workflow that only contains the first two processes. <!-- TODO: change this to use the full finished workflow as suggested in https://github.com/nextflow-io/training/issues/735 -->
 
-    input:
-        path input_file
+The subset we'll be working with is composed of two processes: `sayHello` and `convertToUpper`.
+You can see the full workflow code below.
 
-    output:
-        path "UPPER-${input_file}"
+??? example "Workflow code"
 
-    script:
-    """
-    cat '$input_file' | tr '[a-z]' '[A-Z]' > UPPER-${input_file}
-    """
-}
+    ```groovy title="main.nf"
+    /*
+    * Pipeline parameters
+    */
+    params.input_file = "greetings.csv"
 
-workflow {
+    /*
+    * Use echo to print 'Hello World!' to standard out
+    */
+    process sayHello {
 
-    // create a channel for inputs from a CSV file
-    greeting_ch = channel.fromPath(params.input_file).splitCsv().flatten()
+        publishDir 'results', mode: 'copy'
 
-    // emit a greeting
-    sayHello(greeting_ch)
+        input:
+            val greeting
 
-    // convert the greeting to uppercase
-    convertToUpper(sayHello.out)
-}
-```
+        output:
+            path "${greeting}-output.txt"
 
-We're going to assume an understanding of this workflow, but if you're not sure, you can refer back to [Hello Workflow](../hello_nextflow/03_hello_workflow.md).
+        script:
+        """
+        echo '$greeting' > '$greeting-output.txt'
+        """
+    }
 
-### 0.1. Run the workflow
+    /*
+    * Use a text replace utility to convert the greeting to uppercase
+    */
+    process convertToUpper {
+
+        publishDir 'results', mode: 'copy'
+
+        input:
+            path input_file
+
+        output:
+            path "UPPER-${input_file}"
+
+        script:
+        """
+        cat '$input_file' | tr '[a-z]' '[A-Z]' > UPPER-${input_file}
+        """
+    }
+
+    workflow {
+
+        // create a channel for inputs from a CSV file
+        greeting_ch = channel.fromPath(params.input_file).splitCsv().flatten()
+
+        // emit a greeting
+        sayHello(greeting_ch)
+
+        // convert the greeting to uppercase
+        convertToUpper(sayHello.out)
+    }
+    ```
+
+#### Run the workflow
 
 Let's run the workflow to make sure it's working as expected.
 
@@ -137,15 +193,25 @@ Let's break down what just happened.
 
 You ran the workflow with the default parameters, you confirmed it worked and you're happy with the results. This is the essence of testing. If you worked through the Hello Nextflow training course, you'll have noticed we always started every section by running the workflow we were using as a starting point, to confirm everything is set up correctly.
 
-Testing software essentially does this process for us. Let's replace our simple `nextflow run main.nf` with a standardised test provided by nf-test.
+Testing software essentially does this process for us.
 
-### Takeaway
+#### Review the assignment
 
-You should be able to 'test' a pipeline by manually running it.
+Your challenge is to add standardized tests to this workflow using nf-test, in order to make it easy to verify that every part continues to work as expected in case any further changes are made.
 
-### What's next?
+<!-- TODO: give a bit more details, similar to how it's done in the Metadata side quest -->
 
-Initialize `nf-test`.
+#### Readiness checklist
+
+Think you're ready to dive in?
+
+- [ ] I understand the goal of this course and its prerequisites
+- [ ] My codespace is up and running
+- [ ] I've set my working directory appropriately
+- [ ] I've run the workflow successfully
+- [ ] I understand the assignment
+
+If you can check all the boxes, you're good to go.
 
 ---
 
@@ -1083,23 +1149,15 @@ SUCCESS: Executed 3 tests in 5.007s
 
 Check that out! We ran 3 tests, 1 for each process and 1 for the whole pipeline with a single command. Imagine how powerful this is on a large codebase!
 
-## 4. Summary
+---
 
-In this side quest, we've learned:
+## Summary
 
-1. How to initialize nf-test in a Nextflow project
-2. How to write and run pipeline-level tests:
-   - Basic success testing
-   - Process count verification
-   - Output file existence checks
-3. How to write and run process-level tests
-4. Two approaches to output validation:
-   - Using snapshots for complete output verification
-   - Using direct content assertions for specific content checks
-5. Best practices for test naming and organization
-6. How to run all tests in a repository with a single command
+In this side quest, you've learned to leverage nf-test's features to create and run tests for individual processes as well as end-to-end tests for the entire pipeline.
+You're now aware of the main two approaches to output validation, snapshots and direct content assertions, and and when to use either one.
+You also know how to run tests either one by one or for an entire project.
 
-Testing is a critical part of pipeline development that helps ensure:
+Applying these techniques in your own work will enable you to ensure that:
 
 - Your code works as expected
 - Changes don't break existing functionality
@@ -1107,7 +1165,21 @@ Testing is a critical part of pipeline development that helps ensure:
 - Problems can be identified and fixed quickly
 - Output content matches expectations
 
-### What's next?
+### Key patterns
+
+<!-- TODO: Can we add snippets of code below to illustrate? -->
+
+1. Pipeline-level tests:
+   - Basic success testing
+   - Process count verification
+   - Output file existence checks
+2. Process-level tests
+3. Two approaches to output validation:
+   - Using snapshots for complete output verification
+   - Using direct content assertions for specific content checks
+4. Running all tests in a repository with a single command
+
+### Additional resources
 
 Check out the [nf-test documentation](https://www.nf-test.com/) for more advanced testing features and best practices. You might want to:
 
@@ -1117,4 +1189,10 @@ Check out the [nf-test documentation](https://www.nf-test.com/) for more advance
 - Learn about other types of tests like workflow and module tests
 - Explore more advanced content validation techniques
 
-Remember: Tests are living documentation of how your code should behave. The more tests you write, and the more specific your assertions are, the more confident you can be in your pipeline's reliability.
+**Remember:** Tests are living documentation of how your code should behave. The more tests you write, and the more specific your assertions are, the more confident you can be in your pipeline's reliability.
+
+---
+
+## What's next?
+
+Return to the [menu of Side Quests](./index.md) or click the button in the bottom right of the page to move on to the next topic in the list.

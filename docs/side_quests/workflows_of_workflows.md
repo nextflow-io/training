@@ -1,10 +1,14 @@
 # Workflows of Workflows
 
+When you're developing a pipeline, you often find yourself creating similar sequences of processes for different data types or analysis steps. You might end up copying and pasting these process sequences, leading to duplicated code that's hard to maintain; or you might create one massive workflow that's difficult to understand and modify.
+
 One of the most powerful features of Nextflow is its ability to compose complex pipelines from smaller, reusable workflow modules. This modular approach makes pipelines easier to develop, test, and maintain.
 
-Let's explore why workflow composition is so important. When you're developing a pipeline, you often find yourself creating similar sequences of processes for different data types or analysis steps. Without workflow composition, you might end up copying and pasting these process sequences, leading to duplicated code that's hard to maintain. Or you might create one massive workflow that's difficult to understand and modify.
+### Learning goals
 
-With workflow composition, you can:
+In this side quest, we'll explore how to develop workflow modules that can be tested and used separately, compose those modules into a larger pipeline, and manage data flow between modules.
+
+By the end of this side quest, you'll be able to:
 
 - Break down complex pipelines into logical, reusable units
 - Test each workflow module independently
@@ -12,30 +16,40 @@ With workflow composition, you can:
 - Share common workflow modules across different pipelines
 - Make your code more maintainable and easier to understand
 
-In this side quest, we'll create a pipeline that demonstrates these benefits by:
+These skills will help you build complex pipelines while maintaining clean, maintainable code structure.
 
-1. Creating independent workflow modules that can be tested and used separately
-2. Composing these modules into a larger pipeline
-3. Using Nextflow's workflow composition features to manage data flow between modules
-
----
-
-## 0. Warmup
-
-### 0.1. Prerequisites
+### Prerequisites
 
 Before taking on this side quest you should:
 
-- Complete the [Hello Nextflow](../hello_nextflow/README.md) tutorial
-- Understand basic Nextflow concepts (processes, channels, operators)
+- Have completed the [Hello Nextflow](../hello_nextflow/README.md) tutorial or equivalent beginner's course.
+- Be comfortable using basic Nextflow concepts and mechanisms (processes, channels, operators, modules)
 
-### 0.2. Starting Point
+---
 
-Let's move into the project directory.
+## 0. Get started
+
+#### Open the training codespace
+
+If you haven't yet done so, make sure to open the training environment as described in the [Environment Setup](../envsetup/index.md).
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
+
+#### Move into the project directory
+
+Let's move into the directory where the files for this tutorial are located.
 
 ```bash
 cd side-quests/workflows_of_workflows
 ```
+
+You can set VSCode to focus on this directory:
+
+```bash
+code .
+```
+
+#### Review the materials
 
 You'll find a `modules` directory containing several process definitions that build upon what you learned in 'Hello Nextflow':
 
@@ -48,7 +62,25 @@ modules/
 └── reverse_text.nf          # Reverses text content
 ```
 
-We're going to compose these modules into two separate workflows that we will then compose into a main workflow.
+#### Review the assignment
+
+Your challenge is to assemble these modules into two separate workflows that we will then compose into a main workflow:
+
+- A `GREETING_WORKFLOW` that validates names, creates greetings, and adds timestamps
+- A `TRANSFORM_WORKFLOW` that converts text to uppercase and reverses it
+
+<!-- TODO: give a bit more details, similar to how it's done in the Metadata side quest -->
+
+#### Readiness checklist
+
+Think you're ready to dive in?
+
+- [ ] I understand the goal of this course and its prerequisites
+- [ ] My codespace is up and running
+- [ ] I've set my working directory appropriately
+- [ ] I understand the assignment
+
+If you can check all the boxes, you're good to go.
 
 ---
 
@@ -347,26 +379,11 @@ You should now have a complete pipeline that:
 - Feeds the timestamped greetings into the transform workflow
 - Produces both uppercase and reversed versions of the greetings
 
+---
+
 ## Summary
 
-In this side quest, we've explored the powerful concept of workflow composition in Nextflow, which allows us to build complex pipelines from smaller, reusable components. Here's what we've accomplished:
-
-1. **Created Modular Workflows**: We built two independent workflow modules:
-
-   - A `GREETING_WORKFLOW` that validates names, creates greetings, and adds timestamps
-   - A `TRANSFORM_WORKFLOW` that converts text to uppercase and reverses it
-
-2. **Composed Workflows Together**: We connected these workflows in a main pipeline, demonstrating how data can flow from one workflow to another.
-
-3. **Used Workflow Interfaces**: We defined clear inputs and outputs for each workflow using the `take:` and `emit:` syntax, creating well-defined interfaces between components.
-
-4. **Managed Data Flow**: We learned how to access workflow outputs using the namespace notation (`WORKFLOW_NAME.out.channel_name`) and pass them to other workflows.
-
-5. **Practiced Modular Design**: We experienced firsthand how breaking a pipeline into logical components makes the code more maintainable and easier to understand.
-
-6. **Worked with Entry Points**: We learned that Nextflow requires an entry workflow (either unnamed or specified with `-entry`) to know where to start execution.
-
-7. **Structured Workflow Content**: We wrapped workflow logic within the `main:` block.
+In this side quest, we've explored the powerful concept of workflow composition in Nextflow, which allows us to build complex pipelines from smaller, reusable components.
 
 This modular approach offers several advantages over monolithic pipelines:
 
@@ -376,82 +393,90 @@ This modular approach offers several advantages over monolithic pipelines:
 - Changes to one workflow don't necessarily affect others if the interfaces remain consistent
 - Entry points can be configured to run different parts of your pipeline as needed
 
-It's important to note that while calling workflows is a bit like calling processes, it's not the same. You can't, for example, run a workflow n times by calling it with a channel of size n - you would need to pass a channel of size n to the workflow and iterate internally.
+_It's important to note however that while calling workflows is a bit like calling processes, it's not actually the same thing. You can't, for example, run a workflow N times by calling it with a channel of size N - you would need to pass a channel of size N to the workflow and iterate internally._
 
-By mastering workflow composition, you're now equipped to build more sophisticated Nextflow pipelines that can handle complex bioinformatics tasks while remaining maintainable and scalable.
+Applying these techniques in your own work will enable you to build more sophisticated Nextflow pipelines that can handle complex bioinformatics tasks while remaining maintainable and scalable.
 
-### Key Concepts
+### Key patterns
 
-1. **Workflow Inclusion**
+1.  **Workflow structure**: We defined clear inputs and outputs for each workflow using the `take:` and `emit:` syntax, creating well-defined interfaces between components, and wrapped workflow logic within the `main:` block.
 
-   ```nextflow
-   // Include a single workflow
-   include { WORKFLOW_NAME } from './path/to/workflow'
+    ```groovy
+    workflow EXAMPLE_WORKFLOW {
+        take:
+            // Input channels are declared here
+            input_ch
 
-   // Include multiple workflows
-   include { WORKFLOW_A; WORKFLOW_B } from './path/to/workflows'
+        main:
+            // Workflow logic goes here
+            // This is where processes are called and channels are manipulated
+            result_ch = SOME_PROCESS(input_ch)
 
-   // Include with alias to avoid name conflicts
-   include { WORKFLOW_A as WORKFLOW_A_ALIAS } from './path/to/workflow'
-   ```
+        emit:
+            // Output channels are declared here
+            output_ch = result_ch
+    }
+    ```
 
-2. **Workflow Inputs and Outputs**
+2.  **Workflow imports:** We built two independent workflow modules and imported them into a main pipeline with include statements.
 
-   ```nextflow
-   workflow EXAMPLE {
-       take:
-           input_ch    // Declare inputs
-       emit:
-           output_ch   // Declare outputs
-   }
-   ```
+    - Include a single workflow
 
-3. **Main Block Structure**
+    ```groovy
+    include { WORKFLOW_NAME } from './path/to/workflow'
+    ```
 
-   ```nextflow
-   workflow EXAMPLE_WORKFLOW {
-       take:
-           // Input channels are declared here
-           input_ch
+    - Include multiple workflows
 
-       main:
-           // Workflow logic goes here
-           // This is where processes are called and channels are manipulated
-           result_ch = SOME_PROCESS(input_ch)
+    ```groovy
+    include { WORKFLOW_A; WORKFLOW_B } from './path/to/workflows'
+    ```
 
-       emit:
-           // Output channels are declared here
-           output_ch = result_ch
-   }
-   ```
+    - Include with alias to avoid name conflicts
 
-4. **Workflow Composition**
+    ```groovy
+    include { WORKFLOW_A as WORKFLOW_A_ALIAS } from './path/to/workflow'
+    ```
 
-   ```nextflow
-   // Using explicit connections
-   WORKFLOW_A(input_ch)
-   WORKFLOW_B(WORKFLOW_A.out.some_channel)
-   ```
+3.  **Entry points**: We learned that Nextflow requires an entry workflow (either an unnamed workflow or a named workflow specified with `-entry`) to know where to start execution.
 
-5. **Entry Points**
+    - Unnamed workflow (default entry point)
 
-   ```nextflow
-   // Unnamed workflow (default entry point)
-   workflow {
-       // This is automatically the entry point when the script is run
-   }
+    ```groovy
+    workflow {
+        // This is automatically the entry point when the script is run
+    }
+    ```
 
-   // Named workflow (not an entry point by default)
-   workflow NAMED_WORKFLOW {
-       // This is not automatically run
-   }
+    - Named workflow (not an entry point by default)
 
-   // Running a named workflow as entry point
-   // nextflow run script.nf -entry NAMED_WORKFLOW
-   ```
+    ```groovy
+    workflow NAMED_WORKFLOW {
+        // This is not automatically run
+    }
+    ```
 
-## Resources
+    - Running a named workflow as entry point (bash command)
+
+    ```bash
+    nextflow run script.nf -entry NAMED_WORKFLOW
+    ```
+
+4.  **Managing data flow:** We learned how to access workflow outputs using the namespace notation (`WORKFLOW_NAME.out.channel_name`) and pass them to other workflows.
+
+    ```nextflow
+    WORKFLOW_A(input_ch)
+    WORKFLOW_B(WORKFLOW_A.out.some_channel)
+    ```
+
+### Additional resources
 
 - [Nextflow Workflow Documentation](https://www.nextflow.io/docs/latest/workflow.html)
 - [Channel Operators Reference](https://www.nextflow.io/docs/latest/operator.html)
 - [Error Strategy Documentation](https://www.nextflow.io/docs/latest/process.html#errorstrategy)
+
+---
+
+## What's next?
+
+Return to the [menu of Side Quests](./index.md) or click the button in the bottom right of the page to move on to the next topic in the list.
