@@ -2303,7 +2303,7 @@ Now it's time to put the systematic debugging approach into practice. The workfl
 ## Summary
 
 In this side quest, you've learned a set of systematic techniques for debugging Nextflow workflows.
-Applying these techniques in your own work will enable you to
+Applying these techniques in your own work will enable you to spend less time fighting your computer, solve problems faster and protect yourself from future issues.
 
 ### Key patterns
 
