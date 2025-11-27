@@ -19,6 +19,7 @@ params.intervals        = "${projectDir}/data/ref/intervals.bed"
 // Base name for final output file
 params.cohort_name = "family_trio"
 
+// Importing the required modules
 include { SAMTOOLS_INDEX } from './modules/samtools/index/main.nf'
 include { GATK_HAPLOTYPECALLER } from './modules/gatk/haplotypecaller/main.nf'
 include { GATK_JOINTGENOTYPING } from './modules/gatk/jointgenotyping/main.nf'

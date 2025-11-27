@@ -1,0 +1,2 @@
+task_id	hash	native_id	name	status	exit	submit	duration	realtime	%cpu	peak_rss	peak_vmem	rchar	wchar
+1	69/7e4dba	50498	GATK_JOINTGENOTYPING	COMPLETED	0	2025-11-26 12:46:34.018	6.8s	6.2s	238.8%	687.5 MB	7.5 GB	117.6 MB	49.7 MB

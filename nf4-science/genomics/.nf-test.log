@@ -1,0 +1,66 @@
+Nov-26 12:45:09.308 [main] INFO  com.askimed.nf.test.App - nf-test 0.9.3
+Nov-26 12:45:09.327 [main] INFO  com.askimed.nf.test.App - Arguments: [test]
+Nov-26 12:45:10.188 [main] INFO  com.askimed.nf.test.App - Nextflow Version: 25.04.3
+Nov-26 12:45:10.189 [main] INFO  com.askimed.nf.test.commands.RunTestsCommand - Load config from file /workspaces/training/nf4-science/genomics/nf-test.config...
+Nov-26 12:45:10.678 [main] INFO  com.askimed.nf.test.lang.dependencies.DependencyResolver - Loaded 22 files from directory /workspaces/training/nf4-science/genomics in 0.065 sec
+Nov-26 12:45:10.679 [main] INFO  com.askimed.nf.test.lang.dependencies.DependencyResolver - Found 8 files containing tests.
+Nov-26 12:45:10.680 [main] DEBUG com.askimed.nf.test.lang.dependencies.DependencyResolver - Found files: [/workspaces/training/nf4-science/genomics/solutions/tests/genomics-4.nf.test, /workspaces/training/nf4-science/genomics/modules/gatk/jointgenotyping/tests/main.nf.test, /workspaces/training/nf4-science/genomics/solutions/modules/gatk/haplotypecaller/tests/main.nf.test, /workspaces/training/nf4-science/genomics/solutions/modules/gatk/jointgenotyping/tests/main.nf.test, /workspaces/training/nf4-science/genomics/modules/gatk/haplotypecaller/tests/main.nf.test, /workspaces/training/nf4-science/genomics/tests/genomics-4.nf.test, /workspaces/training/nf4-science/genomics/solutions/modules/samtools/index/tests/main.nf.test, /workspaces/training/nf4-science/genomics/modules/samtools/index/tests/main.nf.test]
+Nov-26 12:45:11.215 [main] INFO  com.askimed.nf.test.commands.RunTestsCommand - Found 16 tests to execute.
+Nov-26 12:45:11.216 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Started test plan
+Nov-26 12:45:11.216 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Running testsuite 'Test Process GATK_HAPLOTYPECALLER' from file '/workspaces/training/nf4-science/genomics/modules/gatk/haplotypecaller/tests/main.nf.test'.
+Nov-26 12:45:11.216 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Run test '1f28bb9c: Should call son's haplotype correctly'. type: com.askimed.nf.test.lang.process.ProcessTest
+Nov-26 12:45:20.468 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Test '1f28bb9c: Should call son's haplotype correctly' finished. status: PASSED
+Nov-26 12:45:20.470 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Run test 'd49bde4a: Should call mother's haplotype correctly'. type: com.askimed.nf.test.lang.process.ProcessTest
+Nov-26 12:45:29.583 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Test 'd49bde4a: Should call mother's haplotype correctly' finished. status: PASSED
+Nov-26 12:45:29.583 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Run test 'fec9ea6a: Should call father's haplotype correctly'. type: com.askimed.nf.test.lang.process.ProcessTest
+Nov-26 12:45:38.771 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Test 'fec9ea6a: Should call father's haplotype correctly' finished. status: PASSED
+Nov-26 12:45:38.771 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Testsuite 'Test Process GATK_HAPLOTYPECALLER' finished. snapshot file: false, skipped tests: false, failed tests: false
+Nov-26 12:45:38.772 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Running testsuite 'Test Process GATK_JOINTGENOTYPING' from file '/workspaces/training/nf4-science/genomics/modules/gatk/jointgenotyping/tests/main.nf.test'.
+Nov-26 12:45:38.773 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Run test 'b714d6b8: Should call trio's joint genotype correctly'. type: com.askimed.nf.test.lang.process.ProcessTest
+Nov-26 12:45:49.643 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Test 'b714d6b8: Should call trio's joint genotype correctly' finished. status: PASSED
+Nov-26 12:45:49.644 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Testsuite 'Test Process GATK_JOINTGENOTYPING' finished. snapshot file: false, skipped tests: false, failed tests: false
+Nov-26 12:45:49.644 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Running testsuite 'Test Process SAMTOOLS_INDEX' from file '/workspaces/training/nf4-science/genomics/modules/samtools/index/tests/main.nf.test'.
+Nov-26 12:45:49.644 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Run test '8f851f41: Should index reads_son.bam correctly'. type: com.askimed.nf.test.lang.process.ProcessTest
+Nov-26 12:45:53.938 [main] DEBUG com.askimed.nf.test.lang.extensions.SnapshotFile - Load snapshots from file '/workspaces/training/nf4-science/genomics/modules/samtools/index/tests/main.nf.test.snap'
+Nov-26 12:45:53.952 [main] DEBUG com.askimed.nf.test.lang.extensions.Snapshot - Snapshots 'Should index reads_son.bam correctly' match.
+Nov-26 12:45:53.953 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Test '8f851f41: Should index reads_son.bam correctly' finished. status: PASSED
+Nov-26 12:45:53.953 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Run test '17fcd16d: Should index reads_mother.bam correctly'. type: com.askimed.nf.test.lang.process.ProcessTest
+Nov-26 12:45:58.430 [main] DEBUG com.askimed.nf.test.lang.extensions.Snapshot - Snapshots 'Should index reads_mother.bam correctly' match.
+Nov-26 12:45:58.430 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Test '17fcd16d: Should index reads_mother.bam correctly' finished. status: PASSED
+Nov-26 12:45:58.430 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Run test '85cb9ee6: Should index reads_father.bam correctly'. type: com.askimed.nf.test.lang.process.ProcessTest
+Nov-26 12:46:02.527 [main] DEBUG com.askimed.nf.test.lang.extensions.Snapshot - Snapshots 'Should index reads_father.bam correctly' match.
+Nov-26 12:46:02.527 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Test '85cb9ee6: Should index reads_father.bam correctly' finished. status: PASSED
+Nov-26 12:46:02.528 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Testsuite 'Test Process SAMTOOLS_INDEX' finished. snapshot file: true, skipped tests: false, failed tests: false
+Nov-26 12:46:02.528 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Running testsuite 'Test Process GATK_HAPLOTYPECALLER' from file '/workspaces/training/nf4-science/genomics/solutions/modules/gatk/haplotypecaller/tests/main.nf.test'.
+Nov-26 12:46:02.528 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Run test '23f74b54: Should call son's haplotype correctly'. type: com.askimed.nf.test.lang.process.ProcessTest
+Nov-26 12:46:11.771 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Test '23f74b54: Should call son's haplotype correctly' finished. status: PASSED
+Nov-26 12:46:11.772 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Run test '6426242d: Should call mother's haplotype correctly'. type: com.askimed.nf.test.lang.process.ProcessTest
+Nov-26 12:46:20.278 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Test '6426242d: Should call mother's haplotype correctly' finished. status: PASSED
+Nov-26 12:46:20.279 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Run test '812a5811: Should call father's haplotype correctly'. type: com.askimed.nf.test.lang.process.ProcessTest
+Nov-26 12:46:29.540 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Test '812a5811: Should call father's haplotype correctly' finished. status: PASSED
+Nov-26 12:46:29.540 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Testsuite 'Test Process GATK_HAPLOTYPECALLER' finished. snapshot file: false, skipped tests: false, failed tests: false
+Nov-26 12:46:29.540 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Running testsuite 'Test Process GATK_JOINTGENOTYPING' from file '/workspaces/training/nf4-science/genomics/solutions/modules/gatk/jointgenotyping/tests/main.nf.test'.
+Nov-26 12:46:29.540 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Run test '401cfc06: Should call trio's joint genotype correctly'. type: com.askimed.nf.test.lang.process.ProcessTest
+Nov-26 12:46:41.027 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Test '401cfc06: Should call trio's joint genotype correctly' finished. status: PASSED
+Nov-26 12:46:41.028 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Testsuite 'Test Process GATK_JOINTGENOTYPING' finished. snapshot file: false, skipped tests: false, failed tests: false
+Nov-26 12:46:41.028 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Running testsuite 'Test Process SAMTOOLS_INDEX' from file '/workspaces/training/nf4-science/genomics/solutions/modules/samtools/index/tests/main.nf.test'.
+Nov-26 12:46:41.028 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Run test 'b99eada0: Should index reads_son.bam correctly'. type: com.askimed.nf.test.lang.process.ProcessTest
+Nov-26 12:46:46.008 [main] DEBUG com.askimed.nf.test.lang.extensions.SnapshotFile - Load snapshots from file '/workspaces/training/nf4-science/genomics/solutions/modules/samtools/index/tests/main.nf.test.snap'
+Nov-26 12:46:46.011 [main] DEBUG com.askimed.nf.test.lang.extensions.Snapshot - Snapshots 'Should index reads_son.bam correctly' match.
+Nov-26 12:46:46.011 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Test 'b99eada0: Should index reads_son.bam correctly' finished. status: PASSED
+Nov-26 12:46:46.012 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Run test '85508243: Should index reads_mother.bam correctly'. type: com.askimed.nf.test.lang.process.ProcessTest
+Nov-26 12:46:50.516 [main] DEBUG com.askimed.nf.test.lang.extensions.Snapshot - Snapshots 'Should index reads_mother.bam correctly' match.
+Nov-26 12:46:50.516 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Test '85508243: Should index reads_mother.bam correctly' finished. status: PASSED
+Nov-26 12:46:50.517 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Run test '1dd5d41e: Should index reads_father.bam correctly'. type: com.askimed.nf.test.lang.process.ProcessTest
+Nov-26 12:46:55.007 [main] DEBUG com.askimed.nf.test.lang.extensions.Snapshot - Snapshots 'Should index reads_father.bam correctly' match.
+Nov-26 12:46:55.008 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Test '1dd5d41e: Should index reads_father.bam correctly' finished. status: PASSED
+Nov-26 12:46:55.008 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Testsuite 'Test Process SAMTOOLS_INDEX' finished. snapshot file: true, skipped tests: false, failed tests: false
+Nov-26 12:46:55.008 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Running testsuite 'Test Workflow genomics-4.nf' from file '/workspaces/training/nf4-science/genomics/solutions/tests/genomics-4.nf.test'.
+Nov-26 12:46:55.008 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Run test '9d7618b7: Should run without failures'. type: com.askimed.nf.test.lang.pipeline.PipelineTest
+Nov-26 12:47:17.861 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Test '9d7618b7: Should run without failures' finished. status: PASSED
+Nov-26 12:47:17.862 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Testsuite 'Test Workflow genomics-4.nf' finished. snapshot file: false, skipped tests: false, failed tests: false
+Nov-26 12:47:17.862 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Running testsuite 'Test Workflow genomics-4.nf' from file '/workspaces/training/nf4-science/genomics/tests/genomics-4.nf.test'.
+Nov-26 12:47:17.862 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Run test 'cd26e3da: Should run the pipeline without failures'. type: com.askimed.nf.test.lang.pipeline.PipelineTest
+Nov-26 12:47:40.997 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Test 'cd26e3da: Should run the pipeline without failures' finished. status: PASSED
+Nov-26 12:47:40.998 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Testsuite 'Test Workflow genomics-4.nf' finished. snapshot file: false, skipped tests: false, failed tests: false
+Nov-26 12:47:40.998 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Executed 16 tests. 0 tests failed. Done!

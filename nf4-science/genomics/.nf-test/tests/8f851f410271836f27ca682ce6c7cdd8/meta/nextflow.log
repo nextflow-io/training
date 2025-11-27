@@ -1,0 +1,72 @@
+Nov-26 12:45:51.040 [main] DEBUG nextflow.cli.Launcher - $> nextflow -quiet -log /workspaces/training/nf4-science/genomics/.nf-test/tests/8f851f410271836f27ca682ce6c7cdd8/meta/nextflow.log run /workspaces/training/nf4-science/genomics/.nf-test-8f851f410271836f27ca682ce6c7cdd8.nf -c /workspaces/training/nf4-science/genomics/nextflow.config -c /workspaces/training/nf4-science/genomics/tests/nextflow.config -params-file /workspaces/training/nf4-science/genomics/.nf-test/tests/8f851f410271836f27ca682ce6c7cdd8/meta/params.json -ansi-log false -with-trace /workspaces/training/nf4-science/genomics/.nf-test/tests/8f851f410271836f27ca682ce6c7cdd8/meta/trace.csv -w /workspaces/training/nf4-science/genomics/.nf-test/tests/8f851f410271836f27ca682ce6c7cdd8/work
+Nov-26 12:45:51.146 [main] INFO  nextflow.cli.CmdRun - N E X T F L O W  ~  version 25.04.3
+Nov-26 12:45:51.178 [main] DEBUG nextflow.plugin.PluginsFacade - Setting up plugin manager > mode=prod; embedded=false; plugins-dir=/workspaces/.nextflow/plugins; core-plugins: nf-amazon@2.15.0,nf-azure@1.16.0,nf-cloudcache@0.4.3,nf-codecommit@0.2.3,nf-console@1.2.1,nf-google@1.21.0,nf-k8s@1.0.0,nf-tower@1.11.3,nf-wave@1.12.1
+Nov-26 12:45:51.219 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Enabled plugins: []
+Nov-26 12:45:51.220 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Disabled plugins: []
+Nov-26 12:45:51.225 [main] INFO  org.pf4j.DefaultPluginManager - PF4J version 3.12.0 in 'deployment' mode
+Nov-26 12:45:51.246 [main] INFO  org.pf4j.AbstractPluginManager - No plugins
+Nov-26 12:45:51.280 [main] DEBUG nextflow.config.ConfigBuilder - Found config base: /workspaces/training/nf4-science/genomics/nextflow.config
+Nov-26 12:45:51.285 [main] DEBUG nextflow.config.ConfigBuilder - User config file: /workspaces/training/nf4-science/genomics/nextflow.config
+Nov-26 12:45:51.285 [main] DEBUG nextflow.config.ConfigBuilder - User config file: /workspaces/training/nf4-science/genomics/tests/nextflow.config
+Nov-26 12:45:51.289 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /workspaces/training/nf4-science/genomics/nextflow.config
+Nov-26 12:45:51.291 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /workspaces/training/nf4-science/genomics/nextflow.config
+Nov-26 12:45:51.291 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /workspaces/training/nf4-science/genomics/tests/nextflow.config
+Nov-26 12:45:51.344 [main] DEBUG n.secret.LocalSecretsProvider - Secrets store: /workspaces/.nextflow/secrets/store.json
+Nov-26 12:45:51.349 [main] DEBUG nextflow.secret.SecretsLoader - Discovered secrets providers: [nextflow.secret.LocalSecretsProvider@4a03bb68] - activable => nextflow.secret.LocalSecretsProvider@4a03bb68
+Nov-26 12:45:51.387 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `standard`
+Nov-26 12:45:51.945 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `standard`
+Nov-26 12:45:51.959 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `standard`
+Nov-26 12:45:52.123 [main] DEBUG nextflow.cli.CmdRun - Applied DSL=2 from script declaration
+Nov-26 12:45:52.141 [main] INFO  nextflow.cli.CmdRun - Launching `/workspaces/training/nf4-science/genomics/.nf-test-8f851f410271836f27ca682ce6c7cdd8.nf` [nostalgic_bell] DSL2 - revision: d03bd8beb9
+Nov-26 12:45:52.142 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins default=[]
+Nov-26 12:45:52.143 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins resolved requirement=[]
+Nov-26 12:45:52.207 [main] DEBUG nextflow.Session - Session UUID: 320bcd09-52c2-4f6e-8247-db1537a737aa
+Nov-26 12:45:52.207 [main] DEBUG nextflow.Session - Run name: nostalgic_bell
+Nov-26 12:45:52.208 [main] DEBUG nextflow.Session - Executor pool size: 4
+Nov-26 12:45:52.218 [main] DEBUG nextflow.file.FilePorter - File porter settings maxRetries=3; maxTransfers=50; pollTimeout=null
+Nov-26 12:45:52.224 [main] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'FileTransfer' minSize=10; maxSize=12; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
+Nov-26 12:45:52.248 [main] DEBUG nextflow.cli.CmdRun - 
+  Version: 25.04.3 build 5949
+  Created: 02-06-2025 20:56 UTC (20:56 GMT)
+  System: Linux 6.8.0-1030-azure
+  Runtime: Groovy 4.0.26 on OpenJDK 64-Bit Server VM 21.0.6+7-LTS
+  Encoding: UTF-8 (UTF-8)
+  Process: 49143@codespaces-71d147 [127.0.0.1]
+  CPUs: 4 - Mem: 15.6 GB (966.1 MB) - Swap: 0 (0)
+Nov-26 12:45:52.279 [main] DEBUG nextflow.Session - Work-dir: /workspaces/training/nf4-science/genomics/.nf-test/tests/8f851f410271836f27ca682ce6c7cdd8/work [ext2/ext3]
+Nov-26 12:45:52.280 [main] DEBUG nextflow.Session - Script base path does not exist or is not a directory: /workspaces/training/nf4-science/genomics/bin
+Nov-26 12:45:52.290 [main] DEBUG nextflow.executor.ExecutorFactory - Extension executors providers=[]
+Nov-26 12:45:52.299 [main] DEBUG nextflow.Session - Observer factory: DefaultObserverFactory
+Nov-26 12:45:52.309 [main] DEBUG nextflow.Session - Observer factory (v2): LinObserverFactory
+Nov-26 12:45:52.331 [main] DEBUG nextflow.cache.CacheFactory - Using Nextflow cache factory: nextflow.cache.DefaultCacheFactory
+Nov-26 12:45:52.339 [main] DEBUG nextflow.util.CustomThreadPool - Creating default thread pool > poolSize: 5; maxThreads: 1000
+Nov-26 12:45:52.393 [main] DEBUG nextflow.Session - Session start
+Nov-26 12:45:52.398 [main] DEBUG nextflow.trace.TraceFileObserver - Workflow started -- trace file: /workspaces/training/nf4-science/genomics/.nf-test/tests/8f851f410271836f27ca682ce6c7cdd8/meta/trace.csv
+Nov-26 12:45:52.790 [main] DEBUG nextflow.script.ScriptRunner - > Launching execution
+Nov-26 12:45:53.002 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Nov-26 12:45:53.003 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Nov-26 12:45:53.009 [main] DEBUG nextflow.executor.Executor - [warm up] executor > local
+Nov-26 12:45:53.016 [main] DEBUG n.processor.LocalPollingMonitor - Creating local task monitor for executor 'local' > cpus=4; memory=15.6 GB; capacity=4; pollInterval=100ms; dumpInterval=5m
+Nov-26 12:45:53.018 [main] DEBUG n.processor.TaskPollingMonitor - >>> barrier register (monitor: local)
+Nov-26 12:45:53.043 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'SAMTOOLS_INDEX': maxForks=0; fair=false; array=0
+Nov-26 12:45:53.143 [main] DEBUG nextflow.Session - Workflow process names [dsl2]: SAMTOOLS_INDEX
+Nov-26 12:45:53.145 [main] DEBUG nextflow.Session - Igniting dataflow network (1)
+Nov-26 12:45:53.146 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > SAMTOOLS_INDEX
+Nov-26 12:45:53.147 [main] DEBUG nextflow.script.ScriptRunner - Parsed script files:
+  Script_4590a20935965ebd: /workspaces/training/nf4-science/genomics/modules/samtools/index/main.nf
+  Script_ee6f4031d57f349c: /workspaces/training/nf4-science/genomics/.nf-test-8f851f410271836f27ca682ce6c7cdd8.nf
+Nov-26 12:45:53.147 [main] DEBUG nextflow.script.ScriptRunner - > Awaiting termination 
+Nov-26 12:45:53.147 [main] DEBUG nextflow.Session - Session await
+Nov-26 12:45:53.330 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Nov-26 12:45:53.333 [Task submitter] INFO  nextflow.Session - [ab/3ae611] Submitted process > SAMTOOLS_INDEX
+Nov-26 12:45:53.745 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 1; name: SAMTOOLS_INDEX; status: COMPLETED; exit: 0; error: -; workDir: /workspaces/training/nf4-science/genomics/.nf-test/tests/8f851f410271836f27ca682ce6c7cdd8/work/ab/3ae611352fd7a73305542a9d7dc9a4]
+Nov-26 12:45:53.746 [Task monitor] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'TaskFinalizer' minSize=10; maxSize=12; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
+Nov-26 12:45:53.813 [main] DEBUG nextflow.Session - Session await > all processes finished
+Nov-26 12:45:53.843 [Task monitor] DEBUG n.processor.TaskPollingMonitor - <<< barrier arrives (monitor: local) - terminating tasks monitor poll loop
+Nov-26 12:45:53.844 [main] DEBUG nextflow.Session - Session await > all barriers passed
+Nov-26 12:45:53.847 [main] DEBUG nextflow.util.ThreadPoolManager - Thread pool 'TaskFinalizer' shutdown completed (hard=false)
+Nov-26 12:45:53.863 [main] DEBUG n.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=1; failedCount=0; ignoredCount=0; cachedCount=0; pendingCount=0; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=0; succeedDuration=12ms; failedDuration=0ms; cachedDuration=0ms;loadCpus=0; loadMemory=0; peakRunning=1; peakCpus=1; peakMemory=0; ]
+Nov-26 12:45:53.863 [main] DEBUG nextflow.trace.TraceFileObserver - Workflow completed -- saving trace file
+Nov-26 12:45:53.885 [main] DEBUG nextflow.cache.CacheDB - Closing CacheDB done
+Nov-26 12:45:53.903 [main] DEBUG nextflow.util.ThreadPoolManager - Thread pool 'FileTransfer' shutdown completed (hard=false)
+Nov-26 12:45:53.903 [main] DEBUG nextflow.script.ScriptRunner - > Execution complete -- Goodbye

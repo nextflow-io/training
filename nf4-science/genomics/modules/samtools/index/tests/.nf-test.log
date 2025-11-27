@@ -1,0 +1,8 @@
+Nov-26 11:51:14.841 [main] INFO  com.askimed.nf.test.App - nf-test 0.9.3
+Nov-26 11:51:14.858 [main] INFO  com.askimed.nf.test.App - Arguments: [test, ./modules/samtools/index/tests/main.nf.test]
+Nov-26 11:51:15.795 [main] INFO  com.askimed.nf.test.App - Nextflow Version: 25.04.3
+Nov-26 11:51:15.799 [main] WARN  com.askimed.nf.test.commands.RunTestsCommand - No nf-test config file found.
+Nov-26 11:51:15.812 [main] INFO  com.askimed.nf.test.lang.dependencies.DependencyResolver - Loaded 1 files from directory /workspaces/training/nf4-science/genomics/modules/samtools/index/tests in 0.011 sec
+Nov-26 11:51:15.814 [main] INFO  com.askimed.nf.test.lang.dependencies.DependencyResolver - Found 0 files containing tests.
+Nov-26 11:51:15.814 [main] DEBUG com.askimed.nf.test.lang.dependencies.DependencyResolver - Found files: []
+Nov-26 11:51:15.817 [main] INFO  com.askimed.nf.test.commands.RunTestsCommand - Found 0 tests to execute.
