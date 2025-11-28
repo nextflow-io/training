@@ -1,0 +1,151 @@
+---
+title: "Kraken2/Bracken data visualization from Nextflow metagenomics training material"
+author: "User"
+date: "2025"
+output:
+    rmdformats::downcute:
+        self_contained: true
+        thumbnails: false
+        lightbox: true
+        gallery: true
+        toc_depth: 2
+        highlight: tango
+        code_folding: hide
+params:
+    args: ''
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+args <- params$args
+file <- args[1]
+```
+
+# Reference-based compositional analysis
+
+<p style='text-align: justify;'>We used Kraken2/Bracken to perform taxonomic assignment of the raw sequences and estimate species abundance. The procedure included the remotion of reads mapping to the [yeast genome](https://benlangmead.github.io/aws-indexes/bowtie). The workflow is proposed by [Lu et al. (2022)](https://www.nature.com/articles/s41596-022-00738-y), wrapped by Nextflow.</p>
+
+<p style='text-align: justify;'>The analysis of the raw counts was developed using the species abundance data as a Phyloseq object to display absolute and relative abundance, α and β-Diversity.</p>
+
+# Abundance plots
+
+With these plots it is possible to establish differences among samples in terms of the community composition:
+
+## Absolute abundance
+
+```{r absolute_plot, echo=TRUE}
+library(phyloseq)
+library(ggplot2)
+
+data_biom <- import_biom(file)
+colnames(data_biom@tax_table@.Data)<- c("Kingdom", "Phylum", "Class", "Order", "Family", "Genus", "Species")
+plot_bar(data_biom, fill = "Genus")+
+    theme_bw()+
+    theme(text = element_text(size = 14),
+        panel.background = element_blank(),
+        plot.title = element_text(size=14,hjust=0.5),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        axis.text.x = element_text(angle = 45, vjust = 1,
+                                    size = 12, hjust = 1))+
+    labs(y = "Absolute abundance")
+```
+
+## Relative abundance
+
+```{r relative_plot, echo=TRUE}
+
+percentages <- transform_sample_counts(data_biom, function(x) x*100 / sum(x) )
+df_per <- psmelt(percentages)
+df_per$Genus <- as.character(df_per$Genus)
+df_per$Genus <- as.factor(df_per$Genus)
+
+ggplot(data=df_per, aes(x=Sample, y=Abundance, fill=Genus))+
+    geom_bar(aes(), stat="identity", position="stack", color = "black")+
+    theme_bw()+
+    theme(text = element_text(size = 14),
+        panel.background = element_blank(),
+        plot.title = element_text(size=14,hjust=0.5),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        axis.text.x = element_text(angle = 45, vjust = 1,
+                                    size = 12, hjust = 1))+
+    labs(y = "Relative abundance")
+```
+
+# α-Diversity
+
+Next, Let’s explore the α-diversity among samples using two indeces, Chao1 and Shannon:
+
+```{r alpha_plot, echo=TRUE}
+p = plot_richness(data_biom, measures=c("Chao1", "Shannon"), color = "samples")+
+    theme_bw()+
+    theme(axis.text.x = element_text(angle = 45, vjust = 1,
+                                    size = 12, hjust = 1),
+        axis.text.y = element_text(size = 14),
+        axis.title = element_text(size = 14),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.border = element_blank(),
+        strip.text.x = element_text(size = 14),
+        legend.text = element_text(size = 10),
+        legend.title = element_text(size = 14),
+        axis.line = element_line(colour = "black"),
+        )+
+    labs(x = "Sample",
+        color = "Sample")
+
+p + geom_point(size=5, alpha=0.7)
+```
+
+# β-Diversity
+
+## Heatmap
+
+```{r heatmap, echo=TRUE}
+plot_heatmap(data_biom, method = "PCoA", distance = "bray",
+            taxa.label = "Genus", taxa.order = "Genus",
+            trans=NULL, low="beige", high="red", na.value="beige")+
+        theme_bw()+
+        theme(axis.text.x = element_text(angle = 45, vjust = 1,
+                                            size = 12, hjust = 1),
+        axis.text.y = element_text(size = 14),
+        axis.title = element_text(size = 14),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        strip.text.x = element_text(size = 14),
+        legend.text = element_text(size = 10),
+        legend.title = element_text(size = 14))
+```
+
+## Ordination plots
+
+### Principal Coordinate Analysis
+
+This dimensionality-reduction technique is useful to review the β-diversity, in other words a measure of how alike or different the samples are. To this purpose, we are going to use a Bray-Curtis dissimilarity matrix as a metric of the overall difference among samples:
+
+```{r pcoa_plot, echo=TRUE}
+data.ord <- ordinate(data_biom, "PCoA", "bray")
+plot_ordination(data_biom, data.ord, type="split", color="Genus",
+                title="biplot")+
+    theme_bw()+
+    theme(axis.text = element_text(size = 12), axis.title = element_text(size = 14),
+        legend.text = element_text(size = 14), strip.text.x = element_text(size = 14),
+        plot.title = element_text(size = 14),
+        legend.title = element_text(size=14),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        axis.line = element_line(colour = "black"),
+        panel.background = element_blank())+
+    geom_point(size=5, alpha=0.7)+
+    labs(title="Biplot")
+```
+
+# Network Analysis
+
+```{r network, echo=TRUE}
+plot_net(data_biom, distance = "bray", type = "taxa",
+            maxdist = 0.9, color="Genus")+
+        guides(color = guide_legend(ncol = 2))
+```
