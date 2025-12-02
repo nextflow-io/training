@@ -18,6 +18,66 @@ jobs:
           mkdir -p lint-results
           nextflow lint . -o json > lint-results/lint-output.json 2>&1 || true
 
+      - name: Generate markdown report
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const lintOutput = JSON.parse(fs.readFileSync('lint-results/lint-output.json', 'utf8'));
+            const { summary, errors } = lintOutput;
+            const sha = context.sha;
+            const repo = `${context.repo.owner}/${context.repo.repo}`;
+
+            const summaryText = `**Nextflow Lint Results:** ${summary.errors} issues in ${summary.filesWithErrors} files (${summary.filesWithoutErrors} files passed)`;
+
+            let markdown = `${summaryText}\n\n`;
+
+            if (summary.errors === 0) {
+              markdown += `:white_check_mark: All Nextflow files passed linting!\n`;
+            } else {
+              // Group errors by type then by file
+              const grouped = { errors: {}, warnings: {} };
+              for (const err of errors) {
+                const isWarning = err.message.startsWith('Variable was declared but not used');
+                const category = isWarning ? 'warnings' : 'errors';
+                if (!grouped[category][err.filename]) {
+                  grouped[category][err.filename] = [];
+                }
+                grouped[category][err.filename].push(err);
+              }
+
+              // Build table rows
+              const rows = [];
+              for (const [category, files] of [['Error', grouped.errors], ['Warning', grouped.warnings]]) {
+                for (const [filename, fileErrors] of Object.entries(files).sort()) {
+                  for (const err of fileErrors) {
+                    const location = `${err.startLine}:${err.startColumn}`;
+                    const link = `[${filename}:${location}](https://github.com/${repo}/blob/${sha}/${filename}#L${err.startLine})`;
+                    rows.push(`| ${category} | ${link} | ${err.message} |`);
+                  }
+                }
+              }
+
+              const errorCount = Object.values(grouped.errors).flat().length;
+              const warningCount = Object.values(grouped.warnings).flat().length;
+
+              markdown += `| Type | Count |\n|------|-------|\n`;
+              markdown += `| Errors | ${errorCount} |\n`;
+              markdown += `| Warnings | ${warningCount} |\n\n`;
+              markdown += `<details>\n<summary>View all issues</summary>\n\n`;
+              markdown += `| Type | Location | Message |\n|------|----------|---------|\n`;
+              markdown += rows.join('\n');
+              markdown += `\n\n</details>\n`;
+            }
+
+            // Write to file
+            fs.writeFileSync('lint-results/report.md', markdown);
+
+            // Add to job summary
+            await core.summary
+              .addRaw(markdown)
+              .write();
+
       - name: Save PR info
         if: github.event_name == 'pull_request'
         run: |

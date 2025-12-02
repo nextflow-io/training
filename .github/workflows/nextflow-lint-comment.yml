@@ -22,68 +22,14 @@ jobs:
           github-token: ${{ github.token }}
           run-id: ${{ github.event.workflow_run.id }}
 
-      - name: Get PR info
+      - name: Get PR info and report
         id: pr-info
         run: |
           PR_NUMBER=$(cat pr-number.txt)
-          HEAD_SHA=$(cat head-sha.txt)
           echo "pr_number=$PR_NUMBER" >> $GITHUB_OUTPUT
-          echo "head_sha=$HEAD_SHA" >> $GITHUB_OUTPUT
-
-      - name: Generate lint report
-        id: report
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const fs = require('fs');
-            const lintOutput = JSON.parse(fs.readFileSync('lint-output.json', 'utf8'));
-            const { summary, errors } = lintOutput;
-            const sha = '${{ steps.pr-info.outputs.head_sha }}';
-            const repo = context.repo.owner + '/' + context.repo.repo;
-
-            const summaryText = `**Nextflow Lint Results:** ${summary.errors} issues in ${summary.filesWithErrors} files (${summary.filesWithoutErrors} files passed)`;
-
-            if (summary.errors === 0) {
-              core.setOutput('comment', `${summaryText}\n\n:white_check_mark: All Nextflow files passed linting!`);
-              return;
-            }
-
-            // Group errors by type then by file
-            const grouped = { errors: {}, warnings: {} };
-            for (const err of errors) {
-              const isWarning = err.message.startsWith('Variable was declared but not used');
-              const category = isWarning ? 'warnings' : 'errors';
-              if (!grouped[category][err.filename]) {
-                grouped[category][err.filename] = [];
-              }
-              grouped[category][err.filename].push(err);
-            }
-
-            // Build table rows
-            const rows = [];
-            for (const [category, files] of [['Error', grouped.errors], ['Warning', grouped.warnings]]) {
-              for (const [filename, fileErrors] of Object.entries(files).sort()) {
-                for (const err of fileErrors) {
-                  const location = `${err.startLine}:${err.startColumn}`;
-                  const link = `[${filename}:${location}](https://github.com/${repo}/blob/${sha}/${filename}#L${err.startLine})`;
-                  rows.push(`| ${category} | ${link} | ${err.message} |`);
-                }
-              }
-            }
-
-            const errorCount = Object.values(grouped.errors).flat().length;
-            const warningCount = Object.values(grouped.warnings).flat().length;
-
-            let comment = `${summaryText}\n\n`;
-            comment += `| Type | Count |\n|------|-------|\n`;
-            comment += `| Errors | ${errorCount} |\n`;
-            comment += `| Warnings | ${warningCount} |\n\n`;
-            comment += `<details>\n<summary>View all issues</summary>\n\n`;
-            comment += `| Type | Location | Message |\n|------|----------|---------|\n`;
-            comment += rows.join('\n');
-            comment += `\n\n</details>`;
-
-            core.setOutput('comment', comment);
+          echo "comment<<EOF" >> $GITHUB_OUTPUT
+          cat report.md >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
 
       - name: Find existing comment
         uses: peter-evans/find-comment@v3
@@ -98,5 +44,5 @@ jobs:
         with:
           comment-id: ${{ steps.find-comment.outputs.comment-id }}
           issue-number: ${{ steps.pr-info.outputs.pr_number }}
-          body: ${{ steps.report.outputs.comment }}
+          body: ${{ steps.pr-info.outputs.comment }}
           edit-mode: replace
