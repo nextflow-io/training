@@ -14,13 +14,13 @@ jobs:
         uses: nf-core/setup-nextflow@v2
 
       - name: Run Nextflow lint
-        run: nextflow lint . -o json > lint-output.json 2>&1 || true
+        run: |
+          mkdir -p lint-results
+          nextflow lint . -o json > lint-results/lint-output.json 2>&1 || true
 
       - name: Save PR info
         if: github.event_name == 'pull_request'
         run: |
-          mkdir -p lint-results
-          cp lint-output.json lint-results/
           echo "${{ github.event.pull_request.number }}" > lint-results/pr-number.txt
           echo "${{ github.sha }}" > lint-results/head-sha.txt
 
