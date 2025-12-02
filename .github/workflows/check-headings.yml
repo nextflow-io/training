@@ -2,10 +2,6 @@ name: Check Markdown Headings
 
 on:
   pull_request:
-    paths:
-      - "**.md"
-      # Transcripts headings correspond to main docs - may skip sections intentionally
-      - "!**/transcripts/**/*.md"
 
 jobs:
   check-headings:
@@ -24,4 +20,9 @@ jobs:
           files_ignore: "**/transcripts/**/*.md"
 
       - name: Run check_headings.py
+        if: steps.changed-files.outputs.any_changed == 'true'
         run: uv run .github/check_headings.py ${{ steps.changed-files.outputs.all_changed_files }}
+
+      - name: Skip check (no markdown files changed)
+        if: steps.changed-files.outputs.any_changed != 'true'
+        run: echo "No markdown files changed, skipping heading check"
