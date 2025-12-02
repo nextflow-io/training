@@ -127,21 +127,22 @@ workflow {
 }
 ```
 
-We have a mini-workflow that refers to a single file path in it's workflow, then prints it to the console, along with its class.
+We have a mini-workflow that refers to a single file path in its workflow, then prints it to the console, along with its class.
 
 !!! note
 
     **What is `.class`?**
 
-    In Groovy (the language Nextflow uses), `.class` tells us what type of object we're working with. It's like asking "what kind of thing is this?" - whether it's a string, a number, a file, or something else. This will help us see the difference between a plain string and a Path object in the next sections.
+    In Groovy (the language Nextflow uses), `.class` tells us what type of object we're working with. It's like asking "what kind of thing is this?" to find out whether it's a string, a number, a file, or something else.
+    This will help us illustrate the difference between a plain string and a Path object in the next sections.
 
-Run the workflow:
+Let's run the workflow:
 
-```bash title="Run the workflow"
+```bash
 nextflow run file_operations.nf
 ```
 
-```console title="Starting Output"
+```console title="Output"
  N E X T F L O W   ~  version 25.04.3
 
 Launching `file_operations.nf` [romantic_chandrasekhar] DSL2 - revision: 5a4a89bc3a
@@ -149,11 +150,17 @@ Launching `file_operations.nf` [romantic_chandrasekhar] DSL2 - revision: 5a4a89b
 data/patientA_rep1_normal_R1_001.fastq.gz is of class java.lang.String
 ```
 
-We printed the string path exactly as we wrote it. This is just text output - Nextflow hasn't done anything special with it yet. We've also confirmed that, so far, to Nextflow this is only a string (of class `java.lang.String`), we haven't yet told Nextflow about its file nature.
+As you can see, Nextflow printed the string path exactly as we wrote it.
+
+This is just text output; Nextflow hasn't done anything special with it yet.
+We've also confirmed that as far as Nextflow is concerned, this is only a string (of class `java.lang.String`).
+That makes sense, since we haven't yet told Nextflow that it corresponds to a file.
 
 ### 1.2. Creating Path Objects
 
-We can tell Nextflow how to handle files by creating [Path objects](https://www.nextflow.io/docs/latest/reference/stdlib-types.html#path) from path strings. In our workflow, we have a string path `data/patientA_rep1_normal_R1_001.fastq.gz`, and we covert that to a Path object using the `file()` method, which provides access to file properties and operations.
+We can tell Nextflow how to handle files by creating [Path objects](https://www.nextflow.io/docs/latest/reference/stdlib-types.html#path) from path strings.
+
+In our workflow, we can convert the string path `data/patientA_rep1_normal_R1_001.fastq.gz` to a Path object using the `file()` method, which provides access to file properties and operations.
 
 Edit the `file_operations.nf` to wrap the string with `file()` as follows:
 
@@ -173,13 +180,13 @@ Edit the `file_operations.nf` to wrap the string with `file()` as follows:
         println "${myFile} is of class ${myFile.class}"
     ```
 
-Run the workflow:
+Now run the workflow again:
 
-```bash title="Test Path object creation"
+```bash
 nextflow run file_operations.nf
 ```
 
-```console title="Path object output"
+```console title="Output"
  N E X T F L O W   ~  version 25.04.3
 
 Launching `file_operations.nf` [kickass_coulomb] DSL2 - revision: 5af44b1b59
@@ -187,7 +194,13 @@ Launching `file_operations.nf` [kickass_coulomb] DSL2 - revision: 5af44b1b59
 /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz is of class class sun.nio.fs.UnixPath
 ```
 
-Now we see the full absolute path instead of the relative path we wrote. Nextflow has converted our string into a Path object and resolved it to the actual file location on the system. The file path will now be absolute, like `/workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz`, and notice that the Path object class is `sun.nio.fs.UnixPath`, this is Nextflow's way of representing local files. As we'll see later, remote files will have different class names (like `nextflow.file.http.XPath` for HTTP files), but they all work exactly the same way and can be used identically in your workflows.
+This time, you see the full absolute path instead of the relative path we provided as input.
+
+Nextflow has converted our string into a Path object and resolved it to the actual file location on the system.
+The file path will now be absolute, as in `/workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz`.
+
+Notice also that the Path object class is `sun.nio.fs.UnixPath`: this is Nextflow's way of representing local files.
+As we'll see later, remote files will have different class names (like `nextflow.file.http.XPath` for HTTP files), but they all work exactly the same way and can be used identically in your workflows.
 
 !!! note
 
@@ -200,9 +213,9 @@ Now we see the full absolute path instead of the relative path we wrote. Nextflo
 
 ### 1.3. File Attributes
 
-Why is this helpful? Well now Nextflow understands that `myFile` is a Path object and not just a string, we can access the various attributes of the Path object.
+Why is this helpful? Well, now that Nextflow understands that `myFile` is a Path object and not just a string, we can access the various attributes of the Path object.
 
-Let's update our workflow to print out the file attributes:
+Let's update our workflow to print out the built-in file attributes:
 
 === "After"
 
@@ -228,13 +241,11 @@ Let's update our workflow to print out the file attributes:
 
 Run the workflow:
 
-```bash title="Test file attributes"
+```bash
 nextflow run file_operations.nf
 ```
 
-You'll see various file attributes printed to the console:
-
-```console title="File Attributes Output"
+```console title="Output"
  N E X T F L O W   ~  version 25.04.3
 
 Launching `file_operations.nf` [ecstatic_ampere] DSL2 - revision: f3fa3dcb48
@@ -246,11 +257,83 @@ Extension: gz
 Parent directory: /workspaces/training/side-quests/working_with_files/data
 ```
 
+You see the various file attributes printed to the console above.
+
 ### 1.4. Why proper file handling matters
 
-The difference between strings and Path objects becomes critical when you start building actual workflows with processes. Let's side-step for a moment to take a look at a workflow where this has been done wrong.
+The difference between strings and Path objects becomes critical when you start building actual workflows with processes.
 
-`count_lines.nf` contains a process that takes a `val` input and tries to treat it as a file:
+To demonstrate, let's take a moment to look at the case of a workflow where this has been done wrong.
+
+Run the `count_lines.nf` workflow as follows:
+
+```bash
+nextflow run count_lines.nf
+```
+
+This workflow should fail; have a look through the output to diagnose the error.
+
+??? example "Output"
+
+    ```console
+    N E X T F L O W   ~  version 25.04.3
+
+    Launching `count_lines.nf` [goofy_koch] DSL2 - revision: 4d9e909d80
+
+    executor >  local (1)
+    [7f/c22b7f] COUNT_LINES [  0%] 0 of 1
+    ERROR ~ Error executing process > 'COUNT_LINES'
+
+    Caused by:
+      Process `COUNT_LINES` terminated with an error exit status (1)
+
+
+    Command executed:
+
+    executor >  local (1)
+    [7f/c22b7f] COUNT_LINES [  0%] 0 of 1 ✘
+    WARN: Got an interrupted exception while taking agent result | java.lang.InterruptedException
+    ERROR ~ Error executing process > 'COUNT_LINES'
+
+    Caused by:
+      Process `COUNT_LINES` terminated with an error exit status (1)
+
+
+    Command executed:
+
+      set -o pipefail
+      echo "Processing file: data/patientA_rep1_normal_R1_001.fastq.gz"
+      gzip -dc data/patientA_rep1_normal_R1_001.fastq.gz | wc -l
+
+    Command exit status:
+      1
+
+    Command output:
+      Processing file: data/patientA_rep1_normal_R1_001.fastq.gz
+      0
+
+    Command error:
+      Processing file: data/patientA_rep1_normal_R1_001.fastq.gz
+      gzip: data/patientA_rep1_normal_R1_001.fastq.gz: No such file or directory
+      0
+
+    Work dir:
+      /workspaces/training/side-quests/working_with_files/work/7f/c22b7f6f86c81f14d53de15584fdd5
+
+    Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
+
+    -- Check '.nextflow.log' file for details
+    ```
+
+Can you identify the problem?
+The key line here is:
+
+```console
+gzip: data/patientA_rep1_normal_R1_001.fastq.gz: No such file or directory
+```
+
+Let's open the `count_lines.nf` workflow and have a look at the code.
+You'll see that it contains a process (`COUNT_LINES`) that takes a `val` input and tries to treat it as a file:
 
 ```groovy title="count_lines.nf" linenums="1" hl_lines="5 16"
 process COUNT_LINES {
@@ -273,75 +356,20 @@ workflow {
 }
 ```
 
+The process failed because the file `data/patientA_rep1_normal_R1_001.fastq.gz` doesn't exist in the process working directory.
+When you use `val` input, Nextflow passes the string value through to your script, but it doesn't _stage_ the actual file in the working directory.
+As a result, the process tries to use the relative string as a file path, but there's no file matching in that location.
+
 !!! note
 
     **About `debug = true`:**
 
-    The `debug = true` directive in the process definition causes Nextflow to print the output from your script (like the line count "40") directly in the execution log. Without this, you would only see the process execution status but not the actual output from your script.
+    The `debug = true` directive in the process definition causes Nextflow to print the output from your script (like the line count "40") directly in the execution log.
+    Without this, you would only see the process execution status but not the actual output from your script.
 
     For more information on debugging Nextflow processes, see the [Debugging Nextflow Workflows](./debugging.md) side quest.
 
-Run this workflow to see the error:
-
-```bash title="Test val input with string error"
-nextflow run count_lines.nf
-```
-
-You'll get an error like this:
-
-```console title="Val input with string error"
- N E X T F L O W   ~  version 25.04.3
-
-Launching `count_lines.nf` [goofy_koch] DSL2 - revision: 4d9e909d80
-
-executor >  local (1)
-[7f/c22b7f] COUNT_LINES [  0%] 0 of 1
-ERROR ~ Error executing process > 'COUNT_LINES'
-
-Caused by:
-  Process `COUNT_LINES` terminated with an error exit status (1)
-
-
-Command executed:
-
-executor >  local (1)
-[7f/c22b7f] COUNT_LINES [  0%] 0 of 1 ✘
-WARN: Got an interrupted exception while taking agent result | java.lang.InterruptedException
-ERROR ~ Error executing process > 'COUNT_LINES'
-
-Caused by:
-  Process `COUNT_LINES` terminated with an error exit status (1)
-
-
-Command executed:
-
-  set -o pipefail
-  echo "Processing file: data/patientA_rep1_normal_R1_001.fastq.gz"
-  gzip -dc data/patientA_rep1_normal_R1_001.fastq.gz | wc -l
-
-Command exit status:
-  1
-
-Command output:
-  Processing file: data/patientA_rep1_normal_R1_001.fastq.gz
-  0
-
-Command error:
-  Processing file: data/patientA_rep1_normal_R1_001.fastq.gz
-  gzip: data/patientA_rep1_normal_R1_001.fastq.gz: No such file or directory
-  0
-
-Work dir:
-  /workspaces/training/side-quests/working_with_files/work/7f/c22b7f6f86c81f14d53de15584fdd5
-
-Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
-
- -- Check '.nextflow.log' file for details
-```
-
-The process failed because the file `data/patientA_rep1_normal_R1_001.fastq.gz` doesn't exist in the process working directory. When you use `val` input, Nextflow passes the string value through to your script, but it doesn't stage the actual file. The process tries to use the string as a file path, but the file isn't there.
-
-Now let's fix this by changing the process to use a `path` input:
+To fix this problem, we'll need to change the input definition in the process to use a `path` input:
 
 === "After"
 
@@ -389,27 +417,45 @@ Now let's fix this by changing the process to use a `path` input:
     }
     ```
 
-Run this updated version and you'll get a different error:
+Do you think that'll be enough?
+Let's try it!
 
-```console title="Path input with string error"
- N E X T F L O W   ~  version 25.04.3
+Go ahead and run the updated version.
 
-Launching `file_operations.nf` [mighty_poitras] DSL2 - revision: e996edfc53
-
-[-        ] COUNT_LINES -
-ERROR ~ Error executing process > 'COUNT_LINES'
-
-Caused by:
-  Not a valid path value: 'data/patientA_rep1_normal_R1_001.fastq.gz'
-
-Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
+```bash
+nextflow run count_lines.nf
 ```
 
-**What this error means:**
+??? example "Output"
 
-This is much better! Nextflow immediately detected the problem and failed before even starting the process. When you use `path` input, Nextflow validates that you're passing actual file references, not just strings. It's telling you that `'data/patientA_rep1_normal_R1_001.fastq.gz'` is not a valid path value because it's a string, not a Path object.
+    ```console
+    N E X T F L O W   ~  version 25.04.3
 
-Now let's fix this properly by using the `file()` method to create a Path object:
+    Launching `file_operations.nf` [mighty_poitras] DSL2 - revision: e996edfc53
+
+    [-        ] COUNT_LINES -
+    ERROR ~ Error executing process > 'COUNT_LINES'
+
+    Caused by:
+      Not a valid path value: 'data/patientA_rep1_normal_R1_001.fastq.gz'
+
+    Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
+    ```
+
+It failed again!
+But the error is different.
+
+```console
+Not a valid path value: 'data/patientA_rep1_normal_R1_001.fastq.gz'
+```
+
+It may not look like it, but this is progress.
+Nextflow immediately detected the problem and failed before even starting the process.
+
+When you specify a `path` input, Nextflow validates that you're passing actual file references, not just strings.
+It's telling you that `'data/patientA_rep1_normal_R1_001.fastq.gz'` is not a valid path value because it's a string, not a Path object.
+
+Now let's finish fixing the issue by using the `file()` method to create a Path object from our string:
 
 === "After"
 
@@ -457,26 +503,29 @@ Now let's fix this properly by using the `file()` method to create a Path object
     }
     ```
 
-Now when you run this, it should work correctly! The file will be staged into the process working directory and the `wc -l` command will succeed.
+Let's run this one more time.
 
-```bash title="Test successful execution"
+```bash
 nextflow run count_lines.nf
 ```
 
-You should see output like this:
+??? example "Output"
 
-```console title="Successful execution"
- N E X T F L O W   ~  version 25.04.3
+    ```console
+    N E X T F L O W   ~  version 25.04.3
 
-Launching `count_lines.nf` [astonishing_tesla] DSL2 - revision: ee38f96485
+    Launching `count_lines.nf` [astonishing_tesla] DSL2 - revision: ee38f96485
 
-executor >  local (1)
-[8a/3f23d5] COUNT_LINES [100%] 1 of 1 ✔
-Processing file: patientA_rep1_normal_R1_001.fastq.gz
-      40
-```
+    executor >  local (1)
+    [8a/3f23d5] COUNT_LINES [100%] 1 of 1 ✔
+    Processing file: patientA_rep1_normal_R1_001.fastq.gz
+          40
+    ```
 
-The process successfully:
+This time, it worked correctly!
+Nextflow staged the file in the process working directory, so the `wc -l` command is able to succeed.
+
+Specifically, Nextflow carried out the following operations successfully:
 
 - Staged the file into the working directory
 - Decompressed the .gz file
@@ -495,28 +544,36 @@ The process successfully:
 
 ## 2. Using Remote Files
 
-One of the key features of Nextflow is the ability to transparently switch between local files (on the same machine) to remote files accessible over the internet. To do this, all you need to do as a user is switch the file path you supply to the workflow from a normal file path (e.g. `/path/to/data`) to a file path with a remote protocol at the start. Importantly, you should **never** have to change the workflow logic to accommodate files coming from different locations.
+One of the key features of Nextflow is the ability to switch seamlessly between local files (on the same machine) to remote files accessible over the internet.
 
-For example, replacing `/path/to/data` with `s3://path/to/data` in your inputs will switch to using the S3 protocol. Many different protocols are supported:
+If you're doing it right, you should **never** need to change the logic of your workflow to accommodate files coming from different locations.
+All you need to do to use a remote file is to specify the appropriate prefix in the file path when you're supplying it to the workflow.
+
+For example, `/path/to/data` has no prefix, indicating that it's a 'normal' local file path, whereas `s3://path/to/data` includes the `s3://` prefix, indicating that it's located in Amazon's S3 object storage.
+
+Many different protocols are supported:
 
 - HTTP(S)/FTP (http://, https://, ftp://)
 - Amazon S3 (s3://)
 - Azure Blob Storage (az://)
 - Google Cloud Storage (gs://)
 
-To use these, simply replace the string and Nextflow will handle authentication and staging the files to the right place, downloading or uploading and all other file operations you would expect. We call this string the Uniform Resource Identifier (URI).
+To use any of these, simply specify the relevant prefix in the string, which is then technically called a Uniform Resource Identifier (URI) instead of a file path.
+Nextflow will handle authentication and staging the files to the right place, downloading or uploading and all other file operations you would expect.
 
-The key strength of this is we can switch between environments without changing any pipeline logic. For example, you can develop with a small, local test set before moving to a remote set of data by changing the URI.
+The key strength of this system is that it enables us to switch between environments without changing any pipeline logic.
+For example, you can develop with a small, local test set before switching to a full-scale test set located in remote storage simply by changing the URI.
 
 ### 2.1. Use a file from the internet
+
+Let's test this out by switching the local path we're providing to our workflow with an HTTPS path pointing to a copy of the same data that is stored in Github.
+This will require Nextflow to download the file from the internet before running on it.
 
 !!! warning
 
     Accessing remote data requires an internet connection!
 
-In your workflow, you can replace the string path with an HTTPS one to download this file from the internet. We are going to swap the relative path of the FASTQ files with the remote one. This is the same data as we have been previously using.
-
-Open `file_operations.nf` again and make changes like this:
+Open `file_operations.nf` again and change the input path as follows:
 
 === "After"
 
