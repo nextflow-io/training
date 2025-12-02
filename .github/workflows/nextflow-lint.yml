@@ -4,10 +4,6 @@ on:
   push:
   pull_request:
 
-permissions:
-  contents: read
-  pull-requests: write
-
 jobs:
   lint:
     runs-on: ubuntu-latest
@@ -18,86 +14,20 @@ jobs:
         uses: nf-core/setup-nextflow@v2
 
       - name: Run Nextflow lint
-        id: lint
+        run: nextflow lint . -o json > lint-output.json 2>&1 || true
+
+      - name: Save PR info
+        if: github.event_name == 'pull_request'
         run: |
-          nextflow lint . -o json > lint-output.json 2>&1 || true
-          echo "result<<EOF" >> $GITHUB_OUTPUT
-          cat lint-output.json >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
+          mkdir -p lint-results
+          cp lint-output.json lint-results/
+          echo "${{ github.event.pull_request.number }}" > lint-results/pr-number.txt
+          echo "${{ github.sha }}" > lint-results/head-sha.txt
 
-      - name: Generate lint report
-        id: report
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const fs = require('fs');
-            const lintOutput = JSON.parse(fs.readFileSync('lint-output.json', 'utf8'));
-            const { summary, errors } = lintOutput;
-
-            // Build summary
-            const summaryText = `**Nextflow Lint Results:** ${summary.errors} issues in ${summary.filesWithErrors} files (${summary.filesWithoutErrors} files passed)`;
-
-            if (summary.errors === 0) {
-              core.setOutput('comment', `${summaryText}\n\n:white_check_mark: All Nextflow files passed linting!`);
-              core.setOutput('has_errors', 'false');
-              return;
-            }
-
-            // Group errors by type (error vs warning) then by file
-            const grouped = { errors: {}, warnings: {} };
-            for (const err of errors) {
-              const isWarning = err.message.startsWith('Variable was declared but not used');
-              const category = isWarning ? 'warnings' : 'errors';
-              if (!grouped[category][err.filename]) {
-                grouped[category][err.filename] = [];
-              }
-              grouped[category][err.filename].push(err);
-            }
-
-            // Build table rows
-            const rows = [];
-            const sha = context.sha;
-            const repo = `${context.repo.owner}/${context.repo.repo}`;
-
-            for (const [category, files] of [['Error', grouped.errors], ['Warning', grouped.warnings]]) {
-              for (const [filename, fileErrors] of Object.entries(files).sort()) {
-                for (const err of fileErrors) {
-                  const location = `${err.startLine}:${err.startColumn}`;
-                  const link = `[${filename}:${location}](https://github.com/${repo}/blob/${sha}/${filename}#L${err.startLine})`;
-                  rows.push(`| ${category} | ${link} | ${err.message} |`);
-                }
-              }
-            }
-
-            const errorCount = Object.values(grouped.errors).flat().length;
-            const warningCount = Object.values(grouped.warnings).flat().length;
-
-            let comment = `${summaryText}\n\n`;
-            comment += `| Type | Count |\n|------|-------|\n`;
-            comment += `| Errors | ${errorCount} |\n`;
-            comment += `| Warnings | ${warningCount} |\n\n`;
-            comment += `<details>\n<summary>View all issues</summary>\n\n`;
-            comment += `| Type | Location | Message |\n|------|----------|---------|\n`;
-            comment += rows.join('\n');
-            comment += `\n\n</details>`;
-
-            core.setOutput('comment', comment);
-            core.setOutput('has_errors', errorCount > 0 ? 'true' : 'false');
-
-      - name: Find existing comment
+      - name: Upload lint results
         if: github.event_name == 'pull_request'
-        uses: peter-evans/find-comment@v3
-        id: find-comment
+        uses: actions/upload-artifact@v4
         with:
-          issue-number: ${{ github.event.pull_request.number }}
-          comment-author: "github-actions[bot]"
-          body-includes: "Nextflow Lint Results"
-
-      - name: Create or update PR comment
-        if: github.event_name == 'pull_request'
-        uses: peter-evans/create-or-update-comment@v4
-        with:
-          comment-id: ${{ steps.find-comment.outputs.comment-id }}
-          issue-number: ${{ github.event.pull_request.number }}
-          body: ${{ steps.report.outputs.comment }}
-          edit-mode: replace
+          name: lint-results
+          path: lint-results/
+          retention-days: 1
