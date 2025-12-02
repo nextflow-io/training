@@ -27,6 +27,9 @@ Testing individual processes is analogous to unit tests in other languages. Test
 
 [**nf-test**](https://www.nf-test.com/) is a tool that allows you to write module, workflow and pipeline level test. In short, it allows you to systematically check every individual part of the pipeline is working as expected, _in isolation_.
 
+![nf-test testing levels](img/nf_test_levels.jpg)
+_Figure 1: The three levels of testing in nf-test: Module (Process), Workflow, and Pipeline._
+
 In this part of the training, we're going to show you how to use nf-test to write module-level tests for the three processes in our pipeline.
 
 ---
@@ -763,6 +766,9 @@ We won't print it here, but you should see a JSON file containing details of the
 ```
 
 This represents the outputs created by the `sayHello` process, which we are testing explicitly. If we re-run the test, the program will check that the new output matches the output that was originally recorded. This is a quick, simple way of testing that process outputs don't change, which is why nf-test provides it as a default.
+
+![nf-test snapshot comparison](img/nf_test_snapshot.jpg)
+_Figure 3: How nf-test compares the current run output against the stored snapshot._
 
 !!!warning
 
