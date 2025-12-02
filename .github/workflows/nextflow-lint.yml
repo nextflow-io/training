@@ -4,6 +4,10 @@ on:
   push:
   pull_request:
 
+permissions:
+  contents: read
+  pull-requests: write
+
 jobs:
   lint:
     runs-on: ubuntu-latest
@@ -73,7 +77,7 @@ jobs:
             comment += `| Errors | ${errorCount} |\n`;
             comment += `| Warnings | ${warningCount} |\n\n`;
             comment += `<details>\n<summary>View all issues</summary>\n\n`;
-            comment += `| Type | Location | Message |\n|------|----------|---------||\n`;
+            comment += `| Type | Location | Message |\n|------|----------|---------|\n`;
             comment += rows.join('\n');
             comment += `\n\n</details>`;
 
