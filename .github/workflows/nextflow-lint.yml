@@ -28,44 +28,35 @@ jobs:
             const sha = context.sha;
             const repo = `${context.repo.owner}/${context.repo.repo}`;
 
-            const summaryText = `**Nextflow Lint Results:** ${summary.errors} issues in ${summary.filesWithErrors} files (${summary.filesWithoutErrors} files passed)`;
-
-            let markdown = `${summaryText}\n\n`;
+            let markdown = '**Nextflow linting complete!**\n\n';
 
             if (summary.errors === 0) {
-              markdown += `:white_check_mark: All Nextflow files passed linting!\n`;
+              markdown += `✅ ${summary.filesWithoutErrors} files had no errors\n`;
             } else {
-              // Group errors by type then by file
-              const grouped = { errors: {}, warnings: {} };
+              markdown += `❌ ${summary.filesWithErrors} files had ${summary.errors} errors\n`;
+              markdown += `✅ ${summary.filesWithoutErrors} files had no errors\n\n`;
+
+              // Group errors by file
+              const grouped = {};
               for (const err of errors) {
-                const isWarning = err.message.startsWith('Variable was declared but not used');
-                const category = isWarning ? 'warnings' : 'errors';
-                if (!grouped[category][err.filename]) {
-                  grouped[category][err.filename] = [];
+                if (!grouped[err.filename]) {
+                  grouped[err.filename] = [];
                 }
-                grouped[category][err.filename].push(err);
+                grouped[err.filename].push(err);
               }
 
               // Build table rows
               const rows = [];
-              for (const [category, files] of [['Error', grouped.errors], ['Warning', grouped.warnings]]) {
-                for (const [filename, fileErrors] of Object.entries(files).sort()) {
-                  for (const err of fileErrors) {
-                    const location = `${err.startLine}:${err.startColumn}`;
-                    const link = `[${filename}:${location}](https://github.com/${repo}/blob/${sha}/${filename}#L${err.startLine})`;
-                    rows.push(`| ${category} | ${link} | ${err.message} |`);
-                  }
+              for (const [filename, fileErrors] of Object.entries(grouped).sort()) {
+                for (const err of fileErrors) {
+                  const location = `${err.startLine}:${err.startColumn}`;
+                  const link = `[${filename}:${location}](https://github.com/${repo}/blob/${sha}/${filename}#L${err.startLine})`;
+                  rows.push(`| ${link} | ${err.message} |`);
                 }
               }
 
-              const errorCount = Object.values(grouped.errors).flat().length;
-              const warningCount = Object.values(grouped.warnings).flat().length;
-
-              markdown += `| Type | Count |\n|------|-------|\n`;
-              markdown += `| Errors | ${errorCount} |\n`;
-              markdown += `| Warnings | ${warningCount} |\n\n`;
-              markdown += `<details>\n<summary>View all issues</summary>\n\n`;
-              markdown += `| Type | Location | Message |\n|------|----------|---------|\n`;
+              markdown += `<details>\n<summary>View all ${summary.errors} issues</summary>\n\n`;
+              markdown += `| Location | Message |\n|----------|---------|\n`;
               markdown += rows.join('\n');
               markdown += `\n\n</details>\n`;
             }
