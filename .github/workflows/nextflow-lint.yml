@@ -24,39 +24,58 @@ jobs:
           script: |
             const fs = require('fs');
             const lintOutput = JSON.parse(fs.readFileSync('lint-results/lint-output.json', 'utf8'));
-            const { summary, errors } = lintOutput;
+            const { summary, errors, warnings } = lintOutput;
             const sha = context.sha;
             const repo = `${context.repo.owner}/${context.repo.repo}`;
 
+            // Handle warnings array (added in future Nextflow version)
+            const warningsArray = warnings || [];
+            const warningCount = summary.warnings || 0;
+
             let markdown = '**Nextflow linting complete!**\n\n';
 
-            if (summary.errors === 0) {
+            const hasIssues = summary.errors > 0 || warningCount > 0;
+
+            if (!hasIssues) {
               markdown += `✅ ${summary.filesWithoutErrors} files had no errors\n`;
             } else {
-              markdown += `❌ ${summary.filesWithErrors} files had ${summary.errors} errors\n`;
+              if (summary.errors > 0) {
+                markdown += `❌ ${summary.filesWithErrors} files had ${summary.errors} errors\n`;
+              }
+              if (warningCount > 0) {
+                const filesWithWarnings = summary.filesWithWarnings || 'N/A';
+                markdown += `⚠️  ${filesWithWarnings} files had ${warningCount} warnings\n`;
+              }
               markdown += `✅ ${summary.filesWithoutErrors} files had no errors\n\n`;
 
-              // Group errors by file
+              // Combine errors and warnings with type labels
+              const allIssues = [
+                ...errors.map(e => ({ ...e, type: 'Error' })),
+                ...warningsArray.map(w => ({ ...w, type: 'Warning' }))
+              ];
+
+              // Group by file
               const grouped = {};
-              for (const err of errors) {
-                if (!grouped[err.filename]) {
-                  grouped[err.filename] = [];
+              for (const issue of allIssues) {
+                if (!grouped[issue.filename]) {
+                  grouped[issue.filename] = [];
                 }
-                grouped[err.filename].push(err);
+                grouped[issue.filename].push(issue);
               }
 
               // Build table rows
               const rows = [];
-              for (const [filename, fileErrors] of Object.entries(grouped).sort()) {
-                for (const err of fileErrors) {
-                  const location = `${err.startLine}:${err.startColumn}`;
-                  const link = `[${filename}:${location}](https://github.com/${repo}/blob/${sha}/${filename}#L${err.startLine})`;
-                  rows.push(`| ${link} | ${err.message} |`);
+              for (const [filename, fileIssues] of Object.entries(grouped).sort()) {
+                for (const issue of fileIssues) {
+                  const location = `${issue.startLine}:${issue.startColumn}`;
+                  const link = `[${filename}:${location}](https://github.com/${repo}/blob/${sha}/${filename}#L${issue.startLine})`;
+                  rows.push(`| ${issue.type} | ${link} | ${issue.message} |`);
                 }
               }
 
-              markdown += `<details>\n<summary>View all ${summary.errors} issues</summary>\n\n`;
-              markdown += `| Location | Message |\n|----------|---------|\n`;
+              const totalIssues = summary.errors + warningCount;
+              markdown += `<details>\n<summary>View all ${totalIssues} issues</summary>\n\n`;
+              markdown += `| Type | Location | Message |\n|------|----------|---------|\n`;
               markdown += rows.join('\n');
               markdown += `\n\n</details>\n`;
             }
