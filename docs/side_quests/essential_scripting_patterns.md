@@ -104,7 +104,7 @@ If you can check all the boxes, you're good to go.
 
 When writing Nextflow workflows, it's important to distinguish between **dataflow** (how data moves through channels and processes) and **scripting** (the code that manipulates data and makes decisions). Let's build a workflow demonstrating how they work together.
 
-#### Step 1: Basic Nextflow Workflow
+#### 1.1.1. Basic Nextflow Workflow
 
 Start with a simple workflow that just reads the CSV file (we've already done this for you in `main.nf`):
 
@@ -134,7 +134,7 @@ Launching `main.nf` [marvelous_tuckerman] DSL2 - revision: 6113e05c17
 [sample_id:SAMPLE_003, organism:human, tissue_type:kidney, sequencing_depth:45000000, file_path:data/sequences/SAMPLE_003_S3_L001_R1_001.fastq, quality_score:42.1]
 ```
 
-#### Step 2: Adding the Map Operator
+#### 1.1.2. Adding the Map Operator
 
 Now we're going to add scripting to transform the data, using the `.map()` operator you will probably already be familiar with. This operator takes a 'closure' where we can write code to transform each item.
 
@@ -177,7 +177,7 @@ nextflow run main.nf
 
 You'll see the same output as before, because we're simply returning the input unchanged. This confirms that the map operator is working correctly. Now let's start transforming the data.
 
-#### Step 3: Creating a Map Data Structure
+#### 1.1.3. Creating a Map Data Structure
 
 Now we're going to write **scripting** logic inside our closure to transform each row of data. This is where we process individual data items rather than orchestrating data flow.
 
@@ -229,7 +229,7 @@ You should see the refined map output like:
 [id:sample_003, organism:human, tissue:kidney, depth:45000000, quality:42.1]
 ```
 
-#### Step 4: Adding Conditional Logic
+#### 1.1.4. Adding Conditional Logic
 
 Now let's add more scripting - this time using a ternary operator to make decisions based on data values.
 
@@ -296,7 +296,7 @@ You should see output like:
 
 We've successfully added conditional logic to enrich our metadata with a priority level based on quality scores.
 
-#### Step 4.5: Subsetting Maps with `.subMap()`
+#### 1.1.5. Subsetting Maps with `.subMap()`
 
 While the `+` operator adds keys to a map, sometimes you need to do the opposite - extract only specific keys. The `.subMap()` method is perfect for this.
 
@@ -378,7 +378,7 @@ Now remove those println statements to restore your workflow to its previous sta
     - **Extract keys**: `map1.subMap(['key1', 'key2'])` - Creates new map with only specified keys
     - **Both operations create new maps** - Original maps remain unchanged
 
-#### Step 5: Combining Maps and Returning Results
+#### 1.1.6. Combining Maps and Returning Results
 
 So far, we've only been returning what the Nextflow community calls the 'meta map', and we've been ignoring the files those metadata relate to. But if you're writing Nextflow workflows, you probably want to do something with those files.
 
@@ -2196,50 +2196,140 @@ Event handlers show how you can use the full power of the Nextflow language with
 
 ## Summary
 
-Throughout this side quest, you've built a comprehensive sample processing pipeline that evolved from basic metadata handling to a sophisticated, production-ready workflow. Each section built upon the previous, demonstrating how programming constructs transform simple workflows into powerful data processing systems.
+Congratulations, you made it!
 
-Here's how we progressively enhanced our pipeline:
-
-1. **Dataflow vs Scripting**: You learned to distinguish between dataflow operations (channel orchestration) and scripting (code that manipulates data), including the crucial differences between operations on different types like `collect` on Channel vs List.
-
-2. **Advanced String Processing**: You mastered regular expressions for parsing file names, dynamic script generation in processes, and variable interpolation (Nextflow vs Bash vs Shell).
-
-3. **Creating Reusable Functions**: You learned to extract complex logic into named functions that can be called from channel operators, making workflows more readable and maintainable.
-
-4. **Dynamic Resource Directives with Closures**: You explored using closures in process directives for adaptive resource allocation based on input characteristics.
-
-5. **Conditional Logic and Process Control**: You added intelligent routing using `.branch()` and `.filter()` operators, leveraging truthiness for concise conditional expressions.
-
-6. **Safe Navigation and Elvis Operators**: You made the pipeline robust against missing data using `?.` for null-safe property access and `?:` for providing default values.
-
-7. **Validation with error() and log.warn**: You learned to validate inputs early and fail fast with clear error messages.
-
-8. **Configuration Event Handlers**: You learned to use workflow event handlers (`onComplete` and `onError`) for logging, notifications, and lifecycle management.
-
-### Key Benefits
+Throughout this side quest, you've built a comprehensive sample processing pipeline that evolved from basic metadata handling to a sophisticated, production-ready workflow.
+Each section built upon the previous one, demonstrating how programming constructs transform simple workflows into powerful data processing systems, with the following benefits:
 
 - **Clearer code**: Understanding dataflow vs scripting helps you write more organized workflows
 - **Robust handling**: Safe navigation and Elvis operators make workflows resilient to missing data
 - **Flexible processing**: Conditional logic lets your workflows process different sample types appropriately
 - **Adaptive resources**: Dynamic directives optimize resource usage based on input characteristics
 
-### From Simple to Sophisticated
+This progression mirrors the real-world evolution of bioinformatics pipelines, from research prototypes handling a few samples to production systems processing thousands of samples across laboratories and institutions.
+Every challenge you solved and pattern you learned reflects actual problems developers face when scaling Nextflow workflows.
 
-This pipeline evolved from basic data processing to production-ready workflows:
+Applying these patterns in your own work will enable you to build robust, production-ready workflows.
 
-1. **Simple**: CSV processing and metadata extraction (dataflow vs scripting boundaries)
-2. **Intelligent**: Regex parsing, variable interpolation, dynamic script generation
-3. **Maintainable**: Reusable functions for cleaner, testable code
-4. **Efficient**: Dynamic resource allocation and retry strategies
-5. **Adaptive**: Conditional routing based on sample characteristics
-6. **Robust**: Safe navigation, Elvis operators, early validation
-7. **Observable**: Event handlers for logging and lifecycle management
+### Key patterns
 
-This progression mirrors the real-world evolution of bioinformatics pipelines - from research prototypes handling a few samples to production systems processing thousands of samples across laboratories and institutions. Every challenge you solved and pattern you learned reflects actual problems developers face when scaling Nextflow workflows.
+1.  **Dataflow vs Scripting:** You learned to distinguish between dataflow operations (channel orchestration) and scripting (code that manipulates data), including the crucial differences between operations on different types like `collect` on Channel vs List.
 
-### Next Steps
+    - Dataflow: channel orchestration
 
-With these fundamentals mastered, you're ready to:
+    ```groovy
+    channel.fromPath('*.fastq').splitCsv(header: true)
+    ```
+
+    - Scripting: data processing on collections
+
+    ```groovy
+    sample_data.collect { it.toUpperCase() }
+    ```
+
+2.  **Advanced String Processing**: You mastered regular expressions for parsing file names, dynamic script generation in processes, and variable interpolation (Nextflow vs Bash vs Shell).
+
+    - Pattern matching
+
+    ```groovy
+    filename =~ ~/^(\w+)_(\w+)_(\d+)\.fastq$/
+    ```
+
+    - Function with conditional return
+
+    ```groovy
+    def parseSample(filename) {
+        def matcher = filename =~ pattern
+        return matcher ? [valid: true, data: matcher[0]] : [valid: false]
+    }
+    ```
+
+    - File collection to command arguments (in process script block)
+
+    ```groovy
+    script:
+    def file_args = input_files.collect { file -> "--input ${file}" }.join(' ')
+    """
+    analysis_tool ${file_args} --output results.txt
+    """
+    ```
+
+3.  **Creating Reusable Functions**: You learned to extract complex logic into named functions that can be called from channel operators, making workflows more readable and maintainable.
+
+<!-- TODO: provide short syntax example? -->
+
+4.  **Dynamic Resource Directives with Closures**: You explored using closures in process directives for adaptive resource allocation based on input characteristics.
+
+    - Named closures and composition
+
+    ```groovy
+    def enrichData = normalizeId >> addQualityCategory >> addFlags
+    def processor = generalFunction.curry(fixedParam)
+    ```
+
+    - Closures with scope access
+
+    ```groovy
+    def collectStats = { data -> stats.count++; return data }
+    ```
+
+5.  **Conditional Logic and Process Control**: You added intelligent routing using `.branch()` and `.filter()` operators, leveraging truthiness for concise conditional expressions.
+
+<!-- TODO: provide short syntax example? -->
+
+6.  **Safe Navigation and Elvis Operators**: You made the pipeline robust against missing data using `?.` for null-safe property access and `?:` for providing default values.
+
+    ```groovy
+    def id = data?.sample?.id ?: 'unknown'
+    if (sample.files) println "Has files"  // Groovy Truth
+    ```
+
+7.  **Validation with error() and log.warn**: You learned to validate inputs early and fail fast with clear error messages.
+
+    ```groovy
+    try {
+        def errors = validateSample(sample)
+        if (errors) throw new RuntimeException("Invalid: ${errors.join(', ')}")
+    } catch (Exception e) {
+        println "Error: ${e.message}"
+    }
+    ```
+
+8.  **Configuration Event Handlers**: You learned to use workflow event handlers (`onComplete` and `onError`) for logging, notifications, and lifecycle management.
+
+<!-- TODO: provide short syntax example? -->
+
+<!-- TODO: these examples didn't match any of the points above? where do they fit?
+
+  ```groovy title="Essential operators examples"
+  // Slashy strings for regex
+  def pattern = /^\w+_R[12]\.fastq$/
+  def script = """
+  echo "Processing ${sample.id}"
+  analysis --depth ${depth ?: 1_000_000}
+  """
+  ```
+
+  ```groovy title="Collection operations examples"
+  // Filter, group, and organize data
+  def high_quality = samples.findAll { it.quality > 40 }
+  def by_organism = samples.groupBy { it.organism }
+  def file_names = files*.getName()  // Spread operator
+  def all_files = nested_lists.flatten()
+  ```
+
+-->
+
+### Additional resources
+
+- [Nextflow Language Reference](https://nextflow.io/docs/latest/reference/syntax.html)
+- [Nextflow Operators](https://www.nextflow.io/docs/latest/operator.html)
+- [Nextflow Script Syntax](https://www.nextflow.io/docs/latest/script.html)
+- [Nextflow Standard Library](https://nextflow.io/docs/latest/reference/stdlib.html)
+
+Be sure to check out these resources when you need to explore more advanced features.
+
+You'll benefit from practicing and expanding your skills in order to:
 
 - Write cleaner workflows with proper separation between dataflow and scripting
 - Master variable interpolation to avoid common pitfalls with Nextflow, Bash, and shell variables
@@ -2251,89 +2341,8 @@ With these fundamentals mastered, you're ready to:
 - Add validation, error handling, and logging to make your workflows production-ready
 - Implement workflow lifecycle management with event handlers
 
-Continue practicing these patterns in your own workflows, and refer to the [Nextflow language reference](https://nextflow.io/docs/latest/reference/index.html) when you need to explore more advanced features.
+---
 
-### Key Concepts Reference
+## What's next?
 
-- **Language Boundaries**
-
-  ```groovy title="Dataflow vs Scripting examples"
-  // Dataflow: channel orchestration
-  channel.fromPath('*.fastq').splitCsv(header: true)
-
-  // Scripting: data processing on collections
-  sample_data.collect { it.toUpperCase() }
-  ```
-
-- **String Processing**
-
-  ```groovy title="String processing examples"
-  // Pattern matching
-  filename =~ ~/^(\w+)_(\w+)_(\d+)\.fastq$/
-
-  // Function with conditional return
-  def parseSample(filename) {
-      def matcher = filename =~ pattern
-      return matcher ? [valid: true, data: matcher[0]] : [valid: false]
-  }
-
-  // File collection to command arguments (in process script block)
-  script:
-  def file_args = input_files.collect { file -> "--input ${file}" }.join(' ')
-  """
-  analysis_tool ${file_args} --output results.txt
-  """
-  ```
-
-- **Error Handling**
-
-  ```groovy title="Error handling patterns"
-  try {
-      def errors = validateSample(sample)
-      if (errors) throw new RuntimeException("Invalid: ${errors.join(', ')}")
-  } catch (Exception e) {
-      println "Error: ${e.message}"
-  }
-  ```
-
-- **Essential Operators**
-
-  ```groovy title="Essential operators examples"
-  // Safe navigation and Elvis operators
-  def id = data?.sample?.id ?: 'unknown'
-  if (sample.files) println "Has files"  // Groovy Truth
-
-  // Slashy strings for regex
-  def pattern = /^\w+_R[12]\.fastq$/
-  def script = """
-  echo "Processing ${sample.id}"
-  analysis --depth ${depth ?: 1_000_000}
-  """
-  ```
-
-- **Advanced Closures**
-
-  ```groovy title="Advanced closure patterns"
-  // Named closures and composition
-  def enrichData = normalizeId >> addQualityCategory >> addFlags
-  def processor = generalFunction.curry(fixedParam)
-
-  // Closures with scope access
-  def collectStats = { data -> stats.count++; return data }
-  ```
-
-- **Collection Operations**
-  ```groovy title="Collection operations examples"
-  // Filter, group, and organize data
-  def high_quality = samples.findAll { it.quality > 40 }
-  def by_organism = samples.groupBy { it.organism }
-  def file_names = files*.getName()  // Spread operator
-  def all_files = nested_lists.flatten()
-  ```
-
-## Resources
-
-- [Nextflow Language Reference](https://nextflow.io/docs/latest/reference/syntax.html)
-- [Nextflow Operators](https://www.nextflow.io/docs/latest/operator.html)
-- [Nextflow Script Syntax](https://www.nextflow.io/docs/latest/script.html)
-- [Nextflow Standard Library](https://nextflow.io/docs/latest/reference/stdlib.html)
+Return to the [menu of Side Quests](./index.md) or click the button in the bottom right of the page to move on to the next topic in the list.
