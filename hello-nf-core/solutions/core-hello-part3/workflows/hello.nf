@@ -20,7 +20,10 @@ workflow HELLO {
 
     take:
     ch_samplesheet // channel: samplesheet read in from --input
+
     main:
+
+    ch_versions = channel.empty()
 
     // emit a greeting
     sayHello(ch_samplesheet)
@@ -28,19 +31,20 @@ workflow HELLO {
     // convert the greeting to uppercase
     convertToUpper(sayHello.out)
 
-    // collect all the greetings into one file using nf-core cat/cat module
     // create metadata map with batch name as the ID
     def cat_meta = [ id: params.batch ]
+
+    // create a channel with metadata and files in tuple format
     ch_for_cat = convertToUpper.out.collect().map { files -> tuple(cat_meta, files) }
 
+    // concatenate the greetings
     CAT_CAT(ch_for_cat)
 
-    // generate ASCII art of the greetings with cowpy
     // extract the file from the tuple since cowpy doesn't use metadata yet
     ch_for_cowpy = CAT_CAT.out.file_out.map{ meta, file -> file }
-    cowpy(ch_for_cowpy, params.character)
 
-    ch_versions = Channel.empty()
+    // generate ASCII art of the greetings with cowpy
+    cowpy(ch_for_cowpy, params.character)
 
     //
     // Collate and save software versions

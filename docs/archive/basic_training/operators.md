@@ -42,7 +42,7 @@ square.view() // (3)!
 Operators can also be chained to implement custom behaviors, so the previous snippet can also be written as:
 
 ```groovy linenums="1" title="snippet.nf"
-Channel
+channel
     .of(1, 2, 3, 4)
     .map { it -> it * it }
     .view()
@@ -63,7 +63,7 @@ Here you will explore some of the most commonly used operators.
 The `view` operator prints the items emitted by a channel to the console standard output, appending a _new line_ character to each item. For example:
 
 ```groovy linenums="1" title="snippet.nf"
-Channel
+channel
     .of('foo', 'bar', 'baz')
     .view()
 ```
@@ -77,7 +77,7 @@ baz
 An optional _closure_ parameter can be specified to customize how items are printed. For example:
 
 ```groovy linenums="1" title="snippet.nf"
-Channel
+channel
     .of('foo', 'bar', 'baz')
     .view { "- $it" }
 ```
@@ -93,7 +93,7 @@ Channel
 The `map` operator applies a function of your choosing to every item emitted by a channel and returns the items obtained as a new channel. The function applied is called the _mapping_ function and is expressed with a _closure_. In the example below the groovy `reverse` method has been used to reverse the order of the characters in each string emitted by the channel.
 
 ```groovy linenums="1" title="snippet.nf"
-Channel
+channel
     .of('hello', 'world')
     .map { it -> it.reverse() }
     .view()
@@ -102,7 +102,7 @@ Channel
 A `map` can associate a generic _tuple_ to each element and can contain any data. In the example below the groovy `size` method is used to return the length of each string emitted by the channel.
 
 ```groovy linenums="1" title="snippet.nf"
-Channel
+channel
     .of('hello', 'world')
     .map { word -> [word, word.size()] }
     .view()
@@ -126,7 +126,7 @@ Channel
         Here is one possible solution:
 
         ```groovy linenums="1" title="snippet.nf"
-        Channel
+        channel
             .fromPath('data/ggal/*.fq')
             .map { file -> [file.name, file] }
             .view()
@@ -180,7 +180,7 @@ The `flatten` operator transforms a channel in such a way that every _tuple_ is 
 foo = [1, 2, 3]
 bar = [4, 5, 6]
 
-Channel
+channel
     .of(foo, bar)
     .flatten()
     .view()
@@ -200,7 +200,7 @@ Channel
 The `collect` operator collects all of the items emitted by a channel in a list and returns the object as a sole emission.
 
 ```groovy linenums="1" title="snippet.nf"
-Channel
+channel
     .of(1, 2, 3, 4)
     .collect()
     .view()
@@ -219,7 +219,7 @@ Channel
 The `groupTuple` operator collects tuples (or lists) of values emitted by the source channel, grouping the elements that share the same key. Finally, it emits a new tuple object for each distinct key collected.
 
 ```groovy linenums="1" title="snippet.nf"
-Channel
+channel
     .of([1, 'A'], [1, 'B'], [2, 'C'], [3, 'B'], [1, 'C'], [2, 'A'], [3, 'D'])
     .groupTuple()
     .view()
@@ -240,7 +240,7 @@ This operator is especially useful to process a group together with all the elem
     ??? solution
 
         ```groovy linenums="1" title="snippet.nf"
-        Channel
+        channel
             .fromPath('data/meta/*')
             .map { file -> tuple(file.baseName, file) }
             .groupTuple()
@@ -282,7 +282,7 @@ The `branch` operator allows you to forward the items emitted by a source channe
 The selection criterion is defined by specifying a closure that provides one or more boolean expressions, each of which is identified by a unique label. For the first expression that evaluates to a true value, the item is bound to a named channel as the label identifier.
 
 ```groovy linenums="1" title="snippet.nf"
-Channel
+channel
     .of(1, 2, 3, 40, 50)
     .branch {
         small: it < 10
@@ -330,7 +330,7 @@ result.large.view { "$it is large" }
 The `splitText` operator allows you to split multi-line strings or text file items, emitted by a source channel into chunks containing _n_ lines, which will be emitted by the resulting channel.
 
 ```groovy linenums="1" title="snippet.nf"
-Channel
+channel
     .fromPath('data/meta/random.txt') // (1)!
     .splitText() // (2)!
     .view() // (3)!
@@ -351,7 +351,7 @@ It has survived not only five centuries, but also the leap into electronic types
 You can define the number of lines in each chunk by using the parameter `by`, as shown in the following example:
 
 ```groovy linenums="1" title="snippet.nf"
-Channel
+channel
     .fromPath('data/meta/random.txt')
     .splitText(by: 2)
     .view()
@@ -369,7 +369,7 @@ It has survived not only five centuries, but also the leap into electronic types
 An optional closure can also be specified in order to transform the text chunks produced by the operator. The following example shows how to split text files into chunks of 2 lines and transform them into capital letters:
 
 ```groovy linenums="1" title="snippet.nf"
-Channel
+channel
     .fromPath('data/meta/random.txt')
     .splitText(by: 2) { it.toUpperCase() }
     .view()
@@ -393,7 +393,7 @@ It then splits them into records or groups them as a list of records with a spec
 In the simplest case, just apply the `splitCsv` operator to a channel emitting a CSV formatted text file or text entries. For example, to view only the first and fourth columns:
 
 ```groovy linenums="1" title="snippet.nf"
-Channel
+channel
     .fromPath("data/meta/patients_1.csv")
     .splitCsv()
     .view { row -> "${row[0]}, ${row[3]}" }
@@ -414,7 +414,7 @@ ATX-TBL-001-GB-03-103, 3
 When the CSV begins with a header line defining the column names, you can specify the parameter `header: true` which allows you to reference each value by its column name, as shown in the following example:
 
 ```groovy linenums="1" title="snippet.nf"
-Channel
+channel
     .fromPath("data/meta/patients_1.csv")
     .splitCsv(header: true)
     // row is a list object
@@ -424,7 +424,7 @@ Channel
 Alternatively, you can provide custom header names by specifying a list of strings in the header parameter as shown below:
 
 ```groovy linenums="1" title="snippet.nf"
-Channel
+channel
     .fromPath("data/meta/patients_1.csv")
     .splitCsv(header: ['col1', 'col2', 'col3', 'col4', 'col5'])
     .view { row -> "${row.col1}, ${row.col4}" }
@@ -445,7 +445,7 @@ ATX-TBL-001-GB-03-103, 3
 You can also process multiple CSV files at the same time:
 
 ```groovy linenums="1" title="snippet.nf"
-Channel
+channel
     .fromPath("data/meta/patients_*.csv") // <-- just use a pattern
     .splitCsv(header: true)
     .view { row -> "${row.patient_id}\t${row.num_samples}" }
@@ -499,7 +499,7 @@ for (List row : lines) {
         Then replace the input channel for the reads in `script7.nf`. Changing the following lines:
 
         ```groovy linenums="1"
-        Channel
+        channel
             .fromFilePairs(params.reads, checkIfExists: true)
             .set { read_pairs_ch }
         ```
@@ -507,7 +507,7 @@ for (List row : lines) {
         To a splitCsv channel factory input:
 
         ```groovy linenums="1" title="script7.nf"
-        Channel
+        channel
             .fromPath("fastq.csv")
             .splitCsv()
             .view { row -> "${row[0]}, ${row[1]}, ${row[2]}" }
@@ -561,7 +561,7 @@ for (List row : lines) {
 Parsing TSV files works in a similar way. Simply add the `sep: '\t'` option in the `splitCsv` context:
 
 ```groovy linenums="1" title="snippet.nf"
-Channel
+channel
     .fromPath("data/meta/regions.tsv", checkIfExists: true)
     // use `sep` option to parse TAB separated files
     .splitCsv(sep: '\t')
@@ -575,7 +575,7 @@ Channel
     ??? solution
 
         ```groovy linenums="1" title="snippet.nf"
-        Channel
+        channel
             .fromPath("data/meta/regions.tsv", checkIfExists: true)
             // use `sep` option to parse TAB separated files
             .splitCsv(sep: '\t', header: true)
@@ -590,7 +590,7 @@ You can parse the JSON file format using the `splitJson` channel operator.
 The `splitJson` operator supports JSON arrays:
 
 ```groovy linenums="1" title="snippet.nf"
-Channel
+channel
     .of('["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]')
     .splitJson()
     .view()
@@ -609,7 +609,7 @@ Saturday
 As well as JSON arrays in objects:
 
 ```groovy linenums="1" title="snippet.nf"
-Channel
+channel
     .of('{"player": {"name": "Bob", "height": 180, "champion": false}}')
     .splitJson()
     .view()
@@ -622,7 +622,7 @@ Channel
 And even a JSON array of JSON objects:
 
 ```groovy linenums="1" title="snippet.nf"
-Channel
+channel
     .of('[{"name": "Bob", "height": 180, "champion": false}, \
           {"name": "Alice", "height": 170, "champion": false}]')
     .splitJson()
@@ -644,7 +644,7 @@ You can also parse JSON files directly:
 ```
 
 ```groovy linenums="1" title="snippet.nf"
-Channel
+channel
     .fromPath('file.json')
     .splitJson()
     .view()
