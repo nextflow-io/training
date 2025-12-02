@@ -17,7 +17,7 @@ jobs:
         run: |
           mkdir -p lint-results
           # TODO: Remove '|| true' to fail CI when linting errors are fixed
-          nextflow lint . -o json > lint-results/lint-output.json 2>&1 || true
+          nextflow lint **/solutions/* -o json > lint-results/lint-output.json 2>&1 || true
 
       - name: Generate markdown report
         if: always()
