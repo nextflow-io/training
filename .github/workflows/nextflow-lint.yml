@@ -76,7 +76,7 @@ jobs:
               }
 
               const totalIssues = summary.errors + warningCount;
-              markdown += `<sup>Click filename locations to go directly to that code.</sup>\n\n`;
+              markdown += `<sup>💡 Tip: Click filename locations to go directly to that code.</sup>\n\n`;
               markdown += `<details>\n<summary>View all ${totalIssues} issues</summary>\n\n`;
               markdown += `| Type | Location | Message |\n|------|----------|---------|\n`;
               markdown += rows.join('\n');
