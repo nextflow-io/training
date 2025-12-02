@@ -16,9 +16,11 @@ jobs:
       - name: Run Nextflow lint
         run: |
           mkdir -p lint-results
+          # TODO: Remove '|| true' to fail CI when linting errors are fixed
           nextflow lint . -o json > lint-results/lint-output.json 2>&1 || true
 
       - name: Generate markdown report
+        if: always()
         uses: actions/github-script@v7
         with:
           script: |
@@ -89,13 +91,13 @@ jobs:
               .write();
 
       - name: Save PR info
-        if: github.event_name == 'pull_request'
+        if: always() && github.event_name == 'pull_request'
         run: |
           echo "${{ github.event.pull_request.number }}" > lint-results/pr-number.txt
           echo "${{ github.sha }}" > lint-results/head-sha.txt
 
       - name: Upload lint results
-        if: github.event_name == 'pull_request'
+        if: always() && github.event_name == 'pull_request'
         uses: actions/upload-artifact@v4
         with:
           name: lint-results
