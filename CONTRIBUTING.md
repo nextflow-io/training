@@ -149,12 +149,6 @@ To run locally:
 nextflow lint .
 ```
 
-Or for JSON output:
-
-```bash
-nextflow lint . -o json
-```
-
 ### Headings CI tests
 
 This repository includes a Python tool to validate markdown heading numbering consistency across training materials.
