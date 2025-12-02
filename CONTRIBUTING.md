@@ -11,6 +11,7 @@ Table of contents:
   - [Figures \& diagrams](#figures--diagrams)
   - [Content style and formatting](#content-style-and-formatting)
     - [Formatting / linting](#formatting--linting)
+    - [Nextflow linting](#nextflow-linting)
     - [Headings CI tests](#headings-ci-tests)
     - [Admonitions](#admonitions)
   - [Known limitations](#known-limitations)
@@ -136,6 +137,23 @@ For paragraphs containing multiple sentences, please start each sentence on a ne
 Doing that produces cleaner diffs for future code reviews.
 The sentences will still be rendered as a continuous paragraph.
 For an example, have a look at the code for this paragraph.
+
+### Nextflow linting
+
+This repository uses `nextflow lint` to check Nextflow scripts for errors and warnings.
+The linter runs automatically in CI and posts results as a PR comment.
+
+To run locally:
+
+```bash
+nextflow lint .
+```
+
+Or for JSON output:
+
+```bash
+nextflow lint . -o json
+```
 
 ### Headings CI tests
 
