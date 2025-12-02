@@ -214,6 +214,8 @@ tree core-hello-results
         ├── hello_software_versions.yml
         ├── params_2025-11-21_04-47-18.json
         └── pipeline_dag_2025-11-21_04-47-18.html
+
+    1 directory, 6 files
     ```
 
 You can take a peek at the reports to see what was run, and the answer is: nothing at all!
@@ -275,7 +277,7 @@ workflow HELLO {
 */
 ```
 
-Compared to a basic Nextflow workflow like the one developed in Hello Nextflow, you'll notice a few things that are new here (highlighted lines above):
+Compared to a basic Nextflow workflow like the one developed in [Hello Nextflow](../hello_nextflow/index.md), you'll notice a few things that are new here (highlighted lines above):
 
 - The workflow block has a name
 - Workflow inputs are declared using the `take:` keyword and the channel construction is moved up to the parent workflow
@@ -286,7 +288,7 @@ These are optional features of Nextflow that make the workflow **composable**, m
 
 !!! note "Composable workflows in depth"
 
-    The [Workflows of Workflows](../side_quests/workflows_of_workflows/) Side Quest explores workflow composition in much greater depth, including how to compose multiple workflows together and manage complex data flows between them. We're introducing composability here because it's a fundamental requirement of the nf-core template architecture, which uses nested workflows to organize pipeline initialization, the main analysis workflow, and completion tasks into separate, reusable components.
+    The [Workflows of Workflows](../side_quests/workflows_of_workflows.md) Side Quest explores workflow composition in much greater depth, including how to compose multiple workflows together and manage complex data flows between them. We're introducing composability here because it's a fundamental requirement of the nf-core template architecture, which uses nested workflows to organize pipeline initialization, the main analysis workflow, and completion tasks into separate, reusable components.
 
 We are going to need to plug the relevant logic from our workflow of interest into that structure.
 The first step for that is to make our original workflow composable.
@@ -371,6 +373,8 @@ tree original-hello/
     │   ├── cowpy.nf
     │   └── sayHello.nf
     └── nextflow.config
+
+    1 directory, 6 files
     ```
 
 Feel free to run it to satisfy yourself that it works:
@@ -478,7 +482,7 @@ Now, replace the channel construction with a simple `take` statement declaring e
 
 This leaves the details of how the inputs are provided up to the parent workflow.
 
-While we're at it, we can also comment out the line
+While we're at it, we can also comment out the line `params.greeting = 'greetings.csv'`
 
 === "After"
 
@@ -486,7 +490,7 @@ While we're at it, we can also comment out the line
         /*
         * Pipeline parameters
         */
-        params.greeting = 'greetings.csv'
+        //params.greeting = 'greetings.csv'
         params.batch = 'test-batch'
         params.character = 'turkey'
     ```
@@ -497,12 +501,10 @@ While we're at it, we can also comment out the line
         /*
         * Pipeline parameters
         */
-        // params.greeting = 'greetings.csv'
+        params.greeting = 'greetings.csv'
         params.batch = 'test-batch'
         params.character = 'turkey'
     ```
-
-params.greeting = 'greetings.csv'
 
 !!! note
 
@@ -566,7 +568,7 @@ This is a net new addition to the code compared to the original workflow.
 
 If you've done all the changes as described, your workflow should now look like this:
 
-```groovy title="original-hello/hello.nf" linenums="1" hl_lines="15 17-19 21 37-38"
+```groovy title="original-hello/hello.nf" linenums="1" hl_lines="16 18-20 22 36-37"
 #!/usr/bin/env nextflow
 
 /*
@@ -802,6 +804,8 @@ tree core-hello/modules
         ├── convertToUpper.nf
         ├── cowpy.nf
         └── sayHello.nf
+
+    1 directory, 4 files
     ```
 
 Now let's set up the module import statements.
@@ -1301,6 +1305,32 @@ Key points:
 - **Absolute paths**: By using `${projectDir}`, we create an absolute path, which is important for test data that ships with the pipeline.
 - **Test data location**: nf-core pipelines typically store test data in the `assets/` directory within the pipeline repository for small test files, or reference external test datasets for larger files.
 
+And while we're at it, let's tighten the default resource limits to ensure this will run on very basic machines (like the minimal VMs in Github Codespaces):
+
+=== "After"
+
+    ```groovy title="core-hello/config/test.config" linenums="13" hl_lines="3-4"
+    process {
+        resourceLimits = [
+            cpus: 2,
+            memory: '4.GB',
+            time: '1.h'
+        ]
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="core-hello/config/test.config" linenums="13" hl_lines="3-4"
+    process {
+        resourceLimits = [
+            cpus: 4,
+            memory: '15.GB',
+            time: '1.h'
+        ]
+    }
+    ```
+
 This completes the code modifications we need to do.
 
 ### 4.4. Run the pipeline with the test profile
@@ -1382,6 +1412,8 @@ tree core-hello-results
         ├── params_2025-11-21_07-29-41.json
         └── pipeline_dag_2025-11-21_04-47-18.html
         └── pipeline_dag_2025-11-21_07-29-37.html
+
+    1 directory, 12 files
     ```
 
 You see we got another set of execution reports in addition to the ones we got from the first run, when the workflow was still just a placeholder.
@@ -1416,6 +1448,8 @@ tree results
     ├── UPPER-Bonjour-output.txt
     ├── UPPER-Hello-output.txt
     └── UPPER-Holà-output.txt
+
+    0 directories, 10 files
     ```
 
 Ah, there they are, mixed in with the outputs of earlier runs of the original Hello pipeline.

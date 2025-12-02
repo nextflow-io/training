@@ -14,7 +14,7 @@ In this fifth part of the Hello nf-core training course, we show you how to use 
     cd core-hello
     ```
 
-    This gives you a pipeline with the `CAT_CAT` module already integrated.
+    This gives you a pipeline with the `COWPY` module already upgraded to follow nf-core standards.
 
 ---
 
@@ -110,7 +110,7 @@ Both schemas use the JSON Schema format, a widely-adopted standard for describin
 
 !!! note "What input data validation does NOT do"
 
-    Input data validation checks the structure of *manifest files* (sample sheets, CSV files), not the contents of your actual data files (FASTQ, BAM, VCF, etc.).
+    Input data validation checks the structure of *manifest files* (sample sheets, CSV files), NOT the contents of your actual data files (FASTQ, BAM, VCF, etc.).
 
     For large-scale data, validating file contents (like checking BAM integrity) should happen in pipeline processes running on worker nodes, not during the validation stage on the orchestrating machine.
 
@@ -127,7 +127,7 @@ graph LR
 
 Validation should happen **before** any pipeline processes run, to provide fast feedback and prevent wasted compute time.
 
-Now let's apply it in practice, starting with parameter validation.
+Now let's apply these principles in practice, starting with parameter validation.
 
 ---
 
@@ -171,7 +171,7 @@ Open `nextflow.config` and find the `validation` block (around line 246). Add `i
 This configuration tells nf-schema to:
 
 - **`defaultIgnoreParams`**: Skip validation of complex parameters like `genomes` (set by template developers)
-- **`ignoreParams`**: Skip validation of the `input` parameter's file contents (temporary - we'll remove this in section 2)
+- **`ignoreParams`**: Skip validation of the `input` parameter's file contents (temporary; we'll re-enable this in section 2)
 - **`monochromeLogs`**: Disable colored output in validation messages when set to `true` (controlled by `params.monochrome_logs`)
 
 !!! note "Why ignore the input parameter?"
@@ -230,7 +230,8 @@ Key validation features:
 
 !!! note "Where do schema parameters come from?"
 
-    The schema validation uses `nextflow.config` as the base for parameter definitions. Parameters declared elsewhere in your workflow scripts (like in `main.nf` or module files) are **not** automatically picked up by the schema validator.
+    The schema validation uses `nextflow.config` as the base for parameter definitions.
+    Parameters declared elsewhere in your workflow scripts (like in `main.nf` or module files) are **not** automatically picked up by the schema validator.
 
     This means you should always declare your pipeline parameters in `nextflow.config`, and then define their validation rules in `nextflow_schema.json`.
 
@@ -245,7 +246,7 @@ Instead, nf-core provides an interactive GUI tool that handles the JSON Schema s
 nf-core pipelines schema build
 ```
 
-You'll see output like:
+You should see something like this:
 
 ```console
                                       ,--./,-.
@@ -276,7 +277,7 @@ To add the `batch` parameter:
    - **ID**: `batch`
    - **Description**: `Name for this batch of greetings`
    - **Type**: `string`
-   - Check the **Required** checkbox
+   - **Required**: tick the checkbox
    - Optionally, select an icon from the icon picker (e.g., `fas fa-layer-group`)
 
 ![Adding the batch parameter](./img/schema_add.png)
@@ -370,7 +371,8 @@ Now that parameter validation is working, let's add validation for the input dat
 
 ## 2. Input data validation (schema_input.json)
 
-Now let's add validation for the contents of our input CSV file. While parameter validation checks command-line flags, input data validation ensures the data inside the CSV file is structured correctly.
+We're going to add validation for the contents of our input CSV file.
+Whereas parameter validation checks command-line flags, input data validation ensures the data inside the CSV file is structured correctly.
 
 ### 2.1. Understand the greetings.csv format
 
@@ -381,29 +383,31 @@ cat assets/greetings.csv
 ```
 
 ```csv title="assets/greetings.csv"
-Hello
-Bonjour
-Holà
+Hello,en,87
+Bonjour,fr,96
+Holà,es,98
 ```
-
-<!-- TODO: Update this to the three-column version -->
 
 This is a simple CSV with:
 
-- One column (no header)
-- One greeting per line
-- Text strings with no special format requirements
+- Three columns (no header)
+- On each line: a greeting, a language, and a score
+- The first two columns are text strings with no special format requirements
+- The third column is an integer
+
+For our pipeline, only the first column is required.
 
 ### 2.2. Design the schema structure
 
 For our use case, we want to:
 
-1. Accept CSV input with one column
-2. Treat each row as a greeting string
-3. Ensure greetings are not empty
-4. Ensure no whitespace-only entries
+1. Accept CSV input with at least one column
+2. Treat the first element of each row as a greeting string
+3. Ensure greetings are not empty and do not start with whitespace
+4. Ensure the language field matches one of the supported language codes (en, fr, es, it, de)
+5. Ensure the score field is an integer with a value between 0 and 100
 
-We'll structure this as an array of objects, where each object has a `greeting` field.
+We'll structure this as an array of objects, where each object has at least a `greeting` field.
 
 ### 2.3. Update the schema file
 
@@ -414,7 +418,7 @@ Open `assets/schema_input.json` and replace the `properties` and `required` sect
 
 === "After"
 
-    ```json title="assets/schema_input.json" linenums="1" hl_lines="10-14 16"
+    ```json title="assets/schema_input.json" linenums="1" hl_lines="10-25 27"
     {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "$id": "https://raw.githubusercontent.com/core/hello/main/assets/schema_input.json",
@@ -428,6 +432,17 @@ Open `assets/schema_input.json` and replace the `properties` and `required` sect
                     "type": "string",
                     "pattern": "^\\S.*$",
                     "errorMessage": "Greeting must be provided and cannot be empty or start with whitespace"
+                },
+                "language": {
+                    "type": "string",
+                    "enum": ["en", "fr", "es", "it", "de"],
+                    "errorMessage": "Language must be one of: en, fr, es, it, de"
+                },
+                "score": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 100,
+                    "errorMessage": "Score must be an integer with a value between 0 and 100"
                 }
             },
             "required": ["greeting"]
@@ -476,9 +491,11 @@ Open `assets/schema_input.json` and replace the `properties` and `required` sect
 The key changes:
 
 - **`description`**: Updated to mention "greetings file"
-- **`properties`**: Replaced `sample`, `fastq_1`, and `fastq_2` with a single `greeting` field
-  - **`type: "string"`**: Must be a text string
-  - **`pattern: "^\\S.*$"`**: Must start with a non-whitespace character (but can contain spaces after that)
+- **`properties`**: Replaced `sample`, `fastq_1`, and `fastq_2` with `greeting`, `language`, and `score`
+  - **`type:`** Enforce either string (`greeting`, `language`) or integer (`score`)
+  - **`pattern: "^\\S.*$"`**: Greeting must start with a non-whitespace character (but can contain spaces after that)
+  - **`"enum": ["en", "fr", "es", "it", "de"]`**: Language code must be in the supported set
+  - **`"minimum": 0` and `"maximum": 100`**: Score value must be between 0 and 100
   - **`errorMessage`**: Custom error message shown if validation fails
 - **`required`**: Changed from `["sample", "fastq_1"]` to `["greeting"]`
 
@@ -486,34 +503,32 @@ The key changes:
 
 When nf-schema reads a CSV file, it expects the first row to contain column headers that match the field names in the schema.
 
-For our simple case, we need to add a `greeting` header to our greetings file:
-
-Add a header line to the greetings file:
+For our simple case, we need to add a header line to our greetings file:
 
 === "After"
 
     ```csv title="assets/greetings.csv" linenums="1" hl_lines="1"
-    greeting
-    Hello
-    Bonjour
-    Holà
+    greeting,language,score
+    Hello,en,87
+    Bonjour,fr,96
+    Holà,es,98
     ```
 
 === "Before"
 
     ```csv title="assets/greetings.csv" linenums="1"
-    Hello
-    Bonjour
-    Holà
+    Hello,en,87
+    Bonjour,fr,96
+    Holà,es,98
     ```
 
-Now the CSV file has a header that matches the field name in our schema.
+Now the CSV file has a header line that matches the field names in our schema.
 
 The final step is to implement the validation in the pipeline code using `samplesheetToList`.
 
-### 2.5. Implement `samplesheetToList` in the pipeline
+### 2.5. Implement validation in the pipeline
 
-Now we need to replace our simple CSV parsing with nf-schema's `samplesheetToList` function, which validates and converts the sample sheet.
+Now we need to replace our simple CSV parsing with nf-schema's `samplesheetToList` function, which will validate and parse the samplesheet.
 
 The `samplesheetToList` function:
 
@@ -648,30 +663,49 @@ executor >  local (10)
 -[core/hello] Pipeline completed successfully-
 ```
 
-Great! The pipeline runs successfully and validation passes silently. The warning about `--character` is just informational since it's not defined in the schema. If you want, use what you've learned to add validation for that parameter too!
+Great! The pipeline runs successfully and validation passes silently.
+The warning about `--character` is just informational since it's not defined in the schema.
+If you want, use what you've learned to add validation for that parameter too!
 
 #### 2.7.2. Test with invalid input
 
-Now let's test that validation catches errors. Create a test file with an invalid column name:
+Passing validation is always a good feeling, but let's make sure that the validation will actually catch errors.
+
+To create a test file with an invalid column name, start by making a copy of the `greetings.csv` file:
 
 ```bash
-cat > /tmp/invalid_greetings.csv << 'EOF'
-message
-Hello
-Bonjour
-Holà
-EOF
+cp assets/greetings.csv assets/invalid_greetings.csv
 ```
 
-This file uses `message` as the column name instead of `greeting`, which doesn't match our schema.
+Now open the file and change the name of the first column, in the header line, from `greeting` to `message`:
+
+=== "After"
+
+    ```csv title="tmp_invalid_greetings.csv" hl_lines="1" linenums="1"
+    message,language,score
+    Hello,en,87
+    Bonjour,fr,96
+    Holà,es,98
+    ```
+
+=== "Before"
+
+    ```csv title="tmp_invalid_greetings.csv" hl_lines="1" linenums="1"
+    greeting,language,score
+    Hello,en,87
+    Bonjour,fr,96
+    Holà,es,98
+    ```
+
+This doesn't match our schema, so the validation should throw an error.
 
 Try running the pipeline with this invalid input:
 
 ```bash
-nextflow run . --input /tmp/invalid_greetings.csv --outdir test-results -profile docker
+nextflow run . --input assets/invalid_greetings.csv --outdir test-results -profile docker
 ```
 
-```console title="Output"
+```console title="Output (subset)"
 ERROR ~ Validation of pipeline parameters failed!
 
  -- Check '.nextflow.log' file for details
@@ -693,6 +727,8 @@ Perfect! The validation caught the error and provided a clear, helpful error mes
 - What the specific problem is (missing required field `greeting`)
 
 The schema validation ensures that input files have the correct structure before the pipeline runs, saving time and preventing confusing errors later in execution.
+
+If you'd like to practice this, feel free to create other greetings input files that violate the schema in other fun ways.
 
 ### Takeaway
 

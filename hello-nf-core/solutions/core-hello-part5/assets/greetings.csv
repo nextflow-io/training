@@ -1,3 +1,4 @@
-Hello,English,123
-Bonjour,French,456
-Holà,Spanish,789
+greeting,language,score
+Hello,en,87
+Bonjour,fr,96
+Holà,es,98

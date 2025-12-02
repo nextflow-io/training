@@ -16,10 +16,10 @@ This helps to increase the reliability and reproducibility of scientific analyse
 
 During this training, you will be introduced to nf-core in a series of hands-on exercises as described further below.
 
-**Additional information:** You can learn more about the project's origins and governance at https://nf-co.re/about.
+**Additional information:** You can learn more about the project's origins and governance at [https://nf-co.re/about](https://nf-co.re/about).
 
 **Reference publication:** nf-core is published in Nature Biotechnology: [Nat Biotechnol 38, 276–278 (2020). Nature Biotechnology](https://www.nature.com/articles/s41587-020-0439-x).
-An updated preprint is available at [bioRxiv](https://www.biorxiv.org/content/10.1101/2024.05.10.592912v1).
+There is another recent publication in Genome Biology [Genome Biol 26, 228 (2025). Genome Biology](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-025-03673-9).
 
 ## Audience & prerequisites
 
