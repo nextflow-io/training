@@ -2256,7 +2256,31 @@ Applying these patterns in your own work will enable you to build robust, produc
 
 3.  **Creating Reusable Functions**: You learned to extract complex logic into named functions that can be called from channel operators, making workflows more readable and maintainable.
 
-<!-- TODO: provide short syntax example? -->
+    - Define a named function
+
+    ```groovy
+    def separateMetadata(row) {
+        def sample_meta = [ /* code hidden for brevity */ ]
+        def fastq_path = file(row.file_path)
+        def m = (fastq_path.name =~ /^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$/)
+        def file_meta = m ? [ /* code hidden for brevity */ ] : [:]
+        def priority = sample_meta.quality > 40 ? 'high' : 'normal'
+
+        return tuple(sample_meta + file_meta + [priority: priority], fastq_path)
+    }
+    ```
+
+    - Call the named function in a workflow
+
+    ```groovy
+    workflow {
+        ch_samples = channel.fromPath("./data/samples.csv")
+            .splitCsv(header: true)
+            .map{ row -> separateMetadata(row) }
+
+        ch_fastp = FASTP(ch_samples)
+    }
+    ```
 
 4.  **Dynamic Resource Directives with Closures**: You explored using closures in process directives for adaptive resource allocation based on input characteristics.
 
@@ -2275,13 +2299,38 @@ Applying these patterns in your own work will enable you to build robust, produc
 
 5.  **Conditional Logic and Process Control**: You added intelligent routing using `.branch()` and `.filter()` operators, leveraging truthiness for concise conditional expressions.
 
-<!-- TODO: provide short syntax example? -->
+    - Use `.branch()` to route data through different workflow branches
+
+    ```groovy
+    trim_branches = ch_samples
+    .branch { meta, reads ->
+        fastp: meta.organism == 'human' && meta.depth >= 30000000
+        trimgalore: true
+    }
+
+    ch_fastp = FASTP(trim_branches.fastp)
+    ch_trimgalore = TRIMGALORE(trim_branches.trimgalore)
+    ```
+
+    - Boolean evaluation with Groovy Truth
+
+    ```groovy
+    if (sample.files) println "Has files"
+    ```
+
+    - Use `filter()` to subset data with 'truthiness'
+
+    ```groovy
+    ch_valid_samples = ch_samples
+        .filter { meta, reads ->
+            meta.id && meta.organism && meta.depth >= 25000000
+        }
+    ```
 
 6.  **Safe Navigation and Elvis Operators**: You made the pipeline robust against missing data using `?.` for null-safe property access and `?:` for providing default values.
 
     ```groovy
     def id = data?.sample?.id ?: 'unknown'
-    if (sample.files) println "Has files"  // Groovy Truth
     ```
 
 7.  **Validation with error() and log.warn**: You learned to validate inputs early and fail fast with clear error messages.
@@ -2297,28 +2346,37 @@ Applying these patterns in your own work will enable you to build robust, produc
 
 8.  **Configuration Event Handlers**: You learned to use workflow event handlers (`onComplete` and `onError`) for logging, notifications, and lifecycle management.
 
-<!-- TODO: provide short syntax example? -->
+    - Using `onComplete` to log and notify
 
-<!-- TODO: these examples didn't match any of the points above? where do they fit?
+    ```groovy
+    workflow.onComplete = {
+        println "Success     : ${workflow.success}"
+        println "exit status : ${workflow.exitStatus}"
 
-  ```groovy title="Essential operators examples"
-  // Slashy strings for regex
-  def pattern = /^\w+_R[12]\.fastq$/
-  def script = """
-  echo "Processing ${sample.id}"
-  analysis --depth ${depth ?: 1_000_000}
-  """
-  ```
+        if (workflow.success) {
+            println "✅ Pipeline completed successfully!"
+        } else {
+            println "❌ Pipeline failed!"
+            println "Error: ${workflow.errorMessage}"
+        }
+    }
+    ```
 
-  ```groovy title="Collection operations examples"
-  // Filter, group, and organize data
-  def high_quality = samples.findAll { it.quality > 40 }
-  def by_organism = samples.groupBy { it.organism }
-  def file_names = files*.getName()  // Spread operator
-  def all_files = nested_lists.flatten()
-  ```
+    - Using `onError` to take action specifically in case of failure
 
--->
+    ```groovy
+    workflow.onError = {
+        // Write detailed error log
+        def error_file = file("${workflow.launchDir}/error.log")
+        error_file.text = """
+        Time: ${new Date()}
+        Error: ${workflow.errorMessage}
+        Error report: ${workflow.errorReport ?: 'No detailed report available'}
+        """
+
+        println "Error details written to: ${error_file}"
+    }
+    ```
 
 ### Additional resources
 
