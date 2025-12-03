@@ -3,9 +3,11 @@
 /*
  * Pipeline parameters
  */
-params.greeting = 'greetings.csv'
-params.batch = 'test-batch'
-params.character = 'turkey'
+params {
+    greeting: Path = 'greetings.csv'
+    batch: String = 'test-batch'
+    character: String = 'turkey'
+}
 
 // Include modules
 include { sayHello } from './modules/sayHello.nf'

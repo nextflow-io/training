@@ -617,16 +617,21 @@ In many cases, it makes sense to supply a default value for a given parameter so
 
 Let's give the `greeting` parameter with a default value by declaring it before the workflow definition.
 
-```groovy title="hello-world.nf" linenums="22"
+```groovy title="hello-world.nf" linenums="3"
 /*
  * Pipeline parameters
  */
-params.greeting = 'Holà mundo!'
+params {
+    greeting: String = 'Holà mundo!'
+}
 ```
+
+The syntax is `name: Type = default_value`. Supported types include `String`, `Integer`, `Float`, `Boolean`, and `Path`.
 
 !!! tip
 
-    You can put the parameter declaration inside the workflow block if you prefer. Whatever you choose, try to group similar things in the same place so you don't end up with declarations all over the place.
+    With the new Nextflow syntax parser in Nextflow 25.10.0, [parameters should be defined](https://www.nextflow.io/docs/latest/workflow.html#parameters)
+    in a block at the top of your main entry workflow script. This makes it easy to find all configurable parameters at a glance.
 
 #### 4.2.2. Run the workflow again without specifying the parameter
 

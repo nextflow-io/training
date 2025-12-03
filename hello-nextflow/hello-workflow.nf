@@ -1,6 +1,13 @@
 #!/usr/bin/env nextflow
 
 /*
+ * Pipeline parameters
+ */
+params {
+    greeting: Path = 'greetings.csv'
+}
+
+/*
  * Use echo to print 'Hello World!' to a file
  */
 process sayHello {
@@ -8,21 +15,16 @@ process sayHello {
     publishDir 'results', mode: 'copy'
 
     input:
-        val greeting
+    val greeting
 
     output:
-        path "${greeting}-output.txt"
+    path "${greeting}-output.txt"
 
     script:
     """
     echo '$greeting' > '$greeting-output.txt'
     """
 }
-
-/*
- * Pipeline parameters
- */
-params.greeting = 'greetings.csv'
 
 workflow {
 
