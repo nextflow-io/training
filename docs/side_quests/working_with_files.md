@@ -1,8 +1,12 @@
 # Working with Files
 
-Bioinformatics workflows often involve processing large numbers of files. Nextflow provides powerful tools to handle files efficiently, helping you organize and process your data with minimal code.
+Bioinformatics workflows often involve processing large numbers of files.
+Nextflow provides powerful tools to handle files efficiently, helping you organize and process your data with minimal code.
 
-In this side quest, we'll explore how Nextflow handles files, from basic file operations to more advanced techniques for working with file collections. You'll learn how to extract metadata from filenames - a common requirement in bioinformatics pipelines.
+### Learning goals
+
+In this side quest, we'll explore how Nextflow handles files, from basic file operations to more advanced techniques for working with file collections.
+You'll learn how to extract metadata from filenames, which is a common requirement in bioinformatics pipelines.
 
 By the end of this side quest, you'll be able to:
 
@@ -15,36 +19,46 @@ By the end of this side quest, you'll be able to:
 - Integrate file operations into Nextflow processes with proper input handling
 - Organize process outputs using metadata-driven directory structures
 
+These skills will help you build workflows that can handle different kinds of file inputs with great flexibility.
+
+### Prerequisites
+
+Before taking on this side quest, you should:
+
+- Have completed the [Hello Nextflow](../hello_nextflow/README.md) tutorial or equivalent beginner's course.
+- Be comfortable using basic Nextflow concepts and mechanisms (processes, channels, operators)
+
+<!-- I removed the suggestion to do the metamaps SQ first because that works more naturally after -->
+
 ---
 
-## 0. Warmup
+## 0. Get started
 
-### 0.1. Prerequisites
+#### Open the training codespace
 
-Before taking on this side quest you should:
+If you haven't yet done so, make sure to open the training environment as described in the [Environment Setup](../envsetup/index.md).
 
-- Complete the [Hello Nextflow](../hello_nextflow/README.md) tutorial
-- Understand basic Nextflow concepts (processes, channels, operators)
-- Basic understanding of using sample-specific data (meta data): [Working with sample-specific data](./metadata.md)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
-### 0.2. Starting Point
+#### Move into the project directory
 
-Let's move into the project directory:
+Let's move into the directory where the files for this tutorial are located.
 
-```bash title="Navigate to project directory"
+```bash
 cd side-quests/working_with_files
 ```
 
 You can set VSCode to focus on this directory:
 
-```bash title="Open directory in VSCode"
+```bash
 code .
 ```
 
-You'll find a simple workflow file (`file_operations.nf`) and a data directory containing some example files.
+#### Review the materials
+
+You'll find a simple workflow file (`file_operations.nf`) and a `data` directory containing some example data files.
 
 ```console title="Directory contents"
-> tree
 .
 ├── count_lines.nf
 ├── data
@@ -65,13 +79,43 @@ You'll find a simple workflow file (`file_operations.nf`) and a data directory c
 │   ├── patientC_rep1_tumor_R1_001.fastq.gz
 │   └── patientC_rep1_tumor_R2_001.fastq.gz
 └── file_operations.nf
-
-2 directories, 18 files
 ```
 
-This directory contains paired-end sequencing data for three patients (A, B, C), with a typical `_R1_` and `_R2_` naming convention for what are known as 'forward' and 'reverse reads' (don't worry if you don't know what this means, it's not important for this session). Each patient has normal and tumor tissue types, and patient A has two replicates.
+This directory contains paired-end sequencing data from three patients (A, B, C).
 
-### 0.3. Running the Workflow
+For each patient, we have samples that are of type `tumor` (typically originating from tumor biopsies) or `normal` (taken from healthy tissue or blood).
+If you're not familiar with cancer analysis, just know that this corresponds to an experimental model that uses paired tumor/normal samples to perform contrastive analyses.
+
+For patient A specifically, we have two sets of technical replicates (repeats).
+
+The sequencing data files are named with a typical `_R1_` and `_R2_` convention for what are known as 'forward reads' and 'reverse reads'.
+
+!!! note
+
+    Don't worry if you're not familiar with this experimental design, it's not critical for understanding this tutorial.
+
+#### Review the assignment
+
+Your challenge is to write a Nextflow workflow that will parse the samplesheet, extract basic metadata from the file naming structure, and use that metadata to organize the analysis and outputs appropriately.
+
+<!-- TODO: give a bit more details, similar to how it's done in the Metadata side quest -->
+
+#### Readiness checklist
+
+Think you're ready to dive in?
+
+- [ ] I understand the goal of this course and its prerequisites
+- [ ] My codespace is up and running
+- [ ] I've set my working directory appropriately
+- [ ] I understand the assignment
+
+If you can check all the boxes, you're good to go.
+
+---
+
+## 1. Basic File Operations
+
+### 1.1. Use `.class` to identify the type of an object
 
 Take a look at the workflow file `file_operations.nf`:
 
@@ -107,9 +151,7 @@ data/patientA_rep1_normal_R1_001.fastq.gz is of class java.lang.String
 
 We printed the string path exactly as we wrote it. This is just text output - Nextflow hasn't done anything special with it yet. We've also confirmed that, so far, to Nextflow this is only a string (of class `java.lang.String`), we haven't yet told Nextflow about its file nature.
 
-## 1. Basic File Operations
-
-### 1.1. Creating Path Objects
+### 1.2. Creating Path Objects
 
 We can tell Nextflow how to handle files by creating [Path objects](https://www.nextflow.io/docs/latest/reference/stdlib-types.html#path) from path strings. In our workflow, we have a string path `data/patientA_rep1_normal_R1_001.fastq.gz`, and we covert that to a Path object using the `file()` method, which provides access to file properties and operations.
 
@@ -156,7 +198,7 @@ Now we see the full absolute path instead of the relative path we wrote. Nextflo
 
     Think of it like this: a path string is like writing an address on paper, while a Path object is like having a GPS device that knows how to navigate and can tell you details about the journey.
 
-### 1.2. File Attributes
+### 1.3. File Attributes
 
 Why is this helpful? Well now Nextflow understands that `myFile` is a Path object and not just a string, we can access the various attributes of the Path object.
 
@@ -204,7 +246,7 @@ Extension: gz
 Parent directory: /workspaces/training/side-quests/working_with_files/data
 ```
 
-### 1.3. Why proper file handling matters
+### 1.4. Why proper file handling matters
 
 The difference between strings and Path objects becomes critical when you start building actual workflows with processes. Let's side-step for a moment to take a look at a workflow where this has been done wrong.
 
@@ -453,7 +495,7 @@ The process successfully:
 
 ## 2. Using Remote Files
 
-One of the key features of Nextflow is the ability to transparently switch between local files (on the same machine) to remote files accessible over the internet. To do this, all you need to do as a user is switch the file path you supply to the workflow from a normal file path (e.g. `/path/to/data`) to a file path with a remote protocol at the start. Importantly, you should **never** have to change the workflow logic to accomodate files coming from different locations.
+One of the key features of Nextflow is the ability to transparently switch between local files (on the same machine) to remote files accessible over the internet. To do this, all you need to do as a user is switch the file path you supply to the workflow from a normal file path (e.g. `/path/to/data`) to a file path with a remote protocol at the start. Importantly, you should **never** have to change the workflow logic to accommodate files coming from different locations.
 
 For example, replacing `/path/to/data` with `s3://path/to/data` in your inputs will switch to using the S3 protocol. Many different protocols are supported:
 
@@ -466,7 +508,7 @@ To use these, simply replace the string and Nextflow will handle authentication 
 
 The key strength of this is we can switch between environments without changing any pipeline logic. For example, you can develop with a small, local test set before moving to a remote set of data by changing the URI.
 
-### 2.1. Using a file from the internet
+### 2.1. Use a file from the internet
 
 !!! warning
 
@@ -532,9 +574,15 @@ To see the difference, check the working directory located at the hash value of 
 
 In this way, you can replace local with remote data without changing any pipeline logic.
 
-#### Cloud Storage with Glob Patterns
+!!! note
 
-While HTTP doesn't support globs, cloud storage protocols do. Here's how you could use glob patterns with cloud storage:
+    **Note on Object Types**: Notice that local files produce `sun.nio.fs.UnixPath` objects while remote files produce `nextflow.file.http.XPath` objects. Despite these different class names, both work exactly the same way and can be used identically in your workflows. This is a key feature of Nextflow - you can seamlessly switch between local and remote data sources without changing your code logic.
+
+<!-- Add a 2.2 step using a file in S3 -->
+
+#### Working with Glob Patterns
+
+HTTP doesn't support globs, but cloud storage protocols do. Here's how you could use glob patterns with cloud storage:
 
 ```groovy title="Cloud storage examples (not runnable in this environment)"
 // S3 with glob patterns - would match multiple files
@@ -549,21 +597,7 @@ ch_gcs_files = channel.fromPath('gs://bucket/data/sample_*.fastq.gz')
 
 These examples show the power of Nextflow's unified file handling - the same code works whether files are local or in the cloud, as long as the protocol supports the operations you need.
 
-### Takeaway
-
-- Remote data is accessed using a URI (HTTP, FTP, S3, Azure, Google Cloud)
-- Nextflow will automatically download and stage the data to the right place
-- Do not write logic to download or upload remote files!
-- Local and remote files produce different object types but work identically
-- **Important**: HTTP/HTTPS only work with single files (no glob patterns)
-- Cloud storage (S3, Azure, GCS) supports both single files and glob patterns
-- You can seamlessly switch between local and remote data sources without changing code logic (as long as the protocol supports your required operations)
-
-!!! note
-
-    **Note on Object Types**: Notice that local files produce `sun.nio.fs.UnixPath` objects while remote files produce `nextflow.file.http.XPath` objects. Despite these different class names, both work exactly the same way and can be used identically in your workflows. This is a key feature of Nextflow - you can seamlessly switch between local and remote data sources without changing your code logic.
-
-### 2.2. Switching Back to Local Files
+### 2.2. Switch Back to Local Files
 
 For the remainder of this side quest, we'll use local files in our examples. This allows us to demonstrate powerful features like glob patterns and batch processing that aren't available with HTTP URLs. Remember: the same concepts apply to cloud storage (S3, Azure, GCS) where glob patterns are fully supported.
 
@@ -596,6 +630,16 @@ Let's update our workflow to use local files again:
         println "Extension: ${myFile.extension}"
         println "Parent directory: ${myFile.parent}"
     ```
+
+### Takeaway
+
+- Remote data is accessed using a URI (HTTP, FTP, S3, Azure, Google Cloud)
+- Nextflow will automatically download and stage the data to the right place
+- Do not write logic to download or upload remote files!
+- Local and remote files produce different object types but work identically
+- **Important**: HTTP/HTTPS only work with single files (no glob patterns)
+- Cloud storage (S3, Azure, GCS) supports both single files and glob patterns
+- You can seamlessly switch between local and remote data sources without changing code logic (as long as the protocol supports your required operations)
 
 ---
 
@@ -1284,88 +1328,141 @@ This pattern of keeping metadata explicit and attached to the data (rather than 
 - The `tag` directive provides process identification in execution logs
 - Workflow structure separates channel creation from process execution
 
+---
+
 ## Summary
 
-In this side quest, you've learned how to work with files in Nextflow, from basic operations to more advanced techniques for handling collections of files. Here's a summary of what we covered:
+In this side quest, you've learned how to work with files in Nextflow, from basic operations to more advanced techniques for handling collections of files.
 
-1. **Basic File Operations**: We created Path objects with `file()` and accessed file attributes like name, extension, and parent directory, learning the difference between strings and Path objects.
+Applying these techniques in your own work will enable you to build more efficient and maintainable workflows, especially when working with large numbers of files with complex naming conventions.
 
-2. **Using Remote Files**: We learned how to transparently switch between local and remote files using URIs, demonstrating Nextflow's ability to handle files from various sources without changing workflow logic.
+### Key patterns
 
-3. **Reading files using the `fromPath()` channel factory**: We created channels from file patterns with `channel.fromPath()` and viewed their file attributes, including object types.
+1.  **Basic File Operations:** We created Path objects with `file()` and accessed file attributes like name, extension, and parent directory, learning the difference between strings and Path objects.
 
-4. **Extracting Patient Metadata from Filenames**: We used `tokenize()` and `replace()` to extract and structure metadata from filenames, converting them to organized maps.
+    - Create a Path object with `file()`
 
-5. **Simplifying with channel.fromFilePairs**: We used `channel.fromFilePairs()` to automatically pair related files and extract metadata from paired file IDs.
+    ```groovy
+    myFile = file('path/to/file.txt')
+    ```
 
-6. **Using File Operations in Processes**: We integrated file operations into Nextflow processes with proper input handling, using `publishDir` to organize outputs based on metadata.
+    - Get file attributes
 
-These techniques will help you build more efficient and maintainable workflows, especially when working with large numbers of files with complex naming conventions.
+    ```groovy
+    println myFile.name       // file.txt
+    println myFile.baseName   // file
+    println myFile.extension  // txt
+    println myFile.parent     // path/to
+    ```
 
-### Key Concepts
+2.  **Using Remote Files**: We learned how to transparently switch between local and remote files using URIs, demonstrating Nextflow's ability to handle files from various sources without changing workflow logic.
 
-- **Path Object Creation**
+    - Local file
 
-  ```groovy
-  // Create a Path object from a string path
-  myFile = file('path/to/file.txt')
-  ```
+    ```groovy
+    myFile = file('path/to/file.txt')
+    ```
 
-- **File Attributes**
+    - FTP
 
-  ```groovy
-  // Get file attributes
-  println myFile.name       // file.txt
-  println myFile.baseName   // file
-  println myFile.extension  // txt
-  println myFile.parent     // path/to
-  ```
+    ```groovy
+    myFile = file('ftp://path/to/file.txt')
+    ```
 
-- **Channel Creation from Files**
+    - HTTPS
 
-  ```groovy
-  // Create a channel from a file pattern
-  ch_fastq = channel.fromPath('data/*.fastq.gz')
+    ```groovy
+    myFile = file('https://path/to/file.txt')
+    ```
 
-  // Create a channel from paired files
-  ch_pairs = channel.fromFilePairs('data/*_R{1,2}_001.fastq.gz')
-  ```
+    - Amazon S3
 
-- **Extracting Metadata**
+    ```groovy
+    myFile = file('s3://path/to/file.txt')
+    ```
 
-  ```groovy
-  // Extract metadata with tokenize
-  def name = file.name.tokenize('_')
-  def patientId = name[0]
-  def replicate = name[1].replace('rep', '')
-  def type = name[2]
-  def readNum = name[3].replace('R', '')
-  ```
+    - Azure Blob Storage
 
-- **Using remote files**
+    ```groovy
+    myFile = file('az://path/to/file.txt')
+    ```
 
-  ```groovy
-  // Use a local file
-  myFile = file('path/to/file.txt')
+    - Google Cloud Storage
 
-  // Use a file on FTP
-  myFile = file('ftp://path/to/file.txt')
+    ```groovy
+    myFile = file('gs://path/to/file.txt')
+    ```
 
-  // Use a file on HTTPS
-  myFile = file('https://path/to/file.txt')
+3.  **Reading files using the `fromPath()` channel factory:** We created channels from file patterns with `channel.fromPath()` and viewed their file attributes, including object types.
 
-  // Use a file on S3
-  myFile = file('s3://path/to/file.txt')
+    - Create a channel from a file pattern
 
-  // Use a file on Azure Blob Storage
-  myFile = file('az://path/to/file.txt')
+    ```groovy
+    ch_fastq = channel.fromPath('data/*.fastq.gz')
+    ```
 
-  // Use a file on Google Cloud Storage
-  myFile = file('gs://path/to/file.txt')
-  ```
+    - Get file attributes
 
-## Resources
+    ```groovy
+    ch_fastq.view { myFile ->
+        println "File object class: ${myFile.class}"
+        println "File name: ${myFile.name}"
+        println "Simple name: ${myFile.simpleName}"
+        println "Extension: ${myFile.extension}"
+        println "Parent directory: ${myFile.parent}"
+    }
+    ```
+
+4.  **Extracting Patient Metadata from Filenames:** We used `tokenize()` and `replace()` to extract and structure metadata from filenames, converting them to organized maps.
+
+    ```groovy
+    def name = file.name.tokenize('_')
+    def patientId = name[0]
+    def replicate = name[1].replace('rep', '')
+    def type = name[2]
+    def readNum = name[3].replace('R', '')
+    ```
+
+5.  **Simplifying with channel.fromFilePairs:** We used `channel.fromFilePairs()` to automatically pair related files and extract metadata from paired file IDs.
+
+    ```groovy
+    ch_pairs = channel.fromFilePairs('data/*_R{1,2}_001.fastq.gz')
+    ```
+
+6.  **Using File Operations in Processes:** We integrated file operations into Nextflow processes with proper input handling, using `publishDir` to organize outputs based on metadata.
+
+    - Associate a meta map with the process inputs
+
+    ```groovy
+    ch_fastq = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
+    ch_samples = ch_fastq.map { id, fastqs ->
+        def (sample, replicate, type, readNum) = id.tokenize('_')
+        [
+            [
+                id: sample,
+                replicate: replicate.replace('rep', ''),
+                type: type
+            ],
+            fastqs
+        ]
+    }
+    ANALYZE_READS(ch_samples)
+    ```
+
+    - Organize outputs based on metadata
+
+    ```groovy
+    publishDir "results/${meta.type}/${meta.id}/${meta.replicate}", mode: 'copy'
+    ```
+
+### Additional resources
 
 - [Nextflow Documentation: Working with Files](https://www.nextflow.io/docs/latest/working-with-files.html)
 - [channel.fromPath](https://www.nextflow.io/docs/latest/channel.html#frompath)
 - [channel.fromFilePairs](https://www.nextflow.io/docs/latest/channel.html#fromfilepairs)
+
+---
+
+## What's next?
+
+Return to the [menu of Side Quests](./index.md) or click the button in the bottom right of the page to move on to the next topic in the list.

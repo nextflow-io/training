@@ -2,15 +2,9 @@
 
 Debugging is a critical skill that can save you hours of frustration and help you become a more effective Nextflow developer. Throughout your career, especially when you're starting out, you'll encounter bugs while building and maintaining your workflows. Learning systematic debugging approaches will help you identify and resolve issues quickly.
 
-## What you should know first
+### Learning goals
 
-This guide assumes you've completed the [Hello Nextflow](../hello_nextflow/) training course and are comfortable with foundational Nextflow concepts including basic workflow structure, processes, channels, and configuration.
-
-This guide focuses on debugging techniques and workflows. For comprehensive coverage of IDE features that support debugging (syntax highlighting, error detection, etc.), see the dedicated [IDE Features for Nextflow Development](ide_features.md) side quest. We recommend completing the IDE training beforehand.
-
-## What you'll learn here
-
-This guide focuses on **systematic debugging techniques** for Nextflow workflows:
+In this side quest, we'll explore **systematic debugging techniques** for Nextflow workflows:
 
 - **Syntax error debugging**: Using IDE features and Nextflow error messages effectively
 - **Channel debugging**: Diagnosing data flow issues and channel structure problems
@@ -20,11 +14,29 @@ This guide focuses on **systematic debugging techniques** for Nextflow workflows
 
 By the end, you'll have a robust debugging methodology that transforms frustrating error messages into clear roadmaps for solutions.
 
+### Prerequisites
+
+Before taking on this side quest, you should:
+
+- Have completed the [Hello Nextflow](../hello_nextflow/README.md) tutorial or equivalent beginner's course.
+- Be comfortable using basic Nextflow concepts and mechanisms (processes, channels, operators)
+
+**Optional:** We recommend completing the [IDE Features for Nextflow Development](./ide_features.md) side quest first.
+That covers comprehensive coverage of IDE features that support debugging (syntax highlighting, error detection, etc.), which we'll use heavily here.
+
 ---
 
-## 0. Warmup
+## 0. Get started
 
-Let's move into the debugging exercise directory:
+#### Open the training codespace
+
+If you haven't yet done so, make sure to open the training environment as described in the [Environment Setup](../envsetup/index.md).
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
+
+#### Move into the project directory
+
+Let's move into the directory where the files for this tutorial are located.
 
 ```bash
 cd side-quests/debugging
@@ -36,13 +48,11 @@ You can set VSCode to focus on this directory:
 code .
 ```
 
-The directory contains example workflows with various types of bugs that we'll use for practice:
+#### Review the materials
 
-```bash
-tree .
-```
+You'll find a set of example workflows with various types of bugs that we'll use for practice:
 
-```console title="Project structure"
+```console title="Directory contents"
 .
 ├── bad_bash_var.nf
 ├── bad_channel_shape.nf
@@ -67,19 +77,26 @@ tree .
 ├── missing_software_with_stub.nf
 ├── nextflow.config
 └── no_such_var.nf
-
-1 directory, 22 files
 ```
 
 These files represent common debugging scenarios you'll encounter in real-world development.
 
-### Takeaway
+#### Review the assignment
 
-You're set up with example files containing various types of bugs that we'll debug systematically throughout this guide.
+Your challenge is to run each workflow, identify the error(s) and fix it.
 
-### What's next?
+<!-- TODO: give a bit more details, similar to how it's done in the Metadata side quest -->
 
-Learn to identify and fix the most common type of error: syntax errors.
+#### Readiness checklist
+
+Think you're ready to dive in?
+
+- [ ] I understand the goal of this course and its prerequisites
+- [ ] My codespace is up and running
+- [ ] I've set my working directory appropriately
+- [ ] I understand the assignment
+
+If you can check all the boxes, you're good to go.
 
 ---
 
@@ -2285,7 +2302,12 @@ Now it's time to put the systematic debugging approach into practice. The workfl
 
 ## Summary
 
-In this side quest, we've learned:
+In this side quest, you've learned a set of systematic techniques for debugging Nextflow workflows.
+Applying these techniques in your own work will enable you to spend less time fighting your computer, solve problems faster and protect yourself from future issues.
+
+### Key patterns
+
+<!-- TODO: Can we add snippets of code below to illustrate? -->
 
 **1. How to identify and fix syntax errors**:
 
@@ -2315,8 +2337,6 @@ In this side quest, we've learned:
 - Applying resume for efficient debugging cycles
 - Following a four-phase systematic debugging methodology
 
----
-
 !!! tip "Quick Debugging Reference"
 
     **Syntax errors?** → Check VSCode warnings, run `nextflow run workflow.nf -preview`
@@ -2333,7 +2353,11 @@ In this side quest, we've learned:
 
     **Made fixes?** → Use `-resume` to save time testing: `nextflow run workflow.nf -resume`
 
-### What's next?
+---
+
+### Additional resources
+
+<!-- TODO: Are there any specific articles to call out / link to? -->
 
 Check out the [Nextflow documentation](https://www.nextflow.io/docs/latest/) for more advanced debugging features and best practices. You might want to:
 
@@ -2343,6 +2367,10 @@ Check out the [Nextflow documentation](https://www.nextflow.io/docs/latest/) for
 - Learn about other debugging tools like profiling and performance analysis
 - Explore more advanced debugging techniques for complex workflows
 
-Remember: Effective debugging is a skill that improves with practice. The systematic methodology and comprehensive toolkit you've developed here will serve you well throughout your Nextflow development journey.
+**Remember:** Effective debugging is a skill that improves with practice. The systematic methodology and comprehensive toolkit you've acquired here will serve you well throughout your Nextflow development journey.
 
 ---
+
+## What's next?
+
+Return to the [menu of Side Quests](./index.md) or click the button in the bottom right of the page to move on to the next topic in the list.
