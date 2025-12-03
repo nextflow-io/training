@@ -140,13 +140,15 @@ Let's run the workflow:
 nextflow run file_operations.nf
 ```
 
-```console title="Output"
- N E X T F L O W   ~  version 25.04.3
+??? example title="Output"
 
-Launching `file_operations.nf` [romantic_chandrasekhar] DSL2 - revision: 5a4a89bc3a
+    ```console
+    N E X T F L O W   ~  version 25.04.3
 
-data/patientA_rep1_normal_R1_001.fastq.gz is of class java.lang.String
-```
+    Launching `file_operations.nf` [romantic_chandrasekhar] DSL2 - revision: 5a4a89bc3a
+
+    data/patientA_rep1_normal_R1_001.fastq.gz is of class java.lang.String
+    ```
 
 As you can see, Nextflow printed the string path exactly as we wrote it.
 
@@ -184,13 +186,15 @@ Now run the workflow again:
 nextflow run file_operations.nf
 ```
 
-```console title="Output"
- N E X T F L O W   ~  version 25.04.3
+??? example title="Output"
 
-Launching `file_operations.nf` [kickass_coulomb] DSL2 - revision: 5af44b1b59
+    ```console
+    N E X T F L O W   ~  version 25.04.3
 
-/workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz is of class class sun.nio.fs.UnixPath
-```
+    Launching `file_operations.nf` [kickass_coulomb] DSL2 - revision: 5af44b1b59
+
+    /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz is of class class sun.nio.fs.UnixPath
+    ```
 
 This time, you see the full absolute path instead of the relative path we provided as input.
 
@@ -243,17 +247,19 @@ Run the workflow:
 nextflow run file_operations.nf
 ```
 
-```console title="Output"
- N E X T F L O W   ~  version 25.04.3
+??? example title="Output"
 
-Launching `file_operations.nf` [ecstatic_ampere] DSL2 - revision: f3fa3dcb48
+    ```console
+    N E X T F L O W   ~  version 25.04.3
 
-File object class: sun.nio.fs.UnixPath
-File name: patientA_rep1_normal_R1_001.fastq.gz
-Simple name: patientA_rep1_normal_R1_001
-Extension: gz
-Parent directory: /workspaces/training/side-quests/working_with_files/data
-```
+    Launching `file_operations.nf` [ecstatic_ampere] DSL2 - revision: f3fa3dcb48
+
+    File object class: sun.nio.fs.UnixPath
+    File name: patientA_rep1_normal_R1_001.fastq.gz
+    Simple name: patientA_rep1_normal_R1_001
+    Extension: gz
+    Parent directory: /workspaces/training/side-quests/working_with_files/data
+    ```
 
 You see the various file attributes printed to the console above.
 
@@ -374,9 +380,9 @@ workflow {
 
 As advertised, this is a small workflow with one process (`COUNT_LINES`) that is meant to take a file input and count how many lines are in it.
 
-??? example title="What does `debug true` do?"
+??? example title="What does the debug directive do?"
 
-    The `debug = true` directive in the process definition causes Nextflow to print the output from your script (like the line count "40") directly in the execution log.
+    The `debug true` directive in the process definition causes Nextflow to print the output from your script (like the line count "40") directly in the execution log.
     Without this, you would only see the process execution status but not the actual output from your script.
 
     For more information on debugging Nextflow processes, see the [Debugging Nextflow Workflows](./debugging.md) side quest.
@@ -391,7 +397,7 @@ Can you find the error? Have a look at the process input definition.
 The input is marked as a `val`, which indicates a value input, and tries to treat it as a file.
 
 When we ran this, Nextflow passed the string value through to the script, but it didn't _stage_ the actual file in the working directory.
-So the process tried to use the relative string, `data/patientA_rep1_normal_R1_001.fastq.gz`, but that file doesn't exist **within the process working directory**, so it failed.
+So the process tried to use the relative string, `data/patientA_rep1_normal_R1_001.fastq.gz`, but that file doesn't exist within the process working directory, so it failed.
 
 #### 1.4.2. Fix the input definition
 
@@ -452,7 +458,7 @@ Go ahead and run the updated version.
 nextflow run count_lines.nf
 ```
 
-??? example "Output"
+??? example title="Output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -537,7 +543,7 @@ Let's run this one more time.
 nextflow run count_lines.nf
 ```
 
-??? example "Output"
+??? example title="Output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -851,7 +857,7 @@ nextflow run file_operations.nf
 
 ??? example title="Output"
 
-    ```console title="channel.fromPath Output"
+    ```console
     N E X T F L O W   ~  version 25.04.3
 
     Launching `file_operations.nf` [furious_swanson] DSL2 - revision: c35c34950d
@@ -1054,7 +1060,7 @@ nextflow run file_operations.nf
 
 ??? example title="Output"
 
-    ```console title="Sample Tokenize Output"
+    ```console
     N E X T F L O W   ~  version 25.04.3
 
     Launching `file_operations.nf` [gigantic_gauss] DSL2 - revision: a39baabb57
@@ -1458,7 +1464,7 @@ nextflow run file_operations.nf
 
 ??? example title="Output"
 
-    ```console title="ANALYZE_READS Output"
+    ```console
     N E X T F L O W   ~  version 25.04.3
 
     Launching `./file_operations.nf` [shrivelled_cori] DSL2 - revision: b546a31769
@@ -1575,7 +1581,7 @@ nextflow run file_operations.nf
 
 ??? example title="Output"
 
-    ```console title="Directory contents"
+    ```console
     N E X T F L O W   ~  version 25.04.3
 
     Launching `./file_operations.nf` [insane_swartz] DSL2 - revision: fff18abe6d
