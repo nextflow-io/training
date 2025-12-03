@@ -81,6 +81,6 @@ workflow {
     collectGreetings(convertToUpper.out.collect(), params.batch)
 
     // optional view statements
-    convertToUpper.out.view { "Before collect: $it" }
-    convertToUpper.out.collect().view { "After collect: $it" }
+    convertToUpper.out.view { item -> "Before collect: $item" }
+    convertToUpper.out.collect().view { item -> "After collect: $item" }
 }

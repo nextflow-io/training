@@ -26,15 +26,13 @@ params.greeting = 'greetings.csv'
 
 workflow {
 
-    greetings_array = ['Hello','Bonjour','Holà']
-
     // create a channel for inputs from a CSV file
     greeting_ch = channel.fromPath(params.greeting)
-                        .view { "Before splitCsv: $it" }
+                        .view { item -> "Before splitCsv: $item" }
                         .splitCsv()
-                        .view { "After splitCsv: $it" }
+                        .view { item -> "After splitCsv: $item" }
                         .map { line -> line[0] }
-                        .view { "After map: $it" }
+                        .view { item -> "After map: $item" }
 
     // emit a greeting
     sayHello(greeting_ch)
