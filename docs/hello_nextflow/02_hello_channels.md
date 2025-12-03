@@ -71,7 +71,7 @@ This is the line of code we're going to use:
 greeting_ch = channel.of('Hello Channels!')
 ```
 
-This creates a channel called `greeting_ch` using the `channel.of()` channel factory, which sets up a simple queue channel, and loads the string `'Hello Channels!'` to use as the greeting value.
+This creates a channel called `greeting_ch` using the `channel.of()` channel factory, which sets up a simple dataflow channel, and loads the string `'Hello Channels!'` to use as the greeting value.
 
 !!! note
 
@@ -299,16 +299,16 @@ In the process block, make the following code changes:
 
 === "After"
 
-    ```groovy title="hello-channels.nf" linenums="6" hl_lines="9 13"
+    ```groovy title="hello-channels.nf" linenums="13" hl_lines="9 13"
     process sayHello {
 
         publishDir 'results', mode: 'copy'
 
         input:
-            val greeting
+        greeting: String
 
         output:
-            path "${greeting}-output.txt"
+        file "${greeting}-output.txt"
 
         script:
         """
@@ -319,16 +319,16 @@ In the process block, make the following code changes:
 
 === "Before"
 
-    ```groovy title="hello-channels.nf" linenums="6"
+    ```groovy title="hello-channels.nf" linenums="13"
     process sayHello {
 
         publishDir 'results', mode: 'copy'
 
         input:
-            val greeting
+        greeting: String
 
         output:
-            path 'output.txt'
+        file 'output.txt'
 
         script:
         """
@@ -650,21 +650,27 @@ Before the workflow block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-channels.nf" linenums="25" hl_lines="4"
+    ```groovy title="hello-channels.nf" linenums="3" hl_lines="4"
     /*
      * Pipeline parameters
      */
-    params.greeting = 'greetings.csv'
+    params {
+        greeting: Path = 'greetings.csv'
+    }
     ```
 
 === "Before"
 
-    ```groovy title="hello-channels.nf" linenums="25"
+    ```groovy title="hello-channels.nf" linenums="3"
     /*
      * Pipeline parameters
      */
-    params.greeting = ['Hello','Bonjour','Holà']
+    params {
+        greeting: String = ['Hello','Bonjour','Holà']
+    }
     ```
+
+Note that we've changed the type from `String` to `Path` since we're now expecting a file path.
 
 #### 4.1.2. Switch to a channel factory designed to handle a file
 

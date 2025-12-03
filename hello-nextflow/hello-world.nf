@@ -6,7 +6,7 @@
 process sayHello {
 
     output:
-        path 'output.txt'
+    file 'output.txt'
 
     script:
     """

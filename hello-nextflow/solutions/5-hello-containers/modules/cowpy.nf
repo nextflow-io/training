@@ -1,5 +1,7 @@
 #!/usr/bin/env nextflow
 
+nextflow.preview.types = true
+
 // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
 process cowpy {
 
@@ -8,11 +10,11 @@ process cowpy {
     container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
 
     input:
-        path input_file
-        val character
+    input_file: Path
+    character: String
 
     output:
-        path "cowpy-${input_file}"
+    file "cowpy-${input_file}"
 
     script:
     """

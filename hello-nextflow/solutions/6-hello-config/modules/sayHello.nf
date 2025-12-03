@@ -1,5 +1,7 @@
 #!/usr/bin/env nextflow
 
+nextflow.preview.types = true
+
 /*
  * Use echo to print 'Hello World!' to a file
  */
@@ -8,10 +10,10 @@ process sayHello {
     publishDir 'results', mode: 'copy'
 
     input:
-        val greeting
+    greeting: String
 
     output:
-        path "${greeting}-output.txt"
+    file "${greeting}-output.txt"
 
     script:
     """

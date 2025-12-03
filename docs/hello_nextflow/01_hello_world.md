@@ -104,7 +104,7 @@ Let's open the `hello-world.nf` script in the editor pane.
 process sayHello {
 
     output:
-        path 'output.txt'
+    file 'output.txt'
 
     script:
     """
@@ -139,7 +139,7 @@ Here we have a **process** called `sayHello` that writes its **output** to a fil
 process sayHello {
 
     output:
-        path 'output.txt'
+    file 'output.txt'
 
     script:
     """
@@ -150,8 +150,8 @@ process sayHello {
 
 This is a very minimal process definition that just contains an `output` definition and the `script` to execute.
 
-The `output` definition includes the `path` qualifier, which tells Nextflow this should be handled as a path (includes both directory paths and files).
-Another common qualifier is `val`.
+The `output` block declares what files or values the process will produce.
+Here we use `file` to indicate we expect a file called `output.txt`.
 
 !!! note
 
@@ -330,7 +330,7 @@ In the workflow script file `hello-world.nf`, make the following code modificati
         publishDir 'results', mode: 'copy'
 
         output:
-            path 'output.txt'
+        file 'output.txt'
     ```
 
 === "Before"
@@ -339,7 +339,7 @@ In the workflow script file `hello-world.nf`, make the following code modificati
     process sayHello {
 
         output:
-            path 'output.txt'
+        file 'output.txt'
     ```
 
 #### 3.1.2. Run the workflow again
@@ -495,10 +495,10 @@ In the process block, make the following code change:
         publishDir 'results', mode: 'copy'
 
         input:
-            val greeting
+        greeting: String
 
         output:
-            path 'output.txt'
+        file 'output.txt'
     ```
 
 === "Before"
@@ -509,10 +509,10 @@ In the process block, make the following code change:
         publishDir 'results', mode: 'copy'
 
         output:
-            path 'output.txt'
+        file 'output.txt'
     ```
 
-The `greeting` variable is prefixed by `val` to tell Nextflow it's a value (not a path).
+The `greeting` input is declared with its name followed by its type (`String`), which tells Nextflow what kind of data to expect.
 
 #### 4.1.2. Edit the process command to use the input variable
 
@@ -617,16 +617,26 @@ In many cases, it makes sense to supply a default value for a given parameter so
 
 Let's give the `greeting` parameter with a default value by declaring it before the workflow definition.
 
-```groovy title="hello-world.nf" linenums="22"
+```groovy title="hello-world.nf" linenums="3"
 /*
  * Pipeline parameters
  */
-params.greeting = 'Holà mundo!'
+params {
+    greeting: String = 'Holà mundo!'
+}
 ```
+
+The syntax is `name: Type = default_value`. Supported types include `String`, `Integer`, `Float`, `Boolean`, and `Path`.
 
 !!! tip
 
-    You can put the parameter declaration inside the workflow block if you prefer. Whatever you choose, try to group similar things in the same place so you don't end up with declarations all over the place.
+    With the new Nextflow syntax parser in Nextflow 25.10.0, [parameters should be defined](https://www.nextflow.io/docs/latest/workflow.html#parameters)
+    in a block at the top of your main entry workflow script. This makes it easy to find all configurable parameters at a glance.
+
+!!! warning "Preview feature flag required"
+
+    The typed syntax used in this course requires adding `nextflow.preview.types = true` at the top of each script file (after the shebang).
+    This flag will no longer be required after Nextflow 26.04, when the typed syntax becomes the default.
 
 #### 4.2.2. Run the workflow again without specifying the parameter
 

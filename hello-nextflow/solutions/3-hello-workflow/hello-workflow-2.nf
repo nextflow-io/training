@@ -1,5 +1,14 @@
 #!/usr/bin/env nextflow
 
+nextflow.preview.types = true
+
+/*
+ * Pipeline parameters
+ */
+params {
+    greeting: Path = 'greetings.csv'
+}
+
 /*
  * Use echo to print 'Hello World!' to a file
  */
@@ -8,10 +17,10 @@ process sayHello {
     publishDir 'results', mode: 'copy'
 
     input:
-        val greeting
+    greeting: String
 
     output:
-        path "${greeting}-output.txt"
+    file "${greeting}-output.txt"
 
     script:
     """
@@ -27,10 +36,10 @@ process convertToUpper {
     publishDir 'results', mode: 'copy'
 
     input:
-        path input_file
+    input_file: Path
 
     output:
-        path "UPPER-${input_file}"
+    file "UPPER-${input_file}"
 
     script:
     """
@@ -46,21 +55,16 @@ process collectGreetings {
     publishDir 'results', mode: 'copy'
 
     input:
-        path input_files
+    input_files: List<Path>
 
     output:
-        path "COLLECTED-output.txt"
+    file "COLLECTED-output.txt"
 
     script:
     """
     cat ${input_files} > 'COLLECTED-output.txt'
     """
 }
-
-/*
- * Pipeline parameters
- */
-params.greeting = 'greetings.csv'
 
 workflow {
 

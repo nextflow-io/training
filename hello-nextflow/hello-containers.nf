@@ -1,10 +1,14 @@
 #!/usr/bin/env nextflow
 
+nextflow.preview.types = true
+
 /*
  * Pipeline parameters
  */
-params.greeting = 'greetings.csv'
-params.batch = 'test-batch'
+params {
+    greeting: Path = 'greetings.csv'
+    batch: String = 'test-batch'
+}
 
 // Include modules
 include { sayHello } from './modules/sayHello.nf'
