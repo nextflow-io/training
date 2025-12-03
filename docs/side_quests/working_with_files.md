@@ -1,12 +1,12 @@
 # Working with Files
 
-Bioinformatics workflows often involve processing large numbers of files.
+Scientific analysis workflows often involve processing large numbers of files.
 Nextflow provides powerful tools to handle files efficiently, helping you organize and process your data with minimal code.
 
 ### Learning goals
 
 In this side quest, we'll explore how Nextflow handles files, from basic file operations to more advanced techniques for working with file collections.
-You'll learn how to extract metadata from filenames, which is a common requirement in bioinformatics pipelines.
+You'll learn how to extract metadata from filenames, which is a common requirement in scientific analysis pipelines.
 
 By the end of this side quest, you'll be able to:
 
@@ -746,16 +746,16 @@ That works, but it's clunky.
 
 This is where [`channel.fromPath()`](https://www.nextflow.io/docs/latest/reference/channel.html#frompath) comes in: a convenient channel factory that bundles all the functionality we need to generate a channel from one or more static file strings as well as glob patterns.
 
-### 3.1. Loading files with channel.fromPath
+### 3.1. Add the channel factory
 
-Let's update our workflow to use `channel.fromPath` as follows:
+Let's update our workflow to use `channel.fromPath`.
 
 === "After"
 
     ```groovy title="file_operations.nf" linenums="2" hl_lines="2"
         // Loading files with channel.fromPath
         ch_fastq = channel.fromPath('data/patientA_rep1_normal_R1_001.fastq.gz')
-        ch_fastq.view { "Found file: $it of type ${it.class}" }
+        ch_fastq.view { myFile -> "Found file: $myFile" }
 
         // // Print file attributes
         // Comment these out for now, we'll come back to them!
@@ -780,6 +780,8 @@ Let's update our workflow to use `channel.fromPath` as follows:
         println "Parent directory: ${myFile.parent}"
     ```
 
+We've also commented out the code that prints out the attributes for now, and added a `.view` statement to print out just the filename instead.
+
 Run the workflow:
 
 ```bash
@@ -796,16 +798,16 @@ nextflow run file_operations.nf
     Found file: /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz of type class sun.nio.fs.UnixPath
     ```
 
-As you can see, each file path is being emitted as a separate element in the channel.
+As you can see, the file path is being loading as a `Path` type object in the channel.
+This is similar to what `file()` would have done, except now we have a channel that we can load more files into if we want.
 
-Note also how Nextflow has retrieved the file we specified and turned it into a `Path` type object, in exactly the same way that `file()` would have done.
-Using `channel.fromPath()` is just a convenient way of creating a new channel populated by a list of files.
+Using `channel.fromPath()` is a convenient way of creating a new channel populated by a list of files.
 
 ### 3.2. View channel contents
 
-Earlier, we used `.view()` to print the file name.
+In our first pass at using the channel factory, we simplified the code and just printed out the file name.
 
-Let's update our workflow to print out the file attributes this time:
+Let's go back to printing out the full file attributes:
 
 === "After"
 
@@ -836,6 +838,8 @@ Let's update our workflow to print out the file attributes this time:
         // println "Parent directory: ${myFile.parent}"
     ```
 
+Since `myFile` is a proper Path object, we have access to all the same class attributes as before.
+
 Run the workflow:
 
 ```bash
@@ -856,20 +860,35 @@ nextflow run file_operations.nf
     Parent directory: /workspaces/training/side-quests/working_with_files/data
     ```
 
-[TODO]
+And there you are, same results as before but now we have the file in a channel, so we can add more.
 
 ### 3.3. Using a glob to match multiple files
 
-Glob patterns are a convenient way to match and retrieve file and directory names based on wildcard characters.
+There are several ways we could load more files into the channel.
+Here we're going to show you how to use glob patterns, which are a convenient way to match and retrieve file and directory names based on wildcard characters.
 The process of matching these patterns is called "globbing" or "filename expansion".
 
-Nextflow supports using globs to manage input and output files, except with HTTPS, because HTTPS cannot list multiple files.
+```note
 
-Let's modify our workflow
+    As noted previously, Nextflow supports globbing to manage input and output files in the majority of cases, except with HTTPS filepaths because HTTPS cannot list multiple files.
+```
 
-`channel.fromPath()` can take a glob pattern as an argument, which will match all files in the directory that match the pattern. Let's grab both of the pair of FASTQs associated with this patient.
+Let's say we want to retrieve both files in a pair of files associated with a given patient, `patientA`:
 
-A glob pattern is a pattern that matches one or more characters in a string. The `*` wildcard is the most common glob pattern, which will match any character in it's place. To do this, we replace the full path with a `*` wildcard, which will match any character in it's place. In this case, we will replace the read number from `R1` to `R*`.
+```console
+patientA_rep1_normal_R1_001.fastq.gz
+patientA_rep1_normal_R2_001.fastq.gz
+```
+
+Since the only difference between the filenames is the replicate number, _i.e._ the number after `R`, we can use the wildcard character `*` to stand in for the number as follows:
+
+```console
+patientA_rep1_normal_R*_001.fastq.gz
+```
+
+That is the glob pattern we need.
+
+Now all we need to do is update the file path in the channel factory to use that glob pattern as follows:
 
 === "After"
 
@@ -883,28 +902,34 @@ A glob pattern is a pattern that matches one or more characters in a string. The
         ch_fastq = channel.fromPath('data/patientA_rep1_normal_R1_001.fastq.gz')
     ```
 
-Run the workflow:
+Nextflow will automatically recognize that this is a glob pattern and will handle it appropriately.
 
-```bash title="Test glob pattern matching"
+Run the workflow to test that out:
+
+```bash
 nextflow run file_operations.nf
 ```
 
-```console title="channel.fromPath Glob Output"
- N E X T F L O W   ~  version 25.04.3
+??? example title="Output"
 
-Launching `file_operations.nf` [boring_sammet] DSL2 - revision: d2aa789c9a
+    ```console
+    N E X T F L O W   ~  version 25.04.3
 
-File object class: sun.nio.fs.UnixPath
-File name: patientA_rep1_normal_R1_001.fastq.gz
-Simple name: patientA_rep1_normal_R1_001
-Extension: gz
-Parent directory: /workspaces/training/side-quests/working_with_files/data
-File object class: sun.nio.fs.UnixPath
-File name: patientA_rep1_normal_R2_001.fastq.gz
-Simple name: patientA_rep1_normal_R2_001
-Extension: gz
-Parent directory: /workspaces/training/side-quests/working_with_files/data
-```
+    Launching `file_operations.nf` [boring_sammet] DSL2 - revision: d2aa789c9a
+
+    File object class: sun.nio.fs.UnixPath
+    File name: patientA_rep1_normal_R1_001.fastq.gz
+    Simple name: patientA_rep1_normal_R1_001
+    Extension: gz
+    Parent directory: /workspaces/training/side-quests/working_with_files/data
+    File object class: sun.nio.fs.UnixPath
+    File name: patientA_rep1_normal_R2_001.fastq.gz
+    Simple name: patientA_rep1_normal_R2_001
+    Extension: gz
+    Parent directory: /workspaces/training/side-quests/working_with_files/data
+    ```
+
+As you can see, we now have two Path objects in our channel, which shows that Nextflow has done the filename expansion correctly and loaded both files as expected.
 
 Using this method, we could grab as many or as few files as we want just by changing the glob pattern. If we made it more generous, we could grab all the files in the `data` directory, but we'll come back to that later.
 
@@ -918,19 +943,37 @@ Using this method, we could grab as many or as few files as we want just by chan
 
 ---
 
-## 4. Extracting Patient Metadata from Filenames
+## 4. Extracting basic metadata from filenames
 
-One of the most common tasks in bioinformatics workflows is extracting metadata from filenames. This is usually feasible when working with sequencing data, where filenames often contain information about the sample, condition, replicate, and read number.
+In most scientific domains, it's very common to have metadata encoded in the names of the files that contain the data.
+For example, in bioinformatics, files containing sequencing data are often named in a way that encodes information about the sample, condition, replicate, and read number.
 
-This isn't ideal - metadata should never be embedded in filenames, but it's a common reality. We want to extract that metadata in a standardised manner so we can use it later.
+If the filenames are constructed according to a consistent convention, you can extract that metadata in a standardized manner and use it in the course of your analysis.
+That is a big 'if', of course, and you should be very cautious whenever you rely on filename structure; but the reality is that this approach is very widely used, so let's have a look at how it's done in Nextflow.
 
-Let's explore how to extract metadata from our FASTQ filenames using Nextflow's powerful data transformation capabilities.
+In the case of our example data, we know that the filenames include consistently structured metadata.
+For example, the filename `patientA_rep1_normal_R2_001` encodes the following:
 
-### 4.1. Basic Metadata Extraction
+- patient ID: `patientA`
+- replicate ID: `rep1`
+- sample type: `normal` (as opposed to `tumor`)
+- read set: `R1` (as opposed to `R2`)
 
-First, let's modify our workflow to extract metadata from the filenames.
+We're going to modify our workflow to retrieve this information in three steps:
 
-First we will grab the simpleName of the file, which includes the metadata, and return with the file. Then, we will separate out the metadata by underscores using tokenize. Finally, we will use string handling to remove additional text like "rep" which aren't required right now.
+1. Retrieve the `simpleName` of the file, which includes the metadata
+2. Separate the metadata using a method called `tokenize()`
+3. Use a map to organize the metadata
+
+!!! warning
+
+    You should never encode sensitive information into filenames, such as patient names or other identifying characteristics, as that can compromise patient privacy or other relevant security restrictions.
+
+### 4.1. Retrieve the `simpleName`
+
+The `simpleName` is a file attribute that corresponds to the filename stripped of its path and extension.
+
+Make the following edits to the workflow:
 
 === "After"
 
@@ -953,26 +996,34 @@ First we will grab the simpleName of the file, which includes the metadata, and 
         }
     ```
 
-```bash title="Test filename metadata extraction"
+This retrieves the `simplename` and associates it with the full file object using a `map()` operation.
+
+Run the workflow to test that it works:
+
+```bash
 nextflow run file_operations.nf
 ```
 
-```console title="Sample Metadata Output"
- N E X T F L O W   ~  version 25.04.3
+??? example title="Output"
 
-Launching `file_operations.nf` [suspicious_mahavira] DSL2 - revision: ae8edc4e48
+    ```console
+    N E X T F L O W   ~  version 25.04.3
 
-[patientA_rep1_normal_R2_001, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]
-[patientA_rep1_normal_R1_001, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz]
-```
+    Launching `file_operations.nf` [suspicious_mahavira] DSL2 - revision: ae8edc4e48
 
-Note how we have separated the patient `simpleName`, which includes the metadata, from the `file` object. This is useful if we want to use the patient metadata in a later process.
+    [patientA_rep1_normal_R2_001, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]
+    [patientA_rep1_normal_R1_001, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz]
+    ```
 
-### 4.2. Extracting Metadata from Filenames
+Each element in the channel is now a tuple containing the `simpleName` and the original file object.
 
-Our metadata is embedded in the filename, but it's not in a standard format. We need to split up the filename into it's components which are separated by underscores.
+### 4.2. Extract the metadata from the `simplename`
 
-Groovy includes a method called `tokenize()` which is perfect for this task.
+At this point, the metadata we want is embedded in the `simplename`, but we can't access individual items directly.
+So we need to split the `simplename` into its components.
+Fortunately, those components are simply separated by underscores in the original filename, so we can apply a common Groovy method called `tokenize()` that is perfect for this task.
+
+Make the following edits to the workflow:
 
 === "After"
 
@@ -990,28 +1041,45 @@ Groovy includes a method called `tokenize()` which is perfect for this task.
         }
     ```
 
-Once we run this, we should see the patient metadata as a list of strings, and the Path object as the second element in the tuple.
+The `tokenize()` method will split the `simpleName` string wherever it finds underscores, and will return a list containing the substrings.
 
-```bash title="Test filename tokenization"
+Run the workflow:
+
+```bash
 nextflow run file_operations.nf
 ```
 
-```console title="Sample Tokenize Output"
- N E X T F L O W   ~  version 25.04.3
+??? example title="Output"
 
-Launching `file_operations.nf` [gigantic_gauss] DSL2 - revision: a39baabb57
+    ```console title="Sample Tokenize Output"
+    N E X T F L O W   ~  version 25.04.3
 
-[[patientA, rep1, normal, R1, 001], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz]
-[[patientA, rep1, normal, R2, 001], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]
+    Launching `file_operations.nf` [gigantic_gauss] DSL2 - revision: a39baabb57
+
+    [[patientA, rep1, normal, R1, 001], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz]
+    [[patientA, rep1, normal, R2, 001], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]
+    ```
+
+Now the tuple for each element in our channel contains the list of metadata (_e.g._ `[patientA, rep1, normal, R1, 001]`) and the original file object.
+
+That's great!
+We've broken down our patient information from a single string into a list of strings.
+We can now handle each part of the patient information separately.
+
+### 4.3. Use a map to organize the metadata
+
+Our metadata is just a flat list at the moment.
+It's easy enough to use but difficult to read.
+
+```console
+[patientA, rep1, normal, R1, 001]
 ```
 
-Success! We've broken down our patient information from a single string into a list of strings. We can now handle each part of the patient information separately.
+What is the item at index 3? Can you tell without referring back to the original explanation of the metadata structure?
 
-### 4.3. Using a map to organise the data
+This is a great opportunity to use a key-value store, where every item has a set of keys and their associated values, so you can easily refer to each key to get the corresponding value.
 
-Our meta data is just a flat list at the moment. It's easy to use but hard to read. What is the item at index 3? Can you tell without checking?
-
-A [map](https://www.baeldung.com/groovy-maps) is Groovy's version of a key-value store. Every item has a key and a value and we can refer to each key to get the value. This will make our code much easier to read, i.e. we go from this:
+In our example, that means going from this organization:
 
 ```groovy
 data = [patientA, 1, normal, R1]
@@ -1019,7 +1087,7 @@ data = [patientA, 1, normal, R1]
 println data[3]
 ```
 
-to this:
+To this one:
 
 ```groovy
 data = [id: patientA, replicate: 1, type: normal, readNum: 1]
@@ -1027,7 +1095,10 @@ data = [id: patientA, replicate: 1, type: normal, readNum: 1]
 println data.readNum
 ```
 
+In Groovy (the language Nextflow is built on), that's called a [map](https://www.baeldung.com/groovy-maps).
+
 Let's convert our flat list into a map now.
+Make the following edits to the workflow:
 
 === "After"
 
@@ -1054,24 +1125,30 @@ Let's convert our flat list into a map now.
         }
     ```
 
-Notice that we're simplifying a couple of the meta data items as we go (e.g. `readNum.replace('rep', '')`).
+<!-- TODO (future) Explain the map a little more? -->
 
-Now re-run the workflow:
+While we're at it, we also simplified a couple of the metadata strings using a string replacement method called `replace()` to remove some characters that are unnecessary (_e.g._ `readNum.replace('rep', '')` to keep only the number from the replicate IDs).
 
-```bash title="Test metadata map structure"
+Let's run the workflow again:
+
+```bash
 nextflow run file_operations.nf
 ```
 
-```console title="Map Output"
- N E X T F L O W   ~  version 25.04.3
+??? example title="Output"
 
-Launching `file_operations.nf` [infallible_swartz] DSL2 - revision: 7f4e68c0cb
+    ```console
+    N E X T F L O W   ~  version 25.04.3
 
-[[id:patientA, replicate:rep1, type:normal, readNum:R2], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]
-[[id:patientA, replicate:rep1, type:normal, readNum:R1], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz]
-```
+    Launching `file_operations.nf` [infallible_swartz] DSL2 - revision: 7f4e68c0cb
 
-We have converted our flat list into a map, and now we can refer to each bit of sample data by name instead of by index. This makes our code easier to read and more maintainable.
+    [[id:patientA, replicate:rep1, type:normal, readNum:R2], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]
+    [[id:patientA, replicate:rep1, type:normal, readNum:R1], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz]
+    ```
+
+Now the metadata is neatly labeled (_e.g._ `[id:patientA, replicate:rep1, type:normal, readNum:R2]`) so it's a lot easier to tell what is what.
+
+It'll also be a lot easier to actually make use of elements of metadata in the workflow, and will make our code easier to read and more maintainable.
 
 ### Takeaway
 
@@ -1081,7 +1158,7 @@ We have converted our flat list into a map, and now we can refer to each bit of 
 - The `.map()` operation transforms channel elements while preserving structure
 - Structured metadata (maps) makes code more readable and maintainable than positional lists
 
-Next up, we will look at how to handle paired-end reads.
+Next up, we will look at how to handle pairs of data files.
 
 ---
 
@@ -1425,7 +1502,7 @@ See how using patient metadata as values gives us powerful flexibility in our pi
 2. Make decisions in processes based on patient properties
 3. Split, join, and recombine data based on metadata values
 
-This pattern of keeping metadata explicit and attached to the data (rather than encoded in filenames) is a core best practice in Nextflow that enables building robust, maintainable bioinformatics workflows. Learn more about this in [Working with metadata](./metadata.md)
+This pattern of keeping metadata explicit and attached to the data (rather than encoded in filenames) is a core best practice in Nextflow that enables building robust, maintainable analysis workflows. Learn more about this in [Working with metadata](./metadata.md)
 
 ### Takeaway
 
