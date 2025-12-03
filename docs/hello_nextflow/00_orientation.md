@@ -17,6 +17,41 @@
     - :fontawesome-solid-closed-captioning: High quality (manually curated) captions / subtitles. Switch them on with the :material-subtitles: icon
     - :material-bookmark: Video chapters in the timeline that correspond to page headings.
 
+## Requirements
+
+This training course uses Nextflow 25.10 or later, which introduces new language features including typed parameters.
+
+!!! warning "Version requirement"
+
+    Make sure you have **Nextflow 25.10 or later** installed. You can check your version by running:
+
+    ```bash
+    nextflow -version
+    ```
+
+### Enable the v2 syntax parser
+
+The typed syntax features used in this course require enabling Nextflow's v2 syntax parser.
+Set the following environment variable before running any workflows:
+
+```bash
+export NXF_SYNTAX_PARSER=v2
+```
+
+!!! tip
+
+    To make this permanent, add the export command to your shell profile (`~/.bashrc`, `~/.zshrc`, etc.):
+
+    ```bash
+    echo 'export NXF_SYNTAX_PARSER=v2' >> ~/.bashrc
+    source ~/.bashrc
+    ```
+
+!!! note "Temporary requirement"
+
+    The `NXF_SYNTAX_PARSER=v2` environment variable is a temporary requirement during the preview period.
+    After Nextflow 26.04, the v2 parser will become the default and this setting will no longer be needed.
+
 ## GitHub Codespaces
 
 The GitHub Codespaces environment contains all the software, code and data necessary to work through this training course, so you don't need to install anything yourself.

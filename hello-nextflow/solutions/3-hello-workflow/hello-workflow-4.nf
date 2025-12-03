@@ -1,6 +1,14 @@
 #!/usr/bin/env nextflow
 
 /*
+ * Pipeline parameters
+ */
+params {
+    greeting: Path = 'greetings.csv'
+    batch: String = 'test-batch'
+}
+
+/*
  * Use echo to print 'Hello World!' to a file
  */
 process sayHello {
@@ -8,10 +16,10 @@ process sayHello {
     publishDir 'results', mode: 'copy'
 
     input:
-        val greeting
+    val greeting
 
     output:
-        path "${greeting}-output.txt"
+    path "${greeting}-output.txt"
 
     script:
     """
@@ -27,10 +35,10 @@ process convertToUpper {
     publishDir 'results', mode: 'copy'
 
     input:
-        path input_file
+    path input_file
 
     output:
-        path "UPPER-${input_file}"
+    path "UPPER-${input_file}"
 
     script:
     """
@@ -46,25 +54,19 @@ process collectGreetings {
     publishDir 'results', mode: 'copy'
 
     input:
-        path input_files
-        val batch_name
+    path input_files
+    val batch_name
 
     output:
-        path "COLLECTED-${batch_name}-output.txt" , emit: outfile
-        val count_greetings , emit: count
+    path "COLLECTED-${batch_name}-output.txt" , emit: outfile
+    val count_greetings , emit: count
 
     script:
-        count_greetings = input_files.size()
+    count_greetings = input_files.size()
     """
     cat ${input_files} > 'COLLECTED-${batch_name}-output.txt'
     """
 }
-
-/*
- * Pipeline parameters
- */
-params.greeting = 'greetings.csv'
-params.batch = 'test-batch'
 
 workflow {
 
