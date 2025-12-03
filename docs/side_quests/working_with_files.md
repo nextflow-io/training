@@ -113,9 +113,9 @@ If you can check all the boxes, you're good to go.
 
 ---
 
-## 1. Basic File Operations
+## 1. Basic file operations
 
-### 1.1. Use `.class` to identify the type of an object
+### 1.1. Identify the type of an object with `.class`
 
 Take a look at the workflow file `file_operations.nf`:
 
@@ -127,11 +127,9 @@ workflow {
 }
 ```
 
-We have a mini-workflow that refers to a single file path in its workflow, then prints it to the console, along with its class.
+This is a mini-workflow (without any processes) that refers to a single file path in its workflow, then prints it to the console, along with its class.
 
-!!! note
-
-    **What is `.class`?**
+??? example title="What is `.class`?"
 
     In Groovy (the language Nextflow uses), `.class` tells us what type of object we're working with. It's like asking "what kind of thing is this?" to find out whether it's a string, a number, a file, or something else.
     This will help us illustrate the difference between a plain string and a Path object in the next sections.
@@ -156,7 +154,7 @@ This is just text output; Nextflow hasn't done anything special with it yet.
 We've also confirmed that as far as Nextflow is concerned, this is only a string (of class `java.lang.String`).
 That makes sense, since we haven't yet told Nextflow that it corresponds to a file.
 
-### 1.2. Creating Path Objects
+### 1.2. Create a Path object with file()
 
 We can tell Nextflow how to handle files by creating [Path objects](https://www.nextflow.io/docs/latest/reference/stdlib-types.html#path) from path strings.
 
@@ -167,7 +165,7 @@ Edit the `file_operations.nf` to wrap the string with `file()` as follows:
 === "After"
 
     ```groovy title="file_operations.nf" linenums="2" hl_lines="2"
-    // Create a Path object from a string path
+        // Create a Path object from a string path
         myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
         println "${myFile} is of class ${myFile.class}"
     ```
@@ -175,7 +173,7 @@ Edit the `file_operations.nf` to wrap the string with `file()` as follows:
 === "Before"
 
     ```groovy title="file_operations.nf" linenums="2" hl_lines="2"
-    // Create a Path object from a string path
+        // Create a Path object from a string path
         myFile = 'data/patientA_rep1_normal_R1_001.fastq.gz'
         println "${myFile} is of class ${myFile.class}"
     ```
@@ -200,18 +198,18 @@ Nextflow has converted our string into a Path object and resolved it to the actu
 The file path will now be absolute, as in `/workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz`.
 
 Notice also that the Path object class is `sun.nio.fs.UnixPath`: this is Nextflow's way of representing local files.
-As we'll see later, remote files will have different class names (like `nextflow.file.http.XPath` for HTTP files), but they all work exactly the same way and can be used identically in your workflows.
+As we'll see later, remote files will have different class names (such as `nextflow.file.http.XPath` for HTTP files), but they all work exactly the same way and can be used identically in your workflows.
 
-!!! note
+!!! tip
 
     **The key difference:**
 
     - **Path string**: Just text that Nextflow treats as characters
     - **Path object**: A smart file reference that Nextflow can work with
 
-    Think of it like this: a path string is like writing an address on paper, while a Path object is like having a GPS device that knows how to navigate and can tell you details about the journey.
+    Think of it like this: a path string is like writing an address on paper, while a Path object is like having the address loaded in a GPS device that knows how to navigate to there and can tell you details about the journey.
 
-### 1.3. File Attributes
+### 1.3. Access file attributes
 
 Why is this helpful? Well, now that Nextflow understands that `myFile` is a Path object and not just a string, we can access the various attributes of the Path object.
 
@@ -259,19 +257,23 @@ Parent directory: /workspaces/training/side-quests/working_with_files/data
 
 You see the various file attributes printed to the console above.
 
-### 1.4. Why proper file handling matters
+### 1.4. Solve basic file input problems
 
 The difference between strings and Path objects becomes critical when you start building actual workflows with processes.
 
-To demonstrate, let's take a moment to look at the case of a workflow where this has been done wrong.
+This often trips up newcomers to Nextflow, so let's take a few minutes to work through the case of a workflow where this has been done wrong.
 
-Run the `count_lines.nf` workflow as follows:
+#### 1.4.1. Diagnose the underlying problem
+
+We've given you a small workflow called `count_lines.nf` that is meant to take a text file (with a file path hardcoded) and count how many lines are in it.
+
+Don't look at the code just yet, just run it as follows :
 
 ```bash
 nextflow run count_lines.nf
 ```
 
-This workflow should fail; have a look through the output to diagnose the error.
+This workflow should fail; have a look through the output and find the error message.
 
 ??? example "Output"
 
@@ -325,15 +327,29 @@ This workflow should fail; have a look through the output to diagnose the error.
     -- Check '.nextflow.log' file for details
     ```
 
-Can you identify the problem?
-The key line here is:
+This shows a lot of details about the error because the process is set to output debugging information; more about that in a bit.
+
+These are the most relevant sections:
 
 ```console
-gzip: data/patientA_rep1_normal_R1_001.fastq.gz: No such file or directory
+Command executed:
+
+  set -o pipefail
+  echo "Processing file: data/patientA_rep1_normal_R1_001.fastq.gz"
+  gzip -dc data/patientA_rep1_normal_R1_001.fastq.gz | wc -l
 ```
 
+```console
+Command error:
+  Processing file: data/patientA_rep1_normal_R1_001.fastq.gz
+  gzip: data/patientA_rep1_normal_R1_001.fastq.gz: No such file or directory
+  0
+```
+
+This says the system couldn't find the file; however if you look up the path, there is a file by that name in that location.
+So what's wrong?
+
 Let's open the `count_lines.nf` workflow and have a look at the code.
-You'll see that it contains a process (`COUNT_LINES`) that takes a `val` input and tries to treat it as a file:
 
 ```groovy title="count_lines.nf" linenums="1" hl_lines="5 16"
 process COUNT_LINES {
@@ -356,18 +372,28 @@ workflow {
 }
 ```
 
-The process failed because the file `data/patientA_rep1_normal_R1_001.fastq.gz` doesn't exist in the process working directory.
-When you use `val` input, Nextflow passes the string value through to your script, but it doesn't _stage_ the actual file in the working directory.
-As a result, the process tries to use the relative string as a file path, but there's no file matching in that location.
+As advertised, this is a small workflow with one process (`COUNT_LINES`) that is meant to take a file input and count how many lines are in it.
 
-!!! note
-
-    **About `debug = true`:**
+??? example title="What does `debug true` do?"
 
     The `debug = true` directive in the process definition causes Nextflow to print the output from your script (like the line count "40") directly in the execution log.
     Without this, you would only see the process execution status but not the actual output from your script.
 
     For more information on debugging Nextflow processes, see the [Debugging Nextflow Workflows](./debugging.md) side quest.
+
+Can you find the error? Have a look at the process input definition.
+
+```groovy
+    input:
+    val fastq_file
+```
+
+The input is marked as a `val`, which indicates a value input, and tries to treat it as a file.
+
+When we ran this, Nextflow passed the string value through to the script, but it didn't _stage_ the actual file in the working directory.
+So the process tried to use the relative string, `data/patientA_rep1_normal_R1_001.fastq.gz`, but that file doesn't exist **within the process working directory**, so it failed.
+
+#### 1.4.2. Fix the input definition
 
 To fix this problem, we'll need to change the input definition in the process to use a `path` input:
 
@@ -443,7 +469,7 @@ nextflow run count_lines.nf
     ```
 
 It failed again!
-But the error is different.
+But the error is different:
 
 ```console
 Not a valid path value: 'data/patientA_rep1_normal_R1_001.fastq.gz'
@@ -454,6 +480,8 @@ Nextflow immediately detected the problem and failed before even starting the pr
 
 When you specify a `path` input, Nextflow validates that you're passing actual file references, not just strings.
 It's telling you that `'data/patientA_rep1_normal_R1_001.fastq.gz'` is not a valid path value because it's a string, not a Path object.
+
+#### 1.4.3. Fix the file creation statement
 
 Now let's finish fixing the issue by using the `file()` method to create a Path object from our string:
 
@@ -538,15 +566,15 @@ Specifically, Nextflow carried out the following operations successfully:
 - The `file()` method converts a string path into a Path object that Nextflow can work with
 - You can access file properties like `name`, `simpleName`, `extension`, and `parent` [using file attributes](https://www.nextflow.io/docs/latest/working-with-files.html#getting-file-attributes)
 - Using Path objects instead of strings allows Nextflow to properly manage files in your workflow
-- Process Input Outcomes: Proper file handling requires Path objects, not strings, to ensure files are correctly staged and accessible in processes.
+- Process Input Outcomes: Proper file handling requires Path objects, not strings, to ensure files are correctly staged and accessible for use by processes.
 
 ---
 
-## 2. Using Remote Files
+## 2. Using remote files
 
 One of the key features of Nextflow is the ability to switch seamlessly between local files (on the same machine) to remote files accessible over the internet.
 
-If you're doing it right, you should **never** need to change the logic of your workflow to accommodate files coming from different locations.
+If you're doing it right, you should never need to change the logic of your workflow to accommodate files coming from different locations.
 All you need to do to use a remote file is to specify the appropriate prefix in the file path when you're supplying it to the workflow.
 
 For example, `/path/to/data` has no prefix, indicating that it's a 'normal' local file path, whereas `s3://path/to/data` includes the `s3://` prefix, indicating that it's located in Amazon's S3 object storage.
@@ -567,11 +595,10 @@ For example, you can develop with a small, local test set before switching to a 
 ### 2.1. Use a file from the internet
 
 Let's test this out by switching the local path we're providing to our workflow with an HTTPS path pointing to a copy of the same data that is stored in Github.
-This will require Nextflow to download the file from the internet before running on it.
 
 !!! warning
 
-    Accessing remote data requires an internet connection!
+    This will only work if you have an active internet connection.
 
 Open `file_operations.nf` again and change the input path as follows:
 
@@ -579,7 +606,7 @@ Open `file_operations.nf` again and change the input path as follows:
 
     ```groovy title="file_operations.nf" linenums="2" hl_lines="2"
     // Using a remote file from the internet
-        myFile = file('https://github.com/nextflow-io/training/blob/bb187e3bfdf4eec2c53b3b08d2b60fdd7003b763/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz')
+        myFile = file('https://raw.github.com/nextflow-io/training/master/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz')
 
         // Print file attributes
         println "File object class: ${myFile.class}"
@@ -603,62 +630,67 @@ Open `file_operations.nf` again and change the input path as follows:
         println "Parent directory: ${myFile.parent}"
     ```
 
-!!! note
+Let's run the workflow:
 
-    HTTPS remote data does not accept globs because HTTPS cannot list multiple files, and similarly cannot be used with directory paths (you must specify exact file URLs). However, other storage protocols such as blob storage (`s3://`, `az://`, `gs://`) can use both globs and directory paths.
-
-Run the workflow and it will automatically pull the data from the internet:
-
-```bash title="Test remote file access"
+```bash
 nextflow run file_operations.nf
 ```
 
-```console title="Remote file output"
- N E X T F L O W   ~  version 25.04.3
+??? example title="Output"
 
-Launching `file_operations.nf` [insane_swartz] DSL2 - revision: fff18abe6d
+    ```console
+    N E X T F L O W   ~  version 25.04.3
 
-File object class: class nextflow.file.http.XPath
-File name: patientA_rep1_normal_R1_001.fastq.gz
-Simple name: patientA_rep1_normal_R1_001
-Extension: gz
-Parent directory: /nextflow-io/training/blob/bb187e3bfdf4eec2c53b3b08d2b60fdd7003b763/side-quests/working_with_files/data
-```
+    Launching `file_operations.nf` [insane_swartz] DSL2 - revision: fff18abe6d
 
-In this example very little has changed! This shows how easy it is to switch between local and remote data using Nextflow.
+    File object class: class nextflow.file.http.XPath
+    File name: patientA_rep1_normal_R1_001.fastq.gz
+    Simple name: patientA_rep1_normal_R1_001
+    Extension: gz
+    Parent directory: /nextflow-io/training/blob/bb187e3bfdf4eec2c53b3b08d2b60fdd7003b763/side-quests/working_with_files/data
+    ```
 
-To see the difference, check the working directory located at the hash value of the process. The file will be downloaded to a staging directory located within the work directory, then symlinked into the relevant process directory. If the file was used again, Nextflow would only download it once.
+It works! You can see that very little has changed.
 
-In this way, you can replace local with remote data without changing any pipeline logic.
+The one difference in the console output is that the path object class is now `nextflow.file.http.XPath`, whereas for the local path the class was `sun.nio.fs.UnixPath`.
+You don't need to remember these classes; we just mention this to demonstrate that Nextflow identifies and handles the different locations appropriately.
+
+Behind the scenes, Nextflow downloaded the file to a staging directory located within the work directory.
+That staged file can then be treated as a local file and symlinked into the relevant process directory.
+
+You can verify that that happened here by looking at the contents of the working directory located at the hash value of the process.
+
+<!-- TODO (future) List work directory contents to show where the staging happens -->
+
+Note that for larger files, the downloading step will take some extra time compared to running on local files.
+However, Nextflow checks whether it already has a staged copy to avoid unnecessary downloads.
+So if you run again on the same file and haven't deleted the staged file, Nextflow will use the staged copy.
+
+This shows how easy it is to switch between local and remote data using Nextflow, which is a key feature of Nextflow.
 
 !!! note
 
-    **Note on Object Types**: Notice that local files produce `sun.nio.fs.UnixPath` objects while remote files produce `nextflow.file.http.XPath` objects. Despite these different class names, both work exactly the same way and can be used identically in your workflows. This is a key feature of Nextflow - you can seamlessly switch between local and remote data sources without changing your code logic.
+    The one important exception to this principle is that you can't use glob patterns or directory paths with HTTPS because HTTPS cannot list multiple files, so you must specify exact file URLs.
+    However, other storage protocols such as blob storage (`s3://`, `az://`, `gs://`) can use both globs and directory paths.
 
-<!-- Add a 2.2 step using a file in S3 -->
+    Here's how you could use glob patterns with cloud storage:
 
-#### Working with Glob Patterns
+    ```groovy title="Cloud storage examples (not runnable in this environment)"
+    // S3 with glob patterns - would match multiple files
+    ch_s3_files = channel.fromPath('s3://my-bucket/data/*.fastq.gz')
 
-HTTP doesn't support globs, but cloud storage protocols do. Here's how you could use glob patterns with cloud storage:
+    // Azure Blob Storage with glob patterns
+    ch_azure_files = channel.fromPath('az://container/data/patient*_R{1,2}.fastq.gz')
 
-```groovy title="Cloud storage examples (not runnable in this environment)"
-// S3 with glob patterns - would match multiple files
-ch_s3_files = channel.fromPath('s3://my-bucket/data/*.fastq.gz')
+    // Google Cloud Storage with glob patterns
+    ch_gcs_files = channel.fromPath('gs://bucket/data/sample_*.fastq.gz')
+    ```
 
-// Azure Blob Storage with glob patterns
-ch_azure_files = channel.fromPath('az://container/data/patient*_R{1,2}.fastq.gz')
+    We'll show you how to work with globs in practice in the next section.
 
-// Google Cloud Storage with glob patterns
-ch_gcs_files = channel.fromPath('gs://bucket/data/sample_*.fastq.gz')
-```
+### 2.2. Switch back to the local file
 
-These examples show the power of Nextflow's unified file handling - the same code works whether files are local or in the cloud, as long as the protocol supports the operations you need.
-
-### 2.2. Switch Back to Local Files
-
-For the remainder of this side quest, we'll use local files in our examples. This allows us to demonstrate powerful features like glob patterns and batch processing that aren't available with HTTP URLs. Remember: the same concepts apply to cloud storage (S3, Azure, GCS) where glob patterns are fully supported.
-
-Let's update our workflow to use local files again:
+We're going to go back to using our local example files for the rest of this side quest, so let's switch the workflow input back to the original file:
 
 === "After"
 
@@ -700,24 +732,28 @@ Let's update our workflow to use local files again:
 
 ---
 
-## 3. Reading files using the `fromPath()` channel factory
+## 3. Loading files using the `fromPath()` channel factory
 
-The `file()` method is useful for simple file operations, and we can combine that with [`channel.of()`](https://www.nextflow.io/docs/latest/reference/channel.html#of) to build channels from files like:
+So far we've been working with a single file at a time, but in Nextflow, we're typically going to want to create an input channel with multiple input files to process.
 
-```groovy title="channel.of() with file()"
+A naive way to do that would be to combine the `file()` method with [`channel.of()`](https://www.nextflow.io/docs/latest/reference/channel.html#of) like this:
+
+```groovy title="Syntax example"
     ch_fastq = channel.of([file('data/patientA_rep1_normal_R1_001.fastq.gz')])
 ```
 
-But we have a much more convenient tool called [`channel.fromPath()`](https://www.nextflow.io/docs/latest/reference/channel.html#frompath) which generates a channel from static file strings as well as glob patterns.
+That works, but it's clunky.
 
-### 3.1. Reading Files with channel.fromPath
+This is where [`channel.fromPath()`](https://www.nextflow.io/docs/latest/reference/channel.html#frompath) comes in: a convenient channel factory that bundles all the functionality we need to generate a channel from one or more static file strings as well as glob patterns.
 
-Update your `file_operations.nf` file:
+### 3.1. Loading files with channel.fromPath
+
+Let's update our workflow to use `channel.fromPath` as follows:
 
 === "After"
 
     ```groovy title="file_operations.nf" linenums="2" hl_lines="2"
-        // Reading files with channel.fromPath
+        // Loading files with channel.fromPath
         ch_fastq = channel.fromPath('data/patientA_rep1_normal_R1_001.fastq.gz')
         ch_fastq.view { "Found file: $it of type ${it.class}" }
 
@@ -733,8 +769,7 @@ Update your `file_operations.nf` file:
 === "Before"
 
     ```groovy title="file_operations.nf" linenums="2" hl_lines="5-8"
-    // Create a Path object from a string path
-        // Create a file object from a string path
+        // Create a Path object from a string path
         myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
 
         // Print file attributes
@@ -747,25 +782,30 @@ Update your `file_operations.nf` file:
 
 Run the workflow:
 
-```bash title="Test channel.fromPath"
+```bash
 nextflow run file_operations.nf
 ```
 
-You'll see each file path being emitted as a separate element in the channel:
+??? example title="Output"
 
-```console title="channel.fromPath Output"
- N E X T F L O W   ~  version 25.04.3
+    ```console
+    N E X T F L O W   ~  version 25.04.3
 
-Launching `file_operations.nf` [grave_meucci] DSL2 - revision: b09964a583
+    Launching `file_operations.nf` [grave_meucci] DSL2 - revision: b09964a583
 
-Found file: /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz of type class sun.nio.fs.UnixPath
-```
+    Found file: /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz of type class sun.nio.fs.UnixPath
+    ```
 
-Note how Nextflow has grabbed the file we specified and turned it into a `Path` type object, in exactly the same way that `file()` would have done. `channel.fromPath()` is just a convenient way of creating a new channel populated by a list of files.
+As you can see, each file path is being emitted as a separate element in the channel.
 
-### 3.2. Viewing Channel Contents
+Note also how Nextflow has retrieved the file we specified and turned it into a `Path` type object, in exactly the same way that `file()` would have done.
+Using `channel.fromPath()` is just a convenient way of creating a new channel populated by a list of files.
 
-In our first version, we use `.view()` to print the file name. Let's update our workflow to print out the file attributes:
+### 3.2. View channel contents
+
+Earlier, we used `.view()` to print the file name.
+
+Let's update our workflow to print out the file attributes this time:
 
 === "After"
 
@@ -798,23 +838,34 @@ In our first version, we use `.view()` to print the file name. Let's update our 
 
 Run the workflow:
 
-```bash title="Test file attributes with channel.fromPath"
+```bash
 nextflow run file_operations.nf
 ```
 
-```console title="channel.fromPath Output"
- N E X T F L O W   ~  version 25.04.3
+??? example title="Output"
 
-Launching `file_operations.nf` [furious_swanson] DSL2 - revision: c35c34950d
+    ```console title="channel.fromPath Output"
+    N E X T F L O W   ~  version 25.04.3
 
-File object class: sun.nio.fs.UnixPath
-File name: patientA_rep1_normal_R1_001.fastq.gz
-Simple name: patientA_rep1_normal_R1_001
-Extension: gz
-Parent directory: /workspaces/training/side-quests/working_with_files/data
-```
+    Launching `file_operations.nf` [furious_swanson] DSL2 - revision: c35c34950d
+
+    File object class: sun.nio.fs.UnixPath
+    File name: patientA_rep1_normal_R1_001.fastq.gz
+    Simple name: patientA_rep1_normal_R1_001
+    Extension: gz
+    Parent directory: /workspaces/training/side-quests/working_with_files/data
+    ```
+
+[TODO]
 
 ### 3.3. Using a glob to match multiple files
+
+Glob patterns are a convenient way to match and retrieve file and directory names based on wildcard characters.
+The process of matching these patterns is called "globbing" or "filename expansion".
+
+Nextflow supports using globs to manage input and output files, except with HTTPS, because HTTPS cannot list multiple files.
+
+Let's modify our workflow
 
 `channel.fromPath()` can take a glob pattern as an argument, which will match all files in the directory that match the pattern. Let's grab both of the pair of FASTQs associated with this patient.
 
