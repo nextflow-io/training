@@ -2,13 +2,13 @@ process COUNT_LINES {
     debug true
 
     input:
-    val fastq_file
+    val input_file
 
     script:
     """
     set -o pipefail
-    echo "Processing file: $fastq_file"
-    gzip -dc $fastq_file | wc -l
+    echo "Processing file: $input_file"
+    gzip -dc $input_file | wc -l
     """
 }
 
