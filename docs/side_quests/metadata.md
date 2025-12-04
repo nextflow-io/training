@@ -17,7 +17,7 @@ In Nextflow pipelines, metadata can be used to:
 ### Learning goals
 
 In this side quest, we'll explore how to handle metadata in workflows.
-Starting with a simple datasheet containing basic file information, you'll learn how to:
+Starting with a simple datasheet (often called a samplesheet in bioinformatics) containing basic file information, you'll learn how to:
 
 - Read and parse file metadata from CSV files
 - Create and manipulate metadata maps
@@ -59,7 +59,7 @@ code .
 
 #### Review the materials
 
-You'll find a main workflow file and a `data` directory containing a samplesheet and a handful of data files.
+You'll find a main workflow file and a `data` directory containing a datasheet and a handful of data files.
 
 ```console title="Directory contents"
 .
@@ -71,18 +71,20 @@ You'll find a main workflow file and a `data` directory containing a samplesheet
 │   ├── hello.txt
 │   ├── hola.txt
 │   ├── salut.txt
-│   └── samplesheet.csv
+│   └── datasheet.csv
 ├── main.nf
 └── nextflow.config
 ```
 
-The samplesheet list the paths to the data files and some associated metadata, organized in 3 columns:
+The workflow in the `main.nf` file is a stub that you will gradually expand into a fully functioning workflow.
+
+The datasheet list the paths to the data files and some associated metadata, organized in 3 columns:
 
 - `id`: self-explanatory, an ID given to the file
 - `character`: a character name, that we will use later to draw different creatures
 - `data`: paths to `.txt` files that contain greetings in different languages
 
-```console title="samplesheet.csv"
+```console title="datasheet.csv"
 id,character,recording
 sampleA,squirrel,/workspaces/training/side-quests/metadata/data/bonjour.txt
 sampleB,tux,/workspaces/training/side-quests/metadata/data/guten_tag.txt
@@ -121,88 +123,55 @@ If you can check all the boxes, you're good to go.
 
 ---
 
-## 1. Read in datasheet
+## 1. Load metadata from a datasheet
 
-### 1.1. Read in datasheet with splitCsv
-
-Let's start by reading in the datasheet with `splitCsv`.
-In the main workflow file, you'll see that we've already started the workflow:
+Open the `main.nf` workflow file to examine the workflow stub we're giving you as a starting point.
 
 ```groovy title="main.nf" linenums="1"
+#!/usr/bin/env nextflow
+
 workflow  {
 
-    ch_samplesheet = channel.fromPath("./data/samplesheet.csv")
+    ch_datasheet = channel.fromPath("./data/datasheet.csv")
 
 }
 ```
 
-!!! note
+You can see we've set up a basic channel factory to load the example datasheet as a file, but that won't yet read in the contents of the file.
+Let's start by adding that.
 
-    Throughout this tutorial, we'll use the `ch_` prefix for all channel variables to clearly indicate they are Nextflow channels.
+### 1.1. Read in contents with `splitCsv`
+
+We need to choose an operator that will parse the file contents appropriately with minimal effort on our part.
+Since our datasheet is in CSV format, this is a job for the [`splitCsv`](https://www.nextflow.io/docs/latest/reference/operator.html#splitcsv) operator, which loads each row in the file as an element in the channel.
+
+Make the following changes to add a `splitCsv()` operation to the channel construction code, plus a `view()` operation to check that the contents of the file are getting loaded into the channel correctly.
 
 === "After"
 
-    ```groovy title="main.nf" linenums="3" hl_lines="2-3"
-        ch_samplesheet = channel.fromPath("./data/samplesheet.csv")
+    ```groovy title="main.nf" linenums="3" hl_lines="6-7"
+    workflow  {
+
+        ch_datasheet = channel.fromPath("./data/datasheet.csv")
             .splitCsv(header: true)
             .view()
+
+    }
     ```
 
 === "Before"
 
     ```groovy title="main.nf" linenums="3"
-        ch_samplesheet = channel.fromPath("./data/samplesheet.csv")
+    workflow  {
+
+        ch_datasheet = channel.fromPath("./data/datasheet.csv")
+
+    }
     ```
 
-Here we use the [`splitCsv` operator](https://www.nextflow.io/docs/latest/operator.html#splitcsv) with the `header: true` option to tell Nextflow to read the first row of the CSV file as the header row.
-This will parse the datasheet into a channel of maps, i.e. key-value pairs, where each map represents a row from the CSV file, with the column headers as keys for the corresponding values.
+Note that we're using the `header: true` option to tell Nextflow to read the first row of the CSV file as the header row.
 
-??? example "(Optional) More about maps"
-
-    In Groovy, the programming language that Nextflow is built on, a map is a key-value data structure similar to dictionaries in Python, objects in JavaScript, or hashes in Ruby.
-
-    For example:
-
-    ```groovy title="Groovy map"
-    def my_map = [id:'sampleA', character:'squirrel']
-    println my_map.id  // Prints: sampleA
-    ```
-
-    And here's a runnable script that applies this in practice:
-
-    ```groovy title="examples/map_demo.nf"
-    #!/usr/bin/env nextflow
-
-    // Create a simple map
-    def my_map = [id:'sampleA', character:'squirrel']
-
-    // Print the whole map
-    println "map: ${my_map}"
-
-    // Access individual values using dot notation
-    println "id: ${my_map.id}"
-    println "character: ${my_map.character}"
-    ```
-
-    Even though it doesn't have a proper `workflow` block, Nextflow can run this as if it were a workflow:
-
-    ```bash title="Run map demo example"
-    nextflow run examples/map_demo.nf
-    ```
-
-    And here's what you can expect to see in the output:
-
-    ```console title="Output"
-    Nextflow 25.10.0 is available - Please consider updating your version to it
-
-    N E X T F L O W   ~  version 25.04.3
-
-    Launching `map_demo.nf` [cheesy_plateau] DSL2 - revision: fae5b8496e
-
-    map: [id:sampleA, character:squirrel]
-    id: sampleA
-    character: squirrel
-    ```
+Running `splitCsv(header: true)` will construct a map of key-value pairs for each row in the CSV file, with the column headers as keys for the corresponding values.
 
 Let's see what Nextflow can see after reading with `splitCsv`.
 
@@ -274,6 +243,56 @@ turtle
 ```
 
 Success, we can use the map structures derived from our datasheet to access the values from individual columns for each row.
+
+<details>
+  <summary>More about maps</summary>
+
+In Groovy, the programming language that Nextflow is built on, a map is a key-value data structure similar to dictionaries in Python, objects in JavaScript, or hashes in Ruby.
+
+For example:
+
+```groovy title="Groovy map"
+def my_map = [id:'sampleA', character:'squirrel']
+println my_map.id  // Prints: sampleA
+```
+
+And here's a runnable script that applies this in practice:
+
+```groovy title="examples/map_demo.nf"
+#!/usr/bin/env nextflow
+
+// Create a simple map
+def my_map = [id:'sampleA', character:'squirrel']
+
+// Print the whole map
+println "map: ${my_map}"
+
+// Access individual values using dot notation
+println "id: ${my_map.id}"
+println "character: ${my_map.character}"
+```
+
+Even though it doesn't have a proper `workflow` block, Nextflow can run this as if it were a workflow:
+
+```bash title="Run map demo example"
+nextflow run examples/map_demo.nf
+```
+
+And here's what you can expect to see in the output:
+
+```console title="Output"
+Nextflow 25.10.0 is available - Please consider updating your version to it
+
+N E X T F L O W   ~  version 25.04.3
+
+Launching `map_demo.nf` [cheesy_plateau] DSL2 - revision: fae5b8496e
+
+map: [id:sampleA, character:squirrel]
+id: sampleA
+character: squirrel
+```
+
+</details>
 
 Now that we've successfully read in the datasheet and have access to the data in each row, we can begin implementing our pipeline logic.
 
@@ -407,7 +426,7 @@ Let's include the process, then run, and view it:
                 [ [id: row.id, character: row.character], row.recording ]
             }
 
-        ch_prediction = IDENTIFY_LANGUAGE(ch_samplesheet)
+        ch_prediction = IDENTIFY_LANGUAGE(ch_datasheet)
         ch_prediction.view()
     ```
 
@@ -470,7 +489,7 @@ We can use the [`map` operator](https://www.nextflow.io/docs/latest/operator.htm
 === "After"
 
     ```groovy title="main.nf" linenums="28" hl_lines="2-6"
-        ch_prediction = IDENTIFY_LANGUAGE(ch_samplesheet)
+        ch_prediction = IDENTIFY_LANGUAGE(ch_datasheet)
         ch_languages = ch_prediction
             .map { meta, file, lang ->
                 [meta + [lang: lang], file]
@@ -482,7 +501,7 @@ We can use the [`map` operator](https://www.nextflow.io/docs/latest/operator.htm
 === "Before"
 
     ```groovy title="main.nf" linenums="28" hl_lines="2"
-        ch_prediction = IDENTIFY_LANGUAGE(ch_samplesheet)
+        ch_prediction = IDENTIFY_LANGUAGE(ch_datasheet)
         ch_prediction.view()
     ```
 
@@ -873,7 +892,7 @@ Applying this pattern in your own work will enable you to build robust, maintain
 1.  **Reading and Structuring Metadata:** Reading CSV files and creating organized metadata maps that stay associated with your data files.
 
     ```groovy
-    channel.fromPath('samplesheet.csv')
+    channel.fromPath('datasheet.csv')
       .splitCsv(header: true)
       .map { row ->
           [ [id:row.id, character:row.character], row.recording ]
