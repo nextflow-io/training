@@ -1,13 +1,6 @@
 #!/usr/bin/env nextflow
 
 /*
- * Pipeline parameters
- */
-params {
-    greeting: Path = 'greetings.csv'
-}
-
-/*
  * Use echo to print 'Hello World!' to a file
  */
 process sayHello {
@@ -43,6 +36,13 @@ process convertToUpper {
     """
     cat '$input_file' | tr '[a-z]' '[A-Z]' > 'UPPER-${input_file}'
     """
+}
+
+/*
+ * Pipeline parameters
+ */
+params {
+    greeting: Path = 'greetings.csv'
 }
 
 workflow {

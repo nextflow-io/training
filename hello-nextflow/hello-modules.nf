@@ -1,14 +1,6 @@
 #!/usr/bin/env nextflow
 
 /*
- * Pipeline parameters
- */
-params {
-    greeting: Path = 'greetings.csv'
-    batch: String = 'test-batch'
-}
-
-/*
  * Use echo to print 'Hello World!' to a file
  */
 process sayHello {
@@ -68,6 +60,14 @@ process collectGreetings {
     """
 }
 
+/*
+ * Pipeline parameters
+ */
+params {
+    greeting: Path = 'greetings.csv'
+    batch: String = 'test-batch'
+}
+
 workflow {
 
     // create a channel for inputs from a CSV file
@@ -85,5 +85,5 @@ workflow {
     collectGreetings(convertToUpper.out.collect(), params.batch)
 
     // emit a message about the size of the batch
-    collectGreetings.out.count.view { "There were $it greetings in this batch" }
+    collectGreetings.out.count.view { num_greetings -> "There were $num_greetings greetings in this batch" }
 }

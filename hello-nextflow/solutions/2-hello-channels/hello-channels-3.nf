@@ -1,13 +1,6 @@
 #!/usr/bin/env nextflow
 
 /*
- * Pipeline parameters
- */
-params {
-    greeting: String = 'Holà mundo'
-}
-
-/*
  * Use echo to print 'Hello World!' to a file
  */
 process sayHello {
@@ -32,9 +25,9 @@ workflow {
 
     // create a channel for inputs
     greeting_ch = channel.of(greetings_array)
-                    .view { "Before flatten: $it" }
+                    .view { item -> "Before flatten: $item" }
                     .flatten()
-                    .view { "After flatten: $it" }
+                    .view { item -> "After flatten: $item" }
 
     // emit a greeting
     sayHello(greeting_ch)

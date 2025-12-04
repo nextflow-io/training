@@ -1,13 +1,6 @@
 #!/usr/bin/env nextflow
 
 /*
- * Pipeline parameters
- */
-params {
-    greeting: Path = 'greetings.csv'
-}
-
-/*
  * Use echo to print 'Hello World!' to a file
  */
 process sayHello {
@@ -26,17 +19,24 @@ process sayHello {
     """
 }
 
+/*
+ * Pipeline parameters
+ */
+params {
+    greeting: Path = 'greetings.csv'
+}
+
 workflow {
 
     greetings_array = ['Hello','Bonjour','Holà']
 
     // create a channel for inputs from a CSV file
     greeting_ch = channel.fromPath(params.greeting)
-                        .view { "Before splitCsv: $it" }
+                        .view { item -> "Before splitCsv: $item" }
                         .splitCsv()
-                        .view { "After splitCsv: $it" }
+                        .view { item -> "After splitCsv: $item" }
                         .map { line -> line[0] }
-                        .view { "After map: $it" }
+                        .view { item -> "After map: $item" }
 
     // emit a greeting
     sayHello(greeting_ch)

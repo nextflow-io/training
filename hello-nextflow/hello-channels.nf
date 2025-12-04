@@ -1,13 +1,6 @@
 #!/usr/bin/env nextflow
 
 /*
- * Pipeline parameters
- */
-params {
-    greeting: String = 'Holà mundo!'
-}
-
-/*
  * Use echo to print 'Hello World!' to a file
  */
 process sayHello {
@@ -24,6 +17,13 @@ process sayHello {
     """
     echo '$greeting' > output.txt
     """
+}
+
+/*
+ * Pipeline parameters
+ */
+params {
+    greeting: String = 'Holà mundo!'
 }
 
 workflow {
