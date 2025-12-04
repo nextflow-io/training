@@ -128,9 +128,9 @@ workflow {
 This is a mini-workflow (without any processes) that refers to a single file path in its workflow, then prints it to the console, along with its class.
 
 <details>
-  <summary>"What is `.class`?"</summary>
+  <summary>What is <code>.class</code>?</summary>
 
-    In Groovy (the language Nextflow uses), `.class` tells us what type of object we're working with. It's like asking "what kind of thing is this?" to find out whether it's a string, a number, a file, or something else.
+    In Groovy (the language Nextflow uses), <code>.class</code> tells us what type of object we're working with. It's like asking "what kind of thing is this?" to find out whether it's a string, a number, a file, or something else.
     This will help us illustrate the difference between a plain string and a Path object in the next sections.
 
 </details>
@@ -382,12 +382,12 @@ workflow {
 As advertised, this is a small workflow with one process (`COUNT_LINES`) that is meant to take a file input and count how many lines are in it.
 
 <details>
-  <summary>"What does `debug true` do?"</summary>
+  <summary>What does <code>debug true</code> do?</summary>
 
-The `debug true` directive in the process definition causes Nextflow to print the output from your script (like the line count "40") directly in the execution log.
+The <code>debug true</code> directive in the process definition causes Nextflow to print the output from your script (like the line count "40") directly in the execution log.
 Without this, you would only see the process execution status but not the actual output from your script.
 
-For more information on debugging Nextflow processes, see the [Debugging Nextflow Workflows](./debugging.md) side quest.
+For more information on debugging Nextflow processes, see the <a href="./debugging.md">Debugging Nextflow Workflows</a> side quest.
 
 </details>
 
@@ -409,7 +409,7 @@ To fix this problem, we'll need to change the input definition in the process to
 
 === "After"
 
-    ```groovy title="file_operations.nf" linenums="1" hl_lines="5 16"
+    ```groovy title="file_operations.nf" linenums="1" hl_lines="5"
     process COUNT_LINES {
         debug true
 
@@ -432,7 +432,7 @@ To fix this problem, we'll need to change the input definition in the process to
 
 === "Before"
 
-    ```groovy title="file_operations.nf" linenums="1" hl_lines="5 16"
+    ```groovy title="file_operations.nf" linenums="1" hl_lines="5"
     process COUNT_LINES {
         debug true
 
@@ -497,7 +497,7 @@ Now let's finish fixing the issue by using the `file()` method to create a Path 
 
 === "After"
 
-    ```groovy title="file_operations.nf" linenums="1" hl_lines="5 16"
+    ```groovy title="file_operations.nf" linenums="1" hl_lines="16"
     process COUNT_LINES {
         debug true
 
@@ -520,7 +520,7 @@ Now let's finish fixing the issue by using the `file()` method to create a Path 
 
 === "Before"
 
-    ```groovy title="file_operations.nf" linenums="1" hl_lines="5 16"
+    ```groovy title="file_operations.nf" linenums="1" hl_lines="16"
     process COUNT_LINES {
         debug true
 
@@ -749,7 +749,7 @@ So far we've been working with a single file at a time, but in Nextflow, we're t
 A naive way to do that would be to combine the `file()` method with [`channel.of()`](https://www.nextflow.io/docs/latest/reference/channel.html#of) like this:
 
 ```groovy title="Syntax example"
-     ch_files = channel.of([file('data/patientA_rep1_normal_R1_001.fastq.gz')])
+ch_files = channel.of([file('data/patientA_rep1_normal_R1_001.fastq.gz')])
 ```
 
 That works, but it's clunky.
@@ -764,8 +764,8 @@ Let's update our workflow to use `channel.fromPath`.
 
 === "After"
 
-    ```groovy title="file_operations.nf" linenums="2" hl_lines="2"
-        // Loading files with channel.fromPath
+    ```groovy title="file_operations.nf" linenums="2" hl_lines="1-3 6 12"
+        // Load files with channel.fromPath
         ch_files = channel.fromPath('data/patientA_rep1_normal_R1_001.fastq.gz')
         ch_files.view { myFile -> "Found file: $myFile" }
 
@@ -781,7 +781,7 @@ Let's update our workflow to use `channel.fromPath`.
 
 === "Before"
 
-    ```groovy title="file_operations.nf" linenums="2" hl_lines="5-8"
+    ```groovy title="file_operations.nf" linenums="2" hl_lines="1-2"
         // Create a Path object from a string path
         myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
 
@@ -816,7 +816,7 @@ This is similar to what `file()` would have done, except now we have a channel t
 
 Using `channel.fromPath()` is a convenient way of creating a new channel populated by a list of files.
 
-### 3.2. View channel contents
+### 3.2. View attributes of files in channel
 
 In our first pass at using the channel factory, we simplified the code and just printed out the file name.
 
@@ -838,17 +838,18 @@ Let's go back to printing out the full file attributes:
 
 === "Before"
 
-    ```groovy title="file_operations.nf" linenums="2" hl_lines="3"
-        // Loading files with channel.fromPath
+    ```groovy title="file_operations.nf" linenums="2" hl_lines="3 6 12"
+        // Load files with channel.fromPath
         ch_files = channel.fromPath('data/patientA_rep1_normal_R1_001.fastq.gz')
         ch_files.view { myFile -> "Found file: $myFile" }
 
-        // // Print file attributes
-        // Comment these out for now, we'll come back to them!
-        // println "File name: ${myFile.name}"
-        // println "Simple name: ${myFile.simpleName}"
-        // println "Extension: ${myFile.extension}"
-        // println "Parent directory: ${myFile.parent}"
+        // Print file attributes
+        /* Comment these out for now, we'll come back to them!
+        println "File name: ${myFile.name}"
+        println "Simple name: ${myFile.simpleName}"
+        println "Extension: ${myFile.extension}"
+        println "Parent directory: ${myFile.parent}"
+        */
     ```
 
 Since `myFile` is a proper Path object, we have access to all the same class attributes as before.
@@ -881,10 +882,9 @@ There are several ways we could load more files into the channel.
 Here we're going to show you how to use glob patterns, which are a convenient way to match and retrieve file and directory names based on wildcard characters.
 The process of matching these patterns is called "globbing" or "filename expansion".
 
-```note
+!!! note
 
     As noted previously, Nextflow supports globbing to manage input and output files in the majority of cases, except with HTTPS filepaths because HTTPS cannot list multiple files.
-```
 
 Let's say we want to retrieve both files in a pair of files associated with a given patient, `patientA`:
 
