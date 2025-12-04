@@ -15,7 +15,7 @@ process sayHello {
 
     script:
     """
-    echo '$greeting' > '$greeting-output.txt'
+    echo '${greeting}' > '${greeting}-output.txt'
     """
 }
 
@@ -34,7 +34,7 @@ process convertToUpper {
 
     script:
     """
-    cat '$input_file' | tr '[a-z]' '[A-Z]' > 'UPPER-${input_file}'
+    cat '${input_file}' | tr '[a-z]' '[A-Z]' > 'UPPER-${input_file}'
     """
 }
 
@@ -68,8 +68,8 @@ workflow {
 
     // create a channel for inputs from a CSV file
     greeting_ch = channel.fromPath(params.greeting)
-                        .splitCsv()
-                        .map { line -> line[0] }
+        .splitCsv()
+        .map { line -> line[0] }
 
     // emit a greeting
     sayHello(greeting_ch)
@@ -81,6 +81,6 @@ workflow {
     collectGreetings(convertToUpper.out.collect())
 
     // optional view statements
-    convertToUpper.out.view { item -> "Before collect: $item" }
-    convertToUpper.out.collect().view { items -> "After collect: $items" }
+    convertToUpper.out.view { item -> "Before collect: ${item}" }
+    convertToUpper.out.collect().view { items -> "After collect: ${items}" }
 }

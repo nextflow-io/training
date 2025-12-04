@@ -15,14 +15,14 @@ process sayHello {
 
     script:
     """
-    echo '$greeting' > '$greeting-output.txt'
+    echo '${greeting}' > '${greeting}-output.txt'
     """
 }
 
 workflow {
 
     // create a channel for inputs
-    greeting_ch = channel.of('Hello','Bonjour','Holà')
+    greeting_ch = channel.of('Hello', 'Bonjour', 'Holà')
 
     // emit a greeting
     sayHello(greeting_ch)

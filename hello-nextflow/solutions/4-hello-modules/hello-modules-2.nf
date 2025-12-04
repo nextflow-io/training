@@ -15,7 +15,7 @@ process convertToUpper {
 
     script:
     """
-    cat '$input_file' | tr '[a-z]' '[A-Z]' > 'UPPER-${input_file}'
+    cat '${input_file}' | tr '[a-z]' '[A-Z]' > 'UPPER-${input_file}'
     """
 }
 
@@ -31,8 +31,8 @@ process collectGreetings {
     val batch_name
 
     output:
-    path "COLLECTED-${batch_name}-output.txt" , emit: outfile
-    val count_greetings , emit: count
+    path "COLLECTED-${batch_name}-output.txt", emit: outfile
+    val count_greetings, emit: count
 
     script:
     count_greetings = input_files.size()
@@ -56,8 +56,8 @@ workflow {
 
     // create a channel for inputs from a CSV file
     greeting_ch = channel.fromPath(params.greeting)
-                        .splitCsv()
-                        .map { line -> line[0] }
+        .splitCsv()
+        .map { line -> line[0] }
 
     // emit a greeting
     sayHello(greeting_ch)
@@ -69,5 +69,5 @@ workflow {
     collectGreetings(convertToUpper.out.collect(), params.batch)
 
     // emit a message about the size of the batch
-    collectGreetings.out.count.view { num_greetings -> "There were $num_greetings greetings in this batch" }
+    collectGreetings.out.count.view { num_greetings -> "There were ${num_greetings} greetings in this batch" }
 }
