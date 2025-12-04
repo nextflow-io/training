@@ -64,8 +64,8 @@ process collectGreetings {
  * Pipeline parameters
  */
 params {
-    greeting : Path = 'greetings.csv'
-    batch    : String = 'test-batch'
+    greeting: Path = 'greetings.csv'
+    batch: String = 'test-batch'
 }
 
 workflow {

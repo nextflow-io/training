@@ -1,16 +1,16 @@
 #!/usr/bin/env nextflow
 
 // Include modules
-include { sayHello         } from './modules/sayHello.nf'
-include { convertToUpper   } from './modules/convertToUpper.nf'
+include { sayHello } from './modules/sayHello.nf'
+include { convertToUpper } from './modules/convertToUpper.nf'
 include { collectGreetings } from './modules/collectGreetings.nf'
 
 /*
  * Pipeline parameters
  */
 params {
-    greeting : Path = 'greetings.csv'
-    batch    : String = 'test-batch'
+    greeting: Path = 'greetings.csv'
+    batch: String = 'test-batch'
 }
 
 workflow {
