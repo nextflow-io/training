@@ -15,19 +15,19 @@ process sayHello {
 
     script:
     """
-    echo '$greeting' > '$greeting-output.txt'
+    echo '${greeting}' > '${greeting}-output.txt'
     """
 }
 
 workflow {
 
-    greetings_array = ['Hello','Bonjour','Holà']
+    greetings_array = ['Hello', 'Bonjour', 'Holà']
 
     // create a channel for inputs
     greeting_ch = channel.of(greetings_array)
-                    .view { item -> "Before flatten: $item" }
-                    .flatten()
-                    .view { item -> "After flatten: $item" }
+        .view { item -> "Before flatten: ${item}" }
+        .flatten()
+        .view { item -> "After flatten: ${item}" }
 
     // emit a greeting
     sayHello(greeting_ch)

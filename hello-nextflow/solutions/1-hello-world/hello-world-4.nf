@@ -15,7 +15,7 @@ process sayHello {
 
     script:
     """
-    echo '$greeting' > output.txt
+    echo '${greeting}' > output.txt
     """
 }
 

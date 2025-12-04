@@ -15,7 +15,7 @@ process sayHello {
 
     script:
     """
-    echo '$greeting' > '$greeting-output.txt'
+    echo '${greeting}' > '${greeting}-output.txt'
     """
 }
 
@@ -28,15 +28,15 @@ params {
 
 workflow {
 
-    greetings_array = ['Hello','Bonjour','Holà']
+    greetings_array = ['Hello', 'Bonjour', 'Holà']
 
     // create a channel for inputs from a CSV file
     greeting_ch = channel.fromPath(params.greeting)
-                        .view { item -> "Before splitCsv: $item" }
-                        .splitCsv()
-                        .view { item -> "After splitCsv: $item" }
-                        .map { line -> line[0] }
-                        .view { item -> "After map: $item" }
+        .view { item -> "Before splitCsv: ${item}" }
+        .splitCsv()
+        .view { item -> "After splitCsv: ${item}" }
+        .map { line -> line[0] }
+        .view { item -> "After map: ${item}" }
 
     // emit a greeting
     sayHello(greeting_ch)
