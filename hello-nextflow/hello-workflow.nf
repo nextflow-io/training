@@ -8,28 +8,30 @@ process sayHello {
     publishDir 'results', mode: 'copy'
 
     input:
-        val greeting
+    val greeting
 
     output:
-        path "${greeting}-output.txt"
+    path "${greeting}-output.txt"
 
     script:
     """
-    echo '$greeting' > '$greeting-output.txt'
+    echo '${greeting}' > '${greeting}-output.txt'
     """
 }
 
 /*
  * Pipeline parameters
  */
-params.greeting = 'greetings.csv'
+params {
+    greeting: Path = 'greetings.csv'
+}
 
 workflow {
 
     // create a channel for inputs from a CSV file
     greeting_ch = channel.fromPath(params.greeting)
-                        .splitCsv()
-                        .map { line -> line[0] }
+        .splitCsv()
+        .map { line -> line[0] }
 
     // emit a greeting
     sayHello(greeting_ch)
