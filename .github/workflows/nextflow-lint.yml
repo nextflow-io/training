@@ -19,12 +19,40 @@ jobs:
           # TODO: Remove '|| true' to fail CI when linting errors are fixed
           nextflow lint **/solutions/* -o json > lint-results/lint-output.json 2>&1 || true
 
+      - name: Check formatting changes
+        if: always()
+        run: |
+          # Run formatter (modifies files in place)
+          nextflow lint **/solutions/* -format || true
+
+          # Count changed files and save diffs
+          changed_files=$(git diff --name-only)
+          if [ -n "$changed_files" ]; then
+            echo "$changed_files" | wc -l | xargs > lint-results/format-count.txt
+            echo "$changed_files" > lint-results/format-files.txt
+
+            # Save individual diffs for each file
+            mkdir -p lint-results/diffs
+            for file in $changed_files; do
+              # Create safe filename for the diff
+              safe_name=$(echo "$file" | tr '/' '_')
+              git diff "$file" > "lint-results/diffs/${safe_name}.diff"
+            done
+          else
+            echo "0" > lint-results/format-count.txt
+            echo "" > lint-results/format-files.txt
+          fi
+
+          # Reset changes so they don't affect other steps
+          git checkout -- . || true
+
       - name: Generate markdown report
         if: always()
         uses: actions/github-script@v7
         with:
           script: |
             const fs = require('fs');
+            const path = require('path');
             const lintOutput = JSON.parse(fs.readFileSync('lint-results/lint-output.json', 'utf8'));
             const { summary, errors, warnings } = lintOutput;
             const sha = context.sha;
@@ -33,6 +61,10 @@ jobs:
             // Handle warnings array (added in future Nextflow version)
             const warningsArray = warnings || [];
             const warningCount = summary.warnings || 0;
+
+            // Read formatting results
+            const formatCount = parseInt(fs.readFileSync('lint-results/format-count.txt', 'utf8').trim()) || 0;
+            const formatFiles = fs.readFileSync('lint-results/format-files.txt', 'utf8').trim().split('\n').filter(f => f);
 
             let markdown = '**Nextflow linting complete!**\n\n';
 
@@ -48,7 +80,19 @@ jobs:
                 const filesWithWarnings = summary.filesWithWarnings || 'N/A';
                 markdown += `⚠️  ${filesWithWarnings} files had ${warningCount} warnings\n`;
               }
-              markdown += `✅ ${summary.filesWithoutErrors} files had no errors\n\n`;
+              markdown += `✅ ${summary.filesWithoutErrors} files had no errors\n`;
+            }
+
+            // Add formatting status line
+            if (formatCount > 0) {
+              markdown += `🔧 ${formatCount} file${formatCount === 1 ? '' : 's'} would be changed by auto-formatting\n`;
+            } else {
+              markdown += `✨ No formatting changes needed\n`;
+            }
+
+            // Add lint issues details section
+            if (hasIssues) {
+              markdown += '\n';
 
               // Combine errors and warnings with type labels
               const allIssues = [
@@ -81,6 +125,29 @@ jobs:
               markdown += `| Type | Location | Message |\n|------|----------|---------|\n`;
               markdown += rows.join('\n');
               markdown += `\n\n</details>\n`;
+            }
+
+            // Add formatting changes details section
+            if (formatCount > 0) {
+              markdown += `\n<details>\n<summary>View formatting changes</summary>\n\n`;
+
+              for (const file of formatFiles) {
+                const safeName = file.replace(/\//g, '_');
+                const diffPath = `lint-results/diffs/${safeName}.diff`;
+
+                try {
+                  const diffContent = fs.readFileSync(diffPath, 'utf8');
+                  markdown += `<details>\n<summary>${file}</summary>\n\n`;
+                  markdown += '```diff\n';
+                  markdown += diffContent;
+                  markdown += '```\n\n</details>\n\n';
+                } catch (e) {
+                  markdown += `<details>\n<summary>${file}</summary>\n\n`;
+                  markdown += '_Could not read diff_\n\n</details>\n\n';
+                }
+              }
+
+              markdown += `</details>\n`;
             }
 
             // Write to file
