@@ -90,9 +90,7 @@ For patient A specifically, we have two sets of technical replicates (repeats).
 
 The sequencing data files are named with a typical `_R1_` and `_R2_` convention for what are known as 'forward reads' and 'reverse reads'.
 
-!!! note
-
-    Don't worry if you're not familiar with this experimental design, it's not critical for understanding this tutorial.
+_Don't worry if you're not familiar with this experimental design, it's not critical for understanding this tutorial._
 
 #### Review the assignment
 
@@ -129,10 +127,13 @@ workflow {
 
 This is a mini-workflow (without any processes) that refers to a single file path in its workflow, then prints it to the console, along with its class.
 
-??? example title="What is `.class`?"
+<details>
+  <summary>"What is `.class`?"</summary>
 
     In Groovy (the language Nextflow uses), `.class` tells us what type of object we're working with. It's like asking "what kind of thing is this?" to find out whether it's a string, a number, a file, or something else.
     This will help us illustrate the difference between a plain string and a Path object in the next sections.
+
+</details>
 
 Let's run the workflow:
 
@@ -140,7 +141,7 @@ Let's run the workflow:
 nextflow run file_operations.nf
 ```
 
-??? example title="Output"
+??? example "Output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -186,7 +187,7 @@ Now run the workflow again:
 nextflow run file_operations.nf
 ```
 
-??? example title="Output"
+??? example "Output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -247,7 +248,7 @@ Run the workflow:
 nextflow run file_operations.nf
 ```
 
-??? example title="Output"
+??? example "Output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -380,16 +381,19 @@ workflow {
 
 As advertised, this is a small workflow with one process (`COUNT_LINES`) that is meant to take a file input and count how many lines are in it.
 
-??? example title="What does the debug directive do?"
+<details>
+  <summary>"What does `debug true` do?"</summary>
 
-    The `debug true` directive in the process definition causes Nextflow to print the output from your script (like the line count "40") directly in the execution log.
-    Without this, you would only see the process execution status but not the actual output from your script.
+The `debug true` directive in the process definition causes Nextflow to print the output from your script (like the line count "40") directly in the execution log.
+Without this, you would only see the process execution status but not the actual output from your script.
 
-    For more information on debugging Nextflow processes, see the [Debugging Nextflow Workflows](./debugging.md) side quest.
+For more information on debugging Nextflow processes, see the [Debugging Nextflow Workflows](./debugging.md) side quest.
+
+</details>
 
 Can you find the error? Have a look at the process input definition.
 
-```groovy
+```groovy title="count_lines.nf" linenums="3"
     input:
     val input_file
 ```
@@ -458,7 +462,7 @@ Go ahead and run the updated version.
 nextflow run count_lines.nf
 ```
 
-??? example title="Output"
+??? example "Output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -543,7 +547,7 @@ Let's run this one more time.
 nextflow run count_lines.nf
 ```
 
-??? example title="Output"
+??? example "Output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -642,7 +646,7 @@ Let's run the workflow:
 nextflow run file_operations.nf
 ```
 
-??? example title="Output"
+??? example "Output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -797,7 +801,7 @@ Run the workflow:
 nextflow run file_operations.nf
 ```
 
-??? example title="Output"
+??? example "Output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -855,7 +859,7 @@ Run the workflow:
 nextflow run file_operations.nf
 ```
 
-??? example title="Output"
+??? example "Output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -919,7 +923,7 @@ Run the workflow to test that out:
 nextflow run file_operations.nf
 ```
 
-??? example title="Output"
+??? example "Output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -1013,7 +1017,7 @@ Run the workflow to test that it works:
 nextflow run file_operations.nf
 ```
 
-??? example title="Output"
+??? example "Output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -1058,7 +1062,7 @@ Run the workflow:
 nextflow run file_operations.nf
 ```
 
-??? example title="Output"
+??? example "Output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -1144,7 +1148,7 @@ Let's run the workflow again:
 nextflow run file_operations.nf
 ```
 
-??? example title="Output"
+??? example "Output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -1256,7 +1260,7 @@ Run the workflow to test it:
 nextflow run file_operations.nf
 ```
 
-??? example title="Output"
+??? example "Output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -1330,7 +1334,7 @@ Let's run the workflow:
 nextflow run file_operations.nf
 ```
 
-??? example title="Output"
+??? example "Output"
 
     ```console
 
@@ -1462,7 +1466,7 @@ Run the workflow:
 nextflow run file_operations.nf
 ```
 
-??? example title="Output"
+??? example "Output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -1523,7 +1527,7 @@ Run the pipeline again:
 nextflow run file_operations.nf
 ```
 
-??? example title="Output"
+??? example "Output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -1579,7 +1583,7 @@ rm -r results
 nextflow run file_operations.nf
 ```
 
-??? example title="Output"
+??? example "Output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
