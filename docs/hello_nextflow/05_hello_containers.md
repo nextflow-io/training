@@ -679,3 +679,86 @@ You know how to use containers in Nextflow to run processes.
 Take a break!
 When you're ready, move on to Part 6 to learn how to configure the execution of your pipeline to fit your infrastructure as well as manage configuration of inputs and parameters.
 It's the very last part and then you're done!
+
+## Quiz
+
+Test your knowledge of the concepts covered in Part 5 with this short quiz:
+
+!!! info
+
+    <!-- mkdocs-quiz intro -->
+
+<quiz>
+What is a container?
+
+- [ ] A directory structure for organizing code
+- [x] A lightweight, standalone executable unit with application and dependencies
+- [ ] A Nextflow configuration file
+- [ ] A type of channel
+
+</quiz>
+
+<quiz>
+What is the difference between a container image and instance?
+
+- [ ] They are the same thing
+- [x] Image is a template; instance is a running container created from the image
+- [ ] Image is local; instance is remote
+- [ ] Instance is smaller than image
+
+</quiz>
+
+<quiz>
+What does the `-v` flag do in Docker?
+
+- [ ] Enables verbose output
+- [ ] Sets the Docker version
+- [x] Mounts a volume to share directories between host and container
+- [ ] Validates the container image
+
+</quiz>
+
+<quiz>
+Why do you need to mount volumes when using containers?
+
+- [ ] To improve performance
+- [ ] To reduce disk space usage
+- [x] Because containers are isolated from the host filesystem by default
+- [ ] To enable networking
+
+</quiz>
+
+<quiz>
+How do you specify a container for a Nextflow process?
+
+- [ ] `docker 'image_uri'` directive
+- [x] `container 'image_uri'` directive
+- [ ] `image 'image_uri'` directive
+- [ ] `containerImage 'image_uri'` directive
+
+</quiz>
+
+<quiz>
+How do you enable Docker in a Nextflow workflow?
+
+- [ ] Use the `-with-docker` flag only
+- [x] Set `docker.enabled = true` in the config file
+- [ ] Docker is enabled by default
+- [ ] Use the `--docker` parameter
+
+</quiz>
+
+<quiz>
+What does Nextflow automatically do when using containers?
+
+- [ ] Builds the container from a Dockerfile
+- [x] Pulls the image if not already local
+- [x] Mounts the work directory into the container
+- [x] Runs the process script inside the container
+- [x] Handles cleanup after execution
+- [ ] Installs Docker on the system
+- [ ] Creates a new container image
+
+</quiz>
+
+<!-- mkdocs-quiz results -->
