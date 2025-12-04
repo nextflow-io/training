@@ -130,14 +130,14 @@ jobs:
             // Add formatting changes details section
             if (formatCount > 0) {
               markdown += `\n<details>\n<summary>View formatting changes</summary>\n\n`;
-              markdown += `| File | Diff |\n|------|------|\n`;
+              markdown += `<table>\n<tr><th>File</th><th>Diff</th></tr>\n`;
 
               const maxDiffLines = 15;
               const maxTotalChars = 15000;
               let totalChars = 0;
 
               for (const file of formatFiles) {
-                const fileLink = `[${file}](https://github.com/${repo}/blob/${sha}/${file})`;
+                const fileLink = `<a href="https://github.com/${repo}/blob/${sha}/${file}">${file}</a>`;
                 const safeName = file.replace(/\//g, '_');
                 const diffPath = `lint-results/diffs/${safeName}.diff`;
 
@@ -149,7 +149,7 @@ jobs:
 
                   // Check if we've exceeded total size limit
                   if (totalChars >= maxTotalChars) {
-                    diffCell = '_(truncated)_';
+                    diffCell = '<em>(truncated)</em>';
                   } else {
                     let fileTruncated = false;
                     if (lines.length > maxDiffLines) {
@@ -161,25 +161,22 @@ jobs:
 
                     // Check if adding this would exceed total size
                     if (totalChars + diffContent.length > maxTotalChars) {
-                      diffCell = '_(truncated)_';
+                      diffCell = '<em>(truncated)</em>';
                       totalChars = maxTotalChars; // Mark as full
                     } else {
                       totalChars += diffContent.length;
-                      diffCell = '<details><summary>View</summary>\n\n```diff\n' + diffContent;
-                      if (fileTruncated) {
-                        diffCell += '\n... (truncated)';
-                      }
-                      diffCell += '\n```\n\n</details>';
+                      let truncMsg = fileTruncated ? '\n... (truncated)' : '';
+                      diffCell = `<details><summary>View</summary>\n\n\`\`\`diff\n${diffContent}${truncMsg}\n\`\`\`\n\n</details>`;
                     }
                   }
                 } catch (e) {
-                  diffCell = '_(error reading diff)_';
+                  diffCell = '<em>(error)</em>';
                 }
 
-                markdown += `| ${fileLink} | ${diffCell} |\n`;
+                markdown += `<tr><td>${fileLink}</td><td>${diffCell}</td></tr>\n`;
               }
 
-              markdown += `\n</details>\n`;
+              markdown += `</table>\n\n</details>\n`;
             }
 
             // Write to file
