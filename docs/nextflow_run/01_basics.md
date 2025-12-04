@@ -81,7 +81,7 @@ nextflow run 1-hello.nf --greeting 'Hello World!'
 You console output should look something like this:
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.04.6
 
 Launching `1-hello.nf` [goofy_torvalds] DSL2 - revision: c33d41f479
 
@@ -423,7 +423,7 @@ The console output should look similar.
   <summary>Command output</summary>
 
 ```console linenums="1"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.04.6
 
 Launching `1-hello.nf` [tiny_noyce] DSL2 - revision: c33d41f479
 
