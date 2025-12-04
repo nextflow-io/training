@@ -4,9 +4,8 @@
  * Use echo to print 'Hello World!' to a file
  */
 process sayHello {
-
     output:
-        path 'output.txt'
+    path 'output.txt'
 
     script:
     """
