@@ -131,15 +131,45 @@ jobs:
             if (formatCount > 0) {
               markdown += `\n<details>\n<summary>View formatting changes</summary>\n\n`;
 
+              const maxDiffLines = 30;
+              const maxTotalChars = 15000;
+              let totalChars = 0;
+              let truncatedDueToSize = false;
+
               for (const file of formatFiles) {
+                if (truncatedDueToSize) {
+                  markdown += `\n_...and more files (output truncated)_\n`;
+                  break;
+                }
+
                 const safeName = file.replace(/\//g, '_');
                 const diffPath = `lint-results/diffs/${safeName}.diff`;
 
                 try {
-                  const diffContent = fs.readFileSync(diffPath, 'utf8');
+                  let diffContent = fs.readFileSync(diffPath, 'utf8');
+                  const lines = diffContent.split('\n');
+
+                  let fileTruncated = false;
+                  if (lines.length > maxDiffLines) {
+                    diffContent = lines.slice(0, maxDiffLines).join('\n');
+                    fileTruncated = true;
+                  }
+
+                  // Check if adding this would exceed total size
+                  if (totalChars + diffContent.length > maxTotalChars) {
+                    truncatedDueToSize = true;
+                    markdown += `\n_...and more files (output truncated due to size)_\n`;
+                    break;
+                  }
+
+                  totalChars += diffContent.length;
+
                   markdown += `<details>\n<summary>${file}</summary>\n\n`;
                   markdown += '```diff\n';
                   markdown += diffContent;
+                  if (fileTruncated) {
+                    markdown += '\n... (truncated)\n';
+                  }
                   markdown += '```\n\n</details>\n\n';
                 } catch (e) {
                   markdown += `<details>\n<summary>${file}</summary>\n\n`;
