@@ -1,13 +1,6 @@
 #!/usr/bin/env nextflow
 
 /*
- * Pipeline parameters
- */
-params {
-    greeting: String = 'Holà mundo!'
-}
-
-/*
  * Use echo to print 'Hello World!' to a file
  */
 process sayHello {

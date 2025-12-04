@@ -1,5 +1,10 @@
 #!/usr/bin/env nextflow
 
+// Include modules
+include { sayHello } from './modules/sayHello.nf'
+include { convertToUpper } from './modules/convertToUpper.nf'
+include { collectGreetings } from './modules/collectGreetings.nf'
+
 /*
  * Pipeline parameters
  */
@@ -7,11 +12,6 @@ params {
     greeting: Path = 'greetings.csv'
     batch: String = 'test-batch'
 }
-
-// Include modules
-include { sayHello } from './modules/sayHello.nf'
-include { convertToUpper } from './modules/convertToUpper.nf'
-include { collectGreetings } from './modules/collectGreetings.nf'
 
 workflow {
 
@@ -30,5 +30,5 @@ workflow {
     collectGreetings(convertToUpper.out.collect(), params.batch)
 
     // emit a message about the size of the batch
-    collectGreetings.out.count.view { "There were $it greetings in this batch" }
+    collectGreetings.out.count.view { num_greetings -> "There were $num_greetings greetings in this batch" }
 }

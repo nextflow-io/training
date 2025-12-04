@@ -1,13 +1,6 @@
 #!/usr/bin/env nextflow
 
 /*
- * Pipeline parameters
- */
-params {
-    greeting: Path = 'greetings.csv'
-}
-
-/*
  * Use echo to print 'Hello World!' to a file
  */
 process sayHello {
@@ -64,6 +57,13 @@ process collectGreetings {
     """
 }
 
+/*
+ * Pipeline parameters
+ */
+params {
+    greeting: Path = 'greetings.csv'
+}
+
 workflow {
 
     // create a channel for inputs from a CSV file
@@ -81,6 +81,6 @@ workflow {
     collectGreetings(convertToUpper.out.collect())
 
     // optional view statements
-    convertToUpper.out.view { "Before collect: $it" }
-    convertToUpper.out.collect().view { "After collect: $it" }
+    convertToUpper.out.view { item -> "Before collect: $item" }
+    convertToUpper.out.collect().view { items -> "After collect: $items" }
 }
