@@ -37,7 +37,7 @@ jobs:
         with:
           issue-number: ${{ steps.pr-info.outputs.pr_number }}
           comment-author: "github-actions[bot]"
-          body-includes: "Nextflow Lint Results"
+          body-includes: "Nextflow linting complete!"
 
       - name: Create or update PR comment
         uses: peter-evans/create-or-update-comment@v4
