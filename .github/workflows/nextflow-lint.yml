@@ -130,54 +130,56 @@ jobs:
             // Add formatting changes details section
             if (formatCount > 0) {
               markdown += `\n<details>\n<summary>View formatting changes</summary>\n\n`;
+              markdown += `| File | Diff |\n|------|------|\n`;
 
-              const maxDiffLines = 30;
+              const maxDiffLines = 15;
               const maxTotalChars = 15000;
               let totalChars = 0;
-              let truncatedDueToSize = false;
 
               for (const file of formatFiles) {
-                if (truncatedDueToSize) {
-                  markdown += `\n_...and more files (output truncated)_\n`;
-                  break;
-                }
-
+                const fileLink = `[${file}](https://github.com/${repo}/blob/${sha}/${file})`;
                 const safeName = file.replace(/\//g, '_');
                 const diffPath = `lint-results/diffs/${safeName}.diff`;
 
+                let diffCell = '';
                 try {
                   let diffContent = fs.readFileSync(diffPath, 'utf8');
-                  const lines = diffContent.split('\n');
+                  // Skip first 4 lines (diff header with file paths)
+                  const lines = diffContent.split('\n').slice(4);
 
-                  let fileTruncated = false;
-                  if (lines.length > maxDiffLines) {
-                    diffContent = lines.slice(0, maxDiffLines).join('\n');
-                    fileTruncated = true;
+                  // Check if we've exceeded total size limit
+                  if (totalChars >= maxTotalChars) {
+                    diffCell = '_(truncated)_';
+                  } else {
+                    let fileTruncated = false;
+                    if (lines.length > maxDiffLines) {
+                      diffContent = lines.slice(0, maxDiffLines).join('\n');
+                      fileTruncated = true;
+                    } else {
+                      diffContent = lines.join('\n');
+                    }
+
+                    // Check if adding this would exceed total size
+                    if (totalChars + diffContent.length > maxTotalChars) {
+                      diffCell = '_(truncated)_';
+                      totalChars = maxTotalChars; // Mark as full
+                    } else {
+                      totalChars += diffContent.length;
+                      diffCell = '<details><summary>View</summary>\n\n```diff\n' + diffContent;
+                      if (fileTruncated) {
+                        diffCell += '\n... (truncated)';
+                      }
+                      diffCell += '\n```\n\n</details>';
+                    }
                   }
-
-                  // Check if adding this would exceed total size
-                  if (totalChars + diffContent.length > maxTotalChars) {
-                    truncatedDueToSize = true;
-                    markdown += `\n_...and more files (output truncated due to size)_\n`;
-                    break;
-                  }
-
-                  totalChars += diffContent.length;
-
-                  markdown += `<details>\n<summary>${file}</summary>\n\n`;
-                  markdown += '```diff\n';
-                  markdown += diffContent;
-                  if (fileTruncated) {
-                    markdown += '\n... (truncated)\n';
-                  }
-                  markdown += '```\n\n</details>\n\n';
                 } catch (e) {
-                  markdown += `<details>\n<summary>${file}</summary>\n\n`;
-                  markdown += '_Could not read diff_\n\n</details>\n\n';
+                  diffCell = '_(error reading diff)_';
                 }
+
+                markdown += `| ${fileLink} | ${diffCell} |\n`;
               }
 
-              markdown += `</details>\n`;
+              markdown += `\n</details>\n`;
             }
 
             // Write to file
