@@ -1374,7 +1374,7 @@ Add the following to the top of your `file_operations.nf` file:
 
 === "After"
 
-    ```groovy title="file_operations.nf - process example" linenums="1" hl_lines="1-24"
+    ```groovy title="file_operations.nf - process example" linenums="1" hl_lines="1-23"
     process ANALYZE_READS {
         tag "${meta.id}"
 
@@ -1403,7 +1403,7 @@ Add the following to the top of your `file_operations.nf` file:
 
 === "Before"
 
-    ```groovy title="file_operations.nf" linenums="1" hl_lines="1"
+    ```groovy title="file_operations.nf" linenums="1"
     workflow {
     ```
 
@@ -1442,17 +1442,17 @@ Make the following edits to the workflow:
 === "Before"
 
     ```groovy title="file_operations.nf" linenums="26" hl_lines="2 13"
-         ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
-         ch_files.map { id,  files ->
-            def (sample, replicate, type, readNum) = id.tokenize('_')
-            [
-                [
-                    id: sample,
-                    replicate: replicate.replace('rep', ''),
-                    type: type
-                ],
-                 files
-            ]
+        ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
+        ch_files.map { id,  files ->
+           def (sample, replicate, type, readNum) = id.tokenize('_')
+           [
+               [
+                   id: sample,
+                   replicate: replicate.replace('rep', ''),
+                   type: type
+               ],
+               files
+           ]
         }
         .view()
     }
@@ -1489,11 +1489,11 @@ results
 ```txt title="patientA_stats.txt"
 Sample metadata: patientA
 Replicate: 1
-Type: tumor
-Read 1: patientA_rep1_tumor_R1_001.fastq.gz
-Read 2: patientA_rep1_tumor_R2_001.fastq.gz
-Read 1 size: 6 reads
-Read 2 size: 6 reads
+Type: normal
+Read 1: patientA_rep1_normal_R1_001.fastq.gz
+Read 2: patientA_rep1_normal_R2_001.fastq.gz
+Read 1 size: 10 reads
+Read 2 size: 10 reads
 ```
 
 The process took our inputs and created a new file containing the patient metadata, as designed.
@@ -1774,8 +1774,8 @@ Applying these techniques in your own work will enable you to build more efficie
 ### Additional resources
 
 - [Nextflow Documentation: Working with Files](https://www.nextflow.io/docs/latest/working-with-files.html)
-- [channel.fromPath](https://www.nextflow.io/docs/latest/channel.html#frompath)
-- [channel.fromFilePairs](https://www.nextflow.io/docs/latest/channel.html#fromfilepairs)
+- [channel.fromPath](https://www.nextflow.io/docs/latest/reference/channel.html#frompath)
+- [channel.fromFilePairs](https://www.nextflow.io/docs/latest/reference/channel.html#fromfilepairs)
 
 ---
 
