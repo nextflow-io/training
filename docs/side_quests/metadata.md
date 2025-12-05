@@ -95,7 +95,7 @@ sampleF,moose,/workspaces/training/side-quests/metadata/data/salut.txt
 sampleG,turtle,/workspaces/training/side-quests/metadata/data/ciao.txt
 ```
 
-Each data file contains some greeting text in one of five languages (French, German, Spanish, Italian, English).
+Each data file contains some greeting text in one of five languages (fr: French, de: German, es: Spanish, it: Italian, en: English).
 
 We will also provide you with a containerized language analysis tool called `langid`.
 
@@ -171,78 +171,97 @@ Make the following changes to add a `splitCsv()` operation to the channel constr
 
 Note that we're using the `header: true` option to tell Nextflow to read the first row of the CSV file as the header row.
 
-Running `splitCsv(header: true)` will construct a map of key-value pairs for each row in the CSV file, with the column headers as keys for the corresponding values.
+Let's what comes out of that, shall we?
+Run the workflow:
 
-Let's see what Nextflow can see after reading with `splitCsv`.
-
-Run the pipeline with the `view()` operator we added above:
-
-```bash title="Read the datasheet"
+```bash
 nextflow run main.nf
 ```
 
-```console title="Read datasheet with splitCsv"
- N E X T F L O W   ~  version 24.10.4
+??? example "Output"
 
-Launching `main.nf` [exotic_albattani] DSL2 - revision: c0d03cec83
+    ```console
+    N E X T F L O W   ~  version 24.10.4
 
-[id:sampleA, character:squirrel, recording:/workspaces/training/side-quests/metadata/data/bonjour.txt]
-[id:sampleB, character:tux, recording:/workspaces/training/side-quests/metadata/data/guten_tag.txt]
-[id:sampleC, character:sheep, recording:/workspaces/training/side-quests/metadata/data/hallo.txt]
-[id:sampleD, character:turkey, recording:/workspaces/training/side-quests/metadata/data/hello.txt]
-[id:sampleE, character:stegosaurus, recording:/workspaces/training/side-quests/metadata/data/hola.txt]
-[id:sampleF, character:moose, recording:/workspaces/training/side-quests/metadata/data/salut.txt]
-[id:sampleG, character:turtle, recording:/workspaces/training/side-quests/metadata/data/ciao.txt]
-```
+    Launching `main.nf` [exotic_albattani] DSL2 - revision: c0d03cec83
 
-We can see that each row from the CSV file has been converted into a map with keys matching the header row.
+    [id:sampleA, character:squirrel, recording:/workspaces/training/side-quests/metadata/data/bonjour.txt]
+    [id:sampleB, character:tux, recording:/workspaces/training/side-quests/metadata/data/guten_tag.txt]
+    [id:sampleC, character:sheep, recording:/workspaces/training/side-quests/metadata/data/hallo.txt]
+    [id:sampleD, character:turkey, recording:/workspaces/training/side-quests/metadata/data/hello.txt]
+    [id:sampleE, character:stegosaurus, recording:/workspaces/training/side-quests/metadata/data/hola.txt]
+    [id:sampleF, character:moose, recording:/workspaces/training/side-quests/metadata/data/salut.txt]
+    [id:sampleG, character:turtle, recording:/workspaces/training/side-quests/metadata/data/ciao.txt]
+    ```
+
+We can see that operator has constructed a map of key-value pairs for each row in the CSV file, with the column headers as keys for the corresponding values.
+
 Each map entry corresponds to a column in our datasheet:
 
 - `id`
 - `character`
 - `recording`
 
-This format makes it easy to access specific fields from each file.
+This is great! It makes it easy to access specific fields from each file.
 For example, we could access the file ID with `id` or the txt file path with `recording`.
-The output above shows each row from the CSV file converted into a map with keys matching the header row.
 
-Let's access a specific column, the `character` column, that we read in from the datasheet, and print it.
-We can use the Nextflow `map` operator to iterate over each item in our channel and return specific entry of our map object:
+### 1.2. Pick out specific fields with `map`
+
+Let's say we want to access the `character` column from the datasheet and print it.
+We can use the Nextflow `map` operator to iterate over each item in our channel and specifically pick out the `character` entry from the map object.
+
+Make the following edits to the workflow:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="4" hl_lines="2-5"
+    ```groovy title="main.nf" linenums="3" hl_lines="5-7"
+    workflow  {
+
+        ch_datasheet = channel.fromPath("./data/datasheet.csv")
             .splitCsv(header: true)
             .map{ row ->
                 row.character
             }
             .view()
+
+    }
     ```
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="4" hl_lines="2-3"
+    ```groovy title="main.nf" linenums="3"
+    workflow  {
+
+        ch_datasheet = channel.fromPath("./data/datasheet.csv")
             .splitCsv(header: true)
             .view()
+
+    }
     ```
 
-and rerun:
+Now run the workflow again:
 
-```bash title="Print the creatures"
+```bash
 nextflow run main.nf
 ```
 
-```console title="Print the creatures"
-squirrel
-tux
-sheep
-turkey
-stegosaurus
-moose
-turtle
-```
+??? example "Output"
 
-Success, we can use the map structures derived from our datasheet to access the values from individual columns for each row.
+    ```console
+    N E X T F L O W   ~  version 24.10.4
+
+    Launching `main.nf` [exotic_albattani] DSL2 - revision: c0d03cec83
+
+    squirrel
+    tux
+    sheep
+    turkey
+    stegosaurus
+    moose
+    turtle
+    ```
+
+Success! We've taken advantage of the map structure derived from our datasheet to access the values from individual columns for each row.
 
 <details>
   <summary>More about maps</summary>
@@ -274,7 +293,7 @@ println "character: ${my_map.character}"
 
 Even though it doesn't have a proper `workflow` block, Nextflow can run this as if it were a workflow:
 
-```bash title="Run map demo example"
+```bash
 nextflow run examples/map_demo.nf
 ```
 
@@ -296,112 +315,113 @@ character: squirrel
 
 Now that we've successfully read in the datasheet and have access to the data in each row, we can begin implementing our pipeline logic.
 
-### 1.2. Separate metadata and data
+### 1.3. Organize the metadata into a 'meta map'
 
-In the datasheet, we have both the input files and data about the input files (`id`, `character`), the metadata.
-As we progress through the workflow, we generate more metadata about each file.
+In the current state of the workflow, the input files (under the `recording` key) and associated metadata (`id`, `character`) are all on the same footing, like they're all in one big bag.
+The practical consequence is that every process that consumes this channel would need to be configured with this structure in mind:
 
-So far, every column from the datasheet has become a separate item in the channel items we derived using `splitCsv()`.
-Every process that consumes this channel would need to be configured with this structure in mind:
-
-```groovy
+```groovy title="Syntax example"
     input:
     tuple val(id), val(character), file(recording)
 ```
 
-This means that as soon as somebody added an extra column to the datasheet, the workflow would start producing errors, because the shape of the channel would no longer match what the process expected.
-It also makes the process hard to share with others who might have slightly different input data, and we end up hard-coding variables into the process that aren't needed by the script block.
+That's fine as long as the number of columns in the datasheet doesn't change.
+However, if you add even just one column to the datasheet, the shape of the channel will no longer match what the process expects, and the workflow will produce errors.
+It also makes the process hard to share with others who might have slightly different input data, and you might end up having to hard-code variables into the process that aren't needed by the script block.
 
-To avoid this, we need to find a way of keeping the channel structure consistent however many columns that datasheet contains, and we can do that by keeping all the metadata in a single part of the channel tuples we call simply the `meta map`.
+To avoid this problem, we need to find a way of keeping the channel structure consistent irrespective of how many columns that datasheet contains.
 
-Let's use this and separate our metadata from the file path.
-We'll use the `map` operator to restructure our channel elements into a tuple consisting of the meta map and file:
+We can do that by collecting all the metadata into a item within the tuple, which we'll call the metadata map, or more simply 'meta map'.
+
+Make the following edits to the `map` operation:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="5" hl_lines="2"
-        .map { row ->
-                [ [id: row.id, character: row.character], row.recording ]
-        }
+    ```groovy title="main.nf" linenums="5" hl_lines="8"
+        ch_datasheet = channel.fromPath("./data/datasheet.csv")
+            .splitCsv(header: true)
+            .map { row ->
+                    [ [id: row.id, character: row.character], row.recording ]
+            }
+            .view()
     ```
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="5" hl_lines="2"
-        .map { row ->
+    ```groovy title="main.nf" linenums="5" hl_lines="8"
+        ch_datasheet = channel.fromPath("./data/datasheet.csv")
+            .splitCsv(header: true)
+            .map{ row ->
                 row.character
-        }
+            }
+            .view()
     ```
 
-Let's run it:
+We've restructured our channel elements into a tuple consisting of two elements, the meta map and the corresponding file object.
+
+Let's run the workflow:
 
 ```bash title="View meta map"
 nextflow run main.nf
 ```
 
-```console title="View meta map"
- N E X T F L O W   ~  version 24.10.4
+??? example "Output"
 
-Launching `main.nf` [lethal_booth] DSL2 - revision: 0d8f844c07
+    ```console title="View meta map"
+    N E X T F L O W   ~  version 24.10.4
 
-[[id:sampleA, character:squirrel], /workspaces/training/side-quests/metadata/data/bonjour.txt]
-[[id:sampleB, character:tux], /workspaces/training/side-quests/metadata/data/guten_tag.txt]
-[[id:sampleC, character:sheep], /workspaces/training/side-quests/metadata/data/hallo.txt]
-[[id:sampleD, character:turkey], /workspaces/training/side-quests/metadata/data/hello.txt]
-[[id:sampleE, character:stegosaurus], /workspaces/training/side-quests/metadata/data/hola.txt]
-[[id:sampleF, character:moose], /workspaces/training/side-quests/metadata/data/salut.txt]
-[[id:sampleG, character:turtle], /workspaces/training/side-quests/metadata/data/ciao.txt]
-```
+    Launching `main.nf` [lethal_booth] DSL2 - revision: 0d8f844c07
 
-Now, each item in the channel has only two items, the metadata map (e.g. `[id:sampleA, character:squirrel]`) and the data file described by that metadata (e.g. `/workspaces/training/side-quests/metadata/data/bonjour.txt`).
+    [[id:sampleA, character:squirrel], /workspaces/training/side-quests/metadata/data/bonjour.txt]
+    [[id:sampleB, character:tux], /workspaces/training/side-quests/metadata/data/guten_tag.txt]
+    [[id:sampleC, character:sheep], /workspaces/training/side-quests/metadata/data/hallo.txt]
+    [[id:sampleD, character:turkey], /workspaces/training/side-quests/metadata/data/hello.txt]
+    [[id:sampleE, character:stegosaurus], /workspaces/training/side-quests/metadata/data/hola.txt]
+    [[id:sampleF, character:moose], /workspaces/training/side-quests/metadata/data/salut.txt]
+    [[id:sampleG, character:turtle], /workspaces/training/side-quests/metadata/data/ciao.txt]
+    ```
 
-Now we can write processes to consume the channel without hard-coding the metadata items into the input specification:
+Now, each element in the channel contains the metadata map first (_e.g._ `[id:sampleA, character:squirrel]`) and the corresponding file object second (_e.g._ `/workspaces/training/side-quests/metadata/data/bonjour.txt`).
 
-```groovy
+As a result, adding more columns in the datasheet will make more metadata available in the `meta` map, but won't change the channel shape.
+This enables us to write processes that consume the channel without having to hard-code the metadata items into the input specification:
+
+```groovy title="Syntax example"
     input:
     tuple val(meta), file(recording)
 ```
 
-Additional columns in the datasheet will make more metadata available in the `meta` map, but won't change the channel shape.
+This is a widely used convention for organizing metadata in Nextflow workflows.
 
 ### Takeaway
 
 In this section, you've learned:
 
-- **Why metadata is important**: Keeping metadata with your data preserves important file information throughout the workflow.
-- **How to read in a datasheets**: Using `splitCsv` to read CSV files with header information and transform rows into structured data
-- **How to create a meta map**: Separating metadata from file data using tuple structure `[ [id:value, ...], file ]`
+- **Why metadata is important:** Keeping metadata with your data preserves important file information throughout the workflow.
+- **How to read in a datasheets:** Using `splitCsv` to read CSV files with header information and transform rows into structured data
+- **How to create a meta map:** Separating metadata from file data using the tuple structure `[ [id:value, ...], file ]`
 
 ---
 
 ## 2. Manipulating metadata
 
-### 2.1. Copying input metadata to output channels
+Now that we have our metadata loaded, let's do something with it!
 
-Now we want to process our files with unidentified languages.
-Let's add a process definition before the `workflow` that can identify the language in each file:
+We're going to use a tool called [`langid`](https://github.com/saffsd/langid.py) to identify the language contained in each creature's recording file.
+The tool comes pre-trained on a set of languages, and given a snippet of text, it will output a language prediction and an associated probability score, both to `stdout`.
+
+### 2.1. Import the process and examine the code
+
+We provide you with a pre-written process module called `IDENTIFY_LANGUAGE` that wraps the `langid` tool, so you just need to add an include statement before the workflow block.
+
+Make the following edit to the workflow:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="1"
-    /*
-     * Use langid to predict the language of each input file
-     */
-    process IDENTIFY_LANGUAGE {
+    ```groovy title="main.nf" linenums="1" hl_lines="3"
+    #!/usr/bin/env nextflow
 
-        container 'community.wave.seqera.io/library/pip_langid:b2269f456a5629ff'
-
-        input:
-        tuple val(meta), path(file)
-
-        output:
-        tuple val(meta), path(file), stdout
-
-        script:
-        """
-        langid < ${file} -l en,de,fr,es,it | sed -E "s/.*\\('([a-z]+)'.*/\\1/" | tr -d '\\n'
-        """
-    }
+    include { IDENTIFY_LANGUAGE } from './modules/langid.nf'
 
     workflow {
     ```
@@ -409,88 +429,141 @@ Let's add a process definition before the `workflow` that can identify the langu
 === "Before"
 
     ```groovy title="main.nf" linenums="1"
-    workflow  {
+    #!/usr/bin/env nextflow
+
+    workflow {
     ```
 
-The tool [langid](https://github.com/saffsd/langid.py) is used for language identification.
-It comes pre-trained on a set of languages.
-For a given phrase, it outputs a language prediction and a probability score for each guess to the console.
-In the `script` section, we use sed to remove the probability score, clean up the string by removing newline characters, and return only the language prediction.
-Since the output is printed directly to the console, we use Nextflow’s [`stdout` output qualifier](https://www.nextflow.io/docs/latest/process.html#outputs) to capture and pass the string as output.
+You can open the module file to examine its code:
 
-Let's include the process, then run, and view it:
+```groovy title="modules/langid.nf" linenums="1" hl_lines="11 14"
+#!/usr/bin/env nextflow
+
+/*
+* Use langid to predict the language of each input file
+*/
+process IDENTIFY_LANGUAGE {
+
+    container 'community.wave.seqera.io/library/pip_langid:b2269f456a5629ff'
+
+    input:
+    tuple val(meta), path(file)
+
+    output:
+    tuple val(meta), path(file), stdout
+
+    script:
+    """
+    langid < ${file} -l en,de,fr,es,it | sed -E "s/.*\\('([a-z]+)'.*/\\1/" | tr -d '\\n'
+    """
+}
+```
+
+As you can see, the input definition uses the same `tuple val(meta), path(file)` structure that we just applied to our input channel.
+
+Note that in the `script` section, we use `sed` to remove the probability score, clean up the string by removing newline characters, and return only the language prediction.
+Since the output is printed directly to the console, we use Nextflow’s [`stdout` output qualifier](https://www.nextflow.io/docs/latest/process.html#outputs) to capture the string as output.
+
+The output definition is structured as a tuple with a similar structure to the input's, except it also contains `stdout` as a third element.
+This `tuple val(meta), path(file), <output>` pattern keeps the metadata associated with both the input data and the outputs as it flows through the pipeline.
+
+### 2.2. Identify the language of each greeting
+
+We still need to add a call to the `IDENTIFY_LANGUAGE` process, so let's do that now.
+Make the following edits to the workflow:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="25" hl_lines="4-5"
-                [ [id: row.id, character: row.character], row.recording ]
+    ```groovy title="main.nf" linenums="8" hl_lines="7-9"
+        ch_datasheet = channel.fromPath("./data/datasheet.csv")
+            .splitCsv(header: true)
+            .map { row ->
+                [[id: row.id, character: row.character], row.recording]
             }
 
-        ch_prediction = IDENTIFY_LANGUAGE(ch_datasheet)
-        ch_prediction.view()
+        // Run langid to identify the language of each greeting
+        IDENTIFY_LANGUAGE(ch_datasheet)
+        IDENTIFY_LANGUAGE.out.view()
     ```
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="25" hl_lines="3"
-                [ [id:row.id, character:row.character], row.recording ]
+    ```groovy title="main.nf" linenums="8" hl_lines="6"
+        ch_datasheet = channel.fromPath("./data/datasheet.csv")
+            .splitCsv(header: true)
+            .map { row ->
+                [[id: row.id, character: row.character], row.recording]
             }
             .view()
     ```
 
-```bash title="Identify languages"
+And now run the workflow:
+
+```bash
 nextflow run main.nf
 ```
 
-```console title="Identify languages"
- N E X T F L O W   ~  version 24.10.4
+??? example "Output"
 
-Launching `main.nf` [voluminous_mcnulty] DSL2 - revision: f9bcfebabb
+    ```console
+    N E X T F L O W   ~  version 24.10.4
 
-executor >  local (7)
-[4e/f722fe] IDENTIFY_LANGUAGE (7) [100%] 7 of 7 ✔
-[[id:sampleA, character:squirrel], /workspaces/training/side-quests/metadata/work/eb/f7148ebdd898fbe1136bec6a714acb/bonjour.txt, fr]
-[[id:sampleB, character:tux], /workspaces/training/side-quests/metadata/work/16/71d72410952c22cd0086d9bca03680/guten_tag.txt, de]
-[[id:sampleD, character:turkey], /workspaces/training/side-quests/metadata/work/c4/b7562adddc1cc0b7d414ec45d436eb/hello.txt, en]
-[[id:sampleC, character:sheep], /workspaces/training/side-quests/metadata/work/ea/04f5d979429e4455e14b9242fb3b45/hallo.txt, de]
-[[id:sampleF, character:moose], /workspaces/training/side-quests/metadata/work/5a/6c2b84bf8fadb98e28e216426be079/salut.txt, fr]
-[[id:sampleE, character:stegosaurus], /workspaces/training/side-quests/metadata/work/af/ee7c69bcab891c40d0529305f6b9e7/hola.txt, es]
-[[id:sampleG, character:turtle], /workspaces/training/side-quests/metadata/work/4e/f722fe47271ba7ebcd69afa42964ca/ciao.txt, it]
-```
+    Launching `main.nf` [voluminous_mcnulty] DSL2 - revision: f9bcfebabb
 
-Neat, for each of our files, we now have a language predicted.
+    executor >  local (7)
+    [4e/f722fe] IDENTIFY_LANGUAGE (7) [100%] 7 of 7 ✔
+    [[id:sampleA, character:squirrel], /workspaces/training/side-quests/metadata/work/eb/f7148ebdd898fbe1136bec6a714acb/bonjour.txt, fr]
+    [[id:sampleB, character:tux], /workspaces/training/side-quests/metadata/work/16/71d72410952c22cd0086d9bca03680/guten_tag.txt, de]
+    [[id:sampleD, character:turkey], /workspaces/training/side-quests/metadata/work/c4/b7562adddc1cc0b7d414ec45d436eb/hello.txt, en]
+    [[id:sampleC, character:sheep], /workspaces/training/side-quests/metadata/work/ea/04f5d979429e4455e14b9242fb3b45/hallo.txt, de]
+    [[id:sampleF, character:moose], /workspaces/training/side-quests/metadata/work/5a/6c2b84bf8fadb98e28e216426be079/salut.txt, fr]
+    [[id:sampleE, character:stegosaurus], /workspaces/training/side-quests/metadata/work/af/ee7c69bcab891c40d0529305f6b9e7/hola.txt, es]
+    [[id:sampleG, character:turtle], /workspaces/training/side-quests/metadata/work/4e/f722fe47271ba7ebcd69afa42964ca/ciao.txt, it]
+    ```
 
-!!! note
+Excellent! For each of our creatures, we now have a prediction for what language the file contains.
 
-    "de" stands for "deutsch", the German word for "german"
-
-You may have noticed something else: we kept the metadata of our files and associated it with our new piece of information.
-We achieved this by adding the `meta` map to the output tuple in the process:
-
-```groovy title="main.nf" linenums="12"
-output:
-tuple val(meta), path(file), stdout
-```
-
-This is a useful way to ensure the metadata stays connected with any new information that is generated.
+As noted earlier, we've also included the input file and the meta map in the output, which means that both remain associated with the new information we've just produced.
+This will prove useful in the next step.
 
 !!! note
 
-    Another compelling reason to use meta maps in this way is that they make it easier to associate related results that share the same identifiers.
-    As you learned in "Hello Nextflow", you can't rely on the order of items in channels to match results across them.
-    Instead, you must use keys to associate data correctly - and meta maps provide an ideal structure for this purpose.
-    We explore this use case in detail in [Splitting & Grouping](./splitting_and_grouping.md).
+    More generally, this pattern of keeping the meta map associated with results makes it easier to associate related results that share the same identifiers.
 
-### 2.2. Using process outputs to augment metadata
+    As you will have learned already, you can't rely on the order of items in channels to match results across them.
+    Instead, you must use keys to associate data correctly, and meta maps provide an ideal structure for this purpose.
 
-Given that this is more data about the files, let's add it to our meta map.
-We can use the [`map` operator](https://www.nextflow.io/docs/latest/operator.html#map) again to create a new key `lang` and set the value to the predicted language:
+    We explore this use case in detail in the [Splitting & Grouping](./splitting_and_grouping.md) side quest.
+
+### 2.3. Augment metadata with process outputs
+
+Given that the results we just produced are in themselves a form of metadata about the contents of the files, we're going to want to add them to our meta map.
+
+However, we don't want to modify the existing meta map in place.
+From a technical standpoint, it is _possible_ to do that, but it's unsafe.
+So instead, we're going to create a new meta map containing the contents of the existing meta map plus a new key-value pair holding the new information.
+
+We do that using the [`map`](https://www.nextflow.io/docs/latest/operator.html#map) operator.
+
+<!-- TODO Explain first how the map merge stuff works
+
+```groovy title="Syntax example"
+.map { meta, new_info ->
+    [meta + [new_key: new_info]]
+}
+```
+
+-->
+
+In the case of our workflow, we also need to account for the presence of the `file` object in the tuple.
+
+Make the following edits to the workflow:
 
 === "After"
 
     ```groovy title="main.nf" linenums="28" hl_lines="2-6"
-        ch_prediction = IDENTIFY_LANGUAGE(ch_datasheet)
-        ch_languages = ch_prediction
+        IDENTIFY_LANGUAGE(ch_datasheet)
+        IDENTIFY_LANGUAGE.out
             .map { meta, file, lang ->
                 [meta + [lang: lang], file]
             }
@@ -501,8 +574,8 @@ We can use the [`map` operator](https://www.nextflow.io/docs/latest/operator.htm
 === "Before"
 
     ```groovy title="main.nf" linenums="28" hl_lines="2"
-        ch_prediction = IDENTIFY_LANGUAGE(ch_datasheet)
-        ch_prediction.view()
+        IDENTIFY_LANGUAGE(ch_datasheet)
+        IDENTIFY_LANGUAGE.out.view()
     ```
 
 The `map` operator takes each channel element and processes it to create a modified version.
@@ -545,7 +618,7 @@ After running the language prediction, each element in the output channel looks 
 
 <!-- TODO Should we also show how to remove a key using subMap?! -->
 
-### 2.3. Assign a language group using conditionals
+### 2.4. Assign a language group using conditionals
 
 Now that we have our language predictions, let's use the information to assign them into new groups. In our example data, we have provided data sets that belong either to `germanic` (either English or German) or `romance` (French, Spanish, Italian) languages.
 

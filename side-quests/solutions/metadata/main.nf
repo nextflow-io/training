@@ -1,55 +1,21 @@
 #!/usr/bin/env nextflow
 
-/*
-    * Use langid to predict the language of each input file
-    */
-process IDENTIFY_LANGUAGE {
-
-    container 'community.wave.seqera.io/library/pip_langid:b2269f456a5629ff'
-
-    input:
-    tuple val(meta), path(file)
-
-    output:
-    tuple val(meta), path(file), stdout
-
-    script:
-    """
-    langid < ${file} -l en,de,fr,es,it | sed -E "s/.*\\('([a-z]+)'.*/\\1/" | tr -d '\\n'
-    """
-}
-
-/*
-    * Generate ASCII art with cowpy
-*/
-process COWPY {
-
-    publishDir "results/${meta.lang_group}", mode: 'copy'
-
-    container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
-
-    input:
-    tuple val(meta), path(input_file)
-
-    output:
-    tuple val(meta), path("cowpy-${input_file}")
-
-    script:
-    """
-    cat ${input_file} | cowpy -c ${meta.character} > cowpy-${input_file}
-    """
-}
+include { IDENTIFY_LANGUAGE } from './modules/langid.nf'
+include { COWPY } from './modules/cowpy.nf'
 
 workflow {
 
-    ch_samplesheet = channel.fromPath("./data/samplesheet.csv")
+    ch_datasheet = channel.fromPath("./data/datasheet.csv")
         .splitCsv(header: true)
         .map { row ->
             [[id: row.id, character: row.character], row.recording]
         }
 
-    ch_prediction = IDENTIFY_LANGUAGE(ch_samplesheet)
-    ch_languages = ch_prediction
+    // Run langid to identify the language of each greeting
+    IDENTIFY_LANGUAGE(ch_datasheet)
+
+    // Reorganize and enrich the metadata
+    IDENTIFY_LANGUAGE.out
         .map { meta, file, lang ->
             [meta + [lang: lang], file]
         }
@@ -65,5 +31,8 @@ workflow {
 
             [meta + [lang_group: lang_group], file]
         }
+        .set { ch_languages }
+
+    // Run cowpy to generate ASCII art
     COWPY(ch_languages)
 }
