@@ -1287,7 +1287,7 @@ Uncomment the map operation in the workflow and make the following edits:
 
 === "After"
 
-    ```groovy title="file_operations.nf" linenums="3" hl_lines="2-3 8"
+    ```groovy title="file_operations.nf" linenums="3" hl_lines="2-3 8 12"
         ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
         ch_files.map { id, files ->
             def (sample, replicate, type) = id.tokenize('_')
