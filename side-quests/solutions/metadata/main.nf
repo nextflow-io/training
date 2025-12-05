@@ -16,8 +16,8 @@ workflow {
 
     // Reorganize and enrich the metadata
     IDENTIFY_LANGUAGE.out
-        .map { meta, file, lang ->
-            [meta + [lang: lang], file]
+        .map { meta, file, lang_id ->
+            [meta + [lang: lang_id], file]
         }
         .map { meta, file ->
 

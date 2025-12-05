@@ -149,7 +149,7 @@ Make the following changes to add a `splitCsv()` operation to the channel constr
 
 === "After"
 
-    ```groovy title="main.nf" linenums="3" hl_lines="6-7"
+    ```groovy title="main.nf" linenums="3" hl_lines="4-5"
     workflow  {
 
         ch_datasheet = channel.fromPath("./data/datasheet.csv")
@@ -337,7 +337,7 @@ Make the following edits to the `map` operation:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="5" hl_lines="8"
+    ```groovy title="main.nf" linenums="5" hl_lines="4"
         ch_datasheet = channel.fromPath("./data/datasheet.csv")
             .splitCsv(header: true)
             .map { row ->
@@ -348,7 +348,7 @@ Make the following edits to the `map` operation:
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="5" hl_lines="8"
+    ```groovy title="main.nf" linenums="5" hl_lines="4"
         ch_datasheet = channel.fromPath("./data/datasheet.csv")
             .splitCsv(header: true)
             .map{ row ->
@@ -461,15 +461,15 @@ process IDENTIFY_LANGUAGE {
 
 As you can see, the input definition uses the same `tuple val(meta), path(file)` structure that we just applied to our input channel.
 
-Note that in the `script` section, we use `sed` to remove the probability score, clean up the string by removing newline characters, and return only the language prediction.
-Since the output is printed directly to the console, we use Nextflow’s [`stdout` output qualifier](https://www.nextflow.io/docs/latest/process.html#outputs) to capture the string as output.
-
 The output definition is structured as a tuple with a similar structure to the input's, except it also contains `stdout` as a third element.
 This `tuple val(meta), path(file), <output>` pattern keeps the metadata associated with both the input data and the outputs as it flows through the pipeline.
 
-### 2.2. Identify the language of each greeting
+Note that we're using Nextflow’s [`stdout`](https://www.nextflow.io/docs/latest/process.html#outputs) output qualifier here because the tool prints its output directly to the console rather than writing a file; and we use `sed` in the command line to remove the probability score, clean up the string by removing newline characters, and return only the language prediction.
 
-We still need to add a call to the `IDENTIFY_LANGUAGE` process, so let's do that now.
+### 2.2. Add a call to `IDENTIFY_LANGUAGE`
+
+Now that the process is available to the workflow, we can add a call to the `IDENTIFY_LANGUAGE` process to run it on the data channel.
+
 Make the following edits to the workflow:
 
 === "After"
@@ -521,9 +521,9 @@ nextflow run main.nf
     [[id:sampleG, character:turtle], /workspaces/training/side-quests/metadata/work/4e/f722fe47271ba7ebcd69afa42964ca/ciao.txt, it]
     ```
 
-Excellent! For each of our creatures, we now have a prediction for what language the file contains.
+Excellent! We now have a prediction for what language each character speaks.
 
-As noted earlier, we've also included the input file and the meta map in the output, which means that both remain associated with the new information we've just produced.
+And as noted earlier, we've also included the input file and the meta map in the output, which means that both remain associated with the new information we've just produced.
 This will prove useful in the next step.
 
 !!! note
@@ -537,98 +537,181 @@ This will prove useful in the next step.
 
 ### 2.3. Augment metadata with process outputs
 
-Given that the results we just produced are in themselves a form of metadata about the contents of the files, we're going to want to add them to our meta map.
+Given that the results we just produced are in themselves a form of metadata about the contents of the files, it would be useful to add them to our meta map.
 
 However, we don't want to modify the existing meta map in place.
 From a technical standpoint, it is _possible_ to do that, but it's unsafe.
-So instead, we're going to create a new meta map containing the contents of the existing meta map plus a new key-value pair holding the new information.
+So instead, we're going to create a new meta map containing the contents of the existing meta map plus a new key-value pair holding the new information, and use the [`map`](https://www.nextflow.io/docs/latest/operator.html#map) operator to replace the old map with the new one.
 
-We do that using the [`map`](https://www.nextflow.io/docs/latest/operator.html#map) operator.
+This is going to take only a very small amount of code, but it's going to have a lot packed into it, so let's break it down in stages.
 
-<!-- TODO Explain first how the map merge stuff works
+First, you need to know that we can merge the contents of two maps using the Groovy operator `+`.
+Let's say we have the following maps:
 
 ```groovy title="Syntax example"
-.map { meta, new_info ->
-    [meta + [new_key: new_info]]
+map1 = [id: 'sampleA', character: 'squirrel']
+map2 = [lang: 'fr']
+```
+
+We can merge them like this:
+
+```groovy title="Syntax example"
+new_map = map1 + map2
+```
+
+The contents of `new_map` will be:
+
+```groovy title="Syntax example"
+[id: 'sampleA', character: 'squirrel', 'fr']
+```
+
+Great! But now let's say the starting point is a little different: you still have `map1` but the language prediction is not in its own map.
+It's held in a variable called `lang_id`, and you know you want to store its value (`'fr'`) with the key `lang`.
+
+You can actually do the following:
+
+```groovy title="Syntax example"
+new_map = [map1 + [lang: lang_id]]
+```
+
+Here, `[lang: new_info]` creates a new unnamed map on the fly, and `map1 + ` merges `map1` with the new unnamed map, producing the same `new_map` contents as before.
+
+Neat, right?
+
+Now let's transpose that into the context of a Nextflow `channel.map()` operation.
+The code becomes:
+
+```groovy title="Syntax example"
+.map { map1, lang_id ->
+    [map1 + [lang: lang_id]]
 }
 ```
 
--->
+This does the following:
 
-In the case of our workflow, we also need to account for the presence of the `file` object in the tuple.
+- `map1, lang_id ->` takes the two items in the tuple
+- `[map1 + [lang: lang_id]]` creates the new map as detailed above
 
-Make the following edits to the workflow:
+The output is a single unnamed map with the same contents as `new_map` in our example above.
+So we've effectively transformed `[id: 'sampleA', character: 'squirrel'], 'it'` into `[id: 'sampleA', character: 'squirrel', lang: 'fr']`.
+
+Hopefully you can see that if we change `map1` to `meta`, that's basically all we need in order to add the language predication to our meta map in our workflow.
+
+Except for one thing!
+
+In the case of our workflow, we also need to account for the presence of the `file` object in the tuple, which contains `meta, file, lang_id`, so the code here would become:
+
+```groovy title="Syntax example"
+.map { meta, file, lang_id ->
+    [meta + [lang: lang_id], file]
+}
+```
+
+If you're having a hard time following why the `file` seems to be moving around, imagine that instead of `[meta + [lang: lang_id], file]`, that line reads `[new_map, file]`.
+This should make it more clear that we're simply leaving the `file` in its original place in second position in the tuple; we've just taken the `new_info` value and folded it into the map that's in first position.
+
+And this brings us back to the `tuple val(meta), path(file)` channel structure!
+
+With that, let's make the following edits to the workflow:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="28" hl_lines="2-6"
+    ```groovy title="main.nf" linenums="14" hl_lines="3-7"
+        // Run langid to identify the language of each greeting
         IDENTIFY_LANGUAGE(ch_datasheet)
         IDENTIFY_LANGUAGE.out
-            .map { meta, file, lang ->
-                [meta + [lang: lang], file]
+            .map { meta, file, lang_id ->
+                [meta + [lang: lang_id], file]
             }
             .view()
-    }
     ```
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="28" hl_lines="2"
+    ```groovy title="main.nf" linenums="14" hl_lines="3"
+        // Run langid to identify the language of each greeting
         IDENTIFY_LANGUAGE(ch_datasheet)
         IDENTIFY_LANGUAGE.out.view()
     ```
 
-The `map` operator takes each channel element and processes it to create a modified version.
-Inside the closure `{ meta, file, lang -> ... }`, we then take the existing `meta` map, create a new map `[lang:lang]`, and merge both together using `+`.
+See, that's not a lot of code, but it helps to walk through the steps before you plug it in.
 
-The `+` operator in Groovy merges two maps together.
-So if our original `meta` was `[id:sampleA, character:squirrel]`, then `meta + [lang:'fr']` creates a new map: `[id:sampleA, character:squirrel, lang:fr]`.
+Let's run the workflow to see if it worked:
 
-!!! Note
-
-    The `+` notation with maps creates an entirely new map object, which is what we want.
-    If we'd done something like `meta.lang = lang` we'd have been modifying the original object, which can lead to unpredictable effects.
-
-```bash title="View new meta map key"
+```bash
 nextflow run main.nf -resume
 ```
 
-```console title="View new meta map key"
+??? example "Output"
 
- N E X T F L O W   ~  version 24.10.4
+    ```console
 
-Launching `main.nf` [cheeky_fermat] DSL2 - revision: d096281ee4
+    N E X T F L O W   ~  version 24.10.4
 
-[4e/f722fe] IDENTIFY_LANGUAGE (7) [100%] 7 of 7, cached: 7 ✔
-[[id:sampleA, character:squirrel, lang:fr], /workspaces/training/side-quests/metadata/work/eb/f7148ebdd898fbe1136bec6a714acb/bonjour.txt]
-[[id:sampleB, character:tux, lang:de], /workspaces/training/side-quests/metadata/work/16/71d72410952c22cd0086d9bca03680/guten_tag.txt]
-[[id:sampleC, character:sheep, lang:de], /workspaces/training/side-quests/metadata/work/ea/04f5d979429e4455e14b9242fb3b45/hallo.txt]
-[[id:sampleD, character:turkey, lang:en], /workspaces/training/side-quests/metadata/work/c4/b7562adddc1cc0b7d414ec45d436eb/hello.txt]
-[[id:sampleF, character:moose, lang:fr], /workspaces/training/side-quests/metadata/work/5a/6c2b84bf8fadb98e28e216426be079/salut.txt]
-[[id:sampleE, character:stegosaurus, lang:es], /workspaces/training/side-quests/metadata/work/af/ee7c69bcab891c40d0529305f6b9e7/hola.txt]
-[[id:sampleG, character:turtle, lang:it], /workspaces/training/side-quests/metadata/work/4e/f722fe47271ba7ebcd69afa42964ca/ciao.txt]
-```
+    Launching `main.nf` [cheeky_fermat] DSL2 - revision: d096281ee4
 
-Nice, we expanded our meta map with new information we gathered in the pipeline.
-After running the language prediction, each element in the output channel looks like this:
+    [4e/f722fe] IDENTIFY_LANGUAGE (7) [100%] 7 of 7, cached: 7 ✔
+    [[id:sampleA, character:squirrel, lang:fr], /workspaces/training/side-quests/metadata/work/eb/f7148ebdd898fbe1136bec6a714acb/bonjour.txt]
+    [[id:sampleB, character:tux, lang:de], /workspaces/training/side-quests/metadata/work/16/71d72410952c22cd0086d9bca03680/guten_tag.txt]
+    [[id:sampleC, character:sheep, lang:de], /workspaces/training/side-quests/metadata/work/ea/04f5d979429e4455e14b9242fb3b45/hallo.txt]
+    [[id:sampleD, character:turkey, lang:en], /workspaces/training/side-quests/metadata/work/c4/b7562adddc1cc0b7d414ec45d436eb/hello.txt]
+    [[id:sampleF, character:moose, lang:fr], /workspaces/training/side-quests/metadata/work/5a/6c2b84bf8fadb98e28e216426be079/salut.txt]
+    [[id:sampleE, character:stegosaurus, lang:es], /workspaces/training/side-quests/metadata/work/af/ee7c69bcab891c40d0529305f6b9e7/hola.txt]
+    [[id:sampleG, character:turtle, lang:it], /workspaces/training/side-quests/metadata/work/4e/f722fe47271ba7ebcd69afa42964ca/ciao.txt]
+    ```
 
-```console
-[meta, file, lang]  // e.g. [[id:sampleA, character:squirrel], bonjour.txt, fr]
-```
+Yep, that checks out!
+We've neatly reorganized the output of the process from `meta, file, lang_id` so that `lang_id` is now one of the keys in the meta map, and the channel's tuples fit the `meta, file` model once again.
 
-<!-- TODO Should we also show how to remove a key using subMap?! -->
+<!-- TODO (future) Should we also show how to remove a key using subMap?! Or note where to find that. -->
 
 ### 2.4. Assign a language group using conditionals
 
-Now that we have our language predictions, let's use the information to assign them into new groups. In our example data, we have provided data sets that belong either to `germanic` (either English or German) or `romance` (French, Spanish, Italian) languages.
+Now that we have our language predictions, let's use the information to assign some new groupings.
 
-We can add another `map` operator to assign either group (add this below your last map operation).
+In our example data, the languages used by our characters can be grouped into germanic languages (English, German) and romance language (French, Spanish, Italian).
+It might be useful to have that classification readily available somewhere later in the pipeline, so let's add that information in the meta map.
+
+And, good news, this is yet another case that lends itself perfectly to using the `map` operator!
+
+Specifically, we're going to define a variable called `lang_group`, use some simple conditional logic to determine what value to assign to the `lang_group` for each piece of data.
+
+The general syntax is going to look like this:
+
+```groovy title="Syntax example"
+            .map { meta, file ->
+
+                // conditional logic defining lang_group goes here
+
+                [meta + [lang_group: lang_group], file]
+            }
+```
+
+You can see this is very similar to the on-the-fly map merging operation we used in the previous step.
+We just need to write the conditional statements.
+
+Here's the conditional logic we want to apply:
+
+- Define a variable called `lang_group` with default value `'unknown'`.
+- If `lang` is either German (`'de'`) or English (`'en'`), change `lang_group` to `germanic`.
+- Else if `lang` is included in a list containing French (`'fr'`), Spanish (`'es'`) and Italian (`'it'`), change `lang_group` to `romance`.
+
+Try taking a stab at writing it yourself if you already know how to write conditional statements in Nextflow.
+
+!!! tip
+
+    You can access the value of `lang` within the map operation with `meta.lang`.
+
+Your goal is to make the following changes to the workflow:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="31" hl_lines="4-15"
-            .map { meta, file, lang ->
-                [meta + [lang: lang], file]
+    ```groovy title="main.nf" linenums="14" hl_lines="7-19"
+        // Run langid to identify the language of each greeting
+        IDENTIFY_LANGUAGE(ch_datasheet)
+        IDENTIFY_LANGUAGE.out
+            .map { meta, file, lang_id ->
+                [meta + [lang: lang_id], file]
             }
             .map { meta, file ->
 
@@ -647,46 +730,48 @@ We can add another `map` operator to assign either group (add this below your la
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="31"
-            .map { meta, file, lang ->
-                [meta + [lang: lang], file]
+    ```groovy title="main.nf" linenums="14" hl_lines="7"
+        // Run langid to identify the language of each greeting
+        IDENTIFY_LANGUAGE(ch_datasheet)
+        IDENTIFY_LANGUAGE.out
+            .map { meta, file, lang_id ->
+                [meta + [lang: lang_id], file]
             }
             .view()
     ```
 
-Let's rerun it
+Here are the key points:
+
+- We use `def lang_group = "unknown"` to create the `lang_group` variable with default value set to `unknown`.
+- We use an `if {} else if {}` structure for the conditional logic, with alternative `.equals()` tests for the two germanic languages, and a test for existence in a list for the three romance languages.
+- We use the `meta + [lang_group:lang_group]` merge operation as previously to generate the updated meta map.
+
+<!-- TODO (future) Add note/links to relevant docs in additional resources section -->
+
+Once that all makes sense, run the workflow again to see the result:
 
 ```bash title="View language groups"
 nextflow run main.nf -resume
 ```
 
-```console title="View language groups"
- N E X T F L O W   ~  version 24.10.4
+??? example "Output"
 
-Launching `main.nf` [wise_almeida] DSL2 - revision: 46778c3cd0
+    ```console
+    N E X T F L O W   ~  version 24.10.4
 
-[da/652cc6] IDENTIFY_LANGUAGE (7) [100%] 7 of 7, cached: 7 ✔
-[[id:sampleA, character:squirrel, lang:fr, lang_group:romance], /workspaces/training/side-quests/metadata/data/bonjour.txt]
-[[id:sampleB, character:tux, lang:de, lang_group:germanic], /workspaces/training/side-quests/metadata/data/guten_tag.txt]
-[[id:sampleC, character:sheep, lang:de, lang_group:germanic], /workspaces/training/side-quests/metadata/data/hallo.txt]
-[[id:sampleD, character:turkey, lang:en, lang_group:germanic], /workspaces/training/side-quests/metadata/data/hello.txt]
-[[id:sampleE, character:stegosaurus, lang:es, lang_group:romance], /workspaces/training/side-quests/metadata/data/hola.txt]
-[[id:sampleF, character:moose, lang:fr, lang_group:romance], /workspaces/training/side-quests/metadata/data/salut.txt]
-[[id:sampleG, character:turtle, lang:it, lang_group:romance], /workspaces/training/side-quests/metadata/data/ciao.txt]
-```
+    Launching `main.nf` [wise_almeida] DSL2 - revision: 46778c3cd0
 
-Let's understand how this transformation works.
-The `map` operator here again takes a closure that processes each element in the channel.
-Inside the closure, we're using an if-clause to create a new language group classification.
+    [da/652cc6] IDENTIFY_LANGUAGE (7) [100%] 7 of 7, cached: 7 ✔
+    [[id:sampleA, character:squirrel, lang:fr, lang_group:romance], /workspaces/training/side-quests/metadata/data/bonjour.txt]
+    [[id:sampleB, character:tux, lang:de, lang_group:germanic], /workspaces/training/side-quests/metadata/data/guten_tag.txt]
+    [[id:sampleC, character:sheep, lang:de, lang_group:germanic], /workspaces/training/side-quests/metadata/data/hallo.txt]
+    [[id:sampleD, character:turkey, lang:en, lang_group:germanic], /workspaces/training/side-quests/metadata/data/hello.txt]
+    [[id:sampleE, character:stegosaurus, lang:es, lang_group:romance], /workspaces/training/side-quests/metadata/data/hola.txt]
+    [[id:sampleF, character:moose, lang:fr, lang_group:romance], /workspaces/training/side-quests/metadata/data/salut.txt]
+    [[id:sampleG, character:turtle, lang:it, lang_group:romance], /workspaces/training/side-quests/metadata/data/ciao.txt]
+    ```
 
-Here's what's happening step by step:
-
-- Create a new field `lang_group`: We set a default to `unknown`
-- Extract existing metadata: We access `meta.lang` (the language we predicted earlier) from the existing meta map
-- Apply conditional logic: We use an if-clause to determine the language group based on the language: Is `meta.lang` either `de` or `en`, we re-assign `lang_group` to `germanic`, if `fr`, `es`, or `it`, then we re-assign to `romance`
-- Merge with existing metadata: We use `meta + [lang_group:lang_group]` in the same way as before to combine the existing meta map with our new field
-
-The resulting channel elements maintain their `[meta, file]` structure, but the meta map now includes this new classification.
+As you can see, the channel elements maintain their `[meta, file]` structure, but the meta map now includes this new classification.
 
 ### Takeaway
 
