@@ -1035,7 +1035,7 @@ Each element in the channel is now a tuple containing the `simpleName` and the o
 
 At this point, the metadata we want is embedded in the `simplename`, but we can't access individual items directly.
 So we need to split the `simplename` into its components.
-Fortunately, those components are simply separated by underscores in the original filename, so we can apply a common Groovy method called `tokenize()` that is perfect for this task.
+Fortunately, those components are simply separated by underscores in the original filename, so we can apply a common Nextflow method called `tokenize()` that is perfect for this task.
 
 Make the following edits to the workflow:
 
@@ -1109,7 +1109,7 @@ data = [id: patientA, replicate: 1, type: normal, readNum: 1]
 println data.readNum
 ```
 
-In Groovy (the language Nextflow is built on), that's called a [map](https://www.baeldung.com/groovy-maps).
+In Nextflow, that's called a [map](https://nextflow.io/docs/latest/script.html#maps).
 
 Let's convert our flat list into a map now.
 Make the following edits to the workflow:
@@ -1156,11 +1156,11 @@ nextflow run file_operations.nf
 
     Launching `file_operations.nf` [infallible_swartz] DSL2 - revision: 7f4e68c0cb
 
-    [[id:patientA, replicate:rep1, type:normal, readNum:R2], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]
-    [[id:patientA, replicate:rep1, type:normal, readNum:R1], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz]
+    [[id:patientA, replicate:1, type:normal, readNum:2], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]
+    [[id:patientA, replicate:1, type:normal, readNum:1], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz]
     ```
 
-Now the metadata is neatly labeled (_e.g._ `[id:patientA, replicate:rep1, type:normal, readNum:R2]`) so it's a lot easier to tell what is what.
+Now the metadata is neatly labeled (_e.g._ `[id:patientA, replicate:1, type:normal, readNum:2]`) so it's a lot easier to tell what is what.
 
 It'll also be a lot easier to actually make use of elements of metadata in the workflow, and will make our code easier to read and more maintainable.
 
