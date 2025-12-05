@@ -733,7 +733,7 @@ We're going to go back to using our local example files for the rest of this sid
 ### Takeaway
 
 - Remote data is accessed using a URI (HTTP, FTP, S3, Azure, Google Cloud)
-- Nextflow will automatically download and stage the data to the right place
+- Nextflow will automatically download and stage the data to the right place, as long as these paths are being fed to processes
 - Do not write logic to download or upload remote files!
 - Local and remote files produce different object types but work identically
 - **Important**: HTTP/HTTPS only work with single files (no glob patterns)
@@ -749,7 +749,8 @@ So far we've been working with a single file at a time, but in Nextflow, we're t
 A naive way to do that would be to combine the `file()` method with [`channel.of()`](https://www.nextflow.io/docs/latest/reference/channel.html#of) like this:
 
 ```groovy title="Syntax example"
-ch_files = channel.of([file('data/patientA_rep1_normal_R1_001.fastq.gz')])
+ch_files = channel.of([file('data/patientA_rep1_normal_R1_001.fastq.gz')],
+                      [file('data/patientA_rep1_normal_R1_001.fastq.gz')])
 ```
 
 That works, but it's clunky.
@@ -808,7 +809,7 @@ nextflow run file_operations.nf
 
     Launching `file_operations.nf` [grave_meucci] DSL2 - revision: b09964a583
 
-    Found file: /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz of type class sun.nio.fs.UnixPath
+    Found file: /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz
     ```
 
 As you can see, the file path is being loading as a `Path` type object in the channel.
