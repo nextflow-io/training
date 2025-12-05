@@ -130,7 +130,7 @@ This is a mini-workflow (without any processes) that refers to a single file pat
 <details>
   <summary>What is <code>.class</code>?</summary>
 
-    In Groovy (the language Nextflow uses), <code>.class</code> tells us what type of object we're working with. It's like asking "what kind of thing is this?" to find out whether it's a string, a number, a file, or something else.
+    In Nextflow, <code>.class</code> tells us what type of object we're working with. It's like asking "what kind of thing is this?" to find out whether it's a string, a number, a file, or something else.
     This will help us illustrate the difference between a plain string and a Path object in the next sections.
 
 </details>
@@ -237,7 +237,7 @@ Let's update our workflow to print out the built-in file attributes:
 === "Before"
 
     ```groovy title="file_operations.nf" linenums="2" hl_lines="3"
-        // Create a file object from a string path
+        // Create a Path object from a string path
         myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
         println "${myFile} is of class ${myFile.class}"
     ```
@@ -387,7 +387,7 @@ As advertised, this is a small workflow with one process (`COUNT_LINES`) that is
 The <code>debug true</code> directive in the process definition causes Nextflow to print the output from your script (like the line count "40") directly in the execution log.
 Without this, you would only see the process execution status but not the actual output from your script.
 
-For more information on debugging Nextflow processes, see the <a href="./debugging.md">Debugging Nextflow Workflows</a> side quest.
+For more information on debugging Nextflow processes, see the <a href="../debugging/">Debugging Nextflow Workflows</a> side quest.
 
 </details>
 
@@ -629,7 +629,7 @@ Open `file_operations.nf` again and change the input path as follows:
 === "Before"
 
     ```groovy title="file_operations.nf" linenums="2" hl_lines="2"
-        // Create a file object from a string path
+        // Create a Path object from a string path
         myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
 
         // Print file attributes
@@ -705,7 +705,7 @@ We're going to go back to using our local example files for the rest of this sid
 === "After"
 
     ```groovy title="file_operations.nf" linenums="2" hl_lines="2"
-        // Create a file object from a string path
+        // Create a Path object from a string path
         myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
 
         // Print file attributes
