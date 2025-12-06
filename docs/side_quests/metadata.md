@@ -270,7 +270,7 @@ In Groovy, the programming language that Nextflow is built on, a map is a key-va
 
 For example:
 
-```groovy title="Groovy map"
+```groovy
 def my_map = [id:'sampleA', character:'squirrel']
 println my_map.id  // Prints: sampleA
 ```
@@ -320,7 +320,7 @@ Now that we've successfully read in the datasheet and have access to the data in
 In the current state of the workflow, the input files (under the `recording` key) and associated metadata (`id`, `character`) are all on the same footing, like they're all in one big bag.
 The practical consequence is that every process that consumes this channel would need to be configured with this structure in mind:
 
-```groovy title="Syntax example"
+```groovy
     input:
     tuple val(id), val(character), file(recording)
 ```
@@ -361,7 +361,7 @@ We've restructured our channel elements into a tuple consisting of two elements,
 
 Let's run the workflow:
 
-```bash title="View meta map"
+```bash
 nextflow run main.nf
 ```
 
@@ -386,7 +386,7 @@ Now, each element in the channel contains the metadata map first (_e.g._ `[id:sa
 As a result, adding more columns in the datasheet will make more metadata available in the `meta` map, but won't change the channel shape.
 This enables us to write processes that consume the channel without having to hard-code the metadata items into the input specification:
 
-```groovy title="Syntax example"
+```groovy
     input:
     tuple val(meta), file(recording)
 ```
@@ -548,20 +548,20 @@ This is going to take only a very small amount of code, but it's going to have a
 First, you need to know that we can merge the contents of two maps using the Groovy operator `+`.
 Let's say we have the following maps:
 
-```groovy title="Syntax example"
+```groovy
 map1 = [id: 'sampleA', character: 'squirrel']
 map2 = [lang: 'fr']
 ```
 
 We can merge them like this:
 
-```groovy title="Syntax example"
+```groovy
 new_map = map1 + map2
 ```
 
 The contents of `new_map` will be:
 
-```groovy title="Syntax example"
+```groovy
 [id: 'sampleA', character: 'squirrel', 'fr']
 ```
 
@@ -570,7 +570,7 @@ It's held in a variable called `lang_id`, and you know you want to store its val
 
 You can actually do the following:
 
-```groovy title="Syntax example"
+```groovy
 new_map = [map1 + [lang: lang_id]]
 ```
 
@@ -581,7 +581,7 @@ Neat, right?
 Now let's transpose that into the context of a Nextflow `channel.map()` operation.
 The code becomes:
 
-```groovy title="Syntax example"
+```groovy
 .map { map1, lang_id ->
     [map1 + [lang: lang_id]]
 }
@@ -601,7 +601,7 @@ Except for one thing!
 
 In the case of our workflow, we also need to account for the presence of the `file` object in the tuple, which contains `meta, file, lang_id`, so the code here would become:
 
-```groovy title="Syntax example"
+```groovy
 .map { meta, file, lang_id ->
     [meta + [lang: lang_id], file]
 }
@@ -678,7 +678,7 @@ Specifically, we're going to define a variable called `lang_group`, use some sim
 
 The general syntax is going to look like this:
 
-```groovy title="Syntax example"
+```groovy
             .map { meta, file ->
 
                 // conditional logic defining lang_group goes here
@@ -750,7 +750,7 @@ Here are the key points:
 
 Once that all makes sense, run the workflow again to see the result:
 
-```bash title="View language groups"
+```bash
 nextflow run main.nf -resume
 ```
 
