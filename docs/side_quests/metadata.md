@@ -941,6 +941,8 @@ By leveraging metadata applied to each item in a channel, you can fine-tune proc
 
 #### 3.2.1. Exploiting metadata at the workflow level
 
+<!-- TODO: will need to adapt where we discuss this based on the new order. -->
+
 In the example above, by using a property of the meta map in the script block, we introduce a hard requirement on the properties that must be present.
 Anyone running with a sample sheet that did not contain the `character` property would encounter an error.
 The process `input:` only says that the `meta` map is required, so someone trying to use this process in another workflow might not notice immediately that the `character` property was required.
@@ -987,7 +989,9 @@ This highlights an important design principle:
 Use the meta map for optional, descriptive information, but extract required values as explicit inputs.
 The meta map is excellent for keeping channel structures clean and preventing arbitrary channel structures, but for mandatory elements that are directly referenced in a process, extracting them as explicit inputs creates more robust and maintainable code.
 
-### 3.2. Use meta map information to organize results
+### 3.3. Use meta map information to organize results
+
+<!-- TODO: Adapt to change file naming instead of messing with publishDir since that will go away very soon? could still do the directory structure in the workflow outputs definitions... -->
 
 Let's run our files through `COWPY` and remove our `view` statement:
 
