@@ -436,12 +436,10 @@ Make the following edit to the workflow:
 
 You can open the module file to examine its code:
 
-```groovy title="modules/langid.nf" linenums="1" hl_lines="11 14"
+```groovy title="modules/langid.nf" linenums="1" hl_lines="9 12"
 #!/usr/bin/env nextflow
 
-/*
-* Use langid to predict the language of each input file
-*/
+// Use langid to predict the language of each input file
 process IDENTIFY_LANGUAGE {
 
     container 'community.wave.seqera.io/library/pip_langid:b2269f456a5629ff'
@@ -781,149 +779,116 @@ In this section, you've learned how to :
 - **Create custom keys**: You created two new keys in your meta map, merging them with `meta + [new_key:value]` into the existing meta map.One based on a computed value from a process, and one based on a condition you set in the `map` operator.
 
 These allow you to associate new and existing metadata with files as you progress through your pipeline.
+Even if you're not using metadata as part of a process, keeping the meta map associated with the data like this makes it easy to keep all the relevant information together.
 
 ---
 
 ## 3. Use meta map information in a process
 
-Let's make some fun characters say the phrases from the files our channel.
-In the [hello-nextflow training](../hello_nextflow/05_hello_containers.md), you already encountered the `cowpy` package, a python implementation of a tool called `cowsay` that generates ASCII art to display arbitrary text inputs in a fun way. We will re-use a process from there.
+Now that you know how to create and update the meta map, we can get to the really fun bit: actually using the metadata in a process.
 
-Copy in the process before your workflow block:
+More specifically, we're going to add a second step to our workflow to draw each animal as ASCII art and make it say the recorded text in a speech bubble.
+We're going to do this using a tool called [`cowpy`](https://github.com/jeffbuttars/cowpy).
+
+<details>
+  <summary>What does `cowpy` do?</summary>
+
+`cowpy` is a command-line tool that generates ASCII art to display arbitrary text inputs in a fun way.
+It is a python implementation of the classic [`cowsay`](https://en.wikipedia.org/wiki/Cowsay) tool by Tony Monroe.
+
+```console
+> cowpy "Hello Nextflow"
+ ______________________________________________________
+< Hello Nextflow >
+ ------------------------------------------------------
+     \   ^__^
+      \  (oo)\_______
+         (__)\       )\/\
+           ||----w |
+           ||     ||
+```
+
+Optionally, you can select a character (or 'cowacter') to use instead of the default cow.
+
+```console
+> cowpy "Hello Nextflow" -c tux
+ __________________
+< Hello Nextflow >
+ ------------------
+   \
+    \
+        .--.
+       |o_o |
+       |:_/ |
+      //   \ \
+     (|     | )
+    /'\_   _/`\
+    \___)=(___/
+```
+
+If you worked through the Hello Nextflow course, you've already seen this tool in action.
+If not, don't worry; we'll cover everything you need to know as we go.
+
+</details>
+
+### 3.1. Import the process and examine the code
+
+We provide you with a pre-written process module called `COWPY` that wraps the `cowpy` tool, so you just need to add an include statement before the workflow block.
+
+Make the following edit to the workflow:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="20"
-    /*
-     * Generate ASCII art with cowpy
-    */
-    process COWPY {
+    ```groovy title="main.nf" linenums="1" hl_lines="4"
+    #!/usr/bin/env nextflow
 
-        publishDir "results/", mode: 'copy'
+    include { IDENTIFY_LANGUAGE } from './modules/langid.nf'
+    include { COWPY } from './modules/cowpy.nf'
 
-        container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
-
-        input:
-        tuple val(meta), path(input_file)
-
-        output:
-        tuple val(meta), path("cowpy-${input_file}")
-
-        script:
-        """
-        cat $input_file | cowpy -c "stegosaurus" > cowpy-${input_file}
-        """
-
-    }
-
-    workflow{}
+    workflow {
     ```
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="20"
-    workflow{
+    ```groovy title="main.nf" linenums="1"
+    #!/usr/bin/env nextflow
+
+    include { IDENTIFY_LANGUAGE } from './modules/langid.nf'
+
+    workflow {
     ```
 
-### 3.1. Use meta map information in the process definition
+You can open the module file to examine its code:
 
-Let's run our files through `COWPY` and remove our `view` statement:
+```groovy title="modules/cowpy.nf" linenums="1" hl_lines=""
+#!/usr/bin/env nextflow
 
-=== "After"
+// Generate ASCII art with cowpy
+process COWPY {
 
-    ```groovy title="main.nf" linenums="59" hl_lines="3"
-                [ meta + [lang_group: lang_group], file ]
-            }
-        COWPY(ch_languages)
-    ```
+    publishDir "results/", mode: 'copy'
 
-=== "Before"
+    container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
 
-    ```groovy title="main.nf" linenums="59" hl_lines="3"
-                [meta + [lang_group: lang_group], file]
-            }
-            .view()
-    ```
+    input:
+    path input_file
+    val character
 
-The process definition as provided would direct results to the `results` folder, but let's make a tweak to be a little smarter.
-Given we have been trying to figure out what languages our samples were in, let's group the samples by language in the output directory.
+    output:
+    path "cowpy-${input_file}"
 
-Earlier, we added the predicted language to the `meta` map.
-We can access this `key` in the process and use it in the `publishDir` directive:
-
-=== "After"
-
-    ```groovy title="main.nf" linenums="23" hl_lines="3"
-    process COWPY {
-
-        publishDir "results/${meta.lang_group}", mode: 'copy'
-
-        container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
-    ```
-
-=== "Before"
-
-    ```groovy title="main.nf" linenums="23" hl_lines="3"
-    process COWPY {
-
-        publishDir "results/", mode: 'copy'
-
-        container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
-    ```
-
-Let's run this:
-
-```bash title="Use cowpy"
-nextflow run main.nf -resume
+    script:
+    """
+    cat ${input_file} | cowpy -c ${character} > cowpy-${input_file}
+    """
+}
 ```
 
-You should now see a new folder called `results`:
+As you can see, this process is currently designed to take an input file (containing the text to be displayed) and a value specifying the character that should be drawn in ASCII art, usually provided at the workflow level by a command-line parameter.
 
-```console title="Results folder"
-results/
-├── germanic
-│   ├── cowpy-guten_tag.txt
-│   ├── cowpy-hallo.txt
-│   └── cowpy-hello.txt
-└── romance
-    ├── cowpy-bonjour.txt
-    ├── cowpy-ciao.txt
-    ├── cowpy-hola.txt
-    └── cowpy-salut.txt
-```
+<!-- TODO Need to continue adapting the instructions from here after the reordering of steps / slight change in code and logic. -->
 
-Success! All our phrases are correctly sorted and we now see which of them correspond to which language.
-
-Let's take a look at `cowpy-salut.txt`:
-
-```console title="cowpy-salut.txt"
- ____________________
-/ Salut, ça va?      \
-\ à plus dans le bus /
- --------------------
-\                             .       .
- \                           / `.   .' "
-  \                  .---.  <    > <    >  .---.
-   \                 |    \  \ - ~ ~ - /  /    |
-         _____          ..-~             ~-..-~
-        |     |   \~~~\.'                    `./~~~/
-       ---------   \__/                        \__/
-      .'  O    \     /               /       \  "
-     (_____,    `._.'               |         }  \/~~~/
-      `----.          /       }     |        /    \__/
-            `-.      |       /      |       /      `. ,~~|
-                ~-.__|      /_ - ~ ^|      /- _      `..-'
-                     |     /        |     /     ~-.     `-. _  _  _
-                     |_____|        |_____|         ~ - . _ _ _ _ _>
-```
-
-Look through the other files.
-All phrases should be spoken by the fashionable stegosaurus.
-
-How did this work? The `publishDir` directive is evaluated at runtime when the process executes.
-Each process task gets its own meta map from the input tuple When the directive is evaluated, `${meta.lang_group}` is replaced with the actual group language value for that dataset creating the dynamic paths like `results/romance`.
-
-### 3.2. Customize the character
+### 3.2. Use meta map information to set the character
 
 In our datasheet, we have another column: `character`.
 To tailor the tool parameters per file, we can also access information from the `meta` map in the script section.
@@ -1021,6 +986,104 @@ Then, at the workflow level, we extract the `character` property from the metada
 This highlights an important design principle:
 Use the meta map for optional, descriptive information, but extract required values as explicit inputs.
 The meta map is excellent for keeping channel structures clean and preventing arbitrary channel structures, but for mandatory elements that are directly referenced in a process, extracting them as explicit inputs creates more robust and maintainable code.
+
+### 3.2. Use meta map information to organize results
+
+Let's run our files through `COWPY` and remove our `view` statement:
+
+=== "After"
+
+    ```groovy title="main.nf" linenums="59" hl_lines="3"
+                [ meta + [lang_group: lang_group], file ]
+            }
+        COWPY(ch_languages)
+    ```
+
+=== "Before"
+
+    ```groovy title="main.nf" linenums="59" hl_lines="3"
+                [meta + [lang_group: lang_group], file]
+            }
+            .view()
+    ```
+
+The process definition as provided would direct results to the `results` folder, but let's make a tweak to be a little smarter.
+Given we have been trying to figure out what languages our samples were in, let's group the samples by language in the output directory.
+
+Earlier, we added the predicted language to the `meta` map.
+We can access this `key` in the process and use it in the `publishDir` directive:
+
+=== "After"
+
+    ```groovy title="main.nf" linenums="23" hl_lines="3"
+    process COWPY {
+
+        publishDir "results/${meta.lang_group}", mode: 'copy'
+
+        container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
+    ```
+
+=== "Before"
+
+    ```groovy title="main.nf" linenums="23" hl_lines="3"
+    process COWPY {
+
+        publishDir "results/", mode: 'copy'
+
+        container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
+    ```
+
+Let's run this:
+
+```bash title="Use cowpy"
+nextflow run main.nf -resume
+```
+
+You should now see a new folder called `results`:
+
+```console title="Results folder"
+results/
+├── germanic
+│   ├── cowpy-guten_tag.txt
+│   ├── cowpy-hallo.txt
+│   └── cowpy-hello.txt
+└── romance
+    ├── cowpy-bonjour.txt
+    ├── cowpy-ciao.txt
+    ├── cowpy-hola.txt
+    └── cowpy-salut.txt
+```
+
+Success! All our phrases are correctly sorted and we now see which of them correspond to which language.
+
+Let's take a look at `cowpy-salut.txt`:
+
+```console title="cowpy-salut.txt"
+ ____________________
+/ Salut, ça va?      \
+\ à plus dans le bus /
+ --------------------
+\                             .       .
+ \                           / `.   .' "
+  \                  .---.  <    > <    >  .---.
+   \                 |    \  \ - ~ ~ - /  /    |
+         _____          ..-~             ~-..-~
+        |     |   \~~~\.'                    `./~~~/
+       ---------   \__/                        \__/
+      .'  O    \     /               /       \  "
+     (_____,    `._.'               |         }  \/~~~/
+      `----.          /       }     |        /    \__/
+            `-.      |       /      |       /      `. ,~~|
+                ~-.__|      /_ - ~ ^|      /- _      `..-'
+                     |     /        |     /     ~-.     `-. _  _  _
+                     |_____|        |_____|         ~ - . _ _ _ _ _>
+```
+
+Look through the other files.
+All phrases should be spoken by the fashionable stegosaurus.
+
+How did this work? The `publishDir` directive is evaluated at runtime when the process executes.
+Each process task gets its own meta map from the input tuple When the directive is evaluated, `${meta.lang_group}` is replaced with the actual group language value for that dataset creating the dynamic paths like `results/romance`.
 
 ### Takeaway
 

@@ -1,8 +1,6 @@
 #!/usr/bin/env nextflow
 
-/*
-* Use langid to predict the language of each input file
-*/
+// Use langid to predict the language of each input file
 process IDENTIFY_LANGUAGE {
 
     container 'community.wave.seqera.io/library/pip_langid:b2269f456a5629ff'
