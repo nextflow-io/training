@@ -783,7 +783,7 @@ Even if you're not using metadata as part of a process, keeping the meta map ass
 
 ---
 
-## 3. Use meta map information in a process
+## 3. Using meta map information in a process
 
 Now that you know how to create and update the meta map, we can get to the really fun bit: actually using the metadata in a process.
 
@@ -886,208 +886,445 @@ process COWPY {
 
 As you can see, this process is currently designed to take an input file (containing the text to be displayed) and a value specifying the character that should be drawn in ASCII art, usually provided at the workflow level by a command-line parameter.
 
-<!-- TODO Need to continue adapting the instructions from here after the reordering of steps / slight change in code and logic. -->
+### 3.2. Pass a meta map field as an input
 
-### 3.2. Use meta map information to set the character
+When we used the `cowpy` tool in the Hello Nextflow course, we used a command-line parameter to determine what character to use to draw the final image.
+That made sense, because we were only generating one image per run of the pipeline.
+However, in this tutorial, we want to generate an appropriate image for each subject that we're processing, so using a command-line parameter would be too limiting.
 
-In our datasheet, we have another column: `character`.
-To tailor the tool parameters per file, we can also access information from the `meta` map in the script section.
-This is really useful in cases where a tool should have different parameters for each file.
+Good news: we have a `character` column in our datasheet and therefore, in our meta map.
+Let's use that to set the character that the process should use for each entry.
 
-Let's customize the characters by changing the `cowpy` command:
+To that end, we'll need to do three things:
+
+1. Give a name to the output channel coming out of the previous process so we can operate on it more conveniently.
+2. Determine how to access the information of interest
+3. Add a call to the second process and feed in the information appropriately.
+
+#### 3.2.1. Name the previous output channel
+
+We applied the previous manipulations directly on the output channel of the first process, `IDENTIFY_LANGUAGE.out`.
+In order to feed the contents of that channel to the next process (and do so in a way that is clear and easy to read) we want to give it its own name, `ch_languages`.
+
+We can do that using the [`set`](https://www.nextflow.io/docs/latest/reference/operator.html#set) operator.
+
+In the main workflow, replace the `.view()` operator with `.set { ch_languages }`, and add a line testing that we can refer to the channel by name.
 
 === "After"
 
-    ```groovy title="main.nf" linenums="37" hl_lines="3"
-        script:
-        """
-        cat $input_file | cowpy -c ${meta.character} > cowpy-${input_file}
-        """
+    ```groovy title="main.nf" linenums="14" hl_lines="7-19"
+        // Run langid to identify the language of each greeting
+        IDENTIFY_LANGUAGE(ch_datasheet)
+        IDENTIFY_LANGUAGE.out
+            .map { meta, file, lang_id ->
+                [meta + [lang: lang_id], file]
+            }
+            .map { meta, file ->
+
+                def lang_group = "unknown"
+                if (meta.lang.equals("de") || meta.lang.equals('en')) {
+                    lang_group = "germanic"
+                }
+                else if (meta.lang in ["fr", "es", "it"]) {
+                    lang_group = "romance"
+                }
+
+                [meta + [lang_group: lang_group], file]
+            }
+            .set { ch_languages }
+
+        // Temporary: peek into ch_languages
+        ch_languages.view()
     ```
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="37"
-        script:
-        """
-        cat $input_file | cowpy -c "stegosaurus" > cowpy-${input_file}
-        """
+    ```groovy title="main.nf" linenums="14" hl_lines="7-19"
+        // Run langid to identify the language of each greeting
+        IDENTIFY_LANGUAGE(ch_datasheet)
+        IDENTIFY_LANGUAGE.out
+            .map { meta, file, lang_id ->
+                [meta + [lang: lang_id], file]
+            }
+            .map { meta, file ->
+
+                def lang_group = "unknown"
+                if (meta.lang.equals("de") || meta.lang.equals('en')) {
+                    lang_group = "germanic"
+                }
+                else if (meta.lang in ["fr", "es", "it"]) {
+                    lang_group = "romance"
+                }
+
+                [meta + [lang_group: lang_group], file]
+            }
+            .view()
     ```
 
 Let's run this:
 
-```bash title="Use cowpy"
-nextflow run main.nf -resume
+```bash
+nextflow run main.nf
 ```
 
-and take another look at our french phrase:
+??? example "Output"
 
-```console title="romance/cowpy-salut.txt"
- ____________________
-/ Salut, ça va?      \
-\ à plus dans le bus /
- --------------------
-  \
-   \   \_\_    _/_/
-    \      \__/
-           (oo)\_______
-           (__)\       )\/\
-               ||----w |
-               ||     ||
-```
+    ```console
+     N E X T F L O W   ~  version 25.04.3
 
-This approach differs from using pipeline parameters (`params`), which generally apply the same configuration to all files in your workflow.
-By leveraging metadata applied to each item in a channel, you can fine-tune process behavior on a per-file basis.
+    Launching `./main.nf` [friendly_austin] DSL2 - revision: 3dbe460fd6
 
-#### 3.2.1. Exploiting metadata at the workflow level
+    [36/cca6a7] IDENTIFY_LANGUAGE (7) | 7 of 7 ✔
+    [[id:sampleB, character:tux, lang:de, lang_group:germanic], /workspaces/training/side-quests/metadata/work/e2/6db2402d83cf72081bcd2d11784714/guten_tag.txt]
+    [[id:sampleA, character:squirrel, lang:fr, lang_group:romance], /workspaces/training/side-quests/metadata/work/6c/114c818317d169457d6e7336d5d55b/bonjour.txt]
+    [[id:sampleC, character:sheep, lang:de, lang_group:germanic], /workspaces/training/side-quests/metadata/work/55/68c69c5efb527f3604ddb3daab8057/hallo.txt]
+    [[id:sampleD, character:turkey, lang:en, lang_group:germanic], /workspaces/training/side-quests/metadata/work/2a/4752055ccb5d1370b0ef9da41d3993/hello.txt]
+    [[id:sampleE, character:stegosaurus, lang:es, lang_group:romance], /workspaces/training/side-quests/metadata/work/f4/fcd3186dc666d5d239ffa6c37d125d/hola.txt]
+    [[id:sampleF, character:moose, lang:fr, lang_group:romance], /workspaces/training/side-quests/metadata/work/c3/3b2627f733f278a7088332a5806108/salut.txt]
+    [[id:sampleG, character:turtle, lang:it, lang_group:romance], /workspaces/training/side-quests/metadata/work/36/cca6a7dbfa26ac24f9329787a32e9d/ciao.txt]
+    ```
 
-<!-- TODO: will need to adapt where we discuss this based on the new order. -->
+This confirms we can now refer to the channel by name.
 
-In the example above, by using a property of the meta map in the script block, we introduce a hard requirement on the properties that must be present.
-Anyone running with a sample sheet that did not contain the `character` property would encounter an error.
-The process `input:` only says that the `meta` map is required, so someone trying to use this process in another workflow might not notice immediately that the `character` property was required.
+#### 3.2.2. Access the file and character metadata
 
-A better approach is to make the required metadata property an explicit input rather than accessing it from within the meta map. This makes the requirement clear and provides better error messages.
-Here's how to refactor the COWPY process:
+We know from looking at the module code that the `COWPY` process expects to be given a text file and a `character` value.
+To write the call to the `COWPY` process call, we just need to know how to extract the corresponding file object and metadata from each element in the channel.
+
+As is often the case, the simplest way to do that is to use a `map` operation.
+
+Our channel contains tuples structured as `[meta, file]`, so we can access the `file` object directly, and we can access the `character` value stored inside the meta map by referring to it as `meta.character`.
+
+In the main workflow, make the following code changes:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="30" hl_lines="2"
+    ```groovy title="main.nf" linenums="34"
+        // Temporary: access the file and character
+        ch_languages.map { meta, file -> file } .view()
+        ch_languages.map { meta, file -> meta.character } .view()
+    ```
+
+=== "Before"
+
+    ```groovy title="main.nf" linenums="34"
+        // Temporary: peek into ch_languages
+        ch_languages.view()
+    ```
+
+Let's run this:
+
+```bash
+nextflow run main.nf
+```
+
+??? example "Output"
+
+    ```console
+     N E X T F L O W   ~  version 25.04.3
+
+    Launching `./main.nf` [cheesy_cantor] DSL2 - revision: 15af9c1ec7
+
+    [23/1c1798] IDENTIFY_LANGUAGE (7) [100%] 7 of 7 ✔
+    tux
+    /workspaces/training/side-quests/metadata/work/2d/7c611dd93f9090da9b1b2e02548395/guten_tag.txt
+    /workspaces/training/side-quests/metadata/work/3e/90c91eb3898d24653083a3f15d96ad/bonjour.txt
+    squirrel
+    turkey
+    /workspaces/training/side-quests/metadata/work/8e/1f624876add21fa9113f283134fda1/hello.txt
+    sheep
+    /workspaces/training/side-quests/metadata/work/ab/5b7d72250283d1ce6a6a927621d2d1/hallo.txt
+    moose
+    /workspaces/training/side-quests/metadata/work/0c/6e1cd4ee97205324409c515568de3b/salut.txt
+    /workspaces/training/side-quests/metadata/work/6e/32e65e6cd8db007fcb8a9e85b34d1d/hola.txt
+    stegosaurus
+    /workspaces/training/side-quests/metadata/work/23/1c1798c05be863ee7ccabd49d891b2/ciao.txt
+    turtle
+    ```
+
+    *The file paths and character values may come out in a different order in your output.*
+
+This confirms we're able to access the file and the character for each element in the channel.
+
+#### 3.2.3. Call the process
+
+Now let's put it all together and actually call the `COWPY` process on the `ch_languages` channel.
+
+In the main workflow, make the following code changes:
+
+=== "After"
+
+    ```groovy title="main.nf" linenums="34"
+        // Run cowpy to generate ASCII art
+        COWPY(
+            ch_languages.map { meta, file -> file },
+            ch_languages.map { meta, file -> meta.character }
+        )
+    ```
+
+=== "Before"
+
+    ```groovy title="main.nf" linenums="34"
+        // Temporary: access the file and character
+        ch_languages.map { meta, file -> [file, meta.character] }
+            .view()
+    ```
+
+You see we simply copy the two map operations (minus the `.view()` statements) as the inputs to the process call.
+Just make sure you don't forget the comma between them!
+
+In case you're wondering, we can't just write a single map operation that outputs both the file and the character because that would return a tuple.
+We need to write them separately so we can feed them to the process separately.
+It's a bit clunky, but we'll see how to make that better in the next section.
+
+Let's run this:
+
+```bash
+nextflow run main.nf -resume
+```
+
+??? example "Output"
+
+    ```console
+     N E X T F L O W   ~  version 25.04.3
+
+    Launching `./main.nf` [naughty_lamarr] DSL2 - revision: 0dfeee3cc1
+
+    executor >  local (14)
+    [dd/68fd08] IDENTIFY_LANGUAGE (7) | 7 of 7 ✔
+    [d3/c0f8a5] COWPY (7)             | 7 of 7 ✔
+    ```
+
+If you look in the results directory, you should see the individual files containing the ASCII art of each greeting spoken by the corresponding character.
+
+??? example "Directory contents"
+
+    ```console
+    results/
+    ├── cowpy-bonjour.txt
+    ├── cowpy-ciao.txt
+    ├── cowpy-guten_tag.txt
+    ├── cowpy-hallo.txt
+    ├── cowpy-hello.txt
+    ├── cowpy-hola.txt
+    └── cowpy-salut.txt
+
+    0 directories, 7 files
+    ```
+
+    ```text title="cowpy-bonjour.txt"
+     _________________
+    / Bonjour         \
+    \ Salut, à demain /
+    -----------------
+      \
+        \
+                      _ _
+          | \__/|  .~    ~.
+          /oo `./      .'
+          {o__,   \    {
+            / .  . )    \
+            `-` '-' \    }
+          .(   _(   )_.'
+          '---.~_ _ _|
+    ```
+
+This shows we were able to use the information in the meta map to parameterize the command in the second step of the pipeline.
+
+However, as noted above, some of the code involved was a bit clunky, since we had to unpack meta data while still in the context of the workflow body.
+This approach works fine for using a small number of fields from the meta map, but would scale poorly if we wanted to use a lot more.
+
+It would be better if we could feed the entire meta map into the process and pick what we needed once there.
+
+### 3.3. Pass and use the entire meta map
+
+The point of the meta map is after all to pass all the metadata together as a bundle.
+The only reason we couldn't do that above is that the process is not set up to accept a meta map.
+But since we control the process code, we can change that.
+
+Let's modify the `COWPY` process to accept the `[meta, file]` tuple structure that we used in the first process so we can streamline the workflow.
+
+To that end, we'll need to do three things:
+
+1. Modify the `COWPY` process module's input definitions
+2. Update the process command to use the meta map
+3. Update the process call in the workflow body
+
+#### 3.3.1. Modify the `COWPY` module input
+
+Make the following edits to the `cowpy.nf` module file:
+
+=== "After"
+
+    ```groovy title="cowpy.nf" linenums="12" hl_lines="2"
+    input:
+    tuple val(meta), path(input_file)
+    ```
+
+=== "Before"
+
+    ```groovy title="cowpy.nf" linenums="12" hl_lines="2-3"
+    input:
+    path(input_file)
+    val character
+    ```
+
+This enables us to use the `[meta, file]` tuple structure we covered earlier in the tutorial.
+
+Note that we did not update the process output definition to output the meta map, in order to keep the tutorial streamlined, but feel free do that yourself as an exercise following the model of the `LANGID` process.
+
+#### 3.3.2. Update the command to use the meta map field
+
+The entire meta map is now available inside the process, so we can refer to the information it contains directly from inside the command block.
+
+Make the following edits to the `cowpy.nf` module file:
+
+=== "After"
+
+    ```groovy title="cowpy.nf" linenums="18" hl_lines="3"
+    script:
+    """
+    cat ${input_file} | cowpy -c ${meta.character} > cowpy-${input_file}
+    """
+    ```
+
+=== "Before"
+
+    ```groovy title="cowpy.nf" linenums="18" hl_lines="3"
+    script:
+    """
+    cat ${input_file} | cowpy -c ${character} > cowpy-${input_file}
+    """
+    ```
+
+We've replaced the reference to the `character` value previously passed as a standalone input with the value held in the meta map, which we refer to using `meta.character`.
+
+Simple and elegant, right? Let's update the process call accordingly.
+
+#### 3.3.3. Update the process call and run it
+
+The process now expects its input to use the `[meta, file]` tuple structure, which is what the previous process outputs, so we can simply pass the whole `ch_languages` channel to the `COWPY` process.
+
+Make the following edits to the main workflow:
+
+=== "After"
+
+    ```groovy title="main.nf" linenums="36" hl_lines="2"
+    // Run cowpy to generate ASCII art
+    COWPY(ch_languages)
+    ```
+
+=== "Before"
+
+    ```groovy title="main.nf" linenums="36" hl_lines="3-4"
+    // Run cowpy to generate ASCII art
+    COWPY(
+        ch_languages.map { meta, file -> file },
+        ch_languages.map { meta, file -> meta.character }
+    )
+    ```
+
+That simplifies the call significantly!
+
+Let's delete the results of the previous execution and run it:
+
+```bash
+rm -r results
+nextflow run main.nf
+```
+
+??? example "Output"
+
+    ```console
+     N E X T F L O W   ~  version 25.04.3
+
+    TODO: RUN AND FILL OUT
+    ```
+
+If you look in the results directory, you should see the same outputs as previously, _i.e._ individual files containing the ASCII art of each greeting spoken by the corresponding character.
+
+??? example "Directory contents"
+
+    ```console
+    TODO: RUN AND FILL OUT
+    ```
+
+This provides
+
+Of course, this assumes you are able to modify the process code.
+In some cases, you may have to rely on existing processes that you're not at liberty to modify, which limits your options.
+The good news, if you're planning to use modules from the [nf-core](https://nf-co.re/) project, is that nf-core modules are all set up to use the `[meta, file]` tuple structure as a standard.
+
+### 3.4 Note on enforcing required inputs
+
+The `character` value is required for the `COWPY` process to run successfully.
+If we do not set a default value for it in a configuration file, we MUST provide a value for it in the datasheet.
+
+What happens if we do not?
+It depends on which version of the workflow we're running.
+
+If we're using the version in section 3.2, Nextflow will attempt to access the `character` value BEFORE calling the `COWPY` process and will fail with a clear error telling us the process input requirement was not satisfied.
+
+<!-- TODO (future): provide the error message -->
+
+If we're using the version in section 3.3, Nextflow will happily pass the meta map to the process, and attempt to run the command.
+This will fail with a different error.
+
+<!-- TODO (future): provide the error message -->
+
+This should give you pause.
+It's almost always better to fail sooner rather than later, and yet we do prefer the approach of passing the entire meta map to the process.
+
+So how should we handle this?
+
+Aside from supplying a default value, which we don't want to do in this context, there are two things you can do (and yes you can do both):
+
+1. If you're only concerned about making sure your own pipeline will behave correct, implement input validation to your workflow to ensure that the datasheet contains all the required information. <!-- TODO: add link to validation part of Hello nf-core pending a proper Validation side quest -->
+
+2. If you want to make sure anyone who uses your process module can immediately identify required inputs, modify the `[meta, file]` tuple to make the required metadata property an explicit input rather than accessing it from within the meta map.
+
+Here's an example of how that second option would work.
+
+First, at the process level, update the input definition as follows:
+
+=== "After"
+
+    ```groovy title="cowpy.nf" linenums="12" hl_lines="2"
         input:
         tuple val(meta), val(character), path(input_file)
     ```
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="30" hl_lines="2"
+    ```groovy title="cowpy.nf" linenums="12" hl_lines="2"
         input:
         tuple val(meta), path(input_file)
     ```
 
-Then, at the workflow level, we extract the `character` property from the metadata and pass it as a separate input:
+Then, at the workflow level, use a mapping operation to extract the `character` property from the metadata and make it an explicit component of the tuple:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="61" hl_lines="1"
+    ```groovy title="main.nf" linenums="37" hl_lines="1"
         COWPY(ch_languages.map{meta, file -> [meta, meta.character, file]})
     ```
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="61" hl_lines="1"
+    ```groovy title="main.nf" linenums="37" hl_lines="1"
         COWPY(ch_languages)
     ```
 
-**Why this approach is better:**
+**How this approach helps:**
 
-1. **Clear Requirements**: The process input explicitly shows that `character` is required
-2. **Better Error Messages**: If `character` is missing, Nextflow will fail at the input stage with a clear error
-3. **Self-Documenting**: Anyone using this process can immediately see what inputs are needed
-4. **Reusable**: The process is easier to redeploy in other contexts
+1. **Clear Requirements**: The process input explicitly shows that `character` is required.
+2. **Better Error Messages**: If `character` is missing, Nextflow will fail at the input stage with a clear error.
+3. **Self-Documenting**: Anyone using this process can immediately see what inputs are needed.
+4. **Reusable**: The process is easier to redeploy in other contexts.
 
 This highlights an important design principle:
 Use the meta map for optional, descriptive information, but extract required values as explicit inputs.
 The meta map is excellent for keeping channel structures clean and preventing arbitrary channel structures, but for mandatory elements that are directly referenced in a process, extracting them as explicit inputs creates more robust and maintainable code.
-
-### 3.3. Use meta map information to organize results
-
-<!-- TODO: Adapt to change file naming instead of messing with publishDir since that will go away very soon? could still do the directory structure in the workflow outputs definitions... -->
-
-Let's run our files through `COWPY` and remove our `view` statement:
-
-=== "After"
-
-    ```groovy title="main.nf" linenums="59" hl_lines="3"
-                [ meta + [lang_group: lang_group], file ]
-            }
-        COWPY(ch_languages)
-    ```
-
-=== "Before"
-
-    ```groovy title="main.nf" linenums="59" hl_lines="3"
-                [meta + [lang_group: lang_group], file]
-            }
-            .view()
-    ```
-
-The process definition as provided would direct results to the `results` folder, but let's make a tweak to be a little smarter.
-Given we have been trying to figure out what languages our samples were in, let's group the samples by language in the output directory.
-
-Earlier, we added the predicted language to the `meta` map.
-We can access this `key` in the process and use it in the `publishDir` directive:
-
-=== "After"
-
-    ```groovy title="main.nf" linenums="23" hl_lines="3"
-    process COWPY {
-
-        publishDir "results/${meta.lang_group}", mode: 'copy'
-
-        container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
-    ```
-
-=== "Before"
-
-    ```groovy title="main.nf" linenums="23" hl_lines="3"
-    process COWPY {
-
-        publishDir "results/", mode: 'copy'
-
-        container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
-    ```
-
-Let's run this:
-
-```bash title="Use cowpy"
-nextflow run main.nf -resume
-```
-
-You should now see a new folder called `results`:
-
-```console title="Results folder"
-results/
-├── germanic
-│   ├── cowpy-guten_tag.txt
-│   ├── cowpy-hallo.txt
-│   └── cowpy-hello.txt
-└── romance
-    ├── cowpy-bonjour.txt
-    ├── cowpy-ciao.txt
-    ├── cowpy-hola.txt
-    └── cowpy-salut.txt
-```
-
-Success! All our phrases are correctly sorted and we now see which of them correspond to which language.
-
-Let's take a look at `cowpy-salut.txt`:
-
-```console title="cowpy-salut.txt"
- ____________________
-/ Salut, ça va?      \
-\ à plus dans le bus /
- --------------------
-\                             .       .
- \                           / `.   .' "
-  \                  .---.  <    > <    >  .---.
-   \                 |    \  \ - ~ ~ - /  /    |
-         _____          ..-~             ~-..-~
-        |     |   \~~~\.'                    `./~~~/
-       ---------   \__/                        \__/
-      .'  O    \     /               /       \  "
-     (_____,    `._.'               |         }  \/~~~/
-      `----.          /       }     |        /    \__/
-            `-.      |       /      |       /      `. ,~~|
-                ~-.__|      /_ - ~ ^|      /- _      `..-'
-                     |     /        |     /     ~-.     `-. _  _  _
-                     |_____|        |_____|         ~ - . _ _ _ _ _>
-```
-
-Look through the other files.
-All phrases should be spoken by the fashionable stegosaurus.
-
-How did this work? The `publishDir` directive is evaluated at runtime when the process executes.
-Each process task gets its own meta map from the input tuple When the directive is evaluated, `${meta.lang_group}` is replaced with the actual group language value for that dataset creating the dynamic paths like `results/romance`.
 
 ### Takeaway
 
@@ -1096,6 +1333,31 @@ In this section, you've learned how to:
 - **Tweak directives using meta values**: Using meta map values in `publishDir` directives to create dynamic output paths based on the file's metadata
 
 - **Tweak the script section based on meta values**: Customizing tool parameters per file using meta information in the `script` section
+
+---
+
+## Supplemental exercise
+
+If you'd like to practice using meta map information from inside a process, try using other pieces of information from the meta map such as `lang` and `lang_group` to customize how the outputs are named and/or organized.
+
+For example, try to modify the code to produce this result:
+
+```console title="Results directory contents"
+results/
+├── germanic
+│   ├── de-guten_tag.txt
+│   ├── de-hallo.txt
+│   └── en-hello.txt
+└── romance
+    ├── es-hola.txt
+    ├── fr-bonjour.txt
+    ├── fr-salut.txt
+    └── it-ciao.txt
+```
+
+<!-- TODO (future) Provide worked out solution -->
+<!-- the renaming should use the meta inside the process -->
+<!-- the output org should use the meta in the workflow outputs -->
 
 ---
 

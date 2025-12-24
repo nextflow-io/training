@@ -5,7 +5,7 @@
 */
 process COWPY {
 
-    publishDir "results/${meta.lang_group}", mode: 'copy'
+    publishDir "results/", mode: 'copy'
 
     container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
 
@@ -13,7 +13,7 @@ process COWPY {
     tuple val(meta), path(input_file)
 
     output:
-    tuple val(meta), path("cowpy-${input_file}")
+    path "cowpy-${input_file}"
 
     script:
     """
