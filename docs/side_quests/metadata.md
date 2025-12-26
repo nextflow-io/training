@@ -939,7 +939,7 @@ In the main workflow, replace the `.view()` operator with `.set { ch_languages }
 
 === "After"
 
-    ```groovy title="main.nf" linenums="14" hl_lines="19 34 35"
+    ```groovy title="main.nf" linenums="14" hl_lines="19 21 22"
         // Run langid to identify the language of each greeting
         IDENTIFY_LANGUAGE(ch_datasheet)
         IDENTIFY_LANGUAGE.out
@@ -1324,7 +1324,7 @@ This will cause an error.
 
 ??? example "Output"
 
-    ```console hl_lines="8 13 25"
+    ```console hl_lines="8 11 16 28"
     N E X T F L O W   ~  version 25.04.3
 
     Launching `main.nf` [marvelous_hirsch] DSL2 - revision: 0dfeee3cc1
@@ -1390,15 +1390,17 @@ If we're using the version of the code we wrote in section 3.2, Nextflow will at
 
 It will not find any elements that match the instruction, so it will not run `COWPY` at all.
 
-```console title="Output"
- N E X T F L O W   ~  version 25.04.3
+??? example "Output"
 
-Launching `main.nf` [desperate_montalcini] DSL2 - revision: 0dfeee3cc1
+    ```console hl_lines="7"
+    N E X T F L O W   ~  version 25.04.3
 
-executor >  local (7)
-[1a/df2544] process > IDENTIFY_LANGUAGE (7) [100%] 7 of 7 ✔
-[-        ] process > COWPY                 -
-```
+    Launching `main.nf` [desperate_montalcini] DSL2 - revision: 0dfeee3cc1
+
+    executor >  local (7)
+    [1a/df2544] process > IDENTIFY_LANGUAGE (7) [100%] 7 of 7 ✔
+    [-        ] process > COWPY                 -
+    ```
 
 As far as Nextflow is concerned, this workflow ran successfully!
 
@@ -1408,55 +1410,64 @@ If we're using the version in section 3.3, Nextflow will pass the entire meta ma
 
 This will cause an error, but a different one compared to the first case.
 
-```console title="Error message" hl_lines="4 9"
-ERROR ~ Error executing process > 'COWPY (2)'
+??? example "Output"
 
-Caused by:
-  Process `COWPY (2)` terminated with an error exit status (1)
+    ```console hl_lines="8 11 16"
+     N E X T F L O W   ~  version 25.04.3
+
+    Launching `main.nf` [jovial_bohr] DSL2 - revision: eaaf375827
+
+    executor >  local (9)
+    [0d/ada9db] process > IDENTIFY_LANGUAGE (5) [ 85%] 6 of 7
+    [06/28065f] process > COWPY (2)             [  0%] 0 of 6
+    ERROR ~ Error executing process > 'COWPY (2)'
+
+    Caused by:
+      Process `COWPY (2)` terminated with an error exit status (1)
 
 
-Command executed:
+    Command executed:
 
-  cat guten_tag.txt | cowpy -c null > cowpy-guten_tag.txt
+      cat guten_tag.txt | cowpy -c null > cowpy-guten_tag.txt
 
-Command exit status:
-  1
+    Command exit status:
+      1
 
-Command output:
-  (empty)
+    Command output:
+      (empty)
 
-Command error:
-  Traceback (most recent call last):
-    File "/opt/conda/bin/cowpy", line 10, in <module>
-      sys.exit(main())
-               ~~~~^^
-    File "/opt/conda/lib/python3.13/site-packages/cowpy/cow.py", line 1215, in main
-      print(cow(eyes=args.eyes,
-            ~~~^^^^^^^^^^^^^^^^
-            tongue=args.tongue,
-            ^^^^^^^^^^^^^^^^^^^
-            thoughts=args.thoughts
-            ^^^^^^^^^^^^^^^^^^^^^^
-                ).milk(msg)
-                ^
-  TypeError: 'str' object is not callable
+    Command error:
+      Traceback (most recent call last):
+        File "/opt/conda/bin/cowpy", line 10, in <module>
+          sys.exit(main())
+                  ~~~~^^
+        File "/opt/conda/lib/python3.13/site-packages/cowpy/cow.py", line 1215, in main
+          print(cow(eyes=args.eyes,
+                ~~~^^^^^^^^^^^^^^^^
+                tongue=args.tongue,
+                ^^^^^^^^^^^^^^^^^^^
+                thoughts=args.thoughts
+                ^^^^^^^^^^^^^^^^^^^^^^
+                    ).milk(msg)
+                    ^
+      TypeError: 'str' object is not callable
 
-Work dir:
-  /workspaces/training/side-quests/metadata/work/ed/e0bc0c7d9fd7d22bba084aa941b6d6
+    Work dir:
+      /workspaces/training/side-quests/metadata/work/06/28065f7d9fd7d22bba084aa941b6d6
 
-Container:
-  community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273
+    Container:
+      community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273
 
-Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
+    Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
 
- -- Check '.nextflow.log' file for details
-```
+    -- Check '.nextflow.log' file for details
+    ```
 
 This happens because `meta.character` does not exist, so our attempt to access it returns `null`. As a result, Nextflow literally plugs in `null` into the command-line, which is of course not recognized by the `cowpy` tool.
 
 #### 3.4.3. Solutions
 
-Aside from supplying a default value as part of the workflow configuration, there are two things we can do to handle this robustly:
+Aside from supplying a default value as part of the workflow configuration, there are two things we can do to handle this more robustly:
 
 1. Implement input validation to your workflow to ensure that the datasheet contains all the required information. You can find an [introduction to input validation](../hello_nf-core/05_input_validation.md) in the Hello nf-core training course. <!-- pending a proper Validation side quest -->
 
