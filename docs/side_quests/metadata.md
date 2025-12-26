@@ -1402,7 +1402,7 @@ executor >  local (7)
 
 As far as Nextflow is concerned, this workflow ran successfully!
 
-##### 3.4.2.1. Value accessed at the process level
+##### 3.4.2.2. Value accessed at the process level
 
 If we're using the version in section 3.3, Nextflow will pass the entire meta map to the `COWPY` process and attempt to run the command.
 
