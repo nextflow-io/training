@@ -1255,7 +1255,7 @@ Of course, this assumes you are able to modify the process code.
 In some cases, you may have to rely on existing processes that you're not at liberty to modify, which limits your options.
 The good news, if you're planning to use modules from the [nf-core](https://nf-co.re/) project, is that nf-core modules are all set up to use the `[meta, file]` tuple structure as a standard.
 
-### 3.4 Note on enforcing required inputs
+### 3.4. Note on enforcing required inputs
 
 The `character` value is required for the `COWPY` process to run successfully.
 If we do not set a default value for it in a configuration file, we MUST provide a value for it in the datasheet.
