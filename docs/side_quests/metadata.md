@@ -815,7 +815,7 @@ We're going to do this using a tool called [`cowpy`](https://github.com/jeffbutt
 It is a python implementation of the classic <a href='https://en.wikipedia.org/wiki/Cowsay'><code>cowsay</code></a> tool by Tony Monroe.
 
 ```console
-> cowpy "Hello Nextflow"
+cowpy "Hello Nextflow"
 ```
 
 ```console
@@ -832,7 +832,7 @@ It is a python implementation of the classic <a href='https://en.wikipedia.org/w
 Optionally, you can select a character (or 'cowacter') to use instead of the default cow.
 
 ```console
-> cowpy "Hello Nextflow" -c tux
+cowpy "Hello Nextflow" -c tux
 ```
 
 ```console
@@ -926,6 +926,8 @@ To that end, we'll need to do three things:
 2. Determine how to access the information of interest
 3. Add a call to the second process and feed in the information appropriately.
 
+Let's get started.
+
 #### 3.2.1. Name the previous output channel
 
 We applied the previous manipulations directly on the output channel of the first process, `IDENTIFY_LANGUAGE.out`.
@@ -937,7 +939,7 @@ In the main workflow, replace the `.view()` operator with `.set { ch_languages }
 
 === "After"
 
-    ```groovy title="main.nf" linenums="14" hl_lines="7-19"
+    ```groovy title="main.nf" linenums="14" hl_lines="19 34 35"
         // Run langid to identify the language of each greeting
         IDENTIFY_LANGUAGE(ch_datasheet)
         IDENTIFY_LANGUAGE.out
@@ -964,7 +966,7 @@ In the main workflow, replace the `.view()` operator with `.set { ch_languages }
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="14" hl_lines="7-19"
+    ```groovy title="main.nf" linenums="14" hl_lines="19"
         // Run langid to identify the language of each greeting
         IDENTIFY_LANGUAGE(ch_datasheet)
         IDENTIFY_LANGUAGE.out
@@ -1067,7 +1069,7 @@ nextflow run main.nf
     turtle
     ```
 
-    *The file paths and character values may come out in a different order in your output.*
+_The file paths and character values may come out in a different order in your output._
 
 This confirms we're able to access the file and the character for each element in the channel.
 
