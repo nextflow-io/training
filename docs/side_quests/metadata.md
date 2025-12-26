@@ -205,6 +205,49 @@ Each map entry corresponds to a column in our datasheet:
 This is great! It makes it easy to access specific fields from each file.
 For example, we could access the file ID with `id` or the txt file path with `recording`.
 
+<details>
+  <summary>(Optional) More about maps</summary>
+
+In Groovy, the programming language that Nextflow is built on, a map is a key-value data structure similar to dictionaries in Python, objects in JavaScript, or hashes in Ruby.
+
+Here's a runnable script that shows how you can define a map and access its contents in practice:
+
+```groovy title="examples/map_demo.nf"
+#!/usr/bin/env nextflow
+
+// Create a simple map
+def my_map = [id:'sampleA', character:'squirrel']
+
+// Print the whole map
+println "map: ${my_map}"
+
+// Access individual values using dot notation
+println "id: ${my_map.id}"
+println "character: ${my_map.character}"
+```
+
+Even though it doesn't have a proper `workflow` block, Nextflow can run this as if it were a workflow:
+
+```bash
+nextflow run examples/map_demo.nf
+```
+
+And here's what you can expect to see in the output:
+
+```console title="Output"
+Nextflow 25.10.0 is available - Please consider updating your version to it
+
+N E X T F L O W   ~  version 25.04.3
+
+Launching `map_demo.nf` [cheesy_plateau] DSL2 - revision: fae5b8496e
+
+map: [id:sampleA, character:squirrel]
+id: sampleA
+character: squirrel
+```
+
+</details>
+
 ### 1.2. Pick out specific fields with `map`
 
 Let's say we want to access the `character` column from the datasheet and print it.
@@ -262,56 +305,6 @@ nextflow run main.nf
     ```
 
 Success! We've taken advantage of the map structure derived from our datasheet to access the values from individual columns for each row.
-
-<details>
-  <summary>More about maps</summary>
-
-In Groovy, the programming language that Nextflow is built on, a map is a key-value data structure similar to dictionaries in Python, objects in JavaScript, or hashes in Ruby.
-
-For example:
-
-```groovy
-def my_map = [id:'sampleA', character:'squirrel']
-println my_map.id  // Prints: sampleA
-```
-
-And here's a runnable script that applies this in practice:
-
-```groovy title="examples/map_demo.nf"
-#!/usr/bin/env nextflow
-
-// Create a simple map
-def my_map = [id:'sampleA', character:'squirrel']
-
-// Print the whole map
-println "map: ${my_map}"
-
-// Access individual values using dot notation
-println "id: ${my_map.id}"
-println "character: ${my_map.character}"
-```
-
-Even though it doesn't have a proper `workflow` block, Nextflow can run this as if it were a workflow:
-
-```bash
-nextflow run examples/map_demo.nf
-```
-
-And here's what you can expect to see in the output:
-
-```console title="Output"
-Nextflow 25.10.0 is available - Please consider updating your version to it
-
-N E X T F L O W   ~  version 25.04.3
-
-Launching `map_demo.nf` [cheesy_plateau] DSL2 - revision: fae5b8496e
-
-map: [id:sampleA, character:squirrel]
-id: sampleA
-character: squirrel
-```
-
-</details>
 
 Now that we've successfully read in the datasheet and have access to the data in each row, we can begin implementing our pipeline logic.
 
@@ -381,12 +374,19 @@ nextflow run main.nf
     [[id:sampleG, character:turtle], /workspaces/training/side-quests/metadata/data/ciao.txt]
     ```
 
-Now, each element in the channel contains the metadata map first (_e.g._ `[id:sampleA, character:squirrel]`) and the corresponding file object second (_e.g._ `/workspaces/training/side-quests/metadata/data/bonjour.txt`).
+Now, each element in the channel contains the metadata map first and the corresponding file object second:
+
+```console title="Example output structure"
+[
+  [id:sampleA, character:squirrel],
+  /workspaces/training/side-quests/metadata/data/bonjour.txt
+]
+```
 
 As a result, adding more columns in the datasheet will make more metadata available in the `meta` map, but won't change the channel shape.
 This enables us to write processes that consume the channel without having to hard-code the metadata items into the input specification:
 
-```groovy
+```groovy title="Syntax example"
     input:
     tuple val(meta), file(recording)
 ```
@@ -543,7 +543,8 @@ So instead, we're going to create a new meta map containing the contents of the 
 
 This is going to take only a very small amount of code, but it's going to have a lot packed into it, so let's break it down in stages.
 
-First, you need to know that we can merge the contents of two maps using the Groovy operator `+`.
+**First, you need to know that we can merge the contents of two maps using the Groovy operator `+`.**
+
 Let's say we have the following maps:
 
 ```groovy
@@ -560,11 +561,15 @@ new_map = map1 + map2
 The contents of `new_map` will be:
 
 ```groovy
-[id: 'sampleA', character: 'squirrel', 'fr']
+[id: 'sampleA', character: 'squirrel', lang: 'fr']
 ```
 
-Great! But now let's say the starting point is a little different: you still have `map1` but the language prediction is not in its own map.
-It's held in a variable called `lang_id`, and you know you want to store its value (`'fr'`) with the key `lang`.
+Great!
+
+**But what if you need to add a field that's not already part of a map?**
+
+Let's say you start again from `map1`, but the language prediction is not in its own map (there is no `map2`).
+Instead, it is held in a variable called `lang_id`, and you know you want to store its value (`'fr'`) with the key `lang`.
 
 You can actually do the following:
 
@@ -576,7 +581,8 @@ Here, `[lang: new_info]` creates a new unnamed map on the fly, and `map1 + ` mer
 
 Neat, right?
 
-Now let's transpose that into the context of a Nextflow `channel.map()` operation.
+**Now let's transpose that into the context of a Nextflow `channel.map()` operation.**
+
 The code becomes:
 
 ```groovy
@@ -591,13 +597,25 @@ This does the following:
 - `[map1 + [lang: lang_id]]` creates the new map as detailed above
 
 The output is a single unnamed map with the same contents as `new_map` in our example above.
-So we've effectively transformed `[id: 'sampleA', character: 'squirrel'], 'it'` into `[id: 'sampleA', character: 'squirrel', lang: 'fr']`.
+So we've effectively transformed:
+
+```groovy
+[id: 'sampleA', character: 'squirrel'], 'it'`
+```
+
+into:
+
+```groovy
+[id: 'sampleA', character: 'squirrel', lang: 'fr']
+```
 
 Hopefully you can see that if we change `map1` to `meta`, that's basically all we need in order to add the language predication to our meta map in our workflow.
 
 Except for one thing!
 
-In the case of our workflow, we also need to account for the presence of the `file` object in the tuple, which contains `meta, file, lang_id`, so the code here would become:
+In the case of our workflow, **we also need to account for the presence of the `file` object in the tuple**, which is composed of `meta, file, lang_id`.
+
+So the code here would become:
 
 ```groovy
 .map { meta, file, lang_id ->
@@ -606,9 +624,9 @@ In the case of our workflow, we also need to account for the presence of the `fi
 ```
 
 If you're having a hard time following why the `file` seems to be moving around, imagine that instead of `[meta + [lang: lang_id], file]`, that line reads `[new_map, file]`.
-This should make it more clear that we're simply leaving the `file` in its original place in second position in the tuple; we've just taken the `new_info` value and folded it into the map that's in first position.
+This should make it more clear that we're simply leaving the `file` in its original place in second position in the tuple. We've just taken the `new_info` value and folded it into the map that's in first position.
 
-And this brings us back to the `tuple val(meta), path(file)` channel structure!
+**And this brings us back to the `tuple val(meta), path(file)` channel structure!**
 
 With that, let's make the following edits to the workflow:
 
@@ -677,12 +695,12 @@ Specifically, we're going to define a variable called `lang_group`, use some sim
 The general syntax is going to look like this:
 
 ```groovy
-            .map { meta, file ->
+.map { meta, file ->
 
-                // conditional logic defining lang_group goes here
+    // conditional logic defining lang_group goes here
 
-                [meta + [lang_group: lang_group], file]
-            }
+    [meta + [lang_group: lang_group], file]
+}
 ```
 
 You can see this is very similar to the on-the-fly map merging operation we used in the previous step.
@@ -700,7 +718,7 @@ Try taking a stab at writing it yourself if you already know how to write condit
 
     You can access the value of `lang` within the map operation with `meta.lang`.
 
-Your goal is to make the following changes to the workflow:
+You should end up making the following changes to the workflow:
 
 === "After"
 
@@ -791,13 +809,16 @@ More specifically, we're going to add a second step to our workflow to draw each
 We're going to do this using a tool called [`cowpy`](https://github.com/jeffbuttars/cowpy).
 
 <details>
-  <summary>What does `cowpy` do?</summary>
+  <summary>What does <code>cowpy</code> do?</summary>
 
-`cowpy` is a command-line tool that generates ASCII art to display arbitrary text inputs in a fun way.
-It is a python implementation of the classic [`cowsay`](https://en.wikipedia.org/wiki/Cowsay) tool by Tony Monroe.
+<code>cowpy</code> is a command-line tool that generates ASCII art to display arbitrary text inputs in a fun way.
+It is a python implementation of the classic <a href='https://en.wikipedia.org/wiki/Cowsay'><code>cowsay</code></a> tool by Tony Monroe.
 
 ```console
 > cowpy "Hello Nextflow"
+```
+
+```console
  ______________________________________________________
 < Hello Nextflow >
  ------------------------------------------------------
@@ -812,6 +833,9 @@ Optionally, you can select a character (or 'cowacter') to use instead of the def
 
 ```console
 > cowpy "Hello Nextflow" -c tux
+```
+
+```console
  __________________
 < Hello Nextflow >
  ------------------
@@ -860,7 +884,7 @@ Make the following edit to the workflow:
 
 You can open the module file to examine its code:
 
-```groovy title="modules/cowpy.nf" linenums="1" hl_lines=""
+```groovy title="modules/cowpy.nf" linenums="1"
 #!/usr/bin/env nextflow
 
 // Generate ASCII art with cowpy
@@ -890,6 +914,7 @@ As you can see, this process is currently designed to take an input file (contai
 
 When we used the `cowpy` tool in the Hello Nextflow course, we used a command-line parameter to determine what character to use to draw the final image.
 That made sense, because we were only generating one image per run of the pipeline.
+
 However, in this tutorial, we want to generate an appropriate image for each subject that we're processing, so using a command-line parameter would be too limiting.
 
 Good news: we have a `character` column in our datasheet and therefore, in our meta map.
