@@ -1226,7 +1226,7 @@ Make the following edits to the `cowpy.nf` module file:
 
 We've replaced the reference to the `character` value previously passed as a standalone input with the value held in the meta map, which we refer to using `meta.character`.
 
-Simple and elegant, right? Let's update the process call accordingly.
+Now let's update the process call accordingly.
 
 #### 3.3.3. Update the process call and run it
 
@@ -1265,7 +1265,11 @@ nextflow run main.nf
     ```console
      N E X T F L O W   ~  version 25.04.3
 
-    TODO: RUN AND FILL OUT
+    Launching `main.nf` [wise_sammet] DSL2 - revision: 99797b1e92
+
+    executor >  local (14)
+    [5d/dffd4e] process > IDENTIFY_LANGUAGE (7) [100%] 7 of 7 ✔
+    [25/9243df] process > COWPY (7)             [100%] 7 of 7 ✔
     ```
 
 If you look in the results directory, you should see the same outputs as previously, _i.e._ individual files containing the ASCII art of each greeting spoken by the corresponding character.
@@ -1273,44 +1277,192 @@ If you look in the results directory, you should see the same outputs as previou
 ??? example "Directory contents"
 
     ```console
-    TODO: RUN AND FILL OUT
+    ./results/
+    ├── cowpy-bonjour.txt
+    ├── cowpy-ciao.txt
+    ├── cowpy-guten_tag.txt
+    ├── cowpy-hallo.txt
+    ├── cowpy-hello.txt
+    ├── cowpy-hola.txt
+    └── cowpy-salut.txt
+
+    0 directories, 7 files
     ```
 
-This provides
+So this produces the same results as before with simpler code.
 
 Of course, this assumes you are able to modify the process code.
 In some cases, you may have to rely on existing processes that you're not at liberty to modify, which limits your options.
 The good news, if you're planning to use modules from the [nf-core](https://nf-co.re/) project, is that nf-core modules are all set up to use the `[meta, file]` tuple structure as a standard.
 
-### 3.4. Note on enforcing required inputs
+### 3.4. Troubleshooting missing required inputs
 
 The `character` value is required for the `COWPY` process to run successfully.
 If we do not set a default value for it in a configuration file, we MUST provide a value for it in the datasheet.
 
-What happens if we do not?
-It depends on which version of the workflow we're running.
+**What happens if we do not?**
+It depends on what the input datasheet contains and which version of the workflow we're running.
 
-If we're using the version in section 3.2, Nextflow will attempt to access the `character` value BEFORE calling the `COWPY` process and will fail with a clear error telling us the process input requirement was not satisfied.
+#### 3.4.1. The character column exists but is empty
 
-<!-- TODO (future): provide the error message -->
+Let's say we delete the character value for one of the entries in our datasheet to simulate a data collection error:
 
-If we're using the version in section 3.3, Nextflow will happily pass the meta map to the process, and attempt to run the command.
-This will fail with a different error.
+```csv title="datasheet.csv" linenums="1" hl_lines="2"
+id,character,recording
+sampleA,,/workspaces/training/side-quests/metadata/data/bonjour.txt
+sampleB,tux,/workspaces/training/side-quests/metadata/data/guten_tag.txt
+sampleC,sheep,/workspaces/training/side-quests/metadata/data/hallo.txt
+sampleD,turkey,/workspaces/training/side-quests/metadata/data/hello.txt
+sampleE,stegosaurus,/workspaces/training/side-quests/metadata/data/hola.txt
+sampleF,moose,/workspaces/training/side-quests/metadata/data/salut.txt
+sampleG,turtle,/workspaces/training/side-quests/metadata/data/ciao.txt
+```
 
-<!-- TODO (future): provide the error message -->
+For either version of the workflow we've used above, the `character` key will be created for all entries when the datasheet is read in, but for `sampleA` the value will be an empty string.
 
-This should give you pause.
-It's almost always better to fail sooner rather than later, and yet we do prefer the approach of passing the entire meta map to the process.
+This will cause an error.
 
-So how should we handle this?
+??? example "Output"
 
-Aside from supplying a default value, which we don't want to do in this context, there are two things you can do (and yes you can do both):
+    ```console hl_lines="8 13 25"
+    N E X T F L O W   ~  version 25.04.3
 
-1. If you're only concerned about making sure your own pipeline will behave correct, implement input validation to your workflow to ensure that the datasheet contains all the required information. <!-- TODO: add link to validation part of Hello nf-core pending a proper Validation side quest -->
+    Launching `main.nf` [marvelous_hirsch] DSL2 - revision: 0dfeee3cc1
 
-2. If you want to make sure anyone who uses your process module can immediately identify required inputs, modify the `[meta, file]` tuple to make the required metadata property an explicit input rather than accessing it from within the meta map.
+    executor >  local (9)
+    [c1/c5dd4f] process > IDENTIFY_LANGUAGE (7) [ 85%] 6 of 7
+    [d3/b7c415] process > COWPY (2)             [  0%] 0 of 6
+    ERROR ~ Error executing process > 'COWPY (1)'
 
-Here's an example of how that second option would work.
+    Caused by:
+      Process `COWPY (1)` terminated with an error exit status (2)
+
+
+    Command executed:
+
+      cat bonjour.txt | cowpy -c  > cowpy-bonjour.txt
+
+    Command exit status:
+      2
+
+    Command output:
+      (empty)
+
+    Command error:
+      usage: cowpy [-h] [-l] [-L] [-t] [-u] [-e EYES] [-c COWACTER] [-E] [-r] [-x]
+                  [-C]
+                  [msg ...]
+      cowpy: error: argument -c/--cowacter: expected one argument
+
+    Work dir:
+      /workspaces/training/side-quests/metadata/work/ca/9d49796612a54dec5ed466063c809b
+
+    Container:
+      community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273
+
+    Tip: you can try to figure out what's wrong by changing to the process work dir and showing the script file named `.command.sh`
+
+    -- Check '.nextflow.log' file for details
+    ```
+
+When Nextflow runs the `cowpy` command line for that sample, `${character}` is filled with an empty string in the `cowpy` command line, so the `cowpy` tool throws an error saying no value was provided for the `-c` argument.
+
+#### 3.4.2. The character column does not exist in the datasheet
+
+Now let's say we delete the character column entirely from our datasheet:
+
+```csv title="datasheet.csv" linenums="1"
+id,recording
+sampleA,/workspaces/training/side-quests/metadata/data/bonjour.txt
+sampleB,/workspaces/training/side-quests/metadata/data/guten_tag.txt
+sampleC,/workspaces/training/side-quests/metadata/data/hallo.txt
+sampleD,/workspaces/training/side-quests/metadata/data/hello.txt
+sampleE,/workspaces/training/side-quests/metadata/data/hola.txt
+sampleF,/workspaces/training/side-quests/metadata/data/salut.txt
+sampleG,/workspaces/training/side-quests/metadata/data/ciao.txt
+```
+
+In this case the `character` key will not be created at all when the datasheet is read in.
+
+##### 3.4.2.1. Value accessed at the workflow level
+
+If we're using the version of the code we wrote in section 3.2, Nextflow will attempt to access the `character` key in the meta map BEFORE calling the `COWPY` process.
+
+It will not find any elements that match the instruction, so it will not run `COWPY` at all.
+
+```console title="Output"
+ N E X T F L O W   ~  version 25.04.3
+
+Launching `main.nf` [desperate_montalcini] DSL2 - revision: 0dfeee3cc1
+
+executor >  local (7)
+[1a/df2544] process > IDENTIFY_LANGUAGE (7) [100%] 7 of 7 ✔
+[-        ] process > COWPY                 -
+```
+
+As far as Nextflow is concerned, this workflow ran successfully!
+
+##### 3.4.2.1. Value accessed at the process level
+
+If we're using the version in section 3.3, Nextflow will pass the entire meta map to the `COWPY` process and attempt to run the command.
+
+This will cause an error, but a different one compared to the first case.
+
+```console title="Error message" hl_lines="4 9"
+ERROR ~ Error executing process > 'COWPY (2)'
+
+Caused by:
+  Process `COWPY (2)` terminated with an error exit status (1)
+
+
+Command executed:
+
+  cat guten_tag.txt | cowpy -c null > cowpy-guten_tag.txt
+
+Command exit status:
+  1
+
+Command output:
+  (empty)
+
+Command error:
+  Traceback (most recent call last):
+    File "/opt/conda/bin/cowpy", line 10, in <module>
+      sys.exit(main())
+               ~~~~^^
+    File "/opt/conda/lib/python3.13/site-packages/cowpy/cow.py", line 1215, in main
+      print(cow(eyes=args.eyes,
+            ~~~^^^^^^^^^^^^^^^^
+            tongue=args.tongue,
+            ^^^^^^^^^^^^^^^^^^^
+            thoughts=args.thoughts
+            ^^^^^^^^^^^^^^^^^^^^^^
+                ).milk(msg)
+                ^
+  TypeError: 'str' object is not callable
+
+Work dir:
+  /workspaces/training/side-quests/metadata/work/ed/e0bc0c7d9fd7d22bba084aa941b6d6
+
+Container:
+  community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273
+
+Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
+
+ -- Check '.nextflow.log' file for details
+```
+
+This happens because `meta.character` does not exist, so our attempt to access it returns `null`. As a result, Nextflow literally plugs in `null` into the command-line, which is of course not recognized by the `cowpy` tool.
+
+#### 3.4.3. Solutions
+
+Aside from supplying a default value as part of the workflow configuration, there are two things we can do to handle this robustly:
+
+1. Implement input validation to your workflow to ensure that the datasheet contains all the required information. You can find an [introduction to input validation](../hello_nf-core/05_input_validation.md) in the Hello nf-core training course. <!-- pending a proper Validation side quest -->
+
+2. If you want to make sure anyone who uses your process module can immediately identify required inputs, you can also make the required metadata property an explicit input.
+
+Here's an example of how that would work.
 
 First, at the process level, update the input definition as follows:
 
@@ -1328,7 +1480,7 @@ First, at the process level, update the input definition as follows:
         tuple val(meta), path(input_file)
     ```
 
-Then, at the workflow level, use a mapping operation to extract the `character` property from the metadata and make it an explicit component of the tuple:
+Then, at the workflow level, use a mapping operation to extract the `character` property from the metadata and make it an explicit component of the input tuple:
 
 === "After"
 
@@ -1342,24 +1494,17 @@ Then, at the workflow level, use a mapping operation to extract the `character` 
         COWPY(ch_languages)
     ```
 
-**How this approach helps:**
-
-1. **Clear Requirements**: The process input explicitly shows that `character` is required.
-2. **Better Error Messages**: If `character` is missing, Nextflow will fail at the input stage with a clear error.
-3. **Self-Documenting**: Anyone using this process can immediately see what inputs are needed.
-4. **Reusable**: The process is easier to redeploy in other contexts.
+This approach has the advantage of showing explicitly that `character` is required, and makes the process easier to redeploy in other contexts.
 
 This highlights an important design principle:
-Use the meta map for optional, descriptive information, but extract required values as explicit inputs.
+
+**Use the meta map for optional, descriptive information, but extract required values as explicit inputs.**
+
 The meta map is excellent for keeping channel structures clean and preventing arbitrary channel structures, but for mandatory elements that are directly referenced in a process, extracting them as explicit inputs creates more robust and maintainable code.
 
 ### Takeaway
 
-In this section, you've learned how to:
-
-- **Tweak directives using meta values**: Using meta map values in `publishDir` directives to create dynamic output paths based on the file's metadata
-
-- **Tweak the script section based on meta values**: Customizing tool parameters per file using meta information in the `script` section
+In this section, you've learned how to utilize metadata to customize the execution of a process, accessing it either at the workflow level or at the process level.
 
 ---
 
@@ -1437,15 +1582,7 @@ Applying this pattern in your own work will enable you to build robust, maintain
     }
     ```
 
-3.  **Customizing Process Behavior:** Using metadata to adapt how processes handle different files.
-
-    - Using meta values in Process Directives
-
-    ```groovy
-    publishDir "results/${meta.lang_group}", mode: 'copy'
-    ```
-
-    - Adapting tool parameters for individual files
+3.  **Customizing Process Behavior:** Using metadata inside the process.
 
     ```groovy
     cat $input_file | cowpy -c ${meta.character} > cowpy-${input_file}

@@ -10,7 +10,7 @@ process COWPY {
     container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
 
     input:
-    path(input_file)
+    path input_file
     val character
 
     output:
