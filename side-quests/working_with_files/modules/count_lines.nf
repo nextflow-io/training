@@ -13,8 +13,3 @@ process COUNT_LINES {
     gzip -dc $input_file | wc -l
     """
 }
-
-workflow {
-    myFile = 'data/patientA_rep1_normal_R1_001.fastq.gz'
-    COUNT_LINES(myFile)
-}
