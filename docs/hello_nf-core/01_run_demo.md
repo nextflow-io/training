@@ -457,6 +457,12 @@ Here is what the relationships between the relevant code components look like fo
 There is a so-called _entrypoint_ script called `main.nf`, which acts as a wrapper for two kinds of nested workflows: the workflow containing the actual analysis logic, located under `workflows/` and called `demo.nf`, and a set of housekeeping workflows located under `subworkflows/`.
 The `demo.nf` workflow calls on **modules** located under `modules/`; these contain the **processes** that will perform the actual analysis steps.
 
+!!! note
+
+    Subworkflows are not limited to housekeeping functions, and they can make use of process modules.
+
+    The `nf-core/demo` pipeline shown here happens to be on the simpler side on the spectrum, but other nf-core pipelines (such as `nf-core/rnaseq`) utilize subworkflows that are involved in the actual analysis.
+
 Now, let's review these components in turn.
 
 #### 3.1.2. The entrypoint script: `main.nf`
