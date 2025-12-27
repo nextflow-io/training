@@ -1122,13 +1122,17 @@ What matters here is that there are two workflows defined:
 - `CORE_HELLO` is a thin wrapper for running the HELLO workflow we just finished adapting in `core-hello/workflows/hello.nf`.
 - An unnamed workflow that calls `CORE_HELLO` as well as two other subworkflows, `PIPELINE_INITIALISATION` and `PIPELINE_COMPLETION`.
 
-<!-- TODO: diagram of how main.nf wraps the second-order workflows -->
+Here is a diagram of how they relate to each other:
+
+<figure class="excalidraw">
+--8<-- "docs/hello_nf-core/img/hello-nested-workflows.svg"
+</figure>
 
 Importantly, we cannot find any code constructing an input channel at this level, only references to a samplesheet provided via the `--input` parameter.
 
-A bit of poking around reveals that the input handling is done by the `PIPELINE_INITIALISATION` subworkflow, appropriately enough.
+A bit of poking around reveals that the input handling is done by the `PIPELINE_INITIALISATION` subworkflow, appropriately enough, which is imported from `core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf`.
 
-If we open up `core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf` and scroll down, we come to this chunk of code:
+If we open up that file and scroll down, we come to this chunk of code:
 
 ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="76"
     //
