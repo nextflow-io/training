@@ -45,11 +45,14 @@ After each step, we'll run the pipeline to test that everything works as expecte
 
 ### 1.1. Update `cowpy` to use metadata tuples
 
-In the current version of the `core-hello` pipeline, we're extracting the file from `CAT_CAT`'s output tuple to pass to `cowpy`.
+In the current version of the `core-hello` pipeline, we're extracting the file from `CAT_CAT`'s output tuple to pass to `cowpy`, as shown in the top half of the diagram below.
 
-<!-- TODO: add a diagram to recap current state -->
+<figure class="excalidraw">
+    --8<-- "docs/hello_nf-core/img/cowpy-inputs.svg"
+</figure>
 
-It would be better to have `cowpy` accept metadata tuples directly, allowing metadata to flow on through the workflow.
+It would be better to have `cowpy` accept metadata tuples directly, allowing metadata to flow on through the workflow, as shown in the bottom half of the diagram.
+
 To the end, we'll need to make the following changes:
 
 1. Update the input and output definitions
@@ -281,7 +284,7 @@ You can see we made three changes.
 
 2. **In the `script:` block, we added the line `def args = task.ext.args ?: ''`.**
    That line uses the `?:` operator to determine the value of the `args` variable: the content of `task.ext.args` if it is not empty, or an empty string if it is.
-   Note that while we generally refer to `ext.args`, this code must reference `task.ext.args` to pull out the module-level `ext.args` configuration. <!-- TODO: check that this is correctly phrased -->
+   Note that while we generally refer to `ext.args`, this code must reference `task.ext.args` to pull out the module-level `ext.args` configuration.
 
 3. **In the command line, we replaced `-c "$character"` with `$args`.**
    This is where Nextflow will inject any tool arguments set in `ext.args` in the `modules.config` file.
@@ -535,7 +538,7 @@ You can see we made three changes.
 
 1. **In the `script:` block, we added the line `prefix = task.ext.prefix ?: "${meta.id}"`.**
    That line uses the `?:` operator to determine the value of the `prefix` variable: the content of `task.ext.prefix` if it is not empty, or the identifier from the metamap (`meta.id`) if it is.
-   Note that while we generally refer to `ext.prefix`, this code must reference `task.ext.prefix` to pull out the module-level `ext.prefix` configuration. <!-- TODO: check that this is correctly phrased -->
+   Note that while we generally refer to `ext.prefix`, this code must reference `task.ext.prefix` to pull out the module-level `ext.prefix` configuration.
 
 2. **In the command line, we replaced `cowpy-${input_file}` with `${prefix}.txt`.**
    This is where Nextflow will inject the value of `prefix` determined by the line above.
@@ -858,7 +861,7 @@ process COWPY {
     task.ext.when == null || task.ext.when
 
     script:
-    def args = task.ext.args ?: ''              // Pattern 2: ext.args ✓
+    def args = task.ext.args ?: ''                // Pattern 2: ext.args ✓
     def prefix = task.ext.prefix ?: "${meta.id}"  // Pattern 3: ext.prefix ✓
 
     """
@@ -1015,6 +1018,9 @@ Key changes:
 ### 2.6. Implementing the stub block
 
 The stub block provides a fast mock implementation for testing pipeline logic without running the actual tool.
+
+<!-- TODO (future) This is super glossed over but should really be explained or at least link out to an explanation about stubs. Right now this is meaningless to anyone who doesn't already know about stubs. -->
+
 It must produce the same output files as the script block:
 
 === "After"
@@ -1061,6 +1067,52 @@ Key changes:
 This allows you to test workflow logic and file handling without waiting for the actual tool to run.
 
 Once you've completed the environment setup (section 2.1.2), inputs/outputs (section 2.1.3), script block (section 2.1.4), and stub block (section 2.1.5), the module is ready to test!
+
+### 2.7. Swap in the new `cowpy` module
+
+All we need to do to try out this new version of the `cowpy` module is to switch the import statement in the `hello.nf` workflow file to point to the new file.
+
+=== "After"
+
+    ```groovy title="workflows/hello.nf" linenums="1" hl_lines="10"
+    /*
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    */
+    include { paramsSummaryMap       } from 'plugin/nf-schema'
+    include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
+    include { sayHello               } from '../modules/local/sayHello.nf'
+    include { convertToUpper         } from '../modules/local/convertToUpper.nf'
+    include { cowpy                  } from '../modules/local/cowpy/main.nf'
+    include { CAT_CAT                } from '../modules/nf-core/cat/cat/main'
+    ```
+
+=== "Before"
+
+    ```groovy title="modules/local/cowpy/main.nf" linenums="1" hl_lines="10"
+    /*
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    */
+    include { paramsSummaryMap       } from 'plugin/nf-schema'
+    include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
+    include { sayHello               } from '../modules/local/sayHello.nf'
+    include { convertToUpper         } from '../modules/local/convertToUpper.nf'
+    include { cowpy                  } from '../modules/local/cowpy.nf'
+    include { CAT_CAT                } from '../modules/nf-core/cat/cat/main'
+    ```
+
+Let's run the pipeline to test it.
+
+```bash
+nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
+```
+
+<!-- TODO: include the console outputs (folded under an example block) -->
+
+You should find the same results as previously.
 
 ### Takeaway
 
