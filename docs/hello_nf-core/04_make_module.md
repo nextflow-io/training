@@ -200,7 +200,7 @@ In its current state, the `cowpy` process expects to receive a value for the `ch
 As a result, we have to provide a value every time we call the process, even if we'd be happy with the defaults set by the tool.
 For `cowpy` this is admittedly not a big problem, but for tools with many optional parameters, it can get quite cumbersome.
 
-The nf-core project recommends using a Nextflow feature called `ext.args` to manage tool arguments more conveniently via configuration files. <!-- TODO: add URL to doc -->
+The nf-core project recommends using a Nextflow feature called [`ext.args`](https://www.nextflow.io/docs/latest/reference/process.html#ext) to manage tool arguments more conveniently via configuration files.
 
 Instead of declaring process inputs for every tool option, you write the module to reference `ext.args` in the construction of its command line.
 Then it's just a matter of setting up the `ext.args` variable to hold the arguments and values you want to use in the `modules.config` file, which consolidates configuration details for all modules.
