@@ -141,7 +141,7 @@ Open the `hello.nf` workflow file (under `core-hello/workflows/`) and update the
 
 === "Before"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="5"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="1-2 5"
         // extract the file from the tuple since cowpy doesn't use metadata yet
         ch_for_cowpy = CAT_CAT.out.file_out.map{ meta, file -> file }
 
@@ -162,7 +162,7 @@ Since `cowpy` now emits a named output, `cowpy_output`, we can update the `hello
     ```groovy title="core-hello/workflows/hello.nf" linenums="60" hl_lines="2"
         emit:
         cowpy_hellos   = cowpy.out.cowpy_output
-        versions       = ch_versions                 // channel: [ path(versions.yml) ]
+        versions       = ch_versions
     ```
 
 === "Before"
@@ -170,7 +170,7 @@ Since `cowpy` now emits a named output, `cowpy_output`, we can update the `hello
     ```groovy title="core-hello/workflows/hello.nf" linenums="60" hl_lines="2"
         emit:
         cowpy_hellos   = cowpy.out
-        versions       = ch_versions                 // channel: [ path(versions.yml) ]
+        versions       = ch_versions
     ```
 
 This is technically not required, but it's good practice to refer to named outputs whenever possible.
@@ -183,16 +183,47 @@ Let's run the workflow to test that everything is working correctly after these 
 nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
 ```
 
-The pipeline should run successfully, with metadata now flowing from `CAT_CAT` through `cowpy`:
+??? example "Output"
 
-```console title="Output (excerpt)"
-executor >  local (8)
-[b2/4cf633] CORE_HELLO:HELLO:sayHello (2)       [100%] 3 of 3 ✔
-[ed/ef4d69] CORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔
-[2d/32c93e] CORE_HELLO:HELLO:CAT_CAT (test)     [100%] 1 of 1 ✔
-[da/6f3246] CORE_HELLO:HELLO:cowpy              [100%] 1 of 1 ✔
--[core/hello] Pipeline completed successfully-
-```
+    ```console
+     N E X T F L O W   ~  version 25.04.3
+
+    Launching `./main.nf` [modest_saha] DSL2 - revision: b9e9b3b8de
+
+    Downloading plugin nf-schema@2.5.1
+    Input/output options
+      input                     : /workspaces/training/hello-nf-core/core-hello/assets/greetings.csv
+      outdir                    : core-hello-results
+
+    Institutional config options
+      config_profile_name       : Test profile
+      config_profile_description: Minimal test dataset to check pipeline function
+
+    Generic options
+      validate_params           : false
+      trace_report_suffix       : 2025-12-27_06-16-55
+
+    Core Nextflow options
+      runName                   : modest_saha
+      containerEngine           : docker
+      launchDir                 : /workspaces/training/hello-nf-core/core-hello
+      workDir                   : /workspaces/training/hello-nf-core/core-hello/work
+      projectDir                : /workspaces/training/hello-nf-core/core-hello
+      userName                  : root
+      profile                   : test,docker
+      configFiles               : /workspaces/training/hello-nf-core/core-hello/nextflow.config
+
+    !! Only displaying parameters that differ from the pipeline defaults !!
+    ------------------------------------------------------
+    executor >  local (8)
+    [a8/447993] CORE_HELLO:HELLO:sayHello (3)       [100%] 3 of 3 ✔
+    [00/1fc59c] CORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔
+    [57/ac800d] CORE_HELLO:HELLO:CAT_CAT (test)     [100%] 1 of 1 ✔
+    [b7/092f2b] CORE_HELLO:HELLO:cowpy              [100%] 1 of 1 ✔
+    -[core/hello] Pipeline completed successfully-
+    ```
+
+The pipeline should run successfully, with metadata now flowing from `CAT_CAT` through `cowpy`.
 
 That completes what we needed to do to make `cowpy` handle metadata tuples.
 Now, let's look at what else we can do to take advantage of nf-core module patterns.
@@ -316,10 +347,12 @@ Open `conf/modules.config` and add the configuration code inside the `process {}
 
 === "After"
 
-    ```groovy title="core-hello/conf/modules.config" linenums="13" hl_lines="6-8"
+    ```groovy title="core-hello/conf/modules.config" linenums="13" hl_lines="8-10"
     process {
         publishDir = [
             path: { "${params.outdir}/${task.process.tokenize(':')[-1].tokenize('_')[0].toLowerCase()}" },
+            mode: params.publish_dir_mode,
+            saveAs: { filename -> filename.equals('versions.yml') ? null : filename }
         ]
 
         withName: 'cowpy' {
@@ -334,6 +367,8 @@ Open `conf/modules.config` and add the configuration code inside the `process {}
     process {
         publishDir = [
             path: { "${params.outdir}/${task.process.tokenize(':')[-1].tokenize('_')[0].toLowerCase()}" },
+            mode: params.publish_dir_mode,
+            saveAs: { filename -> filename.equals('versions.yml') ? null : filename }
         ]
     }
     ```
@@ -380,19 +415,52 @@ Run this command using `kosh`, one of the more... enigmatic options:
 nextflow run . --outdir core-hello-results -profile test,docker --validate_params false --character kosh
 ```
 
-The pipeline should run successfully.
-In the output, look for the cowpy process execution line, which will show something like this:
+??? example "Output"
 
-```console title="Output (excerpt)"
-[bd/0abaf8] CORE_HELLO:HELLO:cowpy              [100%] 1 of 1 ✔
-```
+    ```console
+     N E X T F L O W   ~  version 25.04.3
 
-So it ran successfully, great!
-Now let's verify that the `ext.args` configuration worked by checking the output.
-Find the output in the file browser or use the task hash (the `bd/0abaf8` part in the example above) to look at the output file:
+    Launching `./main.nf` [exotic_planck] DSL2 - revision: b9e9b3b8de
+
+    Input/output options
+      input                     : /workspaces/training/hello-nf-core/core-hello/assets/greetings.csv
+      outdir                    : core-hello-results
+
+    Institutional config options
+      config_profile_name       : Test profile
+      config_profile_description: Minimal test dataset to check pipeline function
+
+    Generic options
+      validate_params           : false
+      trace_report_suffix       : 2025-12-27_06-23-13
+
+    Core Nextflow options
+      runName                   : exotic_planck
+      containerEngine           : docker
+      launchDir                 : /workspaces/training/hello-nf-core/core-hello
+      workDir                   : /workspaces/training/hello-nf-core/core-hello/work
+      projectDir                : /workspaces/training/hello-nf-core/core-hello
+      userName                  : root
+      profile                   : test,docker
+      configFiles               : /workspaces/training/hello-nf-core/core-hello/nextflow.config
+
+    !! Only displaying parameters that differ from the pipeline defaults !!
+    ------------------------------------------------------
+    executor >  local (8)
+    [13/9e3c0e] CORE_HELLO:HELLO:sayHello (3)       [100%] 3 of 3 ✔
+    [e2/5b0ee5] CORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔
+    [b6/4fb569] CORE_HELLO:HELLO:CAT_CAT (test)     [100%] 1 of 1 ✔
+    [38/eb29ea] CORE_HELLO:HELLO:cowpy              [100%] 1 of 1 ✔
+    -[core/hello] Pipeline completed successfully-
+    ```
+
+This should run successfully as previously.
+
+Let's verify that the `ext.args` configuration worked by checking the output.
+Find the output in the file browser or use the task hash (the `38/eb29ea` part in the example above) to look at the output file:
 
 ```bash
-cat work/bd/0abaf8*/cowpy-test.txt
+cat work/38/eb29ea*/cowpy-test.txt
 ```
 
 ??? example "Output"
@@ -426,7 +494,7 @@ You should see the ASCII art displayed with the `kosh` character, confirming tha
     If you want to see exactly how the configuration was applied, you can inspect the `.command.sh` file:
 
     ```bash
-    cat work/bd/0abaf8*/.command.sh
+    cat work/38/eb29ea*/.command.sh
     ```
 
     You'll see the `cowpy` command with the `-c kosh` argument:
@@ -470,13 +538,12 @@ We're going to need to make the following changes:
 1. Update the `cowpy` module
 2. Configure `ext.prefix` in the `modules.config` file
 
-(No changes need to the workflow.)
+(No changes needed to the workflow.)
 
 Once we've done that, we'll run the pipeline to test that everything still works as before.
 
 #### 1.3.1. Update the `cowpy` module
 
-Let's do it.
 Open the `cowpy.nf` module file (under `core-hello/modules/local/`) and modify it to reference `ext.prefix` as shown below.
 
 === "After"
@@ -592,16 +659,64 @@ Let's test that the workflow still works as expected.
 nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
 ```
 
-<!-- TODO: include the console outputs (full or snippet folded under an example block?) -->
+??? example "Output"
 
-Check the outputs:
+    ```console
+     N E X T F L O W   ~  version 25.04.3
 
-```bash
-ls results/
-```
+    Launching `./main.nf` [admiring_turing] DSL2 - revision: b9e9b3b8de
 
+    Input/output options
+      input                     : /workspaces/training/hello-nf-core/core-hello/assets/greetings.csv
+      outdir                    : core-hello-results
+
+    Institutional config options
+      config_profile_name       : Test profile
+      config_profile_description: Minimal test dataset to check pipeline function
+
+    Generic options
+      validate_params           : false
+      trace_report_suffix       : 2025-12-27_06-29-02
+
+    Core Nextflow options
+      runName                   : admiring_turing
+      containerEngine           : docker
+      launchDir                 : /workspaces/training/hello-nf-core/core-hello
+      workDir                   : /workspaces/training/hello-nf-core/core-hello/work
+      projectDir                : /workspaces/training/hello-nf-core/core-hello
+      userName                  : root
+      profile                   : test,docker
+      configFiles               : /workspaces/training/hello-nf-core/core-hello/nextflow.config
+
+    !! Only displaying parameters that differ from the pipeline defaults !!
+    ------------------------------------------------------
+    executor >  local (8)
+    [b2/e08524] CORE_HELLO:HELLO:sayHello (3)       [100%] 3 of 3 ✔
+    [13/88939f] CORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔
+    [23/4554e1] CORE_HELLO:HELLO:CAT_CAT (test)     [100%] 1 of 1 ✔
+    [a3/c6cbe9] CORE_HELLO:HELLO:cowpy              [100%] 1 of 1 ✔
+    -[core/hello] Pipeline completed successfully-
+    ```
+
+Take a look at the output in the results directory.
 You should see the cowpy output file with the same naming as before: `cowpy-test.txt`, based on the default batch name.
-Feel free to change the `ext.prefix` configuration to satisfy yourself that you can change the naming pattern without having to make any changes to the module or workflow code.
+
+??? example "Directory contents"
+
+    ```console hl_lines="3"
+    results
+    ├── Bonjour-output.txt
+    ├── cowpy-test.txt
+    ├── Hello-output.txt
+    ├── Holà-output.txt
+    ├── UPPER-Bonjour-output.txt
+    ├── UPPER-Hello-output.txt
+    └── UPPER-Holà-output.txt
+
+    0 directories, 7 files
+    ```
+
+Feel free to change the `ext.prefix` configuration in `conf/modules.config` to satisfy yourself that you can change the naming pattern without having to make any changes to the module or workflow code.
 
 Alternatively, you can also try running this again with a different `--batch` parameter specified on the command line to satisfy yourself that that part is still customizable on the fly.
 
@@ -687,21 +802,86 @@ Let's have a look at what happens if we run the pipeline now.
 nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
 ```
 
-<!-- TODO: include the console outputs (folded under an example block) -->
+??? example "Output"
+
+    ```console
+     N E X T F L O W   ~  version 25.04.3
+
+    Launching `./main.nf` [silly_caravaggio] DSL2 - revision: b9e9b3b8de
+
+    Input/output options
+      input                     : /workspaces/training/hello-nf-core/core-hello/assets/greetings.csv
+      outdir                    : core-hello-results
+
+    Institutional config options
+      config_profile_name       : Test profile
+      config_profile_description: Minimal test dataset to check pipeline function
+
+    Generic options
+      validate_params           : false
+      trace_report_suffix       : 2025-12-27_06-35-56
+
+    Core Nextflow options
+      runName                   : silly_caravaggio
+      containerEngine           : docker
+      launchDir                 : /workspaces/training/hello-nf-core/core-hello
+      workDir                   : /workspaces/training/hello-nf-core/core-hello/work
+      projectDir                : /workspaces/training/hello-nf-core/core-hello
+      userName                  : root
+      profile                   : test,docker
+      configFiles               : /workspaces/training/hello-nf-core/core-hello/nextflow.config
+
+    !! Only displaying parameters that differ from the pipeline defaults !!
+    ------------------------------------------------------
+    executor >  local (8)
+    [db/39978e] CORE_HELLO:HELLO:sayHello (3)       [100%] 3 of 3 ✔
+    [b5/bf6a8d] CORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔
+    [b7/c61842] CORE_HELLO:HELLO:CAT_CAT (test)     [100%] 1 of 1 ✔
+    [46/5839d6] CORE_HELLO:HELLO:cowpy              [100%] 1 of 1 ✔
+    -[core/hello] Pipeline completed successfully-
+    ```
 
 Have a look at your current working directory.
 Now the `core-hello-results` also contains the outputs of the `cowpy` module.
 
-```bash
-tree core-hello-results/
-```
+??? example "Directory contents"
 
-<!-- TODO: show tree output -->
+    ```console hl_lines="4-5"
+    core-hello-results/
+    ├── cat
+    │   └── test.txt
+    ├── cowpy
+    │   └── cowpy-test.txt
+    └── pipeline_info
+        ├── execution_report_2025-12-27_06-16-55.html
+        ├── execution_report_2025-12-27_06-23-13.html
+        ├── execution_report_2025-12-27_06-29-02.html
+        ├── execution_report_2025-12-27_06-35-56.html
+        ├── execution_timeline_2025-12-27_06-16-55.html
+        ├── execution_timeline_2025-12-27_06-23-13.html
+        ├── execution_timeline_2025-12-27_06-29-02.html
+        ├── execution_timeline_2025-12-27_06-35-56.html
+        ├── execution_trace_2025-12-27_06-16-55.txt
+        ├── execution_trace_2025-12-27_06-23-13.txt
+        ├── execution_trace_2025-12-27_06-29-02.txt
+        ├── execution_trace_2025-12-27_06-35-56.txt
+        ├── hello_software_versions.yml
+        ├── params_2025-12-27_06-17-00.json
+        ├── params_2025-12-27_06-23-17.json
+        ├── params_2025-12-27_06-29-07.json
+        ├── params_2025-12-27_06-36-01.json
+        ├── pipeline_dag_2025-12-27_06-16-55.html
+        ├── pipeline_dag_2025-12-27_06-23-13.html
+        ├── pipeline_dag_2025-12-27_06-29-02.html
+        └── pipeline_dag_2025-12-27_06-35-56.html
+
+    3 directories, 23 files
+    ```
 
 You can see that Nextflow created this hierarchy of directories based on the names of the workflow and of the module.
 
 The code responsible lives in the `conf/modules.config` file.
-This is the default `publishDir` configuration that is part of the nf-core template and applies to all processes.
+This is the default `publishDir` configuration that is part of the nf-core template and applies to all processes:
 
 ```groovy
 process {
@@ -712,8 +892,6 @@ process {
     ]
 }
 ```
-
-<!-- TODO: check the actual code, the mode and saveAs are not shown in the earlier code snippet -->
 
 This may look complicated, so let's look at each of the three components:
 
@@ -743,6 +921,8 @@ For example, you could override the default for a single process using the `with
 process {
     publishDir = [
         path: { "${params.outdir}/${task.process.tokenize(':')[-1].tokenize('_')[0].toLowerCase()}" },
+        mode: params.publish_dir_mode,
+        saveAs: { filename -> filename.equals('versions.yml') ? null : filename }
     ]
 
     withName: 'cowpy' {
@@ -782,16 +962,19 @@ Learn how to use nf-core's built-in template-based tools to create modules the e
 
 ---
 
-## 2. Generate modules with nf-core tools
+## 2. Create a module with the nf-core tooling
 
-Now that you've learned the nf-core module patterns by applying them manually, let's look at how you'd create modules in practice.
-The nf-core project provides the `nf-core modules create` command that generates properly structured module templates with all these patterns built in from the start.
+Now that you've learned the nf-core module patterns by applying them manually, let's look at how you would create modules in practice.
 
-### 2.1. Using nf-core modules create
+### 2.1. Generate a module scaffold from a template
+
+Similar to what exists for creating pipelines, the nf-core project provides tooling to generate properly structured modules based on a template, with all these patterns built in from the start.
+
+#### 2.1.1. Run the module creation command
 
 The `nf-core modules create` command generates a module template that already follows all the conventions you've learned.
 
-For example, to create the `cowpy` module with a minimal template:
+Let's create a new version of the `cowpy` module with a minimal template by running this command:
 
 ```bash
 nf-core modules create --empty-template cowpy
@@ -812,7 +995,7 @@ You'll be prompted for several configuration options:
 
 The tool handles the complexity of finding package information and setting up the structure, allowing you to focus on implementing the tool's specific logic.
 
-### 2.2. What gets generated
+#### 2.1.2. Examine the module scaffold
 
 The tool creates a complete module structure in `modules/local/` (or `modules/nf-core/` if you're in the nf-core/modules repository):
 
@@ -841,7 +1024,7 @@ Each file serves a specific purpose:
 The generated `main.nf` includes all the patterns you just learned, plus some additional features:
 
 ```groovy title="modules/local/cowpy/main.nf" hl_lines="11 21 22"
-process COWPY {
+process cowpy {
     tag "$meta.id"
     label 'process_single'
 
@@ -890,6 +1073,7 @@ process COWPY {
 ```
 
 Notice how all the patterns you applied manually above are already there!
+
 The template also includes several additional nf-core conventions.
 Some of these work out of the box, while others are placeholders we'll need to fill in, as described below.
 
@@ -910,24 +1094,74 @@ These features are already functional and make modules more maintainable.
 
 The next sections walk through completing these customizations.
 
-### 2.3. Completing the environment and container setup
+### 2.2. Set up the container and conda environment
 
-In the case of cowpy, the tool warned that it couldn't find the package in Bioconda (the primary channel for bioinformatics tools).
-However, cowpy is available in conda-forge, so you would complete the `environment.yml` like this:
+The nf-core guidelines require that we specify both a container and a Conda environment as part of the module.
 
-```yaml title="modules/local/cowpy/environment.yml"
-name: cowpy
-channels:
-  - conda-forge
-dependencies:
-  - cowpy=1.1.5
+#### 2.2.1. Container
+
+For the container, you can use [Seqera Containers](https://seqera.io/containers/) to automatically build a container from any Conda package, including conda-forge packages.
+In this case we are using the same prebuilt container as previously.
+
+The default code offers to toggle between Docker and Singularity, but we're going to simplify that line and just specify the Docker container we got from Seqera Containers above.
+
+=== "After"
+
+```groovy title="modules/local/cowpy/main.nf" linenums="3" hl_lines="6"
+process cowpy {
+    tag "$meta.id"
+    label 'process_single'
+
+    conda "${moduleDir}/environment.yml"
+    container "community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273"
 ```
 
-For the container, you can use [Seqera Containers](https://seqera.io/containers/) to automatically build a container from any Conda package, including conda-forge packages:
+=== "Before"
 
-```groovy
-container "community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273"
+```groovy title="modules/local/cowpy/main.nf" linenums="3" hl_lines="6"
+process cowpy {
+    tag "$meta.id"
+    label 'process_single'
+
+    conda "${moduleDir}/environment.yml"
+    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+        'https://depot.galaxyproject.org/singularity/YOUR-TOOL-HERE':
+        'biocontainers/YOUR-TOOL-HERE' }"
 ```
+
+#### 2.2.2. Conda environment
+
+For the Conda environment, the module code specifies `conda "${moduleDir}/environment.yml"` which means that it should be configured in the `environment.yml` file.
+
+The module creation tool warned us that it couldn't find the `cowpy` package in Bioconda (the primary channel for bioinformatics tools).
+However, cowpy is available in conda-forge, so you can complete the `environment.yml` like this:
+
+=== "After"
+
+    ```yaml title="modules/local/cowpy/environment.yml"  linenums="1" hl_lines="1 3 5"
+    name: cowpy
+    channels:
+      - conda-forge
+    dependencies:
+      - cowpy=1.1.5
+    ```
+
+=== "Before"
+
+    ```yaml title="modules/local/cowpy/environment.yml" linenums="1"
+    ---
+    # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/environment-schema.json
+    channels:
+      - conda-forge
+      - bioconda
+    dependencies:
+      # TODO nf-core: List required Conda package(s).
+      #               Software MUST be pinned to channel (i.e. "bioconda"), version (i.e. "1.10").
+      #               For Conda, the build (i.e. "h9402c20_2") must be EXCLUDED to support installation on different operating systems.
+      - "YOUR-TOOL-HERE"
+    ```
+
+For submission to nf-core, we would have to follow the defaults more closely, but for our own use we can simplify the code in this way.
 
 !!! tip "Bioconda vs conda-forge packages"
 
@@ -936,7 +1170,11 @@ container "community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273"
 
     Most bioinformatics tools are in Bioconda, but for conda-forge tools, Seqera Containers provides an easy solution for containerization.
 
-### 2.4. Defining inputs and outputs
+### 2.3. Plug in the `cowpy` logic
+
+Now let's update the code elements that are specific to what the `cowpy` process does: the inputs and outputs, and the script block.
+
+#### 2.3.1. Inputs and outputs
 
 The generated template includes generic input and output declarations that you'll need to customize for your specific tool.
 Looking back at our manual `cowpy` module from section 1, we can use that as a guide.
@@ -971,10 +1209,14 @@ This specifies:
 - The output filename using the configurable prefix pattern (`${prefix}.txt` instead of wildcard `*`)
 - A descriptive emit name (`cowpy_output` instead of generic `output`)
 
-### 2.5. Writing the script block
+If you're using the Nextflow language server to validate syntax, the `${prefix}` part will be flagged as an error at this stage because we haven't added it to the script block yet.
+Let's get to that now.
 
-The template provides a comment placeholder where you add the actual tool command.
-We can reference our manual module from earlier for the command logic:
+#### 2.3.2. The script block
+
+The template provides a comment placeholder in the script block where you should add the actual tool command.
+
+Based on the module we wrote manually earlier, we should make the following edits:
 
 === "After"
 
@@ -1012,20 +1254,22 @@ We can reference our manual module from earlier for the command logic:
 
 Key changes:
 
-- Change `def prefix` to just `prefix` (without `def`) so it's accessible in the output block
+- Change `def prefix` to just `prefix` (without `def`) to make it accessible in the output block
 - Replace the comment with the actual cowpy command that uses both `$args` and `${prefix}.txt`
 
-### 2.6. Implementing the stub block
+Note that if we hadn't already done the work of adding the `ext.args` and `ext.prefix` configuration for the `cowpy` process to the `modules.config` file, we would need to do that now.
 
-The stub block provides a fast mock implementation for testing pipeline logic without running the actual tool.
+#### 2.3.3. Implementing the stub block
 
-<!-- TODO (future) This is super glossed over but should really be explained or at least link out to an explanation about stubs. Right now this is meaningless to anyone who doesn't already know about stubs. -->
+In the Nextflow context, a [stub](https://www.nextflow.io/docs/latest/process.html#stub) block allows you to define a lightweight, dummy script used for rapid prototyping and testing of a pipeline's logic without executing the actual command.
 
-It must produce the same output files as the script block:
+<!-- TODO (future) This is super glossed over but should really be explained or at least link out to an explanation about stubs (the reference doc isn't terribly helpful either). Right now this is likely to be mostly meaningless to anyone who doesn't already know about stubs. -->
+
+Don't worry too much if this seems mysterious; we include this for completeness but you can also just delete the stub section if you don't want to deal with it, as it's completely optional.
 
 === "After"
 
-    ```groovy title="modules/local/cowpy/main.nf" linenums="27" hl_lines="3"
+    ```groovy title="modules/local/cowpy/main.nf" linenums="27" hl_lines="3 6"
     stub:
     def args = task.ext.args ?: ''
     prefix = task.ext.prefix ?: "${meta.id}"
@@ -1049,7 +1293,6 @@ It must produce the same output files as the script block:
 
     """
     echo $args
-    touch ${prefix}.txt
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
@@ -1066,9 +1309,9 @@ Key changes:
 
 This allows you to test workflow logic and file handling without waiting for the actual tool to run.
 
-Once you've completed the environment setup (section 2.1.2), inputs/outputs (section 2.1.3), script block (section 2.1.4), and stub block (section 2.1.5), the module is ready to test!
+Once you've completed the environment setup (section 2.2), inputs/outputs (section 2.3.1), script block (section 2.3.2), and stub block (section 2.3.3), the module is ready to test!
 
-### 2.7. Swap in the new `cowpy` module
+### 2.4. Swap in the new `cowpy` module and run the pipeline
 
 All we need to do to try out this new version of the `cowpy` module is to switch the import statement in the `hello.nf` workflow file to point to the new file.
 
@@ -1110,9 +1353,46 @@ Let's run the pipeline to test it.
 nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
 ```
 
-<!-- TODO: include the console outputs (folded under an example block) -->
+??? example "Output" hl_lines="33"
 
-You should find the same results as previously.
+    ```console
+      N E X T F L O W   ~  version 25.04.3
+
+    Launching `./main.nf` [prickly_neumann] DSL2 - revision: b9e9b3b8de
+
+    Input/output options
+      input                     : /workspaces/training/hello-nf-core/core-hello/assets/greetings.csv
+      outdir                    : core-hello-results
+
+    Institutional config options
+      config_profile_name       : Test profile
+      config_profile_description: Minimal test dataset to check pipeline function
+
+    Generic options
+      validate_params           : false
+      trace_report_suffix       : 2025-12-27_08-23-51
+
+    Core Nextflow options
+      runName                   : prickly_neumann
+      containerEngine           : docker
+      launchDir                 : /workspaces/training/hello-nf-core/core-hello
+      workDir                   : /workspaces/training/hello-nf-core/core-hello/work
+      projectDir                : /workspaces/training/hello-nf-core/core-hello
+      userName                  : root
+      profile                   : test,docker
+      configFiles               : /workspaces/training/hello-nf-core/core-hello/nextflow.config
+
+    !! Only displaying parameters that differ from the pipeline defaults !!
+    ------------------------------------------------------
+    executor >  local (8)
+    [e9/008ede] CORE_HELLO:HELLO:sayHello (3)       [100%] 3 of 3 ✔
+    [f0/d70cfe] CORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔
+    [be/0ecc58] CORE_HELLO:HELLO:CAT_CAT (test)     [100%] 1 of 1 ✔
+    [11/8e082f] CORE_HELLO:HELLO:cowpy (test)       [100%] 1 of 1 ✔
+    -[core/hello] Pipeline completed successfully-
+    ```
+
+This produces the same results as previously.
 
 ### Takeaway
 
@@ -1157,7 +1437,7 @@ For detailed instructions, see the [nf-core components tutorial](https://nf-co.r
 - **Module specifications**: [Technical requirements and guidelines](https://nf-co.re/docs/guidelines/components/modules)
 - **Community support**: [nf-core Slack](https://nf-co.re/join) - Join the `#modules` channel
 
-## Takeaway
+### Takeaway
 
 You now know how to create nf-core modules! You learned the four key patterns that make modules portable and maintainable:
 
@@ -1171,6 +1451,6 @@ In practice, you'll use `nf-core modules create` to generate properly structured
 
 Finally, you learned how to contribute modules to the nf-core community, making tools available to researchers worldwide while benefiting from ongoing community maintenance.
 
-## What's next?
+### What's next?
 
 When you're ready, continue to [Part 5: Input validation](./05_input_validation.md) to learn how to add schema-based input validation to your pipeline.
