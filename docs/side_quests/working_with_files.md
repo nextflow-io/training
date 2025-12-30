@@ -25,7 +25,7 @@ These skills will help you build workflows that can handle different kinds of fi
 
 Before taking on this side quest, you should:
 
-- Have completed the [Hello Nextflow](../hello_nextflow/README.md) tutorial or equivalent beginner's course.
+- Have completed the [Hello Nextflow](../../hello_nextflow/) tutorial or equivalent beginner's course.
 - Be comfortable using basic Nextflow concepts and mechanisms (processes, channels, operators)
 
 <!-- I removed the suggestion to do the metamaps SQ first because that works more naturally after -->
