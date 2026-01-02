@@ -264,10 +264,12 @@ For a complex workflow, or a large number of inputs, having the full list output
 
 That being said, we have another problem. If you look in the `results` directory, there is only one file: `output.txt`!
 
-```console title="Directory contents"
-results
-└── output.txt
-```
+??? example title="Directory contents"
+
+    ```console
+    results
+    └── output.txt
+    ```
 
 What's up with that? Shouldn't we be expecting a separate file per input greeting, so three files in all?
 Did all three greetings go into a single file?
@@ -364,15 +366,17 @@ executor >  local (3)
 [2d/90a2e2] sayHello (1) | 3 of 3 ✔
 ```
 
-Importantly, now we have three new files in addition to the one we already had in the `results` directory:
+Importantly, now we have three new files in addition to the one we already had in the `results` directory.
 
-```console title="Directory contents"
-results
-├── Bonjour-output.txt
-├── Hello-output.txt
-├── Holà-output.txt
-└── output.txt
-```
+??? example title="Directory contents"
+
+    ```console
+    results
+    ├── Bonjour-output.txt
+    ├── Hello-output.txt
+    ├── Holà-output.txt
+    └── output.txt
+    ```
 
 They each have the expected contents:
 

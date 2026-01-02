@@ -52,12 +52,14 @@ executor >  local (3)
 
 As previously, you will find the output files in the `results` directory (specified by the `publishDir` directive).
 
-```console title="Directory contents"
-results
-├── Bonjour-output.txt
-├── Hello-output.txt
-└── Holà-output.txt
-```
+??? example title="Directory contents"
+
+    ```console
+    results
+    ├── Bonjour-output.txt
+    ├── Hello-output.txt
+    └── Holà-output.txt
+    ```
 
 !!! note
 
@@ -212,11 +214,13 @@ There is now an extra line in the console output (line 7), which corresponds to 
 
 Let's have a look inside the work directory of one of the calls to the second process.
 
-```console title="Directory contents"
-work/b3/d52708edba8b864024589285cb3445/
-├── Bonjour-output.txt -> /workspaces/training/hello-nextflow/work/79/33b2f0af8438486258d200045bd9e8/Bonjour-output.txt
-└── UPPER-Bonjour-output.txt
-```
+??? example title="Directory contents"
+
+    ```console
+    work/b3/d52708edba8b864024589285cb3445/
+    ├── Bonjour-output.txt -> /workspaces/training/hello-nextflow/work/79/33b2f0af8438486258d200045bd9e8/Bonjour-output.txt
+    └── UPPER-Bonjour-output.txt
+    ```
 
 We find two output files: the output of the first process AND the output of the second.
 
@@ -226,15 +230,17 @@ By default, when running on a single machine as we're doing here, Nextflow uses 
 
 You'll also find the final outputs in the `results` directory since we used the `publishDir` directive in the second process too.
 
-```console title="Directory contents"
-results
-├── Bonjour-output.txt
-├── Hello-output.txt
-├── Holà-output.txt
-├── UPPER-Bonjour-output.txt
-├── UPPER-Hello-output.txt
-└── UPPER-Holà-output.txt
-```
+??? example title="Directory contents"
+
+    ```console
+    results
+    ├── Bonjour-output.txt
+    ├── Hello-output.txt
+    ├── Holà-output.txt
+    ├── UPPER-Bonjour-output.txt
+    ├── UPPER-Hello-output.txt
+    └── UPPER-Holà-output.txt
+    ```
 
 Think about how all we did was connect the output of `sayHello` to the input of `convertToUpper` and the two processes could be run in series.
 Nextflow did the hard work of handling individual input and output files and passing them between the two commands for us.

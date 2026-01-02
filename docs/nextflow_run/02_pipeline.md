@@ -15,19 +15,13 @@ And wherever possible, we want to run the processing of independent data in para
 To enable this efficiently, Nextflow uses a system of queues called **channels**.
 
 To demonstrate this, we've prepared a a CSV file called `greetings.csv` that contains several input greetings, mimicking the kind of columnar data you might want to process in a real data analysis.
-
-<details>
-  <summary>CSV file contents</summary>
+Note that the numbers are not meaningful, they are just there for illustrative purposes.
 
 ```csv title="greetings.csv" linenums="1"
 Hello,English,123
 Bonjour,French,456
 Holà,Spanish,789
 ```
-
-Note that the numbers are not meaningful, they are just there for illustrative purposes.
-
-</details>
 
 And we've written an improved version of the original workflow, now called `2a-inputs.nf`, that will read in the CSV file, extract the greetings and write each of them to a separate file.
 
@@ -68,17 +62,14 @@ This suggests the `sayHello()` process was called three times, once on each inpu
 
 Let's look at the 'results' directory to see if our workflow is still writing a copy of our outputs there.
 
-<details>
-  <summary>Directory contents</summary>
+??? example title="Directory contents"
 
-```console title="results/" linenums="1"
-results
-├── Bonjour-output.txt
-├── Hello-output.txt
-└── Holà-output.txt
-```
-
-</details>
+    ```console linenums="1"
+    results
+    ├── Bonjour-output.txt
+    ├── Hello-output.txt
+    └── Holà-output.txt
+    ```
 
 Yes! We see three output files with different names, conveniently enough.
 (Spoiler: we changed the workflow to name the files differently.)
@@ -87,22 +78,19 @@ If you haven't deleted the `results` folder when running Part 1 of this training
 
 You can open each of them to satisfy yourself that they contain the appropriate greeting string.
 
-<details>
-  <summary>File contents</summary>
+??? example title="File contents"
 
-```console title="results/Hello-output.txt"
-Hello
-```
+    ```console title="results/Hello-output.txt"
+    Hello
+    ```
 
-```console title="results/Bonjour-output.txt"
-Bonjour
-```
+    ```console title="results/Bonjour-output.txt"
+    Bonjour
+    ```
 
-```console title="results/Holà-output.txt"
-Holà
-```
-
-</details>
+    ```console title="results/Holà-output.txt"
+    Holà
+    ```
 
 This confirms each greeting in the input file has been processed appropriately.
 
@@ -111,17 +99,16 @@ This confirms each greeting in the input file has been processed appropriately.
 You may have noticed that the console output above referred to only one task directory.
 Does that mean all three calls to `sayHello()` were executed within that one task directory?
 
-Let's have a look inside that `8e/0eb066` task directory:
+Let's have a look inside that `8e/0eb066` task directory.
 
-<details>
-  <summary>Directory contents</summary>
-```console title="8e/0eb066"
-work/8e/0eb066071cdb4123906b7b4ea8b047/
-└── Bonjour-output.txt
-```
-</details>
+??? example title="Directory contents"
 
-No! We only find the output corresponding to one of the greetings (as well as the accessory files if we enable display of hidden files).
+    ```console title="8e/0eb066"
+    work/8e/0eb066071cdb4123906b7b4ea8b047/
+    └── Bonjour-output.txt
+    ```
+
+We only find the output corresponding to one of the greetings (as well as the accessory files if we enable display of hidden files).
 
 So what's going on here?
 
@@ -158,25 +145,22 @@ This confirms that the `sayHello()` process gets called three times, and a separ
 
 If we look inside each of the task directories listed there, we can verify that each one corresponds to one of the greetings.
 
-<details>
-  <summary>Directory contents</summary>
+??? example title="Directory contents"
 
-```console title="ab/1a8ece"
-work/ab/1a8ece307e53f03fce689dde904b64/
-└── Hello-output.txt
-```
+    ```console title="ab/1a8ece"
+    work/ab/1a8ece307e53f03fce689dde904b64/
+    └── Hello-output.txt
+    ```
 
-```console title="0d/2cae24"
-work/0d/2cae2481a53593bc607077c80c9466/
-└── Bonjour-output.txt
-```
+    ```console title="0d/2cae24"
+    work/0d/2cae2481a53593bc607077c80c9466/
+    └── Bonjour-output.txt
+    ```
 
-```console title="b5/0df1d6"
-work/b5/0df1d642353269909c2ce23fc2a8fa/
-└── Holà-output.txt
-```
-
-</details>
+    ```console title="b5/0df1d6"
+    work/b5/0df1d642353269909c2ce23fc2a8fa/
+    └── Holà-output.txt
+    ```
 
 This confirms that each process call is executed in isolation from all the others.
 That has many advantages, including avoiding collisions if the process produces any intermediate files with non-unique names.
@@ -374,21 +358,18 @@ You see that as promised, multiple steps were run as part of the workflow; the f
 
 Let's verify that that is in fact what happened by taking a look in the `results` directory.
 
-<details>
-  <summary>Directory contents</summary>
+??? example title="Directory contents"
 
-```console title="Directory contents"
-results
-├── Bonjour-output.txt
-├── COLLECTED-output.txt
-├── Hello-output.txt
-├── Holà-output.txt
-├── UPPER-Bonjour-output.txt
-├── UPPER-Hello-output.txt
-└── UPPER-Holà-output.txt
-```
-
-</details>
+    ```console
+    results
+    ├── Bonjour-output.txt
+    ├── COLLECTED-output.txt
+    ├── Hello-output.txt
+    ├── Holà-output.txt
+    ├── UPPER-Bonjour-output.txt
+    ├── UPPER-Hello-output.txt
+    └── UPPER-Holà-output.txt
+    ```
 
 Look at the file names and check their contents to confirm that they are what you expect; for example:
 
@@ -618,18 +599,15 @@ This makes the code more shareable, flexible and maintainable.
 
 We have of course once again prepared a suitable workflow for demonstration purposes, called `2c-modules.nf`, along with a set of modules located in the `modules/` directory.
 
-<details>
-  <summary>Directory contents</summary>
+??? example title="Directory contents"
 
-```console title="modules/"
-modules/
-├── collectGreetings.nf
-├── convertToUpper.nf
-├── cowpy.nf
-└── sayHello.nf
-```
-
-</details>
+    ```console
+    modules/
+    ├── collectGreetings.nf
+    ├── convertToUpper.nf
+    ├── cowpy.nf
+    └── sayHello.nf
+    ```
 
 You see there are four Nextflow files, each named after one of the processes.
 You can ignore the `cowpy.nf` file for now; we'll get to that one later.
@@ -777,7 +755,7 @@ This tells the system to download the image specified.
 <details>
   <summary>Command output</summary>
 
-```console linenums="1"
+```console
 Unable to find image 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273' locally
 131d6a1b707a8e65: Pulling from library/cowpy
 dafa2b0c44d2: Pull complete
@@ -815,8 +793,6 @@ docker run --rm '<container>' [tool command]
 - `docker run --rm '<container>'` is the instruction to the container system to spin up a container instance from a container image and execute a command in it.
 - `--rm` tells the system to shut down the container instance after the command has completed.
 
-</details>
-
 Fully assembled, the container execution command looks like this:
 
 ```bash
@@ -831,14 +807,9 @@ You can verify this by running `ls` to list directory contents:
 ls /
 ```
 
-<details>
-  <summary>Command output</summary>
-
-```console
+```console title="Command output"
 bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
 ```
-
-</details>
 
 You observe see that the filesystem inside the container is different from the filesystem on your host system.
 

@@ -52,18 +52,20 @@ executor >  local (7)
 
 As previously, you will find the output files in the `results` directory (specified by the `publishDir` directive).
 
-```console title="Directory contents"
-results
-├── Bonjour-output.txt
-├── COLLECTED-output.txt
-├── COLLECTED-test-batch-output.txt
-├── COLLECTED-trio-output.txt
-├── Hello-output.txt
-├── Holà-output.txt
-├── UPPER-Bonjour-output.txt
-├── UPPER-Hello-output.txt
-└── UPPER-Holà-output.txt
-```
+??? example title="Directory contents"
+
+    ```console
+    results
+    ├── Bonjour-output.txt
+    ├── COLLECTED-output.txt
+    ├── COLLECTED-test-batch-output.txt
+    ├── COLLECTED-trio-output.txt
+    ├── Hello-output.txt
+    ├── Holà-output.txt
+    ├── UPPER-Bonjour-output.txt
+    ├── UPPER-Hello-output.txt
+    └── UPPER-Holà-output.txt
+    ```
 
 !!! note
 
