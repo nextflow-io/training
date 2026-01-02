@@ -104,7 +104,7 @@ Let's open the `hello-world.nf` script in the editor pane.
 process sayHello {
 
     output:
-        path 'output.txt'
+    path 'output.txt'
 
     script:
     """
@@ -139,7 +139,7 @@ Here we have a **process** called `sayHello` that writes its **output** to a fil
 process sayHello {
 
     output:
-        path 'output.txt'
+    path 'output.txt'
 
     script:
     """
@@ -254,23 +254,23 @@ Let's take a look at what's in there.
     tree -a work
     ```
 
-You should see something like this, though the exact subdirectory names will be different on your system:
+??? example title="Directory contents"
 
-```console title="Directory contents"
-work
-└── a3
-    └── 7be2fad5e71e5f49998f795677fd68
-        ├── .command.begin
-        ├── .command.err
-        ├── .command.log
-        ├── .command.out
-        ├── .command.run
-        ├── .command.sh
-        ├── .exitcode
-        └── output.txt
-```
+    ```console
+    work
+    └── a3
+        └── 7be2fad5e71e5f49998f795677fd68
+            ├── .command.begin
+            ├── .command.err
+            ├── .command.log
+            ├── .command.out
+            ├── .command.run
+            ├── .command.sh
+            ├── .exitcode
+            └── output.txt
+    ```
 
-These are the helper and log files:
+The exact subdirectory names will be different on your system, but you should see the following helper and log files:
 
 - **`.command.begin`**: Metadata related to the beginning of the execution of the process call
 - **`.command.err`**: Error messages (`stderr`) emitted by the process call
@@ -284,7 +284,7 @@ The `.command.sh` file is especially useful because it tells you what command Ne
 In this case it's very straightforward, but later in the course you'll see commands that involve some interpolation of variables.
 When you're dealing with that, you need to be able to check exactly what was run, especially when troubleshooting an issue.
 
-The actual output of the `sayHello` process is `output.txt`.
+Finally the actual output of the `sayHello` process is `output.txt`.
 Open it and you will find the `Hello World!` greeting, which was the expected result of our minimalist workflow.
 
 ```console title="output.txt" linenums="1"

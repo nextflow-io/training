@@ -172,24 +172,21 @@ Let's take a look at what's in there.
 
 The exact subdirectory names will be different on your system.
 
-<details>
-  <summary>Directory contents</summary>
+??? example title="Directory contents"
 
-```console title="work/"
-work
-└── a3
-    └── 7be2fad5e71e5f49998f795677fd68
-        ├── .command.begin
-        ├── .command.err
-        ├── .command.log
-        ├── .command.out
-        ├── .command.run
-        ├── .command.sh
-        ├── .exitcode
-        └── output.txt
-```
-
-</details>
+    ```console
+    work
+    └── a3
+        └── 7be2fad5e71e5f49998f795677fd68
+            ├── .command.begin
+            ├── .command.err
+            ├── .command.log
+            ├── .command.out
+            ├── .command.run
+            ├── .command.sh
+            ├── .exitcode
+            └── output.txt
+    ```
 
 You should immediately recognize the `output.txt` file, which is in fact the original output of the `sayHello` process that got published to the `results` directory.
 If you open it, you will find the `Hello World!` greeting again.
