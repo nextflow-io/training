@@ -4,7 +4,7 @@ In this fifth part of the Hello nf-core training course, we show you how to use 
 
 !!! note
 
-    This section assumes you have completed [Part 4: Make an nf-core module](./04_make_module.md) and have updated the `COWPY` module to nf-core standards in your pipeline.
+    This section assumes you have completed [Part 4: Make an nf-core module](./04_make_module.md) and have updated the `cowpy` module to nf-core standards in your pipeline.
 
     If you did not complete Part 4 or want to start fresh for this part, you can use the `core-hello-part4` solution as your starting point.
     Run these commands from inside the `hello-nf-core/` directory:
@@ -14,7 +14,7 @@ In this fifth part of the Hello nf-core training course, we show you how to use 
     cd core-hello
     ```
 
-    This gives you a pipeline with the `COWPY` module already upgraded to follow nf-core standards.
+    This gives you a pipeline with the `cowpy` module already upgraded to follow nf-core standards.
 
 ---
 
@@ -738,9 +738,7 @@ You've implemented and tested both parameter validation and input data validatio
 
     To learn more about advanced validation features and patterns, check out the [nf-schema documentation](https://nextflow-io.github.io/nf-schema/latest/). The `nf-core pipelines schema build` command provides an interactive GUI for managing complex schemas.
 
----
-
-## What's next?
+### What's next?
 
 You've completed all five parts of the Hello nf-core training course!
 

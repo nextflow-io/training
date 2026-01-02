@@ -400,7 +400,7 @@ process CAT_CAT {
 The CAT_CAT module takes a single input, but that input is a tuple containing two things:
 
 - `meta` is a structure containing metadata, called a metamap;
-- `input_files` contains one or more input files to process, equivalent to `collectGreetings`'s `input_files`.
+- `files_in` contains one or more input files to process, equivalent to `collectGreetings`'s `input_files`.
 
 Upon completion, CAT_CAT delivers its outputs in two parts:
 
@@ -411,7 +411,9 @@ Note also that by default, the output file will be named based on an identifier 
 
 This may seem like a lot to keep track of just looking at the code, so here's a diagram to help you visualize how everything fits together.
 
-<!-- TODO: diagram of differences between the two module interfaces -->
+<figure class="excalidraw">
+--8<-- "docs/hello_nf-core/img/module_comparison.svg"
+</figure>
 
 You can see that the two modules have similar input requirements in terms of content (a set of input files plus some metadata) but very different expectations for how that content is packaged.
 Ignoring the versions file for now, their main output is equivalent too (a concatenated file), except CAT_CAT also emits the metamap in conjunction with the output file.
