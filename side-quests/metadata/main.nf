@@ -1,5 +1,5 @@
 workflow  {
 
-    ch_samplesheet = channel.fromPath("./data/samplesheet.csv")
+    ch_datasheet = channel.fromPath("./data/datasheet.csv")
 
 }
