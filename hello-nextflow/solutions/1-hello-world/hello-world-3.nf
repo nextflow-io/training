@@ -8,7 +8,7 @@ process sayHello {
     publishDir 'results', mode: 'copy'
 
     output:
-        path 'output.txt'
+    path 'output.txt'
 
     script:
     """
