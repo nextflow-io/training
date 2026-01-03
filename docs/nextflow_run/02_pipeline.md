@@ -190,7 +190,7 @@ Once again, we're not aiming to memorize code syntax, but to identify signature 
 
         script:
         """
-        echo '$greeting' > '$greeting-output.txt'
+        echo '${greeting}' > '$greeting-output.txt'
         """
     }
 
@@ -280,7 +280,7 @@ Finally, it's worth taking a quick look at how we get the output files to be nam
 
     script:
     """
-    echo '$greeting' > '$greeting-output.txt'
+    echo '${greeting}' > '$greeting-output.txt'
     """
 ```
 
@@ -397,7 +397,7 @@ Let's look at the code and see what we can tie back to what we just observed.
 
         script:
         """
-        echo '$greeting' > '$greeting-output.txt'
+        echo '${greeting}' > '$greeting-output.txt'
         """
     }
 
@@ -625,7 +625,7 @@ You can look inside one of the modules to satisfy yourself that the process defi
 
         script:
         """
-        echo '$greeting' > '$greeting-output.txt'
+        echo '${greeting}' > '$greeting-output.txt'
         """
     }
     ```
