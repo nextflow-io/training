@@ -369,16 +369,22 @@ However, many real-world workflows will have many more parameters that may be ru
 
 ### 4.1. Specify default parameter values
 
-It is possible to specify default values in the workflow script itself; for example you may see something like this in the main body of the workflow:
+It is possible to specify default values in the workflow script itself.
+For example, you may see something like this in the main body of the workflow, either in the old syntax (up to 2025) or the newer syntax (starting in 2026) which specifies the variable type:
 
-<!-- TODO: update for typed workflow inputs? -->
-
-```groovy title="Syntax example"
+```groovy title="Syntax example (old syntax)"
 params.input = 'greetings.csv'
 params.character = 'turkey'
 ```
 
-The same syntax can also be used to store parameter defaults in the `nextflow.config` file.
+```groovy title="Syntax example (new syntax)"
+params {
+    input: Path = 'greetings.csv'
+    character: String = 'turkey'
+}
+```
+
+The latter syntax can also be used to store parameter defaults in the `nextflow.config` file.
 Let's try that out.
 
 Open the `nextflow.config` file and add the following lines to it:
@@ -387,8 +393,10 @@ Open the `nextflow.config` file and add the following lines to it:
 /*
  * Pipeline parameters
  */
-params.input = 'greetings.csv'
-params.character = 'turkey'
+params {
+    input: Path = 'greetings.csv'
+    character: String = 'turkey'
+}
 ```
 
 ??? example title="Configuration file"
@@ -408,8 +416,10 @@ params.character = 'turkey'
     /*
     * Pipeline parameters
     */
-    params.input = 'greetings.csv'
-    params.character = 'turkey'
+    params {
+        input: Path = 'greetings.csv'
+        character: String = 'turkey'
+    }
     ```
 
 Now you can run the workflow without specifying the parameters on the command line.
@@ -491,8 +501,10 @@ touch nextflow.config
 Now open the new file and add the parameters you want to customize:
 
 ```groovy title="tux-run/nextflow.config" linenums="1"
-params.input = '../greetings.csv'
-params.character = 'tux'
+params {
+    input: Path = '../greetings.csv'
+    character: String = 'tux'
+}
 ```
 
 Note that the path to the input file must reflect the directory structure.
@@ -559,6 +571,8 @@ Nextflow also allows us to specify parameters via a parameter file in either YAM
 This makes it very convenient to manage and distribute alternative sets of default values, for example, as well as run-specific parameter values.
 
 We provide an example YAML parameter file in the current directory, called `test-params.yaml`, which contains a key-value pair for each of the inputs our workflow expects.
+
+<!-- TODO: does this need to be updated with types? -->
 
 ```yaml title="test-params.yaml" linenums="1"
 input: "greetings.csv"
@@ -702,7 +716,7 @@ We can also use them to swap out sets of default values for workflow parameters,
 
 Let's take the example of creating a test profile to make it easy to test the workflow with minimal effort.
 
-The syntax for expressing default values is the same as when writing them into the workflow file itself, except we wrap them in a block named `test`:
+The syntax for expressing default values is the same as when writing them into the workflow file itself, except we wrap them in a block named `test`: <!-- TODO: update this to be consistent with typed input updates -->
 
 ```groovy title="Syntax example"
     test {
@@ -821,6 +835,8 @@ Run this command to resolve the configuration that would be applied by default.
 nextflow config
 ```
 
+<!-- TODO: update with types -->
+
 ??? example title="Output"
 
     ```groovy
@@ -853,6 +869,8 @@ If you provide command-line parameters, e.g. enabling one or more profiles or lo
 ```bash
 nextflow config -profile my_laptop,test
 ```
+
+<!-- TODO: update with types -->
 
 ??? example title="Output"
 
