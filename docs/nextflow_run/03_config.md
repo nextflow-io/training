@@ -98,22 +98,19 @@ nextflow run 3-main.nf --input greetings.csv --character turkey
 
 This should work without error.
 
-<details>
-  <summary>Command output</summary>
+??? example title="Output"
 
-```console title="Output"
- N E X T F L O W   ~  version 25.04.3
+    ```console
+    N E X T F L O W   ~  version 25.04.3
 
-Launching `3-main.nf` [trusting_lovelace] DSL2 - revision: 028a841db1
+    Launching `3-main.nf` [trusting_lovelace] DSL2 - revision: 028a841db1
 
-executor >  local (8)
-[ee/4ca1f2] sayHello (3)       | 3 of 3 ✔
-[20/2596a7] convertToUpper (1) | 3 of 3 ✔
-[b3/e15de5] collectGreetings   | 1 of 1 ✔
-[c5/af5f88] cowpy              | 1 of 1 ✔
-```
-
-</details>
+    executor >  local (8)
+    [ee/4ca1f2] sayHello (3)       | 3 of 3 ✔
+    [20/2596a7] convertToUpper (1) | 3 of 3 ✔
+    [b3/e15de5] collectGreetings   | 1 of 1 ✔
+    [c5/af5f88] cowpy              | 1 of 1 ✔
+    ```
 
 Behind the scenes, Nextflow has retrieved the Conda packages and created the environment, which normally takes a bit of work; so it's nice that we don't have to do any of that ourselves!
 
@@ -184,48 +181,35 @@ Most high-performance computing platforms allow (and sometimes require) that you
 
 Unfortunately, each of these systems uses different technologies, syntaxes and configurations for defining how a job should be defined and submitted to the relevant scheduler.
 
-For example, a job requiring 8 CPUs and 4GB of RAM to be executed on the queue "my-science-work" needs to be expressed in the following ways depending on the backend:
+For example, the same job requiring 8 CPUs and 4GB of RAM to be executed on the queue "my-science-work" needs to be expressed in different following ways depending on the backend.
 
-<details>
-  <summary>Config for SLURM / submit using `sbatch`</summary>
+??? example title="Examples"
 
-```bash
-#SBATCH -o /path/to/my/task/directory/my-task-1.log
-#SBATCH --no-requeue
-#SBATCH -c 8
-#SBATCH --mem 4096M
-#SBATCH -p my-science-work
-```
+    ```bash title="Config for SLURM / submit using sbatch"
+    #SBATCH -o /path/to/my/task/directory/my-task-1.log
+    #SBATCH --no-requeue
+    #SBATCH -c 8
+    #SBATCH --mem 4096M
+    #SBATCH -p my-science-work
+    ```
 
-</details>
+    ```bash title="Config for PBS / submit using qsub"
+    #PBS -o /path/to/my/task/directory/my-task-1.log
+    #PBS -j oe
+    #PBS -q my-science-work
+    #PBS -l nodes=1:ppn=5
+    #PBS -l mem=4gb
+    ```
 
-<details>
-  <summary>Config for PBS / submit using `qsub`</summary>
-
-```bash
-#PBS -o /path/to/my/task/directory/my-task-1.log
-#PBS -j oe
-#PBS -q my-science-work
-#PBS -l nodes=1:ppn=5
-#PBS -l mem=4gb
-```
-
-</details>
-
-<details>
-  <summary>Config for SGE / submit using `qsub`</summary>
-
-```bash
-#$ -o /path/to/my/task/directory/my-task-1.log
-#$ -j y
-#$ -terse
-#$ -notify
-#$ -q my-science-work
-#$ -l slots=5
-#$ -l h_rss=4096M,mem_free=4096M
-```
-
-</details>
+    ```bash title="Config for SGE / submit using qsub"
+    #$ -o /path/to/my/task/directory/my-task-1.log
+    #$ -j y
+    #$ -terse
+    #$ -notify
+    #$ -q my-science-work
+    #$ -l slots=5
+    #$ -l h_rss=4096M,mem_free=4096M
+    ```
 
 Fortunately, Nextflow simplifies all of this.
 It provides a standardized syntax so that you can specify the relevant properties such as `cpus`, `memory` and `queue` (see documentation for other properties) just once.
@@ -387,6 +371,8 @@ However, many real-world workflows will have many more parameters that may be ru
 
 It is possible to specify default values in the workflow script itself; for example you may see something like this in the main body of the workflow:
 
+<!-- TODO: update for typed workflow inputs? -->
+
 ```groovy title="Syntax example"
 params.input = 'greetings.csv'
 params.character = 'turkey'
@@ -405,91 +391,81 @@ params.input = 'greetings.csv'
 params.character = 'turkey'
 ```
 
-<details>
-  <summary>Code (full file)</summary>
+??? example title="Configuration file"
 
-```groovy title="nextflow.config" linenums="1"
-docker.enabled = false
-conda.enabled = true
+    ```groovy title="nextflow.config" linenums="1"
+    docker.enabled = false
+    conda.enabled = true
 
-process {
-    memory = 1.GB
-    withName: 'cowpy' {
-        memory = 2.GB
-        cpus = 2
+    process {
+        memory = 1.GB
+        withName: 'cowpy' {
+            memory = 2.GB
+            cpus = 2
+        }
     }
-}
 
-/*
- * Pipeline parameters
- */
-params.input = 'greetings.csv'
-params.character = 'turkey'
-```
-
-</details>
+    /*
+    * Pipeline parameters
+    */
+    params.input = 'greetings.csv'
+    params.character = 'turkey'
+    ```
 
 Now you can run the workflow without specifying the parameters on the command line.
+This will produce the same output but is more convenient to type, especially when the workflow requires multiple parameters:
 
 ```bash
 nextflow run 3-main.nf
 ```
 
-This will produce the same output, but is more convenient to type, especially when the workflow requires multiple parameters.
+??? example title="Output"
 
-<details>
-  <summary>Command output</summary>
+    ```console
+    N E X T F L O W   ~  version 25.04.3
 
-```console linenums="1"
- N E X T F L O W   ~  version 25.04.3
+    Launching `3-main.nf` [wise_mahavira] DSL2 - revision: 356df0818d
 
-Launching `3-main.nf` [wise_mahavira] DSL2 - revision: 356df0818d
-
-executor >  local (8)
-[2e/d12fcb] sayHello (2)       [100%] 3 of 3 ✔
-[a0/5799b6] convertToUpper (3) [100%] 3 of 3 ✔
-[db/d3bbb6] collectGreetings   [100%] 1 of 1 ✔
-[a9/f75d13] cowpy              [100%] 1 of 1 ✔
-```
-
-</details>
+    executor >  local (8)
+    [2e/d12fcb] sayHello (2)       [100%] 3 of 3 ✔
+    [a0/5799b6] convertToUpper (3) [100%] 3 of 3 ✔
+    [db/d3bbb6] collectGreetings   [100%] 1 of 1 ✔
+    [a9/f75d13] cowpy              [100%] 1 of 1 ✔
+    ```
 
 The final output file should contain the turkey character saying the greetings.
 
-<details>
-  <summary>File contents</summary>
+??? example title="File contents"
 
-```console title="results/cowpy-COLLECTED-output.txt"
- _________
-/ HELLO   \
-| BONJOUR |
-\ HOLà    /
- ---------
-  \                                  ,+*^^*+___+++_
-   \                           ,*^^^^              )
-    \                       _+*                     ^**+_
-     \                    +^       _ _++*+_+++_,         )
-              _+^^*+_    (     ,+*^ ^          \+_        )
-             {       )  (    ,(    ,_+--+--,      ^)      ^\
-            { (\@)    } f   ,(  ,+-^ __*_*_  ^^\_   ^\       )
-           {:;-/    (_+*-+^^^^^+*+*<_ _++_)_    )    )      /
-          ( /  (    (        ,___    ^*+_+* )   <    <      \
-           U _/     )    *--<  ) ^\-----++__)   )    )       )
-            (      )  _(^)^^))  )  )\^^^^^))^*+/    /       /
-          (      /  (_))_^)) )  )  ))^^^^^))^^^)__/     +^^
-         (     ,/    (^))^))  )  ) ))^^^^^^^))^^)       _)
-          *+__+*       (_))^)  ) ) ))^^^^^^))^^^^^)____*^
-          \             \_)^)_)) ))^^^^^^^^^^))^^^^)
-           (_             ^\__^^^^^^^^^^^^))^^^^^^^)
-             ^\___            ^\__^^^^^^))^^^^^^^^)\\
-                  ^^^^^\uuu/^^\uuu/^^^^\^\^\^\^\^\^\^\
-                     ___) >____) >___   ^\_\_\_\_\_\_\)
-                    ^^^//\\_^^//\\_^       ^(\_\_\_\)
-                      ^^^ ^^ ^^^ ^
+    ```console title="results/cowpy-COLLECTED-output.txt"
+    _________
+    / HELLO   \
+    | BONJOUR |
+    \ HOLà    /
+    ---------
+      \                                  ,+*^^*+___+++_
+      \                           ,*^^^^              )
+        \                       _+*                     ^**+_
+        \                    +^       _ _++*+_+++_,         )
+                  _+^^*+_    (     ,+*^ ^          \+_        )
+                {       )  (    ,(    ,_+--+--,      ^)      ^\
+                { (\@)    } f   ,(  ,+-^ __*_*_  ^^\_   ^\       )
+              {:;-/    (_+*-+^^^^^+*+*<_ _++_)_    )    )      /
+              ( /  (    (        ,___    ^*+_+* )   <    <      \
+              U _/     )    *--<  ) ^\-----++__)   )    )       )
+                (      )  _(^)^^))  )  )\^^^^^))^*+/    /       /
+              (      /  (_))_^)) )  )  ))^^^^^))^^^)__/     +^^
+            (     ,/    (^))^))  )  ) ))^^^^^^^))^^)       _)
+              *+__+*       (_))^)  ) ) ))^^^^^^))^^^^^)____*^
+              \             \_)^)_)) ))^^^^^^^^^^))^^^^)
+              (_             ^\__^^^^^^^^^^^^))^^^^^^^)
+                ^\___            ^\__^^^^^^))^^^^^^^^)\\
+                      ^^^^^\uuu/^^\uuu/^^^^\^\^\^\^\^\^\^\
+                        ___) >____) >___   ^\_\_\_\_\_\_\)
+                        ^^^//\\_^^//\\_^       ^(\_\_\_\)
+                          ^^^ ^^ ^^^ ^
 
-```
-
-</details>
+    ```
 
 You can override those defaults by providing parameter values on the command line, or by providing them through another source of configuration information.
 
@@ -529,49 +505,43 @@ nextflow run ../3-main.nf
 
 This will create a new set of directories under `tux-run/` including `tux-run/work/` and `tux-run/results/`.
 
-<details>
-  <summary>Command output</summary>
+??? example title="Output"
 
-```console linenums="1"
- N E X T F L O W   ~  version 25.04.3
+    ```console
+    N E X T F L O W   ~  version 25.04.3
 
-Launching `../3-main.nf` [trusting_escher] DSL2 - revision: 356df0818d
+    Launching `../3-main.nf` [trusting_escher] DSL2 - revision: 356df0818d
 
-executor >  local (8)
-[59/b66913] sayHello (2)       [100%] 3 of 3 ✔
-[ad/f06364] convertToUpper (3) [100%] 3 of 3 ✔
-[10/714895] collectGreetings   [100%] 1 of 1 ✔
-[88/3ece98] cowpy              [100%] 1 of 1 ✔
-```
-
-</details>
+    executor >  local (8)
+    [59/b66913] sayHello (2)       [100%] 3 of 3 ✔
+    [ad/f06364] convertToUpper (3) [100%] 3 of 3 ✔
+    [10/714895] collectGreetings   [100%] 1 of 1 ✔
+    [88/3ece98] cowpy              [100%] 1 of 1 ✔
+    ```
 
 In this run, Nextflow combines the `nextflow.config` in our current directory with the `nextflow.config` in the root directory of the pipeline, and thereby overrides the default character (turkey) with the tux character.
 
 The final output file should contain the tux character saying the greetings.
 
-<details>
-  <summary>File contents</summary>
+??? example title="File contents"
 
-```console title="results/cowpy-COLLECTED-output.txt"
- _________
-/ HELLO   \
-| BONJOUR |
-\ HOLà    /
- ---------
-   \
-    \
-        .--.
-       |o_o |
-       |:_/ |
-      //   \ \
-     (|     | )
-    /'\_   _/`\
-    \___)=(___/
+    ```console title="results/cowpy-COLLECTED-output.txt"
+    _________
+    / HELLO   \
+    | BONJOUR |
+    \ HOLà    /
+    ---------
+      \
+        \
+            .--.
+          |o_o |
+          |:_/ |
+          //   \ \
+        (|     | )
+        /'\_   _/`\
+        \___)=(___/
 
-```
-
-</details>
+    ```
 
 That's it!
 
@@ -590,15 +560,10 @@ This makes it very convenient to manage and distribute alternative sets of defau
 
 We provide an example YAML parameter file in the current directory, called `test-params.yaml`, which contains a key-value pair for each of the inputs our workflow expects.
 
-<details>
-  <summary>File contents</summary>
-
 ```yaml title="test-params.yaml" linenums="1"
 input: "greetings.csv"
 character: "stegosaurus"
 ```
-
-</details>
 
 To run the workflow with this parameter file, simply add `-params-file <filename>` to the base command.
 
@@ -606,53 +571,45 @@ To run the workflow with this parameter file, simply add `-params-file <filename
 nextflow run 3-main.nf -params-file test-params.yaml
 ```
 
-This should run without error.
+??? example title="Output"
 
-<details>
-  <summary>Command output</summary>
+    ```console
+    N E X T F L O W   ~  version 25.04.3
 
-```console title="Output"
- N E X T F L O W   ~  version 25.04.3
+    Launching `3-main.nf` [disturbed_sammet] DSL2 - revision: ede9037d02
 
-Launching `3-main.nf` [disturbed_sammet] DSL2 - revision: ede9037d02
-
-executor >  local (8)
-[f0/35723c] sayHello (2)       | 3 of 3 ✔
-[40/3efd1a] convertToUpper (3) | 3 of 3 ✔
-[17/e97d32] collectGreetings   | 1 of 1 ✔
-[98/c6b57b] cowpy              | 1 of 1 ✔
-```
-
-</details>
+    executor >  local (8)
+    [f0/35723c] sayHello (2)       | 3 of 3 ✔
+    [40/3efd1a] convertToUpper (3) | 3 of 3 ✔
+    [17/e97d32] collectGreetings   | 1 of 1 ✔
+    [98/c6b57b] cowpy              | 1 of 1 ✔
+    ```
 
 The final output file should contain the stegosaurus character saying the greetings.
 
-<details>
-  <summary>File contents</summary>
+??? example title="File contents"
 
-```console title="results/cowpy-COLLECTED-output.txt"
-_________
-/ HELLO   \
-| HOLà    |
-\ BONJOUR /
- ---------
-\                             .       .
- \                           / `.   .' "
-  \                  .---.  <    > <    >  .---.
-   \                 |    \  \ - ~ ~ - /  /    |
-         _____          ..-~             ~-..-~
-        |     |   \~~~\.'                    `./~~~/
-       ---------   \__/                        \__/
-      .'  O    \     /               /       \  "
-     (_____,    `._.'               |         }  \/~~~/
-      `----.          /       }     |        /    \__/
-            `-.      |       /      |       /      `. ,~~|
-                ~-.__|      /_ - ~ ^|      /- _      `..-'
-                     |     /        |     /     ~-.     `-. _  _  _
-                     |_____|        |_____|         ~ - . _ _ _ _ _>
-```
-
-</details>
+    ```console title="results/cowpy-COLLECTED-output.txt"
+    _________
+    / HELLO   \
+    | HOLà    |
+    \ BONJOUR /
+    ---------
+    \                             .       .
+    \                           / `.   .' "
+      \                  .---.  <    > <    >  .---.
+      \                 |    \  \ - ~ ~ - /  /    |
+            _____          ..-~             ~-..-~
+            |     |   \~~~\.'                    `./~~~/
+          ---------   \__/                        \__/
+          .'  O    \     /               /       \  "
+        (_____,    `._.'               |         }  \/~~~/
+          `----.          /       }     |        /    \__/
+                `-.      |       /      |       /      `. ,~~|
+                    ~-.__|      /_ - ~ ^|      /- _      `..-'
+                        |     /        |     /     ~-.     `-. _  _  _
+                        |_____|        |_____|         ~ - . _ _ _ _ _>
+    ```
 
 Using a parameter file may seem like overkill when you only have a few parameters to specify, but some pipelines expect dozens of parameters.
 In those cases, using a parameter file will allow us to provide parameter values at runtime without having to type massive command lines and without modifying the workflow script.
@@ -715,22 +672,19 @@ nextflow run 3-main.nf -profile my_laptop
 
 This should run without error and produce the same results as previously.
 
-<details>
-  <summary>Command output</summary>
+??? example title="Output"
 
-```console
- N E X T F L O W   ~  version 25.04.3
+    ```console
+    N E X T F L O W   ~  version 25.04.3
 
-Launching `3-main.nf` [gigantic_brazil] DSL2 - revision: ede9037d02
+    Launching `3-main.nf` [gigantic_brazil] DSL2 - revision: ede9037d02
 
-executor >  local (8)
-[58/da9437] sayHello (3)       | 3 of 3 ✔
-[35/9cbe77] convertToUpper (2) | 3 of 3 ✔
-[67/857d05] collectGreetings   | 1 of 1 ✔
-[37/7b51b5] cowpy              | 1 of 1 ✔
-```
-
-</details>
+    executor >  local (8)
+    [58/da9437] sayHello (3)       | 3 of 3 ✔
+    [35/9cbe77] convertToUpper (2) | 3 of 3 ✔
+    [67/857d05] collectGreetings   | 1 of 1 ✔
+    [37/7b51b5] cowpy              | 1 of 1 ✔
+    ```
 
 As you can see, this allows us to toggle between configurations very conveniently at runtime.
 
@@ -798,54 +752,46 @@ Let's try adding the test profile to our previous command:
 nextflow run 3-main.nf -profile my_laptop,test
 ```
 
-This should run without error.
+??? example title="Output"
 
-<details>
-  <summary>Command output</summary>
+    ```console
+    N E X T F L O W   ~  version 25.04.3
 
-```console
- N E X T F L O W   ~  version 25.04.3
+    Launching `3-main.nf` [gigantic_brazil] DSL2 - revision: ede9037d02
 
-Launching `3-main.nf` [gigantic_brazil] DSL2 - revision: ede9037d02
+    executor >  local (8)
+    [58/da9437] sayHello (3)       | 3 of 3 ✔
+    [35/9cbe77] convertToUpper (2) | 3 of 3 ✔
+    [67/857d05] collectGreetings   | 1 of 1 ✔
+    [37/7b51b5] cowpy              | 1 of 1 ✔
+    ```
 
-executor >  local (8)
-[58/da9437] sayHello (3)       | 3 of 3 ✔
-[35/9cbe77] convertToUpper (2) | 3 of 3 ✔
-[67/857d05] collectGreetings   | 1 of 1 ✔
-[37/7b51b5] cowpy              | 1 of 1 ✔
-```
+This should run without error, and the final output file should contain the turtle character saying the greetings.
 
-</details>
+??? example title="File contents"
 
-The final output file should contain the turtle character saying the greetings.
-
-<details>
-  <summary>File contents</summary>
-
-```console title="results/cowpy-COLLECTED-output.txt"
- _________
-/ BONJOUR \
-| HOLà    |
-\ HELLO   /
- ---------
-    \                                  ___-------___
-     \                             _-~~             ~~-_
-      \                         _-~                    /~-_
-             /^\__/^\         /~  \                   /    \
-           /|  O|| O|        /      \_______________/        \
-          | |___||__|      /       /                \          \
-          |          \    /      /                    \          \
-          |   (_______) /______/                        \_________ \
-          |         / /         \                      /            \
-           \         \^\\         \                  /               \     /
-             \         ||           \______________/      _-_       //\__//
-               \       ||------_-~~-_ ------------- \ --/~   ~\    || __/
-                 ~-----||====/~     |==================|       |/~~~~~
-                  (_(__/  ./     /                    \_\      \.
-                         (_(___/                         \_____)_)
-```
-
-</details>
+    ```console title="results/cowpy-COLLECTED-output.txt"
+    _________
+    / BONJOUR \
+    | HOLà    |
+    \ HELLO   /
+    ---------
+        \                                  ___-------___
+        \                             _-~~             ~~-_
+          \                         _-~                    /~-_
+                /^\__/^\         /~  \                   /    \
+              /|  O|| O|        /      \_______________/        \
+              | |___||__|      /       /                \          \
+              |          \    /      /                    \          \
+              |   (_______) /______/                        \_________ \
+              |         / /         \                      /            \
+              \         \^\\         \                  /               \     /
+                \         ||           \______________/      _-_       //\__//
+                  \       ||------_-~~-_ ------------- \ --/~   ~\    || __/
+                    ~-----||====/~     |==================|       |/~~~~~
+                      (_(__/  ./     /                    \_\      \.
+                            (_(___/                         \_____)_)
+    ```
 
 This means that as long as we distribute any test data files with the workflow code, anyone can quickly try out the workflow without having to supply their own inputs via the command line or a parameter file.
 
@@ -875,33 +821,30 @@ Run this command to resolve the configuration that would be applied by default.
 nextflow config
 ```
 
-<details>
-  <summary>Command output</summary>
+??? example title="Output"
 
-```groovy
-docker {
-   enabled = false
-}
+    ```groovy
+    docker {
+      enabled = false
+    }
 
-conda {
-   enabled = true
-}
+    conda {
+      enabled = true
+    }
 
-process {
-   memory = '1 GB'
-   withName:cowpy {
-      memory = '2 GB'
-      cpus = 2
-   }
-}
+    process {
+      memory = '1 GB'
+      withName:cowpy {
+          memory = '2 GB'
+          cpus = 2
+      }
+    }
 
-params {
-   input = 'greetings.csv'
-   character = 'turkey'
-}
-```
-
-</details>
+    params {
+      input = 'greetings.csv'
+      character = 'turkey'
+    }
+    ```
 
 #### 5.5.2. Resolve the configuration with specific settings activated
 
@@ -911,34 +854,31 @@ If you provide command-line parameters, e.g. enabling one or more profiles or lo
 nextflow config -profile my_laptop,test
 ```
 
-<details>
-  <summary>Command output</summary>
+??? example title="Output"
 
-```groovy
-docker {
-   enabled = true
-}
+    ```groovy
+    docker {
+      enabled = true
+    }
 
-conda {
-   enabled = true
-}
+    conda {
+      enabled = true
+    }
 
-process {
-   memory = '1 GB'
-   withName:cowpy {
-      memory = '2 GB'
-      cpus = 2
-   }
-   executor = 'local'
-}
+    process {
+      memory = '1 GB'
+      withName:cowpy {
+          memory = '2 GB'
+          cpus = 2
+      }
+      executor = 'local'
+    }
 
-params {
-   input = 'greetings.csv'
-   character = 'turtle'
-}
-```
-
-</details>
+    params {
+      input = 'greetings.csv'
+      character = 'turtle'
+    }
+    ```
 
 This gets especially useful for complex projects that involve multiple layers of configuration.
 
