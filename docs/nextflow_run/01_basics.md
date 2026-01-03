@@ -80,20 +80,22 @@ nextflow run 1-hello.nf --greeting 'Hello World!'
 
 You console output should look something like this:
 
-```console title="Output" linenums="1"
- N E X T F L O W   ~  version 25.04.3
+??? example title="Output"
 
-Launching `1-hello.nf` [goofy_torvalds] DSL2 - revision: c33d41f479
+    ```console
+    N E X T F L O W   ~  version 25.04.3
 
-executor >  local (1)
-[a3/7be2fa] sayHello | 1 of 1 ✔
-```
+    Launching `1-hello.nf` [goofy_torvalds] DSL2 - revision: c33d41f479
+
+    executor >  local (1)
+    [a3/7be2fa] sayHello | 1 of 1 ✔
+    ```
 
 Congratulations, you just ran your first Nextflow workflow!
 
 The most important output here is the last line (line 6):
 
-```console title="Output" linenums="6"
+```console
 [a3/7be2fa] sayHello | 1 of 1 ✔
 ```
 
@@ -113,14 +115,9 @@ results
 
 Open the file; the contents should match the string you specified on the command line.
 
-<details>
-  <summary>File contents</summary>
-
 ```console title="results/output.txt" linenums="1"
 Hello World!
 ```
-
-</details>
 
 That's great, our workflow did what it was supposed to do!
 
@@ -144,7 +141,7 @@ That may sound confusing, so let's see what that looks like in practice.
 
 Going back to the console output for the workflow we ran earlier, we had this line:
 
-```console title="Excerpt of command output" linenums="6"
+```console
 [a3/7be2fa] sayHello | 1 of 1 ✔
 ```
 
@@ -191,14 +188,9 @@ The exact subdirectory names will be different on your system.
 You should immediately recognize the `output.txt` file, which is in fact the original output of the `sayHello` process that got published to the `results` directory.
 If you open it, you will find the `Hello World!` greeting again.
 
-<details>
-  <summary>File contents</summary>
-
 ```console title="work/a3/7be2fa7be2fad5e71e5f49998f795677fd68/output.txt" linenums="1"
 Hello World!
 ```
-
-</details>
 
 So what about all those other files?
 
@@ -214,16 +206,11 @@ These are the helper and log files that Nextflow wrote as part of the task execu
 
 The `.command.sh` file is especially useful because it shows you the main command Nextflow executed not including all the bookkeeping and task/environment setup.
 
-<details>
-  <summary>File contents</summary>
-
 ```console title="work/a3/7be2fa7be2fad5e71e5f49998f795677fd68/command.sh" linenums="1"
 #!/bin/bash -ue
 echo 'Hello World!' > output.txt
 
 ```
-
-</details>
 
 So this confirms that the workflow composed the same command we ran directly on the command-line earlier.
 
@@ -258,39 +245,36 @@ _The goal here is not to memorize the syntax of Nextflow code, but to form some 
 
 Let's open the `1-hello.nf` script in the editor pane.
 
-<details>
-  <summary>Code</summary>
+??? example title="Workflow code"
 
-```groovy title="1-hello.nf" linenums="1"
-#!/usr/bin/env nextflow
+    ```groovy title="1-hello.nf" linenums="1"
+    #!/usr/bin/env nextflow
 
-/*
- * Use echo to print a greeting to a file
- */
-process sayHello {
+    /*
+    * Use echo to print a greeting to a file
+    */
+    process sayHello {
 
-    publishDir 'results', mode: 'copy'
+        publishDir 'results', mode: 'copy'
 
-    input:
+        input:
         val greeting
 
-    output:
+        output:
         path 'output.txt'
 
-    script:
-    """
-    echo '$greeting' > output.txt
-    """
-}
+        script:
+        """
+        echo '$greeting' > output.txt
+        """
+    }
 
-workflow {
+    workflow {
 
-    // emit a greeting
-    sayHello(params.greeting)
-}
-```
-
-</details>
+        // emit a greeting
+        sayHello(params.greeting)
+    }
+    ```
 
 A Nextflow script involves two main types of core components: one or more **processes**, and the **workflow** itself.
 Each **process** describes what operation(s) the corresponding step in the pipeline should accomplish, while the **workflow** describes the dataflow logic that connects the various steps.
@@ -304,9 +288,6 @@ The process definition starts with the keyword `process`, followed by the proces
 The process body must contain a script block which specifies the command to run, which can be anything you would be able to run in a command line terminal.
 
 Here we have a **process** called `sayHello` that takes an **input** variable called `greeting` and writes its **output** to a file named `output.txt`.
-
-<details>
-  <summary>Code</summary>
 
 ```groovy title="1-hello.nf" linenums="3"
 /*
@@ -328,8 +309,6 @@ process sayHello {
     """
 }
 ```
-
-</details>
 
 This is a very minimal process definition that just contains an `input` definition, an `output` definition and the `script` to execute.
 
@@ -414,20 +393,17 @@ To use it, simply add `-resume` to your command and run it:
 nextflow run 1-hello.nf --greeting 'Hello World!' -resume
 ```
 
+??? example title="Output"
+
+    ```console linenums="1"
+    N E X T F L O W   ~  version 25.04.3
+
+    Launching `1-hello.nf` [tiny_noyce] DSL2 - revision: c33d41f479
+
+    [a3/7be2fa] process > sayHello [100%] 1 of 1, cached: 1 ✔
+    ```
+
 The console output should look similar.
-
-<details>
-  <summary>Command output</summary>
-
-```console linenums="1"
- N E X T F L O W   ~  version 25.04.3
-
-Launching `1-hello.nf` [tiny_noyce] DSL2 - revision: c33d41f479
-
-[a3/7be2fa] process > sayHello [100%] 1 of 1, cached: 1 ✔
-```
-
-</details>
 
 Look for the `cached:` bit that has been added in the process status line (line 5), which means that Nextflow has recognized that it has already done this work and simply reused the result from the previous successful run.
 
@@ -442,18 +418,15 @@ Nextflow is literally pointing you to the previous execution and saying "I alrea
 
 Whenever you launch a nextflow workflow, a line gets written to a log file called `history`, under a hidden directory called `.nextflow` in the current working directory.
 
-<details>
-  <summary>File contents</summary>
+??? example title="File contents"
 
-```txt title=".nextflow/history" linenums="1"
-2025-07-04 19:27:09	1.8s	wise_watson	OK	3539118582ccde68dde471cc2c66295c	a02c9c46-c3c7-4085-9139-d1b9b5b194c8	nextflow run 1-hello.nf --greeting 'Hello World'
-2025-07-04 19:27:20	2.9s	spontaneous_blackwell	OK	3539118582ccde68dde471cc2c66295c	59a5db23-d83c-4c02-a54e-37ddb73a337e	nextflow run 1-hello.nf --greeting Bonjour
-2025-07-04 19:27:31	1.8s	gigantic_yonath	OK	3539118582ccde68dde471cc2c66295c	5acaa83a-6ad6-4509-bebc-cb25d5d7ddd0	nextflow run 1-hello.nf --greeting 'Dobry den'
-2025-07-04 19:27:45	2.4s	backstabbing_swartz	OK	3539118582ccde68dde471cc2c66295c	5f4b3269-5b53-404a-956c-cac915fbb74e	nextflow run 1-hello.nf --greeting Konnichiwa
-2025-07-04 19:27:57	2.1s	goofy_wilson	OK	3539118582ccde68dde471cc2c66295c	5f4b3269-5b53-404a-956c-cac915fbb74e	nextflow run 1-hello.nf --greeting Konnichiwa -resume
-```
-
-</details>
+    ```txt title=".nextflow/history" linenums="1"
+    2025-07-04 19:27:09	1.8s	wise_watson	OK	3539118582ccde68dde471cc2c66295c	a02c9c46-c3c7-4085-9139-d1b9b5b194c8	nextflow run 1-hello.nf --greeting 'Hello World'
+    2025-07-04 19:27:20	2.9s	spontaneous_blackwell	OK	3539118582ccde68dde471cc2c66295c	59a5db23-d83c-4c02-a54e-37ddb73a337e	nextflow run 1-hello.nf --greeting Bonjour
+    2025-07-04 19:27:31	1.8s	gigantic_yonath	OK	3539118582ccde68dde471cc2c66295c	5acaa83a-6ad6-4509-bebc-cb25d5d7ddd0	nextflow run 1-hello.nf --greeting 'Dobry den'
+    2025-07-04 19:27:45	2.4s	backstabbing_swartz	OK	3539118582ccde68dde471cc2c66295c	5f4b3269-5b53-404a-956c-cac915fbb74e	nextflow run 1-hello.nf --greeting Konnichiwa
+    2025-07-04 19:27:57	2.1s	goofy_wilson	OK	3539118582ccde68dde471cc2c66295c	5f4b3269-5b53-404a-956c-cac915fbb74e	nextflow run 1-hello.nf --greeting Konnichiwa -resume
+    ```
 
 This file gives you the timestamp, run name, status, revision ID, session ID and full command line for every Nextflow run that has been launched from within the current working directory.
 
@@ -463,21 +436,18 @@ A more convenient way to access this information is to use the `nextflow log` co
 nextflow log
 ```
 
+??? example title="Output"
+
+    ```console linenums="1"
+    TIMESTAMP               DURATION        RUN NAME                STATUS  REVISION ID     SESSION ID                              COMMAND
+    2025-07-04 19:27:09     1.8s            wise_watson             OK       3539118582     a02c9c46-c3c7-4085-9139-d1b9b5b194c8    nextflow run 1-hello.nf --greeting 'Hello World'
+    2025-07-04 19:27:20     2.9s            spontaneous_blackwell   OK       3539118582     59a5db23-d83c-4c02-a54e-37ddb73a337e    nextflow run 1-hello.nf --greeting Bonjour
+    2025-07-04 19:27:31     1.8s            gigantic_yonath         OK       3539118582     5acaa83a-6ad6-4509-bebc-cb25d5d7ddd0    nextflow run 1-hello.nf --greeting 'Dobry den'
+    2025-07-04 19:27:45     2.4s            backstabbing_swartz     OK       3539118582     5f4b3269-5b53-404a-956c-cac915fbb74e    nextflow run 1-hello.nf --greeting Konnichiwa
+    2025-07-04 19:27:57     2.1s            goofy_wilson            OK       3539118582     5f4b3269-5b53-404a-956c-cac915fbb74e    nextflow run 1-hello.nf --greeting Konnichiwa -resume
+    ```
+
 This will output the contents of the log file to the terminal, augmented with a header line.
-
-<details>
-  <summary>Command output</summary>
-
-```console linenums="1"
-TIMESTAMP               DURATION        RUN NAME                STATUS  REVISION ID     SESSION ID                              COMMAND
-2025-07-04 19:27:09     1.8s            wise_watson             OK       3539118582     a02c9c46-c3c7-4085-9139-d1b9b5b194c8    nextflow run 1-hello.nf --greeting 'Hello World'
-2025-07-04 19:27:20     2.9s            spontaneous_blackwell   OK       3539118582     59a5db23-d83c-4c02-a54e-37ddb73a337e    nextflow run 1-hello.nf --greeting Bonjour
-2025-07-04 19:27:31     1.8s            gigantic_yonath         OK       3539118582     5acaa83a-6ad6-4509-bebc-cb25d5d7ddd0    nextflow run 1-hello.nf --greeting 'Dobry den'
-2025-07-04 19:27:45     2.4s            backstabbing_swartz     OK       3539118582     5f4b3269-5b53-404a-956c-cac915fbb74e    nextflow run 1-hello.nf --greeting Konnichiwa
-2025-07-04 19:27:57     2.1s            goofy_wilson            OK       3539118582     5f4b3269-5b53-404a-956c-cac915fbb74e    nextflow run 1-hello.nf --greeting Konnichiwa -resume
-```
-
-</details>
 
 You'll notice that the session ID changes whenever you run a new `nextflow run` command, EXCEPT if you're using the `-resume` option.
 In that case, the session ID stays the same.
@@ -502,18 +472,15 @@ Once we have that, first we try the `nextflow clean` command using the dry run f
 nextflow clean -before backstabbing_swartz -n
 ```
 
-The output will have different task directory names and may have a different number of lines, but it should look similar to the example given below.
+??? example title="Output"
 
-<details>
-  <summary>Command output</summary>
+    ```console
+    Would remove /workspaces/training/hello-nextflow/work/eb/1a5de36637b475afd88fca7f79e024
+    Would remove /workspaces/training/hello-nextflow/work/6b/19b0e002ea13486d3a0344c336c1d0
+    Would remove /workspaces/training/hello-nextflow/work/45/9a6dd7ab771f93003d040956282883
+    ```
 
-```console title="Output"
-Would remove /workspaces/training/hello-nextflow/work/eb/1a5de36637b475afd88fca7f79e024
-Would remove /workspaces/training/hello-nextflow/work/6b/19b0e002ea13486d3a0344c336c1d0
-Would remove /workspaces/training/hello-nextflow/work/45/9a6dd7ab771f93003d040956282883
-```
-
-</details>
+Your output will have different task directory names and may have a different number of lines, but it should look similar to the example.
 
 If you don't see any lines output, you either did not provide a valid run name or there are no past runs to delete.
 
@@ -525,16 +492,13 @@ nextflow clean -before backstabbing_swartz -f
 
 The output should be similar to before, but now saying 'Removed' instead of 'Would remove'.
 
-<details>
-  <summary>Command output</summary>
+??? example title="Output"
 
-```console title="Output"
-Removed /workspaces/training/hello-nextflow/work/eb/1a5de36637b475afd88fca7f79e024
-Removed /workspaces/training/hello-nextflow/work/6b/19b0e002ea13486d3a0344c336c1d0
-Removed /workspaces/training/hello-nextflow/work/45/9a6dd7ab771f93003d040956282883
-```
-
-</details>
+    ```console
+    Removed /workspaces/training/hello-nextflow/work/eb/1a5de36637b475afd88fca7f79e024
+    Removed /workspaces/training/hello-nextflow/work/6b/19b0e002ea13486d3a0344c336c1d0
+    Removed /workspaces/training/hello-nextflow/work/45/9a6dd7ab771f93003d040956282883
+    ```
 
 !!! Warning
 

@@ -41,19 +41,16 @@ nextflow run 2a-inputs.nf --input greetings.csv
 
 This should run without error.
 
-<details>
-  <summary>Command output</summary>
+??? example title="Output"
 
-```console linenums="1"
- N E X T F L O W   ~  version 25.04.3
+    ```console
+    N E X T F L O W   ~  version 25.04.3
 
-Launching `2a-inputs.nf` [mighty_sammet] DSL2 - revision: 29fb5352b3
+    Launching `2a-inputs.nf` [mighty_sammet] DSL2 - revision: 29fb5352b3
 
-executor >  local (3)
-[8e/0eb066] sayHello (2) [100%] 3 of 3 ✔
-```
-
-</details>
+    executor >  local (3)
+    [8e/0eb066] sayHello (2) [100%] 3 of 3 ✔
+    ```
 
 Excitingly, this seems to indicate that '3 of 3' calls were made for the process, which is encouraging, since there were three rows of data in the CSV we provided as input.
 This suggests the `sayHello()` process was called three times, once on each input row.
@@ -124,22 +121,19 @@ nextflow run 2a-inputs.nf --input greetings.csv -ansi-log false
 
 This time we see all three process runs and their associated work subdirectories listed in the output.
 
-<details>
-  <summary>Command output</summary>
+??? example title="Output"
 
-```console linenums="1"
-N E X T F L O W  ~  version 25.04.3
-Launching `2a-inputs.nf` [pedantic_hamilton] DSL2 - revision: 6bbc42e49f
-[ab/1a8ece] Submitted process > sayHello (1)
-[0d/2cae24] Submitted process > sayHello (2)
-[b5/0df1d6] Submitted process > sayHello (3)
-```
+    ```console linenums="1"
+    N E X T F L O W  ~  version 25.04.3
+    Launching `2a-inputs.nf` [pedantic_hamilton] DSL2 - revision: 6bbc42e49f
+    [ab/1a8ece] Submitted process > sayHello (1)
+    [0d/2cae24] Submitted process > sayHello (2)
+    [b5/0df1d6] Submitted process > sayHello (3)
+    ```
 
 Notice that the way the status is reported is a bit different between the two logging modes.
 In the condensed mode, Nextflow reports whether calls were completed successfully or not.
 In this expanded mode, it only reports that they were submitted.
-
-</details>
 
 This confirms that the `sayHello()` process gets called three times, and a separate task directory is created for each one.
 
@@ -176,44 +170,41 @@ So this version of the workflow is capable of reading in a CSV file of inputs, p
 Let's take a look at what makes that possible in the workflow code.
 Once again, we're not aiming to memorize code syntax, but to identify signature components of the workflow that provide important functionality.
 
-<details>
-  <summary>Code</summary>
+??? example title="Workflow code"
 
-```groovy title="2a-inputs.nf" linenums="1"
-#!/usr/bin/env nextflow
+    ```groovy title="2a-inputs.nf" linenums="1"
+    #!/usr/bin/env nextflow
 
-/*
- * Use echo to print 'Hello World!' to a file
- */
-process sayHello {
+    /*
+    * Use echo to print 'Hello World!' to a file
+    */
+    process sayHello {
 
-    publishDir 'results', mode: 'copy'
+        publishDir 'results', mode: 'copy'
 
-    input:
+        input:
         val greeting
 
-    output:
+        output:
         path "${greeting}-output.txt"
 
-    script:
-    """
-    echo '$greeting' > '$greeting-output.txt'
-    """
-}
+        script:
+        """
+        echo '$greeting' > '$greeting-output.txt'
+        """
+    }
 
-workflow {
+    workflow {
 
-    // create a channel for inputs from a CSV file
-    greeting_ch = channel.fromPath(params.input)
-                        .splitCsv()
-                        .map { line -> line[0] }
+        // create a channel for inputs from a CSV file
+        greeting_ch = channel.fromPath(params.input)
+                            .splitCsv()
+                            .map { line -> line[0] }
 
-    // emit a greeting
-    sayHello(greeting_ch)
-}
-```
-
-</details>
+        // emit a greeting
+        sayHello(greeting_ch)
+    }
+    ```
 
 #### 1.4.1. Loading the input data from the CSV
 
@@ -285,7 +276,7 @@ Finally, it's worth taking a quick look at how we get the output files to be nam
 
 ```groovy title="2a-inputs.nf" linenums="13"
     output:
-        path "${greeting}-output.txt"
+    path "${greeting}-output.txt"
 
     script:
     """
@@ -335,22 +326,17 @@ Run the following command in your terminal:
 nextflow run 2b-multistep.nf --input greetings.csv
 ```
 
-Once again this should run successfully.
+??? example title="Output"
 
-<details>
-  <summary>Command output</summary>
+    ```console linenums="1"
+    N E X T F L O W   ~  version 25.04.3
 
-```console linenums="1"
- N E X T F L O W   ~  version 25.04.3
+    Launching `2b-multistep.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
 
-Launching `2b-multistep.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
-
-[d6/cdf466] sayHello (1)       | 3 of 3 ✔
-[99/79394f] convertToUpper (2) | 3 of 3 ✔
-[1e/83586c] collectGreetings   | 1 of 1 ✔
-```
-
-</details>
+    [d6/cdf466] sayHello (1)       | 3 of 3 ✔
+    [99/79394f] convertToUpper (2) | 3 of 3 ✔
+    [1e/83586c] collectGreetings   | 1 of 1 ✔
+    ```
 
 You see that as promised, multiple steps were run as part of the workflow; the first two (`sayHello` and `convertToUpper`) were presumably run on each individual greeting, and the third (`collectGreetings`) will have been run only once, on the outputs of all three of the `convertToUpper` calls.
 
@@ -373,20 +359,17 @@ Let's verify that that is in fact what happened by taking a look in the `results
 
 Look at the file names and check their contents to confirm that they are what you expect; for example:
 
-```console title="bash"
+```console
 cat results/COLLECTED-output.txt
 ```
 
-<details>
-  <summary>Command output</summary>
+??? example title="File contents"
 
-```console
-HELLO
-BONJOUR
-HOLà
-```
-
-</details>
+    ```console
+    HELLO
+    BONJOUR
+    HOLà
+    ```
 
 That is the expected final result of our multi-step pipeline.
 
@@ -394,89 +377,86 @@ That is the expected final result of our multi-step pipeline.
 
 Let's look at the code and see what we can tie back to what we just observed.
 
-<details>
-  <summary>Code</summary>
+??? example title="Workflow code"
 
-```groovy title="2a-inputs.nf" linenums="1"
-#!/usr/bin/env nextflow
+    ```groovy title="2a-inputs.nf" linenums="1"
+    #!/usr/bin/env nextflow
 
-/*
- * Use echo to print 'Hello World!' to a file
- */
-process sayHello {
+    /*
+    * Use echo to print 'Hello World!' to a file
+    */
+    process sayHello {
 
-    publishDir 'results', mode: 'copy'
+        publishDir 'results', mode: 'copy'
 
-    input:
+        input:
         val greeting
 
-    output:
+        output:
         path "${greeting}-output.txt"
 
-    script:
-    """
-    echo '$greeting' > '$greeting-output.txt'
-    """
-}
+        script:
+        """
+        echo '$greeting' > '$greeting-output.txt'
+        """
+    }
 
-/*
- * Use a text replacement tool to convert the greeting to uppercase
- */
-process convertToUpper {
+    /*
+    * Use a text replacement tool to convert the greeting to uppercase
+    */
+    process convertToUpper {
 
-    publishDir 'results', mode: 'copy'
+        publishDir 'results', mode: 'copy'
 
-    input:
+        input:
         path input_file
 
-    output:
+        output:
         path "UPPER-${input_file}"
 
-    script:
-    """
-    cat '$input_file' | tr '[a-z]' '[A-Z]' > 'UPPER-${input_file}'
-    """
-}
+        script:
+        """
+        cat '$input_file' | tr '[a-z]' '[A-Z]' > 'UPPER-${input_file}'
+        """
+    }
 
-/*
- * Collect uppercase greetings into a single output file
- */
-process collectGreetings {
+    /*
+    * Collect uppercase greetings into a single output file
+    */
+    process collectGreetings {
 
-    publishDir 'results', mode: 'copy'
+        publishDir 'results', mode: 'copy'
 
-    input:
+        input:
         path input_files
 
-    output:
+        output:
         path "COLLECTED-output.txt"
 
-    script:
-    """
-    cat ${input_files} > 'COLLECTED-output.txt'
-    """
-}
+        script:
+        """
+        cat ${input_files} > 'COLLECTED-output.txt'
+        """
+    }
 
-workflow {
+    workflow {
 
-    // create a channel for inputs from a CSV file
-    greeting_ch = channel.fromPath(params.input)
-                        .splitCsv()
-                        .map { line -> line[0] }
+        // create a channel for inputs from a CSV file
+        greeting_ch = channel.fromPath(params.input)
+                            .splitCsv()
+                            .map { line -> line[0] }
 
-    // emit a greeting
-    sayHello(greeting_ch)
+        // emit a greeting
+        sayHello(greeting_ch)
 
-    // convert the greeting to uppercase
-    convertToUpper(sayHello.out)
+        // convert the greeting to uppercase
+        convertToUpper(sayHello.out)
 
-    // collect all the greetings into one file
-    collectGreetings(convertToUpper.out.collect())
-}
+        // collect all the greetings into one file
+        collectGreetings(convertToUpper.out.collect())
+    }
 
-```
-
-</details>
+    ```
 
 The most obvious difference compared to the previous version of the workflow is that now there are multiple process definitions, and correspondingly, several process calls in the workflow block.
 
@@ -490,9 +470,6 @@ We won't go into that in detail, but it shows how a process can be given additio
 #### 2.3.2. Processes are connected via channels
 
 The really interesting thing to look at here is how the process calls are chained together in the workflow block.
-
-<details>
-  <summary>Code</summary>
 
 ```groovy title="2a-inputs.nf" linenums="69"
 workflow {
@@ -512,8 +489,6 @@ workflow {
     collectGreetings(convertToUpper.out.collect())
 }
 ```
-
-</details>
 
 You can see that the first process call, `sayHello(greeting_ch)`, is unchanged.
 
@@ -630,33 +605,30 @@ workflow {
 
 You can look inside one of the modules to satisfy yourself that the process definition is unchanged; it's literally just been copy-pasted into a standalone file.
 
-<details>
-  <summary>Example: sayHello process module</summary>
+??? example title="Module code"
 
-```groovy title="modules/sayHello.nf" linenums="1"
-#!/usr/bin/env nextflow
+    ```groovy title="modules/sayHello.nf" linenums="1"
+    #!/usr/bin/env nextflow
 
-/*
- * Use echo to print 'Hello World!' to a file
- */
-process sayHello {
+    /*
+    * Use echo to print 'Hello World!' to a file
+    */
+    process sayHello {
 
-    publishDir 'results', mode: 'copy'
+        publishDir 'results', mode: 'copy'
 
-    input:
+        input:
         val greeting
 
-    output:
+        output:
         path "${greeting}-output.txt"
 
-    script:
-    """
-    echo '$greeting' > '$greeting-output.txt'
-    """
-}
-```
-
-</details>
+        script:
+        """
+        echo '$greeting' > '$greeting-output.txt'
+        """
+    }
+    ```
 
 So let's see what it looks like to run this new version.
 
@@ -668,22 +640,17 @@ Run this command in your terminal, with the `-resume` flag:
 nextflow run 2c-modules.nf --input greetings.csv -resume
 ```
 
-Once again this should run successfully.
+??? example title="Output"
 
-<details>
-  <summary>Command output</summary>
+    ```console
+    N E X T F L O W   ~  version 25.04.3
 
-```console linenums="1"
- N E X T F L O W   ~  version 25.04.3
+    Launching `2c-modules.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
 
-Launching `2c-modules.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
-
-[j6/cdfa66] sayHello (1)       | 3 of 3, cached: ✔
-[95/79484f] convertToUpper (2) | 3 of 3, cached: ✔
-[5e/4358gc] collectGreetings   | 1 of 1, cached: ✔
-```
-
-</details>
+    [j6/cdfa66] sayHello (1)       | 3 of 3, cached: ✔
+    [95/79484f] convertToUpper (2) | 3 of 3, cached: ✔
+    [5e/4358gc] collectGreetings   | 1 of 1, cached: ✔
+    ```
 
 You'll notice that the process executions all cached successfully, meaning that Nextflow recognized that it has already done the requested work, even though the code has been split up and the main workflow file has been renamed.
 
@@ -750,34 +717,30 @@ Run the complete pull command:
 docker pull 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
 ```
 
+??? example title="Output"
+
+    ```console
+    Unable to find image 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273' locally
+    131d6a1b707a8e65: Pulling from library/cowpy
+    dafa2b0c44d2: Pull complete
+    dec6b097362e: Pull complete
+    f88da01cff0b: Pull complete
+    4f4fb700ef54: Pull complete
+    92dc97a3ef36: Pull complete
+    403f74b0f85e: Pull complete
+    10b8c00c10a5: Pull complete
+    17dc7ea432cc: Pull complete
+    bb36d6c3110d: Pull complete
+    0ea1a16bbe82: Pull complete
+    030a47592a0a: Pull complete
+    622dd7f15040: Pull complete
+    895fb5d0f4df: Pull complete
+    Digest: sha256:fa50498b32534d83e0a89bb21fec0c47cc03933ac95c6b6587df82aaa9d68db3
+    Status: Downloaded newer image for community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273
+    community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273
+    ```
+
 This tells the system to download the image specified.
-
-<details>
-  <summary>Command output</summary>
-
-```console
-Unable to find image 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273' locally
-131d6a1b707a8e65: Pulling from library/cowpy
-dafa2b0c44d2: Pull complete
-dec6b097362e: Pull complete
-f88da01cff0b: Pull complete
-4f4fb700ef54: Pull complete
-92dc97a3ef36: Pull complete
-403f74b0f85e: Pull complete
-10b8c00c10a5: Pull complete
-17dc7ea432cc: Pull complete
-bb36d6c3110d: Pull complete
-0ea1a16bbe82: Pull complete
-030a47592a0a: Pull complete
-622dd7f15040: Pull complete
-895fb5d0f4df: Pull complete
-Digest: sha256:fa50498b32534d83e0a89bb21fec0c47cc03933ac95c6b6587df82aaa9d68db3
-Status: Downloaded newer image for community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273
-community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273
-```
-
-</details>
-
 Once the download is complete, you have a local copy of the container image.
 
 #### 4.1.2. Spin up the container
@@ -807,11 +770,15 @@ You can verify this by running `ls` to list directory contents:
 ls /
 ```
 
-```console title="Command output"
-bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
-```
+<!-- TODO: update to use tree -->
 
-You observe see that the filesystem inside the container is different from the filesystem on your host system.
+??? example title="Output"
+
+    ```console title="Command output"
+    bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+    ```
+
+You see that the filesystem inside the container is different from the filesystem on your host system.
 
 !!! Tip
 
@@ -832,23 +799,20 @@ From inside the container, you can run the `cowpy` command directly.
 cowpy "Hello Containers"
 ```
 
+??? example title="Output"
+
+    ```console
+    ______________________________________________________
+    < Hello Containers >
+    ------------------------------------------------------
+        \   ^__^
+          \  (oo)\_______
+            (__)\       )\/\
+              ||----w |
+              ||     ||
+    ```
+
 This produces ASCII art of the default cow character (or 'cowacter') with a speech bubble containing the text we specified.
-
-<details>
-  <summary>Command output</summary>
-
-```console
- ______________________________________________________
-< Hello Containers >
- ------------------------------------------------------
-     \   ^__^
-      \  (oo)\_______
-         (__)\       )\/\
-           ||----w |
-           ||     ||
-```
-
-</details>
 
 Now that you have tested the basic usage, you can try giving it some parameters.
 For example, the tool documentation says we can set the character with `-c`.
@@ -859,25 +823,22 @@ cowpy "Hello Containers" -c tux
 
 This time the ASCII art output shows the Linux penguin, Tux, because we specified the `-c tux` parameter.
 
-<details>
-  <summary>Command output</summary>
+??? example title="Output"
 
-```console
- __________________
-< Hello Containers >
- ------------------
-   \
-    \
-        .--.
-       |o_o |
-       |:_/ |
-      //   \ \
-     (|     | )
-    /'\_   _/`\
-    \___)=(___/
-```
-
-</details>
+    ```console
+    __________________
+    < Hello Containers >
+    ------------------
+      \
+        \
+            .--.
+          |o_o |
+          |:_/ |
+          //   \ \
+        (|     | )
+        /'\_   _/`\
+        \___)=(___/
+    ```
 
 Since you're inside the container, you can run the cowpy command as many times as you like, varying the input parameters, without having to worry about install any libraries on your system itself.
 
@@ -912,81 +873,75 @@ This should output a file containing the ASCII art with the three greetings in t
 
 #### 4.2.1. Examine the code
 
-The workflow is very similar to the previous one, plus the extra step to run `cowpy.
-The differences are highlighted in the code snippet below.
+The workflow is very similar to the previous one, plus the extra step to run `cowpy`.
 
-<details>
-  <summary>Code</summary>
+??? example title="Workflow code"
 
-```groovy title="2d-container.nf" linenums="1" hl_lines="7 25 26"
-#!/usr/bin/env nextflow
+    ```groovy title="2d-container.nf" linenums="1" hl_lines="7 25 26"
+    #!/usr/bin/env nextflow
 
-// Include modules
-include { sayHello } from './modules/sayHello.nf'
-include { convertToUpper } from './modules/convertToUpper.nf'
-include { collectGreetings } from './modules/collectGreetings.nf'
-include { cowpy } from './modules/cowpy.nf'
+    // Include modules
+    include { sayHello } from './modules/sayHello.nf'
+    include { convertToUpper } from './modules/convertToUpper.nf'
+    include { collectGreetings } from './modules/collectGreetings.nf'
+    include { cowpy } from './modules/cowpy.nf'
 
-workflow {
+    workflow {
 
-    // create a channel for inputs from a CSV file
-    greeting_ch = channel.fromPath(params.input)
-                        .splitCsv()
-                        .map { line -> line[0] }
+        // create a channel for inputs from a CSV file
+        greeting_ch = channel.fromPath(params.input)
+                            .splitCsv()
+                            .map { line -> line[0] }
 
-    // emit a greeting
-    sayHello(greeting_ch)
+        // emit a greeting
+        sayHello(greeting_ch)
 
-    // convert the greeting to uppercase
-    convertToUpper(sayHello.out)
+        // convert the greeting to uppercase
+        convertToUpper(sayHello.out)
 
-    // collect all the greetings into one file
-    collectGreetings(convertToUpper.out.collect())
+        // collect all the greetings into one file
+        collectGreetings(convertToUpper.out.collect())
 
-    // generate ASCII art with cowpy
-    cowpy(collectGreetings.out, params.character)
-}
-```
-
-</details>
+        // generate ASCII art with cowpy
+        cowpy(collectGreetings.out, params.character)
+    }
+    ```
 
 You see that this workflow imports a `cowpy` process from a module file, and calls it on the output of the `collectGreetings()` call.
 
-```groovy title="modules/cowpy.nf" linenums="26"
+```groovy title="2d-container.nf" linenums="25"
+// generate ASCII art with cowpy
 cowpy(collectGreetings.out, params.character)
 ```
 
 The `cowpy` process, which wraps the cowpy command to generate ASCII art, is defined in the `cowpy.nf` module.
 
-<details>
-  <summary>Code</summary>
+??? example title="Module code"
 
-```groovy title="modules/cowpy.nf" linenums="1"
-#!/usr/bin/env nextflow
+    ```groovy title="modules/cowpy.nf" linenums="1"
+    #!/usr/bin/env nextflow
 
-// Generate ASCII art with cowpy
-process cowpy {
+    // Generate ASCII art with cowpy
+    process cowpy {
 
-    container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
+        container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
 
-    publishDir 'results', mode: 'copy'
+        publishDir 'results', mode: 'copy'
 
-    input:
+        input:
         path input_file
         val character
 
-    output:
+        output:
         path "cowpy-${input_file}"
 
-    script:
-    """
-    cat $input_file | cowpy -c "$character" > cowpy-${input_file}
-    """
+        script:
+        """
+        cat $input_file | cowpy -c "$character" > cowpy-${input_file}
+        """
 
-}
-```
-
-</details>
+    }
+    ```
 
 The `cowpy` process requires two inputs: the path to an input file containing the text to put in the speech bubble (`input_file`), and a value for the character variable.
 
@@ -1011,16 +966,15 @@ You can check that this is indeed set correctly either by opening the file, or b
 nextflow config
 ```
 
-<details>
-  <summary>Command output</summary>
+<!-- TODO: paste output of nextflow config command -->
 
-```json title="nextflow.config" linenums="1"
-docker {
-   enabled = true
-}
-```
+??? example title="File contents"
 
-</details>
+    ```json title="nextflow.config" linenums="1"
+    docker {
+      enabled = true
+    }
+    ```
 
 That tells Nextflow to use Docker for any process that specifies a compatible container.
 
@@ -1038,64 +992,54 @@ Let's run the workflow with the `-resume` flag, and specify that we want the cha
 nextflow run 2d-container.nf --input greetings.csv --character turkey -resume
 ```
 
-This should work without error.
+??? example title="Output"
 
-<details>
-  <summary>Command output</summary>
+    ```console
+    N E X T F L O W   ~  version 25.04.3
 
-```console linenums="1"
- N E X T F L O W   ~  version 25.04.3
+    Launching `2d-container.nf` [elegant_brattain] DSL2 - revision: 028a841db1
 
-Launching `2d-container.nf` [elegant_brattain] DSL2 - revision: 028a841db1
-
-executor >  local (1)
-[95/fa0bac] sayHello (3)       | 3 of 3, cached: 3 ✔
-[92/32533f] convertToUpper (3) | 3 of 3, cached: 3 ✔
-[aa/e697a2] collectGreetings   | 1 of 1, cached: 1 ✔
-[7f/caf718] cowpy              | 1 of 1 ✔
-```
-
-</details>
+    executor >  local (1)
+    [95/fa0bac] sayHello (3)       | 3 of 3, cached: 3 ✔
+    [92/32533f] convertToUpper (3) | 3 of 3, cached: 3 ✔
+    [aa/e697a2] collectGreetings   | 1 of 1, cached: 1 ✔
+    [7f/caf718] cowpy              | 1 of 1 ✔
+    ```
 
 The first three steps cached since we've already run them before, but the `cowpy` process is new so that actually gets run.
 
 You can find the output of the `cowpy` step in the `results` directory.
 
-<details>
-  <summary>Output file contents</summary>
+??? example title="File contents"
 
-```console title="results/cowpy-COLLECTED-output.txt"
- _________
-/ HOLà    \
-| HELLO   |
-\ BONJOUR /
- ---------
-  \                                  ,+*^^*+___+++_
-   \                           ,*^^^^              )
-    \                       _+*                     ^**+_
-     \                    +^       _ _++*+_+++_,         )
-              _+^^*+_    (     ,+*^ ^          \+_        )
-             {       )  (    ,(    ,_+--+--,      ^)      ^\
-            { (\@)    } f   ,(  ,+-^ __*_*_  ^^\_   ^\       )
-           {:;-/    (_+*-+^^^^^+*+*<_ _++_)_    )    )      /
-          ( /  (    (        ,___    ^*+_+* )   <    <      \
-           U _/     )    *--<  ) ^\-----++__)   )    )       )
-            (      )  _(^)^^))  )  )\^^^^^))^*+/    /       /
-          (      /  (_))_^)) )  )  ))^^^^^))^^^)__/     +^^
-         (     ,/    (^))^))  )  ) ))^^^^^^^))^^)       _)
-          *+__+*       (_))^)  ) ) ))^^^^^^))^^^^^)____*^
-          \             \_)^)_)) ))^^^^^^^^^^))^^^^)
-           (_             ^\__^^^^^^^^^^^^))^^^^^^^)
-             ^\___            ^\__^^^^^^))^^^^^^^^)\\
-                  ^^^^^\uuu/^^\uuu/^^^^\^\^\^\^\^\^\^\
-                     ___) >____) >___   ^\_\_\_\_\_\_\)
-                    ^^^//\\_^^//\\_^       ^(\_\_\_\)
-                      ^^^ ^^ ^^^ ^
-```
-
-What a beautiful turkey!
-
-</details>
+    ```console title="results/cowpy-COLLECTED-output.txt"
+    _________
+    / HOLà    \
+    | HELLO   |
+    \ BONJOUR /
+    ---------
+      \                                  ,+*^^*+___+++_
+      \                           ,*^^^^              )
+        \                       _+*                     ^**+_
+        \                    +^       _ _++*+_+++_,         )
+                  _+^^*+_    (     ,+*^ ^          \+_        )
+                {       )  (    ,(    ,_+--+--,      ^)      ^\
+                { (\@)    } f   ,(  ,+-^ __*_*_  ^^\_   ^\       )
+              {:;-/    (_+*-+^^^^^+*+*<_ _++_)_    )    )      /
+              ( /  (    (        ,___    ^*+_+* )   <    <      \
+              U _/     )    *--<  ) ^\-----++__)   )    )       )
+                (      )  _(^)^^))  )  )\^^^^^))^*+/    /       /
+              (      /  (_))_^)) )  )  ))^^^^^))^^^)__/     +^^
+            (     ,/    (^))^))  )  ) ))^^^^^^^))^^)       _)
+              *+__+*       (_))^)  ) ) ))^^^^^^))^^^^^)____*^
+              \             \_)^)_)) ))^^^^^^^^^^))^^^^)
+              (_             ^\__^^^^^^^^^^^^))^^^^^^^)
+                ^\___            ^\__^^^^^^))^^^^^^^^)\\
+                      ^^^^^\uuu/^^\uuu/^^^^\^\^\^\^\^\^\^\
+                        ___) >____) >___   ^\_\_\_\_\_\_\)
+                        ^^^//\\_^^//\\_^       ^(\_\_\_\)
+                          ^^^ ^^ ^^^ ^
+    ```
 
 You see that the character is saying all the greetings, since it ran on the file of collected uppercased greetings.
 
@@ -1109,16 +1053,13 @@ This file contains all the commands Nextflow ran on your behalf in the course of
 
 Open the `.command.run` file and search for `nxf_launch` to find the launch command Nextflow used.
 
-<details>
-  <summary>Partial file contents</summary>
+??? example title="File contents (subset)"
 
-```bash title="work/7f/caf7189fca6c56ba627b75749edcb3/.command.run"
-nxf_launch() {
-    docker run -i --cpu-shares 1024 -e "NXF_TASK_WORKDIR" -v /workspaces/training/hello-nextflow/work:/workspaces/training/hello-nextflow/work -w "$NXF_TASK_WORKDIR" --name $NXF_BOXID community.wave.seqera.io/library/pip_cowpy:131d6a1b707a8e65 /bin/bash -ue /workspaces/training/nextflow-run/work/7f/caf7189fca6c56ba627b75749edcb3/.command.sh
-}
-```
-
-</details>
+    ```bash title="work/7f/caf7189fca6c56ba627b75749edcb3/.command.run"
+    nxf_launch() {
+        docker run -i --cpu-shares 1024 -e "NXF_TASK_WORKDIR" -v /workspaces/training/hello-nextflow/work:/workspaces/training/hello-nextflow/work -w "$NXF_TASK_WORKDIR" --name $NXF_BOXID community.wave.seqera.io/library/pip_cowpy:131d6a1b707a8e65 /bin/bash -ue /workspaces/training/nextflow-run/work/7f/caf7189fca6c56ba627b75749edcb3/.command.sh
+    }
+    ```
 
 This launch command shows that Nextflow is using a very similar `docker run` command to launch the process call as we did when we ran it manually.
 It also mounts the corresponding work subdirectory into the container, sets the working directory inside the container accordingly, and runs our templated bash script in the `.command.sh` file.
