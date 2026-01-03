@@ -37,18 +37,18 @@ Just to make sure everything is working, run the script once before making any c
 nextflow run hello-containers.nf
 ```
 
-This should produce the following output:
+??? example title="Output"
 
-```console title="Output"
- N E X T F L O W   ~  version 25.04.3
+    ```console
+    N E X T F L O W   ~  version 25.04.3
 
-Launching `hello-containers.nf` [tender_becquerel] DSL2 - revision: f7cat8e223
+    Launching `hello-containers.nf` [tender_becquerel] DSL2 - revision: f7cat8e223
 
-executor >  local (7)
-[bd/4bb541] sayHello (1)         [100%] 3 of 3 ✔
-[85/b627e8] convertToUpper (3)   [100%] 3 of 3 ✔
-[7d/f7961c] collectGreetings     [100%] 1 of 1 ✔
-```
+    executor >  local (7)
+    [bd/4bb541] sayHello (1)         [100%] 3 of 3 ✔
+    [85/b627e8] convertToUpper (3)   [100%] 3 of 3 ✔
+    [7d/f7961c] collectGreetings     [100%] 1 of 1 ✔
+    ```
 
 As previously, you will find the output files in the `results` directory (specified by the `publishDir` directive).
 
@@ -106,30 +106,31 @@ Run the complete pull command:
 docker pull 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
 ```
 
-This gives you the following console output as the system downloads the image:
+??? example title="Output"
 
-```console title="Output"
-Unable to find image 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273' locally
-131d6a1b707a8e65: Pulling from library/cowpy
-dafa2b0c44d2: Pull complete
-dec6b097362e: Pull complete
-f88da01cff0b: Pull complete
-4f4fb700ef54: Pull complete
-92dc97a3ef36: Pull complete
-403f74b0f85e: Pull complete
-10b8c00c10a5: Pull complete
-17dc7ea432cc: Pull complete
-bb36d6c3110d: Pull complete
-0ea1a16bbe82: Pull complete
-030a47592a0a: Pull complete
-622dd7f15040: Pull complete
-895fb5d0f4df: Pull complete
-Digest: sha256:fa50498b32534d83e0a89bb21fec0c47cc03933ac95c6b6587df82aaa9d68db3
-Status: Downloaded newer image for community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273
-community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273
-```
+    ```console
+    Unable to find image 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273' locally
+    131d6a1b707a8e65: Pulling from library/cowpy
+    dafa2b0c44d2: Pull complete
+    dec6b097362e: Pull complete
+    f88da01cff0b: Pull complete
+    4f4fb700ef54: Pull complete
+    92dc97a3ef36: Pull complete
+    403f74b0f85e: Pull complete
+    10b8c00c10a5: Pull complete
+    17dc7ea432cc: Pull complete
+    bb36d6c3110d: Pull complete
+    0ea1a16bbe82: Pull complete
+    030a47592a0a: Pull complete
+    622dd7f15040: Pull complete
+    895fb5d0f4df: Pull complete
+    Digest: sha256:fa50498b32534d83e0a89bb21fec0c47cc03933ac95c6b6587df82aaa9d68db3
+    Status: Downloaded newer image for community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273
+    community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273
+    ```
 
-Once the download is complete, you have a local copy of the container image.
+If you've never downloaded the image before, this may take a minute to complete.
+Once it's done, you have a local copy of the container image.
 
 ### 1.2. Use the container to run `cowpy` as a one-off command
 
@@ -148,24 +149,24 @@ The `--rm` flag tells the system to shut down the container instance after the c
 The `[tool command]` syntax depends on the tool you are using and how the container is set up.
 Let's just start with `cowpy`.
 
-Fully assembled, the container execution command looks like this:
+Fully assembled, the container execution command looks like this; go ahead and run it.
 
 ```bash
 docker run --rm 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273' cowpy
 ```
 
-Run it to produce the following output:
+??? example title="Output"
 
-```console title="Output"
- ______________________________________________________
-< Cowacter, eyes:default, tongue:False, thoughts:False >
- ------------------------------------------------------
-     \   ^__^
-      \  (oo)\_______
-         (__)\       )\/\
-           ||----w |
-           ||     ||
-```
+    ```console
+    ______________________________________________________
+    < Cowacter, eyes:default, tongue:False, thoughts:False >
+    ------------------------------------------------------
+        \   ^__^
+          \  (oo)\_______
+            (__)\       )\/\
+              ||----w |
+              ||     ||
+    ```
 
 The system spun up the container, ran the `cowpy` command with its parameters, sent the output to the console and finally, shut down the container instance.
 
@@ -190,9 +191,13 @@ You can verify this by running `ls` to list directory contents:
 ls /
 ```
 
-```console title="Output"
-bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
-```
+<!-- TODO: update to tree -->
+
+??? example title="Output"
+
+    ```console
+    bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+    ```
 
 You can see that the filesystem inside the container is different from the filesystem on your host system.
 
@@ -214,20 +219,22 @@ cowpy "Hello Containers" -c tux
 
 Now the output shows the Linux penguin, Tux, instead of the default cow, because we specified the `-c tux` parameter.
 
-```console title="Output"
- __________________
-< Hello Containers >
- ------------------
-   \
-    \
-        .--.
-       |o_o |
-       |:_/ |
-      //   \ \
-     (|     | )
-    /'\_   _/`\
-    \___)=(___/
-```
+??? example title="Output"
+
+    ```console
+    __________________
+    < Hello Containers >
+    ------------------
+      \
+        \
+            .--.
+          |o_o |
+          |:_/ |
+          //   \ \
+        (|     | )
+        /'\_   _/`\
+        \___)=(___/
+    ```
 
 Because you're inside the container, you can run the cowpy command as many times as you like, varying the input parameters, without having to bother with Docker commands.
 
@@ -278,14 +285,16 @@ You can check that it works by listing the contents of `/data`:
 ls /data
 ```
 
-Depending on what part of this training you've done before, the output below my look slightly different.
+Depending on what part of this training you've done before, the output may look slightly different.
 
-```console title="Output"
-greetings.csv      hello-config.nf      hello-modules.nf   hello-world.nf  nextflow.config  solutions         work
-hello-channels.nf  hello-containers.nf  hello-workflow.nf  modules         results          test-params.json
-```
+<!-- TODO: update to tree & update output -->
 
-<!-- ls output may need to be updated -->
+??? example title="Output"
+
+    ```console
+    greetings.csv      hello-config.nf      hello-modules.nf   hello-world.nf  nextflow.config  solutions         work
+    hello-channels.nf  hello-containers.nf  hello-workflow.nf  modules         results          test-params.json
+    ```
 
 You can now see the contents of the `data` directory from inside the container, including the `greetings.csv` file.
 
@@ -301,36 +310,38 @@ To do this, we'll use `cat /data/greetings.csv | ` to pipe the contents of the C
 cat /data/greetings.csv | cowpy -c turkey
 ```
 
-This produces the desired ASCII art of a turkey rattling off our example greetings:
+??? example title="Output"
 
-```console title="Output"
- _________
-/ Hello   \
-| Bonjour |
-\ Holà    /
- ---------
-  \                                  ,+*^^*+___+++_
-   \                           ,*^^^^              )
-    \                       _+*                     ^**+_
-     \                    +^       _ _++*+_+++_,         )
-              _+^^*+_    (     ,+*^ ^          \+_        )
-             {       )  (    ,(    ,_+--+--,      ^)      ^\
-            { (\@)    } f   ,(  ,+-^ __*_*_  ^^\_   ^\       )
-           {:;-/    (_+*-+^^^^^+*+*<_ _++_)_    )    )      /
-          ( /  (    (        ,___    ^*+_+* )   <    <      \
-           U _/     )    *--<  ) ^\-----++__)   )    )       )
-            (      )  _(^)^^))  )  )\^^^^^))^*+/    /       /
-          (      /  (_))_^)) )  )  ))^^^^^))^^^)__/     +^^
-         (     ,/    (^))^))  )  ) ))^^^^^^^))^^)       _)
-          *+__+*       (_))^)  ) ) ))^^^^^^))^^^^^)____*^
-          \             \_)^)_)) ))^^^^^^^^^^))^^^^)
-           (_             ^\__^^^^^^^^^^^^))^^^^^^^)
-             ^\___            ^\__^^^^^^))^^^^^^^^)\\
-                  ^^^^^\uuu/^^\uuu/^^^^\^\^\^\^\^\^\^\
-                     ___) >____) >___   ^\_\_\_\_\_\_\)
-                    ^^^//\\_^^//\\_^       ^(\_\_\_\)
-                      ^^^ ^^ ^^^ ^
-```
+    ```console
+    _________
+    / Hello   \
+    | Bonjour |
+    \ Holà    /
+    ---------
+      \                                  ,+*^^*+___+++_
+      \                           ,*^^^^              )
+        \                       _+*                     ^**+_
+        \                    +^       _ _++*+_+++_,         )
+                  _+^^*+_    (     ,+*^ ^          \+_        )
+                {       )  (    ,(    ,_+--+--,      ^)      ^\
+                { (\@)    } f   ,(  ,+-^ __*_*_  ^^\_   ^\       )
+              {:;-/    (_+*-+^^^^^+*+*<_ _++_)_    )    )      /
+              ( /  (    (        ,___    ^*+_+* )   <    <      \
+              U _/     )    *--<  ) ^\-----++__)   )    )       )
+                (      )  _(^)^^))  )  )\^^^^^))^*+/    /       /
+              (      /  (_))_^)) )  )  ))^^^^^))^^^)__/     +^^
+            (     ,/    (^))^))  )  ) ))^^^^^^^))^^)       _)
+              *+__+*       (_))^)  ) ) ))^^^^^^))^^^^^)____*^
+              \             \_)^)_)) ))^^^^^^^^^^))^^^^)
+              (_             ^\__^^^^^^^^^^^^))^^^^^^^)
+                ^\___            ^\__^^^^^^))^^^^^^^^)\\
+                      ^^^^^\uuu/^^\uuu/^^^^\^\^\^\^\^\^\^\
+                        ___) >____) >___   ^\_\_\_\_\_\_\)
+                        ^^^//\\_^^//\\_^       ^(\_\_\_\)
+                          ^^^ ^^ ^^^ ^
+    ```
+
+This produces the desired ASCII art of a turkey rattling off our example greetings!
 
 Feel free to play around with this command.
 When you're done, exit the container as previously:
@@ -383,11 +394,11 @@ process cowpy {
     publishDir 'results', mode: 'copy'
 
     input:
-        path input_file
-        val character
+    path input_file
+    val character
 
     output:
-        path "cowpy-${input_file}"
+    path "cowpy-${input_file}"
 
     script:
     """
@@ -499,41 +510,42 @@ Run this with the `-resume` flag.
 nextflow run hello-containers.nf -resume
 ```
 
+??? example title="Output"
+
+    ```console
+    N E X T F L O W   ~  version 25.04.3
+
+    Launching `hello-containers.nf` [special_lovelace] DSL2 - revision: 028a841db1
+
+    executor >  local (1)
+    [f6/cc0107] sayHello (1)       | 3 of 3, cached: 3 ✔
+    [2c/67a06b] convertToUpper (3) | 3 of 3, cached: 3 ✔
+    [1a/bc5901] collectGreetings   | 1 of 1, cached: 1 ✔
+    [b2/488871] cowpy             | 0 of 1
+    There were 3 greetings in this batch
+    ERROR ~ Error executing process > 'cowpy'
+
+    Caused by:
+      Process `cowpy` terminated with an error exit status (127)
+
+    Command executed:
+
+      cat COLLECTED-test-batch-output.txt | cowpy -c "turkey" > cowpy-COLLECTED-test-batch-output.txt
+
+    Command exit status:
+      127
+
+    Command output:
+      (empty)
+
+    Command error:
+      .command.sh: line 2: cowpy: command not found
+
+    (trimmed output)
+    ```
+
 Oh no, there's an error!
-
-```console title="Output"
- N E X T F L O W   ~  version 25.04.3
-
-Launching `hello-containers.nf` [special_lovelace] DSL2 - revision: 028a841db1
-
-executor >  local (1)
-[f6/cc0107] sayHello (1)       | 3 of 3, cached: 3 ✔
-[2c/67a06b] convertToUpper (3) | 3 of 3, cached: 3 ✔
-[1a/bc5901] collectGreetings   | 1 of 1, cached: 1 ✔
-[b2/488871] cowpy             | 0 of 1
-There were 3 greetings in this batch
-ERROR ~ Error executing process > 'cowpy'
-
-Caused by:
-  Process `cowpy` terminated with an error exit status (127)
-
-Command executed:
-
-  cat COLLECTED-test-batch-output.txt | cowpy -c "turkey" > cowpy-COLLECTED-test-batch-output.txt
-
-Command exit status:
-  127
-
-Command output:
-  (empty)
-
-Command error:
-  .command.sh: line 2: cowpy: command not found
-
-(trimmed output)
-```
-
-This error code, `error exit status (127)` means the executable we asked for was not found.
+The error code, `error exit status (127)` means the executable we asked for was not found.
 
 Of course, since we're calling the `cowpy` tool but we haven't actually specified a container yet.
 
@@ -600,55 +612,56 @@ Run the workflow with the `-resume` flag:
 nextflow run hello-containers.nf -resume
 ```
 
+??? example title="Output"
+
+    ```console
+    N E X T F L O W   ~  version 25.04.3
+
+    Launching `hello-containers.nf` [elegant_brattain] DSL2 - revision: 028a841db1
+
+    executor >  local (1)
+    [95/fa0bac] sayHello (3)       | 3 of 3, cached: 3 ✔
+    [92/32533f] convertToUpper (3) | 3 of 3, cached: 3 ✔
+    [aa/e697a2] collectGreetings   | 1 of 1, cached: 1 ✔
+    [7f/caf718] cowpy              | 1 of 1 ✔
+    There were 3 greetings in this batch
+    ```
+
 This time it does indeed work.
+You can find the cowpy'ed output in the `results` directory, under the name `cowpy-COLLECTED-test-batch-output.txt`.
 
-```console title="Output" linenums="1"
- N E X T F L O W   ~  version 25.04.3
+??? example title="File contents"
 
-Launching `hello-containers.nf` [elegant_brattain] DSL2 - revision: 028a841db1
-
-executor >  local (1)
-[95/fa0bac] sayHello (3)       | 3 of 3, cached: 3 ✔
-[92/32533f] convertToUpper (3) | 3 of 3, cached: 3 ✔
-[aa/e697a2] collectGreetings   | 1 of 1, cached: 1 ✔
-[7f/caf718] cowpy              | 1 of 1 ✔
-There were 3 greetings in this batch
-```
-
-You can find the cowpy'ed output in the `results` directory.
-
-```console title="results/cowpy-COLLECTED-test-batch-output.txt"
- _________
-/ HOLà    \
-| HELLO   |
-\ BONJOUR /
- ---------
-  \                                  ,+*^^*+___+++_
-   \                           ,*^^^^              )
-    \                       _+*                     ^**+_
-     \                    +^       _ _++*+_+++_,         )
-              _+^^*+_    (     ,+*^ ^          \+_        )
-             {       )  (    ,(    ,_+--+--,      ^)      ^\
-            { (\@)    } f   ,(  ,+-^ __*_*_  ^^\_   ^\       )
-           {:;-/    (_+*-+^^^^^+*+*<_ _++_)_    )    )      /
-          ( /  (    (        ,___    ^*+_+* )   <    <      \
-           U _/     )    *--<  ) ^\-----++__)   )    )       )
-            (      )  _(^)^^))  )  )\^^^^^))^*+/    /       /
-          (      /  (_))_^)) )  )  ))^^^^^))^^^)__/     +^^
-         (     ,/    (^))^))  )  ) ))^^^^^^^))^^)       _)
-          *+__+*       (_))^)  ) ) ))^^^^^^))^^^^^)____*^
-          \             \_)^)_)) ))^^^^^^^^^^))^^^^)
-           (_             ^\__^^^^^^^^^^^^))^^^^^^^)
-             ^\___            ^\__^^^^^^))^^^^^^^^)\\
-                  ^^^^^\uuu/^^\uuu/^^^^\^\^\^\^\^\^\^\
-                     ___) >____) >___   ^\_\_\_\_\_\_\)
-                    ^^^//\\_^^//\\_^       ^(\_\_\_\)
-                      ^^^ ^^ ^^^ ^
-```
+    ```console title="results/cowpy-COLLECTED-test-batch-output.txt"
+    _________
+    / HOLà    \
+    | HELLO   |
+    \ BONJOUR /
+    ---------
+      \                                  ,+*^^*+___+++_
+      \                           ,*^^^^              )
+        \                       _+*                     ^**+_
+        \                    +^       _ _++*+_+++_,         )
+                  _+^^*+_    (     ,+*^ ^          \+_        )
+                {       )  (    ,(    ,_+--+--,      ^)      ^\
+                { (\@)    } f   ,(  ,+-^ __*_*_  ^^\_   ^\       )
+              {:;-/    (_+*-+^^^^^+*+*<_ _++_)_    )    )      /
+              ( /  (    (        ,___    ^*+_+* )   <    <      \
+              U _/     )    *--<  ) ^\-----++__)   )    )       )
+                (      )  _(^)^^))  )  )\^^^^^))^*+/    /       /
+              (      /  (_))_^)) )  )  ))^^^^^))^^^)__/     +^^
+            (     ,/    (^))^))  )  ) ))^^^^^^^))^^)       _)
+              *+__+*       (_))^)  ) ) ))^^^^^^))^^^^^)____*^
+              \             \_)^)_)) ))^^^^^^^^^^))^^^^)
+              (_             ^\__^^^^^^^^^^^^))^^^^^^^)
+                ^\___            ^\__^^^^^^))^^^^^^^^)\\
+                      ^^^^^\uuu/^^\uuu/^^^^\^\^\^\^\^\^\^\
+                        ___) >____) >___   ^\_\_\_\_\_\_\)
+                        ^^^//\\_^^//\\_^       ^(\_\_\_\)
+                          ^^^ ^^ ^^^ ^
+    ```
 
 You see that the character is saying all the greetings, just as it did when we ran the `cowpy` command on the `greetings.csv` file from inside the container.
-
-<!-- considering a side quest where we show how to use a conditional to skip the collect step if we want to emit the cowpy'ed greetings individually, and how to use metadata management to assign a specific character to each greeting, maybe do some cross products etc -->
 
 #### 2.3.4. Inspect how Nextflow launched the containerized task
 
