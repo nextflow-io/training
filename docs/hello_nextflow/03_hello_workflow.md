@@ -41,14 +41,16 @@ Just to make sure everything is working, run the script once before making any c
 nextflow run hello-workflow.nf
 ```
 
-```console title="Output"
- N E X T F L O W   ~  version 25.04.3
+??? example title="Output"
 
-Launching `hello-workflow.nf` [stupefied_sammet] DSL2 - revision: b9e466930b
+    ```console
+    N E X T F L O W   ~  version 25.04.3
 
-executor >  local (3)
-[2a/324ce6] sayHello (3) | 3 of 3 ✔
-```
+    Launching `hello-workflow.nf` [stupefied_sammet] DSL2 - revision: b9e466930b
+
+    executor >  local (3)
+    [2a/324ce6] sayHello (3) | 3 of 3 ✔
+    ```
 
 As previously, you will find the output files in the `results` directory (specified by the `publishDir` directive).
 
@@ -117,10 +119,10 @@ process convertToUpper {
     publishDir 'results', mode: 'copy'
 
     input:
-        path input_file
+    path input_file
 
     output:
-        path "UPPER-${input_file}"
+    path "UPPER-${input_file}"
 
     script:
     """
@@ -198,17 +200,17 @@ Let's run this using the `-resume` flag, since we've already run the first step 
 nextflow run hello-workflow.nf -resume
 ```
 
-You should see the following output:
+??? example title="Output"
 
-```console title="Output" linenums="1"
- N E X T F L O W   ~  version 25.04.3
+    ```console
+    N E X T F L O W   ~  version 25.04.3
 
-Launching `hello-workflow.nf` [disturbed_darwin] DSL2 - revision: 4e252c048f
+    Launching `hello-workflow.nf` [disturbed_darwin] DSL2 - revision: 4e252c048f
 
-executor >  local (3)
-[79/33b2f0] sayHello (2)       | 3 of 3, cached: 3 ✔
-[b3/d52708] convertToUpper (3) | 3 of 3 ✔
-```
+    executor >  local (3)
+    [79/33b2f0] sayHello (2)       | 3 of 3, cached: 3 ✔
+    [b3/d52708] convertToUpper (3) | 3 of 3 ✔
+    ```
 
 There is now an extra line in the console output (line 7), which corresponds to the new process we just added.
 
@@ -306,10 +308,10 @@ process collectGreetings {
     publishDir 'results', mode: 'copy'
 
     input:
-        ???
+    ???
 
     output:
-        path "COLLECTED-output.txt"
+    path "COLLECTED-output.txt"
 
     script:
     """
@@ -336,14 +338,14 @@ In the process block, make the following code change:
 
     ```groovy title="hello-workflow.nf" linenums="48" hl_lines="2"
             input:
-                path input_files
+            path input_files
     ```
 
 === "Before"
 
     ```groovy title="hello-workflow.nf" linenums="48"
             input:
-                ???
+            ???
     ```
 
 Notice we use the `path` prefix even though we expect this to contain multiple files.
@@ -386,7 +388,7 @@ In theory this should handle any arbitrary number of input files.
     In that case, we would have to do a little bit of extra work to compose the command.
     You can see an example of this in the [Nextflow for Genomics](../../nf4_science/genomics/) training course.
 
-<!--[ADD LINK to note above] -->
+<!--TODO: ADD LINK to note above -->
 
 ### 2.3. Add the collection step to the workflow
 
@@ -425,18 +427,20 @@ Let's try it.
 nextflow run hello-workflow.nf -resume
 ```
 
-It runs successfully, including the third step:
+??? example title="Output"
 
-```console title="Output" linenums="1"
- N E X T F L O W   ~  version 25.04.3
+    ```console
+    N E X T F L O W   ~  version 25.04.3
 
-Launching `hello-workflow.nf` [mad_gilbert] DSL2 - revision: 6acfd5e28d
+    Launching `hello-workflow.nf` [mad_gilbert] DSL2 - revision: 6acfd5e28d
 
-executor >  local (3)
-[79/33b2f0] sayHello (2)         | 3 of 3, cached: 3 ✔
-[99/79394f] convertToUpper (3)   | 3 of 3, cached: 3 ✔
-[47/50fe4a] collectGreetings (1) | 3 of 3 ✔
-```
+    executor >  local (3)
+    [79/33b2f0] sayHello (2)         | 3 of 3, cached: 3 ✔
+    [99/79394f] convertToUpper (3)   | 3 of 3, cached: 3 ✔
+    [47/50fe4a] collectGreetings (1) | 3 of 3 ✔
+    ```
+
+It runs successfully, including the third step.
 
 However, look at the number of calls for `collectGreetings()` on line 8.
 We were only expecting one, but there are three.
@@ -516,21 +520,23 @@ Let's try it:
 nextflow run hello-workflow.nf -resume
 ```
 
+??? example title="Output"
+
+    ```console
+    N E X T F L O W   ~  version 25.04.3
+
+    Launching `hello-workflow.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
+
+    [d6/cdf466] sayHello (1)       | 3 of 3, cached: 3 ✔
+    [99/79394f] convertToUpper (2) | 3 of 3, cached: 3 ✔
+    [1e/83586c] collectGreetings   | 1 of 1 ✔
+    Before collect: /workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt
+    Before collect: /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt
+    Before collect: /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Holà-output.txt
+    After collect: [/workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt, /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt, /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Holà-output.txt]
+    ```
+
 It runs successfully, although the log output may look a little messier than this (we cleaned it up for readability).
-
-```console title="Output" linenums="1"
- N E X T F L O W   ~  version 25.04.3
-
-Launching `hello-workflow.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
-
-[d6/cdf466] sayHello (1)       | 3 of 3, cached: 3 ✔
-[99/79394f] convertToUpper (2) | 3 of 3, cached: 3 ✔
-[1e/83586c] collectGreetings   | 1 of 1 ✔
-Before collect: /workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt
-Before collect: /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt
-Before collect: /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Holà-output.txt
-After collect: [/workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt, /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt, /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Holà-output.txt]
-```
 
 This time the third step was only called once!
 
@@ -588,15 +594,15 @@ In the process block, make the following code change:
 
     ```groovy title="hello-workflow.nf" linenums="48" hl_lines="3"
         input:
-            path input_files
-            val batch_name
+        path input_files
+        val batch_name
     ```
 
 === "Before"
 
     ```groovy title="hello-workflow.nf" linenums="48"
         input:
-            path input_files
+        path input_files
     ```
 
 You can set up your processes to expect as many inputs as you want.
@@ -610,7 +616,7 @@ In the process block, make the following code change:
 
     ```groovy title="hello-workflow.nf" linenums="52" hl_lines="2 6"
         output:
-            path "COLLECTED-${batch_name}-output.txt"
+        path "COLLECTED-${batch_name}-output.txt"
 
         script:
         """
@@ -696,20 +702,20 @@ Let's try running this with a batch name on the command line.
 nextflow run hello-workflow.nf -resume --batch trio
 ```
 
-It runs successfully:
+??? example title="Output"
 
-```console title="Output" linenums="1"
- N E X T F L O W   ~  version 25.04.3
+    ```console
+    N E X T F L O W   ~  version 25.04.3
 
-Launching `hello-workflow.nf` [confident_rutherford] DSL2 - revision: bc58af409c
+    Launching `hello-workflow.nf` [confident_rutherford] DSL2 - revision: bc58af409c
 
-executor >  local (1)
-[79/33b2f0] sayHello (2)       | 3 of 3, cached: 3 ✔
-[99/79394f] convertToUpper (2) | 3 of 3, cached: 3 ✔
-[b5/f19efe] collectGreetings   | 1 of 1 ✔
-```
+    executor >  local (1)
+    [79/33b2f0] sayHello (2)       | 3 of 3, cached: 3 ✔
+    [99/79394f] convertToUpper (2) | 3 of 3, cached: 3 ✔
+    [b5/f19efe] collectGreetings   | 1 of 1 ✔
+    ```
 
-And produces the desired output:
+It runs successfully and produces the desired output:
 
 ```console title="bash"
 cat results/COLLECTED-trio-output.txt
@@ -764,7 +770,7 @@ In the `collectGreetings` process block, make the following code change:
 
     ```groovy title="hello-workflow.nf" linenums="55" hl_lines="2"
         script:
-            count_greetings = input_files.size()
+        count_greetings = input_files.size()
         """
         cat ${input_files} > 'COLLECTED-${batch_name}-output.txt'
         """
@@ -793,15 +799,15 @@ In the process block, make the following code change:
 
     ```groovy title="hello-workflow.nf" linenums="52" hl_lines="2 3"
         output:
-            path "COLLECTED-${batch_name}-output.txt" , emit: outfile
-            val count_greetings , emit: count
+        path "COLLECTED-${batch_name}-output.txt" , emit: outfile
+        val count_greetings , emit: count
     ```
 
 === "Before"
 
     ```groovy title="hello-workflow.nf" linenums="52"
         output:
-            path "COLLECTED-${batch_name}-output.txt"
+        path "COLLECTED-${batch_name}-output.txt"
     ```
 
 The `emit:` tags are optional, and we could have added a tag to only one of the outputs.
@@ -847,18 +853,18 @@ Let's try running this with the current batch of greetings.
 nextflow run hello-workflow.nf -resume --batch trio
 ```
 
-This runs successfully:
+??? example title="Output"
 
-```console title="Output" linenums="1"
- N E X T F L O W   ~  version 25.04.3
+    ```console
+    N E X T F L O W   ~  version 25.04.3
 
-Launching `hello-workflow.nf` [evil_sinoussi] DSL2 - revision: eeca64cdb1
+    Launching `hello-workflow.nf` [evil_sinoussi] DSL2 - revision: eeca64cdb1
 
-[d6/cdf466] sayHello (1)       | 3 of 3, cached: 3 ✔
-[99/79394f] convertToUpper (2) | 3 of 3, cached: 3 ✔
-[9e/1dfda7] collectGreetings   | 1 of 1, cached: 1 ✔
-There were 3 greetings in this batch
-```
+    [d6/cdf466] sayHello (1)       | 3 of 3, cached: 3 ✔
+    [99/79394f] convertToUpper (2) | 3 of 3, cached: 3 ✔
+    [9e/1dfda7] collectGreetings   | 1 of 1, cached: 1 ✔
+    There were 3 greetings in this batch
+    ```
 
 The last line (line 8) shows that we correctly retrieved the count of greetings processed.
 Feel free to add more greetings to the CSV and see what happens.
