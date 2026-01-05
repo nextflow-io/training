@@ -178,7 +178,7 @@ Run the workflow:
 nextflow run main.nf
 ```
 
-??? example "Output"
+??? success "Output"
 
     ```console
     N E X T F L O W   ~  version 24.10.4
@@ -205,48 +205,45 @@ Each map entry corresponds to a column in our datasheet:
 This is great! It makes it easy to access specific fields from each file.
 For example, we could access the file ID with `id` or the txt file path with `recording`.
 
-<details>
-  <summary>(Optional) More about maps</summary>
+??? info "(Optional) More about maps"
 
-In Groovy, the programming language that Nextflow is built on, a map is a key-value data structure similar to dictionaries in Python, objects in JavaScript, or hashes in Ruby.
+    In Groovy, the programming language that Nextflow is built on, a map is a key-value data structure similar to dictionaries in Python, objects in JavaScript, or hashes in Ruby.
 
-Here's a runnable script that shows how you can define a map and access its contents in practice:
+    Here's a runnable script that shows how you can define a map and access its contents in practice:
 
-```groovy title="examples/map_demo.nf"
-#!/usr/bin/env nextflow
+    ```groovy title="examples/map_demo.nf"
+    #!/usr/bin/env nextflow
 
-// Create a simple map
-def my_map = [id:'sampleA', character:'squirrel']
+    // Create a simple map
+    def my_map = [id:'sampleA', character:'squirrel']
 
-// Print the whole map
-println "map: ${my_map}"
+    // Print the whole map
+    println "map: ${my_map}"
 
-// Access individual values using dot notation
-println "id: ${my_map.id}"
-println "character: ${my_map.character}"
-```
+    // Access individual values using dot notation
+    println "id: ${my_map.id}"
+    println "character: ${my_map.character}"
+    ```
 
-Even though it doesn't have a proper `workflow` block, Nextflow can run this as if it were a workflow:
+    Even though it doesn't have a proper `workflow` block, Nextflow can run this as if it were a workflow:
 
-```bash
-nextflow run examples/map_demo.nf
-```
+    ```bash
+    nextflow run examples/map_demo.nf
+    ```
 
-And here's what you can expect to see in the output:
+    And here's what you can expect to see in the output:
 
-```console title="Output"
-Nextflow 25.10.0 is available - Please consider updating your version to it
+    ```console title="Output"
+    Nextflow 25.10.0 is available - Please consider updating your version to it
 
-N E X T F L O W   ~  version 25.04.3
+    N E X T F L O W   ~  version 25.04.3
 
-Launching `map_demo.nf` [cheesy_plateau] DSL2 - revision: fae5b8496e
+    Launching `map_demo.nf` [cheesy_plateau] DSL2 - revision: fae5b8496e
 
-map: [id:sampleA, character:squirrel]
-id: sampleA
-character: squirrel
-```
-
-</details>
+    map: [id:sampleA, character:squirrel]
+    id: sampleA
+    character: squirrel
+    ```
 
 ### 1.2. Pick out specific fields with `map`
 
@@ -288,7 +285,7 @@ Now run the workflow again:
 nextflow run main.nf
 ```
 
-??? example "Output"
+??? success "Command output"
 
     ```console
     N E X T F L O W   ~  version 24.10.4
@@ -358,7 +355,7 @@ Let's run the workflow:
 nextflow run main.nf
 ```
 
-??? example "Output"
+??? success "Command output"
 
     ```console title="View meta map"
     N E X T F L O W   ~  version 24.10.4
@@ -501,7 +498,7 @@ And now run the workflow:
 nextflow run main.nf
 ```
 
-??? example "Output"
+??? success "Command output"
 
     ```console
     N E X T F L O W   ~  version 24.10.4
@@ -658,7 +655,7 @@ Let's run the workflow to see if it worked:
 nextflow run main.nf -resume
 ```
 
-??? example "Output"
+??? success "Command output"
 
     ```console
 
@@ -770,7 +767,7 @@ Once that all makes sense, run the workflow again to see the result:
 nextflow run main.nf -resume
 ```
 
-??? example "Output"
+??? success "Command output"
 
     ```console
     N E X T F L O W   ~  version 24.10.4
@@ -808,52 +805,49 @@ Now that you know how to create and update the meta map, we can get to the reall
 More specifically, we're going to add a second step to our workflow to draw each animal as ASCII art and make it say the recorded text in a speech bubble.
 We're going to do this using a tool called [`cowpy`](https://github.com/jeffbuttars/cowpy).
 
-<details>
-  <summary>What does <code>cowpy</code> do?</summary>
+??? info "What does `cowpy` do?"
 
-<code>cowpy</code> is a command-line tool that generates ASCII art to display arbitrary text inputs in a fun way.
-It is a python implementation of the classic <a href='https://en.wikipedia.org/wiki/Cowsay'><code>cowsay</code></a> tool by Tony Monroe.
+    `cowpy` is a command-line tool that generates ASCII art to display arbitrary text inputs in a fun way.
+    It is a python implementation of the classic [cowsay](https://en.wikipedia.org/wiki/Cowsay) tool by Tony Monroe.
 
-```console
-cowpy "Hello Nextflow"
-```
+    ```console
+    cowpy "Hello Nextflow"
+    ```
 
-```console
- ______________________________________________________
-< Hello Nextflow >
- ------------------------------------------------------
-     \   ^__^
-      \  (oo)\_______
-         (__)\       )\/\
-           ||----w |
-           ||     ||
-```
+    ```console
+    ______________________________________________________
+    < Hello Nextflow >
+    ------------------------------------------------------
+        \   ^__^
+          \  (oo)\_______
+            (__)\       )\/\
+              ||----w |
+              ||     ||
+    ```
 
-Optionally, you can select a character (or 'cowacter') to use instead of the default cow.
+    Optionally, you can select a character (or 'cowacter') to use instead of the default cow.
 
-```console
-cowpy "Hello Nextflow" -c tux
-```
+    ```console
+    cowpy "Hello Nextflow" -c tux
+    ```
 
-```console
- __________________
-< Hello Nextflow >
- ------------------
-   \
-    \
-        .--.
-       |o_o |
-       |:_/ |
-      //   \ \
-     (|     | )
-    /'\_   _/`\
-    \___)=(___/
-```
+    ```console
+    __________________
+    < Hello Nextflow >
+    ------------------
+      \
+        \
+            .--.
+          |o_o |
+          |:_/ |
+          //   \ \
+        (|     | )
+        /'\_   _/`\
+        \___)=(___/
+    ```
 
-If you worked through the Hello Nextflow course, you've already seen this tool in action.
-If not, don't worry; we'll cover everything you need to know as we go.
-
-</details>
+    If you worked through the Hello Nextflow course, you've already seen this tool in action.
+    If not, don't worry; we'll cover everything you need to know as we go.
 
 ### 3.1. Import the process and examine the code
 
@@ -994,7 +988,7 @@ Let's run this:
 nextflow run main.nf
 ```
 
-??? example "Output"
+??? success "Command output"
 
     ```console
      N E X T F L O W   ~  version 25.04.3
@@ -1045,7 +1039,7 @@ Let's run this:
 nextflow run main.nf
 ```
 
-??? example "Output"
+??? success "Command output"
 
     ```console
      N E X T F L O W   ~  version 25.04.3
@@ -1110,7 +1104,7 @@ Let's run this:
 nextflow run main.nf -resume
 ```
 
-??? example "Output"
+??? success "Command output"
 
     ```console
      N E X T F L O W   ~  version 25.04.3
@@ -1124,7 +1118,7 @@ nextflow run main.nf -resume
 
 If you look in the results directory, you should see the individual files containing the ASCII art of each greeting spoken by the corresponding character.
 
-??? example "Directory contents"
+??? abstract "Directory contents"
 
     ```console
     results/
@@ -1260,7 +1254,7 @@ rm -r results
 nextflow run main.nf
 ```
 
-??? example "Output"
+??? success "Command output"
 
     ```console
      N E X T F L O W   ~  version 25.04.3
@@ -1274,7 +1268,7 @@ nextflow run main.nf
 
 If you look in the results directory, you should see the same outputs as previously, _i.e._ individual files containing the ASCII art of each greeting spoken by the corresponding character.
 
-??? example "Directory contents"
+??? abstract "Directory contents"
 
     ```console
     ./results/
@@ -1322,7 +1316,7 @@ For either version of the workflow we've used above, the `character` key will be
 
 This will cause an error.
 
-??? example "Output"
+??? failure "Command output"
 
     ```console hl_lines="8 11 16 28"
     N E X T F L O W   ~  version 25.04.3
@@ -1390,7 +1384,7 @@ If we're using the version of the code we wrote in section 3.2, Nextflow will at
 
 It will not find any elements that match the instruction, so it will not run `COWPY` at all.
 
-??? example "Output"
+??? success "Command output"
 
     ```console hl_lines="7"
     N E X T F L O W   ~  version 25.04.3
@@ -1410,7 +1404,7 @@ If we're using the version in section 3.3, Nextflow will pass the entire meta ma
 
 This will cause an error, but a different one compared to the first case.
 
-??? example "Output"
+??? failure "Command output"
 
     ```console hl_lines="8 11 16"
      N E X T F L O W   ~  version 25.04.3
