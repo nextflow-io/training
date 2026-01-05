@@ -1028,8 +1028,8 @@ In the main workflow, make the following code changes:
 
     ```groovy title="main.nf" linenums="34"
         // Temporary: access the file and character
-        ch_languages.map { meta, file -> file } .view()
-        ch_languages.map { meta, file -> meta.character } .view()
+        ch_languages.map { meta, file -> file }.view{file -> "File: " + file}
+        ch_languages.map { meta, file -> meta.character }.view{character -> "Character: " + character}
     ```
 
 === "Before"
