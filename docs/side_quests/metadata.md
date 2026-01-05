@@ -181,7 +181,7 @@ nextflow run main.nf
 ??? success "Output"
 
     ```console
-    N E X T F L O W   ~  version 24.10.4
+     N E X T F L O W   ~  version 25.10.2
 
     Launching `main.nf` [exotic_albattani] DSL2 - revision: c0d03cec83
 
@@ -236,7 +236,7 @@ For example, we could access the file ID with `id` or the txt file path with `re
     ```console title="Output"
     Nextflow 25.10.0 is available - Please consider updating your version to it
 
-    N E X T F L O W   ~  version 25.04.3
+     N E X T F L O W   ~  version 25.10.2
 
     Launching `map_demo.nf` [cheesy_plateau] DSL2 - revision: fae5b8496e
 
@@ -288,7 +288,7 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 24.10.4
+     N E X T F L O W   ~  version 25.10.2
 
     Launching `main.nf` [exotic_albattani] DSL2 - revision: c0d03cec83
 
@@ -358,7 +358,7 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console title="View meta map"
-    N E X T F L O W   ~  version 24.10.4
+     N E X T F L O W   ~  version 25.10.2
 
     Launching `main.nf` [lethal_booth] DSL2 - revision: 0d8f844c07
 
@@ -469,7 +469,7 @@ Make the following edits to the workflow:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="8" hl_lines="7-9"
+    ```groovy title="main.nf" linenums="7" hl_lines="7-9"
         ch_datasheet = channel.fromPath("./data/datasheet.csv")
             .splitCsv(header: true)
             .map { row ->
@@ -483,7 +483,7 @@ Make the following edits to the workflow:
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="8" hl_lines="6"
+    ```groovy title="main.nf" linenums="7" hl_lines="6"
         ch_datasheet = channel.fromPath("./data/datasheet.csv")
             .splitCsv(header: true)
             .map { row ->
@@ -492,7 +492,9 @@ Make the following edits to the workflow:
             .view()
     ```
 
-And now run the workflow:
+Note that we've removed the original `.view()` operation in the channel construction.
+
+We can now run the workflow:
 
 ```bash
 nextflow run main.nf
@@ -501,7 +503,7 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 24.10.4
+     N E X T F L O W   ~  version 25.10.2
 
     Launching `main.nf` [voluminous_mcnulty] DSL2 - revision: f9bcfebabb
 
@@ -629,7 +631,7 @@ With that, let's make the following edits to the workflow:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="14" hl_lines="3-7"
+    ```groovy title="main.nf" linenums="13" hl_lines="3-7"
         // Run langid to identify the language of each greeting
         IDENTIFY_LANGUAGE(ch_datasheet)
         IDENTIFY_LANGUAGE.out
@@ -641,7 +643,7 @@ With that, let's make the following edits to the workflow:
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="14" hl_lines="3"
+    ```groovy title="main.nf" linenums="13" hl_lines="3"
         // Run langid to identify the language of each greeting
         IDENTIFY_LANGUAGE(ch_datasheet)
         IDENTIFY_LANGUAGE.out.view()
@@ -658,8 +660,7 @@ nextflow run main.nf -resume
 ??? success "Command output"
 
     ```console
-
-    N E X T F L O W   ~  version 24.10.4
+     N E X T F L O W   ~  version 25.10.2
 
     Launching `main.nf` [cheeky_fermat] DSL2 - revision: d096281ee4
 
@@ -719,7 +720,7 @@ You should end up making the following changes to the workflow:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="14" hl_lines="7-19"
+    ```groovy title="main.nf" linenums="13" hl_lines="7-19"
         // Run langid to identify the language of each greeting
         IDENTIFY_LANGUAGE(ch_datasheet)
         IDENTIFY_LANGUAGE.out
@@ -743,7 +744,7 @@ You should end up making the following changes to the workflow:
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="14" hl_lines="7"
+    ```groovy title="main.nf" linenums="13" hl_lines="7"
         // Run langid to identify the language of each greeting
         IDENTIFY_LANGUAGE(ch_datasheet)
         IDENTIFY_LANGUAGE.out
@@ -770,7 +771,7 @@ nextflow run main.nf -resume
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 24.10.4
+     N E X T F L O W   ~  version 25.10.2
 
     Launching `main.nf` [wise_almeida] DSL2 - revision: 46778c3cd0
 
@@ -991,7 +992,7 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 25.04.3
+     N E X T F L O W   ~  version 25.10.2
 
     Launching `./main.nf` [friendly_austin] DSL2 - revision: 3dbe460fd6
 
@@ -1022,8 +1023,8 @@ In the main workflow, make the following code changes:
 
     ```groovy title="main.nf" linenums="34"
         // Temporary: access the file and character
-        ch_languages.map { meta, file -> file }.view{file -> "File: " + file}
-        ch_languages.map { meta, file -> meta.character }.view{character -> "Character: " + character}
+        ch_languages.map { meta, file -> file }.view { file -> "File: " + file }
+        ch_languages.map { meta, file -> meta.character }.view { character -> "Character: " + character }
     ```
 
 === "Before"
@@ -1033,41 +1034,43 @@ In the main workflow, make the following code changes:
         ch_languages.view()
     ```
 
+Note that we're using closures (such as `{ file -> "File: " + file }`) to make the output of the `.view` operations more readable.
+
 Let's run this:
 
 ```bash
-nextflow run main.nf
+nextflow run main.nf -resume
 ```
 
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 25.04.3
+     N E X T F L O W   ~  version 25.10.2
 
     Launching `./main.nf` [cheesy_cantor] DSL2 - revision: 15af9c1ec7
 
-    [23/1c1798] IDENTIFY_LANGUAGE (7) [100%] 7 of 7 ✔
-    tux
-    /workspaces/training/side-quests/metadata/work/2d/7c611dd93f9090da9b1b2e02548395/guten_tag.txt
-    /workspaces/training/side-quests/metadata/work/3e/90c91eb3898d24653083a3f15d96ad/bonjour.txt
-    squirrel
-    turkey
-    /workspaces/training/side-quests/metadata/work/8e/1f624876add21fa9113f283134fda1/hello.txt
-    sheep
-    /workspaces/training/side-quests/metadata/work/ab/5b7d72250283d1ce6a6a927621d2d1/hallo.txt
-    moose
-    /workspaces/training/side-quests/metadata/work/0c/6e1cd4ee97205324409c515568de3b/salut.txt
-    /workspaces/training/side-quests/metadata/work/6e/32e65e6cd8db007fcb8a9e85b34d1d/hola.txt
-    stegosaurus
-    /workspaces/training/side-quests/metadata/work/23/1c1798c05be863ee7ccabd49d891b2/ciao.txt
-    turtle
+    [43/05df08] IDENTIFY_LANGUAGE (7) [100%] 7 of 7, cached: 7 ✔
+    Character: squirrel
+    File: /workspaces/training/side-quests/metadata/work/8d/4b9498bbccb7a74f04e41877cdc3e5/bonjour.txt
+    File: /workspaces/training/side-quests/metadata/work/d3/604274985406e40d79021dea658e60/guten_tag.txt
+    Character: tux
+    Character: turkey
+    File: /workspaces/training/side-quests/metadata/work/d4/fafcc9415b61d2b0fea872e6a05e8a/hello.txt
+    File: /workspaces/training/side-quests/metadata/work/02/468ac9efb27f636715e8144b37e9a7/hallo.txt
+    Character: sheep
+    Character: moose
+    Character: stegosaurus
+    File: /workspaces/training/side-quests/metadata/work/d4/61a7e1188b4f2742bc72004e226eca/salut.txt
+    File: /workspaces/training/side-quests/metadata/work/ae/68364be238c11149c588bf6fc858b1/hola.txt
+    File: /workspaces/training/side-quests/metadata/work/43/05df081af5d879ab52e5828fa0357e/ciao.txt
+    Character: turtle
     ```
 
 _The file paths and character values may come out in a different order in your output._
 
 This confirms we're able to access the file and the character for each element in the channel.
 
-#### 3.2.3. Call the process
+#### 3.2.3. Call the `COWPY` process
 
 Now let's put it all together and actually call the `COWPY` process on the `ch_languages` channel.
 
@@ -1094,8 +1097,6 @@ In the main workflow, make the following code changes:
 You see we simply copy the two map operations (minus the `.view()` statements) as the inputs to the process call.
 Just make sure you don't forget the comma between them!
 
-In case you're wondering, we can't just write a single map operation that outputs both the file and the character because that would return a tuple.
-We need to write them separately so we can feed them to the process separately.
 It's a bit clunky, but we'll see how to make that better in the next section.
 
 Let's run this:
@@ -1107,18 +1108,18 @@ nextflow run main.nf -resume
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 25.04.3
+     N E X T F L O W   ~  version 25.10.2
 
-    Launching `./main.nf` [naughty_lamarr] DSL2 - revision: 0dfeee3cc1
+    Launching `main.nf` [suspicious_crick] DSL2 - revision: 25541014c5
 
-    executor >  local (14)
-    [dd/68fd08] IDENTIFY_LANGUAGE (7) | 7 of 7 ✔
-    [d3/c0f8a5] COWPY (7)             | 7 of 7 ✔
+    executor >  local (7)
+    [43/05df08] IDENTIFY_LANGUAGE (7) [100%] 7 of 7, cached: 7 ✔
+    [e7/317c18] COWPY (6)             [100%] 7 of 7 ✔
     ```
 
 If you look in the results directory, you should see the individual files containing the ASCII art of each greeting spoken by the corresponding character.
 
-??? abstract "Directory contents"
+??? abstract "Directory and example file contents"
 
     ```console
     results/
@@ -1129,11 +1130,9 @@ If you look in the results directory, you should see the individual files contai
     ├── cowpy-hello.txt
     ├── cowpy-hola.txt
     └── cowpy-salut.txt
-
-    0 directories, 7 files
     ```
 
-    ```text title="cowpy-bonjour.txt"
+    ```text title="results/cowpy-bonjour.txt"
      _________________
     / Bonjour         \
     \ Salut, à demain /
@@ -1151,6 +1150,26 @@ If you look in the results directory, you should see the individual files contai
     ```
 
 This shows we were able to use the information in the meta map to parameterize the command in the second step of the pipeline.
+
+??? info "(Optional) Accessing map elements with `map()` vs. `multiMap()`"
+
+    In case you're wondering, we couldn't just write a single `map()` operation that outputs both the `file` and the `character`, because that would return them as a tuple.
+    We had to write two separate `map()` operations in order to feed the `file` and `character` elements to the process separately.
+
+    Technically there is another way to do this through a single mapping operation, using the `multiMap()` operator, which is capable of emitting multiple channels.
+    For example, you could replace the call to `COWPY` above with the following code:
+
+    ```
+        // Run cowpy to generate ASCII art
+        COWPY(
+            ch_languages.multiMap { meta, file ->
+                file: file
+                character: meta.character
+            }
+        )
+    ```
+
+    This produces exactly the same result.
 
 However, as noted above, some of the code involved was a bit clunky, since we had to unpack meta data while still in the context of the workflow body.
 This approach works fine for using a small number of fields from the meta map, but would scale poorly if we wanted to use a lot more.
@@ -1171,20 +1190,22 @@ To that end, we'll need to do three things:
 2. Update the process command to use the meta map
 3. Update the process call in the workflow body
 
+Ready? Let's go!
+
 #### 3.3.1. Modify the `COWPY` module input
 
 Make the following edits to the `cowpy.nf` module file:
 
 === "After"
 
-    ```groovy title="cowpy.nf" linenums="12" hl_lines="2"
+    ```groovy title="cowpy.nf" linenums="10" hl_lines="2"
     input:
     tuple val(meta), path(input_file)
     ```
 
 === "Before"
 
-    ```groovy title="cowpy.nf" linenums="12" hl_lines="2-3"
+    ```groovy title="cowpy.nf" linenums="10" hl_lines="2-3"
     input:
     path(input_file)
     val character
@@ -1192,7 +1213,7 @@ Make the following edits to the `cowpy.nf` module file:
 
 This enables us to use the `[meta, file]` tuple structure we covered earlier in the tutorial.
 
-Note that we did not update the process output definition to output the meta map, in order to keep the tutorial streamlined, but feel free do that yourself as an exercise following the model of the `LANGID` process.
+Note that we did not update the process output definition to output the meta map, in order to keep the tutorial streamlined, but feel free do that yourself as an exercise following the model of the `IDENTIFY_LANGUAGE` process.
 
 #### 3.3.2. Update the command to use the meta map field
 
@@ -1202,7 +1223,7 @@ Make the following edits to the `cowpy.nf` module file:
 
 === "After"
 
-    ```groovy title="cowpy.nf" linenums="18" hl_lines="3"
+    ```groovy title="cowpy.nf" linenums="16" hl_lines="3"
     script:
     """
     cat ${input_file} | cowpy -c ${meta.character} > cowpy-${input_file}
@@ -1211,7 +1232,7 @@ Make the following edits to the `cowpy.nf` module file:
 
 === "Before"
 
-    ```groovy title="cowpy.nf" linenums="18" hl_lines="3"
+    ```groovy title="cowpy.nf" linenums="16" hl_lines="3"
     script:
     """
     cat ${input_file} | cowpy -c ${character} > cowpy-${input_file}
@@ -1230,14 +1251,14 @@ Make the following edits to the main workflow:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="36" hl_lines="2"
+    ```groovy title="main.nf" linenums="34" hl_lines="2"
     // Run cowpy to generate ASCII art
     COWPY(ch_languages)
     ```
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="36" hl_lines="3-4"
+    ```groovy title="main.nf" linenums="34" hl_lines="3-4"
     // Run cowpy to generate ASCII art
     COWPY(
         ch_languages.map { meta, file -> file },
@@ -1257,7 +1278,7 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 25.04.3
+     N E X T F L O W   ~  version 25.10.2
 
     Launching `main.nf` [wise_sammet] DSL2 - revision: 99797b1e92
 
@@ -1279,8 +1300,6 @@ If you look in the results directory, you should see the same outputs as previou
     ├── cowpy-hello.txt
     ├── cowpy-hola.txt
     └── cowpy-salut.txt
-
-    0 directories, 7 files
     ```
 
 So this produces the same results as before with simpler code.
@@ -1319,7 +1338,7 @@ This will cause an error.
 ??? failure "Command output"
 
     ```console hl_lines="8 11 16 28"
-    N E X T F L O W   ~  version 25.04.3
+     N E X T F L O W   ~  version 25.10.2
 
     Launching `main.nf` [marvelous_hirsch] DSL2 - revision: 0dfeee3cc1
 
@@ -1359,11 +1378,11 @@ This will cause an error.
     -- Check '.nextflow.log' file for details
     ```
 
-When Nextflow runs the `cowpy` command line for that sample, `${character}` is filled with an empty string in the `cowpy` command line, so the `cowpy` tool throws an error saying no value was provided for the `-c` argument.
+When Nextflow runs the `cowpy` command line for that sample, `${meta.character}` is filled with an empty string in the `cowpy` command line, so the `cowpy` tool throws an error saying no value was provided for the `-c` argument.
 
 #### 3.4.2. The character column does not exist in the datasheet
 
-Now let's say we delete the character column entirely from our datasheet:
+Now let's say we delete the `character` column entirely from our datasheet:
 
 ```csv title="datasheet.csv" linenums="1"
 id,recording
@@ -1387,7 +1406,7 @@ It will not find any elements that match the instruction, so it will not run `CO
 ??? success "Command output"
 
     ```console hl_lines="7"
-    N E X T F L O W   ~  version 25.04.3
+     N E X T F L O W   ~  version 25.10.2
 
     Launching `main.nf` [desperate_montalcini] DSL2 - revision: 0dfeee3cc1
 
@@ -1397,6 +1416,7 @@ It will not find any elements that match the instruction, so it will not run `CO
     ```
 
 As far as Nextflow is concerned, this workflow ran successfully!
+However, none of the outputs we want will be produced.
 
 ##### 3.4.2.2. Value accessed at the process level
 
@@ -1407,7 +1427,7 @@ This will cause an error, but a different one compared to the first case.
 ??? failure "Command output"
 
     ```console hl_lines="8 11 16"
-     N E X T F L O W   ~  version 25.04.3
+     N E X T F L O W   ~  version 25.10.2
 
     Launching `main.nf` [jovial_bohr] DSL2 - revision: eaaf375827
 

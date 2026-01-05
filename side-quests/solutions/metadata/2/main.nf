@@ -11,23 +11,23 @@ workflow {
         }
 
     // Run langid to identify the language of each greeting
-        IDENTIFY_LANGUAGE(ch_datasheet)
-        IDENTIFY_LANGUAGE.out
-            .map { meta, file, lang_id ->
-                [meta + [lang: lang_id], file]
-            }
-            .map { meta, file ->
+    IDENTIFY_LANGUAGE(ch_datasheet)
+    IDENTIFY_LANGUAGE.out
+        .map { meta, file, lang_id ->
+            [meta + [lang: lang_id], file]
+        }
+        .map { meta, file ->
 
-                def lang_group = "unknown"
-                if (meta.lang.equals("de") || meta.lang.equals('en')) {
-                    lang_group = "germanic"
-                }
-                else if (meta.lang in ["fr", "es", "it"]) {
-                    lang_group = "romance"
-                }
-
-                [meta + [lang_group: lang_group], file]
+            def lang_group = "unknown"
+            if (meta.lang.equals("de") || meta.lang.equals('en')) {
+                lang_group = "germanic"
             }
-            .view()
+            else if (meta.lang in ["fr", "es", "it"]) {
+                lang_group = "romance"
+            }
+
+            [meta + [lang_group: lang_group], file]
+        }
+        .view()
 
 }
