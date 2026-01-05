@@ -78,7 +78,7 @@ You'll find a main workflow file and a `data` directory containing a datasheet a
 
 The workflow in the `main.nf` file is a stub that you will gradually expand into a fully functioning workflow.
 
-The datasheet list the paths to the data files and some associated metadata, organized in 3 columns:
+The datasheet lists the paths to the data files and some associated metadata, organized in 3 columns:
 
 - `id`: self-explanatory, an ID given to the file
 - `character`: a character name, that we will use later to draw different creatures
