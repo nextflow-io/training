@@ -86,7 +86,7 @@ View the contents of the new directory to see how much work you saved yourself b
 tree core-hello
 ```
 
-??? example "Directory contents"
+??? abstract "Directory contents"
 
     ```console
     core-hello/
@@ -160,7 +160,7 @@ Believe it or not, even though you haven't yet added any modules to make it do r
 nextflow run ./core-hello -profile docker,test --outdir core-hello-results
 ```
 
-??? example "Output"
+??? success "Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -203,7 +203,7 @@ In fact, a new directory of results called `core-hello-results` was created cont
 tree core-hello-results
 ```
 
-??? example "Directory contents"
+??? abstract "Directory contents"
 
     ```console
     core-hello-results
@@ -308,7 +308,7 @@ Learn how to make a simple workflow composable as a prelude to making it nf-core
 Now it's time to get to work integrating our workflow into the nf-core scaffold.
 As a reminder, we're working with the workflow featured in our [Hello Nextflow](../hello_nextflow/index.md) training course.
 
-??? example "What does the Hello Nextflow workflow do?"
+??? info "What does the Hello Nextflow workflow do?"
 
     If you haven't done the [Hello Nextflow](../hello_nextflow/index.md) training, here's a quick overview of what this simple workflow does.
 
@@ -362,7 +362,7 @@ We provide you with a clean, fully functional copy of the completed Hello Nextfl
 tree original-hello/
 ```
 
-??? example "Directory contents"
+??? abstract "Directory contents"
 
     ```console
     original-hello/
@@ -383,7 +383,7 @@ Feel free to run it to satisfy yourself that it works:
 nextflow run original-hello/hello.nf
 ```
 
-??? example "Output"
+??? success "Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -677,7 +677,7 @@ If we had named the entrypoint workflow `something_else.nf`, we would have had t
 
 If you made all the changes correctly, this should run to completion.
 
-??? example "Output"
+??? success "Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -795,7 +795,7 @@ You should now see the directory of modules listed under `core-hello/`.
 tree core-hello/modules
 ```
 
-??? example "Directory contents"
+??? abstract "Directory contents"
 
     ```console
     core-hello/modules
@@ -1122,13 +1122,17 @@ What matters here is that there are two workflows defined:
 - `CORE_HELLO` is a thin wrapper for running the HELLO workflow we just finished adapting in `core-hello/workflows/hello.nf`.
 - An unnamed workflow that calls `CORE_HELLO` as well as two other subworkflows, `PIPELINE_INITIALISATION` and `PIPELINE_COMPLETION`.
 
-<!-- TODO: diagram of how main.nf wraps the second-order workflows -->
+Here is a diagram of how they relate to each other:
+
+<figure class="excalidraw">
+--8<-- "docs/hello_nf-core/img/hello-nested-workflows.svg"
+</figure>
 
 Importantly, we cannot find any code constructing an input channel at this level, only references to a samplesheet provided via the `--input` parameter.
 
-A bit of poking around reveals that the input handling is done by the `PIPELINE_INITIALISATION` subworkflow, appropriately enough.
+A bit of poking around reveals that the input handling is done by the `PIPELINE_INITIALISATION` subworkflow, appropriately enough, which is imported from `core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf`.
 
-If we open up `core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf` and scroll down, we come to this chunk of code:
+If we open up that file and scroll down, we come to this chunk of code:
 
 ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="76"
     //
@@ -1344,7 +1348,7 @@ nextflow run core-hello --outdir core-hello-results -profile test,docker --valid
 
 If you've done all of the modifications correctly, it should run to completion.
 
-??? example "Output"
+??? success "Command output"
 
     ```console
      N E X T F L O W   ~  version 25.04.3
@@ -1396,7 +1400,7 @@ As you may recall from earlier, our first run of the newly created workflow prod
 tree core-hello-results
 ```
 
-??? example "Directory contents"
+??? abstract "Directory contents"
 
     ```console
     core-hello-results
@@ -1434,7 +1438,7 @@ Here's what happened: we didn't change anything to the modules themselves, so th
 tree results
 ```
 
-??? example "Directory contents"
+??? abstract "Directory contents"
 
     ```console
     results
