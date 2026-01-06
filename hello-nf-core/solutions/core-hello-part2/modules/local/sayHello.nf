@@ -8,10 +8,10 @@ process sayHello {
     publishDir 'results', mode: 'copy'
 
     input:
-        val greeting
+    val greeting
 
     output:
-        path "${greeting}-output.txt"
+    path "${greeting}-output.txt"
 
     script:
     """
