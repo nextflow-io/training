@@ -240,9 +240,7 @@ Let's decide to use Docker for the container system and `demo-results` as the ou
 nextflow run nf-core/demo -profile docker,test --outdir demo-results
 ```
 
-Here's the console output from the pipeline:
-
-??? example "Output"
+??? success "Command output"
 
     ```console
      N E X T F L O W   ~  version 25.04.3
@@ -330,28 +328,30 @@ Finally, let's have a look at the `demo-results` directory produced by the pipel
 tree -L 2 demo-results
 ```
 
-```console title="Directory contents"
-demo-results
-├── fastqc
-│   ├── SAMPLE1_PE
-│   ├── SAMPLE2_PE
-│   └── SAMPLE3_SE
-├── fq
-│   ├── SAMPLE1_PE
-│   ├── SAMPLE2_PE
-│   └── SAMPLE3_SE
-├── multiqc
-│   ├── multiqc_data
-│   ├── multiqc_plots
-│   └── multiqc_report.html
-└── pipeline_info
-    ├── execution_report_2025-11-21_04-57-41.html
-    ├── execution_timeline_2025-11-21_04-57-41.html
-    ├── execution_trace_2025-11-21_04-57-41.txt
-    ├── nf_core_demo_software_mqc_versions.yml
-    ├── params_2025-11-21_04-57-46.json
-    └── pipeline_dag_2025-11-21_04-57-41.html
-```
+??? abstract "Directory contents"
+
+    ```console
+    demo-results
+    ├── fastqc
+    │   ├── SAMPLE1_PE
+    │   ├── SAMPLE2_PE
+    │   └── SAMPLE3_SE
+    ├── fq
+    │   ├── SAMPLE1_PE
+    │   ├── SAMPLE2_PE
+    │   └── SAMPLE3_SE
+    ├── multiqc
+    │   ├── multiqc_data
+    │   ├── multiqc_plots
+    │   └── multiqc_report.html
+    └── pipeline_info
+        ├── execution_report_2025-11-21_04-57-41.html
+        ├── execution_timeline_2025-11-21_04-57-41.html
+        ├── execution_trace_2025-11-21_04-57-41.txt
+        ├── nf_core_demo_software_mqc_versions.yml
+        ├── params_2025-11-21_04-57-46.json
+        └── pipeline_dag_2025-11-21_04-57-41.html
+    ```
 
 That might seem like a lot.
 To learn more about the `nf-core/demo` pipeline's outputs, check out its [documentation page](https://nf-co.re/demo/1.0.2/docs/output/).
@@ -394,7 +394,7 @@ You can either use `tree` or use the file explorer to find and open the `nf-core
 tree -L 1 pipelines/nf-core/demo
 ```
 
-??? example "Directory contents"
+??? abstract "Directory contents"
 
     ```console
     pipelines/nf-core/demo
@@ -457,6 +457,12 @@ Here is what the relationships between the relevant code components look like fo
 There is a so-called _entrypoint_ script called `main.nf`, which acts as a wrapper for two kinds of nested workflows: the workflow containing the actual analysis logic, located under `workflows/` and called `demo.nf`, and a set of housekeeping workflows located under `subworkflows/`.
 The `demo.nf` workflow calls on **modules** located under `modules/`; these contain the **processes** that will perform the actual analysis steps.
 
+!!! note
+
+    Subworkflows are not limited to housekeeping functions, and they can make use of process modules.
+
+    The `nf-core/demo` pipeline shown here happens to be on the simpler side on the spectrum, but other nf-core pipelines (such as `nf-core/rnaseq`) utilize subworkflows that are involved in the actual analysis.
+
 Now, let's review these components in turn.
 
 #### 3.1.2. The entrypoint script: `main.nf`
@@ -498,7 +504,7 @@ You can see this applied in practice to the `nf-core/demo` pipeline modules:
 tree -L 3 pipelines/nf-core/demo/modules
 ```
 
-??? example "Directory contents"
+??? abstract "Directory contents"
 
     ```console
     pipelines/nf-core/demo/modules
@@ -535,7 +541,7 @@ Like modules, subworkflows are differentiated into `local` and `nf-core` directo
 tree -L 3 pipelines/nf-core/demo/subworkflows
 ```
 
-??? example "Directory contents"
+??? abstract "Directory contents"
 
     ```console
     pipelines/nf-core/demo/subworkflows
