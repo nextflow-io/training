@@ -1153,7 +1153,12 @@ If you look in the results directory, you should see the individual files contai
 
 This shows we were able to use the information in the meta map to parameterize the command in the second step of the pipeline.
 
-??? info "(Optional) Accessing map elements with `map()` vs. `multiMap()`"
+However, as noted above, some of the code involved was a bit clunky, since we had to unpack meta data while still in the context of the workflow body.
+That approach works fine for using a small number of fields from the meta map, but would scale poorly if we wanted to use a lot more.
+
+There is another operator called `multiMap()` that allows us to streamline this a little bit, but even then it's not ideal.
+
+??? info "(Optional) Alternative version with `multiMap()`"
 
     In case you're wondering, we couldn't just write a single `map()` operation that outputs both the `file` and the `character`, because that would return them as a tuple.
     We had to write two separate `map()` operations in order to feed the `file` and `character` elements to the process separately.
@@ -1161,7 +1166,9 @@ This shows we were able to use the information in the meta map to parameterize t
     Technically there is another way to do this through a single mapping operation, using the `multiMap()` operator, which is capable of emitting multiple channels.
     For example, you could replace the call to `COWPY` above with the following code:
 
-    ```
+    === "After"
+
+    ```groovy title="main.nf" linenums="34"
         // Run cowpy to generate ASCII art
         COWPY(
             ch_languages.multiMap { meta, file ->
@@ -1171,10 +1178,19 @@ This shows we were able to use the information in the meta map to parameterize t
         )
     ```
 
+    === "Before"
+
+    ```groovy title="main.nf" linenums="34"
+        // Run cowpy to generate ASCII art
+        COWPY(
+            ch_languages.map { meta, file -> file },
+            ch_languages.map { meta, file -> meta.character }
+        )
+    ```
+
     This produces exactly the same result.
 
-However, as noted above, some of the code involved was a bit clunky, since we had to unpack meta data while still in the context of the workflow body.
-This approach works fine for using a small number of fields from the meta map, but would scale poorly if we wanted to use a lot more.
+In either case, it's awkward that we have to do some unpacking at the workflow level.
 
 It would be better if we could feed the entire meta map into the process and pick what we needed once there.
 
@@ -1485,7 +1501,7 @@ This happens because `meta.character` does not exist, so our attempt to access i
 
 Aside from supplying a default value as part of the workflow configuration, there are two things we can do to handle this more robustly:
 
-1. Implement input validation to your workflow to ensure that the datasheet contains all the required information. You can find an [introduction to input validation](../hello_nf-core/05_input_validation.md) in the Hello nf-core training course. <!-- pending a proper Validation side quest -->
+1. Implement input validation to your workflow to ensure that the datasheet contains all the required information. You can find an [introduction to input validation](../hello_nf-core/05_input_validation.md) in the Hello nf-core training course. <!-- TODO (future) pending a proper Validation side quest -->
 
 2. If you want to make sure anyone who uses your process module can immediately identify required inputs, you can also make the required metadata property an explicit input.
 
