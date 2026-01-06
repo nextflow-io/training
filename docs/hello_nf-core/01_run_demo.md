@@ -328,28 +328,30 @@ Finally, let's have a look at the `demo-results` directory produced by the pipel
 tree -L 2 demo-results
 ```
 
-```console title="Directory contents"
-demo-results
-├── fastqc
-│   ├── SAMPLE1_PE
-│   ├── SAMPLE2_PE
-│   └── SAMPLE3_SE
-├── fq
-│   ├── SAMPLE1_PE
-│   ├── SAMPLE2_PE
-│   └── SAMPLE3_SE
-├── multiqc
-│   ├── multiqc_data
-│   ├── multiqc_plots
-│   └── multiqc_report.html
-└── pipeline_info
-    ├── execution_report_2025-11-21_04-57-41.html
-    ├── execution_timeline_2025-11-21_04-57-41.html
-    ├── execution_trace_2025-11-21_04-57-41.txt
-    ├── nf_core_demo_software_mqc_versions.yml
-    ├── params_2025-11-21_04-57-46.json
-    └── pipeline_dag_2025-11-21_04-57-41.html
-```
+??? abstract "Directory contents"
+
+    ```console
+    demo-results
+    ├── fastqc
+    │   ├── SAMPLE1_PE
+    │   ├── SAMPLE2_PE
+    │   └── SAMPLE3_SE
+    ├── fq
+    │   ├── SAMPLE1_PE
+    │   ├── SAMPLE2_PE
+    │   └── SAMPLE3_SE
+    ├── multiqc
+    │   ├── multiqc_data
+    │   ├── multiqc_plots
+    │   └── multiqc_report.html
+    └── pipeline_info
+        ├── execution_report_2025-11-21_04-57-41.html
+        ├── execution_timeline_2025-11-21_04-57-41.html
+        ├── execution_trace_2025-11-21_04-57-41.txt
+        ├── nf_core_demo_software_mqc_versions.yml
+        ├── params_2025-11-21_04-57-46.json
+        └── pipeline_dag_2025-11-21_04-57-41.html
+    ```
 
 That might seem like a lot.
 To learn more about the `nf-core/demo` pipeline's outputs, check out its [documentation page](https://nf-co.re/demo/1.0.2/docs/output/).

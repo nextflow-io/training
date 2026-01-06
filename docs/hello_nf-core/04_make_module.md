@@ -433,7 +433,7 @@ Open the `cowpy.nf` module file (under `core-hello/modules/local/`) and modify i
     #!/usr/bin/env nextflow
 
     // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
-    process cowpy {
+    process COWPY {
 
         publishDir 'results', mode: 'copy'
 
@@ -460,7 +460,7 @@ Open the `cowpy.nf` module file (under `core-hello/modules/local/`) and modify i
     #!/usr/bin/env nextflow
 
     // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
-    process cowpy {
+    process COWPY {
 
         publishDir 'results', mode: 'copy'
 
@@ -506,7 +506,7 @@ Now that we've taken the `character` declaration out of the module, we've got to
 Specifically, we're going to add this little chunk of code to the `process {}` block:
 
 ```groovy title="Code to add"
-withName: 'cowpy' {
+withName: 'COWPY' {
     ext.args = { "-c ${params.character}" }
 }
 ```
@@ -528,7 +528,7 @@ Open `conf/modules.config` and add the configuration code inside the `process {}
             saveAs: { filename -> filename.equals('versions.yml') ? null : filename }
         ]
 
-        withName: 'cowpy' {
+        withName: 'COWPY' {
             ext.args = { "-c ${params.character}" }
         }
     }
@@ -557,7 +557,7 @@ By using the `modules.config` file as the place where all pipelines centralize p
 
 #### 1.3.3. Update the `hello.nf` workflow
 
-Since the cowpy module no longer requires the `character` parameter as an input, we need to update the workflow call accordingly.
+Since the `COWPY` module no longer requires the `character` parameter as an input, we need to update the workflow call accordingly.
 
 Open the `hello.nf` workflow file (under `core-hello/workflows/`) and update the call to `COWPY` as shown below.
 
@@ -565,14 +565,14 @@ Open the `hello.nf` workflow file (under `core-hello/workflows/`) and update the
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="39" hl_lines="2"
         // generate ASCII art of the greetings with cowpy
-        cowpy(CAT_CAT.out.file_out)
+        COWPY(CAT_CAT.out.file_out)
     ```
 
 === "Before"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="39" hl_lines="2"
         // generate ASCII art of the greetings with cowpy
-        cowpy(CAT_CAT.out.file_out, params.character)
+        COWPY(CAT_CAT.out.file_out, params.character)
     ```
 
 The workflow code is now cleaner: we don't need to pass `params.character` directly to the process.
@@ -721,20 +721,7 @@ Open the `cowpy.nf` module file (under `core-hello/modules/local/`) and modify i
 
 === "After"
 
-    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="15 19 21"
-    #!/usr/bin/env nextflow
-
-    // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
-    process cowpy {
-
-        publishDir 'results', mode: 'copy'
-
-        container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
-        conda 'conda-forge::cowpy==1.1.5'
-
-        input:
-            tuple val(meta), path(input_file)
-
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="2 6 8"
         output:
             tuple val(meta), path("${prefix}.txt"), emit: cowpy_output
 
@@ -749,20 +736,7 @@ Open the `cowpy.nf` module file (under `core-hello/modules/local/`) and modify i
 
 === "Before"
 
-    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="15 20"
-    #!/usr/bin/env nextflow
-
-    // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
-    process cowpy {
-
-        publishDir 'results', mode: 'copy'
-
-        container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
-        conda 'conda-forge::cowpy==1.1.5'
-
-        input:
-            tuple val(meta), path(input_file)
-
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="2 7"
         output:
             tuple val(meta), path("cowpy-${input_file}"), emit: cowpy_output
 
@@ -792,7 +766,7 @@ As a result, the output file name is now constructed using a sensible default (t
 
 In this case the sensible default is not sufficiently expressive for our taste; we want to use a custom naming pattern that includes the tool name, `cowpy-<id>.txt`, like we had before.
 
-We'll do that by configuring `ext.prefix` in `modules.config`, just like we did for the `character` parameter with `ext.args`, except this time the `withName: 'cowpy' {}` block already exists, and we just need to add the following line:
+We'll do that by configuring `ext.prefix` in `modules.config`, just like we did for the `character` parameter with `ext.args`, except this time the `withName: 'COWPY' {}` block already exists, and we just need to add the following line:
 
 ```groovy title="Code to add"
 ext.prefix = { "cowpy-${meta.id}" }
@@ -808,7 +782,7 @@ Open `conf/modules.config` and add the configuration code inside the `process {}
 === "After"
 
     ```groovy title="core-hello/conf/modules.config" linenums="21" hl_lines="3"
-        withName: 'cowpy' {
+        withName: 'COWPY' {
             ext.args = { "-c ${params.character}" }
             ext.prefix = { "cowpy-${meta.id}" }
         }
@@ -817,7 +791,7 @@ Open `conf/modules.config` and add the configuration code inside the `process {}
 === "Before"
 
     ```groovy title="core-hello/conf/modules.config" linenums="21"
-        withName: 'cowpy' {
+        withName: 'COWPY' {
             ext.args = { "-c ${params.character}" }
         }
     ```
@@ -942,7 +916,7 @@ Open the `cowpy.nf` module file (under `core-hello/modules/local/`) and remove t
     #!/usr/bin/env nextflow
 
     // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
-    process cowpy {
+    process COWPY {
 
         container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
         conda 'conda-forge::cowpy==1.1.5'
@@ -954,7 +928,7 @@ Open the `cowpy.nf` module file (under `core-hello/modules/local/`) and remove t
     #!/usr/bin/env nextflow
 
     // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
-    process cowpy {
+    process COWPY {
 
         publishDir 'results', mode: 'copy'
 
@@ -1084,7 +1058,7 @@ That being said, you may decide you want to organize your inputs differently, an
 
 To override the default `publishDir` directive, you can simply add your own directives to the `conf/modules.config` file.
 
-For example, you could override the default for a single process using the `withName:` selector, as in this example where we add a custom `publishDir` directive for the 'cowpy' process.
+For example, you could override the default for a single process using the `withName:` selector, as in this example where we add a custom `publishDir` directive for the 'COWPY' process.
 
 ```groovy title="core-hello/conf/modules.config" linenums="13" hl_lines="8-10"
 process {
@@ -1094,7 +1068,7 @@ process {
         saveAs: { filename -> filename.equals('versions.yml') ? null : filename }
     ]
 
-    withName: 'cowpy' {
+    withName: 'COWPY' {
         ext.args = { "-c ${params.character}" }
         publishDir = [
             path: 'my_custom_results'
@@ -1193,7 +1167,7 @@ Each file serves a specific purpose:
 The generated `main.nf` includes all the patterns you just learned, plus some additional features:
 
 ```groovy title="modules/local/cowpy/main.nf" hl_lines="11 21 22"
-process cowpy {
+process COWPY {
     tag "$meta.id"
     label 'process_single'
 
@@ -1221,7 +1195,7 @@ process cowpy {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        cowpy: \$(cowpy --version)
+        COWPY: \$(cowpy --version)
     END_VERSIONS
     """
 
@@ -1235,7 +1209,7 @@ process cowpy {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        cowpy: \$(cowpy --version)
+        COWPY: \$(cowpy --version)
     END_VERSIONS
     """
 }
@@ -1257,7 +1231,7 @@ These features are already functional and make modules more maintainable.
 **Placeholders we'll customize below:**
 
 - **`input:` and `output:` blocks**: Generic declarations we'll update to match our tool
-- **`script:` block**: Contains a comment where we'll add the cowpy command
+- **`script:` block**: Contains a comment where we'll add the `cowpy` command
 - **`stub:` block**: Template we'll update to produce the correct outputs
 - **Container and environment**: Placeholders we'll fill with package information
 
@@ -1277,7 +1251,7 @@ The default code offers to toggle between Docker and Singularity, but we're goin
 === "After"
 
 ```groovy title="modules/local/cowpy/main.nf" linenums="3" hl_lines="6"
-process cowpy {
+process COWPY {
     tag "$meta.id"
     label 'process_single'
 
@@ -1288,7 +1262,7 @@ process cowpy {
 === "Before"
 
 ```groovy title="modules/local/cowpy/main.nf" linenums="3" hl_lines="6"
-process cowpy {
+process COWPY {
     tag "$meta.id"
     label 'process_single'
 
@@ -1303,7 +1277,7 @@ process cowpy {
 For the Conda environment, the module code specifies `conda "${moduleDir}/environment.yml"` which means that it should be configured in the `environment.yml` file.
 
 The module creation tool warned us that it couldn't find the `cowpy` package in Bioconda (the primary channel for bioinformatics tools).
-However, cowpy is available in conda-forge, so you can complete the `environment.yml` like this:
+However, `cowpy` is available in conda-forge, so you can complete the `environment.yml` like this:
 
 === "After"
 
@@ -1399,7 +1373,7 @@ Based on the module we wrote manually earlier, we should make the following edit
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        cowpy: \$(cowpy --version)
+        COWPY: \$(cowpy --version)
     END_VERSIONS
     """
     ```
@@ -1416,7 +1390,7 @@ Based on the module we wrote manually earlier, we should make the following edit
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        cowpy: \$(cowpy --version)
+        COWPY: \$(cowpy --version)
     END_VERSIONS
     """
     ```
@@ -1424,7 +1398,7 @@ Based on the module we wrote manually earlier, we should make the following edit
 Key changes:
 
 - Change `def prefix` to just `prefix` (without `def`) to make it accessible in the output block
-- Replace the comment with the actual cowpy command that uses both `$args` and `${prefix}.txt`
+- Replace the comment with the actual `cowpy` command that uses both `$args` and `${prefix}.txt`
 
 Note that if we hadn't already done the work of adding the `ext.args` and `ext.prefix` configuration for the `COWPY` process to the `modules.config` file, we would need to do that now.
 
@@ -1448,7 +1422,7 @@ Don't worry too much if this seems mysterious; we include this for completeness 
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        cowpy: \$(cowpy --version)
+        COWPY: \$(cowpy --version)
     END_VERSIONS
     """
     ```
@@ -1465,7 +1439,7 @@ Don't worry too much if this seems mysterious; we include this for completeness 
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        cowpy: \$(cowpy --version)
+        COWPY: \$(cowpy --version)
     END_VERSIONS
     """
     ```
@@ -1496,7 +1470,7 @@ All we need to do to try out this new version of the `COWPY` module is to switch
     include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
     include { sayHello               } from '../modules/local/sayHello.nf'
     include { convertToUpper         } from '../modules/local/convertToUpper.nf'
-    include { cowpy                  } from '../modules/local/cowpy/main.nf'
+    include { COWPY                  } from '../modules/local/cowpy/main.nf'
     include { CAT_CAT                } from '../modules/nf-core/cat/cat/main'
     ```
 
@@ -1512,7 +1486,7 @@ All we need to do to try out this new version of the `COWPY` module is to switch
     include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
     include { sayHello               } from '../modules/local/sayHello.nf'
     include { convertToUpper         } from '../modules/local/convertToUpper.nf'
-    include { cowpy                  } from '../modules/local/cowpy.nf'
+    include { COWPY                  } from '../modules/local/cowpy.nf'
     include { CAT_CAT                } from '../modules/nf-core/cat/cat/main'
     ```
 
