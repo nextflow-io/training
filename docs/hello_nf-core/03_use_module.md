@@ -7,9 +7,9 @@ Rather than writing every process from scratch, you can install and use communit
 
 To demonstrate how this works, we'll replace the custom `collectGreetings` module with the `cat/cat` module from nf-core/modules in the `core-hello` pipeline.
 
-!!! note
+??? info "How to begin from this section"
 
-    This part of the course assumes you have completed [Part 2: Rewrite Hello for nf-core](./02_rewrite_hello.md) and have a working `core-hello` pipeline.
+    This section of the course assumes you have completed [Part 2: Rewrite Hello for nf-core](./02_rewrite_hello.md) and have a working `core-hello` pipeline.
 
     If you did not complete Part 2 or want to start fresh for this part, you can use the `core-hello-part2` solution as your starting point.
     Run this command from within the `hello-nf-core/` directory:
@@ -20,6 +20,11 @@ To demonstrate how this works, we'll replace the custom `collectGreetings` modul
     ```
 
     This gives you a fully functional nf-core pipeline ready for adding modules.
+    You can test that it runs successfully by running the following command:
+
+    ```bash
+    nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
+    ```
 
 ---
 
@@ -90,7 +95,7 @@ nf-core modules info cat/cat
 
 This displays documentation about the module, including its inputs, outputs, and basic usage information.
 
-??? example "Output"
+??? success "Command output"
 
     ```console
 
@@ -159,7 +164,7 @@ nf-core modules install cat/cat
 The tool may first prompt you to specify a repository type.
 (If not, skip down to "Finally, the tool will proceed to install the module.")
 
-??? example "Output"
+??? success "Command output"
 
     ```console
 
@@ -182,7 +187,7 @@ If so, press enter to accept the default response (`Pipeline`) and continue.
 
 The tool will then offer to amend the configuration of your project to avoid this prompt in the future.
 
-??? example "Output"
+??? success "Command output"
 
     ```console
         INFO     To avoid this prompt in the future, add the 'repository_type' key to your .nf-core.yml file.
@@ -194,7 +199,7 @@ Press enter to accept the default response (yes).
 
 Finally, the tool will proceed to install the module.
 
-??? example "Output"
+??? success "Command output"
 
     ```console
     INFO Config added to '.nf-core.yml'
@@ -221,7 +226,7 @@ Let's check that the module was installed correctly:
 tree -L 4 modules
 ```
 
-??? example "Directory contents"
+??? abstract "Directory contents"
 
     ```console
     modules
@@ -400,7 +405,7 @@ process CAT_CAT {
 The CAT_CAT module takes a single input, but that input is a tuple containing two things:
 
 - `meta` is a structure containing metadata, called a metamap;
-- `input_files` contains one or more input files to process, equivalent to `collectGreetings`'s `input_files`.
+- `files_in` contains one or more input files to process, equivalent to `collectGreetings`'s `input_files`.
 
 Upon completion, CAT_CAT delivers its outputs in two parts:
 
@@ -411,7 +416,9 @@ Note also that by default, the output file will be named based on an identifier 
 
 This may seem like a lot to keep track of just looking at the code, so here's a diagram to help you visualize how everything fits together.
 
-<!-- TODO: diagram of differences between the two module interfaces -->
+<figure class="excalidraw">
+--8<-- "docs/hello_nf-core/img/module_comparison.svg"
+</figure>
 
 You can see that the two modules have similar input requirements in terms of content (a set of input files plus some metadata) but very different expectations for how that content is packaged.
 Ignoring the versions file for now, their main output is equivalent too (a concatenated file), except CAT_CAT also emits the metamap in conjunction with the output file.
@@ -739,7 +746,7 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
 
 This should run reasonably quickly.
 
-??? example "Output"
+??? success "Command output"
 
     ```console
     N E X T F L O W ~ version 25.04.3
