@@ -30,6 +30,8 @@
     "workspaceMount": "source=${localWorkspaceFolder},target=${localWorkspaceFolder},type=bind",
     "remoteUser": "root",
     "remoteEnv": {
+        // Docker API compatibility
+        "DOCKER_API_VERSION": "1.43",
         // Nextflow installation version
         "NXF_HOME": "/workspaces/training/.nextflow",
         "NXF_EDGE": "0",
