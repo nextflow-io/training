@@ -29,8 +29,6 @@
     "workspaceFolder": "/workspaces/training",
     "remoteUser": "root",
     "remoteEnv": {
-        // Docker API compatibility
-        "DOCKER_API_VERSION": "1.43",
         // Nextflow installation version
         "NXF_HOME": "/workspaces/.nextflow",
         "NXF_EDGE": "0",
