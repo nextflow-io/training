@@ -58,30 +58,32 @@ code .
 
 You'll find a simple workflow file called `main.nf`, a `modules` directory containing two module files, and a `data` directory containing some example data files.
 
-```console title="Directory contents"
-.
-├── data
-│   ├── patientA_rep1_normal_R1_001.fastq.gz
-│   ├── patientA_rep1_normal_R2_001.fastq.gz
-│   ├── patientA_rep1_tumor_R1_001.fastq.gz
-│   ├── patientA_rep1_tumor_R2_001.fastq.gz
-│   ├── patientA_rep2_normal_R1_001.fastq.gz
-│   ├── patientA_rep2_normal_R2_001.fastq.gz
-│   ├── patientA_rep2_tumor_R1_001.fastq.gz
-│   ├── patientA_rep2_tumor_R2_001.fastq.gz
-│   ├── patientB_rep1_normal_R1_001.fastq.gz
-│   ├── patientB_rep1_normal_R2_001.fastq.gz
-│   ├── patientB_rep1_tumor_R1_001.fastq.gz
-│   ├── patientB_rep1_tumor_R2_001.fastq.gz
-│   ├── patientC_rep1_normal_R1_001.fastq.gz
-│   ├── patientC_rep1_normal_R2_001.fastq.gz
-│   ├── patientC_rep1_tumor_R1_001.fastq.gz
-│   └── patientC_rep1_tumor_R2_001.fastq.gz
-├── main.nf
-└── modules
-    ├── analyze_reads.nf
-    └── count_lines.nf
-```
+??? abstract "Directory contents"
+
+    ```console
+    .
+    ├── data
+    │   ├── patientA_rep1_normal_R1_001.fastq.gz
+    │   ├── patientA_rep1_normal_R2_001.fastq.gz
+    │   ├── patientA_rep1_tumor_R1_001.fastq.gz
+    │   ├── patientA_rep1_tumor_R2_001.fastq.gz
+    │   ├── patientA_rep2_normal_R1_001.fastq.gz
+    │   ├── patientA_rep2_normal_R2_001.fastq.gz
+    │   ├── patientA_rep2_tumor_R1_001.fastq.gz
+    │   ├── patientA_rep2_tumor_R2_001.fastq.gz
+    │   ├── patientB_rep1_normal_R1_001.fastq.gz
+    │   ├── patientB_rep1_normal_R2_001.fastq.gz
+    │   ├── patientB_rep1_tumor_R1_001.fastq.gz
+    │   ├── patientB_rep1_tumor_R2_001.fastq.gz
+    │   ├── patientC_rep1_normal_R1_001.fastq.gz
+    │   ├── patientC_rep1_normal_R2_001.fastq.gz
+    │   ├── patientC_rep1_tumor_R1_001.fastq.gz
+    │   └── patientC_rep1_tumor_R2_001.fastq.gz
+    ├── main.nf
+    └── modules
+        ├── analyze_reads.nf
+        └── count_lines.nf
+    ```
 
 This directory contains paired-end sequencing data from three patients (A, B, C).
 
@@ -133,13 +135,10 @@ workflow {
 
 This is a mini-workflow (without any processes) that refers to a single file path in its workflow, then prints it to the console, along with its class.
 
-<details>
-  <summary>What is <code>.class</code>?</summary>
+??? info "What is `.class`?"
 
-    In Nextflow, <code>.class</code> tells us what type of object we're working with. It's like asking "what kind of thing is this?" to find out whether it's a string, a number, a file, or something else.
+    In Nextflow, `.class` tells us what type of object we're working with. It's like asking "what kind of thing is this?" to find out whether it's a string, a number, a file, or something else.
     This will help us illustrate the difference between a plain string and a Path object in the next sections.
-
-</details>
 
 Let's run the workflow:
 
@@ -147,10 +146,10 @@ Let's run the workflow:
 nextflow run main.nf
 ```
 
-??? example "Output"
+??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.04.3
+    N E X T F L O W   ~  version 25.10.2
 
     Launching `main.nf` [romantic_chandrasekhar] DSL2 - revision: 5a4a89bc3a
 
@@ -195,10 +194,10 @@ Now run the workflow again:
 nextflow run main.nf
 ```
 
-??? example "Output"
+??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.04.3
+    N E X T F L O W   ~  version 25.10.2
 
     Launching `main.nf` [kickass_coulomb] DSL2 - revision: 5af44b1b59
 
@@ -257,10 +256,10 @@ Run the workflow:
 nextflow run main.nf
 ```
 
-??? example "Output"
+??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.04.3
+    N E X T F L O W   ~  version 25.10.2
 
     Launching `main.nf` [ecstatic_ampere] DSL2 - revision: f3fa3dcb48
 
@@ -324,15 +323,12 @@ process COUNT_LINES {
 
 As you can see, it's a fairly straightforward little script that unzips the file and counts how many lines it contains.
 
-<details>
-  <summary>What does <code>debug true</code> do?</summary>
+??? info "What does `debug true` do?"
 
-The <code>debug true</code> directive in the process definition causes Nextflow to print the output from your script (like the line count "40") directly in the execution log.
-Without this, you would only see the process execution status but not the actual output from your script.
+    The `debug true` directive in the process definition causes Nextflow to print the output from your script (like the line count "40") directly in the execution log.
+    Without this, you would only see the process execution status but not the actual output from your script.
 
-For more information on debugging Nextflow processes, see the <a href="../debugging/">Debugging Nextflow Workflows</a> side quest.
-
-</details>
+    For more information on debugging Nextflow processes, see the [Debugging Nextflow Workflows](debugging.md) side quest.
 
 #### 1.4.2. Add a call to `COUNT_LINES`
 
@@ -377,10 +373,10 @@ And now run the workflow:
 nextflow run main.nf
 ```
 
-??? example "Output"
+??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 25.04.3
+     N E X T F L O W   ~  version 25.10.2
 
     Launching `main.nf` [cheeky_hypatia] DSL2 - revision: 281d13c414
 
@@ -460,10 +456,10 @@ And now run the workflow:
 nextflow run main.nf
 ```
 
-??? example "Output"
+??? failure "Command output"
 
     ```console
-     N E X T F L O W   ~  version 25.04.3
+     N E X T F L O W   ~  version 25.10.2
 
     Launching `main.nf` [friendly_goodall] DSL2 - revision: ae50609b20
 
@@ -523,10 +519,10 @@ And now run the workflow again:
 nextflow run main.nf
 ```
 
-??? example "Output"
+??? failure "Command output"
 
     ```console
-     N E X T F L O W   ~  version 25.04.3
+     N E X T F L O W   ~  version 25.10.2
 
     Launching `main.nf` [soggy_golick] DSL2 - revision: ae50609b20
 
@@ -670,10 +666,10 @@ Let's run the workflow:
 nextflow run main.nf
 ```
 
-??? example "Output"
+??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.04.3
+    N E X T F L O W   ~  version 25.10.2
 
     Launching `main.nf` [insane_swartz] DSL2 - revision: fff18abe6d
 
@@ -836,10 +832,10 @@ Run the workflow:
 nextflow run main.nf
 ```
 
-??? example "Output"
+??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.04.3
+    N E X T F L O W   ~  version 25.10.2
 
     Launching `main.nf` [grave_meucci] DSL2 - revision: b09964a583
 
@@ -899,10 +895,10 @@ Run the workflow:
 nextflow run main.nf
 ```
 
-??? example "Output"
+??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.04.3
+    N E X T F L O W   ~  version 25.10.2
 
     Launching `main.nf` [furious_swanson] DSL2 - revision: c35c34950d
 
@@ -968,10 +964,10 @@ Run the workflow to test that out:
 nextflow run main.nf
 ```
 
-??? example "Output"
+??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.04.3
+    N E X T F L O W   ~  version 25.10.2
 
     Launching `main.nf` [boring_sammet] DSL2 - revision: d2aa789c9a
 
@@ -1073,10 +1069,10 @@ Run the workflow to test that it works:
 nextflow run main.nf
 ```
 
-??? example "Output"
+??? success "Command output"
 
     ```console hl_lines="7-8"
-    N E X T F L O W   ~  version 25.04.3
+    N E X T F L O W   ~  version 25.10.2
 
     Launching `main.nf` [suspicious_mahavira] DSL2 - revision: ae8edc4e48
 
@@ -1129,10 +1125,10 @@ Run the workflow:
 nextflow run main.nf
 ```
 
-??? example "Output"
+??? success "Command output"
 
     ```console hl_lines="7-8"
-    N E X T F L O W   ~  version 25.04.3
+    N E X T F L O W   ~  version 25.10.2
 
     Launching `main.nf` [gigantic_gauss] DSL2 - revision: a39baabb57
 
@@ -1226,10 +1222,10 @@ Let's run the workflow again:
 nextflow run main.nf
 ```
 
-??? example "Output"
+??? success "Command output"
 
     ```console hl_lines="7-8"
-    N E X T F L O W   ~  version 25.04.3
+    N E X T F L O W   ~  version 25.10.2
 
     Launching `main.nf` [infallible_swartz] DSL2 - revision: 7f4e68c0cb
 
@@ -1345,10 +1341,10 @@ Run the workflow to test it:
 nextflow run main.nf
 ```
 
-??? example "Output"
+??? failure "Command output"
 
     ```console hl_lines="7-8"
-     N E X T F L O W   ~  version 25.04.3
+     N E X T F L O W   ~  version 25.10.2
 
     Launching `main.nf` [angry_koch] DSL2 - revision: 44fdf66105
 
@@ -1412,10 +1408,10 @@ Now let's run the workflow again:
 nextflow run main.nf
 ```
 
-??? example "Output"
+??? success "Command output"
 
     ```console hl_lines="7-8"
-     N E X T F L O W   ~  version 25.04.3
+     N E X T F L O W   ~  version 25.10.2
 
     Launching `main.nf` [fabulous_davinci] DSL2 - revision: 22b53268dc
 
@@ -1486,11 +1482,11 @@ Let's run the workflow:
 nextflow run main.nf
 ```
 
-??? example "Output"
+??? success "Command output"
 
     ```console
 
-    N E X T F L O W   ~  version 25.04.3
+    N E X T F L O W   ~  version 25.10.2
 
     Launching `main.nf` [prickly_stonebraker] DSL2 - revision: f62ab10a3f
 
@@ -1645,10 +1641,10 @@ Let's run this:
 nextflow run main.nf
 ```
 
-??? example "Output"
+??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 25.04.3
+     N E X T F L O W   ~  version 25.10.2
 
     Launching `main.nf` [goofy_kirch] DSL2 - revision: 3313283e42
 
@@ -1683,10 +1679,10 @@ Let's run this:
 nextflow run main.nf
 ```
 
-??? example "Output"
+??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.04.3
+    N E X T F L O W   ~  version 25.10.2
 
     Launching `./main.nf` [shrivelled_cori] DSL2 - revision: b546a31769
 
@@ -1696,21 +1692,23 @@ nextflow run main.nf
 
 This process is set up to publish its outputs to a `results` directory, so have a look in there.
 
-```console title="Directory contents"
-results
-└── patientA
-    └── patientA_stats.txt
-```
+??? abstract "Directory and file contents"
 
-```txt title="patientA_stats.txt"
-Sample metadata: patientA
-Replicate: 1
-Type: normal
-Read 1: patientA_rep1_normal_R1_001.fastq.gz
-Read 2: patientA_rep1_normal_R2_001.fastq.gz
-Read 1 size: 10 reads
-Read 2 size: 10 reads
-```
+    ```console
+    results
+    └── patientA
+        └── patientA_stats.txt
+    ```
+
+    ```txt title="patientA_stats.txt"
+    Sample metadata: patientA
+    Replicate: 1
+    Type: normal
+    Read 1: patientA_rep1_normal_R1_001.fastq.gz
+    Read 2: patientA_rep1_normal_R2_001.fastq.gz
+    Read 1 size: 10 reads
+    Read 2 size: 10 reads
+    ```
 
 The process took our inputs and created a new file containing the patient metadata, as designed.
 Splendid!
@@ -1746,10 +1744,10 @@ Run the pipeline again:
 nextflow run main.nf
 ```
 
-??? example "Output"
+??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.04.3
+    N E X T F L O W   ~  version 25.10.2
 
     Launching `./main.nf` [big_stonebraker] DSL2 - revision: f7f9b8a76c
 
@@ -1759,15 +1757,17 @@ nextflow run main.nf
 
 The results directory should now contain results for all the available data.
 
-```console title="Directory contents"
-results
-├── patientA
-│   └── patientA_stats.txt
-├── patientB
-│   └── patientB_stats.txt
-└── patientC
-    └── patientC_stats.txt
-```
+??? abstract "Directory contents"
+
+    ```console
+    results
+    ├── patientA
+    │   └── patientA_stats.txt
+    ├── patientB
+    │   └── patientB_stats.txt
+    └── patientC
+        └── patientC_stats.txt
+    ```
 
 Success! We have analyzed all the patients in one go! Right?
 
@@ -1802,10 +1802,10 @@ rm -r results
 nextflow run main.nf
 ```
 
-??? example "Output"
+??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.04.3
+    N E X T F L O W   ~  version 25.10.2
 
     Launching `./main.nf` [insane_swartz] DSL2 - revision: fff18abe6d
 
@@ -1815,33 +1815,35 @@ nextflow run main.nf
 
 Check the results directory now:
 
-```console title="Directory contents"
-results/
-├── normal
-│   ├── patientA
-│   │   ├── 1
-│   │   │   └── patientA_stats.txt
-│   │   └── 2
-│   │       └── patientA_stats.txt
-│   ├── patientB
-│   │   └── 1
-│   │       └── patientB_stats.txt
-│   └── patientC
-│       └── 1
-│           └── patientC_stats.txt
-└── tumor
-    ├── patientA
-    │   ├── 1
-    │   │   └── patientA_stats.txt
-    │   └── 2
-    │       └── patientA_stats.txt
-    ├── patientB
-    │   └── 1
-    │       └── patientB_stats.txt
-    └── patientC
-        └── 1
-            └── patientC_stats.txt
-```
+??? abstract "Directory contents"
+
+    ```console
+    results/
+    ├── normal
+    │   ├── patientA
+    │   │   ├── 1
+    │   │   │   └── patientA_stats.txt
+    │   │   └── 2
+    │   │       └── patientA_stats.txt
+    │   ├── patientB
+    │   │   └── 1
+    │   │       └── patientB_stats.txt
+    │   └── patientC
+    │       └── 1
+    │           └── patientC_stats.txt
+    └── tumor
+        ├── patientA
+        │   ├── 1
+        │   │   └── patientA_stats.txt
+        │   └── 2
+        │       └── patientA_stats.txt
+        ├── patientB
+        │   └── 1
+        │       └── patientB_stats.txt
+        └── patientC
+            └── 1
+                └── patientC_stats.txt
+    ```
 
 And there it is, all our metadata, neatly organized. That's success!
 
