@@ -538,96 +538,11 @@ Given that the results we just produced are in themselves a form of metadata abo
 
 However, we don't want to modify the existing meta map in place.
 From a technical standpoint, it is _possible_ to do that, but it's unsafe.
-So instead, we're going to create a new meta map containing the contents of the existing meta map plus a new key-value pair holding the new information, and use the [`map`](https://www.nextflow.io/docs/latest/operator.html#map) operator to replace the old map with the new one.
 
-This is going to take only a very small amount of code, but it's going to have a lot packed into it, so let's break it down in stages.
+So instead, we'll create a new meta map containing the contents of the existing meta map plus a new `lang: lang_id` key-value pair holding the new information, using the `+` operator (a Groovy feature).
+And we'll combine this with a [`map`](https://www.nextflow.io/docs/latest/operator.html#map) operation to replace the old map with the new one.
 
-**First, you need to know that we can merge the contents of two maps using the Groovy operator `+`.**
-
-Let's say we have the following maps:
-
-```groovy
-map1 = [id: 'sampleA', character: 'squirrel']
-map2 = [lang: 'fr']
-```
-
-We can merge them like this:
-
-```groovy
-new_map = map1 + map2
-```
-
-The contents of `new_map` will be:
-
-```groovy
-[id: 'sampleA', character: 'squirrel', lang: 'fr']
-```
-
-Great!
-
-**But what if you need to add a field that's not already part of a map?**
-
-Let's say you start again from `map1`, but the language prediction is not in its own map (there is no `map2`).
-Instead, it is held in a variable called `lang_id`, and you know you want to store its value (`'fr'`) with the key `lang`.
-
-You can actually do the following:
-
-```groovy
-new_map = [map1 + [lang: lang_id]]
-```
-
-Here, `[lang: new_info]` creates a new unnamed map on the fly, and `map1 + ` merges `map1` with the new unnamed map, producing the same `new_map` contents as before.
-
-Neat, right?
-
-**Now let's transpose that into the context of a Nextflow `channel.map()` operation.**
-
-The code becomes:
-
-```groovy
-.map { map1, lang_id ->
-    [map1 + [lang: lang_id]]
-}
-```
-
-This does the following:
-
-- `map1, lang_id ->` takes the two items in the tuple
-- `[map1 + [lang: lang_id]]` creates the new map as detailed above
-
-The output is a single unnamed map with the same contents as `new_map` in our example above.
-So we've effectively transformed:
-
-```groovy
-[id: 'sampleA', character: 'squirrel'], 'it'`
-```
-
-into:
-
-```groovy
-[id: 'sampleA', character: 'squirrel', lang: 'fr']
-```
-
-Hopefully you can see that if we change `map1` to `meta`, that's basically all we need in order to add the language predication to our meta map in our workflow.
-
-Except for one thing!
-
-In the case of our workflow, **we also need to account for the presence of the `file` object in the tuple**, which is composed of `meta, file, lang_id`.
-
-So the code here would become:
-
-```groovy
-.map { meta, file, lang_id ->
-    [meta + [lang: lang_id], file]
-}
-```
-
-If you're having a hard time following why the `file` seems to be moving around, imagine that instead of `[meta + [lang: lang_id], file]`, that line reads `[new_map, file]`.
-This should make it more clear that we're simply leaving the `file` in its original place in second position in the tuple. We've just taken the `new_info` value and folded it into the map that's in first position.
-
-**And this brings us back to the `tuple val(meta), path(file)` channel structure!**
-
-With that, let's make the following edits to the workflow:
+Here are the edits you need to make to the workflow:
 
 === "After"
 
@@ -649,9 +564,96 @@ With that, let's make the following edits to the workflow:
         IDENTIFY_LANGUAGE.out.view()
     ```
 
-See, that's not a lot of code, but it helps to walk through the steps before you plug it in.
+If you're not yet familiar with the `+` operator, or if this seems confusing, take a few minutes to go through the detailed explanation below.
 
-Let's run the workflow to see if it worked:
+??? info "Merging maps with the `+` operator"
+
+    **First, you need to know that we can merge the contents of two maps using the Groovy operator `+`.**
+
+    Let's say we have the following maps:
+
+    ```groovy
+    map1 = [id: 'sampleA', character: 'squirrel']
+    map2 = [lang: 'fr']
+    ```
+
+    We can merge them like this:
+
+    ```groovy
+    new_map = map1 + map2
+    ```
+
+    The contents of `new_map` will be:
+
+    ```groovy
+    [id: 'sampleA', character: 'squirrel', lang: 'fr']
+    ```
+
+    Great!
+
+    **But what if you need to add a field that's not already part of a map?**
+
+    Let's say you start again from `map1`, but the language prediction is not in its own map (there is no `map2`).
+    Instead, it is held in a variable called `lang_id`, and you know you want to store its value (`'fr'`) with the key `lang`.
+
+    You can actually do the following:
+
+    ```groovy
+    new_map = [map1 + [lang: lang_id]]
+    ```
+
+    Here, `[lang: new_info]` creates a new unnamed map on the fly, and `map1 + ` merges `map1` with the new unnamed map, producing the same `new_map` contents as before.
+
+    Neat, right?
+
+    **Now let's transpose that into the context of a Nextflow `channel.map()` operation.**
+
+    The code becomes:
+
+    ```groovy
+    .map { map1, lang_id ->
+        [map1 + [lang: lang_id]]
+    }
+    ```
+
+    This does the following:
+
+    - `map1, lang_id ->` takes the two items in the tuple
+    - `[map1 + [lang: lang_id]]` creates the new map as detailed above
+
+    The output is a single unnamed map with the same contents as `new_map` in our example above.
+    So we've effectively transformed:
+
+    ```groovy
+    [id: 'sampleA', character: 'squirrel'], 'it'
+    ```
+
+    into:
+
+    ```groovy
+    [id: 'sampleA', character: 'squirrel', lang: 'fr']
+    ```
+
+    Hopefully you can see that if we change `map1` to `meta`, that's basically all we need in order to add the language predication to our meta map in our workflow.
+
+    Except for one thing!
+
+    In the case of our workflow, **we also need to account for the presence of the `file` object in the tuple**, which is composed of `meta, file, lang_id`.
+
+    So the code here would become:
+
+    ```groovy
+    .map { meta, file, lang_id ->
+        [meta + [lang: lang_id], file]
+    }
+    ```
+
+    If you're having a hard time following why the `file` seems to be moving around in the `map` operation, imagine that instead of `[meta + [lang: lang_id], file]`, that line reads `[new_map, file]`.
+    This should make it more clear that we're simply leaving the `file` in its original place in second position in the tuple. We've just taken the `new_info` value and folded it into the map that's in first position.
+
+    **And this brings us back to the `tuple val(meta), path(file)` channel structure!**
+
+Once you're confident you understand what this code is doing, run the workflow to see if it worked:
 
 ```bash
 nextflow run main.nf -resume
@@ -847,8 +849,8 @@ We're going to do this using a tool called [`cowpy`](https://github.com/jeffbutt
         \___)=(___/
     ```
 
-    If you worked through the Hello Nextflow course, you've already seen this tool in action.
-    If not, don't worry; we'll cover everything you need to know as we go.
+If you worked through the Hello Nextflow course, you've already seen this tool in action.
+If not, don't worry; we'll cover everything you need to know as we go.
 
 ### 3.1. Import the process and examine the code
 
