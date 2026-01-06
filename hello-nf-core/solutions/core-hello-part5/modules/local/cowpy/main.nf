@@ -1,6 +1,6 @@
 
 
-process cowpy {
+process COWPY {
     tag "$meta.id"
     label 'process_single'
 
@@ -26,7 +26,7 @@ process cowpy {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        cowpy: \$(cowpy --version)
+        COWPY: \$(cowpy --version)
     END_VERSIONS
     """
 
@@ -40,7 +40,7 @@ process cowpy {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        cowpy: \$(cowpy --version)
+        COWPY: \$(cowpy --version)
     END_VERSIONS
     """
 }

@@ -7,9 +7,9 @@ Rather than writing every process from scratch, you can install and use communit
 
 To demonstrate how this works, we'll replace the custom `collectGreetings` module with the `cat/cat` module from nf-core/modules in the `core-hello` pipeline.
 
-!!! note
+??? info "How to begin from this section"
 
-    This part of the course assumes you have completed [Part 2: Rewrite Hello for nf-core](./02_rewrite_hello.md) and have a working `core-hello` pipeline.
+    This section of the course assumes you have completed [Part 2: Rewrite Hello for nf-core](./02_rewrite_hello.md) and have a working `core-hello` pipeline.
 
     If you did not complete Part 2 or want to start fresh for this part, you can use the `core-hello-part2` solution as your starting point.
     Run this command from within the `hello-nf-core/` directory:
@@ -20,6 +20,11 @@ To demonstrate how this works, we'll replace the custom `collectGreetings` modul
     ```
 
     This gives you a fully functional nf-core pipeline ready for adding modules.
+    You can test that it runs successfully by running the following command:
+
+    ```bash
+    nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
+    ```
 
 ---
 
@@ -90,7 +95,7 @@ nf-core modules info cat/cat
 
 This displays documentation about the module, including its inputs, outputs, and basic usage information.
 
-??? example "Output"
+??? success "Command output"
 
     ```console
 
@@ -159,7 +164,7 @@ nf-core modules install cat/cat
 The tool may first prompt you to specify a repository type.
 (If not, skip down to "Finally, the tool will proceed to install the module.")
 
-??? example "Output"
+??? success "Command output"
 
     ```console
 
@@ -182,7 +187,7 @@ If so, press enter to accept the default response (`Pipeline`) and continue.
 
 The tool will then offer to amend the configuration of your project to avoid this prompt in the future.
 
-??? example "Output"
+??? success "Command output"
 
     ```console
         INFO     To avoid this prompt in the future, add the 'repository_type' key to your .nf-core.yml file.
@@ -194,7 +199,7 @@ Press enter to accept the default response (yes).
 
 Finally, the tool will proceed to install the module.
 
-??? example "Output"
+??? success "Command output"
 
     ```console
     INFO Config added to '.nf-core.yml'
@@ -221,7 +226,7 @@ Let's check that the module was installed correctly:
 tree -L 4 modules
 ```
 
-??? example "Directory contents"
+??? abstract "Directory contents"
 
     ```console
     modules
@@ -741,7 +746,7 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
 
 This should run reasonably quickly.
 
-??? example "Output"
+??? success "Command output"
 
     ```console
     N E X T F L O W ~ version 25.04.3

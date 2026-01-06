@@ -240,9 +240,7 @@ Let's decide to use Docker for the container system and `demo-results` as the ou
 nextflow run nf-core/demo -profile docker,test --outdir demo-results
 ```
 
-Here's the console output from the pipeline:
-
-??? example "Output"
+??? success "Command output"
 
     ```console
      N E X T F L O W   ~  version 25.04.3
@@ -394,7 +392,7 @@ You can either use `tree` or use the file explorer to find and open the `nf-core
 tree -L 1 pipelines/nf-core/demo
 ```
 
-??? example "Directory contents"
+??? abstract "Directory contents"
 
     ```console
     pipelines/nf-core/demo
@@ -504,7 +502,7 @@ You can see this applied in practice to the `nf-core/demo` pipeline modules:
 tree -L 3 pipelines/nf-core/demo/modules
 ```
 
-??? example "Directory contents"
+??? abstract "Directory contents"
 
     ```console
     pipelines/nf-core/demo/modules
@@ -541,7 +539,7 @@ Like modules, subworkflows are differentiated into `local` and `nf-core` directo
 tree -L 3 pipelines/nf-core/demo/subworkflows
 ```
 
-??? example "Directory contents"
+??? abstract "Directory contents"
 
     ```console
     pipelines/nf-core/demo/subworkflows

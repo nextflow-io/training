@@ -1,4 +1,4 @@
-name: cowpy
+name: COWPY
 channels:
   - conda-forge
 dependencies:

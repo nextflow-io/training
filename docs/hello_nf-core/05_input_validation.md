@@ -2,9 +2,9 @@
 
 In this fifth part of the Hello nf-core training course, we show you how to use the nf-schema plugin to validate pipeline inputs and parameters.
 
-!!! note
+??? info "How to begin from this section"
 
-    This section assumes you have completed [Part 4: Make an nf-core module](./04_make_module.md) and have updated the `cowpy` module to nf-core standards in your pipeline.
+    This section assumes you have completed [Part 4: Make an nf-core module](./04_make_module.md) and have updated the `COWPY` process module to nf-core standards in your pipeline.
 
     If you did not complete Part 4 or want to start fresh for this part, you can use the `core-hello-part4` solution as your starting point.
     Run these commands from inside the `hello-nf-core/` directory:
@@ -14,7 +14,12 @@ In this fifth part of the Hello nf-core training course, we show you how to use 
     cd core-hello
     ```
 
-    This gives you a pipeline with the `cowpy` module already upgraded to follow nf-core standards.
+    This gives you a pipeline with the `COWPY` module already upgraded to follow nf-core standards.
+    You can test that it runs successfully by running the following command:
+
+    ```bash
+    nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
+    ```
 
 ---
 
@@ -65,7 +70,7 @@ nf-schema provides several key functions:
 
 nf-schema is the successor to the deprecated nf-validation plugin and uses standard [JSON Schema Draft 2020-12](https://json-schema.org/) for validation.
 
-!!! note "What are Nextflow plugins?"
+??? info "What are Nextflow plugins?"
 
     Plugins are extensions that add new functionality to the Nextflow language itself. They're installed via a `plugins{}` block in `nextflow.config` and can provide:
 
@@ -108,7 +113,7 @@ Both schemas use the JSON Schema format, a widely-adopted standard for describin
 - Ensures required fields are present
 - Defined in `assets/schema_input.json`
 
-!!! note "What input data validation does NOT do"
+!!! warning "What input data validation does NOT do"
 
     Input data validation checks the structure of *manifest files* (sample sheets, CSV files), NOT the contents of your actual data files (FASTQ, BAM, VCF, etc.).
 
@@ -219,7 +224,7 @@ The parameter schema is organized into groups. Here's the `input_output_options`
         },
 ```
 
-Key validation features:
+Each input described here has the following key properties that can be validated:
 
 - **`type`**: Data type (string, integer, boolean, number)
 - **`format`**: Special formats like `file-path` or `directory-path`
@@ -228,14 +233,15 @@ Key validation features:
 - **`required`**: Array of parameter names that must be provided
 - **`mimetype`**: Expected file mimetype for validation
 
-!!! note "Where do schema parameters come from?"
+If you've got a sharp eye, you might notice that the `batch` input parameter we've been using isn't defined yet in the schema.
+We're going to add it in the next section.
+
+??? info "Where do schema parameters come from?"
 
     The schema validation uses `nextflow.config` as the base for parameter definitions.
     Parameters declared elsewhere in your workflow scripts (like in `main.nf` or module files) are **not** automatically picked up by the schema validator.
 
     This means you should always declare your pipeline parameters in `nextflow.config`, and then define their validation rules in `nextflow_schema.json`.
-
-Notice the `batch` parameter we've been using isn't defined yet in the schema!
 
 ### 1.3. Add the batch parameter
 
@@ -659,7 +665,7 @@ executor >  local (10)
 [c1/39f64a] CORE_HELLO:HELLO:sayHello (1)       | 4 of 4 ✔
 [44/c3fb82] CORE_HELLO:HELLO:convertToUpper (4) | 4 of 4 ✔
 [62/80fab2] CORE_HELLO:HELLO:CAT_CAT (test)     | 1 of 1 ✔
-[e1/4db4fd] CORE_HELLO:HELLO:cowpy              | 1 of 1 ✔
+[e1/4db4fd] CORE_HELLO:HELLO:COWPY              | 1 of 1 ✔
 -[core/hello] Pipeline completed successfully-
 ```
 
