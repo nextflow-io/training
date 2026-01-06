@@ -37,6 +37,10 @@
         "HOST_PROJECT_PATH": "/workspaces/training",
         "SHELL": "/bin/bash" // Ush bash
     },
+    "containerEnv": {
+        // Docker API compatibility
+        "DOCKER_API_VERSION": "1.43"
+    },
     "onCreateCommand": "bash .devcontainer/setup.sh",
     "customizations": {
         "vscode": {
