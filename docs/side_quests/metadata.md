@@ -566,7 +566,7 @@ Here are the edits you need to make to the workflow:
 
 If you're not yet familiar with the `+` operator, or if this seems confusing, take a few minutes to go through the detailed explanation below.
 
-??? info "Merging maps with the `+` operator"
+??? info "Creation of the new meta map using the `+` operator"
 
     **First, you need to know that we can merge the contents of two maps using the Groovy operator `+`.**
 
