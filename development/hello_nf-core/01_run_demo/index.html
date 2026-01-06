@@ -4941,9 +4941,8 @@ If you follow the link to the pre-configured input, you'll see it is a csv file 
 <p>Let's decide to use Docker for the container system and <code>demo-results</code> as the output directory, and we're ready to run the test command:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>nf-core/demo<span class="w"> </span>-profile<span class="w"> </span>docker,test<span class="w"> </span>--outdir<span class="w"> </span>demo-results
 </code></pre></div>
-<p>Here's the console output from the pipeline:</p>
-<details class="example">
-<summary>Output</summary>
+<details class="success">
+<summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="go"> N E X T F L O W   ~  version 25.04.3</span>
 <a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>
 <a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="go">Launching `https://github.com/nf-core/demo` [magical_pauling] DSL2 - revision: db7f526ce1 [master]</span>
@@ -5018,7 +5017,9 @@ We'll go into more detail about that in a little bit.</p>
 <p>Finally, let's have a look at the <code>demo-results</code> directory produced by the pipeline.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>tree<span class="w"> </span>-L<span class="w"> </span><span class="m">2</span><span class="w"> </span>demo-results
 </code></pre></div>
-<div class="highlight"><span class="filename">Directory contents</span><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="go">demo-results</span>
+<details class="abstract">
+<summary>Directory contents</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="go">demo-results</span>
 <a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="go">├── fastqc</span>
 <a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="go">│   ├── SAMPLE1_PE</span>
 <a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="go">│   ├── SAMPLE2_PE</span>
@@ -5039,6 +5040,7 @@ We'll go into more detail about that in a little bit.</p>
 <a id="__codelineno-17-19" name="__codelineno-17-19" href="#__codelineno-17-19"></a><span class="go">    ├── params_2025-11-21_04-57-46.json</span>
 <a id="__codelineno-17-20" name="__codelineno-17-20" href="#__codelineno-17-20"></a><span class="go">    └── pipeline_dag_2025-11-21_04-57-41.html</span>
 </code></pre></div>
+</details>
 <p>That might seem like a lot.
 To learn more about the <code>nf-core/demo</code> pipeline's outputs, check out its <a href="https://nf-co.re/demo/1.0.2/docs/output/">documentation page</a>.</p>
 <p>At this stage, what's important to observe is that the results are organized by module, and there is additionally a directory called <code>pipeline_info</code> containing various timestamped reports about the pipeline execution.</p>
@@ -5063,7 +5065,7 @@ Understanding how this is all organized is the first step toward developing your
 <p>You can either use <code>tree</code> or use the file explorer to find and open the <code>nf-core/demo</code> directory.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>tree<span class="w"> </span>-L<span class="w"> </span><span class="m">1</span><span class="w"> </span>pipelines/nf-core/demo
 </code></pre></div>
-<details class="example">
+<details class="abstract">
 <summary>Directory contents</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="go">pipelines/nf-core/demo</span>
 <a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="go">├── assets</span>
@@ -5120,6 +5122,11 @@ For now, we're going to focus on the overall organization and logic.</p>
 
 <p>There is a so-called <em>entrypoint</em> script called <code>main.nf</code>, which acts as a wrapper for two kinds of nested workflows: the workflow containing the actual analysis logic, located under <code>workflows/</code> and called <code>demo.nf</code>, and a set of housekeeping workflows located under <code>subworkflows/</code>.
 The <code>demo.nf</code> workflow calls on <strong>modules</strong> located under <code>modules/</code>; these contain the <strong>processes</strong> that will perform the actual analysis steps.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Subworkflows are not limited to housekeeping functions, and they can make use of process modules.</p>
+<p>The <code>nf-core/demo</code> pipeline shown here happens to be on the simpler side on the spectrum, but other nf-core pipelines (such as <code>nf-core/rnaseq</code>) utilize subworkflows that are involved in the actual analysis.</p>
+</div>
 <p>Now, let's review these components in turn.</p>
 <h4 id="312-the-entrypoint-script-mainnf">3.1.2. The entrypoint script: <code>main.nf</code><a class="headerlink" href="#312-the-entrypoint-script-mainnf" title="Permanent link">&para;</a></h4>
 <p>The <code>main.nf</code> script is the entrypoint that Nextflow starts from when we execute <code>nextflow run nf-core/demo</code>.
@@ -5147,7 +5154,7 @@ If the tool belongs to a toolkit (i.e. a package containing multiple tools) then
 <p>You can see this applied in practice to the <code>nf-core/demo</code> pipeline modules:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>tree<span class="w"> </span>-L<span class="w"> </span><span class="m">3</span><span class="w"> </span>pipelines/nf-core/demo/modules
 </code></pre></div>
-<details class="example">
+<details class="abstract">
 <summary>Directory contents</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="go">pipelines/nf-core/demo/modules</span>
 <a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="go">└── nf-core</span>
@@ -5176,7 +5183,7 @@ However, we know there are also housekeeping subworkflows in there, so let's loo
 <p>Like modules, subworkflows are differentiated into <code>local</code> and <code>nf-core</code> directories, and each subworkflow has its own nested directory structure with its own <code>main.nf</code> script, tests and <code>.yml</code> file.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>tree<span class="w"> </span>-L<span class="w"> </span><span class="m">3</span><span class="w"> </span>pipelines/nf-core/demo/subworkflows
 </code></pre></div>
-<details class="example">
+<details class="abstract">
 <summary>Directory contents</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="go">pipelines/nf-core/demo/subworkflows</span>
 <a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="go">├── local</span>
