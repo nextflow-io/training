@@ -12,15 +12,23 @@ hide:
 
 !!! abstract "Self-service courses"
 
-    Catalog of courses goes here
+    Blurb about courses being self-service
 
-!!! info "Some other info"
+    Hello Nextflow / Nextflow Run
 
-    Something else
+    Browse the catalog
 
-!!! warning "Version requirements"
+    Blablabla
 
-    stuff about versions
+    Need this to be long
+
+!!! warning "Version compatibility"
+
+    Stuff about versions
+
+!!! info "Training events"
+
+    Blurb about training events
 
 !!! example "Environments"
 
