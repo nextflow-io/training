@@ -3,6 +3,17 @@
 Nextflow's plugin system allows you to extend the language with custom functions, operators, executors, and more.
 In this side quest, you'll build a simple plugin from scratch, learning the fundamentals of plugin architecture along the way.
 
+!!! warning "Advanced topic"
+
+    Plugin development is one of the more advanced Nextflow topics.
+    It involves Java/Groovy programming, build tools, and software engineering concepts that may be unfamiliar if you come from a pure bioinformatics background.
+
+    **Most Nextflow users will never need to develop plugins** - the existing plugin ecosystem and Nextflow's built-in features cover the vast majority of use cases.
+    This side quest is for those who want to understand how plugins work or have specific needs that require custom extensions.
+
+    If you find this material challenging, that's completely normal!
+    Consider bookmarking it for later and focusing on the [Using existing plugins](#1-using-existing-plugins) section for now.
+
 ### Learning goals
 
 In this side quest, you'll learn how to use existing Nextflow plugins and create your own custom plugin.
@@ -29,6 +40,18 @@ Before taking on this side quest, you should:
 
     This side quest requires Java and Gradle for building plugins.
     The training Codespace comes with Java pre-installed.
+
+??? info "What are Java, Groovy, and Gradle?"
+
+    If these terms are unfamiliar, here's a quick primer:
+
+    **Java** is a widely-used programming language. Nextflow itself is built with Java, and plugins must be compatible with the Java runtime.
+
+    **Groovy** is a programming language that runs on Java and is designed to be more concise and flexible. Nextflow's DSL is based on Groovy, which is why Nextflow syntax looks the way it does. Plugin code is typically written in Groovy.
+
+    **Gradle** is a build tool that compiles code, runs tests, and packages software. Think of it like `make` but for Java/Groovy projects. You don't need to understand Gradle deeply - we'll use simple commands like `./gradlew build`.
+
+    The good news: you don't need to be an expert in any of these. We'll explain the relevant concepts as we go.
 
 ---
 
@@ -87,6 +110,12 @@ We'll create a plugin called `nf-greeting` that provides functions to manipulate
 
 Before diving into plugin development, let's understand how to use plugins that others have created.
 Nextflow has a growing ecosystem of plugins that extend its functionality.
+
+!!! tip "This is the most important section for most users"
+
+    Even if you never develop your own plugin, knowing how to use existing plugins is valuable.
+    Many powerful features - like input validation with nf-schema - come from plugins.
+    If plugin development seems daunting, focus on mastering this section first.
 
 ### 1.1. Installing plugins
 
@@ -410,6 +439,26 @@ class GreetingExtension extends PluginExtensionPoint {
 }
 ```
 
+??? info "Understanding the Groovy syntax"
+
+    If this code looks unfamiliar, here's a breakdown of the key elements:
+
+    **`package nextflow.greeting`** - Declares which package (folder structure) this code belongs to. This must match the directory structure.
+
+    **`import ...`** - Brings in code from other packages, similar to Python's `import` or R's `library()`.
+
+    **`@CompileStatic`** - An annotation (marked with `@`) that tells Groovy to check types at compile time. This catches errors earlier.
+
+    **`class GreetingExtension extends PluginExtensionPoint`** - Defines a class that inherits from `PluginExtensionPoint`. The `extends` keyword means "this class is a type of that class."
+
+    **`@Override`** - Indicates we're replacing a method from the parent class.
+
+    **`@Function`** - The key annotation that makes a method available as a Nextflow function.
+
+    **`String reverseGreeting(String greeting)`** - A method that takes a String parameter and returns a String. In Groovy, you can often omit `return` - the last expression is returned automatically.
+
+    **`String name = 'World'`** - A parameter with a default value, just like in Python.
+
 ### 4.3. Understanding the @Function annotation
 
 The `@Function` annotation marks a method as callable from Nextflow workflows:
@@ -464,11 +513,20 @@ The Makefile provides convenient commands:
 make build
 ```
 
-Or directly with Gradle:
+Or directly with the Gradle wrapper:
 
 ```bash
 ./gradlew build
 ```
+
+??? info "What is `./gradlew`?"
+
+    The `./gradlew` script is the **Gradle wrapper** - a small script included with the project that automatically downloads and runs the correct version of Gradle.
+
+    This means you don't need Gradle installed on your system.
+    The first time you run `./gradlew`, it will download Gradle (which may take a moment), then run your command.
+
+    The `make` commands in the Makefile are just shortcuts that call `./gradlew` for you.
 
 ??? example "Build output"
 
@@ -492,7 +550,25 @@ Or directly with Gradle:
 
 ### 5.2. Write unit tests
 
-Good plugins have tests. Create or edit the test file:
+Good plugins have tests.
+Tests verify that your code works correctly and help catch bugs when you make changes later.
+
+??? info "What are unit tests?"
+
+    **Unit tests** are small pieces of code that automatically check if your functions work correctly.
+    Each test calls a function with known inputs and checks that the output matches what you expect.
+
+    For example, if you have a function that reverses strings, a test might check that `reverse("Hello")` returns `"olleH"`.
+
+    Tests are valuable because:
+
+    - They catch bugs before users do
+    - They give you confidence to make changes without breaking things
+    - They serve as documentation showing how functions should be used
+
+    You don't need to write tests to use a plugin, but they're good practice for any code you plan to share or maintain.
+
+Create or edit the test file:
 
 ```groovy title="src/test/groovy/nextflow/greeting/GreetingExtensionTest.groovy" linenums="1"
 package nextflow.greeting
@@ -553,6 +629,18 @@ Or:
 
     BUILD SUCCESSFUL
     ```
+
+!!! tip "If the build fails"
+
+    Build errors can be intimidating, but they usually point to a specific problem.
+    Common issues include:
+
+    - **Syntax errors**: A missing bracket, quote, or semicolon. The error message usually includes a line number.
+    - **Import errors**: A class name is misspelled or the import statement is missing.
+    - **Type errors**: You're passing the wrong type of data to a function.
+
+    Read the error message carefully - it often tells you exactly what's wrong and where.
+    If you're stuck, compare your code character-by-character with the examples.
 
 ### 5.4. Install locally
 
@@ -695,6 +783,13 @@ Let's explore other extension types.
 ---
 
 ## 7. Going further
+
+!!! note "Reference material"
+
+    This section covers more advanced plugin capabilities.
+    It's provided as a reference for those who want to explore further - you don't need to understand all of this to create useful plugins.
+
+    The `@Function` annotation covered earlier handles most common use cases.
 
 ### 7.1. Custom operators
 
