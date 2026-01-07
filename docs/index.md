@@ -10,39 +10,32 @@ hide:
 
 <div class="grid" markdown>
 
-!!! abstract "Self-service courses"
+!!! example "Self-service courses"
 
-    Blurb about courses being self-service
+    The training courses listed below are designed to be usable as a self-service resource.
+    You can work through them on your own at any time either in the Github Codespaces or in your own environment (see Environment Options for practical details).
 
-    Hello Nextflow / Nextflow Run
+    Blurb about beginners, science, advanced topics. CTA: browse the catalog.
 
-    Browse the catalog
+    ( BUTTON -> )
 
-    Blablabla
+=== "Additional information"
 
-    Need this to be long
-
-=== "Other stuff"
-
-    !!! warning "Version compatibility"
+    ??? warning "Version compatibility"
 
         Stuff about versions
 
-    !!! info "Training events"
-
-        Blurb about training events
-
-    !!! example "Environments"
+    ??? example "Environments"
 
         Codespaces vs local
+
+    ??? abstract "Training events"
+
+        Blurb about training events
 
 </div>
 
 Welcome to the Nextflow community training portal!
-
-We have several distinct training courses available on this website. Scroll down to find the one that's right for you!
-
-The training courses listed below are designed to be usable as a self-service resource; you can work through them on your own at any time (see Environment Setup for practical details). However, you may get even more out of them by joining a group training event.
 
 - Free online events are run regularly by the nf-core community, see the [nf-core events page](https://nf-co.re/events) for more.
 - Seqera (the company that develops Nextflow) runs a variety of training events, see the [Seqera Events](https://seqera.io/events/) page and look for 'Seqera Sessions' and 'Nextflow Summit'.
