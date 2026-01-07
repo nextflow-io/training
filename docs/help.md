@@ -1,5 +1,13 @@
 # Getting Help
 
+Quick reference to some handy links:
+
+| Reference                                                   |  Community                                                   |
+| ----------------------------------------------------------- | ------------------------------------------------------------ |
+| [Nextflow Docs](https://nextflow.io/docs/latest/index.html) | [Nextflow Slack](https://www.nextflow.io/slack-invite.html)  |
+| [Nextflow Homepage](https://nextflow.io/)                   | [nf-core](https://nf-co.re/)                                 |
+| [Seqera](https://seqera.io/)                                | [Seqera Community Forum](https://community.seqera.io)        |
+
 ## Nextflow Documentation
 
 Nextflow has an excellent set of [docs](https://nextflow.io/docs/latest/), which should be your first destination whenever you run into something you don't understand or want to learn more about. You can browse topics or search for specific terms.
