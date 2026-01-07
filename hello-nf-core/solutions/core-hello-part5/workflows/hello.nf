@@ -7,7 +7,7 @@ include { paramsSummaryMap       } from 'plugin/nf-schema'
 include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { sayHello               } from '../modules/local/sayHello.nf'
 include { convertToUpper         } from '../modules/local/convertToUpper.nf'
-include { cowpy                  } from '../modules/local/cowpy.nf'
+include { COWPY                  } from '../modules/local/cowpy/main.nf'
 include { CAT_CAT                } from '../modules/nf-core/cat/cat/main'
 
 /*
@@ -41,7 +41,7 @@ workflow HELLO {
     CAT_CAT(ch_for_cat)
 
     // generate ASCII art of the greetings with cowpy
-    cowpy(CAT_CAT.out.file_out)
+    COWPY(CAT_CAT.out.file_out)
 
     //
     // Collate and save software versions
@@ -56,7 +56,7 @@ workflow HELLO {
 
 
     emit:
-    cowpy_hellos   = cowpy.out.cowpy_output
+    cowpy_hellos   = COWPY.out.cowpy_output
     versions       = ch_versions                 // channel: [ path(versions.yml) ]
 
 }

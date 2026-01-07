@@ -61,7 +61,7 @@ tree . -L 2
 
 If you run this inside `hello-nf-core`, you should see the following output.
 
-??? example "Directory contents"
+??? abstract "Directory contents"
 
     ```console
     .

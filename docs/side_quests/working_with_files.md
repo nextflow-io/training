@@ -1,12 +1,12 @@
-# Working with Files
+# File input processing
 
-Bioinformatics workflows often involve processing large numbers of files.
+Scientific analysis workflows often involve processing large numbers of files.
 Nextflow provides powerful tools to handle files efficiently, helping you organize and process your data with minimal code.
 
 ### Learning goals
 
 In this side quest, we'll explore how Nextflow handles files, from basic file operations to more advanced techniques for working with file collections.
-You'll learn how to extract metadata from filenames, which is a common requirement in bioinformatics pipelines.
+You'll learn how to extract metadata from filenames, which is a common requirement in scientific analysis pipelines.
 
 By the end of this side quest, you'll be able to:
 
@@ -25,7 +25,7 @@ These skills will help you build workflows that can handle different kinds of fi
 
 Before taking on this side quest, you should:
 
-- Have completed the [Hello Nextflow](../hello_nextflow/README.md) tutorial or equivalent beginner's course.
+- Have completed the [Hello Nextflow](../../hello_nextflow/) tutorial or equivalent beginner's course.
 - Be comfortable using basic Nextflow concepts and mechanisms (processes, channels, operators)
 
 <!-- I removed the suggestion to do the metamaps SQ first because that works more naturally after -->
@@ -56,11 +56,10 @@ code .
 
 #### Review the materials
 
-You'll find a simple workflow file (`file_operations.nf`) and a `data` directory containing some example data files.
+You'll find a simple workflow file called `main.nf`, a `modules` directory containing two module files, and a `data` directory containing some example data files.
 
 ```console title="Directory contents"
 .
-├── count_lines.nf
 ├── data
 │   ├── patientA_rep1_normal_R1_001.fastq.gz
 │   ├── patientA_rep1_normal_R2_001.fastq.gz
@@ -78,7 +77,10 @@ You'll find a simple workflow file (`file_operations.nf`) and a `data` directory
 │   ├── patientC_rep1_normal_R2_001.fastq.gz
 │   ├── patientC_rep1_tumor_R1_001.fastq.gz
 │   └── patientC_rep1_tumor_R2_001.fastq.gz
-└── file_operations.nf
+├── main.nf
+└── modules
+    ├── analyze_reads.nf
+    └── count_lines.nf
 ```
 
 This directory contains paired-end sequencing data from three patients (A, B, C).
@@ -90,9 +92,7 @@ For patient A specifically, we have two sets of technical replicates (repeats).
 
 The sequencing data files are named with a typical `_R1_` and `_R2_` convention for what are known as 'forward reads' and 'reverse reads'.
 
-!!! note
-
-    Don't worry if you're not familiar with this experimental design, it's not critical for understanding this tutorial.
+_Don't worry if you're not familiar with this experimental design, it's not critical for understanding this tutorial._
 
 #### Review the assignment
 
@@ -113,100 +113,124 @@ If you can check all the boxes, you're good to go.
 
 ---
 
-## 1. Basic File Operations
+## 1. Basic file operations
 
-### 1.1. Use `.class` to identify the type of an object
+### 1.1. Identify the type of an object with `.class`
 
-Take a look at the workflow file `file_operations.nf`:
+Take a look at the workflow file `main.nf`:
 
-```groovy title="file_operations.nf" linenums="1"
+```groovy title="main.nf" linenums="1"
+#!/usr/bin/env nextflow
+
 workflow {
+
     // Create a Path object from a string path
     myFile = 'data/patientA_rep1_normal_R1_001.fastq.gz'
+
     println "${myFile} is of class ${myFile.class}"
 }
 ```
 
-We have a mini-workflow that refers to a single file path in it's workflow, then prints it to the console, along with its class.
+This is a mini-workflow (without any processes) that refers to a single file path in its workflow, then prints it to the console, along with its class.
 
-!!! note
+<details>
+  <summary>What is <code>.class</code>?</summary>
 
-    **What is `.class`?**
+    In Nextflow, <code>.class</code> tells us what type of object we're working with. It's like asking "what kind of thing is this?" to find out whether it's a string, a number, a file, or something else.
+    This will help us illustrate the difference between a plain string and a Path object in the next sections.
 
-    In Groovy (the language Nextflow uses), `.class` tells us what type of object we're working with. It's like asking "what kind of thing is this?" - whether it's a string, a number, a file, or something else. This will help us see the difference between a plain string and a Path object in the next sections.
+</details>
 
-Run the workflow:
+Let's run the workflow:
 
-```bash title="Run the workflow"
-nextflow run file_operations.nf
+```bash
+nextflow run main.nf
 ```
 
-```console title="Starting Output"
- N E X T F L O W   ~  version 25.04.3
+??? example "Output"
 
-Launching `file_operations.nf` [romantic_chandrasekhar] DSL2 - revision: 5a4a89bc3a
+    ```console
+    N E X T F L O W   ~  version 25.04.3
 
-data/patientA_rep1_normal_R1_001.fastq.gz is of class java.lang.String
-```
+    Launching `main.nf` [romantic_chandrasekhar] DSL2 - revision: 5a4a89bc3a
 
-We printed the string path exactly as we wrote it. This is just text output - Nextflow hasn't done anything special with it yet. We've also confirmed that, so far, to Nextflow this is only a string (of class `java.lang.String`), we haven't yet told Nextflow about its file nature.
+    data/patientA_rep1_normal_R1_001.fastq.gz is of class java.lang.String
+    ```
 
-### 1.2. Creating Path Objects
+As you can see, Nextflow printed the string path exactly as we wrote it.
 
-We can tell Nextflow how to handle files by creating [Path objects](https://www.nextflow.io/docs/latest/reference/stdlib-types.html#path) from path strings. In our workflow, we have a string path `data/patientA_rep1_normal_R1_001.fastq.gz`, and we covert that to a Path object using the `file()` method, which provides access to file properties and operations.
+This is just text output; Nextflow hasn't done anything special with it yet.
+We've also confirmed that as far as Nextflow is concerned, this is only a string (of class `java.lang.String`).
+That makes sense, since we haven't yet told Nextflow that it corresponds to a file.
 
-Edit the `file_operations.nf` to wrap the string with `file()` as follows:
+### 1.2. Create a Path object with file()
+
+We can tell Nextflow how to handle files by creating [Path objects](https://www.nextflow.io/docs/latest/reference/stdlib-types.html#path) from path strings.
+
+In our workflow, we can convert the string path `data/patientA_rep1_normal_R1_001.fastq.gz` to a Path object using the `file()` method, which provides access to file properties and operations.
+
+Edit the `main.nf` to wrap the string with `file()` as follows:
 
 === "After"
 
-    ```groovy title="file_operations.nf" linenums="2" hl_lines="2"
-    // Create a Path object from a string path
+    ```groovy title="main.nf" linenums="5" hl_lines="2"
+        // Create a Path object from a string path
         myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
+
         println "${myFile} is of class ${myFile.class}"
     ```
 
 === "Before"
 
-    ```groovy title="file_operations.nf" linenums="2" hl_lines="2"
-    // Create a Path object from a string path
+    ```groovy title="main.nf" linenums="5" hl_lines="2"
+        // Create a Path object from a string path
         myFile = 'data/patientA_rep1_normal_R1_001.fastq.gz'
+
         println "${myFile} is of class ${myFile.class}"
     ```
 
-Run the workflow:
+Now run the workflow again:
 
-```bash title="Test Path object creation"
-nextflow run file_operations.nf
+```bash
+nextflow run main.nf
 ```
 
-```console title="Path object output"
- N E X T F L O W   ~  version 25.04.3
+??? example "Output"
 
-Launching `file_operations.nf` [kickass_coulomb] DSL2 - revision: 5af44b1b59
+    ```console
+    N E X T F L O W   ~  version 25.04.3
 
-/workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz is of class class sun.nio.fs.UnixPath
-```
+    Launching `main.nf` [kickass_coulomb] DSL2 - revision: 5af44b1b59
 
-Now we see the full absolute path instead of the relative path we wrote. Nextflow has converted our string into a Path object and resolved it to the actual file location on the system. The file path will now be absolute, like `/workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz`, and notice that the Path object class is `sun.nio.fs.UnixPath`, this is Nextflow's way of representing local files. As we'll see later, remote files will have different class names (like `nextflow.file.http.XPath` for HTTP files), but they all work exactly the same way and can be used identically in your workflows.
+    /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz is of class class sun.nio.fs.UnixPath
+    ```
 
-!!! note
+This time, you see the full absolute path instead of the relative path we provided as input.
+
+Nextflow has converted our string into a Path object and resolved it to the actual file location on the system.
+The file path will now be absolute, as in `/workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz`.
+
+Notice also that the Path object class is `sun.nio.fs.UnixPath`: this is Nextflow's way of representing local files.
+As we'll see later, remote files will have different class names (such as `nextflow.file.http.XPath` for HTTP files), but they all work exactly the same way and can be used identically in your workflows.
+
+!!! tip
 
     **The key difference:**
 
     - **Path string**: Just text that Nextflow treats as characters
     - **Path object**: A smart file reference that Nextflow can work with
 
-    Think of it like this: a path string is like writing an address on paper, while a Path object is like having a GPS device that knows how to navigate and can tell you details about the journey.
+    Think of it like this: a path string is like writing an address on paper, while a Path object is like having the address loaded in a GPS device that knows how to navigate to there and can tell you details about the journey.
 
-### 1.3. File Attributes
+### 1.3. Access file attributes
 
-Why is this helpful? Well now Nextflow understands that `myFile` is a Path object and not just a string, we can access the various attributes of the Path object.
+Why is this helpful? Well, now that Nextflow understands that `myFile` is a Path object and not just a string, we can access the various attributes of the Path object.
 
-Let's update our workflow to print out the file attributes:
+Let's update our workflow to print out the built-in file attributes:
 
 === "After"
 
-    ```groovy title="file_operations.nf" linenums="2" hl_lines="5-9"
+    ```groovy title="main.nf" linenums="5" hl_lines="4-9"
         // Create a Path object from a string path
         myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
 
@@ -220,268 +244,355 @@ Let's update our workflow to print out the file attributes:
 
 === "Before"
 
-    ```groovy title="file_operations.nf" linenums="2" hl_lines="3"
-        // Create a file object from a string path
+    ```groovy title="main.nf" linenums="5" hl_lines="4"
+        // Create a Path object from a string path
         myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
+
         println "${myFile} is of class ${myFile.class}"
     ```
 
 Run the workflow:
 
-```bash title="Test file attributes"
-nextflow run file_operations.nf
+```bash
+nextflow run main.nf
 ```
 
-You'll see various file attributes printed to the console:
+??? example "Output"
 
-```console title="File Attributes Output"
- N E X T F L O W   ~  version 25.04.3
+    ```console
+    N E X T F L O W   ~  version 25.04.3
 
-Launching `file_operations.nf` [ecstatic_ampere] DSL2 - revision: f3fa3dcb48
+    Launching `main.nf` [ecstatic_ampere] DSL2 - revision: f3fa3dcb48
 
-File object class: sun.nio.fs.UnixPath
-File name: patientA_rep1_normal_R1_001.fastq.gz
-Simple name: patientA_rep1_normal_R1_001
-Extension: gz
-Parent directory: /workspaces/training/side-quests/working_with_files/data
-```
+    File object class: sun.nio.fs.UnixPath
+    File name: patientA_rep1_normal_R1_001.fastq.gz
+    Simple name: patientA_rep1_normal_R1_001
+    Extension: gz
+    Parent directory: /workspaces/training/side-quests/working_with_files/data
+    ```
 
-### 1.4. Why proper file handling matters
+You see the various file attributes printed to the console above.
 
-The difference between strings and Path objects becomes critical when you start building actual workflows with processes. Let's side-step for a moment to take a look at a workflow where this has been done wrong.
+### 1.4. Feed the file to a process
 
-`count_lines.nf` contains a process that takes a `val` input and tries to treat it as a file:
+The difference between strings and Path objects becomes critical when you start building actual workflows with processes.
+So far we've verified that Nextflow is now treating out input file as a file, but let's see if we can actually run something on that file in a process.
 
-```groovy title="count_lines.nf" linenums="1" hl_lines="5 16"
+#### 1.4.1. Import the process and examine the code
+
+We provide you with a pre-written process module called `COUNT_LINES` that takes a file input and counts how many lines are in it.
+
+To use the process in the workflow, you just need to add an include statement before the workflow block:
+
+=== "After"
+
+    ```groovy title="main.nf" linenums="1" hl_lines="3"
+    #!/usr/bin/env nextflow
+
+    include { COUNT_LINES } from './modules/count_lines.nf'
+
+    workflow {
+    ```
+
+=== "Before"
+
+    ```groovy title="main.nf" linenums="1"
+    #!/usr/bin/env nextflow
+
+    workflow {
+    ```
+
+You can open the module file to examine its code:
+
+```groovy title="modules/langid.nf" linenums="1" hl_lines="9 12"
+#!/usr/bin/env nextflow
+
 process COUNT_LINES {
     debug true
 
     input:
-    val fastq_file
+    val input_file
 
     script:
     """
     set -o pipefail
-    echo "Processing file: $fastq_file"
-    gzip -dc $fastq_file | wc -l
+    echo "Processing file: $input_file"
+    gzip -dc $input_file | wc -l
     """
 }
-
-workflow {
-    myFile = 'data/patientA_rep1_normal_R1_001.fastq.gz'
-    COUNT_LINES(myFile)
-}
 ```
 
-!!! note
+As you can see, it's a fairly straightforward little script that unzips the file and counts how many lines it contains.
 
-    **About `debug = true`:**
+<details>
+  <summary>What does <code>debug true</code> do?</summary>
 
-    The `debug = true` directive in the process definition causes Nextflow to print the output from your script (like the line count "40") directly in the execution log. Without this, you would only see the process execution status but not the actual output from your script.
+The <code>debug true</code> directive in the process definition causes Nextflow to print the output from your script (like the line count "40") directly in the execution log.
+Without this, you would only see the process execution status but not the actual output from your script.
 
-    For more information on debugging Nextflow processes, see the [Debugging Nextflow Workflows](./debugging.md) side quest.
+For more information on debugging Nextflow processes, see the <a href="../debugging/">Debugging Nextflow Workflows</a> side quest.
 
-Run this workflow to see the error:
+</details>
 
-```bash title="Test val input with string error"
-nextflow run count_lines.nf
+#### 1.4.2. Add a call to `COUNT_LINES`
+
+Now that the process is available to the workflow, we can add a call to the `COUNT_LINES` process to run it on the input file.
+
+Make the following edits to the workflow:
+
+=== "After"
+
+    ```groovy title="main.nf" linenums="7" hl_lines="11-12"
+        // Create a Path object from a string path
+        myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
+
+        // Print file attributes
+        println "File object class: ${myFile.class}"
+        println "File name: ${myFile.name}"
+        println "Simple name: ${myFile.simpleName}"
+        println "Extension: ${myFile.extension}"
+        println "Parent directory: ${myFile.parent}"
+
+        // Count the lines in the file
+        COUNT_LINES(myFile)
+    ```
+
+=== "Before"
+
+    ```groovy title="main.nf" linenums="7" hl_lines="4-9"
+        // Create a Path object from a string path
+        myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
+
+        // Print file attributes
+        println "File object class: ${myFile.class}"
+        println "File name: ${myFile.name}"
+        println "Simple name: ${myFile.simpleName}"
+        println "Extension: ${myFile.extension}"
+        println "Parent directory: ${myFile.parent}"
+    ```
+
+And now run the workflow:
+
+```bash
+nextflow run main.nf
 ```
 
-You'll get an error like this:
+??? example "Output"
 
-```console title="Val input with string error"
- N E X T F L O W   ~  version 25.04.3
+    ```console
+     N E X T F L O W   ~  version 25.04.3
 
-Launching `count_lines.nf` [goofy_koch] DSL2 - revision: 4d9e909d80
+    Launching `main.nf` [cheeky_hypatia] DSL2 - revision: 281d13c414
 
-executor >  local (1)
-[7f/c22b7f] COUNT_LINES [  0%] 0 of 1
-ERROR ~ Error executing process > 'COUNT_LINES'
+    File object class: class sun.nio.fs.UnixPath
+    File name: patientA_rep1_normal_R1_001.fastq.gz
+    Simple name: patientA_rep1_normal_R1_001
+    Extension: gz
+    Parent directory: /workspaces/training/side-quests/working_with_files/data
+    executor >  local (1)
+    [e9/341c05] COUNT_LINES [100%] 1 of 1 ✔
+    Processing file: /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz
+    40
+    ```
 
-Caused by:
-  Process `COUNT_LINES` terminated with an error exit status (1)
+This shows we are able to operate on the file appropriately inside a process.
+
+Specifically, Nextflow carried out the following operations successfully:
+
+- Staged the file into the working directory
+- Decompressed the .gz file
+- Counted the lines (40 lines in this case)
+- Completed without error
+
+The key to this smooth operation is that we're explicitly telling Nextflow that our input is a file and should be treated as such.
+
+### 1.5. Troubleshoot basic file input errors
+
+This often trips up newcomers to Nextflow, so let's take a few minutes to look at what happens when you do it wrong.
+
+There are two main places where you can get the file handling wrong: at the level of the workflow, and at the level of the process.
+
+#### 1.5.1. Workflow-level error
+
+Let's see what happens if we revert to treating the file as a string when we specify the input in the workflow block.
+
+Make the following edits to the workflow, making sure to comment out the path-specific print statements:
+
+=== "After"
+
+    ```groovy title="main.nf" linenums="7" hl_lines="2 6-11"
+        // Create a Path object from a string path
+        myFile = 'data/patientA_rep1_normal_R1_001.fastq.gz'
+
+        // Print file attributes
+        println "File object class: ${myFile.class}"
+        /*
+        println "File name: ${myFile.name}"
+        println "Simple name: ${myFile.simpleName}"
+        println "Extension: ${myFile.extension}"
+        println "Parent directory: ${myFile.parent}"
+        */
+
+        // Count the lines in the file
+        COUNT_LINES(myFile)
+    ```
+
+=== "Before"
+
+    ```groovy title="main.nf" linenums="7" hl_lines="4-9"
+        // Create a Path object from a string path
+        myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
+
+        // Print file attributes
+        println "File object class: ${myFile.class}"
+        println "File name: ${myFile.name}"
+        println "Simple name: ${myFile.simpleName}"
+        println "Extension: ${myFile.extension}"
+        println "Parent directory: ${myFile.parent}"
+
+        // Count the lines in the file
+        COUNT_LINES(myFile)
+    ```
+
+And now run the workflow:
+
+```bash
+nextflow run main.nf
+```
+
+??? example "Output"
+
+    ```console
+     N E X T F L O W   ~  version 25.04.3
+
+    Launching `main.nf` [friendly_goodall] DSL2 - revision: ae50609b20
+
+    [-        ] COUNT_LINES -
+    ERROR ~ Error executing process > 'COUNT_LINES'
+
+    Caused by:
+      Not a valid path value: 'data/patientA_rep1_normal_R1_001.fastq.gz'
 
 
-Command executed:
 
-executor >  local (1)
-[7f/c22b7f] COUNT_LINES [  0%] 0 of 1 ✘
-WARN: Got an interrupted exception while taking agent result | java.lang.InterruptedException
-ERROR ~ Error executing process > 'COUNT_LINES'
+    Tip: view the complete command output by changing to the process work dir and entering the command `cat .command.out`
 
-Caused by:
-  Process `COUNT_LINES` terminated with an error exit status (1)
+    -- Check '.nextflow.log' file for details
+    ```
+
+This is the important bit:
+
+```console
+Not a valid path value: 'data/patientA_rep1_normal_R1_001.fastq.gz'
+```
+
+When you specify a `path` input, Nextflow validates that you're passing actual file references, not just strings.
+This error is telling you that `'data/patientA_rep1_normal_R1_001.fastq.gz'` is not a valid path value because it's a string, not a Path object.
+
+Nextflow immediately detected the problem and stopped before even starting the process.
+
+#### 1.5.2. Process-level error
+
+The other place we might forget to specify we want Nextflow to treat the input as a file is in the process definition.
+
+Make the following edit to the module:
+
+=== "After"
+
+    ```groovy title="modules/count_lines.nf" linenums="3" hl_lines="7"
+    process COUNT_LINES {
+        debug true
+
+        input:
+        val input_file
+    ```
+
+=== "Before"
+
+    ```groovy title="modules/count_lines.nf" linenums="3" hl_lines="7"
+    process COUNT_LINES {
+        debug true
+
+        input:
+        path input_file
+    ```
+
+And now run the workflow again:
+
+```bash
+nextflow run main.nf
+```
+
+??? example "Output"
+
+    ```console
+     N E X T F L O W   ~  version 25.04.3
+
+    Launching `main.nf` [soggy_golick] DSL2 - revision: ae50609b20
+
+    executor >  local (1)
+    [b3/b3023c] COUNT_LINES [  0%] 0 of 1 ✘
+    ERROR ~ Error executing process > 'COUNT_LINES'
+
+    Caused by:
+      Process `COUNT_LINES` terminated with an error exit status (1)
 
 
+    Command executed:
+
+      set -o pipefail
+      echo "Processing file: data/patientA_rep1_normal_R1_001.fastq.gz"
+      gzip -dc data/patientA_rep1_normal_R1_001.fastq.gz | wc -l
+
+    Command exit status:
+      1
+
+    Command output:
+      Processing file: data/patientA_rep1_normal_R1_001.fastq.gz
+      0
+
+    Command error:
+      Processing file: data/patientA_rep1_normal_R1_001.fastq.gz
+      gzip: data/patientA_rep1_normal_R1_001.fastq.gz: No such file or directory
+      0
+
+    Work dir:
+      /workspaces/training/side-quests/working_with_files/work/b3/b3023cb2ccb986851301d8e369e79f
+
+    Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
+
+    -- Check '.nextflow.log' file for details
+    ```
+
+This shows a lot of details about the error because the process is set to output debugging information, as noted above.
+
+These are the most relevant sections:
+
+```console
 Command executed:
 
   set -o pipefail
   echo "Processing file: data/patientA_rep1_normal_R1_001.fastq.gz"
   gzip -dc data/patientA_rep1_normal_R1_001.fastq.gz | wc -l
+```
 
-Command exit status:
-  1
-
-Command output:
-  Processing file: data/patientA_rep1_normal_R1_001.fastq.gz
-  0
-
+```console
 Command error:
   Processing file: data/patientA_rep1_normal_R1_001.fastq.gz
   gzip: data/patientA_rep1_normal_R1_001.fastq.gz: No such file or directory
   0
-
-Work dir:
-  /workspaces/training/side-quests/working_with_files/work/7f/c22b7f6f86c81f14d53de15584fdd5
-
-Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
-
- -- Check '.nextflow.log' file for details
 ```
 
-The process failed because the file `data/patientA_rep1_normal_R1_001.fastq.gz` doesn't exist in the process working directory. When you use `val` input, Nextflow passes the string value through to your script, but it doesn't stage the actual file. The process tries to use the string as a file path, but the file isn't there.
+This says the system couldn't find the file; however if you look up the path, there is a file by that name in that location.
 
-Now let's fix this by changing the process to use a `path` input:
+When we ran this, Nextflow passed the string value through to the script, but it didn't _stage_ the actual file in the working directory.
+So the process tried to use the relative string, `data/patientA_rep1_normal_R1_001.fastq.gz`, but that file doesn't exist within the process working directory.
 
-=== "After"
+Taken together, these two examples show you how important it is to tell Nextflow if an input should be handled as a file.
 
-    ```groovy title="file_operations.nf" linenums="1" hl_lines="5 16"
-    process COUNT_LINES {
-        debug true
+!!! note
 
-        input:
-        path fastq_file
-
-        script:
-        """
-        set -o pipefail
-        echo "Processing file: $fastq_file"
-        gzip -dc $fastq_file | wc -l
-        """
-    }
-
-    workflow {
-        myFile = 'data/patientA_rep1_normal_R1_001.fastq.gz'
-        COUNT_LINES(myFile)
-    }
-    ```
-
-=== "Before"
-
-    ```groovy title="file_operations.nf" linenums="1" hl_lines="5 16"
-    process COUNT_LINES {
-        debug true
-
-        input:
-        val fastq_file
-
-        script:
-        """
-        set -o pipefail
-        echo "Processing file: $fastq_file"
-        gzip -dc $fastq_file | wc -l
-        """
-    }
-
-    workflow {
-        myFile = 'data/patientA_rep1_normal_R1_001.fastq.gz'
-        COUNT_LINES(myFile)
-    }
-    ```
-
-Run this updated version and you'll get a different error:
-
-```console title="Path input with string error"
- N E X T F L O W   ~  version 25.04.3
-
-Launching `file_operations.nf` [mighty_poitras] DSL2 - revision: e996edfc53
-
-[-        ] COUNT_LINES -
-ERROR ~ Error executing process > 'COUNT_LINES'
-
-Caused by:
-  Not a valid path value: 'data/patientA_rep1_normal_R1_001.fastq.gz'
-
-Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
-```
-
-**What this error means:**
-
-This is much better! Nextflow immediately detected the problem and failed before even starting the process. When you use `path` input, Nextflow validates that you're passing actual file references, not just strings. It's telling you that `'data/patientA_rep1_normal_R1_001.fastq.gz'` is not a valid path value because it's a string, not a Path object.
-
-Now let's fix this properly by using the `file()` method to create a Path object:
-
-=== "After"
-
-    ```groovy title="file_operations.nf" linenums="1" hl_lines="5 16"
-    process COUNT_LINES {
-        debug true
-
-        input:
-        path fastq_file
-
-        script:
-        """
-        set -o pipefail
-        echo "Processing file: $fastq_file"
-        gzip -dc $fastq_file | wc -l
-        """
-    }
-
-    workflow {
-        myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
-        COUNT_LINES(myFile)
-    }
-    ```
-
-=== "Before"
-
-    ```groovy title="file_operations.nf" linenums="1" hl_lines="5 16"
-    process COUNT_LINES {
-        debug true
-
-        input:
-        path fastq_file
-
-        script:
-        """
-        set -o pipefail
-        echo "Processing file: $fastq_file"
-        gzip -dc $fastq_file | wc -l
-        """
-    }
-
-    workflow {
-        myFile = 'data/patientA_rep1_normal_R1_001.fastq.gz'
-        COUNT_LINES(myFile)
-    }
-    ```
-
-Now when you run this, it should work correctly! The file will be staged into the process working directory and the `wc -l` command will succeed.
-
-```bash title="Test successful execution"
-nextflow run count_lines.nf
-```
-
-You should see output like this:
-
-```console title="Successful execution"
- N E X T F L O W   ~  version 25.04.3
-
-Launching `count_lines.nf` [astonishing_tesla] DSL2 - revision: ee38f96485
-
-executor >  local (1)
-[8a/3f23d5] COUNT_LINES [100%] 1 of 1 ✔
-Processing file: patientA_rep1_normal_R1_001.fastq.gz
-      40
-```
-
-The process successfully:
-
-- Staged the file into the working directory
-- Decompressed the .gz file
-- Counted the lines (40 lines in this case)
-- Completed without errors
+    Make sure to go back and fix both intentional errors before continuing to the next section.
 
 ### Takeaway
 
@@ -489,40 +600,47 @@ The process successfully:
 - The `file()` method converts a string path into a Path object that Nextflow can work with
 - You can access file properties like `name`, `simpleName`, `extension`, and `parent` [using file attributes](https://www.nextflow.io/docs/latest/working-with-files.html#getting-file-attributes)
 - Using Path objects instead of strings allows Nextflow to properly manage files in your workflow
-- Process Input Outcomes: Proper file handling requires Path objects, not strings, to ensure files are correctly staged and accessible in processes.
+- Process Input Outcomes: Proper file handling requires Path objects, not strings, to ensure files are correctly staged and accessible for use by processes.
 
 ---
 
-## 2. Using Remote Files
+## 2. Using remote files
 
-One of the key features of Nextflow is the ability to transparently switch between local files (on the same machine) to remote files accessible over the internet. To do this, all you need to do as a user is switch the file path you supply to the workflow from a normal file path (e.g. `/path/to/data`) to a file path with a remote protocol at the start. Importantly, you should **never** have to change the workflow logic to accommodate files coming from different locations.
+One of the key features of Nextflow is the ability to switch seamlessly between local files (on the same machine) to remote files accessible over the internet.
 
-For example, replacing `/path/to/data` with `s3://path/to/data` in your inputs will switch to using the S3 protocol. Many different protocols are supported:
+If you're doing it right, you should never need to change the logic of your workflow to accommodate files coming from different locations.
+All you need to do to use a remote file is to specify the appropriate prefix in the file path when you're supplying it to the workflow.
+
+For example, `/path/to/data` has no prefix, indicating that it's a 'normal' local file path, whereas `s3://path/to/data` includes the `s3://` prefix, indicating that it's located in Amazon's S3 object storage.
+
+Many different protocols are supported:
 
 - HTTP(S)/FTP (http://, https://, ftp://)
 - Amazon S3 (s3://)
 - Azure Blob Storage (az://)
 - Google Cloud Storage (gs://)
 
-To use these, simply replace the string and Nextflow will handle authentication and staging the files to the right place, downloading or uploading and all other file operations you would expect. We call this string the Uniform Resource Identifier (URI).
+To use any of these, simply specify the relevant prefix in the string, which is then technically called a Uniform Resource Identifier (URI) instead of a file path.
+Nextflow will handle authentication and staging the files to the right place, downloading or uploading and all other file operations you would expect.
 
-The key strength of this is we can switch between environments without changing any pipeline logic. For example, you can develop with a small, local test set before moving to a remote set of data by changing the URI.
+The key strength of this system is that it enables us to switch between environments without changing any pipeline logic.
+For example, you can develop with a small, local test set before switching to a full-scale test set located in remote storage simply by changing the URI.
 
 ### 2.1. Use a file from the internet
 
+Let's test this out by switching the local path we're providing to our workflow with an HTTPS path pointing to a copy of the same data that is stored in Github.
+
 !!! warning
 
-    Accessing remote data requires an internet connection!
+    This will only work if you have an active internet connection.
 
-In your workflow, you can replace the string path with an HTTPS one to download this file from the internet. We are going to swap the relative path of the FASTQ files with the remote one. This is the same data as we have been previously using.
-
-Open `file_operations.nf` again and make changes like this:
+Open `main.nf` again and change the input path as follows:
 
 === "After"
 
-    ```groovy title="file_operations.nf" linenums="2" hl_lines="2"
-    // Using a remote file from the internet
-        myFile = file('https://github.com/nextflow-io/training/blob/bb187e3bfdf4eec2c53b3b08d2b60fdd7003b763/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz')
+    ```groovy title="main.nf" linenums="2" hl_lines="2"
+        // Using a remote file from the internet
+        myFile = file('https://raw.github.com/nextflow-io/training/master/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz')
 
         // Print file attributes
         println "File object class: ${myFile.class}"
@@ -534,94 +652,103 @@ Open `file_operations.nf` again and make changes like this:
 
 === "Before"
 
-    ```groovy title="file_operations.nf" linenums="2" hl_lines="2"
-        // Create a file object from a string path
-        myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
-
-        // Print file attributes
-        println "File object class: ${myFile.class}"
-        println "File name: ${myFile.name}"
-        println "Simple name: ${myFile.simpleName}"
-        println "Extension: ${myFile.extension}"
-        println "Parent directory: ${myFile.parent}"
-    ```
-
-!!! note
-
-    HTTPS remote data does not accept globs because HTTPS cannot list multiple files, and similarly cannot be used with directory paths (you must specify exact file URLs). However, other storage protocols such as blob storage (`s3://`, `az://`, `gs://`) can use both globs and directory paths.
-
-Run the workflow and it will automatically pull the data from the internet:
-
-```bash title="Test remote file access"
-nextflow run file_operations.nf
-```
-
-```console title="Remote file output"
- N E X T F L O W   ~  version 25.04.3
-
-Launching `file_operations.nf` [insane_swartz] DSL2 - revision: fff18abe6d
-
-File object class: class nextflow.file.http.XPath
-File name: patientA_rep1_normal_R1_001.fastq.gz
-Simple name: patientA_rep1_normal_R1_001
-Extension: gz
-Parent directory: /nextflow-io/training/blob/bb187e3bfdf4eec2c53b3b08d2b60fdd7003b763/side-quests/working_with_files/data
-```
-
-In this example very little has changed! This shows how easy it is to switch between local and remote data using Nextflow.
-
-To see the difference, check the working directory located at the hash value of the process. The file will be downloaded to a staging directory located within the work directory, then symlinked into the relevant process directory. If the file was used again, Nextflow would only download it once.
-
-In this way, you can replace local with remote data without changing any pipeline logic.
-
-!!! note
-
-    **Note on Object Types**: Notice that local files produce `sun.nio.fs.UnixPath` objects while remote files produce `nextflow.file.http.XPath` objects. Despite these different class names, both work exactly the same way and can be used identically in your workflows. This is a key feature of Nextflow - you can seamlessly switch between local and remote data sources without changing your code logic.
-
-<!-- Add a 2.2 step using a file in S3 -->
-
-#### Working with Glob Patterns
-
-HTTP doesn't support globs, but cloud storage protocols do. Here's how you could use glob patterns with cloud storage:
-
-```groovy title="Cloud storage examples (not runnable in this environment)"
-// S3 with glob patterns - would match multiple files
-ch_s3_files = channel.fromPath('s3://my-bucket/data/*.fastq.gz')
-
-// Azure Blob Storage with glob patterns
-ch_azure_files = channel.fromPath('az://container/data/patient*_R{1,2}.fastq.gz')
-
-// Google Cloud Storage with glob patterns
-ch_gcs_files = channel.fromPath('gs://bucket/data/sample_*.fastq.gz')
-```
-
-These examples show the power of Nextflow's unified file handling - the same code works whether files are local or in the cloud, as long as the protocol supports the operations you need.
-
-### 2.2. Switch Back to Local Files
-
-For the remainder of this side quest, we'll use local files in our examples. This allows us to demonstrate powerful features like glob patterns and batch processing that aren't available with HTTP URLs. Remember: the same concepts apply to cloud storage (S3, Azure, GCS) where glob patterns are fully supported.
-
-Let's update our workflow to use local files again:
-
-=== "After"
-
-    ```groovy title="file_operations.nf" linenums="2" hl_lines="2"
-        // Create a file object from a string path
-        myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
-
-        // Print file attributes
-        println "File object class: ${myFile.class}"
-        println "File name: ${myFile.name}"
-        println "Simple name: ${myFile.simpleName}"
-        println "Extension: ${myFile.extension}"
-        println "Parent directory: ${myFile.parent}"
-    ```
-
-=== "Before"
-
-    ```groovy title="file_operations.nf" linenums="2" hl_lines="5-8"
+    ```groovy title="main.nf" linenums="2" hl_lines="2"
         // Create a Path object from a string path
-        myFile = file('https://github.com/nextflow-io/training/blob/bb187e3bfdf4eec2c53b3b08d2b60fdd7003b763/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz')
+        myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
+
+        // Print file attributes
+        println "File object class: ${myFile.class}"
+        println "File name: ${myFile.name}"
+        println "Simple name: ${myFile.simpleName}"
+        println "Extension: ${myFile.extension}"
+        println "Parent directory: ${myFile.parent}"
+    ```
+
+Let's run the workflow:
+
+```bash
+nextflow run main.nf
+```
+
+??? example "Output"
+
+    ```console
+    N E X T F L O W   ~  version 25.04.3
+
+    Launching `main.nf` [insane_swartz] DSL2 - revision: fff18abe6d
+
+    File object class: class nextflow.file.http.XPath
+    File name: patientA_rep1_normal_R1_001.fastq.gz
+    Simple name: patientA_rep1_normal_R1_001
+    Extension: gz
+    Parent directory: /nextflow-io/training/master/side-quests/working_with_files/data
+    executor >  local (1)
+    [8a/2ab7ca] COUNT_LINES [100%] 1 of 1 ✔
+    Processing file: patientA_rep1_normal_R1_001.fastq.gz
+    40
+    ```
+
+It works! You can see that very little has changed.
+
+The one difference in the console output is that the path object class is now `nextflow.file.http.XPath`, whereas for the local path the class was `sun.nio.fs.UnixPath`.
+You don't need to remember these classes; we just mention this to demonstrate that Nextflow identifies and handles the different locations appropriately.
+
+Behind the scenes, Nextflow downloaded the file to a staging directory located within the work directory.
+That staged file can then be treated as a local file and symlinked into the relevant process directory.
+
+You can verify that that happened here by looking at the contents of the working directory located at the hash value of the process.
+
+<!-- TODO (future) List work directory contents to show where the staging happens -->
+
+Note that for larger files, the downloading step will take some extra time compared to running on local files.
+However, Nextflow checks whether it already has a staged copy to avoid unnecessary downloads.
+So if you run again on the same file and haven't deleted the staged file, Nextflow will use the staged copy.
+
+This shows how easy it is to switch between local and remote data using Nextflow, which is a key feature of Nextflow.
+
+!!! note
+
+    The one important exception to this principle is that you can't use glob patterns or directory paths with HTTPS because HTTPS cannot list multiple files, so you must specify exact file URLs.
+    However, other storage protocols such as blob storage (`s3://`, `az://`, `gs://`) can use both globs and directory paths.
+
+    Here's how you could use glob patterns with cloud storage:
+
+    ```groovy title="Cloud storage examples (not runnable in this environment)"
+    // S3 with glob patterns - would match multiple files
+    ch_s3_files = channel.fromPath('s3://my-bucket/data/*.fastq.gz')
+
+    // Azure Blob Storage with glob patterns
+    ch_azure_files = channel.fromPath('az://container/data/patient*_R{1,2}.fastq.gz')
+
+    // Google Cloud Storage with glob patterns
+    ch_gcs_files = channel.fromPath('gs://bucket/data/sample_*.fastq.gz')
+    ```
+
+    We'll show you how to work with globs in practice in the next section.
+
+### 2.2. Switch back to the local file
+
+We're going to go back to using our local example files for the rest of this side quest, so let's switch the workflow input back to the original file:
+
+=== "After"
+
+    ```groovy title="main.nf" linenums="2" hl_lines="2"
+        // Create a Path object from a string path
+        myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
+
+        // Print file attributes
+        println "File object class: ${myFile.class}"
+        println "File name: ${myFile.name}"
+        println "Simple name: ${myFile.simpleName}"
+        println "Extension: ${myFile.extension}"
+        println "Parent directory: ${myFile.parent}"
+    ```
+
+=== "Before"
+
+    ```groovy title="main.nf" linenums="2" hl_lines="5-8"
+        // Create a Path object from a string path
+        myFile = file('https://raw.github.com/nextflow-io/training/master/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz')
 
         // Print file attributes
         println "File object class: ${myFile.class}"
@@ -634,7 +761,7 @@ Let's update our workflow to use local files again:
 ### Takeaway
 
 - Remote data is accessed using a URI (HTTP, FTP, S3, Azure, Google Cloud)
-- Nextflow will automatically download and stage the data to the right place
+- Nextflow will automatically download and stage the data to the right place, as long as these paths are being fed to processes
 - Do not write logic to download or upload remote files!
 - Local and remote files produce different object types but work identically
 - **Important**: HTTP/HTTPS only work with single files (no glob patterns)
@@ -643,41 +770,51 @@ Let's update our workflow to use local files again:
 
 ---
 
-## 3. Reading files using the `fromPath()` channel factory
+## 3. Using the `fromPath()` channel factory
 
-The `file()` method is useful for simple file operations, and we can combine that with [`channel.of()`](https://www.nextflow.io/docs/latest/reference/channel.html#of) to build channels from files like:
+So far we've been working with a single file at a time, but in Nextflow, we're typically going to want to create an input channel with multiple input files to process.
 
-```groovy title="channel.of() with file()"
-    ch_fastq = channel.of([file('data/patientA_rep1_normal_R1_001.fastq.gz')])
+A naive way to do that would be to combine the `file()` method with [`channel.of()`](https://www.nextflow.io/docs/latest/reference/channel.html#of) like this:
+
+```groovy title="Syntax example"
+ch_files = channel.of([file('data/patientA_rep1_normal_R1_001.fastq.gz')],
+                      [file('data/patientA_rep1_normal_R1_001.fastq.gz')])
 ```
 
-But we have a much more convenient tool called [`channel.fromPath()`](https://www.nextflow.io/docs/latest/reference/channel.html#frompath) which generates a channel from static file strings as well as glob patterns.
+That works, but it's clunky.
 
-### 3.1. Reading Files with channel.fromPath
+<!-- TODO (future) Discuss when it's good to use just file() vs channel.fromPath() -->
 
-Update your `file_operations.nf` file:
+This is where [`channel.fromPath()`](https://www.nextflow.io/docs/latest/reference/channel.html#frompath) comes in: a convenient channel factory that bundles all the functionality we need to generate a channel from one or more static file strings as well as glob patterns.
+
+### 3.1. Add the channel factory
+
+Let's update our workflow to use `channel.fromPath`.
 
 === "After"
 
-    ```groovy title="file_operations.nf" linenums="2" hl_lines="2"
-        // Reading files with channel.fromPath
-        ch_fastq = channel.fromPath('data/patientA_rep1_normal_R1_001.fastq.gz')
-        ch_fastq.view { "Found file: $it of type ${it.class}" }
+    ```groovy title="main.nf" linenums="7" hl_lines="1-3 6 12 15"
+        // Load files with channel.fromPath
+        ch_files = channel.fromPath('data/patientA_rep1_normal_R1_001.fastq.gz')
+        ch_files.view { myFile -> "Found file: $myFile" }
 
-        // // Print file attributes
-        // Comment these out for now, we'll come back to them!
-        // println "File object class: ${myFile.class}"
-        // println "File name: ${myFile.name}"
-        // println "Simple name: ${myFile.simpleName}"
-        // println "Extension: ${myFile.extension}"
-        // println "Parent directory: ${myFile.parent}"
+        // Print file attributes
+        /* Comment these out for now, we'll come back to them!
+        println "File object class: ${myFile.class}"
+        println "File name: ${myFile.name}"
+        println "Simple name: ${myFile.simpleName}"
+        println "Extension: ${myFile.extension}"
+        println "Parent directory: ${myFile.parent}"
+        */
+
+        // Count the lines in the file
+        // COUNT_LINES(myFile)
     ```
 
 === "Before"
 
-    ```groovy title="file_operations.nf" linenums="2" hl_lines="5-8"
-    // Create a Path object from a string path
-        // Create a file object from a string path
+    ```groovy title="main.nf" linenums="7" hl_lines="1-2"
+        // Create a Path object from a string path
         myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
 
         // Print file attributes
@@ -686,36 +823,50 @@ Update your `file_operations.nf` file:
         println "Simple name: ${myFile.simpleName}"
         println "Extension: ${myFile.extension}"
         println "Parent directory: ${myFile.parent}"
+
+        // Count the lines in the file
+        COUNT_LINES(myFile)
     ```
+
+We've also commented out the code that prints out the attributes for now, and added a `.view` statement to print out just the filename instead.
 
 Run the workflow:
 
-```bash title="Test channel.fromPath"
-nextflow run file_operations.nf
+```bash
+nextflow run main.nf
 ```
 
-You'll see each file path being emitted as a separate element in the channel:
+??? example "Output"
 
-```console title="channel.fromPath Output"
- N E X T F L O W   ~  version 25.04.3
+    ```console
+    N E X T F L O W   ~  version 25.04.3
 
-Launching `file_operations.nf` [grave_meucci] DSL2 - revision: b09964a583
+    Launching `main.nf` [grave_meucci] DSL2 - revision: b09964a583
 
-Found file: /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz of type class sun.nio.fs.UnixPath
-```
+    executor >  local (1)
+    [5c/342c73] COUNT_LINES (1) [100%] 1 of 1 ✔
+    Found file: /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz
+    Processing file: patientA_rep1_normal_R1_001.fastq.gz
+    40
+    ```
 
-Note how Nextflow has grabbed the file we specified and turned it into a `Path` type object, in exactly the same way that `file()` would have done. `channel.fromPath()` is just a convenient way of creating a new channel populated by a list of files.
+As you can see, the file path is being loading as a `Path` type object in the channel.
+This is similar to what `file()` would have done, except now we have a channel that we can load more files into if we want.
 
-### 3.2. Viewing Channel Contents
+Using `channel.fromPath()` is a convenient way of creating a new channel populated by a list of files.
 
-In our first version, we use `.view()` to print the file name. Let's update our workflow to print out the file attributes:
+### 3.2. View attributes of files in channel
+
+In our first pass at using the channel factory, we simplified the code and just printed out the file name.
+
+Let's go back to printing out the full file attributes:
 
 === "After"
 
-    ```groovy title="file_operations.nf" linenums="2" hl_lines="3-9"
-        // Reading files with channel.fromPath
-        ch_fastq = channel.fromPath('data/patientA_rep1_normal_R1_001.fastq.gz')
-        ch_fastq.view { myFile ->
+    ```groovy title="main.nf" linenums="7" hl_lines="3-9"
+        // Loading files with channel.fromPath
+        ch_files = channel.fromPath('data/patientA_rep1_normal_R1_001.fastq.gz')
+        ch_files.view { myFile ->
             println "File object class: ${myFile.class}"
             println "File name: ${myFile.name}"
             println "Simple name: ${myFile.simpleName}"
@@ -726,79 +877,126 @@ In our first version, we use `.view()` to print the file name. Let's update our 
 
 === "Before"
 
-    ```groovy title="file_operations.nf" linenums="2" hl_lines="3"
-        // Reading files with channel.fromPath
-        ch_fastq = channel.fromPath('data/patientA_rep1_normal_R1_001.fastq.gz')
-        ch_fastq.view { myFile -> "Found file: $myFile" }
+    ```groovy title="main.nf" linenums="7" hl_lines="3 6 12"
+        // Load files with channel.fromPath
+        ch_files = channel.fromPath('data/patientA_rep1_normal_R1_001.fastq.gz')
+        ch_files.view { myFile -> "Found file: $myFile" }
 
-        // // Print file attributes
-        // Comment these out for now, we'll come back to them!
-        // println "File name: ${myFile.name}"
-        // println "Simple name: ${myFile.simpleName}"
-        // println "Extension: ${myFile.extension}"
-        // println "Parent directory: ${myFile.parent}"
+        // Print file attributes
+        /* Comment these out for now, we'll come back to them!
+        println "File name: ${myFile.name}"
+        println "Simple name: ${myFile.simpleName}"
+        println "Extension: ${myFile.extension}"
+        println "Parent directory: ${myFile.parent}"
+        */
     ```
+
+Since `myFile` is a proper Path object, we have access to all the same class attributes as before.
 
 Run the workflow:
 
-```bash title="Test file attributes with channel.fromPath"
-nextflow run file_operations.nf
+```bash
+nextflow run main.nf
 ```
 
-```console title="channel.fromPath Output"
- N E X T F L O W   ~  version 25.04.3
+??? example "Output"
 
-Launching `file_operations.nf` [furious_swanson] DSL2 - revision: c35c34950d
+    ```console
+    N E X T F L O W   ~  version 25.04.3
 
-File object class: sun.nio.fs.UnixPath
-File name: patientA_rep1_normal_R1_001.fastq.gz
-Simple name: patientA_rep1_normal_R1_001
-Extension: gz
-Parent directory: /workspaces/training/side-quests/working_with_files/data
-```
+    Launching `main.nf` [furious_swanson] DSL2 - revision: c35c34950d
+
+    executor >  local (1)
+    [9d/6701a6] COUNT_LINES (1) [100%] 1 of 1 ✔
+    File object class: sun.nio.fs.UnixPath
+    File name: patientA_rep1_normal_R1_001.fastq.gz
+    Simple name: patientA_rep1_normal_R1_001
+    Extension: gz
+    Parent directory: /workspaces/training/side-quests/working_with_files/data
+    Processing file: patientA_rep1_normal_R1_001.fastq.gz
+    40
+    ```
+
+And there you are, same results as before but now we have the file in a channel, so we can add more.
 
 ### 3.3. Using a glob to match multiple files
 
-`channel.fromPath()` can take a glob pattern as an argument, which will match all files in the directory that match the pattern. Let's grab both of the pair of FASTQs associated with this patient.
+There are several ways we could load more files into the channel.
+Here we're going to show you how to use glob patterns, which are a convenient way to match and retrieve file and directory names based on wildcard characters.
+The process of matching these patterns is called "globbing" or "filename expansion".
 
-A glob pattern is a pattern that matches one or more characters in a string. The `*` wildcard is the most common glob pattern, which will match any character in it's place. To do this, we replace the full path with a `*` wildcard, which will match any character in it's place. In this case, we will replace the read number from `R1` to `R*`.
+!!! note
+
+    As noted previously, Nextflow supports globbing to manage input and output files in the majority of cases, except with HTTPS filepaths because HTTPS cannot list multiple files.
+
+Let's say we want to retrieve both files in a pair of files associated with a given patient, `patientA`:
+
+```console
+patientA_rep1_normal_R1_001.fastq.gz
+patientA_rep1_normal_R2_001.fastq.gz
+```
+
+Since the only difference between the filenames is the replicate number, _i.e._ the number after `R`, we can use the wildcard character `*` to stand in for the number as follows:
+
+```console
+patientA_rep1_normal_R*_001.fastq.gz
+```
+
+That is the glob pattern we need.
+
+Now all we need to do is update the file path in the channel factory to use that glob pattern as follows:
 
 === "After"
 
-    ```groovy title="file_operations.nf" linenums="3"
-        ch_fastq = channel.fromPath('data/patientA_rep1_normal_R*_001.fastq.gz')
+    ```groovy title="main.nf" linenums="7"
+      // Load files with channel.fromPath
+        ch_files = channel.fromPath('data/patientA_rep1_normal_R*_001.fastq.gz')
     ```
 
 === "Before"
 
-    ```groovy title="file_operations.nf" linenums="3"
-        ch_fastq = channel.fromPath('data/patientA_rep1_normal_R1_001.fastq.gz')
+    ```groovy title="main.nf" linenums="7"
+      // Load files with channel.fromPath
+        ch_files = channel.fromPath('data/patientA_rep1_normal_R1_001.fastq.gz')
     ```
 
-Run the workflow:
+Nextflow will automatically recognize that this is a glob pattern and will handle it appropriately.
 
-```bash title="Test glob pattern matching"
-nextflow run file_operations.nf
+Run the workflow to test that out:
+
+```bash
+nextflow run main.nf
 ```
 
-```console title="channel.fromPath Glob Output"
- N E X T F L O W   ~  version 25.04.3
+??? example "Output"
 
-Launching `file_operations.nf` [boring_sammet] DSL2 - revision: d2aa789c9a
+    ```console
+    N E X T F L O W   ~  version 25.04.3
 
-File object class: sun.nio.fs.UnixPath
-File name: patientA_rep1_normal_R1_001.fastq.gz
-Simple name: patientA_rep1_normal_R1_001
-Extension: gz
-Parent directory: /workspaces/training/side-quests/working_with_files/data
-File object class: sun.nio.fs.UnixPath
-File name: patientA_rep1_normal_R2_001.fastq.gz
-Simple name: patientA_rep1_normal_R2_001
-Extension: gz
-Parent directory: /workspaces/training/side-quests/working_with_files/data
-```
+    Launching `main.nf` [boring_sammet] DSL2 - revision: d2aa789c9a
 
-Using this method, we could grab as many or as few files as we want just by changing the glob pattern. If we made it more generous, we could grab all the files in the `data` directory, but we'll come back to that later.
+    executor >  local (2)
+    [3c/a65de5] COUNT_LINES (2) [100%] 2 of 2 ✔
+    File object class: sun.nio.fs.UnixPath
+    File name: patientA_rep1_normal_R1_001.fastq.gz
+    Simple name: patientA_rep1_normal_R1_001
+    Extension: gz
+    Parent directory: /workspaces/training/side-quests/working_with_files/data
+    File object class: sun.nio.fs.UnixPath
+    File name: patientA_rep1_normal_R2_001.fastq.gz
+    Simple name: patientA_rep1_normal_R2_001
+    Extension: gz
+    Parent directory: /workspaces/training/side-quests/working_with_files/data
+    Processing file: patientA_rep1_normal_R1_001.fastq.gz
+    40
+
+    Processing file: patientA_rep1_normal_R2_001.fastq.gz
+    40
+    ```
+
+As you can see, we now have two Path objects in our channel, which shows that Nextflow has done the filename expansion correctly, and has loaded and processed both files as expected.
+
+Using this method, we can retrieve as many or as few files as we want just by changing the glob pattern. If we made it more generous, for example by replacing all the variable parts of the filenames by `*` (_e.g._ `data/patient*_rep*_*_R*_001.fastq.gz`) we could grab all the example files in the `data` directory.
 
 ### Takeaway
 
@@ -810,24 +1008,44 @@ Using this method, we could grab as many or as few files as we want just by chan
 
 ---
 
-## 4. Extracting Patient Metadata from Filenames
+## 4. Extracting basic metadata from filenames
 
-One of the most common tasks in bioinformatics workflows is extracting metadata from filenames. This is usually feasible when working with sequencing data, where filenames often contain information about the sample, condition, replicate, and read number.
+In most scientific domains, it's very common to have metadata encoded in the names of the files that contain the data.
+For example, in bioinformatics, files containing sequencing data are often named in a way that encodes information about the sample, condition, replicate, and read number.
 
-This isn't ideal - metadata should never be embedded in filenames, but it's a common reality. We want to extract that metadata in a standardised manner so we can use it later.
+If the filenames are constructed according to a consistent convention, you can extract that metadata in a standardized manner and use it in the course of your analysis.
+That is a big 'if', of course, and you should be very cautious whenever you rely on filename structure; but the reality is that this approach is very widely used, so let's have a look at how it's done in Nextflow.
 
-Let's explore how to extract metadata from our FASTQ filenames using Nextflow's powerful data transformation capabilities.
+In the case of our example data, we know that the filenames include consistently structured metadata.
+For example, the filename `patientA_rep1_normal_R2_001` encodes the following:
 
-### 4.1. Basic Metadata Extraction
+- patient ID: `patientA`
+- replicate ID: `rep1`
+- sample type: `normal` (as opposed to `tumor`)
+- read set: `R1` (as opposed to `R2`)
 
-First, let's modify our workflow to extract metadata from the filenames.
+We're going to modify our workflow to retrieve this information in three steps:
 
-First we will grab the simpleName of the file, which includes the metadata, and return with the file. Then, we will separate out the metadata by underscores using tokenize. Finally, we will use string handling to remove additional text like "rep" which aren't required right now.
+1. Retrieve the `simpleName` of the file, which includes the metadata
+2. Separate the metadata using a method called `tokenize()`
+3. Use a map to organize the metadata
+
+!!! warning
+
+    You should never encode sensitive information into filenames, such as patient names or other identifying characteristics, as that can compromise patient privacy or other relevant security restrictions.
+
+### 4.1. Retrieve the `simpleName`
+
+The `simpleName` is a file attribute that corresponds to the filename stripped of its path and extension.
+
+Make the following edits to the workflow:
 
 === "After"
 
-    ```groovy title="file_operations.nf" linenums="4"
-        ch_fastq.map { myFile ->
+    ```groovy title="main.nf" linenums="7" hl_lines="3-6"
+        // Load files with channel.fromPath
+        ch_files = channel.fromPath('data/patientA_rep1_normal_R*_001.fastq.gz')
+        ch_files.map { myFile ->
             [ myFile.simpleName, myFile ]
         }
         .view()
@@ -835,8 +1053,10 @@ First we will grab the simpleName of the file, which includes the metadata, and 
 
 === "Before"
 
-    ```groovy title="file_operations.nf" linenums="4"
-        ch_fastq.view {
+    ```groovy title="main.nf" linenums="7" hl_lines="3-9"
+        // Load files with channel.fromPath
+        ch_files = channel.fromPath('data/patientA_rep1_normal_R*_001.fastq.gz')
+        ch_files.view {
             println "File object class: ${myFile.class}"
             println "File name: ${it.name}"
             println "Simple name: ${it.simpleName}"
@@ -845,65 +1065,108 @@ First we will grab the simpleName of the file, which includes the metadata, and 
         }
     ```
 
-```bash title="Test filename metadata extraction"
-nextflow run file_operations.nf
+This retrieves the `simpleName` and associates it with the full file object using a `map()` operation.
+
+Run the workflow to test that it works:
+
+```bash
+nextflow run main.nf
 ```
 
-```console title="Sample Metadata Output"
- N E X T F L O W   ~  version 25.04.3
+??? example "Output"
 
-Launching `file_operations.nf` [suspicious_mahavira] DSL2 - revision: ae8edc4e48
+    ```console hl_lines="7-8"
+    N E X T F L O W   ~  version 25.04.3
 
-[patientA_rep1_normal_R2_001, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]
-[patientA_rep1_normal_R1_001, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz]
-```
+    Launching `main.nf` [suspicious_mahavira] DSL2 - revision: ae8edc4e48
 
-Note how we have separated the patient `simpleName`, which includes the metadata, from the `file` object. This is useful if we want to use the patient metadata in a later process.
+    executor >  local (2)
+    [e9/55774b] COUNT_LINES (2) [100%] 2 of 2 ✔
+    [patientA_rep1_normal_R2_001, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]
+    [patientA_rep1_normal_R1_001, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz]
+    Processing file: patientA_rep1_normal_R1_001.fastq.gz
+    40
 
-### 4.2. Extracting Metadata from Filenames
+    Processing file: patientA_rep1_normal_R2_001.fastq.gz
+    40
+    ```
 
-Our metadata is embedded in the filename, but it's not in a standard format. We need to split up the filename into it's components which are separated by underscores.
+Each element in the channel is now a tuple containing the `simpleName` and the original file object.
 
-Groovy includes a method called `tokenize()` which is perfect for this task.
+### 4.2. Extract the metadata from the `simplename`
+
+At this point, the metadata we want is embedded in the `simplename`, but we can't access individual items directly.
+So we need to split the `simplename` into its components.
+Fortunately, those components are simply separated by underscores in the original filename, so we can apply a common Nextflow method called `tokenize()` that is perfect for this task.
+
+Make the following edits to the workflow:
 
 === "After"
 
-    ```groovy title="file_operations.nf" linenums="4" hl_lines="2"
-        ch_fastq.map { myFile ->
+    ```groovy title="main.nf" linenums="7" hl_lines="4"
+        // Load files with channel.fromPath
+        ch_files = channel.fromPath('data/patientA_rep1_normal_R*_001.fastq.gz')
+        ch_files.map { myFile ->
             [ myFile.simpleName.tokenize('_'), myFile ]
         }
     ```
 
 === "Before"
 
-    ```groovy title="file_operations.nf" linenums="4" hl_lines="2"
-        ch_fastq.map { myFile ->
+    ```groovy title="main.nf" linenums="7" hl_lines="4"
+        // Load files with channel.fromPath
+        ch_files = channel.fromPath('data/patientA_rep1_normal_R*_001.fastq.gz')
+        ch_files.map { myFile ->
             [ myFile.simpleName, myFile ]
         }
     ```
 
-Once we run this, we should see the patient metadata as a list of strings, and the Path object as the second element in the tuple.
+The `tokenize()` method will split the `simpleName` string wherever it finds underscores, and will return a list containing the substrings.
 
-```bash title="Test filename tokenization"
-nextflow run file_operations.nf
+Run the workflow:
+
+```bash
+nextflow run main.nf
 ```
 
-```console title="Sample Tokenize Output"
- N E X T F L O W   ~  version 25.04.3
+??? example "Output"
 
-Launching `file_operations.nf` [gigantic_gauss] DSL2 - revision: a39baabb57
+    ```console hl_lines="7-8"
+    N E X T F L O W   ~  version 25.04.3
 
-[[patientA, rep1, normal, R1, 001], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz]
-[[patientA, rep1, normal, R2, 001], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]
+    Launching `main.nf` [gigantic_gauss] DSL2 - revision: a39baabb57
+
+    executor >  local (2)
+    [e7/da2f4b] COUNT_LINES (2) [100%] 2 of 2 ✔
+    [[patientA, rep1, normal, R2, 001], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]
+    [[patientA, rep1, normal, R1, 001], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz]
+    Processing file: patientA_rep1_normal_R2_001.fastq.gz
+    40
+
+    Processing file: patientA_rep1_normal_R1_001.fastq.gz
+    40
+    ```
+
+Now the tuple for each element in our channel contains the list of metadata (_e.g._ `[patientA, rep1, normal, R1, 001]`) and the original file object.
+
+That's great!
+We've broken down our patient information from a single string into a list of strings.
+We can now handle each part of the patient information separately.
+
+### 4.3. Use a map to organize the metadata
+
+Our metadata is just a flat list at the moment.
+It's easy enough to use but difficult to read.
+
+```console
+[patientA, rep1, normal, R1, 001]
 ```
 
-Success! We've broken down our patient information from a single string into a list of strings. We can now handle each part of the patient information separately.
+What is the item at index 3? Can you tell without referring back to the original explanation of the metadata structure?
 
-### 4.3. Using a map to organise the data
+This is a great opportunity to use a key-value store, where every item has a set of keys and their associated values, so you can easily refer to each key to get the corresponding value.
 
-Our meta data is just a flat list at the moment. It's easy to use but hard to read. What is the item at index 3? Can you tell without checking?
-
-A [map](https://www.baeldung.com/groovy-maps) is Groovy's version of a key-value store. Every item has a key and a value and we can refer to each key to get the value. This will make our code much easier to read, i.e. we go from this:
+In our example, that means going from this organization:
 
 ```groovy
 data = [patientA, 1, normal, R1]
@@ -911,7 +1174,7 @@ data = [patientA, 1, normal, R1]
 println data[3]
 ```
 
-to this:
+To this one:
 
 ```groovy
 data = [id: patientA, replicate: 1, type: normal, readNum: 1]
@@ -919,19 +1182,24 @@ data = [id: patientA, replicate: 1, type: normal, readNum: 1]
 println data.readNum
 ```
 
+In Nextflow, that's called a [map](https://nextflow.io/docs/latest/script.html#maps).
+
 Let's convert our flat list into a map now.
+Make the following edits to the workflow:
 
 === "After"
 
-    ```groovy title="file_operations.nf" linenums="4" hl_lines="2-11"
-        ch_fastq.map { myFile ->
+    ```groovy title="main.nf" linenums="7" hl_lines="4-13"
+        // Load files with channel.fromPath
+        ch_files = channel.fromPath('data/patientA_rep1_normal_R*_001.fastq.gz')
+        ch_files.map { myFile ->
             def (patient, replicate, type, readNum) = myFile.simpleName.tokenize('_')
             [
               [
                 id: patient,
                 replicate: replicate.replace('rep', ''),
                 type: type,
-                readNum: readNum.replace('rep', ''),
+                readNum: readNum.replace('R', ''),
               ],
               myFile
             ]
@@ -940,30 +1208,45 @@ Let's convert our flat list into a map now.
 
 === "Before"
 
-    ```groovy title="file_operations.nf" linenums="4" hl_lines="2"
-        ch_fastq.map { myFile ->
+    ```groovy title="main.nf" linenums="7" hl_lines="4"
+        // Load files with channel.fromPath
+        ch_files = channel.fromPath('data/patientA_rep1_normal_R*_001.fastq.gz')
+        ch_files.map { myFile ->
             [ myFile.simpleName.tokenize('_'), myFile ]
         }
     ```
 
-Notice that we're simplifying a couple of the meta data items as we go (e.g. `readNum.replace('rep', '')`).
+<!-- TODO (future) Explain the map a little more? -->
 
-Now re-run the workflow:
+While we're at it, we also simplified a couple of the metadata strings using a string replacement method called `replace()` to remove some characters that are unnecessary (_e.g._ `readNum.replace('rep', '')` to keep only the number from the replicate IDs).
 
-```bash title="Test metadata map structure"
-nextflow run file_operations.nf
+Let's run the workflow again:
+
+```bash
+nextflow run main.nf
 ```
 
-```console title="Map Output"
- N E X T F L O W   ~  version 25.04.3
+??? example "Output"
 
-Launching `file_operations.nf` [infallible_swartz] DSL2 - revision: 7f4e68c0cb
+    ```console hl_lines="7-8"
+    N E X T F L O W   ~  version 25.04.3
 
-[[id:patientA, replicate:rep1, type:normal, readNum:R2], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]
-[[id:patientA, replicate:rep1, type:normal, readNum:R1], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz]
-```
+    Launching `main.nf` [infallible_swartz] DSL2 - revision: 7f4e68c0cb
 
-We have converted our flat list into a map, and now we can refer to each bit of sample data by name instead of by index. This makes our code easier to read and more maintainable.
+    executor >  local (2)
+    [1b/e7fb27] COUNT_LINES (1) [100%] 2 of 2 ✔
+    [[id:patientA, replicate:1, type:normal, readNum:2], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]
+    [[id:patientA, replicate:1, type:normal, readNum:1], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz]
+    Processing file: patientA_rep1_normal_R2_001.fastq.gz
+    40
+
+    Processing file: patientA_rep1_normal_R1_001.fastq.gz
+    40
+    ```
+
+Now the metadata is neatly labeled (_e.g._ `[id:patientA, replicate:1, type:normal, readNum:2]`) so it's a lot easier to tell what is what.
+
+It'll also be a lot easier to actually make use of elements of metadata in the workflow, and will make our code easier to read and more maintainable.
 
 ### Takeaway
 
@@ -973,30 +1256,72 @@ We have converted our flat list into a map, and now we can refer to each bit of 
 - The `.map()` operation transforms channel elements while preserving structure
 - Structured metadata (maps) makes code more readable and maintainable than positional lists
 
-Next up, we will look at how to handle paired-end reads.
+Next up, we will look at how to handle paired data files.
 
 ---
 
-## 5. Simplifying with channel.fromFilePairs
+## 5. Handling paired data files
 
-Nextflow provides a specialized channel factory method for working with paired files: `channel.fromFilePairs()`. This method automatically groups files that share a common prefix. This is particularly useful for paired-end sequencing data, where you have two files (e.g., R1 and R2) for each sample.
+Many experimental designs produce paired data files that benefit from being handled in an explicitly paired way.
+For example, in bioinformatics, sequencing data is often generated in the form of paired reads, meaning sequence strings that originate from the same fragment of DNA (often called 'forward' and 'reverse' because they are read from opposite ends).
 
-### 5.1. Basic Usage of fromFilePairs
+That is the case of our example data, where R1 and R2 refer to the two sets of reads.
 
-Complete your `file_operations.nf` file with the following (deleting the map operation):
+```console
+data/patientA_rep1_normal_R1_001.fastq.gz
+data/patientA_rep1_normal_R2_001.fastq.gz
+```
+
+Nextflow provides a specialized channel factory for working with paired files like this called `channel.fromFilePairs()`, which automatically groups files based on a shared naming pattern. That allows you to associate the paired files more tightly with less effort.
+
+We're going to modify our workflow to take advantage of this.
+It's going to take two steps:
+
+1. Switch the channel factory to `channel.fromFilePairs()`
+2. Extract and map the metadata
+
+### 5.1. Switch the channel factory to `channel.fromFilePairs()`
+
+To use `channel.fromFilePairs`, we need to specify the pattern that Nextflow should use to identify the two members in a pair.
+
+Going back to our example data, we can formalize the naming pattern as follows:
+
+```console
+data/patientA_rep1_normal_R{1,2}_001.fastq.gz
+```
+
+This is similar to the glob pattern we used earlier, except this specifically enumerates the substrings (either `1` or `2` coming right after the R) that identify the two members of the pair.
+
+Let's update the workflow `main.nf` accordingly:
 
 === "After"
 
-    ```groovy title="file_operations.nf" linenums="3" hl_lines="1"
-        ch_fastq = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
-            .view()
+    ```groovy title="main.nf" linenums="7" hl_lines="1-2"
+        // Load files with channel.fromFilePairs
+        ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
+        /* Comment out the mapping for now, we'll come back to it!
+        ch_files.map { myFile ->
+            def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
+            [
+                [
+                    id: sample,
+                    replicate: replicate.replace('rep', ''),
+                    type: type,
+                    readNum: readNum,
+                ],
+                myFile
+            ]
+        }
+        */
+        .view()
     ```
 
 === "Before"
 
-    ```groovy title="file_operations.nf" linenums="3" hl_lines="1-13"
-        ch_fastq = channel.fromPath('data/patientA_rep1_normal_R*_001.fastq.gz')
-        ch_fastq.map { myFile ->
+    ```groovy title="main.nf" linenums="7" hl_lines="1-2"
+        // Load files with channel.fromFilePairs
+        ch_files = channel.fromPath('data/patientA_rep1_normal_R*_001.fastq.gz')
+        ch_files.map { myFile ->
             def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
             [
                 [
@@ -1011,41 +1336,118 @@ Complete your `file_operations.nf` file with the following (deleting the map ope
         .view()
     ```
 
-Run the workflow:
+We've switched the channel factory and adapted the file matching pattern, and while we were at it, we commented out the map operation.
+We'll add that back in later, with a few modifications.
 
-```bash title="Test channel.fromFilePairs"
-nextflow run file_operations.nf
+Run the workflow to test it:
+
+```bash
+nextflow run main.nf
 ```
 
-The output will show the paired files grouped together:
+??? example "Output"
 
-```console title="channel.fromFilePairs Output"
- N E X T F L O W   ~  version 25.04.3
+    ```console hl_lines="7-8"
+     N E X T F L O W   ~  version 25.04.3
 
-Launching `file_operations.nf` [chaotic_cuvier] DSL2 - revision: 472265a440
+    Launching `main.nf` [angry_koch] DSL2 - revision: 44fdf66105
 
-[patientA_rep1_normal_R, [/workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]]
+    [-        ] COUNT_LINES -
+    [-        ] COUNT_LINES -
+    [patientA_rep1_normal_R, [/workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]]
+    ERROR ~ Error executing process > 'COUNT_LINES (1)'
+
+    Caused by:
+      Not a valid path value: 'patientA_rep1_normal_R'
+
+
+
+    Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
+
+    -- Check '.nextflow.log' file for details
+    ```
+
+Uh-oh, this time the run failed!
+
+The relevant bit of the error message is here:
+
+```console
+Not a valid path value: 'patientA_rep1_normal_R'
 ```
 
-Note the difference in data structure. Rather than being a list of results, we have a single result in the format `id, [ fastq1, fastq2 ]`. Nextflow has done the hard work of extracting the patient name by examining the shared prefix and using it as a patient id.
+That is because we've changed the channel factory.
+Until now, the original input channel only contained the file paths.
+All the metadata manipulation we've been doing didn't actually affect the channel contents.
 
-### 5.2. Extract metadata from file pairs
+Now that we're using the `.fromFilePairs` channel factory, the contents of the resulting channel are different.
+We see only one channel element, composed of a tuple containing two items: the part of the `simpleName` shared by the two files, which serves as an identifier, and a tuple containing the two file objects, in the format `id, [ file1, file2 ]`.
 
-We still need the metadata. Our `map` operation from before won't work because it doesn't match the data structure, but we can modify it to work. We already have access to the patient name in the `id` variable, so we can use that to extract the metadata without grabbing the `simpleName` from the Path object like before.
+That's great, because Nextflow has done the hard work of extracting the patient name by examining the shared prefix and using it as a patient identifier.
+
+However, it does break our current workflow.
+If we wanted to still run `COUNT_LINES` the same way without changing the process, we would have to apply a mapping operation to extract the file paths.
+But we're not going to do that, because our ultimate goal is to use a different process, `ANALYZE_READS`, that handles file pairs appropriately.
+
+So let's simply comment out (or delete) the call to `COUNT_LINES` and move on.
 
 === "After"
 
-    ```groovy title="file_operations.nf" linenums="3" hl_lines="2-13"
-        ch_fastq = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
-        ch_fastq.map { id, fastqs ->
-            def (sample, replicate, type, readNum) = id.tokenize('_')
+    ```groovy title="main.nf" linenums="26" hl_lines="2"
+        // Count the lines in the file
+        // COUNT_LINES(ch_files)
+    ```
+
+=== "Before"
+
+    ```groovy title="main.nf" linenums="26" hl_lines="2"
+        // Count the lines in the file
+        COUNT_LINES(ch_files)
+    ```
+
+You can also comment out or delete the `COUNT_LINES` include statement, but that will have no functional effect.
+
+Now let's run the workflow again:
+
+```bash
+nextflow run main.nf
+```
+
+??? example "Output"
+
+    ```console hl_lines="7-8"
+     N E X T F L O W   ~  version 25.04.3
+
+    Launching `main.nf` [fabulous_davinci] DSL2 - revision: 22b53268dc
+
+    [patientA_rep1_normal_R, [/workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]]
+    ```
+
+Yay, this time the workflow succeeds!
+
+However, we still need to get the rest of the metadata out of the `id` field.
+
+### 5.2. Extract and organize metadata from file pairs
+
+Our `map` operation from before won't work because it doesn't match the data structure, but we can modify it to work.
+
+We already have access to the actual patient identifier in the string that `fromFilePairs()` used as an identifier, so we can use that to extract the metadata without getting the `simpleName` from the Path object like we did before.
+
+Uncomment the map operation in the workflow and make the following edits:
+
+=== "After"
+
+    ```groovy title="main.nf" linenums="7" hl_lines="3-4 9 11 13"
+        // Load files with channel.fromFilePairs
+        ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
+        ch_files.map { id, files ->
+            def (sample, replicate, type) = id.tokenize('_')
             [
                 [
                     id: sample,
                     replicate: replicate.replace('rep', ''),
                     type: type
                 ],
-                fastqs
+                files
             ]
         }
         .view()
@@ -1053,27 +1455,53 @@ We still need the metadata. Our `map` operation from before won't work because i
 
 === "Before"
 
-    ```groovy title="file_operations.nf" linenums="2" hl_lines="3-11"
-        ch_fastq = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
-            .view()
+    ```groovy title="main.nf" linenums="7" hl_lines="3-5 11 13"
+        // Load files with channel.fromFilePairs
+        ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
+        /* Comment out the mapping for now, we'll come back to it!
+        ch_files.map { myFile ->
+            def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
+            [
+                [
+                    id: sample,
+                    replicate: replicate.replace('rep', ''),
+                    type: type,
+                    readNum: readNum,
+                ],
+                myFile
+            ]
+        }
+        */
+        .view()
     ```
 
-```bash title="Test file pairs metadata extraction"
-nextflow run file_operations.nf
+This time the map starts from `id, files` instead of just `myFile`, and `tokenize()` is applied to `id` instead of to `myFile.simpleName`.
+
+Notice also that we've dropped `readNum` from the `tokenize()` line; any substrings that we don't specifically name (starting from the left) will be silently dropped.
+We can do this because the paired files are now tightly associated, so we no longer need `readNum` in the metadata map.
+
+Let's run the workflow:
+
+```bash
+nextflow run main.nf
 ```
 
-```console title="File Pairs Output parsed"
+??? example "Output"
 
- N E X T F L O W   ~  version 25.04.3
+    ```console
 
-Launching `file_operations.nf` [prickly_stonebraker] DSL2 - revision: f62ab10a3f
+    N E X T F L O W   ~  version 25.04.3
 
-[[id:patientA, replicate:1, type:normal], [/workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]]
-```
+    Launching `main.nf` [prickly_stonebraker] DSL2 - revision: f62ab10a3f
 
-Notice, that this time we don't have a `readNum`. Because read 1 and read 2 are kept together, we do not need to track this in the meta data.
+    [[id:patientA, replicate:1, type:normal], [/workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]]
+    ```
 
-Well done! We have grabbed the metadata from the filenames and used them as values in the tuple.
+And there it is: we have the metadata map (`[id:patientA, replicate:1, type:normal]`) in the first position of the output tuple, followed by the tuple of paired files, as intended.
+
+Of course, this will only pick up and process that specific pair of files.
+If you want to experiment with processing multiple pairs, you can try adding wildcards into the input pattern and see what happens.
+Foe example, try using `data/patientA_rep1_*_R{1,2}_001.fastq.gz`
 
 ### Takeaway
 
@@ -1084,155 +1512,254 @@ Well done! We have grabbed the metadata from the filenames and used them as valu
 
 ---
 
-## 6. Using File Operations in Processes
+## 6. Using file operations in processes
 
-Now let's put all this together in a simple process to reinforce how to use file operations in a Nextflow process.
+Now let's put all this together in a simple process to reinforce how to use file operations inside a Nextflow process.
 
-### 6.1. Create the process
+We provide you with a pre-written process module called `ANALYZE_READS` that takes a tuple of metadata and a pair of input files and analyzes them.
+We could imagine this is doing sequence alignment, or variant calling or any other step that makes sense for this data type.
 
-We'll keep it simple and make a process called `ANALYZE_READS` that takes in a tuple of metadata and a pair of fastq files and analyses them. We could imagine this is an alignment, or variant calling or any other step.
+Let's get started.
 
-Add the following to the top of your `file_operations.nf` file:
+### 6.1. Import the process and examine the code
+
+To use this process in the workflow, we just need to add a module include statement before the workflow block.
+
+Make the following edit to the workflow:
 
 === "After"
 
-    ```groovy title="file_operations.nf - process example" linenums="1" hl_lines="1-24"
-    process ANALYZE_READS {
-        tag "${meta.id}"
+    ```groovy title="main.nf" linenums="1" hl_lines="3"
+    #!/usr/bin/env nextflow
 
-        publishDir "results/${meta.id}", mode: 'copy'
-
-        input:
-        tuple val(meta), path(fastqs)
-
-        output:
-        tuple val(meta.id), path("${meta.id}_stats.txt")
-
-        script:
-        """
-        echo "Sample metadata: ${meta.id}" > ${meta.id}_stats.txt
-        echo "Replicate: ${meta.replicate}" >> ${meta.id}_stats.txt
-        echo "Type: ${meta.type}" >> ${meta.id}_stats.txt
-        echo "Read 1: ${fastqs[0]}" >> ${meta.id}_stats.txt
-        echo "Read 2: ${fastqs[1]}" >> ${meta.id}_stats.txt
-        echo "Read 1 size: \$(gunzip -dc ${fastqs[0]} | wc -l | awk '{print \$1/4}') reads" >> ${meta.id}_stats.txt
-        echo "Read 2 size: \$(gunzip -dc ${fastqs[1]} | wc -l | awk '{print \$1/4}') reads" >> ${meta.id}_stats.txt
-        """
-    }
+    include { ANALYZE_READS } from './modules/analyze_reads.nf'
 
     workflow {
     ```
 
 === "Before"
 
-    ```groovy title="file_operations.nf" linenums="1" hl_lines="1"
+    ```groovy title="main.nf" linenums="1"
+    #!/usr/bin/env nextflow
+
     workflow {
     ```
+
+You can open the module file to examine its code:
+
+```groovy title="modules/analyze_reads.nf - process example" linenums="1"
+#!/usr/bin/env nextflow
+
+process ANALYZE_READS {
+    tag "${meta.id}"
+
+    publishDir "results/${meta.id}", mode: 'copy'
+
+    input:
+    tuple val(meta), path(files)
+
+    output:
+    tuple val(meta.id), path("${meta.id}_stats.txt")
+
+    script:
+    """
+    echo "Sample metadata: ${meta.id}" > ${meta.id}_stats.txt
+    echo "Replicate: ${meta.replicate}" >> ${meta.id}_stats.txt
+    echo "Type: ${meta.type}" >> ${meta.id}_stats.txt
+    echo "Read 1: ${files[0]}" >> ${meta.id}_stats.txt
+    echo "Read 2: ${files[1]}" >> ${meta.id}_stats.txt
+    echo "Read 1 size: \$(gunzip -dc ${files[0]} | wc -l | awk '{print \$1/4}') reads" >> ${meta.id}_stats.txt
+    echo "Read 2 size: \$(gunzip -dc ${files[1]} | wc -l | awk '{print \$1/4}') reads" >> ${meta.id}_stats.txt
+    """
+}
+```
 
 !!! note
 
-    We are calling our map '`meta`'. For a more in-depth introduction to meta maps, see [Working with metadata](./metadata.md).
+    We are calling our metadata map `meta` by convention.
+    For a deeper dive into meta maps, see the [Metadata and meta maps](./metadata.md) side quest.
 
-### 6.2. Implement the process in the workflow
+### 6.2. Call the process in the workflow
 
-Then implement the process in the workflow:
+Now that the process is available to the workflow, we can add a call to the `ANALYZE_READS` process to run it.
+
+To run it on our example data, we'll need to do two things:
+
+1. Give a name to the remapped channel
+2. Add a call to the process
+
+#### 6.2.1. Name the remapped input channel
+
+We previously applied the mapping manipulations directly to the input channel.
+In order to feed the remapped contents to the `ANALYZE_READS` process (and do so in a way that is clear and easy to read) we want to create a new channel named `ch_samples`.
+
+We can do that using the [`set`](https://www.nextflow.io/docs/latest/reference/operator.html#set) operator.
+
+In the main workflow, replace the `.view()` operator with `.set { ch_samples }`, and add a line testing that we can refer to the channel by name.
 
 === "After"
 
-    ```groovy title="file_operations.nf" linenums="26" hl_lines="2 13"
-        ch_fastq = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
-        ch_samples = ch_fastq.map { id, fastqs ->
-            def (sample, replicate, type, readNum) = id.tokenize('_')
-            [
-                [
-                    id: sample,
-                    replicate: replicate.replace('rep', ''),
-                    type: type
-                ],
-                fastqs
-            ]
+    ```groovy title="main.nf" linenums="7" hl_lines="21 23-24"
+        // Load files with channel.fromFilePairs
+        ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
+        ch_files.map { id,  files ->
+           def (sample, replicate, type, readNum) = id.tokenize('_')
+           [
+               [
+                   id: sample,
+                   replicate: replicate.replace('rep', ''),
+                   type: type
+               ],
+               files
+           ]
         }
-        ANALYZE_READS(ch_samples)
-    }
+            .set { ch_samples }
+
+        // Temporary: peek into ch_samples
+        ch_samples.view()
     ```
 
 === "Before"
 
-    ```groovy title="file_operations.nf" linenums="26" hl_lines="2 13"
-        ch_fastq = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
-        ch_fastq.map { id, fastqs ->
-            def (sample, replicate, type, readNum) = id.tokenize('_')
-            [
-                [
-                    id: sample,
-                    replicate: replicate.replace('rep', ''),
-                    type: type
-                ],
-                fastqs
-            ]
+    ```groovy title="main.nf" linenums="7" hl_lines="21"
+        // Load files with channel.fromFilePairs
+        ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
+        ch_files.map { id,  files ->
+           def (sample, replicate, type, readNum) = id.tokenize('_')
+           [
+               [
+                   id: sample,
+                   replicate: replicate.replace('rep', ''),
+                   type: type
+               ],
+               files
+           ]
         }
         .view()
     }
     ```
 
-```bash title="Test ANALYZE_READS process"
-nextflow run file_operations.nf
+Let's run this:
+
+```bash
+nextflow run main.nf
 ```
 
-```console title="ANALYZE_READS Output"
- N E X T F L O W   ~  version 25.04.3
+??? example "Output"
 
-Launching `./file_operations.nf` [shrivelled_cori] DSL2 - revision: b546a31769
+    ```console
+     N E X T F L O W   ~  version 25.04.3
 
-executor >  local (1)
-[b5/110360] process > ANALYZE_READS (patientA) [100%] 1 of 1 ✔
-```
+    Launching `main.nf` [goofy_kirch] DSL2 - revision: 3313283e42
 
-We should see the following files in the `results/patientA` directory:
+    [[id:patientA, replicate:1, type:normal], [/workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]]
+    ```
 
-```console title="Results Directory"
-> tree results/patientA
-results/patientA
-└── patientA_stats.txt
-```
+This confirms we can now refer to the channel by name.
 
-The process took our inputs and created a new file with the patient metadata. Based on what you learned in hello-nextflow, what occurred in the working directory?
+#### 6.2.2. Call the process on the data
 
-### 6.3. Include many more patients
+Now let's actually call the `ANALYZE_READS` process on the `ch_samples` channel.
 
-Remember channel.fromPath() accepts a _glob_ as input, which means it can accept any number of files that match the pattern. Therefore if we want to include all the patients we can just modify the input string to include more patients.
+In the main workflow, make the following code changes:
 
 === "After"
 
-    ```groovy title="file_operations.nf" linenums="26"
-        ch_fastq = channel.fromFilePairs('data/*_R{1,2}_001.fastq.gz')
+    ```groovy title="main.nf" linenums="23"
+        // Temporary: peek into ch_samples
+        ch_samples.view()
     ```
 
 === "Before"
 
-    ```groovy title="file_operations.nf" linenums="26"
-        ch_fastq = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
+    ```groovy title="main.nf" linenums="23"
+        // Run the analysis
+        ANALYZE_READS(ch_samples)
     ```
 
-Run the pipeline now and see all the results:
+Let's run this:
 
-```bash title="Test processing multiple samples"
-nextflow run file_operations.nf
+```bash
+nextflow run main.nf
 ```
 
-```console title="ANALYZE_READS Multiple Samples"
- N E X T F L O W   ~  version 25.04.3
+??? example "Output"
 
-Launching `./file_operations.nf` [big_stonebraker] DSL2 - revision: f7f9b8a76c
+    ```console
+    N E X T F L O W   ~  version 25.04.3
 
-executor >  local (8)
-[d5/441891] process > ANALYZE_READS (patientC) [100%] 8 of 8 ✔
+    Launching `./main.nf` [shrivelled_cori] DSL2 - revision: b546a31769
+
+    executor >  local (1)
+    [b5/110360] process > ANALYZE_READS (patientA) [100%] 1 of 1 ✔
+    ```
+
+This process is set up to publish its outputs to a `results` directory, so have a look in there.
+
+```console title="Directory contents"
+results
+└── patientA
+    └── patientA_stats.txt
 ```
 
-Check the results directory now:
+```txt title="patientA_stats.txt"
+Sample metadata: patientA
+Replicate: 1
+Type: normal
+Read 1: patientA_rep1_normal_R1_001.fastq.gz
+Read 2: patientA_rep1_normal_R2_001.fastq.gz
+Read 1 size: 10 reads
+Read 2 size: 10 reads
+```
 
-```console title="Results Directory"
-> tree results
+The process took our inputs and created a new file containing the patient metadata, as designed.
+Splendid!
+
+### 6.3. Include many more patients
+
+Of course, this is just processing a single pair of files for a single patient, which is not exactly the kind of high throughput you're hoping to get with Nextflow.
+You'll probably want to process a lot more data at a time.
+
+Remember `channel.fromPath()` accepts a _glob_ as input, which means it can accept any number of files that match the pattern.
+Therefore if we want to include all the patients, we can simply modify the input string to include more patients, as noted in passing earlier.
+
+Let's pretend we want to be as greedy as possible.
+Make the following edits to the workflow:
+
+=== "After"
+
+    ```groovy title="main.nf" linenums="7" hl_lines="2"
+        // Load files with channel.fromFilePairs
+        ch_files = channel.fromFilePairs('data/*_R{1,2}_001.fastq.gz')
+    ```
+
+=== "Before"
+
+    ```groovy title="main.nf" linenums="7" hl_lines="2"
+        // Load files with channel.fromFilePairs
+        ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
+    ```
+
+Run the pipeline again:
+
+```bash
+nextflow run main.nf
+```
+
+??? example "Output"
+
+    ```console
+    N E X T F L O W   ~  version 25.04.3
+
+    Launching `./main.nf` [big_stonebraker] DSL2 - revision: f7f9b8a76c
+
+    executor >  local (8)
+    [d5/441891] process > ANALYZE_READS (patientC) [100%] 8 of 8 ✔
+    ```
+
+The results directory should now contain results for all the available data.
+
+```console title="Directory contents"
 results
 ├── patientA
 │   └── patientA_stats.txt
@@ -1242,48 +1769,53 @@ results
     └── patientC_stats.txt
 ```
 
-See how we have analyzed all the patients in one go!
+Success! We have analyzed all the patients in one go! Right?
 
-Wait, we have a problem. We have 2 replicates for patientA, but only 1 output file! We are overwriting the output file each time.
+Maybe not.
+If you look more closely, we have a problem: we have two replicates for patientA, but only one output file!
+We are overwriting the output file each time.
 
 ### 6.4. Make the published files unique
 
-Since we have access to the patient metadata, we can use it to make the output files unique.
+Since we have access to the patient metadata, we can use it to make the published files unique by including differentiating metadata, either in the directory structure or in the filenames themselves.
+
+Make the following change to the workflow:
 
 === "After"
 
-    ```groovy title="file_operations.nf" linenums="4"
+    ```groovy title="modules/analyze_reads.nf" linenums="6"
         publishDir "results/${meta.type}/${meta.id}/${meta.replicate}", mode: 'copy'
     ```
 
 === "Before"
 
-    ```groovy title="file_operations.nf" linenums="4"
+    ```groovy title="modules/analyze_reads.nf" linenums="6"
         publishDir "results/${id}", mode: 'copy'
     ```
 
-We have grabbed the metadata from the patients and used it to construct an output directory for each patient.
+Here we show the option of using additional directory levels to account for sample types and replicates, but you could experiment with doing it at the filename level as well.
 
-Run the pipeline now and see all the results. Remove the results directory first to give yourself a clean workspace:
+Now run the pipeline one more time, but be sure to remove the results directory first to give yourself a clean workspace:
 
-```bash title="Test unique published files"
+```bash
 rm -r results
-nextflow run file_operations.nf
+nextflow run main.nf
 ```
 
-```console title="Results Directory"
- N E X T F L O W   ~  version 25.04.3
+??? example "Output"
 
-Launching `./file_operations.nf` [insane_swartz] DSL2 - revision: fff18abe6d
+    ```console
+    N E X T F L O W   ~  version 25.04.3
 
-executor >  local (8)
-[e3/449081] process > ANALYZE_READS (patientC) [100%] 8 of 8 ✔
-```
+    Launching `./main.nf` [insane_swartz] DSL2 - revision: fff18abe6d
+
+    executor >  local (8)
+    [e3/449081] process > ANALYZE_READS (patientC) [100%] 8 of 8 ✔
+    ```
 
 Check the results directory now:
 
-```console title="Results Directory"
-> tree results
+```console title="Directory contents"
 results/
 ├── normal
 │   ├── patientA
@@ -1311,13 +1843,16 @@ results/
             └── patientC_stats.txt
 ```
 
-See how using patient metadata as values gives us powerful flexibility in our pipeline. By propagating metadata alongside our data in tuples, we can:
+And there it is, all our metadata, neatly organized. That's success!
+
+There's a lot more you can do once you have your metadata loaded into a map like this:
 
 1. Create organized output directories based on patient attributes
 2. Make decisions in processes based on patient properties
 3. Split, join, and recombine data based on metadata values
 
-This pattern of keeping metadata explicit and attached to the data (rather than encoded in filenames) is a core best practice in Nextflow that enables building robust, maintainable bioinformatics workflows. Learn more about this in [Working with metadata](./metadata.md)
+This pattern of keeping metadata explicit and attached to the data (rather than encoded in filenames) is a core best practice in Nextflow that enables building robust, maintainable analysis workflows.
+You can learn more about this in the [Metadata and meta maps](./metadata.md) side quest.
 
 ### Takeaway
 
@@ -1393,18 +1928,18 @@ Applying these techniques in your own work will enable you to build more efficie
     myFile = file('gs://path/to/file.txt')
     ```
 
-3.  **Reading files using the `fromPath()` channel factory:** We created channels from file patterns with `channel.fromPath()` and viewed their file attributes, including object types.
+3.  **Loading files using the `fromPath()` channel factory:** We created channels from file patterns with `channel.fromPath()` and viewed their file attributes, including object types.
 
     - Create a channel from a file pattern
 
     ```groovy
-    ch_fastq = channel.fromPath('data/*.fastq.gz')
+     ch_files = channel.fromPath('data/*.fastq.gz')
     ```
 
     - Get file attributes
 
     ```groovy
-    ch_fastq.view { myFile ->
+     ch_files.view { myFile ->
         println "File object class: ${myFile.class}"
         println "File name: ${myFile.name}"
         println "Simple name: ${myFile.simpleName}"
@@ -1434,8 +1969,8 @@ Applying these techniques in your own work will enable you to build more efficie
     - Associate a meta map with the process inputs
 
     ```groovy
-    ch_fastq = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
-    ch_samples = ch_fastq.map { id, fastqs ->
+    ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
+    ch_files.map { id,  files ->
         def (sample, replicate, type, readNum) = id.tokenize('_')
         [
             [
@@ -1443,9 +1978,11 @@ Applying these techniques in your own work will enable you to build more efficie
                 replicate: replicate.replace('rep', ''),
                 type: type
             ],
-            fastqs
+             files
         ]
     }
+        .set { ch_samples }
+
     ANALYZE_READS(ch_samples)
     ```
 
@@ -1458,8 +1995,8 @@ Applying these techniques in your own work will enable you to build more efficie
 ### Additional resources
 
 - [Nextflow Documentation: Working with Files](https://www.nextflow.io/docs/latest/working-with-files.html)
-- [channel.fromPath](https://www.nextflow.io/docs/latest/channel.html#frompath)
-- [channel.fromFilePairs](https://www.nextflow.io/docs/latest/channel.html#fromfilepairs)
+- [channel.fromPath](https://www.nextflow.io/docs/latest/reference/channel.html#frompath)
+- [channel.fromFilePairs](https://www.nextflow.io/docs/latest/reference/channel.html#fromfilepairs)
 
 ---
 
