@@ -39,7 +39,7 @@ Welcome to the Nextflow community training portal!
 
         If you'd like to do the training in your own environment, please see the setup instructions for local installations in the [Environment Setup](./envsetup/index.md) mini-course.
 
-    ??? tip "Training events"
+    ??? learning "Training events"
 
         If you'd prefer to take Nextflow training as part of a structured event, there are many opportunities to do so. We recommend checking out the following options:
 
@@ -48,11 +48,11 @@ Welcome to the Nextflow community training portal!
         - **[Nextflow Ambassadors]()** organize events for their local community
         - **[nf-core events](https://nf-co.re/events)** include community hackathons
 
-    <!-- TODO: add this when ready
-    ??? people "Information for trainers"
+<!-- TODO: add this above when ready (with indentation)
+??? people "Information for trainers"
 
-        Blurb about train the trainer activities and resources
-    -->
+    Blurb about train the trainer activities and resources
+-->
 
 </div>
 

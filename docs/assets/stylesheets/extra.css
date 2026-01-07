@@ -244,15 +244,15 @@ h3 .enumerate-headings-plugin {
 /* learning */
 .md-typeset .admonition.learning,
 .md-typeset details.learning {
-  border-color: rgb(43, 155, 70);
+  border-color: #448aff;
 }
 .md-typeset .learning > .admonition-title,
 .md-typeset .learning > summary {
-  background-color: rgba(43, 155, 70, 0.1);
+  background-color: var(--md-admonition-bg-color);
 }
 .md-typeset .learning > .admonition-title::before,
 .md-typeset .learning > summary::before {
-  background-color: rgb(43, 155, 70);
+  background-color: #448aff;
   -webkit-mask-image: var(--md-admonition-icon--learning);
   mask-image: var(--md-admonition-icon--learning);
 }
@@ -260,15 +260,15 @@ h3 .enumerate-headings-plugin {
 /* people */
 .md-typeset .admonition.people,
 .md-typeset details.people {
-  border-color: rgb(43, 155, 70);
+  border-color: #6e59d9;
 }
 .md-typeset .people > .admonition-title,
 .md-typeset .people > summary {
-  background-color: rgba(43, 155, 70, 0.1);
+  background-color: rgba(186, 125, 236, 0.1);
 }
 .md-typeset .people > .admonition-title::before,
 .md-typeset .people > summary::before {
-  background-color: rgb(43, 155, 70);
+  background-color: #6e59d9;
   -webkit-mask-image: var(--md-admonition-icon--people);
   mask-image: var(--md-admonition-icon--people);
 }
