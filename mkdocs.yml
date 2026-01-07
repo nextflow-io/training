@@ -5,11 +5,6 @@ repo_name: nextflow-io/training
 
 nav:
   - Home: index.md
-  - Environment setup:
-      - envsetup/index.md
-      - envsetup/01_setup.md
-      - envsetup/02_local.md
-      - envsetup/03_devcontainer.md
   - Nextflow Run:
       - nextflow_run/index.md
       - nextflow_run/00_orientation.md
@@ -108,7 +103,12 @@ nav:
           - archive/advanced/configuration.md
           - archive/advanced/summary.md
           - archive/advanced/support.md
-  - Help: help.md
+  - Help:
+      - help.md
+      - envsetup/index.md
+      - envsetup/01_setup.md
+      - envsetup/02_local.md
+      - envsetup/03_devcontainer.md
 
 theme:
   name: material
