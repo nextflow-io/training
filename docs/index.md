@@ -22,6 +22,8 @@ hide:
 
     Need this to be long
 
+=== "Other stuff"
+
 !!! warning "Version compatibility"
 
     Stuff about versions
