@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Plugin-Id: nf-greeting
+Plugin-Version: 0.1.0
+Plugin-Class: nextflow.greeting.GreetingPlugin
+Plugin-Provider: training
