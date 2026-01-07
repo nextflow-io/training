@@ -61,20 +61,22 @@ code .
 
 You'll find a main workflow file and a `data` directory containing a datasheet and a handful of data files.
 
-```console title="Directory contents"
-.
-├── data
-│   ├── bonjour.txt
-│   ├── ciao.txt
-│   ├── guten_tag.txt
-│   ├── hallo.txt
-│   ├── hello.txt
-│   ├── hola.txt
-│   ├── salut.txt
-│   └── datasheet.csv
-├── main.nf
-└── nextflow.config
-```
+??? abstract "Directory contents"
+
+    ```console
+    .
+    ├── data
+    │   ├── bonjour.txt
+    │   ├── ciao.txt
+    │   ├── guten_tag.txt
+    │   ├── hallo.txt
+    │   ├── hello.txt
+    │   ├── hola.txt
+    │   ├── salut.txt
+    │   └── datasheet.csv
+    ├── main.nf
+    └── nextflow.config
+    ```
 
 The workflow in the `main.nf` file is a stub that you will gradually expand into a fully functioning workflow.
 
@@ -178,7 +180,7 @@ Run the workflow:
 nextflow run main.nf
 ```
 
-??? success "Output"
+??? success "Command output"
 
     ```console
      N E X T F L O W   ~  version 25.10.2
@@ -234,8 +236,6 @@ For example, we could access the file ID with `id` or the txt file path with `re
     And here's what you can expect to see in the output:
 
     ```console title="Output"
-    Nextflow 25.10.0 is available - Please consider updating your version to it
-
      N E X T F L O W   ~  version 25.10.2
 
     Launching `map_demo.nf` [cheesy_plateau] DSL2 - revision: fae5b8496e
@@ -1168,25 +1168,25 @@ There is another operator called `multiMap()` that allows us to streamline this 
 
     === "After"
 
-    ```groovy title="main.nf" linenums="34"
-        // Run cowpy to generate ASCII art
-        COWPY(
-            ch_languages.multiMap { meta, file ->
-                file: file
-                character: meta.character
-            }
-        )
-    ```
+        ```groovy title="main.nf" linenums="34"
+            // Run cowpy to generate ASCII art
+            COWPY(
+                ch_languages.multiMap { meta, file ->
+                    file: file
+                    character: meta.character
+                }
+            )
+        ```
 
     === "Before"
 
-    ```groovy title="main.nf" linenums="34"
-        // Run cowpy to generate ASCII art
-        COWPY(
-            ch_languages.map { meta, file -> file },
-            ch_languages.map { meta, file -> meta.character }
-        )
-    ```
+        ```groovy title="main.nf" linenums="34"
+            // Run cowpy to generate ASCII art
+            COWPY(
+                ch_languages.map { meta, file -> file },
+                ch_languages.map { meta, file -> meta.character }
+            )
+        ```
 
     This produces exactly the same result.
 
