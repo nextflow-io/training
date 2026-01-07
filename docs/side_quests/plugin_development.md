@@ -5,10 +5,11 @@ In this side quest, you'll build a simple plugin from scratch, learning the fund
 
 ### Learning goals
 
-In this side quest, you'll learn how to create, build, and use a custom Nextflow plugin.
+In this side quest, you'll learn how to use existing Nextflow plugins and create your own custom plugin.
 
 By the end of this side quest, you'll be able to:
 
+- Install and use existing plugins in your workflows
 - Understand the Nextflow plugin architecture
 - Create a new plugin project
 - Implement custom functions using the `@Function` annotation
@@ -82,9 +83,119 @@ We'll create a plugin called `nf-greeting` that provides functions to manipulate
 
 ---
 
-## 1. Plugin architecture
+## 1. Using existing plugins
 
-### 1.1. How plugins extend Nextflow
+Before diving into plugin development, let's understand how to use plugins that others have created.
+Nextflow has a growing ecosystem of plugins that extend its functionality.
+
+### 1.1. Installing plugins
+
+Plugins are declared in your `nextflow.config` file using the `plugins {}` block:
+
+```groovy title="nextflow.config"
+plugins {
+    id 'nf-schema@2.1.1'
+}
+```
+
+Key points:
+
+- Use the `id` keyword followed by the plugin name
+- Specify a version with `@version` (recommended for reproducibility)
+- Nextflow automatically downloads plugins from the plugin registry
+
+### 1.2. Importing plugin functions
+
+Once a plugin is installed, you can import its functions using the familiar `include` syntax with a special `plugin/` prefix:
+
+```groovy title="main.nf"
+include { samplesheetToList } from 'plugin/nf-schema'
+```
+
+This imports the `samplesheetToList` function from the nf-schema plugin, making it available in your workflow.
+
+### 1.3. Example: Using nf-schema for validation
+
+The nf-schema plugin is widely used in nf-core pipelines for input validation.
+Here's how it works in practice:
+
+```groovy title="main.nf" linenums="1"
+#!/usr/bin/env nextflow
+
+include { samplesheetToList } from 'plugin/nf-schema'
+
+params.input = 'samplesheet.csv'
+
+workflow {
+    // Validate and parse input samplesheet
+    ch_samples = Channel.fromList(
+        samplesheetToList(params.input, "assets/schema_input.json")
+    )
+
+    ch_samples.view { "Sample: $it" }
+}
+```
+
+The `samplesheetToList` function:
+
+1. Reads the input CSV file
+2. Validates it against a JSON schema
+3. Returns a list of validated entries
+4. Throws helpful errors if validation fails
+
+This pattern is used extensively in nf-core pipelines to ensure input data is valid before processing begins.
+
+### 1.4. Popular community plugins
+
+Here are some useful plugins available in the Nextflow ecosystem:
+
+| Plugin        | Purpose                                       |
+| ------------- | --------------------------------------------- |
+| nf-schema     | Input validation and samplesheet parsing      |
+| nf-prov       | Provenance reporting (RO-Crate format)        |
+| nf-wave       | Container provisioning with Wave              |
+| nf-amazon     | AWS integration (S3, Batch)                   |
+| nf-google     | Google Cloud integration (GCS, Batch)         |
+| nf-azure      | Azure integration (Blob Storage, Batch)       |
+| nf-cloudcache | Cloud-based caching for distributed execution |
+
+!!! tip "Finding plugins"
+
+    Browse available plugins in the [Nextflow plugin registry](https://www.nextflow.io/docs/latest/plugins/plugin-registry.html) or search GitHub for repositories with the `nf-` prefix.
+
+### 1.5. Plugin configuration
+
+Some plugins accept configuration options in `nextflow.config`:
+
+```groovy title="nextflow.config"
+plugins {
+    id 'nf-schema@2.1.1'
+}
+
+// Plugin-specific configuration
+validation {
+    monochromeLogs = true
+    ignoreParams = ['custom_param']
+}
+```
+
+Each plugin documents its configuration options.
+Check the plugin's documentation for available settings.
+
+### Takeaway
+
+Using plugins is straightforward: declare them in `nextflow.config`, import their functions, and use them in your workflows.
+The plugin ecosystem extends Nextflow with powerful features like validation, cloud integration, and provenance tracking.
+
+### What's next?
+
+Now that you understand how to use plugins, let's explore how they work under the hood.
+
+---
+
+## 2. Plugin architecture
+
+### 2.1. How plugins extend Nextflow
 
 Nextflow's plugin system is built on [PF4J](https://pf4j.org/), a lightweight plugin framework for Java.
 Plugins can extend Nextflow in several ways:
@@ -98,7 +209,7 @@ Plugins can extend Nextflow in several ways:
 | Filesystems     | Custom storage backends                  | S3, Azure Blob          |
 | Trace Observers | Monitor workflow execution               | Custom logging, metrics |
 
-### 1.2. Plugin project structure
+### 2.2. Plugin project structure
 
 A typical plugin project looks like this:
 
@@ -122,7 +233,7 @@ nf-greeting/
             └── MANIFEST.MF   # Plugin metadata
 ```
 
-### 1.3. Key components
+### 2.3. Key components
 
 **Plugin class**: The entry point that manages plugin lifecycle.
 
@@ -141,9 +252,9 @@ Let's create our plugin project.
 
 ---
 
-## 2. Creating a plugin project
+## 3. Creating a plugin project
 
-### 2.1. Using the Nextflow plugin create command
+### 3.1. Using the Nextflow plugin create command
 
 The easiest way to create a plugin is with the built-in command:
 
@@ -157,7 +268,7 @@ This scaffolds a complete plugin project.
 
     You can also create plugin projects manually or use the [nf-hello template](https://github.com/nextflow-io/nf-hello) on GitHub as a starting point.
 
-### 2.2. Examine the generated project
+### 3.2. Examine the generated project
 
 Change into the plugin directory:
 
@@ -182,7 +293,7 @@ You should see:
     └── ...
 ```
 
-### 2.3. Understand settings.gradle
+### 3.3. Understand settings.gradle
 
 ```bash
 cat settings.gradle
@@ -194,7 +305,7 @@ rootProject.name = 'nf-greeting'
 
 This simply sets the project name.
 
-### 2.4. Understand build.gradle
+### 3.4. Understand build.gradle
 
 ```bash
 cat build.gradle
@@ -237,9 +348,9 @@ Let's implement our custom functions.
 
 ---
 
-## 3. Implementing custom functions
+## 4. Implementing custom functions
 
-### 3.1. The PluginExtensionPoint class
+### 4.1. The PluginExtensionPoint class
 
 Functions are defined in classes that extend `PluginExtensionPoint`.
 Open the extension file:
@@ -250,7 +361,7 @@ cat src/main/groovy/nextflow/greeting/GreetingExtension.groovy
 
 The template includes a sample function. Let's replace it with our greeting functions.
 
-### 3.2. Create our functions
+### 4.2. Create our functions
 
 Edit the file to contain:
 
@@ -299,7 +410,7 @@ class GreetingExtension extends PluginExtensionPoint {
 }
 ```
 
-### 3.3. Understanding the @Function annotation
+### 4.3. Understanding the @Function annotation
 
 The `@Function` annotation marks a method as callable from Nextflow workflows:
 
@@ -317,7 +428,7 @@ Key points:
 - Return type can be any serializable type
 - Will be available via `include { reverseGreeting } from 'plugin/nf-greeting'`
 
-### 3.4. The init() method
+### 4.4. The init() method
 
 The `init()` method is called when the plugin loads:
 
@@ -343,9 +454,9 @@ Let's build and test our plugin.
 
 ---
 
-## 4. Building and testing
+## 5. Building and testing
 
-### 4.1. Build the plugin
+### 5.1. Build the plugin
 
 The Makefile provides convenient commands:
 
@@ -379,7 +490,7 @@ Or directly with Gradle:
     BUILD SUCCESSFUL
     ```
 
-### 4.2. Write unit tests
+### 5.2. Write unit tests
 
 Good plugins have tests. Create or edit the test file:
 
@@ -418,7 +529,7 @@ class GreetingExtensionTest {
 }
 ```
 
-### 4.3. Run the tests
+### 5.3. Run the tests
 
 ```bash
 make test
@@ -443,7 +554,7 @@ Or:
     BUILD SUCCESSFUL
     ```
 
-### 4.4. Install locally
+### 5.4. Install locally
 
 To use the plugin with Nextflow, install it to your local plugins directory:
 
@@ -464,9 +575,9 @@ Let's use our plugin in a workflow.
 
 ---
 
-## 5. Using your plugin
+## 6. Using your plugin
 
-### 5.1. Configure the plugin
+### 6.1. Configure the plugin
 
 Go back to the pipeline directory:
 
@@ -487,7 +598,7 @@ plugins {
     When using locally installed plugins, you must specify the version (e.g., `nf-greeting@0.1.0`).
     Published plugins in the registry can use just the name.
 
-### 5.2. Import and use functions
+### 6.2. Import and use functions
 
 Edit `main.nf` to use our custom functions:
 
@@ -532,7 +643,7 @@ workflow {
 }
 ```
 
-### 5.3. Run the pipeline
+### 6.3. Run the pipeline
 
 ```bash
 nextflow run main.nf
@@ -558,7 +669,7 @@ nextflow run main.nf
     ...
     ```
 
-### 5.4. Check the output files
+### 6.4. Check the output files
 
 ```bash
 cat work/*/*/Hello-output.txt
@@ -583,9 +694,9 @@ Let's explore other extension types.
 
 ---
 
-## 6. Going further
+## 7. Going further
 
-### 6.1. Custom operators
+### 7.1. Custom operators
 
 Operators work with channels. Use `@Operator` annotation:
 
@@ -613,7 +724,7 @@ Usage in workflow:
 greeting_ch.reverseAll().view()
 ```
 
-### 6.2. Trace observers
+### 7.2. Trace observers
 
 Monitor workflow events with `TraceObserverV2`:
 
@@ -639,7 +750,7 @@ class MyObserver implements TraceObserverV2 {
 }
 ```
 
-### 6.3. Accessing configuration
+### 7.3. Accessing configuration
 
 Plugins can read custom configuration:
 
@@ -658,7 +769,7 @@ void init(Session session) {
 }
 ```
 
-### 6.4. Publishing your plugin
+### 7.4. Publishing your plugin
 
 To share your plugin:
 
