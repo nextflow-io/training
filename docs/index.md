@@ -24,17 +24,17 @@ hide:
 
 === "Other stuff"
 
-!!! warning "Version compatibility"
+    !!! warning "Version compatibility"
 
-    Stuff about versions
+        Stuff about versions
 
-!!! info "Training events"
+    !!! info "Training events"
 
-    Blurb about training events
+        Blurb about training events
 
-!!! example "Environments"
+    !!! example "Environments"
 
-    Codespaces vs local
+        Codespaces vs local
 
 </div>
 
