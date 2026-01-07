@@ -8,6 +8,18 @@ hide:
 
 # Nextflow Training
 
+!!! col \_\_75
+
+    !!! abstract "Self-service courses
+
+        Catalog of courses goes here
+
+!!! col \_\_25
+
+    !!! info "Other stuff to note"
+
+        Other things we need to link to
+
 Welcome to the Nextflow community training portal!
 
 We have several distinct training courses available on this website. Scroll down to find the one that's right for you!
