@@ -8,40 +8,23 @@ hide:
 
 # Nextflow Training
 
-<div class="grid cards" markdown>
+<div class="grid" markdown>
 
-- :material-clock-fast:{ .lg .middle } **Set up in 5 minutes**
+!!! abstract "Self-service courses"
 
-  ***
+    Catalog of courses goes here
 
-  Install [`mkdocs-material`](#) with [`pip`](#) and get up
-  and running in minutes
+!!! info "Some other info"
 
-  [:octicons-arrow-right-24: Getting started](#)
+    Something else
 
-- :fontawesome-brands-markdown:{ .lg .middle } **It's just Markdown**
+!!! warning "Version requirements"
 
-  ***
+    stuff about versions
 
-  Focus on your content and generate a responsive and searchable static site
+!!! example "Environments"
 
-  [:octicons-arrow-right-24: Reference](#)
-
-- :material-format-font:{ .lg .middle } **Made to measure**
-
-  ***
-
-  Change the colors, fonts, language, icons, logo and more with a few lines
-
-  [:octicons-arrow-right-24: Customization](#)
-
-- :material-scale-balance:{ .lg .middle } **Open Source, MIT**
-
-  ***
-
-  Material for MkDocs is licensed under MIT and available on [GitHub]
-
-  [:octicons-arrow-right-24: License](#)
+    Codespaces vs local
 
 </div>
 
