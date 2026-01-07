@@ -150,6 +150,7 @@ theme:
       terminal: octicons/terminal-16
       learning: octicons/mortar-board-16
       people: octicons/people-16
+      github: octicons/mark-github-16
 extra_css:
   - assets/stylesheets/fonts.css
   - assets/stylesheets/extra.css

@@ -273,6 +273,22 @@ h3 .enumerate-headings-plugin {
   mask-image: var(--md-admonition-icon--people);
 }
 
+/* github */
+.md-typeset .admonition.github,
+.md-typeset details.github {
+  border-color: #802387;
+}
+.md-typeset .github > .admonition-title,
+.md-typeset .github > summary {
+  background-color: #80238710;
+}
+.md-typeset .people > .admonition-title::before,
+.md-typeset .people > summary::before {
+  background-color: #802387;
+  -webkit-mask-image: var(--md-admonition-icon--github);
+  mask-image: var(--md-admonition-icon--github);
+}
+
 /* exercise */
 .md-typeset .admonition.exercise,
 .md-typeset details.exercise {
