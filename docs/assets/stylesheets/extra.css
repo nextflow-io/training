@@ -248,7 +248,7 @@ h3 .enumerate-headings-plugin {
 }
 .md-typeset .learning > .admonition-title,
 .md-typeset .learning > summary {
-  background-color: var(--md-admonition-bg-color);
+  background-color: #4489ff10;
 }
 .md-typeset .learning > .admonition-title::before,
 .md-typeset .learning > summary::before {
@@ -264,7 +264,7 @@ h3 .enumerate-headings-plugin {
 }
 .md-typeset .people > .admonition-title,
 .md-typeset .people > summary {
-  background-color: rgba(186, 125, 236, 0.1);
+  background-color: #6e59d910;
 }
 .md-typeset .people > .admonition-title::before,
 .md-typeset .people > summary::before {

@@ -8,14 +8,12 @@ hide:
 
 # Nextflow Training
 
-Welcome to the Nextflow community training portal!
-
 <div class="grid" markdown>
 
-!!! catalog "Self-service courses"
+!!! catalog "Welcome to the Nextflow community training portal"
 
     The training courses listed below are designed to be usable as a self-service resource.
-    You can work through them on your own at any time either in the Github Codespaces or in your own environment (see Environment Options for practical details).
+    You can work through them on your own at any time either in the web-based environment we provide via Github Codespaces or in your own environment (see Environment Options for details).
 
     Blurb about beginners, science, advanced topics. CTA: browse the catalog.
 
