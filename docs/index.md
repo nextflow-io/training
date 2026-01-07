@@ -17,8 +17,6 @@ hide:
     The training courses listed below are designed to be usable as a self-service resource.
     You can work through them on your own at any time either in the web-based environment we provide via Github Codespaces or in your own environment (see Environment Options for details).
 
-    Blurb about beginners, science, advanced topics. CTA: browse the catalog.
-
     ( BUTTON -> )
 
 === "Additional information"
@@ -92,7 +90,7 @@ hide:
 
     ### :material-microscope:{.nextflow-primary} Nextflow for Science
 
-    Learn to apply the concepts and components presented in 'Hello Nextflow' to specific scientific use cases. Each course consists of a series of training modules that are designed to help learners build up their skills progressively.
+    Learn to apply the concepts and components presented in 'Hello Nextflow' to specific scientific use cases.
 
     ??? courses "Nextflow for Genomics (variant calling)"
 
@@ -127,7 +125,7 @@ hide:
 
     ### :material-rocket-launch:{.nextflow-primary} Advanced Nextflow Training
 
-    Learn advanced concepts and mechanisms for developing and deploying Nextflow pipelines to address real-world use cases. These materials are organized into Side Quests that cover individual topics, and Training Collections that combine multiple Side Quests in order to provide a comprehensive learning experience around a particular around a common theme or use case.
+    Learn advanced concepts and mechanisms for developing and deploying Nextflow pipelines to address real-world use cases.
 
     ??? courses "Side Quests: Deep dives into standalone topics"
 
@@ -166,6 +164,8 @@ You can still find the materials in the GitHub repository and download them for 
 - **troubleshoot** — Troubleshooting exercises ([docs](other/troubleshoot) / [code](https://github.com/nextflow-io/training/tree/master/other/troubleshoot))
 
 - **hands-on (rnaseq)** — Developing a pipeline for bulk RNAseq (deprecated) ([docs](other/hands_on) / [code](https://github.com/nextflow-io/training/tree/master/other/hands-on))
+
+---
 
 <div markdown class="homepage_logos">
 
