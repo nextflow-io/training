@@ -33,16 +33,17 @@ hide:
 
         Blurb about training events
 
-        - Training Weeks organized quarterly by the Community team
-        - In-person training events organized by Seqera
-        - Other events organized by Nextflow Ambassadors
+        - **[Training Weeks]()** organized quarterly by the Community team
+        - **[Seqera Events](https://seqera.io/events/)** include in-person training events organized by Seqera (search for 'Seqera Sessions' and 'Nextflow Summit')
+        - **[Nextflow Ambassadors]()** organize events for their local community
+        - **[nf-core events](https://nf-co.re/events)** include community hackathons
 
 </div>
 
 Welcome to the Nextflow community training portal!
 
-- Free online events are run regularly by the nf-core community, see the [nf-core events page](https://nf-co.re/events) for more.
-- Seqera (the company that develops Nextflow) runs a variety of training events, see the [Seqera Events](https://seqera.io/events/) page and look for 'Seqera Sessions' and 'Nextflow Summit'.
+- Free online events are run regularly by the nf-core community, for more.
+- Seqera (the company that develops Nextflow) runs a variety of training events, see the [ page and look for 'Seqera Sessions' and 'Nextflow Summit'.
 - Our Community team also regularly teaches trainings hosted by third party organizations; announcements and signups for those are typically managed by the third-party hosts.
 
 When you're ready to get down to work, click on the 'Open in GitHub Codespaces' button, either on this page or on the index page of the course you chose, to open a web-based training environment (requires a free GitHub account).
