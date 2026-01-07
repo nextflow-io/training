@@ -254,7 +254,7 @@ Let's take a look at what's in there.
     tree -a work
     ```
 
-??? example title="Directory contents"
+??? abstract title="Directory contents"
 
     ```console
     work
@@ -352,7 +352,7 @@ nextflow run hello-world.nf
 
 The log output should look very familiar.
 
-??? example title="Output"
+??? success title="Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -398,7 +398,7 @@ nextflow run hello-world.nf -resume
 
 The console output should look similar.
 
-??? example title="Output"
+??? success title="Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -589,7 +589,7 @@ nextflow run hello-world.nf --greeting 'Bonjour le monde!'
 
 If you made all three edits correctly, you should get another successful execution.
 
-??? example title="Output"
+??? success title="Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -647,7 +647,7 @@ Now that you have a default value set, you can run the workflow again without ha
 nextflow run hello-world.nf
 ```
 
-??? example title="Output"
+??? success title="Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -676,7 +676,7 @@ Try it out:
 nextflow run hello-world.nf --greeting 'Konnichiwa!'
 ```
 
-??? example title="Output"
+??? success title="Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3

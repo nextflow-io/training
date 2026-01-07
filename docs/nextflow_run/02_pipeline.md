@@ -39,9 +39,7 @@ Run the following command in your terminal.
 nextflow run 2a-inputs.nf --input greetings.csv
 ```
 
-This should run without error.
-
-??? example title="Output"
+??? success title="Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -59,7 +57,7 @@ This suggests the `sayHello()` process was called three times, once on each inpu
 
 Let's look at the 'results' directory to see if our workflow is still writing a copy of our outputs there.
 
-??? example title="Directory contents"
+??? abstract title="Directory contents"
 
     ```console linenums="1"
     results
@@ -75,7 +73,7 @@ If you haven't deleted the `results` folder when running Part 1 of this training
 
 You can open each of them to satisfy yourself that they contain the appropriate greeting string.
 
-??? example title="File contents"
+??? abstract title="File contents"
 
     ```console title="results/Hello-output.txt"
     Hello
@@ -98,7 +96,7 @@ Does that mean all three calls to `sayHello()` were executed within that one tas
 
 Let's have a look inside that `8e/0eb066` task directory.
 
-??? example title="Directory contents"
+??? abstract title="Directory contents"
 
     ```console title="8e/0eb066"
     work/8e/0eb066071cdb4123906b7b4ea8b047/
@@ -119,9 +117,7 @@ We can modify the logging behavior to see the full list of process calls by addi
 nextflow run 2a-inputs.nf --input greetings.csv -ansi-log false
 ```
 
-This time we see all three process runs and their associated work subdirectories listed in the output.
-
-??? example title="Output"
+??? success title="Command output"
 
     ```console linenums="1"
     N E X T F L O W  ~  version 25.04.3
@@ -131,6 +127,8 @@ This time we see all three process runs and their associated work subdirectories
     [b5/0df1d6] Submitted process > sayHello (3)
     ```
 
+This time we see all three process runs and their associated work subdirectories listed in the output.
+
 Notice that the way the status is reported is a bit different between the two logging modes.
 In the condensed mode, Nextflow reports whether calls were completed successfully or not.
 In this expanded mode, it only reports that they were submitted.
@@ -139,7 +137,7 @@ This confirms that the `sayHello()` process gets called three times, and a separ
 
 If we look inside each of the task directories listed there, we can verify that each one corresponds to one of the greetings.
 
-??? example title="Directory contents"
+??? abstract title="Directory contents"
 
     ```console title="ab/1a8ece"
     work/ab/1a8ece307e53f03fce689dde904b64/
@@ -326,7 +324,7 @@ Run the following command in your terminal:
 nextflow run 2b-multistep.nf --input greetings.csv
 ```
 
-??? example title="Output"
+??? success title="Command output"
 
     ```console linenums="1"
     N E X T F L O W   ~  version 25.04.3
@@ -344,7 +342,7 @@ You see that as promised, multiple steps were run as part of the workflow; the f
 
 Let's verify that that is in fact what happened by taking a look in the `results` directory.
 
-??? example title="Directory contents"
+??? abstract title="Directory contents"
 
     ```console
     results
@@ -363,7 +361,7 @@ Look at the file names and check their contents to confirm that they are what yo
 cat results/COLLECTED-output.txt
 ```
 
-??? example title="File contents"
+??? abstract title="File contents"
 
     ```console
     HELLO
@@ -574,7 +572,7 @@ This makes the code more shareable, flexible and maintainable.
 
 We have of course once again prepared a suitable workflow for demonstration purposes, called `2c-modules.nf`, along with a set of modules located in the `modules/` directory.
 
-??? example title="Directory contents"
+??? abstract title="Directory contents"
 
     ```console
     modules/
@@ -640,7 +638,7 @@ Run this command in your terminal, with the `-resume` flag:
 nextflow run 2c-modules.nf --input greetings.csv -resume
 ```
 
-??? example title="Output"
+??? success title="Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -717,7 +715,7 @@ Run the complete pull command:
 docker pull 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
 ```
 
-??? example title="Output"
+??? success title="Command output"
 
     ```console
     Unable to find image 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273' locally
@@ -772,7 +770,7 @@ ls /
 
 <!-- TODO: update to use tree -->
 
-??? example title="Output"
+??? abstract title="Directory contents"
 
     ```console title="Command output"
     bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
@@ -799,7 +797,7 @@ From inside the container, you can run the `cowpy` command directly.
 cowpy "Hello Containers"
 ```
 
-??? example title="Output"
+??? success title="Command output"
 
     ```console
     ______________________________________________________
@@ -821,9 +819,7 @@ For example, the tool documentation says we can set the character with `-c`.
 cowpy "Hello Containers" -c tux
 ```
 
-This time the ASCII art output shows the Linux penguin, Tux, because we specified the `-c tux` parameter.
-
-??? example title="Output"
+??? success title="Command output"
 
     ```console
     __________________
@@ -839,6 +835,8 @@ This time the ASCII art output shows the Linux penguin, Tux, because we specifie
         /'\_   _/`\
         \___)=(___/
     ```
+
+This time the ASCII art output shows the Linux penguin, Tux, because we specified the `-c tux` parameter.
 
 Since you're inside the container, you can run the cowpy command as many times as you like, varying the input parameters, without having to worry about install any libraries on your system itself.
 
@@ -968,7 +966,7 @@ nextflow config
 
 <!-- TODO: paste output of nextflow config command -->
 
-??? example title="File contents"
+??? abstract title="File contents"
 
     ```json title="nextflow.config" linenums="1"
     docker {
@@ -992,7 +990,7 @@ Let's run the workflow with the `-resume` flag, and specify that we want the cha
 nextflow run 2d-container.nf --input greetings.csv --character turkey -resume
 ```
 
-??? example title="Output"
+??? success title="Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -1010,7 +1008,7 @@ The first three steps cached since we've already run them before, but the `cowpy
 
 You can find the output of the `cowpy` step in the `results` directory.
 
-??? example title="File contents"
+??? abstract title="File contents"
 
     ```console title="results/cowpy-COLLECTED-output.txt"
     _________

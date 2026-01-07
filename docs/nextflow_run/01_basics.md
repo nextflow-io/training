@@ -80,7 +80,7 @@ nextflow run 1-hello.nf --greeting 'Hello World!'
 
 You console output should look something like this:
 
-??? example title="Output"
+??? success title="Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -169,7 +169,7 @@ Let's take a look at what's in there.
 
 The exact subdirectory names will be different on your system.
 
-??? example title="Directory contents"
+??? abstract title="Directory contents"
 
     ```console
     work
@@ -393,7 +393,7 @@ To use it, simply add `-resume` to your command and run it:
 nextflow run 1-hello.nf --greeting 'Hello World!' -resume
 ```
 
-??? example title="Output"
+??? success title="Command output"
 
     ```console linenums="1"
     N E X T F L O W   ~  version 25.04.3
@@ -418,7 +418,7 @@ Nextflow is literally pointing you to the previous execution and saying "I alrea
 
 Whenever you launch a nextflow workflow, a line gets written to a log file called `history`, under a hidden directory called `.nextflow` in the current working directory.
 
-??? example title="File contents"
+??? abstract title="File contents"
 
     ```txt title=".nextflow/history" linenums="1"
     2025-07-04 19:27:09	1.8s	wise_watson	OK	3539118582ccde68dde471cc2c66295c	a02c9c46-c3c7-4085-9139-d1b9b5b194c8	nextflow run 1-hello.nf --greeting 'Hello World'
@@ -436,7 +436,7 @@ A more convenient way to access this information is to use the `nextflow log` co
 nextflow log
 ```
 
-??? example title="Output"
+??? success title="Command output"
 
     ```console linenums="1"
     TIMESTAMP               DURATION        RUN NAME                STATUS  REVISION ID     SESSION ID                              COMMAND
@@ -472,7 +472,7 @@ Once we have that, first we try the `nextflow clean` command using the dry run f
 nextflow clean -before backstabbing_swartz -n
 ```
 
-??? example title="Output"
+??? success title="Command output"
 
     ```console
     Would remove /workspaces/training/hello-nextflow/work/eb/1a5de36637b475afd88fca7f79e024
@@ -492,7 +492,7 @@ nextflow clean -before backstabbing_swartz -f
 
 The output should be similar to before, but now saying 'Removed' instead of 'Would remove'.
 
-??? example title="Output"
+??? success title="Command output"
 
     ```console
     Removed /workspaces/training/hello-nextflow/work/eb/1a5de36637b475afd88fca7f79e024

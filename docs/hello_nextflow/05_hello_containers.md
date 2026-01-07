@@ -37,7 +37,7 @@ Just to make sure everything is working, run the script once before making any c
 nextflow run hello-containers.nf
 ```
 
-??? example title="Output"
+??? success title="Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -52,7 +52,7 @@ nextflow run hello-containers.nf
 
 As previously, you will find the output files in the `results` directory (specified by the `publishDir` directive).
 
-??? example title="Directory contents"
+??? abstract title="Directory contents"
 
     ```console
     results
@@ -106,7 +106,7 @@ Run the complete pull command:
 docker pull 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
 ```
 
-??? example title="Output"
+??? success title="Command output"
 
     ```console
     Unable to find image 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273' locally
@@ -155,7 +155,7 @@ Fully assembled, the container execution command looks like this; go ahead and r
 docker run --rm 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273' cowpy
 ```
 
-??? example title="Output"
+??? success title="Command output"
 
     ```console
     ______________________________________________________
@@ -193,7 +193,7 @@ ls /
 
 <!-- TODO: update to tree -->
 
-??? example title="Output"
+??? success title="Command output"
 
     ```console
     bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
@@ -219,7 +219,7 @@ cowpy "Hello Containers" -c tux
 
 Now the output shows the Linux penguin, Tux, instead of the default cow, because we specified the `-c tux` parameter.
 
-??? example title="Output"
+??? success title="Command output"
 
     ```console
     __________________
@@ -289,7 +289,7 @@ Depending on what part of this training you've done before, the output may look 
 
 <!-- TODO: update to tree & update output -->
 
-??? example title="Output"
+??? success title="Command output"
 
     ```console
     greetings.csv      hello-config.nf      hello-modules.nf   hello-world.nf  nextflow.config  solutions         work
@@ -310,7 +310,7 @@ To do this, we'll use `cat /data/greetings.csv | ` to pipe the contents of the C
 cat /data/greetings.csv | cowpy -c turkey
 ```
 
-??? example title="Output"
+??? success title="Command output"
 
     ```console
     _________
@@ -510,7 +510,7 @@ Run this with the `-resume` flag.
 nextflow run hello-containers.nf -resume
 ```
 
-??? example title="Output"
+??? failure title="Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -612,7 +612,7 @@ Run the workflow with the `-resume` flag:
 nextflow run hello-containers.nf -resume
 ```
 
-??? example title="Output"
+??? success title="Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -630,7 +630,7 @@ nextflow run hello-containers.nf -resume
 This time it does indeed work.
 You can find the cowpy'ed output in the `results` directory, under the name `cowpy-COLLECTED-test-batch-output.txt`.
 
-??? example title="File contents"
+??? abstract title="File contents"
 
     ```console title="results/cowpy-COLLECTED-test-batch-output.txt"
     _________

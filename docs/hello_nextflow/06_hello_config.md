@@ -43,7 +43,7 @@ Once you've done that, verify that the initial workflow runs properly:
 nextflow run hello-config.nf
 ```
 
-??? example title="Output"
+??? success title="Command output"
 
     ```console title="Output"
     N E X T F L O W   ~  version 25.04.3
@@ -146,7 +146,7 @@ Let's try it out.
 nextflow run hello-config.nf
 ```
 
-??? example title="Output"
+??? success title="Command output"
 
     ```console title="Output"
     N E X T F L O W   ~  version 25.04.3
@@ -363,7 +363,7 @@ To run the workflow with this parameter file, simply add `-params-file <filename
 nextflow run hello-config.nf -params-file test-params.json
 ```
 
-??? example title="Output"
+??? success title="Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -514,7 +514,7 @@ Let's try running the workflow with the `my_laptop` configuration.
 nextflow run hello-config.nf -profile my_laptop
 ```
 
-??? example title="Output"
+??? success title="Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -596,7 +596,7 @@ Let's try adding the test profile to our previous command:
 nextflow run hello-config.nf -profile my_laptop,test
 ```
 
-??? example title="Output"
+??? success title="Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3

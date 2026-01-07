@@ -41,7 +41,7 @@ Just to make sure everything is working, run the script once before making any c
 nextflow run hello-workflow.nf
 ```
 
-??? example title="Output"
+??? success title="Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -54,7 +54,7 @@ nextflow run hello-workflow.nf
 
 As previously, you will find the output files in the `results` directory (specified by the `publishDir` directive).
 
-??? example title="Directory contents"
+??? abstract title="Directory contents"
 
     ```console
     results
@@ -200,7 +200,7 @@ Let's run this using the `-resume` flag, since we've already run the first step 
 nextflow run hello-workflow.nf -resume
 ```
 
-??? example title="Output"
+??? success title="Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -216,7 +216,7 @@ There is now an extra line in the console output (line 7), which corresponds to 
 
 Let's have a look inside the work directory of one of the calls to the second process.
 
-??? example title="Directory contents"
+??? abstract title="Directory contents"
 
     ```console
     work/b3/d52708edba8b864024589285cb3445/
@@ -232,7 +232,7 @@ By default, when running on a single machine as we're doing here, Nextflow uses 
 
 You'll also find the final outputs in the `results` directory since we used the `publishDir` directive in the second process too.
 
-??? example title="Directory contents"
+??? abstract title="Directory contents"
 
     ```console
     results
@@ -427,7 +427,7 @@ Let's try it.
 nextflow run hello-workflow.nf -resume
 ```
 
-??? example title="Output"
+??? success title="Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -520,7 +520,7 @@ Let's try it:
 nextflow run hello-workflow.nf -resume
 ```
 
-??? example title="Output"
+??? success title="Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -702,7 +702,7 @@ Let's try running this with a batch name on the command line.
 nextflow run hello-workflow.nf -resume --batch trio
 ```
 
-??? example title="Output"
+??? success title="Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -853,7 +853,7 @@ Let's try running this with the current batch of greetings.
 nextflow run hello-workflow.nf -resume --batch trio
 ```
 
-??? example title="Output"
+??? success title="Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
