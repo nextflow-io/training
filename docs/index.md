@@ -10,7 +10,7 @@ hide:
 
 <div class="grid" markdown>
 
-!!! example "Self-service courses"
+!!! abstract "Self-service courses"
 
     The training courses listed below are designed to be usable as a self-service resource.
     You can work through them on your own at any time either in the Github Codespaces or in your own environment (see Environment Options for practical details).
@@ -25,13 +25,17 @@ hide:
 
         Stuff about versions
 
-    ??? example "Environments"
+    ??? terminal "Environments"
 
         Codespaces vs local
 
-    ??? abstract "Training events"
+    ??? tip "Training events"
 
         Blurb about training events
+
+        - Training Weeks organized quarterly by the Community team
+        - In-person training events organized by Seqera
+        - Other events organized by Nextflow Ambassadors
 
 </div>
 
