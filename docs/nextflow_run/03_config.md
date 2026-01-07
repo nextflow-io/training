@@ -96,9 +96,7 @@ Let's try it out.
 nextflow run 3-main.nf --input greetings.csv --character turkey
 ```
 
-This should work without error.
-
-??? example title="Output"
+??? success title="Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -429,7 +427,7 @@ This will produce the same output but is more convenient to type, especially whe
 nextflow run 3-main.nf
 ```
 
-??? example title="Output"
+??? success title="Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -445,7 +443,7 @@ nextflow run 3-main.nf
 
 The final output file should contain the turkey character saying the greetings.
 
-??? example title="File contents"
+??? abstract title="File contents"
 
     ```console title="results/cowpy-COLLECTED-output.txt"
     _________
@@ -515,9 +513,7 @@ We can now run our pipeline from within our new working directory:
 nextflow run ../3-main.nf
 ```
 
-This will create a new set of directories under `tux-run/` including `tux-run/work/` and `tux-run/results/`.
-
-??? example title="Output"
+??? success title="Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -531,11 +527,13 @@ This will create a new set of directories under `tux-run/` including `tux-run/wo
     [88/3ece98] cowpy              [100%] 1 of 1 ✔
     ```
 
+This will create a new set of directories under `tux-run/` including `tux-run/work/` and `tux-run/results/`.
+
 In this run, Nextflow combines the `nextflow.config` in our current directory with the `nextflow.config` in the root directory of the pipeline, and thereby overrides the default character (turkey) with the tux character.
 
 The final output file should contain the tux character saying the greetings.
 
-??? example title="File contents"
+??? abstract title="File contents"
 
     ```console title="results/cowpy-COLLECTED-output.txt"
     _________
@@ -585,7 +583,7 @@ To run the workflow with this parameter file, simply add `-params-file <filename
 nextflow run 3-main.nf -params-file test-params.yaml
 ```
 
-??? example title="Output"
+??? success title="Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -601,7 +599,7 @@ nextflow run 3-main.nf -params-file test-params.yaml
 
 The final output file should contain the stegosaurus character saying the greetings.
 
-??? example title="File contents"
+??? abstract title="File contents"
 
     ```console title="results/cowpy-COLLECTED-output.txt"
     _________
@@ -684,9 +682,7 @@ Let's try running the workflow with the `my_laptop` configuration.
 nextflow run 3-main.nf -profile my_laptop
 ```
 
-This should run without error and produce the same results as previously.
-
-??? example title="Output"
+??? success title="Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -766,7 +762,7 @@ Let's try adding the test profile to our previous command:
 nextflow run 3-main.nf -profile my_laptop,test
 ```
 
-??? example title="Output"
+??? success title="Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -782,7 +778,7 @@ nextflow run 3-main.nf -profile my_laptop,test
 
 This should run without error, and the final output file should contain the turtle character saying the greetings.
 
-??? example title="File contents"
+??? abstract title="File contents"
 
     ```console title="results/cowpy-COLLECTED-output.txt"
     _________
@@ -837,7 +833,7 @@ nextflow config
 
 <!-- TODO: update with types -->
 
-??? example title="Output"
+??? success title="Command output"
 
     ```groovy
     docker {
@@ -872,7 +868,7 @@ nextflow config -profile my_laptop,test
 
 <!-- TODO: update with types -->
 
-??? example title="Output"
+??? success title="Command output"
 
     ```groovy
     docker {

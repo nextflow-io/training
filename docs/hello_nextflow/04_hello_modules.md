@@ -38,7 +38,7 @@ Just to make sure everything is working, run the script once before making any c
 nextflow run hello-modules.nf
 ```
 
-??? example title="Output"
+??? success title="Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -54,7 +54,7 @@ nextflow run hello-modules.nf
 
 As previously, you will find the output files in the `results` directory (specified by the `publishDir` directive).
 
-??? example title="Directory contents"
+??? abstract title="Directory contents"
 
     ```console
     results
@@ -171,7 +171,7 @@ We're running the workflow with essentially the same code and inputs as before, 
 nextflow run hello-modules.nf -resume
 ```
 
-??? example title="Output"
+??? success title="Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -270,7 +270,7 @@ Run this with the `-resume` flag.
 nextflow run hello-modules.nf -resume
 ```
 
-??? example title="Output"
+??? success title="Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -364,7 +364,7 @@ Run this with the `-resume` flag.
 nextflow run hello-modules.nf -resume
 ```
 
-??? example title="Output"
+??? success title="Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3

@@ -36,7 +36,7 @@ Just to make sure everything is working, run the script once before making any c
 nextflow run hello-channels.nf --greeting 'Hello Channels!'
 ```
 
-??? example title="Output"
+??? success title="Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -150,7 +150,7 @@ Let's run it!
 nextflow run hello-channels.nf
 ```
 
-??? example title="Output"
+??? success title="Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -221,7 +221,7 @@ Let's try it.
 nextflow run hello-channels.nf
 ```
 
-??? example title="Output"
+??? success title="Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -247,7 +247,7 @@ To expand the logging to display one line per process call, add `-ansi-log false
 nextflow run hello-channels.nf -ansi-log false
 ```
 
-??? example title="Output"
+??? success title="Command output"
 
     ```console
     N E X T F L O W  ~  version 25.04.3
@@ -270,7 +270,7 @@ For a complex workflow, or a large number of inputs, having the full list output
 
 That being said, we have another problem. If you look in the `results` directory, there is only one file: `output.txt`!
 
-??? example title="Directory contents"
+??? abstract title="Directory contents"
 
     ```console
     results
@@ -361,7 +361,7 @@ Let's run it:
 nextflow run hello-channels.nf
 ```
 
-??? example title="Output"
+??? success title="Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -375,7 +375,7 @@ nextflow run hello-channels.nf
 Reverting back to the summary view, the output is summarized on one line again.
 However, now we have three new files in addition to the one we already had in the `results` directory.
 
-??? example title="Directory contents"
+??? abstract title="Directory contents"
 
     ```console
     results
@@ -387,7 +387,7 @@ However, now we have three new files in addition to the one we already had in th
 
 They each have the expected contents.
 
-??? example title="File contents"
+??? abstract title="File contents"
 
     ```console title="Bonjour-output.txt" linenums="1"
     Bonjour
@@ -490,7 +490,7 @@ Let's try running this:
 nextflow run hello-channels.nf
 ```
 
-??? example title="Output"
+??? failure title="Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -594,7 +594,7 @@ Finally, you can try running the workflow again!
 nextflow run hello-channels.nf
 ```
 
-??? example title="Output"
+??? success title="Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -781,7 +781,7 @@ Let's try running the workflow with the added CSV-parsing logic.
 nextflow run hello-channels.nf
 ```
 
-??? example title="Output" <!-- TODO: paste complete output -->
+??? failure title="Command output" <!-- TODO: paste complete output -->
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -870,7 +870,7 @@ Let's run it one more time:
 nextflow run hello-channels.nf
 ```
 
-??? example title="Output"
+??? success title="Command output"
 
     ```console title="Output" linenums="1"
     N E X T F L O W   ~  version 25.04.3
