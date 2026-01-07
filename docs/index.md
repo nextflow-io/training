@@ -54,13 +54,13 @@ hide:
 
         In addition, we'd love to hear from you on how we could better support your training efforts! Please contact us at community@seqera.io or on the community forum (see [Help](help.md) page).
 
-    ??? github "Credits and contributions"
+    ??? licensing "Open-source license and contribution policy"
 
         [![Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0](assets/img/cc_by-nc-nd.svg){ align=right }](https://creativecommons.org/licenses/by-nc-nd/4.0/)
 
-        This training material is developed and maintained by [Seqera](https://seqera.io) and released under an open-source license ([CC BY-NC-ND](https://creativecommons.org/licenses/by-nc-nd/4.0/)) for the benefit of the community. If you wish to use this material in a way that falls outside the scope of the license (note the limitations on redistribution), please contact us at community@seqera.io to discuss your request.
+        This training material is developed and maintained by [Seqera](https://seqera.io) and released under an open-source license ([CC BY-NC-ND](https://creativecommons.org/licenses/by-nc-nd/4.0/)) for the benefit of the community. If you wish to use this material in a way that falls outside the scope of the license (note the limitations on commercial use and redistribution), please contact us at community@seqera.io to discuss your request.
 
-        We welcome improvements, fixes and bug reports from the community. Every page has a :material-file-edit-outline: icon in the top right of the page, which will take you to GitHub where you can propose changes to the training source material via a pull request.
+        We welcome improvements, fixes and bug reports from the community. Every page has a :material-github: icon in the top right of the page linking to the code repository, where you can report issues or propose changes to the training source material via a pull request. See the README in the repository for more details.
 
 </div>
 

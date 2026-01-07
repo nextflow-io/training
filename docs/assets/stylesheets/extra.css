@@ -273,20 +273,20 @@ h3 .enumerate-headings-plugin {
   mask-image: var(--md-admonition-icon--people);
 }
 
-/* github */
-.md-typeset .admonition.github,
-.md-typeset details.github {
+/* licensing */
+.md-typeset .admonition.licensing,
+.md-typeset details.licensing {
   border-color: #802387;
 }
-.md-typeset .github > .admonition-title,
-.md-typeset .github > summary {
+.md-typeset .licensing > .admonition-title,
+.md-typeset .licensing > summary {
   background-color: #80238710;
 }
-.md-typeset .github > .admonition-title::before,
-.md-typeset .github > summary::before {
+.md-typeset .licensing > .admonition-title::before,
+.md-typeset .licensing > summary::before {
   background-color: #802387;
-  -webkit-mask-image: var(--md-admonition-icon--github);
-  mask-image: var(--md-admonition-icon--github);
+  -webkit-mask-image: var(--md-admonition-icon--licensing);
+  mask-image: var(--md-admonition-icon--licensing);
 }
 
 /* exercise */
