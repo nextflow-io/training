@@ -8,6 +8,8 @@ hide:
 
 # Nextflow Training
 
+Welcome to the Nextflow community training portal!
+
 <div class="grid" markdown>
 
 !!! abstract "Self-service courses"
@@ -23,32 +25,40 @@ hide:
 
     ??? warning "Version compatibility"
 
-        Stuff about versions
+        As of January 2026, all of our Nextflow training courses require Nextflow version 25.10.2 or later, with strict v2 syntax activated, unless otherwise noted.
 
-    ??? terminal "Environments"
+        For more information about version requirements and strict v2 syntax, please see the migration guide.
 
-        Codespaces vs local
+        ( BUTTON -> migration guide )
+
+    ??? terminal "Environment options"
+
+        We provide a web-based training environment where everything you need to take the training is preinstalled, available through Github Codespaces (requires a free GitHub account).
+
+        ( BUTTON -> )
+
+        If you'd like to do the training in your own environment, please see the setup instructions for local installations in the [Environment Setup](./envsetup/index.md) mini-course.
 
     ??? tip "Training events"
 
-        Blurb about training events
+        If you'd prefer to take Nextflow training as part of a structured event, there are many opportunities to do so. We recommend checking out the following options:
 
         - **[Training Weeks]()** organized quarterly by the Community team
         - **[Seqera Events](https://seqera.io/events/)** include in-person training events organized by Seqera (search for 'Seqera Sessions' and 'Nextflow Summit')
         - **[Nextflow Ambassadors]()** organize events for their local community
         - **[nf-core events](https://nf-co.re/events)** include community hackathons
 
+    <!-- TODO: add this when ready
+    ??? people "Information for trainers"
+
+        Blurb about train the trainer activities and resources
+    -->
+
 </div>
 
-Welcome to the Nextflow community training portal!
+---
 
-- Free online events are run regularly by the nf-core community, for more.
-- Seqera (the company that develops Nextflow) runs a variety of training events, see the [ page and look for 'Seqera Sessions' and 'Nextflow Summit'.
-- Our Community team also regularly teaches trainings hosted by third party organizations; announcements and signups for those are typically managed by the third-party hosts.
-
-When you're ready to get down to work, click on the 'Open in GitHub Codespaces' button, either on this page or on the index page of the course you chose, to open a web-based training environment (requires a free GitHub account).
-
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
+## Catalog of Nextflow training courses
 
 ## Training Environment Setup
 

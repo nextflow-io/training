@@ -145,7 +145,11 @@ theme:
   icon:
     repo: fontawesome/brands/github
     admonition:
+      catalog: octicons/repo-16
+      courses: octicons/log-16
       terminal: octicons/terminal-16
+      learning: octicons/mortar-board-16
+      people: octicons/people-16
 extra_css:
   - assets/stylesheets/fonts.css
   - assets/stylesheets/extra.css
