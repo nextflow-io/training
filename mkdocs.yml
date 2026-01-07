@@ -144,6 +144,8 @@ theme:
     - toc.follow
   icon:
     repo: fontawesome/brands/github
+    admonition:
+      terminal: octicons/terminal-16
 extra_css:
   - assets/stylesheets/fonts.css
   - assets/stylesheets/extra.css
