@@ -5377,7 +5377,9 @@ You'll learn how to extract metadata from filenames, which is a common requireme
 </code></pre></div>
 <h4 id="review-the-materials">Review the materials<a class="headerlink" href="#review-the-materials" title="Permanent link">&para;</a></h4>
 <p>You'll find a simple workflow file called <code>main.nf</code>, a <code>modules</code> directory containing two module files, and a <code>data</code> directory containing some example data files.</p>
-<div class="highlight"><span class="filename">Directory contents</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="go">.</span>
+<details class="abstract">
+<summary>Directory contents</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="go">.</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="go">├── data</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="go">│   ├── patientA_rep1_normal_R1_001.fastq.gz</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="go">│   ├── patientA_rep1_normal_R2_001.fastq.gz</span>
@@ -5400,6 +5402,7 @@ You'll learn how to extract metadata from filenames, which is a common requireme
 <a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="go">    ├── analyze_reads.nf</span>
 <a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="go">    └── count_lines.nf</span>
 </code></pre></div>
+</details>
 <p>This directory contains paired-end sequencing data from three patients (A, B, C).</p>
 <p>For each patient, we have samples that are of type <code>tumor</code> (typically originating from tumor biopsies) or <code>normal</code> (taken from healthy tissue or blood).
 If you're not familiar with cancer analysis, just know that this corresponds to an experimental model that uses paired tumor/normal samples to perform contrastive analyses.</p>
@@ -5442,20 +5445,17 @@ If you're not familiar with cancer analysis, just know that this corresponds to 
 <a id="__codelineno-3-9" name="__codelineno-3-9"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>This is a mini-workflow (without any processes) that refers to a single file path in its workflow, then prints it to the console, along with its class.</p>
-<details>
-  <summary>What is <code>.class</code>?</summary>
-
-    In Nextflow, <code>.class</code> tells us what type of object we're working with. It's like asking "what kind of thing is this?" to find out whether it's a string, a number, a file, or something else.
-    This will help us illustrate the difference between a plain string and a Path object in the next sections.
-
+<details class="info">
+<summary>What is <code>.class</code>?</summary>
+<p>In Nextflow, <code>.class</code> tells us what type of object we're working with. It's like asking "what kind of thing is this?" to find out whether it's a string, a number, a file, or something else.
+This will help us illustrate the difference between a plain string and a Path object in the next sections.</p>
 </details>
-
 <p>Let's run the workflow:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
-<details class="example">
-<summary>Output</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="go">N E X T F L O W   ~  version 25.04.3</span>
+<details class="success">
+<summary>Command output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="go">Launching `main.nf` [romantic_chandrasekhar] DSL2 - revision: 5a4a89bc3a</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
@@ -5497,9 +5497,9 @@ That makes sense, since we haven't yet told Nextflow that it corresponds to a fi
 <p>Now run the workflow again:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
-<details class="example">
-<summary>Output</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="go">N E X T F L O W   ~  version 25.04.3</span>
+<details class="success">
+<summary>Command output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
 <a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="go">Launching `main.nf` [kickass_coulomb] DSL2 - revision: 5af44b1b59</span>
 <a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>
@@ -5560,9 +5560,9 @@ As we'll see later, remote files will have different class names (such as <code>
 <p>Run the workflow:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
-<details class="example">
-<summary>Output</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="go">N E X T F L O W   ~  version 25.04.3</span>
+<details class="success">
+<summary>Command output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>
 <a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="go">Launching `main.nf` [ecstatic_ampere] DSL2 - revision: f3fa3dcb48</span>
 <a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>
@@ -5636,16 +5636,12 @@ So far we've verified that Nextflow is now treating out input file as a file, bu
 <a id="__codelineno-16-15" name="__codelineno-16-15"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>As you can see, it's a fairly straightforward little script that unzips the file and counts how many lines it contains.</p>
-<details>
-  <summary>What does <code>debug true</code> do?</summary>
-
-The <code>debug true</code> directive in the process definition causes Nextflow to print the output from your script (like the line count "40") directly in the execution log.
-Without this, you would only see the process execution status but not the actual output from your script.
-
-For more information on debugging Nextflow processes, see the <a href="../debugging/">Debugging Nextflow Workflows</a> side quest.
-
+<details class="info">
+<summary>What does <code>debug true</code> do?</summary>
+<p>The <code>debug true</code> directive in the process definition causes Nextflow to print the output from your script (like the line count "40") directly in the execution log.
+Without this, you would only see the process execution status but not the actual output from your script.</p>
+<p>For more information on debugging Nextflow processes, see the <a href="../debugging/">Debugging Nextflow Workflows</a> side quest.</p>
 </details>
-
 <h4 id="142-add-a-call-to-count_lines">1.4.2. Add a call to <code>COUNT_LINES</code><a class="headerlink" href="#142-add-a-call-to-count_lines" title="Permanent link">&para;</a></h4>
 <p>Now that the process is available to the workflow, we can add a call to the <code>COUNT_LINES</code> process to run it on the input file.</p>
 <p>Make the following edits to the workflow:</p>
@@ -5702,9 +5698,9 @@ For more information on debugging Nextflow processes, see the <a href="../debugg
 <p>And now run the workflow:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
-<details class="example">
-<summary>Output</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="go"> N E X T F L O W   ~  version 25.04.3</span>
+<details class="success">
+<summary>Command output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>
 <a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="go">Launching `main.nf` [cheeky_hypatia] DSL2 - revision: 281d13c414</span>
 <a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>
@@ -5797,9 +5793,9 @@ For more information on debugging Nextflow processes, see the <a href="../debugg
 <p>And now run the workflow:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
-<details class="example">
-<summary>Output</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="go"> N E X T F L O W   ~  version 25.04.3</span>
+<details class="failure">
+<summary>Command output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>
 <a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="go">Launching `main.nf` [friendly_goodall] DSL2 - revision: ae50609b20</span>
 <a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a>
@@ -5856,9 +5852,9 @@ This error is telling you that <code>'data/patientA_rep1_normal_R1_001.fastq.gz'
 <p>And now run the workflow again:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
-<details class="example">
-<summary>Output</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="go"> N E X T F L O W   ~  version 25.04.3</span>
+<details class="failure">
+<summary>Command output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a>
 <a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a><span class="go">Launching `main.nf` [soggy_golick] DSL2 - revision: ae50609b20</span>
 <a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a>
@@ -5996,9 +5992,9 @@ For example, you can develop with a small, local test set before switching to a 
 <p>Let's run the workflow:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
-<details class="example">
-<summary>Output</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="go">N E X T F L O W   ~  version 25.04.3</span>
+<details class="success">
+<summary>Command output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>
 <a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a><span class="go">Launching `main.nf` [insane_swartz] DSL2 - revision: fff18abe6d</span>
 <a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a>
@@ -6176,9 +6172,9 @@ However, other storage protocols such as blob storage (<code>s3://</code>, <code
 <p>Run the workflow:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
-<details class="example">
-<summary>Output</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a><span class="go">N E X T F L O W   ~  version 25.04.3</span>
+<details class="success">
+<summary>Command output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-43-2" name="__codelineno-43-2" href="#__codelineno-43-2"></a>
 <a id="__codelineno-43-3" name="__codelineno-43-3" href="#__codelineno-43-3"></a><span class="go">Launching `main.nf` [grave_meucci] DSL2 - revision: b09964a583</span>
 <a id="__codelineno-43-4" name="__codelineno-43-4" href="#__codelineno-43-4"></a>
@@ -6247,9 +6243,9 @@ This is similar to what <code>file()</code> would have done, except now we have 
 <p>Run the workflow:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
-<details class="example">
-<summary>Output</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a><span class="go">N E X T F L O W   ~  version 25.04.3</span>
+<details class="success">
+<summary>Command output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-47-2" name="__codelineno-47-2" href="#__codelineno-47-2"></a>
 <a id="__codelineno-47-3" name="__codelineno-47-3" href="#__codelineno-47-3"></a><span class="go">Launching `main.nf` [furious_swanson] DSL2 - revision: c35c34950d</span>
 <a id="__codelineno-47-4" name="__codelineno-47-4" href="#__codelineno-47-4"></a>
@@ -6302,9 +6298,9 @@ The process of matching these patterns is called "globbing" or "filename expansi
 <p>Run the workflow to test that out:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
-<details class="example">
-<summary>Output</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a><span class="go">N E X T F L O W   ~  version 25.04.3</span>
+<details class="success">
+<summary>Command output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-53-2" name="__codelineno-53-2" href="#__codelineno-53-2"></a>
 <a id="__codelineno-53-3" name="__codelineno-53-3" href="#__codelineno-53-3"></a><span class="go">Launching `main.nf` [boring_sammet] DSL2 - revision: d2aa789c9a</span>
 <a id="__codelineno-53-4" name="__codelineno-53-4" href="#__codelineno-53-4"></a>
@@ -6406,9 +6402,9 @@ For example, the filename <code>patientA_rep1_normal_R2_001</code> encodes the f
 <p>Run the workflow to test that it works:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-56-1" name="__codelineno-56-1" href="#__codelineno-56-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
-<details class="example">
-<summary>Output</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-57-1" name="__codelineno-57-1" href="#__codelineno-57-1"></a><span class="go">N E X T F L O W   ~  version 25.04.3</span>
+<details class="success">
+<summary>Command output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-57-1" name="__codelineno-57-1" href="#__codelineno-57-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-57-2" name="__codelineno-57-2" href="#__codelineno-57-2"></a>
 <a id="__codelineno-57-3" name="__codelineno-57-3" href="#__codelineno-57-3"></a><span class="go">Launching `main.nf` [suspicious_mahavira] DSL2 - revision: ae8edc4e48</span>
 <a id="__codelineno-57-4" name="__codelineno-57-4" href="#__codelineno-57-4"></a>
@@ -6461,9 +6457,9 @@ Fortunately, those components are simply separated by underscores in the origina
 <p>Run the workflow:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
-<details class="example">
-<summary>Output</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-61-1" name="__codelineno-61-1" href="#__codelineno-61-1"></a><span class="go">N E X T F L O W   ~  version 25.04.3</span>
+<details class="success">
+<summary>Command output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-61-1" name="__codelineno-61-1" href="#__codelineno-61-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-61-2" name="__codelineno-61-2" href="#__codelineno-61-2"></a>
 <a id="__codelineno-61-3" name="__codelineno-61-3" href="#__codelineno-61-3"></a><span class="go">Launching `main.nf` [gigantic_gauss] DSL2 - revision: a39baabb57</span>
 <a id="__codelineno-61-4" name="__codelineno-61-4" href="#__codelineno-61-4"></a>
@@ -6554,9 +6550,9 @@ Make the following edits to the workflow:</p>
 <p>Let's run the workflow again:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-67-1" name="__codelineno-67-1" href="#__codelineno-67-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
-<details class="example">
-<summary>Output</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-68-1" name="__codelineno-68-1" href="#__codelineno-68-1"></a><span class="go">N E X T F L O W   ~  version 25.04.3</span>
+<details class="success">
+<summary>Command output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-68-1" name="__codelineno-68-1" href="#__codelineno-68-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-68-2" name="__codelineno-68-2" href="#__codelineno-68-2"></a>
 <a id="__codelineno-68-3" name="__codelineno-68-3" href="#__codelineno-68-3"></a><span class="go">Launching `main.nf` [infallible_swartz] DSL2 - revision: 7f4e68c0cb</span>
 <a id="__codelineno-68-4" name="__codelineno-68-4" href="#__codelineno-68-4"></a>
@@ -6681,9 +6677,9 @@ We'll add that back in later, with a few modifications.</p>
 <p>Run the workflow to test it:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-73-1" name="__codelineno-73-1" href="#__codelineno-73-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
-<details class="example">
-<summary>Output</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-74-1" name="__codelineno-74-1" href="#__codelineno-74-1"></a><span class="go"> N E X T F L O W   ~  version 25.04.3</span>
+<details class="failure">
+<summary>Command output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-74-1" name="__codelineno-74-1" href="#__codelineno-74-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-74-2" name="__codelineno-74-2" href="#__codelineno-74-2"></a>
 <a id="__codelineno-74-3" name="__codelineno-74-3" href="#__codelineno-74-3"></a><span class="go">Launching `main.nf` [angry_koch] DSL2 - revision: 44fdf66105</span>
 <a id="__codelineno-74-4" name="__codelineno-74-4" href="#__codelineno-74-4"></a>
@@ -6736,9 +6732,9 @@ But we're not going to do that, because our ultimate goal is to use a different 
 <p>Now let's run the workflow again:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-78-1" name="__codelineno-78-1" href="#__codelineno-78-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
-<details class="example">
-<summary>Output</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-79-1" name="__codelineno-79-1" href="#__codelineno-79-1"></a><span class="go"> N E X T F L O W   ~  version 25.04.3</span>
+<details class="success">
+<summary>Command output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-79-1" name="__codelineno-79-1" href="#__codelineno-79-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-79-2" name="__codelineno-79-2" href="#__codelineno-79-2"></a>
 <a id="__codelineno-79-3" name="__codelineno-79-3" href="#__codelineno-79-3"></a><span class="go">Launching `main.nf` [fabulous_davinci] DSL2 - revision: 22b53268dc</span>
 <a id="__codelineno-79-4" name="__codelineno-79-4" href="#__codelineno-79-4"></a>
@@ -6827,9 +6823,9 @@ We can do this because the paired files are now tightly associated, so we no lon
 <p>Let's run the workflow:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-82-1" name="__codelineno-82-1" href="#__codelineno-82-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
-<details class="example">
-<summary>Output</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-83-1" name="__codelineno-83-1" href="#__codelineno-83-1"></a><span class="go">N E X T F L O W   ~  version 25.04.3</span>
+<details class="success">
+<summary>Command output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-83-1" name="__codelineno-83-1" href="#__codelineno-83-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-83-2" name="__codelineno-83-2" href="#__codelineno-83-2"></a>
 <a id="__codelineno-83-3" name="__codelineno-83-3" href="#__codelineno-83-3"></a><span class="go">Launching `main.nf` [prickly_stonebraker] DSL2 - revision: f62ab10a3f</span>
 <a id="__codelineno-83-4" name="__codelineno-83-4" href="#__codelineno-83-4"></a>
@@ -7021,9 +7017,9 @@ In order to feed the remapped contents to the <code>ANALYZE_READS</code> process
 <p>Let's run this:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-89-1" name="__codelineno-89-1" href="#__codelineno-89-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
-<details class="example">
-<summary>Output</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-90-1" name="__codelineno-90-1" href="#__codelineno-90-1"></a><span class="go"> N E X T F L O W   ~  version 25.04.3</span>
+<details class="success">
+<summary>Command output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-90-1" name="__codelineno-90-1" href="#__codelineno-90-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-90-2" name="__codelineno-90-2" href="#__codelineno-90-2"></a>
 <a id="__codelineno-90-3" name="__codelineno-90-3" href="#__codelineno-90-3"></a><span class="go">Launching `main.nf` [goofy_kirch] DSL2 - revision: 3313283e42</span>
 <a id="__codelineno-90-4" name="__codelineno-90-4" href="#__codelineno-90-4"></a>
@@ -7053,9 +7049,9 @@ In order to feed the remapped contents to the <code>ANALYZE_READS</code> process
 <p>Let's run this:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-93-1" name="__codelineno-93-1" href="#__codelineno-93-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
-<details class="example">
-<summary>Output</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-94-1" name="__codelineno-94-1" href="#__codelineno-94-1"></a><span class="go">N E X T F L O W   ~  version 25.04.3</span>
+<details class="success">
+<summary>Command output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-94-1" name="__codelineno-94-1" href="#__codelineno-94-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-94-2" name="__codelineno-94-2" href="#__codelineno-94-2"></a>
 <a id="__codelineno-94-3" name="__codelineno-94-3" href="#__codelineno-94-3"></a><span class="go">Launching `./main.nf` [shrivelled_cori] DSL2 - revision: b546a31769</span>
 <a id="__codelineno-94-4" name="__codelineno-94-4" href="#__codelineno-94-4"></a>
@@ -7064,7 +7060,9 @@ In order to feed the remapped contents to the <code>ANALYZE_READS</code> process
 </code></pre></div>
 </details>
 <p>This process is set up to publish its outputs to a <code>results</code> directory, so have a look in there.</p>
-<div class="highlight"><span class="filename">Directory contents</span><pre><span></span><code><a id="__codelineno-95-1" name="__codelineno-95-1" href="#__codelineno-95-1"></a><span class="go">results</span>
+<details class="abstract">
+<summary>Directory and file contents</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-95-1" name="__codelineno-95-1" href="#__codelineno-95-1"></a><span class="go">results</span>
 <a id="__codelineno-95-2" name="__codelineno-95-2" href="#__codelineno-95-2"></a><span class="go">└── patientA</span>
 <a id="__codelineno-95-3" name="__codelineno-95-3" href="#__codelineno-95-3"></a><span class="go">    └── patientA_stats.txt</span>
 </code></pre></div>
@@ -7076,6 +7074,7 @@ In order to feed the remapped contents to the <code>ANALYZE_READS</code> process
 <a id="__codelineno-96-6" name="__codelineno-96-6" href="#__codelineno-96-6"></a>Read 1 size: 10 reads
 <a id="__codelineno-96-7" name="__codelineno-96-7" href="#__codelineno-96-7"></a>Read 2 size: 10 reads
 </code></pre></div>
+</details>
 <p>The process took our inputs and created a new file containing the patient metadata, as designed.
 Splendid!</p>
 <h3 id="63-include-many-more-patients">6.3. Include many more patients<a class="headerlink" href="#63-include-many-more-patients" title="Permanent link">&para;</a></h3>
@@ -7104,9 +7103,9 @@ Make the following edits to the workflow:</p>
 <p>Run the pipeline again:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-99-1" name="__codelineno-99-1" href="#__codelineno-99-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
-<details class="example">
-<summary>Output</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-100-1" name="__codelineno-100-1" href="#__codelineno-100-1"></a><span class="go">N E X T F L O W   ~  version 25.04.3</span>
+<details class="success">
+<summary>Command output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-100-1" name="__codelineno-100-1" href="#__codelineno-100-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-100-2" name="__codelineno-100-2" href="#__codelineno-100-2"></a>
 <a id="__codelineno-100-3" name="__codelineno-100-3" href="#__codelineno-100-3"></a><span class="go">Launching `./main.nf` [big_stonebraker] DSL2 - revision: f7f9b8a76c</span>
 <a id="__codelineno-100-4" name="__codelineno-100-4" href="#__codelineno-100-4"></a>
@@ -7115,7 +7114,9 @@ Make the following edits to the workflow:</p>
 </code></pre></div>
 </details>
 <p>The results directory should now contain results for all the available data.</p>
-<div class="highlight"><span class="filename">Directory contents</span><pre><span></span><code><a id="__codelineno-101-1" name="__codelineno-101-1" href="#__codelineno-101-1"></a><span class="go">results</span>
+<details class="abstract">
+<summary>Directory contents</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-101-1" name="__codelineno-101-1" href="#__codelineno-101-1"></a><span class="go">results</span>
 <a id="__codelineno-101-2" name="__codelineno-101-2" href="#__codelineno-101-2"></a><span class="go">├── patientA</span>
 <a id="__codelineno-101-3" name="__codelineno-101-3" href="#__codelineno-101-3"></a><span class="go">│   └── patientA_stats.txt</span>
 <a id="__codelineno-101-4" name="__codelineno-101-4" href="#__codelineno-101-4"></a><span class="go">├── patientB</span>
@@ -7123,6 +7124,7 @@ Make the following edits to the workflow:</p>
 <a id="__codelineno-101-6" name="__codelineno-101-6" href="#__codelineno-101-6"></a><span class="go">└── patientC</span>
 <a id="__codelineno-101-7" name="__codelineno-101-7" href="#__codelineno-101-7"></a><span class="go">    └── patientC_stats.txt</span>
 </code></pre></div>
+</details>
 <p>Success! We have analyzed all the patients in one go! Right?</p>
 <p>Maybe not.
 If you look more closely, we have a problem: we have two replicates for patientA, but only one output file!
@@ -7147,9 +7149,9 @@ We are overwriting the output file each time.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-104-1" name="__codelineno-104-1" href="#__codelineno-104-1"></a>rm<span class="w"> </span>-r<span class="w"> </span>results
 <a id="__codelineno-104-2" name="__codelineno-104-2" href="#__codelineno-104-2"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
-<details class="example">
-<summary>Output</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-105-1" name="__codelineno-105-1" href="#__codelineno-105-1"></a><span class="go">N E X T F L O W   ~  version 25.04.3</span>
+<details class="success">
+<summary>Command output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-105-1" name="__codelineno-105-1" href="#__codelineno-105-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-105-2" name="__codelineno-105-2" href="#__codelineno-105-2"></a>
 <a id="__codelineno-105-3" name="__codelineno-105-3" href="#__codelineno-105-3"></a><span class="go">Launching `./main.nf` [insane_swartz] DSL2 - revision: fff18abe6d</span>
 <a id="__codelineno-105-4" name="__codelineno-105-4" href="#__codelineno-105-4"></a>
@@ -7158,7 +7160,9 @@ We are overwriting the output file each time.</p>
 </code></pre></div>
 </details>
 <p>Check the results directory now:</p>
-<div class="highlight"><span class="filename">Directory contents</span><pre><span></span><code><a id="__codelineno-106-1" name="__codelineno-106-1" href="#__codelineno-106-1"></a><span class="go">results/</span>
+<details class="abstract">
+<summary>Directory contents</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-106-1" name="__codelineno-106-1" href="#__codelineno-106-1"></a><span class="go">results/</span>
 <a id="__codelineno-106-2" name="__codelineno-106-2" href="#__codelineno-106-2"></a><span class="go">├── normal</span>
 <a id="__codelineno-106-3" name="__codelineno-106-3" href="#__codelineno-106-3"></a><span class="go">│   ├── patientA</span>
 <a id="__codelineno-106-4" name="__codelineno-106-4" href="#__codelineno-106-4"></a><span class="go">│   │   ├── 1</span>
@@ -7184,6 +7188,7 @@ We are overwriting the output file each time.</p>
 <a id="__codelineno-106-24" name="__codelineno-106-24" href="#__codelineno-106-24"></a><span class="go">        └── 1</span>
 <a id="__codelineno-106-25" name="__codelineno-106-25" href="#__codelineno-106-25"></a><span class="go">            └── patientC_stats.txt</span>
 </code></pre></div>
+</details>
 <p>And there it is, all our metadata, neatly organized. That's success!</p>
 <p>There's a lot more you can do once you have your metadata loaded into a map like this:</p>
 <ol>

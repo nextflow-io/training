@@ -5188,7 +5188,9 @@ Starting with a simple datasheet (often called a samplesheet in bioinformatics) 
 </code></pre></div>
 <h4 id="review-the-materials">Review the materials<a class="headerlink" href="#review-the-materials" title="Permanent link">&para;</a></h4>
 <p>You'll find a main workflow file and a <code>data</code> directory containing a datasheet and a handful of data files.</p>
-<div class="highlight"><span class="filename">Directory contents</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="go">.</span>
+<details class="abstract">
+<summary>Directory contents</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="go">.</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="go">├── data</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="go">│   ├── bonjour.txt</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="go">│   ├── ciao.txt</span>
@@ -5201,6 +5203,7 @@ Starting with a simple datasheet (often called a samplesheet in bioinformatics) 
 <a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="go">├── main.nf</span>
 <a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="go">└── nextflow.config</span>
 </code></pre></div>
+</details>
 <p>The workflow in the <code>main.nf</code> file is a stub that you will gradually expand into a fully functioning workflow.</p>
 <p>The datasheet lists the paths to the data files and some associated metadata, organized in 3 columns:</p>
 <ul>
@@ -5298,7 +5301,7 @@ Run the workflow:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
 <details class="success">
-<summary>Output</summary>
+<summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
 <a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="go">Launching `main.nf` [exotic_albattani] DSL2 - revision: c0d03cec83</span>
@@ -5341,15 +5344,13 @@ For example, we could access the file ID with <code>id</code> or the txt file pa
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>examples/map_demo.nf
 </code></pre></div>
 <p>And here's what you can expect to see in the output:</p>
-<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="go">Nextflow 25.10.0 is available - Please consider updating your version to it</span>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
-<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="go">Launching `map_demo.nf` [cheesy_plateau] DSL2 - revision: fae5b8496e</span>
 <a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>
-<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="go">Launching `map_demo.nf` [cheesy_plateau] DSL2 - revision: fae5b8496e</span>
-<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>
-<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="go">map: [id:sampleA, character:squirrel]</span>
-<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="go">id: sampleA</span>
-<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="go">character: squirrel</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="go">map: [id:sampleA, character:squirrel]</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="go">id: sampleA</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="go">character: squirrel</span>
 </code></pre></div>
 </details>
 <h3 id="12-pick-out-specific-fields-with-map">1.2. Pick out specific fields with <code>map</code><a class="headerlink" href="#12-pick-out-specific-fields-with-map" title="Permanent link">&para;</a></h3>
@@ -6259,11 +6260,9 @@ That approach works fine for using a small number of fields from the meta map, b
 We had to write two separate <code>map()</code> operations in order to feed the <code>file</code> and <code>character</code> elements to the process separately.</p>
 <p>Technically there is another way to do this through a single mapping operation, using the <code>multiMap()</code> operator, which is capable of emitting multiple channels.
 For example, you could replace the call to <code>COWPY</code> above with the following code:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="12:1"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><div class="tabbed-labels"><label for="__tabbed_12_1">After</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="12:2"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><input id="__tabbed_12_2" name="__tabbed_12" type="radio" /><div class="tabbed-labels"><label for="__tabbed_12_1">After</label><label for="__tabbed_12_2">Before</label></div>
 <div class="tabbed-content">
-<div class="tabbed-block"></div>
-</div>
-</div>
+<div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-68-34">34</a></span>
 <span class="normal"><a href="#__codelineno-68-35">35</a></span>
 <span class="normal"><a href="#__codelineno-68-36">36</a></span>
@@ -6278,11 +6277,8 @@ For example, you could replace the call to <code>COWPY</code> above with the fol
 <a id="__codelineno-68-39" name="__codelineno-68-39"></a><span class="w">        </span><span class="o">}</span>
 <a id="__codelineno-68-40" name="__codelineno-68-40"></a><span class="w">    </span><span class="o">)</span>
 </code></pre></div></td></tr></table></div>
-<div class="tabbed-set tabbed-alternate" data-tabs="13:1"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><div class="tabbed-labels"><label for="__tabbed_13_1">Before</label></div>
-<div class="tabbed-content">
-<div class="tabbed-block"></div>
 </div>
-</div>
+<div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-69-34">34</a></span>
 <span class="normal"><a href="#__codelineno-69-35">35</a></span>
 <span class="normal"><a href="#__codelineno-69-36">36</a></span>
@@ -6293,6 +6289,9 @@ For example, you could replace the call to <code>COWPY</code> above with the fol
 <a id="__codelineno-69-37" name="__codelineno-69-37"></a><span class="w">        </span><span class="n">ch_languages</span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">character</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-69-38" name="__codelineno-69-38"></a><span class="w">    </span><span class="o">)</span>
 </code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
 <p>This produces exactly the same result.</p>
 </details>
 <p>In either case, it's awkward that we have to do some unpacking at the workflow level.</p>
@@ -6311,7 +6310,7 @@ But since we control the process code, we can change that.</p>
 <p>Ready? Let's go!</p>
 <h4 id="331-modify-the-cowpy-module-input">3.3.1. Modify the <code>COWPY</code> module input<a class="headerlink" href="#331-modify-the-cowpy-module-input" title="Permanent link">&para;</a></h4>
 <p>Make the following edits to the <code>cowpy.nf</code> module file:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="14:2"><input checked="checked" id="__tabbed_14_1" name="__tabbed_14" type="radio" /><input id="__tabbed_14_2" name="__tabbed_14" type="radio" /><div class="tabbed-labels"><label for="__tabbed_14_1">After</label><label for="__tabbed_14_2">Before</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="13:2"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><input id="__tabbed_13_2" name="__tabbed_13" type="radio" /><div class="tabbed-labels"><label for="__tabbed_13_1">After</label><label for="__tabbed_13_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">cowpy.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-70-10">10</a></span>
@@ -6334,7 +6333,7 @@ But since we control the process code, we can change that.</p>
 <h4 id="332-update-the-command-to-use-the-meta-map-field">3.3.2. Update the command to use the meta map field<a class="headerlink" href="#332-update-the-command-to-use-the-meta-map-field" title="Permanent link">&para;</a></h4>
 <p>The entire meta map is now available inside the process, so we can refer to the information it contains directly from inside the command block.</p>
 <p>Make the following edits to the <code>cowpy.nf</code> module file:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="15:2"><input checked="checked" id="__tabbed_15_1" name="__tabbed_15" type="radio" /><input id="__tabbed_15_2" name="__tabbed_15" type="radio" /><div class="tabbed-labels"><label for="__tabbed_15_1">After</label><label for="__tabbed_15_2">Before</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="14:2"><input checked="checked" id="__tabbed_14_1" name="__tabbed_14" type="radio" /><input id="__tabbed_14_2" name="__tabbed_14" type="radio" /><div class="tabbed-labels"><label for="__tabbed_14_1">After</label><label for="__tabbed_14_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">cowpy.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-72-16">16</a></span>
@@ -6363,7 +6362,7 @@ But since we control the process code, we can change that.</p>
 <h4 id="333-update-the-process-call-and-run-it">3.3.3. Update the process call and run it<a class="headerlink" href="#333-update-the-process-call-and-run-it" title="Permanent link">&para;</a></h4>
 <p>The process now expects its input to use the <code>[meta, file]</code> tuple structure, which is what the previous process outputs, so we can simply pass the whole <code>ch_languages</code> channel to the <code>COWPY</code> process.</p>
 <p>Make the following edits to the main workflow:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="16:2"><input checked="checked" id="__tabbed_16_1" name="__tabbed_16" type="radio" /><input id="__tabbed_16_2" name="__tabbed_16" type="radio" /><div class="tabbed-labels"><label for="__tabbed_16_1">After</label><label for="__tabbed_16_2">Before</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="15:2"><input checked="checked" id="__tabbed_15_1" name="__tabbed_15" type="radio" /><input id="__tabbed_15_2" name="__tabbed_15" type="radio" /><div class="tabbed-labels"><label for="__tabbed_15_1">After</label><label for="__tabbed_15_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-74-34">34</a></span>
@@ -6589,7 +6588,7 @@ However, none of the outputs we want will be produced.</p>
 </ol>
 <p>Here's an example of how that would work.</p>
 <p>First, at the process level, update the input definition as follows:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="17:2"><input checked="checked" id="__tabbed_17_1" name="__tabbed_17" type="radio" /><input id="__tabbed_17_2" name="__tabbed_17" type="radio" /><div class="tabbed-labels"><label for="__tabbed_17_1">After</label><label for="__tabbed_17_2">Before</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="16:2"><input checked="checked" id="__tabbed_16_1" name="__tabbed_16" type="radio" /><input id="__tabbed_16_2" name="__tabbed_16" type="radio" /><div class="tabbed-labels"><label for="__tabbed_16_1">After</label><label for="__tabbed_16_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">cowpy.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-84-12">12</a></span>
@@ -6606,7 +6605,7 @@ However, none of the outputs we want will be produced.</p>
 </div>
 </div>
 <p>Then, at the workflow level, use a mapping operation to extract the <code>character</code> property from the metadata and make it an explicit component of the input tuple:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="18:2"><input checked="checked" id="__tabbed_18_1" name="__tabbed_18" type="radio" /><input id="__tabbed_18_2" name="__tabbed_18" type="radio" /><div class="tabbed-labels"><label for="__tabbed_18_1">After</label><label for="__tabbed_18_2">Before</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="17:2"><input checked="checked" id="__tabbed_17_1" name="__tabbed_17" type="radio" /><input id="__tabbed_17_2" name="__tabbed_17" type="radio" /><div class="tabbed-labels"><label for="__tabbed_17_1">After</label><label for="__tabbed_17_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-86-37">37</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-86-37" name="__codelineno-86-37"></a><span class="hll"><span class="w">    </span><span class="n">COWPY</span><span class="o">(</span><span class="n">ch_languages</span><span class="o">.</span><span class="na">map</span><span class="o">{</span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="o">[</span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">character</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="o">]})</span>
