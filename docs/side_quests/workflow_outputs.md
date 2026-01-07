@@ -685,13 +685,13 @@ output {
 
 ### When to use workflow outputs vs publishDir
 
-| Use Case | Approach |
-|----------|----------|
-| Simple pipelines with few outputs | `publishDir` is fine |
-| Complex output organization | Workflow outputs |
-| Need output manifests | Workflow outputs |
-| Multiple processes publishing to same structure | Workflow outputs |
-| Quick prototyping | `publishDir` |
+| Use Case                                        | Approach             |
+| ----------------------------------------------- | -------------------- |
+| Simple pipelines with few outputs               | `publishDir` is fine |
+| Complex output organization                     | Workflow outputs     |
+| Need output manifests                           | Workflow outputs     |
+| Multiple processes publishing to same structure | Workflow outputs     |
+| Quick prototyping                               | `publishDir`         |
 
 ### Additional resources
 

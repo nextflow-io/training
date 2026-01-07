@@ -102,17 +102,17 @@ This is what you've been using throughout Hello Nextflow.
 
 Nextflow supports many executors for different platforms:
 
-| Executor | Platform | Use Case |
-|----------|----------|----------|
-| `local` | Your machine | Development, small jobs |
-| `slurm` | HPC clusters | Academic/research computing |
-| `sge` | HPC clusters | Grid Engine systems |
-| `pbs` | HPC clusters | PBS/Torque systems |
-| `lsf` | HPC clusters | LSF systems |
-| `awsbatch` | AWS | Cloud computing on AWS |
-| `google-batch` | GCP | Cloud computing on Google Cloud |
-| `azurebatch` | Azure | Cloud computing on Azure |
-| `k8s` | Kubernetes | Container orchestration |
+| Executor       | Platform     | Use Case                        |
+| -------------- | ------------ | ------------------------------- |
+| `local`        | Your machine | Development, small jobs         |
+| `slurm`        | HPC clusters | Academic/research computing     |
+| `sge`          | HPC clusters | Grid Engine systems             |
+| `pbs`          | HPC clusters | PBS/Torque systems              |
+| `lsf`          | HPC clusters | LSF systems                     |
+| `awsbatch`     | AWS          | Cloud computing on AWS          |
+| `google-batch` | GCP          | Cloud computing on Google Cloud |
+| `azurebatch`   | Azure        | Cloud computing on Azure        |
+| `k8s`          | Kubernetes   | Container orchestration         |
 
 Each executor has its own configuration options, but the core concepts are the same.
 
@@ -510,12 +510,12 @@ nextflow run main.nf -profile aws -with-trace -with-report
 
 **Common issues:**
 
-| Symptom | Likely Cause |
-|---------|--------------|
+| Symptom                | Likely Cause                        |
+| ---------------------- | ----------------------------------- |
 | Jobs stuck in RUNNABLE | Compute environment has no capacity |
-| Permission denied | IAM role missing S3 permissions |
-| Container not found | Image not in ECR or public registry |
-| Out of memory | Process needs more memory |
+| Permission denied      | IAM role missing S3 permissions     |
+| Container not found    | Image not in ECR or public registry |
+| Out of memory          | Process needs more memory           |
 
 ### 6.3. Resume behavior
 
@@ -591,13 +591,13 @@ profiles {
 
 ### When to use cloud execution
 
-| Scenario | Recommendation |
-|----------|----------------|
-| Development and testing | Local executor |
-| Small datasets, limited compute | Local or small HPC |
-| Large datasets, need to scale | Cloud (AWS Batch, Google Batch) |
-| Existing HPC infrastructure | SLURM, PBS, etc. |
-| Burst capacity beyond HPC | Hybrid cloud |
+| Scenario                        | Recommendation                  |
+| ------------------------------- | ------------------------------- |
+| Development and testing         | Local executor                  |
+| Small datasets, limited compute | Local or small HPC              |
+| Large datasets, need to scale   | Cloud (AWS Batch, Google Batch) |
+| Existing HPC infrastructure     | SLURM, PBS, etc.                |
+| Burst capacity beyond HPC       | Hybrid cloud                    |
 
 ### Additional resources
 

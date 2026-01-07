@@ -89,14 +89,14 @@ We'll create a plugin called `nf-greeting` that provides functions to manipulate
 Nextflow's plugin system is built on [PF4J](https://pf4j.org/), a lightweight plugin framework for Java.
 Plugins can extend Nextflow in several ways:
 
-| Extension Type | Purpose | Example |
-|---------------|---------|---------|
-| Functions | Custom functions callable from workflows | `reverseString()` |
-| Operators | Custom channel operators | `myFilter()` |
-| Factories | Create new channel types | `mySource()` |
-| Executors | Custom task execution backends | AWS Batch, Kubernetes |
-| Filesystems | Custom storage backends | S3, Azure Blob |
-| Trace Observers | Monitor workflow execution | Custom logging, metrics |
+| Extension Type  | Purpose                                  | Example                 |
+| --------------- | ---------------------------------------- | ----------------------- |
+| Functions       | Custom functions callable from workflows | `reverseString()`       |
+| Operators       | Custom channel operators                 | `myFilter()`            |
+| Factories       | Create new channel types                 | `mySource()`            |
+| Executors       | Custom task execution backends           | AWS Batch, Kubernetes   |
+| Filesystems     | Custom storage backends                  | S3, Azure Blob          |
+| Trace Observers | Monitor workflow execution               | Custom logging, metrics |
 
 ### 1.2. Plugin project structure
 
@@ -731,11 +731,11 @@ workflow {
 
 ### Extension point summary
 
-| Type | Annotation | Purpose |
-|------|------------|---------|
+| Type     | Annotation  | Purpose                 |
+| -------- | ----------- | ----------------------- |
 | Function | `@Function` | Callable from workflows |
-| Operator | `@Operator` | Transform channels |
-| Factory | `@Factory` | Create channels |
+| Operator | `@Operator` | Transform channels      |
+| Factory  | `@Factory`  | Create channels         |
 
 ### Additional resources
 
