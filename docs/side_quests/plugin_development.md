@@ -673,42 +673,59 @@ Tests verify that your code works correctly and help catch bugs when you make ch
 
     You don't need to write tests to use a plugin, but they're good practice for any code you plan to share or maintain.
 
-Create or edit the test file:
+The generated project includes a test for the Observer class, but we need to create a new test file for our extension functions.
+
+Create a new file `src/test/groovy/training/plugin/NfGreetingExtensionTest.groovy`:
 
 ```groovy title="src/test/groovy/training/plugin/NfGreetingExtensionTest.groovy" linenums="1"
 package training.plugin
 
-import org.junit.jupiter.api.Test
-import static org.junit.jupiter.api.Assertions.*
+import spock.lang.Specification
 
-class NfGreetingExtensionTest {
+/**
+ * Tests for the greeting extension functions
+ */
+class NfGreetingExtensionTest extends Specification {
 
-    @Test
-    void testReverseGreeting() {
+    def 'should reverse a greeting'() {
+        given:
         def ext = new NfGreetingExtension()
-        assertEquals('olleH', ext.reverseGreeting('Hello'))
-        assertEquals('ruojnoB', ext.reverseGreeting('Bonjour'))
+
+        expect:
+        ext.reverseGreeting('Hello') == 'olleH'
+        ext.reverseGreeting('Bonjour') == 'ruojnoB'
     }
 
-    @Test
-    void testDecorateGreeting() {
+    def 'should decorate a greeting'() {
+        given:
         def ext = new NfGreetingExtension()
-        assertEquals('*** Hello ***', ext.decorateGreeting('Hello'))
+
+        expect:
+        ext.decorateGreeting('Hello') == '*** Hello ***'
     }
 
-    @Test
-    void testFriendlyGreetingDefault() {
+    def 'should create friendly greeting with default name'() {
+        given:
         def ext = new NfGreetingExtension()
-        assertEquals('Hello, World!', ext.friendlyGreeting('Hello'))
+
+        expect:
+        ext.friendlyGreeting('Hello') == 'Hello, World!'
     }
 
-    @Test
-    void testFriendlyGreetingWithName() {
+    def 'should create friendly greeting with custom name'() {
+        given:
         def ext = new NfGreetingExtension()
-        assertEquals('Hello, Alice!', ext.friendlyGreeting('Hello', 'Alice'))
+
+        expect:
+        ext.friendlyGreeting('Hello', 'Alice') == 'Hello, Alice!'
     }
 }
 ```
+
+!!! note "Spock testing framework"
+
+    The generated project uses [Spock](https://spockframework.org/), a testing framework for Groovy.
+    Spock tests use descriptive method names in quotes (like `'should reverse a greeting'`) and a `given`/`expect` structure that reads almost like plain English.
 
 ### 5.3. Run the tests
 
@@ -727,10 +744,11 @@ Or:
     ```console
     > Task :test
 
-    NfGreetingExtensionTest > testReverseGreeting() PASSED
-    NfGreetingExtensionTest > testDecorateGreeting() PASSED
-    NfGreetingExtensionTest > testFriendlyGreetingDefault() PASSED
-    NfGreetingExtensionTest > testFriendlyGreetingWithName() PASSED
+    NfGreetingExtensionTest > should reverse a greeting PASSED
+    NfGreetingExtensionTest > should decorate a greeting PASSED
+    NfGreetingExtensionTest > should create friendly greeting with default name PASSED
+    NfGreetingExtensionTest > should create friendly greeting with custom name PASSED
+    NfGreetingObserverTest > should create the observer instance PASSED
 
     BUILD SUCCESSFUL
     ```
