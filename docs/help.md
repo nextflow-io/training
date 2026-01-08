@@ -1,12 +1,32 @@
 # Getting Help
 
-Quick reference to some handy links:
+[blurb]
 
-| Reference                                                   |  Community                                                   |
-| ----------------------------------------------------------- | ------------------------------------------------------------ |
-| [Nextflow Docs](https://nextflow.io/docs/latest/index.html) | [Nextflow Slack](https://www.nextflow.io/slack-invite.html)  |
-| [Nextflow Homepage](https://nextflow.io/)                   | [nf-core](https://nf-co.re/)                                 |
-| [Seqera](https://seqera.io/)                                | [Seqera Community Forum](https://community.seqera.io)        |
+<div class="grid cards" markdown>
+
+- :material-run:{ .lg .middle } **Community forum**
+
+  ***
+
+  Please post questions or report problems with the training in the [Community forum (training category)](https://community.seqera.io/c/training/39). You may find your question has already been asked --and answered!
+
+- :material-run:{ .lg .middle } **Slack channel**
+
+  ***
+
+  If you're on Slack, you can also reach out in the **training** channel or the general **help** channel in the [Nextflow Slack workspace](<!-- TODO what's the right url -->). It's harder to search for past answers, but a great place to chat with fellow developers.
+
+- :material-run:{ .lg .middle } **Seqera AI assistant**
+
+  ***
+
+  Something something AI assistant trained specifically for Nextflow
+
+- :material-walk:{ .lg .middle } **Nextflow documentation**
+
+  ***
+
+  Something something docs
 
 ## Nextflow Documentation
 
@@ -15,8 +35,6 @@ Nextflow has an excellent set of [docs](https://nextflow.io/docs/latest/), which
 ## Community forum
 
 If you're struggling with the training, please don't hesitate to reach out for help. Our amazing community is one of the great strengths of Nextflow!
-
-The [Seqera community forum](https://community.seqera.io) is a great place to ask questions about Nextflow. It's also a great place to find answers to questions that have already been asked!
 
 If you can't find a solution to your problem, just log in and click the "New Topic" button to post your question in the [Ask for Help](https://community.seqera.io/c/help/37) category. Feel free to include any tags you think might be relevant, since those can help our team and your peers find and answer your question.
 
