@@ -1,24 +1,28 @@
-# Environment Setup
+# Environment options
 
-The training courses offered on the Nextflow community training portal are optimized for use within our GitHub Codespaces environment.
+Our goal is to provide a consistent and thoroughly tested environment that allows learners to focus on learning Nextflow without having to spend time and effort on managing software.
+To that end, we have developed a containerized environment that contains all the necessary software, code files and example data to work through all of our courses.
 
-GitHub Codespaces offers a virtual machine with everything already set up for you, accessible from your web browser or built into your code editor (e.g., VSCode).
+This containerized environment can be run out of the box on [Github Codespaces](01_setup.md) or in any other custom environment that supports [devcontainers](./03_devcontainer.md).
+Alternatively, you can replicate this environment on your own local system by installing the software dependencies and cloning the training repository, as detailed [here](02_local.md).
 
-If you already have a GitHub Codespaces account, click on the button below, otherwise continue in this module to set up your account for the first time.
+For more details about the three options, please see the relevant articles.
 
-Let's get started!
+- [Using GitHub Codespaces for Nextflow training](01_setup.md)
+- [Setting up VS Code with Devcontainers](03_devcontainer.md)
+- [Installing everything on your local system](02_local.md)
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
+!!! warning
 
-For more detailed instructions for GitHub Codespaces, see the [GitHub Codespaces env-setup docs](01_setup.md).
-If you cannot use GitHub Codespaces and wish to use a local development environment, see the [documentation for local installation](02_local.md).
-If you prefer using VS Code with a pre-configured environment, see the [VS Code Devcontainers setup guide](03_devcontainer.md).
+    Many of our courses require a working internet connection by default, but in most cases it is possible to pre-download or cache everything locally if necessary.
+
+---
 
 !!! info "Deprecation of Gitpod"
 
     Nextflow Training used to use [Gitpod](https://gitpod.io) until February 2025.
-    However, the makers of Gitpod have decided to retire the free functionality in favor of their new [Gitpod Flex](https://www.gitpod.io/blog/introducing-gitpod-flex) system.
-    For that reason, we have switched to using GitHub Codespaces, which also offer a one-click developer environment with no prior setup.
+    However, the makers of Gitpod decided to retire the free functionality in favor of the [Gitpod Flex](https://www.gitpod.io/blog/introducing-gitpod-flex) system.
+    For that reason, we switched to using GitHub Codespaces, which also offer a one-click developer environment with no prior setup.
 
     Depending on when you signed up to Gitpod and when exactly they retire the service, you may still be able to launch the training in their old cloud IDE, though we cannot guarantee reliable access going forward:
     [Open in Gitpod](https://gitpod.io/#https://github.com/nextflow-io/training).

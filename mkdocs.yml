@@ -107,8 +107,8 @@ nav:
       - help.md
       - envsetup/index.md
       - envsetup/01_setup.md
-      - envsetup/02_local.md
       - envsetup/03_devcontainer.md
+      - envsetup/02_local.md
 
 theme:
   name: material
