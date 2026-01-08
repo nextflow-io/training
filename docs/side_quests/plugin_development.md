@@ -746,21 +746,9 @@ Or:
     6 actionable tasks: 2 executed, 4 up-to-date
     ```
 
-    **Where are the test results?** Gradle hides detailed output when all tests pass - "BUILD SUCCESSFUL" means everything worked!
+    **Where are the test results?** Gradle hides detailed output when all tests pass - "BUILD SUCCESSFUL" means everything worked! If any test fails, you'll see detailed error messages.
 
-    If you want to see individual test names, use the `--info` flag:
-
-    ```bash
-    ./gradlew test --info
-    ```
-
-    This shows verbose output including each test that runs:
-
-    ```console
-    NfGreetingExtensionTest > should reverse a greeting PASSED
-    NfGreetingExtensionTest > should decorate a greeting PASSED
-    ...
-    ```
+    For a detailed HTML report of all tests, open `build/reports/tests/test/index.html` in your browser after running the tests.
 
 !!! tip "If the build fails"
 
