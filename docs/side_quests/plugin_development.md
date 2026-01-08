@@ -831,48 +831,95 @@ plugins {
 
 ### 6.2. Import and use functions
 
-Edit `main.nf` to use our custom functions:
+Edit `main.nf` to import and use our custom functions:
 
-```groovy title="main.nf" linenums="1"
-#!/usr/bin/env nextflow
+=== "After"
 
-// Import custom functions from our plugin
-include { reverseGreeting; decorateGreeting } from 'plugin/nf-greeting'
+    ```groovy title="main.nf" hl_lines="4-5 18-19 30-33" linenums="1"
+    #!/usr/bin/env nextflow
 
-params.input = 'greetings.csv'
+    // Import custom functions from our plugin
+    include { reverseGreeting } from 'plugin/nf-greeting'
+    include { decorateGreeting } from 'plugin/nf-greeting'
 
-process SAY_HELLO {
+    params.input = 'greetings.csv'
 
-    input:
-        val greeting
+    process SAY_HELLO {
 
-    output:
-        path "${greeting}-output.txt"
+        input:
+            val greeting
 
-    script:
-    // Use our custom plugin function to decorate the greeting
-    def decorated = decorateGreeting(greeting)
-    """
-    echo '$decorated' > '${greeting}-output.txt'
-    """
-}
+        output:
+            path "${greeting}-output.txt"
 
-workflow {
+        script:
+        // Use our custom plugin function to decorate the greeting
+        def decorated = decorateGreeting(greeting)
+        """
+        echo '$decorated' > '${greeting}-output.txt'
+        """
+    }
 
-    greeting_ch = channel.fromPath(params.input)
-                        .splitCsv(header: true)
-                        .map { row -> row.greeting }
+    workflow {
 
-    // Demonstrate using reverseGreeting function
-    greeting_ch
-        .map { greeting -> reverseGreeting(greeting) }
-        .view { "Reversed: $it" }
+        greeting_ch = channel.fromPath(params.input)
+                            .splitCsv(header: true)
+                            .map { row -> row.greeting }
 
-    SAY_HELLO(greeting_ch)
+        // Demonstrate using reverseGreeting function
+        greeting_ch
+            .map { greeting -> reverseGreeting(greeting) }
+            .view { "Reversed: $it" }
 
-    SAY_HELLO.out.view()
-}
-```
+        SAY_HELLO(greeting_ch)
+
+        SAY_HELLO.out.view()
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="main.nf" linenums="1"
+    #!/usr/bin/env nextflow
+
+    /*
+     * Simple greeting pipeline
+     * Will be enhanced to use custom plugin functions
+     */
+
+    params.input = 'greetings.csv'
+
+    process SAY_HELLO {
+
+        input:
+            val greeting
+
+        output:
+            path "${greeting}-output.txt"
+
+        script:
+        """
+        echo '$greeting' > '${greeting}-output.txt'
+        """
+    }
+
+    workflow {
+
+        greeting_ch = channel.fromPath(params.input)
+                            .splitCsv(header: true)
+                            .map { row -> row.greeting }
+
+        SAY_HELLO(greeting_ch)
+
+        SAY_HELLO.out.view()
+    }
+    ```
+
+The key changes:
+
+- **Lines 4-5**: Import our plugin functions using `include { function } from 'plugin/plugin-name'`
+- **Lines 18-19**: Use `decorateGreeting()` in the process script to wrap the greeting
+- **Lines 30-33**: Use `reverseGreeting()` in the workflow to demonstrate channel operations with plugin functions
 
 ### 6.3. Run the pipeline
 
