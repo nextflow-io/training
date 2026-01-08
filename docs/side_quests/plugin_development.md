@@ -641,11 +641,17 @@ Or directly with the Gradle wrapper:
     Welcome to Gradle 8.14!
     ...
 
+    Deprecated Gradle features were used in this build...
+
     BUILD SUCCESSFUL in 23s
     4 actionable tasks: 4 executed
     ```
 
-    Subsequent builds will be much faster since Gradle is already downloaded.
+    **Don't worry about the warnings!**
+
+    - **"Downloading gradle..."**: This only happens the first time. Subsequent builds are much faster.
+    - **"Deprecated Gradle features..."**: This warning comes from the plugin template, not your code. It's safe to ignore.
+    - **"BUILD SUCCESSFUL"**: This is what matters! Your plugin compiled without errors.
 
 ### 5.2. Write unit tests
 
