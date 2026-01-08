@@ -612,13 +612,13 @@ Let's build and test our plugin.
 The Makefile provides convenient commands:
 
 ```bash
-make build
+make assemble
 ```
 
 Or directly with the Gradle wrapper:
 
 ```bash
-./gradlew build
+./gradlew assemble
 ```
 
 ??? info "What is `./gradlew`?"
@@ -756,7 +756,7 @@ This copies the plugin to `~/.nextflow/plugins/`.
 
 ### Takeaway
 
-Use `make build` to compile and `make test` to run tests.
+Use `make assemble` to compile and `make test` to run tests.
 Install with `make install` to use the plugin locally.
 
 ### What's next?
@@ -996,10 +996,10 @@ Let's summarize what we've learned.
 ### Plugin development checklist
 
 - [ ] Java 17+ installed
-- [ ] Create project with `nextflow plugin create`
+- [ ] Create project with `nextflow plugin create <name> <org>`
 - [ ] Implement extension class with `@Function` methods
 - [ ] Write unit tests
-- [ ] Build with `make build`
+- [ ] Build with `make assemble`
 - [ ] Install with `make install`
 - [ ] Enable in `nextflow.config` with `plugins { id 'plugin-id' }`
 - [ ] Import functions with `include { fn } from 'plugin/plugin-id'`
