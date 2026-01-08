@@ -632,23 +632,20 @@ Or directly with the Gradle wrapper:
 
 ??? example "Build output"
 
-    ```console
-    > Task :compileJava NO-SOURCE
-    > Task :compileGroovy
-    > Task :processResources
-    > Task :classes
-    > Task :jar
-    > Task :assemble
-    > Task :compileTestJava NO-SOURCE
-    > Task :compileTestGroovy
-    > Task :processTestResources NO-SOURCE
-    > Task :testClasses
-    > Task :test
-    > Task :check
-    > Task :build
+    The first time you run this, Gradle will download itself (this may take a minute):
 
-    BUILD SUCCESSFUL
+    ```console
+    Downloading https://services.gradle.org/distributions/gradle-8.14-bin.zip
+    ...10%...20%...30%...40%...50%...60%...70%...80%...90%...100%
+
+    Welcome to Gradle 8.14!
+    ...
+
+    BUILD SUCCESSFUL in 23s
+    4 actionable tasks: 4 executed
     ```
+
+    Subsequent builds will be much faster since Gradle is already downloaded.
 
 ### 5.2. Write unit tests
 
