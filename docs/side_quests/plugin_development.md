@@ -816,7 +816,7 @@ Go back to the pipeline directory:
 cd ..
 ```
 
-Edit `nextflow.config` to enable the plugin:
+The `nextflow.config` file is already set up to use our plugin:
 
 ```groovy title="nextflow.config"
 plugins {
