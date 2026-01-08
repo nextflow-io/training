@@ -1,9 +1,14 @@
-# Local installation
+# Manual installation
 
-It is possible to install everything you need to run the training in your own local environment.
+It is possible to install everything you need to run the training in your own local environment manually.
 
 Here we've documented how to do that on standard POSIX-compatible systems (assuming a personal machine such as a laptop).
 Keep in mind that some details may be different depending on your specific system.
+
+!!! tip
+
+    Before you proceed, have you considered using the [Devcontainers approach](03_devcontainer.md)?
+    It provides all the necessary tools and dependencies without requiring manual installation.
 
 ## General software requirements
 
