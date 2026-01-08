@@ -748,7 +748,30 @@ Or:
 
     **Where are the test results?** Gradle hides detailed output when all tests pass - "BUILD SUCCESSFUL" means everything worked! If any test fails, you'll see detailed error messages.
 
-    For a detailed HTML report of all tests, open `build/reports/tests/test/index.html` in your browser after running the tests.
+### 5.4. View the test report
+
+To see detailed results for each test, you can view the HTML test report that Gradle generates.
+
+Start a simple web server in the test report directory:
+
+```bash
+cd build/reports/tests/test
+python -m http.server
+```
+
+VS Code will prompt you to open the application in your browser.
+Click through to your test class to see individual test results:
+
+![Test report showing all tests passed](./img/test_report.png)
+
+The report shows each test method, its duration, and whether it passed or failed.
+This confirms that all four of our greeting functions are being tested correctly.
+
+Press ++ctrl+c++ in the terminal to stop the server when you're done, then return to the plugin directory:
+
+```bash
+cd ../../../..
+```
 
 !!! tip "If the build fails"
 
