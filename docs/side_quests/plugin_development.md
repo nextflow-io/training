@@ -246,21 +246,23 @@ A typical plugin project looks like this:
 nf-greeting/
 ├── build.gradle          # Build configuration
 ├── settings.gradle       # Project settings
-├── Makefile             # Convenience commands
+├── gradlew               # Gradle wrapper script
+├── Makefile              # Convenience commands
 └── src/
     ├── main/
     │   └── groovy/
-    │       └── nextflow/greeting/
-    │           ├── GreetingPlugin.groovy    # Main plugin class
-    │           └── GreetingExtension.groovy # Extension with functions
-    ├── test/
-    │   └── groovy/
-    │       └── nextflow/greeting/
-    │           └── GreetingExtensionTest.groovy
-    └── resources/
-        └── META-INF/
-            └── MANIFEST.MF   # Plugin metadata
+    │       └── training/plugin/
+    │           ├── NfGreetingPlugin.groovy    # Main plugin class
+    │           ├── NfGreetingExtension.groovy # Extension with functions
+    │           ├── NfGreetingFactory.groovy   # Channel factory (optional)
+    │           └── NfGreetingObserver.groovy  # Trace observer (optional)
+    └── test/
+        └── groovy/
+            └── training/plugin/
+                └── NfGreetingObserverTest.groovy
 ```
+
+The package name (`training/plugin`) comes from the organization name you provide when creating the plugin.
 
 ### 2.3. Key components
 
@@ -309,7 +311,7 @@ cd nf-greeting
 List the contents:
 
 ```bash
-ls -la
+tree
 ```
 
 You should see:
@@ -317,10 +319,31 @@ You should see:
 ```console
 .
 ├── build.gradle
-├── settings.gradle
+├── COPYING
+├── gradle
+│   └── wrapper
+│       ├── gradle-wrapper.jar
+│       └── gradle-wrapper.properties
+├── gradlew
 ├── Makefile
-└── src/
-    └── ...
+├── README.md
+├── settings.gradle
+└── src
+    ├── main
+    │   └── groovy
+    │       └── training
+    │           └── plugin
+    │               ├── NfGreetingExtension.groovy
+    │               ├── NfGreetingFactory.groovy
+    │               ├── NfGreetingObserver.groovy
+    │               └── NfGreetingPlugin.groovy
+    └── test
+        └── groovy
+            └── training
+                └── plugin
+                    └── NfGreetingObserverTest.groovy
+
+11 directories, 13 files
 ```
 
 ### 3.3. Understand settings.gradle
@@ -353,9 +376,11 @@ version = '0.1.0'
 nextflowPlugin {
     nextflowVersion = '25.04.0'
     provider = 'training'
-    className = 'nextflow.greeting.GreetingPlugin'
+    className = 'training.plugin.NfGreetingPlugin'
     extensionPoints = [
-        'nextflow.greeting.GreetingExtension'
+        'training.plugin.NfGreetingExtension',
+        'training.plugin.NfGreetingFactory',
+        'training.plugin.NfGreetingObserver'
     ]
 }
 ```
@@ -364,8 +389,8 @@ The `nextflowPlugin` block configures:
 
 - `nextflowVersion`: Minimum Nextflow version required
 - `provider`: Your name or organization
-- `className`: The main plugin class
-- `extensionPoints`: Classes providing extensions (functions, operators)
+- `className`: The main plugin class (uses your package name)
+- `extensionPoints`: Classes providing extensions (functions, operators, observers)
 
 ### Takeaway
 
@@ -386,17 +411,17 @@ Functions are defined in classes that extend `PluginExtensionPoint`.
 Open the extension file:
 
 ```bash
-cat src/main/groovy/nextflow/greeting/GreetingExtension.groovy
+cat src/main/groovy/training/plugin/NfGreetingExtension.groovy
 ```
 
-The template includes a sample function. Let's replace it with our greeting functions.
+The template includes sample functions. Let's replace them with our greeting functions.
 
 ### 4.2. Create our functions
 
 Edit the file to contain:
 
-```groovy title="src/main/groovy/nextflow/greeting/GreetingExtension.groovy" linenums="1"
-package nextflow.greeting
+```groovy title="src/main/groovy/training/plugin/NfGreetingExtension.groovy" linenums="1"
+package training.plugin
 
 import groovy.transform.CompileStatic
 import nextflow.Session
@@ -407,7 +432,7 @@ import nextflow.plugin.extension.PluginExtensionPoint
  * Plugin extension providing custom functions for greeting manipulation
  */
 @CompileStatic
-class GreetingExtension extends PluginExtensionPoint {
+class NfGreetingExtension extends PluginExtensionPoint {
 
     @Override
     void init(Session session) {
@@ -444,13 +469,13 @@ class GreetingExtension extends PluginExtensionPoint {
 
     If this code looks unfamiliar, here's a breakdown of the key elements:
 
-    **`package nextflow.greeting`** - Declares which package (folder structure) this code belongs to. This must match the directory structure.
+    **`package training.plugin`** - Declares which package (folder structure) this code belongs to. This must match the directory structure.
 
     **`import ...`** - Brings in code from other packages, similar to Python's `import` or R's `library()`.
 
     **`@CompileStatic`** - An annotation (marked with `@`) that tells Groovy to check types at compile time. This catches errors earlier.
 
-    **`class GreetingExtension extends PluginExtensionPoint`** - Defines a class that inherits from `PluginExtensionPoint`. The `extends` keyword means "this class is a type of that class."
+    **`class NfGreetingExtension extends PluginExtensionPoint`** - Defines a class that inherits from `PluginExtensionPoint`. The `extends` keyword means "this class is a type of that class."
 
     **`@Override`** - Indicates we're replacing a method from the parent class.
 
@@ -571,36 +596,36 @@ Tests verify that your code works correctly and help catch bugs when you make ch
 
 Create or edit the test file:
 
-```groovy title="src/test/groovy/nextflow/greeting/GreetingExtensionTest.groovy" linenums="1"
-package nextflow.greeting
+```groovy title="src/test/groovy/training/plugin/NfGreetingExtensionTest.groovy" linenums="1"
+package training.plugin
 
 import org.junit.jupiter.api.Test
 import static org.junit.jupiter.api.Assertions.*
 
-class GreetingExtensionTest {
+class NfGreetingExtensionTest {
 
     @Test
     void testReverseGreeting() {
-        def ext = new GreetingExtension()
+        def ext = new NfGreetingExtension()
         assertEquals('olleH', ext.reverseGreeting('Hello'))
         assertEquals('ruojnoB', ext.reverseGreeting('Bonjour'))
     }
 
     @Test
     void testDecorateGreeting() {
-        def ext = new GreetingExtension()
+        def ext = new NfGreetingExtension()
         assertEquals('*** Hello ***', ext.decorateGreeting('Hello'))
     }
 
     @Test
     void testFriendlyGreetingDefault() {
-        def ext = new GreetingExtension()
+        def ext = new NfGreetingExtension()
         assertEquals('Hello, World!', ext.friendlyGreeting('Hello'))
     }
 
     @Test
     void testFriendlyGreetingWithName() {
-        def ext = new GreetingExtension()
+        def ext = new NfGreetingExtension()
         assertEquals('Hello, Alice!', ext.friendlyGreeting('Hello', 'Alice'))
     }
 }
@@ -623,10 +648,10 @@ Or:
     ```console
     > Task :test
 
-    GreetingExtensionTest > testReverseGreeting() PASSED
-    GreetingExtensionTest > testDecorateGreeting() PASSED
-    GreetingExtensionTest > testFriendlyGreetingDefault() PASSED
-    GreetingExtensionTest > testFriendlyGreetingWithName() PASSED
+    NfGreetingExtensionTest > testReverseGreeting() PASSED
+    NfGreetingExtensionTest > testDecorateGreeting() PASSED
+    NfGreetingExtensionTest > testFriendlyGreetingDefault() PASSED
+    NfGreetingExtensionTest > testFriendlyGreetingWithName() PASSED
 
     BUILD SUCCESSFUL
     ```
@@ -918,9 +943,9 @@ String myFunction(String input, String optional = 'default') {
 
 ```groovy
 nextflowPlugin {
-    id = 'my-plugin'
-    className = 'my.package.MyPlugin'
-    extensionClasses = ['my.package.MyExtension']
+    provider = 'my-org'
+    className = 'my.org.MyPlugin'
+    extensionPoints = ['my.org.MyExtension']
 }
 ```
 
