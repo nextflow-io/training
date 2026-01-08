@@ -288,10 +288,11 @@ Let's create our plugin project.
 The easiest way to create a plugin is with the built-in command:
 
 ```bash
-nextflow plugin create nf-greeting
+nextflow plugin create nf-greeting training
 ```
 
 This scaffolds a complete plugin project.
+The first argument is the plugin name, and the second is your organization name (used for the package namespace).
 
 !!! tip "Manual creation"
 
