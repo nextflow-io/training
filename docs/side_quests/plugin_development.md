@@ -969,13 +969,11 @@ nextflow run main.nf
 cat work/*/*/Hello-output.txt
 ```
 
-You should see:
-
-```
+```console title="Output"
 *** Hello ***
 ```
 
-The `decorateGreeting()` function was applied in the process script.
+The `decorateGreeting()` function was applied in the process script, wrapping the greeting with decorative markers.
 
 ### Takeaway
 
