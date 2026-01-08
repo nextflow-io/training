@@ -742,15 +742,24 @@ Or:
 ??? example "Test output"
 
     ```console
-    > Task :test
+    BUILD SUCCESSFUL in 5s
+    6 actionable tasks: 2 executed, 4 up-to-date
+    ```
 
+    **Where are the test results?** Gradle hides detailed output when all tests pass - "BUILD SUCCESSFUL" means everything worked!
+
+    If you want to see individual test names, use the `--info` flag:
+
+    ```bash
+    ./gradlew test --info
+    ```
+
+    This shows verbose output including each test that runs:
+
+    ```console
     NfGreetingExtensionTest > should reverse a greeting PASSED
     NfGreetingExtensionTest > should decorate a greeting PASSED
-    NfGreetingExtensionTest > should create friendly greeting with default name PASSED
-    NfGreetingExtensionTest > should create friendly greeting with custom name PASSED
-    NfGreetingObserverTest > should create the observer instance PASSED
-
-    BUILD SUCCESSFUL
+    ...
     ```
 
 !!! tip "If the build fails"
