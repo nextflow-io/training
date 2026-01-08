@@ -366,22 +366,29 @@ cat build.gradle
 
 Key sections in the build file:
 
-```groovy title="build.gradle (key parts)"
+```groovy title="build.gradle"
 plugins {
-    id 'io.nextflow.nextflow-plugin' version '1.0.0-beta.6'
+    id 'io.nextflow.nextflow-plugin' version '0.0.1-alpha4'
 }
 
 version = '0.1.0'
 
 nextflowPlugin {
-    nextflowVersion = '25.04.0'
+    nextflowVersion = '24.10.0'
+
     provider = 'training'
     className = 'training.plugin.NfGreetingPlugin'
     extensionPoints = [
         'training.plugin.NfGreetingExtension',
-        'training.plugin.NfGreetingFactory',
-        'training.plugin.NfGreetingObserver'
+        'training.plugin.NfGreetingFactory'
     ]
+
+    publishing {
+        registry {
+            url = 'https://nf-plugins-registry.dev-tower.net/api'
+            authToken = project.findProperty('pluginRegistry.accessToken')
+        }
+    }
 }
 ```
 
@@ -390,7 +397,8 @@ The `nextflowPlugin` block configures:
 - `nextflowVersion`: Minimum Nextflow version required
 - `provider`: Your name or organization
 - `className`: The main plugin class (uses your package name)
-- `extensionPoints`: Classes providing extensions (functions, operators, observers)
+- `extensionPoints`: Classes providing extensions (functions, factories, etc.)
+- `publishing`: Configuration for publishing to the plugin registry (optional)
 
 ### Takeaway
 
