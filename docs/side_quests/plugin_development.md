@@ -945,20 +945,23 @@ nextflow run main.nf
     ```console
     N E X T F L O W   ~  version 25.04.3
 
-    Launching `main.nf` [happy_euler] DSL2 - revision: abc123
+    Launching `main.nf` [elated_marconi] DSL2 - revision: cd8d52c97c
 
+    Pipeline is starting! 🚀
     executor >  local (5)
-    [12/abc123] SAY_HELLO (1) | 5 of 5 ✔
-
+    [fe/109754] process > SAY_HELLO (5) [100%] 5 of 5 ✔
     Reversed: olleH
     Reversed: ruojnoB
     Reversed: àloH
     Reversed: oaiC
     Reversed: ollaH
-    /path/to/work/.../Hello-output.txt
-    /path/to/work/.../Bonjour-output.txt
+    /workspaces/.../work/.../Holà-output.txt
+    /workspaces/.../work/.../Hello-output.txt
     ...
+    Pipeline complete! 🎉
     ```
+
+    The "Pipeline is starting!" and "Pipeline complete!" messages come from the `NfGreetingObserver` trace observer that was included in the generated plugin template.
 
 ### 6.4. Check the output files
 
