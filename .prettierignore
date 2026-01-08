@@ -1,3 +1,6 @@
+# Complex formatting on the homepage
+docs/index.md
+
 # Ignore all files in side-quests/solutions
 side-quests/solutions/nf-core/**/*.js
 side-quests/solutions/nf-core/**/*.md

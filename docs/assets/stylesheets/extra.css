@@ -16,6 +16,11 @@
   z-index: 1;
 }
 
+/* Some helper classes */
+.mt-1 {
+  margin-top: 1rem !important;
+}
+
 /* Seqera style typography */
 .md-typeset h1 {
   color: var(--md-default-fg-color);
@@ -212,11 +217,11 @@ h3 .enumerate-headings-plugin {
 .md-typeset .admonition.courses,
 .md-typeset details.courses {
   border-color: rgb(142, 142, 142);
-  font-size: 0.8rem;
 }
 .md-typeset .courses > .admonition-title,
 .md-typeset .courses > summary {
   background-color: rgba(153, 153, 153, 0.1);
+  font-weight: normal;
 }
 .md-typeset .courses > .admonition-title::before,
 .md-typeset .courses > summary::before {
