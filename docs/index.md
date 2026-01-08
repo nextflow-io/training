@@ -73,7 +73,7 @@ hide:
 
 <div class="grid cards" markdown>
 
--   :material-baby-carriage:{ .lg .middle } __Introductory track__
+-   :material-walk:{ .lg .middle } __Introductory track__
 
     ---
 
@@ -103,7 +103,7 @@ hide:
 
         [Start the Nextflow for Genomics training :material-arrow-right:](nf4_science/genomics/){ .md-button .md-button--secondary }
 
-    ??? courses "**Nextflow for RNAseq** (bulk)"
+    ??? courses "**Nextflow for RNAseq** (bulk RNAseq)"
 
         For researchers who wish to learn how to develop their own RNAseq pipelines. The course uses a bulk RNAseq processing use case to demonstrate how to develop a simple but functional RNAseq pipeline.
 
@@ -115,7 +115,7 @@ hide:
 
         [Start the Nextflow for Imaging training :material-arrow-right:](nf4_science/imaging/){ .md-button .md-button--secondary }
 
--   :fontawesome-solid-mortar-board:{ .lg .middle } __Advanced track__
+-   :material-run:{ .lg .middle } __Advanced track__
 
     ---
 
@@ -123,12 +123,11 @@ hide:
 
     Learn to utilize code and best practices from the [nf-core](https://nf-co.re/) community project.
 
-    ??? courses "**Hello nf-core**"
+    ??? courses "**Hello nf-core:**" Get started with nf-core
 
         For developers who wish to learn run and develop [nf-core](https://nf-co.re/) compliant pipelines. The course covers the structure of nf-core pipelines in enough detail to enable developing simple but fully functional pipelines that follow the nf-core template and development best practices, as well as use existing nf-core modules.
 
         [Start the Hello nf-core training :material-arrow-right:](hello_nf-core/index.md){ .md-button .md-button--secondary }
-
 
     ### :material-rocket-launch:{.nextflow-primary} Advanced Nextflow Training
 
