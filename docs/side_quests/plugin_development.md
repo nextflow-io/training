@@ -816,13 +816,26 @@ Go back to the pipeline directory:
 cd ..
 ```
 
-The `nextflow.config` file is already set up to use our plugin:
+Edit `nextflow.config` to enable the plugin by uncommenting the plugins block and adding the version:
 
-```groovy title="nextflow.config"
-plugins {
-    id 'nf-greeting@0.1.0'
-}
-```
+=== "After"
+
+    ```groovy title="nextflow.config" hl_lines="3"
+    // Plugin development example config
+    plugins {
+        id 'nf-greeting@0.1.0'
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="nextflow.config"
+    // Plugin development example config
+    // Uncomment the following when your plugin is ready:
+    // plugins {
+    //     id 'nf-greeting'
+    // }
+    ```
 
 !!! note "Version required for local plugins"
 
