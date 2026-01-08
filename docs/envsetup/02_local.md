@@ -1,90 +1,55 @@
 # Local installation
 
-If you **cannot** use GitHub Codespaces session for any reason, you have the option of installing everything locally instead.
+It is possible to install everything you need to run the training in your own local environment.
 
-Some requirements may be different depending on your local machine.
+Here we've documented how to do that on standard POSIX-compatible systems (assuming a personal machine such as a laptop).
+Keep in mind that some details may be different depending on your specific system.
 
-## Requirements
+## General software requirements
 
-Nextflow can be used on any POSIX-compatible system (Linux, macOS, Windows Subsystem for Linux, etc.).
+Nextflow can be used on any POSIX-compatible system (Linux, macOS, Windows Subsystem for Linux, etc.) with Java installed.
+Our training courses have a few additional requirements.
 
-**Requirements**
+In total, you will need to have the following software installed:
 
-- Bash
+- Bash or equivalent shell
 - [Java 11 (or later, up to 21)](https://www.oracle.com/technetwork/java/javase/downloads/index.html)
 - [Git](https://git-scm.com/)
 - [Docker](https://docs.docker.com/get-docker/)
-
-**Optional requirements**
-
-- [Singularity](https://github.com/sylabs/singularity) 2.5.x (or later)
 - [Conda](https://conda.io/) 4.5 (or later)
-- [Graphviz](http://www.graphviz.org/)
-- [AWS CLI](https://aws.amazon.com/cli/)
-- A configured AWS Batch computing environment
+- [VSCode](https://code.visualstudio.com) with the [Nextflow extension](https://www.nextflow.io/docs/latest/developer-env.html#devenv-nextflow)
 
-## Download Nextflow
+The VSCode application is technically optional but we strongly recommend that you use it for working through the courses as well as for your Nextflow development work in general.
 
-Execute this command in your terminal:
+The Nextflow documentation manual provides instructions for installing these dependencies under [Environment setup](https://www.nextflow.io/docs/latest/developer-env.html).
 
-```bash
-wget -qO- https://get.nextflow.io | bash
-```
+## Nextflow and nf-core tools
 
-Alternatively, you could use the `curl` command:
+You will need to install Nextflow itself, plus the nf-core tools, as detailed in the articles linked below:
 
-```bash
-curl -s https://get.nextflow.io | bash
-```
+- [Nextflow installation](https://www.nextflow.io/docs/latest/install.html)
+- [nf-core tools](https://nf-co.re/docs/nf-core-tools/installation)
 
-Next, ensure that the downloaded binary is executable:
+We recommend using the self-install option for Nextflow and the PyPI option for nf-core tools.
 
-```bash
-chmod +x nextflow
-```
+!!! warning "Version compatibility"
 
-Finally, ensure the `nextflow` executable is in your `$PATH`. The executable could be in `/usr/local/bin`, `/bin/`, etc.
+    <!-- Any update to this content needs to be copied to the home page -->
+    **As of January 2026, all of our Nextflow training courses require Nextflow version 25.10.2 or later, with strict v2 syntax activated, unless otherwise noted.**
 
-## Docker
+    For more information about version requirements and strict v2 syntax, please see the migration guide.
 
-Ensure you have Docker Desktop running on your machine. You can download Docker [here](https://docs.docker.com/get-docker/).
+    Older versions of the training material corresponding to prior syntax are available via the version selector in the menu bar of this webpage.
 
-## Training material
+## Training materials
 
-You can view the training material [here](https://training.nextflow.io/).
-
-To download the material, execute this command:
+The easiest way to download the training materials is to clone the entire repository using this command:
 
 ```bash
 git clone https://github.com/nextflow-io/training.git
 ```
 
-Then `cd` into the relevant directory. By default, that is `hello-nextflow`.
+Each course has its own directory.
+To work through a course, open a terminal window (ideally, from inside the VSCode application) and `cd` into the relevant directory.
 
-## Checking your installation
-
-Check that you have correctly installed `nextflow` by running the following command:
-
-```bash
-nextflow info
-```
-
-This should print the current version, system, and runtime.
-
-!!! question "Exercise"
-
-    To test that the environment is working correctly, execute the following command:
-
-    ```bash
-    nextflow info
-    ```
-
-    This should come up with the Nextflow version and runtime information (actual versions may differ):
-
-    ```console
-    Version: 23.10.1 build 5891
-    Created: 12-01-2024 22:01 UTC
-    System: Linux 6.1.75-060175-generic
-    Runtime: Groovy 3.0.19 on OpenJDK 64-Bit Server VM 11.0.1-internal+0-adhoc..src
-    Encoding: UTF-8 (UTF-8)
-    ```
+You can then follow the course instructions provided on the website.

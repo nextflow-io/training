@@ -23,6 +23,7 @@ hide:
 
     ??? warning "Version compatibility"
 
+        <!-- Any update to this content needs to be copied to the local installation page -->
         **As of January 2026, all of our Nextflow training courses require Nextflow version 25.10.2 or later, with strict v2 syntax activated, unless otherwise noted.**
 
         For more information about version requirements and strict v2 syntax, please see the migration guide.

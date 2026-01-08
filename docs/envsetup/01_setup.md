@@ -55,7 +55,7 @@ However, it is possible to customize the environment by clicking the "Change opt
 Opening a new GitHub Codespaces environment for the first time can take several minutes, because the system has to set up your virtual machine, so don't worry there is a wait time.
 However, it should not take more than five minutes.
 
-## Code editing interface
+## Navigating the training interface
 
 Once your GitHub Codespaces has loaded, you should see something similar to the following (which may open in light mode depending on your account preferences):
 
