@@ -10,7 +10,7 @@ include { SAY_HELLO } from './modules/greetings.nf'
 include { CONVERT_TO_UPPER } from './modules/greetings.nf'
 
 workflow {
-
+    main:
     // Create a channel from the CSV file with metadata
     greeting_ch = channel.fromPath(params.input)
                         .splitCsv(header: true)
@@ -22,7 +22,6 @@ workflow {
     // Convert to uppercase
     CONVERT_TO_UPPER(SAY_HELLO.out)
 
-    // Publish section defines what outputs go where
     publish:
     greetings = SAY_HELLO.out
     uppercase = CONVERT_TO_UPPER.out
