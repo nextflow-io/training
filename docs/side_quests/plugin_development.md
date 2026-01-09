@@ -1641,18 +1641,28 @@ Now test the operator by editing `main.nf` to use it:
 Run it:
 
 ```bash
-nextflow run main.nf
+nextflow run main.nf -ansi-log false
 ```
 
 ```console title="Expected output"
+N E X T F L O W  ~  version 25.04.3
+Launching `main.nf` [fabulous_rosalind] DSL2 - revision: 63f3119fbc
 Pipeline is starting! 🚀
 SHOUTED: HELLO
 SHOUTED: BONJOUR
 SHOUTED: HOLÀ
 SHOUTED: CIAO
 SHOUTED: HALLO
-executor >  local (5)
-[26/c78152] SAY_HELLO (2) [100%] 5 of 5 ✔
+[07/9789e3] Submitted process > SAY_HELLO (2)
+[3b/131239] Submitted process > SAY_HELLO (1)
+[ce/900df3] Submitted process > SAY_HELLO (3)
+[28/d4876e] Submitted process > SAY_HELLO (4)
+📊 Tasks completed so far: 1
+📊 Tasks completed so far: 2
+📊 Tasks completed so far: 3
+[29/8cb8f7] Submitted process > SAY_HELLO (5)
+📊 Tasks completed so far: 4
+📊 Tasks completed so far: 5
 Pipeline complete! 👋
 📈 Final task count: 5
 ```
