@@ -1319,7 +1319,7 @@ Edit `NfGreetingFactory.groovy` to add our new observer:
 
 === "After"
 
-    ```groovy title="NfGreetingFactory.groovy" hl_lines="5-6"
+    ```groovy title="NfGreetingFactory.groovy" linenums="31" hl_lines="3-6"
     @Override
     Collection<TraceObserver> create(Session session) {
         return [
@@ -1331,7 +1331,7 @@ Edit `NfGreetingFactory.groovy` to add our new observer:
 
 === "Before"
 
-    ```groovy title="NfGreetingFactory.groovy"
+    ```groovy title="NfGreetingFactory.groovy" linenums="31" hl_lines="2"
     @Override
     Collection<TraceObserver> create(Session session) {
         return List.<TraceObserver>of(new NfGreetingObserver())
@@ -1344,24 +1344,29 @@ Rebuild and reinstall:
 cd nf-greeting && make assemble && make install && cd ..
 ```
 
-Run the pipeline:
+Run the pipeline with `-ansi-log false` to see all observer output:
 
 ```bash
-nextflow run main.nf
+nextflow run main.nf -ansi-log false
 ```
 
-```console title="Expected output"
+```console title="Expected output (excerpt)"
 Pipeline is starting! 🚀
-executor >  local (5)
+[be/bd8e72] Submitted process > SAY_HELLO (2)
+[5b/d24c2b] Submitted process > SAY_HELLO (1)
+...
 📊 Tasks completed so far: 1
 📊 Tasks completed so far: 2
-📊 Tasks completed so far: 3
-📊 Tasks completed so far: 4
-[fe/109754] process > SAY_HELLO (5) [100%] 5 of 5 ✔
+...
 📊 Tasks completed so far: 5
+Pipeline complete! 👋
 📈 Final task count: 5
-Pipeline complete! 🎉
 ```
+
+!!! tip "Why `-ansi-log false`?"
+
+    By default, Nextflow's ANSI progress display overwrites previous lines.
+    Using `-ansi-log false` shows all output sequentially, which is useful when testing observers that print messages during execution.
 
 ### Takeaway
 
