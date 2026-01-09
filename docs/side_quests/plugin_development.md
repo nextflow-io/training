@@ -211,6 +211,67 @@ validation {
 Each plugin documents its configuration options.
 Check the plugin's documentation for available settings.
 
+### 1.6. Try it: Using the nf-hello plugin
+
+Let's practice using a plugin with [nf-hello](https://github.com/nextflow-io/nf-hello), Nextflow's official example plugin.
+
+Create a new directory for this exercise:
+
+```bash
+mkdir -p /tmp/plugin-test && cd /tmp/plugin-test
+```
+
+Create a `nextflow.config` file:
+
+```groovy title="nextflow.config"
+plugins {
+    id 'nf-hello@0.5.0'
+}
+```
+
+Create a `main.nf` file that uses the plugin's `sayHello` function:
+
+```groovy title="main.nf"
+#!/usr/bin/env nextflow
+
+include { sayHello } from 'plugin/nf-hello'
+
+workflow {
+    Channel.of('Alice', 'Bob', 'Carol')
+        | map { name -> sayHello(name) }
+        | view
+}
+```
+
+Run it:
+
+```bash
+nextflow run main.nf
+```
+
+You should see output like:
+
+```console
+N E X T F L O W  ~  version 25.04.3
+Launching `main.nf` [friendly_sammet] DSL2
+
+Hello, Alice!
+Hello, Bob!
+Hello, Carol!
+```
+
+Nextflow automatically downloaded the nf-hello plugin and made its `sayHello` function available.
+
+??? tip "What else does nf-hello provide?"
+
+    The nf-hello plugin includes several example functions you can explore:
+
+    - `sayHello(name)` - Returns a greeting string
+    - `randomString(length)` - Generates a random string
+    - `reverse` operator - Reverses channel items
+
+    See the [nf-hello source code](https://github.com/nextflow-io/nf-hello) for more examples.
+
 ### Takeaway
 
 Using plugins is straightforward: declare them in `nextflow.config`, import their functions, and use them in your workflows.
