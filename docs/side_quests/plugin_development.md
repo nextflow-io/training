@@ -1869,7 +1869,7 @@ Edit `NfGreetingExtension.groovy`:
 
 === "After"
 
-    ```groovy hl_lines="3-4 10-12 25-26"
+    ```groovy title="NfGreetingExtension.groovy" hl_lines="3-4 8-10 22"
     @CompileStatic
     class NfGreetingExtension extends PluginExtensionPoint {
 
@@ -1878,28 +1878,35 @@ Edit `NfGreetingExtension.groovy`:
 
         @Override
         protected void init(Session session) {
-            // Read configuration with defaults
             prefix = session.config.navigate('greeting.prefix', '***') as String
             suffix = session.config.navigate('greeting.suffix', '***') as String
         }
 
-        // ... other functions ...
+        @Function
+        String reverseGreeting(String greeting) {
+            return greeting.reverse()
+        }
 
-        /**
-         * Decorate a greeting with configurable markers
-         */
         @Function
         String decorateGreeting(String greeting) {
             return "${prefix} ${greeting} ${suffix}"
         }
 
-        // ... rest of file ...
+        @Function
+        String friendlyGreeting(String greeting, String name = 'World') {
+            return "${greeting}, ${name}!"
+        }
+
+        @Operator
+        DataflowWriteChannel shoutAll(DataflowReadChannel source) {
+            // ... unchanged ...
+        }
     }
     ```
 
 === "Before"
 
-    ```groovy
+    ```groovy title="NfGreetingExtension.groovy" hl_lines="6 15"
     @CompileStatic
     class NfGreetingExtension extends PluginExtensionPoint {
 
@@ -1907,17 +1914,25 @@ Edit `NfGreetingExtension.groovy`:
         protected void init(Session session) {
         }
 
-        // ... other functions ...
+        @Function
+        String reverseGreeting(String greeting) {
+            return greeting.reverse()
+        }
 
-        /**
-         * Decorate a greeting with celebratory markers
-         */
         @Function
         String decorateGreeting(String greeting) {
             return "*** ${greeting} ***"
         }
 
-        // ... rest of file ...
+        @Function
+        String friendlyGreeting(String greeting, String name = 'World') {
+            return "${greeting}, ${name}!"
+        }
+
+        @Operator
+        DataflowWriteChannel shoutAll(DataflowReadChannel source) {
+            // ... unchanged ...
+        }
     }
     ```
 
