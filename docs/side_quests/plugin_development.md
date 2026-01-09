@@ -377,7 +377,7 @@ Edit `random_id_example.nf` to import the function from the plugin instead of de
 
 === "Before (local)"
 
-    ```groovy title="random_id_example.nf" hl_lines="3-7"
+    ```groovy title="random_id_example.nf" hl_lines="3-8"
     #!/usr/bin/env nextflow
 
     // Local function - must be copied to every pipeline that needs it
@@ -400,6 +400,16 @@ Run it again with the `-plugins` flag to load the plugin:
 ```bash
 nextflow run random_id_example.nf -plugins nf-hello@0.5.0
 ```
+
+!!! tip "Config vs command line"
+
+    We introduced plugins using `nextflow.config` (section 2.2), but here we use the `-plugins` flag.
+    Both approaches work:
+
+    - **`nextflow.config`**: Best for production pipelines where you want plugins locked to specific versions
+    - **`-plugins` flag**: Handy for quick testing or trying out a plugin without modifying config files
+
+    For a real pipeline, you'd typically add the plugin to `nextflow.config` so it's always available.
 
 The first run will download the plugin automatically. The output is the same, but now the function comes from a versioned, shareable plugin.
 
