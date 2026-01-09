@@ -1447,7 +1447,7 @@ Edit `nf-greeting/src/main/groovy/training/plugin/NfGreetingExtension.groovy` to
 
 === "After"
 
-    ```groovy title="NfGreetingExtension.groovy" linenums="17" hl_lines="24-29 62-73"
+    ```groovy title="NfGreetingExtension.groovy" linenums="17" hl_lines="46-57"
     package training.plugin
 
     import groovy.transform.CompileStatic
