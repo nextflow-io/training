@@ -19,7 +19,7 @@ This containerized environment can be run out of the box on Github Codespaces or
 
     ---
 
-    GitHub Codespaces is a web-based platform that allows us to provide a pre-configured environment for training, backed by virtual machines in the cloud. It is accessible for free to anyone with a Github account.
+    GitHub Codespaces is a web-based service that allows us to provide a pre-built environment for training, with all tools and data included, backed by virtual machines in the cloud. It is accessible for free to anyone with a Github account.
 
     [Use Github Codespaces:material-arrow-right:](01_setup.md){ .md-button .md-button--primary .mt-1 }
 
