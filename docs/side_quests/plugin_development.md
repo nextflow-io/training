@@ -1721,7 +1721,7 @@ First, edit `TaskCounterObserver.groovy` to accept a configuration flag:
 
 === "After"
 
-    ```groovy title="TaskCounterObserver.groovy" linenums="1" hl_lines="14 17-19 24-16"
+    ```groovy title="TaskCounterObserver.groovy" linenums="1" hl_lines="14 17-19 24-26"
     package training.plugin
 
     import groovy.transform.CompileStatic
@@ -1788,6 +1788,12 @@ First, edit `TaskCounterObserver.groovy` to accept a configuration flag:
     }
     ```
 
+The key changes:
+
+- **Line 14**: Add a `verbose` flag to control whether per-task messages are printed
+- **Lines 17-19**: Constructor that accepts the verbose setting
+- **Lines 24-26**: Only print per-task messages if `verbose` is true
+
 Now update `NfGreetingFactory.groovy` to read the configuration and pass it to the observer:
 
 === "After"
@@ -1817,6 +1823,12 @@ Now update `NfGreetingFactory.groovy` to read the configuration and pass it to t
         ]
     }
     ```
+
+The factory now:
+
+- **Lines 33-34**: Reads the `greeting.enabled` config and returns early if disabled
+- **Line 36**: Reads the `greeting.taskCounter.verbose` config (defaulting to `true`)
+- **Line 39**: Passes the verbose setting to the `TaskCounterObserver` constructor
 
 Rebuild and reinstall the plugin:
 
