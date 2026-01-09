@@ -342,7 +342,7 @@ Now update `main.nf` to add the `publish:` section inside the workflow:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="1" hl_lines="25-28"
+    ```groovy title="main.nf" linenums="1" hl_lines="14 26-29"
     #!/usr/bin/env nextflow
 
     /*
@@ -356,6 +356,7 @@ Now update `main.nf` to add the `publish:` section inside the workflow:
 
     workflow {
 
+        main:
         // Create a channel from the CSV file with metadata
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv(header: true)
@@ -367,7 +368,6 @@ Now update `main.nf` to add the `publish:` section inside the workflow:
         // Convert to uppercase
         CONVERT_TO_UPPER(SAY_HELLO.out)
 
-        // Publish section defines what outputs go where
         publish:
         greetings = SAY_HELLO.out
         uppercase = CONVERT_TO_UPPER.out
@@ -403,8 +403,8 @@ Now update `main.nf` to add the `publish:` section inside the workflow:
     }
     ```
 
-The `publish:` section declares two named outputs: `greetings` and `uppercase`.
-Each is assigned to the output channel of the corresponding process.
+When using a `publish:` section, the workflow content must be placed in a `main:` block.
+The `publish:` section then declares named outputs—here `greetings` and `uppercase`—each assigned to an output channel from a process.
 
 ### 2.5. Add the output block
 
