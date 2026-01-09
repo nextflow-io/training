@@ -3,18 +3,19 @@
 /*
  * Pipeline parameters
  */
+params {
+    // Primary input (file of input files, one per line)
+    reads_bam: Path = "${projectDir}/data/sample_bams.txt"
 
-// Primary input (file of input files, one per line)
-params.reads_bam = "${projectDir}/data/sample_bams.txt"
+    // Output directory
+    outdir: String = "results_genomics"
 
-// Output directory
-params.outdir = "results_genomics"
-
-// Accessory files
-params.reference        = "${projectDir}/data/ref/ref.fasta"
-params.reference_index  = "${projectDir}/data/ref/ref.fasta.fai"
-params.reference_dict   = "${projectDir}/data/ref/ref.dict"
-params.intervals        = "${projectDir}/data/ref/intervals.bed"
+    // Accessory files
+    reference: Path = "${projectDir}/data/ref/ref.fasta"
+    reference_index: Path = "${projectDir}/data/ref/ref.fasta.fai"
+    reference_dict: Path = "${projectDir}/data/ref/ref.dict"
+    intervals: Path = "${projectDir}/data/ref/intervals.bed"
+}
 
 /*
  * Generate BAM index file
@@ -26,14 +27,14 @@ process SAMTOOLS_INDEX {
     publishDir params.outdir, mode: 'symlink'
 
     input:
-        path input_bam
+    path input_bam
 
     output:
-        tuple path(input_bam), path("${input_bam}.bai")
+    tuple path(input_bam), path("${input_bam}.bai")
 
     script:
     """
-    samtools index '$input_bam'
+    samtools index '${input_bam}'
     """
 }
 
@@ -47,15 +48,15 @@ process GATK_HAPLOTYPECALLER {
     publishDir params.outdir, mode: 'symlink'
 
     input:
-        tuple path(input_bam), path(input_bam_index)
-        path ref_fasta
-        path ref_index
-        path ref_dict
-        path interval_list
+    tuple path(input_bam), path(input_bam_index)
+    path ref_fasta
+    path ref_index
+    path ref_dict
+    path interval_list
 
     output:
-        path "${input_bam}.vcf"     , emit: vcf
-        path "${input_bam}.vcf.idx" , emit: idx
+    path "${input_bam}.vcf", emit: vcf
+    path "${input_bam}.vcf.idx", emit: idx
 
     script:
     """
@@ -73,10 +74,10 @@ workflow {
     reads_ch = channel.fromPath(params.reads_bam).splitText()
 
     // Load the file paths for the accessory files (reference and intervals)
-    ref_file        = file(params.reference)
-    ref_index_file  = file(params.reference_index)
-    ref_dict_file   = file(params.reference_dict)
-    intervals_file  = file(params.intervals)
+    ref_file = file(params.reference)
+    ref_index_file = file(params.reference_index)
+    ref_dict_file = file(params.reference_dict)
+    intervals_file = file(params.intervals)
 
     // Create index file for input BAM file
     SAMTOOLS_INDEX(reads_ch)
@@ -87,6 +88,6 @@ workflow {
         ref_file,
         ref_index_file,
         ref_dict_file,
-        intervals_file
+        intervals_file,
     )
 }

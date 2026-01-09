@@ -3,21 +3,22 @@
 /*
  * Pipeline parameters
  */
+params {
+    // Primary input (file of input files, one per line)
+    reads_bam: Path = "${projectDir}/data/sample_bams.txt"
 
-// Primary input (file of input files, one per line)
-params.reads_bam = "${projectDir}/data/sample_bams.txt"
+    // Output directory
+    outdir: String = "results_genomics"
 
-// Output directory
-params.outdir = "results_genomics"
+    // Accessory files
+    reference: Path = "${projectDir}/data/ref/ref.fasta"
+    reference_index: Path = "${projectDir}/data/ref/ref.fasta.fai"
+    reference_dict: Path = "${projectDir}/data/ref/ref.dict"
+    intervals: Path = "${projectDir}/data/ref/intervals.bed"
 
-// Accessory files
-params.reference        = "${projectDir}/data/ref/ref.fasta"
-params.reference_index  = "${projectDir}/data/ref/ref.fasta.fai"
-params.reference_dict   = "${projectDir}/data/ref/ref.dict"
-params.intervals        = "${projectDir}/data/ref/intervals.bed"
-
-// Base name for final output file
-params.cohort_name = "family_trio"
+    // Base name for final output file
+    cohort_name: String = "family_trio"
+}
 
 /*
  * Generate BAM index file
@@ -29,14 +30,14 @@ process SAMTOOLS_INDEX {
     publishDir params.outdir, mode: 'symlink'
 
     input:
-        path input_bam
+    path input_bam
 
     output:
-        tuple path(input_bam), path("${input_bam}.bai")
+    tuple path(input_bam), path("${input_bam}.bai")
 
     script:
     """
-    samtools index '$input_bam'
+    samtools index '${input_bam}'
     """
 }
 
@@ -50,15 +51,15 @@ process GATK_HAPLOTYPECALLER {
     publishDir params.outdir, mode: 'symlink'
 
     input:
-        tuple path(input_bam), path(input_bam_index)
-        path ref_fasta
-        path ref_index
-        path ref_dict
-        path interval_list
+    tuple path(input_bam), path(input_bam_index)
+    path ref_fasta
+    path ref_index
+    path ref_dict
+    path interval_list
 
     output:
-        path "${input_bam}.g.vcf"     , emit: vcf
-        path "${input_bam}.g.vcf.idx" , emit: idx
+    path "${input_bam}.g.vcf", emit: vcf
+    path "${input_bam}.g.vcf.idx", emit: idx
 
     script:
     """
@@ -80,17 +81,17 @@ process GATK_JOINTGENOTYPING {
     publishDir params.outdir, mode: 'symlink'
 
     input:
-        path all_gvcfs
-        path all_idxs
-        path interval_list
-        val cohort_name
-        path ref_fasta
-        path ref_index
-        path ref_dict
+    path all_gvcfs
+    path all_idxs
+    path interval_list
+    val cohort_name
+    path ref_fasta
+    path ref_index
+    path ref_dict
 
     output:
-        path "${cohort_name}.joint.vcf"     , emit: vcf
-        path "${cohort_name}.joint.vcf.idx" , emit: idx
+    path "${cohort_name}.joint.vcf", emit: vcf
+    path "${cohort_name}.joint.vcf.idx", emit: idx
 
     script:
     def gvcfs_line = all_gvcfs.collect { gvcf -> "-V ${gvcf}" }.join(' ')
@@ -114,10 +115,10 @@ workflow {
     reads_ch = channel.fromPath(params.reads_bam).splitText()
 
     // Load the file paths for the accessory files (reference and intervals)
-    ref_file        = file(params.reference)
-    ref_index_file  = file(params.reference_index)
-    ref_dict_file   = file(params.reference_dict)
-    intervals_file  = file(params.intervals)
+    ref_file = file(params.reference)
+    ref_index_file = file(params.reference_index)
+    ref_dict_file = file(params.reference_dict)
+    intervals_file = file(params.intervals)
 
     // Create index file for input BAM file
     SAMTOOLS_INDEX(reads_ch)
@@ -128,7 +129,7 @@ workflow {
         ref_file,
         ref_index_file,
         ref_dict_file,
-        intervals_file
+        intervals_file,
     )
 
     // Collect variant calling outputs across samples
@@ -143,6 +144,6 @@ workflow {
         params.cohort_name,
         ref_file,
         ref_index_file,
-        ref_dict_file
+        ref_dict_file,
     )
 }

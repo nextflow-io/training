@@ -6,9 +6,11 @@ include { FASTQC } from './modules/fastqc.nf'
 /*
  * Pipeline parameters
  */
+params {
+    // Primary input
+    reads: Path = "data/reads/ENCSR000COQ1_1.fastq.gz"
+}
 
-// Primary input
-params.reads = "data/reads/ENCSR000COQ1_1.fastq.gz"
 
 workflow {
 

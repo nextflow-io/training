@@ -9,11 +9,16 @@ include { MULTIQC } from './modules/multiqc.nf'
 /*
  * Pipeline parameters
  */
-params.hisat2_index_zip = "data/genome_index.tar.gz"
-params.report_id = "all_paired-end"
+params {
+    // Primary input
+    input_csv: Path = "data/paired-end.csv"
 
-// Primary input
-params.input_csv = "data/paired-end.csv"
+    // Reference genome archive
+    hisat2_index_zip: Path = "data/genome_index.tar.gz"
+
+    // Report ID
+    report_id: String = "all_paired-end"
+}
 
 workflow {
     // Create input channel from the contents of a CSV file
