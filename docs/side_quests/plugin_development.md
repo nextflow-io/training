@@ -1,6 +1,6 @@
 # Nextflow plugins
 
-Nextflow's plugin system allows you to extend the language with custom functions, operators, executors, and more.
+Nextflow's plugin system allows you to extend the language with custom functions, executors, and more.
 In this side quest, you'll learn how to use existing plugins and optionally build your own.
 
 !!! warning "Development sections are advanced"
@@ -25,10 +25,10 @@ By the end of this side quest, you'll be able to:
 - Install and configure existing plugins in your workflows
 - Import and use plugin functions
 
-**Developing plugins (sections 3-11):**
+**Developing plugins (sections 3-10):**
 
 - Create a new plugin project
-- Implement custom functions, operators, and trace observers
+- Implement custom functions and trace observers
 - Build, test, and distribute your plugin
 
 ### Prerequisites
@@ -100,7 +100,7 @@ We have a simple greeting pipeline and materials for both using and developing p
 ### 0.5. What we'll cover
 
 1. **Using plugins** (sections 1-2): Understand plugin architecture and use existing plugins like `nf-hello`
-2. **Building a plugin** (sections 3-10): Create `nf-greeting` with custom functions, operators, and observers
+2. **Building a plugin** (sections 3-10): Create `nf-greeting` with custom functions and observers
 
 ### 0.6. Readiness checklist
 
@@ -115,7 +115,7 @@ Before diving into plugin usage and development, let's understand what plugins a
 
 <!-- TODO: Add Excalidraw diagram showing plugin architecture
      File: docs/side_quests/img/plugin-architecture.excalidraw.svg
-     Content: Show Nextflow core with extension points (Functions, Operators,
+     Content: Show Nextflow core with extension points (Functions,
      Observers, etc.) and a plugin connecting to them via PF4J
 -->
 
@@ -127,8 +127,6 @@ Plugins can extend Nextflow in several ways:
 | Extension Type  | Purpose                                  | Example                 |
 | --------------- | ---------------------------------------- | ----------------------- |
 | Functions       | Custom functions callable from workflows | `reverseString()`       |
-| Operators       | Custom channel operators                 | `myFilter()`            |
-| Factories       | Create new channel types                 | `mySource()`            |
 | Executors       | Custom task execution backends           | AWS Batch, Kubernetes   |
 | Filesystems     | Custom storage backends                  | S3, Azure Blob          |
 | Trace Observers | Monitor workflow execution               | Custom logging, metrics |
@@ -137,8 +135,6 @@ Plugins can extend Nextflow in several ways:
      File: docs/side_quests/img/plugin-extension-types.excalidraw.svg
      Content: Visual showing where each extension type plugs in:
      - Functions: called from workflow/process scripts
-     - Operators: transform channels (between processes)
-     - Factories: create channels (workflow entry points)
      - Trace Observers: hook into lifecycle events
      - Executors: submit tasks to compute backends
      - Filesystems: access remote storage
@@ -155,7 +151,7 @@ You can define custom functions directly in your Nextflow scripts, so why use pl
 | **Local functions** | Project-specific logic | Copy-paste between pipelines, no versioning |
 | **Plugins**         | Reusable utilities     | Requires Java/Groovy knowledge to create    |
 
-While custom functions are the most common plugin use case, remember that plugins can provide much more - operators, observers, executors, and filesystems.
+While custom functions are the most common plugin use case, remember that plugins can provide much more - observers, executors, and filesystems.
 
 Plugins are ideal when you need to:
 
@@ -167,7 +163,7 @@ Plugins are ideal when you need to:
 
 ### Takeaway
 
-Plugins extend Nextflow through well-defined extension points - not just functions, but operators, observers, executors, and more.
+Plugins extend Nextflow through well-defined extension points - not just functions, but observers, executors, and more.
 They're ideal for sharing reusable functionality across pipelines and the community.
 
 ### What's next?
@@ -1404,294 +1400,13 @@ They're useful for custom logging, metrics collection, notifications, and report
 
 ### What's next?
 
-Let's explore custom channel operators.
-
----
-
-## 8. Custom operators and factories
-
-### 8.1. When functions aren't enough
-
-We've used `@Function` to create `reverseGreeting()`.
-But functions have a limitation: they work on **individual values**, not channels.
-
-Consider this pattern:
-
-```groovy
-// Using a function - must wrap in map()
-greeting_ch
-    .map { greeting -> reverseGreeting(greeting) }
-    .view()
-```
-
-With a custom **operator**, you can work directly on channels:
-
-```groovy
-// Using an operator - cleaner syntax
-greeting_ch
-    .reverseAll()
-    .view()
-```
-
-Operators are useful when you need to:
-
-- Transform entire channels (not just individual items)
-- Combine or split channels
-- Add channel-level behaviors (filtering, grouping, etc.)
-
-### 8.2. Try it: Add a shoutAll operator
-
-Let's add an operator that converts all items in a channel to uppercase.
-
-Edit `nf-greeting/src/main/groovy/training/plugin/NfGreetingExtension.groovy` to add an operator.
-We need to add new imports for the dataflow classes and implement the operator method:
-
-=== "After"
-
-    ```groovy title="NfGreetingExtension.groovy" linenums="17" hl_lines="8-13 46-57"
-    package training.plugin
-
-    import groovy.transform.CompileStatic
-    import nextflow.Session
-    import nextflow.plugin.extension.Function
-    import nextflow.plugin.extension.PluginExtensionPoint
-
-    import nextflow.Channel
-    import nextflow.plugin.extension.Operator
-    import groovyx.gpars.dataflow.DataflowReadChannel
-    import groovyx.gpars.dataflow.DataflowWriteChannel
-    import nextflow.extension.CH
-    import nextflow.extension.DataflowHelper
-
-    @CompileStatic
-    class NfGreetingExtension extends PluginExtensionPoint {
-
-        @Override
-        protected void init(Session session) {
-        }
-
-        /**
-         * Reverse a greeting string
-         */
-        @Function
-        String reverseGreeting(String greeting) {
-            return greeting.reverse()
-        }
-
-        /**
-         * Decorate a greeting with celebratory markers
-         */
-        @Function
-        String decorateGreeting(String greeting) {
-            return "*** ${greeting} ***"
-        }
-
-        /**
-         * Convert greeting to a friendly format with a name
-         */
-        @Function
-        String friendlyGreeting(String greeting, String name = 'World') {
-            return "${greeting}, ${name}!"
-        }
-
-        /**
-         * Operator: Convert all items in a channel to uppercase
-         */
-        @Operator
-        DataflowWriteChannel shoutAll(DataflowReadChannel source) {
-            final target = CH.create()
-            DataflowHelper.subscribeImpl(source, [
-                onNext: { item -> target.bind(item.toString().toUpperCase()) },
-                onComplete: { target.bind(Channel.STOP) }
-            ])
-            return target
-        }
-    }
-    ```
-
-=== "Before"
-
-    ```groovy title="NfGreetingExtension.groovy" linenums="17"
-    package training.plugin
-
-    import groovy.transform.CompileStatic
-    import nextflow.Session
-    import nextflow.plugin.extension.Function
-    import nextflow.plugin.extension.PluginExtensionPoint
-
-    @CompileStatic
-    class NfGreetingExtension extends PluginExtensionPoint {
-
-        @Override
-        protected void init(Session session) {
-        }
-
-        /**
-         * Reverse a greeting string
-         */
-        @Function
-        String reverseGreeting(String greeting) {
-            return greeting.reverse()
-        }
-
-        /**
-         * Decorate a greeting with celebratory markers
-         */
-        @Function
-        String decorateGreeting(String greeting) {
-            return "*** ${greeting} ***"
-        }
-
-        /**
-         * Convert greeting to a friendly format with a name
-         */
-        @Function
-        String friendlyGreeting(String greeting, String name = 'World') {
-            return "${greeting}, ${name}!"
-        }
-    }
-    ```
-
-Let's break down the operator code:
-
-- **Lines 24-29**: New imports for working with channels. `DataflowReadChannel` is the input channel type, `DataflowWriteChannel` is the output type.
-- **Line 65**: `@Operator` marks this method as a channel operator (instead of `@Function`)
-- **Line 66**: The method takes a source channel and returns a new channel
-- **Line 67**: `CH.create()` creates a new empty channel to hold our results
-- **Lines 68-71**: `DataflowHelper.subscribeImpl()` sets up callbacks for channel events:
-    - `onNext`: Called for each item - we transform it to uppercase and add to the target channel
-    - `onComplete`: Called when the source channel finishes - we send `Channel.STOP` to close the target channel
-- **Line 72**: Return the new channel containing the transformed items
-
-Rebuild and reinstall:
-
-```bash
-cd nf-greeting && make assemble && make install && cd ..
-```
-
-Now test the operator by editing `main.nf` to use it:
-
-=== "After"
-
-    ```groovy linenums="1" hl_lines="5 28-31"
-    #!/usr/bin/env nextflow
-
-    // Import custom functions from our plugin
-    include { decorateGreeting } from 'plugin/nf-greeting'
-    include { shoutAll } from 'plugin/nf-greeting'
-
-    params.input = 'greetings.csv'
-
-    process SAY_HELLO {
-        input:
-            val greeting
-
-        output:
-            stdout
-
-        script:
-        def decorated = decorateGreeting(greeting)
-        """
-        echo '$decorated'
-        """
-    }
-
-    workflow {
-        greeting_ch = channel.fromPath(params.input)
-                            .splitCsv(header: true)
-                            .map { row -> row.greeting }
-
-        // Demonstrate using the shoutAll operator
-        greeting_ch
-            .shoutAll()
-            .view { shouted -> "SHOUTED: $shouted" }
-
-        SAY_HELLO(greeting_ch)
-    }
-    ```
-
-=== "Before"
-
-    ```groovy hl_lines="4 28-30 34"
-    #!/usr/bin/env nextflow
-
-    // Import custom functions from our plugin
-    include { reverseGreeting } from 'plugin/nf-greeting'
-    include { decorateGreeting } from 'plugin/nf-greeting'
-
-    params.input = 'greetings.csv'
-
-    process SAY_HELLO {
-        input:
-            val greeting
-
-        output:
-            stdout
-
-        script:
-        def decorated = decorateGreeting(greeting)
-        """
-        echo '$decorated'
-        """
-    }
-
-    workflow {
-        greeting_ch = channel.fromPath(params.input)
-                            .splitCsv(header: true)
-                            .map { row -> row.greeting }
-
-        greeting_ch
-            .map { greeting -> reverseGreeting(greeting) }
-            .view { reversed -> "Reversed: $reversed" }
-
-        SAY_HELLO(greeting_ch)
-
-        SAY_HELLO.out.view { result -> "Decorated: ${result.trim()}" }
-    }
-    ```
-
-Run it:
-
-```bash
-nextflow run main.nf -ansi-log false
-```
-
-```console title="Expected output"
-N E X T F L O W  ~  version 25.04.3
-Launching `main.nf` [fabulous_rosalind] DSL2 - revision: 63f3119fbc
-Pipeline is starting! 🚀
-SHOUTED: HELLO
-SHOUTED: BONJOUR
-SHOUTED: HOLÀ
-SHOUTED: CIAO
-SHOUTED: HALLO
-[07/9789e3] Submitted process > SAY_HELLO (2)
-[3b/131239] Submitted process > SAY_HELLO (1)
-[ce/900df3] Submitted process > SAY_HELLO (3)
-[28/d4876e] Submitted process > SAY_HELLO (4)
-📊 Tasks completed so far: 1
-📊 Tasks completed so far: 2
-📊 Tasks completed so far: 3
-[29/8cb8f7] Submitted process > SAY_HELLO (5)
-📊 Tasks completed so far: 4
-📊 Tasks completed so far: 5
-Pipeline complete! 👋
-📈 Final task count: 5
-```
-
-### Takeaway
-
-Custom operators work on entire channels rather than individual values, providing cleaner syntax for channel transformations.
-
-### What's next?
-
 Let's see how plugins can read configuration from `nextflow.config`.
 
 ---
 
-## 9. Configuration
+## 8. Configuration
 
-### 9.1. Configuration-driven behavior
+### 8.1. Configuration-driven behavior
 
 Plugins can read configuration from `nextflow.config`, letting users customize behavior.
 
@@ -1710,7 +1425,7 @@ greeting {
 }
 ```
 
-### 9.2. Try it: Make the task counter configurable
+### 8.2. Try it: Make the task counter configurable
 
 Let's add configuration options to:
 
@@ -1869,21 +1584,26 @@ nextflow run main.nf -ansi-log false
 N E X T F L O W  ~  version 25.04.3
 Launching `main.nf` [stoic_wegener] DSL2 - revision: 63f3119fbc
 Pipeline is starting! 🚀
-SHOUTED: HELLO
-SHOUTED: BONJOUR
-SHOUTED: HOLÀ
-SHOUTED: CIAO
-SHOUTED: HALLO
+Reversed: olleH
+Reversed: ruojnoB
+Reversed: àloH
+Reversed: oaiC
+Reversed: ollaH
 [5e/9c1f21] Submitted process > SAY_HELLO (2)
 [20/8f6f91] Submitted process > SAY_HELLO (1)
 [6d/496bae] Submitted process > SAY_HELLO (4)
 [5c/a7fe10] Submitted process > SAY_HELLO (3)
 [48/18199f] Submitted process > SAY_HELLO (5)
+Decorated: *** Hello ***
+Decorated: *** Bonjour ***
+Decorated: *** Holà ***
+Decorated: *** Ciao ***
+Decorated: *** Hallo ***
 Pipeline complete! 👋
 📈 Final task count: 5
 ```
 
-### 9.3. Try it: Make the decorator configurable
+### 8.3. Try it: Make the decorator configurable
 
 Let's make the `decorateGreeting` function use configurable prefix/suffix.
 
@@ -1955,7 +1675,7 @@ Rebuild and reinstall the plugin:
 cd nf-greeting && make assemble && make install && cd ..
 ```
 
-To see the decorated output, update `main.nf` to add a view:
+To see the decorated output, update `main.nf` to change the output message:
 
 === "After"
 
@@ -1965,29 +1685,29 @@ To see the decorated output, update `main.nf` to add a view:
                             .splitCsv(header: true)
                             .map { row -> row.greeting }
 
-        // Demonstrate using the shoutAll operator
         greeting_ch
-            .shoutAll()
-            .view { shouted -> "SHOUTED: $shouted" }
+            .map { greeting -> reverseGreeting(greeting) }
+            .view { reversed -> "Reversed: $reversed" }
 
-        SAY_HELLO(greeting_ch).view{ result -> "Decorated with custom prefix: ${result.trim()}" }
+        SAY_HELLO(greeting_ch)
+        SAY_HELLO.out.view { result -> "Decorated with custom prefix: ${result.trim()}" }
     }
     ```
 
 === "Before"
 
-    ```groovy title="main.nf (workflow section)" linenums="23" hl_lines="11"
+    ```groovy title="main.nf (workflow section)" linenums="23"
     workflow {
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv(header: true)
                             .map { row -> row.greeting }
 
-        // Demonstrate using the shoutAll operator
         greeting_ch
-            .shoutAll()
-            .view { shouted -> "SHOUTED: $shouted" }
+            .map { greeting -> reverseGreeting(greeting) }
+            .view { reversed -> "Reversed: $reversed" }
 
         SAY_HELLO(greeting_ch)
+        SAY_HELLO.out.view { result -> "Decorated: ${result.trim()}" }
     }
     ```
 
@@ -2029,11 +1749,11 @@ nextflow run main.nf -ansi-log false
 N E X T F L O W  ~  version 25.04.3
 Launching `main.nf` [nostalgic_leibniz] DSL2 - revision: 7d4c977882
 Pipeline is starting! 🚀
-SHOUTED: HELLO
-SHOUTED: BONJOUR
-SHOUTED: HOLÀ
-SHOUTED: CIAO
-SHOUTED: HALLO
+Reversed: olleH
+Reversed: ruojnoB
+Reversed: àloH
+Reversed: oaiC
+Reversed: ollaH
 [ef/0979a4] Submitted process > SAY_HELLO (2)
 [8e/c79e5e] Submitted process > SAY_HELLO (1)
 [dc/c5e8c2] Submitted process > SAY_HELLO (4)
@@ -2058,24 +1778,12 @@ Let's briefly cover some advanced extension types, then look at how to share you
 
 ---
 
-## 10. Advanced extension types
+## 9. Advanced extension types
 
 Some extension types require significant infrastructure or deep Nextflow knowledge to implement.
 This section provides a conceptual overview - for implementation details, see the [Nextflow plugin documentation](https://www.nextflow.io/docs/latest/plugins/developing-plugins.html).
 
-### 10.1. Channel factories
-
-Channel factories create new ways to generate channels:
-
-```groovy
-// Hypothetical channel factory
-channel.fromDatabase('SELECT * FROM samples')
-```
-
-The nf-schema plugin uses this pattern for `samplesheetToList()`.
-Creating channel factories requires deep understanding of Nextflow internals.
-
-### 10.2. Executors
+### 9.1. Executors
 
 Executors define how tasks are submitted to compute resources:
 
@@ -2083,7 +1791,7 @@ Executors define how tasks are submitted to compute resources:
 - Kubernetes, SLURM, PBS, LSF
 - Creating a custom executor is complex and typically done by platform vendors
 
-### 10.3. Filesystems
+### 9.2. Filesystems
 
 Filesystems define how files are accessed:
 
@@ -2093,7 +1801,7 @@ Filesystems define how files are accessed:
 
 ### Takeaway
 
-Channel factories, executors, and filesystems are advanced extension types typically created by platform vendors or for specialized infrastructure needs.
+Executors and filesystems are advanced extension types typically created by platform vendors or for specialized infrastructure needs.
 
 ### What's next?
 
@@ -2101,16 +1809,16 @@ Let's look at how to share your plugin with others.
 
 ---
 
-## 11. Distributing your plugin
+## 10. Distributing your plugin
 
 Once your plugin is working locally, you have two options for sharing it:
 
-| Distribution method | Use case | Approval required |
-|---------------------|----------|-------------------|
-| **Public registry** | Open source plugins for the community | Yes - name must be claimed |
-| **Internal hosting** | Private/proprietary plugins within an organization | No |
+| Distribution method  | Use case                                           | Approval required          |
+| -------------------- | -------------------------------------------------- | -------------------------- |
+| **Public registry**  | Open source plugins for the community              | Yes - name must be claimed |
+| **Internal hosting** | Private/proprietary plugins within an organization | No                         |
 
-### 11.1. Publishing to the public registry
+### 10.1. Publishing to the public registry
 
 The [Nextflow plugin registry](https://registry.nextflow.io/) is the official way to share plugins with the community.
 
@@ -2194,7 +1902,7 @@ plugins {
 
 Nextflow automatically downloads the plugin from the registry on first use.
 
-### 11.2. Internal distribution
+### 10.2. Internal distribution
 
 Organizations often need to distribute plugins internally without using the public registry.
 This is useful for proprietary plugins, plugins under development, or plugins that shouldn't be publicly available.
@@ -2284,7 +1992,7 @@ plugins {
 
     Add the export to your shell profile (`~/.bashrc`, `~/.zshrc`) or set it in your CI/CD pipeline configuration.
 
-### 11.3. Versioning best practices
+### 10.3. Versioning best practices
 
 Follow semantic versioning for your releases:
 
@@ -2313,13 +2021,12 @@ Let's summarize what we've learned.
 - [ ] Java 17+ installed
 - [ ] Create project with `nextflow plugin create <name> <org>`
 - [ ] Implement extension class with `@Function` methods
-- [ ] Optionally add `@Operator` methods for channel transformations
 - [ ] Optionally add `TraceObserver` implementations for workflow events
 - [ ] Write unit tests
 - [ ] Build with `make assemble`
 - [ ] Install with `make install`
 - [ ] Enable in `nextflow.config` with `plugins { id 'plugin-id' }`
-- [ ] Import functions/operators with `include { fn } from 'plugin/plugin-id'`
+- [ ] Import functions with `include { fn } from 'plugin/plugin-id'`
 
 ### Key code patterns
 
@@ -2359,8 +2066,6 @@ workflow {
 | Type     | Annotation  | Purpose                 |
 | -------- | ----------- | ----------------------- |
 | Function | `@Function` | Callable from workflows |
-| Operator | `@Operator` | Transform channels      |
-| Factory  | `@Factory`  | Create channels         |
 
 ### Additional resources
 
@@ -2388,7 +2093,7 @@ Congratulations on completing this side quest!
 **If you completed sections 1-2**, you now know how to discover, configure, and use existing plugins to extend your Nextflow pipelines.
 This knowledge will help you leverage the growing ecosystem of community plugins.
 
-**If you completed sections 3-11**, you've also learned how to create your own plugins, implementing custom functions, operators, trace observers, and more.
+**If you completed sections 3-10**, you've also learned how to create your own plugins, implementing custom functions, trace observers, and more.
 Plugin development opens up powerful possibilities for:
 
 - Sharing reusable functions across your organization
