@@ -162,14 +162,17 @@ You should see two subdirectories: `greetings/` and `uppercase/`, each containin
 
 ### 1.3. Limitations of publishDir
 
-While `publishDir` works well for simple cases, it has some limitations:
+While `publishDir` works well for simple cases, it has some limitations as workflows grow more complex:
 
-1. **Scattered configuration**: Output paths are defined in each process, making it harder to see the overall output structure
-2. **No automatic metadata**: There's no built-in way to generate manifests or indexes of outputs
-3. **Duplication**: If multiple processes need to publish to similar locations, you repeat configuration
-4. **Inflexibility**: Changing the output structure requires editing multiple process definitions
+1. **Scattered configuration**: Whether you define `publishDir` in processes or via configuration selectors like `withName` and `withLabel`, the publish settings for each process are specified separately. To understand the full output structure of a large workflow, you need to piece together information from many different places.
 
-The workflow output definition syntax addresses these limitations by centralizing output configuration.
+2. **No automatic record of outputs**: When a workflow completes, you're left with a directory of files but no machine-readable summary of what was produced. If you want a CSV or JSON file listing all outputs with their associated metadata (often called a "manifest"), you have to build that yourself.
+
+3. **Repetitive patterns**: If multiple processes need similar publish configurations, you end up repeating yourself—either in process definitions or across many configuration selectors.
+
+4. **Coupling between processes and output structure**: The output organization is tied to process-level configuration. If you want to reorganize outputs (say, grouping by sample instead of by process), you need to update the configuration for each affected process.
+
+The workflow output definition syntax addresses these limitations by centralizing output configuration in one place.
 
 ### Takeaway
 
