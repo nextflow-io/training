@@ -5,8 +5,8 @@ The platform is operated by Github (which is owned by Microsoft), and is accessi
 
 !!! warning
 
-    Note that accounts attached to organizations may be subject to certain additional restrictions.
-    If that is your case, you may need to use an independent personal account instead, or use a local installation instead.
+    Accounts attached to organizations may be subject to certain additional restrictions.
+    If that is your case, you may need to use an independent personal account, or use a local installation instead.
 
 ## Creating a GitHub account
 
