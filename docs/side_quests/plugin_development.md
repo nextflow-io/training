@@ -1347,6 +1347,11 @@ Edit `NfGreetingFactory.groovy` to add our new observer:
     }
     ```
 
+!!! note "Groovy list syntax"
+
+    We've replaced the Java-style `List.<TraceObserver>of(...)` with Groovy's simpler list literal `[...]`.
+    Both return a `Collection`, but the Groovy syntax is more readable when adding multiple items.
+
 Rebuild and reinstall:
 
 ```bash
@@ -1359,14 +1364,29 @@ Run the pipeline with `-ansi-log false` to see all observer output:
 nextflow run main.nf -ansi-log false
 ```
 
-```console title="Expected output (excerpt)"
+```console title="Expected output"
+N E X T F L O W  ~  version 25.04.3
+Launching `main.nf` [pensive_engelbart] DSL2 - revision: 85fefd90d0
 Pipeline is starting! 🚀
+Reversed: olleH
+Reversed: ruojnoB
+Reversed: àloH
+Reversed: oaiC
+Reversed: ollaH
 [be/bd8e72] Submitted process > SAY_HELLO (2)
 [5b/d24c2b] Submitted process > SAY_HELLO (1)
-...
+[14/1f9dbe] Submitted process > SAY_HELLO (3)
+Decorated: *** Bonjour ***
+Decorated: *** Hello ***
+[85/a6b3ad] Submitted process > SAY_HELLO (4)
 📊 Tasks completed so far: 1
 📊 Tasks completed so far: 2
-...
+Decorated: *** Holà ***
+📊 Tasks completed so far: 3
+Decorated: *** Ciao ***
+[3c/be6686] Submitted process > SAY_HELLO (5)
+📊 Tasks completed so far: 4
+Decorated: *** Hallo ***
 📊 Tasks completed so far: 5
 Pipeline complete! 👋
 📈 Final task count: 5
