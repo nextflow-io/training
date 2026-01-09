@@ -1933,6 +1933,42 @@ Rebuild and reinstall the plugin:
 cd nf-greeting && make assemble && make install && cd ..
 ```
 
+To see the decorated output, update `main.nf` to add a view:
+
+=== "After"
+
+    ```groovy title="main.nf (workflow section)" linenums="23" hl_lines="11"
+    workflow {
+        greeting_ch = channel.fromPath(params.input)
+                            .splitCsv(header: true)
+                            .map { row -> row.greeting }
+
+        // Demonstrate using the shoutAll operator
+        greeting_ch
+            .shoutAll()
+            .view { shouted -> "SHOUTED: $shouted" }
+
+        SAY_HELLO(greeting_ch).view{ result -> "Decorated with custom prefix: ${result.trim()}" }
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="main.nf (workflow section)" linenums="23" hl_lines="11"
+    workflow {
+        greeting_ch = channel.fromPath(params.input)
+                            .splitCsv(header: true)
+                            .map { row -> row.greeting }
+
+        // Demonstrate using the shoutAll operator
+        greeting_ch
+            .shoutAll()
+            .view { shouted -> "SHOUTED: $shouted" }
+
+        SAY_HELLO(greeting_ch)
+    }
+    ```
+
 Now update `nextflow.config` to customize the decoration:
 
 === "After"
