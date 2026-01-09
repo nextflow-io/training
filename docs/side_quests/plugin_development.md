@@ -1816,7 +1816,7 @@ Now update `nextflow.config` to disable the per-task messages:
 
 === "After"
 
-    ```groovy title="nextflow.config" hl_lines="5-10"
+    ```groovy title="nextflow.config" linenums="1" hl_lines="5-10"
     plugins {
         id 'nf-greeting@0.1.0'
     }
@@ -1831,7 +1831,7 @@ Now update `nextflow.config` to disable the per-task messages:
 
 === "Before"
 
-    ```groovy title="nextflow.config"
+    ```groovy title="nextflow.config" linenums="1"
     plugins {
         id 'nf-greeting@0.1.0'
     }
