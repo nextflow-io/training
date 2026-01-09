@@ -1340,7 +1340,7 @@ Edit `NfGreetingFactory.groovy` to add our new observer:
 
 === "Before"
 
-    ```groovy title="NfGreetingFactory.groovy" linenums="31" hl_lines="2"
+    ```groovy title="NfGreetingFactory.groovy" linenums="31" hl_lines="3"
     @Override
     Collection<TraceObserver> create(Session session) {
         return List.<TraceObserver>of(new NfGreetingObserver())
@@ -1447,7 +1447,7 @@ Edit `nf-greeting/src/main/groovy/training/plugin/NfGreetingExtension.groovy` to
 
 === "After"
 
-    ```groovy title="NfGreetingExtension.groovy" linenums="17" hl_lines="24-28 61-72"
+    ```groovy title="NfGreetingExtension.groovy" linenums="17" hl_lines="24-29 62-73"
     package training.plugin
 
     import groovy.transform.CompileStatic
@@ -1455,6 +1455,7 @@ Edit `nf-greeting/src/main/groovy/training/plugin/NfGreetingExtension.groovy` to
     import nextflow.plugin.extension.Function
     import nextflow.plugin.extension.PluginExtensionPoint
 
+    import nextflow.Channel
     import nextflow.plugin.extension.Operator
     import groovyx.gpars.dataflow.DataflowReadChannel
     import groovyx.gpars.dataflow.DataflowWriteChannel
