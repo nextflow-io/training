@@ -867,7 +867,28 @@ Tests verify that your code works correctly and help catch bugs when you make ch
 
 The generated project includes a test for the Observer class, but we need to create a new test file for our extension functions.
 
-Create the new test file:
+#### Understanding Spock tests
+
+The plugin template uses [Spock](https://spockframework.org/), a testing framework for Groovy that reads almost like plain English.
+Here's the basic structure:
+
+```groovy
+def 'should reverse a greeting'() {   // (1)!
+    given:                             // (2)!
+    def ext = new NfGreetingExtension()
+
+    expect:                            // (3)!
+    ext.reverseGreeting('Hello') == 'olleH'
+}
+```
+
+1. **Test name in quotes** - Describes what the test checks. Use plain English!
+2. **`given:` block** - Set up what you need for the test (create objects, prepare data)
+3. **`expect:` block** - The actual checks. Each line should be `true` for the test to pass
+
+This structure makes tests readable: "Given an extension object, expect that `reverseGreeting('Hello')` equals `'olleH'`."
+
+#### Create the test file
 
 ```bash
 touch src/test/groovy/training/plugin/NfGreetingExtensionTest.groovy
@@ -919,11 +940,6 @@ class NfGreetingExtensionTest extends Specification {
     }
 }
 ```
-
-!!! note "Spock testing framework"
-
-    The generated project uses [Spock](https://spockframework.org/), a testing framework for Groovy.
-    Spock tests use descriptive method names in quotes (like `'should reverse a greeting'`) and a `given`/`expect` structure that reads almost like plain English.
 
 ### 5.3. Run the tests
 
