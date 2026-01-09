@@ -1115,16 +1115,116 @@ Let's explore other extension types.
 
 ## 7. Going further
 
-!!! note "Reference material"
+The `@Function` annotation covers most common use cases, but plugins can do much more.
+Let's explore some advanced capabilities using the code already in your generated plugin.
 
-    This section covers more advanced plugin capabilities.
-    It's provided as a reference for those who want to explore further - you don't need to understand all of this to create useful plugins.
+### 7.1. Trace observers: How the startup messages work
 
-    The `@Function` annotation covered earlier handles most common use cases.
+Remember the "Pipeline is starting! 🚀" message when you ran the pipeline?
+That came from the `NfGreetingObserver` class in your plugin.
 
-### 7.1. Custom operators
+Look at the observer code:
 
-Operators work with channels. Use `@Operator` annotation:
+```bash
+cat src/main/groovy/training/plugin/NfGreetingObserver.groovy
+```
+
+You'll see something like:
+
+```groovy
+class NfGreetingObserver implements TraceObserver {
+
+    @Override
+    void onFlowCreate(Session session) {
+        println "Pipeline is starting! 🚀"
+    }
+
+    @Override
+    void onFlowComplete() {
+        println "Pipeline complete! 🎉"
+    }
+}
+```
+
+Trace observers let you hook into workflow lifecycle events - useful for custom logging, metrics, or notifications.
+
+#### Try it: Customize the messages
+
+Let's change the messages to something more descriptive.
+
+Edit `src/main/groovy/training/plugin/NfGreetingObserver.groovy` and change the `println` statements:
+
+=== "After"
+
+    ```groovy hl_lines="4 9"
+    @Override
+    void onFlowCreate(Session session) {
+        // Custom startup message
+        println "🔬 Starting analysis pipeline..."
+    }
+
+    @Override
+    void onFlowComplete() {
+        // Custom completion message
+        println "✅ Analysis complete! Check your results."
+    }
+    ```
+
+=== "Before"
+
+    ```groovy hl_lines="3 8"
+    @Override
+    void onFlowCreate(Session session) {
+        println "Pipeline is starting! 🚀"
+    }
+
+    @Override
+    void onFlowComplete() {
+        println "Pipeline complete! 🎉"
+    }
+    ```
+
+Rebuild and reinstall the plugin:
+
+```bash
+make assemble && make install
+```
+
+Run the pipeline again from the parent directory:
+
+```bash
+cd .. && nextflow run main.nf
+```
+
+You should see your custom messages in the output:
+
+```console
+🔬 Starting analysis pipeline...
+executor >  local (5)
+[ab/123456] process > SAY_HELLO (5) [100%] 5 of 5 ✔
+...
+✅ Analysis complete! Check your results.
+```
+
+### 7.2. Available observer hooks
+
+Trace observers can respond to many events:
+
+| Method | When it's called |
+| ------ | ---------------- |
+| `onFlowCreate` | Workflow starts |
+| `onFlowComplete` | Workflow finishes |
+| `onProcessCreate` | A process is defined |
+| `onProcessStart` | A task begins execution |
+| `onProcessComplete` | A task finishes |
+| `onProcessCached` | A cached task is reused |
+| `onFilePublish` | A file is published |
+
+This enables powerful use cases like custom reports, Slack notifications, or metrics collection.
+
+### 7.3. Custom operators (reference)
+
+Operators work with channels directly. Use the `@Operator` annotation:
 
 ```groovy
 import nextflow.plugin.extension.Operator
@@ -1134,7 +1234,6 @@ import groovyx.gpars.dataflow.DataflowWriteChannel
 @Operator
 DataflowWriteChannel reverseAll(DataflowReadChannel source) {
     def target = CH.create()
-    // Transform each item
     new SubscribeOp()
         .withSource(source)
         .withTarget(target)
@@ -1150,44 +1249,23 @@ Usage in workflow:
 greeting_ch.reverseAll().view()
 ```
 
-### 7.2. Trace observers
+!!! note "Operators are more complex"
 
-Monitor workflow events with `TraceObserverV2`:
+    Creating operators requires understanding Nextflow's internal channel APIs.
+    For most use cases, `@Function` is simpler and sufficient.
 
-```groovy
-import nextflow.trace.TraceObserverV2
+### 7.4. Accessing configuration
 
-class MyObserver implements TraceObserverV2 {
+Plugins can read custom configuration from `nextflow.config`:
 
-    @Override
-    void onFlowBegin() {
-        log.info "Workflow started!"
-    }
-
-    @Override
-    void onProcessComplete(TaskHandler handler, TraceRecord trace) {
-        log.info "Process ${trace.name} completed"
-    }
-
-    @Override
-    void onFlowComplete() {
-        log.info "Workflow finished!"
-    }
-}
-```
-
-### 7.3. Accessing configuration
-
-Plugins can read custom configuration:
-
-```groovy
-// In nextflow.config
+```groovy title="nextflow.config"
 greeting {
     prefix = '>>>'
     suffix = '<<<'
 }
+```
 
-// In your extension
+```groovy title="In your extension's init() method"
 @Override
 void init(Session session) {
     def prefix = session.config.navigate('greeting.prefix', '***')
@@ -1195,24 +1273,33 @@ void init(Session session) {
 }
 ```
 
-### 7.4. Publishing your plugin
+This lets users customize plugin behavior without modifying plugin code.
 
-To share your plugin:
+### 7.5. Publishing your plugin
+
+To share your plugin with others:
 
 1. Build a release: `make release`
-2. Register with the Nextflow plugin registry
-3. Users can then install via `plugins { id 'nf-greeting' }` without local installation
+2. Push to GitHub with a release tag
+3. Register with the Nextflow plugin registry
+
+Once published, users can install without local builds:
+
+```groovy
+plugins {
+    id 'nf-greeting'  // No version needed for registry plugins
+}
+```
 
 !!! tip "Plugin registry"
 
     The Nextflow plugin registry is in public preview.
-    Contact Seqera for access to publish plugins.
+    See the [Nextflow documentation](https://www.nextflow.io/docs/latest/plugins/publishing-plugins.html) for publishing details.
 
 ### Takeaway
 
-Plugins can provide operators, trace observers, and more.
-Configuration is accessible via the Session object.
-Published plugins can be shared with the community.
+Beyond functions, plugins can provide trace observers for lifecycle hooks, custom operators for channel transformations, and configuration-driven behavior.
+The generated plugin template includes working examples of each.
 
 ### What's next?
 
