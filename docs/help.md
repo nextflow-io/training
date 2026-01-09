@@ -12,7 +12,7 @@ hide:
 
     ---
 
-    Our [Community forum](https://community.seqera.io/) has a category dedicated to training, which is a great place to post questions or report any problems you may be having with the training. You may even find your question has already been asked --and answered!
+    Our Community forum has a category dedicated to training, which is a great place to post questions or report any problems you may be having with the training. You may even find your question has already been asked --and answered!
 
     [Join the training forum:material-arrow-right:](https://community.seqera.io/c/training/39){ .md-button .md-button--primary .mt-1 }
 
@@ -20,7 +20,7 @@ hide:
 
     ---
 
-    If you're on Slack, you're welcome to reach out to us in the **training** channel in the Nextflow Slack workspace. The Nextflow Slack is a great place to chat with fellow developers and engage with the Nextflow community in general.
+    If you're on Slack, you're welcome to reach out to us in the training channel in the Nextflow Slack workspace. The Nextflow Slack is a great place to chat with fellow developers and engage with the Nextflow community in general.
 
     [Join the Nextflow Slack :material-arrow-right:](https://www.nextflow.io/slack-invite.html){ .md-button .md-button--primary .mt-1 }
 
@@ -28,7 +28,7 @@ hide:
 
     ---
 
-    If you spot an error in the training materials, please report it by opening an issue in the Github repository. Whether it's a typo, a formatting issue or an actual bug that affects the code, we want to know so we can fix it!
+    If you spot an error in the training materials, please report it by opening an issue in the Github repository. Whether it's a typo, a formatting issue or an actual bug that affects the code, let us know so we can fix it! We also welcome PRs directly.
 
     [Report an issue:material-arrow-right:](https://github.com/nextflow-io/training/issues){ .md-button .md-button--primary .mt-1 }
 
@@ -36,7 +36,7 @@ hide:
 
     ---
 
-    Seqera AI is an AI assistant trained on Nextflow and nf-core resources. It can help you debug your code, clarify Nextflow concepts, and search for documentation faster. Think of it as having an expert available 24/7 as you work through the course material and build your first workflows.
+    Seqera AI is an AI assistant trained on Nextflow and nf-core resources. It can help you debug your code, clarify Nextflow concepts, and search for documentation faster. Think of it as having an expert available 24/7 as you work through the course material.
 
     [Ask Seqera AI:material-arrow-right:](https://github.com/nextflow-io/training/issues){ .md-button .md-button--primary .mt-1 }
 
@@ -44,7 +44,7 @@ hide:
 
     ---
 
-    The official Nextflow documentation is your comprehensive guide to all language features, operators, and configuration options. Use it alongside this training to dive deeper into specific topics, explore advanced features, and find detailed syntax references.
+    The official documentation is the ultimate guide to all language features and configuration options. Use it alongside this training to dive deeper into specific topics and find detailed syntax references.
 
     [Browse the docs:material-arrow-right:](https://www.nextflow.io/docs/latest){ .md-button .md-button--primary .mt-1 }
 
