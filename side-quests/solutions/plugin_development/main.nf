@@ -6,23 +6,19 @@ include { reverseGreeting; decorateGreeting } from 'plugin/nf-greeting'
 params.input = 'greetings.csv'
 
 process SAY_HELLO {
-
     input:
         val greeting
-
     output:
-        path "${greeting}-output.txt"
-
+        stdout
     script:
     // Use our custom plugin function to decorate the greeting
     def decorated = decorateGreeting(greeting)
     """
-    echo '$decorated' > '${greeting}-output.txt'
+    echo '$decorated'
     """
 }
 
 workflow {
-
     greeting_ch = channel.fromPath(params.input)
                         .splitCsv(header: true)
                         .map { row -> row.greeting }
@@ -33,6 +29,5 @@ workflow {
         .view { "Reversed: $it" }
 
     SAY_HELLO(greeting_ch)
-
-    SAY_HELLO.out.view()
+    SAY_HELLO.out.view { "Decorated: ${it.trim()}" }
 }

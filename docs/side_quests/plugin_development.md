@@ -1067,15 +1067,13 @@ cat main.nf
 params.input = 'greetings.csv'
 
 process SAY_HELLO {
-    publishDir 'results', mode: 'copy'
-
     input:
         val greeting
     output:
-        path "${greeting}-output.txt"
+        stdout
     script:
     """
-    echo '$greeting' > '${greeting}-output.txt'
+    echo '$greeting'
     """
 }
 
@@ -1084,7 +1082,7 @@ workflow {
                         .splitCsv(header: true)
                         .map { row -> row.greeting }
     SAY_HELLO(greeting_ch)
-    SAY_HELLO.out.view()
+    SAY_HELLO.out.view { "Output: ${it.trim()}" }
 }
 ```
 
@@ -1094,14 +1092,12 @@ Run it to see the basic output:
 nextflow run main.nf
 ```
 
-You'll see the pipeline complete, and outputs are copied to the `results/` directory:
-
-```bash
-ls results/
-```
-
 ```console title="Output"
-Bonjour-output.txt  Ciao-output.txt  Hallo-output.txt  Hello-output.txt  Holà-output.txt
+Output: Hello
+Output: Bonjour
+Output: Holà
+Output: Ciao
+Output: Hallo
 ```
 
 Now let's enhance it to use our plugin functions.
@@ -1109,7 +1105,7 @@ Edit `main.nf` to import and use the custom functions:
 
 === "After"
 
-    ```groovy title="main.nf" hl_lines="4-5 20-21 33-36" linenums="1"
+    ```groovy title="main.nf" hl_lines="4-5 17-18 28-30" linenums="1"
     #!/usr/bin/env nextflow
 
     // Import custom functions from our plugin
@@ -1119,24 +1115,19 @@ Edit `main.nf` to import and use the custom functions:
     params.input = 'greetings.csv'
 
     process SAY_HELLO {
-        publishDir 'results', mode: 'copy'
-
         input:
             val greeting
-
         output:
-            path "${greeting}-output.txt"
-
+            stdout
         script:
         // Use our custom plugin function to decorate the greeting
         def decorated = decorateGreeting(greeting)
         """
-        echo '$decorated' > '${greeting}-output.txt'
+        echo '$decorated'
         """
     }
 
     workflow {
-
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv(header: true)
                             .map { row -> row.greeting }
@@ -1147,8 +1138,7 @@ Edit `main.nf` to import and use the custom functions:
             .view { "Reversed: $it" }
 
         SAY_HELLO(greeting_ch)
-
-        SAY_HELLO.out.view()
+        SAY_HELLO.out.view { "Decorated: ${it.trim()}" }
     }
     ```
 
@@ -1160,37 +1150,30 @@ Edit `main.nf` to import and use the custom functions:
     params.input = 'greetings.csv'
 
     process SAY_HELLO {
-        publishDir 'results', mode: 'copy'
-
         input:
             val greeting
-
         output:
-            path "${greeting}-output.txt"
-
+            stdout
         script:
         """
-        echo '$greeting' > '${greeting}-output.txt'
+        echo '$greeting'
         """
     }
 
     workflow {
-
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv(header: true)
                             .map { row -> row.greeting }
-
         SAY_HELLO(greeting_ch)
-
-        SAY_HELLO.out.view()
+        SAY_HELLO.out.view { "Output: ${it.trim()}" }
     }
     ```
 
 The key changes:
 
 - **Lines 4-5**: Import our plugin functions using `include { function } from 'plugin/plugin-name'`
-- **Lines 18-19**: Use `decorateGreeting()` in the process script to wrap the greeting
-- **Lines 30-33**: Use `reverseGreeting()` in the workflow to demonstrate channel operations with plugin functions
+- **Lines 17-18**: Use `decorateGreeting()` in the process script to wrap the greeting
+- **Lines 28-30**: Use `reverseGreeting()` in the workflow to demonstrate channel operations with plugin functions
 
 ### 6.3. Run the pipeline
 
@@ -1213,25 +1196,17 @@ nextflow run main.nf
     Reversed: àloH
     Reversed: oaiC
     Reversed: ollaH
-    /workspaces/.../work/.../Holà-output.txt
-    /workspaces/.../work/.../Hello-output.txt
-    ...
+    Decorated: *** Hello ***
+    Decorated: *** Bonjour ***
+    Decorated: *** Holà ***
+    Decorated: *** Ciao ***
+    Decorated: *** Hallo ***
     Pipeline complete! 🎉
     ```
 
     The "Pipeline is starting!" and "Pipeline complete!" messages come from the `NfGreetingObserver` trace observer that was included in the generated plugin template.
 
-### 6.4. Check the output files
-
-```bash
-cat work/*/*/Hello-output.txt
-```
-
-```console title="Output"
-*** Hello ***
-```
-
-The `decorateGreeting()` function was applied in the process script, wrapping the greeting with decorative markers.
+The `decorateGreeting()` function wraps each greeting with decorative markers, and `reverseGreeting()` shows the reversed strings - all powered by our plugin functions!
 
 ### Takeaway
 
@@ -1746,15 +1721,16 @@ greeting {
 }
 ```
 
-Run the pipeline and check the output file:
+Run the pipeline and observe the changed decoration style:
 
 ```bash
 nextflow run main.nf
-cat work/*/*/Hello-output.txt
 ```
 
-```console
->>> Hello <<<
+```console title="Output (excerpt)"
+Decorated: >>> Hello <<<
+Decorated: >>> Bonjour <<<
+...
 ```
 
 ### 9.3. Executors and filesystems (conceptual)

@@ -8,27 +8,24 @@
 params.input = 'greetings.csv'
 
 process SAY_HELLO {
-    publishDir 'results', mode: 'copy'
-
     input:
         val greeting
 
     output:
-        path "${greeting}-output.txt"
+        stdout
 
     script:
     """
-    echo '$greeting' > '${greeting}-output.txt'
+    echo '$greeting'
     """
 }
 
 workflow {
-
     greeting_ch = channel.fromPath(params.input)
                         .splitCsv(header: true)
                         .map { row -> row.greeting }
 
     SAY_HELLO(greeting_ch)
 
-    SAY_HELLO.out.view()
+    SAY_HELLO.out.view { "Output: ${it.trim()}" }
 }
