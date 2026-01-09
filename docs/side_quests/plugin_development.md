@@ -19,19 +19,26 @@ In this side quest, you'll learn how to use existing Nextflow plugins and option
 
 By the end of this side quest, you'll be able to:
 
-- Install and use existing plugins in your workflows
-- Understand the Nextflow plugin architecture
+**Using plugins (sections 1-2):**
+
+- Understand what plugins are and how they extend Nextflow
+- Install and configure existing plugins in your workflows
+- Import and use plugin functions
+
+**Developing plugins (sections 3-10):**
+
 - Create a new plugin project
-- Implement custom functions using the `@Function` annotation
-- Build and test your plugin locally
-- Use your plugin in a Nextflow workflow
-- Understand other extension points (operators, trace observers)
+- Implement custom functions, operators, and trace observers
+- Build, test, and publish your plugin
 
 ### Prerequisites
 
 Before taking on this side quest, you should:
 
 - Have completed the [Hello Nextflow](../../hello_nextflow/) tutorial or equivalent beginner's course
+
+For plugin development sections (3 onwards):
+
 - Have Java 17 or later installed (check with `java -version`)
 - Have basic familiarity with object-oriented programming concepts
 
@@ -83,6 +90,7 @@ cd side-quests/plugin_development
 ```console title="Directory contents"
 .
 ├── greetings.csv
+├── hello_example.nf
 ├── main.nf
 └── nextflow.config
 ```
@@ -372,7 +380,7 @@ Any pipeline can use `nf-hello@0.5.0` and get the exact same function.
 
 ### Takeaway
 
-Using plugins is straightforward: declare them in `nextflow.config`, import their functions, and use them in your workflows.
+Using plugins is straightforward: declare them in `nextflow.config` or load them with `-plugins`, then import their functions and use them in your workflows.
 The plugin ecosystem extends Nextflow with powerful features like validation, cloud integration, and provenance tracking.
 
 ### What's next?
@@ -1827,13 +1835,18 @@ workflow {
 ## What's next?
 
 Congratulations on completing this side quest!
-You've learned how to create Nextflow plugins and extend the language with custom functionality.
 
+**If you completed sections 1-2**, you now know how to discover, configure, and use existing plugins to extend your Nextflow pipelines.
+This knowledge will help you leverage the growing ecosystem of community plugins.
+
+**If you completed sections 3-10**, you've also learned how to create your own plugins, implementing custom functions, operators, trace observers, and more.
 Plugin development opens up powerful possibilities for:
 
-- Sharing reusable functions across pipelines
-- Integrating with external services
+- Sharing reusable functions across your organization
+- Integrating with external services and APIs
 - Custom monitoring and reporting
 - Supporting new execution platforms
+
+Whether you're using existing plugins or building your own, you now have the tools to extend Nextflow beyond its core capabilities.
 
 Return to the [Side Quests](./index.md) menu to continue your training journey.
