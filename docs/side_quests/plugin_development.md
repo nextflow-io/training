@@ -210,6 +210,8 @@ Each plugin page in the registry shows:
 - Installation instructions
 - Links to documentation and source code
 
+![The nf-hello plugin page on registry.nextflow.io](img/plugin-registry-nf-hello.png)
+
 You can also search GitHub for repositories with the `nf-` prefix, as most Nextflow plugins follow this naming convention.
 
 ### 2.2. Installing plugins
