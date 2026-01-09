@@ -1093,10 +1093,19 @@ nextflow run main.nf
 ```
 
 ```console title="Output"
-[...] process > SAY_HELLO (3) [100%] 3 of 3 ✔
-/workspaces/training/side-quests/plugin_development/work/.../Hello-output.txt
-/workspaces/training/side-quests/plugin_development/work/.../Bonjour-output.txt
-/workspaces/training/side-quests/plugin_development/work/.../Holà-output.txt
+N E X T F L O W   ~  version 25.04.3
+
+Launching `main.nf` [pedantic_perlman] DSL2 - revision: 8cd171f6ef
+
+Pipeline is starting! 🚀
+executor >  local (5)
+[c6/4a46ef] SAY_HELLO (5) [100%] 5 of 5 ✔
+/workspaces/training/side-quests/plugin_development/work/f7/e255e646e5615fb6ae5544811afa8e/Hello-output.txt
+/workspaces/training/side-quests/plugin_development/work/9e/c6b3b2765c5e9356994d520acb6d56/Holà-output.txt
+/workspaces/training/side-quests/plugin_development/work/8d/08c5c3d5e4d0d49bb234f4559d2266/Bonjour-output.txt
+/workspaces/training/side-quests/plugin_development/work/6f/8e9b6997fee47f64362b2ced2ec49a/Ciao-output.txt
+/workspaces/training/side-quests/plugin_development/work/c6/4a46efe191e16555653ef15e9e958e/Hallo-output.txt
+Pipeline complete! 👋
 ```
 
 Now let's enhance it to use our plugin functions.
