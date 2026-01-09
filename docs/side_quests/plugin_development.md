@@ -2062,9 +2062,75 @@ Follow semantic versioning for your releases:
 | **MINOR** (1.0.0 → 1.1.0) | New features, backward compatible | Adding a new function                      |
 | **PATCH** (1.0.0 → 1.0.1) | Bug fixes, backward compatible    | Fixing a bug in existing function          |
 
+### 10.7. Distributing plugins internally
+
+Organizations may need to distribute plugins internally without using the public registry.
+Use the `NXF_PLUGINS_TEST_REPOSITORY` environment variable to point Nextflow at an internal plugin repository.
+
+**1. Build your plugin** - the ZIP file will be at `build/distributions/`:
+
+```bash
+./gradlew assemble
+ls build/distributions/
+# nf-myplugin-0.1.0.zip
+```
+
+**2. Host the ZIP** on an internal web server, S3 bucket, or GitHub release.
+
+**3. Create a `plugins.json`** file alongside your plugin ZIPs:
+
+```json
+[
+  {
+    "id": "nf-myplugin",
+    "releases": [
+      {
+        "version": "1.0.0",
+        "url": "https://internal.example.com/plugins/nf-myplugin-1.0.0.zip",
+        "date": "2025-01-09T10:00:00Z",
+        "sha512sum": "5abe4cbc643ca0333cba545846494b17488d19d17...",
+        "requires": ">=24.04.0"
+      }
+    ]
+  }
+]
+```
+
+**4. Set the environment variable** before running Nextflow:
+
+```bash
+export NXF_PLUGINS_TEST_REPOSITORY="https://internal.example.com/plugins/plugins.json"
+```
+
+**5. Use the plugin** in your pipeline as normal:
+
+```groovy title="nextflow.config"
+plugins {
+    id 'nf-myplugin@1.0.0'
+}
+```
+
+??? tip "Generating the checksum"
+
+    ```bash
+    sha512sum nf-myplugin-1.0.0.zip | awk '{print $1}'
+    ```
+
+??? info "plugins.json field reference"
+
+    | Field | Description |
+    |-------|-------------|
+    | `id` | Plugin identifier (e.g., `nf-myplugin`) |
+    | `version` | Semantic version string |
+    | `url` | Direct download URL to the plugin ZIP |
+    | `date` | ISO 8601 timestamp |
+    | `sha512sum` | SHA-512 checksum of the ZIP file |
+    | `requires` | Minimum Nextflow version (e.g., `>=24.04.0`) |
+
 ### Takeaway
 
 Publishing involves claiming your plugin name, configuring API credentials, and running `make release`.
+For internal distribution, use `NXF_PLUGINS_TEST_REPOSITORY` to point to a custom `plugins.json`.
 Use semantic versioning to communicate changes to users.
 
 ### What's next?
