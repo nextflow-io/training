@@ -8,7 +8,7 @@ hide:
 
 # Environment options
 
-Our goal is to provide a consistent and thoroughly tested environment that allows learners to focus on learning Nextflow without having to spend time and effort on managing software.
+We aim to provide a consistent and thoroughly tested environment that allows learners to focus on learning Nextflow without having to spend time and effort on managing software.
 To that end, we have developed a containerized environment that contains all the necessary software, code files and example data to work through all of our courses.
 
 This containerized environment can be run out of the box on Github Codespaces or locally in VS Code with the Devcontainers extension.
@@ -23,7 +23,7 @@ This containerized environment can be run out of the box on Github Codespaces or
 
     [Use Github Codespaces:material-arrow-right:](01_setup.md){ .md-button .md-button--primary .mt-1 }
 
--   :material-laptop:{ .lg .middle } __VS Code with Devcontainers__
+-   :material-laptop:{ .lg .middle } __Local Devcontainers__
 
     ---
 

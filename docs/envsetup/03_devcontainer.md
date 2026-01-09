@@ -1,10 +1,10 @@
-# VSCode with Devcontainers
+# Local Devcontainers
 
 If you have a local Docker installation or are happy to install one, the easiest way to work locally with these materials is to use Visual Studio Code's devcontainer feature. This approach provides all the necessary tools and dependencies without requiring manual installation.
 
 ## Requirements
 
-To use the devcontainer setup, you'll need:
+To use the local devcontainer setup, you'll need:
 
 - [Visual Studio Code](https://code.visualstudio.com/)
 - A local Docker installation, for example:

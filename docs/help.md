@@ -6,6 +6,12 @@ hide:
   - footer
 ---
 
+# Getting help
+
+Whether you're having a hard time getting started, get stuck mid-way or have follow-up question, don't hesitate to reach out! Our community team is here to help, and the Nextflow community at large is very active, inclusive and eager to help.
+
+Here are the main options available depending on what you're looking for.
+
 <div class="grid cards" markdown>
 
 -   :material-forum-outline:{ .lg .middle } __Community forum__
