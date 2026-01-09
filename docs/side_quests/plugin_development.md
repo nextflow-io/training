@@ -1447,14 +1447,15 @@ Edit `nf-greeting/src/main/groovy/training/plugin/NfGreetingExtension.groovy` to
 
 === "After"
 
-    ```groovy title="NfGreetingExtension.groovy" hl_lines="6-8 55-67"
+    ```groovy title="NfGreetingExtension.groovy" linenums="17" hl_lines="24-28 61-72"
     package training.plugin
 
     import groovy.transform.CompileStatic
     import nextflow.Session
     import nextflow.plugin.extension.Function
-    import nextflow.plugin.extension.Operator
     import nextflow.plugin.extension.PluginExtensionPoint
+
+    import nextflow.plugin.extension.Operator
     import groovyx.gpars.dataflow.DataflowReadChannel
     import groovyx.gpars.dataflow.DataflowWriteChannel
     import nextflow.extension.CH
@@ -1508,7 +1509,7 @@ Edit `nf-greeting/src/main/groovy/training/plugin/NfGreetingExtension.groovy` to
 
 === "Before"
 
-    ```groovy title="NfGreetingExtension.groovy"
+    ```groovy title="NfGreetingExtension.groovy" linenums="17"
     package training.plugin
 
     import groovy.transform.CompileStatic
