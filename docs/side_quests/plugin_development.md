@@ -969,7 +969,7 @@ To see detailed results for each test, you can view the HTML test report that Gr
 Start a simple web server in the test report directory:
 
 ```bash
-cd build/reports/tests/test
+pushd build/reports/tests/test
 python -m http.server
 ```
 
@@ -984,7 +984,7 @@ This confirms that all four of our greeting functions are being tested correctly
 Press ++ctrl+c++ in the terminal to stop the server when you're done, then return to the plugin directory:
 
 ```bash
-cd ../../../..
+popd
 ```
 
 !!! tip "If the build fails"
