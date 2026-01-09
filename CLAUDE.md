@@ -61,15 +61,25 @@ prettier --write docs/**/*.md
       // broken code with line 14 highlighted
       `
   ```
-- **Code block line highlighting**: The `hl_lines` attribute is **relative to the snippet itself** (1-indexed from the first line of the code block), NOT related to `linenums`. For example:
-  ```markdown
-  `groovy linenums="21" hl_lines="3"
-  line one   <- displayed as line 21
-  line two   <- displayed as line 22
-  line three <- displayed as line 23, HIGHLIGHTED (3rd line of snippet)
-  `
+- **Code block line highlighting (`hl_lines`)**: This attribute specifies which lines to highlight, counted from the START of the code block (1-indexed). It is completely independent of `linenums`.
+
+  **To set `hl_lines` correctly**: Before writing the `hl_lines` attribute, identify the lines you want highlighted, then count their position from line 1 of the snippet. Blank lines count. For example, given this snippet:
   ```
-  Always count lines from the start of the snippet when setting `hl_lines`, regardless of `linenums` value.
+  #!/usr/bin/env nextflow    <- line 1
+                             <- line 2 (blank)
+  process FOO {              <- line 3
+                             <- line 4 (blank)
+      publishDir 'results'   <- line 5
+                             <- line 6 (blank)
+      input:                 <- line 7
+          val x              <- line 8
+  ```
+  To highlight the `publishDir` line and the `val x` line, count their positions (5 and 8), then write: `hl_lines="5 8"`. The `linenums` attribute (which controls displayed line numbers) does not affect this counting.
+
+  **Common errors**:
+  - Skipping blank lines when counting (blank lines are lines too)
+  - Assuming `hl_lines` numbers match `linenums` display numbers (they don't - always count from 1)
+  - Highlighting structural keywords (`input:`, `output:`) instead of the meaningful content
 
 ### Nextflow Scripts
 
