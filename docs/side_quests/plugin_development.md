@@ -1030,12 +1030,12 @@ Go back to the pipeline directory:
 cd ..
 ```
 
-Edit `nextflow.config` to enable the plugin by uncommenting the plugins block and adding the version:
+Edit `nextflow.config` to add the plugins block with your plugin and version:
 
 === "After"
 
-    ```groovy title="nextflow.config" hl_lines="3"
-    // Plugin development example config
+    ```groovy title="nextflow.config" hl_lines="2-4"
+    // Configuration for plugin development exercises
     plugins {
         id 'nf-greeting@0.1.0'
     }
@@ -1044,11 +1044,7 @@ Edit `nextflow.config` to enable the plugin by uncommenting the plugins block an
 === "Before"
 
     ```groovy title="nextflow.config"
-    // Plugin development example config
-    // Uncomment the following when your plugin is ready:
-    // plugins {
-    //     id 'nf-greeting'
-    // }
+    // Configuration for plugin development exercises
     ```
 
 !!! note "Version required for local plugins"
