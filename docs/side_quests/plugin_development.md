@@ -2003,11 +2003,27 @@ Run the pipeline and observe the changed decoration style:
 nextflow run main.nf -ansi-log false
 ```
 
-```console title="Output (excerpt)"
-...
-Decorated: >>> Hello <<<
-Decorated: >>> Bonjour <<<
-...
+```console title="Expected output"
+N E X T F L O W  ~  version 25.04.3
+Launching `main.nf` [nostalgic_leibniz] DSL2 - revision: 7d4c977882
+Pipeline is starting! 🚀
+SHOUTED: HELLO
+SHOUTED: BONJOUR
+SHOUTED: HOLÀ
+SHOUTED: CIAO
+SHOUTED: HALLO
+[ef/0979a4] Submitted process > SAY_HELLO (2)
+[8e/c79e5e] Submitted process > SAY_HELLO (1)
+[dc/c5e8c2] Submitted process > SAY_HELLO (4)
+Decorated with custom prefix: >>> Bonjour <<<
+Decorated with custom prefix: >>> Hello <<<
+[b9/47d0b8] Submitted process > SAY_HELLO (3)
+Decorated with custom prefix: >>> Ciao <<<
+[89/846018] Submitted process > SAY_HELLO (5)
+Decorated with custom prefix: >>> Holà <<<
+Decorated with custom prefix: >>> Hallo <<<
+Pipeline complete! 👋
+📈 Final task count: 5
 ```
 
 ### 9.4. Advanced extension types (conceptual)
