@@ -1843,10 +1843,20 @@ Run the pipeline and observe that only the final count appears:
 nextflow run main.nf -ansi-log false
 ```
 
-```console title="Expected output (excerpt)"
+```console title="Expected output"
+N E X T F L O W  ~  version 25.04.3
+Launching `main.nf` [stoic_wegener] DSL2 - revision: 63f3119fbc
 Pipeline is starting! 🚀
 SHOUTED: HELLO
-...
+SHOUTED: BONJOUR
+SHOUTED: HOLÀ
+SHOUTED: CIAO
+SHOUTED: HALLO
+[5e/9c1f21] Submitted process > SAY_HELLO (2)
+[20/8f6f91] Submitted process > SAY_HELLO (1)
+[6d/496bae] Submitted process > SAY_HELLO (4)
+[5c/a7fe10] Submitted process > SAY_HELLO (3)
+[48/18199f] Submitted process > SAY_HELLO (5)
 Pipeline complete! 👋
 📈 Final task count: 5
 ```
