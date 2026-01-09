@@ -1443,11 +1443,12 @@ Operators are useful when you need to:
 
 Let's add an operator that converts all items in a channel to uppercase.
 
-Edit `nf-greeting/src/main/groovy/training/plugin/NfGreetingExtension.groovy` to add an operator:
+Edit `nf-greeting/src/main/groovy/training/plugin/NfGreetingExtension.groovy` to add an operator.
+We need to add new imports for the dataflow classes and implement the operator method:
 
 === "After"
 
-    ```groovy title="NfGreetingExtension.groovy" linenums="17" hl_lines="46-57"
+    ```groovy title="NfGreetingExtension.groovy" linenums="17" hl_lines="24-29 62-73"
     package training.plugin
 
     import groovy.transform.CompileStatic
@@ -1550,6 +1551,17 @@ Edit `nf-greeting/src/main/groovy/training/plugin/NfGreetingExtension.groovy` to
         }
     }
     ```
+
+Let's break down the operator code:
+
+- **Lines 24-29**: New imports for working with channels. `DataflowReadChannel` is the input channel type, `DataflowWriteChannel` is the output type.
+- **Line 65**: `@Operator` marks this method as a channel operator (instead of `@Function`)
+- **Line 66**: The method takes a source channel and returns a new channel
+- **Line 67**: `CH.create()` creates a new empty channel to hold our results
+- **Lines 68-71**: `DataflowHelper.subscribeImpl()` sets up callbacks for channel events:
+    - `onNext`: Called for each item - we transform it to uppercase and add to the target channel
+    - `onComplete`: Called when the source channel finishes - we send `Channel.STOP` to close the target channel
+- **Line 72**: Return the new channel containing the transformed items
 
 Rebuild and reinstall:
 
