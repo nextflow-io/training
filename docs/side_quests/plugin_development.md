@@ -87,21 +87,17 @@ cd side-quests/plugin_development
 └── nextflow.config
 ```
 
-We have a simple greeting pipeline that we'll enhance with custom plugin functions.
+We have a simple greeting pipeline and materials for both using and developing plugins.
 
-#### What we'll build
+#### What we'll cover
 
-We'll create a plugin called `nf-greeting` that provides functions to manipulate greeting strings:
-
-- `reverseGreeting()` - Reverses a greeting
-- `decorateGreeting()` - Adds decorative markers
-- `friendlyGreeting()` - Creates a friendly greeting with a name
+1. **Using plugins** (sections 1-2): Understand plugin architecture and use existing plugins like `nf-hello`
+2. **Building a plugin** (sections 3-10): Create `nf-greeting` with custom functions, operators, and observers
 
 #### Readiness checklist
 
 - [ ] My codespace is running
-- [ ] Java is installed and working
-- [ ] I understand we're building a plugin from scratch
+- [ ] Java is installed (required for plugin development sections)
 
 ---
 
