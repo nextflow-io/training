@@ -1172,8 +1172,10 @@ Edit `main.nf` to import and use the custom functions:
 The key changes:
 
 - **Lines 4-5**: Import our plugin functions using `include { function } from 'plugin/plugin-name'`
-- **Lines 17-18**: Use `decorateGreeting()` in the process script to wrap the greeting
-- **Lines 28-30**: Use `reverseGreeting()` in the workflow to demonstrate channel operations with plugin functions
+- **Lines 17-18**: Use `decorateGreeting()` **inside the process script** to transform the greeting before output
+- **Lines 28-30**: Use `reverseGreeting()` **in a `map` operation** to transform channel items in the workflow
+
+This demonstrates that plugin functions work in both contexts - inside process definitions (where they run on compute nodes) and in workflow channel operations (where they run on the Nextflow head process).
 
 ### 6.3. Run the pipeline
 
@@ -1211,7 +1213,10 @@ The `decorateGreeting()` function wraps each greeting with decorative markers, a
 ### Takeaway
 
 Import plugin functions with `include { function } from 'plugin/plugin-id'`.
-Functions work in both workflow blocks and process scripts.
+Once imported, you can use them anywhere:
+
+- **In process scripts** - like `decorateGreeting()` transforming data before output
+- **In workflow operations** - like `reverseGreeting()` inside a `map` closure
 
 ### What's next?
 
