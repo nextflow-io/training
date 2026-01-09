@@ -82,6 +82,7 @@ process EXAMPLE {
 
 4. Include appropriate elements:
    - Code blocks with proper formatting (linenums, titles, highlighting)
+   - **For `hl_lines`**: Before writing this attribute, identify which lines you want highlighted, then count their position from line 1 of the snippet. Blank lines count. The `hl_lines` values are completely independent of `linenums`.
    - Before/After comparisons using tabbed blocks where relevant:
      ```markdown
      === "After"
