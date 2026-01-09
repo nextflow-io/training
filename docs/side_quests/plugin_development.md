@@ -1559,8 +1559,8 @@ Let's break down the operator code:
 - **Line 66**: The method takes a source channel and returns a new channel
 - **Line 67**: `CH.create()` creates a new empty channel to hold our results
 - **Lines 68-71**: `DataflowHelper.subscribeImpl()` sets up callbacks for channel events:
-    - `onNext`: Called for each item - we transform it to uppercase and add to the target channel
-    - `onComplete`: Called when the source channel finishes - we send `Channel.STOP` to close the target channel
+  - `onNext`: Called for each item - we transform it to uppercase and add to the target channel
+  - `onComplete`: Called when the source channel finishes - we send `Channel.STOP` to close the target channel
 - **Line 72**: Return the new channel containing the transformed items
 
 Rebuild and reinstall:
@@ -2105,10 +2105,10 @@ Let's look at how to share your plugin with others.
 
 Once your plugin is working locally, you have two options for sharing it:
 
-| Distribution method | Use case | Approval required |
-|---------------------|----------|-------------------|
-| **Public registry** | Open source plugins for the community | Yes - name must be claimed |
-| **Internal hosting** | Private/proprietary plugins within an organization | No |
+| Distribution method  | Use case                                           | Approval required          |
+| -------------------- | -------------------------------------------------- | -------------------------- |
+| **Public registry**  | Open source plugins for the community              | Yes - name must be claimed |
+| **Internal hosting** | Private/proprietary plugins within an organization | No                         |
 
 ### 11.1. Publishing to the public registry
 
