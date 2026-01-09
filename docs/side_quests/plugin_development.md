@@ -1667,28 +1667,9 @@ Pipeline complete! 👋
 📈 Final task count: 5
 ```
 
-### 8.3. Channel factories
-
-You may have noticed `NfGreetingFactory.groovy` in your plugin.
-Factories create things - in this case, trace observers.
-
-But plugins can also provide **channel factories** that create new ways to generate channels.
-For example, a plugin could provide:
-
-```groovy
-// Hypothetical channel factory
-channel.fromDatabase('SELECT * FROM samples')
-```
-
-The nf-schema plugin uses this pattern for `samplesheetToList()`.
-
-Creating channel factories is advanced and requires deep understanding of Nextflow internals.
-For most use cases, functions and operators are sufficient.
-
 ### Takeaway
 
 Custom operators work on entire channels rather than individual values, providing cleaner syntax for channel transformations.
-Channel factories can create new channel sources but require advanced Nextflow knowledge.
 
 ### What's next?
 
@@ -1716,7 +1697,143 @@ greeting {
 }
 ```
 
-### 9.2. Try it: Make the decorator configurable
+### 9.2. Try it: Make the task counter configurable
+
+Let's add a configuration option to enable/disable the task counter messages.
+
+Edit `TaskCounterObserver.groovy` to accept a configuration flag:
+
+=== "After"
+
+    ```groovy title="TaskCounterObserver.groovy" hl_lines="14-15 18-22"
+    package training.plugin
+
+    import groovy.transform.CompileStatic
+    import nextflow.processor.TaskHandler
+    import nextflow.trace.TraceObserver
+    import nextflow.trace.TraceRecord
+
+    /**
+     * Observer that counts completed tasks
+     */
+    @CompileStatic
+    class TaskCounterObserver implements TraceObserver {
+
+        private final boolean verbose
+        private int taskCount = 0
+
+        TaskCounterObserver(boolean verbose) {
+            this.verbose = verbose
+        }
+
+        @Override
+        void onProcessComplete(TaskHandler handler, TraceRecord trace) {
+            taskCount++
+            if (verbose) {
+                println "📊 Tasks completed so far: ${taskCount}"
+            }
+        }
+
+        @Override
+        void onFlowComplete() {
+            println "📈 Final task count: ${taskCount}"
+        }
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="TaskCounterObserver.groovy"
+    package training.plugin
+
+    import groovy.transform.CompileStatic
+    import nextflow.processor.TaskHandler
+    import nextflow.trace.TraceObserver
+    import nextflow.trace.TraceRecord
+
+    /**
+     * Observer that counts completed tasks
+     */
+    @CompileStatic
+    class TaskCounterObserver implements TraceObserver {
+
+        private int taskCount = 0
+
+        @Override
+        void onProcessComplete(TaskHandler handler, TraceRecord trace) {
+            taskCount++
+            println "📊 Tasks completed so far: ${taskCount}"
+        }
+
+        @Override
+        void onFlowComplete() {
+            println "📈 Final task count: ${taskCount}"
+        }
+    }
+    ```
+
+Now update `NfGreetingFactory.groovy` to read the configuration and pass it to the observer:
+
+=== "After"
+
+    ```groovy title="NfGreetingFactory.groovy" hl_lines="5-6"
+    @Override
+    Collection<TraceObserver> create(Session session) {
+        final enabled = session.config.navigate('greeting.enabled', true)
+        if (!enabled) return []
+        final verbose = session.config.navigate('greeting.taskCounter.verbose', true)
+        return [
+            new NfGreetingObserver(),
+            new TaskCounterObserver(verbose)
+        ]
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="NfGreetingFactory.groovy"
+    @Override
+    Collection<TraceObserver> create(Session session) {
+        final enabled = session.config.navigate('greeting.enabled', true)
+        if (!enabled) return []
+        return [
+            new NfGreetingObserver(),
+            new TaskCounterObserver()
+        ]
+    }
+    ```
+
+Rebuild and reinstall the plugin.
+
+Now users can disable the per-task messages in `nextflow.config`:
+
+```groovy title="nextflow.config"
+plugins {
+    id 'nf-greeting@0.1.0'
+}
+
+greeting {
+    taskCounter {
+        verbose = false
+    }
+}
+```
+
+Run the pipeline and observe that only the final count appears:
+
+```bash
+nextflow run main.nf -ansi-log false
+```
+
+```console title="Expected output (excerpt)"
+Pipeline is starting! 🚀
+SHOUTED: HELLO
+...
+Pipeline complete! 👋
+📈 Final task count: 5
+```
+
+### 9.3. Try it: Make the decorator configurable
 
 Let's make the `decorateGreeting` function use configurable prefix/suffix.
 
@@ -1803,9 +1920,19 @@ Decorated: >>> Bonjour <<<
 ...
 ```
 
-### 9.3. Executors and filesystems (conceptual)
+### 9.4. Advanced extension types (conceptual)
 
-Some extension types require significant infrastructure to demonstrate:
+Some extension types require significant infrastructure or deep Nextflow knowledge to implement:
+
+**Channel factories** create new ways to generate channels:
+
+```groovy
+// Hypothetical channel factory
+channel.fromDatabase('SELECT * FROM samples')
+```
+
+The nf-schema plugin uses this pattern for `samplesheetToList()`.
+Creating channel factories requires deep understanding of Nextflow internals.
 
 **Executors** define how tasks are submitted to compute resources:
 
@@ -1824,7 +1951,7 @@ These are documented in the [Nextflow plugin documentation](https://www.nextflow
 ### Takeaway
 
 Plugins can read configuration using `session.config.navigate()`, letting users customize behavior without modifying code.
-Executors and filesystems are advanced extension types typically created by platform vendors.
+Channel factories, executors, and filesystems are advanced extension types that require deeper Nextflow knowledge.
 
 ### What's next?
 
