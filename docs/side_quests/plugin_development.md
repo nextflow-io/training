@@ -345,6 +345,12 @@ Now that you understand how to use plugins, let's explore how they work under th
 
 ## 2. Plugin architecture
 
+<!-- TODO: Add Excalidraw diagram showing plugin architecture
+     File: docs/side_quests/img/plugin-architecture.excalidraw.svg
+     Content: Show Nextflow core with extension points (Functions, Operators,
+     Observers, etc.) and a plugin connecting to them via PF4J
+-->
+
 ### 2.1. How plugins extend Nextflow
 
 Nextflow's plugin system is built on [PF4J](https://pf4j.org/), a lightweight plugin framework for Java.
@@ -358,6 +364,17 @@ Plugins can extend Nextflow in several ways:
 | Executors       | Custom task execution backends           | AWS Batch, Kubernetes   |
 | Filesystems     | Custom storage backends                  | S3, Azure Blob          |
 | Trace Observers | Monitor workflow execution               | Custom logging, metrics |
+
+<!-- TODO: Add Excalidraw diagram showing extension types
+     File: docs/side_quests/img/plugin-extension-types.excalidraw.svg
+     Content: Visual showing where each extension type plugs in:
+     - Functions: called from workflow/process scripts
+     - Operators: transform channels (between processes)
+     - Factories: create channels (workflow entry points)
+     - Trace Observers: hook into lifecycle events
+     - Executors: submit tasks to compute backends
+     - Filesystems: access remote storage
+-->
 
 ### 2.2. Plugin project structure
 
@@ -727,6 +744,21 @@ Let's build and test our plugin.
 ---
 
 ## 5. Building and testing
+
+The plugin development cycle follows a simple pattern:
+
+```mermaid
+graph LR
+    A[Write/Edit Code] --> B[make assemble]
+    B --> C[make test]
+    C --> D{Tests pass?}
+    D -->|No| A
+    D -->|Yes| E[make install]
+    E --> F[Test in pipeline]
+    F --> G{Works?}
+    G -->|No| A
+    G -->|Yes| H[Done!]
+```
 
 ### 5.1. Build the plugin
 
@@ -1658,6 +1690,15 @@ Let's look at how to share your plugin with others.
 ## 10. Publishing your plugin
 
 Once your plugin is working locally, you can share it with the Nextflow community through the [plugin registry](https://registry.nextflow.io/).
+
+```mermaid
+graph TD
+    A[1. Claim plugin name] --> B[2. Configure API key]
+    B --> C[3. Update version]
+    C --> D[4. make release]
+    D --> E[Published to registry]
+    E --> F[Users can install globally]
+```
 
 !!! tip "Plugin registry"
 
