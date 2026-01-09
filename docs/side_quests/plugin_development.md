@@ -542,7 +542,7 @@ The `nextflowPlugin` block configures:
 - `nextflowVersion`: Minimum Nextflow version required
 - `provider`: Your name or organization
 - `className`: The main plugin class (uses your package name)
-- `extensionPoints`: Classes providing extensions (functions, factories, etc.)
+- `extensionPoints`: Classes providing extensions (functions, observers, etc.)
 - `publishing`: Configuration for publishing to the plugin registry (optional)
 
 ### Takeaway
