@@ -912,7 +912,7 @@ cd ../../../..
     Read the error message carefully - it often tells you exactly what's wrong and where.
     If you're stuck, compare your code character-by-character with the examples.
 
-### 5.4. Install locally
+### 5.5. Install locally
 
 To use the plugin with Nextflow, install it to your local plugins directory:
 
@@ -1113,20 +1113,11 @@ Let's explore other extension types.
 
 ---
 
-## 7. Going further
+## 7. Trace observers
 
-In section 2.1, we saw that plugins can provide many types of extensions:
-
-| Extension Type  | Purpose                                  | We've used         |
-| --------------- | ---------------------------------------- | ------------------ |
-| Functions       | Custom functions callable from workflows | ✅ `reverseGreeting()` |
-| Operators       | Custom channel operators                 | ❌ Not yet          |
-| Factories       | Create new channel types                 | ❌ Not yet          |
-| Trace Observers | Monitor workflow execution               | ✅ (startup messages) |
-| Executors       | Custom task execution backends           | Conceptual only    |
-| Filesystems     | Custom storage backends                  | Conceptual only    |
-
-Let's explore the ones we haven't tried yet.
+In section 2.1, we saw that plugins can provide many types of extensions.
+So far we've implemented custom functions.
+Now let's explore **trace observers**, which let you hook into workflow lifecycle events.
 
 ### 7.1. Understanding the existing trace observer
 
@@ -1260,7 +1251,20 @@ executor >  local (5)
 Pipeline complete! 🎉
 ```
 
-### 7.3. Custom operators: When functions aren't enough
+### Takeaway
+
+Trace observers hook into workflow lifecycle events like `onFlowCreate`, `onProcessComplete`, and `onFlowComplete`.
+They're useful for custom logging, metrics collection, notifications, and reporting.
+
+### What's next?
+
+Let's explore custom channel operators.
+
+---
+
+## 8. Custom operators and factories
+
+### 8.1. When functions aren't enough
 
 We've used `@Function` to create `reverseGreeting()`.
 But functions have a limitation: they work on **individual values**, not channels.
@@ -1289,7 +1293,7 @@ Operators are useful when you need to:
 - Combine or split channels
 - Add channel-level behaviors (filtering, grouping, etc.)
 
-#### Try it: Add a shoutAll operator
+### 8.2. Try it: Add a shoutAll operator
 
 Let's add an operator that converts all items in a channel to uppercase.
 
@@ -1487,7 +1491,7 @@ Reversed: olleH
 ...
 ```
 
-### 7.4. Channel factories
+### 8.3. Channel factories
 
 You may have noticed `NfGreetingFactory.groovy` in your plugin.
 Factories create things - in this case, trace observers.
@@ -1505,7 +1509,20 @@ The nf-schema plugin uses this pattern for `samplesheetToList()`.
 Creating channel factories is advanced and requires deep understanding of Nextflow internals.
 For most use cases, functions and operators are sufficient.
 
-### 7.5. Configuration-driven behavior
+### Takeaway
+
+Custom operators work on entire channels rather than individual values, providing cleaner syntax for channel transformations.
+Channel factories can create new channel sources but require advanced Nextflow knowledge.
+
+### What's next?
+
+Let's see how plugins can read configuration from `nextflow.config`.
+
+---
+
+## 9. Configuration
+
+### 9.1. Configuration-driven behavior
 
 Plugins can read configuration from `nextflow.config`, letting users customize behavior.
 
@@ -1523,7 +1540,7 @@ greeting {
 }
 ```
 
-#### Try it: Make the decorator configurable
+### 9.2. Try it: Make the decorator configurable
 
 Let's make the `decorateGreeting` function use configurable prefix/suffix.
 
@@ -1609,7 +1626,7 @@ cat work/*/*/Hello-output.txt
 >>> Hello <<<
 ```
 
-### 7.6. Executors and filesystems (conceptual)
+### 9.3. Executors and filesystems (conceptual)
 
 Some extension types require significant infrastructure to demonstrate:
 
@@ -1627,7 +1644,18 @@ Some extension types require significant infrastructure to demonstrate:
 
 These are documented in the [Nextflow plugin documentation](https://www.nextflow.io/docs/latest/plugins/developing-plugins.html) for advanced users.
 
-### 7.7. Publishing your plugin
+### Takeaway
+
+Plugins can read configuration using `session.config.navigate()`, letting users customize behavior without modifying code.
+Executors and filesystems are advanced extension types typically created by platform vendors.
+
+### What's next?
+
+Let's look at how to share your plugin with others.
+
+---
+
+## 10. Publishing your plugin
 
 To share your plugin with others:
 
@@ -1650,13 +1678,8 @@ plugins {
 
 ### Takeaway
 
-Plugins can provide much more than functions:
-
-- **Trace observers** hook into workflow lifecycle events
-- **Operators** transform entire channels
-- **Configuration** lets users customize plugin behavior
-- **Factories** create observers and channel sources
-- **Executors** and **Filesystems** integrate with infrastructure (advanced)
+Publishing to the plugin registry makes your plugin available to the entire Nextflow community.
+Use semantic versioning and include good documentation.
 
 ### What's next?
 
