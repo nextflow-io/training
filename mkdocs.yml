@@ -105,10 +105,11 @@ nav:
           - archive/advanced/support.md
   - Help:
       - help.md
-      - envsetup/index.md
-      - envsetup/01_setup.md
-      - envsetup/03_devcontainer.md
-      - envsetup/02_local.md
+      - Training environment:
+          - envsetup/index.md
+          - envsetup/01_setup.md
+          - envsetup/03_devcontainer.md
+          - envsetup/02_local.md
 
 theme:
   name: material

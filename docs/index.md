@@ -40,7 +40,7 @@ hide:
 
         [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
-        If you'd like to do the training in your own environment, please see the setup instructions for local installations in the [Environment Setup](./envsetup/index.md) mini-course.
+        If this does not suit your needs, please see the other [Environment options](./envsetup/index.md).
 
     ??? learning "Training events"
 

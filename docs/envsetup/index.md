@@ -4,13 +4,30 @@ Our goal is to provide a consistent and thoroughly tested environment that allow
 To that end, we have developed a containerized environment that contains all the necessary software, code files and example data to work through all of our courses.
 
 This containerized environment can be run out of the box on [Github Codespaces](01_setup.md) or in any other custom environment that supports [devcontainers](./03_devcontainer.md).
-Alternatively, you can replicate this environment on your own local system by installing the software dependencies and cloning the training repository, as detailed [here](02_local.md).
 
-For more details about the three options, please see the relevant articles.
+<div class="grid cards" markdown>
 
-- [Using GitHub Codespaces for Nextflow training](01_setup.md)
-- [Setting up VS Code with Devcontainers](03_devcontainer.md)
-- [Installing everything on your local system](02_local.md)
+-   :material-forum-outline:{ .lg .middle } __Github Codespaces__
+
+    ---
+
+    short blurb
+
+    [Use Github Codespaces:material-arrow-right:](01_setup.md){ .md-button .md-button--primary .mt-1 }
+
+-   :material-slack:{ .lg .middle } __VS Code with Devcontainers__
+
+    ---
+
+    short blurb
+
+    [Use VS Code with Devcontainers :material-arrow-right:](https://www.nextflow.io/slack-invite.html){ .md-button .md-button--primary .mt-1 }
+
+</div>
+
+## Instructions for manual installation
+
+If neither of the options above suit your needs, you can replicate this environment on your own local system by installing the software dependencies manually and cloning the training repository, as detailed [here](02_local.md).
 
 !!! warning
 
