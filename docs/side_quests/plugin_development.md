@@ -1111,7 +1111,7 @@ Let's explore other extension types.
 
 ## 7. Trace observers
 
-In section 2.1, we saw that plugins can provide many types of extensions.
+In section 1.1, we saw that plugins can provide many types of extensions.
 So far we've implemented custom functions.
 Now let's explore **trace observers**, which let you hook into workflow lifecycle events.
 
