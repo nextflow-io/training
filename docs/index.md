@@ -67,8 +67,6 @@ hide:
 
 </div>
 
----
-
 ## Catalog of Nextflow training courses
 
 <div class="grid cards" markdown>
@@ -93,7 +91,9 @@ hide:
 
         [Start the Nextflow Run training :material-arrow-right:](nextflow_run/index.md){ .md-button .md-button--secondary }
 
-    ### :material-microscope:{.nextflow-primary} Nextflow for Science
+    ---
+
+    ### :material-microscope:{.nextflow-primary} Nextflow for Science {.mt-1}
 
     Learn to apply the concepts and components presented in 'Hello Nextflow' to specific scientific use cases.
 
@@ -123,13 +123,18 @@ hide:
 
     Learn to utilize code and best practices from the [nf-core](https://nf-co.re/) community project.
 
+    These courses help you go from Nextflow fundamentals to nf-core best practices.
+    Understand how and why the nf-core community builds pipelines, and how you can contribute and reuse these techniques.
+
     ??? courses "**Hello nf-core:** Get started with nf-core"
 
         For developers who wish to learn run and develop [nf-core](https://nf-co.re/) compliant pipelines. The course covers the structure of nf-core pipelines in enough detail to enable developing simple but fully functional pipelines that follow the nf-core template and development best practices, as well as use existing nf-core modules.
 
         [Start the Hello nf-core training :material-arrow-right:](hello_nf-core/index.md){ .md-button .md-button--secondary }
 
-    ### :material-rocket-launch:{.nextflow-primary} Advanced Nextflow Training
+    ---
+
+    ### :material-rocket-launch:{.nextflow-primary} Advanced Nextflow Training {.mt-1}
 
     Learn advanced concepts and mechanisms for developing and deploying Nextflow pipelines to address real-world use cases.
 
@@ -146,8 +151,6 @@ hide:
         [Browse the Training Collections :material-arrow-right:](training_collections/){ .md-button .md-button--secondary }
 
 </div>
-
----
 
 ## Archived materials
 
