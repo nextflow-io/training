@@ -25,11 +25,11 @@ By the end of this side quest, you'll be able to:
 - Install and configure existing plugins in your workflows
 - Import and use plugin functions
 
-**Developing plugins (sections 3-10):**
+**Developing plugins (sections 3-11):**
 
 - Create a new plugin project
 - Implement custom functions, operators, and trace observers
-- Build, test, and publish your plugin
+- Build, test, and distribute your plugin
 
 ### Prerequisites
 
@@ -2291,11 +2291,13 @@ Let's summarize what we've learned.
 - [ ] Java 17+ installed
 - [ ] Create project with `nextflow plugin create <name> <org>`
 - [ ] Implement extension class with `@Function` methods
+- [ ] Optionally add `@Operator` methods for channel transformations
+- [ ] Optionally add `TraceObserver` implementations for workflow events
 - [ ] Write unit tests
 - [ ] Build with `make assemble`
 - [ ] Install with `make install`
 - [ ] Enable in `nextflow.config` with `plugins { id 'plugin-id' }`
-- [ ] Import functions with `include { fn } from 'plugin/plugin-id'`
+- [ ] Import functions/operators with `include { fn } from 'plugin/plugin-id'`
 
 ### Key code patterns
 
@@ -2325,7 +2327,7 @@ include { myFunction } from 'plugin/my-plugin'
 
 workflow {
     channel.of('a', 'b', 'c')
-        .map { myFunction(it) }
+        .map { item -> myFunction(item) }
         .view()
 }
 ```
@@ -2364,7 +2366,7 @@ Congratulations on completing this side quest!
 **If you completed sections 1-2**, you now know how to discover, configure, and use existing plugins to extend your Nextflow pipelines.
 This knowledge will help you leverage the growing ecosystem of community plugins.
 
-**If you completed sections 3-10**, you've also learned how to create your own plugins, implementing custom functions, operators, trace observers, and more.
+**If you completed sections 3-11**, you've also learned how to create your own plugins, implementing custom functions, operators, trace observers, and more.
 Plugin development opens up powerful possibilities for:
 
 - Sharing reusable functions across your organization
