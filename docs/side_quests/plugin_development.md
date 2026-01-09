@@ -1561,7 +1561,7 @@ Now test the operator by editing `main.nf` to use it:
 
 === "After"
 
-    ```groovy linenums="1" hl_lines="5 23-26"
+    ```groovy linenums="1" hl_lines="5 28-31"
     #!/usr/bin/env nextflow
 
     // Import custom functions from our plugin
