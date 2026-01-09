@@ -138,6 +138,9 @@ Now look at the main workflow file:
 ```groovy title="main.nf" linenums="1"
 #!/usr/bin/env nextflow
 
+// Enable workflow output definition syntax (required for Nextflow < 25.10)
+nextflow.preview.output = true
+
 /*
  * Pipeline parameters
  */
@@ -244,13 +247,13 @@ The workflow output definition syntax uses two constructs:
 !!! note "Feature flag"
 
     This training environment uses an older version of Nextflow that requires a feature flag for workflow outputs.
-    When you add the `output {}` block in a later step, you'll also need to add this line near the top of your script:
+    The starter script already includes this line:
 
     ```groovy
     nextflow.preview.output = true
     ```
 
-    In Nextflow 25.10 and later, this flag is no longer needed.
+    In Nextflow 25.10 and later, this flag is no longer needed and can be removed.
 
 Let's modify our workflow to use this new syntax.
 
@@ -353,8 +356,11 @@ Now update `main.nf` to add the `publish:` section inside the workflow:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="1" hl_lines="14 26-28"
+    ```groovy title="main.nf" linenums="1" hl_lines="17 29-31"
     #!/usr/bin/env nextflow
+
+    // Enable workflow output definition syntax (required for Nextflow < 25.10)
+    nextflow.preview.output = true
 
     /*
      * Pipeline parameters
@@ -390,6 +396,9 @@ Now update `main.nf` to add the `publish:` section inside the workflow:
     ```groovy title="main.nf" linenums="1"
     #!/usr/bin/env nextflow
 
+    // Enable workflow output definition syntax (required for Nextflow < 25.10)
+    nextflow.preview.output = true
+
     /*
      * Pipeline parameters
      */
@@ -423,7 +432,7 @@ Now add the `output {}` block after the workflow to configure how outputs are or
 
 === "After"
 
-    ```groovy title="main.nf" linenums="1" hl_lines="3-4 34-47"
+    ```groovy title="main.nf" linenums="1" hl_lines="34-47"
     #!/usr/bin/env nextflow
 
     // Enable workflow output definition syntax (required for Nextflow < 25.10)
@@ -477,6 +486,9 @@ Now add the `output {}` block after the workflow to configure how outputs are or
 
     ```groovy title="main.nf" linenums="1"
     #!/usr/bin/env nextflow
+
+    // Enable workflow output definition syntax (required for Nextflow < 25.10)
+    nextflow.preview.output = true
 
     /*
      * Pipeline parameters
