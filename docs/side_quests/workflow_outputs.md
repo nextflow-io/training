@@ -621,14 +621,14 @@ find results -type f
     ```console
     results/greetings/English/Hello-output.txt
     results/greetings/French/Bonjour-output.txt
-    results/greetings/Spanish/Holà-output.txt
-    results/greetings/Italian/Ciao-output.txt
     results/greetings/German/Hallo-output.txt
+    results/greetings/Italian/Ciao-output.txt
+    results/greetings/Spanish/Holà-output.txt
     results/uppercase/English/UPPER-Hello-output.txt
     results/uppercase/French/UPPER-Bonjour-output.txt
-    results/uppercase/Spanish/UPPER-Holà-output.txt
-    results/uppercase/Italian/UPPER-Ciao-output.txt
     results/uppercase/German/UPPER-Hallo-output.txt
+    results/uppercase/Italian/UPPER-Ciao-output.txt
+    results/uppercase/Spanish/UPPER-Holà-output.txt
     ```
 
 The outputs are now organized by language, making it easy to find results for specific languages.
@@ -736,17 +736,38 @@ cat results/greetings/index.json
     [
         [
             {
-                "id": "Hello",
-                "language": "English"
+                "id": "Hallo",
+                "language": "German"
             },
-            "/workspaces/.../results/greetings/English/Hello-output.txt"
+            "/workspaces/training/side-quests/workflow_outputs/results/greetings/German/Hallo-output.txt"
         ],
         [
             {
                 "id": "Bonjour",
                 "language": "French"
             },
-            "/workspaces/.../results/greetings/French/Bonjour-output.txt"
+            "/workspaces/training/side-quests/workflow_outputs/results/greetings/French/Bonjour-output.txt"
+        ],
+        [
+            {
+                "id": "Holà",
+                "language": "Spanish"
+            },
+            "/workspaces/training/side-quests/workflow_outputs/results/greetings/Spanish/Holà-output.txt"
+        ],
+        [
+            {
+                "id": "Ciao",
+                "language": "Italian"
+            },
+            "/workspaces/training/side-quests/workflow_outputs/results/greetings/Italian/Ciao-output.txt"
+        ],
+        [
+            {
+                "id": "Hello",
+                "language": "English"
+            },
+            "/workspaces/training/side-quests/workflow_outputs/results/greetings/English/Hello-output.txt"
         ]
     ]
     ```
