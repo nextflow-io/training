@@ -186,9 +186,25 @@ In the next section, we'll introduce the workflow output definition syntax that 
 
 ## 2. Introducing workflow outputs
 
-### 2.1. The publish section
+### 2.1. A different approach to publishing
 
-The workflow output definition syntax uses two new constructs:
+With `publishDir`, each process is responsible for publishing its own outputs.
+The process definition (or its configuration) specifies where files should go.
+This means publishing logic is distributed across your workflow—every process that produces user-facing outputs needs its own publish configuration.
+
+The workflow output definition syntax takes a different approach: **publishing is handled at the workflow level, not the process level**.
+
+Instead of processes deciding where to put their outputs, you:
+
+1. Write processes that simply emit their outputs to channels (no `publishDir`)
+2. Declare in your workflow which channels contain outputs worth publishing
+3. Configure in a separate `output {}` block how those outputs should be organized
+
+This separation means processes focus purely on computation, while output organization is managed in one central place.
+
+### 2.2. The syntax
+
+The workflow output definition syntax uses two constructs:
 
 1. A `publish:` section inside your workflow that declares which channels to publish
 2. An `output {}` block that configures how those outputs are organized
@@ -254,7 +270,7 @@ Notice that we:
 - Changed the input to accept a tuple with both greeting and language
 - Changed the output to emit a tuple that includes the metadata
 
-### 2.2. Update CONVERT_TO_UPPER
+### 2.3. Update CONVERT_TO_UPPER
 
 Similarly, update the `CONVERT_TO_UPPER` process:
 
@@ -303,7 +319,7 @@ Similarly, update the `CONVERT_TO_UPPER` process:
     }
     ```
 
-### 2.3. Update the main workflow
+### 2.4. Update the main workflow
 
 Now update `main.nf` to use the publish section and pass metadata through:
 
@@ -373,7 +389,7 @@ Now update `main.nf` to use the publish section and pass metadata through:
 The `publish:` section declares two named outputs: `greetings` and `uppercase`.
 Each is assigned to the output channel of the corresponding process.
 
-### 2.4. Add the output block
+### 2.5. Add the output block
 
 Now add the `output {}` block after the workflow to configure how outputs are organized:
 
@@ -400,7 +416,7 @@ The `output {}` block:
 - Sets the publish mode to `copy` for each output
 - The base output directory defaults to `results` (override with `-output-dir`)
 
-### 2.5. Run the updated workflow
+### 2.6. Run the updated workflow
 
 Clean up previous results and run:
 
