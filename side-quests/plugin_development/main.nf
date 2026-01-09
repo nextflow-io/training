@@ -8,6 +8,7 @@
 params.input = 'greetings.csv'
 
 process SAY_HELLO {
+    publishDir 'results', mode: 'copy'
 
     input:
         val greeting

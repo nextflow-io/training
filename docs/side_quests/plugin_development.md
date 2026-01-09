@@ -1067,6 +1067,8 @@ cat main.nf
 params.input = 'greetings.csv'
 
 process SAY_HELLO {
+    publishDir 'results', mode: 'copy'
+
     input:
         val greeting
     output:
@@ -1092,20 +1094,14 @@ Run it to see the basic output:
 nextflow run main.nf
 ```
 
+You'll see the pipeline complete, and outputs are copied to the `results/` directory:
+
+```bash
+ls results/
+```
+
 ```console title="Output"
-N E X T F L O W   ~  version 25.04.3
-
-Launching `main.nf` [pedantic_perlman] DSL2 - revision: 8cd171f6ef
-
-Pipeline is starting! 🚀
-executor >  local (5)
-[c6/4a46ef] SAY_HELLO (5) [100%] 5 of 5 ✔
-/workspaces/training/side-quests/plugin_development/work/f7/e255e646e5615fb6ae5544811afa8e/Hello-output.txt
-/workspaces/training/side-quests/plugin_development/work/9e/c6b3b2765c5e9356994d520acb6d56/Holà-output.txt
-/workspaces/training/side-quests/plugin_development/work/8d/08c5c3d5e4d0d49bb234f4559d2266/Bonjour-output.txt
-/workspaces/training/side-quests/plugin_development/work/6f/8e9b6997fee47f64362b2ced2ec49a/Ciao-output.txt
-/workspaces/training/side-quests/plugin_development/work/c6/4a46efe191e16555653ef15e9e958e/Hallo-output.txt
-Pipeline complete! 👋
+Bonjour-output.txt  Ciao-output.txt  Hallo-output.txt  Hello-output.txt  Holà-output.txt
 ```
 
 Now let's enhance it to use our plugin functions.
@@ -1113,7 +1109,7 @@ Edit `main.nf` to import and use the custom functions:
 
 === "After"
 
-    ```groovy title="main.nf" hl_lines="4-5 18-19 30-33" linenums="1"
+    ```groovy title="main.nf" hl_lines="4-5 20-21 33-36" linenums="1"
     #!/usr/bin/env nextflow
 
     // Import custom functions from our plugin
@@ -1123,6 +1119,7 @@ Edit `main.nf` to import and use the custom functions:
     params.input = 'greetings.csv'
 
     process SAY_HELLO {
+        publishDir 'results', mode: 'copy'
 
         input:
             val greeting
@@ -1160,14 +1157,10 @@ Edit `main.nf` to import and use the custom functions:
     ```groovy title="main.nf" linenums="1"
     #!/usr/bin/env nextflow
 
-    /*
-     * Simple greeting pipeline
-     * Will be enhanced to use custom plugin functions
-     */
-
     params.input = 'greetings.csv'
 
     process SAY_HELLO {
+        publishDir 'results', mode: 'copy'
 
         input:
             val greeting
