@@ -306,7 +306,7 @@ Edit `modules/greetings.nf` to remove the `publishDir` directives from both proc
 
 === "Before"
 
-    ```groovy title="modules/greetings.nf" linenums="1" hl_lines="8 25"
+    ```groovy title="modules/greetings.nf" linenums="1" hl_lines="8 27"
     #!/usr/bin/env nextflow
 
     /*
