@@ -15,6 +15,6 @@ process TRIM_GALORE {
 
     script:
     """
-    trim_galore --fastqc $reads
+    trim_galore --fastqc ${reads}
     """
 }

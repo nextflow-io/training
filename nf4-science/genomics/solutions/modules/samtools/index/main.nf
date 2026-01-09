@@ -8,13 +8,13 @@ process SAMTOOLS_INDEX {
     publishDir params.outdir, mode: 'symlink'
 
     input:
-        path input_bam
+    path input_bam
 
     output:
-        tuple path(input_bam), path("${input_bam}.bai")
+    tuple path(input_bam), path("${input_bam}.bai")
 
     script:
     """
-    samtools index '$input_bam'
+    samtools index '${input_bam}'
     """
 }

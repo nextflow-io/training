@@ -24,6 +24,5 @@ workflow {
     TRIM_GALORE(read_ch)
 
     // Alignment to a reference genome
-    HISAT2_ALIGN(TRIM_GALORE.out.trimmed_reads, file (params.hisat2_index_zip))
-
+    HISAT2_ALIGN(TRIM_GALORE.out.trimmed_reads, file(params.hisat2_index_zip))
 }

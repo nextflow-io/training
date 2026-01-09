@@ -17,5 +17,4 @@ workflow {
 
     // Initial quality control
     FASTQC(read_ch)
-
 }
