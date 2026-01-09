@@ -1,34 +1,23 @@
 plugins {
-    id 'io.nextflow.nextflow-plugin' version '1.0.0-beta.6'
+    id 'io.nextflow.nextflow-plugin' version '0.0.1-alpha4'
 }
 
 version = '0.1.0'
 
 nextflowPlugin {
-    // Minimum Nextflow version required
-    nextflowVersion = '25.04.0'
+    nextflowVersion = '24.10.0'
 
-    // Plugin provider
     provider = 'training'
-
-    // Plugin class
-    className = 'nextflow.greeting.GreetingPlugin'
-
-    // Extension points
+    className = 'training.plugin.NfGreetingPlugin'
     extensionPoints = [
-        'nextflow.greeting.GreetingExtension'
+        'training.plugin.NfGreetingExtension',
+        'training.plugin.NfGreetingFactory'
     ]
-}
 
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.0'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.10.0'
-}
-
-test {
-    useJUnitPlatform()
+    publishing {
+        registry {
+            url = 'https://nf-plugins-registry.dev-tower.net/api'
+            authToken = project.findProperty('pluginRegistry.accessToken')
+        }
+    }
 }
