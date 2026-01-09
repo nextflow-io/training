@@ -244,7 +244,7 @@ The workflow output definition syntax uses two constructs:
 !!! note "Feature flag"
 
     This training environment uses an older version of Nextflow that requires a feature flag for workflow outputs.
-    The `nextflow.config` file already includes the required setting:
+    When you add the `output {}` block in a later step, you'll also need to add this line near the top of your script:
 
     ```groovy
     nextflow.preview.output = true
@@ -423,8 +423,11 @@ Now add the `output {}` block after the workflow to configure how outputs are or
 
 === "After"
 
-    ```groovy title="main.nf" linenums="1" hl_lines="31-44"
+    ```groovy title="main.nf" linenums="1" hl_lines="3-4 34-47"
     #!/usr/bin/env nextflow
+
+    // Enable workflow output definition syntax (required for Nextflow < 25.10)
+    nextflow.preview.output = true
 
     /*
      * Pipeline parameters
@@ -546,7 +549,7 @@ Update the `output {}` block to use dynamic paths:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="30" hl_lines="7 12"
+    ```groovy title="main.nf" linenums="34" hl_lines="7 12"
     /*
      * Output block defines how published outputs are organized
      */
@@ -565,7 +568,7 @@ Update the `output {}` block to use dynamic paths:
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="30" hl_lines="7 12"
+    ```groovy title="main.nf" linenums="34" hl_lines="7 12"
     /*
      * Output block defines how published outputs are organized
      */
@@ -656,7 +659,7 @@ Update the `output {}` block to generate index files:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="30" hl_lines="8-10 16-18"
+    ```groovy title="main.nf" linenums="34" hl_lines="8-10 16-18"
     /*
      * Output block defines how published outputs are organized
      */
@@ -681,7 +684,7 @@ Update the `output {}` block to generate index files:
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="30"
+    ```groovy title="main.nf" linenums="34"
     /*
      * Output block defines how published outputs are organized
      */

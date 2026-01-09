@@ -1,5 +1,8 @@
 #!/usr/bin/env nextflow
 
+// Enable workflow output definition syntax (required for Nextflow < 25.10)
+nextflow.preview.output = true
+
 /*
  * Pipeline parameters
  */
