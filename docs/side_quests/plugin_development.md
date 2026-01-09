@@ -1780,7 +1780,7 @@ Now update `NfGreetingFactory.groovy` to read the configuration and pass it to t
 
 === "After"
 
-    ```groovy title="NfGreetingFactory.groovy" hl_lines="3-6 9"
+    ```groovy title="NfGreetingFactory.groovy" linenums="31" hl_lines="3-6 9"
     @Override
     Collection<TraceObserver> create(Session session) {
         final enabled = session.config.navigate('greeting.enabled', true)
@@ -1796,7 +1796,7 @@ Now update `NfGreetingFactory.groovy` to read the configuration and pass it to t
 
 === "Before"
 
-    ```groovy title="NfGreetingFactory.groovy"
+    ```groovy title="NfGreetingFactory.groovy" linenums="31"
     @Override
     Collection<TraceObserver> create(Session session) {
         return [
@@ -1808,20 +1808,30 @@ Now update `NfGreetingFactory.groovy` to read the configuration and pass it to t
 
 Rebuild and reinstall the plugin.
 
-Now users can control the plugin behavior in `nextflow.config`:
+Now update `nextflow.config` to disable the per-task messages:
 
-```groovy title="nextflow.config"
-plugins {
-    id 'nf-greeting@0.1.0'
-}
+=== "After"
 
-greeting {
-    // enabled = false     // Disable plugin entirely
-    taskCounter {
-        verbose = false    // Disable per-task messages
+    ```groovy title="nextflow.config" hl_lines="5-10"
+    plugins {
+        id 'nf-greeting@0.1.0'
     }
-}
-```
+
+    greeting {
+        // enabled = false     // Disable plugin entirely
+        taskCounter {
+            verbose = false    // Disable per-task messages
+        }
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="nextflow.config"
+    plugins {
+        id 'nf-greeting@0.1.0'
+    }
+    ```
 
 Run the pipeline and observe that only the final count appears:
 
