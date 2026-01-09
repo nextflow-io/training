@@ -1683,13 +1683,14 @@ Let's see how plugins can read configuration from `nextflow.config`.
 
 Plugins can read configuration from `nextflow.config`, letting users customize behavior.
 
-Look at the existing factory code - it already checks configuration:
+The `session.config.navigate()` method reads nested configuration values:
 
 ```groovy
+// Read 'greeting.enabled' from nextflow.config, defaulting to true
 final enabled = session.config.navigate('greeting.enabled', true)
 ```
 
-This means users can disable your plugin's observers:
+This lets users control plugin behavior without modifying code:
 
 ```groovy title="nextflow.config"
 greeting {
@@ -1699,13 +1700,16 @@ greeting {
 
 ### 9.2. Try it: Make the task counter configurable
 
-Let's add a configuration option to enable/disable the task counter messages.
+Let's add configuration options to:
 
-Edit `TaskCounterObserver.groovy` to accept a configuration flag:
+1. Enable/disable the entire greeting plugin
+2. Control whether per-task counter messages are shown
+
+First, edit `TaskCounterObserver.groovy` to accept a configuration flag:
 
 === "After"
 
-    ```groovy title="TaskCounterObserver.groovy" hl_lines="14-15 18-22"
+    ```groovy title="TaskCounterObserver.groovy" linenums="1" hl_lines="14 17-19 24-16"
     package training.plugin
 
     import groovy.transform.CompileStatic
@@ -1743,7 +1747,7 @@ Edit `TaskCounterObserver.groovy` to accept a configuration flag:
 
 === "Before"
 
-    ```groovy title="TaskCounterObserver.groovy"
+    ```groovy title="TaskCounterObserver.groovy" linenums="1" hl_lines="19"
     package training.plugin
 
     import groovy.transform.CompileStatic
@@ -1776,11 +1780,12 @@ Now update `NfGreetingFactory.groovy` to read the configuration and pass it to t
 
 === "After"
 
-    ```groovy title="NfGreetingFactory.groovy" hl_lines="5-6"
+    ```groovy title="NfGreetingFactory.groovy" hl_lines="3-6 9"
     @Override
     Collection<TraceObserver> create(Session session) {
         final enabled = session.config.navigate('greeting.enabled', true)
         if (!enabled) return []
+
         final verbose = session.config.navigate('greeting.taskCounter.verbose', true)
         return [
             new NfGreetingObserver(),
@@ -1794,8 +1799,6 @@ Now update `NfGreetingFactory.groovy` to read the configuration and pass it to t
     ```groovy title="NfGreetingFactory.groovy"
     @Override
     Collection<TraceObserver> create(Session session) {
-        final enabled = session.config.navigate('greeting.enabled', true)
-        if (!enabled) return []
         return [
             new NfGreetingObserver(),
             new TaskCounterObserver()
@@ -1805,7 +1808,7 @@ Now update `NfGreetingFactory.groovy` to read the configuration and pass it to t
 
 Rebuild and reinstall the plugin.
 
-Now users can disable the per-task messages in `nextflow.config`:
+Now users can control the plugin behavior in `nextflow.config`:
 
 ```groovy title="nextflow.config"
 plugins {
@@ -1813,8 +1816,9 @@ plugins {
 }
 
 greeting {
+    // enabled = false     // Disable plugin entirely
     taskCounter {
-        verbose = false
+        verbose = false    // Disable per-task messages
     }
 }
 ```
