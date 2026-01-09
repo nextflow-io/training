@@ -231,17 +231,16 @@ Check the plugin's documentation for available settings.
 
 Let's see the difference between a local function and a plugin function in practice.
 
-Create a new directory for this exercise:
+#### Run the local function version
+
+We've provided `hello_example.nf` which contains a locally defined `sayHello` function.
+Take a look at it:
 
 ```bash
-mkdir -p /tmp/plugin-test && cd /tmp/plugin-test
+cat hello_example.nf
 ```
 
-#### Using a local function
-
-First, create a workflow with a locally defined `sayHello` function:
-
-```groovy title="main.nf"
+```groovy title="hello_example.nf"
 #!/usr/bin/env nextflow
 
 // Local function - defined in this file
@@ -259,7 +258,7 @@ workflow {
 Run it:
 
 ```bash
-nextflow run main.nf
+nextflow run hello_example.nf
 ```
 
 ```console title="Output"
@@ -270,23 +269,15 @@ Hello, Carol!
 
 This works fine, but if you wanted to use `sayHello` in another pipeline, you'd have to copy the function definition.
 
-#### Using a plugin instead
+#### Replace with a plugin
 
 Now let's replace our local function with the [nf-hello](https://github.com/nextflow-io/nf-hello) plugin, which provides the same functionality.
 
-Create a `nextflow.config` to enable the plugin:
-
-```groovy title="nextflow.config"
-plugins {
-    id 'nf-hello@0.5.0'
-}
-```
-
-Update `main.nf` to import the function from the plugin instead of defining it locally:
+Edit `hello_example.nf` to import the function from the plugin instead of defining it locally:
 
 === "After (plugin)"
 
-    ```groovy title="main.nf" hl_lines="3-4"
+    ```groovy title="hello_example.nf" hl_lines="3-4"
     #!/usr/bin/env nextflow
 
     // Import function from plugin - no local definition needed
@@ -301,7 +292,7 @@ Update `main.nf` to import the function from the plugin instead of defining it l
 
 === "Before (local)"
 
-    ```groovy title="main.nf" hl_lines="3-6"
+    ```groovy title="hello_example.nf" hl_lines="3-6"
     #!/usr/bin/env nextflow
 
     // Local function - defined in this file
@@ -316,10 +307,10 @@ Update `main.nf` to import the function from the plugin instead of defining it l
     }
     ```
 
-Run it again:
+Run it again with the `-plugins` flag to load the plugin:
 
 ```bash
-nextflow run main.nf
+nextflow run hello_example.nf -plugins nf-hello@0.5.0
 ```
 
 The first run will download the plugin automatically. The output is the same:
@@ -330,7 +321,8 @@ Hello, Bob!
 Hello, Carol!
 ```
 
-The key difference: now the `sayHello` function comes from a versioned, shareable plugin rather than copy-pasted code. Any pipeline can use `nf-hello@0.5.0` and get the exact same function.
+The key difference: now the `sayHello` function comes from a versioned, shareable plugin rather than copy-pasted code.
+Any pipeline can use `nf-hello@0.5.0` and get the exact same function.
 
 ### Takeaway
 
