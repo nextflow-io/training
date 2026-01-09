@@ -6,8 +6,6 @@ hide:
   - footer
 ---
 
-[blurb]
-
 <div class="grid cards" markdown>
 
 -   :material-forum-outline:{ .lg .middle } __Community forum__
@@ -18,15 +16,6 @@ hide:
 
     [Join the training forum:material-arrow-right:](https://community.seqera.io/c/training/39){ .md-button .md-button--primary .mt-1 }
 
--   :material-github:{ .lg .middle } __Github issues__
-
-    ---
-
-    If you spot an error in the training materials, please report it by opening an issue in the Github repository. Whether it's a typo, a formatting issue or an actual bug that affects the code, we want to know so we can fix it!
-
-    [Report an issue:material-arrow-right:](https://github.com/nextflow-io/training/issues){ .md-button .md-button--primary .mt-1 }
-
-
 -   :material-slack:{ .lg .middle } __Slack channel__
 
     ---
@@ -35,7 +24,15 @@ hide:
 
     [Join the Nextflow Slack :material-arrow-right:](https://www.nextflow.io/slack-invite.html){ .md-button .md-button--primary .mt-1 }
 
--   :octicons-comment-ai:{ .lg .middle } __Seqera AI assistant__
+-   :material-github:{ .lg .middle } __Github issues__
+
+    ---
+
+    If you spot an error in the training materials, please report it by opening an issue in the Github repository. Whether it's a typo, a formatting issue or an actual bug that affects the code, we want to know so we can fix it!
+
+    [Report an issue:material-arrow-right:](https://github.com/nextflow-io/training/issues){ .md-button .md-button--primary .mt-1 }
+
+-   :octicons-comment-ai-16:{ .lg .middle } __Seqera AI assistant__
 
     ---
 
@@ -51,7 +48,7 @@ hide:
 
     [Browse the docs:material-arrow-right:](https://www.nextflow.io/docs/latest){ .md-button .md-button--primary .mt-1 }
 
--   :material-professional-hexagon:{ .lg .middle } __Professional support__
+-   :material-account-hard-hat:{ .lg .middle } __Professional support__
 
     ---
 
