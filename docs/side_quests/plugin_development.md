@@ -91,10 +91,11 @@ cd side-quests/plugin_development
 .
 ├── greetings.csv
 ├── main.nf
-└── nextflow.config
+├── nextflow.config
+└── random_id_example.nf
 ```
 
-We have a simple greeting pipeline and materials for developing plugins.
+We have a simple greeting pipeline and materials for both using and developing plugins.
 
 #### What we'll cover
 
@@ -303,22 +304,30 @@ validation {
 Each plugin documents its configuration options.
 Check the plugin's documentation for available settings.
 
-### 2.7. Try it: Using a plugin function
+### 2.7. Try it: From local function to plugin
 
-Let's see how to import and use a function from a plugin.
+Let's see the difference between a local function and a plugin function in practice.
 
 The [nf-hello](https://github.com/nextflow-io/nf-hello) plugin provides a `randomString` function that generates random strings of a given length.
-This is useful for generating unique identifiers in workflows.
+We've provided `random_id_example.nf` which has a local implementation of the same functionality.
 
-#### Create a test script
+#### Run the local function version
 
-Create a new file called `plugin_test.nf`:
+Take a look at the starting file:
 
-```groovy title="plugin_test.nf"
+```bash
+cat random_id_example.nf
+```
+
+```groovy title="random_id_example.nf"
 #!/usr/bin/env nextflow
 
-// Import the randomString function from the nf-hello plugin
-include { randomString } from 'plugin/nf-hello'
+// Local function - must be copied to every pipeline that needs it
+def randomString(int length) {
+    def chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+    def random = new Random()
+    return (1..length).collect { chars[random.nextInt(chars.length())] }.join()
+}
 
 workflow {
     // Generate random IDs for each sample
@@ -328,15 +337,11 @@ workflow {
 }
 ```
 
-#### Run with the plugin
-
-Use the `-plugins` flag to load the plugin:
+Run it:
 
 ```bash
-nextflow run plugin_test.nf -plugins nf-hello@0.5.0
+nextflow run random_id_example.nf
 ```
-
-The first run will download the plugin automatically:
 
 ```console title="Output"
 sample_A_xK9mPq2R
@@ -346,29 +351,60 @@ sample_C_Bf5tVc1D
 
 (Your random strings will be different!)
 
-#### Compare to a local function
+This works, but if you wanted to use `randomString` in another pipeline, you'd have to copy the function definition.
 
-Without the plugin, you'd have to define your own random string generator:
+#### Replace with the plugin
 
-```groovy title="Without plugin (more code)"
-#!/usr/bin/env nextflow
+Now let's replace our local function with the one from the `nf-hello` plugin.
 
-// Local function - must be defined in every pipeline that needs it
-def randomString(int length) {
-    def chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
-    def random = new Random()
-    return (1..length).collect { chars[random.nextInt(chars.length())] }.join()
-}
+Edit `random_id_example.nf` to import the function from the plugin instead of defining it locally:
 
-workflow {
-    Channel.of('sample_A', 'sample_B', 'sample_C')
-        | map { sample -> "${sample}_${randomString(8)}" }
-        | view
-}
+=== "After (plugin)"
+
+    ```groovy title="random_id_example.nf" hl_lines="3-4"
+    #!/usr/bin/env nextflow
+
+    // Import function from plugin - no local definition needed
+    include { randomString } from 'plugin/nf-hello'
+
+    workflow {
+        // Generate random IDs for each sample
+        Channel.of('sample_A', 'sample_B', 'sample_C')
+            | map { sample -> "${sample}_${randomString(8)}" }
+            | view
+    }
+    ```
+
+=== "Before (local)"
+
+    ```groovy title="random_id_example.nf" hl_lines="3-7"
+    #!/usr/bin/env nextflow
+
+    // Local function - must be copied to every pipeline that needs it
+    def randomString(int length) {
+        def chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+        def random = new Random()
+        return (1..length).collect { chars[random.nextInt(chars.length())] }.join()
+    }
+
+    workflow {
+        // Generate random IDs for each sample
+        Channel.of('sample_A', 'sample_B', 'sample_C')
+            | map { sample -> "${sample}_${randomString(8)}" }
+            | view
+    }
+    ```
+
+Run it again with the `-plugins` flag to load the plugin:
+
+```bash
+nextflow run random_id_example.nf -plugins nf-hello@0.5.0
 ```
 
-The plugin version is cleaner: one import line replaces the function definition.
-If you need `randomString` in multiple pipelines, just import it from the plugin instead of copying the code.
+The first run will download the plugin automatically. The output is the same, but now the function comes from a versioned, shareable plugin.
+
+The key difference: one import line replaces the entire function definition.
+Any pipeline can use `nf-hello@0.5.0` and get the exact same `randomString` function.
 
 ### Takeaway
 
