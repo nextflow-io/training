@@ -241,6 +241,17 @@ The workflow output definition syntax uses two constructs:
 1. A `publish:` section inside your workflow that declares which channels to publish
 2. An `output {}` block that configures how those outputs are organized
 
+!!! note "Feature flag"
+
+    This training environment uses an older version of Nextflow that requires a feature flag for workflow outputs.
+    The `nextflow.config` file already includes the required setting:
+
+    ```groovy
+    nextflow.preview.output = true
+    ```
+
+    In Nextflow 25.10 and later, this flag is no longer needed.
+
 Let's modify our workflow to use this new syntax.
 
 ### 2.3. Remove publishDir from processes
