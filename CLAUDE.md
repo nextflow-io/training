@@ -79,6 +79,7 @@ prettier --write docs/**/*.md
   To highlight the `publishDir` line and the `val x` line, count their positions (5 and 8), then write: `hl_lines="5 8"`. The `linenums` attribute (which controls displayed line numbers) does not affect this counting.
 
   **Common errors**:
+
   - Skipping blank lines when counting (blank lines are lines too)
   - Assuming `hl_lines` numbers match `linenums` display numbers (they don't - always count from 1)
   - Highlighting structural keywords (`input:`, `output:`) instead of the meaningful content

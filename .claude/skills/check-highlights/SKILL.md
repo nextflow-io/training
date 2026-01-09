@@ -50,6 +50,7 @@ For each code block with `hl_lines`:
    ```
 
 3. **Verify intent** - For Before/After blocks:
+
    - "After" should highlight the NEW or CHANGED lines
    - "Before" should highlight the lines that WILL change (same content positions)
    - Both blocks should highlight corresponding lines showing the difference
