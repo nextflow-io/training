@@ -11,11 +11,12 @@ Verify that `hl_lines` attributes in markdown code blocks are correctly set to h
 
 **`hl_lines` is snippet-relative, NOT related to `linenums`**:
 
-- `linenums="21"` sets the *displayed* starting line number
-- `hl_lines="3"` highlights the *3rd line of the snippet* (which displays as line 23)
+- `linenums="21"` sets the _displayed_ starting line number
+- `hl_lines="3"` highlights the _3rd line of the snippet_ (which displays as line 23)
 - These are completely independent attributes
 
 Example:
+
 ```markdown
 `groovy linenums="21" hl_lines="3"
 process FOO {      <- displayed as line 21 (snippet line 1)
@@ -39,6 +40,7 @@ For each code block with `hl_lines`:
 1. **Identify the code block** - Find blocks with `hl_lines="..."` attribute
 
 2. **Count snippet lines** - Number each line of the code block starting from 1:
+
    ```
    1: #!/usr/bin/env nextflow
    2: (blank line)
@@ -88,6 +90,7 @@ For each file checked, report:
 ## Example Analysis
 
 Given this code block:
+
 ```markdown
 `groovy title="example.nf" linenums="1" hl_lines="8 11 14"
 #!/usr/bin/env nextflow       <- snippet line 1

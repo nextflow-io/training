@@ -64,6 +64,7 @@ prettier --write docs/**/*.md
 - **Code block line highlighting (`hl_lines`)**: This attribute specifies which lines to highlight, counted from the START of the code block (1-indexed). It is completely independent of `linenums`.
 
   **To set `hl_lines` correctly**: Before writing the `hl_lines` attribute, identify the lines you want highlighted, then count their position from line 1 of the snippet. Blank lines count. For example, given this snippet:
+
   ```
   #!/usr/bin/env nextflow    <- line 1
                              <- line 2 (blank)
@@ -74,6 +75,7 @@ prettier --write docs/**/*.md
       input:                 <- line 7
           val x              <- line 8
   ```
+
   To highlight the `publishDir` line and the `val x` line, count their positions (5 and 8), then write: `hl_lines="5 8"`. The `linenums` attribute (which controls displayed line numbers) does not affect this counting.
 
   **Common errors**:
