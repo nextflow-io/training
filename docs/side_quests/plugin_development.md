@@ -582,7 +582,7 @@ Edit the file to replace the `sayHello` function with our three new functions:
 
 === "After"
 
-    ```groovy title="src/main/groovy/training/plugin/NfGreetingExtension.groovy" hl_lines="28-50" linenums="1"
+    ```groovy title="src/main/groovy/training/plugin/NfGreetingExtension.groovy" hl_lines="31-53" linenums="1"
     /*
      * Copyright 2025, Seqera Labs
      *
@@ -642,7 +642,7 @@ Edit the file to replace the `sayHello` function with our three new functions:
 
 === "Before"
 
-    ```groovy title="src/main/groovy/training/plugin/NfGreetingExtension.groovy" hl_lines="28-42" linenums="1"
+    ```groovy title="src/main/groovy/training/plugin/NfGreetingExtension.groovy" hl_lines="35-43" linenums="1"
     /*
      * Copyright 2025, Seqera Labs
      *
@@ -716,17 +716,29 @@ The `@Function` annotation marks a method as callable from Nextflow workflows:
 
 ```groovy
 @Function
-String reverseGreeting(String greeting) {
+public String reverseGreeting(String greeting) {
     return greeting.reverse()
 }
 ```
 
-Key points:
+Key requirements:
 
-- Methods must be public (default in Groovy)
-- Can have parameters with default values
-- Return type can be any serializable type
-- Will be available via `include { reverseGreeting } from 'plugin/nf-greeting'`
+- **Methods must be public**: In Groovy, methods are public by default, so the `public` keyword is optional but shown here for clarity
+- **Return type**: Can be any serializable type (`String`, `List`, `Map`, etc.)
+- **Parameters**: Can have any number of parameters, including default values:
+
+```groovy
+@Function
+public String decorateGreeting(String greeting, String prefix = ">>> ", String suffix = " <<<") {
+    return "${prefix}${greeting}${suffix}"
+}
+```
+
+Once defined, functions are available via the `include` statement:
+
+```groovy
+include { reverseGreeting; decorateGreeting } from 'plugin/nf-greeting'
+```
 
 ### 4.4. The init() method
 
