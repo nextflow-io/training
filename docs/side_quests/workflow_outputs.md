@@ -342,7 +342,7 @@ Now update `main.nf` to add the `publish:` section inside the workflow:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="1" hl_lines="14 26-29"
+    ```groovy title="main.nf" linenums="1" hl_lines="14 26-28"
     #!/usr/bin/env nextflow
 
     /*
