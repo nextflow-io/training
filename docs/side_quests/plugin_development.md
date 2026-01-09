@@ -1,22 +1,21 @@
-# Plugin development
+# Nextflow plugins
 
 Nextflow's plugin system allows you to extend the language with custom functions, operators, executors, and more.
-In this side quest, you'll build a simple plugin from scratch, learning the fundamentals of plugin architecture along the way.
+In this side quest, you'll learn how to use existing plugins and optionally build your own.
 
-!!! warning "Advanced topic"
+!!! warning "Development sections are advanced"
 
-    Plugin development is one of the more advanced Nextflow topics.
+    Using existing plugins (sections 1-2) is straightforward and valuable for all Nextflow users.
+
+    However, **developing your own plugins** (sections 3 onwards) is an advanced topic.
     It involves Java/Groovy programming, build tools, and software engineering concepts that may be unfamiliar if you come from a pure bioinformatics background.
 
-    **Most Nextflow users will never need to develop plugins** - the existing plugin ecosystem and Nextflow's built-in features cover the vast majority of use cases.
-    This side quest is for those who want to understand how plugins work or have specific needs that require custom extensions.
-
-    If you find this material challenging, that's completely normal!
-    Consider bookmarking it for later and focusing on the [Using existing plugins](#1-using-existing-plugins) section for now.
+    Most Nextflow users will never need to develop plugins - the existing plugin ecosystem covers the vast majority of use cases.
+    If development sections feel challenging, focus on sections 1-2 and bookmark the rest for later.
 
 ### Learning goals
 
-In this side quest, you'll learn how to use existing Nextflow plugins and create your own custom plugin.
+In this side quest, you'll learn how to use existing Nextflow plugins and optionally create your own.
 
 By the end of this side quest, you'll be able to:
 
@@ -143,44 +142,9 @@ Plugins can extend Nextflow in several ways:
 
 As you can see, plugins are much more than just custom functions - they can fundamentally extend how Nextflow works.
 
-### 1.2. Plugin project structure
-
-A typical plugin project looks like this:
-
-```
-nf-greeting/
-├── build.gradle          # Build configuration
-├── settings.gradle       # Project settings
-├── gradlew               # Gradle wrapper script
-├── Makefile              # Convenience commands
-└── src/
-    ├── main/
-    │   └── groovy/
-    │       └── training/plugin/
-    │           ├── NfGreetingPlugin.groovy    # Main plugin class
-    │           ├── NfGreetingExtension.groovy # Extension with functions
-    │           ├── NfGreetingFactory.groovy   # Channel factory (optional)
-    │           └── NfGreetingObserver.groovy  # Trace observer (optional)
-    └── test/
-        └── groovy/
-            └── training/plugin/
-                └── NfGreetingObserverTest.groovy
-```
-
-The package name (`training/plugin`) comes from the organization name you provide when creating the plugin.
-
-### 1.3. Key components
-
-**Plugin class**: The entry point that registers extensions with Nextflow.
-
-**Extension classes**: Contain the actual functionality (functions, operators, etc.).
-
-**Build configuration**: Gradle scripts that compile and package the plugin.
-
 ### Takeaway
 
 Plugins extend Nextflow through well-defined extension points - not just functions, but operators, observers, executors, and more.
-The plugin system uses standard Java/Groovy tooling.
 
 ### What's next?
 
