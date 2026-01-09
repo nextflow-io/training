@@ -1869,7 +1869,7 @@ Edit `NfGreetingExtension.groovy`:
 
 === "After"
 
-    ```groovy title="NfGreetingExtension.groovy" hl_lines="3-4 8-10 22"
+    ```groovy title="NfGreetingExtension.groovy" linenums="35" hl_lines="4-5 9-11 27"
     @CompileStatic
     class NfGreetingExtension extends PluginExtensionPoint {
 
@@ -1878,35 +1878,31 @@ Edit `NfGreetingExtension.groovy`:
 
         @Override
         protected void init(Session session) {
+            // Read configuration with defaults
             prefix = session.config.navigate('greeting.prefix', '***') as String
             suffix = session.config.navigate('greeting.suffix', '***') as String
         }
 
+        /**
+        * Reverse a greeting string
+        */
         @Function
         String reverseGreeting(String greeting) {
             return greeting.reverse()
         }
 
+        /**
+        * Decorate a greeting with celebratory markers
+        */
         @Function
         String decorateGreeting(String greeting) {
             return "${prefix} ${greeting} ${suffix}"
         }
-
-        @Function
-        String friendlyGreeting(String greeting, String name = 'World') {
-            return "${greeting}, ${name}!"
-        }
-
-        @Operator
-        DataflowWriteChannel shoutAll(DataflowReadChannel source) {
-            // ... unchanged ...
-        }
-    }
     ```
 
 === "Before"
 
-    ```groovy title="NfGreetingExtension.groovy" hl_lines="6 15"
+    ```groovy title="NfGreetingExtension.groovy" linenums="35"
     @CompileStatic
     class NfGreetingExtension extends PluginExtensionPoint {
 
@@ -1914,26 +1910,21 @@ Edit `NfGreetingExtension.groovy`:
         protected void init(Session session) {
         }
 
+        /**
+        * Reverse a greeting string
+        */
         @Function
         String reverseGreeting(String greeting) {
             return greeting.reverse()
         }
 
+        /**
+        * Decorate a greeting with celebratory markers
+        */
         @Function
         String decorateGreeting(String greeting) {
             return "*** ${greeting} ***"
         }
-
-        @Function
-        String friendlyGreeting(String greeting, String name = 'World') {
-            return "${greeting}, ${name}!"
-        }
-
-        @Operator
-        DataflowWriteChannel shoutAll(DataflowReadChannel source) {
-            // ... unchanged ...
-        }
-    }
     ```
 
 Rebuild and reinstall the plugin:
