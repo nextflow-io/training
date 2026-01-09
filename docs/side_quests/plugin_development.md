@@ -111,6 +111,22 @@ We'll create a plugin called `nf-greeting` that provides functions to manipulate
 Before diving into plugin development, let's understand how to use plugins that others have created.
 Nextflow has a growing ecosystem of plugins that extend its functionality.
 
+### Why use plugins instead of local functions?
+
+You can define custom functions directly in your Nextflow scripts, so why use plugins?
+
+| Approach | Best for | Limitations |
+| -------- | -------- | ----------- |
+| **Local functions** | Project-specific logic | Copy-paste between pipelines, no versioning |
+| **Plugins** | Reusable utilities | Requires Java/Groovy knowledge to create |
+
+Plugins are ideal when you have functions that:
+
+- Are useful across multiple pipelines
+- Need to be shared with the community
+- Require versioning and dependency management
+- Need access to Nextflow internals (channels, sessions, etc.)
+
 !!! tip "This is the most important section for most users"
 
     Even if you never develop your own plugin, knowing how to use existing plugins is valuable.
@@ -211,9 +227,9 @@ validation {
 Each plugin documents its configuration options.
 Check the plugin's documentation for available settings.
 
-### 1.6. Try it: Using the nf-hello plugin
+### 1.6. Try it: From local function to plugin
 
-Let's practice using a plugin with [nf-hello](https://github.com/nextflow-io/nf-hello), Nextflow's official example plugin.
+Let's see the difference between a local function and a plugin function in practice.
 
 Create a new directory for this exercise:
 
@@ -221,20 +237,17 @@ Create a new directory for this exercise:
 mkdir -p /tmp/plugin-test && cd /tmp/plugin-test
 ```
 
-Create a `nextflow.config` file:
+#### Using a local function
 
-```groovy title="nextflow.config"
-plugins {
-    id 'nf-hello@0.5.0'
-}
-```
-
-Create a `main.nf` file that uses the plugin's `sayHello` function:
+First, create a workflow with a locally defined `sayHello` function:
 
 ```groovy title="main.nf"
 #!/usr/bin/env nextflow
 
-include { sayHello } from 'plugin/nf-hello'
+// Local function - defined in this file
+def sayHello(name) {
+    return "Hello, ${name}!"
+}
 
 workflow {
     Channel.of('Alice', 'Bob', 'Carol')
@@ -249,28 +262,75 @@ Run it:
 nextflow run main.nf
 ```
 
-You should see output like:
-
-```console
-N E X T F L O W  ~  version 25.04.3
-Launching `main.nf` [friendly_sammet] DSL2
-
+```console title="Output"
 Hello, Alice!
 Hello, Bob!
 Hello, Carol!
 ```
 
-Nextflow automatically downloaded the nf-hello plugin and made its `sayHello` function available.
+This works fine, but if you wanted to use `sayHello` in another pipeline, you'd have to copy the function definition.
 
-??? tip "What else does nf-hello provide?"
+#### Using a plugin instead
 
-    The nf-hello plugin includes several example functions you can explore:
+Now let's replace our local function with the [nf-hello](https://github.com/nextflow-io/nf-hello) plugin, which provides the same functionality.
 
-    - `sayHello(name)` - Returns a greeting string
-    - `randomString(length)` - Generates a random string
-    - `reverse` operator - Reverses channel items
+Create a `nextflow.config` to enable the plugin:
 
-    See the [nf-hello source code](https://github.com/nextflow-io/nf-hello) for more examples.
+```groovy title="nextflow.config"
+plugins {
+    id 'nf-hello@0.5.0'
+}
+```
+
+Update `main.nf` to import the function from the plugin instead of defining it locally:
+
+=== "After (plugin)"
+
+    ```groovy title="main.nf" hl_lines="3-4"
+    #!/usr/bin/env nextflow
+
+    // Import function from plugin - no local definition needed
+    include { sayHello } from 'plugin/nf-hello'
+
+    workflow {
+        Channel.of('Alice', 'Bob', 'Carol')
+            | map { name -> sayHello(name) }
+            | view
+    }
+    ```
+
+=== "Before (local)"
+
+    ```groovy title="main.nf" hl_lines="3-6"
+    #!/usr/bin/env nextflow
+
+    // Local function - defined in this file
+    def sayHello(name) {
+        return "Hello, ${name}!"
+    }
+
+    workflow {
+        Channel.of('Alice', 'Bob', 'Carol')
+            | map { name -> sayHello(name) }
+            | view
+    }
+    ```
+
+Run it again:
+
+```bash
+nextflow run main.nf
+```
+
+The first run will download the plugin automatically. The output is the same:
+
+```console title="Output"
+Hello, Alice!
+Hello, Bob!
+Hello, Carol!
+```
+
+The key difference: now the `sayHello` function comes from a versioned, shareable plugin rather than copy-pasted code. Any pipeline can use `nf-hello@0.5.0` and get the exact same function.
 
 ### Takeaway
 
