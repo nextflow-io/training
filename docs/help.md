@@ -1,4 +1,10 @@
-# Getting Help
+---
+title: Getting help
+description: Helpful resources when you have a problem with Nextflow training
+hide:
+  - toc
+  - footer
+---
 
 [blurb]
 
