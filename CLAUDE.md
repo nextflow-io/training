@@ -61,6 +61,15 @@ prettier --write docs/**/*.md
       // broken code with line 14 highlighted
       `
   ```
+- **Code block line highlighting**: The `hl_lines` attribute is **relative to the snippet itself** (1-indexed from the first line of the code block), NOT related to `linenums`. For example:
+  ```markdown
+  `groovy linenums="21" hl_lines="3"
+  line one   <- displayed as line 21
+  line two   <- displayed as line 22
+  line three <- displayed as line 23, HIGHLIGHTED (3rd line of snippet)
+  `
+  ```
+  Always count lines from the start of the snippet when setting `hl_lines`, regardless of `linenums` value.
 
 ### Nextflow Scripts
 

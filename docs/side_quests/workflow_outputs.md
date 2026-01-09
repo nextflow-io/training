@@ -217,7 +217,7 @@ Edit `modules/greetings.nf` to remove the `publishDir` directives and pass throu
 
 === "After"
 
-    ```groovy title="modules/greetings.nf" linenums="1" hl_lines="8-9 12 15"
+    ```groovy title="modules/greetings.nf" linenums="1" hl_lines="10 13"
     #!/usr/bin/env nextflow
 
     /*
@@ -276,7 +276,7 @@ Similarly, update the `CONVERT_TO_UPPER` process:
 
 === "After"
 
-    ```groovy title="modules/greetings.nf" linenums="21" hl_lines="8-9 12 15"
+    ```groovy title="modules/greetings.nf" linenums="21" hl_lines="8 11"
     /*
      * Convert greeting to uppercase
      * Note: No publishDir - outputs managed by workflow output block
@@ -298,7 +298,7 @@ Similarly, update the `CONVERT_TO_UPPER` process:
 
 === "Before"
 
-    ```groovy title="modules/greetings.nf" linenums="21" hl_lines="7 10 13"
+    ```groovy title="modules/greetings.nf" linenums="21" hl_lines="6 9 12"
     /*
      * Convert greeting to uppercase
      */
@@ -325,7 +325,7 @@ Now update `main.nf` to use the publish section and pass metadata through:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="1" hl_lines="14 18 23-25"
+    ```groovy title="main.nf" linenums="1" hl_lines="14 17 25-28"
     #!/usr/bin/env nextflow
 
     /*
@@ -359,7 +359,7 @@ Now update `main.nf` to use the publish section and pass metadata through:
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="1" hl_lines="14 18"
+    ```groovy title="main.nf" linenums="1" hl_lines="14 17"
     #!/usr/bin/env nextflow
 
     /*
@@ -452,7 +452,7 @@ Update the `output {}` block to use dynamic paths:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="30" hl_lines="5 10"
+    ```groovy title="main.nf" linenums="30" hl_lines="7 12"
     /*
      * Output block defines how published outputs are organized
      */
@@ -471,7 +471,7 @@ Update the `output {}` block to use dynamic paths:
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="30" hl_lines="5 10"
+    ```groovy title="main.nf" linenums="30" hl_lines="7 12"
     /*
      * Output block defines how published outputs are organized
      */
@@ -562,7 +562,7 @@ Update the `output {}` block to generate index files:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="30" hl_lines="7-9 15-17"
+    ```groovy title="main.nf" linenums="30" hl_lines="8-10 16-18"
     /*
      * Output block defines how published outputs are organized
      */
