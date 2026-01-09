@@ -106,9 +106,91 @@ We'll create a plugin called `nf-greeting` that provides functions to manipulate
 
 ---
 
-## 1. Using existing plugins
+## 1. Plugin architecture
 
-Before diving into plugin development, let's understand how to use plugins that others have created.
+Before diving into plugin usage and development, let's understand what plugins are and how they extend Nextflow.
+
+<!-- TODO: Add Excalidraw diagram showing plugin architecture
+     File: docs/side_quests/img/plugin-architecture.excalidraw.svg
+     Content: Show Nextflow core with extension points (Functions, Operators,
+     Observers, etc.) and a plugin connecting to them via PF4J
+-->
+
+### 1.1. How plugins extend Nextflow
+
+Nextflow's plugin system is built on [PF4J](https://pf4j.org/), a lightweight plugin framework for Java.
+Plugins can extend Nextflow in several ways:
+
+| Extension Type  | Purpose                                  | Example                 |
+| --------------- | ---------------------------------------- | ----------------------- |
+| Functions       | Custom functions callable from workflows | `reverseString()`       |
+| Operators       | Custom channel operators                 | `myFilter()`            |
+| Factories       | Create new channel types                 | `mySource()`            |
+| Executors       | Custom task execution backends           | AWS Batch, Kubernetes   |
+| Filesystems     | Custom storage backends                  | S3, Azure Blob          |
+| Trace Observers | Monitor workflow execution               | Custom logging, metrics |
+
+<!-- TODO: Add Excalidraw diagram showing extension types
+     File: docs/side_quests/img/plugin-extension-types.excalidraw.svg
+     Content: Visual showing where each extension type plugs in:
+     - Functions: called from workflow/process scripts
+     - Operators: transform channels (between processes)
+     - Factories: create channels (workflow entry points)
+     - Trace Observers: hook into lifecycle events
+     - Executors: submit tasks to compute backends
+     - Filesystems: access remote storage
+-->
+
+As you can see, plugins are much more than just custom functions - they can fundamentally extend how Nextflow works.
+
+### 1.2. Plugin project structure
+
+A typical plugin project looks like this:
+
+```
+nf-greeting/
+├── build.gradle          # Build configuration
+├── settings.gradle       # Project settings
+├── gradlew               # Gradle wrapper script
+├── Makefile              # Convenience commands
+└── src/
+    ├── main/
+    │   └── groovy/
+    │       └── training/plugin/
+    │           ├── NfGreetingPlugin.groovy    # Main plugin class
+    │           ├── NfGreetingExtension.groovy # Extension with functions
+    │           ├── NfGreetingFactory.groovy   # Channel factory (optional)
+    │           └── NfGreetingObserver.groovy  # Trace observer (optional)
+    └── test/
+        └── groovy/
+            └── training/plugin/
+                └── NfGreetingObserverTest.groovy
+```
+
+The package name (`training/plugin`) comes from the organization name you provide when creating the plugin.
+
+### 1.3. Key components
+
+**Plugin class**: The entry point that registers extensions with Nextflow.
+
+**Extension classes**: Contain the actual functionality (functions, operators, etc.).
+
+**Build configuration**: Gradle scripts that compile and package the plugin.
+
+### Takeaway
+
+Plugins extend Nextflow through well-defined extension points - not just functions, but operators, observers, executors, and more.
+The plugin system uses standard Java/Groovy tooling.
+
+### What's next?
+
+Let's see how to use existing plugins before we build our own.
+
+---
+
+## 2. Using existing plugins
+
+Now that you understand what plugins can do, let's see how to use plugins that others have created.
 Nextflow has a growing ecosystem of plugins that extend its functionality.
 
 ### Why use plugins instead of local functions?
@@ -133,7 +215,7 @@ Plugins are ideal when you have functions that:
     Many powerful features - like input validation with nf-schema - come from plugins.
     If plugin development seems daunting, focus on mastering this section first.
 
-### 1.1. Installing plugins
+### 2.1. Installing plugins
 
 Plugins are declared in your `nextflow.config` file using the `plugins {}` block:
 
@@ -149,7 +231,7 @@ Key points:
 - Specify a version with `@version` (recommended for reproducibility)
 - Nextflow automatically downloads plugins from the plugin registry
 
-### 1.2. Importing plugin functions
+### 2.2. Importing plugin functions
 
 Once a plugin is installed, you can import its functions using the familiar `include` syntax with a special `plugin/` prefix:
 
@@ -159,7 +241,7 @@ include { samplesheetToList } from 'plugin/nf-schema'
 
 This imports the `samplesheetToList` function from the nf-schema plugin, making it available in your workflow.
 
-### 1.3. Example: Using nf-schema for validation
+### 2.3. Example: Using nf-schema for validation
 
 The nf-schema plugin is widely used in nf-core pipelines for input validation.
 Here's how it works in practice:
@@ -190,7 +272,7 @@ The `samplesheetToList` function:
 
 This pattern is used extensively in nf-core pipelines to ensure input data is valid before processing begins.
 
-### 1.4. Popular community plugins
+### 2.4. Popular community plugins
 
 Here are some useful plugins available in the Nextflow ecosystem:
 
@@ -208,7 +290,7 @@ Here are some useful plugins available in the Nextflow ecosystem:
 
     Browse available plugins in the [Nextflow plugin registry](https://www.nextflow.io/docs/latest/plugins/plugin-registry.html) or search GitHub for repositories with the `nf-` prefix.
 
-### 1.5. Plugin configuration
+### 2.5. Plugin configuration
 
 Some plugins accept configuration options in `nextflow.config`:
 
@@ -227,7 +309,7 @@ validation {
 Each plugin documents its configuration options.
 Check the plugin's documentation for available settings.
 
-### 1.6. Try it: From local function to plugin
+### 2.6. Try it: From local function to plugin
 
 Let's see the difference between a local function and a plugin function in practice.
 
@@ -331,85 +413,7 @@ The plugin ecosystem extends Nextflow with powerful features like validation, cl
 
 ### What's next?
 
-Now that you understand how to use plugins, let's explore how they work under the hood.
-
----
-
-## 2. Plugin architecture
-
-<!-- TODO: Add Excalidraw diagram showing plugin architecture
-     File: docs/side_quests/img/plugin-architecture.excalidraw.svg
-     Content: Show Nextflow core with extension points (Functions, Operators,
-     Observers, etc.) and a plugin connecting to them via PF4J
--->
-
-### 2.1. How plugins extend Nextflow
-
-Nextflow's plugin system is built on [PF4J](https://pf4j.org/), a lightweight plugin framework for Java.
-Plugins can extend Nextflow in several ways:
-
-| Extension Type  | Purpose                                  | Example                 |
-| --------------- | ---------------------------------------- | ----------------------- |
-| Functions       | Custom functions callable from workflows | `reverseString()`       |
-| Operators       | Custom channel operators                 | `myFilter()`            |
-| Factories       | Create new channel types                 | `mySource()`            |
-| Executors       | Custom task execution backends           | AWS Batch, Kubernetes   |
-| Filesystems     | Custom storage backends                  | S3, Azure Blob          |
-| Trace Observers | Monitor workflow execution               | Custom logging, metrics |
-
-<!-- TODO: Add Excalidraw diagram showing extension types
-     File: docs/side_quests/img/plugin-extension-types.excalidraw.svg
-     Content: Visual showing where each extension type plugs in:
-     - Functions: called from workflow/process scripts
-     - Operators: transform channels (between processes)
-     - Factories: create channels (workflow entry points)
-     - Trace Observers: hook into lifecycle events
-     - Executors: submit tasks to compute backends
-     - Filesystems: access remote storage
--->
-
-### 2.2. Plugin project structure
-
-A typical plugin project looks like this:
-
-```
-nf-greeting/
-├── build.gradle          # Build configuration
-├── settings.gradle       # Project settings
-├── gradlew               # Gradle wrapper script
-├── Makefile              # Convenience commands
-└── src/
-    ├── main/
-    │   └── groovy/
-    │       └── training/plugin/
-    │           ├── NfGreetingPlugin.groovy    # Main plugin class
-    │           ├── NfGreetingExtension.groovy # Extension with functions
-    │           ├── NfGreetingFactory.groovy   # Channel factory (optional)
-    │           └── NfGreetingObserver.groovy  # Trace observer (optional)
-    └── test/
-        └── groovy/
-            └── training/plugin/
-                └── NfGreetingObserverTest.groovy
-```
-
-The package name (`training/plugin`) comes from the organization name you provide when creating the plugin.
-
-### 2.3. Key components
-
-**Plugin class**: The entry point that manages plugin lifecycle.
-
-**Extension classes**: Contain the actual functionality (functions, operators, etc.).
-
-**Build configuration**: Gradle scripts that compile and package the plugin.
-
-### Takeaway
-
-Plugins extend Nextflow through well-defined extension points.
-The plugin system uses standard Java/Groovy tooling.
-
-### What's next?
-
-Let's create our plugin project.
+Now that you understand how to use plugins, let's build our own.
 
 ---
 
