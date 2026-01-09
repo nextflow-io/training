@@ -796,7 +796,13 @@ Tests verify that your code works correctly and help catch bugs when you make ch
 
 The generated project includes a test for the Observer class, but we need to create a new test file for our extension functions.
 
-Create a new file `src/test/groovy/training/plugin/NfGreetingExtensionTest.groovy`:
+Create the new test file:
+
+```bash
+touch src/test/groovy/training/plugin/NfGreetingExtensionTest.groovy
+```
+
+Open it in your editor and add the following content:
 
 ```groovy title="src/test/groovy/training/plugin/NfGreetingExtensionTest.groovy" linenums="1"
 package training.plugin
