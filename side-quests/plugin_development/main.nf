@@ -1,9 +1,8 @@
 #!/usr/bin/env nextflow
 
-/*
- * Simple greeting pipeline
- * Will be enhanced to use custom plugin functions
- */
+// Import custom functions from our plugin
+include { decorateGreeting } from 'plugin/nf-greeting'
+include { shoutAll } from 'plugin/nf-greeting'
 
 params.input = 'greetings.csv'
 
@@ -15,8 +14,9 @@ process SAY_HELLO {
         stdout
 
     script:
+    def decorated = decorateGreeting(greeting)
     """
-    echo '$greeting'
+    echo '$decorated'
     """
 }
 
@@ -25,7 +25,10 @@ workflow {
                         .splitCsv(header: true)
                         .map { row -> row.greeting }
 
-    SAY_HELLO(greeting_ch)
+    // Demonstrate using the shoutAll operator
+    greeting_ch
+        .shoutAll()
+        .view { shouted -> "SHOUTED: $shouted" }
 
-    SAY_HELLO.out.view { result -> "Output: ${result.trim()}" }
+    SAY_HELLO(greeting_ch).view{ result -> "Decorated with custom prefix: ${result.trim()}" }
 }
