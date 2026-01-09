@@ -731,15 +731,14 @@ cat results/greetings/index.csv
 ??? example "Output"
 
     ```csv
-    "greeting","language","file"
-    "Hello","English","greetings/English/Hello-output.txt"
-    "Bonjour","French","greetings/French/Bonjour-output.txt"
-    "Holà","Spanish","greetings/Spanish/Holà-output.txt"
-    "Ciao","Italian","greetings/Italian/Ciao-output.txt"
-    "Hallo","German","greetings/German/Hallo-output.txt"
+    "Hello","English","/workspaces/.../results/greetings/English/Hello-output.txt"
+    "Bonjour","French","/workspaces/.../results/greetings/French/Bonjour-output.txt"
+    "Holà","Spanish","/workspaces/.../results/greetings/Spanish/Holà-output.txt"
+    "Ciao","Italian","/workspaces/.../results/greetings/Italian/Ciao-output.txt"
+    "Hallo","German","/workspaces/.../results/greetings/German/Hallo-output.txt"
     ```
 
-The index file contains all the metadata from the output tuples plus the path to each file.
+The index file contains all the metadata from the output tuples plus the absolute path to each file.
 
 ### 4.4. Using JSON format
 
@@ -754,16 +753,17 @@ greetings {
 }
 ```
 
-!!! tip "Use maps for cleaner index files"
+!!! tip "Use maps for named fields in index files"
 
-    For better control over field names in index files, use maps instead of tuples in your outputs:
+    Notice the CSV has no header row with field names—that's because tuples don't carry field names.
+    For named fields, use maps instead of tuples in your process outputs:
 
     ```groovy
     output:
         tuple path("${greeting}-output.txt"), val([greeting: greeting, language: language])
     ```
 
-    This gives you named fields in the index file rather than positional names like "v0", "v1".
+    This produces index files with proper column headers like `greeting,language,file`.
 
 ### Takeaway
 
