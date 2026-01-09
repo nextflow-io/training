@@ -179,7 +179,7 @@ Let's see how to use existing plugins before we build our own.
 ## 2. Using existing plugins
 
 Nextflow has a growing ecosystem of plugins that extend its functionality.
-Let's see how to install and use them.
+Let's see how to discover, install, and use them.
 
 !!! tip "This is the most important section for most users"
 
@@ -187,7 +187,32 @@ Let's see how to install and use them.
     Many powerful features - like input validation with nf-schema - come from plugins.
     If plugin development seems daunting, focus on mastering this section first.
 
-### 2.1. Installing plugins
+!!! info "Official documentation"
+
+    This section covers the essentials of using plugins.
+    For comprehensive details, see the [official Nextflow plugins documentation](https://www.nextflow.io/docs/latest/plugins/plugins.html).
+
+### 2.1. Discovering plugins
+
+The [Nextflow Plugin Registry](https://registry.nextflow.io/) is the central hub for finding available plugins.
+Browse the registry to discover plugins for:
+
+- Input validation and samplesheet parsing
+- Cloud platform integration (AWS, Google Cloud, Azure)
+- Provenance tracking and reporting
+- Notifications (Slack, Teams)
+- And more
+
+Each plugin page in the registry shows:
+
+- Description and purpose
+- Available versions
+- Installation instructions
+- Links to documentation and source code
+
+You can also search GitHub for repositories with the `nf-` prefix, as most Nextflow plugins follow this naming convention.
+
+### 2.2. Installing plugins
 
 Plugins are declared in your `nextflow.config` file using the `plugins {}` block:
 
@@ -203,7 +228,7 @@ Key points:
 - Specify a version with `@version` (recommended for reproducibility)
 - Nextflow automatically downloads plugins from the plugin registry
 
-### 2.2. Importing plugin functions
+### 2.3. Importing plugin functions
 
 Once a plugin is installed, you can import its functions using the familiar `include` syntax with a special `plugin/` prefix:
 
@@ -213,7 +238,7 @@ include { samplesheetToList } from 'plugin/nf-schema'
 
 This imports the `samplesheetToList` function from the nf-schema plugin, making it available in your workflow.
 
-### 2.3. Example: Using nf-schema for validation
+### 2.4. Example: Using nf-schema for validation
 
 The nf-schema plugin is widely used in nf-core pipelines for input validation.
 Here's how it works in practice:
@@ -244,7 +269,7 @@ The `samplesheetToList` function:
 
 This pattern is used extensively in nf-core pipelines to ensure input data is valid before processing begins.
 
-### 2.4. Popular community plugins
+### 2.5. Popular community plugins
 
 Here are some useful plugins available in the Nextflow ecosystem:
 
@@ -258,11 +283,7 @@ Here are some useful plugins available in the Nextflow ecosystem:
 | nf-azure      | Azure integration (Blob Storage, Batch)       |
 | nf-cloudcache | Cloud-based caching for distributed execution |
 
-!!! tip "Finding plugins"
-
-    Browse available plugins in the [Nextflow plugin registry](https://www.nextflow.io/docs/latest/plugins/plugin-registry.html) or search GitHub for repositories with the `nf-` prefix.
-
-### 2.5. Plugin configuration
+### 2.6. Plugin configuration
 
 Some plugins accept configuration options in `nextflow.config`:
 
@@ -281,7 +302,7 @@ validation {
 Each plugin documents its configuration options.
 Check the plugin's documentation for available settings.
 
-### 2.6. Try it: From local function to plugin
+### 2.7. Try it: From local function to plugin
 
 Let's see the difference between a local function and a plugin function in practice.
 
@@ -390,6 +411,11 @@ Now that you understand how to use plugins, let's build our own.
 ---
 
 ## 3. Creating a plugin project
+
+!!! info "Official documentation"
+
+    This section and those that follow cover plugin development essentials.
+    For comprehensive details, see the [official Nextflow plugin development documentation](https://www.nextflow.io/docs/latest/plugins/developing-plugins.html).
 
 ### 3.1. Using the Nextflow plugin create command
 
@@ -1825,10 +1851,20 @@ workflow {
 
 ### Additional resources
 
-- [Nextflow plugin development docs](https://www.nextflow.io/docs/latest/plugins/developing-plugins.html)
-- [Plugin registry](https://www.nextflow.io/docs/latest/plugins/plugin-registry.html)
-- [nf-hello example plugin](https://github.com/nextflow-io/nf-hello)
-- [Existing plugins](https://github.com/nextflow-io/plugins) for reference
+**Official documentation:**
+
+- [Using plugins](https://www.nextflow.io/docs/latest/plugins/plugins.html) - comprehensive guide to installing and configuring plugins
+- [Developing plugins](https://www.nextflow.io/docs/latest/plugins/developing-plugins.html) - detailed plugin development reference
+
+**Plugin discovery:**
+
+- [Nextflow Plugin Registry](https://registry.nextflow.io/) - browse and discover available plugins
+- [Plugin registry docs](https://www.nextflow.io/docs/latest/plugins/plugin-registry.html) - registry documentation
+
+**Examples and references:**
+
+- [nf-hello](https://github.com/nextflow-io/nf-hello) - simple example plugin (great starting point)
+- [Nextflow plugins repository](https://github.com/nextflow-io/plugins) - collection of official plugins for reference
 
 ---
 
