@@ -90,12 +90,11 @@ cd side-quests/plugin_development
 ```console title="Directory contents"
 .
 ├── greetings.csv
-├── hello_example.nf
 ├── main.nf
 └── nextflow.config
 ```
 
-We have a simple greeting pipeline and materials for both using and developing plugins.
+We have a simple greeting pipeline and materials for developing plugins.
 
 #### What we'll cover
 
@@ -304,102 +303,72 @@ validation {
 Each plugin documents its configuration options.
 Check the plugin's documentation for available settings.
 
-### 2.7. Try it: From local function to plugin
+### 2.7. Try it: Using a plugin function
 
-Let's see the difference between a local function and a plugin function in practice.
+Let's see how to import and use a function from a plugin.
 
-#### Run the local function version
+The [nf-hello](https://github.com/nextflow-io/nf-hello) plugin provides a `randomString` function that generates random strings of a given length.
+This is useful for generating unique identifiers in workflows.
 
-We've provided `hello_example.nf` which contains a locally defined `sayHello` function.
-Take a look at it:
+#### Create a test script
 
-```bash
-cat hello_example.nf
-```
+Create a new file called `plugin_test.nf`:
 
-```groovy title="hello_example.nf"
+```groovy title="plugin_test.nf"
 #!/usr/bin/env nextflow
 
-// Local function - defined in this file
-def sayHello(name) {
-    return "Hello, ${name}!"
-}
+// Import the randomString function from the nf-hello plugin
+include { randomString } from 'plugin/nf-hello'
 
 workflow {
-    Channel.of('Alice', 'Bob', 'Carol')
-        | map { name -> sayHello(name) }
+    // Generate random IDs for each sample
+    Channel.of('sample_A', 'sample_B', 'sample_C')
+        | map { sample -> "${sample}_${randomString(8)}" }
         | view
 }
 ```
 
-Run it:
+#### Run with the plugin
+
+Use the `-plugins` flag to load the plugin:
 
 ```bash
-nextflow run hello_example.nf
+nextflow run plugin_test.nf -plugins nf-hello@0.5.0
 ```
+
+The first run will download the plugin automatically:
 
 ```console title="Output"
-Hello, Alice!
-Hello, Bob!
-Hello, Carol!
+sample_A_xK9mPq2R
+sample_B_Lw3nYh8J
+sample_C_Bf5tVc1D
 ```
 
-This works fine, but if you wanted to use `sayHello` in another pipeline, you'd have to copy the function definition.
+(Your random strings will be different!)
 
-#### Replace with a plugin
+#### Compare to a local function
 
-Now let's replace our local function with the [nf-hello](https://github.com/nextflow-io/nf-hello) plugin, which provides the same functionality.
+Without the plugin, you'd have to define your own random string generator:
 
-Edit `hello_example.nf` to import the function from the plugin instead of defining it locally:
+```groovy title="Without plugin (more code)"
+#!/usr/bin/env nextflow
 
-=== "After (plugin)"
+// Local function - must be defined in every pipeline that needs it
+def randomString(int length) {
+    def chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+    def random = new Random()
+    return (1..length).collect { chars[random.nextInt(chars.length())] }.join()
+}
 
-    ```groovy title="hello_example.nf" hl_lines="3-4"
-    #!/usr/bin/env nextflow
-
-    // Import function from plugin - no local definition needed
-    include { sayHello } from 'plugin/nf-hello'
-
-    workflow {
-        Channel.of('Alice', 'Bob', 'Carol')
-            | map { name -> sayHello(name) }
-            | view
-    }
-    ```
-
-=== "Before (local)"
-
-    ```groovy title="hello_example.nf" hl_lines="3-6"
-    #!/usr/bin/env nextflow
-
-    // Local function - defined in this file
-    def sayHello(name) {
-        return "Hello, ${name}!"
-    }
-
-    workflow {
-        Channel.of('Alice', 'Bob', 'Carol')
-            | map { name -> sayHello(name) }
-            | view
-    }
-    ```
-
-Run it again with the `-plugins` flag to load the plugin:
-
-```bash
-nextflow run hello_example.nf -plugins nf-hello@0.5.0
+workflow {
+    Channel.of('sample_A', 'sample_B', 'sample_C')
+        | map { sample -> "${sample}_${randomString(8)}" }
+        | view
+}
 ```
 
-The first run will download the plugin automatically. The output is the same:
-
-```console title="Output"
-Hello, Alice!
-Hello, Bob!
-Hello, Carol!
-```
-
-The key difference: now the `sayHello` function comes from a versioned, shareable plugin rather than copy-pasted code.
-Any pipeline can use `nf-hello@0.5.0` and get the exact same function.
+The plugin version is cleaner: one import line replaces the function definition.
+If you need `randomString` in multiple pipelines, just import it from the plugin instead of copying the code.
 
 ### Takeaway
 
