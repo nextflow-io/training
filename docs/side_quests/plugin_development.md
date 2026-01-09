@@ -1921,28 +1921,48 @@ Edit `NfGreetingExtension.groovy`:
     }
     ```
 
-Rebuild and reinstall the plugin.
+Rebuild and reinstall the plugin:
 
-Now users can customize the decoration in `nextflow.config`:
-
-```groovy title="nextflow.config"
-plugins {
-    id 'nf-greeting@0.1.0'
-}
-
-greeting {
-    prefix = '>>>'
-    suffix = '<<<'
-}
+```bash
+cd nf-greeting && make assemble && make install && cd ..
 ```
+
+Now update `nextflow.config` to customize the decoration:
+
+=== "After"
+
+    ```groovy title="nextflow.config" hl_lines="7-8"
+    plugins {
+        id 'nf-greeting@0.1.0'
+    }
+
+    greeting {
+        taskCounter.verbose = false
+        prefix = '>>>'
+        suffix = '<<<'
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="nextflow.config"
+    plugins {
+        id 'nf-greeting@0.1.0'
+    }
+
+    greeting {
+        taskCounter.verbose = false
+    }
+    ```
 
 Run the pipeline and observe the changed decoration style:
 
 ```bash
-nextflow run main.nf
+nextflow run main.nf -ansi-log false
 ```
 
 ```console title="Output (excerpt)"
+...
 Decorated: >>> Hello <<<
 Decorated: >>> Bonjour <<<
 ...
