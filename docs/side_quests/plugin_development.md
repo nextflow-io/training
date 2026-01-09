@@ -1297,6 +1297,15 @@ class TaskCounterObserver implements TraceObserver {
 }
 ```
 
+Let's break down what this code does:
+
+- **Lines 4-6**: Import the classes we need - `TaskHandler` represents a running task, `TraceObserver` is the interface we implement, and `TraceRecord` contains task execution metadata (timing, resources, etc.)
+- **Line 11**: `@CompileStatic` improves performance by enabling static compilation
+- **Line 12**: `implements TraceObserver` means our class must provide implementations for the observer lifecycle methods
+- **Line 14**: We declare a private instance variable to track state across callbacks - each observer instance maintains its own count
+- **Lines 16-19**: `onProcessComplete` is called every time a task finishes successfully. The `handler` parameter gives access to the task's process name, work directory, etc. The `trace` parameter contains execution metrics. We simply increment our counter and print the running total.
+- **Lines 21-23**: `onFlowComplete` is called once when the entire workflow finishes, giving us a chance to print the final summary
+
 Now we need to register this observer with the plugin.
 The `NfGreetingFactory` creates observers - take a look at it:
 
