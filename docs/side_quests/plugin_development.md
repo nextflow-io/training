@@ -2079,25 +2079,25 @@ Let's look at how to share your plugin with others.
 
 ---
 
-## 11. Publishing your plugin
+## 11. Distributing your plugin
 
-Once your plugin is working locally, you can share it with the Nextflow community through the [plugin registry](https://registry.nextflow.io/).
+Once your plugin is working locally, you have two options for sharing it:
 
-```mermaid
-graph TD
-    A[1. Claim plugin name] --> B[2. Configure API key]
-    B --> C[3. Update version]
-    C --> D[4. make release]
-    D --> E[Published to registry]
-    E --> F[Users can install globally]
-```
+| Distribution method | Use case | Approval required |
+|---------------------|----------|-------------------|
+| **Public registry** | Open source plugins for the community | Yes - name must be claimed |
+| **Internal hosting** | Private/proprietary plugins within an organization | No |
+
+### 11.1. Publishing to the public registry
+
+The [Nextflow plugin registry](https://registry.nextflow.io/) is the official way to share plugins with the community.
 
 !!! tip "Plugin registry"
 
     The Nextflow plugin registry is currently in public preview.
     See the [Nextflow documentation](https://www.nextflow.io/docs/latest/guides/gradle-plugin.html#publishing-a-plugin) for the latest details.
 
-### 11.1. Claim your plugin name
+#### Claim your plugin name
 
 Before publishing, claim your plugin name in the registry:
 
@@ -2107,7 +2107,7 @@ Before publishing, claim your plugin name in the registry:
 
 You can claim a name before the plugin exists - this reserves it for you.
 
-### 11.2. Configure API credentials
+#### Configure API credentials
 
 Create a Gradle properties file to store your registry credentials:
 
@@ -2126,7 +2126,7 @@ npr.apiKey=YOUR_API_KEY_HERE
     Don't commit this file to version control.
     The `~/.gradle/` directory is outside your project, so it won't be included in your repository.
 
-### 11.3. Prepare for release
+#### Prepare for release
 
 Before publishing, ensure your plugin is ready:
 
@@ -2138,7 +2138,7 @@ Before publishing, ensure your plugin is ready:
 version = '1.0.0'  // Use semantic versioning: MAJOR.MINOR.PATCH
 ```
 
-### 11.4. Publish to the registry
+#### Publish to the registry
 
 Run the release command from your plugin directory:
 
@@ -2159,7 +2159,7 @@ This builds the plugin and publishes it to the registry in one step.
     4. Uploads to the Nextflow plugin registry
     5. Makes it available for users to install
 
-### 11.5. Using published plugins
+#### Using published plugins
 
 Once published, users can install your plugin without any local setup:
 
@@ -2172,22 +2172,20 @@ plugins {
 
 Nextflow automatically downloads the plugin from the registry on first use.
 
-### 11.6. Versioning best practices
+### 11.2. Internal distribution
 
-Follow semantic versioning for your releases:
+Organizations often need to distribute plugins internally without using the public registry.
+This is useful for proprietary plugins, plugins under development, or plugins that shouldn't be publicly available.
 
-| Version change            | When to use                       | Example                                    |
-| ------------------------- | --------------------------------- | ------------------------------------------ |
-| **MAJOR** (1.0.0 → 2.0.0) | Breaking changes                  | Removing a function, changing return types |
-| **MINOR** (1.0.0 → 1.1.0) | New features, backward compatible | Adding a new function                      |
-| **PATCH** (1.0.0 → 1.0.1) | Bug fixes, backward compatible    | Fixing a bug in existing function          |
+!!! note "What internal distribution provides"
 
-### 11.7. Distributing plugins internally
+    Internal distribution uses a simple `plugins.json` file that tells Nextflow where to download plugin ZIP files.
+    This is **not** a full self-hosted registry - there's no web UI, search, or automatic updates.
+    A full self-hosted registry solution may be available in the future.
 
-Organizations may need to distribute plugins internally without using the public registry.
-Use the `NXF_PLUGINS_TEST_REPOSITORY` environment variable to point Nextflow at an internal plugin repository.
+#### Build the plugin ZIP
 
-**1. Build your plugin** - the ZIP file will be at `build/distributions/`:
+The ZIP file will be at `build/distributions/`:
 
 ```bash
 ./gradlew assemble
@@ -2195,9 +2193,18 @@ ls build/distributions/
 # nf-myplugin-0.1.0.zip
 ```
 
-**2. Host the ZIP** on an internal web server, S3 bucket, or GitHub release.
+#### Host the files
 
-**3. Create a `plugins.json`** file alongside your plugin ZIPs:
+Host the ZIP file(s) somewhere accessible to your users:
+
+- Internal web server
+- S3 bucket (with appropriate access)
+- GitHub releases (for private repos)
+- Shared network drive (using `file://` URLs)
+
+#### Create the plugins.json index
+
+Create a `plugins.json` file that describes available plugins:
 
 ```json
 [
@@ -2216,19 +2223,7 @@ ls build/distributions/
 ]
 ```
 
-**4. Set the environment variable** before running Nextflow:
-
-```bash
-export NXF_PLUGINS_TEST_REPOSITORY="https://internal.example.com/plugins/plugins.json"
-```
-
-**5. Use the plugin** in your pipeline as normal:
-
-```groovy title="nextflow.config"
-plugins {
-    id 'nf-myplugin@1.0.0'
-}
-```
+Host this file alongside your plugin ZIPs (or anywhere accessible).
 
 ??? tip "Generating the checksum"
 
@@ -2247,10 +2242,40 @@ plugins {
     | `sha512sum` | SHA-512 checksum of the ZIP file |
     | `requires` | Minimum Nextflow version (e.g., `>=24.04.0`) |
 
+#### Configure Nextflow to use your index
+
+Set the environment variable before running Nextflow:
+
+```bash
+export NXF_PLUGINS_TEST_REPOSITORY="https://internal.example.com/plugins/plugins.json"
+```
+
+Then use the plugin as normal:
+
+```groovy title="nextflow.config"
+plugins {
+    id 'nf-myplugin@1.0.0'
+}
+```
+
+!!! tip "Setting the variable permanently"
+
+    Add the export to your shell profile (`~/.bashrc`, `~/.zshrc`) or set it in your CI/CD pipeline configuration.
+
+### 11.3. Versioning best practices
+
+Follow semantic versioning for your releases:
+
+| Version change            | When to use                       | Example                                    |
+| ------------------------- | --------------------------------- | ------------------------------------------ |
+| **MAJOR** (1.0.0 → 2.0.0) | Breaking changes                  | Removing a function, changing return types |
+| **MINOR** (1.0.0 → 1.1.0) | New features, backward compatible | Adding a new function                      |
+| **PATCH** (1.0.0 → 1.0.1) | Bug fixes, backward compatible    | Fixing a bug in existing function          |
+
 ### Takeaway
 
-Publishing involves claiming your plugin name, configuring API credentials, and running `make release`.
-For internal distribution, use `NXF_PLUGINS_TEST_REPOSITORY` to point to a custom `plugins.json`.
+Use the public registry for open source plugins (requires claiming a name).
+For internal distribution, host plugin ZIPs and a `plugins.json` index, then set `NXF_PLUGINS_TEST_REPOSITORY`.
 Use semantic versioning to communicate changes to users.
 
 ### What's next?
