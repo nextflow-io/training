@@ -1806,7 +1806,11 @@ Now update `NfGreetingFactory.groovy` to read the configuration and pass it to t
     }
     ```
 
-Rebuild and reinstall the plugin.
+Rebuild and reinstall the plugin:
+
+```bash
+cd nf-greeting && make assemble && make install && cd ..
+```
 
 Now update `nextflow.config` to disable the per-task messages:
 
