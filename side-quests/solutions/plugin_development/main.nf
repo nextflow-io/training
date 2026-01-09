@@ -1,8 +1,8 @@
 #!/usr/bin/env nextflow
 
 // Import custom functions from our plugin
+include { reverseGreeting } from 'plugin/nf-greeting'
 include { decorateGreeting } from 'plugin/nf-greeting'
-include { shoutAll } from 'plugin/nf-greeting'
 
 params.input = 'greetings.csv'
 
@@ -25,10 +25,11 @@ workflow {
                         .splitCsv(header: true)
                         .map { row -> row.greeting }
 
-    // Demonstrate using the shoutAll operator
+    // Demonstrate using reverseGreeting function
     greeting_ch
-        .shoutAll()
-        .view { shouted -> "SHOUTED: $shouted" }
+        .map { greeting -> reverseGreeting(greeting) }
+        .view { reversed -> "Reversed: $reversed" }
 
-    SAY_HELLO(greeting_ch).view{ result -> "Decorated with custom prefix: ${result.trim()}" }
+    SAY_HELLO(greeting_ch)
+    SAY_HELLO.out.view { result -> "Decorated with custom prefix: ${result.trim()}" }
 }
