@@ -768,6 +768,22 @@ Let's build and test our plugin.
 
 ## 5. Building and testing
 
+??? info "Why do we need to build?"
+
+    If you're used to scripting languages like Python, R, or even Nextflow's DSL, you might wonder why we need a "build" step at all.
+    In those languages, you write code and run it directly.
+
+    Nextflow plugins are written in Groovy, which runs on the Java Virtual Machine (JVM).
+    JVM languages need to be **compiled** before they can run - the human-readable source code is converted into bytecode that the JVM can execute.
+
+    The build process:
+
+    1. **Compiles** your Groovy code into JVM bytecode
+    2. **Packages** it into a JAR file (Java ARchive - like a ZIP of compiled code)
+    3. **Bundles** metadata so Nextflow knows how to load the plugin
+
+    Don't worry - the build tools handle all this automatically. You just run `make assemble` and let Gradle do the work.
+
 The plugin development cycle follows a simple pattern:
 
 ```mermaid
