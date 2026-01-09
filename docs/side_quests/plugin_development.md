@@ -142,9 +142,29 @@ Plugins can extend Nextflow in several ways:
 
 As you can see, plugins are much more than just custom functions - they can fundamentally extend how Nextflow works.
 
+### 1.2. Why use plugins?
+
+You can define custom functions directly in your Nextflow scripts, so why use plugins?
+
+| Approach            | Best for               | Limitations                                 |
+| ------------------- | ---------------------- | ------------------------------------------- |
+| **Local functions** | Project-specific logic | Copy-paste between pipelines, no versioning |
+| **Plugins**         | Reusable utilities     | Requires Java/Groovy knowledge to create    |
+
+While custom functions are the most common plugin use case, remember that plugins can provide much more - operators, observers, executors, and filesystems.
+
+Plugins are ideal when you need to:
+
+- Share functionality across multiple pipelines
+- Distribute reusable code to the community
+- Version and manage dependencies properly
+- Access Nextflow internals (channels, sessions, lifecycle events, etc.)
+- Integrate with external infrastructure (cloud platforms, storage systems)
+
 ### Takeaway
 
 Plugins extend Nextflow through well-defined extension points - not just functions, but operators, observers, executors, and more.
+They're ideal for sharing reusable functionality across pipelines and the community.
 
 ### What's next?
 
@@ -154,27 +174,8 @@ Let's see how to use existing plugins before we build our own.
 
 ## 2. Using existing plugins
 
-Now that you understand what plugins can do, let's see how to use plugins that others have created.
 Nextflow has a growing ecosystem of plugins that extend its functionality.
-
-### Why use plugins instead of local functions?
-
-You can define custom functions directly in your Nextflow scripts, so why use plugins?
-
-| Approach            | Best for               | Limitations                                 |
-| ------------------- | ---------------------- | ------------------------------------------- |
-| **Local functions** | Project-specific logic | Copy-paste between pipelines, no versioning |
-| **Plugins**         | Reusable utilities     | Requires Java/Groovy knowledge to create    |
-
-While custom functions are the most common use case, remember from section 1 that plugins can provide much more - operators, observers, executors, and filesystems.
-
-Plugins are ideal when you need to:
-
-- Share functionality across multiple pipelines
-- Distribute reusable code to the community
-- Version and manage dependencies properly
-- Access Nextflow internals (channels, sessions, lifecycle events, etc.)
-- Integrate with external infrastructure (cloud platforms, storage systems)
+Let's see how to install and use them.
 
 !!! tip "This is the most important section for most users"
 
