@@ -1561,11 +1561,10 @@ Now test the operator by editing `main.nf` to use it:
 
 === "After"
 
-    ```groovy linenums="1" hl_lines="6 29-32"
+    ```groovy linenums="1" hl_lines="5 23-26"
     #!/usr/bin/env nextflow
 
     // Import custom functions from our plugin
-    include { reverseGreeting } from 'plugin/nf-greeting'
     include { decorateGreeting } from 'plugin/nf-greeting'
     include { shoutAll } from 'plugin/nf-greeting'
 
@@ -1595,19 +1594,13 @@ Now test the operator by editing `main.nf` to use it:
             .shoutAll()
             .view { shouted -> "SHOUTED: $shouted" }
 
-        greeting_ch
-            .map { greeting -> reverseGreeting(greeting) }
-            .view { reversed -> "Reversed: $reversed" }
-
         SAY_HELLO(greeting_ch)
-
-        SAY_HELLO.out.view { result -> "Decorated: ${result.trim()}" }
     }
     ```
 
 === "Before"
 
-    ```groovy
+    ```groovy hl_lines="4 28-30 34"
     #!/usr/bin/env nextflow
 
     // Import custom functions from our plugin
@@ -1651,14 +1644,17 @@ Run it:
 nextflow run main.nf
 ```
 
-```console title="Expected output (partial)"
+```console title="Expected output"
+Pipeline is starting! 🚀
 SHOUTED: HELLO
 SHOUTED: BONJOUR
 SHOUTED: HOLÀ
 SHOUTED: CIAO
 SHOUTED: HALLO
-Reversed: olleH
-...
+executor >  local (5)
+[26/c78152] SAY_HELLO (2) [100%] 5 of 5 ✔
+Pipeline complete! 👋
+📈 Final task count: 5
 ```
 
 ### 8.3. Channel factories
