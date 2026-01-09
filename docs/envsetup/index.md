@@ -15,7 +15,7 @@ This containerized environment can be run out of the box on Github Codespaces or
 
 <div class="grid cards" markdown>
 
--   :octicons-codespaces-16:{ .lg .middle } __Github Codespaces__
+-   :material-cloud-outline:{ .lg .middle } __Github Codespaces__
 
     ---
 
@@ -27,7 +27,7 @@ This containerized environment can be run out of the box on Github Codespaces or
 
     ---
 
-    short blurb
+    VS Code with Devcontainers provides a locally-run containerized development environment with all training tools pre-configured. It offers the same pre-built environment as Codespaces but running entirely on your local hardware.
 
     [Use Devcontainers locally :material-arrow-right:](03_devcontainer.md){ .md-button .md-button--primary .mt-1 }
 
