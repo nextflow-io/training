@@ -1,5 +1,6 @@
-# Complex formatting on the homepage
+# Complex formatting on the home and help pages
 docs/index.md
+docs/help.md
 
 # Ignore all files in side-quests/solutions
 side-quests/solutions/nf-core/**/*.js

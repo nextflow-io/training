@@ -10,29 +10,31 @@ hide:
 
 <div class="grid cards" markdown>
 
-- :material-run:{ .lg .middle } **Community forum**
+-   :material-run:{ .lg .middle } __Community forum__
 
-  ***
+    ---
 
-  Please post questions or report problems with the training in the [Community forum (training category)](https://community.seqera.io/c/training/39). You may find your question has already been asked --and answered!
+    Please post questions or report problems with the training in the [Community forum (training category)](https://community.seqera.io/c/training/39). You may find your question has already been asked --and answered!
 
-- :material-run:{ .lg .middle } **Slack channel**
+-   :material-run:{ .lg .middle } __Slack channel__
 
-  ***
+    ---
 
-  If you're on Slack, you can also reach out in the **training** channel or the general **help** channel in the [Nextflow Slack workspace](<!-- TODO what's the right url -->). It's harder to search for past answers, but a great place to chat with fellow developers.
+    If you're on Slack, you can also reach out in the **training** channel or the general **help** channel in the [Nextflow Slack workspace](<!-- TODO what's the right url -->). It's harder to search for past answers, but a great place to chat with fellow developers.
 
-- :material-run:{ .lg .middle } **Seqera AI assistant**
+-   :material-run:{ .lg .middle } __Seqera AI assistant__
 
-  ***
+    ---
 
-  Something something AI assistant trained specifically for Nextflow
+    Something something AI assistant trained specifically for Nextflow
 
-- :material-walk:{ .lg .middle } **Nextflow documentation**
+-   :material-walk:{ .lg .middle } __Nextflow documentation__
 
-  ***
+    ---
 
-  Something something docs
+    Something something docs
+
+</div>
 
 ## Nextflow Documentation
 
