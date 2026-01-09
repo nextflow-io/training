@@ -1786,7 +1786,7 @@ Now update `NfGreetingFactory.groovy` to read the configuration and pass it to t
         final enabled = session.config.navigate('greeting.enabled', true)
         if (!enabled) return []
 
-        final verbose = session.config.navigate('greeting.taskCounter.verbose', true)
+        final verbose = session.config.navigate('greeting.taskCounter.verbose', true) as boolean
         return [
             new NfGreetingObserver(),
             new TaskCounterObserver(verbose)
