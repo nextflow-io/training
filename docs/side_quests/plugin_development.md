@@ -1448,7 +1448,7 @@ We need to add new imports for the dataflow classes and implement the operator m
 
 === "After"
 
-    ```groovy title="NfGreetingExtension.groovy" linenums="17" hl_lines="24-29 62-73"
+    ```groovy title="NfGreetingExtension.groovy" linenums="17" hl_lines="46-57"
     package training.plugin
 
     import groovy.transform.CompileStatic
