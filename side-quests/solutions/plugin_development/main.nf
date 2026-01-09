@@ -1,9 +1,5 @@
 #!/usr/bin/env nextflow
 
-/*
- * Greeting pipeline using custom plugin functions
- */
-
 // Import custom functions from our plugin
 include { reverseGreeting; decorateGreeting } from 'plugin/nf-greeting'
 

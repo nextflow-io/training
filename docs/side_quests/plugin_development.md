@@ -1115,10 +1115,20 @@ Let's explore other extension types.
 
 ## 7. Going further
 
-The `@Function` annotation covers most common use cases, but plugins can do much more.
-Let's explore some advanced capabilities using the code already in your generated plugin.
+In section 2.1, we saw that plugins can provide many types of extensions:
 
-### 7.1. Trace observers: How the startup messages work
+| Extension Type  | Purpose                                  | We've used         |
+| --------------- | ---------------------------------------- | ------------------ |
+| Functions       | Custom functions callable from workflows | ✅ `reverseGreeting()` |
+| Operators       | Custom channel operators                 | ❌ Not yet          |
+| Factories       | Create new channel types                 | ❌ Not yet          |
+| Trace Observers | Monitor workflow execution               | ✅ (startup messages) |
+| Executors       | Custom task execution backends           | Conceptual only    |
+| Filesystems     | Custom storage backends                  | Conceptual only    |
+
+Let's explore the ones we haven't tried yet.
+
+### 7.1. Understanding the existing trace observer
 
 Remember the "Pipeline is starting! 🚀" message when you ran the pipeline?
 That came from the `NfGreetingObserver` class in your plugin.
@@ -1126,95 +1136,16 @@ That came from the `NfGreetingObserver` class in your plugin.
 Look at the observer code:
 
 ```bash
-cat src/main/groovy/training/plugin/NfGreetingObserver.groovy
+cat nf-greeting/src/main/groovy/training/plugin/NfGreetingObserver.groovy
 ```
 
-You'll see something like:
-
-```groovy
-class NfGreetingObserver implements TraceObserver {
-
-    @Override
-    void onFlowCreate(Session session) {
-        println "Pipeline is starting! 🚀"
-    }
-
-    @Override
-    void onFlowComplete() {
-        println "Pipeline complete! 🎉"
-    }
-}
-```
-
-Trace observers let you hook into workflow lifecycle events - useful for custom logging, metrics, or notifications.
-
-#### Try it: Customize the messages
-
-Let's change the messages to something more descriptive.
-
-Edit `src/main/groovy/training/plugin/NfGreetingObserver.groovy` and change the `println` statements:
-
-=== "After"
-
-    ```groovy hl_lines="4 9"
-    @Override
-    void onFlowCreate(Session session) {
-        // Custom startup message
-        println "🔬 Starting analysis pipeline..."
-    }
-
-    @Override
-    void onFlowComplete() {
-        // Custom completion message
-        println "✅ Analysis complete! Check your results."
-    }
-    ```
-
-=== "Before"
-
-    ```groovy hl_lines="3 8"
-    @Override
-    void onFlowCreate(Session session) {
-        println "Pipeline is starting! 🚀"
-    }
-
-    @Override
-    void onFlowComplete() {
-        println "Pipeline complete! 🎉"
-    }
-    ```
-
-Rebuild and reinstall the plugin:
-
-```bash
-make assemble && make install
-```
-
-Run the pipeline again from the parent directory:
-
-```bash
-cd .. && nextflow run main.nf
-```
-
-You should see your custom messages in the output:
-
-```console
-🔬 Starting analysis pipeline...
-executor >  local (5)
-[ab/123456] process > SAY_HELLO (5) [100%] 5 of 5 ✔
-...
-✅ Analysis complete! Check your results.
-```
-
-### 7.2. Available observer hooks
-
+This observer hooks into workflow lifecycle events.
 Trace observers can respond to many events:
 
 | Method | When it's called |
 | ------ | ---------------- |
 | `onFlowCreate` | Workflow starts |
 | `onFlowComplete` | Workflow finishes |
-| `onProcessCreate` | A process is defined |
 | `onProcessStart` | A task begins execution |
 | `onProcessComplete` | A task finishes |
 | `onProcessCached` | A cached task is reused |
@@ -1222,60 +1153,481 @@ Trace observers can respond to many events:
 
 This enables powerful use cases like custom reports, Slack notifications, or metrics collection.
 
-### 7.3. Custom operators (reference)
+### 7.2. Try it: Add a task counter observer
 
-Operators work with channels directly. Use the `@Operator` annotation:
+Rather than modifying the existing observer, let's create a new one that counts completed tasks.
+This reinforces the concepts while doing something different.
 
-```groovy
-import nextflow.plugin.extension.Operator
-import groovyx.gpars.dataflow.DataflowReadChannel
-import groovyx.gpars.dataflow.DataflowWriteChannel
+Create a new file:
 
-@Operator
-DataflowWriteChannel reverseAll(DataflowReadChannel source) {
-    def target = CH.create()
-    new SubscribeOp()
-        .withSource(source)
-        .withTarget(target)
-        .withTransform { it.reverse() }
-        .apply()
-    return target
+```bash
+touch nf-greeting/src/main/groovy/training/plugin/TaskCounterObserver.groovy
+```
+
+Add the following content:
+
+```groovy title="nf-greeting/src/main/groovy/training/plugin/TaskCounterObserver.groovy" linenums="1"
+package training.plugin
+
+import groovy.transform.CompileStatic
+import nextflow.processor.TaskHandler
+import nextflow.trace.TraceObserver
+import nextflow.trace.TraceRecord
+
+/**
+ * Observer that counts completed tasks
+ */
+@CompileStatic
+class TaskCounterObserver implements TraceObserver {
+
+    private int taskCount = 0
+
+    @Override
+    void onProcessComplete(TaskHandler handler, TraceRecord trace) {
+        taskCount++
+        println "📊 Tasks completed so far: ${taskCount}"
+    }
+
+    @Override
+    void onFlowComplete() {
+        println "📈 Final task count: ${taskCount}"
+    }
 }
 ```
 
-Usage in workflow:
+Now we need to register this observer with the plugin.
+The `NfGreetingFactory` creates observers - edit it to include our new one:
 
-```groovy
-greeting_ch.reverseAll().view()
+```bash
+cat nf-greeting/src/main/groovy/training/plugin/NfGreetingFactory.groovy
 ```
 
-!!! note "Operators are more complex"
+Edit `NfGreetingFactory.groovy` to add our new observer:
 
-    Creating operators requires understanding Nextflow's internal channel APIs.
-    For most use cases, `@Function` is simpler and sufficient.
+=== "After"
 
-### 7.4. Accessing configuration
+    ```groovy hl_lines="10"
+    @Override
+    Collection<TraceObserver> create(Session session) {
+        final enabled = session.config.navigate('greeting.enabled', true)
+        if (!enabled) {
+            return []
+        }
+        return [
+            new NfGreetingObserver(),
+            new TaskCounterObserver()
+        ]
+    }
+    ```
 
-Plugins can read custom configuration from `nextflow.config`:
+=== "Before"
+
+    ```groovy
+    @Override
+    Collection<TraceObserver> create(Session session) {
+        final enabled = session.config.navigate('greeting.enabled', true)
+        if (!enabled) {
+            return []
+        }
+        return [
+            new NfGreetingObserver()
+        ]
+    }
+    ```
+
+Rebuild and reinstall:
+
+```bash
+cd nf-greeting && make assemble && make install && cd ..
+```
+
+Run the pipeline:
+
+```bash
+nextflow run main.nf
+```
+
+```console title="Expected output"
+Pipeline is starting! 🚀
+executor >  local (5)
+📊 Tasks completed so far: 1
+📊 Tasks completed so far: 2
+📊 Tasks completed so far: 3
+📊 Tasks completed so far: 4
+[fe/109754] process > SAY_HELLO (5) [100%] 5 of 5 ✔
+📊 Tasks completed so far: 5
+📈 Final task count: 5
+Pipeline complete! 🎉
+```
+
+### 7.3. Custom operators: When functions aren't enough
+
+We've used `@Function` to create `reverseGreeting()`.
+But functions have a limitation: they work on **individual values**, not channels.
+
+Consider this pattern:
+
+```groovy
+// Using a function - must wrap in map()
+greeting_ch
+    .map { greeting -> reverseGreeting(greeting) }
+    .view()
+```
+
+With a custom **operator**, you can work directly on channels:
+
+```groovy
+// Using an operator - cleaner syntax
+greeting_ch
+    .reverseAll()
+    .view()
+```
+
+Operators are useful when you need to:
+
+- Transform entire channels (not just individual items)
+- Combine or split channels
+- Add channel-level behaviors (filtering, grouping, etc.)
+
+#### Try it: Add a shoutAll operator
+
+Let's add an operator that converts all items in a channel to uppercase.
+
+Edit `nf-greeting/src/main/groovy/training/plugin/NfGreetingExtension.groovy` to add an operator:
+
+=== "After"
+
+    ```groovy title="NfGreetingExtension.groovy" hl_lines="6-8 55-67"
+    package training.plugin
+
+    import groovy.transform.CompileStatic
+    import nextflow.Session
+    import nextflow.plugin.extension.Function
+    import nextflow.plugin.extension.Operator
+    import nextflow.plugin.extension.PluginExtensionPoint
+    import groovyx.gpars.dataflow.DataflowReadChannel
+    import groovyx.gpars.dataflow.DataflowWriteChannel
+    import nextflow.extension.CH
+    import nextflow.extension.DataflowHelper
+
+    @CompileStatic
+    class NfGreetingExtension extends PluginExtensionPoint {
+
+        @Override
+        protected void init(Session session) {
+        }
+
+        /**
+         * Reverse a greeting string
+         */
+        @Function
+        String reverseGreeting(String greeting) {
+            return greeting.reverse()
+        }
+
+        /**
+         * Decorate a greeting with celebratory markers
+         */
+        @Function
+        String decorateGreeting(String greeting) {
+            return "*** ${greeting} ***"
+        }
+
+        /**
+         * Convert greeting to a friendly format with a name
+         */
+        @Function
+        String friendlyGreeting(String greeting, String name = 'World') {
+            return "${greeting}, ${name}!"
+        }
+
+        /**
+         * Operator: Convert all items in a channel to uppercase
+         */
+        @Operator
+        DataflowWriteChannel shoutAll(DataflowReadChannel source) {
+            final target = CH.create()
+            DataflowHelper.subscribeImpl(source, [
+                onNext: { target.bind(it.toString().toUpperCase()) },
+                onComplete: { target.bind(Channel.STOP) }
+            ])
+            return target
+        }
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="NfGreetingExtension.groovy"
+    package training.plugin
+
+    import groovy.transform.CompileStatic
+    import nextflow.Session
+    import nextflow.plugin.extension.Function
+    import nextflow.plugin.extension.PluginExtensionPoint
+
+    @CompileStatic
+    class NfGreetingExtension extends PluginExtensionPoint {
+
+        @Override
+        protected void init(Session session) {
+        }
+
+        /**
+         * Reverse a greeting string
+         */
+        @Function
+        String reverseGreeting(String greeting) {
+            return greeting.reverse()
+        }
+
+        /**
+         * Decorate a greeting with celebratory markers
+         */
+        @Function
+        String decorateGreeting(String greeting) {
+            return "*** ${greeting} ***"
+        }
+
+        /**
+         * Convert greeting to a friendly format with a name
+         */
+        @Function
+        String friendlyGreeting(String greeting, String name = 'World') {
+            return "${greeting}, ${name}!"
+        }
+    }
+    ```
+
+Rebuild and reinstall:
+
+```bash
+cd nf-greeting && make assemble && make install && cd ..
+```
+
+Now test the operator by editing `main.nf` to use it:
+
+=== "After"
+
+    ```groovy hl_lines="6 34-36"
+    #!/usr/bin/env nextflow
+
+    // Import custom functions from our plugin
+    include { reverseGreeting } from 'plugin/nf-greeting'
+    include { decorateGreeting } from 'plugin/nf-greeting'
+    include { shoutAll } from 'plugin/nf-greeting'
+
+    params.input = 'greetings.csv'
+
+    process SAY_HELLO {
+
+        input:
+            val greeting
+
+        output:
+            path "${greeting}-output.txt"
+
+        script:
+        // Use our custom plugin function to decorate the greeting
+        def decorated = decorateGreeting(greeting)
+        """
+        echo '$decorated' > '${greeting}-output.txt'
+        """
+    }
+
+    workflow {
+
+        greeting_ch = channel.fromPath(params.input)
+                            .splitCsv(header: true)
+                            .map { row -> row.greeting }
+
+        // Demonstrate using the shoutAll operator
+        greeting_ch
+            .shoutAll()
+            .view { "SHOUTED: $it" }
+
+        // Demonstrate using reverseGreeting function
+        greeting_ch
+            .map { greeting -> reverseGreeting(greeting) }
+            .view { "Reversed: $it" }
+
+        SAY_HELLO(greeting_ch)
+
+        SAY_HELLO.out.view()
+    }
+    ```
+
+=== "Before"
+
+    ```groovy
+    #!/usr/bin/env nextflow
+
+    // Import custom functions from our plugin
+    include { reverseGreeting } from 'plugin/nf-greeting'
+    include { decorateGreeting } from 'plugin/nf-greeting'
+
+    params.input = 'greetings.csv'
+
+    // ... rest of file unchanged
+    ```
+
+Run it:
+
+```bash
+nextflow run main.nf
+```
+
+```console title="Expected output (partial)"
+SHOUTED: HELLO
+SHOUTED: BONJOUR
+SHOUTED: HOLÀ
+SHOUTED: CIAO
+SHOUTED: HALLO
+Reversed: olleH
+...
+```
+
+### 7.4. Channel factories
+
+You may have noticed `NfGreetingFactory.groovy` in your plugin.
+Factories create things - in this case, trace observers.
+
+But plugins can also provide **channel factories** that create new ways to generate channels.
+For example, a plugin could provide:
+
+```groovy
+// Hypothetical channel factory
+channel.fromDatabase('SELECT * FROM samples')
+```
+
+The nf-schema plugin uses this pattern for `samplesheetToList()`.
+
+Creating channel factories is advanced and requires deep understanding of Nextflow internals.
+For most use cases, functions and operators are sufficient.
+
+### 7.5. Configuration-driven behavior
+
+Plugins can read configuration from `nextflow.config`, letting users customize behavior.
+
+Look at the existing factory code - it already checks configuration:
+
+```groovy
+final enabled = session.config.navigate('greeting.enabled', true)
+```
+
+This means users can disable your plugin's observers:
 
 ```groovy title="nextflow.config"
+greeting {
+    enabled = false
+}
+```
+
+#### Try it: Make the decorator configurable
+
+Let's make the `decorateGreeting` function use configurable prefix/suffix.
+
+Edit `NfGreetingExtension.groovy`:
+
+=== "After"
+
+    ```groovy hl_lines="3-4 10-12 25-26"
+    @CompileStatic
+    class NfGreetingExtension extends PluginExtensionPoint {
+
+        private String prefix = '***'
+        private String suffix = '***'
+
+        @Override
+        protected void init(Session session) {
+            // Read configuration with defaults
+            prefix = session.config.navigate('greeting.prefix', '***') as String
+            suffix = session.config.navigate('greeting.suffix', '***') as String
+        }
+
+        // ... other functions ...
+
+        /**
+         * Decorate a greeting with configurable markers
+         */
+        @Function
+        String decorateGreeting(String greeting) {
+            return "${prefix} ${greeting} ${suffix}"
+        }
+
+        // ... rest of file ...
+    }
+    ```
+
+=== "Before"
+
+    ```groovy
+    @CompileStatic
+    class NfGreetingExtension extends PluginExtensionPoint {
+
+        @Override
+        protected void init(Session session) {
+        }
+
+        // ... other functions ...
+
+        /**
+         * Decorate a greeting with celebratory markers
+         */
+        @Function
+        String decorateGreeting(String greeting) {
+            return "*** ${greeting} ***"
+        }
+
+        // ... rest of file ...
+    }
+    ```
+
+Rebuild and reinstall the plugin.
+
+Now users can customize the decoration in `nextflow.config`:
+
+```groovy title="nextflow.config"
+plugins {
+    id 'nf-greeting@0.1.0'
+}
+
 greeting {
     prefix = '>>>'
     suffix = '<<<'
 }
 ```
 
-```groovy title="In your extension's init() method"
-@Override
-void init(Session session) {
-    def prefix = session.config.navigate('greeting.prefix', '***')
-    def suffix = session.config.navigate('greeting.suffix', '***')
-}
+Run the pipeline and check the output file:
+
+```bash
+nextflow run main.nf
+cat work/*/*/Hello-output.txt
 ```
 
-This lets users customize plugin behavior without modifying plugin code.
+```console
+>>> Hello <<<
+```
 
-### 7.5. Publishing your plugin
+### 7.6. Executors and filesystems (conceptual)
+
+Some extension types require significant infrastructure to demonstrate:
+
+**Executors** define how tasks are submitted to compute resources:
+
+- AWS Batch, Google Cloud Batch, Azure Batch
+- Kubernetes, SLURM, PBS, LSF
+- Creating a custom executor is complex and typically done by platform vendors
+
+**Filesystems** define how files are accessed:
+
+- S3, Google Cloud Storage, Azure Blob
+- Custom storage systems
+- Creating a custom filesystem requires implementing Java NIO interfaces
+
+These are documented in the [Nextflow plugin documentation](https://www.nextflow.io/docs/latest/plugins/developing-plugins.html) for advanced users.
+
+### 7.7. Publishing your plugin
 
 To share your plugin with others:
 
@@ -1298,8 +1650,13 @@ plugins {
 
 ### Takeaway
 
-Beyond functions, plugins can provide trace observers for lifecycle hooks, custom operators for channel transformations, and configuration-driven behavior.
-The generated plugin template includes working examples of each.
+Plugins can provide much more than functions:
+
+- **Trace observers** hook into workflow lifecycle events
+- **Operators** transform entire channels
+- **Configuration** lets users customize plugin behavior
+- **Factories** create observers and channel sources
+- **Executors** and **Filesystems** integrate with infrastructure (advanced)
 
 ### What's next?
 
