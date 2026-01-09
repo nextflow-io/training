@@ -36,7 +36,7 @@ hide:
 
     ---
 
-    Seqera AI is an AI assistant trained on Nextflow and nf-core resources. It can help you debug your code, clarify Nextflow concepts, and search for documentation faster. Think of it as having an expert available 24/7 as you work through the course material.
+    Seqera AI is an AI assistant trained on Nextflow and nf-core resources. It can help you debug your code, clarify Nextflow concepts, and search for documentation faster. Think of it as having an tutor available 24/7 as you work through the courses.
 
     [Ask Seqera AI:material-arrow-right:](https://github.com/nextflow-io/training/issues){ .md-button .md-button--primary .mt-1 }
 
@@ -44,7 +44,7 @@ hide:
 
     ---
 
-    The official documentation is the ultimate guide to all language features and configuration options. Use it alongside this training to dive deeper into specific topics and find detailed syntax references.
+    The official documentation is the ultimate guide to all language features and configuration options. Use it alongside this training to dive deeper into specific topics, explore advanced features and find detailed syntax references.
 
     [Browse the docs:material-arrow-right:](https://www.nextflow.io/docs/latest){ .md-button .md-button--primary .mt-1 }
 
@@ -52,7 +52,7 @@ hide:
 
     ---
 
-    Nextflow is developed by [Seqera](https://seqera.io/), a company headquartered in Spain with satellite offices in the UK and the US. We offer professional support services for Nextflow, including custom training.
+    Nextflow is a free, open-source software developed by [Seqera](https://seqera.io/), a company headquartered in Spain with satellite offices in the UK and the US. We offer professional support services for Nextflow, including custom training.
 
     [Get in touch:material-arrow-right:](https://seqera.io/demo/){ .md-button .md-button--primary .mt-1 }
 
