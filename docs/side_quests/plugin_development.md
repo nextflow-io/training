@@ -1054,7 +1054,53 @@ Edit `nextflow.config` to add the plugins block with your plugin and version:
 
 ### 6.2. Import and use functions
 
-Edit `main.nf` to import and use our custom functions:
+We provided a simple greeting pipeline in `main.nf` that reads greetings from a CSV file and writes them to output files.
+Take a quick look at it:
+
+```bash
+cat main.nf
+```
+
+```groovy title="main.nf (starting point)"
+#!/usr/bin/env nextflow
+
+params.input = 'greetings.csv'
+
+process SAY_HELLO {
+    input:
+        val greeting
+    output:
+        path "${greeting}-output.txt"
+    script:
+    """
+    echo '$greeting' > '${greeting}-output.txt'
+    """
+}
+
+workflow {
+    greeting_ch = channel.fromPath(params.input)
+                        .splitCsv(header: true)
+                        .map { row -> row.greeting }
+    SAY_HELLO(greeting_ch)
+    SAY_HELLO.out.view()
+}
+```
+
+Run it to see the basic output:
+
+```bash
+nextflow run main.nf
+```
+
+```console title="Output"
+[...] process > SAY_HELLO (3) [100%] 3 of 3 ✔
+/workspaces/training/side-quests/plugin_development/work/.../Hello-output.txt
+/workspaces/training/side-quests/plugin_development/work/.../Bonjour-output.txt
+/workspaces/training/side-quests/plugin_development/work/.../Holà-output.txt
+```
+
+Now let's enhance it to use our plugin functions.
+Edit `main.nf` to import and use the custom functions:
 
 === "After"
 
