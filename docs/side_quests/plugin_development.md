@@ -1105,7 +1105,7 @@ Edit `main.nf` to import and use the custom functions:
 
 === "After"
 
-    ```groovy title="main.nf" hl_lines="4-5 17-18 28-30" linenums="1"
+    ```groovy title="main.nf" hl_lines="4-5 15-18 28-30 33" linenums="1"
     #!/usr/bin/env nextflow
 
     // Import custom functions from our plugin
@@ -1144,7 +1144,7 @@ Edit `main.nf` to import and use the custom functions:
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="1"
+    ```groovy title="main.nf" linenums="1" hl_lines="11 12 21"
     #!/usr/bin/env nextflow
 
     params.input = 'greetings.csv'
@@ -1298,23 +1298,30 @@ class TaskCounterObserver implements TraceObserver {
 ```
 
 Now we need to register this observer with the plugin.
-The `NfGreetingFactory` creates observers - edit it to include our new one:
+The `NfGreetingFactory` creates observers - take a look at it:
 
 ```bash
 cat nf-greeting/src/main/groovy/training/plugin/NfGreetingFactory.groovy
+```
+
+```groovy title="NfGreetingFactory.groovy (starting point)"
+@CompileStatic
+class NfGreetingFactory implements TraceObserverFactory {
+
+    @Override
+    Collection<TraceObserver> create(Session session) {
+        return List.<TraceObserver>of(new NfGreetingObserver())
+    }
+}
 ```
 
 Edit `NfGreetingFactory.groovy` to add our new observer:
 
 === "After"
 
-    ```groovy hl_lines="10"
+    ```groovy title="NfGreetingFactory.groovy" hl_lines="5-6"
     @Override
     Collection<TraceObserver> create(Session session) {
-        final enabled = session.config.navigate('greeting.enabled', true)
-        if (!enabled) {
-            return []
-        }
         return [
             new NfGreetingObserver(),
             new TaskCounterObserver()
@@ -1324,16 +1331,10 @@ Edit `NfGreetingFactory.groovy` to add our new observer:
 
 === "Before"
 
-    ```groovy
+    ```groovy title="NfGreetingFactory.groovy"
     @Override
     Collection<TraceObserver> create(Session session) {
-        final enabled = session.config.navigate('greeting.enabled', true)
-        if (!enabled) {
-            return []
-        }
-        return [
-            new NfGreetingObserver()
-        ]
+        return List.<TraceObserver>of(new NfGreetingObserver())
     }
     ```
 
