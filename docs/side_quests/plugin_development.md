@@ -258,7 +258,7 @@ workflow {
         samplesheetToList(params.input, "assets/schema_input.json")
     )
 
-    ch_samples.view { "Sample: $it" }
+    ch_samples.view { sample -> "Sample: $sample" }
 }
 ```
 
@@ -1082,7 +1082,7 @@ workflow {
                         .splitCsv(header: true)
                         .map { row -> row.greeting }
     SAY_HELLO(greeting_ch)
-    SAY_HELLO.out.view { "Output: ${it.trim()}" }
+    SAY_HELLO.out.view { result -> "Output: ${result.trim()}" }
 }
 ```
 
@@ -1135,10 +1135,10 @@ Edit `main.nf` to import and use the custom functions:
         // Demonstrate using reverseGreeting function
         greeting_ch
             .map { greeting -> reverseGreeting(greeting) }
-            .view { "Reversed: $it" }
+            .view { reversed -> "Reversed: $reversed" }
 
         SAY_HELLO(greeting_ch)
-        SAY_HELLO.out.view { "Decorated: ${it.trim()}" }
+        SAY_HELLO.out.view { result -> "Decorated: ${result.trim()}" }
     }
     ```
 
@@ -1165,7 +1165,7 @@ Edit `main.nf` to import and use the custom functions:
                             .splitCsv(header: true)
                             .map { row -> row.greeting }
         SAY_HELLO(greeting_ch)
-        SAY_HELLO.out.view { "Output: ${it.trim()}" }
+        SAY_HELLO.out.view { result -> "Output: ${result.trim()}" }
     }
     ```
 
@@ -1463,7 +1463,7 @@ Edit `nf-greeting/src/main/groovy/training/plugin/NfGreetingExtension.groovy` to
         DataflowWriteChannel shoutAll(DataflowReadChannel source) {
             final target = CH.create()
             DataflowHelper.subscribeImpl(source, [
-                onNext: { target.bind(it.toString().toUpperCase()) },
+                onNext: { item -> target.bind(item.toString().toUpperCase()) },
                 onComplete: { target.bind(Channel.STOP) }
             ])
             return target
@@ -1559,12 +1559,12 @@ Now test the operator by editing `main.nf` to use it:
         // Demonstrate using the shoutAll operator
         greeting_ch
             .shoutAll()
-            .view { "SHOUTED: $it" }
+            .view { shouted -> "SHOUTED: $shouted" }
 
         // Demonstrate using reverseGreeting function
         greeting_ch
             .map { greeting -> reverseGreeting(greeting) }
-            .view { "Reversed: $it" }
+            .view { reversed -> "Reversed: $reversed" }
 
         SAY_HELLO(greeting_ch)
 

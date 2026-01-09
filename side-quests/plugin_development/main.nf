@@ -27,5 +27,5 @@ workflow {
 
     SAY_HELLO(greeting_ch)
 
-    SAY_HELLO.out.view { "Output: ${it.trim()}" }
+    SAY_HELLO.out.view { result -> "Output: ${result.trim()}" }
 }

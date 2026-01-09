@@ -26,8 +26,8 @@ workflow {
     // Demonstrate using reverseGreeting function
     greeting_ch
         .map { greeting -> reverseGreeting(greeting) }
-        .view { "Reversed: $it" }
+        .view { reversed -> "Reversed: $reversed" }
 
     SAY_HELLO(greeting_ch)
-    SAY_HELLO.out.view { "Decorated: ${it.trim()}" }
+    SAY_HELLO.out.view { result -> "Decorated: ${result.trim()}" }
 }
