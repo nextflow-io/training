@@ -7,10 +7,10 @@
 process SAY_HELLO {
 
     input:
-        tuple val(greeting), val(language)
+        tuple val(meta), val(greeting)
 
     output:
-        tuple val(greeting), val(language), path("${greeting}-output.txt")
+        tuple val(meta), path("${greeting}-output.txt")
 
     script:
     """
@@ -25,10 +25,10 @@ process SAY_HELLO {
 process CONVERT_TO_UPPER {
 
     input:
-        tuple val(greeting), val(language), path(input_file)
+        tuple val(meta), path(input_file)
 
     output:
-        tuple val(greeting), val(language), path("UPPER-${input_file}")
+        tuple val(meta), path("UPPER-${input_file}")
 
     script:
     """

@@ -17,7 +17,7 @@ workflow {
     // Create a channel from the CSV file with metadata
     greeting_ch = channel.fromPath(params.input)
                         .splitCsv(header: true)
-                        .map { row -> [row.greeting, row.language] }
+                        .map { row -> [[id: row.greeting, language: row.language], row.greeting] }
 
     // Create greeting files
     SAY_HELLO(greeting_ch)

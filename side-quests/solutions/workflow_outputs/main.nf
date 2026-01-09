@@ -17,7 +17,7 @@ workflow {
     // Create a channel from the CSV file with metadata
     greeting_ch = channel.fromPath(params.input)
                         .splitCsv(header: true)
-                        .map { row -> [row.greeting, row.language] }
+                        .map { row -> [[id: row.greeting, language: row.language], row.greeting] }
 
     // Create greeting files
     SAY_HELLO(greeting_ch)
@@ -36,17 +36,17 @@ workflow {
 output {
     greetings {
         mode 'copy'
-        path { greeting, language, file -> "greetings/${language}" }
+        path { meta, file -> "greetings/${meta.language}" }
         index {
-            path 'greetings/index.csv'
+            path 'greetings/index.json'
         }
     }
 
     uppercase {
         mode 'copy'
-        path { greeting, language, file -> "uppercase/${language}" }
+        path { meta, file -> "uppercase/${meta.language}" }
         index {
-            path 'uppercase/index.csv'
+            path 'uppercase/index.json'
         }
     }
 }

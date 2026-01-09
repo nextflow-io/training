@@ -99,10 +99,10 @@ process SAY_HELLO {
     publishDir 'results/greetings', mode: 'copy'
 
     input:
-        tuple val(greeting), val(language)
+        tuple val(meta), val(greeting)
 
     output:
-        tuple val(greeting), val(language), path("${greeting}-output.txt")
+        tuple val(meta), path("${greeting}-output.txt")
 
     script:
     """
@@ -118,10 +118,10 @@ process CONVERT_TO_UPPER {
     publishDir 'results/uppercase', mode: 'copy'
 
     input:
-        tuple val(greeting), val(language), path(input_file)
+        tuple val(meta), path(input_file)
 
     output:
-        tuple val(greeting), val(language), path("UPPER-${input_file}")
+        tuple val(meta), path("UPPER-${input_file}")
 
     script:
     """
@@ -131,7 +131,7 @@ process CONVERT_TO_UPPER {
 ```
 
 Each process has its own `publishDir` directive that specifies where outputs should be copied.
-The processes pass metadata (greeting and language) through their channels, which we'll use later for organizing outputs.
+The processes use the common `[meta, file]` tuple pattern, where `meta` is a map containing metadata like the greeting text and language.
 
 Now look at the main workflow file:
 
@@ -155,7 +155,7 @@ workflow {
     // Create a channel from the CSV file with metadata
     greeting_ch = channel.fromPath(params.input)
                         .splitCsv(header: true)
-                        .map { row -> [row.greeting, row.language] }
+                        .map { row -> [[id: row.greeting, language: row.language], row.greeting] }
 
     // Create greeting files
     SAY_HELLO(greeting_ch)
@@ -165,7 +165,8 @@ workflow {
 }
 ```
 
-The workflow parses the CSV file and extracts both the greeting text and language into a tuple, which flows through both processes.
+The workflow parses the CSV and creates `[meta, greeting]` tuples where `meta` is a map containing both the greeting ID and language.
+This pattern is standard in nf-core pipelines and makes metadata easy to access throughout the workflow.
 
 ### 1.2. Run the workflow
 
@@ -273,10 +274,10 @@ Edit `modules/greetings.nf` to remove the `publishDir` directives from both proc
     process SAY_HELLO {
 
         input:
-            tuple val(greeting), val(language)
+            tuple val(meta), val(greeting)
 
         output:
-            tuple val(greeting), val(language), path("${greeting}-output.txt")
+            tuple val(meta), path("${greeting}-output.txt")
 
         script:
         """
@@ -291,10 +292,10 @@ Edit `modules/greetings.nf` to remove the `publishDir` directives from both proc
     process CONVERT_TO_UPPER {
 
         input:
-            tuple val(greeting), val(language), path(input_file)
+            tuple val(meta), path(input_file)
 
         output:
-            tuple val(greeting), val(language), path("UPPER-${input_file}")
+            tuple val(meta), path("UPPER-${input_file}")
 
         script:
         """
@@ -305,7 +306,7 @@ Edit `modules/greetings.nf` to remove the `publishDir` directives from both proc
 
 === "Before"
 
-    ```groovy title="modules/greetings.nf" linenums="1" hl_lines="8 27"
+    ```groovy title="modules/greetings.nf" linenums="1" hl_lines="8 25"
     #!/usr/bin/env nextflow
 
     /*
@@ -316,10 +317,10 @@ Edit `modules/greetings.nf` to remove the `publishDir` directives from both proc
         publishDir 'results/greetings', mode: 'copy'
 
         input:
-            tuple val(greeting), val(language)
+            tuple val(meta), val(greeting)
 
         output:
-            tuple val(greeting), val(language), path("${greeting}-output.txt")
+            tuple val(meta), path("${greeting}-output.txt")
 
         script:
         """
@@ -335,10 +336,10 @@ Edit `modules/greetings.nf` to remove the `publishDir` directives from both proc
         publishDir 'results/uppercase', mode: 'copy'
 
         input:
-            tuple val(greeting), val(language), path(input_file)
+            tuple val(meta), path(input_file)
 
         output:
-            tuple val(greeting), val(language), path("UPPER-${input_file}")
+            tuple val(meta), path("UPPER-${input_file}")
 
         script:
         """
@@ -377,7 +378,7 @@ Now update `main.nf` to add the `publish:` section inside the workflow:
         // Create a channel from the CSV file with metadata
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv(header: true)
-                            .map { row -> [row.greeting, row.language] }
+                            .map { row -> [[id: row.greeting, language: row.language], row.greeting] }
 
         // Create greeting files
         SAY_HELLO(greeting_ch)
@@ -413,7 +414,7 @@ Now update `main.nf` to add the `publish:` section inside the workflow:
         // Create a channel from the CSV file with metadata
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv(header: true)
-                            .map { row -> [row.greeting, row.language] }
+                            .map { row -> [[id: row.greeting, language: row.language], row.greeting] }
 
         // Create greeting files
         SAY_HELLO(greeting_ch)
@@ -453,7 +454,7 @@ Now add the `output {}` block after the workflow to configure how outputs are or
         // Create a channel from the CSV file with metadata
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv(header: true)
-                            .map { row -> [row.greeting, row.language] }
+                            .map { row -> [[id: row.greeting, language: row.language], row.greeting] }
 
         // Create greeting files
         SAY_HELLO(greeting_ch)
@@ -505,7 +506,7 @@ Now add the `output {}` block after the workflow to configure how outputs are or
         // Create a channel from the CSV file with metadata
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv(header: true)
-                            .map { row -> [row.greeting, row.language] }
+                            .map { row -> [[id: row.greeting, language: row.language], row.greeting] }
 
         // Create greeting files
         SAY_HELLO(greeting_ch)
@@ -568,12 +569,12 @@ Update the `output {}` block to use dynamic paths:
     output {
         greetings {
             mode 'copy'
-            path { greeting, language, file -> "greetings/${language}" }
+            path { meta, file -> "greetings/${meta.language}" }
         }
 
         uppercase {
             mode 'copy'
-            path { greeting, language, file -> "uppercase/${language}" }
+            path { meta, file -> "uppercase/${meta.language}" }
         }
     }
     ```
@@ -597,7 +598,8 @@ Update the `output {}` block to use dynamic paths:
     }
     ```
 
-The closure receives the elements of the output tuple (greeting, language, file) and returns the subdirectory path.
+The closure receives the elements of the output tuple (`meta` map and `file`) and returns the subdirectory path.
+Since `meta` is a map, we access fields with dot notation like `meta.language`.
 
 ### 3.2. Run with dynamic paths
 
@@ -678,17 +680,17 @@ Update the `output {}` block to generate index files:
     output {
         greetings {
             mode 'copy'
-            path { greeting, language, file -> "greetings/${language}" }
+            path { meta, file -> "greetings/${meta.language}" }
             index {
-                path 'greetings/index.csv'
+                path 'greetings/index.json'
             }
         }
 
         uppercase {
             mode 'copy'
-            path { greeting, language, file -> "uppercase/${language}" }
+            path { meta, file -> "uppercase/${meta.language}" }
             index {
-                path 'uppercase/index.csv'
+                path 'uppercase/index.json'
             }
         }
     }
@@ -703,12 +705,12 @@ Update the `output {}` block to generate index files:
     output {
         greetings {
             mode 'copy'
-            path { greeting, language, file -> "greetings/${language}" }
+            path { meta, file -> "greetings/${meta.language}" }
         }
 
         uppercase {
             mode 'copy'
-            path { greeting, language, file -> "uppercase/${language}" }
+            path { meta, file -> "uppercase/${meta.language}" }
         }
     }
     ```
@@ -725,51 +727,43 @@ nextflow run main.nf
 View the generated index file:
 
 ```bash
-cat results/greetings/index.csv
+cat results/greetings/index.json
 ```
 
 ??? example "Output"
 
-    ```csv
-    "Hello","English","/workspaces/.../results/greetings/English/Hello-output.txt"
-    "Bonjour","French","/workspaces/.../results/greetings/French/Bonjour-output.txt"
-    "Holà","Spanish","/workspaces/.../results/greetings/Spanish/Holà-output.txt"
-    "Ciao","Italian","/workspaces/.../results/greetings/Italian/Ciao-output.txt"
-    "Hallo","German","/workspaces/.../results/greetings/German/Hallo-output.txt"
+    ```json
+    [
+        [
+            {
+                "id": "Hello",
+                "language": "English"
+            },
+            "/workspaces/.../results/greetings/English/Hello-output.txt"
+        ],
+        [
+            {
+                "id": "Bonjour",
+                "language": "French"
+            },
+            "/workspaces/.../results/greetings/French/Bonjour-output.txt"
+        ]
+    ]
     ```
 
-The index file contains all the metadata from the output tuples plus the absolute path to each file.
+The index file contains the metadata map with named fields (`id`, `language`) plus the absolute path to each file.
 
-### 4.4. Using JSON format
+!!! tip "JSON works best with meta maps"
 
-You can also generate JSON index files:
-
-```groovy title="main.nf"
-greetings {
-    path { greeting, language, file -> "greetings/${language}" }
-    index {
-        path 'greetings/index.json'
-    }
-}
-```
-
-!!! tip "Use maps for named fields in index files"
-
-    Notice the CSV has no header row with field names—that's because tuples don't carry field names.
-    For named fields, use maps instead of tuples in your process outputs:
-
-    ```groovy
-    output:
-        tuple path("${greeting}-output.txt"), val([greeting: greeting, language: language])
-    ```
-
-    This produces index files with proper column headers like `greeting,language,file`.
+    We use JSON format because it properly expands the `meta` map into an object with named fields.
+    CSV format would serialize the map as a string like `"[id:Hello, language:English]"`, which is less useful.
+    You can also use YAML format by changing the file extension to `.yaml`.
 
 ### Takeaway
 
 Index files provide automatic documentation of workflow outputs:
 
-- Generated in CSV, JSON, or YAML format
+- JSON format works best with meta maps (expands to objects with named fields)
 - Include all metadata from output tuples
 - Useful for downstream pipelines and auditing
 
@@ -787,6 +781,7 @@ Let's summarize what we've learned.
 
 ```groovy
 workflow {
+    main:
     // ... process calls ...
 
     publish:
@@ -796,9 +791,9 @@ workflow {
 output {
     output_name {
         mode 'copy'
-        path { metadata -> "subdir/${metadata}" }
+        path { meta, file -> "subdir/${meta.language}" }
         index {
-            path 'index.csv'
+            path 'index.json'
         }
     }
 }
