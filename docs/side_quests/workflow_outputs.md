@@ -99,10 +99,10 @@ process SAY_HELLO {
     publishDir 'results/greetings', mode: 'copy'
 
     input:
-        val greeting
+        tuple val(greeting), val(language)
 
     output:
-        path "${greeting}-output.txt"
+        tuple val(greeting), val(language), path("${greeting}-output.txt")
 
     script:
     """
@@ -118,10 +118,10 @@ process CONVERT_TO_UPPER {
     publishDir 'results/uppercase', mode: 'copy'
 
     input:
-        path input_file
+        tuple val(greeting), val(language), path(input_file)
 
     output:
-        path "UPPER-${input_file}"
+        tuple val(greeting), val(language), path("UPPER-${input_file}")
 
     script:
     """
@@ -131,6 +131,38 @@ process CONVERT_TO_UPPER {
 ```
 
 Each process has its own `publishDir` directive that specifies where outputs should be copied.
+The processes pass metadata (greeting and language) through their channels, which we'll use later for organizing outputs.
+
+Now look at the main workflow file:
+
+```groovy title="main.nf" linenums="1"
+#!/usr/bin/env nextflow
+
+/*
+ * Pipeline parameters
+ */
+params.input = 'greetings.csv'
+
+// Include modules
+include { SAY_HELLO } from './modules/greetings.nf'
+include { CONVERT_TO_UPPER } from './modules/greetings.nf'
+
+workflow {
+
+    // Create a channel from the CSV file with metadata
+    greeting_ch = channel.fromPath(params.input)
+                        .splitCsv(header: true)
+                        .map { row -> [row.greeting, row.language] }
+
+    // Create greeting files
+    SAY_HELLO(greeting_ch)
+
+    // Convert to uppercase
+    CONVERT_TO_UPPER(SAY_HELLO.out)
+}
+```
+
+The workflow parses the CSV file and extracts both the greeting text and language into a tuple, which flows through both processes.
 
 ### 1.2. Run the workflow
 
@@ -211,13 +243,13 @@ The workflow output definition syntax uses two constructs:
 
 Let's modify our workflow to use this new syntax.
 
-First, we need to update the modules to remove `publishDir` and include metadata in the outputs.
+### 2.3. Remove publishDir from processes
 
-Edit `modules/greetings.nf` to remove the `publishDir` directives and pass through metadata:
+Edit `modules/greetings.nf` to remove the `publishDir` directives from both processes:
 
 === "After"
 
-    ```groovy title="modules/greetings.nf" linenums="1" hl_lines="10 13"
+    ```groovy title="modules/greetings.nf" linenums="1" hl_lines="5-6"
     #!/usr/bin/env nextflow
 
     /*
@@ -237,46 +269,7 @@ Edit `modules/greetings.nf` to remove the `publishDir` directives and pass throu
         echo '$greeting' > '${greeting}-output.txt'
         """
     }
-    ```
 
-=== "Before"
-
-    ```groovy title="modules/greetings.nf" linenums="1" hl_lines="8 11 14"
-    #!/usr/bin/env nextflow
-
-    /*
-     * Create a greeting file from input text
-     */
-    process SAY_HELLO {
-
-        publishDir 'results/greetings', mode: 'copy'
-
-        input:
-            val greeting
-
-        output:
-            path "${greeting}-output.txt"
-
-        script:
-        """
-        echo '$greeting' > '${greeting}-output.txt'
-        """
-    }
-    ```
-
-Notice that we:
-
-- Removed the `publishDir` directive
-- Changed the input to accept a tuple with both greeting and language
-- Changed the output to emit a tuple that includes the metadata
-
-### 2.3. Update CONVERT_TO_UPPER
-
-Similarly, update the `CONVERT_TO_UPPER` process:
-
-=== "After"
-
-    ```groovy title="modules/greetings.nf" linenums="21" hl_lines="8 11"
     /*
      * Convert greeting to uppercase
      * Note: No publishDir - outputs managed by workflow output block
@@ -298,7 +291,28 @@ Similarly, update the `CONVERT_TO_UPPER` process:
 
 === "Before"
 
-    ```groovy title="modules/greetings.nf" linenums="21" hl_lines="6 9 12"
+    ```groovy title="modules/greetings.nf" linenums="1" hl_lines="8 27"
+    #!/usr/bin/env nextflow
+
+    /*
+     * Create a greeting file from input text
+     */
+    process SAY_HELLO {
+
+        publishDir 'results/greetings', mode: 'copy'
+
+        input:
+            tuple val(greeting), val(language)
+
+        output:
+            tuple val(greeting), val(language), path("${greeting}-output.txt")
+
+        script:
+        """
+        echo '$greeting' > '${greeting}-output.txt'
+        """
+    }
+
     /*
      * Convert greeting to uppercase
      */
@@ -307,10 +321,10 @@ Similarly, update the `CONVERT_TO_UPPER` process:
         publishDir 'results/uppercase', mode: 'copy'
 
         input:
-            path input_file
+            tuple val(greeting), val(language), path(input_file)
 
         output:
-            path "UPPER-${input_file}"
+            tuple val(greeting), val(language), path("UPPER-${input_file}")
 
         script:
         """
@@ -319,13 +333,16 @@ Similarly, update the `CONVERT_TO_UPPER` process:
     }
     ```
 
-### 2.4. Update the main workflow
+The only change is removing the `publishDir` directives.
+The inputs, outputs, and script remain exactly the same.
 
-Now update `main.nf` to use the publish section and pass metadata through:
+### 2.4. Add the publish section to main.nf
+
+Now update `main.nf` to add the `publish:` section inside the workflow:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="1" hl_lines="14 17 25-28"
+    ```groovy title="main.nf" linenums="1" hl_lines="25-28"
     #!/usr/bin/env nextflow
 
     /*
@@ -359,7 +376,7 @@ Now update `main.nf` to use the publish section and pass metadata through:
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="1" hl_lines="14 17"
+    ```groovy title="main.nf" linenums="1"
     #!/usr/bin/env nextflow
 
     /*
@@ -373,10 +390,10 @@ Now update `main.nf` to use the publish section and pass metadata through:
 
     workflow {
 
-        // Create a channel from the CSV file
+        // Create a channel from the CSV file with metadata
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv(header: true)
-                            .map { row -> row.greeting }
+                            .map { row -> [row.greeting, row.language] }
 
         // Create greeting files
         SAY_HELLO(greeting_ch)
@@ -393,7 +410,7 @@ Each is assigned to the output channel of the corresponding process.
 
 Now add the `output {}` block after the workflow to configure how outputs are organized:
 
-```groovy title="main.nf" linenums="30"
+```groovy title="main.nf" linenums="31"
 /*
  * Output block defines how published outputs are organized
  */

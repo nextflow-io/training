@@ -8,10 +8,10 @@ process SAY_HELLO {
     publishDir 'results/greetings', mode: 'copy'
 
     input:
-        val greeting
+        tuple val(greeting), val(language)
 
     output:
-        path "${greeting}-output.txt"
+        tuple val(greeting), val(language), path("${greeting}-output.txt")
 
     script:
     """
@@ -27,10 +27,10 @@ process CONVERT_TO_UPPER {
     publishDir 'results/uppercase', mode: 'copy'
 
     input:
-        path input_file
+        tuple val(greeting), val(language), path(input_file)
 
     output:
-        path "UPPER-${input_file}"
+        tuple val(greeting), val(language), path("UPPER-${input_file}")
 
     script:
     """

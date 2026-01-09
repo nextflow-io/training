@@ -11,10 +11,10 @@ include { CONVERT_TO_UPPER } from './modules/greetings.nf'
 
 workflow {
 
-    // Create a channel from the CSV file
+    // Create a channel from the CSV file with metadata
     greeting_ch = channel.fromPath(params.input)
                         .splitCsv(header: true)
-                        .map { row -> row.greeting }
+                        .map { row -> [row.greeting, row.language] }
 
     // Create greeting files
     SAY_HELLO(greeting_ch)
