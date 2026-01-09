@@ -202,12 +202,15 @@ You can define custom functions directly in your Nextflow scripts, so why use pl
 | **Local functions** | Project-specific logic | Copy-paste between pipelines, no versioning |
 | **Plugins** | Reusable utilities | Requires Java/Groovy knowledge to create |
 
-Plugins are ideal when you have functions that:
+While custom functions are the most common use case, remember from section 1 that plugins can provide much more - operators, observers, executors, and filesystems.
 
-- Are useful across multiple pipelines
-- Need to be shared with the community
-- Require versioning and dependency management
-- Need access to Nextflow internals (channels, sessions, etc.)
+Plugins are ideal when you need to:
+
+- Share functionality across multiple pipelines
+- Distribute reusable code to the community
+- Version and manage dependencies properly
+- Access Nextflow internals (channels, sessions, lifecycle events, etc.)
+- Integrate with external infrastructure (cloud platforms, storage systems)
 
 !!! tip "This is the most important section for most users"
 
