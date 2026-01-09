@@ -2026,11 +2026,24 @@ Pipeline complete! 👋
 📈 Final task count: 5
 ```
 
-### 9.4. Advanced extension types (conceptual)
+### Takeaway
 
-Some extension types require significant infrastructure or deep Nextflow knowledge to implement:
+Plugins can read configuration using `session.config.navigate()`, letting users customize behavior without modifying code.
 
-**Channel factories** create new ways to generate channels:
+### What's next?
+
+Let's briefly cover some advanced extension types, then look at how to share your plugin.
+
+---
+
+## 10. Advanced extension types
+
+Some extension types require significant infrastructure or deep Nextflow knowledge to implement.
+This section provides a conceptual overview - for implementation details, see the [Nextflow plugin documentation](https://www.nextflow.io/docs/latest/plugins/developing-plugins.html).
+
+### 10.1. Channel factories
+
+Channel factories create new ways to generate channels:
 
 ```groovy
 // Hypothetical channel factory
@@ -2040,24 +2053,25 @@ channel.fromDatabase('SELECT * FROM samples')
 The nf-schema plugin uses this pattern for `samplesheetToList()`.
 Creating channel factories requires deep understanding of Nextflow internals.
 
-**Executors** define how tasks are submitted to compute resources:
+### 10.2. Executors
+
+Executors define how tasks are submitted to compute resources:
 
 - AWS Batch, Google Cloud Batch, Azure Batch
 - Kubernetes, SLURM, PBS, LSF
 - Creating a custom executor is complex and typically done by platform vendors
 
-**Filesystems** define how files are accessed:
+### 10.3. Filesystems
+
+Filesystems define how files are accessed:
 
 - S3, Google Cloud Storage, Azure Blob
 - Custom storage systems
 - Creating a custom filesystem requires implementing Java NIO interfaces
 
-These are documented in the [Nextflow plugin documentation](https://www.nextflow.io/docs/latest/plugins/developing-plugins.html) for advanced users.
-
 ### Takeaway
 
-Plugins can read configuration using `session.config.navigate()`, letting users customize behavior without modifying code.
-Channel factories, executors, and filesystems are advanced extension types that require deeper Nextflow knowledge.
+Channel factories, executors, and filesystems are advanced extension types typically created by platform vendors or for specialized infrastructure needs.
 
 ### What's next?
 
@@ -2065,7 +2079,7 @@ Let's look at how to share your plugin with others.
 
 ---
 
-## 10. Publishing your plugin
+## 11. Publishing your plugin
 
 Once your plugin is working locally, you can share it with the Nextflow community through the [plugin registry](https://registry.nextflow.io/).
 
@@ -2083,7 +2097,7 @@ graph TD
     The Nextflow plugin registry is currently in public preview.
     See the [Nextflow documentation](https://www.nextflow.io/docs/latest/guides/gradle-plugin.html#publishing-a-plugin) for the latest details.
 
-### 10.1. Claim your plugin name
+### 11.1. Claim your plugin name
 
 Before publishing, claim your plugin name in the registry:
 
@@ -2093,7 +2107,7 @@ Before publishing, claim your plugin name in the registry:
 
 You can claim a name before the plugin exists - this reserves it for you.
 
-### 10.2. Configure API credentials
+### 11.2. Configure API credentials
 
 Create a Gradle properties file to store your registry credentials:
 
@@ -2112,7 +2126,7 @@ npr.apiKey=YOUR_API_KEY_HERE
     Don't commit this file to version control.
     The `~/.gradle/` directory is outside your project, so it won't be included in your repository.
 
-### 10.3. Prepare for release
+### 11.3. Prepare for release
 
 Before publishing, ensure your plugin is ready:
 
@@ -2124,7 +2138,7 @@ Before publishing, ensure your plugin is ready:
 version = '1.0.0'  // Use semantic versioning: MAJOR.MINOR.PATCH
 ```
 
-### 10.4. Publish to the registry
+### 11.4. Publish to the registry
 
 Run the release command from your plugin directory:
 
@@ -2145,7 +2159,7 @@ This builds the plugin and publishes it to the registry in one step.
     4. Uploads to the Nextflow plugin registry
     5. Makes it available for users to install
 
-### 10.5. Using published plugins
+### 11.5. Using published plugins
 
 Once published, users can install your plugin without any local setup:
 
@@ -2158,7 +2172,7 @@ plugins {
 
 Nextflow automatically downloads the plugin from the registry on first use.
 
-### 10.6. Versioning best practices
+### 11.6. Versioning best practices
 
 Follow semantic versioning for your releases:
 
@@ -2168,7 +2182,7 @@ Follow semantic versioning for your releases:
 | **MINOR** (1.0.0 → 1.1.0) | New features, backward compatible | Adding a new function                      |
 | **PATCH** (1.0.0 → 1.0.1) | Bug fixes, backward compatible    | Fixing a bug in existing function          |
 
-### 10.7. Distributing plugins internally
+### 11.7. Distributing plugins internally
 
 Organizations may need to distribute plugins internally without using the public registry.
 Use the `NXF_PLUGINS_TEST_REPOSITORY` environment variable to point Nextflow at an internal plugin repository.
