@@ -1561,7 +1561,7 @@ Now test the operator by editing `main.nf` to use it:
 
 === "After"
 
-    ```groovy hl_lines="6 34-36"
+    ```groovy linenums="1" hl_lines="6 29-32"
     #!/usr/bin/env nextflow
 
     // Import custom functions from our plugin
@@ -1572,23 +1572,20 @@ Now test the operator by editing `main.nf` to use it:
     params.input = 'greetings.csv'
 
     process SAY_HELLO {
-
         input:
             val greeting
 
         output:
-            path "${greeting}-output.txt"
+            stdout
 
         script:
-        // Use our custom plugin function to decorate the greeting
         def decorated = decorateGreeting(greeting)
         """
-        echo '$decorated' > '${greeting}-output.txt'
+        echo '$decorated'
         """
     }
 
     workflow {
-
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv(header: true)
                             .map { row -> row.greeting }
@@ -1598,14 +1595,13 @@ Now test the operator by editing `main.nf` to use it:
             .shoutAll()
             .view { shouted -> "SHOUTED: $shouted" }
 
-        // Demonstrate using reverseGreeting function
         greeting_ch
             .map { greeting -> reverseGreeting(greeting) }
             .view { reversed -> "Reversed: $reversed" }
 
         SAY_HELLO(greeting_ch)
 
-        SAY_HELLO.out.view()
+        SAY_HELLO.out.view { result -> "Decorated: ${result.trim()}" }
     }
     ```
 
@@ -1620,7 +1616,33 @@ Now test the operator by editing `main.nf` to use it:
 
     params.input = 'greetings.csv'
 
-    // ... rest of file unchanged
+    process SAY_HELLO {
+        input:
+            val greeting
+
+        output:
+            stdout
+
+        script:
+        def decorated = decorateGreeting(greeting)
+        """
+        echo '$decorated'
+        """
+    }
+
+    workflow {
+        greeting_ch = channel.fromPath(params.input)
+                            .splitCsv(header: true)
+                            .map { row -> row.greeting }
+
+        greeting_ch
+            .map { greeting -> reverseGreeting(greeting) }
+            .view { reversed -> "Reversed: $reversed" }
+
+        SAY_HELLO(greeting_ch)
+
+        SAY_HELLO.out.view { result -> "Decorated: ${result.trim()}" }
+    }
     ```
 
 Run it:
