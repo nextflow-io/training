@@ -1,37 +1,43 @@
+---
+title: Environment options
+description: Options for setting up your environment for the Nextflow trainings
+hide:
+  - toc
+  - footer
+---
+
 # Environment options
 
 Our goal is to provide a consistent and thoroughly tested environment that allows learners to focus on learning Nextflow without having to spend time and effort on managing software.
 To that end, we have developed a containerized environment that contains all the necessary software, code files and example data to work through all of our courses.
 
-This containerized environment can be run out of the box on [Github Codespaces](01_setup.md) or in any other custom environment that supports [devcontainers](./03_devcontainer.md).
+This containerized environment can be run out of the box on Github Codespaces or locally in VS Code with the Devcontainers extension.
 
 <div class="grid cards" markdown>
 
--   :material-forum-outline:{ .lg .middle } __Github Codespaces__
+-   :octicons-codespaces-16:{ .lg .middle } __Github Codespaces__
 
     ---
 
-    short blurb
+    GitHub Codespaces is a web-based platform that allows us to provide a pre-configured environment for training, backed by virtual machines in the cloud. It is accessible for free to anyone with a Github account.
 
     [Use Github Codespaces:material-arrow-right:](01_setup.md){ .md-button .md-button--primary .mt-1 }
 
--   :material-slack:{ .lg .middle } __VS Code with Devcontainers__
+-   :material-laptop:{ .lg .middle } __VS Code with Devcontainers__
 
     ---
 
     short blurb
 
-    [Use VS Code with Devcontainers :material-arrow-right:](https://www.nextflow.io/slack-invite.html){ .md-button .md-button--primary .mt-1 }
+    [Use Devcontainers locally :material-arrow-right:](03_devcontainer.md){ .md-button .md-button--primary .mt-1 }
 
 </div>
 
 ## Instructions for manual installation
 
-If neither of the options above suit your needs, you can replicate this environment on your own local system by installing the software dependencies manually and cloning the training repository, as detailed [here](02_local.md).
+If neither of the options above suit your needs, you can replicate this environment on your own local system by installing the software dependencies manually and cloning the training repository.
 
-!!! warning
-
-    Many of our courses require a working internet connection by default, but in most cases it is possible to pre-download or cache everything locally if necessary.
+[Manual installation :material-arrow-right:](02_local.md){ .md-button .md-button--primary .mt-1 }
 
 ---
 
