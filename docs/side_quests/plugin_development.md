@@ -161,10 +161,10 @@ Nextflow has a growing ecosystem of plugins that extend its functionality.
 
 You can define custom functions directly in your Nextflow scripts, so why use plugins?
 
-| Approach | Best for | Limitations |
-| -------- | -------- | ----------- |
+| Approach            | Best for               | Limitations                                 |
+| ------------------- | ---------------------- | ------------------------------------------- |
 | **Local functions** | Project-specific logic | Copy-paste between pipelines, no versioning |
-| **Plugins** | Reusable utilities | Requires Java/Groovy knowledge to create |
+| **Plugins**         | Reusable utilities     | Requires Java/Groovy knowledge to create    |
 
 While custom functions are the most common use case, remember from section 1 that plugins can provide much more - operators, observers, executors, and filesystems.
 
@@ -1128,14 +1128,14 @@ cat nf-greeting/src/main/groovy/training/plugin/NfGreetingObserver.groovy
 This observer hooks into workflow lifecycle events.
 Trace observers can respond to many events:
 
-| Method | When it's called |
-| ------ | ---------------- |
-| `onFlowCreate` | Workflow starts |
-| `onFlowComplete` | Workflow finishes |
-| `onProcessStart` | A task begins execution |
-| `onProcessComplete` | A task finishes |
-| `onProcessCached` | A cached task is reused |
-| `onFilePublish` | A file is published |
+| Method              | When it's called        |
+| ------------------- | ----------------------- |
+| `onFlowCreate`      | Workflow starts         |
+| `onFlowComplete`    | Workflow finishes       |
+| `onProcessStart`    | A task begins execution |
+| `onProcessComplete` | A task finishes         |
+| `onProcessCached`   | A cached task is reused |
+| `onFilePublish`     | A file is published     |
 
 This enables powerful use cases like custom reports, Slack notifications, or metrics collection.
 
@@ -1747,11 +1747,11 @@ Nextflow automatically downloads the plugin from the registry on first use.
 
 Follow semantic versioning for your releases:
 
-| Version change | When to use | Example |
-| -------------- | ----------- | ------- |
-| **MAJOR** (1.0.0 → 2.0.0) | Breaking changes | Removing a function, changing return types |
-| **MINOR** (1.0.0 → 1.1.0) | New features, backward compatible | Adding a new function |
-| **PATCH** (1.0.0 → 1.0.1) | Bug fixes, backward compatible | Fixing a bug in existing function |
+| Version change            | When to use                       | Example                                    |
+| ------------------------- | --------------------------------- | ------------------------------------------ |
+| **MAJOR** (1.0.0 → 2.0.0) | Breaking changes                  | Removing a function, changing return types |
+| **MINOR** (1.0.0 → 1.1.0) | New features, backward compatible | Adding a new function                      |
+| **PATCH** (1.0.0 → 1.0.1) | Bug fixes, backward compatible    | Fixing a bug in existing function          |
 
 ### Takeaway
 
