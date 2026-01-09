@@ -1657,29 +1657,102 @@ Let's look at how to share your plugin with others.
 
 ## 10. Publishing your plugin
 
-To share your plugin with others:
-
-1. Build a release: `make release`
-2. Push to GitHub with a release tag
-3. Register with the Nextflow plugin registry
-
-Once published, users can install without local builds:
-
-```groovy
-plugins {
-    id 'nf-greeting'  // No version needed for registry plugins
-}
-```
+Once your plugin is working locally, you can share it with the Nextflow community through the [plugin registry](https://registry.nextflow.io/).
 
 !!! tip "Plugin registry"
 
-    The Nextflow plugin registry is in public preview.
-    See the [Nextflow documentation](https://www.nextflow.io/docs/latest/plugins/publishing-plugins.html) for publishing details.
+    The Nextflow plugin registry is currently in public preview.
+    See the [Nextflow documentation](https://www.nextflow.io/docs/latest/guides/gradle-plugin.html#publishing-a-plugin) for the latest details.
+
+### 10.1. Claim your plugin name
+
+Before publishing, claim your plugin name in the registry:
+
+1. Go to the [Nextflow plugin registry](https://registry.nextflow.io/)
+2. Sign in with your GitHub account
+3. Claim your plugin name (e.g., `nf-greeting`)
+
+You can claim a name before the plugin exists - this reserves it for you.
+
+### 10.2. Configure API credentials
+
+Create a Gradle properties file to store your registry credentials:
+
+```bash
+touch ~/.gradle/gradle.properties
+```
+
+Add your API key (obtain this from the registry after signing in):
+
+```properties title="~/.gradle/gradle.properties"
+npr.apiKey=YOUR_API_KEY_HERE
+```
+
+!!! warning "Keep your API key secret"
+
+    Don't commit this file to version control.
+    The `~/.gradle/` directory is outside your project, so it won't be included in your repository.
+
+### 10.3. Prepare for release
+
+Before publishing, ensure your plugin is ready:
+
+1. **Update the version** in `build.gradle` (use [semantic versioning](https://semver.org/))
+2. **Run tests** to ensure everything works: `make test`
+3. **Update documentation** in your README
+
+```groovy title="build.gradle"
+version = '1.0.0'  // Use semantic versioning: MAJOR.MINOR.PATCH
+```
+
+### 10.4. Publish to the registry
+
+Run the release command from your plugin directory:
+
+```bash
+cd nf-greeting
+make release
+```
+
+This builds the plugin and publishes it to the registry in one step.
+
+??? info "What `make release` does"
+
+    The `make release` command runs `./gradlew publishPlugin`, which:
+
+    1. Compiles your plugin code
+    2. Runs tests
+    3. Packages the plugin as a JAR file
+    4. Uploads to the Nextflow plugin registry
+    5. Makes it available for users to install
+
+### 10.5. Using published plugins
+
+Once published, users can install your plugin without any local setup:
+
+```groovy title="nextflow.config"
+plugins {
+    id 'nf-greeting'        // Latest version
+    id 'nf-greeting@1.0.0'  // Specific version (recommended)
+}
+```
+
+Nextflow automatically downloads the plugin from the registry on first use.
+
+### 10.6. Versioning best practices
+
+Follow semantic versioning for your releases:
+
+| Version change | When to use | Example |
+| -------------- | ----------- | ------- |
+| **MAJOR** (1.0.0 → 2.0.0) | Breaking changes | Removing a function, changing return types |
+| **MINOR** (1.0.0 → 1.1.0) | New features, backward compatible | Adding a new function |
+| **PATCH** (1.0.0 → 1.0.1) | Bug fixes, backward compatible | Fixing a bug in existing function |
 
 ### Takeaway
 
-Publishing to the plugin registry makes your plugin available to the entire Nextflow community.
-Use semantic versioning and include good documentation.
+Publishing involves claiming your plugin name, configuring API credentials, and running `make release`.
+Use semantic versioning to communicate changes to users.
 
 ### What's next?
 
