@@ -6,7 +6,7 @@ process TRIMGALORE {
 
     output:
     tuple val(meta), path("*_trimmed*.fq"), emit: reads
-    path "*_trimming_report.txt"                   , emit: reports
+    path "*_trimming_report.txt", emit: reports
 
     script:
     // Simple single-end vs paired-end detection
@@ -16,17 +16,18 @@ process TRIMGALORE {
         def input_file = reads instanceof List ? reads[0] : reads
         """
         trim_galore \\
-            --cores $task.cpus \\
+            --cores ${task.cpus} \\
             ${input_file}
 
         # Rename output to match expected pattern
         mv *_trimmed.fq ${meta.id}_trimmed.fq
         """
-    } else {
+    }
+    else {
         """
         trim_galore \\
             --paired \\
-            --cores $task.cpus \\
+            --cores ${task.cpus} \\
             ${reads[0]} ${reads[1]}
 
         # Rename outputs to match expected pattern

@@ -10,9 +10,9 @@
 
 workflow UTILS_NEXTFLOW_PIPELINE {
     take:
-    print_version        // boolean: print version
-    dump_parameters      // boolean: dump parameters
-    outdir               //    path: base directory used to publish pipeline results
+    print_version // boolean: print version
+    dump_parameters // boolean: dump parameters
+    outdir //    path: base directory used to publish pipeline results
     check_conda_channels // boolean: check conda channels
 
     main:
@@ -72,10 +72,10 @@ def getWorkflowVersion() {
 //
 def dumpParametersToJSON(outdir) {
     def timestamp = new java.util.Date().format('yyyy-MM-dd_HH-mm-ss')
-    def filename  = "params_${timestamp}.json"
-    def temp_pf   = new File(workflow.launchDir.toString(), ".${filename}")
-    def jsonStr   = groovy.json.JsonOutput.toJson(params)
-    temp_pf.text  = groovy.json.JsonOutput.prettyPrint(jsonStr)
+    def filename = "params_${timestamp}.json"
+    def temp_pf = new File(workflow.launchDir.toString(), ".${filename}")
+    def jsonStr = groovy.json.JsonOutput.toJson(params)
+    temp_pf.text = groovy.json.JsonOutput.prettyPrint(jsonStr)
 
     nextflow.extension.FilesEx.copyTo(temp_pf.toPath(), "${outdir}/pipeline_info/params_${timestamp}.json")
     temp_pf.delete()
@@ -91,12 +91,12 @@ def checkCondaChannels() {
         def config = parser.load("conda config --show channels".execute().text)
         channels = config.channels
     }
-    catch (NullPointerException e) {
+    catch (e: NullPointerException) {
         log.debug(e)
         log.warn("Could not verify conda channel configuration.")
         return null
     }
-    catch (IOException e) {
+    catch (e: IOException) {
         log.debug(e)
         log.warn("Could not verify conda channel configuration.")
         return null
@@ -111,7 +111,8 @@ def checkCondaChannels() {
     def channel_priority_violation = required_channels_in_order != channels.findAll { ch -> ch in required_channels_in_order }
 
     if (channels_missing | channel_priority_violation) {
-        log.warn """\
+        log.warn(
+            """\
         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
             There is a problem with your Conda configuration!
             You will need to set-up the conda-forge and bioconda channels correctly.
@@ -122,5 +123,6 @@ def checkCondaChannels() {
             ${required_channels_in_order}
         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
         """.stripIndent(true)
+        )
     }
 }

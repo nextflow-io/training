@@ -13,9 +13,9 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-include { MYFIRSTPIPELINE  } from './workflows/myfirstpipeline'
+include { MYFIRSTPIPELINE } from './workflows/myfirstpipeline'
 include { PIPELINE_INITIALISATION } from './subworkflows/local/utils_nfcore_myfirstpipeline_pipeline'
-include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_myfirstpipeline_pipeline'
+include { PIPELINE_COMPLETION } from './subworkflows/local/utils_nfcore_myfirstpipeline_pipeline'
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     NAMED WORKFLOWS FOR PIPELINE
@@ -26,7 +26,6 @@ include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_myfi
 // WORKFLOW: Run main analysis pipeline depending on type of input
 //
 workflow MYORG_MYFIRSTPIPELINE {
-
     take:
     samplesheet // channel: samplesheet read in from --input
 
@@ -35,9 +34,10 @@ workflow MYORG_MYFIRSTPIPELINE {
     //
     // WORKFLOW: Run pipeline
     //
-    MYFIRSTPIPELINE (
+    MYFIRSTPIPELINE(
         samplesheet
     )
+
     emit:
     multiqc_report = MYFIRSTPIPELINE.out.multiqc_report // channel: /path/to/multiqc_report.html
 }
@@ -48,38 +48,30 @@ workflow MYORG_MYFIRSTPIPELINE {
 */
 
 workflow {
-
-    main:
     //
     // SUBWORKFLOW: Run initialisation tasks
     //
-    PIPELINE_INITIALISATION (
+    PIPELINE_INITIALISATION(
         params.version,
         params.validate_params,
         params.monochrome_logs,
         args,
         params.outdir,
-        params.input
+        params.input,
     )
 
     //
     // WORKFLOW: Run main workflow
     //
-    MYORG_MYFIRSTPIPELINE (
+    MYORG_MYFIRSTPIPELINE(
         PIPELINE_INITIALISATION.out.samplesheet
     )
     //
     // SUBWORKFLOW: Run completion tasks
     //
-    PIPELINE_COMPLETION (
+    PIPELINE_COMPLETION(
         params.outdir,
         params.monochrome_logs,
-        MYORG_MYFIRSTPIPELINE.out.multiqc_report
+        MYORG_MYFIRSTPIPELINE.out.multiqc_report,
     )
 }
-
-/*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    THE END
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/
