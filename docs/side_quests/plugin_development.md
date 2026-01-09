@@ -63,13 +63,13 @@ For plugin development sections (3 onwards):
 
 ## 0. Get started
 
-#### Open the training codespace
+### 0.1. Open the training codespace
 
 If you haven't yet done so, make sure to open the training environment as described in the [Environment Setup](../envsetup/index.md).
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
-#### Verify Java installation
+### 0.2. Verify Java installation
 
 Check that Java is available:
 
@@ -79,13 +79,13 @@ java -version
 
 You should see Java 17 or later.
 
-#### Move into the project directory
+### 0.3. Move into the project directory
 
 ```bash
 cd side-quests/plugin_development
 ```
 
-#### Review the materials
+### 0.4. Review the materials
 
 ```console title="Directory contents"
 .
@@ -97,12 +97,12 @@ cd side-quests/plugin_development
 
 We have a simple greeting pipeline and materials for both using and developing plugins.
 
-#### What we'll cover
+### 0.5. What we'll cover
 
 1. **Using plugins** (sections 1-2): Understand plugin architecture and use existing plugins like `nf-hello`
 2. **Building a plugin** (sections 3-10): Create `nf-greeting` with custom functions, operators, and observers
 
-#### Readiness checklist
+### 0.6. Readiness checklist
 
 - [ ] My codespace is running
 - [ ] Java is installed (required for plugin development sections)
@@ -1840,16 +1840,14 @@ Now update `nextflow.config` to disable the per-task messages:
 
 === "After"
 
-    ```groovy title="nextflow.config" linenums="1" hl_lines="5-10"
+    ```groovy title="nextflow.config" linenums="1" hl_lines="5-7"
     plugins {
         id 'nf-greeting@0.1.0'
     }
 
     greeting {
-        // enabled = false     // Disable plugin entirely
-        taskCounter {
-            verbose = false    // Disable per-task messages
-        }
+        // enabled = false        // Disable plugin entirely
+        taskCounter.verbose = false  // Disable per-task messages
     }
     ```
 
