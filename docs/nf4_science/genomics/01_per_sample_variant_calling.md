@@ -58,11 +58,27 @@ We're going to pull down a Samtools container, spin it up interactively and run 
 docker pull community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464
 ```
 
+<!--
+??? success "Command output"
+
+    ```console
+
+    ```
+-->
+
 #### 0.1.2. Spin up the Samtools container interactively
 
 ```bash
 docker run -it -v ./data:/data community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464
 ```
+
+<!--
+??? success "Command output"
+
+    ```console
+
+    ```
+-->
 
 #### 0.1.3. Run the indexing command
 
@@ -100,11 +116,27 @@ We're going to pull down a GATK container, spin it up interactively and run the 
 docker pull community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867
 ```
 
+<!--
+??? success "Command output"
+
+    ```console
+
+    ```
+-->
+
 #### 0.2.2. Spin up the GATK container interactively
 
 ```bash
 docker run -it -v ./data:/data community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867
 ```
+
+<!--
+??? success "Command output"
+
+    ```console
+
+    ```
+-->
 
 #### 0.2.3. Run the variant calling command
 
@@ -122,6 +154,14 @@ gatk HaplotypeCaller \
         -O reads_mother.vcf \
         -L /data/ref/intervals.bed
 ```
+
+<!--
+??? success "Command output"
+
+    ```console
+
+    ```
+-->
 
 The output file `reads_mother.vcf` is created inside your working directory in the container, so you won't see it in the VS Code file explorer unless you change the output file path.
 However, it's a small test file, so you can `cat` it to open it and view the contents.
@@ -175,10 +215,10 @@ process SAMTOOLS_INDEX {
     publishDir params.outdir, mode: 'symlink'
 
     input:
-        path input_bam
+    path input_bam
 
     output:
-        path "${input_bam}.bai"
+    path "${input_bam}.bai"
 
     script:
     """
@@ -204,10 +244,14 @@ That way, we can be lazy and not specify the input when we type the command to l
 /*
  * Pipeline parameters
  */
+params {
+    // Primary input
+    reads_bam: Path = "${projectDir}/data/bam/reads_mother.bam"
 
-// Primary input
-params.reads_bam = "${projectDir}/data/bam/reads_mother.bam"
-params.outdir    = "results_genomics"
+    // Output directory
+    outdir: String = "results_genomics"
+}
+
 ```
 
 Now we have a process ready, as well as a parameter to give it an input to run on, so let's wire those things up together.
@@ -247,16 +291,16 @@ Let's run the workflow! As a reminder, we don't need to specify an input in the 
 nextflow run genomics-1.nf
 ```
 
-The command should produce something like this:
+??? success "Command output"
 
-```console title="Output"
- N E X T F L O W   ~  version 24.10.0
+    ```console
+    N E X T F L O W   ~  version 25.10.2
 
- ┃ Launching `genomics-1.nf` [reverent_sinoussi] DSL2 - revision: 41d43ad7fe
+    ┃ Launching `genomics-1.nf` [reverent_sinoussi] DSL2 - revision: 41d43ad7fe
 
-executor >  local (1)
-[2a/e69536] SAMTOOLS_INDEX (1) | 1 of 1 ✔
-```
+    executor >  local (1)
+    [2a/e69536] SAMTOOLS_INDEX (1) | 1 of 1 ✔
+    ```
 
 You can check that the index file has been generated correctly by looking in the work directory or in the directory set up with `publishDir`.
 
@@ -302,16 +346,16 @@ process GATK_HAPLOTYPECALLER {
     publishDir params.outdir, mode: 'symlink'
 
     input:
-        path input_bam
-        path input_bam_index
-        path ref_fasta
-        path ref_index
-        path ref_dict
-        path interval_list
+    path input_bam
+    path input_bam_index
+    path ref_fasta
+    path ref_index
+    path ref_dict
+    path interval_list
 
     output:
-        path "${input_bam}.vcf"     , emit: vcf
-        path "${input_bam}.vcf.idx" , emit: idx
+    path "${input_bam}.vcf"     , emit: vcf
+    path "${input_bam}.vcf.idx" , emit: idx
 
     script:
     """
@@ -343,25 +387,25 @@ Similarly, we have to list the output VCF's index file (the `"${input_bam}.vcf.i
 Since our new process expects a handful of additional files to be provided, we set up some CLI parameters for them under the `Pipeline parameters` section, along with some default values (same reasons as before).
 
 ```groovy title="genomics-1.nf" linenums="10"
-// Accessory files
-params.reference        = "${projectDir}/data/ref/ref.fasta"
-params.reference_index  = "${projectDir}/data/ref/ref.fasta.fai"
-params.reference_dict   = "${projectDir}/data/ref/ref.dict"
-params.intervals        = "${projectDir}/data/ref/intervals.bed"
+    // Accessory files
+    reference: Path = "${projectDir}/data/ref/ref.fasta"
+    reference_index: Path = "${projectDir}/data/ref/ref.fasta.fai"
+    reference_dict: Path = "${projectDir}/data/ref/ref.dict"
+    intervals: Path = "${projectDir}/data/ref/intervals.bed"
 ```
 
 ### 2.3. Create variables to hold the accessory file paths
 
-While main data inputs are streamed dynamically through channels, there are two approaches for handling accessory files. The recommended approach is to create explicit channels, which makes data flow clearer and more consistent. Alternatively, the file() function to create variables can be used for simpler cases, particularly when you need to reference the same file in multiple processes - though be aware this still creates channels implicitly.
+While main data inputs are streamed dynamically through channels, there are two approaches for handling accessory files. The recommended approach is to create explicit channels, which makes data flow clearer and more consistent. Alternatively, the file() function to create variables can be used for simpler cases, particularly when you need to reference the same file in multiple processes - though be aware this still creates channels implicitly. <!-- TODO: Clarify: is this still necessary with typed inputs? -->
 
 Add this to the workflow block (after the `reads_ch` creation):
 
 ```groovy title="genomics-1.nf" linenums="71"
-// Load the file paths for the accessory files (reference and intervals)
-ref_file        = file(params.reference)
-ref_index_file  = file(params.reference_index)
-ref_dict_file   = file(params.reference_dict)
-intervals_file  = file(params.intervals)
+    // Load the file paths for the accessory files (reference and intervals)
+    ref_file        = file(params.reference)
+    ref_index_file  = file(params.reference_index)
+    ref_dict_file   = file(params.reference_dict)
+    intervals_file  = file(params.intervals)
 ```
 
 This will make the accessory file paths available for providing as input to any processes that need them.
@@ -372,14 +416,14 @@ Now that we've got our second process set up and all the inputs and accessory fi
 
 ```groovy title="genomics-1.nf" linenums="80"
 // Call variants from the indexed BAM file
-GATK_HAPLOTYPECALLER(
-    reads_ch,
-    SAMTOOLS_INDEX.out,
-    ref_file,
-    ref_index_file,
-    ref_dict_file,
-    intervals_file
-)
+    GATK_HAPLOTYPECALLER(
+        reads_ch,
+        SAMTOOLS_INDEX.out,
+        ref_file,
+        ref_index_file,
+        ref_dict_file,
+        intervals_file
+    )
 ```
 
 You should recognize the `*.out` syntax from Part 1 of this training series; we are telling Nextflow to take the channel output by `SAMTOOLS_INDEX` and plugging that into the `GATK_HAPLOTYPECALLER` process call.
@@ -397,17 +441,19 @@ Let's run the expanded workflow with `-resume` so that we don't have to run the 
 nextflow run genomics-1.nf -resume
 ```
 
-Now if we look at the console output, we see the two processes listed:
+??? success "Command output"
 
-```console title="Output"
- N E X T F L O W   ~  version 24.10.0
+    ```console
+    N E X T F L O W   ~  version 25.10.2
 
- ┃ Launching `genomics-1.nf` [grave_volta] DSL2 - revision: 4790abc96a
+    ┃ Launching `genomics-1.nf` [grave_volta] DSL2 - revision: 4790abc96a
 
-executor >  local (1)
-[2a/e69536] SAMTOOLS_INDEX (1)       | 1 of 1, cached: 1 ✔
-[53/e18e98] GATK_HAPLOTYPECALLER (1) | 1 of 1 ✔
-```
+    executor >  local (1)
+    [2a/e69536] SAMTOOLS_INDEX (1)       | 1 of 1, cached: 1 ✔
+    [53/e18e98] GATK_HAPLOTYPECALLER (1) | 1 of 1 ✔
+    ```
+
+Now if we look at the console output, we see the two processes listed.
 
 The first process was skipped thanks to the caching, as expected, whereas the second process was run since it's brand new.
 
@@ -455,19 +501,19 @@ Let's turn that default file path in the input BAM file declaration into an arra
 _Before:_
 
 ```groovy title="genomics-1.nf" linenums="7"
-// Primary input
-params.reads_bam = "${projectDir}/data/bam/reads_mother.bam"
+    // Primary input
+    reads_bam: Path = "${projectDir}/data/bam/reads_mother.bam"
 ```
 
 _After:_
 
 ```groovy title="genomics-1.nf" linenums="7"
 // Primary input (array of three samples)
-params.reads_bam = [
-    "${projectDir}/data/bam/reads_mother.bam",
-    "${projectDir}/data/bam/reads_father.bam",
-    "${projectDir}/data/bam/reads_son.bam"
-]
+    reads_bam: Path = [
+        "${projectDir}/data/bam/reads_mother.bam",
+        "${projectDir}/data/bam/reads_father.bam",
+        "${projectDir}/data/bam/reads_son.bam"
+    ]
 ```
 
 And that's actually all we need to do, because the channel factory we use in the workflow body (`.fromPath`) is just as happy to accept multiple file paths to load into the input channel as it was to load a single one.
@@ -485,35 +531,46 @@ Let's try running the workflow now that the plumbing is set up to run on all thr
 nextflow run genomics-1.nf -resume
 ```
 
-Funny thing: this _might work_, OR it _might fail_.
+Funny thing: this _might work_, OR it _might fail_. For example, here's a run that succeeded:
+
+??? success "Command output"
+
+    ```console
+    <!-- TODO: output -->
+    ```
+
 If your workflow run succeeded, run it again until you get an error like this:
 
-```console title="Output"
- N E X T F L O W   ~  version 24.10.0
+??? failure "Command output"
 
- ┃ Launching `genomics-1.nf` [loving_pasteur] DSL2 - revision: d2a8e63076
+    ```console
+    N E X T F L O W   ~  version 25.10.2
 
-executor >  local (4)
-[01/eea165] SAMTOOLS_INDEX (2)       | 3 of 3, cached: 1 ✔
-[a5/fa9fd0] GATK_HAPLOTYPECALLER (3) | 1 of 3, cached: 1
-ERROR ~ Error executing process > 'GATK_HAPLOTYPECALLER (2)'
+    ┃ Launching `genomics-1.nf` [loving_pasteur] DSL2 - revision: d2a8e63076
 
-Caused by:
-  Process `GATK_HAPLOTYPECALLER (2)` terminated with an error exit status (2)
+    executor >  local (4)
+    [01/eea165] SAMTOOLS_INDEX (2)       | 3 of 3, cached: 1 ✔
+    [a5/fa9fd0] GATK_HAPLOTYPECALLER (3) | 1 of 3, cached: 1
+    ERROR ~ Error executing process > 'GATK_HAPLOTYPECALLER (2)'
 
-Command executed:
+    Caused by:
+      Process `GATK_HAPLOTYPECALLER (2)` terminated with an error exit status (2)
 
-  gatk HaplotypeCaller         -R ref.fasta         -I reads_father.bam         -O reads_father.bam.vcf         -L intervals.bed         -ERC GVCF
+    Command executed:
 
-Command exit status:
-  2
+      gatk HaplotypeCaller         -R ref.fasta         -I reads_father.bam         -O reads_father.bam.vcf         -L intervals.bed         -ERC GVCF
 
-Command error:
-```
+    Command exit status:
+      2
 
-Further down, buried in the GATK command error output, there will be a line like this:
+    Command error:
+    ```
 
-```console title="Output"
+<!-- TODO: full output -->
+
+If you look at the GATK command error output, there will be a line like this:
+
+```console
 A USER ERROR has occurred: Traversal by intervals was requested but some input files are not indexed.
 ```
 
@@ -555,12 +612,28 @@ Then run the workflow command again.
 nextflow run genomics-1.nf
 ```
 
+Once again, this may succeed or fail. Here's a successful run:
+
+??? success "Command output"
+
+    ```console
+    <!-- TODO: output -->
+    ```
+
+And here's a failed one:
+
+??? failure "Command output"
+
+    ```console
+    <!-- TODO: output -->
+    ```
+
 You may need to run it several times for it to fail again.
 This error will not reproduce consistently because it is dependent on some variability in the execution times of the individual process calls.
 
 This is what the output of the two `.view()` calls we added looks like for a failed run:
 
-```console title="Output"
+```console
 /workspaces/training/nf4-science/genomics/data/bam/reads_mother.bam
 /workspaces/training/nf4-science/genomics/data/bam/reads_father.bam
 /workspaces/training/nf4-science/genomics/data/bam/reads_son.bam
@@ -600,14 +673,14 @@ First, let's change the output of the `SAMTOOLS_INDEX` process to include the BA
 _Before:_
 
 ```groovy title="genomics-1.nf" linenums="32"
-output:
+    output:
     path "${input_bam}.bai"
 ```
 
 _After:_
 
 ```groovy title="genomics-1.nf" linenums="32"
-output:
+    output:
     tuple path(input_bam), path("${input_bam}.bai")
 ```
 
@@ -622,7 +695,7 @@ Specifically, where we previously declared two separate input paths in the input
 _Before:_
 
 ```groovy title="genomics-1.nf" linenums="49"
-input:
+    input:
     path input_bam
     path input_bam_index
 ```
@@ -630,7 +703,7 @@ input:
 _After:_
 
 ```groovy title="genomics-1.nf" linenums="49"
-input:
+    input:
     tuple path(input_bam), path(input_bam_index)
 ```
 
@@ -669,15 +742,17 @@ nextflow run genomics-1.nf
 
 This time (and every time) everything should run correctly:
 
-```console title="Output"
- N E X T F L O W   ~  version 24.10.0
+??? success "Command output"
 
- ┃ Launching `genomics-1.nf` [special_goldstine] DSL2 - revision: 4cbbf6ea3e
+    ```console
+    N E X T F L O W   ~  version 25.10.2
 
-executor >  local (6)
-[d6/10c2c4] SAMTOOLS_INDEX (1)       | 3 of 3 ✔
-[88/1783aa] GATK_HAPLOTYPECALLER (2) | 3 of 3 ✔
-```
+    ┃ Launching `genomics-1.nf` [special_goldstine] DSL2 - revision: 4cbbf6ea3e
+
+    executor >  local (6)
+    [d6/10c2c4] SAMTOOLS_INDEX (1)       | 3 of 3 ✔
+    [88/1783aa] GATK_HAPLOTYPECALLER (2) | 3 of 3 ✔
+    ```
 
 If you'd like, you can use `.view()` again to peek at what the contents of the `SAMTOOLS_INDEX` output channel looks like:
 
@@ -736,18 +811,18 @@ _Before:_
 
 ```groovy title="genomics-1.nf" linenums="7"
 // Primary input
-params.reads_bam = [
-    "${projectDir}/data/bam/reads_mother.bam",
-    "${projectDir}/data/bam/reads_father.bam",
-    "${projectDir}/data/bam/reads_son.bam"
-]
+    reads_bam: Path = [
+        "${projectDir}/data/bam/reads_mother.bam",
+        "${projectDir}/data/bam/reads_father.bam",
+        "${projectDir}/data/bam/reads_son.bam"
+    ]
 ```
 
 _After:_
 
 ```groovy title="genomics-1.nf" linenums="7"
-// Primary input (file of input files, one per line)
-params.reads_bam = "${projectDir}/data/sample_bams.txt"
+    // Primary input (file of input files, one per line)
+    reads_bam: Path = "${projectDir}/data/sample_bams.txt"
 ```
 
 This way we can continue to be lazy, but the list of files no longer lives in the workflow code itself, which is a big step in the right direction.
@@ -762,15 +837,15 @@ Fortunately we can do that very simply, just by adding the [`.splitText()` opera
 _Before:_
 
 ```groovy title="genomics-1.nf" linenums="68"
-// Create input channel (single file via CLI parameter)
-reads_ch = channel.fromPath(params.reads_bam)
+    // Create input channel (single file via CLI parameter)
+    reads_ch = channel.fromPath(params.reads_bam)
 ```
 
 _After:_
 
 ```groovy title="genomics-1.nf" linenums="68"
-// Create input channel from a text file listing input file paths
-reads_ch = channel.fromPath(params.reads_bam).splitText()
+    // Create input channel from a text file listing input file paths
+    reads_ch = channel.fromPath(params.reads_bam).splitText()
 ```
 
 !!! tip
@@ -779,22 +854,22 @@ reads_ch = channel.fromPath(params.reads_bam).splitText()
 
 ### 4.4. Run the workflow to verify that it works correctly
 
-Let's run the workflow one more time.
+Let's run the workflow one more time. This should produce the same result as before, right?
 
 ```bash
 nextflow run genomics-1.nf -resume
 ```
 
-This should produce the same result as before, right?
+??? success "Command output"
 
-```console title="Output"
- N E X T F L O W   ~  version 24.10.0
+    ```console
+    N E X T F L O W   ~  version 25.10.2
 
- ┃ Launching `genomics-1.nf` [sick_albattani] DSL2 - revision: 46d84642f6
+    ┃ Launching `genomics-1.nf` [sick_albattani] DSL2 - revision: 46d84642f6
 
-[18/23b4bb] SAMTOOLS_INDEX (1)       | 3 of 3, cached: 3 ✔
-[12/f727bb] GATK_HAPLOTYPECALLER (3) | 3 of 3, cached: 3 ✔
-```
+    [18/23b4bb] SAMTOOLS_INDEX (1)       | 3 of 3, cached: 3 ✔
+    [12/f727bb] GATK_HAPLOTYPECALLER (3) | 3 of 3, cached: 3 ✔
+    ```
 
 Yes! In fact, Nextflow correctly detects that the process calls are exactly the same, and doesn't even bother re-running everything, since we were running with `-resume`.
 

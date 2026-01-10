@@ -14,8 +14,8 @@ In this part of the training, we're going to show you how to use [**nf-test**](h
 
 !!! note
 
-     Make sure you're in the correct working directory:
-     `cd /workspaces/training/nf4-science/genomics`
+    Make sure you're in the correct working directory:
+    `cd /workspaces/training/nf4-science/genomics`
 
 If you worked through the previous parts of this training course, you should have a working version of the genomics pipeline, with a modules directory structure like:
 
@@ -77,6 +77,8 @@ https://www.nf-test.com
 
 Project configured. Configuration is stored in nf-test.config
 ```
+
+<!-- TODO: add the contents of nf-test.config in an admonition -->
 
 It also creates a `tests` directory containing a configuration file stub.
 

@@ -61,6 +61,14 @@ This first step is the same as in Part 1, so it should feel very familiar, but t
 docker run -it -v ./data:/data community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464
 ```
 
+<!--
+??? success "Command output"
+
+    ```console
+
+    ```
+-->
+
 #### 0.1.2. Run the indexing command for the three samples
 
 ```bash
@@ -99,6 +107,14 @@ This second step is very similar to what we did Part 1: Hello Genomics, but we a
 docker run -it -v ./data:/data community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867
 ```
 
+<!--
+??? success "Command output"
+
+    ```console
+
+    ```
+-->
+
 #### 0.2.2. Run the variant calling command with the GVCF option
 
 In order to produce a genomic VCF (GVCF), we add the `-ERC GVCF` option to the base command, which switches on the HaplotypeCaller's GVCF mode.
@@ -114,6 +130,14 @@ gatk HaplotypeCaller \
         -L /data/ref/intervals.bed \
         -ERC GVCF
 ```
+
+<!--
+??? success "Command output"
+
+    ```console
+
+    ```
+-->
 
 This creates the GVCF output file `reads_mother.g.vcf` in the current working directory in the container.
 
@@ -152,6 +176,14 @@ gatk HaplotypeCaller \
         -ERC GVCF
 ```
 
+<!--
+??? success "Command output"
+
+    ```console
+
+    ```
+-->
+
 ```bash
 gatk HaplotypeCaller \
         -R /data/ref/ref.fasta \
@@ -160,6 +192,14 @@ gatk HaplotypeCaller \
         -L /data/ref/intervals.bed \
         -ERC GVCF
 ```
+
+<!--
+??? success "Command output"
+
+    ```console
+
+    ```
+-->
 
 Once this completes, you should have three files ending in `.g.vcf` in your current directory (one per sample) and their respective index files ending in `.g.vcf.idx`.
 
@@ -181,6 +221,14 @@ gatk GenomicsDBImport \
     --genomicsdb-workspace-path family_trio_gdb
 ```
 
+<!--
+??? success "Command output"
+
+    ```console
+
+    ```
+-->
+
 The output of this step is effectively a directory containing a set of further nested directories holding the combined variant data in the form of multiple different files.
 You can poke around it but you'll quickly see this data store format is not intended to be read directly by humans.
 
@@ -198,6 +246,14 @@ gatk GenotypeGVCFs \
     -V gendb://family_trio_gdb \
     -O family_trio.vcf
 ```
+
+<!--
+??? success "Command output"
+
+    ```console
+
+    ```
+-->
 
 This creates the VCF output file `family_trio.vcf` in the current working directory in the container.
 It's another reasonably small file so you can `cat` this file to view its contents, and scroll up to find the first few variant lines.
@@ -290,25 +346,27 @@ Make sure to update that appropriately.
 nextflow run genomics-2.nf
 ```
 
+??? success "Command output"
+
+    ```console
+    N E X T F L O W   ~  version 25.10.2
+
+    ┃ Launching `genomics-2.nf` [nice_gates] DSL2 - revision: 43c7de9890
+
+    executor >  local (6)
+    [a1/0b5d00] SAMTOOLS_INDEX (3)       | 3 of 3 ✔
+    [89/4d0c70] GATK_HAPLOTYPECALLER (3) | 0 of 3
+    ERROR ~ Error executing process > 'GATK_HAPLOTYPECALLER (2)'
+
+    Caused by:
+      Missing output file(s) `reads_mother.bam.vcf` expected by process `GATK_HAPLOTYPECALLER (2)`
+
+    Command executed:
+
+      gatk HaplotypeCaller         -R ref.fasta         -I reads_mother.bam         -O reads_mother.bam.g.vcf         -L intervals.bed         -ERC GVCF
+    ```
+
 And the output is... all red! Oh no.
-
-```console title="Output"
- N E X T F L O W   ~  version 24.10.0
-
- ┃ Launching `genomics-2.nf` [nice_gates] DSL2 - revision: 43c7de9890
-
-executor >  local (6)
-[a1/0b5d00] SAMTOOLS_INDEX (3)       | 3 of 3 ✔
-[89/4d0c70] GATK_HAPLOTYPECALLER (3) | 0 of 3
-ERROR ~ Error executing process > 'GATK_HAPLOTYPECALLER (2)'
-
-Caused by:
-  Missing output file(s) `reads_mother.bam.vcf` expected by process `GATK_HAPLOTYPECALLER (2)`
-
-Command executed:
-
-  gatk HaplotypeCaller         -R ref.fasta         -I reads_mother.bam         -O reads_mother.bam.g.vcf         -L intervals.bed         -ERC GVCF
-```
 
 The command that was executed is correct, so we were right that that was enough to change the GATK tool's behavior.
 But look at that line about the missing output file. Notice anything?
@@ -323,16 +381,16 @@ _Before:_
 
 ```groovy title="genomics-2.nf" linenums="52"
     output:
-        path "${input_bam}.vcf"     , emit: vcf
-        path "${input_bam}.vcf.idx" , emit: idx
+    path "${input_bam}.vcf"     , emit: vcf
+    path "${input_bam}.vcf.idx" , emit: idx
 ```
 
 _After:_
 
 ```groovy title="genomics-2.nf" linenums="52"
     output:
-        path "${input_bam}.g.vcf"     , emit: vcf
-        path "${input_bam}.g.vcf.idx" , emit: idx
+    path "${input_bam}.g.vcf"     , emit: vcf
+    path "${input_bam}.g.vcf.idx" , emit: idx
 ```
 
 ### 1.4. Run the pipeline again
@@ -343,17 +401,19 @@ Let's run it with `-resume` this time.
 nextflow run genomics-2.nf -resume
 ```
 
-Ah, this time it works.
+??? success "Command output"
 
-```console title="Output"
- N E X T F L O W   ~  version 24.10.0
+    ```console
+    N E X T F L O W   ~  version 25.10.2
 
- ┃ Launching `genomics-2.nf` [elated_carlsson] DSL2 - revision: 6a5786a6fa
+    ┃ Launching `genomics-2.nf` [elated_carlsson] DSL2 - revision: 6a5786a6fa
 
-executor >  local (3)
-[47/f7fac1] SAMTOOLS_INDEX (2)       | 3 of 3, cached: 3 ✔
-[ce/096ac6] GATK_HAPLOTYPECALLER (1) | 3 of 3 ✔
-```
+    executor >  local (3)
+    [47/f7fac1] SAMTOOLS_INDEX (2)       | 3 of 3, cached: 3 ✔
+    [ce/096ac6] GATK_HAPLOTYPECALLER (1) | 3 of 3 ✔
+    ```
+
+This time it works.
 
 The Nextflow output itself doesn't look any different (compared to a successful run in normal VCF mode), but now we can find the `.g.vcf` files and their respective index files, for all three samples, in the `results_genomics` directory.
 
@@ -406,13 +466,13 @@ process GATK_GENOMICSDB {
     publishDir params.outdir, mode: 'symlink'
 
     input:
-        path all_gvcfs
-        path all_idxs
-        path interval_list
-        val cohort_name
+    path all_gvcfs
+    path all_idxs
+    path interval_list
+    val cohort_name
 
     output:
-        path "${cohort_name}_gdb"
+    path "${cohort_name}_gdb"
 
     script:
     """
@@ -434,8 +494,8 @@ We need to provide an arbitrary name for the cohort.
 Later in the training series you'll learn how to use sample metadata for this sort of thing, but for now we just declare a CLI parameter using `params` and give it a default value for convenience.
 
 ```groovy title="genomics-2.nf" linenums="16"
-// Base name for final output file
-params.cohort_name = "family_trio"
+    // Base name for final output file
+    cohort_name: String = "family_trio"
 ```
 
 ### 2.3. Gather the outputs of GATK_HAPLOTYPECALLER across samples
@@ -472,13 +532,13 @@ The resulting `all_gvcfs_ch` and `all_idxs_ch` channels are what we're going to 
 We've got a process, and we've got input channels. We just need to add the process call.
 
 ```groovy title="genomics-2.nf" linenums="122"
-// Combine GVCFs into a GenomicsDB datastore
-GATK_GENOMICSDB(
-    all_gvcfs_ch,
-    all_idxs_ch,
-    intervals_file,
-    params.cohort_name
-)
+    // Combine GVCFs into a GenomicsDB datastore
+    GATK_GENOMICSDB(
+        all_gvcfs_ch,
+        all_idxs_ch,
+        intervals_file,
+        params.cohort_name
+    )
 ```
 
 Ok, everything is wired up.
@@ -491,26 +551,28 @@ Let's see if this works.
 nextflow run genomics-2.nf -resume
 ```
 
-It run fairly quickly, since we're running with `-resume`, but...
+??? failure "Command output"
 
-```console title="Output"
- N E X T F L O W   ~  version 24.10.0
+    ```console
+    N E X T F L O W   ~  version 25.10.2
 
- ┃ Launching `genomics-2.nf` [mad_edison] DSL2 - revision: 6aea0cfded
+    ┃ Launching `genomics-2.nf` [mad_edison] DSL2 - revision: 6aea0cfded
 
-executor >  local (1)
-[a2/56a3a8] SAMTOOLS_INDEX (1)       | 3 of 3, cached: 3 ✔
-[ce/096ac6] GATK_HAPLOTYPECALLER (1) | 3 of 3, cached: 3 ✔
-[df/994a06] GATK_GENOMICSDB          | 0 of 1
-ERROR ~ Error executing process > 'GATK_GENOMICSDB'
+    executor >  local (1)
+    [a2/56a3a8] SAMTOOLS_INDEX (1)       | 3 of 3, cached: 3 ✔
+    [ce/096ac6] GATK_HAPLOTYPECALLER (1) | 3 of 3, cached: 3 ✔
+    [df/994a06] GATK_GENOMICSDB          | 0 of 1
+    ERROR ~ Error executing process > 'GATK_GENOMICSDB'
 
-Caused by:
-  Process `GATK_GENOMICSDB` terminated with an error exit status (1)
+    Caused by:
+      Process `GATK_GENOMICSDB` terminated with an error exit status (1)
 
-Command executed:
+    Command executed:
 
-  gatk GenomicsDBImport         -V reads_father.bam.g.vcf reads_son.bam.g.vcf reads_mother.bam.g.vcf         -L intervals.bed         --genomicsdb-workspace-path family_trio_gdb
-```
+      gatk GenomicsDBImport         -V reads_father.bam.g.vcf reads_son.bam.g.vcf reads_mother.bam.g.vcf         -L intervals.bed         --genomicsdb-workspace-path family_trio_gdb
+    ```
+
+It runs fairly quickly, since we're running with `-resume`, but it fails!
 
 Ah. On the bright side, we see that Nextflow has picked up the `GATK_GENOMICSDB` process, and specifically called it just once.
 That suggests that the `collect()` approach worked, to a point.
@@ -617,18 +679,20 @@ Alright, let's see if that addressed the issue.
 nextflow run genomics-2.nf -resume
 ```
 
+??? success "Command output"
+
+    ```console
+    N E X T F L O W   ~  version 25.10.2
+
+    ┃ Launching `genomics-2.nf` [special_noyce] DSL2 - revision: 11f7a51bbe
+
+    executor >  local (1)
+    [6a/5dcf6a] SAMTOOLS_INDEX (3)       | 3 of 3, cached: 3 ✔
+    [d6/d0d060] GATK_HAPLOTYPECALLER (3) | 3 of 3, cached: 3 ✔
+    [e8/749a05] GATK_GENOMICSDB          | 1 of 1 ✔
+    ```
+
 Aha! It seems to be working now.
-
-```console title="Output"
- N E X T F L O W   ~  version 24.10.0
-
- ┃ Launching `genomics-2.nf` [special_noyce] DSL2 - revision: 11f7a51bbe
-
-executor >  local (1)
-[6a/5dcf6a] SAMTOOLS_INDEX (3)       | 3 of 3, cached: 3 ✔
-[d6/d0d060] GATK_HAPLOTYPECALLER (3) | 3 of 3, cached: 3 ✔
-[e8/749a05] GATK_GENOMICSDB          | 1 of 1 ✔
-```
 
 The first two steps were successfully skipped, and the third step worked like a charm this time. We find our output data store in the results directory.
 
@@ -728,7 +792,7 @@ The second command requires the reference genome files, so we need to add those 
 _Before:_
 
 ```groovy title="genomics-2.nf" linenums="78"
-input:
+    input:
     path all_gvcfs
     path all_idxs
     path interval_list
@@ -738,7 +802,7 @@ input:
 _After:_
 
 ```groovy title="genomics-2.nf" linenums="78"  hl_lines="5-7"
-input:
+    input:
     path all_gvcfs
     path all_idxs
     path interval_list
@@ -759,14 +823,14 @@ The output we're actually interested in is the VCF produced by the joint genotyp
 _Before:_
 
 ```groovy title="genomics-2.nf" linenums="87"
-output:
+    output:
     path "${cohort_name}_gdb"
 ```
 
 _After:_
 
 ```groovy title="genomics-2.nf" linenums="87"
-output:
+    output:
     path "${cohort_name}.joint.vcf"     , emit: vcf
     path "${cohort_name}.joint.vcf.idx" , emit: idx
 ```
@@ -814,18 +878,20 @@ Finally, we can run the modified workflow...
 nextflow run genomics-2.nf -resume
 ```
 
+??? success "Command output"
+
+    ```console
+    N E X T F L O W   ~  version 25.10.2
+
+    ┃ Launching `genomics-2.nf` [modest_gilbert] DSL2 - revision: 4f49922223
+
+    executor >  local (1)
+    [6a/5dcf6a] SAMTOOLS_INDEX (3)       | 3 of 3, cached: 3 ✔
+    [fe/6c9ad4] GATK_HAPLOTYPECALLER (1) | 3 of 3, cached: 3 ✔
+    [e2/a8d95f] GATK_JOINTGENOTYPING     | 1 of 1 ✔
+    ```
+
 And it works!
-
-```console title="Output"
- N E X T F L O W   ~  version 24.10.0
-
- ┃ Launching `genomics-2.nf` [modest_gilbert] DSL2 - revision: 4f49922223
-
-executor >  local (1)
-[6a/5dcf6a] SAMTOOLS_INDEX (3)       | 3 of 3, cached: 3 ✔
-[fe/6c9ad4] GATK_HAPLOTYPECALLER (1) | 3 of 3, cached: 3 ✔
-[e2/a8d95f] GATK_JOINTGENOTYPING     | 1 of 1 ✔
-```
 
 You'll find the final output file, `family_trio.joint.vcf` (and its file index), in the results directory. If you're the skeptical type, you can click on it to open it and verify that the workflow has generated the same variant calls that you obtained by running the tools manually at the start of this section.
 

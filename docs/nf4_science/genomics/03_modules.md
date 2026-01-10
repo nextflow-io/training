@@ -1,5 +1,7 @@
 # Part 3: Moving code into modules
 
+<!-- TODO: don't bother refining, we'll move to making it modular from the get-go -->
+
 In the first part of this course, you built a variant calling pipeline that was completely linear and processed each sample's data independently of the others.
 
 In the second part, we showed you how to use channels and channel operators to implement joint variant calling with GATK, building on the pipeline from Part 1.
@@ -29,7 +31,7 @@ nextflow run genomics-3.nf -resume
 And it works!
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  version 25.10.2
 
 Launching `genomics-3.nf` [gloomy_poincare] DSL2 - revision: 43203316e0
 
@@ -81,10 +83,10 @@ process SAMTOOLS_INDEX {
     publishDir params.outdir, mode: 'symlink'
 
     input:
-        path input_bam
+    path input_bam
 
     output:
-        tuple path(input_bam), path("${input_bam}.bai")
+    tuple path(input_bam), path("${input_bam}.bai")
 
     script:
     """
@@ -123,7 +125,7 @@ nextflow run genomics-3.nf -resume
 ```
 
 ```console title="Re-used Output after moving SAMTOOLS_INDEX to a module"
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  version 25.10.2
 
 Launching `genomics-3.nf` [ridiculous_jones] DSL2 - revision: c5a13e17a1
 
@@ -170,11 +172,11 @@ You've practiced modularizing a workflow, with the genomics workflow as an examp
 
 ### What's next?
 
-Test the modularised workflow.
+Test the modularized workflow.
 
 ---
 
-## 2. Test the modularised workflow
+## 2. Test the modularized workflow
 
 Let's try running that now.
 
@@ -185,7 +187,7 @@ nextflow run genomics-3.nf -resume
 And it works!
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  version 25.10.2
 
 Launching `genomics-3.nf` [gloomy_poincare] DSL2 - revision: 43203316e0
 
