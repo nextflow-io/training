@@ -1,26 +1,32 @@
 # Getting started
 
-To start the course, launch the training environment by clicking the "Open in GitHub Codespaces" button below.
-We recommend opening the training environment in a new browser tab (use right-click, ctrl-click or cmd-click depending on your equipment) so that you can read on while the environment loads.
-You will need to keep these instructions open in parallel.
+## Start a training environment
+
+To use the pre-built environment we provide on GitHub Codespaces, click the "Open in GitHub Codespaces" button below. For other options, see [Environment options](../envsetup/index.md).
+
+We recommend opening the training environment in a new browser tab or window (use right-click, ctrl-click or cmd-click depending on your equipment) so that you can read on while the environment loads.
+You will need to keep these instructions open in parallel to work through the course.
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
-## Training environment
+### Environment basics
 
-Our training environment runs on GitHub Codespaces (free Github account required) and contains all the software, code and data necessary to work through this training course, so you don't need to install anything yourself.
+This training environment contains all the software, code and data necessary to work through the training course, so you don't need to install anything yourself.
 
 The codespace is set up with a VSCode interface, which includes a filesystem explorer, a code editor and a terminal shell.
 All instructions given during the course (e.g. 'open the file', 'edit the code' or 'run this command') refer to those three parts of the VScode interface unless otherwise specified.
 
-If you are working through this course by yourself, please go through the [Environment Setup](../../envsetup/) mini-course for further details before going any further.
+If you are working through this course by yourself, please acquaint yourself with the [environment basics](../envsetup/01_setup.md) for further details.
 
-!!! warning
+### Version requirements
 
-    This training is designed for nf-core tools version 3.4.1, which should be the version installed in the codespace we provide.
-    If you use a different version of nf-core tooling, you may have difficulty following along.
+This training is designed for **Nextflow 25.10.2** or later **with the v2 syntax parser DISABLED**.
+If you are using a local or custom environment, please make sure you are using the correct settings as documented [here](../nxf_versions.md).
 
-    You can check what version is installed using the command`nf-core --version`.
+The training additionally requires **nf-core tools 3.4.1**.
+If you use a different version of nf-core tooling, you may have difficulty following along.
+
+You can check what version is installed using the command `nf-core --version`.
 
 ## Get ready to work
 
@@ -81,12 +87,12 @@ If you run this inside `hello-nf-core`, you should see the following output.
     9 directories, 3 files
     ```
 
-!!! note
+!!! tip
 
     We use collapsible sections like this to include expected command output in a concise way.
     Click on the colored box to expand the section and view its contents.
 
-**Content guide:**
+### Content guide
 
 - **The `greetings.csv` file** is a CSV containing some minimal columnar data we use for testing purposes.
 
@@ -100,7 +106,7 @@ If you run this inside `hello-nf-core`, you should see the following output.
 Think you're ready to dive in?
 
 - [ ] I understand the goal of this course and its prerequisites
-- [ ] My codespace is up and running
+- [ ] My environment is up and running
 - [ ] I've set my working directory appropriately
 
 If you can check all the boxes, you're good to go.
