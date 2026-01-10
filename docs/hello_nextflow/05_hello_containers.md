@@ -52,7 +52,7 @@ nextflow run hello-containers.nf
 
 As previously, you will find the output files in the `results` directory (specified by the `publishDir` directive).
 
-??? abstract title="Directory contents"
+??? abstract "Directory contents"
 
     ```console
     results
@@ -630,7 +630,7 @@ nextflow run hello-containers.nf -resume
 This time it does indeed work.
 You can find the cowpy'ed output in the `results` directory, under the name `cowpy-COLLECTED-test-batch-output.txt`.
 
-??? abstract title="File contents"
+??? abstract "File contents"
 
     ```console title="results/cowpy-COLLECTED-test-batch-output.txt"
     _________

@@ -169,7 +169,7 @@ Let's take a look at what's in there.
 
 The exact subdirectory names will be different on your system.
 
-??? abstract title="Directory contents"
+??? abstract "Directory contents"
 
     ```console
     work
@@ -418,7 +418,7 @@ Nextflow is literally pointing you to the previous execution and saying "I alrea
 
 Whenever you launch a nextflow workflow, a line gets written to a log file called `history`, under a hidden directory called `.nextflow` in the current working directory.
 
-??? abstract title="File contents"
+??? abstract "File contents"
 
     ```txt title=".nextflow/history" linenums="1"
     2025-07-04 19:27:09	1.8s	wise_watson	OK	3539118582ccde68dde471cc2c66295c	a02c9c46-c3c7-4085-9139-d1b9b5b194c8	nextflow run 1-hello.nf --greeting 'Hello World'

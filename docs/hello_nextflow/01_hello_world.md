@@ -254,7 +254,7 @@ Let's take a look at what's in there.
     tree -a work
     ```
 
-??? abstract title="Directory contents"
+??? abstract "Directory contents"
 
     ```console
     work

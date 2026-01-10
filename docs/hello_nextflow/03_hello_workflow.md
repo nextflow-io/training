@@ -54,7 +54,7 @@ nextflow run hello-workflow.nf
 
 As previously, you will find the output files in the `results` directory (specified by the `publishDir` directive).
 
-??? abstract title="Directory contents"
+??? abstract "Directory contents"
 
     ```console
     results
@@ -216,7 +216,7 @@ There is now an extra line in the console output (line 7), which corresponds to 
 
 Let's have a look inside the work directory of one of the calls to the second process.
 
-??? abstract title="Directory contents"
+??? abstract "Directory contents"
 
     ```console
     work/b3/d52708edba8b864024589285cb3445/
@@ -232,7 +232,7 @@ By default, when running on a single machine as we're doing here, Nextflow uses 
 
 You'll also find the final outputs in the `results` directory since we used the `publishDir` directive in the second process too.
 
-??? abstract title="Directory contents"
+??? abstract "Directory contents"
 
     ```console
     results

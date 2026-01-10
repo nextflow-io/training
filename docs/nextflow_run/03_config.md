@@ -443,7 +443,7 @@ nextflow run 3-main.nf
 
 The final output file should contain the turkey character saying the greetings.
 
-??? abstract title="File contents"
+??? abstract "File contents"
 
     ```console title="results/cowpy-COLLECTED-output.txt"
     _________
@@ -533,7 +533,7 @@ In this run, Nextflow combines the `nextflow.config` in our current directory wi
 
 The final output file should contain the tux character saying the greetings.
 
-??? abstract title="File contents"
+??? abstract "File contents"
 
     ```console title="results/cowpy-COLLECTED-output.txt"
     _________
@@ -599,7 +599,7 @@ nextflow run 3-main.nf -params-file test-params.yaml
 
 The final output file should contain the stegosaurus character saying the greetings.
 
-??? abstract title="File contents"
+??? abstract "File contents"
 
     ```console title="results/cowpy-COLLECTED-output.txt"
     _________
@@ -778,7 +778,7 @@ nextflow run 3-main.nf -profile my_laptop,test
 
 This should run without error, and the final output file should contain the turtle character saying the greetings.
 
-??? abstract title="File contents"
+??? abstract "File contents"
 
     ```console title="results/cowpy-COLLECTED-output.txt"
     _________

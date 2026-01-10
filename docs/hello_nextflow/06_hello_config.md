@@ -15,7 +15,7 @@ This section will explore how to set up and manage the configuration of your Nex
 There are multiple ways to do this; here we are going to use the simplest and most common configuration file mechanism, the `nextflow.config` file.
 Whenever there is a file named `nextflow.config` in the current directory, Nextflow will automatically load configuration from it.
 
-!!!note
+!!! note
 
     Anything you put into the `nextflow.config` can be overridden at runtime by providing the relevant process directives or parameters and values on the command line, or by importing another configuration file, according to the order of precedence described [here](https://www.nextflow.io/docs/latest/config.html).
 

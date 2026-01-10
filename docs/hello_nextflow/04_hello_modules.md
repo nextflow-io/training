@@ -54,7 +54,7 @@ nextflow run hello-modules.nf
 
 As previously, you will find the output files in the `results` directory (specified by the `publishDir` directive).
 
-??? abstract title="Directory contents"
+??? abstract "Directory contents"
 
     ```console
     results

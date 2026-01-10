@@ -57,7 +57,7 @@ This suggests the `sayHello()` process was called three times, once on each inpu
 
 Let's look at the 'results' directory to see if our workflow is still writing a copy of our outputs there.
 
-??? abstract title="Directory contents"
+??? abstract "Directory contents"
 
     ```console linenums="1"
     results
@@ -73,7 +73,7 @@ If you haven't deleted the `results` folder when running Part 1 of this training
 
 You can open each of them to satisfy yourself that they contain the appropriate greeting string.
 
-??? abstract title="File contents"
+??? abstract "File contents"
 
     ```console title="results/Hello-output.txt"
     Hello
@@ -96,7 +96,7 @@ Does that mean all three calls to `sayHello()` were executed within that one tas
 
 Let's have a look inside that `8e/0eb066` task directory.
 
-??? abstract title="Directory contents"
+??? abstract "Directory contents"
 
     ```console title="8e/0eb066"
     work/8e/0eb066071cdb4123906b7b4ea8b047/
@@ -137,7 +137,7 @@ This confirms that the `sayHello()` process gets called three times, and a separ
 
 If we look inside each of the task directories listed there, we can verify that each one corresponds to one of the greetings.
 
-??? abstract title="Directory contents"
+??? abstract "Directory contents"
 
     ```console title="ab/1a8ece"
     work/ab/1a8ece307e53f03fce689dde904b64/
@@ -342,7 +342,7 @@ You see that as promised, multiple steps were run as part of the workflow; the f
 
 Let's verify that that is in fact what happened by taking a look in the `results` directory.
 
-??? abstract title="Directory contents"
+??? abstract "Directory contents"
 
     ```console
     results
@@ -361,7 +361,7 @@ Look at the file names and check their contents to confirm that they are what yo
 cat results/COLLECTED-output.txt
 ```
 
-??? abstract title="File contents"
+??? abstract "File contents"
 
     ```console
     HELLO
@@ -572,7 +572,7 @@ This makes the code more shareable, flexible and maintainable.
 
 We have of course once again prepared a suitable workflow for demonstration purposes, called `2c-modules.nf`, along with a set of modules located in the `modules/` directory.
 
-??? abstract title="Directory contents"
+??? abstract "Directory contents"
 
     ```console
     modules/
@@ -770,7 +770,7 @@ ls /
 
 <!-- TODO: update to use tree -->
 
-??? abstract title="Directory contents"
+??? abstract "Directory contents"
 
     ```console title="Command output"
     bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
@@ -966,7 +966,7 @@ nextflow config
 
 <!-- TODO: paste output of nextflow config command -->
 
-??? abstract title="File contents"
+??? abstract "File contents"
 
     ```json title="nextflow.config" linenums="1"
     docker {
@@ -1008,7 +1008,7 @@ The first three steps cached since we've already run them before, but the `cowpy
 
 You can find the output of the `cowpy` step in the `results` directory.
 
-??? abstract title="File contents"
+??? abstract "File contents"
 
     ```console title="results/cowpy-COLLECTED-output.txt"
     _________

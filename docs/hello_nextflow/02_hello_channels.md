@@ -270,7 +270,7 @@ For a complex workflow, or a large number of inputs, having the full list output
 
 That being said, we have another problem. If you look in the `results` directory, there is only one file: `output.txt`!
 
-??? abstract title="Directory contents"
+??? abstract "Directory contents"
 
     ```console
     results
@@ -375,7 +375,7 @@ nextflow run hello-channels.nf
 Reverting back to the summary view, the output is summarized on one line again.
 However, now we have three new files in addition to the one we already had in the `results` directory.
 
-??? abstract title="Directory contents"
+??? abstract "Directory contents"
 
     ```console
     results
@@ -387,7 +387,7 @@ However, now we have three new files in addition to the one we already had in th
 
 They each have the expected contents.
 
-??? abstract title="File contents"
+??? abstract "File contents"
 
     ```console title="Bonjour-output.txt" linenums="1"
     Bonjour
