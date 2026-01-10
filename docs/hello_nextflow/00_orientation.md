@@ -104,7 +104,7 @@ tree . -L 2
 Click on the colored box to expand the section and view its contents.
 We use collapsible sections like this to include expected command output in a concise way.
 
-### Content guide
+### Content highlights
 
 - **The `.nf` files** are workflow scripts that are named based on what part of the course they're used in.
 
