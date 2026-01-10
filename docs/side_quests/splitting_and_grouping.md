@@ -129,7 +129,7 @@ workflow {
 
 If you completed the [Metadata in workflows](./metadata.md) side quest, you'll recognize this pattern. We'll use `splitCsv` to read the CSV and immediately structure the data with a meta map to separate metadata from file paths.
 
-!!!Note
+!!! info
 
     We'll encounter two different concepts called `map` in this training:
 
@@ -159,24 +159,26 @@ Apply these changes to `main.nf`:
 
 This combines the `splitCsv` operation (reading the CSV with headers) and the `map` operation (structuring data as `[meta, file]` tuples) in one step. Apply that change and run the pipeline:
 
-```bash title="Verify the data structure"
+```bash
 nextflow run main.nf
 ```
 
-```console title="Sample data with meta maps"
- N E X T F L O W   ~  version 25.04.3
+??? success "Command output"
 
-Launching `main.nf` [deadly_mercator] DSL2 - revision: bd6b0224e9
+    ```console
+    N E X T F L O W   ~  version 25.10.2
 
-[[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
-[[id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
-[[id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
-[[id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
-[[id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]
-[[id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
-[[id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
-[[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
-```
+    Launching `main.nf` [deadly_mercator] DSL2 - revision: bd6b0224e9
+
+    [[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
+    [[id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
+    [[id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
+    [[id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
+    [[id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]
+    [[id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
+    [[id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
+    [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
+    ```
 
 We now have a channel where each item is a `[meta, file]` tuple - metadata separated from file paths. This structure allows us to split and group our workload based on metadata fields.
 
@@ -213,20 +215,22 @@ We can use the [`filter` operator](https://www.nextflow.io/docs/latest/operator.
 
 Run the workflow again to see the filtered result:
 
-```bash title="Test the filter operation"
+```bash
 nextflow run main.nf
 ```
 
-```console title="Filtered normal samples"
- N E X T F L O W   ~  version 25.04.3
+??? success "Command output"
 
-Launching `main.nf` [admiring_brown] DSL2 - revision: 194d61704d
+    ```console
+    N E X T F L O W   ~  version 25.10.2
 
-[[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
-[[id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
-[[id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]
-[[id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
-```
+    Launching `main.nf` [admiring_brown] DSL2 - revision: 194d61704d
+
+    [[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
+    [[id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
+    [[id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]
+    [[id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
+    ```
 
 We have successfully filtered the data to only include normal samples. Let's recap how this works.
 
@@ -270,24 +274,28 @@ Currently we're applying the filter to the channel created directly from the CSV
             .view()
     ```
 
-Once again, run the pipeline to see the results:
+Run the pipeline to see the results:
 
-```bash title="Test separate channel creation"
+```bash
 nextflow run main.nf
 ```
 
-```console title="Filtered normal samples"
- N E X T F L O W   ~  version 25.04.3
+??? success "Command output"
 
-Launching `main.nf` [trusting_poisson] DSL2 - revision: 639186ee74
+    ```console
+    N E X T F L O W   ~  version 25.10.2
 
-[[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
-[[id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
-[[id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]
-[[id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
-```
+    Launching `main.nf` [trusting_poisson] DSL2 - revision: 639186ee74
 
-We've successfully filtered the data and created a separate channel for normal samples. Let's create a filtered channel for the tumor samples as well:
+    [[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
+    [[id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
+    [[id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]
+    [[id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
+    ```
+
+We've successfully filtered the data and created a separate channel for normal samples.
+
+Let's create a filtered channel for the tumor samples as well:
 
 === "After"
 
@@ -311,24 +319,26 @@ We've successfully filtered the data and created a separate channel for normal s
             .view()
     ```
 
-```bash title="Test filtering both sample types"
+```bash
 nextflow run main.nf
 ```
 
-```console title="Normal and tumor samples"
- N E X T F L O W   ~  version 25.04.3
+??? success "Command output"
 
-Launching `main.nf` [maniac_boltzmann] DSL2 - revision: 3636b6576b
+    ```console
+    N E X T F L O W   ~  version 25.10.2
 
-Tumor sample: [[id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
-Tumor sample: [[id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
-Normal sample: [[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
-Normal sample: [[id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
-Normal sample: [[id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]
-Normal sample: [[id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
-Tumor sample: [[id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
-Tumor sample: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
-```
+    Launching `main.nf` [maniac_boltzmann] DSL2 - revision: 3636b6576b
+
+    Tumor sample: [[id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
+    Tumor sample: [[id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
+    Normal sample: [[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
+    Normal sample: [[id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
+    Normal sample: [[id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]
+    Normal sample: [[id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
+    Tumor sample: [[id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
+    Tumor sample: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
+    ```
 
 We've separated out the normal and tumor samples into two different channels, and used a closure supplied to `view()` to label them differently in the output: `ch_tumor_samples.view{'Tumor sample: ' + it}`.
 
@@ -352,28 +362,36 @@ Nextflow includes many methods for combining channels, but in this case the most
 
 ### 3.1. Use `map` and `join` to combine based on patient ID
 
-If we check the [`join`](https://www.nextflow.io/docs/latest/operator.html#join) documentation, we can see that by default it joins two channels based on the first item in each tuple. If you don't have the console output still available, let's run the pipeline to check our data structure and see how we need to modify it to join on the `id` field.
+If we check the [`join`](https://www.nextflow.io/docs/latest/operator.html#join) documentation, we can see that by default it joins two channels based on the first item in each tuple.
 
-```bash title="Check current data structure"
+#### 3.1.1. Check the data structure
+
+If you don't have the console output still available, let's run the pipeline to check our data structure and see how we need to modify it to join on the `id` field.
+
+```bash
 nextflow run main.nf
 ```
 
-```console title="Normal and tumor samples"
- N E X T F L O W   ~  version 25.04.3
+??? success "Command output"
 
-Launching `main.nf` [maniac_boltzmann] DSL2 - revision: 3636b6576b
+    ```console
+    N E X T F L O W   ~  version 25.10.2
 
-Tumor sample: [[id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
-Tumor sample: [[id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
-Normal sample: [[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
-Normal sample: [[id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
-Normal sample: [[id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]
-Normal sample: [[id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
-Tumor sample: [[id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
-Tumor sample: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
-```
+    Launching `main.nf` [maniac_boltzmann] DSL2 - revision: 3636b6576b
+
+    Tumor sample: [[id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
+    Tumor sample: [[id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
+    Normal sample: [[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
+    Normal sample: [[id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
+    Normal sample: [[id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]
+    Normal sample: [[id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
+    Tumor sample: [[id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
+    Tumor sample: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
+    ```
 
 We can see that the `id` field is the first element in each meta map. For `join` to work, we should isolate the `id` field in each tuple. After that, we can simply use the `join` operator to combine the two channels.
+
+#### 3.1.2. Isolate the `id` field
 
 To isolate the `id` field, we can use the [`map` operator](https://www.nextflow.io/docs/latest/operator.html#map) to create a new tuple with the `id` field as the first element.
 
@@ -405,26 +423,32 @@ To isolate the `id` field, we can use the [`map` operator](https://www.nextflow.
             .view{'Tumor sample: ' + it}
     ```
 
-```bash title="Test the map transformation"
+```bash
 nextflow run main.nf
 ```
 
-```console title="Samples with ID as first element"
- N E X T F L O W   ~  version 25.04.3
+??? success "Command output"
 
-Launching `main.nf` [mad_lagrange] DSL2 - revision: 9940b3f23d
+    ```console
+    N E X T F L O W   ~  version 25.10.2
 
-Tumor sample: [patientA, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
-Tumor sample: [patientA, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
-Normal sample: [patientA, [id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
-Normal sample: [patientA, [id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
-Tumor sample: [patientB, [id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
-Tumor sample: [patientC, [id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
-Normal sample: [patientB, [id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]
-Normal sample: [patientC, [id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
-```
+    Launching `main.nf` [mad_lagrange] DSL2 - revision: 9940b3f23d
 
-It might be subtle, but you should be able to see the first element in each tuple is the `id` field. Now we can use the `join` operator to combine the two channels based on the `id` field.
+    Tumor sample: [patientA, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
+    Tumor sample: [patientA, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
+    Normal sample: [patientA, [id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
+    Normal sample: [patientA, [id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
+    Tumor sample: [patientB, [id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
+    Tumor sample: [patientC, [id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
+    Normal sample: [patientB, [id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]
+    Normal sample: [patientC, [id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
+    ```
+
+It might be subtle, but you should be able to see the first element in each tuple is the `id` field.
+
+#### 3.1.3. Combine the two channels
+
+Now we can use the `join` operator to combine the two channels based on the `id` field.
 
 Once again, we will use `view` to print the joined outputs.
 
@@ -457,20 +481,22 @@ Once again, we will use `view` to print the joined outputs.
             .view{'Tumor sample: ' + it}
     ```
 
-```bash title="Test the join operation"
+```bash
 nextflow run main.nf
 ```
 
-```console title="Joined normal and tumor samples"
- N E X T F L O W   ~  version 25.04.3
+??? success "Command output"
 
-Launching `main.nf` [soggy_wiles] DSL2 - revision: 3bc1979889
+    ```console
+    N E X T F L O W   ~  version 25.10.2
 
-[patientA, [id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
-[patientA, [id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
-[patientB, [id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam, [id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
-[patientC, [id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam, [id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
-```
+    Launching `main.nf` [soggy_wiles] DSL2 - revision: 3bc1979889
+
+    [patientA, [id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
+    [patientA, [id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
+    [patientB, [id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam, [id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
+    [patientC, [id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam, [id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
+    ```
 
 It's a little hard to tell because it's so wide, but you should be able to see the samples have been joined by the `id` field. Each tuple now has the format:
 
@@ -484,14 +510,10 @@ It's a little hard to tell because it's so wide, but you should be able to see t
 
     The `join` operator will discard any un-matched tuples. In this example, we made sure all samples were matched for tumor and normal but if this is not true you must use the parameter `remainder: true` to keep the unmatched tuples. Check the [documentation](https://www.nextflow.io/docs/latest/operator.html#join) for more details.
 
-### Takeaway
+So now you know how to use `map` to isolate a field in a tuple, and how to use `join` to combine tuples based on the first field.
+With this knowledge, we can successfully combine channels based on a shared field.
 
-In this section, you've learned:
-
-- How to use `map` to isolate a field in a tuple
-- How to use `join` to combine tuples based on the first field
-
-With this knowledge, we can successfully combine channels based on a shared field. Next, we'll consider the situation where you want to join on multiple fields.
+Next, we'll consider the situation where you want to join on multiple fields.
 
 ### 3.2. Join on multiple fields
 
@@ -525,20 +547,22 @@ Let's start by creating a new joining key. We can do this in the same way as bef
 
 Now we should see the join is occurring but using both the `id` and `repeat` fields. Run the workflow:
 
-```bash title="Test multi-field joining"
+```bash
 nextflow run main.nf
 ```
 
-```console title="Samples joined on multiple fields"
- N E X T F L O W   ~  version 25.04.3
+??? success "Command output"
 
-Launching `main.nf` [prickly_wing] DSL2 - revision: 3bebf22dee
+    ```console
+    N E X T F L O W   ~  version 25.10.2
 
-[[patientA, 1], [id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
-[[patientA, 2], [id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
-[[patientB, 1], [id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam, [id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
-[[patientC, 1], [id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam, [id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
-```
+    Launching `main.nf` [prickly_wing] DSL2 - revision: 3bebf22dee
+
+    [[patientA, 1], [id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
+    [[patientA, 2], [id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
+    [[patientB, 1], [id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam, [id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
+    [[patientC, 1], [id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam, [id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
+    ```
 
 Note how we have a tuple of two elements (`id` and `repeat` fields) as the first element of each joined result. This demonstrates how complex items can be used as a joining key, enabling fairly intricate matching between samples from the same conditions.
 
@@ -572,20 +596,22 @@ The `subMap` method extracts only the specified key-value pairs from a map. Here
             .map { meta, file -> [[meta.id, meta.repeat], meta, file] }
     ```
 
-```bash title="Test subMap joining keys"
+```bash
 nextflow run main.nf
 ```
 
-```console title="Samples with subMap joining keys"
- N E X T F L O W   ~  version 25.04.3
+??? success "Command output"
 
-Launching `main.nf` [reverent_wing] DSL2 - revision: 847016c3b7
+    ```console
+    N E X T F L O W   ~  version 25.10.2
 
-[[id:patientA, repeat:1], [id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
-[[id:patientA, repeat:2], [id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
-[[id:patientB, repeat:1], [id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam, [id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
-[[id:patientC, repeat:1], [id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam, [id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
-```
+    Launching `main.nf` [reverent_wing] DSL2 - revision: 847016c3b7
+
+    [[id:patientA, repeat:1], [id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
+    [[id:patientA, repeat:2], [id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
+    [[id:patientB, repeat:1], [id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam, [id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
+    [[id:patientC, repeat:1], [id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam, [id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
+    ```
 
 Now we have a new joining key that not only includes the `id` and `repeat` fields but also retains the field names so we can access them later by name, e.g. `meta.id` and `meta.repeat`.
 
@@ -622,7 +648,9 @@ To do so, first we define the closure as a new variable:
             .filter { meta, file -> meta.type == 'normal' }
     ```
 
-We've defined the map transformation as a named variable that we can reuse. Note that we also convert the file path to a Path object using `file()` so that any process receiving this channel can handle the file correctly (for more information see [Working with files](./working_with_files.md)).
+We've defined the map transformation as a named variable that we can reuse.
+
+Note that we also convert the file path to a Path object using `file()` so that any process receiving this channel can handle the file correctly (for more information see [Working with files](./working_with_files.md)).
 
 Let's implement the closure in our workflow:
 
@@ -653,22 +681,24 @@ Let's implement the closure in our workflow:
 
     The `map` operator has switched from using `{ }` to using `( )` to pass the closure as an argument. This is because the `map` operator expects a closure as an argument and `{ }` is used to define an anonymous closure. When calling a named closure, use the `( )` syntax.
 
-Just run the workflow once more to check everything is still working:
+Run the workflow once more to check everything is still working:
 
-```bash title="Test the named closure"
+```bash
 nextflow run main.nf
 ```
 
-```console title="Samples using named closure"
- N E X T F L O W   ~  version 25.04.3
+??? success "Command output"
 
-Launching `main.nf` [angry_meninsky] DSL2 - revision: 2edc226b1d
+    ```console
+    N E X T F L O W   ~  version 25.10.2
 
-[[id:patientA, repeat:1], [id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
-[[id:patientA, repeat:2], [id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
-[[id:patientB, repeat:1], [id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam, [id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
-[[id:patientC, repeat:1], [id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam, [id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
-```
+    Launching `main.nf` [angry_meninsky] DSL2 - revision: 2edc226b1d
+
+    [[id:patientA, repeat:1], [id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
+    [[id:patientA, repeat:2], [id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
+    [[id:patientB, repeat:1], [id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam, [id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
+    [[id:patientC, repeat:1], [id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam, [id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
+    ```
 
 Using a named closure allows us to reuse the same transformation in multiple places, reducing the risk of errors and making the code more readable and maintainable.
 
@@ -715,16 +745,18 @@ Now the closure returns a tuple where the first element contains the `id` and `r
 
 Run the workflow to see what this looks like:
 
-```bash title="Test data deduplication"
+```bash
 nextflow run main.nf
 ```
 
-```console title="Deduplicated sample data"
-[[id:patientA, repeat:1], [type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep1_normal.bam, [type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep1_tumor.bam]
-[[id:patientA, repeat:2], [type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep2_normal.bam, [type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep2_tumor.bam]
-[[id:patientB, repeat:1], [type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientB_rep1_normal.bam, [type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientB_rep1_tumor.bam]
-[[id:patientC, repeat:1], [type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientC_rep1_normal.bam, [type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientC_rep1_tumor.bam]
-```
+??? success "Command output"
+
+    ```console
+    [[id:patientA, repeat:1], [type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep1_normal.bam, [type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep1_tumor.bam]
+    [[id:patientA, repeat:2], [type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep2_normal.bam, [type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep2_tumor.bam]
+    [[id:patientB, repeat:1], [type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientB_rep1_normal.bam, [type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientB_rep1_tumor.bam]
+    [[id:patientC, repeat:1], [type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientC_rep1_normal.bam, [type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientC_rep1_tumor.bam]
+    ```
 
 We can see we only state the `id` and `repeat` fields once in the grouping key and we have the `type` field in the sample data. We haven't lost any information but we managed to make our channel contents more succinct.
 
@@ -750,20 +782,22 @@ Since we know the position of each element in our channel, we can simplify the s
 
 Run again to see the result:
 
-```bash title="Test streamlined data structure"
+```bash
 nextflow run main.nf
 ```
 
-```console title="Streamlined sample data"
- N E X T F L O W   ~  version 25.04.3
+??? success "Command output"
 
-Launching `main.nf` [confident_leavitt] DSL2 - revision: a2303895bd
+    ```console
+    N E X T F L O W   ~  version 25.10.2
 
-[[id:patientA, repeat:1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
-[[id:patientA, repeat:2], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
-[[id:patientB, repeat:1], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]
-[[id:patientC, repeat:1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
-```
+    Launching `main.nf` [confident_leavitt] DSL2 - revision: a2303895bd
+
+    [[id:patientA, repeat:1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
+    [[id:patientA, repeat:2], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
+    [[id:patientB, repeat:1], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]
+    [[id:patientC, repeat:1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
+    ```
 
 ### Takeaway
 
@@ -824,32 +858,36 @@ Now remember, we want to repeat each sample for each interval. This is sometimes
 
 Now let's run it and see what happens:
 
-```bash title="Test the combine operation"
+```bash
 nextflow run main.nf
 ```
 
-```console title="Samples combined with intervals"
- N E X T F L O W   ~  version 25.04.3
+??? success "Command output"
 
-Launching `main.nf` [mighty_tesla] DSL2 - revision: ae013ab70b
+    ```console
+    N E X T F L O W   ~  version 25.10.2
 
-[[id:patientA, repeat:1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam, chr1]
-[[id:patientA, repeat:1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam, chr2]
-[[id:patientA, repeat:1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam, chr3]
-[[id:patientA, repeat:2], patientA_rep2_normal.bam, patientA_rep2_tumor.bam, chr1]
-[[id:patientA, repeat:2], patientA_rep2_normal.bam, patientA_rep2_tumor.bam, chr2]
-[[id:patientA, repeat:2], patientA_rep2_normal.bam, patientA_rep2_tumor.bam, chr3]
-[[id:patientB, repeat:1], patientB_rep1_normal.bam, patientB_rep1_tumor.bam, chr1]
-[[id:patientB, repeat:1], patientB_rep1_normal.bam, patientB_rep1_tumor.bam, chr2]
-[[id:patientB, repeat:1], patientB_rep1_normal.bam, patientB_rep1_tumor.bam, chr3]
-[[id:patientC, repeat:1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam, chr1]
-[[id:patientC, repeat:1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam, chr2]
-[[id:patientC, repeat:1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam, chr3]
-```
+    Launching `main.nf` [mighty_tesla] DSL2 - revision: ae013ab70b
 
-Success! We have repeated every sample for every single interval in our 3 interval list. We've effectively tripled the number of items in our channel. It's a little hard to read though, so in the next section we will tidy it up.
+    [[id:patientA, repeat:1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam, chr1]
+    [[id:patientA, repeat:1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam, chr2]
+    [[id:patientA, repeat:1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam, chr3]
+    [[id:patientA, repeat:2], patientA_rep2_normal.bam, patientA_rep2_tumor.bam, chr1]
+    [[id:patientA, repeat:2], patientA_rep2_normal.bam, patientA_rep2_tumor.bam, chr2]
+    [[id:patientA, repeat:2], patientA_rep2_normal.bam, patientA_rep2_tumor.bam, chr3]
+    [[id:patientB, repeat:1], patientB_rep1_normal.bam, patientB_rep1_tumor.bam, chr1]
+    [[id:patientB, repeat:1], patientB_rep1_normal.bam, patientB_rep1_tumor.bam, chr2]
+    [[id:patientB, repeat:1], patientB_rep1_normal.bam, patientB_rep1_tumor.bam, chr3]
+    [[id:patientC, repeat:1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam, chr1]
+    [[id:patientC, repeat:1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam, chr2]
+    [[id:patientC, repeat:1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam, chr3]
+    ```
 
-### 4.2. Organise the channel
+Success! We have repeated every sample for every single interval in our 3 interval list. We've effectively tripled the number of items in our channel.
+
+It's a little hard to read though, so in the next section we will tidy it up.
+
+### 4.2. Organize the channel
 
 We can use the `map` operator to tidy and refactor our sample data so it's easier to understand. Let's move the intervals string to the joining map at the first element.
 
@@ -902,28 +940,30 @@ Finally, we return this as a tuple with three elements: the combined metadata ma
 
 Let's run it again and check the channel contents:
 
-```bash title="Test the reorganized structure"
+```bash
 nextflow run main.nf
 ```
 
-```console title="Samples combined with intervals"
- N E X T F L O W   ~  version 25.04.3
+??? success "Command output"
 
-Launching `main.nf` [sad_hawking] DSL2 - revision: 1f6f6250cd
+    ```console
+    N E X T F L O W   ~  version 25.10.2
 
-[[id:patientA, interval:chr1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
-[[id:patientA, interval:chr2], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
-[[id:patientA, interval:chr3], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
-[[id:patientA, interval:chr1], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
-[[id:patientA, interval:chr2], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
-[[id:patientA, interval:chr3], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
-[[id:patientB, interval:chr1], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]
-[[id:patientB, interval:chr2], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]
-[[id:patientB, interval:chr3], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]
-[[id:patientC, interval:chr1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
-[[id:patientC, interval:chr2], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
-[[id:patientC, interval:chr3], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
-```
+    Launching `main.nf` [sad_hawking] DSL2 - revision: 1f6f6250cd
+
+    [[id:patientA, repeat:1, interval:chr1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
+    [[id:patientA, repeat:1, interval:chr2], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
+    [[id:patientA, repeat:1, interval:chr3], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
+    [[id:patientA, repeat:2, interval:chr1], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
+    [[id:patientA, repeat:2, interval:chr2], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
+    [[id:patientA, repeat:2, interval:chr3], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
+    [[id:patientB, repeat:1, interval:chr1], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]
+    [[id:patientB, repeat:1, interval:chr2], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]
+    [[id:patientB, repeat:1, interval:chr3], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]
+    [[id:patientC, repeat:1, interval:chr1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
+    [[id:patientC, repeat:1, interval:chr2], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
+    [[id:patientC, repeat:1, interval:chr3], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
+    ```
 
 Using `map` to coerce your data into the correct structure can be tricky, but it's crucial for effective data manipulation.
 
@@ -1001,28 +1041,30 @@ We can reuse the `subMap` method from before to isolate our `id` and `interval` 
 
 Let's run it again and check the channel contents:
 
-```bash title="Test grouping key isolation"
+```bash
 nextflow run main.nf
 ```
 
-```console title="Samples prepared for grouping"
- N E X T F L O W   ~  version 25.04.3
+??? success "Command output"
 
-Launching `main.nf` [hopeful_brenner] DSL2 - revision: 7f4f7fea76
+    ```console
+    N E X T F L O W   ~  version 25.10.2
 
-[[id:patientA, interval:chr1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
-[[id:patientA, interval:chr2], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
-[[id:patientA, interval:chr3], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
-[[id:patientA, interval:chr1], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
-[[id:patientA, interval:chr2], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
-[[id:patientA, interval:chr3], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
-[[id:patientB, interval:chr1], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]
-[[id:patientB, interval:chr2], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]
-[[id:patientB, interval:chr3], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]
-[[id:patientC, interval:chr1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
-[[id:patientC, interval:chr2], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
-[[id:patientC, interval:chr3], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
-```
+    Launching `main.nf` [hopeful_brenner] DSL2 - revision: 7f4f7fea76
+
+    [[id:patientA, interval:chr1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
+    [[id:patientA, interval:chr2], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
+    [[id:patientA, interval:chr3], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
+    [[id:patientA, interval:chr1], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
+    [[id:patientA, interval:chr2], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
+    [[id:patientA, interval:chr3], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
+    [[id:patientB, interval:chr1], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]
+    [[id:patientB, interval:chr2], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]
+    [[id:patientB, interval:chr3], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]
+    [[id:patientC, interval:chr1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
+    [[id:patientC, interval:chr2], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
+    [[id:patientC, interval:chr3], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
+    ```
 
 We can see that we have successfully isolated the `id` and `interval` fields, but not grouped the samples yet.
 
@@ -1063,25 +1105,27 @@ Let's now group the samples by this new grouping element, using the [`groupTuple
 
 That's all there is to it! We just added a single line of code. Let's see what happens when we run it:
 
-```bash title="Test the groupTuple operation"
+```bash
 nextflow run main.nf
 ```
 
-```console title="Grouped samples by ID and interval"
- N E X T F L O W   ~  version 25.04.3
+??? success "Command output"
 
-Launching `main.nf` [friendly_jang] DSL2 - revision: a1bee1c55d
+    ```console
+    N E X T F L O W   ~  version 25.10.2
 
-[[id:patientA, interval:chr1], [patientA_rep1_normal.bam, patientA_rep2_normal.bam], [patientA_rep1_tumor.bam, patientA_rep2_tumor.bam]]
-[[id:patientA, interval:chr2], [patientA_rep1_normal.bam, patientA_rep2_normal.bam], [patientA_rep1_tumor.bam, patientA_rep2_tumor.bam]]
-[[id:patientA, interval:chr3], [patientA_rep1_normal.bam, patientA_rep2_normal.bam], [patientA_rep1_tumor.bam, patientA_rep2_tumor.bam]]
-[[id:patientB, interval:chr1], [patientB_rep1_normal.bam], [patientB_rep1_tumor.bam]]
-[[id:patientB, interval:chr2], [patientB_rep1_normal.bam], [patientB_rep1_tumor.bam]]
-[[id:patientB, interval:chr3], [patientB_rep1_normal.bam], [patientB_rep1_tumor.bam]]
-[[id:patientC, interval:chr1], [patientC_rep1_normal.bam], [patientC_rep1_tumor.bam]]
-[[id:patientC, interval:chr2], [patientC_rep1_normal.bam], [patientC_rep1_tumor.bam]]
-[[id:patientC, interval:chr3], [patientC_rep1_normal.bam], [patientC_rep1_tumor.bam]]
-```
+    Launching `main.nf` [friendly_jang] DSL2 - revision: a1bee1c55d
+
+    [[id:patientA, interval:chr1], [patientA_rep1_normal.bam, patientA_rep2_normal.bam], [patientA_rep1_tumor.bam, patientA_rep2_tumor.bam]]
+    [[id:patientA, interval:chr2], [patientA_rep1_normal.bam, patientA_rep2_normal.bam], [patientA_rep1_tumor.bam, patientA_rep2_tumor.bam]]
+    [[id:patientA, interval:chr3], [patientA_rep1_normal.bam, patientA_rep2_normal.bam], [patientA_rep1_tumor.bam, patientA_rep2_tumor.bam]]
+    [[id:patientB, interval:chr1], [patientB_rep1_normal.bam], [patientB_rep1_tumor.bam]]
+    [[id:patientB, interval:chr2], [patientB_rep1_normal.bam], [patientB_rep1_tumor.bam]]
+    [[id:patientB, interval:chr3], [patientB_rep1_normal.bam], [patientB_rep1_tumor.bam]]
+    [[id:patientC, interval:chr1], [patientC_rep1_normal.bam], [patientC_rep1_tumor.bam]]
+    [[id:patientC, interval:chr2], [patientC_rep1_normal.bam], [patientC_rep1_tumor.bam]]
+    [[id:patientC, interval:chr3], [patientC_rep1_normal.bam], [patientC_rep1_tumor.bam]]
+    ```
 
 Note our data has changed structure and within each channel element the files now contained in tuples like `[patientA_rep1_normal.bam, patientA_rep2_normal.bam]`. This is because when we use `groupTuple`, Nextflow combines the single files for each sample of a group. This is important to remember when trying to handle the data downstream.
 
