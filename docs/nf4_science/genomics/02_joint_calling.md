@@ -79,15 +79,17 @@ samtools index /data/bam/reads_son.bam
 
 Just like previously, this should produce the index files in the same directory as the corresponding BAM files.
 
-```console title="Directory contents"
-data/bam/
-├── reads_father.bam
-├── reads_father.bam.bai
-├── reads_mother.bam
-├── reads_mother.bam.bai
-├── reads_son.bam
-└── reads_son.bam.bai
-```
+??? abstract "Directory contents"
+
+    ```console
+    data/bam/
+    ├── reads_father.bam
+    ├── reads_father.bam.bai
+    ├── reads_mother.bam
+    ├── reads_mother.bam.bai
+    ├── reads_son.bam
+    └── reads_son.bam.bai
+    ```
 
 Now that we have index files for all three samples, we can proceed to generating the GVCFs for each of them.
 
@@ -417,21 +419,23 @@ This time it works.
 
 The Nextflow output itself doesn't look any different (compared to a successful run in normal VCF mode), but now we can find the `.g.vcf` files and their respective index files, for all three samples, in the `results_genomics` directory.
 
-```console title="Directory contents (symlinks truncated)"
-results_genomics/
-├── reads_father.bam -> */47/f7fac1*/reads_father.bam
-├── reads_father.bam.bai -> */47/f7fac1*/reads_father.bam.bai
-├── reads_father.bam.g.vcf -> */cb/ad7430*/reads_father.bam.g.vcf
-├── reads_father.bam.g.vcf.idx -> */cb/ad7430*/reads_father.bam.g.vcf.idx
-├── reads_mother.bam -> */a2/56a3a8*/reads_mother.bam
-├── reads_mother.bam.bai -> */a2/56a3a8*/reads_mother.bam.bai
-├── reads_mother.bam.g.vcf -> */ce/096ac6*/reads_mother.bam.g.vcf
-├── reads_mother.bam.g.vcf.idx -> */ce/096ac6*/reads_mother.bam.g.vcf.idx
-├── reads_son.bam -> */a1/0b5d00*/reads_son.bam
-├── reads_son.bam.bai -> */a1/0b5d00*/reads_son.bam.bai
-├── reads_son.bam.g.vcf -> */c2/6b6563*/reads_son.bam.g.vcf
-└── reads_son.bam.g.vcf.idx -> */c2/6b6563*/reads_son.bam.g.vcf.idx
-```
+??? abstract "Directory contents (symlinks shortened)"
+
+    ```console
+    results_genomics/
+    ├── reads_father.bam -> */47/f7fac1*/reads_father.bam
+    ├── reads_father.bam.bai -> */47/f7fac1*/reads_father.bam.bai
+    ├── reads_father.bam.g.vcf -> */cb/ad7430*/reads_father.bam.g.vcf
+    ├── reads_father.bam.g.vcf.idx -> */cb/ad7430*/reads_father.bam.g.vcf.idx
+    ├── reads_mother.bam -> */a2/56a3a8*/reads_mother.bam
+    ├── reads_mother.bam.bai -> */a2/56a3a8*/reads_mother.bam.bai
+    ├── reads_mother.bam.g.vcf -> */ce/096ac6*/reads_mother.bam.g.vcf
+    ├── reads_mother.bam.g.vcf.idx -> */ce/096ac6*/reads_mother.bam.g.vcf.idx
+    ├── reads_son.bam -> */a1/0b5d00*/reads_son.bam
+    ├── reads_son.bam.bai -> */a1/0b5d00*/reads_son.bam.bai
+    ├── reads_son.bam.g.vcf -> */c2/6b6563*/reads_son.bam.g.vcf
+    └── reads_son.bam.g.vcf.idx -> */c2/6b6563*/reads_son.bam.g.vcf.idx
+    ```
 
 If you open one of the GVCF files and scroll through it, you can verify that GATK HaplotypeCaller produced GVCF files as requested.
 
@@ -696,16 +700,18 @@ Aha! It seems to be working now.
 
 The first two steps were successfully skipped, and the third step worked like a charm this time. We find our output data store in the results directory.
 
-```console title="Directory contents"
-results_genomics/family_trio_gdb
-├── 20_10037292_10066351$12912$14737
-├── 20_10037292_10066351$3277$5495
-├── 20_10037292_10066351$7536$9859
-├── callset.json
-├── __tiledb_workspace.tdb
-├── vcfheader.vcf
-└── vidmap.json
-```
+??? abstract "Directory contents"
+
+    ```console
+    results_genomics/family_trio_gdb
+    ├── 20_10037292_10066351$12912$14737
+    ├── 20_10037292_10066351$3277$5495
+    ├── 20_10037292_10066351$7536$9859
+    ├── callset.json
+    ├── __tiledb_workspace.tdb
+    ├── vcfheader.vcf
+    └── vidmap.json
+    ```
 
 By the way, we didn't have to do anything special to handle the output being a directory instead of a single file.
 Isn't that nice?
