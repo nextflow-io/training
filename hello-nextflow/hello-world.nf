@@ -4,6 +4,7 @@
  * Use echo to print 'Hello World!' to a file
  */
 process sayHello {
+
     output:
     path 'output.txt'
 
@@ -15,6 +16,7 @@ process sayHello {
 
 workflow {
 
+    main:
     // emit a greeting
     sayHello()
 }
