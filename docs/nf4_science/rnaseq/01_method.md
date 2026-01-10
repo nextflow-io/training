@@ -35,31 +35,41 @@ docker pull community.wave.seqera.io/library/trim-galore:0.6.10--1bf8ca4e1967cd1
 
 This gives you the following console output as the system downloads the image:
 
-```console title="Output"
-0.6.10--1bf8ca4e1967cd18: Pulling from library/trim-galore
-dafa2b0c44d2: Pull complete
-dec6b097362e: Pull complete
-f88da01cff0b: Pull complete
-4f4fb700ef54: Pull complete
-92dc97a3ef36: Pull complete
-403f74b0f85e: Pull complete
-10b8c00c10a5: Pull complete
-17dc7ea432cc: Pull complete
-bb36d6c3110d: Pull complete
-0ea1a16bbe82: Pull complete
-030a47592a0a: Pull complete
-32ec762be2d0: Pull complete
-d2cb90387285: Pull complete
-Digest: sha256:4f00e7b2a09f3c8d8a9ce955120e177152fb1e56f63a2a6e186088b1250d9907
-Status: Downloaded newer image for community.wave.seqera.io/library/trim-galore:0.6.10--1bf8ca4e1967cd18
-community.wave.seqera.io/library/trim-galore:0.6.10--1bf8ca4e1967cd18
-```
+??? success "Command output"
+
+    ```console
+    0.6.10--1bf8ca4e1967cd18: Pulling from library/trim-galore
+    dafa2b0c44d2: Pull complete
+    dec6b097362e: Pull complete
+    f88da01cff0b: Pull complete
+    4f4fb700ef54: Pull complete
+    92dc97a3ef36: Pull complete
+    403f74b0f85e: Pull complete
+    10b8c00c10a5: Pull complete
+    17dc7ea432cc: Pull complete
+    bb36d6c3110d: Pull complete
+    0ea1a16bbe82: Pull complete
+    030a47592a0a: Pull complete
+    32ec762be2d0: Pull complete
+    d2cb90387285: Pull complete
+    Digest: sha256:4f00e7b2a09f3c8d8a9ce955120e177152fb1e56f63a2a6e186088b1250d9907
+    Status: Downloaded newer image for community.wave.seqera.io/library/trim-galore:0.6.10--1bf8ca4e1967cd18
+    community.wave.seqera.io/library/trim-galore:0.6.10--1bf8ca4e1967cd18
+    ```
 
 ### 1.2. Spin up the container interactively
 
 ```bash
 docker run -it -v ./data:/data community.wave.seqera.io/library/trim-galore:0.6.10--1bf8ca4e1967cd18
 ```
+
+<!--
+??? success "Command output"
+
+    ```console
+
+    ```
+-->
 
 Your prompt will change to something like `(base) root@b645838b3314:/tmp#`, which indicates that you are now inside the container.
 
@@ -69,11 +79,13 @@ The `-v ./data:/data` part of the command will enable us to access the contents 
 ls /data/reads
 ```
 
-```console title="Output"
-ENCSR000COQ1_1.fastq.gz  ENCSR000COQ2_2.fastq.gz  ENCSR000COR2_1.fastq.gz  ENCSR000CPO1_2.fastq.gz
-ENCSR000COQ1_2.fastq.gz  ENCSR000COR1_1.fastq.gz  ENCSR000COR2_2.fastq.gz  ENCSR000CPO2_1.fastq.gz
-ENCSR000COQ2_1.fastq.gz  ENCSR000COR1_2.fastq.gz  ENCSR000CPO1_1.fastq.gz  ENCSR000CPO2_2.fastq.gzO
-```
+??? success "Command output"
+
+    ```console
+    ENCSR000COQ1_1.fastq.gz  ENCSR000COQ2_2.fastq.gz  ENCSR000COR2_1.fastq.gz  ENCSR000CPO1_2.fastq.gz
+    ENCSR000COQ1_2.fastq.gz  ENCSR000COR1_1.fastq.gz  ENCSR000COR2_2.fastq.gz  ENCSR000CPO2_1.fastq.gz
+    ENCSR000COQ2_1.fastq.gz  ENCSR000COR1_2.fastq.gz  ENCSR000CPO1_1.fastq.gz  ENCSR000CPO2_2.fastq.gzO
+    ```
 
 ### 1.3. Run the first `fastqc` command
 
@@ -83,38 +95,41 @@ Let's run `fastqc` to collect quality control metrics on the read data.
 fastqc /data/reads/ENCSR000COQ1_1.fastq.gz
 ```
 
-This should run very quickly:
+??? success "Command output"
 
-```console title="Output"
-application/gzip
-Started analysis of ENCSR000COQ1_1.fastq.gz
-Approx 5% complete for ENCSR000COQ1_1.fastq.gz
-Approx 10% complete for ENCSR000COQ1_1.fastq.gz
-Approx 15% complete for ENCSR000COQ1_1.fastq.gz
-Approx 20% complete for ENCSR000COQ1_1.fastq.gz
-Approx 25% complete for ENCSR000COQ1_1.fastq.gz
-Approx 30% complete for ENCSR000COQ1_1.fastq.gz
-Approx 35% complete for ENCSR000COQ1_1.fastq.gz
-Approx 40% complete for ENCSR000COQ1_1.fastq.gz
-Approx 45% complete for ENCSR000COQ1_1.fastq.gz
-Approx 50% complete for ENCSR000COQ1_1.fastq.gz
-Approx 55% complete for ENCSR000COQ1_1.fastq.gz
-Approx 60% complete for ENCSR000COQ1_1.fastq.gz
-Approx 65% complete for ENCSR000COQ1_1.fastq.gz
-Approx 70% complete for ENCSR000COQ1_1.fastq.gz
-Approx 75% complete for ENCSR000COQ1_1.fastq.gz
-Approx 80% complete for ENCSR000COQ1_1.fastq.gz
-Approx 85% complete for ENCSR000COQ1_1.fastq.gz
-Approx 90% complete for ENCSR000COQ1_1.fastq.gz
-Approx 95% complete for ENCSR000COQ1_1.fastq.gz
-Analysis complete for ENCSR000COQ1_1.fastq.gz
-```
+    ```console
+    application/gzip
+    Started analysis of ENCSR000COQ1_1.fastq.gz
+    Approx 5% complete for ENCSR000COQ1_1.fastq.gz
+    Approx 10% complete for ENCSR000COQ1_1.fastq.gz
+    Approx 15% complete for ENCSR000COQ1_1.fastq.gz
+    Approx 20% complete for ENCSR000COQ1_1.fastq.gz
+    Approx 25% complete for ENCSR000COQ1_1.fastq.gz
+    Approx 30% complete for ENCSR000COQ1_1.fastq.gz
+    Approx 35% complete for ENCSR000COQ1_1.fastq.gz
+    Approx 40% complete for ENCSR000COQ1_1.fastq.gz
+    Approx 45% complete for ENCSR000COQ1_1.fastq.gz
+    Approx 50% complete for ENCSR000COQ1_1.fastq.gz
+    Approx 55% complete for ENCSR000COQ1_1.fastq.gz
+    Approx 60% complete for ENCSR000COQ1_1.fastq.gz
+    Approx 65% complete for ENCSR000COQ1_1.fastq.gz
+    Approx 70% complete for ENCSR000COQ1_1.fastq.gz
+    Approx 75% complete for ENCSR000COQ1_1.fastq.gz
+    Approx 80% complete for ENCSR000COQ1_1.fastq.gz
+    Approx 85% complete for ENCSR000COQ1_1.fastq.gz
+    Approx 90% complete for ENCSR000COQ1_1.fastq.gz
+    Approx 95% complete for ENCSR000COQ1_1.fastq.gz
+    Analysis complete for ENCSR000COQ1_1.fastq.gz
+    ```
 
+This should run very quickly.
 You can find the output files in the same directory as the original data:
 
 ```bash
 ls /data/reads/ENCSR000COQ1_1_fastqc*
 ```
+
+<!-- switch to tree -->
 
 ```console title="Output"
 /data/reads/ENCSR000COQ1_1_fastqc.html  /data/reads/ENCSR000COQ1_1_fastqc.zip
@@ -132,19 +147,21 @@ The `--fastqc` flag causes the command to automatically run a QC collection step
 
 _The output is very verbose so what follows is abbreviated._
 
-```console title="Output"
-Multicore support not enabled. Proceeding with single-core trimming.
-Path to Cutadapt set as: 'cutadapt' (default)
-Cutadapt seems to be working fine (tested command 'cutadapt --version')
-Cutadapt version: 4.9
-single-core operation.
-igzip command line interface 2.31.0
-igzip detected. Using igzip for decompressing
+??? success "Command output"
 
-<...>
+    ```console
+    Multicore support not enabled. Proceeding with single-core trimming.
+    Path to Cutadapt set as: 'cutadapt' (default)
+    Cutadapt seems to be working fine (tested command 'cutadapt --version')
+    Cutadapt version: 4.9
+    single-core operation.
+    igzip command line interface 2.31.0
+    igzip detected. Using igzip for decompressing
 
-Analysis complete for ENCSR000COQ1_1_trimmed.fq.gz
-```
+    <...>
+
+    Analysis complete for ENCSR000COQ1_1_trimmed.fq.gz
+    ```
 
 You can find the output files in the working directory:
 
@@ -184,25 +201,27 @@ We're going to pull a container image that has `hisat2` installed, spin it up in
 docker pull community.wave.seqera.io/library/hisat2_samtools:5e49f68a37dc010e
 ```
 
-```console title="Output"
-Unable to find image 'community.wave.seqera.io/library/hisat2_samtools:5e49f68a37dc010e' locally
-5e49f68a37dc010e: Pulling from library/hisat2_samtools
-dafa2b0c44d2: Already exists
-dec6b097362e: Already exists
-f88da01cff0b: Already exists
-4f4fb700ef54: Already exists
-92dc97a3ef36: Already exists
-403f74b0f85e: Already exists
-10b8c00c10a5: Already exists
-17dc7ea432cc: Already exists
-bb36d6c3110d: Already exists
-0ea1a16bbe82: Already exists
-030a47592a0a: Already exists
-e74ed5dd390b: Pull complete
-abfcf0185e51: Pull complete
-Digest: sha256:29d8e1a3172a2bdde7be813f7ebec22d331388194a7c0de872b4ccca4bed8f45
-Status: Downloaded newer image for community.wave.seqera.io/library/hisat2_samtools:5e49f68a37dc010e
-```
+??? success "Command output"
+
+    ```console
+    Unable to find image 'community.wave.seqera.io/library/hisat2_samtools:5e49f68a37dc010e' locally
+    5e49f68a37dc010e: Pulling from library/hisat2_samtools
+    dafa2b0c44d2: Already exists
+    dec6b097362e: Already exists
+    f88da01cff0b: Already exists
+    4f4fb700ef54: Already exists
+    92dc97a3ef36: Already exists
+    403f74b0f85e: Already exists
+    10b8c00c10a5: Already exists
+    17dc7ea432cc: Already exists
+    bb36d6c3110d: Already exists
+    0ea1a16bbe82: Already exists
+    030a47592a0a: Already exists
+    e74ed5dd390b: Pull complete
+    abfcf0185e51: Pull complete
+    Digest: sha256:29d8e1a3172a2bdde7be813f7ebec22d331388194a7c0de872b4ccca4bed8f45
+    Status: Downloaded newer image for community.wave.seqera.io/library/hisat2_samtools:5e49f68a37dc010e
+    ```
 
 ### 2.2. Spin up the `hisat2` container interactively
 
@@ -222,12 +241,16 @@ hisat2-build /data/genome.fa genome_index
 
 The output is very verbose so the following is abbreviated:
 
-```console title="Output"
-Settings:
-  Output files: "genome_index.*.ht2"
-<...>
-Total time for call to driver() for forward index: 00:00:16
-```
+<!-- TODO: switch to full output -->
+
+??? success "Command output"
+
+    ```console
+    Settings:
+      Output files: "genome_index.*.ht2"
+    <...>
+    Total time for call to driver() for forward index: 00:00:16
+    ```
 
 This creates multiple genome index files, which you can find in the working directory.
 
@@ -260,17 +283,19 @@ hisat2 -x genome_index -U /data/trimmed/ENCSR000COQ1_1_trimmed.fq.gz \
     samtools view -bS -o ENCSR000COQ1_1_trimmed.bam
 ```
 
+??? success "Command output"
+
+    ```console
+    HISAT2 summary stats:
+            Total reads: 27816
+                    Aligned 0 time: 1550 (5.57%)
+                    Aligned 1 time: 25410 (91.35%)
+                    Aligned >1 times: 856 (3.08%)
+            Overall alignment rate: 94.43%
+    ```
+
 This runs almost instantly because it's a very small test file.
 At real scale this could take a lot longer.
-
-```console title="Output"
-HISAT2 summary stats:
-        Total reads: 27816
-                Aligned 0 time: 1550 (5.57%)
-                Aligned 1 time: 25410 (91.35%)
-                Aligned >1 times: 856 (3.08%)
-        Overall alignment rate: 94.43%
-```
 
 Once again you can find the output files in the working directory:
 
@@ -307,25 +332,27 @@ We're going to pull a container image that has `multiqc` installed, spin it up i
 docker pull community.wave.seqera.io/library/pip_multiqc:a3c26f6199d64b7c
 ```
 
-```console title="Output"
-ad8f247edb55897c: Pulling from library/pip_multiqc
-dafa2b0c44d2: Already exists
-dec6b097362e: Already exists
-f88da01cff0b: Already exists
-4f4fb700ef54: Already exists
-92dc97a3ef36: Already exists
-403f74b0f85e: Already exists
-10b8c00c10a5: Already exists
-17dc7ea432cc: Already exists
-bb36d6c3110d: Already exists
-0ea1a16bbe82: Already exists
-030a47592a0a: Already exists
-3f229294c69a: Pull complete
-5a5ad47fd84c: Pull complete
-Digest: sha256:0ebb1d9605395a7df49ad0eb366b21f46afd96a5090376b0d8941cf5294a895a
-Status: Downloaded newer image for community.wave.seqera.io/library/pip_multiqc:a3c26f6199d64b7c
-community.wave.seqera.io/library/pip_multiqc:a3c26f6199d64b7c
-```
+??? success "Command output"
+
+    ```console
+    ad8f247edb55897c: Pulling from library/pip_multiqc
+    dafa2b0c44d2: Already exists
+    dec6b097362e: Already exists
+    f88da01cff0b: Already exists
+    4f4fb700ef54: Already exists
+    92dc97a3ef36: Already exists
+    403f74b0f85e: Already exists
+    10b8c00c10a5: Already exists
+    17dc7ea432cc: Already exists
+    bb36d6c3110d: Already exists
+    0ea1a16bbe82: Already exists
+    030a47592a0a: Already exists
+    3f229294c69a: Pull complete
+    5a5ad47fd84c: Pull complete
+    Digest: sha256:0ebb1d9605395a7df49ad0eb366b21f46afd96a5090376b0d8941cf5294a895a
+    Status: Downloaded newer image for community.wave.seqera.io/library/pip_multiqc:a3c26f6199d64b7c
+    community.wave.seqera.io/library/pip_multiqc:a3c26f6199d64b7c
+    ```
 
 ### 3.2. Spin up the `multiqc` container interactively
 
@@ -339,23 +366,25 @@ docker run -it -v ./data:/data community.wave.seqera.io/library/pip_multiqc:a3c2
 multiqc /data/reads /data/trimmed /data/aligned -n ENCSR000COQ1_1_QC
 ```
 
+??? success "Command output"
+
+    ```console
+
+    /// MultiQC 🔍 v1.27.1
+
+          file_search | Search path: /data/reads
+          file_search | Search path: /data/trimmed
+          file_search | Search path: /data/aligned
+            searching | ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 20/20
+                hisat2 | Found 1 reports
+              cutadapt | Found 1 reports
+                fastqc | Found 1 reports
+        write_results | Data        : ENCSR000COQ1_1_QC_data
+        write_results | Report      : ENCSR000COQ1_1_QC.html
+              multiqc | MultiQC complete
+    ```
+
 MultiQC is able to search through directories for compatible QC reports and will aggregate everything it finds.
-
-```console title="Output"
-
-/// MultiQC 🔍 v1.27.1
-
-       file_search | Search path: /data/reads
-       file_search | Search path: /data/trimmed
-       file_search | Search path: /data/aligned
-         searching | ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 20/20
-            hisat2 | Found 1 reports
-          cutadapt | Found 1 reports
-            fastqc | Found 1 reports
-     write_results | Data        : ENCSR000COQ1_1_QC_data
-     write_results | Report      : ENCSR000COQ1_1_QC.html
-           multiqc | MultiQC complete
-```
 
 Here we see the tool found all three QC reports we generated: the initial QC we did with `fastqc`, the post-trimming report from `cutadapt` (made via `trim_galore`) and the post-alignment QC produced by `hisat2`.
 
