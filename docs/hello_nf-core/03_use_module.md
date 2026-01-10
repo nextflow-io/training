@@ -79,9 +79,11 @@ However, if you do, you can pipe the list to `grep` to find specific modules:
 nf-core modules list remote | grep 'cat/cat'
 ```
 
-```console title="Output"
-│ cat/cat
-```
+??? success "Command output"
+
+    ```console
+    │ cat/cat
+    ```
 
 Just keep in mind the that `grep` approach will only pull out results with the search term in their name, which would not work for `cat_cat`.
 
@@ -216,7 +218,7 @@ The command automatically:
 - Updates `modules.json` to track the installed module
 - Provides you with the correct `include` statement to use in your workflow
 
-!!! note
+!!! tip
 
     Always make sure your current working directory is the root of your pipeline project before running the module installation command.
 
@@ -252,16 +254,18 @@ You can also verify the installation by asking the nf-core utility to list local
 nf-core modules list local
 ```
 
-```console title="Output"
-INFO     Repository type: pipeline
-INFO     Modules installed in '.':
+??? success "Command output"
 
-┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓
-┃ Module Name ┃ Repository      ┃ Version SHA ┃ Message                                ┃ Date       ┃
-┡━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩
-│ cat/cat     │ nf-core/modules │ 41dfa3f     │ update meta.yml of all modules (#8747) │ 2025-07-07 │
-└─────────────┴─────────────────┴─────────────┴────────────────────────────────────────┴────────────┘
-```
+    ```console
+    INFO     Repository type: pipeline
+    INFO     Modules installed in '.':
+
+    ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓
+    ┃ Module Name ┃ Repository      ┃ Version SHA ┃ Message                                ┃ Date       ┃
+    ┡━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩
+    │ cat/cat     │ nf-core/modules │ 41dfa3f     │ update meta.yml of all modules (#8747) │ 2025-07-07 │
+    └─────────────┴─────────────────┴─────────────┴────────────────────────────────────────┴────────────┘
+    ```
 
 This confirms that the `cat/cat` module is now part of your project's source code.
 

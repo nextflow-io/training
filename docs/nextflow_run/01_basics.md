@@ -80,7 +80,7 @@ nextflow run 1-hello.nf --greeting 'Hello World!'
 
 You console output should look something like this:
 
-??? success title="Command output"
+??? success "Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -393,7 +393,7 @@ To use it, simply add `-resume` to your command and run it:
 nextflow run 1-hello.nf --greeting 'Hello World!' -resume
 ```
 
-??? success title="Command output"
+??? success "Command output"
 
     ```console linenums="1"
     N E X T F L O W   ~  version 25.04.3
@@ -436,7 +436,7 @@ A more convenient way to access this information is to use the `nextflow log` co
 nextflow log
 ```
 
-??? success title="Command output"
+??? success "Command output"
 
     ```console linenums="1"
     TIMESTAMP               DURATION        RUN NAME                STATUS  REVISION ID     SESSION ID                              COMMAND
@@ -472,7 +472,7 @@ Once we have that, first we try the `nextflow clean` command using the dry run f
 nextflow clean -before backstabbing_swartz -n
 ```
 
-??? success title="Command output"
+??? success "Command output"
 
     ```console
     Would remove /workspaces/training/hello-nextflow/work/eb/1a5de36637b475afd88fca7f79e024
@@ -492,7 +492,7 @@ nextflow clean -before backstabbing_swartz -f
 
 The output should be similar to before, but now saying 'Removed' instead of 'Would remove'.
 
-??? success title="Command output"
+??? success "Command output"
 
     ```console
     Removed /workspaces/training/hello-nextflow/work/eb/1a5de36637b475afd88fca7f79e024

@@ -38,7 +38,7 @@ Just to make sure everything is working, run the script once before making any c
 nextflow run hello-modules.nf
 ```
 
-??? success title="Command output"
+??? success "Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -171,7 +171,7 @@ We're running the workflow with essentially the same code and inputs as before, 
 nextflow run hello-modules.nf -resume
 ```
 
-??? success title="Command output"
+??? success "Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -270,7 +270,7 @@ Run this with the `-resume` flag.
 nextflow run hello-modules.nf -resume
 ```
 
-??? success title="Command output"
+??? success "Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -364,7 +364,7 @@ Run this with the `-resume` flag.
 nextflow run hello-modules.nf -resume
 ```
 
-??? success title="Command output"
+??? success "Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3

@@ -345,14 +345,16 @@ First, try running without the required `input` parameter:
 nextflow run . --outdir test-results -profile docker
 ```
 
-```console title="Output"
-ERROR ~ Validation of pipeline parameters failed!
+??? warning "Command output"
 
- -- Check '.nextflow.log' file for details
-The following invalid input values have been detected:
+    ```console
+    ERROR ~ Validation of pipeline parameters failed!
 
-* Missing required parameter(s): input, batch
-```
+    -- Check '.nextflow.log' file for details
+    The following invalid input values have been detected:
+
+    * Missing required parameter(s): input, batch
+    ```
 
 Perfect! The validation catches the missing required parameter before the pipeline runs.
 
@@ -361,6 +363,8 @@ Now try with a valid set of parameters:
 ```bash
 nextflow run . --input assets/greetings.csv --outdir results --batch my-batch -profile test,docker
 ```
+
+<!-- TODO: add output -->
 
 The pipeline should run successfully, and the `batch` parameter is now validated.
 
@@ -646,28 +650,29 @@ Let's verify that our validation works by testing both valid and invalid inputs.
 
 #### 2.7.1. Test with valid input
 
-First, confirm the pipeline runs successfully with valid input:
+First, confirm the pipeline runs successfully with valid input.
+Note that we no longer need `--validate_params false` since validation is working!
 
 ```bash
 nextflow run . --outdir core-hello-results -profile test,docker
 ```
 
-Note that we no longer need `--validate_params false` since validation is working!
+??? success "Command output"
 
-```console title="Output"
-------------------------------------------------------
-WARN: The following invalid input values have been detected:
+    ```console
+    ------------------------------------------------------
+    WARN: The following invalid input values have been detected:
 
-* --character: tux
+    * --character: tux
 
 
-executor >  local (10)
-[c1/39f64a] CORE_HELLO:HELLO:sayHello (1)       | 4 of 4 ✔
-[44/c3fb82] CORE_HELLO:HELLO:convertToUpper (4) | 4 of 4 ✔
-[62/80fab2] CORE_HELLO:HELLO:CAT_CAT (test)     | 1 of 1 ✔
-[e1/4db4fd] CORE_HELLO:HELLO:COWPY              | 1 of 1 ✔
--[core/hello] Pipeline completed successfully-
-```
+    executor >  local (10)
+    [c1/39f64a] CORE_HELLO:HELLO:sayHello (1)       | 4 of 4 ✔
+    [44/c3fb82] CORE_HELLO:HELLO:convertToUpper (4) | 4 of 4 ✔
+    [62/80fab2] CORE_HELLO:HELLO:CAT_CAT (test)     | 1 of 1 ✔
+    [e1/4db4fd] CORE_HELLO:HELLO:COWPY              | 1 of 1 ✔
+    -[core/hello] Pipeline completed successfully-
+    ```
 
 Great! The pipeline runs successfully and validation passes silently.
 The warning about `--character` is just informational since it's not defined in the schema.
@@ -711,20 +716,24 @@ Try running the pipeline with this invalid input:
 nextflow run . --input assets/invalid_greetings.csv --outdir test-results -profile docker
 ```
 
-```console title="Output (subset)"
-ERROR ~ Validation of pipeline parameters failed!
+??? failure "Command output"
 
- -- Check '.nextflow.log' file for details
-The following invalid input values have been detected:
+    ```console
+    ERROR ~ Validation of pipeline parameters failed!
 
-* Missing required parameter(s): batch
-* --input (/tmp/invalid_greetings.csv): Validation of file failed:
-        -> Entry 1: Missing required field(s): greeting
-        -> Entry 2: Missing required field(s): greeting
-        -> Entry 3: Missing required field(s): greeting
+    -- Check '.nextflow.log' file for details
+    The following invalid input values have been detected:
 
- -- Check script 'subworkflows/nf-core/utils_nfschema_plugin/main.nf' at line: 68 or see '.nextflow.log' file for more details
-```
+    * Missing required parameter(s): batch
+    * --input (/tmp/invalid_greetings.csv): Validation of file failed:
+            -> Entry 1: Missing required field(s): greeting
+            -> Entry 2: Missing required field(s): greeting
+            -> Entry 3: Missing required field(s): greeting
+
+    -- Check script 'subworkflows/nf-core/utils_nfschema_plugin/main.nf' at line: 68 or see '.nextflow.log' file for more details
+    ```
+
+<!-- TODO full output -->
 
 Perfect! The validation caught the error and provided a clear, helpful error message pointing to:
 

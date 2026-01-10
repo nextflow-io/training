@@ -41,7 +41,7 @@ Just to make sure everything is working, run the script once before making any c
 nextflow run hello-workflow.nf
 ```
 
-??? success title="Command output"
+??? success "Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -200,7 +200,7 @@ Let's run this using the `-resume` flag, since we've already run the first step 
 nextflow run hello-workflow.nf -resume
 ```
 
-??? success title="Command output"
+??? success "Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -427,7 +427,7 @@ Let's try it.
 nextflow run hello-workflow.nf -resume
 ```
 
-??? success title="Command output"
+??? success "Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -520,7 +520,7 @@ Let's try it:
 nextflow run hello-workflow.nf -resume
 ```
 
-??? success title="Command output"
+??? success "Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -702,7 +702,7 @@ Let's try running this with a batch name on the command line.
 nextflow run hello-workflow.nf -resume --batch trio
 ```
 
-??? success title="Command output"
+??? success "Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -853,7 +853,7 @@ Let's try running this with the current batch of greetings.
 nextflow run hello-workflow.nf -resume --batch trio
 ```
 
-??? success title="Command output"
+??? success "Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3

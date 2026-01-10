@@ -36,7 +36,7 @@ Just to make sure everything is working, run the script once before making any c
 nextflow run hello-channels.nf --greeting 'Hello Channels!'
 ```
 
-??? success title="Command output"
+??? success "Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -150,7 +150,7 @@ Let's run it!
 nextflow run hello-channels.nf
 ```
 
-??? success title="Command output"
+??? success "Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -221,7 +221,7 @@ Let's try it.
 nextflow run hello-channels.nf
 ```
 
-??? success title="Command output"
+??? success "Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -247,7 +247,7 @@ To expand the logging to display one line per process call, add `-ansi-log false
 nextflow run hello-channels.nf -ansi-log false
 ```
 
-??? success title="Command output"
+??? success "Command output"
 
     ```console
     N E X T F L O W  ~  version 25.04.3
@@ -361,7 +361,7 @@ Let's run it:
 nextflow run hello-channels.nf
 ```
 
-??? success title="Command output"
+??? success "Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -490,7 +490,7 @@ Let's try running this:
 nextflow run hello-channels.nf
 ```
 
-??? failure title="Command output"
+??? failure "Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -594,7 +594,7 @@ Finally, you can try running the workflow again!
 nextflow run hello-channels.nf
 ```
 
-??? success title="Command output"
+??? success "Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -781,7 +781,7 @@ Let's try running the workflow with the added CSV-parsing logic.
 nextflow run hello-channels.nf
 ```
 
-??? failure title="Command output" <!-- TODO: paste complete output -->
+??? failure "Command output" <!-- TODO: paste complete output -->
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -870,7 +870,7 @@ Let's run it one more time:
 nextflow run hello-channels.nf
 ```
 
-??? success title="Command output"
+??? success "Command output"
 
     ```console title="Output" linenums="1"
     N E X T F L O W   ~  version 25.04.3

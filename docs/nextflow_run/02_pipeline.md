@@ -39,7 +39,7 @@ Run the following command in your terminal.
 nextflow run 2a-inputs.nf --input greetings.csv
 ```
 
-??? success title="Command output"
+??? success "Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -117,7 +117,7 @@ We can modify the logging behavior to see the full list of process calls by addi
 nextflow run 2a-inputs.nf --input greetings.csv -ansi-log false
 ```
 
-??? success title="Command output"
+??? success "Command output"
 
     ```console linenums="1"
     N E X T F L O W  ~  version 25.04.3
@@ -324,7 +324,7 @@ Run the following command in your terminal:
 nextflow run 2b-multistep.nf --input greetings.csv
 ```
 
-??? success title="Command output"
+??? success "Command output"
 
     ```console linenums="1"
     N E X T F L O W   ~  version 25.04.3
@@ -638,7 +638,7 @@ Run this command in your terminal, with the `-resume` flag:
 nextflow run 2c-modules.nf --input greetings.csv -resume
 ```
 
-??? success title="Command output"
+??? success "Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -715,7 +715,7 @@ Run the complete pull command:
 docker pull 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
 ```
 
-??? success title="Command output"
+??? success "Command output"
 
     ```console
     Unable to find image 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273' locally
@@ -797,7 +797,7 @@ From inside the container, you can run the `cowpy` command directly.
 cowpy "Hello Containers"
 ```
 
-??? success title="Command output"
+??? success "Command output"
 
     ```console
     ______________________________________________________
@@ -819,7 +819,7 @@ For example, the tool documentation says we can set the character with `-c`.
 cowpy "Hello Containers" -c tux
 ```
 
-??? success title="Command output"
+??? success "Command output"
 
     ```console
     __________________
@@ -990,7 +990,7 @@ Let's run the workflow with the `-resume` flag, and specify that we want the cha
 nextflow run 2d-container.nf --input greetings.csv --character turkey -resume
 ```
 
-??? success title="Command output"
+??? success "Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3

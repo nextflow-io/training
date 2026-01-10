@@ -65,18 +65,20 @@ This TUI will ask you to provide basic information about your pipeline and will 
 
 Once the TUI closes, you should see the following console output.
 
-```console title="Output"
-                                          ,--./,-.
-          ___     __   __   __   ___     /,-._.--~\
-    |\ | |__  __ /  ` /  \ |__) |__         }  {
-    | \| |       \__, \__/ |  \ |___     \`-._,-`-,
-                                          `._,._,'
+??? success "Command output"
 
-    nf-core/tools version 3.4.1 - https://nf-co.re
+    ```console
+                                              ,--./,-.
+              ___     __   __   __   ___     /,-._.--~\
+        |\ | |__  __ /  ` /  \ |__) |__         }  {
+        | \| |       \__, \__/ |  \ |___     \`-._,-`-,
+                                              `._,._,'
+
+        nf-core/tools version 3.4.1 - https://nf-co.re
 
 
-INFO     Launching interactive nf-core pipeline creation tool.
-```
+    INFO     Launching interactive nf-core pipeline creation tool.
+    ```
 
 There is no explicit confirmation in the console output that the pipeline creation worked, but you should see a new directory called `core-hello`.
 

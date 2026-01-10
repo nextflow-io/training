@@ -74,12 +74,14 @@ Let's return to the terminal and run the following:
 nextflow pull nf-core/demo
 ```
 
-Nextflow will `pull` the pipeline code, meaning it will download the full repository to your local drive.
+??? success "Command output"
 
-```console title="Output"
-Checking nf-core/demo ...
- downloaded from https://github.com/nf-core/demo.git - revision: 04060b4644 [master]
-```
+    ```console
+    Checking nf-core/demo ...
+    downloaded from https://github.com/nf-core/demo.git - revision: 04060b4644 [master]
+    ```
+
+Nextflow does a `pull` of the pipeline code, meaning it downloads the full repository to your local drive.
 
 To be clear, you can do this with any Nextflow pipeline that is appropriately set up in GitHub, not just nf-core pipelines.
 However nf-core is the largest open-source collection of Nextflow pipelines.
@@ -90,9 +92,11 @@ You can get Nextflow to give you a list of what pipelines you have retrieved in 
 nextflow list
 ```
 
-```console title="Output"
-nf-core/demo
-```
+??? success "Command output"
+
+    ```console
+    nf-core/demo
+    ```
 
 You'll notice that the files are not in your current work directory.
 By default, Nextflow saves them to `$NXF_HOME/assets`.
@@ -308,7 +312,7 @@ There's a header that includes a summary of the pipeline's version, inputs and o
 
 Moving on to the execution output, let's have a look at the lines that tell us what processes were run:
 
-```console title="Output (subset)"
+```console
     [ff/a6976b] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE)     | 3 of 3 ✔
     [39/731ab7] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE3_SE) | 3 of 3 ✔
     [7c/78d96e] NFCORE_DEMO:DEMO:MULTIQC                 | 1 of 1 ✔

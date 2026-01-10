@@ -96,7 +96,7 @@ Let's try it out.
 nextflow run 3-main.nf --input greetings.csv --character turkey
 ```
 
-??? success title="Command output"
+??? success "Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -427,7 +427,7 @@ This will produce the same output but is more convenient to type, especially whe
 nextflow run 3-main.nf
 ```
 
-??? success title="Command output"
+??? success "Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -513,7 +513,7 @@ We can now run our pipeline from within our new working directory:
 nextflow run ../3-main.nf
 ```
 
-??? success title="Command output"
+??? success "Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -583,7 +583,7 @@ To run the workflow with this parameter file, simply add `-params-file <filename
 nextflow run 3-main.nf -params-file test-params.yaml
 ```
 
-??? success title="Command output"
+??? success "Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -682,7 +682,7 @@ Let's try running the workflow with the `my_laptop` configuration.
 nextflow run 3-main.nf -profile my_laptop
 ```
 
-??? success title="Command output"
+??? success "Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -762,7 +762,7 @@ Let's try adding the test profile to our previous command:
 nextflow run 3-main.nf -profile my_laptop,test
 ```
 
-??? success title="Command output"
+??? success "Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -833,7 +833,7 @@ nextflow config
 
 <!-- TODO: update with types -->
 
-??? success title="Command output"
+??? success "Command output"
 
     ```groovy
     docker {
@@ -868,7 +868,7 @@ nextflow config -profile my_laptop,test
 
 <!-- TODO: update with types -->
 
-??? success title="Command output"
+??? success "Command output"
 
     ```groovy
     docker {

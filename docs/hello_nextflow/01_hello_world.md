@@ -352,7 +352,7 @@ nextflow run hello-world.nf
 
 The log output should look very familiar.
 
-??? success title="Command output"
+??? success "Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -398,7 +398,7 @@ nextflow run hello-world.nf -resume
 
 The console output should look similar.
 
-??? success title="Command output"
+??? success "Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -589,7 +589,7 @@ nextflow run hello-world.nf --greeting 'Bonjour le monde!'
 
 If you made all three edits correctly, you should get another successful execution.
 
-??? success title="Command output"
+??? success "Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -647,7 +647,7 @@ Now that you have a default value set, you can run the workflow again without ha
 nextflow run hello-world.nf
 ```
 
-??? success title="Command output"
+??? success "Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
@@ -676,7 +676,7 @@ Try it out:
 nextflow run hello-world.nf --greeting 'Konnichiwa!'
 ```
 
-??? success title="Command output"
+??? success "Command output"
 
     ```console
     N E X T F L O W   ~  version 25.04.3
