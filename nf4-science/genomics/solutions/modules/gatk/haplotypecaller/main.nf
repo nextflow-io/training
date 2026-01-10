@@ -8,15 +8,15 @@ process GATK_HAPLOTYPECALLER {
     publishDir params.outdir, mode: 'symlink'
 
     input:
-        tuple path(input_bam), path(input_bam_index)
-        path ref_fasta
-        path ref_index
-        path ref_dict
-        path interval_list
+    tuple path(input_bam), path(input_bam_index)
+    path ref_fasta
+    path ref_index
+    path ref_dict
+    path interval_list
 
     output:
-        path "${input_bam}.g.vcf"     , emit: vcf
-        path "${input_bam}.g.vcf.idx" , emit: idx
+    path "${input_bam}.g.vcf", emit: vcf
+    path "${input_bam}.g.vcf.idx", emit: idx
 
     script:
     """

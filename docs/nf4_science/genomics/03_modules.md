@@ -1,5 +1,7 @@
 # Part 3: Moving code into modules
 
+<!-- TODO: don't bother refining, we'll move to making it modular from the get-go -->
+
 In the first part of this course, you built a variant calling pipeline that was completely linear and processed each sample's data independently of the others.
 
 In the second part, we showed you how to use channels and channel operators to implement joint variant calling with GATK, building on the pipeline from Part 1.
@@ -29,7 +31,7 @@ nextflow run genomics-3.nf -resume
 And it works!
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  version 25.10.2
 
 Launching `genomics-3.nf` [gloomy_poincare] DSL2 - revision: 43203316e0
 
@@ -81,10 +83,10 @@ process SAMTOOLS_INDEX {
     publishDir params.outdir, mode: 'symlink'
 
     input:
-        path input_bam
+    path input_bam
 
     output:
-        tuple path(input_bam), path("${input_bam}.bai")
+    tuple path(input_bam), path("${input_bam}.bai")
 
     script:
     """
@@ -122,17 +124,19 @@ You can now run the workflow again, and it should still work the same way as bef
 nextflow run genomics-3.nf -resume
 ```
 
-```console title="Re-used Output after moving SAMTOOLS_INDEX to a module"
- N E X T F L O W   ~  version 24.10.0
+??? success "Command output"
 
-Launching `genomics-3.nf` [ridiculous_jones] DSL2 - revision: c5a13e17a1
+    ```console
+    N E X T F L O W   ~  version 25.10.2
 
-[cf/289c2d] SAMTOOLS_INDEX (2)       | 3 of 3, cached: 3 ✔
-[30/b2522b] GATK_HAPLOTYPECALLER (1) | 3 of 3, cached: 3 ✔
-[a8/d2c189] GATK_JOINTGENOTYPING     | 1 of 1, cached: 1 ✔
-```
+    Launching `genomics-3.nf` [ridiculous_jones] DSL2 - revision: c5a13e17a1
 
-### 1.2. Create a modules for the `GATK_HAPLOTYPECALLER` and `GATK_JOINTGENOTYPING` processes
+    [cf/289c2d] SAMTOOLS_INDEX (2)       | 3 of 3, cached: 3 ✔
+    [30/b2522b] GATK_HAPLOTYPECALLER (1) | 3 of 3, cached: 3 ✔
+    [a8/d2c189] GATK_JOINTGENOTYPING     | 1 of 1, cached: 1 ✔
+    ```
+
+### 1.2. Create modules for the `GATK_HAPLOTYPECALLER` and `GATK_JOINTGENOTYPING` processes
 
 Repeat the same steps for the remaining processes. You'll need to create a directory for each process, and then create a `main.nf` file inside that directory, removing the process definition from the workflow's `main.nf` file and adding an import declaration for the module. Once you're done, check that your modules directory structure is correct by running:
 
@@ -140,19 +144,21 @@ Repeat the same steps for the remaining processes. You'll need to create a direc
 tree modules/
 ```
 
-```console title="Directory structure"
-modules/
-├── gatk
-│   ├── haplotypecaller
-│   │   └── main.nf
-│   └── jointgenotyping
-│       └── main.nf
-└── samtools
-    └── index
-        └── main.nf
+??? abstract "Directory contents"
 
-5 directories, 3 files
-```
+    ```console
+    modules/
+    ├── gatk
+    │   ├── haplotypecaller
+    │   │   └── main.nf
+    │   └── jointgenotyping
+    │       └── main.nf
+    └── samtools
+        └── index
+            └── main.nf
+
+    5 directories, 3 files
+    ```
 
 You should also have something like this in the main workflow file, after the parameters section:
 
@@ -170,11 +176,11 @@ You've practiced modularizing a workflow, with the genomics workflow as an examp
 
 ### What's next?
 
-Test the modularised workflow.
+Test the modularized workflow.
 
 ---
 
-## 2. Test the modularised workflow
+## 2. Test the modularized workflow
 
 Let's try running that now.
 
@@ -185,7 +191,7 @@ nextflow run genomics-3.nf -resume
 And it works!
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  version 25.10.2
 
 Launching `genomics-3.nf` [gloomy_poincare] DSL2 - revision: 43203316e0
 

@@ -5,9 +5,11 @@
  * This workflow contains several intentional bugs for learning purposes
  */
 
-// Parameters with missing validation
-params.input = 'data/sample_data.csv'
-params.output = 'results'
+params{
+    // Parameters with missing validation
+    input: Path = 'data/sample_data.csv'
+    output: String = 'results'
+}
 
 /*
  * Process with input/output mismatch

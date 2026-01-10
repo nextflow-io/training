@@ -7,17 +7,17 @@ process GATK_JOINTGENOTYPING {
     publishDir params.outdir, mode: 'symlink'
 
     input:
-        path all_gvcfs
-        path all_idxs
-        path interval_list
-        val cohort_name
-        path ref_fasta
-        path ref_index
-        path ref_dict
+    path all_gvcfs
+    path all_idxs
+    path interval_list
+    val cohort_name
+    path ref_fasta
+    path ref_index
+    path ref_dict
 
     output:
-        path "${cohort_name}.joint.vcf"     , emit: vcf
-        path "${cohort_name}.joint.vcf.idx" , emit: idx
+    path "${cohort_name}.joint.vcf", emit: vcf
+    path "${cohort_name}.joint.vcf.idx", emit: idx
 
     script:
     def gvcfs_line = all_gvcfs.collect { gvcf -> "-V ${gvcf}" }.join(' ')

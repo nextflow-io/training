@@ -3,24 +3,19 @@
 /*
  * Use echo to print 'Hello World!' to a file
  */
-process sayHello {
-
+process SAY_HELLO {
     publishDir 'results', mode: 'copy'
 
+    tag "greeting ${name}"
+
     input:
-    val greeting
+    val name
 
     output:
-    path 'output.txt'
+    path "${name}-output.txt"
 
     script:
     """
-    echo '${greeting}' > output.txt
+    echo 'Hello, ${name}!' > "${name}-output.txt"
     """
-}
-
-workflow {
-
-    // emit a greeting
-    sayHello(params.greeting)
 }

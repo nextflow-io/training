@@ -117,18 +117,20 @@ workflow {
 
 This is a complete workflow, with a structure similar to the ones you saw in the 'Hello Nextflow' tutorial, that we can test independently. Let's try that now:
 
-```bash title="Run the greeting workflow"
+```bash
 nextflow run workflows/greeting.nf
 ```
 
-```console title="Expected output"
-N E X T F L O W  ~  version 24.10.0
-Launching `workflows/greeting.nf` [peaceful_montalcini] DSL2 - revision: 90f61b7093
-executor >  local (9)
-[51/4f980f] process > VALIDATE_NAME (validating Bob)                    [100%] 3 of 3 ✔
-[2b/dd8dc2] process > SAY_HELLO (greeting Bob)                          [100%] 3 of 3 ✔
-[8e/882565] process > TIMESTAMP_GREETING (adding timestamp to greeting) [100%] 3 of 3 ✔
-```
+??? success "Command output"
+
+    ```console
+    N E X T F L O W  ~  version 24.10.0
+    Launching `workflows/greeting.nf` [peaceful_montalcini] DSL2 - revision: 90f61b7093
+    executor >  local (9)
+    [51/4f980f] process > VALIDATE_NAME (validating Bob)                    [100%] 3 of 3 ✔
+    [2b/dd8dc2] process > SAY_HELLO (greeting Bob)                          [100%] 3 of 3 ✔
+    [8e/882565] process > TIMESTAMP_GREETING (adding timestamp to greeting) [100%] 3 of 3 ✔
+    ```
 
 This works as expected, but to make it composable there's a few things we need to change.
 
@@ -142,6 +144,8 @@ Composable workflows have some differences from the ones you saw in the 'Hello N
 - Outputs are declared using the `emit:` keyword
 
 Let's update the greeting workflow to match this structure. Change the code to the following:
+
+<!-- TODO: switch to before/after tabs -->
 
 ```groovy title="workflows/greeting.nf" linenums="1" hl_lines="6 7 9 15 16 17"
 include { VALIDATE_NAME } from '../modules/validate_name'
@@ -169,17 +173,17 @@ The workflow content is also placed inside the `main:` block. Note also that we 
 
 Let's test the workflow again to see if it works as expected:
 
-```bash title="Run the greeting workflow"
+```bash
 nextflow run workflows/greeting.nf
 ```
 
-What you'll actually see in response is:
+??? warning "Command output"
 
-```console title="Expected output"
-N E X T F L O W  ~  version 24.10.0
-Launching `workflows/greeting.nf` [high_brahmagupta] DSL2 - revision: 8f5857af25
-WARN: No entry workflow specified
-```
+    ```console
+    N E X T F L O W  ~  version 24.10.0
+    Launching `workflows/greeting.nf` [high_brahmagupta] DSL2 - revision: 8f5857af25
+    WARN: No entry workflow specified
+    ```
 
 This tells you about another new concept, an 'entry workflow'. The entry workflow is the workflow that gets called when you run a Nextflow script. By default, Nextflow will use an un-named workflow as the entry workflow, when present, and that's what you've been doing so far, with workflow blocks starting like this:
 
@@ -193,23 +197,25 @@ But our greeting workflow doesn't have an un-named workflow, rather we have a na
 workflow GREETING_WORKFLOW {
 ```
 
-... so Nextflow will throw an error. We can actually tell Nextflow to use our named workflow as the entry workflow by adding this line to Nextflow's command line:
+That's why Nextflow threw a warning and did not do what we wanted.
 
-```bash title="Run the greeting workflow"
+We can actually tell Nextflow to use our named workflow as the entry workflow by adding this line to Nextflow's command line:
+
+```bash
 nextflow run workflows/greeting.nf -entry GREETING_WORKFLOW
 ```
 
-This will also throw an error, because the workflow is expecting an input channel:
+??? failure "Command output"
 
-```console title="Expected output"
-N E X T F L O W  ~  version 24.10.0
-Launching `workflows/greeting.nf` [compassionate_fermi] DSL2 - revision: 8f5857af25
-ERROR ~ Workflow `GREETING_WORKFLOW` declares 1 input channels but 0 were given
+    ```console
+    N E X T F L O W  ~  version 24.10.0
+    Launching `workflows/greeting.nf` [compassionate_fermi] DSL2 - revision: 8f5857af25
+    ERROR ~ Workflow `GREETING_WORKFLOW` declares 1 input channels but 0 were given
 
- -- Check '.nextflow.log' file for details
-```
+    -- Check '.nextflow.log' file for details
+    ```
 
-... but if you wanted to call a named workflow that didn't require inputs, you could call it this way.
+This also throws an error, because the workflow is expecting an input channel. However, if you wanted to call a named workflow that didn't require inputs, you could call it this way.
 
 But we didn't add that syntax so we could call the workflow directly, we did it so we could compose it with other workflows. Let's start by creating a main workflow that imports and uses the `greeting` workflow.
 
@@ -236,24 +242,26 @@ Note that our workflow entry in this file is un-named, and that's because we're 
 
 Run this and see the output:
 
-```bash title="Run the workflow"
+```bash
 nextflow run main.nf
 ```
 
-```console title="Expected output"
-N E X T F L O W  ~  version 24.10.0
-Launching `main.nf` [goofy_mayer] DSL2 - revision: 543f8742fe
-executor >  local (9)
-[05/3cc752] process > GREETING_WORKFLOW:VALIDATE_NAME (validating Char... [100%] 3 of 3 ✔
-[b1/b56ecf] process > GREETING_WORKFLOW:SAY_HELLO (greeting Charlie)      [100%] 3 of 3 ✔
-[ea/342168] process > GREETING_WORKFLOW:TIMESTAMP_GREETING (adding tim... [100%] 3 of 3 ✔
-Original: /workspaces/training/side_quests/workflows_of_workflows/work/bb/c8aff3df0ebc15a4d7d35f736db44c/Alice-output.txt
-Original: /workspaces/training/side_quests/workflows_of_workflows/work/fb/fa877776e8a5d90b537b1bcd3b6f5b/Bob-output.txt
-Original: /workspaces/training/side_quests/workflows_of_workflows/work/b1/b56ecf938fda8bcbec211847c8f0be/Charlie-output.txt
-Timestamped: /workspaces/training/side_quests/workflows_of_workflows/work/06/877bc909f140bbf8223343450cea36/timestamped_Alice-output.txt
-Timestamped: /workspaces/training/side_quests/workflows_of_workflows/work/aa/bd31b71cdb745b7c155ca7f8837b8a/timestamped_Bob-output.txt
-Timestamped: /workspaces/training/side_quests/workflows_of_workflows/work/ea/342168d4ba04cc899a89c56cbfd9b0/timestamped_Charlie-output.txt
-```
+??? success "Command output"
+
+    ```console
+    N E X T F L O W  ~  version 24.10.0
+    Launching `main.nf` [goofy_mayer] DSL2 - revision: 543f8742fe
+    executor >  local (9)
+    [05/3cc752] process > GREETING_WORKFLOW:VALIDATE_NAME (validating Char... [100%] 3 of 3 ✔
+    [b1/b56ecf] process > GREETING_WORKFLOW:SAY_HELLO (greeting Charlie)      [100%] 3 of 3 ✔
+    [ea/342168] process > GREETING_WORKFLOW:TIMESTAMP_GREETING (adding tim... [100%] 3 of 3 ✔
+    Original: /workspaces/training/side_quests/workflows_of_workflows/work/bb/c8aff3df0ebc15a4d7d35f736db44c/Alice-output.txt
+    Original: /workspaces/training/side_quests/workflows_of_workflows/work/fb/fa877776e8a5d90b537b1bcd3b6f5b/Bob-output.txt
+    Original: /workspaces/training/side_quests/workflows_of_workflows/work/b1/b56ecf938fda8bcbec211847c8f0be/Charlie-output.txt
+    Timestamped: /workspaces/training/side_quests/workflows_of_workflows/work/06/877bc909f140bbf8223343450cea36/timestamped_Alice-output.txt
+    Timestamped: /workspaces/training/side_quests/workflows_of_workflows/work/aa/bd31b71cdb745b7c155ca7f8837b8a/timestamped_Bob-output.txt
+    Timestamped: /workspaces/training/side_quests/workflows_of_workflows/work/ea/342168d4ba04cc899a89c56cbfd9b0/timestamped_Charlie-output.txt
+    ```
 
 It works! We've wrapped the named greeting workflow in a main workflow with an un-named entry `workflow` block. The main workflow is using the `GREETING_WORKFLOW` workflow almost (not quite) like a process, and passing the `names` channel as an argument.
 
@@ -285,7 +293,7 @@ Now let's create a workflow that applies text transformations to the greetings.
 
 ### 2.1. Create the workflow file
 
-```bash title="Create transform workflow"
+```bash
 touch workflows/transform.nf
 ```
 
@@ -339,31 +347,33 @@ workflow {
 
 Run the complete pipeline:
 
-```bash title="Run the workflow"
+```bash
 nextflow run main.nf
 ```
 
-```console title="Expected output"
-N E X T F L O W  ~  version 24.10.0
-Launching `main.nf` [sick_kimura] DSL2 - revision: 8dc45fc6a8
-executor >  local (13)
-executor >  local (15)
-[83/1b51f4] process > GREETING_WORKFLOW:VALIDATE_NAME (validating Alice)  [100%] 3 of 3 ✔
-[68/556150] process > GREETING_WORKFLOW:SAY_HELLO (greeting Alice)        [100%] 3 of 3 ✔
-[de/511abd] process > GREETING_WORKFLOW:TIMESTAMP_GREETING (adding tim... [100%] 3 of 3 ✔
-[cd/e6a7e0] process > TRANSFORM_WORKFLOW:SAY_HELLO_UPPER (converting t... [100%] 3 of 3 ✔
-[f0/74ba4a] process > TRANSFORM_WORKFLOW:REVERSE_TEXT (reversing UPPER... [100%] 3 of 3 ✔
-Uppercase: /workspaces/training/side_quests/workflows_of_workflows/work/a0/d4f5df4d6344604498fa47a6084a11/UPPER-timestamped_Bob-output.txt
-Uppercase: /workspaces/training/side_quests/workflows_of_workflows/work/69/b5e37f6c79c2fd38adb75d0eca8f87/UPPER-timestamped_Charlie-output.txt
-Uppercase: /workspaces/training/side_quests/workflows_of_workflows/work/cd/e6a7e0b17e7d5a2f71bb8123cd53a7/UPPER-timestamped_Alice-output.txt
-Reversed: /workspaces/training/side_quests/workflows_of_workflows/work/7a/7a222f7957b35d1d121338566a24ac/REVERSED-UPPER-timestamped_Bob-output.txt
-Reversed: /workspaces/training/side_quests/workflows_of_workflows/work/46/8d19af62e33a5a6417c773496e0f90/REVERSED-UPPER-timestamped_Charlie-output.txt
-Reversed: /workspaces/training/side_quests/workflows_of_workflows/work/f0/74ba4a10d9ef5c82f829d1c154d0f6/REVERSED-UPPER-timestamped_Alice-output.txt
-```
+??? success "Command output"
+
+    ```console
+    N E X T F L O W  ~  version 24.10.0
+    Launching `main.nf` [sick_kimura] DSL2 - revision: 8dc45fc6a8
+    executor >  local (13)
+    executor >  local (15)
+    [83/1b51f4] process > GREETING_WORKFLOW:VALIDATE_NAME (validating Alice)  [100%] 3 of 3 ✔
+    [68/556150] process > GREETING_WORKFLOW:SAY_HELLO (greeting Alice)        [100%] 3 of 3 ✔
+    [de/511abd] process > GREETING_WORKFLOW:TIMESTAMP_GREETING (adding tim... [100%] 3 of 3 ✔
+    [cd/e6a7e0] process > TRANSFORM_WORKFLOW:SAY_HELLO_UPPER (converting t... [100%] 3 of 3 ✔
+    [f0/74ba4a] process > TRANSFORM_WORKFLOW:REVERSE_TEXT (reversing UPPER... [100%] 3 of 3 ✔
+    Uppercase: /workspaces/training/side_quests/workflows_of_workflows/work/a0/d4f5df4d6344604498fa47a6084a11/UPPER-timestamped_Bob-output.txt
+    Uppercase: /workspaces/training/side_quests/workflows_of_workflows/work/69/b5e37f6c79c2fd38adb75d0eca8f87/UPPER-timestamped_Charlie-output.txt
+    Uppercase: /workspaces/training/side_quests/workflows_of_workflows/work/cd/e6a7e0b17e7d5a2f71bb8123cd53a7/UPPER-timestamped_Alice-output.txt
+    Reversed: /workspaces/training/side_quests/workflows_of_workflows/work/7a/7a222f7957b35d1d121338566a24ac/REVERSED-UPPER-timestamped_Bob-output.txt
+    Reversed: /workspaces/training/side_quests/workflows_of_workflows/work/46/8d19af62e33a5a6417c773496e0f90/REVERSED-UPPER-timestamped_Charlie-output.txt
+    Reversed: /workspaces/training/side_quests/workflows_of_workflows/work/f0/74ba4a10d9ef5c82f829d1c154d0f6/REVERSED-UPPER-timestamped_Alice-output.txt
+    ```
 
 If you take a look at one of those reversed files, you'll see that it's the uppercase version of the greeting reversed:
 
-```bash title="Check a final output file"
+```bash
 cat /workspaces/training/side_quests/workflows_of_workflows/work/f0/74ba4a10d9ef5c82f829d1c154d0f6/REVERSED-UPPER-timestamped_Alice-output.txt
 ```
 

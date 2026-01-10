@@ -3,21 +3,22 @@
 /*
  * Pipeline parameters
  */
+params {
+    // Primary input (file of input files, one per line)
+    reads_bam: Path = "${projectDir}/data/sample_bams.txt"
 
-// Primary input (file of input files, one per line)
-params.reads_bam = "${projectDir}/data/sample_bams.txt"
+    // Output directory
+    outdir: String = "results_genomics"
 
-// Output directory
-params.outdir = "results_genomics"
+    // Accessory files
+    reference: Path = "${projectDir}/data/ref/ref.fasta"
+    reference_index: Path = "${projectDir}/data/ref/ref.fasta.fai"
+    reference_dict: Path = "${projectDir}/data/ref/ref.dict"
+    intervals: Path = "${projectDir}/data/ref/intervals.bed"
 
-// Accessory files
-params.reference        = "${projectDir}/data/ref/ref.fasta"
-params.reference_index  = "${projectDir}/data/ref/ref.fasta.fai"
-params.reference_dict   = "${projectDir}/data/ref/ref.dict"
-params.intervals        = "${projectDir}/data/ref/intervals.bed"
-
-// Base name for final output file
-params.cohort_name = "family_trio"
+    // Base name for final output file
+    cohort_name: String = "family_trio"
+}
 
 include { SAMTOOLS_INDEX } from './modules/samtools/index/main.nf'
 include { GATK_HAPLOTYPECALLER } from './modules/gatk/haplotypecaller/main.nf'

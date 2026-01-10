@@ -20,46 +20,45 @@ Here we generate a table of contents to the second level down:
 tree . -L 3
 ```
 
-If you run this inside `nf4-science/rnaseq`, you should see the following output:
+??? success "Directory contents"
 
-```console title="Directory contents"
-.
-├── data
-│   ├── genome.fa
-│   ├── paired-end.csv
-│   ├── reads
-│   │   ├── ENCSR000COQ1_1.fastq.gz
-│   │   ├── ENCSR000COQ1_2.fastq.gz
-│   │   ├── ENCSR000COQ2_1.fastq.gz
-│   │   ├── ENCSR000COQ2_2.fastq.gz
-│   │   ├── ENCSR000COR1_1.fastq.gz
-│   │   ├── ENCSR000COR1_2.fastq.gz
-│   │   ├── ENCSR000COR2_1.fastq.gz
-│   │   ├── ENCSR000COR2_2.fastq.gz
-│   │   ├── ENCSR000CPO1_1.fastq.gz
-│   │   ├── ENCSR000CPO1_2.fastq.gz
-│   │   ├── ENCSR000CPO2_1.fastq.gz
-│   │   └── ENCSR000CPO2_2.fastq.gz
-│   └── single-end.csv
-├── nextflow.config
-├── rnaseq.nf
-└── solutions
-    ├── modules
-    │   ├── fastqc.nf
-    │   ├── fastqc_pe.nf
-    │   ├── hisat2_align.nf
-    │   ├── hisat2_align_pe.nf
-    │   ├── multiqc.nf
-    │   ├── trim_galore.nf
-    │   └── trim_galore_pe.nf
-    ├── rnaseq-2.1.nf
-    ├── rnaseq-2.2.nf
-    ├── rnaseq-2.3.nf
-    ├── rnaseq-3.1.nf
-    ├── rnaseq-3.2.nf
-    └── rnaseq_pe-3.3.nf
-
-```
+    ```console
+    rnaseq
+    ├── data
+    │   ├── genome.fa
+    │   ├── paired-end.csv
+    │   ├── reads
+    │   │   ├── ENCSR000COQ1_1.fastq.gz
+    │   │   ├── ENCSR000COQ1_2.fastq.gz
+    │   │   ├── ENCSR000COQ2_1.fastq.gz
+    │   │   ├── ENCSR000COQ2_2.fastq.gz
+    │   │   ├── ENCSR000COR1_1.fastq.gz
+    │   │   ├── ENCSR000COR1_2.fastq.gz
+    │   │   ├── ENCSR000COR2_1.fastq.gz
+    │   │   ├── ENCSR000COR2_2.fastq.gz
+    │   │   ├── ENCSR000CPO1_1.fastq.gz
+    │   │   ├── ENCSR000CPO1_2.fastq.gz
+    │   │   ├── ENCSR000CPO2_1.fastq.gz
+    │   │   └── ENCSR000CPO2_2.fastq.gz
+    │   └── single-end.csv
+    ├── nextflow.config
+    ├── rnaseq.nf
+    └── solutions
+        ├── modules
+        │   ├── fastqc.nf
+        │   ├── fastqc_pe.nf
+        │   ├── hisat2_align.nf
+        │   ├── hisat2_align_pe.nf
+        │   ├── multiqc.nf
+        │   ├── trim_galore.nf
+        │   └── trim_galore_pe.nf
+        ├── rnaseq-2.1.nf
+        ├── rnaseq-2.2.nf
+        ├── rnaseq-2.3.nf
+        ├── rnaseq-3.1.nf
+        ├── rnaseq-3.2.nf
+        └── rnaseq_pe-3.3.nf
+    ```
 
 !!!note
 

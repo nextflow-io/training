@@ -3,7 +3,9 @@
 /*
  * Pipeline parameters
  */
-params.input_file = "greetings.csv"
+params {
+    input_file: Path = "greetings.csv"
+}
 
 /*
  * Use echo to print 'Hello World!' to standard out
@@ -13,10 +15,10 @@ process sayHello {
     publishDir 'results', mode: 'copy'
 
     input:
-        val greeting
+    val greeting
 
     output:
-        path "${greeting}-output.txt"
+    path "${greeting}-output.txt"
 
     script:
     """
@@ -32,10 +34,10 @@ process convertToUpper {
     publishDir 'results', mode: 'copy'
 
     input:
-        path input_file
+    path input_file
 
     output:
-        path "UPPER-${input_file}"
+    path "UPPER-${input_file}"
 
     script:
     """
