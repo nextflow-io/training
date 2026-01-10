@@ -62,9 +62,9 @@ cd hello-nextflow/
     cd /workspaces/training/hello-nextflow
     ```
 
-Now let's have a look at the contents of this directory.
+Now let's have a look at the contents.
 
-### Check out the materials provided
+### Explore the materials provided
 
 You can explore the contents of this directory by using the file explorer on the left-hand side of the training workspace.
 Alternatively, you can use the `tree` command.
@@ -76,8 +76,6 @@ Here we generate a table of contents to the second level down:
 ```bash
 tree . -L 2
 ```
-
-If you run this inside `hello-nextflow`, you should see the following output.
 
 ??? abstract "Directory contents"
 
@@ -103,10 +101,8 @@ If you run this inside `hello-nextflow`, you should see the following output.
     7 directories, 9 files
     ```
 
-!!! tip
-
-    We use collapsible sections like this to include expected command output in a concise way.
-    Click on the colored box to expand the section and view its contents.
+Click on the colored box to expand the section and view its contents.
+We use collapsible sections like this to include expected command output in a concise way.
 
 ### Content guide
 
