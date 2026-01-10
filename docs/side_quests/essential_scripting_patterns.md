@@ -120,19 +120,19 @@ The `workflow` block defines our pipeline structure, while `channel.fromPath()` 
 
 Run this workflow to see the raw CSV data:
 
-```bash title="Test basic workflow"
+```bash
 nextflow run main.nf
 ```
 
-You should see output like:
+??? success "Command output"
 
-```console title="Raw CSV data"
-Launching `main.nf` [marvelous_tuckerman] DSL2 - revision: 6113e05c17
+    ```console
+    Launching `main.nf` [marvelous_tuckerman] DSL2 - revision: 6113e05c17
 
-[sample_id:SAMPLE_001, organism:human, tissue_type:liver, sequencing_depth:30000000, file_path:data/sequences/SAMPLE_001_S1_L001_R1_001.fastq, quality_score:38.5]
-[sample_id:SAMPLE_002, organism:mouse, tissue_type:brain, sequencing_depth:25000000, file_path:data/sequences/SAMPLE_002_S2_L001_R1_001.fastq, quality_score:35.2]
-[sample_id:SAMPLE_003, organism:human, tissue_type:kidney, sequencing_depth:45000000, file_path:data/sequences/SAMPLE_003_S3_L001_R1_001.fastq, quality_score:42.1]
-```
+    [sample_id:SAMPLE_001, organism:human, tissue_type:liver, sequencing_depth:30000000, file_path:data/sequences/SAMPLE_001_S1_L001_R1_001.fastq, quality_score:38.5]
+    [sample_id:SAMPLE_002, organism:mouse, tissue_type:brain, sequencing_depth:25000000, file_path:data/sequences/SAMPLE_002_S2_L001_R1_001.fastq, quality_score:35.2]
+    [sample_id:SAMPLE_003, organism:human, tissue_type:kidney, sequencing_depth:45000000, file_path:data/sequences/SAMPLE_003_S3_L001_R1_001.fastq, quality_score:42.1]
+    ```
 
 #### 1.1.2. Adding the Map Operator
 
@@ -171,7 +171,7 @@ When the `.map()` operator processes each channel item, it passes that item to y
 
 Apply this change and run the workflow:
 
-```bash title="Test map operator"
+```bash
 nextflow run main.nf
 ```
 
@@ -217,17 +217,17 @@ We use string manipulation methods like `.toLowerCase()` and `.replaceAll()` to 
 
 Apply this change and run the workflow:
 
-```bash title="Test map data structure"
+```bash
 nextflow run main.nf
 ```
 
-You should see the refined map output like:
+??? success "Command output"
 
-```console title="Transformed metadata"
-[id:sample_001, organism:human, tissue:liver, depth:30000000, quality:38.5]
-[id:sample_002, organism:mouse, tissue:brain, depth:25000000, quality:35.2]
-[id:sample_003, organism:human, tissue:kidney, depth:45000000, quality:42.1]
-```
+    ```console
+    [id:sample_001, organism:human, tissue:liver, depth:30000000, quality:38.5]
+    [id:sample_002, organism:mouse, tissue:brain, depth:25000000, quality:35.2]
+    [id:sample_003, organism:human, tissue:kidney, depth:45000000, quality:42.1]
+    ```
 
 #### 1.1.4. Adding Conditional Logic
 
@@ -282,17 +282,17 @@ The map addition operator `+` creates a **new map** rather than modifying the ex
 
 Run the modified workflow:
 
-```bash title="Test conditional logic"
+```bash
 nextflow run main.nf
 ```
 
-You should see output like:
+??? success "Command output"
 
-```console title="Metadata with priority"
-[id:sample_001, organism:human, tissue:liver, depth:30000000, quality:38.5, priority:normal]
-[id:sample_002, organism:mouse, tissue:brain, depth:25000000, quality:35.2, priority:normal]
-[id:sample_003, organism:human, tissue:kidney, depth:45000000, quality:42.1, priority:high]
-```
+    ```console
+    [id:sample_001, organism:human, tissue:liver, depth:30000000, quality:38.5, priority:normal]
+    [id:sample_002, organism:mouse, tissue:brain, depth:25000000, quality:35.2, priority:normal]
+    [id:sample_003, organism:human, tissue:kidney, depth:45000000, quality:42.1, priority:high]
+    ```
 
 We've successfully added conditional logic to enrich our metadata with a priority level based on quality scores.
 
@@ -347,24 +347,26 @@ Let's add a line to create a simplified version of our metadata that only contai
 
 Run the modified workflow:
 
-```bash title="Test subMap"
+```bash
 nextflow run main.nf
 ```
 
-You should see output showing both the full metadata displayed by the `view()` operation and the extracted subset we printed with `println`:
+??? success "Command output"
 
-```console title="SubMap results"
- N E X T F L O W   ~  version 25.04.3
+    ```console
+    N E X T F L O W   ~  version 25.10.2
 
-Launching `main.nf` [peaceful_cori] DSL2 - revision: 4cc4a8340f
+    Launching `main.nf` [peaceful_cori] DSL2 - revision: 4cc4a8340f
 
-ID fields only: [id:sample_001, organism:human, tissue:liver]
-ID fields only: [id:sample_002, organism:mouse, tissue:brain]
-ID fields only: [id:sample_003, organism:human, tissue:kidney]
-[id:sample_001, organism:human, tissue:liver, depth:30000000, quality:38.5, priority:normal]
-[id:sample_002, organism:mouse, tissue:brain, depth:25000000, quality:35.2, priority:normal]
-[id:sample_003, organism:human, tissue:kidney, depth:45000000, quality:42.1, priority:high]
-```
+    ID fields only: [id:sample_001, organism:human, tissue:liver]
+    ID fields only: [id:sample_002, organism:mouse, tissue:brain]
+    ID fields only: [id:sample_003, organism:human, tissue:kidney]
+    [id:sample_001, organism:human, tissue:liver, depth:30000000, quality:38.5, priority:normal]
+    [id:sample_002, organism:mouse, tissue:brain, depth:25000000, quality:35.2, priority:normal]
+    [id:sample_003, organism:human, tissue:kidney, depth:45000000, quality:42.1, priority:high]
+    ```
+
+This shows both the full metadata displayed by the `view()` operation and the extracted subset we printed with `println`.
 
 The `.subMap()` method takes a list of keys and returns a new map containing only those keys. If a key doesn't exist in the original map, it's simply not included in the result.
 
@@ -424,17 +426,17 @@ Let's output a channel structure comprising a tuple of 2 elements: the enriched 
 
 Apply this change and run the workflow:
 
-```bash title="Test complete workflow"
+```bash
 nextflow run main.nf
 ```
 
-You should see output like:
+??? success "Command output"
 
-```console title="Complete workflow output"
-[[id:sample_001, organism:human, tissue:liver, depth:30000000, quality:38.5, priority:normal], /workspaces/training/side-quests/essential_scripting_patterns/data/sequences/SAMPLE_001_S1_L001_R1_001.fastq]
-[[id:sample_002, organism:mouse, tissue:brain, depth:25000000, quality:35.2, priority:normal], /workspaces/training/side-quests/essential_scripting_patterns/data/sequences/SAMPLE_002_S2_L001_R1_001.fastq]
-[[id:sample_003, organism:human, tissue:kidney, depth:45000000, quality:42.1, priority:high], /workspaces/training/side-quests/essential_scripting_patterns/data/sequences/SAMPLE_003_S3_L001_R1_001.fastq]
-```
+    ```console
+    [[id:sample_001, organism:human, tissue:liver, depth:30000000, quality:38.5, priority:normal], /workspaces/training/side-quests/essential_scripting_patterns/data/sequences/SAMPLE_001_S1_L001_R1_001.fastq]
+    [[id:sample_002, organism:mouse, tissue:brain, depth:25000000, quality:35.2, priority:normal], /workspaces/training/side-quests/essential_scripting_patterns/data/sequences/SAMPLE_002_S2_L001_R1_001.fastq]
+    [[id:sample_003, organism:human, tissue:kidney, depth:45000000, quality:42.1, priority:high], /workspaces/training/side-quests/essential_scripting_patterns/data/sequences/SAMPLE_003_S3_L001_R1_001.fastq]
+    ```
 
 This `[meta, file]` tuple structure is a common pattern in Nextflow for passing both metadata and associated files to processes.
 
@@ -474,20 +476,22 @@ We've changed the structure of the channel, but we haven't changed the data itse
 
 Run the workflow to confirm this:
 
-```bash title="Test collect operations"
+```bash
 nextflow run collect.nf
 ```
 
-```console title="Different collect behaviors"
- N E X T F L O W   ~  version 25.04.3
+??? success "Command output"
 
-Launching `collect.nf` [loving_mendel] DSL2 - revision: e8d054a46e
+    ```console
+    N E X T F L O W   ~  version 25.10.2
 
-Individual channel item: sample_001
-Individual channel item: sample_002
-Individual channel item: sample_003
-channel.collect() result: [sample_001, sample_002, sample_003] (3 items grouped into 1)
-```
+    Launching `collect.nf` [loving_mendel] DSL2 - revision: e8d054a46e
+
+    Individual channel item: sample_001
+    Individual channel item: sample_002
+    Individual channel item: sample_003
+    channel.collect() result: [sample_001, sample_002, sample_003] (3 items grouped into 1)
+    ```
 
 `view()` returns an output for every channel emission, so we know that this single output contains all 3 original items grouped into one list.
 
@@ -530,21 +534,23 @@ In this new snippet we:
 
 Run the modified workflow:
 
-```bash title="Test List collect"
+```bash
 nextflow run collect.nf
 ```
 
-```console title="List collect results" hl_lines="5"
- N E X T F L O W   ~  version 25.04.3
+??? success "Command output"
 
-Launching `collect.nf` [cheeky_stonebraker] DSL2 - revision: 2d5039fb47
+    ```console hl_lines="5"
+    N E X T F L O W   ~  version 25.10.2
 
-List.collect() result: [SPECIMEN_001, SPECIMEN_002, SPECIMEN_003] (3 items transformed into 3)
-Individual channel item: sample_001
-Individual channel item: sample_002
-Individual channel item: sample_003
-channel.collect() result: [sample_001, sample_002, sample_003] (3 items grouped into 1)
-```
+    Launching `collect.nf` [cheeky_stonebraker] DSL2 - revision: 2d5039fb47
+
+    List.collect() result: [SPECIMEN_001, SPECIMEN_002, SPECIMEN_003] (3 items transformed into 3)
+    Individual channel item: sample_001
+    Individual channel item: sample_002
+    Individual channel item: sample_003
+    channel.collect() result: [sample_001, sample_002, sample_003] (3 items grouped into 1)
+    ```
 
 This time, we have NOT changed the structure of the data, we still have 3 items in the list, but we HAVE transformed each item using the List's `collect` method to produce a new list with modified values. This is similar to using the `map` operator on a channel, but it's operating on a List data structure rather than a channel.
 
@@ -603,20 +609,20 @@ Run the updated workflow:
 nextflow run collect.nf
 ```
 
-You should see output like:
+??? success "Command output"
 
-```console title="Spread operator output" hl_lines="6"
- N E X T F L O W   ~  version 25.04.3
+    ```console hl_lines="6"
+    N E X T F L O W   ~  version 25.10.2
 
-Launching `collect.nf` [cranky_galileo] DSL2 - revision: 5f3c8b2a91
+    Launching `collect.nf` [cranky_galileo] DSL2 - revision: 5f3c8b2a91
 
-List.collect() result: [SPECIMEN_001, SPECIMEN_002, SPECIMEN_003] (3 items transformed into 3)
-Spread operator result: [s1, s2, s3]
-Individual channel item: sample_001
-Individual channel item: sample_002
-Individual channel item: sample_003
-channel.collect() result: [sample_001, sample_002, sample_003] (3 items grouped into 1)
-```
+    List.collect() result: [SPECIMEN_001, SPECIMEN_002, SPECIMEN_003] (3 items transformed into 3)
+    Spread operator result: [s1, s2, s3]
+    Individual channel item: sample_001
+    Individual channel item: sample_002
+    Individual channel item: sample_003
+    channel.collect() result: [sample_001, sample_002, sample_003] (3 items grouped into 1)
+    ```
 
 The spread operator `*.` is a shorthand for a common collect pattern:
 
@@ -732,17 +738,19 @@ Run the modified workflow:
 nextflow run main.nf
 ```
 
-You should see output with metadata enriched from the file names, like
+??? success "Command output"
 
-```console title="Metadata with file parsing"
- N E X T F L O W   ~  version 25.04.3
+    ```console
+    N E X T F L O W   ~  version 25.10.2
 
-Launching `main.nf` [clever_pauling] DSL2 - revision: 605d2058b4
+    Launching `main.nf` [clever_pauling] DSL2 - revision: 605d2058b4
 
-[[id:sample_001, organism:human, tissue:liver, depth:30000000, quality:38.5, sample_num:1, lane:001, read:R1, chunk:001, priority:normal], /workspaces/training/side-quests/essential_scripting_patterns/data/sequences/SAMPLE_001_S1_L001_R1_001.fastq]
-[[id:sample_002, organism:mouse, tissue:brain, depth:25000000, quality:35.2, sample_num:2, lane:001, read:R1, chunk:001, priority:normal], /workspaces/training/side-quests/essential_scripting_patterns/data/sequences/SAMPLE_002_S2_L001_R1_001.fastq]
-[[id:sample_003, organism:human, tissue:kidney, depth:45000000, quality:42.1, sample_num:3, lane:001, read:R1, chunk:001, priority:high], /workspaces/training/side-quests/essential_scripting_patterns/data/sequences/SAMPLE_003_S3_L001_R1_001.fastq]
-```
+    [[id:sample_001, organism:human, tissue:liver, depth:30000000, quality:38.5, sample_num:1, lane:001, read:R1, chunk:001, priority:normal], /workspaces/training/side-quests/essential_scripting_patterns/data/sequences/SAMPLE_001_S1_L001_R1_001.fastq]
+    [[id:sample_002, organism:mouse, tissue:brain, depth:25000000, quality:35.2, sample_num:2, lane:001, read:R1, chunk:001, priority:normal], /workspaces/training/side-quests/essential_scripting_patterns/data/sequences/SAMPLE_002_S2_L001_R1_001.fastq]
+    [[id:sample_003, organism:human, tissue:kidney, depth:45000000, quality:42.1, sample_num:3, lane:001, read:R1, chunk:001, priority:high], /workspaces/training/side-quests/essential_scripting_patterns/data/sequences/SAMPLE_003_S3_L001_R1_001.fastq]
+    ```
+
+This shows the metadata enriched from the file names.
 
 ### 2.2. Dynamic Script Generation in Processes
 
@@ -851,36 +859,36 @@ Then modify the `workflow` block to connect the `ch_samples` channel to the `FAS
 
 Run this modified workflow:
 
-```bash title="Test fastp process"
+```bash
 nextflow run main.nf
 ```
 
-You'll see a long error trace with some content like:
+??? failure "Command output"
 
-```console title="Process error"
-ERROR ~ Error executing process > 'FASTP (3)'
+    ```console
+    ERROR ~ Error executing process > 'FASTP (3)'
 
-Caused by:
-  Process `FASTP (3)` terminated with an error exit status (255)
+    Caused by:
+      Process `FASTP (3)` terminated with an error exit status (255)
 
 
-Command executed:
+    Command executed:
 
-  fastp \
-      --in1 SAMPLE_003_S3_L001_R1_001.fastq \
-      --in2 null \
-      --out1 sample_003_trimmed_R1.fastq.gz \
-      --out2 sample_003_trimmed_R2.fastq.gz \
-      --json sample_003.fastp.json \
-      --html sample_003.fastp.html \
-      --thread 2
+      fastp \
+          --in1 SAMPLE_003_S3_L001_R1_001.fastq \
+          --in2 null \
+          --out1 sample_003_trimmed_R1.fastq.gz \
+          --out2 sample_003_trimmed_R2.fastq.gz \
+          --json sample_003.fastp.json \
+          --html sample_003.fastp.html \
+          --thread 2
 
-Command exit status:
-  255
+    Command exit status:
+      255
 
-Command output:
-  (empty)
-```
+    Command output:
+      (empty)
+    ```
 
 You can see that the process is trying to run `fastp` with a `null` value for the second input file, which is causing it to fail. This is because our dataset contains single-end reads, but the process is hardcoded to expect paired-end reads (two input files at a time).
 
@@ -936,18 +944,20 @@ Fix this by adding conditional logic to the `FASTP` process `script:` block. An 
 
 Now the workflow can handle both single-end and paired-end reads gracefully. The conditional logic checks the number of input files and constructs the appropriate command for `fastp`. Let's see if it works:
 
-```bash title="Test dynamic fastp"
+```bash
 nextflow run main.nf
 ```
 
-```console title="Successful run"
- N E X T F L O W   ~  version 25.04.3
+??? success "Command output"
 
-Launching `main.nf` [adoring_rosalind] DSL2 - revision: 04b1cd93e9
+    ```console
+    N E X T F L O W   ~  version 25.10.2
 
-executor >  local (3)
-[31/a8ad4d] process > FASTP (3) [100%] 3 of 3 ✔
-```
+    Launching `main.nf` [adoring_rosalind] DSL2 - revision: 04b1cd93e9
+
+    executor >  local (3)
+    [31/a8ad4d] process > FASTP (3) [100%] 3 of 3 ✔
+    ```
 
 Looks good! If we check the actual commands that were run (customise for your task hash):
 
@@ -1083,6 +1093,14 @@ Include the process in your `main.nf` and add it to the workflow:
 
 Now run the workflow and check the generated reports in `results/reports/`. They should contain basic information about each sample.
 
+<!-- TODO: add the run command -->
+
+??? success "Command output"
+
+    ```console
+    <!-- TODO: output -->
+    ```
+
 But what if we want to add information about when and where the processing occurred? Let's modify the process to use **shell** variables and a bit of command substitution to include the current user, hostname, and date in the report:
 
 === "After"
@@ -1108,18 +1126,22 @@ But what if we want to add information about when and where the processing occur
         """
     ```
 
-If you run this, you'll notice an error or unexpected behavior - Nextflow tries to interpret `$(hostname)` as a Nextflow variable that doesn't exist:
+If you run this, you'll notice an error or unexpected behavior - Nextflow tries to interpret `$(hostname)` as a Nextflow variable that doesn't exist.
 
-```console title="Error with shell variables"
-unknown recognition error type: groovyjarjarantlr4.v4.runtime.LexerNoViableAltException
-ERROR ~ Module compilation error
-- file : /workspaces/training/side-quests/essential_scripting_patterns/modules/generate_report.nf
-- cause: token recognition error at: '(' @ line 16, column 22.
-       echo "Hostname: $(hostname)" >> ${meta.id}_report.txt
-                        ^
+<!-- TODO: output -->
 
-1 error
-```
+??? failure "Command output"
+
+    ```console
+    unknown recognition error type: groovyjarjarantlr4.v4.runtime.LexerNoViableAltException
+    ERROR ~ Module compilation error
+    - file : /workspaces/training/side-quests/essential_scripting_patterns/modules/generate_report.nf
+    - cause: token recognition error at: '(' @ line 16, column 22.
+          echo "Hostname: $(hostname)" >> ${meta.id}_report.txt
+                            ^
+
+    1 error
+    ```
 
 We need to escape it so Bash can handle it instead.
 
@@ -1265,19 +1287,21 @@ This makes the workflow logic much easier to read and understand at a glance. Th
 
 Run the workflow to make sure it still works:
 
-```bash title="Test reusable function"
+```bash
 nextflow run main.nf
 ```
 
-```console title="Function results"
- N E X T F L O W   ~  version 25.04.3
+??? success "Command output"
 
-Launching `main.nf` [admiring_panini] DSL2 - revision: 8cc832e32f
+    ```console
+    N E X T F L O W   ~  version 25.10.2
 
-executor >  local (6)
-[8c/2e3f91] process > FASTP (3)           [100%] 3 of 3 ✔
-[7a/1b4c92] process > GENERATE_REPORT (3) [100%] 3 of 3 ✔
-```
+    Launching `main.nf` [admiring_panini] DSL2 - revision: 8cc832e32f
+
+    executor >  local (6)
+    [8c/2e3f91] process > FASTP (3)           [100%] 3 of 3 ✔
+    [7a/1b4c92] process > GENERATE_REPORT (3) [100%] 3 of 3 ✔
+    ```
 
 The output should show both processes completing successfully. The workflow is now much cleaner and easier to maintain, with all the complex metadata processing logic encapsulated in the `separateMetadata` function.
 
@@ -1297,6 +1321,8 @@ Next, we'll explore how to use closures in process directives for dynamic resour
 ## 4. Dynamic Resource Directives with Closures
 
 So far we've used scripting in the `script` block of processes. But **closures** (introduced in Section 1.1) are also incredibly useful in process directives, especially for dynamic resource allocation. Let's add resource directives to our FASTP process that adapt based on the sample characteristics.
+
+### 4.1. Sample-specific resource allocation
 
 Currently, our FASTP process uses default resources. Let's make it smarter by allocating more CPUs for high-depth samples. Edit `modules/fastp.nf` to include a dynamic `cpus` directive and a static `memory` directive:
 
@@ -1329,24 +1355,24 @@ The closure `{ meta.depth > 40000000 ? 2 : 1 }` uses the **ternary operator** (c
 
     The closure can access any input variables (like `meta` here) because Nextflow evaluates these closures in the context of each task execution.
 
-Run the workflow again:
+Run the workflow again with the `-ansi-log false` option to make it easier to see the task hashes.
 
-```bash title="Test resource allocation"
+```bash
 nextflow run main.nf -ansi-log false
 ```
 
-We're using the `-ansi-log false` option to make it easier to see the task hashes.
+??? success "Command output"
 
-```console title="Resource allocation output"
-N E X T F L O W  ~  version 25.04.3
-Launching `main.nf` [fervent_albattani] DSL2 - revision: fa8f249759
-[bd/ff3d41] Submitted process > FASTP (2)
-[a4/a3aab2] Submitted process > FASTP (1)
-[48/6db0c9] Submitted process > FASTP (3)
-[ec/83439d] Submitted process > GENERATE_REPORT (3)
-[bd/15d7cc] Submitted process > GENERATE_REPORT (2)
-[42/699357] Submitted process > GENERATE_REPORT (1)
-```
+    ```console
+    N E X T F L O W  ~  version 25.10.2
+    Launching `main.nf` [fervent_albattani] DSL2 - revision: fa8f249759
+    [bd/ff3d41] Submitted process > FASTP (2)
+    [a4/a3aab2] Submitted process > FASTP (1)
+    [48/6db0c9] Submitted process > FASTP (3)
+    [ec/83439d] Submitted process > GENERATE_REPORT (3)
+    [bd/15d7cc] Submitted process > GENERATE_REPORT (2)
+    [42/699357] Submitted process > GENERATE_REPORT (1)
+    ```
 
 You can check the exact `docker` command that was run to see the CPU allocation for any given task:
 
@@ -1361,6 +1387,8 @@ You should see something like:
 ```
 
 In this example we've chosen an example that requested 2 CPUs (`--cpu-shares 2048`), because it was a high-depth sample, but you should see different CPU allocations depending on the sample depth. Try this for the other tasks as well.
+
+### 4.2. Retry strategies
 
 Another powerful pattern is using `task.attempt` for retry strategies. To show why this is useful, we're going to start by reducing the memory allocation to FASTP to less than it needs. Change the `memory` directive in `modules/fastp.nf` to `1.GB`:
 
@@ -1392,27 +1420,31 @@ Another powerful pattern is using `task.attempt` for retry strategies. To show w
 
 ... and run the workflow again:
 
-```bash title="Test insufficient memory"
+```bash
 nextflow run main.nf
 ```
 
-You'll see an error indicating that the process was killed for exceeding memory limits:
+??? failure "Command output"
 
-```console title="Memory error output" hl_lines="2 11"
-Command exit status:
-  137
+    ```console hl_lines="2 11"
+    Command exit status:
+      137
 
-Command output:
-  (empty)
+    Command output:
+      (empty)
 
-Command error:
-  Detecting adapter sequence for read1...
-  No adapter detected for read1
+    Command error:
+      Detecting adapter sequence for read1...
+      No adapter detected for read1
 
-  .command.sh: line 7:   101 Killed                  fastp --in1 SAMPLE_002_S2_L001_R1_001.fastq --out1 sample_002_trimmed.fastq.gz --json sample_002.fastp.json --html sample_002.fastp.html --thread 2
-```
+      .command.sh: line 7:   101 Killed                  fastp --in1 SAMPLE_002_S2_L001_R1_001.fastq --out1 sample_002_trimmed.fastq.gz --json sample_002.fastp.json --html sample_002.fastp.html --thread 2
+    ```
 
-This is a very common scenario in real-world workflows - sometimes you just don't know how much memory a task will need until you run it. To make our workflow more robust, we can implement a retry strategy that increases memory allocation on each attempt, once again using a Groovy closure. Modify the `memory` directive to multiply the base memory by `task.attempt`, and add `errorStrategy 'retry'` and `maxRetries 2` directives:
+This indicates that the process was killed for exceeding memory limits.
+
+This is a very common scenario in real-world workflows - sometimes you just don't know how much memory a task will need until you run it.
+
+To make our workflow more robust, we can implement a retry strategy that increases memory allocation on each attempt, once again using a Groovy closure. Modify the `memory` directive to multiply the base memory by `task.attempt`, and add `errorStrategy 'retry'` and `maxRetries 2` directives:
 
 === "After"
 
@@ -1522,20 +1554,22 @@ Include the new from in `modules/trimgalore.nf`:
 
 Run this modified workflow:
 
-```bash title="Test conditional trimming"
+```bash
 nextflow run main.nf
 ```
 
-```console title="Conditional trimming results"
- N E X T F L O W   ~  version 25.04.3
+??? success "Command output"
 
-Launching `main.nf` [adoring_galileo] DSL2 - revision: c9e83aaef1
+    ```console
+    N E X T F L O W   ~  version 25.10.2
 
-executor >  local (6)
-[1d/0747ac] process > FASTP (2)           [100%] 2 of 2 ✔
-[cc/c44caf] process > TRIMGALORE (1)      [100%] 1 of 1 ✔
-[34/bd5a9f] process > GENERATE_REPORT (1) [100%] 3 of 3 ✔
-```
+    Launching `main.nf` [adoring_galileo] DSL2 - revision: c9e83aaef1
+
+    executor >  local (6)
+    [1d/0747ac] process > FASTP (2)           [100%] 2 of 2 ✔
+    [cc/c44caf] process > TRIMGALORE (1)      [100%] 1 of 1 ✔
+    [34/bd5a9f] process > GENERATE_REPORT (1) [100%] 3 of 3 ✔
+    ```
 
 Here, we've used small but mighty conditional expressions inside the `.branch{}` operator to route samples based on their metadata. Human samples with high coverage go through `FASTP`, while all other samples go through `TRIMGALORE`.
 
@@ -1588,26 +1622,28 @@ Add the following before the branch operation:
 
 Run the workflow again:
 
-```bash title="Test filtering samples"
+```bash
 nextflow run main.nf
 ```
 
-Because we've chosen a filter that excludes some samples, you should see fewer tasks executed:
+??? success "Command output"
 
-```console title="Filtered samples results"
-N E X T F L O W  ~  version 25.04.3
-Launching `main.nf` [lonely_williams] DSL2 - revision: d0b3f121ec
-[94/b48eac] Submitted process > FASTP (2)
-[2c/d2b28f] Submitted process > GENERATE_REPORT (2)
-[65/2e3be4] Submitted process > GENERATE_REPORT (1)
-[94/b48eac] NOTE: Process `FASTP (2)` terminated with an error exit status (137) -- Execution is retried (1)
-[3e/0d8664] Submitted process > TRIMGALORE (1)
-[6a/9137b0] Submitted process > FASTP (1)
-[6a/9137b0] NOTE: Process `FASTP (1)` terminated with an error exit status (137) -- Execution is retried (1)
-[83/577ac0] Submitted process > GENERATE_REPORT (3)
-[a2/5117de] Re-submitted process > FASTP (1)
-[1f/a1a4ca] Re-submitted process > FASTP (2)
-```
+    ```console
+    N E X T F L O W  ~  version 25.10.2
+    Launching `main.nf` [lonely_williams] DSL2 - revision: d0b3f121ec
+    [94/b48eac] Submitted process > FASTP (2)
+    [2c/d2b28f] Submitted process > GENERATE_REPORT (2)
+    [65/2e3be4] Submitted process > GENERATE_REPORT (1)
+    [94/b48eac] NOTE: Process `FASTP (2)` terminated with an error exit status (137) -- Execution is retried (1)
+    [3e/0d8664] Submitted process > TRIMGALORE (1)
+    [6a/9137b0] Submitted process > FASTP (1)
+    [6a/9137b0] NOTE: Process `FASTP (1)` terminated with an error exit status (137) -- Execution is retried (1)
+    [83/577ac0] Submitted process > GENERATE_REPORT (3)
+    [a2/5117de] Re-submitted process > FASTP (1)
+    [1f/a1a4ca] Re-submitted process > FASTP (2)
+    ```
+
+Because we've chosen a filter that excludes some samples, fewer tasks were executed.
 
 The filter expression `meta.id && meta.organism && meta.depth >= 25000000` combines truthiness with explicit comparisons:
 
@@ -1674,17 +1710,19 @@ Now run the workflow:
 nextflow run main.nf
 ```
 
-It crashes with a NullPointerException:
+??? failure "Command output"
 
-```console title="Null pointer error"
- N E X T F L O W   ~  version 25.04.3
+    ```console
+    N E X T F L O W   ~  version 25.10.2
 
-Launching `main.nf` [trusting_torvalds] DSL2 - revision: b56fbfbce2
+    Launching `main.nf` [trusting_torvalds] DSL2 - revision: b56fbfbce2
 
-ERROR ~ Cannot invoke method toUpperCase() on null object
+    ERROR ~ Cannot invoke method toUpperCase() on null object
 
- -- Check script 'main.nf' at line: 13 or see '.nextflow.log' file for more details
-```
+    -- Check script 'main.nf' at line: 13 or see '.nextflow.log' file for more details
+    ```
+
+This crashes with a NullPointerException.
 
 The problem is that `row.run_id` returns `null` because the `run_id` column doesn't exist in our CSV. When we try to call `.toUpperCase()` on `null`, it crashes. This is where the safe navigation operator saves the day.
 
@@ -1727,6 +1765,12 @@ Run again:
 ```bash
 nextflow run main.nf
 ```
+
+??? success "Command output"
+
+    ```console
+    <!-- TODO: output -->
+    ```
 
 No crash! The workflow now handles the missing field gracefully. When `row.run_id` is `null`, the `?.` operator prevents the `.toUpperCase()` call, and `run_id` becomes `null` instead of causing an exception.
 
@@ -1790,13 +1834,13 @@ and run the workflow:
 nextflow run main.nf
 ```
 
-You'll see output like this:
+??? success "Command output"
 
-```console title="View output with run field"
-[[id:sample_001, organism:human, tissue:liver, depth:30000000, quality:38.5, run:UNSPECIFIED, sample_num:1, lane:001, read:R1, chunk:001, priority:normal], /workspaces/training/side-quests/essential_scripting_patterns/data/sequences/SAMPLE_001_S1_L001_R1_001.fastq]
-[[id:sample_002, organism:mouse, tissue:brain, depth:25000000, quality:35.2, run:UNSPECIFIED, sample_num:2, lane:001, read:R1, chunk:001, priority:normal], /workspaces/training/side-quests/essential_scripting_patterns/data/sequences/SAMPLE_002_S2_L001_R1_001.fastq]
-[[id:sample_003, organism:human, tissue:kidney, depth:45000000, quality:42.1, run:UNSPECIFIED, sample_num:3, lane:001, read:R1, chunk:001, priority:high], /workspaces/training/side-quests/essential_scripting_patterns/data/sequences/SAMPLE_003_S3_L001_R1_001.fastq]
-```
+    ```console
+    [[id:sample_001, organism:human, tissue:liver, depth:30000000, quality:38.5, run:UNSPECIFIED, sample_num:1, lane:001, read:R1, chunk:001, priority:normal], /workspaces/training/side-quests/essential_scripting_patterns/data/sequences/SAMPLE_001_S1_L001_R1_001.fastq]
+    [[id:sample_002, organism:mouse, tissue:brain, depth:25000000, quality:35.2, run:UNSPECIFIED, sample_num:2, lane:001, read:R1, chunk:001, priority:normal], /workspaces/training/side-quests/essential_scripting_patterns/data/sequences/SAMPLE_002_S2_L001_R1_001.fastq]
+    [[id:sample_003, organism:human, tissue:kidney, depth:45000000, quality:42.1, run:UNSPECIFIED, sample_num:3, lane:001, read:R1, chunk:001, priority:high], /workspaces/training/side-quests/essential_scripting_patterns/data/sequences/SAMPLE_003_S3_L001_R1_001.fastq]
+    ```
 
 Perfect! Now all samples have a `run` field with either their actual run ID (in uppercase) or the default value 'UNSPECIFIED'. The combination of `?.` and `?:` provides both safety (no crashes) and sensible defaults.
 
@@ -1871,16 +1915,18 @@ Now try running without the CSV file:
 nextflow run main.nf
 ```
 
-The workflow stops immediately with a clear error message instead of failing mysteriously later!
+??? failure "Command output"
 
-```console title="Validation error output"
- N E X T F L O W   ~  version 25.04.3
+    ```console
+    N E X T F L O W   ~  version 25.10.2
 
-Launching `main.nf` [confident_coulomb] DSL2 - revision: 07059399ed
+    Launching `main.nf` [confident_coulomb] DSL2 - revision: 07059399ed
 
-WARN: Access to undefined parameter `input` -- Initialise it to a default value eg. `params.input = some_value`
-Input CSV file path not provided. Please specify --input <file.csv>
-```
+    WARN: Access to undefined parameter `input` -- Initialise it to a default value eg. `params.input = some_value`
+    Input CSV file path not provided. Please specify --input <file.csv>
+    ```
+
+The workflow stops immediately with a clear error message instead of failing mysteriously later
 
 Now run it with a non-existent file:
 
@@ -1888,21 +1934,27 @@ Now run it with a non-existent file:
 nextflow run main.nf --input ./data/nonexistent.csv
 ```
 
-Observe the error:
+??? failure "Command output"
 
-```console title="File not found error output"
- N E X T F L O W   ~  version 25.04.3
+    ```console
+    N E X T F L O W   ~  version 25.10.2
 
-Launching `main.nf` [cranky_gates] DSL2 - revision: 26839ae3eb
+    Launching `main.nf` [cranky_gates] DSL2 - revision: 26839ae3eb
 
-Input CSV file not found: ./data/nonexistent.csv
-```
+    Input CSV file not found: ./data/nonexistent.csv
+    ```
 
 Finally, run it with the correct file:
 
 ```bash
 nextflow run main.nf --input ./data/samples.csv
 ```
+
+??? success "Command output"
+
+    ```console
+    <!-- TODO: output -->
+    ```
 
 This time it runs successfully.
 
@@ -1937,19 +1989,21 @@ Run the workflow again with the original CSV:
 nextflow run main.nf --input ./data/samples.csv
 ```
 
-... and you'll see a warning about low sequencing depth for one of the samples:
+??? warning "Command output"
 
-```console title="Warning output"
- N E X T F L O W   ~  version 25.04.3
+    ```console
+    N E X T F L O W   ~  version 25.10.2
 
-Launching `main.nf` [awesome_goldwasser] DSL2 - revision: a31662a7c1
+    Launching `main.nf` [awesome_goldwasser] DSL2 - revision: a31662a7c1
 
-executor >  local (5)
-[ce/df5eeb] process > FASTP (2)           [100%] 2 of 2 ✔
-[-        ] process > TRIMGALORE          -
-[d1/7d2b4b] process > GENERATE_REPORT (3) [100%] 3 of 3 ✔
-WARN: Low sequencing depth for sample_002: 25000000
-```
+    executor >  local (5)
+    [ce/df5eeb] process > FASTP (2)           [100%] 2 of 2 ✔
+    [-        ] process > TRIMGALORE          -
+    [d1/7d2b4b] process > GENERATE_REPORT (3) [100%] 3 of 3 ✔
+    WARN: Low sequencing depth for sample_002: 25000000
+    ```
+
+We see a warning about low sequencing depth for one of the samples.
 
 ### Takeaway
 
@@ -2008,28 +2062,30 @@ This closure runs when the workflow completes. Inside, you have access to the `w
 
 Run your workflow and you'll see this summary appear at the end!
 
-```bash title="Run with onComplete handler"
+```bash
 nextflow run main.nf --input ./data/samples.csv -ansi-log false
 ```
 
-```console title="onComplete output"
-N E X T F L O W  ~  version 25.04.3
-Launching `main.nf` [marvelous_boltzmann] DSL2 - revision: a31662a7c1
-WARN: Low sequencing depth for sample_002: 25000000
-[9b/d48e40] Submitted process > FASTP (2)
-[6a/73867a] Submitted process > GENERATE_REPORT (2)
-[79/ad0ac5] Submitted process > GENERATE_REPORT (1)
-[f3/bda6cb] Submitted process > FASTP (1)
-[34/d5b52f] Submitted process > GENERATE_REPORT (3)
+??? success "Command output"
 
-Pipeline execution summary:
-==========================
-Completed at: 2025-10-10T12:14:24.885384+01:00
-Duration    : 2.9s
-Success     : true
-workDir     : /workspaces/training/side-quests/essential_scripting_patterns/work
-exit status : 0
-```
+    ```console
+    N E X T F L O W  ~  version 25.10.2
+    Launching `main.nf` [marvelous_boltzmann] DSL2 - revision: a31662a7c1
+    WARN: Low sequencing depth for sample_002: 25000000
+    [9b/d48e40] Submitted process > FASTP (2)
+    [6a/73867a] Submitted process > GENERATE_REPORT (2)
+    [79/ad0ac5] Submitted process > GENERATE_REPORT (1)
+    [f3/bda6cb] Submitted process > FASTP (1)
+    [34/d5b52f] Submitted process > GENERATE_REPORT (3)
+
+    Pipeline execution summary:
+    ==========================
+    Completed at: 2025-10-10T12:14:24.885384+01:00
+    Duration    : 2.9s
+    Success     : true
+    workDir     : /workspaces/training/side-quests/essential_scripting_patterns/work
+    exit status : 0
+    ```
 
 Let's make it more useful by adding conditional logic:
 
@@ -2084,26 +2140,30 @@ Let's make it more useful by adding conditional logic:
 
 Now we get an even more informative summary, including a success/failure message and the output directory if specified:
 
-```console title="Enhanced onComplete output"
-N E X T F L O W  ~  version 25.04.3
-Launching `main.nf` [boring_linnaeus] DSL2 - revision: a31662a7c1
-WARN: Low sequencing depth for sample_002: 25000000
-[e5/242efc] Submitted process > FASTP (2)
-[3b/74047c] Submitted process > GENERATE_REPORT (3)
-[8a/7a57e6] Submitted process > GENERATE_REPORT (1)
-[a8/b1a31f] Submitted process > GENERATE_REPORT (2)
-[40/648429] Submitted process > FASTP (1)
+<!-- TODO: add run command -->
 
-Pipeline execution summary:
-==========================
-Completed at: 2025-10-10T12:16:00.522569+01:00
-Duration    : 3.6s
-Success     : true
-workDir     : /workspaces/training/side-quests/essential_scripting_patterns/work
-exit status : 0
+??? success "Command output"
 
-✅ Pipeline completed successfully!
-```
+    ```console
+    N E X T F L O W  ~  version 25.10.2
+    Launching `main.nf` [boring_linnaeus] DSL2 - revision: a31662a7c1
+    WARN: Low sequencing depth for sample_002: 25000000
+    [e5/242efc] Submitted process > FASTP (2)
+    [3b/74047c] Submitted process > GENERATE_REPORT (3)
+    [8a/7a57e6] Submitted process > GENERATE_REPORT (1)
+    [a8/b1a31f] Submitted process > GENERATE_REPORT (2)
+    [40/648429] Submitted process > FASTP (1)
+
+    Pipeline execution summary:
+    ==========================
+    Completed at: 2025-10-10T12:16:00.522569+01:00
+    Duration    : 3.6s
+    Success     : true
+    workDir     : /workspaces/training/side-quests/essential_scripting_patterns/work
+    exit status : 0
+
+    ✅ Pipeline completed successfully!
+    ```
 
 You can also write the summary to a file using file operations:
 
