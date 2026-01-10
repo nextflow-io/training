@@ -84,7 +84,7 @@ You should recognize all the pieces from what you learned in Part 1 & Part 2 of 
 
     Even though the data files we're using here are very small, in genomics they can get very large. For the purposes of demonstration in the teaching environment, we're using the 'symlink' publishing mode to avoid unnecessary file copies. You shouldn't do this in your final workflows, since you'll lose results when you clean up your `work` directory.
 
-### 1.2. Import the module into the workflow file
+### 1.3. Import the module into the workflow file
 
 Add the statement `include { FASTQC } from './modules/fastqc.nf'` to the `rnaseq.nf` file:
 
@@ -93,7 +93,7 @@ Add the statement `include { FASTQC } from './modules/fastqc.nf'` to the `rnaseq
 include { FASTQC } from './modules/fastqc.nf'
 ```
 
-### 1.3. Add an input declaration
+### 1.4. Add an input declaration
 
 Declare an input parameter with a default value:
 
@@ -104,7 +104,7 @@ params {
 }
 ```
 
-### 1.4. Create an input channel in the workflow block
+### 1.5. Create an input channel in the workflow block
 
 Use a basic `.fromPath()` channel factory to create the input channel:
 
@@ -119,7 +119,7 @@ workflow {
 }
 ```
 
-### 1.5. Call the `FASTQC` process on the input channel
+### 1.6. Call the `FASTQC` process on the input channel
 
 ```groovy title="rnaseq.nf" linenums="13"
 workflow {
@@ -133,7 +133,7 @@ workflow {
 }
 ```
 
-### 1.6. Run the workflow to test that it works
+### 1.7. Run the workflow to test that it works
 
 We could use the `--reads` parameter to specify an input from command line, but during development we can be lazy and just use the test default we set up.
 
