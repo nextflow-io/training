@@ -36,14 +36,16 @@ Just to make sure everything is working, run the script once before making any c
 nextflow run hello-channels.nf --greeting 'Hello Channels!'
 ```
 
-```console title="Output"
- N E X T F L O W   ~  version 25.04.3
+??? success title="Command output"
 
-Launching `hello-channels.nf` [insane_lichterman] DSL2 - revision: c33d41f479
+    ```console
+    N E X T F L O W   ~  version 25.04.3
 
-executor >  local (1)
-[86/9efa08] sayHello | 1 of 1 ✔
-```
+    Launching `hello-channels.nf` [insane_lichterman] DSL2 - revision: c33d41f479
+
+    executor >  local (1)
+    [86/9efa08] sayHello | 1 of 1 ✔
+    ```
 
 As previously, you will find the output file named `output.txt` in the `results` directory (specified by the `publishDir` directive).
 
@@ -148,17 +150,18 @@ Let's run it!
 nextflow run hello-channels.nf
 ```
 
-If you made both edits correctly, you should get another successful execution:
+??? success title="Command output"
 
-```console title="Output" linenums="1"
- N E X T F L O W   ~  version 25.04.3
+    ```console
+    N E X T F L O W   ~  version 25.04.3
 
-Launching `hello-channels.nf` [nice_heisenberg] DSL2 - revision: 41b4aeb7e9
+    Launching `hello-channels.nf` [nice_heisenberg] DSL2 - revision: 41b4aeb7e9
 
-executor >  local (1)
-[3b/f2b109] sayHello (1) | 1 of 1 ✔
-```
+    executor >  local (1)
+    [3b/f2b109] sayHello (1) | 1 of 1 ✔
+    ```
 
+If you made both edits correctly, you should get another successful execution.
 You can check the results directory to satisfy yourself that the outcome is still the same as previously.
 
 ```console title="results/output.txt" linenums="1"
@@ -218,18 +221,19 @@ Let's try it.
 nextflow run hello-channels.nf
 ```
 
-It certainly seems to run just fine:
+??? success title="Command output"
 
-```console title="Output" linenums="1"
- N E X T F L O W   ~  version 25.04.3
+    ```console
+    N E X T F L O W   ~  version 25.04.3
 
-Launching `hello-channels.nf` [suspicious_lamport] DSL2 - revision: 778deadaea
+    Launching `hello-channels.nf` [suspicious_lamport] DSL2 - revision: 778deadaea
 
-executor >  local (3)
-[cd/77a81f] sayHello (3) | 3 of 3 ✔
-```
+    executor >  local (3)
+    [cd/77a81f] sayHello (3) | 3 of 3 ✔
+    ```
 
-However... This seems to indicate that '3 of 3' calls were made for the process, which is encouraging, but this only shows us a single run of the process, with one subdirectory path (`cd/77a81f`).
+It certainly seems to have run just fine.
+However, this seems to indicate that '3 of 3' calls were made for the process, but it only shows us a single run of the process, with one subdirectory path (`cd/77a81f`).
 What's going on?
 
 By default, the ANSI logging system writes the logging from multiple calls to the same process on the same line.
@@ -243,15 +247,17 @@ To expand the logging to display one line per process call, add `-ansi-log false
 nextflow run hello-channels.nf -ansi-log false
 ```
 
-This time we see all three process runs and their associated work subdirectories listed in the output:
+??? success title="Command output"
 
-```console title="Output" linenums="1"
-N E X T F L O W  ~  version 25.04.3
-Launching `hello-channels.nf` [pensive_poitras] DSL2 - revision: 778deadaea
-[76/f61695] Submitted process > sayHello (1)
-[6e/d12e35] Submitted process > sayHello (3)
-[c1/097679] Submitted process > sayHello (2)
-```
+    ```console
+    N E X T F L O W  ~  version 25.04.3
+    Launching `hello-channels.nf` [pensive_poitras] DSL2 - revision: 778deadaea
+    [76/f61695] Submitted process > sayHello (1)
+    [6e/d12e35] Submitted process > sayHello (3)
+    [c1/097679] Submitted process > sayHello (2)
+    ```
+
+This time we see all three process runs and their associated work subdirectories listed in the output.
 
 That's much better; at least for a simple workflow.
 For a complex workflow, or a large number of inputs, having the full list output to the terminal might get a bit overwhelming, so you might not choose to use `-ansi-log false` in those cases.
@@ -264,10 +270,12 @@ For a complex workflow, or a large number of inputs, having the full list output
 
 That being said, we have another problem. If you look in the `results` directory, there is only one file: `output.txt`!
 
-```console title="Directory contents"
-results
-└── output.txt
-```
+??? abstract title="Directory contents"
+
+    ```console
+    results
+    └── output.txt
+    ```
 
 What's up with that? Shouldn't we be expecting a separate file per input greeting, so three files in all?
 Did all three greetings go into a single file?
@@ -305,10 +313,10 @@ In the process block, make the following code changes:
         publishDir 'results', mode: 'copy'
 
         input:
-            val greeting
+        val greeting
 
         output:
-            path "${greeting}-output.txt"
+        path "${greeting}-output.txt"
 
         script:
         """
@@ -325,10 +333,10 @@ In the process block, make the following code changes:
         publishDir 'results', mode: 'copy'
 
         input:
-            val greeting
+        val greeting
 
         output:
-            path 'output.txt'
+        path 'output.txt'
 
         script:
         """
@@ -353,40 +361,45 @@ Let's run it:
 nextflow run hello-channels.nf
 ```
 
-Reverting back to the summary view, the output looks like this again:
+??? success title="Command output"
 
-```console title="Output" linenums="1"
- N E X T F L O W   ~  version 25.04.3
+    ```console
+    N E X T F L O W   ~  version 25.04.3
 
-Launching `hello-channels.nf` [astonishing_bell] DSL2 - revision: f57ff44a69
+    Launching `hello-channels.nf` [astonishing_bell] DSL2 - revision: f57ff44a69
 
-executor >  local (3)
-[2d/90a2e2] sayHello (1) | 3 of 3 ✔
-```
+    executor >  local (3)
+    [2d/90a2e2] sayHello (1) | 3 of 3 ✔
+    ```
 
-Importantly, now we have three new files in addition to the one we already had in the `results` directory:
+Reverting back to the summary view, the output is summarized on one line again.
+However, now we have three new files in addition to the one we already had in the `results` directory.
 
-```console title="Directory contents"
-results
-├── Bonjour-output.txt
-├── Hello-output.txt
-├── Holà-output.txt
-└── output.txt
-```
+??? abstract title="Directory contents"
 
-They each have the expected contents:
+    ```console
+    results
+    ├── Bonjour-output.txt
+    ├── Hello-output.txt
+    ├── Holà-output.txt
+    └── output.txt
+    ```
 
-```console title="Bonjour-output.txt" linenums="1"
-Bonjour
-```
+They each have the expected contents.
 
-```console title="Hello-output.txt" linenums="1"
-Hello
-```
+??? abstract title="File contents"
 
-```console title="Holà-output.txt" linenums="1"
-Holà
-```
+    ```console title="Bonjour-output.txt" linenums="1"
+    Bonjour
+    ```
+
+    ```console title="Hello-output.txt" linenums="1"
+    Hello
+    ```
+
+    ```console title="Holà-output.txt" linenums="1"
+    Holà
+    ```
 
 Success! Now we can add as many greetings as we like without worrying about output files being overwritten.
 
@@ -395,7 +408,7 @@ Success! Now we can add as many greetings as we like without worrying about outp
     In practice, naming files based on the input data itself is almost always impractical.
     The better way to generate dynamic filenames is to pass metadata to a process along with the input files.
     The metadata is typically provided via a 'sample sheet' or equivalents.
-    You'll learn how to do that later in your Nextflow training.
+    You'll learn how to do that later in your Nextflow training (see [Metadata side quest](../side_quests/metadata.md)).
 
 ### Takeaway
 
@@ -477,20 +490,22 @@ Let's try running this:
 nextflow run hello-channels.nf
 ```
 
-Oh no! Nextflow throws an error that starts like this:
+??? failure title="Command output"
 
-```console title="Output" linenums="1"
- N E X T F L O W   ~  version 25.04.3
+    ```console
+    N E X T F L O W   ~  version 25.04.3
 
-Launching `hello-channels.nf` [friendly_koch] DSL2 - revision: 97256837a7
+    Launching `hello-channels.nf` [friendly_koch] DSL2 - revision: 97256837a7
 
-executor >  local (1)
-[22/57e015] sayHello (1) | 0 of 1
-ERROR ~ Error executing process > 'sayHello (1)'
+    executor >  local (1)
+    [22/57e015] sayHello (1) | 0 of 1
+    ERROR ~ Error executing process > 'sayHello (1)'
 
-Caused by:
-  Missing output file(s) `[Hello, Bonjour, Holà]-output.txt` expected by process `sayHello (1)`
-```
+    Caused by:
+      Missing output file(s) `[Hello, Bonjour, Holà]-output.txt` expected by process `sayHello (1)`
+    ```
+
+Oh no! There's an error!
 
 It looks like Nextflow tried to run a single process call, using `[Hello, Bonjour, Holà]` as a string value, instead of using the three strings in the array as separate values.
 
@@ -579,20 +594,22 @@ Finally, you can try running the workflow again!
 nextflow run hello-channels.nf
 ```
 
-This time it works AND gives us the additional insight into what the contents of the channel look like before and after we run the `flatten()` operator:
+??? success title="Command output"
 
-```console title="Output" linenums="1"
- N E X T F L O W   ~  version 25.04.3
+    ```console
+    N E X T F L O W   ~  version 25.04.3
 
-Launching `hello-channels.nf` [tiny_elion] DSL2 - revision: 1d834f23d2
+    Launching `hello-channels.nf` [tiny_elion] DSL2 - revision: 1d834f23d2
 
-executor >  local (3)
-[8e/bb08f3] sayHello (2) | 3 of 3 ✔
-Before flatten: [Hello, Bonjour, Holà]
-After flatten: Hello
-After flatten: Bonjour
-After flatten: Holà
-```
+    executor >  local (3)
+    [8e/bb08f3] sayHello (2) | 3 of 3 ✔
+    Before flatten: [Hello, Bonjour, Holà]
+    After flatten: Hello
+    After flatten: Bonjour
+    After flatten: Holà
+    ```
+
+This time it works AND gives us the additional insight into what the contents of the channel look like before and after we run the `flatten()` operator.
 
 You see that we get a single `Before flatten:` statement because at that point the channel contains one item, the original array.
 Then we get three separate `After flatten:` statements, one for each greeting, which are now individual items in the channel.
@@ -696,26 +713,27 @@ Let's try running the workflow with the new channel factory and the input file.
 nextflow run hello-channels.nf
 ```
 
-Oh no, it doesn't work. Here's the start of the console output and error message:
+??? example title="Output (subset)" <!-- TODO: paste complete output -->
 
-```console title="Output" linenums="1"
- N E X T F L O W   ~  version 25.04.3
+    ```console
+    N E X T F L O W   ~  version 25.04.3
 
-Launching `hello-channels.nf` [adoring_bhabha] DSL2 - revision: 8ce25edc39
+    Launching `hello-channels.nf` [adoring_bhabha] DSL2 - revision: 8ce25edc39
 
-[-        ] sayHello | 0 of 1
-ERROR ~ Error executing process > 'sayHello (1)'
+    [-        ] sayHello | 0 of 1
+    ERROR ~ Error executing process > 'sayHello (1)'
 
-Caused by:
-  File `/workspaces/training/hello-nextflow/data/greetings.csv-output.txt` is outside the scope of the process work directory: /workspaces/training/hello-nextflow/work/e3/c459b3c8f4029094cc778c89a4393d
+    Caused by:
+      File `/workspaces/training/hello-nextflow/data/greetings.csv-output.txt` is outside the scope of the process work directory: /workspaces/training/hello-nextflow/work/e3/c459b3c8f4029094cc778c89a4393d
 
 
-Command executed:
+    Command executed:
 
-  echo '/workspaces/training/hello-nextflow/data/greetings.csv' > '/workspaces/training/hello-nextflow/data/greetings.
-```
+      echo '/workspaces/training/hello-nextflow/data/greetings.csv' > '/workspaces/training/hello-nextflow/data/greetings.
+    ```
 
-The `Command executed:` bit (lines 13-15) is especially helpful here.
+Oh no, it doesn't work. Have a look at the start of the console output and error message.
+The `Command executed:` bit is especially helpful here.
 
 This may look a little bit familiar.
 It looks like Nextflow tried to run a single process call using the file path itself as a string value.
@@ -763,30 +781,31 @@ Let's try running the workflow with the added CSV-parsing logic.
 nextflow run hello-channels.nf
 ```
 
-Interestingly, this fails too, but with a different error. The console output and error starts like this:
+??? failure title="Command output" <!-- TODO: paste complete output -->
 
-```console title="Output" linenums="1"
- N E X T F L O W   ~  version 25.04.3
+    ```console
+    N E X T F L O W   ~  version 25.04.3
 
-Launching `hello-channels.nf` [stoic_ride] DSL2 - revision: a0e5de507e
+    Launching `hello-channels.nf` [stoic_ride] DSL2 - revision: a0e5de507e
 
-executor >  local (3)
-[42/8fea64] sayHello (1) | 0 of 3
-Before splitCsv: /workspaces/training/hello-nextflow/greetings.csv
-After splitCsv: [Hello]
-After splitCsv: [Bonjour]
-After splitCsv: [Holà]
-ERROR ~ Error executing process > 'sayHello (2)'
+    executor >  local (3)
+    [42/8fea64] sayHello (1) | 0 of 3
+    Before splitCsv: /workspaces/training/hello-nextflow/greetings.csv
+    After splitCsv: [Hello]
+    After splitCsv: [Bonjour]
+    After splitCsv: [Holà]
+    ERROR ~ Error executing process > 'sayHello (2)'
 
-Caused by:
-  Missing output file(s) `[Bonjour]-output.txt` expected by process `sayHello (2)`
+    Caused by:
+      Missing output file(s) `[Bonjour]-output.txt` expected by process `sayHello (2)`
 
 
-Command executed:
+    Command executed:
 
-  echo '[Bonjour]' > '[Bonjour]-output.txt'
-```
+      echo '[Bonjour]' > '[Bonjour]-output.txt'
+    ```
 
+Interestingly, this fails too, but with a different error.
 This time Nextflow has parsed the contents of the file (yay!) but it's added brackets around the greetings.
 
 Long story short, `splitCsv()` reads each line into an array, and each comma-separated value in the line becomes an element in the array.
@@ -851,24 +870,25 @@ Let's run it one more time:
 nextflow run hello-channels.nf
 ```
 
+??? success title="Command output"
+
+    ```console title="Output" linenums="1"
+    N E X T F L O W   ~  version 25.04.3
+
+    Launching `hello-channels.nf` [tiny_heisenberg] DSL2 - revision: 845b471427
+
+    executor >  local (3)
+    [1a/1d19ab] sayHello (2) | 3 of 3 ✔
+    Before splitCsv: /workspaces/training/hello-nextflow/greetings.csv
+    After splitCsv: [Hello]
+    After splitCsv: [Bonjour]
+    After splitCsv: [Holà]
+    After map: Hello
+    After map: Bonjour
+    After map: Holà
+    ```
+
 This time it should run without error.
-
-```console title="Output" linenums="1"
- N E X T F L O W   ~  version 25.04.3
-
-Launching `hello-channels.nf` [tiny_heisenberg] DSL2 - revision: 845b471427
-
-executor >  local (3)
-[1a/1d19ab] sayHello (2) | 3 of 3 ✔
-Before splitCsv: /workspaces/training/hello-nextflow/greetings.csv
-After splitCsv: [Hello]
-After splitCsv: [Bonjour]
-After splitCsv: [Holà]
-After map: Hello
-After map: Bonjour
-After map: Holà
-```
-
 Looking at the output of the `view()` statements, we see the following:
 
 - A single `Before splitCsv:` statement: at that point the channel contains one item, the original file path.
@@ -879,7 +899,7 @@ You can also look at the output files to verify that each greeting was correctly
 
 We've achieved the same result as previously, but now we have a lot more flexibility to add more elements to the channel of greetings we want to process by modifying an input file, without modifying any code.
 
-!!! note
+!!! note <!-- TODO: this goes away once we update to the CSV from Nextflow run -->
 
     Here we had all greetings on one line in the CSV file.
     You can try adding more columns to the CSV file and see what happens; for example, try the following:

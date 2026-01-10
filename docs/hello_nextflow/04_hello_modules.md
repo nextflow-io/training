@@ -38,32 +38,36 @@ Just to make sure everything is working, run the script once before making any c
 nextflow run hello-modules.nf
 ```
 
-```console title="Output"
- N E X T F L O W   ~  version 25.04.3
+??? success title="Command output"
 
-Launching `hello-modules.nf` [festering_nobel] DSL2 - revision: eeca64cdb1
+    ```console
+    N E X T F L O W   ~  version 25.04.3
 
-executor >  local (7)
-[25/648bdd] sayHello (2)       | 3 of 3 ✔
-[60/bc6831] convertToUpper (1) | 3 of 3 ✔
-[1a/bc5901] collectGreetings   | 1 of 1 ✔
-There were 3 greetings in this batch
-```
+    Launching `hello-modules.nf` [festering_nobel] DSL2 - revision: eeca64cdb1
+
+    executor >  local (7)
+    [25/648bdd] sayHello (2)       | 3 of 3 ✔
+    [60/bc6831] convertToUpper (1) | 3 of 3 ✔
+    [1a/bc5901] collectGreetings   | 1 of 1 ✔
+    There were 3 greetings in this batch
+    ```
 
 As previously, you will find the output files in the `results` directory (specified by the `publishDir` directive).
 
-```console title="Directory contents"
-results
-├── Bonjour-output.txt
-├── COLLECTED-output.txt
-├── COLLECTED-test-batch-output.txt
-├── COLLECTED-trio-output.txt
-├── Hello-output.txt
-├── Holà-output.txt
-├── UPPER-Bonjour-output.txt
-├── UPPER-Hello-output.txt
-└── UPPER-Holà-output.txt
-```
+??? abstract title="Directory contents"
+
+    ```console
+    results
+    ├── Bonjour-output.txt
+    ├── COLLECTED-output.txt
+    ├── COLLECTED-test-batch-output.txt
+    ├── COLLECTED-trio-output.txt
+    ├── Hello-output.txt
+    ├── Holà-output.txt
+    ├── UPPER-Bonjour-output.txt
+    ├── UPPER-Hello-output.txt
+    └── UPPER-Holà-output.txt
+    ```
 
 !!! note
 
@@ -120,10 +124,10 @@ process sayHello {
     publishDir 'results', mode: 'copy'
 
     input:
-        val greeting
+    val greeting
 
     output:
-        path "${greeting}-output.txt"
+    path "${greeting}-output.txt"
 
     script:
     """
@@ -167,18 +171,20 @@ We're running the workflow with essentially the same code and inputs as before, 
 nextflow run hello-modules.nf -resume
 ```
 
-This runs quickly very quickly because everything is cached.
+??? success title="Command output"
 
-```console title="Output" linenums="1"
- N E X T F L O W   ~  version 25.04.3
+    ```console
+    N E X T F L O W   ~  version 25.04.3
 
-Launching `hello-modules.nf` [romantic_poisson] DSL2 - revision: 96edfa9ad3
+    Launching `hello-modules.nf` [romantic_poisson] DSL2 - revision: 96edfa9ad3
 
-[f6/cc0107] sayHello (1)       | 3 of 3, cached: 3 ✔
-[3c/4058ba] convertToUpper (2) | 3 of 3, cached: 3 ✔
-[1a/bc5901] collectGreetings   | 1 of 1, cached: 1 ✔
-There were 3 greetings in this batch
-```
+    [f6/cc0107] sayHello (1)       | 3 of 3, cached: 3 ✔
+    [3c/4058ba] convertToUpper (2) | 3 of 3, cached: 3 ✔
+    [1a/bc5901] collectGreetings   | 1 of 1, cached: 1 ✔
+    There were 3 greetings in this batch
+    ```
+
+This should run quickly very quickly because everything is cached.
 
 Nextflow recognized that it's still all the same work to be done, even if the code is split up into multiple files.
 
@@ -219,10 +225,10 @@ process convertToUpper {
     publishDir 'results', mode: 'copy'
 
     input:
-        path input_file
+    path input_file
 
     output:
-        path "UPPER-${input_file}"
+    path "UPPER-${input_file}"
 
     script:
     """
@@ -264,18 +270,20 @@ Run this with the `-resume` flag.
 nextflow run hello-modules.nf -resume
 ```
 
+??? success title="Command output"
+
+    ```console
+    N E X T F L O W   ~  version 25.04.3
+
+    Launching `hello-modules.nf` [nauseous_heisenberg] DSL2 - revision: a04a9f2da0
+
+    [c9/763d42] sayHello (3)       | 3 of 3, cached: 3 ✔
+    [60/bc6831] convertToUpper (3) | 3 of 3, cached: 3 ✔
+    [1a/bc5901] collectGreetings   | 1 of 1, cached: 1 ✔
+    There were 3 greetings in this batch
+    ```
+
 This should still produce the same output as previously.
-
-```console title="Output" linenums="1"
- N E X T F L O W   ~  version 25.04.3
-
-Launching `hello-modules.nf` [nauseous_heisenberg] DSL2 - revision: a04a9f2da0
-
-[c9/763d42] sayHello (3)       | 3 of 3, cached: 3 ✔
-[60/bc6831] convertToUpper (3) | 3 of 3, cached: 3 ✔
-[1a/bc5901] collectGreetings   | 1 of 1, cached: 1 ✔
-There were 3 greetings in this batch
-```
 
 Two done, one more to go!
 
@@ -306,15 +314,15 @@ process collectGreetings {
     publishDir 'results', mode: 'copy'
 
     input:
-        path input_files
-        val batch_name
+    path input_files
+    val batch_name
 
     output:
-        path "COLLECTED-${batch_name}-output.txt" , emit: outfile
-        val count_greetings , emit: count
+    path "COLLECTED-${batch_name}-output.txt" , emit: outfile
+    val count_greetings , emit: count
 
     script:
-        count_greetings = input_files.size()
+    count_greetings = input_files.size()
     """
     cat ${input_files} > 'COLLECTED-${batch_name}-output.txt'
     """
@@ -356,18 +364,20 @@ Run this with the `-resume` flag.
 nextflow run hello-modules.nf -resume
 ```
 
+??? success title="Command output"
+
+    ```console
+    N E X T F L O W   ~  version 25.04.3
+
+    Launching `hello-modules.nf` [friendly_coulomb] DSL2 - revision: 7aa2b9bc0f
+
+    [f6/cc0107] sayHello (1)       | 3 of 3, cached: 3 ✔
+    [3c/4058ba] convertToUpper (2) | 3 of 3, cached: 3 ✔
+    [1a/bc5901] collectGreetings   | 1 of 1, cached: 1 ✔
+    There were 3 greetings in this batch
+    ```
+
 This should still produce the same output as previously.
-
-```console title="Output" linenums="1"
- N E X T F L O W   ~  version 25.04.3
-
-Launching `hello-modules.nf` [friendly_coulomb] DSL2 - revision: 7aa2b9bc0f
-
-[f6/cc0107] sayHello (1)       | 3 of 3, cached: 3 ✔
-[3c/4058ba] convertToUpper (2) | 3 of 3, cached: 3 ✔
-[1a/bc5901] collectGreetings   | 1 of 1, cached: 1 ✔
-There were 3 greetings in this batch
-```
 
 ### Takeaway
 

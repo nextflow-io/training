@@ -1,4 +1,4 @@
-# Orientation
+# Getting started
 
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/G3CV-FcV-rc?si=nyLvwhrSB2m1NPc5&amp;list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -17,16 +17,36 @@
     - :fontawesome-solid-closed-captioning: High quality (manually curated) captions / subtitles. Switch them on with the :material-subtitles: icon
     - :material-bookmark: Video chapters in the timeline that correspond to page headings.
 
-## GitHub Codespaces
+## Start a training environment
 
-The GitHub Codespaces environment contains all the software, code and data necessary to work through this training course, so you don't need to install anything yourself.
-However, you do need a (free) GitHub account to log in, and you should take a few minutes to familiarize yourself with the interface.
+To use the pre-built environment we provide on GitHub Codespaces, click the "Open in GitHub Codespaces" button below. For other options, see [Environment options](../envsetup/index.md).
 
-If you have not yet done so, please go through the [Environment Setup](../../envsetup/) mini-course before going any further.
+We recommend opening the training environment in a new browser tab or window (use right-click, ctrl-click or cmd-click depending on your equipment) so that you can read on while the environment loads.
+You will need to keep these instructions open in parallel to work through the course.
 
-## Working directory
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
-Throughout this training course, we'll be working in the `hello-nextflow/` directory.
+### Environment basics
+
+This training environment contains all the software, code and data necessary to work through the training course, so you don't need to install anything yourself.
+
+The codespace is set up with a VSCode interface, which includes a filesystem explorer, a code editor and a terminal shell.
+All instructions given during the course (e.g. 'open the file', 'edit the code' or 'run this command') refer to those three parts of the VScode interface unless otherwise specified.
+
+If you are working through this course by yourself, please acquaint yourself with the [environment basics](../envsetup/01_setup.md) for further details.
+
+### Version requirements
+
+This training is designed for Nextflow 25.10.2 or later **with the v2 syntax parser ENABLED**.
+If you are using a local or custom environment, please make sure you are using the correct settings as documented [here](../nxf_versions.md).
+
+## Get ready to work
+
+Once your codespace is running, there are two things you need to do before diving into the training: set your working directory for this specific course, and take a look at the materials provided.
+
+### Set the working directory
+
+By default, the codespace opens with the work directory set at the root of all training courses, but for this course, we'll be working in the `hello-nextflow/` directory.
 
 Change directory now by running this command in the terminal:
 
@@ -34,9 +54,9 @@ Change directory now by running this command in the terminal:
 cd hello-nextflow/
 ```
 
-!!!tip
+!!! tip
 
-    If for whatever reason you move out of this directory, you can always use the full path to return to it, assuming you're running this within the Github Codespaces training environment:
+    If for whatever reason you move out of this directory (e.g. your codespace goes to sleep), you can always use the full path to return to it, assuming you're running this within the Github Codespaces training environment:
 
     ```bash
     cd /workspaces/training/hello-nextflow
@@ -44,7 +64,7 @@ cd hello-nextflow/
 
 Now let's have a look at the contents of this directory.
 
-## Materials provided
+### Check out the materials provided
 
 You can explore the contents of this directory by using the file explorer on the left-hand side of the training workspace.
 Alternatively, you can use the `tree` command.
@@ -57,31 +77,38 @@ Here we generate a table of contents to the second level down:
 tree . -L 2
 ```
 
-If you run this inside `hello-nextflow`, you should see the following output:
+If you run this inside `hello-nextflow`, you should see the following output.
 
-```console title="Directory contents"
-.
-├── greetings.csv
-├── hello-channels.nf
-├── hello-config.nf
-├── hello-containers.nf
-├── hello-modules.nf
-├── hello-workflow.nf
-├── hello-world.nf
-├── nextflow.config
-├── solutions
-│   ├── 1-hello-world
-│   ├── 2-hello-channels
-│   ├── 3-hello-workflow
-│   ├── 4-hello-modules
-│   ├── 5-hello-containers
-│   └── 6-hello-config
-└── test-params.json
+??? abstract "Directory contents"
 
-7 directories, 9 files
-```
+    ```console
+    .
+    ├── greetings.csv
+    ├── hello-channels.nf
+    ├── hello-config.nf
+    ├── hello-containers.nf
+    ├── hello-modules.nf
+    ├── hello-workflow.nf
+    ├── hello-world.nf
+    ├── nextflow.config
+    ├── solutions
+    │   ├── 1-hello-world
+    │   ├── 2-hello-channels
+    │   ├── 3-hello-workflow
+    │   ├── 4-hello-modules
+    │   ├── 5-hello-containers
+    │   └── 6-hello-config
+    └── test-params.json
 
-**Here's a summary of what you should know to get started:**
+    7 directories, 9 files
+    ```
+
+!!! tip
+
+    We use collapsible sections like this to include expected command output in a concise way.
+    Click on the colored box to expand the section and view its contents.
+
+### Content guide
 
 - **The `.nf` files** are workflow scripts that are named based on what part of the course they're used in.
 
@@ -97,4 +124,14 @@ If you run this inside `hello-nextflow`, you should see the following output:
   The name and number in the filename correspond to the step of the relevant part of the course.
   For example, the file `hello-world-4.nf` is the expected result of completing steps 1 through 4 of Part 1: Hello World.
 
-**Now, to begin the course, click on the arrow in the bottom right corner of this page.**
+## Readiness checklist
+
+Think you're ready to dive in?
+
+- [ ] I understand the goal of this course and its prerequisites
+- [ ] My environment is up and running
+- [ ] I've set my working directory appropriately
+
+If you can check all the boxes, you're good to go.
+
+**To continue to Part 1, click on the arrow in the bottom right corner of this page.**

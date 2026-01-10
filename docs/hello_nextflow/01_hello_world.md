@@ -104,7 +104,7 @@ Let's open the `hello-world.nf` script in the editor pane.
 process sayHello {
 
     output:
-        path 'output.txt'
+    path 'output.txt'
 
     script:
     """
@@ -139,7 +139,7 @@ Here we have a **process** called `sayHello` that writes its **output** to a fil
 process sayHello {
 
     output:
-        path 'output.txt'
+    path 'output.txt'
 
     script:
     """
@@ -224,7 +224,7 @@ Congratulations, you just ran your first Nextflow workflow!
 
 The most important output here is the last line (line 6):
 
-```console title="Output" linenums="6"
+```console linenums="6"
 [a3/7be2fa] sayHello | 1 of 1 ✔
 ```
 
@@ -254,23 +254,23 @@ Let's take a look at what's in there.
     tree -a work
     ```
 
-You should see something like this, though the exact subdirectory names will be different on your system:
+??? abstract title="Directory contents"
 
-```console title="Directory contents"
-work
-└── a3
-    └── 7be2fad5e71e5f49998f795677fd68
-        ├── .command.begin
-        ├── .command.err
-        ├── .command.log
-        ├── .command.out
-        ├── .command.run
-        ├── .command.sh
-        ├── .exitcode
-        └── output.txt
-```
+    ```console
+    work
+    └── a3
+        └── 7be2fad5e71e5f49998f795677fd68
+            ├── .command.begin
+            ├── .command.err
+            ├── .command.log
+            ├── .command.out
+            ├── .command.run
+            ├── .command.sh
+            ├── .exitcode
+            └── output.txt
+    ```
 
-These are the helper and log files:
+The exact subdirectory names will be different on your system, but you should see the following helper and log files:
 
 - **`.command.begin`**: Metadata related to the beginning of the execution of the process call
 - **`.command.err`**: Error messages (`stderr`) emitted by the process call
@@ -284,7 +284,7 @@ The `.command.sh` file is especially useful because it tells you what command Ne
 In this case it's very straightforward, but later in the course you'll see commands that involve some interpolation of variables.
 When you're dealing with that, you need to be able to check exactly what was run, especially when troubleshooting an issue.
 
-The actual output of the `sayHello` process is `output.txt`.
+Finally the actual output of the `sayHello` process is `output.txt`.
 Open it and you will find the `Hello World!` greeting, which was the expected result of our minimalist workflow.
 
 ```console title="output.txt" linenums="1"
@@ -330,7 +330,7 @@ In the workflow script file `hello-world.nf`, make the following code modificati
         publishDir 'results', mode: 'copy'
 
         output:
-            path 'output.txt'
+        path 'output.txt'
     ```
 
 === "Before"
@@ -339,7 +339,7 @@ In the workflow script file `hello-world.nf`, make the following code modificati
     process sayHello {
 
         output:
-            path 'output.txt'
+        path 'output.txt'
     ```
 
 #### 3.1.2. Run the workflow again
@@ -350,16 +350,18 @@ Now run the modified workflow script:
 nextflow run hello-world.nf
 ```
 
-The log output should look very familiar:
+The log output should look very familiar.
 
-```console title="Output" linenums="1"
- N E X T F L O W   ~  version 25.04.3
+??? success title="Command output"
 
-Launching `hello-world.nf` [jovial_mayer] DSL2 - revision: 35bd3425e5
+    ```console
+    N E X T F L O W   ~  version 25.04.3
 
-executor >  local (1)
-[62/49a1f8] sayHello | 1 of 1 ✔
-```
+    Launching `hello-world.nf` [jovial_mayer] DSL2 - revision: 35bd3425e5
+
+    executor >  local (1)
+    [62/49a1f8] sayHello | 1 of 1 ✔
+    ```
 
 This time, Nextflow has created a new directory called `results/`.
 Our `output.txt` file is in this directory.
@@ -396,13 +398,15 @@ nextflow run hello-world.nf -resume
 
 The console output should look similar.
 
-```console title="Output" linenums="1"
- N E X T F L O W   ~  version 25.04.3
+??? success title="Command output"
 
-Launching `hello-world.nf` [golden_cantor] DSL2 - revision: 35bd3425e5
+    ```console
+    N E X T F L O W   ~  version 25.04.3
 
-[62/49a1f8] sayHello | 1 of 1, cached: 1 ✔
-```
+    Launching `hello-world.nf` [golden_cantor] DSL2 - revision: 35bd3425e5
+
+    [62/49a1f8] sayHello | 1 of 1, cached: 1 ✔
+    ```
 
 Look for the `cached:` bit that has been added in the process status line (line 5), which means that Nextflow has recognized that it has already done this work and simply re-used the result from the previous successful run.
 
@@ -495,10 +499,10 @@ In the process block, make the following code change:
         publishDir 'results', mode: 'copy'
 
         input:
-            val greeting
+        val greeting
 
         output:
-            path 'output.txt'
+        path 'output.txt'
     ```
 
 === "Before"
@@ -509,7 +513,7 @@ In the process block, make the following code change:
         publishDir 'results', mode: 'copy'
 
         output:
-            path 'output.txt'
+        path 'output.txt'
     ```
 
 The `greeting` variable is prefixed by `val` to tell Nextflow it's a value (not a path).
@@ -583,16 +587,18 @@ Let's run it!
 nextflow run hello-world.nf --greeting 'Bonjour le monde!'
 ```
 
-If you made all three edits correctly, you should get another successful execution:
+If you made all three edits correctly, you should get another successful execution.
 
-```console title="Output" linenums="1"
- N E X T F L O W   ~  version 25.04.3
+??? success title="Command output"
 
-Launching `hello-world.nf` [elated_lavoisier] DSL2 - revision: 7c031b42ea
+    ```console
+    N E X T F L O W   ~  version 25.04.3
 
-executor >  local (1)
-[4b/654319] sayHello | 1 of 1 ✔
-```
+    Launching `hello-world.nf` [elated_lavoisier] DSL2 - revision: 7c031b42ea
+
+    executor >  local (1)
+    [4b/654319] sayHello | 1 of 1 ✔
+    ```
 
 Be sure to open up the output file to check that you now have the new version of the greeting.
 
@@ -617,16 +623,21 @@ In many cases, it makes sense to supply a default value for a given parameter so
 
 Let's give the `greeting` parameter with a default value by declaring it before the workflow definition.
 
-```groovy title="hello-world.nf" linenums="22"
+```groovy title="hello-world.nf" linenums="3"
 /*
  * Pipeline parameters
  */
-params.greeting = 'Holà mundo!'
+params {
+    greeting: String = 'Holà mundo!'
+}
 ```
+
+The syntax is `name: Type = default_value`. Supported types include `String`, `Integer`, `Float`, `Boolean`, and `Path`.
 
 !!! tip
 
-    You can put the parameter declaration inside the workflow block if you prefer. Whatever you choose, try to group similar things in the same place so you don't end up with declarations all over the place.
+    With the new Nextflow syntax parser in Nextflow 25.10.0, [parameters should be defined](https://www.nextflow.io/docs/latest/workflow.html#parameters)
+    in a block at the top of your main entry workflow script. This makes it easy to find all configurable parameters at a glance.
 
 #### 4.2.2. Run the workflow again without specifying the parameter
 
@@ -636,16 +647,16 @@ Now that you have a default value set, you can run the workflow again without ha
 nextflow run hello-world.nf
 ```
 
-The console output should look the same.
+??? success title="Command output"
 
-```console title="Output" linenums="1"
- N E X T F L O W   ~  version 25.04.3
+    ```console
+    N E X T F L O W   ~  version 25.04.3
 
-Launching `hello-world.nf` [determined_edison] DSL2 - revision: 3539118582
+    Launching `hello-world.nf` [determined_edison] DSL2 - revision: 3539118582
 
-executor >  local (1)
-[72/394147] sayHello | 1 of 1 ✔
-```
+    executor >  local (1)
+    [72/394147] sayHello | 1 of 1 ✔
+    ```
 
 Check the output in the results directory:
 
@@ -665,16 +676,16 @@ Try it out:
 nextflow run hello-world.nf --greeting 'Konnichiwa!'
 ```
 
-The console output should look the same.
+??? success title="Command output"
 
-```console title="Output" linenums="1"
- N E X T F L O W   ~  version 25.04.3
+    ```console
+    N E X T F L O W   ~  version 25.04.3
 
-Launching `hello-world.nf` [elegant_faraday] DSL2 - revision: 3539118582
+    Launching `hello-world.nf` [elegant_faraday] DSL2 - revision: 3539118582
 
-executor >  local (1)
-[6f/a12a91] sayHello | 1 of 1 ✔
-```
+    executor >  local (1)
+    [6f/a12a91] sayHello | 1 of 1 ✔
+    ```
 
 Now you will have the corresponding new output in your results directory.
 

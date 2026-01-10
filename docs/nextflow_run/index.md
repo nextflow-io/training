@@ -10,11 +10,16 @@ Hello! You are now on the path to running reproducible and scalable scientific w
 
 The rise of big data has made it increasingly necessary to be able to analyze and perform experiments on large datasets in a portable and reproducible manner. Parallelization and distributed computing are the best ways to tackle this challenge, but the tools commonly available to computational scientists often lack good support for these techniques, or they provide a model that fits poorly with the needs of computational scientists. Nextflow was particularly created to address these challenges.
 
-During this training, you will be introduced to Nextflow in a series of complementary hands-on tutorials.
+During this training, you will be introduced to Nextflow through hands-on exercises.
 
-Let's get started!
+## Audience & prerequisites
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
+This training is intended for learners who are completely new to Nextflow and wish to execute existing pipelines.
+
+**Prerequisites**
+
+- A GitHub account OR a local installation (see [Environment options](../envsetup/index.md)).
+- Basic experience with command line.
 
 ## Learning objectives
 
@@ -28,11 +33,6 @@ By the end of this workshop you will be able to:
 - Identify the main components of a Nextflow workflow and explain at a general level how they relate to what the workflow does
 - Configure and manage the execution of Nextflow workflows
 
-## Audience & prerequisites
+Ready to take the course?
 
-This is a workshop for those who are completely new to Nextflow. Some basic familiarity with the command line, and common file formats is assumed.
-
-**Prerequisites**
-
-- A GitHub account
-- Basic familiarity with command line
+[Start learning :material-arrow-right:](00_orientation.md){ .md-button .md-button--primary }

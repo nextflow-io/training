@@ -27,10 +27,10 @@ By learning to utilize these configuration options effectively, you can enhance 
 
 ## 0. Warmup: Check that Docker is enabled and run the Hello Config workflow
 
-First, a quick check. There is a `nextflow.config` file in the current directory that contains the line `docker.enabled = <setting>`, where `<setting>` is either `true` or `false` depending on whether or not you've worked through Part 5 of this course in the same environment.
+First, a quick check.
+There is a `nextflow.config` file in the current directory that contains the line `docker.enabled = <setting>`, where `<setting>` is either `true` or `false` depending on whether or not you've worked through Part 5 of this course in the same environment.
 
 If it is set to `true`, you don't need to do anything.
-
 If it is set to `false`, switch it to `true` now.
 
 ```console title="nextflow.config" linenums="1"
@@ -43,18 +43,20 @@ Once you've done that, verify that the initial workflow runs properly:
 nextflow run hello-config.nf
 ```
 
-```console title="Output"
- N E X T F L O W   ~  version 25.04.3
+??? success title="Command output"
 
-Launching `hello-config.nf` [reverent_heisenberg] DSL2 - revision: 028a841db1
+    ```console title="Output"
+    N E X T F L O W   ~  version 25.04.3
 
-executor >  local (8)
-[7f/0da515] sayHello (1)       | 3 of 3 ✔
-[f3/42f5a5] convertToUpper (3) | 3 of 3 ✔
-[04/fe90e4] collectGreetings   | 1 of 1 ✔
-[81/4f5fa9] cowpy              | 1 of 1 ✔
-There were 3 greetings in this batch
-```
+    Launching `hello-config.nf` [reverent_heisenberg] DSL2 - revision: 028a841db1
+
+    executor >  local (8)
+    [7f/0da515] sayHello (1)       | 3 of 3 ✔
+    [f3/42f5a5] convertToUpper (3) | 3 of 3 ✔
+    [04/fe90e4] collectGreetings   | 1 of 1 ✔
+    [81/4f5fa9] cowpy              | 1 of 1 ✔
+    There were 3 greetings in this batch
+    ```
 
 If everything works, you're ready to learn how to modify basic configuration properties to adapt to your compute environment's requirements.
 
@@ -144,20 +146,22 @@ Let's try it out.
 nextflow run hello-config.nf
 ```
 
+??? success title="Command output"
+
+    ```console title="Output"
+    N E X T F L O W   ~  version 25.04.3
+
+    Launching `hello-config.nf` [trusting_lovelace] DSL2 - revision: 028a841db1
+
+    executor >  local (8)
+    [ee/4ca1f2] sayHello (3)       | 3 of 3 ✔
+    [20/2596a7] convertToUpper (1) | 3 of 3 ✔
+    [b3/e15de5] collectGreetings   | 1 of 1 ✔
+    [c5/af5f88] cowpy              | 1 of 1 ✔
+    There were 3 greetings in this batch
+    ```
+
 This should work without issue.
-
-```console title="Output"
- N E X T F L O W   ~  version 25.04.3
-
-Launching `hello-config.nf` [trusting_lovelace] DSL2 - revision: 028a841db1
-
-executor >  local (8)
-[ee/4ca1f2] sayHello (3)       | 3 of 3 ✔
-[20/2596a7] convertToUpper (1) | 3 of 3 ✔
-[b3/e15de5] collectGreetings   | 1 of 1 ✔
-[c5/af5f88] cowpy              | 1 of 1 ✔
-There were 3 greetings in this batch
-```
 
 Behind the scenes, Nextflow has retrieved the Conda packages and created the environment, which normally takes a bit of work; so it's nice that we don't have to do any of that ourselves!
 
@@ -170,7 +174,7 @@ From our standpoint, it looks like it works exactly the same as running with Doc
 
 This means we're all set to run with Conda environments if needed.
 
-!!!note
+!!! note
 
     Since these directives are assigned per process, it is possible 'mix and match', _i.e._ configure some of the processes in your workflow to run with Docker and others with Conda, for example, if the compute infrastructure you are using supports both.
     In that case, you would enable both Docker and Conda in your configuration file.
@@ -359,20 +363,22 @@ To run the workflow with this parameter file, simply add `-params-file <filename
 nextflow run hello-config.nf -params-file test-params.json
 ```
 
+??? success title="Command output"
+
+    ```console
+    N E X T F L O W   ~  version 25.04.3
+
+    Launching `hello-config.nf` [disturbed_sammet] DSL2 - revision: ede9037d02
+
+    executor >  local (8)
+    [f0/35723c] sayHello (2)       | 3 of 3 ✔
+    [40/3efd1a] convertToUpper (3) | 3 of 3 ✔
+    [17/e97d32] collectGreetings   | 1 of 1 ✔
+    [98/c6b57b] cowpy              | 1 of 1 ✔
+    There were 3 greetings in this batch
+    ```
+
 It works! And as expected, this produces the same outputs as previously.
-
-```console title="Output"
- N E X T F L O W   ~  version 25.04.3
-
-Launching `hello-config.nf` [disturbed_sammet] DSL2 - revision: ede9037d02
-
-executor >  local (8)
-[f0/35723c] sayHello (2)       | 3 of 3 ✔
-[40/3efd1a] convertToUpper (3) | 3 of 3 ✔
-[17/e97d32] collectGreetings   | 1 of 1 ✔
-[98/c6b57b] cowpy              | 1 of 1 ✔
-There were 3 greetings in this batch
-```
 
 This may seem like overkill when you only have a few parameters to specify, but some pipelines expect dozens of parameters.
 In those cases, using a parameter file will allow us to provide parameter values at runtime without having to type massive command lines and without modifying the workflow script.
@@ -508,20 +514,20 @@ Let's try running the workflow with the `my_laptop` configuration.
 nextflow run hello-config.nf -profile my_laptop
 ```
 
-This still produces the following output:
+??? success title="Command output"
 
-```
- N E X T F L O W   ~  version 25.04.3
+    ```console
+    N E X T F L O W   ~  version 25.04.3
 
-Launching `hello-config.nf` [gigantic_brazil] DSL2 - revision: ede9037d02
+    Launching `hello-config.nf` [gigantic_brazil] DSL2 - revision: ede9037d02
 
-executor >  local (8)
-[58/da9437] sayHello (3)       | 3 of 3 ✔
-[35/9cbe77] convertToUpper (2) | 3 of 3 ✔
-[67/857d05] collectGreetings   | 1 of 1 ✔
-[37/7b51b5] cowpy              | 1 of 1 ✔
-There were 3 greetings in this batch
-```
+    executor >  local (8)
+    [58/da9437] sayHello (3)       | 3 of 3 ✔
+    [35/9cbe77] convertToUpper (2) | 3 of 3 ✔
+    [67/857d05] collectGreetings   | 1 of 1 ✔
+    [37/7b51b5] cowpy              | 1 of 1 ✔
+    There were 3 greetings in this batch
+    ```
 
 As you can see, this allows us to toggle between configurations very conveniently at runtime.
 
@@ -590,22 +596,22 @@ Let's try adding the test profile to our previous command:
 nextflow run hello-config.nf -profile my_laptop,test
 ```
 
-This should produce the following:
+??? success title="Command output"
 
-```console title="Output"
- N E X T F L O W   ~  version 25.04.3
+    ```console
+    N E X T F L O W   ~  version 25.04.3
 
-Launching `hello-config.nf` [gigantic_brazil] DSL2 - revision: ede9037d02
+    Launching `hello-config.nf` [gigantic_brazil] DSL2 - revision: ede9037d02
 
-executor >  local (8)
-[58/da9437] sayHello (3)       | 3 of 3 ✔
-[35/9cbe77] convertToUpper (2) | 3 of 3 ✔
-[67/857d05] collectGreetings   | 1 of 1 ✔
-[37/7b51b5] cowpy              | 1 of 1 ✔
-There were 3 greetings in this batch
-```
+    executor >  local (8)
+    [58/da9437] sayHello (3)       | 3 of 3 ✔
+    [35/9cbe77] convertToUpper (2) | 3 of 3 ✔
+    [67/857d05] collectGreetings   | 1 of 1 ✔
+    [37/7b51b5] cowpy              | 1 of 1 ✔
+    There were 3 greetings in this batch
+    ```
 
-<!-- improve by showing and varying the outputs for all these maybe -->
+<!-- TODO: improve by showing and varying the outputs for all these maybe -->
 
 This means that as long as we distribute any test data files with the workflow code, anyone can quickly try out the workflow without having to supply their own inputs via the command line or a parameter file.
 
