@@ -571,7 +571,8 @@ In the workflow block, make the following code change:
                              .flatten()
     ```
 
-We are using an operator _closure_ here - the curly brackets.
+The code in between curly brackets is called an operator _closure_.
+
 This code executes for each item in the channel.
 We define a temporary variable for the inner value, here called `greeting` (it could be anything).
 This variable is only used within the scope of that closure.

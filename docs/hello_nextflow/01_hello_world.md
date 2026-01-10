@@ -90,7 +90,7 @@ To get you started, we'll first open up the workflow script so you can get a sen
 
 Let's open the `hello-world.nf` script in the editor pane.
 
-!!! note
+!!! tip
 
     The file is in the `hello-nextflow` directory, which should be your current working directory.
     You can either click on the file in the file explorer, or type `ls` in the terminal and Cmd+Click (MacOS) or Ctrl+Click (PC) on the file to open it.
@@ -153,11 +153,9 @@ This is a very minimal process definition that just contains an `output` definit
 The `output` definition includes the `path` qualifier, which tells Nextflow this should be handled as a path (includes both directory paths and files).
 Another common qualifier is `val`.
 
-!!! note
-
-    The output definition does not _determine_ what output will be created.
-    It simply _declares_ what is the expected output, so that Nextflow can look for it once execution is complete.
-    This is necessary for verifying that the command was executed successfully and for passing the output to downstream processes if needed. Output produced that doesn't match what is declared in the output block will not be passed to downstream processes.
+Importantly, the output definition does not _determine_ what output will be created.
+It simply _declares_ what is the expected output, so that Nextflow can look for it once execution is complete.
+This is necessary for verifying that the command was executed successfully and for passing the output to downstream processes if needed. Output produced that doesn't match what is declared in the output block will not be passed to downstream processes.
 
 !!! warning
 
@@ -371,6 +369,8 @@ This is how we publish results files outside of the working directories convenie
 When you're dealing with very large files that you don't need to retain for long, you may prefer to set the `publishDir` directive to make a symbolic link to the file instead of copying it.
 However, if you delete the work directory as part of a cleanup operation, you will lose access to the file, so always make sure you have actual copies of everything you care about before deleting anything.
 
+<!-- TODO update with workflow-level outputs -->
+
 !!! note
 
     A newer syntax option documented [here](https://www.nextflow.io/docs/latest/workflow.html#publishing-outputs) has been proposed to make it possible to declare and publish workflow-level outputs.
@@ -556,7 +556,7 @@ Good news: Nextflow has a built-in workflow parameter system called `params`, wh
 Here, we want to create a parameter called `--greeting`, so we need to declare `params.greeting` somewhere in the workflow.
 In principle we can write it anywhere; but since we're going to want to give it to the `sayHello()` process call, we can plug it in there directly by writing `sayHello(params.greeting)`.
 
-!!! note
+!!! tip
 
     The parameter name (at the workflow level) does not have to match the input variable name (at the process level).
     We're just using the same word because that's what makes sense and keeps the code readable.

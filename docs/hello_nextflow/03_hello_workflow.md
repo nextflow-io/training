@@ -63,9 +63,7 @@ As previously, you will find the output files in the `results` directory (specif
     └── Holà-output.txt
     ```
 
-!!! note
-
-    There may also be a file named `output.txt` left over if you worked through Part 2 in the same environment.
+There may also be a file named `output.txt` left over if you worked through Part 2 in the same environment.
 
 If that worked for you, you're ready to learn how to assemble a multi-step workflow.
 
