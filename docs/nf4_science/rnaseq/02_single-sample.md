@@ -351,7 +351,7 @@ workflow {
 }
 ```
 
-### 3.4. Run the workflow to test that it works
+### 3.5. Run the workflow to test that it works
 
 ```bash
 nextflow run rnaseq.nf
