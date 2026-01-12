@@ -9,10 +9,8 @@ params.input = 'greetings.csv'
 process SAY_HELLO {
     input:
         val greeting
-
     output:
         stdout
-
     script:
     def decorated = decorateGreeting(greeting)
     """
@@ -31,5 +29,5 @@ workflow {
         .view { reversed -> "Reversed: $reversed" }
 
     SAY_HELLO(greeting_ch)
-    SAY_HELLO.out.view { result -> "Decorated with custom prefix: ${result.trim()}" }
+    SAY_HELLO.out.view { result -> "Decorated: ${result.trim()}" }
 }
