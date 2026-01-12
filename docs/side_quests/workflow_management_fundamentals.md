@@ -174,9 +174,22 @@ mkdir -p data/fastq results/fastqc results/fastp results/salmon data/salmon_inde
 echo "Completed: $SAMPLE_ID"
 ```
 
-Now let's fill in each step.
+#### Understanding the Starter Script
+
+The script accepts three arguments: a sample ID and two URLs for paired-end FASTQ files. The `set -e` line means the script will stop immediately if any command fails.
+
+The TODO comments mark where you'll add each analysis step:
+
+1. **Download** - Get the raw sequencing data
+2. **FastQC** - Check the quality of the raw reads
+3. **fastp** - Trim adapters and filter low-quality reads
+4. **Salmon** - Quantify transcript expression levels
+
+This is a typical RNA-seq preprocessing workflow. Now let's fill in each step.
 
 #### 1.3.1. Add the Download Step
+
+First, we need to download the FASTQ files from their URLs. We'll use `curl` with `-sL` (silent mode, follow redirects) to fetch each file and save it with a consistent naming pattern.
 
 === "After"
 
@@ -196,6 +209,8 @@ Now let's fill in each step.
 
 #### 1.3.2. Add FastQC
 
+FastQC analyzes sequencing data and generates quality reports. We run it on both read files (`R1` and `R2`) and save the output to our results directory. The `-q` flag suppresses progress output.
+
 === "After"
 
     ```bash title="bash/process_sample.sh" linenums="22" hl_lines="3-5"
@@ -214,6 +229,8 @@ Now let's fill in each step.
     ```
 
 #### 1.3.3. Add fastp
+
+fastp trims adapter sequences and filters out low-quality reads. It takes paired input files (`-i`, `-I`) and produces trimmed output files (`-o`, `-O`), plus JSON and HTML reports for quality metrics.
 
 === "After"
 
@@ -239,6 +256,8 @@ Now let's fill in each step.
 
 #### 1.3.4. Add Salmon Index Download
 
+Salmon needs a pre-built index of the reference transcriptome. We'll download a pre-built index (to save time) only if it doesn't already exist. This avoids re-downloading for every sample.
+
 === "After"
 
     ```bash title="bash/process_sample.sh" linenums="39" hl_lines="2-8"
@@ -260,6 +279,8 @@ Now let's fill in each step.
     ```
 
 #### 1.3.5. Add Salmon Quantification
+
+Salmon quantifies transcript expression by pseudo-aligning reads to the index. It takes the **trimmed** reads from fastp (not the raw reads) and outputs expression counts per transcript.
 
 === "After"
 
@@ -307,7 +328,15 @@ Running this command manually for each one isn't practical.
 
 ### 1.4. Processing Multiple Samples
 
-Open `bash/pipeline_sequential.sh`. The loop structure is already there - you need to add the processing steps inside.
+Now that we can process one sample, we need to handle all samples from our CSV file. Open `bash/pipeline_sequential.sh` - it already has the loop structure that reads the CSV and iterates over each sample.
+
+The starter script handles:
+
+- Reading the CSV file and skipping the header row
+- Parsing each line into sample ID and FASTQ URLs
+- Creating output directories and downloading the shared Salmon index
+
+Your task is to add the actual processing commands inside the loop - the same steps you just wrote, but using the loop variables (`$sample_id`, `$fastq_r1`, `$fastq_r2`) instead of the script arguments.
 
 #### Add Processing Logic to the Loop
 
@@ -396,7 +425,14 @@ With 50 samples, you're looking at **50× the runtime**.
 
 ### 1.5. Adding Parallelization
 
-Open `bash/pipeline_parallel.sh`. The function is already there - you just need to add `&` and `wait` to run samples in parallel.
+The sequential script works, but it's slow - each sample waits for the previous one to finish completely. Since samples are independent, they could run simultaneously.
+
+Open `bash/pipeline_parallel.sh`. This version wraps the processing logic in a function called `process_sample()`. The starter script has everything except the parallelization itself.
+
+Your task is to make the loop run samples in parallel by:
+
+1. Adding `&` after each function call to run it in the background
+2. Adding `wait` after the loop to pause until all background jobs complete
 
 #### Add Background Execution
 
@@ -557,7 +593,9 @@ The tools install themselves, on-demand, with exact versions.
 
 ### 2.2. Your First Process: FastQC
 
-Open `nextflow/modules/fastqc.nf`. The process structure is there - you need to fill in the input, output, and script.
+In Nextflow, each tool runs inside a **process** - a self-contained unit that declares its inputs, outputs, and command. You don't write loops or job management; you just describe what each process needs and produces.
+
+Open `nextflow/modules/fastqc.nf` to see the process structure:
 
 ```bash
 cat nextflow/modules/fastqc.nf
@@ -585,9 +623,19 @@ process FASTQC {
 }
 ```
 
-Notice that `tag`, `container`, and `publishDir` are already set. These aren't learning outcomes - you just need to define the data flow and command.
+#### Understanding the Process Structure
+
+The starter file provides the "infrastructure" parts you'd write the same way every time:
+
+- **`tag`** - Labels each job with the sample ID (visible in logs)
+- **`container`** - The Docker image containing FastQC (no manual installation!)
+- **`publishDir`** - Where to copy final outputs
+
+Your job is to define the **data flow** - what goes in, what comes out, and what command runs. These are the learning outcomes for this section.
 
 #### 2.2.1. Fill in the Input
+
+Nextflow processes receive data through **channels**. We need to declare what shape of data this process expects.
 
 === "After"
 
@@ -604,12 +652,16 @@ Notice that `tag`, `container`, and `publishDir` are already set. These aren't l
     ???
     ```
 
-This declares that FASTQC receives a tuple containing:
+This declaration tells Nextflow: "I expect a tuple (a grouped set of values) containing two things":
 
-- `meta` - a map with sample info (like `[id: "WT_REP1"]`)
-- `reads` - the FASTQ file paths
+- **`val(meta)`** - A value (metadata map like `[id: "WT_REP1"]`) - stays in memory
+- **`path(reads)`** - File path(s) to stage into the working directory
+
+The `val()` vs `path()` distinction matters: `path()` tells Nextflow to make files available in the task's working directory, while `val()` passes data directly.
 
 #### 2.2.2. Fill in the Output
+
+Outputs declare what files the process produces. This is how Nextflow knows what to pass to downstream processes.
 
 === "After"
 
@@ -627,9 +679,13 @@ This declares that FASTQC receives a tuple containing:
     ???
     ```
 
-FastQC produces HTML reports and ZIP files. We capture both and pass along the metadata.
+FastQC produces HTML reports and ZIP files. We capture both and pass along the metadata so downstream processes know which sample each file belongs to.
+
+The **`emit: html`** and **`emit: zip`** labels create named output channels. Later, you can access these as `FASTQC.out.html` or `FASTQC.out.zip`.
 
 #### 2.2.3. Fill in the Script
+
+The script block contains the actual command - the same command you'd run in bash. Variables from the input block are available here.
 
 === "After"
 
@@ -650,7 +706,7 @@ FastQC produces HTML reports and ZIP files. We capture both and pass along the m
     """
     ```
 
-The `${reads}` variable expands to both read files.
+The `${reads}` variable expands to both read files (they were staged as a list). This is the same FastQC command from your bash script, just with Nextflow variable substitution.
 
 !!! tip "Remember installing FastQC with conda?"
 
@@ -694,9 +750,13 @@ executor >  local (3)
 
 ### 2.3. Adding fastp
 
-Open `nextflow/modules/fastp.nf` and fill in the placeholders using the same pattern as FASTQC.
+Now that you understand the process structure, let's add fastp. This process follows the same pattern but introduces one key difference: its output will be used by another process (Salmon needs the trimmed reads).
+
+Open `nextflow/modules/fastp.nf`. The structure is identical to FASTQC - fill in the input, output, and script blocks.
 
 #### Complete fastp.nf
+
+Pay attention to the `emit: reads` on the trimmed reads output. This is how we'll connect fastp to Salmon.
 
 === "After"
 
@@ -750,9 +810,11 @@ Open `nextflow/modules/fastp.nf` and fill in the placeholders using the same pat
     }
     ```
 
-Note the `emit: reads` - this names the output channel so downstream processes can use it.
+The key line is `emit: reads` on the trimmed read files output. This creates a named output channel that Salmon will consume. When you later write `FASTP.out.reads`, you're accessing this specific output.
 
 #### Call FASTP in main.nf
+
+Now connect FASTP to the sample channel in the workflow:
 
 === "After"
 
@@ -775,11 +837,16 @@ Note the `emit: reads` - this names the output channel so downstream processes c
 
 ### 2.4. Connecting to Salmon
 
-Now the interesting part - Salmon needs fastp's output (trimmed reads) plus a reference index.
+This is where data flow gets interesting. Salmon needs **two** inputs:
+
+1. **Trimmed reads** - Different for each sample (from FASTP)
+2. **Reference index** - Same for all samples (from UNTAR)
+
+This is a common pattern: per-sample data combined with a shared reference.
 
 #### Complete salmon.nf
 
-The UNTAR process is already complete. Fill in SALMON_QUANT:
+The UNTAR process (which extracts the pre-built Salmon index) is already complete. Your task is to fill in SALMON_QUANT, which has **two input declarations** - one for the reads tuple and one for the index path:
 
 === "After"
 
@@ -836,9 +903,14 @@ The UNTAR process is already complete. Fill in SALMON_QUANT:
     }
     ```
 
-Notice `$task.cpus` - Nextflow makes the declared resources available to your script.
+Notice two things in the script:
+
+- **`$task.cpus`** - Nextflow makes declared resources available as variables. If you later change `cpus 4` to `cpus 8`, the script automatically uses 8 threads.
+- **Two inputs** - The process receives the trimmed reads tuple and the index path separately.
 
 #### Wire It Up in main.nf
+
+Now comes the crucial part - connecting the processes. SALMON_QUANT needs two arguments:
 
 === "After"
 
@@ -854,19 +926,26 @@ Notice `$task.cpus` - Nextflow makes the declared resources available to your sc
     // Hint: Use UNTAR.out.index.first() for the index
     ```
 
-The `.first()` converts the index channel to a value that's reused for all samples.
+Understanding this line:
+
+- **`FASTP.out.reads`** - The trimmed reads channel (one item per sample)
+- **`UNTAR.out.index.first()`** - The `.first()` operator converts the channel to a single value that gets reused for every sample
+
+Without `.first()`, Nextflow would try to pair each sample with a separate index item. Since there's only one index, we tell Nextflow to reuse it.
 
 #### Run and Watch
+
+Run the complete pipeline:
 
 ```bash
 nextflow run main.nf
 ```
 
-Nextflow automatically determines:
+Watch what happens - Nextflow automatically determines the execution order from the data flow you defined:
 
-- FastQC and FASTP can run in parallel (both only need raw reads)
-- SALMON_QUANT must wait for FASTP (needs trimmed reads)
-- Each sample's SALMON runs as soon as ITS FASTP finishes
+- **FastQC and FASTP can run in parallel** - Both only need the raw reads, no dependency between them
+- **SALMON_QUANT must wait for FASTP** - It needs the trimmed reads output
+- **Each sample runs independently** - Sample 2's Salmon can start as soon as Sample 2's fastp finishes, even if Sample 1 is still running
 
 !!! tip "Remember `&` and `wait`?"
 
