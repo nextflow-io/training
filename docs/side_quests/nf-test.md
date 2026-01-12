@@ -474,7 +474,7 @@ Let's add an assertion to our test to check the pipeline runs the expected numbe
 
 **Before:**
 
-```groovy title="tests/main.nf.test" linenums="1" hl_lines="1 11"
+```groovy title="tests/main.nf.test" linenums="1" hl_lines="1"
     test("Should run without failures") {
 
         when {
@@ -897,7 +897,7 @@ Here's how we could modify our test to check specific content:
 **After:**
 
 ```groovy title="tests/main.sayhello.nf.test" linenums="1" hl_lines="1 5 16 17"
-     test("Should run without failures and contain expected greeting") {
+    test("Should run without failures and contain expected greeting") {
 
         when {
             params {
