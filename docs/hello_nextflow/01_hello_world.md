@@ -50,7 +50,7 @@ Running pipelines mostly involves reading data from files and writing results to
 echo 'Hello World!' > output.txt
 ```
 
-??? success "Output"
+??? success "Command output"
 
     ```console
 
@@ -79,13 +79,14 @@ Find out what that would look like written as a Nextflow workflow.
 
 ---
 
-## 1. Examine the Hello World workflow script
+## 1. Examine the script and run it
 
 We provide you with a fully functional if minimalist workflow script named `hello-world.nf` that does the same thing as before (write out 'Hello World!') but with Nextflow.
 
 To get you started, let's open up the workflow script so you can get a sense of how it's structured.
+Then we'll run it and look for its outputs.
 
-### 1.1. Examine the overall code structure
+### 1.1. Examine the code
 
 You'll find the `hello-world.nf` script in your current director, which should be `hello-nextflow`. Open it in the editor pane.
 
@@ -119,7 +120,7 @@ Each **process** describes what operation(s) the corresponding step in the pipel
 
 Let's take a closer look at the **process** block first, then we'll look at the **workflow** block.
 
-### 1.2. The `process` definition
+#### 1.1.1. The `process` definition
 
 The first block of code describes a **process**.
 
@@ -161,7 +162,7 @@ This is necessary for verifying that the command was executed successfully and f
 
 In a real-world pipeline, a process usually contains additional blocks such as directives and inputs, which we'll introduce in a little bit.
 
-### 1.3. The `workflow` definition
+#### 1.1.2. The `workflow` definition
 
 The second block of code describes the **workflow** itself.
 The workflow definition starts with the keyword `workflow`, followed by an optional name, then the workflow body delimited by curly braces.
@@ -187,21 +188,11 @@ You'll learn how to add variable inputs later in this training module; and you'l
     Technically the `main:` line is not required for simple workflows like this, so you may encounter workflows that don't have it.
     But we'll need it for taking advantage of workflow-level outputs, so we might as well include it from the start.
 
-### Takeaway
-
-You now know how a simple Nextflow workflow is structured.
-
-### What's next?
-
-Learn to launch the workflow, monitor execution and find your outputs.
-
----
-
-## 2. Run the workflow
+### 1.2. Run the workflow
 
 Looking at code is not nearly as fun as running it, so let's try this out in practice.
 
-### 2.1. Launch the workflow and monitor execution
+#### 2.1. Launch the workflow and monitor execution
 
 In the terminal, run the following command:
 
@@ -233,7 +224,7 @@ This tells us that the `sayHello` process was successfully executed once (`1 of 
 Importantly, this line also tells you where to find the output of the `sayHello` process call.
 Let's look at that now.
 
-### 2.2. Find the output and logs in the `work` directory
+#### 2.2. Find the output and logs in the `work` directory
 
 When you run Nextflow for the first time in a given directory, it creates a directory called `work` where it will write all files (and any symlinks) generated in the course of execution.
 
@@ -289,7 +280,7 @@ Open it and you will find the `Hello World!` greeting, which was the expected re
 
 ??? abstract "File contents"
 
-    ```console title="output.txt" linenums="1"
+    ```console title="output.txt"
     Hello World!
     ```
 
@@ -305,7 +296,7 @@ Learn how to 'publish' the workflow outputs to a more convenient location.
 
 ---
 
-## 3. Publish outputs
+## 2. Publish outputs
 
 As you have just learned, the output produced by our pipeline is buried in a working directory several layers deep.
 This is done on purpose; Nextflow is in control of this directory and we are not supposed to interact with it.
@@ -313,14 +304,14 @@ However, that makes it inconvenient to retrieve outputs that we care about.
 
 Fortunately, Nextflow provides a way to 'publish' outputs to a designated directory using [workflow-level output definitions](https://www.nextflow.io/docs/latest/workflow.html#workflow-outputs).
 
-### 3.1. Basic usage
+### 2.1. Basic usage
 
 This is going to involve two new pieces of code:
 
 1. A `publish:` block inside the `workflow` body, declaring process outputs.
 2. An `output` block to the script specifying output options such as mode and location.
 
-#### 3.1.1. Declare the output of the `sayHello` process
+#### 2.1.1. Declare the output of the `sayHello` process
 
 We need to add a `publish:` block to the workflow body (same kind of code element as the `main:` block) and list the output of the `sayHello()` process.
 
@@ -353,7 +344,7 @@ In the workflow script file `hello-world.nf`, add the following lines of code:
 
 You see that we can refer to the output of the process simply by doing `sayHello().out`, and assign it an arbitrary name, `first_output`.
 
-#### 3.1.2. Add an `output:` block to the script
+#### 2.1.2. Add an `output:` block to the script
 
 Now we just need to add the `output:` block where the output directory path will be specified. Note that this new block sits **outside** and **below** the `workflow` block within the script.
 
@@ -396,7 +387,7 @@ In the workflow script file `hello-world.nf`, add the following lines of code:
 We can use this to assign specific paths to any process outputs declared in the `workflow` block.
 Later, you'll learn about ways to generate sophisticated output directory structures, but for now, we're just hardcoding a minimal path for simplicity.
 
-#### 3.1.3. Run the workflow
+#### 2.1.3. Run the workflow
 
 Now run the modified workflow script:
 
@@ -450,7 +441,76 @@ Inside the `results` directory, we find a symbolic link to the `output.txt` prod
 
 This allows us to easily retrieve output files without having to dig through the work subdirectory.
 
-### 3.2. Set the publish mode to copy
+### 2.2. Set a custom location
+
+Having a default location is great, but you might want to customize where the results are saved and how they are organized.
+
+For example, you may want to organize your outputs into subdirectories.
+The simplest way to do that is to assign specific output path per output.
+
+#### 2.2.1. Modify the output path
+
+Once again, modifying the publish behavior for a specific output is really straightforward.
+To set a custom location, just edit the `path` accordingly:
+
+=== "After"
+
+    ```groovy title="hello-world.nf" linenums="27" hl_lines="3"
+    output {
+        first_output {
+            path 'hello_world'
+        }
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="hello-world.nf" linenums="27"
+    output {
+        first_output {
+            path '.'
+        }
+    }
+    ```
+
+Since this is set at the level of the individual output, you can specify different locations and subdirectories to suit your needs.
+
+#### 2.2.2. Run the workflow again
+
+Let's try it out.
+
+```bash
+nextflow run hello-world.nf
+```
+
+??? success "Command output"
+
+    ```console
+     N E X T F L O W   ~  version 25.10.2
+
+    Launching `hello-world.nf` [tiny_shaw] DSL2 - revision: 757723adc1
+
+    executor >  local (1)
+    [8c/79499c] process > sayHello [100%] 1 of 1 ✔
+    ```
+
+This time the result gets written under the specified subdirectory.
+
+??? abstract "Directory contents"
+
+    ```console hl_lines="2-3"
+    results/
+    ├── hello_world
+    │   └── output.txt -> /workspaces/training/hello-nextflow/work/8c/79499c2e506b79e2e01acb808d9d12/output.txt
+    └── output.txt -> /workspaces/training/hello-nextflow/work/65/f56f2cd75df1352e106fcdd084b97b/output.txt
+    ```
+
+You can use as many levels of nesting as you'd like.
+
+It is also possible to use the process name or other variables to name the directories used to organize results, and it is possible to change the default name of the top-level output directory (which is controlled by the special variable `outputDir`).
+We will cover these options in later trainings.
+
+### 2.3. Set the publish mode to copy
 
 By default, the outputs are published as symbolic links from the `work` directory.
 That means there is only a single file on the filesystem.
@@ -461,47 +521,71 @@ So you need to have a plan for saving copies of any important files to a secure 
 
 One easy option is to switch the publish mode to copy for the outputs you care about.
 
-#### 3.2.1. Add the mode directive
+#### 2.3.1. Add the mode directive
 
-[instructions]
+This bit is really straightforward.
+Just add `mode 'copy'` to the relevant workflow-level output definition:
 
-[before/after code]
+=== "After"
 
-[concluding blurb]
+    ```groovy title="hello-world.nf" linenums="27" hl_lines="4"
+    output {
+        first_output {
+            path 'hello_world'
+            mode 'copy'
+        }
+    }
+    ```
 
-#### 3.2.2. Run the workflow again
+=== "Before"
 
-[instructions]
+    ```groovy title="hello-world.nf" linenums="27"
+    output {
+        first_output {
+            path 'hello_world'
+        }
+    }
+    ```
 
-[run command]
+This sets the publish mode for that specific output.
 
-[show output]
+#### 2.3.2. Run the workflow again
 
-[concluding blurb]
+Let's try it out.
 
-### 3.3. Set a custom location
+```bash
+nextflow run hello-world.nf
+```
 
-[blurb]
+??? success "Command output"
 
-#### 3.3.1. Modify the output path
+    ```console
+     N E X T F L O W   ~  version 25.10.2
 
-[instructions]
+    Launching `hello-world.nf` [tiny_shaw] DSL2 - revision: 757723adc1
 
-[before/after code]
+    executor >  local (1)
+    [df/521638] process > sayHello [100%] 1 of 1 ✔
+    ```
 
-[concluding blurb]
+This time, if you look at the results, the file is a proper copy instead of just a symlink.
 
-#### 3.3.2. Run the workflow again
+??? abstract "Directory contents"
 
-[instructions]
+    ```console hl_lines="3"
+    results/
+    ├── hello_world
+    │   └── output.txt
+    └── output.txt -> /workspaces/training/hello-nextflow/work/65/f56f2cd75df1352e106fcdd084b97b/output.txt
+    ```
 
-[run command]
+Since this too is set at the level of the individual output, it allows you to set the publish mode in a granular way.
+This is come in especially handy later when we move on to multi-step pipelines, where you might want to only copy final outputs and leave intermediate outputs as symlinks, for example.
 
-[show output]
+As noted earlier, there are other, more sophisticated options for controlling how outputs are published.
+We'll show you how to use them in due time in your Nextflow journey.
 
-[concluding blurb]
-
-### 3.4. Process-level `publishDir` directive (FYI)
+### 2.4. Process-level `publishDir` directive (FYI)
 
 Until very recently, the established way to publish outputs was to do it at the level of each individual process using a `publishDir` directive.
 
@@ -510,14 +594,17 @@ To achieve what we just did for the outputs of the `sayHello` process, we would 
 ```groovy title="hello-world.nf" linenums="6" hl_lines="2"
 process sayHello {
 
-    publishDir 'results', mode: 'copy'
+    publishDir 'results/hello_world', mode: 'copy'
+
+    input:
+    val greeting
 
     output:
     path 'output.txt'
 
     script:
     """
-    echo 'Hello World!' > output.txt
+    echo '$greeting' > output.txt
     """
 }
 ```
@@ -535,33 +622,33 @@ Learn to provide a variable input via a command-line parameter and utilize defau
 
 ---
 
-## 4. Use a variable input passed on the command line
+## 3. Use a variable input passed on the command line
 
 In its current state, our workflow uses a greeting hardcoded into the process command.
 We want to add some flexibility by using an input variable, so that we can more easily change the greeting at runtime.
 
-### 4.1. Modify the workflow to take and use a variable input
+This requires us to make three sets of changes to our script:
 
-This requires us to make three changes to our script:
-
-1. Tell the process to expect a variable input by adding an `input:` block
-2. Edit the process to use the input
-3. Set up a command-line parameter and provide its value as an input to the process call
+1. Change the process to expect a variable input
+2. Set up a command-line parameter to capture user input
+3. Pass the input to the process in the workflow body
 
 Let's make these changes one at a time.
 
-#### 4.1.1. Add an input block to the process definition
+### 3.1. Change the `sayHello` process to expect a variable input
 
-First we need to adapt the process definition to accept an input called `greeting`.
+We need to edit the process definition to (1) accept an input variable and (2) use that variable in the command line.
+
+#### 3.1.1. Add an input block to the process definition
+
+First, let's adapt the process definition to accept an input called `greeting`.
 
 In the process block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-world.nf" linenums="6" hl_lines="5 6"
+    ```groovy title="hello-world.nf" linenums="6" hl_lines="3-4"
     process sayHello {
-
-        publishDir 'results', mode: 'copy'
 
         input:
         val greeting
@@ -575,15 +662,13 @@ In the process block, make the following code change:
     ```groovy title="hello-world.nf" linenums="6"
     process sayHello {
 
-        publishDir 'results', mode: 'copy'
-
         output:
         path 'output.txt'
     ```
 
 The `greeting` variable is prefixed by `val` to tell Nextflow it's a value (not a path).
 
-#### 4.1.2. Edit the process command to use the input variable
+#### 3.1.2. Edit the process command to use the input variable
 
 Now we swap the original hardcoded value for the value of the input variable we expect to receive.
 
@@ -591,39 +676,41 @@ In the process block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-channels.nf" linenums="16" hl_lines="3"
+    ```groovy title="hello-channels.nf" linenums="14" hl_lines="3"
     script:
     """
-    echo '$greeting' > output.txt
+    echo '${greeting}' > output.txt
     """
     ```
 
 === "Before"
 
-    ```groovy title="hello-channels.nf" linenums="16"
+    ```groovy title="hello-channels.nf" linenums="14"
     script:
     """
     echo 'Hello World!' > output.txt
     """
     ```
 
-Make sure to prepend the `$` symbol to tell Nextflow this is a variable name that needs to be replaced with the actual value (=interpolated).
+The `$` symbol and curly braces (`{ }`) tell Nextflow this is a variable name that needs to be replaced with the actual input value (=interpolated).
 
-#### 4.1.3. Set up a CLI parameter and provide it as input to the process call
+!!! tip
 
-Now we need to actually set up a way to provide an input value to the `sayHello()` process call.
+    The curly braces (`{ }`) were technically optional in previous versions of Nextflow, so you might see older workflows where this is written as `echo '$greeting' > output.txt`.
 
-We could simply hardcode it directly by writing `sayHello('Hello World!')`.
-However, when we're doing real work with our workflow, we're often going to want to be able to control its inputs from the command line.
+Now that the `sayHello()` process is ready to accept a variable input, we need a way to provide an input value to the process call at the workflow level.
+
+### 3.2. Set up a command-line parameter to capture user input
+
+We could simply hardcode an input directly by making the process call `sayHello('Hello World!')`.
+However, when we're doing real work with our workflow, we're going to want to be able to control its inputs from the command line.
 
 Good news: Nextflow has a built-in workflow parameter system called `params`, which makes it easy to declare and use CLI parameters.
 
-<!-- UPDATE THIS FOR V2 SYNTAX -->
-
 The general syntax is to declare `params.<parameter_name>` to tell Nextflow to expect a `--<parameter_name>` parameter on the command line.
 
-Here, we want to create a parameter called `--greeting`, so we need to declare `params.greeting` somewhere in the workflow.
-In principle we can write it anywhere; but since we're going to want to give it to the `sayHello()` process call, we can plug it in there directly by writing `sayHello(params.greeting)`.
+Here, we want to create a parameter called `--input`, so we need to declare `params.input` somewhere in the workflow.
+In principle we can write it anywhere; but since we're going to want to give it to the `sayHello()` process call, we can plug it in there directly by writing `sayHello(params.input)`.
 
 !!! tip
 
@@ -634,26 +721,26 @@ In the workflow block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-world.nf" linenums="24" hl_lines="2"
+    ```groovy title="hello-world.nf" linenums="23" hl_lines="2"
     // emit a greeting
-    sayHello(params.greeting)
+    sayHello(params.input)
     ```
 
 === "Before"
 
-    ```groovy title="hello-world.nf" linenums="24"
+    ```groovy title="hello-world.nf" linenums="23"
     // emit a greeting
     sayHello()
     ```
 
-This tells Nextflow to run the `sayHello` process on the value provided through the `--greeting` parameter.
+This tells Nextflow to run the `sayHello` process on the value provided through the `--input` parameter.
 
-#### 4.1.4. Run the workflow command again
+### 3.3. Run the workflow command
 
 Let's run it!
 
 ```bash
-nextflow run hello-world.nf --greeting 'Bonjour le monde!'
+nextflow run hello-world.nf --input 'Bonjour le monde!'
 ```
 
 ??? success "Command output"
@@ -667,7 +754,7 @@ nextflow run hello-world.nf --greeting 'Bonjour le monde!'
     [4b/654319] sayHello | 1 of 1 ✔
     ```
 
-If you made all three edits correctly, you should get another successful execution.
+If you made all these edits correctly, you should get another successful execution.
 
 Be sure to open up the output file to check that you now have the new version of the greeting.
 
@@ -684,31 +771,35 @@ Voilà!
     - Parameters that apply to a pipeline always take a double hyphen (`--`).
     - Parameters that modify a Nextflow setting, _e.g._ the `-resume` feature we used earlier, take a single hyphen (`-`).
 
-### 4.2. Use default values for command line parameters
+### 3.4. Use default values for command line parameters
 
 In many cases, it makes sense to supply a default value for a given parameter so that you don't have to specify it for every run.
 
-#### 4.2.1. Set a default value for the CLI parameter
+#### 3.4.1. Set a default value for the CLI parameter
 
-Let's give the `greeting` parameter with a default value by declaring it before the workflow definition.
+Let's give the `input` parameter a default value by declaring it before the workflow definition.
 
-```groovy title="hello-world.nf" linenums="3"
+```groovy title="hello-world.nf" linenums="20"
 /*
  * Pipeline parameters
  */
 params {
-    greeting: String = 'Holà mundo!'
+    input: String = 'Holà mundo!'
 }
 ```
 
-The syntax is `name: Type = default_value`. Supported types include `String`, `Integer`, `Float`, `Boolean`, and `Path`.
+As you see, we can specify the type of input that the workflow expects (Nextflow 25.10.2 and later).
+The syntax is `name: Type = default_value`.
+Supported types include `String`, `Integer`, `Float`, `Boolean`, and `Path`.
 
-!!! tip
+!!! info
 
-    With the new Nextflow syntax parser in Nextflow 25.10.0, [parameters should be defined](https://www.nextflow.io/docs/latest/workflow.html#parameters)
-    in a block at the top of your main entry workflow script. This makes it easy to find all configurable parameters at a glance.
+    In older workflows, you may see that whole `params` block written as just `input = 'Holà mundo!'`.
 
-#### 4.2.2. Run the workflow again without specifying the parameter
+As you add more parameters to your pipeline, you should add them all to this block, whether or not you need to give them a default value.
+This will make it easy to find all configurable parameters at a glance.
+
+#### 3.4.2. Run the workflow again without specifying the parameter
 
 Now that you have a default value set, you can run the workflow again without having to specify a value in the command line.
 
@@ -729,20 +820,20 @@ nextflow run hello-world.nf
 
 Check the output in the results directory:
 
-```console title="results/output.txt" linenums="1"
+```console title="results/hello_world/output.txt"
 Holà mundo!
 ```
 
 Nextflow used the default value of the greeting parameter to create the output.
 
-#### 4.2.3. Run the workflow again with the parameter to override the default value
+#### 3.4.3. Override the default value
 
 If you provide the parameter on the command line, the CLI value will override the default value.
 
 Try it out:
 
 ```bash
-nextflow run hello-world.nf --greeting 'Konnichiwa!'
+nextflow run hello-world.nf --input 'Konnichiwa!'
 ```
 
 ??? success "Command output"
@@ -758,7 +849,7 @@ nextflow run hello-world.nf --greeting 'Konnichiwa!'
 
 Now you will have the corresponding new output in your results directory.
 
-```console title="results/output.txt" linenums="1"
+```console title="results/output.txt"
 Konnichiwa!
 ```
 
@@ -777,15 +868,15 @@ Learn how to manage executions more conveniently.
 
 ---
 
-## 5. Manage workflow executions
+## 4. Manage workflow executions
 
 Knowing how to launch workflows and retrieve outputs is great, but you'll quickly find there are a few other aspects of workflow management that will make your life easier, especially if you're developing your own workflows.
 
-Here we show you how to use the `resume` feature for when you need to re-launch the same workflow, and how to delete older work directories with `nextflow clean`.
+Here we show you how to use the `resume` feature for when you need to re-launch the same workflow, how to inspect the log of past executions, and how to delete older work directories with `nextflow clean`.
 
-<!-- Any other cool options we should include? -->
+<!-- Any other cool options we should include? Added log -->
 
-### 5.1. Re-launch a workflow with `-resume`
+### 4.1. Re-launch a workflow with `-resume`
 
 Sometimes, you're going to want to re-run a pipeline that you've already launched previously without redoing any steps that already completed successfully.
 
@@ -825,10 +916,52 @@ Nextflow is literally pointing you to the previous execution and saying "I alrea
 
     When your re-run a pipeline with `resume`, Nextflow does not overwrite any files published outside of the work directory by any executions that were run successfully previously.
 
-### 5.2. Delete older work directories
+### 4.2. Inspect the log of past executions
 
-During the development process, you'll typically run your draft pipelines a large number of times, which can lead to an accumulation of very many files across many subdirectories.
-Since the subdirectories are named randomly, it is difficult to tell from their names what are older vs. more recent runs.
+Whether you're developing a new pipeline or running pipelines in production, at some point you'll probably need to look up information about past runs.
+Here's how to do that.
+
+Whenever you launch a nextflow workflow, a line gets written to a log file called `history`, under a hidden directory called `.nextflow` in the current working directory.
+
+??? abstract "File contents"
+
+    ```txt title=".nextflow/history" linenums="1"
+    2025-07-04 19:27:09	1.8s	wise_watson	OK	3539118582ccde68dde471cc2c66295c	a02c9c46-c3c7-4085-9139-d1b9b5b194c8	nextflow run 1-hello.nf --input 'Hello World'
+    2025-07-04 19:27:20	2.9s	spontaneous_blackwell	OK	3539118582ccde68dde471cc2c66295c	59a5db23-d83c-4c02-a54e-37ddb73a337e	nextflow run 1-hello.nf --input Bonjour
+    2025-07-04 19:27:31	1.8s	gigantic_yonath	OK	3539118582ccde68dde471cc2c66295c	5acaa83a-6ad6-4509-bebc-cb25d5d7ddd0	nextflow run 1-hello.nf --input 'Dobry den'
+    2025-07-04 19:27:45	2.4s	backstabbing_swartz	OK	3539118582ccde68dde471cc2c66295c	5f4b3269-5b53-404a-956c-cac915fbb74e	nextflow run 1-hello.nf --input Konnichiwa
+    2025-07-04 19:27:57	2.1s	goofy_wilson	OK	3539118582ccde68dde471cc2c66295c	5f4b3269-5b53-404a-956c-cac915fbb74e	nextflow run 1-hello.nf --input Konnichiwa -resume
+    ```
+
+This file gives you the timestamp, run name, status, revision ID, session ID and full command line for every Nextflow run that has been launched from within the current working directory.
+
+A more convenient way to access this information is to use the `nextflow log` command.
+
+```bash
+nextflow log
+```
+
+??? success "Command output"
+
+    ```console linenums="1"
+    TIMESTAMP               DURATION        RUN NAME                STATUS  REVISION ID     SESSION ID                              COMMAND
+    2025-07-04 19:27:09     1.8s            wise_watson             OK       3539118582     a02c9c46-c3c7-4085-9139-d1b9b5b194c8    nextflow run 1-hello.nf --input 'Hello World'
+    2025-07-04 19:27:20     2.9s            spontaneous_blackwell   OK       3539118582     59a5db23-d83c-4c02-a54e-37ddb73a337e    nextflow run 1-hello.nf --input Bonjour
+    2025-07-04 19:27:31     1.8s            gigantic_yonath         OK       3539118582     5acaa83a-6ad6-4509-bebc-cb25d5d7ddd0    nextflow run 1-hello.nf --input 'Dobry den'
+    2025-07-04 19:27:45     2.4s            backstabbing_swartz     OK       3539118582     5f4b3269-5b53-404a-956c-cac915fbb74e    nextflow run 1-hello.nf --input Konnichiwa
+    2025-07-04 19:27:57     2.1s            goofy_wilson            OK       3539118582     5f4b3269-5b53-404a-956c-cac915fbb74e    nextflow run 1-hello.nf --input Konnichiwa -resume
+    ```
+
+This will output the contents of the log file to the terminal, augmented with a header line.
+
+You'll notice that the session ID changes whenever you run a new `nextflow run` command, EXCEPT if you're using the `-resume` option.
+In that case, the session ID stays the same.
+
+Nextflow uses the session ID to group run caching information under the `cache` directory, also located under `.nextflow`.
+
+### 4.3. Delete older work directories
+
+During the development process, you'll typically run your draft pipeline a large number of times, which can lead to an accumulation of many files across many subdirectories.
 
 Nextflow includes a convenient `clean` subcommand that can automatically delete the work subdirectories for past runs that you no longer care about, with several [options](https://www.nextflow.io/docs/latest/reference/cli.html#clean) to control what will be deleted.
 
@@ -841,13 +974,13 @@ First we use the dry run flag `-n` to check what will be deleted given the comma
 nextflow clean -before golden_cantor -n
 ```
 
-The output should look like this:
+??? success "Command output"
 
-```console title="Output"
+```console
 Would remove /workspaces/training/hello-nextflow/work/a3/7be2fad5e71e5f49998f795677fd68
 ```
 
-If you don't see any lines output, you either did not provide a valid run name or there are no past runs to delete.
+If you don't see any lines output, you either did not provide a valid run name or there are no past runs to delete. (Make sure to change `golden_cantor` in the example command to whatever is the corresponding latest run name in your log.)
 
 If the output looks as expected and you want to proceed with the deletion, re-run the command with the `-f` flag instead of `-n`:
 
@@ -855,18 +988,20 @@ If the output looks as expected and you want to proceed with the deletion, re-ru
 nextflow clean -before golden_cantor -f
 ```
 
-You should now see the following:
+??? success "Command output"
 
-```console title="Output"
+```console
 Removed /workspaces/training/hello-nextflow/work/a3/7be2fad5e71e5f49998f795677fd68
 ```
+
+This will not remove the two-character subdirectories (like `a3/` above) but it will empty their contents.
 
 !!! Warning
 
     Deleting work subdirectories from past runs removes them from Nextflow's cache and deletes any outputs that were stored in those directories.
     That means it breaks Nextflow's ability to resume execution without re-running the corresponding processes.
 
-    You are responsible for saving any outputs that you care about or plan to rely on! If you're using the `publishDir` directive for that purpose, make sure to use the `copy` mode, not the `symlink` mode.
+    You are responsible for saving any outputs that you care about or plan to rely on! One option is to use the `copy` mode rather than the `symlink` mode for the `publish` directive.
 
 ### Takeaway
 
