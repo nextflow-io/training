@@ -192,7 +192,7 @@ You'll learn how to add variable inputs later in this training module; and you'l
 
 Looking at code is not nearly as fun as running it, so let's try this out in practice.
 
-#### 2.1. Launch the workflow and monitor execution
+#### 1.2.1. Launch the workflow and monitor execution
 
 In the terminal, run the following command:
 
@@ -224,7 +224,7 @@ This tells us that the `sayHello` process was successfully executed once (`1 of 
 Importantly, this line also tells you where to find the output of the `sayHello` process call.
 Let's look at that now.
 
-#### 2.2. Find the output and logs in the `work` directory
+#### 1.2.2. Find the output and logs in the `work` directory
 
 When you run Nextflow for the first time in a given directory, it creates a directory called `work` where it will write all files (and any symlinks) generated in the course of execution.
 
