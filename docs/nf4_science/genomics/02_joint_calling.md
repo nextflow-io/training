@@ -254,30 +254,30 @@ We're going to start by making two changes:
 
 Make sure you add a backslash (`\`) at the end of the previous line when you add `-ERC GVCF`.
 
-_Before:_
+=== "After"
 
-```groovy title="genomics-2.nf" linenums="56" hl_lines="4"
-    """
-    gatk HaplotypeCaller \
-        -R ${ref_fasta} \
-        -I ${input_bam} \
-        -O ${input_bam}.vcf \
-        -L ${interval_list}
-    """
-```
+    ```groovy title="genomics-2.nf" linenums="56" hl_lines="5 7"
+        """
+        gatk HaplotypeCaller \
+            -R ${ref_fasta} \
+            -I ${input_bam} \
+            -O ${input_bam}.g.vcf \
+            -L ${interval_list} \
+            -ERC GVCF
+        """
+    ```
 
-_After:_
+=== "Before"
 
-```groovy title="genomics-2.nf" linenums="56" hl_lines="4 6"
-    """
-    gatk HaplotypeCaller \
-        -R ${ref_fasta} \
-        -I ${input_bam} \
-        -O ${input_bam}.g.vcf \
-        -L ${interval_list} \
-        -ERC GVCF
-    """
-```
+    ```groovy title="genomics-2.nf" linenums="56" hl_lines="5"
+        """
+        gatk HaplotypeCaller \
+            -R ${ref_fasta} \
+            -I ${input_bam} \
+            -O ${input_bam}.vcf \
+            -L ${interval_list}
+        """
+    ```
 
 And that's all it takes to switch HaplotypeCaller to generating GVCFs instead of VCFs, right?
 
@@ -319,21 +319,21 @@ That's right, we forgot to tell Nextflow to expect a new file name. Oops.
 
 Because it's not enough to just change the file extension in the tool command itself, you also have to tell Nextflow that the expected output filename has changed.
 
-_Before:_
+=== "After"
 
-```groovy title="genomics-2.nf" linenums="52"
-    output:
-        path "${input_bam}.vcf"     , emit: vcf
-        path "${input_bam}.vcf.idx" , emit: idx
-```
+    ```groovy title="genomics-2.nf" linenums="52"
+        output:
+            path "${input_bam}.g.vcf"     , emit: vcf
+            path "${input_bam}.g.vcf.idx" , emit: idx
+    ```
 
-_After:_
+=== "Before"
 
-```groovy title="genomics-2.nf" linenums="52"
-    output:
-        path "${input_bam}.g.vcf"     , emit: vcf
-        path "${input_bam}.g.vcf.idx" , emit: idx
-```
+    ```groovy title="genomics-2.nf" linenums="52"
+        output:
+            path "${input_bam}.vcf"     , emit: vcf
+            path "${input_bam}.vcf.idx" , emit: idx
+    ```
 
 ### 1.4. Run the pipeline again
 
@@ -578,30 +578,30 @@ Fun fact: you can add arbitrary code after `script:` and before the `"""` !
 
 Great, let's add our string manipulation line there then, and update the `gatk GenomicsDBImport` command to use the concatenated string it produces.
 
-_Before:_
+=== "After"
 
-```groovy title="genomics-2.nf" linenums="87"  hl_lines="2"
-    script:
-    """
-    gatk GenomicsDBImport \
-        -V ${all_gvcfs} \
-        -L ${interval_list} \
-        --genomicsdb-workspace-path ${cohort_name}_gdb
-    """
-```
+    ```groovy title="genomics-2.nf" linenums="87"  hl_lines="2 5"
+        script:
+        def gvcfs_line = all_gvcfs.collect { gvcf -> "-V ${gvcf}" }.join(' ')
+        """
+        gatk GenomicsDBImport \
+            ${gvcfs_line} \
+            -L ${interval_list} \
+            --genomicsdb-workspace-path ${cohort_name}_gdb
+        """
+    ```
 
-_After:_
+=== "Before"
 
-```groovy title="genomics-2.nf" linenums="87"  hl_lines="2"
-    script:
-    def gvcfs_line = all_gvcfs.collect { gvcf -> "-V ${gvcf}" }.join(' ')
-    """
-    gatk GenomicsDBImport \
-        ${gvcfs_line} \
-        -L ${interval_list} \
-        --genomicsdb-workspace-path ${cohort_name}_gdb
-    """
-```
+    ```groovy title="genomics-2.nf" linenums="87"  hl_lines="4"
+        script:
+        """
+        gatk GenomicsDBImport \
+            -V ${all_gvcfs} \
+            -L ${interval_list} \
+            --genomicsdb-workspace-path ${cohort_name}_gdb
+        """
+    ```
 
 That should be all that's needed to provide the inputs to `gatk GenomicsDBImport` correctly.
 
@@ -667,23 +667,23 @@ For logistical reasons, we decide to include the joint genotyping inside the sam
 
 Since the process will be running more than one tool, we change its name to refer to the overall operation rather than a single tool name.
 
-_Before:_
+=== "After"
 
-```groovy title="genomics-2.nf"
-/*
- * Combine GVCFs into GenomicsDB datastore
- */
-process GATK_GENOMICSDB {
-```
+    ```groovy title="genomics-2.nf"
+    /*
+     * Combine GVCFs into GenomicsDB datastore and run joint genotyping to produce cohort-level calls
+     */
+    process GATK_JOINTGENOTYPING {
+    ```
 
-_After:_
+=== "Before"
 
-```groovy title="genomics-2.nf"
-/*
- * Combine GVCFs into GenomicsDB datastore and run joint genotyping to produce cohort-level calls
- */
-process GATK_JOINTGENOTYPING {
-```
+    ```groovy title="genomics-2.nf"
+    /*
+     * Combine GVCFs into GenomicsDB datastore
+     */
+    process GATK_GENOMICSDB {
+    ```
 
 Remember to keep your process names as descriptive as possible, to maximize readability for your colleagues —and your future self!
 
@@ -691,33 +691,33 @@ Remember to keep your process names as descriptive as possible, to maximize read
 
 Simply add the second command after the first one inside the script section.
 
-_Before:_
+=== "After"
 
-```groovy title="genomics-2.nf" linenums="89"
-    """
-    gatk GenomicsDBImport \
-        ${gvcfs_line} \
-        -L ${interval_list} \
-        --genomicsdb-workspace-path ${cohort_name}_gdb
-    """
-```
+    ```groovy title="genomics-2.nf" linenums="89"  hl_lines="6-11"
+        """
+        gatk GenomicsDBImport \
+            ${gvcfs_line} \
+            -L ${interval_list} \
+            --genomicsdb-workspace-path ${cohort_name}_gdb
 
-_After:_
+        gatk GenotypeGVCFs \
+            -R ${ref_fasta} \
+            -V gendb://${cohort_name}_gdb \
+            -L ${interval_list} \
+            -O ${cohort_name}.joint.vcf
+        """
+    ```
 
-```groovy title="genomics-2.nf" linenums="89"  hl_lines="6-10"
-    """
-    gatk GenomicsDBImport \
-        ${gvcfs_line} \
-        -L ${interval_list} \
-        --genomicsdb-workspace-path ${cohort_name}_gdb
+=== "Before"
 
-    gatk GenotypeGVCFs \
-        -R ${ref_fasta} \
-        -V gendb://${cohort_name}_gdb \
-        -L ${interval_list} \
-        -O ${cohort_name}.joint.vcf
-    """
-```
+    ```groovy title="genomics-2.nf" linenums="89"
+        """
+        gatk GenomicsDBImport \
+            ${gvcfs_line} \
+            -L ${interval_list} \
+            --genomicsdb-workspace-path ${cohort_name}_gdb
+        """
+    ```
 
 The two commands will be run in serial, in the same way that they would if we were to run them manually in the terminal.
 
@@ -725,28 +725,28 @@ The two commands will be run in serial, in the same way that they would if we we
 
 The second command requires the reference genome files, so we need to add those to the process inputs.
 
-_Before:_
+=== "After"
 
-```groovy title="genomics-2.nf" linenums="78"
-input:
-    path all_gvcfs
-    path all_idxs
-    path interval_list
-    val cohort_name
-```
+    ```groovy title="genomics-2.nf" linenums="78"  hl_lines="6-8"
+    input:
+        path all_gvcfs
+        path all_idxs
+        path interval_list
+        val cohort_name
+        path ref_fasta
+        path ref_index
+        path ref_dict
+    ```
 
-_After:_
+=== "Before"
 
-```groovy title="genomics-2.nf" linenums="78"  hl_lines="5-7"
-input:
-    path all_gvcfs
-    path all_idxs
-    path interval_list
-    val cohort_name
-    path ref_fasta
-    path ref_index
-    path ref_dict
-```
+    ```groovy title="genomics-2.nf" linenums="78"
+    input:
+        path all_gvcfs
+        path all_idxs
+        path interval_list
+        val cohort_name
+    ```
 
 It may seem annoying to type these out, but remember, you only type them once, and then you can run the workflow a million times. Worth it?
 
@@ -756,20 +756,20 @@ We don't really care about saving the GenomicsDB datastore, which is just an int
 
 The output we're actually interested in is the VCF produced by the joint genotyping command.
 
-_Before:_
+=== "After"
 
-```groovy title="genomics-2.nf" linenums="87"
-output:
-    path "${cohort_name}_gdb"
-```
+    ```groovy title="genomics-2.nf" linenums="87"
+    output:
+        path "${cohort_name}.joint.vcf"     , emit: vcf
+        path "${cohort_name}.joint.vcf.idx" , emit: idx
+    ```
 
-_After:_
+=== "Before"
 
-```groovy title="genomics-2.nf" linenums="87"
-output:
-    path "${cohort_name}.joint.vcf"     , emit: vcf
-    path "${cohort_name}.joint.vcf.idx" , emit: idx
-```
+    ```groovy title="genomics-2.nf" linenums="87"
+    output:
+        path "${cohort_name}_gdb"
+    ```
 
 We're almost done!
 
@@ -777,32 +777,32 @@ We're almost done!
 
 Let's not forget to rename the process call in the workflow body from GATK_GENOMICSDB to GATK_JOINTGENOTYPING. And while we're at it, we should also add the reference genome files as inputs, since we need to provide them to the joint genotyping tool.
 
-_Before:_
+=== "After"
 
-```groovy title="genomics-2.nf" linenums="134"
-// Combine GVCFs into a GenomicsDB data store
-GATK_GENOMICSDB(
-    all_gvcfs_ch,
-    all_idxs_ch,
-    intervals_file,
-    params.cohort_name
-)
-```
+    ```groovy title="genomics-2.nf" linenums="134"
+    // Combine GVCFs into a GenomicsDB data store and apply joint genotyping
+    GATK_JOINTGENOTYPING(
+        all_gvcfs_ch,
+        all_idxs_ch,
+        intervals_file,
+        params.cohort_name,
+        ref_file,
+        ref_index_file,
+        ref_dict_file
+    )
+    ```
 
-_After:_
+=== "Before"
 
-```groovy title="genomics-2.nf" linenums="134"
-// Combine GVCFs into a GenomicsDB data store and apply joint genotyping
-GATK_JOINTGENOTYPING(
-    all_gvcfs_ch,
-    all_idxs_ch,
-    intervals_file,
-    params.cohort_name,
-    ref_file,
-    ref_index_file,
-    ref_dict_file
-)
-```
+    ```groovy title="genomics-2.nf" linenums="134"
+    // Combine GVCFs into a GenomicsDB data store
+    GATK_GENOMICSDB(
+        all_gvcfs_ch,
+        all_idxs_ch,
+        intervals_file,
+        params.cohort_name
+    )
+    ```
 
 Now everything should be completely wired up.
 

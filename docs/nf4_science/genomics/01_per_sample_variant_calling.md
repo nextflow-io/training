@@ -452,23 +452,23 @@ No, thank goodness! Just make a minor tweak to the code and Nextflow will handle
 
 Let's turn that default file path in the input BAM file declaration into an array listing file paths for our three test samples, up under the `Pipeline parameters` section.
 
-_Before:_
+=== "After"
 
-```groovy title="genomics-1.nf" linenums="7"
-// Primary input
-params.reads_bam = "${projectDir}/data/bam/reads_mother.bam"
-```
+    ```groovy title="genomics-1.nf" linenums="7"
+    // Primary input (array of three samples)
+    params.reads_bam = [
+        "${projectDir}/data/bam/reads_mother.bam",
+        "${projectDir}/data/bam/reads_father.bam",
+        "${projectDir}/data/bam/reads_son.bam"
+    ]
+    ```
 
-_After:_
+=== "Before"
 
-```groovy title="genomics-1.nf" linenums="7"
-// Primary input (array of three samples)
-params.reads_bam = [
-    "${projectDir}/data/bam/reads_mother.bam",
-    "${projectDir}/data/bam/reads_father.bam",
-    "${projectDir}/data/bam/reads_son.bam"
-]
-```
+    ```groovy title="genomics-1.nf" linenums="7"
+    // Primary input
+    params.reads_bam = "${projectDir}/data/bam/reads_mother.bam"
+    ```
 
 And that's actually all we need to do, because the channel factory we use in the workflow body (`.fromPath`) is just as happy to accept multiple file paths to load into the input channel as it was to load a single one.
 
@@ -597,19 +597,19 @@ The simplest way to ensure a BAM file and its index stay closely associated is t
 
 First, let's change the output of the `SAMTOOLS_INDEX` process to include the BAM file in its output declaration.
 
-_Before:_
+=== "After"
 
-```groovy title="genomics-1.nf" linenums="32"
-output:
-    path "${input_bam}.bai"
-```
+    ```groovy title="genomics-1.nf" linenums="32"
+    output:
+        tuple path(input_bam), path("${input_bam}.bai")
+    ```
 
-_After:_
+=== "Before"
 
-```groovy title="genomics-1.nf" linenums="32"
-output:
-    tuple path(input_bam), path("${input_bam}.bai")
-```
+    ```groovy title="genomics-1.nf" linenums="32"
+    output:
+        path "${input_bam}.bai"
+    ```
 
 This way, each index file will be tightly coupled with its original BAM file, and the overall output of the indexing step will be a single channel containing pairs of files.
 
@@ -619,20 +619,20 @@ Since we've changed the 'shape' of the output of the first process in the workfl
 
 Specifically, where we previously declared two separate input paths in the input block of the `GATK_HAPLOTYPECALLER` process, we now declare a single input matching the structure of the tuple emitted by `SAMTOOLS_INDEX`.
 
-_Before:_
+=== "After"
 
-```groovy title="genomics-1.nf" linenums="49"
-input:
-    path input_bam
-    path input_bam_index
-```
+    ```groovy title="genomics-1.nf" linenums="49"
+    input:
+        tuple path(input_bam), path(input_bam_index)
+    ```
 
-_After:_
+=== "Before"
 
-```groovy title="genomics-1.nf" linenums="49"
-input:
-    tuple path(input_bam), path(input_bam_index)
-```
+    ```groovy title="genomics-1.nf" linenums="49"
+    input:
+        path input_bam
+        path input_bam_index
+    ```
 
 Of course, since we've now changed the shape of the inputs that `GATK_HAPLOTYPECALLER` expects, we need to update the process call accordingly in the workflow body.
 
@@ -642,20 +642,20 @@ We no longer need to provide the original `reads_ch` to the `GATK_HAPLOTYPECALLE
 
 As a result, we can simply delete that line.
 
-_Before:_
+=== "After"
 
-```groovy title="genomics-1.nf" linenums="84"
-GATK_HAPLOTYPECALLER(
-    reads_ch,
-    SAMTOOLS_INDEX.out,
-```
+    ```groovy title="genomics-1.nf" linenums="84"
+    GATK_HAPLOTYPECALLER(
+        SAMTOOLS_INDEX.out,
+    ```
 
-_After:_
+=== "Before"
 
-```groovy title="genomics-1.nf" linenums="84"
-GATK_HAPLOTYPECALLER(
-    SAMTOOLS_INDEX.out,
-```
+    ```groovy title="genomics-1.nf" linenums="84"
+    GATK_HAPLOTYPECALLER(
+        reads_ch,
+        SAMTOOLS_INDEX.out,
+    ```
 
 That is all the re-wiring that is necessary to solve the index mismatch problem.
 
@@ -732,23 +732,23 @@ As you can see, we listed one file path per line, and they are absolute paths.
 
 Let's switch the default value for our `reads_bam` input parameter to point to the `sample_bams.txt` file.
 
-_Before:_
+=== "After"
 
-```groovy title="genomics-1.nf" linenums="7"
-// Primary input
-params.reads_bam = [
-    "${projectDir}/data/bam/reads_mother.bam",
-    "${projectDir}/data/bam/reads_father.bam",
-    "${projectDir}/data/bam/reads_son.bam"
-]
-```
+    ```groovy title="genomics-1.nf" linenums="7"
+    // Primary input (file of input files, one per line)
+    params.reads_bam = "${projectDir}/data/sample_bams.txt"
+    ```
 
-_After:_
+=== "Before"
 
-```groovy title="genomics-1.nf" linenums="7"
-// Primary input (file of input files, one per line)
-params.reads_bam = "${projectDir}/data/sample_bams.txt"
-```
+    ```groovy title="genomics-1.nf" linenums="7"
+    // Primary input
+    params.reads_bam = [
+        "${projectDir}/data/bam/reads_mother.bam",
+        "${projectDir}/data/bam/reads_father.bam",
+        "${projectDir}/data/bam/reads_son.bam"
+    ]
+    ```
 
 This way we can continue to be lazy, but the list of files no longer lives in the workflow code itself, which is a big step in the right direction.
 
@@ -759,19 +759,19 @@ Since we're now giving it a file that lists input file paths, we need to change 
 
 Fortunately we can do that very simply, just by adding the [`.splitText()` operator](https://www.nextflow.io/docs/latest/reference/operator.html#operator-splittext) to the channel construction step.
 
-_Before:_
+=== "After"
 
-```groovy title="genomics-1.nf" linenums="68"
-// Create input channel (single file via CLI parameter)
-reads_ch = channel.fromPath(params.reads_bam)
-```
+    ```groovy title="genomics-1.nf" linenums="68"
+    // Create input channel from a text file listing input file paths
+    reads_ch = channel.fromPath(params.reads_bam).splitText()
+    ```
 
-_After:_
+=== "Before"
 
-```groovy title="genomics-1.nf" linenums="68"
-// Create input channel from a text file listing input file paths
-reads_ch = channel.fromPath(params.reads_bam).splitText()
-```
+    ```groovy title="genomics-1.nf" linenums="68"
+    // Create input channel (single file via CLI parameter)
+    reads_ch = channel.fromPath(params.reads_bam)
+    ```
 
 !!! tip
 
