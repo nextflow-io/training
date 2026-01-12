@@ -167,12 +167,12 @@ docker exec -e LANG=C.UTF-8 -e LC_ALL=C.UTF-8 -e USER=testuser \
 
 #### Troubleshooting DooD
 
-| Error | Cause | Solution |
-|-------|-------|----------|
-| `Cannot connect to Docker daemon` | Socket not mounted | Add `-v /var/run/docker.sock:/var/run/docker.sock` |
-| `.command.sh: No such file or directory` | Path mismatch | Use matching paths: `-v "${HOST_PATH}:${HOST_PATH}"` |
-| `exec format error` | ARM/x86 mismatch | Add `--platform linux/amd64` to docker.runOptions |
-| Exit code 137 (OOM) | Insufficient memory | Increase Docker Desktop memory allocation |
+| Error                                    | Cause               | Solution                                             |
+| ---------------------------------------- | ------------------- | ---------------------------------------------------- |
+| `Cannot connect to Docker daemon`        | Socket not mounted  | Add `-v /var/run/docker.sock:/var/run/docker.sock`   |
+| `.command.sh: No such file or directory` | Path mismatch       | Use matching paths: `-v "${HOST_PATH}:${HOST_PATH}"` |
+| `exec format error`                      | ARM/x86 mismatch    | Add `--platform linux/amd64` to docker.runOptions    |
+| Exit code 137 (OOM)                      | Insufficient memory | Increase Docker Desktop memory allocation            |
 
 ---
 
@@ -326,19 +326,16 @@ Categorize issues into:
 Before making any changes, clearly present:
 
 1. **Summary of proposed fixes** - List each fix with:
-
    - File and line number
    - What the current content is
    - What the proposed fix would be
    - Why this fix is needed
 
 2. **Ask for user approval** using AskUserQuestion:
-
    - "Do you want me to apply these fixes and create a PR?"
    - Options: "Yes, create PR", "Let me review/modify first", "No, skip PR"
 
 3. **If user wants to review/modify**:
-
    - Apply fixes one at a time
    - After each fix, show the diff and ask if it's correct
    - Allow user to request modifications before proceeding
