@@ -187,7 +187,7 @@ Invoke the `/test-example` skill on each solution file to verify:
 - Parameter handling (if applicable)
 - Output matches documentation
 
-#### 3.3 Cleanup (if walkthrough succeeded)
+#### 3.3 Cleanup (if walkthrough succeeded with no issues)
 
 If the walkthrough completed successfully without issues, clean up the working directory:
 
@@ -202,7 +202,98 @@ rm -f [working-directory]/.nextflow.log*
 rm -rf [working-directory]/[any-created-directories]  # e.g., nf-greeting for plugin tutorial
 ```
 
-**Important**: Only clean up if no problems were encountered. If issues were found, leave the files in place for investigation.
+**Important**: Only clean up if no problems were encountered. If issues were found, leave the files in place for Phase 4.
+
+### Phase 4: Propose Fixes and Create PR (if issues found)
+
+If the walkthrough identified any fixable issues, offer to create a PR with the fixes.
+
+#### 4.1 Identify Fixable Issues
+
+Categorize issues into:
+
+**Auto-fixable** (can fix programmatically):
+- Extra/missing whitespace in code blocks
+- Incorrect `hl_lines` values
+- Heading numbering errors (use `--fix` flag)
+- Minor formatting inconsistencies
+
+**Requires manual review** (present to user for decision):
+- Content accuracy issues
+- Missing steps in documentation
+- Incorrect command outputs
+- Structural changes to lesson flow
+
+#### 4.2 Present Proposed Changes to User
+
+Before making any changes, clearly present:
+
+1. **Summary of proposed fixes** - List each fix with:
+   - File and line number
+   - What the current content is
+   - What the proposed fix would be
+   - Why this fix is needed
+
+2. **Ask for user approval** using AskUserQuestion:
+   - "Do you want me to apply these fixes and create a PR?"
+   - Options: "Yes, create PR", "Let me review/modify first", "No, skip PR"
+
+3. **If user wants to review/modify**:
+   - Apply fixes one at a time
+   - After each fix, show the diff and ask if it's correct
+   - Allow user to request modifications before proceeding
+
+#### 4.3 Create the PR
+
+Only after user approval:
+
+1. **Create a new branch**:
+   ```bash
+   git checkout -b fix/[tutorial-name]-walkthrough-fixes
+   ```
+
+2. **Stage and commit changes**:
+   ```bash
+   git add [modified-files]
+   git commit -m "Fix issues in [tutorial-name] tutorial
+
+   - [list of fixes applied]
+
+   Found during tutorial walkthrough testing.
+
+   Co-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>"
+   ```
+
+3. **Push and create PR**:
+   ```bash
+   git push -u origin fix/[tutorial-name]-walkthrough-fixes
+   gh pr create --title "Fix issues in [tutorial-name] tutorial" --body "..."
+   ```
+
+4. **Return to original branch** and clean up working directory
+
+#### 4.4 PR Body Format
+
+```markdown
+## Summary
+Fixes issues found during tutorial walkthrough testing.
+
+## Changes
+- [File]: [description of fix]
+- [File]: [description of fix]
+
+## Issues Fixed
+| Issue | Severity | Fix Applied |
+|-------|----------|-------------|
+| [description] | Minor/Warning | [what was changed] |
+
+## Testing
+- [x] Tutorial walkthrough completed successfully after fixes
+- [x] All commands execute as documented
+- [x] Output matches documentation
+
+🤖 Generated with [Claude Code](https://claude.ai/code)
+```
 
 ---
 
@@ -285,6 +376,16 @@ Report the actual results from the /test-example skill:
 
 ### Minor (cosmetic or documentation-only)
 - [issue description]
+
+## Proposed Fixes
+[If fixable issues were found, present them here before asking user]
+
+| # | File | Line | Current | Proposed | Reason |
+|---|------|------|---------|----------|--------|
+| 1 | docs/side_quests/example.md | 123 | `hl_lines="1 11"` | `hl_lines="1"` | Line 11 is just a closing brace |
+| 2 | ... | ... | ... | ... | ... |
+
+**Ready to create PR?** [Ask user with AskUserQuestion before proceeding]
 ```
 
 ---
