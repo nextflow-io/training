@@ -311,24 +311,29 @@ Workflow managers track completed work automatically, so you never lose progress
 
 ### 3.1. The Environment Problem
 
-Your bash script assumes tools are installed:
+Remember the setup step where you installed the tools?
 
 ```bash
-# From bash_pipeline.sh
-fastqc -q -o results/fastqc ${sample}_R1.fastq.gz ${sample}_R2.fastq.gz
-fastp -i ${sample}_R1.fastq.gz -I ${sample}_R2.fastq.gz -o trimmed_R1.fq.gz -O trimmed_R2.fq.gz
-salmon quant --index salmon_index -1 trimmed_R1.fq.gz -2 trimmed_R2.fq.gz -o ${sample}
+mamba create -n rnaseq-bash fastqc fastp salmon multiqc -c bioconda -c conda-forge -y
+mamba activate rnaseq-bash
 ```
 
-Try running this on a colleague's machine:
+This is **your responsibility** to manage. You must:
+
+- Remember which environment to activate before running
+- Document what you installed (and hope the documentation stays current)
+- Reinstall everything when you move to a new machine
+- Debug version conflicts when tools need incompatible dependencies
+
+What happens when a colleague tries to run your script?
 
 ```console
 $ bash bash_pipeline.sh
-Running FastQC...
-bash: fastqc: command not found
+Checking for required tools...
+ERROR: salmon is not installed!
 ```
 
-Or worse - it runs but with different versions:
+Or worse - they have different versions:
 
 ```console
 # Your machine
@@ -348,6 +353,7 @@ This causes real problems:
 - **Colleagues get different results** with different tool versions
 - **Paper reviewers can't verify** your analysis
 - **Future you** has no idea what versions you used
+- **"It worked last month"** - but something changed and you don't know what
 
 ??? question "Think about it"
 
@@ -357,9 +363,9 @@ This causes real problems:
     - What if your pipeline needs tools that require incompatible dependencies (e.g., Python 2.7 vs Python 3.11)?
     - How would you document *exactly* which software versions were used for a publication?
 
-### 3.3. Solution: Per-Process Containers
+### 3.3. Solution: Declarative Software Environments
 
-In Nextflow, each process declares its exact software environment:
+In Nextflow, each process declares its own software environment:
 
 ```groovy title="modules/fastqc.nf" linenums="1" hl_lines="3"
 process FASTQC {
@@ -384,31 +390,34 @@ process SALMON_QUANT {
 }
 ```
 
-**Each process gets its own isolated container** with the exact tool version specified.
+**The workflow manages the software, not you.**
 
-### 3.4. Run It Anywhere
+- Each process specifies exactly what it needs
+- Versions are locked and documented in the code itself
+- No manual environment activation required
+- No "did I install this?" questions
 
-On your colleague's machine (or a cluster, or the cloud):
+### 3.4. Flexibility in How Environments Are Provided
+
+Nextflow can use containers (Docker, Singularity) OR conda - you choose via profiles:
 
 ```bash
+# Use Docker containers
 nextflow run main.nf -profile docker
+
+# Use Singularity (common on HPC)
+nextflow run main.nf -profile singularity
+
+# Use Conda environments
+nextflow run main.nf -profile conda
 ```
 
-```console title="Output"
-Pulling biocontainers/fastqc:0.12.1--hdfd78af_0 ... done
-Pulling biocontainers/fastp:0.23.4--hadf994f_2 ... done
-Pulling biocontainers/salmon:1.10.3--h6dccd9a_2 ... done
-Pulling biocontainers/multiqc:1.25.1--pyhdfd78af_0 ... done
-
-[... pipeline runs identically ...]
-```
-
-**No manual installation. No version conflicts. Perfect reproducibility.**
+The workflow code stays the same. The software management is handled automatically.
 
 ### 3.5. Mix Incompatible Tools
 
-Ever tried to install tools that need different Python versions?
-With containers, each process is isolated:
+Ever tried to install tools that need different Python versions in the same environment?
+With workflow managers, each process is isolated:
 
 ```groovy
 process TOOL_A {
@@ -422,11 +431,11 @@ process TOOL_B {
 }
 ```
 
-They run in separate containers. No conflicts.
+They run in separate environments. No conflicts. No workarounds.
 
 ### 3.6. Effortless Collaboration
 
-With containers, sharing your analysis is trivial:
+Sharing your analysis becomes trivial:
 
 ```bash
 # You send your colleague:
@@ -435,7 +444,7 @@ cd rnaseq-analysis
 nextflow run main.nf -profile docker --samples their_data.csv
 ```
 
-**Same workflow. Same containers. Same results.**
+**Same workflow. Same software. Same results.**
 No "can you send me your installation notes?" emails.
 
 This enables:
@@ -446,8 +455,8 @@ This enables:
 
 ### Takeaway
 
-Bash scripts are environment-dependent and not reproducible.
-Workflow managers isolate each step in containers with exact software versions.
+With bash scripts, **you** manage software environments - installation, activation, documentation, troubleshooting.
+With workflow managers, the **workflow** manages environments declaratively - you just run it.
 
 ---
 
