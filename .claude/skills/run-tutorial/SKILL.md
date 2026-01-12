@@ -196,6 +196,7 @@ docker exec nf-training ls /workspaces/training/
 The `nf-training` container may stop unexpectedly during long tutorial walkthroughs, especially when running many containerized processes via DooD.
 
 **Symptoms**:
+
 - `Error: No such container: nf-training`
 - Commands that worked before suddenly fail
 
@@ -384,7 +385,6 @@ Categorize issues into:
 Before making any changes, clearly present:
 
 1. **Summary of proposed fixes** - List each fix with:
-
    - File and line number
    - **Actual section heading** (read from the document, don't guess!)
    - What the current content is
@@ -394,12 +394,10 @@ Before making any changes, clearly present:
 **CRITICAL**: Always verify section numbers by reading the document. Do NOT guess or infer section numbers. Search for the nearest `### N.N.` heading above the line you're referencing and use that exact text.
 
 2. **Ask for user approval** using AskUserQuestion:
-
    - "Do you want me to apply these fixes and create a PR?"
    - Options: "Yes, create PR", "Let me review/modify first", "No, skip PR"
 
 3. **If user wants to review/modify**:
-
    - Apply fixes one at a time
    - After each fix, show the diff and ask if it's correct
    - Allow user to request modifications before proceeding
@@ -447,8 +445,8 @@ Fixes issues found during tutorial walkthrough testing.
 
 ## Changes
 
-| Location | Before | After | Reason |
-|----------|--------|-------|--------|
+| Location                           | Before    | After     | Reason      |
+| ---------------------------------- | --------- | --------- | ----------- |
 | Section X.Y (exact title from doc) | old value | new value | explanation |
 
 ## Testing
