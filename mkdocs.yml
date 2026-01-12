@@ -60,6 +60,7 @@ nav:
       - side_quests/index.md
       - side_quests/orientation.md
       - side_quests/dev_environment.md
+      - side_quests/workflow_management_fundamentals.md
       - side_quests/metadata.md
       - side_quests/working_with_files.md
       - side_quests/splitting_and_grouping.md
