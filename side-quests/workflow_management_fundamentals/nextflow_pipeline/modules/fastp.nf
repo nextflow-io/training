@@ -1,40 +1,35 @@
 /*
- * fastp - Adapter trimming and quality filtering
+ * FASTP - Adapter trimming and quality filtering
  *
  * Different container than FastQC - each process has its own
  * isolated software environment. No version conflicts!
  */
 process FASTP {
     tag "$meta.id"
-    container 'biocontainers/fastp:0.23.4'
-    publishDir "${params.outdir}/trimmed", mode: 'copy'
+    container 'biocontainers/fastp:0.23.4--hadf994f_2'
+    publishDir "${params.outdir}/fastp", mode: 'copy'
 
     cpus 4
-    memory '8.GB'
+    memory '4.GB'
 
     input:
     tuple val(meta), path(reads)
 
     output:
-    tuple val(meta), path("${meta.id}_trimmed_R{1,2}.fastq.gz"), emit: reads
-    path "*.{json,html}", emit: reports
+    tuple val(meta), path("*_trimmed*.fastq.gz"), emit: reads
+    tuple val(meta), path("*.json"), emit: json
+    tuple val(meta), path("*.html"), emit: html
 
     script:
     def prefix = meta.id
-    // Mock implementation for demonstration
-    // Real: fastp -i ${reads[0]} -I ${reads[1]} -o ${prefix}_trimmed_R1.fastq.gz ...
     """
-    echo "Running fastp on ${meta.id}..."
-    sleep 3  # Simulate processing time
-
-    # Pass through reads (mock trimming)
-    zcat ${reads[0]} | gzip > ${prefix}_trimmed_R1.fastq.gz
-    zcat ${reads[1]} | gzip > ${prefix}_trimmed_R2.fastq.gz
-
-    # Create mock reports
-    echo '{"summary": {"before_filtering": {"total_reads": 1000000}, "after_filtering": {"total_reads": 950000}}}' > ${prefix}.json
-    echo "<html><body><h1>fastp Report: ${prefix}</h1><p>Reads passed filter: 95%</p></body></html>" > ${prefix}.html
-
-    echo "fastp complete for ${meta.id}"
+    fastp \\
+        --in1 ${reads[0]} \\
+        --in2 ${reads[1]} \\
+        --out1 ${prefix}_trimmed_R1.fastq.gz \\
+        --out2 ${prefix}_trimmed_R2.fastq.gz \\
+        --json ${prefix}.fastp.json \\
+        --html ${prefix}.fastp.html \\
+        --thread $task.cpus
     """
 }

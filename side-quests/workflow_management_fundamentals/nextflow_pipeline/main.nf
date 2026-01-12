@@ -1,7 +1,7 @@
 #!/usr/bin/env nextflow
 
 /*
- * Bacterial Genome Analysis Pipeline - Nextflow Version
+ * RNA-seq Analysis Pipeline - Nextflow Version
  *
  * This workflow demonstrates the benefits of workflow management:
  * - Automatic parallelization based on data dependencies
@@ -14,11 +14,12 @@
 // Include process definitions
 include { FASTQC } from './modules/fastqc'
 include { FASTP } from './modules/fastp'
-include { SPADES } from './modules/spades'
-include { QUAST } from './modules/quast'
+include { UNTAR; SALMON_QUANT } from './modules/salmon'
+include { MULTIQC } from './modules/multiqc'
 
 // Pipeline parameters
 params.samples = '../data/samples.csv'
+params.salmon_index = 'https://raw.githubusercontent.com/nf-core/test-datasets/rnaseq/reference/salmon.tar.gz'
 params.outdir = '../results'
 
 // Main workflow
@@ -30,10 +31,14 @@ workflow {
         .fromPath(params.samples)
         .splitCsv(header: true)
         .map { row ->
-            def meta = [id: row.sample_id, organism: row.organism]
-            def reads = [file(row.read1), file(row.read2)]
+            def meta = [id: row.sample]
+            def reads = [file(row.fastq_1), file(row.fastq_2)]
             return [meta, reads]
         }
+
+    // Download and extract pre-built salmon index
+    ch_salmon_index = Channel.fromPath(params.salmon_index)
+    UNTAR(ch_salmon_index)
 
     // Run the pipeline
     // Nextflow automatically determines what can run in parallel
@@ -42,9 +47,15 @@ workflow {
     FASTQC(ch_samples)
     FASTP(ch_samples)
 
-    // SPADES needs FASTP output - it WAITS for FASTP, but runs samples in PARALLEL
-    SPADES(FASTP.out.reads)
+    // SALMON needs FASTP output - it WAITS for FASTP, but runs samples in PARALLEL
+    SALMON_QUANT(FASTP.out.reads, UNTAR.out.index)
 
-    // QUAST needs SPADES output - it WAITS for SPADES, but runs samples in PARALLEL
-    QUAST(SPADES.out.assembly)
+    // MULTIQC aggregates all reports - it WAITS for everything
+    ch_multiqc = FASTQC.out.zip
+        .map { meta, zip -> zip }
+        .mix(FASTP.out.json.map { meta, json -> json })
+        .mix(SALMON_QUANT.out.results.map { meta, results -> results })
+        .collect()
+
+    MULTIQC(ch_multiqc)
 }

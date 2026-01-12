@@ -1,4 +1,4 @@
-sample_id,organism,read1,read2
-sample_01,E.coli,data/reads/sample_01_R1.fastq.gz,data/reads/sample_01_R2.fastq.gz
-sample_02,S.aureus,data/reads/sample_02_R1.fastq.gz,data/reads/sample_02_R2.fastq.gz
-sample_03,P.aeruginosa,data/reads/sample_03_R1.fastq.gz,data/reads/sample_03_R2.fastq.gz
+sample,fastq_1,fastq_2
+WT_REP1,https://raw.githubusercontent.com/nf-core/test-datasets/rnaseq/testdata/GSE110004/SRR6357070_1.fastq.gz,https://raw.githubusercontent.com/nf-core/test-datasets/rnaseq/testdata/GSE110004/SRR6357070_2.fastq.gz
+WT_REP2,https://raw.githubusercontent.com/nf-core/test-datasets/rnaseq/testdata/GSE110004/SRR6357072_1.fastq.gz,https://raw.githubusercontent.com/nf-core/test-datasets/rnaseq/testdata/GSE110004/SRR6357072_2.fastq.gz
+RAP1_IAA_30M_REP1,https://raw.githubusercontent.com/nf-core/test-datasets/rnaseq/testdata/GSE110004/SRR6357076_1.fastq.gz,https://raw.githubusercontent.com/nf-core/test-datasets/rnaseq/testdata/GSE110004/SRR6357076_2.fastq.gz

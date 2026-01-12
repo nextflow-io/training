@@ -24,15 +24,21 @@ We use Nextflow as our example, but the concepts apply to any workflow managemen
 
 ### 0.1. The Scenario
 
-You're analyzing bacterial genome sequences.
+You're analyzing RNA-seq data from a yeast gene expression study.
 Your workflow involves:
 
 1. Quality control (FastQC)
 2. Adapter trimming (fastp)
-3. Genome assembly (SPAdes)
-4. Assembly quality assessment (QUAST)
+3. Transcript quantification (Salmon)
+4. Report aggregation (MultiQC)
 
 You have 3 samples today. Your PI says 50 more are coming next week.
+
+!!! note "Real data, real tools"
+
+    This tutorial uses real RNA-seq data from the nf-core test-datasets repository.
+    The FASTQ files are from a published yeast study (GSE110004).
+    All processes run actual bioinformatics tools in containers.
 
 ### 0.2. Navigate to the Project Directory
 
@@ -43,30 +49,49 @@ cd side-quests/workflow_management_fundamentals
 ### 0.3. Explore the Starting Point
 
 ```bash
-tree
+ls -la
 ```
 
 ```console title="Output"
 .
-├── data
-│   ├── reads
-│   │   ├── sample_01_R1.fastq.gz
-│   │   ├── sample_01_R2.fastq.gz
-│   │   ├── sample_02_R1.fastq.gz
-│   │   ├── sample_02_R2.fastq.gz
-│   │   ├── sample_03_R1.fastq.gz
-│   │   └── sample_03_R2.fastq.gz
+├── data/
 │   └── samples.csv
 ├── bash_pipeline.sh
-├── nextflow_pipeline/
-│   ├── main.nf
-│   ├── modules/
-│   └── nextflow.config
-└── solutions/
+└── nextflow_pipeline/
+    ├── main.nf
+    ├── modules/
+    └── nextflow.config
 ```
 
-We've provided both a bash script (`bash_pipeline.sh`) and a Nextflow workflow (`nextflow_pipeline/`) that do the same thing.
-You'll run both and compare.
+We've provided both a bash script (`bash_pipeline.sh`) and a Nextflow workflow (`nextflow_pipeline/`).
+
+### 0.4. Install Tools for the Bash Script
+
+To run the bash script, you need to install the required bioinformatics tools:
+
+=== "Conda/Mamba (Recommended)"
+
+    ```bash
+    mamba create -n rnaseq-bash fastqc fastp salmon multiqc -c bioconda -c conda-forge -y
+    mamba activate rnaseq-bash
+    ```
+
+=== "Conda"
+
+    ```bash
+    conda create -n rnaseq-bash fastqc fastp salmon multiqc -c bioconda -c conda-forge -y
+    conda activate rnaseq-bash
+    ```
+
+This installation step is **exactly the kind of friction** that workflow managers eliminate.
+Notice you had to:
+
+- Know which package manager to use
+- Know the correct channel (`bioconda`)
+- Hope there are no dependency conflicts
+- Remember to activate the environment
+
+Later, you'll see how Nextflow handles this automatically.
 
 ---
 
@@ -79,57 +104,63 @@ time bash bash_pipeline.sh
 ```
 
 ```console title="Output"
-Starting bacterial genome analysis pipeline
-===========================================
+Starting RNA-seq analysis pipeline (bash version)
+==================================================
 
-Processing sample_01 (E.coli)...
-  Running FastQC... done (2s)
-  Running fastp... done (3s)
-  Running SPAdes... done (5s)
-  Running QUAST... done (1s)
-Completed sample_01
+Checking for required tools...
+All tools found.
 
-Processing sample_02 (S.aureus)...
-  Running FastQC... done (2s)
-  Running fastp... done (3s)
-  Running SPAdes... done (5s)
-  Running QUAST... done (1s)
-Completed sample_02
+Samples: WT_REP1 WT_REP2 RAP1_IAA_30M_REP1
 
-Processing sample_03 (P.aeruginosa)...
-  Running FastQC... done (2s)
-  Running fastp... done (3s)
-  Running SPAdes... done (5s)
-  Running QUAST... done (1s)
-Completed sample_03
+Processing WT_REP1...
+  Downloading FASTQ files...
+  Running FastQC... done
+  Running fastp... done
+  Running Salmon... done
+Completed WT_REP1
+
+Processing WT_REP2...
+  Downloading FASTQ files...
+  Running FastQC... done
+  Running fastp... done
+  Running Salmon... done
+Completed WT_REP2
+
+Processing RAP1_IAA_30M_REP1...
+  Downloading FASTQ files...
+  Running FastQC... done
+  Running fastp... done
+  Running Salmon... done
+Completed RAP1_IAA_30M_REP1
+
+Running MultiQC... done
 
 Pipeline complete!
 
-real    0m33.0s
+real    2m34.567s
 ```
 
-**33 seconds** for 3 samples. Each sample waits for the previous one to finish completely.
+Watch the output carefully: each sample waits for the previous one to finish completely.
 
 ### 1.2. The Problem
 
 Look at what happened:
 
 ```
-Timeline (bash):
-sample_01: [====FastQC====][======fastp======][==========SPAdes==========][==QUAST==]
-sample_02:                                                                            [====FastQC====][======fastp======][==========SPAdes==========][==QUAST==]
-sample_03:                                                                                                                                                        [====FastQC====]...
-           |-------|-------|-------|-------|-------|-------|-------|-------|-------|-------|
-           0s      5s     10s     15s     20s     25s     30s     35s
+Timeline (bash - sequential):
+WT_REP1:          [FastQC][fastp][====Salmon====]
+WT_REP2:                                         [FastQC][fastp][====Salmon====]
+RAP1_IAA_30M_REP1:                                                               [FastQC][fastp][====Salmon====]
+                                                                                                                 [MultiQC]
 ```
 
 These samples are **completely independent**.
-Why is sample_02 waiting for sample_01 to finish QUAST before it can start FastQC?
+Why is WT_REP2 waiting for WT_REP1 to finish Salmon before it can start FastQC?
 
 !!! warning "The scaling nightmare"
 
-    With 50 samples at 11 seconds each: **9+ minutes of sequential waiting**.
-    On a machine with 16 CPUs, you're using 1-2 at a time. The other 14 sit idle.
+    With 50 samples processed sequentially, you're looking at **50× the runtime**.
+    On a machine with 16 CPUs, you're using 1-4 at a time. The other 12 sit idle.
 
 You *could* add parallelization to your bash script with `&` and `wait`, but that adds complexity, error handling, and resource management headaches.
 
@@ -138,7 +169,7 @@ You *could* add parallelization to your bash script with `&` and `wait`, but tha
     Before seeing the solution, consider:
 
     - How would you modify the bash script to run samples in parallel?
-    - What happens if you try to run 50 SPAdes assemblies simultaneously on a laptop with 16GB RAM?
+    - What happens if you try to run 50 Salmon jobs simultaneously on a laptop with 16GB RAM?
     - How would you limit concurrent jobs to match available resources?
 
 ### 1.3. Solution: Automatic Parallelization
@@ -153,26 +184,26 @@ nextflow run main.nf
 ```console title="Output"
 N E X T F L O W  ~  version 24.10.0
 
-executor >  local (12)
-[3a/4b5c6d] FASTQC (sample_01)     [100%] 3 of 3 ✔
-[8e/9f0a1b] FASTP (sample_02)      [100%] 3 of 3 ✔
-[2c/3d4e5f] SPADES (sample_03)     [100%] 3 of 3 ✔
-[7g/8h9i0j] QUAST (sample_01)      [100%] 3 of 3 ✔
+executor >  local (11)
+[5a/8b2c3d] UNTAR              [100%] 1 of 1 ✔
+[3a/4b5c6d] FASTQC (WT_REP1)   [100%] 3 of 3 ✔
+[8e/9f0a1b] FASTP (WT_REP2)    [100%] 3 of 3 ✔
+[2c/3d4e5f] SALMON_QUANT (RAP1_IAA_30M_REP1) [100%] 3 of 3 ✔
+[7g/8h9i0j] MULTIQC            [100%] 1 of 1 ✔
 
 Completed at: 2024-10-11 14:23:45
-Duration    : 12s
-Succeeded   : 12
+Duration    : 45s
+Succeeded   : 11
 ```
 
-**12 seconds** vs 33 seconds. Same work, 3× faster.
+All samples processed **in parallel** - significantly faster than sequential!
 
 ```
-Timeline (Nextflow):
-sample_01: [==FastQC==][===fastp===][=====SPAdes=====][QUAST]
-sample_02: [==FastQC==][===fastp===][=====SPAdes=====][QUAST]
-sample_03: [==FastQC==][===fastp===][=====SPAdes=====][QUAST]
-           |-------|-------|-------|-------|
-           0s      5s     10s     15s
+Timeline (Nextflow - parallel):
+WT_REP1:          [FastQC][fastp][====Salmon====]
+WT_REP2:          [FastQC][fastp][====Salmon====]
+RAP1_IAA_30M_REP1:[FastQC][fastp][====Salmon====]
+                                                 [MultiQC]
 ```
 
 ### 1.4. How It Works
@@ -181,8 +212,8 @@ Nextflow analyzed your data dependencies:
 
 - All 3 FastQC tasks need only raw reads → **run in parallel**
 - All 3 fastp tasks need only raw reads → **run in parallel**
-- Each SPAdes needs its sample's fastp output → **run when ready**
-- Each QUAST needs its sample's SPAdes output → **run when ready**
+- Each Salmon needs its sample's fastp output → **run when ready**
+- MultiQC needs all reports → **wait for everything, then run**
 
 **You wrote zero parallelization code.**
 The workflow manager figured it out from the data flow.
@@ -198,32 +229,33 @@ Workflow managers parallelize automatically based on data dependencies.
 
 ### 2.1. Simulate a Crash
 
-Let's say SPAdes runs out of memory on sample_02 (this happens constantly with real assemblies).
+Let's say Salmon runs out of memory on WT_REP2 (this happens with real large datasets).
 
 ```bash
 cd ..
-bash bash_pipeline.sh --fail-at sample_02_spades
+bash bash_pipeline.sh --fail-at WT_REP2_salmon
 ```
 
 ```console title="Output"
-Processing sample_01 (E.coli)...
-  Running FastQC... done
-  Running fastp... done
-  Running SPAdes... done
-  Running QUAST... done
-Completed sample_01
+Processing WT_REP1...
+  Running FastQC... done (5s)
+  Running fastp... done (8s)
+  Running Salmon... done (15s)
+Completed WT_REP1
 
-Processing sample_02 (S.aureus)...
-  Running FastQC... done
-  Running fastp... done
-  Running SPAdes... ERROR: Out of memory
+Processing WT_REP2...
+  Running FastQC... done (5s)
+  Running fastp... done (8s)
+  Running Salmon... ERROR: Out of memory
+
+Pipeline failed! All progress for remaining samples is lost.
 ```
 
 ### 2.2. The Problem
 
 Your options with bash:
 
-1. **Re-run everything** - sample_01 runs again unnecessarily
+1. **Re-run everything** - WT_REP1 runs again unnecessarily
 2. **Manually track progress** - Comment out completed samples, hope you don't make mistakes
 3. **Build checkpoint logic** - Hours of additional coding for something that isn't your science
 
@@ -246,10 +278,11 @@ nextflow run main.nf -resume
 
 ```console title="Output"
 executor >  local (2)
-[3a/4b5c6d] FASTQC (sample_01)     [100%] 3 of 3, cached: 3 ✔
-[8e/9f0a1b] FASTP (sample_02)      [100%] 3 of 3, cached: 3 ✔
-[2c/3d4e5f] SPADES (sample_01)     [100%] 3 of 3, cached: 2 ✔
-[7g/8h9i0j] QUAST (sample_01)      [100%] 3 of 3, cached: 2 ✔
+[5a/8b2c3d] UNTAR              [100%] 1 of 1, cached: 1 ✔
+[3a/4b5c6d] FASTQC (WT_REP1)   [100%] 3 of 3, cached: 3 ✔
+[8e/9f0a1b] FASTP (WT_REP2)    [100%] 3 of 3, cached: 3 ✔
+[2c/3d4e5f] SALMON_QUANT (WT_REP2) [100%] 3 of 3, cached: 2 ✔
+[7g/8h9i0j] MULTIQC            [100%] 1 of 1 ✔
 ```
 
 **Only the failed task and its downstream dependencies re-run.**
@@ -282,10 +315,9 @@ Your bash script assumes tools are installed:
 
 ```bash
 # From bash_pipeline.sh
-fastqc -q -o results/fastqc $read1 $read2
-fastp -i $read1 -I $read2 -o trimmed_R1.fq.gz -O trimmed_R2.fq.gz
-spades.py -1 trimmed_R1.fq.gz -2 trimmed_R2.fq.gz -o assembly/
-quast.py assembly/contigs.fasta -o quast_report/
+fastqc -q -o results/fastqc ${sample}_R1.fastq.gz ${sample}_R2.fastq.gz
+fastp -i ${sample}_R1.fastq.gz -I ${sample}_R2.fastq.gz -o trimmed_R1.fq.gz -O trimmed_R2.fq.gz
+salmon quant --index salmon_index -1 trimmed_R1.fq.gz -2 trimmed_R2.fq.gz -o ${sample}
 ```
 
 Try running this on a colleague's machine:
@@ -300,12 +332,12 @@ Or worse - it runs but with different versions:
 
 ```console
 # Your machine
-$ fastp --version
-fastp 0.23.4
+$ salmon --version
+salmon 1.10.3
 
 # Colleague's machine
-$ fastp --version
-fastp 0.20.0   # Different version = potentially different results!
+$ salmon --version
+salmon 1.4.0   # Different version = potentially different results!
 ```
 
 ### 3.2. The Reproducibility Crisis
@@ -332,7 +364,7 @@ In Nextflow, each process declares its exact software environment:
 ```groovy title="modules/fastqc.nf" linenums="1" hl_lines="3"
 process FASTQC {
     tag "$meta.id"
-    container 'biocontainers/fastqc:0.12.1'
+    container 'biocontainers/fastqc:0.12.1--hdfd78af_0'
 
     input:
     tuple val(meta), path(reads)
@@ -343,10 +375,10 @@ process FASTQC {
 }
 ```
 
-```groovy title="modules/fastp.nf" linenums="1" hl_lines="3"
-process FASTP {
+```groovy title="modules/salmon.nf" linenums="1" hl_lines="3"
+process SALMON_QUANT {
     tag "$meta.id"
-    container 'biocontainers/fastp:0.23.4'
+    container 'biocontainers/salmon:1.10.3--h6dccd9a_2'
 
     // ...
 }
@@ -363,10 +395,10 @@ nextflow run main.nf -profile docker
 ```
 
 ```console title="Output"
-Pulling biocontainers/fastqc:0.12.1 ... done
-Pulling biocontainers/fastp:0.23.4 ... done
-Pulling biocontainers/spades:3.15.5 ... done
-Pulling biocontainers/quast:5.2.0 ... done
+Pulling biocontainers/fastqc:0.12.1--hdfd78af_0 ... done
+Pulling biocontainers/fastp:0.23.4--hadf994f_2 ... done
+Pulling biocontainers/salmon:1.10.3--h6dccd9a_2 ... done
+Pulling biocontainers/multiqc:1.25.1--pyhdfd78af_0 ... done
 
 [... pipeline runs identically ...]
 ```
@@ -398,8 +430,8 @@ With containers, sharing your analysis is trivial:
 
 ```bash
 # You send your colleague:
-git clone https://github.com/your-lab/bacterial-assembly
-cd bacterial-assembly
+git clone https://github.com/your-lab/rnaseq-analysis
+cd rnaseq-analysis
 nextflow run main.nf -profile docker --samples their_data.csv
 ```
 
@@ -438,7 +470,7 @@ For bash, you need to think about:
     Before seeing the solution, consider:
 
     - How would you modify your bash script to handle 50 samples? 500 samples?
-    - SPAdes needs 16GB RAM, FastQC needs 2GB. How do you prevent memory exhaustion?
+    - Salmon needs 8GB RAM, FastQC needs 2GB. How do you prevent memory exhaustion?
     - What changes are needed to move from your laptop to a cluster with 100 nodes?
 
 ### 4.2. Solution: Declarative Scaling
@@ -459,7 +491,7 @@ nextflow run main.nf --samples data/samples_500.csv
 The workflow manager handles:
 
 - **Scheduling** - Queue tasks, respect resource limits
-- **Resource allocation** - Don't run 50 SPAdes jobs simultaneously if you only have 64GB RAM
+- **Resource allocation** - Don't run 50 Salmon jobs simultaneously if you only have 64GB RAM
 - **Progress tracking** - Know exactly which samples completed
 - **Failure isolation** - One sample's failure doesn't affect others
 
@@ -468,10 +500,9 @@ The workflow manager handles:
 Each process declares what it needs:
 
 ```groovy
-process SPADES {
-    cpus 8
-    memory '16.GB'
-    time '6.h'
+process SALMON_QUANT {
+    cpus 4
+    memory '8.GB'
 
     // ...
 }
@@ -479,8 +510,8 @@ process SPADES {
 
 Nextflow uses this to schedule intelligently:
 
-- **On your laptop (16GB RAM)**: Run 1 SPAdes at a time
-- **On a cluster (256GB RAM)**: Run 16 SPAdes jobs in parallel
+- **On your laptop (16GB RAM)**: Run 2 Salmon jobs at a time
+- **On a cluster (256GB RAM)**: Run 32 Salmon jobs in parallel
 - **On cloud**: Provision appropriately-sized instances
 
 **Same code. Automatic adaptation to available resources.**
@@ -498,7 +529,7 @@ Workflow managers handle scaling automatically through declarative resource mana
 
 Your bash script ran. Now answer these questions:
 
-- How long did SPAdes take for sample_17?
+- How long did Salmon take for WT_REP2?
 - Which samples used more than 8GB memory?
 - What were the exact commands run for each step?
 - When did the pipeline run, and how long did each phase take?
@@ -511,7 +542,7 @@ That's a lot of code that has nothing to do with your science.
     Before seeing the solution, consider:
 
     - How would you write the "Methods" section of a paper based on your bash script?
-    - If a reviewer asks "how long did assembly take for each sample?", can you answer?
+    - If a reviewer asks "how long did quantification take for each sample?", can you answer?
     - How would you identify which step is causing out-of-memory errors?
 
 ### 5.2. Solution: Automatic Provenance
@@ -526,9 +557,9 @@ ls results/
 ```console title="Output"
 results/
 ├── fastqc/
-├── trimmed/
-├── assemblies/
-├── quast/
+├── fastp/
+├── salmon/
+├── multiqc_report.html
 ├── report.html      # Execution report
 ├── timeline.html    # Visual timeline
 └── trace.txt        # Detailed metrics
@@ -537,8 +568,6 @@ results/
 ### 5.3. Execution Timeline
 
 Open `results/timeline.html` in your browser:
-
-![Timeline showing parallel execution](images/timeline_example.png)
 
 See exactly when each task ran, which ran in parallel, and where bottlenecks are.
 
@@ -549,17 +578,18 @@ head results/trace.txt
 ```
 
 ```console title="Output"
-task_id  hash       name              status     exit  duration  realtime  %cpu   peak_rss  peak_vmem
-1        3a/4b5c6d  FASTQC (sample_01)  COMPLETED  0     1m 23s    1m 18s    98.5%  1.8 GB    2.1 GB
-2        8e/9f0a1b  FASTP (sample_01)   COMPLETED  0     3m 45s    3m 40s    390%   2.4 GB    3.1 GB
-3        2c/3d4e5f  SPADES (sample_01)  COMPLETED  0     28m 12s   27m 51s   785%   12.1 GB   15.8 GB
+task_id  hash       name                   status     exit  duration  realtime  %cpu   peak_rss  peak_vmem
+1        5a/8b2c3d  UNTAR                  COMPLETED  0     12s       10s       45%    128 MB    256 MB
+2        3a/4b5c6d  FASTQC (WT_REP1)       COMPLETED  0     45s       42s       180%   512 MB    1.2 GB
+3        8e/9f0a1b  FASTP (WT_REP1)        COMPLETED  0     1m 12s    1m 8s     350%   1.8 GB    2.4 GB
+4        2c/3d4e5f  SALMON_QUANT (WT_REP1) COMPLETED  0     2m 45s    2m 38s    380%   4.2 GB    6.1 GB
 ```
 
 Every task tracked: duration, CPU usage, memory consumption, exit status.
 Perfect for:
 
 - **Optimization** - Which step is the bottleneck?
-- **Resource planning** - How much memory does assembly actually need?
+- **Resource planning** - How much memory does Salmon actually need?
 - **Publication** - Methods section writes itself
 - **Debugging** - Why did sample_42 fail?
 
@@ -686,15 +716,7 @@ All of this comes built-in:
 - Single-sample, single-step operations
 - Interactive work with immediate feedback
 
-### 7.4. The Investment
-
-| Learning Curve | Return |
-|---------------|--------|
-| 1-2 days to become productive | Hours saved per analysis |
-| 1 week to feel comfortable | Perfect reproducibility |
-| After 2-3 workflows, it's second nature | Seamless collaboration |
-
-### 7.5. Next Steps
+### 7.4. Next Steps
 
 This tutorial used Nextflow, but the concepts apply broadly:
 
