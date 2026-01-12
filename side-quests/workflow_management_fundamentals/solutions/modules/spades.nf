@@ -12,7 +12,6 @@ process SPADES {
 
     output:
     tuple val(meta), path("${meta.id}/contigs.fasta"), emit: assembly
-    tuple val(meta), path("${meta.id}/assembly_graph.fastg"), emit: graph
 
     script:
     """

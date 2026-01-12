@@ -51,24 +51,37 @@ Navigate to the project directory:
 cd side-quests/workflow_management_fundamentals
 ```
 
-The directory contains sample data:
+The directory contains sample data and a `solutions/` folder with completed files:
 
 ```console title="Directory contents"
 > tree
 .
+├── README.md
 ├── data
-│   ├── samples.csv
-│   └── reads
-│       ├── sample_01_R1.fastq.gz
-│       ├── sample_01_R2.fastq.gz
-│       ├── sample_02_R1.fastq.gz
-│       ├── sample_02_R2.fastq.gz
-│       ├── sample_03_R1.fastq.gz
-│       └── sample_03_R2.fastq.gz
-└── README.md
+│   ├── reads
+│   │   ├── sample_01_R1.fastq.gz
+│   │   ├── sample_01_R2.fastq.gz
+│   │   ├── sample_02_R1.fastq.gz
+│   │   ├── sample_02_R2.fastq.gz
+│   │   ├── sample_03_R1.fastq.gz
+│   │   └── sample_03_R2.fastq.gz
+│   └── samples.csv
+└── solutions
+    ├── main.nf
+    ├── modules
+    │   ├── fastp.nf
+    │   ├── fastqc.nf
+    │   ├── quast.nf
+    │   └── spades.nf
+    ├── nextflow.config
+    └── process_complete.sh
 
-3 directories, 8 files
+5 directories, 15 files
 ```
+
+!!! tip "Solutions available"
+
+    The `solutions/` directory contains completed versions of all files you'll build in this tutorial. Reference them if you get stuck, but try to work through the exercises yourself first!
 
 Our sample CSV contains metadata:
 
@@ -962,7 +975,7 @@ Now add the trimming step.
     }
     ```
 
-    ```groovy title="main.nf" hl_lines="3 17"
+    ```groovy title="main.nf" hl_lines="4 20"
     #!/usr/bin/env nextflow
 
     include { FASTQC } from './modules/fastqc'
@@ -1028,7 +1041,7 @@ Now add SPADES, which depends on FASTP output.
     }
     ```
 
-    ```groovy title="main.nf" hl_lines="4 21"
+    ```groovy title="main.nf" hl_lines="5 22"
     #!/usr/bin/env nextflow
 
     include { FASTQC } from './modules/fastqc'
@@ -1059,6 +1072,78 @@ Now add SPADES, which depends on FASTP output.
     - `ch_samples` flows into FASTQC and FASTP (parallel)
     - `FASTP.out.reads` flows into SPADES (sequential - SPADES waits for FASTP)
     - Nextflow automatically handles the scheduling
+
+### Exercise 5: Complete the Pipeline with QUAST
+
+Finally, add the QUAST quality assessment step.
+
+=== "Your Task"
+
+    Create `modules/quast.nf` that:
+
+    1. Takes assembly output from SPADES
+    2. Runs QUAST quality assessment
+    3. Uses the `biocontainers/quast:5.2.0` container
+    4. Uses 2 CPUs and 4 GB memory
+
+    Then update `main.nf` to include and call QUAST.
+
+=== "Solution"
+
+    ```groovy title="modules/quast.nf"
+    process QUAST {
+        tag "$meta.id"
+        container 'biocontainers/quast:5.2.0'
+        publishDir "${params.outdir}/quast", mode: 'copy'
+
+        cpus 2
+        memory '4.GB'
+
+        input:
+        tuple val(meta), path(assembly)
+
+        output:
+        tuple val(meta), path("${meta.id}/*"), emit: report
+
+        script:
+        """
+        quast.py \\
+            $assembly \\
+            -o ${meta.id} \\
+            --threads $task.cpus
+        """
+    }
+    ```
+
+    ```groovy title="main.nf" hl_lines="6 24"
+    #!/usr/bin/env nextflow
+
+    include { FASTQC } from './modules/fastqc'
+    include { FASTP } from './modules/fastp'
+    include { SPADES } from './modules/spades'
+    include { QUAST } from './modules/quast'
+
+    params.samples = 'data/samples.csv'
+    params.outdir = 'results'
+
+    workflow {
+        ch_samples = Channel
+            .fromPath(params.samples)
+            .splitCsv(header: true)
+            .map { row ->
+                def meta = [id: row.sample_id, organism: row.organism]
+                def reads = [file(row.read1), file(row.read2)]
+                return [meta, reads]
+            }
+
+        FASTQC(ch_samples)
+        FASTP(ch_samples)
+        SPADES(FASTP.out.reads)
+        QUAST(SPADES.out.assembly)
+    }
+    ```
+
+    **Complete pipeline!** QUAST receives the assembly output from SPADES and generates quality reports. The full dependency chain is now: `input → FASTQC`, `input → FASTP → SPADES → QUAST`.
 
 ---
 
