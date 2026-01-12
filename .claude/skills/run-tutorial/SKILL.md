@@ -173,6 +173,65 @@ docker exec -e LANG=C.UTF-8 -e LC_ALL=C.UTF-8 -e USER=testuser \
 | `exec format error`                      | ARM/x86 mismatch    | Add `--platform linux/amd64` to docker.runOptions    |
 | Exit code 137 (OOM)                      | Insufficient memory | Increase Docker Desktop memory allocation            |
 
+#### Symlink Trick for Codespaces Paths
+
+Training materials often contain hardcoded paths like `/workspaces/training/...` which work in Codespaces/Gitpod but fail when testing locally with DooD (where paths are like `/Users/username/projects/training/...`).
+
+**Solution**: Create a symlink inside the container so Codespaces paths resolve to your host paths:
+
+```bash
+# After starting the container, create the symlink
+docker exec nf-training bash -c "rm -rf /workspaces/training && mkdir -p /workspaces && ln -sf ${HOST_PATH} /workspaces/training"
+
+# Verify it works
+docker exec nf-training ls /workspaces/training/
+```
+
+**Why this works**: Files like `sample_bams.txt` contain paths like `/workspaces/training/nf4-science/genomics/data/bam/reads_mother.bam`. The symlink makes these paths resolve correctly without modifying the training materials.
+
+**Important**: The symlink must be recreated each time you restart the container.
+
+#### Container Stability Issues
+
+The `nf-training` container may stop unexpectedly during long tutorial walkthroughs, especially when running many containerized processes via DooD.
+
+**Symptoms**:
+- `Error: No such container: nf-training`
+- Commands that worked before suddenly fail
+
+**Recovery procedure**:
+
+```bash
+# 1. Check if container is still running
+docker ps | grep nf-training
+
+# 2. If not running, restart it
+docker stop nf-training 2>/dev/null; docker rm nf-training 2>/dev/null
+
+HOST_PATH="/path/to/training"  # Use your actual path
+NXF_VER=$(grep -o '"NXF_VER":\s*"[^"]*"' .devcontainer/devcontainer.json | cut -d'"' -f4)
+
+docker run -d --name nf-training \
+  -e NXF_VER=${NXF_VER} \
+  -e LANG=C.UTF-8 \
+  -e LC_ALL=C.UTF-8 \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  -v "${HOST_PATH}:${HOST_PATH}" \
+  -w "${HOST_PATH}" \
+  ghcr.io/nextflow-io/training:latest \
+  sleep infinity
+
+# 3. Recreate the symlink (critical!)
+docker exec nf-training bash -c "rm -rf /workspaces/training && mkdir -p /workspaces && ln -sf ${HOST_PATH} /workspaces/training"
+
+# 4. Recreate platform config if needed (for ARM Macs)
+docker exec nf-training bash -c 'cat > /tmp/platform.config << EOF
+docker.runOptions = "--platform linux/amd64"
+EOF'
+```
+
+**Tip**: When running long tutorials, periodically check that the container is still running before executing commands.
+
 ---
 
 ## Working Directory Setup
