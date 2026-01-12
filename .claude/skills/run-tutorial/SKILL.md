@@ -204,6 +204,8 @@ docker exec -e LANG=C.UTF-8 -e LC_ALL=C.UTF-8 -e USER=testuser \
 
 ### Phase 2: Progressive Execution (Core Unique Value)
 
+**CRITICAL**: Complete ALL steps (2.1-2.6) for EACH section before moving to the next section. Do NOT batch multiple sections together. The entire point of this skill is to catch issues that only appear when following the tutorial step-by-step.
+
 For each numbered section in the lesson (0, 1, 2, 3...):
 
 #### 2.1 Read and Understand
@@ -246,6 +248,16 @@ For each numbered section in the lesson (0, 1, 2, 3...):
   - Missing or extra output lines
   - Failed commands
   - Missing expected files
+
+#### 2.6 Confirm Section Complete Before Proceeding
+
+**MANDATORY**: Before moving to the next section:
+
+1. Verify the workflow/script ran successfully (exit code 0)
+2. Confirm output matches documentation (within acceptable differences)
+3. Only then proceed to section N+1
+
+**Why this matters**: Skipping incremental testing defeats the purpose of this skill. A tutorial might work when you jump to the final solution but fail at intermediate steps - exactly the bugs learners encounter.
 
 ### Phase 3: Final Verification
 
@@ -519,7 +531,10 @@ Some tutorials have optional paths:
 
 ## Notes
 
-- **Don't skip ahead** - The whole point is testing the progressive journey
+- **ONE SECTION AT A TIME** - Complete steps 2.1-2.6 for each section before moving to the next. Never batch multiple sections together.
+- **Test after EVERY change** - Run the workflow after each section's code changes. This is non-negotiable.
+- **Don't skip ahead** - The whole point is testing the progressive journey as a learner experiences it
 - **State verification is critical** - This catches most tutorial bugs
 - Reset files between full walkthrough runs to ensure clean state
 - Save work directory paths for troubleshooting failed commands
+- If a section doesn't include a "run this command" instruction but changes code, run the workflow anyway to verify the changes work
