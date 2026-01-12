@@ -394,6 +394,7 @@ Before making any changes, clearly present:
 **CRITICAL**: Always verify section numbers by reading the document. Do NOT guess or infer section numbers. Search for the nearest `### N.N.` heading above the line you're referencing and use that exact text.
 
 2. **Ask for user approval** using AskUserQuestion:
+
    - "Do you want me to apply these fixes and create a PR?"
    - Options: "Yes, create PR", "Let me review/modify first", "No, skip PR"
 
