@@ -7,11 +7,11 @@ description: Walk through a training tutorial as a user would, progressively bui
 
 Walk through a training tutorial lesson as a learner would, progressively building code, running commands, and verifying the learning journey works end-to-end.
 
-**This skill focuses on the unique value of simulating a learner's experience.** For detailed checks, it references other skills:
+**This skill focuses on the unique value of simulating a learner's experience.** It automatically invokes other skills during the walkthrough:
 
-- **Highlight validation** → Use `/check-highlights` skill
-- **Pedagogical quality & lesson structure** → Use `/validate` skill
-- **Testing final scripts in isolation** → Use `/test-example` skill
+- **Highlight validation** → Invokes `/validate` skill (includes highlight checking)
+- **Pedagogical quality & lesson structure** → Invokes `/validate` skill
+- **Testing final scripts** → Invokes `/test-example` skill for solution files
 
 ---
 
@@ -100,10 +100,15 @@ docker stop nf-training && docker rm nf-training
 ### Phase 1: Preparation
 
 1. **Read the lesson file** to understand the structure and sections
-2. **Identify starting files** - What files should already exist vs. what the user creates
-3. **Prepare a clean working state** - Reset or backup existing files to avoid conflicts
-4. **Start Docker container** (if using Docker)
-5. **Verify prerequisites** - Check that required data files and configs exist
+2. **Run `/validate` on the lesson file** - This checks:
+   - Lesson structure and heading numbering
+   - Code block `hl_lines` correctness
+   - Pedagogical quality and clarity
+   - Admonition syntax
+3. **Identify starting files** - What files should already exist vs. what the user creates
+4. **Prepare a clean working state** - Reset or backup existing files to avoid conflicts
+5. **Start Docker container** (if using Docker)
+6. **Verify prerequisites** - Check that required data files and configs exist
 
 ### Phase 2: Progressive Execution (Core Unique Value)
 
@@ -164,14 +169,13 @@ diff -u [built-file] [solution-file]
 - Report any differences between what was built and the solution
 - Minor differences (whitespace, comments) may be acceptable
 
-#### 3.2 Run Final Script Tests
+#### 3.2 Run `/test-example` on Solution Files
 
-For the completed script, verify:
-- Fresh run works: `nextflow run script.nf`
-- Resume works: `nextflow run script.nf -resume` (processes should cache)
-- Parameters work (if documented): `nextflow run script.nf --param value`
-
-*For comprehensive script testing, recommend using `/test-example` skill.*
+Invoke the `/test-example` skill on each solution file to verify:
+- Fresh run works
+- Resume functionality (processes should cache)
+- Parameter handling (if applicable)
+- Output matches documentation
 
 #### 3.3 Cleanup (if walkthrough succeeded)
 
@@ -230,31 +234,40 @@ rm -rf [working-directory]/[any-created-directories]  # e.g., nf-greeting for pl
 - Resume test: ✓ (all cached)
 - Parameter test: ✓
 
+## Validation Results (from /validate)
+- Heading structure: ✓
+- Code block highlights: ✓ (or list issues)
+- Pedagogical quality: ✓
+- Admonition syntax: ✓
+
+## Solution Tests (from /test-example)
+- main.nf: ✓ All tests passed
+- bonus.nf: ✓ All tests passed
+
 ## Summary
 - Sections completed: 5/5
 - State mismatches found: 0
 - Command failures: 0
 - Output discrepancies: 1 (Section 3, minor formatting)
 - Solution match: ✓
+- Validation issues: 0
+- Solution test failures: 0
 
 ## Issues Found
 [List any problems that would block or confuse a learner]
-
-## Recommended Follow-up
-- Run `/check-highlights` on this lesson to verify code block highlights
-- Run `/validate` for full pedagogical review
 ```
 
 ---
 
-## When to Defer to Other Skills
+## When to Use Individual Skills Instead
 
-| Situation | Recommended Skill |
-|-----------|-------------------|
-| Need to verify `hl_lines` are correct | `/check-highlights` |
-| Want full lesson structure/quality review | `/validate` |
-| Testing a standalone script (not tutorial context) | `/test-example` |
-| Finding TODO items across files | `/find-todos` |
+This skill invokes `/validate` and `/test-example` automatically. Use individual skills when:
+
+| Situation | Use Instead |
+|-----------|-------------|
+| Quick check of just highlights or structure | `/validate` alone |
+| Testing a script outside tutorial context | `/test-example` alone |
+| Finding TODO items across the codebase | `/find-todos` |
 
 ---
 
