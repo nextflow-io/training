@@ -129,8 +129,7 @@ You just spent time on:
 - Waiting for dependency resolution
 - Hoping nothing conflicts
 
-This is before writing a single line of analysis code.
-**Keep this in mind for later.**
+This is before writing a single line of analysis code. And every colleague who runs your pipeline will need to repeat this setup - or hope their existing environment doesn't conflict with yours.
 
 ---
 
@@ -416,10 +415,9 @@ WT_REP1:          [====FastQC====][====fastp====][======Salmon======]
 WT_REP2:                                                              [====FastQC====]...
 ```
 
-These samples are **completely independent**.
-Why is WT_REP2 waiting for WT_REP1's Salmon to finish before it can start FastQC?
+These samples are **completely independent** - WT_REP2's analysis doesn't depend on WT_REP1's results at all. Yet WT_REP2 sits idle while WT_REP1 runs through all its steps.
 
-With 50 samples, you're looking at **50× the runtime**.
+With 50 samples, you're looking at **50× the runtime** for no good reason. Your computer has multiple cores sitting unused.
 
 ---
 
@@ -496,25 +494,26 @@ What happens with 50 samples? Or 500?
 # That's 500 × 4GB = 2TB RAM required!
 ```
 
-Your machine would crash from memory exhaustion.
+Your machine would crash from memory exhaustion. Bash's `&` has no concept of resource limits - it just launches everything at once.
 
 !!! question "How would you limit concurrent jobs?"
 
-    You'd need to track running jobs, wait when at the limit, and start new jobs as others complete. That's 20-30 lines of infrastructure code that has nothing to do with your science.
+    You'd need to track running jobs, wait when at the limit, and start new jobs as others complete. That's 20-30 lines of infrastructure code that has nothing to do with your science. And you'd have to maintain it, debug it, and hope it works correctly under all conditions.
 
 ---
 
 ### 1.6. The Pain Points
 
-We won't implement these, but consider what you'd need for a production pipeline:
+We won't implement these, but consider what you'd need for a production-ready pipeline:
 
 #### Failure Recovery
 
 If Salmon fails on sample 47 of 50, what happens?
 
-- Everything stops
-- No record of what completed
-- You'd need checkpoint logic (40+ lines)
+- With `set -e`, everything stops immediately
+- You have no record of which 46 samples completed successfully
+- To resume, you'd need to manually figure out what finished and what didn't
+- Implementing proper checkpoint logic would add 40+ lines of file-based state tracking
 
 #### Reproducibility
 
@@ -524,18 +523,20 @@ When your colleague tries to run your script:
 salmon: command not found
 ```
 
-Or worse - they have salmon 1.4.0 but you used 1.10.3. Results differ silently.
+They need to replicate your exact conda environment - same tool versions, same dependencies.
+
+Or worse - they have salmon 1.4.0 but you used 1.10.3. The script runs fine, but results differ silently. Months later, you can't reproduce your own analysis because conda updated something.
 
 #### Scaling to Cluster
 
-Your SLURM cluster needs completely different scripts:
+Your laptop worked fine for 3 samples. For 500 samples, you need the SLURM cluster:
 
 ```bash
 #SBATCH --job-name=salmon
 #SBATCH --cpus-per-task=4
 ```
 
-Your collaborator's PBS cluster needs yet another rewrite.
+Now you're rewriting the entire script with job arrays, dependency tracking, and cluster-specific syntax. Your collaborator's PBS cluster needs yet another rewrite. Each environment requires maintaining a separate codebase.
 
 ---
 
@@ -569,31 +570,29 @@ At each step, we'll call back to the bash equivalent.
 
 ### 2.1. What is Nextflow?
 
-Nextflow is a workflow manager. It handles the infrastructure so you can focus on the science:
-
-- **You declare** what processes exist and what data they need
-- **Nextflow figures out** parallelization, scheduling, error handling
+Nextflow is a workflow manager. Instead of writing imperative scripts that say "do this, then do that," you **declare** what processes exist and how data flows between them. Nextflow handles everything else - the parallelization, scheduling, error handling, and resource management you'd otherwise write yourself.
 
 #### Key Concepts
 
-| Concept | What It Is |
-|---------|------------|
-| **Process** | A unit of work (like running FastQC on one sample) |
-| **Channel** | A queue of data flowing between processes |
-| **Workflow** | How processes connect together |
+| Concept | What It Is | Bash Equivalent |
+|---------|------------|-----------------|
+| **Process** | A unit of work (like running FastQC on one sample) | A function or script |
+| **Channel** | A queue of data flowing between processes | Variables passed between commands |
+| **Workflow** | How processes connect together | The order of commands in your script |
+
+The key difference: in bash, you explicitly manage data flow with variables and file paths. In Nextflow, you declare what each process needs, and Nextflow figures out the execution order automatically.
 
 #### No Tool Installation Needed
 
-Remember installing FastQC, fastp, Salmon with conda?
+Remember installing FastQC, fastp, and Salmon with conda? Hoping dependencies wouldn't conflict? Documenting exactly which versions you used?
 
-With Nextflow, each process declares its own container.
-The tools install themselves, on-demand, with exact versions.
+With Nextflow, each process declares its own container. The tools download automatically, on-demand, with exact versions locked. Your colleague runs the same pipeline and gets the exact same software environment - no conda setup required.
 
 ---
 
 ### 2.2. Your First Process: FastQC
 
-In Nextflow, each tool runs inside a **process** - a self-contained unit that declares its inputs, outputs, and command. You don't write loops or job management; you just describe what each process needs and produces.
+In bash, you wrote FastQC commands inside loops, managed file paths with variables, and handled parallelization with `&`. In Nextflow, each tool runs inside a **process** - a self-contained unit that declares its inputs, outputs, and command. You don't write loops; Nextflow runs the process once per input item automatically.
 
 Open `nextflow/modules/fastqc.nf` to see the process structure:
 
@@ -625,17 +624,17 @@ process FASTQC {
 
 #### Understanding the Process Structure
 
-The starter file provides the "infrastructure" parts you'd write the same way every time:
+The starter file provides the "infrastructure" parts:
 
-- **`tag`** - Labels each job with the sample ID (visible in logs)
-- **`container`** - The Docker image containing FastQC (no manual installation!)
-- **`publishDir`** - Where to copy final outputs
+- **`tag`** - Labels each job with the sample ID (visible in logs) - like your `echo "Processing: $sample_id"` statements
+- **`container`** - The Docker image containing FastQC - replaces your entire conda environment setup
+- **`publishDir`** - Where to copy final outputs - replaces your `results/fastqc` path management
 
-Your job is to define the **data flow** - what goes in, what comes out, and what command runs. These are the learning outcomes for this section.
+Your job is to define the **data flow** - what goes in, what comes out, and what command runs. Notice you're not writing any loop logic, file existence checks, or error handling - Nextflow handles all of that.
 
 #### 2.2.1. Fill in the Input
 
-Nextflow processes receive data through **channels**. We need to declare what shape of data this process expects.
+In bash, you passed data to your function using positional arguments (`$1`, `$2`, `$3`). In Nextflow, processes receive data through **channels** - and you declare the expected structure explicitly.
 
 === "After"
 
@@ -654,14 +653,14 @@ Nextflow processes receive data through **channels**. We need to declare what sh
 
 This declaration tells Nextflow: "I expect a tuple (a grouped set of values) containing two things":
 
-- **`val(meta)`** - A value (metadata map like `[id: "WT_REP1"]`) - stays in memory
-- **`path(reads)`** - File path(s) to stage into the working directory
+- **`val(meta)`** - A value (metadata map like `[id: "WT_REP1"]`) - like your `$sample_id` variable
+- **`path(reads)`** - File paths to stage into the working directory - like your `$fastq_r1` and `$fastq_r2`
 
-The `val()` vs `path()` distinction matters: `path()` tells Nextflow to make files available in the task's working directory, while `val()` passes data directly.
+The `path()` qualifier is important: it tells Nextflow to physically stage these files into each task's isolated working directory. You don't manage file paths yourself - Nextflow handles it.
 
 #### 2.2.2. Fill in the Output
 
-Outputs declare what files the process produces. This is how Nextflow knows what to pass to downstream processes.
+In bash, you just wrote files to paths and hoped downstream code could find them. In Nextflow, you explicitly declare what files the process produces - this is how Nextflow knows what to pass to downstream processes and enables automatic dependency tracking.
 
 === "After"
 
@@ -681,11 +680,11 @@ Outputs declare what files the process produces. This is how Nextflow knows what
 
 FastQC produces HTML reports and ZIP files. We capture both and pass along the metadata so downstream processes know which sample each file belongs to.
 
-The **`emit: html`** and **`emit: zip`** labels create named output channels. Later, you can access these as `FASTQC.out.html` or `FASTQC.out.zip`.
+The **`emit: html`** and **`emit: zip`** labels create named output channels - you can later access these as `FASTQC.out.html` or `FASTQC.out.zip`. This explicit declaration is what allows Nextflow to automatically determine execution order and enable caching.
 
 #### 2.2.3. Fill in the Script
 
-The script block contains the actual command - the same command you'd run in bash. Variables from the input block are available here.
+The script block contains the actual command - essentially the same as what you wrote in bash.
 
 === "After"
 
@@ -706,13 +705,13 @@ The script block contains the actual command - the same command you'd run in bas
     """
     ```
 
-The `${reads}` variable expands to both read files (they were staged as a list). This is the same FastQC command from your bash script, just with Nextflow variable substitution.
+This is nearly identical to your bash FastQC command. The `${reads}` variable expands to the file paths that were staged from the input declaration. You don't need `-o results/fastqc` because `publishDir` handles output location.
 
-!!! tip "Remember installing FastQC with conda?"
+!!! tip "Contrast with bash"
 
-    That entire setup is now **one line**: `container 'quay.io/biocontainers/fastqc:0.12.1--hdfd78af_0'`
+    In bash, you spent time installing FastQC with conda, activating environments, and hoping versions match.
 
-    The version is locked. Your colleague gets the same version. Always.
+    Here, the **one line** `container 'quay.io/biocontainers/fastqc:0.12.1--hdfd78af_0'` handles everything. The version is locked forever. Your colleague, your cluster, your cloud - all get the exact same FastQC.
 
 #### Call FASTQC in main.nf
 
@@ -744,19 +743,19 @@ executor >  local (3)
 [a1/b2c3d4] FASTQC (WT_REP1)           [100%] 3 of 3 ✔
 ```
 
-**All 3 samples ran in parallel automatically.** No `&`, no `wait`, no job tracking.
+**All 3 samples ran in parallel automatically.** Remember writing `&` and `wait` and worrying about resource limits? Nextflow figured out the optimal parallelization from your process definition alone. No infrastructure code required.
 
 ---
 
 ### 2.3. Adding fastp
 
-Now that you understand the process structure, let's add fastp. This process follows the same pattern but introduces one key difference: its output will be used by another process (Salmon needs the trimmed reads).
+Now add fastp following the same pattern. The key difference: fastp's output (trimmed reads) needs to flow to Salmon. In bash, you managed this with file paths like `results/fastp/${sample_id}_trimmed_R1.fastq.gz`. In Nextflow, you declare the output and let channels handle the data flow.
 
-Open `nextflow/modules/fastp.nf`. The structure is identical to FASTQC - fill in the input, output, and script blocks.
+Open `nextflow/modules/fastp.nf` and fill in the input, output, and script blocks.
 
 #### Complete fastp.nf
 
-Pay attention to the `emit: reads` on the trimmed reads output. This is how we'll connect fastp to Salmon.
+Pay attention to the `emit: reads` on the trimmed reads output - this names the output channel so Salmon can consume it.
 
 === "After"
 
@@ -828,25 +827,28 @@ Now connect FASTP to the sample channel in the workflow:
     // TODO: Call FASTP process with ch_samples
     ```
 
-!!! tip "Different container, no conflicts"
+!!! tip "Contrast with bash"
 
-    fastp uses a completely different container than FastQC.
-    They could even require incompatible Python versions - doesn't matter.
+    Remember hoping your conda environment wouldn't have dependency conflicts?
+
+    fastp uses a completely different container than FastQC. They could require incompatible Python versions or conflicting libraries - doesn't matter. Each process is isolated. No more "works on my machine" problems.
 
 ---
 
 ### 2.4. Connecting to Salmon
 
-This is where data flow gets interesting. Salmon needs **two** inputs:
+This is where Nextflow's data flow model really shines. In bash, you manually coordinated file paths - Salmon needed to know where fastp wrote its output. Here, you simply declare that Salmon needs fastp's output, and Nextflow handles the rest.
+
+Salmon needs **two** inputs:
 
 1. **Trimmed reads** - Different for each sample (from FASTP)
 2. **Reference index** - Same for all samples (from UNTAR)
 
-This is a common pattern: per-sample data combined with a shared reference.
+This is a common pattern: per-sample data combined with a shared reference. In bash, you'd check if the index exists with `if [ ! -d ... ]`. In Nextflow, the channel system handles this automatically.
 
 #### Complete salmon.nf
 
-The UNTAR process (which extracts the pre-built Salmon index) is already complete. Your task is to fill in SALMON_QUANT, which has **two input declarations** - one for the reads tuple and one for the index path:
+The UNTAR process (which extracts the pre-built Salmon index) is already complete. Your task is to fill in SALMON_QUANT, which has **two input declarations**:
 
 === "After"
 
@@ -905,8 +907,8 @@ The UNTAR process (which extracts the pre-built Salmon index) is already complet
 
 Notice two things in the script:
 
-- **`$task.cpus`** - Nextflow makes declared resources available as variables. If you later change `cpus 4` to `cpus 8`, the script automatically uses 8 threads.
-- **Two inputs** - The process receives the trimmed reads tuple and the index path separately.
+- **`$task.cpus`** - Nextflow makes declared resources available as variables. In bash, you hardcoded `--threads 2`. Here, you declare resources once (`cpus 4`) and reference them in the script. Change the declaration, and the script adapts automatically.
+- **Two inputs** - The process receives the trimmed reads tuple and the index path separately. In bash, you coordinated these with file paths. Here, the data flow is explicit.
 
 #### Wire It Up in main.nf
 
@@ -947,15 +949,19 @@ Watch what happens - Nextflow automatically determines the execution order from 
 - **SALMON_QUANT must wait for FASTP** - It needs the trimmed reads output
 - **Each sample runs independently** - Sample 2's Salmon can start as soon as Sample 2's fastp finishes, even if Sample 1 is still running
 
-!!! tip "Remember `&` and `wait`?"
+!!! tip "Contrast with bash"
 
-    Gone. Nextflow infers parallelization from the data flow.
+    Remember implementing `&` and `wait`? Then worrying about memory limits with 500 samples?
+
+    Gone. Nextflow infers parallelization from the data flow and respects resource declarations. You get optimal scheduling without writing any infrastructure code.
 
 ---
 
 ### 2.5. The Magic of Resume
 
-Run the pipeline, then modify something and run with `-resume`:
+Remember the bash pain point about failure recovery? If sample 47 failed, you had no record of what completed, and implementing checkpoint logic would take 40+ lines of state tracking.
+
+Run the Nextflow pipeline, then modify something and run with `-resume`:
 
 ```bash
 nextflow run main.nf -resume
@@ -968,16 +974,15 @@ nextflow run main.nf -resume
 [m3/n4o5p6] SALMON_QUANT       [100%] 3 of 3 ✔  <- Only this re-ran
 ```
 
-!!! tip "Remember the checkpointing nightmare?"
-
-    You'd need 40+ lines of state tracking.
-    Nextflow gives you `-resume`. **One flag.**
+Nextflow automatically tracks what completed successfully. Failed tasks can be fixed and re-run without repeating successful work. **One flag** (`-resume`) replaces 40+ lines of bash checkpoint logic you'd have to write and debug.
 
 ---
 
 ### 2.6. Configuration Profiles
 
-The `nextflow.config` file lets you run the same workflow anywhere:
+Remember the bash pain point about scaling to clusters? You'd need to rewrite your entire script with SLURM job arrays and cluster-specific syntax. Your collaborator on PBS would need yet another version.
+
+With Nextflow, the `nextflow.config` file lets you run the **same workflow** anywhere:
 
 ```bash
 # On your laptop
@@ -990,23 +995,21 @@ nextflow run main.nf -profile slurm
 nextflow run main.nf -profile aws
 ```
 
-!!! tip "Remember rewriting scripts for SLURM vs PBS?"
-
-    Same workflow. Same results. Different infrastructure.
+Same workflow code. Same scientific results. Different infrastructure. You write your analysis once, and configuration profiles adapt it to any environment.
 
 ---
 
 ### 2.7. Part 2 Summary
 
-| Feature | Bash | Nextflow |
-|---------|------|----------|
-| Tool installation | Manual conda | `container` directive |
-| Parallelization | `&` + `wait` + job limiting | Automatic from data flow |
-| Failure recovery | Manual checkpoint logic | `-resume` flag |
-| Resource management | Manual, error-prone | Declarative per-process |
-| Cluster/cloud | Complete rewrite | Same code, different profile |
+| Problem | Bash Approach | Nextflow Solution |
+|---------|---------------|-------------------|
+| Tool installation | Manual conda setup, pray for no conflicts | `container` directive - exact versions, isolated |
+| Parallelization | `&` + `wait`, risk OOM with many samples | Automatic from data flow, respects resources |
+| Failure recovery | Manual checkpoint logic (40+ lines) | `-resume` flag - one word |
+| Resource management | Hardcoded, error-prone | Declarative per-process, portable |
+| Cluster/cloud | Complete rewrite per environment | Same code, different profile |
 
-**Nextflow code is almost all science. Bash code is mostly infrastructure.**
+**The fundamental difference:** Your bash scripts mixed *what* to compute with *how* to compute it. Nextflow separates these concerns - you declare the science, Nextflow handles the infrastructure.
 
 ---
 
