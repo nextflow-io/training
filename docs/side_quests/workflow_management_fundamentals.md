@@ -178,13 +178,6 @@ Now let's fill in each step.
 
 #### 1.3.1. Add the Download Step
 
-=== "Before"
-
-    ```bash title="bash/process_sample.sh" linenums="17"
-    # Step 1: Download FASTQ files
-    # TODO: Add curl commands to download R1 and R2 files
-    ```
-
 === "After"
 
     ```bash title="bash/process_sample.sh" linenums="17" hl_lines="2-4"
@@ -194,14 +187,14 @@ Now let's fill in each step.
     curl -sL "$FASTQ_R2_URL" -o "data/fastq/${SAMPLE_ID}_R2.fastq.gz"
     ```
 
-#### 1.3.2. Add FastQC
-
 === "Before"
 
-    ```bash title="bash/process_sample.sh" linenums="22"
-    # Step 2: Run FastQC
-    # TODO: Add fastqc command
+    ```bash title="bash/process_sample.sh" linenums="17"
+    # Step 1: Download FASTQ files
+    # TODO: Add curl commands to download R1 and R2 files
     ```
+
+#### 1.3.2. Add FastQC
 
 === "After"
 
@@ -213,14 +206,14 @@ Now let's fill in each step.
         "data/fastq/${SAMPLE_ID}_R2.fastq.gz"
     ```
 
-#### 1.3.3. Add fastp
-
 === "Before"
 
-    ```bash title="bash/process_sample.sh" linenums="28"
-    # Step 3: Run fastp
-    # TODO: Add fastp command
+    ```bash title="bash/process_sample.sh" linenums="22"
+    # Step 2: Run FastQC
+    # TODO: Add fastqc command
     ```
+
+#### 1.3.3. Add fastp
 
 === "After"
 
@@ -237,14 +230,14 @@ Now let's fill in each step.
         2>/dev/null
     ```
 
-#### 1.3.4. Add Salmon Index Download
-
 === "Before"
 
-    ```bash title="bash/process_sample.sh" linenums="39"
-    # Step 4: Download salmon index (if needed)
-    # TODO: Add conditional download of salmon index
+    ```bash title="bash/process_sample.sh" linenums="28"
+    # Step 3: Run fastp
+    # TODO: Add fastp command
     ```
+
+#### 1.3.4. Add Salmon Index Download
 
 === "After"
 
@@ -259,14 +252,14 @@ Now let's fill in each step.
     fi
     ```
 
-#### 1.3.5. Add Salmon Quantification
-
 === "Before"
 
-    ```bash title="bash/process_sample.sh" linenums="48"
-    # Step 5: Run Salmon quantification
-    # TODO: Add salmon quant command
+    ```bash title="bash/process_sample.sh" linenums="39"
+    # Step 4: Download salmon index (if needed)
+    # TODO: Add conditional download of salmon index
     ```
+
+#### 1.3.5. Add Salmon Quantification
 
 === "After"
 
@@ -281,6 +274,13 @@ Now let's fill in each step.
         --output "results/salmon/${SAMPLE_ID}" \
         --threads 2 \
         --quiet
+    ```
+
+=== "Before"
+
+    ```bash title="bash/process_sample.sh" linenums="48"
+    # Step 5: Run Salmon quantification
+    # TODO: Add salmon quant command
     ```
 
 #### Test Your Script
@@ -311,23 +311,6 @@ Open `bash/pipeline_sequential.sh`. The loop structure is already there - you ne
 
 #### Add Processing Logic to the Loop
 
-=== "Before"
-
-    ```bash title="bash/pipeline_sequential.sh" linenums="26"
-    tail -n +2 "$SAMPLES_FILE" | while IFS=',' read -r sample_id fastq_r1 fastq_r2; do
-        echo ""
-        echo "Processing: $sample_id"
-
-        # TODO: Add the processing steps for each sample
-        # - Download FASTQ files
-        # - Run FastQC
-        # - Run fastp
-        # - Run Salmon
-
-        echo "  Done: $sample_id"
-    done
-    ```
-
 === "After"
 
     ```bash title="bash/pipeline_sequential.sh" linenums="26" hl_lines="5-24"
@@ -355,6 +338,23 @@ Open `bash/pipeline_sequential.sh`. The loop structure is already there - you ne
             --mates1 "results/fastp/${sample_id}_trimmed_R1.fastq.gz" \
             --mates2 "results/fastp/${sample_id}_trimmed_R2.fastq.gz" \
             --output "results/salmon/${sample_id}" --threads 2 --quiet
+
+        echo "  Done: $sample_id"
+    done
+    ```
+
+=== "Before"
+
+    ```bash title="bash/pipeline_sequential.sh" linenums="26"
+    tail -n +2 "$SAMPLES_FILE" | while IFS=',' read -r sample_id fastq_r1 fastq_r2; do
+        echo ""
+        echo "Processing: $sample_id"
+
+        # TODO: Add the processing steps for each sample
+        # - Download FASTQ files
+        # - Run FastQC
+        # - Run fastp
+        # - Run Salmon
 
         echo "  Done: $sample_id"
     done
@@ -400,6 +400,18 @@ Open `bash/pipeline_parallel.sh`. The function is already there - you just need 
 
 #### Add Background Execution
 
+=== "After"
+
+    ```bash title="bash/pipeline_parallel.sh" linenums="58" hl_lines="4 7"
+    # Process each sample in parallel
+    echo "Launching all samples in parallel..."
+    while IFS=',' read -r sample_id fastq_r1 fastq_r2; do
+        process_sample "$sample_id" "$fastq_r1" "$fastq_r2" &
+    done < <(tail -n +2 "$SAMPLES_FILE")
+
+    wait
+    ```
+
 === "Before"
 
     ```bash title="bash/pipeline_parallel.sh" linenums="58"
@@ -411,18 +423,6 @@ Open `bash/pipeline_parallel.sh`. The function is already there - you just need 
     done < <(tail -n +2 "$SAMPLES_FILE")
 
     # TODO: Add wait command to wait for all background jobs
-    ```
-
-=== "After"
-
-    ```bash title="bash/pipeline_parallel.sh" linenums="58" hl_lines="4 7"
-    # Process each sample in parallel
-    echo "Launching all samples in parallel..."
-    while IFS=',' read -r sample_id fastq_r1 fastq_r2; do
-        process_sample "$sample_id" "$fastq_r1" "$fastq_r2" &
-    done < <(tail -n +2 "$SAMPLES_FILE")
-
-    wait
     ```
 
 The key changes:
@@ -589,19 +589,19 @@ Notice that `tag`, `container`, and `publishDir` are already set. These aren't l
 
 #### 2.2.1. Fill in the Input
 
+=== "After"
+
+    ```groovy title="nextflow/modules/fastqc.nf" linenums="6" hl_lines="2"
+    input:
+    tuple val(meta), path(reads)
+    ```
+
 === "Before"
 
     ```groovy title="nextflow/modules/fastqc.nf" linenums="6"
     input:
     // TODO: Define input - a tuple with sample metadata and read files
     ???
-    ```
-
-=== "After"
-
-    ```groovy title="nextflow/modules/fastqc.nf" linenums="6" hl_lines="2"
-    input:
-    tuple val(meta), path(reads)
     ```
 
 This declares that FASTQC receives a tuple containing:
@@ -611,14 +611,6 @@ This declares that FASTQC receives a tuple containing:
 
 #### 2.2.2. Fill in the Output
 
-=== "Before"
-
-    ```groovy title="nextflow/modules/fastqc.nf" linenums="10"
-    output:
-    // TODO: Define outputs - HTML reports and ZIP files
-    ???
-    ```
-
 === "After"
 
     ```groovy title="nextflow/modules/fastqc.nf" linenums="10" hl_lines="2-3"
@@ -627,9 +619,26 @@ This declares that FASTQC receives a tuple containing:
     tuple val(meta), path("*.zip"), emit: zip
     ```
 
+=== "Before"
+
+    ```groovy title="nextflow/modules/fastqc.nf" linenums="10"
+    output:
+    // TODO: Define outputs - HTML reports and ZIP files
+    ???
+    ```
+
 FastQC produces HTML reports and ZIP files. We capture both and pass along the metadata.
 
 #### 2.2.3. Fill in the Script
+
+=== "After"
+
+    ```groovy title="nextflow/modules/fastqc.nf" linenums="14" hl_lines="3"
+    script:
+    """
+    fastqc --quiet --threads 2 ${reads}
+    """
+    ```
 
 === "Before"
 
@@ -638,15 +647,6 @@ FastQC produces HTML reports and ZIP files. We capture both and pass along the m
     // TODO: Add the fastqc command
     """
     ???
-    """
-    ```
-
-=== "After"
-
-    ```groovy title="nextflow/modules/fastqc.nf" linenums="14" hl_lines="3"
-    script:
-    """
-    fastqc --quiet --threads 2 ${reads}
     """
     ```
 
@@ -662,16 +662,16 @@ The `${reads}` variable expands to both read files.
 
 Open `nextflow/main.nf` and add the FASTQC call:
 
-=== "Before"
-
-    ```groovy title="nextflow/main.nf" linenums="34"
-    // TODO: Call FASTQC process with ch_samples
-    ```
-
 === "After"
 
     ```groovy title="nextflow/main.nf" linenums="34" hl_lines="1"
     FASTQC(ch_samples)
+    ```
+
+=== "Before"
+
+    ```groovy title="nextflow/main.nf" linenums="34"
+    // TODO: Call FASTQC process with ch_samples
     ```
 
 #### Test It
@@ -697,27 +697,6 @@ executor >  local (3)
 Open `nextflow/modules/fastp.nf` and fill in the placeholders using the same pattern as FASTQC.
 
 #### Complete fastp.nf
-
-=== "Before"
-
-    ```groovy title="nextflow/modules/fastp.nf"
-    process FASTP {
-        tag "$meta.id"
-        container 'quay.io/biocontainers/fastp:0.23.4--hadf994f_2'
-        publishDir "${params.outdir}/fastp", mode: 'copy'
-
-        input:
-        ???
-
-        output:
-        ???
-
-        script:
-        """
-        ???
-        """
-    }
-    ```
 
 === "After"
 
@@ -750,20 +729,41 @@ Open `nextflow/modules/fastp.nf` and fill in the placeholders using the same pat
     }
     ```
 
+=== "Before"
+
+    ```groovy title="nextflow/modules/fastp.nf"
+    process FASTP {
+        tag "$meta.id"
+        container 'quay.io/biocontainers/fastp:0.23.4--hadf994f_2'
+        publishDir "${params.outdir}/fastp", mode: 'copy'
+
+        input:
+        ???
+
+        output:
+        ???
+
+        script:
+        """
+        ???
+        """
+    }
+    ```
+
 Note the `emit: reads` - this names the output channel so downstream processes can use it.
 
 #### Call FASTP in main.nf
-
-=== "Before"
-
-    ```groovy title="nextflow/main.nf" linenums="36"
-    // TODO: Call FASTP process with ch_samples
-    ```
 
 === "After"
 
     ```groovy title="nextflow/main.nf" linenums="36" hl_lines="1"
     FASTP(ch_samples)
+    ```
+
+=== "Before"
+
+    ```groovy title="nextflow/main.nf" linenums="36"
+    // TODO: Call FASTP process with ch_samples
     ```
 
 !!! tip "Different container, no conflicts"
@@ -780,30 +780,6 @@ Now the interesting part - Salmon needs fastp's output (trimmed reads) plus a re
 #### Complete salmon.nf
 
 The UNTAR process is already complete. Fill in SALMON_QUANT:
-
-=== "Before"
-
-    ```groovy title="nextflow/modules/salmon.nf" linenums="17"
-    process SALMON_QUANT {
-        tag "$meta.id"
-        container 'quay.io/biocontainers/salmon:1.10.3--h6dccd9a_2'
-        publishDir "${params.outdir}/salmon", mode: 'copy'
-
-        cpus 4
-        memory '8.GB'
-
-        input:
-        ???
-
-        output:
-        ???
-
-        script:
-        """
-        ???
-        """
-    }
-    ```
 
 === "After"
 
@@ -836,9 +812,39 @@ The UNTAR process is already complete. Fill in SALMON_QUANT:
     }
     ```
 
+=== "Before"
+
+    ```groovy title="nextflow/modules/salmon.nf" linenums="17"
+    process SALMON_QUANT {
+        tag "$meta.id"
+        container 'quay.io/biocontainers/salmon:1.10.3--h6dccd9a_2'
+        publishDir "${params.outdir}/salmon", mode: 'copy'
+
+        cpus 4
+        memory '8.GB'
+
+        input:
+        ???
+
+        output:
+        ???
+
+        script:
+        """
+        ???
+        """
+    }
+    ```
+
 Notice `$task.cpus` - Nextflow makes the declared resources available to your script.
 
 #### Wire It Up in main.nf
+
+=== "After"
+
+    ```groovy title="nextflow/main.nf" linenums="38" hl_lines="1"
+    SALMON_QUANT(FASTP.out.reads, UNTAR.out.index.first())
+    ```
 
 === "Before"
 
@@ -846,12 +852,6 @@ Notice `$task.cpus` - Nextflow makes the declared resources available to your sc
     // TODO: Call SALMON_QUANT with FASTP output and the index
     // Hint: Use FASTP.out.reads for the trimmed reads
     // Hint: Use UNTAR.out.index.first() for the index
-    ```
-
-=== "After"
-
-    ```groovy title="nextflow/main.nf" linenums="38" hl_lines="1"
-    SALMON_QUANT(FASTP.out.reads, UNTAR.out.index.first())
     ```
 
 The `.first()` converts the index channel to a value that's reused for all samples.
