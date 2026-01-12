@@ -94,6 +94,86 @@ docker exec -e LANG=C.UTF-8 -e LC_ALL=C.UTF-8 -w /workspaces/training/side-quest
 docker stop nf-training && docker rm nf-training
 ```
 
+### Docker-outside-of-Docker (DooD) for Containerized Processes
+
+Many tutorials use Nextflow processes with `container` directives (e.g., FASTP, BWA, SAMTOOLS). In Codespaces/Gitpod, Docker-in-Docker is pre-configured. For **local testing**, you need Docker-outside-of-Docker (DooD) to run containerized processes.
+
+**When DooD is needed**: Any tutorial where processes specify containers, including:
+
+- `hello_nextflow` (later lessons with containers)
+- `nf4_science/genomics` and other domain modules
+- Side quests like `essential_scripting_patterns`, `metadata`, etc.
+
+#### DooD Container Setup
+
+The key differences from basic setup:
+
+1. **Mount the Docker socket** to allow Nextflow to spawn sibling containers
+2. **Use matching host paths** so work directories resolve correctly between containers
+
+```bash
+# Clean up any existing container
+docker stop nf-training 2>/dev/null; docker rm nf-training 2>/dev/null
+
+# Get NXF_VER and host path
+NXF_VER=$(grep -o '"NXF_VER":\s*"[^"]*"' .devcontainer/devcontainer.json | cut -d'"' -f4)
+HOST_PATH="${PWD}"
+
+# Start container with DooD support
+docker run -d --name nf-training \
+  -e NXF_VER=${NXF_VER} \
+  -e LANG=C.UTF-8 \
+  -e LC_ALL=C.UTF-8 \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  -v "${HOST_PATH}:${HOST_PATH}" \
+  -w "${HOST_PATH}" \
+  ghcr.io/nextflow-io/training:latest \
+  sleep infinity
+```
+
+**Critical**: The `-v "${HOST_PATH}:${HOST_PATH}"` mount ensures paths match between the training container and any containers Nextflow spawns. Without this, you'll see `.command.sh: No such file or directory` errors.
+
+#### Running Commands with DooD
+
+```bash
+docker exec -e LANG=C.UTF-8 -e LC_ALL=C.UTF-8 -e USER=testuser \
+  -w ${HOST_PATH}/[working-dir] \
+  nf-training \
+  nextflow run [script.nf] [options]
+```
+
+#### Apple Silicon (ARM) Macs: Platform Emulation
+
+Most bioinformatics containers are built for x86_64/amd64. On ARM Macs, you need platform emulation:
+
+1. Create a Nextflow config with platform option:
+
+```bash
+docker exec nf-training bash -c 'cat > /tmp/platform.config << EOF
+docker.runOptions = "--platform linux/amd64"
+EOF'
+```
+
+2. Include the config when running:
+
+```bash
+docker exec -e LANG=C.UTF-8 -e LC_ALL=C.UTF-8 -e USER=testuser \
+  -w ${HOST_PATH}/side-quests/essential_scripting_patterns \
+  nf-training \
+  nextflow run main.nf -c /tmp/platform.config
+```
+
+**Note**: Platform emulation uses more memory. If you encounter OOM errors (exit code 137), increase Docker Desktop's memory allocation in Preferences → Resources.
+
+#### Troubleshooting DooD
+
+| Error | Cause | Solution |
+|-------|-------|----------|
+| `Cannot connect to Docker daemon` | Socket not mounted | Add `-v /var/run/docker.sock:/var/run/docker.sock` |
+| `.command.sh: No such file or directory` | Path mismatch | Use matching paths: `-v "${HOST_PATH}:${HOST_PATH}"` |
+| `exec format error` | ARM/x86 mismatch | Add `--platform linux/amd64` to docker.runOptions |
+| Exit code 137 (OOM) | Insufficient memory | Increase Docker Desktop memory allocation |
+
 ---
 
 ## Working Directory Setup
