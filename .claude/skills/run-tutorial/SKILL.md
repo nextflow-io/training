@@ -386,9 +386,12 @@ Before making any changes, clearly present:
 1. **Summary of proposed fixes** - List each fix with:
 
    - File and line number
+   - **Actual section heading** (read from the document, don't guess!)
    - What the current content is
    - What the proposed fix would be
    - Why this fix is needed
+
+**CRITICAL**: Always verify section numbers by reading the document. Do NOT guess or infer section numbers. Search for the nearest `### N.N.` heading above the line you're referencing and use that exact text.
 
 2. **Ask for user approval** using AskUserQuestion:
 
@@ -435,6 +438,8 @@ Only after user approval:
 
 #### 4.4 PR Body Format
 
+**IMPORTANT**: Before writing the PR body, read the document to verify the actual section headings for each fix. Do not guess section numbers.
+
 ```markdown
 ## Summary
 
@@ -442,14 +447,9 @@ Fixes issues found during tutorial walkthrough testing.
 
 ## Changes
 
-- [File]: [description of fix]
-- [File]: [description of fix]
-
-## Issues Fixed
-
-| Issue         | Severity      | Fix Applied        |
-| ------------- | ------------- | ------------------ |
-| [description] | Minor/Warning | [what was changed] |
+| Location | Before | After | Reason |
+|----------|--------|-------|--------|
+| Section X.Y (exact title from doc) | old value | new value | explanation |
 
 ## Testing
 
@@ -464,6 +464,8 @@ Fixes issues found during tutorial walkthrough testing.
 
 ## Output Format
 
+**IMPORTANT**: When referencing sections in your report, always read the actual section heading from the document. Do not guess or infer section numbers - search for `### N.N.` headings near the relevant line numbers.
+
 ```
 # Tutorial Walkthrough: [lesson-name]
 
@@ -472,7 +474,7 @@ Fixes issues found during tutorial walkthrough testing.
 - Nextflow version: [from devcontainer.json]
 - Working directory: /workspaces/training/[path]
 
-## Section 0: [title]
+## Section 0: [exact title from document]
 
 ### State Verification
 - Current file matches "Before": ✓
