@@ -32,6 +32,7 @@ Walk through a training tutorial lesson as a learner would, progressively buildi
 - **Existing environment** - User has already set up an environment (just use it as-is)
 
 **Why Docker is recommended**: The training materials are designed for the Codespaces/Gitpod environment which uses the `ghcr.io/nextflow-io/training:latest` image. This image has:
+
 - Java 21 (required for plugin development)
 - All dependencies pre-configured
 - Nextflow version controlled via `NXF_VER` environment variable
@@ -82,6 +83,7 @@ docker exec -e LANG=C.UTF-8 -e LC_ALL=C.UTF-8 -w /workspaces/training/[working-d
 ```
 
 Example:
+
 ```bash
 docker exec -e LANG=C.UTF-8 -e LC_ALL=C.UTF-8 -w /workspaces/training/side-quests/plugin_development nf-training nextflow run main.nf
 ```
@@ -96,12 +98,12 @@ docker stop nf-training && docker rm nf-training
 
 ## Working Directory Setup
 
-| Tutorial Type | Documentation | Working Directory | Solutions |
-|--------------|---------------|-------------------|-----------|
-| hello_nextflow | `docs/hello_nextflow/` | `hello-nextflow/` | `hello-nextflow/solutions/` |
-| hello_nf-core | `docs/hello_nf-core/` | `hello-nf-core/` | `hello-nf-core/solutions/` |
+| Tutorial Type        | Documentation                | Working Directory       | Solutions                         |
+| -------------------- | ---------------------------- | ----------------------- | --------------------------------- |
+| hello_nextflow       | `docs/hello_nextflow/`       | `hello-nextflow/`       | `hello-nextflow/solutions/`       |
+| hello_nf-core        | `docs/hello_nf-core/`        | `hello-nf-core/`        | `hello-nf-core/solutions/`        |
 | nf4_science/genomics | `docs/nf4_science/genomics/` | `nf4-science/genomics/` | `nf4-science/genomics/solutions/` |
-| side_quests/* | `docs/side_quests/*.md` | `side-quests/<name>/` | `side-quests/solutions/<name>/` |
+| side_quests/\*       | `docs/side_quests/*.md`      | `side-quests/<name>/`   | `side-quests/solutions/<name>/`   |
 
 ---
 
@@ -182,6 +184,7 @@ diff -u [built-file] [solution-file]
 #### 3.2 Run `/test-example` on Solution Files
 
 Invoke the `/test-example` skill on each solution file to verify:
+
 - Fresh run works
 - Resume functionality (processes should cache)
 - Parameter handling (if applicable)
@@ -213,12 +216,14 @@ If the walkthrough identified any fixable issues, offer to create a PR with the 
 Categorize issues into:
 
 **Auto-fixable** (can fix programmatically):
+
 - Extra/missing whitespace in code blocks
 - Incorrect `hl_lines` values
 - Heading numbering errors (use `--fix` flag)
 - Minor formatting inconsistencies
 
 **Requires manual review** (present to user for decision):
+
 - Content accuracy issues
 - Missing steps in documentation
 - Incorrect command outputs
@@ -248,11 +253,13 @@ Before making any changes, clearly present:
 Only after user approval:
 
 1. **Create a new branch**:
+
    ```bash
    git checkout -b fix/[tutorial-name]-walkthrough-fixes
    ```
 
 2. **Stage and commit changes**:
+
    ```bash
    git add [modified-files]
    git commit -m "Fix issues in [tutorial-name] tutorial
@@ -265,6 +272,7 @@ Only after user approval:
    ```
 
 3. **Push and create PR**:
+
    ```bash
    git push -u origin fix/[tutorial-name]-walkthrough-fixes
    gh pr create --title "Fix issues in [tutorial-name] tutorial" --body "..."
@@ -276,18 +284,22 @@ Only after user approval:
 
 ```markdown
 ## Summary
+
 Fixes issues found during tutorial walkthrough testing.
 
 ## Changes
+
 - [File]: [description of fix]
 - [File]: [description of fix]
 
 ## Issues Fixed
-| Issue | Severity | Fix Applied |
-|-------|----------|-------------|
+
+| Issue         | Severity      | Fix Applied        |
+| ------------- | ------------- | ------------------ |
 | [description] | Minor/Warning | [what was changed] |
 
 ## Testing
+
 - [x] Tutorial walkthrough completed successfully after fixes
 - [x] All commands execute as documented
 - [x] Output matches documentation
@@ -394,11 +406,11 @@ Report the actual results from the /test-example skill:
 
 This skill invokes `/validate` and `/test-example` automatically. Use individual skills when:
 
-| Situation | Use Instead |
-|-----------|-------------|
-| Quick check of just highlights or structure | `/validate` alone |
-| Testing a script outside tutorial context | `/test-example` alone |
-| Finding TODO items across the codebase | `/find-todos` |
+| Situation                                   | Use Instead           |
+| ------------------------------------------- | --------------------- |
+| Quick check of just highlights or structure | `/validate` alone     |
+| Testing a script outside tutorial context   | `/test-example` alone |
+| Finding TODO items across the codebase      | `/find-todos`         |
 
 ---
 
@@ -407,6 +419,7 @@ This skill invokes `/validate` and `/test-example` automatically. Use individual
 ### Exercises
 
 When encountering `??? exercise` blocks:
+
 1. Attempt the exercise based on instructions given
 2. Check against `??? solution` block
 3. Report if instructions are unclear or incomplete
@@ -414,6 +427,7 @@ When encountering `??? exercise` blocks:
 ### Branching/Optional Steps
 
 Some tutorials have optional paths:
+
 - Note which path was taken
 - Ask user if they want to test alternative paths
 - Document any untested branches
