@@ -133,6 +133,14 @@ Why is sample_02 waiting for sample_01 to finish QUAST before it can start FastQ
 
 You *could* add parallelization to your bash script with `&` and `wait`, but that adds complexity, error handling, and resource management headaches.
 
+??? question "Think about it"
+
+    Before seeing the solution, consider:
+
+    - How would you modify the bash script to run samples in parallel?
+    - What happens if you try to run 50 SPAdes assemblies simultaneously on a laptop with 16GB RAM?
+    - How would you limit concurrent jobs to match available resources?
+
 ### 1.3. Solution: Automatic Parallelization
 
 Now run the same pipeline with Nextflow:
@@ -219,6 +227,14 @@ Your options with bash:
 2. **Manually track progress** - Comment out completed samples, hope you don't make mistakes
 3. **Build checkpoint logic** - Hours of additional coding for something that isn't your science
 
+??? question "Think about it"
+
+    Before seeing the solution, consider:
+
+    - How would you implement checkpointing in a bash script?
+    - What if the failure happened on sample 47 of 50? How much time would you lose?
+    - How would you know which tasks are safe to skip vs. which need re-running?
+
 ### 2.3. Solution: Built-in Resume
 
 With Nextflow, fix the issue (increase memory) and resume:
@@ -301,6 +317,14 @@ This causes real problems:
 - **Paper reviewers can't verify** your analysis
 - **Future you** has no idea what versions you used
 
+??? question "Think about it"
+
+    Before seeing the solution, consider:
+
+    - How would you share your analysis with a collaborator so they get identical results?
+    - What if your pipeline needs tools that require incompatible dependencies (e.g., Python 2.7 vs Python 3.11)?
+    - How would you document *exactly* which software versions were used for a publication?
+
 ### 3.3. Solution: Per-Process Containers
 
 In Nextflow, each process declares its exact software environment:
@@ -368,6 +392,26 @@ process TOOL_B {
 
 They run in separate containers. No conflicts.
 
+### 3.6. Effortless Collaboration
+
+With containers, sharing your analysis is trivial:
+
+```bash
+# You send your colleague:
+git clone https://github.com/your-lab/bacterial-assembly
+cd bacterial-assembly
+nextflow run main.nf -profile docker --samples their_data.csv
+```
+
+**Same workflow. Same containers. Same results.**
+No "can you send me your installation notes?" emails.
+
+This enables:
+
+- **Reproducible science** - Reviewers can verify your analysis
+- **Collaborative research** - Teams get identical results
+- **Shared pipelines** - Communities like [nf-core](https://nf-co.re/) publish production-ready workflows
+
 ### Takeaway
 
 Bash scripts are environment-dependent and not reproducible.
@@ -388,6 +432,14 @@ For bash, you need to think about:
 - How do you manage resource contention?
 - What if different steps need different resources?
 - How do you handle partial failures across 50 samples?
+
+??? question "Think about it"
+
+    Before seeing the solution, consider:
+
+    - How would you modify your bash script to handle 50 samples? 500 samples?
+    - SPAdes needs 16GB RAM, FastQC needs 2GB. How do you prevent memory exhaustion?
+    - What changes are needed to move from your laptop to a cluster with 100 nodes?
 
 ### 4.2. Solution: Declarative Scaling
 
@@ -454,6 +506,14 @@ Your bash script ran. Now answer these questions:
 With bash, you'd need to manually add logging, timing, and resource monitoring.
 That's a lot of code that has nothing to do with your science.
 
+??? question "Think about it"
+
+    Before seeing the solution, consider:
+
+    - How would you write the "Methods" section of a paper based on your bash script?
+    - If a reviewer asks "how long did assembly take for each sample?", can you answer?
+    - How would you identify which step is causing out-of-memory errors?
+
 ### 5.2. Solution: Automatic Provenance
 
 Nextflow generates comprehensive reports automatically:
@@ -499,7 +559,7 @@ Every task tracked: duration, CPU usage, memory consumption, exit status.
 Perfect for:
 
 - **Optimization** - Which step is the bottleneck?
-- **Cost estimation** - How much will this cost on cloud?
+- **Resource planning** - How much memory does assembly actually need?
 - **Publication** - Methods section writes itself
 - **Debugging** - Why did sample_42 fail?
 
@@ -526,6 +586,14 @@ Each environment needs different:
 - Resource request syntax
 - File path conventions
 - Container runtimes (Docker vs Singularity)
+
+??? question "Think about it"
+
+    Before seeing the solution, consider:
+
+    - How many different versions of your script would you need to maintain?
+    - What if the cluster uses Singularity but your laptop uses Docker?
+    - How do you ensure identical results across different execution environments?
 
 ### 6.2. Solution: Configuration Profiles
 
