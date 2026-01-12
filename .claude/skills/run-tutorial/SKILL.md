@@ -53,27 +53,37 @@ This ensures you use the same version learners get in Codespaces.
 
 ### Start a persistent container
 
-Start a container that stays running for the duration of the walkthrough:
+First, clean up any existing container, then start a new one:
 
 ```bash
+# Clean up any existing container
+docker stop nf-training 2>/dev/null; docker rm nf-training 2>/dev/null
+
+# Start fresh container with UTF-8 locale support
 NXF_VER=$(grep -o '"NXF_VER":\s*"[^"]*"' .devcontainer/devcontainer.json | cut -d'"' -f4)
 docker run -d --name nf-training \
   -e NXF_VER=${NXF_VER} \
+  -e LANG=C.UTF-8 \
+  -e LC_ALL=C.UTF-8 \
   -v ${PWD}:/workspaces/training \
   -w /workspaces/training \
   ghcr.io/nextflow-io/training:latest \
   sleep infinity
 ```
 
+**Important**: The `LANG=C.UTF-8` and `LC_ALL=C.UTF-8` environment variables are critical for handling non-ASCII characters (like "Holà", "Grüß Gott") in file names and content. Without these, Nextflow may fail with "Malformed input or input contains unmappable characters" errors.
+
 ### Run commands in the container
 
+Always include UTF-8 locale settings when executing commands:
+
 ```bash
-docker exec -w /workspaces/training/[working-dir] nf-training [command]
+docker exec -e LANG=C.UTF-8 -e LC_ALL=C.UTF-8 -w /workspaces/training/[working-dir] nf-training [command]
 ```
 
 Example:
 ```bash
-docker exec -w /workspaces/training/side-quests/plugin_development nf-training nextflow run main.nf
+docker exec -e LANG=C.UTF-8 -e LC_ALL=C.UTF-8 -w /workspaces/training/side-quests/plugin_development nf-training nextflow run main.nf
 ```
 
 ### Clean up when done
@@ -235,26 +245,46 @@ rm -rf [working-directory]/[any-created-directories]  # e.g., nf-greeting for pl
 - Parameter test: ✓
 
 ## Validation Results (from /validate)
-- Heading structure: ✓
-- Code block highlights: ✓ (or list issues)
-- Pedagogical quality: ✓
-- Admonition syntax: ✓
+
+Report the actual results from the /validate skill:
+
+- Heading numbering: ✓ 0 errors (or list specific issues with file:line)
+- Code block highlights: ✓ All N blocks correct (or list incorrect hl_lines with what they highlight vs. what they should)
+- TODO/FIXME comments: ✓ None found (or "Found N: list locations")
+- Admonition syntax: ✓ All N properly formatted (or list malformed ones)
+- Nextflow script conventions: ✓ All scripts have shebang and follow DSL2
+- Orphaned files: ✓ All files referenced in mkdocs.yml
 
 ## Solution Tests (from /test-example)
-- main.nf: ✓ All tests passed
-- bonus.nf: ✓ All tests passed
+
+Report the actual results from the /test-example skill:
+
+- [script-name].nf:
+  - Fresh run: ✓ Completed (N processes)
+  - Resume test: ✓ All cached
+  - Output verification: ✓ Files match documentation
+- [other-script].nf: ✓ All tests passed
 
 ## Summary
-- Sections completed: 5/5
-- State mismatches found: 0
-- Command failures: 0
-- Output discrepancies: 1 (Section 3, minor formatting)
-- Solution match: ✓
-- Validation issues: 0
-- Solution test failures: 0
+- Sections completed: N/N
+- State mismatches found: N
+- Command failures: N
+- Output discrepancies: N
+- Solution match: ✓ / ⚠ (minor whitespace) / ✗ (significant differences)
+- Validation issues: N
+- Solution test failures: N
 
 ## Issues Found
-[List any problems that would block or confuse a learner]
+[List any problems that would block or confuse a learner, organized by severity]
+
+### Critical (blocks tutorial completion)
+- [issue description]
+
+### Warning (confusing but workable)
+- [issue description]
+
+### Minor (cosmetic or documentation-only)
+- [issue description]
 ```
 
 ---
