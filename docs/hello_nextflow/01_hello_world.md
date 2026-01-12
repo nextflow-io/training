@@ -200,9 +200,9 @@ In the terminal, run the following command:
 nextflow run hello-world.nf
 ```
 
-??? success "Command output" hl_lines="6"
+??? success "Command output"
 
-    ```console
+    ```console hl_lines="6"
     N E X T F L O W   ~  version 25.10.2
 
     Launching `hello-world.nf` [goofy_torvalds] DSL2 - revision: c33d41f479
@@ -292,7 +292,7 @@ You know how to decipher a simple Nextflow script, run it and find the output an
 
 ### What's next?
 
-Learn how to 'publish' the workflow outputs to a more convenient location.
+Learn how to publish the workflow outputs to a more convenient location.
 
 ---
 
@@ -302,7 +302,7 @@ As you have just learned, the output produced by our pipeline is buried in a wor
 This is done on purpose; Nextflow is in control of this directory and we are not supposed to interact with it.
 However, that makes it inconvenient to retrieve outputs that we care about.
 
-Fortunately, Nextflow provides a way to 'publish' outputs to a designated directory using [workflow-level output definitions](https://www.nextflow.io/docs/latest/workflow.html#workflow-outputs).
+Fortunately, Nextflow provides a way to publish outputs to a designated directory using [workflow-level output definitions](https://www.nextflow.io/docs/latest/workflow.html#workflow-outputs).
 
 ### 2.1. Basic usage
 
@@ -319,7 +319,7 @@ In the workflow script file `hello-world.nf`, add the following lines of code:
 
 === "After"
 
-    ```groovy title="hello-world.nf" linenums="17" hl_lines="23-24"
+    ```groovy title="hello-world.nf" linenums="17" hl_lines="7-8"
     workflow {
 
         main:
@@ -352,7 +352,7 @@ In the workflow script file `hello-world.nf`, add the following lines of code:
 
 === "After"
 
-    ```groovy title="hello-world.nf" linenums="17" hl_lines="27-31"
+    ```groovy title="hello-world.nf" linenums="17" hl_lines="11-15"
     workflow {
 
         main:
@@ -465,7 +465,7 @@ To set a custom location, just edit the `path` accordingly:
 
 === "Before"
 
-    ```groovy title="hello-world.nf" linenums="27"
+    ```groovy title="hello-world.nf" linenums="27" hl_lines="3"
     output {
         first_output {
             path '.'
@@ -505,8 +505,9 @@ This time the result gets written under the specified subdirectory.
     └── output.txt -> /workspaces/training/hello-nextflow/work/65/f56f2cd75df1352e106fcdd084b97b/output.txt
     ```
 
-You can use as many levels of nesting as you'd like.
+You see the result from the previous execution is still there.
 
+You can use as many levels of nesting as you'd like.
 It is also possible to use the process name or other variables to name the directories used to organize results, and it is possible to change the default name of the top-level output directory (which is controlled by the special variable `outputDir`).
 We will cover these options in later trainings.
 
@@ -580,31 +581,28 @@ This time, if you look at the results, the file is a proper copy instead of just
     ```
 
 Since this too is set at the level of the individual output, it allows you to set the publish mode in a granular way.
-This is come in especially handy later when we move on to multi-step pipelines, where you might want to only copy final outputs and leave intermediate outputs as symlinks, for example.
+This will come in especially handy later when we move on to multi-step pipelines, where you might want to only copy final outputs and leave intermediate outputs as symlinks, for example.
 
 As noted earlier, there are other, more sophisticated options for controlling how outputs are published.
 We'll show you how to use them in due time in your Nextflow journey.
 
-### 2.4. Process-level `publishDir` directive (FYI)
+### 2.4. (FYI) Process-level `publishDir` directive
 
 Until very recently, the established way to publish outputs was to do it at the level of each individual process using a `publishDir` directive.
 
 To achieve what we just did for the outputs of the `sayHello` process, we would have instead added the following line to the process definition:
 
-```groovy title="hello-world.nf" linenums="6" hl_lines="2"
+```groovy title="hello-world.nf" linenums="6" hl_lines="3"
 process sayHello {
 
     publishDir 'results/hello_world', mode: 'copy'
-
-    input:
-    val greeting
 
     output:
     path 'output.txt'
 
     script:
     """
-    echo '$greeting' > output.txt
+    echo 'Hello World!' > output.txt
     """
 }
 ```
@@ -685,7 +683,7 @@ In the process block, make the following code change:
 
 === "Before"
 
-    ```groovy title="hello-channels.nf" linenums="14"
+    ```groovy title="hello-channels.nf" linenums="14" hl_lines="3"
     script:
     """
     echo 'Hello World!' > output.txt
@@ -728,12 +726,14 @@ In the workflow block, make the following code change:
 
 === "Before"
 
-    ```groovy title="hello-world.nf" linenums="23"
+    ```groovy title="hello-world.nf" linenums="23" hl_lines="2"
     // emit a greeting
     sayHello()
     ```
 
 This tells Nextflow to run the `sayHello` process on the value provided through the `--input` parameter.
+
+In effect, we've accomplished steps (2) and (3) outlined at the start of the section in a single go.
 
 ### 3.3. Run the workflow command
 
@@ -758,9 +758,11 @@ If you made all these edits correctly, you should get another successful executi
 
 Be sure to open up the output file to check that you now have the new version of the greeting.
 
-```console title="results/output.txt" linenums="1"
-Bonjour le monde!
-```
+??? abstract "File contents"
+
+    ```console title="results/hello_world/output.txt"
+    Bonjour le monde!
+    ```
 
 Voilà!
 
@@ -773,7 +775,7 @@ Voilà!
 
 ### 3.4. Use default values for command line parameters
 
-In many cases, it makes sense to supply a default value for a given parameter so that you don't have to specify it for every run.
+Ok, that was convenient, but in many cases, it makes sense to supply a default value for a given parameter so that you don't have to specify it for every run.
 
 #### 3.4.1. Set a default value for the CLI parameter
 
@@ -818,11 +820,13 @@ nextflow run hello-world.nf
     [72/394147] sayHello | 1 of 1 ✔
     ```
 
-Check the output in the results directory:
+The output will be in the same place as previously, but the contents should be updated with the new text.
 
-```console title="results/hello_world/output.txt"
-Holà mundo!
-```
+??? abstract "File contents"
+
+    ```console title="results/hello_world/output.txt"
+    Holà mundo!
+    ```
 
 Nextflow used the default value of the greeting parameter to create the output.
 
@@ -847,11 +851,13 @@ nextflow run hello-world.nf --input 'Konnichiwa!'
     [6f/a12a91] sayHello | 1 of 1 ✔
     ```
 
-Now you will have the corresponding new output in your results directory.
+Once again, you should find the corresponding updated output in your results directory.
 
-```console title="results/output.txt"
-Konnichiwa!
-```
+??? abstract "File contents"
+
+    ```console title="results/hello_world/output.txt"
+    Konnichiwa!
+    ```
 
 !!! note
 
@@ -976,9 +982,9 @@ nextflow clean -before golden_cantor -n
 
 ??? success "Command output"
 
-```console
-Would remove /workspaces/training/hello-nextflow/work/a3/7be2fad5e71e5f49998f795677fd68
-```
+    ```console
+    Would remove /workspaces/training/hello-nextflow/work/a3/7be2fad5e71e5f49998f795677fd68
+    ```
 
 If you don't see any lines output, you either did not provide a valid run name or there are no past runs to delete. (Make sure to change `golden_cantor` in the example command to whatever is the corresponding latest run name in your log.)
 
@@ -990,9 +996,9 @@ nextflow clean -before golden_cantor -f
 
 ??? success "Command output"
 
-```console
-Removed /workspaces/training/hello-nextflow/work/a3/7be2fad5e71e5f49998f795677fd68
-```
+    ```console
+    Removed /workspaces/training/hello-nextflow/work/a3/7be2fad5e71e5f49998f795677fd68
+    ```
 
 This will not remove the two-character subdirectories (like `a3/` above) but it will empty their contents.
 
@@ -1012,4 +1018,5 @@ More generally, you know how to interpret a simple Nextflow workflow, manage its
 ### What's next?
 
 Take a little break, you've earned it!
+
 When you're ready, move on to Part 2 to learn how to use channels to feed inputs into your workflow, which will allow you to take advantage of Nextflow's built-in dataflow parallelism and other powerful features.
