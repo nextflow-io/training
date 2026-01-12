@@ -4,14 +4,16 @@ process FASTQC {
     publishDir "${params.outdir}/fastqc", mode: 'copy'
 
     input:
-    tuple val(meta), path(reads)
+    // TODO: Define input - a tuple with sample metadata and read files
+    ???
 
     output:
-    tuple val(meta), path("*.html"), emit: html
-    tuple val(meta), path("*.zip"), emit: zip
+    // TODO: Define outputs - HTML reports and ZIP files
+    ???
 
     script:
+    // TODO: Add the fastqc command
     """
-    fastqc --quiet --threads 2 ${reads}
+    ???
     """
 }

@@ -1,3 +1,4 @@
+// Helper process to extract the pre-built salmon index
 process UNTAR {
     container 'ubuntu:22.04'
 
@@ -22,20 +23,20 @@ process SALMON_QUANT {
     memory '8.GB'
 
     input:
-    tuple val(meta), path(reads)
-    path index
+    // TODO: Define inputs - trimmed reads AND the salmon index
+    // Hint: This process needs two inputs (one tuple, one path)
+    ???
 
     output:
-    tuple val(meta), path("${meta.id}"), emit: results
+    // TODO: Define output - the quantification results directory
+    ???
 
     script:
+    // TODO: Add the salmon quant command
+    // Hint: Use $index for the index path
+    // Hint: Use ${reads[0]} and ${reads[1]} for input reads
+    // Hint: Use $task.cpus for thread count
     """
-    salmon quant \\
-        --index $index \\
-        --libType A \\
-        --mates1 ${reads[0]} \\
-        --mates2 ${reads[1]} \\
-        --output ${meta.id} \\
-        --threads $task.cpus
+    ???
     """
 }

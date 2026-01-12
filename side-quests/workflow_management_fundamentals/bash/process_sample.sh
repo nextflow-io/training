@@ -1,5 +1,7 @@
 #!/bin/bash
 # Process a single RNA-seq sample
+#
+# Usage: ./process_sample.sh <sample_id> <fastq_r1_url> <fastq_r2_url>
 
 set -e  # Exit on error
 
@@ -10,49 +12,21 @@ FASTQ_R2_URL=$3
 echo "Processing sample: $SAMPLE_ID"
 
 # Create output directories
-mkdir -p data/fastq results/fastqc results/fastp results/salmon
+mkdir -p data/fastq results/fastqc results/fastp results/salmon data/salmon_index
 
-# Download FASTQ files
-echo "  Downloading FASTQ files..."
-curl -sL "$FASTQ_R1_URL" -o "data/fastq/${SAMPLE_ID}_R1.fastq.gz"
-curl -sL "$FASTQ_R2_URL" -o "data/fastq/${SAMPLE_ID}_R2.fastq.gz"
+# Step 1: Download FASTQ files
+# TODO: Add curl commands to download R1 and R2 files
 
-# Run FastQC
-echo "  Running FastQC..."
-fastqc -q -o results/fastqc \
-    "data/fastq/${SAMPLE_ID}_R1.fastq.gz" \
-    "data/fastq/${SAMPLE_ID}_R2.fastq.gz"
+# Step 2: Run FastQC
+# TODO: Add fastqc command
 
-# Run fastp
-echo "  Running fastp..."
-fastp \
-    -i "data/fastq/${SAMPLE_ID}_R1.fastq.gz" \
-    -I "data/fastq/${SAMPLE_ID}_R2.fastq.gz" \
-    -o "results/fastp/${SAMPLE_ID}_trimmed_R1.fastq.gz" \
-    -O "results/fastp/${SAMPLE_ID}_trimmed_R2.fastq.gz" \
-    -j "results/fastp/${SAMPLE_ID}.fastp.json" \
-    -h "results/fastp/${SAMPLE_ID}.fastp.html" \
-    2>/dev/null
+# Step 3: Run fastp
+# TODO: Add fastp command
 
-# Download salmon index (if not present)
-if [ ! -d "data/salmon_index/salmon" ]; then
-    echo "  Downloading salmon index..."
-    mkdir -p data/salmon_index
-    curl -sL https://raw.githubusercontent.com/nf-core/test-datasets/rnaseq/reference/salmon.tar.gz \
-        -o data/salmon_index/salmon.tar.gz
-    tar -xzf data/salmon_index/salmon.tar.gz -C data/salmon_index/
-    rm data/salmon_index/salmon.tar.gz
-fi
+# Step 4: Download salmon index (if needed)
+# TODO: Add conditional download of salmon index
 
-# Run Salmon
-echo "  Running Salmon..."
-salmon quant \
-    --index data/salmon_index/salmon \
-    --libType A \
-    --mates1 "results/fastp/${SAMPLE_ID}_trimmed_R1.fastq.gz" \
-    --mates2 "results/fastp/${SAMPLE_ID}_trimmed_R2.fastq.gz" \
-    --output "results/salmon/${SAMPLE_ID}" \
-    --threads 2 \
-    --quiet
+# Step 5: Run Salmon quantification
+# TODO: Add salmon quant command
 
 echo "Completed: $SAMPLE_ID"

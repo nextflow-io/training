@@ -4,23 +4,19 @@ process FASTP {
     publishDir "${params.outdir}/fastp", mode: 'copy'
 
     input:
-    tuple val(meta), path(reads)
+    // TODO: Define input - same pattern as FASTQC
+    ???
 
     output:
-    tuple val(meta), path("*_trimmed*.fastq.gz"), emit: reads
-    tuple val(meta), path("*.json"), emit: json
-    tuple val(meta), path("*.html"), emit: html
+    // TODO: Define outputs - trimmed reads, JSON report, HTML report
+    // Important: The trimmed reads output needs 'emit: reads' for downstream processes
+    ???
 
     script:
-    def prefix = meta.id
+    // TODO: Add the fastp command
+    // Hint: Use ${reads[0]} and ${reads[1]} for input files
+    // Hint: Use ${meta.id} for output file prefixes
     """
-    fastp \\
-        --in1 ${reads[0]} \\
-        --in2 ${reads[1]} \\
-        --out1 ${prefix}_trimmed_R1.fastq.gz \\
-        --out2 ${prefix}_trimmed_R2.fastq.gz \\
-        --json ${prefix}.fastp.json \\
-        --html ${prefix}.fastp.html \\
-        --thread 4
+    ???
     """
 }

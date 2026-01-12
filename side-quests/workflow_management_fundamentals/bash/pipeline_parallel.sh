@@ -1,5 +1,7 @@
 #!/bin/bash
 # Process all RNA-seq samples in PARALLEL
+#
+# Usage: ./pipeline_parallel.sh [samples.csv]
 
 set -e
 
@@ -11,7 +13,7 @@ echo "=========================================="
 
 mkdir -p data/fastq results/fastqc results/fastp results/salmon data/salmon_index
 
-# Download salmon index once
+# Download salmon index once (shared by all samples)
 if [ ! -d "data/salmon_index/salmon" ]; then
     echo "Downloading salmon index..."
     curl -sL https://raw.githubusercontent.com/nf-core/test-datasets/rnaseq/reference/salmon.tar.gz \
@@ -20,7 +22,7 @@ if [ ! -d "data/salmon_index/salmon" ]; then
     rm data/salmon_index/salmon.tar.gz
 fi
 
-# Function to process one sample
+# Function to process one sample (all steps for a single sample)
 process_sample() {
     local sample_id=$1
     local fastq_r1=$2
@@ -28,15 +30,19 @@ process_sample() {
 
     echo "[${sample_id}] Starting..."
 
+    # Download
     curl -sL "$fastq_r1" -o "data/fastq/${sample_id}_R1.fastq.gz"
     curl -sL "$fastq_r2" -o "data/fastq/${sample_id}_R2.fastq.gz"
 
+    # FastQC
     fastqc -q -o results/fastqc "data/fastq/${sample_id}_R1.fastq.gz" "data/fastq/${sample_id}_R2.fastq.gz"
 
+    # fastp
     fastp -i "data/fastq/${sample_id}_R1.fastq.gz" -I "data/fastq/${sample_id}_R2.fastq.gz" \
         -o "results/fastp/${sample_id}_trimmed_R1.fastq.gz" -O "results/fastp/${sample_id}_trimmed_R2.fastq.gz" \
         -j "results/fastp/${sample_id}.fastp.json" -h "results/fastp/${sample_id}.fastp.html" 2>/dev/null
 
+    # Salmon
     salmon quant --index data/salmon_index/salmon --libType A \
         --mates1 "results/fastp/${sample_id}_trimmed_R1.fastq.gz" \
         --mates2 "results/fastp/${sample_id}_trimmed_R2.fastq.gz" \
@@ -47,19 +53,16 @@ process_sample() {
 
 export -f process_sample
 
-echo "Launching all samples in parallel..."
+echo "Launching samples..."
 
-# Launch each sample in background with &
+# Process each sample
+# TODO: Modify this loop to run samples in PARALLEL
+# Hint: Add & after the function call to run in background
 while IFS=',' read -r sample_id fastq_r1 fastq_r2; do
-    process_sample "$sample_id" "$fastq_r1" "$fastq_r2" &
+    process_sample "$sample_id" "$fastq_r1" "$fastq_r2"
 done < <(tail -n +2 "$SAMPLES_FILE")
 
-# Wait for all background jobs
-wait
-
-echo ""
-echo "Running MultiQC..."
-multiqc results/ -o results/ --quiet --force
+# TODO: Add wait command to wait for all background jobs
 
 echo ""
 echo "Pipeline complete!"
