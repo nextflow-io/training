@@ -6,7 +6,7 @@
  */
 process FASTP {
     tag "$meta.id"
-    container 'biocontainers/fastp:0.23.4--hadf994f_2'
+    container 'quay.io/biocontainers/fastp:0.23.4--hadf994f_2'
     publishDir "${params.outdir}/fastp", mode: 'copy'
 
     cpus 4

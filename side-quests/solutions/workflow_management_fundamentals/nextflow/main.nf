@@ -15,7 +15,6 @@
 include { FASTQC } from './modules/fastqc'
 include { FASTP } from './modules/fastp'
 include { UNTAR; SALMON_QUANT } from './modules/salmon'
-include { MULTIQC } from './modules/multiqc'
 
 // Pipeline parameters
 params.samples = '../data/samples.csv'
@@ -48,14 +47,6 @@ workflow {
     FASTP(ch_samples)
 
     // SALMON needs FASTP output - it WAITS for FASTP, but runs samples in PARALLEL
-    SALMON_QUANT(FASTP.out.reads, UNTAR.out.index)
-
-    // MULTIQC aggregates all reports - it WAITS for everything
-    ch_multiqc = FASTQC.out.zip
-        .map { meta, zip -> zip }
-        .mix(FASTP.out.json.map { meta, json -> json })
-        .mix(SALMON_QUANT.out.results.map { meta, results -> results })
-        .collect()
-
-    MULTIQC(ch_multiqc)
+    // .first() converts the index to a value channel so it's reused for all samples
+    SALMON_QUANT(FASTP.out.reads, UNTAR.out.index.first())
 }

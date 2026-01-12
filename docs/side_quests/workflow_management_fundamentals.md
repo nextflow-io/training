@@ -1,52 +1,52 @@
 # Workflow Management Fundamentals
 
-If you're coming from a background of writing shell scripts or Python scripts for data processing, formal workflow management tools might seem like unnecessary complexity.
+If you're coming from a background of writing shell scripts for data processing, workflow management tools might seem like unnecessary complexity.
 Why learn a whole new framework when your bash script does the job?
 
 This side quest answers that question through direct experience.
-You'll hit real limitations with bash scripts, then see how workflow management tools solve each one.
-We use Nextflow as our example, but the concepts apply to any workflow management system (Snakemake, WDL, CWL, etc.).
+You'll build a real analysis pipeline in bash, hit its limitations firsthand, then rebuild it in Nextflow to see what workflow management actually provides.
 
-**What you'll experience:**
+**What you'll build:**
 
-| Problem | What Goes Wrong | How Workflow Management Helps |
-|---------|-----------------|-------------------------------|
-| Sequential processing | Samples wait in line; CPUs sit idle | Automatic parallelization |
-| Crash recovery | Failure means restart from scratch | Built-in caching and resume |
-| Environment chaos | "Works on my machine" syndrome | Per-process containers |
-| Scaling pain | 3 samples → 300 requires rewrite | Handle any scale, same code |
-| No audit trail | What ran? When? With what? | Automatic provenance tracking |
-| Portability lock-in | Tied to one machine/cluster | Write once, run anywhere |
-
----
-
-## 0. Setup
-
-### 0.1. The Scenario
-
-You're analyzing RNA-seq data from a yeast gene expression study.
-Your workflow involves:
+An RNA-seq analysis pipeline that runs:
 
 1. Quality control (FastQC)
 2. Adapter trimming (fastp)
 3. Transcript quantification (Salmon)
 4. Report aggregation (MultiQC)
 
-You have 3 samples today. Your PI says 50 more are coming next week.
+**How this tutorial works:**
 
-!!! note "Real data, real tools"
+| Part | What You'll Do | What You'll Learn |
+|------|----------------|-------------------|
+| **Part 1: Bash** | Build a pipeline from scratch | Where bash scripts break down |
+| **Part 2: Nextflow** | Rebuild the same pipeline | How workflow managers solve each problem |
 
-    This tutorial uses real RNA-seq data from the nf-core test-datasets repository.
-    The FASTQ files are from a published yeast study (GSE110004).
-    All processes run actual bioinformatics tools in containers.
+By the end, you'll understand *why* workflow managers exist - not because someone told you, but because you experienced the problems yourself.
 
-### 0.2. Navigate to the Project Directory
+---
+
+# Part 1: Building a Bash Pipeline
+
+In this part, you'll build an RNA-seq analysis pipeline using bash.
+Along the way, you'll encounter real limitations that plague shell-based pipelines.
+
+---
+
+## 1.0. Setup
+
+### 1.0.1. The Scenario
+
+You're a bioinformatician analyzing RNA-seq data from a yeast gene expression study.
+You have 3 samples today. Your PI mentions that 50 more samples are coming next week.
+
+### 1.0.2. Navigate to the Working Directory
 
 ```bash
 cd side-quests/workflow_management_fundamentals
 ```
 
-### 0.3. Explore the Starting Point
+### 1.0.3. Explore the Starting Point
 
 ```bash
 ls -la
@@ -54,596 +54,1215 @@ ls -la
 
 ```console title="Output"
 .
+├── bash/           # You'll build scripts here
 ├── data/
-│   └── samples.csv
-├── bash_pipeline.sh
-└── nextflow_pipeline/
-    ├── main.nf
-    ├── modules/
-    └── nextflow.config
+│   └── samples.csv # Sample metadata
+└── nextflow/       # For Part 2
 ```
 
-We've provided both a bash script (`bash_pipeline.sh`) and a Nextflow workflow (`nextflow_pipeline/`).
+### 1.0.4. Examine the Sample Data
 
-### 0.4. Install Tools for the Bash Script
+```bash
+cat data/samples.csv
+```
 
-To run the bash script, you need to install the required bioinformatics tools:
+```console title="Output"
+sample,fastq_1,fastq_2
+WT_REP1,https://raw.githubusercontent.com/.../SRR6357070_1.fastq.gz,https://...
+WT_REP2,https://raw.githubusercontent.com/.../SRR6357072_1.fastq.gz,https://...
+RAP1_IAA_30M_REP1,https://raw.githubusercontent.com/.../SRR6357076_1.fastq.gz,https://...
+```
 
-=== "Conda/Mamba (Recommended)"
+Each row is a sample with URLs to paired-end FASTQ files.
+
+---
+
+## 1.1. Installing Your Tools
+
+Before you can run any analysis, you need to install the bioinformatics tools.
+
+### 1.1.1. Create a Conda Environment
+
+=== "Mamba (Recommended)"
 
     ```bash
     mamba create -n rnaseq-bash fastqc fastp salmon multiqc -c bioconda -c conda-forge -y
-    mamba activate rnaseq-bash
     ```
 
 === "Conda"
 
     ```bash
     conda create -n rnaseq-bash fastqc fastp salmon multiqc -c bioconda -c conda-forge -y
-    conda activate rnaseq-bash
     ```
 
-This installation step is **exactly the kind of friction** that workflow managers eliminate.
-Notice you had to:
+Watch the output. Notice:
 
-- Know which package manager to use
-- Know the correct channel (`bioconda`)
-- Hope there are no dependency conflicts
-- Remember to activate the environment
+- Dependencies being resolved (sometimes this takes minutes)
+- Packages being downloaded
+- Hope that there are no conflicts...
 
-Later, you'll see how Nextflow handles this automatically.
-
----
-
-## 1. Problem: Sequential Processing
-
-### 1.1. Run the Bash Pipeline
+### 1.1.2. Activate the Environment
 
 ```bash
-time bash bash_pipeline.sh
-```
-
-```console title="Output"
-Starting RNA-seq analysis pipeline (bash version)
-==================================================
-
-Checking for required tools...
-All tools found.
-
-Samples: WT_REP1 WT_REP2 RAP1_IAA_30M_REP1
-
-Processing WT_REP1...
-  Downloading FASTQ files...
-  Running FastQC... done
-  Running fastp... done
-  Running Salmon... done
-Completed WT_REP1
-
-Processing WT_REP2...
-  Downloading FASTQ files...
-  Running FastQC... done
-  Running fastp... done
-  Running Salmon... done
-Completed WT_REP2
-
-Processing RAP1_IAA_30M_REP1...
-  Downloading FASTQ files...
-  Running FastQC... done
-  Running fastp... done
-  Running Salmon... done
-Completed RAP1_IAA_30M_REP1
-
-Running MultiQC... done
-
-Pipeline complete!
-
-real    2m34.567s
-```
-
-Watch the output carefully: each sample waits for the previous one to finish completely.
-
-### 1.2. The Problem
-
-Look at what happened:
-
-```
-Timeline (bash - sequential):
-WT_REP1:          [FastQC][fastp][====Salmon====]
-WT_REP2:                                         [FastQC][fastp][====Salmon====]
-RAP1_IAA_30M_REP1:                                                               [FastQC][fastp][====Salmon====]
-                                                                                                                 [MultiQC]
-```
-
-These samples are **completely independent**.
-Why is WT_REP2 waiting for WT_REP1 to finish Salmon before it can start FastQC?
-
-!!! warning "The scaling nightmare"
-
-    With 50 samples processed sequentially, you're looking at **50× the runtime**.
-    On a machine with 16 CPUs, you're using 1-4 at a time. The other 12 sit idle.
-
-You *could* add parallelization to your bash script with `&` and `wait`, but that adds complexity, error handling, and resource management headaches.
-
-??? question "Think about it"
-
-    Before seeing the solution, consider:
-
-    - How would you modify the bash script to run samples in parallel?
-    - What happens if you try to run 50 Salmon jobs simultaneously on a laptop with 16GB RAM?
-    - How would you limit concurrent jobs to match available resources?
-
-### 1.3. Solution: Automatic Parallelization
-
-Now run the same pipeline with Nextflow:
-
-```bash
-cd nextflow_pipeline
-nextflow run main.nf
-```
-
-```console title="Output"
-N E X T F L O W  ~  version 24.10.0
-
-executor >  local (11)
-[5a/8b2c3d] UNTAR              [100%] 1 of 1 ✔
-[3a/4b5c6d] FASTQC (WT_REP1)   [100%] 3 of 3 ✔
-[8e/9f0a1b] FASTP (WT_REP2)    [100%] 3 of 3 ✔
-[2c/3d4e5f] SALMON_QUANT (RAP1_IAA_30M_REP1) [100%] 3 of 3 ✔
-[7g/8h9i0j] MULTIQC            [100%] 1 of 1 ✔
-
-Completed at: 2024-10-11 14:23:45
-Duration    : 45s
-Succeeded   : 11
-```
-
-All samples processed **in parallel** - significantly faster than sequential!
-
-```
-Timeline (Nextflow - parallel):
-WT_REP1:          [FastQC][fastp][====Salmon====]
-WT_REP2:          [FastQC][fastp][====Salmon====]
-RAP1_IAA_30M_REP1:[FastQC][fastp][====Salmon====]
-                                                 [MultiQC]
-```
-
-### 1.4. How It Works
-
-Nextflow analyzed your data dependencies:
-
-- All 3 FastQC tasks need only raw reads → **run in parallel**
-- All 3 fastp tasks need only raw reads → **run in parallel**
-- Each Salmon needs its sample's fastp output → **run when ready**
-- MultiQC needs all reports → **wait for everything, then run**
-
-**You wrote zero parallelization code.**
-The workflow manager figured it out from the data flow.
-
-### Takeaway
-
-Sequential bash scripts waste resources.
-Workflow managers parallelize automatically based on data dependencies.
-
----
-
-## 2. Problem: No Resume After Failure
-
-### 2.1. Simulate a Crash
-
-Let's say Salmon runs out of memory on WT_REP2 (this happens with real large datasets).
-
-```bash
-cd ..
-bash bash_pipeline.sh --fail-at WT_REP2_salmon
-```
-
-```console title="Output"
-Processing WT_REP1...
-  Running FastQC... done (5s)
-  Running fastp... done (8s)
-  Running Salmon... done (15s)
-Completed WT_REP1
-
-Processing WT_REP2...
-  Running FastQC... done (5s)
-  Running fastp... done (8s)
-  Running Salmon... ERROR: Out of memory
-
-Pipeline failed! All progress for remaining samples is lost.
-```
-
-### 2.2. The Problem
-
-Your options with bash:
-
-1. **Re-run everything** - WT_REP1 runs again unnecessarily
-2. **Manually track progress** - Comment out completed samples, hope you don't make mistakes
-3. **Build checkpoint logic** - Hours of additional coding for something that isn't your science
-
-??? question "Think about it"
-
-    Before seeing the solution, consider:
-
-    - How would you implement checkpointing in a bash script?
-    - What if the failure happened on sample 47 of 50? How much time would you lose?
-    - How would you know which tasks are safe to skip vs. which need re-running?
-
-### 2.3. Solution: Built-in Resume
-
-With Nextflow, fix the issue (increase memory) and resume:
-
-```bash
-cd nextflow_pipeline
-nextflow run main.nf -resume
-```
-
-```console title="Output"
-executor >  local (2)
-[5a/8b2c3d] UNTAR              [100%] 1 of 1, cached: 1 ✔
-[3a/4b5c6d] FASTQC (WT_REP1)   [100%] 3 of 3, cached: 3 ✔
-[8e/9f0a1b] FASTP (WT_REP2)    [100%] 3 of 3, cached: 3 ✔
-[2c/3d4e5f] SALMON_QUANT (WT_REP2) [100%] 3 of 3, cached: 2 ✔
-[7g/8h9i0j] MULTIQC            [100%] 1 of 1 ✔
-```
-
-**Only the failed task and its downstream dependencies re-run.**
-Everything else uses cached results.
-
-### 2.4. How It Works
-
-Nextflow creates a unique hash for each task based on:
-
-- The script content
-- The input files (content, not just names)
-- The parameters
-
-If nothing changed, it skips the task and uses cached outputs.
-This isn't just convenient - it's **scientifically rigorous**.
-You know exactly what ran vs. what was reused.
-
-### Takeaway
-
-Failures are inevitable in computational pipelines.
-Workflow managers track completed work automatically, so you never lose progress.
-
----
-
-## 3. Problem: "Works on My Machine"
-
-### 3.1. The Environment Problem
-
-Remember the setup step where you installed the tools?
-
-```bash
-mamba create -n rnaseq-bash fastqc fastp salmon multiqc -c bioconda -c conda-forge -y
 mamba activate rnaseq-bash
 ```
 
-This is **your responsibility** to manage. You must:
+!!! warning "Remember this step"
 
-- Remember which environment to activate before running
-- Document what you installed (and hope the documentation stays current)
-- Reinstall everything when you move to a new machine
-- Debug version conflicts when tools need incompatible dependencies
+    Every time you open a new terminal, you must activate this environment again.
+    Forget, and your script fails with "command not found".
 
-What happens when a colleague tries to run your script?
+### 1.1.3. Verify Installation
 
-```console
-$ bash bash_pipeline.sh
-Checking for required tools...
-ERROR: salmon is not installed!
+```bash
+fastqc --version
+fastp --version
+salmon --version
+multiqc --version
 ```
 
-Or worse - they have different versions:
+### 1.1.4. Reflection: The Installation Tax
 
-```console
-# Your machine
-$ salmon --version
-salmon 1.10.3
+You just spent time on:
 
-# Colleague's machine
-$ salmon --version
-salmon 1.4.0   # Different version = potentially different results!
+- Choosing a package manager (conda vs mamba vs pip?)
+- Finding the right channel (bioconda)
+- Waiting for dependency resolution
+- Hoping nothing conflicts
+
+This is before writing a single line of analysis code.
+**Keep this in mind for later.**
+
+---
+
+## 1.2. Processing Your First Sample
+
+Let's start simple: process just ONE sample.
+
+### 1.2.1. Create Your First Script
+
+Create a new file `bash/process_sample.sh`:
+
+```bash title="bash/process_sample.sh" linenums="1"
+#!/bin/bash
+# Process a single RNA-seq sample
+
+set -e  # Exit on error
+
+SAMPLE_ID=$1
+FASTQ_R1_URL=$2
+FASTQ_R2_URL=$3
+
+echo "Processing sample: $SAMPLE_ID"
+
+# Create output directories
+mkdir -p data/fastq results/fastqc results/fastp results/salmon
+
+# Download FASTQ files
+echo "  Downloading FASTQ files..."
+curl -sL "$FASTQ_R1_URL" -o "data/fastq/${SAMPLE_ID}_R1.fastq.gz"
+curl -sL "$FASTQ_R2_URL" -o "data/fastq/${SAMPLE_ID}_R2.fastq.gz"
+
+# Run FastQC
+echo "  Running FastQC..."
+fastqc -q -o results/fastqc \
+    "data/fastq/${SAMPLE_ID}_R1.fastq.gz" \
+    "data/fastq/${SAMPLE_ID}_R2.fastq.gz"
+
+# Run fastp
+echo "  Running fastp..."
+fastp \
+    -i "data/fastq/${SAMPLE_ID}_R1.fastq.gz" \
+    -I "data/fastq/${SAMPLE_ID}_R2.fastq.gz" \
+    -o "results/fastp/${SAMPLE_ID}_trimmed_R1.fastq.gz" \
+    -O "results/fastp/${SAMPLE_ID}_trimmed_R2.fastq.gz" \
+    -j "results/fastp/${SAMPLE_ID}.fastp.json" \
+    -h "results/fastp/${SAMPLE_ID}.fastp.html" \
+    2>/dev/null
+
+# Download salmon index (if not present)
+if [ ! -d "data/salmon_index/salmon" ]; then
+    echo "  Downloading salmon index..."
+    mkdir -p data/salmon_index
+    curl -sL https://raw.githubusercontent.com/nf-core/test-datasets/rnaseq/reference/salmon.tar.gz \
+        -o data/salmon_index/salmon.tar.gz
+    tar -xzf data/salmon_index/salmon.tar.gz -C data/salmon_index/
+    rm data/salmon_index/salmon.tar.gz
+fi
+
+# Run Salmon
+echo "  Running Salmon..."
+salmon quant \
+    --index data/salmon_index/salmon \
+    --libType A \
+    --mates1 "results/fastp/${SAMPLE_ID}_trimmed_R1.fastq.gz" \
+    --mates2 "results/fastp/${SAMPLE_ID}_trimmed_R2.fastq.gz" \
+    --output "results/salmon/${SAMPLE_ID}" \
+    --threads 2 \
+    --quiet
+
+echo "Completed: $SAMPLE_ID"
 ```
 
-### 3.2. The Reproducibility Crisis
+### 1.2.2. Make It Executable and Run
 
-This causes real problems:
+```bash
+chmod +x bash/process_sample.sh
+```
 
-- **Can't reproduce your own results** after system updates
-- **Colleagues get different results** with different tool versions
-- **Paper reviewers can't verify** your analysis
-- **Future you** has no idea what versions you used
-- **"It worked last month"** - but something changed and you don't know what
+Now run it for one sample (extract values from samples.csv):
 
-??? question "Think about it"
+```bash
+./bash/process_sample.sh WT_REP1 \
+    "https://raw.githubusercontent.com/nf-core/test-datasets/rnaseq/testdata/GSE110004/SRR6357070_1.fastq.gz" \
+    "https://raw.githubusercontent.com/nf-core/test-datasets/rnaseq/testdata/GSE110004/SRR6357070_2.fastq.gz"
+```
 
-    Before seeing the solution, consider:
+```console title="Output"
+Processing sample: WT_REP1
+  Downloading FASTQ files...
+  Running FastQC...
+  Running fastp...
+  Downloading salmon index...
+  Running Salmon...
+Completed: WT_REP1
+```
 
-    - How would you share your analysis with a collaborator so they get identical results?
-    - What if your pipeline needs tools that require incompatible dependencies (e.g., Python 2.7 vs Python 3.11)?
-    - How would you document *exactly* which software versions were used for a publication?
+### 1.2.3. Check the Results
 
-### 3.3. Solution: Declarative Software Environments
+```bash
+ls results/
+```
 
-In Nextflow, each process declares its own software environment:
+```console title="Output"
+fastqc/  fastp/  salmon/
+```
 
-```groovy title="modules/fastqc.nf" linenums="1" hl_lines="3"
+It worked! But you have 3 samples (and 50 more coming).
+Running this command manually for each one isn't practical.
+
+---
+
+## 1.3. Processing Multiple Samples
+
+Let's wrap the logic in a loop to process all samples.
+
+### 1.3.1. Create a Sequential Pipeline
+
+Create `bash/pipeline_sequential.sh`:
+
+```bash title="bash/pipeline_sequential.sh" linenums="1"
+#!/bin/bash
+# Process all RNA-seq samples sequentially
+
+set -e
+
+SAMPLES_FILE=${1:-data/samples.csv}
+
+echo "=========================================="
+echo "RNA-seq Pipeline (Sequential)"
+echo "=========================================="
+
+mkdir -p data/fastq results/fastqc results/fastp results/salmon data/salmon_index
+
+# Download salmon index once
+if [ ! -d "data/salmon_index/salmon" ]; then
+    echo "Downloading salmon index..."
+    curl -sL https://raw.githubusercontent.com/nf-core/test-datasets/rnaseq/reference/salmon.tar.gz \
+        -o data/salmon_index/salmon.tar.gz
+    tar -xzf data/salmon_index/salmon.tar.gz -C data/salmon_index/
+    rm data/salmon_index/salmon.tar.gz
+fi
+
+# Process each sample
+tail -n +2 "$SAMPLES_FILE" | while IFS=',' read -r sample_id fastq_r1 fastq_r2; do
+    echo ""
+    echo "Processing: $sample_id"
+
+    # Download
+    curl -sL "$fastq_r1" -o "data/fastq/${sample_id}_R1.fastq.gz"
+    curl -sL "$fastq_r2" -o "data/fastq/${sample_id}_R2.fastq.gz"
+
+    # FastQC
+    echo "  Running FastQC..."
+    fastqc -q -o results/fastqc "data/fastq/${sample_id}_R1.fastq.gz" "data/fastq/${sample_id}_R2.fastq.gz"
+
+    # fastp
+    echo "  Running fastp..."
+    fastp -i "data/fastq/${sample_id}_R1.fastq.gz" -I "data/fastq/${sample_id}_R2.fastq.gz" \
+        -o "results/fastp/${sample_id}_trimmed_R1.fastq.gz" -O "results/fastp/${sample_id}_trimmed_R2.fastq.gz" \
+        -j "results/fastp/${sample_id}.fastp.json" -h "results/fastp/${sample_id}.fastp.html" 2>/dev/null
+
+    # Salmon
+    echo "  Running Salmon..."
+    salmon quant --index data/salmon_index/salmon --libType A \
+        --mates1 "results/fastp/${sample_id}_trimmed_R1.fastq.gz" \
+        --mates2 "results/fastp/${sample_id}_trimmed_R2.fastq.gz" \
+        --output "results/salmon/${sample_id}" --threads 2 --quiet
+
+    echo "  Done: $sample_id"
+done
+
+# Aggregate reports
+echo ""
+echo "Running MultiQC..."
+multiqc results/ -o results/ --quiet --force
+
+echo ""
+echo "Pipeline complete!"
+```
+
+### 1.3.2. Run and Time It
+
+```bash
+chmod +x bash/pipeline_sequential.sh
+time ./bash/pipeline_sequential.sh
+```
+
+Watch the output. Each sample waits for the previous one to finish completely:
+
+```
+Processing: WT_REP1
+  Running FastQC...
+  Running fastp...
+  Running Salmon...
+  Done: WT_REP1
+
+Processing: WT_REP2      <- Starts only after WT_REP1 is completely done
+  Running FastQC...
+  ...
+```
+
+### 1.3.3. The Problem: Sequential Execution
+
+```
+Timeline (sequential):
+WT_REP1:          [====FastQC====][====fastp====][======Salmon======]
+WT_REP2:                                                              [====FastQC====][====fastp====][======Salmon======]
+RAP1_IAA_30M_REP1:                                                                                                        [====FastQC====]...
+```
+
+These samples are **completely independent**.
+Why is WT_REP2 waiting for WT_REP1's Salmon to finish before it can start FastQC?
+
+With 50 samples, you're looking at **50× the runtime**.
+Your CPUs sit idle while samples wait in line.
+
+---
+
+## 1.4. Adding Parallelization
+
+Let's fix the sequential bottleneck by running samples in parallel.
+
+### 1.4.1. Create a Parallel Pipeline
+
+Create `bash/pipeline_parallel.sh`:
+
+```bash title="bash/pipeline_parallel.sh" linenums="1"
+#!/bin/bash
+# Process all RNA-seq samples in PARALLEL
+
+set -e
+
+SAMPLES_FILE=${1:-data/samples.csv}
+
+echo "=========================================="
+echo "RNA-seq Pipeline (Parallel)"
+echo "=========================================="
+
+mkdir -p data/fastq results/fastqc results/fastp results/salmon data/salmon_index
+
+# Download salmon index once
+if [ ! -d "data/salmon_index/salmon" ]; then
+    echo "Downloading salmon index..."
+    curl -sL https://raw.githubusercontent.com/nf-core/test-datasets/rnaseq/reference/salmon.tar.gz \
+        -o data/salmon_index/salmon.tar.gz
+    tar -xzf data/salmon_index/salmon.tar.gz -C data/salmon_index/
+    rm data/salmon_index/salmon.tar.gz
+fi
+
+# Function to process one sample
+process_sample() {
+    local sample_id=$1
+    local fastq_r1=$2
+    local fastq_r2=$3
+
+    echo "[${sample_id}] Starting..."
+
+    curl -sL "$fastq_r1" -o "data/fastq/${sample_id}_R1.fastq.gz"
+    curl -sL "$fastq_r2" -o "data/fastq/${sample_id}_R2.fastq.gz"
+
+    fastqc -q -o results/fastqc "data/fastq/${sample_id}_R1.fastq.gz" "data/fastq/${sample_id}_R2.fastq.gz"
+
+    fastp -i "data/fastq/${sample_id}_R1.fastq.gz" -I "data/fastq/${sample_id}_R2.fastq.gz" \
+        -o "results/fastp/${sample_id}_trimmed_R1.fastq.gz" -O "results/fastp/${sample_id}_trimmed_R2.fastq.gz" \
+        -j "results/fastp/${sample_id}.fastp.json" -h "results/fastp/${sample_id}.fastp.html" 2>/dev/null
+
+    salmon quant --index data/salmon_index/salmon --libType A \
+        --mates1 "results/fastp/${sample_id}_trimmed_R1.fastq.gz" \
+        --mates2 "results/fastp/${sample_id}_trimmed_R2.fastq.gz" \
+        --output "results/salmon/${sample_id}" --threads 2 --quiet
+
+    echo "[${sample_id}] Complete!"
+}
+
+export -f process_sample
+
+echo "Launching all samples in parallel..."
+
+# Launch each sample in background with &
+while IFS=',' read -r sample_id fastq_r1 fastq_r2; do
+    process_sample "$sample_id" "$fastq_r1" "$fastq_r2" &
+done < <(tail -n +2 "$SAMPLES_FILE")
+
+# Wait for all background jobs
+wait
+
+echo ""
+echo "Running MultiQC..."
+multiqc results/ -o results/ --quiet --force
+
+echo ""
+echo "Pipeline complete!"
+```
+
+### 1.4.2. Run and Compare
+
+```bash
+chmod +x bash/pipeline_parallel.sh
+time ./bash/pipeline_parallel.sh
+```
+
+Notice the interleaved output - all samples running at once:
+
+```
+[WT_REP1] Starting...
+[WT_REP2] Starting...
+[RAP1_IAA_30M_REP1] Starting...
+[WT_REP1] Complete!
+[RAP1_IAA_30M_REP1] Complete!
+[WT_REP2] Complete!
+```
+
+The timeline now looks like:
+
+```
+Timeline (parallel):
+WT_REP1:          [====FastQC====][====fastp====][======Salmon======]
+WT_REP2:          [====FastQC====][====fastp====][======Salmon======]
+RAP1_IAA_30M_REP1:[====FastQC====][====fastp====][======Salmon======]
+                                                                      [MultiQC]
+```
+
+Much faster! But...
+
+### 1.4.3. The Hidden Problem
+
+What happens with 50 samples? Or 500?
+
+```bash
+# This would launch 500 Salmon jobs simultaneously!
+# Each Salmon uses ~4GB RAM
+# 500 × 4GB = 2TB RAM required!
+```
+
+Your machine would crash from memory exhaustion.
+
+??? question "How would you fix this?"
+
+    To limit concurrent jobs, you'd need to:
+
+    - Track how many jobs are running
+    - Wait when at the limit
+    - Start new jobs as others complete
+
+    This requires:
+
+    - PID tracking arrays
+    - A counting loop
+    - Sleep/polling logic
+    - Handling jobs that finish out of order
+
+    It's doable, but it's 20-30 lines of code that has nothing to do with your science.
+    **This is infrastructure code masquerading as analysis.**
+
+---
+
+## 1.5. When Things Go Wrong
+
+Let's simulate what happens when a job fails mid-pipeline.
+
+### 1.5.1. Simulate a Failure
+
+Imagine Salmon crashes on WT_REP2 (out of memory, network timeout, etc.):
+
+```bash
+# Re-run but imagine WT_REP2's Salmon step failed
+# What happens?
+```
+
+With our parallel script, if one sample fails:
+
+- Other samples might complete
+- Some might fail
+- You don't know which finished successfully
+- No checkpoint of progress
+
+### 1.5.2. Your Options After Failure
+
+1. **Re-run everything** - WT_REP1 runs again unnecessarily
+2. **Manually track progress** - Comment out completed samples, hope you don't make mistakes
+3. **Build checkpoint logic** - Track state in files, check before each step...
+
+??? question "What would checkpointing require?"
+
+    To implement proper checkpointing, you'd need:
+
+    ```bash
+    # Track completed steps
+    STATE_FILE=".pipeline_state"
+
+    process_sample() {
+        local sample_id=$1
+
+        # Check if FastQC already done
+        if ! grep -q "${sample_id}:fastqc:done" "$STATE_FILE" 2>/dev/null; then
+            fastqc ...
+            echo "${sample_id}:fastqc:done" >> "$STATE_FILE"
+        fi
+
+        # Check if fastp already done
+        if ! grep -q "${sample_id}:fastp:done" "$STATE_FILE" 2>/dev/null; then
+            fastp ...
+            echo "${sample_id}:fastp:done" >> "$STATE_FILE"
+        fi
+
+        # ... and so on for every step
+    }
+    ```
+
+    This adds:
+
+    - State tracking for every step of every sample
+    - File locking for concurrent writes
+    - Logic to determine what's "safe to skip"
+    - Handling of partial failures within a sample
+
+    **More infrastructure code. More maintenance burden. More chances for bugs.**
+
+### 1.5.3. Reflection: The Failure Tax
+
+Failures are inevitable in computational pipelines:
+
+- Network timeouts
+- Out of memory
+- Disk full
+- Corrupted files
+- Tool bugs
+
+Every minute spent re-running already-completed work is wasted.
+Every bug in your checkpoint logic could corrupt your results.
+
+---
+
+## 1.6. Sharing With a Colleague
+
+Your colleague wants to run your pipeline. You send them the script.
+
+### 1.6.1. They Try to Run It
+
+```console
+$ bash pipeline_parallel.sh
+pipeline_parallel.sh: line 34: fastqc: command not found
+```
+
+They don't have FastQC installed.
+
+### 1.6.2. After Installing
+
+```console
+$ salmon --version
+salmon 1.4.0
+```
+
+But you used salmon 1.10.3. Different versions can produce different results.
+
+### 1.6.3. The Reproducibility Problem
+
+To share your analysis reproducibly, you'd need to:
+
+- Document every tool and version
+- Document the installation steps
+- Hope their system resolves conda packages the same way
+- Test on their machine
+- Repeat when anything updates
+
+??? question "How bad is this really?"
+
+    In a 2016 Nature survey, **70% of researchers** reported failing to reproduce another scientist's experiments.
+    Software environments are a major contributor.
+
+    "It worked on my machine" is not science.
+
+---
+
+## 1.7. Scaling to the Cluster
+
+Your PI's 50 samples arrive. Your laptop can't handle it. Time for the cluster.
+
+### 1.7.1. The Cluster Uses SLURM
+
+Your laptop script won't work. The cluster needs:
+
+```bash
+#!/bin/bash
+#SBATCH --job-name=salmon
+#SBATCH --cpus-per-task=4
+#SBATCH --mem=8G
+#SBATCH --time=2:00:00
+
+salmon quant ...
+```
+
+### 1.7.2. Your Collaborator's Cluster Uses PBS
+
+Different syntax entirely:
+
+```bash
+#!/bin/bash
+#PBS -N salmon
+#PBS -l ncpus=4
+#PBS -l mem=8gb
+#PBS -l walltime=2:00:00
+
+salmon quant ...
+```
+
+### 1.7.3. The Portability Problem
+
+You now need to maintain:
+
+- A laptop version
+- A SLURM version
+- A PBS version
+- Maybe an AWS version
+
+**Same analysis logic. Multiple scripts. Diverging codebases.**
+
+---
+
+## 1.8. Organizing Results
+
+Look at your results directory after running the pipeline:
+
+```bash
+ls -la results/
+```
+
+```console title="Output"
+results/
+├── fastqc/
+│   ├── WT_REP1_R1_fastqc.html
+│   ├── WT_REP1_R1_fastqc.zip
+│   ├── WT_REP1_R2_fastqc.html
+│   ├── ... (many more files)
+├── fastp/
+│   ├── WT_REP1.fastp.html
+│   ├── WT_REP1.fastp.json
+│   ├── WT_REP1_trimmed_R1.fastq.gz
+│   ├── ... (mixed outputs and intermediates)
+├── salmon/
+│   ├── WT_REP1/
+│   │   ├── aux_info/
+│   │   ├── quant.sf
+│   │   └── ... (nested structure)
+```
+
+### 1.8.1. The Organization Problem
+
+Your results are scattered across directories you manually created with `mkdir -p`.
+But consider:
+
+- What if you want QC reports separate from intermediate files?
+- What if you want to keep trimmed FASTQs but not raw downloads?
+- What about organizing by sample vs. by tool?
+- Who cleans up the `work/` intermediates vs. final outputs?
+
+In your bash script, every output location is hardcoded:
+
+```bash
+fastqc -o results/fastqc ...
+fastp -o results/fastp/${sample}_trimmed_R1.fastq.gz ...
+salmon quant --output results/salmon/${sample} ...
+```
+
+### 1.8.2. Changing Organization Requires Code Changes
+
+Want to reorganize? You need to:
+
+- Edit every output path in the script
+- Update any downstream code that reads those paths
+- Hope you don't break anything
+- Re-run everything (since you don't have resume)
+
+**Output organization is tangled with analysis logic.**
+
+---
+
+## 1.9. Part 1 Summary: The True Cost
+
+Let's inventory what we built and what it cost:
+
+| Component | Lines of Code | Purpose |
+|-----------|---------------|---------|
+| Sample processing logic | ~30 | Actual science |
+| Sequential loop | ~10 | Infrastructure |
+| Parallelization | ~20 | Infrastructure |
+| Checkpointing (sketched) | ~40+ | Infrastructure |
+| Job limiting (not built) | ~30+ | Infrastructure |
+| Multi-platform support | ~50+ per platform | Infrastructure |
+| Results organization | ~15 | Infrastructure |
+
+**Most of your code would be infrastructure, not science.**
+
+### What We Achieved
+
+- [x] Process multiple samples
+- [x] Basic parallelization
+
+### What We're Missing
+
+- [ ] Smart job scheduling (fit jobs to available resources)
+- [ ] Resume after failure (without re-running everything)
+- [ ] Automatic retries (retry just the failed task, not everything)
+- [ ] Reproducible environments (same tools, same versions, everywhere)
+- [ ] Transparent remote file handling (no manual downloads)
+- [ ] Cluster/cloud execution (without rewriting everything)
+- [ ] Audit trail / provenance (what ran, when, with what inputs)
+- [ ] Clean separation of outputs from intermediates
+- [ ] Simple workflow logic (separate "what" from "how")
+
+### The Fundamental Problem
+
+Bash scripts mix **what** to compute with **how** to compute it:
+
+- Analysis logic tangled with parallelization code
+- Tool commands mixed with error handling
+- Science buried under infrastructure
+
+**There has to be a better way.**
+
+---
+
+# Part 2: Building a Nextflow Pipeline
+
+Now you'll rebuild the same pipeline using Nextflow.
+At each step, we'll call back to the bash equivalent and see what's different.
+
+---
+
+## 2.0. What is Nextflow?
+
+Nextflow is a workflow manager. It handles the infrastructure so you can focus on the science:
+
+- **You declare** what processes exist and what data they need
+- **Nextflow figures out** parallelization, scheduling, error handling
+
+### 2.0.1. Key Concepts
+
+| Concept | What It Is |
+|---------|------------|
+| **Process** | A unit of work (like running FastQC on one sample) |
+| **Channel** | A queue of data flowing between processes |
+| **Workflow** | How processes connect together |
+
+### 2.0.2. Separation of Concerns
+
+In bash, everything is tangled together - tool commands, parallelization logic, error handling, file management.
+
+In Nextflow, you separate:
+
+- **Process definitions** (in module files): What each tool does, its container, resource needs
+- **Workflow logic** (in main.nf): How processes connect - just a few lines showing data flow
+
+This means your workflow logic becomes remarkably simple:
+
+```groovy
+FASTQC(samples)
+FASTP(samples)
+SALMON_QUANT(FASTP.out.reads, index)
+```
+
+Three lines. That's the entire pipeline flow. All the complexity of parallelization, containers, file staging, and error handling is declared in the process definitions and handled by Nextflow.
+
+### 2.0.3. No Tool Installation Needed
+
+Remember installing FastQC, fastp, Salmon, MultiQC with conda?
+
+With Nextflow, each process declares its own container.
+The tools install themselves, on-demand, with exact versions.
+
+Let's see how.
+
+---
+
+## 2.1. Your First Process: FastQC
+
+### 2.1.1. Create the FastQC Module
+
+Create `nextflow/modules/fastqc.nf`:
+
+```groovy title="nextflow/modules/fastqc.nf" linenums="1"
 process FASTQC {
     tag "$meta.id"
-    container 'biocontainers/fastqc:0.12.1--hdfd78af_0'
+    container 'quay.io/biocontainers/fastqc:0.12.1--hdfd78af_0'
+    publishDir "${params.outdir}/fastqc", mode: 'copy'
 
     input:
     tuple val(meta), path(reads)
 
     output:
     tuple val(meta), path("*.html"), emit: html
-    // ...
+    tuple val(meta), path("*.zip"), emit: zip
+
+    script:
+    """
+    fastqc --quiet --threads 2 ${reads}
+    """
 }
 ```
 
-```groovy title="modules/salmon.nf" linenums="1" hl_lines="3"
-process SALMON_QUANT {
+Let's break this down:
+
+| Line | What It Does |
+|------|--------------|
+| `tag "$meta.id"` | Label for logs (shows sample name) |
+| `container '...'` | The Docker image with FastQC 0.12.1 |
+| `publishDir` | Copy outputs to results folder |
+| `input:` | What data this process needs |
+| `output:` | What files it produces |
+| `script:` | The actual command |
+
+!!! tip "Remember installing FastQC with conda?"
+
+    That entire conda environment setup is now **one line**: `container '...'`
+
+    The version is locked. Your colleague gets the same version. Always.
+
+!!! tip "Remember the results organization mess?"
+
+    In bash, you had to manually create directories (`mkdir -p results/fastqc`) and carefully construct output paths.
+
+    With `publishDir`, you declare **where results go** once, and Nextflow handles the rest.
+    The organization is part of the process definition, not scattered through your script.
+
+### 2.1.2. Update main.nf
+
+Edit `nextflow/main.nf`:
+
+```groovy title="nextflow/main.nf" linenums="1" hl_lines="8 17-23 27"
+#!/usr/bin/env nextflow
+
+/*
+ * RNA-seq Analysis Pipeline - Nextflow Version
+ */
+
+// Include the process
+include { FASTQC } from './modules/fastqc'
+
+// Pipeline parameters
+params.samples = '../data/samples.csv'
+params.outdir = '../results'
+
+// Main workflow
+workflow {
+    // Create channel from sample sheet
+    ch_samples = Channel
+        .fromPath(params.samples)
+        .splitCsv(header: true)
+        .map { row ->
+            def meta = [id: row.sample]
+            def reads = [file(row.fastq_1), file(row.fastq_2)]
+            return [meta, reads]
+        }
+
+    // Run FastQC on all samples
+    FASTQC(ch_samples)
+}
+```
+
+### 2.1.3. Run It
+
+```bash
+cd nextflow
+nextflow run main.nf
+```
+
+```console title="Output"
+N E X T F L O W  ~  version 24.10.0
+
+executor >  local (3)
+[a1/b2c3d4] FASTQC (WT_REP1)           [100%] 3 of 3 ✔
+[e5/f6g7h8] FASTQC (WT_REP2)           [100%] 3 of 3 ✔
+[i9/j0k1l2] FASTQC (RAP1_IAA_30M_REP1) [100%] 3 of 3 ✔
+```
+
+Notice: **All 3 samples ran in parallel automatically.**
+
+You wrote zero parallelization code. No `&`, no `wait`, no job tracking.
+Nextflow saw that the samples were independent and parallelized them.
+
+!!! tip "Remember all that curl downloading in bash?"
+
+    Look at your `samples.csv` - those are **remote URLs**, not local files.
+
+    Nextflow treats remote files like local ones. When a process needs a file, Nextflow:
+
+    - Downloads it automatically (you may see "Staging foreign file..." messages)
+    - Caches it so it's not re-downloaded on resume
+    - Handles HTTP, HTTPS, FTP, S3, Azure Blob, Google Cloud Storage...
+
+    **No curl commands. No download scripts. Just use the URL.**
+
+---
+
+## 2.2. Adding More Processes
+
+### 2.2.1. Create the fastp Module
+
+Create `nextflow/modules/fastp.nf`:
+
+```groovy title="nextflow/modules/fastp.nf" linenums="1"
+process FASTP {
     tag "$meta.id"
-    container 'biocontainers/salmon:1.10.3--h6dccd9a_2'
+    container 'quay.io/biocontainers/fastp:0.23.4--hadf994f_2'
+    publishDir "${params.outdir}/fastp", mode: 'copy'
 
-    // ...
+    input:
+    tuple val(meta), path(reads)
+
+    output:
+    tuple val(meta), path("*_trimmed*.fastq.gz"), emit: reads
+    tuple val(meta), path("*.json"), emit: json
+    tuple val(meta), path("*.html"), emit: html
+
+    script:
+    def prefix = meta.id
+    """
+    fastp \\
+        --in1 ${reads[0]} \\
+        --in2 ${reads[1]} \\
+        --out1 ${prefix}_trimmed_R1.fastq.gz \\
+        --out2 ${prefix}_trimmed_R2.fastq.gz \\
+        --json ${prefix}.fastp.json \\
+        --html ${prefix}.fastp.html \\
+        --thread 4
+    """
 }
 ```
 
-**The workflow manages the software, not you.**
+!!! tip "Different container, no conflicts"
 
-- Each process specifies exactly what it needs
-- Versions are locked and documented in the code itself
-- No manual environment activation required
-- No "did I install this?" questions
+    fastp uses a completely different container than FastQC.
+    They could even require incompatible Python versions - doesn't matter.
+    Each process is isolated.
 
-### 3.4. Flexibility in How Environments Are Provided
+### 2.2.2. Update main.nf
 
-Nextflow can use containers (Docker, Singularity) OR conda - you choose via profiles:
+```groovy title="nextflow/main.nf" linenums="1" hl_lines="9 29"
+#!/usr/bin/env nextflow
 
-```bash
-# Use Docker containers
-nextflow run main.nf -profile docker
+/*
+ * RNA-seq Analysis Pipeline - Nextflow Version
+ */
 
-# Use Singularity (common on HPC)
-nextflow run main.nf -profile singularity
+// Include processes
+include { FASTQC } from './modules/fastqc'
+include { FASTP } from './modules/fastp'
 
-# Use Conda environments
-nextflow run main.nf -profile conda
-```
+// Pipeline parameters
+params.samples = '../data/samples.csv'
+params.outdir = '../results'
 
-The workflow code stays the same. The software management is handled automatically.
+// Main workflow
+workflow {
+    // Create channel from sample sheet
+    ch_samples = Channel
+        .fromPath(params.samples)
+        .splitCsv(header: true)
+        .map { row ->
+            def meta = [id: row.sample]
+            def reads = [file(row.fastq_1), file(row.fastq_2)]
+            return [meta, reads]
+        }
 
-### 3.5. Mix Incompatible Tools
-
-Ever tried to install tools that need different Python versions in the same environment?
-With workflow managers, each process is isolated:
-
-```groovy
-process TOOL_A {
-    container 'tool-a:1.0'  // Needs Python 2.7
-    // ...
-}
-
-process TOOL_B {
-    container 'tool-b:2.0'  // Needs Python 3.11
-    // ...
-}
-```
-
-They run in separate environments. No conflicts. No workarounds.
-
-### 3.6. Effortless Collaboration
-
-Sharing your analysis becomes trivial:
-
-```bash
-# You send your colleague:
-git clone https://github.com/your-lab/rnaseq-analysis
-cd rnaseq-analysis
-nextflow run main.nf -profile docker --samples their_data.csv
-```
-
-**Same workflow. Same software. Same results.**
-No "can you send me your installation notes?" emails.
-
-This enables:
-
-- **Reproducible science** - Reviewers can verify your analysis
-- **Collaborative research** - Teams get identical results
-- **Shared pipelines** - Communities like [nf-core](https://nf-co.re/) publish production-ready workflows
-
-### Takeaway
-
-With bash scripts, **you** manage software environments - installation, activation, documentation, troubleshooting.
-With workflow managers, the **workflow** manages environments declaratively - you just run it.
-
----
-
-## 4. Problem: Scaling Requires Rewriting
-
-### 4.1. The Scaling Problem
-
-Your bash script works for 3 samples.
-Now you have 50 samples.
-
-For bash, you need to think about:
-
-- How many parallel jobs can you run?
-- How do you manage resource contention?
-- What if different steps need different resources?
-- How do you handle partial failures across 50 samples?
-
-??? question "Think about it"
-
-    Before seeing the solution, consider:
-
-    - How would you modify your bash script to handle 50 samples? 500 samples?
-    - Salmon needs 8GB RAM, FastQC needs 2GB. How do you prevent memory exhaustion?
-    - What changes are needed to move from your laptop to a cluster with 100 nodes?
-
-### 4.2. Solution: Declarative Scaling
-
-With Nextflow, going from 3 to 50 samples requires **zero code changes**:
-
-```bash
-# 3 samples
-nextflow run main.nf --samples data/samples_3.csv
-
-# 50 samples - same command, same code
-nextflow run main.nf --samples data/samples_50.csv
-
-# 500 samples - still the same
-nextflow run main.nf --samples data/samples_500.csv
-```
-
-The workflow manager handles:
-
-- **Scheduling** - Queue tasks, respect resource limits
-- **Resource allocation** - Don't run 50 Salmon jobs simultaneously if you only have 64GB RAM
-- **Progress tracking** - Know exactly which samples completed
-- **Failure isolation** - One sample's failure doesn't affect others
-
-### 4.3. Declarative Resources
-
-Each process declares what it needs:
-
-```groovy
-process SALMON_QUANT {
-    cpus 4
-    memory '8.GB'
-
-    // ...
+    // Run processes
+    FASTQC(ch_samples)
+    FASTP(ch_samples)
 }
 ```
 
-Nextflow uses this to schedule intelligently:
-
-- **On your laptop (16GB RAM)**: Run 2 Salmon jobs at a time
-- **On a cluster (256GB RAM)**: Run 32 Salmon jobs in parallel
-- **On cloud**: Provision appropriately-sized instances
-
-**Same code. Automatic adaptation to available resources.**
-
-### Takeaway
-
-Bash scripts require rewriting to scale.
-Workflow managers handle scaling automatically through declarative resource management.
-
----
-
-## 5. Problem: No Audit Trail
-
-### 5.1. The Traceability Problem
-
-Your bash script ran. Now answer these questions:
-
-- How long did Salmon take for WT_REP2?
-- Which samples used more than 8GB memory?
-- What were the exact commands run for each step?
-- When did the pipeline run, and how long did each phase take?
-
-With bash, you'd need to manually add logging, timing, and resource monitoring.
-That's a lot of code that has nothing to do with your science.
-
-??? question "Think about it"
-
-    Before seeing the solution, consider:
-
-    - How would you write the "Methods" section of a paper based on your bash script?
-    - If a reviewer asks "how long did quantification take for each sample?", can you answer?
-    - How would you identify which step is causing out-of-memory errors?
-
-### 5.2. Solution: Automatic Provenance
-
-Nextflow generates comprehensive reports automatically:
+### 2.2.3. Run It
 
 ```bash
 nextflow run main.nf
-ls results/
 ```
 
-```console title="Output"
-results/
-├── fastqc/
-├── fastp/
-├── salmon/
-├── multiqc_report.html
-├── report.html      # Execution report
-├── timeline.html    # Visual timeline
-└── trace.txt        # Detailed metrics
-```
-
-### 5.3. Execution Timeline
-
-Open `results/timeline.html` in your browser:
-
-See exactly when each task ran, which ran in parallel, and where bottlenecks are.
-
-### 5.4. Detailed Trace
-
-```bash
-head results/trace.txt
-```
-
-```console title="Output"
-task_id  hash       name                   status     exit  duration  realtime  %cpu   peak_rss  peak_vmem
-1        5a/8b2c3d  UNTAR                  COMPLETED  0     12s       10s       45%    128 MB    256 MB
-2        3a/4b5c6d  FASTQC (WT_REP1)       COMPLETED  0     45s       42s       180%   512 MB    1.2 GB
-3        8e/9f0a1b  FASTP (WT_REP1)        COMPLETED  0     1m 12s    1m 8s     350%   1.8 GB    2.4 GB
-4        2c/3d4e5f  SALMON_QUANT (WT_REP1) COMPLETED  0     2m 45s    2m 38s    380%   4.2 GB    6.1 GB
-```
-
-Every task tracked: duration, CPU usage, memory consumption, exit status.
-Perfect for:
-
-- **Optimization** - Which step is the bottleneck?
-- **Resource planning** - How much memory does Salmon actually need?
-- **Publication** - Methods section writes itself
-- **Debugging** - Why did sample_42 fail?
-
-### Takeaway
-
-Bash scripts provide no visibility into execution.
-Workflow managers track everything automatically - timing, resources, status, and provenance.
+FastQC and FASTP run **in parallel** because they both only need the raw reads.
 
 ---
 
-## 6. Problem: Tied to One Environment
+## 2.3. Connecting Processes
 
-### 6.1. The Portability Problem
+Now let's add Salmon, which needs fastp's trimmed reads.
 
-Your bash script runs on your laptop. Now you need to:
+### 2.3.1. Create the Salmon Module
 
-- Run on your institution's HPC cluster (uses SLURM)
-- Run on a collaborator's cluster (uses PBS)
-- Run on AWS for a large dataset
+Create `nextflow/modules/salmon.nf`:
 
-Each environment needs different:
+```groovy title="nextflow/modules/salmon.nf" linenums="1"
+process UNTAR {
+    container 'ubuntu:22.04'
 
-- Job submission commands
-- Resource request syntax
-- File path conventions
-- Container runtimes (Docker vs Singularity)
+    input:
+    path archive
 
-??? question "Think about it"
+    output:
+    path "salmon", emit: index
 
-    Before seeing the solution, consider:
+    script:
+    """
+    tar -xzf $archive
+    """
+}
 
-    - How many different versions of your script would you need to maintain?
-    - What if the cluster uses Singularity but your laptop uses Docker?
-    - How do you ensure identical results across different execution environments?
+process SALMON_QUANT {
+    tag "$meta.id"
+    container 'quay.io/biocontainers/salmon:1.10.3--h6dccd9a_2'
+    publishDir "${params.outdir}/salmon", mode: 'copy'
 
-### 6.2. Solution: Configuration Profiles
+    cpus 4
+    memory '8.GB'
 
-With Nextflow, the **workflow never changes**. Only the configuration:
+    input:
+    tuple val(meta), path(reads)
+    path index
 
-```groovy title="nextflow.config"
+    output:
+    tuple val(meta), path("${meta.id}"), emit: results
+
+    script:
+    """
+    salmon quant \\
+        --index $index \\
+        --libType A \\
+        --mates1 ${reads[0]} \\
+        --mates2 ${reads[1]} \\
+        --output ${meta.id} \\
+        --threads $task.cpus
+    """
+}
+```
+
+Notice the **resource declarations**:
+
+```groovy
+cpus 4
+memory '8.GB'
+```
+
+Each process can declare its own resource requirements. Nextflow tracks these and schedules jobs to fit available resources.
+
+!!! tip "Remember the bash parallelization problem?"
+
+    With 50 samples, all Salmon jobs would start at once and crash from OOM.
+
+    Nextflow uses these declarations to **schedule intelligently**:
+
+    - Machine has 16 CPUs? Run 4 Salmon jobs at a time (each needs 4)
+    - Machine has 64GB RAM? Run 8 Salmon jobs at a time (each needs 8GB)
+    - Different processes can have different requirements - FastQC might use 2 CPUs while Salmon uses 4
+
+    You can also use `maxForks` to explicitly limit concurrent instances of a process, or configure executor-level limits in `nextflow.config`.
+
+    **Declarative resource management. No semaphore code. No manual job limiting.**
+
+### 2.3.2. Update main.nf
+
+```groovy title="nextflow/main.nf" linenums="1" hl_lines="10 15 33-37"
+#!/usr/bin/env nextflow
+
+/*
+ * RNA-seq Analysis Pipeline - Nextflow Version
+ */
+
+// Include processes
+include { FASTQC } from './modules/fastqc'
+include { FASTP } from './modules/fastp'
+include { UNTAR; SALMON_QUANT } from './modules/salmon'
+
+// Pipeline parameters
+params.samples = '../data/samples.csv'
+params.outdir = '../results'
+params.salmon_index = 'https://raw.githubusercontent.com/nf-core/test-datasets/rnaseq/reference/salmon.tar.gz'
+
+// Main workflow
+workflow {
+    // Create channel from sample sheet
+    ch_samples = Channel
+        .fromPath(params.samples)
+        .splitCsv(header: true)
+        .map { row ->
+            def meta = [id: row.sample]
+            def reads = [file(row.fastq_1), file(row.fastq_2)]
+            return [meta, reads]
+        }
+
+    // Run processes
+    FASTQC(ch_samples)
+    FASTP(ch_samples)
+
+    // Salmon needs the index AND fastp's output
+    ch_salmon_index = Channel.fromPath(params.salmon_index)
+    UNTAR(ch_salmon_index)
+
+    SALMON_QUANT(FASTP.out.reads, UNTAR.out.index.first())
+}
+```
+
+### 2.3.3. Run and Watch
+
+```bash
+nextflow run main.nf
+```
+
+Nextflow automatically determines:
+
+- FastQC and FASTP can run in parallel (both only need raw reads)
+- SALMON_QUANT must wait for FASTP (needs trimmed reads)
+- Each sample's SALMON_QUANT starts as soon as ITS FASTP finishes
+
+```
+Timeline (Nextflow automatic):
+UNTAR:     [===]
+WT_REP1:         [FastQC]    [FASTP]    [======SALMON======]
+WT_REP2:         [FastQC]    [FASTP]    [======SALMON======]
+RAP1:            [FastQC]    [FASTP]    [======SALMON======]
+```
+
+**You wrote zero scheduling code.**
+Nextflow inferred the dependencies from the data flow.
+
+---
+
+## 2.4. The Magic of Resume
+
+### 2.4.1. Run the Pipeline
+
+```bash
+nextflow run main.nf
+```
+
+### 2.4.2. Modify Something
+
+Let's say you want to change a Salmon parameter. Edit the script, then:
+
+```bash
+nextflow run main.nf -resume
+```
+
+```console title="Output"
+[a1/b2c3d4] UNTAR              [100%] 1 of 1, cached: 1 ✔
+[e5/f6g7h8] FASTQC (WT_REP1)   [100%] 3 of 3, cached: 3 ✔
+[i9/j0k1l2] FASTP (WT_REP1)    [100%] 3 of 3, cached: 3 ✔
+[m3/n4o5p6] SALMON_QUANT (WT_REP1) [100%] 3 of 3 ✔  <- Re-ran
+```
+
+Only SALMON_QUANT re-ran. Everything else used cached results.
+
+!!! tip "Remember the checkpointing nightmare?"
+
+    You'd need 40+ lines of state tracking, file locking, and recovery logic.
+
+    Nextflow gives you `-resume`. **One flag.**
+
+### 2.4.3. How It Works
+
+Nextflow creates a unique hash for each task based on:
+
+- The script content
+- Input file contents (not just names)
+- Parameters
+
+If nothing changed, the cached result is used.
+This is **scientifically rigorous** - you know exactly what ran vs. what was reused.
+
+### 2.4.4. Automatic Task Retries
+
+What if a task fails due to a transient error - network glitch, temporary resource shortage, or a tool that occasionally crashes?
+
+In bash, the whole pipeline fails and you start debugging.
+
+In Nextflow, you can configure automatic retries per process:
+
+```groovy
+process SALMON_QUANT {
+    errorStrategy 'retry'
+    maxRetries 3
+
+    // Increase memory on each retry
+    memory { 8.GB * task.attempt }
+
+    // ... rest of process
+}
+```
+
+If Salmon fails (maybe it ran out of memory), Nextflow automatically:
+
+1. Retries the **specific failed task** (not the whole pipeline)
+2. Increases memory on retry (8GB → 16GB → 24GB)
+3. Keeps successful tasks cached
+4. Continues other independent tasks while retrying
+
+!!! tip "In bash, a single failure stops everything"
+
+    You'd need to implement retry logic, track which tasks failed, increase resources manually, and restart. With 50 samples, finding and re-running just the 2 that failed is painful.
+
+    Nextflow handles this automatically, per-task, with configurable strategies.
+
+---
+
+## 2.5. Configuration Profiles
+
+### 2.5.1. Update nextflow.config
+
+```groovy title="nextflow/nextflow.config" linenums="1"
+// Parameters
+params {
+    samples = '../data/samples.csv'
+    salmon_index = 'https://raw.githubusercontent.com/nf-core/test-datasets/rnaseq/reference/salmon.tar.gz'
+    outdir = '../results'
+}
+
+// Automatic reports
+timeline {
+    enabled = true
+    file = "${params.outdir}/timeline.html"
+}
+report {
+    enabled = true
+    file = "${params.outdir}/report.html"
+}
+trace {
+    enabled = true
+    file = "${params.outdir}/trace.txt"
+}
+
+// Execution profiles
 profiles {
-
     standard {
-        process.executor = 'local'
         docker.enabled = true
+        docker.runOptions = '-u $(id -u):$(id -g)'
     }
 
     slurm {
@@ -660,7 +1279,7 @@ profiles {
 }
 ```
 
-### 6.3. Run Anywhere
+### 2.5.2. Run Anywhere
 
 ```bash
 # On your laptop
@@ -675,89 +1294,159 @@ nextflow run main.nf -profile aws
 
 **Same workflow. Same results. Different infrastructure.**
 
-### Takeaway
+Your processes don't change. The `container`, `cpus`, and `memory` declarations work everywhere. Nextflow handles:
 
-Bash scripts lock you into one environment.
-Workflow managers separate logic from infrastructure through configuration profiles.
+- Submitting jobs to SLURM/PBS/LSF/SGE schedulers
+- Spinning up cloud instances on AWS/Google/Azure
+- Pulling containers via Docker, Singularity, or Podman
+- Transferring input files to remote workers and results back
+
+!!! tip "Imagine doing this in bash..."
+
+    To run your bash pipeline on a SLURM cluster, you'd need to:
+
+    - Rewrite each step as a separate SLURM job script
+    - Add `sbatch` commands with `--dependency` flags for job ordering
+    - Handle output file staging between jobs
+    - Track job IDs and poll for completion
+    - Parse scheduler output to detect failures
+    - Implement retry logic for transient failures
+
+    For AWS Batch? Start over with a completely different approach.
+
+    **With Nextflow: change one flag.** The same workflow runs on your laptop, your institution's cluster, or a cloud with thousands of CPUs - no code changes.
 
 ---
 
-## 7. Summary: Why Workflow Management?
+## 2.6. Automatic Provenance
 
-### 7.1. The Problems with Custom Scripts
+After running the pipeline, check the results directory:
 
-| Problem | Impact | DIY Solution | Time Cost |
-|---------|--------|--------------|-----------|
-| Sequential processing | Wasted time and resources | Add parallelization | Days |
-| No resume | Re-run everything after failures | Build checkpoint system | Days |
-| Environment chaos | Not reproducible | Write installation docs | Hours per machine |
-| Scaling pain | Rewrite for each scale | Add resource management | Days |
-| No audit trail | Can't debug or optimize | Add comprehensive logging | Days |
-| Portability | Tied to one system | Rewrite for each platform | Days per platform |
+```bash
+ls ../results/
+```
 
-**Total: Weeks of engineering that isn't your science.**
+```console title="Output"
+fastqc/          fastp/          salmon/
+report.html      timeline.html   trace.txt
+```
 
-### 7.2. What Workflow Managers Provide
+### 2.6.1. Execution Timeline
 
-All of this comes built-in:
+Open `timeline.html` in a browser. You'll see:
 
-- **Automatic parallelization** from data dependencies
-- **Resume and caching** with content-based hashing
-- **Container isolation** for reproducibility
-- **Declarative scaling** for any sample count
-- **Comprehensive provenance** for every execution
-- **Portable execution** across any infrastructure
+- When each task ran
+- Which tasks ran in parallel
+- Where the bottlenecks are
 
-### 7.3. When to Use Workflow Management
+### 2.6.2. Detailed Trace
 
-**Use a workflow manager when:**
+```bash
+head ../results/trace.txt
+```
+
+Every task tracked:
+
+- Duration and wall-clock time
+- CPU usage percentage
+- Memory consumption
+- Exit status
+
+!!! tip "Remember we never added logging to the bash script?"
+
+    With Nextflow, comprehensive provenance tracking is built in.
+    Zero extra code.
+
+---
+
+## 2.7. Part 2 Summary: What Nextflow Gave Us
+
+### Side-by-Side Comparison
+
+| Feature | Bash | Nextflow |
+|---------|------|----------|
+| Tool installation | Manual conda/mamba | `container` directive |
+| Parallelization | `&` + `wait` + job limiting | Automatic from data flow |
+| Failure recovery | Manual checkpoint logic | `-resume` flag |
+| Task retries | Manual retry loops | `errorStrategy 'retry'` per process |
+| Resource management | Manual, error-prone | Declarative per-process (`cpus`, `memory`, `maxForks`) |
+| Remote files | Manual curl/wget scripts | Transparent (URLs work like local paths) |
+| Results organization | Manual mkdir + path construction | `publishDir` directive |
+| Cluster/cloud execution | Complete rewrite per platform | Same code, different profile |
+| Workflow logic | Tangled with infrastructure | Clean process calls (3 lines for whole pipeline) |
+| Provenance | Manual logging | Built-in |
+
+### Code Comparison
+
+| Component | Bash Lines | Nextflow Lines |
+|-----------|-----------|----------------|
+| Core analysis logic | ~30 | ~50 |
+| Parallelization | ~20 | 0 |
+| Job limiting | ~30 | 0 (declarative resources) |
+| Resume/checkpoint | ~40 | 0 (`-resume` built-in) |
+| Cluster/cloud support | ~100+/platform | ~10 (profiles) |
+| Logging/provenance | ~30 | 0 (built-in) |
+
+**Nextflow code is almost all science. Bash code is mostly infrastructure.**
+
+Running on a cluster or cloud with bash would require completely separate scripts with scheduler-specific job submission, dependency tracking, and file staging - hundreds of lines of infrastructure code per platform. With Nextflow, you write your workflow once and add a few lines of configuration.
+
+---
+
+## When to Use What
+
+### Use a Workflow Manager When:
 
 - Processing more than a handful of samples
 - Pipeline has multiple steps
 - Results need to be reproducible
 - Running on different machines/clusters
-- Analysis takes more than a few minutes
 - Others need to run your pipeline
+- You want to focus on science, not infrastructure
 
-**Bash scripts are fine for:**
+### Bash Scripts Are Fine For:
 
 - Quick one-off explorations
 - Single-sample, single-step operations
 - Interactive work with immediate feedback
+- Simple tasks where setup overhead isn't worth it
 
-### 7.4. Next Steps
+---
 
-This tutorial used Nextflow, but the concepts apply broadly:
+## Next Steps
+
+This tutorial used Nextflow, but the concepts apply to any workflow manager:
 
 - **Nextflow** - What we used here; strong in bioinformatics
 - **Snakemake** - Python-based; popular in genomics
 - **WDL** - Broad Institute standard; used in Terra/Cromwell
 - **CWL** - Highly portable; vendor-neutral standard
 
-Choose based on your community and infrastructure. The principles are the same.
-
 **Continue learning:**
 
 - [Hello Nextflow](../hello_nextflow/index.md) - Full Nextflow introduction
-- [Snakemake Tutorial](https://snakemake.readthedocs.io/en/stable/tutorial/tutorial.html)
-- [WDL Documentation](https://openwdl.org/)
+- [nf-core](https://nf-co.re/) - Production-ready community pipelines
 
 ---
 
 ## Quick Reference
 
-### The Six Problems Solved by Workflow Management
+### The Problems Solved
 
-| # | Problem | Bash Reality | Workflow Solution |
-|---|---------|-------------|-------------------|
-| 1 | Sequential processing | Samples wait in line | Automatic parallelization |
-| 2 | No crash recovery | Start over from scratch | Resume from failure point |
-| 3 | Environment chaos | "Works on my machine" | Per-process containers |
-| 4 | Scaling pain | Rewrite for more samples | Declarative scaling |
-| 5 | No audit trail | What ran? Who knows? | Automatic provenance |
-| 6 | Portability lock-in | Tied to one machine | Write once, run anywhere |
+| Problem | Bash Reality | Workflow Solution |
+|---------|-------------|-------------------|
+| Sequential processing | Samples wait in line | Automatic parallelization |
+| No crash recovery | Start over from scratch | Resume from failure point |
+| Transient failures | Pipeline crashes, manual restart | Automatic per-task retries |
+| Environment chaos | "Works on my machine" | Per-process containers |
+| Scaling pain | Rewrite for more samples | Declarative resources (`cpus`, `memory`, `maxForks`) |
+| Remote data access | Manual curl/wget everywhere | URLs just work (auto-cached) |
+| Results scattered | Manual mkdir + paths everywhere | Declarative publishDir |
+| Tangled code | Infrastructure mixed with science | Clean separation (3-line workflow) |
+| No audit trail | What ran? Who knows? | Automatic provenance |
+| Cluster/cloud execution | Complete rewrite per scheduler | Same workflow, `-profile slurm` or `-profile aws` |
 
-### Nextflow Commands Used
+### Nextflow Commands
 
 ```bash
 # Run workflow
@@ -770,5 +1459,5 @@ nextflow run main.nf -resume
 nextflow run main.nf -profile slurm
 
 # Override parameters
-nextflow run main.nf --samples my_data.csv
+nextflow run main.nf --samples data/more_samples.csv
 ```
