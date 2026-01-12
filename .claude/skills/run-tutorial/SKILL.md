@@ -9,8 +9,7 @@ Walk through a training tutorial lesson as a learner would, progressively buildi
 
 **This skill focuses on the unique value of simulating a learner's experience.** It automatically invokes other skills during the walkthrough:
 
-- **Highlight validation** → Invokes `/validate` skill (includes highlight checking)
-- **Pedagogical quality & lesson structure** → Invokes `/validate` skill
+- **Lesson validation** → Invokes `/validate` skill (includes highlight checking, structure, formatting)
 - **Testing final scripts** → Invokes `/test-example` skill for solution files
 
 ---
