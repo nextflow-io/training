@@ -326,16 +326,19 @@ Categorize issues into:
 Before making any changes, clearly present:
 
 1. **Summary of proposed fixes** - List each fix with:
+
    - File and line number
    - What the current content is
    - What the proposed fix would be
    - Why this fix is needed
 
 2. **Ask for user approval** using AskUserQuestion:
+
    - "Do you want me to apply these fixes and create a PR?"
    - Options: "Yes, create PR", "Let me review/modify first", "No, skip PR"
 
 3. **If user wants to review/modify**:
+
    - Apply fixes one at a time
    - After each fix, show the diff and ask if it's correct
    - Allow user to request modifications before proceeding
