@@ -168,21 +168,21 @@ mv tests/modules/samtools/index/main.nf.test modules/samtools/index/tests/
 
 Now we can simplify the `script` section of the test file to a relative path:
 
-_Before:_
+=== "After"
 
-```groovy title="modules/samtools/index/tests/main.nf.test" linenums="3" hl_lines="2"
-name "Test Process SAMTOOLS_INDEX"
-script "modules/samtools/index/main.nf"
-process "SAMTOOLS_INDEX"
-```
+    ```groovy title="modules/samtools/index/tests/main.nf.test" linenums="3" hl_lines="2"
+    name "Test Process SAMTOOLS_INDEX"
+    script "../main.nf"
+    process "SAMTOOLS_INDEX"
+    ```
 
-_After:_
+=== "Before"
 
-```groovy title="modules/samtools/index/tests/main.nf.test" linenums="3" hl_lines="2"
-name "Test Process SAMTOOLS_INDEX"
-script "../main.nf"
-process "SAMTOOLS_INDEX"
-```
+    ```groovy title="modules/samtools/index/tests/main.nf.test" linenums="3" hl_lines="2"
+    name "Test Process SAMTOOLS_INDEX"
+    script "modules/samtools/index/main.nf"
+    process "SAMTOOLS_INDEX"
+    ```
 
 This tells the test where to find the module's `main.nf` file, without having to specify the full path.
 
@@ -190,68 +190,68 @@ This tells the test where to find the module's `main.nf` file, without having to
 
 The stub file includes a placeholder that we need to replace with an actual test input, appropriate to the input of `samtools index`. The appropriate input is a BAM file, which we have available in the `data/bam` directory.
 
-_Before:_
+=== "After"
 
-```groovy title="modules/samtools/index/tests/main.nf.test" linenums="14"
-process {
-    """
-    // define inputs of the process here. Example:
-    // input[0] = file("test-file.txt")
-    """
-}
-```
+    ```groovy title="modules/samtools/index/tests/main.nf.test" linenums="14"
+    process {
+        """
+        input[0] = file("${projectDir}/data/bam/reads_son.bam")
+        """
+    }
+    ```
 
-_After:_
+=== "Before"
 
-```groovy title="modules/samtools/index/tests/main.nf.test" linenums="14"
-process {
-    """
-    input[0] = file("${projectDir}/data/bam/reads_son.bam")
-    """
-}
-```
+    ```groovy title="modules/samtools/index/tests/main.nf.test" linenums="14"
+    process {
+        """
+        // define inputs of the process here. Example:
+        // input[0] = file("test-file.txt")
+        """
+    }
+    ```
 
 ### 1.4. Name the test based on functionality
 
 As we learned before, it's good practice to rename the test to something that makes sense in the context of the test.
 
-_Before:_
+=== "After"
 
-```groovy title="modules/samtools/index/tests/main.nf.test" linenums="7"
-test("Should run without failures") {
-```
+    ```groovy title="modules/samtools/index/tests/main.nf.test" linenums="7"
+    test("Should index reads_son.bam correctly") {
+    ```
+
+=== "Before"
+
+    ```groovy title="modules/samtools/index/tests/main.nf.test" linenums="7"
+    test("Should run without failures") {
+    ```
 
 This takes an arbitrary string, so we could put anything we want.
-Here we choose to refer to the file name and its format:
-
-_After:_
-
-```groovy title="modules/samtools/index/tests/main.nf.test" linenums="7"
-test("Should index reads_son.bam correctly") {
-```
+Here we choose to refer to the file name and its format.
 
 ### 1.5. Specify test parameters
 
 The `params` block in the stub file includes a placeholder for parameters:
 
-_Before:_
+=== "After"
 
-```groovy title="modules/samtools/index/tests/main.nf.test" linenums="11"
-params {
-    // define parameters here. Example:
-    // outdir = "tests/results"
-}
-```
+    ```groovy title="modules/samtools/index/tests/main.nf.test" linenums="11"
+    params {
+        outdir = "tests/results"
+    }
+    ```
 
-We use it to specify a location for the results to be output, using the default suggestion:
+=== "Before"
 
-_After:_
+    ```groovy title="modules/samtools/index/tests/main.nf.test" linenums="11"
+    params {
+        // define parameters here. Example:
+        // outdir = "tests/results"
+    }
+    ```
 
-```groovy title="modules/samtools/index/tests/main.nf.test" linenums="11"
-params {
-    outdir = "tests/results"
-}
-```
+We use it to specify a location for the results to be output, using the default suggestion.
 
 ### 1.6. Run the test and examine the output
 
@@ -493,52 +493,52 @@ mv tests/modules/gatk/haplotypecaller/main.nf.test modules/gatk/haplotypecaller/
 
 Finally, don't forget to update the script path:
 
-_Before:_
+=== "After"
 
-```groovy title="modules/gatk/haplotypecaller/tests/main.nf.test" linenums="3" hl_lines="2"
-    name "Test Process GATK_HAPLOTYPECALLER"
-    script "modules/gatk/haplotypecaller/main.nf"
-    process "GATK_HAPLOTYPECALLER"
-```
+    ```groovy title="modules/gatk/haplotypecaller/tests/main.nf.test" linenums="3" hl_lines="2"
+        name "Test Process GATK_HAPLOTYPECALLER"
+        script "../main.nf"
+        process "GATK_HAPLOTYPECALLER"
+    ```
 
-_After:_
+=== "Before"
 
-```groovy title="modules/gatk/haplotypecaller/tests/main.nf.test" linenums="3" hl_lines="2"
-    name "Test Process GATK_HAPLOTYPECALLER"
-    script "../main.nf"
-    process "GATK_HAPLOTYPECALLER"
-```
+    ```groovy title="modules/gatk/haplotypecaller/tests/main.nf.test" linenums="3" hl_lines="2"
+        name "Test Process GATK_HAPLOTYPECALLER"
+        script "modules/gatk/haplotypecaller/main.nf"
+        process "GATK_HAPLOTYPECALLER"
+    ```
 
 ### 2.3. Provide inputs using the setup method
 
 We insert a `setup` block before the `when` block, where we can trigger a run of the `SAMTOOLS_INDEX` process on one of our original input files. Also, remember as before to change the test name to something meaningful.
 
-_Before:_
+=== "After"
 
-```groovy title="modules/gatk/haplotypecaller/tests/main.nf.test" linenums="7"  hl_lines="1"
-test("Should run without failures") {
+    ```groovy title="modules/gatk/haplotypecaller/tests/main.nf.test" linenums="7" hl_lines="1-12"
+        test("Should call son's haplotype correctly") {
 
-    when {
-```
-
-_After:_
-
-```groovy title="modules/gatk/haplotypecaller/tests/main.nf.test" linenums="7" hl_lines="1-12"
-    test("Should call son's haplotype correctly") {
-
-        setup {
-            run("SAMTOOLS_INDEX") {
-                script "../../../samtools/index/main.nf"
-                process {
-                    """
-                    input[0] =  file("${projectDir}/data/bam/reads_son.bam")
-                    """
+            setup {
+                run("SAMTOOLS_INDEX") {
+                    script "../../../samtools/index/main.nf"
+                    process {
+                        """
+                        input[0] =  file("${projectDir}/data/bam/reads_son.bam")
+                        """
+                    }
                 }
             }
-        }
+
+            when {
+    ```
+
+=== "Before"
+
+    ```groovy title="modules/gatk/haplotypecaller/tests/main.nf.test" linenums="7"  hl_lines="1"
+    test("Should run without failures") {
 
         when {
-```
+    ```
 
 Then we can refer to the output of that process in the `when` block where we specify the test inputs:
 
@@ -652,24 +652,24 @@ More exactly, we'll have the tool read the lines of the VCF file and check for t
 
 In practice, we replace the second assertion in the `then` block as follows:
 
-_Before:_
+=== "After"
 
-```groovy title="modules/gatk/haplotypecaller/tests/main.nf.test" linenums="35" hl_lines="3"
-then {
-    assert process.success
-    assert snapshot(process.out).match()
-}
-```
+    ```groovy title="modules/gatk/haplotypecaller/tests/main.nf.test" linenums="35" hl_lines="3 4"
+            then {
+                assert process.success
+                assert path(process.out[0][0]).readLines().contains('#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	reads_son')
+                assert path(process.out[0][0]).readLines().contains('20_10037292_10066351	3277	.	G	<NON_REF>	.	.	END=3282	GT:DP:GQ:MIN_DP:PL	0/0:25:72:24:0,72,719')
+            }
+    ```
 
-_After:_
+=== "Before"
 
-```console title="modules/gatk/haplotypecaller/tests/main.nf.test" linenums="35" hl_lines="3 4"
-        then {
-            assert process.success
-            assert path(process.out[0][0]).readLines().contains('#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	reads_son')
-            assert path(process.out[0][0]).readLines().contains('20_10037292_10066351	3277	.	G	<NON_REF>	.	.	END=3282	GT:DP:GQ:MIN_DP:PL	0/0:25:72:24:0,72,719')
-        }
-```
+    ```groovy title="modules/gatk/haplotypecaller/tests/main.nf.test" linenums="35" hl_lines="3"
+    then {
+        assert process.success
+        assert snapshot(process.out).match()
+    }
+    ```
 
 Here we're reading in the full content of the VCF output file and searching for a content match, which is okay to do on a small test file, but you wouldn't want to do that on a larger file.
 You might instead choose to read in specific lines.
@@ -917,21 +917,21 @@ mv tests/modules/gatk/jointgenotyping/main.nf.test modules/gatk/jointgenotyping/
 
 And don't forget to update the script path:
 
-_Before:_
+=== "After"
 
-```groovy title="modules/gatk/jointgenotyping/tests/main.nf.test" linenums="3" hl_lines="2"
-name "Test Process GATK_JOINTGENOTYPING"
-script "modules/gatk/jointgenotyping/main.nf"
-process "GATK_JOINTGENOTYPING"
-```
+    ```groovy title="modules/gatk/jointgenotyping/tests/main.nf.test" linenums="3" hl_lines="2"
+    name "Test Process GATK_JOINTGENOTYPING"
+    script "../main.nf"
+    process "GATK_JOINTGENOTYPING"
+    ```
 
-_After:_
+=== "Before"
 
-```groovy title="modules/gatk/jointgenotyping/tests/main.nf.test" linenums="3" hl_lines="2"
-name "Test Process GATK_JOINTGENOTYPING"
-script "../main.nf"
-process "GATK_JOINTGENOTYPING"
-```
+    ```groovy title="modules/gatk/jointgenotyping/tests/main.nf.test" linenums="3" hl_lines="2"
+    name "Test Process GATK_JOINTGENOTYPING"
+    script "modules/gatk/jointgenotyping/main.nf"
+    process "GATK_JOINTGENOTYPING"
+    ```
 
 ### 3.4. Provide inputs
 
@@ -1074,17 +1074,17 @@ nextflow_pipeline {
 
 Just correct the name to something meaningful (you'll see why this is useful shortly).
 
-_Before:_
+=== "After"
 
-```groovy title="tests/genomics-4.nf.test" linenums="1" hl_lines="1"
-    test("Should run without failures") {
-```
+    ```groovy title="tests/genomics-4.nf.test" linenums="1" hl_lines="1"
+        test("Should run the pipeline without failures") {
+    ```
 
-_After:_
+=== "Before"
 
-```groovy title="tests/genomics-4.nf.test" linenums="1" hl_lines="1"
-    test("Should run the pipeline without failures") {
-```
+    ```groovy title="tests/genomics-4.nf.test" linenums="1" hl_lines="1"
+        test("Should run without failures") {
+    ```
 
 !!!note
 
@@ -1152,31 +1152,31 @@ The test passes, confirming that our complete variant calling pipeline:
 
 nf-test has one more trick up it's sleeve. We can run all the tests at once! Modify the `nf-test.config` file so that nf-test looks in every directory for nf-test files. You can do this by modifying the `testsDir` parameter:
 
-_Before:_
+=== "After"
 
-```groovy title="nf-test.config" linenums="1" hl_lines="3"
-config {
+    ```groovy title="nf-test.config" linenums="1" hl_lines="3"
+    config {
 
-    testsDir "tests"
-    workDir ".nf-test"
-    configFile "tests/nextflow.config"
-    profile ""
+        testsDir "."
+        workDir ".nf-test"
+        configFile "tests/nextflow.config"
+        profile ""
 
-}
-```
+    }
+    ```
 
-_After:_
+=== "Before"
 
-```groovy title="nf-test.config" linenums="1" hl_lines="3"
-config {
+    ```groovy title="nf-test.config" linenums="1" hl_lines="3"
+    config {
 
-    testsDir "."
-    workDir ".nf-test"
-    configFile "tests/nextflow.config"
-    profile ""
+        testsDir "tests"
+        workDir ".nf-test"
+        configFile "tests/nextflow.config"
+        profile ""
 
-}
-```
+    }
+    ```
 
 Now, we can simply run nf-test and it will run _every single test_ in our repository:
 
