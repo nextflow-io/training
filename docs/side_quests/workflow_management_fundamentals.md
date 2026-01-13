@@ -1092,7 +1092,7 @@ Now you've experienced the answer firsthand. Building production-quality pipelin
 
 Workflow managers like Nextflow handle that infrastructure for you. You declare what each process needs and produces; the framework figures out the rest. The result is code that's almost entirely focused on your science, with production-quality features built in.
 
-There's another benefit worth mentioning: **standardization**. When everyone uses the same workflow framework, skills transfer between projects and organizations. New team members can contribute immediately instead of learning someone's homegrown scripting solution. The community shares patterns, modules, and best practices. You're not maintaining your own infrastructure - you're using battle-tested tools that thousands of others rely on.
+There's another benefit worth mentioning: **standardization**. Workflow managers are established tools with communities, documentation, and shared best practices. When you join a new team or project using one, you're working with familiar concepts rather than deciphering someone's homegrown scripting solution. Skills transfer. You're not maintaining custom infrastructure - you're using battle-tested tools that thousands of others rely on.
 
 ### What's Next?
 
