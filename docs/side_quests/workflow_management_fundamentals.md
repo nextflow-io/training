@@ -1,12 +1,36 @@
 # Workflow Management Fundamentals
 
-If you're coming from a background of writing shell scripts for data processing, workflow management tools might seem like unnecessary complexity.
-Why learn a whole new framework when your bash script does the job?
+If you're coming from a background of writing scripts for data processing - whether in bash, Python, or any other language - workflow management tools might seem like unnecessary complexity.
+Why learn a whole new framework when your script does the job?
 
 This side quest answers that question through direct experience.
-You'll build a real analysis pipeline in bash, hit its limitations firsthand, then rebuild it in Nextflow to see what workflow management actually provides.
+You'll build a real analysis pipeline using scripts, try to achieve production-quality standards, then rebuild it in Nextflow to see what workflow management actually provides.
 
-**What you'll build:**
+!!! note "Why bash?"
+
+    We use bash in Part 1 because it's common for bioinformatics pipelines, but the limitations we'll encounter apply equally to Python scripts, R pipelines, or any approach where you're manually orchestrating tools. The issue isn't the language - it's the scripting approach itself.
+
+---
+
+## What Makes a Good Analysis Pipeline?
+
+Before writing any code, let's define what we're aiming for. A production-quality analysis pipeline should have these qualities:
+
+- **Reproducibility** - Same inputs produce identical outputs, every time. Results can be verified and published with confidence.
+- **Software management** - Each task gets its own isolated environment. No dependency conflicts between tools, and a standardized approach across your whole pipeline.
+- **Scalability** - Handles 3 samples or 3,000 without code changes.
+- **Efficient parallelization** - Independent tasks run simultaneously, so analysis completes in hours, not days.
+- **Resource awareness** - Respects memory and CPU limits. No crashed jobs or killed processes.
+- **Failure recovery** - Can resume from where it stopped. A single failure doesn't waste hours of completed work.
+- **Portability** - Runs on laptop, cluster, or cloud with the same code.
+
+These aren't nice-to-haves - they're requirements for serious computational research.
+
+**The question is: how hard is it to achieve these qualities?**
+
+---
+
+## What You'll Build
 
 An RNA-seq analysis pipeline that runs:
 
@@ -18,8 +42,8 @@ An RNA-seq analysis pipeline that runs:
 
 | Part | What You'll Do | What You'll Learn |
 |------|----------------|-------------------|
-| **Part 1: Bash** | Build a pipeline incrementally | Where bash scripts break down |
-| **Part 2: Nextflow** | Fill in process definitions | How workflow managers solve each problem |
+| **Part 1: Bash** | Build a pipeline, try to hit those quality standards | How much infrastructure code it takes |
+| **Part 2: Nextflow** | Rebuild with a workflow manager | How the same standards are achieved with less effort |
 
 By the end, you'll understand *why* workflow managers exist - not because someone told you, but because you experienced the problems yourself.
 
@@ -27,8 +51,8 @@ By the end, you'll understand *why* workflow managers exist - not because someon
 
 ## 1. Building a Bash Pipeline
 
-In this part, you'll build an RNA-seq analysis pipeline using bash.
-Along the way, you'll encounter real limitations that plague shell-based pipelines.
+In this part, you'll build an RNA-seq analysis pipeline using bash, aiming for the production-quality standards we defined above.
+Let's see how far we can get - and where things get difficult.
 
 ---
 
@@ -129,7 +153,9 @@ You just spent time on:
 - Waiting for dependency resolution
 - Hoping nothing conflicts
 
-This is before writing a single line of analysis code. And every colleague who runs your pipeline will need to repeat this setup - or hope their existing environment doesn't conflict with yours.
+This is before writing a single line of analysis code. And this is a simple pipeline - real analyses often need tools with conflicting dependencies that can't coexist in the same environment.
+
+You could improve this with versioned `environment.yml` files, but that's another system you'd need to set up and maintain. Every colleague who runs your pipeline needs to replicate your environment setup.
 
 ---
 
@@ -542,20 +568,19 @@ Now you're rewriting the entire script with job arrays, dependency tracking, and
 
 ### 1.7. Part 1 Summary
 
-**What we achieved:**
+Let's check our progress against the production-quality standards we defined:
 
-- [x] Process multiple samples
-- [x] Basic parallelization
+- ⚠️ **Reproducibility** - Partial. Conda environment helps, but requires discipline to maintain.
+- ⚠️ **Software management** - Partial. All tools share one environment - conflicts possible. Setup is manual and must be replicated by every user.
+- ✅ **Scalability** - Works. The loop handles any number of samples.
+- ⚠️ **Efficient parallelization** - Partial. Works, but no resource limits.
+- ❌ **Resource awareness** - Missing. Would need 20-30 lines of job limiting code.
+- ❌ **Failure recovery** - Missing. Would need 40+ lines of checkpoint logic.
+- ❌ **Portability** - Missing. Complete rewrite for each cluster type.
 
-**What we're missing:**
+We achieved the basics, but the production-quality features require significant infrastructure code that has nothing to do with our science.
 
-- [ ] Smart job scheduling (no OOM crashes)
-- [ ] Resume after failure
-- [ ] Reproducible environments
-- [ ] Cluster/cloud portability
-- [ ] Audit trail
-
-**The fundamental problem:** Bash scripts mix *what* to compute with *how* to compute it.
+**The fundamental problem:** Scripts mix *what* to compute with *how* to compute it. Every quality requirement adds more infrastructure code - and this would be true whether we wrote it in bash, Python, or any other language.
 
 **There has to be a better way.**
 
@@ -707,7 +732,7 @@ The script block contains the actual command - essentially the same as what you 
 
 This is nearly identical to your bash FastQC command. The `${reads}` variable expands to the file paths that were staged from the input declaration. You don't need `-o results/fastqc` because `publishDir` handles output location.
 
-!!! tip "Contrast with bash"
+!!! tip "Contrast with scripts"
 
     In bash, you spent time installing FastQC with conda, activating environments, and hoping versions match.
 
@@ -827,11 +852,11 @@ Now connect FASTP to the sample channel in the workflow:
     // TODO: Call FASTP process with ch_samples
     ```
 
-!!! tip "Contrast with bash"
+!!! tip "Contrast with scripts"
 
-    Remember hoping your conda environment wouldn't have dependency conflicts?
+    Remember installing all tools into one conda environment and hoping they wouldn't conflict?
 
-    fastp uses a completely different container than FastQC. They could require incompatible Python versions or conflicting libraries - doesn't matter. Each process is isolated. No more "works on my machine" problems.
+    Here, fastp uses a completely different container than FastQC. They could require incompatible Python versions or conflicting libraries - doesn't matter. Each process gets its own isolated environment. This is the per-task software management we talked about.
 
 ---
 
@@ -949,7 +974,7 @@ Watch what happens - Nextflow automatically determines the execution order from 
 - **SALMON_QUANT must wait for FASTP** - It needs the trimmed reads output
 - **Each sample runs independently** - Sample 2's Salmon can start as soon as Sample 2's fastp finishes, even if Sample 1 is still running
 
-!!! tip "Contrast with bash"
+!!! tip "Contrast with scripts"
 
     Remember implementing `&` and `wait`? Then worrying about memory limits with 500 samples?
 
@@ -1001,15 +1026,19 @@ Same workflow code. Same scientific results. Different infrastructure. You write
 
 ### 2.7. Part 2 Summary
 
-| Problem | Bash Approach | Nextflow Solution |
-|---------|---------------|-------------------|
-| Tool installation | Manual conda setup, pray for no conflicts | `container` directive - exact versions, isolated |
-| Parallelization | `&` + `wait`, risk OOM with many samples | Automatic from data flow, respects resources |
-| Failure recovery | Manual checkpoint logic (40+ lines) | `-resume` flag - one word |
-| Resource management | Hardcoded, error-prone | Declarative per-process, portable |
-| Cluster/cloud | Complete rewrite per environment | Same code, different profile |
+Let's check our progress against the same production-quality standards:
 
-**The fundamental difference:** Your bash scripts mixed *what* to compute with *how* to compute it. Nextflow separates these concerns - you declare the science, Nextflow handles the infrastructure.
+- ✅ **Reproducibility** - Containers lock exact tool versions. Same results everywhere.
+- ✅ **Software management** - Each process gets its own isolated container. No conflicts, no manual setup.
+- ✅ **Scalability** - Same code for 3 or 3,000 samples.
+- ✅ **Efficient parallelization** - Automatic from data flow declarations.
+- ✅ **Resource awareness** - Declarative `cpus` and `memory` per process.
+- ✅ **Failure recovery** - `-resume` flag. One word.
+- ✅ **Portability** - Same code, different `-profile`.
+
+Every quality we struggled with in Part 1 is built into Nextflow. You didn't write any infrastructure code - you just declared what each process needs and produces.
+
+**The fundamental difference:** Scripts mix *what* to compute with *how* to compute it. Workflow managers separate these concerns - you declare the science, the framework handles the infrastructure.
 
 ---
 
