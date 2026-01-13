@@ -10,13 +10,15 @@
 :green_book: The video transcript is available [here](./transcripts/02_hello_channels.md).
 ///
 
-In Part 1 of this course (Hello World), we showed you how to provide a variable input to a process by providing the input in the process call directly: `sayHello(params.greeting)`.
+In Part 1 of this course (Hello World), we showed you how to provide a variable input to a process by providing the input in the process call directly: `sayHello(params.input)`.
 That was a deliberately simplified approach.
 In practice, that approach has major limitations; namely that it only works for very simple cases where we only want to run the process once, on a single value.
 In most realistic workflow use cases, we want to process multiple values (experimental data for multiple samples, for example), so we need a more sophisticated way to handle inputs.
 
 That is what Nextflow **channels** are for.
 Channels are queues designed to handle inputs efficiently and shuttle them from one step to another in multi-step workflows, while providing built-in parallelism and many additional benefits.
+
+<!-- TODO: simple diagram for channels -->
 
 In this part of the course, you will learn how to use a channel to handle multiple inputs from a variety of different sources.
 You will also learn to use **operators** to transform channel contents as needed.
@@ -28,30 +30,52 @@ _For training on using channels to connect steps in a multi-step workflow, see P
 ## 0. Warmup: Run `hello-channels.nf`
 
 We're going to use the workflow script `hello-channels.nf` as a starting point.
-It is equivalent to the script produced by working through Part 1 of this training course.
+It is equivalent to the script produced by working through Part 1 of this training course, except we've changed the output destination:
+
+```groovy title="hello-channels.nf" linenums="37" hl_lines="3"
+output {
+    first_output {
+        path 'hello_channels'
+        mode 'copy'
+    }
+}
+```
 
 Just to make sure everything is working, run the script once before making any changes:
 
 ```bash
-nextflow run hello-channels.nf --greeting 'Hello Channels!'
+nextflow run hello-channels.nf --input 'Hello Channels!'
 ```
 
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.04.3
+     N E X T F L O W   ~  version 25.10.2
 
-    Launching `hello-channels.nf` [insane_lichterman] DSL2 - revision: c33d41f479
+    Launching `hello-channels.nf` [wise_jennings] DSL2 - revision: b24f4902d6
 
     executor >  local (1)
-    [86/9efa08] sayHello | 1 of 1 ✔
+    [6f/824bc1] process > sayHello [100%] 1 of 1 ✔
     ```
 
-As previously, you will find the output file named `output.txt` in the `results` directory (specified by the `publishDir` directive).
+As previously, you will find the output file named `output.txt` in the `results/hello_channels` directory (as specified in the `output` block of the workflow script, shown above).
 
-```console title="results/output.txt" linenums="1"
-Hello Channels!
-```
+??? abstract "Directory contents"
+
+    ```console title="results/hello_channels" hl_lines="2-3"
+    results
+    ├── hello_channels
+    │   └── output.txt
+    ├── hello_world
+    │   └── output.txt
+    └── output.txt -> /workspaces/training/hello-nextflow/work/8c/79499c11beea6e9d43605141f2817f/output.txt
+    ```
+
+??? abstract "File contents"
+
+    ```console title="results/hello_channels/output.txt"
+    Hello Channels!
+    ```
 
 If that worked for you, you're ready to learn about channels.
 
@@ -83,14 +107,17 @@ In the workflow block, add the channel factory code:
 
 === "After"
 
-    ```groovy title="hello-channels.nf" linenums="27" hl_lines="3 4"
+    ```groovy title="hello-channels.nf" linenums="27" hl_lines="4 5"
     workflow {
 
+        main:
         // create a channel for inputs
         greeting_ch = channel.of('Hello Channels!')
-
         // emit a greeting
-        sayHello(params.greeting)
+        sayHello(params.input)
+
+        publish:
+        first_output = sayHello.out
     }
     ```
 
@@ -99,8 +126,12 @@ In the workflow block, add the channel factory code:
     ```groovy title="hello-channels.nf" linenums="27"
     workflow {
 
+        main:
         // emit a greeting
-        sayHello(params.greeting)
+        sayHello(params.input)
+
+        publish:
+        first_output = sayHello.out
     }
     ```
 
@@ -117,11 +148,14 @@ In the workflow block, make the following code change:
     ```groovy title="hello-channels.nf" linenums="27" hl_lines="7"
     workflow {
 
+        main:
         // create a channel for inputs
         greeting_ch = channel.of('Hello Channels!')
-
         // emit a greeting
         sayHello(greeting_ch)
+
+        publish:
+        first_output = sayHello.out
     }
     ```
 
@@ -130,11 +164,14 @@ In the workflow block, make the following code change:
     ```groovy title="hello-channels.nf" linenums="27"
     workflow {
 
+        main:
         // create a channel for inputs
         greeting_ch = channel.of('Hello Channels!')
-
         // emit a greeting
-        sayHello(params.greeting)
+        sayHello(params.input)
+
+        publish:
+        first_output = sayHello.out
     }
     ```
 
@@ -142,7 +179,7 @@ This tells Nextflow to run the `sayHello` process on the contents of the `greeti
 
 Now our workflow is properly functional; it is the explicit equivalent of writing `sayHello('Hello Channels!')`.
 
-### 1.3. Run the workflow command again
+### 1.3. Run the workflow
 
 Let's run it!
 
@@ -153,26 +190,26 @@ nextflow run hello-channels.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.04.3
+     N E X T F L O W   ~  version 25.10.2
 
-    Launching `hello-channels.nf` [nice_heisenberg] DSL2 - revision: 41b4aeb7e9
+    Launching `hello-channels.nf` [fabulous_crick] DSL2 - revision: 23e20f76e8
 
     executor >  local (1)
-    [3b/f2b109] sayHello (1) | 1 of 1 ✔
+    [c0/4f1872] process > sayHello (1) [100%] 1 of 1 ✔
     ```
 
 If you made both edits correctly, you should get another successful execution.
 You can check the results directory to satisfy yourself that the outcome is still the same as previously.
 
-```console title="results/output.txt" linenums="1"
-Hello Channels!
-```
+??? abstract "File contents"
+
+    ```console title="results/hello_channels/output.txt"
+    Hello Channels!
+    ```
 
 So far we're just progressively tweaking the code to increase the flexibility of our workflow while achieving the same end result.
 
-!!! note
-
-    This may seem like we're writing more code for no tangible benefit, but the value will become clear as soon as we start handling more inputs.
+This may seem like we're writing more code for no tangible benefit, but the value will become clear as soon as we start handling more inputs.
 
 ### Takeaway
 
@@ -199,14 +236,14 @@ Before the workflow block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-channels.nf" linenums="29" hl_lines="2"
+    ```groovy title="hello-channels.nf" linenums="30" hl_lines="2"
     // create a channel for inputs
     greeting_ch = channel.of('Hello','Bonjour','Holà')
     ```
 
 === "Before"
 
-    ```groovy title="hello-channels.nf" linenums="29"
+    ```groovy title="hello-channels.nf" linenums="30" hl_lines="2"
     // create a channel for inputs
     greeting_ch = channel.of('Hello Channels')
     ```
@@ -223,20 +260,68 @@ nextflow run hello-channels.nf
 
 ??? success "Command output"
 
-    ```console
-    N E X T F L O W   ~  version 25.04.3
+    ```console hl_lines="6"
+     N E X T F L O W   ~  version 25.10.2
 
-    Launching `hello-channels.nf` [suspicious_lamport] DSL2 - revision: 778deadaea
+    Launching `hello-channels.nf` [amazing_crick] DSL2 - revision: 59a9a5888a
 
     executor >  local (3)
-    [cd/77a81f] sayHello (3) | 3 of 3 ✔
+    [f4/c9962c] process > sayHello (1) [100%] 3 of 3 ✔
     ```
 
 It certainly seems to have run just fine.
-However, this seems to indicate that '3 of 3' calls were made for the process, but it only shows us a single run of the process, with one subdirectory path (`cd/77a81f`).
-What's going on?
+The execution monitor shows that '3 of 3' calls were made for the process.
 
-By default, the ANSI logging system writes the logging from multiple calls to the same process on the same line.
+However, there is still only one output in the results directory:
+
+??? abstract "Directory contents"
+
+    ```console title="results/hello_channels" hl_lines="3"
+    results
+    ├── hello_channels
+    │   └── output.txt
+    ├── hello_world
+    │   └── output.txt
+    └── output.txt -> /workspaces/training/hello-nextflow/work/8c/79499c11beea6e9d43605141f2817f/output.txt
+    ```
+
+??? abstract "File contents"
+
+    ```console title="results/hello_channels/output.txt"
+    Holà
+    ```
+
+You should see one of the three greetings in there, but the one you got might be different from what is shown here.
+Can you think of why that might be?
+
+Looking back at the execution monitor, it gave us only one subdirectory path (`f4/c9962c`).
+Let's have a look in there.
+
+??? abstract "Directory contents"
+
+    ```console title="results/hello_channels" hl_lines="3"
+    work/f4/c9962ce91ef87480babcb86b2b9042/
+    ├── .command.begin
+    ├── .command.err
+    ├── .command.log
+    ├── .command.out
+    ├── .command.run
+    ├── .command.sh
+    ├── .exitcode
+    └── output.txt
+    ```
+
+??? abstract "File contents"
+
+    ```console title="work/f4/c9962ce91ef87480babcb86b2b9042/output.txt"
+    Hello
+    ```
+
+That's not even the same greeting we got in the results directory! What's going on?
+
+At this point, we need to tell you that by default, the ANSI logging system writes the logging from multiple calls to the same process on the same line.
+So the status from all three calls to the sayHello() process are landing in the same spot.
+
 Fortunately, we can disable that behavior to see the full list of process calls.
 
 #### 2.1.3. Run the command again with the `-ansi-log false` option
@@ -250,17 +335,18 @@ nextflow run hello-channels.nf -ansi-log false
 ??? success "Command output"
 
     ```console
-    N E X T F L O W  ~  version 25.04.3
-    Launching `hello-channels.nf` [pensive_poitras] DSL2 - revision: 778deadaea
-    [76/f61695] Submitted process > sayHello (1)
-    [6e/d12e35] Submitted process > sayHello (3)
-    [c1/097679] Submitted process > sayHello (2)
+     N E X T F L O W  ~  version 25.10.2
+    Launching `hello-channels.nf` [desperate_monod] DSL2 - revision: 59a9a5888a
+    [23/871c7e] Submitted process > sayHello (2)
+    [7f/21e2c2] Submitted process > sayHello (1)
+    [f4/ea10a6] Submitted process > sayHello (3)
     ```
 
 This time we see all three process runs and their associated work subdirectories listed in the output.
 
-That's much better; at least for a simple workflow.
-For a complex workflow, or a large number of inputs, having the full list output to the terminal might get a bit overwhelming, so you might not choose to use `-ansi-log false` in those cases.
+That's much better, at least for a simple workflow.
+For a complex workflow, or a large number of inputs, having the full list output to the terminal would get a bit overwhelming.
+That's why `-ansi-log false` is not the default behavior.
 
 !!! note
 
@@ -268,29 +354,68 @@ For a complex workflow, or a large number of inputs, having the full list output
     In the condensed mode, Nextflow reports whether calls were completed successfully or not.
     In this expanded mode, it only reports that they were submitted.
 
-That being said, we have another problem. If you look in the `results` directory, there is only one file: `output.txt`!
+Anyway, now that we have the subdirectories of each process call, we can look for the their logs and outputs.
 
 ??? abstract "Directory contents"
 
     ```console
-    results
+    work/23/871c7ec3642a898ecd5e6090d21300/
+    ├── .command.begin
+    ├── .command.err
+    ├── .command.log
+    ├── .command.out
+    ├── .command.run
+    ├── .command.sh
+    ├── .exitcode
     └── output.txt
     ```
 
-What's up with that? Shouldn't we be expecting a separate file per input greeting, so three files in all?
-Did all three greetings go into a single file?
+    ```console
+    work/7f/21e2c2f3cc8833ef3858b236e5575c/
+    ├── .command.begin
+    ├── .command.err
+    ├── .command.log
+    ├── .command.out
+    ├── .command.run
+    ├── .command.sh
+    ├── .exitcode
+    └── output.txt
+    ```
 
-You can check the contents of `output.txt`; you will find only one of the three, containing one of the three greetings we provided.
+    ```console
+    work/f4/ea10a680d5687596d3eaa3fcf69272/
+    ├── .command.begin
+    ├── .command.err
+    ├── .command.log
+    ├── .command.out
+    ├── .command.run
+    ├── .command.sh
+    ├── .exitcode
+    └── output.txt
+    ```
 
-```console title="output.txt" linenums="1"
-Bonjour
-```
+??? abstract "File contents"
+
+    ```txt title="work/23/871c7ec3642a898ecd5e6090d21300/output.txt"
+    Bonjour
+    ```
+
+    ```txt title="work/7f/21e2c2f3cc8833ef3858b236e5575c/output.txt"
+    Hello
+    ```
+
+    ```txt title="work/f4/ea10a680d5687596d3eaa3fcf69272/output.txt"
+    Holà
+    ```
+
+This shows that all three processes ran successfully (yay).
+
+That being said, we still have the problem that there is only one output file in the results directory.
 
 You may recall that we hardcoded the output file name for the `sayHello` process, so all three calls produced a file called `output.txt`.
-You can check the work subdirectories for each of the three processes; each of them contains a file called `output.txt` as expected.
 
-As long as the output files stay there, isolated from the other processes, that is okay.
-But when the `publishDir` directive copies each of them to the same `results` directory, whichever got copied there first gets overwritten by the next one, and so on.
+As long as the output files stay in the work subdirectories, isolated from the other processes, that is okay.
+But when they are published to the same results directory, whichever got copied there first gets overwritten by the next one, and so on.
 
 ### 2.2. Ensure the output file names will be unique
 
@@ -310,8 +435,6 @@ In the process block, make the following code changes:
     ```groovy title="hello-channels.nf" linenums="6" hl_lines="9 13"
     process sayHello {
 
-        publishDir 'results', mode: 'copy'
-
         input:
         val greeting
 
@@ -320,7 +443,7 @@ In the process block, make the following code changes:
 
         script:
         """
-        echo '$greeting' > '$greeting-output.txt'
+        echo '${greeting}' > '${greeting}-output.txt'
         """
     }
     ```
@@ -330,8 +453,6 @@ In the process block, make the following code changes:
     ```groovy title="hello-channels.nf" linenums="6"
     process sayHello {
 
-        publishDir 'results', mode: 'copy'
-
         input:
         val greeting
 
@@ -340,7 +461,7 @@ In the process block, make the following code changes:
 
         script:
         """
-        echo '$greeting' > output.txt
+        echo '${greeting}' > output.txt
         """
     }
     ```
@@ -579,7 +700,7 @@ This variable is only used within the scope of that closure.
 
 In this example, `$greeting` represents each individual item loaded in a channel.
 
-!!! note "Note on `$it`"
+!!! info
 
     In some pipelines you may see a special variable called `$it` used inside operator closures.
     This is an _implicit_ variable that allows a short-hand access to the inner variable,
@@ -661,7 +782,7 @@ To get started, we're going to need to make two key changes to the script:
 
 #### 4.1.1. Switch the input parameter to point to the CSV file
 
-Remember the `params.greeting` parameter we set up in Part 1?
+Remember the `params.input` parameter we set up in Part 1?
 We're going to update it to point to the CSV file containing our greetings.
 
 Before the workflow block, make the following code change:
@@ -672,7 +793,7 @@ Before the workflow block, make the following code change:
     /*
      * Pipeline parameters
      */
-    params.greeting = 'greetings.csv'
+    params.input = 'greetings.csv'
     ```
 
 === "Before"
@@ -681,7 +802,7 @@ Before the workflow block, make the following code change:
     /*
      * Pipeline parameters
      */
-    params.greeting = ['Hello','Bonjour','Holà']
+    params.input = ['Hello','Bonjour','Holà']
     ```
 
 #### 4.1.2. Switch to a channel factory designed to handle a file
@@ -695,7 +816,7 @@ In the workflow block, make the following code change:
 
     ```groovy title="hello-channels.nf" linenums="31" hl_lines="1 2"
         // create a channel for inputs from a CSV file
-        greeting_ch = channel.fromPath(params.greeting)
+        greeting_ch = channel.fromPath(params.input)
     ```
 
 === "Before"
@@ -758,7 +879,7 @@ In the workflow block, make the following code change:
 
     ```groovy title="hello-channels.nf" linenums="31" hl_lines="3-5"
     // create a channel for inputs from a CSV file
-    greeting_ch = channel.fromPath(params.greeting)
+    greeting_ch = channel.fromPath(params.input)
                          .view { csv -> "Before splitCsv: $csv" }
                          .splitCsv()
                          .view { csv -> "After splitCsv: $csv" }
@@ -768,7 +889,7 @@ In the workflow block, make the following code change:
 
     ```groovy title="hello-channels.nf" linenums="31"
     // create a channel for inputs from a CSV file
-    greeting_ch = channel.fromPath(params.greeting)
+    greeting_ch = channel.fromPath(params.input)
 
     ```
 
@@ -842,7 +963,7 @@ In the workflow block, make the following code change:
 
     ```groovy title="hello-channels.nf" linenums="31" hl_lines="6-8"
     // create a channel for inputs from a CSV file
-    greeting_ch = channel.fromPath(params.greeting)
+    greeting_ch = channel.fromPath(params.input)
                          .view { csv -> "Before splitCsv: $csv" }
                          .splitCsv()
                          .view { csv -> "After splitCsv: $csv" }
@@ -854,7 +975,7 @@ In the workflow block, make the following code change:
 
     ```groovy title="hello-channels.nf" linenums="31"
     // create a channel for inputs from a CSV file
-    greeting_ch = channel.fromPath(params.greeting)
+    greeting_ch = channel.fromPath(params.input)
                          .view { csv -> "Before splitCsv: $csv" }
                          .splitCsv()
                          .view { csv -> "After splitCsv: $csv" }
