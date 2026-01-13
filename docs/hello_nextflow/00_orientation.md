@@ -81,7 +81,8 @@ tree . -L 2
 
     ```console
     .
-    ├── greetings.csv
+    ├── data
+    │   └── greetings.csv
     ├── hello-channels.nf
     ├── hello-config.nf
     ├── hello-containers.nf
@@ -98,7 +99,7 @@ tree . -L 2
     │   └── 6-hello-config
     └── test-params.json
 
-    7 directories, 9 files
+    8 directories, 9 files
     ```
 
 Click on the colored box to expand the section and view its contents.
