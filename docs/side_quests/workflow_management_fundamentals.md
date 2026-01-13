@@ -589,7 +589,11 @@ We achieved the basics, but the production-quality features require significant 
 ## 2. Building a Nextflow Pipeline
 
 Now you'll rebuild the same pipeline using Nextflow.
-At each step, we'll call back to the bash equivalent.
+At each step, we'll contrast with the scripting approach from Part 1.
+
+!!! note "This isn't a Nextflow tutorial"
+
+    We're skipping over a lot of Nextflow detail here to focus on illustrating how workflow managers solve the problems from Part 1. If you're sold on the idea and want to learn Nextflow properly, head to [Hello Nextflow](../hello_nextflow/index.md) for a thorough introduction.
 
 ---
 
