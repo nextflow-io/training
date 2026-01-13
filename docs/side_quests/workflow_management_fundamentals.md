@@ -40,12 +40,12 @@ An RNA-seq analysis pipeline that runs:
 
 **How this tutorial works:**
 
-| Part | What You'll Do | What You'll Learn |
-|------|----------------|-------------------|
-| **Part 1: Bash** | Build a pipeline, try to hit those quality standards | How much infrastructure code it takes |
-| **Part 2: Nextflow** | Rebuild with a workflow manager | How the same standards are achieved with less effort |
+| Part                 | What You'll Do                                       | What You'll Learn                                    |
+| -------------------- | ---------------------------------------------------- | ---------------------------------------------------- |
+| **Part 1: Bash**     | Build a pipeline, try to hit those quality standards | How much infrastructure code it takes                |
+| **Part 2: Nextflow** | Rebuild with a workflow manager                      | How the same standards are achieved with less effort |
 
-By the end, you'll understand *why* workflow managers exist - not because someone told you, but because you experienced the problems yourself.
+By the end, you'll understand _why_ workflow managers exist - not because someone told you, but because you experienced the problems yourself.
 
 ---
 
@@ -580,7 +580,7 @@ Let's check our progress against the production-quality standards we defined:
 
 We achieved the basics, but the production-quality features require significant infrastructure code that has nothing to do with our science.
 
-**The fundamental problem:** Scripts mix *what* to compute with *how* to compute it. Every quality requirement adds more infrastructure code - and this would be true whether we wrote it in bash, Python, or any other language.
+**The fundamental problem:** Scripts mix _what_ to compute with _how_ to compute it. Every quality requirement adds more infrastructure code - and this would be true whether we wrote it in bash, Python, or any other language.
 
 **There has to be a better way.**
 
@@ -599,11 +599,11 @@ Nextflow is a workflow manager. Instead of writing imperative scripts that say "
 
 #### Key Concepts
 
-| Concept | What It Is | Bash Equivalent |
-|---------|------------|-----------------|
-| **Process** | A unit of work (like running FastQC on one sample) | A function or script |
-| **Channel** | A queue of data flowing between processes | Variables passed between commands |
-| **Workflow** | How processes connect together | The order of commands in your script |
+| Concept      | What It Is                                         | Bash Equivalent                      |
+| ------------ | -------------------------------------------------- | ------------------------------------ |
+| **Process**  | A unit of work (like running FastQC on one sample) | A function or script                 |
+| **Channel**  | A queue of data flowing between processes          | Variables passed between commands    |
+| **Workflow** | How processes connect together                     | The order of commands in your script |
 
 The key difference: in bash, you explicitly manage data flow with variables and file paths. In Nextflow, you declare what each process needs, and Nextflow figures out the execution order automatically.
 
@@ -1038,7 +1038,7 @@ Let's check our progress against the same production-quality standards:
 
 Every quality we struggled with in Part 1 is built into Nextflow. You didn't write any infrastructure code - you just declared what each process needs and produces.
 
-**The fundamental difference:** Scripts mix *what* to compute with *how* to compute it. Workflow managers separate these concerns - you declare the science, the framework handles the infrastructure.
+**The fundamental difference:** Scripts mix _what_ to compute with _how_ to compute it. Workflow managers separate these concerns - you declare the science, the framework handles the infrastructure.
 
 ---
 
