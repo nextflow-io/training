@@ -1828,7 +1828,7 @@ For example, for our first syntax error from earlier:
 nextflow run bad_syntax.nf -preview
 ```
 
-!!! note:
+!!! note
 
     If you fixed the file, reintroduce the syntax error by changing `input` to `inputs` before you run the command
 

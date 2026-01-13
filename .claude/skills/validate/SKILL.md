@@ -82,7 +82,13 @@ Perform the following checks **only on files within the determined scope**:
    - Check for proper indentation (4 spaces)
    - Report any malformed admonitions
 
-6. **Deep Lesson Review** (when reviewing a specific lesson file)
+6. **Check Code Block Highlights**
+
+   - Invoke the `/check-highlights` skill for comprehensive `hl_lines` validation
+   - This checks that highlighted lines match the intended content
+   - Particularly important for Before/After comparison blocks
+
+7. **Deep Lesson Review** (when reviewing a specific lesson file)
 
    If the user asks to review a specific lesson, perform this comprehensive checklist:
 
