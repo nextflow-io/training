@@ -1081,3 +1081,25 @@ process TOOL_NAME {
     """
 }
 ```
+
+---
+
+## Summary
+
+We started with a question: *Why learn a whole new framework when your script does the job?*
+
+Now you've experienced the answer firsthand. Building production-quality pipelines with scripts means writing significant infrastructure code - job scheduling, resource management, failure recovery, environment setup - that has nothing to do with your science. And you'd face the same challenges whether you wrote it in bash, Python, or any other language.
+
+Workflow managers like Nextflow handle that infrastructure for you. You declare what each process needs and produces; the framework figures out the rest. The result is code that's almost entirely focused on your science, with production-quality features built in.
+
+### What's Next?
+
+If you're convinced and want to learn Nextflow properly:
+
+- **[Hello Nextflow](../hello_nextflow/index.md)** - A thorough introduction to Nextflow concepts and syntax
+- **[Nextflow Documentation](https://www.nextflow.io/docs/latest/)** - Official reference documentation
+
+If you want to explore more advanced topics:
+
+- **[nf-core](https://nf-co.re/)** - Community-curated, production-ready pipelines you can use or learn from
+- **[Seqera Platform](https://seqera.io/platform/)** - Enterprise features for monitoring, launching, and managing workflows
