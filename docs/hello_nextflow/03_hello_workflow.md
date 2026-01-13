@@ -876,4 +876,4 @@ More generally, you understand the key principles involved in connecting process
 ### What's next?
 
 Take an extra long break, you've earned it.
-When you're ready, move on to Part 4 to learn how to modularize your code for better maintainability and code efficiency.
+When you're ready, move on to [**Part 4: Hello Modules**](./04_hello_modules.md) to learn how to modularize your code for better maintainability and code efficiency.

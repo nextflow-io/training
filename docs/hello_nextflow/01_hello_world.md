@@ -1019,4 +1019,4 @@ More generally, you know how to interpret a simple Nextflow workflow, manage its
 
 Take a little break, you've earned it!
 
-When you're ready, move on to Part 2 to learn how to use channels to feed inputs into your workflow, which will allow you to take advantage of Nextflow's built-in dataflow parallelism and other powerful features.
+When you're ready, move on to [**Part 2: Hello Channels**](./02_hello_channels.md) to learn how to use channels to feed inputs into your workflow, which will allow you to take advantage of Nextflow's built-in dataflow parallelism and other powerful features.

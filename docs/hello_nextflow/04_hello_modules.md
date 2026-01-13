@@ -391,4 +391,4 @@ This is better than just copy-pasting the code, because if later you decide to i
 ### What's next?
 
 Take a short break if you feel like it.
-When you're ready, move on to Part 5 to learn how to use containers to manage software dependencies more conveniently and reproducibly.
+When you're ready, move on to [**Part 5: Hello Containers**](./05_hello_containers.md) to learn how to use containers to manage software dependencies more conveniently and reproducibly.

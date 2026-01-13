@@ -692,5 +692,7 @@ You know how to use containers in Nextflow to run processes.
 ### What's next?
 
 Take a break!
-When you're ready, move on to Part 6 to learn how to configure the execution of your pipeline to fit your infrastructure as well as manage configuration of inputs and parameters.
-It's the very last part and then you're done!
+
+When you're ready, move on to [**Part 6: Hello Config**](./06_hello_config.md) to learn how to configure the execution of your pipeline to fit your infrastructure as well as manage configuration of inputs and parameters.
+
+It's the very last part, and then you'll be done with this course!
