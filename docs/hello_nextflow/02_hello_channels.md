@@ -198,7 +198,7 @@ nextflow run hello-channels.nf
     [c0/4f1872] process > sayHello (1) [100%] 1 of 1 ✔
     ```
 
-If you made both edits correctly, you should get another successful execution.
+If you made both edits correctly, you should get a successful execution.
 You can check the results directory to satisfy yourself that the outcome is still the same as previously.
 
 ??? abstract "File contents"
@@ -207,9 +207,75 @@ You can check the results directory to satisfy yourself that the outcome is stil
     Hello Channels!
     ```
 
-So far we're just progressively tweaking the code to increase the flexibility of our workflow while achieving the same end result.
-
+So we've increased the flexibility of our workflow while achieving the same end result.
 This may seem like we're writing more code for no tangible benefit, but the value will become clear as soon as we start handling more inputs.
+
+As a preview of that, let's look at one more thing before we move on: one small but convenient benefit of using an explicit channel to manage data input.
+
+### 1.4. Use `view()` to inspect the channel contents
+
+Nextflow channels are built in a way that allows us to operate on their contents using operators, which we'll cover in detail later in this chapter.
+
+For now, we're just going to show you how to use a super simple operator called [`view()`](https://www.nextflow.io/docs/latest/reference/operator.html#view) to inspect the contents of a channel.
+You can think of `view()` as a debugging tool, like a `print()` statement in Python, or its equivalent in other languages.
+
+Add this tiny line to the workflow block:
+
+=== "After"
+
+    ```groovy title="hello-channels.nf" linenums="27" hl_lines="7"
+    workflow {
+
+        main:
+        // create a channel for inputs
+        greeting_ch = channel.of('Hello Channels!')
+                            .view()
+        // emit a greeting
+        sayHello(greeting_ch)
+
+        publish:
+        first_output = sayHello.out
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="hello-channels.nf" linenums="27"
+    workflow {
+
+        main:
+        // create a channel for inputs
+        greeting_ch = channel.of('Hello Channels!')
+        // emit a greeting
+        sayHello(greeting_ch)
+
+        publish:
+        first_output = sayHello.out
+    }
+    ```
+
+The exact amount of spaces doesn't matter as long as it's a multiple of 4; we're just aiming to align the start of the `.view()` statement to the `.of()` part of the channel construction.
+
+Now run the workflow again:
+
+```bash
+nextflow run hello-channels.nf
+```
+
+??? success "Command output"
+
+    ```console hl_lines="7"
+     N E X T F L O W   ~  version 25.10.2
+
+    Launching `hello-channels.nf` [scruffy_shaw] DSL2 - revision: 2ede41e14a
+
+    executor >  local (1)
+    [ef/f7e40a] sayHello (1) [100%] 1 of 1 ✔
+    Hello Channels!
+    ```
+
+As you can see, this outputs the channel contents to the console.
+Here we only have one element, but when we start loading multiple values into the channel in the next section, you'll see that this is set to output one element per line.
 
 ### Takeaway
 
@@ -228,6 +294,7 @@ Workflows typically run on batches of inputs that are meant to be processed in b
 ### 2.1. Load multiple greetings into the input channel
 
 Conveniently, the `channel.of()` channel factory we've been using is quite happy to accept more than one value, so we don't need to modify that at all.
+
 We just have to load more values into the channel.
 
 #### 2.1.1. Add more greetings
@@ -239,6 +306,7 @@ Before the workflow block, make the following code change:
     ```groovy title="hello-channels.nf" linenums="30" hl_lines="2"
     // create a channel for inputs
     greeting_ch = channel.of('Hello','Bonjour','Holà')
+                        .view()
     ```
 
 === "Before"
@@ -246,6 +314,7 @@ Before the workflow block, make the following code change:
     ```groovy title="hello-channels.nf" linenums="30" hl_lines="2"
     // create a channel for inputs
     greeting_ch = channel.of('Hello Channels')
+                        .view()
     ```
 
 The documentation tells us this should work. Can it really be so simple?
@@ -258,7 +327,7 @@ Let's try it.
 nextflow run hello-channels.nf
 ```
 
-??? success "Command output"
+??? success "Command output" hl_lines="6-9"
 
     ```console hl_lines="6"
      N E X T F L O W   ~  version 25.10.2
@@ -267,10 +336,13 @@ nextflow run hello-channels.nf
 
     executor >  local (3)
     [f4/c9962c] process > sayHello (1) [100%] 3 of 3 ✔
+    Hello
+    Bonjour
+    Holà
     ```
 
 It certainly seems to have run just fine.
-The execution monitor shows that '3 of 3' calls were made for the process.
+The execution monitor shows that `3 of 3` calls were made for the `sayHello` process, and we see the three greetings enumerated by the `view()` statement, one per line as promised.
 
 However, there is still only one output in the results directory:
 
@@ -337,6 +409,9 @@ nextflow run hello-channels.nf -ansi-log false
     ```console
      N E X T F L O W  ~  version 25.10.2
     Launching `hello-channels.nf` [desperate_monod] DSL2 - revision: 59a9a5888a
+    Hello
+    Bonjour
+    Holà
     [23/871c7e] Submitted process > sayHello (2)
     [7f/21e2c2] Submitted process > sayHello (1)
     [f4/ea10a6] Submitted process > sayHello (3)
@@ -348,7 +423,7 @@ That's much better, at least for a simple workflow.
 For a complex workflow, or a large number of inputs, having the full list output to the terminal would get a bit overwhelming.
 That's why `-ansi-log false` is not the default behavior.
 
-!!! note
+!!! tip
 
     The way the status is reported is a bit different between the two logging modes.
     In the condensed mode, Nextflow reports whether calls were completed successfully or not.
@@ -432,7 +507,7 @@ In the process block, make the following code changes:
 
 === "After"
 
-    ```groovy title="hello-channels.nf" linenums="6" hl_lines="9 13"
+    ```groovy title="hello-channels.nf" linenums="6" hl_lines="7 11"
     process sayHello {
 
         input:
@@ -450,7 +525,7 @@ In the process block, make the following code changes:
 
 === "Before"
 
-    ```groovy title="hello-channels.nf" linenums="6"
+    ```groovy title="hello-channels.nf" linenums="6" hl_lines="7 11"
     process sayHello {
 
         input:
@@ -472,11 +547,11 @@ Make sure to replace `output.txt` in both the output definition and in the `scri
 
     In the output definition, you MUST use double quotes around the output filename expression (NOT single quotes), otherwise it will fail.
 
-This should produce a unique output file name every time the process is called, so that it can be distinguished from the outputs from other iterations of the same process in the output directory.
+This should produce a unique output file name every time the process is called, so that it can be distinguished from the outputs from other calls to the same process in the output directory.
 
 #### 2.2.2. Run the workflow
 
-Let's run it:
+Let's run it. Note that we're back to running with the default ANSI log settings.
 
 ```bash
 nextflow run hello-channels.nf
@@ -485,46 +560,49 @@ nextflow run hello-channels.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.04.3
+     N E X T F L O W   ~  version 25.10.2
 
-    Launching `hello-channels.nf` [astonishing_bell] DSL2 - revision: f57ff44a69
+    Launching `hello-channels.nf` [sharp_minsky] DSL2 - revision: 16a291febe
 
     executor >  local (3)
-    [2d/90a2e2] sayHello (1) | 3 of 3 ✔
+    [e8/33ee64] sayHello (2) [100%] 3 of 3 ✔
+    Hello
+    Bonjour
+    Holà
     ```
 
 Reverting back to the summary view, the output is summarized on one line again.
-However, now we have three new files in addition to the one we already had in the `results` directory.
+Have a look at the `results` directory to see if all the output greetings are there.
 
 ??? abstract "Directory contents"
 
     ```console
-    results
+    results/hello_channels/
     ├── Bonjour-output.txt
     ├── Hello-output.txt
     ├── Holà-output.txt
     └── output.txt
     ```
 
-They each have the expected contents.
+Yes! And they each have the expected contents.
 
 ??? abstract "File contents"
 
-    ```console title="Bonjour-output.txt" linenums="1"
+    ```console title="Bonjour-output.txt"
     Bonjour
     ```
 
-    ```console title="Hello-output.txt" linenums="1"
+    ```console title="Hello-output.txt"
     Hello
     ```
 
-    ```console title="Holà-output.txt" linenums="1"
+    ```console title="Holà-output.txt"
     Holà
     ```
 
 Success! Now we can add as many greetings as we like without worrying about output files being overwritten.
 
-!!! note
+!!! tip
 
     In practice, naming files based on the input data itself is almost always impractical.
     The better way to generate dynamic filenames is to pass metadata to a process along with the input files.
@@ -543,10 +621,8 @@ Learn to use an operator to transform the contents of a channel.
 
 ## 3. Use an operator to transform the contents of a channel
 
-In Nextflow, [operators](https://www.nextflow.io/docs/latest/reference/operator.html) allow us to transform the contents of a channel.
-
 We just showed you how to handle multiple input elements that were hardcoded directly in the channel factory.
-What if we wanted to provide those multiple inputs in a different form?
+What if we wanted to provide those multiple inputs in a different way?
 
 For example, imagine we set up an input variable containing an array of elements like this:
 
@@ -556,7 +632,8 @@ Can we load that into our output channel and expect it to work? Let's find out.
 
 ### 3.1. Provide an array of values as input to the channel
 
-Common sense suggests we should be able to simply pass in an array of values instead of a single value. Right?
+Common sense suggests we should be able to simply pass in an array of values instead of a single value.
+Let's try it; we'll need to set up the input variable and load it into the channel factory.
 
 #### 3.1.1. Set up the input variable
 
@@ -564,14 +641,21 @@ Let's take the `greetings_array` variable we just imagined and make it a reality
 
 === "After"
 
-    ```groovy title="hello-channels.nf" linenums="27" hl_lines="3 4"
+    ```groovy title="hello-channels.nf" linenums="27" hl_lines="4 5"
     workflow {
 
+        main:
         // declare an array of input greetings
         greetings_array = ['Hello','Bonjour','Holà']
-
         // create a channel for inputs
         greeting_ch = channel.of('Hello','Bonjour','Holà')
+                            .view()
+        // emit a greeting
+        sayHello(greeting_ch)
+
+        publish:
+        first_output = sayHello.out
+    }
     ```
 
 === "Before"
@@ -579,33 +663,69 @@ Let's take the `greetings_array` variable we just imagined and make it a reality
     ```groovy title="hello-channels.nf" linenums="27"
     workflow {
 
+        main:
         // create a channel for inputs
         greeting_ch = channel.of('Hello','Bonjour','Holà')
+                            .view()
+        // emit a greeting
+        sayHello(greeting_ch)
+
+        publish:
+        first_output = sayHello.out
+    }
     ```
+
+This is not yet functional, we've just added a declaration for the array.
 
 #### 3.1.2. Set array of greetings as the input to the channel factory
 
-We're going to replace the values `'Hello','Bonjour','Holà'` currently hardcoded in the channel factory with the `greetings_array` we just created.
+Now we're going to replace the values `'Hello','Bonjour','Holà'` currently hardcoded in the channel factory with the `greetings_array` we just created.
 
 In the workflow block, make the following change:
 
 === "After"
 
-    ```groovy title="hello-channels.nf" linenums="32" hl_lines="2"
+    ```groovy title="hello-channels.nf" linenums="27" hl_lines="7"
+    workflow {
+
+        main:
+        // declare an array of input greetings
+        greetings_array = ['Hello','Bonjour','Holà']
         // create a channel for inputs
         greeting_ch = channel.of(greetings_array)
+                            .view()
+        // emit a greeting
+        sayHello(greeting_ch)
+
+        publish:
+        first_output = sayHello.out
+    }
     ```
 
 === "Before"
 
-    ```groovy title="hello-channels.nf" linenums="32"
+    ```groovy title="hello-channels.nf" linenums="27" hl_lines="7"
+    workflow {
+
+        main:
+        // declare an array of input greetings
+        greetings_array = ['Hello','Bonjour','Holà']
         // create a channel for inputs
         greeting_ch = channel.of('Hello','Bonjour','Holà')
+                            .view()
+        // emit a greeting
+        sayHello(greeting_ch)
+
+        publish:
+        first_output = sayHello.out
+    }
     ```
+
+This should be functional now.
 
 #### 3.1.3. Run the workflow
 
-Let's try running this:
+Let's try running it:
 
 ```bash
 nextflow run hello-channels.nf
@@ -613,35 +733,54 @@ nextflow run hello-channels.nf
 
 ??? failure "Command output"
 
-    ```console
-    N E X T F L O W   ~  version 25.04.3
+    ```console hl_lines="7 11 16"
+    N E X T F L O W   ~  version 25.10.2
 
     Launching `hello-channels.nf` [friendly_koch] DSL2 - revision: 97256837a7
 
     executor >  local (1)
-    [22/57e015] sayHello (1) | 0 of 1
+    [a8/1f6ead] sayHello (1) | 0 of 1
+    [Hello, Bonjour, Holà]
     ERROR ~ Error executing process > 'sayHello (1)'
 
     Caused by:
       Missing output file(s) `[Hello, Bonjour, Holà]-output.txt` expected by process `sayHello (1)`
+
+
+    Command executed:
+
+      echo '[Hello, Bonjour, Holà]' > '[Hello, Bonjour, Holà]-output.txt'
+
+    Command exit status:
+      0
+
+    Command output:
+      (empty)
+
+    Work dir:
+      /workspaces/training/hello-nextflow/work/a8/1f6ead5f3fa30a3c508e2e7cf83ffb
+
+    Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
+
+    -- Check '.nextflow.log' file for details
     ```
 
 Oh no! There's an error!
 
+Look at the output of `view()` and the error messages.
+
 It looks like Nextflow tried to run a single process call, using `[Hello, Bonjour, Holà]` as a string value, instead of using the three strings in the array as separate values.
 
+So it's the 'packaging' that is causing the problem.
 How do we get Nextflow to unpack the array and load the individual strings into the channel?
 
 ### 3.2. Use an operator to transform channel contents
 
-This is where **operators** come in.
+This is where **[operators](https://www.nextflow.io/docs/latest/reference/operator.html)** come into play.
+You've already used the `.view()` operator, which just looks at what's in there.
+Now we're going to look at operators that allow us to act on the contents of a channel.
 
-If you skim through the [list of operators](https://www.nextflow.io/docs/latest/reference/operator.html) in the Nextflow documentation, you'll find [`flatten()`](https://www.nextflow.io/docs/latest/reference/operator.html#flatten), which does exactly what we need: unpack the contents of an array and emits them as individual items.
-
-!!! note
-
-    It is technically possible to achieve the same results by using a different channel factory, [`channel.fromList`](https://nextflow.io/docs/latest/reference/channel.html#fromlist), which includes an implicit mapping step in its operation.
-    Here we chose not to use that in order to demonstrate the use of an operator on a fairly simple use case.
+If you skim through the [list of operators](https://www.nextflow.io/docs/latest/reference/operator.html) in the Nextflow documentation, you'll find [`flatten()`](https://www.nextflow.io/docs/latest/reference/operator.html#flatten), which does exactly what we need: unpack the contents of an array and emit them as individual items.
 
 #### 3.2.1. Add the `flatten()` operator
 
@@ -651,54 +790,102 @@ In the workflow block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-channels.nf" linenums="31" hl_lines="3"
+    ```groovy title="hello-channels.nf" linenums="27" hl_lines="9"
+    workflow {
+
+        main:
+        // declare an array of input greetings
+        greetings_array = ['Hello','Bonjour','Holà']
         // create a channel for inputs
         greeting_ch = channel.of(greetings_array)
-                             .flatten()
+                            .view()
+                            .flatten()
+        // emit a greeting
+        sayHello(greeting_ch)
+
+        publish:
+        first_output = sayHello.out
+    }
     ```
 
 === "Before"
 
-    ```groovy title="hello-channels.nf" linenums="31"
+    ```groovy title="hello-channels.nf" linenums="27"
+    workflow {
+
+        main:
+        // declare an array of input greetings
+        greetings_array = ['Hello','Bonjour','Holà']
         // create a channel for inputs
         greeting_ch = channel.of(greetings_array)
+                            .view()
+        // emit a greeting
+        sayHello(greeting_ch)
 
+        publish:
+        first_output = sayHello.out
+    }
     ```
 
-Here we added the operator on the next line for readability, but you can add operators on the same line as the channel factory if you prefer, like this: `greeting_ch = channel.of(greetings_array).flatten()`
+Here we added the operator on the next line for readability, but you can add operators on the same line as the channel factory if you prefer, like this:
+`greeting_ch = channel.of(greetings_array).view().flatten()`
 
-#### 3.2.2. Add `view()` to inspect channel contents
+#### 3.2.2. Refine the `view()` statement(s)
 
-We could run this right away to test if it works, but while we're at it, we're also going to add a couple of [`view()`](https://www.nextflow.io/docs/latest/reference/operator.html#view) operators, which allow us to inspect the contents of a channel.
-You can think of `view()` as a debugging tool, like a `print()` statement in Python, or its equivalent in other languages.
+We could run this right away to test if it works, but while we're at it, we're going to refine how we inspect the channel contents.
+
+We want to be able to contrast what the contents look like before and after the `flatten()` operator is applied, so we're going to add a second one, AND we're going to add a bit of code to get them labeled more clearly in the output.
 
 In the workflow block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-channels.nf" linenums="31" hl_lines="3-5"
+    ```groovy title="hello-channels.nf" linenums="27" hl_lines="8-10"
+    workflow {
+
+        main:
+        // declare an array of input greetings
+        greetings_array = ['Hello','Bonjour','Holà']
         // create a channel for inputs
         greeting_ch = channel.of(greetings_array)
                              .view { greeting -> "Before flatten: $greeting" }
                              .flatten()
                              .view { greeting -> "After flatten: $greeting" }
+        // emit a greeting
+        sayHello(greeting_ch)
+
+        publish:
+        first_output = sayHello.out
+    }
     ```
 
 === "Before"
 
-    ```groovy title="hello-channels.nf" linenums="31"
+    ```groovy title="hello-channels.nf" linenums="27" hl_lines="8-9"
+    workflow {
+
+        main:
+        // declare an array of input greetings
+        greetings_array = ['Hello','Bonjour','Holà']
         // create a channel for inputs
         greeting_ch = channel.of(greetings_array)
-                             .flatten()
+                            .view()
+                            .flatten()
+        // emit a greeting
+        sayHello(greeting_ch)
+
+        publish:
+        first_output = sayHello.out
+    }
     ```
 
-The code in between curly brackets is called an operator _closure_.
+You see we've added a second `.view` statement, and for each of them, we've replaced the empty parentheses (`()`) with curly braces containing some code, such as `{ greeting -> "Before flatten: $greeting" }`.
 
-This code executes for each item in the channel.
-We define a temporary variable for the inner value, here called `greeting` (it could be anything).
-This variable is only used within the scope of that closure.
+These are called _closures_. The code they contain will be executed for each item in the channel.
+We define a temporary variable for the inner value, here called `greeting` (but it could be any arbitrary name), which is only used within the scope of that closure.
 
-In this example, `$greeting` represents each individual item loaded in a channel.
+In this example, `$greeting` represents each individual item loaded in the channel.
+This will result in neatly labeled console output.
 
 !!! info
 
@@ -718,13 +905,13 @@ nextflow run hello-channels.nf
 
 ??? success "Command output"
 
-    ```console
-    N E X T F L O W   ~  version 25.04.3
+    ```console hl_lines="7-10"
+     N E X T F L O W   ~  version 25.10.2
 
-    Launching `hello-channels.nf` [tiny_elion] DSL2 - revision: 1d834f23d2
+    Launching `hello-channels.nf` [sleepy_gutenberg] DSL2 - revision: 1db4f760ee
 
     executor >  local (3)
-    [8e/bb08f3] sayHello (2) | 3 of 3 ✔
+    [b1/6a1e15] sayHello (2) [100%] 3 of 3 ✔
     Before flatten: [Hello, Bonjour, Holà]
     After flatten: Hello
     After flatten: Bonjour
@@ -733,14 +920,14 @@ nextflow run hello-channels.nf
 
 This time it works AND gives us the additional insight into what the contents of the channel look like before and after we run the `flatten()` operator.
 
-You see that we get a single `Before flatten:` statement because at that point the channel contains one item, the original array.
-Then we get three separate `After flatten:` statements, one for each greeting, which are now individual items in the channel.
+- - You see that we get a single `Before flatten:` statement because at that point the channel contains one item, the original array.
+    Then we get three separate `After flatten:` statements, one for each greeting, which are now individual items in the channel.
 
 Importantly, this means each item can now be processed separately by the workflow.
 
-!!! tip
+!!! note
 
-    You should delete or comment out the `view()` statements before moving on.
+    You should delete or comment out the `view()` statements before moving on, leaving just this code:
 
     ```groovy title="hello-channels.nf" linenums="31"
     // create a channel for inputs
@@ -748,7 +935,12 @@ Importantly, this means each item can now be processed separately by the workflo
                          .flatten()
     ```
 
-    We left them in the `hello-channels-3.nf` solution file for reference purposes.
+    We left `view()` statements in the `hello-channels-3.nf` solution file for reference purposes.
+
+!!! tip
+
+    It is technically possible to achieve the same results by using a different channel factory, [`channel.fromList`](https://nextflow.io/docs/latest/reference/channel.html#fromlist), which includes an implicit mapping step in its operation.
+    Here we chose not to use that in order to demonstrate the use of an operator on a simple use case.
 
 ### Takeaway
 
@@ -838,7 +1030,7 @@ nextflow run hello-channels.nf
 ??? example title="Output (subset)" <!-- TODO: paste complete output -->
 
     ```console
-    N E X T F L O W   ~  version 25.04.3
+    N E X T F L O W   ~  version 25.10.2
 
     Launching `hello-channels.nf` [adoring_bhabha] DSL2 - revision: 8ce25edc39
 
@@ -906,7 +1098,7 @@ nextflow run hello-channels.nf
 ??? failure "Command output" <!-- TODO: paste complete output -->
 
     ```console
-    N E X T F L O W   ~  version 25.04.3
+    N E X T F L O W   ~  version 25.10.2
 
     Launching `hello-channels.nf` [stoic_ride] DSL2 - revision: a0e5de507e
 
@@ -995,7 +1187,7 @@ nextflow run hello-channels.nf
 ??? success "Command output"
 
     ```console title="Output" linenums="1"
-    N E X T F L O W   ~  version 25.04.3
+    N E X T F L O W   ~  version 25.10.2
 
     Launching `hello-channels.nf` [tiny_heisenberg] DSL2 - revision: 845b471427
 

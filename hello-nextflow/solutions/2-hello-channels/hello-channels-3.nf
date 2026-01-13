@@ -5,8 +5,6 @@
  */
 process sayHello {
 
-    publishDir 'results', mode: 'copy'
-
     input:
     val greeting
 
@@ -19,16 +17,33 @@ process sayHello {
     """
 }
 
+/*
+ * Pipeline parameters
+ */
+params {
+    input: String = 'Holà mundo!'
+}
+
 workflow {
 
-    greetings_array = ['Hello', 'Bonjour', 'Holà']
-
+    main:
+    // declare an array of input greetings
+    greetings_array = ['Hello','Bonjour','Holà']
     // create a channel for inputs
     greeting_ch = channel.of(greetings_array)
-        .view { item -> "Before flatten: ${item}" }
-        .flatten()
-        .view { item -> "After flatten: ${item}" }
-
+                        .view { greeting -> "Before flatten: $greeting" }
+                        .flatten()
+                        .view { greeting -> "After flatten: $greeting" }
     // emit a greeting
     sayHello(greeting_ch)
+
+    publish:
+    first_output = sayHello.out
+}
+
+output {
+    first_output {
+        path 'hello_channels'
+        mode 'copy'
+    }
 }
