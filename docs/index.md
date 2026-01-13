@@ -100,6 +100,16 @@ These are courses that demonstrate how to apply the concepts and components pres
 
     [Start the Nextflow for RNAseq training :material-arrow-right:](nf4_science/rnaseq/){ .md-button .md-button--primary }
 
+!!! exercise "Nextflow for Imaging"
+
+    !!! tip inline end ""
+
+        :material-microscope:{.nextflow-primary} Learn to run pipelines for spatial transcriptomics imaging data in Nextflow.
+
+    This is a course for researchers in imaging and spatial omics who wish to learn how to run and customize analysis pipelines. The course uses the nf-core/molkart pipeline to provide a biologically-relevant pipeline demonstrate how to run, configure, and manage inputs for Nextflow pipelines workflows.
+
+    [Start the Nextflow for Imaging training :material-arrow-right:](nf4_science/imaging/){ .md-button .md-button--primary }
+
 Let us know what other domains and use cases you'd like to see covered here by posting in the [Training section](https://community.seqera.io/c/training/) of the community forum.
 
 ## Advanced Nextflow Training
@@ -178,7 +188,7 @@ Not sure where to go? Check out the [Getting help](help.md) page.
 
 [![Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0](assets/img/cc_by-nc-nd.svg){ align=right }](https://creativecommons.org/licenses/by-nc-nd/4.0/)
 
-This training material is developed and maintained by [Seqera](https://seqera.io) and released under an open-source license ([CC BY-NC-ND](https://creativecommons.org/licenses/by-nc-nd/4.0/)) for the benefit of the community. You are welcome to reuse these materials according to the terms of the license. If you are an instructor running your own trainings, we'd love to hear about how it goes and what we could do to make it easier.
+This training material is developed and maintained by [Seqera](https://seqera.io) and released under an open-source license ([CC BY-NC-ND](https://creativecommons.org/licenses/by-nc-nd/4.0/)) for the benefit of the community. You are welcome to reuse these materials according to the terms of the license. If you are an instructor running your own trainings, we'd love to hear about how it goes and what we could do to make it easier. If you wish to use this material in a way that falls outside the scope of the license, please contact us at community@seqera.io to discuss your request.
 
 We welcome fixes and improvements from the community. Every page has a :material-file-edit-outline: icon in the top right of the page, which will take you to GitHub where you can propose changes to the training source material via a pull request.
 

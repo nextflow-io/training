@@ -1,5 +1,7 @@
+#!/usr/bin/env nextflow
+
 workflow  {
 
-    ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
+    ch_datasheet = channel.fromPath("./data/datasheet.csv")
 
 }

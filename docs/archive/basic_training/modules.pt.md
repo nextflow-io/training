@@ -51,7 +51,7 @@ include { CONVERTTOUPPER } from './modules.nf'
         #!/usr/bin/env nextflow
 
         params.greeting  = 'Hello world!'
-        greeting_ch = Channel.of(params.greeting)
+        greeting_ch = channel.of(params.greeting)
 
         include { SPLITLETTERS   } from './modules.nf'
         include { CONVERTTOUPPER } from './modules.nf'
@@ -111,7 +111,7 @@ Ao incluir um componente de um módulo, é possível especificar um apelido para
 #!/usr/bin/env nextflow
 
 params.greeting = 'Hello world!'
-greeting_ch = Channel.of(params.greeting)
+greeting_ch = channel.of(params.greeting)
 
 include { SPLITLETTERS as SPLITLETTERS_one } from './modules.nf'
 include { SPLITLETTERS as SPLITLETTERS_two } from './modules.nf'
@@ -165,7 +165,7 @@ No exemplo básico anterior (`hello.nf`), definimos os nomes dos canais para esp
 
 ```groovy linenums="1"
 workflow  {
-    greeting_ch = Channel.of(params.greeting)
+    greeting_ch = channel.of(params.greeting)
     letters_ch = SPLITLETTERS(greeting_ch)
     results_ch = CONVERTTOUPPER(letters_ch.flatten())
     results_ch.view { it }
@@ -180,7 +180,7 @@ Também podemos definir explicitamente a saída de um canal para outro usando o 
 
 ```groovy linenums="1" hl_lines="3-5"
 workflow  {
-    greeting_ch = Channel.of(params.greeting)
+    greeting_ch = channel.of(params.greeting)
     SPLITLETTERS(greeting_ch)
     CONVERTTOUPPER(SPLITLETTERS.out.flatten())
     CONVERTTOUPPER.out.view()
@@ -191,7 +191,7 @@ Se um processo define dois ou mais canais de saída, cada canal pode ser acessad
 
 ```groovy linenums="1" hl_lines="5"
 workflow  {
-    greeting_ch = Channel.of(params.greeting)
+    greeting_ch = channel.of(params.greeting)
     SPLITLETTERS(greeting_ch)
     CONVERTTOUPPER(SPLITLETTERS.out.flatten())
     CONVERTTOUPPER.out[0].view()
@@ -234,7 +234,7 @@ Em seguida, altere o escopo `workflow` em `hello.nf` para chamar essa saída nom
 
 ```groovy linenums="1" title="hello.nf"
 workflow {
-    greeting_ch = Channel.of(params.greeting)
+    greeting_ch = channel.of(params.greeting)
     SPLITLETTERS(greeting_ch)
     CONVERTTOUPPER(SPLITLETTERS.out.flatten())
     CONVERTTOUPPER.out.upper.view { it }
@@ -251,7 +251,7 @@ Outra maneira de lidar com as saídas no escopo `workflow` é usar pipes `|`.
 
     ```groovy linenums="1"
     workflow {
-        Channel.of(params.greeting) | SPLITLETTERS | flatten | CONVERTTOUPPER | view
+        channel.of(params.greeting) | SPLITLETTERS | flatten | CONVERTTOUPPER | view
     }
     ```
 
@@ -271,7 +271,7 @@ include { CONVERTTOUPPER } from './modules.nf'
 
 
 workflow meu_fluxo_de_trabalho {
-    greeting_ch = Channel.of(params.greeting)
+    greeting_ch = channel.of(params.greeting)
     SPLITLETTERS(greeting_ch)
     CONVERTTOUPPER(SPLITLETTERS.out.flatten())
     CONVERTTOUPPER.out.upper.view { it }
@@ -323,7 +323,7 @@ A entrada para o `workflow` pode então ser especificada como um argumento:
 
 ```groovy linenums="1"
 workflow {
-    meu_fluxo_de_trabalho(Channel.of(params.greeting))
+    meu_fluxo_de_trabalho(channel.of(params.greeting))
 }
 ```
 
@@ -345,7 +345,7 @@ workflow meu_fluxo_de_trabalho {
 }
 
 workflow {
-    meu_fluxo_de_trabalho(Channel.of(params.greeting))
+    meu_fluxo_de_trabalho(channel.of(params.greeting))
     meu_fluxo_de_trabalho.out.view()
 }
 ```
@@ -368,7 +368,7 @@ workflow meu_fluxo_de_trabalho {
 }
 
 workflow {
-    meu_fluxo_de_trabalho(Channel.of(params.greeting))
+    meu_fluxo_de_trabalho(channel.of(params.greeting))
     meu_fluxo_de_trabalho.out.meus_dados.view()
 }
 ```
@@ -406,8 +406,8 @@ workflow meu_fluxo_de_trabalho_dois {
 }
 
 workflow {
-    meu_fluxo_de_trabalho_um(Channel.of(params.greeting))
-    meu_fluxo_de_trabalho_dois(Channel.of(params.greeting))
+    meu_fluxo_de_trabalho_um(channel.of(params.greeting))
+    meu_fluxo_de_trabalho_dois(channel.of(params.greeting))
 }
 ```
 

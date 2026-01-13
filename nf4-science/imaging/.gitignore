@@ -1,0 +1,5 @@
+work
+results*
+*.yaml
+!params.yaml
+molkart

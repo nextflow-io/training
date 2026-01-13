@@ -20,8 +20,8 @@ process PROCESS_FILES {
 
 workflow {
 
-    reference_ch = Channel.of('baseline_reference')
-    input_ch = Channel.of('sample1', 'sample2', 'sample3')
+    reference_ch = channel.of('baseline_reference')
+    input_ch = channel.of('sample1', 'sample2', 'sample3')
 
     PROCESS_FILES(reference_ch, input_ch)
 }

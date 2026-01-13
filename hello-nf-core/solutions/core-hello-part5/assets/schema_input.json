@@ -1,0 +1,29 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://raw.githubusercontent.com/core/hello/main/assets/schema_input.json",
+    "title": "core/hello pipeline - params.input schema",
+    "description": "Schema for the greetings file provided with params.input",
+    "type": "array",
+    "items": {
+        "type": "object",
+        "properties": {
+            "greeting": {
+                "type": "string",
+                "pattern": "^\\S.*$",
+                "errorMessage": "Greeting must be provided and cannot be empty or start with whitespace"
+            },
+            "language": {
+                "type": "string",
+                "enum": ["en", "fr", "es", "it", "de"],
+                "errorMessage": "Language must be one of: en, fr, es, it, de"
+            },
+            "score": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 100,
+                "errorMessage": "Score must be an integer with a value between 0 and 100"
+            }
+        },
+        "required": ["greeting"]
+    }
+}

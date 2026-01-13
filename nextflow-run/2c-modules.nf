@@ -13,7 +13,7 @@ include { collectGreetings } from './modules/collectGreetings.nf'
 workflow {
 
     // create a channel for inputs from a CSV file
-    greeting_ch = Channel.fromPath(params.input)
+    greeting_ch = channel.fromPath(params.input)
                         .splitCsv()
                         .map { line -> line[0] }
 

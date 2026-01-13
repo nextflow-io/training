@@ -17,7 +17,7 @@ params.input_csv = "data/paired-end.csv"
 
 workflow {
     // Create input channel from the contents of a CSV file
-    read_ch = Channel.fromPath(params.input_csv)
+    read_ch = channel.fromPath(params.input_csv)
         .splitCsv(header:true)
         .map { row -> [file(row.fastq_1), file(row.fastq_2)] }
 

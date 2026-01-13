@@ -4,7 +4,7 @@ params.input = "https://raw.githubusercontent.com/nf-core/test-datasets/rnaseq/s
 
 workflow {
 
-    Channel.fromPath(params.input)
+    channel.fromPath(params.input)
         .splitCsv(header: true)
         .view()
 }

@@ -2,15 +2,9 @@
 
 Debugging is a critical skill that can save you hours of frustration and help you become a more effective Nextflow developer. Throughout your career, especially when you're starting out, you'll encounter bugs while building and maintaining your workflows. Learning systematic debugging approaches will help you identify and resolve issues quickly.
 
-## What you should know first
+### Learning goals
 
-This guide assumes you've completed the [Hello Nextflow](../hello_nextflow/) training course and are comfortable with foundational Nextflow concepts including basic workflow structure, processes, channels, and configuration.
-
-This guide focuses on debugging techniques and workflows. For comprehensive coverage of IDE features that support debugging (syntax highlighting, error detection, etc.), see the dedicated [IDE Features for Nextflow Development](ide_features.md) side quest. We recommend completing the IDE training beforehand.
-
-## What you'll learn here
-
-This guide focuses on **systematic debugging techniques** for Nextflow workflows:
+In this side quest, we'll explore **systematic debugging techniques** for Nextflow workflows:
 
 - **Syntax error debugging**: Using IDE features and Nextflow error messages effectively
 - **Channel debugging**: Diagnosing data flow issues and channel structure problems
@@ -20,11 +14,29 @@ This guide focuses on **systematic debugging techniques** for Nextflow workflows
 
 By the end, you'll have a robust debugging methodology that transforms frustrating error messages into clear roadmaps for solutions.
 
+### Prerequisites
+
+Before taking on this side quest, you should:
+
+- Have completed the [Hello Nextflow](../hello_nextflow/README.md) tutorial or equivalent beginner's course.
+- Be comfortable using basic Nextflow concepts and mechanisms (processes, channels, operators)
+
+**Optional:** We recommend completing the [IDE Features for Nextflow Development](./ide_features.md) side quest first.
+That covers comprehensive coverage of IDE features that support debugging (syntax highlighting, error detection, etc.), which we'll use heavily here.
+
 ---
 
-## 0. Warmup
+## 0. Get started
 
-Let's move into the debugging exercise directory:
+#### Open the training codespace
+
+If you haven't yet done so, make sure to open the training environment as described in the [Environment Setup](../envsetup/index.md).
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
+
+#### Move into the project directory
+
+Let's move into the directory where the files for this tutorial are located.
 
 ```bash
 cd side-quests/debugging
@@ -36,13 +48,11 @@ You can set VSCode to focus on this directory:
 code .
 ```
 
-The directory contains example workflows with various types of bugs that we'll use for practice:
+#### Review the materials
 
-```bash
-tree .
-```
+You'll find a set of example workflows with various types of bugs that we'll use for practice:
 
-```console title="Project structure"
+```console title="Directory contents"
 .
 ├── bad_bash_var.nf
 ├── bad_channel_shape.nf
@@ -67,19 +77,26 @@ tree .
 ├── missing_software_with_stub.nf
 ├── nextflow.config
 └── no_such_var.nf
-
-1 directory, 22 files
 ```
 
 These files represent common debugging scenarios you'll encounter in real-world development.
 
-### Takeaway
+#### Review the assignment
 
-You're set up with example files containing various types of bugs that we'll debug systematically throughout this guide.
+Your challenge is to run each workflow, identify the error(s) and fix it.
 
-### What's next?
+<!-- TODO: give a bit more details, similar to how it's done in the Metadata side quest -->
 
-Learn to identify and fix the most common type of error: syntax errors.
+#### Readiness checklist
+
+Think you're ready to dive in?
+
+- [ ] I understand the goal of this course and its prerequisites
+- [ ] My codespace is up and running
+- [ ] I've set my working directory appropriately
+- [ ] I understand the assignment
+
+If you can check all the boxes, you're good to go.
 
 ---
 
@@ -150,7 +167,7 @@ process PROCESS_FILES {
 workflow {
 
     // Create input channel
-    input_ch = Channel.of('sample1', 'sample2', 'sample3')
+    input_ch = channel.of('sample1', 'sample2', 'sample3')
 
     // Call the process with the input channel
     PROCESS_FILES(input_ch)
@@ -192,7 +209,7 @@ Replace the comment with the missing closing brace:
     workflow {
 
         // Create input channel
-        input_ch = Channel.of('sample1', 'sample2', 'sample3')
+        input_ch = channel.of('sample1', 'sample2', 'sample3')
 
         // Call the process with the input channel
         PROCESS_FILES(input_ch)
@@ -220,7 +237,7 @@ Replace the comment with the missing closing brace:
     workflow {
 
         // Create input channel
-        input_ch = Channel.of('sample1', 'sample2', 'sample3')
+        input_ch = channel.of('sample1', 'sample2', 'sample3')
 
         // Call the process with the input channel
         PROCESS_FILES(input_ch)
@@ -287,7 +304,7 @@ process PROCESS_FILES {
 workflow {
 
     // Create input channel
-    input_ch = Channel.of('sample1', 'sample2', 'sample3')
+    input_ch = channel.of('sample1', 'sample2', 'sample3')
 
     // Call the process with the input channel
     PROCESS_FILES(input_ch)
@@ -323,7 +340,7 @@ Replace the incorrect keyword with the correct one by referencing [the documenta
     workflow {
 
         // Create input channel
-        input_ch = Channel.of('sample1', 'sample2', 'sample3')
+        input_ch = channel.of('sample1', 'sample2', 'sample3')
 
         // Call the process with the input channel
         PROCESS_FILES(input_ch)
@@ -351,7 +368,7 @@ Replace the incorrect keyword with the correct one by referencing [the documenta
     workflow {
 
         // Create input channel
-        input_ch = Channel.of('sample1', 'sample2', 'sample3')
+        input_ch = channel.of('sample1', 'sample2', 'sample3')
 
         // Call the process with the input channel
         PROCESS_FILES(input_ch)
@@ -424,7 +441,7 @@ process PROCESS_FILES {
 }
 
 workflow {
-    input_ch = Channel.of('sample1', 'sample2', 'sample3')
+    input_ch = channel.of('sample1', 'sample2', 'sample3')
     PROCESS_FILES(input_ch)
 }
 ```
@@ -458,7 +475,7 @@ If you get a 'No such variable' error, you can fix it by either defining the var
     }
 
     workflow {
-        input_ch = Channel.of('sample1', 'sample2', 'sample3')
+        input_ch = channel.of('sample1', 'sample2', 'sample3')
         PROCESS_FILES(input_ch)
     }
     ```
@@ -487,7 +504,7 @@ If you get a 'No such variable' error, you can fix it by either defining the var
     }
 
     workflow {
-        input_ch = Channel.of('sample1', 'sample2', 'sample3')
+        input_ch = channel.of('sample1', 'sample2', 'sample3')
         PROCESS_FILES(input_ch)
     }
     ```
@@ -568,7 +585,7 @@ If you want to use a Bash variable, you must escape the dollar sign like this:
     }
 
     workflow {
-        input_ch = Channel.of('sample1', 'sample2', 'sample3')
+        input_ch = channel.of('sample1', 'sample2', 'sample3')
         PROCESS_FILES(input_ch)
     }
     ```
@@ -646,7 +663,7 @@ Let's examine `badpractice_syntax.nf` to see what the VSCode extension is warnin
 ```groovy title="badpractice_syntax.nf" hl_lines="3" linenums="1"
 #!/usr/bin/env nextflow
 
-input_ch = Channel.of('sample1', 'sample2', 'sample3')  # WARNING: Channel defined outside workflow
+input_ch = channel.of('sample1', 'sample2', 'sample3')  // WARNING: Channel defined outside workflow
 
 process PROCESS_FILES {
     input:
@@ -703,7 +720,7 @@ Follow the VSCode extension's recommendation by moving the channel definition in
     }
 
     workflow {
-        input_ch = Channel.of('sample1', 'sample2', 'sample3')  # Moved inside workflow block
+        input_ch = channel.of('sample1', 'sample2', 'sample3')  // Moved inside workflow block
         PROCESS_FILES(input_ch)
     }
     ```
@@ -713,7 +730,7 @@ Follow the VSCode extension's recommendation by moving the channel definition in
     ```groovy title="badpractice_syntax.nf" hl_lines="3" linenums="1"
     #!/usr/bin/env nextflow
 
-    input_ch = Channel.of('sample1', 'sample2', 'sample3')  # WARNING: Channel defined outside workflow
+    input_ch = channel.of('sample1', 'sample2', 'sample3')  // WARNING: Channel defined outside workflow
 
     process PROCESS_FILES {
         input:
@@ -812,8 +829,8 @@ process PROCESS_FILES {
 workflow {
 
     // Create two separate channels
-    samples_ch = Channel.of('sample1', 'sample2', 'sample3')
-    files_ch = Channel.of('file1.txt', 'file2.txt', 'file3.txt')
+    samples_ch = channel.of('sample1', 'sample2', 'sample3')
+    files_ch = channel.of('file1.txt', 'file2.txt', 'file3.txt')
 
     // ERROR: Passing 2 channels but process expects only 1
     PROCESS_FILES(samples_ch, files_ch)
@@ -849,8 +866,8 @@ For this specific example, the process expects a single channel and doesn't requ
     workflow {
 
         // Create two separate channels
-        samples_ch = Channel.of('sample1', 'sample2', 'sample3')
-        files_ch = Channel.of('file1.txt', 'file2.txt', 'file3.txt')
+        samples_ch = channel.of('sample1', 'sample2', 'sample3')
+        files_ch = channel.of('file1.txt', 'file2.txt', 'file3.txt')
 
         // Fixed: Pass only the channel the process expects
         PROCESS_FILES(samples_ch)
@@ -878,8 +895,8 @@ For this specific example, the process expects a single channel and doesn't requ
     workflow {
 
         // Create two separate channels
-        samples_ch = Channel.of('sample1', 'sample2', 'sample3')
-        files_ch = Channel.of('file1.txt', 'file2.txt', 'file3.txt')
+        samples_ch = channel.of('sample1', 'sample2', 'sample3')
+        files_ch = channel.of('file1.txt', 'file2.txt', 'file3.txt')
 
         // ERROR: Passing 2 channels but process expects only 1
         PROCESS_FILES(samples_ch, files_ch)
@@ -942,8 +959,8 @@ process PROCESS_FILES {
 
 workflow {
 
-    reference_ch = Channel.of('baseline_reference')
-    input_ch = Channel.of('sample1', 'sample2', 'sample3')
+    reference_ch = channel.of('baseline_reference')
+    input_ch = channel.of('sample1', 'sample2', 'sample3')
 
     PROCESS_FILES(reference_ch, input_ch)
 }
@@ -959,34 +976,34 @@ There are a couple of ways to address this depending on how many files are affec
 
 **Option 1**: You have a single reference file that you are re-using a lot. You can simply create a value channel type, which can be used over and over again. There are three ways to do this:
 
-**1.** Use `Channel.value()`:
+**1a** Use `channel.value()`:
 
 ```groovy title="exhausted.nf (fixed - Option 1a)" hl_lines="2" linenums="21"
 workflow {
-    reference_ch = Channel.value('baseline_reference')  // Value channel can be reused
-    input_ch = Channel.of('sample1', 'sample2', 'sample3')
+    reference_ch = channel.value('baseline_reference')  // Value channel can be reused
+    input_ch = channel.of('sample1', 'sample2', 'sample3')
 
     PROCESS_FILES(reference_ch, input_ch)
 }
 ```
 
-**2.** Use the `first()` [operator](https://www.nextflow.io/docs/latest/reference/operator.html#first):
+**1b** Use the `first()` [operator](https://www.nextflow.io/docs/latest/reference/operator.html#first):
 
 ```groovy title="exhausted.nf (fixed - Option 1b)" hl_lines="2" linenums="21"
 workflow {
-    reference_ch = Channel.of('baseline_reference').first()  // Convert to value channel
-    input_ch = Channel.of('sample1', 'sample2', 'sample3')
+    reference_ch = channel.of('baseline_reference').first()  // Convert to value channel
+    input_ch = channel.of('sample1', 'sample2', 'sample3')
 
     PROCESS_FILES(reference_ch, input_ch)
 }
 ```
 
-**3.** Use the `collect()` [operator](https://www.nextflow.io/docs/latest/reference/operator.html#collect):
+**1c.** Use the `collect()` [operator](https://www.nextflow.io/docs/latest/reference/operator.html#collect):
 
 ```groovy title="exhausted.nf (fixed - Option 1c)" hl_lines="2" linenums="21"
 workflow {
-    reference_ch = Channel.of('baseline_reference').collect()  // Convert to value channel
-    input_ch = Channel.of('sample1', 'sample2', 'sample3')
+    reference_ch = channel.of('baseline_reference').collect()  // Convert to value channel
+    input_ch = channel.of('sample1', 'sample2', 'sample3')
 
     PROCESS_FILES(reference_ch, input_ch)
 }
@@ -996,17 +1013,27 @@ workflow {
 
 ```groovy title="exhausted.nf (fixed - Option 2)" hl_lines="4" linenums="21"
 workflow {
-    reference_ch = Channel.of('baseline_reference')
-    input_ch = Channel.of('sample1', 'sample2', 'sample3')
+    reference_ch = channel.of('baseline_reference','other_reference')
+    input_ch = channel.of('sample1', 'sample2', 'sample3')
     combined_ch = reference_ch.combine(input_ch)  // Creates cartesian product
 
     PROCESS_FILES(combined_ch)
 }
 ```
 
-`.combine()` generates a cartesian product of the two channels, so each item in `reference_ch` will be paired with each item in `input_ch`. This allows the process to run for each sample while still using the reference.
+The `.combine()` operator generates a cartesian product of the two channels, so each item in `reference_ch` will be paired with each item in `input_ch`. This allows the process to run for each sample while still using the reference.
 
-> Note: This requires the process input to be adjusted and therefore is not suitable in all situations.
+This requires the process input to be adjusted. In our example, the start of the process definition would need to be adjusted as follows:
+
+```groovy title="exhausted.nf (fixed - Option 2)" hl_lines="5" linenums="1"
+#!/usr/bin/env nextflow
+
+process PROCESS_FILES {
+    input:
+        tuple val(reference), val(sample_name)
+```
+
+This approach may not be suitable in all situations.
 
 #### Run the pipeline
 
@@ -1083,7 +1110,7 @@ process PROCESS_FILES {
 workflow {
 
     // Channel emits tuples, but process expects single values
-    input_ch = Channel.of(
+    input_ch = channel.of(
       ['sample1', 'file1.txt'],
       ['sample2', 'file2.txt'],
       ['sample3', 'file3.txt']
@@ -1121,7 +1148,7 @@ To fix this, if the process requires both inputs we could adjust the process to 
         workflow {
 
             // Channel emits tuples, but process expects single values
-            input_ch = Channel.of(
+            input_ch = channel.of(
               ['sample1', 'file1.txt'],
               ['sample2', 'file2.txt'],
               ['sample3', 'file3.txt']
@@ -1151,7 +1178,7 @@ To fix this, if the process requires both inputs we could adjust the process to 
         workflow {
 
             // Channel emits tuples, but process expects single values
-            input_ch = Channel.of(
+            input_ch = channel.of(
               ['sample1', 'file1.txt'],
               ['sample2', 'file2.txt'],
               ['sample3', 'file3.txt']
@@ -1168,7 +1195,7 @@ To fix this, if the process requires both inputs we could adjust the process to 
         workflow {
 
             // Channel emits tuples, but process expects single values
-            input_ch = Channel.of(
+            input_ch = channel.of(
               ['sample1', 'file1.txt'],
               ['sample2', 'file2.txt'],
               ['sample3', 'file3.txt']
@@ -1183,7 +1210,7 @@ To fix this, if the process requires both inputs we could adjust the process to 
         workflow {
 
             // Channel emits tuples, but process expects single values
-            input_ch = Channel.of(
+            input_ch = channel.of(
               ['sample1', 'file1.txt'],
               ['sample2', 'file2.txt'],
               ['sample3', 'file3.txt']
@@ -1239,7 +1266,7 @@ Let's examine `bad_channel_shape_viewed.nf` to see how `.view()` is used:
 workflow {
 
     // Channel emits tuples, but process expects single values
-    input_ch = Channel.of(
+    input_ch = channel.of(
       ['sample1', 'file1.txt'],
       ['sample2', 'file2.txt'],
       ['sample3', 'file3.txt']
@@ -1260,7 +1287,7 @@ To save you from using `.view()` operations excessively in future to understand 
 workflow {
 
     // Channel emits tuples, but process expects single values
-    input_ch = Channel.of(
+    input_ch = channel.of(
             ['sample1', 'file1.txt'],
             ['sample2', 'file2.txt'],
             ['sample3', 'file3.txt'],
@@ -2153,7 +2180,7 @@ Now it's time to put the systematic debugging approach into practice. The workfl
 
         **Error 10: Output File Name Mismatch**
         ```groovy linenums="88"
-        file_ch = Channel.fromPath("*.txt") // Error: attempting to take input from the pwd rather than a process
+        file_ch = channel.fromPath("*.txt") // Error: attempting to take input from the pwd rather than a process
         handleFiles(file_ch)
         ```
         **Fix:** Take the output from the previous process
@@ -2244,7 +2271,7 @@ Now it's time to put the systematic debugging approach into practice. The workfl
         workflow {
 
             // Channel with incorrect usage
-            input_ch = Channel
+            input_ch = channel
                 .fromPath(params.input)
                 .splitCsv(header: true)
                 .map { row -> [row.sample_id, file(row.fastq_path)] }
@@ -2275,7 +2302,12 @@ Now it's time to put the systematic debugging approach into practice. The workfl
 
 ## Summary
 
-In this side quest, we've learned:
+In this side quest, you've learned a set of systematic techniques for debugging Nextflow workflows.
+Applying these techniques in your own work will enable you to spend less time fighting your computer, solve problems faster and protect yourself from future issues.
+
+### Key patterns
+
+<!-- TODO: Can we add snippets of code below to illustrate? -->
 
 **1. How to identify and fix syntax errors**:
 
@@ -2305,8 +2337,6 @@ In this side quest, we've learned:
 - Applying resume for efficient debugging cycles
 - Following a four-phase systematic debugging methodology
 
----
-
 !!! tip "Quick Debugging Reference"
 
     **Syntax errors?** → Check VSCode warnings, run `nextflow run workflow.nf -preview`
@@ -2323,7 +2353,11 @@ In this side quest, we've learned:
 
     **Made fixes?** → Use `-resume` to save time testing: `nextflow run workflow.nf -resume`
 
-### What's next?
+---
+
+### Additional resources
+
+<!-- TODO: Are there any specific articles to call out / link to? -->
 
 Check out the [Nextflow documentation](https://www.nextflow.io/docs/latest/) for more advanced debugging features and best practices. You might want to:
 
@@ -2333,6 +2367,10 @@ Check out the [Nextflow documentation](https://www.nextflow.io/docs/latest/) for
 - Learn about other debugging tools like profiling and performance analysis
 - Explore more advanced debugging techniques for complex workflows
 
-Remember: Effective debugging is a skill that improves with practice. The systematic methodology and comprehensive toolkit you've developed here will serve you well throughout your Nextflow development journey.
+**Remember:** Effective debugging is a skill that improves with practice. The systematic methodology and comprehensive toolkit you've acquired here will serve you well throughout your Nextflow development journey.
 
 ---
+
+## What's next?
+
+Return to the [menu of Side Quests](./index.md) or click the button in the bottom right of the page to move on to the next topic in the list.

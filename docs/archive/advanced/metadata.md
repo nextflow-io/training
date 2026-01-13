@@ -52,7 +52,7 @@ A first pass attempt at pulling these files into Nextflow might use the `fromFil
 
 ```groovy linenums="1" hl_lines="2"
 workflow {
-    Channel.fromFilePairs("data/reads/*/*_R{1,2}.fastq.gz")
+    channel.fromFilePairs("data/reads/*/*_R{1,2}.fastq.gz")
         .view()
 }
 ```
@@ -67,7 +67,7 @@ We can use the `tokenize` method to split our id. To sanity-check, I just pipe t
 
 ```groovy linenums="1" hl_lines="3-5"
 workflow {
-    Channel.fromFilePairs("data/reads/*/*_R{1,2}.fastq.gz")
+    channel.fromFilePairs("data/reads/*/*_R{1,2}.fastq.gz")
         .map { id, reads ->
             id.tokenize("_")
         }
@@ -175,7 +175,7 @@ In this particular example, we know ahead of time that the treatments must be th
 
 ```groovy linenums="1" hl_lines="5"
 workflow {
-    Channel.fromFilePairs("data/reads/*/*_R{1,2}.fastq.gz")
+    channel.fromFilePairs("data/reads/*/*_R{1,2}.fastq.gz")
         .map { id, reads ->
             def (sample, replicate, type) = id.tokenize("_")
             def (treatmentFwd, treatmentRev) = reads*.parent*.name*.minus(~/treatment/)

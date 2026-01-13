@@ -234,12 +234,12 @@ Alguns sistemas de arquivos compartilhados, como o [NFS](https://en.wikipedia.or
 O Nextflow é desenvolvido para simplificar programação paralela, de modo que você não precise se preocupar com condições de corrida e acesso a recursos compartilhados. Um dos poucos casos que uma condição de corrida pode surgir é quando uma variável global é utilizada com dois (ou mais) operadores. Por exemplo:
 
 ```groovy linenums="1"
-Channel
+channel
     .of(1, 2, 3)
     .map { it -> X = it; X += 2 }
     .view { "canal1 = $it" }
 
-Channel
+channel
     .of(1, 2, 3)
     .map { it -> X = it; X *= 2 }
     .view { "canal2 = $it" }
@@ -250,12 +250,12 @@ O problema desse trecho é que a variável `X` na clausura é definida no escopo
 A implementação correta requer o uso da palavra chave `def` para declarar a variável **local**.
 
 ```groovy linenums="1"
-Channel
+channel
     .of(1, 2, 3)
     .map { it -> def X = it; X += 2 }
     .println { "canal1 = $it" }
 
-Channel
+channel
     .of(1, 2, 3)
     .map { it -> def X = it; X *= 2 }
     .println { "canal2 = $it" }
@@ -304,7 +304,7 @@ Uma solução comum para isso é usar o que é comumente chamado de _meta mapa_ 
 ```groovy linenums="1"
 // Apenas para fins de exemplos.
 // Estes abaixo seriam normalmente as saídas de processos anteriores
-Channel
+channel
     .of(
         [[id: 'amostra_1'], '/caminho/para/amostra_1.bam'],
         [[id: 'amostra_2'], '/caminho/para/amostra_2.bam']
@@ -312,7 +312,7 @@ Channel
     .set { bam }
 
 // Nota: amostra_2 é agora o primeiro elemento, em vez de amostra_1
-Channel
+channel
     .of(
         [[id: 'amostra_2'], '/caminho/para/amostra_2.bai'],
         [[id: 'amostra_1'], '/caminho/para/amostra_1.bai']

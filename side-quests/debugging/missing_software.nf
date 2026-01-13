@@ -19,7 +19,7 @@ process PROCESS_FILES {
 workflow {
 
     // Create input channel
-    input_ch = Channel.of('sample1', 'sample2', 'sample3')
+    input_ch = channel.of('sample1', 'sample2', 'sample3')
 
     // Call the process with the input channel
     PROCESS_FILES(input_ch)

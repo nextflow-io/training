@@ -161,7 +161,7 @@ gatk HaplotypeCaller \
         -ERC GVCF
 ```
 
-Once this completes, you should have three files ending in `.g.vcf` in your work directory (one per sample) and their respective index files ending in `.g.vcf.idx`.
+Once this completes, you should have three files ending in `.g.vcf` in your current directory (one per sample) and their respective index files ending in `.g.vcf.idx`.
 
 ### 0.3. Run joint genotyping
 
@@ -315,7 +315,7 @@ But look at that line about the missing output file. Notice anything?
 
 That's right, we forgot to tell Nextflow to expect a new file name. Oops.
 
-### 1.2. Update the output file extension in the process outputs block too
+### 1.3. Update the output file extension in the process outputs block too
 
 Because it's not enough to just change the file extension in the tool command itself, you also have to tell Nextflow that the expected output filename has changed.
 
@@ -335,7 +335,7 @@ _After:_
         path "${input_bam}.g.vcf.idx" , emit: idx
 ```
 
-### 1.3. Run the pipeline again
+### 1.4. Run the pipeline again
 
 Let's run it with `-resume` this time.
 

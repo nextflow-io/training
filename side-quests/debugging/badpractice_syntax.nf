@@ -1,6 +1,6 @@
 #!/usr/bin/env nextflow
 
-input_ch = Channel.of('sample1', 'sample2', 'sample3')
+input_ch = channel.of('sample1', 'sample2', 'sample3')
 
 process PROCESS_FILES {
     input:

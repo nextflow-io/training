@@ -82,7 +82,7 @@ process handleFiles {
 workflow {
 
     // Channel with incorrect usage
-    input_ch = Channel.fromPath(params.input)
+    input_ch = channel.fromPath(params.input)
         .splitCsv(header: true)
         .map { row -> [row.sample_id, file(row.fastq_path)] }
     // Fixed: made the map return a tuple with sample_id and fastq_path as a file

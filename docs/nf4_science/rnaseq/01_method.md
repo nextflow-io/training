@@ -157,7 +157,7 @@ ENCSR000COQ1_1.fastq.gz_trimming_report.txt  ENCSR000COQ1_1_trimmed_fastqc.html
 ENCSR000COQ1_1_trimmed.fq.gz                 ENCSR000COQ1_1_trimmed_fastqc.zip
 ```
 
-### 1.6. Move the output files to the filesystem outside the container
+### 1.5. Move the output files to the filesystem outside the container
 
 Anything that remains inside the container will be inaccessible to future work so let's move these to a new directory.
 
@@ -166,7 +166,7 @@ mkdir /data/trimmed
 mv ENCSR000COQ1_1* /data/trimmed
 ```
 
-### 1.7. Exit the container
+### 1.6. Exit the container
 
 ```bash
 exit
@@ -248,7 +248,7 @@ tar -czvf /data/genome_index.tar.gz genome_index.*
 
 This stores a `genome_index.tar.gz` tarball containing the genome index files in the `data/` directory on our filesystem, which wil come in handy in Part 2 of this course.
 
-### 2.5. Run the `hisat2` command
+### 2.4. Run the `hisat2` command
 
 Now we can run the alignment command, which performs the alignment step with `hisat2` then pipes the output to `samtools` to write the output out as a BAM file.
 
@@ -282,14 +282,14 @@ ls ENCSR000COQ1_1*
 ENCSR000COQ1_1_trimmed.bam  ENCSR000COQ1_1_trimmed.hisat2.log
 ```
 
-### 2.6. Move the output files to the filesystem outside the container
+### 2.5. Move the output files to the filesystem outside the container
 
 ```bash
 mkdir /data/aligned
 mv ENCSR000COQ1_1* /data/aligned
 ```
 
-### 2.7. Exit the container
+### 2.6. Exit the container
 
 ```bash
 exit
@@ -304,7 +304,7 @@ We're going to pull a container image that has `multiqc` installed, spin it up i
 ### 3.1. Pull the `multiqc` container
 
 ```bash
-docker pull community.wave.seqera.io/library/pip_multiqc:ad8f247edb55897c
+docker pull community.wave.seqera.io/library/pip_multiqc:a3c26f6199d64b7c
 ```
 
 ```console title="Output"
@@ -323,14 +323,14 @@ bb36d6c3110d: Already exists
 3f229294c69a: Pull complete
 5a5ad47fd84c: Pull complete
 Digest: sha256:0ebb1d9605395a7df49ad0eb366b21f46afd96a5090376b0d8941cf5294a895a
-Status: Downloaded newer image for community.wave.seqera.io/library/pip_multiqc:ad8f247edb55897c
-community.wave.seqera.io/library/pip_multiqc:ad8f247edb55897c
+Status: Downloaded newer image for community.wave.seqera.io/library/pip_multiqc:a3c26f6199d64b7c
+community.wave.seqera.io/library/pip_multiqc:a3c26f6199d64b7c
 ```
 
 ### 3.2. Spin up the `multiqc` container interactively
 
 ```bash
-docker run -it -v ./data:/data community.wave.seqera.io/library/pip_multiqc:ad8f247edb55897c
+docker run -it -v ./data:/data community.wave.seqera.io/library/pip_multiqc:a3c26f6199d64b7c
 ```
 
 ### 3.3. Run the `multiqc` command

@@ -32,6 +32,10 @@ nav:
       - hello_nf-core/00_orientation.md
       - hello_nf-core/01_run_demo.md
       - hello_nf-core/02_rewrite_hello.md
+      - hello_nf-core/03_use_module.md
+      - hello_nf-core/04_make_module.md
+      - hello_nf-core/05_input_validation.md
+      - hello_nf-core/summary.md
       - hello_nf-core/survey.md
       - hello_nf-core/next_steps.md
   - Nextflow for Science:
@@ -53,6 +57,15 @@ nav:
           - nf4_science/rnaseq/03_multi-sample.md
           - nf4_science/rnaseq/survey.md
           - nf4_science/rnaseq/next_steps.md
+      - Imaging:
+          - nf4_science/imaging/index.md
+          - nf4_science/imaging/00_orientation.md
+          - nf4_science/imaging/01_basics.md
+          - nf4_science/imaging/02_run_molkart.md
+          - nf4_science/imaging/03_inputs.md
+          - nf4_science/imaging/04_config.md
+          - nf4_science/imaging/survey.md
+          - nf4_science/imaging/next_steps.md
   - Training Collections:
       - training_collections/index.md
       - training_collections/architects_toolkit_1.md
@@ -68,7 +81,6 @@ nav:
       - side_quests/debugging.md
       - side_quests/essential_scripting_patterns.md
       - side_quests/nf-test.md
-      - side_quests/nf-core.md
   - Archive:
       - Fundamentals Training:
           - archive/basic_training/index.md
@@ -195,6 +207,10 @@ markdown_extensions:
   - pymdownx.snippets
   - pymdownx.superfences:
       preserve_tabs: true
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.tabbed:
       alternate_style: true
   - pymdownx.tasklist:
@@ -226,6 +242,7 @@ plugins:
         - hello_nf-core/*.md
         - nf4_science/genomics/*.md
         - nf4_science/rnaseq/*.md
+        - nf4_science/imaging/*.md
         - side_quests/*.md
         - training_collections/index.md
         - training_collections/advanced_workflow_development/index.md

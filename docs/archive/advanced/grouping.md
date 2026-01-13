@@ -12,7 +12,7 @@ cd grouping
 
 ```groovy linenums="1"
 workflow {
-    Channel.fromPath("data/samplesheet.csv")
+    channel.fromPath("data/samplesheet.csv")
         .splitCsv( header:true )
         .map { row ->
             def meta = [id:row.id, repeat:row.repeat, type:row.type]
@@ -32,7 +32,7 @@ The first change we're going to make is to correct some repetitive code that we'
 
 ```groovy linenums="1" hl_lines="5"
 workflow {
-    Channel.fromPath("data/samplesheet.csv")
+    channel.fromPath("data/samplesheet.csv")
         .splitCsv( header:true )
         .map { row ->
             def meta = row.subMap('id', 'repeat', 'type')
@@ -64,7 +64,7 @@ workflow {
 
         ```groovy linenums="1"
         workflow {
-            Channel.fromPath("data/samplesheet.csv")
+            channel.fromPath("data/samplesheet.csv")
                 .splitCsv( header:true )
                 .map { row ->
                     def meta = row.subMap('id', 'repeat', 'type')
@@ -100,7 +100,7 @@ workflow {
 
         ```groovy linenums="1"
         workflow {
-            Channel.fromPath("data/samplesheet.csv")
+            channel.fromPath("data/samplesheet.csv")
                 .splitCsv( header:true )
                 .map { row ->
                     def meta = row.subMap('id', 'repeat', 'type')
@@ -146,9 +146,9 @@ process MapReads {
 }
 
 workflow {
-    reference = Channel.fromPath("data/genome.fasta").first()
+    reference = channel.fromPath("data/genome.fasta").first()
 
-    samples = Channel.fromPath("data/samplesheet.csv")
+    samples = channel.fromPath("data/samplesheet.csv")
         .splitCsv( header:true )
         .map { row ->
             def meta = row.subMap('id', 'repeat', 'type')
@@ -197,9 +197,9 @@ mapped_reads.view()
 
         ```groovy linenums="13" hl_lines="16-20"
         workflow {
-            reference = Channel.fromPath("data/genome.fasta").first()
+            reference = channel.fromPath("data/genome.fasta").first()
 
-            samples = Channel.fromPath("data/samplesheet.csv")
+            samples = channel.fromPath("data/samplesheet.csv")
                 .splitCsv( header:true )
                 .map { row ->
                     def meta = row.subMap('id', 'repeat', 'type')
@@ -263,7 +263,7 @@ The previous exercise demonstrated the fan-in approach using `groupTuple` and `g
 We can take an existing bed file, for example and turn it into a channel of Maps.
 
 ```groovy linenums="26"
-intervals = Channel.fromPath("data/intervals.bed")
+intervals = channel.fromPath("data/intervals.bed")
     .splitCsv(header: ['chr', 'start', 'stop', 'name'], sep: '\t')
     .collectFile { entry -> ["${entry.name}.bed", entry*.value.join("\t")] }
     .view()

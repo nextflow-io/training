@@ -33,7 +33,7 @@ workflow PIPELINE_INITIALISATION {
 
     main:
 
-    ch_versions = Channel.empty()
+    ch_versions = channel.empty()
 
     //
     // Print version and exit if required and dump pipeline parameters to JSON file
@@ -65,7 +65,7 @@ workflow PIPELINE_INITIALISATION {
     // Create channel from input file provided through params.input
     //
 
-    Channel
+    channel
         .fromList(samplesheetToList(params.input, "${projectDir}/assets/schema_input.json"))
         .map {
             meta, fastq_1, fastq_2 ->

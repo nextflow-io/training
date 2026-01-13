@@ -31,7 +31,7 @@ Um canal de _fila_ é uma fila assíncrona unidirecional FIFO (First-in-First-ou
 - _unidirecional_ significa que os dados fluem do gerador para o consumidor.
 - _FIFO_ significa que os dados são entregues na mesma ordem em que são produzidos. Primeiro a entrar, primeiro a sair.
 
-Um canal de fila é criado implicitamente por definições de saída de um processo ou usando fábricas de canal, como o [Channel.of](https://www.nextflow.io/docs/latest/channel.html#of) ou [Channel.fromPath](https://www.nextflow.io/docs/latest/channel.html#frompath).
+Um canal de fila é criado implicitamente por definições de saída de um processo ou usando fábricas de canal, como o [channel.of](https://www.nextflow.io/docs/latest/channel.html#of) ou [channel.fromPath](https://www.nextflow.io/docs/latest/channel.html#frompath).
 
 Tente os seguintes trechos de código:
 
@@ -40,7 +40,7 @@ Tente os seguintes trechos de código:
     Clique no ícone :material-plus-circle: no código para ver explicações.
 
 ```groovy linenums="1"
-canal = Channel.of(1, 2, 3)
+canal = channel.of(1, 2, 3)
 println(canal) // (1)!
 canal.view() // (2)!
 ```
@@ -53,7 +53,7 @@ canal.view() // (2)!
     Tente executar este trecho de código. Você pode fazer isso criando um novo arquivo `.nf` ou editando um arquivo `.nf` já existente.
 
     ```groovy linenums="1"
-    canal = Channel.of(1, 2, 3)
+    canal = channel.of(1, 2, 3)
     canal.view()
     ```
 
@@ -64,8 +64,8 @@ Um canal de **valor** (também conhecido como canal singleton), por definição,
 Para entender melhor a diferença entre canais de valor e de fila, salve o trecho abaixo como `exemplo.nf`.
 
 ```groovy linenums="1" title="exemplo.nf" linenums="1"
-canal1 = Channel.of(1, 2, 3)
-canal2 = Channel.of(1)
+canal1 = channel.of(1, 2, 3)
+canal2 = channel.of(1)
 
 process SUM {
     input:
@@ -94,11 +94,11 @@ Ao rodar o script, ele imprime apenas 2, como você pode ver abaixo:
 
 Um processo só instanciará uma tarefa quando houver elementos a serem consumidos de _todos_ os canais fornecidos como entrada para ele. Como `canal1` e `canal2` são canais de fila, e o único elemento de `canal2` foi consumido, nenhuma nova instância de processo será iniciada, mesmo se houver outros elementos a serem consumidos em `canal1`.
 
-Para usar o único elemento em `canal2` várias vezes, podemos usar `Channel.value` como mencionado acima, ou usar um operador de canal que retorna um único elemento como `first()` abaixo:
+Para usar o único elemento em `canal2` várias vezes, podemos usar `channel.value` como mencionado acima, ou usar um operador de canal que retorna um único elemento como `first()` abaixo:
 
 ```groovy linenums="1"
-canal1 = Channel.of(1, 2, 3)
-canal2 = Channel.of(1)
+canal1 = channel.of(1, 2, 3)
+canal2 = channel.of(1)
 
 process SUM {
     input:
@@ -138,9 +138,9 @@ Estes são comandos do Nextflow para criar canais que possuem entradas e funçõ
 A fábrica de canal `value` é utilizada para criar um canal de _valor_. Um argumento opcional não `nulo` pode ser especificado para vincular o canal a um valor específico. Por exemplo:
 
 ```groovy linenums="1"
-canal1 = Channel.value() // (1)!
-canal2 = Channel.value('Olá, você!') // (2)!
-canal3 = Channel.value([1, 2, 3, 4, 5]) // (3)!
+canal1 = channel.value() // (1)!
+canal2 = channel.value('Olá, você!') // (2)!
+canal3 = channel.value([1, 2, 3, 4, 5]) // (3)!
 ```
 
 1. Cria um canal de valor _vazio_
@@ -149,10 +149,10 @@ canal3 = Channel.value([1, 2, 3, 4, 5]) // (3)!
 
 ### `of()`
 
-A fábrica `Channel.of` permite a criação de um canal de fila com os valores especificados como argumentos.
+A fábrica `channel.of` permite a criação de um canal de fila com os valores especificados como argumentos.
 
 ```groovy linenums="1"
-canal = Channel.of(1, 3, 5, 7)
+canal = channel.of(1, 3, 5, 7)
 canal.view { "numero: $it" }
 ```
 
@@ -165,22 +165,22 @@ numero: 5
 numero: 7
 ```
 
-A fábrica de canal `Channel.of` funciona de maneira semelhante ao `Channel.from` (que foi [descontinuado](https://www.nextflow.io/docs/latest/channel.html#of)), corrigindo alguns comportamentos inconsistentes do último e fornecendo um melhor manuseio quando um intervalo de valores é especificado. Por exemplo, o seguinte funciona com um intervalo de 1 a 23:
+A fábrica de canal `channel.of` funciona de maneira semelhante ao `channel.from` (que foi [descontinuado](https://www.nextflow.io/docs/latest/channel.html#of)), corrigindo alguns comportamentos inconsistentes do último e fornecendo um melhor manuseio quando um intervalo de valores é especificado. Por exemplo, o seguinte funciona com um intervalo de 1 a 23:
 
 ```groovy linenums="1"
-Channel
+channel
     .of(1..23, 'X', 'Y')
     .view()
 ```
 
 ### `fromList()`
 
-A fábrica de canal `Channel.fromList` cria um canal emitindo os elementos fornecidos por um objeto de lista especificado como um argumento:
+A fábrica de canal `channel.fromList` cria um canal emitindo os elementos fornecidos por um objeto de lista especificado como um argumento:
 
 ```groovy linenums="1"
 list = ['olá', 'mundo']
 
-Channel
+channel
     .fromList(list)
     .view()
 ```
@@ -190,7 +190,7 @@ Channel
 A fábrica de canal `fromPath` cria um canal de fila emitindo um ou mais arquivos correspondentes ao padrão glob especificado.
 
 ```groovy linenums="1"
-Channel.fromPath('./data/meta/*.csv')
+channel.fromPath('./data/meta/*.csv')
 ```
 
 Este exemplo cria um canal e emite tantos itens quanto arquivos com extensão `csv` existirem na pasta `./data/meta`. Cada elemento é um objeto de arquivo implementando a interface [Path](https://docs.oracle.com/javase/8/docs/api/java/nio/file/Paths.html) do Java.
@@ -213,12 +213,12 @@ Saiba mais sobre a sintaxe dos padrões glob [neste link](https://docs.oracle.co
 
 !!! exercise
 
-    Use a fábrica de canal `Channel.fromPath` para criar um canal emitindo todos os arquivos com o sufixo `.fq` no diretório `data/ggal/` e qualquer subdiretório, além dos arquivos ocultos. Em seguida, imprima os nomes dos arquivos.
+    Use a fábrica de canal `channel.fromPath` para criar um canal emitindo todos os arquivos com o sufixo `.fq` no diretório `data/ggal/` e qualquer subdiretório, além dos arquivos ocultos. Em seguida, imprima os nomes dos arquivos.
 
     ??? solution
 
         ```groovy linenums="1"
-        Channel
+        channel
             .fromPath('./data/ggal/**.fq', hidden: true)
             .view()
         ```
@@ -228,7 +228,7 @@ Saiba mais sobre a sintaxe dos padrões glob [neste link](https://docs.oracle.co
 A fábrica de canal `fromFilePairs` cria um canal emitindo os pares de arquivos correspondentes a um padrão glob fornecido pelo usuário. Os arquivos correspondentes são emitidos como tuplas, nas quais o primeiro elemento é a chave de agrupamento do par correspondente e o segundo elemento é a lista de arquivos (classificados em ordem lexicográfica).
 
 ```groovy linenums="1"
-Channel
+channel
     .fromFilePairs('./data/ggal/*_{1,2}.fq')
     .view()
 ```
@@ -264,7 +264,7 @@ Ele produzirá uma saída semelhante à seguinte:
         Use o seguinte, com ou sem `flat: true`:
 
         ```groovy linenums="1"
-        Channel
+        channel
             .fromFilePairs('./data/ggal/*_{1,2}.fq', flat: true)
             .view()
         ```
@@ -273,7 +273,7 @@ Ele produzirá uma saída semelhante à seguinte:
 
 ### `fromSRA()`
 
-A fábrica de canal `Channel.fromSRA` permite consultar o banco de dados [NCBI SRA](https://www.ncbi.nlm.nih.gov/sra) e retorna um canal que emite os arquivos FASTQ correspondentes aos critérios de seleção especificados.
+A fábrica de canal `channel.fromSRA` permite consultar o banco de dados [NCBI SRA](https://www.ncbi.nlm.nih.gov/sra) e retorna um canal que emite os arquivos FASTQ correspondentes aos critérios de seleção especificados.
 
 A consulta pode ser ID(s) de projeto(s) ou número(s) de acesso suportado(s) pela API do [NCBI ESearch](https://www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.ESearch).
 
@@ -296,7 +296,7 @@ Por exemplo, o trecho a seguir imprimirá o conteúdo de um ID de projeto NCBI:
 ```groovy linenums="1"
 params.ncbi_api_key = '<Sua chave da API aqui>'
 
-Channel
+channel
     .fromSRA(['SRP073307'], apiKey: params.ncbi_api_key)
     .view()
 ```
@@ -319,7 +319,7 @@ Vários IDs de acesso podem ser especificados usando um objeto lista:
 
 ```groovy linenums="1"
 ids = ['ERR908507', 'ERR908506', 'ERR908505']
-Channel
+channel
     .fromSRA(ids, apiKey: params.ncbi_api_key)
     .view()
 ```
@@ -357,7 +357,7 @@ process FASTQC {
 }
 
 workflow {
-    leituras = Channel.fromSRA(params.accession, apiKey: params.ncbi_chave_api)
+    leituras = channel.fromSRA(params.accession, apiKey: params.ncbi_chave_api)
     FASTQC(leituras)
 }
 ```
@@ -369,7 +369,7 @@ Se você deseja executar o fluxo de trabalho acima e não possui o fastqc instal
 O operador `splitText` permite dividir strings de várias linhas ou itens de arquivo de texto, emitidos por um canal de origem em blocos contendo n linhas, que serão emitidos pelo canal resultante. Veja:
 
 ```groovy linenums="1"
-Channel
+channel
     .fromPath('data/meta/random.txt') // (1)!
     .splitText() // (2)!
     .view() // (3)!
@@ -382,7 +382,7 @@ Channel
 Você pode definir o número de linhas em cada bloco usando o parâmetro `by`, conforme mostrado no exemplo a seguir:
 
 ```groovy linenums="1"
-Channel
+channel
     .fromPath('data/meta/random.txt')
     .splitText(by: 2)
     .subscribe {
@@ -398,7 +398,7 @@ Channel
 Uma clausura opcional pode ser especificada para transformar os blocos de texto produzidos pelo operador. O exemplo a seguir mostra como dividir arquivos de texto em blocos de 10 linhas e transformá-los em letras maiúsculas:
 
 ```groovy linenums="1"
-Channel
+channel
     .fromPath('data/meta/random.txt')
     .splitText(by: 10) { it.toUpperCase() }
     .view()
@@ -409,7 +409,7 @@ Você também pode fazer contagens para cada linha:
 ```groovy linenums="1"
 contador = 0
 
-Channel
+channel
     .fromPath('data/meta/random.txt')
     .splitText()
     .view { "${contador++}: ${it.toUpperCase().trim()}" }
@@ -435,7 +435,7 @@ Em seguida, ele os divide em registros ou os agrupa como uma lista de registros 
 No caso mais simples, basta aplicar o operador `splitCsv` a um canal que emite arquivos de texto ou entradas de texto no formato CSV. Por exemplo, para visualizar apenas a primeira e a quarta colunas:
 
 ```groovy linenums="1"
-Channel
+channel
     .fromPath("data/meta/patients_1.csv")
     .splitCsv()
     // linha é um objeto de lista
@@ -445,7 +445,7 @@ Channel
 Quando o CSV começa com uma linha de cabeçalho definindo os nomes das colunas, você pode especificar o parâmetro `header: true` que permite referenciar cada valor pelo nome da coluna, conforme mostrado no exemplo a seguir:
 
 ```groovy linenums="1"
-Channel
+channel
     .fromPath("data/meta/patients_1.csv")
     .splitCsv(header: true)
     // linha é um objeto de lista
@@ -455,7 +455,7 @@ Channel
 Como alternativa, você pode fornecer nomes de cabeçalho personalizados especificando uma lista de strings no parâmetro de cabeçalho, conforme mostrado abaixo:
 
 ```groovy linenums="1"
-Channel
+channel
     .fromPath("data/meta/patients_1.csv")
     .splitCsv(header: ['col1', 'col2', 'col3', 'col4', 'col5'])
     // linha é um objeto de lista
@@ -465,7 +465,7 @@ Channel
 Você também pode processar vários arquivos CSV ao mesmo tempo:
 
 ```groovy linenums="1"
-Channel
+channel
     .fromPath("data/meta/patients_*.csv") // <-- use um padrão de captura
     .splitCsv(header: true)
     .view { linha -> "${linha.patient_id}\t${linha.num_samples}" }
@@ -500,7 +500,7 @@ for (List linha : linhas) {
         Em seguida, substitua o canal de entrada para as leituras em `script7.nf`, alterando as seguintes linhas:
 
         ```groovy linenums="1"
-        Channel
+        channel
             .fromFilePairs(params.reads, checkIfExists: true)
             .set { read_pairs_ch }
         ```
@@ -508,7 +508,7 @@ for (List linha : linhas) {
         Para uma entrada de fábrica de canal splitCsv:
 
         ```groovy linenums="1" hl_lines="2 3 4"
-        Channel
+        channel
             .fromPath("fastq.csv")
             .splitCsv()
             .view { linha -> "${linha[0]}, ${linha[1]}, ${linha[2]}" }
@@ -582,7 +582,7 @@ for (List linha : linhas) {
 A análise de arquivos TSV funciona de maneira semelhante, basta adicionar a opção `sep: '\t'` no contexto do `splitCsv`:
 
 ```groovy linenums="1"
-Channel
+channel
     .fromPath("data/meta/regions.tsv", checkIfExists: true)
     // Use a opção `sep` para analisar arquivos com tabulação como separador
     .splitCsv(sep: '\t')
@@ -597,7 +597,7 @@ Channel
     ??? solution
 
         ```groovy linenums="1"
-        Channel
+        channel
             .fromPath("data/meta/regions.tsv", checkIfExists: true)
             // Use a opção `sep` para analisar arquivos com tabulação como separador
             .splitCsv(sep: '\t', header: true)
@@ -616,7 +616,7 @@ O operador `splitJson` suporta arranjos JSON:
 === "Código-fonte"
 
     ```groovy linenums="1"
-    Channel
+    channel
         .of('["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"]')
         .splitJson()
         .view { "Item: ${it}" }
@@ -639,7 +639,7 @@ Objetos JSON:
 === "Código-fonte"
 
     ```groovy linenums="1"
-    Channel
+    channel
         .of('{"jogador": {"nome": "Bob", "altura": 180, "venceu_campeonato": false}}')
         .splitJson()
         .view { "Item: ${it}" }
@@ -656,7 +656,7 @@ E inclusive arranjos JSON com objetos JSON!
 === "Código-fonte"
 
     ```groovy linenums="1"
-    Channel
+    channel
         .of('[{"nome": "Bob", "altura": 180, "venceu_campeonato": false}, \
             {"nome": "Alice", "height": 170, "venceu_campeonato": false}]')
         .splitJson()
@@ -675,7 +675,7 @@ Arquivos contendo dados em formato JSON também podem ser analisados:
 === "Código-fonte"
 
     ```groovy linenums="1"
-    Channel
+    channel
         .fromPath('arquivo.json')
         .splitJson()
         .view { "Item: ${it}" }
@@ -762,7 +762,7 @@ Digamos que não temos um operador de canal JSON, mas criamos uma função para 
     }
 
     workflow {
-        Channel
+        channel
             .fromPath('data/meta/regions*.json')
             | flatMap { parseArquivoJson(it) }
             | map { registro -> [registro.patient_id, registro.feature] }

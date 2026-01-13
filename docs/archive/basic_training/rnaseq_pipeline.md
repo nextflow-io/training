@@ -322,7 +322,7 @@ The [`set`](https://www.nextflow.io/docs/latest/operator.html#set) operator can 
     ??? Solution
 
         ```groovy linenums="18" title="script3.nf"
-        Channel
+        channel
             .fromFilePairs(params.reads)
             .set { read_pairs_ch }
         ```
@@ -336,7 +336,7 @@ Channel factories also have options that can be used to modify their behaviour. 
     ??? Solution
 
         ```groovy linenums="18" title="script3.nf"
-        Channel
+        channel
             .fromFilePairs(params.reads, checkIfExists: true)
             .set { read_pairs_ch }
         ```
@@ -471,7 +471,7 @@ You will only want one task of MultiQC to be executed to produce one report. The
 
         ```groovy linenums="83" title="script6.nf"
         workflow {
-            Channel
+            channel
                 .fromFilePairs(params.reads, checkIfExists: true)
                 .set { read_pairs_ch }
 

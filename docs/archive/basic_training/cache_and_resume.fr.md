@@ -235,12 +235,12 @@ Nextflow est conçu pour simplifier la programmation parallèle sans se préoccu
 Par exemple:
 
 ```groovy linenums="1"
-Channel
+channel
     .of(1, 2, 3)
     .map { it -> X = it; X += 2 }
     .view { "ch1 = $it" }
 
-Channel
+channel
     .of(1, 2, 3)
     .map { it -> X = it; X *= 2 }
     .view { "ch2 = $it" }
@@ -251,12 +251,12 @@ Le problème dans cet extrait est que la variable `X` dans la définition de la 
 L'implémentation correcte nécessite l'utilisation du mot-clé `def` pour déclarer la variable **locale**.
 
 ```groovy linenums="1"
-Channel
+channel
     .of(1, 2, 3)
     .map { it -> def X = it; X += 2 }
     .println { "ch1 = $it" }
 
-Channel
+channel
     .of(1, 2, 3)
     .map { it -> def X = it; X *= 2 }
     .println { "ch2 = $it" }
@@ -305,7 +305,7 @@ Une solution courante consiste à utiliser ce que l'on appelle communément une 
 ```groovy linenums="1"
 // For example purposes only.
 // These would normally be outputs from upstream processes.
-Channel
+channel
     .of(
         [[id: 'sample_1'], '/path/to/sample_1.bam'],
         [[id: 'sample_2'], '/path/to/sample_2.bam']
@@ -313,7 +313,7 @@ Channel
     .set { bam }
 
 // NB: sample_2 is now the first element, instead of sample_1
-Channel
+channel
     .of(
         [[id: 'sample_2'], '/path/to/sample_2.bai'],
         [[id: 'sample_1'], '/path/to/sample_1.bai']

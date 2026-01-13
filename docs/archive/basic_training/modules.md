@@ -45,7 +45,7 @@ include { CONVERTTOUPPER } from './modules.nf'
         #!/usr/bin/env nextflow
 
         params.greeting  = 'Hello world!'
-        greeting_ch = Channel.of(params.greeting)
+        greeting_ch = channel.of(params.greeting)
 
         include { SPLITLETTERS   } from './modules.nf'
         include { CONVERTTOUPPER } from './modules.nf'
@@ -95,7 +95,7 @@ If a Nextflow module script contains multiple `process` definitions they can als
 #!/usr/bin/env nextflow
 
 params.greeting  = 'Hello world!'
-greeting_ch = Channel.of(params.greeting)
+greeting_ch = channel.of(params.greeting)
 
 include { SPLITLETTERS; CONVERTTOUPPER } from './modules.nf'
 
@@ -114,7 +114,7 @@ When including a module component it is possible to specify a name alias using t
 #!/usr/bin/env nextflow
 
 params.greeting = 'Hello world!'
-greeting_ch = Channel.of(params.greeting)
+greeting_ch = channel.of(params.greeting)
 
 include { SPLITLETTERS as SPLITLETTERS_one } from './modules.nf'
 include { SPLITLETTERS as SPLITLETTERS_two } from './modules.nf'
@@ -162,7 +162,7 @@ In the previous example (`hello.nf`), you defined the channel names to specify t
 
 ```groovy linenums="1" title="hello.nf"
 workflow  {
-    greeting_ch = Channel.of(params.greeting)
+    greeting_ch = channel.of(params.greeting)
     letters_ch = SPLITLETTERS(greeting_ch)
     results_ch = CONVERTTOUPPER(letters_ch.flatten())
     results_ch.view { it }
@@ -173,7 +173,7 @@ You can also explicitly define the output of one channel to another using the `.
 
 ```groovy linenums="1" title="hello.nf"
 workflow  {
-    greeting_ch = Channel.of(params.greeting)
+    greeting_ch = channel.of(params.greeting)
     SPLITLETTERS(greeting_ch)
     CONVERTTOUPPER(SPLITLETTERS.out.flatten())
     CONVERTTOUPPER.out.view()
@@ -184,7 +184,7 @@ If a process defines two or more output channels, each channel can be accessed b
 
 ```groovy linenums="1" title="hello.nf"
 workflow  {
-    greeting_ch = Channel.of(params.greeting)
+    greeting_ch = channel.of(params.greeting)
     SPLITLETTERS(greeting_ch)
     CONVERTTOUPPER(SPLITLETTERS.out.flatten())
     CONVERTTOUPPER.out[0].view()
@@ -223,7 +223,7 @@ process CONVERTTOUPPER {
 }
 
 workflow {
-    greeting_ch = Channel.of(params.greeting)
+    greeting_ch = channel.of(params.greeting)
     SPLITLETTERS(greeting_ch)
     CONVERTTOUPPER(SPLITLETTERS.out.flatten())
     CONVERTTOUPPER.out.upper.view { it }
@@ -240,7 +240,7 @@ Another way to deal with outputs in the workflow scope is to use pipes `|`.
 
     ```groovy linenums="1"
     workflow {
-        Channel.of(params.greeting) | SPLITLETTERS | flatten | CONVERTTOUPPER | view
+        channel.of(params.greeting) | SPLITLETTERS | flatten | CONVERTTOUPPER | view
     }
     ```
 
@@ -270,7 +270,7 @@ include { CONVERTTOUPPER } from './modules.nf'
 
 
 workflow my_workflow {
-    greeting_ch = Channel.of(params.greeting)
+    greeting_ch = channel.of(params.greeting)
     SPLITLETTERS(greeting_ch)
     CONVERTTOUPPER(SPLITLETTERS.out.flatten())
     CONVERTTOUPPER.out.upper.view { it }
@@ -322,7 +322,7 @@ The input for the `workflow` can then be specified as an argument:
 
 ```groovy linenums="1" title="hello.nf"
 workflow {
-    my_workflow(Channel.of(params.greeting))
+    my_workflow(channel.of(params.greeting))
 }
 ```
 
@@ -334,7 +334,7 @@ A `workflow` can declare one or more output channels using the `emit` statement.
 #!/usr/bin/env nextflow
 
 params.greeting = 'Hello world!'
-greeting_ch = Channel.of(params.greeting)
+greeting_ch = channel.of(params.greeting)
 
 process SPLITLETTERS {
     input:
@@ -373,7 +373,7 @@ workflow my_workflow {
 }
 
 workflow {
-    my_workflow(Channel.of(params.greeting))
+    my_workflow(channel.of(params.greeting))
     my_workflow.out.view()
 }
 ```
@@ -386,7 +386,7 @@ You can also declare named outputs within the `emit` block.
 #!/usr/bin/env nextflow
 
 params.greeting = 'Hello world!'
-greeting_ch = Channel.of(params.greeting)
+greeting_ch = channel.of(params.greeting)
 
 process SPLITLETTERS {
     input:
@@ -425,7 +425,7 @@ workflow my_workflow {
 }
 
 workflow {
-    my_workflow(Channel.of(params.greeting))
+    my_workflow(channel.of(params.greeting))
     my_workflow.out.my_data.view()
 }
 ```
@@ -463,8 +463,8 @@ workflow my_workflow_two {
 }
 
 workflow {
-    my_workflow_one(Channel.of(params.greeting))
-    my_workflow_two(Channel.of(params.greeting))
+    my_workflow_one(channel.of(params.greeting))
+    my_workflow_two(channel.of(params.greeting))
 }
 ```
 

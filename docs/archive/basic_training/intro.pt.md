@@ -90,7 +90,7 @@ TODO: Maybe either:
 // (1)!
 
 params.greeting = 'Hello world!' // (2)!
-greeting_ch = Channel.of(params.greeting) // (3)!
+greeting_ch = channel.of(params.greeting) // (3)!
 
 process SPLITLETTERS { // (4)!
     input: // (5)!

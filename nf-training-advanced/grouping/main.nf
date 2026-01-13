@@ -1,5 +1,5 @@
 workflow {
-    Channel.fromPath("data/samplesheet.csv")
+    channel.fromPath("data/samplesheet.csv")
         .splitCsv( header:true )
         .map { row ->
             def meta = [id:row.id, repeat:row.repeat, type:row.type]

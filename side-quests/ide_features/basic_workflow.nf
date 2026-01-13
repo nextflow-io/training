@@ -32,7 +32,7 @@ params.output_dir = 'results'
  */
 workflow {
     // Create input channel from CSV file
-    ch_input = Channel.fromPath(params.input, checkIfExists: true)
+    ch_input = channel.fromPath(params.input, checkIfExists: true)
         .splitCsv(header: true)
         .map { row ->
             return [row.sample_id, file(row.fastq_path)]

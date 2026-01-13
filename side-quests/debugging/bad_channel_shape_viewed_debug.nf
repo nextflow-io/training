@@ -18,7 +18,7 @@ process PROCESS_FILES {
 
 workflow {
 
-    input_ch = Channel.of(
+    input_ch = channel.of(
             ['sample1', 'file1.txt'],
             ['sample2', 'file2.txt'],
             ['sample3', 'file3.txt'],
