@@ -18,7 +18,9 @@ workflow_management_fundamentals/
 ## Tutorial Parts
 
 ### Part 1: Building a Bash Pipeline
+
 You'll build an RNA-seq pipeline from scratch in bash, experiencing:
+
 - Tool installation friction (conda/mamba setup)
 - Sequential processing limitations
 - Parallelization complexity (& and wait)
@@ -27,7 +29,9 @@ You'll build an RNA-seq pipeline from scratch in bash, experiencing:
 - Portability issues
 
 ### Part 2: Building a Nextflow Pipeline
+
 You'll rebuild the same pipeline in Nextflow, seeing how each problem is solved:
+
 - Container-based tool management
 - Automatic parallelization from data flow
 - Built-in resume capability
@@ -38,6 +42,7 @@ You'll rebuild the same pipeline in Nextflow, seeing how each problem is solved:
 ## Solutions
 
 Complete solutions are in `../solutions/workflow_management_fundamentals/`:
+
 - `bash/` - Final bash scripts (process_sample.sh, pipeline_sequential.sh, pipeline_parallel.sh)
 - `nextflow/` - Final Nextflow workflow with all modules
 
