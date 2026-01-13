@@ -1086,7 +1086,7 @@ process TOOL_NAME {
 
 ## Summary
 
-We started with a question: *Why learn a whole new framework when your script does the job?*
+We started with a question: _Why learn a whole new framework when your script does the job?_
 
 Now you've experienced the answer firsthand. Building production-quality pipelines with scripts means writing significant infrastructure code - job scheduling, resource management, failure recovery, environment setup - that has nothing to do with your science. And you'd face the same challenges whether you wrote it in bash, Python, or any other language.
 
