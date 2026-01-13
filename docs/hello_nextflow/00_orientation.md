@@ -112,9 +112,9 @@ We use collapsible sections like this to include expected command output in a co
 - **The file `nextflow.config`** is a configuration file that sets minimal environment properties.
   You can ignore it for now.
 
-- **The file `greetings.csv`** contains input data we'll use in most of the course. It is described in Part 1, when we introduce it for the first time.
+- **The file `greetings.csv`** under `data/` contains input data we'll use in most of the course. It is described in Part 2 (Channels), when we introduce it for the first time.
 
-- **The file `test-params.json`** is a file we'll use in Part 6. You can ignore it for now.
+- **The file `test-params.json`** is a file we'll use in Part 6 (Configuration). You can ignore it for now.
 
 - **The `solutions` directory** contains the completed workflow scripts that result from each step of the course.
   They are intended to be used as a reference to check your work and troubleshoot any issues.
