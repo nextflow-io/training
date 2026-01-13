@@ -572,7 +572,7 @@ Let's check our progress against the production-quality standards we defined:
 
 - ⚠️ **Reproducibility** - Partial. Conda environment helps, but requires discipline to maintain.
 - ⚠️ **Software management** - Partial. All tools share one environment - conflicts possible. Setup is manual and must be replicated by every user.
-- ✅ **Scalability** - Works. The loop handles any number of samples.
+- ❌ **Scalability** - Limited. Works on one machine until you hit resource limits. Scaling to cluster/cloud requires a complete rewrite.
 - ⚠️ **Efficient parallelization** - Partial. Works, but no resource limits.
 - ❌ **Resource awareness** - Missing. Would need 20-30 lines of job limiting code.
 - ❌ **Failure recovery** - Missing. Would need 40+ lines of checkpoint logic.
@@ -1030,7 +1030,7 @@ Let's check our progress against the same production-quality standards:
 
 - ✅ **Reproducibility** - Containers lock exact tool versions. Same results everywhere.
 - ✅ **Software management** - Each process gets its own isolated container. No conflicts, no manual setup.
-- ✅ **Scalability** - Same code for 3 or 3,000 samples.
+- ✅ **Scalability** - Same code for 3 or 3,000 samples. Manages resources on one machine, or distributes to cluster/cloud with a config change.
 - ✅ **Efficient parallelization** - Automatic from data flow declarations.
 - ✅ **Resource awareness** - Declarative `cpus` and `memory` per process.
 - ✅ **Failure recovery** - `-resume` flag. One word.
