@@ -925,18 +925,6 @@ This time it works AND gives us the additional insight into what the contents of
 
 Importantly, this means each item can now be processed separately by the workflow.
 
-!!! note
-
-    You should delete or comment out the `view()` statements before moving on, leaving just this code:
-
-    ```groovy title="hello-channels.nf" linenums="31"
-    // create a channel for inputs
-    greeting_ch = channel.of(greetings_array)
-                         .flatten()
-    ```
-
-    We left `view()` statements in the `hello-channels-3.nf` solution file for reference purposes.
-
 !!! tip
 
     It is technically possible to achieve the same results by using a different channel factory, [`channel.fromList`](https://nextflow.io/docs/latest/reference/channel.html#fromlist), which includes an implicit mapping step in its operation.
@@ -954,38 +942,44 @@ Learn how to make the workflow take a file as its source of input values.
 
 ## 4. Use an operator to parse input values from a CSV file
 
-It's often the case that, when we want to run on multiple inputs, the input values are contained in a file.
-As an example, we prepared a CSV file called `greetings.csv` containing several greetings, one on each line (like a column of data).
+Realistically, we're rarely if ever going to start from an array of values.
+Most likely, we'll have one or more files containing the data that needs to be processed, in some kind of structured format.
 
-```csv title="greetings.csv" linenums="1"
-Hello
-Bonjour
-Holà
+We've prepared a a CSV file called `greetings.csv` that contains several input greetings, mimicking the kind of columnar data you might want to process in a real data analysis, stored under `data/`.
+
+```csv title="data/greetings.csv" linenums="1"
+Hello,English,123
+Bonjour,French,456
+Holà,Spanish,789
 ```
 
-So now we need to modify our workflow to read in the values from a file like that.
+Note that the numbers are not meaningful, they are just there for illustrative purposes.
+
+Our next task then is to adapt our workflow to read in the values from this file.
 
 ### 4.1. Modify the script to expect a CSV file as the source of greetings
 
 To get started, we're going to need to make two key changes to the script:
 
 - Switch the input parameter to point to the CSV file
-- Switch to a channel factory designed to handle a file
+- Switch the channel factory to one designed to handle a file
 
 #### 4.1.1. Switch the input parameter to point to the CSV file
 
 Remember the `params.input` parameter we set up in Part 1?
 We're going to update it to point to the CSV file containing our greetings.
 
-Before the workflow block, make the following code change:
+Make the following edit to the parameter declaration:
 
 === "After"
 
-    ```groovy title="hello-channels.nf" linenums="25" hl_lines="4"
+    ```groovy title="hello-channels.nf" linenums="20" hl_lines="5"
     /*
-     * Pipeline parameters
-     */
-    params.input = 'greetings.csv'
+    * Pipeline parameters
+    */
+    params {
+        input: Path = 'data/greetings.csv'
+    }
     ```
 
 === "Before"
@@ -994,8 +988,11 @@ Before the workflow block, make the following code change:
     /*
      * Pipeline parameters
      */
-    params.input = ['Hello','Bonjour','Holà']
+    input: String = 'Holà mundo!'
     ```
+
+This assumes the file is co-located with the workflow code.
+You'll learn how to deal with other data locations later in your Nextflow journey.
 
 #### 4.1.2. Switch to a channel factory designed to handle a file
 
@@ -1006,18 +1003,46 @@ In the workflow block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-channels.nf" linenums="31" hl_lines="1 2"
+    ```groovy title="hello-channels.nf" linenums="27" hl_lines="4-8"
+    workflow {
+
+        main:
         // create a channel for inputs from a CSV file
         greeting_ch = channel.fromPath(params.input)
+                            .view { greeting -> "Before flatten: $greeting" }
+                            //.flatten()
+                            //.view { greeting -> "After flatten: $greeting" }
+        // emit a greeting
+        sayHello(greeting_ch)
+
+        publish:
+        first_output = sayHello.out
+    }
     ```
 
 === "Before"
 
-    ```groovy title="hello-channels.nf" linenums="31"
+    ```groovy title="hello-channels.nf" linenums="27" hl_lines="4-8"
+    workflow {
+
+        main:
+        // declare an array of input greetings
+        greetings_array = ['Hello','Bonjour','Holà']
         // create a channel for inputs
         greeting_ch = channel.of(greetings_array)
-                             .flatten()
+                            .view { greeting -> "Before flatten: $greeting" }
+                            .flatten()
+                            .view { greeting -> "After flatten: $greeting" }
+        // emit a greeting
+        sayHello(greeting_ch)
+
+        publish:
+        first_output = sayHello.out
+    }
     ```
+
+You'll notice we switched the channel input back to `param.input`, and deleted the `greetings_array` declaration since we'll no longer need it.
+We've also commented out the `flatten()` and the second `view()` statement.
 
 #### 4.1.3. Run the workflow
 
@@ -1027,23 +1052,37 @@ Let's try running the workflow with the new channel factory and the input file.
 nextflow run hello-channels.nf
 ```
 
-??? example title="Output (subset)" <!-- TODO: paste complete output -->
+??? failure "Command output"
 
-    ```console
-    N E X T F L O W   ~  version 25.10.2
+    ```console hl_lines="5 6 9 14"
+     N E X T F L O W   ~  version 25.10.2
 
-    Launching `hello-channels.nf` [adoring_bhabha] DSL2 - revision: 8ce25edc39
+    Launching `hello-channels.nf` [peaceful_poisson] DSL2 - revision: a286c08ad5
 
-    [-        ] sayHello | 0 of 1
+    [-        ] sayHello [  0%] 0 of 1
+    Before flatten: /workspaces/training/hello-nextflow/data/greetings.csv
     ERROR ~ Error executing process > 'sayHello (1)'
 
     Caused by:
-      File `/workspaces/training/hello-nextflow/data/greetings.csv-output.txt` is outside the scope of the process work directory: /workspaces/training/hello-nextflow/work/e3/c459b3c8f4029094cc778c89a4393d
+      File `/workspaces/training/hello-nextflow/data/greetings.csv-output.txt` is outside the scope of the process work directory: /workspaces/training/hello-nextflow/work/30/e610cb4ea5ae8693f456ac3329c92f
 
 
     Command executed:
 
-      echo '/workspaces/training/hello-nextflow/data/greetings.csv' > '/workspaces/training/hello-nextflow/data/greetings.
+      echo '/workspaces/training/hello-nextflow/data/greetings.csv' > '/workspaces/training/hello-nextflow/data/greetings.csv-output.txt'
+
+    Command exit status:
+      -
+
+    Command output:
+      (empty)
+
+    Work dir:
+      /workspaces/training/hello-nextflow/work/30/e610cb4ea5ae8693f456ac3329c92f
+
+    Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
+
+    -- Check '.nextflow.log' file for details
     ```
 
 Oh no, it doesn't work. Have a look at the start of the console output and error message.
@@ -1065,27 +1104,48 @@ Looking through the list of operators again, we find [`splitCsv()`](https://www.
 
 To apply the operator, we append it to the channel factory line like previously.
 
-In the workflow block, make the following code change:
+In the workflow block, make the following code change to replace `flatten()` with `splitcsv()` (uncommented):
 
 === "After"
 
-    ```groovy title="hello-channels.nf" linenums="31" hl_lines="3-5"
-    // create a channel for inputs from a CSV file
-    greeting_ch = channel.fromPath(params.input)
-                         .view { csv -> "Before splitCsv: $csv" }
-                         .splitCsv()
-                         .view { csv -> "After splitCsv: $csv" }
+    ```groovy title="hello-channels.nf" linenums="27" hl_lines="6-8"
+    workflow {
+
+        main:
+        // create a channel for inputs from a CSV file
+        greeting_ch = channel.fromPath(params.input)
+                            .view { csv -> "Before splitCsv: $csv" }
+                            .splitCsv()
+                            .view { csv -> "After splitCsv: $csv" }
+        // emit a greeting
+        sayHello(greeting_ch)
+
+        publish:
+        first_output = sayHello.out
+    }
     ```
 
 === "Before"
 
-    ```groovy title="hello-channels.nf" linenums="31"
-    // create a channel for inputs from a CSV file
-    greeting_ch = channel.fromPath(params.input)
+    ```groovy title="hello-channels.nf" linenums="27"
+    workflow {
 
+        main:
+        // create a channel for inputs from a CSV file
+        greeting_ch = channel.fromPath(params.input)
+                            .view { greeting -> "Before flatten: $greeting" }
+                            //.flatten()
+                            //.view { greeting -> "After flatten: $greeting" }
+        // emit a greeting
+        sayHello(greeting_ch)
+
+        publish:
+        first_output = sayHello.out
+    }
     ```
 
-As you can see, we also include before/after view statements while we're at it.
+As you can see, we also updated the before/after `view()` statements.
+Technically we could have used the same variable name (`greeting`) but we updated it to something more appropriate (`csv`) to make the code more readable by others.
 
 #### 4.2.2. Run the workflow again
 
@@ -1095,55 +1155,65 @@ Let's try running the workflow with the added CSV-parsing logic.
 nextflow run hello-channels.nf
 ```
 
-??? failure "Command output" <!-- TODO: paste complete output -->
+??? failure "Command output"
 
-    ```console
-    N E X T F L O W   ~  version 25.10.2
+    ```console hl_lines="7-11 14 19"
+     N E X T F L O W   ~  version 25.10.2
 
-    Launching `hello-channels.nf` [stoic_ride] DSL2 - revision: a0e5de507e
+    Launching `hello-channels.nf` [insane_fermat] DSL2 - revision: 8e62fcbeb1
 
     executor >  local (3)
-    [42/8fea64] sayHello (1) | 0 of 3
-    Before splitCsv: /workspaces/training/hello-nextflow/greetings.csv
-    After splitCsv: [Hello]
-    After splitCsv: [Bonjour]
-    After splitCsv: [Holà]
+    [24/76da2f] sayHello (2) [  0%] 0 of 3 ✘
+    Before splitCsv: /workspaces/training/hello-nextflow/data/greetings.csv
+    After splitCsv: [Hello, English, 123]
+    After splitCsv: [Bonjour, French, 456]
+    After splitCsv: [Holà, Spanish, 789]
     ERROR ~ Error executing process > 'sayHello (2)'
 
     Caused by:
-      Missing output file(s) `[Bonjour]-output.txt` expected by process `sayHello (2)`
+      Missing output file(s) `[Bonjour, French, 456]-output.txt` expected by process `sayHello (2)`
 
 
     Command executed:
 
-      echo '[Bonjour]' > '[Bonjour]-output.txt'
+      echo '[Bonjour, French, 456]' > '[Bonjour, French, 456]-output.txt'
+
+    Command exit status:
+      0
+
+    Command output:
+      (empty)
+
+    Work dir:
+      /workspaces/training/hello-nextflow/work/24/76da2fcc4876b61632749f99e26a50
+
+    Tip: you can try to figure out what's wrong by changing to the process work dir and showing the script file named `.command.sh`
+
+    -- Check '.nextflow.log' file for details
     ```
 
 Interestingly, this fails too, but with a different error.
-This time Nextflow has parsed the contents of the file (yay!) but it's added brackets around the greetings.
+This time Nextflow has parsed the contents of the file (yay!) but it has loaded each row as an array, and each array is an element in the channel.
 
-Long story short, `splitCsv()` reads each line into an array, and each comma-separated value in the line becomes an element in the array.
-So here it gives us three arrays containing one element each.
+We need to tell it to only take the first column in each row.
+So how do we unpack this?
 
-!!! note
+We've previously used `flatten()` to unpack the contents of a channel, but that wouldn't work here because flatten unpacks _everything_ (feel free to try it if you want to see for yourself).
 
-    Even if this behavior feels inconvenient right now, it's going to be extremely useful later when we deal with input files with multiple columns of data.
-
-We could solve this by using `flatten()`, which you already know.
-However, there's another operator called `map()` that's more appropriate to use here and is really useful to know; it pops up a lot in Nextflow pipelines.
+Instead, we'll use another operator called `map()` that is really useful and pops up a lot in Nextflow pipelines.
 
 ### 4.3. Use the `map()` operator to extract the greetings
 
-The `map()` operator is a very handy little tool that allows us to do all kinds of mappings to the contents of a channel.
+The [`map()`](https://www.nextflow.io/docs/latest/reference/operator.html#map) operator is a very handy little tool that allows us to do all kinds of mappings to the contents of a channel.
 
-In this case, we're going to use it to extract that one element that we want from each line of our file.
+In this case, we're going to use it to extract that one element that we want from each row in our data file.
 This is what the syntax looks like:
 
 ```groovy title="Syntax"
-.map { item -> item[0] }
+.map { row -> row[0] }
 ```
 
-This means 'for each element in the channel, take the first of any items it contains'.
+This means 'for each row in the channel, take the 0th (first) item it contains'.
 
 So let's apply that to our CSV parsing.
 
@@ -1153,32 +1223,49 @@ In the workflow block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-channels.nf" linenums="31" hl_lines="6-8"
-    // create a channel for inputs from a CSV file
-    greeting_ch = channel.fromPath(params.input)
-                         .view { csv -> "Before splitCsv: $csv" }
-                         .splitCsv()
-                         .view { csv -> "After splitCsv: $csv" }
-                         .map { item -> item[0] }
-                         .view { csv -> "After map: $csv" }
+    ```groovy title="hello-channels.nf" linenums="27" hl_lines="9 10"
+    workflow {
+
+        main:
+        // create a channel for inputs from a CSV file
+        greeting_ch = channel.fromPath(params.input)
+                            .view { csv -> "Before splitCsv: $csv" }
+                            .splitCsv()
+                            .view { csv -> "After splitCsv: $csv" }
+                            .map { item -> item[0] }
+                            .view { csv -> "After map: $csv" }
+        // emit a greeting
+        sayHello(greeting_ch)
+
+        publish:
+        first_output = sayHello.out
+    }
     ```
 
 === "Before"
 
-    ```groovy title="hello-channels.nf" linenums="31"
-    // create a channel for inputs from a CSV file
-    greeting_ch = channel.fromPath(params.input)
-                         .view { csv -> "Before splitCsv: $csv" }
-                         .splitCsv()
-                         .view { csv -> "After splitCsv: $csv" }
+    ```groovy title="hello-channels.nf" linenums="27"
+    workflow {
 
+        main:
+        // create a channel for inputs from a CSV file
+        greeting_ch = channel.fromPath(params.input)
+                            .view { csv -> "Before splitCsv: $csv" }
+                            .splitCsv()
+                            .view { csv -> "After splitCsv: $csv" }
+        // emit a greeting
+        sayHello(greeting_ch)
+
+        publish:
+        first_output = sayHello.out
+    }
     ```
 
-Once again we include another `view()` call to confirm that the operator does what we expect.
+You see we added another `view()` call to confirm that the operator does what we expect.
 
-#### 4.3.2. Run the workflow one more time
+#### 4.3.2. Run the workflow
 
-Let's run it one more time:
+Let's run this one more time:
 
 ```bash
 nextflow run hello-channels.nf
@@ -1186,51 +1273,40 @@ nextflow run hello-channels.nf
 
 ??? success "Command output"
 
-    ```console title="Output" linenums="1"
-    N E X T F L O W   ~  version 25.10.2
+    ```console
+     N E X T F L O W   ~  version 25.10.2
 
-    Launching `hello-channels.nf` [tiny_heisenberg] DSL2 - revision: 845b471427
+    Launching `hello-channels.nf` [focused_volhard] DSL2 - revision: de435e45be
 
     executor >  local (3)
-    [1a/1d19ab] sayHello (2) | 3 of 3 ✔
-    Before splitCsv: /workspaces/training/hello-nextflow/greetings.csv
-    After splitCsv: [Hello]
-    After splitCsv: [Bonjour]
-    After splitCsv: [Holà]
+    [54/6eebe3] sayHello (3) [100%] 3 of 3 ✔
+    Before splitCsv: /workspaces/training/hello-nextflow/data/greetings.csv
+    After splitCsv: [Hello, English, 123]
+    After splitCsv: [Bonjour, French, 456]
+    After splitCsv: [Holà, Spanish, 789]
     After map: Hello
     After map: Bonjour
     After map: Holà
     ```
 
 This time it should run without error.
-Looking at the output of the `view()` statements, we see the following:
+
+Looking at the output of the `view()` statements, you see the following:
 
 - A single `Before splitCsv:` statement: at that point the channel contains one item, the original file path.
 - Three separate `After splitCsv:` statements: one for each greeting, but each is contained within an array that corresponds to that line in the file.
 - Three separate `After map:` statements: one for each greeting, which are now individual elements in the channel.
 
+Note that the lines may appear in a different order in your output.
+
 You can also look at the output files to verify that each greeting was correctly extracted and processed through the workflow.
 
 We've achieved the same result as previously, but now we have a lot more flexibility to add more elements to the channel of greetings we want to process by modifying an input file, without modifying any code.
-
-!!! note <!-- TODO: this goes away once we update to the CSV from Nextflow run -->
-
-    Here we had all greetings on one line in the CSV file.
-    You can try adding more columns to the CSV file and see what happens; for example, try the following:
-
-    ```csv title="greetings.csv"
-    Hello,English
-    Bonjour,French
-    Holà,Spanish
-    ```
-
-    You can also try replacing `.map { item -> item[0] }` with `.flatten()` and see what happens depending on how many lines and columns you have in the input file.
-
-    You'll learn learn more advanced approaches for handling complex inputs in a later training.
+You'll learn learn more sophisticated approaches for handling complex inputs in a later training.
 
 ### Takeaway
 
-You know how to use the operators `splitCsv()` and `map()` to read in a file of input values and handle them appropriately.
+You know how to use the `.fromPath()` channel constructor and the operators `splitCsv()` and `map()` to read in a file of input values and handle them appropriately.
 
 More generally, you have a basic understanding of how Nextflow uses **channels** to manage inputs to processes and **operators** to transform their contents.
 
