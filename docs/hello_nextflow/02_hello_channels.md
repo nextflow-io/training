@@ -161,7 +161,7 @@ In the workflow block, make the following code change:
 
 === "Before"
 
-    ```groovy title="hello-channels.nf" linenums="27"
+    ```groovy title="hello-channels.nf" linenums="27" hl_lines="7"
     workflow {
 
         main:
@@ -984,7 +984,7 @@ Make the following edit to the parameter declaration:
 
 === "Before"
 
-    ```groovy title="hello-channels.nf" linenums="25"
+    ```groovy title="hello-channels.nf" linenums="20" hl_lines="5"
     /*
      * Pipeline parameters
      */
@@ -1127,7 +1127,7 @@ In the workflow block, make the following code change to replace `flatten()` wit
 
 === "Before"
 
-    ```groovy title="hello-channels.nf" linenums="27"
+    ```groovy title="hello-channels.nf" linenums="27" hl_lines="6-8"
     workflow {
 
         main:
