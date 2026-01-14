@@ -35,7 +35,7 @@ If you haven't yet done so, make sure to open the training environment as descri
 
 #### Move into the project directory
 
-Let's move into the directory where the files for this tutorial are located.
+Move into the directory where the files for this tutorial are located.
 
 ```bash
 cd side-quests/workflow_outputs
@@ -84,11 +84,11 @@ If you can check all the boxes, you're good to go.
 
 ### 1.1. Review the current workflow
 
-Let's start by examining how the current workflow uses `publishDir` to manage outputs.
+Start by examining how the current workflow uses `publishDir` to manage outputs.
 
 Take a look at the modules file:
 
-```groovy title="modules/greetings.nf" linenums="1"
+```groovy title="modules/greetings.nf" linenums="1" hl_lines="8 27"
 #!/usr/bin/env nextflow
 
 /*
@@ -135,7 +135,7 @@ The processes use the common `[meta, file]` tuple pattern, where `meta` is a map
 
 Now look at the main workflow file:
 
-```groovy title="main.nf" linenums="1"
+```groovy title="main.nf" linenums="1" hl_lines="18-20"
 #!/usr/bin/env nextflow
 
 // Enable workflow output definition syntax (required for Nextflow < 25.10)
@@ -170,7 +170,7 @@ This pattern is standard in nf-core pipelines and makes metadata easy to access 
 
 ### 1.2. Run the workflow
 
-Let's run the workflow and see how outputs are organized:
+Run the workflow to see how outputs are organized:
 
 ```bash
 nextflow run main.nf
@@ -256,7 +256,7 @@ The workflow output definition syntax uses two constructs:
 
     In Nextflow 25.10 and later, this flag is no longer needed and can be removed.
 
-Let's modify our workflow to use this new syntax.
+Modify the workflow to use this new syntax.
 
 ### 2.3. Remove publishDir from processes
 
@@ -643,6 +643,12 @@ nextflow run main.nf -output-dir my_results
 
 This creates outputs in `my_results/` instead of `results/`.
 
+!!! note "Native output directory"
+
+    The `-output-dir` flag and the default `results` directory are native Nextflow features introduced with workflow output definitions.
+    This is different from nf-core's `params.outdir`, which was a community convention passed to `publishDir` directives.
+    With workflow outputs, Nextflow itself manages the base output location.
+
 ### Takeaway
 
 Dynamic paths let you organize outputs based on metadata:
@@ -790,7 +796,7 @@ Index files provide automatic documentation of workflow outputs:
 
 ### What's next?
 
-Let's summarize what we've learned.
+Here's a summary of what this side quest covered.
 
 ---
 
