@@ -282,51 +282,67 @@ Let's explore that option.
 
 ## 4. Amazon EKS fundamentals
 
-### 4.1. What is Amazon EKS?
+!!! warning "EKS requires more setup than AWS Batch"
 
-Amazon Elastic Kubernetes Service (EKS) is a managed Kubernetes service that runs containerized workloads on AWS.
-Unlike AWS Batch, which is a managed batch computing service, EKS gives you a full Kubernetes cluster.
+    If you're new to cloud execution, **start with AWS Batch**.
+    It's simpler to set up and requires less infrastructure knowledge.
+
+    EKS is primarily useful when your organization already runs Kubernetes clusters and wants to add Nextflow workloads to existing infrastructure.
+
+### 4.1. What is Kubernetes?
+
+Kubernetes (often abbreviated as "K8s") is a system for running and managing containerized applications across multiple machines.
+Think of it as an orchestration layer that decides where and how to run your containers.
+
+**Key Kubernetes concepts you'll encounter:**
+
+- **Pod**: The basic unit of work in Kubernetes - a wrapper around one or more containers. In Nextflow terms, each process task runs as a pod.
+- **Namespace**: A way to organize and isolate resources within a cluster (like folders for your Kubernetes objects).
+- **Service Account**: An identity that pods use to interact with the Kubernetes API and access resources.
+- **Persistent Volume (PV)**: Storage that exists independently of any pod - like a shared disk.
+- **Persistent Volume Claim (PVC)**: A request for storage that pods use to access a Persistent Volume.
+
+Amazon EKS is AWS's managed Kubernetes service - it handles the complex parts of running Kubernetes while you focus on your workloads.
+
+### 4.2. How Nextflow uses Kubernetes
 
 ```mermaid
 flowchart LR
-    subgraph eks[Amazon EKS]
-        NF[Nextflow] -->|submits pods| K8S[Kubernetes API Server]
-        K8S --> WN[Worker Nodes - EC2]
-        EFS[(Shared Storage - Amazon EFS)]
-        WN <--> EFS
+    subgraph eks[Amazon EKS Cluster]
+        NF[Nextflow] -->|submits pods| K8S[Kubernetes API]
+        K8S --> WN[Worker Nodes]
+        WN <-->|read/write| EFS[(Shared Storage)]
     end
 ```
 
-### 4.2. Why choose EKS over AWS Batch?
+When you run a Nextflow pipeline on Kubernetes:
 
-Both are valid options for running Nextflow on AWS. Consider EKS when:
+1. Nextflow talks to the Kubernetes API to create pods
+2. Each process task becomes a separate pod
+3. All pods access the same shared storage (so they can pass data between tasks)
+4. Nextflow monitors pod status and collects results
 
-| Factor                | AWS Batch                    | Amazon EKS                     |
-| --------------------- | ---------------------------- | ------------------------------ |
-| **Existing infra**    | Starting fresh               | Already have Kubernetes        |
-| **Team expertise**    | Less Kubernetes experience   | Kubernetes-savvy team          |
-| **Multi-cloud**       | AWS-only                     | Portable Kubernetes config     |
-| **Control**           | Managed, less customization  | Full Kubernetes flexibility    |
-| **Scaling**           | Automatic instance scaling   | Node pools + cluster autoscaler|
+The critical requirement is **shared storage** - because tasks run on different machines, they need a common place to read inputs and write outputs.
 
-### 4.3. How Nextflow integrates with EKS
+### 4.3. When to use EKS vs AWS Batch
 
-When you run a Nextflow pipeline with the Kubernetes executor on EKS:
+**Choose AWS Batch when:**
 
-1. Nextflow connects to the EKS cluster via the Kubernetes API
-2. Each process task becomes a Kubernetes pod
-3. Pods mount the shared storage (typically EFS via a PVC)
-4. Pods pull container images and run your process scripts
-5. Results are written to the shared filesystem
-6. Nextflow monitors pod status and retrieves outputs
+- You're new to cloud execution
+- You want the simplest setup
+- You don't have existing Kubernetes infrastructure
 
-The main infrastructure requirement is a [shared filesystem with `ReadWriteMany` access mode](https://www.nextflow.io/docs/latest/kubernetes.html#requirements).
-On AWS, Amazon EFS is the standard choice for this.
+**Choose EKS when:**
+
+- Your organization already runs Kubernetes clusters
+- You want to consolidate Nextflow workloads with other K8s applications
+- Your team is comfortable with Kubernetes administration
+- You need to run on multiple cloud providers with similar configuration
 
 ### Takeaway
 
-Amazon EKS provides a Kubernetes-based alternative to AWS Batch.
-It requires setting up shared storage (like EFS) but gives you full Kubernetes flexibility.
+EKS lets you run Nextflow on Kubernetes infrastructure.
+It's more complex than AWS Batch but useful if you already have Kubernetes expertise and infrastructure.
 
 ### What's next?
 
@@ -336,12 +352,16 @@ Let's look at how to configure Nextflow for EKS execution.
 
 ## 5. Configuring Amazon EKS
 
+This section covers two parts:
+
+1. **Nextflow configuration** - what you put in `nextflow.config` (this is your responsibility)
+2. **Kubernetes infrastructure** - the cluster setup (typically handled by your Kubernetes administrator)
+
 For complete details, see the [Nextflow Kubernetes documentation](https://www.nextflow.io/docs/latest/kubernetes.html).
 
-### 5.1. Essential configuration
+### 5.1. The Nextflow configuration
 
-Running Nextflow on EKS requires a shared filesystem accessible by all pods.
-The standard approach uses a Persistent Volume Claim (PVC) backed by Amazon EFS:
+From Nextflow's perspective, the configuration is straightforward:
 
 ```groovy title="Minimal EKS config"
 process {
@@ -359,156 +379,57 @@ k8s {
 workDir = '/workspace/work'
 ```
 
-Let's break down each part.
+Let's break down what each setting does:
 
-### 5.2. Executor settings
-
-```groovy
-process {
-    executor = 'k8s'
-}
-```
-
-The `k8s` executor tells Nextflow to submit tasks as Kubernetes pods.
-
-### 5.3. Kubernetes settings
-
-```groovy
-k8s {
-    namespace = 'nextflow'
-    serviceAccount = 'nextflow-sa'
-    storageClaimName = 'nextflow-pvc'
-    storageMountPath = '/workspace'
-}
-```
-
-- `namespace`: The Kubernetes namespace where pods run (default: `default`)
-- `serviceAccount`: The service account that pods use
-- `storageClaimName`: The PVC providing shared storage
-- `storageMountPath`: Where the shared storage is mounted in containers (default: `/workspace`)
+| Setting | Purpose |
+|---------|---------|
+| `executor = 'k8s'` | Tells Nextflow to submit tasks as Kubernetes pods instead of running locally |
+| `container` | Required - every task runs in a container on Kubernetes |
+| `namespace` | Which Kubernetes namespace to create pods in (your admin will tell you this) |
+| `serviceAccount` | The identity your pods use (your admin will create this) |
+| `storageClaimName` | The name of the shared storage (your admin will set this up) |
+| `storageMountPath` | Where the shared storage appears inside containers |
+| `workDir` | Where Nextflow stores intermediate files (must be on the shared storage) |
 
 See the [Nextflow configuration reference](https://www.nextflow.io/docs/latest/reference/config.html#scope-k8s) for all available `k8s` scope options.
 
-### 5.4. Shared storage with Amazon EFS
+### 5.2. What you need from your Kubernetes administrator
 
-Kubernetes requires a shared filesystem with `ReadWriteMany` access mode so that multiple pods can read and write data concurrently.
-On EKS, Amazon EFS is the most common choice.
+This guide assumes you have an EKS cluster already set up.
+Before you can run Nextflow pipelines, ask your Kubernetes administrator to provide:
 
-First, create an EFS filesystem and install the [Amazon EFS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/efs-csi.html) in your cluster.
-Then create a PersistentVolume and PersistentVolumeClaim:
+| You need | What it is | Example value |
+|----------|------------|---------------|
+| **Namespace** | Where your pods will run | `nextflow` |
+| **Service account** | Identity with permission to create pods | `nextflow-sa` |
+| **Storage claim name** | Shared storage accessible by all pods | `nextflow-pvc` |
 
-```yaml title="EFS PersistentVolume and Claim"
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: nextflow-pv
-spec:
-  capacity:
-    storage: 100Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteMany
-  persistentVolumeReclaimPolicy: Retain
-  storageClassName: efs-sc
-  csi:
-    driver: efs.csi.aws.com
-    volumeHandle: fs-1234567890abcdef0
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: nextflow-pvc
-  namespace: nextflow
-spec:
-  accessModes:
-    - ReadWriteMany
-  storageClassName: efs-sc
-  resources:
-    requests:
-      storage: 100Gi
-```
+Your administrator will need to set up:
 
-Replace `fs-1234567890abcdef0` with your actual EFS filesystem ID.
+- Shared storage with `ReadWriteMany` access (typically [Amazon EFS](https://aws.amazon.com/efs/))
+- A service account with permissions to create and monitor pods
 
-!!! note "EFS capacity"
+For infrastructure setup details, see the [Nextflow Kubernetes documentation](https://www.nextflow.io/docs/latest/kubernetes.html#requirements).
 
-    The `storage` capacity values are required by Kubernetes but are informational for EFS.
-    EFS is an elastic filesystem that grows and shrinks automatically.
+### 5.3. Running pipelines on EKS
 
-### 5.5. Kubernetes RBAC
-
-The service account needs Kubernetes permissions to manage pods.
-The exact permissions required may vary depending on your setup, but a typical configuration includes:
-
-```yaml title="RBAC Role for pod management"
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: nextflow-sa
-  namespace: nextflow
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: Role
-metadata:
-  name: nextflow-role
-  namespace: nextflow
-rules:
-  - apiGroups: [""]
-    resources: ["pods", "pods/status", "pods/log"]
-    verbs: ["get", "list", "watch", "create", "delete"]
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
-metadata:
-  name: nextflow-rolebinding
-  namespace: nextflow
-subjects:
-  - kind: ServiceAccount
-    name: nextflow-sa
-    namespace: nextflow
-roleRef:
-  kind: Role
-  name: nextflow-role
-  apiGroup: rbac.authorization.k8s.io
-```
-
-!!! note "RBAC permissions"
-
-    This RBAC configuration is based on [Seqera documentation](https://docs.seqera.io/fusion/guide/aws-eks).
-    You may need to adjust permissions based on your specific requirements and cluster policies.
-
-### 5.6. Examine the example config
-
-Look at the EKS config file in the example:
+To run a pipeline on EKS, you need access to the Kubernetes cluster.
+This typically means having `kubectl` configured on your machine:
 
 ```bash
-cat conf/eks.config
-```
-
-This shows a complete configuration for EKS with shared storage.
-
-### 5.7. Running pipelines on EKS
-
-Unlike AWS Batch, where Nextflow can run from anywhere with AWS credentials, EKS requires access to the Kubernetes API.
-
-**Option 1: Run from a machine with kubectl access**
-
-```bash
-# Ensure kubectl is configured
+# Verify you can connect to the cluster
 kubectl cluster-info
 
 # Run the pipeline
 nextflow run main.nf -profile eks
 ```
 
-**Option 2: Run Nextflow inside the EKS cluster**
+Your Kubernetes administrator can help you set up `kubectl` access if you don't have it.
 
-You can run Nextflow itself as a pod in the cluster, which is useful for CI/CD pipelines.
+### 5.4. Simplifying EKS with Seqera Platform
 
-### 5.8. Using S3 with Seqera Platform
-
-If you use Seqera Platform, you can leverage Fusion to access S3 directly without needing a shared filesystem like EFS.
-This simplifies infrastructure setup significantly.
+If you use Seqera Platform, you can leverage Fusion to access S3 directly without needing shared filesystem infrastructure like EFS.
+This significantly simplifies the setup.
 
 With Fusion enabled through Platform, your configuration becomes:
 
@@ -534,12 +455,13 @@ See the [Seqera Fusion documentation](https://docs.seqera.io/fusion) for setup d
 
 ### Takeaway
 
-EKS configuration requires:
+Running Nextflow on EKS involves:
 
-- Kubernetes executor and namespace/service account settings
-- Shared storage via PVC (typically backed by Amazon EFS)
-- Kubernetes RBAC for pod management
-- Work directory on the shared filesystem
+- **For pipeline developers**: A simple Nextflow config pointing to namespace, service account, and storage
+- **For administrators**: Setting up shared storage (EFS) and service account permissions
+
+If your organization already has Kubernetes infrastructure and expertise, EKS can be a good choice.
+Otherwise, AWS Batch is simpler to get started with.
 
 ### What's next?
 
@@ -831,12 +753,9 @@ Let's summarize what we've learned.
 
 **Before running on Amazon EKS**, ensure you have:
 
-- [ ] EKS cluster running and accessible via kubectl
-- [ ] Amazon EFS filesystem created
-- [ ] EFS CSI driver installed in the cluster
-- [ ] PersistentVolume and PersistentVolumeClaim configured
-- [ ] Kubernetes namespace and service account created
-- [ ] RBAC permissions for pod management
+- [ ] Access to an EKS cluster (via `kubectl`)
+- [ ] Namespace, service account, and storage claim name from your administrator
+- [ ] Nextflow config with `k8s` executor settings
 - [ ] Container images accessible (ECR or public registry)
 
 ### Key configuration patterns
