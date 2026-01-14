@@ -184,9 +184,10 @@ Let's look at how to configure Nextflow for AWS Batch execution.
 The minimum configuration for AWS Batch requires:
 
 ```groovy title="Minimal AWS Batch config"
-executor {
-    name = 'awsbatch'
-    queueName = 'my-batch-queue'
+process {
+    executor = 'awsbatch'
+    queue = 'my-batch-queue'
+    container = 'ubuntu:22.04'  // Fallback for processes without explicit containers
 }
 
 aws {
@@ -194,10 +195,6 @@ aws {
 }
 
 workDir = 's3://my-bucket/work'
-
-process {
-    container = 'ubuntu:22.04'  // Fallback for processes without explicit containers
-}
 ```
 
 Let's break down each part.
@@ -230,17 +227,17 @@ If running Nextflow on an EC2 instance, it can use the instance's IAM role - no 
     Nextflow needs credentials to *submit* jobs and access S3 from where you run it.
     The `jobRole` setting (covered below) controls what permissions the *jobs themselves* have when they run on Batch.
 
-### 3.3. Executor settings
+### 3.3. Executor and queue settings
 
 ```groovy
-executor {
-    name = 'awsbatch'
-    queueName = 'my-batch-queue'
+process {
+    executor = 'awsbatch'
+    queue = 'my-batch-queue'
 }
 ```
 
-- `name = 'awsbatch'`: Tells Nextflow to use the AWS Batch executor
-- `queueName`: The AWS Batch job queue to submit jobs to
+- `executor = 'awsbatch'`: Tells Nextflow to use the AWS Batch executor
+- `queue`: The AWS Batch job queue to submit jobs to
 
 ### 3.4. AWS settings
 
@@ -679,14 +676,14 @@ Let's summarize what we've learned.
 **Minimal AWS Batch config:**
 
 ```groovy
-executor {
-    name = 'awsbatch'
-    queueName = 'my-queue'
+process {
+    executor = 'awsbatch'
+    queue = 'my-queue'
+    container = 'my-image:latest'
 }
 
 aws.region = 'us-east-1'
 workDir = 's3://my-bucket/work'
-process.container = 'my-image:latest'
 ```
 
 **Minimal EKS config:**
@@ -712,7 +709,7 @@ profiles {
     local { process.executor = 'local' }
     aws {
         process.executor = 'awsbatch'
-        executor.queueName = 'my-queue'
+        process.queue = 'my-queue'
         workDir = 's3://bucket/work'
     }
     eks {
