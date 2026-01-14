@@ -420,12 +420,12 @@ graph TD
     style D fill:#fff3e0
 ```
 
-| Class                  | Purpose                                              |
-| ---------------------- | ---------------------------------------------------- |
-| `NfGreetingPlugin`     | Entry point that registers all extension points      |
-| `NfGreetingExtension`  | Contains `@Function` methods callable from workflows |
-| `NfGreetingFactory`    | Creates trace observer instances                     |
-| `NfGreetingObserver`   | Hooks into workflow lifecycle events                 |
+| Class                 | Purpose                                              |
+| --------------------- | ---------------------------------------------------- |
+| `NfGreetingPlugin`    | Entry point that registers all extension points      |
+| `NfGreetingExtension` | Contains `@Function` methods callable from workflows |
+| `NfGreetingFactory`   | Creates trace observer instances                     |
+| `NfGreetingObserver`  | Hooks into workflow lifecycle events                 |
 
 This separation keeps concerns organized: functions go in the Extension, event handling goes in Observers created by the Factory.
 
@@ -1840,7 +1840,7 @@ NfGreetingExtension.groovy: 30: [Static type checking] - The variable [prefix] i
 NfGreetingExtension.groovy: 31: [Static type checking] - The variable [suffix] is undeclared.
 ```
 
-**What went wrong?** In Groovy (and Java), you can't just use a variable - you must *declare* it first.
+**What went wrong?** In Groovy (and Java), you can't just use a variable - you must _declare_ it first.
 We're trying to assign values to `prefix` and `suffix`, but we never told the class that these variables exist.
 
 #### Step 3: Fix by declaring instance variables
