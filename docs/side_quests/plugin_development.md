@@ -1347,6 +1347,12 @@ greeting {
 }
 ```
 
+!!! tip "Advanced: Type-safe configuration"
+
+    For production plugins, you can define your configuration as a proper class with annotations.
+    This enables IDE autocompletion, linting support, and type checking.
+    See the [official documentation on custom config scopes](https://nextflow.io/docs/latest/developer/config-scopes.html) for details.
+
 ### 8.2. Try it: Make the task counter configurable
 
 Let's add configuration options to:
