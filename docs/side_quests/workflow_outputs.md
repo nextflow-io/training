@@ -238,11 +238,16 @@ While `publishDir` works well for simple cases, it has some limitations as workf
 
 4. **Coupling between processes and output structure**: The output organization is tied to process-level configuration. If you want to reorganize outputs (say, grouping by sample instead of by process), you need to update the configuration for each affected process.
 
-The workflow output definition syntax addresses these limitations by centralizing output configuration in one place.
+!!! warning "publishDir is legacy syntax"
+
+    The `publishDir` directive is now considered legacy.
+    Nextflow's workflow output definition syntax is the recommended approach for all new pipelines.
+    It addresses the limitations above while providing additional features like automatic output manifests.
 
 ### Takeaway
 
-The traditional `publishDir` approach works but scatters output configuration across process definitions and doesn't provide automatic documentation of outputs.
+The `publishDir` directive scatters output configuration across process definitions and doesn't provide automatic documentation of outputs.
+For new pipelines, use the workflow output definition syntax instead.
 
 ### What's next?
 
@@ -862,12 +867,6 @@ output {
 - Automatic index file generation for output manifests
 - Native `-output-dir` flag for overriding output location
 - Clean separation between process logic and output organization
-
-!!! note "Recommended for new pipelines"
-
-    The workflow output definition syntax is the recommended approach for new pipelines.
-    While `publishDir` still works, it is considered legacy syntax.
-    New development should use the `output {}` block for cleaner, more maintainable output management.
 
 ### Additional resources
 
