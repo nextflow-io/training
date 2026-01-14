@@ -5,8 +5,6 @@
  */
 process sayHello {
 
-    publishDir 'results', mode: 'copy'
-
     input:
     val greeting
 
@@ -24,8 +22,6 @@ process sayHello {
  */
 process convertToUpper {
 
-    publishDir 'results', mode: 'copy'
-
     input:
     path input_file
 
@@ -42,19 +38,33 @@ process convertToUpper {
  * Pipeline parameters
  */
 params {
-    greeting: Path = 'greetings.csv'
+    input: Path = 'greetings.csv'
 }
 
 workflow {
 
+    main:
     // create a channel for inputs from a CSV file
-    greeting_ch = channel.fromPath(params.greeting)
-        .splitCsv()
-        .map { line -> line[0] }
-
+    greeting_ch = channel.fromPath(params.input)
+                        .splitCsv()
+                        .map { line -> line[0] }
     // emit a greeting
     sayHello(greeting_ch)
-
     // convert the greeting to uppercase
     convertToUpper(sayHello.out)
+
+    publish:
+    first_output = sayHello.out
+    uppercased = convertToUpper.out
+}
+
+output {
+    first_output {
+        path 'hello_workflow'
+        mode 'copy'
+    }
+    uppercased {
+        path 'hello_workflow'
+        mode 'copy'
+    }
 }

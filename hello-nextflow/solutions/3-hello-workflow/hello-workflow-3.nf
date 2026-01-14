@@ -5,8 +5,6 @@
  */
 process sayHello {
 
-    publishDir 'results', mode: 'copy'
-
     input:
     val greeting
 
@@ -23,8 +21,6 @@ process sayHello {
  * Use a text replacement tool to convert the greeting to uppercase
  */
 process convertToUpper {
-
-    publishDir 'results', mode: 'copy'
 
     input:
     path input_file
@@ -43,8 +39,6 @@ process convertToUpper {
  */
 process collectGreetings {
 
-    publishDir 'results', mode: 'copy'
-
     input:
     path input_files
     val batch_name
@@ -62,27 +56,41 @@ process collectGreetings {
  * Pipeline parameters
  */
 params {
-    greeting: Path = 'greetings.csv'
+    input: Path = 'greetings.csv'
     batch: String = 'test-batch'
 }
 
 workflow {
 
+    main:
     // create a channel for inputs from a CSV file
-    greeting_ch = channel.fromPath(params.greeting)
-        .splitCsv()
-        .map { line -> line[0] }
-
+    greeting_ch = channel.fromPath(params.input)
+                        .splitCsv()
+                        .map { line -> line[0] }
     // emit a greeting
     sayHello(greeting_ch)
-
     // convert the greeting to uppercase
     convertToUpper(sayHello.out)
-
     // collect all the greetings into one file
     collectGreetings(convertToUpper.out.collect(), params.batch)
 
-    // optional view statements
-    convertToUpper.out.view { item -> "Before collect: ${item}" }
-    convertToUpper.out.collect().view { items -> "After collect: ${items}" }
+    publish:
+    first_output = sayHello.out
+    uppercased = convertToUpper.out
+    collected = collectGreetings.out
+}
+
+output {
+    first_output {
+        path 'hello_workflow'
+        mode 'copy'
+    }
+    uppercased {
+        path 'hello_workflow'
+        mode 'copy'
+    }
+    collected {
+        path 'hello_workflow'
+        mode 'copy'
+    }
 }

@@ -5,8 +5,6 @@
  */
 process sayHello {
 
-    publishDir 'results', mode: 'copy'
-
     input:
     val greeting
 
@@ -24,8 +22,6 @@ process sayHello {
  */
 process convertToUpper {
 
-    publishDir 'results', mode: 'copy'
-
     input:
     path input_file
 
@@ -42,8 +38,6 @@ process convertToUpper {
  * Collect uppercase greetings into a single output file
  */
 process collectGreetings {
-
-    publishDir 'results', mode: 'copy'
 
     input:
     path input_files
@@ -64,30 +58,44 @@ process collectGreetings {
  * Pipeline parameters
  */
 params {
-    greeting: Path = 'greetings.csv'
+    input: Path = 'greetings.csv'
     batch: String = 'test-batch'
 }
 
 workflow {
 
+    main:
     // create a channel for inputs from a CSV file
-    greeting_ch = channel.fromPath(params.greeting)
-        .splitCsv()
-        .map { line -> line[0] }
-
+    greeting_ch = channel.fromPath(params.input)
+                        .splitCsv()
+                        .map { line -> line[0] }
     // emit a greeting
     sayHello(greeting_ch)
-
     // convert the greeting to uppercase
     convertToUpper(sayHello.out)
-
     // collect all the greetings into one file
     collectGreetings(convertToUpper.out.collect(), params.batch)
 
     // emit a message about the size of the batch
     collectGreetings.out.count.view { num_greetings -> "There were ${num_greetings} greetings in this batch" }
 
-    // optional view statements
-    convertToUpper.out.view { num_greetings -> "Before collect: ${num_greetings}" }
-    convertToUpper.out.collect().view { num_greetings -> "After collect: ${num_greetings}" }
+    publish:
+    first_output = sayHello.out
+    upper_output = convertToUpper.out
+    collected_output = collectGreetings.out
+}
+
+output {
+    first_output {
+        path 'hello_workflow'
+        mode 'copy'
+    }
+    upper_output {
+        path 'hello_workflow'
+        mode 'copy'
+    }
+    collected_output {
+        path 'hello_workflow'
+        mode 'copy'
+    }
 }
