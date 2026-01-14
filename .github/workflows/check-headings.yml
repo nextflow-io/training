@@ -17,7 +17,9 @@ jobs:
         uses: tj-actions/changed-files@v42
         with:
           files: "**.md"
-          files_ignore: "**/transcripts/**/*.md"
+          files_ignore: |
+            **/transcripts/**/*.md
+            .claude/**/*.md
 
       - name: Run check_headings.py
         if: steps.changed-files.outputs.any_changed == 'true'
