@@ -12,6 +12,7 @@ process SAY_HELLO {
     output:
         stdout
     script:
+    // Use our custom plugin function to decorate the greeting
     def decorated = decorateGreeting(greeting)
     """
     echo '$decorated'
@@ -29,5 +30,5 @@ workflow {
         .view { reversed -> "Reversed: $reversed" }
 
     SAY_HELLO(greeting_ch)
-    SAY_HELLO.out.view { result -> "Decorated: ${result.trim()}" }
+    SAY_HELLO.out.view { result -> "Decorated with custom prefix: ${result.trim()}" }
 }

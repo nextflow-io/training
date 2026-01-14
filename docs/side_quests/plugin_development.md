@@ -166,14 +166,14 @@ They allow the community to add features to Nextflow without modifying its core.
 
 ### What's next?
 
-Let's see how to use existing plugins before we build our own.
+The next section covers using existing plugins before building our own.
 
 ---
 
 ## 2. Using existing plugins
 
 Nextflow has a growing ecosystem of plugins that extend its functionality.
-Let's see how to discover, install, and use them.
+This section covers discovering, installing, and using them.
 
 !!! tip "This is the most important section for most users"
 
@@ -305,7 +305,7 @@ Check the plugin's documentation for available settings.
 ### 2.6. Try it: Using the nf-hello plugin
 
 The [nf-hello](https://github.com/nextflow-io/nf-hello) plugin provides a `randomString` function that generates random strings.
-Let's use it in a workflow.
+The following example demonstrates using it in a workflow.
 
 #### See the starting point
 
@@ -536,7 +536,7 @@ The `build.gradle` file configures the plugin metadata and dependencies.
 
 ### What's next?
 
-Let's implement our custom functions.
+Now we implement our custom functions.
 
 ---
 
@@ -574,7 +574,7 @@ We'll replace it with our own functions, adding them one at a time to understand
 
 ### 4.2. Add the first function: reverseGreeting
 
-Let's replace the template's `sayHello` function with our first custom function that reverses a greeting string.
+Replace the template's `sayHello` function with our first custom function that reverses a greeting string.
 
 Edit `src/main/groovy/training/plugin/NfGreetingExtension.groovy` to replace the `sayHello` method:
 
@@ -803,7 +803,7 @@ They become available to import in Nextflow workflows.
 
 ### What's next?
 
-Let's build and test our plugin.
+Now we build and test our plugin.
 
 ---
 
@@ -880,7 +880,7 @@ Or directly with the Gradle wrapper:
     4 actionable tasks: 4 executed
     ```
 
-    **Don't worry about the warnings!**
+    **The warnings are expected.**
 
     - **"Downloading gradle..."**: This only happens the first time. Subsequent builds are much faster.
     - **"Deprecated Gradle features..."**: This warning comes from the plugin template, not your code. It's safe to ignore.
@@ -1078,7 +1078,7 @@ Install with `make install` to use the plugin locally.
 
 ### What's next?
 
-Let's use our plugin in a workflow.
+Now we use our plugin in a workflow.
 
 ---
 
@@ -1295,7 +1295,7 @@ Once imported, you can use them anywhere:
 
 ### What's next?
 
-Let's explore other extension types.
+The next section explores other extension types.
 
 ---
 
@@ -1528,7 +1528,7 @@ They're useful for custom logging, metrics collection, notifications, and report
 
 ### What's next?
 
-Let's see how plugins can read configuration from `nextflow.config`.
+The next section shows how plugins can read configuration from `nextflow.config`.
 
 ---
 
@@ -1613,7 +1613,7 @@ greeting {
 
 ### 8.2. Try it: Make the task counter configurable
 
-Let's add configuration options to:
+This exercise adds configuration options to:
 
 1. Enable/disable the entire greeting plugin
 2. Control whether per-task counter messages are shown
@@ -1791,14 +1791,14 @@ Pipeline complete! 👋
 
 ### 8.3. Try it: Make the decorator configurable
 
-Let's make the `decorateGreeting` function use configurable prefix/suffix.
+This exercise makes the `decorateGreeting` function use configurable prefix/suffix.
 We'll intentionally make a common mistake to understand how Groovy/Java handles variables.
 
 #### Step 1: Add the configuration reading (this will fail!)
 
 Edit `NfGreetingExtension.groovy` to read configuration in `init()` and use it in `decorateGreeting()`:
 
-```groovy title="NfGreetingExtension.groovy" linenums="35" hl_lines="5-6 17"
+```groovy title="NfGreetingExtension.groovy" linenums="35" hl_lines="7-8 18"
 @CompileStatic
 class NfGreetingExtension extends PluginExtensionPoint {
 
@@ -1987,7 +1987,7 @@ Plugins can read configuration using `session.config.navigate()`, letting users 
 
 ### What's next?
 
-Let's briefly cover some advanced extension types, then look at how to share your plugin.
+The next section briefly covers advanced extension types, then explains how to share your plugin.
 
 ---
 
@@ -2018,7 +2018,7 @@ Executors and filesystems are advanced extension types typically created by plat
 
 ### What's next?
 
-Let's look at how to share your plugin with others.
+There are several ways to share your plugin with others.
 
 ---
 
@@ -2223,7 +2223,7 @@ Use semantic versioning to communicate changes to users.
 
 ### What's next?
 
-Let's summarize what we've learned.
+The final section summarizes what we've covered.
 
 ---
 
