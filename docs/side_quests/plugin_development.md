@@ -265,21 +265,7 @@ The `samplesheetToList` function:
 
 This pattern is used extensively in nf-core pipelines to ensure input data is valid before processing begins.
 
-### 2.5. Popular community plugins
-
-Here are some useful plugins available in the Nextflow ecosystem:
-
-| Plugin        | Purpose                                       |
-| ------------- | --------------------------------------------- |
-| nf-schema     | Input validation and samplesheet parsing      |
-| nf-prov       | Provenance reporting (RO-Crate format)        |
-| nf-wave       | Container provisioning with Wave              |
-| nf-amazon     | AWS integration (S3, Batch)                   |
-| nf-google     | Google Cloud integration (GCS, Batch)         |
-| nf-azure      | Azure integration (Blob Storage, Batch)       |
-| nf-cloudcache | Cloud-based caching for distributed execution |
-
-### 2.6. Plugin configuration
+### 2.5. Plugin configuration
 
 Some plugins accept configuration options in `nextflow.config`:
 
@@ -298,7 +284,7 @@ validation {
 Each plugin documents its configuration options.
 Check the plugin's documentation for available settings.
 
-### 2.7. Try it: Using the nf-hello plugin
+### 2.6. Try it: Using the nf-hello plugin
 
 The [nf-hello](https://github.com/nextflow-io/nf-hello) plugin provides a `randomString` function that generates random strings.
 Let's use it in a workflow.
