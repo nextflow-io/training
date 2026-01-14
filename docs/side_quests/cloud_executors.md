@@ -196,7 +196,7 @@ aws {
 workDir = 's3://my-bucket/work'
 
 process {
-    container = 'ubuntu:22.04'
+    container = 'ubuntu:22.04'  // Fallback for processes without explicit containers
 }
 ```
 
@@ -273,14 +273,10 @@ S3 provides this.
 
 ### 3.6. Container requirement
 
-```groovy
-process {
-    container = 'ubuntu:22.04'
-}
-```
+AWS Batch runs everything in containers, so every process needs one.
 
-AWS Batch runs everything in containers.
-Every process must have a container specified, either globally or per-process.
+Most pipelines define specific containers for each process (e.g., a BWA container for alignment).
+Setting a default like `process.container = 'ubuntu:22.04'` provides a fallback for simple processes (like bash scripts) that don't specify their own container.
 
 ### 3.7. Examine the example config
 
@@ -394,7 +390,7 @@ From Nextflow's perspective, the configuration is straightforward:
 ```groovy title="Minimal EKS config"
 process {
     executor = 'k8s'
-    container = 'ubuntu:22.04'
+    container = 'ubuntu:22.04'  // Fallback for processes without explicit containers
 }
 
 k8s {
@@ -412,7 +408,7 @@ Let's break down what each setting does:
 | Setting | Purpose |
 |---------|---------|
 | `executor = 'k8s'` | Tells Nextflow to submit tasks as Kubernetes pods instead of running locally |
-| `container` | Required - every task runs in a container on Kubernetes |
+| `container` | Fallback container for processes that don't specify their own |
 | `namespace` | Which Kubernetes namespace to create pods in (your admin will tell you this) |
 | `serviceAccount` | The identity your pods use (your admin will create this) |
 | `storageClaimName` | The name of the shared storage (your admin will set this up) |
@@ -464,7 +460,7 @@ With Fusion enabled through Platform, your configuration becomes:
 ```groovy title="EKS config with Fusion (Platform users)"
 process {
     executor = 'k8s'
-    container = 'ubuntu:22.04'
+    container = 'ubuntu:22.04'  // Fallback for processes without explicit containers
 }
 
 k8s {
