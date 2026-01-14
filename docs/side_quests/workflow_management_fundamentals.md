@@ -350,7 +350,7 @@ Check the results:
 ls results/
 ```
 
-It worked! But you have 3 samples (and 50 more coming).
+This works for one sample, but you have 3 samples (and 50 more coming).
 Running this command manually for each one isn't practical.
 
 ---
@@ -512,7 +512,7 @@ Notice the interleaved output - all samples running at once:
 [WT_REP2] Complete!
 ```
 
-Much faster!
+Faster, because all samples run concurrently.
 
 #### The Hidden Problem
 
@@ -677,6 +677,8 @@ Nextflow is a workflow manager. Instead of writing imperative scripts that say "
 
 The key difference: in bash, you explicitly manage data flow with variables and file paths. In Nextflow, you declare what each process needs, and Nextflow figures out the execution order automatically.
 
+#### Software Management
+
 In Part 1, you installed FastQC, fastp, and Salmon with conda - hoping dependencies wouldn't conflict, documenting versions manually.
 
 With Nextflow, each process declares its own software requirements. The tools are configured automatically at runtime with support for whichever software packaging tool you prefer. Your colleague runs the same pipeline and gets the exact same software environment based on the process definition, not their system.
@@ -720,11 +722,11 @@ Each part has a purpose:
 - **`output`** - Declares produced files with named channels (`emit: html`) for downstream processes
 - **`script`** - The actual command, nearly identical to your bash version
 
-Notice you're not writing any loop logic, file existence checks, or error handling - Nextflow handles all of that.
+You're not writing any loop logic, file existence checks, or error handling.
 
 !!! tip "Contrast with scripts"
 
-    The **one line** `container 'quay.io/biocontainers/fastqc:0.12.1--hdfd78af_0'` handles all software dependencies. The version is locked forever. Your colleague, your cluster, your cloud - all get the exact same FastQC.
+    The **one line** `container 'quay.io/biocontainers/fastqc:0.12.1--hdfd78af_0'` handles all software dependencies. The version is locked forever. Your colleague, your cluster, and your cloud all get the exact same FastQC.
 
 #### Call FASTQC in main.nf
 
@@ -756,7 +758,7 @@ executor >  local (3)
 [a1/b2c3d4] FASTQC (WT_REP1)           [100%] 3 of 3 ✔
 ```
 
-**All 3 samples ran in parallel automatically.** In Part 1, you wrote `&` and `wait` and worried about resource limits. Nextflow figures out optimal parallelization from your process definition alone - no infrastructure code required.
+**All 3 samples ran in parallel automatically.** In Part 1, you wrote `&` and `wait` and worried about resource limits. Nextflow figures out optimal parallelization from your process definition alone.
 
 ---
 
@@ -961,7 +963,7 @@ Watch what happens - Nextflow automatically determines the execution order from 
 
 !!! tip "Contrast with scripts"
 
-    In Part 1, you implemented `&` and `wait`, then worried about memory limits with 500 samples. Nextflow infers parallelization from the data flow and respects resource declarations - optimal scheduling without infrastructure code.
+    In Part 1, you implemented `&` and `wait`, then worried about memory limits with 500 samples. Nextflow infers parallelization from the data flow and respects resource declarations.
 
 ---
 
@@ -1010,7 +1012,7 @@ ch_multiqc = FASTQC.out.zip
 MULTIQC(ch_multiqc)
 ```
 
-The `.collect()` operator waits for all upstream processes to complete, then passes everything to MultiQC as a single batch. Nextflow tracks which files to collect automatically - you don't write any "wait for all jobs" logic.
+The `.collect()` operator waits for all upstream processes to complete, then passes everything to MultiQC as a single batch. Nextflow tracks which files to collect automatically.
 
 !!! tip "Contrast with scripts"
 
@@ -1124,7 +1126,7 @@ Building production-quality pipelines with scripts means writing significant inf
 
 Workflow managers like Nextflow handle that infrastructure for you. You declare what each process needs and produces; the framework figures out the rest. The result is code that's almost entirely focused on your science, with production-quality features built in.
 
-There's another benefit worth mentioning: **standardization**. Workflow managers are established tools with communities, documentation, and shared best practices. When you join a new team or project using one, you're working with familiar concepts rather than deciphering someone's homegrown scripting solution. Skills transfer. You're not maintaining custom infrastructure - you're using battle-tested tools that thousands of others rely on.
+There's also **standardization**. Workflow managers are established tools with communities, documentation, and shared best practices. When you join a new team or project using one, you're working with familiar concepts rather than deciphering someone's homegrown scripting solution. Skills transfer. You're not maintaining custom infrastructure - you're using battle-tested tools that thousands of others rely on.
 
 ### What's Next?
 
