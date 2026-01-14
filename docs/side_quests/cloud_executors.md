@@ -286,7 +286,7 @@ Look at the AWS config file in the example:
 cat conf/aws.config
 ```
 
-This shows a more complete configuration with optional features like Fusion and Wave.
+This shows a more complete configuration including resource labels and error handling strategies.
 
 ### Takeaway
 
@@ -452,7 +452,7 @@ Your Kubernetes administrator can help you set up `kubectl` access if you don't 
 
 ### 5.4. Simplifying EKS with Seqera Platform
 
-If you use Seqera Platform, you can leverage Fusion to access S3 directly without needing shared filesystem infrastructure like EFS.
+If you have a [Seqera Platform](https://seqera.io/platform/) subscription, you can use Fusion to access S3 directly without needing shared filesystem infrastructure like EFS.
 This significantly simplifies the setup.
 
 With Fusion enabled through Platform, your configuration becomes:
@@ -625,18 +625,14 @@ output {
 }
 ```
 
-### 7.4. Fusion filesystem
+### 7.4. Fusion filesystem (Platform feature)
 
-Fusion is a POSIX-compatible filesystem that provides faster S3 access:
+[Fusion](https://docs.seqera.io/fusion) is a POSIX-compatible filesystem that provides faster S3 access.
+It requires a [Seqera Platform](https://seqera.io/platform/) subscription.
 
 ```groovy
-fusion {
-    enabled = true
-}
-
-wave {
-    enabled = true  // Required for Fusion
-}
+wave.enabled = true
+fusion.enabled = true
 ```
 
 Benefits:
@@ -644,16 +640,12 @@ Benefits:
 - No explicit staging - files appear as local paths
 - Better performance for large files
 - Reduced S3 API calls
-
-!!! tip "Fusion requires Wave"
-
-    Fusion works by injecting a filesystem layer into your containers.
-    This requires the Wave container service to build custom container images.
+- On Kubernetes: eliminates the need for shared filesystem setup (EFS)
 
 ### Takeaway
 
 S3 is essential for both AWS Batch and EKS execution.
-Fusion can improve performance by providing transparent S3 access.
+Platform subscribers can use Fusion to improve performance and simplify infrastructure.
 
 ### What's next?
 
