@@ -90,6 +90,56 @@ prettier --write docs/**/*.md
 - **UPPERCASE processes**: Process names like `PROCESS_NAME`
 - **Shebang required**: `#!/usr/bin/env nextflow`
 - **Educational focus**: Keep examples simple and well-commented
+- **Dot notation for channels**: Use `.map{}`, `.view{}` instead of pipe operators
+
+### Writing Style
+
+Training materials should be clear, direct, and professional. Avoid patterns common in LLM-generated text:
+
+**Tone:**
+
+- Get to the point. Don't pad sentences with unnecessary elaboration
+- Avoid casual interjections like "Let's", "Now let's", "Remember when we...?"
+- Don't use exclamations for emphasis ("Much faster!", "So powerful!")
+- Avoid phrases like "worth mentioning", "it's important to note", "don't worry"
+- Use professional, neutral language rather than enthusiasm or reassurance
+
+**Sentence structure:**
+
+- Replace em-dash elaborations with periods or semicolons
+  - Instead of: "This downloads the plugin - which happens automatically"
+  - Write: "This downloads the plugin. It happens automatically."
+- Use colons for list item explanations, not hyphens
+  - Instead of: "**Option A** - does something useful"
+  - Write: "**Option A**: does something useful"
+- Keep explanations concise. One clear explanation is better than two different phrasings
+
+**Content organization:**
+
+- Don't explain the same concept two different ways. Pick one approach
+- Avoid redundant sections (e.g., listing plugins when linking to a registry)
+- Focus on practical, actionable information
+- When teaching a concept, show one clear path rather than multiple alternatives
+
+**Examples of what to avoid:**
+
+```markdown
+<!-- Avoid these patterns -->
+
+Let's see how this works!
+Remember when we created the config file earlier?
+This is really powerful - it means you can do X, Y, and Z!
+Don't worry - the tool handles this automatically.
+It's worth mentioning that...
+
+<!-- Better alternatives -->
+
+Here's how this works.
+The config file from section 2.1 defines...
+This enables X, Y, and Z.
+The tool handles this automatically.
+Note that... (or just state the fact directly)
+```
 
 ### Module Structure
 
