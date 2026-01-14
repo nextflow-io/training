@@ -55,7 +55,7 @@ For plugin development sections (3 onwards):
 
     **Groovy** is a programming language that runs on Java and is designed to be more concise and flexible. Nextflow's DSL is based on Groovy, which is why Nextflow syntax looks the way it does. Plugin code is typically written in Groovy.
 
-    **Gradle** is a build tool that compiles code, runs tests, and packages software. Think of it like `make` but for Java/Groovy projects. You don't need to understand Gradle deeply - we'll use simple commands like `./gradlew build`.
+    **Gradle** is a build tool that compiles code, runs tests, and packages software. You don't need to understand Gradle deeply - we'll use simple commands like `./gradlew build`.
 
     The good news: you don't need to be an expert in any of these. We'll explain the relevant concepts as we go.
 
@@ -124,12 +124,12 @@ Before diving into plugin usage and development, let's understand what plugins a
 Nextflow's plugin system is built on [PF4J](https://pf4j.org/), a lightweight plugin framework for Java.
 Plugins can extend Nextflow in several ways:
 
-| Extension Type  | Purpose                                  | Example                 |
-| --------------- | ---------------------------------------- | ----------------------- |
-| Functions       | Custom functions callable from workflows | `reverseString()`       |
-| Executors       | Custom task execution backends           | AWS Batch, Kubernetes   |
-| Filesystems     | Custom storage backends                  | S3, Azure Blob          |
-| Trace Observers | Monitor workflow execution               | Custom logging, metrics |
+| Extension Type  | Purpose                                  | Example                    |
+| --------------- | ---------------------------------------- | -------------------------- |
+| Functions       | Custom functions callable from workflows | `samplesheetToList()`      |
+| Executors       | Custom task execution backends           | AWS Batch, Kubernetes      |
+| Filesystems     | Custom storage backends                  | S3, Azure Blob             |
+| Trace Observers | Monitor workflow execution               | Custom logging, metrics    |
 
 <!-- TODO: Add Excalidraw diagram showing extension types
      File: docs/side_quests/img/plugin-extension-types.excalidraw.svg
@@ -140,7 +140,7 @@ Plugins can extend Nextflow in several ways:
      - Filesystems: access remote storage
 -->
 
-As you can see, plugins are much more than just custom functions - they can fundamentally extend how Nextflow works.
+Plugins can enhance Nextflow's functionality without modifying its core code, making them ideal for adding supplementary features to pipelines.
 
 ### 1.2. Why use plugins?
 
@@ -151,20 +151,18 @@ You can define custom functions directly in your Nextflow scripts, so why use pl
 | **Local functions** | Project-specific logic | Copy-paste between pipelines, no versioning |
 | **Plugins**         | Reusable utilities     | Requires Java/Groovy knowledge to create    |
 
-While custom functions are the most common plugin use case, remember that plugins can provide much more - observers, executors, and filesystems.
-
 Plugins are ideal when you need to:
 
 - Share functionality across multiple pipelines
-- Distribute reusable code to the community
+- Extend existing pipelines with extra features (e.g., Slack notifications)
 - Version and manage dependencies properly
 - Access Nextflow internals (channels, sessions, lifecycle events, etc.)
 - Integrate with external infrastructure (cloud platforms, storage systems)
 
 ### Takeaway
 
-Plugins extend Nextflow through well-defined extension points - not just functions, but observers, executors, and more.
-They're ideal for sharing reusable functionality across pipelines and the community.
+Plugins extend Nextflow through well-defined extension points: functions, observers, executors, and filesystems.
+They allow the community to add features to Nextflow without modifying its core.
 
 ### What's next?
 
@@ -180,7 +178,7 @@ Let's see how to discover, install, and use them.
 !!! tip "This is the most important section for most users"
 
     Even if you never develop your own plugin, knowing how to use existing plugins is valuable.
-    Many powerful features - like input validation with nf-schema - come from plugins.
+    Many powerful features are available through plugins, such as input validation with nf-schema.
     If plugin development seems daunting, focus on mastering this section first.
 
 !!! info "Official documentation"
@@ -223,8 +221,8 @@ plugins {
 Key points:
 
 - Use the `id` keyword followed by the plugin name
-- Specify a version with `@version` (recommended for reproducibility)
-- Nextflow automatically downloads plugins from the plugin registry
+- Specify a version with `@version` (recommended for reproducibility); if omitted, the latest version is used
+- Nextflow automatically downloads plugins from the registry at runtime
 
 ### 2.3. Importing plugin functions
 
@@ -300,40 +298,39 @@ validation {
 Each plugin documents its configuration options.
 Check the plugin's documentation for available settings.
 
-### 2.7. Try it: From local function to plugin
+### 2.7. Try it: Using the nf-hello plugin
 
-Let's see the difference between a local function and a plugin function in practice.
+The [nf-hello](https://github.com/nextflow-io/nf-hello) plugin provides a `randomString` function that generates random strings.
+Let's use it in a workflow.
 
-The [nf-hello](https://github.com/nextflow-io/nf-hello) plugin provides a `randomString` function that generates random strings of a given length.
-We've provided `random_id_example.nf` which has a local implementation of the same functionality.
+#### Configure the plugin
 
-#### Run the local function version
+First, add the plugin to your `nextflow.config`:
 
-Take a look at the starting file:
-
-```bash
-cat random_id_example.nf
+```groovy title="nextflow.config"
+plugins {
+    id 'nf-hello@0.5.0'
+}
 ```
+
+#### Use the plugin function
+
+Create a workflow that uses `randomString` to generate sample IDs:
 
 ```groovy title="random_id_example.nf"
 #!/usr/bin/env nextflow
 
-// Local function - must be copied to every pipeline that needs it
-def randomString(int length) {
-    def chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
-    def random = new Random()
-    return (1..length).collect { chars[random.nextInt(chars.length())] }.join()
-}
+include { randomString } from 'plugin/nf-hello'
 
 workflow {
     // Generate random IDs for each sample
     Channel.of('sample_A', 'sample_B', 'sample_C')
-        | map { sample -> "${sample}_${randomString(8)}" }
-        | view
+        .map { sample -> "${sample}_${randomString(8)}" }
+        .view()
 }
 ```
 
-Run it:
+#### Run it
 
 ```bash
 nextflow run random_id_example.nf
@@ -347,75 +344,14 @@ sample_C_Bf5tVc1D
 
 (Your random strings will be different!)
 
-This works, but if you wanted to use `randomString` in another pipeline, you'd have to copy the function definition.
+The first run downloads the plugin automatically. Any pipeline using `nf-hello@0.5.0` gets the exact same `randomString` function.
 
-#### Replace with the plugin
-
-Now let's replace our local function with the one from the `nf-hello` plugin.
-
-Edit `random_id_example.nf` to import the function from the plugin instead of defining it locally:
-
-=== "After (plugin)"
-
-    ```groovy title="random_id_example.nf" hl_lines="3-4"
-    #!/usr/bin/env nextflow
-
-    // Import function from plugin - no local definition needed
-    include { randomString } from 'plugin/nf-hello'
-
-    workflow {
-        // Generate random IDs for each sample
-        Channel.of('sample_A', 'sample_B', 'sample_C')
-            | map { sample -> "${sample}_${randomString(8)}" }
-            | view
-    }
-    ```
-
-=== "Before (local)"
-
-    ```groovy title="random_id_example.nf" hl_lines="3-8"
-    #!/usr/bin/env nextflow
-
-    // Local function - must be copied to every pipeline that needs it
-    def randomString(int length) {
-        def chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
-        def random = new Random()
-        return (1..length).collect { chars[random.nextInt(chars.length())] }.join()
-    }
-
-    workflow {
-        // Generate random IDs for each sample
-        Channel.of('sample_A', 'sample_B', 'sample_C')
-            | map { sample -> "${sample}_${randomString(8)}" }
-            | view
-    }
-    ```
-
-Run it again with the `-plugins` flag to load the plugin:
-
-```bash
-nextflow run random_id_example.nf -plugins nf-hello@0.5.0
-```
-
-!!! tip "Config vs command line"
-
-    We introduced plugins using `nextflow.config` (section 2.2), but here we use the `-plugins` flag.
-    Both approaches work:
-
-    - **`nextflow.config`**: Best for production pipelines where you want plugins locked to specific versions
-    - **`-plugins` flag**: Handy for quick testing or trying out a plugin without modifying config files
-
-    For a real pipeline, you'd typically add the plugin to `nextflow.config` so it's always available.
-
-The first run will download the plugin automatically. The output is the same, but now the function comes from a versioned, shareable plugin.
-
-The key difference: one import line replaces the entire function definition.
-Any pipeline can use `nf-hello@0.5.0` and get the exact same `randomString` function.
+Note that we're using a function someone else wrote - the development burden is on the plugin developer, not the pipeline developer. Nextflow also handles installing and updating plugins on your behalf.
 
 ### Takeaway
 
-Using plugins is straightforward: declare them in `nextflow.config` or load them with `-plugins`, then import their functions and use them in your workflows.
-The plugin ecosystem extends Nextflow with powerful features like validation, cloud integration, and provenance tracking.
+Using plugins is straightforward: declare them in `nextflow.config`, import their functions, and use them in your workflows.
+The plugin ecosystem extends Nextflow with features like validation, cloud integration, and provenance tracking.
 
 ### What's next?
 
