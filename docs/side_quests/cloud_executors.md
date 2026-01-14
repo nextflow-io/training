@@ -402,15 +402,15 @@ workDir = '/workspace/work'
 
 Let's break down what each setting does:
 
-| Setting | Purpose |
-|---------|---------|
+| Setting            | Purpose                                                                      |
+| ------------------ | ---------------------------------------------------------------------------- |
 | `executor = 'k8s'` | Tells Nextflow to submit tasks as Kubernetes pods instead of running locally |
-| `container` | Fallback container for processes that don't specify their own |
-| `namespace` | Which Kubernetes namespace to create pods in (your admin will tell you this) |
-| `serviceAccount` | The identity your pods use (your admin will create this) |
-| `storageClaimName` | The name of the shared storage (your admin will set this up) |
-| `storageMountPath` | Where the shared storage appears inside containers |
-| `workDir` | Where Nextflow stores intermediate files (must be on the shared storage) |
+| `container`        | Fallback container for processes that don't specify their own                |
+| `namespace`        | Which Kubernetes namespace to create pods in (your admin will tell you this) |
+| `serviceAccount`   | The identity your pods use (your admin will create this)                     |
+| `storageClaimName` | The name of the shared storage (your admin will set this up)                 |
+| `storageMountPath` | Where the shared storage appears inside containers                           |
+| `workDir`          | Where Nextflow stores intermediate files (must be on the shared storage)     |
 
 See the [Nextflow configuration reference](https://www.nextflow.io/docs/latest/reference/config.html#scope-k8s) for all available `k8s` scope options.
 
@@ -419,11 +419,11 @@ See the [Nextflow configuration reference](https://www.nextflow.io/docs/latest/r
 This guide assumes you have an EKS cluster already set up.
 Before you can run Nextflow pipelines, ask your Kubernetes administrator to provide:
 
-| You need | What it is | Example value |
-|----------|------------|---------------|
-| **Namespace** | Where your pods will run | `nextflow` |
-| **Service account** | Identity with permission to create pods | `nextflow-sa` |
-| **Storage claim name** | Shared storage accessible by all pods | `nextflow-pvc` |
+| You need               | What it is                              | Example value  |
+| ---------------------- | --------------------------------------- | -------------- |
+| **Namespace**          | Where your pods will run                | `nextflow`     |
+| **Service account**    | Identity with permission to create pods | `nextflow-sa`  |
+| **Storage claim name** | Shared storage accessible by all pods   | `nextflow-pvc` |
 
 Your administrator will need to set up:
 
@@ -723,14 +723,14 @@ profiles {
 
 ### When to use cloud execution
 
-| Scenario                        | Recommendation                     |
-| ------------------------------- | ---------------------------------- |
-| Development and testing         | Local executor                     |
-| Small datasets, limited compute | Local or small HPC                 |
-| Large datasets, need to scale   | Cloud (AWS Batch, EKS, GKE)        |
-| Existing Kubernetes cluster     | EKS, GKE, or generic k8s executor  |
-| Existing HPC infrastructure     | SLURM, PBS, etc.                   |
-| Burst capacity beyond HPC       | Hybrid cloud                       |
+| Scenario                        | Recommendation                    |
+| ------------------------------- | --------------------------------- |
+| Development and testing         | Local executor                    |
+| Small datasets, limited compute | Local or small HPC                |
+| Large datasets, need to scale   | Cloud (AWS Batch, EKS, GKE)       |
+| Existing Kubernetes cluster     | EKS, GKE, or generic k8s executor |
+| Existing HPC infrastructure     | SLURM, PBS, etc.                  |
+| Burst capacity beyond HPC       | Hybrid cloud                      |
 
 ### Additional resources
 
