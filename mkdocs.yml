@@ -82,7 +82,6 @@ nav:
       - side_quests/nf-test.md
       - side_quests/workflow_outputs.md
       - side_quests/cloud_executors.md
-      - side_quests/plugin_development.md
   - Archive:
       - Fundamentals Training:
           - archive/basic_training/index.md
