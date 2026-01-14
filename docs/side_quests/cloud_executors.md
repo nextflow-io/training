@@ -1,7 +1,7 @@
 # Running on cloud executors
 
 One of Nextflow's greatest strengths is its ability to run the same pipeline on different computing infrastructures without changing the pipeline code.
-This side quest explores how executors work and how to configure your pipelines for cloud execution with AWS Batch.
+This side quest explores how executors work and how to configure your pipelines for cloud execution with AWS Batch and Amazon EKS.
 
 ### Learning goals
 
@@ -12,6 +12,7 @@ By the end of this side quest, you'll be able to:
 - Understand what executors are and why they matter
 - List the major executor options available in Nextflow
 - Configure AWS Batch executor settings
+- Configure Kubernetes executor settings for Amazon EKS
 - Use profiles to support multiple execution environments
 - Understand cloud storage integration with S3
 - Apply best practices for cost management and debugging
@@ -55,6 +56,7 @@ You'll find a simple workflow and a set of configuration files demonstrating dif
 ├── conf
 │   ├── aws.config
 │   ├── base.config
+│   ├── eks.config
 │   └── local.config
 ├── greetings.csv
 ├── main.nf
@@ -282,13 +284,287 @@ AWS Batch configuration requires:
 
 ### What's next?
 
-Let's see how to use profiles to switch between local and cloud execution.
+AWS Batch is great for many workloads, but Amazon EKS offers an alternative approach using Kubernetes.
+Let's explore that option.
 
 ---
 
-## 4. Using profiles
+## 4. Amazon EKS fundamentals
 
-### 4.1. Why profiles?
+### 4.1. What is Amazon EKS?
+
+Amazon Elastic Kubernetes Service (EKS) is a managed Kubernetes service that runs containerized workloads on AWS.
+Unlike AWS Batch, which is a managed batch computing service, EKS gives you a full Kubernetes cluster.
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                       Amazon EKS                            │
+│                                                             │
+│  ┌──────────────┐    ┌──────────────┐    ┌──────────────┐  │
+│  │   Nextflow   │───▶│  Kubernetes  │───▶│    Worker    │  │
+│  │   submits    │    │   API        │    │    Nodes     │  │
+│  │    pods      │    │   Server     │    │   (EC2)      │  │
+│  └──────────────┘    └──────────────┘    └──────────────┘  │
+│                                                             │
+│  ┌──────────────────────────────────────────────────────┐  │
+│  │         Shared Storage (Amazon EFS via PVC)          │  │
+│  └──────────────────────────────────────────────────────┘  │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### 4.2. Why choose EKS over AWS Batch?
+
+Both are valid options for running Nextflow on AWS. Consider EKS when:
+
+| Factor                | AWS Batch                    | Amazon EKS                     |
+| --------------------- | ---------------------------- | ------------------------------ |
+| **Existing infra**    | Starting fresh               | Already have Kubernetes        |
+| **Team expertise**    | Less Kubernetes experience   | Kubernetes-savvy team          |
+| **Multi-cloud**       | AWS-only                     | Portable Kubernetes config     |
+| **Control**           | Managed, less customization  | Full Kubernetes flexibility    |
+| **Scaling**           | Automatic instance scaling   | Node pools + cluster autoscaler|
+
+### 4.3. How Nextflow integrates with EKS
+
+When you run a Nextflow pipeline with the Kubernetes executor on EKS:
+
+1. Nextflow connects to the EKS cluster via the Kubernetes API
+2. Each process task becomes a Kubernetes pod
+3. Pods mount the shared storage (typically EFS via a PVC)
+4. Pods pull container images and run your process scripts
+5. Results are written to the shared filesystem
+6. Nextflow monitors pod status and retrieves outputs
+
+The main infrastructure requirement is a [shared filesystem with `ReadWriteMany` access mode](https://www.nextflow.io/docs/latest/kubernetes.html#requirements).
+On AWS, Amazon EFS is the standard choice for this.
+
+### Takeaway
+
+Amazon EKS provides a Kubernetes-based alternative to AWS Batch.
+It requires setting up shared storage (like EFS) but gives you full Kubernetes flexibility.
+
+### What's next?
+
+Let's look at how to configure Nextflow for EKS execution.
+
+---
+
+## 5. Configuring Amazon EKS
+
+For complete details, see the [Nextflow Kubernetes documentation](https://www.nextflow.io/docs/latest/kubernetes.html).
+
+### 5.1. Essential configuration
+
+Running Nextflow on EKS requires a shared filesystem accessible by all pods.
+The standard approach uses a Persistent Volume Claim (PVC) backed by Amazon EFS:
+
+```groovy title="Minimal EKS config"
+process {
+    executor = 'k8s'
+    container = 'ubuntu:22.04'
+}
+
+k8s {
+    namespace = 'nextflow'
+    serviceAccount = 'nextflow-sa'
+    storageClaimName = 'nextflow-pvc'
+    storageMountPath = '/workspace'
+}
+
+workDir = '/workspace/work'
+```
+
+Let's break down each part.
+
+### 5.2. Executor settings
+
+```groovy
+process {
+    executor = 'k8s'
+}
+```
+
+The `k8s` executor tells Nextflow to submit tasks as Kubernetes pods.
+
+### 5.3. Kubernetes settings
+
+```groovy
+k8s {
+    namespace = 'nextflow'
+    serviceAccount = 'nextflow-sa'
+    storageClaimName = 'nextflow-pvc'
+    storageMountPath = '/workspace'
+}
+```
+
+- `namespace`: The Kubernetes namespace where pods run (default: `default`)
+- `serviceAccount`: The service account that pods use
+- `storageClaimName`: The PVC providing shared storage
+- `storageMountPath`: Where the shared storage is mounted in containers (default: `/workspace`)
+
+See the [Nextflow configuration reference](https://www.nextflow.io/docs/latest/reference/config.html#scope-k8s) for all available `k8s` scope options.
+
+### 5.4. Shared storage with Amazon EFS
+
+Kubernetes requires a shared filesystem with `ReadWriteMany` access mode so that multiple pods can read and write data concurrently.
+On EKS, Amazon EFS is the most common choice.
+
+First, create an EFS filesystem and install the [Amazon EFS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/efs-csi.html) in your cluster.
+Then create a PersistentVolume and PersistentVolumeClaim:
+
+```yaml title="EFS PersistentVolume and Claim"
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nextflow-pv
+spec:
+  capacity:
+    storage: 100Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: efs-sc
+  csi:
+    driver: efs.csi.aws.com
+    volumeHandle: fs-1234567890abcdef0
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nextflow-pvc
+  namespace: nextflow
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: efs-sc
+  resources:
+    requests:
+      storage: 100Gi
+```
+
+Replace `fs-1234567890abcdef0` with your actual EFS filesystem ID.
+
+!!! note "EFS capacity"
+
+    The `storage` capacity values are required by Kubernetes but are informational for EFS.
+    EFS is an elastic filesystem that grows and shrinks automatically.
+
+### 5.5. Kubernetes RBAC
+
+The service account needs Kubernetes permissions to manage pods.
+The exact permissions required may vary depending on your setup, but a typical configuration includes:
+
+```yaml title="RBAC Role for pod management"
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: nextflow-sa
+  namespace: nextflow
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: nextflow-role
+  namespace: nextflow
+rules:
+  - apiGroups: [""]
+    resources: ["pods", "pods/status", "pods/log"]
+    verbs: ["get", "list", "watch", "create", "delete"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: nextflow-rolebinding
+  namespace: nextflow
+subjects:
+  - kind: ServiceAccount
+    name: nextflow-sa
+    namespace: nextflow
+roleRef:
+  kind: Role
+  name: nextflow-role
+  apiGroup: rbac.authorization.k8s.io
+```
+
+!!! note "RBAC permissions"
+
+    This RBAC configuration is based on [Seqera documentation](https://docs.seqera.io/fusion/guide/aws-eks).
+    You may need to adjust permissions based on your specific requirements and cluster policies.
+
+### 5.6. Examine the example config
+
+Look at the EKS config file in the example:
+
+```bash
+cat conf/eks.config
+```
+
+This shows a complete configuration for EKS with shared storage.
+
+### 5.7. Running pipelines on EKS
+
+Unlike AWS Batch, where Nextflow can run from anywhere with AWS credentials, EKS requires access to the Kubernetes API.
+
+**Option 1: Run from a machine with kubectl access**
+
+```bash
+# Ensure kubectl is configured
+kubectl cluster-info
+
+# Run the pipeline
+nextflow run main.nf -profile eks
+```
+
+**Option 2: Run Nextflow inside the EKS cluster**
+
+You can run Nextflow itself as a pod in the cluster, which is useful for CI/CD pipelines.
+
+### 5.8. Using S3 with Seqera Platform
+
+If you use Seqera Platform, you can leverage Fusion to access S3 directly without needing a shared filesystem like EFS.
+This simplifies infrastructure setup significantly.
+
+With Fusion enabled through Platform, your configuration becomes:
+
+```groovy title="EKS config with Fusion (Platform users)"
+process {
+    executor = 'k8s'
+    container = 'ubuntu:22.04'
+}
+
+k8s {
+    namespace = 'nextflow'
+    serviceAccount = 'nextflow-sa'
+}
+
+wave.enabled = true
+fusion.enabled = true
+
+workDir = 's3://my-bucket/work'
+```
+
+This approach requires IRSA (IAM Roles for Service Accounts) to grant S3 access to pods.
+See the [Seqera Fusion documentation](https://docs.seqera.io/fusion) for setup details.
+
+### Takeaway
+
+EKS configuration requires:
+
+- Kubernetes executor and namespace/service account settings
+- Shared storage via PVC (typically backed by Amazon EFS)
+- Kubernetes RBAC for pod management
+- Work directory on the shared filesystem
+
+### What's next?
+
+Let's see how to use profiles to switch between local, AWS Batch, and EKS execution.
+
+---
+
+## 6. Using profiles
+
+### 6.1. Why profiles?
 
 Profiles let you maintain multiple configurations in one file and switch between them at runtime.
 This is essential for:
@@ -297,7 +573,7 @@ This is essential for:
 - Testing with small resources, scaling up for real runs
 - Supporting multiple cloud environments
 
-### 4.2. Profile structure
+### 6.2. Profile structure
 
 Look at the main config file:
 
@@ -317,10 +593,13 @@ profiles {
     aws {
         includeConfig 'conf/aws.config'
     }
+    eks {
+        includeConfig 'conf/eks.config'
+    }
 }
 ```
 
-### 4.3. Running with profiles
+### 6.3. Running with profiles
 
 To use a specific profile:
 
@@ -328,8 +607,11 @@ To use a specific profile:
 # Run locally (you can test this)
 nextflow run main.nf -profile local
 
-# Run on AWS (requires AWS setup)
+# Run on AWS Batch (requires AWS setup)
 nextflow run main.nf -profile aws
+
+# Run on EKS (requires EKS cluster access)
+nextflow run main.nf -profile eks
 ```
 
 You can also combine profiles:
@@ -338,7 +620,7 @@ You can also combine profiles:
 nextflow run main.nf -profile aws,debug
 ```
 
-### 4.4. Config file organization
+### 6.4. Config file organization
 
 A common pattern for production pipelines:
 
@@ -347,6 +629,7 @@ conf/
 ├── base.config      # Common settings (error handling, default resources)
 ├── local.config     # Local development settings
 ├── aws.config       # AWS Batch settings
+├── eks.config       # Amazon EKS settings
 ├── slurm.config     # HPC cluster settings
 └── test.config      # CI/CD testing settings
 ```
@@ -362,11 +645,11 @@ Let's explore cloud storage integration.
 
 ---
 
-## 5. Cloud storage with S3
+## 7. Cloud storage with S3
 
-### 5.1. Why S3 for cloud execution?
+### 7.1. Why S3 for cloud execution?
 
-When running on AWS Batch:
+When running on AWS Batch or EKS:
 
 - Tasks run on ephemeral compute instances
 - Instances may be in different availability zones
@@ -378,7 +661,7 @@ S3 provides:
 - Durability and availability
 - Integration with AWS security (IAM)
 
-### 5.2. Configuring S3 work directory
+### 7.2. Configuring S3 work directory
 
 ```groovy
 workDir = 's3://my-bucket/nextflow-work'
@@ -390,7 +673,7 @@ Nextflow automatically:
 - Writes output files back to S3
 - Manages the work directory structure
 
-### 5.3. Publishing results to S3
+### 7.3. Publishing results to S3
 
 You can publish final results to S3:
 
@@ -411,7 +694,7 @@ output {
 }
 ```
 
-### 5.4. Fusion filesystem
+### 7.4. Fusion filesystem
 
 Fusion is a POSIX-compatible filesystem that provides faster S3 access:
 
@@ -438,7 +721,7 @@ Benefits:
 
 ### Takeaway
 
-S3 is essential for AWS Batch execution.
+S3 is essential for both AWS Batch and EKS execution.
 Fusion can improve performance by providing transparent S3 access.
 
 ### What's next?
@@ -447,9 +730,9 @@ Let's discuss practical considerations for cloud execution.
 
 ---
 
-## 6. Practical considerations
+## 8. Practical considerations
 
-### 6.1. Cost management
+### 8.1. Cost management
 
 Cloud execution costs money. Key strategies:
 
@@ -488,7 +771,7 @@ process {
 
 The Seqera Platform provides cost tracking and optimization insights.
 
-### 6.2. Debugging cloud jobs
+### 8.2. Debugging cloud jobs
 
 When things go wrong on the cloud:
 
@@ -517,7 +800,7 @@ nextflow run main.nf -profile aws -with-trace -with-report
 | Container not found    | Image not in ECR or public registry |
 | Out of memory          | Process needs more memory           |
 
-### 6.3. Resume behavior
+### 8.3. Resume behavior
 
 Resume works the same on cloud as locally:
 
@@ -527,7 +810,7 @@ nextflow run main.nf -profile aws -resume
 
 The S3 work directory preserves intermediate results, so you don't re-run completed tasks.
 
-### 6.4. Seqera Platform integration
+### 8.4. Seqera Platform integration
 
 For production cloud pipelines, consider Seqera Platform:
 
@@ -549,9 +832,9 @@ Let's summarize what we've learned.
 
 ## Summary
 
-### Configuration checklist
+### Configuration checklists
 
-Before running on AWS Batch, ensure you have:
+**Before running on AWS Batch**, ensure you have:
 
 - [ ] AWS account with Batch, S3, and IAM configured
 - [ ] Batch compute environment created
@@ -559,6 +842,16 @@ Before running on AWS Batch, ensure you have:
 - [ ] S3 bucket for work directory
 - [ ] IAM role with S3 and Batch permissions
 - [ ] Nextflow config with executor, AWS, and workDir settings
+- [ ] Container images accessible (ECR or public registry)
+
+**Before running on Amazon EKS**, ensure you have:
+
+- [ ] EKS cluster running and accessible via kubectl
+- [ ] Amazon EFS filesystem created
+- [ ] EFS CSI driver installed in the cluster
+- [ ] PersistentVolume and PersistentVolumeClaim configured
+- [ ] Kubernetes namespace and service account created
+- [ ] RBAC permissions for pod management
 - [ ] Container images accessible (ECR or public registry)
 
 ### Key configuration patterns
@@ -576,43 +869,68 @@ workDir = 's3://my-bucket/work'
 process.container = 'my-image:latest'
 ```
 
+**Minimal EKS config:**
+
+```groovy
+process.executor = 'k8s'
+process.container = 'my-image:latest'
+
+k8s {
+    namespace = 'nextflow'
+    serviceAccount = 'nextflow-sa'
+    storageClaimName = 'nextflow-pvc'
+    storageMountPath = '/workspace'
+}
+
+workDir = '/workspace/work'
+```
+
 **With profiles:**
 
 ```groovy
 profiles {
-    local { executor.name = 'local' }
+    local { process.executor = 'local' }
     aws {
-        executor.name = 'awsbatch'
+        process.executor = 'awsbatch'
         executor.queueName = 'my-queue'
         workDir = 's3://bucket/work'
+    }
+    eks {
+        process.executor = 'k8s'
+        k8s.namespace = 'nextflow'
+        k8s.storageClaimName = 'nextflow-pvc'
+        workDir = '/workspace/work'
     }
 }
 ```
 
 ### When to use cloud execution
 
-| Scenario                        | Recommendation                  |
-| ------------------------------- | ------------------------------- |
-| Development and testing         | Local executor                  |
-| Small datasets, limited compute | Local or small HPC              |
-| Large datasets, need to scale   | Cloud (AWS Batch, Google Batch) |
-| Existing HPC infrastructure     | SLURM, PBS, etc.                |
-| Burst capacity beyond HPC       | Hybrid cloud                    |
+| Scenario                        | Recommendation                     |
+| ------------------------------- | ---------------------------------- |
+| Development and testing         | Local executor                     |
+| Small datasets, limited compute | Local or small HPC                 |
+| Large datasets, need to scale   | Cloud (AWS Batch, EKS, GKE)        |
+| Existing Kubernetes cluster     | EKS, GKE, or generic k8s executor  |
+| Existing HPC infrastructure     | SLURM, PBS, etc.                   |
+| Burst capacity beyond HPC       | Hybrid cloud                       |
 
 ### Additional resources
 
 - [Nextflow AWS Batch documentation](https://www.nextflow.io/docs/latest/aws.html)
+- [Nextflow Kubernetes documentation](https://www.nextflow.io/docs/latest/kubernetes.html)
 - [AWS Batch user guide](https://docs.aws.amazon.com/batch/)
+- [Amazon EKS user guide](https://docs.aws.amazon.com/eks/)
+- [Amazon EFS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/efs-csi.html)
 - [Seqera Platform](https://seqera.io/platform/)
-- [Fusion filesystem](https://www.nextflow.io/docs/latest/fusion.html)
 
 ---
 
 ## What's next?
 
 Congratulations on completing this side quest!
-You now understand how Nextflow executors work and how to configure pipelines for cloud execution.
+You now understand how Nextflow executors work and how to configure pipelines for cloud execution with AWS Batch and Amazon EKS.
 
-While this lesson was conceptual, you have the knowledge to set up AWS Batch execution when you have access to AWS infrastructure.
+While this lesson was conceptual, you have the knowledge to set up cloud execution when you have access to AWS infrastructure.
 
 Return to the [Side Quests](./index.md) menu to continue your training journey.
