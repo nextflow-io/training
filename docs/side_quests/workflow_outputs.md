@@ -1,10 +1,10 @@
 # Workflow output definitions
 
-Nextflow provides a powerful new syntax for managing workflow outputs that centralizes output configuration and enables automatic generation of output manifests.
+Workflow output definitions are the new standard way to manage outputs in Nextflow pipelines, centralizing output configuration and enabling automatic generation of output manifests.
 
 ### Learning goals
 
-In this side quest, you'll learn how to use the workflow output definition syntax, which provides a cleaner alternative to the traditional `publishDir` directive.
+In this side quest, you'll learn how to use the workflow output definition syntax.
 
 By the end of this side quest, you'll be able to:
 
@@ -238,16 +238,9 @@ While `publishDir` works well for simple cases, it has some limitations as workf
 
 4. **Coupling between processes and output structure**: The output organization is tied to process-level configuration. If you want to reorganize outputs (say, grouping by sample instead of by process), you need to update the configuration for each affected process.
 
-!!! warning "publishDir is legacy syntax"
-
-    The `publishDir` directive is now considered legacy.
-    Nextflow's workflow output definition syntax is the recommended approach for all new pipelines.
-    It addresses the limitations above while providing additional features like automatic output manifests.
-
 ### Takeaway
 
 The `publishDir` directive scatters output configuration across process definitions and doesn't provide automatic documentation of outputs.
-For new pipelines, use the workflow output definition syntax instead.
 
 ### What's next?
 
