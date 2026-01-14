@@ -677,8 +677,6 @@ Nextflow is a workflow manager. Instead of writing imperative scripts that say "
 
 The key difference: in bash, you explicitly manage data flow with variables and file paths. In Nextflow, you declare what each process needs, and Nextflow figures out the execution order automatically.
 
-#### No Tool Installation Needed
-
 In Part 1, you installed FastQC, fastp, and Salmon with conda - hoping dependencies wouldn't conflict, documenting versions manually.
 
 With Nextflow, each process declares its own software requirements. The tools are configured automatically at runtime with support for whichever software packaging tool you prefer. Your colleague runs the same pipeline and gets the exact same software environment based on the process definition, not their system.
