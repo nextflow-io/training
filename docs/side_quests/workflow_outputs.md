@@ -856,22 +856,18 @@ output {
 }
 ```
 
-**Key benefits:**
+**Key benefits over `publishDir`:**
 
-- Centralized output configuration
-- Dynamic paths based on metadata
-- Automatic index file generation
-- Override output directory with `-output-dir`
+- Centralized output configuration in one place
+- Automatic index file generation for output manifests
+- Native `-output-dir` flag for overriding output location
+- Clean separation between process logic and output organization
 
-### When to use workflow outputs vs publishDir
+!!! note "Recommended for new pipelines"
 
-| Use Case                                        | Approach             |
-| ----------------------------------------------- | -------------------- |
-| Simple pipelines with few outputs               | `publishDir` is fine |
-| Complex output organization                     | Workflow outputs     |
-| Need output manifests                           | Workflow outputs     |
-| Multiple processes publishing to same structure | Workflow outputs     |
-| Quick prototyping                               | `publishDir`         |
+    The workflow output definition syntax is the recommended approach for new pipelines.
+    While `publishDir` still works, it is considered legacy syntax.
+    New development should use the `output {}` block for cleaner, more maintainable output management.
 
 ### Additional resources
 
