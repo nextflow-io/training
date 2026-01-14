@@ -135,22 +135,13 @@ Let's dive into AWS Batch, one of the most popular cloud executors.
 AWS Batch is a managed service that runs containerized workloads on AWS.
 It automatically provisions compute resources based on your job requirements.
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                       AWS Batch                              │
-│                                                              │
-│  ┌──────────────┐    ┌──────────────┐    ┌──────────────┐  │
-│  │   Job Queue  │───▶│   Compute    │───▶│  EC2/Fargate │  │
-│  │              │    │  Environment │    │  Instances   │  │
-│  └──────────────┘    └──────────────┘    └──────────────┘  │
-│         ▲                                                   │
-│         │                                                   │
-│  ┌──────────────┐                                          │
-│  │   Nextflow   │                                          │
-│  │   submits    │                                          │
-│  │    jobs      │                                          │
-│  └──────────────┘                                          │
-└─────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart LR
+    subgraph batch[AWS Batch]
+        NF[Nextflow] -->|submits jobs| JQ[Job Queue]
+        JQ --> CE[Compute Environment]
+        CE --> EC2[EC2/Fargate Instances]
+    end
 ```
 
 ### 2.2. Key AWS Batch concepts
@@ -296,20 +287,14 @@ Let's explore that option.
 Amazon Elastic Kubernetes Service (EKS) is a managed Kubernetes service that runs containerized workloads on AWS.
 Unlike AWS Batch, which is a managed batch computing service, EKS gives you a full Kubernetes cluster.
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                       Amazon EKS                            │
-│                                                             │
-│  ┌──────────────┐    ┌──────────────┐    ┌──────────────┐  │
-│  │   Nextflow   │───▶│  Kubernetes  │───▶│    Worker    │  │
-│  │   submits    │    │   API        │    │    Nodes     │  │
-│  │    pods      │    │   Server     │    │   (EC2)      │  │
-│  └──────────────┘    └──────────────┘    └──────────────┘  │
-│                                                             │
-│  ┌──────────────────────────────────────────────────────┐  │
-│  │         Shared Storage (Amazon EFS via PVC)          │  │
-│  └──────────────────────────────────────────────────────┘  │
-└─────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart LR
+    subgraph eks[Amazon EKS]
+        NF[Nextflow] -->|submits pods| K8S[Kubernetes API Server]
+        K8S --> WN[Worker Nodes - EC2]
+        EFS[(Shared Storage - Amazon EFS)]
+        WN <--> EFS
+    end
 ```
 
 ### 4.2. Why choose EKS over AWS Batch?
