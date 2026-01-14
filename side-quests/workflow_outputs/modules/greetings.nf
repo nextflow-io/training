@@ -5,7 +5,7 @@
  */
 process SAY_HELLO {
 
-    publishDir 'results/greetings', mode: 'copy'
+    publishDir { "results/greetings/${meta.language}" }, mode: 'copy'
 
     input:
         tuple val(meta), val(greeting)
@@ -24,7 +24,7 @@ process SAY_HELLO {
  */
 process CONVERT_TO_UPPER {
 
-    publishDir 'results/uppercase', mode: 'copy'
+    publishDir { "results/uppercase/${meta.language}" }, mode: 'copy'
 
     input:
         tuple val(meta), path(input_file)

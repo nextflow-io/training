@@ -96,7 +96,7 @@ Take a look at the modules file:
  */
 process SAY_HELLO {
 
-    publishDir 'results/greetings', mode: 'copy'
+    publishDir { "results/greetings/${meta.language}" }, mode: 'copy'
 
     input:
         tuple val(meta), val(greeting)
@@ -115,7 +115,7 @@ process SAY_HELLO {
  */
 process CONVERT_TO_UPPER {
 
-    publishDir 'results/uppercase', mode: 'copy'
+    publishDir { "results/uppercase/${meta.language}" }, mode: 'copy'
 
     input:
         tuple val(meta), path(input_file)
@@ -130,12 +130,12 @@ process CONVERT_TO_UPPER {
 }
 ```
 
-Each process has its own `publishDir` directive that specifies where outputs should be copied.
+Each process has its own `publishDir` directive with a closure that dynamically determines the output path based on metadata.
 The processes use the common `[meta, file]` tuple pattern, where `meta` is a map containing metadata like the greeting text and language.
 
 Now look at the main workflow file:
 
-```groovy title="main.nf" linenums="1" hl_lines="18-20"
+```groovy title="main.nf" linenums="1"
 #!/usr/bin/env nextflow
 
 // Enable workflow output definition syntax (required for Nextflow < 25.10)
@@ -191,10 +191,25 @@ nextflow run main.nf
 Check the results directory:
 
 ```bash
-ls -la results/
+find results -type f
 ```
 
-You should see two subdirectories: `greetings/` and `uppercase/`, each containing the relevant output files.
+??? example "Output"
+
+    ```console
+    results/greetings/English/Hello-output.txt
+    results/greetings/French/Bonjour-output.txt
+    results/greetings/German/Hallo-output.txt
+    results/greetings/Italian/Ciao-output.txt
+    results/greetings/Spanish/Holà-output.txt
+    results/uppercase/English/UPPER-Hello-output.txt
+    results/uppercase/French/UPPER-Bonjour-output.txt
+    results/uppercase/German/UPPER-Hallo-output.txt
+    results/uppercase/Italian/UPPER-Ciao-output.txt
+    results/uppercase/Spanish/UPPER-Holà-output.txt
+    ```
+
+The outputs are organized by language thanks to the `publishDir` closures accessing `meta.language`.
 
 ### 1.3. Limitations of publishDir
 
@@ -314,7 +329,7 @@ Edit `modules/greetings.nf` to remove the `publishDir` directives from both proc
      */
     process SAY_HELLO {
 
-        publishDir 'results/greetings', mode: 'copy'
+        publishDir { "results/greetings/${meta.language}" }, mode: 'copy'
 
         input:
             tuple val(meta), val(greeting)
@@ -333,7 +348,7 @@ Edit `modules/greetings.nf` to remove the `publishDir` directives from both proc
      */
     process CONVERT_TO_UPPER {
 
-        publishDir 'results/uppercase', mode: 'copy'
+        publishDir { "results/uppercase/${meta.language}" }, mode: 'copy'
 
         input:
             tuple val(meta), path(input_file)
@@ -535,7 +550,8 @@ rm -rf results work .nextflow*
 nextflow run main.nf
 ```
 
-The outputs should be organized the same way as before, but now the configuration is centralized in one place.
+Notice that outputs are now in flat directories (`results/greetings/` and `results/uppercase/`) rather than organized by language.
+The configuration is centralized, but we've lost the dynamic path structure from the original `publishDir` closures.
 
 ### Takeaway
 
@@ -546,17 +562,16 @@ The workflow output definition syntax separates output configuration from proces
 
 ### What's next?
 
-In the next section, we'll use dynamic paths to organize outputs by metadata.
+In the next section, we'll restore the dynamic path organization using closures in the output block.
 
 ---
 
 ## 3. Dynamic publish paths
 
-### 3.1. Organizing by metadata
+### 3.1. Restoring metadata-based organization
 
-One powerful feature of workflow outputs is the ability to use closures to dynamically determine output paths based on the data itself.
-
-Since our outputs include language metadata, we can organize files by language.
+The `output {}` block also supports closures for dynamic paths, just like `publishDir`.
+This lets us restore the language-based organization from the original workflow.
 
 Update the `output {}` block to use dynamic paths:
 
@@ -631,7 +646,7 @@ find results -type f
     results/uppercase/Spanish/UPPER-Holà-output.txt
     ```
 
-The outputs are now organized by language, making it easy to find results for specific languages.
+The outputs are once again organized by language, matching the original `publishDir` behavior but with centralized configuration.
 
 ### 3.3. Override the output directory
 
