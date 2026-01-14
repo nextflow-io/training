@@ -10,7 +10,7 @@ In this side quest, you'll learn how to use existing plugins and optionally buil
     However, **developing your own plugins** (sections 3 onwards) is an advanced topic.
     It involves Java/Groovy programming, build tools, and software engineering concepts that may be unfamiliar if you come from a pure bioinformatics background.
 
-    Most Nextflow users will never need to develop plugins - the existing plugin ecosystem covers the vast majority of use cases.
+    Most Nextflow users will never need to develop plugins. The existing plugin ecosystem covers the vast majority of use cases.
     If development sections feel challenging, focus on sections 1-2 and bookmark the rest for later.
 
 ### Learning goals
@@ -55,7 +55,7 @@ For plugin development sections (3 onwards):
 
     **Groovy** is a programming language that runs on Java and is designed to be more concise and flexible. Nextflow's DSL is based on Groovy, which is why Nextflow syntax looks the way it does. Plugin code is typically written in Groovy.
 
-    **Gradle** is a build tool that compiles code, runs tests, and packages software. You don't need to understand Gradle deeply - we'll use simple commands like `./gradlew build`.
+    **Gradle** is a build tool that compiles code, runs tests, and packages software. You don't need to understand Gradle deeply; we'll use simple commands like `./gradlew build`.
 
     The good news: you don't need to be an expert in any of these. We'll explain the relevant concepts as we go.
 
@@ -284,7 +284,7 @@ validation {
 Each plugin documents its configuration options.
 Check the plugin's documentation for available settings.
 
-### 2.6. Try it: Using the nf-hello plugin
+### 2.7. Try it: Using the nf-hello plugin
 
 The [nf-hello](https://github.com/nextflow-io/nf-hello) plugin provides a `randomString` function that generates random strings.
 Let's use it in a workflow.
@@ -332,7 +332,7 @@ sample_C_Bf5tVc1D
 
 The first run downloads the plugin automatically. Any pipeline using `nf-hello@0.5.0` gets the exact same `randomString` function.
 
-Note that we're using a function someone else wrote - the development burden is on the plugin developer, not the pipeline developer. Nextflow also handles installing and updating plugins on your behalf.
+Note that we're using a function someone else wrote. The development burden is on the plugin developer, not the pipeline developer. Nextflow also handles installing and updating plugins on your behalf.
 
 ### Takeaway
 
@@ -624,7 +624,7 @@ Edit the file to replace the `sayHello` function with our three new functions:
 
     **`@Function`** - The key annotation that makes a method available as a Nextflow function.
 
-    **`String reverseGreeting(String greeting)`** - A method that takes a String parameter and returns a String. In Groovy, you can often omit `return` - the last expression is returned automatically.
+    **`String reverseGreeting(String greeting)`** - A method that takes a String parameter and returns a String. In Groovy, you can often omit `return`; the last expression is returned automatically.
 
     **`String name = 'World'`** - A parameter with a default value, just like in Python.
 
@@ -692,15 +692,15 @@ Let's build and test our plugin.
     In those languages, you write code and run it directly.
 
     Nextflow plugins are written in Groovy, which runs on the Java Virtual Machine (JVM).
-    JVM languages need to be **compiled** before they can run - the human-readable source code is converted into bytecode that the JVM can execute.
+    JVM languages need to be **compiled** before they can run. The human-readable source code is converted into bytecode that the JVM can execute.
 
     The build process:
 
     1. **Compiles** your Groovy code into JVM bytecode
-    2. **Packages** it into a JAR file (Java ARchive - like a ZIP of compiled code)
+    2. **Packages** it into a JAR file (Java ARchive, like a ZIP of compiled code)
     3. **Bundles** metadata so Nextflow knows how to load the plugin
 
-    Don't worry - the build tools handle all this automatically. You just run `make assemble` and let Gradle do the work.
+    The build tools handle all this automatically. Just run `make assemble` and let Gradle do the work.
 
 The plugin development cycle follows a simple pattern:
 
@@ -733,7 +733,7 @@ Or directly with the Gradle wrapper:
 
 ??? info "What is `./gradlew`?"
 
-    The `./gradlew` script is the **Gradle wrapper** - a small script included with the project that automatically downloads and runs the correct version of Gradle.
+    The `./gradlew` script is the **Gradle wrapper**, a small script included with the project that automatically downloads and runs the correct version of Gradle.
 
     This means you don't need Gradle installed on your system.
     The first time you run `./gradlew`, it will download Gradle (which may take a moment), then run your command.
@@ -800,9 +800,9 @@ def 'should reverse a greeting'() {   // (1)!
 }
 ```
 
-1. **Test name in quotes** - Describes what the test checks. Use plain English!
-2. **`given:` block** - Set up what you need for the test (create objects, prepare data)
-3. **`expect:` block** - The actual checks. Each line should be `true` for the test to pass
+1. **Test name in quotes**: Describes what the test checks. Use plain English!
+2. **`given:` block**: Set up what you need for the test (create objects, prepare data)
+3. **`expect:` block**: The actual checks. Each line should be `true` for the test to pass
 
 This structure makes tests readable: "Given an extension object, expect that `reverseGreeting('Hello')` equals `'olleH'`."
 
@@ -914,7 +914,7 @@ popd
     - **Import errors**: A class name is misspelled or the import statement is missing.
     - **Type errors**: You're passing the wrong type of data to a function.
 
-    Read the error message carefully - it often tells you exactly what's wrong and where.
+    Read the error message carefully. It often tells you exactly what's wrong and where.
     If you're stuck, compare your code character-by-character with the examples.
 
 ### 5.5. Install locally
@@ -1093,7 +1093,7 @@ The key changes:
 - **Lines 17-18**: Use `decorateGreeting()` **inside the process script** to transform the greeting before output
 - **Lines 28-30**: Use `reverseGreeting()` **in a `map` operation** to transform channel items in the workflow
 
-This demonstrates that plugin functions work in both contexts - inside process definitions (where they run on compute nodes) and in workflow channel operations (where they run on the Nextflow head process).
+Plugin functions work in both process scripts and workflow operations.
 
 ### 6.3. Run the pipeline
 
@@ -1126,15 +1126,15 @@ nextflow run main.nf
 
     The "Pipeline is starting!" and "Pipeline complete!" messages come from the `NfGreetingObserver` trace observer that was included in the generated plugin template.
 
-The `decorateGreeting()` function wraps each greeting with decorative markers, and `reverseGreeting()` shows the reversed strings - all powered by our plugin functions!
+The `decorateGreeting()` function wraps each greeting with decorative markers, and `reverseGreeting()` shows the reversed strings.
 
 ### Takeaway
 
 Import plugin functions with `include { function } from 'plugin/plugin-id'`.
 Once imported, you can use them anywhere:
 
-- **In process scripts** - like `decorateGreeting()` transforming data before output
-- **In workflow operations** - like `reverseGreeting()` inside a `map` closure
+- **In process scripts**: `decorateGreeting()` transforms data before output
+- **In workflow operations**: `reverseGreeting()` in a `map` closure
 
 ### What's next?
 
@@ -1217,15 +1217,15 @@ class TaskCounterObserver implements TraceObserver {
 
 Let's break down what this code does:
 
-- **Lines 4-6**: Import the classes we need - `TaskHandler` represents a running task, `TraceObserver` is the interface we implement, and `TraceRecord` contains task execution metadata (timing, resources, etc.)
+- **Lines 4-6**: Import the required classes: `TaskHandler` (running task), `TraceObserver` (interface we implement), and `TraceRecord` (task execution metadata)
 - **Line 11**: `@CompileStatic` improves performance by enabling static compilation
 - **Line 12**: `implements TraceObserver` means our class must provide implementations for the observer lifecycle methods
-- **Line 14**: We declare a private instance variable to track state across callbacks - each observer instance maintains its own count
+- **Line 14**: A private instance variable tracks state across callbacks
 - **Lines 16-19**: `onProcessComplete` is called every time a task finishes successfully. The `handler` parameter gives access to the task's process name, work directory, etc. The `trace` parameter contains execution metrics. We simply increment our counter and print the running total.
 - **Lines 21-23**: `onFlowComplete` is called once when the entire workflow finishes, giving us a chance to print the final summary
 
 Now we need to register this observer with the plugin.
-The `NfGreetingFactory` creates observers - take a look at it:
+The `NfGreetingFactory` creates observers. Take a look at it:
 
 ```bash
 cat nf-greeting/src/main/groovy/training/plugin/NfGreetingFactory.groovy
@@ -1703,7 +1703,7 @@ Let's briefly cover some advanced extension types, then look at how to share you
 ## 9. Advanced extension types
 
 Some extension types require significant infrastructure or deep Nextflow knowledge to implement.
-This section provides a conceptual overview - for implementation details, see the [Nextflow plugin documentation](https://www.nextflow.io/docs/latest/plugins/developing-plugins.html).
+This section provides a conceptual overview. For implementation details, see the [Nextflow plugin documentation](https://www.nextflow.io/docs/latest/plugins/developing-plugins.html).
 
 ### 9.1. Executors
 
@@ -1737,7 +1737,7 @@ Once your plugin is working locally, you have two options for sharing it:
 
 | Distribution method  | Use case                                           | Approval required          |
 | -------------------- | -------------------------------------------------- | -------------------------- |
-| **Public registry**  | Open source plugins for the community              | Yes - name must be claimed |
+| **Public registry**  | Open source plugins for the community              | Yes (name must be claimed) |
 | **Internal hosting** | Private/proprietary plugins within an organization | No                         |
 
 ### 10.1. Publishing to the public registry
@@ -1757,7 +1757,7 @@ Before publishing, claim your plugin name in the registry:
 2. Sign in with your GitHub account
 3. Claim your plugin name (e.g., `nf-greeting`)
 
-You can claim a name before the plugin exists - this reserves it for you.
+You can claim a name before the plugin exists to reserve it.
 
 #### Configure API credentials
 
@@ -1832,7 +1832,7 @@ This is useful for proprietary plugins, plugins under development, or plugins th
 !!! note "What internal distribution provides"
 
     Internal distribution uses a simple `plugins.json` file that tells Nextflow where to download plugin ZIP files.
-    This is **not** a full self-hosted registry - there's no web UI, search, or automatic updates.
+    This is **not** a full self-hosted registry (no web UI, search, or automatic updates).
     A full self-hosted registry solution may be available in the future.
 
 #### Build the plugin ZIP
@@ -1993,18 +1993,18 @@ workflow {
 
 **Official documentation:**
 
-- [Using plugins](https://www.nextflow.io/docs/latest/plugins/plugins.html) - comprehensive guide to installing and configuring plugins
-- [Developing plugins](https://www.nextflow.io/docs/latest/plugins/developing-plugins.html) - detailed plugin development reference
+- [Using plugins](https://www.nextflow.io/docs/latest/plugins/plugins.html): comprehensive guide to installing and configuring plugins
+- [Developing plugins](https://www.nextflow.io/docs/latest/plugins/developing-plugins.html): detailed plugin development reference
 
 **Plugin discovery:**
 
-- [Nextflow Plugin Registry](https://registry.nextflow.io/) - browse and discover available plugins
-- [Plugin registry docs](https://www.nextflow.io/docs/latest/plugins/plugin-registry.html) - registry documentation
+- [Nextflow Plugin Registry](https://registry.nextflow.io/): browse and discover available plugins
+- [Plugin registry docs](https://www.nextflow.io/docs/latest/plugins/plugin-registry.html): registry documentation
 
 **Examples and references:**
 
-- [nf-hello](https://github.com/nextflow-io/nf-hello) - simple example plugin (great starting point)
-- [Nextflow plugins repository](https://github.com/nextflow-io/plugins) - collection of official plugins for reference
+- [nf-hello](https://github.com/nextflow-io/nf-hello): simple example plugin (great starting point)
+- [Nextflow plugins repository](https://github.com/nextflow-io/plugins): collection of official plugins for reference
 
 ---
 
