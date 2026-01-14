@@ -166,7 +166,7 @@ workflow {
 ```
 
 The workflow parses the CSV and creates `[meta, greeting]` tuples where `meta` is a map containing both the greeting ID and language.
-This pattern is standard in nf-core pipelines and makes metadata easy to access throughout the workflow.
+The `publishDir` closures use this metadata to route outputs into language-specific subdirectories.
 
 ### 1.2. Run the workflow
 
