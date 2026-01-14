@@ -202,7 +202,35 @@ process {
 
 Let's break down each part.
 
-### 3.2. Executor settings
+### 3.2. AWS authentication
+
+Nextflow needs AWS credentials to submit jobs and access S3.
+It uses the standard AWS credential chain, so any of these methods work:
+
+**Option 1: Environment variables**
+
+```bash
+export AWS_ACCESS_KEY_ID=your-access-key
+export AWS_SECRET_ACCESS_KEY=your-secret-key
+export AWS_DEFAULT_REGION=us-east-1
+
+nextflow run main.nf -profile aws
+```
+
+**Option 2: AWS credentials file**
+
+If you've configured the AWS CLI (`aws configure`), Nextflow will use credentials from `~/.aws/credentials` automatically.
+
+**Option 3: IAM instance profile**
+
+If running Nextflow on an EC2 instance, it can use the instance's IAM role - no explicit credentials needed.
+
+!!! tip "Separate credentials for Nextflow vs jobs"
+
+    Nextflow needs credentials to *submit* jobs and access S3 from where you run it.
+    The `jobRole` setting (covered below) controls what permissions the *jobs themselves* have when they run on Batch.
+
+### 3.3. Executor settings
 
 ```groovy
 executor {
@@ -214,7 +242,7 @@ executor {
 - `name = 'awsbatch'`: Tells Nextflow to use the AWS Batch executor
 - `queueName`: The AWS Batch job queue to submit jobs to
 
-### 3.3. AWS settings
+### 3.4. AWS settings
 
 ```groovy
 aws {
@@ -228,7 +256,7 @@ aws {
 - `region`: The AWS region where your Batch infrastructure lives
 - `jobRole`: IAM role that jobs assume (needs S3 access at minimum)
 
-### 3.4. Work directory
+### 3.5. Work directory
 
 ```groovy
 workDir = 's3://my-bucket/work'
@@ -243,7 +271,7 @@ S3 provides this.
     Unlike local execution, you cannot use a local work directory with AWS Batch.
     Jobs run on different machines and need shared storage.
 
-### 3.5. Container requirement
+### 3.6. Container requirement
 
 ```groovy
 process {
@@ -254,7 +282,7 @@ process {
 AWS Batch runs everything in containers.
 Every process must have a container specified, either globally or per-process.
 
-### 3.6. Examine the example config
+### 3.7. Examine the example config
 
 Look at the AWS config file in the example:
 
