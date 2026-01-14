@@ -88,7 +88,18 @@ Perform the following checks **only on files within the determined scope**:
    - This checks that highlighted lines match the intended content
    - Particularly important for Before/After comparison blocks
 
-7. **Deep Lesson Review** (when reviewing a specific lesson file)
+7. **Check Writing Style**
+
+   - Search for LLM-style patterns that should be avoided:
+     - `Let's` or `let's` at start of sentences
+     - `Remember when` or `Remember that` callbacks
+     - `Don't worry` reassurances
+     - `worth mentioning` or `important to note` padding
+     - Exclamation marks used for emphasis (not in code/output)
+   - Check for em-dash elaborations (space-hyphen-space followed by lowercase) that could be periods
+   - Flag any issues found for manual review
+
+8. **Deep Lesson Review** (when reviewing a specific lesson file)
 
    If the user asks to review a specific lesson, perform this comprehensive checklist:
 
@@ -143,6 +154,15 @@ Perform the following checks **only on files within the determined scope**:
    - [ ] Examples can be run as shown
    - [ ] Output examples match what code produces
 
+   g. **Writing Style** (see CLAUDE.md for full guidelines):
+
+   - [ ] No LLM-style interjections ("Let's", "Remember when...?", "Don't worry")
+   - [ ] No exclamation-based emphasis ("Much faster!", "So powerful!")
+   - [ ] Em-dash elaborations replaced with periods or semicolons
+   - [ ] List explanations use colons, not hyphens
+   - [ ] Single clear explanation per concept (not multiple phrasings)
+   - [ ] Professional, direct tone throughout
+
 ## Output Format
 
 Provide a structured report. For automated validation checks:
@@ -177,6 +197,12 @@ Found 2 orphaned markdown files:
 ✓ All admonitions properly formatted
 [or list of issues]
 
+## Writing Style
+✓ No LLM-style patterns found
+[or list of issues with file:line, e.g.:]
+- docs/example.md:42: "Let's see how..." -> rephrase
+- docs/example.md:87: em-dash elaboration -> use period
+
 ## Summary
 [Overall assessment and recommended actions]
 ```
@@ -203,6 +229,9 @@ For deep lesson reviews, add:
 
 ### Examples & Code
 [Assessment of code quality]
+
+### Writing Style
+[Assessment of tone and language patterns]
 
 ### Overall Assessment
 [Summary with severity-organized issues and recommendations]
