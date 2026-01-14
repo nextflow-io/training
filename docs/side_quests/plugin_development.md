@@ -124,12 +124,12 @@ Before diving into plugin usage and development, let's understand what plugins a
 Nextflow's plugin system is built on [PF4J](https://pf4j.org/), a lightweight plugin framework for Java.
 Plugins can extend Nextflow in several ways:
 
-| Extension Type  | Purpose                                  | Example                    |
-| --------------- | ---------------------------------------- | -------------------------- |
-| Functions       | Custom functions callable from workflows | `samplesheetToList()`      |
-| Executors       | Custom task execution backends           | AWS Batch, Kubernetes      |
-| Filesystems     | Custom storage backends                  | S3, Azure Blob             |
-| Trace Observers | Monitor workflow execution               | Custom logging, metrics    |
+| Extension Type  | Purpose                                  | Example                 |
+| --------------- | ---------------------------------------- | ----------------------- |
+| Functions       | Custom functions callable from workflows | `samplesheetToList()`   |
+| Executors       | Custom task execution backends           | AWS Batch, Kubernetes   |
+| Filesystems     | Custom storage backends                  | S3, Azure Blob          |
+| Trace Observers | Monitor workflow execution               | Custom logging, metrics |
 
 <!-- TODO: Add Excalidraw diagram showing extension types
      File: docs/side_quests/img/plugin-extension-types.excalidraw.svg
@@ -284,7 +284,7 @@ validation {
 Each plugin documents its configuration options.
 Check the plugin's documentation for available settings.
 
-### 2.7. Try it: Using the nf-hello plugin
+### 2.6. Try it: Using the nf-hello plugin
 
 The [nf-hello](https://github.com/nextflow-io/nf-hello) plugin provides a `randomString` function that generates random strings.
 Let's use it in a workflow.
