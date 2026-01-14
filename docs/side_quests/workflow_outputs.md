@@ -191,22 +191,37 @@ nextflow run main.nf
 Check the results directory:
 
 ```bash
-find results -type f
+tree results
 ```
 
 ??? example "Output"
 
     ```console
-    results/greetings/English/Hello-output.txt
-    results/greetings/French/Bonjour-output.txt
-    results/greetings/German/Hallo-output.txt
-    results/greetings/Italian/Ciao-output.txt
-    results/greetings/Spanish/Holà-output.txt
-    results/uppercase/English/UPPER-Hello-output.txt
-    results/uppercase/French/UPPER-Bonjour-output.txt
-    results/uppercase/German/UPPER-Hallo-output.txt
-    results/uppercase/Italian/UPPER-Ciao-output.txt
-    results/uppercase/Spanish/UPPER-Holà-output.txt
+    results
+    ├── greetings
+    │   ├── English
+    │   │   └── Hello-output.txt
+    │   ├── French
+    │   │   └── Bonjour-output.txt
+    │   ├── German
+    │   │   └── Hallo-output.txt
+    │   ├── Italian
+    │   │   └── Ciao-output.txt
+    │   └── Spanish
+    │       └── Holà-output.txt
+    └── uppercase
+        ├── English
+        │   └── UPPER-Hello-output.txt
+        ├── French
+        │   └── UPPER-Bonjour-output.txt
+        ├── German
+        │   └── UPPER-Hallo-output.txt
+        ├── Italian
+        │   └── UPPER-Ciao-output.txt
+        └── Spanish
+            └── UPPER-Holà-output.txt
+
+    12 directories, 10 files
     ```
 
 The outputs are organized by language thanks to the `publishDir` closures accessing `meta.language`.
