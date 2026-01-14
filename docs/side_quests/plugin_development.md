@@ -39,7 +39,7 @@ Before taking on this side quest, you should:
 
 For plugin development sections (3 onwards):
 
-- Have Java 17 or later installed (check with `java -version`)
+- Have Java 21 or later installed (check with `java -version`)
 - Have basic familiarity with object-oriented programming concepts
 
 !!! note "Development environment"
@@ -57,7 +57,7 @@ For plugin development sections (3 onwards):
 
     **Gradle** is a build tool that compiles code, runs tests, and packages software. You don't need to understand Gradle deeply; we'll use simple commands like `./gradlew build`.
 
-    The good news: you don't need to be an expert in any of these. We'll explain the relevant concepts as we go.
+    The good news: you don't need to be an expert in any of these. Many successful Nextflow plugin authors come from bioinformatics backgrounds, not Java development. We'll explain the relevant concepts as we go, and the plugin template handles most of the complexity for you.
 
 ---
 
@@ -77,7 +77,7 @@ Check that Java is available:
 java -version
 ```
 
-You should see Java 17 or later.
+You should see Java 21 or later.
 
 ### 0.3. Move into the project directory
 
@@ -181,6 +181,14 @@ Let's see how to discover, install, and use them.
     Many powerful features are available through plugins, such as input validation with nf-schema.
     If plugin development seems daunting, focus on mastering this section first.
 
+!!! info "Local vs published plugins"
+
+    When you add a plugin to your `nextflow.config`, Nextflow automatically downloads it from the [plugin registry](https://registry.nextflow.io/) the first time you run your pipeline.
+    The plugin is then cached locally in `$NXF_HOME/plugins/` (typically `~/.nextflow/plugins/`).
+
+    Later in this tutorial (section 3 onwards), we'll develop our own plugin and install it locally for testing.
+    Section 10 covers how to publish plugins for others to use.
+
 !!! info "Official documentation"
 
     This section covers the essentials of using plugins.
@@ -207,6 +215,16 @@ Each plugin page in the registry shows:
 ![The nf-hello plugin page on registry.nextflow.io](img/plugin-registry-nf-hello.png)
 
 You can also search GitHub for repositories with the `nf-` prefix, as most Nextflow plugins follow this naming convention.
+
+??? exercise "Explore the registry"
+
+    Take a few minutes to browse the [Nextflow Plugin Registry](https://registry.nextflow.io/).
+
+    1. Find a plugin that provides Slack notifications
+    2. Look at nf-schema - how many downloads does it have?
+    3. Find a plugin that was released in the last month
+
+    This familiarity will help you discover useful plugins for your own pipelines.
 
 ### 2.2. Installing plugins
 
@@ -289,6 +307,22 @@ Check the plugin's documentation for available settings.
 The [nf-hello](https://github.com/nextflow-io/nf-hello) plugin provides a `randomString` function that generates random strings.
 Let's use it in a workflow.
 
+#### See the starting point
+
+First, look at what we're working with. The `random_id_example.nf` file contains a workflow with an embedded `randomString` function:
+
+```bash
+cat random_id_example.nf
+```
+
+Notice the function is defined locally in the file. Run it to see how it works:
+
+```bash
+nextflow run random_id_example.nf
+```
+
+This works, but the function is trapped in this file. Let's replace it with the plugin version.
+
 #### Configure the plugin
 
 First, add the plugin to your `nextflow.config`:
@@ -367,7 +401,35 @@ The first argument is the plugin name, and the second is your organization name 
 
     You can also create plugin projects manually or use the [nf-hello template](https://github.com/nextflow-io/nf-hello) on GitHub as a starting point.
 
-### 3.2. Examine the generated project
+### 3.2. Understand the plugin architecture
+
+Before diving into the generated files, let's understand how the pieces fit together:
+
+```mermaid
+graph TD
+    A[NfGreetingPlugin] -->|registers| B[NfGreetingExtension]
+    A -->|registers| C[NfGreetingFactory]
+    C -->|creates| D[NfGreetingObserver]
+
+    B -->|provides| E["@Function methods<br/>(callable from workflows)"]
+    D -->|hooks into| F["Lifecycle events<br/>(onFlowCreate, onProcessComplete, etc.)"]
+
+    style A fill:#e1f5fe
+    style B fill:#fff3e0
+    style C fill:#fff3e0
+    style D fill:#fff3e0
+```
+
+| Class                  | Purpose                                              |
+| ---------------------- | ---------------------------------------------------- |
+| `NfGreetingPlugin`     | Entry point that registers all extension points      |
+| `NfGreetingExtension`  | Contains `@Function` methods callable from workflows |
+| `NfGreetingFactory`    | Creates trace observer instances                     |
+| `NfGreetingObserver`   | Hooks into workflow lifecycle events                 |
+
+This separation keeps concerns organized: functions go in the Extension, event handling goes in Observers created by the Factory.
+
+### 3.3. Examine the generated project
 
 Change into the plugin directory:
 
@@ -413,7 +475,7 @@ You should see:
 11 directories, 13 files
 ```
 
-### 3.3. Understand settings.gradle
+### 3.4. Understand settings.gradle
 
 ```bash
 cat settings.gradle
@@ -425,7 +487,7 @@ rootProject.name = 'nf-greeting'
 
 This simply sets the project name.
 
-### 3.4. Understand build.gradle
+### 3.5. Understand build.gradle
 
 ```bash
 cat build.gradle
@@ -489,41 +551,154 @@ Open the extension file:
 cat src/main/groovy/training/plugin/NfGreetingExtension.groovy
 ```
 
-The template includes sample functions. Let's replace them with our greeting functions.
+The template includes a sample `sayHello` function.
+We'll replace it with our own functions, adding them one at a time to understand the pattern.
 
-### 4.2. Create our functions
+??? info "Understanding the Groovy syntax"
 
-The template includes a simple `sayHello` function.
-Let's replace it with our greeting manipulation functions.
+    If the code looks unfamiliar, here's a breakdown of the key elements:
 
-Edit the file to replace the `sayHello` function with our three new functions:
+    **`package training.plugin`** - Declares which package (folder structure) this code belongs to. This must match the directory structure.
+
+    **`import ...`** - Brings in code from other packages, similar to Python's `import` or R's `library()`.
+
+    **`@CompileStatic`** - An annotation (marked with `@`) that tells Groovy to check types at compile time. This catches errors earlier.
+
+    **`class NfGreetingExtension extends PluginExtensionPoint`** - Defines a class that inherits from `PluginExtensionPoint`. The `extends` keyword means "this class is a type of that class."
+
+    **`@Override`** - Indicates we're replacing a method from the parent class.
+
+    **`@Function`** - The key annotation that makes a method available as a Nextflow function.
+
+    **`String reverseGreeting(String greeting)`** - A method that takes a String parameter and returns a String. In Groovy, you can often omit `return`; the last expression is returned automatically.
+
+### 4.2. Add the first function: reverseGreeting
+
+Let's replace the template's `sayHello` function with our first custom function that reverses a greeting string.
+
+Edit `src/main/groovy/training/plugin/NfGreetingExtension.groovy` to replace the `sayHello` method:
 
 === "After"
 
-    ```groovy title="src/main/groovy/training/plugin/NfGreetingExtension.groovy" hl_lines="31-53" linenums="1"
-    /*
-     * Copyright 2025, Seqera Labs
-     *
-     * Licensed under the Apache License, Version 2.0 (the "License");
-     * you may not use this file except in compliance with the License.
-     * You may obtain a copy of the License at
-     *
-     *     http://www.apache.org/licenses/LICENSE-2.0
-     *
-     * Unless required by applicable law or agreed to in writing, software
-     * distributed under the License is distributed on an "AS IS" BASIS,
-     * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-     * See the License for the specific language governing permissions and
-     * limitations under the License.
+    ```groovy title="NfGreetingExtension.groovy" linenums="24" hl_lines="8-14"
+    @CompileStatic
+    class NfGreetingExtension extends PluginExtensionPoint {
+
+        @Override
+        protected void init(Session session) {
+        }
+
+        /**
+         * Reverse a greeting string
+         */
+        @Function
+        String reverseGreeting(String greeting) {
+            return greeting.reverse()
+        }
+
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="NfGreetingExtension.groovy" linenums="24" hl_lines="12-20"
+    /**
+     * Implements a custom function which can be imported by
+     * Nextflow scripts.
      */
+    @CompileStatic
+    class NfGreetingExtension extends PluginExtensionPoint {
 
-    package training.plugin
+        @Override
+        protected void init(Session session) {
+        }
 
-    import groovy.transform.CompileStatic
-    import nextflow.Session
-    import nextflow.plugin.extension.Function
-    import nextflow.plugin.extension.PluginExtensionPoint
+        /**
+         * Say hello to the given target.
+         *
+         * @param target
+         */
+        @Function
+        void sayHello(String target) {
+            println "Hello, ${target}!"
+        }
 
+    }
+    ```
+
+The key parts of this function:
+
+- **`@Function`** - This annotation makes the method callable from Nextflow workflows
+- **`String reverseGreeting(String greeting)`** - Takes a String, returns a String
+- **`greeting.reverse()`** - Groovy's built-in string reversal method
+
+### 4.3. Add the second function: decorateGreeting
+
+Now add a second function that wraps a greeting with decorative markers.
+
+Add this method after `reverseGreeting`, before the closing brace of the class:
+
+=== "After"
+
+    ```groovy title="NfGreetingExtension.groovy" linenums="24" hl_lines="16-22"
+    @CompileStatic
+    class NfGreetingExtension extends PluginExtensionPoint {
+
+        @Override
+        protected void init(Session session) {
+        }
+
+        /**
+         * Reverse a greeting string
+         */
+        @Function
+        String reverseGreeting(String greeting) {
+            return greeting.reverse()
+        }
+
+        /**
+         * Decorate a greeting with celebratory markers
+         */
+        @Function
+        String decorateGreeting(String greeting) {
+            return "*** ${greeting} ***"
+        }
+
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="NfGreetingExtension.groovy" linenums="24"
+    @CompileStatic
+    class NfGreetingExtension extends PluginExtensionPoint {
+
+        @Override
+        protected void init(Session session) {
+        }
+
+        /**
+         * Reverse a greeting string
+         */
+        @Function
+        String reverseGreeting(String greeting) {
+            return greeting.reverse()
+        }
+
+    }
+    ```
+
+This function uses Groovy string interpolation (`"*** ${greeting} ***"`) to embed the greeting variable inside a string.
+
+### 4.4. Add the third function: friendlyGreeting
+
+Finally, add a function that demonstrates default parameter values.
+
+Add this method after `decorateGreeting`:
+
+=== "After"
+
+    ```groovy title="NfGreetingExtension.groovy" linenums="24" hl_lines="24-30"
     @CompileStatic
     class NfGreetingExtension extends PluginExtensionPoint {
 
@@ -560,34 +735,7 @@ Edit the file to replace the `sayHello` function with our three new functions:
 
 === "Before"
 
-    ```groovy title="src/main/groovy/training/plugin/NfGreetingExtension.groovy" hl_lines="35-43" linenums="1"
-    /*
-     * Copyright 2025, Seqera Labs
-     *
-     * Licensed under the Apache License, Version 2.0 (the "License");
-     * you may not use this file except in compliance with the License.
-     * You may obtain a copy of the License at
-     *
-     *     http://www.apache.org/licenses/LICENSE-2.0
-     *
-     * Unless required by applicable law or agreed to in writing, software
-     * distributed under the License is distributed on an "AS IS" BASIS,
-     * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-     * See the License for the specific language governing permissions and
-     * limitations under the License.
-     */
-
-    package training.plugin
-
-    import groovy.transform.CompileStatic
-    import nextflow.Session
-    import nextflow.plugin.extension.Function
-    import nextflow.plugin.extension.PluginExtensionPoint
-
-    /**
-     * Implements a custom function which can be imported by
-     * Nextflow scripts.
-     */
+    ```groovy title="NfGreetingExtension.groovy" linenums="24"
     @CompileStatic
     class NfGreetingExtension extends PluginExtensionPoint {
 
@@ -596,61 +744,36 @@ Edit the file to replace the `sayHello` function with our three new functions:
         }
 
         /**
-         * Say hello to the given target.
-         *
-         * @param target
+         * Reverse a greeting string
          */
         @Function
-        void sayHello(String target) {
-            println "Hello, ${target}!"
+        String reverseGreeting(String greeting) {
+            return greeting.reverse()
+        }
+
+        /**
+         * Decorate a greeting with celebratory markers
+         */
+        @Function
+        String decorateGreeting(String greeting) {
+            return "*** ${greeting} ***"
         }
 
     }
     ```
 
-??? info "Understanding the Groovy syntax"
+The `String name = 'World'` syntax provides a default value, just like in Python.
+Users can call `friendlyGreeting('Hello')` or `friendlyGreeting('Hello', 'Alice')`.
 
-    If this code looks unfamiliar, here's a breakdown of the key elements:
+### 4.5. Understanding the @Function annotation
 
-    **`package training.plugin`** - Declares which package (folder structure) this code belongs to. This must match the directory structure.
-
-    **`import ...`** - Brings in code from other packages, similar to Python's `import` or R's `library()`.
-
-    **`@CompileStatic`** - An annotation (marked with `@`) that tells Groovy to check types at compile time. This catches errors earlier.
-
-    **`class NfGreetingExtension extends PluginExtensionPoint`** - Defines a class that inherits from `PluginExtensionPoint`. The `extends` keyword means "this class is a type of that class."
-
-    **`@Override`** - Indicates we're replacing a method from the parent class.
-
-    **`@Function`** - The key annotation that makes a method available as a Nextflow function.
-
-    **`String reverseGreeting(String greeting)`** - A method that takes a String parameter and returns a String. In Groovy, you can often omit `return`; the last expression is returned automatically.
-
-    **`String name = 'World'`** - A parameter with a default value, just like in Python.
-
-### 4.3. Understanding the @Function annotation
-
-The `@Function` annotation marks a method as callable from Nextflow workflows:
-
-```groovy
-@Function
-public String reverseGreeting(String greeting) {
-    return greeting.reverse()
-}
-```
+The `@Function` annotation marks a method as callable from Nextflow workflows.
 
 Key requirements:
 
-- **Methods must be public**: In Groovy, methods are public by default, so the `public` keyword is optional but shown here for clarity
+- **Methods must be public**: In Groovy, methods are public by default
 - **Return type**: Can be any serializable type (`String`, `List`, `Map`, etc.)
-- **Parameters**: Can have any number of parameters, including default values:
-
-```groovy
-@Function
-public String decorateGreeting(String greeting, String prefix = ">>> ", String suffix = " <<<") {
-    return "${prefix}${greeting}${suffix}"
-}
-```
+- **Parameters**: Can have any number of parameters, including default values
 
 Once defined, functions are available via the `include` statement:
 
@@ -658,7 +781,7 @@ Once defined, functions are available via the `include` statement:
 include { reverseGreeting; decorateGreeting } from 'plugin/nf-greeting'
 ```
 
-### 4.4. The init() method
+### 4.6. The init() method
 
 The `init()` method is called when the plugin loads:
 
@@ -913,9 +1036,19 @@ popd
     - **Syntax errors**: A missing bracket, quote, or semicolon. The error message usually includes a line number.
     - **Import errors**: A class name is misspelled or the import statement is missing.
     - **Type errors**: You're passing the wrong type of data to a function.
+    - **"cannot find symbol"**: You're using a variable that wasn't declared. Check that you've added the instance variable (e.g., `private String prefix`) before using it.
 
     Read the error message carefully. It often tells you exactly what's wrong and where.
     If you're stuck, compare your code character-by-character with the examples.
+
+??? warning "Common runtime issues"
+
+    Even if the build succeeds, you might encounter issues when running:
+
+    - **"Plugin not found"**: Did you run `make install`? The plugin must be installed locally before Nextflow can use it.
+    - **"Unknown function"**: Check that you've imported the function with `include { functionName } from 'plugin/nf-greeting'`.
+    - **Wrong directory**: Make sure you're in the right directory. Use `pwd` to check, and `cd ..` or `cd nf-greeting` as needed.
+    - **IDE showing errors**: The VS Code Nextflow extension may show warnings for plugin imports. If the build succeeds and Nextflow runs correctly, you can ignore these.
 
 ### 5.5. Install locally
 
@@ -925,7 +1058,18 @@ To use the plugin with Nextflow, install it to your local plugins directory:
 make install
 ```
 
-This copies the plugin to `~/.nextflow/plugins/`.
+??? example "Expected output"
+
+    ```console
+    > Task :installPlugin
+    Plugin nf-greeting@0.1.0 installed to /home/codespace/.nextflow/plugins
+
+    BUILD SUCCESSFUL in 1s
+    ```
+
+    The exact path will vary depending on your environment, but you should see "Plugin nf-greeting@0.1.0 installed" and "BUILD SUCCESSFUL".
+
+This copies the plugin to `$NXF_HOME/plugins/` (typically `~/.nextflow/plugins/`).
 
 ### Takeaway
 
@@ -948,11 +1092,11 @@ Go back to the pipeline directory:
 cd ..
 ```
 
-Edit `nextflow.config` to add the plugins block with your plugin and version:
+Edit `nextflow.config` to replace the `nf-hello` plugin with our new `nf-greeting` plugin:
 
 === "After"
 
-    ```groovy title="nextflow.config" hl_lines="2-4"
+    ```groovy title="nextflow.config" hl_lines="3"
     // Configuration for plugin development exercises
     plugins {
         id 'nf-greeting@0.1.0'
@@ -961,9 +1105,19 @@ Edit `nextflow.config` to add the plugins block with your plugin and version:
 
 === "Before"
 
-    ```groovy title="nextflow.config"
+    ```groovy title="nextflow.config" hl_lines="3"
     // Configuration for plugin development exercises
+    plugins {
+        id 'nf-hello@0.5.0'
+    }
     ```
+
+We're replacing `nf-hello` with `nf-greeting` because we want to use our own plugin's functions instead.
+
+!!! note "What about random_id_example.nf?"
+
+    The `random_id_example.nf` file we modified earlier still imports from `nf-hello`, so it won't work with this config change.
+    That's fine - we won't use it again. We'll work with `main.nf` from here on.
 
 !!! note "Version required for local plugins"
 
@@ -973,7 +1127,24 @@ Edit `nextflow.config` to add the plugins block with your plugin and version:
 ### 6.2. Import and use functions
 
 We provided a simple greeting pipeline in `main.nf` that reads greetings from a CSV file and writes them to output files.
-Take a quick look at it:
+
+#### See the starting point
+
+First, run the pipeline as-is to see what we're working with:
+
+```bash
+nextflow run main.nf
+```
+
+```console title="Output"
+Output: Hello
+Output: Bonjour
+Output: Holà
+Output: Ciao
+Output: Hallo
+```
+
+Now let's look at the code:
 
 ```bash
 cat main.nf
@@ -1002,20 +1173,6 @@ workflow {
     SAY_HELLO(greeting_ch)
     SAY_HELLO.out.view { result -> "Output: ${result.trim()}" }
 }
-```
-
-Run it to see the basic output:
-
-```bash
-nextflow run main.nf
-```
-
-```console title="Output"
-Output: Hello
-Output: Bonjour
-Output: Holà
-Output: Ciao
-Output: Hallo
 ```
 
 Now let's enhance it to use our plugin functions.
@@ -1176,7 +1333,9 @@ This enables powerful use cases like custom reports, Slack notifications, or met
 ### 7.2. Try it: Add a task counter observer
 
 Rather than modifying the existing observer, let's create a new one that counts completed tasks.
-This reinforces the concepts while doing something different.
+We'll build it up progressively - first a minimal version, then add features.
+
+#### Step 1: Create a minimal observer
 
 Create a new file:
 
@@ -1184,7 +1343,7 @@ Create a new file:
 touch nf-greeting/src/main/groovy/training/plugin/TaskCounterObserver.groovy
 ```
 
-Add the following content:
+Start with the simplest possible observer - just print a message when any task completes:
 
 ```groovy title="nf-greeting/src/main/groovy/training/plugin/TaskCounterObserver.groovy" linenums="1"
 package training.plugin
@@ -1195,36 +1354,26 @@ import nextflow.trace.TraceObserver
 import nextflow.trace.TraceRecord
 
 /**
- * Observer that counts completed tasks
+ * Observer that responds to task completion
  */
 @CompileStatic
 class TaskCounterObserver implements TraceObserver {
 
-    private int taskCount = 0
-
     @Override
     void onProcessComplete(TaskHandler handler, TraceRecord trace) {
-        taskCount++
-        println "📊 Tasks completed so far: ${taskCount}"
-    }
-
-    @Override
-    void onFlowComplete() {
-        println "📈 Final task count: ${taskCount}"
+        println "✓ Task completed!"
     }
 }
 ```
 
-Let's break down what this code does:
+This is the minimum needed:
 
-- **Lines 4-6**: Import the required classes: `TaskHandler` (running task), `TraceObserver` (interface we implement), and `TraceRecord` (task execution metadata)
-- **Line 11**: `@CompileStatic` improves performance by enabling static compilation
-- **Line 12**: `implements TraceObserver` means our class must provide implementations for the observer lifecycle methods
-- **Line 14**: A private instance variable tracks state across callbacks
-- **Lines 16-19**: `onProcessComplete` is called every time a task finishes successfully. The `handler` parameter gives access to the task's process name, work directory, etc. The `trace` parameter contains execution metrics. We simply increment our counter and print the running total.
-- **Lines 21-23**: `onFlowComplete` is called once when the entire workflow finishes, giving us a chance to print the final summary
+- Import the required classes (`TraceObserver`, `TaskHandler`, `TraceRecord`)
+- Create a class that `implements TraceObserver`
+- Override `onProcessComplete` to do something when a task finishes
 
-Now we need to register this observer with the plugin.
+#### Step 2: Register the observer
+
 The `NfGreetingFactory` creates observers. Take a look at it:
 
 ```bash
@@ -1270,15 +1419,69 @@ Edit `NfGreetingFactory.groovy` to add our new observer:
     We've replaced the Java-style `List.<TraceObserver>of(...)` with Groovy's simpler list literal `[...]`.
     Both return a `Collection`, but the Groovy syntax is more readable when adding multiple items.
 
-Rebuild and reinstall:
+Build, install, and test:
 
 ```bash
 cd nf-greeting && make assemble && make install && cd ..
+nextflow run main.nf -ansi-log false
 ```
 
-Run the pipeline with `-ansi-log false` to see all observer output:
+You should see "✓ Task completed!" printed five times (once per task):
+
+```console title="Expected output (partial)"
+...
+[be/bd8e72] Submitted process > SAY_HELLO (2)
+✓ Task completed!
+[5b/d24c2b] Submitted process > SAY_HELLO (1)
+✓ Task completed!
+...
+```
+
+It works! Our observer is responding to task completion events. Now let's make it more useful.
+
+#### Step 3: Add counting logic
+
+Update `TaskCounterObserver.groovy` to track a count and report a summary:
+
+```groovy title="nf-greeting/src/main/groovy/training/plugin/TaskCounterObserver.groovy" linenums="1" hl_lines="14 17-18 22-24"
+package training.plugin
+
+import groovy.transform.CompileStatic
+import nextflow.processor.TaskHandler
+import nextflow.trace.TraceObserver
+import nextflow.trace.TraceRecord
+
+/**
+ * Observer that counts completed tasks
+ */
+@CompileStatic
+class TaskCounterObserver implements TraceObserver {
+
+    private int taskCount = 0
+
+    @Override
+    void onProcessComplete(TaskHandler handler, TraceRecord trace) {
+        taskCount++
+        println "📊 Tasks completed so far: ${taskCount}"
+    }
+
+    @Override
+    void onFlowComplete() {
+        println "📈 Final task count: ${taskCount}"
+    }
+}
+```
+
+The key additions:
+
+- **Line 14**: A private instance variable `taskCount` persists across method calls
+- **Lines 17-18**: Increment the counter and print the running total
+- **Lines 22-24**: `onFlowComplete` is called once when the workflow finishes - perfect for a summary
+
+Rebuild and test:
 
 ```bash
+cd nf-greeting && make assemble && make install && cd ..
 nextflow run main.nf -ansi-log false
 ```
 
@@ -1312,8 +1515,11 @@ Pipeline complete! 👋
 
 !!! tip "Why `-ansi-log false`?"
 
-    By default, Nextflow's ANSI progress display overwrites previous lines.
-    Using `-ansi-log false` shows all output sequentially, which is useful when testing observers that print messages during execution.
+    By default, Nextflow's ANSI progress display overwrites previous lines to show a clean, updating view of progress.
+    This means you'd only see the *final* task count, not the intermediate "Tasks completed so far" messages - they'd be overwritten as new output arrives.
+
+    Using `-ansi-log false` disables this behavior and shows all output sequentially, which is essential when testing observers that print messages during execution.
+    Without this flag, you might think your observer isn't working when it actually is - the output is just being overwritten.
 
 ### Takeaway
 
@@ -1347,11 +1553,63 @@ greeting {
 }
 ```
 
-!!! tip "Advanced: Type-safe configuration"
+??? info "Alternative: Type-safe configuration (advanced)"
 
-    For production plugins, you can define your configuration as a proper class with annotations.
+    For production plugins, you can define configuration as a proper class with annotations instead of using `session.config.navigate()`.
     This enables IDE autocompletion, linting support, and type checking.
-    See the [official documentation on custom config scopes](https://nextflow.io/docs/latest/developer/config-scopes.html) for details.
+
+    Here's what it looks like:
+
+    ```groovy title="GreetingConfig.groovy"
+    package training.plugin
+
+    import nextflow.config.dsl.ConfigOption
+    import nextflow.config.dsl.ConfigScope
+
+    @ConfigScope('greeting')
+    class GreetingConfig {
+
+        @ConfigOption
+        boolean enabled = true
+
+        @ConfigOption
+        String prefix = '***'
+
+        @ConfigOption
+        String suffix = '***'
+
+        @ConfigOption('taskCounter.verbose')
+        boolean taskCounterVerbose = true
+    }
+    ```
+
+    You'd then register this in `build.gradle`:
+
+    ```groovy
+    extensionPoints = [
+        'training.plugin.NfGreetingExtension',
+        'training.plugin.NfGreetingFactory',
+        'training.plugin.GreetingConfig'  // Add config class
+    ]
+    ```
+
+    And access it in your code:
+
+    ```groovy
+    @Override
+    protected void init(Session session) {
+        def config = session.configScope(GreetingConfig)
+        prefix = config.prefix
+        suffix = config.suffix
+    }
+    ```
+
+    **Benefits**: IDE autocompletion for users, type validation, cleaner code.
+
+    **Trade-off**: More boilerplate, requires understanding annotations.
+
+    The `session.config.navigate()` approach we use in this tutorial works well for most cases.
+    See the [official documentation](https://nextflow.io/docs/latest/developer/config-scopes.html) for full details.
 
 ### 8.2. Try it: Make the task counter configurable
 
@@ -1534,74 +1792,101 @@ Pipeline complete! 👋
 ### 8.3. Try it: Make the decorator configurable
 
 Let's make the `decorateGreeting` function use configurable prefix/suffix.
+We'll intentionally make a common mistake to understand how Groovy/Java handles variables.
 
-Edit `NfGreetingExtension.groovy`:
+#### Step 1: Add the configuration reading (this will fail!)
 
-=== "After"
+Edit `NfGreetingExtension.groovy` to read configuration in `init()` and use it in `decorateGreeting()`:
 
-    ```groovy title="NfGreetingExtension.groovy" linenums="35" hl_lines="4-5 9-11 27"
-    @CompileStatic
-    class NfGreetingExtension extends PluginExtensionPoint {
+```groovy title="NfGreetingExtension.groovy" linenums="35" hl_lines="5-6 17"
+@CompileStatic
+class NfGreetingExtension extends PluginExtensionPoint {
 
-        private String prefix = '***'
-        private String suffix = '***'
+    @Override
+    protected void init(Session session) {
+        // Read configuration with defaults
+        prefix = session.config.navigate('greeting.prefix', '***') as String
+        suffix = session.config.navigate('greeting.suffix', '***') as String
+    }
 
-        @Override
-        protected void init(Session session) {
-            // Read configuration with defaults
-            prefix = session.config.navigate('greeting.prefix', '***') as String
-            suffix = session.config.navigate('greeting.suffix', '***') as String
-        }
+    // ... other methods unchanged ...
 
-        /**
-        * Reverse a greeting string
-        */
-        @Function
-        String reverseGreeting(String greeting) {
-            return greeting.reverse()
-        }
+    /**
+    * Decorate a greeting with celebratory markers
+    */
+    @Function
+    String decorateGreeting(String greeting) {
+        return "${prefix} ${greeting} ${suffix}"
+    }
+```
 
-        /**
-        * Decorate a greeting with celebratory markers
-        */
-        @Function
-        String decorateGreeting(String greeting) {
-            return "${prefix} ${greeting} ${suffix}"
-        }
-    ```
-
-=== "Before"
-
-    ```groovy title="NfGreetingExtension.groovy" linenums="35"
-    @CompileStatic
-    class NfGreetingExtension extends PluginExtensionPoint {
-
-        @Override
-        protected void init(Session session) {
-        }
-
-        /**
-        * Reverse a greeting string
-        */
-        @Function
-        String reverseGreeting(String greeting) {
-            return greeting.reverse()
-        }
-
-        /**
-        * Decorate a greeting with celebratory markers
-        */
-        @Function
-        String decorateGreeting(String greeting) {
-            return "*** ${greeting} ***"
-        }
-    ```
-
-Rebuild and reinstall the plugin:
+Now try to build:
 
 ```bash
-cd nf-greeting && make assemble && make install && cd ..
+cd nf-greeting && make assemble
 ```
+
+#### Step 2: Observe the error
+
+The build fails with an error like:
+
+```console
+> Task :compileGroovy FAILED
+NfGreetingExtension.groovy: 30: [Static type checking] - The variable [prefix] is undeclared.
+ @ line 30, column 9.
+           prefix = session.config.navigate('greeting.prefix', '***') as String
+           ^
+
+NfGreetingExtension.groovy: 31: [Static type checking] - The variable [suffix] is undeclared.
+```
+
+**What went wrong?** In Groovy (and Java), you can't just use a variable - you must *declare* it first.
+We're trying to assign values to `prefix` and `suffix`, but we never told the class that these variables exist.
+
+#### Step 3: Fix by declaring instance variables
+
+Add the variable declarations at the top of the class, right after the opening brace:
+
+```groovy title="NfGreetingExtension.groovy" linenums="35" hl_lines="4-5"
+@CompileStatic
+class NfGreetingExtension extends PluginExtensionPoint {
+
+    private String prefix = '***'
+    private String suffix = '***'
+
+    @Override
+    protected void init(Session session) {
+        // Read configuration with defaults
+        prefix = session.config.navigate('greeting.prefix', '***') as String
+        suffix = session.config.navigate('greeting.suffix', '***') as String
+    }
+
+    // ... rest of class unchanged ...
+```
+
+The `private String prefix = '***'` line does two things:
+
+1. **Declares** a variable named `prefix` that can hold a String
+2. **Initializes** it with a default value of `'***'`
+
+Now the `init()` method can assign new values to these variables, and `decorateGreeting()` can read them.
+
+#### Step 4: Build again
+
+```bash
+make assemble
+```
+
+This time it should succeed with "BUILD SUCCESSFUL".
+
+```bash
+make install && cd ..
+```
+
+!!! tip "Learning from errors"
+
+    This "declare before use" pattern is fundamental to Java/Groovy but unfamiliar if you come from Python or R where variables spring into existence when you first assign them.
+    Experiencing this error once helps you recognize and fix it quickly in the future.
 
 To see the decorated output, update `main.nf` to change the output message:
 
@@ -1946,7 +2231,7 @@ Let's summarize what we've learned.
 
 ### Plugin development checklist
 
-- [ ] Java 17+ installed
+- [ ] Java 21+ installed
 - [ ] Create project with `nextflow plugin create <name> <org>`
 - [ ] Implement extension class with `@Function` methods
 - [ ] Optionally add `TraceObserver` implementations for workflow events
