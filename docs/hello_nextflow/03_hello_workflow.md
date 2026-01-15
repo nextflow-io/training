@@ -459,7 +459,7 @@ In the process block, make the following code change:
     ```groovy title="hello-workflow.nf" linenums="54"
         script:
         """
-        ??? > 'COLLECTED-output.txt'
+        cat ??? > 'COLLECTED-output.txt'
         """
     ```
 
@@ -741,7 +741,7 @@ In the process block, make the following code change:
 
     ```groovy title="hello-workflow.nf" linenums="46" hl_lines="2 6"
         output:
-            path "COLLECTED-output.txt"
+        path "COLLECTED-output.txt"
 
         script:
         """
@@ -781,7 +781,7 @@ In the pipeline parameters section, make the following code changes:
      * Pipeline parameters
      */
     params {
-        input: Path = 'greetings.csv'
+        input: Path = 'data/greetings.csv'
     }
     ```
 
@@ -884,7 +884,7 @@ Conveniently, Nextflow lets us add arbitrary code in the `script:` block of the 
 
 That means we can use Nextflow's built-in `size()` function to get the number of files in the `input_files` array, and write the result to file with an `echo` command.
 
-In the `collectGreetings` process block, make the following code change:
+In the `collectGreetings` process block, make the following code changes:
 
 === "After"
 
@@ -920,7 +920,7 @@ In the process block, make the following code change:
 
     ```groovy title="hello-workflow.nf" linenums="46" hl_lines="2 3"
         output:
-        path "COLLECTED-${batch_name}-output.txt" , emit: outfile
+        path "COLLECTED-${batch_name}-output.txt", emit: outfile
         path "${batch_name}-report.txt", emit: report
     ```
 

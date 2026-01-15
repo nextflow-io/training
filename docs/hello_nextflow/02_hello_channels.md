@@ -1313,4 +1313,5 @@ More generally, you have a basic understanding of how Nextflow uses **channels**
 ### What's next?
 
 Take a big break, you worked hard in this one!
+
 When you're ready, move on to [**Part 3: Hello Workflow**](./03_hello_workflow.md) to learn how to add more steps and connect them together into a proper workflow.
