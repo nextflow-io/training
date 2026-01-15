@@ -28,7 +28,7 @@ A **container** is a lightweight, standalone, executable unit of software create
 
 ## 0. Warmup: Run `hello-containers.nf`
 
-We're going to use the workflow script `hello-containers.nf` as a starting point for the second section.
+We're going to use the workflow script `hello-containers.nf` as a starting point.
 It is equivalent to the script produced by working through Part 4 of this training course, except we've changed the output destinations:
 
 ```groovy title="hello-containers.nf" linenums="37" hl_lines="3 7 11 15"
@@ -547,7 +547,7 @@ In the `workflow block`, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-workflow.nf" linenums="34" hl_lines="6"
+    ```groovy title="hello-containers.nf" linenums="34" hl_lines="6"
         publish:
         first_output = sayHello.out
         uppercased = convertToUpper.out
@@ -558,7 +558,7 @@ In the `workflow block`, make the following code change:
 
 === "Before"
 
-    ```groovy title="hello-workflow.nf" linenums="34"
+    ```groovy title="hello-containers.nf" linenums="34"
         publish:
         first_output = sayHello.out
         uppercased = convertToUpper.out
@@ -570,7 +570,7 @@ The `cowpy` process only produces one output so we can refer to it the usual way
 
 But for now, let's finish updating the workflow-level outputs.
 
-#### 4.2.2. Update the `output` block
+##### 2.2.4.2. Update the `output` block
 
 We need to add the final `cowpy_art` output to the `output` block. While we're at it, let's also edit the publishing destinations since now our pipeline is complete and we know what outputs we really care about.
 

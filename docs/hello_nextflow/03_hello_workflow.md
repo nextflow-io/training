@@ -35,7 +35,7 @@ This time, we're going to make the following changes to our workflow to better r
 We're going to use the workflow script `hello-workflow.nf` as a starting point.
 It is equivalent to the script produced by working through Part 2 of this training course, except we've removed the `view()` statements and changed the output destination:
 
-```groovy title="hello-channels.nf" linenums="37" hl_lines="3"
+```groovy title="hello-workflow.nf" linenums="37" hl_lines="3"
 output {
     first_output {
         path 'hello_workflow'

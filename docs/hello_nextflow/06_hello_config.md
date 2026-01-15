@@ -27,15 +27,97 @@ By learning to utilize these configuration options effectively, you can enhance 
 
 ## 0. Warmup: Check that Docker is enabled and run the Hello Config workflow
 
+We're going to use the workflow script `hello-config.nf` as a starting point.
+It is equivalent to the script produced by working through Part 5 of this training course, except we've changed the output destinations:
+
+```groovy title="hello-config.nf" linenums="42" hl_lines="3 7 11 15 19"
+output {
+    first_output {
+        path 'hello_config/intermediates'
+        mode 'copy'
+    }
+    uppercased {
+        path 'hello_config/intermediates'
+        mode 'copy'
+    }
+    collected {
+        path 'hello_config/intermediates'
+        mode 'copy'
+    }
+    batch_report {
+        path 'hello_config'
+        mode 'copy'
+    }
+    cowpy_art {
+        path 'hello_config'
+        mode 'copy'
+    }
+}
+```
+
+!!! tip
+
+    If you're starting the course from this point, you'll need to copy the `modules` directory over from the solutions:
+
+    ```bash
+    cp -r solutions/5-hello-modules/modules .
+    ```
+
+Just to make sure everything is working, run the script once before making any changes:
+
+```bash
+nextflow run hello-config.nf
+```
+
+??? success "Command output"
+
+    ```console
+     N E X T F L O W   ~  version 25.10.2
+
+    Launching `hello-containers.nf` [nice_escher] DSL2 - revision: d5dfdc9872
+
+    executor > local (7)
+    [5a/ec1fa1] sayHello (2) [100%] 3 of 3 ✔
+    [30/32b5b8] convertToUpper (3) [100%] 3 of 3 ✔
+    [d3/be01bc] collectGreetings [100%] 1 of 1 ✔
+
+    ````
+
+As previously, you will find the output files in the directory specified in the `output` block (`results/hello-containers/`).
+
+??? abstract "Directory contents"
+
+    ```console
+    results/hello_containers/
+    ├── Bonjour-output.txt
+    ├── COLLECTED-test-batch-output.txt
+    ├── Hello-output.txt
+    ├── Holà-output.txt
+    ├── test-batch-report.txt
+    ├── UPPER-Bonjour-output.txt
+    ├── UPPER-Hello-output.txt
+    └── UPPER-Holà-output.txt
+    ```
+
+If that worked for you, you're ready to learn how to
+
 First, a quick check.
 There is a `nextflow.config` file in the current directory that contains the line `docker.enabled = <setting>`, where `<setting>` is either `true` or `false` depending on whether or not you've worked through Part 5 of this course in the same environment.
 
 If it is set to `true`, you don't need to do anything.
 If it is set to `false`, switch it to `true` now.
 
-```console title="nextflow.config" linenums="1"
-docker.enabled = true
-```
+=== "After"
+
+    ```console title="nextflow.config" linenums="1" hl_lines="1"
+    docker.enabled = true
+    ```
+
+=== "Before"
+
+    ```console title="nextflow.config" linenums="1" hl_lines="1"
+    docker.enabled = false
+    ```
 
 Once you've done that, verify that the initial workflow runs properly:
 

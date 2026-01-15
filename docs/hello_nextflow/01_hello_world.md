@@ -18,7 +18,7 @@ In this first part of the Hello Nextflow training course, we ease into the topic
 
 ---
 
-## 0. Warmup: Run Hello World directly
+## 0. Warmup: Run a Hello World example directly
 
 Let's demonstrate this with a simple command that we run directly in the terminal, to show what it does before we wrap it in Nextflow.
 
@@ -674,7 +674,7 @@ In the process block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-channels.nf" linenums="14" hl_lines="3"
+    ```groovy title="hello-world.nf" linenums="14" hl_lines="3"
     script:
     """
     echo '${greeting}' > output.txt
@@ -683,7 +683,7 @@ In the process block, make the following code change:
 
 === "Before"
 
-    ```groovy title="hello-channels.nf" linenums="14" hl_lines="3"
+    ```groovy title="hello-world.nf" linenums="14" hl_lines="3"
     script:
     """
     echo 'Hello World!' > output.txt
