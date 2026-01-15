@@ -56,7 +56,7 @@ process collectGreetings {
  * Pipeline parameters
  */
 params {
-    input: Path = 'greetings.csv'
+    input: Path = 'data/greetings.csv'
     batch: String = 'test-batch'
 }
 

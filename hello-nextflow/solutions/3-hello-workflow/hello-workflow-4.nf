@@ -45,12 +45,13 @@ process collectGreetings {
 
     output:
     path "COLLECTED-${batch_name}-output.txt", emit: outfile
-    val count_greetings, emit: count
+    path "${batch_name}-report.txt", emit: report
 
     script:
     count_greetings = input_files.size()
     """
     cat ${input_files} > 'COLLECTED-${batch_name}-output.txt'
+    echo 'There were ${count_greetings} greetings in this batch.' > '${batch_name}-report.txt'
     """
 }
 
@@ -58,7 +59,7 @@ process collectGreetings {
  * Pipeline parameters
  */
 params {
-    input: Path = 'greetings.csv'
+    input: Path = 'data/greetings.csv'
     batch: String = 'test-batch'
 }
 
@@ -76,13 +77,11 @@ workflow {
     // collect all the greetings into one file
     collectGreetings(convertToUpper.out.collect(), params.batch)
 
-    // emit a message about the size of the batch
-    collectGreetings.out.count.view { num_greetings -> "There were ${num_greetings} greetings in this batch" }
-
     publish:
     first_output = sayHello.out
-    upper_output = convertToUpper.out
-    collected_output = collectGreetings.out
+    uppercased = convertToUpper.out
+    collected = collectGreetings.out.outfile
+    batch_report = collectGreetings.out.report
 }
 
 output {
@@ -90,11 +89,15 @@ output {
         path 'hello_workflow'
         mode 'copy'
     }
-    upper_output {
+    uppercased {
         path 'hello_workflow'
         mode 'copy'
     }
-    collected_output {
+    collected {
+        path 'hello_workflow'
+        mode 'copy'
+    }
+    batch_report {
         path 'hello_workflow'
         mode 'copy'
     }

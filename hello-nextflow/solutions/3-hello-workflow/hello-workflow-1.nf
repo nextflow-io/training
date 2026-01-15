@@ -38,7 +38,7 @@ process convertToUpper {
  * Pipeline parameters
  */
 params {
-    input: Path = 'greetings.csv'
+    input: Path = 'data/greetings.csv'
 }
 
 workflow {
