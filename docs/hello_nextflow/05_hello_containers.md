@@ -52,7 +52,7 @@ output {
 }
 ```
 
-??? tip
+!!! tip
 
     If you're starting the course from this point, you'll need to copy the `modules` directory over from the solutions:
 
@@ -71,14 +71,14 @@ nextflow run hello-containers.nf
     ```console
      N E X T F L O W   ~  version 25.10.2
 
-Launching `hello-containers.nf` [nice_escher] DSL2 - revision: d5dfdc9872
+    Launching `hello-containers.nf` [nice_escher] DSL2 - revision: d5dfdc9872
 
-executor > local (7)
-[5a/ec1fa1] sayHello (2) [100%] 3 of 3 ✔
-[30/32b5b8] convertToUpper (3) [100%] 3 of 3 ✔
-[d3/be01bc] collectGreetings [100%] 1 of 1 ✔
+    executor > local (7)
+    [5a/ec1fa1] sayHello (2) [100%] 3 of 3 ✔
+    [30/32b5b8] convertToUpper (3) [100%] 3 of 3 ✔
+    [d3/be01bc] collectGreetings [100%] 1 of 1 ✔
 
-````
+    ````
 
 As previously, you will find the output files in the directory specified in the `output` block (`results/hello-containers/`).
 
@@ -114,7 +114,7 @@ The general syntax is as follows:
 
 ```bash title="Syntax"
 docker pull '<container>'
-````
+```
 
 The `docker pull` part is the instruction to the container system to pull a container image from a repository.
 
@@ -215,7 +215,7 @@ You can verify this by running `ls /` to list directory contents from the root o
 ls /
 ```
 
-??? success "Command output"
+??? abstract "Command output"
 
     ```console
     bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
@@ -756,7 +756,7 @@ Now, let's switch that to `true` to enable Docker:
 
 === "Before"
 
-    ```console title="nextflow.config" linenums="1"
+    ```console title="nextflow.config" linenums="1" hl_lines="1"
     docker.enabled = false
     ```
 
