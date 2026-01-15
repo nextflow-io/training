@@ -20,7 +20,7 @@ def separateMetadata(row) {
         organism: row.organism,
         tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
         depth: row.sequencing_depth.toInteger(),
-        quality: row.quality_score?.toDouble(),
+        quality: row.quality_score.toDouble()
     ]
     def run_id = row.run_id?.toUpperCase() ?: 'UNSPECIFIED'
     sample_meta.run = run_id
@@ -54,9 +54,10 @@ workflow {
         .map { row -> separateMetadata(row) }
 
     // Filter out invalid or low-quality samples
-    ch_valid_samples = ch_samples.filter { meta, reads ->
-        meta.id && meta.organism && meta.depth > 25000000
-    }
+    ch_valid_samples = ch_samples
+        .filter { meta, reads ->
+            meta.id && meta.organism && meta.depth >= 25000000
+        }
 
     trim_branches = ch_valid_samples.branch { meta, reads ->
         fastp: meta.organism == 'human' && meta.depth >= 30000000
