@@ -32,7 +32,7 @@ This makes the code more shareable, flexible and maintainable.
 We're going to use the workflow script `hello-modules.nf` as a starting point.
 It is equivalent to the script produced by working through Part 3 of this training course, except we've changed the output destinations:
 
-```groovy title="hello-channels.nf" linenums="37" hl_lines="3"
+```groovy title="hello-channels.nf" linenums="37" hl_lines="3 7 11 15"
 output {
     first_output {
         path 'hello_modules'
