@@ -74,21 +74,22 @@ nextflow run hello-config.nf
     ```console
      N E X T F L O W   ~  version 25.10.2
 
-    Launching `hello-containers.nf` [nice_escher] DSL2 - revision: d5dfdc9872
+    Launching `hello-config.nf` [nice_escher] DSL2 - revision: d5dfdc9872
 
-    executor > local (7)
-    [5a/ec1fa1] sayHello (2) [100%] 3 of 3 ✔
+    executor >  local (8)
+    [5a/ec1fa1] sayHello (2)       [100%] 3 of 3 ✔
     [30/32b5b8] convertToUpper (3) [100%] 3 of 3 ✔
-    [d3/be01bc] collectGreetings [100%] 1 of 1 ✔
+    [d3/be01bc] collectGreetings   [100%] 1 of 1 ✔
+    [a1/b2c3d4] cowpy              [100%] 1 of 1 ✔
 
-    ````
+    ```
 
-As previously, you will find the output files in the directory specified in the `output` block (`results/hello-containers/`).
+As previously, you will find the output files in the directory specified in the `output` block (`results/hello_config/`).
 
 ??? abstract "Directory contents"
 
     ```console
-        results/hello_containers/
+    results/hello_config/
     ├── cowpy-COLLECTED-test-batch-output.txt
     ├── intermediates
     │   ├── Bonjour-output.txt
@@ -201,23 +202,23 @@ Now we add the URI to the `cowpy` process definition using the `conda` directive
 
 === "After"
 
-    ```console title="modules/cowpy.nf" linenums="4" hl_lines="4"
+    ```groovy title="modules/cowpy.nf" linenums="4" hl_lines="4"
     process cowpy {
 
         container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
         conda 'conda-forge::cowpy==1.1.5'
 
-        publishDir 'results', mode: 'copy'
+        input:
     ```
 
 === "Before"
 
-    ```console title="modules/cowpy.nf" linenums="4"
+    ```groovy title="modules/cowpy.nf" linenums="4"
     process cowpy {
 
         container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
 
-        publishDir 'results', mode: 'copy'
+        input:
     ```
 
 To be clear, we're not _replacing_ the `docker` directive, we're _adding_ an alternative option.
@@ -345,7 +346,7 @@ At the same time, we're going to pretend that the `cowpy` process requires more 
 
 === "Before"
 
-    ```groovy title="nextflow.config" linenums="14"
+    ```groovy title="nextflow.config" linenums="4"
     process {
         memory = 1.GB
     }
@@ -431,7 +432,7 @@ We provide an example parameter file in the current directory, called `test-para
 
 ```json title="test-params.json" linenums="1"
 {
-  "greeting": "greetings.csv",
+  "input": "data/greetings.csv",
   "batch": "Trio",
   "character": "turkey"
 }

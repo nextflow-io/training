@@ -243,7 +243,7 @@ In the `output` block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-workflow.nf" linenums="61" hl_lines="3"
+    ```groovy title="hello-workflow.nf" linenums="61" hl_lines="6-9"
     output {
         first_output {
             path 'hello_workflow'
@@ -893,7 +893,7 @@ In the `collectGreetings` process block, make the following code changes:
         count_greetings = input_files.size()
         """
         cat ${input_files} > 'COLLECTED-${batch_name}-output.txt'
-        echo 'There were ${count_greetings} greetings in this batch' > '${batch_name}-report.txt'
+        echo 'There were ${count_greetings} greetings in this batch.' > '${batch_name}-report.txt'
         """
     ```
 

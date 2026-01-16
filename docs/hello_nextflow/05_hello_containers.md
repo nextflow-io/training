@@ -78,9 +78,9 @@ nextflow run hello-containers.nf
     [30/32b5b8] convertToUpper (3) [100%] 3 of 3 ✔
     [d3/be01bc] collectGreetings [100%] 1 of 1 ✔
 
-    ````
+    ```
 
-As previously, you will find the output files in the directory specified in the `output` block (`results/hello-containers/`).
+As previously, you will find the output files in the directory specified in the `output` block (`results/hello_containers/`).
 
 ??? abstract "Directory contents"
 
@@ -420,7 +420,7 @@ process cowpy {
 
     script:
     """
-    cat $input_file | cowpy -c "${character}" > cowpy-${input_file}
+    cat ${input_file} | cowpy -c "${character}" > cowpy-${input_file}
     """
 
 }
@@ -500,8 +500,6 @@ In the workflow block, make the following code change:
         convertToUpper(sayHello.out)
         // collect all the greetings into one file
         collectGreetings(convertToUpper.out.collect(), params.batch)
-        // generate ASCII art of the greetings with cowpy
-        cowpy(collectGreetings.out.outfile, params.character)
     ```
 
 Notice that we declared a new CLI parameter, `params.character`, in order to specify which character we want to have say the greetings.

@@ -145,7 +145,7 @@ process sayHello {
 
     script:
     """
-    echo '$greeting' > '$greeting-output.txt'
+    echo '${greeting}' > '${greeting}-output.txt'
     """
 }
 ```
@@ -258,7 +258,7 @@ process convertToUpper {
 
     script:
     """
-    cat '$input_file' | tr '[a-z]' '[A-Z]' > 'UPPER-${input_file}'
+    cat '${input_file}' | tr '[a-z]' '[A-Z]' > 'UPPER-${input_file}'
     """
 }
 ```

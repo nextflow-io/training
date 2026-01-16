@@ -327,7 +327,7 @@ Let's try it.
 nextflow run hello-channels.nf
 ```
 
-??? success "Command output" hl_lines="6-9"
+??? success "Command output"
 
     ```console hl_lines="6"
      N E X T F L O W   ~  version 25.10.2
@@ -371,7 +371,7 @@ Let's have a look in there.
 
 ??? abstract "Directory contents"
 
-    ```console title="results/hello_channels" hl_lines="3"
+    ```console hl_lines="9"
     work/f4/c9962ce91ef87480babcb86b2b9042/
     ├── .command.begin
     ├── .command.err
