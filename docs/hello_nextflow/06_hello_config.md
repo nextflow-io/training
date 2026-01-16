@@ -88,15 +88,17 @@ As previously, you will find the output files in the directory specified in the 
 ??? abstract "Directory contents"
 
     ```console
-    results/hello_containers/
-    ├── Bonjour-output.txt
-    ├── COLLECTED-test-batch-output.txt
-    ├── Hello-output.txt
-    ├── Holà-output.txt
-    ├── test-batch-report.txt
-    ├── UPPER-Bonjour-output.txt
-    ├── UPPER-Hello-output.txt
-    └── UPPER-Holà-output.txt
+        results/hello_containers/
+    ├── cowpy-COLLECTED-test-batch-output.txt
+    ├── intermediates
+    │   ├── Bonjour-output.txt
+    │   ├── COLLECTED-test-batch-output.txt
+    │   ├── Hello-output.txt
+    │   ├── Holà-output.txt
+    │   ├── UPPER-Bonjour-output.txt
+    │   ├── UPPER-Hello-output.txt
+    │   └── UPPER-Holà-output.txt
+    └── test-batch-report.txt
     ```
 
 If that worked for you, you're ready to learn how to
