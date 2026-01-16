@@ -588,7 +588,7 @@ We'll show you how to use them in due time in your Nextflow journey.
 
 ### 2.4. (FYI) Process-level `publishDir` directive
 
-Until very recently, the established way to publish outputs was to do it at the level of each individual process using a `publishDir` directive.
+Until recently, the established way to publish outputs was to do it at the level of each individual process using a `publishDir` directive.
 
 To achieve what we just did for the outputs of the `sayHello` process, we would have instead added the following line to the process definition:
 
@@ -607,8 +607,15 @@ process sayHello {
 }
 ```
 
-You will still find this code pattern all over the place in older Nextflow pipelines and process modules, so it's important to be aware of it.
-However, we do not recommend using it in any new work as it will eventually be disallowed in future versions of the Nextflow language.
+You will still find this code pattern in older Nextflow pipelines and process modules, so it's important to recognize it.
+However, we recommend using the workflow-level `output {}` block for new work.
+
+**Why workflow-level outputs are better:**
+
+The `output {}` block requires more lines of code, but provides meaningful benefits:
+
+- **Separation of concerns**: Processes handle computation; workflows decide where outputs go. A process shouldn't dictate where its results are published—that's the workflow's job.
+- **Visibility**: With `publishDir`, output logic gets scattered across many files. In a complex pipeline, understanding where results end up requires searching through every process definition and config file. With workflow-level outputs, all publishing decisions are in one place.
 
 ### Takeaway
 

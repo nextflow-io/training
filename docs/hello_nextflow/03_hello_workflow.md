@@ -272,8 +272,9 @@ Once again, the logic is the same as before.
 This shows you that you can control the output settings at a very granular level, for every individual output.
 Feel free to try changing the paths or the publish mode for one of the processes to see what happens.
 
-Of course, that does mean we're repeating some information here, which could become inconvenient if we wanted to update the location for all the outputs in the same way.
-Later in the course, you'll learn how to configure these settings for multiple outputs in a structured way.
+This does mean writing more lines than a process-level `publishDir` would require.
+The trade-off is worth it: deciding where outputs go is the workflow's job, not the process's, and having all output settings in one place makes the pipeline's structure easier to understand.
+Later in the course, you'll see how to configure these settings for multiple outputs in a structured way.
 
 ### 1.6. Run the workflow with `-resume`
 
