@@ -54,15 +54,6 @@ The entire course is designed to be hands-on, with goal-oriented exercises struc
 
 You will develop a simple Nextflow pipeline that takes some text inputs, runs a few transformation steps, and outputs a single text file containing an ASCII picture of a character saying the transformed text.
 
-<figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello_pipeline_complete.svg"
-</figure>
-
-1. **`sayHello`:** Writes each greeting to its own output file (_e.g._ "Hello-output.txt")
-2. **`convertToUpper`:** Converts each greeting to uppercase (_e.g._ "HELLO")
-3. **`collectGreetings`:** Collects all uppercase greetings into a single batch file
-4. **`cowpy`:** Generates ASCII art using the `cowpy` tool
-
 ### Lesson plan
 
 In order to avoid overwhelming you with concepts and code, we've broken this down into six parts that will each focus on specific aspects of Nextflow.
