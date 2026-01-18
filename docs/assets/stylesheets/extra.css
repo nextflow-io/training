@@ -278,6 +278,22 @@ h3 .enumerate-headings-plugin {
   mask-image: var(--md-admonition-icon--people);
 }
 
+/* youtube */
+.md-typeset .admonition.youtube,
+.md-typeset details.youtube {
+  border-color: #be44dc;
+}
+.md-typeset .youtube > .admonition-title,
+.md-typeset .youtube > summary {
+  background-color: #be44dc10;
+}
+.md-typeset .youtube > .admonition-title::before,
+.md-typeset .youtube > summary::before {
+  background-color: #be44dc;
+  -webkit-mask-image: var(--md-admonition-icon--youtube);
+  mask-image: var(--md-admonition-icon--youtube);
+}
+
 /* licensing */
 .md-typeset .admonition.licensing,
 .md-typeset details.licensing {

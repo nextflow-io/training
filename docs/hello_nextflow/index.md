@@ -14,8 +14,6 @@ hide:
 
     **Hello Nextflow** is a hands-on introduction to building reproducible and scalable data analysis workflows. Working through practical examples and guided exercises, you will learn the fundamentals of Nextflow, including how to define processes, connect them into pipelines, manage files and software dependencies, parallelize execution effortlessly, and run workflows across different computing environments. You will take away the skills and confidence to start developing and running your own workflows with Nextflow.
 
-    [Lesson plan :material-arrow-right:](#lesson-plan){ .md-button .md-button--primary .mt-1 }
-
 -   :material-information-outline:{ .lg .middle } __Additional information__
 
     ---
@@ -41,7 +39,7 @@ hide:
         - A GitHub account OR a local installation (see [Environment options](../envsetup/index.md)).
         - Experience with command line and basic scripting.
 
-    ??? people "Follow the videos"
+    ??? youtube "Follow the videos"
 
         The Hello Nextflow training has a video for each chapter, embedded at the top of each page.
 
