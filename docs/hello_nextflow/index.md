@@ -40,7 +40,7 @@ hide:
         - **Skills:** Some familiarity with the command line, basic scripting concepts and common file formats is assumed.
         - **Domain:** The exercises are all domain-agnostic, so no prior scientific knowledge is required.
 
-    ??? youtube "Follow the videos"
+    ??? videos "Follow the videos"
 
         The Hello Nextflow training has a video for each chapter, embedded at the top of each page.
 
@@ -53,8 +53,6 @@ hide:
 ## Course overview
 
 The entire course is designed to be hands-on, with goal-oriented exercises structured to introduce information gradually.
-
-### Scenario
 
 You will develop a simple Nextflow pipeline that takes some text inputs, runs a few transformation steps, and outputs a single text file containing an ASCII picture of a character saying the transformed text.
 
