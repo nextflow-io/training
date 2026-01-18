@@ -40,7 +40,7 @@ hide:
         - **Skills:** Some familiarity with the command line, basic scripting concepts and common file formats is assumed.
         - **Domain:** The exercises are all domain-agnostic, so no prior scientific knowledge is required.
 
-    ??? videos "Follow the videos"
+    ??? videos "Course videos"
 
         Videos are available for each chapter, featuring an instructor working through the exercises. The video for each part of the course is embedded at the top of the corresponding page.
 
@@ -55,7 +55,7 @@ The entire course is designed to be hands-on, with goal-oriented exercises struc
 You will develop a simple Nextflow pipeline that takes some text inputs, runs a few transformation steps, and outputs a single text file containing an ASCII picture of a character saying the transformed text.
 
 <figure class="excalidraw">
---8<-- "img/hello_pipeline_complete.svg"
+--8<-- "docs/hello_nextflow/img/hello_pipeline_complete.svg"
 </figure>
 
 1. **`sayHello`:** Writes each greeting to its own output file (_e.g._ "Hello-output.txt")
