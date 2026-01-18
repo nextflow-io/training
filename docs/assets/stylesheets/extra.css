@@ -278,20 +278,20 @@ h3 .enumerate-headings-plugin {
   mask-image: var(--md-admonition-icon--people);
 }
 
-/* youtube */
-.md-typeset .admonition.youtube,
-.md-typeset details.youtube {
+/* videos */
+.md-typeset .admonition.videos,
+.md-typeset details.videos {
   border-color: #be44dc;
 }
-.md-typeset .youtube > .admonition-title,
-.md-typeset .youtube > summary {
+.md-typeset .videos > .admonition-title,
+.md-typeset .videos > summary {
   background-color: #be44dc10;
 }
-.md-typeset .youtube > .admonition-title::before,
-.md-typeset .youtube > summary::before {
+.md-typeset .videos > .admonition-title::before,
+.md-typeset .videos > summary::before {
   background-color: #be44dc;
-  -webkit-mask-image: var(--md-admonition-icon--youtube);
-  mask-image: var(--md-admonition-icon--youtube);
+  -webkit-mask-image: var(--md-admonition-icon--videos);
+  mask-image: var(--md-admonition-icon--videos);
 }
 
 /* licensing */

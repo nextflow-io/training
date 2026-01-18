@@ -12,17 +12,21 @@ hide:
 
     ---
 
-    **Hello Nextflow** is a hands-on introduction to building reproducible and scalable data analysis workflows. Working through practical examples and guided exercises, you will learn the fundamentals of Nextflow, including how to define processes, connect them into pipelines, manage files and software dependencies, parallelize execution effortlessly, and run workflows across different computing environments. You will take away the skills and confidence to start developing and running your own workflows with Nextflow.
+    **Hello Nextflow** is a hands-on introduction to building reproducible and scalable data analysis workflows.
+
+    Working through practical examples and guided exercises, you will learn the fundamentals of Nextflow, including how to define processes, connect them into pipelines, manage files and software dependencies, parallelize execution effortlessly, and run workflows across different computing environments.
+
+    You will take away the skills and confidence to start developing and running your own workflows with Nextflow.
 
 -   :material-information-outline:{ .lg .middle } __Additional information__
 
     ---
 
+    ??? terminal "Technical requirements"
+
+        You will need a GitHub account OR a local installation of Nextflow. See [Environment options](../envsetup/index.md) for more details.
+
     ??? learning "Learning objectives"
-
-        In this workshop, you will learn foundational concepts for building pipelines.
-
-        By the end of this workshop you will be able to:
 
         - Describe and utilize core Nextflow components sufficient to build a simple multi-step workflow
         - Describe next-step concepts such as operators and channel factories
@@ -32,12 +36,9 @@ hide:
 
     ??? people "Audience & prerequisites"
 
-        This tutorial is designed for learners who are completely new to Nextflow. Some familiarity with the command line, basic scripting concepts and common file formats is assumed. The exercises are all domain-agnostic, so no prior scientific knowledge is required.
-
-        **Prerequisites**
-
-        - A GitHub account OR a local installation (see [Environment options](../envsetup/index.md)).
-        - Experience with command line and basic scripting.
+        - **Audience:** This course is designed for learners who are completely new to Nextflow.
+        - **Skills:** Some familiarity with the command line, basic scripting concepts and common file formats is assumed.
+        - **Domain:** The exercises are all domain-agnostic, so no prior scientific knowledge is required.
 
     ??? youtube "Follow the videos"
 
