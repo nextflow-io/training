@@ -12,7 +12,7 @@ hide:
 
     ---
 
-    **Hello Nextflow** is a hands-on introduction to building reproducible and scalable data analysis workflows.
+    **Hello Nextflow is a hands-on introduction to building reproducible and scalable data analysis workflows.**
 
     Working through practical examples and guided exercises, you will learn the fundamentals of Nextflow, including how to define processes, connect them into pipelines, manage files and software dependencies, parallelize execution effortlessly, and run workflows across different computing environments.
 
@@ -42,11 +42,9 @@ hide:
 
     ??? videos "Follow the videos"
 
-        The Hello Nextflow training has a video for each chapter, embedded at the top of each page.
+        Videos are available for each chapter, featuring an instructor working through the exercises. The video for each part of the course is embedded at the top of the corresponding page.
 
-        <iframe src="https://www.youtube.com/embed/videoseries?si=9bz6-59u_0XFmHB0&amp;list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
-        You can also find [the whole playlist on the Nextflow YouTube channel](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik).
+        You can also find the [entire playlist](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik) on the Nextflow YouTube channel.
 
 </div>
 
