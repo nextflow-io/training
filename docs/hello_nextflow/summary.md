@@ -12,37 +12,29 @@ Congratulations on completing the Hello Nextflow training course! 🎉
 :green_book: You can read the [video transcript](./transcripts/07_next_steps.md) alongside the video.
 ///
 
-<!-- TODO: make this a pull-right card? -->
-
-Before you move on, please fill out the very brief feedback survey about your experience taking this training.
-
-[Take the survey :material-arrow-right:](survey.md){ .md-button .md-button--primary }
-
 ## Your journey
 
 You started with a very basic workflow that ran a hardcoded command.
 Over the course of six parts, you transformed that basic workflow into a modular multi-step pipeline that exercises key features of Nextflow including channels, operators, built-in support for containers, and configuration options.
 
-### What you built
+??? info "Final state of the Hello workflow"
 
-The final form of the Hello workflow takes as input a CSV file containing text greetings.
+    The final form of the Hello workflow takes as input a CSV file containing text greetings.
 
-The four steps are implemented as Nextflow processes (`sayHello`, `convertToUpper`, `collectGreetings`, and `cowpy`) stored in separate module files.
+    The four steps are implemented as Nextflow processes (`sayHello`, `convertToUpper`, `collectGreetings`, and `cowpy`) stored in separate module files.
 
-The results are published to a directory called `results/`, and the final output of the pipeline is a plain text file containing ASCII art of a character saying the uppercased greetings.
+    The results are published to a directory called `results/`, and the final output of the pipeline is a plain text file containing ASCII art of a character saying the uppercased greetings.
 
-<figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello_pipeline_complete.svg"
-</figure>
+    <figure class="excalidraw">
+    --8<-- "docs/hello_nextflow/img/hello_pipeline_complete.svg"
+    </figure>
 
-1. **`sayHello`:** Writes each greeting to its own output file (_e.g._ "Hello-output.txt")
-2. **`convertToUpper`:** Converts each greeting to uppercase (_e.g._ "HELLO")
-3. **`collectGreetings`:** Collects all uppercase greetings into a single batch file
-4. **`cowpy`:** Generates ASCII art using the `cowpy` tool
+    1. **`sayHello`:** Writes each greeting to its own output file (_e.g._ "Hello-output.txt")
+    2. **`convertToUpper`:** Converts each greeting to uppercase (_e.g._ "HELLO")
+    3. **`collectGreetings`:** Collects all uppercase greetings into a single batch file
+    4. **`cowpy`:** Generates ASCII art using the `cowpy` tool
 
-The workflow configuration supports providing inputs and parameters in a flexible, reproducible way.
-
-### Key skills acquired
+    The workflow configuration supports providing inputs and parameters in a flexible, reproducible way.
 
 Through this hands-on course, you've learned how to:
 
@@ -54,9 +46,9 @@ Through this hands-on course, you've learned how to:
 
 You're now equipped with the foundational knowledge to start developing your own pipelines in Nextflow.
 
-## Next steps
+## Next steps to level up your Nextflow skills
 
-### Top 3 ways to level up your Nextflow skills
+We've got plenty more
 
 - Apply Nextflow to a scientific analysis use case
 
@@ -64,26 +56,16 @@ You're now equipped with the foundational knowledge to start developing your own
 
 - Get started with nf-core
 
-  The **[Hello nf-core](../../hello_nf-core/index.md)** training course will introduce you to the [nf-core](https://nf-co.re/) community-curated pipelines and development framework, designed to help you write reproducible, scalable, and standardized workflows. You’ll learn how to use existing nf-core pipelines, contribute to their development, and even start building your own, supported by best practices and a vibrant community. If you’re keen to apply your Nextflow skills in real-world projects, this is the perfect next step.
+  The **[Hello nf-core](../../hello_nf-core/index.md)** training course will introduce you to the [nf-core](https://nf-co.re/) community-curated pipelines and development framework, designed to help you write reproducible, scalable, and standardized workflows.
 
 - Explore more advanced Nextflow features
 
-  The **[Side Quests](../side_quests/index.md)** are short standalone courses that go deep into specific topics like testing, metadata handling, using conditional statements and the differences between working on HPC _vs._ cloud.
+  The **[Side Quests](../side_quests/index.md)** are short standalone courses that go deep into specific topics.
 
-### Check out Seqera Platform
+Finally, we recommend you have a look at [**Seqera Platform**](https://seqera.io/), a cloud-based platform developed by the creators of Nextflow that makes it even easier to launch and manage your workflows, as well as manage your data and run analyses interactively in any environment.
 
-**[Seqera Platform](https://seqera.io/) is the best way to run Nextflow in practice.**
+## Feedback survey
 
-It's a cloud-based platform developed by the creators of Nextflow that you can connect to your own compute infrastructure (whether local, HPC or cloud) to make it much easier to launch and manage your workflows, as well as manage your data and run analyses interactively in a cloud environment.
-
-The Free Tier is available for free use by everyone (with usage quotas).
-Qualifying academics can get free Pro-level access (no usage limitations) through the [Academic Program](https://seqera.io/academic/program/).
-
-Have a look at the [Seqera Platform tutorials](https://docs.seqera.io/platform/latest/getting-started/quickstart-demo/comm-showcase) to see if this might be useful to you.
-
----
-
-Congratulations again on completing this training!
-Please take a minute to complete the feedback survey if you haven't already.
+Before you move on, please take a minute to complete the course survey! Your feedback helps us improve our training materials for everyone.
 
 [Take the survey :material-arrow-right:](survey.md){ .md-button .md-button--primary }
