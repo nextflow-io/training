@@ -17,24 +17,25 @@ Congratulations on completing the Hello Nextflow training course! 🎉
 You started with a very basic workflow that ran a hardcoded command.
 Over the course of six parts, you transformed that basic workflow into a modular multi-step pipeline that exercises key features of Nextflow including channels, operators, built-in support for containers, and configuration options.
 
-??? info "Final state of the Hello workflow"
+### What you built
 
-    The final form of the Hello workflow takes as input a CSV file containing text greetings.
+- The final form of the Hello workflow takes as input a CSV file containing text greetings.
+- The four steps are implemented as Nextflow processes (`sayHello`, `convertToUpper`, `collectGreetings`, and `cowpy`) stored in separate module files.
+- The results are published to a directory called `results/`.
+- The final output of the pipeline is a plain text file containing ASCII art of a character saying the uppercased greetings.
 
-    The four steps are implemented as Nextflow processes (`sayHello`, `convertToUpper`, `collectGreetings`, and `cowpy`) stored in separate module files.
+<figure class="excalidraw">
+--8<-- "docs/hello_nextflow/img/hello_pipeline_complete.svg"
+</figure>
 
-    The results are published to a directory called `results/`, and the final output of the pipeline is a plain text file containing ASCII art of a character saying the uppercased greetings.
+1. **`sayHello`:** Writes each greeting to its own output file (_e.g._ "Hello-output.txt")
+2. **`convertToUpper`:** Converts each greeting to uppercase (_e.g._ "HELLO")
+3. **`collectGreetings`:** Collects all uppercase greetings into a single batch file
+4. **`cowpy`:** Generates ASCII art using the `cowpy` tool
 
-    <figure class="excalidraw">
-    --8<-- "docs/hello_nextflow/img/hello_pipeline_complete.svg"
-    </figure>
+The workflow configuration supports providing inputs and parameters in a flexible, reproducible way.
 
-    1. **`sayHello`:** Writes each greeting to its own output file (_e.g._ "Hello-output.txt")
-    2. **`convertToUpper`:** Converts each greeting to uppercase (_e.g._ "HELLO")
-    3. **`collectGreetings`:** Collects all uppercase greetings into a single batch file
-    4. **`cowpy`:** Generates ASCII art using the `cowpy` tool
-
-    The workflow configuration supports providing inputs and parameters in a flexible, reproducible way.
+### Skills acquired
 
 Through this hands-on course, you've learned how to:
 
@@ -48,19 +49,9 @@ You're now equipped with the foundational knowledge to start developing your own
 
 ## Next steps to level up your Nextflow skills
 
-We've got plenty more
-
-- Apply Nextflow to a scientific analysis use case
-
-  The **[Nextflow for Science](../nf4_science/index.md)** page lists short standalone courses that demonstrate how to apply the basic concepts and mechanisms presented in Hello Nextflow to common scientific analysis use cases.
-
-- Get started with nf-core
-
-  The **[Hello nf-core](../../hello_nf-core/index.md)** training course will introduce you to the [nf-core](https://nf-co.re/) community-curated pipelines and development framework, designed to help you write reproducible, scalable, and standardized workflows.
-
-- Explore more advanced Nextflow features
-
-  The **[Side Quests](../side_quests/index.md)** are short standalone courses that go deep into specific topics.
+- Apply Nextflow to a scientific analysis use case with [Nextflow for Science](../nf4_science/index.md)
+- Get started with nf-core with [Hello nf-core](../../hello_nf-core/index.md)
+- Explore more advanced Nextflow features with the [Side Quests](../side_quests/index.md)
 
 Finally, we recommend you have a look at [**Seqera Platform**](https://seqera.io/), a cloud-based platform developed by the creators of Nextflow that makes it even easier to launch and manage your workflows, as well as manage your data and run analyses interactively in any environment.
 
