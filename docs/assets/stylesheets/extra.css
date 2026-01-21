@@ -393,3 +393,25 @@ h3 .enumerate-headings-plugin {
 .nextflow-primary {
   color: #58bd9f;
 }
+
+/* Index type badge - displays in top-right of index pages */
+.index-type-badge {
+  vertical-align: text-bottom;
+  margin-left: 1rem;
+  background-color: var(--md-primary-fg-color);
+  color: white;
+  padding: 0.3rem 0.8rem;
+  border-radius: 0.2rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+[data-md-color-scheme="slate"] .index-type-badge {
+  background-color: var(--md-primary-fg-color--dark);
+}
+
+.md-content__inner {
+  position: relative;
+}

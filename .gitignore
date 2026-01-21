@@ -8,3 +8,6 @@ results
 transcript-index
 .vscode
 site/
+.playwright-mcp/
+__pycache__
+*.pyc

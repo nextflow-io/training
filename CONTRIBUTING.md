@@ -14,6 +14,7 @@ Table of contents:
     - [Nextflow linting](#nextflow-linting)
     - [Headings CI tests](#headings-ci-tests)
     - [Admonitions](#admonitions)
+    - [Index page template](#index-page-template)
   - [Known limitations](#known-limitations)
     - [Code annotations](#code-annotations)
     - [Word highlighting](#word-highlighting)
@@ -184,6 +185,84 @@ Please see the [official docs](https://squidfunk.github.io/mkdocs-material/refer
 - Note that we have two custom admonitions: `exercise` and `result` (alias `solution`).
 - `!!!` does a regular admonition, `???` makes it collapsed (click to expand).
 - Indentation is important! Make sure you check the rendered site, as it's easy to make a mistake.
+
+### Index page template
+
+Course and module index pages can use a special template system that generates Material for MkDocs grid cards from structured frontmatter data.
+This keeps the index pages consistent and makes them easier to maintain.
+
+To use the template, add `page_type: index_page` to your frontmatter and include the `<!-- additional_information -->` marker in your content.
+
+#### Basic structure
+
+```markdown
+---
+title: Course Title
+hide:
+  - toc
+page_type: index_page
+index_type: course
+additional_information:
+  technical_requirements: true
+  learning_objectives:
+    - First objective
+    - Second objective
+  audience_prerequisites:
+    - "**Audience:** Description of target audience"
+    - "**Skills:** Required skills"
+  videos_playlist: https://www.youtube.com/playlist?list=...
+---
+
+# Course Title
+
+Summary paragraph describing the course.
+This content appears in the "Course summary" card.
+
+<!-- additional_information -->
+
+## Rest of page
+
+Content after the marker appears below the grid cards.
+```
+
+#### Frontmatter fields
+
+| Field                    | Type           | Required | Description                                                   |
+| ------------------------ | -------------- | -------- | ------------------------------------------------------------- |
+| `page_type`              | `"index_page"` | Yes      | Enables the index page template                               |
+| `index_type`             | string         | No       | Badge label displayed in top-right (e.g., "course", "module") |
+| `additional_information` | object         | No       | Container for the collapsible admonitions                     |
+
+#### Additional information fields
+
+All fields within `additional_information` are optional:
+
+| Field                    | Type             | Description                                                                                       |
+| ------------------------ | ---------------- | ------------------------------------------------------------------------------------------------- |
+| `technical_requirements` | `true` or string | If `true`, uses default text about GitHub/local installation. If a string, uses that custom text. |
+| `learning_objectives`    | list of strings  | Rendered as a bulleted list. Must be a list, not `true`.                                          |
+| `audience_prerequisites` | list of strings  | Rendered as a bulleted list. Supports markdown formatting. Must be a list, not `true`.            |
+| `videos_playlist`        | URL string       | Uses default video description text plus a link to the playlist.                                  |
+| `videos`                 | string           | Custom video description text (no link). Mutually exclusive with `videos_playlist`.               |
+
+#### Default content
+
+When `technical_requirements: true` is set:
+
+> You will need a GitHub account OR a local installation of Nextflow. See [Environment options](../envsetup/index.md) for more details.
+
+When `videos_playlist` is set, the following text precedes the link:
+
+> Videos are available for each chapter, featuring an instructor working through the exercises. The video for each part of the course is embedded at the top of the corresponding page.
+
+#### Requirements
+
+- The page must have an H1 heading (`# Title`)
+- The page must include the `<!-- additional_information -->` marker
+- `learning_objectives` and `audience_prerequisites` must be lists (not `true`)
+- `videos` and `videos_playlist` are mutually exclusive
+
+The build will fail with a descriptive error if these requirements are not met.
 
 ## Known limitations
 

@@ -291,3 +291,6 @@ plugins:
       reconfigure_material: true
       reconfigure_search: true
   - search
+
+hooks:
+  - docs/assets/hooks/index_page_hook.py
