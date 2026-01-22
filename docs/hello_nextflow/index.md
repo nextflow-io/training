@@ -25,7 +25,7 @@ additional_information:
 
 **Hello Nextflow is a hands-on introduction to building reproducible and scalable data analysis workflows.**
 
-Working through practical examples and guided exercises, you will learn the fundamentals of developing with Nextflow, including how to define processes, connect them into pipelines, manage files and software dependencies, parallelize execution effortlessly, and run workflows across different computing environments.
+Working through practical examples and guided exercises, you will learn the fundamentals of developing pipelines with Nextflow, including how to define processes, connect them into pipelines, manage files and software dependencies, parallelize execution effortlessly, and run workflows across different computing environments.
 
 You will take away the skills and confidence to start developing and running your own workflows with Nextflow.
 
@@ -33,7 +33,7 @@ You will take away the skills and confidence to start developing and running you
 
 ## Course overview
 
-The entire course is designed to be hands-on, with goal-oriented exercises structured to introduce information gradually.
+This course is designed to be hands-on, with goal-oriented exercises structured to introduce information gradually.
 
 You will develop a simple Nextflow pipeline that takes some text inputs, runs a few transformation steps, and outputs a single text file containing an ASCII picture of a character saying the transformed text.
 
@@ -50,7 +50,7 @@ In order to avoid overwhelming you with concepts and code, we've broken this dow
 | [Part 5: Hello Containers](./05_hello_containers.md) | Using containers as a mechanism for managing software dependencies and increase reproducibility  | 60 mins            |
 | [Part 6: Hello Config](./06_hello_config.md)         | Customizing pipeline behavior and optimizing usage in different computational environments usage | 60 mins            |
 
-By the end of this course, you will be well-prepared for tackling the next steps in your journey to develop and apply reproducible workflows for your scientific computing needs.
+By the end of this course, you will be well-prepared for tackling the next steps in your journey to develop reproducible workflows for your scientific computing needs.
 
 Ready to take the course?
 

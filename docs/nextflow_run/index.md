@@ -23,15 +23,18 @@ additional_information:
 
 **Nextflow Run is a hands-on introduction to running reproducible and scalable data analysis workflows.**
 
-Working through practical examples and guided exercises, you will learn the fundamentals of using Nextflow, including how to execute pipelines, manage files and software dependencies, parallelize execution effortlessly, and run workflows across different computing environments. You will take away the skills and confidence to start running workflows with Nextflow.
+Working through practical examples and guided exercises, you will learn the fundamentals of using Nextflow, including how to execute pipelines, manage files and software dependencies, parallelize execution effortlessly, and run workflows across different computing environments.
+
+You will take away the skills and confidence to start running workflows with Nextflow.
 
 <!-- additional_information -->
 
 ## Course overview
 
-The entire course is designed to be hands-on, with goal-oriented exercises structured to introduce information gradually.
+This course is designed to be hands-on, with goal-oriented exercises structured to introduce information gradually.
 
-You will execute several versions of a simple Nextflow pipeline, starting with one consisting of a single step and progressively building up to a multi-step version that takes some text inputs, runs a few transformation steps, and outputs a single text file containing an ASCII picture of a character saying the transformed text.
+You will execute several versions of a Nextflow pipeline that processes text inputs.
+You'll start with a simple version that consists of a single step, and eventually progress to a multi-step version that takes a CSV file of tabular text inputs, runs a few transformation steps, and outputs a single text file containing an ASCII picture of a character saying the transformed text.
 
 ### Lesson plan
 
