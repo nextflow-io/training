@@ -88,8 +88,6 @@ tree . -L 2
 Click on the colored box to expand the section and view its contents.
 We use collapsible sections like this to include expected command output in a concise way.
 
-### Content highlights
-
 - **The `greetings.csv` file** is a CSV containing some minimal columnar data we use for testing purposes.
 
 - **The `original-hello` directory** contains a copy of the source code produced by working through the complete Hello Nextflow training series (with Docker enabled).

@@ -47,7 +47,9 @@ Through this hands-on course, you've learned how to:
 
 You're now equipped with the foundational knowledge to start developing your own pipelines in Nextflow.
 
-## Next steps to level up your Nextflow skills
+## Next steps to build your skills
+
+Here are our top 3 suggestions for what to do next:
 
 - Apply Nextflow to a scientific analysis use case with [Nextflow for Science](../nf4_science/index.md)
 - Get started with nf-core with [Hello nf-core](../../hello_nf-core/index.md)

@@ -1,4 +1,4 @@
-# Part 2: Run pipelines
+# Part 2: Run real pipelines
 
 In Part 1 of this course (Run Basic Operations), we started with an example workflow that had only minimal features in order to keep the code complexity low.
 For example, `1-hello.nf` used a command-line parameter (`--greeting`) to provide a single value at a time.

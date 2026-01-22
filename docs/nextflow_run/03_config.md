@@ -1,4 +1,4 @@
-# Part 3: Configuration
+# Part 3: Run configuration
 
 This section will explore how to manage the configuration of a Nextflow pipeline in order to customize its behavior, adapt it to different environments, and optimize resource usage _without altering a single line of the workflow code itself_.
 
