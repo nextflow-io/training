@@ -370,7 +370,7 @@ The final output file should contain the tux character saying the greetings.
 
 That's it; now you have a space for experimenting without modifying your 'normal' configuration.
 
-!!! alert
+!!! warning
 
     Make sure to change back to the previous directory before moving to the next section!
 
@@ -383,7 +383,7 @@ Now let's look at another useful way to set parameter values.
 ### 1.3. Use a parameter file
 
 The subdirectory approach works great for experimenting, but it does involve a bit of setup and requires that you adapt paths accordingly.
-There's a simpler approach for one you want to run your pipeline with a specific set of values, or enable someone else to do it with minimal effort.
+There's a simpler approach for when you want to run your pipeline with a specific set of values, or enable someone else to do it with minimal effort.
 
 Nextflow allows us to specify parameters via a parameter file in either YAML or JSON format, which makes it very convenient to manage and distribute alternative sets of default values, for example, as well as run-specific parameter values.
 
@@ -1017,7 +1017,7 @@ The local executor is convenient and efficient, but it is limited to that single
 
 Nextflow supports [many different execution backends](https://www.nextflow.io/docs/latest/executor.html), including HPC schedulers (Slurm, LSF, SGE, PBS, Moab, OAR, Bridge, HTCondor and others) as well as cloud execution backends such (AWS Batch, Google Cloud Batch, Azure Batch, Kubernetes and more).
 
-### 2.1. Targeting a different backend
+### 4.1. Targeting a different backend
 
 The choice of executor is set by a process directive called `executor`.
 By default it is set to `local`, so the following configuration is implied:
@@ -1040,13 +1040,13 @@ process {
 
     We can't actually test this in the training environment because it's not set up to connect to an HPC.
 
-### 2.2. Dealing with backend-specific syntax for execution parameters
+### 4.2. Dealing with backend-specific syntax for execution parameters
 
 Most high-performance computing platforms allow (and sometimes require) that you specify certain parameters such as resource allocation requests and limitations (for e.g. number of CPUs and memory) and name of the job queue to use.
 
 Unfortunately, each of these systems uses different technologies, syntaxes and configurations for defining how a job should be defined and submitted to the relevant scheduler.
 
-??? abstract title="Examples"
+??? abstract "Examples"
 
     For example, the same job requiring 8 CPUs and 4GB of RAM to be executed on the queue "my-science-work" needs to be expressed in different following ways depending on the backend.
 
@@ -1146,7 +1146,7 @@ process {
 }
 ```
 
-### 5.3. Set resource allocations for an individual process
+### 5.3. Set resource allocations for a specific process
 
 At the same time, we're going to pretend that the `cowpy` process requires more resources than the others, just so we can demonstrate how to adjust allocations for an individual process.
 
@@ -1183,7 +1183,7 @@ With this configuration, all processes will request 1GB of memory and a single C
     If you have a machine with few CPUs and you allocate a high number per process, you might see process calls getting queued behind each other.
     This is because Nextflow ensures we don't request more CPUs than are available.
 
-### 5.4. Run the workflow with the modified configuration
+### 5.4. Run the workflow with the updated configuration
 
 Let's try that out, supplying a different filename for the profiling report so we can compare performance before and after the configuration changes.
 
@@ -1195,7 +1195,7 @@ You will probably not notice any real difference since this is such a small work
 
 It is very useful when your processes have different resource requirements. It empowers you to right-size the resource allocations you set up for each process based on actual data, not guesswork.
 
-!!!note
+!!! tip
 
     This is just a tiny taster of what you can do to optimize your use of resources.
     Nextflow itself has some really neat [dynamic retry logic](https://training.nextflow.io/basic_training/debugging/#dynamic-resources-allocation) built in to retry jobs that fail due to resource limitations.
