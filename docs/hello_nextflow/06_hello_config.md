@@ -92,23 +92,23 @@ As previously, you will find the output files in the directory specified in the 
 
     ```console
     results/hello_config/
-    ├── cowpy-COLLECTED-test-batch-output.txt
+    ├── cowpy-COLLECTED-batch-output.txt
     ├── intermediates
     │   ├── Bonjour-output.txt
-    │   ├── COLLECTED-test-batch-output.txt
+    │   ├── COLLECTED-batch-output.txt
     │   ├── Hello-output.txt
     │   ├── Holà-output.txt
     │   ├── UPPER-Bonjour-output.txt
     │   ├── UPPER-Hello-output.txt
     │   └── UPPER-Holà-output.txt
-    └── test-batch-report.txt
+    └── batch-report.txt
     ```
 
-The final ASCII art output is in the `results/hello_config/` directory, under the name `cowpy-COLLECTED-test-batch-output.txt`.
+The final ASCII art output is in the `results/hello_config/` directory, under the name `cowpy-COLLECTED-batch-output.txt`.
 
 ??? abstract "File contents"
 
-    ```console title="results/hello_config/cowpy-COLLECTED-test-batch-output.txt"
+    ```console title="results/hello_config/cowpy-COLLECTED-batch-output.txt"
     _________
     / HOLà    \
     | HELLO   |
@@ -171,7 +171,7 @@ Make the following code changes in the `nextflow.config` file:
     */
     params {
         input = 'data/greetings.csv'
-        batch = 'test-batch'
+        batch = 'batch'
         character = 'turkey'
     }
     ```
@@ -217,7 +217,7 @@ Make the following code changes to the `hello-config.nf` workflow file:
     */
     params {
         input: Path = 'data/greetings.csv'
-        batch: String = 'test-batch'
+        batch: String = 'batch'
         character: String = 'turkey'
     }
     ```
@@ -248,11 +248,11 @@ nextflow run hello-config.nf
 
 This still produces the same output as previously.
 
-The final ASCII art output is in the `results/hello_config/` directory, under the name `cowpy-COLLECTED-test-batch-output.txt`, same as before.
+The final ASCII art output is in the `results/hello_config/` directory, under the name `cowpy-COLLECTED-batch-output.txt`, same as before.
 
 ??? abstract "File contents"
 
-    ```console title="results/hello_config/cowpy-COLLECTED-test-batch-output.txt"
+    ```console title="results/hello_config/cowpy-COLLECTED-batch-output.txt"
     _________
     / HOLà    \
     | HELLO   |
@@ -312,7 +312,7 @@ Now open the new file and add the parameters you want to customize:
 ```groovy title="tux-run/nextflow.config" linenums="1"
 params {
     input = '../greetings.csv'
-    batch = 'test-tux'
+    batch = 'experiment'
     character = 'tux'
 }
 ```
@@ -350,7 +350,7 @@ The final output file should contain the tux character saying the greetings.
 
 ??? abstract "File contents"
 
-    ```console title="tux-run/results/hello_config/cowpy-COLLECTED-test-tux-output.txt"
+    ```console title="tux-run/results/hello_config/cowpy-COLLECTED-experiment-output.txt"
     _________
     / HELLO   \
     | BONJOUR |
@@ -394,7 +394,7 @@ To demonstrate this, we provide an example parameter file in the current directo
 ```yaml title="test-params.yaml" linenums="1"
 {
   input: "greetings.csv"
-  batch: "test-yaml"
+  batch: "yaml"
   character: "stegosaurus"
 }
 ```
@@ -429,7 +429,7 @@ The final output file should contain the stegosaurus character saying the greeti
 
 ??? abstract "File contents"
 
-    ```console title="results/hello_config/cowpy-COLLECTED-test-yaml-output.txt"
+    ```console title="results/hello_config/cowpy-COLLECTED-yaml-output.txt"
     _________
     / HELLO   \
     | HOLà    |
@@ -495,7 +495,7 @@ Add the following code to the `nextflow.config` file:
     */
     params {
         input = 'data/greetings.csv'
-        batch = 'test-batch'
+        batch = 'batch'
         character = 'turkey'
     }
 
@@ -513,7 +513,7 @@ Add the following code to the `nextflow.config` file:
     */
     params {
         input = 'data/greetings.csv'
-        batch = 'test-batch'
+        batch = 'batch'
         character = 'turkey'
     }
     ```
@@ -587,10 +587,10 @@ We could also have just added `${params.batch}` to each path instead of modifyin
 
 #### 2.1.3. Run the pipeline
 
-Let's test that it works correctly, setting the batch name to `test-outputDir` from the command line.
+Let's test that it works correctly, setting the batch name to `outdir` from the command line.
 
 ```bash
-nextflow run hello-config.nf --batch test-outputDir
+nextflow run hello-config.nf --batch outdir
 ```
 
 ??? success "Command output"
@@ -607,22 +607,22 @@ nextflow run hello-config.nf --batch test-outputDir
     [98/c6b57b] cowpy              | 1 of 1 ✔
     ```
 
-This still produces the same output as previously, except this time we find our outputs under `results/test-outputDir/`.
+This still produces the same output as previously, except this time we find our outputs under `results/outdir/`.
 
 ??? abstract "Directory contents"
 
     ```console
-    results/test-outputDir/
-    ├── cowpy-COLLECTED-test-outputDir-output.txt
+    results/outdir/
+    ├── cowpy-COLLECTED-outdir-output.txt
     ├── intermediates
     │   ├── Bonjour-output.txt
-    │   ├── COLLECTED-test-outputDir-output.txt
+    │   ├── COLLECTED-outdir-output.txt
     │   ├── Hello-output.txt
     │   ├── Holà-output.txt
     │   ├── UPPER-Bonjour-output.txt
     │   ├── UPPER-Hello-output.txt
     │   └── UPPER-Holà-output.txt
-    └── test-outputDir-report.txt
+    └── outdir-report.txt
     ```
 
 You can combine this approach with custom path definitions to construct any directory hierarchy you like.
@@ -695,10 +695,10 @@ This removes the remaining hardcoded elements from the output path configuration
 
 #### 2.2.2. Run the pipeline
 
-Let's test that it works correctly, setting the batch name to `test-names` from the command line.
+Let's test that it works correctly, setting the batch name to `pnames` from the command line.
 
 ```bash
-nextflow run hello-config.nf --batch test-names
+nextflow run hello-config.nf --batch pnames
 ```
 
 ??? success "Command output"
@@ -715,21 +715,21 @@ nextflow run hello-config.nf --batch test-names
     [98/c6b57b] cowpy              | 1 of 1 ✔
     ```
 
-This still produces the same output as previously, except this time we find our outputs under `results/test-names/`, and they are grouped by process.
+This still produces the same output as previously, except this time we find our outputs under `results/pnames/`, and they are grouped by process.
 
 ??? abstract "Directory contents"
 
     ```console
-    results/test-names/
+    results/pnames/
     ├── collectGreetings
-    │   ├── COLLECTED-test-names-output.txt
-    │   └── test-names-report.txt
+    │   ├── COLLECTED-pnames-output.txt
+    │   └── pnames-report.txt
     ├── convertToUpper
     │   ├── UPPER-Bonjour-output.txt
     │   ├── UPPER-Hello-output.txt
     │   └── UPPER-Holà-output.txt
     ├── cowpy
-    │   └── cowpy-COLLECTED-test-names-output.txt
+    │   └── cowpy-COLLECTED-pnames-output.txt
     └── sayHello
         ├── Bonjour-output.txt
         ├── Hello-output.txt
@@ -825,10 +825,10 @@ That's more concise, isn't it?
 
 #### 2.3.3. Run the pipeline
 
-Let's test that it works correctly, setting the batch name to `test-mode` from the command line.
+Let's test that it works correctly, setting the batch name to `outmode` from the command line.
 
 ```bash
-nextflow run hello-config.nf --batch test-mode
+nextflow run hello-config.nf --batch outmode
 ```
 
 ??? success "Command output"
@@ -845,22 +845,22 @@ nextflow run hello-config.nf --batch test-mode
     [98/c6b57b] cowpy              | 1 of 1 ✔
     ```
 
-This still produces the same output as previously, except this time we find our outputs under `results/test-mode/`.
+This still produces the same output as previously, except this time we find our outputs under `results/outmode/`.
 They are still all proper copies, not symlinks.
 
 ??? abstract "Directory contents"
 
     ```console
-    results/test-mode/
+    results/outmode/
     ├── collectGreetings
-    │   ├── COLLECTED-test-mode-output.txt
-    │   └── test-mode-report.txt
+    │   ├── COLLECTED-outmode-output.txt
+    │   └── outmode-report.txt
     ├── convertToUpper
     │   ├── UPPER-Bonjour-output.txt
     │   ├── UPPER-Hello-output.txt
     │   └── UPPER-Holà-output.txt
     ├── cowpy
-    │   └── cowpy-COLLECTED-test-mode-output.txt
+    │   └── cowpy-COLLECTED-outmode-output.txt
     └── sayHello
         ├── Bonjour-output.txt
         ├── Hello-output.txt
@@ -958,7 +958,7 @@ To be clear, we're not _replacing_ the `docker` directive, we're _adding_ an alt
 Let's try it out.
 
 ```bash
-nextflow run hello-config.nf --batch test-conda
+nextflow run hello-config.nf --batch conda
 ```
 
 ??? success "Command output"
@@ -975,7 +975,7 @@ nextflow run hello-config.nf --batch test-conda
     [c5/af5f88] cowpy              | 1 of 1 ✔
     ```
 
-This should work without issue and produce the same outputs as previously under `results/test-conda`.
+This should work without issue and produce the same outputs as previously under `results/conda`.
 
 Behind the scenes, Nextflow has retrieved the Conda packages and created the environment, which normally takes a bit of work; so it's nice that we don't have to do any of that ourselves!
 
@@ -1351,7 +1351,7 @@ profiles {
     }
     test {
         params.greeting = 'greetings.csv'
-        params.batch = 'test-profiles'
+        params.batch = 'test'
         params.character = 'dragonandcow'
     }
 }
@@ -1363,10 +1363,8 @@ Just like for technical configuration profiles, you can set up multiple differen
 
 Conveniently, profiles are not mutually exclusive, so we can specify multiple profiles in our command line using the following syntax `-profile <profile1>,<profile2>` (for any number of profiles).
 
-!!! tip
-
-    If you combine profiles that set values for the same elements of configuration and are described in the same configuration file, Nextflow will resolve the conflict by using whichever value it read in last (_i.e._ whatever comes later in the file).
-    If the conflicting settings are set in different configuration sources, the default [order of precedence](https://www.nextflow.io/docs/latest/config.html) applies.
+If you combine profiles that set values for the same elements of configuration and are described in the same configuration file, Nextflow will resolve the conflict by using whichever value it read in last (_i.e._ whatever comes later in the file).
+If the conflicting settings are set in different configuration sources, the default [order of precedence](https://www.nextflow.io/docs/latest/config.html) applies.
 
 Let's try adding the test profile to our previous command:
 
@@ -1377,7 +1375,7 @@ nextflow run hello-config.nf -profile my_laptop,test
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.04.3
+    N E X T F L O W   ~  version 25.10.2
 
     Launching `hello-config.nf` [gigantic_brazil] DSL2 - revision: ede9037d02
 
@@ -1386,6 +1384,14 @@ nextflow run hello-config.nf -profile my_laptop,test
     [35/9cbe77] convertToUpper (2) | 3 of 3 ✔
     [67/857d05] collectGreetings   | 1 of 1 ✔
     [37/7b51b5] cowpy              | 1 of 1 ✔
+    ```
+
+This will use Docker where possible and produce outputs under `results/test`, and this time the character is the comedic duo `dragonandcow`.
+
+??? abstract "File contents"
+
+    ```console title="results/profiles/cowpy-COLLECTED-profiles-output.txt"
+    TODO: UPDATE WITH correct output (dragonandcow)
     ```
 
 This means that as long as we distribute any test data files with the workflow code, anyone can quickly try out the workflow without having to supply their own inputs via the command line or a parameter file.
@@ -1418,8 +1424,6 @@ Run this command to resolve the configuration that would be applied by default.
 nextflow config
 ```
 
-<!-- TODO: update with types -->
-
 ??? success "Command output"
 
     ```groovy
@@ -1441,9 +1445,12 @@ nextflow config
 
     params {
       input = 'greetings.csv'
+      batch = 'batch'
       character = 'turkey'
     }
     ```
+
+This shows you the base configuration you get if you don't specify anything extra in the command line.
 
 #### 6.3.2. Resolve the configuration with specific settings activated
 
@@ -1452,8 +1459,6 @@ If you provide command-line parameters, e.g. enabling one or more profiles or lo
 ```bash
 nextflow config -profile my_laptop,test
 ```
-
-<!-- TODO: update with types -->
 
 ??? success "Command output"
 
@@ -1477,7 +1482,8 @@ nextflow config -profile my_laptop,test
 
     params {
       input = 'greetings.csv'
-      character = 'turtle'
+      batch = 'test'
+      character = 'dragonandcow'
     }
     ```
 

@@ -79,10 +79,10 @@ As previously, you will find the output files in the directory specified in the 
     ```console
     results/hello_modules/
     ├── Bonjour-output.txt
-    ├── COLLECTED-test-batch-output.txt
+    ├── COLLECTED-batch-output.txt
     ├── Hello-output.txt
     ├── Holà-output.txt
-    ├── test-batch-report.txt
+    ├── batch-report.txt
     ├── UPPER-Bonjour-output.txt
     ├── UPPER-Hello-output.txt
     └── UPPER-Holà-output.txt
@@ -173,7 +173,7 @@ Let's insert that above the `params` block and fill it out appropriately.
     */
     params {
         greeting: Path = 'data/greetings.csv'
-        batch: String = 'test-batch'
+        batch: String = 'batch'
     }
     ```
 
@@ -185,7 +185,7 @@ Let's insert that above the `params` block and fill it out appropriately.
     */
     params {
         greeting: Path = 'data/greetings.csv'
-        batch: String = 'test-batch'
+        batch: String = 'batch'
     }
     ```
 
@@ -281,7 +281,7 @@ Insert the import declaration above the `params` block and fill it out appropria
     */
     params {
         greeting: Path = 'data/greetings.csv'
-        batch: String = 'test-batch'
+        batch: String = 'batch'
     }
     ```
 
@@ -296,7 +296,7 @@ Insert the import declaration above the `params` block and fill it out appropria
     */
     params {
         greeting: Path = 'data/greetings.csv'
-        batch: String = 'test-batch'
+        batch: String = 'batch'
     }
     ```
 
@@ -386,7 +386,7 @@ Insert the import declaration above the `params` block and fill it out appropria
     */
     params {
         greeting: Path = 'data/greetings.csv'
-        batch: String = 'test-batch'
+        batch: String = 'batch'
     }
     ```
 
@@ -402,7 +402,7 @@ Insert the import declaration above the `params` block and fill it out appropria
     */
     params {
         greeting: Path = 'data/greetings.csv'
-        batch: String = 'test-batch'
+        batch: String = 'batch'
     }
     ```
 

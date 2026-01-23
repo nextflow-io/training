@@ -87,10 +87,10 @@ As previously, you will find the output files in the directory specified in the 
     ```console
     results/hello_containers/
     ├── Bonjour-output.txt
-    ├── COLLECTED-test-batch-output.txt
+    ├── COLLECTED-batch-output.txt
     ├── Hello-output.txt
     ├── Holà-output.txt
-    ├── test-batch-report.txt
+    ├── batch-report.txt
     ├── UPPER-Bonjour-output.txt
     ├── UPPER-Hello-output.txt
     └── UPPER-Holà-output.txt
@@ -516,7 +516,7 @@ This is technically optional but it's the recommended practice and it's an oppor
     */
     params {
         input: Path = 'data/greetings.csv'
-        batch: String = 'test-batch'
+        batch: String = 'batch'
         character: String = 'turkey'
     }
     ```
@@ -529,7 +529,7 @@ This is technically optional but it's the recommended practice and it's an oppor
     */
     params {
         input: Path = 'data/greetings.csv'
-        batch: String = 'test-batch'
+        batch: String = 'batch'
     }
     ```
 
@@ -655,7 +655,7 @@ nextflow run hello-containers.nf -resume
 
     Command executed:
 
-      cat COLLECTED-test-batch-output.txt | cowpy -c "turkey" > cowpy-COLLECTED-test-batch-output.txt
+      cat COLLECTED-batch-output.txt | cowpy -c "turkey" > cowpy-COLLECTED-batch-output.txt
 
     Command exit status:
       127
@@ -793,23 +793,23 @@ As usual you can find the workflow outputs in the corresponding results director
 
     ```console
     results/hello_containers/
-    ├── cowpy-COLLECTED-test-batch-output.txt
+    ├── cowpy-COLLECTED-batch-output.txt
     ├── intermediates
     │   ├── Bonjour-output.txt
-    │   ├── COLLECTED-test-batch-output.txt
+    │   ├── COLLECTED-batch-output.txt
     │   ├── Hello-output.txt
     │   ├── Holà-output.txt
     │   ├── UPPER-Bonjour-output.txt
     │   ├── UPPER-Hello-output.txt
     │   └── UPPER-Holà-output.txt
-    └── test-batch-report.txt
+    └── batch-report.txt
     ```
 
-The final ASCII art output is in the `results/hello_containers/` directory, under the name `cowpy-COLLECTED-test-batch-output.txt`.
+The final ASCII art output is in the `results/hello_containers/` directory, under the name `cowpy-COLLECTED-batch-output.txt`.
 
 ??? abstract "File contents"
 
-    ```console title="results/hello_containers/cowpy-COLLECTED-test-batch-output.txt"
+    ```console title="results/hello_containers/cowpy-COLLECTED-batch-output.txt"
     _________
     / HOLà    \
     | HELLO   |
@@ -858,7 +858,7 @@ In that directory, you will find the `.command.run` file that contains all the c
     ### name: 'cowpy'
     ### container: 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
     ### outputs:
-    ### - 'cowpy-COLLECTED-test-batch-output.txt'
+    ### - 'cowpy-COLLECTED-batch-output.txt'
     ### ...
     set -e
     set -u
@@ -959,8 +959,8 @@ In that directory, you will find the `.command.run` file that contains all the c
     nxf_stage() {
         true
         # stage input files
-        rm -f COLLECTED-test-batch-output.txt
-        ln -s /workspaces/training/hello-nextflow/work/7f/f435e3f2cf95979b5f3d7647ae6696/COLLECTED-test-batch-output.txt COLLECTED-test-batch-output.txt
+        rm -f COLLECTED-batch-output.txt
+        ln -s /workspaces/training/hello-nextflow/work/7f/f435e3f2cf95979b5f3d7647ae6696/COLLECTED-batch-output.txt COLLECTED-batch-output.txt
     }
 
     nxf_unstage_outputs() {

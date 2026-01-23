@@ -770,7 +770,7 @@ In the pipeline parameters section, make the following code changes:
      */
     params {
         input: Path = 'data/greetings.csv'
-        batch: String = 'test-batch'
+        batch: String = 'batch'
     }
     ```
 
