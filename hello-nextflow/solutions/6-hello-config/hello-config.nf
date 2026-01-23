@@ -10,30 +10,49 @@ include { cowpy } from './modules/cowpy.nf'
  * Pipeline parameters
  */
 params {
-    greeting: Path = 'greetings.csv'
-    batch: String = 'test-batch'
-    character: String = 'turkey'
+    input: Path
+    batch: String
+    character: String
 }
 
 workflow {
 
+    main:
     // create a channel for inputs from a CSV file
-    greeting_ch = channel.fromPath(params.greeting)
-        .splitCsv()
-        .map { line -> line[0] }
-
+    greeting_ch = channel.fromPath(params.input)
+                        .splitCsv()
+                        .map { line -> line[0] }
     // emit a greeting
     sayHello(greeting_ch)
-
     // convert the greeting to uppercase
     convertToUpper(sayHello.out)
-
     // collect all the greetings into one file
     collectGreetings(convertToUpper.out.collect(), params.batch)
-
-    // emit a message about the size of the batch
-    collectGreetings.out.count.view { num_greetings -> "There were ${num_greetings} greetings in this batch" }
-
     // generate ASCII art of the greetings with cowpy
     cowpy(collectGreetings.out.outfile, params.character)
+
+    publish:
+    first_output = sayHello.out
+    uppercased = convertToUpper.out
+    collected = collectGreetings.out.outfile
+    batch_report = collectGreetings.out.report
+    cowpy_art = cowpy.out
+}
+
+output {
+    first_output {
+        path { sayHello.process }
+    }
+    uppercased {
+        path { convertToUpper.process }
+    }
+    collected {
+        path { collectGreetings.process }
+    }
+    batch_report {
+        path { collectGreetings.process }
+    }
+    cowpy_art {
+        path { cowpy.process }
+    }
 }
