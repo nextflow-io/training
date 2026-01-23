@@ -480,7 +480,7 @@ For each chapter of this course, we've been publishing outputs to a different su
 Let's change that to use a user-configurable parameter.
 We could create a whole new parameter for this, but let's use the `batch` parameter since it's right there.
 
-### 2.1.1. Set a value for `outputDir` in the configuration file
+#### 2.1.1. Set a value for `outputDir` in the configuration file
 
 The path Nextflow uses for publishing outputs is controlled by the `outputDir` option.
 To change the path for all outputs, you can set a value for this option in the `nextflow.config` configuration file.
@@ -523,7 +523,7 @@ You could also change the `results` part if you wanted.
 
 For a temporary change, you could set this option from the command-line using the `-output-dir` parameter in your command (but then you couldn't use the `batch` parameter value).
 
-### 2.1.2. Remove the repeated part of the hardcoded path
+#### 2.1.2. Remove the repeated part of the hardcoded path
 
 We still have a subdirectory hardcoded in the output options, so let's get rid of that now.
 
@@ -585,7 +585,7 @@ Make the following code changes in the workflow file:
 
 We could also have just added `${params.batch}` to each path instead of modifying the `outputDir` default, but this is more concise.
 
-### 2.1.3. Run the pipeline
+#### 2.1.3. Run the pipeline
 
 Let's test that it works correctly, setting the batch name to `test-outputDir` from the command line.
 
