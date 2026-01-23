@@ -403,6 +403,11 @@ This parameter file contains a key-value pair for each of the inputs that we wan
 Note the use of colons (`:`) instead of equal signs (`=`) if you compare the syntax to the configuration file.
 The config file is written in Groovy, whereas the parameter file is written in YAML.
 
+!!! info
+
+    We also provide a JSON version of the parameter file as an example but we're not going to run with it here.
+    Feel free to try that one on your own.
+
 #### 1.3.2. Run the pipeline
 
 To run the workflow with this parameter file, simply add `-params-file <filename>` to the base command.

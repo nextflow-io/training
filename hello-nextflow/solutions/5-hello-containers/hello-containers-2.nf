@@ -11,7 +11,7 @@ include { cowpy } from './modules/cowpy.nf'
  */
 params {
     input: Path = 'data/greetings.csv'
-    batch: String = 'test-batch'
+    batch: String = 'batch'
     character: String = 'turkey'
 }
 

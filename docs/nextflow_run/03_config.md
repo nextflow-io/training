@@ -372,12 +372,14 @@ For example, you may see something like this in the main body of the workflow, e
 
 ```groovy title="Syntax example (old syntax)"
 params.input = 'greetings.csv'
+params.batch = 'batch'
 params.character = 'turkey'
 ```
 
 ```groovy title="Syntax example (new syntax)"
 params {
     input: Path = 'greetings.csv'
+    batch: String = 'batch'
     character: String = 'turkey'
 }
 ```
