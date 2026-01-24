@@ -14,6 +14,10 @@ By learning to utilize these configuration options effectively, you can enhance 
 
 To exercise these elements of configuration, we're going to be running a fresh copy of the workflow we last ran at the end of Part 2 of this training course, renamed `3-main.nf`.
 
+<figure class="excalidraw">
+--8<-- "docs/hello_nextflow/img/hello_pipeline_complete.svg"
+</figure>
+
 ---
 
 ## 1. Determine what software packaging technology to use

@@ -168,7 +168,7 @@ So this version of the workflow is capable of reading in a CSV file of inputs, p
 Let's take a look at what makes that possible in the workflow code.
 Once again, we're not aiming to memorize code syntax, but to identify signature components of the workflow that provide important functionality.
 
-??? example title="Workflow code"
+??? example "Workflow code"
 
     ```groovy title="2a-inputs.nf" linenums="1"
     #!/usr/bin/env nextflow
@@ -375,7 +375,7 @@ That is the expected final result of our multi-step pipeline.
 
 Let's look at the code and see what we can tie back to what we just observed.
 
-??? example title="Workflow code"
+??? example "Workflow code"
 
     ```groovy title="2a-inputs.nf" linenums="1"
     #!/usr/bin/env nextflow
@@ -603,7 +603,7 @@ workflow {
 
 You can look inside one of the modules to satisfy yourself that the process definition is unchanged; it's literally just been copy-pasted into a standalone file.
 
-??? example title="Module code"
+??? example "Module code"
 
     ```groovy title="modules/sayHello.nf" linenums="1"
     #!/usr/bin/env nextflow
@@ -873,7 +873,7 @@ This should output a file containing the ASCII art with the three greetings in t
 
 The workflow is very similar to the previous one, plus the extra step to run `cowpy`.
 
-??? example title="Workflow code"
+??? example "Workflow code"
 
     ```groovy title="2d-container.nf" linenums="1" hl_lines="7 25 26"
     #!/usr/bin/env nextflow
@@ -914,7 +914,7 @@ cowpy(collectGreetings.out, params.character)
 
 The `cowpy` process, which wraps the cowpy command to generate ASCII art, is defined in the `cowpy.nf` module.
 
-??? example title="Module code"
+??? example "Module code"
 
     ```groovy title="modules/cowpy.nf" linenums="1"
     #!/usr/bin/env nextflow
@@ -1051,7 +1051,7 @@ This file contains all the commands Nextflow ran on your behalf in the course of
 
 Open the `.command.run` file and search for `nxf_launch` to find the launch command Nextflow used.
 
-??? example title="File contents (subset)"
+??? abstract "File contents (subset)"
 
     ```bash title="work/7f/caf7189fca6c56ba627b75749edcb3/.command.run"
     nxf_launch() {
