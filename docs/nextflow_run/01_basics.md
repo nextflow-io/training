@@ -77,7 +77,7 @@ Find out what it takes to run a Nextflow workflow that achieves the same result.
 We provide you with a workflow script named `1-hello.nf` that takes an input greeting via a command-line argument named `--input` and produces a text file containing that greeting.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello-world.svg"
+--8<-- "docs/hello_nextflow/img/hello_world.svg"
 </figure>
 
 We're not going to look at the code yet; first let's see what it looks like to run it.
@@ -556,14 +556,22 @@ Nextflow uses the session ID to group run caching information under the `cache` 
 If you run a lot of pipelines, you may end up accumulating very many files across many subdirectories.
 Since the subdirectories are named randomly, it is difficult to tell from their names what are older vs. more recent runs.
 
-Nextflow includes a convenient `clean` subcommand that can automatically delete the work subdirectories for past runs that you no longer care about, with several [options](https://www.nextflow.io/docs/latest/reference/cli.html#clean) to control what will be deleted.
+Fortunately Nextflow includes a helpful `clean` subcommand that can automatically delete the work subdirectories for past runs that you no longer care about.
+
+#### 3.3.1. Determine deletion criteria
+
+There are multiple [options](https://www.nextflow.io/docs/latest/reference/cli.html#clean) to determine what to delete.
 
 Here we show you an example that deletes all subdirectories from runs before a given run, specified using its run name.
-The run name is the machine-generated two-part string shown in square brackets in the `Launching (...)` console output line, which we also saw recorded in the Nextflow log that we looked at earlier.
 
-You can use the Nextflow log to look up a run based on its timestamp and/or command line.
+Look up the most recent successful run where you didn't use `-resume`; in our case the run name was `backstabbing_swartz`.
 
-Once we have that, first we try the `nextflow clean` command using the dry run flag `-n` to check what will be deleted:
+The run name is the machine-generated two-part string shown in square brackets in the `Launching (...)` console output line.
+You can also use the Nextflow log to look up a run based on its timestamp and/or command line.
+
+#### 3.3.2. Do a dry run
+
+First we use the dry run flag `-n` to check what will be deleted given the command:
 
 ```bash
 nextflow clean -before backstabbing_swartz -n
@@ -580,6 +588,8 @@ nextflow clean -before backstabbing_swartz -n
 Your output will have different task directory names and may have a different number of lines, but it should look similar to the example.
 
 If you don't see any lines output, you either did not provide a valid run name or there are no past runs to delete. Make sure to change `backstabbing_swartz` in the example command to whatever is the corresponding latest run name in your log.
+
+#### 3.3.2. Proceed with deletion
 
 If the output looks as expected and you want to proceed with the deletion, re-run the command with the `-f` flag instead of `-n`:
 

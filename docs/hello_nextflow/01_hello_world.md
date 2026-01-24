@@ -127,7 +127,7 @@ Each **process** describes what operation(s) the corresponding step in the pipel
 Based on this, we can represent the workflow by this diagram:
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello-world.svg"
+--8<-- "docs/hello_nextflow/img/hello_world.svg"
 </figure>
 
 Now let's dive further into the code!
@@ -614,7 +614,7 @@ This will come in especially handy later when we move on to multi-step pipelines
 As noted earlier, there are other, more sophisticated options for controlling how outputs are published.
 We'll show you how to use them in due time in your Nextflow journey.
 
-### 2.4. (FYI) Process-level `publishDir` directive
+### 2.4. Note on process-level `publishDir` directives
 
 Until very recently, the established way to publish outputs was to do it at the level of each individual process using a `publishDir` directive.
 
@@ -994,10 +994,20 @@ Nextflow uses the session ID to group run caching information under the `cache` 
 
 During the development process, you'll typically run your draft pipeline a large number of times, which can lead to an accumulation of many files across many subdirectories.
 
-Nextflow includes a convenient `clean` subcommand that can automatically delete the work subdirectories for past runs that you no longer care about, with several [options](https://www.nextflow.io/docs/latest/reference/cli.html#clean) to control what will be deleted.
+Fortunately Nextflow includes a helpful `clean` subcommand that can automatically delete the work subdirectories for past runs that you no longer care about.
+
+#### 4.3.1. Determine deletion criteria
+
+There are multiple [options](https://www.nextflow.io/docs/latest/reference/cli.html#clean) to determine what to delete.
 
 Here we show you an example that deletes all subdirectories from runs before a given run, specified using its run name.
+
+Look up the most recent successful run where you didn't use `-resume`; in our case the run name was `golden_cantor`.
+
 The run name is the machine-generated two-part string shown in square brackets in the `Launching (...)` console output line.
+You can also use the Nextflow log to look up a run based on its timestamp and/or command line.
+
+#### 4.3.2. Do a dry run
 
 First we use the dry run flag `-n` to check what will be deleted given the command:
 
@@ -1011,7 +1021,11 @@ nextflow clean -before golden_cantor -n
     Would remove /workspaces/training/hello-nextflow/work/a3/7be2fad5e71e5f49998f795677fd68
     ```
 
+Your output will have different task directory names and may have a different number of lines, but it should look similar to the example.
+
 If you don't see any lines output, you either did not provide a valid run name or there are no past runs to delete. Make sure to change `golden_cantor` in the example command to whatever is the corresponding latest run name in your log.
+
+#### 4.3.3. Proceed with deletion
 
 If the output looks as expected and you want to proceed with the deletion, re-run the command with the `-f` flag instead of `-n`:
 
