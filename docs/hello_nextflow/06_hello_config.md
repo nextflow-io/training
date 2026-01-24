@@ -12,15 +12,11 @@
 
 This section will explore how to set up and manage the configuration of your Nextflow pipeline so that you'll be able to customize its behavior, adapt it to different environments, and optimize resource usage _without altering a single line of the workflow code itself_.
 
-There are multiple ways to do this; here we are going to use the simplest and most common configuration file mechanism, the `nextflow.config` file.
-Whenever there is a file named `nextflow.config` in the current directory, Nextflow will automatically load configuration from it.
+There are multiple ways to do this, which can be used in combination and are interpreted according to the order of precedence described [here](https://www.nextflow.io/docs/latest/config.html).
 
-!!! note
+In this part of the course, we are going to show you the simplest and most common configuration file mechanism, the `nextflow.config` file, which you already encountered in Part 5: Hello Containers.
 
-    Anything you put into the `nextflow.config` can be overridden at runtime by providing the relevant process directives or parameters and values on the command line, or by importing another configuration file, according to the order of precedence described [here](https://www.nextflow.io/docs/latest/config.html).
-
-In this part of the training, we're going to use the `nextflow.config` file to demonstrate essential components of Nextflow configuration such as process directives, executors, profiles, and parameter files.
-
+We'll go over essential components of Nextflow configuration such as process directives, executors, profiles, and parameter files.
 By learning to utilize these configuration options effectively, you can enhance the flexibility, scalability, and performance of your pipelines.
 
 ---
@@ -54,6 +50,54 @@ output {
     }
 }
 ```
+
+??? info "Summary of the Hello pipeline"
+
+    If you haven't done the previous parts of this course or you could use a recap, here's a quick overview of what this simple workflow does.
+
+    The workflow takes a CSV file containing greetings, writes them to separate files, converts each to uppercase, collects them back together again and outputs a single text file containing an ASCII picture of a fun character saying the greetings.
+
+    The four steps are implemented as Nextflow processes (`sayHello`, `convertToUpper`, `collectGreetings`, and `cowpy`) stored in separate module files.
+
+    1. **`sayHello`:** Writes each greeting to its own output file (e.g., "Hello-output.txt")
+    2. **`convertToUpper`:** Converts each greeting to uppercase (e.g., "HELLO")
+    3. **`collectGreetings`:** Collects all uppercase greetings into a single batch file
+    4. **`cowpy`:** Generates ASCII art using the `cowpy` tool
+
+    <figure class="excalidraw">
+    --8<-- "docs/hello_nextflow/img/hello_pipeline_complete.svg"
+    </figure>
+
+    The results are published to a directory called `results/`, and the final output of the pipeline (when run with default parameters) is a plain text file containing ASCII art of a turkey saying the uppercased greetings.
+
+    ```txt title="results/cowpy-COLLECTED-batch-output.txt"
+     _________
+    / BONJOUR \
+    | HELLO   |
+    \ HOLà    /
+    ---------
+      \                                  ,+*^^*+___+++_
+      \                           ,*^^^^              )
+        \                       _+*                     ^**+_
+        \                    +^       _ _++*+_+++_,         )
+                  _+^^*+_    (     ,+*^ ^          \+_        )
+                {       )  (    ,(    ,_+--+--,      ^)      ^\
+                { (\@)    } f   ,(  ,+-^ __*_*_  ^^\_   ^\       )
+              {:;-/    (_+*-+^^^^^+*+*<_ _++_)_    )    )      /
+              ( /  (    (        ,___    ^*+_+* )   <    <      \
+              U _/     )    *--<  ) ^\-----++__)   )    )       )
+                (      )  _(^)^^))  )  )\^^^^^))^*+/    /       /
+              (      /  (_))_^)) )  )  ))^^^^^))^^^)__/     +^^
+            (     ,/    (^))^))  )  ) ))^^^^^^^))^^)       _)
+              *+__+*       (_))^)  ) ) ))^^^^^^))^^^^^)____*^
+              \             \_)^)_)) ))^^^^^^^^^^))^^^^)
+              (_             ^\__^^^^^^^^^^^^))^^^^^^^)
+                ^\___            ^\__^^^^^^))^^^^^^^^)\\
+                      ^^^^^\uuu/^^\uuu/^^^^\^\^\^\^\^\^\^\
+                        ___) >____) >___   ^\_\_\_\_\_\_\)
+                        ^^^//\\_^^//\\_^       ^(\_\_\_\)
+                          ^^^ ^^ ^^^ ^
+    ```
 
 !!! tip
 
@@ -1496,7 +1540,8 @@ This gets especially useful for complex projects that involve multiple layers of
 
 ### Takeaway
 
-You know how to use profiles to select a preset configuration at runtime with minimal hassle. More generally, you know how to configure your workflow executions to suit different compute platforms and enhance the reproducibility of your analyses.
+You know how to use profiles to select a preset configuration at runtime with minimal hassle.
+More generally, you know how to configure your workflow executions to suit different compute platforms and enhance the reproducibility of your analyses.
 
 ### What's next?
 

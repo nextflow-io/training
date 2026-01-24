@@ -829,7 +829,7 @@ Start by opening the `2c-modules.nf` workflow file.
     */
     params {
         input: Path
-        batch: String
+        batch: String = 'batch'
     }
 
     workflow {

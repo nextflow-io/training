@@ -9,15 +9,15 @@ In this first part of the Nextflow Run training course, we ease into the topic w
 
 ---
 
-## 0. Warmup: Run Hello World directly
+## 1. Run a Hello World directly
 
-Let's demonstrate this with a simple command that we run directly in the terminal, to show what it does before we wrap it in Nextflow.
+Let's demonstrate this concept with a simple command that we run directly in the terminal, to show what it does before we wrap it in Nextflow.
 
 !!! tip
 
     Remember that you should now be inside the `nextflow-run/` directory as described on the [Getting Started](00_orientation.md) page.
 
-### 0.1. Make the terminal say hello
+### 1.1. Make the terminal say hello
 
 Run the following command in your terminal.
 
@@ -33,7 +33,7 @@ echo 'Hello World!'
 
 This outputs the text 'Hello World' right there in the terminal.
 
-### 0.2. Write the output to a file
+### 1.2. Write the output to a file
 
 Running pipelines mostly involves reading data from files and writing results to other files, so let's modify the command to write the text output to a file to make the example a bit more relevant.
 
@@ -49,7 +49,7 @@ echo 'Hello World!' > output.txt
 
 This does not output anything to the terminal.
 
-### 0.3. Find the output
+### 1.3. Find the output
 
 The text 'Hello World' should now be in the output file we specified, named `output.txt`.
 You can open it in the file explorer or from the command line using the `cat` utility, for example.
@@ -72,13 +72,13 @@ Find out what it takes to run a Nextflow workflow that achieves the same result.
 
 ---
 
-## 1. Run the workflow
+## 2. Run the workflow
 
 We provide you with a workflow script named `1-hello.nf` that takes an input greeting via a command-line argument named `--input` and produces a text file containing that greeting.
 
 We're not going to look at the code yet; first let's see what it looks like to run it.
 
-### 1.1. Launch the workflow and monitor execution
+### 2.1. Launch the workflow and monitor execution
 
 In the terminal, run the following command:
 
@@ -109,7 +109,7 @@ This tells us that the `sayHello` process was successfully executed once (`1 of 
 
 That's great, but you may be wondering: where is the output?
 
-### 1.2. Find the output file in the `results` directory
+### 2.2. Find the output file in the `results` directory
 
 This workflow is configured to publish its output to a results directory.
 If you look at your current directory, you will see that when you ran the workflow, Nextflow created a new directory called `results`, as well as a subdirectory called `1-hello` under that, containing a file called `output.txt`.
@@ -137,7 +137,7 @@ So now, we are going to peek under the hood to see where Nextflow actually execu
     Not all workflows will be set up to publish outputs to a results directory, and/or the directory names and structure may be different.
     A little further in this section, we will show you how to find out where this behavior is specified.
 
-### 1.3. Find the original output and logs in the `work/` directory
+### 2.3. Find the original output and logs in the `work/` directory
 
 When you run a workflow, Nextflow creates a distinct 'task directory' for every single invocation of each process in the workflow (=every step in the pipeline).
 For each one, it will stage the necessary inputs, execute the relevant instruction(s) and write outputs and log files within that one directory, which is named automatically using a hash in order to make it unique.
@@ -223,7 +223,7 @@ So this confirms that the workflow composed the same command we ran directly on 
 
 When something goes wrong and you need to troubleshoot what happened, it can be useful to look at the `command.sh` script to check exactly what command Nextflow composed based on the workflow instructions, variable interpolation and so on.
 
-### 1.4. Re-run the workflow with different greetings
+### 2.4. Re-run the workflow with different greetings
 
 Try re-running the workflow a few times with different values for the `--input` argument, then look at the task directories.
 
@@ -306,14 +306,14 @@ Learn how to read a basic Nextflow script and identify how its components relate
 
 ---
 
-## 2. Examine the Hello World workflow starter script
+## 3. Examine the Hello World workflow starter script
 
 What we did there was basically treating the workflow script like a black box.
 Now that we've seen what it does, let's open the box and look inside.
 
 Our goal here is not to memorize the syntax of Nextflow code, but to form some basic intuition of what are the main components and how they are organized.
 
-### 2.1. Examine the overall code structure
+### 3.1. Examine the overall code structure
 
 You'll find the `1-hello.nf` script in your current directory, which should be `nextflow-run`. Open it in the editor pane.
 
@@ -370,7 +370,7 @@ Each **process** describes what operation(s) the corresponding step in the pipel
 
 Let's take a closer look at the **process** block first, then we'll look at the **workflow** block.
 
-### 2.2. The `process` definition
+### 3.2. The `process` definition
 
 The first block of code describes a **process**.
 The process definition starts with the keyword `process`, followed by the process name and finally the process body delimited by curly braces.
@@ -415,7 +415,7 @@ The `output` definition includes the `path` qualifier, which tells Nextflow this
     This is necessary for verifying that the command was executed successfully and for passing the output to downstream processes if needed.
     If the output produced by a process doesn't match what is declared in the output block, it will not be passed to downstream processes and the workflow will fail.
 
-### 2.3. The `workflow` definition
+### 3.3. The `workflow` definition
 
 The second block of code describes the **workflow** itself.
 The workflow definition starts with the keyword `workflow`, followed by an optional name, then the workflow body delimited by curly braces.
@@ -447,7 +447,7 @@ In a real-world pipeline, the workflow typically contains multiple calls to **pr
 We'll get into that in Part 2 of the course.
 For now, let's take a closer look at how our workflow is handling inputs and outputs.
 
-### 2.4. The `params` system of command-line parameters
+### 3.4. The `params` system of command-line parameters
 
 The `params.input` we provide to the `sayHello()` process call is a neat bit of Nextflow code and is worth spending an extra minute on.
 
@@ -472,7 +472,7 @@ Supported types include `String`, `Integer`, `Float`, `Boolean`, and `Path`.
     Workflow parameters declared using the `params` system always take two dashes on the command line (`--`).
     This distinguishes them from Nextflow-level parameters, which only take one dash (`-`).
 
-### 2.5. The `publish` directive
+### 3.5. The `publish` directive
 
 On the other end of the workflow, we've already glanced at the `publish:` block.
 That's one half of the output handling system; the other half is the `output` block located below.
@@ -528,13 +528,13 @@ Learn to manage your workflow executions conveniently.
 
 ---
 
-## 3. Manage workflow executions
+## 4. Manage workflow executions
 
 Knowing how to launch workflows and retrieve outputs is great, but you'll quickly find there are a few other aspects of workflow management that will make your life easier.
 
 Here we show you how to take advantage of the `resume` feature for when you need to re-launch the same workflow, how to inspect the execution logs with `nextflow log`, and how to delete older work directories with `nextflow clean`.
 
-### 3.1. Re-launch a workflow with `-resume`
+### 4.1. Re-launch a workflow with `-resume`
 
 Sometimes, you're going to want to re-run a pipeline that you've already launched previously without redoing any work that was already completed successfully.
 
@@ -574,7 +574,7 @@ Nextflow is literally pointing you to the previous execution and saying "I alrea
 
     When your re-run a pipeline with `resume`, Nextflow does not overwrite any files published outside of the work directory by any executions that were run successfully previously.
 
-### 3.2. Inspect the log of past executions
+### 4.2. Inspect the log of past executions
 
 Whenever you launch a nextflow workflow, a line gets written to a log file called `history`, under a hidden directory called `.nextflow` in the current working directory.
 
@@ -614,14 +614,14 @@ In that case, the session ID stays the same.
 
 Nextflow uses the session ID to group run caching information under the `cache` directory, also located under `.nextflow`.
 
-### 3.3. Delete older work directories
+### 4.3. Delete older work directories
 
 If you run a lot of pipelines, you may end up accumulating very many files across many subdirectories.
 Since the subdirectories are named randomly, it is difficult to tell from their names what are older vs. more recent runs.
 
 Fortunately Nextflow includes a helpful `clean` subcommand that can automatically delete the work subdirectories for past runs that you no longer care about.
 
-#### 3.3.1. Determine deletion criteria
+#### 4.3.1. Determine deletion criteria
 
 There are multiple [options](https://www.nextflow.io/docs/latest/reference/cli.html#clean) to determine what to delete.
 
@@ -632,7 +632,7 @@ Look up the most recent successful run where you didn't use `-resume`; in our ca
 The run name is the machine-generated two-part string shown in square brackets in the `Launching (...)` console output line.
 You can also use the Nextflow log to look up a run based on its timestamp and/or command line.
 
-#### 3.3.2. Do a dry run
+#### 4.3.2. Do a dry run
 
 First we use the dry run flag `-n` to check what will be deleted given the command:
 
@@ -652,7 +652,7 @@ Your output will have different task directory names and may have a different nu
 
 If you don't see any lines output, you either did not provide a valid run name or there are no past runs to delete. Make sure to change `backstabbing_swartz` in the example command to whatever is the corresponding latest run name in your log.
 
-#### 3.3.3. Proceed with deletion
+#### 4.3.3. Proceed with deletion
 
 If the output looks as expected and you want to proceed with the deletion, re-run the command with the `-f` flag instead of `-n`:
 
