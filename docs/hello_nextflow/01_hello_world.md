@@ -246,17 +246,6 @@ Looking at what we got for the run shown above, the console log line for the say
 
 Let's take a look at what's in there.
 
-!!! tip
-
-    The exact subdirectory names will be different on your system.
-
-    If you browse the contents of the task subdirectory in the VSCode file explorer, you'll see all the files right away.
-    However, the log files are set to be invisible in the terminal, so if you want to use `ls` or `tree` to view them, you'll need to set the relevant option for displaying invisible files.
-
-    ```bash
-    tree -a work
-    ```
-
 ??? abstract "Directory contents"
 
     ```console
@@ -273,7 +262,18 @@ Let's take a look at what's in there.
             └── output.txt
     ```
 
-The first thing you probably want to see is the actual output of the workflow, i.e. the `output.txt` file produced by the the `sayHello` process.
+??? question "Don't see the same thing?"
+
+    The exact subdirectory names will be different on your system.
+
+    If you browse the contents of the task subdirectory in the VSCode file explorer, you'll see all the files right away.
+    However, the log files are set to be invisible in the terminal, so if you want to use `ls` or `tree` to view them, you'll need to set the relevant option for displaying invisible files.
+
+    ```bash
+    tree -a work
+    ```
+
+The first thing you want to look at is the actual output of the workflow, i.e. the `output.txt` file produced by the the `sayHello` process.
 Open it and you will find the `Hello World!` greeting, which was the point of our minimalist workflow.
 
 ??? abstract "File contents"
@@ -309,6 +309,68 @@ This matches what we ran earlier manually.
 
 In this case it's very straightforward because the process command was hardcoded, but later in the course you'll see process commands that involve some interpolation of variables.
 That makes it especially valuable to be able to see exactly how Nextflow interpreted the code and what command was produced when you're troubleshooting a failed run.
+
+### 1.3. Run the workflow again
+
+Try re-running the workflow a few times, then look at the task directories under `work/`.
+
+??? abstract "Directory contents"
+
+    ```console
+    work
+    ├── 0f
+    │   └── 52b7e07b0e274a80843fca48ed21b8
+    │       ├── .command.begin
+    │       ├── .command.err
+    │       ├── .command.log
+    │       ├── .command.out
+    │       ├── .command.run
+    │       ├── .command.sh
+    │       ├── .exitcode
+    │       └── output.txt
+    ├── 65
+        └── 7be2fad5e71e5f49998f795677fd68
+    │   │   ├── .command.begin
+    │   │   ├── .command.err
+    │   │   ├── .command.log
+    │   │   ├── .command.out
+    │   │   ├── .command.run
+    │   │   ├── .command.sh
+    │   │   ├── .exitcode
+    │   │   └── output.txt
+    │   └── e029f2e75305874a9ab263d21ebc2c
+    │       ├── .command.begin
+    │       ├── .command.err
+    │       ├── .command.log
+    │       ├── .command.out
+    │       ├── .command.run
+    │       ├── .command.sh
+    │       ├── .exitcode
+    │       └── output.txt
+    ├── 6c
+    │   └── d4fd787e0b01b3c82e85696c297500
+    │       ├── .command.begin
+    │       ├── .command.err
+    │       ├── .command.log
+    │       ├── .command.out
+    │       ├── .command.run
+    │       ├── .command.sh
+    │       ├── .exitcode
+    │       └── output.txt
+    └── e8
+        └── ab99fad46ade52905ec973ff39bb80
+            ├── .command.begin
+            ├── .command.err
+            ├── .command.log
+            ├── .command.out
+            ├── .command.run
+            ├── .command.sh
+            ├── .exitcode
+            └── output.txt
+    ```
+
+You see that a new subdirectory with a complete set of output and log files has been created for each run.
+This shows you that running the same workflow several times will not overwrite the results of previous runs.
 
 ### Takeaway
 
@@ -784,6 +846,9 @@ Be sure to open up the output file to check that you now have the new version of
     ```
 
 Voilà!
+
+Note how the new execution has overwritten the output file published to the `results` directory.
+However, the results of the previous runs are still preserved in the task directories under `work`.
 
 !!! tip
 

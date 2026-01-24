@@ -165,17 +165,6 @@ This should yield the full path directory path: `work/a3/7be2fa7be2fad5e71e5f499
 
 Let's take a look at what's in there.
 
-!!! tip
-
-    The exact subdirectory names will be different on your system.
-
-    If you browse the contents of the task subdirectory in the VSCode file explorer, you'll see all the files right away.
-    However, the log files are set to be invisible in the terminal, so if you want to use `ls` or `tree` to view them, you'll need to set the relevant option for displaying invisible files.
-
-    ```bash
-    tree -a work
-    ```
-
 ??? abstract "Directory contents"
 
     ```console
@@ -190,6 +179,17 @@ Let's take a look at what's in there.
             ├── .command.sh
             ├── .exitcode
             └── output.txt
+    ```
+
+??? question "Don't see the same thing?"
+
+    The exact subdirectory names will be different on your system.
+
+    If you browse the contents of the task subdirectory in the VSCode file explorer, you'll see all the files right away.
+    However, the log files are set to be invisible in the terminal, so if you want to use `ls` or `tree` to view them, you'll need to set the relevant option for displaying invisible files.
+
+    ```bash
+    tree -a work
     ```
 
 You should immediately recognize the `output.txt` file, which is in fact the original output of the `sayHello` process that got published to the `results` directory.
@@ -225,9 +225,76 @@ When something goes wrong and you need to troubleshoot what happened, it can be 
 
 ### 1.4. Re-run the workflow with different greetings
 
-Try re-running the workflow a few times with different values for the `--input` argument, then look at both the contents of the `results/1-hello/` directory and the task directories.
+Try re-running the workflow a few times with different values for the `--input` argument, then look at the task directories.
 
-Observe how the outputs and logs of isolated task directories are preserved, whereas the contents of the `results` directory are overwritten by the output of subsequent executions.
+??? abstract "Directory contents"
+
+    ```console
+    work
+    ├── 0f
+    │   └── 52b7e07b0e274a80843fca48ed21b8
+    │       ├── .command.begin
+    │       ├── .command.err
+    │       ├── .command.log
+    │       ├── .command.out
+    │       ├── .command.run
+    │       ├── .command.sh
+    │       ├── .exitcode
+    │       └── output.txt
+    ├── 67
+    │   ├── 134e6317f90726c6c17ad53234a32b
+    │   │   ├── .command.begin
+    │   │   ├── .command.err
+    │   │   ├── .command.log
+    │   │   ├── .command.out
+    │   │   ├── .command.run
+    │   │   ├── .command.sh
+    │   │   ├── .exitcode
+    │   │   └── output.txt
+    │   └── e029f2e75305874a9ab263d21ebc2c
+    │       ├── .command.begin
+    │       ├── .command.err
+    │       ├── .command.log
+    │       ├── .command.out
+    │       ├── .command.run
+    │       ├── .command.sh
+    │       ├── .exitcode
+    │       └── output.txt
+    ├── 6c
+    │   └── d4fd787e0b01b3c82e85696c297500
+    │       ├── .command.begin
+    │       ├── .command.err
+    │       ├── .command.log
+    │       ├── .command.out
+    │       ├── .command.run
+    │       ├── .command.sh
+    │       ├── .exitcode
+    │       └── output.txt
+    └── e8
+        └── ab99fad46ade52905ec973ff39bb80
+            ├── .command.begin
+            ├── .command.err
+            ├── .command.log
+            ├── .command.out
+            ├── .command.run
+            ├── .command.sh
+            ├── .exitcode
+            └── output.txt
+    ```
+
+You see that a new subdirectory with a complete set of output and log files has been created for each run.
+
+In contrast, if you look at the `results` directory, there is still only one set of results, and the content of the output file corresponds to whatever you ran last.
+
+??? abstract "Directory contents"
+
+    ```console title="results/"
+    results
+    └── 1-hello
+        └── output.txt
+    ```
+
+This shows you that the published results will get overwritten by subsequent executions, whereas the task directories under `work/` are preserved.
 
 ### Takeaway
 
