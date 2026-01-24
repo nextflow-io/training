@@ -528,15 +528,9 @@ Let's look at the code and see what we can tie back to what we just observed.
     }
     ```
 
-The most obvious difference compared to the previous version of the workflow is that now there are multiple process definitions, and correspondingly, several process calls in the workflow block.
+There's a lot going on in there, but the most obvious difference compared to the previous version of the workflow is that now there are multiple process definitions, and correspondingly, several process calls in the workflow block.
 
-Let's take a closer look to get clarity on the following points:
-
-- Overall wiring of the workflow
-- How the processes are connected
-- What `collect()` does in the `collectGreetings` call
-- Where the `params.batch` input comes from
-- What's new in the output handling
+Let's take a closer look and see if we can identify the most interesting pieces.
 
 #### 2.3.1. Overall wiring of the workflow
 
@@ -549,9 +543,8 @@ If you're using VSCode with the Nextflow extension, you can get a helpful diagra
 This gives you a nice overview of how the processes are connected and what they produce.
 
 You see that in addition to the original `sayHello` process, we now also have `convertToUpper` and `collectGreetings`, which match the names of the processes we saw in the console output.
-
 The two new process definitions are structured in the same way as the `sayHello` process, except `collectGreetings` takes an additional input parameter called `batch` and produces two outputs.
-We'll get to that later.
+
 We won't go into the code for each in detail, but if you're curious, you can look up the details in [Part 2 of Hello Nextflow](../hello_nextflow/03_hello_workflow.md).
 
 For now, let's dig into how the processes are connected to one another.
@@ -594,7 +587,7 @@ Finally, the third call, `collectGreetings`, is doing something similar, with a 
 ```
 
 You see this call is given two inputs, `convertToUpper.out.collect()` and `params.batch`, and produces two outputs.
-We're going to tackle `convertToUpper.out.collect()` first, then we'll talk about the multiple inputs and outputs afterward.
+We're going to start by examining that first input, `convertToUpper.out.collect()`. Then we'll talk about the multiple inputs and outputs afterward.
 
 #### 2.3.3. What `collect()` does in the `collectGreetings` call
 
