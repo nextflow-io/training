@@ -124,14 +124,6 @@ AA Nextflow workflow script typically includes one or more **process** definitio
 
 Each **process** describes what operation(s) the corresponding step in the pipeline should accomplish, while the **workflow** describes the dataflow logic that connects the various steps.
 
-Based on this, we can represent the workflow by this diagram:
-
-<figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello_world.svg"
-</figure>
-
-Now let's dive further into the code!
-
 We're going to take a closer look at the **process** block first, then we'll look at the **workflow** block.
 
 #### 1.1.1. The `process` definition
@@ -140,8 +132,6 @@ The first block of code describes a **process**.
 
 The process definition starts with the keyword `process`, followed by the process name and finally the process body delimited by curly braces.
 The process body must contain a script block which specifies the command to run, which can be anything you would be able to run in a command line terminal.
-
-Here we have a **process** called `sayHello` that writes its **output** to a file named `output.txt`.
 
 ```groovy title="hello-world.nf" linenums="3"
 /*
@@ -158,6 +148,12 @@ process sayHello {
     """
 }
 ```
+
+Here we have a **process** called `sayHello` that writes its **output** to a file named `output.txt`.
+
+<figure class="excalidraw">
+--8<-- "docs/hello_nextflow/img/hello_world.svg"
+</figure>
 
 This is a very minimal process definition that just contains an `output` definition and the `script` to execute.
 

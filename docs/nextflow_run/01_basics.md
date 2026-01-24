@@ -76,10 +76,6 @@ Find out what it takes to run a Nextflow workflow that achieves the same result.
 
 We provide you with a workflow script named `1-hello.nf` that takes an input greeting via a command-line argument named `--input` and produces a text file containing that greeting.
 
-<figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello_world.svg"
-</figure>
-
 We're not going to look at the code yet; first let's see what it looks like to run it.
 
 ### 1.1. Launch the workflow and monitor execution
@@ -313,8 +309,6 @@ The first block of code describes a **process**.
 The process definition starts with the keyword `process`, followed by the process name and finally the process body delimited by curly braces.
 The process body must contain a script block which specifies the command to run, which can be anything you would be able to run in a command line terminal.
 
-Here we have a **process** called `sayHello` that takes an **input** variable called `greeting` and writes its **output** to a file named `output.txt`.
-
 ```groovy title="1-hello.nf" linenums="3"
 /*
 * Use echo to print a greeting to a file
@@ -334,23 +328,25 @@ process sayHello {
 }
 ```
 
+Here we have a **process** called `sayHello` that takes an **input** variable called `greeting` and writes its **output** to a file named `output.txt`.
+
+<figure class="excalidraw">
+--8<-- "docs/nextflow_run/img/sayhello_with_input.svg"
+</figure>
+
 This is a very minimal process definition that just contains an `input` definition, an `output` definition and the `script` to execute.
 
 The `input` definition includes the `val` qualifier, which tells Nextflow to expect a value of some kind (can be a string, a number, whatever).
 
 The `output` definition includes the `path` qualifier, which tells Nextflow this should be handled as a path (includes both directory paths and files).
 
-Importantly, the output definition does not _determine_ what output will be created.
-It simply _declares_ what is the expected output, so that Nextflow can look for it once execution is complete.
-This is necessary for verifying that the command was executed successfully and for passing the output to downstream processes if needed. Output produced that doesn't match what is declared in the output block will not be passed to downstream processes.
+!!! info "Role of output definitions"
 
-!!! warning
+    The output definition does not _determine_ what output will be created.
+    It simply _declares_ what is the expected output, so that Nextflow can look for it once execution is complete.
 
-    This example is brittle because we hardcoded the output filename in two separate places (the script and the output blocks).
-    If we change one but not the other, the script will break.
-    Later on, you'll learn ways to use variables to mitigate this problem.
-
-In a real-world pipeline, a process usually contains additional information such as process directives, which we'll introduce in a little bit.
+    This is necessary for verifying that the command was executed successfully and for passing the output to downstream processes if needed.
+    If the output produced by a process doesn't match what is declared in the output block, it will not be passed to downstream processes and the workflow will fail.
 
 ### 2.3. The `workflow` definition
 
@@ -589,7 +585,7 @@ Your output will have different task directory names and may have a different nu
 
 If you don't see any lines output, you either did not provide a valid run name or there are no past runs to delete. Make sure to change `backstabbing_swartz` in the example command to whatever is the corresponding latest run name in your log.
 
-#### 3.3.2. Proceed with deletion
+#### 3.3.3. Proceed with deletion
 
 If the output looks as expected and you want to proceed with the deletion, re-run the command with the `-f` flag instead of `-n`:
 
