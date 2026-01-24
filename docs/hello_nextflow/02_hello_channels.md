@@ -18,12 +18,12 @@ In most realistic workflow use cases, we want to process multiple values (experi
 That is what Nextflow **channels** are for.
 Channels are queues designed to handle inputs efficiently and shuttle them from one step to another in multi-step workflows, while providing built-in parallelism and many additional benefits.
 
-<!-- TODO: simple diagram for channels -->
-
 In this part of the course, you will learn how to use a channel to handle multiple inputs from a variety of different sources.
 You will also learn to use **operators** to transform channel contents as needed.
 
-_For training on using channels to connect steps in a multi-step workflow, see Part 3 of this course._
+??? info "How to begin from this section"
+
+    This section of the course assumes you have completed Part 1 of the [Hello Nextflow](./index.md) course, but if you are comfortable with the basics covered in that section, you can start from here without doing anything special.
 
 ---
 

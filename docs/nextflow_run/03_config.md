@@ -11,53 +11,7 @@ By learning to utilize these configuration options effectively, you can take ful
 
 To exercise these elements of configuration, we're going to be running a fresh copy of the workflow we last ran at the end of Part 2 of this training course, renamed `3-main.nf`.
 
-??? info "Summary of the Hello pipeline"
-
-    If you haven't done the first two parts of this course or you could use a recap, here's a quick overview of what this simple workflow does.
-
-    The workflow takes a CSV file containing greetings, writes them to separate files, converts each to uppercase, collects them back together again and outputs a single text file containing an ASCII picture of a fun character saying the greetings.
-
-    The four steps are implemented as Nextflow processes (`sayHello`, `convertToUpper`, `collectGreetings`, and `cowpy`) stored in separate module files.
-
-    1. **`sayHello`:** Writes each greeting to its own output file (e.g., "Hello-output.txt")
-    2. **`convertToUpper`:** Converts each greeting to uppercase (e.g., "HELLO")
-    3. **`collectGreetings`:** Collects all uppercase greetings into a single batch file
-    4. **`cowpy`:** Generates ASCII art using the `cowpy` tool
-
-    <figure class="excalidraw">
-    --8<-- "docs/hello_nextflow/img/hello_pipeline_complete.svg"
-    </figure>
-
-    The results are published to a directory called `results/`, and the final output of the pipeline (when run with default parameters) is a plain text file containing ASCII art of a turkey saying the uppercased greetings.
-
-    ```txt title="results/cowpy-COLLECTED-batch-output.txt"
-     _________
-    / BONJOUR \
-    | HELLO   |
-    \ HOLà    /
-    ---------
-      \                                  ,+*^^*+___+++_
-      \                           ,*^^^^              )
-        \                       _+*                     ^**+_
-        \                    +^       _ _++*+_+++_,         )
-                  _+^^*+_    (     ,+*^ ^          \+_        )
-                {       )  (    ,(    ,_+--+--,      ^)      ^\
-                { (\@)    } f   ,(  ,+-^ __*_*_  ^^\_   ^\       )
-              {:;-/    (_+*-+^^^^^+*+*<_ _++_)_    )    )      /
-              ( /  (    (        ,___    ^*+_+* )   <    <      \
-              U _/     )    *--<  ) ^\-----++__)   )    )       )
-                (      )  _(^)^^))  )  )\^^^^^))^*+/    /       /
-              (      /  (_))_^)) )  )  ))^^^^^))^^^)__/     +^^
-            (     ,/    (^))^))  )  ) ))^^^^^^^))^^)       _)
-              *+__+*       (_))^)  ) ) ))^^^^^^))^^^^^)____*^
-              \             \_)^)_)) ))^^^^^^^^^^))^^^^)
-              (_             ^\__^^^^^^^^^^^^))^^^^^^^)
-                ^\___            ^\__^^^^^^))^^^^^^^^)\\
-                      ^^^^^\uuu/^^\uuu/^^^^\^\^\^\^\^\^\^\
-                        ___) >____) >___   ^\_\_\_\_\_\_\)
-                        ^^^//\\_^^//\\_^       ^(\_\_\_\)
-                          ^^^ ^^ ^^^ ^
-    ```
+If you're not familiar with the Hello pipeline or you could use a reminder, see [this info page](../info/hello_pipeline.md).
 
 ---
 
@@ -65,12 +19,14 @@ To exercise these elements of configuration, we're going to be running a fresh c
 
 We're going to start with an aspect of configuration that is simply an extension of what we've been working with so far: the management of input parameters.
 
-Currently, our workflow is set up to accept several parameter values via the command-line, with default values set in a `params` block in the workflow script itself.
-However, you might want to override those defaults without having to either specify parameters on the command line, or modify the original script file.
+Currently, our workflow is set up to accept several parameter values via the command-line, declared in a `params` block in the workflow script itself.
+One has a default value set as part of its declaration.
+
+However, you might want to set defaults for all of them, or override the existing default without having to either specify parameters on the command line, or modify the original script file.
 
 There are multiple ways of doing that; we're going to show you three basic ways that are very commonly used.
 
-### 1.1. Move default values to `nextflow.config`
+### 1.1. Set up values in `nextflow.config`
 
 This is the simplest approach, though it's possibly the least flexible since the main `nextflow.config` file is not something you want to be editing for every run.
 But it does have the advantage of separating the concerns of _declaring_ the parameters in the workflow (which definitely belongs there) versus supplying _default values_, which are more at home in a configuration file.
@@ -103,22 +59,22 @@ Make the following code changes in the `nextflow.config` file:
     ```
 
 Note that we didn't simply copy the `params` block from the workflow to the configuration file.
-The syntax is a little different.
-In the workflow file, those are typed declarations.
+For the `batch` parameter that had a default value declared already, the syntax is a little different.
+In the workflow file, that's a typed declaration.
 In the configuration, those are value assignments.
 
 Technically, this is sufficient for overriding the default values still specified in the workflow file.
-You could modify the character, for example, and run the workflow to satisfy yourself that the value set in the configuration file overrides the one set in the workflow file.
+You could modify the default value for `batch` and run the workflow to satisfy yourself that the value set in the configuration file overrides the one set in the workflow file.
 
-But in the spirit of moving configuration completely to the configuration file, let's remove those values from the workflow file entirely.
+But in the spirit of moving configuration completely to the configuration file, let's remove that default value from the workflow file entirely.
 
-#### 1.1.2. Remove the values from the `params` block in the workflow file
+#### 1.1.2. Remove the default value for `batch` in the workflow file
 
-Make the following code changes to the `hello-config.nf` workflow file:
+Make the following code change to the `3-main.nf` workflow file:
 
 === "After"
 
-    ```groovy title="hello-config.nf" linenums="9" hl_lines="5-7"
+    ```groovy title="3-main.nf" linenums="9" hl_lines="6"
     /*
     * Pipeline parameters
     */
@@ -131,14 +87,14 @@ Make the following code changes to the `hello-config.nf` workflow file:
 
 === "Before"
 
-    ```groovy title="hello-config.nf" linenums="9" hl_lines="5-7"
+    ```groovy title="3-main.nf" linenums="9" hl_lines="6"
     /*
     * Pipeline parameters
     */
     params {
-        input: Path = 'data/greetings.csv'
+        input: Path
         batch: String = 'batch'
-        character: String = 'turkey'
+        character: String
     }
     ```
 
@@ -146,10 +102,10 @@ Now the workflow file itself does not set any default values for these parameter
 
 #### 1.1.3. Run the pipeline
 
-Let's test that it works correctly.
+Let's test that it works correctly without specifying any parameters in the command line.
 
 ```bash
-nextflow run hello-config.nf
+nextflow run 3-main.nf
 ```
 
 ??? success "Command output"
@@ -157,7 +113,7 @@ nextflow run hello-config.nf
     ```console
     N E X T F L O W   ~  version 25.10.2
 
-    Launching `hello-config.nf` [disturbed_einstein] DSL2 - revision: ede9037d02
+    Launching `3-main.nf` [disturbed_einstein] DSL2 - revision: ede9037d02
 
     executor >  local (8)
     [f0/35723c] sayHello (2)       | 3 of 3 ✔
@@ -168,11 +124,11 @@ nextflow run hello-config.nf
 
 This still produces the same output as previously.
 
-The final ASCII art output is in the `results/hello_config/` directory, under the name `cowpy-COLLECTED-batch-output.txt`, same as before.
+The final ASCII art output is in the `results/3-main/` directory, under the name `cowpy-COLLECTED-batch-output.txt`, same as before.
 
 ??? abstract "File contents"
 
-    ```console title="results/hello_config/cowpy-COLLECTED-batch-output.txt"
+    ```console title="results/3-main/cowpy-COLLECTED-batch-output.txt"
     _________
     / HOLà    \
     | HELLO   |
@@ -245,7 +201,7 @@ We can now run our pipeline from within our new working directory.
 Make sure to adapt the path accordingly!
 
 ```bash
-nextflow run ../hello-config.nf
+nextflow run ../3-main.nf
 ```
 
 ??? success "Command output"
@@ -253,7 +209,7 @@ nextflow run ../hello-config.nf
     ```console
     N E X T F L O W   ~  version 25.10.2
 
-    Launching `../hello-config.nf` [trusting_escher] DSL2 - revision: 356df0818d
+    Launching `../3-main.nf` [trusting_escher] DSL2 - revision: 356df0818d
 
     executor >  local (8)
     [59/b66913] sayHello (2)       [100%] 3 of 3 ✔
@@ -270,7 +226,7 @@ The final output file should contain the tux character saying the greetings.
 
 ??? abstract "File contents"
 
-    ```console title="tux-run/results/hello_config/cowpy-COLLECTED-experiment-output.txt"
+    ```console title="tux-run/results/3-main/cowpy-COLLECTED-experiment-output.txt"
     _________
     / HELLO   \
     | BONJOUR |
@@ -333,7 +289,7 @@ The config file is written in Groovy, whereas the parameter file is written in Y
 To run the workflow with this parameter file, simply add `-params-file <filename>` to the base command.
 
 ```bash
-nextflow run hello-config.nf -params-file test-params.yaml
+nextflow run 3-main.nf -params-file test-params.yaml
 ```
 
 ??? success "Command output"
@@ -341,7 +297,7 @@ nextflow run hello-config.nf -params-file test-params.yaml
     ```console
     N E X T F L O W   ~  version 25.10.2
 
-    Launching `hello-config.nf` [disturbed_sammet] DSL2 - revision: ede9037d02
+    Launching `3-main.nf` [disturbed_sammet] DSL2 - revision: ede9037d02
 
     executor >  local (8)
     [f0/35723c] sayHello (2)       | 3 of 3 ✔
@@ -354,7 +310,7 @@ The final output file should contain the stegosaurus character saying the greeti
 
 ??? abstract "File contents"
 
-    ```console title="results/hello_config/cowpy-COLLECTED-yaml-output.txt"
+    ```console title="results/3-main/cowpy-COLLECTED-yaml-output.txt"
     _________
     / HELLO   \
     | HOLà    |
@@ -394,13 +350,13 @@ Learn how to manage where and how your workflow outputs get published.
 
 ## 2. Manage workflow outputs
 
-So far we've been hardcoding all the paths for workflow-level output declarations, and as we noted when we started adding multiple outputs, there can a bit of repetition involved.
+The workflow we inherited uses paths for workflow-level output declarations, which isn't terribly flexible and involves a lot of repetition.
 
 Let's look at a few common ways you might configure this to be more flexible.
 
 ### 2.1. Customize the `outputDir` directory name
 
-For each chapter of this course, we've been publishing outputs to a different subdirectory hardcoded into the output definitions.
+Each version of the workflow we've run so far has published its outputs to a different subdirectory hardcoded into the output definitions.
 
 Let's change that to use a user-configurable parameter.
 We could create a whole new parameter for this, but let's use the `batch` parameter since it's right there.
@@ -456,7 +412,7 @@ Make the following code changes in the workflow file:
 
 === "After"
 
-    ```groovy title="hello-config.nf" linenums="42" hl_lines="3 7 11 15 19"
+    ```groovy title="3-main.nf" linenums="42" hl_lines="3 7 11 15 19"
     output {
         first_output {
             path 'intermediates'
@@ -483,26 +439,26 @@ Make the following code changes in the workflow file:
 
 === "Before"
 
-    ```groovy title="hello-config.nf" linenums="42" hl_lines="3 7 11 15 19"
+    ```groovy title="3-main.nf" linenums="42" hl_lines="3 7 11 15 19"
     output {
         first_output {
-            path 'hello_config/intermediates'
+            path '3-main/intermediates'
             mode 'copy'
         }
         uppercased {
-            path 'hello_config/intermediates'
+            path '3-main/intermediates'
             mode 'copy'
         }
         collected {
-            path 'hello_config/intermediates'
+            path '3-main/intermediates'
             mode 'copy'
         }
         batch_report {
-            path 'hello_config'
+            path '3-main'
             mode 'copy'
         }
         cowpy_art {
-            path 'hello_config'
+            path '3-main'
             mode 'copy'
         }
     }
@@ -515,7 +471,7 @@ We could also have just added `${params.batch}` to each path instead of modifyin
 Let's test that it works correctly, setting the batch name to `outdir` from the command line.
 
 ```bash
-nextflow run hello-config.nf --batch outdir
+nextflow run 3-main.nf --batch outdir
 ```
 
 ??? success "Command output"
@@ -523,7 +479,7 @@ nextflow run hello-config.nf --batch outdir
     ```console
     N E X T F L O W   ~  version 25.10.2
 
-    Launching `hello-config.nf` [disturbed_einstein] DSL2 - revision: ede9037d02
+    Launching `3-main.nf` [disturbed_einstein] DSL2 - revision: ede9037d02
 
     executor >  local (8)
     [f0/35723c] sayHello (2)       | 3 of 3 ✔
@@ -564,7 +520,7 @@ Make the following changes in the workflow file:
 
 === "After"
 
-    ```groovy title="hello-config.nf" linenums="42" hl_lines="3 7 11 15 19"
+    ```groovy title="3-main.nf" linenums="42" hl_lines="3 7 11 15 19"
     output {
         first_output {
             path { sayHello.process }
@@ -591,7 +547,7 @@ Make the following changes in the workflow file:
 
 === "Before"
 
-    ```groovy title="hello-config.nf" linenums="42" hl_lines="3 7 11 15 19"
+    ```groovy title="3-main.nf" linenums="42" hl_lines="3 7 11 15 19"
     output {
         first_output {
             path 'intermediates'
@@ -623,7 +579,7 @@ This removes the remaining hardcoded elements from the output path configuration
 Let's test that it works correctly, setting the batch name to `pnames` from the command line.
 
 ```bash
-nextflow run hello-config.nf --batch pnames
+nextflow run 3-main.nf --batch pnames
 ```
 
 ??? success "Command output"
@@ -631,7 +587,7 @@ nextflow run hello-config.nf --batch pnames
     ```console
     N E X T F L O W   ~  version 25.10.2
 
-    Launching `hello-config.nf` [jovial_mcclintock] DSL2 - revision: ede9037d02
+    Launching `3-main.nf` [jovial_mcclintock] DSL2 - revision: ede9037d02
 
     executor >  local (8)
     [f0/35723c] sayHello (2)       | 3 of 3 ✔
@@ -699,7 +655,7 @@ Make the following changes in the workflow file:
 
 === "After"
 
-    ```groovy title="hello-config.nf" linenums="42"
+    ```groovy title="3-main.nf" linenums="42"
     output {
         first_output {
             path { sayHello.process }
@@ -721,7 +677,7 @@ Make the following changes in the workflow file:
 
 === "Before"
 
-    ```groovy title="hello-config.nf" linenums="42" hl_lines="3 7 11 15 19"
+    ```groovy title="3-main.nf" linenums="42" hl_lines="3 7 11 15 19"
     output {
         first_output {
             path { sayHello.process }
@@ -753,7 +709,7 @@ That's more concise, isn't it?
 Let's test that it works correctly, setting the batch name to `outmode` from the command line.
 
 ```bash
-nextflow run hello-config.nf --batch outmode
+nextflow run 3-main.nf --batch outmode
 ```
 
 ??? success "Command output"
@@ -761,7 +717,7 @@ nextflow run hello-config.nf --batch outmode
     ```console
     N E X T F L O W   ~  version 25.10.2
 
-    Launching `hello-config.nf` [rowdy_sagan] DSL2 - revision: ede9037d02
+    Launching `3-main.nf` [rowdy_sagan] DSL2 - revision: ede9037d02
 
     executor >  local (8)
     [f0/35723c] sayHello (2)       | 3 of 3 ✔
@@ -883,15 +839,15 @@ To be clear, we're not _replacing_ the `docker` directive, we're _adding_ an alt
 Let's try it out.
 
 ```bash
-nextflow run hello-config.nf --batch conda
+nextflow run 3-main.nf --batch conda
 ```
 
 ??? success "Command output"
 
     ```console title="Output"
-    N E X T F L O W   ~  version 25.04.3
+    N E X T F L O W   ~  version 25.10.2
 
-    Launching `hello-config.nf` [trusting_lovelace] DSL2 - revision: 028a841db1
+    Launching `3-main.nf` [trusting_lovelace] DSL2 - revision: 028a841db1
 
     executor >  local (8)
     [ee/4ca1f2] sayHello (3)       | 3 of 3 ✔
@@ -904,7 +860,7 @@ This should work without issue and produce the same outputs as previously under 
 
 Behind the scenes, Nextflow has retrieved the Conda packages and created the environment, which normally takes a bit of work; so it's nice that we don't have to do any of that ourselves!
 
-!!! note
+!!! info
 
     This runs quickly because the `cowpy` package is quite small, but if you're working with large packages, it may take a bit longer than usual the first time, and you might see the console output stay 'stuck' for a minute or so before completing.
     This is normal and is due to the extra work Nextflow does the first time you use a new package.
@@ -1045,7 +1001,7 @@ Conveniently, Nextflow includes built-in tools for doing this, and will happily 
 To do so, add `-with-report <filename>.html` to your command line.
 
 ```bash
-nextflow run hello-config.nf -with-report report-config-1.html
+nextflow run 3-main.nf -with-report report-config-1.html
 ```
 
 The report is an html file, which you can download and open in your browser. You can also right click it in the file explorer on the left and click on `Show preview` in order to view it in the training environment.
@@ -1060,9 +1016,9 @@ There is some [documentation](https://www.nextflow.io/docs/latest/reports.html) 
 
 The profiling shows that the processes in our training workflow are very lightweight, so let's reduce the default memory allocation to 1GB per process.
 
-Add the following to your `nextflow.config` file:
+Add the following to your `nextflow.config` file, before the pipeline parameters section:
 
-```groovy title="nextflow.config" linenums="19"
+```groovy title="nextflow.config" linenums="4"
 /*
 * Process settings
 */
@@ -1071,13 +1027,15 @@ process {
 }
 ```
 
+That will help reduce the amount of compute we consume.
+
 ### 5.3. Set resource allocations for a specific process
 
 At the same time, we're going to pretend that the `cowpy` process requires more resources than the others, just so we can demonstrate how to adjust allocations for an individual process.
 
 === "After"
 
-    ```groovy title="nextflow.config" linenums="19" hl_lines="6-9"
+    ```groovy title="nextflow.config" linenums="4" hl_lines="6-9"
     /*
     * Process settings
     */
@@ -1092,7 +1050,7 @@ At the same time, we're going to pretend that the `cowpy` process requires more 
 
 === "Before"
 
-    ```groovy title="nextflow.config" linenums="19"
+    ```groovy title="nextflow.config" linenums="4"
     /*
     * Process settings
     */
@@ -1103,7 +1061,7 @@ At the same time, we're going to pretend that the `cowpy` process requires more 
 
 With this configuration, all processes will request 1GB of memory and a single CPU (the implied default), except the `cowpy` process, which will request 2GB and 2 CPUs.
 
-!!! tip
+!!! info
 
     If you have a machine with few CPUs and you allocate a high number per process, you might see process calls getting queued behind each other.
     This is because Nextflow ensures we don't request more CPUs than are available.
@@ -1113,7 +1071,7 @@ With this configuration, all processes will request 1GB of memory and a single C
 Let's try that out, supplying a different filename for the profiling report so we can compare performance before and after the configuration changes.
 
 ```bash
-nextflow run hello-config.nf -with-report report-config-2.html
+nextflow run 3-main.nf -with-report report-config-2.html
 ```
 
 You will probably not notice any real difference since this is such a small workload, but this is the approach you would use to analyze the performance and resource requirements of a real-world workflow.
@@ -1178,9 +1136,9 @@ Let's set up two alternative profiles; one for running small scale loads on a re
 
 #### 6.1.1. Set up the profiles
 
-Add the following to your `nextflow.config` file:
+Add the following to your `nextflow.config` file, after the pipeline parameters section but before the output settings:
 
-```groovy title="nextflow.config" linenums="26"
+```groovy title="nextflow.config" linenums="24"
 /*
 * Profiles
 */
@@ -1210,15 +1168,15 @@ To specify a profile in our Nextflow command line, we use the `-profile` argumen
 Let's try running the workflow with the `my_laptop` configuration.
 
 ```bash
-nextflow run hello-config.nf -profile my_laptop
+nextflow run 3-main.nf -profile my_laptop
 ```
 
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.04.3
+    N E X T F L O W   ~  version 25.10.2
 
-    Launching `hello-config.nf` [gigantic_brazil] DSL2 - revision: ede9037d02
+    Launching `3-main.nf` [gigantic_brazil] DSL2 - revision: ede9037d02
 
     executor >  local (8)
     [58/da9437] sayHello (3)       | 3 of 3 ✔
@@ -1256,7 +1214,7 @@ The syntax for expressing default values in this context looks like this, for a 
 
 If we add a test profile for our workflow, the `profiles` block becomes:
 
-```groovy title="nextflow.config" linenums="26"
+```groovy title="nextflow.config" linenums="24"
 /*
 * Profiles
 */
@@ -1294,7 +1252,7 @@ If the conflicting settings are set in different configuration sources, the defa
 Let's try adding the test profile to our previous command:
 
 ```bash
-nextflow run hello-config.nf -profile my_laptop,test
+nextflow run 3-main.nf -profile my_laptop,test
 ```
 
 ??? success "Command output"
@@ -1302,21 +1260,41 @@ nextflow run hello-config.nf -profile my_laptop,test
     ```console
     N E X T F L O W   ~  version 25.10.2
 
-    Launching `hello-config.nf` [gigantic_brazil] DSL2 - revision: ede9037d02
+    Launching `3-main.nf` [jovial_coulomb] DSL2 - revision: 46a6763141
 
     executor >  local (8)
-    [58/da9437] sayHello (3)       | 3 of 3 ✔
-    [35/9cbe77] convertToUpper (2) | 3 of 3 ✔
-    [67/857d05] collectGreetings   | 1 of 1 ✔
-    [37/7b51b5] cowpy              | 1 of 1 ✔
+    [9b/687cdc] sayHello (2)       | 3 of 3 ✔
+    [ca/552187] convertToUpper (3) | 3 of 3 ✔
+    [e8/83e306] collectGreetings   | 1 of 1 ✔
+    [fd/e84fa9] cowpy              | 1 of 1 ✔
     ```
 
 This will use Docker where possible and produce outputs under `results/test`, and this time the character is the comedic duo `dragonandcow`.
 
 ??? abstract "File contents"
 
-    ```console title="results/profiles/cowpy-COLLECTED-profiles-output.txt"
-    TODO: UPDATE WITH correct output (dragonandcow)
+    ```console title="results/test/
+     _________
+    / HOLà    \
+    | HELLO   |
+    \ BONJOUR /
+    ---------
+                \                    ^    /^
+                  \                  / \  // \
+                  \   |\___/|      /   \//  .\
+                    \  /O  O  \__  /    //  | \ \           *----*
+                      /     /  \/_/    //   |  \  \          \   |
+                      \@___\@`    \/_   //    |   \   \         \/\ \
+                    0/0/|       \/_ //     |    \    \         \ \
+                0/0/0/0/|        \///      |     \     \       | |
+              0/0/0/0/0/_|_ /   (  //       |      \     _\     |  /
+          0/0/0/0/0/0/`/,_ _ _/  ) ; -.    |    _ _\.-~       /   /
+                      ,-}        _      *-.|.-~-.           .~    ~
+      \     \__/        `/\      /                 ~-. _ .-~      /
+      \____(oo)           *.   }            {                   /
+      (    (--)          .----~-.\        \-`                 .~
+      //__\\  \__ Ack!   ///.----..<        \             _ -~
+      //    \\               ///-._ _ _ _ _ _ _{^ - - - - ~
     ```
 
 This means that as long as we distribute any test data files with the workflow code, anyone can quickly try out the workflow without having to supply their own inputs via the command line or a parameter file.

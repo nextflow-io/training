@@ -28,6 +28,10 @@ This time, we're going to make the following changes to our workflow to better r
 3. Add a parameter to name the final output file and pass that as a secondary input to the collection step.
 4. Make the collection step also report a simple statistic about what was processed.
 
+??? info "How to begin from this section"
+
+    This section of the course assumes you have completed Parts 1-2 of the [Hello Nextflow](./index.md) course, but if you are comfortable with the basics covered in those sections, you can start from here without doing anything special.
+
 ---
 
 ## 0. Warmup: Run `hello-workflow.nf`

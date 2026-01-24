@@ -19,6 +19,21 @@ In this part of the course, we are going to show you the simplest and most commo
 We'll go over essential components of Nextflow configuration such as process directives, executors, profiles, and parameter files.
 By learning to utilize these configuration options effectively, you can enhance the flexibility, scalability, and performance of your pipelines.
 
+??? info "How to begin from this section"
+
+    This section of the course assumes you have completed Parts 1-5 of the [Hello Nextflow](./index.md) course and have a complete working pipeline.
+
+    If you're starting the course from this point, you'll need to copy the `modules` directory and the `nextflow.config` file over from the solutions:
+
+    ```bash
+    cp -r solutions/5-hello-containers/modules .
+    cp solutions/5-hello-containers/nextflow.config .
+    ```
+
+    The `nextflow.config` file contains the line `docker.enabled = true` which enables use of Docker containers.
+
+    If you're not familiar with the Hello pipeline or you could use a reminder, see [this info page](../info/hello_pipeline.md).
+
 ---
 
 ## 0. Warmup: Run `hello-config.nf`
@@ -50,65 +65,6 @@ output {
     }
 }
 ```
-
-??? info "Summary of the Hello pipeline"
-
-    If you haven't done the previous parts of this course or you could use a recap, here's a quick overview of what this simple workflow does.
-
-    The workflow takes a CSV file containing greetings, writes them to separate files, converts each to uppercase, collects them back together again and outputs a single text file containing an ASCII picture of a fun character saying the greetings.
-
-    The four steps are implemented as Nextflow processes (`sayHello`, `convertToUpper`, `collectGreetings`, and `cowpy`) stored in separate module files.
-
-    1. **`sayHello`:** Writes each greeting to its own output file (e.g., "Hello-output.txt")
-    2. **`convertToUpper`:** Converts each greeting to uppercase (e.g., "HELLO")
-    3. **`collectGreetings`:** Collects all uppercase greetings into a single batch file
-    4. **`cowpy`:** Generates ASCII art using the `cowpy` tool
-
-    <figure class="excalidraw">
-    --8<-- "docs/hello_nextflow/img/hello_pipeline_complete.svg"
-    </figure>
-
-    The results are published to a directory called `results/`, and the final output of the pipeline (when run with default parameters) is a plain text file containing ASCII art of a turkey saying the uppercased greetings.
-
-    ```txt title="results/cowpy-COLLECTED-batch-output.txt"
-     _________
-    / BONJOUR \
-    | HELLO   |
-    \ HOLà    /
-    ---------
-      \                                  ,+*^^*+___+++_
-      \                           ,*^^^^              )
-        \                       _+*                     ^**+_
-        \                    +^       _ _++*+_+++_,         )
-                  _+^^*+_    (     ,+*^ ^          \+_        )
-                {       )  (    ,(    ,_+--+--,      ^)      ^\
-                { (\@)    } f   ,(  ,+-^ __*_*_  ^^\_   ^\       )
-              {:;-/    (_+*-+^^^^^+*+*<_ _++_)_    )    )      /
-              ( /  (    (        ,___    ^*+_+* )   <    <      \
-              U _/     )    *--<  ) ^\-----++__)   )    )       )
-                (      )  _(^)^^))  )  )\^^^^^))^*+/    /       /
-              (      /  (_))_^)) )  )  ))^^^^^))^^^)__/     +^^
-            (     ,/    (^))^))  )  ) ))^^^^^^^))^^)       _)
-              *+__+*       (_))^)  ) ) ))^^^^^^))^^^^^)____*^
-              \             \_)^)_)) ))^^^^^^^^^^))^^^^)
-              (_             ^\__^^^^^^^^^^^^))^^^^^^^)
-                ^\___            ^\__^^^^^^))^^^^^^^^)\\
-                      ^^^^^\uuu/^^\uuu/^^^^\^\^\^\^\^\^\^\
-                        ___) >____) >___   ^\_\_\_\_\_\_\)
-                        ^^^//\\_^^//\\_^       ^(\_\_\_\)
-                          ^^^ ^^ ^^^ ^
-    ```
-
-!!! tip
-
-    If you're starting the course from this point, you'll need to copy the `modules` directory and the `nextflow.config` file over from the solutions:
-
-    ```bash
-    cp -r solutions/5-hello-containers/modules .
-    cp solutions/5-hello-containers/nextflow.config .
-    ```
-
-    The `nextflow.config` file contains the line `docker.enabled = true` which enables use of Docker containers.
 
 Just to make sure everything is working, run the script once before making any changes:
 
@@ -1013,7 +969,7 @@ nextflow run hello-config.nf --batch conda
 ??? success "Command output"
 
     ```console title="Output"
-    N E X T F L O W   ~  version 25.04.3
+    N E X T F L O W   ~  version 25.10.2
 
     Launching `hello-config.nf` [trusting_lovelace] DSL2 - revision: 028a841db1
 
@@ -1184,9 +1140,9 @@ There is some [documentation](https://www.nextflow.io/docs/latest/reports.html) 
 
 The profiling shows that the processes in our training workflow are very lightweight, so let's reduce the default memory allocation to 1GB per process.
 
-Add the following to your `nextflow.config` file:
+Add the following to your `nextflow.config` file, before the pipeline parameters section:
 
-```groovy title="nextflow.config" linenums="19"
+```groovy title="nextflow.config" linenums="4"
 /*
 * Process settings
 */
@@ -1195,13 +1151,15 @@ process {
 }
 ```
 
+That will help reduce the amount of compute we consume.
+
 ### 5.3. Set resource allocations for a specific process
 
 At the same time, we're going to pretend that the `cowpy` process requires more resources than the others, just so we can demonstrate how to adjust allocations for an individual process.
 
 === "After"
 
-    ```groovy title="nextflow.config" linenums="19" hl_lines="6-9"
+    ```groovy title="nextflow.config" linenums="4" hl_lines="6-9"
     /*
     * Process settings
     */
@@ -1216,7 +1174,7 @@ At the same time, we're going to pretend that the `cowpy` process requires more 
 
 === "Before"
 
-    ```groovy title="nextflow.config" linenums="19"
+    ```groovy title="nextflow.config" linenums="4"
     /*
     * Process settings
     */
@@ -1302,9 +1260,9 @@ Let's set up two alternative profiles; one for running small scale loads on a re
 
 #### 6.1.1. Set up the profiles
 
-Add the following to your `nextflow.config` file:
+Add the following to your `nextflow.config` file, after the pipeline parameters section but before the output settings:
 
-```groovy title="nextflow.config" linenums="26"
+```groovy title="nextflow.config" linenums="24"
 /*
 * Profiles
 */
@@ -1340,7 +1298,7 @@ nextflow run hello-config.nf -profile my_laptop
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.04.3
+    N E X T F L O W   ~  version 25.10.2
 
     Launching `hello-config.nf` [gigantic_brazil] DSL2 - revision: ede9037d02
 
@@ -1380,7 +1338,7 @@ The syntax for expressing default values in this context looks like this, for a 
 
 If we add a test profile for our workflow, the `profiles` block becomes:
 
-```groovy title="nextflow.config" linenums="26"
+```groovy title="nextflow.config" linenums="24"
 /*
 * Profiles
 */
@@ -1426,21 +1384,41 @@ nextflow run hello-config.nf -profile my_laptop,test
     ```console
     N E X T F L O W   ~  version 25.10.2
 
-    Launching `hello-config.nf` [gigantic_brazil] DSL2 - revision: ede9037d02
+    Launching `hello-config.nf` [jovial_coulomb] DSL2 - revision: 46a6763141
 
     executor >  local (8)
-    [58/da9437] sayHello (3)       | 3 of 3 ✔
-    [35/9cbe77] convertToUpper (2) | 3 of 3 ✔
-    [67/857d05] collectGreetings   | 1 of 1 ✔
-    [37/7b51b5] cowpy              | 1 of 1 ✔
+    [9b/687cdc] sayHello (2)       | 3 of 3 ✔
+    [ca/552187] convertToUpper (3) | 3 of 3 ✔
+    [e8/83e306] collectGreetings   | 1 of 1 ✔
+    [fd/e84fa9] cowpy              | 1 of 1 ✔
     ```
 
 This will use Docker where possible and produce outputs under `results/test`, and this time the character is the comedic duo `dragonandcow`.
 
 ??? abstract "File contents"
 
-    ```console title="results/profiles/cowpy-COLLECTED-profiles-output.txt"
-    TODO: UPDATE WITH correct output (dragonandcow)
+    ```console title="results/test/
+     _________
+    / HOLà    \
+    | HELLO   |
+    \ BONJOUR /
+    ---------
+                \                    ^    /^
+                  \                  / \  // \
+                  \   |\___/|      /   \//  .\
+                    \  /O  O  \__  /    //  | \ \           *----*
+                      /     /  \/_/    //   |  \  \          \   |
+                      \@___\@`    \/_   //    |   \   \         \/\ \
+                    0/0/|       \/_ //     |    \    \         \ \
+                0/0/0/0/|        \///      |     \     \       | |
+              0/0/0/0/0/_|_ /   (  //       |      \     _\     |  /
+          0/0/0/0/0/0/`/,_ _ _/  ) ; -.    |    _ _\.-~       /   /
+                      ,-}        _      *-.|.-~-.           .~    ~
+      \     \__/        `/\      /                 ~-. _ .-~      /
+      \____(oo)           *.   }            {                   /
+      (    (--)          .----~-.\        \-`                 .~
+      //__\\  \__ Ack!   ///.----..<        \             _ -~
+      //    \\               ///-._ _ _ _ _ _ _{^ - - - - ~
     ```
 
 This means that as long as we distribute any test data files with the workflow code, anyone can quickly try out the workflow without having to supply their own inputs via the command line or a parameter file.

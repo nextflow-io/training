@@ -19,10 +19,19 @@ Typically, you'd need to install these tools, manage their dependencies, and res
 That is all very tedious and annoying, so we're going to show you how to use **containers** to solve this problem much more conveniently.
 
 A **container** is a lightweight, standalone, executable unit of software created from a container **image** that includes everything needed to run an application including code, system libraries and settings.
+As you might imagine, that is a going to be very helpful for making your pipelines more reproducible.
 
-!!! info
+Note that we'll be teaching this using [Docker](https://www.docker.com/get-started/), but keep in mind Nextflow supports [several other container technologies](https://www.nextflow.io/docs/latest/container.html#) as well.
 
-    We'll be teaching this using the technology [Docker](https://www.docker.com/get-started/), but Nextflow supports [several other container technologies](https://www.nextflow.io/docs/latest/container.html#) as well.
+??? info "How to begin from this section"
+
+    This section of the course assumes you have completed Parts 1-4 of the [Hello Nextflow](./index.md) course and have a complete working pipeline.
+
+    If you're starting the course from this point, you'll need to copy the `modules` directory over from the solutions:
+
+    ```bash
+    cp -r solutions/4-hello-modules/modules .
+    ```
 
 ---
 
@@ -51,14 +60,6 @@ output {
     }
 }
 ```
-
-!!! tip
-
-    If you're starting the course from this point, you'll need to copy the `modules` directory over from the solutions:
-
-    ```bash
-    cp -r solutions/4-hello-modules/modules .
-    ```
 
 Just to make sure everything is working, run the script once before making any changes:
 
@@ -386,6 +387,14 @@ Nextflow has built-in support for running processes inside containers to let you
 This means that you can use any container image you like to run your processes, and Nextflow will take care of pulling the image, mounting the data, and running the process inside it.
 
 To demonstrate this, we are going to add a `cowpy` step to the pipeline we've been developing, after the `collectGreetings` step.
+
+Once complete, it's going to look like this:
+
+<figure class="excalidraw">
+--8<-- "docs/hello_nextflow/img/hello_pipeline_complete.svg"
+</figure>
+
+Ready to dive in?
 
 ### 2.1. Write a `cowpy` module
 

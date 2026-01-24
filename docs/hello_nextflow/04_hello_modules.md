@@ -17,13 +17,12 @@ In Nextflow, a **module** is a single process definition that is encapsulated by
 To use a module in a workflow, you just add a single-line import statement to your workflow code file; then you can integrate the process into the workflow the same way you normally would.
 
 When we started developing our workflow, we wrote everything in one single code file.
-
 Moving processes out into individual modules makes it possible to reuse process definitions in multiple workflows without producing multiple copies of the code.
 This makes the code more shareable, flexible and maintainable.
 
-!!! tip
+??? info "How to begin from this section"
 
-    It is also possible to encapsulate a section of a workflow as a 'subworkflow' that can be imported into a larger pipeline, but that is outside the scope of this course.
+    This section of the course assumes you have completed Parts 1-3 of the [Hello Nextflow](./index.md) course, but if you are comfortable with the basics covered in those sections, you can start from here without doing anything special.
 
 ---
 

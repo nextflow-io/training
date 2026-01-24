@@ -11,7 +11,7 @@ include { cowpy } from './modules/cowpy.nf'
  */
 params {
     input: Path
-    batch: String
+    batch: String = 'batch'
     character: String
 }
 
@@ -41,15 +41,15 @@ workflow {
 
 output {
     first_output {
-        path '3-main'
+        path '3-main/intermediates'
         mode 'copy'
     }
     uppercased {
-        path '3-main'
+        path '3-main/intermediates'
         mode 'copy'
     }
     collected {
-        path '3-main'
+        path '3-main/intermediates'
         mode 'copy'
     }
     batch_report {

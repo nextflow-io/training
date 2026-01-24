@@ -1243,7 +1243,6 @@ The `cowpy` process, which wraps the cowpy command to generate ASCII art, is def
     process cowpy {
 
         container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
-        conda 'conda-forge::cowpy==1.1.5'
 
         input:
         path input_file
@@ -1262,7 +1261,6 @@ The `cowpy` process, which wraps the cowpy command to generate ASCII art, is def
 The `cowpy` process requires two inputs: the path to an input file containing the text to put in the speech bubble (`input_file`), and a value for the character variable.
 
 Importantly, it also includes the line `container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'`, which points to the container URI we used earlier.
-(We'll talk about the `conda` line later.)
 
 #### 4.2.2. Check that Docker is enabled in the configuration
 
