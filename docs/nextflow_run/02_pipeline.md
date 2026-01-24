@@ -577,26 +577,52 @@ Then the next process call, to `convertToUpper`, refers to the output of `sayHel
 ```
 
 This tells Nextflow to provide `sayHello.out`, which represents the channel output by `sayHello()`, as an input to `convertToUpper`.
-That is, at its simplest, how we shuttle data from one step to the next in Nextflow.
 
-Finally, the third call, `collectGreetings`, is doing something similar, with a twist:
+That is, at its simplest, how we shuttle data from one step to the next in Nextflow.
+We take the output channel from the first process, and pass it as an input to the next process.
+
+#### 2.3.3. A process can take multiple inputs
+
+The third process call, to `collectGreetings`, is a little different.
 
 ```groovy title="2b-multistep.nf" linenums="77"
     // collect all the greetings into one file
     collectGreetings(convertToUpper.out.collect(), params.batch)
 ```
 
-You see this call is given two inputs, `convertToUpper.out.collect()` and `params.batch`, and produces two outputs.
-We're going to start by examining that first input, `convertToUpper.out.collect()`. Then we'll talk about the multiple inputs and outputs afterward.
+You see this call is given two inputs, `convertToUpper.out.collect()` and `params.batch`.
+Ignoring the `.collect()` bit for now, we can generalize this as `collectGreetings(input1, input2)`.
 
-#### 2.3.3. What `collect()` does in the `collectGreetings` call
+That matches the two input declarations in the process module:
 
-Remember the `splitCsv` and `map` operators in the previous section?
-Now we're seeing another operator called `collect`, applied to the output of `convertToUpper`.
+```groovy title="2b-multistep.nf" linenums="40"
+process collectGreetings {
 
-This operator is used to collect the outputs from multiple calls to the same process and package them into a single channel element.
+    input:
+    path input_files
+    val batch_name
+```
 
-If we didn't apply `collect()` to the output of `convertToUpper()` before feeding it to `collectGreetings()`, Nextflow would simply run `collectGreetings()` independently on each greeting, which would not achieve our goal.
+When Nextflow parses this, it will assign the first input in the call to `path input_files`, and the second to `val batch_name`.
+
+So now you know a process can take multiple inputs, and what the call looks like in the workflow block.
+
+Now let's take a closer look at that first input, `convertToUpper.out.collect()`.
+
+#### 2.3.4. What `collect()` does in the `collectGreetings` call
+
+To pass the output of `sayHello` to `convertToUpper`, we simply referred to the output channel of `sayHello` as `sayHello.out`. But for the next step, we're seeing a reference to `convertToUpper.out.collect()`.
+
+What is this `collect()` bit and what does it do?
+
+It's an operator, of course. Just like the `splitCsv` and `map` operators we encountered earlier.
+This time the operator is called `collect`, and is applied to the output channel produced by `convertToUpper`.
+
+The `collect` operator is used to collect the outputs from multiple calls to the same process and package them into a single channel element.
+
+In the context of this workflow, it's taking the three uppercased greetings in the `convertToUpper.out` channel --which are three separate channel items, and would normally be handled in separate calls by the next process-- and packaging them into a single item.
+
+In more practical terms: if we didn't apply `collect()` to the output of `convertToUpper()` before feeding it to `collectGreetings()`, Nextflow would simply run `collectGreetings()` independently on each greeting, which would not achieve our goal.
 
 <figure class="excalidraw">
 --8<-- "docs/nextflow_run/img/without-collect-operator.svg"
@@ -615,20 +641,20 @@ There are many other [operators](https://www.nextflow.io/docs/latest/reference/o
 This gives pipeline developers a lot of flexibility for customizing the flow logic of their pipeline.
 The downside is that it can sometimes make it harder to decipher what the pipeline is doing.
 
-#### 2.3.4. Where the `params.batch` input comes from
+#### 2.3.5. An input parameter can have a default value
 
-Coming back to the `collectGreetings` call, we saw that this process gets two inputs.
+Now that we understand what's going on with the first input to `collectGreetings`, let's look at that `params.batch` input.
 
 ```groovy title="2b-multistep.nf" linenums="77"
     // collect all the greetings into one file
     collectGreetings(convertToUpper.out.collect(), params.batch)
 ```
 
-We just discussed what was happening with the primary input.
-Now let's look at that `params.batch` input.
+That automatically causes the workflow to expect a CLI parameter named `--batch` to be included in the command line used to run it.
+However, you may recall that when we launched the workflow, we didn't specify a `batch` parameter in the command.
 
-You may recall that when we ran the command to run the workflow, we didn't specify a `batch` parameter.
-Let's have a look at the `params` block.
+What's going on there?
+Have a look at the `params` block.
 
 ```groovy title="2b-multistep.nf" linenums="58" hl_lines="6"
     /*
@@ -687,13 +713,10 @@ You should see new final outputs named accordingly.
             └── UPPER-Holà-output.txt
     ```
 
-This is an aspect of input configuration, which we'll cover in more detail in Part 3, but for now the important thing is to now that input parameters can be given default values.
+This is an aspect of input configuration, which we'll cover in more detail in Part 3, but for now the important thing is to know that input parameters can be given default values.
 
-#### 2.3.5. What's new in the output handling
+#### 2.3.6. A process can produce multiple outputs
 
-There are two interesting things to note on the output handling side of things.
-
-**A process can produce multiple outputs.**
 In the `collectGreetings` process definition, we see the following output declarations:
 
 ```groovy title="2b-multistep.nf" linenums="46"
@@ -714,7 +737,9 @@ Which are then referred to by the name given with `emit:` in the `publish:` bloc
 
 This makes it easy to then pass specific outputs individually to other processes in the workflow, in combination with various operators.
 
-**Outputs can be organized arbitrarily.** In the `output` block, we've used custom paths to group intermediate results in order to make it easier to pick out just the final outputs of the workflow.
+#### 2.3.7. Published outputs can be organized
+
+In the `output` block, we've used custom paths to group intermediate results in order to make it easier to pick out just the final outputs of the workflow.
 
 ```groovy title="2b-multistep.nf" linenums="80" hl_lines="3 7 11 15"
 output {
@@ -737,7 +762,7 @@ output {
 }
 ```
 
-There are more sophisticated ways to organize published outputs; it's entirely up to the author of the workflow to decide what structure they want to use.
+There are more sophisticated ways to organize published outputs; we'll touch on a few in the part on configuration.
 
 ### Takeaway
 
