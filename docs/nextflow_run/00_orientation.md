@@ -70,28 +70,36 @@ tree . -L 2
     ├── 2c-modules.nf
     ├── 2d-container.nf
     ├── 3-main.nf
+    ├── data
+    │   └── greetings.csv
     ├── modules
     │   ├── collectGreetings.nf
     │   ├── convertToUpper.nf
     │   ├── cowpy.nf
     │   └── sayHello.nf
     ├── nextflow.config
+    ├── solutions
+    │   ├── 3-main.nf
+    │   ├── modules
+    │   └── nextflow.config
+    ├── test-params.json
     └── test-params.yaml
-
-    1 directory, 12 files
     ```
 
 Click on the colored box to expand the section and view its contents.
-We use collapsible sections like this to include expected command output in a concise way.
+We use collapsible sections like this to display expected command output as well as directory and file contents in a concise way.
 
 - **The `.nf` files** are workflow scripts that are numbered based on what part of the course they're used in.
 
 - **The file `nextflow.config`** is a configuration file that sets minimal environment properties.
   You can ignore it for now.
 
-- **The file `greetings.csv`** contains input data we'll use in most of the course. It is described in Part 2, when we introduce it for the first time.
+- **The file `greetings.csv`** under `data/` contains input data we'll use in most of the course. It is described in Part 2 (Run pipelines), when we introduce it for the first time.
 
-- **The file `test-params.yaml`** is a file we'll use in Part 3. You can ignore it for now.
+- **The `test-params.*`** files are configuration files we'll use in Part 3 (Configuration). You can ignore them for now.
+
+- **The `solutions` directory** contains the final state of the workflow and its accessory files (config and modules) that result from completing the course.
+  They are intended to be used as a reference to check your work and troubleshoot any issues.
 
 ## Readiness checklist
 
@@ -103,4 +111,4 @@ Think you're ready to dive in?
 
 If you can check all the boxes, you're good to go.
 
-**To continue to Part 1, click on the arrow in the bottom right corner of this page.**
+**To continue to [Part 1: Run Basic operations](./01_basics.md), click on the arrow in the bottom right corner of this page.**

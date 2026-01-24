@@ -13,47 +13,52 @@ Let's demonstrate this with a simple command that we run directly in the termina
 
 !!! Tip
 
-    Remember that you should now be inside the `nextflow-run/` directory as described in the Orientation.
+    Remember that you should now be inside the `nextflow-run/` directory as described on the [Getting Started](00_orientation.md) page.
 
 ### 0.1. Make the terminal say hello
+
+Run the following command in your terminal.
 
 ```bash
 echo 'Hello World!'
 ```
 
-This outputs the text 'Hello World' to the terminal.
+??? success "Command output"
 
-```console title="Output"
-Hello World!
-```
+    ```console
+    Hello World!
+    ```
 
-### 0.2. Now make it write the text output to a file
+This outputs the text 'Hello World' right there in the terminal.
+
+### 0.2. Write the output to a file
+
+Running pipelines mostly involves reading data from files and writing results to other files, so let's modify the command to write the text output to a file to make the example a bit more relevant.
 
 ```bash
 echo 'Hello World!' > output.txt
 ```
 
+??? success "Command output"
+
+    ```console
+
+    ```
+
 This does not output anything to the terminal.
 
-```console title="Output"
+### 0.3. Find the output
 
-```
+The text 'Hello World' should now be in the output file we specified, named `output.txt`.
+You can open it in the file explorer or from the command line using the `cat` utility, for example.
 
-### 0.3. Show the file contents
+??? abstract "File contents"
 
-```bash
-cat output.txt
-```
+    ```console title="output.txt" linenums="1"
+    Hello World!
+    ```
 
-The text 'Hello World' is now in the output file we specified.
-
-```console title="output.txt" linenums="1"
-Hello World!
-```
-
-!!! Tip
-
-    In the training environment, you can also find the output file in the file explorer, and view its contents by clicking on it.
+This is what we're going to try to replicate with our very first Nextflow workflow.
 
 ### Takeaway
 

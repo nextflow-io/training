@@ -99,8 +99,6 @@ tree . -L 2
     │   └── 6-hello-config
     ├── test-params.json
     └── test-params.yaml
-
-    8 directories, 9 files
     ```
 
 Click on the colored box to expand the section and view its contents.
@@ -117,8 +115,6 @@ We use collapsible sections like this to include expected command output in a co
 
 - **The `solutions` directory** contains the completed workflow scripts that result from each step of the course.
   They are intended to be used as a reference to check your work and troubleshoot any issues.
-  The name and number in the filename correspond to the step of the relevant part of the course.
-  For example, the file `hello-world-4.nf` is the expected result of completing steps 1 through 4 of Part 1: Hello World.
 
 ## Readiness checklist
 

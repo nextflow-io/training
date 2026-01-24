@@ -69,6 +69,8 @@ You can open it in the file explorer or from the command line using the `cat` ut
     Hello World!
     ```
 
+This is what we're going to try to replicate with our very first Nextflow workflow.
+
 ### Takeaway
 
 You now know how to run a simple command in the terminal that outputs some text, and optionally, how to make it write the output to a file.

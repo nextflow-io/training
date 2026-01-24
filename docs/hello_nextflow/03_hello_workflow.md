@@ -679,7 +679,7 @@ Learn how to pass more than one input to a process.
 
 ---
 
-## 3. Pass more than one input to a process in order to name the final output file uniquely
+## 3. Pass more than one input to a process
 
 We want to be able to name the final output file something specific in order to process subsequent batches of greetings without overwriting the final results.
 
