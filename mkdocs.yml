@@ -149,6 +149,7 @@ theme:
       catalog: octicons/repo-16
       courses: octicons/log-16
       terminal: octicons/terminal-16
+      full-code: material/code-block-braces
       learning: octicons/mortar-board-16
       people: octicons/people-16
       licensing: octicons/law-16

@@ -317,7 +317,7 @@ Our goal here is not to memorize the syntax of Nextflow code, but to form some b
 
 You'll find the `1-hello.nf` script in your current directory, which should be `nextflow-run`. Open it in the editor pane.
 
-??? terminal "Complete workflow file contents"
+??? full-code "Full code file"
 
     ```groovy title="1-hello.nf" linenums="1"
     #!/usr/bin/env nextflow

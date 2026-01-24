@@ -246,6 +246,22 @@ h3 .enumerate-headings-plugin {
   mask-image: var(--md-admonition-icon--terminal);
 }
 
+/* full-code */
+.md-typeset .admonition.full-code,
+.md-typeset details.full-code {
+  border-color: rgb(26, 128, 50);
+}
+.md-typeset .full-code > .admonition-title,
+.md-typeset .full-code > summary {
+  background-color: rgba(26, 128, 50, 0.1);
+}
+.md-typeset .full-code > .admonition-title::before,
+.md-typeset .full-code > summary::before {
+  background-color: rgb(26, 128, 50);
+  -webkit-mask-image: var(--md-admonition-icon--full-code);
+  mask-image: var(--md-admonition-icon--full-code);
+}
+
 /* learning */
 .md-typeset .admonition.learning,
 .md-typeset details.learning {

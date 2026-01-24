@@ -1,7 +1,7 @@
 # Part 2: Run real pipelines
 
 In Part 1 of this course (Run Basic Operations), we started with an example workflow that had only minimal features in order to keep the code complexity low.
-For example, `1-hello.nf` used a command-line parameter (`--greeting`) to provide a single value at a time.
+For example, `1-hello.nf` used a command-line parameter (`--input`) to provide a single value at a time.
 
 However, most real-world pipelines use more sophisticated features in order to enable efficient processing of large amounts of data at scale, and apply multiple processing steps chained together by sometimes complex logic.
 
@@ -17,13 +17,13 @@ To enable this efficiently, Nextflow uses a system of queues called **channels**
 To demonstrate this, we've prepared a a CSV file called `greetings.csv` that contains several input greetings, mimicking the kind of columnar data you might want to process in a real data analysis.
 Note that the numbers are not meaningful, they are just there for illustrative purposes.
 
-```csv title="greetings.csv" linenums="1"
+```csv title="data/greetings.csv" linenums="1"
 Hello,English,123
 Bonjour,French,456
 Holà,Spanish,789
 ```
 
-And we've written an improved version of the original workflow, now called `2a-inputs.nf`, that will read in the CSV file, extract the greetings and write each of them to a separate file.
+We've also written an improved version of the original workflow, now called `2a-inputs.nf`, that will read in the CSV file, extract the greetings and write each of them to a separate file.
 
 <figure class="excalidraw">
 --8<-- "docs/nextflow_run/img/hello-pipeline-multi-inputs.svg"
@@ -53,7 +53,7 @@ nextflow run 2a-inputs.nf --input greetings.csv
 Excitingly, this seems to indicate that '3 of 3' calls were made for the process, which is encouraging, since there were three rows of data in the CSV we provided as input.
 This suggests the `sayHello()` process was called three times, once on each input row.
 
-### 1.2. Find the outputs in the `results` directory
+### 1.2. Find the published outputs in the `results` directory
 
 Let's look at the 'results' directory to see if our workflow is still writing a copy of our outputs there.
 
@@ -61,29 +61,29 @@ Let's look at the 'results' directory to see if our workflow is still writing a 
 
     ```console linenums="1"
     results
-    ├── Bonjour-output.txt
-    ├── Hello-output.txt
-    └── Holà-output.txt
+    ├── 1-hello
+    |   └── output.txt
+    └── 2a-inputs
+        ├── Bonjour-output.txt
+        ├── Hello-output.txt
+        └── Holà-output.txt
     ```
 
-Yes! We see three output files with different names, conveniently enough.
-(Spoiler: we changed the workflow to name the files differently.)
-
-If you haven't deleted the `results` folder when running Part 1 of this training, you'll see the `output.txt` file in there too.
+Yes! We see a new directory called `2a-inputs` with three output files with different names, conveniently enough.
 
 You can open each of them to satisfy yourself that they contain the appropriate greeting string.
 
 ??? abstract "File contents"
 
-    ```console title="results/Hello-output.txt"
+    ```console title="results/2a-inputs/Hello-output.txt"
     Hello
     ```
 
-    ```console title="results/Bonjour-output.txt"
+    ```console title="results/2a-inputs/Bonjour-output.txt"
     Bonjour
     ```
 
-    ```console title="results/Holà-output.txt"
+    ```console title="results/2a-inputs/Holà-output.txt"
     Holà
     ```
 
@@ -93,6 +93,8 @@ This confirms each greeting in the input file has been processed appropriately.
 
 You may have noticed that the console output above referred to only one task directory.
 Does that mean all three calls to `sayHello()` were executed within that one task directory?
+
+#### 1.3.1. Examine the task directory given in the terminal
 
 Let's have a look inside that `8e/0eb066` task directory.
 
@@ -110,6 +112,8 @@ So what's going on here?
 By default, the ANSI logging system writes the status information for all calls to the same process on the same line.
 As a result, it only showed us one of the three task directory paths (`8e/0eb066`) in the console output.
 There are two others that are not listed there.
+
+#### 1.3.2. Make the terminal show more details
 
 We can modify the logging behavior to see the full list of process calls by adding the `-ansi-log false` to the command as follows:
 
@@ -157,18 +161,18 @@ If we look inside each of the task directories listed there, we can verify that 
 This confirms that each process call is executed in isolation from all the others.
 That has many advantages, including avoiding collisions if the process produces any intermediate files with non-unique names.
 
-!!! Tip
+!!! tip
 
     For a complex workflow, or a large number of inputs, having the full list output to the terminal might get a bit overwhelming, so you might prefer not to use `-ansi-log false` in those cases.
 
-### 1.4. Examine the code
+### 1.4. Examine the workflow code
 
 So this version of the workflow is capable of reading in a CSV file of inputs, processing the inputs separately, and naming the outputs uniquely.
 
 Let's take a look at what makes that possible in the workflow code.
 Once again, we're not aiming to memorize code syntax, but to identify signature components of the workflow that provide important functionality.
 
-??? example "Workflow code"
+??? full-code "Full code file"
 
     ```groovy title="2a-inputs.nf" linenums="1"
     #!/usr/bin/env nextflow
@@ -375,7 +379,7 @@ That is the expected final result of our multi-step pipeline.
 
 Let's look at the code and see what we can tie back to what we just observed.
 
-??? example "Workflow code"
+??? full-code "Full code file"
 
     ```groovy title="2a-inputs.nf" linenums="1"
     #!/usr/bin/env nextflow
@@ -587,12 +591,72 @@ You can ignore the `cowpy.nf` file for now; we'll get to that one later.
 
 ### 3.1. Examine the code
 
-This time we're going to look at the code first, so let's open each of the files listed above (not shown here).
+This time we're going to look at the code first.
+Start by opening the `2c-modules.nf` workflow file.
 
-We see that the code for the processes and workflow logic are exactly the same as in the previous version of the workflow.
-However, the process code is now located in the modules instead of being in the main workflow file, and there are now import statements in the workflow file telling Nextflow to pull them in at runtime.
+??? full-code "Full code file"
 
-```groovy title="hello-modules.nf" linenums="9" hl_lines="4"
+    ```groovy title="2c-modules.nf" linenums="1"
+    #!/usr/bin/env nextflow
+
+    // Include modules
+    include { sayHello } from './modules/sayHello.nf'
+    include { convertToUpper } from './modules/convertToUpper.nf'
+    include { collectGreetings } from './modules/collectGreetings.nf'
+
+    /*
+    * Pipeline parameters
+    */
+    params {
+        input: Path
+        batch: String
+    }
+
+    workflow {
+
+        main:
+        // create a channel for inputs from a CSV file
+        greeting_ch = channel.fromPath(params.input)
+                            .splitCsv()
+                            .map { line -> line[0] }
+        // emit a greeting
+        sayHello(greeting_ch)
+        // convert the greeting to uppercase
+        convertToUpper(sayHello.out)
+        // collect all the greetings into one file
+        collectGreetings(convertToUpper.out.collect(), params.batch)
+
+        publish:
+        first_output = sayHello.out
+        uppercased = convertToUpper.out
+        collected = collectGreetings.out.outfile
+        batch_report = collectGreetings.out.report
+    }
+
+    output {
+        first_output {
+            path '2c-modules'
+            mode 'copy'
+        }
+        uppercased {
+            path '2c-modules'
+            mode 'copy'
+        }
+        collected {
+            path '2c-modules'
+            mode 'copy'
+        }
+        batch_report {
+            path '2c-modules'
+            mode 'copy'
+        }
+    }
+    ```
+
+You see that the workflow logic is exactly the same as in the previous version of the workflow.
+However, the process code is gone from the workflow file, and instead there are `include` statements pointing to separate files under `modules`.
+
+```groovy title="hello-modules.nf" linenums="3" hl_lines="4"
 // Include modules
 include { sayHello } from './modules/sayHello.nf'
 include { convertToUpper } from './modules/convertToUpper.nf'
@@ -601,9 +665,9 @@ include { collectGreetings } from './modules/collectGreetings.nf'
 workflow {
 ```
 
-You can look inside one of the modules to satisfy yourself that the process definition is unchanged; it's literally just been copy-pasted into a standalone file.
+Open up one of those files and you'll find the process code.
 
-??? example "Module code"
+??? full-code "Full code file"
 
     ```groovy title="modules/sayHello.nf" linenums="1"
     #!/usr/bin/env nextflow
@@ -627,6 +691,9 @@ You can look inside one of the modules to satisfy yourself that the process defi
         """
     }
     ```
+
+As you can see, the process code has not changed; it's just been copied into an individual module file instead of being in the main workflow file.
+The same applies to the other two processes.
 
 So let's see what it looks like to run this new version.
 
@@ -654,7 +721,7 @@ You'll notice that the process executions all cached successfully, meaning that 
 
 None of that matters to Nextflow; what matters is the job script that is generated once all the code has been pulled together and evaluated.
 
-!!! Tip
+!!! tip
 
     It is also possible to encapsulate a section of a workflow as a 'subworkflow' that can be imported into a larger pipeline, but that is outside the scope of this course.
 
@@ -873,7 +940,7 @@ This should output a file containing the ASCII art with the three greetings in t
 
 The workflow is very similar to the previous one, plus the extra step to run `cowpy`.
 
-??? example "Workflow code"
+??? full-code "Full code file"
 
     ```groovy title="2d-container.nf" linenums="1" hl_lines="7 25 26"
     #!/usr/bin/env nextflow
@@ -914,7 +981,7 @@ cowpy(collectGreetings.out, params.character)
 
 The `cowpy` process, which wraps the cowpy command to generate ASCII art, is defined in the `cowpy.nf` module.
 
-??? example "Module code"
+??? full-code "Full code file"
 
     ```groovy title="modules/cowpy.nf" linenums="1"
     #!/usr/bin/env nextflow

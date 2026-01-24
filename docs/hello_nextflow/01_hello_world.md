@@ -93,7 +93,7 @@ Then we'll run it and look for its outputs.
 
 You'll find the `hello-world.nf` script in your current directory, which should be `hello-nextflow`. Open it in the editor pane.
 
-??? terminal "Complete workflow file contents"
+??? full-code "Full code file"
 
     ```groovy title="hello-world.nf" linenums="1"
     #!/usr/bin/env nextflow
