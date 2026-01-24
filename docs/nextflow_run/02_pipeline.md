@@ -12,9 +12,7 @@ In this part of the training, we demonstrate key features of real-world pipeline
 In a real-world pipeline, we typically want to process multiple data points (or data series) contained in one or more input files.
 And wherever possible, we want to run the processing of independent data in parallel, to shorten the time spent waiting for analysis.
 
-To enable this efficiently, Nextflow uses a system of queues called **channels**.
-
-To demonstrate this, we've prepared a a CSV file called `greetings.csv` that contains several input greetings, mimicking the kind of columnar data you might want to process in a real data analysis.
+To demonstrate how Nextflow does this, we've prepared a a CSV file called `greetings.csv` that contains several input greetings, mimicking the kind of columnar data you might want to process in a real data analysis.
 Note that the numbers are not meaningful, they are just there for illustrative purposes.
 
 ```csv title="data/greetings.csv" linenums="1"
@@ -42,7 +40,7 @@ nextflow run 2a-inputs.nf --input greetings.csv
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.04.3
+    N E X T F L O W   ~  version 25.10.2
 
     Launching `2a-inputs.nf` [mighty_sammet] DSL2 - revision: 29fb5352b3
 
@@ -59,7 +57,7 @@ Let's look at the 'results' directory to see if our workflow is still writing a 
 
 ??? abstract "Directory contents"
 
-    ```console linenums="1"
+    ```console linenums="1" hl_lines="4-7"
     results
     ├── 1-hello
     |   └── output.txt
@@ -124,7 +122,7 @@ nextflow run 2a-inputs.nf --input greetings.csv -ansi-log false
 ??? success "Command output"
 
     ```console linenums="1"
-    N E X T F L O W  ~  version 25.04.3
+    N E X T F L O W  ~  version 25.10.2
     Launching `2a-inputs.nf` [pedantic_hamilton] DSL2 - revision: 6bbc42e49f
     [ab/1a8ece] Submitted process > sayHello (1)
     [0d/2cae24] Submitted process > sayHello (2)
@@ -163,26 +161,23 @@ That has many advantages, including avoiding collisions if the process produces 
 
 !!! tip
 
-    For a complex workflow, or a large number of inputs, having the full list output to the terminal might get a bit overwhelming, so you might prefer not to use `-ansi-log false` in those cases.
+    For a complex workflow, or a large number of inputs, having the full list output to the terminal might get a bit overwhelming, so people don't normally use `-ansi-log false` in routine usage.
 
 ### 1.4. Examine the workflow code
 
 So this version of the workflow is capable of reading in a CSV file of inputs, processing the inputs separately, and naming the outputs uniquely.
 
 Let's take a look at what makes that possible in the workflow code.
-Once again, we're not aiming to memorize code syntax, but to identify signature components of the workflow that provide important functionality.
 
 ??? full-code "Full code file"
 
-    ```groovy title="2a-inputs.nf" linenums="1"
+    ```groovy title="2a-inputs.nf" linenums="1" hl_lines="31-33 35"
     #!/usr/bin/env nextflow
 
     /*
     * Use echo to print 'Hello World!' to a file
     */
     process sayHello {
-
-        publishDir 'results', mode: 'copy'
 
         input:
         val greeting
@@ -192,21 +187,40 @@ Once again, we're not aiming to memorize code syntax, but to identify signature 
 
         script:
         """
-        echo '${greeting}' > '$greeting-output.txt'
+        echo '${greeting}' > '${greeting}-output.txt'
         """
+    }
+
+    /*
+    * Pipeline parameters
+    */
+    params {
+        input: Path
     }
 
     workflow {
 
+        main:
         // create a channel for inputs from a CSV file
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
-
         // emit a greeting
         sayHello(greeting_ch)
+
+        publish:
+        first_output = sayHello.out
+    }
+
+    output {
+        first_output {
+            path '2a-inputs'
+            mode 'copy'
+        }
     }
     ```
+
+Once again, you don't need to memorize code syntax, but it's good to learn to recognize key components of the workflow that provide important functionality.
 
 #### 1.4.1. Loading the input data from the CSV
 
@@ -216,19 +230,20 @@ In Nextflow, we do that with a **channel**: a construct designed to handle input
 
 Let's break it down.
 
-```groovy title="2a-inputs.nf" linenums="22"
-workflow {
-
+```groovy title="2a-inputs.nf" linenums="29" hl_lines="31-33"
+    main:
     // create a channel for inputs from a CSV file
     greeting_ch = channel.fromPath(params.input)
                         .splitCsv()
                         .map { line -> line[0] }
+    // emit a greeting
+    sayHello(greeting_ch)
 ```
 
-This is where the magic happens, starting at line 25.
+This is where the magic happens, starting at line 31.
 Here's what that line means in plain English:
 
-- `Channel` creates a **channel**, i.e. a queue that will hold the data
+- `channel` creates a **channel**, _i.e._ a queue that will hold the data
 - `.fromPath` specifies the data source is a filepath
 - `(params.input)` specifies the filepath is provided by `--input` on the command line
 
@@ -259,38 +274,48 @@ The result of this very short snippet of code is a channel called `greeting_ch` 
 
 #### 1.4.2. Call the process on each greeting
 
-Next, in the last line of the workflow block, we provide the loaded `greeting_ch` channel as input to the `sayHello()` process.
+Next, in the last line of the workflow's `main:` block, we provide the loaded `greeting_ch` channel as input to the `sayHello()` process.
 
-```groovy title="2a-inputs.nf" linenums="28"
+```groovy title="2a-inputs.nf" linenums="29" hl_lines="35"
+    main:
+    // create a channel for inputs from a CSV file
+    greeting_ch = channel.fromPath(params.input)
+                        .splitCsv()
+                        .map { line -> line[0] }
+    // emit a greeting
     sayHello(greeting_ch)
-}
 ```
 
-This tells Nextflow to run the process _individually_ on each element in the channel, i.e. on each greeting.
-
+This tells Nextflow to run the process individually on each element in the channel, _i.e._ on each greeting.
 And because Nextflow is smart like that, it will run these process calls in parallel if possible, depending on the available computing infrastructure.
 
 That is how you can achieve efficient and scalable processing of a lot of data (many samples, or data points, whatever is your unit of research) with comparatively very little code.
 
-#### 1.4.3. Ensure the outputs are uniquely named
+#### 1.4.3. How the outputs are named
 
-Finally, it's worth taking a quick look at how we get the output files to be named uniquely.
+Finally, it's worth taking a quick look at the process code to see how we get the output files to be named uniquely.
 
-```groovy title="2a-inputs.nf" linenums="13"
+```groovy title="2a-inputs.nf" linenums="6" hl_lines="12 16"
+process sayHello {
+
+    input:
+    val greeting
+
     output:
     path "${greeting}-output.txt"
 
     script:
     """
-    echo '${greeting}' > '$greeting-output.txt'
+    echo '${greeting}' > '${greeting}-output.txt'
     """
+}
 ```
 
 You see that, compared to the version of this process in `1-hello.nf`, the output declaration and the relevant bit of the command have changed to include the greeting value in the output file name.
 
-This is one way to ensure that the output file names won't collide when they get published to the common `results` directory.
+This is one way to ensure that the output file names won't collide when they get published to the common results directory.
 
-And that's the only change we've had to make inside the process declaration.
+And that's the only change we've had to make inside the process declaration!
 
 ### Takeaway
 
@@ -318,7 +343,7 @@ Specifically, we made an expanded version of the workflow called `2b-multistep.n
 --8<-- "docs/nextflow_run/img/hello-pipeline-multi-steps.svg"
 </figure>
 
-As previously, we'll run the workflow first then look at the code to see what's changed.
+As previously, we'll run the workflow first then look at the code to see what is new.
 
 ### 2.1. Run the workflow
 
@@ -331,7 +356,7 @@ nextflow run 2b-multistep.nf --input greetings.csv
 ??? success "Command output"
 
     ```console linenums="1"
-    N E X T F L O W   ~  version 25.04.3
+    N E X T F L O W   ~  version 25.10.2
 
     Launching `2b-multistep.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
 
@@ -348,32 +373,47 @@ Let's verify that that is in fact what happened by taking a look in the `results
 
 ??? abstract "Directory contents"
 
-    ```console
+    ```console linenums="1" hl_lines="8-16"
     results
-    ├── Bonjour-output.txt
-    ├── COLLECTED-output.txt
-    ├── Hello-output.txt
-    ├── Holà-output.txt
-    ├── UPPER-Bonjour-output.txt
-    ├── UPPER-Hello-output.txt
-    └── UPPER-Holà-output.txt
+    ├── 1-hello
+    |   └── output.txt
+    ├── 2a-inputs
+    |   ├── Bonjour-output.txt
+    |   ├── Hello-output.txt
+    |   └── Holà-output.txt
+    └── 2b-multistep
+        ├── COLLECTED-batch-output.txt
+        ├── batch-report.txt
+        └── intermediates
+            ├── Bonjour-output.txt
+            ├── Hello-output.txt
+            ├── Holà-output.txt
+            ├── UPPER-Bonjour-output.txt
+            ├── UPPER-Hello-output.txt
+            └── UPPER-Holà-output.txt
+
     ```
 
-Look at the file names and check their contents to confirm that they are what you expect; for example:
+As you can see, we have a new directory called `2b-multistep`, and it contains quite a few more files than before.
+Some of the files have been grouped into a subdirectory called `intermediates`, while two files are located at the top level.
 
-```console
-cat results/COLLECTED-output.txt
-```
+Those two are the final results of the multi-step workflow.
+Take a minute to look at the file names and check their contents to confirm that they are what you expect.
 
 ??? abstract "File contents"
 
-    ```console
+    ```txt title="results/2b-multistep/COLLECTED-batch-output.txt"
     HELLO
     BONJOUR
     HOLà
     ```
 
-That is the expected final result of our multi-step pipeline.
+    ```txt title="results/2b-multistep/batch-report.txt"
+    There were 3 greetings in this batch.
+    ```
+
+The first contains our three greetings, uppercased and collected back into a single file as promised.
+The second is a report file that summarizes some information about the run.
 
 ### 2.3. Examine the code
 
@@ -381,15 +421,13 @@ Let's look at the code and see what we can tie back to what we just observed.
 
 ??? full-code "Full code file"
 
-    ```groovy title="2a-inputs.nf" linenums="1"
+    ```groovy title="2b-multistep.nf" linenums="1" hl_lines="63 75-78 82-84"
     #!/usr/bin/env nextflow
 
     /*
     * Use echo to print 'Hello World!' to a file
     */
     process sayHello {
-
-        publishDir 'results', mode: 'copy'
 
         input:
         val greeting
@@ -399,7 +437,7 @@ Let's look at the code and see what we can tie back to what we just observed.
 
         script:
         """
-        echo '${greeting}' > '$greeting-output.txt'
+        echo '${greeting}' > '${greeting}-output.txt'
         """
     }
 
@@ -407,8 +445,6 @@ Let's look at the code and see what we can tie back to what we just observed.
     * Use a text replacement tool to convert the greeting to uppercase
     */
     process convertToUpper {
-
-        publishDir 'results', mode: 'copy'
 
         input:
         path input_file
@@ -418,7 +454,7 @@ Let's look at the code and see what we can tie back to what we just observed.
 
         script:
         """
-        cat '$input_file' | tr '[a-z]' '[A-Z]' > 'UPPER-${input_file}'
+        cat '${input_file}' | tr '[a-z]' '[A-Z]' > 'UPPER-${input_file}'
         """
     }
 
@@ -427,104 +463,145 @@ Let's look at the code and see what we can tie back to what we just observed.
     */
     process collectGreetings {
 
-        publishDir 'results', mode: 'copy'
-
         input:
         path input_files
+        val batch_name
 
         output:
-        path "COLLECTED-output.txt"
+        path "COLLECTED-${batch_name}-output.txt", emit: outfile
+        path "${batch_name}-report.txt", emit: report
 
         script:
+        count_greetings = input_files.size()
         """
-        cat ${input_files} > 'COLLECTED-output.txt'
+        cat ${input_files} > 'COLLECTED-${batch_name}-output.txt'
+        echo 'There were ${count_greetings} greetings in this batch.' > '${batch_name}-report.txt'
         """
+    }
+
+    /*
+    * Pipeline parameters
+    */
+    params {
+        input: Path
+        batch: String = 'batch'
     }
 
     workflow {
 
+        main:
         // create a channel for inputs from a CSV file
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
-
         // emit a greeting
         sayHello(greeting_ch)
-
         // convert the greeting to uppercase
         convertToUpper(sayHello.out)
-
         // collect all the greetings into one file
-        collectGreetings(convertToUpper.out.collect())
+        collectGreetings(convertToUpper.out.collect(), params.batch)
+
+        publish:
+        first_output = sayHello.out
+        uppercased = convertToUpper.out
+        collected = collectGreetings.out.outfile
+        batch_report = collectGreetings.out.report
     }
 
+    output {
+        first_output {
+            path '2b-multistep/intermediates'
+            mode 'copy'
+        }
+        uppercased {
+            path '2b-multistep/intermediates'
+            mode 'copy'
+        }
+        collected {
+            path '2b-multistep'
+            mode 'copy'
+        }
+        batch_report {
+            path '2b-multistep'
+            mode 'copy'
+        }
+    }
     ```
 
 The most obvious difference compared to the previous version of the workflow is that now there are multiple process definitions, and correspondingly, several process calls in the workflow block.
 
-#### 2.3.1. Multiple process definitions
+Let's take a closer look to get clarity on the following points:
 
-In addition to the original `sayHello` process, we now also have `convertToUpper` and `collectGreetings`, which match the names of the processes we saw in the console output.
+- Overall wiring of the workflow
+- How the processes are connected
+- What `collect()` does in the `collectGreetings` call
+- Where the `params.batch` input comes from
+- What's new in the output handling
 
-All three are structured in the same way and follow roughly the same logic.
-We won't go into that in detail, but it shows how a process can be given additional parameters and emit multiple outputs.
+#### 2.3.1. Overall wiring of the workflow
 
-#### 2.3.2. Processes are connected via channels
+If you're using VSCode with the Nextflow extension, you can get a helpful diagram of how the processes are connected by clicking on the small `DAG preview` link displayed just above the workflow block in any Nextflow script.
 
-The really interesting thing to look at here is how the process calls are chained together in the workflow block.
+<figure class="excalidraw">
+--8<-- "docs/nextflow_run/img/DAG-multistep.svg"
+</figure>
 
-```groovy title="2a-inputs.nf" linenums="69"
-workflow {
+This gives you a nice overview of how the processes are connected and what they produce.
 
+You see that in addition to the original `sayHello` process, we now also have `convertToUpper` and `collectGreetings`, which match the names of the processes we saw in the console output.
+
+The two new process definitions are structured in the same way as the `sayHello` process, except `collectGreetings` takes an additional input parameter called `batch` and produces two outputs.
+We'll get to that later.
+We won't go into the code for each in detail, but if you're curious, you can look up the details in [Part 2 of Hello Nextflow](../hello_nextflow/03_hello_workflow.md).
+
+For now, let's dig into how the processes are connected to one another.
+
+#### 2.3.2. How the processes are connected
+
+The really interesting thing to look at here is how the process calls are chained together in the workflow's `main:` block.
+
+```groovy title="2b-multistep.nf" linenums="68" hl_lines="76 78"
+    main:
     // create a channel for inputs from a CSV file
     greeting_ch = channel.fromPath(params.input)
                         .splitCsv()
                         .map { line -> line[0] }
-
     // emit a greeting
     sayHello(greeting_ch)
-
     // convert the greeting to uppercase
     convertToUpper(sayHello.out)
-
     // collect all the greetings into one file
-    collectGreetings(convertToUpper.out.collect())
-}
+    collectGreetings(convertToUpper.out.collect(), params.batch)
 ```
 
 You can see that the first process call, `sayHello(greeting_ch)`, is unchanged.
 
-Then the next process call, to `convertToUpper`, _refers_ to the output of `sayHello` as `sayHello.out`.
+Then the next process call, to `convertToUpper`, refers to the output of `sayHello` as `sayHello.out`, just like the `publish:` block did.
 
-```groovy title="2a-inputs.nf" linenums="79"
+```groovy title="2b-multistep.nf" linenums="75"
     // convert the greeting to uppercase
     convertToUpper(sayHello.out)
 ```
 
 This tells Nextflow to provide `sayHello.out`, which represents the channel output by `sayHello()`, as an input to `convertToUpper`.
-
 That is, at its simplest, how we shuttle data from one step to the next in Nextflow.
 
-Finally, the third call, `collectGreetings`, is doing the same thing, with a twist:
+Finally, the third call, `collectGreetings`, is doing something similar, with a twist:
 
-```groovy title="2a-inputs.nf" linenums="82"
+```groovy title="2b-multistep.nf" linenums="77"
     // collect all the greetings into one file
-    collectGreetings(convertToUpper.out.collect())
+    collectGreetings(convertToUpper.out.collect(), params.batch)
 ```
 
-This one is a bit more complicated and deserves its own discussion.
+You see this call is given two inputs, `convertToUpper.out.collect()` and `params.batch`, and produces two outputs.
+We're going to tackle `convertToUpper.out.collect()` first, then we'll talk about the multiple inputs and outputs afterward.
 
-#### 2.3.3. Operators provide additional wiring options
+#### 2.3.3. What `collect()` does in the `collectGreetings` call
 
-What we're seeing in `convertToUpper.out.collect()` is the use of another operator (like `splitCsv` and `map` in the previous section), called `collect`.
+Remember the `splitCsv` and `map` operators in the previous section?
+Now we're seeing another operator called `collect`, applied to the output of `convertToUpper`.
 
-This operator is used to collect the outputs from multiple calls to the same process (as when we run `sayHello` on multiple greetings independently) and package them into a single channel element.
-
-This allows us to take all the separate uppercased greetings produced by the second step of the workflow and feed them all together to a single call in the third step of the pipeline.
-
-<figure class="excalidraw">
---8<-- "docs/nextflow_run/img/with-collect-operator.svg"
-</figure>
+This operator is used to collect the outputs from multiple calls to the same process and package them into a single channel element.
 
 If we didn't apply `collect()` to the output of `convertToUpper()` before feeding it to `collectGreetings()`, Nextflow would simply run `collectGreetings()` independently on each greeting, which would not achieve our goal.
 
@@ -532,22 +609,147 @@ If we didn't apply `collect()` to the output of `convertToUpper()` before feedin
 --8<-- "docs/nextflow_run/img/without-collect-operator.svg"
 </figure>
 
+In contrast, using `collect()` allows us to take all the separate uppercased greetings produced by the second step of the workflow and feed them all together to a single call in the third step of the pipeline.
+
+<figure class="excalidraw">
+--8<-- "docs/nextflow_run/img/with-collect-operator.svg"
+</figure>
+
+That's how we get all the greetings back into the same file.
+
 There are many other [operators](https://www.nextflow.io/docs/latest/reference/operator.html#operator-page) available to apply transformations to the contents of channels between process calls.
 
 This gives pipeline developers a lot of flexibility for customizing the flow logic of their pipeline.
 The downside is that it can sometimes make it harder to decipher what the pipeline is doing.
 
-### 2.4. Use the graph preview
+#### 2.3.4. Where the `params.batch` input comes from
 
-One very helpful tool for understanding what a pipeline does, if it's not adequately documented, is the graph preview functionality available in VSCode thanks to the Nextflow extension. You can see this in the training environment by clicking on the small `DAG preview` link displayed just above the workflow block in any Nextflow script.
+Coming back to the `collectGreetings` call, we saw that this process gets two inputs.
 
-![DAG preview](img/DAG-preview.png)
+```groovy title="2b-multistep.nf" linenums="77"
+    // collect all the greetings into one file
+    collectGreetings(convertToUpper.out.collect(), params.batch)
+```
 
-This does not show operators, but it does give a useful representation of how process calls are connected and what are their inputs.
+We just discussed what was happening with the primary input.
+Now let's look at that `params.batch` input.
+
+You may recall that when we ran the command to run the workflow, we didn't specify a `batch` parameter.
+Let's have a look at the `params` block.
+
+```groovy title="2b-multistep.nf" linenums="58" hl_lines="6"
+    /*
+    * Pipeline parameters
+    */
+    params {
+        input: Path
+        batch: String = 'batch'
+    }
+```
+
+Ah! There is a default value configured in the workflow, so we don't have to provide it.
+But if we do provide one on the command line, the value we specify will be used instead of the default.
+
+You can try it yourself if you want.
+
+```bash
+nextflow run 2b-multistep.nf --input greetings.csv --batch test
+```
+
+??? success "Command output"
+
+    ```console linenums="1"
+    N E X T F L O W   ~  version 25.10.2
+
+    Launching `2b-multistep.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
+
+    [a5/cdff26] sayHello (1)       | 3 of 3 ✔
+    [c5/78794f] convertToUpper (2) | 3 of 3 ✔
+    [d3/b4d86c] collectGreetings   | 1 of 1 ✔
+    ```
+
+You should see new final outputs named accordingly.
+
+??? abstract "Directory contents"
+
+    ```console linenums="1" hl_lines="10 12"
+    results
+    ├── 1-hello
+    |   └── output.txt
+    ├── 2a-inputs
+    |   ├── Bonjour-output.txt
+    |   ├── Hello-output.txt
+    |   └── Holà-output.txt
+    └── 2b-multistep
+        ├── COLLECTED-batch-output.txt
+        ├── COLLECTED-test-output.txt
+        ├── batch-report.txt
+        ├── test-report.txt
+        └── intermediates
+            ├── Bonjour-output.txt
+            ├── Hello-output.txt
+            ├── Holà-output.txt
+            ├── UPPER-Bonjour-output.txt
+            ├── UPPER-Hello-output.txt
+            └── UPPER-Holà-output.txt
+    ```
+
+This is an aspect of input configuration, which we'll cover in more detail in Part 3, but for now the important thing is to now that input parameters can be given default values.
+
+#### 2.3.5. What's new in the output handling
+
+There are two interesting things to note on the output handling side of things.
+
+**A process can produce multiple outputs.**
+In the `collectGreetings` process definition, we see the following output declarations:
+
+```groovy title="2b-multistep.nf" linenums="46"
+    output:
+    path "COLLECTED-${batch_name}-output.txt", emit: outfile
+    path "${batch_name}-report.txt", emit: report
+```
+
+Which are then referred to by the name given with `emit:` in the `publish:` block:
+
+```groovy title="2b-multistep.nf" linenums="80" hl_lines="4 5"
+    publish:
+    first_output = sayHello.out
+    uppercased = convertToUpper.out
+    collected = collectGreetings.out.outfile
+    batch_report = collectGreetings.out.report
+```
+
+This makes it easy to then pass specific outputs individually to other processes in the workflow, in combination with various operators.
+
+**Outputs can be organized arbitrarily.** In the `output` block, we've used custom paths to group intermediate results in order to make it easier to pick out just the final outputs of the workflow.
+
+```groovy title="2b-multistep.nf" linenums="80" hl_lines="3 7 11 15"
+output {
+    first_output {
+        path '2b-multistep/intermediates'
+        mode 'copy'
+    }
+    uppercased {
+        path '2b-multistep/intermediates'
+        mode 'copy'
+    }
+    collected {
+        path '2b-multistep'
+        mode 'copy'
+    }
+    batch_report {
+        path '2b-multistep'
+        mode 'copy'
+    }
+}
+```
+
+There are more sophisticated ways to organize published outputs; it's entirely up to the author of the workflow to decide what structure they want to use.
 
 ### Takeaway
 
 You understand at a basic level how multi-step workflows are constructed using channels and operators and how they operate.
+You've also seen that processes can take multiple inputs and produce multiple outputs, and that these can be published in a structured way.
 
 ### What's next?
 
@@ -635,11 +837,11 @@ Start by opening the `2c-modules.nf` workflow file.
 
     output {
         first_output {
-            path '2c-modules'
+            path '2c-modules/intermediates'
             mode 'copy'
         }
         uppercased {
-            path '2c-modules'
+            path '2c-modules/intermediates'
             mode 'copy'
         }
         collected {
@@ -656,16 +858,14 @@ Start by opening the `2c-modules.nf` workflow file.
 You see that the workflow logic is exactly the same as in the previous version of the workflow.
 However, the process code is gone from the workflow file, and instead there are `include` statements pointing to separate files under `modules`.
 
-```groovy title="hello-modules.nf" linenums="3" hl_lines="4"
+```groovy title="hello-modules.nf" linenums="3"
 // Include modules
 include { sayHello } from './modules/sayHello.nf'
 include { convertToUpper } from './modules/convertToUpper.nf'
 include { collectGreetings } from './modules/collectGreetings.nf'
-
-workflow {
 ```
 
-Open up one of those files and you'll find the process code.
+Open up one of those files and you'll find the code for the corresponding process.
 
 ??? full-code "Full code file"
 
@@ -677,8 +877,6 @@ Open up one of those files and you'll find the process code.
     */
     process sayHello {
 
-        publishDir 'results', mode: 'copy'
-
         input:
         val greeting
 
@@ -687,7 +885,7 @@ Open up one of those files and you'll find the process code.
 
         script:
         """
-        echo '${greeting}' > '$greeting-output.txt'
+        echo '${greeting}' > '${greeting}-output.txt'
         """
     }
     ```
@@ -708,7 +906,7 @@ nextflow run 2c-modules.nf --input greetings.csv -resume
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.04.3
+    N E X T F L O W   ~  version 25.10.2
 
     Launching `2c-modules.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
 
@@ -835,11 +1033,9 @@ You can verify this by running `ls` to list directory contents:
 ls /
 ```
 
-<!-- TODO: update to use tree -->
+??? success "Command output"
 
-??? abstract "Directory contents"
-
-    ```console title="Command output"
+    ```console
     bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
     ```
 
@@ -855,6 +1051,8 @@ You see that the filesystem inside the container is different from the filesyste
     ```
 
     This effectively establishes a tunnel through the container wall that you can use to access that part of your filesystem.
+
+    This is covered in more detail in [Part 5 of Hello Nextflow](../hello_nextflow/05_hello_containers.md).
 
 #### 4.1.3. Run the `cowpy` tool
 
@@ -907,9 +1105,10 @@ This time the ASCII art output shows the Linux penguin, Tux, because we specifie
 
 Since you're inside the container, you can run the cowpy command as many times as you like, varying the input parameters, without having to worry about install any libraries on your system itself.
 
-!!! Tip
+??? tip "Other available characters"
 
     Use the '-c' flag to pick a different character, including:
+
     `beavis`, `cheese`, `daemon`, `dragonandcow`, `ghostbusters`, `kitty`, `moose`, `milk`, `stegosaurus`, `turkey`, `turtle`, `tux`
 
 Feel free to play around with this.
@@ -942,7 +1141,7 @@ The workflow is very similar to the previous one, plus the extra step to run `co
 
 ??? full-code "Full code file"
 
-    ```groovy title="2d-container.nf" linenums="1" hl_lines="7 25 26"
+    ```groovy title="2d-container.nf" linenums="1" hl_lines="7 15 32 39 59-62"
     #!/usr/bin/env nextflow
 
     // Include modules
@@ -951,28 +1150,64 @@ The workflow is very similar to the previous one, plus the extra step to run `co
     include { collectGreetings } from './modules/collectGreetings.nf'
     include { cowpy } from './modules/cowpy.nf'
 
+    /*
+    * Pipeline parameters
+    */
+    params {
+        input: Path
+        batch: String = 'batch'
+        character: String
+    }
+
     workflow {
 
+        main:
         // create a channel for inputs from a CSV file
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
-
         // emit a greeting
         sayHello(greeting_ch)
-
         // convert the greeting to uppercase
         convertToUpper(sayHello.out)
-
         // collect all the greetings into one file
-        collectGreetings(convertToUpper.out.collect())
+        collectGreetings(convertToUpper.out.collect(), params.batch)
+        // generate ASCII art of the greetings with cowpy
+        cowpy(collectGreetings.out.outfile, params.character)
 
-        // generate ASCII art with cowpy
-        cowpy(collectGreetings.out, params.character)
+        publish:
+        first_output = sayHello.out
+        uppercased = convertToUpper.out
+        collected = collectGreetings.out.outfile
+        batch_report = collectGreetings.out.report
+        cowpy_art = cowpy.out
+    }
+
+    output {
+        first_output {
+            path '2d-container/intermediates'
+            mode 'copy'
+        }
+        uppercased {
+            path '2d-container/intermediates'
+            mode 'copy'
+        }
+        collected {
+            path '2d-container/intermediates'
+            mode 'copy'
+        }
+        batch_report {
+            path '2d-container'
+            mode 'copy'
+        }
+        cowpy_art {
+            path '2d-container'
+            mode 'copy'
+        }
     }
     ```
 
-You see that this workflow imports a `cowpy` process from a module file, and calls it on the output of the `collectGreetings()` call.
+You see that this workflow imports a `cowpy` process from a module file, and calls it on the output of the `collectGreetings()` call, plus an input parameter called `params.character`.
 
 ```groovy title="2d-container.nf" linenums="25"
 // generate ASCII art with cowpy
@@ -986,12 +1221,11 @@ The `cowpy` process, which wraps the cowpy command to generate ASCII art, is def
     ```groovy title="modules/cowpy.nf" linenums="1"
     #!/usr/bin/env nextflow
 
-    // Generate ASCII art with cowpy
+    // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
     process cowpy {
 
         container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
-
-        publishDir 'results', mode: 'copy'
+        conda 'conda-forge::cowpy==1.1.5'
 
         input:
         path input_file
@@ -1002,52 +1236,34 @@ The `cowpy` process, which wraps the cowpy command to generate ASCII art, is def
 
         script:
         """
-        cat $input_file | cowpy -c "$character" > cowpy-${input_file}
+        cat ${input_file} | cowpy -c "${character}" > cowpy-${input_file}
         """
-
     }
     ```
 
 The `cowpy` process requires two inputs: the path to an input file containing the text to put in the speech bubble (`input_file`), and a value for the character variable.
 
 Importantly, it also includes the line `container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'`, which points to the container URI we used earlier.
+(We'll talk about the `conda` line later.)
 
 #### 4.2.2. Check that Docker is enabled in the configuration
 
-We're going to slightly anticipate Part 3 of this training course by introducing the topic of configuration.
+We're going to slightly anticipate Part 3 of this training course by introducing the `nextflow.config` configuration file, which is one of the main ways Nextflow offers for configuring workflow execution.
+When a file named `nextflow.config` is present in the current directory, Nextflow will automatically load it in and apply any configuration it contains.
 
-One of the main ways Nextflow offers for configuring workflow execution is to use a `nextflow.config` file.
-When such a file is present in the current directory, Nextflow will automatically load it in and apply any configuration it contains.
-
-To that end, we include a `nextflow.config` file with a single line of code that enables Docker.
+To that end, we included a `nextflow.config` file with a single line of code that enables Docker.
 
 ```groovy title="nextflow.config" linenums="1"
 docker.enabled = true
 ```
 
-You can check that this is indeed set correctly either by opening the file, or by running the `nextflow config` command in the terminal.
+This configuration tells Nextflow to use Docker for any process that specifies a compatible container.
 
-```bash
-nextflow config
-```
+!!! tip
 
-<!-- TODO: paste output of nextflow config command -->
-
-??? abstract "File contents"
-
-    ```json title="nextflow.config" linenums="1"
-    docker {
-      enabled = true
-    }
-    ```
-
-That tells Nextflow to use Docker for any process that specifies a compatible container.
-
-!!! Tip
-
-    It is possible to enable Docker execution from the command-line, on a per-run basis, using the `-with-docker <container>` parameter.
+    It is technically possible to enable Docker execution from the command-line, on a per-run basis, using the `-with-docker <container>` parameter.
     However, that only allows us to specify one container for the entire workflow, whereas the approach we just showed you allows us to specify a different container per process.
-    This is better for modularity, code maintenance and reproducibility.
+    The latter is much better for modularity, code maintenance and reproducibility.
 
 #### 4.2.3. Run the workflow
 
@@ -1060,7 +1276,7 @@ nextflow run 2d-container.nf --input greetings.csv --character turkey -resume
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.04.3
+    N E X T F L O W   ~  version 25.10.2
 
     Launching `2d-container.nf` [elegant_brattain] DSL2 - revision: 028a841db1
 
@@ -1077,7 +1293,7 @@ You can find the output of the `cowpy` step in the `results` directory.
 
 ??? abstract "File contents"
 
-    ```console title="results/cowpy-COLLECTED-output.txt"
+    ```console title="results/2d-container/cowpy-COLLECTED-batch-output.txt"
     _________
     / HOLà    \
     | HELLO   |
@@ -1113,18 +1329,176 @@ And we can now share the pipeline with collaborators and have them run it on the
 
 #### 4.2.4. Inspect how Nextflow launched the containerized task
 
-Let's take a look at the `.command.run` file inside the task directory where the `cowpy` call was executed.
-This file contains all the commands Nextflow ran on your behalf in the course of executing the pipeline.
+As a final coda to this section, let's take a look at the work subdirectory for one of the `cowpy` process calls to get a bit more insight on how Nextflow works with containers under the hood.
 
-Open the `.command.run` file and search for `nxf_launch` to find the launch command Nextflow used.
+Check the output from your `nextflow run` command to find the path to the work subdirectory for the `cowpy` process.
+Looking at what we got for the run shown above, the console log line for the `cowpy` process starts with `[7f/caf718]`.
+That corresponds to the following truncated directory path: `work/7f/caf718`.
 
-??? abstract "File contents (subset)"
+In that directory, you will find the `.command.run` file that contains all the commands Nextflow ran on your behalf in the course of executing the pipeline.
 
-    ```bash title="work/7f/caf7189fca6c56ba627b75749edcb3/.command.run"
-    nxf_launch() {
-        docker run -i --cpu-shares 1024 -e "NXF_TASK_WORKDIR" -v /workspaces/training/hello-nextflow/work:/workspaces/training/hello-nextflow/work -w "$NXF_TASK_WORKDIR" --name $NXF_BOXID community.wave.seqera.io/library/pip_cowpy:131d6a1b707a8e65 /bin/bash -ue /workspaces/training/nextflow-run/work/7f/caf7189fca6c56ba627b75749edcb3/.command.sh
+??? abstract "File contents"
+
+    ```console title="work/7f/caf71890cce1667c094d880f4b6dcc/.command.run"
+    #!/bin/bash
+    ### ---
+    ### name: 'cowpy'
+    ### container: 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
+    ### outputs:
+    ### - 'cowpy-COLLECTED-batch-output.txt'
+    ### ...
+    set -e
+    set -u
+    NXF_DEBUG=${NXF_DEBUG:=0}; [[ $NXF_DEBUG > 1 ]] && set -x
+    NXF_ENTRY=${1:-nxf_main}
+
+
+    nxf_sleep() {
+      sleep $1 2>/dev/null || sleep 1;
     }
+
+    nxf_date() {
+        local ts=$(date +%s%3N);
+        if [[ ${#ts} == 10 ]]; then echo ${ts}000
+        elif [[ $ts == *%3N ]]; then echo ${ts/\%3N/000}
+        elif [[ $ts == *3N ]]; then echo ${ts/3N/000}
+        elif [[ ${#ts} == 13 ]]; then echo $ts
+        else echo "Unexpected timestamp value: $ts"; exit 1
+        fi
+    }
+
+    nxf_env() {
+        echo '============= task environment ============='
+        env | sort | sed "s/\(.*\)AWS\(.*\)=\(.\{6\}\).*/\1AWS\2=\3xxxxxxxxxxxxx/"
+        echo '============= task output =================='
+    }
+
+    nxf_kill() {
+        declare -a children
+        while read P PP;do
+            children[$PP]+=" $P"
+        done < <(ps -e -o pid= -o ppid=)
+
+        kill_all() {
+            [[ $1 != $$ ]] && kill $1 2>/dev/null || true
+            for i in ${children[$1]:=}; do kill_all $i; done
+        }
+
+        kill_all $1
+    }
+
+    nxf_mktemp() {
+        local base=${1:-/tmp}
+        mkdir -p "$base"
+        if [[ $(uname) = Darwin ]]; then mktemp -d $base/nxf.XXXXXXXXXX
+        else TMPDIR="$base" mktemp -d -t nxf.XXXXXXXXXX
+        fi
+    }
+
+    nxf_fs_copy() {
+      local source=$1
+      local target=$2
+      local basedir=$(dirname $1)
+      mkdir -p $target/$basedir
+      cp -fRL $source $target/$basedir
+    }
+
+    nxf_fs_move() {
+      local source=$1
+      local target=$2
+      local basedir=$(dirname $1)
+      mkdir -p $target/$basedir
+      mv -f $source $target/$basedir
+    }
+
+    nxf_fs_rsync() {
+      rsync -rRl $1 $2
+    }
+
+    nxf_fs_rclone() {
+      rclone copyto $1 $2/$1
+    }
+
+    nxf_fs_fcp() {
+      fcp $1 $2/$1
+    }
+
+    on_exit() {
+        local last_err=$?
+        local exit_status=${nxf_main_ret:=0}
+        [[ ${exit_status} -eq 0 && ${nxf_unstage_ret:=0} -ne 0 ]] && exit_status=${nxf_unstage_ret:=0}
+        [[ ${exit_status} -eq 0 && ${last_err} -ne 0 ]] && exit_status=${last_err}
+        printf -- $exit_status > /workspaces/training/nextflow-run/work/7f/caf71890cce1667c094d880f4b6dcc/.exitcode
+        set +u
+        docker rm $NXF_BOXID &>/dev/null || true
+        exit $exit_status
+    }
+
+    on_term() {
+        set +e
+        docker stop $NXF_BOXID
+    }
+
+    nxf_launch() {
+        docker run -i --cpu-shares 1024 -e "NXF_TASK_WORKDIR" -v /workspaces/training/nextflow-run/work:/workspaces/training/nextflow-run/work -w "$NXF_TASK_WORKDIR" --name $NXF_BOXID community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273 /bin/bash -ue /workspaces/training/nextflow-run/work/7f/caf71890cce1667c094d880f4b6dcc/.command.sh
+    }
+
+    nxf_stage() {
+        true
+        # stage input files
+        rm -f COLLECTED-batch-output.txt
+        ln -s /workspaces/training/nextflow-run/work/7f/f435e3f2cf95979b5f3d7647ae6696/COLLECTED-batch-output.txt COLLECTED-batch-output.txt
+    }
+
+    nxf_unstage_outputs() {
+        true
+    }
+
+    nxf_unstage_controls() {
+        true
+    }
+
+    nxf_unstage() {
+        if [[ ${nxf_main_ret:=0} == 0 ]]; then
+            (set -e -o pipefail; (nxf_unstage_outputs | tee -a .command.out) 3>&1 1>&2 2>&3 | tee -a .command.err)
+            nxf_unstage_ret=$?
+        fi
+        nxf_unstage_controls
+    }
+
+    nxf_main() {
+        trap on_exit EXIT
+        trap on_term TERM INT USR2
+        trap '' USR1
+
+        [[ "${NXF_CHDIR:-}" ]] && cd "$NXF_CHDIR"
+        export NXF_BOXID="nxf-$(dd bs=18 count=1 if=/dev/urandom 2>/dev/null | base64 | tr +/ 0A | tr -d '\r\n')"
+        NXF_SCRATCH=''
+        [[ $NXF_DEBUG > 0 ]] && nxf_env
+        touch /workspaces/training/nextflow-run/work/7f/caf71890cce1667c094d880f4b6dcc/.command.begin
+        set +u
+        set -u
+        [[ $NXF_SCRATCH ]] && cd $NXF_SCRATCH
+        export NXF_TASK_WORKDIR="$PWD"
+        nxf_stage
+
+        set +e
+        (set -o pipefail; (nxf_launch | tee .command.out) 3>&1 1>&2 2>&3 | tee .command.err) &
+        pid=$!
+        wait $pid || nxf_main_ret=$?
+        nxf_unstage
+    }
+
+    $NXF_ENTRY
     ```
+
+If you search for `nxf_launch` in this file, you should see something like this:
+
+```console
+nxf_launch() {
+    docker run -i --cpu-shares 1024 -e "NXF_TASK_WORKDIR" -v /workspaces/training/nextflow-run/work:/workspaces/training/nextflow-run/work -w "$NXF_TASK_WORKDIR" --name $NXF_BOXID community.wave.seqera.io/library/pip_cowpy:131d6a1b707a8e65 /bin/bash -ue /workspaces/training/nextflow-run/work/7f/caf7189fca6c56ba627b75749edcb3/.command.sh
+}
+```
 
 This launch command shows that Nextflow is using a very similar `docker run` command to launch the process call as we did when we ran it manually.
 It also mounts the corresponding work subdirectory into the container, sets the working directory inside the container accordingly, and runs our templated bash script in the `.command.sh` file.
@@ -1141,5 +1515,6 @@ You know the fundamentals of how Nextflow can process multiple inputs efficientl
 ### What's next?
 
 Take another break! That was a big pile of information about how Nextflow pipelines work.
-In the next section of this training, we're going to delve deeper into the topic of configuration.
+
+In the last section of this training, we're going to delve deeper into the topic of configuration.
 You will learn how to configure the execution of your pipeline to fit your infrastructure as well as manage configuration of inputs and parameters.

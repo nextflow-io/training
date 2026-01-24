@@ -60,7 +60,7 @@ process collectGreetings {
  */
 params {
     input: Path
-    batch: String
+    batch: String = 'batch'
 }
 
 workflow {
@@ -86,11 +86,11 @@ workflow {
 
 output {
     first_output {
-        path '2b-multistep'
+        path '2b-multistep/intermediates'
         mode 'copy'
     }
     uppercased {
-        path '2b-multistep'
+        path '2b-multistep/intermediates'
         mode 'copy'
     }
     collected {

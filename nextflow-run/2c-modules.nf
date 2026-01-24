@@ -10,7 +10,7 @@ include { collectGreetings } from './modules/collectGreetings.nf'
  */
 params {
     input: Path
-    batch: String
+    batch: String = 'batch'
 }
 
 workflow {
@@ -36,11 +36,11 @@ workflow {
 
 output {
     first_output {
-        path '2c-modules'
+        path '2c-modules/intermediates'
         mode 'copy'
     }
     uppercased {
-        path '2c-modules'
+        path '2c-modules/intermediates'
         mode 'copy'
     }
     collected {

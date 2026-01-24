@@ -842,7 +842,7 @@ And there it is, our beautiful turkey saying the greetings as desired.
 
 #### 2.3.4. Inspect how Nextflow launched the containerized task
 
-As a final code to this section, let's take a look at the work subdirectory for one of the `cowpy` process calls to get a bit more insight on how Nextflow works with containers under the hood.
+As a final coda to this section, let's take a look at the work subdirectory for one of the `cowpy` process calls to get a bit more insight on how Nextflow works with containers under the hood.
 
 Check the output from your `nextflow run` command to find the path to the work subdirectory for the `cowpy` process.
 Looking at what we got for the run shown above, the console log line for the `cowpy` process starts with `[98/656c6c]`.
