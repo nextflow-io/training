@@ -388,13 +388,11 @@ This means that you can use any container image you like to run your processes, 
 
 To demonstrate this, we are going to add a `cowpy` step to the pipeline we've been developing, after the `collectGreetings` step.
 
-Once complete, it's going to look like this:
-
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello_pipeline_complete.svg"
+--8<-- "docs/nextflow_run/img/hello-pipeline-cowpy.svg"
 </figure>
 
-Ready to dive in?
+Moo if you're ready to dive in!
 
 ### 2.1. Write a `cowpy` module
 
@@ -636,6 +634,14 @@ In the `output` block, make the following code changes:
 Now the published outputs will be a bit more organized.
 
 #### 2.2.5. Run the workflow
+
+Just to recap, this is what we are aiming for:
+
+<figure class="excalidraw">
+--8<-- "docs/hello_nextflow/img/hello_pipeline_complete.svg"
+</figure>
+
+Do you think it's going to work?
 
 Let's delete the previous published outputs to have a clean slate, and run the workflow with the `-resume` flag.
 

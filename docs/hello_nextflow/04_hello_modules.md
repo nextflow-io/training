@@ -15,10 +15,16 @@ Specifically, we are going to demonstrate how to use **modules**.
 
 In Nextflow, a **module** is a single process definition that is encapsulated by itself in a standalone code file.
 To use a module in a workflow, you just add a single-line import statement to your workflow code file; then you can integrate the process into the workflow the same way you normally would.
+That makes it possible to reuse process definitions in multiple workflows without producing multiple copies of the code.
 
 When we started developing our workflow, we wrote everything in one single code file.
-Moving processes out into individual modules makes it possible to reuse process definitions in multiple workflows without producing multiple copies of the code.
-This makes the code more shareable, flexible and maintainable.
+Now we're going to move the processes out into individual modules.
+
+<figure class="excalidraw">
+--8<-- "docs/hello_nextflow/img/modules.svg"
+</figure>
+
+This will make our code more shareable, flexible and maintainable.
 
 ??? info "How to begin from this section"
 

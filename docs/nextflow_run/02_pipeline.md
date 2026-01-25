@@ -782,19 +782,20 @@ So far, all the workflows we've looked at have consisted of one single workflow 
 However, real-world pipelines typically benefit from being _modularized_, meaning that the code is split into different files.
 This can make their development and maintenance more efficient and sustainable.
 
-<figure class="excalidraw">
-    --8<-- "docs/side_quests/img/nf-core/nested.excalidraw.svg"
-</figure>
-
 Here we are going to demonstrate the most common form of code modularity in Nextflow, which is the use of **modules**.
 
 In Nextflow, a **module** is a single process definition that is encapsulated by itself in a standalone code file.
 To use a module in a workflow, you just add a single-line import statement to your workflow code file; then you can integrate the process into the workflow the same way you normally would.
+That makes it possible to reuse process definitions in multiple workflows without producing multiple copies of the code.
 
-Putting processes into individual modules makes it possible to reuse process definitions in multiple workflows without producing multiple copies of the code.
-This makes the code more shareable, flexible and maintainable.
+Until now we've been running workflows that had all their processes included in a monolithic code file.
+Now we're going to see what it looks like when the processes are stored in individual modules.
 
 We have of course once again prepared a suitable workflow for demonstration purposes, called `2c-modules.nf`, along with a set of modules located in the `modules/` directory.
+
+<figure class="excalidraw">
+--8<-- "docs/nextflow_run/img/modules.svg"
+</figure>
 
 ??? abstract "Directory contents"
 
@@ -1282,6 +1283,14 @@ This configuration tells Nextflow to use Docker for any process that specifies a
     The latter is much better for modularity, code maintenance and reproducibility.
 
 #### 4.2.3. Run the workflow
+
+Just to recap, this is what we are about to run:
+
+<figure class="excalidraw">
+--8<-- "docs/hello_nextflow/img/hello_pipeline_complete.svg"
+</figure>
+
+Do you think it's going to work?
 
 Let's run the workflow with the `-resume` flag, and specify that we want the character to be the turkey.
 
