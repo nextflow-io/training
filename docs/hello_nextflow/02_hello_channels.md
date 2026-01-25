@@ -99,6 +99,10 @@ greeting_ch = channel.of('Hello Channels!')
 
 This creates a channel called `greeting_ch` using the `channel.of()` channel factory, which sets up a simple queue channel, and loads the string `'Hello Channels!'` to use as the greeting value.
 
+<figure class="excalidraw">
+--8<-- "docs/hello_nextflow/img/hello-pipeline-channel.svg"
+</figure>
+
 !!! note
 
     We are temporarily switching back to hardcoded strings instead of using a CLI parameter for the sake of readability. We'll go back to using CLI parameters once we've covered what's happening at the level of the channel.
@@ -296,6 +300,13 @@ Workflows typically run on batches of inputs that are meant to be processed in b
 Conveniently, the `channel.of()` channel factory we've been using is quite happy to accept more than one value, so we don't need to modify that at all.
 
 We just have to load more values into the channel.
+Let's make them 'Hello','Bonjour' and 'Holà'.
+
+<figure class="excalidraw">
+--8<-- "docs/hello_nextflow/img/hello-pipeline-channel-multi.svg"
+</figure>
+
+_In the diagram, the channel is represented in green, and the order of elements is represented like marbles in a pipe: the first one loaded is on the right, then the second one in the middle, then the third is on the left._
 
 #### 2.1.1. Add more greetings
 
@@ -619,7 +630,7 @@ Learn to use an operator to transform the contents of a channel.
 
 ---
 
-## 3. Use an operator to transform the contents of a channel
+## 3. Provide multiple inputs via an array
 
 We just showed you how to handle multiple input elements that were hardcoded directly in the channel factory.
 What if we wanted to provide those multiple inputs in a different way?
@@ -628,7 +639,13 @@ For example, imagine we set up an input variable containing an array of elements
 
 `greetings_array = ['Hello','Bonjour','Holà']`
 
-Can we load that into our output channel and expect it to work? Let's find out.
+Can we load that into our output channel and expect it to work?
+
+<figure class="excalidraw">
+--8<-- "docs/hello_nextflow/img/hello-pipeline-multi-inputs-array.svg"
+</figure>
+
+Let's find out.
 
 ### 3.1. Provide an array of values as input to the channel
 
@@ -940,7 +957,7 @@ Learn how to make the workflow take a file as its source of input values.
 
 ---
 
-## 4. Use an operator to parse input values from a CSV file
+## 4. Read input values from a CSV file
 
 Realistically, we're rarely if ever going to start from an array of values.
 Most likely, we'll have one or more files containing the data that needs to be processed, in some kind of structured format.
@@ -953,9 +970,15 @@ Bonjour,French,456
 Holà,Spanish,789
 ```
 
-Note that the numbers are not meaningful, they are just there for illustrative purposes.
+_Note that the numbers are not meaningful, they are just there for illustrative purposes._
 
 Our next task then is to adapt our workflow to read in the values from this file.
+
+<figure class="excalidraw">
+--8<-- "docs/hello_nextflow/img/hello-pipeline-multi-inputs-csv.svg"
+</figure>
+
+Let's see how we can make that happen.
 
 ### 4.1. Modify the script to expect a CSV file as the source of greetings
 
