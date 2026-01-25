@@ -1,5 +1,5 @@
 ---
-title: Nextflow Run
+title: Hello nf-core
 hide:
   - toc
 page_type: index_page
