@@ -1055,6 +1055,28 @@ It also mounts the corresponding work subdirectory into the container, sets the 
 
 All the hard work we had to do manually in the first section? Nextflow does it for us behind the scenes!
 
+```txt
+ _______________________
+< Hurray for robots...! >
+ -----------------------
+                                   ,-----.
+                                   |     |
+                                ,--|     |-.
+                         __,----|  |     | |
+                       ,;::     |  `_____' |
+                       `._______|    i^i   |
+                                `----| |---'| .
+                           ,-------._| |== ||//
+                           |       |_|P`.  /'/
+                           `-------' 'Y Y/'/'
+                                     .==\ /_\
+   ^__^                             /   /'|  `i
+   (oo)\_______                   /'   /  |   |
+   (__)\       )\/\             /'    /   |   `i
+       ||----w |           ___,;`----'.___L_,-'`\__
+       ||     ||          i_____;----\.____i""\____\
+```
+
 ### Takeaway
 
 You know how to use containers in Nextflow to run processes.
