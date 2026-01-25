@@ -13,11 +13,11 @@ Other trainings use this pipeline, or parts of it, as a starting point.
 
 This page summarizes the state of the pipeline as it stands at the completion of the Hello Nextflow course.
 
-### 1. Summary description
+### Summary description
 
 The Hello workflow takes a CSV file containing greetings, writes them to separate files, converts each to uppercase, collects them back together again and outputs a single text file containing an ASCII picture of a fun character saying the greetings.
 
-### 2. Workflow steps (processes)
+### Workflow steps (processes)
 
 The four steps are implemented as Nextflow processes (`sayHello`, `convertToUpper`, `collectGreetings`, and `cowpy`) stored in separate module files.
 
@@ -26,13 +26,13 @@ The four steps are implemented as Nextflow processes (`sayHello`, `convertToUppe
 3. **`collectGreetings`:** Collects all uppercase greetings into a single batch file
 4. **`cowpy`:** Generates ASCII art using the `cowpy` tool
 
-### 3. Diagram
+### Diagram
 
 <figure class="excalidraw">
 --8<-- "docs/hello_nextflow/img/hello_pipeline_complete.svg"
 </figure>
 
-### 4. Results
+### Results
 
 The results are published to a directory called `results/`, and the final output of the pipeline (when run with default parameters) is a plain text file containing ASCII art of a turkey saying the uppercased greetings.
 
