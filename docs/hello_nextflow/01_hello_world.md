@@ -593,6 +593,10 @@ This time the result gets written under the specified subdirectory.
 
 You see the result from the previous execution is still there.
 
+<figure class="excalidraw">
+--8<-- "docs/hello_nextflow/img/hello_world_output.svg"
+</figure>
+
 You can use as many levels of nesting as you'd like.
 It is also possible to use the process name or other variables to name the directories used to organize results, and it is possible to change the default name of the top-level output directory (which is controlled by the special variable `outputDir`).
 We will cover these options in later trainings.
@@ -846,6 +850,10 @@ Be sure to open up the output file to check that you now have the new version of
     ```
 
 Voilà!
+
+<figure class="excalidraw">
+--8<-- "docs/hello_nextflow/img/hello_world_input.svg"
+</figure>
 
 Note how the new execution has overwritten the output file published to the `results` directory.
 However, the results of the previous runs are still preserved in the task directories under `work`.
