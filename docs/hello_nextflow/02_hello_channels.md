@@ -298,9 +298,9 @@ Workflows typically run on batches of inputs that are meant to be processed in b
 ### 2.1. Load multiple greetings into the input channel
 
 Conveniently, the `channel.of()` channel factory we've been using is quite happy to accept more than one value, so we don't need to modify that at all.
+We can just load multiple values into the channel.
 
-We just have to load more values into the channel.
-Let's make them 'Hello','Bonjour' and 'Holà'.
+Let's make them `'Hello'`, `'Bonjour'` and `'Holà'`.
 
 <figure class="excalidraw">
 --8<-- "docs/hello_nextflow/img/hello-pipeline-channel-multi.svg"
@@ -963,6 +963,7 @@ Realistically, we're rarely if ever going to start from an array of values.
 Most likely, we'll have one or more files containing the data that needs to be processed, in some kind of structured format.
 
 We've prepared a a CSV file called `greetings.csv` that contains several input greetings, mimicking the kind of columnar data you might want to process in a real data analysis, stored under `data/`.
+(The numbers are not meaningful, they are just there for illustrative purposes.)
 
 ```csv title="data/greetings.csv" linenums="1"
 Hello,English,123
@@ -970,9 +971,7 @@ Bonjour,French,456
 Holà,Spanish,789
 ```
 
-_Note that the numbers are not meaningful, they are just there for illustrative purposes._
-
-Our next task then is to adapt our workflow to read in the values from this file.
+Our next task is to adapt our workflow to read in the values from this file.
 
 <figure class="excalidraw">
 --8<-- "docs/hello_nextflow/img/hello-pipeline-multi-inputs-csv.svg"

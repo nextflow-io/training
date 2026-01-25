@@ -83,7 +83,12 @@ If that worked for you, you're ready to learn how to assemble a multi-step workf
 
 ## 1. Add a second step to the workflow
 
-We're going to add a step to convert the greeting to uppercase.
+We're going to add a step to convert each greeting to uppercase.
+
+<figure class="excalidraw">
+--8<-- "docs/hello_nextflow/img/hello-multistep.svg"
+</figure>
+
 To that end, we need to do three things:
 
 - Define the command we're going to use to do the uppercase conversion.
@@ -351,7 +356,13 @@ Learn how to collect outputs from batched process calls and feed them into a sin
 
 When we use a process to apply a transformation to each of the elements in a channel, like we're doing here to the multiple greetings, we sometimes want to collect elements from the output channel of that process, and feed them into another process that performs some kind of analysis or summation.
 
-In the next step we're simply going to write all the elements of a channel to a single file, using the UNIX `cat` command.
+To demonstrate, we'll add a new step to our pipeline that collects all the uppercase greetings produced by the `convertToUpper` process and write them out to a single file.
+
+<figure class="excalidraw">
+--8<-- "docs/hello_nextflow/img/hello-collect.svg"
+</figure>
+
+Not to spoil the surprise, but this is going to involve a very useful operator.
 
 ### 2.1. Define the collection command and test it in the terminal
 
