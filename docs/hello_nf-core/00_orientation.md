@@ -81,8 +81,6 @@ tree . -L 2
         ├── core-hello-part4
         ├── core-hello-part5
         └── core-hello-start
-
-    9 directories, 3 files
     ```
 
 Click on the colored box to expand the section and view its contents.

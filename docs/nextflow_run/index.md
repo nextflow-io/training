@@ -40,11 +40,11 @@ You'll start with a simple version that consists of a single step, and eventuall
 
 We've broken this down into three parts that will each focus on specific aspects of running and managing pipelines written in Nextflow.
 
-| Course chapter                                 | Summary                                                                                          | Estimated duration |
-| ---------------------------------------------- | ------------------------------------------------------------------------------------------------ | ------------------ |
-| [Part 1: Run basic operations](./01_basics.md) | Launching and managing execution of a simple workflow                                            | 30 mins            |
-| [Part 2: Run real pipelines](./02_pipeline.md) | Processing complex inputs, running multi-step workflows and parallelizing execution effortlessly | 60 mins            |
-| [Part 3: Run configuration](./03_config.md)    | Customizing pipeline behavior and optimizing usage in different computational environments       | 60 mins            |
+| Course chapter                                 | Summary                                                                                                            | Estimated duration |
+| ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ | ------------------ |
+| [Part 1: Run basic operations](./01_basics.md) | Launching and managing execution of a simple workflow                                                              | 30 mins            |
+| [Part 2: Run real pipelines](./02_pipeline.md) | Processing complex inputs, running multi-step workflows, using containers and parallelizing execution effortlessly | 60 mins            |
+| [Part 3: Run configuration](./03_config.md)    | Customizing pipeline behavior and optimizing usage in different computational environments                         | 60 mins            |
 
 By the end of this course, you will be well-prepared for tackling the next steps in your journey to run reproducible workflows for your scientific computing needs.
 
