@@ -23,13 +23,13 @@ additional_information:
 
 # Hello nf-core
 
-**Hello nf-core is a hands-on introduction to using nf-core resources and best practices for developing Nextflow pipelines.**
+**Hello nf-core is a hands-on introduction to using nf-core resources and best practices.**
+
+![nf-core logo](./img/nf-core-logo.png)
 
 Working through practical examples and guided exercises, you will learn to use and develop nf-core compatible modules and pipelines, and to utilize nf-core tooling effectively.
 
 You will take away the skills and confidence to start developing pipelines according to nf-core best practices.
-
-![nf-core logo](./img/nf-core-logo.png)
 
 <!-- additional_information -->
 

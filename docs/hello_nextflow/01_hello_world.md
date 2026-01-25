@@ -120,7 +120,7 @@ You'll find the `hello-world.nf` script in your current directory, which should 
     }
     ```
 
-AA Nextflow workflow script typically includes one or more **process** definitions and the **workflow** itself, plus a few optional blocks (not present here) which we'll introduce later on.
+A Nextflow workflow script typically includes one or more **process** definitions and the **workflow** itself, plus a few optional blocks (not present here) which we'll introduce later on.
 
 Each **process** describes what operation(s) the corresponding step in the pipeline should accomplish, while the **workflow** describes the dataflow logic that connects the various steps.
 

@@ -407,14 +407,6 @@ The `input` definition includes the `val` qualifier, which tells Nextflow to exp
 
 The `output` definition includes the `path` qualifier, which tells Nextflow this should be handled as a path (includes both directory paths and files).
 
-!!! info "Role of output definitions"
-
-    The output definition does not _determine_ what output will be created.
-    It simply _declares_ what is the expected output, so that Nextflow can look for it once execution is complete.
-
-    This is necessary for verifying that the command was executed successfully and for passing the output to downstream processes if needed.
-    If the output produced by a process doesn't match what is declared in the output block, it will not be passed to downstream processes and the workflow will fail.
-
 ### 3.3. The `workflow` definition
 
 The second block of code describes the **workflow** itself.
