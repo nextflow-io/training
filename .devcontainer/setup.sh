@@ -8,4 +8,19 @@ export PS1='\[\e[3;36m\]${PWD#/workspaces/} ->\[\e[0m\] '
 nextflow self-update
 nextflow -version
 
+# Build nf-test from main branch with v2 parser support (PR #336)
+# TODO: Remove this once nf-test releases a version with strict syntax support
+# See: https://github.com/askimed/nf-test/pull/336
+NFTEST_COMMIT="350bb147a23a7f0aa657c13342d9726c0e3edacc"
+echo "Building nf-test from commit ${NFTEST_COMMIT} (v2 parser support)..."
+cd /tmp
+git clone --quiet https://github.com/askimed/nf-test.git
+cd nf-test
+git checkout --quiet ${NFTEST_COMMIT}
+mvn install -DskipTests -q
+cp target/nf-test.jar ~/.nf-test/nf-test.jar
+cd /workspaces/training
+rm -rf /tmp/nf-test
+echo "nf-test updated with v2 parser support"
+
 cat /usr/local/etc/vscode-dev-containers/first-run-notice.txt
