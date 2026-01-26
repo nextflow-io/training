@@ -62,6 +62,7 @@ NXF_SYNTAX_PARSER=v2
 ```
 
 When running in Docker:
+
 ```bash
 docker exec -e NXF_SYNTAX_PARSER=v2 ...
 ```
@@ -221,7 +222,6 @@ Categorize issues into:
 Before making any changes, clearly present:
 
 1. **Summary of proposed fixes** - List each fix with:
-
    - File and line number
    - **Actual section heading** (read from the document, don't guess!)
    - What the current content is
@@ -231,7 +231,6 @@ Before making any changes, clearly present:
 **CRITICAL**: Always verify section numbers by reading the document. Do NOT guess or infer section numbers. Search for the nearest `### N.N.` heading above the line you're referencing and use that exact text.
 
 2. **Ask for user approval** using `AskUserQuestion`:
-
    - "Do you want me to apply these fixes and create a PR?"
    - Options: "Yes, create PR", "Let me review/modify first", "No, skip PR"
 
