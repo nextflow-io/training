@@ -187,7 +187,7 @@ Now open the new file and add the parameters you want to customize:
 
 ```groovy title="tux-run/nextflow.config" linenums="1"
 params {
-    input = '../greetings.csv'
+    input = '../data/greetings.csv'
     batch = 'experiment'
     character = 'tux'
 }
@@ -268,11 +268,9 @@ Nextflow allows us to specify parameters via a parameter file in either YAML or 
 To demonstrate this, we provide an example parameter file in the current directory, called `test-params.yaml`:
 
 ```yaml title="test-params.yaml" linenums="1"
-{
-  input: "greetings.csv"
-  batch: "yaml"
-  character: "stegosaurus"
-}
+input: "data/greetings.csv"
+batch: "yaml"
+character: "stegosaurus"
 ```
 
 This parameter file contains a key-value pair for each of the inputs that we want to specify.
@@ -514,7 +512,7 @@ One popular way to organize outputs further is to do it by process, _i.e._ creat
 
 #### 2.2.1. Replace the output paths by a reference to process names
 
-All you need to do is reference the name of the process as `<task>.process` in the output path declaration.
+All you need to do is reference the name of the process as `<task>.name` in the output path declaration.
 
 Make the following changes in the workflow file:
 
@@ -523,23 +521,23 @@ Make the following changes in the workflow file:
     ```groovy title="3-main.nf" linenums="42" hl_lines="3 7 11 15 19"
     output {
         first_output {
-            path { sayHello.process }
+            path { sayHello.name }
             mode 'copy'
         }
         uppercased {
-            path { convertToUpper.process }
+            path { convertToUpper.name }
             mode 'copy'
         }
         collected {
-            path { collectGreetings.process }
+            path { collectGreetings.name }
             mode 'copy'
         }
         batch_report {
-            path { collectGreetings.process }
+            path { collectGreetings.name }
             mode 'copy'
         }
         cowpy_art {
-            path { cowpy.process }
+            path { cowpy.name }
             mode 'copy'
         }
     }
@@ -618,7 +616,7 @@ This still produces the same output as previously, except this time we find our 
     ```
 
 Note that here we've erased the distinction between `intermediates` versus final outputs being at the top level.
-You could of course mix and match these approaches, for example by setting the first output's path as `intermediates/${sayHello.process}`
+You could of course mix and match these approaches, for example by setting the first output's path as `intermediates/${sayHello.name}`
 
 ### 2.3. Set the publish mode at the workflow level
 
@@ -658,19 +656,19 @@ Make the following changes in the workflow file:
     ```groovy title="3-main.nf" linenums="42"
     output {
         first_output {
-            path { sayHello.process }
+            path { sayHello.name }
         }
         uppercased {
-            path { convertToUpper.process }
+            path { convertToUpper.name }
         }
         collected {
-            path { collectGreetings.process }
+            path { collectGreetings.name }
         }
         batch_report {
-            path { collectGreetings.process }
+            path { collectGreetings.name }
         }
         cowpy_art {
-            path { cowpy.process }
+            path { cowpy.name }
         }
     }
     ```
@@ -680,23 +678,23 @@ Make the following changes in the workflow file:
     ```groovy title="3-main.nf" linenums="42" hl_lines="3 7 11 15 19"
     output {
         first_output {
-            path { sayHello.process }
+            path { sayHello.name }
             mode 'copy'
         }
         uppercased {
-            path { convertToUpper.process }
+            path { convertToUpper.name }
             mode 'copy'
         }
         collected {
-            path { collectGreetings.process }
+            path { collectGreetings.name }
             mode 'copy'
         }
         batch_report {
-            path { collectGreetings.process }
+            path { collectGreetings.name }
             mode 'copy'
         }
         cowpy_art {
-            path { cowpy.process }
+            path { cowpy.name }
             mode 'copy'
         }
     }
@@ -1233,7 +1231,7 @@ profiles {
         ]
     }
     test {
-        params.greeting = 'greetings.csv'
+        params.input = 'data/greetings.csv'
         params.batch = 'test'
         params.character = 'dragonandcow'
     }

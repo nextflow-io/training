@@ -88,7 +88,7 @@ nextflow run 1-hello.nf --input 'Hello World!'
 
 ??? success "Command output"
 
-    ```console hl_lines="7"
+    ```console hl_lines="6"
     N E X T F L O W   ~  version 25.10.2
 
     Launching `1-hello.nf` [goofy_torvalds] DSL2 - revision: c33d41f479
@@ -542,17 +542,17 @@ There are two key advantages to doing this:
 To use it, simply add `-resume` to your command and run it:
 
 ```bash
-nextflow run 1-hello.nf --greeting 'Hello World!' -resume
+nextflow run 1-hello.nf --input 'Hello World!' -resume
 ```
 
 ??? success "Command output"
 
     ```console linenums="1"
-    N E X T F L O W   ~  version 25.04.3
+    N E X T F L O W   ~  version 25.10.2
 
     Launching `1-hello.nf` [tiny_noyce] DSL2 - revision: c33d41f479
 
-    [a3/7be2fa] process > sayHello [100%] 1 of 1, cached: 1 ✔
+    [a3/7be2fa] sayHello | 1 of 1, cached: 1 ✔
     ```
 
 The console output should look familiar, but there's one thing that's a little different compared to before.

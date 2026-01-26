@@ -34,7 +34,7 @@ Let's run the workflow first, and we'll take a look at the relevant Nextflow cod
 Run the following command in your terminal.
 
 ```bash
-nextflow run 2a-inputs.nf --input greetings.csv
+nextflow run 2a-inputs.nf --input data/greetings.csv
 ```
 
 ??? success "Command output"
@@ -116,7 +116,7 @@ There are two others that are not listed there.
 We can modify the logging behavior to see the full list of process calls by adding the `-ansi-log false` to the command as follows:
 
 ```bash
-nextflow run 2a-inputs.nf --input greetings.csv -ansi-log false
+nextflow run 2a-inputs.nf --input data/greetings.csv -ansi-log false
 ```
 
 ??? success "Command output"
@@ -230,7 +230,7 @@ In Nextflow, we do that with a **channel**: a construct designed to handle input
 
 Let's break it down.
 
-```groovy title="2a-inputs.nf" linenums="29" hl_lines="31-33"
+```groovy title="2a-inputs.nf" linenums="29" hl_lines="3-5"
     main:
     // create a channel for inputs from a CSV file
     greeting_ch = channel.fromPath(params.input)
@@ -276,7 +276,7 @@ The result of this very short snippet of code is a channel called `greeting_ch` 
 
 Next, in the last line of the workflow's `main:` block, we provide the loaded `greeting_ch` channel as input to the `sayHello()` process.
 
-```groovy title="2a-inputs.nf" linenums="29" hl_lines="35"
+```groovy title="2a-inputs.nf" linenums="29" hl_lines="7"
     main:
     // create a channel for inputs from a CSV file
     greeting_ch = channel.fromPath(params.input)
@@ -295,7 +295,7 @@ That is how you can achieve efficient and scalable processing of a lot of data (
 
 Finally, it's worth taking a quick look at the process code to see how we get the output files to be named uniquely.
 
-```groovy title="2a-inputs.nf" linenums="6" hl_lines="12 16"
+```groovy title="2a-inputs.nf" linenums="6" hl_lines="7 11"
 process sayHello {
 
     input:
@@ -350,7 +350,7 @@ As previously, we'll run the workflow first then look at the code to see what is
 Run the following command in your terminal:
 
 ```bash
-nextflow run 2b-multistep.nf --input greetings.csv
+nextflow run 2b-multistep.nf --input data/greetings.csv
 ```
 
 ??? success "Command output"
@@ -553,7 +553,7 @@ For now, let's dig into how the processes are connected to one another.
 
 The really interesting thing to look at here is how the process calls are chained together in the workflow's `main:` block.
 
-```groovy title="2b-multistep.nf" linenums="68" hl_lines="76 78"
+```groovy title="2b-multistep.nf" linenums="68" hl_lines="9 11"
     main:
     // create a channel for inputs from a CSV file
     greeting_ch = channel.fromPath(params.input)
@@ -672,7 +672,7 @@ But if we do provide one on the command line, the value we specify will be used 
 You can try it yourself if you want.
 
 ```bash
-nextflow run 2b-multistep.nf --input greetings.csv --batch test
+nextflow run 2b-multistep.nf --input data/greetings.csv --batch test
 ```
 
 ??? success "Command output"
@@ -919,7 +919,7 @@ So let's see what it looks like to run this new version.
 Run this command in your terminal, with the `-resume` flag:
 
 ```bash
-nextflow run 2c-modules.nf --input greetings.csv -resume
+nextflow run 2c-modules.nf --input data/greetings.csv -resume
 ```
 
 ??? success "Command output"
@@ -1295,7 +1295,7 @@ Do you think it's going to work?
 Let's run the workflow with the `-resume` flag, and specify that we want the character to be the turkey.
 
 ```bash
-nextflow run 2d-container.nf --input greetings.csv --character turkey -resume
+nextflow run 2d-container.nf --input data/greetings.csv --character turkey -resume
 ```
 
 ??? success "Command output"
