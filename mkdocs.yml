@@ -248,6 +248,7 @@ plugins:
       exclude:
         - index*.md
         - help*.md
+        - info/*.md
         - envsetup/*.md
         - nextflow_run/*.md
         - hello_nextflow/*.md
