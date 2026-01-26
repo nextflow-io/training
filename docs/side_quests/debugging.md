@@ -134,26 +134,18 @@ nextflow run bad_syntax.nf
 
     Launching `bad_syntax.nf` [stupefied_bhabha] DSL2 - revision: ca6327fad2
 
-    ERROR ~ Script compilation error
-    - file : /workspaces/training/side-quests/debugging/bad_syntax.nf
-    - cause: Unexpected input: '{' @ line 3, column 23.
-      process PROCESS_FILES {
-                            ^
+    Error bad_syntax.nf:24:1: Unexpected input: '<EOF>'
 
-    1 error
+    ERROR ~ Script compilation failed
 
-    NOTE: If this is the beginning of a process or workflow, there may be a syntax error in the body, such as a missing or extra comma, for which a more specific error message could not be produced.
-
-    -- Check '.nextflow.log' file for details
+     -- Check '.nextflow.log' file for details
     ```
 
 **Key elements of syntax error messages:**
 
-- **File location**: Shows exactly which file contains the error (`- file : /workspaces/training/side-quests/debugging/bad_syntax.nf`)
-- **Error description**: Explains what the parser found that it didn't expect (`- cause: Unexpected input: '{'`)
-- **Line and column**: Points to where the parser encountered the problem (`@ line 3, column 23.`)
-- **Context**: Shows the problematic line with a caret (^) pointing to location of an unclosed brace (`process PROCESS_FILES {`)
-- **Additional notes**: Provides hints about common causes
+- **File and location**: Shows which file and line/column contain the error (`bad_syntax.nf:24:1`)
+- **Error description**: Explains what the parser found that it didn't expect (`Unexpected input: '<EOF>'`)
+- **EOF indicator**: The `<EOF>` (End Of File) message indicates the parser reached the end of the file while still expecting more content - a classic sign of unclosed braces
 
 #### Check the code
 
@@ -291,21 +283,22 @@ nextflow run invalid_process.nf
 
     Launching `invalid_process.nf` [nasty_jepsen] DSL2 - revision: da9758d614
 
-    ERROR ~ Script compilation error
-    - file : /workspaces/training/side-quests/debugging/invalid_process.nf
-    - cause: Invalid process definition -- Unknown keyword `inputs` @ line 5, column 5.
-          val sample_name
-          ^
+    Error invalid_process.nf:3:1: Invalid process definition -- check for missing or out-of-order section labels
+    │   3 | process PROCESS_FILES {
+    │     | ^^^^^^^^^^^^^^^^^^^^^^^
+    │   4 |     inputs:
+    │   5 |     val sample_name
+    │   6 |
+    ╰   7 |     output:
 
-    1 error
+    ERROR ~ Script compilation failed
 
-
-    -- Check '.nextflow.log' file for details
+     -- Check '.nextflow.log' file for details
     ```
 
 #### Check the code
 
-Let's examine `invalid_process.nf` to see what's wrong:
+The error indicates an "Invalid process definition" and shows the context around the problem. Looking at lines 3-7, we can see `inputs:` on line 4, which is the issue. Let's examine `invalid_process.nf`:
 
 ```groovy title="invalid_process.nf" hl_lines="4" linenums="1"
 #!/usr/bin/env nextflow
@@ -333,7 +326,7 @@ workflow {
 }
 ```
 
-The error message was quite straightforward: we're using `inputs` instead of the correct `input` directive. You'll also see that the Nextflow VSCode exension is unhappy:
+Looking at line 4 in the error context, we can spot the issue: we're using `inputs` instead of the correct `input` directive. The Nextflow VSCode extension will also flag this:
 
 ![Invalid process message](img/invalid_process_message.png)
 
@@ -429,24 +422,20 @@ nextflow run no_such_var.nf
 ??? failure "Command output"
 
     ```console
-    ERROR ~ Error executing process > 'PROCESS_FILES (3)'
+    N E X T F L O W   ~  version 25.10.2
 
-    Caused by:
-      No such variable: undefined_var -- Check script 'no_such_var.nf' at line: 15
+    Launching `no_such_var.nf` [gloomy_meninsky] DSL2 - revision: 0c4d3bc28c
 
+    Error no_such_var.nf:17:39: `undefined_var` is not defined
+    │  17 |     echo "Using undefined variable: ${undefined_var}" >> ${output_pref
+    ╰     |                                       ^^^^^^^^^^^^^
 
-    Source block:
-      def output_prefix = "${sample_name}_processed"
-      def timestamp = new Date().format("yyyy-MM-dd")
-      """
-      echo "Processing ${sample_name} on ${timestamp}" > ${output_prefix}.txt
-      echo "Using undefined variable: ${undefined_var}" >> ${output_prefix}.txt  // ERROR: undefined_var not defined
-      """
+    ERROR ~ Script compilation failed
 
-    Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
-
-    -- Check '.nextflow.log' file for details
+     -- Check '.nextflow.log' file for details
     ```
+
+The error is caught at compile time and points directly to the undefined variable on line 17, with a caret indicating exactly where the problem is.
 
 #### Check the code
 
@@ -574,16 +563,22 @@ nextflow run bad_bash_var.nf
 ??? failure "Command output"
 
     ```console
-    ERROR ~ Error executing process > 'PROCESS_FILES (1)'
+    N E X T F L O W   ~  version 25.10.2
 
-    Caused by:
-      No such variable: prefix -- Check script 'bad_bash_var.nf' at line: 11
+    Launching `bad_bash_var.nf` [infallible_mandelbrot] DSL2 - revision: 0853c11080
 
+    Error bad_bash_var.nf:13:42: `prefix` is not defined
+    │  13 |     echo "Processing ${sample_name}" > ${prefix}.txt
+    ╰     |                                          ^^^^^^
+
+    ERROR ~ Script compilation failed
+
+     -- Check '.nextflow.log' file for details
     ```
 
 #### Check the code
 
-Let's examine `bad_bash_var.nf` to see what's causing the issue:
+The error points to line 13 where `${prefix}` is used. Let's examine `bad_bash_var.nf` to see what's causing the issue:
 
 ```groovy title="bad_bash_var.nf" hl_lines="13" linenums="1"
 #!/usr/bin/env nextflow
@@ -690,9 +685,9 @@ nextflow run bad_bash_var.nf
 
     This approach avoids the need to escape dollar signs and makes the code easier to read and maintain.
 
-### 1.5. Non-Fatal Syntax Warnings
+### 1.5. Statements Outside Workflow Block
 
-The Nextflow VSCode extension sometimes highlights issues that won't prevent execution but represent bad practices. For example, it's currently possible to define channels outside of the `workflow {}` block, but it's not good practice and the extension will highlight this as a potential issue. These warnings help you write better code even though they're not fatal errors.
+The Nextflow VSCode extension highlights issues with code structure that will cause errors. A common example is defining channels outside of the `workflow {}` block - this is now enforced as a syntax error.
 
 #### Run the pipeline
 
@@ -700,27 +695,32 @@ The Nextflow VSCode extension sometimes highlights issues that won't prevent exe
 nextflow run badpractice_syntax.nf
 ```
 
-??? success "Command output"
+??? failure "Command output"
 
-```console title="Successful execution despite bad practice"
-N E X T F L O W   ~  version 25.10.2
+    ```console
+    N E X T F L O W   ~  version 25.10.2
 
-Launching `badpractice_syntax.nf` [peaceful_euler] DSL2 - revision: 7b2c9a1d45
+    Launching `badpractice_syntax.nf` [intergalactic_colden] DSL2 - revision: 5e4b291bde
 
-executor >  local (3)
-[a1/b2c3d4] process > PROCESS_FILES (1) [100%] 3 of 3 ✔
-```
+    Error badpractice_syntax.nf:3:1: Statements cannot be mixed with script declarations -- move statements into a process or workflow
+    │   3 | input_ch = channel.of('sample1', 'sample2', 'sample3')
+    ╰     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This workflow runs successfully despite the bad practice!
+    ERROR ~ Script compilation failed
+
+     -- Check '.nextflow.log' file for details
+    ```
+
+The error message clearly indicates the problem: statements (like channel definitions) cannot be mixed with script declarations outside of a workflow or process block.
 
 #### Check the code
 
-Let's examine `badpractice_syntax.nf` to see what the VSCode extension is warning about:
+Let's examine `badpractice_syntax.nf` to see what's causing the error:
 
 ```groovy title="badpractice_syntax.nf" hl_lines="3" linenums="1"
 #!/usr/bin/env nextflow
 
-input_ch = channel.of('sample1', 'sample2', 'sample3')  // WARNING: Channel defined outside workflow
+input_ch = channel.of('sample1', 'sample2', 'sample3')  // ERROR: Channel defined outside workflow
 
 process PROCESS_FILES {
     input:
@@ -744,15 +744,13 @@ workflow {
 }
 ```
 
-The VSCode extension will highlight the `input_ch` variable as being defined outside the workflow block, which is not recommended:
+The VSCode extension will also highlight the `input_ch` variable as being defined outside the workflow block:
 
 ![Non-lethal syntax error](img/nonlethal.png)
 
-This won't prevent execution but could lead to confusion or unexpected behavior in larger workflows.
-
 #### Fix the code
 
-Follow the VSCode extension's recommendation by moving the channel definition inside the workflow block:
+Move the channel definition inside the workflow block:
 
 === "After"
 
@@ -787,7 +785,7 @@ Follow the VSCode extension's recommendation by moving the channel definition in
     ```groovy title="badpractice_syntax.nf" hl_lines="3" linenums="1"
     #!/usr/bin/env nextflow
 
-    input_ch = channel.of('sample1', 'sample2', 'sample3')  // WARNING: Channel defined outside workflow
+    input_ch = channel.of('sample1', 'sample2', 'sample3')  // ERROR: Channel defined outside workflow
 
     process PROCESS_FILES {
         input:
@@ -813,7 +811,7 @@ Follow the VSCode extension's recommendation by moving the channel definition in
 
 #### Run the pipeline
 
-Run the workflow again to confirm it still works and the VSCode warning is resolved:
+Run the workflow again to confirm the fix works:
 
 ```bash
 nextflow run badpractice_syntax.nf
@@ -830,7 +828,7 @@ nextflow run badpractice_syntax.nf
     [6a/84a608] PROCESS_FILES (2) | 3 of 3 ✔
     ```
 
-Tighter restrictions on such things will likely become enforced in future Nextflow versions, so it's good practice to keep your input channels defined within the workflow block, and in general to follow any other recommendations the extension makes.
+Keep your input channels defined within the workflow block, and in general follow any other recommendations the extension makes.
 
 ### Takeaway
 
@@ -869,16 +867,20 @@ nextflow run bad_number_inputs.nf
     ```console
     N E X T F L O W   ~  version 25.10.2
 
-    Launching `bad_number_inputs.nf` [high_mendel] DSL2 - revision: 955705c51b
+    Launching `bad_number_inputs.nf` [happy_swartz] DSL2 - revision: d83e58dcd3
 
-    Process `PROCESS_FILES` declares 1 input channel but 2 were specified
+    Error bad_number_inputs.nf:23:5: Incorrect number of call arguments, expected 1 but received 2
+    │  23 |     PROCESS_FILES(samples_ch, files_ch)
+    ╰     |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-    -- Check script 'bad_number_inputs.nf' at line: 23 or see '.nextflow.log' file for more details
+    ERROR ~ Script compilation failed
+
+     -- Check '.nextflow.log' file for details
     ```
 
 #### Check the code
 
-The error message clearly states that the process expects 1 input channel, but 2 were provided. Let's examine `bad_number_inputs.nf`:
+The error message clearly states that the call expected 1 argument but received 2, and points to line 23. Let's examine `bad_number_inputs.nf`:
 
 ```groovy title="bad_number_inputs.nf" hl_lines="5 23" linenums="1"
 #!/usr/bin/env nextflow
@@ -1228,7 +1230,7 @@ To fix this, if the process requires both inputs we could adjust the process to 
 
         process PROCESS_FILES {
             input:
-                tuple val(sample_name), path(file_name)  // Fixed: Accept tuple
+                tuple val(sample_name), val(file_name)  // Fixed: Accept tuple
 
             output:
                 path "${sample_name}_output.txt"
@@ -2029,7 +2031,7 @@ The preview mode lets you test workflow logic without executing commands. This c
 
 !!! note
 
-    If you fixed the `bad_syntax.nf` file for the first syntax error from earlier, reintroduce the syntax error by changing `input` to `inputs` before you run the command
+    If you fixed `bad_syntax.nf` earlier, reintroduce the syntax error by removing the closing brace after the script block before running this command.
 
 Run this command:
 
@@ -2042,19 +2044,13 @@ nextflow run bad_syntax.nf -preview
     ```console
     N E X T F L O W   ~  version 25.10.2
 
-    Launching `bad_syntax.nf` [sick_fermi] DSL2 - revision: ca6327fad2
+    Launching `bad_syntax.nf` [magical_mercator] DSL2 - revision: 550b9a8873
 
-    ERROR ~ Script compilation error
-    - file : /workspaces/training/side-quests/debugging/bad_syntax.nf
-    - cause: Unexpected input: '{' @ line 3, column 23.
-      process PROCESS_FILES {
-                            ^
+    Error bad_syntax.nf:24:1: Unexpected input: '<EOF>'
 
-    1 error
+    ERROR ~ Script compilation failed
 
-    NOTE: If this is the beginning of a process or workflow, there may be a syntax error in the body, such as a missing or extra comma, for which a more specific error message could not be produced.
-
-    -- Check '.nextflow.log' file for details
+     -- Check '.nextflow.log' file for details
     ```
 
 Preview mode is particularly useful for catching syntax errors early without running any processes. It validates the workflow structure and process connections before execution.
@@ -2253,20 +2249,14 @@ Now it's time to put the systematic debugging approach into practice. The workfl
         ```console
         N E X T F L O W   ~  version 25.10.2
 
-        Launching `buggy_workflow.nf` [distracted_hoover] DSL2 - revision: d51a8e83fd
+        Launching `buggy_workflow.nf` [wise_ramanujan] DSL2 - revision: d51a8e83fd
 
-        ERROR ~ Script compilation error
-        - file : /workspaces/training/side-quests/debugging/buggy_workflow.nf
-        - cause: Unexpected input: '{' @ line 17, column 22.
-           process processFiles {
-                                ^
-
-        1 error
-
-        NOTE: If this is the beginning of a process or workflow, there may be a syntax error in the body, such as a missing or extra comma, for which a more specific error message could not be produced.
+        ERROR ~ Range [11, 12) out of bounds for length 11
 
          -- Check '.nextflow.log' file for details
         ```
+
+        This cryptic error indicates a parsing problem around line 11-12 in the `params{}` block. The v2 parser catches structural issues early.
 
     Apply the four-phase debugging method you've learned:
 
