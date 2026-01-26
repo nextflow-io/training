@@ -1397,7 +1397,7 @@ This will use Docker where possible and produce outputs under `results/test`, an
 
 ??? abstract "File contents"
 
-    ```console title="results/test/
+    ```console title="results/test/"
      _________
     / HOLà    \
     | HELLO   |

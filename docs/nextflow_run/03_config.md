@@ -417,11 +417,11 @@ Make the following code changes in the workflow file:
             mode 'copy'
         }
         uppercased {
-            path '/intermediates'
+            path 'intermediates'
             mode 'copy'
         }
         collected {
-            path '/intermediates'
+            path 'intermediates'
             mode 'copy'
         }
         batch_report {
@@ -1271,7 +1271,7 @@ This will use Docker where possible and produce outputs under `results/test`, an
 
 ??? abstract "File contents"
 
-    ```console title="results/test/
+    ```console title="results/test/"
      _________
     / HOLà    \
     | HELLO   |
