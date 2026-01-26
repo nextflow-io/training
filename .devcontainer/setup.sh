@@ -13,6 +13,13 @@ nextflow -version
 # See: https://github.com/askimed/nf-test/pull/336
 NFTEST_COMMIT="350bb147a23a7f0aa657c13342d9726c0e3edacc"
 echo "Building nf-test from commit ${NFTEST_COMMIT} (v2 parser support)..."
+
+# Install Maven if not present
+if ! command -v mvn &> /dev/null; then
+    echo "Installing Maven..."
+    apt-get update -qq && apt-get install -y -qq maven > /dev/null
+fi
+
 cd /tmp
 git clone --quiet https://github.com/askimed/nf-test.git
 cd nf-test
