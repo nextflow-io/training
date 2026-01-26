@@ -27,7 +27,7 @@ git checkout --quiet ${NFTEST_COMMIT}
 mvn install -DskipTests -q
 cp target/nf-test.jar ~/.nf-test/nf-test.jar
 cd /workspaces/training
-rm -rf /tmp/nf-test
+rm -rf /tmp/nf-test ~/.m2/repository
 echo "nf-test updated with v2 parser support"
 
 cat /usr/local/etc/vscode-dev-containers/first-run-notice.txt
