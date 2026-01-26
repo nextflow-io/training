@@ -517,12 +517,17 @@ _After:_
 
 ```groovy title="genomics-1.nf" linenums="7"
 // Primary input (array of three samples)
-    reads_bam: Path = [
+    reads_bam = [
         "${projectDir}/data/bam/reads_mother.bam",
         "${projectDir}/data/bam/reads_father.bam",
         "${projectDir}/data/bam/reads_son.bam"
     ]
 ```
+
+!!! note
+
+    When using typed parameter declarations (like `reads_bam: Path`), you cannot assign an array value.
+    For arrays, omit the type annotation.
 
 And that's actually all we need to do, because the channel factory we use in the workflow body (`.fromPath`) is just as happy to accept multiple file paths to load into the input channel as it was to load a single one.
 
@@ -544,7 +549,13 @@ Funny thing: this _might work_, OR it _might fail_. For example, here's a run th
 ??? success "Command output"
 
     ```console
-    <!-- TODO: output -->
+    N E X T F L O W   ~  version 25.10.2
+
+    ┃ Launching `genomics-1.nf` [peaceful_yalow] DSL2 - revision: a256d113ad
+
+    executor >  local (6)
+    [4f/7071b0] SAMTOOLS_INDEX (3)       | 3 of 3, cached: 1 ✔
+    [7a/89bc43] GATK_HAPLOTYPECALLER (2) | 3 of 3, cached: 1 ✔
     ```
 
 If your workflow run succeeded, run it again until you get an error like this:
@@ -627,7 +638,19 @@ Once again, this may succeed or fail. Here's a successful run:
 ??? success "Command output"
 
     ```console
-    <!-- TODO: output -->
+    N E X T F L O W   ~  version 25.10.2
+
+    ┃ Launching `genomics-1.nf` [fervent_pasteur] DSL2 - revision: a256d113ad
+
+    /workspaces/training/nf4-science/genomics/data/bam/reads_mother.bam
+    /workspaces/training/nf4-science/genomics/data/bam/reads_father.bam
+    /workspaces/training/nf4-science/genomics/data/bam/reads_son.bam
+    executor >  local (6)
+    [4f/7071b0] SAMTOOLS_INDEX (3)       | 3 of 3 ✔
+    /workspaces/training/nf4-science/genomics/work/b4/45a376f0e724be1dc626a6807f73d8/reads_mother.bam.bai
+    /workspaces/training/nf4-science/genomics/work/4f/7071b082b45dd85b1c9b6b3b32cb69/reads_father.bam.bai
+    /workspaces/training/nf4-science/genomics/work/3c/331645a9e20e67edae10da5ba17c7b/reads_son.bam.bai
+    [a2/dbd8d5] GATK_HAPLOTYPECALLER (3) | 3 of 3 ✔
     ```
 
 And here's a failed one:
@@ -635,7 +658,21 @@ And here's a failed one:
 ??? failure "Command output"
 
     ```console
-    <!-- TODO: output -->
+    N E X T F L O W   ~  version 25.10.2
+
+    ┃ Launching `genomics-1.nf` [angry_hamilton] DSL2 - revision: a256d113ad
+
+    /workspaces/training/nf4-science/genomics/data/bam/reads_mother.bam
+    /workspaces/training/nf4-science/genomics/data/bam/reads_father.bam
+    /workspaces/training/nf4-science/genomics/data/bam/reads_son.bam
+    executor >  local (6)
+    [4f/7071b0] SAMTOOLS_INDEX (3)       | 3 of 3 ✔
+    /workspaces/training/nf4-science/genomics/work/4f/7071b082b45dd85b1c9b6b3b32cb69/reads_father.bam.bai
+    /workspaces/training/nf4-science/genomics/work/3c/331645a9e20e67edae10da5ba17c7b/reads_son.bam.bai
+    /workspaces/training/nf4-science/genomics/work/b4/45a376f0e724be1dc626a6807f73d8/reads_mother.bam.bai
+    [a3/cf3a89] GATK_HAPLOTYPECALLER (3) | 1 of 3
+    ERROR ~ Error executing process > 'GATK_HAPLOTYPECALLER (3)'
+    ...
     ```
 
 You may need to run it several times for it to fail again.
@@ -820,8 +857,8 @@ Let's switch the default value for our `reads_bam` input parameter to point to t
 _Before:_
 
 ```groovy title="genomics-1.nf" linenums="7"
-// Primary input
-    reads_bam: Path = [
+// Primary input (array of three samples)
+    reads_bam = [
         "${projectDir}/data/bam/reads_mother.bam",
         "${projectDir}/data/bam/reads_father.bam",
         "${projectDir}/data/bam/reads_son.bam"
