@@ -13,6 +13,6 @@ process SAMTOOLS_INDEX {
 
     script:
     """
-    samtools index '${input_bam}'
+    samtools index '$input_bam'
     """
 }
