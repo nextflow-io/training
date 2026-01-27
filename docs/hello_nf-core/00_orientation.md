@@ -21,12 +21,23 @@ If you are working through this course by yourself, please acquaint yourself wit
 ### Version requirements
 
 This training is designed for **Nextflow 25.10.2** or later **with the v2 syntax parser DISABLED**.
-If you are using a local or custom environment, please make sure you are using the correct settings as documented [here](../info/nxf_versions.md).
+
+#### If you are using our training environment:
+
+You MUST run the following command before going any further:
+
+```bash
+export NXF_SYNTAX_PARSER=v1
+```
+
+#### If you are using a local or custom environment:
+
+Please make sure you are using the correct settings as documented [here](../info/nxf_versions.md).
 
 The training additionally requires **nf-core tools 3.4.1**.
 If you use a different version of nf-core tooling, you may have difficulty following along.
 
-You can check what version is installed using the command `nf-core --version`.
+You can check what version is installed in your environment using the command `nf-core --version`.
 
 ## Get ready to work
 
@@ -99,6 +110,7 @@ Think you're ready to dive in?
 
 - [ ] I understand the goal of this course and its prerequisites
 - [ ] My environment is up and running
+- [ ] I've made certain that the syntax parser is set to **v1**
 - [ ] I've set my working directory appropriately
 
 If you can check all the boxes, you're good to go.

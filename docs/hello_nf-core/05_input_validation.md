@@ -732,18 +732,41 @@ nextflow run . --input assets/invalid_greetings.csv --outdir test-results -profi
 ??? failure "Command output"
 
     ```console
+    N E X T F L O W   ~  version 24.10.4
+
+    Launching `./main.nf` [trusting_ochoa] DSL2 - revision: b9e9b3b8de
+
+    Input/output options
+      input              : assets/invalid_greetings.csv
+      outdir             : test-results
+
+    Generic options
+      trace_report_suffix: 2025-01-27_03-16-04
+
+    Core Nextflow options
+      runName            : trusting_ochoa
+      containerEngine    : docker
+      launchDir          : /workspace/hello-nf-core
+      workDir            : /workspace/hello-nf-core/work
+      projectDir         : /workspace/hello-nf-core
+      userName           : user
+      profile            : docker
+      configFiles        : /workspace/hello-nf-core/nextflow.config
+
+    !! Only displaying parameters that differ from the pipeline defaults !!
+    ------------------------------------------------------
     ERROR ~ Validation of pipeline parameters failed!
 
-    -- Check '.nextflow.log' file for details
+     -- Check '.nextflow.log' file for details
     The following invalid input values have been detected:
 
     * Missing required parameter(s): batch
-    * --input (/tmp/invalid_greetings.csv): Validation of file failed:
-            -> Entry 1: Missing required field(s): greeting
-            -> Entry 2: Missing required field(s): greeting
-            -> Entry 3: Missing required field(s): greeting
+    * --input (assets/invalid_greetings.csv): Validation of file failed:
+        -> Entry 1: Missing required field(s): greeting
+        -> Entry 2: Missing required field(s): greeting
+        -> Entry 3: Missing required field(s): greeting
 
-    -- Check script 'subworkflows/nf-core/utils_nfschema_plugin/main.nf' at line: 68 or see '.nextflow.log' file for more details
+     -- Check script 'subworkflows/nf-core/utils_nfschema_plugin/main.nf' at line: 68 or see '.nextflow.log' file for more details
     ```
 
 Perfect! The validation caught the error and provided a clear, helpful error message pointing to:

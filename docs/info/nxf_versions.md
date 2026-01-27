@@ -23,7 +23,21 @@ When you select an older version of the training materials, links to the trainin
 
 ## Other information about Nextflow syntax versions
 
-<!-- TODO: Blurb about Nextflow versions disambiguating DSL1 / DSL2 and strict syntax v2 parser stuff. -->
+Nextflow has two distinct versioning concepts that are sometimes confused: **DSL versions** and **syntax parser versions**.
+
+**DSL1 vs DSL2** refers to fundamentally different ways of writing Nextflow pipelines.
+DSL1 was the original syntax where processes were implicitly connected through channels.
+DSL2, introduced in Nextflow 20.07, added modularity features: the ability to import processes and workflows from other files, explicit `workflow` blocks, and named process outputs.
+DSL1 was deprecated in Nextflow 22.03 and removed in 22.12.
+All modern Nextflow code uses DSL2.
+
+**Syntax parser v1 vs v2** refers to different parsers that both work with DSL2 code.
+The v1 parser is the original, more permissive parser.
+The v2 parser is stricter and enables new language features such as static typing (typed inputs and outputs) and workflow-level output directives.
+The v2 parser also provides better error messages and catches more errors at parse time rather than at runtime.
+The v2 parser will become the default in Nextflow 26.04.
+
+In summary: DSL2 is the language you write; the syntax parser version determines how strictly that language is interpreted and what advanced features are available.
 
 ### Checking and setting the Nextflow version
 
