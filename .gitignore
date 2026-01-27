@@ -9,5 +9,6 @@ transcript-index
 .vscode
 site/
 .playwright-mcp/
+.preview-release/
 __pycache__
 *.pyc

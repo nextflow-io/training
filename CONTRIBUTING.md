@@ -19,6 +19,7 @@ Table of contents:
     - [Code annotations](#code-annotations)
     - [Word highlighting](#word-highlighting)
   - [TODO / FIXME](#todo--fixme)
+  - [Preview Release](#preview-release)
 
 ## Contribution model
 
@@ -293,3 +294,62 @@ I recommend the [Todo Tree VSCode extension](https://marketplace.visualstudio.co
 A list of key ones also included here:
 
 - Remove plugin install from Phil's GitHub fork in `requirements.txt` and `.github/mkdocs.Dockerfile` when [this PR](https://github.com/timvink/mkdocs-enumerate-headings-plugin/pull/33) is merged
+
+## Preview Release
+
+The `preview_release.py` script serves the training docs locally at `https://training.nextflow.io/` with the current branch appearing as a specified version release.
+This is useful for recording videos or previewing how a release will look before it's published.
+
+### How it works
+
+1. Fetches existing released versions from the `gh-pages` branch
+2. Builds the current branch's docs using Docker
+3. Updates `versions.json` to show your version as "latest"
+4. Generates trusted TLS certificates using mkcert
+5. Adds a temporary entry to `/etc/hosts` to redirect the domain locally
+6. Serves the site using Caddy on port 443
+7. Cleans up the hosts entry when you stop the server (Ctrl+C)
+
+### First-time setup
+
+Install the mkcert root CA (one-time, as your regular user):
+
+```bash
+mkcert -install
+```
+
+This adds a local certificate authority to your system keychain so browsers trust the generated certificates.
+Restart your browser after running this command.
+
+### Usage
+
+The easiest way to run the script is with [uv](https://docs.astral.sh/uv/), which handles dependencies automatically:
+
+```bash
+# Serve current branch as version 3.0
+sudo uv run ./preview_release.py --version 3.0
+
+# Check current status
+uv run ./preview_release.py status
+
+# Clean up work directory on exit (default keeps it for faster restarts)
+sudo uv run ./preview_release.py --version 3.0 --clean
+```
+
+The script requires `sudo` because it needs to:
+
+- Modify `/etc/hosts` to redirect `training.nextflow.io` to localhost
+- Bind to port 443 for HTTPS
+
+### Caching
+
+The script caches:
+
+- Downloaded gh-pages content (existing released versions)
+- Built docs for your version
+- Generated TLS certificates
+
+A hash of source files (`docs/`, `mkdocs.yml`) is computed to detect changes.
+If you modify source files, the docs will be rebuilt automatically on the next run.
+
+Use `--clean` to delete the work directory on exit, or manually remove `.preview-release/` to force a fresh build.
