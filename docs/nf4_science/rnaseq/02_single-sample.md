@@ -8,6 +8,11 @@ We'll do this in three stages:
 2. Add adapter trimming and post-trimming QC
 3. Add alignment to the reference genome
 
+!!! warning "Prerequisite"
+
+    You must work through Part 1 of the course before starting this lesson.
+    Specifically, working through sections 2.1-3 creates the genome index file (`data/genome_index.tar.gz`) required for the alignment step in this lesson.
+
 ---
 
 ## 1. Write a single-stage workflow that runs the initial QC
