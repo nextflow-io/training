@@ -269,7 +269,7 @@ We'll use these in a moment, but first let's generate a gzipped tarball with the
 tar -czvf /data/genome_index.tar.gz genome_index.*
 ```
 
-This stores a `genome_index.tar.gz` tarball containing the genome index files in the `data/` directory on our filesystem, which wil come in handy in Part 2 of this course.
+This stores a `genome_index.tar.gz` tarball containing the genome index files in the `data/` directory on our filesystem, which will come in handy in Part 2 of this course.
 
 ### 2.4. Run the `hisat2` command
 

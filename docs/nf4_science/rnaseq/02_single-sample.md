@@ -248,7 +248,7 @@ nextflow run rnaseq.nf
     [c2/e4a9bb] TRIM_GALORE (1)  [100%] 1 of 1 ✔
     ```
 
-This should run very quickly too, since we're runnng on such a small input file.
+This should run very quickly too, since we're running on such a small input file.
 
 You can find the outputs under `results/trimming` as specified in the `TRIM_GALORE` process by the `publishDir` directive.
 

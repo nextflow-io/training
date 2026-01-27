@@ -598,7 +598,7 @@ process PROCESS_FILES {
 }
 ```
 
-In this example, we're defining the `prefix` variable in Bash, but in a Nexflow process the `$` syntax we used to refer to it (`${prefix}`) is interpretes as a Groovy variable, not Bash. The variable doesn't exist in the Groovy context, so we get a 'no such variable' error.
+In this example, we're defining the `prefix` variable in Bash, but in a Nexflow process the `$` syntax we used to refer to it (`${prefix}`) is interpreted as a Groovy variable, not Bash. The variable doesn't exist in the Groovy context, so we get a 'no such variable' error.
 
 #### Fix the code
 
@@ -2395,7 +2395,7 @@ Now it's time to put the systematic debugging approach into practice. The workfl
         time '100 s'
         ```
 
-        Next we have a `Missing output file(s)` errror to resolve:
+        Next we have a `Missing output file(s)` error to resolve:
 
         **Error 9: Output File Name Mismatch**
         ```groovy linenums="49"
