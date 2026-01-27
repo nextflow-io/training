@@ -1019,8 +1019,6 @@ You know how to use some common operators as well as Groovy closures to control 
 
 ### What's next?
 
-Celebrate your success and take an extra super mega long break! This was tough and you deserve it.
+Celebrate your success and take a well-deserved break.
 
-When you're ready to move on, have a look at our training portal to browse available training courses and select your next step.
-
-**Good luck!**
+In the next part of this course, you'll learn how to modularize your workflow by extracting process definitions into reusable modules.
