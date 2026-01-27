@@ -1008,8 +1008,6 @@ Take a few minutes to look through the report and see if you can identify some o
 Make sure to click on the tabs that show the utilization results as a percentage of what was allocated.
 There is some [documentation](https://www.nextflow.io/docs/latest/reports.html) describing all the available features.
 
-<!-- TODO: insert images -->
-
 ### 5.2. Set resource allocations for all processes
 
 The profiling shows that the processes in our training workflow are very lightweight, so let's reduce the default memory allocation to 1GB per process.
