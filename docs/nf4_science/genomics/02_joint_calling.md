@@ -353,19 +353,19 @@ nextflow run genomics-2.nf
     ```console
     N E X T F L O W   ~  version 25.10.2
 
-    ┃ Launching `genomics-2.nf` [nice_gates] DSL2 - revision: 43c7de9890
+    ┃ Launching `genomics-2.nf` [crazy_venter] DSL2 - revision: a2d6f6f09f
 
     executor >  local (6)
-    [a1/0b5d00] SAMTOOLS_INDEX (3)       | 3 of 3 ✔
-    [89/4d0c70] GATK_HAPLOTYPECALLER (3) | 0 of 3
+    [f1/8d8486] SAMTOOLS_INDEX (1)       | 3 of 3 ✔
+    [72/3249ca] GATK_HAPLOTYPECALLER (3) | 0 of 3
     ERROR ~ Error executing process > 'GATK_HAPLOTYPECALLER (2)'
 
     Caused by:
-      Missing output file(s) `reads_mother.bam.vcf` expected by process `GATK_HAPLOTYPECALLER (2)`
+      Missing output file(s) `reads_son.bam.vcf` expected by process `GATK_HAPLOTYPECALLER (2)`
 
     Command executed:
 
-      gatk HaplotypeCaller         -R ref.fasta         -I reads_mother.bam         -O reads_mother.bam.g.vcf         -L intervals.bed         -ERC GVCF
+      gatk HaplotypeCaller         -R ref.fasta         -I reads_son.bam         -O reads_son.bam.g.vcf         -L intervals.bed         -ERC GVCF
     ```
 
 And the output is... all red! Oh no.
@@ -395,7 +395,66 @@ _After:_
     path "${input_bam}.g.vcf.idx" , emit: idx
 ```
 
-### 1.4. Run the pipeline again
+### 1.4. Update the publish targets for the new GVCF outputs
+
+Since we're now producing GVCFs instead of VCFs, we should update the workflow's `publish:` section to use more descriptive names.
+We'll also organize the GVCF files into their own subdirectory for clarity.
+
+_Before:_
+
+```groovy title="genomics-2.nf" linenums="88"
+    publish:
+    indexed_bam = SAMTOOLS_INDEX.out
+    vcf = GATK_HAPLOTYPECALLER.out.vcf
+    vcf_idx = GATK_HAPLOTYPECALLER.out.idx
+```
+
+_After:_
+
+```groovy title="genomics-2.nf" linenums="88" hl_lines="3 4"
+    publish:
+    indexed_bam = SAMTOOLS_INDEX.out
+    gvcf = GATK_HAPLOTYPECALLER.out.vcf
+    gvcf_idx = GATK_HAPLOTYPECALLER.out.idx
+```
+
+### 1.5. Update the output block for the new directory structure
+
+We also need to update the `output` block to put the GVCF files in a `gvcf` subdirectory.
+
+_Before:_
+
+```groovy title="genomics-2.nf" linenums="94"
+output {
+    indexed_bam {
+        path '.'
+    }
+    vcf {
+        path '.'
+    }
+    vcf_idx {
+        path '.'
+    }
+}
+```
+
+_After:_
+
+```groovy title="genomics-2.nf" linenums="94" hl_lines="5 6 8 9"
+output {
+    indexed_bam {
+        path 'indexed_bam'
+    }
+    gvcf {
+        path 'gvcf'
+    }
+    gvcf_idx {
+        path 'gvcf'
+    }
+}
+```
+
+### 1.6. Run the pipeline again
 
 Let's run it with `-resume` this time.
 
@@ -408,33 +467,35 @@ nextflow run genomics-2.nf -resume
     ```console
     N E X T F L O W   ~  version 25.10.2
 
-    ┃ Launching `genomics-2.nf` [elated_carlsson] DSL2 - revision: 6a5786a6fa
+    ┃ Launching `genomics-2.nf` [nostalgic_franklin] DSL2 - revision: f2c0a93c6a
 
     executor >  local (3)
-    [47/f7fac1] SAMTOOLS_INDEX (2)       | 3 of 3, cached: 3 ✔
-    [ce/096ac6] GATK_HAPLOTYPECALLER (1) | 3 of 3 ✔
+    [cc/fbc705] SAMTOOLS_INDEX (3)       | 3 of 3, cached: 3 ✔
+    [27/0d7eb9] GATK_HAPLOTYPECALLER (2) | 3 of 3 ✔
     ```
 
 This time it works.
 
-The Nextflow output itself doesn't look any different (compared to a successful run in normal VCF mode), but now we can find the `.g.vcf` files and their respective index files, for all three samples, in the `results_genomics` directory.
+The Nextflow output itself doesn't look any different (compared to a successful run in normal VCF mode), but now we can find the `.g.vcf` files and their respective index files, for all three samples, organized in subdirectories.
 
 ??? abstract "Directory contents (symlinks shortened)"
 
     ```console
     results_genomics/
-    ├── reads_father.bam -> */47/f7fac1*/reads_father.bam
-    ├── reads_father.bam.bai -> */47/f7fac1*/reads_father.bam.bai
-    ├── reads_father.bam.g.vcf -> */cb/ad7430*/reads_father.bam.g.vcf
-    ├── reads_father.bam.g.vcf.idx -> */cb/ad7430*/reads_father.bam.g.vcf.idx
-    ├── reads_mother.bam -> */a2/56a3a8*/reads_mother.bam
-    ├── reads_mother.bam.bai -> */a2/56a3a8*/reads_mother.bam.bai
-    ├── reads_mother.bam.g.vcf -> */ce/096ac6*/reads_mother.bam.g.vcf
-    ├── reads_mother.bam.g.vcf.idx -> */ce/096ac6*/reads_mother.bam.g.vcf.idx
-    ├── reads_son.bam -> */a1/0b5d00*/reads_son.bam
-    ├── reads_son.bam.bai -> */a1/0b5d00*/reads_son.bam.bai
-    ├── reads_son.bam.g.vcf -> */c2/6b6563*/reads_son.bam.g.vcf
-    └── reads_son.bam.g.vcf.idx -> */c2/6b6563*/reads_son.bam.g.vcf.idx
+    ├── gvcf/
+    │   ├── reads_father.bam.g.vcf -> */27/0d7eb9*/reads_father.bam.g.vcf
+    │   ├── reads_father.bam.g.vcf.idx -> */27/0d7eb9*/reads_father.bam.g.vcf.idx
+    │   ├── reads_mother.bam.g.vcf -> */e4/4ed55e*/reads_mother.bam.g.vcf
+    │   ├── reads_mother.bam.g.vcf.idx -> */e4/4ed55e*/reads_mother.bam.g.vcf.idx
+    │   ├── reads_son.bam.g.vcf -> */08/e95962*/reads_son.bam.g.vcf
+    │   └── reads_son.bam.g.vcf.idx -> */08/e95962*/reads_son.bam.g.vcf.idx
+    └── indexed_bam/
+        ├── reads_father.bam -> */9a/c7a873*/reads_father.bam
+        ├── reads_father.bam.bai -> */9a/c7a873*/reads_father.bam.bai
+        ├── reads_mother.bam -> */f1/8d8486*/reads_mother.bam
+        ├── reads_mother.bam.bai -> */f1/8d8486*/reads_mother.bam.bai
+        ├── reads_son.bam -> */cc/fbc705*/reads_son.bam
+        └── reads_son.bam.bai -> */cc/fbc705*/reads_son.bam.bai
     ```
 
 If you open one of the GVCF files and scroll through it, you can verify that GATK HaplotypeCaller produced GVCF files as requested.
@@ -467,7 +528,6 @@ Let's write a new process to define how that's going to work, based on the comma
 process GATK_GENOMICSDB {
 
     container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
-    publishDir params.outdir, mode: 'symlink'
 
     input:
     path all_gvcfs
@@ -560,12 +620,12 @@ nextflow run genomics-2.nf -resume
     ```console
     N E X T F L O W   ~  version 25.10.2
 
-    ┃ Launching `genomics-2.nf` [mad_edison] DSL2 - revision: 6aea0cfded
+    ┃ Launching `genomics-2.nf` [disturbed_bell] DSL2 - revision: 57942246cc
 
     executor >  local (1)
-    [a2/56a3a8] SAMTOOLS_INDEX (1)       | 3 of 3, cached: 3 ✔
-    [ce/096ac6] GATK_HAPLOTYPECALLER (1) | 3 of 3, cached: 3 ✔
-    [df/994a06] GATK_GENOMICSDB          | 0 of 1
+    [f1/8d8486] SAMTOOLS_INDEX (1)       | 3 of 3, cached: 3 ✔
+    [e4/4ed55e] GATK_HAPLOTYPECALLER (2) | 3 of 3, cached: 3 ✔
+    [51/d350ea] GATK_GENOMICSDB          | 0 of 1
     ERROR ~ Error executing process > 'GATK_GENOMICSDB'
 
     Caused by:
@@ -573,7 +633,7 @@ nextflow run genomics-2.nf -resume
 
     Command executed:
 
-      gatk GenomicsDBImport         -V reads_father.bam.g.vcf reads_son.bam.g.vcf reads_mother.bam.g.vcf         -L intervals.bed         --genomicsdb-workspace-path family_trio_gdb
+      gatk GenomicsDBImport         -V reads_son.bam.g.vcf reads_father.bam.g.vcf reads_mother.bam.g.vcf         -L intervals.bed         --genomicsdb-workspace-path family_trio_gdb
     ```
 
 It runs fairly quickly, since we're running with `-resume`, but it fails!
@@ -688,33 +748,20 @@ nextflow run genomics-2.nf -resume
     ```console
     N E X T F L O W   ~  version 25.10.2
 
-    ┃ Launching `genomics-2.nf` [special_noyce] DSL2 - revision: 11f7a51bbe
+    ┃ Launching `genomics-2.nf` [peaceful_gates] DSL2 - revision: ca0bf847ed
 
     executor >  local (1)
-    [6a/5dcf6a] SAMTOOLS_INDEX (3)       | 3 of 3, cached: 3 ✔
-    [d6/d0d060] GATK_HAPLOTYPECALLER (3) | 3 of 3, cached: 3 ✔
-    [e8/749a05] GATK_GENOMICSDB          | 1 of 1 ✔
+    [cc/fbc705] SAMTOOLS_INDEX (3)       | 3 of 3, cached: 3 ✔
+    [27/0d7eb9] GATK_HAPLOTYPECALLER (2) | 3 of 3, cached: 3 ✔
+    [76/d13861] GATK_GENOMICSDB          | 1 of 1 ✔
     ```
 
 Aha! It seems to be working now.
 
-The first two steps were successfully skipped, and the third step worked like a charm this time. We find our output data store in the results directory.
-
-??? abstract "Directory contents"
-
-    ```console
-    results_genomics/family_trio_gdb
-    ├── 20_10037292_10066351$12912$14737
-    ├── 20_10037292_10066351$3277$5495
-    ├── 20_10037292_10066351$7536$9859
-    ├── callset.json
-    ├── __tiledb_workspace.tdb
-    ├── vcfheader.vcf
-    └── vidmap.json
-    ```
+The first two steps were successfully skipped, and the third step worked like a charm this time.
+The GenomicsDB data store is created in the work directory but not published to results, since it's just an intermediate format that we'll use for joint genotyping.
 
 By the way, we didn't have to do anything special to handle the output being a directory instead of a single file.
-Isn't that nice?
 
 ### Takeaway
 
@@ -874,9 +921,35 @@ GATK_JOINTGENOTYPING(
 )
 ```
 
+Now the process is completely wired up.
+
+### 3.6. Add the joint VCF to the publish section
+
+We need to publish the joint VCF outputs from the new process.
+Add these lines to the `publish:` section of the workflow:
+
+```groovy title="genomics-2.nf" linenums="145"
+    joint_vcf = GATK_JOINTGENOTYPING.out.vcf
+    joint_vcf_idx = GATK_JOINTGENOTYPING.out.idx
+```
+
+### 3.7. Add the joint VCF targets to the output block
+
+Finally, add output targets for the joint VCF files.
+We'll put them at the root of the results directory since this is the final output.
+
+```groovy title="genomics-2.nf" linenums="157"
+    joint_vcf {
+        path '.'
+    }
+    joint_vcf_idx {
+        path '.'
+    }
+```
+
 Now everything should be completely wired up.
 
-### 3.6. Run the workflow
+### 3.8. Run the workflow
 
 Finally, we can run the modified workflow...
 
@@ -889,17 +962,41 @@ nextflow run genomics-2.nf -resume
     ```console
     N E X T F L O W   ~  version 25.10.2
 
-    ┃ Launching `genomics-2.nf` [modest_gilbert] DSL2 - revision: 4f49922223
+    ┃ Launching `genomics-2.nf` [crazy_marconi] DSL2 - revision: 5da9afc841
 
     executor >  local (1)
-    [6a/5dcf6a] SAMTOOLS_INDEX (3)       | 3 of 3, cached: 3 ✔
-    [fe/6c9ad4] GATK_HAPLOTYPECALLER (1) | 3 of 3, cached: 3 ✔
-    [e2/a8d95f] GATK_JOINTGENOTYPING     | 1 of 1 ✔
+    [9a/c7a873] SAMTOOLS_INDEX (2)       | 3 of 3, cached: 3 ✔
+    [e4/4ed55e] GATK_HAPLOTYPECALLER (2) | 3 of 3, cached: 3 ✔
+    [a6/7cc8ed] GATK_JOINTGENOTYPING     | 1 of 1 ✔
     ```
 
 And it works!
 
-You'll find the final output file, `family_trio.joint.vcf` (and its file index), in the results directory. If you're the skeptical type, you can click on it to open it and verify that the workflow has generated the same variant calls that you obtained by running the tools manually at the start of this section.
+You'll find the final output file, `family_trio.joint.vcf` (and its file index), in the results directory.
+
+??? abstract "Directory contents (symlinks shortened)"
+
+    ```console
+    results_genomics/
+    ├── family_trio.joint.vcf -> */a6/7cc8ed*/family_trio.joint.vcf
+    ├── family_trio.joint.vcf.idx -> */a6/7cc8ed*/family_trio.joint.vcf.idx
+    ├── gvcf/
+    │   ├── reads_father.bam.g.vcf -> */27/0d7eb9*/reads_father.bam.g.vcf
+    │   ├── reads_father.bam.g.vcf.idx -> */27/0d7eb9*/reads_father.bam.g.vcf.idx
+    │   ├── reads_mother.bam.g.vcf -> */e4/4ed55e*/reads_mother.bam.g.vcf
+    │   ├── reads_mother.bam.g.vcf.idx -> */e4/4ed55e*/reads_mother.bam.g.vcf.idx
+    │   ├── reads_son.bam.g.vcf -> */08/e95962*/reads_son.bam.g.vcf
+    │   └── reads_son.bam.g.vcf.idx -> */08/e95962*/reads_son.bam.g.vcf.idx
+    └── indexed_bam/
+        ├── reads_father.bam -> */9a/c7a873*/reads_father.bam
+        ├── reads_father.bam.bai -> */9a/c7a873*/reads_father.bam.bai
+        ├── reads_mother.bam -> */f1/8d8486*/reads_mother.bam
+        ├── reads_mother.bam.bai -> */f1/8d8486*/reads_mother.bam.bai
+        ├── reads_son.bam -> */cc/fbc705*/reads_son.bam
+        └── reads_son.bam.bai -> */cc/fbc705*/reads_son.bam.bai
+    ```
+
+If you're the skeptical type, you can click on the joint VCF file to open it and verify that the workflow has generated the same variant calls that you obtained by running the tools manually at the start of this section.
 
 ```console title="family_trio.joint.vcf" linenums="40"
 #CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	reads_father	reads_mother	reads_son
