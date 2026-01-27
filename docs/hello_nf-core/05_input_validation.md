@@ -364,7 +364,20 @@ Now try with a valid set of parameters:
 nextflow run . --input assets/greetings.csv --outdir results --batch my-batch -profile test,docker
 ```
 
-<!-- TODO: add output -->
+??? success "Command output"
+
+    ```console
+     N E X T F L O W   ~  version 25.04.1
+
+    Launching `./main.nf` [peaceful_wozniak] DSL2 - revision: abc123
+
+    executor >  local (8)
+    [de/a1b2c3] NFCORE_HELLO:HELLO:SAYHELLO (3)       | 3 of 3 ✔
+    [4f/d5e6f7] NFCORE_HELLO:HELLO:CONVERTTOUPPER (3) | 3 of 3 ✔
+    [8a/b9c0d1] NFCORE_HELLO:HELLO:COLLECTGREETINGS   | 1 of 1 ✔
+    [e2/f3a4b5] NFCORE_HELLO:HELLO:COWPY              | 1 of 1 ✔
+    -[nf-core/hello] Pipeline completed successfully-
+    ```
 
 The pipeline should run successfully, and the `batch` parameter is now validated.
 
@@ -732,8 +745,6 @@ nextflow run . --input assets/invalid_greetings.csv --outdir test-results -profi
 
     -- Check script 'subworkflows/nf-core/utils_nfschema_plugin/main.nf' at line: 68 or see '.nextflow.log' file for more details
     ```
-
-<!-- TODO full output -->
 
 Perfect! The validation caught the error and provided a clear, helpful error message pointing to:
 
