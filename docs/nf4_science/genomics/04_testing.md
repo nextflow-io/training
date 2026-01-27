@@ -279,23 +279,23 @@ As we learned previously, this verified the basic assertion about the success of
 
 ```json title="modules/samtools/index/tests/main.nf.test.snap" linenums="1"
 {
-    "Should index reads_son.bam correctly": {
-        "content": [
-            {
-                "0": [
-                    [
-                        "reads_son.bam:md5,af5956d9388ba017944bef276b71d809",
-                        "reads_son.bam.bai:md5,a2ca7b84998218ee77eff14af8eb8ca2"
-                    ]
-                ]
-            }
-        ],
-        "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
-        },
-        "timestamp": "2026-01-27T15:09:48.394063389"
-    }
+  "Should index reads_son.bam correctly": {
+    "content": [
+      {
+        "0": [
+          [
+            "reads_son.bam:md5,af5956d9388ba017944bef276b71d809",
+            "reads_son.bam.bai:md5,a2ca7b84998218ee77eff14af8eb8ca2"
+          ]
+        ]
+      }
+    ],
+    "meta": {
+      "nf-test": "0.9.3",
+      "nextflow": "25.10.2"
+    },
+    "timestamp": "2026-01-27T15:09:48.394063389"
+  }
 }
 ```
 
