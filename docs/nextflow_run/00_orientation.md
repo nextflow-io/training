@@ -21,7 +21,7 @@ If you are working through this course by yourself, please acquaint yourself wit
 ### Version requirements
 
 This training is designed for Nextflow 25.10.2 or later **with the v2 syntax parser ENABLED**.
-If you are using a local or custom environment, please make sure you are using the correct settings as documented [here](../nxf_versions.md).
+If you are using a local or custom environment, please make sure you are using the correct settings as documented [here](../info/nxf_versions.md).
 
 ## Get ready to work
 

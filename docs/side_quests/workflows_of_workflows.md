@@ -177,15 +177,15 @@ Let's test the workflow again to see if it works as expected:
 nextflow run workflows/greeting.nf
 ```
 
-??? warning "Command output"
+??? failure "Command output"
 
     ```console
     N E X T F L O W  ~  version 24.10.0
     Launching `workflows/greeting.nf` [high_brahmagupta] DSL2 - revision: 8f5857af25
-    WARN: No entry workflow specified
+    No entry workflow specified
     ```
 
-This tells you about another new concept, an 'entry workflow'. The entry workflow is the workflow that gets called when you run a Nextflow script. By default, Nextflow will use an un-named workflow as the entry workflow, when present, and that's what you've been doing so far, with workflow blocks starting like this:
+This tells you about another new concept, an 'entry workflow'. The entry workflow is the workflow that gets called when you run a Nextflow script. By default, Nextflow will use an unnamed workflow as the entry workflow, when present, and that's what you've been doing so far, with workflow blocks starting like this:
 
 ```groovy title="hello.nf" linenums="1"
 workflow {
@@ -197,27 +197,9 @@ But our greeting workflow doesn't have an un-named workflow, rather we have a na
 workflow GREETING_WORKFLOW {
 ```
 
-That's why Nextflow threw a warning and did not do what we wanted.
+That's why Nextflow threw an error and did not do what we wanted.
 
-We can actually tell Nextflow to use our named workflow as the entry workflow by adding this line to Nextflow's command line:
-
-```bash
-nextflow run workflows/greeting.nf -entry GREETING_WORKFLOW
-```
-
-??? failure "Command output"
-
-    ```console
-    N E X T F L O W  ~  version 24.10.0
-    Launching `workflows/greeting.nf` [compassionate_fermi] DSL2 - revision: 8f5857af25
-    ERROR ~ Workflow `GREETING_WORKFLOW` declares 1 input channels but 0 were given
-
-    -- Check '.nextflow.log' file for details
-    ```
-
-This also throws an error, because the workflow is expecting an input channel. However, if you wanted to call a named workflow that didn't require inputs, you could call it this way.
-
-But we didn't add that syntax so we could call the workflow directly, we did it so we could compose it with other workflows. Let's start by creating a main workflow that imports and uses the `greeting` workflow.
+We didn't add the `take:`/`emit:` syntax so we could call the workflow directly - we did it so we could compose it with other workflows. The solution is to create a main script with an unnamed entry workflow that imports and calls our named workflow.
 
 ### 1.4. Create and test the main workflow
 
@@ -271,7 +253,7 @@ In this section, you've learned several important concepts:
 
 - **Named Workflows**: Creating a named workflow (`GREETING_WORKFLOW`) that can be imported and reused
 - **Workflow Interfaces**: Defining clear inputs with `take:` and outputs with `emit:` to create a composable workflow
-- **Entry Points**: Understanding that Nextflow needs an entry workflow (either unnamed or specified with `-entry`)
+- **Entry Points**: Understanding that Nextflow needs an unnamed entry workflow to run a script
 - **Workflow Composition**: Importing and using a named workflow within another workflow
 - **Workflow Namespaces**: Accessing workflow outputs using the `.out` namespace (`GREETING_WORKFLOW.out.greetings`)
 
@@ -448,28 +430,23 @@ Applying these techniques in your own work will enable you to build more sophist
     include { WORKFLOW_A as WORKFLOW_A_ALIAS } from './path/to/workflow'
     ```
 
-3.  **Entry points**: We learned that Nextflow requires an entry workflow (either an unnamed workflow or a named workflow specified with `-entry`) to know where to start execution.
+3.  **Entry points**: Nextflow requires an unnamed entry workflow to know where to start execution. This entry workflow calls your named workflows.
 
-    - Unnamed workflow (default entry point)
+    - Unnamed workflow (entry point)
 
     ```groovy
     workflow {
-        // This is automatically the entry point when the script is run
+        // This is the entry point when the script is run
+        NAMED_WORKFLOW(input_ch)
     }
     ```
 
-    - Named workflow (not an entry point by default)
+    - Named workflow (called from entry workflow)
 
     ```groovy
     workflow NAMED_WORKFLOW {
-        // This is not automatically run
+        // Must be called from the entry workflow
     }
-    ```
-
-    - Running a named workflow as entry point (bash command)
-
-    ```bash
-    nextflow run script.nf -entry NAMED_WORKFLOW
     ```
 
 4.  **Managing data flow:** We learned how to access workflow outputs using the namespace notation (`WORKFLOW_NAME.out.channel_name`) and pass them to other workflows.

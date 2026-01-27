@@ -226,7 +226,7 @@ nf-test init
 This should produce the following output:
 
 ```bash
-🚀 nf-test 0.9.2
+🚀 nf-test 0.9.3
 https://www.nf-test.com
 (c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
 
@@ -331,7 +331,7 @@ nf-test test tests/main.nf.test
 ```console title="nf-test pipeline fail"
 > nf-test test tests/main.nf.test
 
-🚀 nf-test 0.9.2
+🚀 nf-test 0.9.3
 https://www.nf-test.com
 (c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
 
@@ -419,7 +419,7 @@ nf-test test tests/main.nf.test
 ```console title="Pipeline passes"
 > nf-test test tests/main.nf.test
 
-🚀 nf-test 0.9.2
+🚀 nf-test 0.9.3
 https://www.nf-test.com
 (c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
 
@@ -443,7 +443,7 @@ nf-test test tests/main.nf.test --verbose
 ```console title="Pipeline runs all processes"
 > nf-test test tests/main.nf.test
 
-🚀 nf-test 0.9.2
+🚀 nf-test 0.9.3
 https://www.nf-test.com
 (c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
 
@@ -518,7 +518,7 @@ nf-test test tests/main.nf.test
 ```
 
 ```console title="Pipeline passes with assertions"
-🚀 nf-test 0.9.2
+🚀 nf-test 0.9.3
 https://www.nf-test.com
 (c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
 
@@ -603,7 +603,7 @@ nf-test test tests/main.nf.test
 ```console title="Pipeline passes with file assertions"
 > nf-test test tests/main.nf.test
 
-🚀 nf-test 0.9.2
+🚀 nf-test 0.9.3
 https://www.nf-test.com
 (c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
 
@@ -702,7 +702,7 @@ nf-test test tests/main.sayhello.nf.test
 ```console title="Process test fails"
 > nf-test test tests/main.sayhello.nf.test
 
-🚀 nf-test 0.9.2
+🚀 nf-test 0.9.3
 https://www.nf-test.com
 (c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
 
@@ -720,15 +720,13 @@ Test Process sayHello
 
   Nextflow stdout:
 
-  Process `sayHello` declares 1 input channel but 0 were specified
-
-   -- Check script '/workspaces/training/side-quests/nf-test/.nf-test-1eaad118145a1fd798cb07e7dd75d087.nf' at line: 38 or see '/workspaces/training/side-quests/nf-test/.nf-test/tests/1eaad118145a1fd798cb07e7dd75d087/meta/nextflow.log' file for more details
+  Process `sayHello` declares 1 input but was called with 0 arguments
   Nextflow stderr:
 
 FAILURE: Executed 1 tests in 4.884s (1 failed)
 ```
 
-The test fails because the `sayHello` process declares 1 input channel but 0 were specified. Let's fix that by adding an input to the process. Remember from [Hello Workflow](../hello_nextflow/03_hello_workflow.md) (and the warmup section above) that our `sayHello` process takes a single value input, which we will need to provide. We should also fix the test name to better reflect what we're testing.
+The test fails because the `sayHello` process declares 1 input but was called with 0 arguments. Let's fix that by adding an input to the process. Remember from [Hello Workflow](../hello_nextflow/03_hello_workflow.md) (and the warmup section above) that our `sayHello` process takes a single value input, which we will need to provide. We should also fix the test name to better reflect what we're testing.
 
 **Before:**
 
@@ -786,7 +784,7 @@ Let's run the test again to see if it works.
 ```console title="nf-test pipeline pass"
 > nf-test test tests/main.sayhello.nf.test
 
-🚀 nf-test 0.9.2
+🚀 nf-test 0.9.3
 https://www.nf-test.com
 (c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
 
@@ -844,7 +842,7 @@ We can run the test again and see the test should pass:
 ```console title="nf-test process pass with snapshot"
 > nf-test test tests/main.sayhello.nf.test
 
-🚀 nf-test 0.9.2
+🚀 nf-test 0.9.3
 https://www.nf-test.com
 (c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
 
@@ -937,7 +935,7 @@ nf-test test tests/main.sayhello.nf.test
 ```console title="Process test fails"
 > nf-test test tests/main.sayhello.nf.test
 
-🚀 nf-test 0.9.2
+🚀 nf-test 0.9.3
 https://www.nf-test.com
 (c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
 
@@ -1056,7 +1054,7 @@ nf-test test tests/main.converttoupper.nf.test
 ```console title="nf-test process convertToUpper pass"
 > nf-test test tests/main.converttoupper.nf.test
 
-🚀 nf-test 0.9.2
+🚀 nf-test 0.9.3
 https://www.nf-test.com
 (c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
 
@@ -1083,7 +1081,7 @@ nf-test test tests/main.converttoupper.nf.test
 ```console title="nf-test process convertToUpper pass"
 > nf-test test tests/main.converttoupper.nf.test
 
-🚀 nf-test 0.9.2
+🚀 nf-test 0.9.3
 https://www.nf-test.com
 (c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
 
@@ -1123,31 +1121,31 @@ nf-test test .
 Note, we are just using the `.` to run everything from our current directory. This will include every test!
 
 ```console title="nf-test repo pass"
-> nf-test test tests/main.converttoupper.nf.test
+> nf-test test .
 
-🚀 nf-test 0.9.2
+🚀 nf-test 0.9.3
 https://www.nf-test.com
 (c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
 
 
 Test Process convertToUpper
 
-  Test [c59b6044] 'Should run without failures and produce correct output' PASSED (1.798s)
+  Test [3d26d9af] 'Should run without failures and produce correct output' PASSED (4.155s)
 
 Test Workflow main.nf
 
-  Test [f0e08a68] 'Should run successfully with correct number of processes' PASSED (8.144s)
-  Test [d7e32a32] 'Should produce correct output files' PASSED (6.994s)
+  Test [f183df37] 'Should run successfully with correct number of processes' PASSED (3.33s)
+  Test [d7e32a32] 'Should produce correct output files' PASSED (3.102s)
 
 Test Process sayHello
 
-  Test [f91a1bcd] 'Should run without failures and contain expected greeting' PASSED (1.664s)
+  Test [58df4e4b] 'Should run without failures and contain expected greeting' PASSED (2.614s)
 
 
-SUCCESS: Executed 3 tests in 5.007s
+SUCCESS: Executed 4 tests in 13.481s
 ```
 
-Check that out! We ran 3 tests, 1 for each process and 1 for the whole pipeline with a single command. Imagine how powerful this is on a large codebase!
+Check that out! We ran 4 tests, 1 for each process and 2 for the whole pipeline with a single command. Imagine how powerful this is on a large codebase!
 
 ---
 

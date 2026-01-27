@@ -53,6 +53,22 @@ AskUserQuestion:
 
 **If Existing environment selected**: Skip Docker setup. Verify Nextflow is installed: `nextflow -version`
 
+### Strict Syntax Parser (v2)
+
+**Always use the strict syntax parser** when running Nextflow commands. Set the environment variable:
+
+```bash
+NXF_SYNTAX_PARSER=v2
+```
+
+When running in Docker:
+
+```bash
+docker exec -e NXF_SYNTAX_PARSER=v2 ...
+```
+
+This ensures tutorials are validated against the strict syntax that will become the default in future Nextflow versions.
+
 ---
 
 ## Working Directory Mapping
@@ -206,7 +222,6 @@ Categorize issues into:
 Before making any changes, clearly present:
 
 1. **Summary of proposed fixes** - List each fix with:
-
    - File and line number
    - **Actual section heading** (read from the document, don't guess!)
    - What the current content is
@@ -293,6 +308,7 @@ Generated with [Claude Code](https://claude.ai/code)
 ## Environment
 - Mode: Docker / Local
 - Nextflow version: <from devcontainer.json or local>
+- Syntax parser: v2 (strict)
 - Working directory: <path>
 
 ## Section 0: <exact title from document>
@@ -397,6 +413,7 @@ Some tutorials have optional paths:
 
 ## Notes
 
+- **Always use v2 parser** - Set `NXF_SYNTAX_PARSER=v2` for all Nextflow commands
 - **Use TodoWrite** - Track progress through phases and sections with the `TodoWrite` tool
 - **ONE SECTION AT A TIME** - Complete steps 2.1-2.6 for each section before moving to the next
 - **Test after EVERY change** - Run the workflow after each section's code changes

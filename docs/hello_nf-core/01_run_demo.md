@@ -163,7 +163,7 @@ It's a great way to quickly try out a pipeline at small scale.
 !!! note
 
     Nextflow's configuration profile system allows you to easily switch between different container engines or execution environments.
-    For more details, see [Hello Nextflow Part 6: Configuration](../hello_nextflow/06_hello_configuration.md).
+    For more details, see [Hello Nextflow Part 6: Configuration](../hello_nextflow/06_hello_config.md).
 
 ### 2.1. Examine the test profile
 

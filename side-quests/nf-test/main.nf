@@ -3,9 +3,7 @@
 /*
  * Pipeline parameters
  */
-params {
-    input_file: Path = "greetings.csv"
-}
+params.input_file = "greetings.csv"
 
 /*
  * Use echo to print 'Hello World!' to standard out

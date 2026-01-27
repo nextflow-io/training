@@ -21,7 +21,7 @@ If you are working through this course by yourself, please acquaint yourself wit
 ### Version requirements
 
 This training is designed for **Nextflow 25.10.2** or later **with the v2 syntax parser DISABLED**.
-If you are using a local or custom environment, please make sure you are using the correct settings as documented [here](../nxf_versions.md).
+If you are using a local or custom environment, please make sure you are using the correct settings as documented [here](../info/nxf_versions.md).
 
 The training additionally requires **nf-core tools 3.4.1**.
 If you use a different version of nf-core tooling, you may have difficulty following along.

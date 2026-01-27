@@ -1,6 +1,7 @@
 ---
 title: The Hello pipeline
 description: Recap of what the Hello pipeline does and how it is structured.
+hide:
   - toc
   - footer
 ---
@@ -71,8 +72,8 @@ You may encounter some variations in the specifics depending on the course the p
 
 <div markdown class="homepage_logos">
 
-![Seqera](assets/img/seqera_logo.png#only-light)
+![Seqera](../assets/img/seqera_logo.png#only-light)
 
-![Seqera](assets/img/seqera_logo_dark.png#only-dark)
+![Seqera](../assets/img/seqera_logo_dark.png#only-dark)
 
 </div>

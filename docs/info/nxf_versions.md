@@ -1,7 +1,7 @@
 ---
 title: Nextflow versions
-description:
-  Understanding and managing the evolution of Nextflow's syntax versions
+description: Understanding and managing the evolution of Nextflow's syntax versions
+hide:
   - toc
   - footer
 ---
@@ -11,8 +11,8 @@ description:
 As of version 3.0 of the training portal, all our training courses are based on the 25.10.2 version release of Nextflow unless otherwise specified on the course index page (except deprecated or otherwise archived materials which may not include a version notice).
 
 Because the courses now use typed inputs at the workflow level as well as workflow-level output directives, they require the use of the V2 syntax parser.
-If you plan to use the environment we provide through [Github Codespaces](envsetup/01_setup.md) or [local devcontainers](envsetup/03_devcontainer.md), you don't need to do anything unless specifically noted in the course instructions.
-However, if you are planning to work through the trainings in your own environment ([Manual install](envsetup/02_local.md)), you will need to make sure to use Nextflow version 25.10.2 or later with the v2 syntax parser enabled.
+If you plan to use the environment we provide through [Github Codespaces](../envsetup/01_setup.md) or [local devcontainers](../envsetup/03_devcontainer.md), you don't need to do anything unless specifically noted in the course instructions.
+However, if you are planning to work through the trainings in your own environment ([Manual install](../envsetup/02_local.md)), you will need to make sure to use Nextflow version 25.10.2 or later with the v2 syntax parser enabled.
 
 ## Older versions of the training materials
 
@@ -74,14 +74,14 @@ Depending on the generation of Nextflow code you intend to migrate, you may be a
 See the CLI reference for [`lint`](https://www.nextflow.io/docs/latest/reference/cli.html#lint) for more details.
 
 We hope this will be helpful.
-Don't hesitate to reach out on Slack or on the forum if you need help.
+If you need help, reach out on Slack or on the forum.
 
 ---
 
 <div markdown class="homepage_logos">
 
-![Seqera](assets/img/seqera_logo.png#only-light)
+![Seqera](../assets/img/seqera_logo.png#only-light)
 
-![Seqera](assets/img/seqera_logo_dark.png#only-dark)
+![Seqera](../assets/img/seqera_logo_dark.png#only-dark)
 
 </div>
