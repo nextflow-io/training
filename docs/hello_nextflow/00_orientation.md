@@ -54,6 +54,12 @@ Change directory now by running this command in the terminal:
 cd hello-nextflow/
 ```
 
+You can set VSCode to focus on this directory, so that only the relevant files show in the file explorer sidebar:
+
+```bash
+code .
+```
+
 !!! tip
 
     If for whatever reason you move out of this directory (e.g. your codespace goes to sleep), you can always use the full path to return to it, assuming you're running this within the Github Codespaces training environment:
