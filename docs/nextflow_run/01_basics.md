@@ -679,3 +679,71 @@ You know how to relaunch a pipeline without repeating steps that were already ru
 Take a little break! You've just absorbed the building blocks of Nextflow syntax and basic usage instructions.
 
 In the next section of this training, we're going to look at four successively more realistic versions of the Hello World pipeline that will demonstrate how Nextflow allows you to process multiple inputs efficiently, run workflows composed of multiple steps connected together, leverage modular code components, and utilize containers for greater reproducibility and portability.
+
+---
+
+## Quiz
+
+<quiz>
+In the console output line `[a3/7be2fa] sayHello | 1 of 1 ✔`, what does `[a3/7be2fa]` represent?
+- [ ] The process version number
+- [ ] A unique run identifier
+- [x] The truncated path to the task's work directory
+- [ ] The checksum of the output file
+</quiz>
+
+<quiz>
+What is the purpose of the `.command.sh` file in a task directory?
+- [ ] It stores the task's configuration settings
+- [x] It shows the actual command that was executed by the process
+- [ ] It contains error messages from failed tasks
+- [ ] It lists input files staged for the task
+</quiz>
+
+<quiz>
+What happens to published results when you re-run a workflow without -resume?
+- [ ] They are preserved in separate timestamped directories
+- [x] They get overwritten by the new execution
+- [ ] Nextflow prevents overwriting and fails
+- [ ] They are automatically backed up
+</quiz>
+
+<quiz>
+When using -resume, what does the `cached: 1` indicator in the console output mean?
+- [ ] The output was loaded from a backup
+- [ ] The task failed and was retried
+- [x] Nextflow reused results from a previous identical execution
+- [ ] The task is waiting in a queue
+</quiz>
+
+<quiz>
+Where does Nextflow store the execution history that `nextflow log` displays?
+- [ ] In the results directory
+- [ ] In the work directory
+- [x] In the .nextflow/history file
+- [ ] In nextflow.config
+</quiz>
+
+<quiz>
+What is the purpose of the `params` block in a workflow file?
+- [ ] To define process resource requirements
+- [ ] To configure the executor
+- [x] To declare and type workflow input parameters
+- [ ] To specify output publishing options
+</quiz>
+
+<quiz>
+In the workflow's `output` block, what does `mode 'copy'` do?
+- [ ] Creates a backup of the work directory
+- [x] Makes a full copy of files instead of symbolic links
+- [ ] Copies the workflow script to results
+- [ ] Enables incremental file copying
+</quiz>
+
+<quiz>
+What is the recommended flag to use with `nextflow clean` before actually deleting files?
+- [x] -n (dry run) to preview what would be deleted
+- [ ] -v (verbose) to see detailed output
+- [ ] -a (all) to select all directories
+- [ ] -q (quiet) to suppress warnings
+</quiz>

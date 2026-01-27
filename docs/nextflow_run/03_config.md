@@ -1404,3 +1404,111 @@ That concludes this course, but if you're eager to keep learning, we have two ma
 - If you would like to continue learning how to run Nextflow pipelines without going deeper into the code, have a look at the first part of [Hello nf-core](../hello_nf-core/index.md), which introduces the tooling for finding and running pipelines from the hugely popular [nf-core](https://nf-co.re/) project.
 
 Have fun!
+
+---
+
+## Quiz
+
+<quiz>
+When parameter values are set in both the workflow file and nextflow.config, which takes precedence?
+- [ ] The workflow file value
+- [x] The configuration file value
+- [ ] The first value encountered
+- [ ] It causes an error
+</quiz>
+
+<quiz>
+What is the syntax difference between setting a parameter default in a workflow file vs. a config file?
+- [ ] They use the same syntax
+- [x] Workflow uses typed declaration (param: Type = value), config uses assignment (param = value)
+- [ ] Config uses typed declaration, workflow uses assignment
+- [ ] Only config files can set default values
+</quiz>
+
+<quiz>
+How do you specify a parameter file when running a workflow?
+- [ ] --params params.yaml
+- [ ] -config params.yaml
+- [x] -params-file params.yaml
+- [ ] --input-params params.yaml
+</quiz>
+
+<quiz>
+What does the `outputDir` configuration option control?
+- [ ] The location of the work directory
+- [x] The base path where workflow outputs are published
+- [ ] The directory for log files
+- [ ] The location of module files
+</quiz>
+
+<quiz>
+How do you reference a process name dynamically in output path configuration?
+- [ ] ${processName}
+- [ ] process.name
+- [x] { processName.name }
+- [ ] @processName
+</quiz>
+
+<quiz>
+If both Docker and Conda are enabled and a process has both directives, which is prioritized?
+- [x] Docker (containers)
+- [ ] Conda
+- [ ] The first one defined in the process
+- [ ] It causes an error
+</quiz>
+
+<quiz>
+What is the default executor in Nextflow?
+- [x] local
+- [ ] slurm
+- [ ] kubernetes
+- [ ] aws
+</quiz>
+
+<quiz>
+What command generates a resource utilization report?
+- [ ] nextflow run workflow.nf -with-metrics
+- [ ] nextflow run workflow.nf -with-stats
+- [x] nextflow run workflow.nf -with-report report.html
+- [ ] nextflow run workflow.nf -profile report
+</quiz>
+
+<quiz>
+How do you set resource requirements for a specific process named 'cowpy' in the config file?
+- [ ] cowpy.memory = '2.GB'
+- [ ] process.cowpy.memory = '2.GB'
+- [x] process { withName: 'cowpy' { memory = '2.GB' } }
+- [ ] resources.cowpy.memory = '2.GB'
+</quiz>
+
+<quiz>
+What does the `resourceLimits` directive do?
+- [ ] Sets minimum resource requirements
+- [ ] Allocates resources to processes
+- [x] Caps the maximum resources that can be requested
+- [ ] Monitors resource usage in real-time
+</quiz>
+
+<quiz>
+How do you specify multiple profiles in a single command?
+- [ ] -profile profile1 -profile profile2
+- [ ] -profiles profile1,profile2
+- [x] -profile profile1,profile2
+- [ ] --profile profile1 --profile profile2
+</quiz>
+
+<quiz>
+What command shows the fully resolved configuration that Nextflow would use?
+- [ ] nextflow show-config
+- [ ] nextflow settings
+- [x] nextflow config
+- [ ] nextflow resolve
+</quiz>
+
+<quiz>
+What can profiles be used for? (Select all that apply)
+- [x] Defining infrastructure-specific settings (executors, containers)
+- [x] Setting resource limits for different environments
+- [x] Providing test parameters for easy workflow testing
+- [ ] Defining new processes
+</quiz>
