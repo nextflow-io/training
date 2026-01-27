@@ -634,15 +634,16 @@ If your workflow run succeeded, run it again until you get an error like this:
 
     Command executed:
 
-      gatk HaplotypeCaller         -R ref.fasta         -I reads_father.bam         -O reads_father.bam.vcf         -L intervals.bed         -ERC GVCF
+      gatk HaplotypeCaller         -R ref.fasta         -I reads_father.bam         -O reads_father.bam.vcf         -L intervals.bed
 
     Command exit status:
       2
 
     Command error:
+      ...
+      A USER ERROR has occurred: Traversal by intervals was requested but some input files are not indexed.
+      ...
     ```
-
-<!-- TODO: full output -->
 
 If you look at the GATK command error output, there will be a line like this:
 
