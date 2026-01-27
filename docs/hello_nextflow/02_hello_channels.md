@@ -233,7 +233,7 @@ Add this tiny line to the workflow block:
         main:
         // create a channel for inputs
         greeting_ch = channel.of('Hello Channels!')
-                            .view()
+                             .view()
         // emit a greeting
         sayHello(greeting_ch)
 
@@ -317,7 +317,7 @@ Before the workflow block, make the following code change:
     ```groovy title="hello-channels.nf" linenums="30" hl_lines="2"
     // create a channel for inputs
     greeting_ch = channel.of('Hello','Bonjour','Holà')
-                        .view()
+                         .view()
     ```
 
 === "Before"
@@ -325,7 +325,7 @@ Before the workflow block, make the following code change:
     ```groovy title="hello-channels.nf" linenums="30" hl_lines="2"
     // create a channel for inputs
     greeting_ch = channel.of('Hello Channels')
-                        .view()
+                         .view()
     ```
 
 The documentation tells us this should work. Can it really be so simple?
@@ -666,7 +666,7 @@ Let's take the `greetings_array` variable we just imagined and make it a reality
         greetings_array = ['Hello','Bonjour','Holà']
         // create a channel for inputs
         greeting_ch = channel.of('Hello','Bonjour','Holà')
-                            .view()
+                             .view()
         // emit a greeting
         sayHello(greeting_ch)
 
@@ -683,7 +683,7 @@ Let's take the `greetings_array` variable we just imagined and make it a reality
         main:
         // create a channel for inputs
         greeting_ch = channel.of('Hello','Bonjour','Holà')
-                            .view()
+                             .view()
         // emit a greeting
         sayHello(greeting_ch)
 
@@ -710,7 +710,7 @@ In the workflow block, make the following change:
         greetings_array = ['Hello','Bonjour','Holà']
         // create a channel for inputs
         greeting_ch = channel.of(greetings_array)
-                            .view()
+                             .view()
         // emit a greeting
         sayHello(greeting_ch)
 
@@ -729,7 +729,7 @@ In the workflow block, make the following change:
         greetings_array = ['Hello','Bonjour','Holà']
         // create a channel for inputs
         greeting_ch = channel.of('Hello','Bonjour','Holà')
-                            .view()
+                             .view()
         // emit a greeting
         sayHello(greeting_ch)
 
@@ -815,8 +815,8 @@ In the workflow block, make the following code change:
         greetings_array = ['Hello','Bonjour','Holà']
         // create a channel for inputs
         greeting_ch = channel.of(greetings_array)
-                            .view()
-                            .flatten()
+                             .view()
+                             .flatten()
         // emit a greeting
         sayHello(greeting_ch)
 
@@ -835,7 +835,7 @@ In the workflow block, make the following code change:
         greetings_array = ['Hello','Bonjour','Holà']
         // create a channel for inputs
         greeting_ch = channel.of(greetings_array)
-                            .view()
+                             .view()
         // emit a greeting
         sayHello(greeting_ch)
 
@@ -886,8 +886,8 @@ In the workflow block, make the following code change:
         greetings_array = ['Hello','Bonjour','Holà']
         // create a channel for inputs
         greeting_ch = channel.of(greetings_array)
-                            .view()
-                            .flatten()
+                             .view()
+                             .flatten()
         // emit a greeting
         sayHello(greeting_ch)
 
@@ -1031,9 +1031,9 @@ In the workflow block, make the following code change:
         main:
         // create a channel for inputs from a CSV file
         greeting_ch = channel.fromPath(params.input)
-                            .view { greeting -> "Before flatten: $greeting" }
-                            //.flatten()
-                            //.view { greeting -> "After flatten: $greeting" }
+                             .view { greeting -> "Before flatten: $greeting" }
+                             // .flatten()
+                             // .view { greeting -> "After flatten: $greeting" }
         // emit a greeting
         sayHello(greeting_ch)
 
@@ -1052,9 +1052,9 @@ In the workflow block, make the following code change:
         greetings_array = ['Hello','Bonjour','Holà']
         // create a channel for inputs
         greeting_ch = channel.of(greetings_array)
-                            .view { greeting -> "Before flatten: $greeting" }
-                            .flatten()
-                            .view { greeting -> "After flatten: $greeting" }
+                             .view { greeting -> "Before flatten: $greeting" }
+                             .flatten()
+                             .view { greeting -> "After flatten: $greeting" }
         // emit a greeting
         sayHello(greeting_ch)
 
@@ -1136,9 +1136,9 @@ In the workflow block, make the following code change to replace `flatten()` wit
         main:
         // create a channel for inputs from a CSV file
         greeting_ch = channel.fromPath(params.input)
-                            .view { csv -> "Before splitCsv: $csv" }
-                            .splitCsv()
-                            .view { csv -> "After splitCsv: $csv" }
+                             .view { csv -> "Before splitCsv: $csv" }
+                             .splitCsv()
+                             .view { csv -> "After splitCsv: $csv" }
         // emit a greeting
         sayHello(greeting_ch)
 
@@ -1155,9 +1155,9 @@ In the workflow block, make the following code change to replace `flatten()` wit
         main:
         // create a channel for inputs from a CSV file
         greeting_ch = channel.fromPath(params.input)
-                            .view { greeting -> "Before flatten: $greeting" }
-                            //.flatten()
-                            //.view { greeting -> "After flatten: $greeting" }
+                             .view { greeting -> "Before flatten: $greeting" }
+                             // .flatten()
+                             // .view { greeting -> "After flatten: $greeting" }
         // emit a greeting
         sayHello(greeting_ch)
 
@@ -1251,11 +1251,11 @@ In the workflow block, make the following code change:
         main:
         // create a channel for inputs from a CSV file
         greeting_ch = channel.fromPath(params.input)
-                            .view { csv -> "Before splitCsv: $csv" }
-                            .splitCsv()
-                            .view { csv -> "After splitCsv: $csv" }
-                            .map { item -> item[0] }
-                            .view { csv -> "After map: $csv" }
+                             .view { csv -> "Before splitCsv: $csv" }
+                             .splitCsv()
+                             .view { csv -> "After splitCsv: $csv" }
+                             .map { item -> item[0] }
+                             .view { csv -> "After map: $csv" }
         // emit a greeting
         sayHello(greeting_ch)
 
@@ -1272,9 +1272,9 @@ In the workflow block, make the following code change:
         main:
         // create a channel for inputs from a CSV file
         greeting_ch = channel.fromPath(params.input)
-                            .view { csv -> "Before splitCsv: $csv" }
-                            .splitCsv()
-                            .view { csv -> "After splitCsv: $csv" }
+                             .view { csv -> "Before splitCsv: $csv" }
+                             .splitCsv()
+                             .view { csv -> "After splitCsv: $csv" }
         // emit a greeting
         sayHello(greeting_ch)
 
