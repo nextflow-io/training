@@ -367,16 +367,16 @@ nextflow run . --input assets/greetings.csv --outdir results --batch my-batch -p
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 25.04.1
+     N E X T F L O W   ~  version 25.04.3
 
-    Launching `./main.nf` [peaceful_wozniak] DSL2 - revision: abc123
+    Launching `./main.nf` [peaceful_wozniak] DSL2 - revision: b9e9b3b8de
 
     executor >  local (8)
-    [de/a1b2c3] NFCORE_HELLO:HELLO:SAYHELLO (3)       | 3 of 3 ✔
-    [4f/d5e6f7] NFCORE_HELLO:HELLO:CONVERTTOUPPER (3) | 3 of 3 ✔
-    [8a/b9c0d1] NFCORE_HELLO:HELLO:COLLECTGREETINGS   | 1 of 1 ✔
-    [e2/f3a4b5] NFCORE_HELLO:HELLO:COWPY              | 1 of 1 ✔
-    -[nf-core/hello] Pipeline completed successfully-
+    [de/a1b2c3] CORE_HELLO:HELLO:sayHello (3)       | 3 of 3 ✔
+    [4f/d5e6f7] CORE_HELLO:HELLO:convertToUpper (3) | 3 of 3 ✔
+    [8a/b9c0d1] CORE_HELLO:HELLO:CAT_CAT (test)     | 1 of 1 ✔
+    [e2/f3a4b5] CORE_HELLO:HELLO:COWPY (test)       | 1 of 1 ✔
+    -[core/hello] Pipeline completed successfully-
     ```
 
 The pipeline should run successfully, and the `batch` parameter is now validated.
