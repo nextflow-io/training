@@ -36,15 +36,15 @@ workflow {
 
 output {
     first_output {
-        path 'hello_containers/intermediates'
+        path 'hello_containers'
         mode 'copy'
     }
     uppercased {
-        path 'hello_containers/intermediates'
+        path 'hello_containers'
         mode 'copy'
     }
     collected {
-        path 'hello_containers/intermediates'
+        path 'hello_containers'
         mode 'copy'
     }
     batch_report {
