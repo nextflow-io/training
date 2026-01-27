@@ -679,11 +679,11 @@ nextflow run . --outdir core-hello-results -profile test,docker
     * --character: tux
 
 
-    executor >  local (10)
-    [c1/39f64a] CORE_HELLO:HELLO:sayHello (1)       | 4 of 4 ✔
-    [44/c3fb82] CORE_HELLO:HELLO:convertToUpper (4) | 4 of 4 ✔
+    executor >  local (8)
+    [c1/39f64a] CORE_HELLO:HELLO:sayHello (1)       | 3 of 3 ✔
+    [44/c3fb82] CORE_HELLO:HELLO:convertToUpper (3) | 3 of 3 ✔
     [62/80fab2] CORE_HELLO:HELLO:CAT_CAT (test)     | 1 of 1 ✔
-    [e1/4db4fd] CORE_HELLO:HELLO:COWPY              | 1 of 1 ✔
+    [e1/4db4fd] CORE_HELLO:HELLO:COWPY (test)       | 1 of 1 ✔
     -[core/hello] Pipeline completed successfully-
     ```
 
