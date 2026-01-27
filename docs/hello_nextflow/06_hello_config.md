@@ -1524,3 +1524,103 @@ More generally, you know how to configure your workflow executions to suit diffe
 Celebrate and give yourself a big pat on the back! You have completed your very first Nextflow developer course.
 
 Head on to the final [course summary](./next_steps.md) to review what you learned and find out what comes next.
+
+---
+
+## Quiz
+
+<quiz>
+What is the name of the configuration file that Nextflow automatically loads?
+- [ ] config.nf
+- [ ] pipeline.config
+- [x] nextflow.config
+- [ ] workflow.config
+</quiz>
+
+<quiz>
+What takes precedence when the same parameter is set in both the config file and command line?
+- [ ] The config file value
+- [x] The command line value
+- [ ] The first value encountered
+- [ ] Neither; it causes an error
+</quiz>
+
+<quiz>
+Can you have both Docker and Conda enabled in the same configuration?
+- [x] Yes, Nextflow can use both depending on process directives
+- [ ] No, only one can be enabled at a time
+- [ ] Yes, but only in profiles
+- [ ] No, they are mutually exclusive
+</quiz>
+
+<quiz>
+If both Docker and Conda are enabled and a process has both directives, which is prioritized?
+- [x] Docker (containers)
+- [ ] Conda
+- [ ] The first one defined
+- [ ] It causes an error
+</quiz>
+
+<quiz>
+What is the default memory allocation for Nextflow processes?
+- [ ] 1 GB
+- [x] 2 GB
+- [ ] 4 GB
+- [ ] No limit
+</quiz>
+
+<quiz>
+How do you set resource requirements for a specific process in the config file?
+- [ ] processName.memory = '4 GB'
+- [ ] process.memory.processName = '4 GB'
+- [x] process { withName: 'processName' { memory = '4 GB' } }
+- [ ] resources.processName.memory = '4 GB'
+</quiz>
+
+<quiz>
+What command line option generates a resource utilization report?
+- [ ] -with-metrics
+- [ ] -with-stats
+- [x] -with-report
+- [ ] -with-profile
+</quiz>
+
+<quiz>
+What does the resourceLimits directive do?
+- [ ] Sets minimum resource requirements
+- [ ] Allocates resources to processes
+- [x] Caps the maximum resources that can be requested
+- [ ] Monitors resource usage
+</quiz>
+
+<quiz>
+What is the default executor in Nextflow?
+- [x] local
+- [ ] slurm
+- [ ] kubernetes
+- [ ] aws
+</quiz>
+
+<quiz>
+How do you specify a parameter file when running Nextflow?
+- [ ] --params params.json
+- [ ] -config params.json
+- [x] -params-file params.json
+- [ ] --input params.json
+</quiz>
+
+<quiz>
+What can profiles be used for? (Select all that apply)
+- [x] Defining infrastructure-specific settings
+- [x] Setting resource limits for different environments
+- [x] Providing test parameters
+- [ ] Defining new processes
+</quiz>
+
+<quiz>
+How do you specify multiple profiles in a single command?
+- [ ] -profile profile1 -profile profile2
+- [ ] -profiles profile1,profile2
+- [x] -profile profile1,profile2
+- [ ] --profile profile1 --profile profile2
+</quiz>

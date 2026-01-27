@@ -449,3 +449,55 @@ This is better than copy-pasting the code, because if later you decide to improv
 Take a short break if you feel like it.
 
 When you're ready, move on to [**Part 5: Hello Containers**](./05_hello_containers.md) to learn how to use containers to manage software dependencies more conveniently and reproducibly.
+
+---
+
+## Quiz
+
+<quiz>
+What is a module in Nextflow?
+- [ ] A configuration file
+- [x] A standalone file containing a single process definition
+- [ ] A workflow definition
+- [ ] A channel operator
+</quiz>
+
+<quiz>
+What is the recommended naming convention for module files?
+- [ ] module_processName.nf
+- [ ] processName_module.nf
+- [x] processName.nf
+- [ ] mod_processName.nf
+</quiz>
+
+<quiz>
+Where should module files be stored?
+- [ ] In the same directory as the workflow
+- [ ] In a bin/ directory
+- [x] In a modules/ directory
+- [ ] In a lib/ directory
+</quiz>
+
+<quiz>
+What is the correct syntax to import a module?
+- [ ] import { processName } from './modules/processName.nf'
+- [ ] require { processName } from './modules/processName.nf'
+- [x] include { processName } from './modules/processName.nf'
+- [ ] load { processName } from './modules/processName.nf'
+</quiz>
+
+<quiz>
+What happens to the -resume functionality when using modules?
+- [ ] It no longer works
+- [ ] It requires additional configuration
+- [x] It works the same as before
+- [ ] It only works for local modules
+</quiz>
+
+<quiz>
+What are the benefits of using modules? (Select all that apply)
+- [x] Code reusability across workflows
+- [x] Easier maintenance
+- [x] Better organization of workflow code
+- [ ] Faster execution speed
+</quiz>

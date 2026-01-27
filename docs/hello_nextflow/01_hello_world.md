@@ -1129,3 +1129,71 @@ More generally, you know how to interpret a simple Nextflow workflow, manage its
 Take a little break, you've earned it!
 
 When you're ready, move on to [**Part 2: Hello Channels**](./02_hello_channels.md) to learn how to use channels to feed inputs into your workflow, which will allow you to take advantage of Nextflow's built-in dataflow parallelism and other powerful features.
+
+---
+
+## Quiz
+
+<quiz>
+What are the minimum required components of a Nextflow process?
+- [ ] Input and output blocks only
+- [x] Output and script blocks
+- [ ] Input, output, and script blocks
+- [ ] Only a script block
+</quiz>
+
+<quiz>
+What is the purpose of the output block in a process?
+- [ ] To print results to the console
+- [ ] To save files to the work directory
+- [x] To declare expected outputs from the process
+- [ ] To define environment variables
+</quiz>
+
+<quiz>
+What command is used to run a Nextflow workflow?
+- [ ] nextflow start
+- [ ] nextflow execute
+- [x] nextflow run
+- [ ] nextflow launch
+</quiz>
+
+<quiz>
+What does the work directory contain? (Select all that apply)
+- [x] Temporary files created during execution
+- [x] Task metadata files like .command.sh and .exitcode
+- [x] Process outputs before publishing
+- [ ] The original workflow script
+</quiz>
+
+<quiz>
+What does the -resume flag do?
+- [ ] Restarts the workflow from the beginning
+- [ ] Pauses the workflow
+- [x] Skips processes that have already completed successfully
+- [ ] Creates a backup of the workflow
+</quiz>
+
+<quiz>
+What is the default mode for publishing workflow outputs?
+- [ ] Copy files to the output directory
+- [x] Create symbolic links in the output directory
+- [ ] Move files to the output directory
+- [ ] Compress files in the output directory
+</quiz>
+
+<quiz>
+How do you pass a parameter value to a Nextflow workflow from the command line?
+- [ ] -parameter value
+- [ ] --parameter:value
+- [x] --parameter value
+- [ ] -p parameter=value
+</quiz>
+
+<quiz>
+How do you reference a variable inside a Nextflow script block?
+- [ ] Use %variable% syntax
+- [x] Use ${variable} syntax
+- [ ] Use {{variable}} syntax
+- [ ] Use [variable] syntax
+</quiz>

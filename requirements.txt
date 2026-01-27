@@ -5,4 +5,5 @@ pymdown-extensions>=10.12
 pillow
 cairosvg
 mkdocs-enumerate-headings-plugin>=0.6.0
+mkdocs-quiz
 mike
