@@ -7,9 +7,6 @@ params {
     // Primary input (file of input files, one per line)
     reads_bam: Path = "${projectDir}/data/sample_bams.txt"
 
-    // Output directory
-    outdir: String = "results_genomics"
-
     // Accessory files
     reference: Path = "${projectDir}/data/ref/ref.fasta"
     reference_index: Path = "${projectDir}/data/ref/ref.fasta.fai"
@@ -27,6 +24,7 @@ include { GATK_JOINTGENOTYPING } from './modules/gatk/jointgenotyping/main.nf'
 
 workflow {
 
+    main:
     // Create input channel from a text file listing input file paths
     reads_ch = channel.fromPath(params.reads_bam).splitText()
 
@@ -62,4 +60,29 @@ workflow {
         ref_index_file,
         ref_dict_file
     )
+
+    publish:
+    indexed_bam = SAMTOOLS_INDEX.out
+    gvcf = GATK_HAPLOTYPECALLER.out.vcf
+    gvcf_idx = GATK_HAPLOTYPECALLER.out.idx
+    joint_vcf = GATK_JOINTGENOTYPING.out.vcf
+    joint_vcf_idx = GATK_JOINTGENOTYPING.out.idx
+}
+
+output {
+    indexed_bam {
+        path 'indexed_bam'
+    }
+    gvcf {
+        path 'gvcf'
+    }
+    gvcf_idx {
+        path 'gvcf'
+    }
+    joint_vcf {
+        path '.'
+    }
+    joint_vcf_idx {
+        path '.'
+    }
 }
