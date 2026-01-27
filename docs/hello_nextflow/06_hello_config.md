@@ -311,7 +311,7 @@ Now open the new file and add the parameters you want to customize:
 
 ```groovy title="tux-run/nextflow.config" linenums="1"
 params {
-    input = '../greetings.csv'
+    input = '../data/greetings.csv'
     batch = 'experiment'
     character = 'tux'
 }
@@ -543,11 +543,11 @@ Make the following code changes in the workflow file:
             mode 'copy'
         }
         uppercased {
-            path '/intermediates'
+            path 'intermediates'
             mode 'copy'
         }
         collected {
-            path '/intermediates'
+            path 'intermediates'
             mode 'copy'
         }
         batch_report {
@@ -638,7 +638,7 @@ One popular way to organize outputs further is to do it by process, _i.e._ creat
 
 #### 2.2.1. Replace the output paths by a reference to process names
 
-All you need to do is reference the name of the process as `<task>.process` in the output path declaration.
+All you need to do is reference the name of the process as `<task>.name` in the output path declaration.
 
 Make the following changes in the workflow file:
 
@@ -647,23 +647,23 @@ Make the following changes in the workflow file:
     ```groovy title="hello-config.nf" linenums="42" hl_lines="3 7 11 15 19"
     output {
         first_output {
-            path { sayHello.process }
+            path { sayHello.name }
             mode 'copy'
         }
         uppercased {
-            path { convertToUpper.process }
+            path { convertToUpper.name }
             mode 'copy'
         }
         collected {
-            path { collectGreetings.process }
+            path { collectGreetings.name }
             mode 'copy'
         }
         batch_report {
-            path { collectGreetings.process }
+            path { collectGreetings.name }
             mode 'copy'
         }
         cowpy_art {
-            path { cowpy.process }
+            path { cowpy.name }
             mode 'copy'
         }
     }
