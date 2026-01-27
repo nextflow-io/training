@@ -321,7 +321,7 @@ nf-test test modules/samtools/index/tests/main.nf.test
     SUCCESS: Executed 1 tests in 7.987s
     ```
 
-### 1.7. Add more tests to `SAMTOOLS_INDEX`
+### 1.6. Add more tests to `SAMTOOLS_INDEX`
 
 Sometimes it's useful to test a range of different input files to ensure we're testing for a variety of potential issues. Add tests for the mother and father's BAM files in the trio from our test data.
 
@@ -398,7 +398,7 @@ nf-test test modules/samtools/index/tests/main.nf.test
 
 Notice the warning, referring to the effect of the `--update-snapshot` parameter.
 
-!!!note
+!!! note
 
     Here we are using test data that we used previously to demonstrate the scientific outputs of the pipeline.
     If we had been planning to operate these tests in a production environment, we would have generated smaller inputs for testing purposes.
@@ -1105,7 +1105,7 @@ Just correct the name to something meaningful (you'll see why this is useful sho
         test("Should run without failures") {
     ```
 
-!!!note
+!!! note
 
     In this case the test file can stay where `nf-test` created it.
 

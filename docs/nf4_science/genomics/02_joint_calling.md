@@ -581,13 +581,13 @@ Does that seem a bit complicated? Let's break this down and translate it into pl
 2. Each 'element' coming out of the channel is a pair of files: the GVCF and its index file, in that order because that's the order they're listed in the process output block. Conveniently, because in the last session we named the outputs of this process (using `emit:`), we can pick out the GVCFs on one hand by adding `.vcf` and the index files on the other by adding `.idx` after the `.out` property. If we had not named those outputs, we would have had to refer to them by `.out[0]` and `.out[1]`, respectively.
 3. We append the `collect()` channel operator to bundle all the GVCF files together into a single element in a new channel called `all_gvcfs_ch`, and do the same with the index files to form the new channel called `all_idxs_ch`.
 
-!!!tip
+!!! tip
 
     If you're having a hard time envisioning exactly what is happening here, remember that you can use the `view()` operator to inspect the contents of channels before and after applying channel operators.
 
 The resulting `all_gvcfs_ch` and `all_idxs_ch` channels are what we're going to plug into the `GATK_GENOMICSDB` process we just wrote.
 
-!!!note
+!!! note
 
     In case you were wondering, we collect the GVCFs and their index files separately because the GATK GenomicsDBImport command only wants to see the GVCF file paths. Fortunately, since Nextflow will stage all the files together for execution, we don't have to worry about the order of files like we did for BAMs and their index in Part 1.
 
@@ -731,7 +731,7 @@ Great, let's add our string manipulation line there then, and update the `gatk G
 
 That should be all that's needed to provide the inputs to `gatk GenomicsDBImport` correctly.
 
-!!!tip
+!!! tip
 
     When you update the `gatk GenomicsDBImport` command, make sure to remove the `-V ` prefix when you swap in the `${gvcfs_line}` variable.
 
@@ -1007,7 +1007,7 @@ If you're the skeptical type, you can click on the joint VCF file to open it and
 
 You now have an automated, fully reproducible joint variant calling workflow!
 
-!!!note
+!!! note
 
     Keep in mind the data files we gave you cover only a tiny portion of chromosome 20.
     The real size of a variant callset would be counted in millions of variants.
