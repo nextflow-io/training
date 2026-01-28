@@ -8,6 +8,10 @@ description: Diagnose and fix common issues when running Nextflow pipelines
 When running pipelines, things don't always go smoothly.
 This section covers common issues you'll encounter and how to diagnose and resolve them.
 
+!!! tip "Want more depth?"
+
+    For a comprehensive hands-on debugging course with exercises, see the [Debugging side quest](../side_quests/debugging.md).
+
 ---
 
 ## 1. Understanding task failures

@@ -549,6 +549,49 @@ params {
 ```
 
 If you don't specify `--batch` on the command line, the default value `'batch'` is used.
+Try running the workflow with a custom batch name:
+
+```bash
+nextflow run 2b-multistep.nf --input data/greetings.csv --batch test
+```
+
+??? success "Command output"
+
+    ```console
+    N E X T F L O W   ~  version 25.10.2
+
+    Launching `2b-multistep.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
+
+    [a5/cdff26] sayHello (1)       | 3 of 3 ✔
+    [c5/78794f] convertToUpper (2) | 3 of 3 ✔
+    [d3/b4d86c] collectGreetings   | 1 of 1 ✔
+    ```
+
+You should see new final outputs named with your custom batch name:
+
+??? abstract "Directory contents"
+
+    ```console hl_lines="10 12"
+    results
+    ├── 1-hello
+    |   └── output.txt
+    ├── 2a-inputs
+    |   ├── Bonjour-output.txt
+    |   ├── Hello-output.txt
+    |   └── Holà-output.txt
+    └── 2b-multistep
+        ├── COLLECTED-batch-output.txt
+        ├── COLLECTED-test-output.txt
+        ├── batch-report.txt
+        ├── test-report.txt
+        └── intermediates
+            ├── Bonjour-output.txt
+            ├── Hello-output.txt
+            ├── Holà-output.txt
+            ├── UPPER-Bonjour-output.txt
+            ├── UPPER-Hello-output.txt
+            └── UPPER-Holà-output.txt
+    ```
 
 #### 2.3.6. Published outputs can be organized
 

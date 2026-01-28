@@ -714,7 +714,7 @@ nextflow run nextflow-io/hello
 
     Pulling nextflow-io/hello ...
      downloaded from https://github.com/nextflow-io/hello.git
-    Launching `https://github.com/nextflow-io/hello` [happy_torvalds] DSL2 - revision: 8ccc9cb7d4 [master]
+    Launching `https://github.com/nextflow-io/hello` [happy_torvalds] DSL2 - revision: 2ce0b0e294 [master]
 
     executor >  local (4)
     [31/5a64d4] sayHello (1) | 4 of 4 ✔
@@ -730,19 +730,31 @@ Subsequent runs will use the cached version unless you explicitly request an upd
 ### 5.2. Specify a version or branch
 
 By default, Nextflow runs the latest version from the default branch (usually `main` or `master`).
-You can specify a particular version, branch, or commit using the `-r` flag:
+You can specify a particular version, branch, or commit using the `-r` flag.
 
-```bash title="Syntax"
-nextflow run <repository> -r <revision>
-```
-
-For example, to run a specific tagged release:
+Try running an older version of the hello pipeline:
 
 ```bash
 nextflow run nextflow-io/hello -r v1.1
 ```
 
-This is important for reproducibility: specifying an exact version ensures you get consistent behavior across different runs.
+??? success "Command output"
+
+    ```console
+    N E X T F L O W   ~  version 25.10.2
+
+    Launching `https://github.com/nextflow-io/hello` [awesome_borg] DSL2 - revision: baba3959d7 [v1.1]
+
+    executor >  local (4)
+    [5a/c2e383] sayHello (4) | 4 of 4 ✔
+    Ciao world!
+    Bonjour world!
+    Hello world!
+    Hola world!
+    ```
+
+Notice the output shows `revision: baba3959d7 [v1.1]` - this confirms you're running the specific tagged version.
+Specifying exact versions is important for reproducibility.
 
 ### 5.3. Find available parameters
 
@@ -755,35 +767,44 @@ The best places to look are:
 Some pipelines (particularly nf-core pipelines) use the [nf-schema](https://nextflow-io.github.io/nf-schema/) plugin, which enables a `--help` flag that displays all available parameters.
 However, not all pipelines support this feature.
 
-### 5.4. Update a cached pipeline
+### 5.4. Update and manage cached pipelines
 
-If you've previously downloaded a pipeline and want to get the latest version, use the `-latest` flag:
-
-```bash
-nextflow run nextflow-io/hello -latest
-```
-
-Alternatively, you can use `nextflow pull` to update the cached copy without running it:
-
-```bash
-nextflow pull nextflow-io/hello
-```
-
-This is useful when you want to ensure you have the latest version before starting a long-running analysis.
-
-### 5.5. List and manage cached pipelines
-
-To see what pipelines you have cached locally:
+Now that you've run the hello pipeline twice, it's cached locally.
+Check what pipelines you have cached:
 
 ```bash
 nextflow list
 ```
 
-To remove a cached pipeline:
+??? success "Command output"
+
+    ```console
+    nextflow-io/hello
+    ```
+
+If you want to update to the latest version, use the `-latest` flag:
+
+```bash
+nextflow run nextflow-io/hello -latest
+```
+
+Or update without running:
+
+```bash
+nextflow pull nextflow-io/hello
+```
+
+Finally, clean up by removing the cached pipeline:
 
 ```bash
 nextflow drop nextflow-io/hello
 ```
+
+??? success "Command output"
+
+    ```console
+    Project `nextflow-io/hello` was dropped
+    ```
 
 ### Takeaway
 
