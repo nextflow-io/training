@@ -867,3 +867,83 @@ More generally, you understand the key principles involved in connecting process
 
 Take an extra long break, you've earned it.
 When you're ready, move on to Part 4 to learn how to modularize your code for better maintainability and code efficiency.
+
+## Quiz
+
+Test your knowledge of the concepts covered in Part 3 with this short quiz:
+
+!!! info
+
+    <!-- mkdocs-quiz intro -->
+
+<quiz>
+How do you access the output of a process in Nextflow?
+
+- [ ] `processName.output`
+- [x] `processName.out`
+- [ ] `processName.result`
+- [ ] `output.processName`
+
+</quiz>
+
+<quiz>
+What determines the execution order of processes in a workflow?
+
+- [ ] The order they are defined in the file
+- [ ] Alphabetical order by process name
+- [x] The dependencies between processes (output → input)
+- [ ] The order they are called in the workflow block
+
+</quiz>
+
+<quiz>
+What does the `collect()` operator do?
+
+- [ ] Unpacks arrays into individual items
+- [x] Packages many channel items into a single array element
+- [ ] Removes null values from a channel
+- [ ] Collects error messages
+
+</quiz>
+
+<quiz>
+When should you use the `collect()` operator?
+
+- [ ] Before processing items individually in parallel
+- [x] Before a process that needs all results at once
+- [ ] To speed up channel operations
+- [ ] When publishing outputs
+
+</quiz>
+
+<quiz>
+How do you access named outputs from a process?
+
+- [ ] `processName.out[outputname]`
+- [x] `processName.out.outputname`
+- [ ] `processName.outputname`
+- [ ] `output.processName.outputname`
+
+</quiz>
+
+<quiz>
+What is the syntax for naming a process output?
+
+- [x] `output: path "file.txt", emit: myoutput`
+- [ ] `output: path "file.txt", name: myoutput`
+- [ ] `output: path "file.txt" as myoutput`
+- [ ] `output: path "file.txt" -> myoutput`
+
+</quiz>
+
+<quiz>
+When passing multiple inputs to a process, what must match?
+
+- [x] The order of inputs in the workflow call must match the input block order
+- [ ] The data types must all be the same
+- [ ] The variable names must match exactly
+- [ ] The number of inputs must equal the number of outputs
+
+</quiz>
+
+<!-- mkdocs-quiz results -->

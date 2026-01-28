@@ -382,3 +382,75 @@ This is better than just copy-pasting the code, because if later you decide to i
 
 Take a short break if you feel like it.
 When you're ready, move on to Part 5 to learn how to use containers to manage software dependencies more conveniently and reproducibly.
+
+## Quiz
+
+Test your knowledge of the concepts covered in Part 4 with this short quiz:
+
+!!! info
+
+    <!-- mkdocs-quiz intro -->
+
+<quiz>
+What is a Nextflow module?
+
+- [ ] A configuration file
+- [ ] A workflow definition
+- [x] A standalone file containing a single process definition
+- [ ] A container image
+
+</quiz>
+
+<quiz>
+What is the recommended filename convention for modules?
+
+- [ ] `module_processName.nf`
+- [x] `processName.nf`
+- [ ] `processName.module`
+- [ ] `processName_module.nf`
+
+</quiz>
+
+<quiz>
+Where should module files typically be stored?
+
+- [ ] In the root directory
+- [ ] In the `lib/` directory
+- [x] In the `modules/` directory
+- [ ] In the `processes/` directory
+
+</quiz>
+
+<quiz>
+What is the correct syntax to import a module?
+
+- [ ] `import { processName } from './modules/processName.nf'`
+- [x] `include { processName } from './modules/processName.nf'`
+- [ ] `require { processName } from './modules/processName.nf'`
+- [ ] `use { processName } from './modules/processName.nf'`
+
+</quiz>
+
+<quiz>
+What happens to resume functionality when you convert processes to modules?
+
+- [ ] Resume stops working
+- [ ] Resume only works for the main workflow
+- [x] Resume continues to work normally
+- [ ] Resume works but cache is reset
+
+</quiz>
+
+<quiz>
+What are key benefits of using modules?
+
+- [ ] Faster execution time
+- [ ] Reduced memory usage
+- [x] Reuse processes in multiple workflows without duplication
+- [x] Easier maintenance - improve module once, all workflows benefit
+- [x] Better code organization
+- [ ] Automatic parallelization
+
+</quiz>
+
+<!-- mkdocs-quiz results -->

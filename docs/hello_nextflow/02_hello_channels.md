@@ -904,3 +904,93 @@ More generally, you have a basic understanding of how Nextflow uses **channels**
 
 Take a big break, you worked hard in this one!
 When you're ready, move on to Part 3 to learn how to add more steps and connect them together into a proper workflow.
+
+## Quiz
+
+Test your knowledge of the concepts covered in Part 2 with this short quiz:
+
+!!! info
+
+    <!-- mkdocs-quiz intro -->
+
+<quiz>
+What is a channel in Nextflow?
+
+- [ ] A file directory
+- [x] A queue-based mechanism for passing data between processes
+- [ ] A configuration parameter
+- [ ] A container registry
+
+</quiz>
+
+<quiz>
+Which channel factory creates a simple queue channel with values?
+
+- [ ] `channel.fromPath()`
+- [x] `channel.of()`
+- [ ] `channel.from()`
+- [ ] `channel.create()`
+
+</quiz>
+
+<quiz>
+What happens when you pass a channel with multiple values to a process?
+
+- [ ] Only the first value is processed
+- [x] The process is called once for each value in the channel
+- [ ] All values are processed together in a single call
+- [ ] The workflow fails with an error
+
+</quiz>
+
+<quiz>
+What does the `flatten()` operator do?
+
+- [x] Unpacks array contents into individual items
+- [ ] Removes duplicate items from a channel
+- [ ] Sorts channel contents alphabetically
+- [ ] Converts items to lowercase
+
+</quiz>
+
+<quiz>
+What is the purpose of the `view()` operator?
+
+- [ ] To visualize the workflow structure
+- [x] To inspect and print channel contents for debugging
+- [ ] To create graphical output
+- [ ] To validate channel data types
+
+</quiz>
+
+<quiz>
+What does the `splitCsv()` operator do?
+
+- [ ] Creates a CSV file from channel data
+- [x] Parses CSV-formatted content, reading each line into an array
+- [ ] Splits a channel into multiple channels
+- [ ] Validates CSV formatting
+
+</quiz>
+
+<quiz>
+Which operator transforms channel contents element-by-element?
+
+- [ ] `transform()`
+- [ ] `apply()`
+- [x] `map()`
+- [ ] `modify()`
+
+</quiz>
+
+<quiz>
+Why do you need dynamic filenames when processing multiple inputs?
+
+- [ ] To save disk space
+- [ ] To improve performance
+- [x] To prevent output files from overwriting each other
+- [ ] To make resume work correctly
+
+</quiz>
+
+<!-- mkdocs-quiz results -->
