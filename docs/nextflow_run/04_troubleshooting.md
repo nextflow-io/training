@@ -14,6 +14,13 @@ This section covers common issues you'll encounter and how to diagnose and resol
 
 When a Nextflow task fails, understanding what went wrong is the first step to fixing it.
 
+The timing of when an error occurs can help narrow down the cause:
+
+- **Before the first process**: Often related to configuration issues or an outdated Nextflow version
+- **During the first process**: Usually indicates a problem with software dependencies (containers/Conda not configured)
+- **Partway through the run**: Could be a tool-specific error, resource limits, or input data issues
+- **While generating outputs**: Often means a tool ran but didn't produce the expected output files
+
 ### 1.1. Reading the error output
 
 When a task fails, Nextflow displays an error message that includes the task work directory:
@@ -105,10 +112,12 @@ Command error:
 
 **Solutions**:
 
-1. Check if a container is configured for the process
-2. Enable Docker/Singularity in your config: `docker.enabled = true`
-3. If using Conda, ensure `conda.enabled = true` is set
-4. For local execution, install the missing software
+One of Nextflow's superpowers is its ability to bundle software with pipeline code,
+however you need to tell it how to use that software. That depends on your environment.
+
+1. Some pipelines (such as nf-core) provide profiles that enable containers or Conda, for example: `nextflow run <pipeline> -profile docker`
+2. Alternatively, enable a software packaging technology in your config (e.g., `docker.enabled = true` or `conda.enabled = true`)
+3. In very rare cases, you may need to install the missing software. But check the pipeline code first to make sure that it's definitely not defining any containers or conda packages.
 
 ### 2.2. File not found
 
@@ -150,22 +159,7 @@ Command exit status:
 2. Check if your system has enough memory available
 3. Use `-with-report` to see actual memory usage and tune allocations
 
-### 2.4. Permission denied
-
-```console
-Command error:
-  bash: ./script.sh: Permission denied
-```
-
-**Cause**: The script or file lacks execute permissions, or you don't have write access to a directory.
-
-**Solutions**:
-
-1. Check file permissions: `ls -la script.sh`
-2. Ensure output directories are writable
-3. If using containers, check that volume mounts have correct permissions
-
-### 2.5. Container image not found
+### 2.4. Container image not found
 
 ```console
 ERROR ~ Error executing process > 'PROCESS_NAME'
@@ -316,6 +310,26 @@ If you're cleaning up work directories, be selective:
 nextflow clean -but last -n  # dry run first
 nextflow clean -but last
 ```
+
+---
+
+## 6. Getting help
+
+If you've worked through the steps above and are still stuck, there are several places to get help:
+
+1. **Seqera Community Forum**: Post questions at [community.seqera.io](https://community.seqera.io) for searchable, long-form discussions
+2. **Nextflow Slack**: Join the [Nextflow Slack](https://nextflow.io/slack-invite.html) for real-time help from the community
+3. **GitHub issues**: Open an issue on the pipeline's GitHub repository for pipeline-specific bugs
+
+When asking for help, include:
+
+- The command you ran
+- The full error message
+- Your Nextflow version (`nextflow -version`)
+- Your configuration (run `nextflow config` to see resolved settings)
+- The contents of `.nextflow.log` if relevant
+
+The more information you provide, the easier it is for others to help you.
 
 ---
 
