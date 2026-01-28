@@ -248,35 +248,6 @@ When `sayHello(greeting_ch)` is called, Nextflow automatically runs the process 
 
 #### 1.4.2. Dynamic output naming
 
-??? tip "More on `.map`"
-
-    The `.map` operator is one of the most commonly used operators in Nextflow.
-    It transforms each element in a channel by applying a function to it.
-
-    The syntax `{ line -> line[0] }` is a closure (a small anonymous function) where:
-
-    - `line` is the input variable (you can name it anything)
-    - `->` separates the input from the transformation
-    - `line[0]` is what gets returned (in this case, the first element of the array)
-
-    Here's what the data looks like at each step:
-
-    ```groovy
-    // After .splitCsv() - each row is an array:
-    [Hello, English, 123]
-    [Bonjour, French, 456]
-    [Holà, Spanish, 789]
-
-    // After .map { line -> line[0] } - just the first element:
-    Hello
-    Bonjour
-    Holà
-    ```
-
-    Arrays in Groovy are zero-indexed, so `line[0]` gets the first element, `line[1]` would get the second, and so on.
-
-#### 1.4.2. Dynamic output naming
-
 The process uses the input value in the output filename to ensure unique names:
 
 ```groovy title="2a-inputs.nf" linenums="6" hl_lines="7 11"

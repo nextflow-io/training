@@ -166,7 +166,10 @@ Functionally, this move has changed nothing, but conceptually it's a little clea
 
 ### 1.2. Use a run-specific configuration file
 
-That's great, but sometimes you might want to run some temporary experiments with different default values without messing with the main configuration file.
+!!! tip "Scenario"
+
+    You want to experiment with different settings without modifying your main configuration file.
+
 You can do that by creating a new `nextflow.config` file in a subdirectory that you'll use as working directory for your experiments.
 
 #### 1.2.1. Create the working directory with a blank configuration
@@ -263,6 +266,10 @@ Now let's look at another useful way to set parameter values.
 
 ### 1.3. Use a parameter file
 
+!!! tip "Scenario"
+
+    You need to share exact run parameters with a collaborator, or record them for a publication.
+
 The subdirectory approach works great for experimenting, but it does involve a bit of setup and requires that you adapt paths accordingly.
 There's a simpler approach for when you want to run your pipeline with a specific set of values, or enable someone else to do it with minimal effort.
 
@@ -352,6 +359,10 @@ Learn how to manage where and how your workflow outputs get published.
 ---
 
 ## 2. Manage workflow outputs
+
+!!! tip "Scenario"
+
+    Your pipeline publishes outputs to a hardcoded directory, but you want to organize results by project or experiment name without editing the workflow code each time.
 
 The workflow we inherited uses paths for workflow-level output declarations, which isn't terribly flexible and involves a lot of repetition.
 
@@ -781,8 +792,12 @@ Now let's see how we can configure an alternative software packaging option via 
 
 ### 3.1. Disable Docker and enable Conda in the config file
 
-Let's pretend we're working on an HPC cluster and the admin doesn't allow the use of Docker for security reasons.
-Fortunately for us, Nextflow supports multiple other container technologies such as including Singularity (which is more widely used on HPC), and software package managers such as Conda.
+!!! tip "Scenario"
+
+    You're moving your pipeline to an HPC cluster where Docker isn't allowed for security reasons.
+    The cluster supports Singularity and Conda, so you need to switch your configuration accordingly.
+
+Nextflow supports multiple container technologies including Singularity (which is more widely used on HPC), as well as software package managers such as Conda.
 
 We can change our configuration file to use Conda instead of Docker.
 To do so, let's switch the value of `docker.enabled` to `false`, and add a directive enabling the use of Conda:
@@ -1007,6 +1022,10 @@ But how do you know what values to use?
 
 ### 5.1. Run the workflow to generate a resource utilization report
 
+!!! tip "Scenario"
+
+    You don't know how much memory or CPU your processes need and want to avoid wasting resources or having jobs killed.
+
 If you don't know up front how much CPU and memory your processes are likely to need, you can do some resource profiling, meaning you run the workflow with some default allocations, record how much each process used, and from there, estimate how to adjust the base allocations.
 
 Conveniently, Nextflow includes built-in tools for doing this, and will happily generate a report for you on request.
@@ -1211,6 +1230,10 @@ If in the future we find other elements of configuration that are always co-occu
 We can also create additional profiles if there are other elements of configuration that we want to group together.
 
 ### 6.2. Create a profile of test parameters
+
+!!! tip "Scenario"
+
+    You want others to be able to try your pipeline quickly without gathering their own input data.
 
 Profiles are not only for infrastructure configuration.
 We can also use them to set default values for workflow parameters, to make it easier for others to try out the workflow without having to gather appropriate input values themselves.

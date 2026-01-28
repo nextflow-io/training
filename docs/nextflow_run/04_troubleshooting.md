@@ -1,5 +1,5 @@
 ---
-title: Troubleshooting
+title: Part 4 - Troubleshooting
 description: Diagnose and fix common issues when running Nextflow pipelines
 ---
 
