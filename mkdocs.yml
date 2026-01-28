@@ -38,6 +38,19 @@ nav:
       - hello_nf-core/summary.md
       - hello_nf-core/survey.md
       - hello_nf-core/next_steps.md
+  - Hello Plugins:
+      - hello_plugins/index.md
+      - hello_plugins/00_orientation.md
+      - hello_plugins/01_plugin_basics.md
+      - hello_plugins/02_create_project.md
+      - hello_plugins/03_custom_functions.md
+      - hello_plugins/04_build_and_test.md
+      - hello_plugins/05_observers.md
+      - hello_plugins/06_configuration.md
+      - hello_plugins/07_distribution.md
+      - hello_plugins/summary.md
+      - hello_plugins/survey.md
+      - hello_plugins/next_steps.md
   - Nextflow for Science:
       - nf4_science/index.md
       - Genomics:
@@ -226,6 +239,7 @@ plugins:
         - nextflow_run/00_orientation.md
         - hello_nextflow/00_orientation.md
         - hello_nf-core/00_orientation.md
+        - hello_plugins/00_orientation.md
         - nf4_science/genomics/00_orientation.md
         - nf4_science/rnaseq/00_orientation.md
         - side_quests/orientation.md
@@ -239,6 +253,7 @@ plugins:
         - nextflow_run/*.md
         - hello_nextflow/*.md
         - hello_nf-core/*.md
+        - hello_plugins/*.md
         - nf4_science/genomics/*.md
         - nf4_science/rnaseq/*.md
         - nf4_science/imaging/*.md

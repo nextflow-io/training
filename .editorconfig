@@ -15,6 +15,10 @@ indent_size = 2
 [*.{py,md}]
 indent_style = unset
 
+# Makefiles require tabs
+[Makefile]
+indent_style = tab
+
 # ignore nf-core files
 [side-quests/solutions/nf-core/**]
 charset = unset

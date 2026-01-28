@@ -1,0 +1,17 @@
+plugins {
+    id 'io.nextflow.nextflow-plugin' version '1.0.0-beta.10'
+}
+
+version = '0.1.0'
+
+nextflowPlugin {
+    nextflowVersion = '25.10.0'
+
+    provider = 'training'
+    className = 'training.plugin.GreetingPlugin'
+    extensionPoints = [
+        'training.plugin.GreetingExtension',
+        'training.plugin.GreetingFactory'
+    ]
+
+}

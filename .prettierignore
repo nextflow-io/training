@@ -5,3 +5,6 @@ side-quests/solutions/nf-core/**/*.yaml
 side-quests/solutions/nf-core/**/*.json
 side-quests/solutions/nf-core/**/*.html
 side-quests/solutions/nf-core/**/*.yml
+
+# Ignore auto-generated license files in plugin solutions
+hello-plugins/**/COPYING

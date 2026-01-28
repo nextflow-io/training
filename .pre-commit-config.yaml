@@ -12,6 +12,7 @@ repos:
     hooks:
       - id: editorconfig-checker
         alias: ec
+        exclude: hello-plugins/.*/nf-greeting/(COPYING|gradlew)$
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v5.0.0
@@ -19,6 +20,8 @@ repos:
       - id: trailing-whitespace
         exclude_types:
           - svg
+        exclude: hello-plugins/.*/COPYING$
       - id: end-of-file-fixer
         exclude_types:
           - svg
+        exclude: hello-plugins/.*/COPYING$
