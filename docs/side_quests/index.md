@@ -30,6 +30,7 @@ Otherwise, select a side quest from the table below.
 
 | Side Quest                                                                 | Time Estimate for Teaching |
 | -------------------------------------------------------------------------- | -------------------------- |
+| [Workflow Management Fundamentals](./workflow_management_fundamentals.md) | 1.5 hours                  |
 | [Nextflow development environment walkthrough](./ide_features.md)          | 45 mins                    |
 | [Essential Nextflow Scripting Patterns](./essential_scripting_patterns.md) | 90 mins                    |
 | [Metadata in workflows](./metadata.md)                                     | 45 mins                    |
