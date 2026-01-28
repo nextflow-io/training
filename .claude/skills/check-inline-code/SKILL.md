@@ -7,12 +7,6 @@ description: Review inline code in markdown files for proper formatting and synt
 
 Review inline code in markdown files for proper formatting and appropriate use of syntax highlighting.
 
-## When to Use
-
-- After writing or editing documentation with code references
-- When checking for consistent formatting across lessons
-- As part of lesson review/validation
-
 ## What to Check
 
 ### 1. Missing Backticks
@@ -63,46 +57,6 @@ Use `` `#!groovy code` `` for Groovy/Nextflow code that benefits from syntax col
 
 - Similar code references should be formatted the same way throughout a document
 - Quiz answer options should have consistent formatting
-
-## How to Check
-
-1. **Search for code-like text without backticks:**
-
-   ```bash
-   # Find potential missing backticks (manual review needed)
-   grep -E '\b(nextflow|params\.|\.nf|work/|docker)\b' docs/**/*.md | grep -v '`'
-   ```
-
-2. **Review existing inline code:**
-
-   ```bash
-   # Find all inline code with syntax highlighting
-   grep -o '`#!groovy [^`]*`' docs/**/*.md
-   ```
-
-## Output Format
-
-For each file checked, report:
-
-```
-## [filename]
-
-### Missing backticks
-- Line N: `nextflow run` should be wrapped in backticks
-- Line M: `-resume` flag should be wrapped in backticks
-
-### Inappropriate #!groovy usage
-- Line N: `#!groovy container` - single keyword, remove #!groovy
-- Line M: `#!groovy processName.out` - simple dot notation, remove #!groovy
-
-### Missing #!groovy (would benefit from highlighting)
-- Line N: `${greeting}` - variable interpolation, add #!groovy
-- Line M: `.map { it * 2 }` - closure syntax, add #!groovy
-
-### Summary
-- Issues found: N
-- Fixes needed: [list]
-```
 
 ## Examples
 
