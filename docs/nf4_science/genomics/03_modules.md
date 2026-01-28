@@ -1,7 +1,5 @@
 # Part 3: Moving code into modules
 
-<!-- TODO: don't bother refining, we'll move to making it modular from the get-go -->
-
 In the first part of this course, you built a variant calling pipeline that was completely linear and processed each sample's data independently of the others.
 
 In the second part, we showed you how to use channels and channel operators to implement joint variant calling with GATK, building on the pipeline from Part 1.
@@ -22,26 +20,24 @@ We're going to start with the same workflow as in Part 2, which we've provided f
      Make sure you're in the correct working directory:
      `cd /workspaces/training/nf4-science/genomics`
 
-Let's try running that now.
+Run the workflow to verify the starting point:
 
 ```bash
 nextflow run genomics-3.nf -resume
 ```
 
-And it works!
-
 ```console title="Output"
  N E X T F L O W   ~  version 25.10.2
 
-Launching `genomics-3.nf` [gloomy_poincare] DSL2 - revision: 43203316e0
+Launching `genomics-3.nf` [serene_borg] DSL2 - revision: 0cbebb67a1
 
 executor >  local (7)
-[18/89dfa4] SAMTOOLS_INDEX (1)       | 3 of 3 ✔
-[30/b2522b] GATK_HAPLOTYPECALLER (2) | 3 of 3 ✔
-[a8/d2c189] GATK_JOINTGENOTYPING     | 1 of 1 ✔
+[6f/83ee72] SAMTOOLS_INDEX (3)       | 3 of 3 ✔
+[53/b9d342] GATK_HAPLOTYPECALLER (1) | 3 of 3 ✔
+[0c/fa6d15] GATK_JOINTGENOTYPING     | 1 of 1 ✔
 ```
 
-Like previously, there will now be a `work` directory and a `results_genomics` directory inside your project directory.
+There will now be a `work` directory and a `results_genomics` directory inside your project directory.
 
 ### Takeaway
 
@@ -68,19 +64,15 @@ mkdir -p modules/samtools/index
 touch modules/samtools/index/main.nf
 ```
 
-Open the `main.nf` file and copy the `SAMTOOLS_INDEX` process definition into it, so you end up with something like this:
+Open the `main.nf` file and copy the `SAMTOOLS_INDEX` process definition into it.
 
 ```groovy title="modules/samtools/index/main.nf" linenums="1"
-#!/usr/bin/env nextflow
-
 /*
  * Generate BAM index file
  */
 process SAMTOOLS_INDEX {
 
     container 'community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464'
-
-    publishDir params.outdir, mode: 'symlink'
 
     input:
     path input_bam
@@ -97,26 +89,26 @@ process SAMTOOLS_INDEX {
 
 Then, remove the `SAMTOOLS_INDEX` process definition from `genomics-3.nf`, and add an import declaration for the module before the next process definition, like this:
 
-_Before:_
+=== "After"
 
-```groovy title="tests/main.nf.test" linenums="1" hl_lines="1"
-/*
- * Call variants with GATK HaplotypeCaller
- */
-process GATK_HAPLOTYPECALLER {
-```
+    ```groovy title="genomics-3.nf" linenums="1" hl_lines="1 2"
+    // Include modules
+    include { SAMTOOLS_INDEX } from './modules/samtools/index/main.nf'
 
-_After:_
+    /*
+     * Call variants with GATK HaplotypeCaller
+     */
+    process GATK_HAPLOTYPECALLER {
+    ```
 
-```groovy title="genomics-3.nf" linenums="1" hl_lines="1 2"
-// Include modules
-include { SAMTOOLS_INDEX } from './modules/samtools/index/main.nf'
+=== "Before"
 
-/*
- * Call variants with GATK HaplotypeCaller
- */
-process GATK_HAPLOTYPECALLER {
-```
+    ```groovy title="genomics-3.nf" linenums="1" hl_lines="1"
+    /*
+     * Call variants with GATK HaplotypeCaller
+     */
+    process GATK_HAPLOTYPECALLER {
+    ```
 
 You can now run the workflow again, and it should still work the same way as before. If you supply the `-resume` flag, no new tasks should even need to be run:
 
@@ -129,16 +121,24 @@ nextflow run genomics-3.nf -resume
     ```console
     N E X T F L O W   ~  version 25.10.2
 
-    Launching `genomics-3.nf` [ridiculous_jones] DSL2 - revision: c5a13e17a1
+    Launching `genomics-3.nf` [sleepy_snyder] DSL2 - revision: aa68d06c43
 
-    [cf/289c2d] SAMTOOLS_INDEX (2)       | 3 of 3, cached: 3 ✔
-    [30/b2522b] GATK_HAPLOTYPECALLER (1) | 3 of 3, cached: 3 ✔
-    [a8/d2c189] GATK_JOINTGENOTYPING     | 1 of 1, cached: 1 ✔
+    [0f/71b55e] SAMTOOLS_INDEX (1)       | 3 of 3, cached: 3 ✔
+    [f1/18971b] GATK_HAPLOTYPECALLER (3) | 3 of 3, cached: 3 ✔
+    [0c/fa6d15] GATK_JOINTGENOTYPING     | 1 of 1, cached: 1 ✔
     ```
 
 ### 1.2. Create modules for the `GATK_HAPLOTYPECALLER` and `GATK_JOINTGENOTYPING` processes
 
-Repeat the same steps for the remaining processes. You'll need to create a directory for each process, and then create a `main.nf` file inside that directory, removing the process definition from the workflow's `main.nf` file and adding an import declaration for the module. Once you're done, check that your modules directory structure is correct by running:
+Repeat the same steps for the remaining processes.
+For each process:
+
+1. Create the directory structure (`modules/gatk/haplotypecaller/` and `modules/gatk/jointgenotyping/`)
+2. Create a `main.nf` file containing the process definition
+3. Remove the process definition from `genomics-3.nf`
+4. Add an import declaration for the module
+
+Once you're done, check that your modules directory structure is correct by running:
 
 ```bash
 tree modules/
@@ -182,33 +182,63 @@ Test the modularized workflow.
 
 ## 2. Test the modularized workflow
 
-Let's try running that now.
+Run the modularized workflow to verify everything still works.
 
 ```bash
 nextflow run genomics-3.nf -resume
 ```
 
-And it works!
-
 ```console title="Output"
  N E X T F L O W   ~  version 25.10.2
 
-Launching `genomics-3.nf` [gloomy_poincare] DSL2 - revision: 43203316e0
+Launching `genomics-3.nf` [astonishing_venter] DSL2 - revision: ca27264c13
 
-executor >  local (7)
-[18/89dfa4] SAMTOOLS_INDEX (1)       | 3 of 3 ✔
-[30/b2522b] GATK_HAPLOTYPECALLER (2) | 3 of 3 ✔
-[a8/d2c189] GATK_JOINTGENOTYPING     | 1 of 1 ✔
+[6f/83ee72] SAMTOOLS_INDEX (3)       | 3 of 3, cached: 3 ✔
+[53/b9d342] GATK_HAPLOTYPECALLER (3) | 3 of 3, cached: 3 ✔
+[0c/fa6d15] GATK_JOINTGENOTYPING     | 1 of 1, cached: 1 ✔
 ```
 
-Yep, everything still works, including the resumability of the pipeline.
+Everything still works, including the resumability of the pipeline.
+The results continue to be published to the `results_genomics` directory.
+
+```console title="Directory contents"
+results_genomics/
+├── family_trio.joint.vcf
+├── family_trio.joint.vcf.idx
+├── gvcf
+│   ├── reads_father.bam.g.vcf
+│   ├── reads_father.bam.g.vcf.idx
+│   ├── reads_mother.bam.g.vcf
+│   ├── reads_mother.bam.g.vcf.idx
+│   ├── reads_son.bam.g.vcf
+│   └── reads_son.bam.g.vcf.idx
+└── indexed_bam
+    ├── reads_father.bam
+    ├── reads_father.bam.bai
+    ├── reads_mother.bam
+    ├── reads_mother.bam.bai
+    ├── reads_son.bam
+    └── reads_son.bam.bai
+```
 
 ### Takeaway
 
-You've practiced modularizing a workflow, and you've seen that it still works the same way as before.
+You've modularized a workflow and verified it still works the same way as before.
+
+### What's next?
+
+Review what you've learned and look ahead to testing.
 
 ---
 
 ## 3. Summary
 
-So, once again (assuming you followed [Hello Modules](../../../hello_nextflow/hello_modules.md)), you've done all this work and absolutely nothing has changed to how the pipeline works! This is a good thing, because it means that you've modularised your workflow without impacting its function. Importantly, you've laid a foundation for doing things that will make your code more modular and easier to maintain- for example, you can now add tests to your pipeline using the nf-test framework. This is what we'll be looking at in the next part of this course.
+You've modularized the workflow, and nothing has changed to how the pipeline works.
+This is intentional: you've restructured the code without impacting its function.
+
+The modules contain only the process logic, making them clean and reusable.
+The main script controls what gets published and where, while modules remain focused on their computational task.
+
+You've laid a foundation for things that will make your code easier to maintain.
+For example, you can now add tests to your pipeline using the nf-test framework.
+This is what we'll look at in the next part of this course.

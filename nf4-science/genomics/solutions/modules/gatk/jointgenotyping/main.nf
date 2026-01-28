@@ -4,7 +4,6 @@
 process GATK_JOINTGENOTYPING {
 
     container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
-    publishDir params.outdir, mode: 'symlink'
 
     input:
     path all_gvcfs
@@ -16,8 +15,8 @@ process GATK_JOINTGENOTYPING {
     path ref_dict
 
     output:
-    path "${cohort_name}.joint.vcf", emit: vcf
-    path "${cohort_name}.joint.vcf.idx", emit: idx
+    path "${cohort_name}.joint.vcf"     , emit: vcf
+    path "${cohort_name}.joint.vcf.idx" , emit: idx
 
     script:
     def gvcfs_line = all_gvcfs.collect { gvcf -> "-V ${gvcf}" }.join(' ')

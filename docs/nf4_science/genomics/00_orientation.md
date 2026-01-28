@@ -58,14 +58,8 @@ If you run this inside `nf4-science/genomics`, you should see the following outp
 
 - **The `data` directory** contains input data and related resources, described later in the course.
 
-_Completed workflows (solutions) will be added in the near future._
-
-<!-- COMMENTED OUT UNTIL SOLUTIONS ARE READY (need to redo them)
-- **The `solutions` directory** contains the completed workflow scripts that result from each step of the course.
+- **The `solutions` directory** contains module files and test configurations that result from Parts 3 and 4 of the course.
   They are intended to be used as a reference to check your work and troubleshoot any issues.
-  The name and number in the filename correspond to the step of the relevant part of the course.
-  For example, the file `genomics-1-4.nf` is the expected result of completing steps 1 through 4 of _Part 1: Per-sample variant calling_ using the `genomics-1.nf` workflow.
--->
 
 !!!tip
 

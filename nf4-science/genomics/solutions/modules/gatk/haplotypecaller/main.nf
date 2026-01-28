@@ -5,8 +5,6 @@ process GATK_HAPLOTYPECALLER {
 
     container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
 
-    publishDir params.outdir, mode: 'symlink'
-
     input:
     tuple path(input_bam), path(input_bam_index)
     path ref_fasta
@@ -15,8 +13,8 @@ process GATK_HAPLOTYPECALLER {
     path interval_list
 
     output:
-    path "${input_bam}.g.vcf", emit: vcf
-    path "${input_bam}.g.vcf.idx", emit: idx
+    path "${input_bam}.g.vcf"     , emit: vcf
+    path "${input_bam}.g.vcf.idx" , emit: idx
 
     script:
     """
