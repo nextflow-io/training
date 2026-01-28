@@ -1,4 +1,4 @@
-## 2 Using Seqera Platform Launchpad to run Nextflow workflows
+## 1. Using Seqera Platform Launchpad to run Nextflow workflows
 
 So far we've been running Nextflow workflows on our local machine using the command line interface but sending the logs to Seqera Platform for monitoring and visualization.
 Next we want to start using Seqera Platform to launch Nextflow workflows on our behalf.
@@ -12,7 +12,7 @@ Next we want to start using Seqera Platform to launch Nextflow workflows on our 
 
     Launch a test run of the nf-core/rnaseq pipeline in the community/showcase workspace prior to starting this session, so you'll have a recent run for participants to inspect.
 
-### 2.1. Navigate to the community/showcase workspace
+### 1.1. Navigate to the community/showcase workspace
 
 Seqera Platform has a concept of [**organizations**](https://docs.seqera.io/platform/latest/orgs-and-teams/organizations) and [**workspaces**](https://docs.seqera.io/platform/latest/orgs-and-teams/workspace-management) which are used to organize and share [pipelines](https://docs.seqera.io/platform/latest/launch/launchpad), [compute environments](https://docs.seqera.io/platform/latest/compute-envs/overview), [data](https://docs.seqera.io/platform/latest/data/data-explorer), [credentials](https://docs.seqera.io/platform/latest/credentials/overview), and more.
 The `community/showcase` workspace is a public workspace where you can see some example pipelines and compute environments.
@@ -21,7 +21,7 @@ Each user has an allotted amount of free compute to use in this workspace.
 Click on your username in the top left corner of the screen to bring up the list of organizations and workspaces you have access to.
 Select the `community/showcase` workspace.
 
-### 2.2. Launch a test run of nf-core/rnaseq pipeline
+### 1.2. Launch a test run of nf-core/rnaseq pipeline
 
 In the `community/showcase` workspace, you will see a list of pipelines that have been set up by the workspace owner for you to run.
 Follow these steps to launch a test run of a pipeline:
@@ -46,12 +46,12 @@ Follow these steps to launch a test run of a pipeline:
 
     This is what ensures that everyone's pipeline will write to a unique location in cloud storage despite all having the `outdir` parameter set to `./results`.
 
-### 2.3. Monitor the pipeline run
+### 1.3. Monitor the pipeline run
 
 After launching the pipeline, you will be taken to the pipeline run page where you can monitor the progress of the pipeline.
 It may take some time for the pipeline to start running while AWS Batch spins up the needed resources, so go to the "Runs" tab above the pipeline and open a recent completed (or failed) run by one of your "teammates" in the community.
 
-### 2.4. Inspect a pipeline run
+### 1.4. Inspect a pipeline run
 
 Scroll down to find the list of tasks that were executed in the pipeline run.
 For example, by searching for `fastq` we can find the task `NFCORE_RNASEQ:RNASEQ:FASTQ_FASTQC_UMITOOLS_FASTP:FASTP (WT_REP2)` that was executed as part of the pipeline.
