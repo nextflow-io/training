@@ -88,7 +88,13 @@ Perform the following checks **only on files within the determined scope**:
    - This checks that highlighted lines match the intended content
    - Particularly important for Before/After comparison blocks
 
-7. **Check Writing Style**
+7. **Check Inline Code Formatting**
+
+   - Invoke the `/check-inline-code` skill to review inline code formatting
+   - Checks for missing backticks on CLI flags, filenames, and code elements
+   - Verifies appropriate use of inline syntax highlighting (`#!groovy`)
+
+8. **Check Writing Style**
 
    - Search for LLM-style patterns that should be avoided:
      - `Let's` or `let's` at start of sentences
@@ -99,7 +105,7 @@ Perform the following checks **only on files within the determined scope**:
    - Check for em-dash elaborations (space-hyphen-space followed by lowercase) that could be periods
    - Flag any issues found for manual review
 
-8. **Deep Lesson Review** (when reviewing a specific lesson file)
+9. **Deep Lesson Review** (when reviewing a specific lesson file)
 
    If the user asks to review a specific lesson, perform this comprehensive checklist:
 
