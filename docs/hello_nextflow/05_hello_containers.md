@@ -1088,3 +1088,63 @@ Take a break!
 When you're ready, move on to [**Part 6: Hello Config**](./06_hello_config.md) to learn how to configure the execution of your pipeline to fit your infrastructure as well as manage configuration of inputs and parameters.
 
 It's the very last part, and then you'll be done with this course!
+
+---
+
+## Quiz
+
+<quiz>
+What is a container?
+- [ ] A type of virtual machine
+- [ ] A file compression format
+- [x] A lightweight, standalone executable unit that includes everything needed to run an application
+- [ ] A network protocol
+</quiz>
+
+<quiz>
+What is the difference between a container image and a container instance?
+- [ ] They are the same thing
+- [x] An image is a template; an instance is a running container created from that image
+- [ ] An instance is a template; an image is a running container
+- [ ] Images are for Docker; instances are for Singularity
+</quiz>
+
+<quiz>
+What does the -v flag do in a docker run command?
+- [ ] Enables verbose output
+- [ ] Validates the container
+- [x] Mounts a volume from the host system into the container
+- [ ] Specifies the version of the container
+</quiz>
+
+<quiz>
+Why do you need to mount volumes when using containers?
+- [ ] To improve container performance
+- [ ] To save disk space
+- [x] Because containers are isolated from the host filesystem by default
+- [ ] To enable networking
+</quiz>
+
+<quiz>
+How do you specify a container for a Nextflow process?
+- [ ] docker 'container-uri'
+- [ ] image 'container-uri'
+- [x] container 'container-uri'
+- [ ] use 'container-uri'
+</quiz>
+
+<quiz>
+How do you enable Docker in Nextflow?
+- [ ] Add --docker to the command line
+- [ ] Set process.docker = true in the config
+- [x] Set docker.enabled = true in the config
+- [ ] Docker is enabled by default
+</quiz>
+
+<quiz>
+What does Nextflow automatically handle when running a process in a container? (Select all that apply)
+- [x] Pulling the container image if needed
+- [x] Mounting the work directory
+- [x] Running the process script inside the container
+- [x] Cleaning up the container instance after execution
+</quiz>

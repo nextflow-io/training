@@ -1085,3 +1085,63 @@ More generally, you understand the key principles involved in connecting process
 Take an extra long break, you've earned it.
 
 When you're ready, move on to [**Part 4: Hello Modules**](./04_hello_modules.md) to learn how to modularize your code for better maintainability and code efficiency.
+
+---
+
+## Quiz
+
+<quiz>
+How do you access the output of a process in the workflow block?
+- [ ] process.output
+- [ ] output.processName
+- [x] processName.out
+- [ ] get(processName)
+</quiz>
+
+<quiz>
+What determines the order of process execution in Nextflow?
+- [ ] The order processes are written in the workflow block
+- [ ] Alphabetical order by process name
+- [x] Data dependencies between processes
+- [ ] Random order for parallel execution
+</quiz>
+
+<quiz>
+What does the collect() operator do?
+- [ ] Filters elements from a channel
+- [ ] Splits a channel into multiple channels
+- [x] Gathers all elements from a channel into a single list
+- [ ] Counts the number of elements in a channel
+</quiz>
+
+<quiz>
+When should you use the collect() operator?
+- [ ] When you want to process items in parallel
+- [ ] When you need to filter channel contents
+- [x] When a downstream process needs all items from an upstream process
+- [ ] When you want to split data across multiple processes
+</quiz>
+
+<quiz>
+How do you access a named output from a process?
+- [ ] processName.outputName
+- [ ] processName.get(outputName)
+- [x] processName.out.outputName
+- [ ] output.processName.outputName
+</quiz>
+
+<quiz>
+What is the correct syntax for naming an output in a process?
+- [ ] name: outputName
+- [ ] output: outputName
+- [x] emit: outputName
+- [ ] label: outputName
+</quiz>
+
+<quiz>
+When providing multiple inputs to a process, what must be true?
+- [ ] All inputs must be of the same type
+- [ ] Inputs must be provided in alphabetical order
+- [x] The order of inputs must match the order defined in the input block
+- [ ] Only two inputs can be provided at a time
+</quiz>
