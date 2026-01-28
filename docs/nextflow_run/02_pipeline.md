@@ -1579,7 +1579,7 @@ export NO_COLOR=1
 </quiz>
 
 <quiz>
-In the code `channel.fromPath(params.input).splitCsv().map { line -> line[0] }`, what does `.map { line -> line[0] }` do?
+In the code `#!groovy channel.fromPath(params.input).splitCsv().map { line -> line[0] }`, what does `#!groovy .map { line -> line[0] }` do?
 - [ ] Filters out empty lines
 - [ ] Sorts the lines alphabetically
 - [x] Extracts the first column from each CSV row
@@ -1589,7 +1589,7 @@ Learn more: [1.4.1. Loading the input data from the CSV](#141-loading-the-input-
 </quiz>
 
 <quiz>
-Why is it important to include the input value in output filenames (e.g., `${greeting}-output.txt`)?
+Why is it important to include the input value in output filenames (e.g., `#!groovy "${greeting}-output.txt"`)?
 - [ ] To improve processing speed
 - [ ] To enable resume functionality
 - [x] To prevent output files from overwriting each other when processing multiple inputs

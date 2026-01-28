@@ -1594,7 +1594,7 @@ Learn more: [5.1. Run the workflow to generate a resource utilization report](#5
 </quiz>
 
 <quiz>
-What does the resourceLimits directive do?
+What does the `resourceLimits` directive do?
 - [ ] Sets minimum resource requirements
 - [ ] Allocates resources to processes
 - [x] Caps the maximum resources that can be requested
@@ -1605,10 +1605,10 @@ Learn more: [5.5. Add resource limits](#55-add-resource-limits)
 
 <quiz>
 What is the default executor in Nextflow?
-- [x] local
-- [ ] slurm
-- [ ] kubernetes
-- [ ] aws
+- [x] `local`
+- [ ] `slurm`
+- [ ] `kubernetes`
+- [ ] `aws`
 
 Learn more: [4. Select an execution platform](#4-select-an-execution-platform)
 </quiz>

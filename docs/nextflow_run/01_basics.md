@@ -685,7 +685,7 @@ In the next section of this training, we're going to look at four successively m
 ## Quiz
 
 <quiz>
-In the console output line `[a3/7be2fa] sayHello | 1 of 1 ✔`, what does `[a3/7be2fa]` represent?
+In the console output line `[a3/7be2fa] SAYHELLO | 1 of 1 ✔`, what does `[a3/7be2fa]` represent?
 - [ ] The process version number
 - [ ] A unique run identifier
 - [x] The truncated path to the task's work directory
@@ -730,7 +730,7 @@ Learn more: [4.1. Re-launch a workflow with `-resume`](#41-re-launch-a-workflow-
 </quiz>
 
 <quiz>
-Where does Nextflow store the execution history that `nextflow log` displays?
+Where does Nextflow store the execution history that the `nextflow log` command displays?
 - [ ] In the results directory
 - [ ] In the work directory
 - [x] In the `.nextflow/history` file
@@ -760,7 +760,7 @@ Learn more: [3.5. The publish directive](#35-the-publish-directive)
 </quiz>
 
 <quiz>
-What is the recommended flag to use with `nextflow clean` before actually deleting files?
+What is the recommended flag to use with the `nextflow clean` command before actually deleting files?
 - [x] `-n` (dry run) to preview what would be deleted
 - [ ] `-v` (verbose) to see detailed output
 - [ ] `-a` (all) to select all directories

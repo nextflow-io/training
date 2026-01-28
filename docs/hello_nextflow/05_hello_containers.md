@@ -1131,10 +1131,10 @@ Learn more: [1.3.4. Mount data into the container](#134-mount-data-into-the-cont
 
 <quiz>
 How do you specify a container for a Nextflow process?
-- [ ] docker 'container-uri'
-- [ ] image 'container-uri'
-- [x] container 'container-uri'
-- [ ] use 'container-uri'
+- [ ] `docker 'container-uri'`
+- [ ] `image 'container-uri'`
+- [x] `container 'container-uri'`
+- [ ] `use 'container-uri'`
 
 Learn more: [2.3.1. Specify a container for cowpy](#231-specify-a-container-for-cowpy)
 </quiz>

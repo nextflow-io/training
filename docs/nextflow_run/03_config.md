@@ -1422,7 +1422,7 @@ Learn more: [1.1. Set up values in `nextflow.config`](#11-set-up-values-in-nextf
 <quiz>
 What is the syntax difference between setting a parameter default in a workflow file vs. a config file?
 - [ ] They use the same syntax
-- [x] Workflow uses typed declaration (param: Type = value), config uses assignment (param = value)
+- [x] Workflow uses typed declaration (`#!groovy param: Type = value`), config uses assignment (`#!groovy param = value`)
 - [ ] Config uses typed declaration, workflow uses assignment
 - [ ] Only config files can set default values
 
@@ -1451,10 +1451,10 @@ Learn more: [2.1. Customize the outputDir directory name](#21-customize-the-outp
 
 <quiz>
 How do you reference a process name dynamically in output path configuration?
-- [ ] ${processName}
-- [ ] process.name
-- [x] { processName.name }
-- [ ] @processName
+- [ ] `#!groovy ${processName}`
+- [ ] `process.name`
+- [x] `#!groovy { meta.id }`
+- [ ] `@processName`
 
 Learn more: [2.2. Organize outputs by process](#22-organize-outputs-by-process)
 </quiz>
@@ -1471,10 +1471,10 @@ Learn more: [3. Select a software packaging technology](#3-select-a-software-pac
 
 <quiz>
 What is the default executor in Nextflow?
-- [x] local
-- [ ] slurm
-- [ ] kubernetes
-- [ ] aws
+- [x] `local`
+- [ ] `slurm`
+- [ ] `kubernetes`
+- [ ] `aws`
 
 Learn more: [4. Select an execution platform](#4-select-an-execution-platform)
 </quiz>

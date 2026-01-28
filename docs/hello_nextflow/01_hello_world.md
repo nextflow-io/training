@@ -1217,8 +1217,8 @@ Learn more: [3.2. Set up a command-line parameter to capture user input](#32-set
 
 <quiz>
 How do you reference a variable inside a Nextflow script block?
-- [ ] Use %variable% syntax
-- [x] Use ${variable} syntax
-- [ ] Use {{variable}} syntax
-- [ ] Use [variable] syntax
+- [ ] Use `%variable%` syntax
+- [x] Use `#!groovy ${variable}` syntax
+- [ ] Use `{{variable}}` syntax
+- [ ] Use `[variable]` syntax
 </quiz>

@@ -466,10 +466,10 @@ Learn more: [2. Create a module for `sayHello()`](#2-create-a-module-for-sayhell
 
 <quiz>
 What is the recommended naming convention for module files?
-- [ ] module_processName.nf
-- [ ] processName_module.nf
-- [x] processName.nf
-- [ ] mod_processName.nf
+- [ ] `module_processName.nf`
+- [ ] `processName_module.nf`
+- [x] `processName.nf`
+- [ ] `mod_processName.nf`
 </quiz>
 
 <quiz>
