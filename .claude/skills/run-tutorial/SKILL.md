@@ -40,6 +40,22 @@ Do not proceed until the container is confirmed running.
 
 **If existing environment:** Verify Nextflow is installed with `nextflow -version`
 
+### Strict Syntax Parser (v2)
+
+**Always use the strict syntax parser** when running Nextflow commands:
+
+```bash
+NXF_SYNTAX_PARSER=v2 nextflow run ...
+```
+
+In Docker:
+
+```bash
+docker exec -e NXF_SYNTAX_PARSER=v2 nf-training nextflow run ...
+```
+
+This validates tutorials against the strict syntax that will become default in future Nextflow versions.
+
 ---
 
 ## Working Directory Mapping
