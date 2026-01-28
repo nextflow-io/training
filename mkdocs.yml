@@ -11,6 +11,7 @@ nav:
       - nextflow_run/01_basics.md
       - nextflow_run/02_pipeline.md
       - nextflow_run/03_config.md
+      - nextflow_run/04_troubleshooting.md
       - nextflow_run/next_steps.md
       - nextflow_run/survey.md
   - Hello Nextflow:

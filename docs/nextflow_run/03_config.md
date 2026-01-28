@@ -17,6 +17,11 @@ If you're not familiar with the Hello pipeline or you could use a reminder, see 
 
 ## 1. Manage workflow input parameters
 
+!!! tip "Scenario"
+
+    You've downloaded a pipeline and want to run it repeatedly with the same input files and settings, but you don't want to type out all the parameters every time.
+    Or perhaps you're setting up the pipeline for a colleague who isn't comfortable with command-line arguments.
+
 We're going to start with an aspect of configuration that is simply an extension of what we've been working with so far: the management of input parameters.
 
 Currently, our workflow is set up to accept several parameter values via the command-line, declared in a `params` block in the workflow script itself.
@@ -887,6 +892,11 @@ Learn how to change the execution platform used by Nextflow to actually do the w
 
 ## 4. Select an execution platform
 
+!!! tip "Scenario"
+
+    You've been developing and testing your pipeline on your laptop, but now you need to run it on thousands of samples.
+    Your institution has an HPC cluster with a Slurm scheduler that you'd like to use instead.
+
 Until now, we've been running our pipeline with the local executor.
 This executes each task on the machine that Nextflow is running on.
 When Nextflow begins, it looks at the available CPUs and memory.
@@ -972,6 +982,11 @@ Learn how to evaluate and express resource allocations and limitations in Nextfl
 ---
 
 ## 5. Control compute resource allocations
+
+!!! tip "Scenario"
+
+    Your pipeline keeps failing on the cluster because tasks are being killed for exceeding memory limits.
+    Or perhaps you're being charged for resources you're not using and want to optimize costs.
 
 Most high-performance computing platforms allow (and sometimes require) that you specify certain resource allocation parameters such as number of CPUs and memory.
 
@@ -1119,6 +1134,11 @@ Learn how to set up preset configuration profiles and switch between them at run
 ---
 
 ## 6. Use profiles to switch between preset configurations
+
+!!! tip "Scenario"
+
+    You regularly switch between running pipelines on your laptop for development and on your institution's HPC for production runs.
+    You're tired of manually changing configuration settings every time you switch environments.
 
 We've shown you a number of ways that you can customize your pipeline configuration depending on the project you're working on or the compute environment you're using.
 
@@ -1395,15 +1415,7 @@ More generally, you know how to configure your workflow executions to suit diffe
 
 ### What's next?
 
-Give yourself a big pat on the back!
-You know everything you need to know to get started running and managing Nextflow pipelines.
-
-That concludes this course, but if you're eager to keep learning, we have two main recommendations:
-
-- If you want to dig deeper into developing your own pipelines, have a look at [Hello Nextflow](../hello_nextflow/index.md), a course for beginners that covers the same general progression as this one but goes into much more detail about channels and operators.
-- If you would like to continue learning how to run Nextflow pipelines without going deeper into the code, have a look at the first part of [Hello nf-core](../hello_nf-core/index.md), which introduces the tooling for finding and running pipelines from the hugely popular [nf-core](https://nf-co.re/) project.
-
-Have fun!
+Learn how to troubleshoot common issues when running Nextflow pipelines.
 
 ---
 
