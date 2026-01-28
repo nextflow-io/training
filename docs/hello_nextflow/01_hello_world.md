@@ -1156,30 +1156,30 @@ Learn more: [The process definition](#111-the-process-definition)
 
 <quiz>
 What command is used to run a Nextflow workflow?
-- [ ] nextflow start
-- [ ] nextflow execute
-- [x] nextflow run
-- [ ] nextflow launch
+- [ ] `nextflow start`
+- [ ] `nextflow execute`
+- [x] `nextflow run`
+- [ ] `nextflow launch`
 </quiz>
 
 <quiz>
 What does the work directory contain? (Select all that apply)
 - [x] Temporary files created during execution
-- [x] Task metadata files like .command.sh and .exitcode
+- [x] Task metadata files like `.command.sh` and `.exitcode`
 - [x] Process outputs before publishing
 - [ ] The original workflow script
 
-Learn more: [Find the output and logs in the work directory](#122-find-the-output-and-logs-in-the-work-directory)
+Learn more: [Find the output and logs in the `work` directory](#122-find-the-output-and-logs-in-the-work-directory)
 </quiz>
 
 <quiz>
-What does the -resume flag do?
+What does the `-resume` flag do?
 - [ ] Restarts the workflow from the beginning
 - [ ] Pauses the workflow
 - [x] Skips processes that have already completed successfully
 - [ ] Creates a backup of the workflow
 
-Learn more: [Re-launch a workflow with -resume](#41-re-launch-a-workflow-with--resume)
+Learn more: [Re-launch a workflow with `-resume`](#41-re-launch-a-workflow-with--resume)
 </quiz>
 
 <quiz>
@@ -1194,10 +1194,10 @@ Learn more: [Set the publish mode to copy](#23-set-the-publish-mode-to-copy)
 
 <quiz>
 How do you pass a parameter value to a Nextflow workflow from the command line?
-- [ ] -parameter value
-- [ ] --parameter:value
-- [x] --parameter value
-- [ ] -p parameter=value
+- [ ] `-parameter value`
+- [ ] `--parameter:value`
+- [x] `--parameter value`
+- [ ] `-p parameter=value`
 
 Learn more: [Set up a command-line parameter to capture user input](#32-set-up-a-command-line-parameter-to-capture-user-input)
 </quiz>

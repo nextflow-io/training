@@ -1092,10 +1092,10 @@ When you're ready, move on to [**Part 4: Hello Modules**](./04_hello_modules.md)
 
 <quiz>
 How do you access the output of a process in the workflow block?
-- [ ] process.output
-- [ ] output.processName
-- [x] processName.out
-- [ ] get(processName)
+- [ ] `process.output`
+- [ ] `output.processName`
+- [x] `processName.out`
+- [ ] `get(processName)`
 
 Learn more: [Pass the output of the first process to the second process](#14-pass-the-output-of-the-first-process-to-the-second-process)
 </quiz>
@@ -1111,7 +1111,7 @@ Learn more: [Pass the output of the first process to the second process](#14-pas
 </quiz>
 
 <quiz>
-What does the collect() operator do?
+What does the `collect()` operator do?
 - [ ] Filters elements from a channel
 - [ ] Splits a channel into multiple channels
 - [x] Gathers all elements from a channel into a single list
@@ -1121,7 +1121,7 @@ Learn more: [Use an operator to collect the greetings into a single input](#24-u
 </quiz>
 
 <quiz>
-When should you use the collect() operator?
+When should you use the `collect()` operator?
 - [ ] When you want to process items in parallel
 - [ ] When you need to filter channel contents
 - [x] When a downstream process needs all items from an upstream process
@@ -1132,20 +1132,20 @@ Learn more: [Use an operator to collect the greetings into a single input](#24-u
 
 <quiz>
 How do you access a named output from a process?
-- [ ] processName.outputName
-- [ ] processName.get(outputName)
-- [x] processName.out.outputName
-- [ ] output.processName.outputName
+- [ ] `processName.outputName`
+- [ ] `processName.get(outputName)`
+- [x] `processName.out.outputName`
+- [ ] `output.processName.outputName`
 
 Learn more: [Emit the report file and name outputs](#412-emit-the-report-file-and-name-outputs)
 </quiz>
 
 <quiz>
 What is the correct syntax for naming an output in a process?
-- [ ] name: outputName
-- [ ] output: outputName
-- [x] emit: outputName
-- [ ] label: outputName
+- [ ] `name: outputName`
+- [ ] `output: outputName`
+- [x] `emit: outputName`
+- [ ] `label: outputName`
 
 Learn more: [Emit the report file and name outputs](#412-emit-the-report-file-and-name-outputs)
 </quiz>

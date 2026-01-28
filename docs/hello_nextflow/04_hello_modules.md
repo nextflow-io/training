@@ -461,7 +461,7 @@ What is a module in Nextflow?
 - [ ] A workflow definition
 - [ ] A channel operator
 
-Learn more: [Create a module for sayHello()](#2-create-a-module-for-sayhello)
+Learn more: [Create a module for `sayHello()`](#2-create-a-module-for-sayhello)
 </quiz>
 
 <quiz>
@@ -475,9 +475,9 @@ What is the recommended naming convention for module files?
 <quiz>
 Where should module files be stored?
 - [ ] In the same directory as the workflow
-- [ ] In a bin/ directory
-- [x] In a modules/ directory
-- [ ] In a lib/ directory
+- [ ] In a `bin/` directory
+- [x] In a `modules/` directory
+- [ ] In a `lib/` directory
 
 Learn more: [Create a directory to store modules](#1-create-a-directory-to-store-modules)
 </quiz>
@@ -493,7 +493,7 @@ Learn more: [Add an import declaration](#23-add-an-import-declaration-before-the
 </quiz>
 
 <quiz>
-What happens to the -resume functionality when using modules?
+What happens to the `-resume` functionality when using modules?
 - [ ] It no longer works
 - [ ] It requires additional configuration
 - [x] It works the same as before

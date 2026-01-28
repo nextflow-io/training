@@ -1353,7 +1353,7 @@ Learn more: [Create an input channel](#11-create-an-input-channel)
 </quiz>
 
 <quiz>
-What does channel.of() create?
+What does `channel.of()` create?
 - [ ] A value channel
 - [x] A queue channel with the specified elements
 - [ ] An empty channel
@@ -1373,43 +1373,43 @@ Learn more: [Modify the workflow to run on multiple input values](#2-modify-the-
 </quiz>
 
 <quiz>
-What does the flatten() operator do?
+What does the `flatten()` operator do?
 - [ ] Combines multiple channels into one
 - [ ] Sorts channel elements
 - [x] Unpacks arrays into individual elements
 - [ ] Removes duplicate elements
 
-Learn more: [Add the flatten() operator](#321-add-the-flatten-operator)
+Learn more: [Add the `flatten()` operator](#321-add-the-flatten-operator)
 </quiz>
 
 <quiz>
-What is the purpose of the view() operator?
+What is the purpose of the `view()` operator?
 - [ ] To filter channel contents
 - [ ] To transform channel elements
 - [x] To inspect and debug channel contents
 - [ ] To save channel contents to a file
 
-Learn more: [Use view() to inspect the channel contents](#14-use-view-to-inspect-the-channel-contents)
+Learn more: [Use `view()` to inspect the channel contents](#14-use-view-to-inspect-the-channel-contents)
 </quiz>
 
 <quiz>
-What does splitCsv() do?
+What does `splitCsv()` do?
 - [ ] Creates a CSV file from channel contents
 - [ ] Splits a string by commas
 - [x] Parses a CSV file into arrays representing each row
 - [ ] Merges multiple CSV files
 
-Learn more: [Use the splitCsv() operator to parse the file](#42-use-the-splitcsv-operator-to-parse-the-file)
+Learn more: [Use the `splitCsv()` operator to parse the file](#42-use-the-splitcsv-operator-to-parse-the-file)
 </quiz>
 
 <quiz>
-What is the purpose of the map() operator?
+What is the purpose of the `map()` operator?
 - [ ] To filter elements from a channel
 - [ ] To combine multiple channels
 - [x] To transform each element in a channel
 - [ ] To count elements in a channel
 
-Learn more: [Use the map() operator to extract the greetings](#43-use-the-map-operator-to-extract-the-greetings)
+Learn more: [Use the `map()` operator to extract the greetings](#43-use-the-map-operator-to-extract-the-greetings)
 </quiz>
 
 <quiz>

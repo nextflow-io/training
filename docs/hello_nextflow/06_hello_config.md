@@ -1531,10 +1531,10 @@ Head on to the final [course summary](./next_steps.md) to review what you learne
 
 <quiz>
 What is the name of the configuration file that Nextflow automatically loads?
-- [ ] config.nf
-- [ ] pipeline.config
-- [x] nextflow.config
-- [ ] workflow.config
+- [ ] `config.nf`
+- [ ] `pipeline.config`
+- [x] `nextflow.config`
+- [ ] `workflow.config`
 </quiz>
 
 <quiz>
@@ -1544,7 +1544,7 @@ What takes precedence when the same parameter is set in both the config file and
 - [ ] The first value encountered
 - [ ] Neither; it causes an error
 
-Learn more: [Move default values to nextflow.config](#11-move-default-values-to-nextflowconfig)
+Learn more: [Move default values to `nextflow.config`](#11-move-default-values-to-nextflowconfig)
 </quiz>
 
 <quiz>
@@ -1585,10 +1585,10 @@ Learn more: [Set resource allocations for a specific process](#53-set-resource-a
 
 <quiz>
 What command line option generates a resource utilization report?
-- [ ] -with-metrics
-- [ ] -with-stats
-- [x] -with-report
-- [ ] -with-profile
+- [ ] `-with-metrics`
+- [ ] `-with-stats`
+- [x] `-with-report`
+- [ ] `-with-profile`
 
 Learn more: [Run the workflow to generate a resource utilization report](#51-run-the-workflow-to-generate-a-resource-utilization-report)
 </quiz>
@@ -1615,10 +1615,10 @@ Learn more: [Select an execution platform](#4-select-an-execution-platform)
 
 <quiz>
 How do you specify a parameter file when running Nextflow?
-- [ ] --params params.json
-- [ ] -config params.json
-- [x] -params-file params.json
-- [ ] --input params.json
+- [ ] `--params params.json`
+- [ ] `-config params.json`
+- [x] `-params-file params.json`
+- [ ] `--input params.json`
 
 Learn more: [Use a parameter file](#13-use-a-parameter-file)
 </quiz>
@@ -1635,10 +1635,10 @@ Learn more: [Use profiles to switch between preset configurations](#6-use-profil
 
 <quiz>
 How do you specify multiple profiles in a single command?
-- [ ] -profile profile1 -profile profile2
-- [ ] -profiles profile1,profile2
-- [x] -profile profile1,profile2
-- [ ] --profile profile1 --profile profile2
+- [ ] `-profile profile1 -profile profile2`
+- [ ] `-profiles profile1,profile2`
+- [x] `-profile profile1,profile2`
+- [ ] `--profile profile1 --profile profile2`
 
 Learn more: [Use profiles to switch between preset configurations](#6-use-profiles-to-switch-between-preset-configurations)
 </quiz>

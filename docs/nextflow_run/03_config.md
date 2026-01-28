@@ -1410,13 +1410,13 @@ Have fun!
 ## Quiz
 
 <quiz>
-When parameter values are set in both the workflow file and nextflow.config, which takes precedence?
+When parameter values are set in both the workflow file and `nextflow.config`, which takes precedence?
 - [ ] The workflow file value
 - [x] The configuration file value
 - [ ] The first value encountered
 - [ ] It causes an error
 
-Learn more: [Set up values in nextflow.config](#11-set-up-values-in-nextflowconfig)
+Learn more: [Set up values in `nextflow.config`](#11-set-up-values-in-nextflowconfig)
 </quiz>
 
 <quiz>
@@ -1426,15 +1426,15 @@ What is the syntax difference between setting a parameter default in a workflow 
 - [ ] Config uses typed declaration, workflow uses assignment
 - [ ] Only config files can set default values
 
-Learn more: [Set up values in nextflow.config](#11-set-up-values-in-nextflowconfig)
+Learn more: [Set up values in `nextflow.config`](#11-set-up-values-in-nextflowconfig)
 </quiz>
 
 <quiz>
 How do you specify a parameter file when running a workflow?
-- [ ] --params params.yaml
-- [ ] -config params.yaml
-- [x] -params-file params.yaml
-- [ ] --input-params params.yaml
+- [ ] `--params params.yaml`
+- [ ] `-config params.yaml`
+- [x] `-params-file params.yaml`
+- [ ] `--input-params params.yaml`
 
 Learn more: [Use a parameter file](#13-use-a-parameter-file)
 </quiz>
@@ -1481,10 +1481,10 @@ Learn more: [Select an execution platform](#4-select-an-execution-platform)
 
 <quiz>
 What command generates a resource utilization report?
-- [ ] nextflow run workflow.nf -with-metrics
-- [ ] nextflow run workflow.nf -with-stats
-- [x] nextflow run workflow.nf -with-report report.html
-- [ ] nextflow run workflow.nf -profile report
+- [ ] `nextflow run workflow.nf -with-metrics`
+- [ ] `nextflow run workflow.nf -with-stats`
+- [x] `nextflow run workflow.nf -with-report report.html`
+- [ ] `nextflow run workflow.nf -profile report`
 
 Learn more: [Run the workflow to generate a resource utilization report](#51-run-the-workflow-to-generate-a-resource-utilization-report)
 </quiz>
@@ -1511,22 +1511,22 @@ Learn more: [Add resource limits](#55-add-resource-limits)
 
 <quiz>
 How do you specify multiple profiles in a single command?
-- [ ] -profile profile1 -profile profile2
-- [ ] -profiles profile1,profile2
-- [x] -profile profile1,profile2
-- [ ] --profile profile1 --profile profile2
+- [ ] `-profile profile1 -profile profile2`
+- [ ] `-profiles profile1,profile2`
+- [x] `-profile profile1,profile2`
+- [ ] `--profile profile1 --profile profile2`
 
 Learn more: [Use profiles to switch between preset configurations](#6-use-profiles-to-switch-between-preset-configurations)
 </quiz>
 
 <quiz>
 What command shows the fully resolved configuration that Nextflow would use?
-- [ ] nextflow show-config
-- [ ] nextflow settings
-- [x] nextflow config
-- [ ] nextflow resolve
+- [ ] `nextflow show-config`
+- [ ] `nextflow settings`
+- [x] `nextflow config`
+- [ ] `nextflow resolve`
 
-Learn more: [Use nextflow config to see the resolved configuration](#63-use-nextflow-config-to-see-the-resolved-configuration)
+Learn more: [Use `nextflow config` to see the resolved configuration](#63-use-nextflow-config-to-see-the-resolved-configuration)
 </quiz>
 
 <quiz>

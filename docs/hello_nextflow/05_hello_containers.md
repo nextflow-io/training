@@ -1110,7 +1110,7 @@ What is the difference between a container image and a container instance?
 </quiz>
 
 <quiz>
-What does the -v flag do in a docker run command?
+What does the `-v` flag do in a `docker run` command?
 - [ ] Enables verbose output
 - [ ] Validates the container
 - [x] Mounts a volume from the host system into the container
@@ -1141,12 +1141,12 @@ Learn more: [Specify a container for cowpy](#231-specify-a-container-for-cowpy)
 
 <quiz>
 How do you enable Docker in Nextflow?
-- [ ] Add --docker to the command line
-- [ ] Set process.docker = true in the config
-- [x] Set docker.enabled = true in the config
+- [ ] Add `--docker` to the command line
+- [ ] Set `process.docker = true` in the config
+- [x] Set `docker.enabled = true` in the config
 - [ ] Docker is enabled by default
 
-Learn more: [Enable use of Docker via the nextflow.config file](#232-enable-use-of-docker-via-the-nextflowconfig-file)
+Learn more: [Enable use of Docker via the `nextflow.config` file](#232-enable-use-of-docker-via-the-nextflowconfig-file)
 </quiz>
 
 <quiz>

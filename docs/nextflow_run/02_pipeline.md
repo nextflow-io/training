@@ -1599,7 +1599,7 @@ Learn more: [Running modularized pipelines](#3-running-modularized-pipelines)
 </quiz>
 
 <quiz>
-When you modularize a workflow and run it with -resume, what happens?
+When you modularize a workflow and run it with `-resume`, what happens?
 - [ ] Caching is disabled for modular processes
 - [ ] All tasks must be re-executed
 - [x] Caching works normally based on the generated job scripts
@@ -1622,7 +1622,7 @@ Learn more: [Use a container in a workflow](#42-use-a-container-in-a-workflow)
 In the `.command.run` file, what does the `nxf_launch` function contain?
 - [ ] The Nextflow version information
 - [ ] The workflow parameters
-- [x] The docker run command with volume mounts and container settings
+- [x] The `docker run` command with volume mounts and container settings
 - [ ] The process input declarations
 
 Learn more: [Inspect how Nextflow launched the containerized task](#424-inspect-how-nextflow-launched-the-containerized-task)
