@@ -5,27 +5,25 @@ description: Run comprehensive validation and review checks including heading nu
 
 # Validate Training Materials
 
-Run comprehensive validation checks on training materials to ensure quality and consistency. This includes both automated checks and deep lesson reviews.
+Run comprehensive validation checks on training materials. Execute from repository root.
 
-## User Input
+See [../shared/repo-conventions.md](../shared/repo-conventions.md) for directory mapping and file conventions.
 
-**IMPORTANT**: Ask the user to specify what to validate if not clear from the request:
+## Skill Dependencies (MANDATORY)
 
-- A specific side quest (e.g., "debugging", "metadata")
-- A specific module (e.g., "hello_nextflow", "nf4_science/genomics")
-- The entire repository (only if explicitly requested)
+This skill MUST invoke other skills during validation. **Do not skip these.**
 
-If the user provides a path or module name, **only validate that specific content**.
+| Task | Skill | When |
+|------|-------|------|
+| Check code block highlights | `/check-highlights` | Always |
+| Check inline code formatting | `/check-inline-code` | Always |
 
-## Working Directory
+## Scope
 
-**IMPORTANT**: All commands in this skill must be executed from the repository root directory.
-
-- The repository root is the directory containing `mkdocs.yml`, `docs/`, and `.github/`
-- Verify you are in the correct directory before running any commands (check for these files/folders)
-- All file paths in this skill are relative to the repository root
-- Do not change directories during skill execution
-- Use paths relative to repository root only
+Ask user to specify what to validate if not clear:
+- Specific side quest (e.g., "debugging")
+- Specific module (e.g., "hello_nextflow")
+- Entire repository (only if explicitly requested)
 
 ## Determining Scope
 
@@ -84,11 +82,21 @@ Perform the following checks **only on files within the determined scope**:
 
 6. **Check Code Block Highlights**
 
-   - Invoke the `/check-highlights` skill for comprehensive `hl_lines` validation
-   - This checks that highlighted lines match the intended content
-   - Particularly important for Before/After comparison blocks
+   ```
+   >>> STOP. INVOKE /check-highlights on the scoped files NOW.
 
-7. **Check Writing Style**
+   Record results before continuing.
+   ```
+
+7. **Check Inline Code Formatting**
+
+   ```
+   >>> STOP. INVOKE /check-inline-code on the scoped files NOW.
+
+   Record results before continuing.
+   ```
+
+8. **Check Writing Style**
 
    - Search for LLM-style patterns that should be avoided:
      - `Let's` or `let's` at start of sentences
@@ -99,7 +107,7 @@ Perform the following checks **only on files within the determined scope**:
    - Check for em-dash elaborations (space-hyphen-space followed by lowercase) that could be periods
    - Flag any issues found for manual review
 
-8. **Deep Lesson Review** (when reviewing a specific lesson file)
+9. **Deep Lesson Review** (when reviewing a specific lesson file)
 
    If the user asks to review a specific lesson, perform this comprehensive checklist:
 
@@ -165,84 +173,22 @@ Perform the following checks **only on files within the determined scope**:
 
 ## Output Format
 
-Provide a structured report. For automated validation checks:
+Structure your report with these sections:
 
 ```
 # Validation Report
 
 ## Heading Numbering
-✓ All headings correctly numbered
-[or list of issues with file:line]
-
-## TODO/FIXME Comments
-Found 15 total:
-- High priority: 3
-- Documentation: 8
-- Code: 4
-
-Top files:
-- docs/side_quests/debugging.md (5 items)
-- ...
-
-## Nextflow Scripts
-✓ All 23 scripts follow conventions
-[or list of non-compliant scripts]
-
+## TODO/FIXME Comments (count by priority, list top files)
+## Nextflow Scripts (conventions check)
 ## Orphaned Files
-Found 2 orphaned markdown files:
-- docs/old/deprecated.md
-- ...
-
 ## Admonitions
-✓ All admonitions properly formatted
-[or list of issues]
-
+## Code Block Highlights (from /check-highlights)
+## Inline Code Formatting (from /check-inline-code)
 ## Writing Style
-✓ No LLM-style patterns found
-[or list of issues with file:line, e.g.:]
-- docs/example.md:42: "Let's see how..." -> rephrase
-- docs/example.md:87: em-dash elaboration -> use period
-
 ## Summary
-[Overall assessment and recommended actions]
 ```
 
-For deep lesson reviews, add:
+For deep lesson reviews, add sections for: Structure, Formatting, Content Accuracy, Teaching Effectiveness, Cross-References, Examples & Code, Writing Style, Overall Assessment, Positive Aspects.
 
-```
-## Lesson Review: [lesson-name]
-
-### Structure
-[Assessment of structure with specific issues/successes]
-
-### Formatting
-[Assessment of formatting with specific issues/successes]
-
-### Content Accuracy
-[Assessment of technical content]
-
-### Teaching Effectiveness
-[Assessment of pedagogical quality]
-
-### Cross-References
-[Assessment of links and references]
-
-### Examples & Code
-[Assessment of code quality]
-
-### Writing Style
-[Assessment of tone and language patterns]
-
-### Overall Assessment
-[Summary with severity-organized issues and recommendations]
-
-### Positive Aspects
-[Things worth preserving]
-```
-
-## Notes
-
-- Use Grep and Glob tools for efficient searching
-- Run heading check script directly via Bash
-- Provide actionable next steps for any issues found
-- If no issues found, give clear confirmation
+**Important**: Always provide actionable next steps for any issues found. If no issues found, give clear confirmation.
