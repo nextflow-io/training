@@ -24,15 +24,32 @@ additional_information:
 
 **Nextflow Run is a hands-on introduction to running reproducible and scalable data analysis workflows.**
 
-Working through practical examples and guided exercises, you will learn the fundamentals of using Nextflow, including how to execute pipelines, manage files and software dependencies, parallelize execution effortlessly, and run workflows across different computing environments.
-
-You will take away the skills and confidence to run and configure workflows with Nextflow.
+You will learn how to execute existing pipelines, interpret their outputs, configure them for different computing environments, and troubleshoot common issues.
+By the end, you'll have the skills and confidence to run Nextflow pipelines created by others, such as those from [nf-core](https://nf-co.re).
 
 <!-- additional_information -->
 
 ## Course overview
 
-This course is designed to be hands-on, with goal-oriented exercises structured to introduce information gradually.
+### Which course should I take?
+
+We offer two introductory Nextflow courses with different goals:
+
+| Course                                           | Goal                       | You will...                                                                      |
+| ------------------------------------------------ | -------------------------- | -------------------------------------------------------------------------------- |
+| **Nextflow Run** (this course)                   | Run existing pipelines     | Learn to execute, configure, and troubleshoot pipelines created by others        |
+| **[Hello Nextflow](../hello_nextflow/index.md)** | Develop your own pipelines | Build pipelines from scratch, learning channels, operators, and modules in depth |
+
+Both courses use the same training environment and cover some overlapping ground (running pipelines, configuration basics), so you don't need to take both unless you want comprehensive coverage.
+
+### What you'll do
+
+This course is hands-on, with goal-oriented exercises structured to introduce information gradually.
+It's named after the core Nextflow command:
+
+```bash
+nextflow run <pipeline>
+```
 
 You will execute several versions of a Nextflow pipeline that processes text inputs.
 You'll start with a simple version that consists of a single step, and eventually progress to a multi-step version that takes a CSV file of tabular text inputs, runs a few transformation steps, and outputs a single text file containing an ASCII picture of a character saying the transformed text.
