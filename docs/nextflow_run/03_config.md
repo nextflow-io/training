@@ -1415,6 +1415,8 @@ When parameter values are set in both the workflow file and nextflow.config, whi
 - [x] The configuration file value
 - [ ] The first value encountered
 - [ ] It causes an error
+
+Learn more: [Set up values in nextflow.config](03_config.md#11-set-up-values-in-nextflowconfig)
 </quiz>
 
 <quiz>
@@ -1423,6 +1425,8 @@ What is the syntax difference between setting a parameter default in a workflow 
 - [x] Workflow uses typed declaration (param: Type = value), config uses assignment (param = value)
 - [ ] Config uses typed declaration, workflow uses assignment
 - [ ] Only config files can set default values
+
+Learn more: [Set up values in nextflow.config](03_config.md#11-set-up-values-in-nextflowconfig)
 </quiz>
 
 <quiz>
@@ -1431,6 +1435,8 @@ How do you specify a parameter file when running a workflow?
 - [ ] -config params.yaml
 - [x] -params-file params.yaml
 - [ ] --input-params params.yaml
+
+Learn more: [Use a parameter file](03_config.md#13-use-a-parameter-file)
 </quiz>
 
 <quiz>
@@ -1439,6 +1445,8 @@ What does the `outputDir` configuration option control?
 - [x] The base path where workflow outputs are published
 - [ ] The directory for log files
 - [ ] The location of module files
+
+Learn more: [Customize the outputDir directory name](03_config.md#21-customize-the-outputdir-directory-name)
 </quiz>
 
 <quiz>
@@ -1447,6 +1455,8 @@ How do you reference a process name dynamically in output path configuration?
 - [ ] process.name
 - [x] { processName.name }
 - [ ] @processName
+
+Learn more: [Organize outputs by process](03_config.md#22-organize-outputs-by-process)
 </quiz>
 
 <quiz>
@@ -1455,6 +1465,8 @@ If both Docker and Conda are enabled and a process has both directives, which is
 - [ ] Conda
 - [ ] The first one defined in the process
 - [ ] It causes an error
+
+Learn more: [Select a software packaging technology](03_config.md#3-select-a-software-packaging-technology)
 </quiz>
 
 <quiz>
@@ -1463,6 +1475,8 @@ What is the default executor in Nextflow?
 - [ ] slurm
 - [ ] kubernetes
 - [ ] aws
+
+Learn more: [Select an execution platform](03_config.md#4-select-an-execution-platform)
 </quiz>
 
 <quiz>
@@ -1471,6 +1485,8 @@ What command generates a resource utilization report?
 - [ ] nextflow run workflow.nf -with-stats
 - [x] nextflow run workflow.nf -with-report report.html
 - [ ] nextflow run workflow.nf -profile report
+
+Learn more: [Run the workflow to generate a resource utilization report](03_config.md#51-run-the-workflow-to-generate-a-resource-utilization-report)
 </quiz>
 
 <quiz>
@@ -1479,6 +1495,8 @@ How do you set resource requirements for a specific process named 'cowpy' in the
 - [ ] process.cowpy.memory = '2.GB'
 - [x] process { withName: 'cowpy' { memory = '2.GB' } }
 - [ ] resources.cowpy.memory = '2.GB'
+
+Learn more: [Set resource allocations for a specific process](03_config.md#53-set-resource-allocations-for-a-specific-process)
 </quiz>
 
 <quiz>
@@ -1487,6 +1505,8 @@ What does the `resourceLimits` directive do?
 - [ ] Allocates resources to processes
 - [x] Caps the maximum resources that can be requested
 - [ ] Monitors resource usage in real-time
+
+Learn more: [Add resource limits](03_config.md#55-add-resource-limits)
 </quiz>
 
 <quiz>
@@ -1495,6 +1515,8 @@ How do you specify multiple profiles in a single command?
 - [ ] -profiles profile1,profile2
 - [x] -profile profile1,profile2
 - [ ] --profile profile1 --profile profile2
+
+Learn more: [Use profiles to switch between preset configurations](03_config.md#6-use-profiles-to-switch-between-preset-configurations)
 </quiz>
 
 <quiz>
@@ -1503,6 +1525,8 @@ What command shows the fully resolved configuration that Nextflow would use?
 - [ ] nextflow settings
 - [x] nextflow config
 - [ ] nextflow resolve
+
+Learn more: [Use nextflow config to see the resolved configuration](03_config.md#63-use-nextflow-config-to-see-the-resolved-configuration)
 </quiz>
 
 <quiz>
@@ -1511,4 +1535,6 @@ What can profiles be used for? (Select all that apply)
 - [x] Setting resource limits for different environments
 - [x] Providing test parameters for easy workflow testing
 - [ ] Defining new processes
+
+Learn more: [Use profiles to switch between preset configurations](03_config.md#6-use-profiles-to-switch-between-preset-configurations)
 </quiz>

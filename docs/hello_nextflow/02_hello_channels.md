@@ -1348,6 +1348,8 @@ What is a channel in Nextflow?
 - [ ] A process definition
 - [x] A queue-like structure for passing data between processes
 - [ ] A configuration setting
+
+Learn more: [Create an input channel](02_hello_channels.md#11-create-an-input-channel)
 </quiz>
 
 <quiz>
@@ -1356,6 +1358,8 @@ What does channel.of() create?
 - [x] A queue channel with the specified elements
 - [ ] An empty channel
 - [ ] A file channel
+
+Learn more: [Create an input channel](02_hello_channels.md#11-create-an-input-channel)
 </quiz>
 
 <quiz>
@@ -1364,6 +1368,8 @@ When a channel contains multiple values, how does Nextflow handle process execut
 - [x] The process runs once for each value in the channel
 - [ ] The process runs only with the first value
 - [ ] The process runs only with the last value
+
+Learn more: [Modify the workflow to run on multiple input values](02_hello_channels.md#2-modify-the-workflow-to-run-on-multiple-input-values)
 </quiz>
 
 <quiz>
@@ -1372,6 +1378,8 @@ What does the flatten() operator do?
 - [ ] Sorts channel elements
 - [x] Unpacks arrays into individual elements
 - [ ] Removes duplicate elements
+
+Learn more: [Add the flatten() operator](02_hello_channels.md#321-add-the-flatten-operator)
 </quiz>
 
 <quiz>
@@ -1380,6 +1388,8 @@ What is the purpose of the view() operator?
 - [ ] To transform channel elements
 - [x] To inspect and debug channel contents
 - [ ] To save channel contents to a file
+
+Learn more: [Use view() to inspect the channel contents](02_hello_channels.md#14-use-view-to-inspect-the-channel-contents)
 </quiz>
 
 <quiz>
@@ -1388,6 +1398,8 @@ What does splitCsv() do?
 - [ ] Splits a string by commas
 - [x] Parses a CSV file into arrays representing each row
 - [ ] Merges multiple CSV files
+
+Learn more: [Use the splitCsv() operator to parse the file](02_hello_channels.md#42-use-the-splitcsv-operator-to-parse-the-file)
 </quiz>
 
 <quiz>
@@ -1396,6 +1408,8 @@ What is the purpose of the map() operator?
 - [ ] To combine multiple channels
 - [x] To transform each element in a channel
 - [ ] To count elements in a channel
+
+Learn more: [Use the map() operator to extract the greetings](02_hello_channels.md#43-use-the-map-operator-to-extract-the-greetings)
 </quiz>
 
 <quiz>
@@ -1404,4 +1418,6 @@ Why is it important to use dynamic output filenames when processing multiple inp
 - [ ] To reduce disk space
 - [x] To prevent output files from overwriting each other
 - [ ] To enable resume functionality
+
+Learn more: [Ensure the output file names will be unique](02_hello_channels.md#22-ensure-the-output-file-names-will-be-unique)
 </quiz>

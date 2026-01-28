@@ -1554,6 +1554,8 @@ Why does Nextflow create a separate task directory for each process call?
 - [ ] To reduce memory usage
 - [x] To isolate executions and avoid collisions between outputs
 - [ ] To enable parallel file compression
+
+Learn more: [Find the original outputs and logs](02_pipeline.md#13-find-the-original-outputs-and-logs)
 </quiz>
 
 <quiz>
@@ -1562,6 +1564,8 @@ What does the `-ansi-log false` option do when running a workflow?
 - [ ] Removes color from the output
 - [x] Shows all task directory paths instead of condensing them on one line
 - [ ] Enables verbose debugging mode
+
+Learn more: [Make the terminal show more details](02_pipeline.md#132-make-the-terminal-show-more-details)
 </quiz>
 
 <quiz>
@@ -1570,6 +1574,8 @@ In the code `channel.fromPath(params.input).splitCsv().map { line -> line[0] }`,
 - [ ] Sorts the lines alphabetically
 - [x] Extracts the first column from each CSV row
 - [ ] Counts the number of lines
+
+Learn more: [Loading the input data from the CSV](02_pipeline.md#141-loading-the-input-data-from-the-csv)
 </quiz>
 
 <quiz>
@@ -1578,6 +1584,8 @@ Why is it important to include the input value in output filenames (e.g., `${gre
 - [ ] To enable resume functionality
 - [x] To prevent output files from overwriting each other when processing multiple inputs
 - [ ] To make files easier to compress
+
+Learn more: [How the outputs are named](02_pipeline.md#143-how-the-outputs-are-named)
 </quiz>
 
 <quiz>
@@ -1586,6 +1594,8 @@ What is the purpose of the `include` statement in a modularized workflow?
 - [x] To import a process definition from an external module file
 - [ ] To include configuration settings
 - [ ] To add documentation comments
+
+Learn more: [Running modularized pipelines](02_pipeline.md#3-running-modularized-pipelines)
 </quiz>
 
 <quiz>
@@ -1594,6 +1604,8 @@ When you modularize a workflow and run it with -resume, what happens?
 - [ ] All tasks must be re-executed
 - [x] Caching works normally based on the generated job scripts
 - [ ] Only the main workflow file is cached
+
+Learn more: [Run the workflow](02_pipeline.md#32-run-the-workflow)
 </quiz>
 
 <quiz>
@@ -1602,6 +1614,8 @@ What does the `container` directive in a process definition specify?
 - [ ] The maximum memory allocation
 - [x] The container image URI to use for running the process
 - [ ] The output file format
+
+Learn more: [Use a container in a workflow](02_pipeline.md#42-use-a-container-in-a-workflow)
 </quiz>
 
 <quiz>
@@ -1610,6 +1624,8 @@ In the `.command.run` file, what does the `nxf_launch` function contain?
 - [ ] The workflow parameters
 - [x] The docker run command with volume mounts and container settings
 - [ ] The process input declarations
+
+Learn more: [Inspect how Nextflow launched the containerized task](02_pipeline.md#424-inspect-how-nextflow-launched-the-containerized-task)
 </quiz>
 
 <quiz>
@@ -1618,4 +1634,6 @@ What does Nextflow automatically handle when running a containerized process? (S
 - [x] Mounting the work directory into the container
 - [x] Running the process script inside the container
 - [x] Cleaning up the container instance after execution
+
+Learn more: [Using containerized software](02_pipeline.md#4-using-containerized-software)
 </quiz>

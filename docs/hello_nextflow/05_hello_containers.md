@@ -1115,6 +1115,8 @@ What does the -v flag do in a docker run command?
 - [ ] Validates the container
 - [x] Mounts a volume from the host system into the container
 - [ ] Specifies the version of the container
+
+Learn more: [Mount data into the container](05_hello_containers.md#134-mount-data-into-the-container)
 </quiz>
 
 <quiz>
@@ -1123,6 +1125,8 @@ Why do you need to mount volumes when using containers?
 - [ ] To save disk space
 - [x] Because containers are isolated from the host filesystem by default
 - [ ] To enable networking
+
+Learn more: [Mount data into the container](05_hello_containers.md#134-mount-data-into-the-container)
 </quiz>
 
 <quiz>
@@ -1131,6 +1135,8 @@ How do you specify a container for a Nextflow process?
 - [ ] image 'container-uri'
 - [x] container 'container-uri'
 - [ ] use 'container-uri'
+
+Learn more: [Specify a container for cowpy](05_hello_containers.md#231-specify-a-container-for-cowpy)
 </quiz>
 
 <quiz>
@@ -1139,6 +1145,8 @@ How do you enable Docker in Nextflow?
 - [ ] Set process.docker = true in the config
 - [x] Set docker.enabled = true in the config
 - [ ] Docker is enabled by default
+
+Learn more: [Enable use of Docker via the nextflow.config file](05_hello_containers.md#232-enable-use-of-docker-via-the-nextflowconfig-file)
 </quiz>
 
 <quiz>
@@ -1147,4 +1155,6 @@ What does Nextflow automatically handle when running a process in a container? (
 - [x] Mounting the work directory
 - [x] Running the process script inside the container
 - [x] Cleaning up the container instance after execution
+
+Learn more: [Inspect how Nextflow launched the containerized task](05_hello_containers.md#234-inspect-how-nextflow-launched-the-containerized-task)
 </quiz>

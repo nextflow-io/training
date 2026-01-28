@@ -690,6 +690,8 @@ In the console output line `[a3/7be2fa] sayHello | 1 of 1 ✔`, what does `[a3/7
 - [ ] A unique run identifier
 - [x] The truncated path to the task's work directory
 - [ ] The checksum of the output file
+
+Learn more: [Find the original output and logs in the work/ directory](01_basics.md#23-find-the-original-output-and-logs-in-the-work-directory)
 </quiz>
 
 <quiz>
@@ -698,6 +700,8 @@ What is the purpose of the `.command.sh` file in a task directory?
 - [x] It shows the actual command that was executed by the process
 - [ ] It contains error messages from failed tasks
 - [ ] It lists input files staged for the task
+
+Learn more: [Find the original output and logs in the work/ directory](01_basics.md#23-find-the-original-output-and-logs-in-the-work-directory)
 </quiz>
 
 <quiz>
@@ -706,6 +710,8 @@ What happens to published results when you re-run a workflow without -resume?
 - [x] They get overwritten by the new execution
 - [ ] Nextflow prevents overwriting and fails
 - [ ] They are automatically backed up
+
+Learn more: [Re-run the workflow with different greetings](01_basics.md#24-re-run-the-workflow-with-different-greetings)
 </quiz>
 
 <quiz>
@@ -714,6 +720,8 @@ When using -resume, what does the `cached: 1` indicator in the console output me
 - [ ] The task failed and was retried
 - [x] Nextflow reused results from a previous identical execution
 - [ ] The task is waiting in a queue
+
+Learn more: [Re-launch a workflow with -resume](01_basics.md#41-re-launch-a-workflow-with--resume)
 </quiz>
 
 <quiz>
@@ -722,6 +730,8 @@ Where does Nextflow store the execution history that `nextflow log` displays?
 - [ ] In the work directory
 - [x] In the .nextflow/history file
 - [ ] In nextflow.config
+
+Learn more: [Inspect the log of past executions](01_basics.md#42-inspect-the-log-of-past-executions)
 </quiz>
 
 <quiz>
@@ -730,6 +740,8 @@ What is the purpose of the `params` block in a workflow file?
 - [ ] To configure the executor
 - [x] To declare and type workflow input parameters
 - [ ] To specify output publishing options
+
+Learn more: [The params system of command-line parameters](01_basics.md#34-the-params-system-of-command-line-parameters)
 </quiz>
 
 <quiz>
@@ -738,6 +750,8 @@ In the workflow's `output` block, what does `mode 'copy'` do?
 - [x] Makes a full copy of files instead of symbolic links
 - [ ] Copies the workflow script to results
 - [ ] Enables incremental file copying
+
+Learn more: [The publish directive](01_basics.md#35-the-publish-directive)
 </quiz>
 
 <quiz>
@@ -746,4 +760,6 @@ What is the recommended flag to use with `nextflow clean` before actually deleti
 - [ ] -v (verbose) to see detailed output
 - [ ] -a (all) to select all directories
 - [ ] -q (quiet) to suppress warnings
+
+Learn more: [Delete older work directories](01_basics.md#43-delete-older-work-directories)
 </quiz>
