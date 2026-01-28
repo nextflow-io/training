@@ -1490,11 +1490,11 @@ Learn more: [5.1. Run the workflow to generate a resource utilization report](#5
 </quiz>
 
 <quiz>
-How do you set resource requirements for a specific process named 'cowpy' in the config file?
-- [ ] cowpy.memory = '2.GB'
-- [ ] process.cowpy.memory = '2.GB'
-- [x] process { withName: 'cowpy' { memory = '2.GB' } }
-- [ ] resources.cowpy.memory = '2.GB'
+How do you set resource requirements for a specific process named `cowpy` in the config file?
+- [ ] `#!groovy cowpy.memory = '2.GB'`
+- [ ] `#!groovy process.cowpy.memory = '2.GB'`
+- [x] `#!groovy process { withName: 'cowpy' { memory = '2.GB' } }`
+- [ ] `#!groovy resources.cowpy.memory = '2.GB'`
 
 Learn more: [5.3. Set resource allocations for a specific process](#53-set-resource-allocations-for-a-specific-process)
 </quiz>

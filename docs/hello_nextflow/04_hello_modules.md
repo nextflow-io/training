@@ -484,10 +484,11 @@ Learn more: [1. Create a directory to store modules](#1-create-a-directory-to-st
 
 <quiz>
 What is the correct syntax to import a module?
-- [ ] import { processName } from './modules/processName.nf'
-- [ ] require { processName } from './modules/processName.nf'
-- [x] include { processName } from './modules/processName.nf'
-- [ ] load { processName } from './modules/processName.nf'
+
+- [ ] `#!groovy import { SAYHELLO } from './modules/sayhello.nf'`
+- [ ] `#!groovy require { SAYHELLO } from './modules/sayhello.nf'`
+- [x] `#!groovy include { SAYHELLO } from './modules/sayhello.nf'`
+- [ ] `#!groovy load { SAYHELLO } from './modules/sayhello.nf'`
 
 Learn more: [2.3. Add an import declaration](#23-add-an-import-declaration-before-the-workflow-block)
 </quiz>

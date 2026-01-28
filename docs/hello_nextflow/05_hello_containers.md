@@ -1140,11 +1140,11 @@ Learn more: [2.3.1. Specify a container for cowpy](#231-specify-a-container-for-
 </quiz>
 
 <quiz>
-How do you enable Docker in Nextflow?
-- [ ] Add `--docker` to the command line
-- [ ] Set `process.docker = true` in the config
-- [x] Set `docker.enabled = true` in the config
-- [ ] Docker is enabled by default
+Which `nextflow.config` setting enables Docker for your workflow?
+- [ ] `#!groovy process.docker = true`
+- [x] `#!groovy docker.enabled = true`
+- [ ] `#!groovy container.engine = 'docker'`
+- [ ] `#!groovy docker.activate = true`
 
 Learn more: [2.3.2. Enable use of Docker via the `nextflow.config` file](#232-enable-use-of-docker-via-the-nextflowconfig-file)
 </quiz>

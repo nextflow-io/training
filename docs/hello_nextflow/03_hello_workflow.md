@@ -1111,11 +1111,20 @@ Learn more: [1.4. Pass the output of the first process to the second process](#1
 </quiz>
 
 <quiz>
-What does the `collect()` operator do?
-- [ ] Filters elements from a channel
-- [ ] Splits a channel into multiple channels
-- [x] Gathers all elements from a channel into a single list
-- [ ] Counts the number of elements in a channel
+Which operator should replace `???` to gather all outputs into a single list for the downstream process?
+
+```groovy hl_lines="4"
+workflow {
+    greetings_ch = Channel.of('Hello', 'Bonjour', 'Hola')
+    SAYHELLO(greetings_ch)
+    GATHER_ALL(SAYHELLO.out.???)
+}
+```
+
+- [ ] `flatten()`
+- [x] `collect()`
+- [ ] `mix()`
+- [ ] `join()`
 
 Learn more: [2.4. Use an operator to collect the greetings into a single input](#24-use-an-operator-to-collect-the-greetings-into-a-single-input)
 </quiz>

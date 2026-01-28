@@ -1163,11 +1163,24 @@ What command is used to run a Nextflow workflow?
 </quiz>
 
 <quiz>
-What does the work directory contain? (Select all that apply)
-- [x] Temporary files created during execution
-- [x] Task metadata files like `.command.sh` and `.exitcode`
-- [x] Process outputs before publishing
-- [ ] The original workflow script
+Looking at a task's work directory, which file contains the actual command that was executed?
+
+```
+work/a3/7be2fa.../
+├── .command.begin
+├── .command.err
+├── .command.log
+├── .command.out
+├── .command.run
+├── .command.sh
+├── .exitcode
+└── output.txt
+```
+
+- [ ] `.command.run`
+- [x] `.command.sh`
+- [ ] `.command.log`
+- [ ] `.command.out`
 
 Learn more: [1.2.2. Find the output and logs in the `work` directory](#122-find-the-output-and-logs-in-the-work-directory)
 </quiz>

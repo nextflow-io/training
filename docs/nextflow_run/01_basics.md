@@ -715,11 +715,16 @@ Learn more: [2.4. Re-run the workflow with different greetings](#24-re-run-the-w
 </quiz>
 
 <quiz>
-When using `-resume`, what does the `cached: 1` indicator in the console output mean?
-- [ ] The output was loaded from a backup
-- [ ] The task failed and was retried
-- [x] Nextflow reused results from a previous identical execution
+What does this console output indicate?
+
+```console
+[skipped  ] process > sayHello (1) [100%] 1 of 1, cached: 1 ✔
+```
+
+- [ ] The task failed and was skipped
 - [ ] The task is waiting in a queue
+- [x] Nextflow reused results from a previous identical execution
+- [ ] The task was manually cancelled
 
 Learn more: [4.1. Re-launch a workflow with `-resume`](#41-re-launch-a-workflow-with--resume)
 </quiz>

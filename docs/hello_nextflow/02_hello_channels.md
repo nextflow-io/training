@@ -1353,11 +1353,17 @@ Learn more: [1.1. Create an input channel](#11-create-an-input-channel)
 </quiz>
 
 <quiz>
-What does `channel.of()` create?
-- [ ] A value channel
-- [x] A queue channel with the specified elements
-- [ ] An empty channel
-- [ ] A file channel
+What will this code output?
+
+```groovy
+channel.of('Hello', 'Bonjour', 'Hola')
+    .view()
+```
+
+- [ ] `['Hello', 'Bonjour', 'Hola']` (a single list)
+- [x] Each element on a separate line: `Hello`, `Bonjour`, `Hola`
+- [ ] Nothing (channels don't print by default)
+- [ ] An error (invalid syntax)
 
 Learn more: [1.1. Create an input channel](#11-create-an-input-channel)
 </quiz>

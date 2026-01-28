@@ -1575,10 +1575,10 @@ What is the default memory allocation for Nextflow processes?
 
 <quiz>
 How do you set resource requirements for a specific process in the config file?
-- [ ] processName.memory = '4 GB'
-- [ ] process.memory.processName = '4 GB'
-- [x] process { withName: 'processName' { memory = '4 GB' } }
-- [ ] resources.processName.memory = '4 GB'
+- [ ] `#!groovy processName.memory = '4 GB'`
+- [ ] `#!groovy process.memory.processName = '4 GB'`
+- [x] `#!groovy process { withName: 'processName' { memory = '4 GB' } }`
+- [ ] `#!groovy resources.processName.memory = '4 GB'`
 
 Learn more: [5.3. Set resource allocations for a specific process](#53-set-resource-allocations-for-a-specific-process)
 </quiz>

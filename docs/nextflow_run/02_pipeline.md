@@ -130,6 +130,7 @@ nextflow run 2a-inputs.nf --input data/greetings.csv -ansi-log false
     ```
 
 This time we see all three process runs and their associated work subdirectories listed in the output.
+Disabling ANSI logging also prevented Nextflow from using colours in the terminal output.
 
 Notice that the way the status is reported is a bit different between the two logging modes.
 In the condensed mode, Nextflow reports whether calls were completed successfully or not.
@@ -1561,11 +1562,20 @@ Learn more: [1.3. Find the original outputs and logs](#13-find-the-original-outp
 <quiz>
 What does the `-ansi-log false` option do when running a workflow?
 - [ ] Disables all console output
-- [ ] Removes color from the output
+- [x] Removes color from the output
 - [x] Shows all task directory paths instead of condensing them on one line
 - [ ] Enables verbose debugging mode
 
 Learn more: [1.3.2. Make the terminal show more details](#132-make-the-terminal-show-more-details)
+
+You can also use either of the following environment variables if you prefer this style:
+
+```bash
+export NXF_ANSI_LOG=0
+# or
+export NO_COLOR=1
+```
+
 </quiz>
 
 <quiz>
