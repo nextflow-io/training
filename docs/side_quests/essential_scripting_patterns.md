@@ -766,7 +766,7 @@ process FASTP {
     tuple val(meta), path(reads)
 
     output:
-    tuple val(sample_id), path("*_trimmed*.fastq.gz"), emit: reads
+    tuple val(meta), path("*_trimmed*.fastq.gz"), emit: reads
 
     script:
     """
@@ -1126,21 +1126,16 @@ But what if we want to add information about when and where the processing occur
         """
     ```
 
-If you run this, you'll notice an error or unexpected behavior - Nextflow tries to interpret `$(hostname)` as a Nextflow variable that doesn't exist.
-
-<!-- TODO: output -->
+If you run this, you'll notice an error - Nextflow tries to interpret `${USER}` as a Nextflow variable that doesn't exist.
 
 ??? failure "Command output"
 
     ```console
-    unknown recognition error type: groovyjarjarantlr4.v4.runtime.LexerNoViableAltException
-    ERROR ~ Module compilation error
-    - file : /workspaces/training/side-quests/essential_scripting_patterns/modules/generate_report.nf
-    - cause: token recognition error at: '(' @ line 16, column 22.
-          echo "Hostname: $(hostname)" >> ${meta.id}_report.txt
-                            ^
+    Error modules/generate_report.nf:15:27: `USER` is not defined
+    │  15 |     echo "Processed by: ${USER}" >> ${meta.id}_report.txt
+    ╰     |                           ^^^^
 
-    1 error
+    ERROR ~ Script compilation failed
     ```
 
 We need to escape it so Bash can handle it instead.
@@ -1528,7 +1523,7 @@ Include the new from in `modules/trimgalore.nf`:
     ```groovy title="main.nf" linenums="28" hl_lines="5-12"
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
-            .map(separateMetadata)
+            .map { row -> separateMetadata(row) }
 
         trim_branches = ch_samples
             .branch { meta, reads ->
@@ -1546,7 +1541,7 @@ Include the new from in `modules/trimgalore.nf`:
     ```groovy title="main.nf" linenums="28" hl_lines="5"
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
-            .map(separateMetadata)
+            .map { row -> separateMetadata(row) }
 
         ch_fastp = FASTP(ch_samples)
         GENERATE_REPORT(ch_samples)
@@ -1591,7 +1586,7 @@ Add the following before the branch operation:
     ```groovy title="main.nf" linenums="28" hl_lines="5-11"
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
-            .map(separateMetadata)
+            .map { row -> separateMetadata(row) }
 
         // Filter out invalid or low-quality samples
         ch_valid_samples = ch_samples
@@ -1611,7 +1606,7 @@ Add the following before the branch operation:
     ```groovy title="main.nf" linenums="28" hl_lines="5"
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
-            .map(separateMetadata)
+            .map { row -> separateMetadata(row) }
 
         trim_branches = ch_samples
             .branch { meta, reads ->
