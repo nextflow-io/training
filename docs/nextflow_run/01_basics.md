@@ -764,8 +764,14 @@ The best places to look are:
 - **Documentation**: Check the pipeline's README or website for parameter descriptions
 - **Source code**: Look at the `params` block in the main workflow file or `nextflow.config`
 
-Some pipelines (particularly nf-core pipelines) use the [nf-schema](https://nextflow-io.github.io/nf-schema/) plugin, which enables a `--help` flag that displays all available parameters.
-However, not all pipelines support this feature.
+Some pipelines (particularly nf-core pipelines) use the [nf-schema](https://nextflow-io.github.io/nf-schema/) plugin, which enables a `--help` flag.
+Try it with an nf-core pipeline:
+
+```bash
+nextflow run nf-core/demo --help
+```
+
+You should see a list of all available parameters grouped by category.
 
 ### 5.4. Update and manage cached pipelines
 

@@ -537,9 +537,20 @@ Processes can accept multiple inputs (comma-separated in the call) and produce m
 
 Named outputs are referenced as `processName.out.outputName` (e.g., `collectGreetings.out.outfile`).
 
-#### 2.3.5. Default parameter values
+#### 2.3.5. An input parameter can have a default value
 
-Parameters can have default values in the `params` block:
+You may have noticed that `collectGreetings` takes a second input, `params.batch`:
+
+```groovy title="2b-multistep.nf" linenums="77"
+    // collect all the greetings into one file
+    collectGreetings(convertToUpper.out.collect(), params.batch)
+```
+
+This causes the workflow to expect a CLI parameter named `--batch`.
+However, when we launched the workflow earlier, we didn't specify a `--batch` parameter.
+
+What's going on there?
+Have a look at the `params` block:
 
 ```groovy title="2b-multistep.nf" linenums="61" hl_lines="3"
 params {
@@ -548,8 +559,10 @@ params {
 }
 ```
 
-If you don't specify `--batch` on the command line, the default value `'batch'` is used.
-Try running the workflow with a custom batch name:
+There is a default value configured in the workflow, so we don't have to provide it.
+But if we do provide one on the command line, the value we specify will be used instead of the default.
+
+Try it:
 
 ```bash
 nextflow run 2b-multistep.nf --input data/greetings.csv --batch test
@@ -592,6 +605,8 @@ You should see new final outputs named with your custom batch name:
             ├── UPPER-Hello-output.txt
             └── UPPER-Holà-output.txt
     ```
+
+This is an aspect of input configuration, which we'll cover in more detail in Part 3, but for now the important thing is to know that input parameters can be given default values.
 
 #### 2.3.6. Published outputs can be organized
 
