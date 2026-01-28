@@ -1110,11 +1110,13 @@ What is the difference between a container image and a container instance?
 </quiz>
 
 <quiz>
-What does the -v flag do in a docker run command?
+What does the `-v` flag do in a `docker run` command?
 - [ ] Enables verbose output
 - [ ] Validates the container
 - [x] Mounts a volume from the host system into the container
 - [ ] Specifies the version of the container
+
+Learn more: [1.3.4. Mount data into the container](#134-mount-data-into-the-container)
 </quiz>
 
 <quiz>
@@ -1123,22 +1125,28 @@ Why do you need to mount volumes when using containers?
 - [ ] To save disk space
 - [x] Because containers are isolated from the host filesystem by default
 - [ ] To enable networking
+
+Learn more: [1.3.4. Mount data into the container](#134-mount-data-into-the-container)
 </quiz>
 
 <quiz>
 How do you specify a container for a Nextflow process?
-- [ ] docker 'container-uri'
-- [ ] image 'container-uri'
-- [x] container 'container-uri'
-- [ ] use 'container-uri'
+- [ ] `docker 'container-uri'`
+- [ ] `image 'container-uri'`
+- [x] `container 'container-uri'`
+- [ ] `use 'container-uri'`
+
+Learn more: [2.3.1. Specify a container for cowpy](#231-specify-a-container-for-cowpy)
 </quiz>
 
 <quiz>
-How do you enable Docker in Nextflow?
-- [ ] Add --docker to the command line
-- [ ] Set process.docker = true in the config
-- [x] Set docker.enabled = true in the config
-- [ ] Docker is enabled by default
+Which `nextflow.config` setting enables Docker for your workflow?
+- [ ] `#!groovy process.docker = true`
+- [x] `#!groovy docker.enabled = true`
+- [ ] `#!groovy container.engine = 'docker'`
+- [ ] `#!groovy docker.activate = true`
+
+Learn more: [2.3.2. Enable use of Docker via the `nextflow.config` file](#232-enable-use-of-docker-via-the-nextflowconfig-file)
 </quiz>
 
 <quiz>
@@ -1147,4 +1155,6 @@ What does Nextflow automatically handle when running a process in a container? (
 - [x] Mounting the work directory
 - [x] Running the process script inside the container
 - [x] Cleaning up the container instance after execution
+
+Learn more: [2.3.4. Inspect how Nextflow launched the containerized task](#234-inspect-how-nextflow-launched-the-containerized-task)
 </quiz>

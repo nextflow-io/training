@@ -1092,10 +1092,12 @@ When you're ready, move on to [**Part 4: Hello Modules**](./04_hello_modules.md)
 
 <quiz>
 How do you access the output of a process in the workflow block?
-- [ ] process.output
-- [ ] output.processName
-- [x] processName.out
-- [ ] get(processName)
+- [ ] `process.output`
+- [ ] `output.processName`
+- [x] `processName.out`
+- [ ] `get(processName)`
+
+Learn more: [1.4. Pass the output of the first process to the second process](#14-pass-the-output-of-the-first-process-to-the-second-process)
 </quiz>
 
 <quiz>
@@ -1104,38 +1106,57 @@ What determines the order of process execution in Nextflow?
 - [ ] Alphabetical order by process name
 - [x] Data dependencies between processes
 - [ ] Random order for parallel execution
+
+Learn more: [1.4. Pass the output of the first process to the second process](#14-pass-the-output-of-the-first-process-to-the-second-process)
 </quiz>
 
 <quiz>
-What does the collect() operator do?
-- [ ] Filters elements from a channel
-- [ ] Splits a channel into multiple channels
-- [x] Gathers all elements from a channel into a single list
-- [ ] Counts the number of elements in a channel
+Which operator should replace `???` to gather all outputs into a single list for the downstream process?
+
+```groovy hl_lines="4"
+workflow {
+    greetings_ch = Channel.of('Hello', 'Bonjour', 'Hola')
+    SAYHELLO(greetings_ch)
+    GATHER_ALL(SAYHELLO.out.???)
+}
+```
+
+- [ ] `flatten()`
+- [x] `collect()`
+- [ ] `mix()`
+- [ ] `join()`
+
+Learn more: [2.4. Use an operator to collect the greetings into a single input](#24-use-an-operator-to-collect-the-greetings-into-a-single-input)
 </quiz>
 
 <quiz>
-When should you use the collect() operator?
+When should you use the `collect()` operator?
 - [ ] When you want to process items in parallel
 - [ ] When you need to filter channel contents
 - [x] When a downstream process needs all items from an upstream process
 - [ ] When you want to split data across multiple processes
+
+Learn more: [2.4. Use an operator to collect the greetings into a single input](#24-use-an-operator-to-collect-the-greetings-into-a-single-input)
 </quiz>
 
 <quiz>
 How do you access a named output from a process?
-- [ ] processName.outputName
-- [ ] processName.get(outputName)
-- [x] processName.out.outputName
-- [ ] output.processName.outputName
+- [ ] `processName.outputName`
+- [ ] `processName.get(outputName)`
+- [x] `processName.out.outputName`
+- [ ] `output.processName.outputName`
+
+Learn more: [4.1.2. Emit the report file and name outputs](#412-emit-the-report-file-and-name-outputs)
 </quiz>
 
 <quiz>
 What is the correct syntax for naming an output in a process?
-- [ ] name: outputName
-- [ ] output: outputName
-- [x] emit: outputName
-- [ ] label: outputName
+- [ ] `name: outputName`
+- [ ] `output: outputName`
+- [x] `emit: outputName`
+- [ ] `label: outputName`
+
+Learn more: [4.1.2. Emit the report file and name outputs](#412-emit-the-report-file-and-name-outputs)
 </quiz>
 
 <quiz>
@@ -1144,4 +1165,6 @@ When providing multiple inputs to a process, what must be true?
 - [ ] Inputs must be provided in alphabetical order
 - [x] The order of inputs must match the order defined in the input block
 - [ ] Only two inputs can be provided at a time
+
+Learn more: [3. Pass more than one input to a process](#3-pass-more-than-one-input-to-a-process)
 </quiz>

@@ -1531,10 +1531,10 @@ Head on to the final [course summary](./next_steps.md) to review what you learne
 
 <quiz>
 What is the name of the configuration file that Nextflow automatically loads?
-- [ ] config.nf
-- [ ] pipeline.config
-- [x] nextflow.config
-- [ ] workflow.config
+- [ ] `config.nf`
+- [ ] `pipeline.config`
+- [x] `nextflow.config`
+- [ ] `workflow.config`
 </quiz>
 
 <quiz>
@@ -1543,6 +1543,8 @@ What takes precedence when the same parameter is set in both the config file and
 - [x] The command line value
 - [ ] The first value encountered
 - [ ] Neither; it causes an error
+
+Learn more: [1.1. Move default values to `nextflow.config`](#11-move-default-values-to-nextflowconfig)
 </quiz>
 
 <quiz>
@@ -1559,6 +1561,8 @@ If both Docker and Conda are enabled and a process has both directives, which is
 - [ ] Conda
 - [ ] The first one defined
 - [ ] It causes an error
+
+Learn more: [3. Select a software packaging technology](#3-select-a-software-packaging-technology)
 </quiz>
 
 <quiz>
@@ -1571,42 +1575,52 @@ What is the default memory allocation for Nextflow processes?
 
 <quiz>
 How do you set resource requirements for a specific process in the config file?
-- [ ] processName.memory = '4 GB'
-- [ ] process.memory.processName = '4 GB'
-- [x] process { withName: 'processName' { memory = '4 GB' } }
-- [ ] resources.processName.memory = '4 GB'
+- [ ] `#!groovy processName.memory = '4 GB'`
+- [ ] `#!groovy process.memory.processName = '4 GB'`
+- [x] `#!groovy process { withName: 'processName' { memory = '4 GB' } }`
+- [ ] `#!groovy resources.processName.memory = '4 GB'`
+
+Learn more: [5.3. Set resource allocations for a specific process](#53-set-resource-allocations-for-a-specific-process)
 </quiz>
 
 <quiz>
 What command line option generates a resource utilization report?
-- [ ] -with-metrics
-- [ ] -with-stats
-- [x] -with-report
-- [ ] -with-profile
+- [ ] `-with-metrics`
+- [ ] `-with-stats`
+- [x] `-with-report`
+- [ ] `-with-profile`
+
+Learn more: [5.1. Run the workflow to generate a resource utilization report](#51-run-the-workflow-to-generate-a-resource-utilization-report)
 </quiz>
 
 <quiz>
-What does the resourceLimits directive do?
+What does the `resourceLimits` directive do?
 - [ ] Sets minimum resource requirements
 - [ ] Allocates resources to processes
 - [x] Caps the maximum resources that can be requested
 - [ ] Monitors resource usage
+
+Learn more: [5.5. Add resource limits](#55-add-resource-limits)
 </quiz>
 
 <quiz>
 What is the default executor in Nextflow?
-- [x] local
-- [ ] slurm
-- [ ] kubernetes
-- [ ] aws
+- [x] `local`
+- [ ] `slurm`
+- [ ] `kubernetes`
+- [ ] `aws`
+
+Learn more: [4. Select an execution platform](#4-select-an-execution-platform)
 </quiz>
 
 <quiz>
 How do you specify a parameter file when running Nextflow?
-- [ ] --params params.json
-- [ ] -config params.json
-- [x] -params-file params.json
-- [ ] --input params.json
+- [ ] `--params params.json`
+- [ ] `-config params.json`
+- [x] `-params-file params.json`
+- [ ] `--input params.json`
+
+Learn more: [1.3. Use a parameter file](#13-use-a-parameter-file)
 </quiz>
 
 <quiz>
@@ -1615,12 +1629,16 @@ What can profiles be used for? (Select all that apply)
 - [x] Setting resource limits for different environments
 - [x] Providing test parameters
 - [ ] Defining new processes
+
+Learn more: [6. Use profiles to switch between preset configurations](#6-use-profiles-to-switch-between-preset-configurations)
 </quiz>
 
 <quiz>
 How do you specify multiple profiles in a single command?
-- [ ] -profile profile1 -profile profile2
-- [ ] -profiles profile1,profile2
-- [x] -profile profile1,profile2
-- [ ] --profile profile1 --profile profile2
+- [ ] `-profile profile1 -profile profile2`
+- [ ] `-profiles profile1,profile2`
+- [x] `-profile profile1,profile2`
+- [ ] `--profile profile1 --profile profile2`
+
+Learn more: [6. Use profiles to switch between preset configurations](#6-use-profiles-to-switch-between-preset-configurations)
 </quiz>

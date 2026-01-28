@@ -130,6 +130,7 @@ nextflow run 2a-inputs.nf --input data/greetings.csv -ansi-log false
     ```
 
 This time we see all three process runs and their associated work subdirectories listed in the output.
+Disabling ANSI logging also prevented Nextflow from using colours in the terminal output.
 
 Notice that the way the status is reported is a bit different between the two logging modes.
 In the condensed mode, Nextflow reports whether calls were completed successfully or not.
@@ -1554,30 +1555,47 @@ Why does Nextflow create a separate task directory for each process call?
 - [ ] To reduce memory usage
 - [x] To isolate executions and avoid collisions between outputs
 - [ ] To enable parallel file compression
+
+Learn more: [1.3. Find the original outputs and logs](#13-find-the-original-outputs-and-logs)
 </quiz>
 
 <quiz>
 What does the `-ansi-log false` option do when running a workflow?
 - [ ] Disables all console output
-- [ ] Removes color from the output
+- [x] Removes color from the output
 - [x] Shows all task directory paths instead of condensing them on one line
 - [ ] Enables verbose debugging mode
+
+Learn more: [1.3.2. Make the terminal show more details](#132-make-the-terminal-show-more-details)
+
+You can also use either of the following environment variables if you prefer this style:
+
+```bash
+export NXF_ANSI_LOG=0
+# or
+export NO_COLOR=1
+```
+
 </quiz>
 
 <quiz>
-In the code `channel.fromPath(params.input).splitCsv().map { line -> line[0] }`, what does `.map { line -> line[0] }` do?
+In the code `#!groovy channel.fromPath(params.input).splitCsv().map { line -> line[0] }`, what does `#!groovy .map { line -> line[0] }` do?
 - [ ] Filters out empty lines
 - [ ] Sorts the lines alphabetically
 - [x] Extracts the first column from each CSV row
 - [ ] Counts the number of lines
+
+Learn more: [1.4.1. Loading the input data from the CSV](#141-loading-the-input-data-from-the-csv)
 </quiz>
 
 <quiz>
-Why is it important to include the input value in output filenames (e.g., `${greeting}-output.txt`)?
+Why is it important to include the input value in output filenames (e.g., `#!groovy "${greeting}-output.txt"`)?
 - [ ] To improve processing speed
 - [ ] To enable resume functionality
 - [x] To prevent output files from overwriting each other when processing multiple inputs
 - [ ] To make files easier to compress
+
+Learn more: [1.4.3. How the outputs are named](#143-how-the-outputs-are-named)
 </quiz>
 
 <quiz>
@@ -1586,14 +1604,18 @@ What is the purpose of the `include` statement in a modularized workflow?
 - [x] To import a process definition from an external module file
 - [ ] To include configuration settings
 - [ ] To add documentation comments
+
+Learn more: [3. Running modularized pipelines](#3-running-modularized-pipelines)
 </quiz>
 
 <quiz>
-When you modularize a workflow and run it with -resume, what happens?
+When you modularize a workflow and run it with `-resume`, what happens?
 - [ ] Caching is disabled for modular processes
 - [ ] All tasks must be re-executed
 - [x] Caching works normally based on the generated job scripts
 - [ ] Only the main workflow file is cached
+
+Learn more: [3.2. Run the workflow](#32-run-the-workflow)
 </quiz>
 
 <quiz>
@@ -1602,14 +1624,18 @@ What does the `container` directive in a process definition specify?
 - [ ] The maximum memory allocation
 - [x] The container image URI to use for running the process
 - [ ] The output file format
+
+Learn more: [4.2. Use a container in a workflow](#42-use-a-container-in-a-workflow)
 </quiz>
 
 <quiz>
 In the `.command.run` file, what does the `nxf_launch` function contain?
 - [ ] The Nextflow version information
 - [ ] The workflow parameters
-- [x] The docker run command with volume mounts and container settings
+- [x] The `docker run` command with volume mounts and container settings
 - [ ] The process input declarations
+
+Learn more: [4.2.4. Inspect how Nextflow launched the containerized task](#424-inspect-how-nextflow-launched-the-containerized-task)
 </quiz>
 
 <quiz>
@@ -1618,4 +1644,6 @@ What does Nextflow automatically handle when running a containerized process? (S
 - [x] Mounting the work directory into the container
 - [x] Running the process script inside the container
 - [x] Cleaning up the container instance after execution
+
+Learn more: [4. Using containerized software](#4-using-containerized-software)
 </quiz>

@@ -460,34 +460,41 @@ What is a module in Nextflow?
 - [x] A standalone file containing a single process definition
 - [ ] A workflow definition
 - [ ] A channel operator
+
+Learn more: [2. Create a module for `sayHello()`](#2-create-a-module-for-sayhello)
 </quiz>
 
 <quiz>
 What is the recommended naming convention for module files?
-- [ ] module_processName.nf
-- [ ] processName_module.nf
-- [x] processName.nf
-- [ ] mod_processName.nf
+- [ ] `module_processName.nf`
+- [ ] `processName_module.nf`
+- [x] `processName.nf`
+- [ ] `mod_processName.nf`
 </quiz>
 
 <quiz>
 Where should module files be stored?
 - [ ] In the same directory as the workflow
-- [ ] In a bin/ directory
-- [x] In a modules/ directory
-- [ ] In a lib/ directory
+- [ ] In a `bin/` directory
+- [x] In a `modules/` directory
+- [ ] In a `lib/` directory
+
+Learn more: [1. Create a directory to store modules](#1-create-a-directory-to-store-modules)
 </quiz>
 
 <quiz>
 What is the correct syntax to import a module?
-- [ ] import { processName } from './modules/processName.nf'
-- [ ] require { processName } from './modules/processName.nf'
-- [x] include { processName } from './modules/processName.nf'
-- [ ] load { processName } from './modules/processName.nf'
+
+- [ ] `#!groovy import { SAYHELLO } from './modules/sayhello.nf'`
+- [ ] `#!groovy require { SAYHELLO } from './modules/sayhello.nf'`
+- [x] `#!groovy include { SAYHELLO } from './modules/sayhello.nf'`
+- [ ] `#!groovy load { SAYHELLO } from './modules/sayhello.nf'`
+
+Learn more: [2.3. Add an import declaration](#23-add-an-import-declaration-before-the-workflow-block)
 </quiz>
 
 <quiz>
-What happens to the -resume functionality when using modules?
+What happens to the `-resume` functionality when using modules?
 - [ ] It no longer works
 - [ ] It requires additional configuration
 - [x] It works the same as before

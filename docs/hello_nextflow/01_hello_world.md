@@ -1140,6 +1140,8 @@ What are the minimum required components of a Nextflow process?
 - [x] Output and script blocks
 - [ ] Input, output, and script blocks
 - [ ] Only a script block
+
+Learn more: [1.1.1. The process definition](#111-the-process-definition)
 </quiz>
 
 <quiz>
@@ -1148,30 +1150,49 @@ What is the purpose of the output block in a process?
 - [ ] To save files to the work directory
 - [x] To declare expected outputs from the process
 - [ ] To define environment variables
+
+Learn more: [1.1.1. The process definition](#111-the-process-definition)
 </quiz>
 
 <quiz>
 What command is used to run a Nextflow workflow?
-- [ ] nextflow start
-- [ ] nextflow execute
-- [x] nextflow run
-- [ ] nextflow launch
+- [ ] `nextflow start`
+- [ ] `nextflow execute`
+- [x] `nextflow run`
+- [ ] `nextflow launch`
 </quiz>
 
 <quiz>
-What does the work directory contain? (Select all that apply)
-- [x] Temporary files created during execution
-- [x] Task metadata files like .command.sh and .exitcode
-- [x] Process outputs before publishing
-- [ ] The original workflow script
+Looking at a task's work directory, which file contains the actual command that was executed?
+
+```
+work/a3/7be2fa.../
+├── .command.begin
+├── .command.err
+├── .command.log
+├── .command.out
+├── .command.run
+├── .command.sh
+├── .exitcode
+└── output.txt
+```
+
+- [ ] `.command.run`
+- [x] `.command.sh`
+- [ ] `.command.log`
+- [ ] `.command.out`
+
+Learn more: [1.2.2. Find the output and logs in the `work` directory](#122-find-the-output-and-logs-in-the-work-directory)
 </quiz>
 
 <quiz>
-What does the -resume flag do?
+What does the `-resume` flag do?
 - [ ] Restarts the workflow from the beginning
 - [ ] Pauses the workflow
 - [x] Skips processes that have already completed successfully
 - [ ] Creates a backup of the workflow
+
+Learn more: [4.1. Re-launch a workflow with `-resume`](#41-re-launch-a-workflow-with--resume)
 </quiz>
 
 <quiz>
@@ -1180,20 +1201,24 @@ What is the default mode for publishing workflow outputs?
 - [x] Create symbolic links in the output directory
 - [ ] Move files to the output directory
 - [ ] Compress files in the output directory
+
+Learn more: [2.3. Set the publish mode to copy](#23-set-the-publish-mode-to-copy)
 </quiz>
 
 <quiz>
 How do you pass a parameter value to a Nextflow workflow from the command line?
-- [ ] -parameter value
-- [ ] --parameter:value
-- [x] --parameter value
-- [ ] -p parameter=value
+- [ ] `-parameter value`
+- [ ] `--parameter:value`
+- [x] `--parameter value`
+- [ ] `-p parameter=value`
+
+Learn more: [3.2. Set up a command-line parameter to capture user input](#32-set-up-a-command-line-parameter-to-capture-user-input)
 </quiz>
 
 <quiz>
 How do you reference a variable inside a Nextflow script block?
-- [ ] Use %variable% syntax
-- [x] Use ${variable} syntax
-- [ ] Use {{variable}} syntax
-- [ ] Use [variable] syntax
+- [ ] Use `%variable%` syntax
+- [x] Use `#!groovy ${variable}` syntax
+- [ ] Use `{{variable}}` syntax
+- [ ] Use `[variable]` syntax
 </quiz>

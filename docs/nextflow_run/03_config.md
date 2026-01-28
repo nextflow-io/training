@@ -1410,27 +1410,33 @@ Have fun!
 ## Quiz
 
 <quiz>
-When parameter values are set in both the workflow file and nextflow.config, which takes precedence?
+When parameter values are set in both the workflow file and `nextflow.config`, which takes precedence?
 - [ ] The workflow file value
 - [x] The configuration file value
 - [ ] The first value encountered
 - [ ] It causes an error
+
+Learn more: [1.1. Set up values in `nextflow.config`](#11-set-up-values-in-nextflowconfig)
 </quiz>
 
 <quiz>
 What is the syntax difference between setting a parameter default in a workflow file vs. a config file?
 - [ ] They use the same syntax
-- [x] Workflow uses typed declaration (param: Type = value), config uses assignment (param = value)
+- [x] Workflow uses typed declaration (`#!groovy param: Type = value`), config uses assignment (`#!groovy param = value`)
 - [ ] Config uses typed declaration, workflow uses assignment
 - [ ] Only config files can set default values
+
+Learn more: [1.1. Set up values in `nextflow.config`](#11-set-up-values-in-nextflowconfig)
 </quiz>
 
 <quiz>
 How do you specify a parameter file when running a workflow?
-- [ ] --params params.yaml
-- [ ] -config params.yaml
-- [x] -params-file params.yaml
-- [ ] --input-params params.yaml
+- [ ] `--params params.yaml`
+- [ ] `-config params.yaml`
+- [x] `-params-file params.yaml`
+- [ ] `--input-params params.yaml`
+
+Learn more: [1.3. Use a parameter file](#13-use-a-parameter-file)
 </quiz>
 
 <quiz>
@@ -1439,14 +1445,18 @@ What does the `outputDir` configuration option control?
 - [x] The base path where workflow outputs are published
 - [ ] The directory for log files
 - [ ] The location of module files
+
+Learn more: [2.1. Customize the outputDir directory name](#21-customize-the-outputdir-directory-name)
 </quiz>
 
 <quiz>
 How do you reference a process name dynamically in output path configuration?
-- [ ] ${processName}
-- [ ] process.name
-- [x] { processName.name }
-- [ ] @processName
+- [ ] `#!groovy ${processName}`
+- [ ] `process.name`
+- [x] `#!groovy { meta.id }`
+- [ ] `@processName`
+
+Learn more: [2.2. Organize outputs by process](#22-organize-outputs-by-process)
 </quiz>
 
 <quiz>
@@ -1455,30 +1465,38 @@ If both Docker and Conda are enabled and a process has both directives, which is
 - [ ] Conda
 - [ ] The first one defined in the process
 - [ ] It causes an error
+
+Learn more: [3. Select a software packaging technology](#3-select-a-software-packaging-technology)
 </quiz>
 
 <quiz>
 What is the default executor in Nextflow?
-- [x] local
-- [ ] slurm
-- [ ] kubernetes
-- [ ] aws
+- [x] `local`
+- [ ] `slurm`
+- [ ] `kubernetes`
+- [ ] `aws`
+
+Learn more: [4. Select an execution platform](#4-select-an-execution-platform)
 </quiz>
 
 <quiz>
 What command generates a resource utilization report?
-- [ ] nextflow run workflow.nf -with-metrics
-- [ ] nextflow run workflow.nf -with-stats
-- [x] nextflow run workflow.nf -with-report report.html
-- [ ] nextflow run workflow.nf -profile report
+- [ ] `nextflow run workflow.nf -with-metrics`
+- [ ] `nextflow run workflow.nf -with-stats`
+- [x] `nextflow run workflow.nf -with-report report.html`
+- [ ] `nextflow run workflow.nf -profile report`
+
+Learn more: [5.1. Run the workflow to generate a resource utilization report](#51-run-the-workflow-to-generate-a-resource-utilization-report)
 </quiz>
 
 <quiz>
-How do you set resource requirements for a specific process named 'cowpy' in the config file?
-- [ ] cowpy.memory = '2.GB'
-- [ ] process.cowpy.memory = '2.GB'
-- [x] process { withName: 'cowpy' { memory = '2.GB' } }
-- [ ] resources.cowpy.memory = '2.GB'
+How do you set resource requirements for a specific process named `cowpy` in the config file?
+- [ ] `#!groovy cowpy.memory = '2.GB'`
+- [ ] `#!groovy process.cowpy.memory = '2.GB'`
+- [x] `#!groovy process { withName: 'cowpy' { memory = '2.GB' } }`
+- [ ] `#!groovy resources.cowpy.memory = '2.GB'`
+
+Learn more: [5.3. Set resource allocations for a specific process](#53-set-resource-allocations-for-a-specific-process)
 </quiz>
 
 <quiz>
@@ -1487,22 +1505,28 @@ What does the `resourceLimits` directive do?
 - [ ] Allocates resources to processes
 - [x] Caps the maximum resources that can be requested
 - [ ] Monitors resource usage in real-time
+
+Learn more: [5.5. Add resource limits](#55-add-resource-limits)
 </quiz>
 
 <quiz>
 How do you specify multiple profiles in a single command?
-- [ ] -profile profile1 -profile profile2
-- [ ] -profiles profile1,profile2
-- [x] -profile profile1,profile2
-- [ ] --profile profile1 --profile profile2
+- [ ] `-profile profile1 -profile profile2`
+- [ ] `-profiles profile1,profile2`
+- [x] `-profile profile1,profile2`
+- [ ] `--profile profile1 --profile profile2`
+
+Learn more: [6. Use profiles to switch between preset configurations](#6-use-profiles-to-switch-between-preset-configurations)
 </quiz>
 
 <quiz>
 What command shows the fully resolved configuration that Nextflow would use?
-- [ ] nextflow show-config
-- [ ] nextflow settings
-- [x] nextflow config
-- [ ] nextflow resolve
+- [ ] `nextflow show-config`
+- [ ] `nextflow settings`
+- [x] `nextflow config`
+- [ ] `nextflow resolve`
+
+Learn more: [6.3. Use `nextflow config` to see the resolved configuration](#63-use-nextflow-config-to-see-the-resolved-configuration)
 </quiz>
 
 <quiz>
@@ -1511,4 +1535,6 @@ What can profiles be used for? (Select all that apply)
 - [x] Setting resource limits for different environments
 - [x] Providing test parameters for easy workflow testing
 - [ ] Defining new processes
+
+Learn more: [6. Use profiles to switch between preset configurations](#6-use-profiles-to-switch-between-preset-configurations)
 </quiz>

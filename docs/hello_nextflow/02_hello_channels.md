@@ -1348,14 +1348,24 @@ What is a channel in Nextflow?
 - [ ] A process definition
 - [x] A queue-like structure for passing data between processes
 - [ ] A configuration setting
+
+Learn more: [1.1. Create an input channel](#11-create-an-input-channel)
 </quiz>
 
 <quiz>
-What does channel.of() create?
-- [ ] A value channel
-- [x] A queue channel with the specified elements
-- [ ] An empty channel
-- [ ] A file channel
+What will this code output?
+
+```groovy
+channel.of('Hello', 'Bonjour', 'Hola')
+    .view()
+```
+
+- [ ] `['Hello', 'Bonjour', 'Hola']` (a single list)
+- [x] Each element on a separate line: `Hello`, `Bonjour`, `Hola`
+- [ ] Nothing (channels don't print by default)
+- [ ] An error (invalid syntax)
+
+Learn more: [1.1. Create an input channel](#11-create-an-input-channel)
 </quiz>
 
 <quiz>
@@ -1364,38 +1374,48 @@ When a channel contains multiple values, how does Nextflow handle process execut
 - [x] The process runs once for each value in the channel
 - [ ] The process runs only with the first value
 - [ ] The process runs only with the last value
+
+Learn more: [2. Modify the workflow to run on multiple input values](#2-modify-the-workflow-to-run-on-multiple-input-values)
 </quiz>
 
 <quiz>
-What does the flatten() operator do?
+What does the `flatten()` operator do?
 - [ ] Combines multiple channels into one
 - [ ] Sorts channel elements
 - [x] Unpacks arrays into individual elements
 - [ ] Removes duplicate elements
+
+Learn more: [3.2.1. Add the `flatten()` operator](#321-add-the-flatten-operator)
 </quiz>
 
 <quiz>
-What is the purpose of the view() operator?
+What is the purpose of the `view()` operator?
 - [ ] To filter channel contents
 - [ ] To transform channel elements
 - [x] To inspect and debug channel contents
 - [ ] To save channel contents to a file
+
+Learn more: [1.4. Use `view()` to inspect the channel contents](#14-use-view-to-inspect-the-channel-contents)
 </quiz>
 
 <quiz>
-What does splitCsv() do?
+What does `splitCsv()` do?
 - [ ] Creates a CSV file from channel contents
 - [ ] Splits a string by commas
 - [x] Parses a CSV file into arrays representing each row
 - [ ] Merges multiple CSV files
+
+Learn more: [4.2. Use the `splitCsv()` operator to parse the file](#42-use-the-splitcsv-operator-to-parse-the-file)
 </quiz>
 
 <quiz>
-What is the purpose of the map() operator?
+What is the purpose of the `map()` operator?
 - [ ] To filter elements from a channel
 - [ ] To combine multiple channels
 - [x] To transform each element in a channel
 - [ ] To count elements in a channel
+
+Learn more: [4.3. Use the `map()` operator to extract the greetings](#43-use-the-map-operator-to-extract-the-greetings)
 </quiz>
 
 <quiz>
@@ -1404,4 +1424,6 @@ Why is it important to use dynamic output filenames when processing multiple inp
 - [ ] To reduce disk space
 - [x] To prevent output files from overwriting each other
 - [ ] To enable resume functionality
+
+Learn more: [2.2. Ensure the output file names will be unique](#22-ensure-the-output-file-names-will-be-unique)
 </quiz>
