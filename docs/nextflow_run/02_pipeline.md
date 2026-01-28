@@ -227,7 +227,7 @@ You don't need to memorize code syntax, but it's good to recognize key component
 
 The key to processing multiple inputs is the **channel**: a queue that holds data and shuttles it between workflow steps.
 
-```groovy title="2a-inputs.nf" linenums="29" hl_lines="3-5"
+```groovy title="2a-inputs.nf" linenums="29" hl_lines="3-5,7"
     main:
     // create a channel for inputs from a CSV file
     greeting_ch = channel.fromPath(params.input)
@@ -244,7 +244,8 @@ When `sayHello(greeting_ch)` is called, Nextflow automatically runs the process 
 
 !!! tip "Want to learn more about channels?"
 
-    If you want to understand channels and operators in depth, including how to write them yourself, see [Hello Nextflow Part 2: Hello Channels](../hello_nextflow/02_hello_channels.md).
+    If you want to understand channels and operators in depth, including how to write them yourself, see [Hello Nextflow Part 2: Hello Channels](../hello_nextflow/02_hello_channels.md#4-read-input-values-from-a-csv-file).
+    This same code example is walked through in more detail, explaining how it works.
 
 #### 1.4.2. Dynamic output naming
 
@@ -540,14 +541,41 @@ Named outputs are referenced as `processName.out.outputName` (e.g., `collectGree
 
 Parameters can have default values in the `params` block:
 
-```groovy title="2b-multistep.nf" linenums="58" hl_lines="6"
-    params {
-        input: Path
-        batch: String = 'batch'
-    }
+```groovy title="2b-multistep.nf" linenums="61" hl_lines="3"
+params {
+    input: Path
+    batch: String = 'batch'
+}
 ```
 
 If you don't specify `--batch` on the command line, the default value `'batch'` is used.
+
+#### 2.3.6. Published outputs can be organized
+
+In the `output` block, we've used custom paths to group intermediate results in order to make it easier to pick out just the final outputs of the workflow.
+
+```groovy title="2b-multistep.nf" linenums="87" hl_lines="3 7 11 15"
+output {
+    first_output {
+        path '2b-multistep/intermediates'
+        mode 'copy'
+    }
+    uppercased {
+        path '2b-multistep/intermediates'
+        mode 'copy'
+    }
+    collected {
+        path '2b-multistep'
+        mode 'copy'
+    }
+    batch_report {
+        path '2b-multistep'
+        mode 'copy'
+    }
+}
+```
+
+There are more sophisticated ways to organize published outputs; we'll touch on a few in the part on configuration.
 
 !!! tip "Want to learn more about building workflows?"
 
