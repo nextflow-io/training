@@ -579,12 +579,12 @@ def cli(ctx, version: str | None, clean: bool):
 
         # Setup
         check_dependencies()
+        modify_hosts()  # Do this early so user isn't prompted after long build
         generate_certificates()
         fetch_gh_pages()
         build_docs(version)
         update_versions_json(version)
         create_caddyfile()
-        modify_hosts()
 
         # Run (blocks until Ctrl+C)
         run_server(version)
