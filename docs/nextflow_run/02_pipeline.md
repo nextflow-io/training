@@ -255,7 +255,7 @@ Then the next two lines apply **operators** that do the actual parsing of the fi
 - `.splitCsv()` tells Nextflow to parse the CSV file into an array representing rows and columns
 - `.map { line -> line[0] }` tells Nextflow to take only the element in the first column from each row
 
-??? tip "Say that again?"
+??? tip "More on `.map`"
 
     The `.map` operator is one of the most commonly used operators in Nextflow.
     It transforms each element in a channel by applying a function to it.
@@ -270,14 +270,14 @@ Then the next two lines apply **operators** that do the actual parsing of the fi
 
     ```groovy
     // After .splitCsv() - each row is an array:
-    // [Hello, English, 123]
-    // [Bonjour, French, 456]
-    // [Holà, Spanish, 789]
+    [Hello, English, 123]
+    [Bonjour, French, 456]
+    [Holà, Spanish, 789]
 
     // After .map { line -> line[0] } - just the first element:
-    // Hello
-    // Bonjour
-    // Holà
+    Hello
+    Bonjour
+    Holà
     ```
 
     Arrays in Groovy are zero-indexed, so `line[0]` gets the first element, `line[1]` would get the second, and so on.
