@@ -95,26 +95,26 @@ process SAMTOOLS_INDEX {
 
 Then, remove the `SAMTOOLS_INDEX` process definition from `genomics-3.nf`, and add an import declaration for the module before the next process definition, like this:
 
-_Before:_
+=== "After"
 
-```groovy title="tests/main.nf.test" linenums="1" hl_lines="1"
-/*
- * Call variants with GATK HaplotypeCaller
- */
-process GATK_HAPLOTYPECALLER {
-```
+    ```groovy title="genomics-3.nf" linenums="1" hl_lines="1 2"
+    // Include modules
+    include { SAMTOOLS_INDEX } from './modules/samtools/index/main.nf'
 
-_After:_
+    /*
+     * Call variants with GATK HaplotypeCaller
+     */
+    process GATK_HAPLOTYPECALLER {
+    ```
 
-```groovy title="genomics-3.nf" linenums="1" hl_lines="1 2"
-// Include modules
-include { SAMTOOLS_INDEX } from './modules/samtools/index/main.nf'
+=== "Before"
 
-/*
- * Call variants with GATK HaplotypeCaller
- */
-process GATK_HAPLOTYPECALLER {
-```
+    ```groovy title="genomics-3.nf" linenums="1" hl_lines="1"
+    /*
+     * Call variants with GATK HaplotypeCaller
+     */
+    process GATK_HAPLOTYPECALLER {
+    ```
 
 You can now run the workflow again, and it should still work the same way as before. If you supply the `-resume` flag, no new tasks should even need to be run:
 

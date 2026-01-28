@@ -38,5 +38,8 @@ Otherwise, select a side quest from the table below.
 | [Workflows of workflows](./workflows_of_workflows.md)                      | 30 mins                    |
 | [Working with files](./working_with_files.md)                              | 45 mins                    |
 | [Debugging workflows](./debugging.md)                                      | 1 hour                     |
+| [Workflow output definitions](./workflow_outputs.md)                       | 45 mins                    |
+| [Running on cloud executors](./cloud_executors.md)                         | 30 mins                    |
+| [Plugin development](./plugin_development.md)                              | 90 mins                    |
 
 Let us know what other domains and use cases you'd like to see covered here by posting in the [Training section](https://community.seqera.io/c/training/) of the community forum.
