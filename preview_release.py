@@ -12,6 +12,9 @@ Preview Release Script
 Serves the training docs locally at https://training.nextflow.io/ with the
 current branch appearing as a specified version release.
 
+Note: This script should NOT be run with sudo. It will prompt for sudo
+privileges only when needed (for /etc/hosts modification).
+
 See CONTRIBUTING.md for full documentation.
 """
 
@@ -34,7 +37,7 @@ try:
     from rich.table import Table
 except ImportError:
     print("Error: Required packages not found.")
-    print("Run this script with uv: sudo uv run ./preview_release.py --version 3.0")
+    print("Run this script with uv: uv run ./preview_release.py --version 3.0")
     sys.exit(1)
 
 # Configuration
@@ -91,6 +94,11 @@ def check_sudo():
     return os.geteuid() == 0
 
 
+def run_with_sudo(cmd, check=True, capture=False, **kwargs):
+    """Run a command with sudo, prompting for password if needed."""
+    return run_cmd(["sudo"] + cmd, check=check, capture=capture, **kwargs)
+
+
 def cleanup():
     """Clean up everything on exit."""
     global _cleanup_done, _hosts_modified, _caddy_process, _keep_files
@@ -115,7 +123,7 @@ def cleanup():
     # Remove hosts entry
     if _hosts_modified:
         status_msg("cleanup", "Removing hosts entry...")
-        run_cmd(["sed", "-i", "", f"/{DOMAIN}/d", "/etc/hosts"], check=False)
+        run_with_sudo(["sed", "-i", "", f"/{DOMAIN}/d", "/etc/hosts"], check=False)
         status_msg("cleanup", "Hosts entry removed", success=True)
 
     # Remove work directory
@@ -136,13 +144,19 @@ def check_dependencies():
 
     # Check for Homebrew
     if not shutil.which("brew"):
-        status_msg("setup", "Homebrew not found. Please install it first.", success=False)
+        status_msg(
+            "setup", "Homebrew not found. Please install it first.", success=False
+        )
         sys.exit(1)
 
     # Check for Docker
     result = run_cmd(["docker", "info"], check=False, capture=True)
     if result.returncode != 0:
-        status_msg("setup", "Docker is not running. Please start Docker Desktop.", success=False)
+        status_msg(
+            "setup",
+            "Docker is not running. Please start Docker Desktop.",
+            success=False,
+        )
         sys.exit(1)
     status_msg("setup", "Docker running", success=True)
 
@@ -160,22 +174,31 @@ def check_dependencies():
 
     # Check if mkcert CA is installed in the system keychain
     result = run_cmd(
-        ["security", "find-certificate", "-c", "mkcert", "/Library/Keychains/System.keychain"],
-        check=False, capture=True
+        [
+            "security",
+            "find-certificate",
+            "-c",
+            "mkcert",
+            "/Library/Keychains/System.keychain",
+        ],
+        check=False,
+        capture=True,
     )
     ca_in_keychain = result.returncode == 0 and "mkcert" in result.stdout
 
     if not ca_in_keychain:
         status_msg("setup", "mkcert CA not found in system keychain.", success=False)
         console.print()
-        console.print(Panel(
-            "[yellow]The mkcert root CA must be installed for browsers to trust the certificate.[/yellow]\n\n"
-            "This is a one-time setup. Run this command as your regular user (not sudo):\n\n"
-            "    [bold cyan]mkcert -install[/bold cyan]\n\n"
-            "Then restart your browser and re-run this script.",
-            title="Action Required",
-            border_style="yellow"
-        ))
+        console.print(
+            Panel(
+                "[yellow]The mkcert root CA must be installed for browsers to trust the certificate.[/yellow]\n\n"
+                "This is a one-time setup. Run this command as your regular user (not sudo):\n\n"
+                "    [bold cyan]mkcert -install[/bold cyan]\n\n"
+                "Then restart your browser and re-run this script.",
+                title="Action Required",
+                border_style="yellow",
+            )
+        )
         console.print()
         sys.exit(1)
 
@@ -195,7 +218,9 @@ def generate_certificates():
         status_msg("setup", "Certificates already exist", success=True)
         return
 
-    run_cmd(["mkcert", "-cert-file", str(cert_file), "-key-file", str(key_file), DOMAIN])
+    run_cmd(
+        ["mkcert", "-cert-file", str(cert_file), "-key-file", str(key_file), DOMAIN]
+    )
     status_msg("setup", "Certificates created", success=True)
 
 
@@ -205,16 +230,22 @@ def fetch_gh_pages():
     versions_file = SITE_DIR / "versions.json"
     if versions_file.exists():
         versions = json.loads(versions_file.read_text())
-        status_msg("setup", f"Using cached gh-pages ({len(versions)} versions)", success=True)
+        status_msg(
+            "setup", f"Using cached gh-pages ({len(versions)} versions)", success=True
+        )
         return
 
     SITE_DIR.mkdir(parents=True, exist_ok=True)
 
     # Check if upstream remote exists
-    result = run_cmd(["git", "remote", "get-url", "upstream"], check=False, capture=True)
+    result = run_cmd(
+        ["git", "remote", "get-url", "upstream"], check=False, capture=True
+    )
     if result.returncode != 0:
         status_msg("setup", "upstream remote not found.", success=False)
-        console.print("  Please add it: [cyan]git remote add upstream https://github.com/nextflow-io/training.git[/cyan]")
+        console.print(
+            "  Please add it: [cyan]git remote add upstream https://github.com/nextflow-io/training.git[/cyan]"
+        )
         sys.exit(1)
 
     with Progress(
@@ -231,13 +262,10 @@ def fetch_gh_pages():
 
         # Extract gh-pages content using git archive
         archive_proc = subprocess.Popen(
-            ["git", "archive", "upstream/gh-pages"],
-            stdout=subprocess.PIPE
+            ["git", "archive", "upstream/gh-pages"], stdout=subprocess.PIPE
         )
         subprocess.run(
-            ["tar", "-x", "-C", str(SITE_DIR)],
-            stdin=archive_proc.stdout,
-            check=True
+            ["tar", "-x", "-C", str(SITE_DIR)], stdin=archive_proc.stdout, check=True
         )
         archive_proc.wait()
 
@@ -246,7 +274,9 @@ def fetch_gh_pages():
         versions = json.loads(versions_file.read_text())
         status_msg("setup", f"Fetched {len(versions)} existing versions", success=True)
     else:
-        status_msg("setup", "Warning: versions.json not found in gh-pages", success=False)
+        status_msg(
+            "setup", "Warning: versions.json not found in gh-pages", success=False
+        )
 
 
 def compute_source_hash():
@@ -267,7 +297,14 @@ def compute_source_hash():
         else:
             # For directories, hash all markdown and config files
             for file in sorted(source_path.rglob("*")):
-                if file.is_file() and file.suffix in (".md", ".yml", ".yaml", ".css", ".js", ".html"):
+                if file.is_file() and file.suffix in (
+                    ".md",
+                    ".yml",
+                    ".yaml",
+                    ".css",
+                    ".js",
+                    ".html",
+                ):
                     try:
                         hasher.update(str(file).encode())
                         hasher.update(file.read_bytes())
@@ -286,10 +323,18 @@ def build_docs(version: str):
     current_hash = compute_source_hash()
 
     # Check if we can skip the build
-    if version_dir.exists() and (version_dir / "index.html").exists() and hash_file.exists():
+    if (
+        version_dir.exists()
+        and (version_dir / "index.html").exists()
+        and hash_file.exists()
+    ):
         stored_hash = hash_file.read_text().strip()
         if stored_hash == current_hash:
-            status_msg("setup", f"v{version} already built [dim](source unchanged)[/dim]", success=True)
+            status_msg(
+                "setup",
+                f"v{version} already built [dim](source unchanged)[/dim]",
+                success=True,
+            )
             return
         else:
             status_msg("setup", "Source files changed, rebuilding...")
@@ -312,15 +357,27 @@ def build_docs(version: str):
         console=console,
         transient=True,
     ) as progress:
-        progress.add_task(f"Building v{version} docs (this may take a few minutes)...", total=None)
+        progress.add_task(
+            f"Building v{version} docs (this may take a few minutes)...", total=None
+        )
 
-        result = run_cmd([
-            "docker", "run", "--rm",
-            "-v", f"{repo_root}:/docs",
-            "-e", "CARDS=false",
-            "ghcr.io/nextflow-io/training-mkdocs:latest",
-            "build", "-d", f"/docs/{WORK_DIR}/site/{version}"
-        ], check=False, capture=True)
+        result = run_cmd(
+            [
+                "docker",
+                "run",
+                "--rm",
+                "-v",
+                f"{repo_root}:/docs",
+                "-e",
+                "CARDS=false",
+                "ghcr.io/nextflow-io/training-mkdocs:latest",
+                "build",
+                "-d",
+                f"/docs/{WORK_DIR}/site/{version}",
+            ],
+            check=False,
+            capture=True,
+        )
 
     if result.returncode != 0:
         status_msg("setup", "Docker build failed", success=False)
@@ -358,11 +415,9 @@ def update_versions_json(version: str):
             if v["version"] == version:
                 v["aliases"] = ["latest"]
     else:
-        versions.insert(0, {
-            "version": version,
-            "title": version,
-            "aliases": ["latest"]
-        })
+        versions.insert(
+            0, {"version": version, "title": version, "aliases": ["latest"]}
+        )
 
     versions_file.write_text(json.dumps(versions, indent=2))
 
@@ -416,9 +471,8 @@ def modify_hosts():
         _hosts_modified = True
         return
 
-    entry = f"127.0.0.1 {DOMAIN}\n"
-    with open("/etc/hosts", "a") as f:
-        f.write(entry)
+    entry = f"127.0.0.1 {DOMAIN}"
+    run_with_sudo(["sh", "-c", f'echo "{entry}" >> /etc/hosts'])
 
     _hosts_modified = True
     status_msg("setup", "Hosts entry added", success=True)
@@ -431,10 +485,16 @@ def run_server(version: str):
     status_msg("run", "Starting server...")
 
     caddyfile_path = CADDYFILE.resolve()
-    _caddy_process = subprocess.Popen([
-        "caddy", "run",
-        "--config", str(caddyfile_path),
-    ], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    _caddy_process = subprocess.Popen(
+        [
+            "caddy",
+            "run",
+            "--config",
+            str(caddyfile_path),
+        ],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
 
     # Give it a moment to start
     time.sleep(1)
@@ -446,13 +506,15 @@ def run_server(version: str):
 
     status_msg("run", "Server running", success=True)
     console.print()
-    console.print(Panel(
-        f"[bold green]Site available at:[/bold green] [link=https://{DOMAIN}/]https://{DOMAIN}/[/link]\n\n"
-        f"Serving current branch as [cyan]v{version}[/cyan] (latest)\n\n"
-        "[dim]Press Ctrl+C to stop and clean up[/dim]",
-        title="Preview Server Running",
-        border_style="green"
-    ))
+    console.print(
+        Panel(
+            f"[bold green]Site available at:[/bold green] [link=https://{DOMAIN}/]https://{DOMAIN}/[/link]\n\n"
+            f"Serving current branch as [cyan]v{version}[/cyan] (latest)\n\n"
+            "[dim]Press Ctrl+C to stop and clean up[/dim]",
+            title="Preview Server Running",
+            border_style="green",
+        )
+    )
     console.print()
 
     # Wait for the process (blocks until Ctrl+C or process exits)
@@ -463,8 +525,19 @@ def run_server(version: str):
 
 
 @click.group(invoke_without_command=True)
-@click.option("--version", "-v", "version", type=str, help="Version number to publish current branch as (e.g., 3.0)")
-@click.option("--clean", "-c", is_flag=True, help="Delete work directory on exit (default: keep for faster restart)")
+@click.option(
+    "--version",
+    "-v",
+    "version",
+    type=str,
+    help="Version number to publish current branch as (e.g., 3.0)",
+)
+@click.option(
+    "--clean",
+    "-c",
+    is_flag=True,
+    help="Delete work directory on exit (default: keep for faster restart)",
+)
 @click.pass_context
 def cli(ctx, version: str | None, clean: bool):
     """
@@ -475,6 +548,8 @@ def cli(ctx, version: str | None, clean: bool):
     how a release will look.
 
     **First-time setup:** Run `mkcert -install` once as your regular user.
+
+    **Note:** Do not run with sudo. The script will prompt for sudo when needed.
     """
     global _keep_files
     _keep_files = not clean
@@ -489,9 +564,12 @@ def cli(ctx, version: str | None, clean: bool):
         sys.exit(1)
 
     if version:
-        if not check_sudo():
-            console.print("[red]Error:[/red] This command requires sudo privileges.")
-            console.print(f"  Please re-run: [cyan]sudo ./preview_release.py --version {version}[/cyan]")
+        if check_sudo():
+            console.print("[red]Error:[/red] Do not run this script with sudo.")
+            console.print("  The script will request sudo privileges only when needed.")
+            console.print(
+                f"  Please re-run: [cyan]./preview_release.py --version {version}[/cyan]"
+            )
             sys.exit(1)
 
         # Register cleanup handlers
@@ -530,7 +608,9 @@ def status():
     # Check hosts entry
     with open("/etc/hosts") as f:
         hosts_has_entry = DOMAIN in f.read()
-    table.add_row("Hosts entry", "[green]yes[/green]" if hosts_has_entry else "[dim]no[/dim]")
+    table.add_row(
+        "Hosts entry", "[green]yes[/green]" if hosts_has_entry else "[dim]no[/dim]"
+    )
 
     # Check work directory
     if WORK_DIR.exists():
@@ -538,8 +618,13 @@ def status():
         versions_file = SITE_DIR / "versions.json"
         if versions_file.exists():
             versions = json.loads(versions_file.read_text())
-            latest_version = next((v["version"] for v in versions if "latest" in v.get("aliases", [])), None)
-            table.add_row("Versions cached", ", ".join(v["version"] for v in versions[:5]) + "...")
+            latest_version = next(
+                (v["version"] for v in versions if "latest" in v.get("aliases", [])),
+                None,
+            )
+            table.add_row(
+                "Versions cached", ", ".join(v["version"] for v in versions[:5]) + "..."
+            )
             if latest_version:
                 table.add_row("Latest points to", f"[cyan]{latest_version}[/cyan]")
     else:
@@ -548,18 +633,35 @@ def status():
     # Check if server is running
     result = run_cmd(["pgrep", "-f", "caddy"], check=False, capture=True)
     server_running = result.returncode == 0
-    table.add_row("Server running", "[green]yes[/green]" if server_running else "[dim]no[/dim]")
+    table.add_row(
+        "Server running", "[green]yes[/green]" if server_running else "[dim]no[/dim]"
+    )
 
     console.print(table)
 
     # Check if site is accessible
     if server_running and hosts_has_entry:
-        result = run_cmd(["curl", "-s", "-o", "/dev/null", "-w", "%{http_code}",
-                         f"https://{DOMAIN}/"], check=False, capture=True)
+        result = run_cmd(
+            [
+                "curl",
+                "-s",
+                "-o",
+                "/dev/null",
+                "-w",
+                "%{http_code}",
+                f"https://{DOMAIN}/",
+            ],
+            check=False,
+            capture=True,
+        )
         if result.stdout.strip() == "200":
-            console.print(f"\n[green]✓[/green] Site accessible at [link=https://{DOMAIN}/]https://{DOMAIN}/[/link]")
+            console.print(
+                f"\n[green]✓[/green] Site accessible at [link=https://{DOMAIN}/]https://{DOMAIN}/[/link]"
+            )
         else:
-            console.print(f"\n[red]✗[/red] Site not responding (HTTP {result.stdout.strip()})")
+            console.print(
+                f"\n[red]✗[/red] Site not responding (HTTP {result.stdout.strip()})"
+            )
 
 
 if __name__ == "__main__":
