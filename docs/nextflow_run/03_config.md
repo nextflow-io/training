@@ -17,6 +17,11 @@ If you're not familiar with the Hello pipeline or you could use a reminder, see 
 
 ## 1. Manage workflow input parameters
 
+!!! tip "Scenario"
+
+    You've downloaded a pipeline and want to run it repeatedly with the same input files and settings, but you don't want to type out all the parameters every time.
+    Or perhaps you're setting up the pipeline for a colleague who isn't comfortable with command-line arguments.
+
 We're going to start with an aspect of configuration that is simply an extension of what we've been working with so far: the management of input parameters.
 
 Currently, our workflow is set up to accept several parameter values via the command-line, declared in a `params` block in the workflow script itself.
@@ -161,7 +166,10 @@ Functionally, this move has changed nothing, but conceptually it's a little clea
 
 ### 1.2. Use a run-specific configuration file
 
-That's great, but sometimes you might want to run some temporary experiments with different default values without messing with the main configuration file.
+!!! tip "Scenario"
+
+    You want to experiment with different settings without modifying your main configuration file.
+
 You can do that by creating a new `nextflow.config` file in a subdirectory that you'll use as working directory for your experiments.
 
 #### 1.2.1. Create the working directory with a blank configuration
@@ -258,6 +266,10 @@ Now let's look at another useful way to set parameter values.
 
 ### 1.3. Use a parameter file
 
+!!! tip "Scenario"
+
+    You need to share exact run parameters with a collaborator, or record them for a publication.
+
 The subdirectory approach works great for experimenting, but it does involve a bit of setup and requires that you adapt paths accordingly.
 There's a simpler approach for when you want to run your pipeline with a specific set of values, or enable someone else to do it with minimal effort.
 
@@ -347,6 +359,10 @@ Learn how to manage where and how your workflow outputs get published.
 ---
 
 ## 2. Manage workflow outputs
+
+!!! tip "Scenario"
+
+    Your pipeline publishes outputs to a hardcoded directory, but you want to organize results by project or experiment name without editing the workflow code each time.
 
 The workflow we inherited uses paths for workflow-level output declarations, which isn't terribly flexible and involves a lot of repetition.
 
@@ -776,8 +792,12 @@ Now let's see how we can configure an alternative software packaging option via 
 
 ### 3.1. Disable Docker and enable Conda in the config file
 
-Let's pretend we're working on an HPC cluster and the admin doesn't allow the use of Docker for security reasons.
-Fortunately for us, Nextflow supports multiple other container technologies such as including Singularity (which is more widely used on HPC), and software package managers such as Conda.
+!!! tip "Scenario"
+
+    You're moving your pipeline to an HPC cluster where Docker isn't allowed for security reasons.
+    The cluster supports Singularity and Conda, so you need to switch your configuration accordingly.
+
+Nextflow supports multiple container technologies including Singularity (which is more widely used on HPC), as well as software package managers such as Conda.
 
 We can change our configuration file to use Conda instead of Docker.
 To do so, let's switch the value of `docker.enabled` to `false`, and add a directive enabling the use of Conda:
@@ -887,6 +907,11 @@ Learn how to change the execution platform used by Nextflow to actually do the w
 
 ## 4. Select an execution platform
 
+!!! tip "Scenario"
+
+    You've been developing and testing your pipeline on your laptop, but now you need to run it on thousands of samples.
+    Your institution has an HPC cluster with a Slurm scheduler that you'd like to use instead.
+
 Until now, we've been running our pipeline with the local executor.
 This executes each task on the machine that Nextflow is running on.
 When Nextflow begins, it looks at the available CPUs and memory.
@@ -973,6 +998,11 @@ Learn how to evaluate and express resource allocations and limitations in Nextfl
 
 ## 5. Control compute resource allocations
 
+!!! tip "Scenario"
+
+    Your pipeline keeps failing on the cluster because tasks are being killed for exceeding memory limits.
+    Or perhaps you're being charged for resources you're not using and want to optimize costs.
+
 Most high-performance computing platforms allow (and sometimes require) that you specify certain resource allocation parameters such as number of CPUs and memory.
 
 By default, Nextflow will use a single CPU and 2GB of memory for each process.
@@ -991,6 +1021,10 @@ Nextflow will translate them into the appropriate instructions for the chosen ex
 But how do you know what values to use?
 
 ### 5.1. Run the workflow to generate a resource utilization report
+
+!!! tip "Scenario"
+
+    You don't know how much memory or CPU your processes need and want to avoid wasting resources or having jobs killed.
 
 If you don't know up front how much CPU and memory your processes are likely to need, you can do some resource profiling, meaning you run the workflow with some default allocations, record how much each process used, and from there, estimate how to adjust the base allocations.
 
@@ -1120,6 +1154,11 @@ Learn how to set up preset configuration profiles and switch between them at run
 
 ## 6. Use profiles to switch between preset configurations
 
+!!! tip "Scenario"
+
+    You regularly switch between running pipelines on your laptop for development and on your institution's HPC for production runs.
+    You're tired of manually changing configuration settings every time you switch environments.
+
 We've shown you a number of ways that you can customize your pipeline configuration depending on the project you're working on or the compute environment you're using.
 
 You may want to switch between alternative settings depending on what computing infrastructure you're using. For example, you might want to develop and run small-scale tests locally on your laptop, then run full-scale workloads on HPC or cloud.
@@ -1191,6 +1230,10 @@ If in the future we find other elements of configuration that are always co-occu
 We can also create additional profiles if there are other elements of configuration that we want to group together.
 
 ### 6.2. Create a profile of test parameters
+
+!!! tip "Scenario"
+
+    You want others to be able to try your pipeline quickly without gathering their own input data.
 
 Profiles are not only for infrastructure configuration.
 We can also use them to set default values for workflow parameters, to make it easier for others to try out the workflow without having to gather appropriate input values themselves.
@@ -1395,15 +1438,7 @@ More generally, you know how to configure your workflow executions to suit diffe
 
 ### What's next?
 
-Give yourself a big pat on the back!
-You know everything you need to know to get started running and managing Nextflow pipelines.
-
-That concludes this course, but if you're eager to keep learning, we have two main recommendations:
-
-- If you want to dig deeper into developing your own pipelines, have a look at [Hello Nextflow](../hello_nextflow/index.md), a course for beginners that covers the same general progression as this one but goes into much more detail about channels and operators.
-- If you would like to continue learning how to run Nextflow pipelines without going deeper into the code, have a look at the first part of [Hello nf-core](../hello_nf-core/index.md), which introduces the tooling for finding and running pipelines from the hugely popular [nf-core](https://nf-co.re/) project.
-
-Have fun!
+Learn how to troubleshoot common issues when running Nextflow pipelines.
 
 ---
 

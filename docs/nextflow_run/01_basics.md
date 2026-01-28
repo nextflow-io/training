@@ -676,6 +676,148 @@ You know how to relaunch a pipeline without repeating steps that were already ru
 
 ### What's next?
 
+Learn how to run pipelines stored in remote repositories like GitHub.
+
+---
+
+## 5. Run pipelines from remote repositories
+
+So far we've been running workflow scripts located in the current directory.
+However, in practice you'll often want to run pipelines that are stored in remote repositories, such as GitHub.
+
+Nextflow makes this straightforward: you can run any pipeline directly from a Git repository URL without manually downloading it first.
+
+### 5.1. Run a pipeline from GitHub
+
+The basic syntax for running a remote pipeline is:
+
+```bash title="Syntax"
+nextflow run <repository>
+```
+
+Where `<repository>` can be:
+
+- A GitHub repository path like `nextflow-io/hello`
+- A full URL like `https://github.com/nextflow-io/hello`
+- A GitLab, Bitbucket, or other Git hosting service URL
+
+Let's try running the official Nextflow "hello" demo pipeline:
+
+```bash
+nextflow run nextflow-io/hello
+```
+
+??? success "Command output"
+
+    ```console
+    N E X T F L O W   ~  version 25.10.2
+
+    Pulling nextflow-io/hello ...
+     downloaded from https://github.com/nextflow-io/hello.git
+    Launching `https://github.com/nextflow-io/hello` [happy_torvalds] DSL2 - revision: 2ce0b0e294 [master]
+
+    executor >  local (4)
+    [31/5a64d4] sayHello (1) | 4 of 4 ✔
+    Hello world!
+    Bonjour world!
+    Ciao world!
+    Hola world!
+    ```
+
+The first time you run a remote pipeline, Nextflow downloads it and caches it locally.
+Subsequent runs will use the cached version unless you explicitly request an update.
+
+### 5.2. Specify a version or branch
+
+By default, Nextflow runs the latest version from the default branch (usually `main` or `master`).
+You can specify a particular version, branch, or commit using the `-r` flag.
+
+Try running an older version of the hello pipeline:
+
+```bash
+nextflow run nextflow-io/hello -r v1.1
+```
+
+??? success "Command output"
+
+    ```console
+    N E X T F L O W   ~  version 25.10.2
+
+    Launching `https://github.com/nextflow-io/hello` [awesome_borg] DSL2 - revision: baba3959d7 [v1.1]
+
+    executor >  local (4)
+    [5a/c2e383] sayHello (4) | 4 of 4 ✔
+    Ciao world!
+    Bonjour world!
+    Hello world!
+    Hola world!
+    ```
+
+Notice the output shows `revision: baba3959d7 [v1.1]` - this confirms you're running the specific tagged version.
+Specifying exact versions is important for reproducibility.
+
+### 5.3. Find available parameters
+
+When running an unfamiliar pipeline, you'll want to know what parameters it accepts.
+The best places to look are:
+
+- **Documentation**: Check the pipeline's README or website for parameter descriptions
+- **Source code**: Look at the `params` block in the main workflow file or `nextflow.config`
+
+Some pipelines (particularly nf-core pipelines) use the [nf-schema](https://nextflow-io.github.io/nf-schema/) plugin, which enables a `--help` flag.
+Try it with an nf-core pipeline:
+
+```bash
+nextflow run nf-core/demo --help
+```
+
+You should see a list of all available parameters grouped by category.
+
+### 5.4. Update and manage cached pipelines
+
+Now that you've run the hello pipeline twice, it's cached locally.
+Check what pipelines you have cached:
+
+```bash
+nextflow list
+```
+
+??? success "Command output"
+
+    ```console
+    nextflow-io/hello
+    ```
+
+If you want to update to the latest version, use the `-latest` flag:
+
+```bash
+nextflow run nextflow-io/hello -latest
+```
+
+Or update without running:
+
+```bash
+nextflow pull nextflow-io/hello
+```
+
+Finally, clean up by removing the cached pipeline:
+
+```bash
+nextflow drop nextflow-io/hello
+```
+
+??? success "Command output"
+
+    ```console
+    Project `nextflow-io/hello` was dropped
+    ```
+
+### Takeaway
+
+You know how to run pipelines directly from GitHub and other remote repositories, specify versions for reproducibility, and manage your local cache of downloaded pipelines.
+
+### What's next?
+
 Take a little break! You've just absorbed the building blocks of Nextflow syntax and basic usage instructions.
 
 In the next section of this training, we're going to look at four successively more realistic versions of the Hello World pipeline that will demonstrate how Nextflow allows you to process multiple inputs efficiently, run workflows composed of multiple steps connected together, leverage modular code components, and utilize containers for greater reproducibility and portability.
@@ -767,4 +909,24 @@ What is the recommended flag to use with the `nextflow clean` command before act
 - [ ] `-q` (quiet) to suppress warnings
 
 Learn more: [4.3. Delete older work directories](#43-delete-older-work-directories)
+</quiz>
+
+<quiz>
+What flag do you use to run a specific version of a remote pipeline?
+- [ ] `-v` (version)
+- [x] `-r` (revision)
+- [ ] `-t` (tag)
+- [ ] `-b` (branch)
+
+Learn more: [5.2. Specify a version or branch](#52-specify-a-version-or-branch)
+</quiz>
+
+<quiz>
+What happens the first time you run a pipeline from a GitHub repository?
+- [ ] Nextflow fails because the pipeline isn't installed
+- [ ] Nextflow streams the pipeline code without saving it
+- [x] Nextflow downloads and caches the pipeline locally
+- [ ] Nextflow requires you to manually clone the repository first
+
+Learn more: [5.1. Run a pipeline from GitHub](#51-run-a-pipeline-from-github)
 </quiz>
