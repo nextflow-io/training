@@ -14,7 +14,7 @@ process COWPY {
     val character
 
     output:
-    path("cowpy-${input_file}")
+    path "cowpy-${input_file}"
 
     script:
     """

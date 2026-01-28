@@ -1,5 +1,5 @@
 # ONLY USED FOR DEPLOYMENT PREVIEWS
 #  production deploys go from gh-pages and are pre-built using Mike, for versioning
 [build]
-    command = "mkdocs build"
+    command = "pip install -r requirements.txt && mkdocs build"
     publish = "site/"

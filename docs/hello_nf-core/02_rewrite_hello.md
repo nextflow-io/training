@@ -7,10 +7,7 @@ Creating all that from scratch would be very tedious, so the nf-core community h
 
 We are going to show you how to use this tooling to create a pipeline scaffold, then adapt existing 'regular' pipeline code onto the nf-core scaffold.
 
-!!! note
-
-    The nf-core-tools package is pre-installed for you in our training environment.
-    If you are using a different environment, you need to check whether the package is installed (run `nf-core --help` in your terminal) and if not, install it as described here: https://nf-co.re/docs/nf-core-tools/installation.
+If you're not familiar with the Hello pipeline or you could use a reminder, see [this info page](../info/hello_pipeline.md).
 
 ---
 
@@ -65,18 +62,20 @@ This TUI will ask you to provide basic information about your pipeline and will 
 
 Once the TUI closes, you should see the following console output.
 
-```console title="Output"
-                                          ,--./,-.
-          ___     __   __   __   ___     /,-._.--~\
-    |\ | |__  __ /  ` /  \ |__) |__         }  {
-    | \| |       \__, \__/ |  \ |___     \`-._,-`-,
-                                          `._,._,'
+??? success "Command output"
 
-    nf-core/tools version 3.4.1 - https://nf-co.re
+    ```console
+                                              ,--./,-.
+              ___     __   __   __   ___     /,-._.--~\
+        |\ | |__  __ /  ` /  \ |__) |__         }  {
+        | \| |       \__, \__/ |  \ |___     \`-._,-`-,
+                                              `._,._,'
+
+        nf-core/tools version 3.4.1 - https://nf-co.re
 
 
-INFO     Launching interactive nf-core pipeline creation tool.
-```
+    INFO     Launching interactive nf-core pipeline creation tool.
+    ```
 
 There is no explicit confirmation in the console output that the pipeline creation worked, but you should see a new directory called `core-hello`.
 
@@ -308,53 +307,9 @@ Learn how to make a simple workflow composable as a prelude to making it nf-core
 Now it's time to get to work integrating our workflow into the nf-core scaffold.
 As a reminder, we're working with the workflow featured in our [Hello Nextflow](../hello_nextflow/index.md) training course.
 
-??? info "What does the Hello Nextflow workflow do?"
+!!! tip
 
-    If you haven't done the [Hello Nextflow](../hello_nextflow/index.md) training, here's a quick overview of what this simple workflow does.
-
-    The workflow takes a CSV file containing greetings, runs four consecutive transformation steps on them, and outputs a single text file containing an ASCII picture of a fun character saying the greetings.
-
-    The four steps are implemented as Nextflow processes (`sayHello`, `convertToUpper`, `collectGreetings`, and `cowpy`) stored in separate module files.
-
-    1. **`sayHello`:** Writes each greeting to its own output file (e.g., "Hello-output.txt")
-    2. **`convertToUpper`:** Converts each greeting to uppercase (e.g., "HELLO")
-    3. **`collectGreetings`:** Collects all uppercase greetings into a single batch file
-    4. **`cowpy`:** Generates ASCII art using the `cowpy` tool
-
-    The results are published to a directory called `results/`, and the final output of the pipeline (when run with default parameters) is a plain text file containing ASCII art of a turkey saying the uppercased greetings.
-
-    ```txt title="results/cowpy-COLLECTED-test-batch-output.txt"
-     _________
-    / BONJOUR \
-    | HELLO   |
-    \ HOLà    /
-    ---------
-      \                                  ,+*^^*+___+++_
-      \                           ,*^^^^              )
-        \                       _+*                     ^**+_
-        \                    +^       _ _++*+_+++_,         )
-                  _+^^*+_    (     ,+*^ ^          \+_        )
-                {       )  (    ,(    ,_+--+--,      ^)      ^\
-                { (\@)    } f   ,(  ,+-^ __*_*_  ^^\_   ^\       )
-              {:;-/    (_+*-+^^^^^+*+*<_ _++_)_    )    )      /
-              ( /  (    (        ,___    ^*+_+* )   <    <      \
-              U _/     )    *--<  ) ^\-----++__)   )    )       )
-                (      )  _(^)^^))  )  )\^^^^^))^*+/    /       /
-              (      /  (_))_^)) )  )  ))^^^^^))^^^)__/     +^^
-            (     ,/    (^))^))  )  ) ))^^^^^^^))^^)       _)
-              *+__+*       (_))^)  ) ) ))^^^^^^))^^^^^)____*^
-              \             \_)^)_)) ))^^^^^^^^^^))^^^^)
-              (_             ^\__^^^^^^^^^^^^))^^^^^^^)
-                ^\___            ^\__^^^^^^))^^^^^^^^)\\
-                      ^^^^^\uuu/^^\uuu/^^^^\^\^\^\^\^\^\^\
-                        ___) >____) >___   ^\_\_\_\_\_\_\)
-                        ^^^//\\_^^//\\_^       ^(\_\_\_\)
-                          ^^^ ^^ ^^^ ^
-    ```
-
-<figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello_pipeline_complete.svg"
-</figure>
+    If you're not familiar with that pipeline or you could use a reminder, see [The Hello pipeline](../info/hello_pipeline.md).
 
 We provide you with a clean, fully functional copy of the completed Hello Nextflow workflow in the directory `original-hello` along with its modules and the default CSV file it expects to use as input.
 

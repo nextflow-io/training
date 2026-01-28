@@ -1,24 +1,51 @@
-# Environment Setup
+---
+title: Environment options
+description: Options for setting up your environment for the Nextflow trainings
+hide:
+  - toc
+  - footer
+---
 
-The training courses offered on the Nextflow community training portal are optimized for use within our GitHub Codespaces environment.
+# Environment options
 
-GitHub Codespaces offers a virtual machine with everything already set up for you, accessible from your web browser or built into your code editor (e.g., VSCode).
+We aim to provide a consistent and thoroughly tested environment that allows learners to focus on learning Nextflow without having to spend time and effort on managing software.
+To that end, we have developed a containerized environment that contains all the necessary software, code files and example data to work through all of our courses.
 
-If you already have a GitHub Codespaces account, click on the button below, otherwise continue in this module to set up your account for the first time.
+This containerized environment can be run out of the box on Github Codespaces or locally in VS Code with the Devcontainers extension.
 
-Let's get started!
+<div class="grid cards" markdown>
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
+-   :material-cloud-outline:{ .lg .middle } __Github Codespaces__
 
-For more detailed instructions for GitHub Codespaces, see the [GitHub Codespaces env-setup docs](01_setup.md).
-If you cannot use GitHub Codespaces and wish to use a local development environment, see the [documentation for local installation](02_local.md).
-If you prefer using VS Code with a pre-configured environment, see the [VS Code Devcontainers setup guide](03_devcontainer.md).
+    ---
+
+    GitHub Codespaces is a web-based service that allows us to provide a pre-built environment for training, with all tools and data included, backed by virtual machines in the cloud. It is accessible for free to anyone with a Github account.
+
+    [Use Github Codespaces:material-arrow-right:](01_setup.md){ .md-button .md-button--primary .mt-1 }
+
+-   :material-laptop:{ .lg .middle } __Local Devcontainers__
+
+    ---
+
+    VS Code with Devcontainers provides a locally-run containerized development environment with all training tools pre-configured. It offers the same pre-built environment as Codespaces but running entirely on your local hardware.
+
+    [Use Devcontainers locally :material-arrow-right:](03_devcontainer.md){ .md-button .md-button--primary .mt-1 }
+
+</div>
+
+## Instructions for manual installation
+
+If neither of the options above suit your needs, you can replicate this environment on your own local system by installing the software dependencies manually and cloning the training repository.
+
+[Manual installation :material-arrow-right:](02_local.md){ .md-button .md-button--primary .mt-1 }
+
+---
 
 !!! info "Deprecation of Gitpod"
 
     Nextflow Training used to use [Gitpod](https://gitpod.io) until February 2025.
-    However, the makers of Gitpod have decided to retire the free functionality in favor of their new [Gitpod Flex](https://www.gitpod.io/blog/introducing-gitpod-flex) system.
-    For that reason, we have switched to using GitHub Codespaces, which also offer a one-click developer environment with no prior setup.
+    However, the makers of Gitpod decided to retire the free functionality in favor of the [Gitpod Flex](https://www.gitpod.io/blog/introducing-gitpod-flex) system.
+    For that reason, we switched to using GitHub Codespaces, which also offer a one-click developer environment with no prior setup.
 
     Depending on when you signed up to Gitpod and when exactly they retire the service, you may still be able to launch the training in their old cloud IDE, though we cannot guarantee reliable access going forward:
     [Open in Gitpod](https://gitpod.io/#https://github.com/nextflow-io/training).

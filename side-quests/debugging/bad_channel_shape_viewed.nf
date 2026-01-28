@@ -20,9 +20,9 @@ workflow {
             ['sample2', 'file2.txt'],
             ['sample3', 'file3.txt'],
         )
-        .view { "Channel content: ${it}" }
+        .view { item -> "Channel content: ${item}" }
         .map { tuple -> tuple[0] }
-        .view { "After mapping: ${it}" }
+        .view { item -> "After mapping: ${item}" }
 
     PROCESS_FILES(input_ch)
 }

@@ -15,22 +15,48 @@ Specifically, we are going to demonstrate how to use **modules**.
 
 In Nextflow, a **module** is a single process definition that is encapsulated by itself in a standalone code file.
 To use a module in a workflow, you just add a single-line import statement to your workflow code file; then you can integrate the process into the workflow the same way you normally would.
+That makes it possible to reuse process definitions in multiple workflows without producing multiple copies of the code.
 
-When we started developing our workflow, we put everything in one single code file.
+When we started developing our workflow, we wrote everything in one single code file.
+Now we're going to move the processes out into individual modules.
 
-Putting processes into individual modules makes it possible to reuse process definitions in multiple workflows without producing multiple copies of the code.
-This makes the code more shareable, flexible and maintainable.
+<figure class="excalidraw">
+--8<-- "docs/hello_nextflow/img/modules.svg"
+</figure>
 
-!!!note
+This will make our code more shareable, flexible and maintainable.
 
-    It is also possible to encapsulate a section of a workflow as a 'subworkflow' that can be imported into a larger pipeline, but that is outside the scope of this course.
+??? info "How to begin from this section"
+
+    This section of the course assumes you have completed Parts 1-3 of the [Hello Nextflow](./index.md) course, but if you are comfortable with the basics covered in those sections, you can start from here without doing anything special.
 
 ---
 
 ## 0. Warmup: Run `hello-modules.nf`
 
 We're going to use the workflow script `hello-modules.nf` as a starting point.
-It is equivalent to the script produced by working through Part 3 of this training course.
+It is equivalent to the script produced by working through Part 3 of this training course, except we've changed the output destinations:
+
+```groovy title="hello-modules.nf" linenums="37" hl_lines="3 7 11 15"
+output {
+    first_output {
+        path 'hello_modules'
+        mode 'copy'
+    }
+    uppercased {
+        path 'hello_modules'
+        mode 'copy'
+    }
+    collected {
+        path 'hello_modules'
+        mode 'copy'
+    }
+    batch_report {
+        path 'hello_modules'
+        mode 'copy'
+    }
+}
+```
 
 Just to make sure everything is working, run the script once before making any changes:
 
@@ -38,36 +64,34 @@ Just to make sure everything is working, run the script once before making any c
 nextflow run hello-modules.nf
 ```
 
-```console title="Output"
- N E X T F L O W   ~  version 25.04.3
+??? success "Command output"
 
-Launching `hello-modules.nf` [festering_nobel] DSL2 - revision: eeca64cdb1
+    ```console
+     N E X T F L O W   ~  version 25.10.2
 
-executor >  local (7)
-[25/648bdd] sayHello (2)       | 3 of 3 ✔
-[60/bc6831] convertToUpper (1) | 3 of 3 ✔
-[1a/bc5901] collectGreetings   | 1 of 1 ✔
-There were 3 greetings in this batch
-```
+    Launching `hello-modules.nf` [hopeful_avogadro] DSL2 - revision: b09af1237d
 
-As previously, you will find the output files in the `results` directory (specified by the `publishDir` directive).
+    executor >  local (7)
+    [0f/8795c9] sayHello (3)       [100%] 3 of 3 ✔
+    [6a/eb2510] convertToUpper (3) [100%] 3 of 3 ✔
+    [af/479117] collectGreetings   [100%] 1 of 1 ✔
+    ```
 
-```console title="Directory contents"
-results
-├── Bonjour-output.txt
-├── COLLECTED-output.txt
-├── COLLECTED-test-batch-output.txt
-├── COLLECTED-trio-output.txt
-├── Hello-output.txt
-├── Holà-output.txt
-├── UPPER-Bonjour-output.txt
-├── UPPER-Hello-output.txt
-└── UPPER-Holà-output.txt
-```
+As previously, you will find the output files in the directory specified in the `output` block (here, `results/hello_modules/`).
 
-!!! note
+??? abstract "Directory contents"
 
-    There may also be a file named `output.txt` left over if you worked through Part 2 in the same environment.
+    ```console
+    results/hello_modules/
+    ├── Bonjour-output.txt
+    ├── COLLECTED-batch-output.txt
+    ├── Hello-output.txt
+    ├── Holà-output.txt
+    ├── batch-report.txt
+    ├── UPPER-Bonjour-output.txt
+    ├── UPPER-Hello-output.txt
+    └── UPPER-Holà-output.txt
+    ```
 
 If that worked for you, you're ready to learn how to modularize your workflow code.
 
@@ -82,9 +106,10 @@ You can call that directory anything you want, but the convention is to call it 
 mkdir modules
 ```
 
-!!! note
+!!! tip
 
-    Here we are showing how to use local modules, meaning modules stored locally in the same repository as the rest of the workflow code, in contrast to remote modules, which are stored in other (remote) repositories. For more information about remote modules, see the [documentation](https://www.nextflow.io/docs/latest/module.html).
+    Here we are showing you how to use **local modules**, meaning modules stored locally in the same repository as the rest of the workflow code, in contrast to remote modules, which are stored in other (remote) repositories.
+    For more information about **remote modules**, see the [documentation](https://www.nextflow.io/docs/latest/module.html).
 
 ---
 
@@ -117,17 +142,15 @@ Copy the whole process definition over from the workflow file to the module file
  */
 process sayHello {
 
-    publishDir 'results', mode: 'copy'
-
     input:
-        val greeting
+    val greeting
 
     output:
-        path "${greeting}-output.txt"
+    path "${greeting}-output.txt"
 
     script:
     """
-    echo '$greeting' > '$greeting-output.txt'
+    echo '${greeting}' > '${greeting}-output.txt'
     """
 }
 ```
@@ -142,24 +165,38 @@ The syntax for importing a local module is fairly straightforward:
 include { <MODULE_NAME> } from '<path_to_module>'
 ```
 
-Let's insert that above the workflow block and fill it out appropriately.
+Let's insert that above the `params` block and fill it out appropriately.
 
 === "After"
 
-    ```groovy title="hello-modules.nf" linenums="50" hl_lines="1 2"
+    ```groovy title="hello-modules.nf" linenums="44" hl_lines="1 2"
     // Include modules
     include { sayHello } from './modules/sayHello.nf'
 
-    workflow {
+    /*
+    * Pipeline parameters
+    */
+    params {
+        greeting: Path = 'data/greetings.csv'
+        batch: String = 'batch'
+    }
     ```
 
 === "Before"
 
-    ```groovy title="hello-modules.nf" linenums="50"
-    workflow {
+    ```groovy title="hello-modules.nf" linenums="44"
+    /*
+    * Pipeline parameters
+    */
+    params {
+        greeting: Path = 'data/greetings.csv'
+        batch: String = 'batch'
+    }
     ```
 
-### 2.4. Run the workflow to verify that it does the same thing as before
+You see we've filled in the module name, `sayHello`, and the path to the file containing the module code, `./modules/sayHello.nf`.
+
+### 2.4. Run the workflow
 
 We're running the workflow with essentially the same code and inputs as before, so let's run with the `-resume` flag and see what happens.
 
@@ -167,18 +204,20 @@ We're running the workflow with essentially the same code and inputs as before, 
 nextflow run hello-modules.nf -resume
 ```
 
-This runs quickly very quickly because everything is cached.
+??? success "Command output"
 
-```console title="Output" linenums="1"
- N E X T F L O W   ~  version 25.04.3
+    ```console
+    N E X T F L O W   ~  version 25.10.2
 
-Launching `hello-modules.nf` [romantic_poisson] DSL2 - revision: 96edfa9ad3
+    Launching `hello-modules.nf` [romantic_poisson] DSL2 - revision: 96edfa9ad3
 
-[f6/cc0107] sayHello (1)       | 3 of 3, cached: 3 ✔
-[3c/4058ba] convertToUpper (2) | 3 of 3, cached: 3 ✔
-[1a/bc5901] collectGreetings   | 1 of 1, cached: 1 ✔
-There were 3 greetings in this batch
-```
+    [f6/cc0107] sayHello (1)       | 3 of 3, cached: 3 ✔
+    [3c/4058ba] convertToUpper (2) | 3 of 3, cached: 3 ✔
+    [1a/bc5901] collectGreetings   | 1 of 1, cached: 1 ✔
+    ```
+
+This should run quickly very quickly because everything is cached.
+Feel free to check the published outputs.
 
 Nextflow recognized that it's still all the same work to be done, even if the code is split up into multiple files.
 
@@ -189,7 +228,7 @@ You know how to extract a process into a local module and you know doing this do
 ### What's next?
 
 Practice making more modules.
-Once you've done one, you can do a million modules...
+Once you've done one, you can do a million more...
 But let's just do two more for now.
 
 ---
@@ -216,47 +255,59 @@ Copy the whole process definition over from the workflow file to the module file
  */
 process convertToUpper {
 
-    publishDir 'results', mode: 'copy'
-
     input:
-        path input_file
+    path input_file
 
     output:
-        path "UPPER-${input_file}"
+    path "UPPER-${input_file}"
 
     script:
     """
-    cat '$input_file' | tr '[a-z]' '[A-Z]' > 'UPPER-${input_file}'
+    cat '${input_file}' | tr '[a-z]' '[A-Z]' > 'UPPER-${input_file}'
     """
 }
 ```
 
 Once that is done, delete the process definition from the workflow file, but make sure to leave the shebang in place.
 
-### 3.3. Add an import declaration before the workflow block
+### 3.3. Add an import declaration before the `params` block
 
-Insert the import declaration above the workflow block and fill it out appropriately.
+Insert the import declaration above the `params` block and fill it out appropriately.
 
 === "After"
 
-    ```groovy title="hello-modules.nf" linenums="31" hl_lines="3"
+    ```groovy title="hello-modules.nf" linenums="23" hl_lines="3"
     // Include modules
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
 
-    workflow {
+    /*
+    * Pipeline parameters
+    */
+    params {
+        greeting: Path = 'data/greetings.csv'
+        batch: String = 'batch'
+    }
     ```
 
 === "Before"
 
-    ```groovy title="hello-modules.nf" linenums="31"
+    ```groovy title="hello-modules.nf" linenums="23"
     // Include modules
     include { sayHello } from './modules/sayHello.nf'
 
-    workflow {
+    /*
+    * Pipeline parameters
+    */
+    params {
+        greeting: Path = 'data/greetings.csv'
+        batch: String = 'batch'
+    }
     ```
 
-### 3.4. Run the workflow to verify that it does the same thing as before
+This should start to look very familiar.
+
+### 3.4. Run the workflow again
 
 Run this with the `-resume` flag.
 
@@ -264,18 +315,19 @@ Run this with the `-resume` flag.
 nextflow run hello-modules.nf -resume
 ```
 
+??? success "Command output"
+
+    ```console
+    N E X T F L O W   ~  version 25.10.2
+
+    Launching `hello-modules.nf` [nauseous_heisenberg] DSL2 - revision: a04a9f2da0
+
+    [c9/763d42] sayHello (3)       | 3 of 3, cached: 3 ✔
+    [60/bc6831] convertToUpper (3) | 3 of 3, cached: 3 ✔
+    [1a/bc5901] collectGreetings   | 1 of 1, cached: 1 ✔
+    ```
+
 This should still produce the same output as previously.
-
-```console title="Output" linenums="1"
- N E X T F L O W   ~  version 25.04.3
-
-Launching `hello-modules.nf` [nauseous_heisenberg] DSL2 - revision: a04a9f2da0
-
-[c9/763d42] sayHello (3)       | 3 of 3, cached: 3 ✔
-[60/bc6831] convertToUpper (3) | 3 of 3, cached: 3 ✔
-[1a/bc5901] collectGreetings   | 1 of 1, cached: 1 ✔
-There were 3 greetings in this batch
-```
 
 Two done, one more to go!
 
@@ -303,52 +355,65 @@ Copy the whole process definition over from the workflow file to the module file
  */
 process collectGreetings {
 
-    publishDir 'results', mode: 'copy'
-
     input:
-        path input_files
-        val batch_name
+    path input_files
+    val batch_name
 
     output:
-        path "COLLECTED-${batch_name}-output.txt" , emit: outfile
-        val count_greetings , emit: count
+    path "COLLECTED-${batch_name}-output.txt", emit: outfile
+    path "${batch_name}-report.txt", emit: report
 
     script:
-        count_greetings = input_files.size()
+    count_greetings = input_files.size()
     """
     cat ${input_files} > 'COLLECTED-${batch_name}-output.txt'
+    echo 'There were ${count_greetings} greetings in this batch.' > '${batch_name}-report.txt'
     """
 }
 ```
 
 Once that is done, delete the process definition from the workflow file, but make sure to leave the shebang in place.
 
-### 4.3. Add an import declaration before the workflow block
+### 4.3. Add an import declaration before the `params` block
 
-Insert the import declaration above the workflow block and fill it out appropriately.
+Insert the import declaration above the `params` block and fill it out appropriately.
 
 === "After"
 
-    ```groovy title="hello-modules.nf" linenums="9" hl_lines="4"
+    ```groovy title="hello-modules.nf" linenums="3" hl_lines="4"
     // Include modules
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
     include { collectGreetings } from './modules/collectGreetings.nf'
 
-    workflow {
+    /*
+    * Pipeline parameters
+    */
+    params {
+        greeting: Path = 'data/greetings.csv'
+        batch: String = 'batch'
+    }
     ```
 
 === "Before"
 
-    ```groovy title="hello-modules.nf" linenums="9"
+    ```groovy title="hello-modules.nf" linenums="3"
     // Include modules
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
 
-    workflow {
+    /*
+    * Pipeline parameters
+    */
+    params {
+        greeting: Path = 'data/greetings.csv'
+        batch: String = 'batch'
+    }
     ```
 
-### 4.4. Run the workflow to verify that it does the same thing as before
+Last one!
+
+### 4.4. Run the workflow
 
 Run this with the `-resume` flag.
 
@@ -356,18 +421,19 @@ Run this with the `-resume` flag.
 nextflow run hello-modules.nf -resume
 ```
 
+??? success "Command output"
+
+    ```console
+    N E X T F L O W   ~  version 25.10.2
+
+    Launching `hello-modules.nf` [friendly_coulomb] DSL2 - revision: 7aa2b9bc0f
+
+    [f6/cc0107] sayHello (1)       | 3 of 3, cached: 3 ✔
+    [3c/4058ba] convertToUpper (2) | 3 of 3, cached: 3 ✔
+    [1a/bc5901] collectGreetings   | 1 of 1, cached: 1 ✔
+    ```
+
 This should still produce the same output as previously.
-
-```console title="Output" linenums="1"
- N E X T F L O W   ~  version 25.04.3
-
-Launching `hello-modules.nf` [friendly_coulomb] DSL2 - revision: 7aa2b9bc0f
-
-[f6/cc0107] sayHello (1)       | 3 of 3, cached: 3 ✔
-[3c/4058ba] convertToUpper (2) | 3 of 3, cached: 3 ✔
-[1a/bc5901] collectGreetings   | 1 of 1, cached: 1 ✔
-There were 3 greetings in this batch
-```
 
 ### Takeaway
 
@@ -376,9 +442,69 @@ You know how to modularize multiple processes in a workflow.
 Congratulations, you've done all this work and absolutely nothing has changed to how the pipeline works!
 
 Jokes aside, now your code is more modular, and if you decide to write another pipeline that calls on one of those processes, you just need to type one short import statement to use the relevant module.
-This is better than just copy-pasting the code, because if later you decide to improve the module, all your pipelines will inherit the improvements.
+This is better than copy-pasting the code, because if later you decide to improve the module, all your pipelines will inherit the improvements.
 
 ### What's next?
 
 Take a short break if you feel like it.
-When you're ready, move on to Part 5 to learn how to use containers to manage software dependencies more conveniently and reproducibly.
+
+When you're ready, move on to [**Part 5: Hello Containers**](./05_hello_containers.md) to learn how to use containers to manage software dependencies more conveniently and reproducibly.
+
+---
+
+## Quiz
+
+<quiz>
+What is a module in Nextflow?
+- [ ] A configuration file
+- [x] A standalone file containing a single process definition
+- [ ] A workflow definition
+- [ ] A channel operator
+
+Learn more: [2. Create a module for `sayHello()`](#2-create-a-module-for-sayhello)
+</quiz>
+
+<quiz>
+What is the recommended naming convention for module files?
+- [ ] `module_processName.nf`
+- [ ] `processName_module.nf`
+- [x] `processName.nf`
+- [ ] `mod_processName.nf`
+</quiz>
+
+<quiz>
+Where should module files be stored?
+- [ ] In the same directory as the workflow
+- [ ] In a `bin/` directory
+- [x] In a `modules/` directory
+- [ ] In a `lib/` directory
+
+Learn more: [1. Create a directory to store modules](#1-create-a-directory-to-store-modules)
+</quiz>
+
+<quiz>
+What is the correct syntax to import a module?
+
+- [ ] `#!groovy import { SAYHELLO } from './modules/sayhello.nf'`
+- [ ] `#!groovy require { SAYHELLO } from './modules/sayhello.nf'`
+- [x] `#!groovy include { SAYHELLO } from './modules/sayhello.nf'`
+- [ ] `#!groovy load { SAYHELLO } from './modules/sayhello.nf'`
+
+Learn more: [2.3. Add an import declaration](#23-add-an-import-declaration-before-the-workflow-block)
+</quiz>
+
+<quiz>
+What happens to the `-resume` functionality when using modules?
+- [ ] It no longer works
+- [ ] It requires additional configuration
+- [x] It works the same as before
+- [ ] It only works for local modules
+</quiz>
+
+<quiz>
+What are the benefits of using modules? (Select all that apply)
+- [x] Code reusability across workflows
+- [x] Easier maintenance
+- [x] Better organization of workflow code
+- [ ] Faster execution speed
+</quiz>

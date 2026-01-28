@@ -5,17 +5,14 @@ repo_name: nextflow-io/training
 
 nav:
   - Home: index.md
-  - Environment setup:
-      - envsetup/index.md
-      - envsetup/01_setup.md
-      - envsetup/02_local.md
-      - envsetup/03_devcontainer.md
   - Nextflow Run:
       - nextflow_run/index.md
       - nextflow_run/00_orientation.md
       - nextflow_run/01_basics.md
       - nextflow_run/02_pipeline.md
       - nextflow_run/03_config.md
+      - nextflow_run/next_steps.md
+      - nextflow_run/survey.md
   - Hello Nextflow:
       - hello_nextflow/index.md
       - hello_nextflow/00_orientation.md
@@ -25,8 +22,8 @@ nav:
       - hello_nextflow/04_hello_modules.md
       - hello_nextflow/05_hello_containers.md
       - hello_nextflow/06_hello_config.md
-      - hello_nextflow/survey.md
       - hello_nextflow/next_steps.md
+      - hello_nextflow/survey.md
   - Hello nf-core:
       - hello_nf-core/index.md
       - hello_nf-core/00_orientation.md
@@ -35,9 +32,8 @@ nav:
       - hello_nf-core/03_use_module.md
       - hello_nf-core/04_make_module.md
       - hello_nf-core/05_input_validation.md
-      - hello_nf-core/summary.md
-      - hello_nf-core/survey.md
       - hello_nf-core/next_steps.md
+      - hello_nf-core/survey.md
   - Nextflow for Science:
       - nf4_science/index.md
       - Genomics:
@@ -66,9 +62,6 @@ nav:
           - nf4_science/imaging/04_config.md
           - nf4_science/imaging/survey.md
           - nf4_science/imaging/next_steps.md
-  - Training Collections:
-      - training_collections/index.md
-      - training_collections/architects_toolkit_1.md
   - Side Quests:
       - side_quests/index.md
       - side_quests/orientation.md
@@ -80,6 +73,9 @@ nav:
       - side_quests/debugging.md
       - side_quests/essential_scripting_patterns.md
       - side_quests/nf-test.md
+  - Training Collections:
+      - training_collections/index.md
+      - training_collections/architects_toolkit_1.md
   - Archive:
       - Fundamentals Training:
           - archive/basic_training/index.md
@@ -108,7 +104,15 @@ nav:
           - archive/advanced/configuration.md
           - archive/advanced/summary.md
           - archive/advanced/support.md
-  - Help: help.md
+  - Help:
+      - help.md
+      - Training environment:
+          - envsetup/index.md
+          - envsetup/01_setup.md
+          - envsetup/03_devcontainer.md
+          - envsetup/02_local.md
+      - info/nxf_versions.md
+      - info/hello_pipeline.md
 
 theme:
   name: material
@@ -144,6 +148,15 @@ theme:
     - toc.follow
   icon:
     repo: fontawesome/brands/github
+    admonition:
+      catalog: octicons/repo-16
+      courses: octicons/log-16
+      terminal: octicons/terminal-16
+      full-code: material/code-block-braces
+      learning: octicons/mortar-board-16
+      people: octicons/people-16
+      licensing: octicons/law-16
+      videos: octicons/video-16
 extra_css:
   - assets/stylesheets/fonts.css
   - assets/stylesheets/extra.css
@@ -235,6 +248,7 @@ plugins:
       exclude:
         - index*.md
         - help*.md
+        - info/*.md
         - envsetup/*.md
         - nextflow_run/*.md
         - hello_nextflow/*.md
@@ -282,3 +296,7 @@ plugins:
       reconfigure_material: true
       reconfigure_search: true
   - search
+  - mkdocs_quiz
+
+hooks:
+  - docs/assets/hooks/index_page_hook.py

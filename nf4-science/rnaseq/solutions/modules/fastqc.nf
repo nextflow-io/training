@@ -14,6 +14,6 @@ process FASTQC {
 
     script:
     """
-    fastqc $reads
+    fastqc ${reads}
     """
 }

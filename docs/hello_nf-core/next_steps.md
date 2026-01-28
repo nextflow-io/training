@@ -1,47 +1,49 @@
-# Next Steps
+# Course summary
 
-Congrats again on completing the **Hello nf-core** training course and thank you for completing our survey!
+Congratulations on completing the Hello nf-core training course! 🎉
 
----
+<!-- placeholder for video -->
 
-## 1. Top 3 ways to level up your Nextflow skills
+## Your journey
 
-Here are our top three recommendations for what to do next based on the course you just completed.
+You started by learning retrieve and run a demo pipeline, then tackled the conversion of a simple Nextflow workflow into an nf-core pipeline.
+You learned how to create a pipeline scaffold using a template and grafted the existing pipeline onto that scaffold.
+Then you gradually refined the pipeline by replacing one of the local modules with an nf-core module, transformed another one of the local modules to fit nf-core standards, and added input validation.
 
-### 1.1. Get involved with the nf-core community
+### What you built
 
-**The nf-core community is a welcoming, collaborative space** where you can keep learning, connect with others, and make meaningful contributions. Join the [nf-core Slack workspace](https://nf-co.re/join/slack) to ask questions, share ideas, and stay updated. Whether you attend a hackathon, help improve a pipeline, or just chat with fellow community members, getting involved is a great way to grow your skills and be part of the future of open bioinformatics.
+Your final `core-hello` pipeline now has:
 
-### 1.2. Apply Nextflow to a scientific analysis use case
+- **Standardized structure** using the nf-core template with organized directories for workflows, subworkflows, modules, and configuration
+- **Community modules** from the nf-core repository (`cat/cat`) alongside your custom modules
+- **Comprehensive validation** that checks both parameters and input data before the pipeline runs
+- **Professional configuration** with profiles for different execution environments
+- **Complete documentation** and metadata following nf-core conventions
 
-**Check out the [Nextflow for Science](../nf4_science/index.md) page** for a list of short standalone courses that demonstrate how to apply the basic concepts and mechanisms presented in Hello Nextflow to common scientific analysis use cases.
+### Key skills acquired
 
-If you don't see your domain represented by a relatable use case, let us know in the [Community forum](https://community.seqera.io/) so we can add it to our development list.
+Through this hands-on course, you've learned to:
 
-### 1.3. Master more advanced Nextflow features
+1. **Navigate and understand** nf-core pipeline structure by exploring an existing pipeline
+2. **Restructure workflows** to be composable and fit within the nf-core template
+3. **Find and integrate** pre-built modules from the community repository
+4. **Create custom modules** following nf-core standards for naming, structure, and metadata
+5. **Implement validation** using nf-schema to catch errors early with clear feedback
 
-In the Hello courses, we keep the level of technical complexity low on purpose to avoid overloading you with information you don't need in order to get started with Nextflow.
-As you move forward with your work, you're going to want to learn how to use the full feature set and power of Nextflow.
+You're now equipped with the foundational knowledge to build production-ready nf-core pipelines that follow community best practices.
 
-To that end, we are currently working on a **collection of [Side Quests](../side_quests/index.md)**, which are meant to be short standalone courses that go deep into specific topics like testing, metadata handling, using conditional statements and the differences between working on HPC _vs._ cloud.
+## Next steps to build your skills
 
-For any topics that's not covered there yet, **browse the [Fundamentals Training](../basic_training/index.md) and [Advanced Training](../advanced/index.md)** to find training materials about the topics that interest you.
+Here are our top 3 suggestions for what to do next:
 
----
+- Apply Nextflow to a scientific analysis use case with [Nextflow for Science](../nf4_science/index.md)
+- Explore more advanced Nextflow features with the [Side Quests](../side_quests/index.md)
+- Get involved by [joining the nf-core community](https://nf-co.re/join).
 
-## 2. Check out Seqera Platform
+Finally, we recommend you have a look at [**Seqera Platform**](https://seqera.io/), a cloud-based platform developed by the creators of Nextflow that makes it even easier to launch and manage your workflows, as well as manage your data and run analyses interactively in any environment.
 
-**[Seqera Platform](https://seqera.io/) is the best way to run Nextflow in practice.**
+## Feedback survey
 
-It is a cloud-based platform developed by the creators of Nextflow that you can connect to your own compute infrastructure (whether local, HPC or cloud) to make it much easier to launch and manage your workflows, as well as manage your data and run analyses interactively in a cloud environment.
+Before you move on, please take a minute to complete the course survey! Your feedback helps us improve our training materials for everyone.
 
-The Free Tier is available for free use by everyone (with usage quotas).
-Qualifying academics can get free Pro-level access (no usage limitations) through the [Academic Program](https://seqera.io/academic/program/).
-
-Have a look at the [Seqera Platform tutorials](https://docs.seqera.io/platform/latest/getting-started/quickstart-demo/comm-showcase) to see if this might be useful to you.
-
----
-
-### That's it for now!
-
-**Good luck in your Nextflow journey and don't hesitate to let us know in the [Community forum](https://community.seqera.io/) what else we could do to help.**
+[Take the survey :material-arrow-right:](survey.md){ .md-button .md-button--primary }

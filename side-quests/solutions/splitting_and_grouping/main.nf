@@ -1,20 +1,19 @@
 workflow {
     ch_samples = channel.fromPath("./data/samplesheet.csv")
         .splitCsv(header: true)
-        .map{ row ->
-            [[id:row.id, repeat:row.repeat, type:row.type], row.bam]
+        .map { row ->
+            [[id: row.id, repeat: row.repeat, type: row.type], row.bam]
         }
 
-    getSampleIdAndReplicate = { meta, file -> [ meta.subMap(['id', 'repeat']), file ] }
+    getSampleIdAndReplicate = { meta, file -> [meta.subMap(['id', 'repeat']), file] }
 
     ch_normal_samples = ch_samples
         .filter { meta, file -> meta.type == 'normal' }
-        .map ( getSampleIdAndReplicate )
+        .map(getSampleIdAndReplicate)
     ch_tumor_samples = ch_samples
         .filter { meta, file -> meta.type == 'tumor' }
-        .map ( getSampleIdAndReplicate )
-    ch_joined_samples = ch_normal_samples
-        .join(ch_tumor_samples)
+        .map(getSampleIdAndReplicate)
+    ch_joined_samples = ch_normal_samples.join(ch_tumor_samples)
     ch_intervals = channel.of('chr1', 'chr2', 'chr3')
 
     ch_combined_samples = ch_joined_samples
@@ -23,7 +22,7 @@ workflow {
             [
                 grouping_key + [interval: interval],
                 normal,
-                tumor
+                tumor,
             ]
         }
 
@@ -32,10 +31,9 @@ workflow {
             [
                 grouping_key.subMap('id', 'interval'),
                 normal,
-                tumor
+                tumor,
             ]
-            }
-            .groupTuple()
-            .view()
-
+        }
+        .groupTuple()
+        .view()
 }

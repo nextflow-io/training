@@ -9,7 +9,7 @@ process COUNT_LINES {
     script:
     """
     set -o pipefail
-    echo "Processing file: $input_file"
-    gzip -dc $input_file | wc -l
+    echo "Processing file: ${input_file}"
+    gzip -dc ${input_file} | wc -l
     """
 }

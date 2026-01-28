@@ -5,27 +5,38 @@
  */
 process sayHello {
 
-    publishDir 'results', mode: 'copy'
-
     input:
-        val greeting
+    val greeting
 
     output:
-        path 'output.txt'
+    path 'output.txt'
 
     script:
     """
-    echo '$greeting' > output.txt
+    echo '${greeting}' > output.txt
     """
 }
 
 /*
  * Pipeline parameters
  */
-params.greeting = 'Holà mundo!'
+params {
+    input: String = 'Holà mundo!'
+}
 
 workflow {
 
+    main:
     // emit a greeting
-    sayHello(params.greeting)
+    sayHello(params.input)
+
+    publish:
+    first_output = sayHello.out
+}
+
+output {
+    first_output {
+        path 'hello_channels'
+        mode 'copy'
+    }
 }

@@ -29,5 +29,4 @@ workflow {
             [meta + [lang_group: lang_group], file]
         }
         .view()
-
 }

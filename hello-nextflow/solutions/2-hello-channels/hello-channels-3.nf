@@ -5,35 +5,45 @@
  */
 process sayHello {
 
-    publishDir 'results', mode: 'copy'
-
     input:
-        val greeting
+    val greeting
 
     output:
-        path "${greeting}-output.txt"
+    path "${greeting}-output.txt"
 
     script:
     """
-    echo '$greeting' > '$greeting-output.txt'
+    echo '${greeting}' > '${greeting}-output.txt'
     """
 }
 
 /*
  * Pipeline parameters
  */
-params.greeting = 'Holà mundo'
+params {
+    input: String = 'Holà mundo!'
+}
 
 workflow {
 
+    main:
+    // declare an array of input greetings
     greetings_array = ['Hello','Bonjour','Holà']
-
     // create a channel for inputs
     greeting_ch = channel.of(greetings_array)
-                    .view { "Before flatten: $it" }
-                    .flatten()
-                    .view { "After flatten: $it" }
-
+                        .view { greeting -> "Before flatten: $greeting" }
+                        .flatten()
+                        .view { greeting -> "After flatten: $greeting" }
     // emit a greeting
     sayHello(greeting_ch)
+
+    publish:
+    first_output = sayHello.out
+}
+
+output {
+    first_output {
+        path 'hello_channels'
+        mode 'copy'
+    }
 }

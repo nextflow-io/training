@@ -3,18 +3,16 @@
 /*
  * Pipeline parameters
  */
+params {
+    // Primary input (file of input files, one per line)
+    reads_bam: Path = "${projectDir}/data/sample_bams.txt"
 
-// Primary input (file of input files, one per line)
-params.reads_bam = "${projectDir}/data/sample_bams.txt"
-
-// Output directory
-params.outdir = "results_genomics"
-
-// Accessory files
-params.reference        = "${projectDir}/data/ref/ref.fasta"
-params.reference_index  = "${projectDir}/data/ref/ref.fasta.fai"
-params.reference_dict   = "${projectDir}/data/ref/ref.dict"
-params.intervals        = "${projectDir}/data/ref/intervals.bed"
+    // Accessory files
+    reference: Path = "${projectDir}/data/ref/ref.fasta"
+    reference_index: Path = "${projectDir}/data/ref/ref.fasta.fai"
+    reference_dict: Path = "${projectDir}/data/ref/ref.dict"
+    intervals: Path = "${projectDir}/data/ref/intervals.bed"
+}
 
 /*
  * Generate BAM index file
@@ -23,13 +21,11 @@ process SAMTOOLS_INDEX {
 
     container 'community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464'
 
-    publishDir params.outdir, mode: 'symlink'
-
     input:
-        path input_bam
+    path input_bam
 
     output:
-        tuple path(input_bam), path("${input_bam}.bai")
+    tuple path(input_bam), path("${input_bam}.bai")
 
     script:
     """
@@ -44,18 +40,16 @@ process GATK_HAPLOTYPECALLER {
 
     container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
 
-    publishDir params.outdir, mode: 'symlink'
-
     input:
-        tuple path(input_bam), path(input_bam_index)
-        path ref_fasta
-        path ref_index
-        path ref_dict
-        path interval_list
+    tuple path(input_bam), path(input_bam_index)
+    path ref_fasta
+    path ref_index
+    path ref_dict
+    path interval_list
 
     output:
-        path "${input_bam}.vcf"     , emit: vcf
-        path "${input_bam}.vcf.idx" , emit: idx
+    path "${input_bam}.vcf"     , emit: vcf
+    path "${input_bam}.vcf.idx" , emit: idx
 
     script:
     """
@@ -69,6 +63,7 @@ process GATK_HAPLOTYPECALLER {
 
 workflow {
 
+    main:
     // Create input channel from a text file listing input file paths
     reads_ch = channel.fromPath(params.reads_bam).splitText()
 
@@ -89,4 +84,21 @@ workflow {
         ref_dict_file,
         intervals_file
     )
+
+    publish:
+    indexed_bam = SAMTOOLS_INDEX.out
+    vcf = GATK_HAPLOTYPECALLER.out.vcf
+    vcf_idx = GATK_HAPLOTYPECALLER.out.idx
+}
+
+output {
+    indexed_bam {
+        path '.'
+    }
+    vcf {
+        path '.'
+    }
+    vcf_idx {
+        path '.'
+    }
 }

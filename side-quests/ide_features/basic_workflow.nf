@@ -24,8 +24,10 @@ process FASTQC {
 /*
  * Workflow parameters
  */
-params.input = 'data/sample_data.csv'
-params.output_dir = 'results'
+params{
+    input: Path = 'data/sample_data.csv'
+    output_dir: String = 'results'
+}
 
 /*
  * Main workflow demonstrating module usage and navigation

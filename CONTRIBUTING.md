@@ -14,10 +14,12 @@ Table of contents:
     - [Nextflow linting](#nextflow-linting)
     - [Headings CI tests](#headings-ci-tests)
     - [Admonitions](#admonitions)
+    - [Index page template](#index-page-template)
   - [Known limitations](#known-limitations)
     - [Code annotations](#code-annotations)
     - [Word highlighting](#word-highlighting)
   - [TODO / FIXME](#todo--fixme)
+  - [Preview Release](#preview-release)
 
 ## Contribution model
 
@@ -185,6 +187,84 @@ Please see the [official docs](https://squidfunk.github.io/mkdocs-material/refer
 - `!!!` does a regular admonition, `???` makes it collapsed (click to expand).
 - Indentation is important! Make sure you check the rendered site, as it's easy to make a mistake.
 
+### Index page template
+
+Course and module index pages can use a special template system that generates Material for MkDocs grid cards from structured frontmatter data.
+This keeps the index pages consistent and makes them easier to maintain.
+
+To use the template, add `page_type: index_page` to your frontmatter and include the `<!-- additional_information -->` marker in your content.
+
+#### Basic structure
+
+```markdown
+---
+title: Course Title
+hide:
+  - toc
+page_type: index_page
+index_type: course
+additional_information:
+  technical_requirements: true
+  learning_objectives:
+    - First objective
+    - Second objective
+  audience_prerequisites:
+    - "**Audience:** Description of target audience"
+    - "**Skills:** Required skills"
+  videos_playlist: https://www.youtube.com/playlist?list=...
+---
+
+# Course Title
+
+Summary paragraph describing the course.
+This content appears in the "Course summary" card.
+
+<!-- additional_information -->
+
+## Rest of page
+
+Content after the marker appears below the grid cards.
+```
+
+#### Frontmatter fields
+
+| Field                    | Type           | Required | Description                                                   |
+| ------------------------ | -------------- | -------- | ------------------------------------------------------------- |
+| `page_type`              | `"index_page"` | Yes      | Enables the index page template                               |
+| `index_type`             | string         | No       | Badge label displayed in top-right (e.g., "course", "module") |
+| `additional_information` | object         | No       | Container for the collapsible admonitions                     |
+
+#### Additional information fields
+
+All fields within `additional_information` are optional:
+
+| Field                    | Type             | Description                                                                                       |
+| ------------------------ | ---------------- | ------------------------------------------------------------------------------------------------- |
+| `technical_requirements` | `true` or string | If `true`, uses default text about GitHub/local installation. If a string, uses that custom text. |
+| `learning_objectives`    | list of strings  | Rendered as a bulleted list. Must be a list, not `true`.                                          |
+| `audience_prerequisites` | list of strings  | Rendered as a bulleted list. Supports markdown formatting. Must be a list, not `true`.            |
+| `videos_playlist`        | URL string       | Uses default video description text plus a link to the playlist.                                  |
+| `videos`                 | string           | Custom video description text (no link). Mutually exclusive with `videos_playlist`.               |
+
+#### Default content
+
+When `technical_requirements: true` is set:
+
+> You will need a GitHub account OR a local installation of Nextflow. See [Environment options](../envsetup/index.md) for more details.
+
+When `videos_playlist` is set, the following text precedes the link:
+
+> Videos are available for each chapter, featuring an instructor working through the exercises. The video for each part of the course is embedded at the top of the corresponding page.
+
+#### Requirements
+
+- The page must have an H1 heading (`# Title`)
+- The page must include the `<!-- additional_information -->` marker
+- `learning_objectives` and `audience_prerequisites` must be lists (not `true`)
+- `videos` and `videos_playlist` are mutually exclusive
+
+The build will fail with a descriptive error if these requirements are not met.
+
 ## Known limitations
 
 There are a couple of known limitations that I haven't figured out how to get around yet
@@ -214,3 +294,62 @@ I recommend the [Todo Tree VSCode extension](https://marketplace.visualstudio.co
 A list of key ones also included here:
 
 - Remove plugin install from Phil's GitHub fork in `requirements.txt` and `.github/mkdocs.Dockerfile` when [this PR](https://github.com/timvink/mkdocs-enumerate-headings-plugin/pull/33) is merged
+
+## Preview Release
+
+The `preview_release.py` script serves the training docs locally at `https://training.nextflow.io/` with the current branch appearing as a specified version release.
+This is useful for recording videos or previewing how a release will look before it's published.
+
+### How it works
+
+1. Fetches existing released versions from the `gh-pages` branch
+2. Builds the current branch's docs using Docker
+3. Updates `versions.json` to show your version as "latest"
+4. Generates trusted TLS certificates using mkcert
+5. Adds a temporary entry to `/etc/hosts` to redirect the domain locally
+6. Serves the site using Caddy on port 443
+7. Cleans up the hosts entry when you stop the server (Ctrl+C)
+
+### First-time setup
+
+Install the mkcert root CA (one-time, as your regular user):
+
+```bash
+mkcert -install
+```
+
+This adds a local certificate authority to your system keychain so browsers trust the generated certificates.
+Restart your browser after running this command.
+
+### Usage
+
+The easiest way to run the script is with [uv](https://docs.astral.sh/uv/), which handles dependencies automatically:
+
+```bash
+# Serve current branch as version 3.0
+sudo uv run ./preview_release.py --version 3.0
+
+# Check current status
+uv run ./preview_release.py status
+
+# Clean up work directory on exit (default keeps it for faster restarts)
+sudo uv run ./preview_release.py --version 3.0 --clean
+```
+
+The script requires `sudo` because it needs to:
+
+- Modify `/etc/hosts` to redirect `training.nextflow.io` to localhost
+- Bind to port 443 for HTTPS
+
+### Caching
+
+The script caches:
+
+- Downloaded gh-pages content (existing released versions)
+- Built docs for your version
+- Generated TLS certificates
+
+A hash of source files (`docs/`, `mkdocs.yml`) is computed to detect changes.
+If you modify source files, the docs will be rebuilt automatically on the next run.
+
+Use `--clean` to delete the work directory on exit, or manually remove `.preview-release/` to force a fresh build.

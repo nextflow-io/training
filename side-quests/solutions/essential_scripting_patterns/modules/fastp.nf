@@ -11,7 +11,7 @@ process FASTP {
 
     output:
     tuple val(meta), path("*_trimmed*.fastq.gz"), emit: reads
-    path "*.{json,html}"                             , emit: reports
+    path "*.{json,html}", emit: reports
 
     script:
     // Simple single-end vs paired-end detection
@@ -25,9 +25,10 @@ process FASTP {
             --out1 ${meta.id}_trimmed.fastq.gz \\
             --json ${meta.id}.fastp.json \\
             --html ${meta.id}.fastp.html \\
-            --thread $task.cpus
+            --thread ${task.cpus}
         """
-    } else {
+    }
+    else {
         """
         fastp \\
             --in1 ${reads[0]} \\
@@ -36,7 +37,7 @@ process FASTP {
             --out2 ${meta.id}_trimmed_R2.fastq.gz \\
             --json ${meta.id}.fastp.json \\
             --html ${meta.id}.fastp.html \\
-            --thread $task.cpus
+            --thread ${task.cpus}
         """
     }
 }

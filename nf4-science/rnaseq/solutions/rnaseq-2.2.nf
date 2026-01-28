@@ -7,9 +7,10 @@ include { TRIM_GALORE } from './modules/trim_galore.nf'
 /*
  * Pipeline parameters
  */
-
-// Primary input
-params.reads = "data/reads/ENCSR000COQ1_1.fastq.gz"
+params {
+    // Primary input
+    reads: Path = "data/reads/ENCSR000COQ1_1.fastq.gz"
+}
 
 workflow {
 

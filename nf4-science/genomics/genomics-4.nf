@@ -3,21 +3,19 @@
 /*
  * Pipeline parameters
  */
+params {
+    // Primary input (file of input files, one per line)
+    reads_bam: Path = "${projectDir}/data/sample_bams.txt"
 
-// Primary input (file of input files, one per line)
-params.reads_bam = "${projectDir}/data/sample_bams.txt"
+    // Accessory files
+    reference: Path = "${projectDir}/data/ref/ref.fasta"
+    reference_index: Path = "${projectDir}/data/ref/ref.fasta.fai"
+    reference_dict: Path = "${projectDir}/data/ref/ref.dict"
+    intervals: Path = "${projectDir}/data/ref/intervals.bed"
 
-// Output directory
-params.outdir = "results_genomics"
-
-// Accessory files
-params.reference        = "${projectDir}/data/ref/ref.fasta"
-params.reference_index  = "${projectDir}/data/ref/ref.fasta.fai"
-params.reference_dict   = "${projectDir}/data/ref/ref.dict"
-params.intervals        = "${projectDir}/data/ref/intervals.bed"
-
-// Base name for final output file
-params.cohort_name = "family_trio"
+    // Base name for final output file
+    cohort_name: String = "family_trio"
+}
 
 include { SAMTOOLS_INDEX } from './modules/samtools/index/main.nf'
 include { GATK_HAPLOTYPECALLER } from './modules/gatk/haplotypecaller/main.nf'
@@ -26,6 +24,7 @@ include { GATK_JOINTGENOTYPING } from './modules/gatk/jointgenotyping/main.nf'
 
 workflow {
 
+    main:
     // Create input channel from a text file listing input file paths
     reads_ch = channel.fromPath(params.reads_bam).splitText()
 
@@ -61,4 +60,29 @@ workflow {
         ref_index_file,
         ref_dict_file
     )
+
+    publish:
+    indexed_bam = SAMTOOLS_INDEX.out
+    gvcf = GATK_HAPLOTYPECALLER.out.vcf
+    gvcf_idx = GATK_HAPLOTYPECALLER.out.idx
+    joint_vcf = GATK_JOINTGENOTYPING.out.vcf
+    joint_vcf_idx = GATK_JOINTGENOTYPING.out.idx
+}
+
+output {
+    indexed_bam {
+        path 'indexed_bam'
+    }
+    gvcf {
+        path 'gvcf'
+    }
+    gvcf_idx {
+        path 'gvcf'
+    }
+    joint_vcf {
+        path '.'
+    }
+    joint_vcf_idx {
+        path '.'
+    }
 }
