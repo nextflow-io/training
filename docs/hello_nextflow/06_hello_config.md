@@ -1544,7 +1544,7 @@ What takes precedence when the same parameter is set in both the config file and
 - [ ] The first value encountered
 - [ ] Neither; it causes an error
 
-Learn more: [Move default values to nextflow.config](06_hello_config.md#11-move-default-values-to-nextflowconfig)
+Learn more: [Move default values to nextflow.config](#11-move-default-values-to-nextflowconfig)
 </quiz>
 
 <quiz>
@@ -1562,7 +1562,7 @@ If both Docker and Conda are enabled and a process has both directives, which is
 - [ ] The first one defined
 - [ ] It causes an error
 
-Learn more: [Select a software packaging technology](06_hello_config.md#3-select-a-software-packaging-technology)
+Learn more: [Select a software packaging technology](#3-select-a-software-packaging-technology)
 </quiz>
 
 <quiz>
@@ -1580,7 +1580,7 @@ How do you set resource requirements for a specific process in the config file?
 - [x] process { withName: 'processName' { memory = '4 GB' } }
 - [ ] resources.processName.memory = '4 GB'
 
-Learn more: [Set resource allocations for a specific process](06_hello_config.md#53-set-resource-allocations-for-a-specific-process)
+Learn more: [Set resource allocations for a specific process](#53-set-resource-allocations-for-a-specific-process)
 </quiz>
 
 <quiz>
@@ -1590,7 +1590,7 @@ What command line option generates a resource utilization report?
 - [x] -with-report
 - [ ] -with-profile
 
-Learn more: [Run the workflow to generate a resource utilization report](06_hello_config.md#51-run-the-workflow-to-generate-a-resource-utilization-report)
+Learn more: [Run the workflow to generate a resource utilization report](#51-run-the-workflow-to-generate-a-resource-utilization-report)
 </quiz>
 
 <quiz>
@@ -1600,7 +1600,7 @@ What does the resourceLimits directive do?
 - [x] Caps the maximum resources that can be requested
 - [ ] Monitors resource usage
 
-Learn more: [Add resource limits](06_hello_config.md#55-add-resource-limits)
+Learn more: [Add resource limits](#55-add-resource-limits)
 </quiz>
 
 <quiz>
@@ -1610,7 +1610,7 @@ What is the default executor in Nextflow?
 - [ ] kubernetes
 - [ ] aws
 
-Learn more: [Select an execution platform](06_hello_config.md#4-select-an-execution-platform)
+Learn more: [Select an execution platform](#4-select-an-execution-platform)
 </quiz>
 
 <quiz>
@@ -1620,7 +1620,7 @@ How do you specify a parameter file when running Nextflow?
 - [x] -params-file params.json
 - [ ] --input params.json
 
-Learn more: [Use a parameter file](06_hello_config.md#13-use-a-parameter-file)
+Learn more: [Use a parameter file](#13-use-a-parameter-file)
 </quiz>
 
 <quiz>
@@ -1630,7 +1630,7 @@ What can profiles be used for? (Select all that apply)
 - [x] Providing test parameters
 - [ ] Defining new processes
 
-Learn more: [Use profiles to switch between preset configurations](06_hello_config.md#6-use-profiles-to-switch-between-preset-configurations)
+Learn more: [Use profiles to switch between preset configurations](#6-use-profiles-to-switch-between-preset-configurations)
 </quiz>
 
 <quiz>
@@ -1640,5 +1640,5 @@ How do you specify multiple profiles in a single command?
 - [x] -profile profile1,profile2
 - [ ] --profile profile1 --profile profile2
 
-Learn more: [Use profiles to switch between preset configurations](06_hello_config.md#6-use-profiles-to-switch-between-preset-configurations)
+Learn more: [Use profiles to switch between preset configurations](#6-use-profiles-to-switch-between-preset-configurations)
 </quiz>

@@ -1097,7 +1097,7 @@ How do you access the output of a process in the workflow block?
 - [x] processName.out
 - [ ] get(processName)
 
-Learn more: [Pass the output of the first process to the second process](03_hello_workflow.md#14-pass-the-output-of-the-first-process-to-the-second-process)
+Learn more: [Pass the output of the first process to the second process](#14-pass-the-output-of-the-first-process-to-the-second-process)
 </quiz>
 
 <quiz>
@@ -1107,7 +1107,7 @@ What determines the order of process execution in Nextflow?
 - [x] Data dependencies between processes
 - [ ] Random order for parallel execution
 
-Learn more: [Pass the output of the first process to the second process](03_hello_workflow.md#14-pass-the-output-of-the-first-process-to-the-second-process)
+Learn more: [Pass the output of the first process to the second process](#14-pass-the-output-of-the-first-process-to-the-second-process)
 </quiz>
 
 <quiz>
@@ -1117,7 +1117,7 @@ What does the collect() operator do?
 - [x] Gathers all elements from a channel into a single list
 - [ ] Counts the number of elements in a channel
 
-Learn more: [Use an operator to collect the greetings into a single input](03_hello_workflow.md#24-use-an-operator-to-collect-the-greetings-into-a-single-input)
+Learn more: [Use an operator to collect the greetings into a single input](#24-use-an-operator-to-collect-the-greetings-into-a-single-input)
 </quiz>
 
 <quiz>
@@ -1127,7 +1127,7 @@ When should you use the collect() operator?
 - [x] When a downstream process needs all items from an upstream process
 - [ ] When you want to split data across multiple processes
 
-Learn more: [Use an operator to collect the greetings into a single input](03_hello_workflow.md#24-use-an-operator-to-collect-the-greetings-into-a-single-input)
+Learn more: [Use an operator to collect the greetings into a single input](#24-use-an-operator-to-collect-the-greetings-into-a-single-input)
 </quiz>
 
 <quiz>
@@ -1137,7 +1137,7 @@ How do you access a named output from a process?
 - [x] processName.out.outputName
 - [ ] output.processName.outputName
 
-Learn more: [Emit the report file and name outputs](03_hello_workflow.md#412-emit-the-report-file-and-name-outputs)
+Learn more: [Emit the report file and name outputs](#412-emit-the-report-file-and-name-outputs)
 </quiz>
 
 <quiz>
@@ -1147,7 +1147,7 @@ What is the correct syntax for naming an output in a process?
 - [x] emit: outputName
 - [ ] label: outputName
 
-Learn more: [Emit the report file and name outputs](03_hello_workflow.md#412-emit-the-report-file-and-name-outputs)
+Learn more: [Emit the report file and name outputs](#412-emit-the-report-file-and-name-outputs)
 </quiz>
 
 <quiz>
@@ -1157,5 +1157,5 @@ When providing multiple inputs to a process, what must be true?
 - [x] The order of inputs must match the order defined in the input block
 - [ ] Only two inputs can be provided at a time
 
-Learn more: [Pass more than one input to a process](03_hello_workflow.md#3-pass-more-than-one-input-to-a-process)
+Learn more: [Pass more than one input to a process](#3-pass-more-than-one-input-to-a-process)
 </quiz>

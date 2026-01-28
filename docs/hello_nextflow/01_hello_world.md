@@ -1141,7 +1141,7 @@ What are the minimum required components of a Nextflow process?
 - [ ] Input, output, and script blocks
 - [ ] Only a script block
 
-Learn more: [The process definition](01_hello_world.md#111-the-process-definition)
+Learn more: [The process definition](#111-the-process-definition)
 </quiz>
 
 <quiz>
@@ -1151,7 +1151,7 @@ What is the purpose of the output block in a process?
 - [x] To declare expected outputs from the process
 - [ ] To define environment variables
 
-Learn more: [The process definition](01_hello_world.md#111-the-process-definition)
+Learn more: [The process definition](#111-the-process-definition)
 </quiz>
 
 <quiz>
@@ -1169,7 +1169,7 @@ What does the work directory contain? (Select all that apply)
 - [x] Process outputs before publishing
 - [ ] The original workflow script
 
-Learn more: [Find the output and logs in the work directory](01_hello_world.md#122-find-the-output-and-logs-in-the-work-directory)
+Learn more: [Find the output and logs in the work directory](#122-find-the-output-and-logs-in-the-work-directory)
 </quiz>
 
 <quiz>
@@ -1179,7 +1179,7 @@ What does the -resume flag do?
 - [x] Skips processes that have already completed successfully
 - [ ] Creates a backup of the workflow
 
-Learn more: [Re-launch a workflow with -resume](01_hello_world.md#41-re-launch-a-workflow-with--resume)
+Learn more: [Re-launch a workflow with -resume](#41-re-launch-a-workflow-with--resume)
 </quiz>
 
 <quiz>
@@ -1189,7 +1189,7 @@ What is the default mode for publishing workflow outputs?
 - [ ] Move files to the output directory
 - [ ] Compress files in the output directory
 
-Learn more: [Set the publish mode to copy](01_hello_world.md#23-set-the-publish-mode-to-copy)
+Learn more: [Set the publish mode to copy](#23-set-the-publish-mode-to-copy)
 </quiz>
 
 <quiz>
@@ -1199,7 +1199,7 @@ How do you pass a parameter value to a Nextflow workflow from the command line?
 - [x] --parameter value
 - [ ] -p parameter=value
 
-Learn more: [Set up a command-line parameter to capture user input](01_hello_world.md#32-set-up-a-command-line-parameter-to-capture-user-input)
+Learn more: [Set up a command-line parameter to capture user input](#32-set-up-a-command-line-parameter-to-capture-user-input)
 </quiz>
 
 <quiz>
