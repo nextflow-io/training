@@ -461,7 +461,7 @@ What is a module in Nextflow?
 - [ ] A workflow definition
 - [ ] A channel operator
 
-Learn more: [Create a module for `sayHello()`](#2-create-a-module-for-sayhello)
+Learn more: [2. Create a module for `sayHello()`](#2-create-a-module-for-sayhello)
 </quiz>
 
 <quiz>
@@ -479,7 +479,7 @@ Where should module files be stored?
 - [x] In a `modules/` directory
 - [ ] In a `lib/` directory
 
-Learn more: [Create a directory to store modules](#1-create-a-directory-to-store-modules)
+Learn more: [1. Create a directory to store modules](#1-create-a-directory-to-store-modules)
 </quiz>
 
 <quiz>
@@ -489,7 +489,7 @@ What is the correct syntax to import a module?
 - [x] include { processName } from './modules/processName.nf'
 - [ ] load { processName } from './modules/processName.nf'
 
-Learn more: [Add an import declaration](#23-add-an-import-declaration-before-the-workflow-block)
+Learn more: [2.3. Add an import declaration](#23-add-an-import-declaration-before-the-workflow-block)
 </quiz>
 
 <quiz>

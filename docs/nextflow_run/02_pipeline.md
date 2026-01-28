@@ -1555,7 +1555,7 @@ Why does Nextflow create a separate task directory for each process call?
 - [x] To isolate executions and avoid collisions between outputs
 - [ ] To enable parallel file compression
 
-Learn more: [Find the original outputs and logs](#13-find-the-original-outputs-and-logs)
+Learn more: [1.3. Find the original outputs and logs](#13-find-the-original-outputs-and-logs)
 </quiz>
 
 <quiz>
@@ -1565,7 +1565,7 @@ What does the `-ansi-log false` option do when running a workflow?
 - [x] Shows all task directory paths instead of condensing them on one line
 - [ ] Enables verbose debugging mode
 
-Learn more: [Make the terminal show more details](#132-make-the-terminal-show-more-details)
+Learn more: [1.3.2. Make the terminal show more details](#132-make-the-terminal-show-more-details)
 </quiz>
 
 <quiz>
@@ -1575,7 +1575,7 @@ In the code `channel.fromPath(params.input).splitCsv().map { line -> line[0] }`,
 - [x] Extracts the first column from each CSV row
 - [ ] Counts the number of lines
 
-Learn more: [Loading the input data from the CSV](#141-loading-the-input-data-from-the-csv)
+Learn more: [1.4.1. Loading the input data from the CSV](#141-loading-the-input-data-from-the-csv)
 </quiz>
 
 <quiz>
@@ -1585,7 +1585,7 @@ Why is it important to include the input value in output filenames (e.g., `${gre
 - [x] To prevent output files from overwriting each other when processing multiple inputs
 - [ ] To make files easier to compress
 
-Learn more: [How the outputs are named](#143-how-the-outputs-are-named)
+Learn more: [1.4.3. How the outputs are named](#143-how-the-outputs-are-named)
 </quiz>
 
 <quiz>
@@ -1595,7 +1595,7 @@ What is the purpose of the `include` statement in a modularized workflow?
 - [ ] To include configuration settings
 - [ ] To add documentation comments
 
-Learn more: [Running modularized pipelines](#3-running-modularized-pipelines)
+Learn more: [3. Running modularized pipelines](#3-running-modularized-pipelines)
 </quiz>
 
 <quiz>
@@ -1605,7 +1605,7 @@ When you modularize a workflow and run it with `-resume`, what happens?
 - [x] Caching works normally based on the generated job scripts
 - [ ] Only the main workflow file is cached
 
-Learn more: [Run the workflow](#32-run-the-workflow)
+Learn more: [3.2. Run the workflow](#32-run-the-workflow)
 </quiz>
 
 <quiz>
@@ -1615,7 +1615,7 @@ What does the `container` directive in a process definition specify?
 - [x] The container image URI to use for running the process
 - [ ] The output file format
 
-Learn more: [Use a container in a workflow](#42-use-a-container-in-a-workflow)
+Learn more: [4.2. Use a container in a workflow](#42-use-a-container-in-a-workflow)
 </quiz>
 
 <quiz>
@@ -1625,7 +1625,7 @@ In the `.command.run` file, what does the `nxf_launch` function contain?
 - [x] The `docker run` command with volume mounts and container settings
 - [ ] The process input declarations
 
-Learn more: [Inspect how Nextflow launched the containerized task](#424-inspect-how-nextflow-launched-the-containerized-task)
+Learn more: [4.2.4. Inspect how Nextflow launched the containerized task](#424-inspect-how-nextflow-launched-the-containerized-task)
 </quiz>
 
 <quiz>
@@ -1635,5 +1635,5 @@ What does Nextflow automatically handle when running a containerized process? (S
 - [x] Running the process script inside the container
 - [x] Cleaning up the container instance after execution
 
-Learn more: [Using containerized software](#4-using-containerized-software)
+Learn more: [4. Using containerized software](#4-using-containerized-software)
 </quiz>
