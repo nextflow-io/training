@@ -664,7 +664,7 @@ nextflow run 2b-multistep.nf --input data/greetings.csv --batch test
 
 ??? success "Command output"
 
-    ```console
+    ```console linenums="1"
     N E X T F L O W   ~  version 25.10.2
 
     Launching `2b-multistep.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
@@ -678,7 +678,7 @@ You should see new final outputs named with your custom batch name:
 
 ??? abstract "Directory contents"
 
-    ```console hl_lines="10 12"
+    ```console linenums="1" hl_lines="10 12"
     results
     ├── 1-hello
     |   └── output.txt
