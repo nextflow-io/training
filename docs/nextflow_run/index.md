@@ -30,28 +30,15 @@ You will take away the skills and confidence to start running workflows with Nex
 
 ## Course overview
 
-### Which course should I take?
-
-We offer two introductory Nextflow courses with different goals:
-
-| Course                                           | Goal                       | You will...                                                                      |
-| ------------------------------------------------ | -------------------------- | -------------------------------------------------------------------------------- |
-| **Nextflow Run** (this course)                   | Run existing pipelines     | Learn to execute, configure, and troubleshoot pipelines created by others        |
-| **[Hello Nextflow](../hello_nextflow/index.md)** | Develop your own pipelines | Build pipelines from scratch, learning channels, operators, and modules in depth |
-
-Both courses use the same training environment and cover some overlapping ground (running pipelines, configuration basics), so you don't need to take both unless you want comprehensive coverage.
-
 ### What you'll do
 
 This course is hands-on, with goal-oriented exercises structured to introduce information gradually.
-It's named after the core Nextflow command:
-
-```bash
-nextflow run <pipeline>
-```
 
 You will execute several versions of a Nextflow pipeline that processes text inputs.
 You'll start with a simple version that consists of a single step, and eventually progress to a multi-step version that takes a CSV file of tabular text inputs, runs a few transformation steps, and outputs a single text file containing an ASCII picture of a character saying the transformed text.
+
+This course focuses on running pipelines (named after the core `nextflow run` command).
+If you're looking for an intro to developing Nextflow pipelines, see [Hello Nextflow](../hello_nextflow/index.md).
 
 ### Lesson plan
 

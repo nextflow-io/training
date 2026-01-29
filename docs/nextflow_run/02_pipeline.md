@@ -680,7 +680,7 @@ nextflow run 2b-multistep.nf --input data/greetings.csv --batch test
     [d3/b4d86c] collectGreetings   | 1 of 1 ✔
     ```
 
-You should see new final outputs named with your custom batch name:
+You should see new final outputs named with your custom batch name.
 
 ??? abstract "Directory contents"
 

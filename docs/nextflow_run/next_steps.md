@@ -55,13 +55,7 @@ Finally, we recommend you have a look at [**Seqera Platform**](https://seqera.io
 
 ## Getting help
 
-When you run into issues, the Nextflow community is here to help:
-
-- **[Community Forum](https://community.seqera.io)**: Post questions and search for answers from the community
-- **[Nextflow Slack](https://www.nextflow.io/slack-invite.html)**: Chat with other users and developers in real-time
-- **[GitHub Issues](https://github.com/nextflow-io/nextflow/issues)**: Report bugs or request features
-
-When asking for help, include: the command you ran, the error message, your Nextflow version (`nextflow -v`), and relevant parts of your configuration.
+For help resources and community support, see the [Help page](../help.md).
 
 ## Feedback survey
 
