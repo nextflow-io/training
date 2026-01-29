@@ -87,8 +87,7 @@ hide:
 
     ??? courses "**Nextflow Run:** Learn to run existing pipelines"
 
-        Learn to run and configure existing Nextflow pipelines without needing to write your own.
-        A stripped-down version of "Hello Nextflow" that covers execution, outputs, basic code structure, and configuration for different compute environments.
+        A concise introduction to running and configuring Nextflow pipelines, based on the Hello Nextflow developer's course but with less focus on code. Covers execution, outputs, basic code structure, and configuration for different compute environments."
 
         [Start the Nextflow Run training :material-arrow-right:](nextflow_run/index.md){ .md-button .md-button--secondary }
 
