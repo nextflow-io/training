@@ -94,9 +94,15 @@ For patient A specifically, we have two sets of technical replicates (repeats).
 
 #### Review the assignment
 
-Your challenge is to write a Nextflow workflow that will group and split the samples based on the associated metadata.
+Your challenge is to write a Nextflow workflow that will:
 
-<!-- TODO: give a bit more details, similar to how it's done in the Metadata side quest -->
+1. **Read** sample data from a CSV file and structure it with meta maps
+2. **Separate** samples into different channels based on type (normal vs tumor)
+3. **Join** matched tumor/normal pairs by patient ID and replicate number
+4. **Distribute** samples across genomic intervals for parallel processing
+5. **Group** related samples back together for downstream analysis
+
+This represents a common bioinformatics pattern where you need to split data for independent processing, then recombine related items for comparative analysis.
 
 #### Readiness checklist
 
@@ -113,7 +119,7 @@ If you can check all the boxes, you're good to go.
 
 ## 1. Read in sample data
 
-### 1.1. Read in sample data with splitCsv and create meta maps
+### 1.1. Read in sample data with `splitCsv` and create meta maps
 
 Let's start by reading in the sample data with `splitCsv` and organizing it into the meta map pattern. In the `main.nf`, you'll see that we've already started the workflow.
 
@@ -568,7 +574,7 @@ Note how we have a tuple of two elements (`id` and `repeat` fields) as the first
 
 If you want to explore more ways to join on different keys, check out the [join operator documentation](https://www.nextflow.io/docs/latest/operator.html#join) for additional options and examples.
 
-### 3.3. Use subMap to create a new joining key
+### 3.3. Use `subMap` to create a new joining key
 
 The previous approach loses the field names from our joining key - the `id` and `repeat` fields become just a list of values. To retain the field names for later access, we can use the [`subMap` method](<https://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/Map.html#subMap(java.util.Collection)>).
 
@@ -826,7 +832,7 @@ Let's start by creating a channel of intervals. To keep life simple, we will jus
 
 === "After"
 
-    ```groovy title="main.nf" linenums="17" hl_lines="3"
+    ```groovy title="main.nf" linenums="17" hl_lines="2"
             .join(ch_tumor_samples)
         ch_intervals = channel.of('chr1', 'chr2', 'chr3')
     ```

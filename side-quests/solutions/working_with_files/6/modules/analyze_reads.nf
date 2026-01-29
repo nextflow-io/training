@@ -1,9 +1,9 @@
 #!/usr/bin/env nextflow
 
 process ANALYZE_READS {
-    tag "${meta.id}"
+    tag { meta.id }
 
-    publishDir "results/${meta.type}/${meta.id}/${meta.replicate}", mode: 'copy'
+    publishDir { "results/${meta.type}/${meta.id}/${meta.replicate}" }, mode: 'copy'
 
     input:
     tuple val(meta), path(files)

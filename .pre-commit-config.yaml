@@ -5,6 +5,7 @@ repos:
       - id: prettier
         additional_dependencies:
           - prettier@3.2.5
+        exclude: ^\.claude/skills/
 
   - repo: https://github.com/editorconfig-checker/editorconfig-checker.python
     rev: "3.2.1"
