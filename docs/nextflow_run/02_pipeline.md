@@ -229,6 +229,8 @@ This is the most interesting part: how did we switch from taking a single value 
 
 In Nextflow, we do that with a **channel**: a construct designed to handle inputs efficiently and shuttle them from one step to another in multi-step workflows, while providing built-in parallelism and many additional benefits.
 
+Let's break it down.
+
 ```groovy title="2a-inputs.nf" linenums="29" hl_lines="3-5"
     main:
     // create a channel for inputs from a CSV file
@@ -316,6 +318,8 @@ process sayHello {
 You see that, compared to the version of this process in `1-hello.nf`, the output declaration and the relevant bit of the command have changed to include the greeting value in the output file name.
 
 This is one way to ensure that the output file names won't collide when they get published to the common results directory.
+
+And that's the only change we've had to make inside the process declaration!
 
 ### Takeaway
 
@@ -530,6 +534,8 @@ Let's look at the code and identify the key patterns for multi-step workflows.
 
 There's a lot going on in there, but the most obvious difference compared to the previous version of the workflow is that now there are multiple process definitions, and correspondingly, several process calls in the workflow block.
 
+Let's take a closer look and see if we can identify the most interesting pieces.
+
 #### 2.3.1. Visualizing workflow structure
 
 If you're using VSCode with the Nextflow extension, you can get a helpful diagram of how the processes are connected by clicking on the small `DAG preview` link displayed just above the workflow block in any Nextflow script.
@@ -549,7 +555,7 @@ For now, let's dig into how the processes are connected to one another.
 
 #### 2.3.2. How the processes are connected
 
-The interesting thing to look at here is how the process calls are chained together in the workflow's `main:` block.
+The really interesting thing to look at here is how the process calls are chained together in the workflow's `main:` block.
 
 ```groovy title="2b-multistep.nf" linenums="68" hl_lines="9 11"
     main:
