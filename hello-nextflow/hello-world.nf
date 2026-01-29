@@ -14,6 +14,8 @@ process sayHello {
 }
 
 workflow {
+
+    main:
     // emit a greeting
     sayHello()
 }
