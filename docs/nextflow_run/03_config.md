@@ -17,7 +17,7 @@ If you're not familiar with the Hello pipeline or you could use a reminder, see 
 
 ## 1. Manage workflow input parameters
 
-!!! example "Scenario"
+??? example "Scenario"
 
     You've downloaded a pipeline and want to run it repeatedly with the same input files and settings, but you don't want to type out all the parameters every time.
     Or perhaps you're setting up the pipeline for a colleague who isn't comfortable with command-line arguments.
@@ -166,7 +166,7 @@ Functionally, this move has changed nothing, but conceptually it's a little clea
 
 ### 1.2. Use a run-specific configuration file
 
-!!! example "Scenario"
+??? example "Scenario"
 
     You want to experiment with different settings without modifying your main configuration file.
 
@@ -266,7 +266,7 @@ Now let's look at another useful way to set parameter values.
 
 ### 1.3. Use a parameter file
 
-!!! example "Scenario"
+??? example "Scenario"
 
     You need to share exact run parameters with a collaborator, or record them for a publication.
 
@@ -360,7 +360,7 @@ Learn how to manage where and how your workflow outputs get published.
 
 ## 2. Manage workflow outputs
 
-!!! example "Scenario"
+??? example "Scenario"
 
     Your pipeline publishes outputs to a hardcoded directory, but you want to organize results by project or experiment name without editing the workflow code each time.
 
@@ -792,7 +792,7 @@ Now let's see how we can configure an alternative software packaging option via 
 
 ### 3.1. Disable Docker and enable Conda in the config file
 
-!!! example "Scenario"
+??? example "Scenario"
 
     You're moving your pipeline to an HPC cluster where Docker isn't allowed for security reasons.
     The cluster supports Singularity and Conda, so you need to switch your configuration accordingly.
@@ -907,7 +907,7 @@ Learn how to change the execution platform used by Nextflow to actually do the w
 
 ## 4. Select an execution platform
 
-!!! example "Scenario"
+??? example "Scenario"
 
     You've been developing and testing your pipeline on your laptop, but now you need to run it on thousands of samples.
     Your institution has an HPC cluster with a Slurm scheduler that you'd like to use instead.
@@ -998,7 +998,7 @@ Learn how to evaluate and express resource allocations and limitations in Nextfl
 
 ## 5. Control compute resource allocations
 
-!!! example "Scenario"
+??? example "Scenario"
 
     Your pipeline keeps failing on the cluster because tasks are being killed for exceeding memory limits.
     Or perhaps you're being charged for resources you're not using and want to optimize costs.
@@ -1022,7 +1022,7 @@ But how do you know what values to use?
 
 ### 5.1. Run the workflow to generate a resource utilization report
 
-!!! example "Scenario"
+??? example "Scenario"
 
     You don't know how much memory or CPU your processes need and want to avoid wasting resources or having jobs killed.
 
@@ -1154,7 +1154,7 @@ Learn how to set up preset configuration profiles and switch between them at run
 
 ## 6. Use profiles to switch between preset configurations
 
-!!! example "Scenario"
+??? example "Scenario"
 
     You regularly switch between running pipelines on your laptop for development and on your institution's HPC for production runs.
     You're tired of manually changing configuration settings every time you switch environments.
@@ -1231,7 +1231,7 @@ We can also create additional profiles if there are other elements of configurat
 
 ### 6.2. Create a profile of test parameters
 
-!!! example "Scenario"
+??? example "Scenario"
 
     You want others to be able to try your pipeline quickly without gathering their own input data.
 
@@ -1444,7 +1444,7 @@ Learn how to run pipelines directly from remote repositories like GitHub.
 
 ## 7. Run pipelines from remote repositories
 
-!!! example "Scenario"
+??? example "Scenario"
 
     You want to run a well-established pipeline like those from nf-core without having to download and manage the code yourself.
 
