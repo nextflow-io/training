@@ -296,7 +296,21 @@ plugins:
       reconfigure_material: true
       reconfigure_search: true
   - search
-  - mkdocs_quiz
+  - mkdocs_quiz:
+      progress_sidebar_position: bottom
+      cli_run:
+        "Nextflow Run":
+          "Basics": docs/nextflow_run/01_basics.md
+          "Pipeline": docs/nextflow_run/02_pipeline.md
+          "Config": docs/nextflow_run/03_config.md
+          "Troubleshooting": docs/nextflow_run/04_troubleshooting.md
+        "Hello Nextflow":
+          "Hello World": docs/hello_nextflow/01_hello_world.md
+          "Hello Channels": docs/hello_nextflow/02_hello_channels.md
+          "Hello Workflow": docs/hello_nextflow/03_hello_workflow.md
+          "Hello Modules": docs/hello_nextflow/04_hello_modules.md
+          "Hello Containers": docs/hello_nextflow/05_hello_containers.md
+          "Hello Config": docs/hello_nextflow/06_hello_config.md
 
 hooks:
   - docs/assets/hooks/index_page_hook.py
