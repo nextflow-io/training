@@ -241,37 +241,40 @@ Let's break it down.
     sayHello(greeting_ch)
 ```
 
-This is where the magic happens, starting at line 31.
-Here's what that line means in plain English:
+This code creates a channel called `greeting_ch` that reads the CSV file, parses it, and extracts the first column from each row.
+The result is a channel containing `Hello`, `Bonjour`, and `Holà`.
 
-- `channel` creates a **channel**, _i.e._ a queue that will hold the data
-- `.fromPath` specifies the data source is a filepath
-- `(params.input)` specifies the filepath is provided by `--input` on the command line
+??? tip "How does this work?"
 
-In other words, that line tells Nextflow: take the filepath given with `--input` and get ready to treat its contents as input data.
+    Here's what that line means in plain English:
 
-Then the next two lines apply **operators** that do the actual parsing of the file and loading of the data into the appropriate data structure:
+    - `channel.fromPath` is a **channel factory** that creates a channel from file path(s)
+    - `(params.input)` specifies the filepath is provided by `--input` on the command line
 
-- `.splitCsv()` tells Nextflow to parse the CSV file into an array representing rows and columns
-- `.map { line -> line[0] }` tells Nextflow to take only the element in the first column from each row
+    In other words, that line tells Nextflow: take the filepath given with `--input` and get ready to treat its contents as input data.
 
-So in practice, starting from the following CSV file:
+    Then the next two lines apply **operators** that do the actual parsing of the file and loading of the data into the appropriate data structure:
 
-```csv title="greetings.csv" linenums="1"
-Hello,English,123
-Bonjour,French,456
-Holà,Spanish,789
-```
+    - `.splitCsv()` tells Nextflow to parse the CSV file into an array representing rows and columns
+    - `.map { line -> line[0] }` tells Nextflow to take only the element in the first column from each row
 
-We have transformed that into an array that looks like this:
+    So in practice, starting from the following CSV file:
 
-```txt title="Array contents"
-[[Hello,English,123],[Bonjour,French,456],[Holà,Spanish,789]]
-```
+    ```csv title="greetings.csv" linenums="1"
+    Hello,English,123
+    Bonjour,French,456
+    Holà,Spanish,789
+    ```
 
-And then we've taken the first element from each of the three rows and loaded them into a Nextflow channel that now contains: `Hello`, `Bonjour`, and `Holà`.
+    We have transformed that into an array that looks like this:
 
-The result of this very short snippet of code is a channel called `greeting_ch` loaded with the three individual greetings from the CSV file, ready for processing.
+    ```txt title="Array contents"
+    [[Hello,English,123],[Bonjour,French,456],[Holà,Spanish,789]]
+    ```
+
+    And then we've taken the first element from each of the three rows and loaded them into a Nextflow channel that now contains: `Hello`, `Bonjour`, and `Holà`.
+
+    If you want to understand channels and operators in depth, including how to write them yourself, see [Hello Nextflow Part 2: Hello Channels](../hello_nextflow/02_hello_channels.md#4-read-input-values-from-a-csv-file).
 
 #### 1.4.2. Call the process on each greeting
 
@@ -418,7 +421,7 @@ The second is a report file that summarizes some information about the run.
 
 ### 2.3. Examine the code
 
-Let's look at the code and see what we can tie back to what we just observed.
+Let's look at the code and identify the key patterns for multi-step workflows.
 
 ??? full-code "Full code file"
 
@@ -533,7 +536,7 @@ There's a lot going on in there, but the most obvious difference compared to the
 
 Let's take a closer look and see if we can identify the most interesting pieces.
 
-#### 2.3.1. Overall wiring of the workflow
+#### 2.3.1. Visualizing workflow structure
 
 If you're using VSCode with the Nextflow extension, you can get a helpful diagram of how the processes are connected by clicking on the small `DAG preview` link displayed just above the workflow block in any Nextflow script.
 
@@ -569,18 +572,10 @@ The really interesting thing to look at here is how the process calls are chaine
 ```
 
 You can see that the first process call, `sayHello(greeting_ch)`, is unchanged.
+Then the next process call, to `convertToUpper`, refers to the output of `sayHello` as `sayHello.out`.
 
-Then the next process call, to `convertToUpper`, refers to the output of `sayHello` as `sayHello.out`, just like the `publish:` block did.
-
-```groovy title="2b-multistep.nf" linenums="75"
-    // convert the greeting to uppercase
-    convertToUpper(sayHello.out)
-```
-
-This tells Nextflow to provide `sayHello.out`, which represents the channel output by `sayHello()`, as an input to `convertToUpper`.
-
-That is, at its simplest, how we shuttle data from one step to the next in Nextflow.
-We take the output channel from the first process, and pass it as an input to the next process.
+The pattern is simple: `processName.out` refers to a process's output channel, which can be passed directly to the next process.
+This is how we shuttle data from one step to the next in Nextflow.
 
 #### 2.3.3. A process can take multiple inputs
 
@@ -644,33 +639,30 @@ The downside is that it can sometimes make it harder to decipher what the pipeli
 
 #### 2.3.5. An input parameter can have a default value
 
-Now that we understand what's going on with the first input to `collectGreetings`, let's look at that `params.batch` input.
+You may have noticed that `collectGreetings` takes a second input, `params.batch`:
 
 ```groovy title="2b-multistep.nf" linenums="77"
     // collect all the greetings into one file
     collectGreetings(convertToUpper.out.collect(), params.batch)
 ```
 
-That automatically causes the workflow to expect a CLI parameter named `--batch` to be included in the command line used to run it.
-However, you may recall that when we launched the workflow, we didn't specify a `batch` parameter in the command.
+This passes a CLI parameter named `--batch` to the workflow.
+However, when we launched the workflow earlier, we didn't specify a `--batch` parameter.
 
 What's going on there?
-Have a look at the `params` block.
+Have a look at the `params` block:
 
-```groovy title="2b-multistep.nf" linenums="58" hl_lines="6"
-    /*
-    * Pipeline parameters
-    */
-    params {
-        input: Path
-        batch: String = 'batch'
-    }
+```groovy title="2b-multistep.nf" linenums="61" hl_lines="3"
+params {
+    input: Path
+    batch: String = 'batch'
+}
 ```
 
-Ah! There is a default value configured in the workflow, so we don't have to provide it.
+There is a default value configured in the workflow, so we don't have to provide it.
 But if we do provide one on the command line, the value we specify will be used instead of the default.
 
-You can try it yourself if you want.
+Try it:
 
 ```bash
 nextflow run 2b-multistep.nf --input data/greetings.csv --batch test
@@ -688,7 +680,7 @@ nextflow run 2b-multistep.nf --input data/greetings.csv --batch test
     [d3/b4d86c] collectGreetings   | 1 of 1 ✔
     ```
 
-You should see new final outputs named accordingly.
+You should see new final outputs named with your custom batch name.
 
 ??? abstract "Directory contents"
 
@@ -742,7 +734,7 @@ This makes it easy to then pass specific outputs individually to other processes
 
 In the `output` block, we've used custom paths to group intermediate results in order to make it easier to pick out just the final outputs of the workflow.
 
-```groovy title="2b-multistep.nf" linenums="80" hl_lines="3 7 11 15"
+```groovy title="2b-multistep.nf" linenums="87" hl_lines="3 7 11 15"
 output {
     first_output {
         path '2b-multistep/intermediates'
@@ -764,6 +756,10 @@ output {
 ```
 
 There are more sophisticated ways to organize published outputs; we'll touch on a few in the part on configuration.
+
+!!! tip "Want to learn more about building workflows?"
+
+    For detailed coverage of building multi-step workflows, see [Hello Nextflow Part 3: Hello Workflow](../hello_nextflow/03_hello_workflow.md).
 
 ### Takeaway
 

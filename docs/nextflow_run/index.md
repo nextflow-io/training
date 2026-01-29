@@ -9,12 +9,11 @@ additional_information:
   learning_objectives:
     - Launch and manage execution of Nextflow workflows
     - Find and interpret outputs (results) and log files
-    - Troubleshoot basic issues
     - Recognize core Nextflow components in a simple multi-step workflow
     - Configure pipeline execution to run on common computing platforms including HPC and cloud
     - Summarize best practices for reproducibility, portability and code re-use that make pipelines FAIR, including code modularity and software containers
   audience_prerequisites:
-    - "**Audience:** This course is designed for learners who are completely new to Nextflow and want to execute existing pipelines."
+    - "**Audience:** This course is designed for learners who are completely new to Nextflow and want to run existing pipelines."
     - "**Skills:** Some familiarity with the command line, basic scripting concepts and common file formats is assumed."
     - "**Domain:** The exercises are all domain-agnostic, so no prior scientific knowledge is required."
 ---
@@ -31,10 +30,15 @@ You will take away the skills and confidence to start running workflows with Nex
 
 ## Course overview
 
-This course is designed to be hands-on, with goal-oriented exercises structured to introduce information gradually.
+### What you'll do
+
+This course is hands-on, with goal-oriented exercises structured to introduce information gradually.
 
 You will execute several versions of a Nextflow pipeline that processes text inputs.
 You'll start with a simple version that consists of a single step, and eventually progress to a multi-step version that takes a CSV file of tabular text inputs, runs a few transformation steps, and outputs a single text file containing an ASCII picture of a character saying the transformed text.
+
+This course focuses on running pipelines (named after the core `nextflow run` command).
+If you're looking for an intro to developing Nextflow pipelines, see [Hello Nextflow](../hello_nextflow/index.md).
 
 ### Lesson plan
 
