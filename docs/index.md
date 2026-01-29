@@ -87,11 +87,8 @@ hide:
 
     ??? courses "**Nextflow Run:** Learn to run existing pipelines"
 
-        For users who want to **run pipelines created by others** (such as nf-core pipelines) without writing their own.
-        Covers launching pipelines from repositories, understanding outputs and logs, configuration for different compute environments, and troubleshooting.
-
-        You will learn to recognize code patterns but won't write pipelines from scratch.
-        If you want to **develop your own pipelines**, take Hello Nextflow instead.
+        Learn to run and configure existing Nextflow pipelines without needing to write your own.
+        A stripped-down version of "Hello Nextflow" that covers execution, outputs, basic code structure, and configuration for different compute environments.
 
         [Start the Nextflow Run training :material-arrow-right:](nextflow_run/index.md){ .md-button .md-button--secondary }
 

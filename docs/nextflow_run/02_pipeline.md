@@ -242,7 +242,7 @@ In Nextflow, we do that with a **channel**: a construct designed to handle input
 This code creates a channel called `greeting_ch` that reads the CSV file, parses it, and extracts the first column from each row.
 The result is a channel containing `Hello`, `Bonjour`, and `Holà`.
 
-!!! tip "How does this work?"
+??? tip "How does this work?"
 
     Here's what that line means in plain English:
 
