@@ -1481,6 +1481,18 @@ Specifying exact versions is essential for reproducibility.
 
 You know how to run pipelines directly from GitHub and other remote repositories, and how to specify versions for reproducibility.
 
+### What's next?
+
+Give yourself a big pat on the back!
+You know everything you need to know to get started running and managing Nextflow pipelines.
+
+That concludes this course, but if you're eager to keep learning, we have two main recommendations:
+
+- If you want to dig deeper into developing your own pipelines, have a look at [Hello Nextflow](../hello_nextflow/index.md), a course for beginners that covers the same general progression as this one but goes into much more detail about channels and operators.
+- If you would like to continue learning how to run Nextflow pipelines without going deeper into the code, have a look at the first part of [Hello nf-core](../hello_nf-core/index.md), which introduces the tooling for finding and running pipelines from the hugely popular [nf-co.re](https://nf-co.re/) project.
+
+Have fun!
+
 ---
 
 ## Quiz
