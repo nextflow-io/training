@@ -4,7 +4,6 @@
  * Use echo to print 'Hello World!' to a file
  */
 process sayHello {
-
     input:
     val greeting
 
@@ -29,7 +28,7 @@ workflow {
     main:
     // create a channel for inputs
     greeting_ch = channel.of('Hello', 'Bonjour', 'Holà')
-                        .view()
+        .view()
     // emit a greeting
     sayHello(greeting_ch)
 

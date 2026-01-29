@@ -4,7 +4,6 @@
  * Use echo to print 'Hello World!' to a file
  */
 process sayHello {
-
     input:
     val greeting
 
@@ -21,7 +20,6 @@ process sayHello {
  * Use a text replacement tool to convert the greeting to uppercase
  */
 process convertToUpper {
-
     input:
     path input_file
 
@@ -38,7 +36,6 @@ process convertToUpper {
  * Collect uppercase greetings into a single output file
  */
 process collectGreetings {
-
     input:
     path input_files
 
@@ -63,8 +60,8 @@ workflow {
     main:
     // create a channel for inputs from a CSV file
     greeting_ch = channel.fromPath(params.input)
-                        .splitCsv()
-                        .map { line -> line[0] }
+        .splitCsv()
+        .map { line -> line[0] }
     // emit a greeting
     sayHello(greeting_ch)
     // convert the greeting to uppercase

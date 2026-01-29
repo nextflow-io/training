@@ -204,8 +204,8 @@ Let's take a look at what makes that possible in the workflow code.
         main:
         // create a channel for inputs from a CSV file
         greeting_ch = channel.fromPath(params.input)
-                            .splitCsv()
-                            .map { line -> line[0] }
+            .splitCsv()
+            .map { line -> line[0] }
         // emit a greeting
         sayHello(greeting_ch)
 
@@ -235,8 +235,8 @@ Let's break it down.
     main:
     // create a channel for inputs from a CSV file
     greeting_ch = channel.fromPath(params.input)
-                        .splitCsv()
-                        .map { line -> line[0] }
+        .splitCsv()
+        .map { line -> line[0] }
     // emit a greeting
     sayHello(greeting_ch)
 ```
@@ -281,8 +281,8 @@ Next, in the last line of the workflow's `main:` block, we provide the loaded `g
     main:
     // create a channel for inputs from a CSV file
     greeting_ch = channel.fromPath(params.input)
-                        .splitCsv()
-                        .map { line -> line[0] }
+        .splitCsv()
+        .map { line -> line[0] }
     // emit a greeting
     sayHello(greeting_ch)
 ```
@@ -493,8 +493,8 @@ Let's look at the code and see what we can tie back to what we just observed.
         main:
         // create a channel for inputs from a CSV file
         greeting_ch = channel.fromPath(params.input)
-                            .splitCsv()
-                            .map { line -> line[0] }
+            .splitCsv()
+            .map { line -> line[0] }
         // emit a greeting
         sayHello(greeting_ch)
         // convert the greeting to uppercase
@@ -558,8 +558,8 @@ The really interesting thing to look at here is how the process calls are chaine
     main:
     // create a channel for inputs from a CSV file
     greeting_ch = channel.fromPath(params.input)
-                        .splitCsv()
-                        .map { line -> line[0] }
+        .splitCsv()
+        .map { line -> line[0] }
     // emit a greeting
     sayHello(greeting_ch)
     // convert the greeting to uppercase
@@ -839,8 +839,8 @@ Start by opening the `2c-modules.nf` workflow file.
         main:
         // create a channel for inputs from a CSV file
         greeting_ch = channel.fromPath(params.input)
-                            .splitCsv()
-                            .map { line -> line[0] }
+            .splitCsv()
+            .map { line -> line[0] }
         // emit a greeting
         sayHello(greeting_ch)
         // convert the greeting to uppercase
@@ -1184,8 +1184,8 @@ The workflow is very similar to the previous one, plus the extra step to run `co
         main:
         // create a channel for inputs from a CSV file
         greeting_ch = channel.fromPath(params.input)
-                            .splitCsv()
-                            .map { line -> line[0] }
+            .splitCsv()
+            .map { line -> line[0] }
         // emit a greeting
         sayHello(greeting_ch)
         // convert the greeting to uppercase

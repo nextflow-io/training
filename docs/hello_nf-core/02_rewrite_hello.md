@@ -374,8 +374,8 @@ workflow {
 
   // create a channel for inputs from a CSV file
   greeting_ch = channel.fromPath(params.greeting)
-                      .splitCsv()
-                      .map { line -> line[0] }
+      .splitCsv()
+      .map { line -> line[0] }
 
   // emit a greeting
   sayHello(greeting_ch)
@@ -431,8 +431,8 @@ Now, replace the channel construction with a simple `take` statement declaring e
     ```groovy title="original-hello/hello.nf" linenums="18"
         // create a channel for inputs from a CSV file
         greeting_ch = channel.fromPath(params.greeting)
-                            .splitCsv()
-                            .map { line -> line[0] }
+            .splitCsv()
+            .map { line -> line[0] }
     ```
 
 This leaves the details of how the inputs are provided up to the parent workflow.
@@ -592,8 +592,8 @@ params.greeting = 'greetings.csv'
 workflow {
   // create a channel for inputs from a CSV file
   greeting_ch = channel.fromPath(params.greeting)
-                      .splitCsv()
-                      .map { line -> line[0] }
+      .splitCsv()
+      .map { line -> line[0] }
 
   // call the imported workflow on the channel of greetings
   HELLO(greeting_ch)

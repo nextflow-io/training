@@ -4,7 +4,6 @@
  * Collect uppercase greetings into a single output file
  */
 process collectGreetings {
-
     input:
     path input_files
     val batch_name

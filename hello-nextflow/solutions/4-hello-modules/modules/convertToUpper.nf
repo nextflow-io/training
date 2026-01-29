@@ -4,7 +4,6 @@
  * Use a text replacement tool to convert the greeting to uppercase
  */
 process convertToUpper {
-
     input:
     path input_file
 
