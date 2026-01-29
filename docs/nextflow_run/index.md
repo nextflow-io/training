@@ -13,7 +13,7 @@ additional_information:
     - Configure pipeline execution to run on common computing platforms including HPC and cloud
     - Summarize best practices for reproducibility, portability and code re-use that make pipelines FAIR, including code modularity and software containers
   audience_prerequisites:
-    - "**Audience:** This course is designed for learners are completely new to Nextflow and want to run existing pipelines created by others."
+    - "**Audience:** This course is designed for learners who are completely new to Nextflow and want to run existing pipelines created by others."
     - "**Skills:** Some familiarity with the command line, basic scripting concepts and common file formats is assumed."
     - "**Domain:** The exercises are all domain-agnostic, so no prior scientific knowledge is required."
 ---
