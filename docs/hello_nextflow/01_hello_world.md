@@ -1134,6 +1134,10 @@ When you're ready, move on to [**Part 2: Hello Channels**](./02_hello_channels.m
 
 ## Quiz
 
+!!! tip
+
+    You can run this quiz interactively in your terminal by running `quiz`.
+
 <quiz>
 What are the minimum required components of a Nextflow process?
 - [ ] Input and output blocks only
