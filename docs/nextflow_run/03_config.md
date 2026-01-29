@@ -1409,10 +1409,6 @@ Have fun!
 
 ## Quiz
 
-!!! tip
-
-    You can run this quiz interactively in your terminal by running `quiz`.
-
 <quiz>
 When parameter values are set in both the workflow file and `nextflow.config`, which takes precedence?
 - [ ] The workflow file value

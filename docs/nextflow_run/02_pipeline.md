@@ -1549,10 +1549,6 @@ You will learn how to configure the execution of your pipeline to fit your infra
 
 ## Quiz
 
-!!! tip
-
-    You can run this quiz interactively in your terminal by running `quiz`.
-
 <quiz>
 Why does Nextflow create a separate task directory for each process call?
 - [ ] To improve execution speed

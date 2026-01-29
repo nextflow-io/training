@@ -684,10 +684,6 @@ In the next section of this training, we're going to look at four successively m
 
 ## Quiz
 
-!!! tip
-
-    You can run this quiz interactively in your terminal by running `quiz`.
-
 <quiz>
 In the console output line `[a3/7be2fa] SAYHELLO | 1 of 1 ✔`, what does `[a3/7be2fa]` represent?
 - [ ] The process version number

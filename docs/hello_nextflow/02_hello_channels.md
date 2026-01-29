@@ -1342,10 +1342,6 @@ When you're ready, move on to [**Part 3: Hello Workflow**](./03_hello_workflow.m
 
 ## Quiz
 
-!!! tip
-
-    You can run this quiz interactively in your terminal by running `quiz`.
-
 <quiz>
 What is a channel in Nextflow?
 - [ ] A file path specification
