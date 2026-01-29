@@ -303,7 +303,6 @@ plugins:
           "Basics": docs/nextflow_run/01_basics.md
           "Pipeline": docs/nextflow_run/02_pipeline.md
           "Config": docs/nextflow_run/03_config.md
-          "Troubleshooting": docs/nextflow_run/04_troubleshooting.md
         "Hello Nextflow":
           "Hello World": docs/hello_nextflow/01_hello_world.md
           "Hello Channels": docs/hello_nextflow/02_hello_channels.md
