@@ -246,8 +246,7 @@ The result is a channel containing `Hello`, `Bonjour`, and `Holà`.
 
     Here's what that line means in plain English:
 
-    - `channel` creates a **channel**, _i.e._ a queue that will hold the data
-    - `.fromPath` specifies the data source is a filepath
+    - `channel.fromPath` is a **channel factory** that creates a channel from file path(s)
     - `(params.input)` specifies the filepath is provided by `--input` on the command line
 
     In other words, that line tells Nextflow: take the filepath given with `--input` and get ready to treat its contents as input data.
@@ -641,7 +640,7 @@ You may have noticed that `collectGreetings` takes a second input, `params.batch
     collectGreetings(convertToUpper.out.collect(), params.batch)
 ```
 
-This causes the workflow to expect a CLI parameter named `--batch`.
+This passes a CLI parameter named `--batch` to the workflow.
 However, when we launched the workflow earlier, we didn't specify a `--batch` parameter.
 
 What's going on there?
