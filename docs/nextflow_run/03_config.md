@@ -1438,7 +1438,48 @@ More generally, you know how to configure your workflow executions to suit diffe
 
 ### What's next?
 
-Learn how to troubleshoot common issues when running Nextflow pipelines.
+Learn how to run pipelines directly from remote repositories like GitHub.
+
+---
+
+## 7. Run pipelines from remote repositories
+
+!!! tip "Scenario"
+
+    You want to run a well-established pipeline like those from nf-core without having to download and manage the code yourself.
+
+So far we've been running workflow scripts located in the current directory.
+In practice, you'll often want to run pipelines stored in remote repositories, such as GitHub.
+
+Nextflow makes this straightforward: you can run any pipeline directly from a Git repository URL without manually downloading it first.
+
+### 7.1. Run a pipeline from GitHub
+
+The basic syntax for running a remote pipeline is `nextflow run <repository>`, where `<repository>` can be a GitHub repository path like `nextflow-io/hello`, a full URL, or a path to GitLab, Bitbucket, or other Git hosting services.
+
+Try running the official Nextflow "hello" demo pipeline:
+
+```bash
+nextflow run nextflow-io/hello
+```
+
+The first time you run a remote pipeline, Nextflow downloads it and caches it locally.
+Subsequent runs use the cached version unless you explicitly request an update.
+
+### 7.2. Specify a version for reproducibility
+
+By default, Nextflow runs the latest version from the default branch.
+You can specify a particular version, branch, or commit using the `-r` flag:
+
+```bash
+nextflow run nextflow-io/hello -r v1.1
+```
+
+Specifying exact versions is essential for reproducibility.
+
+### Takeaway
+
+You know how to run pipelines directly from GitHub and other remote repositories, and how to specify versions for reproducibility.
 
 ---
 
