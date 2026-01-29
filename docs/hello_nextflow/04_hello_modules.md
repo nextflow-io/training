@@ -454,10 +454,6 @@ When you're ready, move on to [**Part 5: Hello Containers**](./05_hello_containe
 
 ## Quiz
 
-!!! tip
-
-    You can run this quiz interactively in your terminal by running `quiz`.
-
 <quiz>
 What is a module in Nextflow?
 - [ ] A configuration file

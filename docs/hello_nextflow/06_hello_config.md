@@ -1529,10 +1529,6 @@ Head on to the final [course summary](./next_steps.md) to review what you learne
 
 ## Quiz
 
-!!! tip
-
-    You can run this quiz interactively in your terminal by running `quiz`.
-
 <quiz>
 What is the name of the configuration file that Nextflow automatically loads?
 - [ ] `config.nf`

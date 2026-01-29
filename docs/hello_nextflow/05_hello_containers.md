@@ -1093,10 +1093,6 @@ It's the very last part, and then you'll be done with this course!
 
 ## Quiz
 
-!!! tip
-
-    You can run this quiz interactively in your terminal by running `quiz`.
-
 <quiz>
 What is a container?
 - [ ] A type of virtual machine

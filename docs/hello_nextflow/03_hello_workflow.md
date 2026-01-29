@@ -1090,10 +1090,6 @@ When you're ready, move on to [**Part 4: Hello Modules**](./04_hello_modules.md)
 
 ## Quiz
 
-!!! tip
-
-    You can run this quiz interactively in your terminal by running `quiz`.
-
 <quiz>
 How do you access the output of a process in the workflow block?
 - [ ] `process.output`
