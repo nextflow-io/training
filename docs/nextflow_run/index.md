@@ -13,7 +13,7 @@ additional_information:
     - Configure pipeline execution to run on common computing platforms including HPC and cloud
     - Summarize best practices for reproducibility, portability and code re-use that make pipelines FAIR, including code modularity and software containers
   audience_prerequisites:
-    - "**Audience:** This course is designed for learners who want to **run existing pipelines** created by others (such as nf-core pipelines). You will learn to recognize code patterns but won't write pipelines from scratch. If you want to **develop your own pipelines**, take [Hello Nextflow](../hello_nextflow/index.md) instead."
+    - "**Audience:** This course is designed for learners are completely new to Nextflow and want to run existing pipelines created by others."
     - "**Skills:** Some familiarity with the command line, basic scripting concepts and common file formats is assumed."
     - "**Domain:** The exercises are all domain-agnostic, so no prior scientific knowledge is required."
 ---
@@ -22,8 +22,9 @@ additional_information:
 
 **Nextflow Run is a hands-on introduction to running reproducible and scalable data analysis workflows.**
 
-You will learn how to execute existing pipelines, interpret their outputs, and configure them for different computing environments.
-By the end, you'll have the skills and confidence to run Nextflow pipelines created by others, such as those from [nf-core](https://nf-co.re).
+Working through practical examples and guided exercises, you will learn the fundamentals of using Nextflow, including how to execute pipelines, manage files and software dependencies, parallelize execution effortlessly, and run workflows across different computing environments.
+
+You will take away the skills and confidence to start running workflows with Nextflow.
 
 <!-- additional_information -->
 
