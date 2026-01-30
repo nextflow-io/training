@@ -5,6 +5,16 @@
 #     "typer>=0.12.0",
 #     "pyyaml>=6.0",
 #     "rich>=13.0.0",
+#     # MkDocs and plugins
+#     "mkdocs",
+#     "mkdocs-material",
+#     "mkdocs-static-i18n",
+#     "pymdown-extensions>=10.12",
+#     "pillow",
+#     "cairosvg",
+#     "mkdocs-enumerate-headings-plugin>=0.6.0",
+#     "mkdocs-quiz>=1.5.0",
+#     "mike",
 # ]
 # ///
 """

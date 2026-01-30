@@ -65,23 +65,24 @@ INFO     -  [21:52:17] Serving on http://0.0.0.0:8000/
 Visit <http://0.0.0.0:8000/> in your web browser to view the site.
 Pages will automatically refresh when you save changes in your editor.
 
-### Python
+### Python (uv)
 
-If you have a recent version of Python installed, then local installation should be as simple as:
-
-```bash
-pip install -r requirements.txt
-```
-
-Once installed, you can view the site by running:
+If you have Python installed, we recommend using [uv](https://docs.astral.sh/uv/) to manage dependencies.
+Install uv, then run:
 
 ```bash
-cd docs/en
-mkdocs serve
+uv run _scripts/docs.py live
 ```
 
-The log output will show a URL, probably <http://127.0.0.1:8000/> - open this in your browser to view the site.
+This will automatically install all dependencies and start a local preview server.
+The log output will show a URL, probably <http://127.0.0.1:8008/> - open this in your browser to view the site.
 Pages will automatically refresh when you save changes in your editor.
+
+To build all languages:
+
+```bash
+uv run _scripts/docs.py build-all
+```
 
 ## Translations
 
