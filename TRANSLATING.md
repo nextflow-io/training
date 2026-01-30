@@ -18,37 +18,19 @@ This document describes how translations work for the Nextflow training material
 
 When English source files are modified, translations are automatically updated via GitHub Actions:
 
-```
-English file changed
-        │
-        ▼
-┌───────────────────────────────────────┐
-│  GitHub Actions: translate-check.yml  │
-│  (Triggers on push to master)         │
-└───────────────────────────────────────┘
-        │
-        ▼
-┌───────────────────────────────────────┐
-│  Detect outdated translations         │
-│  (Compare git commit timestamps)      │
-└───────────────────────────────────────┘
-        │
-        ▼
-┌───────────────────────────────────────┐
-│  AI updates only changed sections     │
-│  (Minimal diffs for easy review)      │
-└───────────────────────────────────────┘
-        │
-        ▼
-┌───────────────────────────────────────┐
-│  Create PR for each language          │
-│  (One PR per language with changes)   │
-└───────────────────────────────────────┘
-        │
-        ▼
-┌───────────────────────────────────────┐
-│  Human review + approve + merge       │
-└───────────────────────────────────────┘
+```mermaid
+flowchart TD
+    A[English file changed] --> B[GitHub Actions triggered]
+    B --> C[Detect outdated translations]
+    C --> D{Any outdated?}
+    D -->|No| E[Done]
+    D -->|Yes| F[AI updates changed sections]
+    F --> G[Create PR for each language]
+    G --> H[Human review]
+    H --> I{Approved?}
+    I -->|Yes| J[Merge PR]
+    I -->|No| K[Request changes]
+    K --> H
 ```
 
 ### Reviewing Automatic Translation PRs
