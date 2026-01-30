@@ -1,0 +1,137 @@
+name: Auto-update Translations
+
+# Automatically update translations when English content changes
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - "docs/en/docs/**/*.md"
+
+  # Allow manual trigger
+  workflow_dispatch:
+
+jobs:
+  detect-changes:
+    runs-on: ubuntu-latest
+    outputs:
+      languages: ${{ steps.check.outputs.languages }}
+      has_outdated: ${{ steps.check.outputs.has_outdated }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: astral-sh/setup-uv@v4
+
+      - name: Check for outdated translations
+        id: check
+        working-directory: _scripts
+        run: |
+          # Check each language for outdated translations
+          languages_with_outdated=""
+
+          for lang in pt es fr it ko pl tr; do
+            outdated=$(uv run python translate.py list-outdated "$lang" 2>/dev/null | grep -c "docs/" || echo "0")
+            if [ "$outdated" -gt 0 ]; then
+              echo "Found $outdated outdated files for $lang"
+              if [ -n "$languages_with_outdated" ]; then
+                languages_with_outdated="$languages_with_outdated,$lang"
+              else
+                languages_with_outdated="$lang"
+              fi
+            fi
+          done
+
+          if [ -n "$languages_with_outdated" ]; then
+            echo "Languages with outdated translations: $languages_with_outdated"
+            echo "has_outdated=true" >> $GITHUB_OUTPUT
+            # Convert to JSON array for matrix
+            json_array=$(echo "$languages_with_outdated" | sed 's/,/","/g' | sed 's/^/["/' | sed 's/$/"]/')
+            echo "languages=$json_array" >> $GITHUB_OUTPUT
+          else
+            echo "No outdated translations found"
+            echo "has_outdated=false" >> $GITHUB_OUTPUT
+            echo "languages=[]" >> $GITHUB_OUTPUT
+          fi
+
+  update-translations:
+    needs: detect-changes
+    if: needs.detect-changes.outputs.has_outdated == 'true'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 2 # Limit parallel API calls
+      matrix:
+        language: ${{ fromJson(needs.detect-changes.outputs.languages) }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: astral-sh/setup-uv@v4
+
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Update outdated translations
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        working-directory: _scripts
+        run: |
+          echo "Updating outdated translations for ${{ matrix.language }}..."
+          uv run python translate.py update-outdated --language ${{ matrix.language }}
+
+      - name: Check for changes
+        id: changes
+        run: |
+          if [ -n "$(git status --porcelain docs/${{ matrix.language }}/)" ]; then
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create Pull Request
+        if: steps.changes.outputs.has_changes == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          LANG="${{ matrix.language }}"
+          BRANCH="auto-translate-${LANG}-$(date +%Y%m%d-%H%M%S)"
+
+          git checkout -b "$BRANCH"
+          git add "docs/${LANG}/"
+          git commit -m "Update ${LANG} translations to match latest English content"
+          git push origin "$BRANCH"
+
+          gh pr create \
+            --title "Update ${{ matrix.language }} translations" \
+            --body "$(cat <<EOF
+          ## Automatic Translation Update
+
+          This PR updates **${{ matrix.language }}** translations to match recent changes in English source files.
+
+          ### Review Checklist
+          - [ ] Verify technical terms are correctly translated
+          - [ ] Check that code blocks remain in English
+          - [ ] Confirm admonition titles match the glossary
+          - [ ] Test the build passes
+
+          ---
+          *This PR was automatically created by the translation workflow.*
+          EOF
+          )" \
+            --base master \
+            --head "$BRANCH"
