@@ -152,17 +152,10 @@ hide:
 
 </div>
 
-## Other/Experimental
+!!! info "Looking for archived training materials?"
 
-These are other training courses that are not being actively taught/maintained and that we may repurpose elsewhere or delete in the near future.
-The corresponding materials are not available within the training environment.
-You can still find the materials in the GitHub repository and download them for local use.
-
-- **nf-customize** — Configuring nf-core pipelines ([docs](other/nf_customize) / [code](https://github.com/nextflow-io/training/tree/master/other/nf-customize))
-
-- **troubleshoot** — Troubleshooting exercises ([docs](other/troubleshoot) / [code](https://github.com/nextflow-io/training/tree/master/other/troubleshoot))
-
-- **hands-on (rnaseq)** — Developing a pipeline for bulk RNAseq (deprecated) ([docs](other/hands_on) / [code](https://github.com/nextflow-io/training/tree/master/other/hands-on))
+    Older training materials (Fundamentals Training, Advanced Training, and other experimental courses) have been removed from the training portal as they are incompatible with Nextflow 3.0 strict syntax.
+    If you need access to these materials, they are available in the [git history](https://github.com/nextflow-io/training) prior to January 2026.
 
 ---
 
