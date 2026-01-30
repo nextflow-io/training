@@ -233,5 +233,6 @@ Consider also using:
 ## Additional Resources
 
 - **CONTRIBUTING.md** - Full contribution guidelines
+- **TRANSLATING.md** - Translation guide (all translations are AI-generated)
 - **Training Site** - https://training.nextflow.io
 - **Nextflow Docs** - https://www.nextflow.io/docs/latest/

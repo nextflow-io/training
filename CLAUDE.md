@@ -6,7 +6,7 @@ This repository contains training materials for Nextflow, built with Material fo
 
 - **Purpose**: Educational materials teaching Nextflow workflow development
 - **Build system**: MkDocs with Material theme and custom plugins
-- **Languages**: Multiple (en, pt, es, fr, it, ko) - be aware when editing
+- **Languages**: Multiple (en, pt, es, fr, it, ko, pl, tr) - translations are AI-generated, see TRANSLATING.md
 - **Target audience**: Scientists and developers learning Nextflow
 
 ## Common Commands
@@ -194,6 +194,7 @@ nextflow run example.nf -resume  # verify caching works
 ## Resources
 
 - **Full contribution guide**: See CONTRIBUTING.md
+- **Translation guide**: See TRANSLATING.md (all translations are AI-generated)
 - **Training site**: https://training.nextflow.io
 - **Nextflow docs**: https://nextflow.io/docs/latest/
 - **MkDocs Material**: https://squidfunk.github.io/mkdocs-material/
