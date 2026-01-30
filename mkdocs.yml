@@ -229,8 +229,6 @@ plugins:
         - side_quests/*.md
         - training_collections/index.md
         - training_collections/advanced_workflow_development/index.md
-        - nf_customize/index.md
-        - nf_develop/index.md
   - i18n:
       docs_structure: suffix
       fallback_to_default: true
