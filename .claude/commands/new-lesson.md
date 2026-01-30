@@ -105,4 +105,5 @@ process EXAMPLE {
    - Test any Nextflow examples before committing
    - Run heading validation: `uv run .github/check_headings.py --fix docs/**/*.md`
    - Preview locally with `mkdocs serve` or Docker to verify formatting
+   - Translations are handled automatically - when merged to master, the translation workflow will create PRs for each language
 ````

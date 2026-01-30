@@ -38,3 +38,4 @@ Create a new training module in this repository. Follow these steps:
    - Test all examples thoroughly
    - Run validation tools before committing
    - Preview the site locally
+   - Translations are handled automatically - when merged to master, the translation workflow will create PRs for each language
