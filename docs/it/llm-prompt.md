@@ -8,6 +8,18 @@ The target language for this translation is **Italian** (`it`).
 - Follow standard Italian spelling conventions
 - Prefer active voice when possible
 
+## Translation Context Rules
+
+**Important distinction**: Some technical terms have different translation rules depending on context:
+
+1. **In code blocks**: Keep ALL Nextflow syntax in English (the code must run)
+2. **In prose/explanatory text**: Follow the glossary below for translations
+
+For example:
+
+- In prose: "Il canale di input riceve i file..." (translate "channel" to "canale")
+- In code: `channel.fromPath('*.fastq')` (keep "channel" in English)
+
 ## Glossary
 
 ### Terms to Keep in English (DO NOT TRANSLATE)

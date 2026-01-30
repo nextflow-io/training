@@ -9,6 +9,18 @@ The target language for this translation is **Turkish** (`tr`).
 - Prefer active voice when possible
 - Pay attention to vowel harmony in suffixes
 
+## Translation Context Rules
+
+**Important distinction**: Some technical terms have different translation rules depending on context:
+
+1. **In code blocks**: Keep ALL Nextflow syntax in English (the code must run)
+2. **In prose/explanatory text**: Follow the glossary below for translations
+
+For example:
+
+- In prose: "Giriş kanalı dosyaları alır..." (translate "channel" to "kanal")
+- In code: `channel.fromPath('*.fastq')` (keep "channel" in English)
+
 ## Glossary
 
 ### Terms to Keep in English (DO NOT TRANSLATE)

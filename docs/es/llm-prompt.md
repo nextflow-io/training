@@ -8,6 +8,18 @@ The target language for this translation is **Spanish** (`es`).
 - Use Latin American Spanish spelling conventions
 - Prefer active voice when possible
 
+## Translation Context Rules
+
+**Important distinction**: Some technical terms have different translation rules depending on context:
+
+1. **In code blocks**: Keep ALL Nextflow syntax in English (the code must run)
+2. **In prose/explanatory text**: Follow the glossary below for translations
+
+For example:
+
+- In prose: "El canal de entrada recibe los archivos..." (translate "channel" to "canal")
+- In code: `channel.fromPath('*.fastq')` (keep "channel" in English)
+
 ## Glossary
 
 ### Terms to Keep in English (DO NOT TRANSLATE)

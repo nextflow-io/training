@@ -8,6 +8,18 @@ The target language for this translation is **Korean** (`ko`).
 - Maintain consistent honorific usage throughout
 - Follow standard Korean spelling conventions (한글 맞춤법)
 
+## Translation Context Rules
+
+**Important distinction**: Some technical terms have different translation rules depending on context:
+
+1. **In code blocks**: Keep ALL Nextflow syntax in English (the code must run)
+2. **In prose/explanatory text**: Follow the glossary below for translations
+
+For example:
+
+- In prose: "입력 채널이 파일을 받습니다..." (translate "channel" to "채널")
+- In code: `channel.fromPath('*.fastq')` (keep "channel" in English)
+
 ## Glossary
 
 ### Terms to Keep in English (DO NOT TRANSLATE)
