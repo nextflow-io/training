@@ -2,9 +2,12 @@
 
 This document describes how translations work for the Nextflow training materials.
 
-> [!WARNING] > **All translations are generated and maintained by AI.**
+<!-- prettier-ignore-start -->
+> [!WARNING]
+> **All translations are generated and maintained by AI.**
 > Do not submit manual translations - they will be overwritten by automated updates.
 > Instead, improve the translation prompts to fix issues permanently.
+<!-- prettier-ignore-end -->
 
 ## Overview
 
@@ -73,9 +76,12 @@ When reviewing a translation PR (whether automatic or triggered manually), follo
 
 ### How to Handle Issues
 
-> [!CAUTION] > **Do NOT suggest changes directly to translation PRs.**
+<!-- prettier-ignore-start -->
+> [!CAUTION]
+> **Do NOT suggest changes directly to translation PRs.**
 > Direct edits will be overwritten on the next automatic update.
 > Instead, update the translation prompts and re-run the translation.
+<!-- prettier-ignore-end -->
 
 When you find an issue during review:
 
