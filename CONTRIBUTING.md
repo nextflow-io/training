@@ -46,7 +46,9 @@ A short version for this training site is below.
 If you are used to using Docker and don't want to mess around with Python, you can run the following command to preview the site:
 
 ```bash
-docker run --rm -it -p 8000:8000 -v ${PWD}:/docs ghcr.io/nextflow-io/training-mkdocs:latest
+docker run --rm -it -p 8000:8000 -v ${PWD}:/docs \
+  -w /docs/docs/en \
+  ghcr.io/nextflow-io/training-mkdocs:latest
 ```
 
 This uses a custom image with all required mkdocs plugins.
@@ -72,11 +74,16 @@ pip install -r requirements.txt
 Once installed, you can view the site by running:
 
 ```bash
+cd docs/en
 mkdocs serve
 ```
 
 The log output will show a URL, probably <http://127.0.0.1:8000/> - open this in your browser to view the site.
 Pages will automatically refresh when you save changes in your editor.
+
+## Translations
+
+For information about contributing translations, see [TRANSLATING.md](TRANSLATING.md).
 
 ### Social cards
 
@@ -92,7 +99,7 @@ docker run --rm -it -p 8000:8000 -e 'CARDS=false' -v ${PWD}:/docs ghcr.io/nextfl
 
 ## Announcement banner
 
-If there is an announcement banner, you can enable and customise it using the following config in `mkdocs.yml`:
+If there is an announcement banner, you can enable and customise it using the following config in `docs/en/mkdocs.yml`:
 
 ```yaml
 extra:
@@ -103,7 +110,7 @@ extra:
     register_url: https://nf-co.re/events/2024/training-foundational-march
 ```
 
-If you need more customisation, edit `docs/assets/overrides/main.html`
+If you need more customisation, edit `docs/en/overrides/main.html`
 
 ## Figures & diagrams
 
