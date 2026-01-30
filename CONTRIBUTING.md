@@ -87,7 +87,10 @@ uv run _scripts/docs.py build-all
 ## Translations
 
 Training materials are available in multiple languages.
-All translations are **generated and maintained by AI** - do not submit manual translations.
+
+> [!WARNING]
+> All translations are **generated and maintained by AI**.
+> Do not submit manual translations - they will be overwritten by automated updates.
 
 ### For Readers
 
@@ -104,12 +107,11 @@ To improve translations, update the LLM prompts - not the translated files direc
 - **Language-specific rules**: Edit `docs/<lang>/llm-prompt.md`
 - **General formatting rules**: Edit `_scripts/general-llm-prompt.md`
 
-Then regenerate the affected translations:
+Then use the GitHub Actions workflow to regenerate:
 
-```bash
-cd _scripts
-uv run python translate.py translate-page -l <lang> -p <path-to-file>
-```
+1. Go to **Actions** → **Translate** → **Run workflow**
+2. Select the language and `translate-page` command
+3. The workflow will regenerate the translation with your prompt changes
 
 ### Why AI-Only?
 

@@ -2,19 +2,19 @@
 
 This document describes how translations work for the Nextflow training materials.
 
-> **Important**: All translations are generated and maintained by AI (LLM).
+> [!WARNING] > **All translations are generated and maintained by AI.**
 > Do not submit manual translations - they will be overwritten by automated updates.
 > Instead, improve the translation prompts to fix issues permanently.
 
-## Quick Reference
+## Overview
 
-| Task                       | Command                                                         |
-| -------------------------- | --------------------------------------------------------------- |
-| Preview translations       | `uv run python docs.py serve <lang>`                            |
-| List outdated translations | `uv run python translate.py list-outdated <lang>`               |
-| List missing translations  | `uv run python translate.py list-missing <lang>`                |
-| Update a single file       | `uv run python translate.py translate-page -l <lang> -p <path>` |
-| Update all outdated        | `uv run python translate.py update-outdated -l <lang>`          |
+Translations are managed through a combination of:
+
+1. **LLM prompts** that define translation rules and glossaries
+2. **GitHub Actions** that automatically regenerate translations
+3. **Human review** to catch errors and improve prompts
+
+The key insight: **to fix a translation, fix the prompt** - not the translated file.
 
 ---
 
@@ -49,7 +49,7 @@ flowchart TD
 
 ## Reviewing Translation PRs
 
-When reviewing a translation PR (whether automatic or manual trigger), follow these guidelines:
+When reviewing a translation PR (whether automatic or triggered manually), follow these guidelines:
 
 ### What to Check
 
@@ -73,43 +73,53 @@ When reviewing a translation PR (whether automatic or manual trigger), follow th
 
 ### How to Handle Issues
 
-> **Critical**: Do NOT suggest changes directly to translation PRs.
+> [!CAUTION] > **Do NOT suggest changes directly to translation PRs.**
 > Direct edits will be overwritten on the next automatic update.
+> Instead, update the translation prompts and re-run the translation.
 
-Instead, fix issues permanently by updating the translation prompts:
+When you find an issue during review:
 
 ```mermaid
-flowchart LR
+flowchart TD
     A[Find translation error] --> B{Type of issue?}
-    B -->|Wrong term| C[Update glossary in llm-prompt.md]
-    B -->|Wrong style| D[Update grammar rules in llm-prompt.md]
-    B -->|Structural issue| E[Update general-llm-prompt.md]
-    C --> F[Submit prompt PR]
+    B -->|Wrong term| C[Update glossary in<br>docs/LANG/llm-prompt.md]
+    B -->|Wrong style/tone| D[Update grammar rules in<br>docs/LANG/llm-prompt.md]
+    B -->|Structural issue| E[Update rules in<br>_scripts/general-llm-prompt.md]
+    C --> F[Commit prompt change to same PR]
     D --> F
     E --> F
-    F --> G[Re-run translation]
-    G --> H[Verify fix]
+    F --> G[Trigger translation workflow]
+    G --> H[Review updated translation]
 ```
+
+#### Workflow for Fixing Issues
+
+1. **Edit the appropriate prompt file** in the same PR branch:
+
+   - Language-specific issues → `docs/<lang>/llm-prompt.md`
+   - General formatting issues → `_scripts/general-llm-prompt.md`
+
+2. **Trigger the translation workflow** to regenerate:
+
+   - Go to **Actions** → **Translate** → **Run workflow**
+   - Select the language and `translate-page` or `update-outdated`
+   - Target the PR branch (not `master`)
+
+3. **Review the updated translation** to verify the fix
+
+4. **Approve and merge** once the translation is correct
 
 #### Example: Fixing a Wrong Term
 
 If "workflow" is incorrectly translated as "flujo" instead of "flujo de trabajo" in Spanish:
 
-1. Open `docs/es/llm-prompt.md`
+1. In the PR branch, edit `docs/es/llm-prompt.md`
 2. Add or update the glossary entry:
    ```markdown
    | workflow | flujo de trabajo (NOT "flujo") |
    ```
-3. Submit a PR with this change
-4. Re-run the translation for affected files
-
-#### Example: Fixing a Style Issue
-
-If translations are too formal when they should be informal:
-
-1. Open `docs/<lang>/llm-prompt.md`
-2. Update the grammar preferences section
-3. Submit a PR and re-run translations
+3. Run the translation workflow targeting this branch
+4. Verify the fix in the updated PR
 
 ### Approving PRs
 
@@ -137,14 +147,12 @@ The **only** sustainable way to fix translations is to improve the LLM prompts:
    - Edit `_scripts/general-llm-prompt.md`
    - Add rules with before/after examples
 
-3. **Re-run the translation**:
+3. **Re-run the translation** via GitHub Actions:
 
-   ```bash
-   cd _scripts
-   uv run python translate.py translate-page -l <lang> -p <path-to-file>
-   ```
+   - Go to **Actions** → **Translate** → **Run workflow**
+   - Select language and command (`translate-page` or `update-outdated`)
 
-4. **Submit a PR** with both the prompt change and re-translated file
+4. **Submit a PR** with both the prompt change and regenerated translation
 
 ### Why Not Edit Translations Directly?
 
@@ -173,10 +181,12 @@ If a language exists but is missing content (e.g., Portuguese has `hello_nextflo
 1. Go to **Actions** → **Translate** → **Run workflow**
 2. Select language (e.g., `pt`)
 3. Select command: `add-missing`
-4. Optionally add `--include nf4_science` to filter
+4. Optionally specify a filter (e.g., `nf4_science`)
 5. The workflow creates a PR with translations
 
-### Using the Script Locally
+### Using the CLI (Requires API Key)
+
+For maintainers with `ANTHROPIC_API_KEY` access:
 
 ```bash
 cd _scripts
@@ -186,7 +196,6 @@ uv run python translate.py list-missing pt
 
 # Translate one file at a time (recommended for large files)
 uv run python translate.py translate-page -l pt -p nf4_science/index.md
-uv run python translate.py translate-page -l pt -p nf4_science/01_rnaseq.md
 
 # Or translate all missing with a filter
 uv run python translate.py add-missing -l pt --include nf4_science
@@ -196,13 +205,15 @@ uv run python translate.py add-missing -l pt --include nf4_science
 
 1. Review the generated translations
 2. Check if any prompt updates are needed
-3. Submit a PR targeting the `lang` branch (or `master`)
+3. Submit a PR
 
 ---
 
 ## How to Add a New Language
 
 ### Step 1: Create Language Structure
+
+Use the GitHub Actions workflow or CLI:
 
 ```bash
 cd _scripts
@@ -246,24 +257,19 @@ Add the language code to:
 
 ### Step 4: Generate Initial Translations
 
-```bash
-cd _scripts
+Use GitHub Actions:
 
-# Start with hello_nextflow (smallest, good for testing)
-uv run python translate.py add-missing -l <lang> --include hello_nextflow
-
-# Add supporting pages
-uv run python translate.py translate-page -l <lang> -p index.md
-uv run python translate.py translate-page -l <lang> -p help.md
-```
+1. Go to **Actions** → **Translate** → **Run workflow**
+2. Select the new language
+3. Select command: `add-missing`
+4. Filter to `hello_nextflow` for initial testing
 
 ### Step 5: Review and Iterate
 
-1. Build and preview: `uv run python docs.py serve <lang>`
-2. Check translations for quality
-3. Update `llm-prompt.md` to fix any issues
-4. Re-run translations as needed
-5. Submit PR when satisfied
+1. Review the PR with generated translations
+2. Update `llm-prompt.md` to fix any issues
+3. Re-run translations as needed
+4. Merge when satisfied
 
 ---
 
@@ -304,7 +310,11 @@ _scripts/
 
 ---
 
-## Translation Script Reference
+## CLI Reference (For Maintainers)
+
+> [!NOTE]
+> The CLI requires `ANTHROPIC_API_KEY` for translation commands.
+> Community contributors should use GitHub Actions instead.
 
 All commands run from `_scripts/` directory:
 
@@ -312,7 +322,7 @@ All commands run from `_scripts/` directory:
 cd _scripts
 ```
 
-### List Commands (Read-only)
+### List Commands (No API key required)
 
 ```bash
 # List files that need translation
@@ -344,7 +354,7 @@ uv run python translate.py update-outdated -l <lang>
 uv run python translate.py remove-removable -l <lang>
 ```
 
-### Preview Commands
+### Preview Commands (No API key required)
 
 ```bash
 # Serve docs locally
