@@ -190,6 +190,9 @@ extra:
     - name: français
       link: /fr/
       lang: fr
+    - name: हिन्दी
+      link: /hi/
+      lang: hi
     - name: italiano
       link: /it/
       lang: it

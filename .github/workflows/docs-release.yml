@@ -19,7 +19,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        lang: [de, en, es, fr, it, ko, pl, pt, tr]
+        lang: [de, en, es, fr, hi, it, ko, pl, pt, tr]
     steps:
       - uses: actions/checkout@v4
 
@@ -63,7 +63,7 @@ jobs:
           # English goes to root
           cp -r artifacts/site-en/* combined/
           # Other languages go to subdirectories
-          for lang in de es fr it ko pl pt tr; do
+          for lang in de es fr hi it ko pl pt tr; do
             if [ -d "artifacts/site-$lang" ]; then
               mkdir -p combined/$lang
               cp -r artifacts/site-$lang/* combined/$lang/
