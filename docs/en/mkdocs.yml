@@ -181,9 +181,9 @@ extra:
     - name: English
       link: /
       lang: en
-    - name: português
-      link: /pt/
-      lang: pt
+    - name: Deutsch
+      link: /de/
+      lang: de
     - name: español
       link: /es/
       lang: es
@@ -199,6 +199,9 @@ extra:
     - name: Polski
       link: /pl/
       lang: pl
+    - name: português
+      link: /pt/
+      lang: pt
     - name: Türkçe
       link: /tr/
       lang: tr
