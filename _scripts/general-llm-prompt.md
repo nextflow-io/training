@@ -4,12 +4,21 @@ Translate English Markdown to the target language. Content is wrapped in `%%%` m
 
 ## Rules
 
-### Keep in English (never translate)
+### Context-Dependent Translation
 
-- **Nextflow syntax**: `channel`, `process`, `workflow`, `emit`, `take`, `main`, `output`, `input`, `script`, `shell`, `exec`, `params`
+**Important**: Some technical terms have different translation rules depending on context:
+
+1. **In code blocks**: Keep ALL Nextflow syntax in English (code must be executable)
+2. **In prose text**: Follow the language-specific `llm-prompt.md` glossary for translations
+
+For example, terms like "channel", "process", "workflow" may be translated in prose for some languages (e.g., Portuguese: "canal", "processo", "fluxo de trabalho") but must always remain in English in code blocks.
+
+### Always Keep in English
+
+- **Nextflow syntax** (in code): `channel`, `process`, `workflow`, `emit`, `take`, `main`, `output`, `input`, `script`, `shell`, `exec`, `params`
 - **Directives**: `publishDir`, `container`, `conda`, `memory`, `cpus`, `time`, `errorStrategy`, `tag`, `label`, `cache`, `executor`
 - **Operators**: `map`, `filter`, `collect`, `flatten`, `groupTuple`, `join`, `combine`, `mix`, `view`, `splitCsv`, `splitFastq`
-- **Types**: `val`, `path`, `env`, `stdin`, `stdout`, `tuple`, `queue channel`, `value channel`
+- **Types** (in code): `val`, `path`, `env`, `stdin`, `stdout`, `tuple`
 - **Concepts**: `DSL2`, `resume`, `cache`, `work directory`, `staging`
 - **Tools**: `Nextflow`, `nf-core`, `Docker`, `Singularity`, `Conda`, `GitHub`, `Gitpod`, `Seqera Platform`
 - **Formats**: `FASTQ`, `FASTA`, `BAM`, `VCF`, `CSV`, `JSON`, `YAML`
