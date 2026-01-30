@@ -86,7 +86,48 @@ uv run _scripts/docs.py build-all
 
 ## Translations
 
-For information about contributing translations, see [TRANSLATING.md](TRANSLATING.md).
+Training materials are available in multiple languages.
+All translations are **generated and maintained by AI** - do not submit manual translations.
+
+### For Readers
+
+If you find a translation error:
+
+1. Check if it's a glossary issue (wrong term used consistently)
+2. Open an issue describing: language, file, current text, expected text
+3. A maintainer will update the translation prompt and regenerate
+
+### For Contributors
+
+To improve translations, update the LLM prompts - not the translated files directly:
+
+- **Language-specific rules**: Edit `docs/<lang>/llm-prompt.md`
+- **General formatting rules**: Edit `_scripts/general-llm-prompt.md`
+
+Then regenerate the affected translations:
+
+```bash
+cd _scripts
+uv run python translate.py translate-page -l <lang> -p <path-to-file>
+```
+
+### Why AI-Only?
+
+Manual translations don't scale and aren't maintainable:
+
+- They get overwritten when English content changes
+- There's no way to track intentional vs accidental differences
+- The same errors reappear in new content
+- Quality varies between contributors
+
+By using AI with carefully tuned prompts, we ensure:
+
+- Consistent terminology across all pages
+- Automatic updates when English changes
+- Reproducible, auditable translations
+- Easy fixes via prompt improvements
+
+For detailed information, see [TRANSLATING.md](TRANSLATING.md).
 
 ## Announcement banner
 

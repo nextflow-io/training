@@ -2,6 +2,10 @@
 
 This document describes how translations work for the Nextflow training materials.
 
+> **Important**: All translations are generated and maintained by AI (LLM).
+> Do not submit manual translations - they will be overwritten by automated updates.
+> Instead, improve the translation prompts to fix issues permanently.
+
 ## Quick Reference
 
 | Task                       | Command                                                         |
@@ -29,74 +33,150 @@ flowchart TD
     G --> H[Human review]
     H --> I{Approved?}
     I -->|Yes| J[Merge PR]
-    I -->|No| K[Request changes]
-    K --> H
+    I -->|No| K[Update llm-prompt.md]
+    K --> L[Re-run translation]
+    L --> H
 ```
 
-### Reviewing Automatic Translation PRs
+### Key Points
 
-When the bot creates a translation update PR:
+- The AI makes **minimal changes**, updating only sections that changed in English
+- Translations preserve line-by-line structure for easy diff review
+- Each language gets a separate PR for independent review/merge
+- The system uses git commit timestamps to detect outdated files
 
-1. **Check the diff** - The AI makes minimal changes, updating only sections that changed in English
-2. **Verify accuracy** - Spot-check that translations are correct, especially for:
-   - Technical terminology
-   - Code block comments (should be translated)
-   - Admonition titles (should match glossary)
-3. **Test the build** - The CI will build the docs; check for errors
-4. **Approve and merge** - If everything looks good, approve and merge
+---
 
-### Manual Trigger
+## Reviewing Translation PRs
 
-You can also manually trigger translation updates:
+When reviewing a translation PR (whether automatic or manual trigger), follow these guidelines:
+
+### What to Check
+
+1. **Technical accuracy**
+
+   - Are Nextflow concepts correctly explained?
+   - Are code examples unchanged (only comments translated)?
+   - Are technical terms used consistently with the glossary?
+
+2. **Formatting preservation**
+
+   - Are code blocks intact and properly formatted?
+   - Are admonitions (note, tip, warning) correctly structured?
+   - Are heading anchors preserved (`{ #anchor-name }`)?
+   - Are links working (URLs unchanged, only link text translated)?
+
+3. **Language quality**
+   - Is the tone appropriate (formal/informal per language)?
+   - Are translations natural and readable?
+   - Are there any obvious errors or awkward phrasings?
+
+### How to Handle Issues
+
+> **Critical**: Do NOT suggest changes directly to translation PRs.
+> Direct edits will be overwritten on the next automatic update.
+
+Instead, fix issues permanently by updating the translation prompts:
+
+```mermaid
+flowchart LR
+    A[Find translation error] --> B{Type of issue?}
+    B -->|Wrong term| C[Update glossary in llm-prompt.md]
+    B -->|Wrong style| D[Update grammar rules in llm-prompt.md]
+    B -->|Structural issue| E[Update general-llm-prompt.md]
+    C --> F[Submit prompt PR]
+    D --> F
+    E --> F
+    F --> G[Re-run translation]
+    G --> H[Verify fix]
+```
+
+#### Example: Fixing a Wrong Term
+
+If "workflow" is incorrectly translated as "flujo" instead of "flujo de trabajo" in Spanish:
+
+1. Open `docs/es/llm-prompt.md`
+2. Add or update the glossary entry:
+   ```markdown
+   | workflow | flujo de trabajo (NOT "flujo") |
+   ```
+3. Submit a PR with this change
+4. Re-run the translation for affected files
+
+#### Example: Fixing a Style Issue
+
+If translations are too formal when they should be informal:
+
+1. Open `docs/<lang>/llm-prompt.md`
+2. Update the grammar preferences section
+3. Submit a PR and re-run translations
+
+### Approving PRs
+
+Once you've verified the translation quality:
+
+1. Check that CI passes (build succeeds)
+2. Approve the PR
+3. Merge (squash merge recommended)
+
+---
+
+## How to Fix Existing Translations
+
+### The Right Way: Update the Prompt
+
+The **only** sustainable way to fix translations is to improve the LLM prompts:
+
+1. **For language-specific issues** (terminology, tone, grammar):
+
+   - Edit `docs/<lang>/llm-prompt.md`
+   - Add glossary terms, clarify rules, provide examples
+
+2. **For structural issues** (code blocks, formatting, links):
+
+   - Edit `_scripts/general-llm-prompt.md`
+   - Add rules with before/after examples
+
+3. **Re-run the translation**:
+
+   ```bash
+   cd _scripts
+   uv run python translate.py translate-page -l <lang> -p <path-to-file>
+   ```
+
+4. **Submit a PR** with both the prompt change and re-translated file
+
+### Why Not Edit Translations Directly?
+
+- Direct edits are **overwritten** when English content changes
+- There's no way to track why a translation differs from the AI output
+- Future maintainers won't know which changes were intentional
+- The same error will reappear in new content
+
+### Reporting Issues
+
+If you find errors but can't fix the prompts yourself:
+
+1. Open a GitHub issue
+2. Include: language, file path, current text, expected text
+3. Explain why the current translation is wrong
+4. A maintainer will update the prompt and re-run
+
+---
+
+## How to Add a Missing Course
+
+If a language exists but is missing content (e.g., Portuguese has `hello_nextflow/` but not `nf4_science/`):
+
+### Using GitHub Actions (Recommended)
 
 1. Go to **Actions** → **Translate** → **Run workflow**
-2. Select the language and command
-3. The workflow will create a PR with changes
+2. Select language (e.g., `pt`)
+3. Select command: `add-missing`
+4. Optionally add `--include nf4_science` to filter
+5. The workflow creates a PR with translations
 
----
-
-## How to Review and Fix Existing Translations
-
-### Option 1: Improve the Translation Prompt (Recommended)
-
-The best way to improve translations is to edit `docs/<lang>/llm-prompt.md`. This ensures:
-
-- Future translations follow better rules
-- Consistency across all pages
-- Changes persist through re-translation
-
-**Steps:**
-
-1. Fork the repository
-2. Edit `docs/<lang>/llm-prompt.md`
-3. Add or update: translation rules, glossary terms, or grammar preferences
-4. Submit a PR
-
-### Option 2: Direct File Edits
-
-For specific fixes, edit files directly in `docs/<lang>/docs/`:
-
-1. Fork the repository
-2. Edit the markdown file
-3. Submit a PR
-
-**Warning**: Direct edits may be overwritten when English source changes trigger re-translation. For permanent fixes, update the prompt file instead.
-
-### Option 3: Report Issues
-
-If you find translation errors but can't fix them:
-
-1. Open an issue
-2. Specify: language, file path, current text, suggested fix
-3. A maintainer will update the translation or prompt
-
----
-
-## How to Add a Missing Course for a Language
-
-If a language exists but is missing a course (e.g., Portuguese exists but `nf4_science/` isn't translated):
-
-### Using the Translation Script
+### Using the Script Locally
 
 ```bash
 cd _scripts
@@ -104,30 +184,19 @@ cd _scripts
 # Check what's missing
 uv run python translate.py list-missing pt
 
-# Translate specific files (one at a time recommended)
+# Translate one file at a time (recommended for large files)
 uv run python translate.py translate-page -l pt -p nf4_science/index.md
 uv run python translate.py translate-page -l pt -p nf4_science/01_rnaseq.md
-# ... continue for each file
 
-# Or translate all missing at once (may timeout for large batches)
+# Or translate all missing with a filter
 uv run python translate.py add-missing -l pt --include nf4_science
 ```
 
-### Using GitHub Actions
+### After Translation
 
-1. Go to **Actions** → **Translate** → **Run workflow**
-2. Select language: `pt`
-3. Select command: `add-missing`
-4. The workflow will translate all missing files and create a PR
-
-### Manual Translation
-
-For high-quality translations or languages where AI struggles:
-
-1. Copy English source: `cp docs/en/docs/course/file.md docs/<lang>/docs/course/file.md`
-2. Translate the content manually
-3. Follow the glossary in `docs/<lang>/llm-prompt.md`
-4. Submit a PR
+1. Review the generated translations
+2. Check if any prompt updates are needed
+3. Submit a PR targeting the `lang` branch (or `master`)
 
 ---
 
@@ -142,81 +211,59 @@ uv run python docs.py new-lang <lang-code>
 
 This creates:
 
-- `docs/<lang>/mkdocs.yml` - MkDocs config (inherits from English)
-- `docs/<lang>/llm-prompt.md` - Translation prompt template
-- `docs/<lang>/docs/.gitkeep` - Placeholder for content
+- `docs/<lang>/mkdocs.yml` - MkDocs config
+- `docs/<lang>/llm-prompt.md` - Translation prompt (requires customization)
+- `docs/<lang>/docs/.gitkeep` - Placeholder
 
 ### Step 2: Customize the Translation Prompt
 
-Edit `docs/<lang>/llm-prompt.md` to add:
+Edit `docs/<lang>/llm-prompt.md` to define:
 
-1. **Grammar preferences**: Formal/informal tone, regional variants
-2. **Translation context rules**: When to translate vs. keep English
-3. **Glossary**: Language-specific term translations
-4. **Admonition titles**: Translations for Note, Tip, Warning, etc.
+1. **Grammar preferences**
 
-Example structure:
+   - Formal or informal tone
+   - Regional spelling conventions
+   - Specific grammar rules
 
-```markdown
-# Translation Rules for <Language>
+2. **Glossary**
 
-## Grammar Preferences
+   - Terms to keep in English
+   - Terms to translate (with exact translations)
+   - Common mistakes to avoid
 
-- Use formal/informal tone
-- Regional spelling conventions
+3. **Admonition titles**
+   - Translations for Note, Tip, Warning, Exercise, Solution
 
-## Translation Context Rules
-
-- In code blocks: Keep ALL Nextflow syntax in English
-- In prose: Follow glossary for translations
-
-## Glossary
-
-### Terms to Keep in English
-
-- Nextflow, Docker, GitHub, etc.
-
-### Terms to Translate
-
-| English | <Language>    |
-| ------- | ------------- |
-| channel | <translation> |
-| process | <translation> |
-
-### Admonition Titles
-
-| English | <Language>    |
-| ------- | ------------- |
-| Note    | <translation> |
-```
+See existing language prompts for examples (e.g., `docs/pt/llm-prompt.md`).
 
 ### Step 3: Register the Language
 
-Add the language to:
+Add the language code to:
 
-1. `_scripts/docs.py` - Add to `SUPPORTED_LANGS` list
-2. `docs/en/mkdocs.yml` - Add to `extra.alternate` for language switcher
-3. `.github/workflows/translate.yml` - Add to language options
+1. `_scripts/docs.py` - `SUPPORTED_LANGS` list
+2. `docs/en/mkdocs.yml` - `extra.alternate` for language switcher
+3. `.github/workflows/translate.yml` - language dropdown options
 
-### Step 4: Translate Initial Content
+### Step 4: Generate Initial Translations
 
 ```bash
 cd _scripts
 
-# Translate hello_nextflow (recommended starting point)
+# Start with hello_nextflow (smallest, good for testing)
 uv run python translate.py add-missing -l <lang> --include hello_nextflow
 
-# Also translate supporting files
+# Add supporting pages
 uv run python translate.py translate-page -l <lang> -p index.md
 uv run python translate.py translate-page -l <lang> -p help.md
 ```
 
-### Step 5: Submit PR
+### Step 5: Review and Iterate
 
-1. Create a branch: `lang-<code>` (e.g., `lang-de` for German)
-2. Commit all changes
-3. Create PR targeting the `lang` branch (if it exists) or `master`
-4. Request review from a native speaker if possible
+1. Build and preview: `uv run python docs.py serve <lang>`
+2. Check translations for quality
+3. Update `llm-prompt.md` to fix any issues
+4. Re-run translations as needed
+5. Submit PR when satisfied
 
 ---
 
@@ -224,21 +271,22 @@ uv run python translate.py translate-page -l <lang> -p help.md
 
 ```
 docs/
-├── en/                     # English (source language)
-│   ├── mkdocs.yml          # Main config (inherited by other languages)
-│   ├── overrides/          # Theme overrides
-│   ├── hooks/              # MkDocs hooks
+├── en/                     # English (source)
+│   ├── mkdocs.yml          # Main config
+│   ├── overrides/          # Theme customization
 │   └── docs/               # English content
-│       ├── hello_nextflow/ # Course content
-│       ├── envsetup/       # Setup guides
-│       └── ...
 ├── pt/                     # Portuguese
-│   ├── mkdocs.yml          # Inherits from ../en/mkdocs.yml
-│   ├── llm-prompt.md       # Translation rules & glossary
-│   └── docs/               # Portuguese translations
+│   ├── mkdocs.yml          # Inherits from en
+│   ├── llm-prompt.md       # Translation rules
+│   └── docs/               # Translated content
 ├── es/                     # Spanish
 │   └── ...
 └── ...
+
+_scripts/
+├── translate.py            # Translation CLI
+├── general-llm-prompt.md   # Shared translation rules
+└── docs.py                 # Build/serve CLI
 ```
 
 ## Supported Languages
@@ -281,7 +329,7 @@ uv run python translate.py list-removable <lang>
 
 ```bash
 # Translate a single file
-uv run python translate.py translate-page -l <lang> -p <path-relative-to-en-docs>
+uv run python translate.py translate-page -l <lang> -p <path>
 
 # Translate all missing files
 uv run python translate.py add-missing -l <lang>
@@ -289,7 +337,7 @@ uv run python translate.py add-missing -l <lang>
 # Translate missing files matching pattern
 uv run python translate.py add-missing -l <lang> --include hello_nextflow
 
-# Update outdated translations (smart diff)
+# Update outdated translations (smart minimal diff)
 uv run python translate.py update-outdated -l <lang>
 
 # Remove orphaned translations
@@ -308,47 +356,7 @@ uv run python docs.py build-lang <lang>
 
 ---
 
-## Translation Guidelines
-
-### Code Blocks
-
-Only **comments** are translated. Code stays in English:
-
-```groovy
-// Este comentário é traduzido
-Channel.fromPath('data/*.fastq')  // Código permanece igual
-    .set { reads_ch }
-```
-
-### Admonitions
-
-Titles are translated, keywords stay in English:
-
-```markdown
-!!! note "Nota"
-
-    Conteúdo traduzido aqui.
-```
-
-### Headings
-
-Text is translated, anchors are preserved:
-
-```markdown
-## 1. Primeiros Passos { #getting-started }
-```
-
-### Links
-
-Link text is translated, URLs and anchors stay unchanged:
-
-```markdown
-[Texto traduzido](../unchanged/path.md#unchanged-anchor)
-```
-
----
-
 ## References
 
 - [FastAPI Translation System](https://github.com/fastapi/fastapi/tree/master/scripts) - Inspiration for this implementation
-- [Portuguese Glossary (Google Sheets)](https://docs.google.com/spreadsheets/d/1HUa3BO2kwukhX4EXQ-1blXeP5iueUdM23OwDRpfarDg/edit)
+- [Portuguese Glossary](https://docs.google.com/spreadsheets/d/1HUa3BO2kwukhX4EXQ-1blXeP5iueUdM23OwDRpfarDg/edit)
