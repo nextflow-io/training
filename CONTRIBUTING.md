@@ -116,7 +116,7 @@ Excalidraw SVGs should be embedded as follows:
 <!-- prettier-ignore-start -->
 ```html
 <figure class="excalidraw">
---8<-- "docs/basic_training/img/channel-files.excalidraw.svg"
+--8<-- "docs/hello_nextflow/img/hello-pipeline-channel.excalidraw.svg"
 </figure>
 ```
 <!-- prettier-ignore-end -->

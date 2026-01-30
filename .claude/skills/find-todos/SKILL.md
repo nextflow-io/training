@@ -78,7 +78,7 @@ Provide an organized report:
 
 ## Code TODOs
 
-### nf-training/script7.nf:23
+### hello-nextflow/hello-world.nf:23
 
 ```groovy
 // TODO: Add error handling for missing files
@@ -110,7 +110,7 @@ Known limitation documented - needs upstream fix in mkdocs plugin
 
 1. docs/side_quests/debugging.md (5)
 2. docs/nf4_science/genomics/01_per_sample_variant_calling.md (3)
-3. nf-training/script7.nf (2)
+3. hello-nextflow/hello-world.nf (2)
 
 ```
 

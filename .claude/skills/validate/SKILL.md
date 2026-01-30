@@ -38,7 +38,7 @@ Based on the user's request, determine the scope:
 2. **Specific module** (e.g., "hello_nextflow"):
 
    - Documentation files: `docs/{module}/**/*.md`
-   - Example scripts: `{module}/**/*.nf` or `nf-training/**/*.nf`
+   - Example scripts: `{module}/**/*.nf` or `hello-nextflow/**/*.nf`
    - Solution files: `{module}/solutions/**/*.nf`
 
 3. **Entire repository** (only if explicitly requested):

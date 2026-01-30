@@ -152,17 +152,7 @@ hide:
 
 </div>
 
-## Archived materials
-
-### Original Nextflow training materials
-
-These were developed at the start of the project. We are in the process of deprecating them in favor of the newer materials listed above. However, some topics covered in the original trainings are not yet represented in the newer material, so we are keeping these around for reference, with the caveat that they are no longer maintained and some exercises may no longer work.
-
-- **Fundamentals Training** — Intended as a reference material for anyone looking to build complex workflows with Nextflow ([docs](archive/basic_training/) / [code](https://github.com/nextflow-io/training/tree/master/nf-training))
-
-- **Advanced Training** — More advanced features of the Nextflow language and runtime, and how to use them to write efficient and scalable data-intensive workflows ([docs](archive/advanced/) / [code](https://github.com/nextflow-io/training/tree/master/nf-training-advanced))
-
-### Other/Experimental
+## Other/Experimental
 
 These are other training courses that are not being actively taught/maintained and that we may repurpose elsewhere or delete in the near future.
 The corresponding materials are not available within the training environment.

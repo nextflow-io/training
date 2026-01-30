@@ -1111,7 +1111,7 @@ It is very useful when your processes have different resource requirements. It e
 !!! tip
 
     This is just a tiny taster of what you can do to optimize your use of resources.
-    Nextflow itself has some really neat [dynamic retry logic](https://training.nextflow.io/basic_training/debugging/#dynamic-resources-allocation) built in to retry jobs that fail due to resource limitations.
+    Nextflow itself has some really neat [dynamic retry logic](https://www.nextflow.io/docs/latest/process.html#dynamic-task-resources) built in to retry jobs that fail due to resource limitations.
     Additionally, the Seqera Platform offers AI-driven tooling for optimizing your resource allocations automatically as well.
 
 ### 5.5. Add resource limits
