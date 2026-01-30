@@ -10,7 +10,7 @@ THIS IS A PLACEHOLDER
 
 TODO
 
-### 4.3. Run the workflow to generate a resource utilization report
+### 1.1. Run the workflow to generate a resource utilization report
 
 To have Nextflow generate the report automatically, simply add `-with-report <filename>.html` to your command line.
 
@@ -32,7 +32,7 @@ So we could try boosting that and see if it cuts down on runtime.
 However, we seem to have overshot the mark with the memory allocations; all processes are only using a fraction of what we're giving them.
 We should dial that back down and save some resources.
 
-### 4.4. Adjust resource allocations for a specific process
+### 1.2. Adjust resource allocations for a specific process
 
 We can specify resource allocations for a given process using the `withName` process selector.
 The syntax looks like this when it's by itself in a process block:
@@ -62,7 +62,7 @@ process {
 With that specified, the default settings will apply to all processes **except** the `GATK_JOINTGENOTYPING` process, which is a special snowflake that gets a lot more CPU.
 Hopefully that should have an effect.
 
-### 4.5. Run again with the modified configuration
+### 1.3. Run again with the modified configuration
 
 Let's run the workflow again with the modified configuration and with the reporting flag turned on, but notice we're giving the report a different name so we can differentiate them.
 
