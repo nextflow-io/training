@@ -60,6 +60,8 @@ INFO     -  [21:52:17] Watching paths for changes: 'docs', 'mkdocs.yml'
 INFO     -  [21:52:17] Serving on http://0.0.0.0:8000/
 ```
 
+> Note: The working directory is `docs/en` so paths are relative to that.
+
 Visit <http://0.0.0.0:8000/> in your web browser to view the site.
 Pages will automatically refresh when you save changes in your editor.
 
@@ -356,7 +358,7 @@ The script caches:
 - Built docs for your version
 - Generated TLS certificates
 
-A hash of source files (`docs/`, `mkdocs.yml`) is computed to detect changes.
+A hash of source files (`docs/en/`) is computed to detect changes.
 If you modify source files, the docs will be rebuilt automatically on the next run.
 
 Use `--clean` to delete the work directory on exit, or manually remove `.preview-release/` to force a fresh build.

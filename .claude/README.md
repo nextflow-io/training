@@ -208,7 +208,7 @@ Automatically runs heading validation when you submit a prompt:
 
 4. **Update Navigation**
 
-   - Manually edit mkdocs.yml to add new content
+   - Manually edit `docs/en/mkdocs.yml` to add new content
    - Or just ask Claude to update it
 
 5. **Preview Locally**

@@ -99,7 +99,7 @@ process EXAMPLE {
    - Clear explanations for beginners
 
 5. Remind the user to:
-   - Add the lesson to `mkdocs.yml` nav section in the correct module
+   - Add the lesson to `docs/en/mkdocs.yml` nav section in the correct module
    - Create corresponding Nextflow example scripts if needed
    - Add solution files for any exercises in `[module]/solutions/`
    - Test any Nextflow examples before committing

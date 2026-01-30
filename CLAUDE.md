@@ -33,13 +33,16 @@ prettier --write docs/**/*.md
 
 ## Repository Structure
 
-- `docs/` - All training content (markdown)
-  - `hello_nextflow/` - Basic Nextflow introduction
-  - `hello_nf-core/` - nf-core framework training
-  - `nf4_science/` - Domain-specific training (genomics, RNAseq)
-  - `side_quests/` - Advanced topics
+- `docs/en/` - English training content (source)
+  - `docs/` - Markdown content
+    - `hello_nextflow/` - Basic Nextflow introduction
+    - `hello_nf-core/` - nf-core framework training
+    - `nf4_science/` - Domain-specific training (genomics, RNAseq)
+    - `side_quests/` - Advanced topics
+  - `mkdocs.yml` - Site navigation and configuration
+- `docs/{lang}/` - Translated content (pt, es, fr, it, ko, pl, tr)
+- `_scripts/` - Translation and build scripts
 - `hello-nextflow/`, `nf4-science/`, etc. - Example Nextflow scripts for lessons
-- `mkdocs.yml` - Site navigation and configuration
 - `.github/check_headings.py` - Validates heading numbering
 
 ## Important Conventions

@@ -12,25 +12,21 @@ Execute from repository root. See [../shared/repo-conventions.md](../shared/repo
 ## Tasks to Perform
 
 1. **Search Markdown Files**
-
    - Use Grep to find TODO and FIXME in `docs/**/*.md`
    - Capture file path, line number, and full comment
    - Note context (which module/lesson)
 
 2. **Search Nextflow Scripts**
-
    - Find TODO/FIXME in `**/*.nf` files
    - Distinguish between training examples and solution code
    - Note if in core examples or side-quests
 
 3. **Search Configuration Files**
-
-   - Check `mkdocs.yml`
+   - Check `docs/en/mkdocs.yml`
    - Check `.github/**/*.yml` and `.github/**/*.py`
    - Check `CONTRIBUTING.md`
 
 4. **Categorize Results**
-
    - **High Priority**: Marked as FIXME, TODO(urgent), or blocking
    - **Documentation**: TODOs in markdown files
    - **Code**: TODOs in .nf or .py files
@@ -93,12 +89,10 @@ Known limitation documented - needs upstream fix in mkdocs plugin
 ## Recommendations
 
 1. **Immediate attention** (3 items):
-
    - Fix blocking issues in hello_nextflow
    - Update genomics examples for latest tools
 
 2. **Next sprint** (8 items):
-
    - Complete debugging module exercises
    - Add missing screenshots
 

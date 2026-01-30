@@ -30,7 +30,7 @@ Create a new training module in this repository. Follow these steps:
    - Appropriate use of admonitions
    - Code examples with proper formatting
 
-4. Add the module to mkdocs.yml navigation structure
+4. Add the module to `docs/en/mkdocs.yml` navigation structure
 
 5. Remind the user to:
    - Create any associated Nextflow example scripts in the root-level directory

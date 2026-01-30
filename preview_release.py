@@ -285,8 +285,7 @@ def compute_source_hash():
 
     # Hash key source directories and files
     source_paths = [
-        Path("docs"),
-        Path("mkdocs.yml"),
+        Path("docs/en"),
     ]
 
     for source_path in source_paths:
@@ -559,7 +558,7 @@ def cli(ctx, version: str | None, clean: bool):
         return
 
     # Ensure we're in the repo root
-    if not Path("mkdocs.yml").exists():
+    if not Path("docs/en/mkdocs.yml").exists():
         console.print("[red]Error:[/red] Must be run from the training repository root")
         sys.exit(1)
 
@@ -597,7 +596,7 @@ def cli(ctx, version: str | None, clean: bool):
 def status():
     """Show current preview release status."""
     # Ensure we're in the repo root
-    if not Path("mkdocs.yml").exists():
+    if not Path("docs/en/mkdocs.yml").exists():
         console.print("[red]Error:[/red] Must be run from the training repository root")
         sys.exit(1)
 
