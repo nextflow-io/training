@@ -121,9 +121,11 @@ If "workflow" is incorrectly translated as "flujo" instead of "flujo de trabajo"
 
 1. In the PR branch, edit `docs/es/llm-prompt.md`
 2. Add or update the glossary entry:
-   ```markdown
+
+   | English  | Spanish                        |
+   | -------- | ------------------------------ |
    | workflow | flujo de trabajo (NOT "flujo") |
-   ```
+
 3. Run the translation workflow targeting this branch
 4. Verify the fix in the updated PR
 
