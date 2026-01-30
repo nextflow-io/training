@@ -14,7 +14,7 @@ This repository contains training materials for Nextflow, built with Material fo
 ### Preview locally
 
 ```bash
-docker run --rm -it -p 8000:8000 -v ${PWD}:/docs ghcr.io/nextflow-io/training-mkdocs:latest
+docker run --rm -it -p 8000:8000 -v ${PWD}:/docs -w /docs/docs/en ghcr.io/nextflow-io/training-mkdocs:latest
 # View at http://0.0.0.0:8000/
 ```
 

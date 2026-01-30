@@ -16,7 +16,7 @@ docker ps --filter "ancestor=ghcr.io/nextflow-io/training-mkdocs:latest" --forma
 **Start the server using Docker (recommended):**
 
 ```bash
-docker run --rm -d -p 8000:8000 -v ${PWD}:/docs ghcr.io/nextflow-io/training-mkdocs:latest
+docker run --rm -d -p 8000:8000 -v ${PWD}:/docs -w /docs/docs/en ghcr.io/nextflow-io/training-mkdocs:latest
 ```
 
 **Alternative options:**
@@ -24,19 +24,19 @@ docker run --rm -d -p 8000:8000 -v ${PWD}:/docs ghcr.io/nextflow-io/training-mkd
 If you encounter issues with social cards:
 
 ```bash
-docker run --rm -p 8000:8000 -e 'CARDS=false' -v ${PWD}:/docs ghcr.io/nextflow-io/training-mkdocs:latest
+docker run --rm -p 8000:8000 -e 'CARDS=false' -v ${PWD}:/docs -w /docs/docs/en ghcr.io/nextflow-io/training-mkdocs:latest
 ```
 
-If you have Python environment set up:
+If you have uv installed:
 
 ```bash
-mkdocs serve
+uv run _scripts/docs.py serve
 ```
 
 Or without social cards:
 
 ```bash
-CARDS=false mkdocs serve
+CARDS=false uv run _scripts/docs.py serve
 ```
 
 **After starting the server:**

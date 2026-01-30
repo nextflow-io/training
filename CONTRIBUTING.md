@@ -97,7 +97,7 @@ CARDS=false mkdocs serve
 ```
 
 ```bash
-docker run --rm -it -p 8000:8000 -e 'CARDS=false' -v ${PWD}:/docs ghcr.io/nextflow-io/training-mkdocs:latest
+docker run --rm -it -p 8000:8000 -e 'CARDS=false' -v ${PWD}:/docs -w /docs/docs/en ghcr.io/nextflow-io/training-mkdocs:latest
 ```
 
 ## Announcement banner
