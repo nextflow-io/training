@@ -44,7 +44,9 @@ EN_DOCS_PATH = DOCS_PATH / "en" / "docs"
 SCRIPTS_PATH = REPO_ROOT / "_scripts"
 
 # Model to use for translations
-MODEL = "claude-sonnet-4-20250514"
+# Using alias to automatically get the latest Sonnet version
+# Sonnet is ~40% cheaper than Opus and recommended for translation tasks
+MODEL = "claude-sonnet-4-5"
 
 # Priority directories for translation (most important first)
 PRIORITY_DIRS = ["hello_nextflow", "hello_nf-core", "nf4_science", "envsetup"]
@@ -118,12 +120,31 @@ def iter_en_docs() -> list[Path]:
     return paths
 
 
+def check_api_key() -> None:
+    """Check that ANTHROPIC_API_KEY is set and provide helpful error if not."""
+    import os
+
+    if not os.environ.get("ANTHROPIC_API_KEY"):
+        console.print(
+            "[red]Error:[/red] ANTHROPIC_API_KEY environment variable not set"
+        )
+        console.print()
+        console.print("[dim]To fix this, set the environment variable:[/dim]")
+        console.print("  export ANTHROPIC_API_KEY='your-api-key-here'")
+        console.print()
+        console.print("[dim]Get your API key from:[/dim]")
+        console.print("  https://console.anthropic.com/settings/keys")
+        raise typer.Exit(code=1)
+
+
 @app.command()
 def translate_page(
     language: str = typer.Option(..., "--language", "-l", envvar="LANGUAGE"),
     en_path: Path = typer.Option(..., "--en-path", "-p", envvar="EN_PATH"),
 ):
     """Translate a single page from English to another language."""
+    check_api_key()
+
     if language == "en":
         console.print("[red]Error:[/red] Cannot translate to English (source language)")
         raise typer.Exit(code=1)

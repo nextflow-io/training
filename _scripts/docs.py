@@ -39,8 +39,19 @@ EN_DOCS_PATH = DOCS_PATH / "en"
 SITE_PATH = REPO_ROOT / "site"
 BUILD_SITE_PATH = REPO_ROOT / "site_build"
 
-# Languages to build (add new languages here as they become ready)
-SUPPORTED_LANGS = {"en", "pt", "es", "fr", "it", "ko", "pl", "tr"}
+
+def get_supported_langs() -> set[str]:
+    """
+    Load supported languages from language_names.yml.
+
+    This is the single source of truth for which languages are supported.
+    """
+    lang_file = DOCS_PATH / "language_names.yml"
+    if not lang_file.exists():
+        console.print(f"[red]Error:[/red] Language file not found: {lang_file}")
+        raise typer.Exit(code=1)
+    langs = yaml.safe_load(lang_file.read_text(encoding="utf-8"))
+    return set(langs.keys())
 
 
 def get_lang_paths() -> list[Path]:
@@ -72,7 +83,7 @@ def new_lang(lang: str):
     console.print(f"[green]Created:[/green] {new_path}")
     console.print("\nNext steps:")
     console.print(f"  1. Edit {new_path}/llm-prompt.md to add translation rules")
-    console.print(f"  2. Add '{lang}' to SUPPORTED_LANGS in _scripts/docs.py")
+    console.print(f"  2. Add '{lang}: <native name>' to docs/language_names.yml")
     console.print(f"  3. Add language to extra.alternate in docs/en/mkdocs.yml")
 
 
@@ -110,9 +121,8 @@ def build_lang(lang: str):
 def build_all():
     """Build docs for all supported languages."""
     shutil.rmtree(SITE_PATH, ignore_errors=True)
-    langs = [
-        p.name for p in get_lang_paths() if p.is_dir() and p.name in SUPPORTED_LANGS
-    ]
+    supported = get_supported_langs()
+    langs = [p.name for p in get_lang_paths() if p.is_dir() and p.name in supported]
 
     console.print(f"Building {len(langs)} languages: {', '.join(langs)}")
 
@@ -159,9 +169,8 @@ def live(lang: str = "en", dirty: bool = False):
 @app.command()
 def langs_json():
     """Output supported languages as JSON (for CI)."""
-    langs = [
-        p.name for p in get_lang_paths() if p.is_dir() and p.name in SUPPORTED_LANGS
-    ]
+    supported = get_supported_langs()
+    langs = [p.name for p in get_lang_paths() if p.is_dir() and p.name in supported]
     print(json.dumps(sorted(langs)))
 
 

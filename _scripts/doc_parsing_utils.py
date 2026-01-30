@@ -37,6 +37,14 @@ SLASHES_COMMENT_RE = re.compile(
 
 HASH_COMMENT_RE = re.compile(r"^(?P<code>.*?)(?P<comment>(?:(?<= )# .*)|(?:^# .*))?$")
 
+# Multi-line block comment patterns (for Groovy/Nextflow/Java)
+# Matches: /*  or opening of block comment
+BLOCK_COMMENT_START_RE = re.compile(r"^\s*/\*")
+# Matches: */  or closing of block comment
+BLOCK_COMMENT_END_RE = re.compile(r"\*/\s*$")
+# Matches lines inside block comment: * comment text
+BLOCK_COMMENT_LINE_RE = re.compile(r"^(?P<prefix>\s*\*\s?)(?P<comment>.*)$")
+
 
 class HeaderPermalinkInfo(TypedDict):
     line_no: int
@@ -474,6 +482,29 @@ def _split_slashes_comment(line: str) -> tuple[str, Union[str, None]]:
     return line, None
 
 
+def _is_block_comment_start(line: str) -> bool:
+    """Check if line starts a block comment (/*...)."""
+    return bool(BLOCK_COMMENT_START_RE.match(line))
+
+
+def _is_block_comment_end(line: str) -> bool:
+    """Check if line ends a block comment (...*/)."""
+    return bool(BLOCK_COMMENT_END_RE.search(line))
+
+
+def _split_block_comment_line(line: str) -> tuple[str, Union[str, None]]:
+    """
+    Split a line inside a block comment into prefix and comment content.
+
+    For lines like: " * This is a comment"
+    Returns: (" * ", "This is a comment")
+    """
+    match = BLOCK_COMMENT_LINE_RE.match(line)
+    if match:
+        return match.group("prefix"), match.group("comment")
+    return line, None
+
+
 def replace_multiline_code_block(
     block_a: MultilineCodeBlockInfo, block_b: MultilineCodeBlockInfo
 ) -> list[str]:
@@ -511,6 +542,8 @@ def replace_multiline_code_block(
         return block_a["content"].copy()
 
     code_block: list[str] = []
+    in_block_comment = False
+
     for line_a, line_b in zip(block_a["content"], block_b["content"]):
         line_a_comment: Union[str, None] = None
 
@@ -526,17 +559,48 @@ def replace_multiline_code_block(
             "toml",
             "yaml",
             "yml",
-            "nextflow",
-            "groovy",
-            "nf",
             "hash-style-comments",
         }:
+            # Hash-style comments only
             _line_a_code, line_a_comment = _split_hash_comment(line_a)
             _line_b_code, line_b_comment = _split_hash_comment(line_b)
             res_line = line_b
             if line_b_comment and line_a_comment:
                 res_line = res_line.replace(line_b_comment, line_a_comment, 1)
             code_block.append(res_line)
+        elif block_language in {
+            "nextflow",
+            "groovy",
+            "nf",
+            "java",
+            "kotlin",
+            "block-and-hash-comments",
+        }:
+            # Languages with both hash (#) and block (/* */) comments
+            # Check for block comment boundaries
+            starts_block = _is_block_comment_start(line_a)
+            ends_block = _is_block_comment_end(line_a)
+
+            if starts_block:
+                in_block_comment = True
+                # Lines like "/* comment */" or "/*" - keep translated version
+                code_block.append(line_a)
+            elif ends_block and in_block_comment:
+                in_block_comment = False
+                # Lines like " */" or "comment */" - keep translated version
+                code_block.append(line_a)
+            elif in_block_comment:
+                # Inside block comment - lines like " * comment text"
+                # Keep the translated comment content from line_a
+                code_block.append(line_a)
+            else:
+                # Outside block comment - handle hash comments
+                _line_a_code, line_a_comment = _split_hash_comment(line_a)
+                _line_b_code, line_b_comment = _split_hash_comment(line_b)
+                res_line = line_b
+                if line_b_comment and line_a_comment:
+                    res_line = res_line.replace(line_b_comment, line_a_comment, 1)
+                code_block.append(res_line)
         elif block_language in {"console", "json", "slash-style-comments"}:
             _line_a_code, line_a_comment = _split_slashes_comment(line_a)
             _line_b_code, line_b_comment = _split_slashes_comment(line_b)
