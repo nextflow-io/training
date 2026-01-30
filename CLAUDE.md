@@ -160,11 +160,10 @@ module_name/
 
 ## Gotchas
 
-1. **Social cards are slow**: If preview is slow, disable with `CARDS=false`
-2. **Multilingual builds**: Initial build takes minutes due to multiple languages
-3. **Heading validation**: Auto-runs on commit via pre-commit hook
-4. **Excalidraw diagrams**: Must use `.excalidraw.svg` extension for editability
-5. **Module vs Lesson**: Module = entire course (e.g. "Hello Nextflow"), Lesson = single page (e.g. "01_hello_world.md")
+1. **Multilingual builds**: Initial build takes minutes due to multiple languages
+2. **Heading validation**: Auto-runs on commit via pre-commit hook
+3. **Excalidraw diagrams**: Must use `.excalidraw.svg` extension for editability
+4. **Module vs Lesson**: Module = entire course (e.g. "Hello Nextflow"), Lesson = single page (e.g. "01_hello_world.md")
 
 ## Testing Nextflow Examples
 

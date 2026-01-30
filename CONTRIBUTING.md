@@ -88,18 +88,6 @@ uv run _scripts/docs.py build-all
 
 For information about contributing translations, see [TRANSLATING.md](TRANSLATING.md).
 
-### Social cards
-
-If you're having trouble with the social sharing card images, set the environment variable `CARDS` to `false`:
-
-```bash
-CARDS=false mkdocs serve
-```
-
-```bash
-docker run --rm -it -p 8000:8000 -e 'CARDS=false' -v ${PWD}:/docs -w /docs/docs/en ghcr.io/nextflow-io/training-mkdocs:latest
-```
-
 ## Announcement banner
 
 If there is an announcement banner, you can enable and customise it using the following config in `docs/en/mkdocs.yml`:
@@ -183,7 +171,7 @@ uv run .github/check_headings.py docs/**/*.md
 uv run .github/check_headings.py --fix docs/**/*.md
 ```
 
-Otherwise, run `pip install typer rich` then `python .github/check_headings.py`.
+Otherwise, run `uv run .github/check_headings.py` which handles dependencies automatically.
 
 The script runs automatically in CI on markdown file changes via GitHub Actions,
 and will cause a CI failure if any incorrect headings are found.
@@ -303,7 +291,7 @@ I recommend the [Todo Tree VSCode extension](https://marketplace.visualstudio.co
 
 A list of key ones also included here:
 
-- Remove plugin install from Phil's GitHub fork in `requirements.txt` and `.github/mkdocs.Dockerfile` when [this PR](https://github.com/timvink/mkdocs-enumerate-headings-plugin/pull/33) is merged
+- Remove plugin install from Phil's GitHub fork in `.github/mkdocs.Dockerfile` and `_scripts/docs.py` when [this PR](https://github.com/timvink/mkdocs-enumerate-headings-plugin/pull/33) is merged
 
 ## Preview Release
 

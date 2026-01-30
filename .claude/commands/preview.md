@@ -19,24 +19,10 @@ docker ps --filter "ancestor=ghcr.io/nextflow-io/training-mkdocs:latest" --forma
 docker run --rm -d -p 8000:8000 -v ${PWD}:/docs -w /docs/docs/en ghcr.io/nextflow-io/training-mkdocs:latest
 ```
 
-**Alternative options:**
-
-If you encounter issues with social cards:
-
-```bash
-docker run --rm -p 8000:8000 -e 'CARDS=false' -v ${PWD}:/docs -w /docs/docs/en ghcr.io/nextflow-io/training-mkdocs:latest
-```
-
-If you have uv installed:
+**Alternative - using uv:**
 
 ```bash
 uv run _scripts/docs.py serve
-```
-
-Or without social cards:
-
-```bash
-CARDS=false uv run _scripts/docs.py serve
 ```
 
 **After starting the server:**
@@ -46,10 +32,7 @@ CARDS=false uv run _scripts/docs.py serve
 - Check console for any build errors
 - Use `/stop-preview` command or Ctrl+C to stop the server
 
-**Note:** The initial build may take a few minutes as it builds documentation in multiple languages (en, pt, es, fr, it, ko). Wait for the "Serving on" message before accessing the site.
-
 **Common issues:**
 
-- If social cards fail, use CARDS=false option
 - If port 8000 is busy, use `/stop-preview` to stop other servers
 - If changes don't appear, check for markdown syntax errors in the console

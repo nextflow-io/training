@@ -8,10 +8,7 @@
 #     # MkDocs and plugins
 #     "mkdocs",
 #     "mkdocs-material",
-#     "mkdocs-static-i18n",
 #     "pymdown-extensions>=10.12",
-#     "pillow",
-#     "cairosvg",
 #     "mkdocs-enumerate-headings-plugin>=0.6.0",
 #     "mkdocs-quiz>=1.5.0",
 #     "mike",
@@ -117,11 +114,17 @@ def build_lang(lang: str):
         shutil.rmtree(dist_path, ignore_errors=True)
 
     shutil.rmtree(build_site_dist_path, ignore_errors=True)
-    subprocess.run(
+    result = subprocess.run(
         ["mkdocs", "build", "--site-dir", str(build_site_dist_path)],
         cwd=lang_path,
-        check=True,
+        capture_output=True,
+        text=True,
     )
+    if result.returncode != 0:
+        console.print(f"[red]Error building {lang}:[/red]")
+        console.print(result.stdout)
+        console.print(result.stderr)
+        raise subprocess.CalledProcessError(result.returncode, result.args)
     shutil.copytree(build_site_dist_path, dist_path, dirs_exist_ok=True)
 
     console.print(f"[green]Built:[/green] {lang}")

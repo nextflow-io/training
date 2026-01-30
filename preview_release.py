@@ -369,8 +369,6 @@ def build_docs(version: str):
                 f"{repo_root}:/docs",
                 "-w",
                 "/docs/docs/en",
-                "-e",
-                "CARDS=false",
                 "ghcr.io/nextflow-io/training-mkdocs:latest",
                 "build",
                 "-d",
