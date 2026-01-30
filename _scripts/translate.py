@@ -137,6 +137,37 @@ def check_api_key() -> None:
         raise typer.Exit(code=1)
 
 
+def resolve_en_path(en_path: Path) -> Path:
+    """
+    Resolve an English docs path to an absolute path.
+
+    Accepts paths in several formats:
+    - Absolute path: /full/path/to/docs/en/docs/file.md
+    - Relative to repo root: docs/en/docs/file.md
+    - Relative to EN_DOCS_PATH: hello_nextflow/index.md
+    """
+    # If already absolute and exists, use it
+    if en_path.is_absolute() and en_path.exists():
+        return en_path
+
+    # Try as relative to current directory
+    if en_path.exists():
+        return en_path.resolve()
+
+    # Try as relative to repo root
+    repo_relative = REPO_ROOT / en_path
+    if repo_relative.exists():
+        return repo_relative
+
+    # Try as relative to EN_DOCS_PATH (e.g., "hello_nextflow/index.md")
+    en_docs_relative = EN_DOCS_PATH / en_path
+    if en_docs_relative.exists():
+        return en_docs_relative
+
+    # Return original for error message
+    return en_path
+
+
 @app.command()
 def translate_page(
     language: str = typer.Option(..., "--language", "-l", envvar="LANGUAGE"),
@@ -148,6 +179,9 @@ def translate_page(
     if language == "en":
         console.print("[red]Error:[/red] Cannot translate to English (source language)")
         raise typer.Exit(code=1)
+
+    # Resolve the path
+    en_path = resolve_en_path(en_path)
 
     if not en_path.exists():
         console.print(f"[red]Error:[/red] Source file not found: {en_path}")
@@ -325,16 +359,30 @@ def update_outdated(
 @app.command()
 def add_missing(
     language: str = typer.Option(..., "--language", "-l", envvar="LANGUAGE"),
+    include: str = typer.Option(
+        None,
+        "--include",
+        "-i",
+        help="Only translate files matching this pattern (e.g., 'hello_nextflow')",
+    ),
 ):
     """Translate all missing files for a language."""
     missing = []
     for en_path in iter_en_docs():
+        # Filter by include pattern if specified
+        if include and include not in str(en_path):
+            continue
         lang_path = to_lang_path(en_path, language)
         if not lang_path.exists():
             missing.append(en_path)
 
     if not missing:
-        console.print(f"[green]All files already translated for {language}[/green]")
+        if include:
+            console.print(
+                f"[green]All matching files already translated for {language}[/green]"
+            )
+        else:
+            console.print(f"[green]All files already translated for {language}[/green]")
         return
 
     console.print(f"Translating {len(missing)} missing files...")
