@@ -4,7 +4,23 @@
   function fixLanguageLinks() {
     var path = window.location.pathname;
     var versionMatch = path.match(/^\/([^\/]+)\//);
-    var knownLangs = ["en", "pt", "es", "fr", "it", "ko", "pl", "tr"];
+
+    // Dynamically get known languages from the language picker in the DOM
+    // This avoids hardcoding languages and automatically picks up new ones
+    var knownLangs = [];
+    var langLinks = document.querySelectorAll(".md-select__link[hreflang]");
+    langLinks.forEach(function (link) {
+      var lang = link.getAttribute("hreflang");
+      if (lang && knownLangs.indexOf(lang) === -1) {
+        knownLangs.push(lang);
+      }
+    });
+
+    // Fallback if DOM query fails (should not happen in normal operation)
+    if (knownLangs.length === 0) {
+      knownLangs = ["de", "en", "es", "fr", "hi", "it", "ko", "pl", "pt", "tr"];
+    }
+
     var versionPrefix = "";
 
     if (versionMatch) {
