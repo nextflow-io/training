@@ -1,12 +1,10 @@
-// Fix language picker links for mike versioning
-// Detects version prefix (e.g., /latest/, /0.dev/) and prepends to language links
+// Fix language picker links to preserve current page when switching languages
+// Also handles mike versioning prefixes (e.g., /latest/, /0.dev/)
 (function () {
   function fixLanguageLinks() {
     var path = window.location.pathname;
-    var versionMatch = path.match(/^\/([^\/]+)\//);
 
-    // Dynamically get known languages from the language picker in the DOM
-    // This avoids hardcoding languages and automatically picks up new ones
+    // Get known languages from the language picker in the DOM
     var knownLangs = [];
     var langLinks = document.querySelectorAll(".md-select__link[hreflang]");
     langLinks.forEach(function (link) {
@@ -21,42 +19,48 @@
       return;
     }
 
+    // Parse the current path to extract version prefix, language, and page path
+    // Handles: /page, /de/page, /latest/page, /latest/de/page
     var versionPrefix = "";
+    var pagePath = path;
 
-    if (versionMatch) {
-      var potentialVersion = versionMatch[1];
-      // If first path segment isn't a language code, it's a version
-      if (knownLangs.indexOf(potentialVersion) === -1) {
-        versionPrefix = "/" + potentialVersion;
+    // Split path into segments
+    var segments = path.split("/").filter(function (s) {
+      return s.length > 0;
+    });
+
+    if (segments.length > 0) {
+      // Check if first segment is a version (not a language)
+      if (knownLangs.indexOf(segments[0]) === -1) {
+        // First segment is a version prefix
+        versionPrefix = "/" + segments[0];
+        segments.shift();
+      }
+
+      // Check if next segment is a language
+      if (segments.length > 0 && knownLangs.indexOf(segments[0]) !== -1) {
+        // Remove language from page path
+        segments.shift();
+      }
+
+      // Remaining segments are the page path
+      pagePath = "/" + segments.join("/");
+      // Preserve trailing slash if original had one
+      if (path.endsWith("/") && !pagePath.endsWith("/")) {
+        pagePath += "/";
       }
     }
 
-    // Only proceed if we have a version prefix to add
-    if (!versionPrefix) return;
-
-    var langLinks = document.querySelectorAll(".md-select__link[hreflang]");
+    // Update each language link to preserve current page
     langLinks.forEach(function (link) {
-      var href = link.getAttribute("href");
-      // Handle both absolute URLs and relative paths
-      try {
-        var url = new URL(href, window.location.origin);
-        var linkPath = url.pathname;
-
-        // Check if this link already has the version prefix
-        if (
-          !linkPath.startsWith(versionPrefix + "/") &&
-          linkPath !== versionPrefix
-        ) {
-          // Prepend version prefix to the path
-          url.pathname = versionPrefix + linkPath;
-          link.setAttribute("href", url.href);
-        }
-      } catch (e) {
-        // Fallback for older browsers
-        if (href.startsWith("/") && !href.startsWith(versionPrefix)) {
-          link.setAttribute("href", versionPrefix + href);
-        }
+      var lang = link.getAttribute("hreflang");
+      var langPrefix = lang === "en" ? "" : "/" + lang;
+      var newHref = versionPrefix + langPrefix + pagePath;
+      // Ensure we don't end up with empty href
+      if (newHref === "") {
+        newHref = "/";
       }
+      link.setAttribute("href", newHref);
     });
   }
 
