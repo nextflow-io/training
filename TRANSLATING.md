@@ -19,6 +19,17 @@ Translations are managed through a combination of:
 
 The key insight: **to fix a translation, fix the prompt** - not the translated file.
 
+### Contents
+
+- [How Automatic Translation Updates Work](#how-automatic-translation-updates-work)
+- [How to Improve Existing Translations](#how-to-improve-existing-translations)
+- [Reviewing Translation PRs](#reviewing-translation-prs)
+- [How to Add a Missing Course](#how-to-add-a-missing-course)
+- [How to Add a New Language](#how-to-add-a-new-language)
+- [Directory Structure](#directory-structure)
+- [Supported Languages](#supported-languages)
+- [CLI Reference (For Maintainers)](#cli-reference-for-maintainers)
+
 ---
 
 ## How Automatic Translation Updates Work
@@ -47,6 +58,49 @@ flowchart TD
 - Translations preserve line-by-line structure for easy diff review
 - Each language gets a separate PR for independent review/merge
 - The system uses git commit timestamps to detect outdated files
+
+---
+
+## How to Improve Existing Translations
+
+Found a translation error or want to suggest an improvement? Here's how to fix it the right way.
+
+### The Right Way: Update the Prompt
+
+The **only** sustainable way to fix translations is to improve the LLM prompts:
+
+1. **For language-specific issues** (terminology, tone, grammar):
+
+   - Edit `docs/<lang>/llm-prompt.md`
+   - Add glossary terms, clarify rules, provide examples
+
+2. **For structural issues** (code blocks, formatting, links):
+
+   - Edit `_scripts/general-llm-prompt.md`
+   - Add rules with before/after examples
+
+3. **Re-run the translation** via GitHub Actions:
+
+   - Go to **Actions** → **Translate** → **Run workflow**
+   - Select language and command (`translate-page` or `update-outdated`)
+
+4. **Submit a PR** with both the prompt change and regenerated translation
+
+### Why Not Edit Translations Directly?
+
+- Direct edits are **overwritten** when English content changes
+- There's no way to track why a translation differs from the AI output
+- Future maintainers won't know which changes were intentional
+- The same error will reappear in new content
+
+### Reporting Issues
+
+If you find errors but can't fix the prompts yourself:
+
+1. Open a GitHub issue
+2. Include: language, file path, current text, expected text
+3. Explain why the current translation is wrong
+4. A maintainer will update the prompt and re-run
 
 ---
 
@@ -136,47 +190,6 @@ Once you've verified the translation quality:
 1. Check that CI passes (build succeeds)
 2. Approve the PR
 3. Merge (squash merge recommended)
-
----
-
-## How to Fix Existing Translations
-
-### The Right Way: Update the Prompt
-
-The **only** sustainable way to fix translations is to improve the LLM prompts:
-
-1. **For language-specific issues** (terminology, tone, grammar):
-
-   - Edit `docs/<lang>/llm-prompt.md`
-   - Add glossary terms, clarify rules, provide examples
-
-2. **For structural issues** (code blocks, formatting, links):
-
-   - Edit `_scripts/general-llm-prompt.md`
-   - Add rules with before/after examples
-
-3. **Re-run the translation** via GitHub Actions:
-
-   - Go to **Actions** → **Translate** → **Run workflow**
-   - Select language and command (`translate-page` or `update-outdated`)
-
-4. **Submit a PR** with both the prompt change and regenerated translation
-
-### Why Not Edit Translations Directly?
-
-- Direct edits are **overwritten** when English content changes
-- There's no way to track why a translation differs from the AI output
-- Future maintainers won't know which changes were intentional
-- The same error will reappear in new content
-
-### Reporting Issues
-
-If you find errors but can't fix the prompts yourself:
-
-1. Open a GitHub issue
-2. Include: language, file path, current text, expected text
-3. Explain why the current translation is wrong
-4. A maintainer will update the prompt and re-run
 
 ---
 
