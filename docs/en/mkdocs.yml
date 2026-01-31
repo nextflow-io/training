@@ -4,7 +4,7 @@ repo_url: https://github.com/nextflow-io/training
 repo_name: nextflow-io/training
 
 nav:
-  - Home: index.md
+  - index.md
   - Nextflow Run:
       - nextflow_run/index.md
       - nextflow_run/00_orientation.md
