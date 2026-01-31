@@ -1,0 +1,7 @@
+# Ankieta zwrotna
+
+Zanim przejdziesz dalej, wypełnij tę krótką, 5-pytaniową ankietę, aby ocenić szkolenie, podzielić się opinią o swoim doświadczeniu i dać nam znać, co jeszcze moglibyśmy zrobić, aby pomóc Ci w Twojej podróży z Nextflow.
+
+Wypełnienie powinno zająć mniej niż minutę. Dziękujemy za pomoc w ulepszaniu naszych materiałów szkoleniowych dla wszystkich!
+
+<div data-tf-live="01JMHYE82Z92J2Q6Q3Z7QJ1BFW"></div><script src="//embed.typeform.com/next/embed.js"></script>
