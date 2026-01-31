@@ -27,7 +27,6 @@ The key insight: **to fix a translation, fix the prompt** - not the translated f
 - [How to Add a Missing Course](#how-to-add-a-missing-course)
 - [How to Add a New Language](#how-to-add-a-new-language)
 - [Directory Structure](#directory-structure)
-- [Supported Languages](#supported-languages)
 - [CLI Reference (For Maintainers)](#cli-reference-for-maintainers)
 
 ---
@@ -64,6 +63,22 @@ flowchart TD
 ## How to Improve Existing Translations
 
 Found a translation error or want to suggest an improvement? Here's how to fix it the right way.
+
+```mermaid
+flowchart TD
+    A[Find translation error] --> B{Type of issue?}
+    B -->|Wrong term| C[Update glossary in<br>docs/LANG/llm-prompt.md]
+    B -->|Wrong style/tone| D[Update grammar rules in<br>docs/LANG/llm-prompt.md]
+    B -->|Structural issue| E[Update rules in<br>_scripts/general-llm-prompt.md]
+    C --> F[Commit prompt change]
+    D --> F
+    E --> F
+    F --> G[Trigger translation workflow]
+    G --> H[Review updated translation]
+    H --> I{Correct?}
+    I -->|Yes| J[Submit PR]
+    I -->|No| B
+```
 
 ### The Right Way: Update the Prompt
 
@@ -315,21 +330,6 @@ _scripts/
 ├── general-llm-prompt.md   # Shared translation rules
 └── docs.py                 # Build/serve CLI
 ```
-
-## Supported Languages
-
-| Code | Language   | Status |
-| ---- | ---------- | ------ |
-| en   | English    | Source |
-| pt   | Portuguese | Active |
-| es   | Spanish    | Active |
-| fr   | French     | Active |
-| it   | Italian    | Active |
-| ko   | Korean     | Active |
-| pl   | Polish     | Active |
-| tr   | Turkish    | Active |
-
----
 
 ## CLI Reference (For Maintainers)
 
