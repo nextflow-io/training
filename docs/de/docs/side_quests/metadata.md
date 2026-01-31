@@ -1,5 +1,7 @@
 # Metadaten und Meta-Maps
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Bei jeder wissenschaftlichen Analyse arbeiten wir selten nur mit den reinen Datendateien.
 Jede Datei kommt mit ihren eigenen zusätzlichen Informationen: was sie ist, woher sie stammt und was sie besonders macht.
 Diese zusätzlichen Informationen nennen wir Metadaten.

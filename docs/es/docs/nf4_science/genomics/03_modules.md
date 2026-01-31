@@ -1,5 +1,7 @@
 # Parte 3: Mover código a módulos
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 En la primera parte de este curso, construiste un pipeline de llamado de variantes que era completamente lineal y procesaba los datos de cada muestra independientemente de las demás.
 
 En la segunda parte, te mostramos cómo usar canales y operadores de canal para implementar el llamado conjunto de variantes con GATK, construyendo sobre el pipeline de la Parte 1.

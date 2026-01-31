@@ -1,5 +1,7 @@
 # भाग 3: एक nf-core मॉड्यूल का उपयोग करें
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Hello nf-core प्रशिक्षण पाठ्यक्रम के इस तीसरे भाग में, हम आपको दिखाते हैं कि अपनी pipeline में मौजूदा nf-core मॉड्यूल को कैसे खोजें, इंस्टॉल करें, और उपयोग करें।
 
 nf-core के साथ काम करने के महान लाभों में से एक [nf-core/modules](https://github.com/nf-core/modules) रिपॉजिटरी से पूर्व-निर्मित, परीक्षित मॉड्यूल का लाभ उठाने की क्षमता है।

@@ -1,5 +1,7 @@
 # Teil 4: Tests hinzufügen
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Im ersten Teil dieses Kurses hast du eine Varianten-Calling-Pipeline erstellt, die vollständig linear war und die Daten jeder Probe unabhängig von den anderen verarbeitet hat.
 
 Im zweiten Teil haben wir dir gezeigt, wie du Channels und Channel-Operatoren verwendest, um gemeinsames Varianten-Calling mit GATK zu implementieren.

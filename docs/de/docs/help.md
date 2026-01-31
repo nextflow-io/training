@@ -8,6 +8,8 @@ hide:
 
 # Hilfe erhalten
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Egal ob du Schwierigkeiten beim Einstieg hast, mittendrin nicht weiterkommst oder eine Anschlussfrage hast - zögere nicht, dich zu melden! Unser Community-Team ist hier, um zu helfen, und die Nextflow-Community insgesamt ist sehr aktiv, inklusiv und hilfsbereit.
 
 Hier sind die wichtigsten verfügbaren Optionen, je nachdem, wonach du suchst.

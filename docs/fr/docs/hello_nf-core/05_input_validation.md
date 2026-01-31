@@ -1,5 +1,7 @@
 # Partie 5 : Validation des entrées
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Dans cette cinquième partie du cours de formation Hello nf-core, nous vous montrons comment utiliser le plugin nf-schema pour valider les entrées et les paramètres du pipeline.
 
 ??? info "Comment commencer à partir de cette section"

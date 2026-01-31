@@ -1,5 +1,7 @@
 # 수동 설치
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 자체 로컬 환경에서 교육을 실행하는 데 필요한 모든 것을 수동으로 설치할 수 있습니다.
 
 여기서는 표준 POSIX 호환 시스템(노트북과 같은 개인용 머신 가정)에서 이를 수행하는 방법을 문서화했습니다.

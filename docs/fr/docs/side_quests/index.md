@@ -1,5 +1,7 @@
 # Quêtes secondaires
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Ceci est une collection de mini-cours de formation autonomes qui approfondissent des sujets spécifiques. Vous pouvez les suivre dans n'importe quel ordre.
 
 Commençons ! Cliquez sur le bouton « Open in GitHub Codespaces » ci-dessous pour lancer l'environnement de formation (de préférence dans un onglet séparé), puis continuez votre lecture pendant le chargement.

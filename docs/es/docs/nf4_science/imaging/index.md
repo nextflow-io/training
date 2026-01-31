@@ -1,5 +1,7 @@
 # Nextflow run for Imaging
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Este curso de entrenamiento está dirigido a investigadores en imagenología y biología espacial que estén interesados en ejecutar y personalizar pipelines de análisis de datos.
 Enseña conceptos fundamentales de Nextflow relacionados con la ejecución, organización y configuración de workflows utilizando [nf-core/molkart](https://nf-co.re/molkart), un pipeline para procesar datos de transcriptómica espacial de Cartografía Molecular.
 Las habilidades que aprenderá aquí son transferibles a cualquier pipeline de Nextflow o nf-core.

@@ -1,5 +1,7 @@
 # Teil 3: Implementierung für mehrere Proben mit Paired-End-Daten
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 In diesem letzten Teil des Kurses werden wir unseren einfachen Workflow auf die nächste Stufe heben, indem wir ihn in ein leistungsstarkes Batch-Automatisierungswerkzeug verwandeln, das eine beliebige Anzahl von Proben verarbeiten kann.
 Und dabei werden wir ihn auch auf Paired-End-Daten umstellen, die in neueren Studien häufiger vorkommen.
 

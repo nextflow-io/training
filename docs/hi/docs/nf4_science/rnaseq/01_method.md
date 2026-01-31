@@ -1,5 +1,7 @@
 # भाग 1: विधि का अवलोकन और मैनुअल परीक्षण
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 बल्क RNAseq डेटा को प्रोसेस और विश्लेषण करने के लिए कई वैध विधियाँ हैं।
 इस कोर्स के लिए, हम [Babraham Institute](https://www.babraham.ac.uk/) में डॉ. साइमन एंड्रूज और लौरा बिगिंस द्वारा [यहाँ](https://www.bioinformatics.babraham.ac.uk/training/RNASeq_Course/Analysing%20RNA-Seq%20data%20Exercise.pdf) वर्णित विधि का अनुसरण कर रहे हैं।
 

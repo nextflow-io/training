@@ -1,5 +1,7 @@
 # Prossimi passi
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Congratulazioni per aver completato la formazione Nextflow per il Bioimaging!
 
 Ora possiede le competenze fondamentali per eseguire e configurare pipeline Nextflow per l'analisi di dati di imaging.

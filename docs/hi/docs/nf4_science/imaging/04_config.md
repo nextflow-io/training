@@ -1,5 +1,7 @@
 # भाग 4: कॉन्फ़िगरेशन
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 भाग 1-3 में, हमने सीखा कि Nextflow को कैसे चलाएं, एक nf-core pipeline को कैसे चलाएं, और parameter files और samplesheets के साथ inputs को कैसे मैनेज करें।
 अब हम **configuration files** और **profiles** का उपयोग करके विभिन्न computing environments के लिए pipelines को configure करने का तरीका जानेंगे।
 

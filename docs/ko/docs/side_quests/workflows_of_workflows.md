@@ -1,5 +1,7 @@
 # 워크플로우의 워크플로우
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 파이프라인을 개발할 때, 다양한 데이터 유형이나 분석 단계에 대해 유사한 프로세스 시퀀스를 생성하는 경우가 종종 있습니다. 이러한 프로세스 시퀀스를 복사하고 붙여넣게 되면 유지 관리가 어려운 중복 코드가 생성되거나, 이해하고 수정하기 어려운 하나의 거대한 워크플로우를 만들게 될 수 있습니다.
 
 Nextflow의 가장 강력한 기능 중 하나는 작고 재사용 가능한 워크플로우 모듈로부터 복잡한 파이프라인을 구성할 수 있는 능력입니다. 이러한 모듈식 접근 방식은 파이프라인을 더 쉽게 개발, 테스트 및 유지 관리할 수 있게 합니다.

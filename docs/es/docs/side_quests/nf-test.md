@@ -1,5 +1,7 @@
 # Pruebas con nf-test
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Poder probar sistemáticamente que cada parte de su flujo de trabajo está haciendo lo que se supone que debe hacer es fundamental para la reproducibilidad y el mantenimiento a largo plazo, y puede ser de gran ayuda durante el proceso de desarrollo.
 
 Tomemos un minuto para hablar sobre por qué las pruebas son tan importantes. Si está desarrollando un flujo de trabajo, una de las primeras cosas que hará es tomar algunos datos de prueba que sabe que son válidos y que deberían producir un resultado. Agrega el primer proceso al pipeline y lo conecta a sus entradas para que funcione. Luego, para verificar que todo funciona, lo ejecuta con los datos de prueba. Suponiendo que funcione, pasa al siguiente proceso y ejecuta los datos de prueba nuevamente. Repite este proceso hasta que tiene un pipeline con el que está satisfecho.

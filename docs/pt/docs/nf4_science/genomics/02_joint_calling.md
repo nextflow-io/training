@@ -1,5 +1,7 @@
 # Parte 2: Chamada conjunta em uma coorte
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tradução assistida por IA - [saiba mais e sugira melhorias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Na primeira parte deste curso, você construiu um pipeline de chamada de variantes que era completamente linear e processava os dados de cada amostra independentemente das outras.
 No entanto, em um caso de uso real de genômica, você normalmente precisará examinar as chamadas de variantes de múltiplas amostras em conjunto.
 

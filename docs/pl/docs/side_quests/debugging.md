@@ -1,5 +1,7 @@
 # Debugowanie Workflow
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Debugowanie to kluczowa umiejętność, która może zaoszczędzić Ci godzin frustracji i pomóc Ci stać się bardziej efektywnym programistą Nextflow. Przez całą swoją karierę, szczególnie na początku, będziesz napotykać błędy podczas budowania i utrzymywania swoich workflow. Nauka systematycznych podejść do debugowania pomoże Ci szybko identyfikować i rozwiązywać problemy.
 
 ### Cele nauczania

@@ -1,5 +1,7 @@
 # फ़ाइल इनपुट प्रोसेसिंग
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 वैज्ञानिक विश्लेषण workflows में अक्सर बड़ी संख्या में फ़ाइलों को प्रोसेस करना शामिल होता है।
 Nextflow फ़ाइलों को कुशलता से संभालने के लिए शक्तिशाली टूल प्रदान करता है, जो तुम्हें न्यूनतम कोड के साथ अपने डेटा को व्यवस्थित और प्रोसेस करने में मदद करता है।
 

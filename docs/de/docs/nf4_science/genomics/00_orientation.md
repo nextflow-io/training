@@ -1,5 +1,7 @@
 # Orientierung
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Die Trainingsumgebung enthält alle Software, den Code und die Daten, die für diesen Trainingskurs notwendig sind, sodass du nichts selbst installieren musst.
 Du benötigst jedoch einen (kostenlosen) Account, um dich anzumelden, und solltest dir ein paar Minuten Zeit nehmen, um dich mit der Oberfläche vertraut zu machen.
 

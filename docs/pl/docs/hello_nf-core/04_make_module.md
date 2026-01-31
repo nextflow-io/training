@@ -1,5 +1,7 @@
 # Część 4: Tworzenie modułu nf-core
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 W czwartej części kursu szkoleniowego Hello nf-core pokażemy, jak utworzyć moduł nf-core, stosując kluczowe konwencje, które czynią moduły przenośnymi i łatwymi w utrzymaniu.
 
 Projekt nf-core udostępnia polecenie (`nf-core modules create`), które automatycznie generuje prawidłowo ustrukturyzowane szablony modułów, podobnie jak to, czego użyliśmy dla workflow w Części 2.

@@ -1,5 +1,7 @@
 # Divisão e Agrupamento
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tradução assistida por IA - [saiba mais e sugira melhorias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 O Nextflow fornece ferramentas poderosas para trabalhar com dados de forma flexível. Uma capacidade-chave é dividir dados em diferentes fluxos e depois agrupar itens relacionados de volta. Isso é especialmente valioso em fluxos de trabalho de bioinformática onde você precisa processar diferentes tipos de amostras separadamente antes de combinar resultados para análise.
 
 Pense nisso como classificar correspondências: você separa cartas por destino, processa cada pilha de forma diferente e depois recombina itens indo para a mesma pessoa. O Nextflow usa operadores especiais para realizar isso com dados científicos. Essa abordagem também é comumente conhecida como o padrão **scatter/gather** em computação distribuída e fluxos de trabalho de bioinformática.

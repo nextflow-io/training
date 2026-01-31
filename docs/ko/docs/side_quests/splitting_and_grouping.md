@@ -1,5 +1,7 @@
 # 데이터 분할 및 그룹화
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Nextflow는 데이터를 유연하게 다룰 수 있는 강력한 도구를 제공합니다. 주요 기능 중 하나는 데이터를 여러 스트림으로 분할한 다음 관련 항목을 다시 그룹화하는 것입니다. 이는 특히 생물정보학 워크플로에서 유용합니다. 이러한 워크플로에서는 서로 다른 유형의 샘플을 별도로 처리한 후 분석을 위해 결과를 결합해야 합니다.
 
 우편물을 분류하는 것으로 생각해 보십시오. 목적지별로 편지를 분리하고, 각 묶음을 다르게 처리한 다음, 동일한 사람에게 보내지는 항목을 다시 결합합니다. Nextflow는 과학 데이터로 이를 수행하기 위해 특수 연산자를 사용합니다. 이 접근 방식은 분산 컴퓨팅 및 생물정보학 워크플로에서 일반적으로 **scatter/gather** 패턴으로 알려져 있습니다.

@@ -1,5 +1,7 @@
 # Nächste Schritte
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Herzlichen Glückwunsch zum Abschluss des Nextflow for Bioimaging Trainings!
 
 Du hast jetzt die grundlegenden Fähigkeiten, um Nextflow Pipelines für die Analyse von Bilddaten auszuführen und zu konfigurieren.

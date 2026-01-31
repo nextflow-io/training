@@ -23,6 +23,8 @@ additional_information:
 
 # Hello nf-core
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 **Hello nf-core는 nf-core 리소스와 모범 사례 사용에 대한 실습 입문 과정입니다.**
 
 ![nf-core logo](./img/nf-core-logo.png)

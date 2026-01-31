@@ -1,5 +1,7 @@
 # Bölüm 4: Test ekleme
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Bu kursun ilk bölümünde, tamamen doğrusal olan ve her örneğin verisini diğerlerinden bağımsız olarak işleyen bir varyant çağırma pipeline'ı oluşturdunuz.
 
 İkinci bölümde, GATK ile ortak varyant çağırma işlemini gerçekleştirmek için kanalları ve kanal operatörlerini nasıl kullanacağınızı gösterdik.

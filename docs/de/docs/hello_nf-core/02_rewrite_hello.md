@@ -1,5 +1,7 @@
 # Teil 2: Hello für nf-core umschreiben
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 In diesem zweiten Teil des Hello nf-core Trainingskurses zeigen wir dir, wie du eine nf-core-kompatible Version der Pipeline erstellst, die im [Hello Nextflow](../hello_nextflow/index.md) Einsteigerkurs entwickelt wurde.
 
 Dir ist im ersten Abschnitt des Trainings aufgefallen, dass nf-core-Pipelines einer ziemlich aufwendigen Struktur mit vielen zusätzlichen Dateien folgen.

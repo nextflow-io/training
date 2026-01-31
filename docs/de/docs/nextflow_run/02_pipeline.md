@@ -1,5 +1,7 @@
 # Teil 2: Echte Pipelines ausführen
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 In Teil 1 dieses Kurses (Grundlegende Operationen ausführen) haben wir mit einem Beispiel-Workflow begonnen, der nur minimale Funktionen hatte, um die Code-Komplexität gering zu halten.
 Zum Beispiel verwendete `1-hello.nf` einen Kommandozeilen-Parameter (`--input`), um jeweils einen einzelnen Wert zu übergeben.
 

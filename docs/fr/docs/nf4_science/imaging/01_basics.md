@@ -1,5 +1,7 @@
 # Partie 1 : Exécuter des opérations de base
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Dans cette première partie du cours de formation Nextflow pour la bio-imagerie, nous allons utiliser un exemple Hello World très basique et indépendant du domaine pour démontrer les opérations essentielles et identifier les composants de code Nextflow correspondants.
 
 ## 1. Exécuter le workflow

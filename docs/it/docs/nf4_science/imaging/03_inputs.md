@@ -1,5 +1,7 @@
 # Parte 3: Organizzazione degli input
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Nella Parte 2, abbiamo eseguito molkart con più parametri dalla riga di comando.
 Ora impareremo due approcci migliori per gestire gli input: **file di parametri** e **samplesheet**.
 

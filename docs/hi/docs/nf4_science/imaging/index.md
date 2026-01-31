@@ -7,6 +7,8 @@ hide:
 
 # इमेजिंग के लिए Nextflow run
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 यह प्रशिक्षण पाठ्यक्रम इमेजिंग और स्थानिक जीवविज्ञान के शोधकर्ताओं के लिए है जो डेटा विश्लेषण pipelines को चलाने और अनुकूलित करने में रुचि रखते हैं।
 यह [nf-core/molkart](https://nf-co.re/molkart) का उपयोग करके workflows को चलाने, व्यवस्थित करने और कॉन्फ़िगर करने से संबंधित बुनियादी Nextflow अवधारणाएँ सिखाता है, जो Molecular Cartography स्थानिक transcriptomics डेटा को प्रोसेस करने के लिए एक pipeline है।
 यहाँ आप जो कौशल सीखते हैं वे किसी भी Nextflow या nf-core pipeline में लागू होते हैं।

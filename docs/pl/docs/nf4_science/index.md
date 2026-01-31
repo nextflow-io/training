@@ -6,6 +6,8 @@ hide:
 
 # Nextflow dla Nauki
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 To są kursy, które pokazują, jak zastosować koncepcje i komponenty przedstawione w kursie dla początkujących [Hello Nextflow](../hello_nextflow/) do konkretnych przypadków użycia naukowego. Każdy kurs składa się z serii modułów szkoleniowych zaprojektowanych, aby pomóc uczącym się stopniowo rozwijać swoje umiejętności.
 
 !!! exercise "Ćwiczenie"

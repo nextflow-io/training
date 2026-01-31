@@ -1,5 +1,7 @@
 # Bölüm 2: Hello'yu nf-core için yeniden yazma
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Bu Hello nf-core eğitim kursunun ikinci bölümünde, [Hello Nextflow](../hello_nextflow/index.md) başlangıç kursu tarafından üretilen pipeline'ın nf-core uyumlu bir versiyonunu nasıl oluşturacağınızı gösteriyoruz.
 
 Eğitimin ilk bölümünde nf-core pipeline'larının çok sayıda yardımcı dosya ile oldukça detaylı bir yapıyı takip ettiğini fark etmişsinizdir.

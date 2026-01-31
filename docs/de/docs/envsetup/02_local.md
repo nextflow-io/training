@@ -1,5 +1,7 @@
 # Manuelle Installation
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Es ist möglich, alles, was du zum Ausführen des Trainings benötigst, manuell in deiner eigenen lokalen Umgebung zu installieren.
 
 Hier haben wir dokumentiert, wie das auf Standard-POSIX-kompatiblen Systemen geht (unter der Annahme eines persönlichen Rechners wie eines Laptops).

@@ -7,6 +7,8 @@ hide:
 
 # Kit de Herramientas del Arquitecto I
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Nuestras Colecciones de Entrenamiento proporcionan rutas de aprendizaje curadas a través de nuestros materiales de entrenamiento avanzado (llamados [Side Quests](../../side_quests)). Esta colección cubre cuatro temas esenciales que se usan frecuentemente en conjunto para construir workflows robustos y escalables.
 
 ## Objetivos de aprendizaje

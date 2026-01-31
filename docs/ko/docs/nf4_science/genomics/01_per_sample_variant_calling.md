@@ -1,5 +1,7 @@
 # 파트 1: 샘플별 변이 호출
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 이 과정의 첫 번째 파트에서는 개별 시퀀싱 샘플에 GATK 변이 호출을 적용하는 간단한 변이 호출 파이프라인을 구축하는 방법을 보여드립니다.
 
 ### 방법 개요

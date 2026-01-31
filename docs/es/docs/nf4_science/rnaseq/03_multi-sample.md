@@ -1,5 +1,7 @@
 # Parte 3: Implementación con múltiples muestras de extremos pareados
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 En esta parte final del curso, vamos a llevar nuestro flujo de trabajo simple al siguiente nivel convirtiéndolo en una poderosa herramienta de automatización por lotes para manejar números arbitrarios de muestras.
 Y mientras lo hacemos, también vamos a cambiarlo para que espere datos de extremos pareados, que son más comunes en estudios más recientes.
 

@@ -1,5 +1,7 @@
 # Teil 4: Konfiguration
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 In den Teilen 1-3 haben wir gelernt, wie man Nextflow ausführt, eine nf-core Pipeline ausführt und Eingaben mit Parameterdateien und Samplesheets verwaltet.
 Jetzt werden wir erkunden, wie man Pipelines für verschiedene Rechenumgebungen mit **Konfigurationsdateien** und **Profilen** konfiguriert.
 

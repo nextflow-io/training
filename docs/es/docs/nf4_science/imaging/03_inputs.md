@@ -1,5 +1,7 @@
 # Parte 3: Organización de entradas
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 En la Parte 2, ejecutamos molkart con múltiples parámetros en la línea de comandos.
 Ahora aprenderemos dos enfoques mejores para gestionar entradas: **archivos de parámetros** y **hojas de muestras**.
 

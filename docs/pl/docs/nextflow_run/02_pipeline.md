@@ -1,5 +1,7 @@
 # Część 2: Uruchamianie prawdziwych pipeline
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 W Części 1 tego kursu (Podstawowe operacje) zaczęliśmy od przykładowego workflow, który miał tylko minimalne funkcje, aby utrzymać niską złożoność kodu.
 Na przykład `1-hello.nf` używał parametru wiersza poleceń (`--input`) do przekazywania pojedynczej wartości na raz.
 

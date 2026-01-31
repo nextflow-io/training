@@ -1,5 +1,7 @@
 # Divisione e Raggruppamento
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Nextflow fornisce strumenti potenti per lavorare con i dati in modo flessibile. Una capacità chiave è la divisione dei dati in flussi diversi e il successivo raggruppamento degli elementi correlati. Questo è particolarmente prezioso nei workflow di bioinformatica dove è necessario processare diversi tipi di campioni separatamente prima di combinare i risultati per l'analisi.
 
 Pensatelo come smistare la posta: separate le lettere per destinazione, processate ogni pila in modo diverso, poi ricombinate gli elementi destinati alla stessa persona. Nextflow utilizza operatori speciali per realizzare questo con dati scientifici. Questo approccio è anche comunemente noto come pattern **scatter/gather** nel computing distribuito e nei workflow di bioinformatica.

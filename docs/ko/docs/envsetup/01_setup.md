@@ -1,5 +1,7 @@
 # GitHub Codespaces
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 GitHub Codespaces는 클라우드의 가상 머신에 의해 지원되는 사전 구성된 교육 환경을 제공할 수 있는 웹 기반 플랫폼입니다.
 이 플랫폼은 Github(Microsoft 소유)에서 운영되며, Github 계정이 있는 누구나 무료(사용량 할당량 내에서)로 이용할 수 있습니다.
 

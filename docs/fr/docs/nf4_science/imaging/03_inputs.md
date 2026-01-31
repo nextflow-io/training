@@ -1,5 +1,7 @@
 # Partie 3 : Organisation des entrées
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Dans la Partie 2, nous avons exécuté molkart avec plusieurs paramètres sur la ligne de commande.
 Nous allons maintenant apprendre deux meilleures approches pour gérer les entrées : les **fichiers de paramètres** et les **feuilles d'échantillons**.
 

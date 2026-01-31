@@ -1,5 +1,7 @@
 # Partie 3 : Profilage et optimisation des ressources
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 CECI EST UN ESPACE RÉSERVÉ
 
 !!!note "Note"

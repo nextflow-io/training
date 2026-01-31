@@ -1,5 +1,7 @@
 # Testando com nf-test
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tradução assistida por IA - [saiba mais e sugira melhorias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Ser capaz de testar sistematicamente que cada parte do seu fluxo de trabalho está fazendo o que deveria fazer é crítico para reprodutibilidade e manutenção a longo prazo, e pode ser uma grande ajuda durante o processo de desenvolvimento.
 
 Vamos reservar um minuto para falar sobre por que testar é tão importante. Se você está desenvolvendo um fluxo de trabalho, uma das primeiras coisas que você fará é pegar alguns dados de teste que você sabe que são válidos e devem produzir um resultado. Você adiciona o primeiro processo ao pipeline e o conecta às suas entradas para fazê-lo funcionar. Então, para verificar se está tudo funcionando, você o executa nos dados de teste. Assumindo que funciona, você passa para o próximo processo e executa os dados de teste novamente. Você repete esse processo até ter um pipeline com o qual está satisfeito.

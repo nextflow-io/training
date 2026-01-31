@@ -1,5 +1,7 @@
 # भाग 1: बुनियादी संचालन चलाएं
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Nextflow Run प्रशिक्षण कोर्स के इस पहले भाग में, हम एक बहुत ही बुनियादी डोमेन-अज्ञेयवादी Hello World उदाहरण के साथ विषय में आसानी से प्रवेश करते हैं, जिसका उपयोग हम आवश्यक संचालन प्रदर्शित करने और संबंधित Nextflow कोड कॉम्पोनेंट्स को इंगित करने के लिए करेंगे।
 
 ??? info "Hello World उदाहरण क्या है?"

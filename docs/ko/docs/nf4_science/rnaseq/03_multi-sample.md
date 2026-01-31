@@ -1,5 +1,7 @@
 # 파트 3: 다중 샘플 paired-end 구현
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 이 과정의 마지막 파트에서는 간단한 워크플로우를 한 단계 더 발전시켜 임의의 수의 샘플을 처리할 수 있는 강력한 배치 자동화 도구로 전환하겠습니다.
 그리고 그 과정에서 더 최근 연구에서 일반적으로 사용되는 paired-end 데이터를 처리하도록 전환하겠습니다.
 

@@ -1,5 +1,7 @@
 # Parte 4: Configurazione
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Nelle Parti 1-3, abbiamo imparato come eseguire Nextflow, eseguire una pipeline nf-core e gestire gli input con file di parametri e samplesheet.
 Ora esploreremo come configurare le pipeline per diversi ambienti di calcolo utilizzando **file di configurazione** e **profili**.
 

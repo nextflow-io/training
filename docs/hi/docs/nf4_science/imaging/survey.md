@@ -1,5 +1,7 @@
 # सर्वेक्षण
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Nextflow for Bioimaging प्रशिक्षण पूरा करने के लिए धन्यवाद!
 
 हम इस प्रशिक्षण सामग्री को बेहतर बनाने में मदद के लिए आपकी प्रतिक्रिया की बहुत सराहना करेंगे।

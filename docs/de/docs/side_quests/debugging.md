@@ -1,5 +1,7 @@
 # Debugging von Workflows
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Debugging ist eine kritische Fähigkeit, die dir Stunden der Frustration ersparen und dich zu einem effektiveren Nextflow-Entwickler machen kann. Im Laufe deiner Karriere, besonders wenn du gerade anfängst, wirst du beim Erstellen und Warten deiner Workflows auf Bugs stoßen. Systematische Debugging-Ansätze zu lernen wird dir helfen, Probleme schnell zu identifizieren und zu lösen.
 
 ### Lernziele

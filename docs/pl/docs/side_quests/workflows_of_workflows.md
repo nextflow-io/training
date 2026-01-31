@@ -1,5 +1,7 @@
 # Przepływy pracy złożone z przepływów pracy
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Podczas tworzenia potoku często zdarza się, że tworzysz podobne sekwencje procesów dla różnych typów danych lub etapów analizy. Możesz kończyć kopiując i wklejając te sekwencje procesów, co prowadzi do zduplikowanego kodu, który jest trudny w utrzymaniu; albo możesz stworzyć jeden masywny przepływ pracy, który jest trudny do zrozumienia i modyfikacji.
 
 Jedną z najpotężniejszych funkcji Nextflow jest jego zdolność do komponowania złożonych potoków z mniejszych, wielokrotnego użytku modułów przepływu pracy. To modularne podejście sprawia, że potoki są łatwiejsze do rozwijania, testowania i utrzymania.

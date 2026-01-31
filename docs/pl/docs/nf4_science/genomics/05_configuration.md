@@ -1,5 +1,7 @@
 # Część 3: Profilowanie i optymalizacja zasobów
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 TO JEST PLACEHOLDER
 
 !!!note "Uwaga"

@@ -1,5 +1,7 @@
 # Manuel kurulum
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Eğitimi çalıştırmak için ihtiyacınız olan her şeyi kendi yerel ortamınızda manuel olarak kurmak mümkündür.
 
 Burada bunu standart POSIX uyumlu sistemlerde (dizüstü bilgisayar gibi kişisel bir makine varsayarak) nasıl yapacağınızı belgeledik.

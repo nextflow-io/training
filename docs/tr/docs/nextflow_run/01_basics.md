@@ -1,5 +1,7 @@
 # Bölüm 1: Temel işlemleri çalıştırma
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Nextflow Run eğitim kursunun bu ilk bölümünde, temel işlemleri göstermek ve ilgili Nextflow kod bileşenlerini işaret etmek için kullanacağımız çok temel, alandan bağımsız bir Hello World örneğiyle konuya yumuşak bir giriş yapıyoruz.
 
 ??? info "Hello World örneği nedir?"

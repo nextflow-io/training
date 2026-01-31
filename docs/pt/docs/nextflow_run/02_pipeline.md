@@ -1,5 +1,7 @@
 # Parte 2: Executar pipelines reais
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tradução assistida por IA - [saiba mais e sugira melhorias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Na Parte 1 deste curso (Operações Básicas de Execução), começamos com um fluxo de trabalho de exemplo que tinha apenas recursos mínimos para manter a complexidade do código baixa.
 Por exemplo, `1-hello.nf` usou um parâmetro de linha de comando (`--input`) para fornecer um único valor por vez.
 

@@ -1,5 +1,7 @@
 # 파트 4: 구성
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 파트 1-3에서는 Nextflow를 실행하고, nf-core 파이프라인을 실행하며, 매개변수 파일과 샘플시트로 입력을 관리하는 방법을 배웠습니다.
 이제 **구성 파일**과 **프로파일**을 사용하여 다양한 컴퓨팅 환경에 맞게 파이프라인을 구성하는 방법을 살펴보겠습니다.
 

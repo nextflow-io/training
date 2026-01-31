@@ -1,5 +1,7 @@
 # Parte 2: Ejecutar pipelines reales
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 En la Parte 1 de este curso (Ejecutar operaciones básicas), comenzamos con un workflow de ejemplo que solo tenía características mínimas para mantener baja la complejidad del código.
 Por ejemplo, `1-hello.nf` usaba un parámetro de línea de comandos (`--input`) para proporcionar un único valor a la vez.
 

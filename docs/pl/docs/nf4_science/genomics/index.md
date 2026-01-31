@@ -1,5 +1,7 @@
 # Nextflow dla Genomiki
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Ten kurs szkoleniowy jest przeznaczony dla badaczy w dziedzinie genomiki i pokrewnych obszarów, którzy są zainteresowani tworzeniem lub dostosowywaniem potoków analizy danych.
 Opiera się na [Hello Nextflow](../../hello_nextflow/) – szkoleniu dla początkujących i демонструje, jak używać Nextflow w specyficznym kontekście dziedziny genomiki.
 

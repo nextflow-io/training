@@ -1,5 +1,7 @@
 # Parte 2: Chiamata congiunta su una coorte
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Nella prima parte di questo corso, Lei ha costruito una pipeline di chiamata delle varianti completamente lineare che processava i dati di ciascun campione indipendentemente dagli altri.
 Tuttavia, in un caso d'uso genomico reale, tipicamente sarà necessario esaminare le chiamate di varianti di più campioni insieme.
 

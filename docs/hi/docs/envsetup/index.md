@@ -8,6 +8,8 @@ hide:
 
 # वातावरण विकल्प
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 हमारा लक्ष्य एक सुसंगत और पूर्णतः परीक्षित वातावरण प्रदान करना है जो शिक्षार्थियों को software प्रबंधन पर समय और प्रयास खर्च किए बिना Nextflow सीखने पर ध्यान केंद्रित करने की अनुमति देता है।
 इसके लिए, हमने एक containerized वातावरण विकसित किया है जिसमें हमारे सभी courses में काम करने के लिए सभी आवश्यक software, code files और उदाहरण data शामिल हैं।
 

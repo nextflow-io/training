@@ -1,5 +1,7 @@
 # 시작하기
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 ## 교육 환경 시작
 
 GitHub Codespaces에서 제공하는 사전 구축 환경을 사용하려면 아래의 "Open in GitHub Codespaces" 버튼을 클릭하세요. 다른 옵션은 [환경 옵션](../envsetup/index.md)을 참조하세요.

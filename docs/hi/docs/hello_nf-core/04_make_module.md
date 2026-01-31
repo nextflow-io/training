@@ -1,5 +1,7 @@
 # भाग 4: nf-core मॉड्यूल बनाएं
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Hello nf-core प्रशिक्षण पाठ्यक्रम के इस चौथे भाग में, हम आपको दिखाएंगे कि मुख्य परंपराओं को लागू करके एक nf-core मॉड्यूल कैसे बनाया जाए जो मॉड्यूल को पोर्टेबल और मेंटेनेबल बनाती हैं।
 
 nf-core प्रोजेक्ट एक कमांड (`nf-core modules create`) प्रदान करता है जो स्वचालित रूप से उचित रूप से संरचित मॉड्यूल टेम्पलेट जेनरेट करता है, जैसा कि हमने भाग 2 में workflow के लिए उपयोग किया था।

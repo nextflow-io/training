@@ -1,5 +1,7 @@
 # Parte 3: Profilazione e ottimizzazione delle risorse
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 QUESTO È UN SEGNAPOSTO
 
 !!!note "Nota"

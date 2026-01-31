@@ -6,6 +6,8 @@ hide:
 
 # Nextflow für die Wissenschaft
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Dies sind Kurse, die zeigen, wie du die Konzepte und Komponenten aus dem [Hello Nextflow](../hello_nextflow/) Anfängerkurs auf spezifische wissenschaftliche Anwendungsfälle anwenden kannst. Jeder Kurs besteht aus einer Reihe von Trainingsmodulen, die so gestaltet sind, dass Lernende ihre Fähigkeiten schrittweise aufbauen können.
 
 !!! exercise "Nextflow für Genomik"

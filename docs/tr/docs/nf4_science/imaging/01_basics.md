@@ -1,5 +1,7 @@
 # Bölüm 1: Temel işlemleri çalıştırın
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Nextflow for Bioimaging eğitim kursunun bu ilk bölümünde, temel işlemleri göstermek ve ilgili Nextflow kod bileşenlerine işaret etmek için çok basit, alan-bağımsız bir Hello World örneği kullanacağız.
 
 ## 1. Workflow'u çalıştırın

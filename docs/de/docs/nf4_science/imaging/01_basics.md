@@ -1,5 +1,7 @@
 # Teil 1: Grundlegende Operationen ausführen
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Im ersten Teil des Nextflow für Bioimaging Trainingskurses verwenden wir ein sehr einfaches, domänenunabhängiges Hello World Beispiel, um wesentliche Operationen zu demonstrieren und auf die entsprechenden Nextflow Code-Komponenten hinzuweisen.
 
 ## 1. Den Workflow ausführen

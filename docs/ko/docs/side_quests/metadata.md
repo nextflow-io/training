@@ -1,5 +1,7 @@
 # 메타데이터와 메타 맵
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 과학적 분석에서 우리는 원시 데이터 파일만으로 작업하는 경우가 거의 없습니다.
 각 파일에는 고유한 추가 정보가 함께 제공됩니다: 그것이 무엇인지, 어디서 왔는지, 무엇이 특별한지 등입니다.
 이러한 추가 정보를 우리는 메타데이터라고 부릅니다.

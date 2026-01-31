@@ -6,6 +6,8 @@ hide:
 
 # The Architect's Toolkit I
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 हमारे प्रशिक्षण संग्रह हमारी उन्नत प्रशिक्षण सामग्री (जिसे [Side Quests](../../side_quests) कहा जाता है) के माध्यम से क्यूरेटेड लर्निंग पाथ प्रदान करते हैं। यह संग्रह चार आवश्यक विषयों को कवर करता है जो मजबूत और स्केलेबल workflows बनाने के लिए अक्सर एक साथ उपयोग किए जाते हैं।
 
 ## सीखने के उद्देश्य

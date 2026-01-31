@@ -1,5 +1,7 @@
 # 파일 입력 처리
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 과학 분석 워크플로우는 종종 대량의 파일 처리를 포함합니다.
 Nextflow는 파일을 효율적으로 처리할 수 있는 강력한 도구를 제공하여, 최소한의 코드로 데이터를 구성하고 처리할 수 있도록 돕습니다.
 

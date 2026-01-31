@@ -1,5 +1,7 @@
 # Parte 2: Implementação de amostra única
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tradução assistida por IA - [saiba mais e sugira melhorias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Nesta parte do curso, vamos escrever o fluxo de trabalho mais simples possível que envolve todos os comandos que executamos na Parte 1 para automatizar sua execução, e vamos processar apenas uma amostra por vez.
 
 Faremos isso em três etapas:

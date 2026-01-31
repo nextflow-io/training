@@ -1,5 +1,7 @@
 # Genomik için Nextflow
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Bu eğitim kursu, veri analizi pipeline'larını geliştirmek veya özelleştirmek isteyen genomik ve ilgili alanlardaki araştırmacılar için tasarlanmıştır.
 [Hello Nextflow](../../hello_nextflow/) başlangıç eğitimi üzerine inşa edilmiştir ve Nextflow'un genomik alanının özel bağlamında nasıl kullanılacağını gösterir.
 

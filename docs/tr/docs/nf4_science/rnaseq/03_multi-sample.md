@@ -1,5 +1,7 @@
 # Bölüm 3: Çok-örnekli paired-end uygulaması
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Bu kursun son bölümünde, basit iş akışımızı bir üst seviyeye taşıyarak keyfi sayıda örneği işleyebilen güçlü bir toplu otomasyon aracına dönüştüreceğiz.
 Bunu yaparken, aynı zamanda yeni çalışmalarda daha yaygın olan paired-end verileri kabul edecek şekilde de değiştireceğiz.
 

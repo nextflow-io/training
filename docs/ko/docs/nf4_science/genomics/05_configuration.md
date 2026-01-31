@@ -1,5 +1,7 @@
 # Part 3: 리소스 프로파일링 및 최적화
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 이것은 임시 자리표시자입니다
 
 !!!note "참고"

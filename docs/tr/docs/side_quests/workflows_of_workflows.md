@@ -1,5 +1,7 @@
 # İç İçe Workflow'lar
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Bir pipeline geliştirirken, kendinizi farklı veri türleri veya analiz adımları için benzer process dizileri oluştururken bulursunuz. Bu process dizilerini kopyalayıp yapıştırarak, bakımı zor çoğaltılmış kod oluşturabilirsiniz; veya anlaşılması ve değiştirilmesi zor tek bir devasa iş akışı oluşturabilirsiniz.
 
 Nextflow'un en güçlü özelliklerinden biri, karmaşık pipeline'ları daha küçük, yeniden kullanılabilir workflow modüllerinden oluşturma yeteneğidir. Bu modüler yaklaşım, pipeline'ların geliştirilmesini, test edilmesini ve bakımını kolaylaştırır.

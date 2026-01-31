@@ -1,5 +1,7 @@
 # Prochaines étapes
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Félicitations pour avoir terminé la formation Nextflow pour la bio-imagerie !
 
 Vous possédez maintenant les compétences fondamentales pour exécuter et configurer des pipelines Nextflow pour l'analyse de données d'imagerie.

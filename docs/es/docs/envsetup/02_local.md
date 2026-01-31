@@ -1,5 +1,7 @@
 # Instalación manual
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Es posible instalar todo lo que necesita para ejecutar el entrenamiento en su propio entorno local manualmente.
 
 Aquí hemos documentado cómo hacerlo en sistemas estándar compatibles con POSIX (asumiendo una máquina personal como una laptop).

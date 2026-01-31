@@ -1,5 +1,7 @@
 # शुरू करना
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 ## एक प्रशिक्षण वातावरण शुरू करें
 
 GitHub Codespaces पर हमारे द्वारा प्रदान किए गए पूर्व-निर्मित वातावरण का उपयोग करने के लिए, नीचे "Open in GitHub Codespaces" बटन पर क्लिक करो। अन्य विकल्पों के लिए, [वातावरण विकल्प](../envsetup/index.md) देखो।

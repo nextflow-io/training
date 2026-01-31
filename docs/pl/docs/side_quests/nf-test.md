@@ -1,5 +1,7 @@
 # Testowanie z nf-test
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Możliwość systematycznego testowania, czy każda część przepływu pracy działa zgodnie z założeniami, jest kluczowa dla odtwarzalności i długoterminowej konserwacji, a także może być ogromną pomocą podczas procesu twórczego.
 
 Poświęćmy chwilę na omówienie, dlaczego testowanie jest tak ważne. Jeśli tworzysz przepływ pracy, jedną z pierwszych rzeczy, które zrobisz, jest pobranie danych testowych, o których wiesz, że są poprawne i powinny dać wynik. Dodajesz pierwszy proces do potoku i podłączasz go do swoich danych wejściowych, aby działał. Następnie, aby sprawdzić, czy wszystko działa, uruchamiasz go na danych testowych. Zakładając, że działa, przechodzisz do następnego procesu i ponownie uruchamiasz dane testowe. Powtarzasz ten proces, aż otrzymasz potok, z którego jesteś zadowolony.

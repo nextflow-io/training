@@ -7,6 +7,8 @@ hide:
 
 # Kolekcje Szkoleń
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Ta sekcja zawiera wyselekcjonowane kolekcje modułów szkoleniowych zwanych [Side Quests](../side_quests/index.md), które mają na celu zapewnienie kompleksowego doświadczenia edukacyjnego wokół określonego tematu lub przypadku użycia.
 
 ## Wymagania wstępne

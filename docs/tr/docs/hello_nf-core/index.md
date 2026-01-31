@@ -24,6 +24,8 @@ additional_information:
 
 # Merhaba nf-core
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 **Merhaba nf-core, nf-core kaynaklarını ve en iyi uygulamalarını kullanmaya yönelik uygulamalı bir giriştir.**
 
 ![nf-core logo](./img/nf-core-logo.png)

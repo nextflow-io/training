@@ -8,6 +8,8 @@ hide:
 
 # 도움말
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 시작하는 데 어려움이 있거나, 진행 중에 막히거나, 후속 질문이 있더라도 언제든지 연락해 주세요! 저희 커뮤니티 팀이 도움을 드릴 준비가 되어 있으며, Nextflow 커뮤니티 전체가 매우 활발하고 포용적이며 기꺼이 도움을 드립니다.
 
 찾고 계신 내용에 따라 사용할 수 있는 주요 옵션은 다음과 같습니다.

@@ -1,5 +1,7 @@
 # Część 1: Uruchamianie podstawowych operacji
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 W tej pierwszej części kursu szkoleniowego Nextflow dla Bioimagingu użyjemy bardzo prostego, niezależnego od domeny przykładu Hello World, aby zademonstrować podstawowe operacje i wskazać odpowiednie komponenty kodu Nextflow.
 
 ## 1. Uruchomienie workflow

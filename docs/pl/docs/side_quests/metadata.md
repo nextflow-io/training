@@ -1,5 +1,7 @@
 # Metadane i mapy meta
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 W każdej analizie naukowej rzadko pracujemy jedynie z surowymi plikami danych.
 Każdy plik zawiera dodatkowe informacje: czym jest, skąd pochodzi i co go wyróżnia.
 Te dodatkowe informacje nazywamy metadanymi.

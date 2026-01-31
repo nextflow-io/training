@@ -431,3 +431,19 @@ h3 .enumerate-headings-plugin {
 .md-content__inner {
   position: relative;
 }
+
+/* AI translation notice - inline text on translated pages */
+.ai-translation-notice {
+  color: #448aff;
+  font-size: 0.75rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+.ai-translation-notice .twemoji {
+  vertical-align: -0.125em;
+  margin-right: 0.25rem;
+}
+.ai-translation-notice a {
+  color: inherit;
+  text-decoration: underline;
+}

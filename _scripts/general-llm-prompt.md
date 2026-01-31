@@ -576,3 +576,48 @@ Before submitting your translation, verify:
 - [ ] Natural, readable language
 - [ ] Proper grammar and spelling for the target language
 - [ ] Same formatting as original (line breaks, indentation, lists)
+
+---
+
+## AI Translation Notice
+
+All translated pages include a notice informing readers that the content was translated with AI assistance. This notice should be included in new translations.
+
+### For the Homepage (index.md)
+
+Add a note admonition immediately **before** the "Catalog of Nextflow training courses" heading (the `## Catalog...` H2 heading). This places it after the introductory grid cards but before the course listings.
+
+```markdown
+</div>
+
+!!! note "AI-Assisted Translation Title"
+
+    Brief explanation that this translation was created using AI with human oversight.
+    Welcome feedback and improvements.
+    Link to [translation guide](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md).
+
+## Catalog of Nextflow training courses
+```
+
+The admonition title and content should be translated naturally into the target language.
+
+### For All Other Pages
+
+Add an inline notice immediately after the first heading:
+
+```markdown
+# Page Title
+
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Short notice about AI translation - [link text](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+```
+
+The notice text should be brief (one line) and translated into the target language. Examples:
+
+| Language   | Notice Text                                                                        |
+| ---------- | ---------------------------------------------------------------------------------- |
+| German     | `KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](...)`     |
+| Spanish    | `Traducción asistida por IA - [más información y sugerencias](...)`                |
+| French     | `Traduction assistée par IA - [en savoir plus et suggérer des améliorations](...)` |
+| Portuguese | `Tradução assistida por IA - [saiba mais e sugira melhorias](...)`                 |
+
+Keep the CSS class `ai-translation-notice`, the icon `:material-information-outline:{ .ai-translation-notice-icon }`, and the URL unchanged.

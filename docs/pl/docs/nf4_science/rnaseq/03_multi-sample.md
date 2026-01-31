@@ -1,5 +1,7 @@
 # Część 3: Implementacja dla wielu próbek z danymi paired-end
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 W tej ostatniej części kursu zamienimy nasz prosty przepływ pracy w potężne narzędzie do automatyzacji wsadowej, które obsłuży dowolną liczbę próbek.
 Przy okazji przełączymy go również na obsługę danych paired-end, które są bardziej powszechne w nowszych badaniach.
 

@@ -6,6 +6,8 @@ hide:
 
 # Training-Sammlungen
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Dieser Abschnitt enthält kuratierte Sammlungen von Trainingsmodulen, die [Side Quests](../side_quests/index.md) genannt werden und darauf abzielen, eine umfassende Lernerfahrung zu einem bestimmten Thema oder Anwendungsfall zu bieten.
 
 ## Voraussetzungen

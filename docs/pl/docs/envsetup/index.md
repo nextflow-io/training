@@ -8,6 +8,8 @@ hide:
 
 # Opcje środowiska
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Naszym celem jest zapewnienie spójnego i dokładnie przetestowanego środowiska, które pozwala uczącym się skupić się na nauce Nextflow bez konieczności poświęcania czasu i wysiłku na zarządzanie oprogramowaniem.
 W tym celu opracowaliśmy skonteneryzowane środowisko zawierające całe niezbędne oprogramowanie, pliki kodu i przykładowe dane do pracy ze wszystkimi naszymi kursami.
 

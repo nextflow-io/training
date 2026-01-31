@@ -7,6 +7,8 @@ hide:
 
 # RNAseq için Nextflow
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Bu eğitim kursu, transkriptomik ve ilgili alanlarda veri analizi pipeline'ları geliştirmek veya özelleştirmek isteyen araştırmacılar için tasarlanmıştır.
 [Hello Nextflow](../../hello_nextflow/) başlangıç eğitimi üzerine inşa edilmiş olup, Nextflow'un toplu RNAseq analizi bağlamında nasıl kullanılacağını göstermektedir.
 

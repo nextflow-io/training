@@ -1,5 +1,7 @@
 # Bölüm 1: Yönteme genel bakış ve manuel test
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Toplu RNAseq verilerini işlemek ve analiz etmek için birden fazla geçerli yöntem bulunmaktadır.
 Bu kurs için, [Babraham Enstitüsü](https://www.babraham.ac.uk/)'nden Dr. Simon Andrews ve Laura Biggins tarafından [burada](https://www.bioinformatics.babraham.ac.uk/training/RNASeq_Course/Analysing%20RNA-Seq%20data%20Exercise.pdf) açıklanan yöntemi takip ediyoruz.
 

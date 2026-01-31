@@ -1,5 +1,7 @@
 # Bölüm 5: Girdi doğrulaması
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Bu Hello nf-core eğitim kursunun beşinci bölümünde, pipeline girdi ve parametrelerini doğrulamak için nf-schema eklentisinin nasıl kullanılacağını gösteriyoruz.
 
 ??? info "Bu bölüme nasıl başlanır"

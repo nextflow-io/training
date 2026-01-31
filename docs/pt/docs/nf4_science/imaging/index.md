@@ -7,6 +7,8 @@ hide:
 
 # Executar Nextflow para Imagens
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tradução assistida por IA - [saiba mais e sugira melhorias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Este curso de treinamento é destinado a pesquisadores em imagens e biologia espacial que estão interessados em executar e personalizar pipelines de análise de dados.
 Ele ensina conceitos fundamentais do Nextflow relacionados à execução, organização e configuração de fluxos de trabalho usando [nf-core/molkart](https://nf-co.re/molkart), um pipeline para processar dados de transcriptômica espacial de Cartografia Molecular.
 As habilidades que você aprenderá aqui são transferíveis para qualquer pipeline Nextflow ou nf-core.

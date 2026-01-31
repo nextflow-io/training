@@ -1,5 +1,7 @@
 # भाग 1: बुनियादी ऑपरेशन चलाएं
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Nextflow for Bioimaging प्रशिक्षण पाठ्यक्रम के इस पहले भाग में, हम एक बहुत ही बुनियादी domain-agnostic Hello World उदाहरण का उपयोग करेंगे ताकि आवश्यक ऑपरेशन प्रदर्शित कर सकें और संबंधित Nextflow कोड घटकों को इंगित कर सकें।
 
 ## 1. workflow चलाएं

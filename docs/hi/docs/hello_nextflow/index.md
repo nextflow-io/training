@@ -23,6 +23,8 @@ additional_information:
 
 # Hello Nextflow
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 **Hello Nextflow reproducible और scalable data analysis workflows बनाने का एक hands-on परिचय है।**
 
 व्यावहारिक उदाहरणों और guided exercises के माध्यम से काम करते हुए, तुम Nextflow के साथ pipelines विकसित करने की मूल बातें सीखोगे, जिसमें processes को परिभाषित करना, उन्हें pipelines में जोड़ना, files और software dependencies को मैनेज करना, execution को आसानी से parallelize करना, और विभिन्न computing environments में workflows चलाना शामिल है।

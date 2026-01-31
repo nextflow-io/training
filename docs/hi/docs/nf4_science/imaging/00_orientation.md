@@ -1,5 +1,7 @@
 # ओरिएंटेशन
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 यह ओरिएंटेशन मानता है कि आपने पहले से ही "Open in GitHub Codespaces" बटन पर क्लिक करके प्रशिक्षण वातावरण खोल लिया है।
 यदि नहीं, तो कृपया अभी ऐसा करें, आदर्श रूप से दूसरे ब्राउज़र विंडो या टैब में ताकि आप इन निर्देशों को वापस देख सकें।
 

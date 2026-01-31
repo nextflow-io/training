@@ -1,5 +1,7 @@
 # Ręczna instalacja
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Możliwe jest ręczne zainstalowanie wszystkiego, czego potrzebujesz do uruchomienia szkolenia w Twoim własnym lokalnym środowisku.
 
 Tutaj udokumentowaliśmy, jak to zrobić na standardowych systemach zgodnych z POSIX (zakładając komputer osobisty, taki jak laptop).

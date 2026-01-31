@@ -1,5 +1,7 @@
 # Prossimi Passi
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Congratulazioni ancora per aver completato il corso di formazione Nextflow per RNAseq e grazie per aver completato il nostro questionario!
 
 ---

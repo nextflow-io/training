@@ -1,5 +1,7 @@
 # Parte 2: Implementación de muestra única
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 En esta parte del curso, vamos a escribir el flujo de trabajo más simple posible que envuelva todos los comandos que ejecutamos en la Parte 1 para automatizar su ejecución, y nos enfocaremos en procesar una muestra a la vez.
 
 Haremos esto en tres etapas:

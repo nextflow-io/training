@@ -8,6 +8,8 @@ hide:
 
 # Pipeline Hello
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Większość naszych kursów szkoleniowych używa prostego, domenowo-agnostycznego pipeline'u do demonstracji koncepcji i mechanizmów Nextflow.
 Kurs Hello Nextflow pokazuje, jak rozwijać ten pipeline krok po kroku, wyjaśniając każdą decyzję projektową i implementacyjną.
 Inne szkolenia używają tego pipeline'u lub jego części jako punktu wyjścia.

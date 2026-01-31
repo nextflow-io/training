@@ -1,5 +1,7 @@
 # Parte 4: Aggiunta di test
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Nella prima parte di questo corso, Lei ha costruito una pipeline di variant calling completamente lineare che processava i dati di ciascun campione indipendentemente dagli altri.
 
 Nella seconda parte, Le abbiamo mostrato come utilizzare i canali e gli operatori di canale per implementare il joint variant calling con GATK.

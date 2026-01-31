@@ -1,5 +1,7 @@
 # Splitting und Grouping
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Nextflow bietet leistungsstarke Werkzeuge, um flexibel mit Daten zu arbeiten. Eine wichtige Fähigkeit ist das Aufteilen von Daten in verschiedene Streams und das anschließende Gruppieren zusammengehöriger Elemente. Dies ist besonders wertvoll in Bioinformatik-Workflows, wo du verschiedene Arten von Proben separat verarbeiten musst, bevor du die Ergebnisse für die Analyse kombinierst.
 
 Stell es dir wie das Sortieren von Post vor: Du trennst Briefe nach Zielort, verarbeitest jeden Stapel unterschiedlich und kombinierst dann Elemente, die an dieselbe Person gehen. Nextflow verwendet spezielle Operatoren, um dies mit wissenschaftlichen Daten zu erreichen. Dieser Ansatz ist auch allgemein als **scatter/gather**-Muster in verteiltem Computing und Bioinformatik-Workflows bekannt.

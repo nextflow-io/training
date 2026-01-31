@@ -6,6 +6,8 @@ hide:
 
 # 교육 컬렉션
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 이 섹션에는 특정 주제나 사용 사례를 중심으로 포괄적인 학습 경험을 제공하는 것을 목표로 하는 [Side Quests](../side_quests/index.md)라는 교육 모듈의 큐레이션된 컬렉션이 포함되어 있습니다.
 
 ## 전제 조건

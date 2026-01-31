@@ -1,5 +1,7 @@
 # 파트 2: 코호트에 대한 조인트 콜링
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 이 과정의 첫 번째 파트에서는 완전히 선형적이고 각 샘플의 데이터를 독립적으로 처리하는 변이 콜링 파이프라인을 구축했습니다.
 그러나 실제 유전체학 사용 사례에서는 일반적으로 여러 샘플의 변이 콜을 함께 살펴봐야 합니다.
 

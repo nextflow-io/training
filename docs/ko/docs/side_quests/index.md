@@ -6,6 +6,8 @@ hide:
 
 # 사이드 퀘스트
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 이것은 특정 주제를 더 깊이 다루는 독립적인 교육 미니 코스 모음입니다. 순서에 관계없이 진행하실 수 있습니다.
 
 시작해 봅시다! 아래 "Open in GitHub Codespaces" 버튼을 클릭하여 교육 환경을 시작하시고(별도 탭에서 여는 것을 권장합니다), 로딩되는 동안 계속 읽어주십시오.

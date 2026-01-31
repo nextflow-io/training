@@ -6,6 +6,8 @@ hide:
 
 # Nextflow für Genomik
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Dieser Trainingskurs richtet sich an Forschende im Bereich Genomik und verwandten Feldern, die daran interessiert sind, Datenanalyse-Pipelines zu entwickeln oder anzupassen.
 Er baut auf dem [Hello Nextflow](../../hello_nextflow/) Einsteiger-Training auf und zeigt, wie du Nextflow im spezifischen Kontext der Genomik-Domäne nutzen kannst.
 

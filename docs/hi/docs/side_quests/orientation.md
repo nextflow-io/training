@@ -1,5 +1,7 @@
 # अभिविन्यास
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 GitHub Codespaces वातावरण में इस प्रशिक्षण पाठ्यक्रम को पूरा करने के लिए आवश्यक सभी सॉफ़्टवेयर, कोड और डेटा शामिल हैं, इसलिए आपको स्वयं कुछ भी इंस्टॉल करने की आवश्यकता नहीं है।
 हालांकि, लॉग इन करने के लिए आपको एक (निःशुल्क) खाते की आवश्यकता है, और आपको इंटरफ़ेस से परिचित होने के लिए कुछ मिनट देने चाहिए।
 

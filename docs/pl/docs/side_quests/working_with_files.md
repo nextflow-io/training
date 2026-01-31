@@ -1,5 +1,7 @@
 # Przetwarzanie plików wejściowych
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Przepływy pracy analizy naukowej często obejmują przetwarzanie dużej liczby plików.
 Nextflow zapewnia potężne narzędzia do efektywnej obsługi plików, pomagając organizować i przetwarzać dane przy minimalnym nakładzie kodu.
 

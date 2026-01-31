@@ -1,5 +1,7 @@
 # Parte 2: Eseguire nf-core/molkart
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Nella Parte 1, abbiamo eseguito un semplice workflow Hello World per comprendere le basi dell'esecuzione di Nextflow.
 Ora eseguiremo una pipeline di bioimaging reale: **nf-core/molkart**.
 

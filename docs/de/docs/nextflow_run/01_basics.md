@@ -1,5 +1,7 @@
 # Teil 1: Grundlegende Operationen
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Im ersten Teil des Nextflow Run-Trainingskurses steigen wir mit einem sehr grundlegenden, fachunabhängigen Hello World-Beispiel in das Thema ein, das wir verwenden werden, um wesentliche Operationen zu demonstrieren und auf die entsprechenden Nextflow-Code-Komponenten hinzuweisen.
 
 ??? info "Was ist ein Hello World-Beispiel?"

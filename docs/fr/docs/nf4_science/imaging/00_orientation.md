@@ -1,5 +1,7 @@
 # Orientation
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Cette orientation suppose que vous avez déjà ouvert l'environnement de formation en cliquant sur le bouton "Open in GitHub Codespaces".
 Si ce n'est pas le cas, veuillez le faire maintenant, idéalement dans une seconde fenêtre ou un second onglet de navigateur afin de pouvoir vous référer à ces instructions.
 

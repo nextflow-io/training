@@ -1,5 +1,7 @@
 # nf-test ile Test Etme
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 İş akışınızın her bir parçasının yapması gerekeni yaptığını sistematik olarak test edebilmek, tekrarlanabilirlik ve uzun vadeli bakım için kritik öneme sahiptir ve geliştirme sürecinde büyük bir yardımcı olabilir.
 
 Test etmenin neden bu kadar önemli olduğu hakkında biraz konuşalım. Bir iş akışı geliştiriyorsanız, yapacağınız ilk şeylerden biri geçerli olduğunu bildiğiniz ve sonuç üretmesi gereken bazı test verilerini almaktır. Pipeline'a ilk süreci ekler ve çalışması için girdilerinize bağlarsınız. Ardından, her şeyin çalıştığını kontrol etmek için test verileri üzerinde çalıştırırsınız. Bunun işe yaradığını varsayarsak, bir sonraki sürece geçer ve test verilerini tekrar çalıştırırsınız. Pipeline'dan memnun kalana kadar bu süreci tekrarlarsınız.

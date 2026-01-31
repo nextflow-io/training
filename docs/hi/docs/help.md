@@ -8,6 +8,8 @@ hide:
 
 # सहायता प्राप्त करना
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 चाहे तुम्हें शुरू करने में कठिनाई हो रही हो, बीच में अटक गए हो या कोई अनुवर्ती प्रश्न हो, संपर्क करने में संकोच मत करो! हमारी समुदाय टीम मदद के लिए यहाँ है, और Nextflow समुदाय बहुत सक्रिय, समावेशी और मदद के लिए उत्सुक है।
 
 तुम जो खोज रहे हो उसके आधार पर यहाँ मुख्य विकल्प उपलब्ध हैं।

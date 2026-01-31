@@ -1,5 +1,7 @@
 # Questionário
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tradução assistida por IA - [saiba mais e sugira melhorias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Obrigado por completar o treinamento Nextflow para Bioimagem!
 
 Agradecemos muito o seu feedback para nos ajudar a melhorar este material de treinamento.

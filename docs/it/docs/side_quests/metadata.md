@@ -1,5 +1,7 @@
 # Metadati e meta map
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 In qualsiasi analisi scientifica, raramente lavoriamo solo con i file di dati grezzi.
 Ogni file è accompagnato da informazioni aggiuntive: cosa rappresenta, da dove proviene e cosa lo rende speciale.
 Queste informazioni extra sono ciò che chiamiamo metadati.

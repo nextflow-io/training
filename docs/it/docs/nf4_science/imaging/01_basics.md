@@ -1,5 +1,7 @@
 # Parte 1: Eseguire operazioni di base
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 In questa prima parte del corso di formazione Nextflow per il Bioimaging, utilizzeremo un esempio Hello World molto semplice e indipendente dal dominio per dimostrare operazioni essenziali e indicare i componenti corrispondenti del codice Nextflow.
 
 ## 1. Eseguire il workflow

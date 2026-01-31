@@ -1,5 +1,7 @@
 # Procesamiento de archivos de entrada
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Los flujos de trabajo de análisis científico a menudo implican el procesamiento de grandes cantidades de archivos.
 Nextflow proporciona herramientas poderosas para manejar archivos de manera eficiente, ayudándole a organizar y procesar sus datos con un código mínimo.
 

@@ -1,5 +1,7 @@
 # Bölüm 1: Demo pipeline çalıştırma
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Hello nf-core eğitim kursunun bu ilk bölümünde, bir nf-core pipeline'ının nasıl bulunacağını ve deneneceğini, kodun nasıl düzenlendiğini ve [Hello Nextflow](../hello_nextflow/index.md)'da gösterilen düz Nextflow kodundan nasıl farklılaştığını öğreneceksiniz.
 
 nf-core projesi tarafından kod yapısını ve araç işlemlerini göstermek amacıyla pipeline envanterinin bir parçası olarak sürdürülen nf-core/demo adlı bir pipeline kullanacağız.

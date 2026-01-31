@@ -1,5 +1,7 @@
 # 2부: nf-core용 Hello 재작성
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Hello nf-core 교육 과정의 두 번째 부분에서는 [Hello Nextflow](../hello_nextflow/index.md) 초급자 과정에서 만든 파이프라인의 nf-core 호환 버전을 생성하는 방법을 보여드립니다.
 
 교육의 첫 번째 섹션에서 nf-core 파이프라인이 많은 부속 파일과 함께 상당히 정교한 구조를 따른다는 것을 알아차리셨을 것입니다.

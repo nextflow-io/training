@@ -1,5 +1,7 @@
 # Parte 2: Llamado conjunto en una cohorte
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 En la primera parte de este curso, construyó un pipeline de llamado de variantes que era completamente lineal y procesaba los datos de cada muestra independientemente de las demás.
 Sin embargo, en un caso de uso genómico real, típicamente necesitará examinar los llamados de variantes de múltiples muestras juntas.
 

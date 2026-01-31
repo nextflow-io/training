@@ -1,5 +1,7 @@
 # Part 2: 실제 pipeline 실행
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 이 과정의 Part 1(기본 작업 실행)에서 코드 복잡성을 낮추기 위해 최소한의 기능만 있는 예제 workflow로 시작했습니다.
 예를 들어 `1-hello.nf`는 명령줄 매개변수(`--input`)를 사용하여 한 번에 하나의 값을 제공했습니다.
 

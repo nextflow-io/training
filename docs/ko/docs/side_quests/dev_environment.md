@@ -1,5 +1,7 @@
 # 개발 환경
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 현대적인 통합 개발 환경(IDE)은 Nextflow 개발 경험을 극적으로 변화시킬 수 있습니다. 이 사이드 퀘스트는 VS Code와 Nextflow 확장 프로그램을 활용하여 코드를 더 빠르게 작성하고, 오류를 조기에 발견하며, 복잡한 워크플로우를 효율적으로 탐색하는 데 중점을 둡니다.
 
 !!! note "이것은 전통적인 튜토리얼이 아닙니다"

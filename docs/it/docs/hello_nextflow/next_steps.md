@@ -1,5 +1,7 @@
 # Riepilogo del corso
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Congratulazioni per aver completato il corso di formazione Hello Nextflow! 🎉
 
 <div class="video-wrapper">

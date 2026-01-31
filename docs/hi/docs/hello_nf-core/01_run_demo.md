@@ -1,5 +1,7 @@
 # भाग 1: एक डेमो पाइपलाइन चलाएं
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Hello nf-core प्रशिक्षण पाठ्यक्रम के इस पहले भाग में, हम आपको दिखाएंगे कि एक nf-core pipeline कैसे खोजें और आज़माएं, कोड कैसे व्यवस्थित है यह कैसे समझें, और यह पहचानें कि यह plain Nextflow कोड से कैसे अलग है जैसा कि [Hello Nextflow](../hello_nextflow/index.md) में दिखाया गया है।
 
 हम nf-core/demo नामक एक pipeline का उपयोग करने जा रहे हैं जिसे nf-core प्रोजेक्ट अपने pipelines की सूची के हिस्से के रूप में कोड संरचना और टूल संचालन के प्रदर्शन के लिए बनाए रखता है।

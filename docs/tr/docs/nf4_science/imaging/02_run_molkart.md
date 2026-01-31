@@ -1,5 +1,7 @@
 # Bölüm 2: nf-core/molkart'ı Çalıştırma
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Bölüm 1'de, Nextflow çalıştırmasının temellerini anlamak için basit bir Hello World iş akışı çalıştırdık.
 Şimdi gerçek dünyadan bir biyogörüntüleme pipeline'ı çalıştıracağız: **nf-core/molkart**.
 

@@ -1,5 +1,7 @@
 # GitHub Codespaces
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 GitHub Codespaces è una piattaforma basata sul web che ci permette di fornire un ambiente preconfigurato per la formazione, supportato da macchine virtuali nel cloud.
 La piattaforma è gestita da Github (di proprietà di Microsoft) ed è accessibile gratuitamente (con quote di utilizzo) a chiunque abbia un account Github.
 

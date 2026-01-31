@@ -6,6 +6,8 @@ hide:
 
 # Mimar Araç Seti I
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Eğitim Koleksiyonlarımız, gelişmiş eğitim materyallerimiz ([Yan Görevler](../../side_quests) olarak adlandırılır) aracılığıyla küratörlü öğrenme yolları sunar. Bu koleksiyon, sağlam ve ölçeklenebilir iş akışları oluşturmak için sıklıkla birlikte kullanılan dört temel konuyu kapsar.
 
 ## Öğrenme hedefleri

@@ -67,6 +67,12 @@ hide:
 
 </div>
 
+!!! note "AI 지원 번역"
+
+    이 번역은 인공지능을 사용하여 생성되었으며 인간 번역가가 검토했습니다.
+    피드백과 개선 제안을 환영합니다.
+    자세한 내용은 [번역 가이드](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)를 참조하세요.
+
 ## Nextflow 교육 과정 목록
 
 <div class="grid cards" markdown>

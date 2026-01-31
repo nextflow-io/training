@@ -1,5 +1,7 @@
 # Yönlendirme
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Eğitim ortamı, bu eğitim kursunda çalışmak için gerekli tüm yazılımı, kodu ve veriyi içerir, bu nedenle kendiniz herhangi bir şey yüklemenize gerek yoktur.
 Ancak, giriş yapmak için (ücretsiz) bir hesaba ihtiyacınız var ve arayüzü tanımak için birkaç dakikanızı ayırmalısınız.
 

@@ -1,5 +1,7 @@
 # Część 2: Implementacja dla pojedynczej próbki
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 W tej części kursu napiszemy najprostszy możliwy workflow, który obejmie wszystkie polecenia uruchomione w Części 1, aby zautomatyzować ich wykonywanie, i będziemy dążyć do przetwarzania jednej próbki na raz.
 
 Zrobimy to w trzech etapach:

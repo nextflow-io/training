@@ -6,6 +6,8 @@ hide:
 
 # Yan Görevler
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Bu, belirli konuları daha derinlemesine ele alan bağımsız eğitim mini kurslarının bir koleksiyonudur. Bunları istediğiniz sırada tamamlayabilirsiniz.
 
 Hadi başlayalım! Eğitim ortamını başlatmak için aşağıdaki "GitHub Codespaces'te Aç" düğmesine tıklayın (tercihen ayrı bir sekmede), ardından yüklenirken okumaya devam edin.

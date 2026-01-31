@@ -6,6 +6,8 @@ hide:
 
 # Nextflow para Ciencia
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Estos son cursos que demuestran cómo aplicar los conceptos y componentes presentados en el curso para principiantes [Hello Nextflow](../hello_nextflow/) a casos de uso científicos específicos. Cada curso consiste en una serie de módulos de entrenamiento diseñados para ayudar a los estudiantes a desarrollar sus habilidades de forma progresiva.
 
 !!! exercise "Ejercicio"

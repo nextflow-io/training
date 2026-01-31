@@ -67,6 +67,12 @@ hide:
 
 </div>
 
+!!! note "Tradução assistida por IA"
+
+    Esta tradução foi criada utilizando inteligência artificial e revisada por tradutores humanos.
+    Agradecemos seu feedback e sugestões de melhorias.
+    Consulte nosso [guia de tradução](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md) para mais informações.
+
 ## Catálogo de cursos de treinamento em Nextflow
 
 <div class="grid cards" markdown>

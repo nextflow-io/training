@@ -1,5 +1,7 @@
 # Nächste Schritte
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Herzlichen Glückwunsch nochmal zum Abschluss des Nextflow For Genomics Trainingskurses und vielen Dank für das Ausfüllen unserer Umfrage!
 
 ---

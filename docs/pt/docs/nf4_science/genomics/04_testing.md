@@ -1,5 +1,7 @@
 # Parte 4: Adicionando testes
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tradução assistida por IA - [saiba mais e sugira melhorias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Na primeira parte deste curso, você construiu um pipeline de chamada de variantes que era completamente linear e processava os dados de cada amostra independentemente das outras.
 
 Na segunda parte, mostramos como usar canais e operadores de canal para implementar chamada conjunta de variantes com GATK.

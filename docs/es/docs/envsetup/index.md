@@ -8,6 +8,8 @@ hide:
 
 # Opciones de entorno
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Nuestro objetivo es proporcionar un entorno consistente y exhaustivamente probado que permita a los estudiantes concentrarse en aprender Nextflow sin tener que dedicar tiempo y esfuerzo a gestionar software.
 Para ese fin, hemos desarrollado un entorno en contenedor que contiene todo el software necesario, archivos de código y datos de ejemplo para trabajar con todos nuestros cursos.
 

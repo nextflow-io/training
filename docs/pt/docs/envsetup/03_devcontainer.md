@@ -1,5 +1,7 @@
 # Devcontainers Locais
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tradução assistida por IA - [saiba mais e sugira melhorias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Se você tem uma instalação local do Docker ou está disposto a instalar uma, a maneira mais fácil de trabalhar localmente com esses materiais é usar o recurso de devcontainer do Visual Studio Code. Essa abordagem fornece todas as ferramentas e dependências necessárias sem exigir instalação manual.
 
 ## Requisitos

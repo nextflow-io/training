@@ -1,5 +1,7 @@
 # भाग 3: संसाधन प्रोफाइलिंग और अनुकूलन
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 यह एक प्लेसहोल्डर है
 
 !!!note "नोट"
