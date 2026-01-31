@@ -41,15 +41,19 @@ flowchart TD
     B -->|Wrong term| C[Update glossary in<br>docs/LANG/llm-prompt.md]
     B -->|Wrong style/tone| D[Update grammar rules in<br>docs/LANG/llm-prompt.md]
     B -->|Structural issue| E[Update rules in<br>_scripts/general-llm-prompt.md]
-    C --> F[Commit prompt change]
+    C --> F[Open PR with prompt change]
     D --> F
     E --> F
-    F --> G[Trigger translation workflow]
+    F --> G[Trigger translation workflow<br>on PR branch]
     G --> H[Review updated translation]
     H --> I{Correct?}
-    I -->|Yes| J[Submit PR]
+    I -->|Yes| J[Merge PR]
     I -->|No| B
 ```
+
+> [!NOTE]
+> The translation workflow can only run on branches in the main repository, not on forks.
+> If you'd like to contribute translation improvements and need write access, please open an issue to request it.
 
 ### The Right Way: Update the Prompt
 
