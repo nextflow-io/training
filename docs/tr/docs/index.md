@@ -8,12 +8,6 @@ hide:
 
 # Nextflow Eğitimi
 
-!!! note "Yapay Zeka Destekli Çeviri"
-
-    Bu çeviri yapay zeka kullanılarak oluşturulmuş ve insan çevirmenler tarafından gözden geçirilmiştir.
-    Geri bildirimlerinizi ve iyileştirme önerilerinizi memnuniyetle karşılıyoruz.
-    Daha fazla bilgi için [çeviri kılavuzumuza](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md) bakın.
-
 <div class="grid cards" markdown>
 
 -   :material-book-open-variant:{ .lg .middle } __Bireysel çalışma kursları__

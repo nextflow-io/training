@@ -8,12 +8,6 @@ hide:
 
 # Szkolenie Nextflow
 
-!!! note "Tłumaczenie wspomagane przez AI"
-
-    To tłumaczenie zostało utworzone przy użyciu sztucznej inteligencji i zweryfikowane przez ludzkich tłumaczy.
-    Zachęcamy do przekazywania opinii i sugestii ulepszeń.
-    Więcej informacji znajdziesz w naszym [przewodniku tłumaczenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md).
-
 <div class="grid cards" markdown>
 
 -   :material-book-open-variant:{ .lg .middle } __Kursy do samodzielnej nauki__
