@@ -1,5 +1,5 @@
 ---
-title: Nextflow प्रशिक्षण
+title: होम
 description: Nextflow समुदाय प्रशिक्षण पोर्टल में आपका स्वागत है!
 hide:
   - toc

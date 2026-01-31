@@ -1,5 +1,5 @@
 ---
-title: Formazione Nextflow
+title: Home
 description: Benvenuti nel portale di formazione della community Nextflow!
 hide:
   - toc

@@ -1,5 +1,5 @@
 ---
-title: Szkolenie Nextflow
+title: Strona główna
 description: Witamy w portalu szkoleniowym społeczności Nextflow!
 hide:
   - toc

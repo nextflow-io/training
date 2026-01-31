@@ -1,5 +1,5 @@
 ---
-title: Nextflow 교육
+title: 홈
 description: Nextflow 커뮤니티 교육 포털에 오신 것을 환영합니다!
 hide:
   - toc

@@ -1,5 +1,5 @@
 ---
-title: Nextflow Eğitimi
+title: Ana Sayfa
 description: Nextflow topluluk eğitim portalına hoş geldiniz!
 hide:
   - toc

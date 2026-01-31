@@ -1,5 +1,5 @@
 ---
-title: Treinamento em Nextflow
+title: Início
 description: Bem-vindo ao portal de treinamento da comunidade Nextflow!
 hide:
   - toc
