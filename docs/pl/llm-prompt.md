@@ -13,12 +13,14 @@ The target language for this translation is **Polish** (`pl`).
 **Important distinction**: Some technical terms have different translation rules depending on context:
 
 1. **In code blocks**: Keep ALL Nextflow syntax in English (the code must run)
-2. **In prose/explanatory text**: Follow the glossary below for translations
+2. **In code comments**: TRANSLATE comments to Polish (they are not executable)
+3. **In prose/explanatory text**: Follow the glossary below for translations
 
 For example:
 
 - In prose: "Kanał wejściowy otrzymuje pliki..." (translate "channel" to "kanał")
 - In code: `channel.fromPath('*.fastq')` (keep "channel" in English)
+- In comments: `// emit a greeting` → `// Wyemituj powitanie`
 
 ## Glossary
 

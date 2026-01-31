@@ -14,12 +14,14 @@ The target language for this translation is **Turkish** (`tr`).
 **Important distinction**: Some technical terms have different translation rules depending on context:
 
 1. **In code blocks**: Keep ALL Nextflow syntax in English (the code must run)
-2. **In prose/explanatory text**: Follow the glossary below for translations
+2. **In code comments**: TRANSLATE comments to Turkish (they are not executable)
+3. **In prose/explanatory text**: Follow the glossary below for translations
 
 For example:
 
 - In prose: "Giriş kanalı dosyaları alır..." (translate "channel" to "kanal")
 - In code: `channel.fromPath('*.fastq')` (keep "channel" in English)
+- In comments: `// emit a greeting` → `// bir selamlama yayınla`
 
 ## Glossary
 

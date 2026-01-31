@@ -57,10 +57,11 @@ Code blocks are critical - the code must remain executable.
 ### Rules
 
 1. **Never translate code syntax** - only translate comments
-2. **Preserve exact indentation and spacing**
-3. **Keep all Nextflow keywords in English**: `process`, `workflow`, `channel`, `emit`, `take`, `main`, `input`, `output`, `script`, `shell`, `exec`, `params`, `val`, `path`, `tuple`, `env`
-4. **Keep all operators in English**: `map`, `filter`, `collect`, `view`, `flatten`, `groupTuple`, `join`, `combine`, `mix`, `splitCsv`, `splitFastq`, etc.
-5. **Keep all directives in English**: `publishDir`, `container`, `conda`, `memory`, `cpus`, `time`, `errorStrategy`, `tag`, `label`, `cache`, `executor`, etc.
+2. **Always translate code comments** - comments are not executable and should be in the target language
+3. **Preserve exact indentation and spacing**
+4. **Keep all Nextflow keywords in English**: `process`, `workflow`, `channel`, `emit`, `take`, `main`, `input`, `output`, `script`, `shell`, `exec`, `params`, `val`, `path`, `tuple`, `env`
+5. **Keep all operators in English**: `map`, `filter`, `collect`, `view`, `flatten`, `groupTuple`, `join`, `combine`, `mix`, `splitCsv`, `splitFastq`, etc.
+6. **Keep all directives in English**: `publishDir`, `container`, `conda`, `memory`, `cpus`, `time`, `errorStrategy`, `tag`, `label`, `cache`, `executor`, etc.
 
 ### Examples
 
@@ -370,18 +371,18 @@ Note: Keep tool names like "Gitpod" in English.
 
 These tabs appear frequently in Before/After code comparisons:
 
-| English | Translate per language glossary         |
-| ------- | --------------------------------------- |
-| After   | Yes (e.g., "Depois", "Dopo", "Después") |
-| Before  | Yes (e.g., "Antes", "Prima", "Antes")   |
-| Gitpod  | No - keep in English                    |
-| Local   | Sometimes (check glossary)              |
+| English | Translate | Examples                                                       |
+| ------- | --------- | -------------------------------------------------------------- |
+| After   | Yes       | Depois (pt), Después (es), Dopo (it), Nach (de), 후 (ko)       |
+| Before  | Yes       | Antes (pt/es), Prima (it), Vor (de), 전 (ko)                   |
+| Gitpod  | No        | Keep in English                                                |
+| Local   | Sometimes | Local (pt/es), Locale (it), Lokal (de) - check language prompt |
 
 ---
 
 ## Standard Section Headers
 
-These recurring section headers appear throughout the training and should be translated consistently per the language glossary:
+These recurring section headers appear throughout the training and should be translated consistently:
 
 | English            | Notes                                       |
 | ------------------ | ------------------------------------------- |
@@ -391,7 +392,23 @@ These recurring section headers appear throughout the training and should be tra
 | Directory contents | Shows file listing                          |
 | Output             | In code block titles, often kept in English |
 
-Check the language-specific `llm-prompt.md` for the correct translations.
+Check the language-specific `llm-prompt.md` for the correct translations. If not specified, translate naturally.
+
+---
+
+## Page Titles
+
+Page titles (the `# Heading` at the top of each page) follow these rules:
+
+1. **Translate the descriptive text** (e.g., "Part 1", "Getting Started")
+2. **Keep course/module names in English** (e.g., "Hello World", "Hello Channels")
+
+Example:
+
+- English: `# Part 1: Hello World`
+- Spanish: `# Parte 1: Hello World`
+- Korean: `# 파트 1: Hello World`
+- German: `# Teil 1: Hello World`
 
 ---
 

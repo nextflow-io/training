@@ -10,6 +10,20 @@ The target language for this translation is **Hindi** (`hi`).
 - Use Hindi numerals or Arabic numerals as appropriate for context
 - Maintain a conversational yet professional tone
 
+## Translation Context Rules
+
+**Important distinction**: Some technical terms have different translation rules depending on context:
+
+1. **In code blocks**: Keep ALL Nextflow syntax in English (the code must run)
+2. **In code comments**: TRANSLATE comments to Hindi (they are not executable)
+3. **In prose/explanatory text**: Follow the glossary below for translations
+
+For example:
+
+- In prose: "इनपुट channel फ़ाइलें प्राप्त करता है..." (translate "channel" to "चैनल" or keep in English with Hindi text)
+- In code: `channel.fromPath('*.fastq')` (keep "channel" in English)
+- In comments: `// emit a greeting` → `// एक अभिवादन emit करें`
+
 ## Glossary
 
 ### Terms to Keep in English (DO NOT TRANSLATE)

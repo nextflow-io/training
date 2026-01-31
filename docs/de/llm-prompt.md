@@ -9,6 +9,20 @@ The target language for this translation is **German** (`de`).
 - Prefer active voice when possible
 - Use gender-neutral language where appropriate
 
+## Translation Context Rules
+
+**Important distinction**: Some technical terms have different translation rules depending on context:
+
+1. **In code blocks**: Keep ALL Nextflow syntax in English (the code must run)
+2. **In code comments**: TRANSLATE comments to German (they are not executable)
+3. **In prose/explanatory text**: Follow the glossary below for translations
+
+For example:
+
+- In prose: "Der Eingabekanal empfängt die Dateien..." (translate "channel" to "Kanal")
+- In code: `channel.fromPath('*.fastq')` (keep "channel" in English)
+- In comments: `// emit a greeting` → `// Eine Begrüßung ausgeben`
+
 ## Glossary
 
 ### Terms to Keep in English (DO NOT TRANSLATE)
