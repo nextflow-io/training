@@ -1,5 +1,7 @@
 # Ambiente di Sviluppo
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Gli Ambienti di Sviluppo Integrati (IDE) moderni possono trasformare radicalmente la Sua esperienza di sviluppo in Nextflow. Questa quest secondaria si concentra specificamente sull'utilizzo di VS Code e della sua estensione Nextflow per scrivere codice più velocemente, individuare errori tempestivamente e navigare workflow complessi in modo efficiente.
 
 !!! note "Questo non è un tutorial tradizionale"

@@ -1,5 +1,7 @@
 # Bölüm 3: Çalıştırma yapılandırması
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Bu bölümde, bir Nextflow pipeline'ının yapılandırmasını yönetmeyi keşfedeceğiz; davranışını özelleştirmek, farklı ortamlara uyarlamak ve kaynak kullanımını optimize etmek için _workflow kodunun tek bir satırını değiştirmeden_.
 
 Bunu yapmanın birden fazla yolu vardır; bunlar birlikte kullanılabilir ve [burada](https://www.nextflow.io/docs/latest/config.html) açıklanan öncelik sırasına göre yorumlanır.

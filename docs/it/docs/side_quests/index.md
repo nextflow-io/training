@@ -6,6 +6,8 @@ hide:
 
 # Missioni Secondarie
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Questa è una raccolta di mini-corsi di formazione indipendenti che approfondiscono argomenti specifici. Può seguirli in qualsiasi ordine.
 
 Iniziamo! Clicchi sul pulsante "Open in GitHub Codespaces" qui sotto per avviare l'ambiente di formazione (preferibilmente in una scheda separata), quindi continui a leggere mentre si carica.

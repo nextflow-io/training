@@ -1,5 +1,7 @@
 # Parte 3: Implementação de múltiplas amostras com dados paired-end
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tradução assistida por IA - [saiba mais e sugira melhorias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Nesta parte final do curso, vamos levar nosso fluxo de trabalho simples ao próximo nível, transformando-o em uma poderosa ferramenta de automação em lote para lidar com números arbitrários de amostras.
 E enquanto fazemos isso, também vamos alterá-lo para esperar dados paired-end, que são mais comuns em estudos mais recentes.
 

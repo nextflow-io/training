@@ -1,5 +1,7 @@
 # 필수 Nextflow 스크립팅 패턴
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Nextflow는 Java Virtual Machine에서 실행되는 프로그래밍 언어입니다. Nextflow는 [Groovy](http://groovy-lang.org/)를 기반으로 구축되어 많은 구문을 공유하지만, Nextflow는 단순히 "확장 기능이 있는 Groovy"가 아닙니다. 완전히 명세화된 [구문](https://nextflow.io/docs/latest/reference/syntax.html)과 [표준 라이브러리](https://nextflow.io/docs/latest/reference/stdlib.html)를 갖춘 독립적인 언어입니다.
 
 변수, 맵, 리스트에 대한 기본 구문을 넘어서지 않고도 많은 Nextflow 코드를 작성할 수 있습니다. 대부분의 Nextflow 튜토리얼은 워크플로 오케스트레이션(채널, 프로세스, 데이터 흐름)에 초점을 맞추며, 이것만으로도 놀라울 정도로 많은 것을 할 수 있습니다.

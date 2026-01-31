@@ -1,5 +1,7 @@
 # विकास वातावरण
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 आधुनिक इंटीग्रेटेड डेवलपमेंट एनवायरनमेंट (IDE) आपके Nextflow विकास अनुभव को पूरी तरह बदल सकते हैं। यह साइड क्वेस्ट विशेष रूप से VS Code और उसकी Nextflow एक्सटेंशन का उपयोग करके तेज़ी से कोड लिखने, गलतियों को जल्दी पकड़ने और जटिल workflows को कुशलता से नेविगेट करने पर केंद्रित है।
 
 !!! note "यह एक पारंपरिक ट्यूटोरियल नहीं है"

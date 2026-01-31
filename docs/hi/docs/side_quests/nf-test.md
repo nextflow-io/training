@@ -1,5 +1,7 @@
 # nf-test के साथ परीक्षण
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 यह सुनिश्चित करने के लिए कि आपके workflow का हर भाग वही कर रहा है जो उसे करना चाहिए, व्यवस्थित रूप से परीक्षण करना reproducibility और दीर्घकालिक रखरखाव के लिए महत्वपूर्ण है, और development process के दौरान एक बड़ी मदद हो सकती है।
 
 आइए एक मिनट के लिए बात करें कि परीक्षण इतना महत्वपूर्ण क्यों है। यदि आप एक workflow develop कर रहे हैं, तो आप सबसे पहले कुछ test data लेंगे जो आपको पता है कि valid है और result produce करना चाहिए। आप pipeline में पहली process जोड़ते हैं और इसे काम करने के लिए अपने inputs के साथ wire करते हैं। फिर, यह जांचने के लिए कि सब कुछ काम कर रहा है, आप इसे test data पर run करते हैं। यह मानते हुए कि यह काम करता है, आप अगली process पर जाते हैं और फिर से test data run करते हैं। आप इस process को तब तक दोहराते हैं जब तक आपके पास एक pipeline न हो जिससे आप संतुष्ट हों।

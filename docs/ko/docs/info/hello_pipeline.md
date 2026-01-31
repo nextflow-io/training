@@ -8,6 +8,8 @@ hide:
 
 # Hello pipeline
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 대부분의 교육 과정에서는 Nextflow 개념과 메커니즘을 시연하기 위해 간단한 도메인 비의존적 pipeline을 사용합니다.
 Hello Nextflow 과정에서는 모든 설계 및 구현 결정을 설명하면서 이 pipeline을 단계별로 개발하는 방법을 보여줍니다.
 다른 교육에서는 이 pipeline 또는 그 일부를 시작점으로 사용합니다.

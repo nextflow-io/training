@@ -1,5 +1,7 @@
 # Flujos de trabajo de flujos de trabajo
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Cuando está desarrollando un pipeline, a menudo se encuentra creando secuencias similares de procesos para diferentes tipos de datos o pasos de análisis. Podría terminar copiando y pegando estas secuencias de procesos, lo que lleva a código duplicado que es difícil de mantener; o podría crear un flujo de trabajo masivo que es difícil de entender y modificar.
 
 Una de las características más poderosas de Nextflow es su capacidad para componer pipelines complejos a partir de módulos de flujos de trabajo más pequeños y reutilizables. Este enfoque modular hace que los pipelines sean más fáciles de desarrollar, probar y mantener.

@@ -1,5 +1,7 @@
 # Bölüm 4: Yapılandırma
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Bölüm 1-3'te Nextflow'u nasıl çalıştıracağımızı, bir nf-core pipeline'ını nasıl çalıştıracağımızı ve girdileri parametre dosyaları ve örnek listelerini kullanarak nasıl yöneteceğimizi öğrendik.
 Şimdi, **yapılandırma dosyaları** ve **profiller** kullanarak pipeline'ları farklı hesaplama ortamları için nasıl yapılandıracağımızı keşfedeceğiz.
 

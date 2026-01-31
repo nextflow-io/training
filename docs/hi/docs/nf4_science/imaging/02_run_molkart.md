@@ -1,5 +1,7 @@
 # भाग 2: nf-core/molkart चलाना
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 भाग 1 में, हमने Nextflow निष्पादन की मूल बातें समझने के लिए एक सरल Hello World वर्कफ़्लो चलाया।
 अब हम एक वास्तविक बायोइमेजिंग पाइपलाइन चलाने जा रहे हैं: **nf-core/molkart**।
 

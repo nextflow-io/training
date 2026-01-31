@@ -1,5 +1,7 @@
 # जीनोमिक्स के लिए Nextflow
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 यह प्रशिक्षण पाठ्यक्रम जीनोमिक्स और संबंधित क्षेत्रों के शोधकर्ताओं के लिए है जो डेटा विश्लेषण pipelines विकसित करने या उन्हें अनुकूलित करने में रुचि रखते हैं।
 यह [Hello Nextflow](../../hello_nextflow/) शुरुआती प्रशिक्षण पर आधारित है और यह प्रदर्शित करता है कि जीनोमिक्स डोमेन के विशिष्ट संदर्भ में Nextflow का उपयोग कैसे करें।
 

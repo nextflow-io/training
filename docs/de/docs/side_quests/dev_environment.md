@@ -1,5 +1,7 @@
 # Entwicklungsumgebung
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Moderne Integrierte Entwicklungsumgebungen (IDEs) können deine Nextflow-Entwicklungserfahrung dramatisch verändern. Dieser Side Quest konzentriert sich speziell darauf, VS Code und seine Nextflow-Erweiterung zu nutzen, um Code schneller zu schreiben, Fehler frühzeitig zu erkennen und effizient in komplexen Workflows zu navigieren.
 
 !!! note "Dies ist kein traditionelles Tutorial"

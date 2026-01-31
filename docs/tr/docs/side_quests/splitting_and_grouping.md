@@ -1,5 +1,7 @@
 # Bölme ve Gruplama
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Nextflow, verilerle esnek bir şekilde çalışmak için güçlü araçlar sağlar. Temel bir özellik, verileri farklı akışlara bölmek ve ardından ilişkili öğeleri tekrar birleştirmektir. Bu, özellikle analiz için sonuçları birleştirmeden önce farklı örnek türlerini ayrı ayrı işlemeniz gereken biyoinformatik iş akışlarında değerlidir.
 
 Bunu mektup sıralama gibi düşünün: mektupları varış yerine göre ayırırsınız, her yığını farklı şekilde işlersiniz, ardından aynı kişiye giden öğeleri yeniden birleştirirsiniz. Nextflow, bilimsel verilerle bunu başarmak için özel operatörler kullanır. Bu yaklaşım aynı zamanda dağıtık hesaplama ve biyoinformatik iş akışlarında yaygın olarak **scatter/gather** deseni olarak bilinir.

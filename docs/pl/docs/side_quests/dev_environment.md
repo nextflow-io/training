@@ -1,5 +1,7 @@
 # Środowisko programistyczne
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Nowoczesne zintegrowane środowiska programistyczne (IDE) mogą dramatycznie zmienić Twoje doświadczenie z tworzeniem kodu w Nextflow. Ten quest poboczny koncentruje się konkretnie na wykorzystaniu VS Code i jego rozszerzenia Nextflow do szybszego pisania kodu, wczesnego wykrywania błędów i efektywnej nawigacji po złożonych workflow.
 
 !!! note "To nie jest tradycyjny samouczek"

@@ -20,6 +20,8 @@ additional_information:
 
 # Nextflow Run
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 **Nextflow Run ist eine praktische Einführung in die Ausführung reproduzierbarer und skalierbarer Datenanalyse-Workflows.**
 
 Durch praktische Beispiele und geführte Übungen lernst du die Grundlagen der Verwendung von Nextflow, einschließlich der Ausführung von Pipelines, der Verwaltung von Dateien und Software-Abhängigkeiten, der mühelosen Parallelisierung der Ausführung und der Ausführung von Workflows in verschiedenen Rechenumgebungen.

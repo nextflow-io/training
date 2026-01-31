@@ -1,5 +1,7 @@
 # Side Quests
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Dies ist eine Sammlung eigenständiger Mini-Kurse, die tiefer in spezifische Themen eintauchen. Du kannst sie in beliebiger Reihenfolge durchgehen.
 
 Lass uns loslegen! Klicke auf den Button „Open in GitHub Codespaces" unten, um die Trainingsumgebung zu starten (vorzugsweise in einem separaten Tab), und lies dann weiter, während sie lädt.

@@ -1,5 +1,7 @@
 # Partie 1 : Aperçu de la méthode et tests manuels
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Il existe plusieurs méthodes valides pour traiter et analyser les données RNAseq en vrac.
 Pour cette formation, nous suivons la méthode décrite [ici](https://www.bioinformatics.babraham.ac.uk/training/RNASeq_Course/Analysing%20RNA-Seq%20data%20Exercise.pdf) par les Drs. Simon Andrews et Laura Biggins au [Babraham Institute](https://www.babraham.ac.uk/).
 

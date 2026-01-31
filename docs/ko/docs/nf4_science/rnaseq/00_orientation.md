@@ -1,5 +1,7 @@
 # 오리엔테이션
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 교육 환경에는 이 교육 과정을 진행하는 데 필요한 모든 소프트웨어, 코드 및 데이터가 포함되어 있으므로 직접 설치할 필요가 없습니다.
 그러나 로그인하려면 (무료) 계정이 필요하며, 인터페이스에 익숙해지기 위해 몇 분 정도 시간을 할애해야 합니다.
 

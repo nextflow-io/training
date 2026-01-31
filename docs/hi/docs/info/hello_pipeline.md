@@ -8,6 +8,8 @@ hide:
 
 # Hello pipeline
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 हमारे अधिकांश प्रशिक्षण पाठ्यक्रम Nextflow अवधारणाओं और तंत्रों को प्रदर्शित करने के लिए एक सरल डोमेन-अज्ञेयवादी pipeline का उपयोग करते हैं।
 Hello Nextflow पाठ्यक्रम दिखाता है कि इस pipeline को चरण-दर-चरण तरीके से कैसे विकसित किया जाए जो प्रत्येक डिज़ाइन और कार्यान्वयन निर्णय को समझाता है।
 अन्य प्रशिक्षण इस pipeline, या इसके भागों को, प्रारंभिक बिंदु के रूप में उपयोग करते हैं।

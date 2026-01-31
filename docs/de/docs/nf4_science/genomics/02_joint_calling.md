@@ -1,5 +1,7 @@
 # Teil 2: Joint Calling auf einer Kohorte
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Im ersten Teil dieses Kurses hast du eine Variant-Calling-Pipeline erstellt, die komplett linear war und die Daten jeder Probe unabhängig von den anderen verarbeitet hat.
 In einem echten Genomik-Anwendungsfall musst du jedoch normalerweise die Variant Calls mehrerer Proben gemeinsam betrachten.
 

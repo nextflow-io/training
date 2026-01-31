@@ -1,5 +1,7 @@
 # Erste Schritte
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 ## Eine Trainingsumgebung starten
 
 Um die vorgefertigte Umgebung zu nutzen, die wir auf GitHub Codespaces bereitstellen, klicke auf die Schaltfläche "Open in GitHub Codespaces" unten. Für andere Optionen siehe [Umgebungsoptionen](../envsetup/index.md).

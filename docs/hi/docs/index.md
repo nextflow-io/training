@@ -8,6 +8,12 @@ hide:
 
 # Nextflow प्रशिक्षण
 
+!!! note "AI-सहायता प्राप्त अनुवाद"
+
+    यह अनुवाद कृत्रिम बुद्धिमत्ता का उपयोग करके बनाया गया था और मानव अनुवादकों द्वारा समीक्षा की गई है।
+    हम आपकी प्रतिक्रिया और सुधार के सुझावों का स्वागत करते हैं।
+    अधिक जानकारी के लिए हमारी [अनुवाद मार्गदर्शिका](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md) देखें।
+
 <div class="grid cards" markdown>
 
 -   :material-book-open-variant:{ .lg .middle } __स्व-सेवा पाठ्यक्रम__

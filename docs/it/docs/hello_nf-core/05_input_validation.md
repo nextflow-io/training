@@ -1,5 +1,7 @@
 # Parte 5: Validazione degli input
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 In questa quinta parte del corso di formazione Hello nf-core, mostriamo come utilizzare il plugin nf-schema per validare gli input e i parametri della pipeline.
 
 ??? info "Come iniziare da questa sezione"

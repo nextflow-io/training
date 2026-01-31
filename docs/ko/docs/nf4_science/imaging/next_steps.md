@@ -1,5 +1,7 @@
 # 다음 단계
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Nextflow for Bioimaging 교육을 완료하신 것을 축하합니다!
 
 이제 이미징 데이터 분석을 위한 Nextflow pipeline을 실행하고 구성하는 기초 기술을 갖추셨습니다.

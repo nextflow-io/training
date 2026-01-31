@@ -1,5 +1,7 @@
 # 다음 단계
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Nextflow For RNAseq 교육 과정을 완료하신 것을 다시 한번 축하드리며, 설문조사에 응해 주셔서 감사합니다!
 
 ---

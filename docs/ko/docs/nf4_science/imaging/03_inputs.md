@@ -1,5 +1,7 @@
 # Part 3: 입력 구성하기
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Part 2에서는 명령줄에서 여러 매개변수를 사용하여 molkart를 실행했습니다.
 이제 입력을 관리하는 두 가지 더 나은 방법인 **매개변수 파일**과 **샘플시트**를 배우겠습니다.
 

@@ -1,5 +1,7 @@
 # Depuración de Flujos de Trabajo
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 La depuración es una habilidad crítica que puede ahorrarle horas de frustración y ayudarle a convertirse en un desarrollador de Nextflow más eficaz. A lo largo de su carrera, especialmente cuando está comenzando, encontrará errores mientras construye y mantiene sus flujos de trabajo. Aprender enfoques sistemáticos de depuración le ayudará a identificar y resolver problemas rápidamente.
 
 ### Objetivos de aprendizaje

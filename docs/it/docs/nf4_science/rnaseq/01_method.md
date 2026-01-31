@@ -1,5 +1,7 @@
 # Parte 1: Panoramica del metodo e test manuali
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Esistono molteplici metodi validi per elaborare e analizzare dati RNAseq in bulk.
 Per questo corso, seguiamo il metodo descritto [qui](https://www.bioinformatics.babraham.ac.uk/training/RNASeq_Course/Analysing%20RNA-Seq%20data%20Exercise.pdf) dai Dott. Simon Andrews e Laura Biggins presso il [Babraham Institute](https://www.babraham.ac.uk/).
 

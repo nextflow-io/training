@@ -8,6 +8,12 @@ hide:
 
 # Nextflow Training
 
+!!! note "KI-gestützte Übersetzung"
+
+    Diese Übersetzung wurde mit künstlicher Intelligenz erstellt und von menschlichen Übersetzern überprüft.
+    Wir freuen uns über Feedback und Verbesserungsvorschläge.
+    Weitere Informationen findest du in unserer [Übersetzungsanleitung](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md).
+
 <div class="grid cards" markdown>
 
 -   :material-book-open-variant:{ .lg .middle } __Selbstlernkurse__

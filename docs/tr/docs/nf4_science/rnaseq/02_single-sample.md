@@ -1,5 +1,7 @@
 # Bölüm 2: Tek örnek implementasyonu
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Bu kurumun bu bölümünde, Bölüm 1'de çalıştırdığımız tüm komutları otomatikleştirmek için mümkün olan en basit iş akışını yazacağız ve her seferinde yalnızca bir örnek işlemeyi hedefleyeceğiz.
 
 Bunu üç aşamada yapacağız:

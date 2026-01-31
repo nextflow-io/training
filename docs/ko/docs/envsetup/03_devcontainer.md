@@ -1,5 +1,7 @@
 # 로컬 Devcontainers
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 로컬 Docker 설치가 있거나 설치할 의향이 있다면, 이 자료로 로컬에서 작업하는 가장 쉬운 방법은 Visual Studio Code의 devcontainer 기능을 사용하는 것입니다. 이 방식은 수동 설치 없이 필요한 모든 도구와 종속성을 제공합니다.
 
 ## 요구 사항

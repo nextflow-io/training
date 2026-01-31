@@ -1,5 +1,7 @@
 # Partie 1 : Appel de variants par échantillon
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Dans la première partie de ce cours, nous vous montrons comment construire un pipeline simple d'appel de variants qui applique l'appel de variants GATK à des échantillons de séquençage individuels.
 
 ### Vue d'ensemble de la méthode

@@ -1,5 +1,7 @@
 # 파트 2: 단일 샘플 구현
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 이 과정의 이 부분에서는 파트 1에서 실행한 모든 명령을 래핑하여 자동으로 실행하는 가장 간단한 워크플로우를 작성하며, 한 번에 하나의 샘플만 처리하는 것을 목표로 합니다.
 
 이를 세 단계로 진행합니다:

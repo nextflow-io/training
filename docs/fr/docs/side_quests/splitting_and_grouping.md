@@ -1,5 +1,7 @@
 # Division et regroupement
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Nextflow fournit des outils puissants pour travailler avec les données de manière flexible. Une capacité clé est la division des données en différents flux, puis le regroupement d'éléments connexes. Ceci est particulièrement précieux dans les workflows de bioinformatique où vous devez traiter différents types d'échantillons séparément avant de combiner les résultats pour l'analyse.
 
 Imaginez cela comme le tri du courrier : vous séparez les lettres par destination, traitez chaque pile différemment, puis recombinez les éléments allant à la même personne. Nextflow utilise des opérateurs spéciaux pour accomplir cela avec des données scientifiques. Cette approche est également communément appelée le modèle **scatter/gather** dans l'informatique distribuée et les workflows de bioinformatique.

@@ -6,6 +6,8 @@ hide:
 
 # Nextflow pour l'ARNseq
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Ce cours de formation est destiné aux chercheurs en transcriptomique et dans les domaines connexes qui souhaitent développer ou personnaliser des pipelines d'analyse de données.
 Il s'appuie sur la formation débutant [Hello Nextflow](../../hello_nextflow/) et démontre comment utiliser Nextflow dans le contexte spécifique de l'analyse d'ARNseq en bulk.
 

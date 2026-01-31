@@ -1,5 +1,7 @@
 # Orientamento
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 L'ambiente di formazione contiene tutto il software, il codice e i dati necessari per seguire questo corso di formazione, quindi non è necessario installare nulla autonomamente.
 Tuttavia, è necessario un account (gratuito) per effettuare l'accesso, e si dovrebbe dedicare qualche minuto per familiarizzare con l'interfaccia.
 

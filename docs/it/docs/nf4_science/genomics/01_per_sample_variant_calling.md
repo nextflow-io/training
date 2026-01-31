@@ -1,5 +1,7 @@
 # Parte 1: Chiamata di varianti per campione
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Nella prima parte di questo corso, Le mostreremo come costruire una semplice pipeline di chiamata di varianti che applica la chiamata di varianti GATK a singoli campioni di sequenziamento.
 
 ### Panoramica del metodo

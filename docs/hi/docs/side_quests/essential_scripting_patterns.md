@@ -1,5 +1,7 @@
 # आवश्यक Nextflow स्क्रिप्टिंग पैटर्न
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Nextflow एक प्रोग्रामिंग भाषा है जो Java Virtual Machine पर चलती है। जबकि Nextflow [Groovy](http://groovy-lang.org/) पर बनाई गई है और इसके अधिकांश सिंटैक्स को साझा करती है, Nextflow सिर्फ "एक्सटेंशन के साथ Groovy" नहीं है -- यह पूर्णतः निर्दिष्ट [सिंटैक्स](https://nextflow.io/docs/latest/reference/syntax.html) और [standard library](https://nextflow.io/docs/latest/reference/stdlib.html) के साथ एक स्वतंत्र भाषा है।
 
 आप वेरिएबल, maps, और lists के लिए बुनियादी सिंटैक्स से आगे बढ़े बिना बहुत सारी Nextflow लिख सकते हैं। अधिकांश Nextflow ट्यूटोरियल workflow orchestration (channels, processes, और data flow) पर केंद्रित होते हैं, और आप सिर्फ इतने से ही आश्चर्यजनक रूप से बहुत आगे जा सकते हैं।

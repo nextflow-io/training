@@ -6,6 +6,8 @@ hide:
 
 # Eğitim Koleksiyonları
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Bu bölüm, belirli bir tema veya kullanım senaryosu etrafında kapsamlı bir öğrenme deneyimi sağlamayı amaçlayan [Yan Görevler](../side_quests/index.md) adlı eğitim modüllerinin küratörlü koleksiyonlarını içerir.
 
 ## Ön koşullar

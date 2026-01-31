@@ -1,5 +1,7 @@
 # Collezioni di Formazione
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Questa sezione contiene collezioni curate di moduli di formazione chiamati [Side Quests](../side_quests/index.md) che mirano a fornire un'esperienza di apprendimento completa su un tema o caso d'uso particolare.
 
 ## Prerequisiti

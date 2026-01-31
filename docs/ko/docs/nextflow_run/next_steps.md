@@ -1,5 +1,7 @@
 # 과정 요약
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Nextflow Run 교육 과정을 완료하신 것을 축하합니다! 🎉
 
 <!-- placeholder for video -->

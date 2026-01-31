@@ -1,5 +1,7 @@
 # Parte 2: Implementazione per singolo campione
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 In questa parte del corso, scriveremo il workflow più semplice possibile che racchiude tutti i comandi eseguiti nella Parte 1 per automatizzarne l'esecuzione, e ci limiteremo a processare un campione alla volta.
 
 Lo faremo in tre fasi:

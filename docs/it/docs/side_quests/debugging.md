@@ -1,5 +1,7 @@
 # Debug dei Workflow
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Il debug è una competenza critica che può farvi risparmiare ore di frustrazione e aiutarvi a diventare sviluppatori Nextflow più efficaci. Durante la vostra carriera, specialmente quando state iniziando, incontrerete bug durante la costruzione e manutenzione dei vostri workflow. Imparare approcci sistematici al debug vi aiuterà a identificare e risolvere i problemi rapidamente.
 
 ### Obiettivi di apprendimento

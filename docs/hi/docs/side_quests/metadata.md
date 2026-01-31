@@ -1,5 +1,7 @@
 # मेटाडेटा और मेटा मैप्स
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 किसी भी वैज्ञानिक विश्लेषण में, हम शायद ही कभी केवल कच्ची डेटा फ़ाइलों के साथ काम करते हैं।
 प्रत्येक फ़ाइल अपनी अतिरिक्त जानकारी के साथ आती है: यह क्या है, यह कहाँ से आई, और इसे क्या खास बनाता है।
 इस अतिरिक्त जानकारी को हम मेटाडेटा कहते हैं।

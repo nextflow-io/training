@@ -1,5 +1,7 @@
 # Sonraki adımlar
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Nextflow Biogörüntüleme eğitimini tamamladığınız için tebrikler!
 
 Artık görüntüleme verisi analizi için Nextflow pipeline'larını çalıştırmak ve yapılandırmak için temel becerilere sahipsiniz.

@@ -1,5 +1,7 @@
 # Part 1: 데모 파이프라인 실행하기
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Hello nf-core 교육 과정의 첫 번째 파트에서는 nf-core 파이프라인을 찾아서 사용해보고, 코드 구성 방식을 이해하며, [Hello Nextflow](../hello_nextflow/index.md)에서 보여드린 일반 Nextflow 코드와 어떻게 다른지 알아보겠습니다.
 
 nf-core 프로젝트에서 코드 구조와 도구 작동을 시연하기 위한 파이프라인 모음의 일부로 유지 관리하는 nf-core/demo라는 파이프라인을 사용하겠습니다.

@@ -1,5 +1,7 @@
 # Część 3: Przenoszenie kodu do modułów
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 W pierwszej części tego kursu zbudowałeś pipeline do wywoływania wariantów, który był całkowicie liniowy i przetwarzał dane każdej próbki niezależnie od innych.
 
 W drugiej części pokazaliśmy, jak używać kanałów i operatorów kanałów do implementacji wspólnego wywoływania wariantów za pomocą GATK, rozbudowując pipeline z Części 1.

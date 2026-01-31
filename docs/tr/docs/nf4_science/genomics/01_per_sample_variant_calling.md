@@ -1,5 +1,7 @@
 # Bölüm 1: Örnek başına varyant çağırma
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Bu kursun ilk bölümünde, bireysel sekanslama örneklerine GATK varyant çağırma uygulayan basit bir varyant çağırma pipeline'ı oluşturmayı göstereceğiz.
 
 ### Yöntem genel bakışı

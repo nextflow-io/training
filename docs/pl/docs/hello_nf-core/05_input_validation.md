@@ -1,5 +1,7 @@
 # Część 5: Walidacja danych wejściowych
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 W tej piątej części kursu szkoleniowego Hello nf-core pokażemy, jak używać wtyczki nf-schema do walidacji danych wejściowych i parametrów potoku.
 
 ??? info "Jak rozpocząć od tej sekcji"

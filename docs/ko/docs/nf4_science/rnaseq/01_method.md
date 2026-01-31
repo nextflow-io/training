@@ -1,5 +1,7 @@
 # 파트 1: 방법 개요 및 수동 테스트
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 대량 RNAseq 데이터를 처리하고 분석하는 여러 가지 유효한 방법이 있습니다.
 이 과정에서는 [Babraham Institute](https://www.babraham.ac.uk/)의 Simon Andrews 박사와 Laura Biggins 박사가 [여기](https://www.bioinformatics.babraham.ac.uk/training/RNASeq_Course/Analysing%20RNA-Seq%20data%20Exercise.pdf)에서 설명한 방법을 따릅니다.
 

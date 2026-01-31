@@ -1,5 +1,7 @@
 # Umfrage
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Vielen Dank, dass du das Nextflow für Bioimaging Training abgeschlossen hast!
 
 Wir würden uns sehr über dein Feedback freuen, um dieses Trainingsmaterial zu verbessern.

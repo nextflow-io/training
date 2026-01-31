@@ -7,6 +7,8 @@ hide:
 
 # Nextflow run dla Obrazowania
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Ten kurs szkoleniowy jest przeznaczony dla naukowców zajmujących się obrazowaniem i biologią przestrzenną, którzy są zainteresowani uruchamianiem i dostosowywaniem potoków analizy danych.
 Kurs uczy podstawowych koncepcji Nextflow związanych z uruchamianiem, organizowaniem i konfigurowaniem workflow przy użyciu [nf-core/molkart](https://nf-co.re/molkart), pipeline do przetwarzania danych transkryptomiki przestrzennej Molecular Cartography.
 Umiejętności, których się tutaj nauczysz, można przenieść do dowolnego pipeline Nextflow lub nf-core.

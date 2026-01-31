@@ -6,6 +6,8 @@ hide:
 
 # Nextflow per la Genomica
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Questo corso di formazione è destinato ai ricercatori nel campo della genomica e settori correlati che sono interessati a sviluppare o personalizzare pipeline di analisi dei dati.
 Si basa sulla formazione per principianti [Hello Nextflow](../../hello_nextflow/) e dimostra come utilizzare Nextflow nel contesto specifico del dominio della genomica.
 

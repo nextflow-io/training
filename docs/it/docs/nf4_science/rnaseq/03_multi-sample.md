@@ -1,5 +1,7 @@
 # Parte 3: Implementazione con campioni multipli paired-end
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 In questa parte finale del corso, porteremo il nostro semplice workflow al livello successivo trasformandolo in un potente strumento di automazione batch per gestire un numero arbitrario di campioni.
 E mentre ci siamo, lo modificheremo anche per accettare dati paired-end, che sono più comuni negli studi più recenti.
 

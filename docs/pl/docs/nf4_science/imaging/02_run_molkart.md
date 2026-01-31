@@ -1,5 +1,7 @@
 # Część 2: Uruchomienie nf-core/molkart
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 W Części 1 uruchomiliśmy prosty przepływ pracy Hello World, aby zrozumieć podstawy wykonywania Nextflow.
 Teraz uruchomimy rzeczywisty pipeline do bioobrażowania: **nf-core/molkart**.
 

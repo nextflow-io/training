@@ -1,5 +1,7 @@
 # भाग 2: असली pipelines चलाएं
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 इस कोर्स के भाग 1 (बुनियादी संचालन चलाएं) में, हमने एक उदाहरण workflow से शुरुआत की थी जिसमें code complexity को कम रखने के लिए केवल न्यूनतम features थीं।
 उदाहरण के लिए, `1-hello.nf` ने एक समय में एक single value प्रदान करने के लिए एक कमांड-लाइन parameter (`--input`) का उपयोग किया।
 

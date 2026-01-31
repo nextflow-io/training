@@ -1,5 +1,7 @@
 # GitHub Codespaces
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 GitHub Codespaces एक web-आधारित platform है जो हमें प्रशिक्षण के लिए पूर्व-configured वातावरण प्रदान करने की अनुमति देता है, जो cloud में virtual machines द्वारा समर्थित है।
 यह platform Github (जो Microsoft के स्वामित्व में है) द्वारा संचालित है, और Github account वाले किसी भी व्यक्ति के लिए मुफ्त में (उपयोग quotas के साथ) उपलब्ध है।
 

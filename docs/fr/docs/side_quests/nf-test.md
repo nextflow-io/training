@@ -1,5 +1,7 @@
 # Tests avec nf-test
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Pouvoir tester systématiquement que chaque partie de votre workflow fait ce qu'elle est censée faire est essentiel pour la reproductibilité et la maintenance à long terme, et peut être d'une grande aide durant le processus de développement.
 
 Prenons un moment pour parler de l'importance des tests. Si vous développez un workflow, l'une des premières choses que vous ferez sera de prendre des données de test dont vous savez qu'elles sont valides et devraient produire un résultat. Vous ajoutez le premier processus au pipeline et le connectez à vos entrées pour le faire fonctionner. Ensuite, pour vérifier que tout fonctionne, vous l'exécutez sur les données de test. En supposant que cela fonctionne, vous passez au processus suivant et exécutez à nouveau les données de test. Vous répétez ce processus jusqu'à obtenir un pipeline qui vous satisfait.

@@ -8,6 +8,8 @@ hide:
 
 # Umgebungsoptionen
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Wir möchten eine konsistente und gründlich getestete Umgebung bereitstellen, die es Lernenden ermöglicht, sich auf das Erlernen von Nextflow zu konzentrieren, ohne Zeit und Mühe für die Softwareverwaltung aufwenden zu müssen.
 Zu diesem Zweck haben wir eine containerisierte Umgebung entwickelt, die alle notwendige Software, Codedateien und Beispieldaten enthält, um alle unsere Kurse durchzuarbeiten.
 

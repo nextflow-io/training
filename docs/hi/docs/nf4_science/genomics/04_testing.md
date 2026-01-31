@@ -1,5 +1,7 @@
 # भाग 4: टेस्ट जोड़ना
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 इस कोर्स के पहले भाग में, आपने एक variant calling pipeline बनाई जो पूरी तरह से linear थी और प्रत्येक नमूने के डेटा को दूसरों से स्वतंत्र रूप से प्रोसेस करती थी।
 
 दूसरे भाग में, हमने आपको दिखाया कि GATK के साथ joint variant calling को लागू करने के लिए channels और channel operators का उपयोग कैसे करें।

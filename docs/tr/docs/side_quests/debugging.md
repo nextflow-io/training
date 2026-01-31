@@ -1,5 +1,7 @@
 # İş Akışlarında Hata Ayıklama
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Hata ayıklama, saatlerce süren hayal kırıklığından sizi kurtarabilecek ve sizi daha etkili bir Nextflow geliştiricisi haline getirebilecek kritik bir beceridir. Kariyeriniz boyunca, özellikle yeni başlarken, iş akışlarınızı oluştururken ve sürdürürken hatalarla karşılaşacaksınız. Sistematik hata ayıklama yaklaşımlarını öğrenmek, sorunları hızla belirlemenize ve çözmenize yardımcı olacaktır.
 
 ### Öğrenme hedefleri

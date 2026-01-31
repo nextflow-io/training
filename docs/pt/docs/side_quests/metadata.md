@@ -1,5 +1,7 @@
 # Metadados e mapas meta
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tradução assistida por IA - [saiba mais e sugira melhorias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Em qualquer análise científica, raramente trabalhamos apenas com os arquivos de dados brutos.
 Cada arquivo vem com suas próprias informações adicionais: o que é, de onde veio e o que o torna especial.
 Essas informações extras são o que chamamos de metadados.

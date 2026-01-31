@@ -8,6 +8,8 @@ hide:
 
 # Hello pipeline'ı
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Eğitim kurslarımızın çoğu, Nextflow kavramlarını ve mekanizmalarını göstermek için basit, alan bağımsız bir pipeline kullanır.
 Hello Nextflow kursu, bu pipeline'ı her tasarım ve uygulama kararını açıklayan adım adım bir şekilde nasıl geliştireceğinizi gösterir.
 Diğer eğitimler bu pipeline'ı veya parçalarını başlangıç noktası olarak kullanır.

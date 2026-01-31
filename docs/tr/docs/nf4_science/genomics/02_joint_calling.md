@@ -1,5 +1,7 @@
 # Bölüm 2: Bir kohort üzerinde birleşik çağrı yapma
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Bu kursun ilk bölümünde, tamamen doğrusal olan ve her örneğin verilerini diğerlerinden bağımsız olarak işleyen bir varyant çağırma pipeline'ı oluşturdunuz.
 Ancak gerçek bir genomik kullanım durumunda, tipik olarak birden fazla örneğin varyant çağrılarına birlikte bakmanız gerekecektir.
 

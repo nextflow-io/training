@@ -1,5 +1,7 @@
 # Part 2: nf-core/molkart 실행하기
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Part 1에서는 간단한 Hello World 워크플로를 실행하여 Nextflow 실행의 기본 사항을 이해했습니다.
 이제 실제 바이오이미징 파이프라인인 **nf-core/molkart**를 실행하겠습니다.
 

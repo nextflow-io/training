@@ -1,5 +1,7 @@
 # Entorno de Desarrollo
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Los Entornos de Desarrollo Integrados (IDEs) modernos pueden transformar dramáticamente su experiencia de desarrollo con Nextflow. Esta misión secundaria se enfoca específicamente en aprovechar VS Code y su extensión de Nextflow para escribir código más rápido, detectar errores temprano y navegar workflows complejos de manera eficiente.
 
 !!! note "Este no es un tutorial tradicional"

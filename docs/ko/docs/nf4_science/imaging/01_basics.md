@@ -1,5 +1,7 @@
 # 파트 1: 기본 작업 실행하기
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Nextflow for Bioimaging 교육 과정의 첫 번째 파트에서는 매우 기본적인 도메인 독립적 Hello World 예제를 사용하여 필수 작업을 시연하고 해당하는 Nextflow 코드 구성 요소를 설명하겠습니다.
 
 ## 1. 워크플로우 실행하기

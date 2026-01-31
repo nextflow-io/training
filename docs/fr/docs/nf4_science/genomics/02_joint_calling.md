@@ -1,5 +1,7 @@
 # Partie 2 : Appel conjoint de variants sur une cohorte
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Dans la première partie de ce cours, vous avez construit un pipeline d'appel de variants complètement linéaire qui traitait les données de chaque échantillon indépendamment des autres.
 Cependant, dans un cas d'usage génomique réel, vous aurez généralement besoin d'examiner les appels de variants de plusieurs échantillons ensemble.
 

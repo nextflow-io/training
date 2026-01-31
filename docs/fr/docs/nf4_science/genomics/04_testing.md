@@ -1,5 +1,7 @@
 # Partie 4 : Ajout de tests
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Dans la première partie de ce cours, vous avez construit un pipeline d'appel de variants complètement linéaire qui traitait les données de chaque échantillon indépendamment des autres.
 
 Dans la deuxième partie, nous vous avons montré comment utiliser les canaux et les opérateurs de canaux pour implémenter l'appel de variants conjoint avec GATK.

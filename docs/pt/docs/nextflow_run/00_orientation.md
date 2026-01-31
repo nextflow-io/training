@@ -1,5 +1,7 @@
 # Primeiros passos
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tradução assistida por IA - [saiba mais e sugira melhorias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 ## Inicie um ambiente de treinamento
 
 Para usar o ambiente pré-construído que fornecemos no GitHub Codespaces, clique no botão "Open in GitHub Codespaces" abaixo. Para outras opções, veja [Opções de ambiente](../envsetup/index.md).

@@ -1,5 +1,7 @@
 # GitHub Codespaces
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 GitHub Codespaces, buluttaki sanal makineler tarafından desteklenen, eğitim için önceden yapılandırılmış bir ortam sağlamamıza olanak tanıyan web tabanlı bir platformdur.
 Platform, Github (Microsoft'a ait) tarafından işletilmektedir ve Github hesabı olan herkes için ücretsiz olarak (kullanım kotalarıyla) erişilebilir.
 

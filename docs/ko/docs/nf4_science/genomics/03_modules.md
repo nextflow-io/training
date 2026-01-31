@@ -1,5 +1,7 @@
 # Part 3: 코드를 모듈로 이동하기
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 이 과정의 첫 번째 부분에서는 완전히 선형적이며 각 샘플의 데이터를 다른 샘플과 독립적으로 처리하는 변이 호출 파이프라인을 구축했습니다.
 
 두 번째 부분에서는 채널과 채널 연산자를 사용하여 GATK로 공동 변이 호출을 구현하는 방법을 보여드렸으며, Part 1의 파이프라인을 기반으로 했습니다.

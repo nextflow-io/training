@@ -1,5 +1,7 @@
 # Part 4: nf-core 모듈 만들기
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Hello nf-core 교육 과정의 네 번째 파트에서는 모듈을 이식 가능하고 유지보수 가능하게 만드는 주요 규칙을 적용하여 nf-core 모듈을 만드는 방법을 보여드립니다.
 
 nf-core 프로젝트는 Part 2에서 워크플로에 사용했던 것과 유사하게 적절하게 구조화된 모듈 템플릿을 자동으로 생성하는 명령(`nf-core modules create`)을 제공합니다.

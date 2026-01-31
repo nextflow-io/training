@@ -1,5 +1,7 @@
 # Part 4: 테스트 추가하기
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 이 교육 과정의 첫 번째 파트에서는 완전히 선형적이며 각 샘플의 데이터를 독립적으로 처리하는 변이 호출 파이프라인을 구축했습니다.
 
 두 번째 파트에서는 GATK를 사용한 공동 변이 호출을 구현하기 위해 채널과 채널 연산자를 사용하는 방법을 보여드렸습니다.

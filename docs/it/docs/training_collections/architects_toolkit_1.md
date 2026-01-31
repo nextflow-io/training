@@ -6,6 +6,8 @@ hide:
 
 # Il Toolkit dell'Architetto I
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Le nostre Raccolte di Formazione forniscono percorsi di apprendimento curati attraverso i nostri materiali di formazione avanzati (chiamati [Side Quests](../../side_quests)). Questa raccolta copre quattro argomenti essenziali che vengono frequentemente utilizzati insieme per costruire workflow robusti e scalabili.
 
 ## Obiettivi di apprendimento

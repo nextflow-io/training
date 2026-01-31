@@ -6,6 +6,8 @@ hide:
 
 # 과학을 위한 Nextflow
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 이 과정들은 [Hello Nextflow](../hello_nextflow/) 초급 과정에서 제시된 개념과 구성 요소를 특정 과학적 사용 사례에 적용하는 방법을 보여줍니다. 각 과정은 학습자가 점진적으로 기술을 쌓을 수 있도록 설계된 일련의 교육 모듈로 구성되어 있습니다.
 
 !!! exercise "유전체학을 위한 Nextflow"

@@ -1,5 +1,7 @@
 # भाग 3: Run configuration
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 यह section explore करेगा कि pipeline के व्यवहार को customize करने, इसे different environments में adapt करने, और resource usage को optimize करने के लिए Nextflow pipeline की configuration कैसे manage करें _workflow code की एक भी पंक्ति बदले बिना_।
 
 ऐसा करने के कई तरीके हैं, जिन्हें combination में use किया जा सकता है और [यहां](https://www.nextflow.io/docs/latest/config.html) described precedence के order के अनुसार interpret किया जाता है।

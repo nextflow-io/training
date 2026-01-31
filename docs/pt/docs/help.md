@@ -8,6 +8,8 @@ hide:
 
 # Obtendo ajuda
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tradução assistida por IA - [saiba mais e sugira melhorias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Se você está tendo dificuldades para começar, ficou travado no meio do caminho ou tem perguntas adicionais, não hesite em entrar em contato!
 Nossa equipe da comunidade está aqui para ajudar, e a comunidade Nextflow em geral é muito ativa, inclusiva e sempre disposta a ajudar.
 

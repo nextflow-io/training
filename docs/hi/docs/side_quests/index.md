@@ -6,6 +6,8 @@ hide:
 
 # साइड क्वेस्ट
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 यह स्वतंत्र प्रशिक्षण मिनी-कोर्स का संग्रह है जो विशिष्ट विषयों में गहराई से जाते हैं। आप इन्हें किसी भी क्रम में पूरा कर सकते हैं।
 
 आइए शुरू करें! प्रशिक्षण वातावरण लॉन्च करने के लिए नीचे "Open in GitHub Codespaces" बटन पर क्लिक करें (अधिमानतः एक अलग टैब में), फिर इसके लोड होने के दौरान पढ़ें।

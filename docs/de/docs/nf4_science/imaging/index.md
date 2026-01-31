@@ -7,6 +7,8 @@ hide:
 
 # Nextflow run für Bildgebung
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Dieser Trainingskurs richtet sich an Forschende im Bereich Bildgebung und räumliche Biologie, die daran interessiert sind, Datenanalyse-Pipelines auszuführen und anzupassen.
 Er vermittelt grundlegende Nextflow-Konzepte für das Ausführen, Organisieren und Konfigurieren von Workflows anhand von [nf-core/molkart](https://nf-co.re/molkart), einer Pipeline zur Verarbeitung von Molecular Cartography Spatial-Transkriptomik-Daten.
 Die hier erlernten Fähigkeiten sind auf jede Nextflow- oder nf-core-Pipeline übertragbar.

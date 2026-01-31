@@ -1,5 +1,7 @@
 # Parte 4: Criar um módulo nf-core
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tradução assistida por IA - [saiba mais e sugira melhorias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Nesta quarta parte do curso de treinamento Hello nf-core, mostramos como criar um módulo nf-core aplicando as convenções principais que tornam os módulos portáteis e de fácil manutenção.
 
 O projeto nf-core fornece um comando (`nf-core modules create`) que gera templates de módulos estruturados corretamente de forma automática, semelhante ao que usamos para o fluxo de trabalho na Parte 2.

@@ -7,6 +7,8 @@ hide:
 
 # 아키텍트 툴킷 I
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 트레이닝 컬렉션은 고급 교육 자료([Side Quests](../../side_quests)라고 함)를 통한 선별된 학습 경로를 제공합니다. 이 컬렉션은 견고하고 확장 가능한 workflow를 구축하기 위해 자주 함께 사용되는 네 가지 필수 주제를 다룹니다.
 
 ## 학습 목표

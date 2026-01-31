@@ -8,6 +8,8 @@ hide:
 
 # Opzioni per l'ambiente
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Il nostro obiettivo è fornire un ambiente coerente e accuratamente testato che permetta ai partecipanti di concentrarsi sull'apprendimento di Nextflow senza dover dedicare tempo e sforzi alla gestione del software.
 A tal fine, abbiamo sviluppato un ambiente containerizzato che contiene tutto il software necessario, i file di codice e i dati di esempio per lavorare attraverso tutti i nostri corsi.
 

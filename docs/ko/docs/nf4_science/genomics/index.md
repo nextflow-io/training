@@ -6,6 +6,8 @@ hide:
 
 # 유전체학을 위한 Nextflow
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 이 교육 과정은 데이터 분석 파이프라인을 개발하거나 맞춤화하는 데 관심이 있는 유전체학 및 관련 분야의 연구자를 위한 것입니다.
 이 과정은 [Hello Nextflow](../../hello_nextflow/) 초급 교육을 기반으로 하며, 유전체학 도메인의 특정 맥락에서 Nextflow를 사용하는 방법을 보여줍니다.
 

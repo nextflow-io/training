@@ -6,6 +6,8 @@ hide:
 
 # La Boîte à Outils de l'Architecte I
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Nos Collections de Formation proposent des parcours d'apprentissage organisés à travers nos supports de formation avancés (appelés [Side Quests](../../side_quests)). Cette collection couvre quatre sujets essentiels qui sont fréquemment utilisés ensemble pour construire des workflows robustes et évolutifs.
 
 ## Objectifs pédagogiques

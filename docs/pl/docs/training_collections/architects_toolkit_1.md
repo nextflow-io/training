@@ -6,6 +6,8 @@ hide:
 
 # Zestaw Narzędzi Architekta I
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Nasze Kolekcje Szkoleniowe dostarczają wyselekcjonowane ścieżki uczenia się poprzez nasze zaawansowane materiały szkoleniowe (zwane [Side Quests](../../side_quests)). Ta kolekcja obejmuje cztery kluczowe tematy, które są często używane razem do budowania solidnych i skalowalnych przepływów pracy.
 
 ## Cele szkolenia

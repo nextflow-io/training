@@ -20,6 +20,8 @@ additional_information:
 
 # Nextflow Run
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 **Nextflow Run reproducible और scalable डेटा विश्लेषण workflows चलाने का एक हैंड्स-ऑन परिचय है।**
 
 व्यावहारिक उदाहरणों और निर्देशित अभ्यासों के माध्यम से, तुम Nextflow का उपयोग करने के मूल सिद्धांतों को सीखोगे, जिसमें pipelines कैसे execute करें, फ़ाइलों और software dependencies को कैसे मैनेज करें, execution को सहजता से parallelize कैसे करें, और विभिन्न कंप्यूटिंग वातावरणों में workflows कैसे चलाएं।

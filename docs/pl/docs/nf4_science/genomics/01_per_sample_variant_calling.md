@@ -1,5 +1,7 @@
 # Część 1: Wykrywanie wariantów dla pojedynczych próbek
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 W pierwszej części tego kursu pokażemy, jak zbudować prosty pipeline do wykrywania wariantów, który aplikuje narzędzie GATK do wykrywania wariantów w indywidualnych próbkach sekwencjonowania.
 
 ### Przegląd metody

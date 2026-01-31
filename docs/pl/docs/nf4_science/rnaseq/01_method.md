@@ -1,5 +1,7 @@
 # Część 1: Przegląd metody i manualne testowanie
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Istnieje wiele prawidłowych metod przetwarzania i analizy danych bulk RNAseq.
 W tym szkoleniu stosujemy metodę opisaną [tutaj](https://www.bioinformatics.babraham.ac.uk/training/RNASeq_Course/Analysing%20RNA-Seq%20data%20Exercise.pdf) przez dr Simon Andrews i dr Laurę Biggins z [Babraham Institute](https://www.babraham.ac.uk/).
 

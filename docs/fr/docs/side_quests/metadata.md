@@ -1,5 +1,7 @@
 # Métadonnées et meta maps
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Dans toute analyse scientifique, nous travaillons rarement uniquement avec les fichiers de données brutes.
 Chaque fichier s'accompagne de ses propres informations supplémentaires : ce qu'il est, d'où il vient et ce qui le rend spécial.
 Ces informations supplémentaires sont ce que nous appelons les métadonnées.

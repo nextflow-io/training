@@ -1,5 +1,7 @@
 # Część 3: Organizowanie danych wejściowych
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 W Części 2 uruchomiliśmy molkart z wieloma parametrami w wierszu poleceń.
 Teraz poznamy dwa lepsze podejścia do zarządzania wejściami: **pliki parametrów** oraz **arkusze próbek**.
 

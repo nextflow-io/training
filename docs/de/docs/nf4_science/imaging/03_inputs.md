@@ -1,5 +1,7 @@
 # Teil 3: Eingaben organisieren
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 In Teil 2 haben wir molkart mit mehreren Parametern über die Kommandozeile ausgeführt.
 Jetzt lernen wir zwei bessere Ansätze zum Verwalten von Eingaben kennen: **Parameterdateien** und **Samplesheets**.
 

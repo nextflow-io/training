@@ -1,5 +1,7 @@
 # Parte 1: Llamado de variantes por muestra
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 En la primera parte de este curso, le mostramos cómo construir un pipeline simple de llamado de variantes que aplica el llamado de variantes de GATK a muestras de secuenciación individuales.
 
 ### Descripción general del método

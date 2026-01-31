@@ -1,5 +1,7 @@
 # Parte 3: Configuración de ejecución
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Esta sección explorará cómo gestionar la configuración de un pipeline de Nextflow para personalizar su comportamiento, adaptarlo a diferentes entornos y optimizar el uso de recursos _sin alterar una sola línea del código del workflow en sí_.
 
 Hay múltiples formas de hacer esto, que pueden usarse en combinación y se interpretan según el orden de precedencia descrito [aquí](https://www.nextflow.io/docs/latest/config.html).

@@ -1,5 +1,7 @@
 # Orientación
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 El entorno de entrenamiento contiene todo el software, código y datos necesarios para trabajar en este curso de entrenamiento, por lo que no necesita instalar nada usted mismo.
 Sin embargo, sí necesita una cuenta (gratuita) para iniciar sesión, y debe tomarse unos minutos para familiarizarse con la interfaz.
 

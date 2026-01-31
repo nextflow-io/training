@@ -1,5 +1,7 @@
 # Bölüm 2: Gerçek pipeline'ları çalıştırma
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Bu kursun 1. Bölümünde (Temel İşlemleri Çalıştırma), kod karmaşıklığını düşük tutmak için yalnızca minimal özelliklere sahip örnek bir workflow ile başladık.
 Örneğin, `1-hello.nf` bir seferde tek bir değer sağlamak için komut satırı parametresi (`--input`) kullandı.
 

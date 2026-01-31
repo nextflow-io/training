@@ -1,5 +1,7 @@
 # Ankieta
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Dziękujemy za ukończenie szkolenia Nextflow dla bioimagingu!
 
 Będziemy bardzo wdzięczni za opinię, która pomoże nam ulepszyć te materiały szkoleniowe.

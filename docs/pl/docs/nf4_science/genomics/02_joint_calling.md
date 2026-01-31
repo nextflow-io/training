@@ -1,5 +1,7 @@
 # Część 2: Wspólne wywołanie wariantów dla kohorty
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 W pierwszej części tego kursu zbudowałeś pipeline do wywoływania wariantów, który był całkowicie liniowy i przetwarzał dane każdej próbki niezależnie od innych.
 Jednak w rzeczywistym przypadku użycia genomiki zazwyczaj będziesz musiał spojrzeć na wywołania wariantów wielu próbek razem.
 

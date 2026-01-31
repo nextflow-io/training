@@ -6,6 +6,8 @@ hide:
 
 # प्रशिक्षण संग्रह
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 इस अनुभाग में [Side Quests](../side_quests/index.md) नामक प्रशिक्षण मॉड्यूल के क्यूरेटेड संग्रह हैं जो किसी विशेष विषय या उपयोग के मामले के आसपास एक व्यापक सीखने का अनुभव प्रदान करने का लक्ष्य रखते हैं।
 
 ## पूर्वापेक्षाएँ

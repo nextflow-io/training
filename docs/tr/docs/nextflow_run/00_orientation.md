@@ -1,5 +1,7 @@
 # Başlangıç
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 ## Eğitim ortamını başlatın
 
 GitHub Codespaces'te sağladığımız önceden oluşturulmuş ortamı kullanmak için aşağıdaki "Open in GitHub Codespaces" butonuna tıklayın. Diğer seçenekler için [Ortam seçenekleri](../envsetup/index.md) bölümüne bakın.

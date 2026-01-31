@@ -23,6 +23,8 @@ additional_information:
 
 # Hello nf-core
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tradução assistida por IA - [saiba mais e sugira melhorias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 **Hello nf-core é uma introdução prática ao uso de recursos e melhores práticas do nf-core.**
 
 ![nf-core logo](./img/nf-core-logo.png)

@@ -1,5 +1,7 @@
 # Teil 1: Variantenerkennung pro Probe
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Im ersten Teil dieses Kurses zeigen wir dir, wie du eine einfache Varianten-Pipeline erstellst, die GATK-Variantenerkennung auf einzelne Sequenzierungsproben anwendet.
 
 ### Methodenübersicht

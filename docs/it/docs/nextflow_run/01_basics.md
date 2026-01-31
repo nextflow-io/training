@@ -1,5 +1,7 @@
 # Parte 1: Operazioni base
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 In questa prima parte del corso di formazione Nextflow Run, ci introduciamo all'argomento con un esempio Hello World molto basilare e indipendente dal dominio, che useremo per dimostrare le operazioni essenziali e indicare i corrispondenti componenti del codice Nextflow.
 
 ??? info "Cos'è un esempio Hello World?"

@@ -24,6 +24,8 @@ additional_information:
 
 # Hello nf-core
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 **Hello nf-core, nf-core संसाधनों और सर्वोत्तम प्रथाओं का उपयोग करने के लिए एक व्यावहारिक परिचय है।**
 
 ![nf-core logo](./img/nf-core-logo.png)

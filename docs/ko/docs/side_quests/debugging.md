@@ -1,5 +1,7 @@
 # 워크플로우 디버깅
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 디버깅은 수 시간의 좌절을 줄여주고 더 효과적인 Nextflow 개발자가 되도록 도와주는 핵심 기술입니다. 경력 전반에 걸쳐, 특히 시작 단계에서는 워크플로우를 구축하고 유지보수하면서 버그를 마주하게 될 것입니다. 체계적인 디버깅 접근법을 배우면 문제를 빠르게 식별하고 해결하는 데 도움이 됩니다.
 
 ### 학습 목표

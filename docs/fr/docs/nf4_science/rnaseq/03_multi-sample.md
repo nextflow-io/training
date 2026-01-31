@@ -1,5 +1,7 @@
 # Partie 3 : Implémentation multi-échantillons en lecture appariée
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Dans cette dernière partie du cours, nous allons faire passer notre simple workflow au niveau supérieur en le transformant en un puissant outil d'automatisation par lots capable de traiter un nombre arbitraire d'échantillons.
 Et pendant que nous y sommes, nous allons également le modifier pour qu'il accepte des données en lecture appariée, ce qui est plus courant dans les études récentes.
 

@@ -6,6 +6,8 @@ hide:
 
 # Nextflow para Genômica
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tradução assistida por IA - [saiba mais e sugira melhorias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Este curso de treinamento é destinado a pesquisadores em genômica e áreas relacionadas que estão interessados em desenvolver ou personalizar pipelines de análise de dados.
 Ele se baseia no treinamento para iniciantes [Hello Nextflow](../../hello_nextflow/) e demonstra como usar o Nextflow no contexto específico do domínio de genômica.
 

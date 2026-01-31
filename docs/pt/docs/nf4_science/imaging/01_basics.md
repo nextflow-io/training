@@ -1,5 +1,7 @@
 # Parte 1: Executar operações básicas
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tradução assistida por IA - [saiba mais e sugira melhorias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Nesta primeira parte do curso de treinamento Nextflow para Bioimagem, usaremos um exemplo básico Hello World agnóstico de domínio para demonstrar operações essenciais e apontar os componentes de código Nextflow correspondentes.
 
 ## 1. Executar o fluxo de trabalho

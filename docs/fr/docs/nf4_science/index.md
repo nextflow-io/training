@@ -6,6 +6,8 @@ hide:
 
 # Nextflow pour la Science
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Il s'agit de cours qui démontrent comment appliquer les concepts et composants présentés dans le cours débutant [Hello Nextflow](../hello_nextflow/) à des cas d'usage scientifiques spécifiques. Chaque cours consiste en une série de modules de formation conçus pour aider les apprenants à développer progressivement leurs compétences.
 
 !!! exercise "Nextflow pour la Génomique"

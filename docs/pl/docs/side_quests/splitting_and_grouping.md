@@ -1,5 +1,7 @@
 # Dzielenie i Grupowanie
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Nextflow zapewnia potężne narzędzia do elastycznej pracy z danymi. Kluczową możliwością jest dzielenie danych na różne strumienie, a następnie grupowanie powiązanych elementów z powrotem. Jest to szczególnie cenne w przepływach pracy bioinformatycznych, gdzie trzeba przetwarzać różne typy próbek oddzielnie, a następnie łączyć wyniki do analizy.
 
 Pomyśl o tym jak o sortowaniu poczty: oddzielasz listy według miejsca przeznaczenia, przetwarzasz każdy stos inaczej, a następnie łączysz ponownie elementy idące do tej samej osoby. Nextflow używa specjalnych operatorów do wykonania tego z danymi naukowymi. To podejście jest również powszechnie znane jako wzorzec **scatter/gather** w obliczeniach rozproszonych i przepływach pracy bioinformatycznych.

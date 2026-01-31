@@ -1,5 +1,7 @@
 # 설문조사
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Nextflow for Bioimaging 교육을 완료해 주셔서 감사합니다!
 
 교육 자료를 개선하는 데 도움이 되도록 여러분의 피드백을 주시면 대단히 감사하겠습니다.

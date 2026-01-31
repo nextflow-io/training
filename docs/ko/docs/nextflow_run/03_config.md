@@ -1,5 +1,7 @@
 # Part 3: 실행 구성
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 이 섹션에서는 _workflow 코드 자체를 한 줄도 변경하지 않고_ pipeline의 동작을 사용자 정의하고, 다양한 환경에 적응시키고, 리소스 사용을 최적화하기 위해 Nextflow pipeline의 구성을 관리하는 방법을 살펴봅니다.
 
 이를 수행하는 여러 가지 방법이 있으며, 조합하여 사용할 수 있고 [여기](https://www.nextflow.io/docs/latest/config.html)에 설명된 우선순위에 따라 해석됩니다.

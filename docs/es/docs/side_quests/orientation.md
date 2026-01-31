@@ -1,5 +1,7 @@
 # Orientación
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 El entorno de GitHub Codespaces contiene todo el software, código y datos necesarios para completar este curso de entrenamiento, por lo que no necesita instalar nada usted mismo.
 Sin embargo, necesita una cuenta (gratuita) para iniciar sesión, y debería tomarse unos minutos para familiarizarse con la interfaz.
 

@@ -1,5 +1,7 @@
 # Parte 1: Ejecutar un pipeline de demostración
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 En esta primera parte del curso de entrenamiento Hello nf-core, le mostramos cómo encontrar y probar un pipeline de nf-core, entender cómo está organizado el código y reconocer en qué se diferencia del código Nextflow básico como se muestra en [Hello Nextflow](../hello_nextflow/index.md).
 
 Vamos a utilizar un pipeline llamado nf-core/demo que es mantenido por el proyecto nf-core como parte de su inventario de pipelines para demostrar la estructura del código y las operaciones de las herramientas.

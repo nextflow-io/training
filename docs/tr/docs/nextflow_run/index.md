@@ -20,6 +20,8 @@ additional_information:
 
 # Nextflow Run
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 **Nextflow Run, tekrar üretilebilir ve ölçeklenebilir veri analizi workflow'larını çalıştırmaya yönelik uygulamalı bir giriştir.**
 
 Pratik örnekler ve rehberli alıştırmalar üzerinde çalışarak, pipeline'ları çalıştırma, dosyaları ve yazılım bağımlılıklarını yönetme, çalıştırmayı zahmetsizce paralelleştirme ve farklı hesaplama ortamlarında workflow'ları çalıştırma dahil olmak üzere Nextflow kullanmanın temellerini öğreneceksiniz.

@@ -1,5 +1,7 @@
 # 오리엔테이션
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 이 오리엔테이션은 "Open in GitHub Codespaces" 버튼을 클릭하여 이미 교육 환경을 열었다고 가정합니다.
 아직 열지 않았다면, 지금 여십시오. 가능하면 이 지침을 참조할 수 있도록 두 번째 브라우저 창이나 탭에서 여는 것이 좋습니다.
 

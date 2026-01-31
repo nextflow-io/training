@@ -6,6 +6,8 @@ hide:
 
 # The Architect's Toolkit I
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Unsere Training Collections bieten kuratierte Lernpfade durch unsere fortgeschrittenen Trainingsmaterialien (genannt [Side Quests](../../side_quests)). Diese Sammlung behandelt vier wesentliche Themen, die häufig zusammen verwendet werden, um robuste und skalierbare Workflows zu erstellen.
 
 ## Lernziele

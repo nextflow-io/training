@@ -1,5 +1,7 @@
 # मैन्युअल इंस्टॉलेशन
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 प्रशिक्षण चलाने के लिए आवश्यक सब कुछ अपने स्थानीय वातावरण में मैन्युअल रूप से install करना संभव है।
 
 यहाँ हमने standard POSIX-compatible systems (व्यक्तिगत machine जैसे laptop मानते हुए) पर यह कैसे करना है इसका documentation किया है।

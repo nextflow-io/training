@@ -1,5 +1,7 @@
 # Patrones Esenciales de Scripting en Nextflow
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Nextflow es un lenguaje de programación que se ejecuta en la Máquina Virtual de Java. Aunque Nextflow está construido sobre [Groovy](http://groovy-lang.org/) y comparte gran parte de su sintaxis, Nextflow es más que solo "Groovy con extensiones" -- es un lenguaje independiente con una [sintaxis](https://nextflow.io/docs/latest/reference/syntax.html) y [biblioteca estándar](https://nextflow.io/docs/latest/reference/stdlib.html) completamente especificadas.
 
 Se puede escribir mucho código en Nextflow sin aventurarse más allá de la sintaxis básica para variables, mapas y listas. La mayoría de los tutoriales de Nextflow se centran en la orquestación del flujo de trabajo (canales, procesos y flujo de datos), y se puede llegar sorprendentemente lejos con solo eso.

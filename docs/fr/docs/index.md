@@ -8,6 +8,12 @@ hide:
 
 # Formation Nextflow
 
+!!! note "Traduction assistée par IA"
+
+    Cette traduction a été réalisée à l'aide de l'intelligence artificielle et révisée par des traducteurs humains.
+    Vos commentaires et suggestions d'amélioration sont les bienvenus.
+    Consultez notre [guide de traduction](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md) pour plus d'informations.
+
 <div class="grid cards" markdown>
 
 -   :material-book-open-variant:{ .lg .middle } __Cours en libre-service__

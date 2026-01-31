@@ -1,5 +1,7 @@
 # Workflows von Workflows
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Wenn du eine Pipeline entwickelst, stellst du oft fest, dass du ähnliche Abfolgen von Prozessen für verschiedene Datentypen oder Analyseschritte erstellst. Du könntest dazu neigen, diese Prozessabfolgen zu kopieren und einzufügen, was zu dupliziertem Code führt, der schwer zu warten ist; oder du erstellst einen einzigen riesigen Workflow, der schwer zu verstehen und zu modifizieren ist.
 
 Eine der mächtigsten Funktionen von Nextflow ist die Fähigkeit, komplexe Pipelines aus kleineren, wiederverwendbaren Workflow-Modulen zusammenzusetzen. Dieser modulare Ansatz macht Pipelines einfacher zu entwickeln, zu testen und zu warten.

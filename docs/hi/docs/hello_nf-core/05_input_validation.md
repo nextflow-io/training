@@ -1,5 +1,7 @@
 # भाग 5: इनपुट सत्यापन
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Hello nf-core प्रशिक्षण कोर्स के इस पांचवें भाग में, हम आपको दिखाते हैं कि pipeline इनपुट और पैरामीटर को सत्यापित करने के लिए nf-schema plugin का उपयोग कैसे करें।
 
 ??? info "इस खंड से कैसे शुरू करें"

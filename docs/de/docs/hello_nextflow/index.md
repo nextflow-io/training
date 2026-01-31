@@ -23,6 +23,8 @@ additional_information:
 
 # Hello Nextflow
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 **Hello Nextflow ist eine praxisorientierte Einführung in den Aufbau reproduzierbarer und skalierbarer Datenanalyse-Workflows.**
 
 Durch praktische Beispiele und geführte Übungen lernst du die Grundlagen der Pipeline-Entwicklung mit Nextflow, einschließlich der Definition von Prozessen, deren Verbindung zu Pipelines, der Verwaltung von Dateien und Software-Abhängigkeiten, der mühelosen Parallelisierung der Ausführung und des Ausführens von Workflows in verschiedenen Rechenumgebungen.

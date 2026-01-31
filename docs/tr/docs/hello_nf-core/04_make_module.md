@@ -1,5 +1,7 @@
 # Bölüm 4: Bir nf-core modülü oluşturma
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Hello nf-core eğitim kursunun bu dördüncü bölümünde, modülleri taşınabilir ve sürdürülebilir kılan temel kuralları uygulayarak bir nf-core modülünün nasıl oluşturulacağını göstereceğiz.
 
 nf-core projesi, Bölüm 2'de iş akışı için kullandığımıza benzer şekilde, düzgün yapılandırılmış modül şablonlarını otomatik olarak oluşturan bir komut (`nf-core modules create`) sağlar.

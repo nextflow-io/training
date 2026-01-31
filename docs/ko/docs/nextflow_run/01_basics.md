@@ -1,5 +1,7 @@
 # Part 1: 기본 작업 실행
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Nextflow Run 교육 과정의 첫 번째 파트에서는 매우 기본적인 도메인에 구애받지 않는 Hello World 예제로 주제를 시작하며, 이를 사용하여 필수 작업을 시연하고 해당 Nextflow 코드 구성 요소를 설명합니다.
 
 ??? info "Hello World 예제란 무엇인가요?"

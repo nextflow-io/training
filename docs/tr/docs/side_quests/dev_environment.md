@@ -1,5 +1,7 @@
 # Geliştirme Ortamı
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Modern Entegre Geliştirme Ortamları (IDE'ler) Nextflow geliştirme deneyiminizi önemli ölçüde dönüştürebilir. Bu yan görev, özellikle VS Code ve Nextflow eklentisini kullanarak daha hızlı kod yazma, hataları erken yakalama ve karmaşık iş akışlarında verimli gezinme konularına odaklanır.
 
 !!! note "Bu geleneksel bir eğitim değildir"

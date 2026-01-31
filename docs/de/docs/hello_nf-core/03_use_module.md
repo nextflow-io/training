@@ -1,5 +1,7 @@
 # Teil 3: Ein nf-core-Modul verwenden
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 In diesem dritten Teil des Hello nf-core Trainingskurses zeigen wir dir, wie du ein existierendes nf-core-Modul findest, installierst und in deiner Pipeline verwendest.
 
 Einer der großen Vorteile der Arbeit mit nf-core ist die Möglichkeit, vorgefertigte, getestete Module aus dem [nf-core/modules](https://github.com/nf-core/modules) Repository zu nutzen.

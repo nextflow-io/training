@@ -6,6 +6,8 @@ hide:
 
 # Nextflow für RNAseq
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Dieser Trainingskurs richtet sich an Forscher im Bereich Transkriptomik und verwandter Fachgebiete, die daran interessiert sind, Datenanalyse-Pipelines zu entwickeln oder anzupassen.
 Er baut auf dem [Hello Nextflow](../../hello_nextflow/) Einsteiger-Training auf und demonstriert, wie man Nextflow im spezifischen Kontext der Bulk-RNAseq-Analyse einsetzt.
 

@@ -1,5 +1,7 @@
 # Débogage des Workflows
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Le débogage est une compétence essentielle qui peut vous faire gagner des heures de frustration et vous aider à devenir un développeur Nextflow plus efficace. Tout au long de votre carrière, en particulier lorsque vous débutez, vous rencontrerez des bugs lors de la construction et de la maintenance de vos workflows. L'apprentissage d'approches de débogage systématiques vous aidera à identifier et à résoudre les problèmes rapidement.
 
 ### Objectifs d'apprentissage

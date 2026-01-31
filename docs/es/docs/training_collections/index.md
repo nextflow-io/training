@@ -7,6 +7,8 @@ hide:
 
 # Colecciones de Entrenamiento
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Esta sección contiene colecciones curadas de módulos de entrenamiento llamados [Side Quests](../side_quests/index.md) que tienen como objetivo proporcionar una experiencia de aprendizaje integral alrededor de un tema o caso de uso particular.
 
 ## Requisitos Previos

@@ -1,5 +1,7 @@
 # Orientierung
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Die GitHub Codespaces-Umgebung enthält alle Software, Code und Daten, die für dieses Training notwendig sind, sodass du nichts selbst installieren musst.
 Du benötigst jedoch einen (kostenlosen) Account zum Einloggen und solltest dir ein paar Minuten Zeit nehmen, um dich mit der Benutzeroberfläche vertraut zu machen.
 

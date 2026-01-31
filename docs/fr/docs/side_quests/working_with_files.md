@@ -1,5 +1,7 @@
 # Traitement des fichiers en entrée
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Les flux de travail d'analyse scientifique impliquent souvent le traitement d'un grand nombre de fichiers.
 Nextflow fournit des outils puissants pour gérer les fichiers efficacement, vous aidant à organiser et traiter vos données avec un minimum de code.
 

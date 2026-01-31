@@ -1,5 +1,7 @@
 # Ankieta zwrotna
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Zanim przejdziesz dalej, prosimy o wypełnienie krótkiej 5-pytaniowej ankiety, aby ocenić szkolenie, podzielić się swoimi uwagami na temat swoich doświadczeń i dać nam znać, co jeszcze możemy zrobić, aby pomóc Ci w Twojej podróży z Nextflow.
 
 Wypełnienie ankiety zajmie Ci mniej niż minutę. Dziękujemy za pomoc w ulepszaniu naszych materiałów szkoleniowych dla wszystkich!

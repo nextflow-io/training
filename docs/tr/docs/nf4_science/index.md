@@ -7,6 +7,8 @@ hide:
 
 # Bilim için Nextflow
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Bu kurslar, [Merhaba Nextflow](../hello_nextflow/) başlangıç kursunda sunulan kavramların ve bileşenlerin belirli bilimsel kullanım durumlarına nasıl uygulanacağını gösterir. Her kurs, öğrencilerin becerilerini aşamalı olarak geliştirmelerine yardımcı olmak için tasarlanmış bir dizi eğitim modülünden oluşur.
 
 !!! exercise "Genomik için Nextflow"

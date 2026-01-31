@@ -1,5 +1,7 @@
 # Teil 2: Implementierung für eine einzelne Probe
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 In diesem Teil des Kurses werden wir den einfachstmöglichen Workflow schreiben, der alle Befehle aus Teil 1 zusammenfasst, um ihre Ausführung zu automatisieren. Dabei werden wir zunächst nur eine Probe gleichzeitig verarbeiten.
 
 Wir werden dies in drei Schritten tun:

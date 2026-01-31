@@ -1,5 +1,7 @@
 # Metadata ve meta map'ler
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Herhangi bir bilimsel analizde, sadece ham veri dosyalarıyla çalışmayız.
 Her dosya kendi ek bilgileriyle birlikte gelir: ne olduğu, nereden geldiği ve onu özel kılan nedir.
 Bu ek bilgilere metadata (üst veri) diyoruz.

@@ -1,5 +1,7 @@
 # Bölüm 3: Girdileri düzenleme
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Bölüm 2'de molkart'ı komut satırında birden fazla parametre ile çalıştırdık.
 Şimdi girdileri yönetmek için iki daha iyi yaklaşım öğreneceğiz: **parametre dosyaları** ve **örnek tabloları**.
 

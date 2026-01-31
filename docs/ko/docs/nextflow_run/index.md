@@ -20,6 +20,8 @@ additional_information:
 
 # Nextflow Run
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 **Nextflow Run은 재현 가능하고 확장 가능한 데이터 분석 workflow 실행에 대한 실습 입문 과정입니다.**
 
 실용적인 예제와 안내된 연습을 통해 pipeline 실행, 파일 및 소프트웨어 종속성 관리, 손쉬운 병렬 실행, 다양한 컴퓨팅 환경에서의 workflow 실행 방법을 포함한 Nextflow 사용의 기본 사항을 배웁니다.

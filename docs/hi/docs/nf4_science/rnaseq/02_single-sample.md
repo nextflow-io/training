@@ -1,5 +1,7 @@
 # भाग 2: एकल-नमूना कार्यान्वयन
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 कोर्स के इस भाग में, हम सबसे सरल संभव workflow लिखने जा रहे हैं जो भाग 1 में चलाए गए सभी commands को wrap करता है ताकि उन्हें चलाना automate हो सके, और हम एक बार में सिर्फ एक नमूना प्रोसेस करने का लक्ष्य रखेंगे।
 
 हम यह तीन चरणों में करेंगे:

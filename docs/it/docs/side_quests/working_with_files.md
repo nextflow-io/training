@@ -1,5 +1,7 @@
 # Elaborazione di file in input
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 I workflow di analisi scientifica spesso comportano l'elaborazione di un gran numero di file.
 Nextflow fornisce strumenti potenti per gestire i file in modo efficiente, aiutandola ad organizzare ed elaborare i suoi dati con codice minimo.
 

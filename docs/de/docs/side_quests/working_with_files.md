@@ -1,5 +1,7 @@
 # Verarbeitung von Datei-Eingaben
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Wissenschaftliche Analyse-Workflows beinhalten oft die Verarbeitung großer Mengen von Dateien.
 Nextflow bietet leistungsstarke Werkzeuge, um Dateien effizient zu verarbeiten und hilft dir, deine Daten mit minimalem Code zu organisieren und zu verarbeiten.
 

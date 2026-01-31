@@ -8,6 +8,8 @@ hide:
 
 # 환경 옵션
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 학습자가 소프트웨어 관리에 시간과 노력을 들이지 않고 Nextflow 학습에 집중할 수 있도록 일관되고 철저히 테스트된 환경을 제공하는 것을 목표로 합니다.
 이를 위해 모든 과정을 진행하는 데 필요한 모든 소프트웨어, 코드 파일 및 예제 데이터가 포함된 컨테이너화된 환경을 개발했습니다.
 

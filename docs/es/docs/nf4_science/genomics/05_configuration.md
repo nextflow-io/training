@@ -1,5 +1,7 @@
 # Parte 3: Perfilado y optimización de recursos
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 ESTO ES UN MARCADOR DE POSICIÓN
 
 !!!note "Nota"
