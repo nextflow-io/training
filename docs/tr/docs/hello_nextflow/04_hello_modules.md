@@ -1,4 +1,4 @@
-# Bölüm 4: Merhaba Modüller
+# Bölüm 4: Hello Modules
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 

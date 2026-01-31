@@ -172,7 +172,6 @@ Note: Spanish technical writing commonly keeps certain English terms:
 
 - **workflow** - commonly kept in English (not "flujo de trabajo")
 - **pipeline** - commonly kept in English
-- Course/module names: "Hello Nextflow", "Hello nf-core" - keep as proper nouns
 
 ### Terms to Translate
 

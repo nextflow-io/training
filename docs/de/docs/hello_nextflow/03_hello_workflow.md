@@ -1,4 +1,4 @@
-# Teil 3: Hallo Workflow
+# Teil 3: Hello Workflow
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 

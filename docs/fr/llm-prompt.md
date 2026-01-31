@@ -182,7 +182,6 @@ Note: French technical writing commonly keeps certain English terms, especially 
 
 - **workflow** - commonly kept in English in French tech docs (not "flux de travail")
 - **pipeline** - commonly kept in English (not "pipeline de traitement")
-- Course/module names: "Hello Nextflow", "Hello nf-core" - keep as proper nouns
 
 ### Terms to Translate
 

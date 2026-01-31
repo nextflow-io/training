@@ -1,4 +1,4 @@
-# Bölüm 6: Merhaba Yapılandırma
+# Bölüm 6: Hello Config
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 

@@ -46,6 +46,7 @@ General principles:
 - Tool names (Nextflow, Docker, GitHub, etc.)
 - File format names (FASTQ, BAM, CSV, etc.)
 - Technical identifiers and variable names
+- Course/module names: "Hello Nextflow", "Hello Channels", "Hello nf-core" - keep as proper nouns
 
 ---
 

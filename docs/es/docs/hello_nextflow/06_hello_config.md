@@ -1,4 +1,4 @@
-# Parte 6: Hola Config
+# Parte 6: Hello Config
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
