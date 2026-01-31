@@ -9,6 +9,20 @@ Your goal is to produce a translation that:
 - Preserves all technical accuracy
 - Maintains identical formatting and structure
 - Keeps all code executable (no translation of code syntax)
+- Matches the tone specified in the language-specific prompt
+
+---
+
+## Tone and Style
+
+Each language has specific tone guidance in its `llm-prompt.md` file (formal vs informal, regional variants, etc.). Follow that guidance.
+
+General principles:
+
+- **Educational but approachable**: This is training material, not formal documentation
+- **Preserve personality**: If the English has humor or encouragement (e.g., "Congratulations!", "Take a short break"), translate these naturally rather than removing them
+- **Natural expressions**: Use expressions natural to the target language rather than word-for-word translations
+- **Consistency**: Use the same term for the same concept throughout
 
 ---
 
@@ -350,6 +364,33 @@ Korean:
 ```
 
 Note: Keep tool names like "Gitpod" in English.
+
+### Common Tab Labels
+
+These tabs appear frequently in Before/After code comparisons:
+
+| English | Translate per language glossary         |
+| ------- | --------------------------------------- |
+| After   | Yes (e.g., "Depois", "Dopo", "Después") |
+| Before  | Yes (e.g., "Antes", "Prima", "Antes")   |
+| Gitpod  | No - keep in English                    |
+| Local   | Sometimes (check glossary)              |
+
+---
+
+## Standard Section Headers
+
+These recurring section headers appear throughout the training and should be translated consistently per the language glossary:
+
+| English            | Notes                                       |
+| ------------------ | ------------------------------------------- |
+| Takeaway           | Summary section at end of lessons           |
+| What's next?       | Transition to next section                  |
+| Warmup             | Initial exercise at start of lessons        |
+| Directory contents | Shows file listing                          |
+| Output             | In code block titles, often kept in English |
+
+Check the language-specific `llm-prompt.md` for the correct translations.
 
 ---
 

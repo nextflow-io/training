@@ -4,21 +4,29 @@ The target language for this translation is **Spanish** (`es`).
 
 ## Grammar Preferences
 
-- Use formal tone (usted) for instructions
 - Use Latin American Spanish spelling conventions
+- For instructions, use imperative forms that work with both tú and usted (e.g., "Ejecute", "Consulte")
+- Use proper Spanish punctuation: ¡...! and ¿...?
 - Prefer active voice when possible
+- Consider gender-inclusive greetings: "¡Te damos la bienvenida!" or "¡Bienvenido/a!" rather than just "¡Bienvenido!"
 
 ## Translation Context Rules
 
 **Important distinction**: Some technical terms have different translation rules depending on context:
 
 1. **In code blocks**: Keep ALL Nextflow syntax in English (the code must run)
-2. **In prose/explanatory text**: Follow the glossary below for translations
+2. **In code comments**: TRANSLATE comments to Spanish (they are not executable)
+3. **In prose/explanatory text**: Follow the glossary below for translations
 
 For example:
 
 - In prose: "El canal de entrada recibe los archivos..." (translate "channel" to "canal")
 - In code: `channel.fromPath('*.fastq')` (keep "channel" in English)
+- In comments: `// emit a greeting` → `// emite un saludo`
+
+## Code Comments
+
+**Always translate code comments to Spanish.** Comments are not executable code and should be in the target language for better comprehension.
 
 ## Glossary
 
@@ -158,29 +166,42 @@ For example:
 - map (data structure)
 - set
 
+### Terms to Keep in English
+
+Note: Spanish technical writing commonly keeps certain English terms:
+
+- **workflow** - commonly kept in English (not "flujo de trabajo")
+- **pipeline** - commonly kept in English
+- Course/module names: "Hello Nextflow", "Hello nf-core" - keep as proper nouns
+
 ### Terms to Translate
 
-| English        | Spanish              |
-| -------------- | -------------------- |
-| alignment      | alineamiento         |
-| command        | comando              |
-| container      | contenedor           |
-| directive      | directiva            |
-| directory      | directorio           |
-| environment    | entorno              |
-| file (general) | archivo              |
-| index          | índice               |
-| input          | entrada              |
-| module         | módulo               |
-| operator       | operador             |
-| output         | salida               |
-| parameter      | parámetro            |
-| reference      | referencia           |
-| run            | ejecutar / ejecución |
-| sample         | muestra              |
-| task           | tarea                |
-| training       | entrenamiento        |
-| tuple          | tupla                |
+| English        | Spanish              | Notes                          |
+| -------------- | -------------------- | ------------------------------ |
+| training       | capacitación         | Latin American preference      |
+| workshop       | Taller               |                                |
+| open source    | código abierto       |                                |
+| community      | Comunidad            |                                |
+| alignment      | alineamiento         |                                |
+| command        | comando              |                                |
+| container      | contenedor           |                                |
+| directive      | directiva            |                                |
+| directory      | directorio           |                                |
+| environment    | entorno              |                                |
+| file (general) | archivo              |                                |
+| index          | índice               |                                |
+| input          | entrada              |                                |
+| module         | módulo               |                                |
+| operator       | operador             |                                |
+| output         | salida               |                                |
+| parameter      | parámetro            |                                |
+| reference      | referencia           |                                |
+| run            | ejecutar / ejecución |                                |
+| sample         | muestra              |                                |
+| task           | tarea                |                                |
+| tuple          | tupla                |                                |
+| channel        | canal                | In prose; keep English in code |
+| process        | proceso              | In prose; keep English in code |
 
 ### Admonition Titles
 
@@ -192,3 +213,22 @@ For example:
 | Exercise | Ejercicio   |
 | Solution | Solución    |
 | Example  | Ejemplo     |
+
+### Tab Labels
+
+| English | Spanish |
+| ------- | ------- |
+| After   | Después |
+| Before  | Antes   |
+| Gitpod  | Gitpod  |
+| Local   | Local   |
+
+### Section Headers
+
+| English           | Spanish                   |
+| ----------------- | ------------------------- |
+| Takeaway          | Conclusión                |
+| What's next?      | ¿Qué sigue?               |
+| Warmup            | Calentamiento             |
+| Environment Setup | Configuración del entorno |
+| Getting Started   | Primeros pasos            |

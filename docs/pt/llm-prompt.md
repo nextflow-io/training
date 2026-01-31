@@ -5,20 +5,35 @@ The target language for this translation is **Brazilian Portuguese** (`pt`).
 ## Grammar Preferences
 
 - Use informal tone (você instead of o senhor/a senhora)
-- Use Brazilian Portuguese spelling conventions
+- Use Brazilian Portuguese spelling conventions (e.g., "arquivo" not "ficheiro", "diretório" not "pasta")
 - Prefer active voice when possible
+- Use a friendly, encouraging tone where appropriate (e.g., "Parabéns!" for congratulations, "Boas notícias" for good news)
 
 ## Translation Context Rules
 
 **Important distinction**: Some technical terms have different translation rules depending on context:
 
 1. **In code blocks**: Keep ALL Nextflow syntax in English (the code must run)
-2. **In prose/explanatory text**: Follow the glossary below for translations
+2. **In code comments**: TRANSLATE comments to Portuguese (they are not executable)
+3. **In prose/explanatory text**: Follow the glossary below for translations
 
 For example:
 
 - In prose: "O canal de entrada recebe os arquivos..." (translate "channel" to "canal")
 - In code: `channel.fromPath('*.fastq')` (keep "channel" in English)
+- In comments: `// emit a greeting` → `// emite uma saudação`
+
+## Code Comments
+
+**Always translate code comments to Portuguese.** Comments are not executable code and should be in the target language for better comprehension.
+
+```groovy
+// English original
+params.greeting = "Hello" // set default greeting
+
+// Portuguese translation
+params.greeting = "Hello" // define a saudação padrão
+```
 
 ## Glossary
 
@@ -141,3 +156,48 @@ Directive names should always remain in English:
 | Exercise | Exercício  |
 | Solution | Solução    |
 | Example  | Exemplo    |
+
+### Section Headers
+
+These recurring section headers should be translated consistently:
+
+| English            | Portuguese                                       |
+| ------------------ | ------------------------------------------------ |
+| Takeaway           | Conclusão                                        |
+| What's next?       | O que vem a seguir?                              |
+| Warmup             | Aquecimento                                      |
+| Directory contents | Conteúdo do diretório                            |
+| Output             | Saída (in prose) / Output (in code block titles) |
+
+### Tab Labels
+
+| English | Portuguese |
+| ------- | ---------- |
+| After   | Depois     |
+| Before  | Antes      |
+| Gitpod  | Gitpod     |
+| Local   | Local      |
+
+### UI Elements
+
+| English       | Portuguese             |
+| ------------- | ---------------------- |
+| file explorer | explorador de arquivos |
+| sidebar       | barra lateral          |
+| editor pane   | painel do editor       |
+| terminal      | terminal               |
+
+### Common Expressions
+
+Brazilian Portuguese translations often use these natural expressions:
+
+| English            | Portuguese                      |
+| ------------------ | ------------------------------- |
+| Congratulations!   | Parabéns!                       |
+| Good news          | Boas notícias                   |
+| That said          | Dito isso                       |
+| free bonus         | bônus gratuito                  |
+| symbolic link      | link simbólico                  |
+| Ta-da! / Voilà!    | Tcharam! (Brazilian colloquial) |
+| Take a short break | Faça uma pequena pausa          |
+| you've earned it   | você mereceu                    |
