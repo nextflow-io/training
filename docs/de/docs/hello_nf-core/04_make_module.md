@@ -38,7 +38,7 @@ Dies ist der aktuelle Code für das `cowpy`-Prozessmodul:
 ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1"
 #!/usr/bin/env nextflow
 
-// Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
+// ASCII-Kunst mit cowpy generieren (https://github.com/jeffbuttars/cowpy)
 process cowpy {
 
     publishDir 'results', mode: 'copy'
@@ -97,14 +97,14 @@ Los geht's!
 === "Nachher"
 
     ```groovy title="core-hello/modules/local/cowpy.nf" linenums="3" hl_lines="2"
-    // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
+    // ASCII-Kunst mit cowpy generieren (https://github.com/jeffbuttars/cowpy)
     process COWPY {
     ```
 
 === "Vorher"
 
     ```groovy title="core-hello/modules/local/cowpy.nf" linenums="3" hl_lines="2"
-    // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
+    // ASCII-Kunst mit cowpy generieren (https://github.com/jeffbuttars/cowpy)
     process cowpy {
     ```
 
@@ -161,7 +161,7 @@ Also aktualisieren wir jetzt die beiden Referenzen auf den Prozess im Workflow-B
     COWPY(CAT_CAT.out.file_out)
 
     //
-    // Collate and save software versions
+    // Software-Versionen sammeln und speichern
     //
     softwareVersionsToYAML(ch_versions)
         .collectFile(
@@ -184,7 +184,7 @@ Also aktualisieren wir jetzt die beiden Referenzen auf den Prozess im Workflow-B
     cowpy(CAT_CAT.out.file_out)
 
     //
-    // Collate and save software versions
+    // Software-Versionen sammeln und speichern
     //
     softwareVersionsToYAML(ch_versions)
         .collectFile(
@@ -434,7 +434,7 @@ Lass es uns tun.
     ```groovy title="modules/local/cowpy.nf" linenums="1" hl_lines="18 20"
     #!/usr/bin/env nextflow
 
-    // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
+    // ASCII-Kunst mit cowpy generieren (https://github.com/jeffbuttars/cowpy)
     process COWPY {
 
         publishDir 'results', mode: 'copy'
@@ -461,7 +461,7 @@ Lass es uns tun.
     ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="13 20"
     #!/usr/bin/env nextflow
 
-    // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
+    // ASCII-Kunst mit cowpy generieren (https://github.com/jeffbuttars/cowpy)
     process COWPY {
 
         publishDir 'results', mode: 'copy'
@@ -917,7 +917,7 @@ Lass uns das tun.
     ```groovy title="core-hello/modules/local/cowpy.nf (Auszug)" linenums="1"
     #!/usr/bin/env nextflow
 
-    // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
+    // ASCII-Kunst mit cowpy generieren (https://github.com/jeffbuttars/cowpy)
     process COWPY {
 
         container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
@@ -929,7 +929,7 @@ Lass uns das tun.
     ```groovy title="core-hello/modules/local/cowpy.nf (Auszug)" linenums="1" hl_lines="6"
     #!/usr/bin/env nextflow
 
-    // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
+    // ASCII-Kunst mit cowpy generieren (https://github.com/jeffbuttars/cowpy)
     process COWPY {
 
         publishDir 'results', mode: 'copy'

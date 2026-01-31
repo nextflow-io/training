@@ -167,14 +167,14 @@ process PROCESS_FILES {
     """
     echo "Processing ${sample_name}" > ${sample_name}_output.txt
     """
-// Missing closing brace for the process
+// Chave de fechamento ausente para o processo
 
 workflow {
 
-    // Create input channel
+    // Cria canal de entrada
     input_ch = channel.of('sample1', 'sample2', 'sample3')
 
-    // Call the process with the input channel
+    // Chama o processo com o canal de entrada
     PROCESS_FILES(input_ch)
 }
 ```
@@ -209,14 +209,14 @@ Substitua o comentário pela chave de fechamento ausente:
         """
         echo "Processing ${sample_name}" > ${sample_name}_output.txt
         """
-    }  // Add the missing closing brace
+    }  // Adiciona a chave de fechamento ausente
 
     workflow {
 
-        // Create input channel
+        // Cria canal de entrada
         input_ch = channel.of('sample1', 'sample2', 'sample3')
 
-        // Call the process with the input channel
+        // Chama o processo com o canal de entrada
         PROCESS_FILES(input_ch)
     }
     ```
@@ -237,14 +237,14 @@ Substitua o comentário pela chave de fechamento ausente:
         """
         echo "Processing ${sample_name}" > ${sample_name}_output.txt
         """
-    // Missing closing brace for the process
+    // Chave de fechamento ausente para o processo
 
     workflow {
 
-        // Create input channel
+        // Cria canal de entrada
         input_ch = channel.of('sample1', 'sample2', 'sample3')
 
-        // Call the process with the input channel
+        // Chama o processo com o canal de entrada
         PROCESS_FILES(input_ch)
     }
     ```
@@ -320,10 +320,10 @@ process PROCESS_FILES {
 
 workflow {
 
-    // Create input channel
+    // Cria canal de entrada
     input_ch = channel.of('sample1', 'sample2', 'sample3')
 
-    // Call the process with the input channel
+    // Chama o processo com o canal de entrada
     PROCESS_FILES(input_ch)
 }
 ```
@@ -342,7 +342,7 @@ Substitua a palavra-chave incorreta pela correta referenciando [a documentação
     #!/usr/bin/env nextflow
 
     process PROCESS_FILES {
-        input:  // Fixed: Changed 'inputs' to 'input'
+        input:  // Corrigido: Mudou 'inputs' para 'input'
         val sample_name
 
         output:
@@ -356,10 +356,10 @@ Substitua a palavra-chave incorreta pela correta referenciando [a documentação
 
     workflow {
 
-        // Create input channel
+        // Cria canal de entrada
         input_ch = channel.of('sample1', 'sample2', 'sample3')
 
-        // Call the process with the input channel
+        // Chama o processo com o canal de entrada
         PROCESS_FILES(input_ch)
     }
     ```
@@ -370,7 +370,7 @@ Substitua a palavra-chave incorreta pela correta referenciando [a documentação
     #!/usr/bin/env nextflow
 
     process PROCESS_FILES {
-        inputs:  // ERROR: Should be 'input' not 'inputs'
+        inputs:  // ERRO: Deveria ser 'input' não 'inputs'
         val sample_name
 
         output:
@@ -384,10 +384,10 @@ Substitua a palavra-chave incorreta pela correta referenciando [a documentação
 
     workflow {
 
-        // Create input channel
+        // Cria canal de entrada
         input_ch = channel.of('sample1', 'sample2', 'sample3')
 
-        // Call the process with the input channel
+        // Chama o processo com o canal de entrada
         PROCESS_FILES(input_ch)
     }
     ```
@@ -454,7 +454,7 @@ process PROCESS_FILES {
     path "${sample_name}_processed.txt"
 
     script:
-    // Define variables in Groovy code before the script
+    // Define variáveis no código Groovy antes do script
     def output_prefix = "${sample_name}_processed"
     def timestamp = new Date().format("yyyy-MM-dd")
 
@@ -489,13 +489,13 @@ Se você receber um erro 'No such variable', pode corrigi-lo definindo a variáv
         path "${sample_name}_output.txt"
 
         script:
-        // Define variables in Groovy code before the script
+        // Define variáveis no código Groovy antes do script
         def output_prefix = "${sample_name}_processed"
         def timestamp = new Date().format("yyyy-MM-dd")
 
         """
         echo "Processing ${sample_name} on ${timestamp}" > ${output_prefix}.txt
-        """  // Removed the line with undefined_var
+        """  // Removida a linha com undefined_var
     }
 
     workflow {
@@ -517,7 +517,7 @@ Se você receber um erro 'No such variable', pode corrigi-lo definindo a variáv
         path "${sample_name}_output.txt"
 
         script:
-        // Define variables in Groovy code before the script
+        // Define variáveis no código Groovy antes do script
         def output_prefix = "${sample_name}_processed"
         def timestamp = new Date().format("yyyy-MM-dd")
 
@@ -732,7 +732,7 @@ process PROCESS_FILES {
     path "${sample_name}_processed.txt"
 
     script:
-    // Define variables in Groovy code before the script
+    // Define variáveis no código Groovy antes do script
     def output_prefix = "${sample_name}_processed"
     def timestamp = new Date().format("yyyy-MM-dd")
 
@@ -767,7 +767,7 @@ Mova a definição do canal para dentro do bloco workflow:
         path "${sample_name}_processed.txt"
 
         script:
-        // Define variables in Groovy code before the script
+        // Define variáveis no código Groovy antes do script
         def output_prefix = "${sample_name}_processed"
         def timestamp = new Date().format("yyyy-MM-dd")
 
@@ -777,7 +777,7 @@ Mova a definição do canal para dentro do bloco workflow:
     }
 
     workflow {
-        input_ch = channel.of('sample1', 'sample2', 'sample3')  // Moved inside workflow block
+        input_ch = channel.of('sample1', 'sample2', 'sample3')  // Movido para dentro do bloco workflow
         PROCESS_FILES(input_ch)
     }
     ```
@@ -797,7 +797,7 @@ Mova a definição do canal para dentro do bloco workflow:
         path "${sample_name}_processed.txt"
 
         script:
-        // Define variables in Groovy code before the script
+        // Define variáveis no código Groovy antes do script
         def output_prefix = "${sample_name}_processed"
         def timestamp = new Date().format("yyyy-MM-dd")
 
@@ -889,7 +889,7 @@ A mensagem de erro afirma claramente que a chamada esperava 1 argumento mas rece
 
 process PROCESS_FILES {
     input:
-        val sample_name  // Process expects only 1 input
+        val sample_name  // Processo espera apenas 1 entrada
 
     output:
         path "${sample_name}_output.txt"
@@ -902,7 +902,7 @@ process PROCESS_FILES {
 
 workflow {
 
-    // Create two separate channels
+    // Cria dois canais separados
     samples_ch = channel.of('sample1', 'sample2', 'sample3')
     files_ch = channel.of('file1.txt', 'file2.txt', 'file3.txt')
 
@@ -926,7 +926,7 @@ Para este exemplo específico, o processo espera um único canal e não requer o
 
     process PROCESS_FILES {
         input:
-            val sample_name  // Process expects only 1 input
+            val sample_name  // Processo espera apenas 1 entrada
 
         output:
             path "${sample_name}_output.txt"
@@ -939,11 +939,11 @@ Para este exemplo específico, o processo espera um único canal e não requer o
 
     workflow {
 
-        // Create two separate channels
+        // Cria dois canais separados
         samples_ch = channel.of('sample1', 'sample2', 'sample3')
         files_ch = channel.of('file1.txt', 'file2.txt', 'file3.txt')
 
-        // Fixed: Pass only the channel the process expects
+        // Corrigido: Passa apenas o canal que o processo espera
         PROCESS_FILES(samples_ch)
     }
     ```
@@ -955,7 +955,7 @@ Para este exemplo específico, o processo espera um único canal e não requer o
 
     process PROCESS_FILES {
         input:
-            val sample_name  // Process expects only 1 input
+            val sample_name  // Processo espera apenas 1 entrada
 
         output:
             path "${sample_name}_output.txt"
@@ -968,11 +968,11 @@ Para este exemplo específico, o processo espera um único canal e não requer o
 
     workflow {
 
-        // Create two separate channels
+        // Cria dois canais separados
         samples_ch = channel.of('sample1', 'sample2', 'sample3')
         files_ch = channel.of('file1.txt', 'file2.txt', 'file3.txt')
 
-        // ERROR: Passing 2 channels but process expects only 1
+        // ERRO: Passando 2 canais mas o processo espera apenas 1
         PROCESS_FILES(samples_ch, files_ch)
     }
     ```
@@ -1035,7 +1035,7 @@ process PROCESS_FILES {
     path "${output_prefix}.txt"
 
     script:
-    // Define variables in Groovy code before the script
+    // Define variáveis no código Groovy antes do script
     output_prefix = "${reference}_${sample_name}"
     def timestamp = new Date().format("yyyy-MM-dd")
 
@@ -1067,7 +1067,7 @@ Existem algumas maneiras de resolver isso dependendo de quantos arquivos são af
 
 ```groovy title="exhausted.nf (corrigido - Opção 1a)" hl_lines="2" linenums="21"
 workflow {
-    reference_ch = channel.value('baseline_reference')  // Value channel can be reused
+    reference_ch = channel.value('baseline_reference')  // Canal de valor pode ser reutilizado
     input_ch = channel.of('sample1', 'sample2', 'sample3')
 
     PROCESS_FILES(reference_ch, input_ch)
@@ -1078,7 +1078,7 @@ workflow {
 
 ```groovy title="exhausted.nf (corrigido - Opção 1b)" hl_lines="2" linenums="21"
 workflow {
-    reference_ch = channel.of('baseline_reference').first()  // Convert to value channel
+    reference_ch = channel.of('baseline_reference').first()  // Converte para canal de valor
     input_ch = channel.of('sample1', 'sample2', 'sample3')
 
     PROCESS_FILES(reference_ch, input_ch)
@@ -1089,7 +1089,7 @@ workflow {
 
 ```groovy title="exhausted.nf (corrigido - Opção 1c)" hl_lines="2" linenums="21"
 workflow {
-    reference_ch = channel.of('baseline_reference').collect()  // Convert to value channel
+    reference_ch = channel.of('baseline_reference').collect()  // Converte para canal de valor
     input_ch = channel.of('sample1', 'sample2', 'sample3')
 
     PROCESS_FILES(reference_ch, input_ch)
@@ -1102,7 +1102,7 @@ workflow {
 workflow {
     reference_ch = channel.of('baseline_reference','other_reference')
     input_ch = channel.of('sample1', 'sample2', 'sample3')
-    combined_ch = reference_ch.combine(input_ch)  // Creates cartesian product
+    combined_ch = reference_ch.combine(input_ch)  // Cria produto cartesiano
 
     PROCESS_FILES(combined_ch)
 }
@@ -1194,7 +1194,7 @@ Os colchetes na mensagem de erro fornecem a pista aqui - o processo está tratan
 
 process PROCESS_FILES {
     input:
-        val sample_name  // Expects single value, gets tuple
+        val sample_name  // Espera valor único, recebe tupla
 
     output:
         path "${sample_name}_output.txt"
@@ -1207,7 +1207,7 @@ process PROCESS_FILES {
 
 workflow {
 
-    // Channel emits tuples, but process expects single values
+    // Canal emite tuplas, mas o processo espera valores únicos
     input_ch = channel.of(
       ['sample1', 'file1.txt'],
       ['sample2', 'file2.txt'],
@@ -1232,7 +1232,7 @@ Para corrigir isso, se o processo requer ambas as entradas, poderíamos ajustar 
 
         process PROCESS_FILES {
             input:
-                tuple val(sample_name), val(file_name)  // Fixed: Accept tuple
+                tuple val(sample_name), val(file_name)  // Corrigido: Aceita tupla
 
             output:
                 path "${sample_name}_output.txt"
@@ -1245,7 +1245,7 @@ Para corrigir isso, se o processo requer ambas as entradas, poderíamos ajustar 
 
         workflow {
 
-            // Channel emits tuples, but process expects single values
+        // Canal emite tuplas, mas o processo espera valores únicos
             input_ch = channel.of(
               ['sample1', 'file1.txt'],
               ['sample2', 'file2.txt'],
@@ -1262,7 +1262,7 @@ Para corrigir isso, se o processo requer ambas as entradas, poderíamos ajustar 
 
         process PROCESS_FILES {
             input:
-                val sample_name  // Expects single value, gets tuple
+                val sample_name  // Espera valor único, recebe tupla
 
             output:
                 path "${sample_name}_output.txt"
@@ -1275,7 +1275,7 @@ Para corrigir isso, se o processo requer ambas as entradas, poderíamos ajustar 
 
         workflow {
 
-            // Channel emits tuples, but process expects single values
+        // Canal emite tuplas, mas o processo espera valores únicos
             input_ch = channel.of(
               ['sample1', 'file1.txt'],
               ['sample2', 'file2.txt'],
@@ -1292,13 +1292,13 @@ Para corrigir isso, se o processo requer ambas as entradas, poderíamos ajustar 
         ```groovy title="bad_channel_shape.nf" hl_lines="9" linenums="16"
         workflow {
 
-            // Channel emits tuples, but process expects single values
+        // Canal emite tuplas, mas o processo espera valores únicos
             input_ch = channel.of(
               ['sample1', 'file1.txt'],
               ['sample2', 'file2.txt'],
               ['sample3', 'file3.txt']
             )
-            PROCESS_FILES(input_ch.map { it[0] })  // Fixed: Extract first element
+            PROCESS_FILES(input_ch.map { it[0] })  // Corrigido: Extrai primeiro elemento
         }
         ```
 
@@ -1307,7 +1307,7 @@ Para corrigir isso, se o processo requer ambas as entradas, poderíamos ajustar 
         ```groovy title="bad_channel_shape.nf" hl_lines="9" linenums="16"
         workflow {
 
-            // Channel emits tuples, but process expects single values
+        // Canal emite tuplas, mas o processo espera valores únicos
             input_ch = channel.of(
               ['sample1', 'file1.txt'],
               ['sample2', 'file2.txt'],
@@ -1374,15 +1374,15 @@ Vamos examinar `bad_channel_shape_viewed.nf` para ver como `.view()` é usado:
 ```groovy title="bad_channel_shape_viewed.nf" linenums="16" hl_lines="9 11"
 workflow {
 
-    // Channel emits tuples, but process expects single values
+    // Canal emite tuplas, mas o processo espera valores únicos
     input_ch = channel.of(
       ['sample1', 'file1.txt'],
       ['sample2', 'file2.txt'],
       ['sample3', 'file3.txt']
     )
-    .view { "Channel content: $it" }  // Debug: Show original channel content
-    .map { tuple -> tuple[0] }        // Transform: Extract first element
-    .view { "After mapping: $it" }    // Debug: Show transformed channel content
+    .view { "Channel content: $it" }  // Debug: Mostra conteúdo original do canal
+    .map { tuple -> tuple[0] }        // Transforma: Extrai primeiro elemento
+    .view { "After mapping: $it" }    // Debug: Mostra conteúdo do canal transformado
 
     PROCESS_FILES(input_ch)
 }
@@ -1395,7 +1395,7 @@ Para evitar usar operações `.view()` excessivamente no futuro para entender o 
 ```groovy title="bad_channel_shape_viewed.nf (com comentários)" linenums="16" hl_lines="8 9"
 workflow {
 
-    // Channel emits tuples, but process expects single values
+    // Canal emite tuplas, mas o processo espera valores únicos
     input_ch = channel.of(
             ['sample1', 'file1.txt'],
             ['sample2', 'file2.txt'],
@@ -1500,11 +1500,11 @@ process PROCESS_FILES {
     val sample_name
 
     output:
-    path "${sample_name}.txt"  // Expects: sample3.txt
+    path "${sample_name}.txt"  // Espera: sample3.txt
 
     script:
     """
-    echo "Processing ${sample_name}" > ${sample_name}_output.txt  // Creates: sample3_output.txt
+    echo "Processing ${sample_name}" > ${sample_name}_output.txt  // Cria: sample3_output.txt
     """
 }
 ```
@@ -1532,7 +1532,7 @@ Corrija a incompatibilidade tornando o nome do arquivo de saída consistente:
         val sample_name
 
         output:
-        path "${sample_name}_output.txt"  // Fixed: Match the script output
+        path "${sample_name}_output.txt"  // Corrigido: Corresponde à saída do script
 
         script:
         """
@@ -1549,11 +1549,11 @@ Corrija a incompatibilidade tornando o nome do arquivo de saída consistente:
         val sample_name
 
         output:
-        path "${sample_name}.txt"  // Expects: sample3.txt
+        path "${sample_name}.txt"  // Espera: sample3.txt
 
         script:
         """
-        echo "Processing ${sample_name}" > ${sample_name}_output.txt  // Creates: sample3_output.txt
+        echo "Processing ${sample_name}" > ${sample_name}_output.txt  // Cria: sample3_output.txt
         """
     }
     ```

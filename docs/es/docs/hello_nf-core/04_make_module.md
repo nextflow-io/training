@@ -161,7 +161,7 @@ Así que ahora actualicemos las dos referencias al proceso en el bloque workflow
     COWPY(CAT_CAT.out.file_out)
 
     //
-    // Collate and save software versions
+    // Recopilar y guardar versiones de software
     //
     softwareVersionsToYAML(ch_versions)
         .collectFile(
@@ -184,7 +184,7 @@ Así que ahora actualicemos las dos referencias al proceso en el bloque workflow
     cowpy(CAT_CAT.out.file_out)
 
     //
-    // Collate and save software versions
+    // Recopilar y guardar versiones de software
     //
     softwareVersionsToYAML(ch_versions)
         .collectFile(

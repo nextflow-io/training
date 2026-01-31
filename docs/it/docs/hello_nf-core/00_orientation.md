@@ -32,24 +32,24 @@ DEVE eseguire il seguente comando prima di procedere oltre:
 export NXF_SYNTAX_PARSER=v1
 ```
 
-#### Se sta utilizzando un ambiente locale o personalizzato:
+#### Se state utilizzando un ambiente locale o personalizzato:
 
-Si assicuri di utilizzare le impostazioni corrette come documentato [qui](../info/nxf_versions.md).
+Assicuratevi di utilizzare le impostazioni corrette come documentato [qui](../info/nxf_versions.md).
 
 La formazione richiede inoltre **nf-core tools 3.4.1**.
-Se utilizza una versione diversa degli strumenti nf-core, potrebbe avere difficoltà a seguire.
+Se utilizzate una versione diversa degli strumenti nf-core, potreste avere difficoltà a seguire.
 
-Può verificare quale versione è installata nel suo ambiente utilizzando il comando `nf-core --version`.
+Potete verificare quale versione è installata nel vostro ambiente utilizzando il comando `nf-core --version`.
 
 ## Prepararsi a lavorare
 
-Una volta che il suo codespace è in esecuzione, ci sono due cose da fare prima di immergersi nella formazione: impostare la directory di lavoro per questo corso specifico e dare un'occhiata ai materiali forniti.
+Una volta che il vostro codespace è in esecuzione, ci sono due cose da fare prima di immergersi nella formazione: impostare la directory di lavoro per questo corso specifico e dare un'occhiata ai materiali forniti.
 
 ### Impostare la directory di lavoro
 
 Per impostazione predefinita, il codespace si apre con la directory di lavoro impostata alla radice di tutti i corsi di formazione, ma per questo corso lavoreremo nella directory `hello-nf-core/`.
 
-Cambi directory ora eseguendo questo comando nel terminale:
+Cambiate directory ora eseguendo questo comando nel terminale:
 
 ```bash
 cd hello-nf-core/
@@ -67,7 +67,7 @@ Ora diamo un'occhiata al contenuto di questa directory.
 
 ### Esplorare i materiali forniti
 
-Può esplorare il contenuto di questa directory utilizzando l'esploratore di file sul lato sinistro dello spazio di lavoro di formazione.
+Potete esplorare il contenuto di questa directory utilizzando l'esploratore di file sul lato sinistro dello spazio di lavoro di formazione.
 In alternativa, potete utilizzare il comando `tree`.
 
 Durante il corso, utilizziamo l'output di `tree` per rappresentare la struttura e il contenuto delle directory in forma leggibile, a volte con lievi modifiche per chiarezza.

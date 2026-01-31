@@ -111,7 +111,7 @@ docker run --rm -it -v .:/my_project 'community.wave.seqera.io/library/cowpy:1.1
 cat /my_project/data/greetings.csv | cowpy -c turkey
 ```
 
-### Takeaway
+### सीख
 
 तुम जानते हो कि container pull करना और इसे one-off या interactively run करना। तुम यह भी जानते हो कि अपने data को अपने container के भीतर से accessible कैसे बनाना।
 
@@ -192,7 +192,7 @@ docker.enabled = true
 nextflow run hello-containers.nf -resume
 ```
 
-### Takeaway
+### सीख
 
 तुम जानते हो कि Nextflow में processes run करने के लिए containers कैसे use करें।
 

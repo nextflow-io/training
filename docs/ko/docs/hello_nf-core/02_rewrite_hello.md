@@ -249,7 +249,7 @@ include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pi
 workflow HELLO {
 
     take:
-    ch_samplesheet // channel: samplesheet read in from --input
+    ch_samplesheet // channel: --input에서 읽은 샘플시트
     main:
 
     ch_versions = channel.empty()

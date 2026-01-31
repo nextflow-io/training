@@ -1174,7 +1174,7 @@ nf-core project nested subworkflows का भारी उपयोग कर�
 
     ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="76" hl_lines="5-23"
         //
-        // Create channel from input file provided through params.input
+        // params.input के माध्यम से प्रदान की गई इनपुट फ़ाइल से channel बनाएं
         //
 
         channel

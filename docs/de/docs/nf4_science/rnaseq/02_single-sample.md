@@ -26,19 +26,19 @@ Wir stellen dir eine Workflow-Datei, `rnaseq.nf`, zur Verfügung, die die Hauptt
 ```groovy title="rnaseq.nf" linenums="1"
 #!/usr/bin/env nextflow
 
-// Module INCLUDE statements
+// Modul-INCLUDE-Anweisungen
 
 /*
  * Pipeline parameters
  */
 
-// Primary input
+// Primäre Eingabe
 
 workflow {
 
-    // Create input channel
+    // Eingabe-Channel erstellen
 
-    // Call processes
+    // Prozesse aufrufen
 
 }
 ```
@@ -96,7 +96,7 @@ Du solltest alle Teile aus dem wiedererkennen, was du in Teil 1 & Teil 2 dieser 
 Füge die Anweisung `include { FASTQC } from './modules/fastqc.nf'` zur Datei `rnaseq.nf` hinzu:
 
 ```groovy title="rnaseq.nf" linenums="3"
-// Module INCLUDE statements
+// Modul-INCLUDE-Anweisungen
 include { FASTQC } from './modules/fastqc.nf'
 ```
 
@@ -106,7 +106,7 @@ Deklariere einen Eingabeparameter mit einem Standardwert:
 
 ```groovy title="rnaseq.nf" linenums="10"
 params {
-    // Primary input
+    // Primäre Eingabe
     reads: Path = "data/reads/ENCSR000COQ1_1.fastq.gz"
 }
 ```
@@ -118,10 +118,10 @@ Verwende eine einfache `.fromPath()`-Channel-Factory, um den Eingabekanal zu ers
 ```groovy title="rnaseq.nf" linenums="13"
 workflow {
 
-    // Create input channel from a file path
+    // Eingabe-Channel aus einem Dateipfad erstellen
     read_ch = channel.fromPath(params.reads)
 
-    // Call processes
+    // Prozesse aufrufen
 
 }
 ```
@@ -131,10 +131,10 @@ workflow {
 ```groovy title="rnaseq.nf" linenums="13"
 workflow {
 
-    // Create input channel from a file path
+    // Eingabe-Channel aus einem Dateipfad erstellen
     read_ch = channel.fromPath(params.reads)
 
-    // Initial quality control
+    // Initiale Qualitätskontrolle
     FASTQC(read_ch)
 
 }
@@ -216,7 +216,7 @@ process TRIM_GALORE {
 Füge die Anweisung `include { TRIM_GALORE } from './modules/trim_galore.nf'` zur Datei `rnaseq.nf` hinzu:
 
 ```groovy title="rnaseq.nf" linenums="3"
-// Module INCLUDE statements
+// Modul-INCLUDE-Anweisungen
 include { FASTQC } from './modules/fastqc.nf'
 include { TRIM_GALORE } from './modules/trim_galore.nf'
 ```
@@ -226,13 +226,13 @@ include { TRIM_GALORE } from './modules/trim_galore.nf'
 ```groovy title="rnaseq.nf" linenums="14"
 workflow {
 
-    // Create input channel from a file path
+    // Eingabe-Channel aus einem Dateipfad erstellen
     read_ch = channel.fromPath(params.reads)
 
-    // Initial quality control
+    // Initiale Qualitätskontrolle
     FASTQC(read_ch)
 
-    // Adapter trimming and post-trimming QC
+    // Adapter-Trimming und Post-Trimming-QC
     TRIM_GALORE(read_ch)
 }
 ```
@@ -315,7 +315,7 @@ process HISAT2_ALIGN {
 Füge die Anweisung `include { HISAT2_ALIGN } from './modules/hisat2_align.nf'` zur Datei `rnaseq.nf` hinzu:
 
 ```groovy title="rnaseq.nf" linenums="3"
-// Module INCLUDE statements
+// Modul-INCLUDE-Anweisungen
 include { FASTQC } from './modules/fastqc.nf'
 include { TRIM_GALORE } from './modules/trim_galore.nf'
 include { HISAT2_ALIGN } from './modules/hisat2_align.nf'
@@ -327,10 +327,10 @@ Deklariere einen Eingabeparameter mit einem Standardwert:
 
 ```groovy title="rnaseq.nf" linenums="8"
 params {
-    // Primary input
+    // Primäre Eingabe
     reads: Path = "data/reads/ENCSR000COQ1_1.fastq.gz"
 
-    // Reference genome archive
+    // Referenzgenom-Archiv
     hisat2_index_zip: Path = "data/genome_index.tar.gz"
 }
 ```
@@ -344,16 +344,16 @@ Zusätzlich verwenden wir `file (params.hisat2_index_zip)`, um dem Hisat2-Tool d
 ```groovy title="rnaseq.nf" linenums="16"
 workflow {
 
-    // Create input channel from a file path
+    // Eingabe-Channel aus einem Dateipfad erstellen
     read_ch = channel.fromPath(params.reads)
 
-    // Initial quality control
+    // Initiale Qualitätskontrolle
     FASTQC(read_ch)
 
-    // Adapter trimming and post-trimming QC
+    // Adapter-Trimming und Post-Trimming-QC
     TRIM_GALORE(read_ch)
 
-    // Alignment to a reference genome
+    // Alignment zum Referenzgenom
     HISAT2_ALIGN(TRIM_GALORE.out.trimmed_reads, file (params.hisat2_index_zip))
 }
 ```

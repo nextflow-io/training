@@ -178,7 +178,7 @@ Jetons un coup d'œil à ce qui rend cela possible dans le code du workflow.
     #!/usr/bin/env nextflow
 
     /*
-    * Use echo to print 'Hello World!' to a file
+    * Utilise echo pour imprimer 'Hello World!' dans un fichier
     */
     process sayHello {
 
@@ -431,7 +431,7 @@ Regardons le code et identifions les modèles clés pour les workflows multi-ét
     #!/usr/bin/env nextflow
 
     /*
-    * Use echo to print 'Hello World!' to a file
+    * Utilise echo pour imprimer 'Hello World!' dans un fichier
     */
     process sayHello {
 
@@ -448,7 +448,7 @@ Regardons le code et identifions les modèles clés pour les workflows multi-ét
     }
 
     /*
-    * Use a text replacement tool to convert the greeting to uppercase
+    * Utilise un outil de remplacement de texte pour convertir la salutation en majuscules
     */
     process convertToUpper {
 
@@ -891,7 +891,7 @@ Ouvrez l'un de ces fichiers et vous trouverez le code du process correspondant.
     #!/usr/bin/env nextflow
 
     /*
-    * Use echo to print 'Hello World!' to a file
+    * Utilise echo pour imprimer 'Hello World!' dans un fichier
     */
     process sayHello {
 

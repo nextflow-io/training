@@ -132,7 +132,7 @@ Regardez le fichier de flux de travail `main.nf` :
 
 workflow {
 
-    // Create a Path object from a string path
+    // Crée un objet Path à partir d'une chaîne de chemin
     myFile = 'data/patientA_rep1_normal_R1_001.fastq.gz'
 
     println "${myFile} is of class ${myFile.class}"
@@ -179,7 +179,7 @@ Modifiez le fichier `main.nf` pour envelopper la chaîne avec `file()` comme sui
 === "Après"
 
     ```groovy title="main.nf" linenums="5" hl_lines="2"
-        // Create a Path object from a string path
+        // Crée un objet Path à partir d'une chaîne de chemin
         myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
 
         println "${myFile} is of class ${myFile.class}"
@@ -188,7 +188,7 @@ Modifiez le fichier `main.nf` pour envelopper la chaîne avec `file()` comme sui
 === "Avant"
 
     ```groovy title="main.nf" linenums="5" hl_lines="2"
-        // Create a Path object from a string path
+        // Crée un objet Path à partir d'une chaîne de chemin
         myFile = 'data/patientA_rep1_normal_R1_001.fastq.gz'
 
         println "${myFile} is of class ${myFile.class}"
@@ -236,10 +236,10 @@ Mettons à jour notre flux de travail pour imprimer les attributs de fichier int
 === "Après"
 
     ```groovy title="main.nf" linenums="5" hl_lines="4-9"
-        // Create a Path object from a string path
+        // Crée un objet Path à partir d'une chaîne de chemin
         myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
 
-        // Print file attributes
+        // Affiche les attributs du fichier
         println "File object class: ${myFile.class}"
         println "File name: ${myFile.name}"
         println "Simple name: ${myFile.simpleName}"
@@ -250,7 +250,7 @@ Mettons à jour notre flux de travail pour imprimer les attributs de fichier int
 === "Avant"
 
     ```groovy title="main.nf" linenums="5" hl_lines="4"
-        // Create a Path object from a string path
+        // Crée un objet Path à partir d'une chaîne de chemin
         myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
 
         println "${myFile} is of class ${myFile.class}"
@@ -345,27 +345,27 @@ Effectuez les modifications suivantes dans le flux de travail :
 === "Après"
 
     ```groovy title="main.nf" linenums="7" hl_lines="11-12"
-        // Create a Path object from a string path
+        // Crée un objet Path à partir d'une chaîne de chemin
         myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
 
-        // Print file attributes
+        // Affiche les attributs du fichier
         println "File object class: ${myFile.class}"
         println "File name: ${myFile.name}"
         println "Simple name: ${myFile.simpleName}"
         println "Extension: ${myFile.extension}"
         println "Parent directory: ${myFile.parent}"
 
-        // Count the lines in the file
+        // Compte les lignes dans le fichier
         COUNT_LINES(myFile)
     ```
 
 === "Avant"
 
     ```groovy title="main.nf" linenums="7" hl_lines="4-9"
-        // Create a Path object from a string path
+        // Crée un objet Path à partir d'une chaîne de chemin
         myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
 
-        // Print file attributes
+        // Affiche les attributs du fichier
         println "File object class: ${myFile.class}"
         println "File name: ${myFile.name}"
         println "Simple name: ${myFile.simpleName}"
@@ -423,10 +423,10 @@ Effectuez les modifications suivantes dans le flux de travail, en veillant à co
 === "Après"
 
     ```groovy title="main.nf" linenums="7" hl_lines="2 6-11"
-        // Create a Path object from a string path
+        // Crée un objet Path à partir d'une chaîne de chemin
         myFile = 'data/patientA_rep1_normal_R1_001.fastq.gz'
 
-        // Print file attributes
+        // Affiche les attributs du fichier
         println "File object class: ${myFile.class}"
         /*
         println "File name: ${myFile.name}"
@@ -435,24 +435,24 @@ Effectuez les modifications suivantes dans le flux de travail, en veillant à co
         println "Parent directory: ${myFile.parent}"
         */
 
-        // Count the lines in the file
+        // Compte les lignes dans le fichier
         COUNT_LINES(myFile)
     ```
 
 === "Avant"
 
     ```groovy title="main.nf" linenums="7" hl_lines="4-9"
-        // Create a Path object from a string path
+        // Crée un objet Path à partir d'une chaîne de chemin
         myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
 
-        // Print file attributes
+        // Affiche les attributs du fichier
         println "File object class: ${myFile.class}"
         println "File name: ${myFile.name}"
         println "Simple name: ${myFile.simpleName}"
         println "Extension: ${myFile.extension}"
         println "Parent directory: ${myFile.parent}"
 
-        // Count the lines in the file
+        // Compte les lignes dans le fichier
         COUNT_LINES(myFile)
     ```
 
@@ -646,10 +646,10 @@ Ouvrez à nouveau `main.nf` et modifiez le chemin d'entrée comme suit :
 === "Après"
 
     ```groovy title="main.nf" linenums="2" hl_lines="2"
-        // Using a remote file from the internet
+        // Utilise un fichier distant depuis Internet
         myFile = file('https://raw.github.com/nextflow-io/training/master/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz')
 
-        // Print file attributes
+        // Affiche les attributs du fichier
         println "File object class: ${myFile.class}"
         println "File name: ${myFile.name}"
         println "Simple name: ${myFile.simpleName}"
@@ -660,10 +660,10 @@ Ouvrez à nouveau `main.nf` et modifiez le chemin d'entrée comme suit :
 === "Avant"
 
     ```groovy title="main.nf" linenums="2" hl_lines="2"
-        // Create a Path object from a string path
+        // Crée un objet Path à partir d'une chaîne de chemin
         myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
 
-        // Print file attributes
+        // Affiche les attributs du fichier
         println "File object class: ${myFile.class}"
         println "File name: ${myFile.name}"
         println "Simple name: ${myFile.simpleName}"
@@ -754,10 +754,10 @@ Nous allons revenir à l'utilisation de nos fichiers d'exemple locaux pour le re
 === "Après"
 
     ```groovy title="main.nf" linenums="2" hl_lines="2"
-        // Create a Path object from a string path
+        // Crée un objet Path à partir d'une chaîne de chemin
         myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
 
-        // Print file attributes
+        // Affiche les attributs du fichier
         println "File object class: ${myFile.class}"
         println "File name: ${myFile.name}"
         println "Simple name: ${myFile.simpleName}"
@@ -768,10 +768,10 @@ Nous allons revenir à l'utilisation de nos fichiers d'exemple locaux pour le re
 === "Avant"
 
     ```groovy title="main.nf" linenums="2" hl_lines="2"
-        // Create a Path object from a string path
+        // Crée un objet Path à partir d'une chaîne de chemin
         myFile = file('https://raw.github.com/nextflow-io/training/master/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz')
 
-        // Print file attributes
+        // Affiche les attributs du fichier
         println "File object class: ${myFile.class}"
         println "File name: ${myFile.name}"
         println "Simple name: ${myFile.simpleName}"
@@ -818,11 +818,11 @@ Mettons à jour notre flux de travail pour utiliser `channel.fromPath`.
 === "Après"
 
     ```groovy title="main.nf" linenums="7" hl_lines="1-3"
-        // Load files with channel.fromPath
+        // Charge les fichiers avec channel.fromPath
         ch_files = channel.fromPath('data/patientA_rep1_normal_R1_001.fastq.gz')
         ch_files.view { myFile -> "Found file: $myFile" }
 
-        // Print file attributes
+        // Affiche les attributs du fichier
         /* Comment these out for now, we'll come back to them!
         println "File object class: ${myFile.class}"
         println "File name: ${myFile.name}"
@@ -831,24 +831,24 @@ Mettons à jour notre flux de travail pour utiliser `channel.fromPath`.
         println "Parent directory: ${myFile.parent}"
         */
 
-        // Count the lines in the file
+        // Compte les lignes dans le fichier
         // COUNT_LINES(myFile)
     ```
 
 === "Avant"
 
     ```groovy title="main.nf" linenums="7" hl_lines="1-2"
-        // Create a Path object from a string path
+        // Crée un objet Path à partir d'une chaîne de chemin
         myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
 
-        // Print file attributes
+        // Affiche les attributs du fichier
         println "File object class: ${myFile.class}"
         println "File name: ${myFile.name}"
         println "Simple name: ${myFile.simpleName}"
         println "Extension: ${myFile.extension}"
         println "Parent directory: ${myFile.parent}"
 
-        // Count the lines in the file
+        // Compte les lignes dans le fichier
         COUNT_LINES(myFile)
     ```
 
@@ -884,7 +884,7 @@ Revenons à l'impression des attributs de fichier complets :
 === "Après"
 
     ```groovy title="main.nf" linenums="7" hl_lines="3-9 12"
-        // Load files with channel.fromPath
+        // Charge les fichiers avec channel.fromPath
         ch_files = channel.fromPath('data/patientA_rep1_normal_R1_001.fastq.gz')
         ch_files.view { myFile ->
             println "File object class: ${myFile.class}"
@@ -894,18 +894,18 @@ Revenons à l'impression des attributs de fichier complets :
             println "Parent directory: ${myFile.parent}"
         }
 
-        // Count the lines in the file
+        // Compte les lignes dans le fichier
         COUNT_LINES(ch_files)
     ```
 
 === "Avant"
 
     ```groovy title="main.nf" linenums="7" hl_lines="3"
-        // Load files with channel.fromPath
+        // Charge les fichiers avec channel.fromPath
         ch_files = channel.fromPath('data/patientA_rep1_normal_R1_001.fastq.gz')
         ch_files.view { myFile -> "Found file: $myFile" }
 
-        // Count the lines in the file
+        // Compte les lignes dans le fichier
         // COUNT_LINES(ch_files)
     ```
 
@@ -967,14 +967,14 @@ Maintenant, tout ce que nous devons faire est de mettre à jour le chemin de fic
 === "Après"
 
     ```groovy title="main.nf" linenums="7"
-      // Load files with channel.fromPath
+      // Charge les fichiers avec channel.fromPath
         ch_files = channel.fromPath('data/patientA_rep1_normal_R*_001.fastq.gz')
     ```
 
 === "Avant"
 
     ```groovy title="main.nf" linenums="7"
-      // Load files with channel.fromPath
+      // Charge les fichiers avec channel.fromPath
         ch_files = channel.fromPath('data/patientA_rep1_normal_R1_001.fastq.gz')
     ```
 
@@ -1061,7 +1061,7 @@ Effectuez les modifications suivantes dans le flux de travail :
 === "Après"
 
     ```groovy title="main.nf" linenums="7" hl_lines="3-6"
-        // Load files with channel.fromPath
+        // Charge les fichiers avec channel.fromPath
         ch_files = channel.fromPath('data/patientA_rep1_normal_R*_001.fastq.gz')
         ch_files.map { myFile ->
             [ myFile.simpleName, myFile ]
@@ -1072,7 +1072,7 @@ Effectuez les modifications suivantes dans le flux de travail :
 === "Avant"
 
     ```groovy title="main.nf" linenums="7" hl_lines="3-9"
-        // Load files with channel.fromPath
+        // Charge les fichiers avec channel.fromPath
         ch_files = channel.fromPath('data/patientA_rep1_normal_R*_001.fastq.gz')
         ch_files.view { myFile ->
             println "File object class: ${myFile.class}"
@@ -1122,7 +1122,7 @@ Effectuez les modifications suivantes dans le flux de travail :
 === "Après"
 
     ```groovy title="main.nf" linenums="7" hl_lines="4"
-        // Load files with channel.fromPath
+        // Charge les fichiers avec channel.fromPath
         ch_files = channel.fromPath('data/patientA_rep1_normal_R*_001.fastq.gz')
         ch_files.map { myFile ->
             [ myFile.simpleName.tokenize('_'), myFile ]
@@ -1132,7 +1132,7 @@ Effectuez les modifications suivantes dans le flux de travail :
 === "Avant"
 
     ```groovy title="main.nf" linenums="7" hl_lines="4"
-        // Load files with channel.fromPath
+        // Charge les fichiers avec channel.fromPath
         ch_files = channel.fromPath('data/patientA_rep1_normal_R*_001.fastq.gz')
         ch_files.map { myFile ->
             [ myFile.simpleName, myFile ]
@@ -1208,7 +1208,7 @@ Effectuez les modifications suivantes dans le flux de travail :
 === "Après"
 
     ```groovy title="main.nf" linenums="7" hl_lines="4-13"
-        // Load files with channel.fromPath
+        // Charge les fichiers avec channel.fromPath
         ch_files = channel.fromPath('data/patientA_rep1_normal_R*_001.fastq.gz')
         ch_files.map { myFile ->
             def (patient, replicate, type, readNum) = myFile.simpleName.tokenize('_')

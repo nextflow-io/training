@@ -131,7 +131,7 @@ Füge die folgende process-Definition zum Workflow-Skript hinzu, direkt unter de
 
 ```groovy title="hello-workflow.nf" linenums="20"
 /*
- * Use a text replacement tool to convert the greeting to uppercase
+ * Verwende ein Textersetzungstool, um die Begrüßung in Großbuchstaben umzuwandeln
  */
 process convertToUpper {
 
@@ -404,7 +404,7 @@ Füge die folgende process-Definition zum Workflow-Skript hinzu:
 
 ```groovy title="hello-workflow.nf" linenums="37"
 /*
- * Collect uppercase greetings into a single output file
+ * Großbuchstaben-Begrüßungen in einer einzelnen Ausgabedatei sammeln
  */
 process collectGreetings {
 

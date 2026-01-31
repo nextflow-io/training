@@ -83,12 +83,12 @@ nextflow pull nf-core/demo
     downloaded from https://github.com/nf-core/demo.git - revision: 04060b4644 [master]
     ```
 
-Nextflow esegue un `pull` del codice della pipeline, cioè scarica il repository completo sul Suo disco locale.
+Nextflow esegue un `pull` del codice della pipeline, cioè scarica il repository completo sul vostro disco locale.
 
 Per essere chiari, potete farlo con qualsiasi pipeline Nextflow che sia configurata appropriatamente in GitHub, non solo le pipeline nf-core.
 Tuttavia nf-core è la più grande collezione open-source di pipeline Nextflow.
 
-Può ottenere da Nextflow un elenco di quali pipeline ha recuperato in questo modo:
+Potete ottenere da Nextflow un elenco di quali pipeline avete recuperato in questo modo:
 
 ```bash
 nextflow list
@@ -100,7 +100,7 @@ nextflow list
     nf-core/demo
     ```
 
-Noterà che i file non sono nella Sua directory di lavoro corrente.
+Noterete che i file non sono nella vostra directory di lavoro corrente.
 Per impostazione predefinita, Nextflow li salva in `$NXF_HOME/assets`.
 
 ```bash
@@ -117,7 +117,7 @@ tree -L 2 $NXF_HOME/assets/
 
 !!! note
 
-    Il percorso completo potrebbe differire sul Suo sistema se non sta utilizzando il nostro ambiente di formazione.
+    Il percorso completo potrebbe differire sul vostro sistema se non state utilizzando il nostro ambiente di formazione.
 
 Nextflow mantiene intenzionalmente il codice sorgente scaricato 'fuori mano' sul principio che queste pipeline dovrebbero essere utilizzate più come librerie che come codice con cui interagire direttamente.
 
@@ -303,14 +303,14 @@ nextflow run nf-core/demo -profile docker,test --outdir demo-results
     -[nf-core/demo] Pipeline completed successfully-
     ```
 
-Se il Suo output corrisponde a quello, congratulazioni! Ha appena eseguito la Sua prima pipeline nf-core.
+Se il vostro output corrisponde a quello, congratulazioni! Avete appena eseguito la vostra prima pipeline nf-core.
 
-Noterà che c'è molto più output sulla console rispetto a quando esegue una pipeline Nextflow di base.
+Noterete che c'è molto più output sulla console rispetto a quando eseguite una pipeline Nextflow di base.
 C'è un'intestazione che include un riepilogo della versione della pipeline, input e output, e alcuni elementi di configurazione.
 
 !!! note
 
-    Il Suo output mostrerà timestamp, nomi di esecuzione e percorsi di file diversi, ma la struttura complessiva e l'esecuzione dei processi dovrebbero essere simili.
+    Il vostro output mostrerà timestamp, nomi di esecuzione e percorsi di file diversi, ma la struttura complessiva e l'esecuzione dei processi dovrebbero essere simili.
 
 Passando all'output di esecuzione, diamo un'occhiata alle righe che ci dicono quali processi sono stati eseguiti:
 
@@ -322,7 +322,7 @@ Passando all'output di esecuzione, diamo un'occhiata alle righe che ci dicono qu
 
 Questo ci dice che sono stati eseguiti tre processi, corrispondenti ai tre strumenti mostrati nella pagina di documentazione della pipeline sul sito web nf-core: FASTQC, SEQTK_TRIM e MULTIQC.
 
-I nomi completi dei processi come mostrati qui, come `NFCORE_DEMO:DEMO:MULTIQC`, sono più lunghi di quelli che potrebbe aver visto nel materiale introduttivo Hello Nextflow.
+I nomi completi dei processi come mostrati qui, come `NFCORE_DEMO:DEMO:MULTIQC`, sono più lunghi di quelli che potreste aver visto nel materiale introduttivo Hello Nextflow.
 Questi includono i nomi dei loro workflow padre e riflettono la modularità del codice della pipeline.
 Entreremo più nel dettaglio tra poco.
 
@@ -364,14 +364,14 @@ Per saperne di più sugli output della pipeline `nf-core/demo`, consulti la sua 
 
 In questa fase, ciò che è importante osservare è che i risultati sono organizzati per modulo, e c'è inoltre una directory chiamata `pipeline_info` contenente vari report con timestamp sull'esecuzione della pipeline.
 
-Per esempio, il file `execution_timeline_*` Le mostra quali processi sono stati eseguiti, in quale ordine e quanto tempo hanno impiegato per essere eseguiti:
+Per esempio, il file `execution_timeline_*` vi mostra quali processi sono stati eseguiti, in quale ordine e quanto tempo hanno impiegato per essere eseguiti:
 
 ![report della timeline di esecuzione](./img/execution_timeline.png)
 
 !!! note
 
     Qui le attività non sono state eseguite in parallelo perché stiamo eseguendo su una macchina minimalista in Github Codespaces.
-    Per vedere queste eseguite in parallelo, provi ad aumentare l'allocazione CPU del Suo codespace e i limiti di risorse nella configurazione di test.
+    Per vedere queste eseguite in parallelo, provate ad aumentare l'allocazione CPU del vostro codespace e i limiti di risorse nella configurazione di test.
 
 Questi report sono generati automaticamente per tutte le pipeline nf-core.
 
@@ -381,7 +381,7 @@ Sapete come eseguire una pipeline nf-core utilizzando il suo profilo di test int
 
 ### Prossimi passi
 
-Impari come è organizzato il codice della pipeline.
+Imparate come è organizzato il codice della pipeline.
 
 ---
 
@@ -394,7 +394,7 @@ Comprendere come tutto questo è organizzato è il primo passo verso lo sviluppo
 
 Diamo un'occhiata a come il codice della pipeline è organizzato nel repository `nf-core/demo`, utilizzando il symlink `pipelines` che abbiamo creato in precedenza.
 
-Può usare `tree` o utilizzare l'esploratore di file per trovare e aprire la directory `nf-core/demo`.
+Potete usare `tree` o utilizzare l'esploratore di file per trovare e aprire la directory `nf-core/demo`.
 
 ```bash
 tree -L 1 pipelines/nf-core/demo

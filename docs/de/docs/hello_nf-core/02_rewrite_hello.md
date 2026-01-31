@@ -255,7 +255,7 @@ workflow HELLO {
     ch_versions = channel.empty()
 
     //
-    // Collate and save software versions
+    // Software-Versionen sammeln und speichern
     //
     softwareVersionsToYAML(ch_versions)
         .collectFile(
@@ -696,7 +696,7 @@ workflow HELLO {
     ch_versions = channel.empty()
 
     //
-    // Collate and save software versions
+    // Software-Versionen sammeln und speichern
     //
     softwareVersionsToYAML(ch_versions)
         .collectFile(
@@ -877,7 +877,7 @@ Diese Reihenfolge macht Sinn, weil in einer echten Pipeline die Prozesse Version
         cowpy(collectGreetings.out.outfile, params.character)
 
         //
-        // Collate and save software versions
+        // Software-Versionen sammeln und speichern
         //
         softwareVersionsToYAML(ch_versions)
             .collectFile(
@@ -906,7 +906,7 @@ Diese Reihenfolge macht Sinn, weil in einer echten Pipeline die Prozesse Version
         ch_versions = Channel.empty()
 
         //
-        // Collate and save software versions
+        // Software-Versionen sammeln und speichern
         //
         softwareVersionsToYAML(ch_versions)
             .collectFile(
@@ -1013,7 +1013,7 @@ include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_hell
 */
 
 //
-// WORKFLOW: Run main analysis pipeline depending on type of input
+// WORKFLOW: Haupt-Analyse-Pipeline abhängig vom Eingabetyp ausführen
 //
 workflow CORE_HELLO {
 
@@ -1023,7 +1023,7 @@ workflow CORE_HELLO {
     main:
 
     //
-    // WORKFLOW: Run pipeline
+    // WORKFLOW: Pipeline ausführen
     //
     HELLO (
         samplesheet
@@ -1039,7 +1039,7 @@ workflow {
 
     main:
     //
-    // SUBWORKFLOW: Run initialisation tasks
+    // SUBWORKFLOW: Initialisierungsaufgaben ausführen
     //
     PIPELINE_INITIALISATION (
         params.version,
@@ -1051,13 +1051,13 @@ workflow {
     )
 
     //
-    // WORKFLOW: Run main workflow
+    // WORKFLOW: Haupt-Workflow ausführen
     //
     CORE_HELLO (
         PIPELINE_INITIALISATION.out.samplesheet
     )
     //
-    // SUBWORKFLOW: Run completion tasks
+    // SUBWORKFLOW: Abschlussaufgaben ausführen
     //
     PIPELINE_COMPLETION (
         params.outdir,
@@ -1093,7 +1093,7 @@ Wenn wir diese Datei öffnen und nach unten scrollen, kommen wir zu diesem Codeb
 
 ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="76"
     //
-    // Create channel from input file provided through params.input
+    // Channel aus der Eingabedatei erstellen, die über params.input bereitgestellt wird
     //
 
     channel
@@ -1158,7 +1158,7 @@ Also müssen wir das nur in den Initialisierungs-Workflow einfügen, mit kleinen
 
     ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="76" hl_lines="5-7"
         //
-        // Create channel from input file provided through params.input
+        // Channel aus der Eingabedatei erstellen, die über params.input bereitgestellt wird
         //
 
         ch_samplesheet = channel.fromPath(params.input)
@@ -1174,7 +1174,7 @@ Also müssen wir das nur in den Initialisierungs-Workflow einfügen, mit kleinen
 
     ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="76" hl_lines="5-23"
         //
-        // Create channel from input file provided through params.input
+        // Channel aus der Eingabedatei erstellen, die über params.input bereitgestellt wird
         //
 
         channel
@@ -1237,10 +1237,10 @@ Jetzt können wir die `test.config`-Datei wie folgt aktualisieren:
         config_profile_name        = 'Test profile'
         config_profile_description = 'Minimal test dataset to check pipeline function'
 
-        // Input data
+        // Eingabedaten
         input  = "${projectDir}/assets/greetings.csv"
 
-        // Other parameters
+        // Weitere Parameter
         batch     = 'test'
         character = 'tux'
     }
@@ -1253,9 +1253,9 @@ Jetzt können wir die `test.config`-Datei wie folgt aktualisieren:
         config_profile_name        = 'Test profile'
         config_profile_description = 'Minimal test dataset to check pipeline function'
 
-        // Input data
-        // TODO nf-core: Specify the paths to your test data on nf-core/test-datasets
-        // TODO nf-core: Give any required params for the test so that command line flags are not needed
+        // Eingabedaten
+        // TODO nf-core: Pfade zu deinen Testdaten auf nf-core/test-datasets angeben
+        // TODO nf-core: Erforderliche Parameter für den Test angeben, damit keine Kommandozeilen-Flags benötigt werden
         input  = params.pipelines_testdata_base_path + 'viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv'
     }
     ```

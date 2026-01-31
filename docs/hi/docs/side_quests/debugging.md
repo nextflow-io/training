@@ -237,7 +237,7 @@ workflow {
         """
         echo "Processing ${sample_name}" > ${sample_name}_output.txt
         """
-    // Missing closing brace for the process
+    // process के लिए closing brace गुम है
 
     workflow {
 
@@ -306,7 +306,7 @@ nextflow run invalid_process.nf
 #!/usr/bin/env nextflow
 
 process PROCESS_FILES {
-    inputs:  // ERROR: Should be 'input' not 'inputs'
+    inputs:  // एरर: 'inputs' नहीं, 'input' होना चाहिए
     val sample_name
 
     output:
@@ -320,10 +320,10 @@ process PROCESS_FILES {
 
 workflow {
 
-    // Create input channel
+    // इनपुट channel बनाएं
     input_ch = channel.of('sample1', 'sample2', 'sample3')
 
-    // Call the process with the input channel
+    // इनपुट channel के साथ process को call करें
     PROCESS_FILES(input_ch)
 }
 ```
@@ -342,7 +342,7 @@ workflow {
     #!/usr/bin/env nextflow
 
     process PROCESS_FILES {
-        input:  // Fixed: Changed 'inputs' to 'input'
+        input:  // ठीक किया: 'inputs' को 'input' में बदला
         val sample_name
 
         output:
@@ -370,7 +370,7 @@ workflow {
     #!/usr/bin/env nextflow
 
     process PROCESS_FILES {
-        inputs:  // ERROR: Should be 'input' not 'inputs'
+        inputs:  // एरर: 'inputs' नहीं, 'input' होना चाहिए
         val sample_name
 
         output:
@@ -460,7 +460,7 @@ process PROCESS_FILES {
 
     """
     echo "Processing ${sample_name} on ${timestamp}" > ${output_prefix}.txt
-    echo "Using undefined variable: ${undefined_var}" >> ${output_prefix}.txt  // ERROR: undefined_var not defined
+    echo "Using undefined variable: ${undefined_var}" >> ${output_prefix}.txt  // एरर: undefined_var परिभाषित नहीं है
     """
 }
 
@@ -495,7 +495,7 @@ workflow {
 
         """
         echo "Processing ${sample_name} on ${timestamp}" > ${output_prefix}.txt
-        """  // Removed the line with undefined_var
+        """  // undefined_var वाली लाइन हटाई गई
     }
 
     workflow {
@@ -523,7 +523,7 @@ workflow {
 
         """
         echo "Processing ${sample_name} on ${timestamp}" > ${output_prefix}.txt
-        echo "Using undefined variable: ${undefined_var}" >> ${output_prefix}.txt  // ERROR: undefined_var not defined
+        echo "Using undefined variable: ${undefined_var}" >> ${output_prefix}.txt  // एरर: undefined_var परिभाषित नहीं है
         """
     }
 
@@ -722,7 +722,7 @@ nextflow run badpractice_syntax.nf
 ```groovy title="badpractice_syntax.nf" hl_lines="3" linenums="1"
 #!/usr/bin/env nextflow
 
-input_ch = channel.of('sample1', 'sample2', 'sample3')  // ERROR: Channel defined outside workflow
+input_ch = channel.of('sample1', 'sample2', 'sample3')  // एरर: Channel workflow के बाहर परिभाषित है
 
 process PROCESS_FILES {
     input:
@@ -777,7 +777,7 @@ channel परिभाषा को workflow ब्लॉक के अंद�
     }
 
     workflow {
-        input_ch = channel.of('sample1', 'sample2', 'sample3')  // Moved inside workflow block
+        input_ch = channel.of('sample1', 'sample2', 'sample3')  // workflow ब्लॉक के अंदर ले जाया गया
         PROCESS_FILES(input_ch)
     }
     ```
@@ -787,7 +787,7 @@ channel परिभाषा को workflow ब्लॉक के अंद�
     ```groovy title="badpractice_syntax.nf" hl_lines="3" linenums="1"
     #!/usr्bin/env nextflow
 
-    input_ch = channel.of('sample1', 'sample2', 'sample3')  // ERROR: Channel defined outside workflow
+    input_ch = channel.of('sample1', 'sample2', 'sample3')  // एरर: Channel workflow के बाहर परिभाषित है
 
     process PROCESS_FILES {
         input:
@@ -851,7 +851,7 @@ Channel संरचना एरर सिंटैक्स एरर से �
     इस सेक्शन के दौरान, याद रखें कि आप अपने वर्कफ़्लो में किसी भी बिंदु पर channel सामग्री का निरीक्षण करने के लिए `.view()` operator का उपयोग कर सकते हैं। यह channel संरचना समस्याओं को समझने के लिए सबसे शक्तिशाली डिबगिंग टूल में से एक है। हम सेक्शन 2.4 में इस तकनीक का विस्तार से पता लगाएंगे, लेकिन उदाहरणों के माध्यम से काम करते समय इसका उपयोग करने के लिए स्वतंत्र महसूस करें।
 
     ```groovy
-    my_channel.view()  // Shows what's flowing through the channel
+    my_channel.view()  // channel में क्या बह रहा है दिखाता है
     ```
 
 ### 2.1. गलत संख्या में इनपुट Channels
@@ -889,7 +889,7 @@ nextflow run bad_number_inputs.nf
 
 process PROCESS_FILES {
     input:
-        val sample_name  // Process expects only 1 input
+        val sample_name  // Process केवल 1 इनपुट की अपेक्षा करती है
 
     output:
         path "${sample_name}_output.txt"
@@ -926,7 +926,7 @@ workflow {
 
     process PROCESS_FILES {
         input:
-            val sample_name  // Process expects only 1 input
+            val sample_name  // Process केवल 1 इनपुट की अपेक्षा करती है
 
         output:
             path "${sample_name}_output.txt"
@@ -955,7 +955,7 @@ workflow {
 
     process PROCESS_FILES {
         input:
-            val sample_name  // Process expects only 1 input
+            val sample_name  // Process केवल 1 इनपुट की अपेक्षा करती है
 
         output:
             path "${sample_name}_output.txt"
@@ -1102,7 +1102,7 @@ workflow {
 workflow {
     reference_ch = channel.of('baseline_reference','other_reference')
     input_ch = channel.of('sample1', 'sample2', 'sample3')
-    combined_ch = reference_ch.combine(input_ch)  // Creates cartesian product
+    combined_ch = reference_ch.combine(input_ch)  // कार्टेशियन उत्पाद बनाता है
 
     PROCESS_FILES(combined_ch)
 }

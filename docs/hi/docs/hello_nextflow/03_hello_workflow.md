@@ -316,7 +316,7 @@ Console output में अब एक extra line है जो हमने अ
     └── UPPER-Holà-output.txt
     ```
 
-### Takeaway
+### सीख
 
 तुम जानते हो कि एक step का output अगले step को input के रूप में provide करके processes को chain कैसे करें।
 
@@ -435,7 +435,7 @@ Workflow block में, निम्नलिखित code change करो:
     }
     ```
 
-### Takeaway
+### सीख
 
 तुम जानते हो कि batch of process calls से outputs collect करके joint analysis या summation step में कैसे feed करें।
 
@@ -477,7 +477,7 @@ params {
 nextflow run hello-workflow.nf -resume --batch trio
 ```
 
-### Takeaway
+### सीख
 
 तुम जानते हो कि process को एक से अधिक input कैसे pass करें।
 
@@ -516,7 +516,7 @@ Multiple outputs separate channels में package होंगे।
 nextflow run hello-workflow.nf -resume --batch trio
 ```
 
-### Takeaway
+### सीख
 
 तुम जानते हो कि process को multiple named outputs emit करवाना और उन्हें workflow level पर appropriately handle करना।
 

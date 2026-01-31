@@ -253,7 +253,7 @@ Kopiere die gesamte process-Definition von der Workflow-Datei in die Moduldatei 
 #!/usr/bin/env nextflow
 
 /*
- * Use a text replacement tool to convert the greeting to uppercase
+ * Verwende ein Textersetzungstool, um die Begrüßung in Großbuchstaben umzuwandeln
  */
 process convertToUpper {
 
@@ -353,7 +353,7 @@ Kopiere die gesamte process-Definition von der Workflow-Datei in die Moduldatei 
 #!/usr/bin/env nextflow
 
 /*
- * Collect uppercase greetings into a single output file
+ * Großbuchstaben-Begrüßungen in einer einzelnen Ausgabedatei sammeln
  */
 process collectGreetings {
 

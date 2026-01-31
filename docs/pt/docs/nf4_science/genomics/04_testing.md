@@ -1124,7 +1124,7 @@ No entanto, uma maneira mais simples é configurar um bloco `params {}` no arqui
 ========================================================================================
 */
 
-// Output directory for workflow outputs
+// Diretório de saída para saídas do fluxo de trabalho
 outputDir = 'results_genomics'
 
 /*
@@ -1132,16 +1132,16 @@ outputDir = 'results_genomics'
  */
 
 params {
-    // Primary input (file of input files, one per line)
+    // Entrada primária (arquivo de arquivos de entrada, um por linha)
     reads_bam = "${projectDir}/data/sample_bams.txt"
 
-    // Accessory files
+    // Arquivos acessórios
     reference = "${projectDir}/data/ref/ref.fasta"
     reference_index = "${projectDir}/data/ref/ref.fasta.fai"
     reference_dict = "${projectDir}/data/ref/ref.dict"
     intervals = "${projectDir}/data/ref/intervals.bed"
 
-    // Base name for final output file
+    // Nome base para arquivo de saída final
     cohort_name = "family_trio"
 }
 ```

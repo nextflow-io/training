@@ -108,7 +108,7 @@ workflow {
 
     names_ch = channel.of('Alice', 'Bob', 'Charlie')
 
-    // Chain processes: validate -> create greeting -> add timestamp
+    // Processes की chain: validate -> greeting बनाएं -> timestamp जोड़ें
     validated_ch = VALIDATE_NAME(names_ch)
     greetings_ch = SAY_HELLO(validated_ch)
     timestamped_ch = TIMESTAMP_GREETING(greetings_ch)
@@ -155,7 +155,7 @@ workflow GREETING_WORKFLOW {
         names_ch        // इनपुट channel नामों के साथ
 
     main:
-        // Chain processes: validate -> create greeting -> add timestamp
+        // Processes की chain: validate -> greeting बनाएं -> timestamp जोड़ें
         validated_ch = VALIDATE_NAME(names_ch)
         greetings_ch = SAY_HELLO(validated_ch)
         timestamped_ch = TIMESTAMP_GREETING(greetings_ch)
@@ -398,7 +398,7 @@ _यह ध्यान रखना महत्वपूर्ण है क�
             input_ch
 
         main:
-            // Workflow तर्क यहां जाता है
+            // Workflow logic यहां जाता है
             // यह वह जगह है जहां processes को कॉल किया जाता है और channels को manipulate किया जाता है
             result_ch = SOME_PROCESS(input_ch)
 

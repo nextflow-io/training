@@ -132,7 +132,7 @@ Eche un vistazo al archivo de workflow `main.nf`:
 
 workflow {
 
-    // Create a Path object from a string path
+    // Crear un objeto Path a partir de una ruta de texto
     myFile = 'data/patientA_rep1_normal_R1_001.fastq.gz'
 
     println "${myFile} is of class ${myFile.class}"
@@ -179,7 +179,7 @@ Edite el `main.nf` para envolver la cadena con `file()` de la siguiente manera:
 === "Después"
 
     ```groovy title="main.nf" linenums="5" hl_lines="2"
-        // Create a Path object from a string path
+        // Crear un objeto Path a partir de una ruta de texto
         myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
 
         println "${myFile} is of class ${myFile.class}"
@@ -188,7 +188,7 @@ Edite el `main.nf` para envolver la cadena con `file()` de la siguiente manera:
 === "Antes"
 
     ```groovy title="main.nf" linenums="5" hl_lines="2"
-        // Create a Path object from a string path
+        // Crear un objeto Path a partir de una ruta de texto
         myFile = 'data/patientA_rep1_normal_R1_001.fastq.gz'
 
         println "${myFile} is of class ${myFile.class}"
@@ -236,10 +236,10 @@ Actualicemos nuestro workflow para imprimir los atributos de archivo incorporado
 === "Después"
 
     ```groovy title="main.nf" linenums="5" hl_lines="4-9"
-        // Create a Path object from a string path
+        // Crear un objeto Path a partir de una ruta de texto
         myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
 
-        // Print file attributes
+        // Imprimir atributos del archivo
         println "File object class: ${myFile.class}"
         println "File name: ${myFile.name}"
         println "Simple name: ${myFile.simpleName}"
@@ -250,7 +250,7 @@ Actualicemos nuestro workflow para imprimir los atributos de archivo incorporado
 === "Antes"
 
     ```groovy title="main.nf" linenums="5" hl_lines="4"
-        // Create a Path object from a string path
+        // Crear un objeto Path a partir de una ruta de texto
         myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
 
         println "${myFile} is of class ${myFile.class}"
@@ -345,27 +345,27 @@ Haga las siguientes ediciones al workflow:
 === "Después"
 
     ```groovy title="main.nf" linenums="7" hl_lines="11-12"
-        // Create a Path object from a string path
+        // Crear un objeto Path a partir de una ruta de texto
         myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
 
-        // Print file attributes
+        // Imprimir atributos del archivo
         println "File object class: ${myFile.class}"
         println "File name: ${myFile.name}"
         println "Simple name: ${myFile.simpleName}"
         println "Extension: ${myFile.extension}"
         println "Parent directory: ${myFile.parent}"
 
-        // Count the lines in the file
+        // Contar las líneas del archivo
         COUNT_LINES(myFile)
     ```
 
 === "Antes"
 
     ```groovy title="main.nf" linenums="7" hl_lines="4-9"
-        // Create a Path object from a string path
+        // Crear un objeto Path a partir de una ruta de texto
         myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
 
-        // Print file attributes
+        // Imprimir atributos del archivo
         println "File object class: ${myFile.class}"
         println "File name: ${myFile.name}"
         println "Simple name: ${myFile.simpleName}"
@@ -423,10 +423,10 @@ Haga las siguientes ediciones al workflow, asegurándose de comentar las declara
 === "Después"
 
     ```groovy title="main.nf" linenums="7" hl_lines="2 6-11"
-        // Create a Path object from a string path
+        // Crear un objeto Path a partir de una ruta de texto
         myFile = 'data/patientA_rep1_normal_R1_001.fastq.gz'
 
-        // Print file attributes
+        // Imprimir atributos del archivo
         println "File object class: ${myFile.class}"
         /*
         println "File name: ${myFile.name}"
@@ -435,24 +435,24 @@ Haga las siguientes ediciones al workflow, asegurándose de comentar las declara
         println "Parent directory: ${myFile.parent}"
         */
 
-        // Count the lines in the file
+        // Contar las líneas del archivo
         COUNT_LINES(myFile)
     ```
 
 === "Antes"
 
     ```groovy title="main.nf" linenums="7" hl_lines="4-9"
-        // Create a Path object from a string path
+        // Crear un objeto Path a partir de una ruta de texto
         myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
 
-        // Print file attributes
+        // Imprimir atributos del archivo
         println "File object class: ${myFile.class}"
         println "File name: ${myFile.name}"
         println "Simple name: ${myFile.simpleName}"
         println "Extension: ${myFile.extension}"
         println "Parent directory: ${myFile.parent}"
 
-        // Count the lines in the file
+        // Contar las líneas del archivo
         COUNT_LINES(myFile)
     ```
 
@@ -646,10 +646,10 @@ Abra `main.nf` nuevamente y cambie la ruta de entrada de la siguiente manera:
 === "Después"
 
     ```groovy title="main.nf" linenums="2" hl_lines="2"
-        // Using a remote file from the internet
+        // Usar un archivo remoto de internet
         myFile = file('https://raw.github.com/nextflow-io/training/master/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz')
 
-        // Print file attributes
+        // Imprimir atributos del archivo
         println "File object class: ${myFile.class}"
         println "File name: ${myFile.name}"
         println "Simple name: ${myFile.simpleName}"
@@ -660,10 +660,10 @@ Abra `main.nf` nuevamente y cambie la ruta de entrada de la siguiente manera:
 === "Antes"
 
     ```groovy title="main.nf" linenums="2" hl_lines="2"
-        // Create a Path object from a string path
+        // Crear un objeto Path a partir de una ruta de texto
         myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
 
-        // Print file attributes
+        // Imprimir atributos del archivo
         println "File object class: ${myFile.class}"
         println "File name: ${myFile.name}"
         println "Simple name: ${myFile.simpleName}"
@@ -754,10 +754,10 @@ Vamos a volver a usar nuestros archivos de ejemplo locales para el resto de esta
 === "Después"
 
     ```groovy title="main.nf" linenums="2" hl_lines="2"
-        // Create a Path object from a string path
+        // Crear un objeto Path a partir de una ruta de texto
         myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
 
-        // Print file attributes
+        // Imprimir atributos del archivo
         println "File object class: ${myFile.class}"
         println "File name: ${myFile.name}"
         println "Simple name: ${myFile.simpleName}"
@@ -768,10 +768,10 @@ Vamos a volver a usar nuestros archivos de ejemplo locales para el resto de esta
 === "Antes"
 
     ```groovy title="main.nf" linenums="2" hl_lines="2"
-        // Create a Path object from a string path
+        // Crear un objeto Path a partir de una ruta de texto
         myFile = file('https://raw.github.com/nextflow-io/training/master/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz')
 
-        // Print file attributes
+        // Imprimir atributos del archivo
         println "File object class: ${myFile.class}"
         println "File name: ${myFile.name}"
         println "Simple name: ${myFile.simpleName}"
@@ -818,12 +818,12 @@ Actualicemos nuestro workflow para usar `channel.fromPath`.
 === "Después"
 
     ```groovy title="main.nf" linenums="7" hl_lines="1-3"
-        // Load files with channel.fromPath
+        // Cargar archivos con channel.fromPath
         ch_files = channel.fromPath('data/patientA_rep1_normal_R1_001.fastq.gz')
         ch_files.view { myFile -> "Found file: $myFile" }
 
-        // Print file attributes
-        /* Comment these out for now, we'll come back to them!
+        // Imprimir atributos del archivo
+        /* Comentar esto por ahora, volveremos a ello más adelante!
         println "File object class: ${myFile.class}"
         println "File name: ${myFile.name}"
         println "Simple name: ${myFile.simpleName}"
@@ -831,24 +831,24 @@ Actualicemos nuestro workflow para usar `channel.fromPath`.
         println "Parent directory: ${myFile.parent}"
         */
 
-        // Count the lines in the file
+        // Contar las líneas del archivo
         // COUNT_LINES(myFile)
     ```
 
 === "Antes"
 
     ```groovy title="main.nf" linenums="7" hl_lines="1-2"
-        // Create a Path object from a string path
+        // Crear un objeto Path a partir de una ruta de texto
         myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
 
-        // Print file attributes
+        // Imprimir atributos del archivo
         println "File object class: ${myFile.class}"
         println "File name: ${myFile.name}"
         println "Simple name: ${myFile.simpleName}"
         println "Extension: ${myFile.extension}"
         println "Parent directory: ${myFile.parent}"
 
-        // Count the lines in the file
+        // Contar las líneas del archivo
         COUNT_LINES(myFile)
     ```
 
@@ -884,7 +884,7 @@ Volvamos a imprimir los atributos completos del archivo:
 === "Después"
 
     ```groovy title="main.nf" linenums="7" hl_lines="3-9 12"
-        // Load files with channel.fromPath
+        // Cargar archivos con channel.fromPath
         ch_files = channel.fromPath('data/patientA_rep1_normal_R1_001.fastq.gz')
         ch_files.view { myFile ->
             println "File object class: ${myFile.class}"
@@ -894,18 +894,18 @@ Volvamos a imprimir los atributos completos del archivo:
             println "Parent directory: ${myFile.parent}"
         }
 
-        // Count the lines in the file
+        // Contar las líneas del archivo
         COUNT_LINES(ch_files)
     ```
 
 === "Antes"
 
     ```groovy title="main.nf" linenums="7" hl_lines="3"
-        // Load files with channel.fromPath
+        // Cargar archivos con channel.fromPath
         ch_files = channel.fromPath('data/patientA_rep1_normal_R1_001.fastq.gz')
         ch_files.view { myFile -> "Found file: $myFile" }
 
-        // Count the lines in the file
+        // Contar las líneas del archivo
         // COUNT_LINES(ch_files)
     ```
 
@@ -967,14 +967,14 @@ Ahora todo lo que necesitamos hacer es actualizar la ruta del archivo en el chan
 === "Después"
 
     ```groovy title="main.nf" linenums="7"
-      // Load files with channel.fromPath
+      // Cargar archivos con channel.fromPath
         ch_files = channel.fromPath('data/patientA_rep1_normal_R*_001.fastq.gz')
     ```
 
 === "Antes"
 
     ```groovy title="main.nf" linenums="7"
-      // Load files with channel.fromPath
+      // Cargar archivos con channel.fromPath
         ch_files = channel.fromPath('data/patientA_rep1_normal_R1_001.fastq.gz')
     ```
 
@@ -1061,7 +1061,7 @@ Haga las siguientes ediciones al workflow:
 === "Después"
 
     ```groovy title="main.nf" linenums="7" hl_lines="3-6"
-        // Load files with channel.fromPath
+        // Cargar archivos con channel.fromPath
         ch_files = channel.fromPath('data/patientA_rep1_normal_R*_001.fastq.gz')
         ch_files.map { myFile ->
             [ myFile.simpleName, myFile ]
@@ -1072,7 +1072,7 @@ Haga las siguientes ediciones al workflow:
 === "Antes"
 
     ```groovy title="main.nf" linenums="7" hl_lines="3-9"
-        // Load files with channel.fromPath
+        // Cargar archivos con channel.fromPath
         ch_files = channel.fromPath('data/patientA_rep1_normal_R*_001.fastq.gz')
         ch_files.view { myFile ->
             println "File object class: ${myFile.class}"
@@ -1122,7 +1122,7 @@ Haga las siguientes ediciones al workflow:
 === "Después"
 
     ```groovy title="main.nf" linenums="7" hl_lines="4"
-        // Load files with channel.fromPath
+        // Cargar archivos con channel.fromPath
         ch_files = channel.fromPath('data/patientA_rep1_normal_R*_001.fastq.gz')
         ch_files.map { myFile ->
             [ myFile.simpleName.tokenize('_'), myFile ]
@@ -1132,7 +1132,7 @@ Haga las siguientes ediciones al workflow:
 === "Antes"
 
     ```groovy title="main.nf" linenums="7" hl_lines="4"
-        // Load files with channel.fromPath
+        // Cargar archivos con channel.fromPath
         ch_files = channel.fromPath('data/patientA_rep1_normal_R*_001.fastq.gz')
         ch_files.map { myFile ->
             [ myFile.simpleName, myFile ]
@@ -1208,7 +1208,7 @@ Haga las siguientes ediciones al workflow:
 === "Después"
 
     ```groovy title="main.nf" linenums="7" hl_lines="4-13"
-        // Load files with channel.fromPath
+        // Cargar archivos con channel.fromPath
         ch_files = channel.fromPath('data/patientA_rep1_normal_R*_001.fastq.gz')
         ch_files.map { myFile ->
             def (patient, replicate, type, readNum) = myFile.simpleName.tokenize('_')
@@ -1227,7 +1227,7 @@ Haga las siguientes ediciones al workflow:
 === "Antes"
 
     ```groovy title="main.nf" linenums="7" hl_lines="4"
-        // Load files with channel.fromPath
+        // Cargar archivos con channel.fromPath
         ch_files = channel.fromPath('data/patientA_rep1_normal_R*_001.fastq.gz')
         ch_files.map { myFile ->
             [ myFile.simpleName.tokenize('_'), myFile ]

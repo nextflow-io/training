@@ -27,9 +27,9 @@ additional_information:
 
 **Hello Nextflow è un'introduzione pratica alla costruzione di workflow di analisi dati riproducibili e scalabili.**
 
-Attraverso esempi pratici ed esercizi guidati, imparerà i fondamenti dello sviluppo di pipeline con Nextflow, incluso come definire processi, connetterli in pipeline, gestire file e dipendenze software, parallelizzare l'esecuzione senza sforzo ed eseguire workflow in diversi ambienti di calcolo.
+Attraverso esempi pratici ed esercizi guidati, imparerete i fondamenti dello sviluppo di pipeline con Nextflow, incluso come definire processi, connetterli in pipeline, gestire file e dipendenze software, parallelizzare l'esecuzione senza sforzo ed eseguire workflow in diversi ambienti di calcolo.
 
-Acquisirà le competenze e la sicurezza per iniziare a sviluppare e eseguire i propri workflow con Nextflow.
+Acquisirete le competenze e la sicurezza per iniziare a sviluppare e eseguire i vostri workflow con Nextflow.
 
 <!-- additional_information -->
 
@@ -37,11 +37,11 @@ Acquisirà le competenze e la sicurezza per iniziare a sviluppare e eseguire i p
 
 Questo corso è progettato per essere pratico, con esercizi orientati agli obiettivi strutturati per introdurre le informazioni gradualmente.
 
-Svilupperà una semplice pipeline Nextflow che prende alcuni input di testo, esegue alcuni passaggi di trasformazione e produce un singolo file di testo contenente un'immagine ASCII di un personaggio che dice il testo trasformato.
+Svilupperete una semplice pipeline Nextflow che prende alcuni input di testo, esegue alcuni passaggi di trasformazione e produce un singolo file di testo contenente un'immagine ASCII di un personaggio che dice il testo trasformato.
 
 ### Piano delle lezioni
 
-Per evitare di sovraccaricarLa con concetti e codice, abbiamo suddiviso questo in sei parti che si concentreranno ciascuna su aspetti specifici dello sviluppo di pipeline con Nextflow.
+Per evitare di sovraccaricarvi con concetti e codice, abbiamo suddiviso questo in sei parti che si concentreranno ciascuna su aspetti specifici dello sviluppo di pipeline con Nextflow.
 
 | Capitolo del corso                                    | Riepilogo                                                                                                            | Durata stimata |
 | ----------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------- |
@@ -52,7 +52,7 @@ Per evitare di sovraccaricarLa con concetti e codice, abbiamo suddiviso questo i
 | [Parte 5: Hello Containers](./05_hello_containers.md) | Utilizzo dei container come meccanismo per gestire le dipendenze software e aumentare la riproducibilità             | 60 min         |
 | [Parte 6: Hello Config](./06_hello_config.md)         | Personalizzazione del comportamento della pipeline e ottimizzazione dell'utilizzo in diversi ambienti computazionali | 60 min         |
 
-Al termine di questo corso, sarà ben preparato per affrontare i prossimi passi nel Suo percorso per sviluppare workflow riproducibili per le Sue esigenze di calcolo scientifico.
+Al termine di questo corso, sarete ben preparati per affrontare i prossimi passi nel vostro percorso per sviluppare workflow riproducibili per le vostre esigenze di calcolo scientifico.
 
 Pronto a seguire il corso?
 

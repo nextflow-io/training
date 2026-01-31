@@ -37,7 +37,7 @@ Renombremos el parámetro de entrada principal a `input_csv` y cambiemos el valo
 
 ```groovy title="rnaseq.nf" linenums="13"
 params {
-    // Primary input
+    // Entrada principal
     input_csv: Path = "data/single-end.csv"
 
     // Reference genome archive
@@ -50,7 +50,7 @@ params {
 Vamos a querer cargar los contenidos del archivo en el canal en lugar de solo la ruta del archivo, así que usamos el operador `.splitCsv()` para analizar el formato CSV, luego el operador `.map()` para obtener la información específica que queremos (la ruta del archivo FASTQ).
 
 ```groovy title="rnaseq.nf" linenums="16"
-    // Create input channel from the contents of a CSV file
+    // Crear canal de entrada a partir del contenido de un archivo CSV
     read_ch = channel.fromPath(params.input_csv)
         .splitCsv(header:true)
         .map { row -> file(row.fastq_path) }
@@ -125,7 +125,7 @@ process MULTIQC {
 Agregue la declaración `include { MULTIQC } from './modules/multiqc.nf'` al archivo `rnaseq.nf`:
 
 ```groovy title="rnaseq.nf" linenums="3"
-// Module INCLUDE statements
+// Declaraciones de inclusión de módulos
 include { FASTQC } from './modules/fastqc.nf'
 include { TRIM_GALORE } from './modules/trim_galore.nf'
 include { HISAT2_ALIGN } from './modules/hisat2_align.nf'
@@ -136,7 +136,7 @@ include { MULTIQC } from './modules/multiqc.nf'
 
 ```groovy title="rnaseq.nf" linenums="9"
 params {
-    // Primary input
+    // Entrada principal
     input_csv: Path = "data/single-end.csv"
 
     // Reference genome archive
@@ -197,7 +197,7 @@ En el contexto del bloque de flujo de trabajo completo, termina viéndose así:
 
 ```groovy title="rnaseq.nf" linenums="18"
 workflow {
-    // Create input channel from the contents of a CSV file
+    // Crear canal de entrada a partir del contenido de un archivo CSV
     read_ch = channel.fromPath(params.input_csv)
         .splitCsv(header:true)
         .map { row -> file(row.fastq_path) }
@@ -208,7 +208,7 @@ workflow {
     // Adapter trimming and post-trimming QC
     TRIM_GALORE(read_ch)
 
-    // Alignment to a reference genome
+    // Alineamiento a un genoma de referencia
     HISAT2_ALIGN(TRIM_GALORE.out.trimmed_reads, file (params.hisat2_index_zip))
 
     // Comprehensive QC report generation
@@ -318,7 +318,7 @@ Cambiemos el valor predeterminado de `input_csv` para que sea la ruta al archivo
 
 ```groovy title="rnaseq_pe.nf" linenums="15"
 params {
-    // Primary input
+    // Entrada principal
     input_csv: Path = "data/paired-end.csv"
 
     // Reference genome archive
@@ -336,7 +336,7 @@ Necesitamos decirle al operador `.map()` que obtenga ambas rutas de archivos FAS
 Así que `row -> file(row.fastq_path)` se convierte en `row -> [file(row.fastq_1), file(row.fastq_2)]`
 
 ```groovy title="rnaseq_pe.nf" linenums="19"
-    // Create input channel from the contents of a CSV file
+    // Crear canal de entrada a partir del contenido de un archivo CSV
     read_ch = channel.fromPath(params.input_csv)
         .splitCsv(header:true)
         .map { row -> [file(row.fastq_1), file(row.fastq_2)] }
@@ -437,7 +437,7 @@ Mientras estamos en MultiQC, actualicemos también el valor predeterminado del p
 
 ```groovy title="rnaseq_pe.nf" linenums="9"
 params {
-    // Primary input
+    // Entrada principal
     input_csv: Path = "data/paired-end.csv"
 
     // Reference genome archive

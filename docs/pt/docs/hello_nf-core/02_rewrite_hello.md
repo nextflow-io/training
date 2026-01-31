@@ -255,7 +255,7 @@ workflow HELLO {
     ch_versions = channel.empty()
 
     //
-    // Collate and save software versions
+    // Agrupar e salvar versões de software
     //
     softwareVersionsToYAML(ch_versions)
         .collectFile(
@@ -696,7 +696,7 @@ workflow HELLO {
     ch_versions = channel.empty()
 
     //
-    // Collate and save software versions
+    // Agrupar e salvar versões de software
     //
     softwareVersionsToYAML(ch_versions)
         .collectFile(
@@ -877,7 +877,7 @@ Esta ordenação faz sentido porque em um pipeline real, os processos emitiriam 
         cowpy(collectGreetings.out.outfile, params.character)
 
         //
-        // Collate and save software versions
+        // Agrupar e salvar versões de software
         //
         softwareVersionsToYAML(ch_versions)
             .collectFile(
@@ -906,7 +906,7 @@ Esta ordenação faz sentido porque em um pipeline real, os processos emitiriam 
         ch_versions = Channel.empty()
 
         //
-        // Collate and save software versions
+        // Agrupar e salvar versões de software
         //
         softwareVersionsToYAML(ch_versions)
             .collectFile(
@@ -1093,7 +1093,7 @@ Se abrirmos esse arquivo e rolarmos para baixo, chegamos a este pedaço de códi
 
 ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="76"
     //
-    // Create channel from input file provided through params.input
+    // Cria canal a partir do arquivo de entrada fornecido através de params.input
     //
 
     channel
@@ -1158,7 +1158,7 @@ Então só precisamos conectar isso no fluxo de trabalho de inicialização, com
 
     ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="76" hl_lines="5-7"
         //
-        // Create channel from input file provided through params.input
+        // Cria canal a partir do arquivo de entrada fornecido através de params.input
         //
 
         ch_samplesheet = channel.fromPath(params.input)
@@ -1174,7 +1174,7 @@ Então só precisamos conectar isso no fluxo de trabalho de inicialização, com
 
     ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="76" hl_lines="5-23"
         //
-        // Create channel from input file provided through params.input
+        // Cria canal a partir do arquivo de entrada fornecido através de params.input
         //
 
         channel
@@ -1237,10 +1237,10 @@ Agora podemos atualizar o arquivo `test.config` da seguinte forma:
         config_profile_name        = 'Test profile'
         config_profile_description = 'Minimal test dataset to check pipeline function'
 
-        // Input data
+        // Dados de entrada
         input  = "${projectDir}/assets/greetings.csv"
 
-        // Other parameters
+        // Outros parâmetros
         batch     = 'test'
         character = 'tux'
     }
@@ -1253,7 +1253,7 @@ Agora podemos atualizar o arquivo `test.config` da seguinte forma:
         config_profile_name        = 'Test profile'
         config_profile_description = 'Minimal test dataset to check pipeline function'
 
-        // Input data
+        // Dados de entrada
         // TODO nf-core: Specify the paths to your test data on nf-core/test-datasets
         // TODO nf-core: Give any required params for the test so that command line flags are not needed
         input  = params.pipelines_testdata_base_path + 'viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv'

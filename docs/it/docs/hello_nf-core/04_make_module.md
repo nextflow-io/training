@@ -2,15 +2,15 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-In questa quarta parte del corso di formazione Hello nf-core, Le mostreremo come creare un modulo nf-core applicando le convenzioni chiave che rendono i moduli portabili e manutenibili.
+In questa quarta parte del corso di formazione Hello nf-core, vi mostreremo come creare un modulo nf-core applicando le convenzioni chiave che rendono i moduli portabili e manutenibili.
 
 Il progetto nf-core fornisce un comando (`nf-core modules create`) che genera automaticamente template di moduli correttamente strutturati, simile a quello che abbiamo utilizzato per il workflow nella Parte 2.
-Tuttavia, per scopi didattici, inizieremo facendolo manualmente: trasformando il modulo locale `cowpy` nel Suo pipeline `core-hello` in un modulo in stile nf-core passo dopo passo.
-Successivamente, Le mostreremo come utilizzare la creazione di moduli basata su template per lavorare in modo più efficiente in futuro.
+Tuttavia, per scopi didattici, inizieremo facendolo manualmente: trasformando il modulo locale `cowpy` nel vostro pipeline `core-hello` in un modulo in stile nf-core passo dopo passo.
+Successivamente, vi mostreremo come utilizzare la creazione di moduli basata su template per lavorare in modo più efficiente in futuro.
 
 ??? info "Come iniziare da questa sezione"
 
-    Questa sezione presuppone che Lei abbia completato la [Parte 3: Utilizzare un modulo nf-core](./03_use_module.md) e abbia integrato il modulo `CAT_CAT` nel Suo pipeline.
+    Questa sezione presuppone che abbiate completato la [Parte 3: Utilizzare un modulo nf-core](./03_use_module.md) e abbiate integrato il modulo `CAT_CAT` nel vostro pipeline.
 
     Se non avete completato la Parte 3 o desiderate iniziare da zero per questa parte, potete utilizzare la soluzione `core-hello-part3` come punto di partenza.
     Eseguite questi comandi dall'interno della directory `hello-nf-core/`:
@@ -20,8 +20,8 @@ Successivamente, Le mostreremo come utilizzare la creazione di moduli basata su 
     cd core-hello
     ```
 
-    Questo Le fornisce un pipeline con il modulo `CAT_CAT` già integrato.
-    Può verificare che funzioni correttamente eseguendo il seguente comando:
+    Questo vi fornisce un pipeline con il modulo `CAT_CAT` già integrato.
+    Potete verificare che funzioni correttamente eseguendo il seguente comando:
 
     ```bash
     nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
@@ -31,7 +31,7 @@ Successivamente, Le mostreremo come utilizzare la creazione di moduli basata su 
 
 ## 1. Trasformare `cowpy` in un modulo nf-core
 
-In questa sezione, applicheremo le convenzioni nf-core al modulo locale `cowpy` nel Suo pipeline `core-hello`, trasformandolo in un modulo che segue gli standard della community nf-core.
+In questa sezione, applicheremo le convenzioni nf-core al modulo locale `cowpy` nel vostro pipeline `core-hello`, trasformandolo in un modulo che segue gli standard della community nf-core.
 
 Questo è il codice attuale per il modulo di processo `cowpy`:
 
@@ -72,7 +72,7 @@ Dopo ogni passaggio, eseguiremo il pipeline per verificare che tutto funzioni co
 
 !!! warning "Directory di lavoro"
 
-    Si assicuri di trovarsi nella directory `core-hello` (la radice del Suo pipeline) per tutte le modifiche ai file e le esecuzioni di comandi in questa sezione.
+    Assicuratevi di trovarvi nella directory `core-hello` (la radice del vostro pipeline) per tutte le modifiche ai file e le esecuzioni di comandi in questa sezione.
 
     ```bash
     cd core-hello
@@ -92,7 +92,7 @@ Iniziamo!
 
 #### 1.1.1. Aggiornare il nome del processo nel modulo
 
-Apra il file del modulo `cowpy.nf` (sotto `core-hello/modules/local/`) e modifichi il nome del processo in maiuscolo:
+Aprite il file del modulo `cowpy.nf` (sotto `core-hello/modules/local/`) e modificate il nome del processo in maiuscolo:
 
 === "Dopo"
 
@@ -490,7 +490,7 @@ Può vedere che abbiamo effettuato tre modifiche.
 
 2. **Nel blocco `script:`, abbiamo aggiunto la riga `def args = task.ext.args ?: ''`.**
    Quella riga utilizza l'operatore `?:` per determinare il valore della variabile `args`: il contenuto di `task.ext.args` se non è vuoto, o una stringa vuota se lo è.
-   Noti che mentre generalmente ci riferiamo a `ext.args`, questo codice deve riferirsi a `task.ext.args` per estrarre la configurazione `ext.args` a livello di modulo.
+   Notate che mentre generalmente ci riferiamo a `ext.args`, questo codice deve riferirsi a `task.ext.args` per estrarre la configurazione `ext.args` a livello di modulo.
 
 3. **Nella riga di comando, abbiamo sostituito `-c "$character"` con `$args`.**
    Qui è dove Nextflow inietterà eventuali argomenti dello strumento impostati in `ext.args` nel file `modules.config`.
@@ -514,11 +514,11 @@ withName: 'COWPY' {
 ```
 
 La sintassi `withName:` assegna questa configurazione solo al processo `COWPY`, e `ext.args = { "-c ${params.character}" }` semplicemente compone una stringa che includerà il valore del parametro `character`.
-Noti l'uso delle parentesi graffe, che dicono a Nextflow di valutare il valore del parametro a runtime.
+Notate l'uso delle parentesi graffe, che dicono a Nextflow di valutare il valore del parametro a runtime.
 
 Ha senso? Aggiungiamolo.
 
-Apra `conf/modules.config` e aggiunga il codice di configurazione all'interno del blocco `process {}` come mostrato di seguito.
+Aprite `conf/modules.config` e aggiungete il codice di configurazione all'interno del blocco `process {}` come mostrato di seguito.
 
 === "Dopo"
 
@@ -548,11 +548,11 @@ Apra `conf/modules.config` e aggiunga il codice di configurazione all'interno de
     }
     ```
 
-Speriamo possa immaginare di avere tutti i moduli in un pipeline con i loro `ext.args` specificati in questo file, con i seguenti vantaggi:
+Speriamo possiate immaginare di avere tutti i moduli in un pipeline con i loro `ext.args` specificati in questo file, con i seguenti vantaggi:
 
 - L'**interfaccia del modulo rimane semplice** - Accetta solo gli input essenziali di metadati e file
 - Il **pipeline espone ancora `params.character`** - Gli utenti finali possono ancora configurarlo come prima
-- Il **modulo è ora portabile** - Può essere riutilizzato in altri pipeline senza aspettarsi un nome di parametro specifico
+- Il **modulo è ora portabile** - Può essere riutilizzato in altri pipeline senza dover aspettarsi un nome di parametro specifico
 - La configurazione è **centralizzata** in `modules.config`, mantenendo pulita la logica del workflow
 
 Utilizzando il file `modules.config` come luogo dove tutti i pipeline centralizzano la configurazione per-modulo, rendiamo i nostri moduli più riutilizzabili attraverso diversi pipeline.
@@ -750,11 +750,11 @@ Apra il file del modulo `cowpy.nf` (sotto `core-hello/modules/local/`) e lo modi
     }
     ```
 
-Può vedere che abbiamo effettuato tre modifiche.
+Potete vedere che abbiamo effettuato tre modifiche.
 
 1. **Nel blocco `script:`, abbiamo aggiunto la riga `prefix = task.ext.prefix ?: "${meta.id}"`.**
    Quella riga utilizza l'operatore `?:` per determinare il valore della variabile `prefix`: il contenuto di `task.ext.prefix` se non è vuoto, o l'identificatore dalla metamap (`meta.id`) se lo è.
-   Noti che mentre generalmente ci riferiamo a `ext.prefix`, questo codice deve riferirsi a `task.ext.prefix` per estrarre la configurazione `ext.prefix` a livello di modulo.
+   Notate che mentre generalmente ci riferiamo a `ext.prefix`, questo codice deve riferirsi a `task.ext.prefix` per estrarre la configurazione `ext.prefix` a livello di modulo.
 
 2. **Nella riga di comando, abbiamo sostituito `cowpy-${input_file}` con `${prefix}.txt`.**
    Qui è dove Nextflow inietterà il valore di `prefix` determinato dalla riga sopra.
@@ -775,11 +775,11 @@ ext.prefix = { "cowpy-${meta.id}" }
 ```
 
 Questo comporrà la stringa che vogliamo.
-Noti che ancora una volta utilizziamo le parentesi graffe, questa volta per dire a Nextflow di valutare il valore di `meta.id` a runtime.
+Notate che ancora una volta utilizziamo le parentesi graffe, questa volta per dire a Nextflow di valutare il valore di `meta.id` a runtime.
 
 Aggiungiamolo.
 
-Apra `conf/modules.config` e aggiunga il codice di configurazione all'interno del blocco `process {}` come mostrato di seguito.
+Aprite `conf/modules.config` e aggiungete il codice di configurazione all'interno del blocco `process {}` come mostrato di seguito.
 
 === "Dopo"
 
@@ -1023,7 +1023,7 @@ Ora `core-hello-results` contiene anche gli output del modulo `COWPY`.
         └── pipeline_dag_2025-12-27_06-35-56.html
     ```
 
-Può vedere che Nextflow ha creato questa gerarchia di directory basata sui nomi del workflow e del modulo.
+Potete vedere che Nextflow ha creato questa gerarchia di directory basata sui nomi del workflow e del modulo.
 
 Il codice responsabile si trova nel file `conf/modules.config`.
 Questa è la configurazione `publishDir` predefinita che fa parte del template nf-core e si applica a tutti i processi:
@@ -1051,16 +1051,16 @@ Questo può sembrare complicato, quindi esaminiamo ciascuno dei tre componenti:
 
 Questo fornisce una logica coerente per organizzare gli output.
 
-L'output appare ancora meglio quando tutti i moduli in un pipeline adottano questa convenzione, quindi si senta libero di andare a eliminare le direttive `publishDir` dagli altri moduli nel Suo pipeline.
+L'output appare ancora meglio quando tutti i moduli in un pipeline adottano questa convenzione, quindi sentitevi liberi di andare a eliminare le direttive `publishDir` dagli altri moduli nel vostro pipeline.
 Questo valore predefinito verrà applicato anche ai moduli che non abbiamo esplicitamente modificato per seguire le linee guida nf-core.
 
-Detto questo, potrebbe decidere di voler organizzare i Suoi input in modo diverso, e la buona notizia è che è facile farlo.
+Detto questo, potreste decidere di voler organizzare i vostri input in modo diverso, e la buona notizia è che è facile farlo.
 
 #### 1.5.3. Sovrascrivere il valore predefinito
 
 Per sovrascrivere la direttiva `publishDir` predefinita, potete semplicemente aggiungere le vostre direttive al file `conf/modules.config`.
 
-Ad esempio, potrebbe sovrascrivere il valore predefinito per un singolo processo utilizzando il selettore `withName:`, come in questo esempio dove aggiungiamo una direttiva `publishDir` personalizzata per il processo 'COWPY'.
+Ad esempio, potreste sovrascrivere il valore predefinito per un singolo processo utilizzando il selettore `withName:`, come in questo esempio dove aggiungiamo una direttiva `publishDir` personalizzata per il processo 'COWPY'.
 
 ```groovy title="core-hello/conf/modules.config" linenums="13" hl_lines="8-10"
 process {
@@ -1081,13 +1081,13 @@ process {
 
 Non effettueremo effettivamente quella modifica, ma sentitevi liberi di sperimentare con questo e vedere quale logica potete implementare.
 
-Il punto è che questo sistema Le dà il meglio di entrambi i mondi: coerenza per default e la flessibilità di personalizzare la configurazione su richiesta.
+Il punto è che questo sistema vi dà il meglio di entrambi i mondi: coerenza per default e la flessibilità di personalizzare la configurazione su richiesta.
 
-Per riassumere, ottiene:
+Per riassumere, ottenete:
 
 - **Unica fonte di verità**: Tutta la configurazione di pubblicazione risiede in `modules.config`
 - **Default utile**: I processi funzionano out-of-the-box senza configurazione per-modulo
-- **Personalizzazione facile**: Sovrascriva il comportamento di pubblicazione nella configurazione, non nel codice del modulo
+- **Personalizzazione facile**: Sovrascrivete il comportamento di pubblicazione nella configurazione, non nel codice del modulo
 - **Moduli portabili**: I moduli non hardcodeano le posizioni di output
 
 Questo completa l'insieme di funzionalità dei moduli nf-core che dovreste assolutamente imparare a utilizzare, ma ce ne sono altre che potete leggere nelle [specifiche dei moduli nf-core](https://nf-co.re/docs/guidelines/components/modules).

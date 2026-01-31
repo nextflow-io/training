@@ -325,7 +325,7 @@ echo 'Hello World!' > output.txt
     #!/usr/bin/env nextflow
 
     /*
-    * Use echo to print 'Hello World!' to a file
+    * echo를 사용하여 'Hello World!'를 파일에 출력
     */
     process sayHello {
 
@@ -342,7 +342,7 @@ echo 'Hello World!' > output.txt
     }
 
     /*
-    * Pipeline parameters
+    * 파이프라인 매개변수
     */
     params {
         input: String
@@ -380,7 +380,7 @@ process 본문에는 실행할 명령을 지정하는 script 블록이 포함되
 
 ```groovy title="1-hello.nf" linenums="3"
 /*
-* Use echo to print a greeting to a file
+* echo를 사용하여 인사말을 파일에 출력
 */
 process sayHello {
 

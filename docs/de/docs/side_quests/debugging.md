@@ -167,14 +167,14 @@ process PROCESS_FILES {
     """
     echo "Processing ${sample_name}" > ${sample_name}_output.txt
     """
-// Missing closing brace for the process
+// Fehlende schließende Klammer für den Process
 
 workflow {
 
-    // Create input channel
+    // Eingabe-Channel erstellen
     input_ch = channel.of('sample1', 'sample2', 'sample3')
 
-    // Call the process with the input channel
+    // Den Process mit dem Eingabe-Channel aufrufen
     PROCESS_FILES(input_ch)
 }
 ```
@@ -209,14 +209,14 @@ Ersetze den Kommentar mit der fehlenden schließenden Klammer:
         """
         echo "Processing ${sample_name}" > ${sample_name}_output.txt
         """
-    }  // Add the missing closing brace
+    }  // Fehlende schließende Klammer hinzufügen
 
     workflow {
 
-        // Create input channel
+        // Eingabe-Channel erstellen
         input_ch = channel.of('sample1', 'sample2', 'sample3')
 
-        // Call the process with the input channel
+        // Den Process mit dem Eingabe-Channel aufrufen
         PROCESS_FILES(input_ch)
     }
     ```
@@ -237,14 +237,14 @@ Ersetze den Kommentar mit der fehlenden schließenden Klammer:
         """
         echo "Processing ${sample_name}" > ${sample_name}_output.txt
         """
-    // Missing closing brace for the process
+    // Fehlende schließende Klammer für den Process
 
     workflow {
 
-        // Create input channel
+        // Eingabe-Channel erstellen
         input_ch = channel.of('sample1', 'sample2', 'sample3')
 
-        // Call the process with the input channel
+        // Den Process mit dem Eingabe-Channel aufrufen
         PROCESS_FILES(input_ch)
     }
     ```
@@ -306,7 +306,7 @@ Der Fehler zeigt eine "Invalid process definition" an und zeigt den Kontext um d
 #!/usr/bin/env nextflow
 
 process PROCESS_FILES {
-    inputs:  // ERROR: Should be 'input' not 'inputs'
+    inputs:  // FEHLER: Sollte 'input' sein, nicht 'inputs'
     val sample_name
 
     output:
@@ -320,10 +320,10 @@ process PROCESS_FILES {
 
 workflow {
 
-    // Create input channel
+    // Eingabe-Channel erstellen
     input_ch = channel.of('sample1', 'sample2', 'sample3')
 
-    // Call the process with the input channel
+    // Den Process mit dem Eingabe-Channel aufrufen
     PROCESS_FILES(input_ch)
 }
 ```
@@ -342,7 +342,7 @@ Ersetze das falsche Schlüsselwort durch das korrekte, indem du [die Dokumentati
     #!/usr/bin/env nextflow
 
     process PROCESS_FILES {
-        input:  // Fixed: Changed 'inputs' to 'input'
+        input:  // Behoben: 'inputs' zu 'input' geändert
         val sample_name
 
         output:
@@ -356,10 +356,10 @@ Ersetze das falsche Schlüsselwort durch das korrekte, indem du [die Dokumentati
 
     workflow {
 
-        // Create input channel
+        // Eingabe-Channel erstellen
         input_ch = channel.of('sample1', 'sample2', 'sample3')
 
-        // Call the process with the input channel
+        // Den Process mit dem Eingabe-Channel aufrufen
         PROCESS_FILES(input_ch)
     }
     ```
@@ -370,7 +370,7 @@ Ersetze das falsche Schlüsselwort durch das korrekte, indem du [die Dokumentati
     #!/usr/bin/env nextflow
 
     process PROCESS_FILES {
-        inputs:  // ERROR: Should be 'input' not 'inputs'
+        inputs:  // FEHLER: Sollte 'input' sein, nicht 'inputs'
         val sample_name
 
         output:
@@ -384,10 +384,10 @@ Ersetze das falsche Schlüsselwort durch das korrekte, indem du [die Dokumentati
 
     workflow {
 
-        // Create input channel
+        // Eingabe-Channel erstellen
         input_ch = channel.of('sample1', 'sample2', 'sample3')
 
-        // Call the process with the input channel
+        // Den Process mit dem Eingabe-Channel aufrufen
         PROCESS_FILES(input_ch)
     }
     ```
@@ -454,13 +454,13 @@ process PROCESS_FILES {
     path "${sample_name}_processed.txt"
 
     script:
-    // Define variables in Groovy code before the script
+    // Variablen im Groovy-Code vor dem Script definieren
     def output_prefix = "${sample_name}_processed"
     def timestamp = new Date().format("yyyy-MM-dd")
 
     """
     echo "Processing ${sample_name} on ${timestamp}" > ${output_prefix}.txt
-    echo "Using undefined variable: ${undefined_var}" >> ${output_prefix}.txt  // ERROR: undefined_var not defined
+    echo "Using undefined variable: ${undefined_var}" >> ${output_prefix}.txt  // FEHLER: undefined_var nicht definiert
     """
 }
 
@@ -489,13 +489,13 @@ Wenn du einen 'No such variable'-Fehler erhältst, kannst du ihn beheben, indem 
         path "${sample_name}_output.txt"
 
         script:
-        // Define variables in Groovy code before the script
+        // Variablen im Groovy-Code vor dem Script definieren
         def output_prefix = "${sample_name}_processed"
         def timestamp = new Date().format("yyyy-MM-dd")
 
         """
         echo "Processing ${sample_name} on ${timestamp}" > ${output_prefix}.txt
-        """  // Removed the line with undefined_var
+        """  // Die Zeile mit undefined_var entfernt
     }
 
     workflow {
@@ -517,13 +517,13 @@ Wenn du einen 'No such variable'-Fehler erhältst, kannst du ihn beheben, indem 
         path "${sample_name}_output.txt"
 
         script:
-        // Define variables in Groovy code before the script
+        // Variablen im Groovy-Code vor dem Script definieren
         def output_prefix = "${sample_name}_processed"
         def timestamp = new Date().format("yyyy-MM-dd")
 
         """
         echo "Processing ${sample_name} on ${timestamp}" > ${output_prefix}.txt
-        echo "Using undefined variable: ${undefined_var}" >> ${output_prefix}.txt  // ERROR: undefined_var not defined
+        echo "Using undefined variable: ${undefined_var}" >> ${output_prefix}.txt  // FEHLER: undefined_var nicht definiert
         """
     }
 
@@ -722,7 +722,7 @@ Schauen wir uns `badpractice_syntax.nf` an, um zu sehen, was den Fehler verursac
 ```groovy title="badpractice_syntax.nf" hl_lines="3" linenums="1"
 #!/usr/bin/env nextflow
 
-input_ch = channel.of('sample1', 'sample2', 'sample3')  // ERROR: Channel defined outside workflow
+input_ch = channel.of('sample1', 'sample2', 'sample3')  // FEHLER: Channel außerhalb des Workflows definiert
 
 process PROCESS_FILES {
     input:
@@ -732,7 +732,7 @@ process PROCESS_FILES {
     path "${sample_name}_processed.txt"
 
     script:
-    // Define variables in Groovy code before the script
+    // Variablen im Groovy-Code vor dem Script definieren
     def output_prefix = "${sample_name}_processed"
     def timestamp = new Date().format("yyyy-MM-dd")
 
@@ -767,7 +767,7 @@ Verschiebe die Channel-Definition in den Workflow-Block:
         path "${sample_name}_processed.txt"
 
         script:
-        // Define variables in Groovy code before the script
+        // Variablen im Groovy-Code vor dem Script definieren
         def output_prefix = "${sample_name}_processed"
         def timestamp = new Date().format("yyyy-MM-dd")
 
@@ -787,7 +787,7 @@ Verschiebe die Channel-Definition in den Workflow-Block:
     ```groovy title="badpractice_syntax.nf" hl_lines="3" linenums="1"
     #!/usr/bin/env nextflow
 
-    input_ch = channel.of('sample1', 'sample2', 'sample3')  // ERROR: Channel defined outside workflow
+    input_ch = channel.of('sample1', 'sample2', 'sample3')  // FEHLER: Channel außerhalb des Workflows definiert
 
     process PROCESS_FILES {
         input:
@@ -797,7 +797,7 @@ Verschiebe die Channel-Definition in den Workflow-Block:
         path "${sample_name}_processed.txt"
 
         script:
-        // Define variables in Groovy code before the script
+        // Variablen im Groovy-Code vor dem Script definieren
         def output_prefix = "${sample_name}_processed"
         def timestamp = new Date().format("yyyy-MM-dd")
 
@@ -902,11 +902,11 @@ process PROCESS_FILES {
 
 workflow {
 
-    // Create two separate channels
+    // Zwei separate Channels erstellen
     samples_ch = channel.of('sample1', 'sample2', 'sample3')
     files_ch = channel.of('file1.txt', 'file2.txt', 'file3.txt')
 
-    // ERROR: Passing 2 channels but process expects only 1
+    // FEHLER: 2 Channels übergeben, aber Process erwartet nur 1
     PROCESS_FILES(samples_ch, files_ch)
 }
 ```
@@ -939,11 +939,11 @@ Für dieses spezifische Beispiel erwartet der Process einen einzelnen Channel un
 
     workflow {
 
-        // Create two separate channels
+        // Zwei separate Channels erstellen
         samples_ch = channel.of('sample1', 'sample2', 'sample3')
         files_ch = channel.of('file1.txt', 'file2.txt', 'file3.txt')
 
-        // Fixed: Pass only the channel the process expects
+        // Behoben: Nur den Channel übergeben, den der Process erwartet
         PROCESS_FILES(samples_ch)
     }
     ```
@@ -968,11 +968,11 @@ Für dieses spezifische Beispiel erwartet der Process einen einzelnen Channel un
 
     workflow {
 
-        // Create two separate channels
+        // Zwei separate Channels erstellen
         samples_ch = channel.of('sample1', 'sample2', 'sample3')
         files_ch = channel.of('file1.txt', 'file2.txt', 'file3.txt')
 
-        // ERROR: Passing 2 channels but process expects only 1
+        // FEHLER: 2 Channels übergeben, aber Process erwartet nur 1
         PROCESS_FILES(samples_ch, files_ch)
     }
     ```
@@ -1035,7 +1035,7 @@ process PROCESS_FILES {
     path "${output_prefix}.txt"
 
     script:
-    // Define variables in Groovy code before the script
+    // Variablen im Groovy-Code vor dem Script definieren
     output_prefix = "${reference}_${sample_name}"
     def timestamp = new Date().format("yyyy-MM-dd")
 
@@ -1232,7 +1232,7 @@ Um dies zu beheben, könnten wir, wenn der Process beide Eingaben benötigt, den
 
         process PROCESS_FILES {
             input:
-                tuple val(sample_name), val(file_name)  // Fixed: Accept tuple
+                tuple val(sample_name), val(file_name)  // Behoben: Tuple akzeptieren
 
             output:
                 path "${sample_name}_output.txt"
@@ -1298,7 +1298,7 @@ Um dies zu beheben, könnten wir, wenn der Process beide Eingaben benötigt, den
               ['sample2', 'file2.txt'],
               ['sample3', 'file3.txt']
             )
-            PROCESS_FILES(input_ch.map { it[0] })  // Fixed: Extract first element
+            PROCESS_FILES(input_ch.map { it[0] })  // Behoben: Erstes Element extrahieren
         }
         ```
 
@@ -1532,7 +1532,7 @@ Behebe die Diskrepanz, indem du den Ausgabedateinamen konsistent machst:
         val sample_name
 
         output:
-        path "${sample_name}_output.txt"  // Fixed: Match the script output
+        path "${sample_name}_output.txt"  // Behoben: Mit der Script-Ausgabe übereinstimmen
 
         script:
         """

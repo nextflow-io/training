@@ -167,14 +167,14 @@ process PROCESS_FILES {
     """
     echo "Processing ${sample_name}" > ${sample_name}_output.txt
     """
-// Missing closing brace for the process
+// Accolade fermante manquante pour le processus
 
 workflow {
 
-    // Create input channel
+    // Crée un canal d'entrée
     input_ch = channel.of('sample1', 'sample2', 'sample3')
 
-    // Call the process with the input channel
+    // Appelle le processus avec le canal d'entrée
     PROCESS_FILES(input_ch)
 }
 ```
@@ -209,14 +209,14 @@ Remplacez le commentaire par l'accolade fermante manquante :
         """
         echo "Processing ${sample_name}" > ${sample_name}_output.txt
         """
-    }  // Add the missing closing brace
+    }  // Ajoute l'accolade fermante manquante
 
     workflow {
 
-        // Create input channel
+        // Crée un canal d'entrée
         input_ch = channel.of('sample1', 'sample2', 'sample3')
 
-        // Call the process with the input channel
+        // Appelle le processus avec le canal d'entrée
         PROCESS_FILES(input_ch)
     }
     ```
@@ -237,14 +237,14 @@ Remplacez le commentaire par l'accolade fermante manquante :
         """
         echo "Processing ${sample_name}" > ${sample_name}_output.txt
         """
-    // Missing closing brace for the process
+    // Accolade fermante manquante pour le processus
 
     workflow {
 
-        // Create input channel
+        // Crée un canal d'entrée
         input_ch = channel.of('sample1', 'sample2', 'sample3')
 
-        // Call the process with the input channel
+        // Appelle le processus avec le canal d'entrée
         PROCESS_FILES(input_ch)
     }
     ```
@@ -306,7 +306,7 @@ L'erreur indique une "Définition de processus invalide" et montre le contexte a
 #!/usr/bin/env nextflow
 
 process PROCESS_FILES {
-    inputs:  // ERROR: Should be 'input' not 'inputs'
+    inputs:  // ERREUR : Devrait être 'input' et non 'inputs'
     val sample_name
 
     output:
@@ -320,10 +320,10 @@ process PROCESS_FILES {
 
 workflow {
 
-    // Create input channel
+    // Crée un canal d'entrée
     input_ch = channel.of('sample1', 'sample2', 'sample3')
 
-    // Call the process with the input channel
+    // Appelle le processus avec le canal d'entrée
     PROCESS_FILES(input_ch)
 }
 ```
@@ -342,7 +342,7 @@ Remplacez le mot-clé incorrect par le bon en consultant [la documentation](http
     #!/usr/bin/env nextflow
 
     process PROCESS_FILES {
-        input:  // Fixed: Changed 'inputs' to 'input'
+        input:  // Corrigé : Changé 'inputs' en 'input'
         val sample_name
 
         output:
@@ -356,10 +356,10 @@ Remplacez le mot-clé incorrect par le bon en consultant [la documentation](http
 
     workflow {
 
-        // Create input channel
+        // Crée un canal d'entrée
         input_ch = channel.of('sample1', 'sample2', 'sample3')
 
-        // Call the process with the input channel
+        // Appelle le processus avec le canal d'entrée
         PROCESS_FILES(input_ch)
     }
     ```
@@ -370,7 +370,7 @@ Remplacez le mot-clé incorrect par le bon en consultant [la documentation](http
     #!/usr/bin/env nextflow
 
     process PROCESS_FILES {
-        inputs:  // ERROR: Should be 'input' not 'inputs'
+        inputs:  // ERREUR : Devrait être 'input' et non 'inputs'
         val sample_name
 
         output:
@@ -384,10 +384,10 @@ Remplacez le mot-clé incorrect par le bon en consultant [la documentation](http
 
     workflow {
 
-        // Create input channel
+        // Crée un canal d'entrée
         input_ch = channel.of('sample1', 'sample2', 'sample3')
 
-        // Call the process with the input channel
+        // Appelle le processus avec le canal d'entrée
         PROCESS_FILES(input_ch)
     }
     ```
@@ -454,13 +454,13 @@ process PROCESS_FILES {
     path "${sample_name}_processed.txt"
 
     script:
-    // Define variables in Groovy code before the script
+    // Définit les variables dans le code Groovy avant le script
     def output_prefix = "${sample_name}_processed"
     def timestamp = new Date().format("yyyy-MM-dd")
 
     """
     echo "Processing ${sample_name} on ${timestamp}" > ${output_prefix}.txt
-    echo "Using undefined variable: ${undefined_var}" >> ${output_prefix}.txt  // ERROR: undefined_var not defined
+    echo "Using undefined variable: ${undefined_var}" >> ${output_prefix}.txt  // ERREUR : undefined_var non définie
     """
 }
 
@@ -489,13 +489,13 @@ Si vous obtenez une erreur 'No such variable', vous pouvez la corriger soit en d
         path "${sample_name}_output.txt"
 
         script:
-        // Define variables in Groovy code before the script
+        // Définit les variables dans le code Groovy avant le script
         def output_prefix = "${sample_name}_processed"
         def timestamp = new Date().format("yyyy-MM-dd")
 
         """
         echo "Processing ${sample_name} on ${timestamp}" > ${output_prefix}.txt
-        """  // Removed the line with undefined_var
+        """  // Supprime la ligne avec undefined_var
     }
 
     workflow {
@@ -517,13 +517,13 @@ Si vous obtenez une erreur 'No such variable', vous pouvez la corriger soit en d
         path "${sample_name}_output.txt"
 
         script:
-        // Define variables in Groovy code before the script
+        // Définit les variables dans le code Groovy avant le script
         def output_prefix = "${sample_name}_processed"
         def timestamp = new Date().format("yyyy-MM-dd")
 
         """
         echo "Processing ${sample_name} on ${timestamp}" > ${output_prefix}.txt
-        echo "Using undefined variable: ${undefined_var}" >> ${output_prefix}.txt  // ERROR: undefined_var not defined
+        echo "Using undefined variable: ${undefined_var}" >> ${output_prefix}.txt  // ERREUR : undefined_var non définie
         """
     }
 
@@ -722,7 +722,7 @@ Examinons `badpractice_syntax.nf` pour voir ce qui cause l'erreur :
 ```groovy title="badpractice_syntax.nf" hl_lines="3" linenums="1"
 #!/usr/bin/env nextflow
 
-input_ch = channel.of('sample1', 'sample2', 'sample3')  // ERROR: Channel defined outside workflow
+input_ch = channel.of('sample1', 'sample2', 'sample3')  // ERREUR : Canal défini en dehors du workflow
 
 process PROCESS_FILES {
     input:
@@ -732,7 +732,7 @@ process PROCESS_FILES {
     path "${sample_name}_processed.txt"
 
     script:
-    // Define variables in Groovy code before the script
+    // Définit les variables dans le code Groovy avant le script
     def output_prefix = "${sample_name}_processed"
     def timestamp = new Date().format("yyyy-MM-dd")
 
@@ -767,7 +767,7 @@ Déplacez la définition du canal à l'intérieur du bloc workflow :
         path "${sample_name}_processed.txt"
 
         script:
-        // Define variables in Groovy code before the script
+        // Définit les variables dans le code Groovy avant le script
         def output_prefix = "${sample_name}_processed"
         def timestamp = new Date().format("yyyy-MM-dd")
 
@@ -777,7 +777,7 @@ Déplacez la définition du canal à l'intérieur du bloc workflow :
     }
 
     workflow {
-        input_ch = channel.of('sample1', 'sample2', 'sample3')  // Moved inside workflow block
+        input_ch = channel.of('sample1', 'sample2', 'sample3')  // Déplacé à l'intérieur du bloc workflow
         PROCESS_FILES(input_ch)
     }
     ```
@@ -787,7 +787,7 @@ Déplacez la définition du canal à l'intérieur du bloc workflow :
     ```groovy title="badpractice_syntax.nf" hl_lines="3" linenums="1"
     #!/usr/bin/env nextflow
 
-    input_ch = channel.of('sample1', 'sample2', 'sample3')  // ERROR: Channel defined outside workflow
+    input_ch = channel.of('sample1', 'sample2', 'sample3')  // ERREUR : Canal défini en dehors du workflow
 
     process PROCESS_FILES {
         input:
@@ -797,7 +797,7 @@ Déplacez la définition du canal à l'intérieur du bloc workflow :
         path "${sample_name}_processed.txt"
 
         script:
-        // Define variables in Groovy code before the script
+        // Définit les variables dans le code Groovy avant le script
         def output_prefix = "${sample_name}_processed"
         def timestamp = new Date().format("yyyy-MM-dd")
 
@@ -851,7 +851,7 @@ Les erreurs de structure des canaux sont plus subtiles que les erreurs de syntax
     Tout au long de cette section, rappelez-vous que vous pouvez utiliser l'opérateur `.view()` pour inspecter le contenu des canaux à n'importe quel point de votre workflow. C'est l'un des outils de débogage les plus puissants pour comprendre les problèmes de structure des canaux. Nous explorerons cette technique en détail dans la section 2.4, mais n'hésitez pas à l'utiliser pendant que vous travaillez sur les exemples.
 
     ```groovy
-    my_channel.view()  // Shows what's flowing through the channel
+    my_channel.view()  // Affiche ce qui circule dans le canal
     ```
 
 ### 2.1. Mauvais Nombre de Canaux d'Entrée
@@ -889,7 +889,7 @@ Le message d'erreur indique clairement que l'appel attendait 1 argument mais en 
 
 process PROCESS_FILES {
     input:
-        val sample_name  // Process expects only 1 input
+        val sample_name  // Le processus n'attend qu'une seule entrée
 
     output:
         path "${sample_name}_output.txt"
@@ -902,11 +902,11 @@ process PROCESS_FILES {
 
 workflow {
 
-    // Create two separate channels
+    // Crée deux canaux séparés
     samples_ch = channel.of('sample1', 'sample2', 'sample3')
     files_ch = channel.of('file1.txt', 'file2.txt', 'file3.txt')
 
-    // ERROR: Passing 2 channels but process expects only 1
+    // ERREUR : Passe 2 canaux mais le processus n'en attend qu'un seul
     PROCESS_FILES(samples_ch, files_ch)
 }
 ```
@@ -926,7 +926,7 @@ Pour cet exemple spécifique, le processus attend un seul canal et ne nécessite
 
     process PROCESS_FILES {
         input:
-            val sample_name  // Process expects only 1 input
+            val sample_name  // Le processus n'attend qu'une seule entrée
 
         output:
             path "${sample_name}_output.txt"
@@ -939,11 +939,11 @@ Pour cet exemple spécifique, le processus attend un seul canal et ne nécessite
 
     workflow {
 
-        // Create two separate channels
+        // Crée deux canaux séparés
         samples_ch = channel.of('sample1', 'sample2', 'sample3')
         files_ch = channel.of('file1.txt', 'file2.txt', 'file3.txt')
 
-        // Fixed: Pass only the channel the process expects
+        // Corrigé : Passe uniquement le canal que le processus attend
         PROCESS_FILES(samples_ch)
     }
     ```
@@ -955,7 +955,7 @@ Pour cet exemple spécifique, le processus attend un seul canal et ne nécessite
 
     process PROCESS_FILES {
         input:
-            val sample_name  // Process expects only 1 input
+            val sample_name  // Le processus n'attend qu'une seule entrée
 
         output:
             path "${sample_name}_output.txt"
@@ -968,11 +968,11 @@ Pour cet exemple spécifique, le processus attend un seul canal et ne nécessite
 
     workflow {
 
-        // Create two separate channels
+        // Crée deux canaux séparés
         samples_ch = channel.of('sample1', 'sample2', 'sample3')
         files_ch = channel.of('file1.txt', 'file2.txt', 'file3.txt')
 
-        // ERROR: Passing 2 channels but process expects only 1
+        // ERREUR : Passe 2 canaux mais le processus n'en attend qu'un seul
         PROCESS_FILES(samples_ch, files_ch)
     }
     ```
@@ -1035,7 +1035,7 @@ process PROCESS_FILES {
     path "${output_prefix}.txt"
 
     script:
-    // Define variables in Groovy code before the script
+    // Définit les variables dans le code Groovy avant le script
     output_prefix = "${reference}_${sample_name}"
     def timestamp = new Date().format("yyyy-MM-dd")
 
@@ -1067,7 +1067,7 @@ Il existe plusieurs façons de résoudre ce problème selon le nombre de fichier
 
 ```groovy title="exhausted.nf (corrigé - Option 1a)" hl_lines="2" linenums="21"
 workflow {
-    reference_ch = channel.value('baseline_reference')  // Value channel can be reused
+    reference_ch = channel.value('baseline_reference')  // Le canal de valeur peut être réutilisé
     input_ch = channel.of('sample1', 'sample2', 'sample3')
 
     PROCESS_FILES(reference_ch, input_ch)
@@ -1078,7 +1078,7 @@ workflow {
 
 ```groovy title="exhausted.nf (corrigé - Option 1b)" hl_lines="2" linenums="21"
 workflow {
-    reference_ch = channel.of('baseline_reference').first()  // Convert to value channel
+    reference_ch = channel.of('baseline_reference').first()  // Convertit en canal de valeur
     input_ch = channel.of('sample1', 'sample2', 'sample3')
 
     PROCESS_FILES(reference_ch, input_ch)
@@ -1089,7 +1089,7 @@ workflow {
 
 ```groovy title="exhausted.nf (corrigé - Option 1c)" hl_lines="2" linenums="21"
 workflow {
-    reference_ch = channel.of('baseline_reference').collect()  // Convert to value channel
+    reference_ch = channel.of('baseline_reference').collect()  // Convertit en canal de valeur
     input_ch = channel.of('sample1', 'sample2', 'sample3')
 
     PROCESS_FILES(reference_ch, input_ch)
@@ -1102,7 +1102,7 @@ workflow {
 workflow {
     reference_ch = channel.of('baseline_reference','other_reference')
     input_ch = channel.of('sample1', 'sample2', 'sample3')
-    combined_ch = reference_ch.combine(input_ch)  // Creates cartesian product
+    combined_ch = reference_ch.combine(input_ch)  // Crée un produit cartésien
 
     PROCESS_FILES(combined_ch)
 }
@@ -1194,7 +1194,7 @@ Les crochets dans le message d'erreur fournissent l'indice ici - le processus tr
 
 process PROCESS_FILES {
     input:
-        val sample_name  // Expects single value, gets tuple
+        val sample_name  // Attend une valeur unique, reçoit un tuple
 
     output:
         path "${sample_name}_output.txt"
@@ -1207,7 +1207,7 @@ process PROCESS_FILES {
 
 workflow {
 
-    // Channel emits tuples, but process expects single values
+    // Le canal émet des tuples, mais le processus attend des valeurs uniques
     input_ch = channel.of(
       ['sample1', 'file1.txt'],
       ['sample2', 'file2.txt'],
@@ -1232,7 +1232,7 @@ Pour corriger cela, si le processus nécessite les deux entrées, nous pourrions
 
         process PROCESS_FILES {
             input:
-                tuple val(sample_name), val(file_name)  // Fixed: Accept tuple
+                tuple val(sample_name), val(file_name)  // Corrigé : Accepte le tuple
 
             output:
                 path "${sample_name}_output.txt"
@@ -1245,7 +1245,7 @@ Pour corriger cela, si le processus nécessite les deux entrées, nous pourrions
 
         workflow {
 
-            // Channel emits tuples, but process expects single values
+            // Le canal émet des tuples, mais le processus attend des valeurs uniques
             input_ch = channel.of(
               ['sample1', 'file1.txt'],
               ['sample2', 'file2.txt'],
@@ -1262,7 +1262,7 @@ Pour corriger cela, si le processus nécessite les deux entrées, nous pourrions
 
         process PROCESS_FILES {
             input:
-                val sample_name  // Expects single value, gets tuple
+                val sample_name  // Attend une valeur unique, reçoit un tuple
 
             output:
                 path "${sample_name}_output.txt"
@@ -1275,7 +1275,7 @@ Pour corriger cela, si le processus nécessite les deux entrées, nous pourrions
 
         workflow {
 
-            // Channel emits tuples, but process expects single values
+            // Le canal émet des tuples, mais le processus attend des valeurs uniques
             input_ch = channel.of(
               ['sample1', 'file1.txt'],
               ['sample2', 'file2.txt'],
@@ -1292,13 +1292,13 @@ Pour corriger cela, si le processus nécessite les deux entrées, nous pourrions
         ```groovy title="bad_channel_shape.nf" hl_lines="9" linenums="16"
         workflow {
 
-            // Channel emits tuples, but process expects single values
+            // Le canal émet des tuples, mais le processus attend des valeurs uniques
             input_ch = channel.of(
               ['sample1', 'file1.txt'],
               ['sample2', 'file2.txt'],
               ['sample3', 'file3.txt']
             )
-            PROCESS_FILES(input_ch.map { it[0] })  // Fixed: Extract first element
+            PROCESS_FILES(input_ch.map { it[0] })  // Corrigé : Extrait le premier élément
         }
         ```
 
@@ -1307,7 +1307,7 @@ Pour corriger cela, si le processus nécessite les deux entrées, nous pourrions
         ```groovy title="bad_channel_shape.nf" hl_lines="9" linenums="16"
         workflow {
 
-            // Channel emits tuples, but process expects single values
+            // Le canal émet des tuples, mais le processus attend des valeurs uniques
             input_ch = channel.of(
               ['sample1', 'file1.txt'],
               ['sample2', 'file2.txt'],
@@ -1374,7 +1374,7 @@ Examinons `bad_channel_shape_viewed.nf` pour voir comment `.view()` est utilisé
 ```groovy title="bad_channel_shape_viewed.nf" linenums="16" hl_lines="9 11"
 workflow {
 
-    // Channel emits tuples, but process expects single values
+    // Le canal émet des tuples, mais le processus attend des valeurs uniques
     input_ch = channel.of(
       ['sample1', 'file1.txt'],
       ['sample2', 'file2.txt'],
@@ -1395,7 +1395,7 @@ Pour vous éviter d'utiliser excessivement les opérations `.view()` à l'avenir
 ```groovy title="bad_channel_shape_viewed.nf (avec commentaires)" linenums="16" hl_lines="8 9"
 workflow {
 
-    // Channel emits tuples, but process expects single values
+    // Le canal émet des tuples, mais le processus attend des valeurs uniques
     input_ch = channel.of(
             ['sample1', 'file1.txt'],
             ['sample2', 'file2.txt'],
@@ -1532,7 +1532,7 @@ Corrigez le décalage en rendant le nom de fichier de sortie cohérent :
         val sample_name
 
         output:
-        path "${sample_name}_output.txt"  // Fixed: Match the script output
+        path "${sample_name}_output.txt"  // Corrigé : Correspond à la sortie du script
 
         script:
         """

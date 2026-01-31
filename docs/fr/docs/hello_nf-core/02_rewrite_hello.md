@@ -1093,7 +1093,7 @@ Si nous ouvrons ce fichier et faisons défiler vers le bas, nous arrivons à ce 
 
 ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="76"
     //
-    // Create channel from input file provided through params.input
+    // Crée un canal à partir du fichier d'entrée fourni via params.input
     //
 
     channel
@@ -1158,7 +1158,7 @@ Donc nous devons juste intégrer cela dans le workflow d'initialisation, avec de
 
     ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="76" hl_lines="5-7"
         //
-        // Create channel from input file provided through params.input
+        // Crée un canal à partir du fichier d'entrée fourni via params.input
         //
 
         ch_samplesheet = channel.fromPath(params.input)
@@ -1174,7 +1174,7 @@ Donc nous devons juste intégrer cela dans le workflow d'initialisation, avec de
 
     ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="76" hl_lines="5-23"
         //
-        // Create channel from input file provided through params.input
+        // Crée un canal à partir du fichier d'entrée fourni via params.input
         //
 
         channel

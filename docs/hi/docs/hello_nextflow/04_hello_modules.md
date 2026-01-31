@@ -181,7 +181,7 @@ nextflow run hello-modules.nf -resume
 
 Nextflow ने recognize किया कि यह अभी भी same work है, भले ही code multiple files में split हो।
 
-### Takeaway
+### सीख
 
 तुम जानते हो कि process को local module में extract कैसे करें और तुम जानते हो कि ऐसा करना workflow की resumability break नहीं करता।
 
@@ -288,7 +288,7 @@ include { collectGreetings } from './modules/collectGreetings.nf'
 nextflow run hello-modules.nf -resume
 ```
 
-### Takeaway
+### सीख
 
 तुम जानते हो कि workflow में multiple processes को modularize कैसे करें।
 

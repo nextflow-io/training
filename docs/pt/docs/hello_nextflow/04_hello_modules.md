@@ -253,7 +253,7 @@ Copie toda a definição do processo do arquivo de fluxo de trabalho para o arqu
 #!/usr/bin/env nextflow
 
 /*
- * Use a text replacement tool to convert the greeting to uppercase
+ * Usa uma ferramenta de substituição de texto para converter a saudação para maiúsculas
  */
 process convertToUpper {
 
@@ -353,7 +353,7 @@ Copie toda a definição do processo do arquivo de fluxo de trabalho para o arqu
 #!/usr/bin/env nextflow
 
 /*
- * Collect uppercase greetings into a single output file
+ * Coleta saudações em maiúsculas em um único arquivo de saída
  */
 process collectGreetings {
 

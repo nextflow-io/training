@@ -245,7 +245,7 @@ nextflow run hello-config.nf -params-file test-params.yaml
 Parameter file use करना overkill लग सकता है जब तुम्हारे पास specify करने के लिए only कुछ parameters हों, लेकिन कुछ pipelines दर्जनों parameters expect करती हैं।
 उन cases में, parameter file use करना हमें massive command lines type किए बिना और workflow script modify किए बिना runtime पर parameter values provide करने allow करेगा।
 
-### Takeaway
+### सीख
 
 तुम जानते हो कि workflow inputs manage करने के लिए key configuration options का advantage कैसे लें।
 
@@ -538,7 +538,7 @@ nextflow run hello-config.nf --batch outmode
 यह अभी भी पहले जैसा same output produce करता है, except इस बार हम अपने outputs `results/outmode/` के under पाते हैं।
 वे सभी अभी भी proper copies हैं, symlinks नहीं।
 
-### Takeaway
+### सीख
 
 तुम जानते हो कि directories का naming और structure जहाँ तुम्हारे outputs publish होते हैं, साथ ही workflow output publishing mode कैसे control करें।
 
@@ -630,7 +630,7 @@ Behind the scenes, Nextflow ने Conda packages retrieve किए और envi
     उस case में, तुम अपनी configuration file में Docker और Conda दोनों enable करोगे।
     यदि किसी given process के लिए दोनों available हैं, Nextflow containers को prioritize करेगा।
 
-### Takeaway
+### सीख
 
 तुम जानते हो कि प्रत्येक process को कौन सा software package use करना चाहिए यह कैसे configure करें, और technologies के बीच switch कैसे करें।
 
@@ -683,7 +683,7 @@ Fortunately, Nextflow यह सब simplify करता है।
 यह एक standardized syntax provide करता है ताकि तुम relevant properties जैसे `cpus`, `memory` और `queue` सिर्फ एक बार specify कर सको।
 फिर, runtime पर, Nextflow उन settings को executor setting के based पर appropriate backend-specific scripts generate करने के लिए use करेगा।
 
-### Takeaway
+### सीख
 
 अब तुम जानते हो कि different kinds of computing infrastructure use करने के लिए executor कैसे change करें।
 
@@ -800,7 +800,7 @@ process {
 
 Nextflow इन values को उस executor के depending appropriate instructions में translate करेगा जो तुमने specify किया।
 
-### Takeaway
+### सीख
 
 तुम जानते हो कि resource utilization assess करने के लिए profiling report कैसे generate करें और सभी processes के लिए और/या individual processes के लिए resource allocations कैसे modify करें, साथ ही HPC पर running के लिए resource limitations set करें।
 
@@ -942,7 +942,7 @@ nextflow config -profile my_laptop,test
 
 यह complex projects के लिए especially useful हो जाता है जिनमें configuration की multiple layers involve होती हैं।
 
-### Takeaway
+### सीख
 
 तुम जानते हो कि minimal hassle के साथ runtime पर preset configuration select करने के लिए profiles कैसे use करें।
 More generally, तुम जानते हो कि अपने workflow executions को different compute platforms suit करने के लिए कैसे configure करें और अपनी analyses की reproducibility enhance करें।

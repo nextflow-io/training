@@ -117,7 +117,7 @@ Vous pouvez voir le code complet du workflow ci-dessous.
     params.input_file = "greetings.csv"
 
     /*
-    * Use echo to print 'Hello World!' to standard out
+    * Utilise echo pour imprimer 'Hello World!' sur la sortie standard
     */
     process sayHello {
 
@@ -136,7 +136,7 @@ Vous pouvez voir le code complet du workflow ci-dessous.
     }
 
     /*
-    * Use a text replace utility to convert the greeting to uppercase
+    * Utilise un utilitaire de remplacement de texte pour convertir la salutation en majuscules
     */
     process convertToUpper {
 

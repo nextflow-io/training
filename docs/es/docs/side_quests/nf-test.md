@@ -117,7 +117,7 @@ Puede ver el código completo del flujo de trabajo a continuación.
     params.input_file = "greetings.csv"
 
     /*
-    * Use echo to print 'Hello World!' to standard out
+    * Usar echo para imprimir 'Hello World!' a la salida estándar
     */
     process sayHello {
 
@@ -136,7 +136,7 @@ Puede ver el código completo del flujo de trabajo a continuación.
     }
 
     /*
-    * Use a text replace utility to convert the greeting to uppercase
+    * Usar una utilidad de reemplazo de texto para convertir el saludo a mayúsculas
     */
     process convertToUpper {
 

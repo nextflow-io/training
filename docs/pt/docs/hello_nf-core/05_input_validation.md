@@ -576,7 +576,7 @@ Primeiro, note que a função `samplesheetToList` já está importada no topo do
 
 ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="1" hl_lines="13"
 //
-// Subworkflow with functionality specific to the core/hello pipeline
+// Subfluxo de trabalho com funcionalidade específica para o pipeline core/hello
 //
 
 /*
@@ -600,7 +600,7 @@ Agora atualize o código de criação do canal:
 
     ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="80" hl_lines="4"
         //
-        // Create channel from input file provided through params.input
+        // Cria canal a partir do arquivo de entrada fornecido através de params.input
         //
         ch_samplesheet = channel.fromList(samplesheetToList(params.input, "${projectDir}/assets/schema_input.json"))
             .map { line -> line[0] }
@@ -614,7 +614,7 @@ Agora atualize o código de criação do canal:
 
     ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="80" hl_lines="4 5"
         //
-        // Create channel from input file provided through params.input
+        // Cria canal a partir do arquivo de entrada fornecido através de params.input
         //
         ch_samplesheet = channel.fromPath(params.input)
             .splitCsv()

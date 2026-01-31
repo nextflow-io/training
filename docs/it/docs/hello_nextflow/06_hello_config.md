@@ -287,8 +287,8 @@ Funzionalmente, questo spostamento non ha cambiato nulla, ma concettualmente è 
 
 ### 1.2. Usare un file di configurazione specifico per l'esecuzione
 
-Questo è ottimo, ma a volte potrebbe voler eseguire alcuni esperimenti temporanei con valori predefiniti diversi senza toccare il file di configurazione principale.
-Può farlo creando un nuovo file `nextflow.config` in una sottodirectory che userà come directory di lavoro per i Suoi esperimenti.
+Questo è ottimo, ma a volte potreste voler eseguire alcuni esperimenti temporanei con valori predefiniti diversi senza toccare il file di configurazione principale.
+Potete farlo creando un nuovo file `nextflow.config` in una sottodirectory che userete come directory di lavoro per i vostri esperimenti.
 
 #### 1.2.1. Creare la directory di lavoro con una configurazione vuota
 
@@ -890,7 +890,7 @@ Imparare come adattare la configurazione del vostro workflow al vostro ambiente 
 
 ## 3. Selezionare una tecnologia di packaging del software
 
-Finora abbiamo esaminato elementi di configurazione che controllano come gli input entrano e dove escono gli output. Ora è il momento di concentrarci più specificamente sull'adattamento della configurazione del Suo workflow al Suo ambiente di calcolo.
+Finora abbiamo esaminato elementi di configurazione che controllano come gli input entrano e dove escono gli output. Ora è il momento di concentrarci più specificamente sull'adattamento della configurazione del vostro workflow al vostro ambiente di calcolo.
 
 Il primo passo su quel percorso è specificare da dove provengono i pacchetti software che verranno eseguiti in ogni passaggio.
 Sono già installati nell'ambiente di calcolo locale?
@@ -958,7 +958,7 @@ Per essere chiari, non stiamo _sostituendo_ la direttiva `docker`, stiamo _aggiu
 !!! tip "Suggerimento"
 
     Ci sono diversi modi per ottenere l'URI per un dato pacchetto conda.
-    Raccomandiamo di usare la query di ricerca di [Seqera Containers](https://seqera.io/containers/), che Le darà un URI che può copiare e incollare, anche se non ha intenzione di creare un container da esso.
+    Raccomandiamo di usare la query di ricerca di [Seqera Containers](https://seqera.io/containers/), che vi darà un URI che potete copiare e incollare, anche se non avete intenzione di creare un container da esso.
 
 ### 3.3. Eseguire il workflow per verificare che possa usare Conda
 
@@ -988,7 +988,7 @@ Dietro le quinte, Nextflow ha recuperato i pacchetti Conda e creato l'ambiente, 
 
 !!! note "Nota"
 
-    Questo viene eseguito rapidamente perché il pacchetto `cowpy` è abbastanza piccolo, ma se sta lavorando con pacchetti grandi, potrebbe richiedere un po' più di tempo del solito la prima volta, e potrebbe vedere l'output della console rimanere 'bloccato' per un minuto o così prima di completare.
+    Questo viene eseguito rapidamente perché il pacchetto `cowpy` è abbastanza piccolo, ma se state lavorando con pacchetti grandi, potrebbe richiedere un po' più di tempo del solito la prima volta, e potreste vedere l'output della console rimanere 'bloccato' per un minuto o così prima di completare.
     Questo è normale ed è dovuto al lavoro extra che Nextflow fa la prima volta che usa un nuovo pacchetto.
 
 Dal nostro punto di vista, sembra che funzioni esattamente come l'esecuzione con Docker, anche se sul backend i meccanismi sono un po' diversi.
@@ -997,8 +997,8 @@ Questo significa che siamo pronti a eseguire con ambienti Conda se necessario.
 
 ??? info "Mescolare Docker e Conda"
 
-    Dato che queste direttive sono assegnate per processo, è possibile 'mescolare', _cioè_ configurare alcuni dei processi nel Suo workflow per essere eseguiti con Docker e altri con Conda, per esempio, se l'infrastruttura di calcolo che sta usando supporta entrambi.
-    In quel caso, abiliterebbe sia Docker che Conda nel Suo file di configurazione.
+    Dato che queste direttive sono assegnate per processo, è possibile 'mescolare', _cioè_ configurare alcuni dei processi nel vostro workflow per essere eseguiti con Docker e altri con Conda, per esempio, se l'infrastruttura di calcolo che state usando supporta entrambi.
+    In quel caso, abilitereste sia Docker che Conda nel vostro file di configurazione.
     Se entrambi sono disponibili per un dato processo, Nextflow darà priorità ai container.
 
     E come notato in precedenza, Nextflow supporta diverse altre tecnologie di packaging software e container, quindi non è limitato a quelle due.
@@ -1204,9 +1204,9 @@ Probabilmente non noterete alcuna differenza reale dato che questo è un carico 
 
 !!! tip "Suggerimento"
 
-    Questo è solo un piccolo assaggio di ciò che può fare per ottimizzare il Suo uso delle risorse.
+    Questo è solo un piccolo assaggio di ciò che potete fare per ottimizzare il vostro uso delle risorse.
     Nextflow stesso ha una [logica di retry dinamica](https://www.nextflow.io/docs/latest/process.html#dynamic-task-resources) davvero interessante integrata per riprovare i lavori che falliscono a causa di limitazioni di risorse.
-    Inoltre, la Piattaforma Seqera offre strumenti guidati dall'AI per ottimizzare le Sue allocazioni di risorse automaticamente.
+    Inoltre, la Piattaforma Seqera offre strumenti guidati dall'AI per ottimizzare le vostre allocazioni di risorse automaticamente.
 
 ### 5.5. Aggiungere limiti di risorse
 

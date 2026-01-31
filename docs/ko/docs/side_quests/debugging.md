@@ -167,21 +167,21 @@ process PROCESS_FILES {
     """
     echo "Processing ${sample_name}" > ${sample_name}_output.txt
     """
-// Missing closing brace for the process
+// process에 닫는 중괄호가 누락됨
 
 workflow {
 
-    // Create input channel
+    // 입력 채널 생성
     input_ch = channel.of('sample1', 'sample2', 'sample3')
 
-    // Call the process with the input channel
+    // 입력 채널로 process 호출
     PROCESS_FILES(input_ch)
 }
 ```
 
 이 예제의 목적을 위해 오류가 어디에 있는지 보여주는 주석을 남겨두었습니다. Nextflow VSCode 확장도 일치하지 않는 중괄호를 빨간색으로 표시하고 파일의 조기 종료를 강조하여 무엇이 잘못되었는지에 대한 힌트를 제공할 것입니다:
 
-![Bad syntax](img/bad_syntax.png)
+![잘못된 구문](img/bad_syntax.png)
 
 **괄호 오류 디버깅 전략:**
 
@@ -209,14 +209,14 @@ workflow {
         """
         echo "Processing ${sample_name}" > ${sample_name}_output.txt
         """
-    }  // Add the missing closing brace
+    }  // 누락된 닫는 중괄호 추가
 
     workflow {
 
-        // Create input channel
+        // 입력 채널 생성
         input_ch = channel.of('sample1', 'sample2', 'sample3')
 
-        // Call the process with the input channel
+        // 입력 채널로 process 호출
         PROCESS_FILES(input_ch)
     }
     ```
@@ -237,14 +237,14 @@ workflow {
         """
         echo "Processing ${sample_name}" > ${sample_name}_output.txt
         """
-    // Missing closing brace for the process
+    // process에 닫는 중괄호가 누락됨
 
     workflow {
 
-        // Create input channel
+        // 입력 채널 생성
         input_ch = channel.of('sample1', 'sample2', 'sample3')
 
-        // Call the process with the input channel
+        // 입력 채널로 process 호출
         PROCESS_FILES(input_ch)
     }
     ```
@@ -306,7 +306,7 @@ nextflow run invalid_process.nf
 #!/usr/bin/env nextflow
 
 process PROCESS_FILES {
-    inputs:  // ERROR: Should be 'input' not 'inputs'
+    inputs:  // 오류: 'inputs'가 아니라 'input'이어야 함
     val sample_name
 
     output:
@@ -320,17 +320,17 @@ process PROCESS_FILES {
 
 workflow {
 
-    // Create input channel
+    // 입력 채널 생성
     input_ch = channel.of('sample1', 'sample2', 'sample3')
 
-    // Call the process with the input channel
+    // 입력 채널로 process 호출
     PROCESS_FILES(input_ch)
 }
 ```
 
 오류 컨텍스트의 4번 줄을 보면 문제를 발견할 수 있습니다: 올바른 `input` 지시문 대신 `inputs`를 사용하고 있습니다. Nextflow VSCode 확장도 이를 표시할 것입니다:
 
-![Invalid process message](img/invalid_process_message.png)
+![잘못된 process 메시지](img/invalid_process_message.png)
 
 #### 코드 수정
 
@@ -342,7 +342,7 @@ workflow {
     #!/usr/bin/env nextflow
 
     process PROCESS_FILES {
-        input:  // Fixed: Changed 'inputs' to 'input'
+        input:  // 수정됨: 'inputs'를 'input'으로 변경
         val sample_name
 
         output:
@@ -356,10 +356,10 @@ workflow {
 
     workflow {
 
-        // Create input channel
+        // 입력 채널 생성
         input_ch = channel.of('sample1', 'sample2', 'sample3')
 
-        // Call the process with the input channel
+        // 입력 채널로 process 호출
         PROCESS_FILES(input_ch)
     }
     ```
@@ -370,7 +370,7 @@ workflow {
     #!/usr/bin/env nextflow
 
     process PROCESS_FILES {
-        inputs:  // ERROR: Should be 'input' not 'inputs'
+        inputs:  // 오류: 'inputs'가 아니라 'input'이어야 함
         val sample_name
 
         output:
@@ -384,10 +384,10 @@ workflow {
 
     workflow {
 
-        // Create input channel
+        // 입력 채널 생성
         input_ch = channel.of('sample1', 'sample2', 'sample3')
 
-        // Call the process with the input channel
+        // 입력 채널로 process 호출
         PROCESS_FILES(input_ch)
     }
     ```
@@ -454,13 +454,13 @@ process PROCESS_FILES {
     path "${sample_name}_processed.txt"
 
     script:
-    // Define variables in Groovy code before the script
+    // 스크립트 전에 Groovy 코드에서 변수 정의
     def output_prefix = "${sample_name}_processed"
     def timestamp = new Date().format("yyyy-MM-dd")
 
     """
     echo "Processing ${sample_name} on ${timestamp}" > ${output_prefix}.txt
-    echo "Using undefined variable: ${undefined_var}" >> ${output_prefix}.txt  // ERROR: undefined_var not defined
+    echo "Using undefined variable: ${undefined_var}" >> ${output_prefix}.txt  // 오류: undefined_var가 정의되지 않음
     """
 }
 
@@ -489,13 +489,13 @@ workflow {
         path "${sample_name}_output.txt"
 
         script:
-        // Define variables in Groovy code before the script
+        // 스크립트 전에 Groovy 코드에서 변수 정의
         def output_prefix = "${sample_name}_processed"
         def timestamp = new Date().format("yyyy-MM-dd")
 
         """
         echo "Processing ${sample_name} on ${timestamp}" > ${output_prefix}.txt
-        """  // Removed the line with undefined_var
+        """  // undefined_var가 있는 줄 제거됨
     }
 
     workflow {
@@ -517,13 +517,13 @@ workflow {
         path "${sample_name}_output.txt"
 
         script:
-        // Define variables in Groovy code before the script
+        // 스크립트 전에 Groovy 코드에서 변수 정의
         def output_prefix = "${sample_name}_processed"
         def timestamp = new Date().format("yyyy-MM-dd")
 
         """
         echo "Processing ${sample_name} on ${timestamp}" > ${output_prefix}.txt
-        echo "Using undefined variable: ${undefined_var}" >> ${output_prefix}.txt  // ERROR: undefined_var not defined
+        echo "Using undefined variable: ${undefined_var}" >> ${output_prefix}.txt  // 오류: undefined_var가 정의되지 않음
         """
     }
 
@@ -595,7 +595,7 @@ process PROCESS_FILES {
     script:
     """
     prefix="${sample_name}_output"
-    echo "Processing ${sample_name}" > ${prefix}.txt  # ERROR: ${prefix} is Groovy syntax, not Bash
+    echo "Processing ${sample_name}" > ${prefix}.txt  # 오류: ${prefix}는 Bash가 아닌 Groovy 구문임
     """
 }
 ```
@@ -621,7 +621,7 @@ Bash 변수를 사용하려면 다음과 같이 달러 기호를 이스케이프
         script:
         """
         prefix="${sample_name}_output"
-        echo "Processing ${sample_name}" > \${prefix}.txt  # Fixed: Escaped the dollar sign
+        echo "Processing ${sample_name}" > \${prefix}.txt  # 수정됨: 달러 기호를 이스케이프함
         """
     }
 
@@ -646,7 +646,7 @@ Bash 변수를 사용하려면 다음과 같이 달러 기호를 이스케이프
         script:
         """
         prefix="${sample_name}_output"
-        echo "Processing ${sample_name}" > ${prefix}.txt  # ERROR: ${prefix} is Groovy syntax, not Bash
+        echo "Processing ${sample_name}" > ${prefix}.txt  # 오류: ${prefix}는 Bash가 아닌 Groovy 구문임
         """
     }
     ```
@@ -722,7 +722,7 @@ nextflow run badpractice_syntax.nf
 ```groovy title="badpractice_syntax.nf" hl_lines="3" linenums="1"
 #!/usr/bin/env nextflow
 
-input_ch = channel.of('sample1', 'sample2', 'sample3')  // ERROR: Channel defined outside workflow
+input_ch = channel.of('sample1', 'sample2', 'sample3')  // 오류: workflow 외부에서 정의된 채널
 
 process PROCESS_FILES {
     input:
@@ -732,7 +732,7 @@ process PROCESS_FILES {
     path "${sample_name}_processed.txt"
 
     script:
-    // Define variables in Groovy code before the script
+    // 스크립트 전에 Groovy 코드에서 변수 정의
     def output_prefix = "${sample_name}_processed"
     def timestamp = new Date().format("yyyy-MM-dd")
 
@@ -748,7 +748,7 @@ workflow {
 
 VSCode 확장은 또한 워크플로우 블록 외부에서 정의된 `input_ch` 변수를 강조할 것입니다:
 
-![Non-lethal syntax error](img/nonlethal.png)
+![치명적이지 않은 구문 오류](img/nonlethal.png)
 
 #### 코드 수정
 
@@ -767,7 +767,7 @@ VSCode 확장은 또한 워크플로우 블록 외부에서 정의된 `input_ch`
         path "${sample_name}_processed.txt"
 
         script:
-        // Define variables in Groovy code before the script
+        // 스크립트 전에 Groovy 코드에서 변수 정의
         def output_prefix = "${sample_name}_processed"
         def timestamp = new Date().format("yyyy-MM-dd")
 
@@ -777,7 +777,7 @@ VSCode 확장은 또한 워크플로우 블록 외부에서 정의된 `input_ch`
     }
 
     workflow {
-        input_ch = channel.of('sample1', 'sample2', 'sample3')  // Moved inside workflow block
+        input_ch = channel.of('sample1', 'sample2', 'sample3')  // workflow 블록 내부로 이동됨
         PROCESS_FILES(input_ch)
     }
     ```
@@ -787,7 +787,7 @@ VSCode 확장은 또한 워크플로우 블록 외부에서 정의된 `input_ch`
     ```groovy title="badpractice_syntax.nf" hl_lines="3" linenums="1"
     #!/usr/bin/env nextflow
 
-    input_ch = channel.of('sample1', 'sample2', 'sample3')  // ERROR: Channel defined outside workflow
+    input_ch = channel.of('sample1', 'sample2', 'sample3')  // 오류: workflow 외부에서 정의된 채널
 
     process PROCESS_FILES {
         input:
@@ -797,7 +797,7 @@ VSCode 확장은 또한 워크플로우 블록 외부에서 정의된 `input_ch`
         path "${sample_name}_processed.txt"
 
         script:
-        // Define variables in Groovy code before the script
+        // 스크립트 전에 Groovy 코드에서 변수 정의
         def output_prefix = "${sample_name}_processed"
         def timestamp = new Date().format("yyyy-MM-dd")
 
@@ -851,7 +851,7 @@ Nextflow 오류 메시지와 IDE 시각적 표시를 사용하여 구문 오류�
     이 섹션 전체에서 `.view()` 연산자를 사용하여 워크플로우의 어느 지점에서든 채널 내용을 검사할 수 있다는 것을 기억하십시오. 이것은 채널 구조 문제를 이해하기 위한 가장 강력한 디버깅 도구 중 하나입니다. 섹션 2.4에서 이 기법을 자세히 탐구할 것이지만, 예제를 작업하면서 자유롭게 사용하십시오.
 
     ```groovy
-    my_channel.view()  // Shows what's flowing through the channel
+    my_channel.view()  // 채널을 통해 흐르는 내용을 표시
     ```
 
 ### 2.1. 잘못된 입력 채널 수
@@ -889,7 +889,7 @@ nextflow run bad_number_inputs.nf
 
 process PROCESS_FILES {
     input:
-        val sample_name  // Process expects only 1 input
+        val sample_name  // process는 1개의 입력만 예상함
 
     output:
         path "${sample_name}_output.txt"
@@ -902,18 +902,18 @@ process PROCESS_FILES {
 
 workflow {
 
-    // Create two separate channels
+    // 두 개의 별도 채널 생성
     samples_ch = channel.of('sample1', 'sample2', 'sample3')
     files_ch = channel.of('file1.txt', 'file2.txt', 'file3.txt')
 
-    // ERROR: Passing 2 channels but process expects only 1
+    // 오류: 2개의 채널을 전달하지만 process는 1개만 예상함
     PROCESS_FILES(samples_ch, files_ch)
 }
 ```
 
 프로세스가 하나만 정의하는데 여러 입력 채널을 제공하는 일치하지 않는 `PROCESS_FILES` 호출을 볼 수 있어야 합니다. VSCode 확장도 프로세스 호출 아래에 빨간 줄을 표시하고 마우스를 올리면 진단 메시지를 제공할 것입니다:
 
-![Incorrect number of args message](img/incorrect_num_args.png)
+![잘못된 인수 개수 메시지](img/incorrect_num_args.png)
 
 #### 코드 수정
 
@@ -926,7 +926,7 @@ workflow {
 
     process PROCESS_FILES {
         input:
-            val sample_name  // Process expects only 1 input
+            val sample_name  // process는 1개의 입력만 예상함
 
         output:
             path "${sample_name}_output.txt"
@@ -939,11 +939,11 @@ workflow {
 
     workflow {
 
-        // Create two separate channels
+        // 두 개의 별도 채널 생성
         samples_ch = channel.of('sample1', 'sample2', 'sample3')
         files_ch = channel.of('file1.txt', 'file2.txt', 'file3.txt')
 
-        // Fixed: Pass only the channel the process expects
+        // 수정됨: process가 예상하는 채널만 전달
         PROCESS_FILES(samples_ch)
     }
     ```
@@ -955,7 +955,7 @@ workflow {
 
     process PROCESS_FILES {
         input:
-            val sample_name  // Process expects only 1 input
+            val sample_name  // process는 1개의 입력만 예상함
 
         output:
             path "${sample_name}_output.txt"
@@ -968,11 +968,11 @@ workflow {
 
     workflow {
 
-        // Create two separate channels
+        // 두 개의 별도 채널 생성
         samples_ch = channel.of('sample1', 'sample2', 'sample3')
         files_ch = channel.of('file1.txt', 'file2.txt', 'file3.txt')
 
-        // ERROR: Passing 2 channels but process expects only 1
+        // 오류: 2개의 채널을 전달하지만 process는 1개만 예상함
         PROCESS_FILES(samples_ch, files_ch)
     }
     ```
@@ -1035,7 +1035,7 @@ process PROCESS_FILES {
     path "${output_prefix}.txt"
 
     script:
-    // Define variables in Groovy code before the script
+    // 스크립트 전에 Groovy 코드에서 변수 정의
     output_prefix = "${reference}_${sample_name}"
     def timestamp = new Date().format("yyyy-MM-dd")
 
@@ -1067,7 +1067,7 @@ workflow {
 
 ```groovy title="exhausted.nf (fixed - Option 1a)" hl_lines="2" linenums="21"
 workflow {
-    reference_ch = channel.value('baseline_reference')  // Value channel can be reused
+    reference_ch = channel.value('baseline_reference')  // value 채널은 재사용 가능
     input_ch = channel.of('sample1', 'sample2', 'sample3')
 
     PROCESS_FILES(reference_ch, input_ch)
@@ -1078,7 +1078,7 @@ workflow {
 
 ```groovy title="exhausted.nf (fixed - Option 1b)" hl_lines="2" linenums="21"
 workflow {
-    reference_ch = channel.of('baseline_reference').first()  // Convert to value channel
+    reference_ch = channel.of('baseline_reference').first()  // value 채널로 변환
     input_ch = channel.of('sample1', 'sample2', 'sample3')
 
     PROCESS_FILES(reference_ch, input_ch)
@@ -1089,7 +1089,7 @@ workflow {
 
 ```groovy title="exhausted.nf (fixed - Option 1c)" hl_lines="2" linenums="21"
 workflow {
-    reference_ch = channel.of('baseline_reference').collect()  // Convert to value channel
+    reference_ch = channel.of('baseline_reference').collect()  // value 채널로 변환
     input_ch = channel.of('sample1', 'sample2', 'sample3')
 
     PROCESS_FILES(reference_ch, input_ch)
@@ -1102,7 +1102,7 @@ workflow {
 workflow {
     reference_ch = channel.of('baseline_reference','other_reference')
     input_ch = channel.of('sample1', 'sample2', 'sample3')
-    combined_ch = reference_ch.combine(input_ch)  // Creates cartesian product
+    combined_ch = reference_ch.combine(input_ch)  // 데카르트 곱 생성
 
     PROCESS_FILES(combined_ch)
 }
@@ -1194,7 +1194,7 @@ nextflow run bad_channel_shape.nf
 
 process PROCESS_FILES {
     input:
-        val sample_name  // Expects single value, gets tuple
+        val sample_name  // 단일 값을 예상하지만 튜플을 받음
 
     output:
         path "${sample_name}_output.txt"
@@ -1207,7 +1207,7 @@ process PROCESS_FILES {
 
 workflow {
 
-    // Channel emits tuples, but process expects single values
+    // 채널이 튜플을 내보내지만 process는 단일 값을 예상함
     input_ch = channel.of(
       ['sample1', 'file1.txt'],
       ['sample2', 'file2.txt'],
@@ -1232,7 +1232,7 @@ workflow {
 
         process PROCESS_FILES {
             input:
-                tuple val(sample_name), val(file_name)  // Fixed: Accept tuple
+                tuple val(sample_name), val(file_name)  // 수정됨: 튜플 수락
 
             output:
                 path "${sample_name}_output.txt"
@@ -1245,7 +1245,7 @@ workflow {
 
         workflow {
 
-            // Channel emits tuples, but process expects single values
+            // 채널이 튜플을 내보내지만 process는 단일 값을 예상함
             input_ch = channel.of(
               ['sample1', 'file1.txt'],
               ['sample2', 'file2.txt'],
@@ -1262,7 +1262,7 @@ workflow {
 
         process PROCESS_FILES {
             input:
-                val sample_name  // Expects single value, gets tuple
+                val sample_name  // 단일 값을 예상하지만 튜플을 받음
 
             output:
                 path "${sample_name}_output.txt"
@@ -1275,7 +1275,7 @@ workflow {
 
         workflow {
 
-            // Channel emits tuples, but process expects single values
+            // 채널이 튜플을 내보내지만 process는 단일 값을 예상함
             input_ch = channel.of(
               ['sample1', 'file1.txt'],
               ['sample2', 'file2.txt'],
@@ -1292,13 +1292,13 @@ workflow {
         ```groovy title="bad_channel_shape.nf" hl_lines="9" linenums="16"
         workflow {
 
-            // Channel emits tuples, but process expects single values
+            // 채널이 튜플을 내보내지만 process는 단일 값을 예상함
             input_ch = channel.of(
               ['sample1', 'file1.txt'],
               ['sample2', 'file2.txt'],
               ['sample3', 'file3.txt']
             )
-            PROCESS_FILES(input_ch.map { it[0] })  // Fixed: Extract first element
+            PROCESS_FILES(input_ch.map { it[0] })  // 수정됨: 첫 번째 요소 추출
         }
         ```
 
@@ -1307,7 +1307,7 @@ workflow {
         ```groovy title="bad_channel_shape.nf" hl_lines="9" linenums="16"
         workflow {
 
-            // Channel emits tuples, but process expects single values
+            // 채널이 튜플을 내보내지만 process는 단일 값을 예상함
             input_ch = channel.of(
               ['sample1', 'file1.txt'],
               ['sample2', 'file2.txt'],
@@ -1374,15 +1374,15 @@ nextflow run bad_channel_shape_viewed.nf
 ```groovy title="bad_channel_shape_viewed.nf" linenums="16" hl_lines="9 11"
 workflow {
 
-    // Channel emits tuples, but process expects single values
+    // 채널이 튜플을 내보내지만 process는 단일 값을 예상함
     input_ch = channel.of(
       ['sample1', 'file1.txt'],
       ['sample2', 'file2.txt'],
       ['sample3', 'file3.txt']
     )
-    .view { "Channel content: $it" }  // Debug: Show original channel content
-    .map { tuple -> tuple[0] }        // Transform: Extract first element
-    .view { "After mapping: $it" }    // Debug: Show transformed channel content
+    .view { "Channel content: $it" }  // 디버그: 원래 채널 내용 표시
+    .map { tuple -> tuple[0] }        // 변환: 첫 번째 요소 추출
+    .view { "After mapping: $it" }    // 디버그: 변환된 채널 내용 표시
 
     PROCESS_FILES(input_ch)
 }
@@ -1395,7 +1395,7 @@ workflow {
 ```groovy title="bad_channel_shape_viewed.nf (with comments)" linenums="16" hl_lines="8 9"
 workflow {
 
-    // Channel emits tuples, but process expects single values
+    // 채널이 튜플을 내보내지만 process는 단일 값을 예상함
     input_ch = channel.of(
             ['sample1', 'file1.txt'],
             ['sample2', 'file2.txt'],

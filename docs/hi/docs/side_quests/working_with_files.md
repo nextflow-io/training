@@ -601,7 +601,7 @@ Command error:
 
     अगले अनुभाग पर जाने से पहले दोनों जानबूझकर errors को ठीक करना सुनिश्चित करो।
 
-### Takeaway
+### सीख
 
 - Path strings बनाम Path ऑब्जेक्ट्स: Strings बस टेक्स्ट हैं, Path ऑब्जेक्ट्स स्मार्ट फ़ाइल references हैं
 - `file()` मेथड एक string path को Path ऑब्जेक्ट में बदलती है जिसके साथ Nextflow काम कर सकता है
@@ -779,7 +779,7 @@ nextflow run main.nf
         println "Parent directory: ${myFile.parent}"
     ```
 
-### Takeaway
+### सीख
 
 - रिमोट डेटा को URI (HTTP, FTP, S3, Azure, Google Cloud) का उपयोग करके access किया जाता है
 - Nextflow automatically डेटा को download और सही जगह पर stage करेगा, जब तक ये paths processes को feed किए जा रहे हैं
@@ -1018,7 +1018,7 @@ nextflow run main.nf
 
 इस मेथड का उपयोग करके, हम बस glob pattern बदलकर जितनी चाहें उतनी या कम फ़ाइलें retrieve कर सकते हैं। यदि हम इसे अधिक generous बनाते हैं, उदाहरण के लिए filenames के सभी variable parts को `*` से replace करके (_जैसे_ `data/patient*_rep*_*_R*_001.fastq.gz`) हम `data` डायरेक्टरी में सभी example फ़ाइलें grab कर सकते हैं।
 
-### Takeaway
+### सीख
 
 - `channel.fromPath()` एक pattern से match करने वाली फ़ाइलों के साथ channel बनाता है
 - प्रत्येक फ़ाइल channel में एक separate element के रूप में emit होती है
@@ -1272,7 +1272,7 @@ nextflow run main.nf
 
 workflow में मेटाडेटा के elements का actually उपयोग करना भी बहुत आसान होगा, और हमारे code को पढ़ने में आसान और अधिक maintainable बनाएगा।
 
-### Takeaway
+### सीख
 
 - हम Nextflow में filenames को एक full programming language की power के साथ handle कर सकते हैं
 - हम relevant जानकारी extract करने के लिए filenames को strings के रूप में treat कर सकते हैं
@@ -1526,7 +1526,7 @@ nextflow run main.nf
 यदि तुम multiple pairs को process करने के साथ experiment करना चाहते हो, तुम input pattern में wildcards add करने की कोशिश कर सकते हो और देख सकते हो क्या होता है।
 उदाहरण के लिए, `data/patientA_rep1_*_R{1,2}_001.fastq.gz` try करो।
 
-### Takeaway
+### सीख
 
 - [`channel.fromFilePairs()` automatically related फ़ाइलों को find और pair करती है](https://www.nextflow.io/docs/latest/reference/channel.html#fromfilepairs)
 - यह तुम्हारी pipeline में paired-end reads को handle करना simplify करता है
@@ -1889,7 +1889,7 @@ nextflow run main.nf
 मेटाडेटा को explicit और data से attached रखने का यह pattern (filenames में encoded करने के बजाय) Nextflow में एक core best practice है जो robust, maintainable analysis workflows बनाने में enable करता है।
 तुम इसके बारे में [Metadata and meta maps](./metadata.md) side quest में और जान सकते हो।
 
-### Takeaway
+### सीख
 
 - `publishDir` निर्देश metadata values के आधार पर outputs organize कर सकता है
 - Tuples में metadata results का structured organization enable करता है
@@ -1900,13 +1900,13 @@ nextflow run main.nf
 
 ---
 
-## Summary
+## सारांश
 
 इस side quest में, तुमने सीखा कि Nextflow में फ़ाइलों के साथ कैसे काम करना है, basic ऑपरेशंस से लेकर फ़ाइलों के collections को handle करने की अधिक advanced techniques तक।
 
 अपने own काम में इन techniques को apply करना तुम्हें अधिक efficient और maintainable workflows बनाने में enable करेगा, खासकर जब complex naming conventions के साथ बड़ी संख्या में फ़ाइलों के साथ काम कर रहे हो।
 
-### Key patterns
+### मुख्य पैटर्न
 
 1.  **Basic File ऑपरेशंस:** हमने `file()` के साथ Path ऑब्जेक्ट्स बनाए और name, extension, और parent directory जैसी फ़ाइल attributes access कीं, strings और Path ऑब्जेक्ट्स के बीच अंतर सीखा।
 

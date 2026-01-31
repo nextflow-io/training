@@ -2,37 +2,37 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Gli Ambienti di Sviluppo Integrati (IDE) moderni possono trasformare radicalmente la Sua esperienza di sviluppo in Nextflow. Questa quest secondaria si concentra specificamente sull'utilizzo di VS Code e della sua estensione Nextflow per scrivere codice più velocemente, individuare errori tempestivamente e navigare workflow complessi in modo efficiente.
+Gli Ambienti di Sviluppo Integrati (IDE) moderni possono trasformare radicalmente la vostra esperienza di sviluppo in Nextflow. Questa quest secondaria si concentra specificamente sull'utilizzo di VS Code e della sua estensione Nextflow per scrivere codice più velocemente, individuare errori tempestivamente e navigare workflow complessi in modo efficiente.
 
 !!! note "Questo non è un tutorial tradizionale"
 
-    A differenza di altri moduli di formazione, questa guida è organizzata come una raccolta di suggerimenti rapidi, consigli ed esempi pratici piuttosto che come un tutorial passo-passo. Ogni sezione può essere esplorata indipendentemente in base ai Suoi interessi e alle attuali esigenze di sviluppo. Si senta libero di spostarsi tra le sezioni e concentrarsi sulle funzionalità che saranno immediatamente più utili per lo sviluppo del Suo workflow.
+    A differenza di altri moduli di formazione, questa guida è organizzata come una raccolta di suggerimenti rapidi, consigli ed esempi pratici piuttosto che come un tutorial passo-passo. Ogni sezione può essere esplorata indipendentemente in base ai vostri interessi e alle attuali esigenze di sviluppo. Sentitevi liberi di spostarvi tra le sezioni e concentrarvi sulle funzionalità che saranno immediatamente più utili per lo sviluppo del vostro workflow.
 
-## Cosa dovrebbe sapere prima
+## Cosa dovreste sapere prima
 
-Questa guida presuppone che abbia completato il corso di formazione [Hello Nextflow](../hello_nextflow/) e che abbia familiarità con i concetti fondamentali di Nextflow, tra cui:
+Questa guida presuppone che abbiate completato il corso di formazione [Hello Nextflow](../hello_nextflow/) e che abbiate familiarità con i concetti fondamentali di Nextflow, tra cui:
 
 - **Struttura base del workflow**: Comprensione dei process, workflow e come si collegano tra loro
 - **Operazioni sui channel**: Creazione di channel, passaggio di dati tra process e utilizzo di operatori base
 - **Moduli e organizzazione**: Creazione di moduli riutilizzabili e utilizzo delle istruzioni include
 - **Nozioni di base sulla configurazione**: Utilizzo di `nextflow.config` per parametri, direttive dei process e profili
 
-## Cosa imparerà qui
+## Cosa imparerete qui
 
-Questa guida si concentra sulle **funzionalità di produttività dell'IDE** che La renderanno uno sviluppatore Nextflow più efficiente:
+Questa guida si concentra sulle **funzionalità di produttività dell'IDE** che vi renderanno sviluppatori Nextflow più efficienti:
 
-- **Evidenziazione avanzata della sintassi**: Comprendere cosa VS Code Le sta mostrando sulla struttura del codice
+- **Evidenziazione avanzata della sintassi**: Comprendere cosa VS Code vi sta mostrando sulla struttura del codice
 - **Auto-completamento intelligente**: Sfruttare suggerimenti contestuali per una scrittura del codice più rapida
 - **Rilevamento degli errori e diagnostica**: Individuare errori di sintassi prima di eseguire il workflow
-- **Navigazione del codice**: Spostarsi rapidamente tra process, moduli e definizioni
+- **Navigazione del codice**: Spostarvi rapidamente tra process, moduli e definizioni
 - **Formattazione e organizzazione**: Mantenere uno stile di codice coerente e leggibile
-- **Sviluppo assistito da AI** (facoltativo): Utilizzare strumenti AI moderni integrati con il Suo IDE
+- **Sviluppo assistito da AI** (facoltativo): Utilizzare strumenti AI moderni integrati con il vostro IDE
 
 !!! info "Perché le funzionalità dell'IDE adesso?"
 
-    Probabilmente ha già utilizzato VS Code durante il corso [Hello Nextflow](../hello_nextflow/), ma abbiamo mantenuto il focus sull'apprendimento dei fondamenti di Nextflow piuttosto che sulle funzionalità dell'IDE. Ora che ha familiarità con i concetti base di Nextflow come process, workflow, channel e moduli, è pronto per sfruttare le sofisticate funzionalità dell'IDE che La renderanno uno sviluppatore più efficiente.
+    Probabilmente avete già utilizzato VS Code durante il corso [Hello Nextflow](../hello_nextflow/), ma abbiamo mantenuto il focus sull'apprendimento dei fondamenti di Nextflow piuttosto che sulle funzionalità dell'IDE. Ora che avete familiarità con i concetti base di Nextflow come process, workflow, channel e moduli, siete pronti per sfruttare le sofisticate funzionalità dell'IDE che vi renderanno sviluppatori più efficienti.
 
-    Pensi a questo come a un "potenziamento" del Suo ambiente di sviluppo - lo stesso editor che ha utilizzato ha capacità molto più potenti che diventano veramente preziose una volta compreso ciò con cui La stanno aiutando.
+    Pensate a questo come a un "potenziamento" del vostro ambiente di sviluppo - lo stesso editor che avete utilizzato ha capacità molto più potenti che diventano veramente preziose una volta compreso ciò con cui vi stanno aiutando.
 
 ---
 
@@ -44,7 +44,7 @@ Configuriamo uno spazio di lavoro specificamente per esplorare le funzionalità 
 cd side-quests/ide_features
 ```
 
-Apra questa directory in VS Code:
+Aprite questa directory in VS Code:
 
 ```bash title="Aprire VS Code nella directory corrente"
 code .
@@ -84,59 +84,59 @@ tree .
 
 ### Scorciatoie da Tastiera
 
-Alcune delle funzionalità in questa guida utilizzeranno scorciatoie da tastiera facoltative. Potrebbe accedere a questo materiale tramite GitHub Codespaces nel browser, e in questo caso a volte le scorciatoie potrebbero non funzionare come previsto perché sono utilizzate per altre funzioni nel Suo sistema.
+Alcune delle funzionalità in questa guida utilizzeranno scorciatoie da tastiera facoltative. Potreste accedere a questo materiale tramite GitHub Codespaces nel browser, e in questo caso a volte le scorciatoie potrebbero non funzionare come previsto perché sono utilizzate per altre funzioni nel vostro sistema.
 
-Se sta eseguendo VS Code localmente, come probabilmente farà quando effettivamente scriverà workflow, le scorciatoie funzioneranno come descritto.
+Se state eseguendo VS Code localmente, come probabilmente farete quando effettivamente scriverete workflow, le scorciatoie funzioneranno come descritto.
 
-Se sta utilizzando un Mac, alcune (non tutte) scorciatoie da tastiera utilizzeranno "cmd" invece di "ctrl", e lo indicheremo nel testo come `Ctrl/Cmd`.
+Se state utilizzando un Mac, alcune (non tutte) scorciatoie da tastiera utilizzeranno "cmd" invece di "ctrl", e lo indicheremo nel testo come `Ctrl/Cmd`.
 
 ### 0.1. Installazione dell'Estensione Nextflow
 
-!!! note "Sta già utilizzando Devcontainers?"
+!!! note "State già utilizzando Devcontainers?"
 
-    Se sta lavorando in **GitHub Codespaces** o utilizzando un **devcontainer locale**, l'estensione Nextflow è probabilmente già installata e configurata. Può saltare i passaggi di installazione manuale qui sotto e procedere direttamente all'esplorazione delle funzionalità dell'estensione.
+    Se state lavorando in **GitHub Codespaces** o utilizzando un **devcontainer locale**, l'estensione Nextflow è probabilmente già installata e configurata. Potete saltare i passaggi di installazione manuale qui sotto e procedere direttamente all'esplorazione delle funzionalità dell'estensione.
 
 Per installare manualmente l'estensione:
 
-1. Apra VS Code
-2. Vada alla vista Estensioni cliccando sull'icona delle estensioni a sinistra: ![icona estensioni](img/extensions_icon.png) (scorciatoia `Ctrl/Cmd+Shift+X` se sta eseguendo VSCode localmente)
-3. Cerchi "Nextflow"
-4. Installi l'estensione ufficiale Nextflow
+1. Aprite VS Code
+2. Andate alla vista Estensioni cliccando sull'icona delle estensioni a sinistra: ![icona estensioni](img/extensions_icon.png) (scorciatoia `Ctrl/Cmd+Shift+X` se state eseguendo VSCode localmente)
+3. Cercate "Nextflow"
+4. Installate l'estensione ufficiale Nextflow
 
 ![Installare l'Estensione Nextflow](img/install_extension.png)
 
 ### 0.2. Layout dello Spazio di Lavoro
 
-Poiché ha utilizzato VS Code durante tutto Hello Nextflow, ha già familiarità con le nozioni di base. Ecco come organizzare il Suo spazio di lavoro in modo efficiente per questa sessione:
+Poiché avete utilizzato VS Code durante tutto Hello Nextflow, avete già familiarità con le nozioni di base. Ecco come organizzare il vostro spazio di lavoro in modo efficiente per questa sessione:
 
-- **Area Editor**: Per visualizzare e modificare file. Può dividere questa area in più pannelli per confrontare file affiancati.
-- **Esplora File** click (![icona esplora file](img/files_icon.png)) (`Ctrl/Cmd+Shift+E`): I file e le cartelle locali sul Suo sistema. Tenga questo aperto a sinistra per navigare tra i file
-- **Terminale Integrato** (`Ctrl+Shift+` backtick sia per Windows che per MacOS): Un terminale per interagire con il computer in basso. Lo utilizzi per eseguire Nextflow o altri comandi.
+- **Area Editor**: Per visualizzare e modificare file. Potete dividere questa area in più pannelli per confrontare file affiancati.
+- **Esplora File** click (![icona esplora file](img/files_icon.png)) (`Ctrl/Cmd+Shift+E`): I file e le cartelle locali sul vostro sistema. Tenetelo aperto a sinistra per navigare tra i file
+- **Terminale Integrato** (`Ctrl+Shift+` backtick sia per Windows che per MacOS): Un terminale per interagire con il computer in basso. Utilizzatelo per eseguire Nextflow o altri comandi.
 - **Pannello Problemi** (`Ctrl+Shift+M`): VS Code mostrerà qui eventuali errori e problemi rilevati. Questo è utile per evidenziare problemi a colpo d'occhio.
 
-Può trascinare i pannelli o nasconderli (`Ctrl/Cmd+B` per attivare/disattivare la barra laterale) per personalizzare il Suo layout mentre lavoriamo sugli esempi.
+Potete trascinare i pannelli o nasconderli (`Ctrl/Cmd+B` per attivare/disattivare la barra laterale) per personalizzare il vostro layout mentre lavoriamo sugli esempi.
 
 ### Takeaway
 
-Ha configurato VS Code con l'estensione Nextflow e comprende il layout dello spazio di lavoro per uno sviluppo efficiente.
+Avete configurato VS Code con l'estensione Nextflow e comprendete il layout dello spazio di lavoro per uno sviluppo efficiente.
 
 ### Prossimo passo
 
-Impari come l'evidenziazione della sintassi La aiuta a comprendere la struttura del codice Nextflow a colpo d'occhio.
+Imparate come l'evidenziazione della sintassi vi aiuta a comprendere la struttura del codice Nextflow a colpo d'occhio.
 
 ---
 
 ## 1. Evidenziazione della Sintassi e Struttura del Codice
 
-Ora che il Suo spazio di lavoro è configurato, esploriamo come l'evidenziazione della sintassi di VS Code La aiuta a leggere e scrivere codice Nextflow in modo più efficace.
+Ora che il vostro spazio di lavoro è configurato, esploriamo come l'evidenziazione della sintassi di VS Code vi aiuta a leggere e scrivere codice Nextflow in modo più efficace.
 
 ### 1.1. Elementi di Sintassi Nextflow
 
-Apra `basic_workflow.nf` per vedere l'evidenziazione della sintassi in azione:
+Aprite `basic_workflow.nf` per vedere l'evidenziazione della sintassi in azione:
 
 ![Dimostrazione Sintassi](img/syntax_showcase.png)
 
-Noti come VS Code evidenzia:
+Notate come VS Code evidenzia:
 
 - **Parole chiave** (`process`, `workflow`, `input`, `output`, `script`) con colori distinti
 - **Stringhe letterali** e **parametri** con stili diversi
@@ -146,11 +146,11 @@ Noti come VS Code evidenzia:
 
 !!! note "Colori Dipendenti dal Tema"
 
-    I colori specifici che vede dipenderanno dal Suo tema VS Code (modalità scura/chiara), impostazioni dei colori ed eventuali personalizzazioni effettuate. L'aspetto importante è che diversi elementi sintattici siano visivamente distinti l'uno dall'altro, rendendo la struttura del codice più facile da comprendere indipendentemente dalla combinazione di colori scelta.
+    I colori specifici che vedete dipenderanno dal vostro tema VS Code (modalità scura/chiara), impostazioni dei colori ed eventuali personalizzazioni effettuate. L'aspetto importante è che diversi elementi sintattici siano visivamente distinti l'uno dall'altro, rendendo la struttura del codice più facile da comprendere indipendentemente dalla combinazione di colori scelta.
 
 ### 1.2. Comprensione della Struttura del Codice
 
-L'evidenziazione della sintassi La aiuta a identificare rapidamente:
+L'evidenziazione della sintassi vi aiuta a identificare rapidamente:
 
 - **Confini dei process**: Distinzione chiara tra diversi process
 - **Blocchi input/output**: Facile individuazione delle definizioni di flusso dati
@@ -162,25 +162,25 @@ Questa organizzazione visiva diventa inestimabile quando si lavora con workflow 
 
 ### Takeaway
 
-Comprende come l'evidenziazione della sintassi di VS Code La aiuta a leggere la struttura del codice Nextflow e identificare diversi elementi del linguaggio per uno sviluppo più rapido.
+Comprendete come l'evidenziazione della sintassi di VS Code vi aiuta a leggere la struttura del codice Nextflow e identificare diversi elementi del linguaggio per uno sviluppo più rapido.
 
 ### Prossimo passo
 
-Impari come l'auto-completamento intelligente accelera la scrittura del codice con suggerimenti contestuali.
+Imparate come l'auto-completamento intelligente accelera la scrittura del codice con suggerimenti contestuali.
 
 ---
 
 ## 2. Auto-completamento Intelligente
 
-Le funzionalità di auto-completamento di VS Code La aiutano a scrivere codice più velocemente e con meno errori suggerendo opzioni appropriate in base al contesto.
+Le funzionalità di auto-completamento di VS Code vi aiutano a scrivere codice più velocemente e con meno errori suggerendo opzioni appropriate in base al contesto.
 
 ### 2.1. Suggerimenti Contestuali
 
-Le opzioni di auto-completamento variano a seconda di dove si trova nel Suo codice:
+Le opzioni di auto-completamento variano a seconda di dove vi trovate nel vostro codice:
 
 #### Operazioni sui Channel
 
-Apra nuovamente `basic_workflow.nf` e provi a digitare `channel.` nel blocco workflow:
+Aprite nuovamente `basic_workflow.nf` e provate a digitare `channel.` nel blocco workflow:
 
 ![Auto-completamento channel](img/autocomplete_channel.png)
 
@@ -192,9 +192,9 @@ Vedrà suggerimenti per:
 - `fromSRA()` - Creare channel da accessi SRA
 - E molti altri...
 
-Questo La aiuta a trovare rapidamente il factory channel giusto da utilizzare senza dover ricordare i nomi esatti dei metodi.
+Questo vi aiuta a trovare rapidamente il factory channel giusto da utilizzare senza dover ricordare i nomi esatti dei metodi.
 
-Può anche scoprire gli operatori disponibili da applicare ai channel. Per esempio, digiti `FASTQC.out.html.` per vedere le operazioni disponibili:
+Potete anche scoprire gli operatori disponibili da applicare ai channel. Per esempio, digitate `FASTQC.out.html.` per vedere le operazioni disponibili:
 
 ![Auto-completamento operazioni channel](img/autocomplete_operators.png)
 

@@ -576,7 +576,7 @@ Primero, note que la función `samplesheetToList` ya está importada en la parte
 
 ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="1" hl_lines="13"
 //
-// Subworkflow with functionality specific to the core/hello pipeline
+// Subworkflow con funcionalidad específica del pipeline core/hello
 //
 
 /*

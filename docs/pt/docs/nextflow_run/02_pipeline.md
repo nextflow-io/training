@@ -178,7 +178,7 @@ Vamos dar uma olhada no que torna isso possível no código do fluxo de trabalho
     #!/usr/bin/env nextflow
 
     /*
-    * Use echo to print 'Hello World!' to a file
+    * Usa echo para imprimir 'Hello World!' em um arquivo
     */
     process sayHello {
 
@@ -431,7 +431,7 @@ Vamos olhar o código e identificar os padrões-chave para fluxos de trabalho de
     #!/usr/bin/env nextflow
 
     /*
-    * Use echo to print 'Hello World!' to a file
+    * Usa echo para imprimir 'Hello World!' em um arquivo
     */
     process sayHello {
 
@@ -448,7 +448,7 @@ Vamos olhar o código e identificar os padrões-chave para fluxos de trabalho de
     }
 
     /*
-    * Use a text replacement tool to convert the greeting to uppercase
+    * Usa uma ferramenta de substituição de texto para converter a saudação para maiúsculas
     */
     process convertToUpper {
 
@@ -465,7 +465,7 @@ Vamos olhar o código e identificar os padrões-chave para fluxos de trabalho de
     }
 
     /*
-    * Collect uppercase greetings into a single output file
+    * Coleta saudações em maiúsculas em um único arquivo de saída
     */
     process collectGreetings {
 
@@ -891,7 +891,7 @@ Abra um desses arquivos e você encontrará o código para o processo correspond
     #!/usr/bin/env nextflow
 
     /*
-    * Use echo to print 'Hello World!' to a file
+    * Usa echo para imprimir 'Hello World!' em um arquivo
     */
     process sayHello {
 
@@ -1239,7 +1239,7 @@ O processo `cowpy`, que envolve o comando cowpy para gerar arte ASCII, é defini
     ```groovy title="modules/cowpy.nf" linenums="1"
     #!/usr/bin/env nextflow
 
-    // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
+    // Gera arte ASCII com cowpy (https://github.com/jeffbuttars/cowpy)
     process cowpy {
 
         container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'

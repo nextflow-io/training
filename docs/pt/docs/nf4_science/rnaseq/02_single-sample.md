@@ -26,19 +26,19 @@ Fornecemos um arquivo de fluxo de trabalho, `rnaseq.nf`, que descreve as princip
 ```groovy title="rnaseq.nf" linenums="1"
 #!/usr/bin/env nextflow
 
-// Module INCLUDE statements
+// Declarações de INCLUDE de módulo
 
 /*
  * Pipeline parameters
  */
 
-// Primary input
+// Entrada primária
 
 workflow {
 
-    // Create input channel
+    // Cria canal de entrada
 
-    // Call processes
+    // Chama processos
 
 }
 ```
@@ -96,7 +96,7 @@ Você deve reconhecer todas as peças do que aprendeu na Parte 1 e Parte 2 desta
 Adicione a instrução `include { FASTQC } from './modules/fastqc.nf'` ao arquivo `rnaseq.nf`:
 
 ```groovy title="rnaseq.nf" linenums="3"
-// Module INCLUDE statements
+// Declarações de INCLUDE de módulo
 include { FASTQC } from './modules/fastqc.nf'
 ```
 
@@ -106,7 +106,7 @@ Declare um parâmetro de entrada com um valor padrão:
 
 ```groovy title="rnaseq.nf" linenums="10"
 params {
-    // Primary input
+    // Entrada primária
     reads: Path = "data/reads/ENCSR000COQ1_1.fastq.gz"
 }
 ```
@@ -118,10 +118,10 @@ Use uma factory de canal básica `.fromPath()` para criar o canal de entrada:
 ```groovy title="rnaseq.nf" linenums="13"
 workflow {
 
-    // Create input channel from a file path
+    // Cria canal de entrada a partir de um caminho de arquivo
     read_ch = channel.fromPath(params.reads)
 
-    // Call processes
+    // Chama processos
 
 }
 ```
@@ -131,10 +131,10 @@ workflow {
 ```groovy title="rnaseq.nf" linenums="13"
 workflow {
 
-    // Create input channel from a file path
+    // Cria canal de entrada a partir de um caminho de arquivo
     read_ch = channel.fromPath(params.reads)
 
-    // Initial quality control
+    // Controle de qualidade inicial
     FASTQC(read_ch)
 
 }
@@ -216,7 +216,7 @@ process TRIM_GALORE {
 Adicione a instrução `include { TRIM_GALORE } from './modules/trim_galore.nf'` ao arquivo `rnaseq.nf`:
 
 ```groovy title="rnaseq.nf" linenums="3"
-// Module INCLUDE statements
+// Declarações de INCLUDE de módulo
 include { FASTQC } from './modules/fastqc.nf'
 include { TRIM_GALORE } from './modules/trim_galore.nf'
 ```
@@ -226,13 +226,13 @@ include { TRIM_GALORE } from './modules/trim_galore.nf'
 ```groovy title="rnaseq.nf" linenums="14"
 workflow {
 
-    // Create input channel from a file path
+    // Cria canal de entrada a partir de um caminho de arquivo
     read_ch = channel.fromPath(params.reads)
 
-    // Initial quality control
+    // Controle de qualidade inicial
     FASTQC(read_ch)
 
-    // Adapter trimming and post-trimming QC
+    // Corte de adaptador e QC pós-corte
     TRIM_GALORE(read_ch)
 }
 ```
@@ -315,7 +315,7 @@ process HISAT2_ALIGN {
 Adicione a instrução `include { HISAT2_ALIGN } from './modules/hisat2_align.nf'` ao arquivo `rnaseq.nf`:
 
 ```groovy title="rnaseq.nf" linenums="3"
-// Module INCLUDE statements
+// Declarações de INCLUDE de módulo
 include { FASTQC } from './modules/fastqc.nf'
 include { TRIM_GALORE } from './modules/trim_galore.nf'
 include { HISAT2_ALIGN } from './modules/hisat2_align.nf'
@@ -327,10 +327,10 @@ Declare um parâmetro de entrada com um valor padrão:
 
 ```groovy title="rnaseq.nf" linenums="8"
 params {
-    // Primary input
+    // Entrada primária
     reads: Path = "data/reads/ENCSR000COQ1_1.fastq.gz"
 
-    // Reference genome archive
+    // Arquivo do genoma de referência
     hisat2_index_zip: Path = "data/genome_index.tar.gz"
 }
 ```
@@ -344,16 +344,16 @@ Além disso, usamos `file (params.hisat2_index_zip)` para fornecer à ferramenta
 ```groovy title="rnaseq.nf" linenums="16"
 workflow {
 
-    // Create input channel from a file path
+    // Cria canal de entrada a partir de um caminho de arquivo
     read_ch = channel.fromPath(params.reads)
 
-    // Initial quality control
+    // Controle de qualidade inicial
     FASTQC(read_ch)
 
-    // Adapter trimming and post-trimming QC
+    // Corte de adaptador e QC pós-corte
     TRIM_GALORE(read_ch)
 
-    // Alignment to a reference genome
+    // Alinhamento a um genoma de referência
     HISAT2_ALIGN(TRIM_GALORE.out.trimmed_reads, file (params.hisat2_index_zip))
 }
 ```

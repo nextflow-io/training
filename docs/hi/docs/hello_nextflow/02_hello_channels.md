@@ -283,7 +283,7 @@ nextflow run hello-channels.nf
 जैसा कि तुम देख सकते हो, यह channel contents को console पर output करता है।
 यहाँ हमारे पास केवल एक element है, लेकिन जब हम next section में channel में multiple values load करना शुरू करेंगे, तुम देखोगे कि यह एक element per line output करने के लिए set है।
 
-### Takeaway
+### सीख
 
 तुम जानते हो कि process को input provide करने के लिए basic channel factory कैसे use करें।
 
@@ -622,7 +622,7 @@ Success! अब हम जितनी चाहें उतनी greetings ad
     Metadata typically 'sample sheet' या equivalents के माध्यम से provide किया जाता है।
     तुम यह बाद में अपने Nextflow training में सीखोगे ([Metadata side quest](../side_quests/metadata.md) देखें)।
 
-### Takeaway
+### सीख
 
 तुम जानते हो कि channel के माध्यम से multiple input elements कैसे feed करें।
 
@@ -949,7 +949,7 @@ nextflow run hello-channels.nf
     एक different channel factory, [`channel.fromList`](https://nextflow.io/docs/latest/reference/channel.html#fromlist) use करके technically same results achieve करना संभव है, जिसमें इसके operation में एक implicit mapping step शामिल है।
     यहाँ हमने वह use न करने का choice किया ताकि एक simple use case पर operator के use को demonstrate किया जा सके।
 
-### Takeaway
+### सीख
 
 तुम जानते हो कि channel की contents transform करने के लिए `flatten()` जैसे operator कैसे use करें, और operator apply करने से पहले और बाद में channel contents inspect करने के लिए `view()` operator कैसे use करें।
 
@@ -1328,7 +1328,7 @@ Note करो कि lines तुम्हारे output में different 
 हमने पहले जैसा same result achieve किया है, लेकिन अब हमारे पास process करने के लिए greetings के channel में more elements add करने की बहुत अधिक flexibility है एक input file modify करके, बिना कोई code modify किए।
 तुम बाद की training में complex inputs handle करने के लिए more sophisticated approaches सीखोगे।
 
-### Takeaway
+### सीख
 
 तुम जानते हो कि `.fromPath()` channel constructor और operators `splitCsv()` और `map()` का उपयोग करके input values की file पढ़ना और उन्हें appropriately handle करना।
 

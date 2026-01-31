@@ -325,7 +325,7 @@ Encontrará el script `1-hello.nf` en su directorio actual, que debería ser `ne
     #!/usr/bin/env nextflow
 
     /*
-    * Use echo to print 'Hello World!' to a file
+    * Usar echo para imprimir 'Hello World!' a un archivo
     */
     process sayHello {
 
@@ -380,7 +380,7 @@ El cuerpo del process debe contener un bloque script que especifica el comando a
 
 ```groovy title="1-hello.nf" linenums="3"
 /*
-* Use echo to print a greeting to a file
+* Usar echo para imprimir un saludo a un archivo
 */
 process sayHello {
 

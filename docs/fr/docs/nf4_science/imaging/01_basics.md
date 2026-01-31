@@ -205,7 +205,7 @@ Ouvrons le script `hello-world.nf` dans le volet de l'éditeur.
 #!/usr/bin/env nextflow
 
 /*
- * Use echo to print a greeting to a file
+ * Utilise echo pour imprimer une salutation dans un fichier
  */
 process sayHello {
 
@@ -250,7 +250,7 @@ Ici, nous avons un **processus** appelé `sayHello` qui prend une variable d'**e
 
 ```groovy title="hello-world.nf" linenums="3"
 /*
- * Use echo to print a greeting to a file
+ * Utilise echo pour imprimer une salutation dans un fichier
  */
 process sayHello {
 

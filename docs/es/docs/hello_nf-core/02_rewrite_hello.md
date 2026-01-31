@@ -249,13 +249,13 @@ include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pi
 workflow HELLO {
 
     take:
-    ch_samplesheet // channel: samplesheet read in from --input
+    ch_samplesheet // canal: samplesheet leído desde --input
     main:
 
     ch_versions = channel.empty()
 
     //
-    // Collate and save software versions
+    // Recopilar y guardar versiones de software
     //
     softwareVersionsToYAML(ch_versions)
         .collectFile(
@@ -267,7 +267,7 @@ workflow HELLO {
 
 
     emit:
-    versions       = ch_versions                 // channel: [ path(versions.yml) ]
+    versions       = ch_versions                 // canal: [ path(versions.yml) ]
 
 }
 
@@ -585,10 +585,10 @@ Copia el siguiente código en el archivo `main.nf`.
 ```groovy title="original-hello/main.nf" linenums="1"
 #!/usr/bin/env nextflow
 
-// import the workflow code from the hello.nf file
+// importar el código del workflow desde el archivo hello.nf
 include { HELLO } from './hello.nf'
 
-// declare input parameter
+// declarar parámetro de entrada
 params.greeting = 'greetings.csv'
 
 workflow {
@@ -597,10 +597,10 @@ workflow {
                       .splitCsv()
                       .map { line -> line[0] }
 
-  // call the imported workflow on the channel of greetings
+  // llamar al workflow importado con el canal de saludos
   HELLO(greeting_ch)
 
-  // view the outputs emitted by the workflow
+  // ver las salidas emitidas por el workflow
   HELLO.out.view { output -> "Output: $output" }
 }
 ```
@@ -690,13 +690,13 @@ include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pi
 workflow HELLO {
 
     take:
-    ch_samplesheet // channel: samplesheet read in from --input
+    ch_samplesheet // canal: samplesheet leído desde --input
     main:
 
     ch_versions = channel.empty()
 
     //
-    // Collate and save software versions
+    // Recopilar y guardar versiones de software
     //
     softwareVersionsToYAML(ch_versions)
         .collectFile(
@@ -708,7 +708,7 @@ workflow HELLO {
 
 
     emit:
-    versions       = ch_versions                 // channel: [ path(versions.yml) ]
+    versions       = ch_versions                 // canal: [ path(versions.yml) ]
 
 }
 
@@ -819,7 +819,7 @@ Como eso es esencialmente lo que es nuestro archivo `greetings.csv`, mantendremo
 
 ```groovy title="core-hello/workflows/hello.nf" linenums="21"
     take:
-    ch_samplesheet // channel: samplesheet read in from --input
+    ch_samplesheet // canal: samplesheet leído desde --input
 ```
 
 El manejo de entrada se hará antes de este workflow (no en este archivo de código).
@@ -858,7 +858,7 @@ Este orden tiene sentido porque en un pipeline real, los procesos emitirían inf
     workflow HELLO {
 
         take:
-        ch_samplesheet // channel: samplesheet read in from --input
+        ch_samplesheet // canal: samplesheet leído desde --input
 
         main:
 
@@ -877,7 +877,7 @@ Este orden tiene sentido porque en un pipeline real, los procesos emitirían inf
         cowpy(collectGreetings.out.outfile, params.character)
 
         //
-        // Collate and save software versions
+        // Recopilar y guardar versiones de software
         //
         softwareVersionsToYAML(ch_versions)
             .collectFile(
@@ -889,7 +889,7 @@ Este orden tiene sentido porque en un pipeline real, los procesos emitirían inf
 
 
         emit:
-        versions       = ch_versions                 // channel: [ path(versions.yml) ]
+        versions       = ch_versions                 // canal: [ path(versions.yml) ]
 
     }
     ```
@@ -900,13 +900,13 @@ Este orden tiene sentido porque en un pipeline real, los procesos emitirían inf
     workflow HELLO {
 
         take:
-        ch_samplesheet // channel: samplesheet read in from --input
+        ch_samplesheet // canal: samplesheet leído desde --input
         main:
 
         ch_versions = Channel.empty()
 
         //
-        // Collate and save software versions
+        // Recopilar y guardar versiones de software
         //
         softwareVersionsToYAML(ch_versions)
             .collectFile(
@@ -918,7 +918,7 @@ Este orden tiene sentido porque en un pipeline real, los procesos emitirían inf
 
 
         emit:
-        versions       = ch_versions                 // channel: [ path(versions.yml) ]
+        versions       = ch_versions                 // canal: [ path(versions.yml) ]
 
     }
     ```
@@ -952,14 +952,14 @@ Finalmente, necesitamos actualizar el bloque `emit` para incluir la declaración
     ```groovy title="core-hello/workflows/hello.nf" linenums="55" hl_lines="2"
         emit:
         cowpy_hellos   = cowpy.out
-        versions       = ch_versions                 // channel: [ path(versions.yml) ]
+        versions       = ch_versions                 // canal: [ path(versions.yml) ]
     ```
 
 === "Antes"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="55"
         emit:
-        versions       = ch_versions                 // channel: [ path(versions.yml) ]
+        versions       = ch_versions                 // canal: [ path(versions.yml) ]
     ```
 
 Esto concluye las modificaciones que necesitamos hacer al workflow HELLO en sí mismo.
@@ -1013,17 +1013,17 @@ include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_hell
 */
 
 //
-// WORKFLOW: Run main analysis pipeline depending on type of input
+// WORKFLOW: Ejecutar el pipeline de análisis principal según el tipo de entrada
 //
 workflow CORE_HELLO {
 
     take:
-    samplesheet // channel: samplesheet read in from --input
+    samplesheet // canal: samplesheet leído desde --input
 
     main:
 
     //
-    // WORKFLOW: Run pipeline
+    // WORKFLOW: Ejecutar pipeline
     //
     HELLO (
         samplesheet
@@ -1039,7 +1039,7 @@ workflow {
 
     main:
     //
-    // SUBWORKFLOW: Run initialisation tasks
+    // SUBWORKFLOW: Ejecutar tareas de inicialización
     //
     PIPELINE_INITIALISATION (
         params.version,
@@ -1051,13 +1051,13 @@ workflow {
     )
 
     //
-    // WORKFLOW: Run main workflow
+    // WORKFLOW: Ejecutar workflow principal
     //
     CORE_HELLO (
         PIPELINE_INITIALISATION.out.samplesheet
     )
     //
-    // SUBWORKFLOW: Run completion tasks
+    // SUBWORKFLOW: Ejecutar tareas de finalización
     //
     PIPELINE_COMPLETION (
         params.outdir,
@@ -1237,7 +1237,7 @@ Ahora podemos actualizar el archivo `test.config` de la siguiente manera:
         config_profile_name        = 'Test profile'
         config_profile_description = 'Minimal test dataset to check pipeline function'
 
-        // Input data
+        // Datos de entrada
         input  = "${projectDir}/assets/greetings.csv"
 
         // Other parameters
@@ -1253,7 +1253,7 @@ Ahora podemos actualizar el archivo `test.config` de la siguiente manera:
         config_profile_name        = 'Test profile'
         config_profile_description = 'Minimal test dataset to check pipeline function'
 
-        // Input data
+        // Datos de entrada
         // TODO nf-core: Specify the paths to your test data on nf-core/test-datasets
         // TODO nf-core: Give any required params for the test so that command line flags are not needed
         input  = params.pipelines_testdata_base_path + 'viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv'

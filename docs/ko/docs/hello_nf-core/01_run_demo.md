@@ -18,7 +18,7 @@ nf-core 프로젝트에서 코드 구조와 도구 작동을 시연하기 위한
 
 웹 브라우저에서 [https://nf-co.re/pipelines/](https://nf-co.re/pipelines/)로 이동하여 검색창에 `demo`를 입력하십시오.
 
-![search results](./img/search-results.png)
+![검색 결과](./img/search-results.png)
 
 파이프라인 이름인 `demo`를 클릭하여 파이프라인 문서 페이지에 접근하십시오.
 
@@ -43,7 +43,7 @@ nf-core 프로젝트에서 코드 구조와 도구 작동을 시연하기 위한
 
 `Introduction` 탭은 시각적 표현(지하철 노선도라고 함)과 파이프라인의 일부로 실행되는 도구 목록을 포함한 파이프라인의 개요를 제공합니다.
 
-![pipeline subway map](./img/nf-core-demo-subway-cropped.png)
+![파이프라인 지하철 노선도](./img/nf-core-demo-subway-cropped.png)
 
 1. Read QC (FASTQC)
 2. Adapter and quality trimming (SEQTK_TRIM)
@@ -366,7 +366,7 @@ tree -L 2 demo-results
 
 예를 들어, `execution_timeline_*` 파일은 어떤 프로세스가 실행되었는지, 어떤 순서로, 얼마나 오래 실행되었는지 보여줍니다:
 
-![execution timeline report](./img/execution_timeline.png)
+![실행 타임라인 보고서](./img/execution_timeline.png)
 
 !!! note
 
