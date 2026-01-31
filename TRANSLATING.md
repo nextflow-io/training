@@ -21,42 +21,13 @@ The key insight: **to fix a translation, fix the prompt** - not the translated f
 
 ### Contents
 
-- [How Automatic Translation Updates Work](#how-automatic-translation-updates-work)
 - [How to Improve Existing Translations](#how-to-improve-existing-translations)
+- [How Automatic Translation Updates Work](#how-automatic-translation-updates-work)
 - [Reviewing Translation PRs](#reviewing-translation-prs)
 - [How to Add a Missing Course](#how-to-add-a-missing-course)
 - [How to Add a New Language](#how-to-add-a-new-language)
 - [Directory Structure](#directory-structure)
 - [CLI Reference (For Maintainers)](#cli-reference-for-maintainers)
-
----
-
-## How Automatic Translation Updates Work
-
-When English source files are modified, translations are automatically updated via GitHub Actions:
-
-```mermaid
-flowchart TD
-    A[English file changed] --> B[GitHub Actions triggered]
-    B --> C[Detect outdated translations]
-    C --> D{Any outdated?}
-    D -->|No| E[Done]
-    D -->|Yes| F[AI updates changed sections]
-    F --> G[Create PR for each language]
-    G --> H[Human review]
-    H --> I{Approved?}
-    I -->|Yes| J[Merge PR]
-    I -->|No| K[Update llm-prompt.md]
-    K --> L[Re-run translation]
-    L --> H
-```
-
-### Key Points
-
-- The AI makes **minimal changes**, updating only sections that changed in English
-- Translations preserve line-by-line structure for easy diff review
-- Each language gets a separate PR for independent review/merge
-- The system uses git commit timestamps to detect outdated files
 
 ---
 
@@ -116,6 +87,37 @@ If you find errors but can't fix the prompts yourself:
 2. Include: language, file path, current text, expected text
 3. Explain why the current translation is wrong
 4. A maintainer will update the prompt and re-run
+
+---
+
+---
+
+## How Automatic Translation Updates Work
+
+When English source files are modified, translations are automatically updated via GitHub Actions:
+
+```mermaid
+flowchart TD
+    A[English file changed] --> B[GitHub Actions triggered]
+    B --> C[Detect outdated translations]
+    C --> D{Any outdated?}
+    D -->|No| E[Done]
+    D -->|Yes| F[AI updates changed sections]
+    F --> G[Create PR for each language]
+    G --> H[Human review]
+    H --> I{Approved?}
+    I -->|Yes| J[Merge PR]
+    I -->|No| K[Update llm-prompt.md]
+    K --> L[Re-run translation]
+    L --> H
+```
+
+### Key Points
+
+- The AI makes **minimal changes**, updating only sections that changed in English
+- Translations preserve line-by-line structure for easy diff review
+- Each language gets a separate PR for independent review/merge
+- The system uses git commit timestamps to detect outdated files
 
 ---
 
