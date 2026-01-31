@@ -90,8 +90,6 @@ If you find errors but can't fix the prompts yourself:
 
 ---
 
----
-
 ## How Automatic Translation Updates Work
 
 When English source files are modified, translations are automatically updated via GitHub Actions:
