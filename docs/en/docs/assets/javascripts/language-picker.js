@@ -19,6 +19,12 @@
       return;
     }
 
+    // Check if a segment looks like a mike version
+    // Versions are like: latest, stable, 0.dev, 1.0, 2.8.1, etc.
+    function isVersion(segment) {
+      return /^(latest|stable|\d+(\.\d+)*\.?dev|\d+(\.\d+)*)$/.test(segment);
+    }
+
     // Parse the current path to extract version prefix, language, and page path
     // Handles: /page, /de/page, /latest/page, /latest/de/page
     var versionPrefix = "";
@@ -30,14 +36,14 @@
     });
 
     if (segments.length > 0) {
-      // Check if first segment is a version (not a language)
-      if (knownLangs.indexOf(segments[0]) === -1) {
+      // Check if first segment is a version (not a language, and looks like a version)
+      if (knownLangs.indexOf(segments[0]) === -1 && isVersion(segments[0])) {
         // First segment is a version prefix
         versionPrefix = "/" + segments[0];
         segments.shift();
       }
 
-      // Check if next segment is a language
+      // Check if first/next segment is a language
       if (segments.length > 0 && knownLangs.indexOf(segments[0]) !== -1) {
         // Remove language from page path
         segments.shift();
