@@ -585,16 +585,18 @@ All translated pages include a notice informing readers that the content was tra
 
 ### For the Homepage (index.md)
 
-Add a note admonition after the first heading (`# ...`), before any other content:
+Add a note admonition immediately **before** the "Catalog of Nextflow training courses" heading (the `## Catalog...` H2 heading). This places it after the introductory grid cards but before the course listings.
 
 ```markdown
-# Page Title
+</div>
 
 !!! note "AI-Assisted Translation Title"
 
     Brief explanation that this translation was created using AI with human oversight.
     Welcome feedback and improvements.
     Link to [translation guide](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md).
+
+## Catalog of Nextflow training courses
 ```
 
 The admonition title and content should be translated naturally into the target language.
