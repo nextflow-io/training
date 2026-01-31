@@ -16,7 +16,7 @@ Per utilizzare la configurazione devcontainer locale, avrà bisogno di:
 - [Docker Buildx](https://docs.docker.com/build/concepts/overview/#install-buildx) (incluso in Docker Desktop, ma potrebbe richiedere un'installazione separata con altre configurazioni Docker)
 - [Estensione Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) per VS Code
 
-La Sua installazione Docker deve essere in esecuzione prima di tentare di aprire il devcontainer.
+La vostra installazione Docker deve essere in esecuzione prima di tentare di aprire il devcontainer.
 
 Per verificare che Docker buildx sia disponibile, eseguite:
 
@@ -28,7 +28,7 @@ Se questo comando fallisce, dovrà installare l'estensione buildx prima di proce
 
 ## Istruzioni di configurazione
 
-Segua questi passaggi per configurare il Suo ambiente locale utilizzando i devcontainer di VS Code:
+Segua questi passaggi per configurare il vostro ambiente locale utilizzando i devcontainer di VS Code:
 
 ### Installare l'estensione "Dev Containers" in VS Code
 
@@ -83,11 +83,11 @@ L'utilizzo dell'approccio devcontainer offre diversi vantaggi:
 
 - **Coerenza**: Garantisce un ambiente di sviluppo coerente su macchine diverse
 - **Semplicità**: Tutte le dipendenze sono preinstallate e configurate
-- **Isolamento**: L'ambiente di sviluppo è isolato dal Suo sistema locale
+- **Isolamento**: L'ambiente di sviluppo è isolato dal vostro sistema locale
 - **Riproducibilità**: Tutti coloro che utilizzano il devcontainer ottengono la stessa configurazione
 - **Nessuna installazione manuale**: Non è necessario installare manualmente Java, Nextflow e altri strumenti
 
-## Verificare il Suo ambiente
+## Verificare il vostro ambiente
 
 Una volta che il devcontainer è in esecuzione, potete verificare che tutto sia configurato correttamente eseguendo:
 
@@ -95,13 +95,13 @@ Una volta che il devcontainer è in esecuzione, potete verificare che tutto sia 
 nextflow info
 ```
 
-Questo dovrebbe visualizzare la versione di Nextflow e le informazioni di runtime, confermando che il Suo ambiente è configurato correttamente.
+Questo dovrebbe visualizzare la versione di Nextflow e le informazioni di runtime, confermando che il vostro ambiente è configurato correttamente.
 
 ## Risoluzione dei problemi
 
 Se riscontra problemi con la configurazione del devcontainer:
 
-1. Si assicuri che la Sua installazione Docker (Docker Desktop, Colima, Docker Engine, ecc.) sia in esecuzione prima di aprire il devcontainer
+1. Assicuratevi che la vostra installazione Docker (Docker Desktop, Colima, Docker Engine, ecc.) sia in esecuzione prima di aprire il devcontainer
 2. Verifichi di aver selezionato la configurazione **local-dev** quando richiesto
 3. Verifichi che Docker buildx sia installato e funzionante eseguendo `docker buildx version`
 4. Se il container non riesce a costruirsi, provi a ricostruirlo eseguendo il comando "Dev Containers: Rebuild Container"

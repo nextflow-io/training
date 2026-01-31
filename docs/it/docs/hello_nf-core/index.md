@@ -29,7 +29,7 @@ additional_information:
 
 ![nf-core logo](./img/nf-core-logo.png)
 
-Attraverso esempi pratici ed esercizi guidati, Lei imparerà a utilizzare e sviluppare moduli e pipeline compatibili con nf-core, e a utilizzare efficacemente gli strumenti nf-core.
+Attraverso esempi pratici ed esercizi guidati, imparerete a utilizzare e sviluppare moduli e pipeline compatibili con nf-core, e a utilizzare efficacemente gli strumenti nf-core.
 
 Acquisirà le competenze e la sicurezza per iniziare a sviluppare pipeline secondo le best practice di nf-core.
 

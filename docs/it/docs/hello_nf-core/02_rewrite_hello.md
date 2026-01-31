@@ -19,7 +19,7 @@ Prima di tutto, creiamo lo scaffold per la nuova pipeline.
 
 !!! note "Nota"
 
-    Si assicuri di trovarsi nella directory `hello-nf-core` nel suo terminale.
+    Assicuratevi di trovarsi nella directory `hello-nf-core` nel suo terminale.
 
 ### 1.1. Eseguire lo strumento di creazione pipeline basato su template
 
@@ -36,7 +36,7 @@ L'esecuzione di questo comando aprirà un'interfaccia utente testuale (TUI) per 
     <iframe width="560" height="315" src="https://www.youtube.com/embed/VwjXNXONHlY?si=d0HkFSISnKn76TeI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" data-ruffle-polyfilled=""></iframe>
 </div>
 
-Questa TUI Le chiederà di fornire informazioni di base sulla Sua pipeline e Le offrirà una scelta di funzionalità da includere o escludere nello scaffold della pipeline.
+Questa TUI Le chiederà di fornire informazioni di base sulla vostra pipeline e Le offrirà una scelta di funzionalità da includere o escludere nello scaffold della pipeline.
 
 - Nella schermata di benvenuto, cliccate su **Let's go!**.
 - Nella schermata `Choose pipeline type`, cliccate su **Custom**.
@@ -618,7 +618,7 @@ Ci sono due osservazioni importanti da fare qui:
     Nextflow cercherà automaticamente un file chiamato `main.nf` nella directory di esecuzione.
 
     Tuttavia, potete nominare il file del workflow entrypoint in altro modo se preferite.
-    In tal caso, si assicuri di specificare il nome del file del workflow nel suo comando `nextflow run`.
+    In tal caso, assicuratevi di specificare il nome del file del workflow nel suo comando `nextflow run`.
 
 ### 2.7. Testare che il workflow venga eseguito
 
@@ -777,7 +777,7 @@ include { collectGreetings } from './modules/collectGreetings.nf'
 include { cowpy } from './modules/cowpy.nf'
 ```
 
-Apra il file `core-hello/workflows/hello.nf` e trasponga quelle dichiarazioni di importazione in esso come mostrato di seguito.
+Aprite il file `core-hello/workflows/hello.nf` e trasponga quelle dichiarazioni di importazione in esso come mostrato di seguito.
 
 === "Dopo"
 
@@ -1237,7 +1237,7 @@ Ora possiamo aggiornare il file `test.config` come segue:
         config_profile_name        = 'Test profile'
         config_profile_description = 'Minimal test dataset to check pipeline function'
 
-        // Input data
+        // Dati di input
         input  = "${projectDir}/assets/greetings.csv"
 
         // Other parameters
@@ -1253,7 +1253,7 @@ Ora possiamo aggiornare il file `test.config` come segue:
         config_profile_name        = 'Test profile'
         config_profile_description = 'Minimal test dataset to check pipeline function'
 
-        // Input data
+        // Dati di input
         // TODO nf-core: Specify the paths to your test data on nf-core/test-datasets
         // TODO nf-core: Give any required params for the test so that command line flags are not needed
         input  = params.pipelines_testdata_base_path + 'viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv'

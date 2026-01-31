@@ -2,14 +2,14 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Questo orientamento presuppone che Lei abbia già aperto l'ambiente di formazione cliccando sul pulsante "Open in GitHub Codespaces".
-Se non l'ha ancora fatto, La preghiamo di farlo ora, idealmente in una seconda finestra o scheda del browser in modo da poter consultare queste istruzioni.
+Questo orientamento presuppone che abbiate già aperto l'ambiente di formazione cliccando sul pulsante "Open in GitHub Codespaces".
+Se non l'ha ancora fatto, Vi preghiamo di farlo ora, idealmente in una seconda finestra o scheda del browser in modo da poter consultare queste istruzioni.
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=master&repo=290790519&skip_quickstart=true&machine=premiumLinux&devcontainer_path=.devcontainer%2Fdevcontainer.json)
 
 !!!warning "Requisito dimensione macchina"
 
-    Si assicuri di selezionare una **macchina a 8 core** quando crea il Suo Codespace per questo corso di formazione. I workflow di bioimaging richiedono risorse di calcolo aggiuntive.
+    Assicuratevi di selezionare una **macchina a 8 core** quando crea il vostro Codespace per questo corso di formazione. I workflow di bioimaging richiedono risorse di calcolo aggiuntive.
 
 ## GitHub Codespaces
 
@@ -18,7 +18,7 @@ Tuttavia, è necessario un account GitHub (gratuito) per effettuare l'accesso e,
 
 ## Pre-download delle immagini Docker
 
-Una volta aperto il Suo Codespace, scarichiamo preventivamente tutte le immagini Docker che ci serviranno per questo corso di formazione.
+Una volta aperto il vostro Codespace, scarichiamo preventivamente tutte le immagini Docker che ci serviranno per questo corso di formazione.
 Questo farà risparmiare tempo in seguito e garantirà un'esecuzione fluida dei workflow.
 
 Aprite una nuova scheda del terminale ed eseguite il seguente comando:

@@ -99,7 +99,7 @@ Come in precedenza, troverete i file di output nella directory specificata nel b
     └── UPPER-Holà-output.txt
     ```
 
-Se ha funzionato, siete pronti a imparare come usare i container.
+Se tutto ha funzionato, siete pronti a imparare come usare i container.
 
 ---
 
@@ -876,7 +876,7 @@ L'output ASCII art finale è nella directory `results/hello_containers/`, sotto 
                           ^^^ ^^ ^^^ ^
     ```
 
-Ed eccolo, il nostro bellissimo tacchino che dice i saluti come desiderato.
+Ed eccolo, il nostro bellissimo tacchino che dice i saluti come desiderateto.
 
 #### 2.3.4. Ispezionare come Nextflow ha lanciato il task containerizzato
 
@@ -1142,7 +1142,7 @@ Per approfondire: [2.3.1. Specificare un container per cowpy](#231-specificare-u
 </quiz>
 
 <quiz>
-Quale impostazione `nextflow.config` abilita Docker per il Suo workflow?
+Quale impostazione `nextflow.config` abilita Docker per il vostro workflow?
 - [ ] `#!groovy process.docker = true`
 - [x] `#!groovy docker.enabled = true`
 - [ ] `#!groovy container.engine = 'docker'`

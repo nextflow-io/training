@@ -139,7 +139,7 @@ L'output ASCII art finale è nella directory `results/hello_config/`, sotto il n
                           ^^^ ^^ ^^^ ^
     ```
 
-Se ha funzionato, siete pronti a imparare come configurare le vostre pipeline.
+Se tutto ha funzionato, siete pronti a imparare come configurare le vostre pipeline.
 
 ---
 
@@ -1432,13 +1432,13 @@ Questo significa che finché distribuiamo qualsiasi file di dati di test con il 
 
 ### 6.3. Usare `nextflow config` per vedere la configurazione risolta
 
-Come notato sopra, a volte lo stesso parametro può essere impostato a valori diversi in profili che vuole combinare.
+Come notato sopra, a volte lo stesso parametro può essere impostato a valori diversi in profili che volete combinare.
 E più in generale, ci sono numerosi posti dove elementi di configurazione possono essere memorizzati, e a volte le stesse proprietà possono essere impostate a valori diversi in posti diversi.
 
 Nextflow applica un [ordine di precedenza](https://www.nextflow.io/docs/latest/config.html) stabilito per risolvere qualsiasi conflitto, ma può essere complicato da determinare da soli.
 E anche se nulla è in conflitto, può essere tedioso cercare tutti i possibili posti dove le cose potrebbero essere configurate:
 
-Fortunatamente, Nextflow include uno strumento utility conveniente chiamato `config` che può automatizzare l'intero processo per Lei.
+Fortunatamente, Nextflow include uno strumento utility conveniente chiamato `config` che può automatizzare l'intero processo per voi.
 
 Lo strumento `config` esplorerà tutti i contenuti nella vostra directory di lavoro corrente, raccoglierà qualsiasi file di configurazione, e produrrà la configurazione completamente risolta che Nextflow userebbe per eseguire il workflow.
 Questo vi permette di scoprire quali impostazioni verranno usate senza dover lanciare nulla.
@@ -1551,7 +1551,7 @@ Per approfondire: [1.1. Spostare i valori predefiniti in `nextflow.config`](#11-
 
 <quiz>
 Si possono avere sia Docker che Conda abilitati nella stessa configurazione?
-- [x] Sì, Nextflow può usare entrambi a seconda delle direttive del processo
+- [x] Sì, Nextflow potete usare entrambi a seconda delle direttive del processo
 - [ ] No, solo uno può essere abilitato alla volta
 - [ ] Sì, ma solo nei profili
 - [ ] No, sono mutuamente esclusivi

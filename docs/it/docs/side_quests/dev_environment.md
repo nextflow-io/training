@@ -79,7 +79,7 @@ tree .
 
 !!! note "Informazioni sui File di Esempio"
 
-    - `basic_workflow.nf` è un workflow base funzionante che può eseguire e modificare
+    - `basic_workflow.nf` è un workflow base funzionante che potete eseguire e modificare
     - `complex_workflow.nf` è progettato solo per scopi illustrativi per dimostrare le funzionalità di navigazione - potrebbe non essere eseguito con successo ma mostra una struttura realistica di workflow multi-file
 
 ### Scorciatoie da Tastiera
@@ -224,11 +224,11 @@ Può utilizzare l'auto-completamento intelligente di VS Code per scoprire operaz
 
 ### Prossimo passo
 
-Impari come il rilevamento degli errori in tempo reale La aiuta a individuare problemi prima di eseguire il Suo workflow, semplicemente leggendo il codice.
+Imparate come il rilevamento degli errori in tempo reale La aiuta a individuare problemi prima di eseguire il vostro workflow, semplicemente leggendo il codice.
 
 ## 3. Rilevamento degli Errori e Diagnostica
 
-Il rilevamento degli errori in tempo reale di VS Code La aiuta a individuare problemi prima di eseguire il Suo workflow.
+Il rilevamento degli errori in tempo reale di VS Code La aiuta a individuare problemi prima di eseguire il vostro workflow.
 
 ### 3.1. Rilevamento degli Errori di Sintassi
 
@@ -238,7 +238,7 @@ Creiamo un errore deliberato per vedere il rilevamento in azione. Apra `basic_wo
 
 ### 3.2. Pannello Problemi
 
-Oltre all'evidenziazione dei singoli errori, VS Code fornisce un Pannello Problemi centralizzato che aggrega tutti gli errori, avvisi e messaggi informativi nel Suo spazio di lavoro. Lo apra con `Ctrl/Cmd+Shift+M` e utilizzi l'icona filtro per mostrare solo gli errori rilevanti per il file corrente:
+Oltre all'evidenziazione dei singoli errori, VS Code fornisce un Pannello Problemi centralizzato che aggrega tutti gli errori, avvisi e messaggi informativi nel vostro spazio di lavoro. Lo apra con `Ctrl/Cmd+Shift+M` e utilizzi l'icona filtro per mostrare solo gli errori rilevanti per il file corrente:
 
 ![Filtrare il pannello problemi](img/active_file.png)
 
@@ -262,11 +262,11 @@ Il language server Nextflow evidenzia questi problemi nel pannello Problemi. Pu�
 
 ### Takeaway
 
-Può utilizzare il rilevamento degli errori e il Pannello Problemi di VS Code per individuare errori di sintassi e problemi prima di eseguire il Suo workflow, risparmiando tempo e prevenendo frustrazioni.
+Può utilizzare il rilevamento degli errori e il Pannello Problemi di VS Code per individuare errori di sintassi e problemi prima di eseguire il vostro workflow, risparmiando tempo e prevenendo frustrazioni.
 
 ### Prossimo passo
 
-Impari come navigare in modo efficiente tra process, moduli e definizioni in workflow complessi.
+Imparate come navigare in modo efficiente tra process, moduli e definizioni in workflow complessi.
 
 ---
 
@@ -319,7 +319,7 @@ Può navigare rapidamente a qualsiasi definizione di process, modulo o variabile
 
 La stessa cosa funziona per i nomi dei process. Torni a `basic_workflow.nf` e provi questo sul nome del process `FASTQC` nel blocco workflow. Questo La collega direttamente al nome del process (che è lo stesso del file del modulo in questo esempio, ma potrebbe essere a metà di un file molto più grande).
 
-Per tornare dove era, usi **Alt+←** (o **Ctrl+-** su Mac). Questo è un modo potente per esplorare il codice senza perdere la Sua posizione.
+Per tornare dove era, usi **Alt+←** (o **Ctrl+-** su Mac). Questo è un modo potente per esplorare il codice senza perdere la vostra posizione.
 
 Ora esploriamo la navigazione in un workflow più complesso usando `complex_workflow.nf` (il file solo illustrativo menzionato in precedenza). Questo workflow contiene molteplici process definiti in file di moduli separati, oltre ad alcuni inline. Sebbene strutture multi-file complesse possano essere difficili da navigare manualmente, la capacità di saltare alle definizioni rende l'esplorazione molto più gestibile.
 
@@ -350,7 +350,7 @@ Comprendere dove un process o una variabile viene utilizzata in tutto il vostro 
 
 ![Trova riferimenti](img/references.png)
 
-Questa funzionalità visualizza tutte le istanze dove `FASTQC` è referenziato all'interno del Suo spazio di lavoro, incluso il suo utilizzo nei due workflows distinti. Questa comprensione è cruciale per valutare il potenziale impatto delle modifiche al process `FASTQC`.
+Questa funzionalità visualizza tutte le istanze dove `FASTQC` è referenziato all'interno del vostro spazio di lavoro, incluso il suo utilizzo nei due workflows distinti. Questa comprensione è cruciale per valutare il potenziale impatto delle modifiche al process `FASTQC`.
 
 ### 4.4. Pannello Outline
 
@@ -358,11 +358,11 @@ Il pannello Outline, situato nella barra laterale Explorer (cliccate ![Icona Exp
 
 ![Pannello outline](img/outline.png)
 
-Utilizzi il pannello Outline per navigare rapidamente a diverse parti del Suo codice senza usare il browser dei file.
+Utilizzi il pannello Outline per navigare rapidamente a diverse parti del vostro codice senza usare il browser dei file.
 
 ### 4.5. Visualizzazione DAG
 
-L'estensione Nextflow di VS Code può visualizzare il vostro workflow come un Grafo Aciclico Diretto (DAG). Questo vi aiuta a comprendere il flusso dei dati e le dipendenze tra i processes. Aprite `complex_workflow.nf` e cliccate il pulsante "Preview DAG" sopra `workflow {` (il secondo blocco `workflow` in questo file):
+L'estensione Nextflow di VS Code potete visualizzare il vostro workflow come un Grafo Aciclico Diretto (DAG). Questo vi aiuta a comprendere il flusso dei dati e le dipendenze tra i processes. Aprite `complex_workflow.nf` e cliccate il pulsante "Preview DAG" sopra `workflow {` (il secondo blocco `workflow` in questo file):
 
 ![Anteprima DAG](img/dag_preview.png)
 
@@ -370,7 +370,7 @@ Questo è solo il workflow 'principale', ma può anche visualizzare in anteprima
 
 ![Anteprima DAG workflow interno](img/dag_preview_inner.png)
 
-Per questo workflow, può utilizzare i nodi nel DAG per navigare alle corrispondenti definizioni dei processes nel codice. Clicchi su un nodo, e La porterà alla definizione del process rilevante nell'editor. Particolarmente quando un workflow cresce a dimensioni considerevoli, questo può davvero aiutarLa a navigare nel codice e comprendere come i processes sono collegati.
+Per questo workflow, potete utilizzare i nodi nel DAG per navigare alle corrispondenti definizioni dei processes nel codice. Clicchi su un nodo, e La porterà alla definizione del process rilevante nell'editor. Particolarmente quando un workflow cresce a dimensioni considerevoli, questo può davvero aiutarvi a navigare nel codice e comprendere come i processes sono collegati.
 
 ### Takeaway
 
@@ -378,7 +378,7 @@ Può navigare workflow complessi in modo efficiente usando vai-alla-definizione,
 
 ### Prossimo passo
 
-Impari come lavorare efficacemente su più file interconnessi in progetti Nextflow più grandi.
+Imparate come lavorare efficacemente su più file interconnessi in progetti Nextflow più grandi.
 
 ## 5. Lavorare su Più File
 
@@ -405,7 +405,7 @@ Quando si lavora con i moduli, spesso è necessario vedere sia il workflow princ
 1. Apra `complex_workflow.nf`
 2. Apra `modules/fastqc.nf` in una nuova scheda
 3. Clicchi con il tasto destro sulla scheda `modules/fastqc.nf` e selezioni "Split Right"
-4. Ora può vedere entrambi i file affiancati
+4. Ora potete vedere entrambi i file affiancati
 
 ![Editor diviso](img/split_editor.png)
 
@@ -435,7 +435,7 @@ Può gestire progetti multi-file complessi usando la navigazione rapida dei file
 
 ### Prossimo passo
 
-Impari come le funzionalità di formattazione e manutenzione del codice mantengono i Suoi workflows organizzati e leggibili.
+Imparate come le funzionalità di formattazione e manutenzione del codice mantengono i vostri workflows organizzati e leggibili.
 
 ---
 
@@ -460,7 +460,7 @@ VS Code immediatamente:
 - Rimuove spazi bianchi non necessari
 - Mantiene interruzioni di riga leggibili
 
-Noti che la formattazione automatica potrebbe non risolvere ogni problema di stile del codice. Il language server Nextflow mira a mantenere il Suo codice ordinato, ma rispetta anche le Sue preferenze personali in certe aree. Per esempio, se rimuove l'indentazione all'interno del blocco `script` di un process, il formattatore la lascerà così com'è, poiché potrebbe preferire intenzionalmente quello stile.
+Noti che la formattazione automatica potrebbe non risolvere ogni problema di stile del codice. Il language server Nextflow mira a mantenere il vostro codice ordinato, ma rispetta anche le vostre preferenze personali in certe aree. Per esempio, se rimuove l'indentazione all'interno del blocco `script` di un process, il formattatore la lascerà così com'è, poiché potrebbe preferire intenzionalmente quello stile.
 
 Attualmente, non esiste un'applicazione rigorosa dello stile per Nextflow, quindi il language server offre una certa flessibilità. Tuttavia, applicherà in modo coerente le regole di formattazione attorno alle definizioni di metodi e funzioni per mantenere la chiarezza.
 
@@ -468,7 +468,7 @@ Attualmente, non esiste un'applicazione rigorosa dello stile per Nextflow, quind
 
 #### Commento Rapido
 
-Selezioni un blocco di codice nel Suo workflow e prema **Ctrl+/** (o **Cmd+/**) per commentarlo:
+Selezionate un blocco di codice nel vostro workflow e prema **Ctrl+/** (o **Cmd+/**) per commentarlo:
 
 ```groovy
 // workflow {
@@ -494,7 +494,7 @@ In `complex_workflow.nf`, notate le piccole frecce accanto alle definizioni dei 
 
 ![Ripiegamento codice](img/code_folding.png)
 
-Questo Le dà una panoramica di alto livello della struttura del Suo workflow senza perdersi nei dettagli di implementazione.
+Questo Le dà una panoramica di alto livello della struttura del vostro workflow senza perdersi nei dettagli di implementazione.
 
 #### Corrispondenza delle Parentesi
 
@@ -525,13 +525,13 @@ Può mantenere un codice pulito e leggibile usando formattazione automatica, fun
 
 ### Prossimo passo
 
-Impari come VS Code si integra con il Suo workflow di sviluppo più ampio oltre alla semplice modifica del codice.
+Imparate come VS Code si integra con il vostro workflow di sviluppo più ampio oltre alla semplice modifica del codice.
 
 ---
 
 ## 7. Integrazione del Workflow di Sviluppo
 
-VS Code si integra bene con il Suo workflow di sviluppo oltre alla semplice modifica del codice.
+VS Code si integra bene con il vostro workflow di sviluppo oltre alla semplice modifica del codice.
 
 ### 7.1. Integrazione del Controllo Versione
 
@@ -539,14 +539,14 @@ VS Code si integra bene con il Suo workflow di sviluppo oltre alla semplice modi
 
     Se sta lavorando in **GitHub Codespaces**, alcune funzionalità di integrazione Git potrebbero non funzionare come previsto, in particolare le scorciatoie da tastiera per Source Control. Potrebbe anche aver rifiutato di aprire la directory come repository Git durante la configurazione iniziale, il che va bene per scopi di formazione.
 
-Se il Suo progetto è un repository git (come lo è questo), VS Code mostra:
+Se il vostro progetto è un repository git (come lo è questo), VS Code mostra:
 
 - File modificati con indicatori colorati
 - Stato Git nella barra di stato
 - Viste diff inline
 - Capacità di commit e push
 
-Apra il pannello Source Control usando il pulsante source control (![Icona Source control](img/source_control_icon.png)) (`Ctrl+Shift+G` o `Cmd+Shift+G` se sta lavorando con VSCode localmente) per vedere le modifiche git e effettuare commit direttamente nell'editor.
+Aprite il pannello Source Control usando il pulsante source control (![Icona Source control](img/source_control_icon.png)) (`Ctrl+Shift+G` o `Cmd+Shift+G` se state lavorando con VSCode localmente) per vedere le modifiche git e effettuare commit direttamente nell'editor.
 
 ![Pannello Source Control](img/source_control.png)
 
@@ -558,12 +558,12 @@ Eseguiamo un workflow e quindi ispezioniamo i risultati. Nel terminale integrato
 nextflow run basic_workflow.nf --input data/sample_data.csv --output_dir results
 ```
 
-Mentre il workflow è in esecuzione, vedrà l'output in tempo reale nel terminale. Dopo il completamento, può utilizzare VS Code per ispezionare i risultati senza lasciare il Suo editor:
+Mentre il workflow è in esecuzione, vedrà l'output in tempo reale nel terminale. Dopo il completamento, potete utilizzare VS Code per ispezionare i risultati senza lasciare il vostro editor:
 
 1. **Navigare alle directory di lavoro**: Utilizzi l'esplora file o il terminale per navigare `.nextflow/work`
 2. **Aprire file di log**: Clicchi sui percorsi dei file di log nell'output del terminale per aprirli direttamente in VS Code
 3. **Ispezionare gli output**: Navighi le directory dei risultati pubblicati nell'esplora file
-4. **Visualizzare report di esecuzione**: Apra report HTML direttamente in VS Code o nel Suo browser
+4. **Visualizzare report di esecuzione**: Apra report HTML direttamente in VS Code o nel vostro browser
 
 Questo mantiene tutto in un unico posto piuttosto che cambiare tra molteplici applicazioni.
 
@@ -573,7 +573,7 @@ Può integrare VS Code con il controllo versione e l'esecuzione del workflow per
 
 ### Prossimo passo
 
-Veda come tutte queste funzionalità dell'IDE lavorano insieme nel Suo workflow di sviluppo quotidiano.
+Vedete come tutte queste funzionalità dell'IDE lavorano insieme nel vostro workflow di sviluppo quotidiano.
 
 ---
 
@@ -620,10 +620,10 @@ Non ci aspettiamo che ricordi tutto, ma ora sa che queste funzionalità esistono
 
 Applichi queste competenze dell'IDE mentre lavora attraverso altri moduli di formazione, per esempio:
 
-- **[nf-test](nf-test.md)**: Creare suite di test complete per i Suoi workflows
+- **[nf-test](nf-test.md)**: Creare suite di test complete per i vostri workflows
 - **[Hello nf-core](../../hello_nf-core/)**: Costruire pipeline di qualità per la produzione con standard della comunità
 
-Il vero potere di queste funzionalità dell'IDE emerge mentre lavora su progetti più grandi e complessi. Inizi a incorporarle gradualmente nel Suo workflow - nel giro di poche sessioni, diventeranno una seconda natura e trasformeranno il Suo approccio allo sviluppo Nextflow.
+Il vero potere di queste funzionalità dell'IDE emerge mentre lavora su progetti più grandi e complessi. Inizi a incorporarle gradualmente nel vostro workflow - nel giro di poche sessioni, diventeranno una seconda natura e trasformeranno il vostro approccio allo sviluppo Nextflow.
 
 Dall'individuare errori prima che La rallentino alla navigazione di codebase complessi con facilità, questi strumenti La renderanno uno sviluppatore più sicuro ed efficiente.
 

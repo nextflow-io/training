@@ -29,7 +29,7 @@ Questo ambiente containerizzato può essere eseguito direttamente su GitHub Code
 
   ***
 
-  VS Code con Devcontainers fornisce un ambiente di sviluppo containerizzato eseguito localmente con tutti gli strumenti di formazione preconfigurati. Offre lo stesso ambiente preconfigurato di Codespaces ma funziona interamente sul Suo hardware locale.
+  VS Code con Devcontainers fornisce un ambiente di sviluppo containerizzato eseguito localmente con tutti gli strumenti di formazione preconfigurati. Offre lo stesso ambiente preconfigurato di Codespaces ma funziona interamente sul vostro hardware locale.
 
   [Usa Devcontainers localmente :material-arrow-right:](03_devcontainer.md){ .md-button .md-button--primary .mt-1 }
 

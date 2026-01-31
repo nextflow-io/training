@@ -20,7 +20,7 @@ Ecco le principali opzioni disponibili a seconda di ciò che sta cercando.
 
     ---
 
-    Il nostro forum della community ha una categoria dedicata alla formazione, che è un ottimo posto per pubblicare domande o segnalare eventuali problemi riscontrati con la formazione. Potrebbe anche scoprire che la Sua domanda è già stata posta -- e ha già ricevuto risposta!
+    Il nostro forum della community ha una categoria dedicata alla formazione, che è un ottimo posto per pubblicare domande o segnalare eventuali problemi riscontrati con la formazione. Potrebbe anche scoprire che la vostra domanda è già stata posta -- e ha già ricevuto risposta!
 
     [Vai al forum di formazione:material-arrow-right:](https://community.seqera.io/c/training/39){ .md-button .md-button--primary .mt-1 }
 
@@ -36,7 +36,7 @@ Ecco le principali opzioni disponibili a seconda di ciò che sta cercando.
 
     ---
 
-    Se individua un errore nei materiali formativi, La preghiamo di segnalarlo aprendo una issue nel repository Github. Che si tratti di un refuso, un problema di formattazione o un bug effettivo che influisce sul codice, ce lo faccia sapere in modo da poterlo correggere! Accogliamo anche le PR direttamente.
+    Se individua un errore nei materiali formativi, Vi preghiamo di segnalarlo aprendo una issue nel repository Github. Che si tratti di un refuso, un problema di formattazione o un bug effettivo che influisce sul codice, fatecelo sapere in modo da poterlo correggere! Accogliamo anche le PR direttamente.
 
     [Segnala un problema:material-arrow-right:](https://github.com/nextflow-io/training/issues){ .md-button .md-button--primary .mt-1 }
 

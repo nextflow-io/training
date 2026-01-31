@@ -477,7 +477,7 @@ Più avanti imparerete modi per generare strutture di directory di output sofist
 
 #### 2.1.3. Eseguire il workflow
 
-Ora esegua lo script del workflow modificato:
+Ora eseguite lo script del workflow modificato:
 
 ```bash
 nextflow run hello-world.nf
@@ -1065,7 +1065,7 @@ Nextflow usa l'ID di sessione per raggruppare le informazioni di cache dell'esec
 
 Durante il processo di sviluppo, tipicamente eseguirete la vostra bozza di pipeline un gran numero di volte, il che può portare a un accumulo di molti file in molte sottodirectory.
 
-Fortunatamente Nextflow include un utile sottocomando `clean` che può eliminare automaticamente le sottodirectory work per le esecuzioni passate che non Le interessano più.
+Fortunatamente Nextflow include un utile sottocomando `clean` che potete eliminare automaticamente le sottodirectory work per le esecuzioni passate che non Le interessano più.
 
 #### 4.3.1. Determinare i criteri di eliminazione
 

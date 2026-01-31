@@ -1,6 +1,6 @@
 ```yaml
 ---
-title: Merhaba nf-core
+title: Hello nf-core
 hide:
   - toc
 page_type: index_page
@@ -18,15 +18,15 @@ additional_information:
   audience_prerequisites:
     - "**Hedef Kitle:** Bu kurs, temel Nextflow'a zaten aşina olan ve nf-core kaynaklarını ve en iyi uygulamalarını kullanmayı öğrenmek isteyen katılımcılar için tasarlanmıştır."
     - "**Beceriler:** Komut satırı, temel betik yazma kavramları ve yaygın dosya formatları hakkında bilgi sahibi olunduğu varsayılmaktadır."
-    - "**Kurslar:** [Merhaba Nextflow](../hello_nextflow/index.md) kursunu veya eşdeğerini tamamlamış olmalıdır."
+    - "**Kurslar:** [Hello Nextflow](../hello_nextflow/index.md) kursunu veya eşdeğerini tamamlamış olmalıdır."
     - "**Alan:** Alıştırmaların tümü alandan bağımsızdır, dolayısıyla önceden bilimsel bilgi gerekmemektedir."
 ---
 
-# Merhaba nf-core
+# Hello nf-core
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-**Merhaba nf-core, nf-core kaynaklarını ve en iyi uygulamalarını kullanmaya yönelik uygulamalı bir giriştir.**
+**Hello nf-core, nf-core kaynaklarını ve en iyi uygulamalarını kullanmaya yönelik uygulamalı bir giriştir.**
 
 ![nf-core logo](./img/nf-core-logo.png)
 
@@ -56,7 +56,7 @@ Bunu, nf-core kaynaklarını kullanmanın belirli yönlerine odaklanan beş böl
 | Kurs bölümü                                                | Özet                                                                                                                                                                                        | Tahmini süre |
 | ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
 | [Bölüm 1: Demo pipeline çalıştırma](./01_run_demo.md)     | Mevcut bir nf-core pipeline'ı çalıştırın ve bu pipeline'ları temel Nextflow iş akışlarından farklı kılan şeyleri anlamak için kod yapısını inceleyin                                       | 30 dakika    |
-| [Bölüm 2: Hello'yu nf-core için yeniden yazma](./02_rewrite_hello.md) | Mevcut bir iş akışını nf-core şablon iskeletine uyarlayın, [Merhaba Nextflow](../hello_nextflow/index.md) kursunda üretilen basit iş akışından başlayarak                                  | 60 dakika    |
+| [Bölüm 2: Hello'yu nf-core için yeniden yazma](./02_rewrite_hello.md) | Mevcut bir iş akışını nf-core şablon iskeletine uyarlayın, [Hello Nextflow](../hello_nextflow/index.md) kursunda üretilen basit iş akışından başlayarak                                  | 60 dakika    |
 | [Bölüm 3: nf-core modülü kullanma](./03_use_module.md)    | Topluluk modülleri kütüphanesini keşfedin ve yaygın biyoinformatik araçlarını sarmalayan önceden oluşturulmuş, test edilmiş modülleri entegre etmeyi öğrenin                               | 30 dakika    |
 | [Bölüm 4: nf-core modülü oluşturma](./04_make_module.md)  | nf-core tarafından belirlenen belirli yapı, adlandırma konvansiyonları ve metadata gereksinimlerini kullanarak kendi nf-core tarzı modülünüzü oluşturun                                    | 30 dakika    |
 | [Bölüm 5: Girdi doğrulama ekleme](./05_input_validation.md) | nf-schema kullanarak hem komut satırı parametreleri hem de girdi veri dosyaları için girdi doğrulama uygulayın                                                                             | 30 dakika    |

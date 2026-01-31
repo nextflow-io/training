@@ -2,7 +2,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Nella prima parte di questo corso, Lei ha costruito una pipeline di chiamata delle varianti completamente lineare che processava i dati di ciascun campione indipendentemente dagli altri.
+Nella prima parte di questo corso, avete costruito una pipeline di chiamata delle varianti completamente lineare che processava i dati di ciascun campione indipendentemente dagli altri.
 Tuttavia, in un caso d'uso genomico reale, tipicamente sarà necessario esaminare le chiamate di varianti di più campioni insieme.
 
 In questa seconda parte, Le mostriamo come utilizzare i canali e gli operatori di canale per implementare la chiamata congiunta delle varianti con GATK, basandosi sulla pipeline della Parte 1.
@@ -46,7 +46,7 @@ Proprio come in precedenza, vogliamo provare i comandi manualmente prima di tent
 
 !!! note
 
-     Si assicuri di essere nella directory di lavoro corretta:
+     Assicuratevi di essere nella directory di lavoro corretta:
      `cd /workspaces/training/nf4-science/genomics`
 
 ### 0.1. Indicizzare un file BAM di input con Samtools
@@ -145,7 +145,7 @@ gatk HaplotypeCaller \
 
 Questo crea il file di output GVCF `reads_mother.g.vcf` nella directory di lavoro corrente nel container.
 
-Se lo visualizza con `cat` per vederne il contenuto, vedrà che è molto più lungo del VCF equivalente che abbiamo generato nella Parte 1. Non può nemmeno scorrere fino all'inizio del file, e la maggior parte delle righe appare abbastanza diversa da ciò che abbiamo visto nel VCF della Parte 1.
+Se lo visualizzate con `cat` per vederne il contenuto, vedrà che è molto più lungo del VCF equivalente che abbiamo generato nella Parte 1. Non potete nemmeno scorrere fino all'inizio del file, e la maggior parte delle righe appare abbastanza diversa da ciò che abbiamo visto nel VCF della Parte 1.
 
 ```console title="Output" linenums="1674"
 20_10037292_10066351    14714   .       T       <NON_REF>       .       .       END=14718       GT:DP:GQ:MIN_DP:PL       0/0:37:99:37:0,99,1192
@@ -205,7 +205,7 @@ gatk HaplotypeCaller \
     ```
 -->
 
-Una volta completato, dovrebbe avere tre file che terminano con `.g.vcf` nella Sua directory corrente (uno per campione) e i rispettivi file di indice che terminano con `.g.vcf.idx`.
+Una volta completato, dovrebbe avere tre file che terminano con `.g.vcf` nella vostra directory corrente (uno per campione) e i rispettivi file di indice che terminano con `.g.vcf.idx`.
 
 ### 0.3. Eseguire la genotipizzazione congiunta
 
@@ -260,7 +260,7 @@ gatk GenotypeGVCFs \
 -->
 
 Questo crea il file di output VCF `family_trio.vcf` nella directory di lavoro corrente nel container.
-È un altro file ragionevolmente piccolo quindi può visualizzare questo file con `cat` per vederne il contenuto, e scorrere verso l'alto per trovare le prime righe di varianti.
+È un altro file ragionevolmente piccolo quindi potete visualizzare questo file con `cat` per vederne il contenuto, e scorrere verso l'alto per trovare le prime righe di varianti.
 
 ```console title="family_trio.vcf" linenums="40"
 #CHROM  POS     ID      REF     ALT     QUAL    FILTER  INFO    FORMAT  reads_father    reads_mother    reads_son
@@ -312,7 +312,7 @@ Inizieremo facendo due modifiche:
 - Aggiungere il parametro `-ERC GVCF` al comando GATK HaplotypeCaller;
 - Aggiornare il percorso del file di output per utilizzare l'estensione corrispondente `.g.vcf`, secondo la convenzione GATK.
 
-Si assicuri di aggiungere una barra rovesciata (`\`) alla fine della riga precedente quando aggiunge `-ERC GVCF`.
+Assicuratevi di aggiungere una barra rovesciata (`\`) alla fine della riga precedente quando aggiunge `-ERC GVCF`.
 
 === "Dopo"
 
@@ -344,7 +344,7 @@ E questo è tutto ciò che serve per passare HaplotypeCaller alla generazione di
 ### 1.2. Eseguire la pipeline per verificare che si possano generare GVCF
 
 Il comando di esecuzione Nextflow è lo stesso di prima, salvo per il nome del file del workflow stesso.
-Si assicuri di aggiornarlo appropriatamente.
+Assicuratevi di aggiornarlo appropriatamente.
 
 ```bash
 nextflow run genomics-2.nf
@@ -500,7 +500,7 @@ L'output di Nextflow stesso non appare diverso (rispetto a un'esecuzione riuscit
         └── reads_son.bam.bai -> */cc/fbc705*/reads_son.bam.bai
     ```
 
-Se apre uno dei file GVCF e lo scorre, può verificare che GATK HaplotypeCaller abbia prodotto file GVCF come richiesto.
+Se apre uno dei file GVCF e lo scorre, potete verificare che GATK HaplotypeCaller abbia prodotto file GVCF come richiesto.
 
 ### Takeaway
 
@@ -585,7 +585,7 @@ Sembra un po' complicato? Scomponiamolo e traduciamolo in linguaggio semplice.
 
 !!! tip
 
-    Se ha difficoltà a visualizzare esattamente cosa sta succedendo qui, ricordi che può utilizzare l'operatore `view()` per ispezionare il contenuto dei canali prima e dopo l'applicazione degli operatori di canale.
+    Se avete difficoltà a visualizzare esattamente cosa sta succedendo qui, ricordate che potete utilizzare l'operatore `view()` per ispezionare il contenuto dei canali prima e dopo l'applicazione degli operatori di canale.
 
 I canali risultanti `all_gvcfs_ch` e `all_idxs_ch` sono ciò che collegheremo al processo `GATK_GENOMICSDB` che abbiamo appena scritto.
 
@@ -702,7 +702,7 @@ Questo perché Nextflow deve vederli come percorsi di file per organizzare i fil
 
 Ma _dove_ nel processo possiamo aggiungere questo?
 
-Fatto divertente: può aggiungere codice arbitrario dopo `script:` e prima del `"""` !
+Fatto divertente: potete aggiungere codice arbitrario dopo `script:` e prima del `"""` !
 
 Ottimo, aggiungiamo la nostra riga di manipolazione delle stringhe lì allora, e aggiorniamo il comando `gatk GenomicsDBImport` per utilizzare la stringa concatenata che produce.
 
@@ -735,7 +735,7 @@ Questo dovrebbe essere tutto ciò che è necessario per fornire correttamente gl
 
 !!! tip
 
-    Quando aggiorna il comando `gatk GenomicsDBImport`, si assicuri di rimuovere il prefisso `-V ` quando sostituisce con la variabile `${gvcfs_line}`.
+    Quando aggiorna il comando `gatk GenomicsDBImport`, assicuratevi di rimuovere il prefisso `-V ` quando sostituisce con la variabile `${gvcfs_line}`.
 
 ### 2.7. Eseguire il workflow per verificare che generi l'output GenomicsDB come previsto
 
@@ -804,7 +804,7 @@ Poiché il processo eseguirà più di uno strumento, cambiamo il suo nome per fa
     process GATK_GENOMICSDB {
     ```
 
-Ricordi di mantenere i nomi dei Suoi processi il più descrittivi possibile, per massimizzare la leggibilità per i Suoi colleghi — e il Suo futuro sé!
+Ricordi di mantenere i nomi dei vostri processi il più descrittivi possibile, per massimizzare la leggibilità per i vostri colleghi — e il vostro futuro sé!
 
 ### 3.2. Aggiungere il comando di genotipizzazione congiunta al processo GATK_JOINTGENOTYPING
 
@@ -867,7 +867,7 @@ Il secondo comando richiede i file del genoma di riferimento, quindi dobbiamo ag
         val cohort_name
     ```
 
-Può sembrare fastidioso digitarli, ma ricordi, li digita una volta, e poi può eseguire il workflow un milione di volte. Ne vale la pena?
+Può sembrare fastidioso digitarli, ma ricordi, li digita una volta, e poi potete eseguire il workflow un milione di volte. Ne vale la pena?
 
 ### 3.4. Aggiornare la definizione di output del processo per emettere il VCF delle chiamate di varianti a livello di coorte
 
@@ -998,7 +998,7 @@ Troverà il file di output finale, `family_trio.joint.vcf` (e il suo indice di f
         └── reads_son.bam.bai -> */cc/fbc705*/reads_son.bam.bai
     ```
 
-Se è del tipo scettico, può fare clic sul file VCF congiunto per aprirlo e verificare che il workflow abbia generato le stesse chiamate di varianti che ha ottenuto eseguendo gli strumenti manualmente all'inizio di questa sezione.
+Se è del tipo scettico, potete fare clic sul file VCF congiunto per aprirlo e verificare che il workflow abbia generato le stesse chiamate di varianti che avete ottenuto eseguendo gli strumenti manualmente all'inizio di questa sezione.
 
 ```console title="family_trio.joint.vcf" linenums="40"
 #CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	reads_father	reads_mother	reads_son
@@ -1017,10 +1017,10 @@ Ora ha un workflow di chiamata congiunta delle varianti automatizzato, completam
 
 ### Takeaway
 
-Sa come utilizzare alcuni operatori comuni così come le closure di Groovy per controllare il flusso di dati nel Suo workflow.
+Sa come utilizzare alcuni operatori comuni così come le closure di Groovy per controllare il flusso di dati nel vostro workflow.
 
 ### Quali sono i prossimi passi?
 
-Celebri il Suo successo e si prenda una meritata pausa.
+Celebrate il vostro successo e prendetevi una meritata pausa.
 
-Nella prossima parte di questo corso, imparerà come modularizzare il Suo workflow estraendo le definizioni dei processi in moduli riutilizzabili.
+Nella prossima parte di questo corso, imparerà come modularizzare il vostro workflow estraendo le definizioni dei processi in moduli riutilizzabili.

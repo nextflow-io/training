@@ -46,6 +46,6 @@ Infine, Le raccomandiamo di dare un'occhiata a [**Seqera Platform**](https://seq
 
 ## Questionario di feedback
 
-Prima di proseguire, La preghiamo di dedicare un minuto per completare il questionario del corso! Il suo feedback ci aiuta a migliorare i nostri materiali di formazione per tutti.
+Prima di proseguire, Vi preghiamo di dedicare un minuto per completare il questionario del corso! Il suo feedback ci aiuta a migliorare i nostri materiali di formazione per tutti.
 
 [Compili il questionario :material-arrow-right:](survey.md){ .md-button .md-button--primary }

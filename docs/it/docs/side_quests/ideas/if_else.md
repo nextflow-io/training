@@ -84,6 +84,6 @@ Ora sa come utilizzare i container in Nextflow per eseguire processi e come cost
 
 ### Prossimi passi
 
-Celebri, si prenda una pausa per fare stretching e beva dell'acqua!
+Celebri, prendetevi una pausa per fare stretching e beva dell'acqua!
 
 Quando è pronto, passi alla Parte 3 di questa serie di formazione per imparare ad applicare quanto appreso finora a un caso d'uso di analisi dati più realistico.

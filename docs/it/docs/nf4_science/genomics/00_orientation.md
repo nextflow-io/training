@@ -61,7 +61,7 @@ Se esegue questo comando all'interno di `nf4-science/genomics`, dovrebbe vedere 
 - **La directory `data`** contiene dati di input e risorse correlate, descritte più avanti nel corso.
 
 - **La directory `solutions`** contiene file di moduli e configurazioni di test che risultano dalle Parti 3 e 4 del corso.
-  Sono destinati ad essere utilizzati come riferimento per verificare il Suo lavoro e risolvere eventuali problemi.
+  Sono destinati ad essere utilizzati come riferimento per verificare il vostro lavoro e risolvere eventuali problemi.
 
 !!!tip "Suggerimento"
 

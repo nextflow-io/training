@@ -104,7 +104,7 @@ process cowpy {
 === "पहले"
 
     ```groovy title="core-hello/modules/local/cowpy.nf" linenums="3" hl_lines="2"
-    // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
+    // cowpy के साथ ASCII art जेनरेट करें (https://github.com/jeffbuttars/cowpy)
     process cowpy {
     ```
 

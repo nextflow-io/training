@@ -20,10 +20,10 @@ Per fare in modo che Nextflow generi il report automaticamente, è sufficiente a
 nextflow run main.nf -profile my_laptop -with-report report-config-1.html
 ```
 
-Il report è un file html, che può scaricare e aprire nel suo browser. Può anche fare clic con il tasto destro su di esso nell'esploratore file a sinistra e fare clic su `Show preview` per visualizzarlo in VS Code.
+Il report è un file html, che potete scaricare e aprire nel suo browser. Può anche fare clic con il tasto destro su di esso nell'esploratore file a sinistra e fare clic su `Show preview` per visualizzarlo in VS Code.
 
 Si prenda alcuni minuti per esaminare il report e verificare se riesce a identificare alcune opportunità per regolare le risorse.
-Si assicuri di fare clic sulle schede che mostrano i risultati di utilizzo come percentuale di ciò che è stato allocato.
+Assicuratevi di fare clic sulle schede che mostrano i risultati di utilizzo come percentuale di ciò che è stato allocato.
 È disponibile una [documentazione](https://www.nextflow.io/docs/latest/reports.html) che descrive tutte le funzionalità disponibili.
 
 <!-- TODO: insert images -->
@@ -78,14 +78,14 @@ Tuttavia, il secondo report mostra che il nostro utilizzo delle risorse è ora p
 
 <!-- **TODO: screenshots?** -->
 
-Come può vedere, questo approccio è utile quando i suoi processi hanno requisiti di risorse diversi. Le permette di dimensionare correttamente le allocazioni di risorse che configura per ciascun processo in base a dati effettivi, non a ipotesi.
+Come potete vedere, questo approccio è utile quando i vostri processi hanno requisiti di risorse diversi. Le permette di dimensionare correttamente le allocazioni di risorse che configura per ciascun processo in base a dati effettivi, non a ipotesi.
 
 !!!note "Nota"
 
-    Questo è solo un piccolo assaggio di ciò che può fare per ottimizzare l'utilizzo delle risorse.
+    Questo è solo un piccolo assaggio di ciò che potete fare per ottimizzare l'utilizzo delle risorse.
     Nextflow stesso ha una [logica di retry dinamica](https://www.nextflow.io/docs/latest/process.html#dynamic-task-resources) davvero interessante integrata per riprovare le attività che falliscono a causa di limitazioni di risorse.
     Inoltre, Seqera Platform offre strumenti basati su AI per ottimizzare le allocazioni di risorse automaticamente.
 
     Tratteremo entrambi questi approcci in una prossima parte di questo corso di formazione.
 
-Detto questo, potrebbero esserci alcuni vincoli su ciò che può (o deve) allocare a seconda dell'executor di calcolo e dell'infrastruttura di calcolo che sta utilizzando. Ad esempio, il suo cluster potrebbe richiedere di rimanere entro determinati limiti che non si applicano quando si esegue altrove.
+Detto questo, potrebbero esserci alcuni vincoli su ciò che può (o deve) allocare a seconda dell'executor di calcolo e dell'infrastruttura di calcolo che state utilizzando. Ad esempio, il vostro cluster potrebbe richiedere di rimanere entro determinati limiti che non si applicano quando si esegue altrove.

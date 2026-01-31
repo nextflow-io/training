@@ -79,7 +79,7 @@ Come in precedenza, troverete il file di output chiamato `output.txt` nella dire
     Hello Channels!
     ```
 
-Se ha funzionato, siete pronti a imparare i channel.
+Se tutto ha funzionato, siete pronti a imparare i channel.
 
 ---
 
@@ -262,7 +262,7 @@ Aggiungete questa piccola riga al blocco workflow:
 
 La quantità esatta di spazi non importa purché sia un multiplo di 4; stiamo solo cercando di allineare l'inizio dell'istruzione `.view()` alla parte `.of()` della costruzione del channel.
 
-Ora esegua di nuovo il workflow:
+Ora eseguite di nuovo il workflow:
 
 ```bash
 nextflow run hello-channels.nf

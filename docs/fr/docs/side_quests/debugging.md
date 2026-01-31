@@ -1380,9 +1380,9 @@ workflow {
       ['sample2', 'file2.txt'],
       ['sample3', 'file3.txt']
     )
-    .view { "Channel content: $it" }  // Debug: Show original channel content
-    .map { tuple -> tuple[0] }        // Transform: Extract first element
-    .view { "After mapping: $it" }    // Debug: Show transformed channel content
+    .view { "Channel content: $it" }  // Débogage : Affiche le contenu original du canal
+    .map { tuple -> tuple[0] }        // Transformation : Extrait le premier élément
+    .view { "After mapping: $it" }    // Débogage : Affiche le contenu transformé du canal
 
     PROCESS_FILES(input_ch)
 }
@@ -1500,11 +1500,11 @@ process PROCESS_FILES {
     val sample_name
 
     output:
-    path "${sample_name}.txt"  // Expects: sample3.txt
+    path "${sample_name}.txt"  // Attend : sample3.txt
 
     script:
     """
-    echo "Processing ${sample_name}" > ${sample_name}_output.txt  // Creates: sample3_output.txt
+    echo "Processing ${sample_name}" > ${sample_name}_output.txt  // Crée : sample3_output.txt
     """
 }
 ```
@@ -1549,11 +1549,11 @@ Corrigez le décalage en rendant le nom de fichier de sortie cohérent :
         val sample_name
 
         output:
-        path "${sample_name}.txt"  // Expects: sample3.txt
+        path "${sample_name}.txt"  // Attend : sample3.txt
 
         script:
         """
-        echo "Processing ${sample_name}" > ${sample_name}_output.txt  // Creates: sample3_output.txt
+        echo "Processing ${sample_name}" > ${sample_name}_output.txt  // Crée : sample3_output.txt
         """
     }
     ```

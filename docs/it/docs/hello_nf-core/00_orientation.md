@@ -18,7 +18,7 @@ Questo ambiente di formazione contiene tutto il software, il codice e i dati nec
 Il codespace è configurato con un'interfaccia VSCode, che include un esploratore del filesystem, un editor di codice e una shell di terminale.
 Tutte le istruzioni fornite durante il corso (ad es. 'aprite il file', 'modificate il codice' o 'eseguite questo comando') si riferiscono a queste tre parti dell'interfaccia VSCode, salvo diversa indicazione.
 
-Se sta seguendo questo corso autonomamente, La preghiamo di familiarizzare con le [nozioni di base sull'ambiente](../envsetup/01_setup.md) per ulteriori dettagli.
+Se sta seguendo questo corso autonomamente, Vi preghiamo di familiarizzare con le [nozioni di base sull'ambiente](../envsetup/01_setup.md) per ulteriori dettagli.
 
 ### Requisiti di versione
 

@@ -24,7 +24,7 @@ Tuttavia, tutti presuppongono una familiarità minima con i seguenti aspetti:
 
 Per i requisiti tecnici e la configurazione dell'ambiente, consulti il mini-corso [Configurazione dell'Ambiente](../../envsetup/).
 
-**Se questa è la prima volta che si avventura nelle Missioni Secondarie, si assicuri di consultare prima la pagina [Orientamento](./orientation.md)!**
+**Se questa è la prima volta che si avventura nelle Missioni Secondarie, assicuratevi di consultare prima la pagina [Orientamento](./orientation.md)!**
 
 Altrimenti, selezioni una missione secondaria dalla tabella qui sotto.
 

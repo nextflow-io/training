@@ -50,7 +50,7 @@ results
 └── output.txt
 ```
 
-Apra il file; il contenuto dovrebbe corrispondere al saluto che ha specificato dalla riga di comando.
+Aprite il file; il contenuto dovrebbe corrispondere al saluto che ha specificato dalla riga di comando.
 
 <details>
   <summary>Contenuto del file</summary>
@@ -77,7 +77,7 @@ Quindi ora, daremo un'occhiata dietro le quinte per vedere dove Nextflow ha effe
 Quando esegue un workflow, Nextflow crea una 'directory di attività' distinta per ogni singola invocazione di ciascun processo nel workflow (=ogni passaggio nella pipeline).
 Per ognuna, preparerà gli input necessari, eseguirà le istruzioni pertinenti e scriverà output e file di log all'interno di quella directory, che viene nominata automaticamente utilizzando un hash per renderla unica.
 
-Tutte queste directory di attività risiederanno sotto una directory chiamata `work` all'interno della sua directory corrente (dove sta eseguendo il comando).
+Tutte queste directory di attività risiederanno sotto una directory chiamata `work` all'interno della vostra directory corrente (dove state eseguendo il comando).
 
 Questo potrebbe sembrare confuso, quindi vediamo come appare nella pratica.
 
@@ -183,7 +183,7 @@ Sa come eseguire un semplice script Nextflow, monitorarne l'esecuzione e trovare
 
 ### Cosa succede dopo?
 
-Impari a leggere uno script Nextflow di base e a identificare come i suoi componenti si relazionano alla sua funzionalità.
+Imparate a leggere uno script Nextflow di base e a identificare come i suoi componenti si relazionano alla sua funzionalità.
 
 ---
 
@@ -325,7 +325,7 @@ Ora sa come è strutturato un semplice workflow Nextflow e come i componenti di 
 
 ### Cosa succede dopo?
 
-Impari a gestire comodamente le esecuzioni del workflow.
+Imparate a gestire comodamente le esecuzioni del workflow.
 
 ---
 
@@ -333,7 +333,7 @@ Impari a gestire comodamente le esecuzioni del workflow.
 
 Sapere come avviare workflow e recuperare output è ottimo, ma scoprirà rapidamente che ci sono alcuni altri aspetti della gestione del workflow che renderanno la sua vita più facile.
 
-Qui le mostriamo come sfruttare la funzione `resume` per quando deve rilanciare lo stesso workflow, come ispezionare i log di esecuzione con `nextflow log`, e come eliminare le directory work più vecchie con `nextflow clean`.
+Qui vi mostriamo come sfruttare la funzione `resume` per quando deve rilanciare lo stesso workflow, come ispezionare i log di esecuzione con `nextflow log`, e come eliminare le directory work più vecchie con `nextflow clean`.
 
 ### 3.1. Rilanciare un workflow con `-resume`
 
@@ -345,8 +345,8 @@ Questo significa che Nextflow eseguirà solo i processi che ha aggiunto o modifi
 
 Ci sono due vantaggi chiave nel farlo:
 
-- Se sta sviluppando una pipeline, può iterare più rapidamente poiché deve solo eseguire il/i processo/i su cui sta lavorando attivamente per testare le sue modifiche.
-- Se sta eseguendo una pipeline in produzione e qualcosa va storto, in molti casi può risolvere il problema e rilanciare la pipeline, e riprenderà l'esecuzione dal punto di errore, il che può farle risparmiare molto tempo e calcolo.
+- Se sta sviluppando una pipeline, potete iterare più rapidamente poiché deve solo eseguire il/i processo/i su cui state lavorando attivamente per testare le vostre modifiche.
+- Se state eseguendo una pipeline in produzione e qualcosa va storto, in molti casi potete risolvere il problema e rilanciare la pipeline, e riprenderà l'esecuzione dal punto di errore, il che può farvi risparmiare molto tempo e calcolo.
 
 Per utilizzarlo, aggiungete semplicemente `-resume` al vostro comando ed eseguite:
 
@@ -367,7 +367,7 @@ nextflow run hello-world.nf --greeting 'Hello World!' -resume
 Cerchi il bit `cached:` che è stato aggiunto nella riga dello stato del processo (riga 5), che significa che Nextflow ha riconosciuto di aver già fatto questo lavoro e ha semplicemente riutilizzato il risultato dall'esecuzione precedente riuscita.
 
 Può anche vedere che l'hash della sottodirectory work è lo stesso dell'esecuzione precedente.
-Nextflow le sta letteralmente indicando l'esecuzione precedente e dicendo "L'ho già fatto lì."
+Nextflow vi sta letteralmente indicando l'esecuzione precedente e dicendo "L'ho già fatto lì."
 
 !!! Tip "Suggerimento"
 
@@ -387,10 +387,10 @@ Questo produrrà il contenuto del file di log nel terminale, mostrandole il time
 
 ### 3.3. Eliminare le directory work più vecchie
 
-Durante il processo di sviluppo, tipicamente eseguirà le sue bozze di pipeline un gran numero di volte, il che può portare a un accumulo di molti file in molte sottodirectory.
+Durante il processo di sviluppo, tipicamente eseguirete le vostre bozze di pipeline un gran numero di volte, il che può portare a un accumulo di molti file in molte sottodirectory.
 Poiché le sottodirectory sono nominate casualmente, è difficile dire dai loro nomi quali sono le esecuzioni più vecchie rispetto a quelle più recenti.
 
-Nextflow include un comodo sottocomando `clean` che può eliminare automaticamente le sottodirectory work per esecuzioni passate che non le interessano più, con diverse [opzioni](https://www.nextflow.io/docs/latest/reference/cli.html#clean) per controllare cosa verrà eliminato.
+Nextflow include un comodo sottocomando `clean` che potete eliminare automaticamente le sottodirectory work per esecuzioni passate che non vi interessano più, con diverse [opzioni](https://www.nextflow.io/docs/latest/reference/cli.html#clean) per controllare cosa verrà eliminato.
 
 Può utilizzare il log Nextflow per cercare un'esecuzione in base al suo timestamp e/o alla riga di comando, quindi utilizzare `nextflow clean -before <run_name> -f` per eliminare le directory work dalle esecuzioni precedenti.
 
@@ -399,7 +399,7 @@ Può utilizzare il log Nextflow per cercare un'esecuzione in base al suo timesta
     L'eliminazione delle sottodirectory work dalle esecuzioni passate le rimuove dalla cache di Nextflow ed elimina qualsiasi output che era memorizzato in quelle directory.
     Questo significa che interrompe la capacità di Nextflow di riprendere l'esecuzione senza rieseguire i processi corrispondenti.
 
-    È responsabile del salvataggio di qualsiasi output che le interessa o su cui prevede di fare affidamento! Se sta utilizzando la direttiva `publishDir` per questo scopo, si assicuri di utilizzare la modalità `copy`, non la modalità `symlink`.
+    È responsabile del salvataggio di qualsiasi output che vi interessa o su cui prevedete di fare affidamento! Se sta utilizzando la direttiva `publishDir` per questo scopo, assicuratevi di utilizzare la modalità `copy`, non la modalità `symlink`.
 
 ### Takeaway
 

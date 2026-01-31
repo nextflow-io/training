@@ -470,7 +470,7 @@ SUCCESS: Executed 1 tests in 5.239s
 
 Un controllo semplice è assicurarsi che la nostra pipeline esegua tutti i processi che ci aspettiamo e non ne salti nessuno silenziosamente. Ricordate che la nostra pipeline esegue 6 processi, uno chiamato `sayHello` e uno chiamato `convertToUpper` per ciascuno dei 3 saluti.
 
-Aggiungiamo un'asserzione al nostro test per verificare che la pipeline esegua il numero atteso di processi. Aggiorneremo anche il nome del nostro test per riflettere meglio ciò che stiamo testando.
+Aggiungiamo un'asserzione al nostro test per verificare che la pipeline eseguite il numero atteso di processi. Aggiorneremo anche il nome del nostro test per riflettere meglio ciò che stiamo testando.
 
 **Prima:**
 

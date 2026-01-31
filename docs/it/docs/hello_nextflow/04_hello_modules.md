@@ -16,7 +16,7 @@ Questa sezione tratta come organizzare il codice del workflow per rendere lo svi
 Nello specifico, dimostreremo come usare i **moduli**.
 
 In Nextflow, un **modulo** è una singola definizione di processo che è incapsulata da sola in un file di codice autonomo.
-Per usare un modulo in un workflow, basta aggiungere una singola riga di import al file di codice del workflow; poi può integrare il processo nel workflow nello stesso modo in cui farebbe normalmente.
+Per usare un modulo in un workflow, basta aggiungere una singola riga di import al file di codice del workflow; poi potete integrare il processo nel workflow nello stesso modo in cui farebbe normalmente.
 Questo rende possibile riutilizzare le definizioni dei processi in più workflow senza produrre copie multiple del codice.
 
 Quando abbiamo iniziato a sviluppare il nostro workflow, abbiamo scritto tutto in un singolo file di codice.
@@ -95,7 +95,7 @@ Come in precedenza, troverete i file di output nella directory specificata nel b
     └── UPPER-Holà-output.txt
     ```
 
-Se ha funzionato, siete pronti a imparare come modularizzare il codice del workflow.
+Se tutto ha funzionato, siete pronti a imparare come modularizzare il codice del workflow.
 
 ---
 
@@ -230,7 +230,7 @@ Sapete come estrarre un processo in un modulo locale e sapete che fare questo no
 ### Cosa c'è dopo?
 
 Fare pratica creando più moduli.
-Una volta che ne ha fatto uno, può farne un milione di più...
+Una volta che ne avete fatto uno, potete farne un milione di più...
 Ma per ora ne facciamo solo altri due.
 
 ---

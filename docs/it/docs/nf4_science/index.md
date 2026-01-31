@@ -14,7 +14,7 @@ Questi sono corsi che dimostrano come applicare i concetti e i componenti presen
 
     !!! tip inline end ""
 
-        :material-run-fast: Impari a sviluppare una pipeline per la genomica in Nextflow.
+        :material-run-fast: Imparate a sviluppare una pipeline per la genomica in Nextflow.
 
     Questo è un corso per ricercatori che desiderano imparare a sviluppare le proprie pipeline genomiche. Il corso utilizza un caso d'uso di variant calling per dimostrare come sviluppare una pipeline genomica semplice ma funzionale.
 
@@ -24,7 +24,7 @@ Questi sono corsi che dimostrano come applicare i concetti e i componenti presen
 
     !!! tip inline end ""
 
-        :material-run-fast: Impari a sviluppare una pipeline per l'elaborazione di dati RNAseq in Nextflow.
+        :material-run-fast: Imparate a sviluppare una pipeline per l'elaborazione di dati RNAseq in Nextflow.
 
     Questo è un corso per ricercatori che desiderano imparare a sviluppare le proprie pipeline RNAseq. Il corso utilizza un caso d'uso di elaborazione RNAseq bulk per dimostrare come sviluppare una pipeline RNAseq semplice ma funzionale.
 
@@ -34,7 +34,7 @@ Questi sono corsi che dimostrano come applicare i concetti e i componenti presen
 
     !!! tip inline end ""
 
-        :material-run-fast: Impari a eseguire pipeline per dati di imaging in Nextflow.
+        :material-run-fast: Imparate a eseguire pipeline per dati di imaging in Nextflow.
 
     Questo è un corso per ricercatori che desiderano imparare a eseguire e configurare pipeline di bioimaging. Il corso utilizza nf-core/molkart per dimostrare i pattern di utilizzo essenziali di Nextflow applicabili a qualsiasi pipeline.
 

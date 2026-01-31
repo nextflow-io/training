@@ -33,7 +33,7 @@ Dovrete tenere queste istruzioni aperte in parallelo per lavorare attraverso il 
 Questo ambiente di formazione contiene tutto il software, il codice e i dati necessari per lavorare attraverso il corso di formazione, quindi non è necessario installare nulla.
 
 Il codespace è configurato con un'interfaccia VSCode, che include un esplora file, un editor di codice e una shell del terminale.
-Tutte le istruzioni fornite durante il corso (ad es. 'apra il file', 'modifichi il codice' o 'esegua questo comando') si riferiscono a queste tre parti dell'interfaccia VScode, salvo diversa indicazione.
+Tutte le istruzioni fornite durante il corso (ad es. 'aprite il file', 'modificate il codice' o 'eseguite questo comando') si riferiscono a queste tre parti dell'interfaccia VScode, salvo diversa indicazione.
 
 Se state seguendo questo corso autonomamente, familiarizzatevi con le [nozioni di base sull'ambiente](../envsetup/01_setup.md) per ulteriori dettagli.
 

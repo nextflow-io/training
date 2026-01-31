@@ -6,7 +6,7 @@ In questa prima parte del corso di formazione Hello nf-core, mostreremo come tro
 
 Utilizzeremo una pipeline chiamata nf-core/demo che è mantenuta dal progetto nf-core come parte del suo inventario di pipeline per dimostrare la struttura del codice e le operazioni degli strumenti.
 
-Si assicuri che la Sua directory di lavoro sia impostata su `hello-nf-core/` come indicato nella pagina [Iniziare](./00_orientation.md).
+Assicuratevi che la vostra directory di lavoro sia impostata su `hello-nf-core/` come indicato nella pagina [Iniziare](./00_orientation.md).
 
 ---
 
@@ -16,7 +16,7 @@ Iniziamo localizzando la pipeline nf-core/demo sul sito web del progetto [nf-co.
 
 ### 1.1. Trovare la pipeline sul sito web
 
-Nel Suo browser web, vada su [https://nf-co.re/pipelines/](https://nf-co.re/pipelines/) e digiti `demo` nella barra di ricerca.
+Nel vostro browser web, vada su [https://nf-co.re/pipelines/](https://nf-co.re/pipelines/) e digiti `demo` nella barra di ricerca.
 
 ![risultati della ricerca](./img/search-results.png)
 
@@ -152,7 +152,7 @@ Ora sapete come trovare una pipeline tramite il sito web nf-core e recuperare un
 
 ### Prossimi passi
 
-Impari come provare una pipeline nf-core con il minimo sforzo.
+Imparate come provare una pipeline nf-core con il minimo sforzo.
 
 ---
 
@@ -197,7 +197,7 @@ params {
     config_profile_name        = 'Test profile'
     config_profile_description = 'Minimal test dataset to check pipeline function'
 
-    // Input data
+    // Dati di input
     input  = 'https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv'
 
 }
@@ -637,8 +637,8 @@ Sapete quali sono i componenti principali di una pipeline nf-core e come il codi
 
 ### Prossimi passi
 
-Si prenda una pausa! È stato molto. Quando si sente riposato e pronto, passi alla sezione successiva per applicare ciò che ha appreso per scrivere una pipeline compatibile con nf-core.
+Si prenda una pausa! È stato molto. Quando si sente riposato e pronto, passi alla sezione successiva per applicare ciò che avete appreso per scrivere una pipeline compatibile con nf-core.
 
 !!! tip
 
-    Se desidera imparare come comporre workflow con subworkflow prima di passare alla parte successiva, consulti la [Side Quest Workflows of Workflows](../side_quests/workflows_of_workflows.md).
+    Se desiderate imparare come comporre workflow con subworkflow prima di passare alla parte successiva, consulti la [Side Quest Workflows of Workflows](../side_quests/workflows_of_workflows.md).

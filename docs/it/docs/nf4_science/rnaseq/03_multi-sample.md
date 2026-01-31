@@ -37,7 +37,7 @@ Rinominiamo il parametro di input primario in `input_csv` e modifichiamo il valo
 
 ```groovy title="rnaseq.nf" linenums="13"
 params {
-    // Primary input
+    // Input primario
     input_csv: Path = "data/single-end.csv"
 
     // Reference genome archive
@@ -136,7 +136,7 @@ include { MULTIQC } from './modules/multiqc.nf'
 
 ```groovy title="rnaseq.nf" linenums="9"
 params {
-    // Primary input
+    // Input primario
     input_csv: Path = "data/single-end.csv"
 
     // Reference genome archive
@@ -153,7 +153,7 @@ Dobbiamo dare al processo `MULTIQC` tutti gli output relativi al QC dai passaggi
 
 Per questo, useremo l'operatore `.mix()`, che aggrega più canali in uno solo.
 
-Se avessimo quattro processi chiamati A, B, C e D con un semplice canale `.out` ciascuno, la sintassi sarebbe così: `A.out.mix( B.out, C.out, D.out )`. Come si può vedere, lo si applica al primo dei canali che si vogliono combinare (non importa quale) e si aggiungono tutti gli altri, separati da virgole, nelle parentesi che seguono.
+Se avessimo quattro processi chiamati A, B, C e D con un semplice canale `.out` ciascuno, la sintassi sarebbe così: `A.out.mix( B.out, C.out, D.out )`. Come si potete vedere, lo si applica al primo dei canali che si vogliono combinare (non importa quale) e si aggiungono tutti gli altri, separati da virgole, nelle parentesi che seguono.
 
 Nel caso del nostro workflow, abbiamo i seguenti output da aggregare:
 
@@ -318,7 +318,7 @@ Modifichiamo il valore predefinito di `input_csv` nel percorso del file `paired-
 
 ```groovy title="rnaseq_pe.nf" linenums="15"
 params {
-    // Primary input
+    // Input primario
     input_csv: Path = "data/paired-end.csv"
 
     // Reference genome archive
@@ -437,7 +437,7 @@ Mentre siamo su MultiQC, aggiorniamo anche il valore predefinito del parametro `
 
 ```groovy title="rnaseq_pe.nf" linenums="9"
 params {
-    // Primary input
+    // Input primario
     input_csv: Path = "data/paired-end.csv"
 
     // Reference genome archive
@@ -515,10 +515,10 @@ Il passo logico successivo sarebbe rendere il workflow in grado di accettare ent
 
 ### Takeaway
 
-Lei sa come adattare un workflow per campione singolo per parallelizzare l'elaborazione di campioni multipli, generare un report QC completo e adattare il workflow per utilizzare dati read paired-end se necessario.
+Sapete come adattare un workflow per campione singolo per parallelizzare l'elaborazione di campioni multipli, generare un report QC completo e adattare il workflow per utilizzare dati read paired-end se necessario.
 
 ### Cosa seguirà?
 
-Congratulazioni, ha completato il mini-corso Nextflow Per RNAseq! Celebri il Suo successo e si prenda una meritata pausa!
+Congratulazioni, ha completato il mini-corso Nextflow Per RNAseq! Celebrate il vostro successo e prendetevi una meritata pausa!
 
-Successivamente, Le chiediamo di completare un breve sondaggio sulla Sua esperienza con questo corso di formazione, poi La porteremo a una pagina con collegamenti a ulteriori risorse di formazione e collegamenti utili.
+Successivamente, vi chiediamo di completare un breve sondaggio sulla vostra esperienza con questo corso di formazione, poi vi porteremo a una pagina con collegamenti a ulteriori risorse di formazione e collegamenti utili.

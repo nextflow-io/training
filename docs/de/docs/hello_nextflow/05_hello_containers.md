@@ -283,7 +283,7 @@ Jetzt zeigt die Ausgabe den Linux-Pinguin Tux anstelle der Standard-Kuh, weil wi
 
 Da du dich innerhalb des Containers befindest, kannst du den `cowpy`-Befehl beliebig oft ausführen und die Eingabeparameter variieren, ohne dich mit Docker-Befehlen befassen zu müssen.
 
-!!! Tipp
+!!! tip "Tipp"
 
     Verwende das '-c'-Flag, um einen anderen Charakter auszuwählen, einschließlich:
     `beavis`, `cheese`, `daemon`, `dragonandcow`, `ghostbusters`, `kitty`, `moose`, `milk`, `stegosaurus`, `turkey`, `turtle`, `tux`
@@ -796,7 +796,7 @@ Jetzt ändern wir das auf `true`, um Docker zu aktivieren:
     docker.enabled = false
     ```
 
-!!! Tipp
+!!! tip "Tipp"
 
     Es ist möglich, die Docker-Ausführung über die Befehlszeile pro Ausführung mit dem Parameter `-with-docker <container>` zu aktivieren.
     Das erlaubt uns jedoch nur, einen Container für den gesamten Workflow anzugeben, während der gerade gezeigte Ansatz es uns ermöglicht, einen anderen Container pro Prozess anzugeben.

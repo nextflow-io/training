@@ -24,7 +24,7 @@ Trasformeremo un semplice workflow di lettura CSV in una sofisticata pipeline bi
 
 ### Prerequisiti
 
-Prima di intraprendere questa missione secondaria, Lei dovrebbe:
+Prima di intraprendere questa missione secondaria, dovreste:
 
 - Aver completato il tutorial [Hello Nextflow](../hello_nextflow/README.md) o un corso equivalente per principianti.
 - Essere a proprio agio nell'uso di concetti e meccanismi di base di Nextflow (processi, canali, operatori, lavoro con file, metadati)
@@ -39,7 +39,7 @@ Inizieremo con concetti fondamentali e costruiremo fino a pattern avanzati.
 
 #### Aprire il codespace di formazione
 
-Se non lo ha ancora fatto, si assicuri di aprire l'ambiente di formazione come descritto in [Configurazione Ambiente](../envsetup/index.md).
+Se non lo ha ancora fatto, assicuratevi di aprire l'ambiente di formazione come descritto in [Configurazione Ambiente](../envsetup/index.md).
 
 [![Apri in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
@@ -108,7 +108,7 @@ Quando si scrivono workflow Nextflow, è importante distinguere tra **dataflow**
 
 #### 1.1.1. Workflow Nextflow di Base
 
-Iniziamo con un semplice workflow che legge solo il file CSV (lo abbiamo già fatto per Lei in `main.nf`):
+Iniziamo con un semplice workflow che legge solo il file CSV (lo abbiamo già fatto per voi in `main.nf`):
 
 ```groovy title="main.nf" linenums="1"
 workflow {
@@ -142,7 +142,7 @@ Ora aggiungeremo scripting per trasformare i dati, utilizzando l'operatore `.map
 
 !!! note
 
-    Una **closure** è un blocco di codice che può essere passato in giro ed eseguito successivamente. Pensi ad essa come a una funzione definita inline. Le closure sono scritte con parentesi graffe `{ }` e possono prendere parametri. Sono fondamentali per come funzionano gli operatori Nextflow e se ha scritto Nextflow per un po', potrebbe averle già utilizzate senza rendersene conto!
+    Una **closure** è un blocco di codice che può essere passato in giro ed eseguito successivamente. Pensate ad essa come a una funzione definita inline. Le closure sono scritte con parentesi graffe `{ }` e possono prendere parametri. Sono fondamentali per come funzionano gli operatori Nextflow e se avete scritto Nextflow per un po', potrebbe averle già utilizzate senza rendersene conto!
 
 Ecco come appare quell'operazione map:
 
@@ -384,7 +384,7 @@ Ora rimuova quelle istruzioni println per ripristinare il workflow allo stato pr
 
 #### 1.1.6. Combinare Mappe e Restituire Risultati
 
-Finora, abbiamo restituito solo quella che la comunità Nextflow chiama 'meta map', e abbiamo ignorato i file a cui quei metadati si riferiscono. Ma se sta scrivendo workflow Nextflow, probabilmente vuole fare qualcosa con quei file.
+Finora, abbiamo restituito solo quella che la comunità Nextflow chiama 'meta map', e abbiamo ignorato i file a cui quei metadati si riferiscono. Ma se state scrivendo workflow Nextflow, probabilmente vuole fare qualcosa con quei file.
 
 Produciamo una struttura di canale comprendente una tupla di 2 elementi: la mappa di metadati arricchita e il percorso di file corrispondente. Questo è un pattern comune in Nextflow per passare dati ai processi.
 
@@ -651,7 +651,7 @@ In questa sezione, ha imparato:
 
 - **Dataflow vs scripting**: Gli operatori di canale orchestrano come i dati fluiscono attraverso la pipeline, mentre lo scripting trasforma i singoli elementi di dati
 - **Comprendere i tipi**: Lo stesso nome di metodo (come `collect`) può comportarsi in modo diverso a seconda del tipo su cui viene chiamato (Channel vs List)
-- **Il contesto conta**: Sia sempre consapevole se sta lavorando con canali (dataflow) o strutture dati (scripting)
+- **Il contesto conta**: Sia sempre consapevole se state lavorando con canali (dataflow) o strutture dati (scripting)
 
 Comprendere questi confini è essenziale per il debug, la documentazione e la scrittura di workflow manutenibili.
 
@@ -756,7 +756,7 @@ Questo mostra i metadati arricchiti dai nomi dei file.
 
 ### 2.2. Generazione Dinamica di Script nei Processi
 
-I blocchi script dei processi sono essenzialmente stringhe multi-linea che vengono passate alla shell. Si può usare **logica condizionale** (if/else, operatori ternari) per generare dinamicamente diverse stringhe di script in base alle caratteristiche dell'input. Questo è essenziale per gestire diversi tipi di input—come letture single-end vs paired-end—senza duplicare le definizioni dei processi.
+I blocchi script dei processi sono essenzialmente stringhe multi-linea che vengono passate alla shell. Si potete usare **logica condizionale** (if/else, operatori ternari) per generare dinamicamente diverse stringhe di script in base alle caratteristiche dell'input. Questo è essenziale per gestire diversi tipi di input—come letture single-end vs paired-end—senza duplicare le definizioni dei processi.
 
 Aggiungiamo un processo al nostro workflow che dimostri questo pattern. Apra `modules/fastp.nf` e dia un'occhiata:
 
@@ -892,7 +892,7 @@ nextflow run main.nf
       (empty)
     ```
 
-Si può vedere che il processo sta cercando di eseguire `fastp` con un valore `null` per il secondo file di input, il che lo fa fallire. Questo perché il nostro dataset contiene letture single-end, ma il processo è codificato per aspettarsi letture paired-end (due file di input alla volta).
+Si potete vedere che il processo sta cercando di eseguire `fastp` con un valore `null` per il secondo file di input, il che lo fa fallire. Questo perché il nostro dataset contiene letture single-end, ma il processo è codificato per aspettarsi letture paired-end (due file di input alla volta).
 
 Corregga questo aggiungendo logica condizionale al blocco `script:` del processo `FASTP`. Un'istruzione if/else controlla il conteggio dei file di lettura e regola il comando di conseguenza.
 

@@ -14,7 +14,7 @@ Ecco le nostre tre raccomandazioni principali su cosa fare dopo, basate sul cors
 
 **Consulti la pagina [Nextflow for Science](../nf4_science/index.md)** per un elenco di altri brevi corsi autonomi che dimostrano come applicare i concetti e i meccanismi di base presentati in Hello Nextflow a casi d'uso comuni di analisi scientifica.
 
-Se non vede il suo dominio rappresentato da un caso d'uso pertinente, ce lo faccia sapere nel [Forum della Community](https://community.seqera.io/) così potremo aggiungerlo alla nostra lista di sviluppo.
+Se non vede il suo dominio rappresentato da un caso d'uso pertinente, fatecelo sapere nel [Forum della Community](https://community.seqera.io/) così potremo aggiungerlo alla nostra lista di sviluppo.
 
 ### 1.2. Iniziare con nf-core
 
@@ -36,7 +36,7 @@ A tal fine, stiamo attualmente lavorando a una **raccolta di [Side Quests](../si
 
 **[Seqera Platform](https://seqera.io/) è il modo migliore per eseguire Nextflow nella pratica.**
 
-È una piattaforma basata su cloud sviluppata dai creatori di Nextflow che può connettere alla sua infrastruttura di calcolo (sia locale, HPC o cloud) per rendere molto più semplice lanciare e gestire i suoi workflow, nonché gestire i suoi dati ed eseguire analisi in modo interattivo in un ambiente cloud.
+È una piattaforma basata su cloud sviluppata dai creatori di Nextflow che potete connettere alla sua infrastruttura di calcolo (sia locale, HPC o cloud) per rendere molto più semplice lanciare e gestire i suoi workflow, nonché gestire i suoi dati ed eseguire analisi in modo interattivo in un ambiente cloud.
 
 Il Free Tier è disponibile per l'uso gratuito da parte di tutti (con quote di utilizzo).
 Gli accademici qualificati possono ottenere accesso gratuito a livello Pro (senza limitazioni di utilizzo) attraverso l'[Academic Program](https://seqera.io/academic/program/).
@@ -47,4 +47,4 @@ Dia un'occhiata ai [tutorial di Seqera Platform](https://docs.seqera.io/platform
 
 ### Per ora è tutto!
 
-**Buona fortuna nel suo percorso con Nextflow e non esiti a farci sapere nel [Forum della Community](https://community.seqera.io/) cos'altro potremmo fare per aiutarla.**
+**Buona fortuna nel suo percorso con Nextflow e non esitate a farci sapere nel [Forum della Community](https://community.seqera.io/) cos'altro potremmo fare per aiutarla.**

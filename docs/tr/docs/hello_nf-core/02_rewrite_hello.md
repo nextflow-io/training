@@ -1236,10 +1236,10 @@ cp greetings.csv core-hello/assets/.
         config_profile_name        = 'Test profile'
         config_profile_description = 'Minimal test dataset to check pipeline function'
 
-        // Input data
+        // Girdi verileri
         input  = "${projectDir}/assets/greetings.csv"
 
-        // Other parameters
+        // Diğer parametreler
         batch     = 'test'
         character = 'tux'
     }
@@ -1252,9 +1252,9 @@ cp greetings.csv core-hello/assets/.
         config_profile_name        = 'Test profile'
         config_profile_description = 'Minimal test dataset to check pipeline function'
 
-        // Input data
-        // TODO nf-core: Specify the paths to your test data on nf-core/test-datasets
-        // TODO nf-core: Give any required params for the test so that command line flags are not needed
+        // Girdi verileri
+        // TODO nf-core: Test verilerinizin nf-core/test-datasets üzerindeki yollarını belirtin
+        // TODO nf-core: Test için gerekli parametreleri verin, böylece komut satırı bayrakları gerekmez
         input  = params.pipelines_testdata_base_path + 'viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv'
     }
     ```

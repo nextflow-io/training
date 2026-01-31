@@ -79,7 +79,7 @@ Per questo capitolo, è sotto `results/hello_workflow/`.
     └── Holà-output.txt
     ```
 
-Se ha funzionato, siete pronti a imparare come assemblare un workflow multi-step.
+Se tutto ha funzionato, siete pronti a imparare come assemblare un workflow multi-step.
 
 ---
 
@@ -953,7 +953,7 @@ Ma come dice il detto, perché non entrambi?
 
 !!! tip "Suggerimento"
 
-    Se non nomina gli output di un processo usando `emit:`, può comunque accedervi individualmente usando il rispettivo indice (a base zero).
+    Se non nominate gli output di un processo usando `emit:`, potete comunque accedervi individualmente usando il rispettivo indice (a base zero).
     Per esempio, userebbe `<process>.out[0]` per ottenere il primo output, `<process>.out[1]` per ottenere il secondo output, e così via.
 
     Preferiamo nominare gli output perché altrimenti, è troppo facile prendere l'indice sbagliato per errore, specialmente quando il processo produce molti output.

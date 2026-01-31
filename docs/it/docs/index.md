@@ -40,11 +40,11 @@ hide:
 
         [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
-        Se questa opzione non soddisfa le Sue esigenze, consulti le altre [Opzioni per l'ambiente](./envsetup/index.md).
+        Se questa opzione non soddisfa le vostre esigenze, consulti le altre [Opzioni per l'ambiente](./envsetup/index.md).
 
     ??? learning "Eventi formativi"
 
-        Se preferisce seguire la formazione Nextflow come parte di un evento strutturato, ci sono molte opportunità per farlo. Le consigliamo di esplorare le seguenti opzioni:
+        Se preferisce seguire la formazione Nextflow come parte di un evento strutturato, ci sono molte opportunità per farlo. vi consigliamo di esplorare le seguenti opzioni:
 
         - **[Training Weeks]()** organizzate trimestralmente dal team Community
         - **[Seqera Events](https://seqera.io/events/)** includono eventi formativi in presenza organizzati da Seqera (cercare 'Seqera Sessions' e 'Nextflow Summit')
@@ -53,15 +53,15 @@ hide:
 
     ??? people "Informazioni per i formatori"
 
-        Se Lei è un formatore che organizza le proprie sessioni di formazione, è libero di utilizzare i nostri materiali direttamente dal portale di formazione, a condizione di attribuire il corretto credito. Vedere 'Crediti e contributi' di seguito per i dettagli.
+        Se siete un formatore che organizza le proprie sessioni di formazione, siete liberi di utilizzare i nostri materiali direttamente dal portale di formazione, a condizione di attribuire il corretto credito. Vedere 'Crediti e contributi' di seguito per i dettagli.
 
-        Inoltre, ci piacerebbe ricevere il Suo feedback su come potremmo supportare meglio i Suoi sforzi formativi! La preghiamo di contattarci all'indirizzo [community@seqera.io](mailto:community@seqera.io) o sul forum della community (vedere la pagina [Aiuto](help.md)).
+        Inoltre, ci piacerebbe ricevere il vostro feedback su come potremmo supportare meglio i vostri sforzi formativi! Vi preghiamo di contattarci all'indirizzo [community@seqera.io](mailto:community@seqera.io) o sul forum della community (vedere la pagina [Aiuto](help.md)).
 
     ??? licensing "Licenza open-source e politica sui contributi"
 
         [![Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)](assets/img/cc_by-nc-sa.svg){ align=right }](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
-        Questo materiale formativo è sviluppato e mantenuto da [Seqera](https://seqera.io) e rilasciato con una licenza open-source ([CC BY-NC-SA](https://creativecommons.org/licenses/by-nc-sa/4.0/)) a beneficio della community. Se desidera utilizzare questo materiale in un modo che non rientra nell'ambito della licenza (si noti le limitazioni sull'uso commerciale e la redistribuzione), La preghiamo di contattarci all'indirizzo [community@seqera.io](mailto:community@seqera.io) per discutere la Sua richiesta.
+        Questo materiale formativo è sviluppato e mantenuto da [Seqera](https://seqera.io) e rilasciato con una licenza open-source ([CC BY-NC-SA](https://creativecommons.org/licenses/by-nc-sa/4.0/)) a beneficio della community. Se desiderate utilizzare questo materiale in un modo che non rientra nell'ambito della licenza (si noti le limitazioni sull'uso commerciale e la redistribuzione), Vi preghiamo di contattarci all'indirizzo [community@seqera.io](mailto:community@seqera.io) per discutere la vostra richiesta.
 
         Accogliamo con piacere miglioramenti, correzioni e segnalazioni di bug dalla community. Ogni pagina ha un'icona :material-file-edit-outline: in alto a destra che collega al repository del codice, dove è possibile segnalare problemi o proporre modifiche al materiale sorgente della formazione tramite una pull request. Consultare il `README.md` nel repository per maggiori dettagli.
 

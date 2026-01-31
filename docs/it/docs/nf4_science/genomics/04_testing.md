@@ -2,13 +2,13 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Nella prima parte di questo corso, Lei ha costruito una pipeline di variant calling completamente lineare che processava i dati di ciascun campione indipendentemente dagli altri.
+Nella prima parte di questo corso, avete costruito una pipeline di variant calling completamente lineare che processava i dati di ciascun campione indipendentemente dagli altri.
 
 Nella seconda parte, Le abbiamo mostrato come utilizzare i canali e gli operatori di canale per implementare il joint variant calling con GATK.
 
 Nella terza parte, abbiamo modularizzato la pipeline.
 
-In questa parte della formazione, Le mostreremo come utilizzare [**nf-test**](https://www.nf-test.com/), un framework di testing che si integra bene con Nextflow e rende semplice aggiungere test sia a livello di modulo che a livello di workflow alla Sua pipeline. Per seguire questa parte della formazione, dovrebbe aver completato la Parte 1, la Parte 2 e la Parte 3, nonché la [side quest su nf-test](../../side_quests/nf-test.md), che copre le basi di nf-test e il motivo per cui il testing è importante.
+In questa parte della formazione, Le mostreremo come utilizzare [**nf-test**](https://www.nf-test.com/), un framework di testing che si integra bene con Nextflow e rende semplice aggiungere test sia a livello di modulo che a livello di workflow alla vostra pipeline. Per seguire questa parte della formazione, dovrebbe aver completato la Parte 1, la Parte 2 e la Parte 3, nonché la [side quest su nf-test](../../side_quests/nf-test.md), che copre le basi di nf-test e il motivo per cui il testing è importante.
 
 ---
 
@@ -16,7 +16,7 @@ In questa parte della formazione, Le mostreremo come utilizzare [**nf-test**](ht
 
 !!! note "Nota"
 
-    Si assicuri di essere nella directory di lavoro corretta:
+    Assicuratevi di essere nella directory di lavoro corretta:
     `cd /workspaces/training/nf4-science/genomics`
 
 Se ha completato le parti precedenti di questo corso di formazione, dovrebbe avere una versione funzionante della pipeline genomics con l'appropriata struttura di directory dei moduli.
@@ -35,19 +35,19 @@ Se ha completato le parti precedenti di questo corso di formazione, dovrebbe ave
             └── main.nf
     ```
 
-Questa directory dei moduli può essere trovata nella directory `solutions` se ne ha bisogno.
+Questa directory dei moduli può essere trovata nella directory `solutions` se ne avete bisogno.
 
 Inizieremo con lo stesso workflow della Parte 3, che Le abbiamo fornito nel file `genomics-4.nf`. Esattamente come per la [side quest su nf-test](../../side_quests/nf-test.md), aggiungeremo alcuni tipi diversi di test ai tre processi in questa pipeline, nonché un test a livello di workflow.
 
 ### 0.1. Verificare che il workflow funzioni
 
-Prima di iniziare ad aggiungere test, si assicuri che il workflow funzioni come previsto.
+Prima di iniziare ad aggiungere test, assicuratevi che il workflow funzioni come previsto.
 
 ```bash
 nextflow run genomics-4.nf -resume
 ```
 
-Questo dovrebbe sembrare molto familiare ormai se ha seguito questo corso di formazione dall'inizio.
+Questo dovrebbe sembrare molto familiare ormai se avete seguito questo corso di formazione dall'inizio.
 
 ??? success "Output del comando"
 
@@ -62,7 +62,7 @@ Questo dovrebbe sembrare molto familiare ormai se ha seguito questo corso di for
     [a8/d2c189] GATK_JOINTGENOTYPING     | 1 of 1 ✔
     ```
 
-Come in precedenza, ci sarà ora una directory `work` e una directory `results_genomics` all'interno della Sua directory di progetto. Utilizzeremo effettivamente questi risultati più avanti nei nostri test. Ma da ora in poi utilizzeremo il pacchetto `nf-test` per testare la pipeline.
+Come in precedenza, ci sarà ora una directory `work` e una directory `results_genomics` all'interno della vostra directory di progetto. Utilizzeremo effettivamente questi risultati più avanti nei nostri test. Ma da ora in poi utilizzeremo il pacchetto `nf-test` per testare la pipeline.
 
 ### 0.2. Inizializzare `nf-test`
 
@@ -369,7 +369,7 @@ A volte è utile testare una gamma di file di input diversi per assicurarsi di t
     }
 ```
 
-Quindi può eseguire nuovamente il test:
+Quindi potete eseguire nuovamente il test:
 
 ```bash
 nf-test test modules/samtools/index/tests/main.nf.test
@@ -410,7 +410,7 @@ Noti l'avviso, che si riferisce all'effetto del parametro `--update-snapshot`.
 
 ### Takeaway
 
-Ha scritto il Suo primo test di modulo per un processo genomics, verificando che `SAMTOOLS_INDEX` crei correttamente file indice per diversi file BAM. La suite di test garantisce che:
+Ha scritto il vostro primo test di modulo per un processo genomics, verificando che `SAMTOOLS_INDEX` crei correttamente file indice per diversi file BAM. La suite di test garantisce che:
 
 1. Il processo venga eseguito con successo
 2. I file indice vengano creati
@@ -514,7 +514,7 @@ Infine, non dimentichi di aggiornare il percorso dello script:
 
 ### 2.3. Fornire input utilizzando il metodo setup
 
-Inseriamo un blocco `setup` prima del blocco `when`, dove possiamo attivare un'esecuzione del processo `SAMTOOLS_INDEX` su uno dei nostri file di input originali. Inoltre, ricordi come prima di cambiare il nome del test in qualcosa di significativo.
+Inseriamo un blocco `setup` prima del blocco `when`, dove possiamo attivare un'esecuzione del processo `SAMTOOLS_INDEX` su uno dei nostri file di input originali. Inoltre, ricordate come prima di cambiare il nome del test in qualcosa di significativo.
 
 === "Dopo"
 
@@ -1132,7 +1132,7 @@ outputDir = 'results_genomics'
  */
 
 params {
-    // Primary input (file of input files, one per line)
+    // Input primario (file di file di input, uno per riga)
     reads_bam = "${projectDir}/data/sample_bams.txt"
 
     // Accessory files
@@ -1245,11 +1245,11 @@ nf-test test
 
 8 test in 1 comando! Abbiamo speso molto tempo configurando molti test, ma quando è arrivato il momento di eseguirli è stato molto rapido e facile. Può vedere quanto sia utile quando si mantiene una grande pipeline, che potrebbe includere centinaia di elementi diversi. Spendiamo tempo scrivendo i test una volta così possiamo risparmiare tempo eseguendoli molte volte.
 
-Inoltre, possiamo automatizzare questo! Immagini che i test vengano eseguiti ogni volta che Lei o un collega cerca di aggiungere nuovo codice. Questo è il modo in cui garantiamo che le nostre pipeline mantengano uno standard elevato.
+Inoltre, possiamo automatizzare questo! Immagini che i test vengano eseguiti ogni volta che voi o un collega cerca di aggiungere nuovo codice. Questo è il modo in cui garantiamo che le nostre pipeline mantengano uno standard elevato.
 
 ## Takeaway
 
-Ora sa come scrivere ed eseguire diversi tipi di test per la Sua pipeline genomics utilizzando nf-test. Questo framework di testing aiuta a garantire che il Suo workflow di variant calling produca risultati coerenti e affidabili in diversi ambienti e mentre apporta modifiche al codice.
+Ora sa come scrivere ed eseguire diversi tipi di test per la vostra pipeline genomics utilizzando nf-test. Questo framework di testing aiuta a garantire che il vostro workflow di variant calling produca risultati coerenti e affidabili in diversi ambienti e mentre apporta modifiche al codice.
 
 Ha imparato a testare componenti critici come:
 
@@ -1261,6 +1261,6 @@ Ha anche implementato diverse strategie di testing specifiche per i dati genomic
 
 - Verificare che i file VCF contengano le chiamate di varianti attese nonostante elementi non deterministici come i timestamp
 - Testare con un dataset di trio familiare per garantire la corretta identificazione delle varianti tra campioni correlati
-- Verificare coordinate genomiche specifiche e informazioni sulle varianti nei Suoi file di output
+- Verificare coordinate genomiche specifiche e informazioni sulle varianti nei vostri file di output
 
 Queste competenze di testing sono essenziali per sviluppare pipeline bioinformatiche robuste che possono processare in modo affidabile dati genomici e produrre chiamate di varianti accurate. Man mano che continua a lavorare con Nextflow per l'analisi genomica, questa base di testing La aiuterà a mantenere codice di alta qualità che produce risultati scientifici affidabili.

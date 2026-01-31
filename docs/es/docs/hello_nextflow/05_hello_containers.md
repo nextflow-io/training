@@ -1087,7 +1087,7 @@ Sabe cómo usar contenedores en Nextflow para ejecutar procesos.
 
 ¡Tome un descanso!
 
-Cuando esté listo, continúe con [**Parte 6: Hola Config**](./06_hello_config.md) para aprender cómo configurar la ejecución de su pipeline para adaptarse a su infraestructura así como gestionar la configuración de entradas y parámetros.
+Cuando esté listo, continúe con [**Parte 6: Hello Config**](./06_hello_config.md) para aprender cómo configurar la ejecución de su pipeline para adaptarse a su infraestructura así como gestionar la configuración de entradas y parámetros.
 
 ¡Es la última parte, y luego habrá terminado con este curso!
 

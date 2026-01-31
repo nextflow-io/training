@@ -200,7 +200,7 @@ Quindi ora aggiorniamo i due riferimenti al processo nel blocco workflow di `hel
     versions       = ch_versions
     ```
 
-Si assicuri di effettuare **entrambe** le modifiche, altrimenti riceverà un errore quando eseguirà questo.
+Assicuratevi di effettuare **entrambe** le modifiche, altrimenti riceverà un errore quando eseguirà questo.
 
 #### 1.1.4. Eseguire il pipeline per testarlo
 
@@ -305,7 +305,7 @@ Ora che abbiamo cambiato ciò che il processo si aspetta, dobbiamo aggiornare ci
 La buona notizia è che questa modifica semplificherà la chiamata del processo.
 Ora che l'output di `CAT_CAT` e l'input di `COWPY` hanno la stessa 'forma', cioè entrambi consistono in una struttura `tuple val(meta), path(input_file)`, possiamo semplicemente connetterli direttamente invece di dover estrarre esplicitamente il file dall'output del processo `CAT_CAT`.
 
-Apra il file del workflow `hello.nf` (sotto `core-hello/workflows/`) e aggiorni la chiamata a `COWPY` come mostrato di seguito.
+Aprite il file del workflow `hello.nf` (sotto `core-hello/workflows/`) e aggiorni la chiamata a `COWPY` come mostrato di seguito.
 
 === "Dopo"
 
@@ -427,7 +427,7 @@ Una volta fatto tutto ciò, eseguiremo il pipeline per verificare che tutto funz
 #### 1.3.1. Aggiornare il modulo `COWPY`
 
 Facciamolo.
-Apra il file del modulo `cowpy.nf` (sotto `core-hello/modules/local/`) e lo modifichi per riferirsi a `ext.args` come mostrato di seguito.
+Aprite il file del modulo `cowpy.nf` (sotto `core-hello/modules/local/`) e lo modifichi per riferirsi a `ext.args` come mostrato di seguito.
 
 === "Dopo"
 
@@ -561,7 +561,7 @@ Utilizzando il file `modules.config` come luogo dove tutti i pipeline centralizz
 
 Poiché il modulo `COWPY` non richiede più il parametro `character` come input, dobbiamo aggiornare di conseguenza la chiamata del workflow.
 
-Apra il file del workflow `hello.nf` (sotto `core-hello/workflows/`) e aggiorni la chiamata a `COWPY` come mostrato di seguito.
+Aprite il file del workflow `hello.nf` (sotto `core-hello/workflows/`) e aggiorni la chiamata a `COWPY` come mostrato di seguito.
 
 === "Dopo"
 
@@ -666,7 +666,7 @@ Dovrebbe vedere l'arte ASCII visualizzata con il personaggio `kosh`, confermando
 
 ??? info "(Opzionale) Ispezionare il file di comando"
 
-    Se desiderate vedere esattamente come è stata applicata la configurazione, potete ispezionare il file `.command.sh`:
+    Se desideratete vedere esattamente come è stata applicata la configurazione, potete ispezionare il file `.command.sh`:
 
     ```bash
     cat work/38/eb29ea*/.command.sh
@@ -685,7 +685,7 @@ Dovrebbe vedere l'arte ASCII visualizzata con il personaggio `kosh`, confermando
 Si prenda un momento per riflettere su ciò che abbiamo ottenuto qui.
 Questo approccio mantiene l'interfaccia del modulo focalizzata sui dati essenziali (file, metadati e eventuali parametri obbligatori per campione), mentre le opzioni che controllano il comportamento dello strumento sono gestite separatamente tramite configurazione.
 
-Questo può sembrare superfluo per uno strumento semplice come `cowpy`, ma può fare una grande differenza per gli strumenti di analisi dati che hanno molti argomenti opzionali.
+Questo può sembrare superfluo per uno strumento semplice come `cowpy`, ma potete fare una grande differenza per gli strumenti di analisi dati che hanno molti argomenti opzionali.
 
 Per riassumere i vantaggi di questo approccio:
 
@@ -703,7 +703,7 @@ Per riassumere i vantaggi di questo approccio:
 
 Ora che abbiamo dato al processo `COWPY` accesso alla metamap, possiamo iniziare a sfruttare un altro utile pattern nf-core: denominare i file di output in base ai metadati.
 
-Qui utilizzeremo una funzionalità Nextflow chiamata `ext.prefix` che ci permetterà di standardizzare la denominazione dei file di output attraverso i moduli usando `meta.id` (l'identificatore incluso nella metamap), pur essendo ancora in grado di configurare i moduli individualmente se desiderato.
+Qui utilizzeremo una funzionalità Nextflow chiamata `ext.prefix` che ci permetterà di standardizzare la denominazione dei file di output attraverso i moduli usando `meta.id` (l'identificatore incluso nella metamap), pur essendo ancora in grado di configurare i moduli individualmente se desiderateto.
 
 Questo sarà simile a ciò che abbiamo fatto con `ext.args`, con alcune differenze che dettaglieremo man mano che procediamo.
 
@@ -719,7 +719,7 @@ Una volta fatto ciò, eseguiremo il pipeline per verificare che tutto funzioni a
 
 #### 1.4.1. Aggiornare il modulo `COWPY`
 
-Apra il file del modulo `cowpy.nf` (sotto `core-hello/modules/local/`) e lo modifichi per riferirsi a `ext.prefix` come mostrato di seguito.
+Aprite il file del modulo `cowpy.nf` (sotto `core-hello/modules/local/`) e lo modifichi per riferirsi a `ext.prefix` come mostrato di seguito.
 
 === "Dopo"
 
@@ -867,7 +867,7 @@ Sentitevi liberi di cambiare la configurazione `ext.prefix` in `conf/modules.con
 
 In alternativa, potete anche provare a eseguirlo di nuovo con un parametro `--batch` diverso specificato sulla riga di comando per convincervi che quella parte sia ancora personalizzabile al volo.
 
-Questo dimostra come `ext.prefix` Le permetta di mantenere la Sua convenzione di denominazione preferita mantenendo flessibile l'interfaccia del modulo.
+Questo dimostra come `ext.prefix` vi permetta di mantenere la vostra convenzione di denominazione preferita mantenendo flessibile l'interfaccia del modulo.
 
 Per riassumere i vantaggi di questo approccio:
 
@@ -905,12 +905,12 @@ Non suona fantastico? Potrebbe essere che per sfruttare questa direttiva predefi
 
 Proviamolo su `COWPY` per vedere cosa succede, poi guarderemo il codice per la configurazione predefinita per capire come funziona.
 
-Infine, dimostreremo come sovrascrivere il comportamento predefinito se desiderato.
+Infine, dimostreremo come sovrascrivere il comportamento predefinito se desiderateto.
 
 #### 1.5.1. Rimuovere la direttiva `publishDir` da `COWPY`
 
 Facciamolo.
-Apra il file del modulo `cowpy.nf` (sotto `core-hello/modules/local/`) e rimuova la direttiva `publishDir` come mostrato di seguito.
+Aprite il file del modulo `cowpy.nf` (sotto `core-hello/modules/local/`) e rimuova la direttiva `publishDir` come mostrato di seguito.
 
 === "Dopo"
 
@@ -988,7 +988,7 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
     -[core/hello] Pipeline completed successfully-
     ```
 
-Dia un'occhiata alla Sua directory di lavoro corrente.
+Dia un'occhiata alla vostra directory di lavoro corrente.
 Ora `core-hello-results` contiene anche gli output del modulo `COWPY`.
 
 ??? abstract "Contenuto della directory"
@@ -1096,14 +1096,14 @@ Questo completa l'insieme di funzionalità dei moduli nf-core che dovreste assol
 
 Ora sa come adattare i moduli locali per seguire le convenzioni nf-core:
 
-- Progettare i Suoi moduli per accettare e propagare tuple di metadati;
+- Progettare i vostri moduli per accettare e propagare tuple di metadati;
 - Utilizzare `ext.args` per mantenere le interfacce dei moduli minimali e portabili;
 - Utilizzare `ext.prefix` per una denominazione dei file di output configurabile e standardizzata;
 - Adottare la direttiva `publishDir` centralizzata predefinita per una struttura della directory dei risultati coerente.
 
 ### Prossimi passi
 
-Impari come utilizzare gli strumenti integrati nf-core basati su template per creare moduli nel modo più semplice.
+Imparate come utilizzare gli strumenti integrati nf-core basati su template per creare moduli nel modo più semplice.
 
 ---
 
@@ -1132,7 +1132,7 @@ Cerca automaticamente le informazioni sullo strumento da repository di pacchetti
 
 Le verrà richiesto di configurare diverse opzioni:
 
-- **Informazioni sull'autore**: Il Suo nome utente GitHub per l'attribuzione
+- **Informazioni sull'autore**: Il vostro nome utente GitHub per l'attribuzione
 - **Etichetta di risorsa**: Un insieme predefinito di requisiti computazionali.
   Il progetto nf-core fornisce etichette standard come `process_single` per strumenti leggeri e `process_high` per quelli impegnativi.
   Queste etichette aiutano a gestire l'allocazione delle risorse in diversi ambienti di esecuzione.

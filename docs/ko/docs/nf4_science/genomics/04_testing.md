@@ -1,4 +1,4 @@
-# Part 4: 테스트 추가하기
+# 파트 4: 테스트 추가하기
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
@@ -1120,28 +1120,28 @@ nextflow_pipeline {
 ```groovy title="tests/nextflow.config" linenums="1"
 /*
 ========================================================================================
-    Nextflow config file for running tests
+    테스트 실행을 위한 Nextflow 설정 파일
 ========================================================================================
 */
 
-// Output directory for workflow outputs
+// workflow 출력을 위한 출력 디렉토리
 outputDir = 'results_genomics'
 
 /*
- * Pipeline parameters
+ * 파이프라인 매개변수
  */
 
 params {
-    // Primary input (file of input files, one per line)
+    // 기본 입력 (입력 파일 목록, 한 줄에 하나씩)
     reads_bam = "${projectDir}/data/sample_bams.txt"
 
-    // Accessory files
+    // 보조 파일
     reference = "${projectDir}/data/ref/ref.fasta"
     reference_index = "${projectDir}/data/ref/ref.fasta.fai"
     reference_dict = "${projectDir}/data/ref/ref.dict"
     intervals = "${projectDir}/data/ref/intervals.bed"
 
-    // Base name for final output file
+    // 최종 출력 파일의 기본 이름
     cohort_name = "family_trio"
 }
 ```

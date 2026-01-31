@@ -1086,7 +1086,7 @@ Más generalmente, entiende los principios clave involucrados en conectar proces
 
 Tome un descanso extra largo, se lo ha ganado.
 
-Cuando esté listo, continúe con [**Parte 4: Hola Modules**](./04_hello_modules.md) para aprender cómo modularizar su código para mejor mantenibilidad y eficiencia de código.
+Cuando esté listo, continúe con [**Parte 4: Hello Modules**](./04_hello_modules.md) para aprender cómo modularizar su código para mejor mantenibilidad y eficiencia de código.
 
 ---
 

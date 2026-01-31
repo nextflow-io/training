@@ -159,8 +159,8 @@ nextflow run rnaseq.nf
     [d6/d94c3a] FASTQC (1) [100%] 1 of 1 ✔
     ```
 
-Questo dovrebbe essere eseguito molto rapidamente se ha completato la Parte 1 e ha già scaricato il container.
-Se l'ha saltata, Nextflow scaricherà il container per Lei; non deve fare nulla perché accada, ma potrebbe dover attendere fino a un minuto.
+Questo dovrebbe essere eseguito molto rapidamente se avete completato la Parte 1 e ha già scaricato il container.
+Se lo avete saltato, Nextflow scaricherà il container per voi; non deve fare nulla perché accada, ma potrebbe dover attendere fino a un minuto.
 
 Può trovare gli output in `results/fastqc` come specificato nel processo `FASTQC` dalla direttiva `publishDir`.
 
@@ -399,4 +399,4 @@ Sa come racchiudere tutti i passaggi principali per processare campioni RNAseq s
 
 ### Qual è il prossimo passo?
 
-Impari come modificare il workflow per processare più campioni in parallelo, aggregare i report QC attraverso tutti i passaggi per tutti i campioni e abilitare l'esecuzione del workflow su dati RNAseq paired-end.
+Imparate come modificare il workflow per processare più campioni in parallelo, aggregare i report QC attraverso tutti i passaggi per tutti i campioni e abilitare l'esecuzione del workflow su dati RNAseq paired-end.

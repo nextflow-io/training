@@ -120,18 +120,18 @@ Dopo alcuni istanti, vedrà un errore come questo:
 
 **Cosa sta succedendo?**
 
-L'errore `command not found` (stato di uscita 127) significa che Nextflow ha tentato di eseguire `duplicate_finder.py` ma non è riuscito a trovarlo sul Suo sistema.
+L'errore `command not found` (stato di uscita 127) significa che Nextflow ha tentato di eseguire `duplicate_finder.py` ma non è riuscito a trovarlo sul vostro sistema.
 Questo perché:
 
 1. La pipeline si aspetta che software bioinformatico specializzato sia installato
 2. Questi strumenti (come `duplicate_finder.py`, `apply_clahe.dask.py`, ecc.) non fanno parte delle distribuzioni Linux standard
-3. Senza container, Nextflow tenta di eseguire i comandi direttamente sulla Sua macchina locale
+3. Senza container, Nextflow tenta di eseguire i comandi direttamente sulla vostra macchina locale
 
 **Da dove dovrebbero provenire questi strumenti?**
 
 Ispezioniamo uno dei moduli process per vedere come dichiara i suoi requisiti software.
 
-Apra il modulo di preprocessing CLAHE:
+Aprite il modulo di preprocessing CLAHE:
 
 ```bash
 code molkart/modules/local/clahe/main.nf
@@ -154,7 +154,7 @@ Tuttavia, Nextflow utilizza questi container solo se glielo indica!
 
 Per abilitare Docker, dobbiamo cambiare `docker.enabled` da `false` a `true` nel file `nextflow.config`.
 
-Apra il file di configurazione:
+Aprite il file di configurazione:
 
 ```bash
 code nextflow.config
@@ -298,7 +298,7 @@ Noti come questo output sia più dettagliato rispetto al nostro esempio Hello Wo
 
 La riga executor `executor > local (22)` Le dice:
 
-- **executor**: Quale ambiente di calcolo viene utilizzato (`local` = la Sua macchina)
+- **executor**: Quale ambiente di calcolo viene utilizzato (`local` = la vostra macchina)
 - **(22)**: Numero totale di attività lanciate
 
 Ogni riga di process mostra:
@@ -414,7 +414,7 @@ File chiave:
 - **execution_trace.txt**: Metriche dettagliate dell'esecuzione delle attività
 - **pipeline_dag.html**: Grafico aciclico diretto che mostra la struttura del workflow
 
-Apra il report di esecuzione per vedere l'utilizzo delle risorse:
+Aprite il report di esecuzione per vedere l'utilizzo delle risorse:
 
 ```bash
 code results/pipeline_info/execution_report.html
@@ -479,7 +479,7 @@ La differenza chiave rispetto a Hello World:
 
 !!! Tip
 
-    Se un process fallisce, potete navigare alla sua directory di lavoro, esaminare `.command.err` per i messaggi di errore e persino rieseguire `.command.sh` manualmente per il debug del problema.
+    Se un process fallisce, potete navigare alla vostra directory di lavoro, esaminare `.command.err` per i messaggi di errore e persino rieseguire `.command.sh` manualmente per il debug del problema.
 
 ### 4.3. Pulizia della directory di lavoro
 
@@ -548,7 +548,7 @@ Resume è particolarmente prezioso quando:
 
 - Una pipeline fallisce a causa di limiti di risorse (memoria esaurita, limite di tempo superato)
 - È necessario modificare i process a valle senza rieseguire i passaggi a monte
-- La Sua connessione di rete si interrompe durante il download dei dati
+- La vostra connessione di rete si interrompe durante il download dei dati
 - Desidera aggiungere output aggiuntivi senza rifare il calcolo
 
 !!! Warning

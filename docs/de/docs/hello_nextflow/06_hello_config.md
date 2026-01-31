@@ -372,7 +372,7 @@ Die finale Ausgabedatei sollte den tux-Charakter enthalten, der die Grüße sagt
 
 Das war's; jetzt hast du einen Bereich zum Experimentieren, ohne deine 'normale' Konfiguration zu ändern.
 
-!!! Warnung
+!!! warning "Warnung"
 
     Stelle sicher, dass du zum vorherigen Verzeichnis zurückwechselst, bevor du zum nächsten Abschnitt übergehst!
 
@@ -955,7 +955,7 @@ Jetzt fügen wir die URI zur `cowpy`-Prozessdefinition hinzu, indem wir die `con
 
 Um klar zu sein, wir _ersetzen_ nicht die `docker`-Direktive, wir _fügen_ eine alternative Option hinzu.
 
-!!! Tipp
+!!! tip "Tipp"
 
     Es gibt einige verschiedene Möglichkeiten, die URI für ein bestimmtes Conda-Paket zu erhalten.
     Wir empfehlen die Verwendung der [Seqera Containers](https://seqera.io/containers/)-Suchabfrage, die dir eine URI gibt, die du kopieren und einfügen kannst, auch wenn du nicht vorhast, einen Container daraus zu erstellen.
@@ -986,7 +986,7 @@ Dies sollte ohne Probleme funktionieren und dieselben Ausgaben wie zuvor unter `
 
 Hinter den Kulissen hat Nextflow die Conda-Pakete abgerufen und die Umgebung erstellt, was normalerweise etwas Arbeit erfordert; es ist also schön, dass wir das nicht selbst tun müssen!
 
-!!! Hinweis
+!!! note "Hinweis"
 
     Dies läuft schnell, weil das `cowpy`-Paket ziemlich klein ist, aber wenn du mit großen Paketen arbeitest, kann es beim ersten Mal etwas länger dauern als üblich, und du könntest sehen, dass die Konsolenausgabe für eine Minute oder so 'hängen bleibt', bevor sie abgeschlossen wird.
     Das ist normal und liegt an der zusätzlichen Arbeit, die Nextflow beim ersten Mal erledigt, wenn du ein neues Paket verwendest.
@@ -1043,7 +1043,7 @@ process {
 }
 ```
 
-!!! Warnung
+!!! warning "Warnung"
 
     Wir können dies in der Trainingsumgebung nicht tatsächlich testen, weil sie nicht für die Verbindung mit einem HPC eingerichtet ist.
 
@@ -1185,7 +1185,7 @@ Gleichzeitig werden wir so tun, als ob der `cowpy`-Prozess mehr Ressourcen benö
 
 Mit dieser Konfiguration werden alle Prozesse 1GB Speicher und eine einzelne CPU (der implizierte Standard) anfordern, außer dem `cowpy`-Prozess, der 2GB und 2 CPUs anfordern wird.
 
-!!! Tipp
+!!! tip "Tipp"
 
     Wenn du eine Maschine mit wenigen CPUs hast und eine hohe Anzahl pro Prozess zuweist, könntest du sehen, dass Prozessaufrufe hintereinander in die Warteschlange gestellt werden.
     Das liegt daran, dass Nextflow sicherstellt, dass wir nicht mehr CPUs anfordern als verfügbar sind.
@@ -1202,7 +1202,7 @@ Du wirst wahrscheinlich keinen echten Unterschied bemerken, da dies eine so klei
 
 Es ist sehr nützlich, wenn deine Prozesse unterschiedliche Ressourcenanforderungen haben. Es ermöglicht dir, die Ressourcenzuweisungen, die du für jeden Prozess einrichtest, basierend auf tatsächlichen Daten richtig zu dimensionieren, nicht auf Vermutungen.
 
-!!! Tipp
+!!! tip "Tipp"
 
     Dies ist nur ein kleiner Vorgeschmack dessen, was du tun kannst, um deine Ressourcennutzung zu optimieren.
     Nextflow selbst hat eine wirklich raffinierte [dynamische Wiederholungslogik](https://www.nextflow.io/docs/latest/process.html#dynamic-task-resources) eingebaut, um Jobs, die aufgrund von Ressourcenbeschränkungen fehlschlagen, automatisch zu wiederholen.
@@ -1311,7 +1311,7 @@ nextflow run hello-config.nf -profile my_laptop
 
 Wie du sehen kannst, ermöglicht uns das, zur Laufzeit sehr bequem zwischen Konfigurationen zu wechseln.
 
-!!! Warnung
+!!! warning "Warnung"
 
     Das `univ_hpc`-Profil wird in der Trainingsumgebung nicht richtig funktionieren, da wir keinen Zugang zu einem Slurm-Scheduler haben.
 

@@ -2,7 +2,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Nella prima parte di questo corso, Lei ha costruito una pipeline di variant calling completamente lineare che processava i dati di ciascun campione indipendentemente dagli altri.
+Nella prima parte di questo corso, avete costruito una pipeline di variant calling completamente lineare che processava i dati di ciascun campione indipendentemente dagli altri.
 
 Nella seconda parte, Le abbiamo mostrato come utilizzare i canali e gli operatori di canale per implementare il joint variant calling con GATK, costruendo sulla pipeline della Parte 1.
 
@@ -19,7 +19,7 @@ Inizieremo con lo stesso workflow della Parte 2, che Le abbiamo fornito nel file
 
 !!! note "Nota"
 
-     Si assicuri di essere nella directory di lavoro corretta:
+     Assicuratevi di essere nella directory di lavoro corretta:
      `cd /workspaces/training/nf4-science/genomics`
 
 Esegua il workflow per verificare il punto di partenza:
@@ -39,11 +39,11 @@ executor >  local (7)
 [0c/fa6d15] GATK_JOINTGENOTYPING     | 1 of 1 ✔
 ```
 
-Ora ci sarà una directory `work` e una directory `results_genomics` all'interno della Sua directory di progetto.
+Ora ci sarà una directory `work` e una directory `results_genomics` all'interno della vostra directory di progetto.
 
 ### Takeaway
 
-È pronto per iniziare a modularizzare il Suo workflow.
+È pronto per iniziare a modularizzare il vostro workflow.
 
 ### Prossimi passi
 
@@ -53,7 +53,7 @@ Spostare i processi del workflow Genomics in moduli.
 
 ## 1. Spostare i processi in moduli
 
-Come ha appreso in [Hello Modules](../../../hello_nextflow/hello_modules.md), può creare un modulo semplicemente copiando la definizione del processo in un proprio file, in qualsiasi directory, e può nominare quel file come desidera.
+Come avete appreso in [Hello Modules](../../../hello_nextflow/hello_modules.md), potete creare un modulo semplicemente copiando la definizione del processo in un proprio file, in qualsiasi directory, e potete nominare quel file come desiderate.
 
 Per motivi che diventeranno chiari più avanti (in particolare quando arriveremo ai test), in questa formazione seguiremo la convenzione di nominare il file `main.nf`, e posizionarlo in una struttura di directory denominata secondo il toolkit e il comando.
 
@@ -66,7 +66,7 @@ mkdir -p modules/samtools/index
 touch modules/samtools/index/main.nf
 ```
 
-Apra il file `main.nf` e copi la definizione del processo `SAMTOOLS_INDEX` al suo interno.
+Aprite il file `main.nf` e copi la definizione del processo `SAMTOOLS_INDEX` al suo interno.
 
 ```groovy title="modules/samtools/index/main.nf" linenums="1"
 /*
@@ -112,7 +112,7 @@ Poi, rimuova la definizione del processo `SAMTOOLS_INDEX` da `genomics-3.nf`, e 
     process GATK_HAPLOTYPECALLER {
     ```
 
-Ora può eseguire nuovamente il workflow, e dovrebbe continuare a funzionare nello stesso modo di prima. Se fornisce il flag `-resume`, non dovrebbe nemmeno essere necessario eseguire nuove attività:
+Ora potete eseguire nuovamente il workflow, e dovrebbe continuare a funzionare nello stesso modo di prima. Se fornisce il flag `-resume`, non dovrebbe nemmeno essere necessario eseguire nuove attività:
 
 ```bash
 nextflow run genomics-3.nf -resume
@@ -229,7 +229,7 @@ Ha modularizzato un workflow e verificato che funzioni ancora nello stesso modo 
 
 ### Prossimi passi
 
-Rivedere ciò che ha appreso e guardare avanti ai test.
+Rivedere ciò che avete appreso e guardare avanti ai test.
 
 ---
 
@@ -241,6 +241,6 @@ Questo è intenzionale: ha ristrutturato il codice senza impattare la sua funzio
 I moduli contengono solo la logica del processo, rendendoli puliti e riutilizzabili.
 Lo script principale controlla cosa viene pubblicato e dove, mentre i moduli rimangono focalizzati sulla loro attività computazionale.
 
-Ha posto le fondamenta per cose che renderanno il Suo codice più facile da mantenere.
-Ad esempio, ora può aggiungere test alla Sua pipeline utilizzando il framework nf-test.
+Ha posto le fondamenta per cose che renderanno il vostro codice più facile da mantenere.
+Ad esempio, ora potete aggiungere test alla vostra pipeline utilizzando il framework nf-test.
 Questo è ciò che esamineremo nella prossima parte di questo corso.

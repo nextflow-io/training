@@ -1237,10 +1237,10 @@ Maintenant nous pouvons mettre à jour le fichier `test.config` comme suit :
         config_profile_name        = 'Test profile'
         config_profile_description = 'Minimal test dataset to check pipeline function'
 
-        // Input data
+        // Données d'entrée
         input  = "${projectDir}/assets/greetings.csv"
 
-        // Other parameters
+        // Autres paramètres
         batch     = 'test'
         character = 'tux'
     }
@@ -1253,9 +1253,9 @@ Maintenant nous pouvons mettre à jour le fichier `test.config` comme suit :
         config_profile_name        = 'Test profile'
         config_profile_description = 'Minimal test dataset to check pipeline function'
 
-        // Input data
-        // TODO nf-core: Specify the paths to your test data on nf-core/test-datasets
-        // TODO nf-core: Give any required params for the test so that command line flags are not needed
+        // Données d'entrée
+        // TODO nf-core: Spécifiez les chemins vers vos données de test sur nf-core/test-datasets
+        // TODO nf-core: Donnez tous les paramètres requis pour le test afin que les flags de ligne de commande ne soient pas nécessaires
         input  = params.pipelines_testdata_base_path + 'viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv'
     }
     ```

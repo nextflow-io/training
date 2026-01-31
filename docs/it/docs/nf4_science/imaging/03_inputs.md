@@ -24,7 +24,7 @@ nextflow run ./molkart \
 
 Questo funziona, ma è difficile da riprodurre, condividere o modificare.
 Cosa succede se è necessario eseguire nuovamente la stessa analisi il prossimo mese?
-Cosa succede se un collaboratore vuole utilizzare le Sue stesse impostazioni?
+Cosa succede se un collaboratore vuole utilizzare le vostre stesse impostazioni?
 
 ### 1.2. Soluzione: Utilizzare un file di parametri
 
@@ -40,13 +40,13 @@ clahe_pyramid_tile: 368
 segmentation_method: "cellpose"
 ```
 
-Ora il Suo comando diventa:
+Ora il vostro comando diventa:
 
 ```bash
 nextflow run ./molkart -params-file params.yaml -resume
 ```
 
-Ecco fatto! Il file di parametri documenta la Sua configurazione esatta e rende facile rieseguire o condividere.
+Ecco fatto! Il file di parametri documenta la vostra configurazione esatta e rende facile rieseguire o condividere.
 
 ### 1.3. Sovrascrittura dei parametri
 
@@ -62,7 +62,7 @@ Può utilizzare questo schema per testare rapidamente diverse variazioni della p
 
 ### Takeaway
 
-I file di parametri rendono le Sue analisi riproducibili e facili da condividere.
+I file di parametri rendono le vostre analisi riproducibili e facili da condividere.
 Li utilizzi per qualsiasi lavoro di analisi reale.
 
 ### Prossimi passi
@@ -75,7 +75,7 @@ Scopra come i samplesheet organizzano le informazioni su più campioni.
 
 ### 2.1. Cos'è un samplesheet?
 
-Un samplesheet è un file CSV che descrive i Suoi campioni di input.
+Un samplesheet è un file CSV che descrive i vostri campioni di input.
 Ogni riga è un campione e le colonne specificano i file e i metadati per quel campione.
 
 Esaminiamo il samplesheet che abbiamo utilizzato:
@@ -137,7 +137,7 @@ Come potete vedere, Nextflow esegue questa esecuzione in modo simile a quando i 
 
 ### Takeaway
 
-I samplesheet organizzano set di dati multi-campione in modo da permetterLe di definire esplicitamente i Suoi metadati insieme ai percorsi dei file.
+I samplesheet organizzano set di dati multi-campione in modo da permettervi di definire esplicitamente i vostri metadati insieme ai percorsi dei file.
 La maggior parte delle pipeline nf-core utilizza questo pattern.
 
 ### Prossimi passi

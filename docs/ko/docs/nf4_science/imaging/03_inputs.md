@@ -1,4 +1,4 @@
-# Part 3: 입력 구성하기
+# 파트 3: 입력 구성하기
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 

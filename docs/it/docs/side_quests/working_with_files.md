@@ -38,7 +38,7 @@ Prima di intraprendere questa side quest, dovrebbe:
 
 #### Aprire il codespace per la formazione
 
-Se non l'ha ancora fatto, si assicuri di aprire l'ambiente di formazione come descritto in [Configurazione dell'Ambiente](../envsetup/index.md).
+Se non l'ha ancora fatto, assicuratevi di aprire l'ambiente di formazione come descritto in [Configurazione dell'Ambiente](../envsetup/index.md).
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
@@ -162,7 +162,7 @@ nextflow run main.nf
     data/patientA_rep1_normal_R1_001.fastq.gz is of class java.lang.String
     ```
 
-Come può vedere, Nextflow ha stampato il percorso stringa esattamente come l'abbiamo scritto.
+Come potete vedere, Nextflow ha stampato il percorso stringa esattamente come l'abbiamo scritto.
 
 Questo è solo output di testo; Nextflow non ha ancora fatto nulla di speciale con esso.
 Abbiamo anche confermato che per quanto riguarda Nextflow, questa è solo una stringa (di classe `java.lang.String`).
@@ -225,7 +225,7 @@ Come vedremo più avanti, i file remoti avranno nomi di classi diversi (come `ne
     - **Stringa di percorso**: Solo testo che Nextflow tratta come caratteri
     - **Oggetto Path**: Un riferimento intelligente al file con cui Nextflow può lavorare
 
-    Pensi a questo: una stringa di percorso è come scrivere un indirizzo su carta, mentre un oggetto Path è come avere l'indirizzo caricato in un dispositivo GPS che sa come navigare lì e può dirle dettagli sul viaggio.
+    Pensate a questo: una stringa di percorso è come scrivere un indirizzo su carta, mentre un oggetto Path è come avere l'indirizzo caricato in un dispositivo GPS che sa come navigare lì e può dirle dettagli sul viaggio.
 
 ### 1.3. Accedere agli attributi del file
 
@@ -327,7 +327,7 @@ process COUNT_LINES {
 }
 ```
 
-Come può vedere, è uno script abbastanza semplice che decomprime il file e conta quante righe contiene.
+Come potete vedere, è uno script abbastanza semplice che decomprime il file e conta quante righe contiene.
 
 ??? info "Cosa fa `debug true`?"
 
@@ -599,7 +599,7 @@ Presi insieme, questi due esempi le mostrano quanto sia importante dire a Nextfl
 
 !!! note
 
-    Si assicuri di tornare indietro e correggere entrambi gli errori intenzionali prima di continuare alla sezione successiva.
+    Assicuratevi di tornare indietro e correggere entrambi gli errori intenzionali prima di continuare alla sezione successiva.
 
 ### Conclusioni
 
@@ -639,7 +639,7 @@ Testiamo questo sostituendo il percorso locale che stiamo fornendo al nostro wor
 
 !!! warning
 
-    Questo funzionerà solo se ha una connessione internet attiva.
+    Questo funzionerà solo se avete una connessione internet attiva.
 
 Apra `main.nf` di nuovo e cambi il percorso input come segue:
 
@@ -722,14 +722,14 @@ Può verificare che ciò sia accaduto qui guardando i contenuti della directory 
     Il link simbolico punta ad una copia preparata del file remoto che Nextflow ha scaricato automaticamente.
 
 Noti che per file più grandi, il passaggio di download richiederà tempo extra rispetto all'esecuzione su file locali.
-Tuttavia, Nextflow verifica se ha già una copia preparata per evitare download non necessari.
+Tuttavia, Nextflow verifica se avete già una copia preparata per evitare download non necessari.
 Quindi se esegue nuovamente sullo stesso file e non ha eliminato il file preparato, Nextflow utilizzerà la copia preparata.
 
 Questo mostra quanto sia facile passare tra dati locali e remoti usando Nextflow, che è una caratteristica chiave di Nextflow.
 
 !!! note
 
-    L'unica importante eccezione a questo principio è che non può utilizzare pattern glob o percorsi di directory con HTTPS perché HTTPS non può elencare più file, quindi deve specificare URL esatti di file.
+    L'unica importante eccezione a questo principio è che non potete utilizzare pattern glob o percorsi di directory con HTTPS perché HTTPS non può elencare più file, quindi deve specificare URL esatti di file.
     Tuttavia, altri protocolli di storage come blob storage (`s3://`, `az://`, `gs://`) possono utilizzare sia glob che percorsi di directory.
 
     Ecco come potrebbe utilizzare pattern glob con cloud storage:
@@ -870,7 +870,7 @@ nextflow run main.nf
     Found file: /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz
     ```
 
-Come può vedere, il percorso del file viene caricato come un oggetto di tipo `Path` nel canale.
+Come potete vedere, il percorso del file viene caricato come un oggetto di tipo `Path` nel canale.
 Questo è simile a quello che avrebbe fatto `file()`, eccetto che ora abbiamo un canale in cui possiamo caricare più file se vogliamo.
 
 Usare `channel.fromPath()` è un modo conveniente di creare un nuovo canale popolato da una lista di file.
@@ -1012,7 +1012,7 @@ nextflow run main.nf
     40
     ```
 
-Come può vedere, ora abbiamo due oggetti Path nel nostro canale, il che mostra che Nextflow ha fatto correttamente l'espansione del nome file, e ha caricato ed elaborato entrambi i file come previsto.
+Come potete vedere, ora abbiamo due oggetti Path nel nostro canale, il che mostra che Nextflow ha fatto correttamente l'espansione del nome file, e ha caricato ed elaborato entrambi i file come previsto.
 
 Utilizzando questo metodo, possiamo recuperare quanti file vogliamo semplicemente cambiando il pattern glob. Se lo rendessimo più generoso, ad esempio sostituendo tutte le parti variabili dei nomi file con `*` (_ad es._ `data/patient*_rep*_*_R*_001.fastq.gz`) potremmo prendere tutti i file di esempio nella directory `data`.
 

@@ -26,14 +26,14 @@ Partendo da un semplice datasheet (spesso chiamato samplesheet in bioinformatica
 - Aggiungere nuovi campi di metadati durante l'esecuzione del workflow
 - Utilizzare i metadati per personalizzare il comportamento dei processi
 
-Queste competenze Lei aiuteranno a costruire pipeline più robuste e flessibili in grado di gestire relazioni tra file complesse e requisiti di elaborazione.
+Queste competenze vi aiuteranno a costruire pipeline più robuste e flessibili in grado di gestire relazioni tra file complesse e requisiti di elaborazione.
 
 ### Prerequisiti
 
 Prima di intraprendere questa side quest, dovrebbe:
 
 - Aver completato il tutorial [Hello Nextflow](../hello_nextflow/README.md) o un corso equivalente per principianti.
-- Essere a Suo agio nell'utilizzo di concetti e meccanismi di base di Nextflow (processi, canali, operatori)
+- Essere a vostro agio nell'utilizzo di concetti e meccanismi di base di Nextflow (processi, canali, operatori)
 
 ---
 
@@ -41,7 +41,7 @@ Prima di intraprendere questa side quest, dovrebbe:
 
 #### Aprire il codespace di formazione
 
-Se non lo ha ancora fatto, si assicuri di aprire l'ambiente di formazione come descritto in [Configurazione dell'Ambiente](../envsetup/index.md).
+Se non lo ha ancora fatto, assicuratevi di aprire l'ambiente di formazione come descritto in [Configurazione dell'Ambiente](../envsetup/index.md).
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
@@ -105,7 +105,7 @@ Le forniremo anche uno strumento di analisi linguistica containerizzato chiamato
 
 #### Esaminare l'assegnazione
 
-La Sua sfida è scrivere un workflow Nextflow che:
+La vostra sfida è scrivere un workflow Nextflow che:
 
 1. **Identifichi** automaticamente la lingua in ciascun file
 2. **Raggruppi** i file per famiglia linguistica (lingue germaniche vs lingue romanze)
@@ -129,7 +129,7 @@ Se può spuntare tutte le caselle, è pronto per iniziare.
 
 ## 1. Caricare metadati da un datasheet
 
-Apra il file di workflow `main.nf` per esaminare la bozza di workflow che Le forniamo come punto di partenza.
+Aprite il file di workflow `main.nf` per esaminare la bozza di workflow che Le forniamo come punto di partenza.
 
 ```groovy title="main.nf" linenums="1"
 #!/usr/bin/env nextflow
@@ -396,7 +396,7 @@ Questa è una convenzione ampiamente utilizzata per organizzare i metadati nei w
 
 In questa sezione, ha imparato:
 
-- **Perché i metadati sono importanti:** Mantenere i metadati con i Suoi dati preserva informazioni importanti sui file durante tutto il workflow.
+- **Perché i metadati sono importanti:** Mantenere i metadati con i vostri dati preserva informazioni importanti sui file durante tutto il workflow.
 - **Come leggere i datasheet:** Utilizzare `splitCsv` per leggere file CSV con informazioni di intestazione e trasformare le righe in dati strutturati
 - **Come creare una meta map:** Separare i metadati dai dati dei file utilizzando la struttura di tupla `[ [id:value, ...], file ]`
 
@@ -456,7 +456,7 @@ process IDENTIFY_LANGUAGE {
 }
 ```
 
-Come può vedere, la definizione di input utilizza la stessa struttura `tuple val(meta), path(file)` che abbiamo appena applicato al nostro canale di input.
+Come potete vedere, la definizione di input utilizza la stessa struttura `tuple val(meta), path(file)` che abbiamo appena applicato al nostro canale di input.
 
 La definizione di output è strutturata come una tupla con una struttura simile a quella dell'input, tranne per il fatto che contiene anche `stdout` come terzo elemento.
 Questo pattern `tuple val(meta), path(file), <output>` mantiene i metadati associati sia ai dati di input che agli output mentre scorrono attraverso la pipeline.
@@ -529,7 +529,7 @@ Questo si rivelerà utile nel prossimo passaggio.
 
     Più in generale, questo pattern di mantenere la meta map associata ai risultati rende più facile associare risultati correlati che condividono gli stessi identificatori.
 
-    Come avrà già imparato, non può fare affidamento sull'ordine degli elementi nei canali per abbinare i risultati tra di essi.
+    Come avrà già imparato, non potete fare affidamento sull'ordine degli elementi nei canali per abbinare i risultati tra di essi.
     Invece, deve usare chiavi per associare correttamente i dati, e le meta map forniscono una struttura ideale per questo scopo.
 
     Esploriamo questo caso d'uso in dettaglio nella side quest [Splitting & Grouping](./splitting_and_grouping.md).
@@ -650,7 +650,7 @@ Se non ha ancora familiarità con l'operatore `+`, o se questo sembra confuso, s
     }
     ```
 
-    Se ha difficoltà a capire perché il `file` sembra muoversi nell'operazione `map`, immagini che invece di `[meta + [lang: lang_id], file]`, quella riga legga `[new_map, file]`.
+    Se avete difficoltà a capire perché il `file` sembra muoversi nell'operazione `map`, immagini che invece di `[meta + [lang: lang_id], file]`, quella riga legga `[new_map, file]`.
     Questo dovrebbe rendere più chiaro che stiamo semplicemente lasciando il `file` nella sua posizione originale in seconda posizione nella tupla. Abbiamo appena preso il valore `new_info` e lo abbiamo incorporato nella map che è in prima posizione.
 
     **E questo ci riporta alla struttura del canale `tuple val(meta), path(file)`!**
@@ -714,7 +714,7 @@ Ecco la logica condizionale che vogliamo applicare:
 - Se `lang` è tedesco (`'de'`) o inglese (`'en'`), cambiare `lang_group` in `germanic`.
 - Altrimenti se `lang` è incluso in un elenco contenente francese (`'fr'`), spagnolo (`'es'`) e italiano (`'it'`), cambiare `lang_group` in `romance`.
 
-Provi a scriverlo Lei stesso se sa già come scrivere istruzioni condizionali in Nextflow.
+Provi a scriverlo voi stessi se sa già come scrivere istruzioni condizionali in Nextflow.
 
 !!! tip
 
@@ -789,16 +789,16 @@ nextflow run main.nf -resume
     [[id:sampleG, character:turtle, lang:it, lang_group:romance], /workspaces/training/side-quests/metadata/data/ciao.txt]
     ```
 
-Come può vedere, gli elementi del canale mantengono la loro struttura `[meta, file]`, ma la meta map ora include questa nuova classificazione.
+Come potete vedere, gli elementi del canale mantengono la loro struttura `[meta, file]`, ma la meta map ora include questa nuova classificazione.
 
 ### Concetti chiave
 
 In questa sezione, ha imparato come:
 
 - **Applicare i metadati di input ai canali di output**: Copiare i metadati in questo modo ci consente di associare i risultati successivamente in base al contenuto dei metadati.
-- **Creare chiavi personalizzate**: Ha creato due nuove chiavi nella Sua meta map, fondendole con `meta + [new_key:value]` nella meta map esistente. Una basata su un valore calcolato da un processo e una basata su una condizione impostata nell'operatore `map`.
+- **Creare chiavi personalizzate**: Ha creato due nuove chiavi nella vostra meta map, fondendole con `meta + [new_key:value]` nella meta map esistente. Una basata su un valore calcolato da un processo e una basata su una condizione impostata nell'operatore `map`.
 
-Questi Le consentono di associare metadati nuovi ed esistenti con i file man mano che procede attraverso la Sua pipeline.
+Questi vi consentono di associare metadati nuovi ed esistenti con i file man mano che procede attraverso la vostra pipeline.
 Anche se non sta utilizzando i metadati come parte di un processo, mantenere la meta map associata ai dati in questo modo rende facile tenere insieme tutte le informazioni rilevanti.
 
 ---
@@ -907,7 +907,7 @@ process COWPY {
 }
 ```
 
-Come può vedere, questo processo è attualmente progettato per prendere un file di input (contenente il testo da visualizzare) e un valore che specifica il personaggio che dovrebbe essere disegnato in arte ASCII, solitamente fornito a livello di workflow da un parametro da riga di comando.
+Come potete vedere, questo processo è attualmente progettato per prendere un file di input (contenente il testo da visualizzare) e un valore che specifica il personaggio che dovrebbe essere disegnato in arte ASCII, solitamente fornito a livello di workflow da un parametro da riga di comando.
 
 ### 3.2. Passare un campo della meta map come input
 
@@ -1070,7 +1070,7 @@ nextflow run main.nf -resume
     Character: turtle
     ```
 
-_I percorsi dei file e i valori dei personaggi potrebbero uscire in un ordine diverso nel Suo output._
+_I percorsi dei file e i valori dei personaggi potrebbero uscire in un ordine diverso nel vostro output._
 
 Questo conferma che siamo in grado di accedere al file e al personaggio per ogni elemento nel canale.
 
@@ -1099,7 +1099,7 @@ Nel workflow principale, apporti le seguenti modifiche al codice:
     ```
 
 Vede che copiamo semplicemente le due operazioni map (meno le istruzioni `.view()`) come input alla chiamata del processo.
-Si assicuri solo di non dimenticare la virgola tra di loro!
+Assicuratevi solo di non dimenticare la virgola tra di loro!
 
 È un po' goffo, ma vedremo come migliorarlo nella prossima sezione.
 
@@ -1233,7 +1233,7 @@ Apporti le seguenti modifiche al file del modulo `cowpy.nf`:
 
 Questo ci consente di utilizzare la struttura di tupla `[meta, file]` che abbiamo trattato in precedenza nel tutorial.
 
-Noti che non abbiamo aggiornato la definizione di output del processo per restituire la meta map, al fine di mantenere il tutorial snello, ma si senta libero di farlo Lei stesso come esercizio seguendo il modello del processo `IDENTIFY_LANGUAGE`.
+Noti che non abbiamo aggiornato la definizione di output del processo per restituire la meta map, al fine di mantenere il tutorial snello, ma si senta libero di farlo voi stessi come esercizio seguendo il modello del processo `IDENTIFY_LANGUAGE`.
 
 #### 3.3.2. Aggiornare il comando per utilizzare il campo della meta map
 

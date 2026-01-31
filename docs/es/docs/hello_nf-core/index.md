@@ -1,5 +1,5 @@
 ---
-title: Hola nf-core
+title: Hello nf-core
 hide:
   - toc
 page_type: index_page
@@ -17,15 +17,15 @@ additional_information:
   audience_prerequisites:
     - "**Audiencia:** Este curso está diseñado para estudiantes que ya están familiarizados con Nextflow básico y desean aprender a usar recursos y mejores prácticas de nf-core."
     - "**Habilidades:** Se asume familiaridad con la línea de comandos, conceptos básicos de scripting y formatos de archivo comunes."
-    - "**Cursos:** Debe haber completado el curso [Hola Nextflow](../hello_nextflow/index.md) o equivalente."
+    - "**Cursos:** Debe haber completado el curso [Hello Nextflow](../hello_nextflow/index.md) o equivalente."
     - "**Dominio:** Los ejercicios son todos agnósticos al dominio, por lo que no se requiere conocimiento científico previo."
 ---
 
-# Hola nf-core
+# Hello nf-core
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-**Hola nf-core es una introducción práctica al uso de recursos y mejores prácticas de nf-core.**
+**Hello nf-core es una introducción práctica al uso de recursos y mejores prácticas de nf-core.**
 
 ![nf-core logo](./img/nf-core-logo.png)
 
@@ -55,7 +55,7 @@ Hemos dividido esto en cinco partes que se enfocarán cada una en aspectos espec
 | Capítulo del curso                                                | Resumen                                                                                                                                                                           | Duración estimada |
 | ----------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
 | [Parte 1: Ejecutar un pipeline de demostración](./01_run_demo.md) | Ejecutar un pipeline existente de nf-core y examinar su estructura de código para tener una idea de lo que hace diferentes a estos pipelines de los workflows básicos de Nextflow | 30 mins           |
-| [Parte 2: Reescribir Hola para nf-core](./02_rewrite_hello.md)    | Adaptar un workflow existente a la estructura de plantilla de nf-core, comenzando desde el workflow simple producido en el curso [Hola Nextflow](../hello_nextflow/index.md)      | 60 mins           |
+| [Parte 2: Reescribir Hello para nf-core](./02_rewrite_hello.md)   | Adaptar un workflow existente a la estructura de plantilla de nf-core, comenzando desde el workflow simple producido en el curso [Hello Nextflow](../hello_nextflow/index.md)     | 60 mins           |
 | [Parte 3: Usar un módulo de nf-core](./03_use_module.md)          | Explorar la biblioteca de módulos de la comunidad y aprender a integrar módulos preconstruidos y probados que envuelven herramientas bioinformáticas comunes                      | 30 mins           |
 | [Parte 4: Crear un módulo de nf-core](./04_make_module.md)        | Crear su propio módulo al estilo nf-core usando la estructura específica, convenciones de nomenclatura y requisitos de metadatos establecidos por nf-core                         | 30 mins           |
 | [Parte 5: Añadir validación de entrada](./05_input_validation.md) | Implementar validación de entrada tanto para parámetros de línea de comandos como para archivos de datos de entrada usando nf-schema                                              | 30 mins           |

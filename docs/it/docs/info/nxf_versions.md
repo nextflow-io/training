@@ -47,7 +47,7 @@ Per maggiori informazioni su come aggiornare la versione di Nextflow, consulti l
 
 ### Abilitare il parser di sintassi v2
 
-Per **abilitare** il parser di sintassi v2 per la sessione corrente, esegua il seguente comando nel terminale:
+Per **abilitare** il parser di sintassi v2 per la sessione corrente, eseguite il seguente comando nel terminale:
 
 ```bash
 export NXF_SYNTAX_PARSER=v2
@@ -65,7 +65,7 @@ Da Nextflow 26.04 in poi, il parser v2 diventerà predefinito e questa impostazi
 
 ### Disabilitare il parser di sintassi v2
 
-Per **disabilitare** il parser di sintassi v2 per la sessione corrente, esegua il seguente comando nel terminale:
+Per **disabilitare** il parser di sintassi v2 per la sessione corrente, eseguite il seguente comando nel terminale:
 
 ```bash
 export NXF_SYNTAX_PARSER=v1
@@ -88,7 +88,7 @@ A seconda della generazione di codice Nextflow che intende migrare, potrebbe ess
 Consulti il riferimento CLI per [`lint`](https://www.nextflow.io/docs/latest/reference/cli.html#lint) per maggiori dettagli.
 
 Speriamo che questo sia utile.
-Se ha bisogno di aiuto, ci contatti su Slack o sul forum.
+Se avete bisogno di aiuto, ci contatti su Slack o sul forum.
 
 ---
 

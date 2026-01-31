@@ -8,15 +8,15 @@ Ora possiede le competenze fondamentali per eseguire e configurare pipeline Next
 
 ## Continui l'apprendimento
 
-Ecco alcuni passi successivi consigliati per approfondire la Sua conoscenza di Nextflow:
+Ecco alcuni passi successivi consigliati per approfondire la vostra conoscenza di Nextflow:
 
 ### Esplori altre pipeline nf-core
 
 - **Esplori tutte le pipeline**: [https://nf-co.re/pipelines](https://nf-co.re/pipelines)
 
-### Sviluppi le Sue proprie pipeline
+### Sviluppi le vostre proprie pipeline
 
-Se desidera imparare a scrivere pipeline Nextflow:
+Se desiderate imparare a scrivere pipeline Nextflow:
 
 - **[Hello Nextflow](../../hello_nextflow/)**: Formazione completa sullo sviluppo con Nextflow
 - **[Side Quests](../../side_quests/)**: Argomenti avanzati per sviluppatori di pipeline
@@ -35,7 +35,7 @@ Se desidera imparare a scrivere pipeline Nextflow:
 ## Si coinvolga
 
 - **Contribuisca a nf-core**: Aiuti a migliorare le pipeline o la documentazione
-- **Condivida i Suoi workflow**: Contribuisca con le Sue proprie pipeline alla community
+- **Condividete i vostri workflow**: Contribuite con le vostre proprie pipeline alla community
 - **Partecipi agli eventi**: Si unisca al Nextflow Summit e alle sessioni di formazione della community
 
 Grazie per aver imparato con noi!

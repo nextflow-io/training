@@ -25,7 +25,7 @@ Clicchi su "+Add" e poi su "Get Container" per richiedere un'immagine di contain
 ![Seqera Containers](img/seqera-containers-2.png)
 
 Se è la prima volta che viene costruito un container di comunità per questa versione del pacchetto, potrebbero essere necessari alcuni minuti per completare l'operazione.
-Clicchi per copiare l'URI (ad es. `community.wave.seqera.io/library/pip_quote:ae07804021465ee9`) dell'immagine di container che è stata creata per Lei.
+Clicchi per copiare l'URI (ad es. `community.wave.seqera.io/library/pip_quote:ae07804021465ee9`) dell'immagine di container che è stata creata per voi.
 
 Ora potete utilizzare l'immagine di container per eseguire il comando `quote` e ottenere un detto casuale di Grace Hopper.
 

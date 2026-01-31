@@ -48,7 +48,7 @@ Gli strumenti di cui abbiamo bisogno (Samtools e GATK) non sono installati nell'
 
 !!! note "Nota"
 
-     Si assicuri di trovarsi nella directory `nf4-science/genomics` in modo che l'ultima parte del percorso mostrato quando digita `pwd` sia `genomics`.
+     Assicuratevi di trovarsi nella directory `nf4-science/genomics` in modo che l'ultima parte del percorso mostrato quando digita `pwd` sia `genomics`.
 
 ### 0.1. Indicizzare un file BAM di input con Samtools
 
@@ -167,8 +167,8 @@ gatk HaplotypeCaller \
     ```
 -->
 
-Il file di output `reads_mother.vcf` viene creato all'interno della Sua directory di lavoro nel container, quindi non lo vedrà nell'explorer di file di VS Code a meno che non modifichi il percorso del file di output.
-Tuttavia, è un piccolo file di test, quindi può usare `cat` per aprirlo e visualizzarne il contenuto.
+Il file di output `reads_mother.vcf` viene creato all'interno della vostra directory di lavoro nel container, quindi non lo vedrà nell'explorer di file di VS Code a meno che non modifichi il percorso del file di output.
+Tuttavia, è un piccolo file di test, quindi potete usare `cat` per aprirlo e visualizzarne il contenuto.
 Se scorrete fino all'inizio del file, troverete un'intestazione composta da molte righe di metadati, seguita da un elenco di chiamate di varianti, una per riga.
 
 ```console title="reads_mother.vcf" linenums="26"
@@ -243,7 +243,7 @@ In questo modo, possiamo essere pigri e non specificare l'input quando digitiamo
  * Pipeline parameters
  */
 params {
-    // Primary input
+    // Input primario
     reads_bam: Path = "${projectDir}/data/bam/reads_mother.bam"
 }
 ```
@@ -303,7 +303,7 @@ Ogni target nominato dalla sezione `publish:` (come `bam_index`) ottiene il prop
     Anche se i file di dati che stiamo usando qui sono molto piccoli, nella genomica possono diventare molto grandi.
     Per impostazione predefinita, Nextflow crea collegamenti simbolici ai file di output nella directory di pubblicazione, il che evita copie di file non necessarie.
     È possibile modificare questo comportamento utilizzando l'opzione `mode` (ad esempio, `mode 'copy'`) per creare copie effettive invece.
-    Sia consapevole che i collegamenti simbolici si romperanno quando pulirà la Sua directory `work`, quindi per i workflow di produzione potrebbe voler usare `mode 'copy'`.
+    Sia consapevole che i collegamenti simbolici si romperanno quando pulirà la vostra directory `work`, quindi per i workflow di produzione potrebbe voler usare `mode 'copy'`.
 
 ### 1.5. Configurare la directory di output
 
@@ -556,10 +556,10 @@ Fare in modo che il workflow gestisca più campioni in blocco.
 
 ## 3. Adattare il workflow per eseguirlo su un batch di campioni
 
-È tutto bello avere un workflow che può automatizzare l'elaborazione su un singolo campione, ma cosa succede se ha 1000 campioni?
-Ha bisogno di scrivere uno script bash che scorra attraverso tutti i Suoi campioni?
+È tutto bello avere un workflow che può automatizzare l'elaborazione su un singolo campione, ma cosa succede se avete 1000 campioni?
+Ha bisogno di scrivere uno script bash che scorra attraverso tutti i vostri campioni?
 
-No, per fortuna! Basta fare una piccola modifica al codice e Nextflow gestirà anche questo per Lei.
+No, per fortuna! Basta fare una piccola modifica al codice e Nextflow gestirà anche questo per voi.
 
 ### 3.1. Trasformare la dichiarazione del parametro di input in un array che elenca i tre campioni
 
@@ -568,7 +568,7 @@ Trasformiamo quel percorso di file predefinito nella dichiarazione del file BAM 
 === "Dopo"
 
     ```groovy title="genomics-1.nf" linenums="7"
-    // Primary input (array of three samples)
+    // Input primario (array di tre campioni)
         reads_bam = [
             "${projectDir}/data/bam/reads_mother.bam",
             "${projectDir}/data/bam/reads_father.bam",
@@ -579,7 +579,7 @@ Trasformiamo quel percorso di file predefinito nella dichiarazione del file BAM 
 === "Prima"
 
     ```groovy title="genomics-1.nf" linenums="7"
-        // Primary input
+        // Input primario
         reads_bam: Path = "${projectDir}/data/bam/reads_mother.bam"
     ```
 
@@ -592,7 +592,7 @@ E questo è in realtà tutto ciò che dobbiamo fare, perché il channel factory 
 
 !!! note "Nota"
 
-    Normalmente, non vorrebbe codificare l'elenco dei campioni nel Suo file workflow, ma lo stiamo facendo qui per mantenere le cose semplici.
+    Normalmente, non vorrebbe codificare l'elenco dei campioni nel vostro file workflow, ma lo stiamo facendo qui per mantenere le cose semplici.
     Presenteremo modi più eleganti per gestire gli input più avanti in questa serie di formazione.
 
 ### 3.2. Eseguire il workflow per verificare che venga eseguito su tutti e tre i campioni
@@ -765,7 +765,7 @@ Per risolvere questo problema, dobbiamo assicurarci che i file BAM e i loro file
 !!! tip "Suggerimento"
 
     Le istruzioni `view()` nel codice del workflow non fanno nulla, quindi non è un problema lasciarle.
-    Tuttavia, ingombreranno l'output della Sua console, quindi Le consigliamo di rimuoverle quando ha finito di risolvere il problema.
+    Tuttavia, ingombreranno l'output della vostra console, quindi vi consigliamo di rimuoverle quando ha finito di risolvere il problema.
 
 ### 3.3. Modificare l'output del processo SAMTOOLS_INDEX in una tupla che mantiene insieme il file di input e il suo indice
 
@@ -920,7 +920,7 @@ La directory dei risultati ora contiene sia file BAM che BAI per ciascun campion
     └── reads_son.bam.vcf.idx -> */d7/a6b046*/reads_son.bam.vcf.idx
     ```
 
-Se desidera, può usare `.view()` di nuovo per dare un'occhiata a come appare il contenuto del channel di output di `SAMTOOLS_INDEX`:
+Se desiderate, potete usare `.view()` di nuovo per dare un'occhiata a come appare il contenuto del channel di output di `SAMTOOLS_INDEX`:
 
 ```groovy title="genomics-1.nf" linenums="92"
 SAMTOOLS_INDEX.out.view()
@@ -938,7 +938,7 @@ Questo sarà molto più sicuro, andando avanti.
 
 ### Takeaway
 
-Sa come fare in modo che il Suo workflow venga eseguito su più campioni (in modo indipendente).
+Sa come fare in modo che il vostro workflow venga eseguito su più campioni (in modo indipendente).
 
 ### Cosa c'è dopo?
 
@@ -955,7 +955,7 @@ Qui Le mostreremo come fare nel caso semplice.
 
 ### 4.1. Esaminare il file di testo fornito che elenca i percorsi dei file di input
 
-Abbiamo già creato un file di testo che elenca i percorsi dei file di input, chiamato `sample_bams.txt`, che può trovare nella directory `data/`.
+Abbiamo già creato un file di testo che elenca i percorsi dei file di input, chiamato `sample_bams.txt`, che potete trovare nella directory `data/`.
 
 ```txt title="sample_bams.txt"
 /workspaces/training/nf4-science/genomics/data/bam/reads_mother.bam
@@ -963,11 +963,11 @@ Abbiamo già creato un file di testo che elenca i percorsi dei file di input, ch
 /workspaces/training/nf4-science/genomics/data/bam/reads_son.bam
 ```
 
-Come può vedere, abbiamo elencato un percorso di file per riga, e sono percorsi assoluti.
+Come potete vedere, abbiamo elencato un percorso di file per riga, e sono percorsi assoluti.
 
 !!! note "Nota"
 
-    I file che stiamo usando qui sono semplicemente sul filesystem locale del Suo GitHub Codespaces, ma potremmo anche puntare a file nello storage cloud.
+    I file che stiamo usando qui sono semplicemente sul filesystem locale del vostro GitHub Codespaces, ma potremmo anche puntare a file nello storage cloud.
 
 ### 4.2. Aggiornare il valore predefinito del parametro
 
@@ -976,14 +976,14 @@ Cambiamo il valore predefinito per il nostro parametro di input `reads_bam` per 
 === "Dopo"
 
     ```groovy title="genomics-1.nf" linenums="7"
-        // Primary input (file of input files, one per line)
+        // Input primario (file di file di input, uno per riga)
         reads_bam: Path = "${projectDir}/data/sample_bams.txt"
     ```
 
 === "Prima"
 
     ```groovy title="genomics-1.nf" linenums="7"
-    // Primary input (array of three samples)
+    // Input primario (array di tre campioni)
         reads_bam = [
             "${projectDir}/data/bam/reads_mother.bam",
             "${projectDir}/data/bam/reads_father.bam",
@@ -1049,6 +1049,6 @@ Più in generale, ha imparato come utilizzare componenti e logica essenziali di 
 
 ### Cosa c'è dopo?
 
-Celebri il Suo successo e si prenda una pausa extra lunga!
+Celebrate il vostro successo e prendetevi una pausa extra lunga!
 
 Nella prossima parte di questo corso, imparerà come utilizzare alcune funzionalità aggiuntive di Nextflow (inclusi più operatori di channel) per applicare la chiamata congiunta di varianti ai dati.

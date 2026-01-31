@@ -45,7 +45,7 @@ Du kannst VSCode so einstellen, dass es sich auf dieses Verzeichnis konzentriert
 code .
 ```
 
-!!! Tipp
+!!! tip "Tipp"
 
     Wenn du aus irgendeinem Grund dieses Verzeichnis verlässt (z.B. dein Codespace geht in den Schlafmodus), kannst du immer den vollständigen Pfad verwenden, um dorthin zurückzukehren, vorausgesetzt du arbeitest in der GitHub Codespaces-Trainingsumgebung:
 

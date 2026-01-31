@@ -15,7 +15,7 @@ Im ersten Teil des Nextflow Run-Trainingskurses steigen wir mit einem sehr grund
 
 Demonstrieren wir dieses Konzept mit einem einfachen Befehl, den wir direkt im Terminal ausführen, um zu zeigen, was er tut, bevor wir ihn in Nextflow einpacken.
 
-!!! Tipp
+!!! tip "Tipp"
 
     Denke daran, dass du dich jetzt im Verzeichnis `nextflow-run/` befinden solltest, wie auf der Seite [Erste Schritte](00_orientation.md) beschrieben.
 
@@ -134,7 +134,7 @@ Beachte jedoch, dass das 'veröffentlichte' Ergebnis eine Kopie (oder in einigen
 
 Also werden wir jetzt unter die Haube schauen, um zu sehen, wo Nextflow die Arbeit tatsächlich ausgeführt hat.
 
-!!! Warnung
+!!! warning "Warnung"
 
     Nicht alle Workflows werden so eingerichtet sein, dass sie Ausgaben in ein results-Verzeichnis veröffentlichen, und/oder die Verzeichnisnamen und -struktur können unterschiedlich sein.
     Etwas später in diesem Abschnitt zeigen wir dir, wie du herausfindest, wo dieses Verhalten festgelegt ist.
@@ -430,7 +430,7 @@ params {
 
 Unterstützte Typen umfassen `String`, `Integer`, `Float`, `Boolean` und `Path`.
 
-!!! Tipp
+!!! tip "Tipp"
 
     Workflow-Parameter, die mit dem `params`-System deklariert werden, nehmen immer zwei Bindestriche auf der Befehlszeile (`--`).
     Das unterscheidet sie von Nextflow-Level-Parametern, die nur einen Bindestrich nehmen (`-`).
@@ -533,7 +533,7 @@ Suche nach dem `cached:`-Teil, der in der Prozessstatuszeile (Zeile 5) hinzugef�
 Du kannst auch sehen, dass der Work-Unterverzeichnis-Hash derselbe ist wie im vorherigen Lauf.
 Nextflow zeigt dir buchstäblich auf die vorherige Ausführung und sagt "Das habe ich schon dort drüben gemacht."
 
-!!! Tipp
+!!! tip "Tipp"
 
     Wenn du eine Pipeline mit `resume` erneut ausführst, überschreibt Nextflow keine Dateien, die außerhalb des Work-Verzeichnisses von Ausführungen veröffentlicht wurden, die zuvor erfolgreich ausgeführt wurden.
 
@@ -629,7 +629,7 @@ nextflow clean -before backstabbing_swartz -f
 Die Ausgabe sollte ähnlich wie vorher sein, aber jetzt sagt sie 'Removed' anstelle von 'Would remove'.
 Beachte, dass dies nicht die zweistelligen Unterverzeichnisse (wie `eb/` oben) entfernt, aber ihren Inhalt leert.
 
-!!! Warnung
+!!! warning "Warnung"
 
     Das Löschen von Work-Unterverzeichnissen von vergangenen Läufen entfernt sie aus Nextflows Cache und löscht alle Ausgaben, die in diesen Verzeichnissen gespeichert waren.
     Das bedeutet, es bricht Nextflows Fähigkeit, die Ausführung fortzusetzen, ohne die entsprechenden Prozesse erneut auszuführen.

@@ -5,7 +5,7 @@
 È possibile installare tutto il necessario per eseguire la formazione nel proprio ambiente locale manualmente.
 
 Qui abbiamo documentato come farlo su sistemi standard compatibili con POSIX (assumendo un computer personale come un laptop).
-Tenga presente che alcuni dettagli potrebbero essere diversi a seconda del Suo sistema specifico.
+Tenga presente che alcuni dettagli potrebbero essere diversi a seconda del vostro sistema specifico.
 
 !!! tip "Suggerimento"
 
@@ -26,7 +26,7 @@ In totale, dovrà avere installato il seguente software:
 - [Conda](https://conda.io/) 4.5 (o successivo)
 - [VSCode](https://code.visualstudio.com) con l'[estensione Nextflow](https://www.nextflow.io/docs/latest/developer-env.html#devenv-nextflow)
 
-L'applicazione VSCode è tecnicamente opzionale ma raccomandiamo fortemente di utilizzarla per lavorare attraverso i corsi così come per il Suo lavoro di sviluppo Nextflow in generale.
+L'applicazione VSCode è tecnicamente opzionale ma raccomandiamo fortemente di utilizzarla per lavorare attraverso i corsi così come per il vostro lavoro di sviluppo Nextflow in generale.
 
 Il manuale della documentazione Nextflow fornisce istruzioni per l'installazione di queste dipendenze in [Configurazione dell'ambiente](https://www.nextflow.io/docs/latest/developer-env.html).
 
