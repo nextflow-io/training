@@ -135,6 +135,7 @@ extra_css:
   - assets/stylesheets/extra.css
 
 extra_javascript:
+  - assets/javascripts/consent-sync.js
   - assets/javascripts/posthog.js
   - assets/javascripts/language-picker.js
 
