@@ -554,32 +554,32 @@ Agreguemos estas líneas después de la llamada a `convertToUpper`, eliminando l
 === "Después"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="7-8"
-        // emit a greeting
+        // emitir un saludo
         sayHello(ch_samplesheet)
 
-        // convert the greeting to uppercase
+        // convertir el saludo a mayúsculas
         convertToUpper(sayHello.out)
 
         // crear mapa de metadatos con el nombre del lote como ID
         def cat_meta = [ id: params.batch ]
 
-        // generate ASCII art of the greetings with cowpy
+        // generar arte ASCII de los saludos con cowpy
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
 === "Antes"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="7-8"
-        // emit a greeting
+        // emitir un saludo
         sayHello(ch_samplesheet)
 
-        // convert the greeting to uppercase
+        // convertir el saludo a mayúsculas
         convertToUpper(sayHello.out)
 
-        // collect all the greetings into one file
+        // recopilar todos los saludos en un archivo
         collectGreetings(convertToUpper.out.collect(), params.batch)
 
-        // generate ASCII art of the greetings with cowpy
+        // generar arte ASCII de los saludos con cowpy
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
@@ -592,10 +592,10 @@ A continuación, transforme el canal de archivos en un canal de tuplas que conte
 === "Después"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="10-11"
-        // emit a greeting
+        // emitir un saludo
         sayHello(ch_samplesheet)
 
-        // convert the greeting to uppercase
+        // convertir el saludo a mayúsculas
         convertToUpper(sayHello.out)
 
         // crear mapa de metadatos con el nombre del lote como ID
@@ -604,23 +604,23 @@ A continuación, transforme el canal de archivos en un canal de tuplas que conte
         // crear un canal con metadatos y archivos en formato de tupla
         ch_for_cat = convertToUpper.out.collect().map { files -> tuple(cat_meta, files) }
 
-        // generate ASCII art of the greetings with cowpy
+        // generar arte ASCII de los saludos con cowpy
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
 === "Antes"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26"
-        // emit a greeting
+        // emitir un saludo
         sayHello(ch_samplesheet)
 
-        // convert the greeting to uppercase
+        // convertir el saludo a mayúsculas
         convertToUpper(sayHello.out)
 
         // crear mapa de metadatos con el nombre del lote como ID
         def cat_meta = [ id: params.batch ]
 
-        // generate ASCII art of the greetings with cowpy
+        // generar arte ASCII de los saludos con cowpy
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
@@ -638,10 +638,10 @@ Ahora llame a `CAT_CAT` en el canal recién creado:
 === "Después"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="13-14"
-        // emit a greeting
+        // emitir un saludo
         sayHello(ch_samplesheet)
 
-        // convert the greeting to uppercase
+        // convertir el saludo a mayúsculas
         convertToUpper(sayHello.out)
 
         // crear mapa de metadatos con el nombre del lote como ID
@@ -653,17 +653,17 @@ Ahora llame a `CAT_CAT` en el canal recién creado:
         // concatenar archivos usando el módulo nf-core cat/cat
         CAT_CAT(ch_for_cat)
 
-        // generate ASCII art of the greetings with cowpy
+        // generar arte ASCII de los saludos con cowpy
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
 === "Antes"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26"
-        // emit a greeting
+        // emitir un saludo
         sayHello(ch_samplesheet)
 
-        // convert the greeting to uppercase
+        // convertir el saludo a mayúsculas
         convertToUpper(sayHello.out)
 
         // crear mapa de metadatos con el nombre del lote como ID
@@ -672,7 +672,7 @@ Ahora llame a `CAT_CAT` en el canal recién creado:
         // crear un canal con metadatos y archivos en formato de tupla
         ch_for_cat = convertToUpper.out.collect().map { files -> tuple(cat_meta, files) }
 
-        // generate ASCII art of the greetings with cowpy
+        // generar arte ASCII de los saludos con cowpy
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
@@ -688,10 +688,10 @@ Dado que `cowpy` aún no acepta tuplas de metadatos (arreglaremos esto en la sig
 === "Después"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="16-17 20"
-        // emit a greeting
+        // emitir un saludo
         sayHello(ch_samplesheet)
 
-        // convert the greeting to uppercase
+        // convertir el saludo a mayúsculas
         convertToUpper(sayHello.out)
 
         // crear mapa de metadatos con el nombre del lote como ID
@@ -713,10 +713,10 @@ Dado que `cowpy` aún no acepta tuplas de metadatos (arreglaremos esto en la sig
 === "Antes"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="17"
-        // emit a greeting
+        // emitir un saludo
         sayHello(ch_samplesheet)
 
-        // convert the greeting to uppercase
+        // convertir el saludo a mayúsculas
         convertToUpper(sayHello.out)
 
         // crear mapa de metadatos con el nombre del lote como ID

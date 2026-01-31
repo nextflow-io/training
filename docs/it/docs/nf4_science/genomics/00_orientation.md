@@ -11,7 +11,7 @@ Durante questo corso di formazione, lavoreremo nella directory `nf4-science/geno
 Questa directory contiene tutti i file di codice, i dati di test e i file accessori di cui avrà bisogno.
 
 Si senta libero di esplorare i contenuti di questa directory; il modo più semplice per farlo è utilizzare l'esploratore di file sul lato sinistro dello spazio di lavoro della formazione nell'interfaccia VSCode.
-In alternativa, può utilizzare il comando `tree`.
+In alternativa, potete utilizzare il comando `tree`.
 Durante il corso, utilizziamo l'output di `tree` per rappresentare la struttura e i contenuti della directory in forma leggibile, talvolta con modifiche minori per chiarezza.
 
 Qui generiamo un indice dei contenuti fino al secondo livello:
@@ -63,10 +63,10 @@ Se esegue questo comando all'interno di `nf4-science/genomics`, dovrebbe vedere 
 
 !!!tip "Suggerimento"
 
-    Se per qualsiasi motivo si sposta fuori da questa directory, può sempre eseguire questo comando per ritornarvi:
+    Se per qualsiasi motivo vi spostate fuori da questa directory, potete sempre eseguire questo comando per ritornarvi:
 
     ```bash
     cd /workspaces/training/nf4-science/genomics
     ```
 
-Ora, per iniziare il corso, clicchi sulla freccia nell'angolo in basso a destra di questa pagina.
+Ora, per iniziare il corso, cliccate sulla freccia nell'angolo in basso a destra di questa pagina.

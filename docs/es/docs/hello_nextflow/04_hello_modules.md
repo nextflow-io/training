@@ -138,7 +138,7 @@ Copie toda la definición del proceso desde el archivo de workflow al archivo de
 #!/usr/bin/env nextflow
 
 /*
- * Use echo to print 'Hello World!' to a file
+ * Usar echo para imprimir 'Hello World!' a un archivo
  */
 process sayHello {
 
@@ -170,11 +170,11 @@ Insertemos eso arriba del bloque `params` y completémoslo apropiadamente.
 === "Después"
 
     ```groovy title="hello-modules.nf" linenums="44" hl_lines="1 2"
-    // Include modules
+    // Incluir módulos
     include { sayHello } from './modules/sayHello.nf'
 
     /*
-    * Pipeline parameters
+    * Parámetros del pipeline
     */
     params {
         greeting: Path = 'data/greetings.csv'
@@ -186,7 +186,7 @@ Insertemos eso arriba del bloque `params` y completémoslo apropiadamente.
 
     ```groovy title="hello-modules.nf" linenums="44"
     /*
-    * Pipeline parameters
+    * Parámetros del pipeline
     */
     params {
         greeting: Path = 'data/greetings.csv'
@@ -221,7 +221,7 @@ Siéntase libre de verificar las salidas publicadas.
 
 Nextflow reconoció que sigue siendo el mismo trabajo por hacer, incluso si el código está dividido en múltiples archivos.
 
-### Resumen
+### Conclusión
 
 Sabe cómo extraer un proceso en un módulo local y sabe que hacer esto no rompe la capacidad de reanudar del flujo de trabajo.
 
@@ -251,7 +251,7 @@ Copie toda la definición del proceso desde el archivo de workflow al archivo de
 #!/usr/bin/env nextflow
 
 /*
- * Use a text replacement tool to convert the greeting to uppercase
+ * Usar una herramienta de reemplazo de texto para convertir el saludo a mayúsculas
  */
 process convertToUpper {
 
@@ -277,12 +277,12 @@ Inserte la declaración de importación arriba del bloque `params` y complétela
 === "Después"
 
     ```groovy title="hello-modules.nf" linenums="23" hl_lines="3"
-    // Include modules
+    // Incluir módulos
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
 
     /*
-    * Pipeline parameters
+    * Parámetros del pipeline
     */
     params {
         greeting: Path = 'data/greetings.csv'
@@ -293,11 +293,11 @@ Inserte la declaración de importación arriba del bloque `params` y complétela
 === "Antes"
 
     ```groovy title="hello-modules.nf" linenums="23"
-    // Include modules
+    // Incluir módulos
     include { sayHello } from './modules/sayHello.nf'
 
     /*
-    * Pipeline parameters
+    * Parámetros del pipeline
     */
     params {
         greeting: Path = 'data/greetings.csv'
@@ -351,7 +351,7 @@ Copie toda la definición del proceso desde el archivo de workflow al archivo de
 #!/usr/bin/env nextflow
 
 /*
- * Collect uppercase greetings into a single output file
+ * Recopilar saludos en mayúsculas en un único archivo de salida
  */
 process collectGreetings {
 
@@ -381,13 +381,13 @@ Inserte la declaración de importación arriba del bloque `params` y complétela
 === "Después"
 
     ```groovy title="hello-modules.nf" linenums="3" hl_lines="4"
-    // Include modules
+    // Incluir módulos
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
     include { collectGreetings } from './modules/collectGreetings.nf'
 
     /*
-    * Pipeline parameters
+    * Parámetros del pipeline
     */
     params {
         greeting: Path = 'data/greetings.csv'
@@ -398,12 +398,12 @@ Inserte la declaración de importación arriba del bloque `params` y complétela
 === "Antes"
 
     ```groovy title="hello-modules.nf" linenums="3"
-    // Include modules
+    // Incluir módulos
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
 
     /*
-    * Pipeline parameters
+    * Parámetros del pipeline
     */
     params {
         greeting: Path = 'data/greetings.csv'
@@ -435,7 +435,7 @@ nextflow run hello-modules.nf -resume
 
 Esto debería seguir produciendo la misma salida que anteriormente.
 
-### Resumen
+### Conclusión
 
 Sabe cómo modularizar múltiples procesos en un flujo de trabajo.
 

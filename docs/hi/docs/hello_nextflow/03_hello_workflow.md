@@ -129,7 +129,7 @@ Workflow script में, पहले वाले के ठीक नीच�
 
 ```groovy title="hello-workflow.nf" linenums="20"
 /*
- * Use a text replacement tool to convert the greeting to uppercase
+ * अभिवादन को uppercase में बदलने के लिए text replacement tool का उपयोग करें
  */
 process convertToUpper {
 
@@ -160,13 +160,13 @@ Workflow block में, निम्नलिखित code change करो:
     workflow {
 
         main:
-        // create a channel for inputs from a CSV file
+        // CSV फ़ाइल से इनपुट के लिए एक channel बनाएं
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
-        // emit a greeting
+        // एक अभिवादन emit करें
         sayHello(greeting_ch)
-        // convert the greeting to uppercase
+        // अभिवादन को uppercase में बदलें
         convertToUpper()
 
         publish:
@@ -180,11 +180,11 @@ Workflow block में, निम्नलिखित code change करो:
     workflow {
 
         main:
-        // create a channel for inputs from a CSV file
+        // CSV फ़ाइल से इनपुट के लिए एक channel बनाएं
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
-        // emit a greeting
+        // एक अभिवादन emit करें
         sayHello(greeting_ch)
 
         publish:
@@ -206,14 +206,14 @@ Workflow block में, निम्नलिखित code change करो:
 === "After"
 
     ```groovy title="hello-workflow.nf" linenums="53" hl_lines="2"
-        // convert the greeting to uppercase
+        // अभिवादन को uppercase में बदलें
         convertToUpper(sayHello.out)
     ```
 
 === "Before"
 
     ```groovy title="hello-workflow.nf" linenums="53" hl_lines="2"
-        // convert the greeting to uppercase
+        // अभिवादन को uppercase में बदलें
         convertToUpper()
     ```
 
@@ -369,7 +369,7 @@ Output `COLLECTED-output.txt` नामक एक text file है जिसम�
 
 ```groovy title="hello-workflow.nf" linenums="37"
 /*
- * Collect uppercase greetings into a single output file
+ * Uppercase अभिवादनों को एक single output फ़ाइल में collect करें
  */
 process collectGreetings {
 
@@ -395,10 +395,10 @@ Workflow block में, निम्नलिखित code change करो:
 === "After"
 
     ```groovy title="hello-workflow.nf" linenums="75" hl_lines="4 5"
-        // convert the greeting to uppercase
+        // अभिवादन को uppercase में बदलें
         convertToUpper(sayHello.out)
 
-        // collect all the greetings into one file
+        // सभी अभिवादनों को एक फ़ाइल में collect करें
         collectGreetings(convertToUpper.out)
     }
     ```
@@ -406,7 +406,7 @@ Workflow block में, निम्नलिखित code change करो:
 === "Before"
 
     ```groovy title="hello-workflow.nf" linenums="75"
-        // convert the greeting to uppercase
+        // अभिवादन को uppercase में बदलें
         convertToUpper(sayHello.out)
     }
     ```
@@ -420,7 +420,7 @@ Workflow block में, निम्नलिखित code change करो:
 === "After"
 
     ```groovy title="hello-workflow.nf" linenums="73" hl_lines="2"
-        // collect all the greetings into one file
+        // सभी अभिवादनों को एक फ़ाइल में collect करें
         collectGreetings(convertToUpper.out.collect())
     }
     ```
@@ -428,7 +428,7 @@ Workflow block में, निम्नलिखित code change करो:
 === "Before"
 
     ```groovy title="hello-workflow.nf" linenums="73" hl_lines="2"
-        // collect all the greetings into one file
+        // सभी अभिवादनों को एक फ़ाइल में collect करें
         collectGreetings(convertToUpper.out)
     }
     ```
@@ -461,7 +461,7 @@ Workflow block में, निम्नलिखित code change करो:
 
 ```groovy title="hello-workflow.nf" linenums="55" hl_lines="6"
 /*
- * Pipeline parameters
+ * Pipeline पैरामीटर
  */
 params {
     input: Path = 'data/greetings.csv'

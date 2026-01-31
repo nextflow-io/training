@@ -99,7 +99,7 @@ Skrypt `hello-world.nf` znajdziesz w swoim bieżącym katalogu, którym powinien
     #!/usr/bin/env nextflow
 
     /*
-    * Use echo to print 'Hello World!' to a file
+    * Użyj echo do wypisania 'Hello World!' do pliku
     */
     process sayHello {
 
@@ -115,7 +115,7 @@ Skrypt `hello-world.nf` znajdziesz w swoim bieżącym katalogu, którym powinien
     workflow {
 
         main:
-        // emit a greeting
+        // wyemituj pozdrowienie
         sayHello()
     }
     ```
@@ -135,7 +135,7 @@ Ciało procesu musi zawierać blok script, który określa polecenie do uruchomi
 
 ```groovy title="hello-world.nf" linenums="3"
 /*
-* Use echo to print 'Hello World!' to a file
+* Użyj echo do wypisania 'Hello World!' do pliku
 */
 process sayHello {
 
@@ -183,7 +183,7 @@ Tutaj mamy **workflow**, który składa się z bloku `main:` (który mówi 'to j
 workflow {
 
     main:
-    // emit a greeting
+    // wyemituj pozdrowienie
     sayHello()
 }
 ```
@@ -409,7 +409,7 @@ W pliku skryptu workflow'u `hello-world.nf` dodaj następujące linie kodu:
     workflow {
 
         main:
-        // emit a greeting
+        // wyemituj pozdrowienie
         sayHello()
 
         publish:
@@ -423,7 +423,7 @@ W pliku skryptu workflow'u `hello-world.nf` dodaj następujące linie kodu:
     workflow {
 
         main:
-        // emit a greeting
+        // wyemituj pozdrowienie
         sayHello()
     }
     ```
@@ -442,7 +442,7 @@ W pliku skryptu workflow'u `hello-world.nf` dodaj następujące linie kodu:
     workflow {
 
         main:
-        // emit a greeting
+        // wyemituj pozdrowienie
         sayHello()
 
         publish:
@@ -462,7 +462,7 @@ W pliku skryptu workflow'u `hello-world.nf` dodaj następujące linie kodu:
     workflow {
 
         main:
-        // emit a greeting
+        // wyemituj pozdrowienie
         sayHello()
 
         publish:
@@ -805,14 +805,14 @@ W bloku workflow wprowadź następującą zmianę kodu:
 === "Po"
 
     ```groovy title="hello-world.nf" linenums="23" hl_lines="2"
-    // emit a greeting
+    // wyemituj pozdrowienie
     sayHello(params.input)
     ```
 
 === "Przed"
 
     ```groovy title="hello-world.nf" linenums="23" hl_lines="2"
-    // emit a greeting
+    // wyemituj pozdrowienie
     sayHello()
     ```
 
@@ -875,7 +875,7 @@ Nadajmy parametrowi `input` wartość domyślną, deklarując go przed definicj�
 
 ```groovy title="hello-world.nf" linenums="20"
 /*
- * Pipeline parameters
+ * Parametry pipeline'u
  */
 params {
     input: String = 'Holà mundo!'

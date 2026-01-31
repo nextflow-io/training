@@ -270,7 +270,7 @@ nextflow_pipeline {
 
         when {
             params {
-                // define parameters here. Example:
+                // Parameter hier definieren. Beispiel:
                 // outdir = "tests/results"
             }
         }
@@ -361,7 +361,7 @@ Der Test schlägt fehl! Was ist passiert?
 ```groovy title="tests/main.nf.test"
 when {
     params {
-        // define parameters here. Example:
+        // Parameter hier definieren. Beispiel:
         // outdir = "tests/results"
     }
 }
@@ -392,7 +392,7 @@ _Vorher:_
 ```groovy title="tests/main.nf.test" linenums="1" hl_lines="3 4"
 when {
     params {
-        // define parameters here. Example:
+        // Parameter hier definieren. Beispiel:
         // outdir = "tests/results"
     }
 }
@@ -668,12 +668,12 @@ nextflow_process {
 
         when {
             params {
-                // define parameters here. Example:
+                // Parameter hier definieren. Beispiel:
                 // outdir = "tests/results"
             }
             process {
                 """
-                // define inputs of the process here. Example:
+                // Eingaben des Prozesses hier definieren. Beispiel:
                 // input[0] = file("test-file.txt")
                 """
             }
@@ -733,12 +733,12 @@ Der Test schlägt fehl, weil der `sayHello`-Process 1 Eingabe deklariert, aber m
 
         when {
             params {
-                // define parameters here. Example:
+                // Parameter hier definieren. Beispiel:
                 // outdir = "tests/results"
             }
             process {
                 """
-                // define inputs of the process here. Example:
+                // Eingaben des Prozesses hier definieren. Beispiel:
                 // input[0] = file("test-file.txt")
                 """
             }
@@ -759,7 +759,7 @@ Der Test schlägt fehl, weil der `sayHello`-Process 1 Eingabe deklariert, aber m
 
         when {
             params {
-                // define parameters here. Example:
+                // Parameter hier definieren. Beispiel:
                 // outdir = "tests/results"
             }
             process {
@@ -872,7 +872,7 @@ So könnten wir unseren Test modifizieren, um spezifischen Inhalt zu überprüfe
 
         when {
             params {
-                // define parameters here. Example:
+                // Parameter hier definieren. Beispiel:
                 // outdir = "tests/results"
             }
             process {
@@ -961,12 +961,12 @@ nextflow_process {
 
         when {
             params {
-                // define parameters here. Example:
+                // Parameter hier definieren. Beispiel:
                 // outdir = "tests/results"
             }
             process {
                 """
-                // define inputs of the process here. Example:
+                // Eingaben des Prozesses hier definieren. Beispiel:
                 // input[0] = file("test-file.txt")
                 """
             }
@@ -999,12 +999,12 @@ Für jetzt lass uns die vorhandene data/greetings.csv-Datei wiederverwenden, unt
 
         when {
             params {
-                // define parameters here. Example:
+                // Parameter hier definieren. Beispiel:
                 // outdir = "tests/results"
             }
             process {
                 """
-                // define inputs of the process here. Example:
+                // Eingaben des Prozesses hier definieren. Beispiel:
                 // input[0] = file("test-file.txt")
                 """
             }
@@ -1025,7 +1025,7 @@ Für jetzt lass uns die vorhandene data/greetings.csv-Datei wiederverwenden, unt
 
         when {
             params {
-                // define parameters here. Example:
+                // Parameter hier definieren. Beispiel:
                 // outdir = "tests/results"
             }
             process {

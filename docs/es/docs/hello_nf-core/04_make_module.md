@@ -155,7 +155,7 @@ Así que ahora actualicemos las dos referencias al proceso en el bloque workflow
 === "Después"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="2 17"
-    // generate ASCII art of the greetings with cowpy
+    // generar arte ASCII de los saludos con cowpy
     COWPY(CAT_CAT.out.file_out)
 
     //
@@ -178,7 +178,7 @@ Así que ahora actualicemos las dos referencias al proceso en el bloque workflow
 === "Antes"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="2 17"
-    // generate ASCII art of the greetings with cowpy
+    // generar arte ASCII de los saludos con cowpy
     cowpy(CAT_CAT.out.file_out)
 
     //
@@ -308,7 +308,7 @@ Abra el archivo de flujo de trabajo `hello.nf` (en `core-hello/workflows/`) y ac
 === "Después"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="2"
-        // generate ASCII art of the greetings with cowpy
+        // generar arte ASCII de los saludos con cowpy
         COWPY(CAT_CAT.out.file_out, params.character)
     ```
 
@@ -318,7 +318,7 @@ Abra el archivo de flujo de trabajo `hello.nf` (en `core-hello/workflows/`) y ac
         // extract the file from the tuple since cowpy doesn't use metadata yet
         ch_for_cowpy = CAT_CAT.out.file_out.map{ meta, file -> file }
 
-        // generate ASCII art of the greetings with cowpy
+        // generar arte ASCII de los saludos con cowpy
         COWPY(ch_for_cowpy, params.character)
     ```
 
@@ -564,14 +564,14 @@ Abra el archivo de flujo de trabajo `hello.nf` (en `core-hello/workflows/`) y ac
 === "Después"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="39" hl_lines="2"
-        // generate ASCII art of the greetings with cowpy
+        // generar arte ASCII de los saludos con cowpy
         COWPY(CAT_CAT.out.file_out)
     ```
 
 === "Antes"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="39" hl_lines="2"
-        // generate ASCII art of the greetings with cowpy
+        // generar arte ASCII de los saludos con cowpy
         COWPY(CAT_CAT.out.file_out, params.character)
     ```
 

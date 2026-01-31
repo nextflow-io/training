@@ -55,10 +55,10 @@ nextflow run ./molkart -params-file params.yaml --segmentation_method "stardist"
 ```
 
 La riga sopra cambia il `segmentation_method` in `stardist` e il nome di `--outdir` in `stardist_results` invece dei parametri nel file `params.yaml`.
-Inoltre, può vedere che il flag `-resume` ci ha permesso di riutilizzare i risultati di pre-elaborazione dall'esecuzione precedente, risparmiando tempo.
+Inoltre, potete vedere che il flag `-resume` ci ha permesso di riutilizzare i risultati di pre-elaborazione dall'esecuzione precedente, risparmiando tempo.
 Può utilizzare questo schema per testare rapidamente diverse variazioni della pipeline.
 
-### Conclusione
+### Takeaway
 
 I file di parametri rendono le Sue analisi riproducibili e facili da condividere.
 Li utilizzi per qualsiasi lavoro di analisi reale.
@@ -131,9 +131,9 @@ Infine, eseguiamo nf-core/molkart un'altra volta con il samplesheet con percorsi
 
 `nextflow run ./molkart -params-file params.yaml -resume`
 
-Come può vedere, Nextflow esegue questa esecuzione in modo simile a quando i file sono stati scaricati da Github. Questa è una delle grandi caratteristiche di Nextflow: prepara i dati correttamente per Lei, indipendentemente da dove si trovano.
+Come potete vedere, Nextflow esegue questa esecuzione in modo simile a quando i file sono stati scaricati da GitHub. Questa è una delle grandi caratteristiche di Nextflow: prepara i dati correttamente per voi, indipendentemente da dove si trovano.
 
-### Conclusione
+### Takeaway
 
 I samplesheet organizzano set di dati multi-campione in modo da permetterLe di definire esplicitamente i Suoi metadati insieme ai percorsi dei file.
 La maggior parte delle pipeline nf-core utilizza questo pattern.

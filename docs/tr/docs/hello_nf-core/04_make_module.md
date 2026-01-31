@@ -155,7 +155,7 @@ Process çağrılarını güncellemek zorunda kalmamak için import ifadesinde b
 === "Sonra"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="2 17"
-    // generate ASCII art of the greetings with cowpy
+    // cowpy ile selamlamaların ASCII sanatını oluştur
     COWPY(CAT_CAT.out.file_out)
 
     //
@@ -178,7 +178,7 @@ Process çağrılarını güncellemek zorunda kalmamak için import ifadesinde b
 === "Önce"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="2 17"
-    // generate ASCII art of the greetings with cowpy
+    // cowpy ile selamlamaların ASCII sanatını oluştur
     cowpy(CAT_CAT.out.file_out)
 
     //
@@ -308,7 +308,7 @@ Artık `CAT_CAT` çıktısı ve `COWPY` girdisi aynı 'şekle' sahip, yani her i
 === "Sonra"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="2"
-        // generate ASCII art of the greetings with cowpy
+        // cowpy ile selamlamaların ASCII sanatını oluştur
         COWPY(CAT_CAT.out.file_out, params.character)
     ```
 
@@ -318,7 +318,7 @@ Artık `CAT_CAT` çıktısı ve `COWPY` girdisi aynı 'şekle' sahip, yani her i
         // extract the file from the tuple since cowpy doesn't use metadata yet
         ch_for_cowpy = CAT_CAT.out.file_out.map{ meta, file -> file }
 
-        // generate ASCII art of the greetings with cowpy
+        // cowpy ile selamlamaların ASCII sanatını oluştur
         COWPY(ch_for_cowpy, params.character)
     ```
 
@@ -564,14 +564,14 @@ Umarım bir iş hattındaki tüm modüllerin `ext.args` değerlerinin bu dosyada
 === "Sonra"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="39" hl_lines="2"
-        // generate ASCII art of the greetings with cowpy
+        // cowpy ile selamlamaların ASCII sanatını oluştur
         COWPY(CAT_CAT.out.file_out)
     ```
 
 === "Önce"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="39" hl_lines="2"
-        // generate ASCII art of the greetings with cowpy
+        // cowpy ile selamlamaların ASCII sanatını oluştur
         COWPY(CAT_CAT.out.file_out, params.character)
     ```
 

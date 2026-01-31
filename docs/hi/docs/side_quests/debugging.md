@@ -165,14 +165,14 @@ process PROCESS_FILES {
     """
     echo "Processing ${sample_name}" > ${sample_name}_output.txt
     """
-// Missing closing brace for the process
+// process के लिए closing brace गुम है
 
 workflow {
 
-    // Create input channel
+    // इनपुट channel बनाएं
     input_ch = channel.of('sample1', 'sample2', 'sample3')
 
-    // Call the process with the input channel
+    // इनपुट channel के साथ process को call करें
     PROCESS_FILES(input_ch)
 }
 ```
@@ -207,14 +207,14 @@ workflow {
         """
         echo "Processing ${sample_name}" > ${sample_name}_output.txt
         """
-    }  // Add the missing closing brace
+    }  // गुम closing brace जोड़ें
 
     workflow {
 
-        // Create input channel
+        // इनपुट channel बनाएं
         input_ch = channel.of('sample1', 'sample2', 'sample3')
 
-        // Call the process with the input channel
+        // इनपुट channel के साथ process को call करें
         PROCESS_FILES(input_ch)
     }
     ```
@@ -239,10 +239,10 @@ workflow {
 
     workflow {
 
-        // Create input channel
+        // इनपुट channel बनाएं
         input_ch = channel.of('sample1', 'sample2', 'sample3')
 
-        // Call the process with the input channel
+        // इनपुट channel के साथ process को call करें
         PROCESS_FILES(input_ch)
     }
     ```
@@ -354,10 +354,10 @@ workflow {
 
     workflow {
 
-        // Create input channel
+        // इनपुट channel बनाएं
         input_ch = channel.of('sample1', 'sample2', 'sample3')
 
-        // Call the process with the input channel
+        // इनपुट channel के साथ process को call करें
         PROCESS_FILES(input_ch)
     }
     ```
@@ -382,10 +382,10 @@ workflow {
 
     workflow {
 
-        // Create input channel
+        // इनपुट channel बनाएं
         input_ch = channel.of('sample1', 'sample2', 'sample3')
 
-        // Call the process with the input channel
+        // इनपुट channel के साथ process को call करें
         PROCESS_FILES(input_ch)
     }
     ```
@@ -452,7 +452,7 @@ process PROCESS_FILES {
     path "${sample_name}_processed.txt"
 
     script:
-    // Define variables in Groovy code before the script
+    // script से पहले Groovy code में variables परिभाषित करें
     def output_prefix = "${sample_name}_processed"
     def timestamp = new Date().format("yyyy-MM-dd")
 
@@ -487,7 +487,7 @@ workflow {
         path "${sample_name}_output.txt"
 
         script:
-        // Define variables in Groovy code before the script
+        // script से पहले Groovy code में variables परिभाषित करें
         def output_prefix = "${sample_name}_processed"
         def timestamp = new Date().format("yyyy-MM-dd")
 
@@ -515,7 +515,7 @@ workflow {
         path "${sample_name}_output.txt"
 
         script:
-        // Define variables in Groovy code before the script
+        // script से पहले Groovy code में variables परिभाषित करें
         def output_prefix = "${sample_name}_processed"
         def timestamp = new Date().format("yyyy-MM-dd")
 
@@ -730,7 +730,7 @@ process PROCESS_FILES {
     path "${sample_name}_processed.txt"
 
     script:
-    // Define variables in Groovy code before the script
+    // script से पहले Groovy code में variables परिभाषित करें
     def output_prefix = "${sample_name}_processed"
     def timestamp = new Date().format("yyyy-MM-dd")
 
@@ -765,7 +765,7 @@ channel परिभाषा को workflow ब्लॉक के अंद�
         path "${sample_name}_processed.txt"
 
         script:
-        // Define variables in Groovy code before the script
+        // script से पहले Groovy code में variables परिभाषित करें
         def output_prefix = "${sample_name}_processed"
         def timestamp = new Date().format("yyyy-MM-dd")
 
@@ -795,7 +795,7 @@ channel परिभाषा को workflow ब्लॉक के अंद�
         path "${sample_name}_processed.txt"
 
         script:
-        // Define variables in Groovy code before the script
+        // script से पहले Groovy code में variables परिभाषित करें
         def output_prefix = "${sample_name}_processed"
         def timestamp = new Date().format("yyyy-MM-dd")
 
@@ -900,11 +900,11 @@ process PROCESS_FILES {
 
 workflow {
 
-    // Create two separate channels
+    // दो अलग-अलग channels बनाएं
     samples_ch = channel.of('sample1', 'sample2', 'sample3')
     files_ch = channel.of('file1.txt', 'file2.txt', 'file3.txt')
 
-    // ERROR: Passing 2 channels but process expects only 1
+    // ERROR: 2 channels पास कर रहे हैं लेकिन process केवल 1 की अपेक्षा करता है
     PROCESS_FILES(samples_ch, files_ch)
 }
 ```
@@ -937,11 +937,11 @@ workflow {
 
     workflow {
 
-        // Create two separate channels
+        // दो अलग-अलग channels बनाएं
         samples_ch = channel.of('sample1', 'sample2', 'sample3')
         files_ch = channel.of('file1.txt', 'file2.txt', 'file3.txt')
 
-        // Fixed: Pass only the channel the process expects
+        // ठीक किया: केवल वह channel पास करें जो process अपेक्षा करता है
         PROCESS_FILES(samples_ch)
     }
     ```
@@ -966,11 +966,11 @@ workflow {
 
     workflow {
 
-        // Create two separate channels
+        // दो अलग-अलग channels बनाएं
         samples_ch = channel.of('sample1', 'sample2', 'sample3')
         files_ch = channel.of('file1.txt', 'file2.txt', 'file3.txt')
 
-        // ERROR: Passing 2 channels but process expects only 1
+        // ERROR: 2 channels पास कर रहे हैं लेकिन process केवल 1 की अपेक्षा करता है
         PROCESS_FILES(samples_ch, files_ch)
     }
     ```
@@ -1033,7 +1033,7 @@ process PROCESS_FILES {
     path "${output_prefix}.txt"
 
     script:
-    // Define variables in Groovy code before the script
+    // script से पहले Groovy code में variables परिभाषित करें
     output_prefix = "${reference}_${sample_name}"
     def timestamp = new Date().format("yyyy-MM-dd")
 

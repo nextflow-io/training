@@ -203,7 +203,7 @@ _Buradaki amaç Nextflow kodunun sözdizimini ezberlemek değil, ana bileşenler
 #!/usr/bin/env nextflow
 
 /*
- * Use echo to print a greeting to a file
+ * Bir selamlamayı bir dosyaya yazdırmak için echo kullan
  */
 process sayHello {
 
@@ -223,7 +223,7 @@ process sayHello {
 
 workflow {
 
-    // emit a greeting
+    // bir selamlama yayınla
     sayHello(params.greeting)
 }
 ```
@@ -248,7 +248,7 @@ Burada `greeting` adlı bir **input** değişkeni alan ve **output**'unu `output
 
 ```groovy title="hello-world.nf" linenums="3"
 /*
- * Use echo to print a greeting to a file
+ * Bir selamlamayı bir dosyaya yazdırmak için echo kullan
  */
 process sayHello {
 
@@ -295,7 +295,7 @@ Burada, `--greeting` parametresine verdiğimiz değeri tutan `params.greeting` g
 ```groovy title="hello-world.nf" linenums="22"
 workflow {
 
-    // emit a greeting
+    // bir selamlama yayınla
     sayHello(params.greeting)
 }
 ```

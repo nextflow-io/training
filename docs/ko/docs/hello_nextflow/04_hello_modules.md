@@ -138,7 +138,7 @@ touch modules/sayHello.nf
 #!/usr/bin/env nextflow
 
 /*
- * Use echo to print 'Hello World!' to a file
+ * echo를 사용하여 'Hello World!'를 파일에 출력
  */
 process sayHello {
 
@@ -170,11 +170,11 @@ include { <MODULE_NAME> } from '<path_to_module>'
 === "수정 후"
 
     ```groovy title="hello-modules.nf" linenums="44" hl_lines="1 2"
-    // Include modules
+    // 모듈 포함
     include { sayHello } from './modules/sayHello.nf'
 
     /*
-    * Pipeline parameters
+    * 파이프라인 매개변수
     */
     params {
         greeting: Path = 'data/greetings.csv'
@@ -186,7 +186,7 @@ include { <MODULE_NAME> } from '<path_to_module>'
 
     ```groovy title="hello-modules.nf" linenums="44"
     /*
-    * Pipeline parameters
+    * 파이프라인 매개변수
     */
     params {
         greeting: Path = 'data/greetings.csv'
@@ -251,7 +251,7 @@ touch modules/convertToUpper.nf
 #!/usr/bin/env nextflow
 
 /*
- * Use a text replacement tool to convert the greeting to uppercase
+ * 텍스트 대체 도구를 사용하여 인사말을 대문자로 변환
  */
 process convertToUpper {
 
@@ -277,12 +277,12 @@ process convertToUpper {
 === "수정 후"
 
     ```groovy title="hello-modules.nf" linenums="23" hl_lines="3"
-    // Include modules
+    // 모듈 포함
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
 
     /*
-    * Pipeline parameters
+    * 파이프라인 매개변수
     */
     params {
         greeting: Path = 'data/greetings.csv'
@@ -293,11 +293,11 @@ process convertToUpper {
 === "수정 전"
 
     ```groovy title="hello-modules.nf" linenums="23"
-    // Include modules
+    // 모듈 포함
     include { sayHello } from './modules/sayHello.nf'
 
     /*
-    * Pipeline parameters
+    * 파이프라인 매개변수
     */
     params {
         greeting: Path = 'data/greetings.csv'
@@ -351,7 +351,7 @@ touch modules/collectGreetings.nf
 #!/usr/bin/env nextflow
 
 /*
- * Collect uppercase greetings into a single output file
+ * 대문자 인사말을 하나의 출력 파일에 수집
  */
 process collectGreetings {
 
@@ -381,13 +381,13 @@ process collectGreetings {
 === "수정 후"
 
     ```groovy title="hello-modules.nf" linenums="3" hl_lines="4"
-    // Include modules
+    // 모듈 포함
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
     include { collectGreetings } from './modules/collectGreetings.nf'
 
     /*
-    * Pipeline parameters
+    * 파이프라인 매개변수
     */
     params {
         greeting: Path = 'data/greetings.csv'
@@ -398,12 +398,12 @@ process collectGreetings {
 === "수정 전"
 
     ```groovy title="hello-modules.nf" linenums="3"
-    // Include modules
+    // 모듈 포함
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
 
     /*
-    * Pipeline parameters
+    * 파이프라인 매개변수
     */
     params {
         greeting: Path = 'data/greetings.csv'

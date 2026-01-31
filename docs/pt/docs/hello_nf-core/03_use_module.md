@@ -340,7 +340,7 @@ Vamos abordar isso como uma seção separada porque envolve um novo mecanismo qu
 
     No entanto, você pode querer mantê-lo como referência para entender as diferenças entre módulos locais e nf-core.
 
-### Resumo
+### Conclusão
 
 Você sabe como encontrar um módulo nf-core e torná-lo disponível para o seu projeto.
 
@@ -510,7 +510,7 @@ Com base no que revisamos, estas são as principais mudanças que precisamos faz
 
 Isso deve resolver! Agora que temos um plano, estamos prontos para mergulhar.
 
-### Resumo
+### Conclusão
 
 Você sabe como avaliar a interface de entrada e saída de um novo módulo para identificar seus requisitos, e aprendeu como os mapas de metadados são usados por pipelines nf-core para manter metadados intimamente associados aos dados conforme eles fluem por um pipeline.
 
@@ -793,7 +793,7 @@ Observe que `CAT_CAT` agora aparece na lista de execução de processos em vez d
 
 E é isso! Agora estamos usando um módulo robusto curado pela comunidade em vez de código customizado de nível de protótipo para essa etapa no pipeline.
 
-### Resumo
+### Conclusão
 
 Você agora sabe como:
 

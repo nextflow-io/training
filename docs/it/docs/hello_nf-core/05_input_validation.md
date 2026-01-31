@@ -381,7 +381,7 @@ nextflow run . --input assets/greetings.csv --outdir results --batch my-batch -p
 
 La pipeline dovrebbe essere eseguita con successo, e il parametro `batch` è ora validato.
 
-### Conclusione
+### Takeaway
 
 Avete imparato come utilizzare lo strumento interattivo `nf-core pipelines schema build` per aggiungere parametri a `nextflow_schema.json` e avete visto la validazione dei parametri in azione.
 L'interfaccia web gestisce tutta la sintassi JSON Schema per voi, rendendo facile gestire schemi di parametri complessi senza modifiche JSON manuali soggette a errori.
@@ -779,7 +779,7 @@ La validazione dello schema assicura che i file di input abbiano la struttura co
 
 Se volete esercitarvi, sentitevi liberi di creare altri file di input di saluti che violano lo schema in altri modi divertenti.
 
-### Conclusione
+### Takeaway
 
 Avete implementato e testato sia la validazione dei parametri che la validazione dei dati input. La vostra pipeline ora valida gli input prima dell'esecuzione, fornendo feedback rapido e messaggi di errore chiari.
 

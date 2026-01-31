@@ -11,7 +11,7 @@ hide:
 Il nostro obiettivo è fornire un ambiente coerente e accuratamente testato che permetta ai partecipanti di concentrarsi sull'apprendimento di Nextflow senza dover dedicare tempo e sforzi alla gestione del software.
 A tal fine, abbiamo sviluppato un ambiente containerizzato che contiene tutto il software necessario, i file di codice e i dati di esempio per lavorare attraverso tutti i nostri corsi.
 
-Questo ambiente containerizzato può essere eseguito direttamente su Github Codespaces o localmente in VS Code con l'estensione Devcontainers.
+Questo ambiente containerizzato può essere eseguito direttamente su GitHub Codespaces o localmente in VS Code con l'estensione Devcontainers.
 
 <div class="grid cards" markdown>
 
@@ -35,7 +35,7 @@ Questo ambiente containerizzato può essere eseguito direttamente su Github Code
 
 ## Istruzioni per l'installazione manuale
 
-Se nessuna delle opzioni sopra soddisfa le Sue esigenze, può replicare questo ambiente sul Suo sistema locale installando manualmente le dipendenze software e clonando il repository della formazione.
+Se nessuna delle opzioni sopra soddisfa le vostre esigenze, potete replicare questo ambiente sul vostro sistema locale installando manualmente le dipendenze software e clonando il repository della formazione.
 
 [Installazione manuale :material-arrow-right:](02_local.md){ .md-button .md-button--primary .mt-1 }
 

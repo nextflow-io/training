@@ -253,7 +253,7 @@ workflow HELLO {
     ch_versions = channel.empty()
 
     //
-    // Collate and save software versions
+    // 소프트웨어 버전 수집 및 저장
     //
     softwareVersionsToYAML(ch_versions)
         .collectFile(
@@ -271,7 +271,7 @@ workflow HELLO {
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    THE END
+    끝
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 ```
@@ -364,7 +364,7 @@ params.greeting = 'greetings.csv'
 params.batch = 'test-batch'
 params.character = 'turkey'
 
-// Include modules
+// 모듈 포함
 include { sayHello } from './modules/sayHello.nf'
 include { convertToUpper } from './modules/convertToUpper.nf'
 include { collectGreetings } from './modules/collectGreetings.nf'
@@ -372,21 +372,21 @@ include { cowpy } from './modules/cowpy.nf'
 
 workflow {
 
-  // create a channel for inputs from a CSV file
+  // CSV 파일에서 입력용 채널 생성
   greeting_ch = channel.fromPath(params.greeting)
                       .splitCsv()
                       .map { line -> line[0] }
 
-  // emit a greeting
+  // 인사말 출력
   sayHello(greeting_ch)
 
-  // convert the greeting to uppercase
+  // 인사말을 대문자로 변환
   convertToUpper(sayHello.out)
 
-  // collect all the greetings into one file
+  // 모든 인사말을 하나의 파일에 수집
   collectGreetings(convertToUpper.out.collect(), params.batch)
 
-  // generate ASCII art of the greetings with cowpy
+  // cowpy로 인사말의 ASCII 아트 생성
   cowpy(collectGreetings.out.outfile, params.character)
 }
 ```
@@ -422,14 +422,14 @@ nf-core 템플릿이 요구하는 대로 상위 workflow 내에서 실행 가능
 
     ```groovy title="original-hello/hello.nf" linenums="18"
         take:
-        // channel of greetings
+        // 인사말 채널
         greeting_ch
     ```
 
 === "변경 전"
 
     ```groovy title="original-hello/hello.nf" linenums="18"
-        // create a channel for inputs from a CSV file
+        // CSV 파일에서 입력용 채널 생성
         greeting_ch = channel.fromPath(params.greeting)
                             .splitCsv()
                             .map { line -> line[0] }
@@ -477,32 +477,32 @@ nf-core 템플릿이 요구하는 대로 상위 workflow 내에서 실행 가능
     ```groovy title="original-hello/hello.nf" linenums="22" hl_lines="1"
         main:
 
-        // emit a greeting
+        // 인사말 출력
         sayHello(greeting_ch)
 
-        // convert the greeting to uppercase
+        // 인사말을 대문자로 변환
         convertToUpper(sayHello.out)
 
-        // collect all the greetings into one file
+        // 모든 인사말을 하나의 파일에 수집
         collectGreetings(convertToUpper.out.collect(), params.batch)
 
-        // generate ASCII art of the greetings with cowpy
+        // cowpy로 인사말의 ASCII 아트 생성
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
 === "변경 전"
 
     ```groovy title="original-hello/hello.nf" linenums="21"
-        // emit a greeting
+        // 인사말 출력
         sayHello(greeting_ch)
 
-        // convert the greeting to uppercase
+        // 인사말을 대문자로 변환
         convertToUpper(sayHello.out)
 
-        // collect all the greetings into one file
+        // 모든 인사말을 하나의 파일에 수집
         collectGreetings(convertToUpper.out.collect(), params.batch)
 
-        // generate ASCII art of the greetings with cowpy
+        // cowpy로 인사말의 ASCII 아트 생성
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
@@ -533,7 +533,7 @@ nf-core 템플릿이 요구하는 대로 상위 workflow 내에서 실행 가능
 params.batch = 'test-batch'
 params.character = 'turkey'
 
-// Include modules
+// 모듈 포함
 include { sayHello } from './modules/sayHello.nf'
 include { convertToUpper } from './modules/convertToUpper.nf'
 include { collectGreetings } from './modules/collectGreetings.nf'
@@ -542,21 +542,21 @@ include { cowpy } from './modules/cowpy.nf'
 workflow HELLO {
 
     take:
-    // channel of greetings
+    // 인사말 채널
     greeting_ch
 
     main:
 
-    // emit a greeting
+    // 인사말 출력
     sayHello(greeting_ch)
 
-    // convert the greeting to uppercase
+    // 인사말을 대문자로 변환
     convertToUpper(sayHello.out)
 
-    // collect all the greetings into one file
+    // 모든 인사말을 하나의 파일에 수집
     collectGreetings(convertToUpper.out.collect(), params.batch)
 
-    // generate ASCII art of the greetings with cowpy
+    // cowpy로 인사말의 ASCII 아트 생성
     cowpy(collectGreetings.out.outfile, params.character)
 
     emit:
@@ -583,22 +583,22 @@ touch original-hello/main.nf
 ```groovy title="original-hello/main.nf" linenums="1"
 #!/usr/bin/env nextflow
 
-// import the workflow code from the hello.nf file
+// hello.nf 파일에서 workflow 코드 가져오기
 include { HELLO } from './hello.nf'
 
-// declare input parameter
+// 입력 매개변수 선언
 params.greeting = 'greetings.csv'
 
 workflow {
-  // create a channel for inputs from a CSV file
+  // CSV 파일에서 입력용 채널 생성
   greeting_ch = channel.fromPath(params.greeting)
                       .splitCsv()
                       .map { line -> line[0] }
 
-  // call the imported workflow on the channel of greetings
+  // 인사말 채널에서 가져온 workflow 호출
   HELLO(greeting_ch)
 
-  // view the outputs emitted by the workflow
+  // workflow에서 방출된 출력 보기
   HELLO.out.view { output -> "Output: $output" }
 }
 ```
@@ -688,13 +688,13 @@ include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pi
 workflow HELLO {
 
     take:
-    ch_samplesheet // channel: samplesheet read in from --input
+    ch_samplesheet // channel: --input에서 읽어온 samplesheet
     main:
 
     ch_versions = channel.empty()
 
     //
-    // Collate and save software versions
+    // 소프트웨어 버전 수집 및 저장
     //
     softwareVersionsToYAML(ch_versions)
         .collectFile(
@@ -712,7 +712,7 @@ workflow HELLO {
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    THE END
+    끝
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 ```
@@ -768,7 +768,7 @@ tree core-hello/modules
 `original-hello/hello.nf` workflow의 import 문은 다음과 같았습니다:
 
 ```groovy title="original-hello/hello.nf" linenums="9"
-// Include modules
+// 모듈 포함
 include { sayHello } from './modules/sayHello.nf'
 include { convertToUpper } from './modules/convertToUpper.nf'
 include { collectGreetings } from './modules/collectGreetings.nf'
@@ -817,7 +817,7 @@ nf-core 프로젝트에는 일반적으로 열 데이터를 포함하는 CSV 파
 
 ```groovy title="core-hello/workflows/hello.nf" linenums="21"
     take:
-    ch_samplesheet // channel: samplesheet read in from --input
+    ch_samplesheet // channel: --input에서 읽어온 samplesheet
 ```
 
 입력 처리는 이 workflow의 상위에서 수행됩니다(이 코드 파일에서가 아님).
@@ -831,16 +831,16 @@ nf-core 프로젝트에는 일반적으로 열 데이터를 포함하는 CSV 파
 ```groovy title="original-hello/hello.nf" linenums="22"
     main:
 
-    // emit a greeting
+    // 인사말 출력
     sayHello(greeting_ch)
 
-    // convert the greeting to uppercase
+    // 인사말을 대문자로 변환
     convertToUpper(sayHello.out)
 
-    // collect all the greetings into one file
+    // 모든 인사말을 하나의 파일에 수집
     collectGreetings(convertToUpper.out.collect(), params.batch)
 
-    // generate ASCII art of the greetings with cowpy
+    // cowpy로 인사말의 ASCII 아트 생성
     cowpy(collectGreetings.out.outfile, params.character)
 ```
 
@@ -856,26 +856,26 @@ workflow를 실행하는 도구의 버전을 캡처하는 것과 관련된 일�
     workflow HELLO {
 
         take:
-        ch_samplesheet // channel: samplesheet read in from --input
+        ch_samplesheet // channel: --input에서 읽어온 samplesheet
 
         main:
 
         ch_versions = Channel.empty()
 
-        // emit a greeting
+        // 인사말 출력
         sayHello(greeting_ch)
 
-        // convert the greeting to uppercase
+        // 인사말을 대문자로 변환
         convertToUpper(sayHello.out)
 
-        // collect all the greetings into one file
+        // 모든 인사말을 하나의 파일에 수집
         collectGreetings(convertToUpper.out.collect(), params.batch)
 
-        // generate ASCII art of the greetings with cowpy
+        // cowpy로 인사말의 ASCII 아트 생성
         cowpy(collectGreetings.out.outfile, params.character)
 
         //
-        // Collate and save software versions
+        // 소프트웨어 버전 수집 및 저장
         //
         softwareVersionsToYAML(ch_versions)
             .collectFile(
@@ -898,15 +898,15 @@ workflow를 실행하는 도구의 버전을 캡처하는 것과 관련된 일�
     workflow HELLO {
 
         take:
-        ch_samplesheet // channel: samplesheet read in from --input
-        main:
+    ch_samplesheet // channel: --input에서 읽어온 samplesheet
+    main:
 
-        ch_versions = Channel.empty()
+    ch_versions = channel.empty()
 
-        //
-        // Collate and save software versions
-        //
-        softwareVersionsToYAML(ch_versions)
+    //
+    // 소프트웨어 버전 수집 및 저장
+    //
+    softwareVersionsToYAML(ch_versions)
             .collectFile(
                 storeDir: "${params.outdir}/pipeline_info",
                 name:  'hello_software_'  + 'versions.yml',
@@ -928,14 +928,14 @@ workflow를 실행하는 도구의 버전을 캡처하는 것과 관련된 일�
 === "변경 후"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26"
-        // emit a greeting (updated to use the nf-core convention for samplesheets)
+        // 인사말 출력 (nf-core samplesheet 규칙을 사용하도록 업데이트됨)
         sayHello(ch_samplesheet)
     ```
 
 === "변경 전"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26"
-        // emit a greeting
+        // 인사말 출력
         sayHello(greeting_ch)
     ```
 
@@ -1011,17 +1011,17 @@ include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_hell
 */
 
 //
-// WORKFLOW: Run main analysis pipeline depending on type of input
+// WORKFLOW: 입력 유형에 따라 메인 분석 파이프라인 실행
 //
 workflow CORE_HELLO {
 
     take:
-    samplesheet // channel: samplesheet read in from --input
+    samplesheet // channel: --input에서 읽어온 samplesheet
 
     main:
 
     //
-    // WORKFLOW: Run pipeline
+    // WORKFLOW: 파이프라인 실행
     //
     HELLO (
         samplesheet
@@ -1029,7 +1029,7 @@ workflow CORE_HELLO {
 }
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    RUN MAIN WORKFLOW
+    메인 WORKFLOW 실행
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
@@ -1037,7 +1037,7 @@ workflow {
 
     main:
     //
-    // SUBWORKFLOW: Run initialisation tasks
+    // SUBWORKFLOW: 초기화 작업 실행
     //
     PIPELINE_INITIALISATION (
         params.version,
@@ -1049,13 +1049,13 @@ workflow {
     )
 
     //
-    // WORKFLOW: Run main workflow
+    // WORKFLOW: 메인 워크플로우 실행
     //
     CORE_HELLO (
         PIPELINE_INITIALISATION.out.samplesheet
     )
     //
-    // SUBWORKFLOW: Run completion tasks
+    // SUBWORKFLOW: 완료 작업 실행
     //
     PIPELINE_COMPLETION (
         params.outdir,
@@ -1065,7 +1065,7 @@ workflow {
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    THE END
+    끝
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 ```
@@ -1091,7 +1091,7 @@ nf-core 프로젝트는 중첩된 subworkflow를 많이 사용하므로 이 부�
 
 ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="76"
     //
-    // Create channel from input file provided through params.input
+    // params.input을 통해 제공된 입력 파일에서 채널 생성
     //
 
     channel
@@ -1144,7 +1144,7 @@ nf-core 프로젝트는 중첩된 subworkflow를 많이 사용하므로 이 부�
 참고로 채널 구성은 다음과 같았습니다(solutions 디렉토리에서 확인):
 
 ```groovy title="solutions/composable-hello/main.nf" linenums="10" hl_lines="4"
-    // create a channel for inputs from a CSV file
+    // CSV 파일에서 입력용 채널 생성
     greeting_ch = channel.fromPath(params.greeting)
         .splitCsv()
         .map { line -> line[0] }
@@ -1156,7 +1156,7 @@ nf-core 프로젝트는 중첩된 subworkflow를 많이 사용하므로 이 부�
 
     ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="76" hl_lines="5-7"
         //
-        // Create channel from input file provided through params.input
+        // params.input을 통해 제공된 입력 파일에서 채널 생성
         //
 
         ch_samplesheet = channel.fromPath(params.input)
@@ -1172,7 +1172,7 @@ nf-core 프로젝트는 중첩된 subworkflow를 많이 사용하므로 이 부�
 
     ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="76" hl_lines="5-23"
         //
-        // Create channel from input file provided through params.input
+        // params.input을 통해 제공된 입력 파일에서 채널 생성
         //
 
         channel

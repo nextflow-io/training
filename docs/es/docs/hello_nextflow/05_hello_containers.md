@@ -392,7 +392,7 @@ exit
 
 Se encontrará de vuelta en su shell normal.
 
-### Resumen
+### Conclusión
 
 Sabe cómo descargar un contenedor y ejecutarlo ya sea como un comando único o interactivamente. También sabe cómo hacer que sus datos sean accesibles desde dentro de su contenedor, lo que le permite probar cualquier herramienta que le interese en datos reales sin tener que instalar ningún software en su sistema.
 
@@ -436,7 +436,7 @@ Podemos modelar nuestro proceso `cowpy` en los otros procesos que hemos escrito 
 ```groovy title="modules/cowpy.nf" linenums="1"
 #!/usr/bin/env nextflow
 
-// Generate ASCII art with cowpy
+// Generar arte ASCII con cowpy
 process cowpy {
 
     input:
@@ -469,7 +469,7 @@ Inserte la declaración de importación arriba del bloque workflow y complétela
 === "Después"
 
     ```groovy title="hello-containers.nf" linenums="3" hl_lines="5"
-    // Include modules
+    // Incluir módulos
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
     include { collectGreetings } from './modules/collectGreetings.nf'
@@ -479,7 +479,7 @@ Inserte la declaración de importación arriba del bloque workflow y complétela
 === "Antes"
 
     ```groovy title="hello-containers.nf" linenums="3"
-    // Include modules
+    // Incluir módulos
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
     include { collectGreetings } from './modules/collectGreetings.nf'
@@ -500,17 +500,17 @@ En el bloque workflow, haga el siguiente cambio de código:
 
     ```groovy title="hello-containers.nf" linenums="19" hl_lines="12-13"
         main:
-        // create a channel for inputs from a CSV file
+        // crear un canal para entradas desde un archivo CSV
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
-        // emit a greeting
+        // emitir un saludo
         sayHello(greeting_ch)
-        // convert the greeting to uppercase
+        // convertir el saludo a mayúsculas
         convertToUpper(sayHello.out)
-        // collect all the greetings into one file
+        // recopilar todos los saludos en un archivo
         collectGreetings(convertToUpper.out.collect(), params.batch)
-        // generate ASCII art of the greetings with cowpy
+        // generar arte ASCII de los saludos con cowpy
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
@@ -518,15 +518,15 @@ En el bloque workflow, haga el siguiente cambio de código:
 
     ```groovy title="hello-containers.nf" linenums="19"
         main:
-        // create a channel for inputs from a CSV file
+        // crear un canal para entradas desde un archivo CSV
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
-        // emit a greeting
+        // emitir un saludo
         sayHello(greeting_ch)
-        // convert the greeting to uppercase
+        // convertir el saludo a mayúsculas
         convertToUpper(sayHello.out)
-        // collect all the greetings into one file
+        // recopilar todos los saludos en un archivo
         collectGreetings(convertToUpper.out.collect(), params.batch)
     ```
 
@@ -540,7 +540,7 @@ Esto es técnicamente opcional pero es la práctica recomendada y es una oportun
 
     ```groovy title="hello-containers.nf" linenums="9" hl_lines="7"
     /*
-    * Pipeline parameters
+    * Parámetros del pipeline
     */
     params {
         input: Path = 'data/greetings.csv'
@@ -553,7 +553,7 @@ Esto es técnicamente opcional pero es la práctica recomendada y es una oportun
 
     ```groovy title="hello-containers.nf" linenums="9"
     /*
-    * Pipeline parameters
+    * Parámetros del pipeline
     */
     params {
         input: Path = 'data/greetings.csv'
@@ -1077,7 +1077,7 @@ También monta el subdirectorio de trabajo correspondiente en el contenedor, est
        ||     ||          i_____;----\.____i""\____\
 ```
 
-### Resumen
+### Conclusión
 
 Sabe cómo usar contenedores en Nextflow para ejecutar procesos.
 

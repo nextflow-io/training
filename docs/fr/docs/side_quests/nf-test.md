@@ -110,7 +110,7 @@ Vous pouvez voir le code complet du workflow ci-dessous.
 
     ```groovy title="main.nf"
     /*
-    * Pipeline parameters
+    * Paramètres du pipeline
     */
     params.input_file = "greetings.csv"
 
@@ -154,13 +154,13 @@ Vous pouvez voir le code complet du workflow ci-dessous.
 
     workflow {
 
-        // create a channel for inputs from a CSV file
+        // créer un canal pour les entrées depuis un fichier CSV
         greeting_ch = channel.fromPath(params.input_file).splitCsv().flatten()
 
-        // emit a greeting
+        // émettre une salutation
         sayHello(greeting_ch)
 
-        // convert the greeting to uppercase
+        // convertir la salutation en majuscules
         convertToUpper(sayHello.out)
     }
     ```

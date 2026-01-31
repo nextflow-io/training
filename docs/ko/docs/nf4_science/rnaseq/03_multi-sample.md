@@ -35,10 +35,10 @@ ENCSR000CPO2,/workspaces/training/nf4-science/rnaseq/data/reads/ENCSR000CPO2_1.f
 
 ```groovy title="rnaseq.nf" linenums="13"
 params {
-    // Primary input
+    // 기본 입력
     input_csv: Path = "data/single-end.csv"
 
-    // Reference genome archive
+    // 참조 게놈 아카이브
     hisat2_index_zip: Path = "data/genome_index.tar.gz"
 }
 ```
@@ -48,7 +48,7 @@ params {
 파일 경로 자체가 아니라 파일의 내용을 채널에 로드하려고 하므로 `.splitCsv()` 연산자를 사용하여 CSV 형식을 파싱한 다음 `.map()` 연산자를 사용하여 원하는 특정 정보(FASTQ 파일 경로)를 가져옵니다.
 
 ```groovy title="rnaseq.nf" linenums="16"
-    // Create input channel from the contents of a CSV file
+    // CSV 파일의 내용에서 입력 채널 생성
     read_ch = channel.fromPath(params.input_csv)
         .splitCsv(header:true)
         .map { row -> file(row.fastq_path) }
@@ -123,7 +123,7 @@ process MULTIQC {
 `rnaseq.nf` 파일에 `include { MULTIQC } from './modules/multiqc.nf'` 문을 추가합니다:
 
 ```groovy title="rnaseq.nf" linenums="3"
-// Module INCLUDE statements
+// 모듈 INCLUDE 문
 include { FASTQC } from './modules/fastqc.nf'
 include { TRIM_GALORE } from './modules/trim_galore.nf'
 include { HISAT2_ALIGN } from './modules/hisat2_align.nf'
@@ -134,13 +134,13 @@ include { MULTIQC } from './modules/multiqc.nf'
 
 ```groovy title="rnaseq.nf" linenums="9"
 params {
-    // Primary input
+    // 기본 입력
     input_csv: Path = "data/single-end.csv"
 
-    // Reference genome archive
+    // 참조 게놈 아카이브
     hisat2_index_zip: Path = "data/genome_index.tar.gz"
 
-    // Report ID
+    // 보고서 ID
     report_id: String = "all_single-end"
 }
 ```
@@ -179,7 +179,7 @@ params {
 이렇게 하면 다음과 같이 됩니다:
 
 ```groovy title="완성된 MULTIQC 호출" linenums="33"
-    // Comprehensive QC report generation
+    // 종합 QC 보고서 생성
     MULTIQC(
         FASTQC.out.zip.mix(
         FASTQC.out.html,
@@ -195,21 +195,21 @@ params {
 
 ```groovy title="rnaseq.nf" linenums="18"
 workflow {
-    // Create input channel from the contents of a CSV file
+    // CSV 파일의 내용에서 입력 채널 생성
     read_ch = channel.fromPath(params.input_csv)
         .splitCsv(header:true)
         .map { row -> file(row.fastq_path) }
 
-    /// Initial quality control
+    /// 초기 품질 관리
     FASTQC(read_ch)
 
-    // Adapter trimming and post-trimming QC
+    // 어댑터 트리밍 및 트리밍 후 QC
     TRIM_GALORE(read_ch)
 
-    // Alignment to a reference genome
+    // 참조 게놈에 정렬
     HISAT2_ALIGN(TRIM_GALORE.out.trimmed_reads, file (params.hisat2_index_zip))
 
-    // Comprehensive QC report generation
+    // 종합 QC 보고서 생성
     MULTIQC(
         FASTQC.out.zip.mix(
         FASTQC.out.html,
@@ -316,13 +316,13 @@ ENCSR000CPO2,/workspaces/training/nf4-science/rnaseq/data/reads/ENCSR000CPO2_1.f
 
 ```groovy title="rnaseq_pe.nf" linenums="15"
 params {
-    // Primary input
+    // 기본 입력
     input_csv: Path = "data/paired-end.csv"
 
-    // Reference genome archive
+    // 참조 게놈 아카이브
     hisat2_index_zip: Path = "data/genome_index.tar.gz"
 
-    // Report ID
+    // 보고서 ID
     report_id: String = "all_single-end"
 }
 ```
@@ -334,7 +334,7 @@ params {
 따라서 `row -> file(row.fastq_path)`는 `row -> [file(row.fastq_1), file(row.fastq_2)]`가 됩니다
 
 ```groovy title="rnaseq_pe.nf" linenums="19"
-    // Create input channel from the contents of a CSV file
+    // CSV 파일의 내용에서 입력 채널 생성
     read_ch = channel.fromPath(params.input_csv)
         .splitCsv(header:true)
         .map { row -> [file(row.fastq_1), file(row.fastq_2)] }
@@ -418,7 +418,7 @@ include { TRIM_GALORE } from './modules/trim_galore_pe.nf'
 `TRIM_GALORE.out.fastqc_reports,`를 `TRIM_GALORE.out.fastqc_reports_1,`과 `TRIM_GALORE.out.fastqc_reports_2,`로 바꿉니다:
 
 ```groovy title="rnaseq_pe.nf" linenums="33"
-    // Comprehensive QC report generation
+    // 종합 QC 보고서 생성
     MULTIQC(
         FASTQC.out.zip.mix(
         FASTQC.out.html,
@@ -435,13 +435,13 @@ MultiQC에 대해 이야기하는 김에 `report_id` 매개변수 기본값도 `
 
 ```groovy title="rnaseq_pe.nf" linenums="9"
 params {
-    // Primary input
+    // 기본 입력
     input_csv: Path = "data/paired-end.csv"
 
-    // Reference genome archive
+    // 참조 게놈 아카이브
     hisat2_index_zip: Path = "data/genome_index.tar.gz"
 
-    // Report ID
+    // 보고서 ID
     report_id: String = "all_paired-end"
 }
 ```

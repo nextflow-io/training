@@ -16,18 +16,18 @@ La piattaforma è gestita da Github (di proprietà di Microsoft) ed è accessibi
 
 Una volta effettuato l'accesso a GitHub, apra questo link nel browser per aprire l'ambiente di formazione Nextflow: <https://codespaces.new/nextflow-io/training?quickstart=1&ref=master>
 
-In alternativa, può cliccare sul pulsante mostrato di seguito, che viene ripetuto in ogni corso di formazione (tipicamente nella pagina Orientamento).
+In alternativa, potete cliccare sul pulsante mostrato di seguito, che viene ripetuto in ogni corso di formazione (tipicamente nella pagina Orientamento).
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
-Dovrebbe visualizzare una pagina dove può creare un nuovo GitHub Codespace:
+Dovreste visualizzare una pagina dove potete creare un nuovo GitHub Codespace:
 
 ![Create a GitHub Codespace](img/codespaces_create.png)
 
 ### Configurazione
 
 Per l'uso generale, non dovrebbe essere necessario configurare nulla.
-Salvo diversa indicazione nel corso che sta iniziando, può semplicemente cliccare sul pulsante principale per continuare.
+Salvo diversa indicazione nel corso che state iniziando, potete semplicemente cliccare sul pulsante principale per continuare.
 
 Tuttavia, è possibile personalizzare l'ambiente cliccando sul pulsante "Change options".
 
@@ -52,7 +52,7 @@ Tuttavia, è possibile personalizzare l'ambiente cliccando sul pulsante "Change 
 
 ### Tempo di avvio
 
-Aprire un nuovo ambiente GitHub Codespaces per la prima volta può richiedere diversi minuti, perché il sistema deve configurare la Sua macchina virtuale, quindi non si preoccupi se c'è un tempo di attesa.
+Aprire un nuovo ambiente GitHub Codespaces per la prima volta può richiedere diversi minuti, perché il sistema deve configurare la vostra macchina virtuale, quindi non preoccupatevi se c'è un tempo di attesa.
 Tuttavia, non dovrebbe richiedere più di cinque minuti.
 
 ## Navigare nell'interfaccia di formazione
@@ -84,8 +84,8 @@ Clicchi su una sessione per riprenderla.
 
 ![List GitHub Codespace sessions](img/codespaces_list.png)
 
-Se ha salvato l'URL del Suo ambiente GitHub Codespaces precedente, può semplicemente aprirlo nel browser.
-In alternativa, clicchi sullo stesso pulsante che ha usato per crearlo inizialmente:
+Se avete salvato l'URL del vostro ambiente GitHub Codespaces precedente, potete semplicemente aprirlo nel browser.
+In alternativa, cliccate sullo stesso pulsante che avete usato per crearlo inizialmente:
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
@@ -95,7 +95,7 @@ Dovrebbe vedere la sessione precedente, l'opzione predefinita è di riprenderla:
 
 ### Salvare file sulla macchina locale
 
-Per salvare qualsiasi file dal pannello esplora, clicchi con il tasto destro sul file e selezioni `Download`.
+Per salvare qualsiasi file dal pannello esplora, cliccate con il tasto destro sul file e selezionate `Download`.
 
 ### Gestire le quote di GitHub Codespaces
 

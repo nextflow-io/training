@@ -36,7 +36,7 @@ nf-core प्रोजेक्ट एक कमांड (`nf-core modules cre
 ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1"
 #!/usr/bin/env nextflow
 
-// Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
+// cowpy के साथ ASCII art जनरेट करें (https://github.com/jeffbuttars/cowpy)
 process cowpy {
 
     publishDir 'results', mode: 'copy'
@@ -95,7 +95,7 @@ process cowpy {
 === "बाद में"
 
     ```groovy title="core-hello/modules/local/cowpy.nf" linenums="3" hl_lines="2"
-    // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
+    // cowpy के साथ ASCII art जनरेट करें (https://github.com/jeffbuttars/cowpy)
     process COWPY {
     ```
 
@@ -155,7 +155,7 @@ process cowpy {
 === "बाद में"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="2 17"
-    // generate ASCII art of the greetings with cowpy
+    // cowpy के साथ अभिवादनों का ASCII art जनरेट करें
     COWPY(CAT_CAT.out.file_out)
 
     //
@@ -178,7 +178,7 @@ process cowpy {
 === "पहले"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="2 17"
-    // generate ASCII art of the greetings with cowpy
+    // cowpy के साथ अभिवादनों का ASCII art जनरेट करें
     cowpy(CAT_CAT.out.file_out)
 
     //
@@ -308,17 +308,17 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
 === "बाद में"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="2"
-        // generate ASCII art of the greetings with cowpy
+        // cowpy के साथ अभिवादनों का ASCII art generate करें
         COWPY(CAT_CAT.out.file_out, params.character)
     ```
 
 === "पहले"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="1-2 5"
-        // extract the file from the tuple since cowpy doesn't use metadata yet
+        // tuple से file extract करें क्योंकि cowpy अभी metadata का उपयोग नहीं करता
         ch_for_cowpy = CAT_CAT.out.file_out.map{ meta, file -> file }
 
-        // generate ASCII art of the greetings with cowpy
+        // cowpy के साथ अभिवादनों का ASCII art जनरेट करें
         COWPY(ch_for_cowpy, params.character)
     ```
 
@@ -432,7 +432,7 @@ Nextflow रनटाइम पर उन आर्गुमेंट को उ
     ```groovy title="modules/local/cowpy.nf" linenums="1" hl_lines="18 20"
     #!/usr/bin/env nextflow
 
-    // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
+    // cowpy के साथ ASCII art जनरेट करें (https://github.com/jeffbuttars/cowpy)
     process COWPY {
 
         publishDir 'results', mode: 'copy'
@@ -459,7 +459,7 @@ Nextflow रनटाइम पर उन आर्गुमेंट को उ
     ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="13 20"
     #!/usr/bin/env nextflow
 
-    // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
+    // cowpy के साथ ASCII art जनरेट करें (https://github.com/jeffbuttars/cowpy)
     process COWPY {
 
         publishDir 'results', mode: 'copy'
@@ -564,14 +564,14 @@ withName: 'COWPY' {
 === "बाद में"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="39" hl_lines="2"
-        // generate ASCII art of the greetings with cowpy
+        // cowpy के साथ अभिवादनों का ASCII art generate करें
         COWPY(CAT_CAT.out.file_out)
     ```
 
 === "पहले"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="39" hl_lines="2"
-        // generate ASCII art of the greetings with cowpy
+        // cowpy के साथ अभिवादनों का ASCII art generate करें
         COWPY(CAT_CAT.out.file_out, params.character)
     ```
 

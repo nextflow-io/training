@@ -196,7 +196,7 @@ Questo combina:
 
 I profili vengono applicati da sinistra a destra, quindi i profili successivi sovrascrivono quelli precedenti se impostano gli stessi valori.
 
-### Conclusione
+### Takeaway
 
 Le pipeline nf-core sono fornite con profili integrati per container, test e ambienti speciali.
 È possibile combinare più profili per costruire la configurazione necessaria.
@@ -271,7 +271,7 @@ Questo è estremamente utile per:
 - Comprendere quali valori verranno effettivamente utilizzati
 - Verificare come interagiscono più profili
 
-### Conclusione
+### Takeaway
 
 I profili personalizzati consentono di passare tra diversi ambienti di calcolo con un singolo flag da riga di comando.
 Utilizzare `nextflow config` per ispezionare la configurazione risolta prima dell'esecuzione.
@@ -347,7 +347,7 @@ Nella prossima sezione impareremo come prevenire questi tipi di fallimenti.
     Per trovare i nomi dei processi, consultare l'output di esecuzione della pipeline o verificare `.nextflow.log`.
     I nomi dei processi seguono il modello `WORKFLOW:SUBWORKFLOW:PROCESS`.
 
-### Conclusione
+### Takeaway
 
 Le pipeline nf-core utilizzano etichette dei processi per standardizzare l'allocazione delle risorse.
 È possibile sovrascrivere le risorse per etichetta (influisce su più processi) o per nome (influisce su un processo specifico).
@@ -412,7 +412,7 @@ profiles {
     Impostare limiti di risorse troppo bassi può causare il fallimento dei processi o un'esecuzione lenta.
     La pipeline potrebbe dover utilizzare algoritmi meno intensivi in termini di memoria o elaborare i dati in blocchi più piccoli.
 
-### Conclusione
+### Takeaway
 
 Utilizzare `resourceLimits` per eseguire pipeline in ambienti con risorse limitate limitando le richieste di risorse dei processi.
 Profili diversi possono avere limiti diversi appropriati per il loro ambiente.
@@ -423,7 +423,7 @@ Hai completato la formazione principale su Nextflow per Bioimaging!
 
 ---
 
-## Conclusione
+## Takeaway
 
 Ora comprendi come configurare le pipeline Nextflow per diversi ambienti di calcolo.
 

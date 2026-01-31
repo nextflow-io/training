@@ -167,7 +167,7 @@ Haga los siguientes cambios de código en el archivo `nextflow.config`:
     docker.enabled = true
 
     /*
-    * Pipeline parameters
+    * Parámetros del pipeline
     */
     params {
         input = 'data/greetings.csv'
@@ -200,7 +200,7 @@ Haga los siguientes cambios de código en el archivo de flujo de trabajo `hello-
 
     ```groovy title="hello-config.nf" linenums="9" hl_lines="5-7"
     /*
-    * Pipeline parameters
+    * Parámetros del pipeline
     */
     params {
         input: Path
@@ -213,7 +213,7 @@ Haga los siguientes cambios de código en el archivo de flujo de trabajo `hello-
 
     ```groovy title="hello-config.nf" linenums="9" hl_lines="5-7"
     /*
-    * Pipeline parameters
+    * Parámetros del pipeline
     */
     params {
         input: Path = 'data/greetings.csv'
@@ -462,7 +462,7 @@ En esos casos, usar un archivo de parámetros nos permitirá proporcionar valore
 También hace más fácil distribuir conjuntos de parámetros a colaboradores, o como información de soporte para una publicación, por ejemplo.
 Esto hace que su trabajo sea más reproducible por otros.
 
-### Resumen
+### Conclusión
 
 Sabe cómo aprovechar las opciones de configuración clave para gestionar entradas de flujo de trabajo.
 
@@ -496,7 +496,7 @@ Agregue el siguiente código al archivo `nextflow.config`:
 
     ```groovy title="nextflow.config" linenums="9" hl_lines="10-13"
     /*
-    * Pipeline parameters
+    * Parámetros del pipeline
     */
     params {
         input = 'data/greetings.csv'
@@ -505,7 +505,7 @@ Agregue el siguiente código al archivo `nextflow.config`:
     }
 
     /*
-    * Output settings
+    * Configuración de salida
     */
     outputDir = "results/${params.batch}"
     ```
@@ -514,7 +514,7 @@ Agregue el siguiente código al archivo `nextflow.config`:
 
     ```groovy title="nextflow.config" linenums="9"
     /*
-    * Pipeline parameters
+    * Parámetros del pipeline
     */
     params {
         input = 'data/greetings.csv'
@@ -756,7 +756,7 @@ Agregue el siguiente código al archivo `nextflow.config`:
 
     ```groovy title="nextflow.config" linenums="2" hl_lines="5"
     /*
-    * Output settings
+    * Configuración de salida
     */
     outputDir = "results/${params.batch}"
     workflow.output.mode = 'copy'
@@ -766,7 +766,7 @@ Agregue el siguiente código al archivo `nextflow.config`:
 
     ```groovy title="nextflow.config" linenums="12"
     /*
-    * Output settings
+    * Configuración de salida
     */
     outputDir = "results/${params.batch}"
     ```
@@ -876,7 +876,7 @@ La razón principal por la que aún podría querer usar la forma por salida de e
 
 Hay muchas otras opciones que puede personalizar de esta manera, pero esperamos que esto le dé una idea del rango de opciones y cómo utilizarlas efectivamente para adaptarse a sus preferencias.
 
-### Resumen
+### Conclusión
 
 Sabe cómo controlar el nombre y la estructura de los directorios donde se publican sus salidas, así como el modo de publicación de salida del flujo de trabajo.
 
@@ -1001,7 +1001,7 @@ Esto significa que estamos listos para ejecutar con entornos Conda si es necesar
 
     Y como se señaló anteriormente, Nextflow soporta múltiples otras tecnologías de empaquetado de software y contenedores, así que no está limitado a solo esas dos.
 
-### Resumen
+### Conclusión
 
 Sabe cómo configurar qué paquete de software debería usar cada proceso, y cómo cambiar entre tecnologías.
 
@@ -1087,7 +1087,7 @@ Luego, en tiempo de ejecución, Nextflow usará esas configuraciones para genera
 
 Cubriremos esa sintaxis estandarizada en la siguiente sección.
 
-### Resumen
+### Conclusión
 
 Ahora sabe cómo cambiar el executor para usar diferentes tipos de infraestructura de cómputo.
 
@@ -1142,7 +1142,7 @@ Agregue lo siguiente a su archivo `nextflow.config`, antes de la sección de par
 
 ```groovy title="nextflow.config" linenums="4"
 /*
-* Process settings
+* Configuración de procesos
 */
 process {
     memory = 1.GB
@@ -1159,7 +1159,7 @@ Al mismo tiempo, vamos a pretender que el proceso `cowpy` requiere más recursos
 
     ```groovy title="nextflow.config" linenums="4" hl_lines="6-9"
     /*
-    * Process settings
+    * Configuración de procesos
     */
     process {
         memory = 1.GB
@@ -1174,7 +1174,7 @@ Al mismo tiempo, vamos a pretender que el proceso `cowpy` requiere más recursos
 
     ```groovy title="nextflow.config" linenums="4"
     /*
-    * Process settings
+    * Configuración de procesos
     */
     process {
         memory = 1.GB
@@ -1234,7 +1234,7 @@ Sin embargo, si intentara ejecutar el flujo de trabajo con asignaciones de recur
 
     Esas configuraciones compartidas son valiosas tanto para las personas que trabajan allí y por lo tanto pueden simplemente utilizar la configuración de su institución directamente, como un modelo para personas que buscan desarrollar una configuración para su propia infraestructura.
 
-### Resumen
+### Conclusión
 
 Sabe cómo generar un reporte de perfilado para evaluar la utilización de recursos y cómo modificar las asignaciones de recursos para todos los procesos y/o para procesos individuales, así como establecer limitaciones de recursos para ejecutar en HPC.
 
@@ -1262,7 +1262,7 @@ Agregue lo siguiente a su archivo `nextflow.config`, después de la sección de 
 
 ```groovy title="nextflow.config" linenums="24"
 /*
-* Profiles
+* Perfiles
 */
 profiles {
     my_laptop {
@@ -1338,7 +1338,7 @@ Si agregamos un perfil de prueba para nuestro flujo de trabajo, el bloque `profi
 
 ```groovy title="nextflow.config" linenums="24"
 /*
-* Profiles
+* Perfiles
 */
 profiles {
     my_laptop {
@@ -1514,7 +1514,7 @@ nextflow config -profile my_laptop,test
 
 Esto se vuelve especialmente útil para proyectos complejos que involucran múltiples capas de configuración.
 
-### Resumen
+### Conclusión
 
 Sabe cómo usar perfiles para seleccionar una configuración preestablecida en tiempo de ejecución con mínimo esfuerzo.
 Más generalmente, sabe cómo configurar las ejecuciones de su flujo de trabajo para adaptarse a diferentes plataformas de cómputo y mejorar la reproducibilidad de sus análisis.

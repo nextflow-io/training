@@ -154,13 +154,13 @@ Puede ver el código completo del flujo de trabajo a continuación.
 
     workflow {
 
-        // create a channel for inputs from a CSV file
+        // crear un canal para entradas desde un archivo CSV
         greeting_ch = channel.fromPath(params.input_file).splitCsv().flatten()
 
-        // emit a greeting
+        // emitir un saludo
         sayHello(greeting_ch)
 
-        // convert the greeting to uppercase
+        // convertir el saludo a mayúsculas
         convertToUpper(sayHello.out)
     }
     ```

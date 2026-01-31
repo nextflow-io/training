@@ -100,7 +100,7 @@ Currently, हमारा workflow command-line के through कई parameter
     docker.enabled = true
 
     /*
-    * Pipeline parameters
+    * Pipeline पैरामीटर
     */
     params {
         input = 'data/greetings.csv'
@@ -128,7 +128,7 @@ Configuration में, वे value assignments हैं।
 
     ```groovy title="hello-config.nf" linenums="9" hl_lines="5-7"
     /*
-    * Pipeline parameters
+    * Pipeline पैरामीटर
     */
     params {
         input: Path
@@ -141,7 +141,7 @@ Configuration में, वे value assignments हैं।
 
     ```groovy title="hello-config.nf" linenums="9" hl_lines="5-7"
     /*
-    * Pipeline parameters
+    * Pipeline पैरामीटर
     */
     params {
         input: Path = 'data/greetings.csv'
@@ -276,7 +276,7 @@ Nextflow जो path outputs publish करने के लिए use करत
 
     ```groovy title="nextflow.config" linenums="9" hl_lines="10-13"
     /*
-    * Pipeline parameters
+    * Pipeline पैरामीटर
     */
     params {
         input = 'data/greetings.csv'
@@ -285,7 +285,7 @@ Nextflow जो path outputs publish करने के लिए use करत
     }
 
     /*
-    * Output settings
+    * Output सेटिंग्स
     */
     outputDir = "results/${params.batch}"
     ```
@@ -294,7 +294,7 @@ Nextflow जो path outputs publish करने के लिए use करत
 
     ```groovy title="nextflow.config" linenums="9"
     /*
-    * Pipeline parameters
+    * Pipeline पैरामीटर
     */
     params {
         input = 'data/greetings.csv'
@@ -457,7 +457,7 @@ Finally, repetitive code की amount reduce करने की spirit मे�
 
     ```groovy title="nextflow.config" linenums="2" hl_lines="5"
     /*
-    * Output settings
+    * Output सेटिंग्स
     */
     outputDir = "results/${params.batch}"
     workflow.output.mode = 'copy'
@@ -467,7 +467,7 @@ Finally, repetitive code की amount reduce करने की spirit मे�
 
     ```groovy title="nextflow.config" linenums="12"
     /*
-    * Output settings
+    * Output सेटिंग्स
     */
     outputDir = "results/${params.batch}"
     ```
@@ -733,7 +733,7 @@ Profiling show करती है कि हमारी training workflow म�
 
 ```groovy title="nextflow.config" linenums="4"
 /*
-* Process settings
+* Process सेटिंग्स
 */
 process {
     memory = 1.GB

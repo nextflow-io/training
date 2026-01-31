@@ -11,7 +11,7 @@ Durante questo corso di formazione, lavoreremo nella directory `side-quests/`.
 Questa directory contiene tutti i file di codice, i dati di test e i file accessori di cui avrà bisogno.
 
 Si senta libero di esplorare il contenuto di questa directory; il modo più semplice per farlo è utilizzare l'explorer dei file sul lato sinistro dell'area di lavoro di GitHub Codespaces.
-In alternativa, può utilizzare il comando `tree`.
+In alternativa, potete utilizzare il comando `tree`.
 Durante il corso, utilizziamo l'output di `tree` per rappresentare la struttura e il contenuto delle directory in forma leggibile, talvolta con modifiche minori per maggiore chiarezza.
 
 Qui generiamo un indice dei contenuti fino al secondo livello:
@@ -42,10 +42,10 @@ Se esegue questo comando all'interno di `side-quests`, dovrebbe vedere il seguen
 
 !!!tip "Suggerimento"
 
-    Se per qualsiasi motivo dovesse uscire da questa directory, può sempre eseguire questo comando per tornarvi:
+    Se per qualsiasi motivo doveste uscire da questa directory, potete sempre eseguire questo comando per tornarvi:
 
     ```bash
     cd /workspaces/training/side-quests
     ```
 
-Ora, per iniziare il corso, clicchi sulla freccia nell'angolo in basso a destra di questa pagina.
+Ora, per iniziare il corso, cliccate sulla freccia nell'angolo in basso a destra di questa pagina.

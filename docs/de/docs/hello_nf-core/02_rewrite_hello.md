@@ -247,7 +247,7 @@ include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pi
 workflow HELLO {
 
     take:
-    ch_samplesheet // channel: samplesheet read in from --input
+    ch_samplesheet // Channel: Samplesheet eingelesen von --input
     main:
 
     ch_versions = channel.empty()
@@ -265,7 +265,7 @@ workflow HELLO {
 
 
     emit:
-    versions       = ch_versions                 // channel: [ path(versions.yml) ]
+    versions       = ch_versions                 // Channel: [ path(versions.yml) ]
 
 }
 
@@ -358,13 +358,13 @@ Lass uns die Workflow-Datei `hello.nf` öffnen, um den Code zu inspizieren, der 
 #!/usr/bin/env nextflow
 
 /*
-* Pipeline parameters
+* Pipeline-Parameter
 */
 params.greeting = 'greetings.csv'
 params.batch = 'test-batch'
 params.character = 'turkey'
 
-// Include modules
+// Module einbinden
 include { sayHello } from './modules/sayHello.nf'
 include { convertToUpper } from './modules/convertToUpper.nf'
 include { collectGreetings } from './modules/collectGreetings.nf'
@@ -372,21 +372,21 @@ include { cowpy } from './modules/cowpy.nf'
 
 workflow {
 
-  // create a channel for inputs from a CSV file
+  // Einen Channel für Eingaben aus einer CSV-Datei erstellen
   greeting_ch = channel.fromPath(params.greeting)
                       .splitCsv()
                       .map { line -> line[0] }
 
-  // emit a greeting
+  // Eine Begrüßung ausgeben
   sayHello(greeting_ch)
 
-  // convert the greeting to uppercase
+  // Die Begrüßung in Großbuchstaben umwandeln
   convertToUpper(sayHello.out)
 
-  // collect all the greetings into one file
+  // Alle Begrüßungen in einer Datei sammeln
   collectGreetings(convertToUpper.out.collect(), params.batch)
 
-  // generate ASCII art of the greetings with cowpy
+  // ASCII-Kunst der Begrüßungen mit cowpy generieren
   cowpy(collectGreetings.out.outfile, params.character)
 }
 ```
@@ -422,14 +422,14 @@ Ersetze nun die Kanal-Konstruktion durch eine einfache `take`-Anweisung, die erw
 
     ```groovy title="original-hello/hello.nf" linenums="18"
         take:
-        // channel of greetings
+        // Channel für Begrüßungen
         greeting_ch
     ```
 
 === "Vorher"
 
     ```groovy title="original-hello/hello.nf" linenums="18"
-        // create a channel for inputs from a CSV file
+        // Einen Channel für Eingaben aus einer CSV-Datei erstellen
         greeting_ch = channel.fromPath(params.greeting)
                             .splitCsv()
                             .map { line -> line[0] }
@@ -477,32 +477,32 @@ Als Nächstes füge eine `main`-Anweisung vor den restlichen Operationen hinzu, 
     ```groovy title="original-hello/hello.nf" linenums="22" hl_lines="1"
         main:
 
-        // emit a greeting
+        // Eine Begrüßung ausgeben
         sayHello(greeting_ch)
 
-        // convert the greeting to uppercase
+        // Die Begrüßung in Großbuchstaben umwandeln
         convertToUpper(sayHello.out)
 
-        // collect all the greetings into one file
+        // Alle Begrüßungen in einer Datei sammeln
         collectGreetings(convertToUpper.out.collect(), params.batch)
 
-        // generate ASCII art of the greetings with cowpy
+        // ASCII-Kunst der Begrüßungen mit cowpy generieren
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
 === "Vorher"
 
     ```groovy title="original-hello/hello.nf" linenums="21"
-        // emit a greeting
+        // Eine Begrüßung ausgeben
         sayHello(greeting_ch)
 
-        // convert the greeting to uppercase
+        // Die Begrüßung in Großbuchstaben umwandeln
         convertToUpper(sayHello.out)
 
-        // collect all the greetings into one file
+        // Alle Begrüßungen in einer Datei sammeln
         collectGreetings(convertToUpper.out.collect(), params.batch)
 
-        // generate ASCII art of the greetings with cowpy
+        // ASCII-Kunst der Begrüßungen mit cowpy generieren
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
@@ -529,11 +529,11 @@ Wenn du alle Änderungen wie beschrieben vorgenommen hast, sollte dein Workflow 
 /*
 * Pipeline parameters
 */
-// params.greeting = 'greetings.csv'
+// params.greeting = 'greetings.csv' (auskommentiert)
 params.batch = 'test-batch'
 params.character = 'turkey'
 
-// Include modules
+// Module einbinden
 include { sayHello } from './modules/sayHello.nf'
 include { convertToUpper } from './modules/convertToUpper.nf'
 include { collectGreetings } from './modules/collectGreetings.nf'
@@ -542,21 +542,21 @@ include { cowpy } from './modules/cowpy.nf'
 workflow HELLO {
 
     take:
-    // channel of greetings
+    // Channel für Begrüßungen
     greeting_ch
 
     main:
 
-    // emit a greeting
+    // Eine Begrüßung ausgeben
     sayHello(greeting_ch)
 
-    // convert the greeting to uppercase
+    // Die Begrüßung in Großbuchstaben umwandeln
     convertToUpper(sayHello.out)
 
-    // collect all the greetings into one file
+    // Alle Begrüßungen in einer Datei sammeln
     collectGreetings(convertToUpper.out.collect(), params.batch)
 
-    // generate ASCII art of the greetings with cowpy
+    // ASCII-Kunst der Begrüßungen mit cowpy generieren
     cowpy(collectGreetings.out.outfile, params.character)
 
     emit:
@@ -583,22 +583,22 @@ Kopiere den folgenden Code in die Datei `main.nf`.
 ```groovy title="original-hello/main.nf" linenums="1"
 #!/usr/bin/env nextflow
 
-// import the workflow code from the hello.nf file
+// Den Workflow-Code aus der hello.nf-Datei importieren
 include { HELLO } from './hello.nf'
 
-// declare input parameter
+// Eingabeparameter deklarieren
 params.greeting = 'greetings.csv'
 
 workflow {
-  // create a channel for inputs from a CSV file
+  // Einen Channel für Eingaben aus einer CSV-Datei erstellen
   greeting_ch = channel.fromPath(params.greeting)
                       .splitCsv()
                       .map { line -> line[0] }
 
-  // call the imported workflow on the channel of greetings
+  // Den importierten Workflow mit dem Channel der Begrüßungen aufrufen
   HELLO(greeting_ch)
 
-  // view the outputs emitted by the workflow
+  // Die vom Workflow ausgegebenen Ergebnisse anzeigen
   HELLO.out.view { output -> "Output: $output" }
 }
 ```
@@ -688,7 +688,7 @@ include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pi
 workflow HELLO {
 
     take:
-    ch_samplesheet // channel: samplesheet read in from --input
+    ch_samplesheet // Channel: Samplesheet eingelesen von --input
     main:
 
     ch_versions = channel.empty()
@@ -706,7 +706,7 @@ workflow HELLO {
 
 
     emit:
-    versions       = ch_versions                 // channel: [ path(versions.yml) ]
+    versions       = ch_versions                 // Channel: [ path(versions.yml) ]
 
 }
 
@@ -768,7 +768,7 @@ Jetzt richten wir die Modul-Import-Anweisungen ein.
 Das waren die Import-Anweisungen im `original-hello/hello.nf`-Workflow:
 
 ```groovy title="original-hello/hello.nf" linenums="9"
-// Include modules
+// Module einbinden
 include { sayHello } from './modules/sayHello.nf'
 include { convertToUpper } from './modules/convertToUpper.nf'
 include { collectGreetings } from './modules/collectGreetings.nf'
@@ -817,7 +817,7 @@ Da dies im Wesentlichen das ist, was unsere `greetings.csv`-Datei ist, behalten 
 
 ```groovy title="core-hello/workflows/hello.nf" linenums="21"
     take:
-    ch_samplesheet // channel: samplesheet read in from --input
+    ch_samplesheet // Channel: Samplesheet eingelesen von --input
 ```
 
 Die Eingabebehandlung wird oberhalb dieses Workflows erfolgen (nicht in dieser Codedatei).
@@ -831,16 +831,16 @@ Zur Erinnerung: Dies ist der relevante Code im ursprünglichen Workflow, der sic
 ```groovy title="original-hello/hello.nf" linenums="22"
     main:
 
-    // emit a greeting
+    // Eine Begrüßung ausgeben
     sayHello(greeting_ch)
 
-    // convert the greeting to uppercase
+    // Die Begrüßung in Großbuchstaben umwandeln
     convertToUpper(sayHello.out)
 
-    // collect all the greetings into one file
+    // Alle Begrüßungen in einer Datei sammeln
     collectGreetings(convertToUpper.out.collect(), params.batch)
 
-    // generate ASCII art of the greetings with cowpy
+    // ASCII-Kunst der Begrüßungen mit cowpy generieren
     cowpy(collectGreetings.out.outfile, params.character)
 ```
 
@@ -856,22 +856,22 @@ Diese Reihenfolge macht Sinn, weil in einer echten Pipeline die Prozesse Version
     workflow HELLO {
 
         take:
-        ch_samplesheet // channel: samplesheet read in from --input
+        ch_samplesheet // Channel: Samplesheet eingelesen von --input
 
         main:
 
         ch_versions = Channel.empty()
 
-        // emit a greeting
+        // Eine Begrüßung ausgeben
         sayHello(greeting_ch)
 
-        // convert the greeting to uppercase
+        // Die Begrüßung in Großbuchstaben umwandeln
         convertToUpper(sayHello.out)
 
-        // collect all the greetings into one file
+        // Alle Begrüßungen in einer Datei sammeln
         collectGreetings(convertToUpper.out.collect(), params.batch)
 
-        // generate ASCII art of the greetings with cowpy
+        // ASCII-Kunst der Begrüßungen mit cowpy generieren
         cowpy(collectGreetings.out.outfile, params.character)
 
         //
@@ -887,7 +887,7 @@ Diese Reihenfolge macht Sinn, weil in einer echten Pipeline die Prozesse Version
 
 
         emit:
-        versions       = ch_versions                 // channel: [ path(versions.yml) ]
+        versions       = ch_versions                 // Channel: [ path(versions.yml) ]
 
     }
     ```
@@ -898,7 +898,7 @@ Diese Reihenfolge macht Sinn, weil in einer echten Pipeline die Prozesse Version
     workflow HELLO {
 
         take:
-        ch_samplesheet // channel: samplesheet read in from --input
+        ch_samplesheet // Channel: Samplesheet eingelesen von --input
         main:
 
         ch_versions = Channel.empty()
@@ -916,7 +916,7 @@ Diese Reihenfolge macht Sinn, weil in einer echten Pipeline die Prozesse Version
 
 
         emit:
-        versions       = ch_versions                 // channel: [ path(versions.yml) ]
+        versions       = ch_versions                 // Channel: [ path(versions.yml) ]
 
     }
     ```
@@ -928,14 +928,14 @@ Das sieht großartig aus, aber wir müssen noch den Namen des Kanals aktualisier
 === "Nachher"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26"
-        // emit a greeting (updated to use the nf-core convention for samplesheets)
+        // Eine Begrüßung ausgeben (aktualisiert für die nf-core-Konvention für Samplesheets)
         sayHello(ch_samplesheet)
     ```
 
 === "Vorher"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26"
-        // emit a greeting
+        // Eine Begrüßung ausgeben
         sayHello(greeting_ch)
     ```
 
@@ -950,14 +950,14 @@ Schließlich müssen wir den `emit`-Block aktualisieren, um die Deklaration der 
     ```groovy title="core-hello/workflows/hello.nf" linenums="55" hl_lines="2"
         emit:
         cowpy_hellos   = cowpy.out
-        versions       = ch_versions                 // channel: [ path(versions.yml) ]
+        versions       = ch_versions                 // Channel: [ path(versions.yml) ]
     ```
 
 === "Vorher"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="55"
         emit:
-        versions       = ch_versions                 // channel: [ path(versions.yml) ]
+        versions       = ch_versions                 // Channel: [ path(versions.yml) ]
     ```
 
 Damit sind die Änderungen abgeschlossen, die wir am HELLO-Workflow selbst vornehmen müssen.
@@ -1016,7 +1016,7 @@ include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_hell
 workflow CORE_HELLO {
 
     take:
-    samplesheet // channel: samplesheet read in from --input
+    samplesheet // Channel: Samplesheet eingelesen von --input
 
     main:
 
@@ -1144,7 +1144,7 @@ Die gute Nachricht ist, dass die Bedürfnisse unserer Pipeline viel einfacher si
 Zur Erinnerung: So sah die Kanal-Konstruktion aus (wie im Solutions-Verzeichnis zu sehen):
 
 ```groovy title="solutions/composable-hello/main.nf" linenums="10" hl_lines="4"
-    // create a channel for inputs from a CSV file
+    // Einen Channel für Eingaben aus einer CSV-Datei erstellen
     greeting_ch = channel.fromPath(params.greeting)
         .splitCsv()
         .map { line -> line[0] }

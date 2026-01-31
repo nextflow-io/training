@@ -160,13 +160,13 @@ Nimm im workflow-Block die folgende Codeänderung vor:
     workflow {
 
         main:
-        // create a channel for inputs from a CSV file
+        // Einen Channel für Eingaben aus einer CSV-Datei erstellen
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
-        // emit a greeting
+        // Eine Begrüßung ausgeben
         sayHello(greeting_ch)
-        // convert the greeting to uppercase
+        // Die Begrüßung in Großbuchstaben umwandeln
         convertToUpper()
 
         publish:
@@ -180,11 +180,11 @@ Nimm im workflow-Block die folgende Codeänderung vor:
     workflow {
 
         main:
-        // create a channel for inputs from a CSV file
+        // Einen Channel für Eingaben aus einer CSV-Datei erstellen
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
-        // emit a greeting
+        // Eine Begrüßung ausgeben
         sayHello(greeting_ch)
 
         publish:
@@ -206,14 +206,14 @@ Nimm im workflow-Block die folgende Codeänderung vor:
 === "Nachher"
 
     ```groovy title="hello-workflow.nf" linenums="53" hl_lines="2"
-        // convert the greeting to uppercase
+        // Die Begrüßung in Großbuchstaben umwandeln
         convertToUpper(sayHello.out)
     ```
 
 === "Vorher"
 
     ```groovy title="hello-workflow.nf" linenums="53" hl_lines="2"
-        // convert the greeting to uppercase
+        // Die Begrüßung in Großbuchstaben umwandeln
         convertToUpper()
     ```
 
@@ -497,10 +497,10 @@ Nimm im workflow-Block die folgende Codeänderung vor:
 === "Nachher"
 
     ```groovy title="hello-workflow.nf" linenums="75" hl_lines="4 5"
-        // convert the greeting to uppercase
+        // Die Begrüßung in Großbuchstaben umwandeln
         convertToUpper(sayHello.out)
 
-        // collect all the greetings into one file
+        // Alle Begrüßungen in einer Datei sammeln
         collectGreetings(convertToUpper.out)
     }
     ```
@@ -508,7 +508,7 @@ Nimm im workflow-Block die folgende Codeänderung vor:
 === "Vorher"
 
     ```groovy title="hello-workflow.nf" linenums="75"
-        // convert the greeting to uppercase
+        // Die Begrüßung in Großbuchstaben umwandeln
         convertToUpper(sayHello.out)
     }
     ```
@@ -571,7 +571,7 @@ Nimm im workflow-Block die folgende Codeänderung vor:
 === "Nachher"
 
     ```groovy title="hello-workflow.nf" linenums="73" hl_lines="2"
-        // collect all the greetings into one file
+        // Alle Begrüßungen in einer Datei sammeln
         collectGreetings(convertToUpper.out.collect())
     }
     ```
@@ -579,7 +579,7 @@ Nimm im workflow-Block die folgende Codeänderung vor:
 === "Vorher"
 
     ```groovy title="hello-workflow.nf" linenums="73" hl_lines="2"
-        // collect all the greetings into one file
+        // Alle Begrüßungen in einer Datei sammeln
         collectGreetings(convertToUpper.out)
     }
     ```
@@ -591,10 +591,10 @@ Lass uns auch ein paar `view()`-Anweisungen einfügen, um die Zustände des chan
 === "Nachher"
 
     ```groovy title="hello-workflow.nf" linenums="73" hl_lines="4-6"
-        // collect all the greetings into one file
+        // Alle Begrüßungen in einer Datei sammeln
         collectGreetings(convertToUpper.out.collect())
 
-        // optional view statements
+        // Optionale view-Anweisungen
         convertToUpper.out.view { contents -> "Before collect: $contents" }
         convertToUpper.out.collect().view { contents -> "After collect: $contents" }
     }
@@ -603,7 +603,7 @@ Lass uns auch ein paar `view()`-Anweisungen einfügen, um die Zustände des chan
 === "Vorher"
 
     ```groovy title="hello-workflow.nf" linenums="73"
-        // collect all the greetings into one file
+        // Alle Begrüßungen in einer Datei sammeln
         collectGreetings(convertToUpper.out.collect())
     }
     ```
@@ -667,17 +667,17 @@ Bevor du zum nächsten Abschnitt übergehst, empfehlen wir, die `view()`-Anweisu
 === "Nachher"
 
     ```groovy title="hello-workflow.nf" linenums="73"
-        // collect all the greetings into one file
+        // Alle Begrüßungen in einer Datei sammeln
         collectGreetings(convertToUpper.out.collect())
     ```
 
 === "Vorher"
 
     ```groovy title="hello-workflow.nf" linenums="73" hl_lines="4-6"
-        // collect all the greetings into one file
+        // Alle Begrüßungen in einer Datei sammeln
         collectGreetings(convertToUpper.out.collect())
 
-        // optional view statements
+        // Optionale view-Anweisungen
         convertToUpper.out.view { contents -> "Before collect: $contents" }
         convertToUpper.out.collect().view { contents -> "After collect: $contents" }
     ```
@@ -781,7 +781,7 @@ Nimm im Abschnitt für Pipeline-Parameter die folgenden Codeänderungen vor:
 
     ```groovy title="hello-workflow.nf" linenums="55" hl_lines="6"
     /*
-     * Pipeline parameters
+     * Pipeline-Parameter
      */
     params {
         input: Path = 'data/greetings.csv'
@@ -793,7 +793,7 @@ Nimm im Abschnitt für Pipeline-Parameter die folgenden Codeänderungen vor:
 
     ```groovy title="hello-workflow.nf" linenums="55"
     /*
-     * Pipeline parameters
+     * Pipeline-Parameter
      */
     params {
         input: Path = 'data/greetings.csv'
@@ -811,14 +811,14 @@ Nimm im workflow-Block die folgende Codeänderung vor:
 === "Nachher"
 
     ```groovy title="hello-workflow.nf" linenums="74" hl_lines="2"
-        // collect all the greetings into one file
+        // Alle Begrüßungen in einer Datei sammeln
         collectGreetings(convertToUpper.out.collect(), params.batch)
     ```
 
 === "Vorher"
 
     ```groovy title="hello-workflow.nf" linenums="74" hl_lines="2"
-        // collect all the greetings into one file
+        // Alle Begrüßungen in einer Datei sammeln
         collectGreetings(convertToUpper.out.collect())
     ```
 

@@ -83,7 +83,7 @@ nextflow pull nf-core/demo
 
 Nextflow esegue un `pull` del codice della pipeline, cioè scarica il repository completo sul Suo disco locale.
 
-Per essere chiari, può farlo con qualsiasi pipeline Nextflow che sia configurata appropriatamente in GitHub, non solo le pipeline nf-core.
+Per essere chiari, potete farlo con qualsiasi pipeline Nextflow che sia configurata appropriatamente in GitHub, non solo le pipeline nf-core.
 Tuttavia nf-core è la più grande collezione open-source di pipeline Nextflow.
 
 Può ottenere da Nextflow un elenco di quali pipeline ha recuperato in questo modo:
@@ -144,9 +144,9 @@ Ora possiamo più facilmente sbirciare nel codice sorgente secondo necessità.
 
 Ma prima, proviamo ad eseguire la nostra prima pipeline nf-core!
 
-### Conclusione
+### Takeaway
 
-Ora sa come trovare una pipeline tramite il sito web nf-core e recuperare una copia locale del codice sorgente.
+Ora sapete come trovare una pipeline tramite il sito web nf-core e recuperare una copia locale del codice sorgente.
 
 ### Prossimi passi
 
@@ -373,9 +373,9 @@ Per esempio, il file `execution_timeline_*` Le mostra quali processi sono stati 
 
 Questi report sono generati automaticamente per tutte le pipeline nf-core.
 
-### Conclusione
+### Takeaway
 
-Sa come eseguire una pipeline nf-core utilizzando il suo profilo di test integrato e dove trovare i suoi output.
+Sapete come eseguire una pipeline nf-core utilizzando il suo profilo di test integrato e dove trovare i suoi output.
 
 ### Prossimi passi
 
@@ -425,7 +425,7 @@ tree -L 1 pipelines/nf-core/demo
 
 C'è molto in corso là dentro, quindi affronteremo questo passo per passo.
 
-Prima, notiamo che al livello superiore, può trovare un file README con informazioni di riepilogo, così come file accessori che riassumono informazioni sul progetto come licenza, linee guida per i contributi, citazioni e codice di condotta.
+Prima, notiamo che al livello superiore, potete trovare un file README con informazioni di riepilogo, così come file accessori che riassumono informazioni sul progetto come licenza, linee guida per i contributi, citazioni e codice di condotta.
 La documentazione dettagliata della pipeline si trova nella directory `docs`.
 Tutto questo contenuto viene utilizzato per generare le pagine web sul sito web nf-core in modo programmatico, quindi sono sempre aggiornate con il codice.
 
@@ -447,7 +447,7 @@ Questo potrebbe sembrare un po' astratto, quindi diamo un'occhiata a come viene 
 
 !!! note
 
-    Non esamineremo il codice effettivo per _come_ questi componenti modulari sono connessi, perché c'è una certa complessità aggiuntiva associata all'uso dei subworkflow che può essere confusa, e comprendere questo non è necessario in questa fase della formazione.
+    Non esamineremo il codice effettivo per _come_ questi componenti modulari sono connessi, perché c'è una certa complessità aggiuntiva associata all'uso dei subworkflow che può risultare confusa, e comprendere questo non è necessario in questa fase della formazione.
     Per ora, ci concentreremo sull'organizzazione generale e sulla logica.
 
 #### 3.1.1. Panoramica generale
@@ -628,11 +628,10 @@ Questo è utilizzato per vari scopi, inclusa la validazione automatizzata dei pa
 
 Il `schema_input.json` è un file utilizzato per definire la struttura del samplesheet di input.
 Ogni colonna può avere un tipo, pattern, descrizione e testo di aiuto in un formato leggibile dalle macchine.
-Lo schema è utilizzato per vari scopi, inclusa la validazione automatizzata e la fornitura di messaggi di errore utili.
 
-### Conclusione
+### Takeaway
 
-Sa quali sono i componenti principali di una pipeline nf-core e come il codice è organizzato; dove si trovano gli elementi principali di configurazione; ed è consapevole di cosa serve la validazione dell'input.
+Sapete quali sono i componenti principali di una pipeline nf-core e come il codice è organizzato; dove si trovano gli elementi principali di configurazione; e siete consapevoli di cosa serve la validazione dell'input.
 
 ### Prossimi passi
 

@@ -554,32 +554,32 @@ def cat_meta = [id: params.batch]
 === "बाद में"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="7-8"
-        // emit a greeting
+        // एक अभिवादन emit करें
         sayHello(ch_samplesheet)
 
-        // convert the greeting to uppercase
+        // अभिवादन को uppercase में बदलें
         convertToUpper(sayHello.out)
 
         // batch name के साथ ID के रूप में metadata map बनाएं
         def cat_meta = [ id: params.batch ]
 
-        // generate ASCII art of the greetings with cowpy
+        // cowpy के साथ अभिवादनों का ASCII art जनरेट करें
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
 === "पहले"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="7-8"
-        // emit a greeting
+        // एक अभिवादन emit करें
         sayHello(ch_samplesheet)
 
-        // convert the greeting to uppercase
+        // अभिवादन को uppercase में बदलें
         convertToUpper(sayHello.out)
 
-        // collect all the greetings into one file
+        // सभी अभिवादनों को एक फ़ाइल में collect करें
         collectGreetings(convertToUpper.out.collect(), params.batch)
 
-        // generate ASCII art of the greetings with cowpy
+        // cowpy के साथ अभिवादनों का ASCII art जनरेट करें
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
@@ -592,10 +592,10 @@ def cat_meta = [id: params.batch]
 === "बाद में"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="10-11"
-        // emit a greeting
+        // एक अभिवादन emit करें
         sayHello(ch_samplesheet)
 
-        // convert the greeting to uppercase
+        // अभिवादन को uppercase में बदलें
         convertToUpper(sayHello.out)
 
         // batch name के साथ ID के रूप में metadata map बनाएं
@@ -604,23 +604,23 @@ def cat_meta = [id: params.batch]
         // tuple format में metadata और files के साथ एक channel बनाएं
         ch_for_cat = convertToUpper.out.collect().map { files -> tuple(cat_meta, files) }
 
-        // generate ASCII art of the greetings with cowpy
+        // cowpy के साथ अभिवादनों का ASCII art जनरेट करें
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
 === "पहले"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26"
-        // emit a greeting
+        // एक अभिवादन emit करें
         sayHello(ch_samplesheet)
 
-        // convert the greeting to uppercase
+        // अभिवादन को uppercase में बदलें
         convertToUpper(sayHello.out)
 
         // batch name के साथ ID के रूप में metadata map बनाएं
         def cat_meta = [ id: params.batch ]
 
-        // generate ASCII art of the greetings with cowpy
+        // cowpy के साथ अभिवादनों का ASCII art जनरेट करें
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
@@ -638,10 +638,10 @@ def cat_meta = [id: params.batch]
 === "बाद में"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="13-14"
-        // emit a greeting
+        // एक अभिवादन emit करें
         sayHello(ch_samplesheet)
 
-        // convert the greeting to uppercase
+        // अभिवादन को uppercase में बदलें
         convertToUpper(sayHello.out)
 
         // batch name के साथ ID के रूप में metadata map बनाएं
@@ -653,17 +653,17 @@ def cat_meta = [id: params.batch]
         // nf-core cat/cat मॉड्यूल का उपयोग करके फ़ाइलों को concatenate करें
         CAT_CAT(ch_for_cat)
 
-        // generate ASCII art of the greetings with cowpy
+        // cowpy के साथ अभिवादनों का ASCII art जनरेट करें
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
 === "पहले"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26"
-        // emit a greeting
+        // एक अभिवादन emit करें
         sayHello(ch_samplesheet)
 
-        // convert the greeting to uppercase
+        // अभिवादन को uppercase में बदलें
         convertToUpper(sayHello.out)
 
         // batch name के साथ ID के रूप में metadata map बनाएं
@@ -672,7 +672,7 @@ def cat_meta = [id: params.batch]
         // tuple format में metadata और files के साथ एक channel बनाएं
         ch_for_cat = convertToUpper.out.collect().map { files -> tuple(cat_meta, files) }
 
-        // generate ASCII art of the greetings with cowpy
+        // cowpy के साथ अभिवादनों का ASCII art जनरेट करें
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
@@ -688,10 +688,10 @@ def cat_meta = [id: params.batch]
 === "बाद में"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="16-17 20"
-        // emit a greeting
+        // एक अभिवादन emit करें
         sayHello(ch_samplesheet)
 
-        // convert the greeting to uppercase
+        // अभिवादन को uppercase में बदलें
         convertToUpper(sayHello.out)
 
         // batch name के साथ ID के रूप में metadata map बनाएं
@@ -706,17 +706,17 @@ def cat_meta = [id: params.batch]
         // tuple से file को extract करें क्योंकि cowpy अभी तक metadata का उपयोग नहीं करता है
         ch_for_cowpy = CAT_CAT.out.file_out.map{ meta, file -> file }
 
-        // generate ASCII art of the greetings with cowpy
+        // cowpy के साथ अभिवादनों का ASCII art generate करें
         cowpy(ch_for_cowpy, params.character)
     ```
 
 === "पहले"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="17"
-        // emit a greeting
+        // एक अभिवादन emit करें
         sayHello(ch_samplesheet)
 
-        // convert the greeting to uppercase
+        // अभिवादन को uppercase में बदलें
         convertToUpper(sayHello.out)
 
         // batch name के साथ ID के रूप में metadata map बनाएं
@@ -728,7 +728,7 @@ def cat_meta = [id: params.batch]
         // concatenate the greetings
         CAT_CAT(ch_for_cat)
 
-        // generate ASCII art of the greetings with cowpy
+        // cowpy के साथ अभिवादनों का ASCII art जनरेट करें
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 

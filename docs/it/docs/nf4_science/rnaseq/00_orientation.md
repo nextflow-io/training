@@ -11,7 +11,7 @@ Nel corso di questa formazione, lavoreremo nella directory `nf4-science/rnaseq/`
 Questa directory contiene tutti i file di codice, i dati di test e i file accessori necessari.
 
 Si senta libero di esplorare i contenuti di questa directory; il modo più semplice per farlo è utilizzare l'esploratore di file sul lato sinistro dell'ambiente di formazione nell'interfaccia VSCode.
-In alternativa, può utilizzare il comando `tree`.
+In alternativa, potete utilizzare il comando `tree`.
 Nel corso della formazione, utilizziamo l'output di `tree` per rappresentare la struttura e i contenuti delle directory in una forma leggibile, talvolta con modifiche minori per chiarezza.
 
 Qui generiamo un sommario dei contenuti fino al secondo livello:
@@ -83,10 +83,10 @@ tree . -L 3
 
 !!!tip
 
-    Se per qualsiasi motivo si sposta fuori da questa directory, può sempre eseguire questo comando per ritornarvi:
+    Se per qualsiasi motivo vi spostate fuori da questa directory, potete sempre eseguire questo comando per ritornarvi:
 
     ```bash
     cd /workspaces/training/nf4-science/rnaseq
     ```
 
-Ora, per iniziare il corso, clicchi sulla freccia nell'angolo in basso a destra di questa pagina.
+Ora, per iniziare il corso, cliccate sulla freccia nell'angolo in basso a destra di questa pagina.

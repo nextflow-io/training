@@ -253,7 +253,7 @@ workflow HELLO {
     ch_versions = channel.empty()
 
     //
-    // Collate and save software versions
+    // Software versions को collate और save करें
     //
     softwareVersionsToYAML(ch_versions)
         .collectFile(
@@ -364,7 +364,7 @@ params.greeting = 'greetings.csv'
 params.batch = 'test-batch'
 params.character = 'turkey'
 
-// Include modules
+// Modules include करें
 include { sayHello } from './modules/sayHello.nf'
 include { convertToUpper } from './modules/convertToUpper.nf'
 include { collectGreetings } from './modules/collectGreetings.nf'
@@ -372,21 +372,21 @@ include { cowpy } from './modules/cowpy.nf'
 
 workflow {
 
-  // create a channel for inputs from a CSV file
+  // CSV फ़ाइल से इनपुट के लिए एक channel बनाएं
   greeting_ch = channel.fromPath(params.greeting)
                       .splitCsv()
                       .map { line -> line[0] }
 
-  // emit a greeting
+  // एक अभिवादन emit करें
   sayHello(greeting_ch)
 
-  // convert the greeting to uppercase
+  // अभिवादन को uppercase में बदलें
   convertToUpper(sayHello.out)
 
-  // collect all the greetings into one file
+  // सभी अभिवादनों को एक फ़ाइल में collect करें
   collectGreetings(convertToUpper.out.collect(), params.batch)
 
-  // generate ASCII art of the greetings with cowpy
+  // cowpy के साथ अभिवादनों का ASCII art जनरेट करें
   cowpy(collectGreetings.out.outfile, params.character)
 }
 ```
@@ -422,14 +422,14 @@ workflow {
 
     ```groovy title="original-hello/hello.nf" linenums="18"
         take:
-        // channel of greetings
+        // अभिवादनों का channel
         greeting_ch
     ```
 
 === "पहले"
 
     ```groovy title="original-hello/hello.nf" linenums="18"
-        // create a channel for inputs from a CSV file
+        // CSV फ़ाइल से इनपुट के लिए एक channel बनाएं
         greeting_ch = channel.fromPath(params.greeting)
                             .splitCsv()
                             .map { line -> line[0] }
@@ -477,32 +477,32 @@ workflow {
     ```groovy title="original-hello/hello.nf" linenums="22" hl_lines="1"
         main:
 
-        // emit a greeting
+        // एक अभिवादन emit करें
         sayHello(greeting_ch)
 
-        // convert the greeting to uppercase
+        // अभिवादन को uppercase में बदलें
         convertToUpper(sayHello.out)
 
-        // collect all the greetings into one file
+        // सभी अभिवादनों को एक फ़ाइल में collect करें
         collectGreetings(convertToUpper.out.collect(), params.batch)
 
-        // generate ASCII art of the greetings with cowpy
+        // cowpy के साथ अभिवादनों का ASCII art generate करें
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
 === "पहले"
 
     ```groovy title="original-hello/hello.nf" linenums="21"
-        // emit a greeting
+        // एक अभिवादन emit करें
         sayHello(greeting_ch)
 
-        // convert the greeting to uppercase
+        // अभिवादन को uppercase में बदलें
         convertToUpper(sayHello.out)
 
-        // collect all the greetings into one file
+        // सभी अभिवादनों को एक फ़ाइल में collect करें
         collectGreetings(convertToUpper.out.collect(), params.batch)
 
-        // generate ASCII art of the greetings with cowpy
+        // cowpy के साथ अभिवादनों का ASCII art generate करें
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
@@ -529,11 +529,11 @@ workflow {
 /*
 * Pipeline parameters
 */
-// params.greeting = 'greetings.csv'
+// params.greeting = 'greetings.csv' (comment out किया गया)
 params.batch = 'test-batch'
 params.character = 'turkey'
 
-// Include modules
+// Modules include करें
 include { sayHello } from './modules/sayHello.nf'
 include { convertToUpper } from './modules/convertToUpper.nf'
 include { collectGreetings } from './modules/collectGreetings.nf'
@@ -547,16 +547,16 @@ workflow HELLO {
 
     main:
 
-    // emit a greeting
+    // एक अभिवादन emit करें
     sayHello(greeting_ch)
 
-    // convert the greeting to uppercase
+    // अभिवादन को uppercase में बदलें
     convertToUpper(sayHello.out)
 
-    // collect all the greetings into one file
+    // सभी अभिवादनों को एक फ़ाइल में collect करें
     collectGreetings(convertToUpper.out.collect(), params.batch)
 
-    // generate ASCII art of the greetings with cowpy
+    // cowpy के साथ अभिवादनों का ASCII art जनरेट करें
     cowpy(collectGreetings.out.outfile, params.character)
 
     emit:
@@ -583,22 +583,22 @@ touch original-hello/main.nf
 ```groovy title="original-hello/main.nf" linenums="1"
 #!/usr/bin/env nextflow
 
-// import the workflow code from the hello.nf file
+// hello.nf फ़ाइल से workflow code import करें
 include { HELLO } from './hello.nf'
 
-// declare input parameter
+// इनपुट पैरामीटर घोषित करें
 params.greeting = 'greetings.csv'
 
 workflow {
-  // create a channel for inputs from a CSV file
+  // CSV फ़ाइल से इनपुट के लिए एक channel बनाएं
   greeting_ch = channel.fromPath(params.greeting)
                       .splitCsv()
                       .map { line -> line[0] }
 
-  // call the imported workflow on the channel of greetings
+  // अभिवादनों के channel पर imported workflow को call करें
   HELLO(greeting_ch)
 
-  // view the outputs emitted by the workflow
+  // workflow द्वारा emit किए गए outputs देखें
   HELLO.out.view { output -> "Output: $output" }
 }
 ```
@@ -694,7 +694,7 @@ workflow HELLO {
     ch_versions = channel.empty()
 
     //
-    // Collate and save software versions
+    // Software versions को collate और save करें
     //
     softwareVersionsToYAML(ch_versions)
         .collectFile(
@@ -768,7 +768,7 @@ tree core-hello/modules
 ये `original-hello/hello.nf` workflow में import statements थे:
 
 ```groovy title="original-hello/hello.nf" linenums="9"
-// Include modules
+// Modules include करें
 include { sayHello } from './modules/sayHello.nf'
 include { convertToUpper } from './modules/convertToUpper.nf'
 include { collectGreetings } from './modules/collectGreetings.nf'
@@ -831,16 +831,16 @@ nf-core project में samplesheet की अवधारणा के आस
 ```groovy title="original-hello/hello.nf" linenums="22"
     main:
 
-    // emit a greeting
+    // एक अभिवादन emit करें
     sayHello(greeting_ch)
 
-    // convert the greeting to uppercase
+    // अभिवादन को uppercase में बदलें
     convertToUpper(sayHello.out)
 
-    // collect all the greetings into one file
+    // सभी अभिवादनों को एक फ़ाइल में collect करें
     collectGreetings(convertToUpper.out.collect(), params.batch)
 
-    // generate ASCII art of the greetings with cowpy
+    // cowpy के साथ अभिवादनों का ASCII art जनरेट करें
     cowpy(collectGreetings.out.outfile, params.character)
 ```
 
@@ -862,16 +862,16 @@ nf-core project में samplesheet की अवधारणा के आस
 
         ch_versions = Channel.empty()
 
-        // emit a greeting
+        // एक अभिवादन emit करें
         sayHello(greeting_ch)
 
-        // convert the greeting to uppercase
+        // अभिवादन को uppercase में बदलें
         convertToUpper(sayHello.out)
 
-        // collect all the greetings into one file
+        // सभी अभिवादनों को एक फ़ाइल में collect करें
         collectGreetings(convertToUpper.out.collect(), params.batch)
 
-        // generate ASCII art of the greetings with cowpy
+        // cowpy के साथ अभिवादनों का ASCII art generate करें
         cowpy(collectGreetings.out.outfile, params.character)
 
         //
@@ -928,14 +928,14 @@ nf-core project में samplesheet की अवधारणा के आस
 === "बाद में"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26"
-        // emit a greeting (updated to use the nf-core convention for samplesheets)
+        // एक अभिवादन emit करें (nf-core samplesheet convention का उपयोग करने के लिए अपडेट किया गया)
         sayHello(ch_samplesheet)
     ```
 
 === "पहले"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26"
-        // emit a greeting
+        // एक अभिवादन emit करें
         sayHello(greeting_ch)
     ```
 
@@ -1011,7 +1011,7 @@ include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_hell
 */
 
 //
-// WORKFLOW: Run main analysis pipeline depending on type of input
+// WORKFLOW: इनपुट के प्रकार के आधार पर मुख्य analysis pipeline चलाएं
 //
 workflow CORE_HELLO {
 
@@ -1021,7 +1021,7 @@ workflow CORE_HELLO {
     main:
 
     //
-    // WORKFLOW: Run pipeline
+    // WORKFLOW: Pipeline चलाएं
     //
     HELLO (
         samplesheet
@@ -1037,7 +1037,7 @@ workflow {
 
     main:
     //
-    // SUBWORKFLOW: Run initialisation tasks
+    // SUBWORKFLOW: Initialisation tasks चलाएं
     //
     PIPELINE_INITIALISATION (
         params.version,
@@ -1049,13 +1049,13 @@ workflow {
     )
 
     //
-    // WORKFLOW: Run main workflow
+    // WORKFLOW: मुख्य workflow चलाएं
     //
     CORE_HELLO (
         PIPELINE_INITIALISATION.out.samplesheet
     )
     //
-    // SUBWORKFLOW: Run completion tasks
+    // SUBWORKFLOW: Completion tasks चलाएं
     //
     PIPELINE_COMPLETION (
         params.outdir,
@@ -1091,7 +1091,7 @@ nf-core project nested subworkflows का भारी उपयोग कर�
 
 ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="76"
     //
-    // Create channel from input file provided through params.input
+    // params.input के माध्यम से प्रदान की गई इनपुट फ़ाइल से channel बनाएं
     //
 
     channel
@@ -1144,7 +1144,7 @@ nf-core project nested subworkflows का भारी उपयोग कर�
 एक reminder के रूप में, यह channel निर्माण कैसा दिखता था (जैसा कि solutions डायरेक्टरी में देखा गया है):
 
 ```groovy title="solutions/composable-hello/main.nf" linenums="10" hl_lines="4"
-    // create a channel for inputs from a CSV file
+    // CSV फ़ाइल से इनपुट के लिए एक channel बनाएं
     greeting_ch = channel.fromPath(params.greeting)
         .splitCsv()
         .map { line -> line[0] }
@@ -1156,7 +1156,7 @@ nf-core project nested subworkflows का भारी उपयोग कर�
 
     ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="76" hl_lines="5-7"
         //
-        // Create channel from input file provided through params.input
+        // params.input के माध्यम से प्रदान की गई इनपुट फ़ाइल से channel बनाएं
         //
 
         ch_samplesheet = channel.fromPath(params.input)

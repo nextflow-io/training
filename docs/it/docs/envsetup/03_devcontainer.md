@@ -16,7 +16,7 @@ Per utilizzare la configurazione devcontainer locale, avrà bisogno di:
 
 La Sua installazione Docker deve essere in esecuzione prima di tentare di aprire il devcontainer.
 
-Per verificare che Docker buildx sia disponibile, esegua:
+Per verificare che Docker buildx sia disponibile, eseguite:
 
 ```bash
 docker buildx version
@@ -53,7 +53,7 @@ cd training
 
 ### Riaprire nel Container
 
-Se VS Code Le chiede di "Reopen in Container", clicchi su di esso. In alternativa:
+Se VS Code vi chiede di "Reopen in Container", cliccate su di esso. In alternativa:
 
 - Prema F1 (o Ctrl+Shift+P / Cmd+Shift+P su macOS)
 - Digiti "Dev Containers: Reopen in Container"
@@ -87,7 +87,7 @@ L'utilizzo dell'approccio devcontainer offre diversi vantaggi:
 
 ## Verificare il Suo ambiente
 
-Una volta che il devcontainer è in esecuzione, può verificare che tutto sia configurato correttamente eseguendo:
+Una volta che il devcontainer è in esecuzione, potete verificare che tutto sia configurato correttamente eseguendo:
 
 ```bash
 nextflow info

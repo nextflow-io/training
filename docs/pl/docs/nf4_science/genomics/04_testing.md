@@ -1122,24 +1122,24 @@ Jednak prostszym sposobem jest skonfigurowanie bloku `params {}` w pliku `nextfl
 ========================================================================================
 */
 
-// Output directory for workflow outputs
+// Katalog wyjściowy dla wyników workflow
 outputDir = 'results_genomics'
 
 /*
- * Pipeline parameters
+ * Parametry pipeline'u
  */
 
 params {
-    // Primary input (file of input files, one per line)
+    // Główne dane wejściowe (plik z listą plików wejściowych, jeden na linię)
     reads_bam = "${projectDir}/data/sample_bams.txt"
 
-    // Accessory files
+    // Pliki pomocnicze
     reference = "${projectDir}/data/ref/ref.fasta"
     reference_index = "${projectDir}/data/ref/ref.fasta.fai"
     reference_dict = "${projectDir}/data/ref/ref.dict"
     intervals = "${projectDir}/data/ref/intervals.bed"
 
-    // Base name for final output file
+    // Nazwa bazowa dla końcowego pliku wyjściowego
     cohort_name = "family_trio"
 }
 ```

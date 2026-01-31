@@ -129,7 +129,7 @@ Ajoutez la définition de processus suivante au script de workflow, juste en des
 
 ```groovy title="hello-workflow.nf" linenums="20"
 /*
- * Use a text replacement tool to convert the greeting to uppercase
+ * Utilise un outil de remplacement de texte pour convertir la salutation en majuscules
  */
 process convertToUpper {
 
@@ -160,13 +160,13 @@ Dans le bloc workflow, effectuez la modification de code suivante :
     workflow {
 
         main:
-        // create a channel for inputs from a CSV file
+        // créer un canal pour les entrées depuis un fichier CSV
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
-        // emit a greeting
+        // émettre une salutation
         sayHello(greeting_ch)
-        // convert the greeting to uppercase
+        // convertir la salutation en majuscules
         convertToUpper()
 
         publish:
@@ -180,11 +180,11 @@ Dans le bloc workflow, effectuez la modification de code suivante :
     workflow {
 
         main:
-        // create a channel for inputs from a CSV file
+        // créer un canal pour les entrées depuis un fichier CSV
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
-        // emit a greeting
+        // émettre une salutation
         sayHello(greeting_ch)
 
         publish:
@@ -206,14 +206,14 @@ Dans le bloc workflow, effectuez la modification de code suivante :
 === "Après"
 
     ```groovy title="hello-workflow.nf" linenums="53" hl_lines="2"
-        // convert the greeting to uppercase
+        // convertir la salutation en majuscules
         convertToUpper(sayHello.out)
     ```
 
 === "Avant"
 
     ```groovy title="hello-workflow.nf" linenums="53" hl_lines="2"
-        // convert the greeting to uppercase
+        // convertir la salutation en majuscules
         convertToUpper()
     ```
 
@@ -402,7 +402,7 @@ Ajoutez la définition de processus suivante au script de workflow :
 
 ```groovy title="hello-workflow.nf" linenums="37"
 /*
- * Collect uppercase greetings into a single output file
+ * Collecter les salutations en majuscules dans un seul fichier de sortie
  */
 process collectGreetings {
 
@@ -497,10 +497,10 @@ Dans le bloc workflow, effectuez la modification de code suivante :
 === "Après"
 
     ```groovy title="hello-workflow.nf" linenums="75" hl_lines="4 5"
-        // convert the greeting to uppercase
+        // convertir la salutation en majuscules
         convertToUpper(sayHello.out)
 
-        // collect all the greetings into one file
+        // collecter toutes les salutations dans un seul fichier
         collectGreetings(convertToUpper.out)
     }
     ```
@@ -508,7 +508,7 @@ Dans le bloc workflow, effectuez la modification de code suivante :
 === "Avant"
 
     ```groovy title="hello-workflow.nf" linenums="75"
-        // convert the greeting to uppercase
+        // convertir la salutation en majuscules
         convertToUpper(sayHello.out)
     }
     ```
@@ -571,7 +571,7 @@ Dans le bloc workflow, effectuez la modification de code suivante :
 === "Après"
 
     ```groovy title="hello-workflow.nf" linenums="73" hl_lines="2"
-        // collect all the greetings into one file
+        // collecter toutes les salutations dans un seul fichier
         collectGreetings(convertToUpper.out.collect())
     }
     ```
@@ -579,7 +579,7 @@ Dans le bloc workflow, effectuez la modification de code suivante :
 === "Avant"
 
     ```groovy title="hello-workflow.nf" linenums="73" hl_lines="2"
-        // collect all the greetings into one file
+        // collecter toutes les salutations dans un seul fichier
         collectGreetings(convertToUpper.out)
     }
     ```
@@ -591,7 +591,7 @@ Incluons également quelques instructions `view()` pour visualiser les états av
 === "Après"
 
     ```groovy title="hello-workflow.nf" linenums="73" hl_lines="4-6"
-        // collect all the greetings into one file
+        // collecter toutes les salutations dans un seul fichier
         collectGreetings(convertToUpper.out.collect())
 
         // optional view statements
@@ -603,7 +603,7 @@ Incluons également quelques instructions `view()` pour visualiser les états av
 === "Avant"
 
     ```groovy title="hello-workflow.nf" linenums="73"
-        // collect all the greetings into one file
+        // collecter toutes les salutations dans un seul fichier
         collectGreetings(convertToUpper.out.collect())
     }
     ```
@@ -667,14 +667,14 @@ Avant de passer à la section suivante, nous vous recommandons de supprimer les 
 === "Après"
 
     ```groovy title="hello-workflow.nf" linenums="73"
-        // collect all the greetings into one file
+        // collecter toutes les salutations dans un seul fichier
         collectGreetings(convertToUpper.out.collect())
     ```
 
 === "Avant"
 
     ```groovy title="hello-workflow.nf" linenums="73" hl_lines="4-6"
-        // collect all the greetings into one file
+        // collecter toutes les salutations dans un seul fichier
         collectGreetings(convertToUpper.out.collect())
 
         // optional view statements
@@ -781,7 +781,7 @@ Dans la section des paramètres du pipeline, effectuez les modifications de code
 
     ```groovy title="hello-workflow.nf" linenums="55" hl_lines="6"
     /*
-     * Pipeline parameters
+     * Paramètres du pipeline
      */
     params {
         input: Path = 'data/greetings.csv'
@@ -793,7 +793,7 @@ Dans la section des paramètres du pipeline, effectuez les modifications de code
 
     ```groovy title="hello-workflow.nf" linenums="55"
     /*
-     * Pipeline parameters
+     * Paramètres du pipeline
      */
     params {
         input: Path = 'data/greetings.csv'
@@ -811,14 +811,14 @@ Dans le bloc workflow, effectuez la modification de code suivante :
 === "Après"
 
     ```groovy title="hello-workflow.nf" linenums="74" hl_lines="2"
-        // collect all the greetings into one file
+        // collecter toutes les salutations dans un seul fichier
         collectGreetings(convertToUpper.out.collect(), params.batch)
     ```
 
 === "Avant"
 
     ```groovy title="hello-workflow.nf" linenums="74" hl_lines="2"
-        // collect all the greetings into one file
+        // collecter toutes les salutations dans un seul fichier
         collectGreetings(convertToUpper.out.collect())
     ```
 

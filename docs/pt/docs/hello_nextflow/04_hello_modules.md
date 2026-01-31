@@ -138,7 +138,7 @@ Copie toda a definição do processo do arquivo de fluxo de trabalho para o arqu
 #!/usr/bin/env nextflow
 
 /*
- * Use echo to print 'Hello World!' to a file
+ * Usa echo para imprimir 'Hello World!' em um arquivo
  */
 process sayHello {
 
@@ -170,7 +170,7 @@ Vamos inserir isso acima do bloco `params` e preenchê-lo adequadamente.
 === "Depois"
 
     ```groovy title="hello-modules.nf" linenums="44" hl_lines="1 2"
-    // Include modules
+    // Inclui módulos
     include { sayHello } from './modules/sayHello.nf'
 
     /*
@@ -277,7 +277,7 @@ Insira a declaração de importação acima do bloco `params` e preencha-a adequ
 === "Depois"
 
     ```groovy title="hello-modules.nf" linenums="23" hl_lines="3"
-    // Include modules
+    // Inclui módulos
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
 
@@ -293,7 +293,7 @@ Insira a declaração de importação acima do bloco `params` e preencha-a adequ
 === "Antes"
 
     ```groovy title="hello-modules.nf" linenums="23"
-    // Include modules
+    // Inclui módulos
     include { sayHello } from './modules/sayHello.nf'
 
     /*
@@ -381,7 +381,7 @@ Insira a declaração de importação acima do bloco `params` e preencha-a adequ
 === "Depois"
 
     ```groovy title="hello-modules.nf" linenums="3" hl_lines="4"
-    // Include modules
+    // Inclui módulos
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
     include { collectGreetings } from './modules/collectGreetings.nf'
@@ -398,7 +398,7 @@ Insira a declaração de importação acima do bloco `params` e preencha-a adequ
 === "Antes"
 
     ```groovy title="hello-modules.nf" linenums="3"
-    // Include modules
+    // Inclui módulos
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
 

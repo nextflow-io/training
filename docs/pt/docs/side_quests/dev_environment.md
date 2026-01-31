@@ -114,7 +114,7 @@ Como você tem usado o VS Code durante o Hello Nextflow, você já está familia
 
 Você pode arrastar painéis ou ocultá-los (`Ctrl/Cmd+B` para alternar a barra lateral) para personalizar seu layout enquanto trabalhamos nos exemplos.
 
-### Resumo
+### Conclusão
 
 Você tem o VS Code configurado com a extensão Nextflow e entende o layout do espaço de trabalho para desenvolvimento eficiente.
 
@@ -158,7 +158,7 @@ O destaque de sintaxe ajuda você a identificar rapidamente:
 
 Esta organização visual se torna inestimável ao trabalhar com fluxos de trabalho complexos contendo múltiplos processos e fluxos de dados intrincados.
 
-### Resumo
+### Conclusão
 
 Você entende como o destaque de sintaxe do VS Code ajuda você a ler a estrutura do código Nextflow e identificar diferentes elementos da linguagem para um desenvolvimento mais rápido.
 
@@ -216,7 +216,7 @@ Você verá sugestões para:
 
 Isso economiza tempo ao configurar processos e funciona em diferentes escopos de configuração. Por exemplo, tente digitar `docker.` para ver opções de configuração específicas do Docker.
 
-### Resumo
+### Conclusão
 
 Você pode usar o autocompletar inteligente do VS Code para descobrir operações de canal disponíveis, diretivas de processo e opções de configuração sem memorizar sintaxe.
 
@@ -258,7 +258,7 @@ Erros comuns na sintaxe Nextflow incluem:
 
 O language server do Nextflow destaca esses problemas no Painel de Problemas. Você pode verificá-los cedo para evitar erros de sintaxe ao executar um pipeline.
 
-### Resumo
+### Conclusão
 
 Você pode usar a detecção de erros do VS Code e o Painel de Problemas para capturar erros de sintaxe e problemas antes de executar seu fluxo de trabalho, economizando tempo e evitando frustrações.
 
@@ -370,7 +370,7 @@ Este é apenas o workflow de 'entrada', mas você também pode visualizar o DAG 
 
 Para este fluxo de trabalho, você pode usar os nós no DAG para navegar até as definições de processo correspondentes no código. Clique em um nó e ele levará você à definição de processo relevante no editor. Particularmente quando um fluxo de trabalho cresce para um tamanho grande, isso pode realmente ajudá-lo a navegar pelo código e entender como os processos estão conectados.
 
-### Resumo
+### Conclusão
 
 Você pode navegar fluxos de trabalho complexos eficientemente usando ir-para-definição, busca de símbolos, encontrar referências e visualização DAG para entender a estrutura do código e dependências.
 
@@ -427,7 +427,7 @@ Isso mostra todo arquivo que usa diretórios de publicação, ajudando você a:
 - Encontrar exemplos de diretivas específicas
 - Garantir consistência entre módulos
 
-### Resumo
+### Conclusão
 
 Você pode gerenciar projetos complexos de múltiplos arquivos usando navegação rápida de arquivos, editores divididos e pesquisa em todo o projeto para trabalhar eficientemente com fluxos de trabalho e módulos.
 
@@ -517,7 +517,7 @@ Isso é particularmente útil para:
 - Adicionar comentários a múltiplas linhas de uma vez
 - Editar definições de parâmetros similares em múltiplos processos
 
-### Resumo
+### Conclusão
 
 Você pode manter código limpo e legível usando formatação automática, recursos de comentário, dobramento de código, correspondência de colchetes e edição multi-linha para organizar fluxos de trabalho complexos eficientemente.
 
@@ -565,7 +565,7 @@ Enquanto o fluxo de trabalho executa, você verá saída em tempo real no termin
 
 Isso mantém tudo em um só lugar em vez de alternar entre múltiplas aplicações.
 
-### Resumo
+### Conclusão
 
 Você pode integrar o VS Code com controle de versão e execução de fluxo de trabalho para gerenciar todo o seu processo de desenvolvimento a partir de uma única interface.
 

@@ -99,7 +99,7 @@ echo 'Hello World!' > output.txt
     #!/usr/bin/env nextflow
 
     /*
-    * Use echo to print 'Hello World!' to a file
+    * 'Hello World!' को एक फ़ाइल में प्रिंट करने के लिए echo का उपयोग करें
     */
     process sayHello {
 
@@ -115,7 +115,7 @@ echo 'Hello World!' > output.txt
     workflow {
 
         main:
-        // emit a greeting
+        // एक अभिवादन emit करें
         sayHello()
     }
     ```
@@ -135,7 +135,7 @@ Process body में एक script block होना चाहिए जो �
 
 ```groovy title="hello-world.nf" linenums="3"
 /*
-* Use echo to print 'Hello World!' to a file
+* 'Hello World!' को एक फ़ाइल में प्रिंट करने के लिए echo का उपयोग करें
 */
 process sayHello {
 
@@ -183,7 +183,7 @@ Workflow definition keyword `workflow` से शुरू होती है, 
 workflow {
 
     main:
-    // emit a greeting
+    // एक अभिवादन emit करें
     sayHello()
 }
 ```
@@ -409,7 +409,7 @@ Workflow script file `hello-world.nf` में, code की निम्नल�
     workflow {
 
         main:
-        // emit a greeting
+        // एक अभिवादन emit करें
         sayHello()
 
         publish:
@@ -423,7 +423,7 @@ Workflow script file `hello-world.nf` में, code की निम्नल�
     workflow {
 
         main:
-        // emit a greeting
+        // एक अभिवादन emit करें
         sayHello()
     }
     ```
@@ -442,7 +442,7 @@ Workflow script file `hello-world.nf` में, code की निम्नल�
     workflow {
 
         main:
-        // emit a greeting
+        // एक अभिवादन emit करें
         sayHello()
 
         publish:
@@ -462,7 +462,7 @@ Workflow script file `hello-world.nf` में, code की निम्नल�
     workflow {
 
         main:
-        // emit a greeting
+        // एक अभिवादन emit करें
         sayHello()
 
         publish:
@@ -805,14 +805,14 @@ Workflow block में, निम्नलिखित code change करो:
 === "After"
 
     ```groovy title="hello-world.nf" linenums="23" hl_lines="2"
-    // emit a greeting
+    // एक अभिवादन emit करें
     sayHello(params.input)
     ```
 
 === "Before"
 
     ```groovy title="hello-world.nf" linenums="23" hl_lines="2"
-    // emit a greeting
+    // एक अभिवादन emit करें
     sayHello()
     ```
 

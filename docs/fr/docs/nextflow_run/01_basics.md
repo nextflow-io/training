@@ -340,7 +340,7 @@ Vous trouverez le script `1-hello.nf` dans votre répertoire actuel, qui devrait
     }
 
     /*
-    * Pipeline parameters
+    * Paramètres du pipeline
     */
     params {
         input: String
@@ -349,7 +349,7 @@ Vous trouverez le script `1-hello.nf` dans votre répertoire actuel, qui devrait
     workflow {
 
         main:
-        // emit a greeting
+        // émettre une salutation
         sayHello(params.input)
 
         publish:
@@ -419,7 +419,7 @@ Le bloc `main:` est le corps principal du workflow et le bloc `publish:` liste l
 workflow {
 
     main:
-    // emit a greeting
+    // émettre une salutation
     sayHello(params.input)
 
     publish:
@@ -450,7 +450,7 @@ Ici, nous avons formalisé cette déclaration de paramètre en configurant un bl
 
 ```groovy title="1-hello.nf" linenums="20"
 /*
- * Pipeline parameters
+ * Paramètres du pipeline
  */
 params {
     input: String

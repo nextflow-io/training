@@ -169,7 +169,7 @@ La closure `{ row -> return row }` prende un parametro `row` (potrebbe essere qu
 
 Quando l'operatore `.map()` elabora ogni elemento del canale, passa quell'elemento alla closure. Qui, `row` contiene una riga CSV alla volta.
 
-Applichi questa modifica ed esegua il workflow:
+Applicate questa modifica ed eseguite il workflow:
 
 ```bash
 nextflow run main.nf
@@ -215,7 +215,7 @@ La mappa `sample_meta` è una struttura dati chiave-valore (come i dizionari in 
 
 Utilizziamo metodi di manipolazione delle stringhe come `.toLowerCase()` e `.replaceAll()` per pulire i nostri dati, e metodi di conversione di tipo come `.toInteger()` e `.toDouble()` per convertire i dati stringa dal CSV nei tipi numerici appropriati.
 
-Applichi questa modifica ed esegua il workflow:
+Applicate questa modifica ed eseguite il workflow:
 
 ```bash
 nextflow run main.nf
@@ -424,7 +424,7 @@ Produciamo una struttura di canale comprendente una tupla di 2 elementi: la mapp
             .view()
     ```
 
-Applichi questa modifica ed esegua il workflow:
+Applicate questa modifica ed eseguite il workflow:
 
 ```bash
 nextflow run main.nf
@@ -643,7 +643,7 @@ L'operatore spread è particolarmente utile quando è necessario estrarre una si
     - **Usare spread (`*.`)** per accesso semplice alle proprietà: `samples*.id`, `files*.name`
     - **Usare collect** per trasformazioni o logica complessa: `samples.collect { it.id.toUpperCase() }`, `samples.collect { [it.id, it.quality > 40] }`
 
-### Conclusione
+### Takeaway
 
 In questa sezione, ha imparato:
 
@@ -1091,7 +1091,7 @@ Includa il processo nel suo `main.nf` e lo aggiunga al workflow:
     }
     ```
 
-Ora esegua il workflow e controlli i report generati in `results/reports/`. Dovrebbero contenere informazioni di base su ogni campione.
+Ora eseguite il workflow e controllate i report generati in `results/reports/`. Dovrebbero contenere informazioni di base su ogni campione.
 
 <!-- TODO: add the run command -->
 
@@ -1170,7 +1170,7 @@ Corregga questo facendo l'escape delle variabili shell e delle sostituzioni di c
 
 Ora funziona! Il backslash (`\`) dice a Nextflow "non interpretare questo, passalo a Bash."
 
-### Conclusione
+### Takeaway
 
 In questa sezione, ha imparato tecniche di **elaborazione delle stringhe**:
 

@@ -36,7 +36,7 @@ Voici le code actuel du module de processus `cowpy` :
 ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1"
 #!/usr/bin/env nextflow
 
-// Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
+// Générer de l'art ASCII avec cowpy (https://github.com/jeffbuttars/cowpy)
 process cowpy {
 
     publishDir 'results', mode: 'copy'
@@ -95,14 +95,14 @@ Ouvrez le fichier du module `cowpy.nf` (sous `core-hello/modules/local/`) et mod
 === "Après"
 
     ```groovy title="core-hello/modules/local/cowpy.nf" linenums="3" hl_lines="2"
-    // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
+    // Générer de l'art ASCII avec cowpy (https://github.com/jeffbuttars/cowpy)
     process COWPY {
     ```
 
 === "Avant"
 
     ```groovy title="core-hello/modules/local/cowpy.nf" linenums="3" hl_lines="2"
-    // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
+    // Générer de l'art ASCII avec cowpy (https://github.com/jeffbuttars/cowpy)
     process cowpy {
     ```
 
@@ -155,11 +155,11 @@ Maintenant, mettons à jour les deux références au processus dans le bloc work
 === "Après"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="2 17"
-    // generate ASCII art of the greetings with cowpy
+    // générer de l'art ASCII des salutations avec cowpy
     COWPY(CAT_CAT.out.file_out)
 
     //
-    // Collate and save software versions
+    // Rassembler et enregistrer les versions des logiciels
     //
     softwareVersionsToYAML(ch_versions)
         .collectFile(
@@ -178,11 +178,11 @@ Maintenant, mettons à jour les deux références au processus dans le bloc work
 === "Avant"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="2 17"
-    // generate ASCII art of the greetings with cowpy
+    // générer de l'art ASCII des salutations avec cowpy
     cowpy(CAT_CAT.out.file_out)
 
     //
-    // Collate and save software versions
+    // Rassembler et enregistrer les versions des logiciels
     //
     softwareVersionsToYAML(ch_versions)
         .collectFile(
@@ -308,17 +308,17 @@ Ouvrez le fichier workflow `hello.nf` (sous `core-hello/workflows/`) et mettez �
 === "Après"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="2"
-        // generate ASCII art of the greetings with cowpy
+        // générer de l'art ASCII des salutations avec cowpy
         COWPY(CAT_CAT.out.file_out, params.character)
     ```
 
 === "Avant"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="1-2 5"
-        // extract the file from the tuple since cowpy doesn't use metadata yet
+        // extraire le fichier du tuple puisque cowpy n'utilise pas encore les métadonnées
         ch_for_cowpy = CAT_CAT.out.file_out.map{ meta, file -> file }
 
-        // generate ASCII art of the greetings with cowpy
+        // générer de l'art ASCII des salutations avec cowpy
         COWPY(ch_for_cowpy, params.character)
     ```
 
@@ -432,7 +432,7 @@ Ouvrez le fichier du module `cowpy.nf` (sous `core-hello/modules/local/`) et mod
     ```groovy title="modules/local/cowpy.nf" linenums="1" hl_lines="18 20"
     #!/usr/bin/env nextflow
 
-    // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
+    // Générer de l'art ASCII avec cowpy (https://github.com/jeffbuttars/cowpy)
     process COWPY {
 
         publishDir 'results', mode: 'copy'
@@ -459,7 +459,7 @@ Ouvrez le fichier du module `cowpy.nf` (sous `core-hello/modules/local/`) et mod
     ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="13 20"
     #!/usr/bin/env nextflow
 
-    // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
+    // Générer de l'art ASCII avec cowpy (https://github.com/jeffbuttars/cowpy)
     process COWPY {
 
         publishDir 'results', mode: 'copy'
@@ -564,14 +564,14 @@ Ouvrez le fichier workflow `hello.nf` (sous `core-hello/workflows/`) et mettez �
 === "Après"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="39" hl_lines="2"
-        // generate ASCII art of the greetings with cowpy
+        // générer de l'art ASCII des salutations avec cowpy
         COWPY(CAT_CAT.out.file_out)
     ```
 
 === "Avant"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="39" hl_lines="2"
-        // generate ASCII art of the greetings with cowpy
+        // générer de l'art ASCII des salutations avec cowpy
         COWPY(CAT_CAT.out.file_out, params.character)
     ```
 
@@ -915,7 +915,7 @@ Ouvrez le fichier du module `cowpy.nf` (sous `core-hello/modules/local/`) et sup
     ```groovy title="core-hello/modules/local/cowpy.nf (extrait)" linenums="1"
     #!/usr/bin/env nextflow
 
-    // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
+    // Générer de l'art ASCII avec cowpy (https://github.com/jeffbuttars/cowpy)
     process COWPY {
 
         container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
@@ -927,7 +927,7 @@ Ouvrez le fichier du module `cowpy.nf` (sous `core-hello/modules/local/`) et sup
     ```groovy title="core-hello/modules/local/cowpy.nf (extrait)" linenums="1" hl_lines="6"
     #!/usr/bin/env nextflow
 
-    // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
+    // Générer de l'art ASCII avec cowpy (https://github.com/jeffbuttars/cowpy)
     process COWPY {
 
         publishDir 'results', mode: 'copy'

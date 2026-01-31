@@ -554,32 +554,32 @@ Dodajmy te linie po wywołaniu `convertToUpper`, usuwając wywołanie `collectGr
 === "Po"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="7-8"
-        // emit a greeting
+        // wyemituj pozdrowienie
         sayHello(ch_samplesheet)
 
-        // convert the greeting to uppercase
+        // przekształć pozdrowienie na wielkie litery
         convertToUpper(sayHello.out)
 
         // utwórz mapę metadanych z nazwą partii jako ID
         def cat_meta = [ id: params.batch ]
 
-        // generate ASCII art of the greetings with cowpy
+        // wygeneruj grafikę ASCII pozdrowień za pomocą cowpy
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
 === "Przed"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="7-8"
-        // emit a greeting
+        // wyemituj pozdrowienie
         sayHello(ch_samplesheet)
 
-        // convert the greeting to uppercase
+        // przekształć pozdrowienie na wielkie litery
         convertToUpper(sayHello.out)
 
         // zbierz wszystkie powitania w jeden plik
         collectGreetings(convertToUpper.out.collect(), params.batch)
 
-        // generate ASCII art of the greetings with cowpy
+        // wygeneruj grafikę ASCII pozdrowień za pomocą cowpy
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
@@ -592,10 +592,10 @@ Następnie przekształć kanał plików w kanał krotek zawierających metadane 
 === "Po"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="10-11"
-        // emit a greeting
+        // wyemituj pozdrowienie
         sayHello(ch_samplesheet)
 
-        // convert the greeting to uppercase
+        // przekształć pozdrowienie na wielkie litery
         convertToUpper(sayHello.out)
 
         // utwórz mapę metadanych z nazwą partii jako ID
@@ -604,23 +604,23 @@ Następnie przekształć kanał plików w kanał krotek zawierających metadane 
         // utwórz kanał z metadanymi i plikami w formacie krotki
         ch_for_cat = convertToUpper.out.collect().map { files -> tuple(cat_meta, files) }
 
-        // generate ASCII art of the greetings with cowpy
+        // wygeneruj grafikę ASCII pozdrowień za pomocą cowpy
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
 === "Przed"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26"
-        // emit a greeting
+        // wyemituj pozdrowienie
         sayHello(ch_samplesheet)
 
-        // convert the greeting to uppercase
+        // przekształć pozdrowienie na wielkie litery
         convertToUpper(sayHello.out)
 
         // utwórz mapę metadanych z nazwą partii jako ID
         def cat_meta = [ id: params.batch ]
 
-        // generate ASCII art of the greetings with cowpy
+        // wygeneruj grafikę ASCII pozdrowień za pomocą cowpy
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
@@ -638,10 +638,10 @@ Teraz wywołaj `CAT_CAT` na nowo utworzonym kanale:
 === "Po"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="13-14"
-        // emit a greeting
+        // wyemituj pozdrowienie
         sayHello(ch_samplesheet)
 
-        // convert the greeting to uppercase
+        // przekształć pozdrowienie na wielkie litery
         convertToUpper(sayHello.out)
 
         // utwórz mapę metadanych z nazwą partii jako ID
@@ -653,17 +653,17 @@ Teraz wywołaj `CAT_CAT` na nowo utworzonym kanale:
         // połącz pliki używając modułu nf-core cat/cat
         CAT_CAT(ch_for_cat)
 
-        // generate ASCII art of the greetings with cowpy
+        // wygeneruj grafikę ASCII pozdrowień za pomocą cowpy
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
 === "Przed"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26"
-        // emit a greeting
+        // wyemituj pozdrowienie
         sayHello(ch_samplesheet)
 
-        // convert the greeting to uppercase
+        // przekształć pozdrowienie na wielkie litery
         convertToUpper(sayHello.out)
 
         // utwórz mapę metadanych z nazwą partii jako ID
@@ -672,7 +672,7 @@ Teraz wywołaj `CAT_CAT` na nowo utworzonym kanale:
         // utwórz kanał z metadanymi i plikami w formacie krotki
         ch_for_cat = convertToUpper.out.collect().map { files -> tuple(cat_meta, files) }
 
-        // generate ASCII art of the greetings with cowpy
+        // wygeneruj grafikę ASCII pozdrowień za pomocą cowpy
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
@@ -688,10 +688,10 @@ Ponieważ `cowpy` nie akceptuje jeszcze krotek metadanych (naprawimy to w nastę
 === "Po"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="16-17 20"
-        // emit a greeting
+        // wyemituj pozdrowienie
         sayHello(ch_samplesheet)
 
-        // convert the greeting to uppercase
+        // przekształć pozdrowienie na wielkie litery
         convertToUpper(sayHello.out)
 
         // utwórz mapę metadanych z nazwą partii jako ID
@@ -713,10 +713,10 @@ Ponieważ `cowpy` nie akceptuje jeszcze krotek metadanych (naprawimy to w nastę
 === "Przed"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="17"
-        // emit a greeting
+        // wyemituj pozdrowienie
         sayHello(ch_samplesheet)
 
-        // convert the greeting to uppercase
+        // przekształć pozdrowienie na wielkie litery
         convertToUpper(sayHello.out)
 
         // utwórz mapę metadanych z nazwą partii jako ID

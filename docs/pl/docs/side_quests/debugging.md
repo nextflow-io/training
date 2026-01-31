@@ -1378,9 +1378,9 @@ workflow {
       ['sample2', 'file2.txt'],
       ['sample3', 'file3.txt']
     )
-    .view { "Channel content: $it" }  // Debug: Pokaż oryginalną zawartość kanału
-    .map { tuple -> tuple[0] }        // Transform: Wydobądź pierwszy element
-    .view { "After mapping: $it" }    // Debug: Pokaż przekształconą zawartość kanału
+    .view { "Channel content: $it" }  // Debugowanie: Pokaż oryginalną zawartość kanału
+    .map { tuple -> tuple[0] }        // Transformacja: Wydobądź pierwszy element
+    .view { "After mapping: $it" }    // Debugowanie: Pokaż przekształconą zawartość kanału
 
     PROCESS_FILES(input_ch)
 }

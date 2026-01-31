@@ -115,9 +115,9 @@ workflow 블록에서 channel 팩토리 코드를 추가하십시오:
     workflow {
 
         main:
-        // create a channel for inputs
+        // 입력용 channel 생성
         greeting_ch = channel.of('Hello Channels!')
-        // emit a greeting
+        // 인사말을 내보냅니다
         sayHello(params.input)
 
         publish:
@@ -131,7 +131,7 @@ workflow 블록에서 channel 팩토리 코드를 추가하십시오:
     workflow {
 
         main:
-        // emit a greeting
+        // 인사말을 내보냅니다
         sayHello(params.input)
 
         publish:
@@ -153,9 +153,9 @@ workflow 블록에서 다음 코드 변경을 수행하십시오:
     workflow {
 
         main:
-        // create a channel for inputs
+        // 입력용 channel 생성
         greeting_ch = channel.of('Hello Channels!')
-        // emit a greeting
+        // 인사말을 내보냅니다
         sayHello(greeting_ch)
 
         publish:
@@ -169,9 +169,9 @@ workflow 블록에서 다음 코드 변경을 수행하십시오:
     workflow {
 
         main:
-        // create a channel for inputs
+        // 입력용 channel 생성
         greeting_ch = channel.of('Hello Channels!')
-        // emit a greeting
+        // 인사말을 내보냅니다
         sayHello(params.input)
 
         publish:
@@ -231,10 +231,10 @@ workflow 블록에 이 작은 라인을 추가하십시오:
     workflow {
 
         main:
-        // create a channel for inputs
+        // 입력용 channel 생성
         greeting_ch = channel.of('Hello Channels!')
                              .view()
-        // emit a greeting
+        // 인사말을 내보냅니다
         sayHello(greeting_ch)
 
         publish:
@@ -248,9 +248,9 @@ workflow 블록에 이 작은 라인을 추가하십시오:
     workflow {
 
         main:
-        // create a channel for inputs
+        // 입력용 channel 생성
         greeting_ch = channel.of('Hello Channels!')
-        // emit a greeting
+        // 인사말을 내보냅니다
         sayHello(greeting_ch)
 
         publish:
@@ -315,7 +315,7 @@ workflow 블록 전에 다음 코드 변경을 수행하십시오:
 === "수정 후"
 
     ```groovy title="hello-channels.nf" linenums="30" hl_lines="2"
-    // create a channel for inputs
+    // 입력용 channel 생성
     greeting_ch = channel.of('Hello','Bonjour','Holà')
                          .view()
     ```
@@ -323,7 +323,7 @@ workflow 블록 전에 다음 코드 변경을 수행하십시오:
 === "수정 전"
 
     ```groovy title="hello-channels.nf" linenums="30" hl_lines="2"
-    // create a channel for inputs
+    // 입력용 channel 생성
     greeting_ch = channel.of('Hello Channels')
                          .view()
     ```
@@ -662,12 +662,12 @@ Channel을 통해 여러 입력 요소를 공급하는 방법을 알게 되었�
     workflow {
 
         main:
-        // declare an array of input greetings
+        // 입력 인사말 배열 선언
         greetings_array = ['Hello','Bonjour','Holà']
-        // create a channel for inputs
+        // 입력용 channel 생성
         greeting_ch = channel.of('Hello','Bonjour','Holà')
                              .view()
-        // emit a greeting
+        // 인사말을 내보냅니다
         sayHello(greeting_ch)
 
         publish:
@@ -681,10 +681,10 @@ Channel을 통해 여러 입력 요소를 공급하는 방법을 알게 되었�
     workflow {
 
         main:
-        // create a channel for inputs
+        // 입력용 channel 생성
         greeting_ch = channel.of('Hello','Bonjour','Holà')
                              .view()
-        // emit a greeting
+        // 인사말을 내보냅니다
         sayHello(greeting_ch)
 
         publish:
@@ -706,12 +706,12 @@ workflow 블록에서 다음 변경을 수행하십시오:
     workflow {
 
         main:
-        // declare an array of input greetings
+        // 입력 인사말 배열 선언
         greetings_array = ['Hello','Bonjour','Holà']
-        // create a channel for inputs
+        // 입력용 channel 생성
         greeting_ch = channel.of(greetings_array)
                              .view()
-        // emit a greeting
+        // 인사말을 내보냅니다
         sayHello(greeting_ch)
 
         publish:
@@ -725,12 +725,12 @@ workflow 블록에서 다음 변경을 수행하십시오:
     workflow {
 
         main:
-        // declare an array of input greetings
+        // 입력 인사말 배열 선언
         greetings_array = ['Hello','Bonjour','Holà']
-        // create a channel for inputs
+        // 입력용 channel 생성
         greeting_ch = channel.of('Hello','Bonjour','Holà')
                              .view()
-        // emit a greeting
+        // 인사말을 내보냅니다
         sayHello(greeting_ch)
 
         publish:
@@ -811,13 +811,13 @@ workflow 블록에서 다음 코드 변경을 수행하십시오:
     workflow {
 
         main:
-        // declare an array of input greetings
+        // 입력 인사말 배열 선언
         greetings_array = ['Hello','Bonjour','Holà']
-        // create a channel for inputs
+        // 입력용 channel 생성
         greeting_ch = channel.of(greetings_array)
                              .view()
                              .flatten()
-        // emit a greeting
+        // 인사말을 내보냅니다
         sayHello(greeting_ch)
 
         publish:
@@ -831,12 +831,12 @@ workflow 블록에서 다음 코드 변경을 수행하십시오:
     workflow {
 
         main:
-        // declare an array of input greetings
+        // 입력 인사말 배열 선언
         greetings_array = ['Hello','Bonjour','Holà']
-        // create a channel for inputs
+        // 입력용 channel 생성
         greeting_ch = channel.of(greetings_array)
                              .view()
-        // emit a greeting
+        // 인사말을 내보냅니다
         sayHello(greeting_ch)
 
         publish:
@@ -861,14 +861,14 @@ workflow 블록에서 다음 코드 변경을 수행하십시오:
     workflow {
 
         main:
-        // declare an array of input greetings
+        // 입력 인사말 배열 선언
         greetings_array = ['Hello','Bonjour','Holà']
-        // create a channel for inputs
+        // 입력용 channel 생성
         greeting_ch = channel.of(greetings_array)
                              .view { greeting -> "Before flatten: $greeting" }
                              .flatten()
                              .view { greeting -> "After flatten: $greeting" }
-        // emit a greeting
+        // 인사말을 내보냅니다
         sayHello(greeting_ch)
 
         publish:
@@ -882,13 +882,13 @@ workflow 블록에서 다음 코드 변경을 수행하십시오:
     workflow {
 
         main:
-        // declare an array of input greetings
+        // 입력 인사말 배열 선언
         greetings_array = ['Hello','Bonjour','Holà']
-        // create a channel for inputs
+        // 입력용 channel 생성
         greeting_ch = channel.of(greetings_array)
                              .view()
                              .flatten()
-        // emit a greeting
+        // 인사말을 내보냅니다
         sayHello(greeting_ch)
 
         publish:
@@ -996,7 +996,7 @@ Holà,Spanish,789
 
     ```groovy title="hello-channels.nf" linenums="20" hl_lines="5"
     /*
-    * Pipeline parameters
+    * 파이프라인 매개변수
     */
     params {
         input: Path = 'data/greetings.csv'
@@ -1007,7 +1007,7 @@ Holà,Spanish,789
 
     ```groovy title="hello-channels.nf" linenums="20" hl_lines="5"
     /*
-     * Pipeline parameters
+     * 파이프라인 매개변수
      */
     input: String = 'Holà mundo!'
     ```
@@ -1028,12 +1028,12 @@ workflow 블록에서 다음 코드 변경을 수행하십시오:
     workflow {
 
         main:
-        // create a channel for inputs from a CSV file
+        // CSV 파일에서 입력용 channel 생성
         greeting_ch = channel.fromPath(params.input)
                              .view { greeting -> "Before flatten: $greeting" }
                              // .flatten()
                              // .view { greeting -> "After flatten: $greeting" }
-        // emit a greeting
+        // 인사말을 내보냅니다
         sayHello(greeting_ch)
 
         publish:
@@ -1047,14 +1047,14 @@ workflow 블록에서 다음 코드 변경을 수행하십시오:
     workflow {
 
         main:
-        // declare an array of input greetings
+        // 입력 인사말 배열 선언
         greetings_array = ['Hello','Bonjour','Holà']
-        // create a channel for inputs
+        // 입력용 channel 생성
         greeting_ch = channel.of(greetings_array)
                              .view { greeting -> "Before flatten: $greeting" }
                              .flatten()
                              .view { greeting -> "After flatten: $greeting" }
-        // emit a greeting
+        // 인사말을 내보냅니다
         sayHello(greeting_ch)
 
         publish:
@@ -1133,12 +1133,12 @@ workflow 블록에서 `flatten()`을 `splitcsv()`로 교체(주석 해제)하는
     workflow {
 
         main:
-        // create a channel for inputs from a CSV file
+        // CSV 파일에서 입력용 channel 생성
         greeting_ch = channel.fromPath(params.input)
                              .view { csv -> "Before splitCsv: $csv" }
                              .splitCsv()
                              .view { csv -> "After splitCsv: $csv" }
-        // emit a greeting
+        // 인사말을 내보냅니다
         sayHello(greeting_ch)
 
         publish:
@@ -1152,12 +1152,12 @@ workflow 블록에서 `flatten()`을 `splitcsv()`로 교체(주석 해제)하는
     workflow {
 
         main:
-        // create a channel for inputs from a CSV file
+        // CSV 파일에서 입력용 channel 생성
         greeting_ch = channel.fromPath(params.input)
                              .view { greeting -> "Before flatten: $greeting" }
                              // .flatten()
                              // .view { greeting -> "After flatten: $greeting" }
-        // emit a greeting
+        // 인사말을 내보냅니다
         sayHello(greeting_ch)
 
         publish:
@@ -1248,14 +1248,14 @@ workflow 블록에서 다음 코드 변경을 수행하십시오:
     workflow {
 
         main:
-        // create a channel for inputs from a CSV file
+        // CSV 파일에서 입력용 channel 생성
         greeting_ch = channel.fromPath(params.input)
                              .view { csv -> "Before splitCsv: $csv" }
                              .splitCsv()
                              .view { csv -> "After splitCsv: $csv" }
                              .map { item -> item[0] }
                              .view { csv -> "After map: $csv" }
-        // emit a greeting
+        // 인사말을 내보냅니다
         sayHello(greeting_ch)
 
         publish:
@@ -1269,12 +1269,12 @@ workflow 블록에서 다음 코드 변경을 수행하십시오:
     workflow {
 
         main:
-        // create a channel for inputs from a CSV file
+        // CSV 파일에서 입력용 channel 생성
         greeting_ch = channel.fromPath(params.input)
                              .view { csv -> "Before splitCsv: $csv" }
                              .splitCsv()
                              .view { csv -> "After splitCsv: $csv" }
-        // emit a greeting
+        // 인사말을 내보냅니다
         sayHello(greeting_ch)
 
         publish:

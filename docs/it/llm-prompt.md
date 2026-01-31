@@ -22,7 +22,7 @@ For example:
 
 - In prose: "Il canale di input riceve i file..." (translate "channel" to "canale")
 - In code: `channel.fromPath('*.fastq')` (keep "channel" in English)
-- In comments: `// emit a greeting` → `// emette un saluto`
+- In comments: `// emit a greeting` → `// emette un saluto` (already translated in all files)
 
 ## Code Comments
 

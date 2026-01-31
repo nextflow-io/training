@@ -48,7 +48,7 @@ Effectuez les modifications de code suivantes dans le fichier `nextflow.config` 
     docker.enabled = true
 
     /*
-    * Pipeline parameters
+    * Paramètres du pipeline
     */
     params {
         input = 'data/greetings.csv'
@@ -81,7 +81,7 @@ Effectuez la modification de code suivante dans le fichier du workflow `3-main.n
 
     ```groovy title="3-main.nf" linenums="9" hl_lines="6"
     /*
-    * Pipeline parameters
+    * Paramètres du pipeline
     */
     params {
         input: Path
@@ -94,7 +94,7 @@ Effectuez la modification de code suivante dans le fichier du workflow `3-main.n
 
     ```groovy title="3-main.nf" linenums="9" hl_lines="6"
     /*
-    * Pipeline parameters
+    * Paramètres du pipeline
     */
     params {
         input: Path
@@ -386,7 +386,7 @@ Ajoutez le code suivant au fichier `nextflow.config` :
 
     ```groovy title="nextflow.config" linenums="9" hl_lines="10-13"
     /*
-    * Pipeline parameters
+    * Paramètres du pipeline
     */
     params {
         input = 'data/greetings.csv'
@@ -404,7 +404,7 @@ Ajoutez le code suivant au fichier `nextflow.config` :
 
     ```groovy title="nextflow.config" linenums="9"
     /*
-    * Pipeline parameters
+    * Paramètres du pipeline
     */
     params {
         input = 'data/greetings.csv'

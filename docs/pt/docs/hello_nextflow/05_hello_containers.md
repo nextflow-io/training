@@ -392,7 +392,7 @@ exit
 
 Você se encontrará de volta ao seu shell normal.
 
-### Resumo
+### Conclusão
 
 Você sabe como puxar um contêiner e executá-lo como um comando único ou interativamente. Você também sabe como tornar seus dados acessíveis de dentro do seu contêiner, o que permite que você experimente qualquer ferramenta na qual esteja interessado com dados reais sem ter que instalar nenhum software no seu sistema.
 
@@ -436,7 +436,7 @@ Podemos modelar nosso processo `cowpy` nos outros processos que escrevemos anter
 ```groovy title="modules/cowpy.nf" linenums="1"
 #!/usr/bin/env nextflow
 
-// Generate ASCII art with cowpy
+// Gera arte ASCII com cowpy
 process cowpy {
 
     input:
@@ -469,7 +469,7 @@ Insira a declaração de importação acima do bloco de fluxo de trabalho e pree
 === "Depois"
 
     ```groovy title="hello-containers.nf" linenums="3" hl_lines="5"
-    // Include modules
+    // Inclui módulos
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
     include { collectGreetings } from './modules/collectGreetings.nf'
@@ -479,7 +479,7 @@ Insira a declaração de importação acima do bloco de fluxo de trabalho e pree
 === "Antes"
 
     ```groovy title="hello-containers.nf" linenums="3"
-    // Include modules
+    // Inclui módulos
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
     include { collectGreetings } from './modules/collectGreetings.nf'
@@ -500,17 +500,17 @@ No bloco de fluxo de trabalho, faça a seguinte mudança de código:
 
     ```groovy title="hello-containers.nf" linenums="19" hl_lines="12-13"
         main:
-        // create a channel for inputs from a CSV file
+        // cria um canal para entradas de um arquivo CSV
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
-        // emit a greeting
+        // emite uma saudação
         sayHello(greeting_ch)
-        // convert the greeting to uppercase
+        // converte a saudação para maiúsculas
         convertToUpper(sayHello.out)
-        // collect all the greetings into one file
+        // coleta todas as saudações em um arquivo
         collectGreetings(convertToUpper.out.collect(), params.batch)
-        // generate ASCII art of the greetings with cowpy
+        // gera arte ASCII das saudações com cowpy
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
@@ -518,15 +518,15 @@ No bloco de fluxo de trabalho, faça a seguinte mudança de código:
 
     ```groovy title="hello-containers.nf" linenums="19"
         main:
-        // create a channel for inputs from a CSV file
+        // cria um canal para entradas de um arquivo CSV
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
-        // emit a greeting
+        // emite uma saudação
         sayHello(greeting_ch)
-        // convert the greeting to uppercase
+        // converte a saudação para maiúsculas
         convertToUpper(sayHello.out)
-        // collect all the greetings into one file
+        // coleta todas as saudações em um arquivo
         collectGreetings(convertToUpper.out.collect(), params.batch)
     ```
 
@@ -1077,7 +1077,7 @@ Todo o trabalho duro que tivemos que fazer manualmente na primeira seção? O Ne
        ||     ||          i_____;----\.____i""\____\
 ```
 
-### Resumo
+### Conclusão
 
 Você sabe como usar contêineres no Nextflow para executar processos.
 

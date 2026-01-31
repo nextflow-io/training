@@ -554,32 +554,32 @@ Lass uns diese Zeilen nach dem `convertToUpper`-Aufruf hinzufügen und den `coll
 === "Nachher"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="7-8"
-        // emit a greeting
+        // Eine Begrüßung ausgeben
         sayHello(ch_samplesheet)
 
-        // convert the greeting to uppercase
+        // Die Begrüßung in Großbuchstaben umwandeln
         convertToUpper(sayHello.out)
 
         // Metadaten-Map mit Chargennamen als ID erstellen
         def cat_meta = [ id: params.batch ]
 
-        // generate ASCII art of the greetings with cowpy
+        // ASCII-Kunst der Begrüßungen mit cowpy generieren
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
 === "Vorher"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="7-8"
-        // emit a greeting
+        // Eine Begrüßung ausgeben
         sayHello(ch_samplesheet)
 
-        // convert the greeting to uppercase
+        // Die Begrüßung in Großbuchstaben umwandeln
         convertToUpper(sayHello.out)
 
-        // collect all the greetings into one file
+        // Alle Begrüßungen in einer Datei sammeln
         collectGreetings(convertToUpper.out.collect(), params.batch)
 
-        // generate ASCII art of the greetings with cowpy
+        // ASCII-Kunst der Begrüßungen mit cowpy generieren
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
@@ -592,10 +592,10 @@ Als Nächstes transformieren wir den Kanal von Dateien in einen Kanal von Tupeln
 === "Nachher"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="10-11"
-        // emit a greeting
+        // Eine Begrüßung ausgeben
         sayHello(ch_samplesheet)
 
-        // convert the greeting to uppercase
+        // Die Begrüßung in Großbuchstaben umwandeln
         convertToUpper(sayHello.out)
 
         // Metadaten-Map mit Chargennamen als ID erstellen
@@ -604,23 +604,23 @@ Als Nächstes transformieren wir den Kanal von Dateien in einen Kanal von Tupeln
         // Kanal mit Metadaten und Dateien im Tupel-Format erstellen
         ch_for_cat = convertToUpper.out.collect().map { files -> tuple(cat_meta, files) }
 
-        // generate ASCII art of the greetings with cowpy
+        // ASCII-Kunst der Begrüßungen mit cowpy generieren
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
 === "Vorher"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26"
-        // emit a greeting
+        // Eine Begrüßung ausgeben
         sayHello(ch_samplesheet)
 
-        // convert the greeting to uppercase
+        // Die Begrüßung in Großbuchstaben umwandeln
         convertToUpper(sayHello.out)
 
         // Metadaten-Map mit Chargennamen als ID erstellen
         def cat_meta = [ id: params.batch ]
 
-        // generate ASCII art of the greetings with cowpy
+        // ASCII-Kunst der Begrüßungen mit cowpy generieren
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
@@ -638,10 +638,10 @@ Rufe nun `CAT_CAT` auf dem neu erstellten Kanal auf:
 === "Nachher"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="13-14"
-        // emit a greeting
+        // Eine Begrüßung ausgeben
         sayHello(ch_samplesheet)
 
-        // convert the greeting to uppercase
+        // Die Begrüßung in Großbuchstaben umwandeln
         convertToUpper(sayHello.out)
 
         // Metadaten-Map mit Chargennamen als ID erstellen
@@ -653,17 +653,17 @@ Rufe nun `CAT_CAT` auf dem neu erstellten Kanal auf:
         // Dateien mit dem nf-core cat/cat-Modul verketten
         CAT_CAT(ch_for_cat)
 
-        // generate ASCII art of the greetings with cowpy
+        // ASCII-Kunst der Begrüßungen mit cowpy generieren
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
 === "Vorher"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26"
-        // emit a greeting
+        // Eine Begrüßung ausgeben
         sayHello(ch_samplesheet)
 
-        // convert the greeting to uppercase
+        // Die Begrüßung in Großbuchstaben umwandeln
         convertToUpper(sayHello.out)
 
         // Metadaten-Map mit Chargennamen als ID erstellen
@@ -672,7 +672,7 @@ Rufe nun `CAT_CAT` auf dem neu erstellten Kanal auf:
         // Kanal mit Metadaten und Dateien im Tupel-Format erstellen
         ch_for_cat = convertToUpper.out.collect().map { files -> tuple(cat_meta, files) }
 
-        // generate ASCII art of the greetings with cowpy
+        // ASCII-Kunst der Begrüßungen mit cowpy generieren
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
@@ -688,10 +688,10 @@ Da `cowpy` noch keine Metadaten-Tupel akzeptiert (das werden wir im nächsten Te
 === "Nachher"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="16-17 20"
-        // emit a greeting
+        // Eine Begrüßung ausgeben
         sayHello(ch_samplesheet)
 
-        // convert the greeting to uppercase
+        // Die Begrüßung in Großbuchstaben umwandeln
         convertToUpper(sayHello.out)
 
         // Metadaten-Map mit Chargennamen als ID erstellen
@@ -700,23 +700,23 @@ Da `cowpy` noch keine Metadaten-Tupel akzeptiert (das werden wir im nächsten Te
         // Kanal mit Metadaten und Dateien im Tupel-Format erstellen
         ch_for_cat = convertToUpper.out.collect().map { files -> tuple(cat_meta, files) }
 
-        // concatenate the greetings
+        // Die Begrüßungen verketten
         CAT_CAT(ch_for_cat)
 
         // Datei aus dem Tupel extrahieren, da cowpy noch keine Metadaten verwendet
         ch_for_cowpy = CAT_CAT.out.file_out.map{ meta, file -> file }
 
-        // generate ASCII art of the greetings with cowpy
+        // ASCII-Kunst der Begrüßungen mit cowpy generieren
         cowpy(ch_for_cowpy, params.character)
     ```
 
 === "Vorher"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="17"
-        // emit a greeting
+        // Eine Begrüßung ausgeben
         sayHello(ch_samplesheet)
 
-        // convert the greeting to uppercase
+        // Die Begrüßung in Großbuchstaben umwandeln
         convertToUpper(sayHello.out)
 
         // Metadaten-Map mit Chargennamen als ID erstellen
@@ -725,10 +725,10 @@ Da `cowpy` noch keine Metadaten-Tupel akzeptiert (das werden wir im nächsten Te
         // Kanal mit Metadaten und Dateien im Tupel-Format erstellen
         ch_for_cat = convertToUpper.out.collect().map { files -> tuple(cat_meta, files) }
 
-        // concatenate the greetings
+        // Die Begrüßungen verketten
         CAT_CAT(ch_for_cat)
 
-        // generate ASCII art of the greetings with cowpy
+        // ASCII-Kunst der Begrüßungen mit cowpy generieren
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 

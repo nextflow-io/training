@@ -10,8 +10,8 @@ Successivamente, Le mostreremo come utilizzare la creazione di moduli basata su 
 
     Questa sezione presuppone che Lei abbia completato la [Parte 3: Utilizzare un modulo nf-core](./03_use_module.md) e abbia integrato il modulo `CAT_CAT` nel Suo pipeline.
 
-    Se non ha completato la Parte 3 o desidera iniziare da zero per questa parte, può utilizzare la soluzione `core-hello-part3` come punto di partenza.
-    Esegua questi comandi dall'interno della directory `hello-nf-core/`:
+    Se non avete completato la Parte 3 o desiderate iniziare da zero per questa parte, potete utilizzare la soluzione `core-hello-part3` come punto di partenza.
+    Eseguite questi comandi dall'interno della directory `hello-nf-core/`:
 
     ```bash
     cp -r solutions/core-hello-part3 core-hello
@@ -155,7 +155,7 @@ Quindi ora aggiorniamo i due riferimenti al processo nel blocco workflow di `hel
 === "Dopo"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="2 17"
-    // generate ASCII art of the greetings with cowpy
+    // genera arte ASCII dei saluti con cowpy
     COWPY(CAT_CAT.out.file_out)
 
     //
@@ -178,7 +178,7 @@ Quindi ora aggiorniamo i due riferimenti al processo nel blocco workflow di `hel
 === "Prima"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="2 17"
-    // generate ASCII art of the greetings with cowpy
+    // genera arte ASCII dei saluti con cowpy
     cowpy(CAT_CAT.out.file_out)
 
     //
@@ -293,7 +293,7 @@ Torni al file del modulo `cowpy.nf` e lo modifichi per accettare tuple di metada
             path "cowpy-${input_file}"
     ```
 
-Come può vedere, abbiamo modificato sia l'**input principale** che l'**output** in una tupla che segue il pattern `tuple val(meta), path(input_file)` introdotto nella Parte 3 di questa formazione.
+Come potete vedere, abbiamo modificato sia l'**input principale** che l'**output** in una tupla che segue il pattern `tuple val(meta), path(input_file)` introdotto nella Parte 3 di questa formazione.
 Per l'output, abbiamo anche colto questa opportunità per aggiungere `emit: cowpy_output` al fine di dare al canale di output un nome descrittivo.
 
 Ora che abbiamo cambiato ciò che il processo si aspetta, dobbiamo aggiornare ciò che gli forniamo nella chiamata del processo.
@@ -308,7 +308,7 @@ Apra il file del workflow `hello.nf` (sotto `core-hello/workflows/`) e aggiorni 
 === "Dopo"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="2"
-        // generate ASCII art of the greetings with cowpy
+        // genera arte ASCII dei saluti con cowpy
         COWPY(CAT_CAT.out.file_out, params.character)
     ```
 
@@ -318,13 +318,13 @@ Apra il file del workflow `hello.nf` (sotto `core-hello/workflows/`) e aggiorni 
         // extract the file from the tuple since cowpy doesn't use metadata yet
         ch_for_cowpy = CAT_CAT.out.file_out.map{ meta, file -> file }
 
-        // generate ASCII art of the greetings with cowpy
+        // genera arte ASCII dei saluti con cowpy
         COWPY(ch_for_cowpy, params.character)
     ```
 
 Ora chiamiamo `COWPY` su `CAT_CAT.out.file_out` direttamente.
 
-Di conseguenza, non abbiamo più bisogno di costruire il canale `ch_for_cowpy`, quindi quella riga (e la sua riga di commento) può essere eliminata completamente.
+Di conseguenza, non abbiamo più bisogno di costruire il canale `ch_for_cowpy`, quindi quella riga (e la sua riga di commento) può essere rimossa completamente.
 
 #### 1.2.3. Aggiornare il blocco emit nel workflow
 
@@ -405,7 +405,7 @@ Ora, vediamo cos'altro possiamo fare per sfruttare i pattern dei moduli nf-core.
 
 Nel suo stato attuale, il processo `COWPY` si aspetta di ricevere un valore per il parametro `character`.
 Di conseguenza, dobbiamo fornire un valore ogni volta che chiamiamo il processo, anche se saremmo contenti con i valori predefiniti impostati dallo strumento.
-Per `COWPY` questo non è ammissibilmente un grande problema, ma per strumenti con molti parametri opzionali, può diventare piuttosto oneroso.
+Per `COWPY` questo non è certamente un grande problema, ma per strumenti con molti parametri opzionali, può diventare piuttosto oneroso.
 
 Il progetto nf-core raccomanda di utilizzare una funzionalità Nextflow chiamata [`ext.args`](https://www.nextflow.io/docs/latest/reference/process.html#ext) per gestire gli argomenti degli strumenti in modo più conveniente tramite file di configurazione.
 
@@ -564,14 +564,14 @@ Apra il file del workflow `hello.nf` (sotto `core-hello/workflows/`) e aggiorni 
 === "Dopo"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="39" hl_lines="2"
-        // generate ASCII art of the greetings with cowpy
+        // genera arte ASCII dei saluti con cowpy
         COWPY(CAT_CAT.out.file_out)
     ```
 
 === "Prima"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="39" hl_lines="2"
-        // generate ASCII art of the greetings with cowpy
+        // genera arte ASCII dei saluti con cowpy
         COWPY(CAT_CAT.out.file_out, params.character)
     ```
 
@@ -582,7 +582,7 @@ L'interfaccia del modulo è mantenuta minimale, rendendola più portabile, mentr
 
 Verifichiamo che il workflow funzioni ancora come previsto, specificando un personaggio diverso per verificare che la configurazione `ext.args` funzioni.
 
-Esegua questo comando usando `kosh`, una delle opzioni più... enigmatiche:
+Eseguite questo comando usando `kosh`, una delle opzioni più... enigmatiche:
 
 ```bash
 nextflow run . --outdir core-hello-results -profile test,docker --validate_params false --character kosh
@@ -664,7 +664,7 @@ Dovrebbe vedere l'arte ASCII visualizzata con il personaggio `kosh`, confermando
 
 ??? info "(Opzionale) Ispezionare il file di comando"
 
-    Se desidera vedere esattamente come è stata applicata la configurazione, può ispezionare il file `.command.sh`:
+    Se desiderate vedere esattamente come è stata applicata la configurazione, potete ispezionare il file `.command.sh`:
 
     ```bash
     cat work/38/eb29ea*/.command.sh
@@ -683,7 +683,7 @@ Dovrebbe vedere l'arte ASCII visualizzata con il personaggio `kosh`, confermando
 Si prenda un momento per riflettere su ciò che abbiamo ottenuto qui.
 Questo approccio mantiene l'interfaccia del modulo focalizzata sui dati essenziali (file, metadati e eventuali parametri obbligatori per campione), mentre le opzioni che controllano il comportamento dello strumento sono gestite separatamente tramite configurazione.
 
-Questo può sembrare non necessario per uno strumento semplice come `cowpy`, ma può fare una grande differenza per gli strumenti di analisi dati che hanno molti argomenti opzionali.
+Questo può sembrare superfluo per uno strumento semplice come `cowpy`, ma può fare una grande differenza per gli strumenti di analisi dati che hanno molti argomenti opzionali.
 
 Per riassumere i vantaggi di questo approccio:
 
@@ -861,9 +861,9 @@ Dovrebbe vedere il file di output cowpy con la stessa denominazione di prima: `c
     └── UPPER-Holà-output.txt
     ```
 
-Si senta libero di cambiare la configurazione `ext.prefix` in `conf/modules.config` per convincerSi che può cambiare il pattern di denominazione senza dover apportare modifiche al codice del modulo o del workflow.
+Sentitevi liberi di cambiare la configurazione `ext.prefix` in `conf/modules.config` per convincervi che potete cambiare il pattern di denominazione senza dover apportare modifiche al codice del modulo o del workflow.
 
-In alternativa, può anche provare a eseguirlo di nuovo con un parametro `--batch` diverso specificato sulla riga di comando per convincerSi che quella parte sia ancora personalizzabile al volo.
+In alternativa, potete anche provare a eseguirlo di nuovo con un parametro `--batch` diverso specificato sulla riga di comando per convincervi che quella parte sia ancora personalizzabile al volo.
 
 Questo dimostra come `ext.prefix` Le permetta di mantenere la Sua convenzione di denominazione preferita mantenendo flessibile l'interfaccia del modulo.
 
@@ -1036,7 +1036,7 @@ process {
 }
 ```
 
-Questo può sembrare complicato, quindi guardiamo ciascuno dei tre componenti:
+Questo può sembrare complicato, quindi esaminiamo ciascuno dei tre componenti:
 
 - **`path:`** Determina la directory di output in base al nome del processo.
   Il nome completo di un processo contenuto in `task.process` include la gerarchia di import di workflow e moduli (come `CORE_HELLO:HELLO:CAT_CAT`).
@@ -1056,7 +1056,7 @@ Detto questo, potrebbe decidere di voler organizzare i Suoi input in modo divers
 
 #### 1.5.3. Sovrascrivere il valore predefinito
 
-Per sovrascrivere la direttiva `publishDir` predefinita, può semplicemente aggiungere le Sue direttive al file `conf/modules.config`.
+Per sovrascrivere la direttiva `publishDir` predefinita, potete semplicemente aggiungere le vostre direttive al file `conf/modules.config`.
 
 Ad esempio, potrebbe sovrascrivere il valore predefinito per un singolo processo utilizzando il selettore `withName:`, come in questo esempio dove aggiungiamo una direttiva `publishDir` personalizzata per il processo 'COWPY'.
 
@@ -1077,7 +1077,7 @@ process {
 }
 ```
 
-Non effettueremo effettivamente quella modifica, ma si senta libero di sperimentare con questo e vedere quale logica può implementare.
+Non effettueremo effettivamente quella modifica, ma sentitevi liberi di sperimentare con questo e vedere quale logica potete implementare.
 
 Il punto è che questo sistema Le dà il meglio di entrambi i mondi: coerenza per default e la flessibilità di personalizzare la configurazione su richiesta.
 
@@ -1088,9 +1088,9 @@ Per riassumere, ottiene:
 - **Personalizzazione facile**: Sovrascriva il comportamento di pubblicazione nella configurazione, non nel codice del modulo
 - **Moduli portabili**: I moduli non hardcodeano le posizioni di output
 
-Questo completa l'insieme di funzionalità dei moduli nf-core che dovrebbe assolutamente imparare a utilizzare, ma ce ne sono altre che può leggere nelle [specifiche dei moduli nf-core](https://nf-co.re/docs/guidelines/components/modules).
+Questo completa l'insieme di funzionalità dei moduli nf-core che dovreste assolutamente imparare a utilizzare, ma ce ne sono altre che potete leggere nelle [specifiche dei moduli nf-core](https://nf-co.re/docs/guidelines/components/modules).
 
-### Conclusione
+### Takeaway
 
 Ora sa come adattare i moduli locali per seguire le convenzioni nf-core:
 

@@ -62,7 +62,7 @@ Puede abrirlo en el explorador de archivos o desde la línea de comandos usando 
 
 Esto es lo que vamos a intentar replicar con nuestro primer workflow de Nextflow.
 
-### Resumen
+### Conclusión
 
 Ahora sabe cómo ejecutar un comando simple en la terminal que produce algún texto, y opcionalmente, cómo hacer que escriba la salida a un archivo.
 
@@ -296,7 +296,7 @@ En contraste, si mira el directorio `results`, todavía hay solo un conjunto de 
 
 Esto le muestra que los resultados publicados serán sobrescritos por ejecuciones posteriores, mientras que los directorios de tarea bajo `work/` se preservan.
 
-### Resumen
+### Conclusión
 
 Sabe cómo ejecutar un script simple de Nextflow, monitorear su ejecución y encontrar sus salidas.
 
@@ -349,7 +349,7 @@ Encontrará el script `1-hello.nf` en su directorio actual, que debería ser `ne
     workflow {
 
         main:
-        // emit a greeting
+        // emitir un saludo
         sayHello(params.input)
 
         publish:
@@ -419,7 +419,7 @@ El bloque `main:` es el cuerpo principal del workflow y el bloque `publish:` lis
 workflow {
 
     main:
-    // emit a greeting
+    // emitir un saludo
     sayHello(params.input)
 
     publish:
@@ -510,7 +510,7 @@ También verá que cuando un workflow genera múltiples salidas, cada una se lis
 
     Sin embargo, no recomendamos usar esto en ningún trabajo nuevo ya que eventualmente será prohibido en futuras versiones del lenguaje Nextflow.
 
-### Resumen
+### Conclusión
 
 Ahora sabe cómo está estructurado un workflow simple de Nextflow, y cómo los componentes básicos se relacionan con su funcionalidad.
 
@@ -670,7 +670,7 @@ Note que esto no elimina los subdirectorios de dos caracteres (como `eb/` arriba
 
     ¡Usted es responsable de guardar cualquier salida que le importe! Esa es la razón principal por la que preferimos usar el modo `copy` en lugar del modo `symlink` para la directiva `publish`.
 
-### Resumen
+### Conclusión
 
 Sabe cómo relanzar un pipeline sin repetir pasos que ya se ejecutaron de manera idéntica, inspeccionar el registro de ejecución, y usar el comando `nextflow clean` para limpiar directorios de trabajo antiguos.
 

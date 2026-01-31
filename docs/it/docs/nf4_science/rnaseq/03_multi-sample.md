@@ -511,7 +511,7 @@ Il passo logico successivo sarebbe rendere il workflow in grado di accettare ent
 
 ---
 
-### Conclusione
+### Takeaway
 
 Lei sa come adattare un workflow per campione singolo per parallelizzare l'elaborazione di campioni multipli, generare un report QC completo e adattare il workflow per utilizzare dati read paired-end se necessario.
 

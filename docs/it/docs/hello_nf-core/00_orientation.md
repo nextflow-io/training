@@ -2,7 +2,7 @@
 
 ## Avviare un ambiente di formazione
 
-Per utilizzare l'ambiente preconfigurato che forniamo su GitHub Codespaces, clicchi sul pulsante "Open in GitHub Codespaces" qui sotto. Per altre opzioni, consulti [Opzioni di ambiente](../envsetup/index.md).
+Per utilizzare l'ambiente preconfigurato che forniamo su GitHub Codespaces, cliccate sul pulsante "Open in GitHub Codespaces" qui sotto. Per altre opzioni, consultate [Opzioni di ambiente](../envsetup/index.md).
 
 Consigliamo di aprire l'ambiente di formazione in una nuova scheda o finestra del browser (utilizzi il clic destro, ctrl-clic o cmd-clic a seconda della sua dotazione) in modo da poter continuare a leggere mentre l'ambiente si carica.
 Dovrà tenere queste istruzioni aperte in parallelo per seguire il corso.
@@ -14,7 +14,7 @@ Dovrà tenere queste istruzioni aperte in parallelo per seguire il corso.
 Questo ambiente di formazione contiene tutto il software, il codice e i dati necessari per seguire il corso di formazione, quindi non dovrà installare nulla da sola/o.
 
 Il codespace è configurato con un'interfaccia VSCode, che include un esploratore del filesystem, un editor di codice e una shell di terminale.
-Tutte le istruzioni fornite durante il corso (ad es. 'apra il file', 'modifichi il codice' o 'esegua questo comando') si riferiscono a queste tre parti dell'interfaccia VSCode, salvo diversa indicazione.
+Tutte le istruzioni fornite durante il corso (ad es. 'aprite il file', 'modificate il codice' o 'eseguite questo comando') si riferiscono a queste tre parti dell'interfaccia VSCode, salvo diversa indicazione.
 
 Se sta seguendo questo corso autonomamente, La preghiamo di familiarizzare con le [nozioni di base sull'ambiente](../envsetup/01_setup.md) per ulteriori dettagli.
 
@@ -55,7 +55,7 @@ cd hello-nf-core/
 
 !!! tip "Suggerimento"
 
-    Se per qualsiasi motivo si sposta fuori da questa directory (ad es. il suo codespace va in sospensione), può sempre utilizzare il percorso completo per ritornarvi, supponendo che stia eseguendo questo all'interno dell'ambiente di formazione Github Codespaces:
+    Se per qualsiasi motivo vi spostate fuori da questa directory (ad es. il vostro codespace va in sospensione), potete sempre utilizzare il percorso completo per ritornarvi, supponendo che stiate eseguendo questo all'interno dell'ambiente di formazione Github Codespaces:
 
     ```bash
     cd /workspaces/training/hello-nf-core
@@ -66,7 +66,7 @@ Ora diamo un'occhiata al contenuto di questa directory.
 ### Esplorare i materiali forniti
 
 Può esplorare il contenuto di questa directory utilizzando l'esploratore di file sul lato sinistro dello spazio di lavoro di formazione.
-In alternativa, può utilizzare il comando `tree`.
+In alternativa, potete utilizzare il comando `tree`.
 
 Durante il corso, utilizziamo l'output di `tree` per rappresentare la struttura e il contenuto delle directory in forma leggibile, a volte con lievi modifiche per chiarezza.
 
@@ -113,6 +113,6 @@ Pensa di essere pronto/a per iniziare?
 - [ ] Mi sono assicurato/a che il parser di sintassi sia impostato su **v1**
 - [ ] Ho impostato la mia directory di lavoro in modo appropriato
 
-Se può spuntare tutte le caselle, è pronto/a per iniziare.
+Se potete spuntare tutte le caselle, siete pronti per iniziare.
 
-**Per continuare con la Parte 1, clicchi sulla freccia nell'angolo in basso a destra di questa pagina.**
+**Per continuare con la Parte 1, cliccate sulla freccia nell'angolo in basso a destra di questa pagina.**

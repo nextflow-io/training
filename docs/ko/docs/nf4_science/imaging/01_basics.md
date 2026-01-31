@@ -223,7 +223,7 @@ process sayHello {
 
 workflow {
 
-    // emit a greeting
+    // 인사말 출력
     sayHello(params.greeting)
 }
 ```
@@ -295,7 +295,7 @@ workflow 정의는 `workflow` 키워드로 시작하고 선택적 이름이 뒤�
 ```groovy title="hello-world.nf" linenums="22"
 workflow {
 
-    // emit a greeting
+    // 인사말 출력
     sayHello(params.greeting)
 }
 ```

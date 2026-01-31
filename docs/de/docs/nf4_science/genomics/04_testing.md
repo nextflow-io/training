@@ -144,12 +144,12 @@ nextflow_process {
 
         when {
             params {
-                // define parameters here. Example:
+                // Parameter hier definieren. Beispiel:
                 // outdir = "tests/results"
             }
             process {
                 """
-                // define inputs of the process here. Example:
+                // Eingaben des Prozesses hier definieren. Beispiel:
                 // input[0] = file("test-file.txt")
                 """
             }
@@ -221,7 +221,7 @@ Die Vorlagendatei enthält einen Platzhalter, den wir durch eine tatsächliche T
     ```groovy title="modules/samtools/index/tests/main.nf.test" linenums="14"
     process {
         """
-        // define inputs of the process here. Example:
+        // Eingaben des Prozesses hier definieren. Beispiel:
         // input[0] = file("test-file.txt")
         """
     }
@@ -330,7 +330,7 @@ Manchmal ist es nützlich, eine Reihe verschiedener Eingabedateien zu testen, um
 
         when {
             params {
-                // define parameters here
+                // Parameter hier definieren
             }
             process {
                 """
@@ -350,7 +350,7 @@ Manchmal ist es nützlich, eine Reihe verschiedener Eingabedateien zu testen, um
 
         when {
             params {
-                // define parameters here
+                // Parameter hier definieren
             }
             process {
                 """
@@ -457,12 +457,12 @@ nextflow_process {
 
         when {
             params {
-                // define parameters here. Example:
+                // Parameter hier definieren. Beispiel:
                 // outdir = "tests/results"
             }
             process {
                 """
-                // define inputs of the process here. Example:
+                // Eingaben des Prozesses hier definieren. Beispiel:
                 // input[0] = file("test-file.txt")
                 """
             }
@@ -546,7 +546,7 @@ Dann können wir auf die Ausgabe dieses Prozesses im `when`-Block verweisen, wo 
 ```groovy title="modules/gatk/haplotypecaller/tests/main.nf.test" linenums="20"
         when {
             params {
-                // define parameters here
+                // Parameter hier definieren
             }
             process {
                 """
@@ -722,7 +722,7 @@ Füge ähnliche Tests für die Mutter- und Vaterproben hinzu:
 
         when {
             params {
-                // define parameters here
+                // Parameter hier definieren
             }
             process {
                 """
@@ -757,7 +757,7 @@ Füge ähnliche Tests für die Mutter- und Vaterproben hinzu:
 
         when {
             params {
-                // define parameters here
+                // Parameter hier definieren
             }
             process {
                 """
@@ -896,12 +896,12 @@ nextflow_process {
 
         when {
             params {
-                // define parameters here. Example:
+                // Parameter hier definieren. Beispiel:
                 // outdir = "tests/results"
             }
             process {
                 """
-                // define inputs of the process here. Example:
+                // Eingaben des Prozesses hier definieren. Beispiel:
                 // input[0] = file("test-file.txt")
                 """
             }
@@ -952,7 +952,7 @@ Fülle die Eingaben basierend auf den Prozess-Eingabedefinitionen aus und benenn
 
         when {
             params {
-                // define parameters here
+                // Parameter hier definieren
             }
             process {
                 """
@@ -1077,7 +1077,7 @@ nextflow_pipeline {
 
         when {
             params {
-                // define parameters here. Example:
+                // Parameter hier definieren. Beispiel:
                 // outdir = "tests/results"
             }
         }

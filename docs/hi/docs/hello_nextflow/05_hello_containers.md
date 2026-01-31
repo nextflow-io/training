@@ -128,7 +128,7 @@ Nextflow में processes को containers के अंदर run करन
 ```groovy title="modules/cowpy.nf" linenums="1"
 #!/usr/bin/env nextflow
 
-// Generate ASCII art with cowpy
+// cowpy के साथ ASCII art generate करें
 process cowpy {
 
     input:
@@ -151,7 +151,7 @@ process cowpy {
 #### 2.2.1. `hello-containers.nf` में `cowpy` process import करें
 
 ```groovy title="hello-containers.nf" linenums="3" hl_lines="5"
-// Include modules
+// Modules को include करें
 include { sayHello } from './modules/sayHello.nf'
 include { convertToUpper } from './modules/convertToUpper.nf'
 include { collectGreetings } from './modules/collectGreetings.nf'
@@ -162,7 +162,7 @@ include { cowpy } from './modules/cowpy.nf'
 
 ```groovy title="hello-containers.nf" linenums="31" hl_lines="2"
         collectGreetings(convertToUpper.out.collect(), params.batch)
-        // generate ASCII art of the greetings with cowpy
+        // cowpy के साथ अभिवादनों का ASCII art generate करें
         cowpy(collectGreetings.out.outfile, params.character)
 ```
 

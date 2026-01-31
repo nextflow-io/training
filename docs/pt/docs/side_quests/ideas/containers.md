@@ -95,7 +95,7 @@ Depois que terminar de construir, você pode executar a imagem de contêiner que
 docker run --rm quote:latest quote "Margaret Oakley Dayhoff"
 ```
 
-### Resumo
+### Conclusão
 
 Você aprendeu duas maneiras diferentes de obter uma imagem de contêiner para uma ferramenta que deseja usar em seus pipelines Nextflow: usando Seqera Containers e construindo a imagem de contêiner você mesmo.
 
@@ -178,7 +178,7 @@ workflow {
 
 Você pode encontrar uma solução para este exercício em `containers/solutions/hello-containers-4.2.nf`.
 
-### Resumo
+### Conclusão
 
 Você sabe como usar contêineres no Nextflow para executar processos, e como construir alguma lógica de ramificação em seus pipelines!
 

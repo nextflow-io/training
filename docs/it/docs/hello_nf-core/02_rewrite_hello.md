@@ -36,18 +36,18 @@ L'esecuzione di questo comando aprirà un'interfaccia utente testuale (TUI) per 
 
 Questa TUI Le chiederà di fornire informazioni di base sulla Sua pipeline e Le offrirà una scelta di funzionalità da includere o escludere nello scaffold della pipeline.
 
-- Nella schermata di benvenuto, clicchi su **Let's go!**.
-- Nella schermata `Choose pipeline type`, clicchi su **Custom**.
-- Inserisca i dettagli della Sua pipeline come segue (sostituendo `< IL SUO NOME >` con il Suo nome), quindi clicchi su **Next**.
+- Nella schermata di benvenuto, cliccate su **Let's go!**.
+- Nella schermata `Choose pipeline type`, cliccate su **Custom**.
+- Inserite i dettagli della vostra pipeline come segue (sostituendo `< IL VOSTRO NOME >` con il vostro nome), quindi cliccate su **Next**.
 
 ```
 [ ] GitHub organisation: core
 [ ] Workflow name: hello
 [ ] A short description of your pipeline: A basic nf-core style version of Hello Nextflow
-[ ] Name of the main author(s): < IL SUO NOME >
+[ ] Name of the main author(s): < IL VOSTRO NOME >
 ```
 
-- Nella schermata Template features, imposti `Toggle all features` su **off**, quindi **abiliti** selettivamente i seguenti. Controlli le sue selezioni e clicchi su **Continue**.
+- Nella schermata Template features, impostate `Toggle all features` su **off**, quindi **abilitate** selettivamente i seguenti. Controllate le vostre selezioni e cliccate su **Continue**.
 
 ```
 [ ] Add testing profiles
@@ -57,8 +57,8 @@ Questa TUI Le chiederà di fornire informazioni di base sulla Sua pipeline e Le 
 [ ] Add documentation
 ```
 
-- Nella schermata `Final details`, clicchi su **Finish**. Attenda che la pipeline venga creata, quindi clicchi su **Continue**.
-- Nella schermata Create GitHub repository, clicchi su **Finish without creating a repo**. Questo mostrerà le istruzioni per creare successivamente un repository GitHub. Le ignori e clicchi su **Close**.
+- Nella schermata `Final details`, cliccate su **Finish**. Attendete che la pipeline venga creata, quindi cliccate su **Continue**.
+- Nella schermata Create GitHub repository, cliccate su **Finish without creating a repo**. Questo mostrerà le istruzioni per creare successivamente un repository GitHub. Ignoratele e cliccate su **Close**.
 
 Una volta chiusa la TUI, dovrebbe vedere il seguente output nella console.
 
@@ -153,7 +153,7 @@ Ma non si preoccupi se si sente ancora un po' spaesato; percorreremo insieme le 
 
 ### 1.2. Testare che lo scaffold sia funzionale
 
-Che ci creda o no, anche se non ha ancora aggiunto alcun modulo per farle svolgere un lavoro reale, lo scaffold della pipeline può effettivamente essere eseguito utilizzando il profilo test, nello stesso modo in cui abbiamo eseguito la pipeline `nf-core/demo`.
+Che ci crediate o no, anche se non avete ancora aggiunto alcun modulo per farle svolgere un lavoro reale, lo scaffold della pipeline può effettivamente essere eseguito utilizzando il profilo test, nello stesso modo in cui abbiamo eseguito la pipeline `nf-core/demo`.
 
 ```bash
 nextflow run ./core-hello -profile docker,test --outdir core-hello-results
@@ -283,7 +283,7 @@ Rispetto a un workflow Nextflow di base come quello sviluppato in [Hello Nextflo
 - Il contenuto del workflow è posizionato all'interno di un blocco `main:`
 - Gli output sono dichiarati utilizzando la parola chiave `emit:`
 
-Queste sono funzionalità opzionali di Nextflow che rendono il workflow **componibile**, il che significa che può essere chiamato dall'interno di un altro workflow.
+Queste sono funzionalità opzionali di Nextflow che rendono il workflow **componibile**, il che significa che può essere richiamato dall'interno di un altro workflow.
 
 !!! note "Workflow componibili in profondità"
 
@@ -364,7 +364,7 @@ params.greeting = 'greetings.csv'
 params.batch = 'test-batch'
 params.character = 'turkey'
 
-// Include modules
+// Include i moduli
 include { sayHello } from './modules/sayHello.nf'
 include { convertToUpper } from './modules/convertToUpper.nf'
 include { collectGreetings } from './modules/collectGreetings.nf'
@@ -372,26 +372,26 @@ include { cowpy } from './modules/cowpy.nf'
 
 workflow {
 
-  // create a channel for inputs from a CSV file
+  // crea un canale per gli input da un file CSV
   greeting_ch = channel.fromPath(params.greeting)
                       .splitCsv()
                       .map { line -> line[0] }
 
-  // emit a greeting
+  // emette un saluto
   sayHello(greeting_ch)
 
-  // convert the greeting to uppercase
+  // converte il saluto in maiuscolo
   convertToUpper(sayHello.out)
 
-  // collect all the greetings into one file
+  // raccoglie tutti i saluti in un file
   collectGreetings(convertToUpper.out.collect(), params.batch)
 
-  // generate ASCII art of the greetings with cowpy
+  // genera arte ASCII dei saluti con cowpy
   cowpy(collectGreetings.out.outfile, params.character)
 }
 ```
 
-Come può vedere, questo workflow è stato scritto come un semplice workflow senza nome che può essere eseguito autonomamente.
+Come potete vedere, questo workflow è stato scritto come un semplice workflow senza nome che può essere eseguito autonomamente.
 Per renderlo eseguibile dall'interno di un workflow genitore come richiede il template nf-core, dobbiamo renderlo **componibile**.
 
 Esaminiamo le modifiche necessarie una per una.
@@ -429,7 +429,7 @@ Ora, sostituisca la costruzione del canale con una semplice dichiarazione `take`
 === "Prima"
 
     ```groovy title="original-hello/hello.nf" linenums="18"
-        // create a channel for inputs from a CSV file
+        // crea un canale per gli input da un file CSV
         greeting_ch = channel.fromPath(params.greeting)
                             .splitCsv()
                             .map { line -> line[0] }
@@ -477,32 +477,32 @@ Successivamente, aggiunga una dichiarazione `main` prima del resto delle operazi
     ```groovy title="original-hello/hello.nf" linenums="22" hl_lines="1"
         main:
 
-        // emit a greeting
+        // emette un saluto
         sayHello(greeting_ch)
 
-        // convert the greeting to uppercase
+        // converte il saluto in maiuscolo
         convertToUpper(sayHello.out)
 
-        // collect all the greetings into one file
+        // raccoglie tutti i saluti in un file
         collectGreetings(convertToUpper.out.collect(), params.batch)
 
-        // generate ASCII art of the greetings with cowpy
+        // genera arte ASCII dei saluti con cowpy
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
 === "Prima"
 
     ```groovy title="original-hello/hello.nf" linenums="21"
-        // emit a greeting
+        // emette un saluto
         sayHello(greeting_ch)
 
-        // convert the greeting to uppercase
+        // converte il saluto in maiuscolo
         convertToUpper(sayHello.out)
 
-        // collect all the greetings into one file
+        // raccoglie tutti i saluti in un file
         collectGreetings(convertToUpper.out.collect(), params.batch)
 
-        // generate ASCII art of the greetings with cowpy
+        // genera arte ASCII dei saluti con cowpy
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
@@ -533,7 +533,7 @@ Se ha effettuato tutte le modifiche come descritto, il suo workflow dovrebbe ora
 params.batch = 'test-batch'
 params.character = 'turkey'
 
-// Include modules
+// Include i moduli
 include { sayHello } from './modules/sayHello.nf'
 include { convertToUpper } from './modules/convertToUpper.nf'
 include { collectGreetings } from './modules/collectGreetings.nf'
@@ -547,16 +547,16 @@ workflow HELLO {
 
     main:
 
-    // emit a greeting
+    // emette un saluto
     sayHello(greeting_ch)
 
-    // convert the greeting to uppercase
+    // converte il saluto in maiuscolo
     convertToUpper(sayHello.out)
 
-    // collect all the greetings into one file
+    // raccoglie tutti i saluti in un file
     collectGreetings(convertToUpper.out.collect(), params.batch)
 
-    // generate ASCII art of the greetings with cowpy
+    // genera arte ASCII dei saluti con cowpy
     cowpy(collectGreetings.out.outfile, params.character)
 
     emit:
@@ -590,7 +590,7 @@ include { HELLO } from './hello.nf'
 params.greeting = 'greetings.csv'
 
 workflow {
-  // create a channel for inputs from a CSV file
+  // crea un canale per gli input da un file CSV
   greeting_ch = channel.fromPath(params.greeting)
                       .splitCsv()
                       .map { line -> line[0] }
@@ -612,10 +612,10 @@ Ci sono due osservazioni importanti da fare qui:
 
     Nominare il file del workflow entrypoint `main.nf` è una convenzione, non un requisito.
 
-    Se segue questa convenzione, può omettere di specificare il nome del file del workflow nel suo comando `nextflow run`.
+    Se seguite questa convenzione, potete omettere di specificare il nome del file del workflow nel vostro comando `nextflow run`.
     Nextflow cercherà automaticamente un file chiamato `main.nf` nella directory di esecuzione.
 
-    Tuttavia, può nominare il file del workflow entrypoint in altro modo se preferisce.
+    Tuttavia, potete nominare il file del workflow entrypoint in altro modo se preferite.
     In tal caso, si assicuri di specificare il nome del file del workflow nel suo comando `nextflow run`.
 
 ### 2.7. Testare che il workflow venga eseguito
@@ -768,7 +768,7 @@ Ora configuriamo le dichiarazioni di importazione dei moduli.
 Queste erano le dichiarazioni di importazione nel workflow `original-hello/hello.nf`:
 
 ```groovy title="original-hello/hello.nf" linenums="9"
-// Include modules
+// Include i moduli
 include { sayHello } from './modules/sayHello.nf'
 include { convertToUpper } from './modules/convertToUpper.nf'
 include { collectGreetings } from './modules/collectGreetings.nf'
@@ -831,16 +831,16 @@ Come promemoria, questo è il codice pertinente nel workflow originale, che non 
 ```groovy title="original-hello/hello.nf" linenums="22"
     main:
 
-    // emit a greeting
+    // emette un saluto
     sayHello(greeting_ch)
 
-    // convert the greeting to uppercase
+    // converte il saluto in maiuscolo
     convertToUpper(sayHello.out)
 
-    // collect all the greetings into one file
+    // raccoglie tutti i saluti in un file
     collectGreetings(convertToUpper.out.collect(), params.batch)
 
-    // generate ASCII art of the greetings with cowpy
+    // genera arte ASCII dei saluti con cowpy
     cowpy(collectGreetings.out.outfile, params.character)
 ```
 
@@ -862,16 +862,16 @@ Questo ordinamento ha senso perché in una pipeline reale, i processi emetterebb
 
         ch_versions = Channel.empty()
 
-        // emit a greeting
+        // emette un saluto
         sayHello(greeting_ch)
 
-        // convert the greeting to uppercase
+        // converte il saluto in maiuscolo
         convertToUpper(sayHello.out)
 
-        // collect all the greetings into one file
+        // raccoglie tutti i saluti in un file
         collectGreetings(convertToUpper.out.collect(), params.batch)
 
-        // generate ASCII art of the greetings with cowpy
+        // genera arte ASCII dei saluti con cowpy
         cowpy(collectGreetings.out.outfile, params.character)
 
         //
@@ -928,14 +928,14 @@ Sembra ottimo, ma dobbiamo ancora aggiornare il nome del canale che stiamo passa
 === "Dopo"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26"
-        // emit a greeting (updated to use the nf-core convention for samplesheets)
+        // emette un saluto (updated to use the nf-core convention for samplesheets)
         sayHello(ch_samplesheet)
     ```
 
 === "Prima"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26"
-        // emit a greeting
+        // emette un saluto
         sayHello(greeting_ch)
     ```
 
@@ -1070,7 +1070,7 @@ workflow {
 */
 ```
 
-Il progetto nf-core fa un uso intensivo di subworkflow annidati, quindi questa parte può essere un po' confusa al primo approccio.
+Il progetto nf-core fa un uso intensivo di subworkflow annidati, quindi questa parte può risultare un po' confusa al primo approccio.
 
 Ciò che conta qui è che ci sono due workflow definiti:
 
@@ -1144,7 +1144,7 @@ La buona notizia è che le esigenze della nostra pipeline sono molto più sempli
 Come promemoria, ecco come appariva la costruzione del canale (come visto nella directory delle soluzioni):
 
 ```groovy title="solutions/composable-hello/main.nf" linenums="10" hl_lines="4"
-    // create a channel for inputs from a CSV file
+    // crea un canale per gli input da un file CSV
     greeting_ch = channel.fromPath(params.greeting)
         .splitCsv()
         .map { line -> line[0] }
@@ -1342,7 +1342,7 @@ Se ha effettuato tutte le modifiche correttamente, dovrebbe essere eseguita fino
     -[core/hello] Pipeline completed successfully-
     ```
 
-Come può vedere, questo ha prodotto il tipico riepilogo nf-core all'inizio grazie al subworkflow di inizializzazione, e le righe per ogni modulo ora mostrano i nomi completi PIPELINE:WORKFLOW:module.
+Come potete vedere, questo ha prodotto il tipico riepilogo nf-core all'inizio grazie al subworkflow di inizializzazione, e le righe per ogni modulo ora mostrano i nomi completi PIPELINE:WORKFLOW:module.
 
 ### 4.5. Trovare gli output della pipeline
 

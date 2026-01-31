@@ -95,7 +95,7 @@ nf-test init
 
 Ele também cria um diretório `tests` contendo um esboço de arquivo de configuração.
 
-### Resumo
+### Conclusão
 
 Agora estamos prontos para começar a escrever testes para nosso pipeline de genômica.
 
@@ -406,7 +406,7 @@ Observe o aviso, referindo-se ao efeito do parâmetro `--update-snapshot`.
     Em geral, é importante manter os testes unitários o mais leves possível usando os menores pedaços de dados necessários e suficientes para avaliar a funcionalidade do processo, caso contrário o tempo total de execução pode aumentar consideravelmente.
     Uma suíte de testes que leva muito tempo para executar regularmente é uma suíte de testes que provavelmente será pulada no interesse da conveniência.
 
-### Resumo
+### Conclusão
 
 Você escreveu seu primeiro teste de módulo para um processo de genômica, verificando que `SAMTOOLS_INDEX` cria corretamente arquivos de índice para diferentes arquivos BAM. A suíte de testes garante que:
 
@@ -804,7 +804,7 @@ nf-test test modules/gatk/haplotypecaller/tests/main.nf.test
 
 Isso completa o plano de testes básico para esta segunda etapa do pipeline. Vamos para o terceiro e último teste em nível de módulo!
 
-### Resumo
+### Conclusão
 
 Você aprendeu como:
 
@@ -1027,7 +1027,7 @@ O teste passa, verificando que nosso processo de genotipagem conjunta corretamen
 2. Realiza chamada conjunta de variantes
 3. Produz um VCF multi-amostra com chamadas de genótipo consistentes entre execuções
 
-### Resumo
+### Conclusão
 
 Você sabe como:
 

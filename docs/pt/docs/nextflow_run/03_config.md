@@ -348,7 +348,7 @@ Nesses casos, usar um arquivo de parâmetros nos permitirá fornecer valores de 
 Também torna mais fácil distribuir conjuntos de parâmetros para colaboradores, ou como informação suplementar para uma publicação, por exemplo.
 Isso torna seu trabalho mais reproduzível por outros.
 
-### Resumo
+### Conclusão
 
 Você sabe como aproveitar opções de configuração-chave para gerenciar entradas de fluxo de trabalho.
 
@@ -766,7 +766,7 @@ A principal razão pela qual você ainda pode querer usar a forma por saída de 
 
 Há muitas outras opções que você pode personalizar dessa forma, mas esperamos que isso dê uma ideia da gama de opções e como utilizá-las efetivamente para se adequar às suas preferências.
 
-### Resumo
+### Conclusão
 
 Você sabe como controlar a nomenclatura e estrutura dos diretórios onde suas saídas são publicadas, bem como o modo de publicação de saída do fluxo de trabalho.
 
@@ -895,7 +895,7 @@ Isso significa que estamos prontos para executar com ambientes Conda se necessá
 
     E como notado anteriormente, o Nextflow suporta múltiplas outras tecnologias de empacotamento de software e contêiner, então você não está limitado a apenas essas duas.
 
-### Resumo
+### Conclusão
 
 Você sabe como configurar qual pacote de software cada processo deve usar, e como alternar entre tecnologias.
 
@@ -986,7 +986,7 @@ Então, em tempo de execução, o Nextflow usará essas configurações para ger
 
 Cobriremos essa sintaxe padronizada na próxima seção.
 
-### Resumo
+### Conclusão
 
 Agora você sabe como mudar o executor para usar diferentes tipos de infraestrutura de computação.
 
@@ -1142,7 +1142,7 @@ No entanto, se você tentasse executar o fluxo de trabalho com alocações de re
 
     Essas configs compartilhadas são valiosas tanto para pessoas que trabalham lá e podem portanto simplesmente utilizar a configuração da sua instituição prontas para uso, quanto como modelo para pessoas que estão procurando desenvolver uma configuração para sua própria infraestrutura.
 
-### Resumo
+### Conclusão
 
 Você sabe como gerar um relatório de profiling para avaliar a utilização de recursos e como modificar alocações de recursos para todos os processos e/ou para processos individuais, bem como definir limitações de recursos para executar em HPC.
 
@@ -1431,7 +1431,7 @@ nextflow config -profile my_laptop,test
 
 Isso se torna especialmente útil para projetos complexos que envolvem múltiplas camadas de configuração.
 
-### Resumo
+### Conclusão
 
 Você sabe como usar perfis para selecionar uma configuração predefinida em tempo de execução com o mínimo de trabalho.
 Mais geralmente, você sabe como configurar suas execuções de fluxo de trabalho para se adequar a diferentes plataformas de computação e melhorar a reprodutibilidade de suas análises.
@@ -1477,7 +1477,7 @@ nextflow run nextflow-io/hello -r v1.1
 
 Especificar versões exatas é essencial para reprodutibilidade.
 
-### Resumo
+### Conclusão
 
 Você sabe como executar pipelines diretamente do GitHub e outros repositórios remotos, e como especificar versões para reprodutibilidade.
 

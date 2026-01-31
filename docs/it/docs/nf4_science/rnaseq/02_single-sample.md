@@ -391,7 +391,7 @@ _Aggiungeremo l'aggregazione dei report MultiQC nella Parte 2, dopo aver modific
 
 ---
 
-### Conclusione
+### Takeaway
 
 Sa come racchiudere tutti i passaggi principali per processare campioni RNAseq single-end individualmente.
 

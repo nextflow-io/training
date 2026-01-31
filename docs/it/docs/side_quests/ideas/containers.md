@@ -25,7 +25,7 @@ Clicchi su "+Add" e poi su "Get Container" per richiedere un'immagine di contain
 Se è la prima volta che viene costruito un container di comunità per questa versione del pacchetto, potrebbero essere necessari alcuni minuti per completare l'operazione.
 Clicchi per copiare l'URI (ad es. `community.wave.seqera.io/library/pip_quote:ae07804021465ee9`) dell'immagine di container che è stata creata per Lei.
 
-Ora può utilizzare l'immagine di container per eseguire il comando `quote` e ottenere un detto casuale di Grace Hopper.
+Ora potete utilizzare l'immagine di container per eseguire il comando `quote` e ottenere un detto casuale di Grace Hopper.
 
 ```bash
 docker run --rm community.wave.seqera.io/library/pip_quote:ae07804021465ee9 quote "Grace Hopper"
@@ -42,7 +42,7 @@ that runs counter-clockwise.
 ### 1.2. Costruire l'immagine del container da sé
 
 Utilizziamo alcuni dettagli di costruzione dal sito web di Seqera Containers per costruire noi stessi l'immagine di container per il pacchetto pip `quote`.
-Ritorni al sito web di Seqera Containers e clicchi sul pulsante "Build Details".
+Ritornate al sito web di Seqera Containers e cliccate sul pulsante "Build Details".
 
 Il primo elemento che esamineremo è il `Dockerfile`, un tipo di file di script che contiene tutti i comandi necessari per costruire l'immagine di container.
 Abbiamo aggiunto alcuni commenti esplicativi al Dockerfile qui sotto per aiutarla a comprendere cosa fa ciascuna parte.
@@ -78,7 +78,7 @@ dependencies:
   - quote==3.0.0 #
 ```
 
-Copi il contenuto di questi file negli stub situati nella directory `containers/build`, quindi esegua il seguente comando per costruire l'immagine di container da sé.
+Copiate il contenuto di questi file negli stub situati nella directory `containers/build`, quindi eseguite il seguente comando per costruire l'immagine di container da sé.
 
 !!! Note "Nota"
 
@@ -89,7 +89,7 @@ Copi il contenuto di questi file negli stub situati nella directory `containers/
 docker build -t quote:latest containers/build
 ```
 
-Dopo che la costruzione è terminata, può eseguire l'immagine di container che ha appena costruito.
+Dopo che la costruzione è terminata, potete eseguire l'immagine di container che avete appena costruito.
 
 ```bash
 docker run --rm quote:latest quote "Margaret Oakley Dayhoff"
@@ -139,7 +139,7 @@ Ad alto livello, per completare questo esercizio dovrà:
 - Creare un processo `getQuote` che utilizza il container `quote` per recuperare una citazione per ogni input.
 - Connettere l'output del processo `getQuote` al processo `cowsay` per visualizzare la citazione.
 
-Per l'immagine di container `quote`, può utilizzare quella che ha costruito da sé nell'esercizio avanzato precedente o utilizzare quella ottenuta da Seqera Containers.
+Per l'immagine di container `quote`, potete utilizzare quella che avete costruito da sé nell'esercizio avanzato precedente o utilizzare quella ottenuta da Seqera Containers.
 
 !!! Hint "Suggerimento"
 

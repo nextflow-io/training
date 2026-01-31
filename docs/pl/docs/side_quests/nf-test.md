@@ -115,7 +115,7 @@ Pełny kod przepływu pracy możesz zobaczyć poniżej.
     params.input_file = "greetings.csv"
 
     /*
-    * Use echo to print 'Hello World!' to standard out
+    * Użyj echo do wypisania 'Hello World!' na standardowe wyjście
     */
     process sayHello {
 
@@ -134,7 +134,7 @@ Pełny kod przepływu pracy możesz zobaczyć poniżej.
     }
 
     /*
-    * Use a text replace utility to convert the greeting to uppercase
+    * Użyj narzędzia zamiany tekstu do przekształcenia pozdrowienia na wielkie litery
     */
     process convertToUpper {
 
@@ -154,13 +154,13 @@ Pełny kod przepływu pracy możesz zobaczyć poniżej.
 
     workflow {
 
-        // create a channel for inputs from a CSV file
+        // utwórz kanał dla danych wejściowych z pliku CSV
         greeting_ch = channel.fromPath(params.input_file).splitCsv().flatten()
 
-        // emit a greeting
+        // wyemituj pozdrowienie
         sayHello(greeting_ch)
 
-        // convert the greeting to uppercase
+        // przekształć pozdrowienie na wielkie litery
         convertToUpper(sayHello.out)
     }
     ```

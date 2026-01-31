@@ -99,7 +99,7 @@ Nextflow 워크플로우로 작성하면 어떻게 보이는지 알아보세요.
     #!/usr/bin/env nextflow
 
     /*
-    * Use echo to print 'Hello World!' to a file
+    * echo를 사용하여 'Hello World!'를 파일에 출력
     */
     process sayHello {
 
@@ -115,7 +115,7 @@ Nextflow 워크플로우로 작성하면 어떻게 보이는지 알아보세요.
     workflow {
 
         main:
-        // emit a greeting
+        // 인사말을 내보냅니다
         sayHello()
     }
     ```
@@ -135,7 +135,7 @@ Nextflow 워크플로우 스크립트는 일반적으로 하나 이상의 **proc
 
 ```groovy title="hello-world.nf" linenums="3"
 /*
-* Use echo to print 'Hello World!' to a file
+* echo를 사용하여 'Hello World!'를 파일에 출력
 */
 process sayHello {
 
@@ -183,7 +183,7 @@ process sayHello {
 workflow {
 
     main:
-    // emit a greeting
+    // 인사말을 내보냅니다
     sayHello()
 }
 ```
@@ -409,7 +409,7 @@ nextflow run hello-world.nf
     workflow {
 
         main:
-        // emit a greeting
+        // 인사말을 내보냅니다
         sayHello()
 
         publish:
@@ -423,7 +423,7 @@ nextflow run hello-world.nf
     workflow {
 
         main:
-        // emit a greeting
+        // 인사말을 내보냅니다
         sayHello()
     }
     ```
@@ -442,7 +442,7 @@ nextflow run hello-world.nf
     workflow {
 
         main:
-        // emit a greeting
+        // 인사말을 내보냅니다
         sayHello()
 
         publish:
@@ -462,7 +462,7 @@ nextflow run hello-world.nf
     workflow {
 
         main:
-        // emit a greeting
+        // 인사말을 내보냅니다
         sayHello()
 
         publish:
@@ -805,14 +805,14 @@ process sayHello {
 === "이후"
 
     ```groovy title="hello-world.nf" linenums="23" hl_lines="2"
-    // emit a greeting
+    // 인사말을 내보냅니다
     sayHello(params.input)
     ```
 
 === "이전"
 
     ```groovy title="hello-world.nf" linenums="23" hl_lines="2"
-    // emit a greeting
+    // 인사말을 내보냅니다
     sayHello()
     ```
 
@@ -875,7 +875,7 @@ Voilà!
 
 ```groovy title="hello-world.nf" linenums="20"
 /*
- * Pipeline parameters
+ * 파이프라인 매개변수
  */
 params {
     input: String = 'Holà mundo!'

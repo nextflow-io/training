@@ -436,7 +436,7 @@ Możemy wzorować nasz proces `cowpy` na innych procesach, które napisaliśmy w
 ```groovy title="modules/cowpy.nf" linenums="1"
 #!/usr/bin/env nextflow
 
-// Generate ASCII art with cowpy
+// Wygeneruj grafikę ASCII za pomocą cowpy
 process cowpy {
 
     input:
@@ -469,7 +469,7 @@ Wstaw deklarację importu powyżej bloku workflow i wypełnij ją odpowiednio.
 === "Po"
 
     ```groovy title="hello-containers.nf" linenums="3" hl_lines="5"
-    // Include modules
+    // Dołącz moduły
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
     include { collectGreetings } from './modules/collectGreetings.nf'
@@ -479,7 +479,7 @@ Wstaw deklarację importu powyżej bloku workflow i wypełnij ją odpowiednio.
 === "Przed"
 
     ```groovy title="hello-containers.nf" linenums="3"
-    // Include modules
+    // Dołącz moduły
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
     include { collectGreetings } from './modules/collectGreetings.nf'
@@ -500,17 +500,17 @@ W bloku workflow wprowadź następującą zmianę w kodzie:
 
     ```groovy title="hello-containers.nf" linenums="19" hl_lines="12-13"
         main:
-        // create a channel for inputs from a CSV file
+        // utwórz kanał dla danych wejściowych z pliku CSV
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
-        // emit a greeting
+        // wyemituj pozdrowienie
         sayHello(greeting_ch)
-        // convert the greeting to uppercase
+        // przekształć pozdrowienie na wielkie litery
         convertToUpper(sayHello.out)
-        // collect all the greetings into one file
+        // zbierz wszystkie pozdrowienia do jednego pliku
         collectGreetings(convertToUpper.out.collect(), params.batch)
-        // generate ASCII art of the greetings with cowpy
+        // wygeneruj grafikę ASCII pozdrowień za pomocą cowpy
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
@@ -518,15 +518,15 @@ W bloku workflow wprowadź następującą zmianę w kodzie:
 
     ```groovy title="hello-containers.nf" linenums="19"
         main:
-        // create a channel for inputs from a CSV file
+        // utwórz kanał dla danych wejściowych z pliku CSV
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
-        // emit a greeting
+        // wyemituj pozdrowienie
         sayHello(greeting_ch)
-        // convert the greeting to uppercase
+        // przekształć pozdrowienie na wielkie litery
         convertToUpper(sayHello.out)
-        // collect all the greetings into one file
+        // zbierz wszystkie pozdrowienia do jednego pliku
         collectGreetings(convertToUpper.out.collect(), params.batch)
     ```
 

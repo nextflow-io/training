@@ -106,7 +106,7 @@ workflow {
 
     names_ch = channel.of('Alice', 'Bob', 'Charlie')
 
-    // Chain processes: validate -> create greeting -> add timestamp
+    // Połącz procesy: waliduj -> utwórz pozdrowienie -> dodaj znacznik czasu
     validated_ch = VALIDATE_NAME(names_ch)
     greetings_ch = SAY_HELLO(validated_ch)
     timestamped_ch = TIMESTAMP_GREETING(greetings_ch)
@@ -150,17 +150,17 @@ include { TIMESTAMP_GREETING } from '../modules/timestamp_greeting'
 
 workflow GREETING_WORKFLOW {
     take:
-        names_ch        // Input channel with names
+        names_ch        // Kanał wejściowy z imionami
 
     main:
-        // Chain processes: validate -> create greeting -> add timestamp
+        // Połącz procesy: waliduj -> utwórz pozdrowienie -> dodaj znacznik czasu
         validated_ch = VALIDATE_NAME(names_ch)
         greetings_ch = SAY_HELLO(validated_ch)
         timestamped_ch = TIMESTAMP_GREETING(greetings_ch)
 
     emit:
-        greetings = greetings_ch      // Original greetings
-        timestamped = timestamped_ch  // Timestamped greetings
+        greetings = greetings_ch      // Oryginalne pozdrowienia
+        timestamped = timestamped_ch  // Pozdrowienia ze znacznikiem czasu
 }
 ```
 
@@ -285,16 +285,16 @@ include { REVERSE_TEXT } from '../modules/reverse_text'
 
 workflow TRANSFORM_WORKFLOW {
     take:
-        input_ch         // Input channel with messages
+        input_ch         // Kanał wejściowy z wiadomościami
 
     main:
-        // Apply transformations in sequence
+        // Zastosuj transformacje sekwencyjnie
         upper_ch = SAY_HELLO_UPPER(input_ch)
         reversed_ch = REVERSE_TEXT(upper_ch)
 
     emit:
-        upper = upper_ch        // Uppercase greetings
-        reversed = reversed_ch  // Reversed uppercase greetings
+        upper = upper_ch        // Pozdrowienia pisane wielkimi literami
+        reversed = reversed_ch  // Odwrócone pozdrowienia pisane wielkimi literami
 }
 ```
 
@@ -311,13 +311,13 @@ include { TRANSFORM_WORKFLOW } from './workflows/transform'
 workflow {
     names = channel.of('Alice', 'Bob', 'Charlie')
 
-    // Run the greeting workflow
+    // Uruchom workflow powitania
     GREETING_WORKFLOW(names)
 
-    // Run the transform workflow
+    // Uruchom workflow transformacji
     TRANSFORM_WORKFLOW(GREETING_WORKFLOW.out.timestamped)
 
-    // View results
+    // Wyświetl wyniki
     TRANSFORM_WORKFLOW.out.upper.view { "Uppercase: $it" }
     TRANSFORM_WORKFLOW.out.reversed.view { "Reversed: $it" }
 }
@@ -392,16 +392,16 @@ Stosowanie tych technik w swojej pracy umożliwi Ci budowanie bardziej wyrafinow
     ```groovy
     workflow EXAMPLE_WORKFLOW {
         take:
-            // Input channels are declared here
+            // Kanały wejściowe są deklarowane tutaj
             input_ch
 
         main:
-            // Workflow logic goes here
-            // This is where processes are called and channels are manipulated
+            // Logika workflow znajduje się tutaj
+            // Tutaj wywoływane są procesy i manipulowane są kanały
             result_ch = SOME_PROCESS(input_ch)
 
         emit:
-            // Output channels are declared here
+            // Kanały wyjściowe są deklarowane tutaj
             output_ch = result_ch
     }
     ```
@@ -432,7 +432,7 @@ Stosowanie tych technik w swojej pracy umożliwi Ci budowanie bardziej wyrafinow
 
     ```groovy
     workflow {
-        // This is the entry point when the script is run
+        // To jest punkt wejścia, gdy skrypt jest uruchamiany
         NAMED_WORKFLOW(input_ch)
     }
     ```
@@ -441,7 +441,7 @@ Stosowanie tych technik w swojej pracy umożliwi Ci budowanie bardziej wyrafinow
 
     ```groovy
     workflow NAMED_WORKFLOW {
-        // Must be called from the entry workflow
+        // Musi być wywołany z głównego workflow
     }
     ```
 

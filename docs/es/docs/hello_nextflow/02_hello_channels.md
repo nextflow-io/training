@@ -115,9 +115,9 @@ En el bloque workflow, agregue el código de la channel factory:
     workflow {
 
         main:
-        // create a channel for inputs
+        // crear un canal para entradas
         greeting_ch = channel.of('Hello Channels!')
-        // emit a greeting
+        // emitir un saludo
         sayHello(params.input)
 
         publish:
@@ -131,7 +131,7 @@ En el bloque workflow, agregue el código de la channel factory:
     workflow {
 
         main:
-        // emit a greeting
+        // emitir un saludo
         sayHello(params.input)
 
         publish:
@@ -153,9 +153,9 @@ En el bloque workflow, haga el siguiente cambio de código:
     workflow {
 
         main:
-        // create a channel for inputs
+        // crear un canal para entradas
         greeting_ch = channel.of('Hello Channels!')
-        // emit a greeting
+        // emitir un saludo
         sayHello(greeting_ch)
 
         publish:
@@ -169,9 +169,9 @@ En el bloque workflow, haga el siguiente cambio de código:
     workflow {
 
         main:
-        // create a channel for inputs
+        // crear un canal para entradas
         greeting_ch = channel.of('Hello Channels!')
-        // emit a greeting
+        // emitir un saludo
         sayHello(params.input)
 
         publish:
@@ -231,10 +231,10 @@ Agregue esta pequeña línea al bloque workflow:
     workflow {
 
         main:
-        // create a channel for inputs
+        // crear un canal para entradas
         greeting_ch = channel.of('Hello Channels!')
                              .view()
-        // emit a greeting
+        // emitir un saludo
         sayHello(greeting_ch)
 
         publish:
@@ -248,9 +248,9 @@ Agregue esta pequeña línea al bloque workflow:
     workflow {
 
         main:
-        // create a channel for inputs
+        // crear un canal para entradas
         greeting_ch = channel.of('Hello Channels!')
-        // emit a greeting
+        // emitir un saludo
         sayHello(greeting_ch)
 
         publish:
@@ -281,7 +281,7 @@ nextflow run hello-channels.nf
 Como puede ver, esto muestra el contenido del channel en la consola.
 Aquí solo tenemos un elemento, pero cuando comencemos a cargar múltiples valores en el channel en la siguiente sección, verá que esto está configurado para mostrar un elemento por línea.
 
-### Resumen
+### Conclusión
 
 Sabe cómo usar una channel factory básica para proporcionar una entrada a un proceso.
 
@@ -315,7 +315,7 @@ Antes del bloque workflow, haga el siguiente cambio de código:
 === "Después"
 
     ```groovy title="hello-channels.nf" linenums="30" hl_lines="2"
-    // create a channel for inputs
+    // crear un canal para entradas
     greeting_ch = channel.of('Hello','Bonjour','Holà')
                          .view()
     ```
@@ -323,7 +323,7 @@ Antes del bloque workflow, haga el siguiente cambio de código:
 === "Antes"
 
     ```groovy title="hello-channels.nf" linenums="30" hl_lines="2"
-    // create a channel for inputs
+    // crear un canal para entradas
     greeting_ch = channel.of('Hello Channels')
                          .view()
     ```
@@ -620,7 +620,7 @@ Eche un vistazo al directorio `results` para ver si todos los saludos de salida 
     Los metadatos típicamente se proporcionan a través de una 'hoja de muestras' o equivalentes.
     Aprenderá cómo hacer eso más adelante en su entrenamiento de Nextflow (vea [Misión secundaria de Metadatos](../side_quests/metadata.md)).
 
-### Resumen
+### Conclusión
 
 Sabe cómo alimentar múltiples elementos de entrada a través de un channel.
 
@@ -662,12 +662,12 @@ Tomemos la variable `greetings_array` que acabamos de imaginar y hagámosla real
     workflow {
 
         main:
-        // declare an array of input greetings
+        // declarar un array de saludos de entrada
         greetings_array = ['Hello','Bonjour','Holà']
-        // create a channel for inputs
+        // crear un canal para entradas
         greeting_ch = channel.of('Hello','Bonjour','Holà')
                              .view()
-        // emit a greeting
+        // emitir un saludo
         sayHello(greeting_ch)
 
         publish:
@@ -681,10 +681,10 @@ Tomemos la variable `greetings_array` que acabamos de imaginar y hagámosla real
     workflow {
 
         main:
-        // create a channel for inputs
+        // crear un canal para entradas
         greeting_ch = channel.of('Hello','Bonjour','Holà')
                              .view()
-        // emit a greeting
+        // emitir un saludo
         sayHello(greeting_ch)
 
         publish:
@@ -706,12 +706,12 @@ En el bloque workflow, haga el siguiente cambio:
     workflow {
 
         main:
-        // declare an array of input greetings
+        // declarar un array de saludos de entrada
         greetings_array = ['Hello','Bonjour','Holà']
-        // create a channel for inputs
+        // crear un canal para entradas
         greeting_ch = channel.of(greetings_array)
                              .view()
-        // emit a greeting
+        // emitir un saludo
         sayHello(greeting_ch)
 
         publish:
@@ -725,12 +725,12 @@ En el bloque workflow, haga el siguiente cambio:
     workflow {
 
         main:
-        // declare an array of input greetings
+        // declarar un array de saludos de entrada
         greetings_array = ['Hello','Bonjour','Holà']
-        // create a channel for inputs
+        // crear un canal para entradas
         greeting_ch = channel.of('Hello','Bonjour','Holà')
                              .view()
-        // emit a greeting
+        // emitir un saludo
         sayHello(greeting_ch)
 
         publish:
@@ -811,13 +811,13 @@ En el bloque workflow, haga el siguiente cambio de código:
     workflow {
 
         main:
-        // declare an array of input greetings
+        // declarar un array de saludos de entrada
         greetings_array = ['Hello','Bonjour','Holà']
-        // create a channel for inputs
+        // crear un canal para entradas
         greeting_ch = channel.of(greetings_array)
                              .view()
                              .flatten()
-        // emit a greeting
+        // emitir un saludo
         sayHello(greeting_ch)
 
         publish:
@@ -831,12 +831,12 @@ En el bloque workflow, haga el siguiente cambio de código:
     workflow {
 
         main:
-        // declare an array of input greetings
+        // declarar un array de saludos de entrada
         greetings_array = ['Hello','Bonjour','Holà']
-        // create a channel for inputs
+        // crear un canal para entradas
         greeting_ch = channel.of(greetings_array)
                              .view()
-        // emit a greeting
+        // emitir un saludo
         sayHello(greeting_ch)
 
         publish:
@@ -861,14 +861,14 @@ En el bloque workflow, haga el siguiente cambio de código:
     workflow {
 
         main:
-        // declare an array of input greetings
+        // declarar un array de saludos de entrada
         greetings_array = ['Hello','Bonjour','Holà']
-        // create a channel for inputs
+        // crear un canal para entradas
         greeting_ch = channel.of(greetings_array)
                              .view { greeting -> "Before flatten: $greeting" }
                              .flatten()
                              .view { greeting -> "After flatten: $greeting" }
-        // emit a greeting
+        // emitir un saludo
         sayHello(greeting_ch)
 
         publish:
@@ -882,13 +882,13 @@ En el bloque workflow, haga el siguiente cambio de código:
     workflow {
 
         main:
-        // declare an array of input greetings
+        // declarar un array de saludos de entrada
         greetings_array = ['Hello','Bonjour','Holà']
-        // create a channel for inputs
+        // crear un canal para entradas
         greeting_ch = channel.of(greetings_array)
                              .view()
                              .flatten()
-        // emit a greeting
+        // emitir un saludo
         sayHello(greeting_ch)
 
         publish:
@@ -947,7 +947,7 @@ Importante, esto significa que cada elemento ahora puede ser procesado por separ
     Es técnicamente posible lograr los mismos resultados usando una channel factory diferente, [`channel.fromList`](https://nextflow.io/docs/latest/reference/channel.html#fromlist), que incluye un paso de mapeo implícito en su operación.
     Aquí elegimos no usar eso para demostrar el uso de un operador en un caso de uso simple.
 
-### Resumen
+### Conclusión
 
 Sabe cómo usar un operador como `flatten()` para transformar el contenido de un channel, y cómo usar el operador `view()` para inspeccionar el contenido del channel antes y después de aplicar un operador.
 
@@ -997,7 +997,7 @@ Haga la siguiente edición a la declaración del parámetro:
 
     ```groovy title="hello-channels.nf" linenums="20" hl_lines="5"
     /*
-    * Pipeline parameters
+    * Parámetros del pipeline
     */
     params {
         input: Path = 'data/greetings.csv'
@@ -1008,7 +1008,7 @@ Haga la siguiente edición a la declaración del parámetro:
 
     ```groovy title="hello-channels.nf" linenums="20" hl_lines="5"
     /*
-     * Pipeline parameters
+     * Parámetros del pipeline
      */
     input: String = 'Holà mundo!'
     ```
@@ -1029,12 +1029,12 @@ En el bloque workflow, haga el siguiente cambio de código:
     workflow {
 
         main:
-        // create a channel for inputs from a CSV file
+        // crear un canal para entradas from a CSV file
         greeting_ch = channel.fromPath(params.input)
                              .view { greeting -> "Before flatten: $greeting" }
                              // .flatten()
                              // .view { greeting -> "After flatten: $greeting" }
-        // emit a greeting
+        // emitir un saludo
         sayHello(greeting_ch)
 
         publish:
@@ -1048,14 +1048,14 @@ En el bloque workflow, haga el siguiente cambio de código:
     workflow {
 
         main:
-        // declare an array of input greetings
+        // declarar un array de saludos de entrada
         greetings_array = ['Hello','Bonjour','Holà']
-        // create a channel for inputs
+        // crear un canal para entradas
         greeting_ch = channel.of(greetings_array)
                              .view { greeting -> "Before flatten: $greeting" }
                              .flatten()
                              .view { greeting -> "After flatten: $greeting" }
-        // emit a greeting
+        // emitir un saludo
         sayHello(greeting_ch)
 
         publish:
@@ -1134,12 +1134,12 @@ En el bloque workflow, haga el siguiente cambio de código para reemplazar `flat
     workflow {
 
         main:
-        // create a channel for inputs from a CSV file
+        // crear un canal para entradas from a CSV file
         greeting_ch = channel.fromPath(params.input)
                              .view { csv -> "Before splitCsv: $csv" }
                              .splitCsv()
                              .view { csv -> "After splitCsv: $csv" }
-        // emit a greeting
+        // emitir un saludo
         sayHello(greeting_ch)
 
         publish:
@@ -1153,12 +1153,12 @@ En el bloque workflow, haga el siguiente cambio de código para reemplazar `flat
     workflow {
 
         main:
-        // create a channel for inputs from a CSV file
+        // crear un canal para entradas from a CSV file
         greeting_ch = channel.fromPath(params.input)
                              .view { greeting -> "Before flatten: $greeting" }
                              // .flatten()
                              // .view { greeting -> "After flatten: $greeting" }
-        // emit a greeting
+        // emitir un saludo
         sayHello(greeting_ch)
 
         publish:
@@ -1249,14 +1249,14 @@ En el bloque workflow, haga el siguiente cambio de código:
     workflow {
 
         main:
-        // create a channel for inputs from a CSV file
+        // crear un canal para entradas from a CSV file
         greeting_ch = channel.fromPath(params.input)
                              .view { csv -> "Before splitCsv: $csv" }
                              .splitCsv()
                              .view { csv -> "After splitCsv: $csv" }
                              .map { item -> item[0] }
                              .view { csv -> "After map: $csv" }
-        // emit a greeting
+        // emitir un saludo
         sayHello(greeting_ch)
 
         publish:
@@ -1270,12 +1270,12 @@ En el bloque workflow, haga el siguiente cambio de código:
     workflow {
 
         main:
-        // create a channel for inputs from a CSV file
+        // crear un canal para entradas from a CSV file
         greeting_ch = channel.fromPath(params.input)
                              .view { csv -> "Before splitCsv: $csv" }
                              .splitCsv()
                              .view { csv -> "After splitCsv: $csv" }
-        // emit a greeting
+        // emitir un saludo
         sayHello(greeting_ch)
 
         publish:
@@ -1326,7 +1326,7 @@ También puede mirar los archivos de salida para verificar que cada saludo fue c
 Hemos logrado el mismo resultado que antes, pero ahora tenemos mucha más flexibilidad para agregar más elementos al channel de saludos que queremos procesar modificando un archivo de entrada, sin modificar ningún código.
 Aprenderá enfoques más sofisticados para manejar entradas complejas en un entrenamiento posterior.
 
-### Resumen
+### Conclusión
 
 Sabe cómo usar el constructor de channel `.fromPath()` y los operadores `splitCsv()` y `map()` para leer un archivo de valores de entrada y manejarlos apropiadamente.
 

@@ -72,7 +72,7 @@ Puede abrirlo en el explorador de archivos o desde la línea de comandos usando 
 
 Esto es lo que vamos a intentar replicar con nuestro primer flujo de trabajo de Nextflow.
 
-### Resumen
+### Conclusión
 
 Ahora sabe cómo ejecutar un comando simple en el terminal que produce algún texto, y opcionalmente, cómo hacer que escriba la salida en un archivo.
 
@@ -99,7 +99,7 @@ Encontrará el script `hello-world.nf` en su directorio actual, que debería ser
     #!/usr/bin/env nextflow
 
     /*
-    * Use echo to print 'Hello World!' to a file
+    * Usar echo para imprimir 'Hello World!' a un archivo
     */
     process sayHello {
 
@@ -115,7 +115,7 @@ Encontrará el script `hello-world.nf` en su directorio actual, que debería ser
     workflow {
 
         main:
-        // emit a greeting
+        // emitir un saludo
         sayHello()
     }
     ```
@@ -135,7 +135,7 @@ El cuerpo del proceso debe contener un bloque script que especifica el comando a
 
 ```groovy title="hello-world.nf" linenums="3"
 /*
-* Use echo to print 'Hello World!' to a file
+* Usar echo para imprimir 'Hello World!' a un archivo
 */
 process sayHello {
 
@@ -183,7 +183,7 @@ Aquí tenemos un **workflow** que consiste en un bloque `main:` (que dice 'este 
 workflow {
 
     main:
-    // emit a greeting
+    // emitir un saludo
     sayHello()
 }
 ```
@@ -372,7 +372,7 @@ Intente volver a ejecutar el flujo de trabajo varias veces, luego mire los direc
 Ve que se ha creado un nuevo subdirectorio con un conjunto completo de archivos de salida y log para cada ejecución.
 Esto le muestra que ejecutar el mismo flujo de trabajo varias veces no sobrescribirá los resultados de ejecuciones anteriores.
 
-### Resumen
+### Conclusión
 
 Sabe cómo descifrar un script simple de Nextflow, ejecutarlo y encontrar la salida y los archivos de log relevantes en el directorio de trabajo.
 
@@ -409,7 +409,7 @@ En el archivo de script del flujo de trabajo `hello-world.nf`, agregue las sigui
     workflow {
 
         main:
-        // emit a greeting
+        // emitir un saludo
         sayHello()
 
         publish:
@@ -423,7 +423,7 @@ En el archivo de script del flujo de trabajo `hello-world.nf`, agregue las sigui
     workflow {
 
         main:
-        // emit a greeting
+        // emitir un saludo
         sayHello()
     }
     ```
@@ -442,7 +442,7 @@ En el archivo de script del flujo de trabajo `hello-world.nf`, agregue las sigui
     workflow {
 
         main:
-        // emit a greeting
+        // emitir un saludo
         sayHello()
 
         publish:
@@ -462,7 +462,7 @@ En el archivo de script del flujo de trabajo `hello-world.nf`, agregue las sigui
     workflow {
 
         main:
-        // emit a greeting
+        // emitir un saludo
         sayHello()
 
         publish:
@@ -700,7 +700,7 @@ process sayHello {
 Todavía encontrará este patrón de código en todos los pipelines más antiguos de Nextflow y módulos de proceso, por lo que es importante estar al tanto de él.
 Sin embargo, no recomendamos usarlo en ningún trabajo nuevo ya que eventualmente se deshabilitará en futuras versiones del lenguaje Nextflow.
 
-### Resumen
+### Conclusión
 
 Sabe cómo publicar salidas del flujo de trabajo en una ubicación más conveniente.
 
@@ -805,14 +805,14 @@ En el bloque del flujo de trabajo, haga el siguiente cambio de código:
 === "Después"
 
     ```groovy title="hello-world.nf" linenums="23" hl_lines="2"
-    // emit a greeting
+    // emitir un saludo
     sayHello(params.input)
     ```
 
 === "Antes"
 
     ```groovy title="hello-world.nf" linenums="23" hl_lines="2"
-    // emit a greeting
+    // emitir un saludo
     sayHello()
     ```
 
@@ -875,7 +875,7 @@ Démosle al parámetro `input` un valor predeterminado declarándolo antes de la
 
 ```groovy title="hello-world.nf" linenums="20"
 /*
- * Pipeline parameters
+ * Parámetros del pipeline
  */
 params {
     input: String = 'Holà mundo!'
@@ -958,7 +958,7 @@ Una vez más, debería encontrar la salida actualizada correspondiente en su dir
 
     Cubriremos esto en más detalle en la Parte 6 (Configuration).
 
-### Resumen
+### Conclusión
 
 Sabe cómo usar una entrada variable simple proporcionada en tiempo de ejecución a través de un parámetro de línea de comandos, así como configurar, usar y sobrescribir valores predeterminados.
 
@@ -1118,7 +1118,7 @@ Note que esto no elimina los subdirectorios de dos caracteres (como `a3/` arriba
 
     ¡Usted es responsable de guardar cualquier salida que le importe o en la que planee confiar! Esa es la razón principal por la que preferimos usar el modo `copy` en lugar del modo `symlink` para la directiva `publish`.
 
-### Resumen
+### Conclusión
 
 Sabe cómo publicar salidas en un directorio específico, volver a iniciar un pipeline sin repetir pasos que ya se ejecutaron de manera idéntica, y usar el comando `nextflow clean` para limpiar directorios de trabajo antiguos.
 

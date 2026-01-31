@@ -138,7 +138,7 @@ Copiez l'ensemble de la définition du processus du fichier de workflow vers le 
 #!/usr/bin/env nextflow
 
 /*
- * Use echo to print 'Hello World!' to a file
+ * Utilise echo pour imprimer 'Hello World!' dans un fichier
  */
 process sayHello {
 
@@ -170,11 +170,11 @@ Insérons cela au-dessus du bloc `params` et remplissons-le de manière appropri
 === "Après"
 
     ```groovy title="hello-modules.nf" linenums="44" hl_lines="1 2"
-    // Include modules
+    // Inclure les modules
     include { sayHello } from './modules/sayHello.nf'
 
     /*
-    * Pipeline parameters
+    * Paramètres du pipeline
     */
     params {
         greeting: Path = 'data/greetings.csv'
@@ -186,7 +186,7 @@ Insérons cela au-dessus du bloc `params` et remplissons-le de manière appropri
 
     ```groovy title="hello-modules.nf" linenums="44"
     /*
-    * Pipeline parameters
+    * Paramètres du pipeline
     */
     params {
         greeting: Path = 'data/greetings.csv'
@@ -251,7 +251,7 @@ Copiez l'ensemble de la définition du processus du fichier de workflow vers le 
 #!/usr/bin/env nextflow
 
 /*
- * Use a text replacement tool to convert the greeting to uppercase
+ * Utilise un outil de remplacement de texte pour convertir la salutation en majuscules
  */
 process convertToUpper {
 
@@ -277,12 +277,12 @@ Insérez la déclaration d'importation au-dessus du bloc `params` et remplissez-
 === "Après"
 
     ```groovy title="hello-modules.nf" linenums="23" hl_lines="3"
-    // Include modules
+    // Inclure les modules
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
 
     /*
-    * Pipeline parameters
+    * Paramètres du pipeline
     */
     params {
         greeting: Path = 'data/greetings.csv'
@@ -293,11 +293,11 @@ Insérez la déclaration d'importation au-dessus du bloc `params` et remplissez-
 === "Avant"
 
     ```groovy title="hello-modules.nf" linenums="23"
-    // Include modules
+    // Inclure les modules
     include { sayHello } from './modules/sayHello.nf'
 
     /*
-    * Pipeline parameters
+    * Paramètres du pipeline
     */
     params {
         greeting: Path = 'data/greetings.csv'
@@ -351,7 +351,7 @@ Copiez l'ensemble de la définition du processus du fichier de workflow vers le 
 #!/usr/bin/env nextflow
 
 /*
- * Collect uppercase greetings into a single output file
+ * Collecter les salutations en majuscules dans un seul fichier de sortie
  */
 process collectGreetings {
 
@@ -381,13 +381,13 @@ Insérez la déclaration d'importation au-dessus du bloc `params` et remplissez-
 === "Après"
 
     ```groovy title="hello-modules.nf" linenums="3" hl_lines="4"
-    // Include modules
+    // Inclure les modules
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
     include { collectGreetings } from './modules/collectGreetings.nf'
 
     /*
-    * Pipeline parameters
+    * Paramètres du pipeline
     */
     params {
         greeting: Path = 'data/greetings.csv'
@@ -398,12 +398,12 @@ Insérez la déclaration d'importation au-dessus du bloc `params` et remplissez-
 === "Avant"
 
     ```groovy title="hello-modules.nf" linenums="3"
-    // Include modules
+    // Inclure les modules
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
 
     /*
-    * Pipeline parameters
+    * Paramètres du pipeline
     */
     params {
         greeting: Path = 'data/greetings.csv'

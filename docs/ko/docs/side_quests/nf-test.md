@@ -154,13 +154,13 @@ code .
 
     workflow {
 
-        // create a channel for inputs from a CSV file
+        // 입력용 채널 생성
         greeting_ch = channel.fromPath(params.input_file).splitCsv().flatten()
 
-        // emit a greeting
+        // 인사말 출력
         sayHello(greeting_ch)
 
-        // convert the greeting to uppercase
+        // 인사말을 대문자로 변환
         convertToUpper(sayHello.out)
     }
     ```

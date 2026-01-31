@@ -192,7 +192,7 @@ Modifichi `main.nf` per avvolgere la stringa con `file()` come segue:
         println "${myFile} is of class ${myFile.class}"
     ```
 
-Ora esegua nuovamente il workflow:
+Ora eseguite nuovamente il workflow:
 
 ```bash
 nextflow run main.nf
@@ -371,7 +371,7 @@ Effettui le seguenti modifiche al workflow:
         println "Parent directory: ${myFile.parent}"
     ```
 
-E ora esegua il workflow:
+E ora eseguite il workflow:
 
 ```bash
 nextflow run main.nf
@@ -454,7 +454,7 @@ Effettui le seguenti modifiche al workflow, assicurandosi di commentare le istru
         COUNT_LINES(myFile)
     ```
 
-E ora esegua il workflow:
+E ora eseguite il workflow:
 
 ```bash
 nextflow run main.nf
@@ -522,7 +522,7 @@ Effettui la seguente modifica al modulo:
         path input_file
     ```
 
-E ora esegua nuovamente il workflow:
+E ora eseguite nuovamente il workflow:
 
 ```bash
 nextflow run main.nf

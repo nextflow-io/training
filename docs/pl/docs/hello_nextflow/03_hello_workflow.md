@@ -129,7 +129,7 @@ Dodaj następującą definicję procesu do skryptu workflow, tuż pod pierwszym 
 
 ```groovy title="hello-workflow.nf" linenums="20"
 /*
- * Use a text replacement tool to convert the greeting to uppercase
+ * Użyj narzędzia zamiany tekstu do przekształcenia pozdrowienia na wielkie litery
  */
 process convertToUpper {
 
@@ -160,13 +160,13 @@ W bloku workflow wprowadź następującą zmianę w kodzie:
     workflow {
 
         main:
-        // create a channel for inputs from a CSV file
+        // utwórz kanał dla danych wejściowych z pliku CSV
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
-        // emit a greeting
+        // wyemituj pozdrowienie
         sayHello(greeting_ch)
-        // convert the greeting to uppercase
+        // przekształć pozdrowienie na wielkie litery
         convertToUpper()
 
         publish:
@@ -180,11 +180,11 @@ W bloku workflow wprowadź następującą zmianę w kodzie:
     workflow {
 
         main:
-        // create a channel for inputs from a CSV file
+        // utwórz kanał dla danych wejściowych z pliku CSV
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
-        // emit a greeting
+        // wyemituj pozdrowienie
         sayHello(greeting_ch)
 
         publish:
@@ -206,14 +206,14 @@ W bloku workflow wprowadź następującą zmianę w kodzie:
 === "Po"
 
     ```groovy title="hello-workflow.nf" linenums="53" hl_lines="2"
-        // convert the greeting to uppercase
+        // przekształć pozdrowienie na wielkie litery
         convertToUpper(sayHello.out)
     ```
 
 === "Przed"
 
     ```groovy title="hello-workflow.nf" linenums="53" hl_lines="2"
-        // convert the greeting to uppercase
+        // przekształć pozdrowienie na wielkie litery
         convertToUpper()
     ```
 
@@ -402,7 +402,7 @@ Dodaj następującą definicję procesu do skryptu workflow:
 
 ```groovy title="hello-workflow.nf" linenums="37"
 /*
- * Collect uppercase greetings into a single output file
+ * Zbierz pozdrowienia pisane wielkimi literami do jednego pliku wyjściowego
  */
 process collectGreetings {
 
@@ -497,10 +497,10 @@ W bloku workflow wprowadź następującą zmianę w kodzie:
 === "Po"
 
     ```groovy title="hello-workflow.nf" linenums="75" hl_lines="4 5"
-        // convert the greeting to uppercase
+        // przekształć pozdrowienie na wielkie litery
         convertToUpper(sayHello.out)
 
-        // collect all the greetings into one file
+        // zbierz wszystkie pozdrowienia do jednego pliku
         collectGreetings(convertToUpper.out)
     }
     ```
@@ -508,7 +508,7 @@ W bloku workflow wprowadź następującą zmianę w kodzie:
 === "Przed"
 
     ```groovy title="hello-workflow.nf" linenums="75"
-        // convert the greeting to uppercase
+        // przekształć pozdrowienie na wielkie litery
         convertToUpper(sayHello.out)
     }
     ```
@@ -571,7 +571,7 @@ W bloku workflow wprowadź następującą zmianę w kodzie:
 === "Po"
 
     ```groovy title="hello-workflow.nf" linenums="73" hl_lines="2"
-        // collect all the greetings into one file
+        // zbierz wszystkie pozdrowienia do jednego pliku
         collectGreetings(convertToUpper.out.collect())
     }
     ```
@@ -579,7 +579,7 @@ W bloku workflow wprowadź następującą zmianę w kodzie:
 === "Przed"
 
     ```groovy title="hello-workflow.nf" linenums="73" hl_lines="2"
-        // collect all the greetings into one file
+        // zbierz wszystkie pozdrowienia do jednego pliku
         collectGreetings(convertToUpper.out)
     }
     ```
@@ -591,10 +591,10 @@ Dodajmy również kilka instrukcji `view()`, aby zwizualizować stany channel pr
 === "Po"
 
     ```groovy title="hello-workflow.nf" linenums="73" hl_lines="4-6"
-        // collect all the greetings into one file
+        // zbierz wszystkie pozdrowienia do jednego pliku
         collectGreetings(convertToUpper.out.collect())
 
-        // optional view statements
+        // opcjonalne instrukcje view
         convertToUpper.out.view { contents -> "Before collect: $contents" }
         convertToUpper.out.collect().view { contents -> "After collect: $contents" }
     }
@@ -603,7 +603,7 @@ Dodajmy również kilka instrukcji `view()`, aby zwizualizować stany channel pr
 === "Przed"
 
     ```groovy title="hello-workflow.nf" linenums="73"
-        // collect all the greetings into one file
+        // zbierz wszystkie pozdrowienia do jednego pliku
         collectGreetings(convertToUpper.out.collect())
     }
     ```
@@ -667,17 +667,17 @@ Zanim przejdziesz do następnej sekcji, zalecamy usunięcie instrukcji `view()`,
 === "Po"
 
     ```groovy title="hello-workflow.nf" linenums="73"
-        // collect all the greetings into one file
+        // zbierz wszystkie pozdrowienia do jednego pliku
         collectGreetings(convertToUpper.out.collect())
     ```
 
 === "Przed"
 
     ```groovy title="hello-workflow.nf" linenums="73" hl_lines="4-6"
-        // collect all the greetings into one file
+        // zbierz wszystkie pozdrowienia do jednego pliku
         collectGreetings(convertToUpper.out.collect())
 
-        // optional view statements
+        // opcjonalne instrukcje view
         convertToUpper.out.view { contents -> "Before collect: $contents" }
         convertToUpper.out.collect().view { contents -> "After collect: $contents" }
     ```
@@ -811,14 +811,14 @@ W bloku workflow wprowadź następującą zmianę w kodzie:
 === "Po"
 
     ```groovy title="hello-workflow.nf" linenums="74" hl_lines="2"
-        // collect all the greetings into one file
+        // zbierz wszystkie pozdrowienia do jednego pliku
         collectGreetings(convertToUpper.out.collect(), params.batch)
     ```
 
 === "Przed"
 
     ```groovy title="hello-workflow.nf" linenums="74" hl_lines="2"
-        // collect all the greetings into one file
+        // zbierz wszystkie pozdrowienia do jednego pliku
         collectGreetings(convertToUpper.out.collect())
     ```
 

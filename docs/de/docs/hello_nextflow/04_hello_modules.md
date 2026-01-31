@@ -138,7 +138,7 @@ Kopiere die gesamte process-Definition von der Workflow-Datei in die Moduldatei 
 #!/usr/bin/env nextflow
 
 /*
- * Use echo to print 'Hello World!' to a file
+ * Verwende echo, um 'Hello World!' in eine Datei zu schreiben
  */
 process sayHello {
 
@@ -170,11 +170,11 @@ Lass uns das oberhalb des `params`-Blocks einfügen und es entsprechend ausfüll
 === "Nachher"
 
     ```groovy title="hello-modules.nf" linenums="44" hl_lines="1 2"
-    // Include modules
+    // Module einbinden
     include { sayHello } from './modules/sayHello.nf'
 
     /*
-    * Pipeline parameters
+    * Pipeline-Parameter
     */
     params {
         greeting: Path = 'data/greetings.csv'
@@ -186,7 +186,7 @@ Lass uns das oberhalb des `params`-Blocks einfügen und es entsprechend ausfüll
 
     ```groovy title="hello-modules.nf" linenums="44"
     /*
-    * Pipeline parameters
+    * Pipeline-Parameter
     */
     params {
         greeting: Path = 'data/greetings.csv'
@@ -277,12 +277,12 @@ Füge die Import-Deklaration oberhalb des `params`-Blocks ein und fülle sie ent
 === "Nachher"
 
     ```groovy title="hello-modules.nf" linenums="23" hl_lines="3"
-    // Include modules
+    // Module einbinden
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
 
     /*
-    * Pipeline parameters
+    * Pipeline-Parameter
     */
     params {
         greeting: Path = 'data/greetings.csv'
@@ -293,11 +293,11 @@ Füge die Import-Deklaration oberhalb des `params`-Blocks ein und fülle sie ent
 === "Vorher"
 
     ```groovy title="hello-modules.nf" linenums="23"
-    // Include modules
+    // Module einbinden
     include { sayHello } from './modules/sayHello.nf'
 
     /*
-    * Pipeline parameters
+    * Pipeline-Parameter
     */
     params {
         greeting: Path = 'data/greetings.csv'
@@ -381,13 +381,13 @@ Füge die Import-Deklaration oberhalb des `params`-Blocks ein und fülle sie ent
 === "Nachher"
 
     ```groovy title="hello-modules.nf" linenums="3" hl_lines="4"
-    // Include modules
+    // Module einbinden
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
     include { collectGreetings } from './modules/collectGreetings.nf'
 
     /*
-    * Pipeline parameters
+    * Pipeline-Parameter
     */
     params {
         greeting: Path = 'data/greetings.csv'
@@ -398,12 +398,12 @@ Füge die Import-Deklaration oberhalb des `params`-Blocks ein und fülle sie ent
 === "Vorher"
 
     ```groovy title="hello-modules.nf" linenums="3"
-    // Include modules
+    // Module einbinden
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
 
     /*
-    * Pipeline parameters
+    * Pipeline-Parameter
     */
     params {
         greeting: Path = 'data/greetings.csv'

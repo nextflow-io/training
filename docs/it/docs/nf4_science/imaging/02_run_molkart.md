@@ -13,7 +13,7 @@ Prima di eseguire la pipeline, comprendiamo cos'è nf-core e perché è importan
 ### 1.1. Cos'è nf-core?
 
 [nf-core](https://nf-co.re/) è una raccolta guidata dalla comunità di pipeline Nextflow di alta qualità.
-Tutte le pipeline nf-core seguono la stessa struttura e convenzioni, il che significa che una volta imparato a eseguirne una, può eseguirle tutte.
+Tutte le pipeline nf-core seguono la stessa struttura e convenzioni, il che significa che una volta imparato a eseguirne una, potete eseguirle tutte.
 
 Caratteristiche chiave delle pipeline nf-core:
 
@@ -170,7 +170,7 @@ process {
 }
 ```
 
-Ora esegua nuovamente la pipeline con lo stesso comando:
+Ora eseguite nuovamente la pipeline con lo stesso comando:
 
 ```bash
 nextflow run ./molkart \
@@ -306,7 +306,7 @@ Ogni riga di process mostra:
 - **Identificatore input**: Nome del campione tra parentesi
 - **Progresso**: Percentuale completata e conteggio (es., `1 of 1 ✔`)
 
-### Conclusione
+### Takeaway
 
 Sa come lanciare una pipeline nf-core con dati di test e interpretare il suo output di esecuzione.
 
@@ -361,7 +361,7 @@ Ogni subdirectory contiene output da una fase specifica della pipeline:
 
 Il report MultiQC è un file HTML completo che aggrega le metriche di qualità da tutti i passaggi della pipeline.
 
-Apra il report nel file browser e poi clicchi sul pulsante "Show Preview" per vederlo renderizzato direttamente in VS Code.
+Aprite il report nel file browser e poi cliccate sul pulsante "Show Preview" per vederlo renderizzato direttamente in VS Code.
 
 Il report include:
 
@@ -428,7 +428,7 @@ Questo mostra:
 
     Questi report sono incredibilmente utili per ottimizzare l'allocazione delle risorse e risolvere problemi di prestazioni.
 
-### Conclusione
+### Takeaway
 
 Sa come localizzare gli output della pipeline, esaminare i report di controllo qualità e accedere alle metriche di esecuzione.
 
@@ -477,16 +477,16 @@ La differenza chiave rispetto a Hello World:
 
 !!! Tip
 
-    Se un process fallisce, può navigare alla sua directory di lavoro, esaminare `.command.err` per i messaggi di errore e persino rieseguire `.command.sh` manualmente per il debug del problema.
+    Se un process fallisce, potete navigare alla sua directory di lavoro, esaminare `.command.err` per i messaggi di errore e persino rieseguire `.command.sh` manualmente per il debug del problema.
 
 ### 4.3. Pulizia della directory di lavoro
 
 La directory di lavoro può diventare piuttosto grande nel corso di più esecuzioni della pipeline.
-Come abbiamo appreso nella Parte 1, può utilizzare `nextflow clean` per rimuovere le directory di lavoro dalle vecchie esecuzioni.
+Come abbiamo appreso nella Parte 1, potete utilizzare `nextflow clean` per rimuovere le directory di lavoro dalle vecchie esecuzioni.
 
 Tuttavia, per le pipeline nf-core con grandi file intermedi, è particolarmente importante pulire regolarmente.
 
-### Conclusione
+### Takeaway
 
 Comprende come le pipeline nf-core organizzano le loro directory di lavoro e come ispezionare singole attività per il debugging.
 
@@ -554,10 +554,10 @@ Resume è particolarmente prezioso quando:
     Resume funziona solo se non ha modificato i dati di input, il codice della pipeline o i parametri.
     Se modifica uno di questi, Nextflow rieseguirà correttamente le attività interessate.
 
-### Conclusione
+### Takeaway
 
 Sa come utilizzare `-resume` per rieseguire efficientemente le pipeline senza ripetere attività riuscite.
 
 ### Prossimi passi
 
-Ora che può eseguire nf-core/molkart con dati di test, è pronto per imparare come configurarla per i Suoi dataset.
+Ora che potete eseguire nf-core/molkart con dati di test, siete pronti per imparare come configurarla per i vostri dataset.

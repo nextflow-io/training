@@ -292,7 +292,7 @@ Du findest das `1-hello.nf`-Script in deinem aktuellen Verzeichnis, das `nextflo
     #!/usr/bin/env nextflow
 
     /*
-    * Use echo to print 'Hello World!' to a file
+    * Verwende echo, um 'Hello World!' in eine Datei zu schreiben
     */
     process sayHello {
 
@@ -309,7 +309,7 @@ Du findest das `1-hello.nf`-Script in deinem aktuellen Verzeichnis, das `nextflo
     }
 
     /*
-    * Pipeline parameters
+    * Pipeline-Parameter
     */
     params {
         input: String
@@ -318,7 +318,7 @@ Du findest das `1-hello.nf`-Script in deinem aktuellen Verzeichnis, das `nextflo
     workflow {
 
         main:
-        // emit a greeting
+        // Eine Begrüßung ausgeben
         sayHello(params.input)
 
         publish:
@@ -347,7 +347,7 @@ Der Prozess-Body muss einen Script-Block enthalten, der den auszuführenden Befe
 
 ```groovy title="1-hello.nf" linenums="3"
 /*
-* Use echo to print a greeting to a file
+* Verwende echo, um eine Begrüßung in eine Datei zu schreiben
 */
 process sayHello {
 
@@ -388,7 +388,7 @@ Der `main:`-Block ist der Haupt-Body des Workflows und der `publish:`-Block list
 workflow {
 
     main:
-    // emit a greeting
+    // Eine Begrüßung ausgeben
     sayHello(params.input)
 
     publish:
@@ -419,7 +419,7 @@ Hier haben wir diese Parameterdeklaration formalisiert, indem wir einen `params`
 
 ```groovy title="1-hello.nf" linenums="20"
 /*
- * Pipeline parameters
+ * Pipeline-Parameter
  */
 params {
     input: String

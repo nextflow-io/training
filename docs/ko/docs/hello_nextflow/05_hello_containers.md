@@ -436,7 +436,7 @@ touch modules/cowpy.nf
 ```groovy title="modules/cowpy.nf" linenums="1"
 #!/usr/bin/env nextflow
 
-// Generate ASCII art with cowpy
+// cowpy로 ASCII 아트 생성
 process cowpy {
 
     input:
@@ -469,7 +469,7 @@ workflow 블록 위에 import 선언을 삽입하고 적절하게 채웁니다.
 === "수정 후"
 
     ```groovy title="hello-containers.nf" linenums="3" hl_lines="5"
-    // Include modules
+    // 모듈 포함
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
     include { collectGreetings } from './modules/collectGreetings.nf'
@@ -479,7 +479,7 @@ workflow 블록 위에 import 선언을 삽입하고 적절하게 채웁니다.
 === "수정 전"
 
     ```groovy title="hello-containers.nf" linenums="3"
-    // Include modules
+    // 모듈 포함
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
     include { collectGreetings } from './modules/collectGreetings.nf'
@@ -500,17 +500,17 @@ workflow 블록에서 다음 코드 변경을 수행하십시오:
 
     ```groovy title="hello-containers.nf" linenums="19" hl_lines="12-13"
         main:
-        // create a channel for inputs from a CSV file
+        // CSV 파일에서 입력용 channel 생성
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
-        // emit a greeting
+        // 인사말을 내보냅니다
         sayHello(greeting_ch)
-        // convert the greeting to uppercase
+        // 인사말을 대문자로 변환
         convertToUpper(sayHello.out)
-        // collect all the greetings into one file
+        // 모든 인사말을 하나의 파일에 수집
         collectGreetings(convertToUpper.out.collect(), params.batch)
-        // generate ASCII art of the greetings with cowpy
+        // cowpy로 인사말의 ASCII 아트 생성
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
@@ -518,15 +518,15 @@ workflow 블록에서 다음 코드 변경을 수행하십시오:
 
     ```groovy title="hello-containers.nf" linenums="19"
         main:
-        // create a channel for inputs from a CSV file
+        // CSV 파일에서 입력용 channel 생성
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
-        // emit a greeting
+        // 인사말을 내보냅니다
         sayHello(greeting_ch)
-        // convert the greeting to uppercase
+        // 인사말을 대문자로 변환
         convertToUpper(sayHello.out)
-        // collect all the greetings into one file
+        // 모든 인사말을 하나의 파일에 수집
         collectGreetings(convertToUpper.out.collect(), params.batch)
     ```
 
@@ -540,7 +540,7 @@ workflow 블록에서 다음 코드 변경을 수행하십시오:
 
     ```groovy title="hello-containers.nf" linenums="9" hl_lines="7"
     /*
-    * Pipeline parameters
+    * 파이프라인 매개변수
     */
     params {
         input: Path = 'data/greetings.csv'
@@ -553,7 +553,7 @@ workflow 블록에서 다음 코드 변경을 수행하십시오:
 
     ```groovy title="hello-containers.nf" linenums="9"
     /*
-    * Pipeline parameters
+    * 파이프라인 매개변수
     */
     params {
         input: Path = 'data/greetings.csv'

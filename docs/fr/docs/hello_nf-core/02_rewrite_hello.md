@@ -253,7 +253,7 @@ workflow HELLO {
     ch_versions = channel.empty()
 
     //
-    // Collate and save software versions
+    // Rassembler et enregistrer les versions des logiciels
     //
     softwareVersionsToYAML(ch_versions)
         .collectFile(
@@ -358,13 +358,13 @@ Ouvrons le fichier de workflow `hello.nf` pour inspecter le code, qui est montr�
 #!/usr/bin/env nextflow
 
 /*
-* Pipeline parameters
+* Paramètres du pipeline
 */
 params.greeting = 'greetings.csv'
 params.batch = 'test-batch'
 params.character = 'turkey'
 
-// Include modules
+// Inclure les modules
 include { sayHello } from './modules/sayHello.nf'
 include { convertToUpper } from './modules/convertToUpper.nf'
 include { collectGreetings } from './modules/collectGreetings.nf'
@@ -372,21 +372,21 @@ include { cowpy } from './modules/cowpy.nf'
 
 workflow {
 
-  // create a channel for inputs from a CSV file
+  // créer un canal pour les entrées depuis un fichier CSV
   greeting_ch = channel.fromPath(params.greeting)
                       .splitCsv()
                       .map { line -> line[0] }
 
-  // emit a greeting
+  // émettre une salutation
   sayHello(greeting_ch)
 
-  // convert the greeting to uppercase
+  // convertir la salutation en majuscules
   convertToUpper(sayHello.out)
 
-  // collect all the greetings into one file
+  // collecter toutes les salutations dans un seul fichier
   collectGreetings(convertToUpper.out.collect(), params.batch)
 
-  // generate ASCII art of the greetings with cowpy
+  // générer de l'art ASCII des salutations avec cowpy
   cowpy(collectGreetings.out.outfile, params.character)
 }
 ```
@@ -443,7 +443,7 @@ Pendant que nous y sommes, nous pouvons également commenter la ligne `params.gr
 
     ```groovy title="original-hello/hello.nf" linenums="3" hl_lines="4"
         /*
-        * Pipeline parameters
+        * Paramètres du pipeline
         */
         //params.greeting = 'greetings.csv'
         params.batch = 'test-batch'
@@ -454,7 +454,7 @@ Pendant que nous y sommes, nous pouvons également commenter la ligne `params.gr
 
     ```groovy title="original-hello/hello.nf" linenums="3" hl_lines="4"
         /*
-        * Pipeline parameters
+        * Paramètres du pipeline
         */
         params.greeting = 'greetings.csv'
         params.batch = 'test-batch'
@@ -527,13 +527,13 @@ Si vous avez effectué toutes les modifications comme décrit, votre workflow de
 #!/usr/bin/env nextflow
 
 /*
-* Pipeline parameters
+* Paramètres du pipeline
 */
 // params.greeting = 'greetings.csv'
 params.batch = 'test-batch'
 params.character = 'turkey'
 
-// Include modules
+// Inclure les modules
 include { sayHello } from './modules/sayHello.nf'
 include { convertToUpper } from './modules/convertToUpper.nf'
 include { collectGreetings } from './modules/collectGreetings.nf'
@@ -694,7 +694,7 @@ workflow HELLO {
     ch_versions = channel.empty()
 
     //
-    // Collate and save software versions
+    // Rassembler et enregistrer les versions des logiciels
     //
     softwareVersionsToYAML(ch_versions)
         .collectFile(
@@ -768,7 +768,7 @@ Maintenant configurons les déclarations d'importation de modules.
 Voici les déclarations d'importation dans le workflow `original-hello/hello.nf` :
 
 ```groovy title="original-hello/hello.nf" linenums="9"
-// Include modules
+// Inclure les modules
 include { sayHello } from './modules/sayHello.nf'
 include { convertToUpper } from './modules/convertToUpper.nf'
 include { collectGreetings } from './modules/collectGreetings.nf'
@@ -875,7 +875,7 @@ Cet ordonnancement a du sens car dans un vrai pipeline, les processus émettraie
         cowpy(collectGreetings.out.outfile, params.character)
 
         //
-        // Collate and save software versions
+        // Rassembler et enregistrer les versions des logiciels
         //
         softwareVersionsToYAML(ch_versions)
             .collectFile(
@@ -904,7 +904,7 @@ Cet ordonnancement a du sens car dans un vrai pipeline, les processus émettraie
         ch_versions = Channel.empty()
 
         //
-        // Collate and save software versions
+        // Rassembler et enregistrer les versions des logiciels
         //
         softwareVersionsToYAML(ch_versions)
             .collectFile(

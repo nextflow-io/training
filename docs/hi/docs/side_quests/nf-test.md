@@ -154,13 +154,13 @@ Files के विस्तृत description के लिए, [Hello Nextflow
 
     workflow {
 
-        // create a channel for inputs from a CSV file
+        // CSV फ़ाइल से इनपुट के लिए एक channel बनाएं
         greeting_ch = channel.fromPath(params.input_file).splitCsv().flatten()
 
-        // emit a greeting
+        // एक अभिवादन emit करें
         sayHello(greeting_ch)
 
-        // convert the greeting to uppercase
+        // अभिवादन को uppercase में बदलें
         convertToUpper(sayHello.out)
     }
     ```
@@ -270,8 +270,8 @@ nextflow_pipeline {
 
         when {
             params {
-                // define parameters here. Example:
-                // outdir = "tests/results"
+                // यहाँ parameters define करें। उदाहरण:
+                // outdir = "tests/results" (output directory)
             }
         }
 
@@ -668,8 +668,8 @@ nextflow_process {
 
         when {
             params {
-                // define parameters here. Example:
-                // outdir = "tests/results"
+                // यहाँ parameters define करें। उदाहरण:
+                // outdir = "tests/results" (output directory)
             }
             process {
                 """
@@ -733,8 +733,8 @@ Test fail होता है क्योंकि `sayHello` process 1 input d
 
         when {
             params {
-                // define parameters here. Example:
-                // outdir = "tests/results"
+                // यहाँ parameters define करें। उदाहरण:
+                // outdir = "tests/results" (output directory)
             }
             process {
                 """
@@ -759,8 +759,8 @@ Test fail होता है क्योंकि `sayHello` process 1 input d
 
         when {
             params {
-                // define parameters here. Example:
-                // outdir = "tests/results"
+                // यहाँ parameters define करें। उदाहरण:
+                // outdir = "tests/results" (output directory)
             }
             process {
                 """
@@ -872,8 +872,8 @@ SUCCESS: Executed 1 tests in 1.685s
 
         when {
             params {
-                // define parameters here. Example:
-                // outdir = "tests/results"
+                // यहाँ parameters define करें। उदाहरण:
+                // outdir = "tests/results" (output directory)
             }
             process {
                 """
@@ -961,8 +961,8 @@ nextflow_process {
 
         when {
             params {
-                // define parameters here. Example:
-                // outdir = "tests/results"
+                // यहाँ parameters define करें। उदाहरण:
+                // outdir = "tests/results" (output directory)
             }
             process {
                 """
@@ -999,8 +999,8 @@ nextflow_process {
 
         when {
             params {
-                // define parameters here. Example:
-                // outdir = "tests/results"
+                // यहाँ parameters define करें। उदाहरण:
+                // outdir = "tests/results" (output directory)
             }
             process {
                 """
@@ -1025,8 +1025,8 @@ nextflow_process {
 
         when {
             params {
-                // define parameters here. Example:
-                // outdir = "tests/results"
+                // यहाँ parameters define करें। उदाहरण:
+                // outdir = "tests/results" (output directory)
             }
             process {
                 """

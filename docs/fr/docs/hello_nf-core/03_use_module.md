@@ -554,32 +554,32 @@ Ajoutons ces lignes après l'appel à `convertToUpper`, en supprimant l'appel à
 === "Après"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="7-8"
-        // emit a greeting
+        // émettre une salutation
         sayHello(ch_samplesheet)
 
-        // convert the greeting to uppercase
+        // convertir la salutation en majuscules
         convertToUpper(sayHello.out)
 
         // créer une map de métadonnées avec le nom du lot comme ID
         def cat_meta = [ id: params.batch ]
 
-        // generate ASCII art of the greetings with cowpy
+        // générer de l'art ASCII des salutations avec cowpy
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
 === "Avant"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="7-8"
-        // emit a greeting
+        // émettre une salutation
         sayHello(ch_samplesheet)
 
-        // convert the greeting to uppercase
+        // convertir la salutation en majuscules
         convertToUpper(sayHello.out)
 
-        // collect all the greetings into one file
-        collectGreetings(convertToUpper.out.collect(), params.batch)
+        // créer une map de métadonnées avec le nom du lot comme ID
+        def cat_meta = [ id: params.batch ]
 
-        // generate ASCII art of the greetings with cowpy
+        // générer de l'art ASCII des salutations avec cowpy
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
@@ -592,10 +592,10 @@ Ensuite, transformez le canal de fichiers en un canal de tuples contenant des m�
 === "Après"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="10-11"
-        // emit a greeting
+        // émettre une salutation
         sayHello(ch_samplesheet)
 
-        // convert the greeting to uppercase
+        // convertir la salutation en majuscules
         convertToUpper(sayHello.out)
 
         // créer une map de métadonnées avec le nom du lot comme ID
@@ -604,23 +604,23 @@ Ensuite, transformez le canal de fichiers en un canal de tuples contenant des m�
         // créer un canal avec des métadonnées et des fichiers au format tuple
         ch_for_cat = convertToUpper.out.collect().map { files -> tuple(cat_meta, files) }
 
-        // generate ASCII art of the greetings with cowpy
+        // générer de l'art ASCII des salutations avec cowpy
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
 === "Avant"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26"
-        // emit a greeting
+        // émettre une salutation
         sayHello(ch_samplesheet)
 
-        // convert the greeting to uppercase
+        // convertir la salutation en majuscules
         convertToUpper(sayHello.out)
 
         // créer une map de métadonnées avec le nom du lot comme ID
         def cat_meta = [ id: params.batch ]
 
-        // generate ASCII art of the greetings with cowpy
+        // générer de l'art ASCII des salutations avec cowpy
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
@@ -638,10 +638,10 @@ Maintenant, appelez `CAT_CAT` sur le canal nouvellement créé :
 === "Après"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="13-14"
-        // emit a greeting
+        // émettre une salutation
         sayHello(ch_samplesheet)
 
-        // convert the greeting to uppercase
+        // convertir la salutation en majuscules
         convertToUpper(sayHello.out)
 
         // créer une map de métadonnées avec le nom du lot comme ID
@@ -653,17 +653,17 @@ Maintenant, appelez `CAT_CAT` sur le canal nouvellement créé :
         // concaténer les fichiers en utilisant le module nf-core cat/cat
         CAT_CAT(ch_for_cat)
 
-        // generate ASCII art of the greetings with cowpy
+        // générer de l'art ASCII des salutations avec cowpy
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
 === "Avant"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26"
-        // emit a greeting
+        // émettre une salutation
         sayHello(ch_samplesheet)
 
-        // convert the greeting to uppercase
+        // convertir la salutation en majuscules
         convertToUpper(sayHello.out)
 
         // créer une map de métadonnées avec le nom du lot comme ID
@@ -672,7 +672,7 @@ Maintenant, appelez `CAT_CAT` sur le canal nouvellement créé :
         // créer un canal avec des métadonnées et des fichiers au format tuple
         ch_for_cat = convertToUpper.out.collect().map { files -> tuple(cat_meta, files) }
 
-        // generate ASCII art of the greetings with cowpy
+        // générer de l'art ASCII des salutations avec cowpy
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
@@ -688,10 +688,10 @@ Puisque `cowpy` n'accepte pas encore les tuples de métadonnées (nous corrigero
 === "Après"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="16-17 20"
-        // emit a greeting
+        // émettre une salutation
         sayHello(ch_samplesheet)
 
-        // convert the greeting to uppercase
+        // convertir la salutation en majuscules
         convertToUpper(sayHello.out)
 
         // créer une map de métadonnées avec le nom du lot comme ID
@@ -713,10 +713,10 @@ Puisque `cowpy` n'accepte pas encore les tuples de métadonnées (nous corrigero
 === "Avant"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="17"
-        // emit a greeting
+        // émettre une salutation
         sayHello(ch_samplesheet)
 
-        // convert the greeting to uppercase
+        // convertir la salutation en majuscules
         convertToUpper(sayHello.out)
 
         // créer une map de métadonnées avec le nom du lot comme ID

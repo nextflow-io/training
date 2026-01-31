@@ -427,7 +427,7 @@ exit
 
 ---
 
-### Conclusione
+### Takeaway
 
 Sono stati testati tutti i comandi individuali in modo interattivo nei container pertinenti.
 

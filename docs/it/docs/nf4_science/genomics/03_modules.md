@@ -39,7 +39,7 @@ executor >  local (7)
 
 Ora ci sarà una directory `work` e una directory `results_genomics` all'interno della Sua directory di progetto.
 
-### Conclusione
+### Takeaway
 
 È pronto per iniziare a modularizzare il Suo workflow.
 
@@ -170,7 +170,7 @@ include { GATK_JOINTGENOTYPING } from './modules/gatk/jointgenotyping/main.nf'
 workflow {
 ```
 
-### Conclusione
+### Takeaway
 
 Ha praticato la modularizzazione di un workflow, con il workflow genomics come esempio.
 
@@ -221,7 +221,7 @@ results_genomics/
     └── reads_son.bam.bai
 ```
 
-### Conclusione
+### Takeaway
 
 Ha modularizzato un workflow e verificato che funzioni ancora nello stesso modo di prima.
 

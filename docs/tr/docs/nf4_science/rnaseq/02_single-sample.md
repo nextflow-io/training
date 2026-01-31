@@ -24,19 +24,19 @@ Size iş akışının ana bölümlerini özetleyen `rnaseq.nf` adında bir iş a
 ```groovy title="rnaseq.nf" linenums="1"
 #!/usr/bin/env nextflow
 
-// Module INCLUDE statements
+// Modül INCLUDE ifadeleri
 
 /*
- * Pipeline parameters
+ * Pipeline parametreleri
  */
 
-// Primary input
+// Birincil girdi
 
 workflow {
 
-    // Create input channel
+    // Girdi kanalı oluştur
 
-    // Call processes
+    // Process'leri çağır
 
 }
 ```
@@ -94,7 +94,7 @@ Bu eğitim serisinin Bölüm 1 ve Bölüm 2'de öğrendiklerinizden tüm parçal
 `rnaseq.nf` dosyasına `include { FASTQC } from './modules/fastqc.nf'` ifadesini ekleyin:
 
 ```groovy title="rnaseq.nf" linenums="3"
-// Module INCLUDE statements
+// Modül INCLUDE ifadeleri
 include { FASTQC } from './modules/fastqc.nf'
 ```
 
@@ -104,7 +104,7 @@ Varsayılan değere sahip bir girdi parametresi bildirin:
 
 ```groovy title="rnaseq.nf" linenums="10"
 params {
-    // Primary input
+    // Birincil girdi
     reads: Path = "data/reads/ENCSR000COQ1_1.fastq.gz"
 }
 ```
@@ -116,10 +116,10 @@ Girdi kanalını oluşturmak için temel bir `.fromPath()` kanal fabrikası kull
 ```groovy title="rnaseq.nf" linenums="13"
 workflow {
 
-    // Create input channel from a file path
+    // Girdi kanalı oluştur from a file path
     read_ch = channel.fromPath(params.reads)
 
-    // Call processes
+    // Process'leri çağır
 
 }
 ```
@@ -129,10 +129,10 @@ workflow {
 ```groovy title="rnaseq.nf" linenums="13"
 workflow {
 
-    // Create input channel from a file path
+    // Girdi kanalı oluştur from a file path
     read_ch = channel.fromPath(params.reads)
 
-    // Initial quality control
+    // İlk kalite kontrolü
     FASTQC(read_ch)
 
 }
@@ -214,7 +214,7 @@ process TRIM_GALORE {
 `rnaseq.nf` dosyasına `include { TRIM_GALORE } from './modules/trim_galore.nf'` ifadesini ekleyin:
 
 ```groovy title="rnaseq.nf" linenums="3"
-// Module INCLUDE statements
+// Modül INCLUDE ifadeleri
 include { FASTQC } from './modules/fastqc.nf'
 include { TRIM_GALORE } from './modules/trim_galore.nf'
 ```
@@ -224,13 +224,13 @@ include { TRIM_GALORE } from './modules/trim_galore.nf'
 ```groovy title="rnaseq.nf" linenums="14"
 workflow {
 
-    // Create input channel from a file path
+    // Girdi kanalı oluştur from a file path
     read_ch = channel.fromPath(params.reads)
 
-    // Initial quality control
+    // İlk kalite kontrolü
     FASTQC(read_ch)
 
-    // Adapter trimming and post-trimming QC
+    // Adaptör kırpma ve kırpma sonrası QC
     TRIM_GALORE(read_ch)
 }
 ```
@@ -313,7 +313,7 @@ process HISAT2_ALIGN {
 `rnaseq.nf` dosyasına `include { HISAT2_ALIGN } from './modules/hisat2_align.nf'` ifadesini ekleyin:
 
 ```groovy title="rnaseq.nf" linenums="3"
-// Module INCLUDE statements
+// Modül INCLUDE ifadeleri
 include { FASTQC } from './modules/fastqc.nf'
 include { TRIM_GALORE } from './modules/trim_galore.nf'
 include { HISAT2_ALIGN } from './modules/hisat2_align.nf'
@@ -325,10 +325,10 @@ Varsayılan değere sahip bir girdi parametresi bildirin:
 
 ```groovy title="rnaseq.nf" linenums="8"
 params {
-    // Primary input
+    // Birincil girdi
     reads: Path = "data/reads/ENCSR000COQ1_1.fastq.gz"
 
-    // Reference genome archive
+    // Referans genom arşivi
     hisat2_index_zip: Path = "data/genome_index.tar.gz"
 }
 ```
@@ -342,16 +342,16 @@ Ek olarak, Hisat2 aracına sıkıştırılmış genom dizini tarball'ını sağl
 ```groovy title="rnaseq.nf" linenums="16"
 workflow {
 
-    // Create input channel from a file path
+    // Girdi kanalı oluştur from a file path
     read_ch = channel.fromPath(params.reads)
 
-    // Initial quality control
+    // İlk kalite kontrolü
     FASTQC(read_ch)
 
-    // Adapter trimming and post-trimming QC
+    // Adaptör kırpma ve kırpma sonrası QC
     TRIM_GALORE(read_ch)
 
-    // Alignment to a reference genome
+    // Referans genoma hizalama
     HISAT2_ALIGN(TRIM_GALORE.out.trimmed_reads, file (params.hisat2_index_zip))
 }
 ```

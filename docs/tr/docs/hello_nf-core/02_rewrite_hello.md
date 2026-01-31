@@ -357,13 +357,13 @@ Kodu incelemek için `hello.nf` workflow dosyasını açalım, aşağıda tam ol
 #!/usr/bin/env nextflow
 
 /*
-* Pipeline parameters
+* Pipeline parametreleri
 */
 params.greeting = 'greetings.csv'
 params.batch = 'test-batch'
 params.character = 'turkey'
 
-// Include modules
+// Modülleri dahil et
 include { sayHello } from './modules/sayHello.nf'
 include { convertToUpper } from './modules/convertToUpper.nf'
 include { collectGreetings } from './modules/collectGreetings.nf'
@@ -371,21 +371,21 @@ include { cowpy } from './modules/cowpy.nf'
 
 workflow {
 
-  // create a channel for inputs from a CSV file
+  // bir CSV dosyasından girdiler için bir kanal oluştur
   greeting_ch = channel.fromPath(params.greeting)
                       .splitCsv()
                       .map { line -> line[0] }
 
-  // emit a greeting
+  // bir selamlama yayınla
   sayHello(greeting_ch)
 
-  // convert the greeting to uppercase
+  // selamlamayı büyük harfe dönüştür
   convertToUpper(sayHello.out)
 
-  // collect all the greetings into one file
+  // tüm selamlamaları tek bir dosyada topla
   collectGreetings(convertToUpper.out.collect(), params.batch)
 
-  // generate ASCII art of the greetings with cowpy
+  // cowpy ile selamlamaların ASCII sanatını oluştur
   cowpy(collectGreetings.out.outfile, params.character)
 }
 ```
@@ -428,7 +428,7 @@ Workflow adları için modül adlarında olduğu gibi aynı kurallar geçerlidir
 === "Önce"
 
     ```groovy title="original-hello/hello.nf" linenums="18"
-        // create a channel for inputs from a CSV file
+        // bir CSV dosyasından girdiler için bir kanal oluştur
         greeting_ch = channel.fromPath(params.greeting)
                             .splitCsv()
                             .map { line -> line[0] }
@@ -442,7 +442,7 @@ Bu arada, `params.greeting = 'greetings.csv'` satırını da yorum satırı yapa
 
     ```groovy title="original-hello/hello.nf" linenums="3" hl_lines="4"
         /*
-        * Pipeline parameters
+        * Pipeline parametreleri
         */
         //params.greeting = 'greetings.csv'
         params.batch = 'test-batch'
@@ -453,7 +453,7 @@ Bu arada, `params.greeting = 'greetings.csv'` satırını da yorum satırı yapa
 
     ```groovy title="original-hello/hello.nf" linenums="3" hl_lines="4"
         /*
-        * Pipeline parameters
+        * Pipeline parametreleri
         */
         params.greeting = 'greetings.csv'
         params.batch = 'test-batch'
@@ -476,32 +476,32 @@ Ardından, workflow gövdesinde çağrılan işlemlerin geri kalanından önce b
     ```groovy title="original-hello/hello.nf" linenums="22" hl_lines="1"
         main:
 
-        // emit a greeting
+        // bir selamlama yayınla
         sayHello(greeting_ch)
 
-        // convert the greeting to uppercase
+        // selamlamayı büyük harfe dönüştür
         convertToUpper(sayHello.out)
 
-        // collect all the greetings into one file
+        // tüm selamlamaları tek bir dosyada topla
         collectGreetings(convertToUpper.out.collect(), params.batch)
 
-        // generate ASCII art of the greetings with cowpy
+        // cowpy ile ASCII art oluştur
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
 === "Önce"
 
     ```groovy title="original-hello/hello.nf" linenums="21"
-        // emit a greeting
+        // bir selamlama yayınla
         sayHello(greeting_ch)
 
-        // convert the greeting to uppercase
+        // selamlamayı büyük harfe dönüştür
         convertToUpper(sayHello.out)
 
-        // collect all the greetings into one file
+        // tüm selamlamaları tek bir dosyada topla
         collectGreetings(convertToUpper.out.collect(), params.batch)
 
-        // generate ASCII art of the greetings with cowpy
+        // cowpy ile ASCII art oluştur
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
@@ -526,13 +526,13 @@ Tüm değişiklikleri açıklandığı gibi yaptıysanız, workflow'unuz şimdi 
 #!/usr/bin/env nextflow
 
 /*
-* Pipeline parameters
+* Pipeline parametreleri
 */
 // params.greeting = 'greetings.csv'
 params.batch = 'test-batch'
 params.character = 'turkey'
 
-// Include modules
+// Modülleri dahil et
 include { sayHello } from './modules/sayHello.nf'
 include { convertToUpper } from './modules/convertToUpper.nf'
 include { collectGreetings } from './modules/collectGreetings.nf'
@@ -546,16 +546,16 @@ workflow HELLO {
 
     main:
 
-    // emit a greeting
+    // bir selamlama yayınla
     sayHello(greeting_ch)
 
-    // convert the greeting to uppercase
+    // selamlamayı büyük harfe dönüştür
     convertToUpper(sayHello.out)
 
-    // collect all the greetings into one file
+    // tüm selamlamaları tek bir dosyada topla
     collectGreetings(convertToUpper.out.collect(), params.batch)
 
-    // generate ASCII art of the greetings with cowpy
+    // cowpy ile selamlamaların ASCII sanatını oluştur
     cowpy(collectGreetings.out.outfile, params.character)
 
     emit:
@@ -589,7 +589,7 @@ include { HELLO } from './hello.nf'
 params.greeting = 'greetings.csv'
 
 workflow {
-  // create a channel for inputs from a CSV file
+  // bir CSV dosyasından girdiler için bir kanal oluştur
   greeting_ch = channel.fromPath(params.greeting)
                       .splitCsv()
                       .map { line -> line[0] }
@@ -767,7 +767,7 @@ tree core-hello/modules
 Bunlar `original-hello/hello.nf` workflow'undaki import ifadeleriydi:
 
 ```groovy title="original-hello/hello.nf" linenums="9"
-// Include modules
+// Modülleri dahil et
 include { sayHello } from './modules/sayHello.nf'
 include { convertToUpper } from './modules/convertToUpper.nf'
 include { collectGreetings } from './modules/collectGreetings.nf'
@@ -830,16 +830,16 @@ Hatırlatma olarak, orijinal workflow'daki ilgili kod şudur, birleştirilebilir
 ```groovy title="original-hello/hello.nf" linenums="22"
     main:
 
-    // emit a greeting
+    // bir selamlama yayınla
     sayHello(greeting_ch)
 
-    // convert the greeting to uppercase
+    // selamlamayı büyük harfe dönüştür
     convertToUpper(sayHello.out)
 
-    // collect all the greetings into one file
+    // tüm selamlamaları tek bir dosyada topla
     collectGreetings(convertToUpper.out.collect(), params.batch)
 
-    // generate ASCII art of the greetings with cowpy
+    // cowpy ile selamlamaların ASCII sanatını oluştur
     cowpy(collectGreetings.out.outfile, params.character)
 ```
 
@@ -861,16 +861,16 @@ Bu sıralama mantıklıdır çünkü gerçek bir pipeline'da, process'ler workfl
 
         ch_versions = Channel.empty()
 
-        // emit a greeting
+        // bir selamlama yayınla
         sayHello(greeting_ch)
 
-        // convert the greeting to uppercase
+        // selamlamayı büyük harfe dönüştür
         convertToUpper(sayHello.out)
 
-        // collect all the greetings into one file
+        // tüm selamlamaları tek bir dosyada topla
         collectGreetings(convertToUpper.out.collect(), params.batch)
 
-        // generate ASCII art of the greetings with cowpy
+        // cowpy ile ASCII art oluştur
         cowpy(collectGreetings.out.outfile, params.character)
 
         //
@@ -927,14 +927,14 @@ Bu harika görünüyor, ancak `sayHello()` process'ine ilettiğimiz kanalın ad�
 === "Sonra"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26"
-        // emit a greeting (updated to use the nf-core convention for samplesheets)
+        // bir selamlama yayınla (updated to use the nf-core convention for samplesheets)
         sayHello(ch_samplesheet)
     ```
 
 === "Önce"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26"
-        // emit a greeting
+        // bir selamlama yayınla
         sayHello(greeting_ch)
     ```
 
@@ -1143,7 +1143,7 @@ Bu kod, yazım zamanında çok alana özgü olan ve basit pipeline projemiz içi
 Hatırlatma olarak, kanal oluşturma şöyle görünüyordu (çözümler dizininde görüldüğü gibi):
 
 ```groovy title="solutions/composable-hello/main.nf" linenums="10" hl_lines="4"
-    // create a channel for inputs from a CSV file
+    // bir CSV dosyasından girdiler için bir kanal oluştur
     greeting_ch = channel.fromPath(params.greeting)
         .splitCsv()
         .map { line -> line[0] }

@@ -574,7 +574,7 @@ nf-core pipeline टेम्पलेट में एक डिफ़ॉल्
 
 ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="1" hl_lines="13"
 //
-// Subworkflow with functionality specific to the core/hello pipeline
+// core/hello pipeline के लिए विशिष्ट कार्यक्षमता के साथ Subworkflow
 //
 
 /*
@@ -598,7 +598,7 @@ include { UTILS_NEXTFLOW_PIPELINE   } from '../../nf-core/utils_nextflow_pipelin
 
     ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="80" hl_lines="4"
         //
-        // Create channel from input file provided through params.input
+        // params.input के माध्यम से प्रदान की गई इनपुट फ़ाइल से channel बनाएं
         //
         ch_samplesheet = channel.fromList(samplesheetToList(params.input, "${projectDir}/assets/schema_input.json"))
             .map { line -> line[0] }
@@ -612,7 +612,7 @@ include { UTILS_NEXTFLOW_PIPELINE   } from '../../nf-core/utils_nextflow_pipelin
 
     ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="80" hl_lines="4 5"
         //
-        // Create channel from input file provided through params.input
+        // params.input के माध्यम से प्रदान की गई इनपुट फ़ाइल से channel बनाएं
         //
         ch_samplesheet = channel.fromPath(params.input)
             .splitCsv()

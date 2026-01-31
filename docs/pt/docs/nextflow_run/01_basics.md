@@ -62,7 +62,7 @@ Você pode abri-lo no explorador de arquivos ou pela linha de comando usando o u
 
 Isso é o que vamos tentar replicar com nosso primeiro fluxo de trabalho Nextflow.
 
-### Resumo
+### Conclusão
 
 Agora você sabe como executar um comando simples no terminal que produz algum texto e, opcionalmente, como fazê-lo escrever a saída em um arquivo.
 
@@ -296,7 +296,7 @@ Em contraste, se você olhar o diretório `results`, ainda há apenas um conjunt
 
 Isso mostra que os resultados publicados serão sobrescritos por execuções subsequentes, enquanto os diretórios de tarefa em `work/` são preservados.
 
-### Resumo
+### Conclusão
 
 Você sabe como executar um script Nextflow simples, monitorar sua execução e encontrar suas saídas.
 
@@ -349,7 +349,7 @@ Você encontrará o script `1-hello.nf` no seu diretório atual, que deve ser `n
     workflow {
 
         main:
-        // emit a greeting
+        // emite uma saudação
         sayHello(params.input)
 
         publish:
@@ -419,7 +419,7 @@ O bloco `main:` é o corpo principal do fluxo de trabalho e o bloco `publish:` l
 workflow {
 
     main:
-    // emit a greeting
+    // emite uma saudação
     sayHello(params.input)
 
     publish:
@@ -510,7 +510,7 @@ Você também verá que quando um fluxo de trabalho gera múltiplas saídas, cad
 
     No entanto, não recomendamos usar isso em nenhum trabalho novo, pois eventualmente será proibido em versões futuras da linguagem Nextflow.
 
-### Resumo
+### Conclusão
 
 Agora você sabe como um fluxo de trabalho Nextflow simples é estruturado e como os componentes básicos se relacionam com sua funcionalidade.
 
@@ -670,7 +670,7 @@ Note que isso não remove os subdiretórios de dois caracteres (como `eb/` acima
 
     Você é responsável por salvar quaisquer saídas que você se importe! Essa é a principal razão pela qual preferimos usar o modo `copy` em vez do modo `symlink` para a diretiva `publish`.
 
-### Resumo
+### Conclusão
 
 Você sabe como relançar um pipeline sem repetir etapas que já foram executadas de forma idêntica, inspecionar o log de execução e usar o comando `nextflow clean` para limpar diretórios de trabalho antigos.
 

@@ -24,19 +24,19 @@
 ```groovy title="rnaseq.nf" linenums="1"
 #!/usr/bin/env nextflow
 
-// Module INCLUDE statements
+// 모듈 INCLUDE 문
 
 /*
  * Pipeline parameters
  */
 
-// Primary input
+// 기본 입력
 
 workflow {
 
-    // Create input channel
+    // 입력 채널 생성
 
-    // Call processes
+    // 프로세스 호출
 
 }
 ```
@@ -94,7 +94,7 @@ process FASTQC {
 `rnaseq.nf` 파일에 `include { FASTQC } from './modules/fastqc.nf'` 문을 추가합니다:
 
 ```groovy title="rnaseq.nf" linenums="3"
-// Module INCLUDE statements
+// 모듈 INCLUDE 문
 include { FASTQC } from './modules/fastqc.nf'
 ```
 
@@ -104,7 +104,7 @@ include { FASTQC } from './modules/fastqc.nf'
 
 ```groovy title="rnaseq.nf" linenums="10"
 params {
-    // Primary input
+    // 기본 입력
     reads: Path = "data/reads/ENCSR000COQ1_1.fastq.gz"
 }
 ```
@@ -116,10 +116,10 @@ params {
 ```groovy title="rnaseq.nf" linenums="13"
 workflow {
 
-    // Create input channel from a file path
+    // 파일 경로에서 입력 채널 생성
     read_ch = channel.fromPath(params.reads)
 
-    // Call processes
+    // 프로세스 호출
 
 }
 ```
@@ -129,10 +129,10 @@ workflow {
 ```groovy title="rnaseq.nf" linenums="13"
 workflow {
 
-    // Create input channel from a file path
+    // 파일 경로에서 입력 채널 생성
     read_ch = channel.fromPath(params.reads)
 
-    // Initial quality control
+    // 초기 품질 관리
     FASTQC(read_ch)
 
 }
@@ -214,7 +214,7 @@ process TRIM_GALORE {
 `rnaseq.nf` 파일에 `include { TRIM_GALORE } from './modules/trim_galore.nf'` 문을 추가합니다:
 
 ```groovy title="rnaseq.nf" linenums="3"
-// Module INCLUDE statements
+// 모듈 INCLUDE 문
 include { FASTQC } from './modules/fastqc.nf'
 include { TRIM_GALORE } from './modules/trim_galore.nf'
 ```
@@ -224,13 +224,13 @@ include { TRIM_GALORE } from './modules/trim_galore.nf'
 ```groovy title="rnaseq.nf" linenums="14"
 workflow {
 
-    // Create input channel from a file path
+    // 파일 경로에서 입력 채널 생성
     read_ch = channel.fromPath(params.reads)
 
-    // Initial quality control
+    // 초기 품질 관리
     FASTQC(read_ch)
 
-    // Adapter trimming and post-trimming QC
+    // 어댑터 트리밍 및 트리밍 후 QC
     TRIM_GALORE(read_ch)
 }
 ```
@@ -313,7 +313,7 @@ process HISAT2_ALIGN {
 `rnaseq.nf` 파일에 `include { HISAT2_ALIGN } from './modules/hisat2_align.nf'` 문을 추가합니다:
 
 ```groovy title="rnaseq.nf" linenums="3"
-// Module INCLUDE statements
+// 모듈 INCLUDE 문
 include { FASTQC } from './modules/fastqc.nf'
 include { TRIM_GALORE } from './modules/trim_galore.nf'
 include { HISAT2_ALIGN } from './modules/hisat2_align.nf'
@@ -325,10 +325,10 @@ include { HISAT2_ALIGN } from './modules/hisat2_align.nf'
 
 ```groovy title="rnaseq.nf" linenums="8"
 params {
-    // Primary input
+    // 기본 입력
     reads: Path = "data/reads/ENCSR000COQ1_1.fastq.gz"
 
-    // Reference genome archive
+    // 참조 게놈 아카이브
     hisat2_index_zip: Path = "data/genome_index.tar.gz"
 }
 ```
@@ -342,16 +342,16 @@ params {
 ```groovy title="rnaseq.nf" linenums="16"
 workflow {
 
-    // Create input channel from a file path
+    // 파일 경로에서 입력 채널 생성
     read_ch = channel.fromPath(params.reads)
 
-    // Initial quality control
+    // 초기 품질 관리
     FASTQC(read_ch)
 
-    // Adapter trimming and post-trimming QC
+    // 어댑터 트리밍 및 트리밍 후 QC
     TRIM_GALORE(read_ch)
 
-    // Alignment to a reference genome
+    // 참조 게놈에 정렬
     HISAT2_ALIGN(TRIM_GALORE.out.trimmed_reads, file (params.hisat2_index_zip))
 }
 ```

@@ -436,7 +436,7 @@ Nous pouvons modeler notre processus `cowpy` sur les autres processus que nous a
 ```groovy title="modules/cowpy.nf" linenums="1"
 #!/usr/bin/env nextflow
 
-// Generate ASCII art with cowpy
+// Générer de l'art ASCII avec cowpy
 process cowpy {
 
     input:
@@ -469,7 +469,7 @@ Insérez la déclaration d'importation au-dessus du bloc workflow et remplissez-
 === "Après"
 
     ```groovy title="hello-containers.nf" linenums="3" hl_lines="5"
-    // Include modules
+    // Inclure les modules
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
     include { collectGreetings } from './modules/collectGreetings.nf'
@@ -479,7 +479,7 @@ Insérez la déclaration d'importation au-dessus du bloc workflow et remplissez-
 === "Avant"
 
     ```groovy title="hello-containers.nf" linenums="3"
-    // Include modules
+    // Inclure les modules
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
     include { collectGreetings } from './modules/collectGreetings.nf'
@@ -500,17 +500,17 @@ Dans le bloc workflow, effectuez la modification de code suivante :
 
     ```groovy title="hello-containers.nf" linenums="19" hl_lines="12-13"
         main:
-        // create a channel for inputs from a CSV file
+        // créer un canal pour les entrées depuis un fichier CSV
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
-        // emit a greeting
+        // émettre une salutation
         sayHello(greeting_ch)
-        // convert the greeting to uppercase
+        // convertir la salutation en majuscules
         convertToUpper(sayHello.out)
-        // collect all the greetings into one file
+        // collecter toutes les salutations dans un seul fichier
         collectGreetings(convertToUpper.out.collect(), params.batch)
-        // generate ASCII art of the greetings with cowpy
+        // générer de l'art ASCII des salutations avec cowpy
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
@@ -518,15 +518,15 @@ Dans le bloc workflow, effectuez la modification de code suivante :
 
     ```groovy title="hello-containers.nf" linenums="19"
         main:
-        // create a channel for inputs from a CSV file
+        // créer un canal pour les entrées depuis un fichier CSV
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
-        // emit a greeting
+        // émettre une salutation
         sayHello(greeting_ch)
-        // convert the greeting to uppercase
+        // convertir la salutation en majuscules
         convertToUpper(sayHello.out)
-        // collect all the greetings into one file
+        // collecter toutes les salutations dans un seul fichier
         collectGreetings(convertToUpper.out.collect(), params.batch)
     ```
 
@@ -540,7 +540,7 @@ C'est techniquement optionnel mais c'est la pratique recommandée et c'est une o
 
     ```groovy title="hello-containers.nf" linenums="9" hl_lines="7"
     /*
-    * Pipeline parameters
+    * Paramètres du pipeline
     */
     params {
         input: Path = 'data/greetings.csv'
@@ -553,7 +553,7 @@ C'est techniquement optionnel mais c'est la pratique recommandée et c'est une o
 
     ```groovy title="hello-containers.nf" linenums="9"
     /*
-    * Pipeline parameters
+    * Paramètres du pipeline
     */
     params {
         input: Path = 'data/greetings.csv'

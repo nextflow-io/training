@@ -202,11 +202,11 @@ Veamos qué hace posible eso en el código del workflow.
     workflow {
 
         main:
-        // create a channel for inputs from a CSV file
+        // crear un canal para entradas desde un archivo CSV
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
-        // emit a greeting
+        // emitir un saludo
         sayHello(greeting_ch)
 
         publish:
@@ -233,11 +233,11 @@ Desglosémoslo.
 
 ```groovy title="2a-inputs.nf" linenums="29" hl_lines="3-5"
     main:
-    // create a channel for inputs from a CSV file
+    // crear un canal para entradas desde un archivo CSV
     greeting_ch = channel.fromPath(params.input)
                         .splitCsv()
                         .map { line -> line[0] }
-    // emit a greeting
+    // emitir un saludo
     sayHello(greeting_ch)
 ```
 
@@ -282,11 +282,11 @@ Luego, en la última línea del bloque `main:` del workflow, proporcionamos el c
 
 ```groovy title="2a-inputs.nf" linenums="29" hl_lines="7"
     main:
-    // create a channel for inputs from a CSV file
+    // crear un canal para entradas desde un archivo CSV
     greeting_ch = channel.fromPath(params.input)
                         .splitCsv()
                         .map { line -> line[0] }
-    // emit a greeting
+    // emitir un saludo
     sayHello(greeting_ch)
 ```
 
@@ -321,7 +321,7 @@ Esta es una forma de asegurar que los nombres de los archivos de salida no colis
 
 ¡Y ese es el único cambio que hemos tenido que hacer dentro de la declaración del process!
 
-### Resumen
+### Conclusión
 
 Comprende a un nivel básico cómo los channels y operadores nos permiten procesar múltiples entradas eficientemente.
 
@@ -494,15 +494,15 @@ Veamos el código e identifiquemos los patrones clave para workflows de múltipl
     workflow {
 
         main:
-        // create a channel for inputs from a CSV file
+        // crear un canal para entradas desde un archivo CSV
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
-        // emit a greeting
+        // emitir un saludo
         sayHello(greeting_ch)
-        // convert the greeting to uppercase
+        // convertir el saludo a mayúsculas
         convertToUpper(sayHello.out)
-        // collect all the greetings into one file
+        // recopilar todos los saludos en un archivo
         collectGreetings(convertToUpper.out.collect(), params.batch)
 
         publish:
@@ -559,15 +559,15 @@ Lo realmente interesante de ver aquí es cómo las llamadas de process están en
 
 ```groovy title="2b-multistep.nf" linenums="68" hl_lines="9 11"
     main:
-    // create a channel for inputs from a CSV file
+    // crear un canal para entradas desde un archivo CSV
     greeting_ch = channel.fromPath(params.input)
                         .splitCsv()
                         .map { line -> line[0] }
-    // emit a greeting
+    // emitir un saludo
     sayHello(greeting_ch)
-    // convert the greeting to uppercase
+    // convertir el saludo a mayúsculas
     convertToUpper(sayHello.out)
-    // collect all the greetings into one file
+    // recopilar todos los saludos en un archivo
     collectGreetings(convertToUpper.out.collect(), params.batch)
 ```
 
@@ -582,7 +582,7 @@ Así es como transportamos datos de un paso al siguiente en Nextflow.
 La tercera llamada de process, a `collectGreetings`, es un poco diferente.
 
 ```groovy title="2b-multistep.nf" linenums="77"
-    // collect all the greetings into one file
+    // recopilar todos los saludos en un archivo
     collectGreetings(convertToUpper.out.collect(), params.batch)
 ```
 
@@ -642,7 +642,7 @@ La desventaja es que a veces puede hacer más difícil descifrar lo que está ha
 Puede haber notado que `collectGreetings` toma una segunda entrada, `params.batch`:
 
 ```groovy title="2b-multistep.nf" linenums="77"
-    // collect all the greetings into one file
+    // recopilar todos los saludos en un archivo
     collectGreetings(convertToUpper.out.collect(), params.batch)
 ```
 
@@ -761,7 +761,7 @@ Hay formas más sofisticadas de organizar las salidas publicadas; tocaremos algu
 
     Para cobertura detallada de la construcción de workflows de múltiples pasos, vea [Hello Nextflow Part 3: Hello Workflow](../hello_nextflow/03_hello_workflow.md).
 
-### Resumen
+### Conclusión
 
 Comprende a un nivel básico cómo se construyen los workflows de múltiples pasos usando channels y operadores y cómo operan.
 También ha visto que los processes pueden tomar múltiples entradas y producir múltiples salidas, y que estas pueden publicarse de manera estructurada.
@@ -817,7 +817,7 @@ Comience abriendo el archivo de workflow `2c-modules.nf`.
     ```groovy title="2c-modules.nf" linenums="1"
     #!/usr/bin/env nextflow
 
-    // Include modules
+    // Incluir módulos
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
     include { collectGreetings } from './modules/collectGreetings.nf'
@@ -833,15 +833,15 @@ Comience abriendo el archivo de workflow `2c-modules.nf`.
     workflow {
 
         main:
-        // create a channel for inputs from a CSV file
+        // crear un canal para entradas desde un archivo CSV
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
-        // emit a greeting
+        // emitir un saludo
         sayHello(greeting_ch)
-        // convert the greeting to uppercase
+        // convertir el saludo a mayúsculas
         convertToUpper(sayHello.out)
-        // collect all the greetings into one file
+        // recopilar todos los saludos en un archivo
         collectGreetings(convertToUpper.out.collect(), params.batch)
 
         publish:
@@ -875,7 +875,7 @@ Puede ver que la lógica del workflow es exactamente la misma que en la versión
 Sin embargo, el código del process ya no está en el archivo del workflow, y en su lugar hay declaraciones `include` que apuntan a archivos separados bajo `modules`.
 
 ```groovy title="hello-modules.nf" linenums="3"
-// Include modules
+// Incluir módulos
 include { sayHello } from './modules/sayHello.nf'
 include { convertToUpper } from './modules/convertToUpper.nf'
 include { collectGreetings } from './modules/collectGreetings.nf'
@@ -941,7 +941,7 @@ Nada de eso importa a Nextflow; lo que importa es el script de trabajo que se ge
 
     Puede aprender más sobre desarrollar workflows componibles en el Side Quest sobre [Workflows of Workflows](https://training.nextflow.io/latest/side_quests/workflows_of_workflows/).
 
-### Resumen
+### Conclusión
 
 Sabe cómo los processes pueden almacenarse en módulos independientes para promover la reutilización de código y mejorar la mantenibilidad.
 
@@ -1160,7 +1160,7 @@ El workflow es muy similar al anterior, más el paso extra para ejecutar `cowpy`
     ```groovy title="2d-container.nf" linenums="1" hl_lines="7 15 32 39 59-62"
     #!/usr/bin/env nextflow
 
-    // Include modules
+    // Incluir módulos
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
     include { collectGreetings } from './modules/collectGreetings.nf'
@@ -1178,17 +1178,17 @@ El workflow es muy similar al anterior, más el paso extra para ejecutar `cowpy`
     workflow {
 
         main:
-        // create a channel for inputs from a CSV file
+        // crear un canal para entradas desde un archivo CSV
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
-        // emit a greeting
+        // emitir un saludo
         sayHello(greeting_ch)
-        // convert the greeting to uppercase
+        // convertir el saludo a mayúsculas
         convertToUpper(sayHello.out)
-        // collect all the greetings into one file
+        // recopilar todos los saludos en un archivo
         collectGreetings(convertToUpper.out.collect(), params.batch)
-        // generate ASCII art of the greetings with cowpy
+        // generar arte ASCII de los saludos con cowpy
         cowpy(collectGreetings.out.outfile, params.character)
 
         publish:
@@ -1226,7 +1226,7 @@ El workflow es muy similar al anterior, más el paso extra para ejecutar `cowpy`
 Puede ver que este workflow importa un process `cowpy` de un archivo de módulo, y lo llama en la salida de la llamada `collectGreetings()`, más un parámetro de entrada llamado `params.character`.
 
 ```groovy title="2d-container.nf" linenums="25"
-// generate ASCII art with cowpy
+// generar arte ASCII con cowpy
 cowpy(collectGreetings.out, params.character)
 ```
 
@@ -1389,7 +1389,7 @@ También monta el subdirectorio de trabajo correspondiente en el contenedor, est
 
 ¡Esto confirma que todo el trabajo duro que tuvimos que hacer manualmente en la sección anterior ahora lo hace Nextflow por nosotros!
 
-### Resumen
+### Conclusión
 
 Comprende qué papel juegan los contenedores en la gestión de versiones de herramientas de software y asegurar la reproducibilidad.
 

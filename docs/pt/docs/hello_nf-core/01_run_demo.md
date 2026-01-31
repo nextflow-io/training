@@ -144,7 +144,7 @@ Agora podemos espiar o código-fonte mais facilmente conforme necessário.
 
 Mas primeiro, vamos tentar executar nosso primeiro pipeline do nf-core!
 
-### Resumo
+### Conclusão
 
 Agora você sabe como encontrar um pipeline através do site do nf-core e recuperar uma cópia local do código-fonte.
 
@@ -373,7 +373,7 @@ Por exemplo, o arquivo `execution_timeline_*` mostra quais processos foram execu
 
 Esses relatórios são gerados automaticamente para todos os pipelines do nf-core.
 
-### Resumo
+### Conclusão
 
 Você sabe como executar um pipeline do nf-core usando seu perfil de teste integrado e onde encontrar suas saídas.
 
@@ -630,7 +630,7 @@ O `schema_input.json` é um arquivo usado para definir a estrutura da planilha d
 Cada coluna pode ter um tipo, padrão, descrição e texto de ajuda em um formato legível por máquina.
 O schema é usado para vários propósitos, incluindo validação automatizada e fornecimento de mensagens de erro úteis.
 
-### Resumo
+### Conclusão
 
 Você sabe quais são os principais componentes de um pipeline do nf-core e como o código é organizado; onde os elementos principais de configuração estão localizados; e está ciente de para que serve a validação de entrada.
 

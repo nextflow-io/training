@@ -202,11 +202,11 @@ Diamo un'occhiata a cosa rende questo possibile nel codice del workflow.
     workflow {
 
         main:
-        // create a channel for inputs from a CSV file
+        // crea un canale per gli input da un file CSV
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
-        // emit a greeting
+        // emette un saluto
         sayHello(greeting_ch)
 
         publish:
@@ -233,11 +233,11 @@ Analizziamolo.
 
 ```groovy title="2a-inputs.nf" linenums="29" hl_lines="3-5"
     main:
-    // create a channel for inputs from a CSV file
+    // crea un canale per gli input da un file CSV
     greeting_ch = channel.fromPath(params.input)
                         .splitCsv()
                         .map { line -> line[0] }
-    // emit a greeting
+    // emette un saluto
     sayHello(greeting_ch)
 ```
 
@@ -282,11 +282,11 @@ Successivamente, nell'ultima riga del blocco `main:` del workflow, forniamo il c
 
 ```groovy title="2a-inputs.nf" linenums="29" hl_lines="7"
     main:
-    // create a channel for inputs from a CSV file
+    // crea un canale per gli input da un file CSV
     greeting_ch = channel.fromPath(params.input)
                         .splitCsv()
                         .map { line -> line[0] }
-    // emit a greeting
+    // emette un saluto
     sayHello(greeting_ch)
 ```
 
@@ -494,15 +494,15 @@ Guardiamo il codice e identifichiamo i pattern chiave per i workflow multi-step.
     workflow {
 
         main:
-        // create a channel for inputs from a CSV file
+        // crea un canale per gli input da un file CSV
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
-        // emit a greeting
+        // emette un saluto
         sayHello(greeting_ch)
-        // convert the greeting to uppercase
+        // converte il saluto in maiuscolo
         convertToUpper(sayHello.out)
-        // collect all the greetings into one file
+        // raccoglie tutti i saluti in un file
         collectGreetings(convertToUpper.out.collect(), params.batch)
 
         publish:
@@ -559,15 +559,15 @@ La cosa veramente interessante da guardare qui è come le chiamate ai process so
 
 ```groovy title="2b-multistep.nf" linenums="68" hl_lines="9 11"
     main:
-    // create a channel for inputs from a CSV file
+    // crea un canale per gli input da un file CSV
     greeting_ch = channel.fromPath(params.input)
                         .splitCsv()
                         .map { line -> line[0] }
-    // emit a greeting
+    // emette un saluto
     sayHello(greeting_ch)
-    // convert the greeting to uppercase
+    // converte il saluto in maiuscolo
     convertToUpper(sayHello.out)
-    // collect all the greetings into one file
+    // raccoglie tutti i saluti in un file
     collectGreetings(convertToUpper.out.collect(), params.batch)
 ```
 
@@ -582,7 +582,7 @@ Il pattern è semplice: `processName.out` si riferisce al channel di output di u
 La terza chiamata al process, a `collectGreetings`, è un po' diversa.
 
 ```groovy title="2b-multistep.nf" linenums="77"
-    // collect all the greetings into one file
+    // raccoglie tutti i saluti in un file
     collectGreetings(convertToUpper.out.collect(), params.batch)
 ```
 
@@ -642,7 +642,7 @@ Il lato negativo è che a volte può rendere più difficile decifrare cosa sta f
 Potresti aver notato che `collectGreetings` prende un secondo input, `params.batch`:
 
 ```groovy title="2b-multistep.nf" linenums="77"
-    // collect all the greetings into one file
+    // raccoglie tutti i saluti in un file
     collectGreetings(convertToUpper.out.collect(), params.batch)
 ```
 
@@ -817,7 +817,7 @@ Inizia aprendo il file di workflow `2c-modules.nf`.
     ```groovy title="2c-modules.nf" linenums="1"
     #!/usr/bin/env nextflow
 
-    // Include modules
+    // Include i moduli
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
     include { collectGreetings } from './modules/collectGreetings.nf'
@@ -833,15 +833,15 @@ Inizia aprendo il file di workflow `2c-modules.nf`.
     workflow {
 
         main:
-        // create a channel for inputs from a CSV file
+        // crea un canale per gli input da un file CSV
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
-        // emit a greeting
+        // emette un saluto
         sayHello(greeting_ch)
-        // convert the greeting to uppercase
+        // converte il saluto in maiuscolo
         convertToUpper(sayHello.out)
-        // collect all the greetings into one file
+        // raccoglie tutti i saluti in un file
         collectGreetings(convertToUpper.out.collect(), params.batch)
 
         publish:
@@ -875,7 +875,7 @@ Vedi che la logica del workflow è esattamente la stessa della versione preceden
 Tuttavia, il codice del process non c'è più nel file del workflow, e invece ci sono dichiarazioni `include` che puntano a file separati sotto `modules`.
 
 ```groovy title="hello-modules.nf" linenums="3"
-// Include modules
+// Include i moduli
 include { sayHello } from './modules/sayHello.nf'
 include { convertToUpper } from './modules/convertToUpper.nf'
 include { collectGreetings } from './modules/collectGreetings.nf'
@@ -1160,7 +1160,7 @@ Il workflow è molto simile a quello precedente, più lo step extra per eseguire
     ```groovy title="2d-container.nf" linenums="1" hl_lines="7 15 32 39 59-62"
     #!/usr/bin/env nextflow
 
-    // Include modules
+    // Include i moduli
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
     include { collectGreetings } from './modules/collectGreetings.nf'
@@ -1178,17 +1178,17 @@ Il workflow è molto simile a quello precedente, più lo step extra per eseguire
     workflow {
 
         main:
-        // create a channel for inputs from a CSV file
+        // crea un canale per gli input da un file CSV
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
-        // emit a greeting
+        // emette un saluto
         sayHello(greeting_ch)
-        // convert the greeting to uppercase
+        // converte il saluto in maiuscolo
         convertToUpper(sayHello.out)
-        // collect all the greetings into one file
+        // raccoglie tutti i saluti in un file
         collectGreetings(convertToUpper.out.collect(), params.batch)
-        // generate ASCII art of the greetings with cowpy
+        // genera arte ASCII dei saluti con cowpy
         cowpy(collectGreetings.out.outfile, params.character)
 
         publish:
@@ -1226,7 +1226,7 @@ Il workflow è molto simile a quello precedente, più lo step extra per eseguire
 Vedi che questo workflow importa un process `cowpy` da un file modulo, e lo chiama sull'output della chiamata `collectGreetings()`, più un parametro di input chiamato `params.character`.
 
 ```groovy title="2d-container.nf" linenums="25"
-// generate ASCII art with cowpy
+// genera arte ASCII con cowpy
 cowpy(collectGreetings.out, params.character)
 ```
 

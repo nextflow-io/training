@@ -348,7 +348,7 @@ nextflow run main.nf
 
 Separamos as amostras normais e de tumor em dois canais diferentes e usamos um closure fornecido a `view()` para rotulá-las de forma diferente na saída: `ch_tumor_samples.view{'Tumor sample: ' + it}`.
 
-### Resumo
+### Conclusão
 
 Nesta seção, você aprendeu:
 
@@ -805,7 +805,7 @@ nextflow run main.nf
     [[id:patientC, repeat:1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
     ```
 
-### Resumo
+### Conclusão
 
 Nesta seção, você aprendeu:
 
@@ -975,7 +975,7 @@ Usar `map` para forçar seus dados na estrutura correta pode ser complicado, mas
 
 Agora temos cada amostra repetida em todos os intervalos genômicos, criando múltiplas unidades de análise independentes que podem ser processadas em paralelo. Mas e se quisermos trazer amostras relacionadas de volta? Na próxima seção, aprenderemos como agrupar amostras que compartilham atributos comuns.
 
-### Resumo
+### Conclusão
 
 Nesta seção, você aprendeu:
 

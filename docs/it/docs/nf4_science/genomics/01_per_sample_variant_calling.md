@@ -167,7 +167,7 @@ gatk HaplotypeCaller \
 
 Il file di output `reads_mother.vcf` viene creato all'interno della Sua directory di lavoro nel container, quindi non lo vedrà nell'explorer di file di VS Code a meno che non modifichi il percorso del file di output.
 Tuttavia, è un piccolo file di test, quindi può usare `cat` per aprirlo e visualizzarne il contenuto.
-Se scorre fino all'inizio del file, troverà un'intestazione composta da molte righe di metadati, seguita da un elenco di chiamate di varianti, una per riga.
+Se scorrete fino all'inizio del file, troverete un'intestazione composta da molte righe di metadati, seguita da un elenco di chiamate di varianti, una per riga.
 
 ```console title="reads_mother.vcf" linenums="26"
 #CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	reads_mother
@@ -187,7 +187,7 @@ Ha la stessa funzione del file indice BAM, per consentire agli strumenti di cerc
 exit
 ```
 
-### Conclusione
+### Takeaway
 
 Sa come testare i comandi di indicizzazione Samtools e di chiamata di varianti GATK nei rispettivi container.
 
@@ -358,7 +358,7 @@ Può verificare che il file indice sia stato generato correttamente guardando ne
 
 Eccolo!
 
-### Conclusione
+### Takeaway
 
 Sa come includere uno strumento genomico in un workflow Nextflow a passaggio singolo e farlo eseguire utilizzando un container.
 
@@ -542,7 +542,7 @@ Se apre il file VCF, dovrebbe vedere lo stesso contenuto del file che ha generat
 
 Questo è l'output che ci interessa generare per ciascun campione nel nostro studio.
 
-### Conclusione
+### Takeaway
 
 Sa come creare un workflow a due passaggi molto semplice che fa un lavoro di analisi reale ed è in grado di gestire le idiosincrasie dei formati di file genomici come i file accessori.
 
@@ -615,7 +615,7 @@ Cosa divertente: questo _potrebbe funzionare_, OPPURE _potrebbe fallire_. Ad ese
     [7a/89bc43] GATK_HAPLOTYPECALLER (2) | 3 of 3, cached: 1 ✔
     ```
 
-Se l'esecuzione del Suo workflow è riuscita, la esegua di nuovo finché non ottiene un errore come questo:
+Se l'esecuzione del vostro workflow è riuscita, eseguitela di nuovo finché non ottenete un errore come questo:
 
 ??? failure "Output del comando"
 
@@ -685,7 +685,7 @@ Aggiunga queste due righe nel corpo del workflow prima della chiamata al process
     SAMTOOLS_INDEX.out.view()
 ```
 
-Quindi esegua di nuovo il comando del workflow.
+Quindi eseguite di nuovo il comando del workflow.
 
 ```bash
 nextflow run genomics-1.nf
@@ -934,7 +934,7 @@ Vedrà che il channel contiene le tre tuple previste (percorsi dei file troncati
 
 Questo sarà molto più sicuro, andando avanti.
 
-### Conclusione
+### Takeaway
 
 Sa come fare in modo che il Suo workflow venga eseguito su più campioni (in modo indipendente).
 
@@ -1039,7 +1039,7 @@ Sì! Infatti, Nextflow rileva correttamente che le chiamate ai processi sono esa
 
 E questo è tutto! Il nostro semplice workflow di chiamata di varianti ha tutte le funzionalità di base che volevamo.
 
-### Conclusione
+### Takeaway
 
 Sa come creare un workflow lineare a più passaggi per indicizzare un file BAM e applicare la chiamata di varianti per campione utilizzando GATK.
 

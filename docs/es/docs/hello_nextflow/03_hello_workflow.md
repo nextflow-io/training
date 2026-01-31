@@ -129,7 +129,7 @@ Agregue la siguiente definición de proceso al script de workflow, justo debajo 
 
 ```groovy title="hello-workflow.nf" linenums="20"
 /*
- * Use a text replacement tool to convert the greeting to uppercase
+ * Usar una herramienta de reemplazo de texto para convertir el saludo a mayúsculas
  */
 process convertToUpper {
 
@@ -160,13 +160,13 @@ En el bloque workflow, haga el siguiente cambio de código:
     workflow {
 
         main:
-        // create a channel for inputs from a CSV file
+        // crear un canal para entradas desde un archivo CSV
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
-        // emit a greeting
+        // emitir un saludo
         sayHello(greeting_ch)
-        // convert the greeting to uppercase
+        // convertir el saludo a mayúsculas
         convertToUpper()
 
         publish:
@@ -180,11 +180,11 @@ En el bloque workflow, haga el siguiente cambio de código:
     workflow {
 
         main:
-        // create a channel for inputs from a CSV file
+        // crear un canal para entradas desde un archivo CSV
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
-        // emit a greeting
+        // emitir un saludo
         sayHello(greeting_ch)
 
         publish:
@@ -206,14 +206,14 @@ En el bloque workflow, haga el siguiente cambio de código:
 === "Después"
 
     ```groovy title="hello-workflow.nf" linenums="53" hl_lines="2"
-        // convert the greeting to uppercase
+        // convertir el saludo a mayúsculas
         convertToUpper(sayHello.out)
     ```
 
 === "Antes"
 
     ```groovy title="hello-workflow.nf" linenums="53" hl_lines="2"
-        // convert the greeting to uppercase
+        // convertir el saludo a mayúsculas
         convertToUpper()
     ```
 
@@ -342,7 +342,7 @@ Nextflow hizo el trabajo duro de manejar archivos de entrada y salida individual
 
 Esta es una de las razones por las que los channels de Nextflow son tan poderosos: se encargan del trabajo tedioso involucrado en conectar pasos del flujo de trabajo.
 
-### Resumen
+### Conclusión
 
 Sabe cómo encadenar procesos proporcionando la salida de un paso como entrada al siguiente paso.
 
@@ -402,7 +402,7 @@ Agregue la siguiente definición de proceso al script de workflow:
 
 ```groovy title="hello-workflow.nf" linenums="37"
 /*
- * Collect uppercase greetings into a single output file
+ * Recopilar saludos en mayúsculas en un único archivo de salida
  */
 process collectGreetings {
 
@@ -497,10 +497,10 @@ En el bloque workflow, haga el siguiente cambio de código:
 === "Después"
 
     ```groovy title="hello-workflow.nf" linenums="75" hl_lines="4 5"
-        // convert the greeting to uppercase
+        // convertir el saludo a mayúsculas
         convertToUpper(sayHello.out)
 
-        // collect all the greetings into one file
+        // recopilar todos los saludos en un archivo
         collectGreetings(convertToUpper.out)
     }
     ```
@@ -508,7 +508,7 @@ En el bloque workflow, haga el siguiente cambio de código:
 === "Antes"
 
     ```groovy title="hello-workflow.nf" linenums="75"
-        // convert the greeting to uppercase
+        // convertir el saludo a mayúsculas
         convertToUpper(sayHello.out)
     }
     ```
@@ -571,7 +571,7 @@ En el bloque workflow, haga el siguiente cambio de código:
 === "Después"
 
     ```groovy title="hello-workflow.nf" linenums="73" hl_lines="2"
-        // collect all the greetings into one file
+        // recopilar todos los saludos en un archivo
         collectGreetings(convertToUpper.out.collect())
     }
     ```
@@ -579,7 +579,7 @@ En el bloque workflow, haga el siguiente cambio de código:
 === "Antes"
 
     ```groovy title="hello-workflow.nf" linenums="73" hl_lines="2"
-        // collect all the greetings into one file
+        // recopilar todos los saludos en un archivo
         collectGreetings(convertToUpper.out)
     }
     ```
@@ -591,10 +591,10 @@ También incluyamos un par de declaraciones `view()` para visualizar los estados
 === "Después"
 
     ```groovy title="hello-workflow.nf" linenums="73" hl_lines="4-6"
-        // collect all the greetings into one file
+        // recopilar todos los saludos en un archivo
         collectGreetings(convertToUpper.out.collect())
 
-        // optional view statements
+        // declaraciones view opcionales
         convertToUpper.out.view { contents -> "Before collect: $contents" }
         convertToUpper.out.collect().view { contents -> "After collect: $contents" }
     }
@@ -603,7 +603,7 @@ También incluyamos un par de declaraciones `view()` para visualizar los estados
 === "Antes"
 
     ```groovy title="hello-workflow.nf" linenums="73"
-        // collect all the greetings into one file
+        // recopilar todos los saludos en un archivo
         collectGreetings(convertToUpper.out.collect())
     }
     ```
@@ -667,24 +667,24 @@ Antes de pasar a la siguiente sección, le recomendamos que elimine las declarac
 === "Después"
 
     ```groovy title="hello-workflow.nf" linenums="73"
-        // collect all the greetings into one file
+        // recopilar todos los saludos en un archivo
         collectGreetings(convertToUpper.out.collect())
     ```
 
 === "Antes"
 
     ```groovy title="hello-workflow.nf" linenums="73" hl_lines="4-6"
-        // collect all the greetings into one file
+        // recopilar todos los saludos en un archivo
         collectGreetings(convertToUpper.out.collect())
 
-        // optional view statements
+        // declaraciones view opcionales
         convertToUpper.out.view { contents -> "Before collect: $contents" }
         convertToUpper.out.collect().view { contents -> "After collect: $contents" }
     ```
 
 Esto es básicamente la operación inversa del punto 2.4.2.
 
-### Resumen
+### Conclusión
 
 Sabe cómo recopilar salidas de un lote de llamadas de proceso y alimentarlas en un análisis conjunto o paso de suma.
 
@@ -781,7 +781,7 @@ En la sección de parámetros del pipeline, haga los siguientes cambios de códi
 
     ```groovy title="hello-workflow.nf" linenums="55" hl_lines="6"
     /*
-     * Pipeline parameters
+     * Parámetros del pipeline
      */
     params {
         input: Path = 'data/greetings.csv'
@@ -793,7 +793,7 @@ En la sección de parámetros del pipeline, haga los siguientes cambios de códi
 
     ```groovy title="hello-workflow.nf" linenums="55"
     /*
-     * Pipeline parameters
+     * Parámetros del pipeline
      */
     params {
         input: Path = 'data/greetings.csv'
@@ -811,14 +811,14 @@ En el bloque workflow, haga el siguiente cambio de código:
 === "Después"
 
     ```groovy title="hello-workflow.nf" linenums="74" hl_lines="2"
-        // collect all the greetings into one file
+        // recopilar todos los saludos en un archivo
         collectGreetings(convertToUpper.out.collect(), params.batch)
     ```
 
 === "Antes"
 
     ```groovy title="hello-workflow.nf" linenums="74" hl_lines="2"
-        // collect all the greetings into one file
+        // recopilar todos los saludos en un archivo
         collectGreetings(convertToUpper.out.collect())
     ```
 
@@ -861,7 +861,7 @@ Se ejecuta exitosamente y produce la salida deseada:
 
 Ahora, mientras especifiquemos el parámetro apropiadamente, las ejecuciones subsiguientes en otros lotes de entradas no sobrescribirán los resultados anteriores.
 
-### Resumen
+### Conclusión
 
 Sabe cómo pasar más de una entrada a un proceso.
 
@@ -1074,7 +1074,7 @@ Si mira en el directorio `results/hello_workflow/`, encontrará el nuevo archivo
 
 Siéntase libre de agregar más saludos al CSV y probar qué sucede.
 
-### Resumen
+### Conclusión
 
 Sabe cómo hacer que un proceso emita múltiples salidas nombradas y cómo manejarlas apropiadamente a nivel de flujo de trabajo.
 

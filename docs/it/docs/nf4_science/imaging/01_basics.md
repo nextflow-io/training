@@ -9,7 +9,7 @@ Non esamineremo ancora il codice; vediamo prima come si presenta la sua esecuzio
 
 ### 1.1. Avviare il workflow e monitorare l'esecuzione
 
-Nel terminale, esegua il seguente comando:
+Nel terminale, eseguite il seguente comando:
 
 ```bash
 nextflow run hello-world.nf --greeting 'Hello World!'
@@ -129,7 +129,7 @@ work
 </details>
 
 Dovrebbe riconoscere immediatamente il file `output.txt`, che è infatti l'output originale del processo `sayHello` che è stato pubblicato nella directory `results`.
-Se lo apre, troverà di nuovo il saluto `Hello World!`.
+Se lo aprite, troverete di nuovo il saluto `Hello World!`.
 
 <details>
   <summary>Contenuto del file output.txt</summary>
@@ -175,7 +175,7 @@ Provi a rieseguire il workflow alcune volte con valori diversi per l'argomento `
 
 Osservi come gli output e i log delle directory di attività isolate vengono preservati, mentre il contenuto della directory `results` viene sovrascritto dall'output delle esecuzioni successive.
 
-### Conclusione
+### Takeaway
 
 Sa come eseguire un semplice script Nextflow, monitorarne l'esecuzione e trovare i suoi output.
 
@@ -223,7 +223,7 @@ process sayHello {
 
 workflow {
 
-    // emit a greeting
+    // emette un saluto
     sayHello(params.greeting)
 }
 ```
@@ -295,7 +295,7 @@ Qui abbiamo un **workflow** che consiste in una chiamata al processo `sayHello`,
 ```groovy title="hello-world.nf" linenums="22"
 workflow {
 
-    // emit a greeting
+    // emette un saluto
     sayHello(params.greeting)
 }
 ```
@@ -317,7 +317,7 @@ Infatti, semplicemente dichiarando `params.someParameterName` ci permetterà di 
     Questi parametri del workflow dichiarati utilizzando il sistema `params` richiedono sempre due trattini (`--`).
     Questo li distingue dai parametri a livello Nextflow, che richiedono solo un trattino (`-`).
 
-### Conclusione
+### Takeaway
 
 Ora sa come è strutturato un semplice workflow Nextflow e come i componenti di base si relazionano alla sua funzionalità.
 
@@ -346,7 +346,7 @@ Ci sono due vantaggi chiave nel farlo:
 - Se sta sviluppando una pipeline, può iterare più rapidamente poiché deve solo eseguire il/i processo/i su cui sta lavorando attivamente per testare le sue modifiche.
 - Se sta eseguendo una pipeline in produzione e qualcosa va storto, in molti casi può risolvere il problema e rilanciare la pipeline, e riprenderà l'esecuzione dal punto di errore, il che può farle risparmiare molto tempo e calcolo.
 
-Per utilizzarlo, aggiunga semplicemente `-resume` al suo comando ed esegua:
+Per utilizzarlo, aggiungete semplicemente `-resume` al vostro comando ed eseguite:
 
 ```bash
 nextflow run hello-world.nf --greeting 'Hello World!' -resume
@@ -399,7 +399,7 @@ Può utilizzare il log Nextflow per cercare un'esecuzione in base al suo timesta
 
     È responsabile del salvataggio di qualsiasi output che le interessa o su cui prevede di fare affidamento! Se sta utilizzando la direttiva `publishDir` per questo scopo, si assicuri di utilizzare la modalità `copy`, non la modalità `symlink`.
 
-### Conclusione
+### Takeaway
 
 Sa come rilanciare una pipeline senza ripetere i passaggi che sono già stati eseguiti in modo identico, ispezionare il log di esecuzione e utilizzare il comando `nextflow clean` per ripulire le vecchie directory work.
 

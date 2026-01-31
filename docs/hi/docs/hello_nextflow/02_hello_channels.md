@@ -115,9 +115,9 @@ Workflow block में, channel factory code add करो:
     workflow {
 
         main:
-        // create a channel for inputs
+        // इनपुट के लिए एक channel बनाएं
         greeting_ch = channel.of('Hello Channels!')
-        // emit a greeting
+        // एक अभिवादन emit करें
         sayHello(params.input)
 
         publish:
@@ -131,7 +131,7 @@ Workflow block में, channel factory code add करो:
     workflow {
 
         main:
-        // emit a greeting
+        // एक अभिवादन emit करें
         sayHello(params.input)
 
         publish:
@@ -153,9 +153,9 @@ Workflow block में, निम्नलिखित code change करो:
     workflow {
 
         main:
-        // create a channel for inputs
+        // इनपुट के लिए एक channel बनाएं
         greeting_ch = channel.of('Hello Channels!')
-        // emit a greeting
+        // एक अभिवादन emit करें
         sayHello(greeting_ch)
 
         publish:
@@ -169,9 +169,9 @@ Workflow block में, निम्नलिखित code change करो:
     workflow {
 
         main:
-        // create a channel for inputs
+        // इनपुट के लिए एक channel बनाएं
         greeting_ch = channel.of('Hello Channels!')
-        // emit a greeting
+        // एक अभिवादन emit करें
         sayHello(params.input)
 
         publish:
@@ -231,10 +231,10 @@ Workflow block में यह tiny line add करो:
     workflow {
 
         main:
-        // create a channel for inputs
+        // इनपुट के लिए एक channel बनाएं
         greeting_ch = channel.of('Hello Channels!')
                              .view()
-        // emit a greeting
+        // एक अभिवादन emit करें
         sayHello(greeting_ch)
 
         publish:
@@ -248,9 +248,9 @@ Workflow block में यह tiny line add करो:
     workflow {
 
         main:
-        // create a channel for inputs
+        // इनपुट के लिए एक channel बनाएं
         greeting_ch = channel.of('Hello Channels!')
-        // emit a greeting
+        // एक अभिवादन emit करें
         sayHello(greeting_ch)
 
         publish:
@@ -315,7 +315,7 @@ Workflow block से पहले, निम्नलिखित code change �
 === "After"
 
     ```groovy title="hello-channels.nf" linenums="30" hl_lines="2"
-    // create a channel for inputs
+    // इनपुट के लिए एक channel बनाएं
     greeting_ch = channel.of('Hello','Bonjour','Holà')
                          .view()
     ```
@@ -323,7 +323,7 @@ Workflow block से पहले, निम्नलिखित code change �
 === "Before"
 
     ```groovy title="hello-channels.nf" linenums="30" hl_lines="2"
-    // create a channel for inputs
+    // इनपुट के लिए एक channel बनाएं
     greeting_ch = channel.of('Hello Channels')
                          .view()
     ```
@@ -662,12 +662,12 @@ Common sense suggest करता है कि हमें single value के
     workflow {
 
         main:
-        // declare an array of input greetings
+        // इनपुट अभिवादनों की एक array declare करें
         greetings_array = ['Hello','Bonjour','Holà']
-        // create a channel for inputs
+        // इनपुट के लिए एक channel बनाएं
         greeting_ch = channel.of('Hello','Bonjour','Holà')
                              .view()
-        // emit a greeting
+        // एक अभिवादन emit करें
         sayHello(greeting_ch)
 
         publish:
@@ -681,10 +681,10 @@ Common sense suggest करता है कि हमें single value के
     workflow {
 
         main:
-        // create a channel for inputs
+        // इनपुट के लिए एक channel बनाएं
         greeting_ch = channel.of('Hello','Bonjour','Holà')
                              .view()
-        // emit a greeting
+        // एक अभिवादन emit करें
         sayHello(greeting_ch)
 
         publish:
@@ -706,12 +706,12 @@ Workflow block में, निम्नलिखित change करो:
     workflow {
 
         main:
-        // declare an array of input greetings
+        // इनपुट अभिवादनों की एक array declare करें
         greetings_array = ['Hello','Bonjour','Holà']
-        // create a channel for inputs
+        // इनपुट के लिए एक channel बनाएं
         greeting_ch = channel.of(greetings_array)
                              .view()
-        // emit a greeting
+        // एक अभिवादन emit करें
         sayHello(greeting_ch)
 
         publish:
@@ -725,12 +725,12 @@ Workflow block में, निम्नलिखित change करो:
     workflow {
 
         main:
-        // declare an array of input greetings
+        // इनपुट अभिवादनों की एक array declare करें
         greetings_array = ['Hello','Bonjour','Holà']
-        // create a channel for inputs
+        // इनपुट के लिए एक channel बनाएं
         greeting_ch = channel.of('Hello','Bonjour','Holà')
                              .view()
-        // emit a greeting
+        // एक अभिवादन emit करें
         sayHello(greeting_ch)
 
         publish:
@@ -811,13 +811,13 @@ Workflow block में, निम्नलिखित code change करो:
     workflow {
 
         main:
-        // declare an array of input greetings
+        // इनपुट अभिवादनों की एक array declare करें
         greetings_array = ['Hello','Bonjour','Holà']
-        // create a channel for inputs
+        // इनपुट के लिए एक channel बनाएं
         greeting_ch = channel.of(greetings_array)
                              .view()
                              .flatten()
-        // emit a greeting
+        // एक अभिवादन emit करें
         sayHello(greeting_ch)
 
         publish:
@@ -831,12 +831,12 @@ Workflow block में, निम्नलिखित code change करो:
     workflow {
 
         main:
-        // declare an array of input greetings
+        // इनपुट अभिवादनों की एक array declare करें
         greetings_array = ['Hello','Bonjour','Holà']
-        // create a channel for inputs
+        // इनपुट के लिए एक channel बनाएं
         greeting_ch = channel.of(greetings_array)
                              .view()
-        // emit a greeting
+        // एक अभिवादन emit करें
         sayHello(greeting_ch)
 
         publish:
@@ -861,14 +861,14 @@ Workflow block में, निम्नलिखित code change करो:
     workflow {
 
         main:
-        // declare an array of input greetings
+        // इनपुट अभिवादनों की एक array declare करें
         greetings_array = ['Hello','Bonjour','Holà']
-        // create a channel for inputs
+        // इनपुट के लिए एक channel बनाएं
         greeting_ch = channel.of(greetings_array)
                              .view { greeting -> "Before flatten: $greeting" }
                              .flatten()
                              .view { greeting -> "After flatten: $greeting" }
-        // emit a greeting
+        // एक अभिवादन emit करें
         sayHello(greeting_ch)
 
         publish:
@@ -882,13 +882,13 @@ Workflow block में, निम्नलिखित code change करो:
     workflow {
 
         main:
-        // declare an array of input greetings
+        // इनपुट अभिवादनों की एक array declare करें
         greetings_array = ['Hello','Bonjour','Holà']
-        // create a channel for inputs
+        // इनपुट के लिए एक channel बनाएं
         greeting_ch = channel.of(greetings_array)
                              .view()
                              .flatten()
-        // emit a greeting
+        // एक अभिवादन emit करें
         sayHello(greeting_ch)
 
         publish:
@@ -997,7 +997,7 @@ Parameter declaration में निम्नलिखित edit करो:
 
     ```groovy title="hello-channels.nf" linenums="20" hl_lines="5"
     /*
-    * Pipeline parameters
+    * Pipeline पैरामीटर
     */
     params {
         input: Path = 'data/greetings.csv'
@@ -1029,12 +1029,12 @@ Workflow block में, निम्नलिखित code change करो:
     workflow {
 
         main:
-        // create a channel for inputs from a CSV file
+        // CSV फ़ाइल से इनपुट के लिए एक channel बनाएं
         greeting_ch = channel.fromPath(params.input)
                              .view { greeting -> "Before flatten: $greeting" }
-                             // .flatten()
-                             // .view { greeting -> "After flatten: $greeting" }
-        // emit a greeting
+                             // .flatten() को uncomment करें
+                             // .view { greeting -> "Flatten के बाद: $greeting" }
+        // एक अभिवादन emit करें
         sayHello(greeting_ch)
 
         publish:
@@ -1048,14 +1048,14 @@ Workflow block में, निम्नलिखित code change करो:
     workflow {
 
         main:
-        // declare an array of input greetings
+        // इनपुट अभिवादनों की एक array declare करें
         greetings_array = ['Hello','Bonjour','Holà']
-        // create a channel for inputs
+        // इनपुट के लिए एक channel बनाएं
         greeting_ch = channel.of(greetings_array)
                              .view { greeting -> "Before flatten: $greeting" }
                              .flatten()
                              .view { greeting -> "After flatten: $greeting" }
-        // emit a greeting
+        // एक अभिवादन emit करें
         sayHello(greeting_ch)
 
         publish:
@@ -1134,12 +1134,12 @@ Workflow block में, `flatten()` को `splitcsv()` (uncommented) से r
     workflow {
 
         main:
-        // create a channel for inputs from a CSV file
+        // CSV फ़ाइल से इनपुट के लिए एक channel बनाएं
         greeting_ch = channel.fromPath(params.input)
                              .view { csv -> "Before splitCsv: $csv" }
                              .splitCsv()
                              .view { csv -> "After splitCsv: $csv" }
-        // emit a greeting
+        // एक अभिवादन emit करें
         sayHello(greeting_ch)
 
         publish:
@@ -1153,12 +1153,12 @@ Workflow block में, `flatten()` को `splitcsv()` (uncommented) से r
     workflow {
 
         main:
-        // create a channel for inputs from a CSV file
+        // CSV फ़ाइल से इनपुट के लिए एक channel बनाएं
         greeting_ch = channel.fromPath(params.input)
                              .view { greeting -> "Before flatten: $greeting" }
-                             // .flatten()
-                             // .view { greeting -> "After flatten: $greeting" }
-        // emit a greeting
+                             // .flatten() को uncomment करें
+                             // .view { greeting -> "Flatten के बाद: $greeting" }
+        // एक अभिवादन emit करें
         sayHello(greeting_ch)
 
         publish:
@@ -1249,14 +1249,14 @@ Workflow block में, निम्नलिखित code change करो:
     workflow {
 
         main:
-        // create a channel for inputs from a CSV file
+        // CSV फ़ाइल से इनपुट के लिए एक channel बनाएं
         greeting_ch = channel.fromPath(params.input)
                              .view { csv -> "Before splitCsv: $csv" }
                              .splitCsv()
                              .view { csv -> "After splitCsv: $csv" }
                              .map { item -> item[0] }
                              .view { csv -> "After map: $csv" }
-        // emit a greeting
+        // एक अभिवादन emit करें
         sayHello(greeting_ch)
 
         publish:
@@ -1270,12 +1270,12 @@ Workflow block में, निम्नलिखित code change करो:
     workflow {
 
         main:
-        // create a channel for inputs from a CSV file
+        // CSV फ़ाइल से इनपुट के लिए एक channel बनाएं
         greeting_ch = channel.fromPath(params.input)
                              .view { csv -> "Before splitCsv: $csv" }
                              .splitCsv()
                              .view { csv -> "After splitCsv: $csv" }
-        // emit a greeting
+        // एक अभिवादन emit करें
         sayHello(greeting_ch)
 
         publish:

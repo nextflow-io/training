@@ -114,7 +114,7 @@ Poiché ha utilizzato VS Code durante tutto Hello Nextflow, ha già familiarità
 
 Può trascinare i pannelli o nasconderli (`Ctrl/Cmd+B` per attivare/disattivare la barra laterale) per personalizzare il Suo layout mentre lavoriamo sugli esempi.
 
-### Conclusione
+### Takeaway
 
 Ha configurato VS Code con l'estensione Nextflow e comprende il layout dello spazio di lavoro per uno sviluppo efficiente.
 
@@ -158,7 +158,7 @@ L'evidenziazione della sintassi La aiuta a identificare rapidamente:
 
 Questa organizzazione visiva diventa inestimabile quando si lavora con workflow complessi contenenti molteplici process e flussi di dati intricati.
 
-### Conclusione
+### Takeaway
 
 Comprende come l'evidenziazione della sintassi di VS Code La aiuta a leggere la struttura del codice Nextflow e identificare diversi elementi del linguaggio per uno sviluppo più rapido.
 
@@ -216,7 +216,7 @@ Vedrà suggerimenti per:
 
 Questo fa risparmiare tempo durante la configurazione dei process e funziona attraverso diversi ambiti di configurazione. Per esempio, provi a digitare `docker.` per vedere le opzioni di configurazione specifiche di Docker.
 
-### Conclusione
+### Takeaway
 
 Può utilizzare l'auto-completamento intelligente di VS Code per scoprire operazioni sui channel, direttive dei process e opzioni di configurazione disponibili senza memorizzare la sintassi.
 
@@ -258,7 +258,7 @@ Gli errori comuni nella sintassi Nextflow includono:
 
 Il language server Nextflow evidenzia questi problemi nel pannello Problemi. Può controllarli preventivamente per evitare errori di sintassi durante l'esecuzione di una pipeline.
 
-### Conclusione
+### Takeaway
 
 Può utilizzare il rilevamento degli errori e il Pannello Problemi di VS Code per individuare errori di sintassi e problemi prima di eseguire il Suo workflow, risparmiando tempo e prevenendo frustrazioni.
 
@@ -344,7 +344,7 @@ Inizi a digitare per filtrare i risultati.
 
 ### 4.3. Trova Tutti i Riferimenti
 
-Comprendere dove un process o una variabile viene utilizzata in tutto il Suo codebase può essere molto utile. Per esempio, se vuole trovare tutti i riferimenti al process `FASTQC`, inizi navigando alla sua definizione. Può farlo aprendo direttamente `modules/fastqc.nf`, o utilizzando la funzione di navigazione rapida di VS Code con `Ctrl/Cmd-click` come abbiamo fatto sopra. Una volta alla definizione del process, clicchi con il tasto destro sul nome del process `FASTQC` e selezioni "Find All References" dal menu contestuale per vedere tutte le istanze dove viene utilizzato.
+Comprendere dove un process o una variabile viene utilizzata in tutto il vostro codebase può essere molto utile. Per esempio, se volete trovare tutti i riferimenti al process `FASTQC`, iniziate navigando alla sua definizione. Potete farlo aprendo direttamente `modules/fastqc.nf`, o utilizzando la funzione di navigazione rapida di VS Code con `Ctrl/Cmd-click` come abbiamo fatto sopra. Una volta alla definizione del process, cliccate con il tasto destro sul nome del process `FASTQC` e selezionate "Find All References" dal menu contestuale per vedere tutte le istanze dove viene utilizzato.
 
 ![Trova riferimenti](img/references.png)
 
@@ -352,7 +352,7 @@ Questa funzionalità visualizza tutte le istanze dove `FASTQC` è referenziato a
 
 ### 4.4. Pannello Outline
 
-Il pannello Outline, situato nella barra laterale Explorer (clicchi ![Icona Explorer](img/files_icon.png)), fornisce una panoramica conveniente di tutti i simboli nel Suo file corrente. Questa funzionalità Le consente di navigare e gestire rapidamente la struttura del Suo codice visualizzando funzioni, variabili e altri elementi chiave in una vista gerarchica.
+Il pannello Outline, situato nella barra laterale Explorer (cliccate ![Icona Explorer](img/files_icon.png)), fornisce una panoramica conveniente di tutti i simboli nel vostro file corrente. Questa funzionalità vi consente di navigare e gestire rapidamente la struttura del vostro codice visualizzando funzioni, variabili e altri elementi chiave in una vista gerarchica.
 
 ![Pannello outline](img/outline.png)
 
@@ -360,7 +360,7 @@ Utilizzi il pannello Outline per navigare rapidamente a diverse parti del Suo co
 
 ### 4.5. Visualizzazione DAG
 
-L'estensione Nextflow di VS Code può visualizzare il Suo workflow come un Grafo Aciclico Diretto (DAG). Questo La aiuta a comprendere il flusso dei dati e le dipendenze tra i processes. Apra `complex_workflow.nf` e clicchi il pulsante "Preview DAG" sopra `workflow {` (il secondo blocco `workflow` in questo file):
+L'estensione Nextflow di VS Code può visualizzare il vostro workflow come un Grafo Aciclico Diretto (DAG). Questo vi aiuta a comprendere il flusso dei dati e le dipendenze tra i processes. Aprite `complex_workflow.nf` e cliccate il pulsante "Preview DAG" sopra `workflow {` (il secondo blocco `workflow` in questo file):
 
 ![Anteprima DAG](img/dag_preview.png)
 
@@ -370,7 +370,7 @@ Questo è solo il workflow 'principale', ma può anche visualizzare in anteprima
 
 Per questo workflow, può utilizzare i nodi nel DAG per navigare alle corrispondenti definizioni dei processes nel codice. Clicchi su un nodo, e La porterà alla definizione del process rilevante nell'editor. Particolarmente quando un workflow cresce a dimensioni considerevoli, questo può davvero aiutarLa a navigare nel codice e comprendere come i processes sono collegati.
 
-### Conclusione
+### Takeaway
 
 Può navigare workflow complessi in modo efficiente usando vai-alla-definizione, ricerca dei simboli, trova riferimenti e visualizzazione DAG per comprendere la struttura del codice e le dipendenze.
 
@@ -427,7 +427,7 @@ Questo Le mostra ogni file che utilizza directory di pubblicazione, aiutandoLa a
 - Trovare esempi di direttive specifiche
 - Garantire coerenza tra i moduli
 
-### Conclusione
+### Takeaway
 
 Può gestire progetti multi-file complessi usando la navigazione rapida dei file, editor divisi e ricerca a livello di progetto per lavorare in modo efficiente su workflows e moduli.
 
@@ -488,7 +488,7 @@ Usi nuovamente **Ctrl+/** (o **Cmd+/**) per decommentare il codice.
 
 #### Ripiegamento del Codice per Panoramica
 
-In `complex_workflow.nf`, noti le piccole frecce accanto alle definizioni dei processes. Le clicchi per ripiegare (comprimere) i processes:
+In `complex_workflow.nf`, notate le piccole frecce accanto alle definizioni dei processes. Cliccatele per ripiegare (comprimere) i processes:
 
 ![Ripiegamento codice](img/code_folding.png)
 
@@ -517,7 +517,7 @@ Questo è particolarmente utile per:
 - Aggiungere commenti a molteplici righe contemporaneamente
 - Modificare definizioni di parametri simili attraverso molteplici processes
 
-### Conclusione
+### Takeaway
 
 Può mantenere un codice pulito e leggibile usando formattazione automatica, funzionalità di commento, ripiegamento del codice, corrispondenza delle parentesi e modifica multi-linea per organizzare workflow complessi in modo efficiente.
 
@@ -550,7 +550,7 @@ Apra il pannello Source Control usando il pulsante source control (![Icona Sourc
 
 ### 7.2. Esecuzione e Ispezione dei Workflows
 
-Eseguiamo un workflow e quindi ispezioniamo i risultati. Nel terminale integrato (`Ctrl+Shift+` backtick sia in Windows che in MacOS), esegua il workflow base:
+Eseguiamo un workflow e quindi ispezioniamo i risultati. Nel terminale integrato (`Ctrl+Shift+` backtick sia in Windows che in MacOS), eseguite il workflow base:
 
 ```bash title="Eseguire il workflow base"
 nextflow run basic_workflow.nf --input data/sample_data.csv --output_dir results
@@ -565,7 +565,7 @@ Mentre il workflow è in esecuzione, vedrà l'output in tempo reale nel terminal
 
 Questo mantiene tutto in un unico posto piuttosto che cambiare tra molteplici applicazioni.
 
-### Conclusione
+### Takeaway
 
 Può integrare VS Code con il controllo versione e l'esecuzione del workflow per gestire l'intero processo di sviluppo da un'unica interfaccia.
 

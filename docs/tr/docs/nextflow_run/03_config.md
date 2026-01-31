@@ -48,7 +48,7 @@ Bunu iki adımda yapalım.
     docker.enabled = true
 
     /*
-    * Pipeline parameters
+    * Pipeline parametreleri
     */
     params {
         input = 'data/greetings.csv'
@@ -81,7 +81,7 @@ Ancak yapılandırmayı tamamen yapılandırma dosyasına taşıma ruhuyla, bu v
 
     ```groovy title="3-main.nf" linenums="9" hl_lines="6"
     /*
-    * Pipeline parameters
+    * Pipeline parametreleri
     */
     params {
         input: Path
@@ -94,7 +94,7 @@ Ancak yapılandırmayı tamamen yapılandırma dosyasına taşıma ruhuyla, bu v
 
     ```groovy title="3-main.nf" linenums="9" hl_lines="6"
     /*
-    * Pipeline parameters
+    * Pipeline parametreleri
     */
     params {
         input: Path
@@ -386,7 +386,7 @@ Tüm çıktılar için yolu değiştirmek için bu seçenek için `nextflow.conf
 
     ```groovy title="nextflow.config" linenums="9" hl_lines="10-13"
     /*
-    * Pipeline parameters
+    * Pipeline parametreleri
     */
     params {
         input = 'data/greetings.csv'
@@ -404,7 +404,7 @@ Tüm çıktılar için yolu değiştirmek için bu seçenek için `nextflow.conf
 
     ```groovy title="nextflow.config" linenums="9"
     /*
-    * Pipeline parameters
+    * Pipeline parametreleri
     */
     params {
         input = 'data/greetings.csv'

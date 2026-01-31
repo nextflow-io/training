@@ -223,7 +223,7 @@ process sayHello {
 
 workflow {
 
-    // emit a greeting
+    // emite uma saudação
     sayHello(params.greeting)
 }
 ```
@@ -295,7 +295,7 @@ Aqui temos um **fluxo de trabalho** que consiste em uma chamada ao processo `say
 ```groovy title="hello-world.nf" linenums="22"
 workflow {
 
-    // emit a greeting
+    // emite uma saudação
     sayHello(params.greeting)
 }
 ```

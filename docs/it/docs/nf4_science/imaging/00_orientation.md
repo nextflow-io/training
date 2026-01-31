@@ -19,7 +19,7 @@ Tuttavia, è necessario un account GitHub (gratuito) per effettuare l'accesso e,
 Una volta aperto il Suo Codespace, scarichiamo preventivamente tutte le immagini Docker che ci serviranno per questo corso di formazione.
 Questo farà risparmiare tempo in seguito e garantirà un'esecuzione fluida dei workflow.
 
-Apra una nuova scheda del terminale ed esegua il seguente comando:
+Aprite una nuova scheda del terminale ed eseguite il seguente comando:
 
 ```bash
 nextflow run nf-core/molkart -profile docker,test -stub -resume --outdir results
@@ -44,10 +44,10 @@ cd nf4-science/imaging/
 
 !!!tip "Suggerimento"
 
-    Se per qualsiasi motivo si sposta fuori da questa directory, può sempre utilizzare il percorso completo per ritornarvi, assumendo che stia lavorando nell'ambiente di formazione GitHub Codespaces:
+    Se per qualsiasi motivo vi spostate fuori da questa directory, potete sempre utilizzare il percorso completo per ritornarvi, assumendo che stiate lavorando nell'ambiente di formazione GitHub Codespaces:
 
     ```bash
     cd /workspaces/training/nf4-science/imaging
     ```
 
-**Ora, per iniziare il corso, clicchi sulla freccia nell'angolo in basso a destra di questa pagina.**
+**Ora, per iniziare il corso, cliccate sulla freccia nell'angolo in basso a destra di questa pagina.**

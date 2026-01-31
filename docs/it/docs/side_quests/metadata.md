@@ -279,7 +279,7 @@ Apporti le seguenti modifiche al workflow:
     }
     ```
 
-Ora esegua nuovamente il workflow:
+Ora eseguite nuovamente il workflow:
 
 ```bash
 nextflow run main.nf
@@ -653,7 +653,7 @@ Se non ha ancora familiarità con l'operatore `+`, o se questo sembra confuso, s
 
     **E questo ci riporta alla struttura del canale `tuple val(meta), path(file)`!**
 
-Una volta che è sicuro di aver capito cosa fa questo codice, esegua il workflow per vedere se ha funzionato:
+Una volta che siete sicuri di aver capito cosa fa questo codice, eseguite il workflow per vedere se ha funzionato:
 
 ```bash
 nextflow run main.nf -resume
@@ -764,7 +764,7 @@ Ecco i punti chiave:
 
 <!-- TODO (future) Add note/links to relevant docs in additional resources section -->
 
-Una volta che tutto ha senso, esegua nuovamente il workflow per vedere il risultato:
+Una volta che tutto ha senso, eseguite nuovamente il workflow per vedere il risultato:
 
 ```bash
 nextflow run main.nf -resume

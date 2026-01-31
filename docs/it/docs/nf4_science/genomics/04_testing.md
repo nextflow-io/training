@@ -95,7 +95,7 @@ nf-test init
 
 Crea anche una directory `tests` contenente uno stub del file di configurazione.
 
-### Conclusione
+### Takeaway
 
 Ora siamo pronti per iniziare a scrivere test per la nostra pipeline genomics.
 
@@ -406,7 +406,7 @@ Noti l'avviso, che si riferisce all'effetto del parametro `--update-snapshot`.
     In generale è importante mantenere i test unitari il più leggeri possibile utilizzando i pezzi di dati più piccoli necessari e sufficienti per valutare la funzionalità del processo, altrimenti il tempo di esecuzione totale può accumularsi in modo significativo.
     Una suite di test che richiede troppo tempo per essere eseguita regolarmente è una suite di test che probabilmente verrà saltata nell'interesse della rapidità.
 
-### Conclusione
+### Takeaway
 
 Ha scritto il Suo primo test di modulo per un processo genomics, verificando che `SAMTOOLS_INDEX` crei correttamente file indice per diversi file BAM. La suite di test garantisce che:
 
@@ -560,7 +560,7 @@ Quindi possiamo fare riferimento all'output di quel processo nel blocco `when` d
         }
 ```
 
-Effettui quella modifica ed esegua nuovamente il test:
+Effettuate quella modifica ed eseguite nuovamente il test:
 
 ```bash
 nf-test test modules/gatk/haplotypecaller/tests/main.nf.test
@@ -804,7 +804,7 @@ nf-test test modules/gatk/haplotypecaller/tests/main.nf.test
 
 Questo completa il piano di test di base per questo secondo passaggio nella pipeline. Avanti verso il terzo e ultimo test a livello di modulo!
 
-### Conclusione
+### Takeaway
 
 Ha imparato a:
 
@@ -1027,7 +1027,7 @@ Il test passa, verificando che il nostro processo di joint genotyping correttame
 2. Esegue il variant calling congiunto
 3. Produce un VCF multi-campione con chiamate genotipiche coerenti tra le esecuzioni
 
-### Conclusione
+### Takeaway
 
 Sa come:
 
@@ -1245,7 +1245,7 @@ nf-test test
 
 Inoltre, possiamo automatizzare questo! Immagini che i test vengano eseguiti ogni volta che Lei o un collega cerca di aggiungere nuovo codice. Questo è il modo in cui garantiamo che le nostre pipeline mantengano uno standard elevato.
 
-## Conclusione
+## Takeaway
 
 Ora sa come scrivere ed eseguire diversi tipi di test per la Sua pipeline genomics utilizzando nf-test. Questo framework di testing aiuta a garantire che il Suo workflow di variant calling produca risultati coerenti e affidabili in diversi ambienti e mentre apporta modifiche al codice.
 

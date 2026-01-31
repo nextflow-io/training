@@ -253,7 +253,7 @@ workflow HELLO {
     ch_versions = channel.empty()
 
     //
-    // Collate and save software versions
+    // Zbierz i zapisz wersje oprogramowania
     //
     softwareVersionsToYAML(ch_versions)
         .collectFile(
@@ -364,7 +364,7 @@ params.greeting = 'greetings.csv'
 params.batch = 'test-batch'
 params.character = 'turkey'
 
-// Include modules
+// Dołącz moduły
 include { sayHello } from './modules/sayHello.nf'
 include { convertToUpper } from './modules/convertToUpper.nf'
 include { collectGreetings } from './modules/collectGreetings.nf'
@@ -372,21 +372,21 @@ include { cowpy } from './modules/cowpy.nf'
 
 workflow {
 
-  // create a channel for inputs from a CSV file
+  // utwórz kanał dla danych wejściowych z pliku CSV
   greeting_ch = channel.fromPath(params.greeting)
                       .splitCsv()
                       .map { line -> line[0] }
 
-  // emit a greeting
+  // wyemituj pozdrowienie
   sayHello(greeting_ch)
 
-  // convert the greeting to uppercase
+  // przekształć pozdrowienie na wielkie litery
   convertToUpper(sayHello.out)
 
-  // collect all the greetings into one file
+  // zbierz wszystkie pozdrowienia do jednego pliku
   collectGreetings(convertToUpper.out.collect(), params.batch)
 
-  // generate ASCII art of the greetings with cowpy
+  // wygeneruj grafikę ASCII pozdrowień za pomocą cowpy
   cowpy(collectGreetings.out.outfile, params.character)
 }
 ```
@@ -422,14 +422,14 @@ Teraz zastąp konstrukcję kanału prostą instrukcją `take` deklarującą ocze
 
     ```groovy title="original-hello/hello.nf" linenums="18"
         take:
-        // channel of greetings
+        // kanał pozdrowień
         greeting_ch
     ```
 
 === "Przed"
 
     ```groovy title="original-hello/hello.nf" linenums="18"
-        // create a channel for inputs from a CSV file
+        // utwórz kanał dla danych wejściowych z pliku CSV
         greeting_ch = channel.fromPath(params.greeting)
                             .splitCsv()
                             .map { line -> line[0] }
@@ -477,32 +477,32 @@ Następnie dodaj instrukcję `main` przed pozostałymi operacjami wywoływanymi 
     ```groovy title="original-hello/hello.nf" linenums="22" hl_lines="1"
         main:
 
-        // emit a greeting
+        // wyemituj pozdrowienie
         sayHello(greeting_ch)
 
-        // convert the greeting to uppercase
+        // przekształć pozdrowienie na wielkie litery
         convertToUpper(sayHello.out)
 
-        // collect all the greetings into one file
+        // zbierz wszystkie pozdrowienia do jednego pliku
         collectGreetings(convertToUpper.out.collect(), params.batch)
 
-        // generate ASCII art of the greetings with cowpy
+        // wygeneruj grafikę ASCII pozdrowień za pomocą cowpy
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
 === "Przed"
 
     ```groovy title="original-hello/hello.nf" linenums="21"
-        // emit a greeting
+        // wyemituj pozdrowienie
         sayHello(greeting_ch)
 
-        // convert the greeting to uppercase
+        // przekształć pozdrowienie na wielkie litery
         convertToUpper(sayHello.out)
 
-        // collect all the greetings into one file
+        // zbierz wszystkie pozdrowienia do jednego pliku
         collectGreetings(convertToUpper.out.collect(), params.batch)
 
-        // generate ASCII art of the greetings with cowpy
+        // wygeneruj grafikę ASCII pozdrowień za pomocą cowpy
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
@@ -533,7 +533,7 @@ Jeśli wykonałeś wszystkie zmiany zgodnie z opisem, Twój workflow powinien te
 params.batch = 'test-batch'
 params.character = 'turkey'
 
-// Include modules
+// Dołącz moduły
 include { sayHello } from './modules/sayHello.nf'
 include { convertToUpper } from './modules/convertToUpper.nf'
 include { collectGreetings } from './modules/collectGreetings.nf'
@@ -542,21 +542,21 @@ include { cowpy } from './modules/cowpy.nf'
 workflow HELLO {
 
     take:
-    // channel of greetings
+    // kanał pozdrowień
     greeting_ch
 
     main:
 
-    // emit a greeting
+    // wyemituj pozdrowienie
     sayHello(greeting_ch)
 
-    // convert the greeting to uppercase
+    // przekształć pozdrowienie na wielkie litery
     convertToUpper(sayHello.out)
 
-    // collect all the greetings into one file
+    // zbierz wszystkie pozdrowienia do jednego pliku
     collectGreetings(convertToUpper.out.collect(), params.batch)
 
-    // generate ASCII art of the greetings with cowpy
+    // wygeneruj grafikę ASCII pozdrowień za pomocą cowpy
     cowpy(collectGreetings.out.outfile, params.character)
 
     emit:
@@ -583,22 +583,22 @@ Skopiuj następujący kod do pliku `main.nf`.
 ```groovy title="original-hello/main.nf" linenums="1"
 #!/usr/bin/env nextflow
 
-// import the workflow code from the hello.nf file
+// importuj kod workflow z pliku hello.nf
 include { HELLO } from './hello.nf'
 
-// declare input parameter
+// zadeklaruj parametr wejściowy
 params.greeting = 'greetings.csv'
 
 workflow {
-  // create a channel for inputs from a CSV file
+  // utwórz kanał dla danych wejściowych z pliku CSV
   greeting_ch = channel.fromPath(params.greeting)
                       .splitCsv()
                       .map { line -> line[0] }
 
-  // call the imported workflow on the channel of greetings
+  // wywołaj zaimportowany workflow na kanale pozdrowień
   HELLO(greeting_ch)
 
-  // view the outputs emitted by the workflow
+  // wyświetl wyjścia wyemitowane przez workflow
   HELLO.out.view { output -> "Output: $output" }
 }
 ```
@@ -694,7 +694,7 @@ workflow HELLO {
     ch_versions = channel.empty()
 
     //
-    // Collate and save software versions
+    // Zbierz i zapisz wersje oprogramowania
     //
     softwareVersionsToYAML(ch_versions)
         .collectFile(
@@ -768,7 +768,7 @@ Teraz skonfigurujmy instrukcje importu modułów.
 To były instrukcje importu w workflow `original-hello/hello.nf`:
 
 ```groovy title="original-hello/hello.nf" linenums="9"
-// Include modules
+// Dołącz moduły
 include { sayHello } from './modules/sayHello.nf'
 include { convertToUpper } from './modules/convertToUpper.nf'
 include { collectGreetings } from './modules/collectGreetings.nf'
@@ -831,16 +831,16 @@ Przypominamy, że to jest odpowiedni kod w oryginalnym workflow, który nie zmie
 ```groovy title="original-hello/hello.nf" linenums="22"
     main:
 
-    // emit a greeting
+    // wyemituj pozdrowienie
     sayHello(greeting_ch)
 
-    // convert the greeting to uppercase
+    // przekształć pozdrowienie na wielkie litery
     convertToUpper(sayHello.out)
 
-    // collect all the greetings into one file
+    // zbierz wszystkie pozdrowienia do jednego pliku
     collectGreetings(convertToUpper.out.collect(), params.batch)
 
-    // generate ASCII art of the greetings with cowpy
+    // wygeneruj grafikę ASCII pozdrowień za pomocą cowpy
     cowpy(collectGreetings.out.outfile, params.character)
 ```
 
@@ -862,20 +862,20 @@ Ta kolejność ma sens, ponieważ w prawdziwym pipeline'ie procesy emitowałyby 
 
         ch_versions = Channel.empty()
 
-        // emit a greeting
+        // wyemituj pozdrowienie
         sayHello(greeting_ch)
 
-        // convert the greeting to uppercase
+        // przekształć pozdrowienie na wielkie litery
         convertToUpper(sayHello.out)
 
-        // collect all the greetings into one file
+        // zbierz wszystkie pozdrowienia do jednego pliku
         collectGreetings(convertToUpper.out.collect(), params.batch)
 
-        // generate ASCII art of the greetings with cowpy
+        // wygeneruj grafikę ASCII pozdrowień za pomocą cowpy
         cowpy(collectGreetings.out.outfile, params.character)
 
         //
-        // Collate and save software versions
+        // Zbierz i zapisz wersje oprogramowania
         //
         softwareVersionsToYAML(ch_versions)
             .collectFile(
@@ -904,7 +904,7 @@ Ta kolejność ma sens, ponieważ w prawdziwym pipeline'ie procesy emitowałyby 
         ch_versions = Channel.empty()
 
         //
-        // Collate and save software versions
+        // Zbierz i zapisz wersje oprogramowania
         //
         softwareVersionsToYAML(ch_versions)
             .collectFile(
@@ -928,14 +928,14 @@ To wygląda świetnie, ale nadal musimy zaktualizować nazwę kanału, który pr
 === "Po"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26"
-        // emit a greeting (updated to use the nf-core convention for samplesheets)
+        // wyemituj pozdrowienie (zaktualizowane do używania konwencji nf-core dla samplesheet)
         sayHello(ch_samplesheet)
     ```
 
 === "Przed"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26"
-        // emit a greeting
+        // wyemituj pozdrowienie
         sayHello(greeting_ch)
     ```
 
@@ -1011,7 +1011,7 @@ include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_hell
 */
 
 //
-// WORKFLOW: Run main analysis pipeline depending on type of input
+// WORKFLOW: Uruchom główny pipeline analizy w zależności od typu danych wejściowych
 //
 workflow CORE_HELLO {
 
@@ -1021,7 +1021,7 @@ workflow CORE_HELLO {
     main:
 
     //
-    // WORKFLOW: Run pipeline
+    // WORKFLOW: Uruchom pipeline
     //
     HELLO (
         samplesheet
@@ -1037,7 +1037,7 @@ workflow {
 
     main:
     //
-    // SUBWORKFLOW: Run initialisation tasks
+    // SUBWORKFLOW: Uruchom zadania inicjalizacyjne
     //
     PIPELINE_INITIALISATION (
         params.version,
@@ -1049,13 +1049,13 @@ workflow {
     )
 
     //
-    // WORKFLOW: Run main workflow
+    // WORKFLOW: Uruchom główny workflow
     //
     CORE_HELLO (
         PIPELINE_INITIALISATION.out.samplesheet
     )
     //
-    // SUBWORKFLOW: Run completion tasks
+    // SUBWORKFLOW: Uruchom zadania końcowe
     //
     PIPELINE_COMPLETION (
         params.outdir,
@@ -1091,7 +1091,7 @@ Jeśli otworzymy ten plik i przewiniemy w dół, natrafimy na ten fragment kodu:
 
 ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="76"
     //
-    // Create channel from input file provided through params.input
+    // Utwórz kanał z pliku wejściowego podanego przez params.input
     //
 
     channel
@@ -1144,7 +1144,7 @@ Dobrą wiadomością jest to, że potrzeby naszego pipeline'u są znacznie prost
 Przypominamy, że konstrukcja kanału wyglądała tak (jak widać w katalogu rozwiązań):
 
 ```groovy title="solutions/composable-hello/main.nf" linenums="10" hl_lines="4"
-    // create a channel for inputs from a CSV file
+    // utwórz kanał dla danych wejściowych z pliku CSV
     greeting_ch = channel.fromPath(params.greeting)
         .splitCsv()
         .map { line -> line[0] }
@@ -1156,7 +1156,7 @@ Musimy więc po prostu podłączyć to do workflow inicjalizacji, z drobnymi zmi
 
     ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="76" hl_lines="5-7"
         //
-        // Create channel from input file provided through params.input
+        // Utwórz kanał z pliku wejściowego podanego przez params.input
         //
 
         ch_samplesheet = channel.fromPath(params.input)
@@ -1172,7 +1172,7 @@ Musimy więc po prostu podłączyć to do workflow inicjalizacji, z drobnymi zmi
 
     ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="76" hl_lines="5-23"
         //
-        // Create channel from input file provided through params.input
+        // Utwórz kanał z pliku wejściowego podanego przez params.input
         //
 
         channel
@@ -1235,10 +1235,10 @@ Teraz możemy zaktualizować plik `test.config` w następujący sposób:
         config_profile_name        = 'Test profile'
         config_profile_description = 'Minimal test dataset to check pipeline function'
 
-        // Input data
+        // Dane wejściowe
         input  = "${projectDir}/assets/greetings.csv"
 
-        // Other parameters
+        // Inne parametry
         batch     = 'test'
         character = 'tux'
     }
@@ -1251,9 +1251,9 @@ Teraz możemy zaktualizować plik `test.config` w następujący sposób:
         config_profile_name        = 'Test profile'
         config_profile_description = 'Minimal test dataset to check pipeline function'
 
-        // Input data
-        // TODO nf-core: Specify the paths to your test data on nf-core/test-datasets
-        // TODO nf-core: Give any required params for the test so that command line flags are not needed
+        // Dane wejściowe
+        // TODO nf-core: Określ ścieżki do swoich danych testowych w nf-core/test-datasets
+        // TODO nf-core: Podaj wszystkie wymagane parametry dla testu, aby nie były potrzebne flagi linii poleceń
         input  = params.pipelines_testdata_base_path + 'viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv'
     }
     ```

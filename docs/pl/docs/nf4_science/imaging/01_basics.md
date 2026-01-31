@@ -203,7 +203,7 @@ Otwórzmy skrypt `hello-world.nf` w panelu edytora.
 #!/usr/bin/env nextflow
 
 /*
- * Use echo to print a greeting to a file
+ * Użyj echo do wypisania pozdrowienia do pliku
  */
 process sayHello {
 
@@ -223,7 +223,7 @@ process sayHello {
 
 workflow {
 
-    // emit a greeting
+    // wyemituj pozdrowienie
     sayHello(params.greeting)
 }
 ```
@@ -248,7 +248,7 @@ Tutaj mamy **proces** o nazwie `sayHello`, który przyjmuje zmienną **wejściow
 
 ```groovy title="hello-world.nf" linenums="3"
 /*
- * Use echo to print a greeting to a file
+ * Użyj echo do wypisania pozdrowienia do pliku
  */
 process sayHello {
 
@@ -295,7 +295,7 @@ Tutaj mamy **workflow**, który składa się z jednego wywołania procesu `sayHe
 ```groovy title="hello-world.nf" linenums="22"
 workflow {
 
-    // emit a greeting
+    // wyemituj pozdrowienie
     sayHello(params.greeting)
 }
 ```

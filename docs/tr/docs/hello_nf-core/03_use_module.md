@@ -554,32 +554,32 @@ Bu satırları `convertToUpper` çağrısından sonra ekleyelim ve `collectGreet
 === "Sonra"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="7-8"
-        // emit a greeting
+        // bir selamlama yayınla
         sayHello(ch_samplesheet)
 
-        // convert the greeting to uppercase
+        // selamlamayı büyük harfe dönüştür
         convertToUpper(sayHello.out)
 
         // batch adını ID olarak içeren metadata map oluştur
         def cat_meta = [ id: params.batch ]
 
-        // generate ASCII art of the greetings with cowpy
+        // cowpy ile ASCII art oluştur
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
 === "Önce"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="7-8"
-        // emit a greeting
+        // bir selamlama yayınla
         sayHello(ch_samplesheet)
 
-        // convert the greeting to uppercase
+        // selamlamayı büyük harfe dönüştür
         convertToUpper(sayHello.out)
 
-        // collect all the greetings into one file
+        // tüm selamlamaları tek bir dosyada topla
         collectGreetings(convertToUpper.out.collect(), params.batch)
 
-        // generate ASCII art of the greetings with cowpy
+        // cowpy ile ASCII art oluştur
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
@@ -592,10 +592,10 @@ Ardından, dosya kanalını metadata ve dosyalar içeren demet kanalına dönü�
 === "Sonra"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="10-11"
-        // emit a greeting
+        // bir selamlama yayınla
         sayHello(ch_samplesheet)
 
-        // convert the greeting to uppercase
+        // selamlamayı büyük harfe dönüştür
         convertToUpper(sayHello.out)
 
         // batch adını ID olarak içeren metadata map oluştur
@@ -604,23 +604,23 @@ Ardından, dosya kanalını metadata ve dosyalar içeren demet kanalına dönü�
         // metadata ve dosyaları demet formatında içeren bir kanal oluştur
         ch_for_cat = convertToUpper.out.collect().map { files -> tuple(cat_meta, files) }
 
-        // generate ASCII art of the greetings with cowpy
+        // cowpy ile ASCII art oluştur
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
 === "Önce"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26"
-        // emit a greeting
+        // bir selamlama yayınla
         sayHello(ch_samplesheet)
 
-        // convert the greeting to uppercase
+        // selamlamayı büyük harfe dönüştür
         convertToUpper(sayHello.out)
 
         // batch adını ID olarak içeren metadata map oluştur
         def cat_meta = [ id: params.batch ]
 
-        // generate ASCII art of the greetings with cowpy
+        // cowpy ile ASCII art oluştur
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
@@ -638,10 +638,10 @@ Eklediğimiz satır iki şey başarır:
 === "Sonra"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="13-14"
-        // emit a greeting
+        // bir selamlama yayınla
         sayHello(ch_samplesheet)
 
-        // convert the greeting to uppercase
+        // selamlamayı büyük harfe dönüştür
         convertToUpper(sayHello.out)
 
         // batch adını ID olarak içeren metadata map oluştur
@@ -653,17 +653,17 @@ Eklediğimiz satır iki şey başarır:
         // nf-core cat/cat modülünü kullanarak dosyaları birleştir
         CAT_CAT(ch_for_cat)
 
-        // generate ASCII art of the greetings with cowpy
+        // cowpy ile ASCII art oluştur
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
 === "Önce"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26"
-        // emit a greeting
+        // bir selamlama yayınla
         sayHello(ch_samplesheet)
 
-        // convert the greeting to uppercase
+        // selamlamayı büyük harfe dönüştür
         convertToUpper(sayHello.out)
 
         // batch adını ID olarak içeren metadata map oluştur
@@ -672,7 +672,7 @@ Eklediğimiz satır iki şey başarır:
         // metadata ve dosyaları demet formatında içeren bir kanal oluştur
         ch_for_cat = convertToUpper.out.collect().map { files -> tuple(cat_meta, files) }
 
-        // generate ASCII art of the greetings with cowpy
+        // cowpy ile ASCII art oluştur
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
@@ -688,10 +688,10 @@ Ancak, `CAT_CAT` işlemi çıktı dosyasına ek olarak metamap'i de içeren bir 
 === "Sonra"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="16-17 20"
-        // emit a greeting
+        // bir selamlama yayınla
         sayHello(ch_samplesheet)
 
-        // convert the greeting to uppercase
+        // selamlamayı büyük harfe dönüştür
         convertToUpper(sayHello.out)
 
         // batch adını ID olarak içeren metadata map oluştur
@@ -706,17 +706,17 @@ Ancak, `CAT_CAT` işlemi çıktı dosyasına ek olarak metamap'i de içeren bir 
         // cowpy henüz metadata kullanmadığı için dosyayı demetten çıkar
         ch_for_cowpy = CAT_CAT.out.file_out.map{ meta, file -> file }
 
-        // generate ASCII art of the greetings with cowpy
+        // cowpy ile selamlamaların ASCII sanatını oluştur
         cowpy(ch_for_cowpy, params.character)
     ```
 
 === "Önce"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="17"
-        // emit a greeting
+        // bir selamlama yayınla
         sayHello(ch_samplesheet)
 
-        // convert the greeting to uppercase
+        // selamlamayı büyük harfe dönüştür
         convertToUpper(sayHello.out)
 
         // batch adını ID olarak içeren metadata map oluştur
@@ -728,7 +728,7 @@ Ancak, `CAT_CAT` işlemi çıktı dosyasına ek olarak metamap'i de içeren bir 
         // concatenate the greetings
         CAT_CAT(ch_for_cat)
 
-        // generate ASCII art of the greetings with cowpy
+        // cowpy ile ASCII art oluştur
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 

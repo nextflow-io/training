@@ -216,13 +216,13 @@ Na przykład moglibyśmy uzyskać dostęp do ID pliku za pomocą `id` lub ście�
     ```groovy title="examples/map_demo.nf"
     #!/usr/bin/env nextflow
 
-    // Create a simple map
+    // Utwórz prostą mapę
     def my_map = [id:'sampleA', character:'squirrel']
 
-    // Print the whole map
+    // Wypisz całą mapę
     println "map: ${my_map}"
 
-    // Access individual values using dot notation
+    // Uzyskaj dostęp do pojedynczych wartości za pomocą notacji kropkowej
     println "id: ${my_map.id}"
     println "character: ${my_map.character}"
     ```
@@ -436,7 +436,7 @@ Możesz otworzyć plik modułu, aby przeanalizować jego kod:
 ```groovy title="modules/langid.nf" linenums="1" hl_lines="9 12"
 #!/usr/bin/env nextflow
 
-// Use langid to predict the language of each input file
+// Użyj langid do przewidzenia języka każdego pliku wejściowego
 process IDENTIFY_LANGUAGE {
 
     container 'community.wave.seqera.io/library/pip_langid:b2269f456a5629ff'
@@ -476,7 +476,7 @@ Wprowadź następujące edycje do workflow:
                 [[id: row.id, character: row.character], row.recording]
             }
 
-        // Run langid to identify the language of each greeting
+        // Uruchom langid, aby zidentyfikować język każdego pozdrowienia
         IDENTIFY_LANGUAGE(ch_datasheet)
         IDENTIFY_LANGUAGE.out.view()
     ```
@@ -547,7 +547,7 @@ Oto edycje, które musisz wprowadzić do workflow:
 === "Po"
 
     ```groovy title="main.nf" linenums="13" hl_lines="3-7"
-        // Run langid to identify the language of each greeting
+        // Uruchom langid, aby zidentyfikować język każdego pozdrowienia
         IDENTIFY_LANGUAGE(ch_datasheet)
         IDENTIFY_LANGUAGE.out
             .map { meta, file, lang_id ->
@@ -559,7 +559,7 @@ Oto edycje, które musisz wprowadzić do workflow:
 === "Przed"
 
     ```groovy title="main.nf" linenums="13" hl_lines="3"
-        // Run langid to identify the language of each greeting
+        // Uruchom langid, aby zidentyfikować język każdego pozdrowienia
         IDENTIFY_LANGUAGE(ch_datasheet)
         IDENTIFY_LANGUAGE.out.view()
     ```
@@ -721,7 +721,7 @@ Powinieneś wprowadzić następujące zmiany do workflow:
 === "Po"
 
     ```groovy title="main.nf" linenums="13" hl_lines="7-19"
-        // Run langid to identify the language of each greeting
+        // Uruchom langid, aby zidentyfikować język każdego pozdrowienia
         IDENTIFY_LANGUAGE(ch_datasheet)
         IDENTIFY_LANGUAGE.out
             .map { meta, file, lang_id ->
@@ -745,7 +745,7 @@ Powinieneś wprowadzić następujące zmiany do workflow:
 === "Przed"
 
     ```groovy title="main.nf" linenums="13" hl_lines="7"
-        // Run langid to identify the language of each greeting
+        // Uruchom langid, aby zidentyfikować język każdego pozdrowienia
         IDENTIFY_LANGUAGE(ch_datasheet)
         IDENTIFY_LANGUAGE.out
             .map { meta, file, lang_id ->
@@ -880,7 +880,7 @@ Możesz otworzyć plik modułu, aby przeanalizować jego kod:
 ```groovy title="modules/cowpy.nf" linenums="1"
 #!/usr/bin/env nextflow
 
-// Generate ASCII art with cowpy
+// Wygeneruj grafikę ASCII za pomocą cowpy
 process COWPY {
 
     publishDir "results/", mode: 'copy'
@@ -933,7 +933,7 @@ W głównym workflow zastąp operator `.view()` przez `.set { ch_languages }` i 
 === "Po"
 
     ```groovy title="main.nf" linenums="14" hl_lines="19 21 22"
-        // Run langid to identify the language of each greeting
+        // Uruchom langid, aby zidentyfikować język każdego pozdrowienia
         IDENTIFY_LANGUAGE(ch_datasheet)
         IDENTIFY_LANGUAGE.out
             .map { meta, file, lang_id ->
@@ -953,14 +953,14 @@ W głównym workflow zastąp operator `.view()` przez `.set { ch_languages }` i 
             }
             .set { ch_languages }
 
-        // Temporary: peek into ch_languages
+        // Tymczasowe: podejrzyj ch_languages
         ch_languages.view()
     ```
 
 === "Przed"
 
     ```groovy title="main.nf" linenums="14" hl_lines="19"
-        // Run langid to identify the language of each greeting
+        // Uruchom langid, aby zidentyfikować język każdego pozdrowienia
         IDENTIFY_LANGUAGE(ch_datasheet)
         IDENTIFY_LANGUAGE.out
             .map { meta, file, lang_id ->
@@ -1020,7 +1020,7 @@ W głównym workflow wprowadź następujące zmiany w kodzie:
 === "Po"
 
     ```groovy title="main.nf" linenums="34"
-        // Temporary: access the file and character
+        // Tymczasowe: uzyskaj dostęp do pliku i postaci
         ch_languages.map { meta, file -> file }.view { file -> "File: " + file }
         ch_languages.map { meta, file -> meta.character }.view { character -> "Character: " + character }
     ```
@@ -1028,7 +1028,7 @@ W głównym workflow wprowadź następujące zmiany w kodzie:
 === "Przed"
 
     ```groovy title="main.nf" linenums="34"
-        // Temporary: peek into ch_languages
+        // Tymczasowe: podejrzyj ch_languages
         ch_languages.view()
     ```
 
@@ -1077,7 +1077,7 @@ W głównym workflow wprowadź następujące zmiany w kodzie:
 === "Po"
 
     ```groovy title="main.nf" linenums="34"
-        // Run cowpy to generate ASCII art
+        // Uruchom cowpy, aby wygenerować grafikę ASCII
         COWPY(
             ch_languages.map { meta, file -> file },
             ch_languages.map { meta, file -> meta.character }
@@ -1087,7 +1087,7 @@ W głównym workflow wprowadź następujące zmiany w kodzie:
 === "Przed"
 
     ```groovy title="main.nf" linenums="34"
-        // Temporary: access the file and character
+        // Tymczasowe: uzyskaj dostęp do pliku i postaci
         ch_languages.map { meta, file -> [file, meta.character] }
             .view()
     ```
@@ -1165,7 +1165,7 @@ Jest inny operator o nazwie `multiMap()`, który pozwala nam to nieco usprawnić
     === "Po"
 
         ```groovy title="main.nf" linenums="34"
-            // Run cowpy to generate ASCII art
+            // Uruchom cowpy, aby wygenerować grafikę ASCII
             COWPY(
                 ch_languages.multiMap { meta, file ->
                     file: file
@@ -1177,7 +1177,7 @@ Jest inny operator o nazwie `multiMap()`, który pozwala nam to nieco usprawnić
     === "Przed"
 
         ```groovy title="main.nf" linenums="34"
-            // Run cowpy to generate ASCII art
+            // Uruchom cowpy, aby wygenerować grafikę ASCII
             COWPY(
                 ch_languages.map { meta, file -> file },
                 ch_languages.map { meta, file -> meta.character }

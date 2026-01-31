@@ -45,7 +45,7 @@ Navigare alla pagina dei moduli nel browser web e utilizzare la barra di ricerca
 
 ![risultati ricerca moduli](./img/module-search-results.png)
 
-Come si può vedere, ci sono diversi risultati, molti dei quali moduli progettati per concatenare tipi di file molto specifici.
+Come potete vedere, ci sono diversi risultati, molti dei quali moduli progettati per concatenare tipi di file molto specifici.
 Tra questi, dovrebbe essercene uno chiamato `cat_cat` che è generico.
 
 !!! note "Convenzione di denominazione dei moduli"
@@ -426,7 +426,7 @@ Questo potrebbe sembrare molto da tenere a mente guardando solo il codice, quind
 --8<-- "docs/hello_nf-core/img/module_comparison.svg"
 </figure>
 
-Si può vedere che i due moduli hanno requisiti di input simili in termini di contenuto (un insieme di file di input più alcuni metadati) ma aspettative molto diverse per come quel contenuto è confezionato.
+Potete vedere che i due moduli hanno requisiti di input simili in termini di contenuto (un insieme di file di input più alcuni metadati) ma aspettative molto diverse per come quel contenuto è confezionato.
 Ignorando per ora il file delle versioni, anche il loro output principale è equivalente (un file concatenato), tranne che CAT_CAT emette anche la metamap insieme al file di output.
 
 Le differenze di confezionamento saranno abbastanza facili da gestire, come vedrete tra poco.
@@ -476,7 +476,7 @@ prefix   = task.ext.prefix ?: "${meta.id}${getFileSuffix(file_list[0])}"
 
 Questo si traduce approssimativamente come segue: se un `prefix` viene fornito tramite il sistema di parametri esterni delle attività (`task.ext`), usarlo per denominare il file di output; altrimenti crearne uno usando `${meta.id}`, che corrisponde al campo `id` nella metamap.
 
-Si può immaginare il canale di input che arriva a questo modulo con contenuti come questo:
+Potete immaginare il canale di input che arriva a questo modulo con contenuti come questo:
 
 ```groovy title="Esempio di contenuto del canale di input"
 ch_input = [[[id: 'batch1', date: '25.10.01'], ['file1A.txt', 'file1B.txt']],

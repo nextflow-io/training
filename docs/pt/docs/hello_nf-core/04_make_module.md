@@ -155,7 +155,7 @@ Então agora vamos atualizar as duas referências ao processo no bloco workflow 
 === "Depois"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="2 17"
-    // generate ASCII art of the greetings with cowpy
+    // gera arte ASCII das saudações com cowpy
     COWPY(CAT_CAT.out.file_out)
 
     //
@@ -178,7 +178,7 @@ Então agora vamos atualizar as duas referências ao processo no bloco workflow 
 === "Antes"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="2 17"
-    // generate ASCII art of the greetings with cowpy
+    // gera arte ASCII das saudações com cowpy
     cowpy(CAT_CAT.out.file_out)
 
     //
@@ -308,7 +308,7 @@ Abra o arquivo de fluxo de trabalho `hello.nf` (em `core-hello/workflows/`) e at
 === "Depois"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="2"
-        // generate ASCII art of the greetings with cowpy
+        // gera arte ASCII das saudações com cowpy
         COWPY(CAT_CAT.out.file_out, params.character)
     ```
 
@@ -318,7 +318,7 @@ Abra o arquivo de fluxo de trabalho `hello.nf` (em `core-hello/workflows/`) e at
         // extract the file from the tuple since cowpy doesn't use metadata yet
         ch_for_cowpy = CAT_CAT.out.file_out.map{ meta, file -> file }
 
-        // generate ASCII art of the greetings with cowpy
+        // gera arte ASCII das saudações com cowpy
         COWPY(ch_for_cowpy, params.character)
     ```
 
@@ -564,14 +564,14 @@ Abra o arquivo de fluxo de trabalho `hello.nf` (em `core-hello/workflows/`) e at
 === "Depois"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="39" hl_lines="2"
-        // generate ASCII art of the greetings with cowpy
+        // gera arte ASCII das saudações com cowpy
         COWPY(CAT_CAT.out.file_out)
     ```
 
 === "Antes"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="39" hl_lines="2"
-        // generate ASCII art of the greetings with cowpy
+        // gera arte ASCII das saudações com cowpy
         COWPY(CAT_CAT.out.file_out, params.character)
     ```
 
@@ -1090,7 +1090,7 @@ Para resumir, você obtém:
 
 Isso completa o conjunto de recursos de módulos nf-core que você deve absolutamente aprender a usar, mas há outros que você pode ler sobre nas [especificações de módulos nf-core](https://nf-co.re/docs/guidelines/components/modules).
 
-### Resumo
+### Conclusão
 
 Você agora sabe como adaptar módulos locais para seguir as convenções nf-core:
 

@@ -176,7 +176,7 @@ Przyjrzyjmy się, co to umożliwia w kodzie workflow.
     #!/usr/bin/env nextflow
 
     /*
-    * Use echo to print 'Hello World!' to a file
+    * Użyj echo do wypisania 'Hello World!' do pliku
     */
     process sayHello {
 
@@ -202,11 +202,11 @@ Przyjrzyjmy się, co to umożliwia w kodzie workflow.
     workflow {
 
         main:
-        // create a channel for inputs from a CSV file
+        // utwórz kanał dla danych wejściowych z pliku CSV
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
-        // emit a greeting
+        // wyemituj pozdrowienie
         sayHello(greeting_ch)
 
         publish:
@@ -233,11 +233,11 @@ Rozłóżmy to na czynniki.
 
 ```groovy title="2a-inputs.nf" linenums="29" hl_lines="3-5"
     main:
-    // create a channel for inputs from a CSV file
+    // utwórz kanał dla danych wejściowych z pliku CSV
     greeting_ch = channel.fromPath(params.input)
                         .splitCsv()
                         .map { line -> line[0] }
-    // emit a greeting
+    // wyemituj pozdrowienie
     sayHello(greeting_ch)
 ```
 
@@ -282,11 +282,11 @@ Następnie, w ostatniej linii bloku `main:` workflow, przekazujemy załadowany c
 
 ```groovy title="2a-inputs.nf" linenums="29" hl_lines="7"
     main:
-    // create a channel for inputs from a CSV file
+    // utwórz kanał dla danych wejściowych z pliku CSV
     greeting_ch = channel.fromPath(params.input)
                         .splitCsv()
                         .map { line -> line[0] }
-    // emit a greeting
+    // wyemituj pozdrowienie
     sayHello(greeting_ch)
 ```
 
@@ -429,7 +429,7 @@ Przyjrzyjmy się kodowi i zidentyfikujmy kluczowe wzorce dla wieloetapowych work
     #!/usr/bin/env nextflow
 
     /*
-    * Use echo to print 'Hello World!' to a file
+    * Użyj echo do wypisania 'Hello World!' do pliku
     */
     process sayHello {
 
@@ -446,7 +446,7 @@ Przyjrzyjmy się kodowi i zidentyfikujmy kluczowe wzorce dla wieloetapowych work
     }
 
     /*
-    * Use a text replacement tool to convert the greeting to uppercase
+    * Użyj narzędzia zamiany tekstu do przekształcenia pozdrowienia na wielkie litery
     */
     process convertToUpper {
 
@@ -463,7 +463,7 @@ Przyjrzyjmy się kodowi i zidentyfikujmy kluczowe wzorce dla wieloetapowych work
     }
 
     /*
-    * Collect uppercase greetings into a single output file
+    * Zbierz pozdrowienia pisane wielkimi literami do jednego pliku wyjściowego
     */
     process collectGreetings {
 
@@ -494,15 +494,15 @@ Przyjrzyjmy się kodowi i zidentyfikujmy kluczowe wzorce dla wieloetapowych work
     workflow {
 
         main:
-        // create a channel for inputs from a CSV file
+        // utwórz kanał dla danych wejściowych z pliku CSV
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
-        // emit a greeting
+        // wyemituj pozdrowienie
         sayHello(greeting_ch)
-        // convert the greeting to uppercase
+        // przekształć pozdrowienie na wielkie litery
         convertToUpper(sayHello.out)
-        // collect all the greetings into one file
+        // zbierz wszystkie pozdrowienia do jednego pliku
         collectGreetings(convertToUpper.out.collect(), params.batch)
 
         publish:
@@ -559,15 +559,15 @@ Naprawdę interesującą rzeczą do przyjrzenia się jest to, jak wywołania pro
 
 ```groovy title="2b-multistep.nf" linenums="68" hl_lines="9 11"
     main:
-    // create a channel for inputs from a CSV file
+    // utwórz kanał dla danych wejściowych z pliku CSV
     greeting_ch = channel.fromPath(params.input)
                         .splitCsv()
                         .map { line -> line[0] }
-    // emit a greeting
+    // wyemituj pozdrowienie
     sayHello(greeting_ch)
-    // convert the greeting to uppercase
+    // przekształć pozdrowienie na wielkie litery
     convertToUpper(sayHello.out)
-    // collect all the greetings into one file
+    // zbierz wszystkie pozdrowienia do jednego pliku
     collectGreetings(convertToUpper.out.collect(), params.batch)
 ```
 
@@ -582,7 +582,7 @@ W ten sposób przekazujemy dane z jednego kroku do następnego w Nextflow.
 Trzecie wywołanie process, do `collectGreetings`, jest nieco inne.
 
 ```groovy title="2b-multistep.nf" linenums="77"
-    // collect all the greetings into one file
+    // zbierz wszystkie pozdrowienia do jednego pliku
     collectGreetings(convertToUpper.out.collect(), params.batch)
 ```
 
@@ -642,7 +642,7 @@ Wadą jest to, że czasami może to utrudnić rozszyfrowanie tego, co pipeline r
 Być może zauważyłeś, że `collectGreetings` przyjmuje drugie wejście, `params.batch`:
 
 ```groovy title="2b-multistep.nf" linenums="77"
-    // collect all the greetings into one file
+    // zbierz wszystkie pozdrowienia do jednego pliku
     collectGreetings(convertToUpper.out.collect(), params.batch)
 ```
 
@@ -817,7 +817,7 @@ Zacznij od otwarcia pliku workflow `2c-modules.nf`.
     ```groovy title="2c-modules.nf" linenums="1"
     #!/usr/bin/env nextflow
 
-    // Include modules
+    // Dołącz moduły
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
     include { collectGreetings } from './modules/collectGreetings.nf'
@@ -833,15 +833,15 @@ Zacznij od otwarcia pliku workflow `2c-modules.nf`.
     workflow {
 
         main:
-        // create a channel for inputs from a CSV file
+        // utwórz kanał dla danych wejściowych z pliku CSV
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
-        // emit a greeting
+        // wyemituj pozdrowienie
         sayHello(greeting_ch)
-        // convert the greeting to uppercase
+        // przekształć pozdrowienie na wielkie litery
         convertToUpper(sayHello.out)
-        // collect all the greetings into one file
+        // zbierz wszystkie pozdrowienia do jednego pliku
         collectGreetings(convertToUpper.out.collect(), params.batch)
 
         publish:
@@ -875,7 +875,7 @@ Widzisz, że logika workflow jest dokładnie taka sama jak w poprzedniej wersji 
 Jednak kod process zniknął z pliku workflow, a zamiast tego są instrukcje `include` wskazujące na oddzielne pliki w katalogu `modules`.
 
 ```groovy title="hello-modules.nf" linenums="3"
-// Include modules
+// Dołącz moduły
 include { sayHello } from './modules/sayHello.nf'
 include { convertToUpper } from './modules/convertToUpper.nf'
 include { collectGreetings } from './modules/collectGreetings.nf'
@@ -889,7 +889,7 @@ Otwórz jeden z tych plików, a znajdziesz kod dla odpowiedniego process.
     #!/usr/bin/env nextflow
 
     /*
-    * Use echo to print 'Hello World!' to a file
+    * Użyj echo do wypisania 'Hello World!' do pliku
     */
     process sayHello {
 
@@ -1160,7 +1160,7 @@ Workflow jest bardzo podobny do poprzedniego, plus dodatkowy krok do uruchomieni
     ```groovy title="2d-container.nf" linenums="1" hl_lines="7 15 32 39 59-62"
     #!/usr/bin/env nextflow
 
-    // Include modules
+    // Dołącz moduły
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
     include { collectGreetings } from './modules/collectGreetings.nf'
@@ -1178,17 +1178,17 @@ Workflow jest bardzo podobny do poprzedniego, plus dodatkowy krok do uruchomieni
     workflow {
 
         main:
-        // create a channel for inputs from a CSV file
+        // utwórz kanał dla danych wejściowych z pliku CSV
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
-        // emit a greeting
+        // wyemituj pozdrowienie
         sayHello(greeting_ch)
-        // convert the greeting to uppercase
+        // przekształć pozdrowienie na wielkie litery
         convertToUpper(sayHello.out)
-        // collect all the greetings into one file
+        // zbierz wszystkie pozdrowienia do jednego pliku
         collectGreetings(convertToUpper.out.collect(), params.batch)
-        // generate ASCII art of the greetings with cowpy
+        // wygeneruj grafikę ASCII powitań za pomocą cowpy
         cowpy(collectGreetings.out.outfile, params.character)
 
         publish:
@@ -1226,7 +1226,7 @@ Workflow jest bardzo podobny do poprzedniego, plus dodatkowy krok do uruchomieni
 Widzisz, że ten workflow importuje process `cowpy` z pliku modułu i wywołuje go na wyjściu wywołania `collectGreetings()`, plus parametr wejściowy o nazwie `params.character`.
 
 ```groovy title="2d-container.nf" linenums="25"
-// generate ASCII art with cowpy
+// wygeneruj grafikę ASCII za pomocą cowpy
 cowpy(collectGreetings.out, params.character)
 ```
 
@@ -1237,7 +1237,7 @@ Process `cowpy`, który opakowuje polecenie cowpy do generowania grafiki ASCII, 
     ```groovy title="modules/cowpy.nf" linenums="1"
     #!/usr/bin/env nextflow
 
-    // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
+    // Wygeneruj grafikę ASCII za pomocą cowpy (https://github.com/jeffbuttars/cowpy)
     process cowpy {
 
         container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'

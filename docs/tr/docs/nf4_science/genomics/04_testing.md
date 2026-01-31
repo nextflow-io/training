@@ -1126,20 +1126,20 @@ Ancak, daha basit bir yol, `nf-test init`'in `tests` dizininde başlangıçta ol
 outputDir = 'results_genomics'
 
 /*
- * Pipeline parameters
+ * Pipeline parametreleri
  */
 
 params {
-    // Primary input (file of input files, one per line)
+    // Birincil girdi (satır başına bir tane olmak üzere girdi dosyalarının dosyası)
     reads_bam = "${projectDir}/data/sample_bams.txt"
 
-    // Accessory files
+    // Yardımcı dosyalar
     reference = "${projectDir}/data/ref/ref.fasta"
     reference_index = "${projectDir}/data/ref/ref.fasta.fai"
     reference_dict = "${projectDir}/data/ref/ref.dict"
     intervals = "${projectDir}/data/ref/intervals.bed"
 
-    // Base name for final output file
+    // Son çıktı dosyası için temel ad
     cohort_name = "family_trio"
 }
 ```

@@ -323,7 +323,7 @@ Buradaki amacımız Nextflow kodunun sözdizimini ezberlemek değil, ana bileşe
     #!/usr/bin/env nextflow
 
     /*
-    * Use echo to print 'Hello World!' to a file
+    * 'Hello World!' ifadesini bir dosyaya yazdırmak için echo kullan
     */
     process sayHello {
 
@@ -340,7 +340,7 @@ Buradaki amacımız Nextflow kodunun sözdizimini ezberlemek değil, ana bileşe
     }
 
     /*
-    * Pipeline parameters
+    * Pipeline parametreleri
     */
     params {
         input: String
@@ -349,7 +349,7 @@ Buradaki amacımız Nextflow kodunun sözdizimini ezberlemek değil, ana bileşe
     workflow {
 
         main:
-        // emit a greeting
+        // bir selamlama yayınla
         sayHello(params.input)
 
         publish:
@@ -378,7 +378,7 @@ Process gövdesi, çalıştırılacak komutu belirten bir script bloğu içermel
 
 ```groovy title="1-hello.nf" linenums="3"
 /*
-* Use echo to print a greeting to a file
+* Bir selamlamayı bir dosyaya yazdırmak için echo kullan
 */
 process sayHello {
 
@@ -419,7 +419,7 @@ Burada `main:` bloğu ve `publish:` bloğundan oluşan bir **workflow**'umuz var
 workflow {
 
     main:
-    // emit a greeting
+    // bir selamlama yayınla
     sayHello(params.input)
 
     publish:
@@ -450,7 +450,7 @@ Burada bu parametre bildirimini, workflow'un beklediği girdi türünü belirten
 
 ```groovy title="1-hello.nf" linenums="20"
 /*
- * Pipeline parameters
+ * Pipeline parametreleri
  */
 params {
     input: String

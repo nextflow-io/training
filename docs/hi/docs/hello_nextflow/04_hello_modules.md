@@ -99,7 +99,7 @@ Workflow file से पूरी process definition को module file मे�
 #!/usr/bin/env nextflow
 
 /*
- * Use echo to print 'Hello World!' to a file
+ * 'Hello World!' को एक फ़ाइल में प्रिंट करने के लिए echo का उपयोग करें
  */
 process sayHello {
 
@@ -131,11 +131,11 @@ include { <MODULE_NAME> } from '<path_to_module>'
 === "After"
 
     ```groovy title="hello-modules.nf" linenums="44" hl_lines="1 2"
-    // Include modules
+    // Modules को include करें
     include { sayHello } from './modules/sayHello.nf'
 
     /*
-    * Pipeline parameters
+    * Pipeline पैरामीटर
     */
     params {
         greeting: Path = 'data/greetings.csv'
@@ -147,7 +147,7 @@ include { <MODULE_NAME> } from '<path_to_module>'
 
     ```groovy title="hello-modules.nf" linenums="44"
     /*
-    * Pipeline parameters
+    * Pipeline पैरामीटर
     */
     params {
         greeting: Path = 'data/greetings.csv'
@@ -203,7 +203,7 @@ touch modules/convertToUpper.nf
 #!/usr/bin/env nextflow
 
 /*
- * Use a text replacement tool to convert the greeting to uppercase
+ * अभिवादन को uppercase में बदलने के लिए text replacement tool का उपयोग करें
  */
 process convertToUpper {
 
@@ -223,7 +223,7 @@ process convertToUpper {
 ### 3.3. `params` block से पहले import declaration add करें
 
 ```groovy title="hello-modules.nf" linenums="23" hl_lines="3"
-// Include modules
+// Modules को include करें
 include { sayHello } from './modules/sayHello.nf'
 include { convertToUpper } from './modules/convertToUpper.nf'
 ```
@@ -250,7 +250,7 @@ touch modules/collectGreetings.nf
 #!/usr/bin/env nextflow
 
 /*
- * Collect uppercase greetings into a single output file
+ * Uppercase अभिवादनों को एक single output फ़ाइल में collect करें
  */
 process collectGreetings {
 
@@ -274,7 +274,7 @@ process collectGreetings {
 ### 4.3. `params` block से पहले import declaration add करें
 
 ```groovy title="hello-modules.nf" linenums="3" hl_lines="4"
-// Include modules
+// Modules को include करें
 include { sayHello } from './modules/sayHello.nf'
 include { convertToUpper } from './modules/convertToUpper.nf'
 include { collectGreetings } from './modules/collectGreetings.nf'

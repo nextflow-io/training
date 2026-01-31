@@ -19,10 +19,10 @@
 
 ## Avviare un ambiente di formazione
 
-Per utilizzare l'ambiente preconfigurato che forniamo su GitHub Codespaces, clicchi sul pulsante "Open in GitHub Codespaces" qui sotto. Per altre opzioni, consulti [Opzioni per l'ambiente](../envsetup/index.md).
+Per utilizzare l'ambiente preconfigurato che forniamo su GitHub Codespaces, cliccate sul pulsante "Open in GitHub Codespaces" qui sotto. Per altre opzioni, consultate [Opzioni per l'ambiente](../envsetup/index.md).
 
-Le consigliamo di aprire l'ambiente di formazione in una nuova scheda o finestra del browser (usi il clic destro, ctrl-clic o cmd-clic a seconda del Suo dispositivo) in modo da poter continuare a leggere mentre l'ambiente si carica.
-Dovrà tenere queste istruzioni aperte in parallelo per lavorare attraverso il corso.
+Vi consigliamo di aprire l'ambiente di formazione in una nuova scheda o finestra del browser (usate il clic destro, ctrl-clic o cmd-clic a seconda del vostro dispositivo) in modo da poter continuare a leggere mentre l'ambiente si carica.
+Dovrete tenere queste istruzioni aperte in parallelo per lavorare attraverso il corso.
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
@@ -33,12 +33,12 @@ Questo ambiente di formazione contiene tutto il software, il codice e i dati nec
 Il codespace è configurato con un'interfaccia VSCode, che include un esplora file, un editor di codice e una shell del terminale.
 Tutte le istruzioni fornite durante il corso (ad es. 'apra il file', 'modifichi il codice' o 'esegua questo comando') si riferiscono a queste tre parti dell'interfaccia VScode, salvo diversa indicazione.
 
-Se sta seguendo questo corso autonomamente, si familiarizzi con le [nozioni di base sull'ambiente](../envsetup/01_setup.md) per ulteriori dettagli.
+Se state seguendo questo corso autonomamente, familiarizzatevi con le [nozioni di base sull'ambiente](../envsetup/01_setup.md) per ulteriori dettagli.
 
 ### Requisiti di versione
 
 Questa formazione è progettata per Nextflow 25.10.2 o successivo **con il parser di sintassi v2 ABILITATO**.
-Se sta utilizzando un ambiente locale o personalizzato, si assicuri di utilizzare le impostazioni corrette come documentato [qui](../info/nxf_versions.md).
+Se state utilizzando un ambiente locale o personalizzato, assicuratevi di utilizzare le impostazioni corrette come documentato [qui](../info/nxf_versions.md).
 
 ## Prepararsi a lavorare
 
@@ -48,13 +48,13 @@ Una volta che il codespace è in esecuzione, ci sono due cose da fare prima di i
 
 Per impostazione predefinita, il codespace si apre con la directory di lavoro impostata alla radice di tutti i corsi di formazione, ma per questo corso lavoreremo nella directory `hello-nextflow/`.
 
-Cambi directory ora eseguendo questo comando nel terminale:
+Cambiate directory ora eseguendo questo comando nel terminale:
 
 ```bash
 cd hello-nextflow/
 ```
 
-Può impostare VSCode per focalizzarsi su questa directory, in modo che solo i file rilevanti vengano mostrati nella barra laterale dell'esplora file:
+Potete impostare VSCode per focalizzarsi su questa directory, in modo che solo i file rilevanti vengano mostrati nella barra laterale dell'esplora file:
 
 ```bash
 code .
@@ -62,7 +62,7 @@ code .
 
 !!! tip "Suggerimento"
 
-    Se per qualsiasi motivo esce da questa directory (ad es. il codespace va in sleep), può sempre usare il percorso completo per tornarci, assumendo che stia eseguendo all'interno dell'ambiente di formazione Github Codespaces:
+    Se per qualsiasi motivo uscite da questa directory (ad es. il codespace va in sleep), potete sempre usare il percorso completo per tornarci, assumendo che stiate eseguendo all'interno dell'ambiente di formazione Github Codespaces:
 
     ```bash
     cd /workspaces/training/hello-nextflow
@@ -72,8 +72,8 @@ Ora diamo un'occhiata ai contenuti.
 
 ### Esplorare i materiali forniti
 
-Può esplorare i contenuti di questa directory utilizzando l'esplora file sul lato sinistro dell'area di lavoro di formazione.
-In alternativa, può usare il comando `tree`.
+Potete esplorare i contenuti di questa directory utilizzando l'esplora file sul lato sinistro dell'area di lavoro di formazione.
+In alternativa, potete usare il comando `tree`.
 
 Durante il corso, utilizziamo l'output di `tree` per rappresentare la struttura della directory e i contenuti in una forma leggibile, a volte con piccole modifiche per chiarezza.
 
@@ -107,29 +107,29 @@ tree . -L 2
     └── test-params.yaml
     ```
 
-Clicchi sul riquadro colorato per espandere la sezione e visualizzarne i contenuti.
+Cliccate sul riquadro colorato per espandere la sezione e visualizzarne i contenuti.
 Utilizziamo sezioni espandibili come questa per includere l'output dei comandi atteso in modo conciso.
 
 - **I file `.nf`** sono script di workflow denominati in base alla parte del corso in cui vengono utilizzati.
 
 - **Il file `nextflow.config`** è un file di configurazione che imposta proprietà minime dell'ambiente.
-  Può ignorarlo per ora.
+  Potete ignorarlo per ora.
 
 - **Il file `greetings.csv`** sotto `data/` contiene i dati di input che useremo nella maggior parte del corso. È descritto nella Parte 2 (Channels), quando lo introduciamo per la prima volta.
 
-- **I file `test-params.*`** sono file di configurazione che useremo nella Parte 6 (Configuration). Può ignorarli per ora.
+- **I file `test-params.*`** sono file di configurazione che useremo nella Parte 6 (Configuration). Potete ignorarli per ora.
 
 - **La directory `solutions`** contiene gli script di workflow completati che risultano da ogni passaggio del corso.
-  Sono pensati per essere usati come riferimento per verificare il Suo lavoro e risolvere eventuali problemi.
+  Sono pensati per essere usati come riferimento per verificare il vostro lavoro e risolvere eventuali problemi.
 
 ## Checklist di preparazione
 
-Pensa di essere pronto a iniziare?
+Pensate di essere pronti a iniziare?
 
 - [ ] Comprendo l'obiettivo di questo corso e i suoi prerequisiti
 - [ ] Il mio ambiente è attivo e funzionante
 - [ ] Ho impostato la mia directory di lavoro in modo appropriato
 
-Se può spuntare tutte le caselle, è pronto a partire.
+Se potete spuntare tutte le caselle, siete pronti a partire.
 
-**Per continuare alla [Parte 1: Hello World](./01_hello_world.md), clicchi sulla freccia nell'angolo in basso a destra di questa pagina.**
+**Per continuare alla [Parte 1: Hello World](./01_hello_world.md), cliccate sulla freccia nell'angolo in basso a destra di questa pagina.**

@@ -349,7 +349,7 @@ echo 'Hello World!' > output.txt
     workflow {
 
         main:
-        // emit a greeting
+        // एक अभिवादन emit करें
         sayHello(params.input)
 
         publish:
@@ -419,7 +419,7 @@ Workflow definition `workflow` keyword से शुरू होती है, 
 workflow {
 
     main:
-    // emit a greeting
+    // एक अभिवादन emit करें
     sayHello(params.input)
 
     publish:

@@ -138,7 +138,7 @@ Skopiuj całą definicję procesu z pliku workflow do pliku modułu, upewniając
 #!/usr/bin/env nextflow
 
 /*
- * Use echo to print 'Hello World!' to a file
+ * Użyj echo do wypisania 'Hello World!' do pliku
  */
 process sayHello {
 
@@ -170,7 +170,7 @@ Wstawmy ją powyżej bloku `params` i wypełnijmy odpowiednio.
 === "Po"
 
     ```groovy title="hello-modules.nf" linenums="44" hl_lines="1 2"
-    // Include modules
+    // Dołącz moduły
     include { sayHello } from './modules/sayHello.nf'
 
     /*
@@ -251,7 +251,7 @@ Skopiuj całą definicję procesu z pliku workflow do pliku modułu, upewniając
 #!/usr/bin/env nextflow
 
 /*
- * Use a text replacement tool to convert the greeting to uppercase
+ * Użyj narzędzia zamiany tekstu do przekształcenia pozdrowienia na wielkie litery
  */
 process convertToUpper {
 
@@ -277,7 +277,7 @@ Wstaw deklarację importu powyżej bloku `params` i wypełnij ją odpowiednio.
 === "Po"
 
     ```groovy title="hello-modules.nf" linenums="23" hl_lines="3"
-    // Include modules
+    // Dołącz moduły
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
 
@@ -293,7 +293,7 @@ Wstaw deklarację importu powyżej bloku `params` i wypełnij ją odpowiednio.
 === "Przed"
 
     ```groovy title="hello-modules.nf" linenums="23"
-    // Include modules
+    // Dołącz moduły
     include { sayHello } from './modules/sayHello.nf'
 
     /*
@@ -351,7 +351,7 @@ Skopiuj całą definicję procesu z pliku workflow do pliku modułu, upewniając
 #!/usr/bin/env nextflow
 
 /*
- * Collect uppercase greetings into a single output file
+ * Zbierz pozdrowienia pisane wielkimi literami do jednego pliku wyjściowego
  */
 process collectGreetings {
 
@@ -381,7 +381,7 @@ Wstaw deklarację importu powyżej bloku `params` i wypełnij ją odpowiednio.
 === "Po"
 
     ```groovy title="hello-modules.nf" linenums="3" hl_lines="4"
-    // Include modules
+    // Dołącz moduły
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
     include { collectGreetings } from './modules/collectGreetings.nf'
@@ -398,7 +398,7 @@ Wstaw deklarację importu powyżej bloku `params` i wypełnij ją odpowiednio.
 === "Przed"
 
     ```groovy title="hello-modules.nf" linenums="3"
-    // Include modules
+    // Dołącz moduły
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
 

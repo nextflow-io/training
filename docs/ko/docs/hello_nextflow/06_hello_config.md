@@ -167,7 +167,7 @@ nextflow run hello-config.nf
     docker.enabled = true
 
     /*
-    * Pipeline parameters
+    * 파이프라인 매개변수
     */
     params {
         input = 'data/greetings.csv'
@@ -200,7 +200,7 @@ Workflow 파일에서는 타입이 지정된 선언입니다.
 
     ```groovy title="hello-config.nf" linenums="9" hl_lines="5-7"
     /*
-    * Pipeline parameters
+    * 파이프라인 매개변수
     */
     params {
         input: Path
@@ -213,7 +213,7 @@ Workflow 파일에서는 타입이 지정된 선언입니다.
 
     ```groovy title="hello-config.nf" linenums="9" hl_lines="5-7"
     /*
-    * Pipeline parameters
+    * 파이프라인 매개변수
     */
     params {
         input: Path = 'data/greetings.csv'
@@ -496,7 +496,7 @@ Nextflow가 출력을 게시하는 데 사용하는 경로는 `outputDir` 옵션
 
     ```groovy title="nextflow.config" linenums="9" hl_lines="10-13"
     /*
-    * Pipeline parameters
+    * 파이프라인 매개변수
     */
     params {
         input = 'data/greetings.csv'
@@ -505,7 +505,7 @@ Nextflow가 출력을 게시하는 데 사용하는 경로는 `outputDir` 옵션
     }
 
     /*
-    * Output settings
+    * 출력 설정
     */
     outputDir = "results/${params.batch}"
     ```
@@ -514,7 +514,7 @@ Nextflow가 출력을 게시하는 데 사용하는 경로는 `outputDir` 옵션
 
     ```groovy title="nextflow.config" linenums="9"
     /*
-    * Pipeline parameters
+    * 파이프라인 매개변수
     */
     params {
         input = 'data/greetings.csv'
@@ -756,7 +756,7 @@ nextflow run hello-config.nf --batch pnames
 
     ```groovy title="nextflow.config" linenums="2" hl_lines="5"
     /*
-    * Output settings
+    * 출력 설정
     */
     outputDir = "results/${params.batch}"
     workflow.output.mode = 'copy'
@@ -766,7 +766,7 @@ nextflow run hello-config.nf --batch pnames
 
     ```groovy title="nextflow.config" linenums="12"
     /*
-    * Output settings
+    * 출력 설정
     */
     outputDir = "results/${params.batch}"
     ```
@@ -1142,7 +1142,7 @@ nextflow run hello-config.nf -with-report report-config-1.html
 
 ```groovy title="nextflow.config" linenums="4"
 /*
-* Process settings
+* Process 설정
 */
 process {
     memory = 1.GB
@@ -1159,7 +1159,7 @@ process {
 
     ```groovy title="nextflow.config" linenums="4" hl_lines="6-9"
     /*
-    * Process settings
+    * Process 설정
     */
     process {
         memory = 1.GB
@@ -1174,7 +1174,7 @@ process {
 
     ```groovy title="nextflow.config" linenums="4"
     /*
-    * Process settings
+    * Process 설정
     */
     process {
         memory = 1.GB

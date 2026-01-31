@@ -223,7 +223,7 @@ process sayHello {
 
 workflow {
 
-    // emit a greeting
+    // एक अभिवादन emit करें
     sayHello(params.greeting)
 }
 ```
@@ -295,7 +295,7 @@ Workflow परिभाषा keyword `workflow` से शुरू होत�
 ```groovy title="hello-world.nf" linenums="22"
 workflow {
 
-    // emit a greeting
+    // एक अभिवादन emit करें
     sayHello(params.greeting)
 }
 ```

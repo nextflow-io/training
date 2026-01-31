@@ -349,7 +349,7 @@ Troverai lo script `1-hello.nf` nella tua directory corrente, che dovrebbe esser
     workflow {
 
         main:
-        // emit a greeting
+        // emette un saluto
         sayHello(params.input)
 
         publish:
@@ -419,7 +419,7 @@ Il blocco `main:` è il corpo principale del workflow e il blocco `publish:` ele
 workflow {
 
     main:
-    // emit a greeting
+    // emette un saluto
     sayHello(params.input)
 
     publish:

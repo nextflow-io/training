@@ -155,7 +155,7 @@ Also aktualisieren wir jetzt die beiden Referenzen auf den Prozess im Workflow-B
 === "Nachher"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="2 17"
-    // generate ASCII art of the greetings with cowpy
+    // ASCII-Kunst der Begrüßungen mit cowpy generieren
     COWPY(CAT_CAT.out.file_out)
 
     //
@@ -178,7 +178,7 @@ Also aktualisieren wir jetzt die beiden Referenzen auf den Prozess im Workflow-B
 === "Vorher"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="2 17"
-    // generate ASCII art of the greetings with cowpy
+    // ASCII-Kunst der Begrüßungen mit cowpy generieren
     cowpy(CAT_CAT.out.file_out)
 
     //
@@ -308,17 +308,17 @@ Da die Ausgabe von `CAT_CAT` und die Eingabe von `COWPY` jetzt die gleiche 'Form
 === "Nachher"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="2"
-        // generate ASCII art of the greetings with cowpy
+        // ASCII-Kunst der Begrüßungen mit cowpy generieren
         COWPY(CAT_CAT.out.file_out, params.character)
     ```
 
 === "Vorher"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="1-2 5"
-        // extract the file from the tuple since cowpy doesn't use metadata yet
+        // Die Datei aus dem Tupel extrahieren, da cowpy noch keine Metadaten verwendet
         ch_for_cowpy = CAT_CAT.out.file_out.map{ meta, file -> file }
 
-        // generate ASCII art of the greetings with cowpy
+        // ASCII-Kunst der Begrüßungen mit cowpy generieren
         COWPY(ch_for_cowpy, params.character)
     ```
 
@@ -564,14 +564,14 @@ Da das `COWPY`-Modul den `character`-Parameter nicht mehr als Eingabe benötigt,
 === "Nachher"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="39" hl_lines="2"
-        // generate ASCII art of the greetings with cowpy
+        // ASCII-Kunst der Begrüßungen mit cowpy generieren
         COWPY(CAT_CAT.out.file_out)
     ```
 
 === "Vorher"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="39" hl_lines="2"
-        // generate ASCII art of the greetings with cowpy
+        // ASCII-Kunst der Begrüßungen mit cowpy generieren
         COWPY(CAT_CAT.out.file_out, params.character)
     ```
 

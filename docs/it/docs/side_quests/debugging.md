@@ -830,7 +830,7 @@ nextflow run badpractice_syntax.nf
 
 Mantenete i vostri canali di input definiti all'interno del blocco workflow, e in generale seguite qualsiasi altra raccomandazione che l'estensione fa.
 
-### Conclusione
+### Takeaway
 
 Potete identificare e correggere sistematicamente gli errori di sintassi usando i messaggi di errore di Nextflow e gli indicatori visivi dell'IDE. Gli errori di sintassi comuni includono parentesi graffe mancanti, parole chiave di processo errate, variabili non definite e uso improprio di variabili Bash vs. Nextflow. L'estensione VSCode aiuta a catturare molti di questi prima del runtime. Con queste competenze di debug della sintassi nel vostro toolkit, sarete in grado di risolvere rapidamente gli errori di sintassi più comuni di Nextflow e passare ad affrontare problemi di runtime più complessi.
 
@@ -1430,7 +1430,7 @@ nextflow run bad_channel_shape_viewed.nf
     After mapping: sample3
     ```
 
-### Conclusione
+### Takeaway
 
 Molti errori di struttura dei canali possono essere creati con sintassi Nextflow valida. Potete debuggare gli errori di struttura dei canali comprendendo il flusso dei dati, usando operatori `.view()` per l'ispezione e riconoscendo pattern di errore come parentesi quadre che indicano strutture di tuple inaspettate.
 

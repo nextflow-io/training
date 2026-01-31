@@ -323,7 +323,7 @@ Znajdziesz skrypt `1-hello.nf` w bieżącym katalogu, którym powinien być `nex
     #!/usr/bin/env nextflow
 
     /*
-    * Use echo to print 'Hello World!' to a file
+    * Użyj echo do wypisania 'Hello World!' do pliku
     */
     process sayHello {
 
@@ -349,7 +349,7 @@ Znajdziesz skrypt `1-hello.nf` w bieżącym katalogu, którym powinien być `nex
     workflow {
 
         main:
-        // emit a greeting
+        // wyemituj pozdrowienie
         sayHello(params.input)
 
         publish:
@@ -378,7 +378,7 @@ Ciało process musi zawierać blok script, który określa polecenie do uruchomi
 
 ```groovy title="1-hello.nf" linenums="3"
 /*
-* Use echo to print a greeting to a file
+* Użyj echo do wypisania pozdrowienia do pliku
 */
 process sayHello {
 
@@ -419,7 +419,7 @@ Blok `main:` jest głównym ciałem workflow, a blok `publish:` wymienia wyjści
 workflow {
 
     main:
-    // emit a greeting
+    // wyemituj pozdrowienie
     sayHello(params.input)
 
     publish:

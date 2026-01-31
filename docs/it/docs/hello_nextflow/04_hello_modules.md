@@ -28,7 +28,7 @@ Questo renderà il nostro codice più condivisibile, flessibile e manutenibile.
 
 ??? info "Come iniziare da questa sezione"
 
-    Questa sezione del corso presuppone che Lei abbia completato le Parti 1-3 del corso [Hello Nextflow](./index.md), ma se ha familiarità con i concetti base trattati in quelle sezioni, può iniziare da qui senza fare nulla di speciale.
+    Questa sezione del corso presuppone che abbiate completato le Parti 1-3 del corso [Hello Nextflow](./index.md), ma se avete familiarità con i concetti base trattati in quelle sezioni, potete iniziare da qui senza fare nulla di speciale.
 
 ---
 
@@ -58,7 +58,7 @@ output {
 }
 ```
 
-Solo per assicurarci che tutto funzioni, esegua lo script una volta prima di apportare modifiche:
+Solo per assicurarci che tutto funzioni, eseguite lo script una volta prima di apportare modifiche:
 
 ```bash
 nextflow run hello-modules.nf
@@ -77,7 +77,7 @@ nextflow run hello-modules.nf
     [af/479117] collectGreetings   [100%] 1 of 1 ✔
     ```
 
-Come in precedenza, troverà i file di output nella directory specificata nel blocco `output` (qui, `results/hello_modules/`).
+Come in precedenza, troverete i file di output nella directory specificata nel blocco `output` (qui, `results/hello_modules/`).
 
 ??? abstract "Contenuti della directory"
 
@@ -93,14 +93,14 @@ Come in precedenza, troverà i file di output nella directory specificata nel bl
     └── UPPER-Holà-output.txt
     ```
 
-Se ha funzionato, è pronto a imparare come modularizzare il codice del workflow.
+Se ha funzionato, siete pronti a imparare come modularizzare il codice del workflow.
 
 ---
 
 ## 1. Creare una directory per memorizzare i moduli
 
 È buona pratica memorizzare i moduli in una directory specifica.
-Può chiamare quella directory come vuole, ma la convenzione è chiamarla `modules/`.
+Potete chiamare quella directory come volete, ma la convenzione è chiamarla `modules/`.
 
 ```bash
 mkdir modules
@@ -108,8 +108,8 @@ mkdir modules
 
 !!! tip "Suggerimento"
 
-    Qui Le stiamo mostrando come usare **moduli locali**, cioè moduli memorizzati localmente nello stesso repository del resto del codice del workflow, in contrasto con i moduli remoti, che sono memorizzati in altri repository (remoti).
-    Per maggiori informazioni sui **moduli remoti**, veda la [documentazione](https://www.nextflow.io/docs/latest/module.html).
+    Qui vi stiamo mostrando come usare **moduli locali**, cioè moduli memorizzati localmente nello stesso repository del resto del codice del workflow, in contrasto con i moduli remoti, che sono memorizzati in altri repository (remoti).
+    Per maggiori informazioni sui **moduli remoti**, vedete la [documentazione](https://www.nextflow.io/docs/latest/module.html).
 
 ---
 
@@ -132,7 +132,7 @@ Questo ci dà un posto dove mettere il codice del processo.
 
 ### 2.2. Spostare il codice del processo `sayHello` nel file del modulo
 
-Copi l'intera definizione del processo dal file del workflow al file del modulo, assicurandosi di copiare anche lo shebang `#!/usr/bin/env nextflow`.
+Copiate l'intera definizione del processo dal file del workflow al file del modulo, assicurandovi di copiare anche lo shebang `#!/usr/bin/env nextflow`.
 
 ```groovy title="modules/sayHello.nf" linenums="1"
 #!/usr/bin/env nextflow
@@ -155,7 +155,7 @@ process sayHello {
 }
 ```
 
-Una volta fatto, cancelli la definizione del processo dal file del workflow, ma assicuri di lasciare lo shebang al suo posto.
+Una volta fatto, cancellate la definizione del processo dal file del workflow, ma assicuratevi di lasciare lo shebang al suo posto.
 
 ### 2.3. Aggiungere una dichiarazione di import prima del blocco workflow
 
@@ -170,7 +170,7 @@ Inseriamola sopra il blocco `params` e compiliamola appropriatamente.
 === "Dopo"
 
     ```groovy title="hello-modules.nf" linenums="44" hl_lines="1 2"
-    // Include modules
+    // Include i moduli
     include { sayHello } from './modules/sayHello.nf'
 
     /*
@@ -194,7 +194,7 @@ Inseriamola sopra il blocco `params` e compiliamola appropriatamente.
     }
     ```
 
-Vede che abbiamo inserito il nome del modulo, `sayHello`, e il percorso al file contenente il codice del modulo, `./modules/sayHello.nf`.
+Vedete che abbiamo inserito il nome del modulo, `sayHello`, e il percorso al file contenente il codice del modulo, `./modules/sayHello.nf`.
 
 ### 2.4. Eseguire il workflow
 
@@ -217,13 +217,13 @@ nextflow run hello-modules.nf -resume
     ```
 
 Questo dovrebbe funzionare molto velocemente perché tutto è in cache.
-Si senta libero di controllare gli output pubblicati.
+Sentitevi liberi di controllare gli output pubblicati.
 
 Nextflow ha riconosciuto che è ancora tutto lo stesso lavoro da fare, anche se il codice è diviso in più file.
 
-### Conclusione
+### Takeaway
 
-Sa come estrarre un processo in un modulo locale e sa che fare questo non compromette la ripristinabilità del workflow.
+Sapete come estrarre un processo in un modulo locale e sapete che fare questo non compromette la ripristinabilità del workflow.
 
 ### Cosa c'è dopo?
 
@@ -237,7 +237,7 @@ Ma per ora ne facciamo solo altri due.
 
 ### 3.1. Creare uno stub di file per il nuovo modulo
 
-Crei un file vuoto per il modulo chiamato `convertToUpper.nf`.
+Create un file vuoto per il modulo chiamato `convertToUpper.nf`.
 
 ```bash
 touch modules/convertToUpper.nf
@@ -245,7 +245,7 @@ touch modules/convertToUpper.nf
 
 ### 3.2. Spostare il codice del processo `convertToUpper` nel file del modulo
 
-Copi l'intera definizione del processo dal file del workflow al file del modulo, assicurandosi di copiare anche lo shebang `#!/usr/bin/env nextflow`.
+Copiate l'intera definizione del processo dal file del workflow al file del modulo, assicurandovi di copiare anche lo shebang `#!/usr/bin/env nextflow`.
 
 ```groovy title="modules/convertToUpper.nf" linenums="1"
 #!/usr/bin/env nextflow
@@ -268,16 +268,16 @@ process convertToUpper {
 }
 ```
 
-Una volta fatto, cancelli la definizione del processo dal file del workflow, ma assicuri di lasciare lo shebang al suo posto.
+Una volta fatto, cancellate la definizione del processo dal file del workflow, ma assicuratevi di lasciare lo shebang al suo posto.
 
 ### 3.3. Aggiungere una dichiarazione di import prima del blocco `params`
 
-Inserisca la dichiarazione di import sopra il blocco `params` e la compili appropriatamente.
+Inserite la dichiarazione di import sopra il blocco `params` e compilatela appropriatamente.
 
 === "Dopo"
 
     ```groovy title="hello-modules.nf" linenums="23" hl_lines="3"
-    // Include modules
+    // Include i moduli
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
 
@@ -293,7 +293,7 @@ Inserisca la dichiarazione di import sopra il blocco `params` e la compili appro
 === "Prima"
 
     ```groovy title="hello-modules.nf" linenums="23"
-    // Include modules
+    // Include i moduli
     include { sayHello } from './modules/sayHello.nf'
 
     /*
@@ -309,7 +309,7 @@ Questo dovrebbe iniziare a sembrare molto familiare.
 
 ### 3.4. Eseguire di nuovo il workflow
 
-Esegua questo con il flag `-resume`.
+Eseguite questo con il flag `-resume`.
 
 ```bash
 nextflow run hello-modules.nf -resume
@@ -337,7 +337,7 @@ Due fatti, ne manca ancora uno!
 
 ### 4.1. Creare uno stub di file per il nuovo modulo
 
-Crei un file vuoto per il modulo chiamato `collectGreetings.nf`.
+Create un file vuoto per il modulo chiamato `collectGreetings.nf`.
 
 ```bash
 touch modules/collectGreetings.nf
@@ -345,7 +345,7 @@ touch modules/collectGreetings.nf
 
 ### 4.2. Spostare il codice del processo `collectGreetings` nel file del modulo
 
-Copi l'intera definizione del processo dal file del workflow al file del modulo, assicurandosi di copiare anche lo shebang `#!/usr/bin/env nextflow`.
+Copiate l'intera definizione del processo dal file del workflow al file del modulo, assicurandovi di copiare anche lo shebang `#!/usr/bin/env nextflow`.
 
 ```groovy title="modules/collectGreetings.nf" linenums="1"
 #!/usr/bin/env nextflow
@@ -372,16 +372,16 @@ process collectGreetings {
 }
 ```
 
-Una volta fatto, cancelli la definizione del processo dal file del workflow, ma assicuri di lasciare lo shebang al suo posto.
+Una volta fatto, cancellate la definizione del processo dal file del workflow, ma assicuratevi di lasciare lo shebang al suo posto.
 
 ### 4.3. Aggiungere una dichiarazione di import prima del blocco `params`
 
-Inserisca la dichiarazione di import sopra il blocco `params` e la compili appropriatamente.
+Inserite la dichiarazione di import sopra il blocco `params` e compilatela appropriatamente.
 
 === "Dopo"
 
     ```groovy title="hello-modules.nf" linenums="3" hl_lines="4"
-    // Include modules
+    // Include i moduli
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
     include { collectGreetings } from './modules/collectGreetings.nf'
@@ -398,7 +398,7 @@ Inserisca la dichiarazione di import sopra il blocco `params` e la compili appro
 === "Prima"
 
     ```groovy title="hello-modules.nf" linenums="3"
-    // Include modules
+    // Include i moduli
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
 
@@ -415,7 +415,7 @@ Ultimo!
 
 ### 4.4. Eseguire il workflow
 
-Esegua questo con il flag `-resume`.
+Eseguite questo con il flag `-resume`.
 
 ```bash
 nextflow run hello-modules.nf -resume
@@ -435,20 +435,20 @@ nextflow run hello-modules.nf -resume
 
 Questo dovrebbe ancora produrre lo stesso output di prima.
 
-### Conclusione
+### Takeaway
 
-Sa come modularizzare più processi in un workflow.
+Sapete come modularizzare più processi in un workflow.
 
-Congratulazioni, ha fatto tutto questo lavoro e non è cambiato assolutamente nulla nel funzionamento della pipeline!
+Congratulazioni, avete fatto tutto questo lavoro e non è cambiato assolutamente nulla nel funzionamento della pipeline!
 
-A parte gli scherzi, ora il Suo codice è più modulare, e se decide di scrivere un'altra pipeline che chiama uno di quei processi, Le basta digitare una breve istruzione di import per usare il modulo rilevante.
-Questo è meglio che fare copia-incolla del codice, perché se in seguito decide di migliorare il modulo, tutte le Sue pipeline erediteranno i miglioramenti.
+A parte gli scherzi, ora il vostro codice è più modulare, e se decidete di scrivere un'altra pipeline che chiama uno di quei processi, vi basta digitare una breve istruzione di import per usare il modulo rilevante.
+Questo è meglio che fare copia-incolla del codice, perché se in seguito decidete di migliorare il modulo, tutte le vostre pipeline erediteranno i miglioramenti.
 
 ### Cosa c'è dopo?
 
-Si prenda una breve pausa se ne ha voglia.
+Prendetevi una breve pausa se ne avete voglia.
 
-Quando è pronto, passi alla [**Parte 5: Hello Containers**](./05_hello_containers.md) per imparare come usare i container per gestire le dipendenze software in modo più conveniente e riproducibile.
+Quando siete pronti, passate alla [**Parte 5: Hello Containers**](./05_hello_containers.md) per imparare come usare i container per gestire le dipendenze software in modo più conveniente e riproducibile.
 
 ---
 

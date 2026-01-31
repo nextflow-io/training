@@ -280,7 +280,7 @@ Questa è in definitiva l'informazione che stiamo cercando di estrarre dal datas
 exit
 ```
 
-### Conclusione
+### Takeaway
 
 Sa come eseguire i singoli comandi coinvolti nella chiamata congiunta delle varianti nel terminale per verificare che producano le informazioni desiderate.
 
@@ -500,7 +500,7 @@ L'output di Nextflow stesso non appare diverso (rispetto a un'esecuzione riuscit
 
 Se apre uno dei file GVCF e lo scorre, può verificare che GATK HaplotypeCaller abbia prodotto file GVCF come richiesto.
 
-### Conclusione
+### Takeaway
 
 Ok, questo è stato minimo in termini di apprendimento di Nextflow...
 Ma è stata una bella opportunità per ribadire l'importanza del blocco di output del processo!
@@ -763,7 +763,7 @@ L'archivio dati GenomicsDB viene creato nella directory di lavoro ma non pubblic
 
 Tra l'altro, non abbiamo dovuto fare nulla di speciale per gestire l'output che è una directory invece di un singolo file.
 
-### Conclusione
+### Takeaway
 
 Ora sa come raccogliere output da un canale e raggrupparli come singolo input a un altro processo.
 Sa anche come costruire una riga di comando per fornire input a un determinato strumento con la sintassi appropriata.
@@ -1013,7 +1013,7 @@ Ora ha un workflow di chiamata congiunta delle varianti automatizzato, completam
     La dimensione reale di un set di chiamate di varianti sarebbe contata in milioni di varianti.
     Ecco perché usiamo solo piccoli sottoinsiemi di dati per scopi formativi!
 
-### Conclusione
+### Takeaway
 
 Sa come utilizzare alcuni operatori comuni così come le closure di Groovy per controllare il flusso di dati nel Suo workflow.
 

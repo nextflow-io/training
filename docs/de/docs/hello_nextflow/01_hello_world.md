@@ -99,7 +99,7 @@ Du findest das Skript `hello-world.nf` in deinem aktuellen Verzeichnis, das `hel
     #!/usr/bin/env nextflow
 
     /*
-    * Use echo to print 'Hello World!' to a file
+    * Verwende echo, um 'Hello World!' in eine Datei zu schreiben
     */
     process sayHello {
 
@@ -115,7 +115,7 @@ Du findest das Skript `hello-world.nf` in deinem aktuellen Verzeichnis, das `hel
     workflow {
 
         main:
-        // emit a greeting
+        // Eine Begrüßung ausgeben
         sayHello()
     }
     ```
@@ -135,7 +135,7 @@ Der Prozesskörper muss einen script-Block enthalten, der den auszuführenden Be
 
 ```groovy title="hello-world.nf" linenums="3"
 /*
-* Use echo to print 'Hello World!' to a file
+* Verwende echo, um 'Hello World!' in eine Datei zu schreiben
 */
 process sayHello {
 
@@ -183,7 +183,7 @@ Hier haben wir einen **workflow**, der aus einem `main:`-Block (der sagt 'dies i
 workflow {
 
     main:
-    // emit a greeting
+    // Eine Begrüßung ausgeben
     sayHello()
 }
 ```
@@ -409,7 +409,7 @@ Füge in der Workflow-Skriptdatei `hello-world.nf` die folgenden Codezeilen hinz
     workflow {
 
         main:
-        // emit a greeting
+        // Eine Begrüßung ausgeben
         sayHello()
 
         publish:
@@ -423,7 +423,7 @@ Füge in der Workflow-Skriptdatei `hello-world.nf` die folgenden Codezeilen hinz
     workflow {
 
         main:
-        // emit a greeting
+        // Eine Begrüßung ausgeben
         sayHello()
     }
     ```
@@ -442,7 +442,7 @@ Füge in der Workflow-Skriptdatei `hello-world.nf` die folgenden Codezeilen hinz
     workflow {
 
         main:
-        // emit a greeting
+        // Eine Begrüßung ausgeben
         sayHello()
 
         publish:
@@ -462,7 +462,7 @@ Füge in der Workflow-Skriptdatei `hello-world.nf` die folgenden Codezeilen hinz
     workflow {
 
         main:
-        // emit a greeting
+        // Eine Begrüßung ausgeben
         sayHello()
 
         publish:
@@ -805,14 +805,14 @@ Nimm im Workflow-Block die folgende Codeänderung vor:
 === "Nachher"
 
     ```groovy title="hello-world.nf" linenums="23" hl_lines="2"
-    // emit a greeting
+    // Eine Begrüßung ausgeben
     sayHello(params.input)
     ```
 
 === "Vorher"
 
     ```groovy title="hello-world.nf" linenums="23" hl_lines="2"
-    // emit a greeting
+    // Eine Begrüßung ausgeben
     sayHello()
     ```
 
@@ -875,7 +875,7 @@ Lass uns dem `input`-Parameter einen Standardwert geben, indem wir ihn vor der W
 
 ```groovy title="hello-world.nf" linenums="20"
 /*
- * Pipeline parameters
+ * Pipeline-Parameter
  */
 params {
     input: String = 'Holà mundo!'
