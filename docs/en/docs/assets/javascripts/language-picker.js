@@ -16,9 +16,9 @@
       }
     });
 
-    // Fallback if DOM query fails (should not happen in normal operation)
     if (knownLangs.length === 0) {
-      knownLangs = ["de", "en", "es", "fr", "hi", "it", "ko", "pl", "pt", "tr"];
+      console.error("language-picker.js: Could not find language links in DOM");
+      return;
     }
 
     var versionPrefix = "";
