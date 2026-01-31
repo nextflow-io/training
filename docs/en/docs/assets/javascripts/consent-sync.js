@@ -1,31 +1,32 @@
-// Sync cookie consent and palette (light/dark mode) across language paths
+// Sync MkDocs Material settings (consent, palette, etc.) across language paths
 // MkDocs Material prefixes localStorage keys with path (e.g., /de/.__consent, /de/.__palette)
-// This script copies settings from any language to the current one on page load
+// This script copies all settings from any language to the current one on page load
 (function () {
-  var suffixes = [".__consent", ".__palette"];
-
   // Get current path's prefix
   var pathMatch = window.location.pathname.match(/^\/[a-z]{2}\//);
   var currentPath = pathMatch ? pathMatch[0] : "/";
 
-  suffixes.forEach(function (suffix) {
-    var currentKey = currentPath + suffix;
-
-    // Skip if current path already has this setting
-    if (localStorage.getItem(currentKey)) {
-      return;
-    }
-
-    // Find any existing setting in localStorage
-    for (var i = 0; i < localStorage.length; i++) {
-      var key = localStorage.key(i);
-      if (key && key.endsWith(suffix)) {
-        var value = localStorage.getItem(key);
-        if (value) {
-          localStorage.setItem(currentKey, value);
-          break;
+  // Find all MkDocs Material settings (keys ending with .__something)
+  var settingsToSync = {};
+  for (var i = 0; i < localStorage.length; i++) {
+    var key = localStorage.key(i);
+    if (key) {
+      var match = key.match(/\.__\w+$/);
+      if (match) {
+        var suffix = match[0];
+        // Only store first found value for each suffix
+        if (!settingsToSync[suffix]) {
+          settingsToSync[suffix] = localStorage.getItem(key);
         }
       }
+    }
+  }
+
+  // Copy any missing settings to current path
+  Object.keys(settingsToSync).forEach(function (suffix) {
+    var currentKey = currentPath + suffix;
+    if (!localStorage.getItem(currentKey)) {
+      localStorage.setItem(currentKey, settingsToSync[suffix]);
     }
   });
 })();
