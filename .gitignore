@@ -16,6 +16,7 @@ __pycache__
 site/
 site_build/
 docs/*/site/
+docs/*/site_build/
 
 # Python virtual environments
 .venv/
