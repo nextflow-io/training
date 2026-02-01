@@ -66,6 +66,26 @@ def get_lang_paths() -> list[Path]:
     return sorted(DOCS_PATH.iterdir())
 
 
+MKDOCS_TEMPLATE = """\
+INHERIT: ../en/mkdocs.yml
+theme:
+  language: {lang}
+  custom_dir: ../en/overrides
+extra:
+  consent:
+    title: "Cookie consent"
+    description: >-
+      We use cookies to recognize your repeated visits and preferences, as well
+      as to measure the effectiveness of our documentation and whether users
+      find what they're searching for. With your consent, you're helping us to
+      make our training materials better.
+      Find out more on
+      <a href="https://seqera.io/privacy-policy/#cookies" target="_blank" rel="noopener">how we use cookies</a>.
+    cookies:
+      posthog: "PostHog Analytics"
+"""
+
+
 @app.command()
 def new_lang(lang: str):
     """Generate a new docs translation directory for a language."""
@@ -78,20 +98,33 @@ def new_lang(lang: str):
 
     new_path.mkdir()
     (new_path / "mkdocs.yml").write_text(
-        f"INHERIT: ../en/mkdocs.yml\ntheme:\n  language: {lang}\n",
+        MKDOCS_TEMPLATE.format(lang=lang),
         encoding="utf-8",
     )
     (new_path / "llm-prompt.md").write_text(
         f"# Translation Rules for {lang}\n\nTODO: Add language-specific translation rules here.\n",
         encoding="utf-8",
     )
+
+    # Copy ui-strings.yml from English as a starting point
+    en_ui_strings = EN_DOCS_PATH / "ui-strings.yml"
+    if en_ui_strings.exists():
+        ui_strings_content = en_ui_strings.read_text(encoding="utf-8")
+        # Add TODO comment at the top
+        ui_strings_content = (
+            f"# TODO: Translate these UI strings to {lang}\n" + ui_strings_content
+        )
+        (new_path / "ui-strings.yml").write_text(ui_strings_content, encoding="utf-8")
+
     (new_path / "docs").mkdir()
 
     console.print(f"[green]Created:[/green] {new_path}")
     console.print("\nNext steps:")
     console.print(f"  1. Edit {new_path}/llm-prompt.md to add translation rules")
-    console.print(f"  2. Add '{lang}: <native name>' to docs/language_names.yml")
-    console.print(f"  3. Add language to extra.alternate in docs/en/mkdocs.yml")
+    console.print(f"  2. Translate {new_path}/ui-strings.yml")
+    console.print(f"  3. Translate extra.consent in {new_path}/mkdocs.yml")
+    console.print(f"  4. Add '{lang}: <native name>' to docs/language_names.yml")
+    console.print(f"  5. Add language to extra.alternate in docs/en/mkdocs.yml")
 
 
 @app.command()

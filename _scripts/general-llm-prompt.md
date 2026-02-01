@@ -639,3 +639,52 @@ The notice text should be brief (one line) and translated into the target langua
 | Portuguese | `Tradução assistida por IA - [saiba mais e sugira melhorias](...)`                 |
 
 Keep the CSS class `ai-translation-notice`, the icon `:material-information-outline:{ .ai-translation-notice-icon }`, and the URL unchanged.
+
+---
+
+## UI Strings File
+
+Each language directory contains a `ui-strings.yml` file with translations for UI elements that appear on course landing pages. When translating a new language or updating translations, this file must also be translated.
+
+### Location
+
+```
+docs/<lang>/ui-strings.yml
+```
+
+### Contents
+
+The file contains:
+
+1. **Index page headings**: Labels for course landing page sections
+2. **Default content**: Standard text used when courses don't provide custom content
+
+### Example
+
+English (`docs/en/ui-strings.yml`):
+
+```yaml
+index_page:
+  course_summary: "Course summary"
+  additional_information: "Additional information"
+  technical_requirements: "Technical requirements"
+  learning_objectives: "Learning objectives"
+  audience_prerequisites: "Audience & prerequisites"
+  course_videos: "Course videos"
+
+defaults:
+  technical_requirements: >-
+    You will need a GitHub account OR a local installation of Nextflow.
+    See [Environment options](../envsetup/index.md) for more details.
+  videos: >-
+    Videos are available for each chapter, featuring an instructor working
+    through the exercises. The video for each part of the course is embedded
+    at the top of the corresponding page.
+```
+
+### Translation Rules
+
+- Translate all string values naturally into the target language
+- Keep the YAML structure and keys unchanged
+- The markdown link in `defaults.technical_requirements` should have translated link text but keep the URL unchanged
+- Follow the same tone guidance as for content translation (formal/informal per language)
