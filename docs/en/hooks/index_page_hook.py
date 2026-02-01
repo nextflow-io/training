@@ -239,7 +239,8 @@ def generate_admonitions(additional_info, src_path, labels, defaults):
         )
 
     if videos_playlist:
-        content = f'{default_videos}\n\n[View the playlist on YouTube]({videos_playlist}){{:target="_blank"}}'
+        view_playlist = defaults.get("view_playlist", "View the playlist on YouTube")
+        content = f'{default_videos}\n\n[{view_playlist}]({videos_playlist}){{:target="_blank"}}'
         admonitions.append(f'??? videos "{videos_label}"\n{indent_content(content, 4)}')
     elif videos:
         admonitions.append(f'??? videos "{videos_label}"\n{indent_content(videos, 4)}')

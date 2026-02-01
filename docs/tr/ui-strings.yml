@@ -17,3 +17,4 @@ defaults:
   videos: >-
     Her bölüm için eğitmenin alıştırmaları yaptığı videolar mevcuttur.
     Kursun her bölümüne ait video, ilgili sayfanın üst kısmına yerleştirilmiştir.
+  view_playlist: "YouTube'da oynatma listesini görüntüle"
