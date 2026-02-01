@@ -52,7 +52,7 @@ Um dich nicht mit Konzepten und Code zu überfordern, haben wir dies in sechs Te
 | [Teil 5: Hello Containers](./05_hello_containers.md) | Verwendung von Containern als Mechanismus zur Verwaltung von Software-Abhängigkeiten und Erhöhung der Reproduzierbarkeit | 60 Min.          |
 | [Teil 6: Hello Config](./06_hello_config.md)         | Anpassung des Pipeline-Verhaltens und Optimierung der Nutzung in verschiedenen Rechenumgebungen                          | 60 Min.          |
 
-Am Ende dieses Kurses wirst du gut vorbereitet sein, um die nächsten Schritte auf deiner Reise zur Entwicklung reproduzierbarer Workflows für deine wissenschaftlichen Rechenanforderungen anzugehen.
+Nach Abschluss dieses Kurses bist du bereit, reproduzierbare Workflows für deine eigenen Projekte zu entwickeln.
 
 Bereit, den Kurs zu starten?
 
