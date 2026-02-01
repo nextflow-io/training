@@ -171,10 +171,10 @@ process PROCESS_FILES {
 
 workflow {
 
-    // Create input channel
+    // Crea canale di input
     input_ch = channel.of('sample1', 'sample2', 'sample3')
 
-    // Call the process with the input channel
+    // Chiama il processo con il canale di input
     PROCESS_FILES(input_ch)
 }
 ```
@@ -213,10 +213,10 @@ Sostituire il commento con la parentesi graffa di chiusura mancante:
 
     workflow {
 
-        // Create input channel
+        // Crea canale di input
         input_ch = channel.of('sample1', 'sample2', 'sample3')
 
-        // Call the process with the input channel
+        // Chiama il processo con il canale di input
         PROCESS_FILES(input_ch)
     }
     ```
@@ -241,10 +241,10 @@ Sostituire il commento con la parentesi graffa di chiusura mancante:
 
     workflow {
 
-        // Create input channel
+        // Crea canale di input
         input_ch = channel.of('sample1', 'sample2', 'sample3')
 
-        // Call the process with the input channel
+        // Chiama il processo con il canale di input
         PROCESS_FILES(input_ch)
     }
     ```
@@ -320,10 +320,10 @@ process PROCESS_FILES {
 
 workflow {
 
-    // Create input channel
+    // Crea canale di input
     input_ch = channel.of('sample1', 'sample2', 'sample3')
 
-    // Call the process with the input channel
+    // Chiama il processo con il canale di input
     PROCESS_FILES(input_ch)
 }
 ```
@@ -356,10 +356,10 @@ Sostituire la parola chiave errata con quella corretta facendo riferimento [alla
 
     workflow {
 
-        // Create input channel
+        // Crea canale di input
         input_ch = channel.of('sample1', 'sample2', 'sample3')
 
-        // Call the process with the input channel
+        // Chiama il processo con il canale di input
         PROCESS_FILES(input_ch)
     }
     ```
@@ -384,10 +384,10 @@ Sostituire la parola chiave errata con quella corretta facendo riferimento [alla
 
     workflow {
 
-        // Create input channel
+        // Crea canale di input
         input_ch = channel.of('sample1', 'sample2', 'sample3')
 
-        // Call the process with the input channel
+        // Chiama il processo con il canale di input
         PROCESS_FILES(input_ch)
     }
     ```

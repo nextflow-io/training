@@ -264,7 +264,7 @@ Nel blocco `workflow`, dobbiamo configurare un **channel** per alimentare l'inpu
 workflow {
 
     main:
-    // Create input channel (single file via CLI parameter)
+    // Crea canale di input (singolo file tramite parametro CLI)
     reads_ch = channel.fromPath(params.reads_bam)
 
     // Create index file for input BAM file
@@ -1003,14 +1003,14 @@ Fortunatamente possiamo farlo molto semplicemente, semplicemente aggiungendo l'[
 === "Dopo"
 
     ```groovy title="genomics-1.nf" linenums="68"
-        // Create input channel from a text file listing input file paths
+        // Crea canale di input da un file di testo che elenca i percorsi dei file di input
         reads_ch = channel.fromPath(params.reads_bam).splitText()
     ```
 
 === "Prima"
 
     ```groovy title="genomics-1.nf" linenums="68"
-        // Create input channel (single file via CLI parameter)
+        // Crea canale di input (singolo file tramite parametro CLI)
         reads_ch = channel.fromPath(params.reads_bam)
     ```
 

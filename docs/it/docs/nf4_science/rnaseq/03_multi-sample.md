@@ -50,7 +50,7 @@ params {
 Vogliamo caricare il contenuto del file nel canale invece del solo percorso del file, quindi usiamo l'operatore `.splitCsv()` per analizzare il formato CSV, poi l'operatore `.map()` per acquisire l'informazione specifica che vogliamo (il percorso del file FASTQ).
 
 ```groovy title="rnaseq.nf" linenums="16"
-    // Create input channel from the contents of a CSV file
+    // Crea canale di input dal contenuto di un file CSV
     read_ch = channel.fromPath(params.input_csv)
         .splitCsv(header:true)
         .map { row -> file(row.fastq_path) }
@@ -197,7 +197,7 @@ Nel contesto del blocco del workflow completo, finisce per apparire così:
 
 ```groovy title="rnaseq.nf" linenums="18"
 workflow {
-    // Create input channel from the contents of a CSV file
+    // Crea canale di input dal contenuto di un file CSV
     read_ch = channel.fromPath(params.input_csv)
         .splitCsv(header:true)
         .map { row -> file(row.fastq_path) }
@@ -336,7 +336,7 @@ Dobbiamo dire all'operatore `.map()` di acquisire ora entrambi i percorsi dei fi
 Quindi `row -> file(row.fastq_path)` diventa `row -> [file(row.fastq_1), file(row.fastq_2)]`
 
 ```groovy title="rnaseq_pe.nf" linenums="19"
-    // Create input channel from the contents of a CSV file
+    // Crea canale di input dal contenuto di un file CSV
     read_ch = channel.fromPath(params.input_csv)
         .splitCsv(header:true)
         .map { row -> [file(row.fastq_1), file(row.fastq_2)] }

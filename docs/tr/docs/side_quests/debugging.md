@@ -171,10 +171,10 @@ process PROCESS_FILES {
 
 workflow {
 
-    // Create input channel
+    // Girdi kanalı oluştur
     input_ch = channel.of('sample1', 'sample2', 'sample3')
 
-    // Call the process with the input channel
+    // İşlemi girdi kanalıyla çağır
     PROCESS_FILES(input_ch)
 }
 ```
@@ -213,10 +213,10 @@ Yorumu eksik kapatan parantez ile değiştirin:
 
     workflow {
 
-        // Create input channel
+        // Girdi kanalı oluştur
         input_ch = channel.of('sample1', 'sample2', 'sample3')
 
-        // Call the process with the input channel
+        // İşlemi girdi kanalıyla çağır
         PROCESS_FILES(input_ch)
     }
     ```
@@ -241,10 +241,10 @@ Yorumu eksik kapatan parantez ile değiştirin:
 
     workflow {
 
-        // Create input channel
+        // Girdi kanalı oluştur
         input_ch = channel.of('sample1', 'sample2', 'sample3')
 
-        // Call the process with the input channel
+        // İşlemi girdi kanalıyla çağır
         PROCESS_FILES(input_ch)
     }
     ```
@@ -320,10 +320,10 @@ process PROCESS_FILES {
 
 workflow {
 
-    // Create input channel
+    // Girdi kanalı oluştur
     input_ch = channel.of('sample1', 'sample2', 'sample3')
 
-    // Call the process with the input channel
+    // İşlemi girdi kanalıyla çağır
     PROCESS_FILES(input_ch)
 }
 ```
@@ -356,10 +356,10 @@ Hata bağlamındaki 4. satıra bakıldığında, sorunu tespit edebiliriz: doğr
 
     workflow {
 
-        // Create input channel
+        // Girdi kanalı oluştur
         input_ch = channel.of('sample1', 'sample2', 'sample3')
 
-        // Call the process with the input channel
+        // İşlemi girdi kanalıyla çağır
         PROCESS_FILES(input_ch)
     }
     ```
@@ -384,10 +384,10 @@ Hata bağlamındaki 4. satıra bakıldığında, sorunu tespit edebiliriz: doğr
 
     workflow {
 
-        // Create input channel
+        // Girdi kanalı oluştur
         input_ch = channel.of('sample1', 'sample2', 'sample3')
 
-        // Call the process with the input channel
+        // İşlemi girdi kanalıyla çağır
         PROCESS_FILES(input_ch)
     }
     ```
