@@ -7,7 +7,7 @@ The target language for this translation is **German** (`de`).
 - Use informal tone (du instead of Sie)
 - Use standard German (Hochdeutsch) spelling conventions
 - Prefer active voice when possible
-- Use gender-neutral language where appropriate
+- Use gender-neutral language where appropriate, including gender stars for gender-specific suffices, e.g. "Entwickler\*innen".
 
 ## Translation Context Rules
 
