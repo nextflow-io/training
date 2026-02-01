@@ -12,7 +12,7 @@ Nextflow For RNAseq 교육 과정을 완료하신 것을 다시 한번 축하드
 
 ### 1.1. 다른 과학적 분석 사용 사례에 Nextflow 적용하기
 
-**[Nextflow for Science](../nf4_science/index.md) 페이지를 확인하십시오.** Hello Nextflow에서 제시된 기본 개념과 메커니즘을 일반적인 과학적 분석 사용 사례에 적용하는 방법을 보여주는 짧은 독립형 과정 목록이 있습니다.
+**[Nextflow for Science](../nf4_science/index.md) 페이지를 확인하십시오.** Hello Nextflow에서 제시된 기본 개념과 메커니즘을 일반적인 과학적 분석 사용 사례에 적용하는 방법을 보여주는 짧은 단독형 과정 목록이 있습니다.
 
 관련성 있는 사용 사례로 귀하의 도메인이 표현되지 않은 경우, [Community forum](https://community.seqera.io/)에 알려주시면 개발 목록에 추가하겠습니다.
 
@@ -28,7 +28,7 @@ Nextflow For RNAseq 교육 과정을 완료하신 것을 다시 한번 축하드
 Hello 과정에서는 Nextflow를 시작하는 데 필요하지 않은 정보로 여러분을 과부하시키지 않기 위해 의도적으로 기술적 복잡성 수준을 낮게 유지합니다.
 작업을 진행하면서 Nextflow의 전체 기능 세트와 성능을 사용하는 방법을 배우고 싶으실 것입니다.
 
-이를 위해 현재 **[Side Quests](../side_quests/index.md) 모음**을 작업 중입니다. 이는 테스트 및 메타데이터 처리와 같은 특정 주제를 심도 있게 다루는 짧은 독립형 과정입니다.
+이를 위해 현재 **[Side Quests](../side_quests/index.md) 모음**을 작업 중입니다. 이는 테스트 및 메타데이터 처리와 같은 특정 주제를 심도 있게 다루는 짧은 단독형 과정입니다.
 
 ---
 

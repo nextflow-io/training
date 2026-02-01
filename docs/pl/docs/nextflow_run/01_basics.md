@@ -185,7 +185,7 @@ Zobaczmy, co jest w środku.
 
 ??? question "Nie widzisz tego samego?"
 
-    Dokładne nazwy podkatalogów będą inne w twoim systemie.
+    Dokładne nazwy podkatalogów będą inne w Twoim systemie.
 
     Jeśli przeglądasz zawartość podkatalogu zadania w eksploratorze plików VSCode, zobaczysz wszystkie pliki od razu.
     Jednak pliki dziennika są ustawione jako niewidoczne w terminalu, więc jeśli chcesz użyć `ls` lub `tree` do ich wyświetlenia, musisz ustawić odpowiednią opcję wyświetlania niewidocznych plików.
@@ -524,7 +524,7 @@ Naucz się wygodnie zarządzać wykonaniami workflow.
 
 ## 4. Zarządzaj wykonaniami workflow
 
-Wiedza o tym, jak uruchamiać workflow i pobierać wyjścia, jest świetna, ale szybko odkryjesz, że jest kilka innych aspektów zarządzania workflow, które ułatwią ci życie.
+Wiedza o tym, jak uruchamiać workflow i pobierać wyjścia, jest świetna, ale szybko odkryjesz, że jest kilka innych aspektów zarządzania workflow, które ułatwią Ci życie.
 
 Tutaj pokażemy, jak wykorzystać funkcję `resume`, gdy musisz ponownie uruchomić ten sam workflow, jak sprawdzić logi wykonania za pomocą `nextflow log` i jak usunąć starsze katalogi robocze za pomocą `nextflow clean`.
 
@@ -562,7 +562,7 @@ Wyjście konsoli powinno wyglądać znajomo, ale jest jedna rzecz, która jest t
 Poszukaj fragmentu `cached:`, który został dodany w linii statusu process (linia 5), co oznacza, że Nextflow rozpoznał, że już wykonał tę pracę i po prostu ponownie użył wyniku z poprzedniego pomyślnego uruchomienia.
 
 Możesz również zobaczyć, że hash podkatalogu roboczego jest taki sam jak w poprzednim uruchomieniu.
-Nextflow dosłownie wskazuje ci poprzednie wykonanie i mówi "Już to zrobiłem tam".
+Nextflow dosłownie wskazuje Ci poprzednie wykonanie i mówi "Już to zrobiłem tam".
 
 !!! tip "Wskazówka"
 
@@ -613,7 +613,7 @@ Nextflow używa ID sesji do grupowania informacji o pamięci podręcznej uruchom
 Jeśli uruchamiasz dużo pipeline, możesz zgromadzić bardzo wiele plików w wielu podkatalogach.
 Ponieważ podkatalogi są nazywane losowo, trudno jest powiedzieć po ich nazwach, które są starsze, a które nowsze.
 
-Na szczęście Nextflow zawiera pomocne podpolecenie `clean`, które może automatycznie usuwać podkatalogi robocze dla poprzednich uruchomień, na których ci już nie zależy.
+Na szczęście Nextflow zawiera pomocne podpolecenie `clean`, które może automatycznie usuwać podkatalogi robocze dla poprzednich uruchomień, na których Ci już nie zależy.
 
 #### 4.3.1. Określ kryteria usuwania
 
@@ -644,7 +644,7 @@ nextflow clean -before backstabbing_swartz -n
 
 Twoje wyjście będzie miało inne nazwy katalogów zadań i może mieć inną liczbę linii, ale powinno wyglądać podobnie do przykładu.
 
-Jeśli nie widzisz żadnych wypisanych linii, albo nie podałeś prawidłowej nazwy uruchomienia, albo nie ma poprzednich uruchomień do usunięcia. Upewnij się, że zmienisz `backstabbing_swartz` w przykładowym poleceniu na odpowiednią najnowszą nazwę uruchomienia w twoim dzienniku.
+Jeśli nie widzisz żadnych wypisanych linii, albo nie podałeś prawidłowej nazwy uruchomienia, albo nie ma poprzednich uruchomień do usunięcia. Upewnij się, że zmienisz `backstabbing_swartz` w przykładowym poleceniu na odpowiednią najnowszą nazwę uruchomienia w Twoim dzienniku.
 
 #### 4.3.3. Kontynuuj usuwanie
 
@@ -670,7 +670,7 @@ Zauważ, że to nie usuwa dwuznakowych podkatalogów (jak `eb/` powyżej), ale o
     Usuwanie podkatalogów roboczych z poprzednich uruchomień usuwa je z pamięci podręcznej Nextflow i kasuje wszelkie wyjścia, które były przechowywane w tych katalogach.
     To oznacza, że psuje zdolność Nextflow do wznowienia wykonania bez ponownego uruchamiania odpowiednich procesów.
 
-    Jesteś odpowiedzialny za zapisanie wszelkich wyjść, na których ci zależy! To jest główny powód, dla którego wolimy używać trybu `copy` zamiast trybu `symlink` dla dyrektywy `publish`.
+    Jesteś odpowiedzialny za zapisanie wszelkich wyjść, na których Ci zależy! To jest główny powód, dla którego wolimy używać trybu `copy` zamiast trybu `symlink` dla dyrektywy `publish`.
 
 ### Podsumowanie
 

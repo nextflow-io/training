@@ -21,7 +21,7 @@ Lass uns anfangen! Klicke auf den Button "Open in GitHub Codespaces" unten, um d
 
 Durch die Bearbeitung dieses Kurses lernst du, wie man grundlegende Nextflow-Konzepte und Tools auf einen typischen RNAseq-Anwendungsfall anwendet.
 
-Am Ende dieses Workshops wirst du in der Lage sein:
+Am Ende dieses Workshops kannst du:
 
 - Einen linearen Workflow zu schreiben, um grundlegende RNAseq-Verarbeitungs- und QC-Methoden anzuwenden
 - Domänenspezifische Dateien wie FASTQ und Genomreferenzen angemessen zu handhaben

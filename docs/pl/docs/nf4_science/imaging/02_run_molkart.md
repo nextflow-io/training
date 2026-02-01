@@ -120,7 +120,7 @@ Po kilku chwilach zobaczysz błąd taki jak ten:
 
 **Co się dzieje?**
 
-Błąd `command not found` (status wyjścia 127) oznacza, że Nextflow próbował uruchomić `duplicate_finder.py`, ale nie mógł go znaleźć w twoim systemie.
+Błąd `command not found` (status wyjścia 127) oznacza, że Nextflow próbował uruchomić `duplicate_finder.py`, ale nie mógł go znaleźć w Twoim systemie.
 Dzieje się tak, ponieważ:
 
 1. Pipeline oczekuje zainstalowanego specjalistycznego oprogramowania bioinformatycznego
@@ -298,7 +298,7 @@ Zauważ, jak to wyjście jest bardziej szczegółowe niż nasz przykład Hello W
 
 Linia executor `executor > local (22)` informuje cię:
 
-- **executor**: Które środowisko obliczeniowe jest używane (`local` = twoja maszyna)
+- **executor**: Które środowisko obliczeniowe jest używane (`local` = Twoja maszyna)
 - **(22)**: Całkowita liczba uruchomionych zadań
 
 Każda linia procesu pokazuje:

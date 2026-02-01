@@ -1016,7 +1016,7 @@ Nimm die folgende Änderung an der Parameterdeklaration vor:
     ```
 
 Dies setzt voraus, dass die Datei am selben Ort wie der Workflow-Code liegt.
-Du wirst später auf deiner Nextflow-Reise lernen, wie du mit anderen Datenspeicherorten umgehst.
+Wie du mit anderen Datenspeicherorten umgehst, lernst du in späteren Kursen.
 
 #### 4.1.2. Zu einer channel factory wechseln, die für das Handhaben einer Datei ausgelegt ist
 

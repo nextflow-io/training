@@ -1011,13 +1011,13 @@ Masz teraz zautomatyzowany, w pełni odtwarzalny workflow wspólnego wywoływani
 
 !!! note
 
-    Pamiętaj, że pliki danych, które ci daliśmy, obejmują tylko maleńką część chromosomu 20.
+    Pamiętaj, że pliki danych, które Ci daliśmy, obejmują tylko maleńką część chromosomu 20.
     Rzeczywisty rozmiar zestawu wywołań wariantów byłby liczony w milionach wariantów.
     Dlatego używamy tylko małych podzbiorów danych do celów szkoleniowych!
 
 ### Wnioski
 
-Wiesz, jak używać niektórych typowych operatorów, a także domknięć Groovy do kontrolowania przepływu danych w twoim workflow.
+Wiesz, jak używać niektórych typowych operatorów, a także domknięć Groovy do kontrolowania przepływu danych w Twoim workflow.
 
 ### Co dalej?
 

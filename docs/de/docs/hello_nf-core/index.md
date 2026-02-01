@@ -31,7 +31,7 @@ additional_information:
 
 Durch praktische Beispiele und angeleitete Übungen lernst du, nf-core kompatible Module und Pipelines zu nutzen und zu entwickeln sowie nf-core Tooling effektiv einzusetzen.
 
-Du wirst die Fähigkeiten und das Selbstvertrauen mitnehmen, um mit der Entwicklung von Pipelines nach nf-core Best Practices zu beginnen.
+Nach diesem Kurs kannst du Pipelines nach nf-core Best Practices entwickeln.
 
 <!-- additional_information -->
 
@@ -41,9 +41,7 @@ Dieser Kurs ist darauf ausgelegt, praktisch zu sein, mit zielorientierten Übung
 
 Du wirst in [**nf-core**](https://nf-co.re/) eingeführt, eine Community-Initiative zur Entwicklung und Pflege einer kuratierten Sammlung wissenschaftlicher Pipelines, die mit Nextflow erstellt wurden, sowie relevantes Tooling und Richtlinien, die offene Entwicklung, Testing und Peer Review fördern ([Nat Biotechnol 38, 276–278 (2020)](https://www.nature.com/articles/s41587-020-0439-x), [Genome Biol 26, 228 (2025)](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-025-03673-9)).
 
-Die von der nf-core Community entwickelten Pipelines sind modular, skalierbar und portabel konzipiert, was es Forschenden ermöglicht, sie einfach anzupassen und mit ihren eigenen Daten und Rechenressourcen auszuführen.
-Die vom Projekt durchgesetzten Best Practices Richtlinien stellen zudem sicher, dass die Pipelines robust, gut dokumentiert und gegen reale Datensätze validiert sind.
-Dies trägt dazu bei, die Zuverlässigkeit und Reproduzierbarkeit wissenschaftlicher Analysen zu erhöhen und ermöglicht es Forschenden letztendlich, ihre wissenschaftlichen Entdeckungen zu beschleunigen.
+nf-core Pipelines sind modular, skalierbar und portabel. So lassen sie sich leicht anpassen und mit eigenen Daten ausführen. Die Best-Practice-Richtlinien sorgen für robuste, gut dokumentierte und validierte Pipelines. Das verbessert die Reproduzierbarkeit wissenschaftlicher Analysen.
 
 Wir werden in diesem Kurs nicht alles abdecken, was es über nf-core Pipelines zu wissen gibt, denn nf-core umfasst viele Features und Konventionen, die die Community über Jahre entwickelt hat.
 Stattdessen konzentrieren wir uns auf die wesentlichen Konzepte, die dir helfen werden, loszulegen und zu verstehen, wie nf-core funktioniert.
@@ -60,7 +58,7 @@ Wir haben dies in fünf Teile unterteilt, die sich jeweils auf bestimmte Aspekte
 | [Teil 4: Ein nf-core Modul erstellen](./04_make_module.md)        | Erstelle dein eigenes nf-core-style Modul unter Verwendung der spezifischen Struktur, Namenskonventionen und Metadaten-Anforderungen, die von nf-core etabliert wurden            | 30 Min.          |
 | [Teil 5: Eingabevalidierung hinzufügen](./05_input_validation.md) | Implementiere Eingabevalidierung sowohl für Kommandozeilen-Parameter als auch für Eingabedateien mit nf-schema                                                                    | 30 Min.          |
 
-Am Ende dieses Kurses wirst du in der Lage sein, den enormen Reichtum an Ressourcen zu nutzen, die das nf-core Projekt bietet.
+Am Ende dieses Kurses kannst du den enormen Reichtum an Ressourcen nutzen, die das nf-core Projekt bietet.
 
 Bereit, den Kurs zu beginnen?
 

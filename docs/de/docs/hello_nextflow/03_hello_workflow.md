@@ -734,7 +734,7 @@ Nimm im process-Block die folgende Codeänderung vor:
 Du kannst deine processes so einrichten, dass sie so viele Eingaben erwarten, wie du möchtest.
 Im Moment sind diese alle als erforderliche Eingaben eingerichtet; du _musst_ einen Wert angeben, damit der Workflow funktioniert.
 
-Du wirst später auf deiner Nextflow-Reise lernen, wie du erforderliche vs. optionale Eingaben handhabst.
+Die Handhabung erforderlicher und optionaler Eingaben behandeln fortgeschrittene Kurse.
 
 #### 3.1.2. Die `batch_name`-Variable im Ausgabedateinamen verwenden
 

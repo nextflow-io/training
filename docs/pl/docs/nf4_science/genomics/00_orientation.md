@@ -49,7 +49,7 @@ Jeśli uruchomisz to wewnątrz `nf4-science/genomics`, powinieneś zobaczyć nas
 !!!note "Uwaga"
 
     Nie martw się, jeśli wydaje się to dużo; przejdziemy przez odpowiednie elementy na każdym etapie kursu.
-    Ma to na celu jedynie dać ci przegląd.
+    Ma to na celu jedynie dać Ci przegląd.
 
 **Oto podsumowanie tego, co powinieneś wiedzieć, aby rozpocząć:**
 

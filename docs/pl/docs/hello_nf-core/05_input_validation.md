@@ -16,7 +16,7 @@ W tej piątej części kursu szkoleniowego Hello nf-core pokażemy, jak używać
     cd core-hello
     ```
 
-    To da ci potok z modułem `COWPY` już zaktualizowanym zgodnie ze standardami nf-core.
+    To da Ci potok z modułem `COWPY` już zaktualizowanym zgodnie ze standardami nf-core.
     Możesz przetestować, czy działa poprawnie, uruchamiając następujące polecenie:
 
     ```bash
@@ -108,7 +108,7 @@ Oba schematy używają formatu JSON Schema, szeroko przyjętego standardu do opi
 - Waliduje, czy ścieżki plików istnieją
 - Zdefiniowana w `nextflow_schema.json`
 
-**Walidacja danych wejściowych** waliduje strukturę arkuszy próbek i plików manifestu (pliki CSV/TSV, które opisują twoje dane):
+**Walidacja danych wejściowych** waliduje strukturę arkuszy próbek i plików manifestu (pliki CSV/TSV, które opisują Twoje dane):
 
 - Sprawdza strukturę kolumn i typy danych
 - Waliduje, czy ścieżki plików wymienione w arkuszu próbek istnieją
@@ -248,7 +248,7 @@ Dodamy go w następnej sekcji.
 ### 1.3. Dodaj parametr batch
 
 Chociaż schemat jest plikiem JSON, który można edytować ręcznie, **ręczna edycja jest podatna na błędy i nie jest zalecana**.
-Zamiast tego nf-core zapewnia interaktywne narzędzie GUI, które obsługuje składnię JSON Schema za ciebie i waliduje twoje zmiany:
+Zamiast tego nf-core zapewnia interaktywne narzędzie GUI, które obsługuje składnię JSON Schema za ciebie i waliduje Twoje zmiany:
 
 ```bash
 nf-core pipelines schema build
@@ -301,7 +301,7 @@ INFO     Writing schema with 18 params: 'nextflow_schema.json'
 
 Naciśnij `Ctrl+C`, aby wyjść z konstruktora schematu.
 
-Narzędzie zaktualizowało teraz twój plik `nextflow_schema.json` nowym parametrem `batch`, obsługując całą składnię JSON Schema poprawnie.
+Narzędzie zaktualizowało teraz Twój plik `nextflow_schema.json` nowym parametrem `batch`, obsługując całą składnię JSON Schema poprawnie.
 
 ### 1.4. Zweryfikuj zmiany
 

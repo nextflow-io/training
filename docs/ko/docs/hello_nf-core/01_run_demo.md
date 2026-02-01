@@ -491,7 +491,7 @@ tree -L 1 pipelines/nf-core/demo
 !!! note
 
     일부 nf-core 분석 workflow는 하위 레벨 subworkflow를 호출하여 추가 중첩 레벨을 표시합니다.
-    이것은 주로 일반적으로 함께 사용되는 두 개 이상의 모듈을 쉽게 재사용 가능한 파이프라인 세그먼트로 래핑하는 데 사용됩니다.
+    이것은 주로 일반적으로 함께 사용되는 두 개 이상의 모듈을 쉽게 재사용 가능한 파이프라인 세그먼트로 적용하는 데 사용됩니다.
     nf-core 웹사이트에서 사용 가능한 [nf-core subworkflows](https://nf-co.re/subworkflows/)를 탐색하여 몇 가지 예제를 볼 수 있습니다.
 
     분석 스크립트가 subworkflow를 사용하는 경우 `subworkflows/` 디렉토리 아래에 저장됩니다.
@@ -501,7 +501,7 @@ tree -L 1 pipelines/nf-core/demo
 모듈은 [Hello Nextflow 교육 과정의 Part 4](../hello_nextflow/04_hello_modules.md)에 설명된 대로 프로세스 코드가 있는 곳입니다.
 
 nf-core 프로젝트에서 모듈은 출처와 내용을 모두 반영하는 다단계 중첩 구조를 사용하여 구성됩니다.
-최상위 레벨에서 모듈은 `nf-core` 또는 `local`(nf-core 프로젝트의 일부가 아님)로 구분되며, 그런 다음 래핑하는 도구의 이름을 따서 명명된 디렉토리에 배치됩니다.
+최상위 레벨에서 모듈은 `nf-core` 또는 `local`(nf-core 프로젝트의 일부가 아님)로 구분되며, 그런 다음 적용하는 도구의 이름을 따서 명명된 디렉토리에 배치됩니다.
 도구가 툴킷(즉, 여러 도구를 포함하는 패키지)에 속하는 경우 툴킷 이름을 따서 명명된 중간 디렉토리 레벨이 있습니다.
 
 `nf-core/demo` 파이프라인 모듈에 실제로 적용된 것을 볼 수 있습니다:

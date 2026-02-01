@@ -7,7 +7,7 @@ Jetzt werden wir erkunden, wie man Pipelines für verschiedene Rechenumgebungen 
 
 ## Lernziele
 
-Am Ende dieses Teils wirst du in der Lage sein:
+Am Ende dieses Teils kannst du:
 
 - Zu verstehen, wie Nextflow Konfigurationen aus mehreren Quellen auflöst
 - nf-core eingebaute Profile für Container und Tests zu verwenden

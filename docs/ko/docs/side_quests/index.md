@@ -8,7 +8,7 @@ hide:
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-이것은 특정 주제를 더 깊이 다루는 독립적인 교육 미니 코스 모음입니다. 순서에 관계없이 진행하실 수 있습니다.
+이것은 특정 주제를 더 깊이 다루는 단독 교육 단기 과정 모음입니다. 순서에 관계없이 진행하실 수 있습니다.
 
 시작해 봅시다! 아래 "Open in GitHub Codespaces" 버튼을 클릭하여 교육 환경을 시작하시고(별도 탭에서 여는 것을 권장합니다), 로딩되는 동안 계속 읽어주십시오.
 
@@ -16,13 +16,13 @@ hide:
 
 ## 사전 요구 사항
 
-각 미니 코스의 구체적인 사전 요구 사항은 다르며 해당 페이지에 문서화되어 있습니다.
+각 단기 과정의 구체적인 사전 요구 사항은 다르며 해당 페이지에 문서화되어 있습니다.
 그럼에도 불구하고, 모두 다음 항목에 대한 최소한의 익숙함을 가정합니다:
 
 - 명령줄 사용 경험
 - [Hello Nextflow](../../hello_nextflow/) 초급 교육 코스에서 다루는 기초적인 Nextflow 개념 및 도구
 
-기술 요구 사항 및 환경 설정에 대해서는 [Environment Setup](../../envsetup/) 미니 코스를 참고하십시오.
+기술 요구 사항 및 환경 설정에 대해서는 [Environment Setup](../../envsetup/) 단기 과정을 참고하십시오.
 
 **사이드 퀘스트를 처음 접하시는 경우, 먼저 [Orientation](./orientation.md) 페이지를 확인하십시오!**
 

@@ -146,7 +146,7 @@ hide:
 
     ??? courses "**Side Quests:** 독립 주제에 대한 심층 탐구"
 
-        특정 주제에 대한 범위를 넓히거나 기술을 심화하고자 하는 Nextflow 개발자를 위한 독립형 미니 과정입니다. 순차적으로 제시되지만 어떤 순서로든 수강할 수 있습니다(각 미니 과정 개요에서 의존성 참조).
+        특정 주제에 대한 범위를 넓히거나 기술을 심화하고자 하는 Nextflow 개발자를 위한 단독형 단기 과정입니다. 순차적으로 제시되지만 어떤 순서로든 수강할 수 있습니다(각 단기 과정 개요에서 의존성 참조).
 
         [Side Quests 둘러보기 :material-arrow-right:](side_quests/){ .md-button .md-button--secondary }
 

@@ -1020,7 +1020,7 @@ Dieser führt jede Aufgabe auf der Maschine aus, auf der Nextflow läuft.
 Wenn Nextflow startet, schaut es sich die verfügbaren CPUs und den Speicher an.
 Wenn die Ressourcen der zur Ausführung bereiten Aufgaben die verfügbaren Ressourcen übersteigen, hält Nextflow die letzten Aufgaben von der Ausführung zurück, bis eine oder mehrere der früheren Aufgaben abgeschlossen sind und die notwendigen Ressourcen freigeben.
 
-Der lokale Executor ist bequem und effizient, aber er ist auf diese einzelne Maschine beschränkt. Bei sehr großen Arbeitslasten könntest du feststellen, dass deine lokale Maschine ein Engpass ist, entweder weil du eine einzelne Aufgabe hast, die mehr Ressourcen erfordert als verfügbar sind, oder weil du so viele Aufgaben hast, dass das Warten auf eine einzelne Maschine zu lange dauern würde.
+Der lokale Executor ist bequem und effizient, aber er ist auf diese einzelne Maschine beschränkt. Bei großen Arbeitslasten kann die lokale Maschine zum Engpass werden: wenn einzelne Aufgaben mehr Ressourcen brauchen als verfügbar, oder wenn zu viele Aufgaben anfallen.
 
 Nextflow unterstützt [viele verschiedene Ausführungs-Backends](https://www.nextflow.io/docs/latest/executor.html), einschließlich HPC-Scheduler (Slurm, LSF, SGE, PBS, Moab, OAR, Bridge, HTCondor und andere) sowie Cloud-Ausführungs-Backends wie (AWS Batch, Google Cloud Batch, Azure Batch, Kubernetes und mehr).
 

@@ -47,4 +47,4 @@ Wirf einen Blick auf die [Seqera Platform Tutorials](https://docs.seqera.io/plat
 
 ### Das war's für jetzt!
 
-**Viel Erfolg auf deiner Nextflow-Reise und zögere nicht, uns im [Community-Forum](https://community.seqera.io/) mitzuteilen, was wir sonst noch tun könnten, um zu helfen.**
+**Viel Erfolg mit Nextflow! Zögere nicht, uns im [Community-Forum](https://community.seqera.io/) mitzuteilen, was wir sonst noch tun könnten.**

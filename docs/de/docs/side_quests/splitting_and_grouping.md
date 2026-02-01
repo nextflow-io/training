@@ -13,7 +13,7 @@ Nextflows Channel-System steht im Mittelpunkt dieser Flexibilität. Channels ver
 In dieser Side Quest lernst du, Daten mit Nextflows Channel-Operatoren aufzuteilen und zu gruppieren.
 Wir beginnen mit einer CSV-Datei, die Probeninformationen und zugehörige Datendateien enthält, und manipulieren und reorganisieren diese Daten dann.
 
-Am Ende dieser Side Quest wirst du in der Lage sein, Datenströme effektiv zu trennen und zu kombinieren, indem du die folgenden Techniken verwendest:
+Am Ende dieser Side Quest kannst du Datenströme effektiv trennen und kombinieren, indem du die folgenden Techniken verwendest:
 
 - Daten aus Dateien mit `splitCsv` einlesen
 - Daten mit `filter` und `map` filtern und transformieren

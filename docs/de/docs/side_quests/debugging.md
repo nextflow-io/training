@@ -834,7 +834,7 @@ Halte deine Input-Channels im Workflow-Block definiert und folge im Allgemeinen 
 
 ### Zusammenfassung
 
-Du kannst Syntaxfehler systematisch identifizieren und beheben, indem du Nextflow-Fehlermeldungen und IDE-visuelle Indikatoren verwendest. Häufige Syntaxfehler umfassen fehlende Klammern, falsche Process-Schlüsselwörter, undefinierte Variablen und unsachgemäße Verwendung von Bash- vs. Nextflow-Variablen. Die VSCode Extension hilft, viele davon vor der Laufzeit zu erkennen. Mit diesen Syntax-Debugging-Fähigkeiten in deinem Toolkit wirst du in der Lage sein, die häufigsten Nextflow-Syntaxfehler schnell zu beheben und zu komplexeren Laufzeitproblemen überzugehen.
+Du kannst Syntaxfehler systematisch identifizieren und beheben, indem du Nextflow-Fehlermeldungen und IDE-visuelle Indikatoren verwendest. Häufige Syntaxfehler umfassen fehlende Klammern, falsche Process-Schlüsselwörter, undefinierte Variablen und unsachgemäße Verwendung von Bash- vs. Nextflow-Variablen. Die VSCode Extension hilft, viele davon vor der Laufzeit zu erkennen. Mit diesen Syntax-Debugging-Fähigkeiten kannst du die häufigsten Nextflow-Syntaxfehler schnell beheben und dich komplexeren Laufzeitproblemen widmen.
 
 ### Was kommt als Nächstes?
 

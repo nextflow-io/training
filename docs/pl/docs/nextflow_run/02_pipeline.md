@@ -295,7 +295,7 @@ Następnie, w ostatniej linii bloku `main:` workflow, przekazujemy załadowany c
 To mówi Nextflow, aby uruchomił process indywidualnie na każdym elemencie w channel, _tzn._ na każdym powitaniu.
 A ponieważ Nextflow jest tak inteligentny, uruchomi te wywołania process równolegle, jeśli to możliwe, w zależności od dostępnej infrastruktury obliczeniowej.
 
-W ten sposób można osiągnąć efektywne i skalowalne przetwarzanie dużej ilości danych (wielu próbek lub punktów danych, cokolwiek jest twoją jednostką badawczą) przy stosunkowo niewielkiej ilości kodu.
+W ten sposób można osiągnąć efektywne i skalowalne przetwarzanie dużej ilości danych (wielu próbek lub punktów danych, cokolwiek jest Twoją jednostką badawczą) przy stosunkowo niewielkiej ilości kodu.
 
 #### 1.4.3. Jak nazywane są wyjścia
 
@@ -682,7 +682,7 @@ nextflow run 2b-multistep.nf --input data/greetings.csv --batch test
     [d3/b4d86c] collectGreetings   | 1 of 1 ✔
     ```
 
-Powinieneś zobaczyć nowe końcowe wyjścia nazwane twoją własną nazwą batch.
+Powinieneś zobaczyć nowe końcowe wyjścia nazwane Twoją własną nazwą batch.
 
 ??? abstract "Zawartość katalogu"
 
@@ -1026,7 +1026,7 @@ Po zakończeniu pobierania masz lokalną kopię obrazu kontenera.
 
 #### 4.1.2. Uruchom kontener
 
-Kontenery można uruchamiać jako jednorazowe polecenie, ale można ich również używać interaktywnie, co daje ci wiersz poleceń wewnątrz kontenera i pozwala bawić się poleceniem.
+Kontenery można uruchamiać jako jednorazowe polecenie, ale można ich również używać interaktywnie, co daje Ci wiersz poleceń wewnątrz kontenera i pozwala bawić się poleceniem.
 
 Ogólna składnia jest następująca:
 
@@ -1043,7 +1043,7 @@ W pełni złożone polecenie wykonania kontenera wygląda tak:
 docker run --rm -it 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
 ```
 
-Uruchom to polecenie, a powinieneś zobaczyć, że twój znak zachęty zmienia się na coś takiego jak `(base) root@b645838b3314:/tmp#`, co wskazuje, że jesteś teraz wewnątrz kontenera.
+Uruchom to polecenie, a powinieneś zobaczyć, że Twój znak zachęty zmienia się na coś takiego jak `(base) root@b645838b3314:/tmp#`, co wskazuje, że jesteś teraz wewnątrz kontenera.
 
 Możesz to zweryfikować, uruchamiając `ls`, aby wylistować zawartość katalogu:
 
@@ -1057,7 +1057,7 @@ ls /
     bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
     ```
 
-Widzisz, że system plików wewnątrz kontenera jest inny niż system plików na twoim systemie hosta.
+Widzisz, że system plików wewnątrz kontenera jest inny niż system plików na Twoim systemie hosta.
 
 !!! tip "Wskazówka"
 
@@ -1359,7 +1359,7 @@ Sprawdź wyjście z polecenia `nextflow run`, aby znaleźć ścieżkę do podkat
 Patrząc na to, co otrzymaliśmy dla uruchomienia pokazanego powyżej, linia dziennika konsoli dla process `cowpy` zaczyna się od `[7f/caf718]`.
 To odpowiada następującej skróconej ścieżce katalogu: `work/7f/caf718`.
 
-W tym katalogu znajdziesz plik `.command.run`, który zawiera wszystkie polecenia, które Nextflow uruchomił w twoim imieniu w trakcie wykonywania pipeline.
+W tym katalogu znajdziesz plik `.command.run`, który zawiera wszystkie polecenia, które Nextflow uruchomił w Twoim imieniu w trakcie wykonywania pipeline.
 
 ??? abstract "Zawartość pliku"
 
@@ -1377,7 +1377,7 @@ Są tam polecenia `docker`, które Nextflow składa na podstawie URI obrazu kont
 
 ### Podsumowanie
 
-Wiesz, jak określić kontener dla process i jak Nextflow obsługuje go pod maską, aby uczynić twój kod przenośnym i odtwarzalnym.
+Wiesz, jak określić kontener dla process i jak Nextflow obsługuje go pod maską, aby uczynić Twój kod przenośnym i odtwarzalnym.
 
 ### Co dalej?
 

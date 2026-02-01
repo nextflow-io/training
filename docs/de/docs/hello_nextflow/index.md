@@ -27,9 +27,9 @@ additional_information:
 
 **Hello Nextflow ist eine praxisorientierte Einführung in den Aufbau reproduzierbarer und skalierbarer Datenanalyse-Workflows.**
 
-Durch praktische Beispiele und geführte Übungen lernst du die Grundlagen der Pipeline-Entwicklung mit Nextflow, einschließlich der Definition von Prozessen, deren Verbindung zu Pipelines, der Verwaltung von Dateien und Software-Abhängigkeiten, der mühelosen Parallelisierung der Ausführung und des Ausführens von Workflows in verschiedenen Rechenumgebungen.
+In praktischen Übungen lernst du die Pipeline-Entwicklung mit Nextflow: Prozesse definieren, Pipelines verbinden, Dateien und Dependencies verwalten, Ausführung parallelisieren und Workflows in verschiedenen Umgebungen starten.
 
-Du wirst die Fähigkeiten und das Selbstvertrauen mitnehmen, um eigene Workflows mit Nextflow zu entwickeln und auszuführen.
+Nach diesem Kurs kannst du eigene Workflows mit Nextflow entwickeln und ausführen.
 
 <!-- additional_information -->
 

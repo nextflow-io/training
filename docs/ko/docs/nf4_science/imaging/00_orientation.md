@@ -14,7 +14,7 @@
 ## GitHub Codespaces
 
 GitHub Codespaces 환경에는 이 교육 과정을 진행하는 데 필요한 모든 소프트웨어, 코드 및 데이터가 포함되어 있으므로 별도로 설치할 필요가 없습니다.
-다만, 로그인하려면 (무료) GitHub 계정이 필요하며, 인터페이스에 익숙하지 않으시다면 [GitHub Codespaces 오리엔테이션](../../envsetup/index.md) 미니 과정을 완료하여 몇 분간 익숙해지시기 바랍니다.
+다만, 로그인하려면 (무료) GitHub 계정이 필요하며, 인터페이스에 익숙하지 않으시다면 [GitHub Codespaces 오리엔테이션](../../envsetup/index.md) 단기 과정을 완료하여 몇 분간 익숙해지시기 바랍니다.
 
 ## Docker 이미지 사전 다운로드
 

@@ -193,7 +193,7 @@ workflow {
 Dies ist eine sehr minimale **workflow**-Definition.
 In einer realen Pipeline enthält der Workflow typischerweise mehrere Aufrufe von **Prozessen**, die durch **Channels** verbunden sind, und die Prozesse erwarten eine oder mehrere variable **Eingabe(n)**.
 
-Du wirst lernen, wie man variable Eingaben hinzufügt, später in diesem Trainingsmodul; und du wirst lernen, wie man mehr Prozesse hinzufügt und sie durch Channels verbindet, in Teil 3 dieses Kurses.
+Variable Eingaben behandeln wir später in diesem Modul. Teil 3 erklärt, wie du mehrere Prozesse hinzufügst und durch Channels verbindest.
 
 !!! tip "Tipp"
 
@@ -676,7 +676,7 @@ Da dies auch auf der Ebene der einzelnen Ausgabe festgelegt wird, kannst du den 
 Dies wird besonders praktisch sein, wenn wir zu mehrstufigen Pipelines übergehen, wo du vielleicht nur endgültige Ausgaben kopieren und Zwischenausgaben als Symlinks belassen möchtest.
 
 Wie bereits erwähnt, gibt es andere, ausgeklügeltere Optionen zur Steuerung, wie Ausgaben veröffentlicht werden.
-Wir werden dir zeigen, wie du sie zu gegebener Zeit in deiner Nextflow-Reise verwendest.
+Wir werden dir zeigen, wie du sie beim Arbeiten mit Nextflow verwendest.
 
 ### 2.4. Hinweis zu `publishDir`-Direktiven auf Prozessebene
 

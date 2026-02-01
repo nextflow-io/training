@@ -14,9 +14,9 @@ Herzlichen Glückwunsch zum Abschluss des Hello Nextflow-Trainingskurses!
 :green_book: Du kannst das [Video-Transkript](./transcripts/07_next_steps.md) neben dem Video lesen.
 ///
 
-## Deine Reise
+## Dein Weg
 
-Du hast mit einem sehr einfachen Workflow begonnen, der einen fest codierten Befehl ausführte.
+Du hast mit einem einfachen Workflow begonnen, der einen fest codierten Befehl ausführte.
 Im Laufe von sechs Teilen hast du diesen einfachen Workflow in eine modulare mehrstufige Pipeline verwandelt, die wichtige Funktionen von Nextflow nutzt, einschließlich channels, Operatoren, integrierter Container-Unterstützung und Konfigurationsoptionen.
 
 ### Was du gebaut hast

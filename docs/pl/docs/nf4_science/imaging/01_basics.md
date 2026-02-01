@@ -77,7 +77,7 @@ Teraz zajrzymy pod maskę, aby zobaczyć, gdzie Nextflow faktycznie wykonał pra
 Kiedy uruchamiasz workflow, Nextflow tworzy odrębny 'katalog zadania' dla każdego pojedynczego wywołania każdego procesu w workflow (=każdego kroku w pipeline).
 Dla każdego z nich przygotuje niezbędne wejścia, wykona odpowiednie instrukcje i zapisze wyjścia oraz pliki logów w tym jednym katalogu, który jest automatycznie nazwany przy użyciu hasha w celu zapewnienia unikalności.
 
-Wszystkie te katalogi zadań będą znajdować się w katalogu o nazwie `work` w twoim bieżącym katalogu (gdzie uruchamiasz polecenie).
+Wszystkie te katalogi zadań będą znajdować się w katalogu o nazwie `work` w Twoim bieżącym katalogu (gdzie uruchamiasz polecenie).
 
 To może brzmieć zagmatwanie, więc zobaczmy, jak to wygląda w praktyce.
 
@@ -109,7 +109,7 @@ Zobaczmy, co tam jest.
     tree -a work
     ```
 
-Dokładne nazwy podkatalogów będą różne w twoim systemie.
+Dokładne nazwy podkatalogów będą różne w Twoim systemie.
 
 <details>
   <summary>Zawartość katalogu</summary>
@@ -331,7 +331,7 @@ Naucz się wygodnie zarządzać wykonaniami workflow.
 
 ## 3. Zarządzanie wykonaniami workflow
 
-Wiedza, jak uruchamiać workflow i pobierać wyjścia, jest świetna, ale szybko odkryjesz, że jest kilka innych aspektów zarządzania workflow, które ułatwią ci życie.
+Wiedza, jak uruchamiać workflow i pobierać wyjścia, jest świetna, ale szybko odkryjesz, że jest kilka innych aspektów zarządzania workflow, które ułatwią Ci życie.
 
 Tutaj pokażemy ci, jak wykorzystać funkcję `resume` do ponownego uruchomienia tego samego workflow, jak sprawdzić logi wykonania za pomocą `nextflow log` oraz jak usunąć starsze katalogi robocze za pomocą `nextflow clean`.
 
@@ -339,14 +339,14 @@ Tutaj pokażemy ci, jak wykorzystać funkcję `resume` do ponownego uruchomienia
 
 Czasami będziesz chciał ponownie uruchomić pipeline, który już wcześniej uruchomiłeś, bez powtarzania jakiejkolwiek pracy, która została już pomyślnie zakończona.
 
-Nextflow ma opcję o nazwie `-resume`, która pozwala ci to zrobić.
+Nextflow ma opcję o nazwie `-resume`, która pozwala Ci to zrobić.
 W szczególności, w tym trybie, wszystkie procesy, które zostały już uruchomione z dokładnie tym samym kodem, ustawieniami i wejściami, zostaną pominięte.
 Oznacza to, że Nextflow uruchomi tylko procesy, które dodałeś lub zmodyfikowałeś od ostatniego uruchomienia, lub którym przekazujesz nowe ustawienia lub wejścia.
 
 Są dwie kluczowe zalety tego podejścia:
 
 - Jeśli jesteś w trakcie opracowywania pipeline, możesz iterować szybciej, ponieważ musisz uruchomić tylko proces(y), nad którymi aktywnie pracujesz, aby przetestować swoje zmiany.
-- Jeśli uruchamiasz pipeline w środowisku produkcyjnym i coś pójdzie nie tak, w wielu przypadkach możesz naprawić problem i ponownie uruchomić pipeline, a on wznowi działanie od punktu awarii, co może zaoszczędzić ci dużo czasu i mocy obliczeniowej.
+- Jeśli uruchamiasz pipeline w środowisku produkcyjnym i coś pójdzie nie tak, w wielu przypadkach możesz naprawić problem i ponownie uruchomić pipeline, a on wznowi działanie od punktu awarii, co może zaoszczędzić Ci dużo czasu i mocy obliczeniowej.
 
 Aby z niego skorzystać, po prostu dodaj `-resume` do swojego polecenia i uruchom je:
 
@@ -367,7 +367,7 @@ nextflow run hello-world.nf --greeting 'Hello World!' -resume
 Zwróć uwagę na fragment `cached:`, który został dodany w linii statusu procesu (linia 5), co oznacza, że Nextflow rozpoznał, że już wykonał tę pracę i po prostu ponownie wykorzystał wynik z poprzedniego pomyślnego uruchomienia.
 
 Możesz również zobaczyć, że hash podkatalogu roboczego jest taki sam jak w poprzednim uruchomieniu.
-Nextflow dosłownie wskazuje ci na poprzednie wykonanie mówiąc "Już to zrobiłem tam."
+Nextflow dosłownie wskazuje Ci na poprzednie wykonanie mówiąc "Już to zrobiłem tam."
 
 !!! Tip "Wskazówka"
 
@@ -383,14 +383,14 @@ Bardziej wygodnym sposobem dostępu do tych informacji jest użycie polecenia `n
 nextflow log
 ```
 
-To wyświetli zawartość pliku logu w terminalu, pokazując ci znacznik czasu, nazwę uruchomienia, status i pełną linię poleceń dla każdego uruchomienia Nextflow, które zostało uruchomione z bieżącego katalogu roboczego.
+To wyświetli zawartość pliku logu w terminalu, pokazując Ci znacznik czasu, nazwę uruchomienia, status i pełną linię poleceń dla każdego uruchomienia Nextflow, które zostało uruchomione z bieżącego katalogu roboczego.
 
 ### 3.3. Usuwanie starszych katalogów roboczych
 
 Podczas procesu rozwoju zazwyczaj uruchamiasz swoje robocze pipeline wiele razy, co może prowadzić do nagromadzenia bardzo wielu plików w wielu podkatalogach.
 Ponieważ podkatalogi są nazwane losowo, trudno jest stwierdzić na podstawie ich nazw, które są starsze, a które nowsze.
 
-Nextflow zawiera wygodne podpolecenie `clean`, które może automatycznie usuwać podkatalogi robocze dla wcześniejszych uruchomień, o które już ci nie zależy, z kilkoma [opcjami](https://www.nextflow.io/docs/latest/reference/cli.html#clean) do kontrolowania, co zostanie usunięte.
+Nextflow zawiera wygodne podpolecenie `clean`, które może automatycznie usuwać podkatalogi robocze dla wcześniejszych uruchomień, o które już Ci nie zależy, z kilkoma [opcjami](https://www.nextflow.io/docs/latest/reference/cli.html#clean) do kontrolowania, co zostanie usunięte.
 
 Możesz użyć logu Nextflow, aby wyszukać uruchomienie na podstawie jego znacznika czasu i/lub linii poleceń, a następnie użyć `nextflow clean -before <run_name> -f`, aby usunąć katalogi robocze z wcześniejszych uruchomień.
 
@@ -399,7 +399,7 @@ Możesz użyć logu Nextflow, aby wyszukać uruchomienie na podstawie jego znacz
     Usuwanie podkatalogów roboczych z wcześniejszych uruchomień usuwa je z pamięci podręcznej Nextflow i usuwa wszystkie wyjścia, które były przechowywane w tych katalogach.
     Oznacza to, że przerywa zdolność Nextflow do wznowienia wykonania bez ponownego uruchamiania odpowiednich procesów.
 
-    Jesteś odpowiedzialny za zapisanie wszelkich wyjść, na których ci zależy lub na których planujesz polegać! Jeśli używasz dyrektywy `publishDir` w tym celu, upewnij się, że używasz trybu `copy`, a nie trybu `symlink`.
+    Jesteś odpowiedzialny za zapisanie wszelkich wyjść, na których Ci zależy lub na których planujesz polegać! Jeśli używasz dyrektywy `publishDir` w tym celu, upewnij się, że używasz trybu `copy`, a nie trybu `symlink`.
 
 ### Podsumowanie
 

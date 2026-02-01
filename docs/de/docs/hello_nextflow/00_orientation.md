@@ -126,7 +126,7 @@ Wir verwenden ausklappbare Abschnitte wie diesen, um erwartete Befehlsausgaben k
 
 ## Bereitschafts-Checkliste
 
-Denkst du, du bist bereit einzutauchen?
+Bist du bereit?
 
 - [ ] Ich verstehe das Ziel dieses Kurses und seine Voraussetzungen
 - [ ] Meine Umgebung läuft

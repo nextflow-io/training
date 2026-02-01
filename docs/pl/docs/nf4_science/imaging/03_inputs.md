@@ -24,7 +24,7 @@ nextflow run ./molkart \
 
 To działa, ale trudno to odtworzyć, udostępnić lub zmodyfikować.
 Co jeśli musisz ponownie uruchomić tę samą analizę za miesiąc?
-Co jeśli współpracownik chce użyć dokładnie twoich ustawień?
+Co jeśli współpracownik chce użyć dokładnie Twoich ustawień?
 
 ### 1.2. Rozwiązanie: Użyj pliku parametrów
 

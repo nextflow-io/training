@@ -26,7 +26,7 @@ additional_information:
 
 Durch praktische Beispiele und geführte Übungen lernst du die Grundlagen der Verwendung von Nextflow, einschließlich der Ausführung von Pipelines, der Verwaltung von Dateien und Software-Abhängigkeiten, der mühelosen Parallelisierung der Ausführung und der Ausführung von Workflows in verschiedenen Rechenumgebungen.
 
-Du wirst die Fähigkeiten und das Selbstvertrauen mitnehmen, um Workflows mit Nextflow auszuführen.
+Nach diesem Kurs kannst du Workflows mit Nextflow ausführen.
 
 <!-- additional_information -->
 

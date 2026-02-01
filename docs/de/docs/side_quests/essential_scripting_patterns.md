@@ -10,7 +10,7 @@ Wenn du jedoch Daten manipulieren, komplexe Dateinamen parsen, bedingte Logik im
 
 ### Lernziele
 
-Dieses Side Quest nimmt dich mit auf eine praktische Reise von grundlegenden Konzepten zu produktionsreifen Mustern.
+Dieses Side Quest führt dich von grundlegenden Konzepten zu produktionsreifen Mustern.
 Wir werden einen einfachen CSV-lesenden Workflow in einen ausgefeilten Bioinformatik-Pipeline verwandeln und ihn Schritt für Schritt durch realistische Herausforderungen weiterentwickeln:
 
 - **Grenzen verstehen:** Unterscheide zwischen Dataflow-Operationen und Scripting und verstehe, wie sie zusammenarbeiten

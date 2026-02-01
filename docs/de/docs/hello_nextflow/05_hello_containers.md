@@ -396,7 +396,7 @@ Du befindest dich wieder in deiner normalen Shell.
 
 ### Erkenntnisse
 
-Du weißt, wie man einen Container pullt und ihn entweder einmalig oder interaktiv ausführt. Du weißt auch, wie du deine Daten von innerhalb deines Containers zugänglich machst, was es dir ermöglicht, jedes Tool, das dich interessiert, mit echten Daten auszuprobieren, ohne Software auf deinem System installieren zu müssen.
+Du kannst Container pullen und einmalig oder interaktiv ausführen. Du kannst Daten im Container zugänglich machen und Tools mit echten Daten testen, ohne lokale Installationen.
 
 ### Was kommt als Nächstes?
 

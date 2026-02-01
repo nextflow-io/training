@@ -20,9 +20,9 @@ Pod koniec tej misji pobocznej będziesz w stanie efektywnie rozdzielać i łąc
 - Łączenie powiązanych danych za pomocą `join` i `groupTuple`
 - Tworzenie kombinacji danych za pomocą `combine` do przetwarzania równoległego
 - Optymalizacja struktury danych za pomocą `subMap` i strategii deduplikacji
-- Budowanie funkcji wielokrotnego użytku z nazwanymi domknięciami, które pomogą ci manipulować strukturami kanałów
+- Budowanie funkcji wielokrotnego użytku z nazwanymi domknięciami, które pomogą Ci manipulować strukturami kanałów
 
-Te umiejętności pomogą ci budować przepływy pracy, które mogą efektywnie obsługiwać wiele plików wejściowych i różne typy danych, zachowując czystą, łatwą w utrzymaniu strukturę kodu.
+Te umiejętności pomogą Ci budować przepływy pracy, które mogą efektywnie obsługiwać wiele plików wejściowych i różne typy danych, zachowując czystą, łatwą w utrzymaniu strukturę kodu.
 
 ### Wymagania wstępne
 

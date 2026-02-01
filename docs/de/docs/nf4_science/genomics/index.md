@@ -21,7 +21,7 @@ Los geht's! Klicke auf die Schaltfläche „Open in GitHub Codespaces" unten, um
 
 Durch die Bearbeitung dieses Kurses lernst du, wie du grundlegende Nextflow-Konzepte und -Werkzeuge auf einen typischen Genomik-Anwendungsfall anwendest.
 
-Am Ende dieses Workshops wirst du in der Lage sein:
+Am Ende dieses Workshops kannst du:
 
 - Einen linearen Workflow zu schreiben, um Variant Calling auf eine einzelne Probe anzuwenden
 - Zusatzdateien wie Index-Dateien und Referenzgenom-Ressourcen angemessen zu handhaben

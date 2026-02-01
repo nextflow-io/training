@@ -83,7 +83,7 @@ hide:
 
     ### :material-compass:{.nextflow-primary} Nextflow für Einsteiger {.mt-1}
 
-    Fachbereichsunabhängige Kurse für alle, die komplett neu bei Nextflow sind. Jeder Kurs besteht aus einer Reihe von Trainingsmodulen, die Lernenden helfen sollen, ihre Fähigkeiten schrittweise aufzubauen.
+    Fachbereichsunabhängige Kurse für alle, die komplett neu bei Nextflow sind. Jeder Kurs besteht aus mehreren Modulen, die Fähigkeiten schrittweise aufbauen.
 
     ??? courses "**Hello Nextflow:** Lerne, eigene Pipelines zu entwickeln"
 

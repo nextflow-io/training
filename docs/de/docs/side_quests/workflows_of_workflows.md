@@ -10,7 +10,7 @@ Eine der mächtigsten Funktionen von Nextflow ist die Fähigkeit, komplexe Pipel
 
 In dieser Side Quest werden wir erkunden, wie man Workflow-Module entwickelt, die separat getestet und verwendet werden können, wie man diese Module zu einer größeren Pipeline zusammensetzt und wie man den Datenfluss zwischen Modulen verwaltet.
 
-Am Ende dieser Side Quest wirst du in der Lage sein:
+Am Ende dieser Side Quest kannst du:
 
 - Komplexe Pipelines in logische, wiederverwendbare Einheiten aufzuteilen
 - Jedes Workflow-Modul unabhängig zu testen

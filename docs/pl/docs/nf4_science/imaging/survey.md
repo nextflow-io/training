@@ -10,6 +10,6 @@ Prosimy o poświęcenie kilku minut na wypełnienie krótkiej ankiety:
 
 <div data-tf-live="01K8GYZC9RJ7ASGKJYVG5ZETQW"></div><script src="//embed.typeform.com/next/embed.js"></script>
 
-Państwa odpowiedzi pomogą nam zrozumieć, co działało dobrze i co możemy poprawić dla przyszłych uczestników.
+Twoje odpowiedzi pomogą nam zrozumieć, co działało dobrze i co możemy poprawić dla przyszłych uczestników.
 
 Dziękujemy za czas i udział!

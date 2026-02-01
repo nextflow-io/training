@@ -1232,7 +1232,7 @@ workflow는 `cowpy`를 실행하는 추가 단계를 제외하고 이전 것과 
 cowpy(collectGreetings.out, params.character)
 ```
 
-ASCII 아트를 생성하기 위해 cowpy 명령을 래핑하는 `cowpy` process는 `cowpy.nf` 모듈에 정의되어 있습니다.
+ASCII 아트를 생성하기 위해 cowpy 명령을 적용하는 `cowpy` process는 `cowpy.nf` 모듈에 정의되어 있습니다.
 
 ??? full-code "전체 코드 파일"
 

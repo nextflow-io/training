@@ -10,7 +10,7 @@ Nextflow bietet leistungsstarke Werkzeuge, um Dateien effizient zu verarbeiten u
 In dieser Side Quest werden wir erkunden, wie Nextflow mit Dateien umgeht, von grundlegenden Dateioperationen bis hin zu fortgeschritteneren Techniken für die Arbeit mit Dateisammlungen.
 Du wirst lernen, wie man Metadaten aus Dateinamen extrahiert, was eine häufige Anforderung in wissenschaftlichen Analyse-Pipelines ist.
 
-Am Ende dieser Side Quest wirst du in der Lage sein:
+Am Ende dieser Side Quest kannst du:
 
 - Path-Objekte aus Dateipfad-Strings mit der `file()`-Methode von Nextflow zu erstellen
 - Auf Dateiattribute wie Name, Extension und übergeordnetes Verzeichnis zuzugreifen

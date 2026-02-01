@@ -21,7 +21,7 @@ Pod koniec tego side questa będziesz potrafić:
 - Integrować operacje na plikach z procesami Nextflow z prawidłową obsługą wejścia
 - Organizować wyjścia procesów przy użyciu struktur katalogów opartych na metadanych
 
-Te umiejętności pomogą ci budować przepływy pracy, które mogą obsługiwać różne rodzaje plików wejściowych z dużą elastycznością.
+Te umiejętności pomogą Ci budować przepływy pracy, które mogą obsługiwać różne rodzaje plików wejściowych z dużą elastycznością.
 
 ### Wymagania wstępne
 
@@ -214,7 +214,7 @@ Nextflow przekonwertował nasz ciąg na obiekt Path i rozwiązał go do rzeczywi
 Ścieżka pliku będzie teraz bezwzględna, jak w `/workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz`.
 
 Zauważ również, że klasa obiektu Path to `sun.nio.fs.UnixPath`: to sposób Nextflow na reprezentowanie plików lokalnych.
-Jak zobaczymy później, pliki zdalne będą miały inne nazwy klas (takie jak `nextflow.file.http.XPath` dla plików HTTP), ale wszystkie działają dokładnie w ten sam sposób i mogą być używane identycznie w twoich workflow.
+Jak zobaczymy później, pliki zdalne będą miały inne nazwy klas (takie jak `nextflow.file.http.XPath` dla plików HTTP), ale wszystkie działają dokładnie w ten sam sposób i mogą być używane identycznie w Twoich workflow.
 
 !!! tip
 
@@ -604,7 +604,7 @@ Razem wzięte, te dwa przykłady pokazują, jak ważne jest poinformowanie Nextf
 - Ciągi ścieżek vs obiekty Path: Ciągi to tylko tekst, obiekty Path to inteligentne odniesienia do plików
 - Metoda `file()` konwertuje ciąg ścieżki na obiekt Path, z którym Nextflow może pracować
 - Możesz uzyskać dostęp do właściwości pliku, takich jak `name`, `simpleName`, `extension` i `parent` [używając atrybutów pliku](https://www.nextflow.io/docs/latest/working-with-files.html#getting-file-attributes)
-- Używanie obiektów Path zamiast ciągów pozwala Nextflow prawidłowo zarządzać plikami w twoim workflow
+- Używanie obiektów Path zamiast ciągów pozwala Nextflow prawidłowo zarządzać plikami w Twoim workflow
 - Wyniki wejścia procesu: Prawidłowa obsługa plików wymaga obiektów Path, a nie ciągów, aby zapewnić, że pliki są prawidłowo przenoszone i dostępne do użycia przez procesy.
 
 ---

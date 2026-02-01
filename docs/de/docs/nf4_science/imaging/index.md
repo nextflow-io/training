@@ -21,7 +21,7 @@ Los geht's! Klicke unten auf die Schaltfläche "Open in GitHub Codespaces", um d
 
 Durch die Bearbeitung dieses Kurses lernst du, wie du grundlegende Nextflow-Konzepte und -Tools auf die Ausführung von Bildgebungsanalyse-Pipelines anwendest.
 
-Am Ende dieses Workshops wirst du in der Lage sein:
+Am Ende dieses Workshops kannst du:
 
 - Einen Nextflow-Workflow lokal zu starten und die Ausführung zu überwachen
 - Von Nextflow generierte Ausgaben (Ergebnisse) und Log-Dateien zu finden und zu interpretieren

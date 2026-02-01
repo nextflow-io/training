@@ -348,7 +348,7 @@ Użycie pliku parametrów może wydawać się przesadą, gdy masz tylko kilka pa
 W takich przypadkach użycie pliku parametrów pozwoli nam podać wartości parametrów w czasie wykonania bez konieczności wpisywania ogromnych wierszy poleceń i bez modyfikowania skryptu workflow.
 
 Ułatwia również dystrybucję zestawów parametrów współpracownikom lub jako materiał pomocniczy do publikacji, na przykład.
-To czyni twoją pracę bardziej odtwarzalną przez innych.
+To czyni Twoją pracę bardziej odtwarzalną przez innych.
 
 ### Podsumowanie
 
@@ -356,7 +356,7 @@ Wiesz, jak wykorzystać kluczowe opcje konfiguracji do zarządzania danymi wejś
 
 ### Co dalej?
 
-Dowiedz się, jak zarządzać tym, gdzie i jak twoje wyjścia workflow są publikowane.
+Dowiedz się, jak zarządzać tym, gdzie i jak Twoje wyjścia workflow są publikowane.
 
 ---
 
@@ -766,11 +766,11 @@ Wszystkie nadal są właściwymi kopiami, nie symlinkami.
 
 Głównym powodem, dla którego nadal możesz chcieć użyć sposobu ustawiania trybu dla każdego wyjścia, jest sytuacja, gdy chcesz mieszać i łączyć w tym samym workflow, _tzn._ mieć niektóre wyjścia kopiowane, a niektóre dowiązane symbolicznie.
 
-Jest wiele innych opcji, które możesz dostosować w ten sposób, ale mamy nadzieję, że to daje ci poczucie zakresu opcji i jak je skutecznie wykorzystać, aby dopasować do swoich preferencji.
+Jest wiele innych opcji, które możesz dostosować w ten sposób, ale mamy nadzieję, że to daje Ci poczucie zakresu opcji i jak je skutecznie wykorzystać, aby dopasować do swoich preferencji.
 
 ### Podsumowanie
 
-Wiesz, jak kontrolować nazewnictwo i strukturę katalogów, w których publikowane są twoje wyjścia, a także tryb publikowania wyjść workflow.
+Wiesz, jak kontrolować nazewnictwo i strukturę katalogów, w których publikowane są Twoje wyjścia, a także tryb publikowania wyjść workflow.
 
 ### Co dalej?
 
@@ -852,7 +852,7 @@ Dla jasności, nie _zastępujemy_ dyrektywy `docker`, _dodajemy_ alternatywną o
 !!! tip "Wskazówka"
 
     Jest kilka różnych sposobów na uzyskanie URI dla danego pakietu conda.
-    Zalecamy korzystanie z zapytania wyszukiwania [Seqera Containers](https://seqera.io/containers/), które da ci URI, które możesz skopiować i wkleić, nawet jeśli nie planujesz tworzyć z niego kontenera.
+    Zalecamy korzystanie z zapytania wyszukiwania [Seqera Containers](https://seqera.io/containers/), które da Ci URI, które możesz skopiować i wkleić, nawet jeśli nie planujesz tworzyć z niego kontenera.
 
 ### 3.3. Uruchom workflow, aby zweryfikować, że może używać Conda
 
@@ -919,7 +919,7 @@ Ten wykonuje każde zadanie na maszynie, na której działa Nextflow.
 Gdy Nextflow się uruchamia, sprawdza dostępne procesory i pamięć.
 Jeśli zasoby zadań gotowych do uruchomienia przekraczają dostępne zasoby, Nextflow wstrzyma ostatnie zadania przed wykonaniem, dopóki jedno lub więcej wcześniejszych zadań nie zakończy się, zwalniając niezbędne zasoby.
 
-Lokalny executor jest wygodny i wydajny, ale jest ograniczony do tej jednej maszyny. Dla bardzo dużych obciążeń możesz odkryć, że twoja lokalna maszyna jest wąskim gardłem, albo dlatego, że masz pojedyncze zadanie wymagające więcej zasobów niż masz dostępne, albo dlatego, że masz tak wiele zadań, że czekanie, aż pojedyncza maszyna je uruchomi, zajęłoby zbyt długo.
+Lokalny executor jest wygodny i wydajny, ale jest ograniczony do tej jednej maszyny. Dla bardzo dużych obciążeń możesz odkryć, że Twoja lokalna maszyna jest wąskim gardłem, albo dlatego, że masz pojedyncze zadanie wymagające więcej zasobów niż masz dostępne, albo dlatego, że masz tak wiele zadań, że czekanie, aż pojedyncza maszyna je uruchomi, zajęłoby zbyt długo.
 
 Nextflow obsługuje [wiele różnych backendów wykonawczych](https://www.nextflow.io/docs/latest/executor.html), w tym harmonogramy HPC (Slurm, LSF, SGE, PBS, Moab, OAR, Bridge, HTCondor i inne), a także backendy wykonywania w chmurze, takie jak (AWS Batch, Google Cloud Batch, Azure Batch, Kubernetes i więcej).
 
@@ -1026,11 +1026,11 @@ Ale skąd wiesz, jakich wartości użyć?
 
 ??? example "Scenariusz"
 
-    Nie wiesz, ile pamięci lub CPU potrzebują twoje procesy i chcesz uniknąć marnowania zasobów lub zabijania zadań.
+    Nie wiesz, ile pamięci lub CPU potrzebują Twoje procesy i chcesz uniknąć marnowania zasobów lub zabijania zadań.
 
-Jeśli nie wiesz z góry, ile CPU i pamięci prawdopodobnie będą potrzebować twoje procesy, możesz przeprowadzić profilowanie zasobów, co oznacza, że uruchamiasz workflow z pewnymi domyślnymi alokacjami, rejestrujesz, ile każdy process użył, i na tej podstawie szacujesz, jak dostosować bazowe alokacje.
+Jeśli nie wiesz z góry, ile CPU i pamięci prawdopodobnie będą potrzebować Twoje procesy, możesz przeprowadzić profilowanie zasobów, co oznacza, że uruchamiasz workflow z pewnymi domyślnymi alokacjami, rejestrujesz, ile każdy process użył, i na tej podstawie szacujesz, jak dostosować bazowe alokacje.
 
-Wygodnie, Nextflow zawiera wbudowane narzędzia do tego i chętnie wygeneruje dla ciebie raport na żądanie.
+Wygodnie, Nextflow zawiera wbudowane narzędzia do tego i chętnie wygeneruje dla Ciebie raport na żądanie.
 
 Aby to zrobić, dodaj `-with-report <nazwa_pliku>.html` do wiersza poleceń.
 
@@ -1108,7 +1108,7 @@ nextflow run 3-main.nf -with-report report-config-2.html
 
 Prawdopodobnie nie zauważysz żadnej rzeczywistej różnicy, ponieważ to jest tak małe obciążenie, ale to jest podejście, którego użyjesz do analizy wydajności i wymagań zasobowych rzeczywistego workflow.
 
-Jest to bardzo przydatne, gdy twoje procesy mają różne wymagania zasobowe. Pozwala ci odpowiednio dostosować alokacje zasobów, które ustawiasz dla każdego process na podstawie rzeczywistych danych, a nie domysłów.
+Jest to bardzo przydatne, gdy Twoje procesy mają różne wymagania zasobowe. Pozwala Ci odpowiednio dostosować alokacje zasobów, które ustawiasz dla każdego process na podstawie rzeczywistych danych, a nie domysłów.
 
 !!! tip "Wskazówka"
 
@@ -1119,7 +1119,7 @@ Jest to bardzo przydatne, gdy twoje procesy mają różne wymagania zasobowe. Po
 ### 5.5. Dodaj limity zasobów
 
 W zależności od tego, jakiego executora i infrastruktury obliczeniowej używasz, mogą istnieć pewne ograniczenia dotyczące tego, co możesz (lub musisz) przydzielić.
-Na przykład twój klaster może wymagać, abyś pozostał w określonych limitach.
+Na przykład Twój klaster może wymagać, abyś pozostał w określonych limitach.
 
 Możesz użyć dyrektywy `resourceLimits`, aby ustawić odpowiednie ograniczenia. Składnia wygląda tak, gdy jest sama w bloku process:
 
@@ -1161,11 +1161,11 @@ Dowiedz się, jak skonfigurować predefiniowane profile konfiguracji i przełąc
     Regularnie przełączasz się między uruchamianiem pipeline na laptopie do rozwoju i na HPC swojej instytucji do uruchomień produkcyjnych.
     Masz dość ręcznego zmieniania ustawień konfiguracji za każdym razem, gdy zmieniasz środowiska.
 
-Pokazaliśmy ci wiele sposobów, w jakie możesz dostosować konfigurację pipeline w zależności od projektu, nad którym pracujesz, lub środowiska obliczeniowego, którego używasz.
+Pokazaliśmy Ci wiele sposobów, w jakie możesz dostosować konfigurację pipeline w zależności od projektu, nad którym pracujesz, lub środowiska obliczeniowego, którego używasz.
 
 Możesz chcieć przełączać się między alternatywnymi ustawieniami w zależności od tego, jakiej infrastruktury obliczeniowej używasz. Na przykład możesz chcieć rozwijać i uruchamiać małe testy lokalnie na laptopie, a następnie uruchamiać pełnoskalowe obciążenia na HPC lub w chmurze.
 
-Nextflow pozwala ci skonfigurować dowolną liczbę profili, które opisują różne konfiguracje, które możesz następnie wybrać w czasie wykonania używając argumentu wiersza poleceń, zamiast modyfikować sam plik konfiguracyjny.
+Nextflow pozwala Ci skonfigurować dowolną liczbę profili, które opisują różne konfiguracje, które możesz następnie wybrać w czasie wykonania używając argumentu wiersza poleceń, zamiast modyfikować sam plik konfiguracyjny.
 
 ### 6.1. Utwórz profile do przełączania między lokalnym rozwojem a wykonaniem na HPC
 
@@ -1235,7 +1235,7 @@ Możemy również tworzyć dodatkowe profile, jeśli są inne elementy konfigura
 
 ??? example "Scenariusz"
 
-    Chcesz, aby inni mogli szybko wypróbować twój pipeline bez zbierania własnych danych wejściowych.
+    Chcesz, aby inni mogli szybko wypróbować Twój pipeline bez zbierania własnych danych wejściowych.
 
 Profile służą nie tylko do konfiguracji infrastruktury.
 Możemy ich również używać do ustawiania wartości domyślnych dla parametrów workflow, aby ułatwić innym wypróbowanie workflow bez konieczności samodzielnego zbierania odpowiednich wartości wejściowych.
@@ -1358,7 +1358,7 @@ I nawet jeśli nic nie jest w konflikcie, może być żmudne sprawdzanie wszystk
 Na szczęście Nextflow zawiera wygodne narzędzie o nazwie `config`, które może zautomatyzować cały ten proces za ciebie.
 
 Narzędzie `config` zbada całą zawartość w bieżącym katalogu roboczym, zbierze wszystkie pliki konfiguracyjne i wyprodukuje w pełni rozwiązaną konfigurację, której Nextflow użyłby do uruchomienia workflow.
-To pozwala ci dowiedzieć się, jakie ustawienia zostaną użyte bez konieczności uruchamiania czegokolwiek.
+To pozwala Ci dowiedzieć się, jakie ustawienia zostaną użyte bez konieczności uruchamiania czegokolwiek.
 
 #### 6.3.1. Rozwiąż domyślną konfigurację
 
@@ -1394,7 +1394,7 @@ nextflow config
     }
     ```
 
-To pokazuje ci bazową konfigurację, którą otrzymujesz, jeśli nie określisz niczego dodatkowego w wierszu poleceń.
+To pokazuje Ci bazową konfigurację, którą otrzymujesz, jeśli nie określisz niczego dodatkowego w wierszu poleceń.
 
 #### 6.3.2. Rozwiąż konfigurację z aktywowanymi konkretnymi ustawieniami
 

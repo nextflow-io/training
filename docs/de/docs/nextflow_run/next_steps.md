@@ -6,7 +6,7 @@ Herzlichen Glückwunsch zum Abschluss des Nextflow Run-Trainingskurses! 🎉
 
 <!-- placeholder for video -->
 
-## Deine Reise
+## Dein Fortschritt
 
 Du hast mit einem sehr grundlegenden Workflow begonnen und gelernt, ihn auszuführen, die Ausgaben zu finden und seine Ausführung zu verwalten.
 Dann hast du dich durch immer komplexere Versionen dieses Workflows gearbeitet und gelernt, die wesentlichen Konzepte und Mechanismen zu erkennen, die Nextflow-Pipelines antreiben, einschließlich Channels und Operatoren, Code-Modularisierung und Container.
