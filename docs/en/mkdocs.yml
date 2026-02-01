@@ -182,7 +182,7 @@ extra:
     - name: English
       link: /
       lang: en
-    - name: Deutsch
+    - name: deutsch
       link: /de/
       lang: de
     - name: español

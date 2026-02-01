@@ -2,12 +2,24 @@
 
 The target language for this translation is **German** (`de`).
 
+**Language name**: Use lowercase "deutsch" (not "Deutsch") in the language selector to match the style of other Romance languages (español, français, italiano, português).
+
 ## Grammar Preferences
 
 - Use informal tone (du instead of Sie)
 - Use standard German (Hochdeutsch) spelling conventions
 - Prefer active voice when possible
 - Use gender-neutral language where appropriate, including gender stars for gender-specific suffices, e.g. "Entwickler\*innen".
+
+## Writing Style
+
+- Keep sentences short and direct; this is tutorial text, not academic writing
+- Avoid overly formal or dated phrasing (e.g., "wissenschaftliche Rechenanforderungen" sounds archaic)
+- Prefer modern, conversational German that feels natural for technical documentation
+- Break complex sentences into simpler ones rather than using long subordinate clause chains
+- Example:
+  - Avoid: "Am Ende dieses Kurses wirst du gut vorbereitet sein, um die nächsten Schritte auf deiner Reise zur Entwicklung reproduzierbarer Workflows für deine wissenschaftlichen Rechenanforderungen anzugehen."
+  - Better: "Nach Abschluss dieses Kurses bist du bereit, reproduzierbare Workflows für deine eigenen Projekte zu entwickeln."
 
 ## Translation Context Rules
 

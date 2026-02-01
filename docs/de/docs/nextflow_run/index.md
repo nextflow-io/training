@@ -52,7 +52,7 @@ Wir haben dies in drei Teile unterteilt, die sich jeweils auf bestimmte Aspekte 
 | [Teil 2: Echte Pipelines ausführen](./02_pipeline.md) | Komplexe Eingaben verarbeiten, mehrstufige Workflows ausführen, Container verwenden und mühelos parallelisieren | 60 Min           |
 | [Teil 3: Konfiguration](./03_config.md)               | Pipeline-Verhalten anpassen und Nutzung in verschiedenen Rechenumgebungen optimieren                            | 60 Min           |
 
-Am Ende dieses Kurses wirst du gut vorbereitet sein, um die nächsten Schritte auf deinem Weg zum Ausführen reproduzierbarer Workflows für deine wissenschaftlichen Rechenanforderungen anzugehen.
+Nach Abschluss dieses Kurses bist du bereit, reproduzierbare Workflows für deine eigenen Projekte auszuführen.
 
 Bereit, den Kurs zu beginnen?
 
