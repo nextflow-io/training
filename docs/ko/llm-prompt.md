@@ -209,28 +209,31 @@ Note: Some technical terms use transliteration (음차) while others use actual 
 
 #### Actual Translations
 
-| English        | Korean      | Notes                      |
-| -------------- | ----------- | -------------------------- |
-| training       | 교육        | Actual translation         |
-| environment    | 환경        | Actual translation         |
-| repository     | 저장소      | Actual translation         |
-| file explorer  | 파일 탐색기 | Mixed                      |
-| main editor    | 메인 편집기 | Mixed                      |
-| directory      | 디렉토리    | Transliteration acceptable |
-| file (general) | 파일        | Transliteration            |
-| alignment      | 정렬        | Actual translation         |
-| command        | 명령        | Actual translation         |
-| directive      | 지시문      | Actual translation         |
-| input          | 입력        | Actual translation         |
-| output         | 출력        | Actual translation         |
-| operator       | 연산자      | Actual translation         |
-| parameter      | 매개변수    | Actual translation         |
-| reference      | 참조        | Actual translation         |
-| run            | 실행        | Actual translation         |
-| task           | 작업        | Actual translation         |
-| lowercase      | 소문자      | Actual translation         |
-| materials      | 자료        | Actual translation         |
-| course         | 과정        | Actual translation         |
+| English        | Korean      | Notes                                         |
+| -------------- | ----------- | --------------------------------------------- |
+| standalone     | 단독        | Not 독립 (political independence)             |
+| mini-course    | 단기 과정   | Not 미니 과정 (too casual)                    |
+| wrap           | 적용하다    | Not 래핑하다 (sounds like physical packaging) |
+| training       | 교육        | Actual translation                            |
+| environment    | 환경        | Actual translation                            |
+| repository     | 저장소      | Actual translation                            |
+| file explorer  | 파일 탐색기 | Mixed                                         |
+| main editor    | 메인 편집기 | Mixed                                         |
+| directory      | 디렉토리    | Transliteration acceptable                    |
+| file (general) | 파일        | Transliteration                               |
+| alignment      | 정렬        | Actual translation                            |
+| command        | 명령        | Actual translation                            |
+| directive      | 지시문      | Actual translation                            |
+| input          | 입력        | Actual translation                            |
+| output         | 출력        | Actual translation                            |
+| operator       | 연산자      | Actual translation                            |
+| parameter      | 매개변수    | Actual translation                            |
+| reference      | 참조        | Actual translation                            |
+| run            | 실행        | Actual translation                            |
+| task           | 작업        | Actual translation                            |
+| lowercase      | 소문자      | Actual translation                            |
+| materials      | 자료        | Actual translation                            |
+| course         | 과정        | Actual translation                            |
 
 ### Admonition Titles
 
