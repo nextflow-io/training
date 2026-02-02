@@ -557,7 +557,7 @@ We need to do something to tell Nextflow explicitly that we want that third step
 
 Yes, once again the answer to our problem is an operator.
 
-Specifically, we are going to use the aptly-named [`collect()`](https://www.nextflow.io/docs/latest/reference/operator.html#collect) operator.
+Specifically, we are going to use the aptly-named [`collect()`](https://nextflow.io/docs/latest/reference/operator.html#collect) operator.
 
 #### 2.4.1. Add the `collect()` operator
 

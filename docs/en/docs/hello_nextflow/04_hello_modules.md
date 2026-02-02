@@ -11,7 +11,7 @@
 ///
 
 This section covers how to organize your workflow code to make development and maintenance of your pipeline more efficient and sustainable.
-Specifically, we are going to demonstrate how to use **modules**.
+Specifically, we are going to demonstrate how to use [**modules**](https://nextflow.io/docs/latest/module.html).
 
 In Nextflow, a **module** is a single process definition that is encapsulated by itself in a standalone code file.
 To use a module in a workflow, you just add a single-line import statement to your workflow code file; then you can integrate the process into the workflow the same way you normally would.
@@ -109,7 +109,7 @@ mkdir modules
 !!! tip
 
     Here we are showing you how to use **local modules**, meaning modules stored locally in the same repository as the rest of the workflow code, in contrast to remote modules, which are stored in other (remote) repositories.
-    For more information about **remote modules**, see the [documentation](https://www.nextflow.io/docs/latest/module.html).
+    For more information about **remote modules**, see the [module documentation](https://nextflow.io/docs/latest/module.html).
 
 ---
 

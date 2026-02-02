@@ -15,11 +15,11 @@ That was a deliberately simplified approach.
 In practice, that approach has major limitations; namely that it only works for very simple cases where we only want to run the process once, on a single value.
 In most realistic workflow use cases, we want to process multiple values (experimental data for multiple samples, for example), so we need a more sophisticated way to handle inputs.
 
-That is what Nextflow **channels** are for.
+That is what Nextflow [**channels**](https://nextflow.io/docs/latest/channel.html) are for.
 Channels are queues designed to handle inputs efficiently and shuttle them from one step to another in multi-step workflows, while providing built-in parallelism and many additional benefits.
 
 In this part of the course, you will learn how to use a channel to handle multiple inputs from a variety of different sources.
-You will also learn to use **operators** to transform channel contents as needed.
+You will also learn to use [**operators**](https://nextflow.io/docs/latest/reference/operator.html) to transform channel contents as needed.
 
 ??? info "How to begin from this section"
 
@@ -87,8 +87,8 @@ We are going to create a **channel** to pass the variable input to the `sayHello
 
 ### 1.1. Create an input channel
 
-There are a variety of **channel factories** that we can use to set up a channel.
-To keep things simple for now, we are going to use the most basic channel factory, called `channel.of`, which will create a channel containing a single value.
+There are a variety of [**channel factories**](https://nextflow.io/docs/latest/reference/channel.html) that we can use to set up a channel.
+To keep things simple for now, we are going to use the most basic channel factory, called [`channel.of`](https://nextflow.io/docs/latest/reference/channel.html#of), which will create a channel containing a single value.
 Functionally this will be similar to how we had it set up before, but instead of having Nextflow create a channel implicitly, we are doing this explicitly now.
 
 This is the line of code we're going to use:
@@ -793,11 +793,11 @@ How do we get Nextflow to unpack the array and load the individual strings into 
 
 ### 3.2. Use an operator to transform channel contents
 
-This is where **[operators](https://www.nextflow.io/docs/latest/reference/operator.html)** come into play.
+This is where [**operators**](https://nextflow.io/docs/latest/reference/operator.html) come into play.
 You've already used the `.view()` operator, which just looks at what's in there.
 Now we're going to look at operators that allow us to act on the contents of a channel.
 
-If you skim through the [list of operators](https://www.nextflow.io/docs/latest/reference/operator.html) in the Nextflow documentation, you'll find [`flatten()`](https://www.nextflow.io/docs/latest/reference/operator.html#flatten), which does exactly what we need: unpack the contents of an array and emit them as individual items.
+If you skim through the [list of operators](https://nextflow.io/docs/latest/reference/operator.html) in the Nextflow documentation, you'll find [`flatten()`](https://nextflow.io/docs/latest/reference/operator.html#flatten), which does exactly what we need: unpack the contents of an array and emit them as individual items.
 
 #### 3.2.1. Add the `flatten()` operator
 
@@ -1019,7 +1019,7 @@ You'll learn how to deal with other data locations later in your Nextflow journe
 #### 4.1.2. Switch to a channel factory designed to handle a file
 
 Since we now want to use a file instead of simple strings as the input, we can't use the `channel.of()` channel factory from before.
-We need to switch to using a new channel factory, [`channel.fromPath()`](https://www.nextflow.io/docs/latest/reference/channel.html#channel-path), which has some built-in functionality for handling file paths.
+We need to switch to using a new channel factory, [`channel.fromPath()`](https://nextflow.io/docs/latest/reference/channel.html#frompath), which has some built-in functionality for handling file paths.
 
 In the workflow block, make the following code change:
 
@@ -1116,11 +1116,11 @@ So it has resolved the file path correctly, but it didn't actually parse its con
 
 How do we get Nextflow to open the file and load its contents into the channel?
 
-Sounds like we need another [operator](https://www.nextflow.io/docs/latest/reference/operator.html)!
+Sounds like we need another [operator](https://nextflow.io/docs/latest/reference/operator.html)!
 
 ### 4.2. Use the `splitCsv()` operator to parse the file
 
-Looking through the list of operators again, we find [`splitCsv()`](https://www.nextflow.io/docs/latest/reference/operator.html#splitCsv), which is designed to parse and split CSV-formatted text.
+Looking through the list of operators again, we find [`splitCsv()`](https://nextflow.io/docs/latest/reference/operator.html#splitcsv), which is designed to parse and split CSV-formatted text.
 
 #### 4.2.1. Apply `splitCsv()` to the channel
 
@@ -1226,7 +1226,7 @@ Instead, we'll use another operator called `map()` that is really useful and pop
 
 ### 4.3. Use the `map()` operator to extract the greetings
 
-The [`map()`](https://www.nextflow.io/docs/latest/reference/operator.html#map) operator is a very handy little tool that allows us to do all kinds of mappings to the contents of a channel.
+The [`map()`](https://nextflow.io/docs/latest/reference/operator.html#map) operator is a very handy little tool that allows us to do all kinds of mappings to the contents of a channel.
 
 In this case, we're going to use it to extract that one element that we want from each row in our data file.
 This is what the syntax looks like:
