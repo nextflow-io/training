@@ -265,8 +265,10 @@ def sync_language_picker():
     content = mkdocs_path.read_text(encoding="utf-8")
 
     # Build the new alternate section
+    # English first (primary language), then others alphabetically
     alternate_lines = ["  alternate:"]
-    for lang_code in sorted(lang_names.keys()):
+    lang_codes = ["en"] + sorted(k for k in lang_names.keys() if k != "en")
+    for lang_code in lang_codes:
         name = lang_names[lang_code]
         # English goes to root, others to /{lang}/
         link = "/" if lang_code == "en" else f"/{lang_code}/"

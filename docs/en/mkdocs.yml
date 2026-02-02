@@ -179,12 +179,12 @@ extra:
   # Language picker
   # Links use defined base paths; JS in main.html fixes for mike versioning
   alternate:
-    - name: deutsch
-      link: /de/
-      lang: de
     - name: English
       link: /
       lang: en
+    - name: deutsch
+      link: /de/
+      lang: de
     - name: español
       link: /es/
       lang: es
