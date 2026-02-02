@@ -11,14 +11,57 @@ The target language for this translation is **French** (`fr`).
 
 ### Inclusive Writing (Écriture Inclusive)
 
-Consider using inclusive writing with middle dots for gender-neutral terms:
+Use inclusive writing with middle dots (·) for gender-neutral terms when referring to people. Apply this in running text only, not in headings.
 
-- "débutant·es" (beginners, both genders)
-- "prêt·e" (ready, both genders)
-- "chercheur·euses" (researchers, both genders)
-- "formateur·trice" (trainer, both genders)
+#### Nouns referring to people
 
-This is optional but aligns with modern French writing practices.
+| English    | French (singular)      | French (plural)        |
+| ---------- | ---------------------- | ---------------------- |
+| user       | un·e utilisateur·trice | les utilisateur·trices |
+| developer  | un·e développeur·se    | les développeur·ses    |
+| researcher | un·e chercheur·euse    | les chercheur·euses    |
+| learner    | un·e apprenant·e       | les apprenant·es       |
+| trainer    | un·e formateur·trice   | les formateur·trices   |
+| beginner   | un·e débutant·e        | les débutant·es        |
+
+#### Adjectives referring to the reader
+
+When an adjective refers to the reader (using "vous"), make it inclusive:
+
+| English         | French                        |
+| --------------- | ----------------------------- |
+| ready           | prêt·e                        |
+| prepared        | préparé·e                     |
+| equipped        | équipé·e                      |
+| invited         | invité·e                      |
+| familiar        | familier·ère                  |
+| confident       | confiant·e                    |
+| new (people)    | nouveau·elle / nouveaux·elles |
+| future (people) | futur·e / futur·es            |
+
+#### Examples
+
+```markdown
+// Correct - inclusive forms in running text
+Vous êtes prêt·e à commencer.
+Ce cours est destiné aux chercheur·euses en génomique.
+Les apprenant·es développeront progressivement leurs compétences.
+Devenez un·e développeur·se Nextflow.
+
+// Correct - no change needed for invariable adjectives
+Vous êtes capable de...
+Vous êtes responsable de...
+
+// Correct - no change for adjectives referring to objects (not people)
+Le pipeline est prêt. (masculine noun, not the reader)
+Le fichier est préparé. (masculine noun, not the reader)
+```
+
+#### When NOT to use inclusive forms
+
+- In headings (keep simple forms for readability)
+- For adjectives modifying non-person nouns (le fichier, le pipeline, etc.)
+- For invariable adjectives that don't change form (capable, responsable, etc.)
 
 ## 2. Translation Context Rules
 
