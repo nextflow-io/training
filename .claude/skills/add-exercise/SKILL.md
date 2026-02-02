@@ -1,9 +1,13 @@
 ---
 name: add-exercise
-description: Add an exercise with solution to an existing lesson
+description: Add an interactive exercise with solution to an existing lesson. Creates properly formatted exercise and solution admonition blocks. Use when a lesson needs hands-on practice.
 ---
 
-Add an exercise with solution to an existing training lesson. Follow these steps:
+Add an exercise with solution to an existing training lesson.
+
+See [../shared/repo-conventions.md](../shared/repo-conventions.md) for directory structure and file conventions.
+
+Follow these steps:
 
 1. Ask the user:
 

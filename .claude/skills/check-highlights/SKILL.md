@@ -7,6 +7,8 @@ description: Verify that hl_lines attributes in markdown code blocks correctly h
 
 Verify that `hl_lines` attributes in markdown code blocks are correctly set to highlight the intended lines.
 
+See [../shared/repo-conventions.md](../shared/repo-conventions.md) for file conventions.
+
 ## Critical Understanding
 
 **`hl_lines` is snippet-relative, NOT related to `linenums`**:
@@ -25,13 +27,6 @@ process FOO {      <- displayed as line 21 (snippet line 1)
 }
 `
 ```
-
-## When to Use
-
-- After writing or editing code blocks with highlights
-- When reviewing Before/After comparison blocks
-- When a user reports highlights look wrong
-- As part of lesson review/validation
 
 ## How to Check
 

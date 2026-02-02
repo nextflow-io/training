@@ -1,9 +1,11 @@
 ---
 name: stop-preview
-description: Stop the running MkDocs preview server
+description: Stop a running MkDocs preview server. Use when port 8000 is busy, switching tasks, or done editing documentation.
 ---
 
 Stop the MkDocs preview server that is running in the background.
+
+See [../shared/repo-conventions.md](../shared/repo-conventions.md) for directory structure.
 
 This will:
 

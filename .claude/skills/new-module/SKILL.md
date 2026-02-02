@@ -1,9 +1,13 @@
 ---
 name: new-module
-description: Scaffold a new complete training module with all standard files
+description: Scaffold a complete new training module with standard directory structure, index, orientation, lessons, survey, and next-steps files. Use when creating a new course like 'Advanced Pipelines' or a new domain module.
 ---
 
-Create a new training module in this repository. Follow these steps:
+Create a new training module in this repository.
+
+See [../shared/repo-conventions.md](../shared/repo-conventions.md) for directory structure and file conventions.
+
+Follow these steps:
 
 1. Ask the user for:
 

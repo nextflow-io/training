@@ -1,9 +1,11 @@
 ---
 name: preview
-description: Start local preview server to view training materials
+description: Start local MkDocs preview server to view training material changes. Use when editing documentation, checking formatting, or testing how content renders before committing.
 ---
 
 Start the local MkDocs preview server to view changes to training materials.
+
+See [../shared/repo-conventions.md](../shared/repo-conventions.md) for directory structure.
 
 **First, check if a server is already running:**
 

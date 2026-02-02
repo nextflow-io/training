@@ -38,80 +38,32 @@ Execute from repository root. See [../shared/repo-conventions.md](../shared/repo
 
 ## Output Format
 
-Provide an organized report:
-
-````
+```
 # TODO/FIXME Report
 
 ## Summary
-- Total items: 23
-- High priority: 3
-- Documentation: 15
-- Code: 4
-- Configuration: 1
+Total items, High priority count, by category (Documentation/Code/Configuration)
 
 ## High Priority Items
-
-### docs/hello_nextflow/03_hello_workflow.md:156
-```markdown
-<!-- FIXME: Update this example for DSL2 syntax -->
-````
+[List FIXME and urgent items with file:line and context]
 
 ## Documentation TODOs
-
-### By File
-
-**docs/side_quests/debugging.md** (5 items)
-
-- Line 45: TODO: Add example of common error message
-- Line 89: TODO: Include screenshot of trace report
-- ...
-
-**docs/nf4_science/genomics/01_per_sample_variant_calling.md** (3 items)
-
-- Line 234: TODO: Verify this command works with latest GATK
-- ...
+[Group by file with line numbers]
 
 ## Code TODOs
-
-### hello-nextflow/hello-world.nf:23
-
-```groovy
-// TODO: Add error handling for missing files
-```
-
-## Configuration TODOs
-
-### CONTRIBUTING.md:204
-
-Known limitation documented - needs upstream fix in mkdocs plugin
+[Group by file with line numbers]
 
 ## Recommendations
-
-1. **Immediate attention** (3 items):
-   - Fix blocking issues in hello_nextflow
-   - Update genomics examples for latest tools
-
-2. **Next sprint** (8 items):
-   - Complete debugging module exercises
-   - Add missing screenshots
-
-3. **Low priority** (12 items):
-   - Style improvements
-   - Nice-to-have features
+1. Immediate attention: [blocking items]
+2. Next sprint: [significant items]
+3. Low priority: [nice-to-haves]
 
 ## Files with Most TODOs
-
-1. docs/side_quests/debugging.md (5)
-2. docs/nf4_science/genomics/01_per_sample_variant_calling.md (3)
-3. hello-nextflow/hello-world.nf (2)
-
+[Top 3-5 files]
 ```
 
 ## Notes
 
-- Use Grep tool with pattern `TODO|FIXME` (case insensitive)
-- Show enough context to understand what needs doing
+- Use Grep with pattern `TODO|FIXME` (case insensitive)
 - Distinguish between legitimate TODOs and example comments in training materials
 - Provide actionable priorities, not just a list
-```

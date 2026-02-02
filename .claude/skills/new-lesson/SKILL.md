@@ -1,9 +1,11 @@
 ---
 name: new-lesson
-description: Create a new lesson page within an existing training module
+description: Create a new numbered lesson page within an existing training module. Use when adding a new topic like '05_error_handling.md' to an existing course.
 ---
 
 Create a new lesson page within an existing training module.
+
+See [../shared/repo-conventions.md](../shared/repo-conventions.md) for directory structure and file conventions.
 
 **Note**: A "module" is a complete training course (like "Hello Nextflow" or "Side Quests"), while a "lesson" is a single numbered page within that module (like "01_hello_world.md").
 

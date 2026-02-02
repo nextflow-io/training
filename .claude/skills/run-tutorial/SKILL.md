@@ -85,11 +85,11 @@ Use `TodoWrite` to track progress through phases and sections.
 Record any issues found. Do not proceed to Phase 2 until validation completes.
 ```
 
-### Phase 2: Progressive Execution (Core Unique Value)
+### Phase 2: Progressive Execution
 
-**CRITICAL**: Complete ALL steps (2.1-2.6) for EACH section before moving to the next section. Do NOT batch multiple sections together. The entire point of this skill is to catch issues that only appear when following the tutorial step-by-step.
+Complete steps 2.1-2.6 for each section before moving to the next. Do not batch sections together.
 
-For each numbered section in the lesson (0, 1, 2, 3...):
+For each numbered section in the lesson:
 
 #### 2.1 Read and Understand
 
@@ -99,13 +99,11 @@ For each numbered section in the lesson (0, 1, 2, 3...):
 
 #### 2.2 Verify Current State Matches "Before"
 
-**This is the key unique check**: Before applying any code change:
+Before applying any code change:
 
-1. Read the current file content using the `Read` tool
+1. Read the current file content
 2. Compare with the "Before" block in the documentation
-3. If they don't match, **STOP and report the discrepancy**
-   - This catches issues where earlier steps didn't work correctly
-   - This catches documentation that skipped steps
+3. If they don't match, stop and report the discrepancy
 
 #### 2.3 Apply Code Changes Progressively
 
@@ -125,16 +123,13 @@ For each numbered section in the lesson (0, 1, 2, 3...):
 - Compare console output with documented "Output" blocks
 - See [references/acceptable-differences.md](references/acceptable-differences.md) for what to flag vs. ignore
 
-#### 2.6 Confirm Section Complete Before Proceeding
+#### 2.6 Confirm Section Complete
 
-**MANDATORY**: Before moving to the next section:
+Before moving to the next section:
 
 1. Verify the workflow/script ran successfully (exit code 0)
 2. Confirm output matches documentation (within acceptable differences)
 3. Update `TodoWrite` to mark section complete
-4. Only then proceed to section N+1
-
-**Why this matters**: Skipping incremental testing defeats the purpose of this skill. A tutorial might work when you jump to the final solution but fail at intermediate steps - exactly the bugs learners encounter.
 
 ### Phase 3: Final Verification
 
@@ -206,8 +201,6 @@ Categorize as Critical / Warning / Minor
 ## Proposed Fixes (if any)
 Table with file, line, current, proposed, reason
 ```
-
-**IMPORTANT**: Always read actual section headings from the document. Do not guess.
 
 ---
 
