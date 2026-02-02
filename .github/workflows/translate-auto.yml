@@ -33,9 +33,10 @@ jobs:
         working-directory: _scripts
         run: |
           # Check each language for outdated translations
+          # Discover translation languages (all language dirs except 'en')
           languages_with_outdated=""
 
-          for lang in pt es fr it ko pl tr; do
+          for lang in $(find ../docs -maxdepth 2 -name "mkdocs.yml" -exec dirname {} \; | xargs -n1 basename | sort | grep -v '^en$'); do
             outdated=$(uv run python translate.py list-outdated "$lang" 2>/dev/null | grep -c "docs/" || echo "0")
             if [ "$outdated" -gt 0 ]; then
               echo "Found $outdated outdated files for $lang"

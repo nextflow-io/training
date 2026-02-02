@@ -4,17 +4,9 @@ on:
   workflow_dispatch:
     inputs:
       language:
-        description: "Language code (pt, es, fr, it, ko, pl, tr)"
+        description: "Language code (any language directory under docs/ except 'en')"
         required: true
-        type: choice
-        options:
-          - pt
-          - es
-          - fr
-          - it
-          - ko
-          - pl
-          - tr
+        type: string
       command:
         description: "Command to run"
         required: true
@@ -40,6 +32,20 @@ jobs:
           python-version: "3.12"
 
       - uses: astral-sh/setup-uv@v4
+
+      - name: Validate language
+        run: |
+          LANG="${{ inputs.language }}"
+          if [ "$LANG" = "en" ]; then
+            echo "Error: Cannot translate English (source language)"
+            exit 1
+          fi
+          if [ ! -d "docs/$LANG" ] || [ ! -f "docs/$LANG/mkdocs.yml" ]; then
+            echo "Error: Language '$LANG' not found. Available languages:"
+            find docs -maxdepth 2 -name "mkdocs.yml" -exec dirname {} \; | xargs -n1 basename | sort | grep -v '^en$'
+            exit 1
+          fi
+          echo "Language '$LANG' validated"
 
       - name: Run translation command
         env:
