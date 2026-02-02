@@ -329,6 +329,17 @@ def list_removable(language: str):
 @app.command()
 def update_outdated(
     language: str = typer.Option(..., "--language", "-l", envvar="LANGUAGE"),
+    verify: bool = typer.Option(
+        False,
+        "--verify",
+        "-v",
+        help="Run verification pass after translation to ensure compliance with prompt guidelines",
+    ),
+    verify_iterations: int = typer.Option(
+        2,
+        "--verify-iterations",
+        help="Number of verification iterations (only used with --verify)",
+    ),
 ):
     """Update all outdated translations for a language."""
     repo = git.Repo(REPO_ROOT)
@@ -351,9 +362,30 @@ def update_outdated(
         return
 
     console.print(f"Updating {len(outdated)} outdated translations...")
+    translated_paths = []
     for i, en_path in enumerate(outdated, 1):
         console.print(f"\n[{i}/{len(outdated)}] {en_path.name}")
         translate_page(language=language, en_path=en_path)
+        translated_paths.append(to_lang_path(en_path, language))
+
+    # Run verification pass if requested
+    if verify and translated_paths:
+        console.print(
+            f"\n[bold]Running verification pass on {len(translated_paths)} translated files...[/bold]"
+        )
+        for iteration in range(1, verify_iterations + 1):
+            console.print(
+                f"\n[cyan]Verification pass {iteration}/{verify_iterations}[/cyan]"
+            )
+            changes = 0
+            for lang_path in translated_paths:
+                if fix_single_file(lang_path, language):
+                    console.print(f"  [yellow]Fixed:[/yellow] {lang_path.name}")
+                    changes += 1
+            if changes == 0:
+                console.print("[green]All translations verified![/green]")
+                break
+            console.print(f"  [dim]Fixed {changes} files in this pass[/dim]")
 
 
 @app.command()
@@ -364,6 +396,17 @@ def add_missing(
         "--include",
         "-i",
         help="Only translate files matching this pattern (e.g., 'hello_nextflow')",
+    ),
+    verify: bool = typer.Option(
+        False,
+        "--verify",
+        "-v",
+        help="Run verification pass after translation to ensure compliance with prompt guidelines",
+    ),
+    verify_iterations: int = typer.Option(
+        2,
+        "--verify-iterations",
+        help="Number of verification iterations (only used with --verify)",
     ),
 ):
     """Translate all missing files for a language."""
@@ -386,9 +429,30 @@ def add_missing(
         return
 
     console.print(f"Translating {len(missing)} missing files...")
+    translated_paths = []
     for i, en_path in enumerate(missing, 1):
         console.print(f"\n[{i}/{len(missing)}] {en_path.name}")
         translate_page(language=language, en_path=en_path)
+        translated_paths.append(to_lang_path(en_path, language))
+
+    # Run verification pass if requested
+    if verify and translated_paths:
+        console.print(
+            f"\n[bold]Running verification pass on {len(translated_paths)} translated files...[/bold]"
+        )
+        for iteration in range(1, verify_iterations + 1):
+            console.print(
+                f"\n[cyan]Verification pass {iteration}/{verify_iterations}[/cyan]"
+            )
+            changes = 0
+            for lang_path in translated_paths:
+                if fix_single_file(lang_path, language):
+                    console.print(f"  [yellow]Fixed:[/yellow] {lang_path.name}")
+                    changes += 1
+            if changes == 0:
+                console.print("[green]All translations verified![/green]")
+                break
+            console.print(f"  [dim]Fixed {changes} files in this pass[/dim]")
 
 
 @app.command()
@@ -407,6 +471,193 @@ def remove_removable(
             removed += 1
 
     console.print(f"\nRemoved {removed} orphaned files")
+
+
+def fix_single_file(
+    lang_path: Path,
+    language: str,
+    run_post_fixer: bool = True,
+) -> bool:
+    """
+    Fix a single translation file to comply with current prompt guidelines.
+
+    Returns True if changes were made, False if file was already compliant.
+    """
+    from translation_fixer import fix_one_page
+
+    if not lang_path.exists():
+        console.print(f"[red]Error:[/red] File not found: {lang_path}")
+        return False
+
+    # Find English source
+    en_path = to_en_path(lang_path, language)
+    if not en_path.exists():
+        console.print(
+            f"[yellow]Warning:[/yellow] No English source for {lang_path.name}, skipping"
+        )
+        return False
+
+    original_content = lang_path.read_text(encoding="utf-8")
+    en_content = en_path.read_text(encoding="utf-8")
+
+    # Build fix prompt
+    prompt_parts = [
+        "# Translation Fix Task",
+        "",
+        "You are reviewing an existing translation of Nextflow training materials.",
+        "",
+        "## Your Task",
+        "Check the translation against the guidelines below and fix any violations.",
+        "Make MINIMAL changes - only fix what violates the guidelines.",
+        "If the translation is already correct, output it unchanged.",
+        "",
+        "## Guidelines",
+        get_general_prompt(),
+        get_lang_prompt(language),
+        "",
+        "## English Source (for reference)",
+        f"%%%\n{en_content}%%%",
+        "",
+        "## Current Translation to Fix",
+        f"%%%\n{original_content}%%%",
+        "",
+        "## Output",
+        "Output ONLY the corrected markdown file. No explanations or commentary.",
+    ]
+
+    prompt = "\n\n".join(prompt_parts)
+
+    client = anthropic.Anthropic()
+    message = client.messages.create(
+        model=MODEL,
+        max_tokens=16384,
+        messages=[{"role": "user", "content": prompt}],
+    )
+
+    fixed_content = f"{message.content[0].text.strip()}\n"
+
+    # Check if content changed
+    if fixed_content == original_content:
+        return False
+
+    # Write fixed content
+    lang_path.write_text(fixed_content, encoding="utf-8", newline="\n")
+
+    # Run post-processing fixer (restores code blocks, links, etc.)
+    if run_post_fixer:
+        try:
+            fix_one_page(lang_path)
+        except ValueError as e:
+            console.print(f"[yellow]Warning:[/yellow] Post-fixer issue: {e}")
+
+    return True
+
+
+@app.command()
+def fix_translations(
+    language: str = typer.Option(..., "--language", "-l", help="Language code to fix"),
+    max_iterations: int = typer.Option(
+        8, "--max-iterations", "-m", help="Maximum fix iterations"
+    ),
+    files: list[Path] = typer.Option(
+        None,
+        "--files",
+        "-f",
+        help="Specific files to fix (relative to docs/{lang}/docs/)",
+    ),
+    dry_run: bool = typer.Option(
+        False, "--dry-run", help="Show what would be fixed without making changes"
+    ),
+):
+    """
+    Fix existing translations to comply with current prompt guidelines.
+
+    Uses LLM to review and fix translations, with multiple passes until
+    no more changes are needed or max iterations reached.
+    """
+    langs = get_langs()
+    if language not in langs:
+        console.print(f"[red]Error:[/red] Unknown language: {language}")
+        raise typer.Exit(code=1)
+
+    lang_docs = DOCS_PATH / language / "docs"
+    if not lang_docs.exists():
+        console.print(f"[red]Error:[/red] Language docs not found: {lang_docs}")
+        raise typer.Exit(code=1)
+
+    # Get list of files to process
+    if files:
+        # Resolve specified files
+        paths_to_fix = []
+        for f in files:
+            # Try as relative to lang docs
+            full_path = lang_docs / f
+            if full_path.exists():
+                paths_to_fix.append(full_path)
+            elif f.exists():
+                paths_to_fix.append(f.resolve())
+            else:
+                console.print(f"[red]Error:[/red] File not found: {f}")
+                raise typer.Exit(code=1)
+    else:
+        # Get all translation files
+        paths_to_fix = sorted(lang_docs.rglob("*.md"))
+
+    if not paths_to_fix:
+        console.print(f"[yellow]No translation files found for {language}[/yellow]")
+        return
+
+    console.print(
+        f"[bold]Fixing {len(paths_to_fix)} translation files for {langs[language]}[/bold]"
+    )
+
+    if dry_run:
+        console.print("[yellow]DRY RUN - no changes will be made[/yellow]")
+        for p in paths_to_fix:
+            console.print(f"  Would check: {p.relative_to(REPO_ROOT)}")
+        return
+
+    # Check API key only when actually running (not dry-run)
+    check_api_key()
+
+    total_changes = 0
+    for iteration in range(1, max_iterations + 1):
+        console.print(f"\n[bold cyan]Pass {iteration}/{max_iterations}[/bold cyan]")
+
+        changes_this_pass = 0
+        for i, lang_path in enumerate(paths_to_fix, 1):
+            console.print(f"  [{i}/{len(paths_to_fix)}] {lang_path.name}", end=" ")
+
+            with Progress(
+                SpinnerColumn(),
+                TextColumn("[progress.description]{task.description}"),
+                console=console,
+                transient=True,
+            ) as progress:
+                progress.add_task("checking...", total=None)
+                changed = fix_single_file(lang_path, language)
+
+            if changed:
+                console.print("[yellow]fixed[/yellow]")
+                changes_this_pass += 1
+            else:
+                console.print("[green]OK[/green]")
+
+        total_changes += changes_this_pass
+        console.print(
+            f"  [dim]Pass {iteration} complete: {changes_this_pass} files changed[/dim]"
+        )
+
+        if changes_this_pass == 0:
+            console.print(
+                f"\n[green]All translations now comply with guidelines![/green]"
+            )
+            console.print(f"Total changes across all passes: {total_changes}")
+            return
+
+    console.print(f"\n[yellow]Max iterations ({max_iterations}) reached.[/yellow]")
+    console.print(f"Total changes: {total_changes}")
+    console.print("Some issues may remain - consider running again or manual review.")
 
 
 @app.command()
