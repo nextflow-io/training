@@ -53,21 +53,140 @@ jobs:
         id: check
         working-directory: _scripts
         run: |
-          # Determine command (push events always use 'auto')
+          # Discover all translation languages (all language dirs except 'en')
+          all_languages=$(find ../docs -maxdepth 2 -name "mkdocs.yml" -exec dirname {} \; | xargs -n1 basename | sort | grep -v '^en$' | tr '\n' ' ')
+          echo "All translation languages: $all_languages"
+
+          # Determine command to run
           if [ "${{ github.event_name }}" = "push" ]; then
-            COMMAND="auto"
+            command="auto"
           else
-            COMMAND="${{ inputs.command }}"
+            command="${{ inputs.command }}"
+          fi
+          echo "command=$command" >> $GITHUB_OUTPUT
+
+          # Helper to convert space-separated to JSON array
+          to_json_array() {
+            local input="$1"
+            if [ -z "$input" ]; then
+              echo "[]"
+            else
+              echo "$input" | xargs | sed 's/ /","/g' | sed 's/^/["/' | sed 's/$/"]/'
+            fi
+          }
+
+          # For list-* commands, just pass through the language
+          if [[ "$command" == list-* ]]; then
+            lang="${{ inputs.language }}"
+            if [ -z "$lang" ]; then
+              json_array=$(to_json_array "$all_languages")
+            else
+              if [ ! -d "../docs/$lang" ] || [ ! -f "../docs/$lang/mkdocs.yml" ]; then
+                echo "Error: Language '$lang' not found"
+                exit 1
+              fi
+              json_array="[\"$lang\"]"
+            fi
+            echo "languages_outdated=$json_array" >> $GITHUB_OUTPUT
+            echo "languages_fix=[]" >> $GITHUB_OUTPUT
+            echo "has_work=true" >> $GITHUB_OUTPUT
+            exit 0
           fi
 
-          # Run detection and capture output to GITHUB_OUTPUT
-          uv run translate.py detect-work \
-            --event-name "${{ github.event_name }}" \
-            --command "$COMMAND" \
-            ${{ inputs.language && format('--language "{0}"', inputs.language) || '' }} \
-            ${{ github.event.before && format('--before-sha "{0}"', github.event.before) || '' }} \
-            ${{ github.event.sha && format('--after-sha "{0}"', github.event.sha) || '' }} \
-            >> $GITHUB_OUTPUT
+          # For fix-translations command (manual)
+          if [ "$command" = "fix-translations" ]; then
+            lang="${{ inputs.language }}"
+            if [ -z "$lang" ]; then
+              json_array=$(to_json_array "$all_languages")
+            else
+              if [ ! -d "../docs/$lang" ] || [ ! -f "../docs/$lang/mkdocs.yml" ]; then
+                echo "Error: Language '$lang' not found"
+                exit 1
+              fi
+              json_array="[\"$lang\"]"
+            fi
+            echo "languages_outdated=[]" >> $GITHUB_OUTPUT
+            echo "languages_fix=$json_array" >> $GITHUB_OUTPUT
+            echo "has_work=true" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          # For specific update/add commands with language specified (including auto with language)
+          if [ -n "${{ inputs.language }}" ]; then
+            lang="${{ inputs.language }}"
+            if [ ! -d "../docs/$lang" ] || [ ! -f "../docs/$lang/mkdocs.yml" ]; then
+              echo "Error: Language '$lang' not found"
+              exit 1
+            fi
+
+            if [ "$command" = "auto" ]; then
+              # Auto with specific language: check if it has outdated files
+              outdated=$(uv run translate.py list-outdated "$lang" 2>/dev/null | grep -c "docs/" || echo "0")
+              if [ "$outdated" -gt 0 ]; then
+                echo "languages_outdated=[\"$lang\"]" >> $GITHUB_OUTPUT
+                echo "has_work=true" >> $GITHUB_OUTPUT
+              else
+                echo "languages_outdated=[]" >> $GITHUB_OUTPUT
+                echo "has_work=false" >> $GITHUB_OUTPUT
+              fi
+              echo "languages_fix=[]" >> $GITHUB_OUTPUT
+            else
+              # Specific command with specific language
+              echo "languages_outdated=[\"$lang\"]" >> $GITHUB_OUTPUT
+              echo "languages_fix=[]" >> $GITHUB_OUTPUT
+              echo "has_work=true" >> $GITHUB_OUTPUT
+            fi
+            exit 0
+          fi
+
+          # Auto-detect mode: separate languages needing update vs fix
+          languages_outdated=""
+          languages_fix=""
+
+          # Check for prompt changes (on push events) - these need fix-translations
+          if [ "${{ github.event_name }}" = "push" ]; then
+            changed_files=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} 2>/dev/null || echo "")
+
+            # Check if general prompt changed (affects all languages)
+            if echo "$changed_files" | grep -q '_scripts/general-llm-prompt.md'; then
+              echo "General prompt changed - all languages need fixing"
+              languages_fix="$all_languages"
+            else
+              # Check which language-specific prompts changed
+              for lang in $all_languages; do
+                if echo "$changed_files" | grep -q "docs/${lang}/llm-prompt.md"; then
+                  echo "Prompt changed for $lang"
+                  languages_fix="$languages_fix $lang"
+                fi
+              done
+            fi
+          fi
+
+          # Check each language for outdated translations (English source newer)
+          for lang in $all_languages; do
+            outdated=$(uv run translate.py list-outdated "$lang" 2>/dev/null | grep -c "docs/" || echo "0")
+            if [ "$outdated" -gt 0 ]; then
+              echo "Found $outdated outdated files for $lang"
+              languages_outdated="$languages_outdated $lang"
+            fi
+          done
+
+          # Clean up
+          languages_outdated=$(echo "$languages_outdated" | xargs)
+          languages_fix=$(echo "$languages_fix" | xargs)
+
+          if [ -z "$languages_outdated" ] && [ -z "$languages_fix" ]; then
+            echo "No languages need updates"
+            echo "has_work=false" >> $GITHUB_OUTPUT
+            echo "languages_outdated=[]" >> $GITHUB_OUTPUT
+            echo "languages_fix=[]" >> $GITHUB_OUTPUT
+          else
+            echo "Languages needing update: $languages_outdated"
+            echo "Languages needing fix: $languages_fix"
+            echo "has_work=true" >> $GITHUB_OUTPUT
+            echo "languages_outdated=$(to_json_array "$languages_outdated")" >> $GITHUB_OUTPUT
+            echo "languages_fix=$(to_json_array "$languages_fix")" >> $GITHUB_OUTPUT
+          fi
 
   translate:
     needs: detect
@@ -95,18 +214,90 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         working-directory: _scripts
         run: |
-          uv run translate.py run-batch \
-            --command "${{ needs.detect.outputs.command }}" \
-            --languages-outdated '${{ needs.detect.outputs.languages_outdated }}' \
-            --languages-fix '${{ needs.detect.outputs.languages_fix }}'
+          COMMAND="${{ needs.detect.outputs.command }}"
+          LANGUAGES_OUTDATED='${{ needs.detect.outputs.languages_outdated }}'
+          LANGUAGES_FIX='${{ needs.detect.outputs.languages_fix }}'
+
+          echo "Command: $COMMAND"
+          echo "Languages (outdated): $LANGUAGES_OUTDATED"
+          echo "Languages (fix): $LANGUAGES_FIX"
+
+          # Parse JSON arrays to space-separated lists
+          OUTDATED_LIST=$(echo "$LANGUAGES_OUTDATED" | tr -d '[]"' | tr ',' ' ')
+          FIX_LIST=$(echo "$LANGUAGES_FIX" | tr -d '[]"' | tr ',' ' ')
+
+          # Handle explicit commands (non-auto)
+          if [ "$COMMAND" != "auto" ]; then
+            # Use outdated list for most commands, fix list for fix-translations
+            if [ "$COMMAND" = "fix-translations" ]; then
+              LANG_LIST="$FIX_LIST"
+            else
+              LANG_LIST="$OUTDATED_LIST"
+            fi
+
+            for lang in $LANG_LIST; do
+              echo ""
+              echo "=========================================="
+              echo "Processing language: $lang (command: $COMMAND)"
+              echo "=========================================="
+
+              case "$COMMAND" in
+                list-outdated)
+                  uv run translate.py list-outdated "$lang"
+                  ;;
+                list-missing)
+                  uv run translate.py list-missing "$lang"
+                  ;;
+                update-outdated)
+                  uv run translate.py update-outdated --language "$lang"
+                  ;;
+                add-missing)
+                  uv run translate.py add-missing --language "$lang"
+                  ;;
+                update-and-add)
+                  uv run translate.py update-and-add --language "$lang"
+                  ;;
+                fix-translations)
+                  uv run translate.py fix-translations --language "$lang" --max-iterations 8
+                  ;;
+              esac
+            done
+            exit 0
+          fi
+
+          # Auto mode: run appropriate command per language
+          # First, update outdated translations
+          for lang in $OUTDATED_LIST; do
+            echo ""
+            echo "=========================================="
+            echo "Updating outdated translations: $lang"
+            echo "=========================================="
+            uv run translate.py update-outdated --language "$lang"
+          done
+
+          # Then, fix translations for languages with prompt changes
+          for lang in $FIX_LIST; do
+            echo ""
+            echo "=========================================="
+            echo "Fixing translations (prompt changed): $lang"
+            echo "=========================================="
+            uv run translate.py fix-translations --language "$lang" --max-iterations 8
+          done
 
       - name: Run post-processing fixer
         if: needs.detect.outputs.command != 'list-outdated' && needs.detect.outputs.command != 'list-missing'
         working-directory: _scripts
         run: |
-          uv run translate.py run-post-fix \
-            --languages-outdated '${{ needs.detect.outputs.languages_outdated }}' \
-            --languages-fix '${{ needs.detect.outputs.languages_fix }}'
+          LANGUAGES_OUTDATED='${{ needs.detect.outputs.languages_outdated }}'
+          LANGUAGES_FIX='${{ needs.detect.outputs.languages_fix }}'
+
+          # Combine and dedupe language lists
+          ALL_LANGS=$(echo "$LANGUAGES_OUTDATED $LANGUAGES_FIX" | tr -d '[]"' | tr ',' ' ' | xargs -n1 | sort -u | xargs)
+
+          for lang in $ALL_LANGS; do
+            echo "Post-processing $lang..."
+            uv run translation_fixer.py fix-all "$lang"
+          done
 
       - name: Create PR with changes
         if: needs.detect.outputs.command != 'list-outdated' && needs.detect.outputs.command != 'list-missing'
