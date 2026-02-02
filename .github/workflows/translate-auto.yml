@@ -1,4 +1,4 @@
-name: Auto-update Translations
+name: "Translate: Auto-update"
 
 # Automatically update translations when English content or prompts change
 on:
@@ -68,7 +68,7 @@ jobs:
           # Check each language for outdated translations (English source newer than translation)
           languages_with_outdated=""
           for lang in $all_languages; do
-            outdated=$(uv run python translate.py list-outdated "$lang" 2>/dev/null | grep -c "docs/" || echo "0")
+            outdated=$(uv run translate.py list-outdated "$lang" 2>/dev/null | grep -c "docs/" || echo "0")
             if [ "$outdated" -gt 0 ]; then
               echo "Found $outdated outdated files for $lang"
               if [ -n "$languages_with_outdated" ]; then
@@ -146,7 +146,7 @@ jobs:
         working-directory: _scripts
         run: |
           echo "Updating outdated translations for ${{ matrix.language }}..."
-          uv run python translate.py update-outdated --language ${{ matrix.language }}
+          uv run translate.py update-outdated --language ${{ matrix.language }}
 
       - name: Check for changes
         id: changes
@@ -224,7 +224,7 @@ jobs:
         working-directory: _scripts
         run: |
           echo "Fixing ${{ matrix.language }} translations to comply with updated prompt guidelines..."
-          uv run python translate.py fix-translations --language ${{ matrix.language }} --max-iterations 8
+          uv run translate.py fix-translations --language ${{ matrix.language }} --max-iterations 8
 
       - name: Check for changes
         id: changes

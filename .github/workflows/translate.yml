@@ -56,26 +56,26 @@ jobs:
         run: |
           case "$COMMAND" in
             list-outdated)
-              uv run python translate.py list-outdated "$LANGUAGE"
+              uv run translate.py list-outdated "$LANGUAGE"
               ;;
             list-missing)
-              uv run python translate.py list-missing "$LANGUAGE"
+              uv run translate.py list-missing "$LANGUAGE"
               ;;
             update-outdated)
-              uv run python translate.py update-outdated --language "$LANGUAGE"
+              uv run translate.py update-outdated --language "$LANGUAGE"
               ;;
             add-missing)
-              uv run python translate.py add-missing --language "$LANGUAGE"
+              uv run translate.py add-missing --language "$LANGUAGE"
               ;;
             update-and-add)
-              uv run python translate.py update-and-add --language "$LANGUAGE"
+              uv run translate.py update-and-add --language "$LANGUAGE"
               ;;
           esac
 
       - name: Fix translations
         if: inputs.command == 'update-outdated' || inputs.command == 'add-missing' || inputs.command == 'update-and-add'
         working-directory: _scripts
-        run: uv run python translation_fixer.py fix-all ${{ inputs.language }}
+        run: uv run translation_fixer.py fix-all ${{ inputs.language }}
 
       - name: Create PR with changes
         if: inputs.command == 'update-outdated' || inputs.command == 'add-missing' || inputs.command == 'update-and-add'
@@ -87,7 +87,7 @@ jobs:
           COMMAND: ${{ inputs.command }}
         working-directory: _scripts
         run: |
-          uv run python translate.py make-pr \
+          uv run translate.py make-pr \
             --language "$LANGUAGE" \
             --command "$COMMAND" \
             --github-token "$GITHUB_TOKEN" \
