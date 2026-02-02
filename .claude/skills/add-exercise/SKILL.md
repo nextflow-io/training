@@ -1,4 +1,5 @@
 ---
+name: add-exercise
 description: Add an exercise with solution to an existing lesson
 ---
 

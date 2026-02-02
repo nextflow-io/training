@@ -1,4 +1,5 @@
 ---
+name: new-module
 description: Scaffold a new complete training module with all standard files
 ---
 

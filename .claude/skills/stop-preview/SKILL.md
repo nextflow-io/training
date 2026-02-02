@@ -1,4 +1,5 @@
 ---
+name: stop-preview
 description: Stop the running MkDocs preview server
 ---
 

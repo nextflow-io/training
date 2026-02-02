@@ -1,4 +1,5 @@
 ---
+name: new-lesson
 description: Create a new lesson page within an existing training module
 ---
 
