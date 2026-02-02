@@ -5,9 +5,11 @@
  * This workflow contains several intentional bugs for learning purposes
  */
 
-// Parameters with missing validation
-params.input = 'data/sample_data.csv'
-params.output = 'results'
+params{
+    // Parameters with missing validation
+    input: Path = 'data/sample_data.csv'
+    output: String = 'results'
+}
 
 /*
  * Process with input/output mismatch
@@ -16,10 +18,10 @@ process processFiles {
     publishDir "${params.output}/processed", mode: 'copy'
 
     input:
-        tuple val(sample_id), path(input_file)
+    tuple val(sample_id), path(input_file)
 
     output:
-        path "${sample_id}_result.txt",
+    path "${sample_id}_result.txt",
 
     script:
     """
@@ -36,10 +38,10 @@ process heavyProcess {
     time '1 ms'
 
     input:
-        val sample_id
+    val sample_id
 
     output:
-        path "${sample_id}_heavy.txt"
+    path "${sample_id}_heavy.txt"
 
     script:
     """
@@ -57,10 +59,10 @@ process handleFiles {
     publishDir "${params.output}/files", mode: 'copy'
 
     input:
-        path input_file
+    path input_file
 
     output:
-        path "processed_${input_file}"
+    path "processed_${input_file}"
 
     script:
     """

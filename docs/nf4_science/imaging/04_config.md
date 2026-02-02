@@ -141,7 +141,7 @@ Notice all processes show `cached: 2` or `cached: 1` - nothing was re-executed!
 
 ### 2.4. Test profiles
 
-Test profiles provide quick ways to specify default input parameters adn datafiles to let you verify the pipeline works.
+Test profiles provide quick ways to specify default input parameters and datafiles to let you verify the pipeline works.
 nf-core pipelines will always include at least two test profiles:
 
 - `test`: Small dataset with fast parameters for quick testing

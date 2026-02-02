@@ -95,24 +95,26 @@ Let's break down these parameters:
 
 After a few moments, you'll see an error like this:
 
-```console title="Error output"
-ERROR ~ Error executing process > 'NFCORE_MOLKART:MOLKART:MINDAGAP_DUPLICATEFINDER (mem_only)'
+??? failure "Command output"
 
-Caused by:
-  Process `NFCORE_MOLKART:MOLKART:MINDAGAP_DUPLICATEFINDER (mem_only)` terminated with an error exit status (127)
+    ```console
+    ERROR ~ Error executing process > 'NFCORE_MOLKART:MOLKART:MINDAGAP_DUPLICATEFINDER (mem_only)'
 
-Command executed:
+    Caused by:
+      Process `NFCORE_MOLKART:MOLKART:MINDAGAP_DUPLICATEFINDER (mem_only)` terminated with an error exit status (127)
 
-  duplicate_finder.py \
-      spots.txt \
-      90
+    Command executed:
 
-Command exit status:
-  127
+      duplicate_finder.py \
+          spots.txt \
+          90
 
-Command error:
-  .command.sh: line 3: duplicate_finder.py: command not found
-```
+    Command exit status:
+      127
+
+    Command error:
+      .command.sh: line 3: duplicate_finder.py: command not found
+    ```
 
 **What's happening here?**
 
@@ -202,84 +204,86 @@ This time, Nextflow will:
 
 As the pipeline runs, you'll see output similar to this:
 
-```console title="Output"
-Nextflow 25.04.8 is available - Please consider updating your version to it
+??? success "Command output"
 
- N E X T F L O W   ~  version 25.04.3
+    ```console
+    Nextflow 25.04.8 is available - Please consider updating your version to it
 
-Launching `https://github.com/nf-core/molkart` [soggy_kalam] DSL2 - revision: 5e54b29cb3 [dev]
+    N E X T F L O W   ~  version 25.04.3
+
+    Launching `https://github.com/nf-core/molkart` [soggy_kalam] DSL2 - revision: 5e54b29cb3 [dev]
 
 
-------------------------------------------------------
-                                        ,--./,-.
-        ___     __   __   __   ___     /,-._.--~'
-  |\ | |__  __ /  ` /  \ |__) |__         }  {
-  | \| |       \__, \__/ |  \ |___     \`-._,-`-,
-                                        `._,._,'
-  nf-core/molkart 1.2.0dev
-------------------------------------------------------
-Segmentation methods and options
-  segmentation_method       : mesmer,cellpose,stardist
+    ------------------------------------------------------
+                                            ,--./,-.
+            ___     __   __   __   ___     /,-._.--~'
+      |\ | |__  __ /  ` /  \ |__) |__         }  {
+      | \| |       \__, \__/ |  \ |___     \`-._,-`-,
+                                            `._,._,'
+      nf-core/molkart 1.2.0dev
+    ------------------------------------------------------
+    Segmentation methods and options
+      segmentation_method       : mesmer,cellpose,stardist
 
-Image preprocessing
-  mindagap_boxsize          : 7
-  mindagap_loopnum          : 100
-  clahe_kernel              : 25
-  mindagap_tilesize         : 90
-  clahe_pyramid_tile        : 368
+    Image preprocessing
+      mindagap_boxsize          : 7
+      mindagap_loopnum          : 100
+      clahe_kernel              : 25
+      mindagap_tilesize         : 90
+      clahe_pyramid_tile        : 368
 
-Input/output options
-  input                     : https://raw.githubusercontent.com/nf-core/test-datasets/molkart/test_data/samplesheets/samplesheet_membrane.csv
-  outdir                    : results
+    Input/output options
+      input                     : https://raw.githubusercontent.com/nf-core/test-datasets/molkart/test_data/samplesheets/samplesheet_membrane.csv
+      outdir                    : results
 
-Institutional config options
-  config_profile_name       : Test profile
-  config_profile_description: Minimal test dataset to check pipeline function
+    Institutional config options
+      config_profile_name       : Test profile
+      config_profile_description: Minimal test dataset to check pipeline function
 
-Generic options
-  trace_report_suffix       : 2025-10-18_22-22-21
+    Generic options
+      trace_report_suffix       : 2025-10-18_22-22-21
 
-Core Nextflow options
-  revision                  : dev
-  runName                   : soggy_kalam
-  containerEngine           : docker
-  launchDir                 : /workspaces/training/nf4-science/imaging
-  workDir                   : /workspaces/training/nf4-science/imaging/work
-  projectDir                : /workspaces/.nextflow/assets/nf-core/molkart
-  userName                  : root
-  profile                   : docker,test
-  configFiles               :
+    Core Nextflow options
+      revision                  : dev
+      runName                   : soggy_kalam
+      containerEngine           : docker
+      launchDir                 : /workspaces/training/nf4-science/imaging
+      workDir                   : /workspaces/training/nf4-science/imaging/work
+      projectDir                : /workspaces/.nextflow/assets/nf-core/molkart
+      userName                  : root
+      profile                   : docker,test
+      configFiles               :
 
-!! Only displaying parameters that differ from the pipeline defaults !!
-------------------------------------------------------
-* The pipeline
-    https://doi.org/10.5281/zenodo.10650748
+    !! Only displaying parameters that differ from the pipeline defaults !!
+    ------------------------------------------------------
+    * The pipeline
+        https://doi.org/10.5281/zenodo.10650748
 
-* The nf-core framework
-    https://doi.org/10.1038/s41587-020-0439-x
+    * The nf-core framework
+        https://doi.org/10.1038/s41587-020-0439-x
 
-* Software dependencies
-    https://github.com/nf-core/molkart/blob/master/CITATIONS.md
+    * Software dependencies
+        https://github.com/nf-core/molkart/blob/master/CITATIONS.md
 
-executor >  local (22)
-[c1/da5009] NFCORE_MOLKART:MOLKART:MINDAGAP_MINDAGAP (mem_only)        [100%] 2 of 2 ✔
-[73/8f5e8a] NFCORE_MOLKART:MOLKART:CLAHE (mem_only)                    [100%] 2 of 2 ✔
-[ec/8f84d5] NFCORE_MOLKART:MOLKART:CREATE_STACK (mem_only)             [100%] 1 of 1 ✔
-[a2/99349b] NFCORE_MOLKART:MOLKART:MINDAGAP_DUPLICATEFINDER (mem_only) [100%] 1 of 1 ✔
-[95/c9b4b1] NFCORE_MOLKART:MOLKART:DEEPCELL_MESMER (mem_only)          [100%] 1 of 1 ✔
-[d4/1ebd1e] NFCORE_MOLKART:MOLKART:STARDIST (mem_only)                 [100%] 1 of 1 ✔
-[3e/3c0736] NFCORE_MOLKART:MOLKART:CELLPOSE (mem_only)                 [100%] 1 of 1 ✔
-[a0/415c6a] NFCORE_MOLKART:MOLKART:MASKFILTER (mem_only)               [100%] 3 of 3 ✔
-[14/a830c9] NFCORE_MOLKART:MOLKART:SPOT2CELL (mem_only)                [100%] 3 of 3 ✔
-[b5/391836] NFCORE_MOLKART:MOLKART:CREATE_ANNDATA (mem_only)           [100%] 3 of 3 ✔
-[77/aed558] NFCORE_MOLKART:MOLKART:MOLKARTQC (mem_only)                [100%] 3 of 3 ✔
-[e6/b81475] NFCORE_MOLKART:MOLKART:MULTIQC                             [100%] 1 of 1 ✔
--[nf-core/molkart] Pipeline completed successfully-
-Completed at: 19-Oct-2025 22:23:01
-Duration    : 2m 52s
-CPU hours   : 0.1
-Succeeded   : 22
-```
+    executor >  local (22)
+    [c1/da5009] NFCORE_MOLKART:MOLKART:MINDAGAP_MINDAGAP (mem_only)        [100%] 2 of 2 ✔
+    [73/8f5e8a] NFCORE_MOLKART:MOLKART:CLAHE (mem_only)                    [100%] 2 of 2 ✔
+    [ec/8f84d5] NFCORE_MOLKART:MOLKART:CREATE_STACK (mem_only)             [100%] 1 of 1 ✔
+    [a2/99349b] NFCORE_MOLKART:MOLKART:MINDAGAP_DUPLICATEFINDER (mem_only) [100%] 1 of 1 ✔
+    [95/c9b4b1] NFCORE_MOLKART:MOLKART:DEEPCELL_MESMER (mem_only)          [100%] 1 of 1 ✔
+    [d4/1ebd1e] NFCORE_MOLKART:MOLKART:STARDIST (mem_only)                 [100%] 1 of 1 ✔
+    [3e/3c0736] NFCORE_MOLKART:MOLKART:CELLPOSE (mem_only)                 [100%] 1 of 1 ✔
+    [a0/415c6a] NFCORE_MOLKART:MOLKART:MASKFILTER (mem_only)               [100%] 3 of 3 ✔
+    [14/a830c9] NFCORE_MOLKART:MOLKART:SPOT2CELL (mem_only)                [100%] 3 of 3 ✔
+    [b5/391836] NFCORE_MOLKART:MOLKART:CREATE_ANNDATA (mem_only)           [100%] 3 of 3 ✔
+    [77/aed558] NFCORE_MOLKART:MOLKART:MOLKARTQC (mem_only)                [100%] 3 of 3 ✔
+    [e6/b81475] NFCORE_MOLKART:MOLKART:MULTIQC                             [100%] 1 of 1 ✔
+    -[nf-core/molkart] Pipeline completed successfully-
+    Completed at: 19-Oct-2025 22:23:01
+    Duration    : 2m 52s
+    CPU hours   : 0.1
+    Succeeded   : 22
+    ```
 
 Notice how this output is more detailed than our Hello World example because of the nf-core conventions the pipeline follows:
 
@@ -522,7 +526,7 @@ nextflow run ./molkart \
   -resume
 ```
 
-You should see output like:
+You should see output like: <!-- TODO: full output -->
 
 ```console
 executor >  local (0)

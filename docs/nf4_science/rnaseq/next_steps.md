@@ -28,8 +28,6 @@ As you move forward with your work, you're going to want to learn how to use the
 
 To that end, we are currently working on a **collection of [Side Quests](../side_quests/index.md)**, which are meant to be short standalone courses that go deep into specific topics like testing and metadata handling.
 
-For any topics that's not covered there yet, **browse the [Fundamentals Training](../basic_training/index.md) and [Advanced Training](../advanced/index.md)** to find training materials about the topics that interest you.
-
 ---
 
 ## 2. Check out Seqera Platform

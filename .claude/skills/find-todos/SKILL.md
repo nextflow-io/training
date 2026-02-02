@@ -7,15 +7,7 @@ description: Search markdown files, Nextflow scripts, and config files for TODO/
 
 Search the training materials codebase for TODO and FIXME comments to identify pending work.
 
-## Working Directory
-
-**IMPORTANT**: All commands in this skill must be executed from the repository root directory.
-
-- The repository root is the directory containing `mkdocs.yml`, `docs/`, and `.github/`
-- Verify you are in the correct directory before running any commands (check for these files/folders)
-- All file paths in this skill are relative to the repository root
-- Do not change directories during skill execution
-- Use paths relative to repository root only
+Execute from repository root. See [../shared/repo-conventions.md](../shared/repo-conventions.md) for directory structure.
 
 ## Tasks to Perform
 
@@ -86,7 +78,7 @@ Provide an organized report:
 
 ## Code TODOs
 
-### nf-training/script7.nf:23
+### hello-nextflow/hello-world.nf:23
 
 ```groovy
 // TODO: Add error handling for missing files
@@ -118,7 +110,7 @@ Known limitation documented - needs upstream fix in mkdocs plugin
 
 1. docs/side_quests/debugging.md (5)
 2. docs/nf4_science/genomics/01_per_sample_variant_calling.md (3)
-3. nf-training/script7.nf (2)
+3. hello-nextflow/hello-world.nf (2)
 
 ```
 

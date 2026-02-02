@@ -1,3 +1,9 @@
+# Complex formatting on the home and help pages
+docs/index.md
+docs/help.md
+docs/envsetup/index.md
+docs/hello_nextflow/index.md
+
 # Ignore all files in side-quests/solutions
 side-quests/solutions/nf-core/**/*.js
 side-quests/solutions/nf-core/**/*.md

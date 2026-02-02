@@ -345,14 +345,16 @@ First, try running without the required `input` parameter:
 nextflow run . --outdir test-results -profile docker
 ```
 
-```console title="Output"
-ERROR ~ Validation of pipeline parameters failed!
+??? warning "Command output"
 
- -- Check '.nextflow.log' file for details
-The following invalid input values have been detected:
+    ```console
+    ERROR ~ Validation of pipeline parameters failed!
 
-* Missing required parameter(s): input, batch
-```
+    -- Check '.nextflow.log' file for details
+    The following invalid input values have been detected:
+
+    * Missing required parameter(s): input, batch
+    ```
 
 Perfect! The validation catches the missing required parameter before the pipeline runs.
 
@@ -361,6 +363,21 @@ Now try with a valid set of parameters:
 ```bash
 nextflow run . --input assets/greetings.csv --outdir results --batch my-batch -profile test,docker
 ```
+
+??? success "Command output"
+
+    ```console
+     N E X T F L O W   ~  version 25.04.3
+
+    Launching `./main.nf` [peaceful_wozniak] DSL2 - revision: b9e9b3b8de
+
+    executor >  local (8)
+    [de/a1b2c3] CORE_HELLO:HELLO:sayHello (3)       | 3 of 3 ✔
+    [4f/d5e6f7] CORE_HELLO:HELLO:convertToUpper (3) | 3 of 3 ✔
+    [8a/b9c0d1] CORE_HELLO:HELLO:CAT_CAT (test)     | 1 of 1 ✔
+    [e2/f3a4b5] CORE_HELLO:HELLO:COWPY (test)       | 1 of 1 ✔
+    -[core/hello] Pipeline completed successfully-
+    ```
 
 The pipeline should run successfully, and the `batch` parameter is now validated.
 
@@ -646,28 +663,29 @@ Let's verify that our validation works by testing both valid and invalid inputs.
 
 #### 2.7.1. Test with valid input
 
-First, confirm the pipeline runs successfully with valid input:
+First, confirm the pipeline runs successfully with valid input.
+Note that we no longer need `--validate_params false` since validation is working!
 
 ```bash
 nextflow run . --outdir core-hello-results -profile test,docker
 ```
 
-Note that we no longer need `--validate_params false` since validation is working!
+??? success "Command output"
 
-```console title="Output"
-------------------------------------------------------
-WARN: The following invalid input values have been detected:
+    ```console
+    ------------------------------------------------------
+    WARN: The following invalid input values have been detected:
 
-* --character: tux
+    * --character: tux
 
 
-executor >  local (10)
-[c1/39f64a] CORE_HELLO:HELLO:sayHello (1)       | 4 of 4 ✔
-[44/c3fb82] CORE_HELLO:HELLO:convertToUpper (4) | 4 of 4 ✔
-[62/80fab2] CORE_HELLO:HELLO:CAT_CAT (test)     | 1 of 1 ✔
-[e1/4db4fd] CORE_HELLO:HELLO:COWPY              | 1 of 1 ✔
--[core/hello] Pipeline completed successfully-
-```
+    executor >  local (8)
+    [c1/39f64a] CORE_HELLO:HELLO:sayHello (1)       | 3 of 3 ✔
+    [44/c3fb82] CORE_HELLO:HELLO:convertToUpper (3) | 3 of 3 ✔
+    [62/80fab2] CORE_HELLO:HELLO:CAT_CAT (test)     | 1 of 1 ✔
+    [e1/4db4fd] CORE_HELLO:HELLO:COWPY (test)       | 1 of 1 ✔
+    -[core/hello] Pipeline completed successfully-
+    ```
 
 Great! The pipeline runs successfully and validation passes silently.
 The warning about `--character` is just informational since it's not defined in the schema.
@@ -711,20 +729,45 @@ Try running the pipeline with this invalid input:
 nextflow run . --input assets/invalid_greetings.csv --outdir test-results -profile docker
 ```
 
-```console title="Output (subset)"
-ERROR ~ Validation of pipeline parameters failed!
+??? failure "Command output"
 
- -- Check '.nextflow.log' file for details
-The following invalid input values have been detected:
+    ```console
+    N E X T F L O W   ~  version 24.10.4
 
-* Missing required parameter(s): batch
-* --input (/tmp/invalid_greetings.csv): Validation of file failed:
+    Launching `./main.nf` [trusting_ochoa] DSL2 - revision: b9e9b3b8de
+
+    Input/output options
+      input              : assets/invalid_greetings.csv
+      outdir             : test-results
+
+    Generic options
+      trace_report_suffix: 2025-01-27_03-16-04
+
+    Core Nextflow options
+      runName            : trusting_ochoa
+      containerEngine    : docker
+      launchDir          : /workspace/hello-nf-core
+      workDir            : /workspace/hello-nf-core/work
+      projectDir         : /workspace/hello-nf-core
+      userName           : user
+      profile            : docker
+      configFiles        : /workspace/hello-nf-core/nextflow.config
+
+    !! Only displaying parameters that differ from the pipeline defaults !!
+    ------------------------------------------------------
+    ERROR ~ Validation of pipeline parameters failed!
+
+     -- Check '.nextflow.log' file for details
+    The following invalid input values have been detected:
+
+    * Missing required parameter(s): batch
+    * --input (assets/invalid_greetings.csv): Validation of file failed:
         -> Entry 1: Missing required field(s): greeting
         -> Entry 2: Missing required field(s): greeting
         -> Entry 3: Missing required field(s): greeting
 
- -- Check script 'subworkflows/nf-core/utils_nfschema_plugin/main.nf' at line: 68 or see '.nextflow.log' file for more details
-```
+     -- Check script 'subworkflows/nf-core/utils_nfschema_plugin/main.nf' at line: 68 or see '.nextflow.log' file for more details
+    ```
 
 Perfect! The validation caught the error and provided a clear, helpful error message pointing to:
 

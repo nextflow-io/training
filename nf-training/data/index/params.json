@@ -1,7 +1,0 @@
-{
-    "samples": [
-        ["gut", "/data/ggal/gut_1.fq", "/data/ggal/gut_2.fq"],
-        ["lung", "/data/ggal/lung_1.fq", "/data/ggal/lung_2.fq"],
-        ["liver", "/data/ggal/liver_1.fq", "/data/ggal/liver_2.fq"]
-    ]
-}

@@ -210,10 +210,10 @@ process sayHello {
     publishDir 'results', mode: 'copy'
 
     input:
-        val greeting
+    val greeting
 
     output:
-        path 'output.txt'
+    path 'output.txt'
 
     script:
     """
@@ -255,10 +255,10 @@ process sayHello {
     publishDir 'results', mode: 'copy'
 
     input:
-        val greeting
+    val greeting
 
     output:
-        path 'output.txt'
+    path 'output.txt'
 
     script:
     """
@@ -352,20 +352,15 @@ To use it, simply add `-resume` to your command and run it:
 nextflow run hello-world.nf --greeting 'Hello World!' -resume
 ```
 
-The console output should look similar.
+??? success "Command output"
 
-<details>
-  <summary>Command output</summary>
+    ```console
+    N E X T F L O W   ~  version 25.04.3
 
-```console linenums="1"
- N E X T F L O W   ~  version 25.04.3
+    Launching `hello-world.nf` [tiny_noyce] DSL2 - revision: c33d41f479
 
-Launching `hello-world.nf` [tiny_noyce] DSL2 - revision: c33d41f479
-
-[a3/7be2fa] process > sayHello [100%] 1 of 1, cached: 1 ✔
-```
-
-</details>
+    [a3/7be2fa] process > sayHello [100%] 1 of 1, cached: 1 ✔
+    ```
 
 Look for the `cached:` bit that has been added in the process status line (line 5), which means that Nextflow has recognized that it has already done this work and simply reused the result from the previous successful run.
 

@@ -34,8 +34,13 @@ ENCSR000CPO2,/workspaces/training/nf4-science/rnaseq/data/reads/ENCSR000CPO2_1.f
 Let's rename the primary input parameter to `input_csv` and change the default to be the path to the `single-end.csv` file.
 
 ```groovy title="rnaseq.nf" linenums="13"
-// Primary input
-params.input_csv = "data/single-end.csv"
+params {
+    // Primary input
+    input_csv: Path = "data/single-end.csv"
+
+    // Reference genome archive
+    hisat2_index_zip: Path = "data/genome_index.tar.gz"
+}
 ```
 
 ### 1.2. Update the input channel factory to handle a CSV as input
@@ -55,18 +60,20 @@ We're going to want to load the contents of the file into the channel instead of
 nextflow run rnaseq.nf
 ```
 
+??? success "Command output"
+
+    ```console
+    N E X T F L O W   ~  version 24.10.0
+
+    Launching `rnaseq.nf` [golden_curry] DSL2 - revision: 2a5ba5be1e
+
+    executor >  local (18)
+    [07/3ff9c5] FASTQC (6)       [100%] 6 of 6 ✔
+    [cc/16859f] TRIM_GALORE (6)  [100%] 6 of 6 ✔
+    [68/4c27b5] HISAT2_ALIGN (6) [100%] 6 of 6 ✔
+    ```
+
 This time we see each step gets run 6 times, on each of the 6 data files we provided.
-
-```console title="Output"
- N E X T F L O W   ~  version 24.10.0
-
-Launching `rnaseq.nf` [golden_curry] DSL2 - revision: 2a5ba5be1e
-
-executor >  local (18)
-[07/3ff9c5] FASTQC (6)       [100%] 6 of 6 ✔
-[cc/16859f] TRIM_GALORE (6)  [100%] 6 of 6 ✔
-[68/4c27b5] HISAT2_ALIGN (6) [100%] 6 of 6 ✔
-```
 
 That's all it took to get the workflow to run on multiple files!
 Nextflow handles all the parallelism for us.
@@ -126,11 +133,16 @@ include { MULTIQC } from './modules/multiqc.nf'
 ### 2.3. Add a `report_id` parameter and give it a sensible default
 
 ```groovy title="rnaseq.nf" linenums="9"
-/*
- * Pipeline parameters
- */
-params.hisat2_index_zip = "data/genome_index.tar.gz"
-params.report_id = "all_single-end"
+params {
+    // Primary input
+    input_csv: Path = "data/single-end.csv"
+
+    // Reference genome archive
+    hisat2_index_zip: Path = "data/genome_index.tar.gz"
+
+    // Report ID
+    report_id: String = "all_single-end"
+}
 ```
 
 ### 2.4. Call the process on the outputs of the previous steps
@@ -216,19 +228,21 @@ workflow {
 nextflow run rnaseq.nf -resume
 ```
 
+??? success "Command output"
+
+    ```console
+    N E X T F L O W   ~  version 24.10.0
+
+    Launching `rnaseq.nf` [modest_pare] DSL2 - revision: fc724d3b49
+
+    executor >  local (1)
+    [07/3ff9c5] FASTQC (6)       [100%] 6 of 6, cached: 6 ✔
+    [2c/8d8e1e] TRIM_GALORE (5)  [100%] 6 of 6, cached: 6 ✔
+    [a4/7f9c44] HISAT2_ALIGN (6) [100%] 6 of 6, cached: 6 ✔
+    [56/e1f102] MULTIQC          [100%] 1 of 1 ✔
+    ```
+
 This time we see a single call to MULTIQC added after the cached process calls:
-
-```console title="Output"
- N E X T F L O W   ~  version 24.10.0
-
-Launching `rnaseq.nf` [modest_pare] DSL2 - revision: fc724d3b49
-
-executor >  local (1)
-[07/3ff9c5] FASTQC (6)       [100%] 6 of 6, cached: 6 ✔
-[2c/8d8e1e] TRIM_GALORE (5)  [100%] 6 of 6, cached: 6 ✔
-[a4/7f9c44] HISAT2_ALIGN (6) [100%] 6 of 6, cached: 6 ✔
-[56/e1f102] MULTIQC          [100%] 1 of 1 ✔
-```
 
 You can find the outputs under `results/trimming` as specified in the `TRIM_GALORE` process by the `publishDir` directive.
 
@@ -301,8 +315,16 @@ ENCSR000CPO2,/workspaces/training/nf4-science/rnaseq/data/reads/ENCSR000CPO2_1.f
 Let's change the `input_csv` default to be the path to the `paired-end.csv` file.
 
 ```groovy title="rnaseq_pe.nf" linenums="15"
-// Primary input
-params.input_csv = "data/paired-end.csv"
+params {
+    // Primary input
+    input_csv: Path = "data/paired-end.csv"
+
+    // Reference genome archive
+    hisat2_index_zip: Path = "data/genome_index.tar.gz"
+
+    // Report ID
+    report_id: String = "all_single-end"
+}
 ```
 
 ### 3.3. Update the channel factory
@@ -412,11 +434,16 @@ Replace `TRIM_GALORE.out.fastqc_reports,` with `TRIM_GALORE.out.fastqc_reports_1
 While we're on MultiQC, let's also update the `report_id` parameter default from `"all_single-end"` to `"all_paired-end"`.
 
 ```groovy title="rnaseq_pe.nf" linenums="9"
-/*
- * Pipeline parameters
- */
-params.hisat2_index_zip = "data/genome_index.tar.gz"
-params.report_id = "all_paired-end"
+params {
+    // Primary input
+    input_csv: Path = "data/paired-end.csv"
+
+    // Reference genome archive
+    hisat2_index_zip: Path = "data/genome_index.tar.gz"
+
+    // Report ID
+    report_id: String = "all_paired-end"
+}
 ```
 
 ### 3.7. Make a paired-end version of the HISAT2_ALIGN process
@@ -459,23 +486,25 @@ include { HISAT2_ALIGN } from './modules/hisat2_align_pe.nf'
 
 ### 3.8. Run the workflow to test that it works
 
+We don't use `-resume` since this wouldn't cache, and there's twice as much data to process than before, but it should still complete in under a minute.
+
 ```bash
 nextflow run rnaseq_pe.nf
 ```
 
-We don't use `-resume` since this wouldn't cache, and there's twice as much data to process than before, but it should still complete in under a minute.
+??? success "Command output"
 
-```console title="Output"
- N E X T F L O W   ~  version 24.10.0
+    ```console
+    N E X T F L O W   ~  version 24.10.0
 
-Launching `rnaseq_pe.nf` [reverent_kare] DSL2 - revision: 9c376cc219
+    Launching `rnaseq_pe.nf` [reverent_kare] DSL2 - revision: 9c376cc219
 
-executor >  local (19)
-[c5/cbde15] FASTQC (5)       [100%] 6 of 6 ✔
-[e4/fa2784] TRIM_GALORE (5)  [100%] 6 of 6 ✔
-[3a/e23049] HISAT2_ALIGN (5) [100%] 6 of 6 ✔
-[e6/a3ccd9] MULTIQC          [100%] 1 of 1 ✔
-```
+    executor >  local (19)
+    [c5/cbde15] FASTQC (5)       [100%] 6 of 6 ✔
+    [e4/fa2784] TRIM_GALORE (5)  [100%] 6 of 6 ✔
+    [3a/e23049] HISAT2_ALIGN (5) [100%] 6 of 6 ✔
+    [e6/a3ccd9] MULTIQC          [100%] 1 of 1 ✔
+    ```
 
 And that's it! Now we have two slightly divergent versions of our workflow, one for single-end read data and one for paired-end data.
 The next logical step would be to make the workflow accept either data type on the fly, which is out of scope for this course, but we may tackle that in a follow-up.

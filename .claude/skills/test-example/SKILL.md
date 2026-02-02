@@ -7,22 +7,16 @@ description: Test a Nextflow script by running it, verifying outputs, testing re
 
 Test a Nextflow example script and verify it matches the documentation.
 
+See [../shared/repo-conventions.md](../shared/repo-conventions.md) for directory mapping.
+
 ## Working Directory
 
-**IMPORTANT**: This skill works with directories in two phases:
+This skill works in two phases:
 
-1. **Initial phase** - Start from repository root
+1. **Initial phase**: Start from repository root for finding scripts and reading documentation
+2. **Execution phase**: Change to the script's directory for running Nextflow (ensures relative paths work)
 
-   - Repository root is the directory containing `mkdocs.yml`, `docs/`, and `.github/`
-   - Verify you are in the correct directory (check for these files/folders)
-   - Use this for finding scripts and reading documentation
-   - All Grep and Glob operations use repository root paths
-
-2. **Execution phase** - Change to the script's directory for running Nextflow
-   - Use `cd` to the script's directory before running `nextflow run`
-   - This ensures relative paths in the script work correctly
-
-After testing, return to repository root or use absolute paths for final documentation checks.
+Return to repository root after testing for final documentation checks.
 
 ## Tasks to Perform
 

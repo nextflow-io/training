@@ -13,8 +13,6 @@ process SAMTOOLS_INDEX {
 
     container
 
-    publishDir
-
     input:
 
     output:

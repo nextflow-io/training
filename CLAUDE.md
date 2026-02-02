@@ -38,7 +38,7 @@ prettier --write docs/**/*.md
   - `hello_nf-core/` - nf-core framework training
   - `nf4_science/` - Domain-specific training (genomics, RNAseq)
   - `side_quests/` - Advanced topics
-- `nf-training/`, `nf4-science/`, etc. - Example Nextflow scripts for lessons
+- `hello-nextflow/`, `nf4-science/`, etc. - Example Nextflow scripts for lessons
 - `mkdocs.yml` - Site navigation and configuration
 - `.github/check_headings.py` - Validates heading numbering
 

@@ -8,15 +8,18 @@ include { HISAT2_ALIGN } from './modules/hisat2_align.nf'
 /*
  * Pipeline parameters
  */
-params.hisat2_index_zip = "data/genome_index.tar.gz"
+params {
+    // Primary input
+    input_csv: Path = "data/single-end.csv"
 
-// Primary input
-params.input_csv = "data/single-end.csv"
+    // Reference genome archive
+    hisat2_index_zip: Path = "data/genome_index.tar.gz"
+}
 
 workflow {
     // Create input channel from the contents of a CSV file
     read_ch = channel.fromPath(params.input_csv)
-        .splitCsv(header:true)
+        .splitCsv(header: true)
         .map { row -> file(row.fastq_path) }
 
     /// Initial quality control
@@ -26,6 +29,5 @@ workflow {
     TRIM_GALORE(read_ch)
 
     // Alignment to a reference genome
-    HISAT2_ALIGN(TRIM_GALORE.out.trimmed_reads, file (params.hisat2_index_zip))
-
+    HISAT2_ALIGN(TRIM_GALORE.out.trimmed_reads, file(params.hisat2_index_zip))
 }

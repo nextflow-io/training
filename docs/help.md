@@ -1,19 +1,75 @@
-# Getting Help
+---
+title: Getting help
+description: Helpful resources when you have a problem with Nextflow training
+hide:
+  - toc
+  - footer
+---
 
-## Nextflow Documentation
+# Getting help
 
-Nextflow has an excellent set of [docs](https://nextflow.io/docs/latest/), which should be your first destination whenever you run into something you don't understand or want to learn more about. You can browse topics or search for specific terms.
+Whether you're having a hard time getting started, get stuck mid-way or have follow-up question, don't hesitate to reach out! Our community team is here to help, and the Nextflow community at large is very active, inclusive and eager to help.
 
-## Community forum
+Here are the main options available depending on what you're looking for.
 
-If you're struggling with the training, please don't hesitate to reach out for help. Our amazing community is one of the great strengths of Nextflow!
+<div class="grid cards" markdown>
 
-The [Seqera community forum](https://community.seqera.io) is a great place to ask questions about Nextflow. It's also a great place to find answers to questions that have already been asked!
+-   :material-forum-outline:{ .lg .middle } __Community forum__
 
-If you can't find a solution to your problem, just log in and click the "New Topic" button to post your question in the [Ask for Help](https://community.seqera.io/c/help/37) category. Feel free to include any tags you think might be relevant, since those can help our team and your peers find and answer your question.
+    ---
 
-## Professional support
+    Our Community forum has a category dedicated to training, which is a great place to post questions or report any problems you may be having with the training. You may even find your question has already been asked --and answered!
 
-Nextflow is a free and open-source software developed by [Seqera](https://seqera.io/), a company headquartered in Spain with satellite offices in the UK and the US.
+    [Join the training forum:material-arrow-right:](https://community.seqera.io/c/training/39){ .md-button .md-button--primary .mt-1 }
 
-Seqera offers professional support services for Nextflow and associated products, including bespoke training sessions. If this sounds like something that might be of interest to you, please [Get in touch](https://seqera.io/demo/).
+-   :material-slack:{ .lg .middle } __Slack channel__
+
+    ---
+
+    If you're on Slack, you're welcome to reach out to us in the training channel in the Nextflow Slack workspace. The Nextflow Slack is a great place to chat with fellow developers and engage with the Nextflow community in general.
+
+    [Join the Nextflow Slack :material-arrow-right:](https://www.nextflow.io/slack-invite.html){ .md-button .md-button--primary .mt-1 }
+
+-   :material-github:{ .lg .middle } __Github issues__
+
+    ---
+
+    If you spot an error in the training materials, please report it by opening an issue in the Github repository. Whether it's a typo, a formatting issue or an actual bug that affects the code, let us know so we can fix it! We also welcome PRs directly.
+
+    [Report an issue:material-arrow-right:](https://github.com/nextflow-io/training/issues){ .md-button .md-button--primary .mt-1 }
+
+-   :octicons-comment-ai-16:{ .lg .middle } __Seqera AI assistant__
+
+    ---
+
+    Seqera AI is an AI assistant trained on Nextflow and nf-core resources. It can help you debug your code, clarify Nextflow concepts, and search for documentation faster. Think of it as having an tutor available 24/7 as you work through the courses.
+
+    [Ask Seqera AI:material-arrow-right:](https://github.com/nextflow-io/training/issues){ .md-button .md-button--primary .mt-1 }
+
+-   :material-book-open-variant:{ .lg .middle } __Nextflow documentation__
+
+    ---
+
+    The official documentation is the ultimate guide to all language features and configuration options. Use it alongside this training to dive deeper into specific topics, explore advanced features and find detailed syntax references.
+
+    [Browse the docs:material-arrow-right:](https://www.nextflow.io/docs/latest){ .md-button .md-button--primary .mt-1 }
+
+-   :material-account-hard-hat:{ .lg .middle } __Professional support__
+
+    ---
+
+    Nextflow is a free, open-source software developed by [Seqera](https://seqera.io/), a company headquartered in Spain with satellite offices in the UK and the US. We offer professional support services for Nextflow, including custom training.
+
+    [Get in touch:material-arrow-right:](https://seqera.io/demo/){ .md-button .md-button--primary .mt-1 }
+
+</div>
+
+---
+
+<div markdown class="homepage_logos">
+
+![Seqera](assets/img/seqera_logo.png#only-light)
+
+![Seqera](assets/img/seqera_logo_dark.png#only-dark)
+
+</div>

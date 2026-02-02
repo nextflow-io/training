@@ -14,22 +14,24 @@ In this part of the training, we're going to show you how to use [**nf-test**](h
 
 !!! note
 
-     Make sure you're in the correct working directory:
-     `cd /workspaces/training/nf4-science/genomics`
+    Make sure you're in the correct working directory:
+    `cd /workspaces/training/nf4-science/genomics`
 
-If you worked through the previous parts of this training course, you should have a working version of the genomics pipeline, with a modules directory structure like:
+If you worked through the previous parts of this training course, you should have a working version of the genomics pipeline with the appropriate modules directory structure.
 
-```console title="Directory structure"
-modules/
-├── gatk
-│   ├── haplotypecaller
-│   │   └── main.nf
-│   └── jointgenotyping
-│       └── main.nf
-└── samtools
-    └── index
-        └── main.nf
-```
+??? abstract "Directory contents"
+
+    ```console
+    modules/
+    ├── gatk
+    │   ├── haplotypecaller
+    │   │   └── main.nf
+    │   └── jointgenotyping
+    │       └── main.nf
+    └── samtools
+        └── index
+            └── main.nf
+    ```
 
 This modules directory can be found in the `solutions` directory if you need it.
 
@@ -37,9 +39,7 @@ We're going to start with the same workflow as in Part 3, which we've provided f
 
 ### 0.1. Check the workflow runs
 
-Before we start adding tests, let's make sure the workflow runs as expected.
-
-Let's try running that now.
+Before we start adding tests, make sure the workflow runs as expected.
 
 ```bash
 nextflow run genomics-4.nf -resume
@@ -47,16 +47,18 @@ nextflow run genomics-4.nf -resume
 
 This should look very familiar by now if you've been working through this training course from the start.
 
-```console title="Output"
- N E X T F L O W   ~  version 24.10.0
+??? success "Command output"
 
-Launching `genomics-4.nf` [gloomy_poincare] DSL2 - revision: 43203316e0
+    ```console
+    N E X T F L O W   ~  version 25.10.2
 
-executor >  local (7)
-[18/89dfa4] SAMTOOLS_INDEX (1)       | 3 of 3 ✔
-[30/b2522b] GATK_HAPLOTYPECALLER (2) | 3 of 3 ✔
-[a8/d2c189] GATK_JOINTGENOTYPING     | 1 of 1 ✔
-```
+    Launching `genomics-4.nf` [gloomy_poincare] DSL2 - revision: 43203316e0
+
+    executor >  local (7)
+    [18/89dfa4] SAMTOOLS_INDEX (1)       | 3 of 3 ✔
+    [30/b2522b] GATK_HAPLOTYPECALLER (2) | 3 of 3 ✔
+    [a8/d2c189] GATK_JOINTGENOTYPING     | 1 of 1 ✔
+    ```
 
 Like previously, there will now be a `work` directory and a `results_genomics` directory inside your project directory. We'll actually make use of these results later on in our testing. But from now on we're going to be using the `nf-test` package to test the pipeline.
 
@@ -68,15 +70,28 @@ As for the [nf-test side quest](../../side_quests/nf-test.md), we need to initia
 nf-test init
 ```
 
-This should produce the following output:
+??? success "Command output"
 
-```bash
-🚀 nf-test 0.9.2
-https://www.nf-test.com
-(c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
+    ```console
+    🚀 nf-test 0.9.3
+    https://www.nf-test.com
+    (c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
 
-Project configured. Configuration is stored in nf-test.config
-```
+    Project configured. Configuration is stored in nf-test.config
+    ```
+
+??? abstract "nf-test.config contents"
+
+    ```groovy title="nf-test.config"
+    config {
+
+        testsDir "tests"
+        workDir ".nf-test"
+        configFile "tests/nextflow.config"
+        profile ""
+
+    }
+    ```
 
 It also creates a `tests` directory containing a configuration file stub.
 
@@ -106,15 +121,16 @@ First, generate a test file stub:
 nf-test generate process modules/samtools/index/main.nf
 ```
 
-This creates a file in the same directory as `main.nf`, summarized in the terminal output as follows:
+??? success "Command output"
 
-```console title="Output"
-Load source file '/workspaces/training/nf4-science/genomics/modules/samtools/index/main.nf'
-Wrote process test file '/workspaces/training/nf4-science/genomics/tests/modules/samtools/index/main.nf.test
+    ```console
+    Load source file '/workspaces/training/nf4-science/genomics/modules/samtools/index/main.nf'
+    Wrote process test file '/workspaces/training/nf4-science/genomics/tests/modules/samtools/index/main.nf.test'
 
-SUCCESS: Generated 1 test files.
-```
+    SUCCESS: Generated 1 test files.
+    ```
 
+This creates a file in the same directory as `main.nf`.
 You can navigate to the directory in the file explorer and open the file, which should contain the following code:
 
 ```groovy title="tests/modules/samtools/index/main.nf.test" linenums="1"
@@ -159,7 +175,7 @@ Using this as a starting point, we need to add the right test inputs for the sam
 
 ### 1.2. Move the test file and update the script path
 
-Before we get to work on filling out the test, we need to move the file to its definitive location. Part of the reason we added a directory for each module is that we can now ship tests in a `tests` directory co-located with each module's `main.nf` file. Let's create that directory and move the test file there.
+Before we get to work on filling out the test, we need to move the file to its definitive location. Part of the reason we added a directory for each module is that we can now ship tests in a `tests` directory co-located with each module's `main.nf` file. Create that directory and move the test file there.
 
 ```bash
 mkdir -p modules/samtools/index/tests
@@ -168,21 +184,21 @@ mv tests/modules/samtools/index/main.nf.test modules/samtools/index/tests/
 
 Now we can simplify the `script` section of the test file to a relative path:
 
-_Before:_
+=== "After"
 
-```groovy title="modules/samtools/index/tests/main.nf.test" linenums="3" hl_lines="2"
-name "Test Process SAMTOOLS_INDEX"
-script "modules/samtools/index/main.nf"
-process "SAMTOOLS_INDEX"
-```
+    ```groovy title="modules/samtools/index/tests/main.nf.test" linenums="3" hl_lines="2"
+    name "Test Process SAMTOOLS_INDEX"
+    script "../main.nf"
+    process "SAMTOOLS_INDEX"
+    ```
 
-_After:_
+=== "Before"
 
-```groovy title="modules/samtools/index/tests/main.nf.test" linenums="3" hl_lines="2"
-name "Test Process SAMTOOLS_INDEX"
-script "../main.nf"
-process "SAMTOOLS_INDEX"
-```
+    ```groovy title="modules/samtools/index/tests/main.nf.test" linenums="3" hl_lines="2"
+    name "Test Process SAMTOOLS_INDEX"
+    script "modules/samtools/index/main.nf"
+    process "SAMTOOLS_INDEX"
+    ```
 
 This tells the test where to find the module's `main.nf` file, without having to specify the full path.
 
@@ -190,70 +206,47 @@ This tells the test where to find the module's `main.nf` file, without having to
 
 The stub file includes a placeholder that we need to replace with an actual test input, appropriate to the input of `samtools index`. The appropriate input is a BAM file, which we have available in the `data/bam` directory.
 
-_Before:_
+=== "After"
 
-```groovy title="modules/samtools/index/tests/main.nf.test" linenums="14"
-process {
-    """
-    // define inputs of the process here. Example:
-    // input[0] = file("test-file.txt")
-    """
-}
-```
+    ```groovy title="modules/samtools/index/tests/main.nf.test" linenums="14"
+    process {
+        """
+        input[0] = file("${projectDir}/data/bam/reads_son.bam")
+        """
+    }
+    ```
 
-_After:_
+=== "Before"
 
-```groovy title="modules/samtools/index/tests/main.nf.test" linenums="14"
-process {
-    """
-    input[0] = file("${projectDir}/data/bam/reads_son.bam")
-    """
-}
-```
+    ```groovy title="modules/samtools/index/tests/main.nf.test" linenums="14"
+    process {
+        """
+        // define inputs of the process here. Example:
+        // input[0] = file("test-file.txt")
+        """
+    }
+    ```
 
 ### 1.4. Name the test based on functionality
 
 As we learned before, it's good practice to rename the test to something that makes sense in the context of the test.
 
-_Before:_
+=== "After"
 
-```groovy title="modules/samtools/index/tests/main.nf.test" linenums="7"
-test("Should run without failures") {
-```
+    ```groovy title="modules/samtools/index/tests/main.nf.test" linenums="7"
+    test("Should index reads_son.bam correctly") {
+    ```
 
-This takes an arbitrary string, so we could put anything we want.
-Here we choose to refer to the file name and its format:
+    This takes an arbitrary string, so we could put anything we want.
+    Here we choose to refer to the file name and its format.
 
-_After:_
+=== "Before"
 
-```groovy title="modules/samtools/index/tests/main.nf.test" linenums="7"
-test("Should index reads_son.bam correctly") {
-```
+    ```groovy title="modules/samtools/index/tests/main.nf.test" linenums="7"
+    test("Should run without failures") {
+    ```
 
-### 1.5. Specify test parameters
-
-The `params` block in the stub file includes a placeholder for parameters:
-
-_Before:_
-
-```groovy title="modules/samtools/index/tests/main.nf.test" linenums="11"
-params {
-    // define parameters here. Example:
-    // outdir = "tests/results"
-}
-```
-
-We use it to specify a location for the results to be output, using the default suggestion:
-
-_After:_
-
-```groovy title="modules/samtools/index/tests/main.nf.test" linenums="11"
-params {
-    outdir = "tests/results"
-}
-```
-
-### 1.6. Run the test and examine the output
+### 1.5. Run the test and examine the output
 
 Run the test:
 
@@ -261,30 +254,30 @@ Run the test:
 nf-test test modules/samtools/index/tests/main.nf.test
 ```
 
-This should produce:
+??? success "Command output"
 
-```console title="Output"
-🚀 nf-test 0.9.2
-https://www.nf-test.com
-(c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
-
-
-Test Process SAMTOOLS_INDEX
-
-  Test [e761f2e2] 'Should index reads_son.bam correctly' PASSED (11.226s)
-  Snapshots:
-    1 created [Should index reads_son.bam correctly]
+    ```console
+    🚀 nf-test 0.9.3
+    https://www.nf-test.com
+    (c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
 
 
-Snapshot Summary:
-  1 created
+    Test Process SAMTOOLS_INDEX
 
-SUCCESS: Executed 1 tests in 11.265s
-```
+      Test [625e39ee] 'Should index reads_son.bam correctly' PASSED (7.717s)
+      Snapshots:
+        1 created [Should index reads_son.bam correctly]
+
+
+    Snapshot Summary:
+      1 created
+
+    SUCCESS: Executed 1 tests in 7.727s
+    ```
 
 As we learned previously, this verified the basic assertion about the success of the process and created a snapshot file based on the output of the process. We can see the contents of the snapshot file in the `tests/modules/samtools/index/tests/main.nf.test.snap` file:
 
-```json title="tests/modules/samtools/index/tests/main.nf.test.snap" linenums="1"
+```json title="modules/samtools/index/tests/main.nf.test.snap" linenums="1"
 {
   "Should index reads_son.bam correctly": {
     "content": [
@@ -298,10 +291,10 @@ As we learned previously, this verified the basic assertion about the success of
       }
     ],
     "meta": {
-      "nf-test": "0.9.2",
-      "nextflow": "24.10.0"
+      "nf-test": "0.9.3",
+      "nextflow": "25.10.2"
     },
-    "timestamp": "2025-03-03T16:59:54.195992321"
+    "timestamp": "2026-01-27T15:09:48.394063389"
   }
 }
 ```
@@ -312,32 +305,32 @@ We can also run the test again and see that it passes, because the output is ide
 nf-test test modules/samtools/index/tests/main.nf.test
 ```
 
-This produces:
+??? success "Command output"
 
-```console title="Output"
-🚀 nf-test 0.9.2
-https://www.nf-test.com
-(c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
-
-
-Test Process SAMTOOLS_INDEX
-
-  Test [625e39ee] 'Should index reads_son.bam correctly' PASSED (11.91s)
+    ```console
+    🚀 nf-test 0.9.3
+    https://www.nf-test.com
+    (c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
 
 
-SUCCESS: Executed 1 tests in 11.947s
-```
+    Test Process SAMTOOLS_INDEX
 
-### 1.7. Add more tests to `SAMTOOLS_INDEX`
+      Test [625e39ee] 'Should index reads_son.bam correctly' PASSED (7.938s)
 
-Sometimes it's useful to test a range of different input files to ensure we're testing for a variety of potential issues. Let's also test for the mother and father's bam files in the trio from our test data. Add the following tests to the test file:
 
-```
+    SUCCESS: Executed 1 tests in 7.987s
+    ```
+
+### 1.6. Add more tests to `SAMTOOLS_INDEX`
+
+Sometimes it's useful to test a range of different input files to ensure we're testing for a variety of potential issues. Add tests for the mother and father's BAM files in the trio from our test data.
+
+```groovy
     test("Should index reads_mother.bam correctly") {
 
         when {
             params {
-                outdir = "tests/results"
+                // define parameters here
             }
             process {
                 """
@@ -357,7 +350,7 @@ Sometimes it's useful to test a range of different input files to ensure we're t
 
         when {
             params {
-                outdir = "tests/results"
+                // define parameters here
             }
             process {
                 """
@@ -380,33 +373,32 @@ Then you can run the test again:
 nf-test test modules/samtools/index/tests/main.nf.test
 ```
 
-This produces:
+??? success "Command output"
 
-```groovy title="modules/samtools/index/tests/main.nf.test" linenums="27"
-🚀 nf-test 0.9.2
-https://www.nf-test.com
-(c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
-
-Warning: every snapshot that fails during this test run is re-record.
-
-Test Process SAMTOOLS_INDEX
-
-  Test [625e39ee] 'Should index reads_son.bam correctly' PASSED (10.916s)
-  Test [a8b28f36] 'Should index reads_mother.bam correctly' PASSED (11.147s)
-  Test [c15852a1] 'Should index reads_father.bam correctly' PASSED (10.785s)
-  Snapshots:
-    2 created [Should index reads_father.bam correctly, Should index reads_mother.bam correctly]
+    ```console
+    🚀 nf-test 0.9.3
+    https://www.nf-test.com
+    (c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
 
 
-Snapshot Summary:
-  2 created
+    Test Process SAMTOOLS_INDEX
 
-SUCCESS: Executed 3 tests in 32.913s
-```
+      Test [625e39ee] 'Should index reads_son.bam correctly' PASSED (7.185s)
+      Test [a8b28f36] 'Should index reads_mother.bam correctly' PASSED (6.576s)
+      Test [c15852a1] 'Should index reads_father.bam correctly' PASSED (6.31s)
+      Snapshots:
+        2 created [Should index reads_father.bam correctly, Should index reads_mother.bam correctly]
+
+
+    Snapshot Summary:
+      2 created
+
+    SUCCESS: Executed 3 tests in 20.117s
+    ```
 
 Notice the warning, referring to the effect of the `--update-snapshot` parameter.
 
-!!!note
+!!! note
 
     Here we are using test data that we used previously to demonstrate the scientific outputs of the pipeline.
     If we had been planning to operate these tests in a production environment, we would have generated smaller inputs for testing purposes.
@@ -433,7 +425,7 @@ Learn how to write tests for other processes in our genomics workflow, using the
 
 To test `GATK_HAPLOTYPECALLER`, we need to provide the process with the `SAMTOOLS_INDEX` output as an input. We could do that by running `SAMTOOLS_INDEX`, retrieving its outputs, and storing them with the test data for the workflow. That's actually the recommended approach for a polished pipeline, but nf-test provides an alternative approach, using the `setup` method.
 
-With the setup method, we can trigger the `SAMTOOLS_INDEX` process as part of the test setup, and then use its output as an input for `GATK_HAPLOTYPECALLER`. This has a cost - we're going to have to run the `SAMTOOLS_INDEX` process every time we run the test for `GATK_HAPLOTYPECALLER`- but maybe we're still developing the workflow and don't want to pre-generate test data we might have to change later. `SAMTOOLS_INDEX` process is also very quick, so maybe the benefits of pre-generating and storing its outputs are negligible. Let's see the setup method works.
+With the setup method, we can trigger the `SAMTOOLS_INDEX` process as part of the test setup, and then use its output as an input for `GATK_HAPLOTYPECALLER`. This has a cost: we're going to have to run the `SAMTOOLS_INDEX` process every time we run the test for `GATK_HAPLOTYPECALLER`. However, maybe we're still developing the workflow and don't want to pre-generate test data we might have to change later. The `SAMTOOLS_INDEX` process is also very quick, so maybe the benefits of pre-generating and storing its outputs are negligible. Here's how the setup method works.
 
 ### 2.1. Generate and place the test file
 
@@ -442,6 +434,15 @@ As previously, first we generate the file stub:
 ```bash
 nf-test generate process modules/gatk/haplotypecaller/main.nf
 ```
+
+??? success "Command output"
+
+    ```console
+    Load source file '/workspaces/training/nf4-science/genomics/modules/gatk/haplotypecaller/main.nf'
+    Wrote process test file '/workspaces/training/nf4-science/genomics/tests/modules/gatk/haplotypecaller/main.nf.test'
+
+    SUCCESS: Generated 1 test files.
+    ```
 
 This produces the following test stub:
 
@@ -493,59 +494,59 @@ mv tests/modules/gatk/haplotypecaller/main.nf.test modules/gatk/haplotypecaller/
 
 Finally, don't forget to update the script path:
 
-_Before:_
+=== "After"
 
-```groovy title="modules/gatk/haplotypecaller/tests/main.nf.test" linenums="3" hl_lines="2"
-    name "Test Process GATK_HAPLOTYPECALLER"
-    script "modules/gatk/haplotypecaller/main.nf"
-    process "GATK_HAPLOTYPECALLER"
-```
+    ```groovy title="modules/gatk/haplotypecaller/tests/main.nf.test" linenums="3" hl_lines="2"
+        name "Test Process GATK_HAPLOTYPECALLER"
+        script "../main.nf"
+        process "GATK_HAPLOTYPECALLER"
+    ```
 
-_After:_
+=== "Before"
 
-```groovy title="modules/gatk/haplotypecaller/tests/main.nf.test" linenums="3" hl_lines="2"
-    name "Test Process GATK_HAPLOTYPECALLER"
-    script "../main.nf"
-    process "GATK_HAPLOTYPECALLER"
-```
+    ```groovy title="modules/gatk/haplotypecaller/tests/main.nf.test" linenums="3" hl_lines="2"
+        name "Test Process GATK_HAPLOTYPECALLER"
+        script "modules/gatk/haplotypecaller/main.nf"
+        process "GATK_HAPLOTYPECALLER"
+    ```
 
 ### 2.3. Provide inputs using the setup method
 
 We insert a `setup` block before the `when` block, where we can trigger a run of the `SAMTOOLS_INDEX` process on one of our original input files. Also, remember as before to change the test name to something meaningful.
 
-_Before:_
+=== "After"
 
-```groovy title="modules/gatk/haplotypecaller/tests/main.nf.test" linenums="7"  hl_lines="1"
-test("Should run without failures") {
+    ```groovy title="modules/gatk/haplotypecaller/tests/main.nf.test" linenums="7" hl_lines="1-12"
+        test("Should call son's haplotype correctly") {
 
-    when {
-```
-
-_After:_
-
-```groovy title="modules/gatk/haplotypecaller/tests/main.nf.test" linenums="7" hl_lines="1-12"
-    test("Should call son's haplotype correctly") {
-
-        setup {
-            run("SAMTOOLS_INDEX") {
-                script "../../../samtools/index/main.nf"
-                process {
-                    """
-                    input[0] =  file("${projectDir}/data/bam/reads_son.bam")
-                    """
+            setup {
+                run("SAMTOOLS_INDEX") {
+                    script "../../../samtools/index/main.nf"
+                    process {
+                        """
+                        input[0] =  file("${projectDir}/data/bam/reads_son.bam")
+                        """
+                    }
                 }
             }
-        }
+
+            when {
+    ```
+
+=== "Before"
+
+    ```groovy title="modules/gatk/haplotypecaller/tests/main.nf.test" linenums="7"  hl_lines="1"
+    test("Should run without failures") {
 
         when {
-```
+    ```
 
 Then we can refer to the output of that process in the `when` block where we specify the test inputs:
 
 ```groovy title="modules/gatk/haplotypecaller/tests/main.nf.test" linenums="20"
         when {
             params {
-                outdir = "tests/results"
+                // define parameters here
             }
             process {
                 """
@@ -565,77 +566,77 @@ Make that change and run the test again:
 nf-test test modules/gatk/haplotypecaller/tests/main.nf.test
 ```
 
-This produces the following output:
+??? success "Command output"
 
-```console title="Output"
-🚀 nf-test 0.9.2
-https://www.nf-test.com
-(c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
-
-
-Test Process GATK_HAPLOTYPECALLER
-
-  Test [30247349] 'Should call son's haplotype correctly' PASSED (20.002s)
-  Snapshots:
-    1 created [Should call son's haplotype correctly]
+    ```console
+    🚀 nf-test 0.9.3
+    https://www.nf-test.com
+    (c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
 
 
-Snapshot Summary:
-  1 created
+    Test Process GATK_HAPLOTYPECALLER
 
-SUCCESS: Executed 1 tests in 20.027s
-```
+      Test [c5156c2b] 'Should call son's haplotype correctly' PASSED (40.53s)
+      Snapshots:
+        1 created [Should call son's haplotype correctly]
+
+
+    Snapshot Summary:
+      1 created
+
+    SUCCESS: Executed 1 tests in 40.555s
+    ```
 
 It also produces a snapshot file like earlier.
 
 ### 2.4. Run again and observe failure
 
-Interestingly, if you run the exact same command again, this time the test will fail. This command:
+Interestingly, if you run the exact same command again, this time the test will fail.
 
 ```bash
 nf-test test modules/gatk/haplotypecaller/tests/main.nf.test
 ```
 
-produces:
+??? failure "Command output"
 
-```console title="Output"
-🚀 nf-test 0.9.2
-https://www.nf-test.com
-(c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
-
-
-Test Process GATK_HAPLOTYPECALLER
-
-  Test [c847bfae] 'Should call son's haplotype correctly' FAILED (19.979s)
-
-  java.lang.RuntimeException: Different Snapshot:
-  [                                                                                           [
-      {                                                                                           {
-          "0": [                                                                                      "0": [
-              "reads_son.bam.g.vcf:md5,069316cdd4328542ffc6ae247b1dac39"                         |                 "reads_son.bam.g.vcf:md5,005f1a13ee39f11b0fc9bea094850eac"
-          ],                                                                                          ],
-          "1": [                                                                                      "1": [
-              "reads_son.bam.g.vcf.idx:md5,dc36c18f2afdc546f41e68b2687e9334"                     |                 "reads_son.bam.g.vcf.idx:md5,dbad4b76a4b90c158ffc9c9740764242"
-          ],                                                                                          ],
-          "idx": [                                                                                    "idx": [
-              "reads_son.bam.g.vcf.idx:md5,dc36c18f2afdc546f41e68b2687e9334"                     |                 "reads_son.bam.g.vcf.idx:md5,dbad4b76a4b90c158ffc9c9740764242"
-          ],                                                                                          ],
-          "vcf": [                                                                                    "vcf": [
-              "reads_son.bam.g.vcf:md5,069316cdd4328542ffc6ae247b1dac39"                         |                 "reads_son.bam.g.vcf:md5,005f1a13ee39f11b0fc9bea094850eac"
-          ]                                                                                           ]
-      }                                                                                           }
-  ]                                                                                           ]
-
-  Nextflow stdout:
-
-  Nextflow stderr:
+    ```console
+    🚀 nf-test 0.9.3
+    https://www.nf-test.com
+    (c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
 
 
-    Obsolete snapshots can only be checked if all tests of a file are executed successful.
+    Test Process GATK_HAPLOTYPECALLER
+
+      Test [c5156c2b] 'Should call son's haplotype correctly' FAILED (40.123s)
+
+      java.lang.RuntimeException: Different Snapshot:
+      [                                                                                           [
+          {                                                                                           {
+              "0": [                                                                                      "0": [
+                  "reads_son.bam.g.vcf:md5,069316cdd4328542ffc6ae247b1dac39"                         |                 "reads_son.bam.g.vcf:md5,005f1a13ee39f11b0fc9bea094850eac"
+              ],                                                                                          ],
+              "1": [                                                                                      "1": [
+                  "reads_son.bam.g.vcf.idx:md5,dc36c18f2afdc546f41e68b2687e9334"                     |                 "reads_son.bam.g.vcf.idx:md5,dbad4b76a4b90c158ffc9c9740764242"
+              ],                                                                                          ],
+              "idx": [                                                                                    "idx": [
+                  "reads_son.bam.g.vcf.idx:md5,dc36c18f2afdc546f41e68b2687e9334"                     |                 "reads_son.bam.g.vcf.idx:md5,dbad4b76a4b90c158ffc9c9740764242"
+              ],                                                                                          ],
+              "vcf": [                                                                                    "vcf": [
+                  "reads_son.bam.g.vcf:md5,069316cdd4328542ffc6ae247b1dac39"                         |                 "reads_son.bam.g.vcf:md5,005f1a13ee39f11b0fc9bea094850eac"
+              ]                                                                                           ]
+          }                                                                                           }
+      ]                                                                                           ]
+
+      Nextflow stdout:
+
+      Nextflow stderr:
 
 
-FAILURE: Executed 1 tests in 20.032s (1 failed)
-```
+        Obsolete snapshots can only be checked if all tests of a file are executed successful.
+
+
+    FAILURE: Executed 1 tests in 40.156s (1 failed)
+    ```
 
 The error message tells you there were differences between the snapshots for the two runs; specifically, the md5sum values are different for the VCF files.
 
@@ -652,24 +653,24 @@ More exactly, we'll have the tool read the lines of the VCF file and check for t
 
 In practice, we replace the second assertion in the `then` block as follows:
 
-_Before:_
+=== "After"
 
-```groovy title="modules/gatk/haplotypecaller/tests/main.nf.test" linenums="35" hl_lines="3"
-then {
-    assert process.success
-    assert snapshot(process.out).match()
-}
-```
+    ```groovy title="modules/gatk/haplotypecaller/tests/main.nf.test" linenums="35" hl_lines="3 4"
+            then {
+                assert process.success
+                assert path(process.out[0][0]).readLines().contains('#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	reads_son')
+                assert path(process.out[0][0]).readLines().contains('20_10037292_10066351	3277	.	G	<NON_REF>	.	.	END=3282	GT:DP:GQ:MIN_DP:PL	0/0:25:72:24:0,72,719')
+            }
+    ```
 
-_After:_
+=== "Before"
 
-```console title="modules/gatk/haplotypecaller/tests/main.nf.test" linenums="35" hl_lines="3 4"
-        then {
-            assert process.success
-            assert path(process.out[0][0]).readLines().contains('#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	reads_son')
-            assert path(process.out[0][0]).readLines().contains('20_10037292_10066351	3277	.	G	<NON_REF>	.	.	END=3282	GT:DP:GQ:MIN_DP:PL	0/0:25:72:24:0,72,719')
-        }
-```
+    ```groovy title="modules/gatk/haplotypecaller/tests/main.nf.test" linenums="35" hl_lines="3"
+    then {
+        assert process.success
+        assert snapshot(process.out).match()
+    }
+    ```
 
 Here we're reading in the full content of the VCF output file and searching for a content match, which is okay to do on a small test file, but you wouldn't want to do that on a larger file.
 You might instead choose to read in specific lines.
@@ -685,21 +686,21 @@ Once we've modified the test in this way, we can run the test multiple times, an
 nf-test test modules/gatk/haplotypecaller/tests/main.nf.test
 ```
 
-This produces:
+??? success "Command output"
 
-```console title="Output"
-🚀 nf-test 0.9.2
-https://www.nf-test.com
-(c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
-
-
-Test Process GATK_HAPLOTYPECALLER
-
-  Test [c847bfae] 'Should call son's haplotype correctly' PASSED (19.33s)
+    ```console
+    🚀 nf-test 0.9.3
+    https://www.nf-test.com
+    (c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
 
 
-SUCCESS: Executed 1 tests in 19.382s
-```
+    Test Process GATK_HAPLOTYPECALLER
+
+      Test [c5156c2b] 'Should call son's haplotype correctly' PASSED (40.53s)
+
+
+    SUCCESS: Executed 1 tests in 40.555s
+    ```
 
 ### 2.7. Add more tests
 
@@ -721,7 +722,7 @@ Add similar tests for the mother and father samples:
 
         when {
             params {
-                outdir = "tests/results"
+                // define parameters here
             }
             process {
                 """
@@ -756,7 +757,7 @@ Add similar tests for the mother and father samples:
 
         when {
             params {
-                outdir = "tests/results"
+                // define parameters here
             }
             process {
                 """
@@ -783,23 +784,23 @@ Add similar tests for the mother and father samples:
 nf-test test modules/gatk/haplotypecaller/tests/main.nf.test
 ```
 
-This produces:
+??? success "Command output"
 
-```console title="Output"
-🚀 nf-test 0.9.2
-https://www.nf-test.com
-(c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
-
-
-Test Process GATK_HAPLOTYPECALLER
-
-  Test [c847bfae] 'Should call son's haplotype correctly' PASSED (19.91s)
-  Test [44494e9c] 'Should call mother's haplotype correctly' PASSED (18.606s)
-  Test [eb0d1a07] 'Should call father's haplotype correctly' PASSED (18.773s)
+    ```console
+    🚀 nf-test 0.9.3
+    https://www.nf-test.com
+    (c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
 
 
-SUCCESS: Executed 3 tests in 57.348s
-```
+    Test Process GATK_HAPLOTYPECALLER
+
+      Test [c5156c2b] 'Should call son's haplotype correctly' PASSED (40.53s)
+      Test [10de94a8] 'Should call mother's haplotype correctly' PASSED (41.47s)
+      Test [c0386fc7] 'Should call father's haplotype correctly' PASSED (45.556s)
+
+
+    SUCCESS: Executed 3 tests in 127.586s
+    ```
 
 That completes the basic test plan for this second step in the pipeline. On to the third and last module-level test!
 
@@ -828,7 +829,7 @@ For the joint genotyping step, we'll use a different approach - using pre-genera
 
 ### 3.1. Generate test data
 
-Let's inspect the results we generated at the start of this section:
+Inspect the results we generated at the start of this section:
 
 ```bash
 tree results_genomics/
@@ -838,29 +839,29 @@ tree results_genomics/
 results_genomics/
 ├── family_trio.joint.vcf
 ├── family_trio.joint.vcf.idx
-├── reads_father.bam -> /workspaces/training/nf4-science/genomics/work/42/a3bf19dbfaf1f3672b16a5d5e6a8be/reads_father.bam
-├── reads_father.bam.bai -> /workspaces/training/nf4-science/genomics/work/cf/289c2d264f496d60a69e3e9ba6463e/reads_father.bam.bai
-├── reads_father.bam.g.vcf -> /workspaces/training/nf4-science/genomics/work/30/b2522b83c63baff8c3cf75704512a2/reads_father.bam.g.vcf
-├── reads_father.bam.g.vcf.idx -> /workspaces/training/nf4-science/genomics/work/30/b2522b83c63baff8c3cf75704512a2/reads_father.bam.g.vcf.idx
-├── reads_mother.bam -> /workspaces/training/nf4-science/genomics/work/af/f31a6ade82cc0cf853c4f61c8bc473/reads_mother.bam
-├── reads_mother.bam.bai -> /workspaces/training/nf4-science/genomics/work/18/89dfa40a3def17e45421e54431a126/reads_mother.bam.bai
-├── reads_mother.bam.g.vcf -> /workspaces/training/nf4-science/genomics/work/f6/be2efa58e625d08cf8d0da1d0e9f09/reads_mother.bam.g.vcf
-├── reads_mother.bam.g.vcf.idx -> /workspaces/training/nf4-science/genomics/work/f6/be2efa58e625d08cf8d0da1d0e9f09/reads_mother.bam.g.vcf.idx
-├── reads_son.bam -> /workspaces/training/nf4-science/genomics/work/9f/9615dd553d6f13d8bec4f006ac395f/reads_son.bam
-├── reads_son.bam.bai -> /workspaces/training/nf4-science/genomics/work/4d/cb384a97db5687cc9daab002017c7c/reads_son.bam.bai
-├── reads_son.bam.g.vcf -> /workspaces/training/nf4-science/genomics/work/fe/2f22d56aa16ed45f8bc419312894f6/reads_son.bam.g.vcf
-└── reads_son.bam.g.vcf.idx -> /workspaces/training/nf4-science/genomics/work/fe/2f22d56aa16ed45f8bc419312894f6/reads_son.bam.g.vcf.idx
+├── gvcf
+│   ├── reads_father.bam.g.vcf -> /workspaces/training/nf4-science/genomics/work/30/b2522b83c63baff8c3cf75704512a2/reads_father.bam.g.vcf
+│   ├── reads_father.bam.g.vcf.idx -> /workspaces/training/nf4-science/genomics/work/30/b2522b83c63baff8c3cf75704512a2/reads_father.bam.g.vcf.idx
+│   ├── reads_mother.bam.g.vcf -> /workspaces/training/nf4-science/genomics/work/f6/be2efa58e625d08cf8d0da1d0e9f09/reads_mother.bam.g.vcf
+│   ├── reads_mother.bam.g.vcf.idx -> /workspaces/training/nf4-science/genomics/work/f6/be2efa58e625d08cf8d0da1d0e9f09/reads_mother.bam.g.vcf.idx
+│   ├── reads_son.bam.g.vcf -> /workspaces/training/nf4-science/genomics/work/fe/2f22d56aa16ed45f8bc419312894f6/reads_son.bam.g.vcf
+│   └── reads_son.bam.g.vcf.idx -> /workspaces/training/nf4-science/genomics/work/fe/2f22d56aa16ed45f8bc419312894f6/reads_son.bam.g.vcf.idx
+└── indexed_bam
+    ├── reads_father.bam -> /workspaces/training/nf4-science/genomics/work/42/a3bf19dbfaf1f3672b16a5d5e6a8be/reads_father.bam
+    ├── reads_father.bam.bai -> /workspaces/training/nf4-science/genomics/work/cf/289c2d264f496d60a69e3e9ba6463e/reads_father.bam.bai
+    ├── reads_mother.bam -> /workspaces/training/nf4-science/genomics/work/af/f31a6ade82cc0cf853c4f61c8bc473/reads_mother.bam
+    ├── reads_mother.bam.bai -> /workspaces/training/nf4-science/genomics/work/18/89dfa40a3def17e45421e54431a126/reads_mother.bam.bai
+    ├── reads_son.bam -> /workspaces/training/nf4-science/genomics/work/9f/9615dd553d6f13d8bec4f006ac395f/reads_son.bam
+    └── reads_son.bam.bai -> /workspaces/training/nf4-science/genomics/work/4d/cb384a97db5687cc9daab002017c7c/reads_son.bam.bai
 
-0 directories, 14 files
+2 directories, 14 files
 ```
 
-Note that some of these files are symlinks to the actual files in the `work` directory.
-
-The joint genotyping step needs the VCF files produced by the haplotype caller steps as inputs, along with the indices. So let's copy the results we have into the `jointgenotyping` module's test directory. We'll follow symlinks to the original files.
+The joint genotyping step needs the VCF files produced by the haplotype caller steps as inputs, along with the indices. So let's copy the results we have into the `jointgenotyping` module's test directory.
 
 ```bash
 mkdir -p modules/gatk/jointgenotyping/tests/inputs/
-cp -rL results_genomics/*.g.vcf results_genomics/*.g.vcf.idx modules/gatk/jointgenotyping/tests/inputs/
+cp results_genomics/gvcf/*.g.vcf results_genomics/gvcf/*.g.vcf.idx modules/gatk/jointgenotyping/tests/inputs/
 ```
 
 Now we can use these files as inputs to the test we're going to write for the joint genotyping step.
@@ -872,6 +873,15 @@ As previously, first we generate the file stub:
 ```bash
 nf-test generate process modules/gatk/jointgenotyping/main.nf
 ```
+
+??? success "Command output"
+
+    ```console
+    Load source file '/workspaces/training/nf4-science/genomics/modules/gatk/jointgenotyping/main.nf'
+    Wrote process test file '/workspaces/training/nf4-science/genomics/tests/modules/gatk/jointgenotyping/main.nf.test'
+
+    SUCCESS: Generated 1 test files.
+    ```
 
 This produces the following test stub:
 
@@ -917,21 +927,21 @@ mv tests/modules/gatk/jointgenotyping/main.nf.test modules/gatk/jointgenotyping/
 
 And don't forget to update the script path:
 
-_Before:_
+=== "After"
 
-```groovy title="modules/gatk/jointgenotyping/tests/main.nf.test" linenums="3" hl_lines="2"
-name "Test Process GATK_JOINTGENOTYPING"
-script "modules/gatk/jointgenotyping/main.nf"
-process "GATK_JOINTGENOTYPING"
-```
+    ```groovy title="modules/gatk/jointgenotyping/tests/main.nf.test" linenums="3" hl_lines="2"
+    name "Test Process GATK_JOINTGENOTYPING"
+    script "../main.nf"
+    process "GATK_JOINTGENOTYPING"
+    ```
 
-_After:_
+=== "Before"
 
-```groovy title="modules/gatk/jointgenotyping/tests/main.nf.test" linenums="3" hl_lines="2"
-name "Test Process GATK_JOINTGENOTYPING"
-script "../main.nf"
-process "GATK_JOINTGENOTYPING"
-```
+    ```groovy title="modules/gatk/jointgenotyping/tests/main.nf.test" linenums="3" hl_lines="2"
+    name "Test Process GATK_JOINTGENOTYPING"
+    script "modules/gatk/jointgenotyping/main.nf"
+    process "GATK_JOINTGENOTYPING"
+    ```
 
 ### 3.4. Provide inputs
 
@@ -942,7 +952,7 @@ Fill in the inputs based on the process input definitions and rename the test ac
 
         when {
             params {
-                outdir = "tests/results"
+                // define parameters here
             }
             process {
                 """
@@ -995,21 +1005,21 @@ We haven't snapshotted the whole file, but by checking a specific variant, we ca
 nf-test test modules/gatk/jointgenotyping/tests/main.nf.test
 ```
 
-This produces:
+??? success "Command output"
 
-```console title="Output"
-🚀 nf-test 0.9.2
-https://www.nf-test.com
-(c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
-
-
-Test Process GATK_JOINTGENOTYPING
-
-  Test [ac2067de] 'Should call trio's joint genotype correctly' PASSED (21.604s)
+    ```console
+    🚀 nf-test 0.9.3
+    https://www.nf-test.com
+    (c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
 
 
-SUCCESS: Executed 1 tests in 21.622s
-```
+    Test Process GATK_JOINTGENOTYPING
+
+      Test [ac2067de] 'Should call trio's joint genotype correctly' PASSED (53.827s)
+
+
+    SUCCESS: Executed 1 tests in 53.837s
+    ```
 
 The test passes, verifying that our joint genotyping process correctly:
 
@@ -1046,6 +1056,15 @@ Generate a test file for the complete pipeline:
 nf-test generate pipeline genomics-4.nf
 ```
 
+??? success "Command output"
+
+    ```console
+    Load source file '/workspaces/training/nf4-science/genomics/genomics-4.nf'
+    Wrote pipeline test file '/workspaces/training/nf4-science/genomics/tests/genomics-4.nf.test'
+
+    SUCCESS: Generated 1 test files.
+    ```
+
 This creates a basic test stub:
 
 ```groovy title="tests/genomics-4.nf.test" linenums="1"
@@ -1074,19 +1093,19 @@ nextflow_pipeline {
 
 Just correct the name to something meaningful (you'll see why this is useful shortly).
 
-_Before:_
+=== "After"
 
-```groovy title="tests/genomics-4.nf.test" linenums="1" hl_lines="1"
-    test("Should run without failures") {
-```
+    ```groovy title="tests/genomics-4.nf.test" linenums="6" hl_lines="1"
+        test("Should run the pipeline without failures") {
+    ```
 
-_After:_
+=== "Before"
 
-```groovy title="tests/genomics-4.nf.test" linenums="1" hl_lines="1"
-    test("Should run the pipeline without failures") {
-```
+    ```groovy title="tests/genomics-4.nf.test" linenums="6" hl_lines="1"
+        test("Should run without failures") {
+    ```
 
-!!!note
+!!! note
 
     In this case the test file can stay where `nf-test` created it.
 
@@ -1098,24 +1117,30 @@ However, a simpler way is to set up a `params {}` block in the `nextflow.config`
 
 ```groovy title="tests/nextflow.config" linenums="1"
 /*
+========================================================================================
+    Nextflow config file for running tests
+========================================================================================
+*/
+
+// Output directory for workflow outputs
+outputDir = 'results_genomics'
+
+/*
  * Pipeline parameters
  */
 
 params {
     // Primary input (file of input files, one per line)
-    reads_bam        = "${projectDir}/data/sample_bams.txt"
+    reads_bam = "${projectDir}/data/sample_bams.txt"
 
-    // Output directory
-    outdir = "results_genomics"
-
-    // Reference genome and intervals
-    reference        = "${projectDir}/data/ref/ref.fasta"
-    reference_index  = "${projectDir}/data/ref/ref.fasta.fai"
-    reference_dict   = "${projectDir}/data/ref/ref.dict"
-    intervals        = "${projectDir}/data/ref/intervals.bed"
+    // Accessory files
+    reference = "${projectDir}/data/ref/ref.fasta"
+    reference_index = "${projectDir}/data/ref/ref.fasta.fai"
+    reference_dict = "${projectDir}/data/ref/ref.dict"
+    intervals = "${projectDir}/data/ref/intervals.bed"
 
     // Base name for final output file
-    cohort_name      = "family_trio"
+    cohort_name = "family_trio"
 }
 ```
 
@@ -1127,21 +1152,21 @@ When we run the test, `nf-test` will pick up this configuration file and pull in
 nf-test test tests/genomics-4.nf.test
 ```
 
-This produces:
+??? success "Command output"
 
-```console title="Output"
-🚀 nf-test 0.9.2
-https://www.nf-test.com
-(c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
-
-
-Test Workflow genomics-4.nf
-
-  Test [c7dbcaca] 'Should run without failures' PASSED (48.443s)
+    ```console
+    🚀 nf-test 0.9.3
+    https://www.nf-test.com
+    (c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
 
 
-SUCCESS: Executed 1 tests in 48.486s
-```
+    Test Workflow genomics-4.nf
+
+      Test [1b4c6936] 'Should run the pipeline without failures' PASSED (171.019s)
+
+
+    SUCCESS: Executed 1 tests in 171.056s
+    ```
 
 The test passes, confirming that our complete variant calling pipeline:
 
@@ -1150,33 +1175,33 @@ The test passes, confirming that our complete variant calling pipeline:
 
 ### 4.4. Run ALL tests
 
-nf-test has one more trick up it's sleeve. We can run all the tests at once! Modify the `nf-test.config` file so that nf-test looks in every directory for nf-test files. You can do this by modifying the `testsDir` parameter:
+nf-test has one more trick up its sleeve. We can run all the tests at once! Modify the `nf-test.config` file so that nf-test looks in every directory for nf-test files. You can do this by modifying the `testsDir` parameter:
 
-_Before:_
+=== "After"
 
-```groovy title="nf-test.config" linenums="1" hl_lines="3"
-config {
+    ```groovy title="nf-test.config" linenums="1" hl_lines="3"
+    config {
 
-    testsDir "tests"
-    workDir ".nf-test"
-    configFile "tests/nextflow.config"
-    profile ""
+        testsDir "."
+        workDir ".nf-test"
+        configFile "tests/nextflow.config"
+        profile ""
 
-}
-```
+    }
+    ```
 
-_After:_
+=== "Before"
 
-```groovy title="nf-test.config" linenums="1" hl_lines="3"
-config {
+    ```groovy title="nf-test.config" linenums="1" hl_lines="3"
+    config {
 
-    testsDir "."
-    workDir ".nf-test"
-    configFile "tests/nextflow.config"
-    profile ""
+        testsDir "tests"
+        workDir ".nf-test"
+        configFile "tests/nextflow.config"
+        profile ""
 
-}
-```
+    }
+    ```
 
 Now, we can simply run nf-test and it will run _every single test_ in our repository:
 
@@ -1184,40 +1209,39 @@ Now, we can simply run nf-test and it will run _every single test_ in our reposi
 nf-test test
 ```
 
-This produces:
+??? success "Command output"
 
-```console title="Output"
-
-🚀 nf-test 0.9.2
-https://www.nf-test.com
-(c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
-
-
-Test Process GATK_HAPLOTYPECALLER
-
-  Test [c847bfae] 'Should call son's haplotype correctly' PASSED (20.951s)
-  Test [44494e9c] 'Should call mother's haplotype correctly' PASSED (19.155s)
-  Test [eb0d1a07] 'Should call father's haplotype correctly' PASSED (21.843s)
-
-Test Process GATK_JOINTGENOTYPING
-
-  Test [ac2067de] 'Should call trio's joint genotype correctly' PASSED (22.994s)
-
-Test Process SAMTOOLS_INDEX
-
-  Test [625e39ee] 'Should index reads_son.bam correctly' PASSED (11.281s)
-  Test [a8b28f36] 'Should index reads_mother.bam correctly' PASSED (11.126s)
-  Test [c15852a1] 'Should index reads_father.bam correctly' PASSED (12.005s)
-
-Test Workflow genomics-4.nf
-
-  Test [c7dbcaca] 'Should run the pipeline without failures' PASSED (47.92s)
+    ```console
+    🚀 nf-test 0.9.3
+    https://www.nf-test.com
+    (c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
 
 
-SUCCESS: Executed 8 tests in 167.772s
-```
+    Test Process GATK_HAPLOTYPECALLER
 
-7 tests in 1 command! We spent a long time configuring lots and lots of tests, but when it came to running them it was very quick and easy. You can see how useful this is when maintaining a large pipeline, which could include hundreds of different elements. We spend time writing tests once so we can save time running them many times.
+      Test [c5156c2b] 'Should call son's haplotype correctly' PASSED (39.947s)
+      Test [10de94a8] 'Should call mother's haplotype correctly' PASSED (43.17s)
+      Test [c0386fc7] 'Should call father's haplotype correctly' PASSED (44.244s)
+
+    Test Process GATK_JOINTGENOTYPING
+
+      Test [ac2067de] 'Should call trio's joint genotype correctly' PASSED (61.129s)
+
+    Test Process SAMTOOLS_INDEX
+
+      Test [625e39ee] 'Should index reads_son.bam correctly' PASSED (8.671s)
+      Test [a8b28f36] 'Should index reads_mother.bam correctly' PASSED (8.518s)
+      Test [c15852a1] 'Should index reads_father.bam correctly' PASSED (5.378s)
+
+    Test Workflow genomics-4.nf
+
+      Test [1b4c6936] 'Should run the pipeline without failures' PASSED (169.714s)
+
+
+    SUCCESS: Executed 8 tests in 380.801s
+    ```
+
+8 tests in 1 command! We spent a long time configuring lots and lots of tests, but when it came to running them it was very quick and easy. You can see how useful this is when maintaining a large pipeline, which could include hundreds of different elements. We spend time writing tests once so we can save time running them many times.
 
 Furthermore, we can automate this! Imagine tests running every time you or a colleague tries to add new code. This is how we ensure our pipelines maintain a high standard.
 

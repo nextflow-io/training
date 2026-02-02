@@ -4,7 +4,7 @@ process COUNT_LINES {
     debug true
 
     input:
-    val input_file
+    path input_file
 
     script:
     """

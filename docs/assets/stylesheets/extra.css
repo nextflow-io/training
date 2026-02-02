@@ -16,6 +16,11 @@
   z-index: 1;
 }
 
+/* Some helper classes */
+.mt-1 {
+  margin-top: 1rem !important;
+}
+
 /* Seqera style typography */
 .md-typeset h1 {
   color: var(--md-default-fg-color);
@@ -190,6 +195,138 @@ h3 .enumerate-headings-plugin {
 }
 
 /* Custom admonitions */
+
+/* catalog */
+.md-typeset .admonition.catalog,
+.md-typeset details.catalog {
+  border-color: rgb(142, 142, 142);
+  font-size: 0.8rem;
+}
+.md-typeset .catalog > .admonition-title,
+.md-typeset .catalog > summary {
+  background-color: rgba(153, 153, 153, 0.1);
+}
+.md-typeset .catalog > .admonition-title::before,
+.md-typeset .catalog > summary::before {
+  background-color: rgb(146, 146, 146);
+  -webkit-mask-image: var(--md-admonition-icon--catalog);
+  mask-image: var(--md-admonition-icon--catalog);
+}
+
+/* courses */
+.md-typeset .admonition.courses,
+.md-typeset details.courses {
+  border-color: rgb(142, 142, 142);
+}
+.md-typeset .courses > .admonition-title,
+.md-typeset .courses > summary {
+  background-color: rgba(153, 153, 153, 0.1);
+  font-weight: normal;
+}
+.md-typeset .courses > .admonition-title::before,
+.md-typeset .courses > summary::before {
+  background-color: rgb(146, 146, 146);
+  -webkit-mask-image: var(--md-admonition-icon--courses);
+  mask-image: var(--md-admonition-icon--courses);
+}
+
+/* terminal */
+.md-typeset .admonition.terminal,
+.md-typeset details.terminal {
+  border-color: rgb(43, 155, 70);
+}
+.md-typeset .terminal > .admonition-title,
+.md-typeset .terminal > summary {
+  background-color: rgba(43, 155, 70, 0.1);
+}
+.md-typeset .terminal > .admonition-title::before,
+.md-typeset .terminal > summary::before {
+  background-color: rgb(43, 155, 70);
+  -webkit-mask-image: var(--md-admonition-icon--terminal);
+  mask-image: var(--md-admonition-icon--terminal);
+}
+
+/* full-code */
+.md-typeset .admonition.full-code,
+.md-typeset details.full-code {
+  border-color: rgb(26, 128, 50);
+}
+.md-typeset .full-code > .admonition-title,
+.md-typeset .full-code > summary {
+  background-color: rgba(26, 128, 50, 0.1);
+}
+.md-typeset .full-code > .admonition-title::before,
+.md-typeset .full-code > summary::before {
+  background-color: rgb(26, 128, 50);
+  -webkit-mask-image: var(--md-admonition-icon--full-code);
+  mask-image: var(--md-admonition-icon--full-code);
+}
+
+/* learning */
+.md-typeset .admonition.learning,
+.md-typeset details.learning {
+  border-color: #448aff;
+}
+.md-typeset .learning > .admonition-title,
+.md-typeset .learning > summary {
+  background-color: #4489ff10;
+}
+.md-typeset .learning > .admonition-title::before,
+.md-typeset .learning > summary::before {
+  background-color: #448aff;
+  -webkit-mask-image: var(--md-admonition-icon--learning);
+  mask-image: var(--md-admonition-icon--learning);
+}
+
+/* people */
+.md-typeset .admonition.people,
+.md-typeset details.people {
+  border-color: #6e59d9;
+}
+.md-typeset .people > .admonition-title,
+.md-typeset .people > summary {
+  background-color: #6e59d910;
+}
+.md-typeset .people > .admonition-title::before,
+.md-typeset .people > summary::before {
+  background-color: #6e59d9;
+  -webkit-mask-image: var(--md-admonition-icon--people);
+  mask-image: var(--md-admonition-icon--people);
+}
+
+/* videos */
+.md-typeset .admonition.videos,
+.md-typeset details.videos {
+  border-color: #be44dc;
+}
+.md-typeset .videos > .admonition-title,
+.md-typeset .videos > summary {
+  background-color: #be44dc10;
+}
+.md-typeset .videos > .admonition-title::before,
+.md-typeset .videos > summary::before {
+  background-color: #be44dc;
+  -webkit-mask-image: var(--md-admonition-icon--videos);
+  mask-image: var(--md-admonition-icon--videos);
+}
+
+/* licensing */
+.md-typeset .admonition.licensing,
+.md-typeset details.licensing {
+  border-color: #802387;
+}
+.md-typeset .licensing > .admonition-title,
+.md-typeset .licensing > summary {
+  background-color: #80238710;
+}
+.md-typeset .licensing > .admonition-title::before,
+.md-typeset .licensing > summary::before {
+  background-color: #802387;
+  -webkit-mask-image: var(--md-admonition-icon--licensing);
+  mask-image: var(--md-admonition-icon--licensing);
+}
+
+/* exercise */
 .md-typeset .admonition.exercise,
 .md-typeset details.exercise {
   border-color: rgb(142, 142, 142);
@@ -206,6 +343,7 @@ h3 .enumerate-headings-plugin {
   mask-image: var(--md-admonition-icon--exercise);
 }
 
+/* result */
 .md-typeset .admonition.result,
 .md-typeset details.result {
   border-color: rgb(0, 200, 83);
@@ -221,6 +359,8 @@ h3 .enumerate-headings-plugin {
   -webkit-mask-image: var(--md-admonition-icon--result);
   mask-image: var(--md-admonition-icon--result);
 }
+
+/* solution */
 .md-typeset .admonition.solution,
 .md-typeset details.solution {
   border-color: rgb(0, 200, 83);
@@ -268,4 +408,26 @@ h3 .enumerate-headings-plugin {
 }
 .nextflow-primary {
   color: #58bd9f;
+}
+
+/* Index type badge - displays in top-right of index pages */
+.index-type-badge {
+  vertical-align: text-bottom;
+  margin-left: 1rem;
+  background-color: var(--md-primary-fg-color);
+  color: white;
+  padding: 0.3rem 0.8rem;
+  border-radius: 0.2rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+[data-md-color-scheme="slate"] .index-type-badge {
+  background-color: var(--md-primary-fg-color--dark);
+}
+
+.md-content__inner {
+  position: relative;
 }

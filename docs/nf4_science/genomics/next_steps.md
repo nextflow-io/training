@@ -10,7 +10,7 @@ Here are our top three recommendations for what to do next based on the course y
 
 ### 1.1. Apply Nextflow to other scientific analysis use cases
 
-**Check out the [Nextflow for Science](../nf4_science/index.md) page** for a list of other short standalone courses that demonstrate how to apply the basic concepts and mechanisms presented in Hello Nextflow to common scientific analysis use cases.
+**Check out the [Nextflow for Science](../index.md) page** for a list of other short standalone courses that demonstrate how to apply the basic concepts and mechanisms presented in Hello Nextflow to common scientific analysis use cases.
 
 If you don't see your domain represented by a relatable use case, let us know in the [Community forum](https://community.seqera.io/) so we can add it to our development list.
 
@@ -27,8 +27,6 @@ In the Hello courses, we keep the level of technical complexity low on purpose t
 As you move forward with your work, you're going to want to learn how to use the full feature set and power of Nextflow.
 
 To that end, we are currently working on a **collection of [Side Quests](../side_quests/index.md)**, which are meant to be short standalone courses that go deep into specific topics like testing and metadata handling.
-
-For any topics that's not covered there yet, **browse the [Fundamentals Training](../basic_training/index.md) and [Advanced Training](../advanced/index.md)** to find training materials about the topics that interest you.
 
 ---
 

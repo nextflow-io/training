@@ -6,7 +6,7 @@
 process sayHello {
 
     output:
-        path 'output.txt'
+    path 'output.txt'
 
     script:
     """
@@ -16,6 +16,7 @@ process sayHello {
 
 workflow {
 
+    main:
     // emit a greeting
     sayHello()
 }

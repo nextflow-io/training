@@ -36,6 +36,6 @@ workflow {
     // Run cowpy to generate ASCII art
     COWPY(
         ch_languages.map { meta, file -> file },
-        ch_languages.map { meta, file -> meta.character }
+        ch_languages.map { meta, file -> meta.character },
     )
 }

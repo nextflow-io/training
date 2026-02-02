@@ -1,5 +1,0 @@
-id,repeat,normal_fastq_1,normal_fastq_2,tumor_fastq_1,tumor_fastq_2
-sampleA,1,data/reads/sampleA_normal_R1.fastq.gz,data/reads/sampleA_normal_R2.fastq.gz,data/reads/sampleA_tumor_R1.fastq.gz,data/reads/sampleA_tumor_R2.fastq.gz
-sampleA,2,data/reads/sampleA_normal_R1.fastq.gz,data/reads/sampleA_normal_R2.fastq.gz,data/reads/sampleA_tumor_R1.fastq.gz,data/reads/sampleA_tumor_R2.fastq.gz
-sampleB,1,data/reads/sampleB_normal_R1.fastq.gz,data/reads/sampleB_normal_R2.fastq.gz,data/reads/sampleB_tumor_R1.fastq.gz,data/reads/sampleB_tumor_R2.fastq.gz
-sampleC,1,data/reads/sampleC_normal_R1.fastq.gz,data/reads/sampleC_normal_R2.fastq.gz,data/reads/sampleC_tumor_R1.fastq.gz,data/reads/sampleC_tumor_R2.fastq.gz

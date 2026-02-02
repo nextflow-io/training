@@ -1,18 +1,17 @@
 nextflow_process {
 
     name "Test Process SAMTOOLS_INDEX"
-    script "modules/samtools/index/main.nf"
+    script "../main.nf"
     process "SAMTOOLS_INDEX"
 
     test("Should index reads_son.bam correctly") {
 
         when {
             params {
-                outdir = "tests/results"
+                // define parameters here
             }
             process {
                 """
-                // define inputs of the process here. Example:
                 input[0] = file("${projectDir}/data/bam/reads_son.bam")
                 """
             }
@@ -29,7 +28,7 @@ nextflow_process {
 
         when {
             params {
-                outdir = "tests/results"
+                // define parameters here
             }
             process {
                 """
@@ -49,7 +48,7 @@ nextflow_process {
 
         when {
             params {
-                outdir = "tests/results"
+                // define parameters here
             }
             process {
                 """

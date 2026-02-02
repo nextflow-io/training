@@ -25,7 +25,6 @@ By the end of this workshop you will be able to:
 - Handle accessory files such as index files and reference genome resources appropriately
 - Leverage Nextflow's dataflow paradigm to parallelize per-sample variant calling
 - Implement multi-sample variant calling using relevant channel operators
-- Configure pipeline execution and manage and optimize resource allocations
 - Implement per-step and end-to-end pipeline tests that handle genomics-specific idiosyncrasies appropriately
 
 <!-- TODO for future expansion: add metadata/samplesheet handling -->

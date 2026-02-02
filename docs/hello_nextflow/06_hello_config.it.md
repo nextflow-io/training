@@ -285,7 +285,7 @@ Probabilmente non noterai alcuna differenza reale, poiché si tratta di un caric
 !!!note
 
     Questo è solo un piccolo assaggio di ciò che puoi fare per ottimizzare l'uso delle risorse.
-    Nextflow stesso ha una [logica di retry dinamica](https://training.nextflow.io/basic_training/debugging/#dynamic-resources-allocation) davvero interessante, utilizzata per riprovare i lavori che falliscono a causa di limitazioni di risorse.
+    Nextflow stesso ha una [logica di retry dinamica](https://www.nextflow.io/docs/latest/process.html#dynamic-task-resources) davvero interessante, utilizzata per riprovare i lavori che falliscono a causa di limitazioni di risorse.
     Inoltre, la piattaforma Seqera offre anche strumenti basati sull'intelligenza artificiale per ottimizzare automaticamente le allocazioni delle risorse.
 
     Parleremo di entrambi gli approcci in una prossima parte di questo corso di formazione.
