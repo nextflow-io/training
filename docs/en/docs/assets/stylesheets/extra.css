@@ -447,3 +447,8 @@ h3 .enumerate-headings-plugin {
   color: inherit;
   text-decoration: underline;
 }
+
+/* Language selector dropdown - allow dynamic height */
+.md-select__inner {
+  max-height: min(80vh, 30rem) !important;
+}
