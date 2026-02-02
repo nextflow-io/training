@@ -79,7 +79,7 @@ Comme précédemment, vous trouverez le fichier de sortie nommé `output.txt` da
     Hello Channels!
     ```
 
-Si cela a fonctionné pour vous, vous êtes prêt à apprendre les canaux.
+Si cela a fonctionné pour vous, vous êtes prêt·e à apprendre les canaux.
 
 ---
 
@@ -1338,7 +1338,7 @@ Plus généralement, vous avez une compréhension de base de la façon dont Next
 
 Prenez une grande pause, vous avez travaillé dur sur celui-ci !
 
-Quand vous êtes prêt, passez à la [**Partie 3 : Hello Workflow**](./03_hello_workflow.md) pour apprendre comment ajouter plus d'étapes et les connecter ensemble dans un vrai flux de travail.
+Quand vous êtes prêt·e, passez à la [**Partie 3 : Hello Workflow**](./03_hello_workflow.md) pour apprendre comment ajouter plus d'étapes et les connecter ensemble dans un vrai flux de travail.
 
 ---
 

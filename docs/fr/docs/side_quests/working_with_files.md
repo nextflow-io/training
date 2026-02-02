@@ -110,14 +110,14 @@ Votre défi est d'écrire un flux de travail Nextflow qui va :
 
 #### Liste de vérification de préparation
 
-Vous pensez être prêt à vous lancer ?
+Vous pensez être prêt·e à vous lancer ?
 
 - [ ] Je comprends l'objectif de ce cours et ses prérequis
 - [ ] Mon espace de code est opérationnel
 - [ ] J'ai défini mon répertoire de travail de manière appropriée
 - [ ] Je comprends l'exercice
 
-Si vous pouvez cocher toutes les cases, vous êtes prêt.
+Si vous pouvez cocher toutes les cases, vous êtes prêt·e.
 
 ---
 

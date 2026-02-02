@@ -998,7 +998,7 @@ Vous trouverez le fichier de sortie final, `family_trio.joint.vcf` (et son index
         └── reads_son.bam.bai -> */cc/fbc705*/reads_son.bam.bai
     ```
 
-Si vous êtes du genre sceptique, vous pouvez cliquer sur le fichier VCF conjoint pour l'ouvrir et vérifier que le workflow a généré les mêmes appels de variants que vous avez obtenus en exécutant les outils manuellement au début de cette section.
+Si vous êtes du genre sceptique (ou curieux·se), vous pouvez cliquer sur le fichier VCF conjoint pour l'ouvrir et vérifier que le workflow a généré les mêmes appels de variants que vous avez obtenus en exécutant les outils manuellement au début de cette section.
 
 ```console title="family_trio.joint.vcf" linenums="40"
 #CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	reads_father	reads_mother	reads_son

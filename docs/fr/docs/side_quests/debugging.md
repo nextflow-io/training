@@ -102,14 +102,14 @@ Les solutions sont discutées en ligne, mais essayez de résoudre chaque problè
 
 #### Liste de vérification de préparation
 
-Pensez-vous être prêt à vous lancer ?
+Pensez-vous être prêt·e à vous lancer ?
 
 - [ ] Je comprends l'objectif de ce cours et ses prérequis
 - [ ] Mon espace de code est opérationnel
 - [ ] J'ai défini mon répertoire de travail de manière appropriée
 - [ ] Je comprends l'exercice
 
-Si vous pouvez cocher toutes les cases, vous êtes prêt à commencer.
+Si vous pouvez cocher toutes les cases, vous êtes prêt·e à commencer.
 
 ---
 

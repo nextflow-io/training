@@ -1130,7 +1130,7 @@ Plus généralement, vous savez comment interpréter un flux de travail Nextflow
 
 Faites une petite pause, vous l'avez bien mérité !
 
-Quand vous êtes prêt, passez à la [**Partie 2 : Hello Channels**](./02_hello_channels.md) pour apprendre comment utiliser les canaux pour alimenter les entrées dans votre flux de travail, ce qui vous permettra de profiter du parallélisme de flux de données intégré de Nextflow et d'autres fonctionnalités puissantes.
+Quand vous êtes prêt·e, passez à la [**Partie 2 : Hello Channels**](./02_hello_channels.md) pour apprendre comment utiliser les canaux pour alimenter les entrées dans votre flux de travail, ce qui vous permettra de profiter du parallélisme de flux de données intégré de Nextflow et d'autres fonctionnalités puissantes.
 
 ---
 

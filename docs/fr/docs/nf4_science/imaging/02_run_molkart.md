@@ -562,4 +562,4 @@ Vous savez comment utiliser `-resume` pour réexécuter efficacement les pipelin
 
 ### Et maintenant ?
 
-Maintenant que vous pouvez exécuter nf-core/molkart avec des données de test, vous êtes prêt à apprendre comment le configurer pour vos propres ensembles de données.
+Maintenant que vous pouvez exécuter nf-core/molkart avec des données de test, vous êtes prêt·e à apprendre comment le configurer pour vos propres ensembles de données.

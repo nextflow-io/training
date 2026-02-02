@@ -89,14 +89,14 @@ Nous utiliserons cet ensemble de données réaliste pour explorer des techniques
 
 #### Liste de vérification de la préparation
 
-Pensez-vous être prêt à vous lancer ?
+Pensez-vous être prêt·e à vous lancer ?
 
 - [ ] Je comprends l'objectif de ce cours et ses prérequis
 - [ ] Mon codespace est opérationnel
 - [ ] J'ai défini mon répertoire de travail de manière appropriée
 <!-- - [ ] Je comprends l'assignation -->
 
-Si vous pouvez cocher toutes les cases, vous êtes prêt.
+Si vous pouvez cocher toutes les cases, vous êtes prêt·e.
 
 ---
 

@@ -95,7 +95,7 @@ Comme précédemment, vous trouverez les fichiers de sortie dans le répertoire 
     └── UPPER-Holà-output.txt
     ```
 
-Si cela a fonctionné pour vous, vous êtes prêt à apprendre comment modulariser votre code de workflow.
+Si cela a fonctionné pour vous, vous êtes prêt·e à apprendre comment modulariser votre code de workflow.
 
 ---
 
@@ -450,7 +450,7 @@ C'est mieux que de copier-coller le code, parce que si plus tard vous décidez d
 
 Prenez une courte pause si vous le souhaitez.
 
-Quand vous êtes prêt, passez à la [**Partie 5 : Hello Containers**](./05_hello_containers.md) pour apprendre comment utiliser les conteneurs pour gérer les dépendances logicielles de manière plus pratique et reproductible.
+Quand vous êtes prêt·e, passez à la [**Partie 5 : Hello Containers**](./05_hello_containers.md) pour apprendre comment utiliser les conteneurs pour gérer les dépendances logicielles de manière plus pratique et reproductible.
 
 ---
 

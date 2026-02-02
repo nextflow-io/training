@@ -39,7 +39,7 @@ Vous acquerrez les compétences et la confiance nécessaires pour commencer à d
 
 Ce cours est conçu pour être pratique, avec des exercices orientés objectifs structurés pour introduire l'information progressivement.
 
-Vous serez initié à [**nf-core**](https://nf-co.re/), un effort communautaire pour développer et maintenir un ensemble organisé de pipelines scientifiques construits avec Nextflow, ainsi que les outils et directives pertinents qui favorisent le développement ouvert, les tests et l'évaluation par les pairs ([Nat Biotechnol 38, 276–278 (2020)](https://www.nature.com/articles/s41587-020-0439-x), [Genome Biol 26, 228 (2025)](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-025-03673-9)).
+Vous serez initié·e à [**nf-core**](https://nf-co.re/), un effort communautaire pour développer et maintenir un ensemble organisé de pipelines scientifiques construits avec Nextflow, ainsi que les outils et directives pertinents qui favorisent le développement ouvert, les tests et l'évaluation par les pairs ([Nat Biotechnol 38, 276–278 (2020)](https://www.nature.com/articles/s41587-020-0439-x), [Genome Biol 26, 228 (2025)](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-025-03673-9)).
 
 Les pipelines développés par la communauté nf-core sont conçus pour être modulaires, évolutifs et portables, permettant aux chercheurs de les adapter et de les exécuter facilement avec leurs propres données et ressources de calcul.
 Les directives de bonnes pratiques imposées par le projet garantissent en outre que les pipelines sont robustes, bien documentés et validés sur des ensembles de données réels.

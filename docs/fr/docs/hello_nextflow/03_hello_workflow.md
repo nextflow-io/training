@@ -79,7 +79,7 @@ Pour ce chapitre, c'est sous `results/hello_workflow/`.
     └── Holà-output.txt
     ```
 
-Si cela a fonctionné pour vous, vous êtes prêt à apprendre comment assembler un workflow multi-étapes.
+Si cela a fonctionné pour vous, vous êtes prêt·e à apprendre comment assembler un workflow multi-étapes.
 
 ---
 
@@ -1086,7 +1086,7 @@ Plus généralement, vous comprenez les principes clés impliqués dans la conne
 
 Prenez une pause extra longue, vous l'avez bien méritée.
 
-Quand vous êtes prêt, passez à la [**Partie 4 : Hello Modules**](./04_hello_modules.md) pour apprendre comment modulariser votre code pour une meilleure maintenabilité et efficacité du code.
+Quand vous êtes prêt·e, passez à la [**Partie 4 : Hello Modules**](./04_hello_modules.md) pour apprendre comment modulariser votre code pour une meilleure maintenabilité et efficacité du code.
 
 ---
 

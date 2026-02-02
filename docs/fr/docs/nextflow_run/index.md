@@ -52,8 +52,8 @@ Nous avons divisé cela en trois parties qui se concentreront chacune sur des as
 | [Partie 2 : Exécuter de vrais pipelines](./02_pipeline.md)   | Traiter des entrées complexes, exécuter des workflows multi-étapes, utiliser des conteneurs et paralléliser l'exécution sans effort | 60 mins       |
 | [Partie 3 : Configuration d'exécution](./03_config.md)       | Personnaliser le comportement du pipeline et optimiser l'utilisation dans différents environnements de calcul                       | 60 mins       |
 
-À la fin de cette formation, vous serez bien préparé pour aborder les prochaines étapes de votre parcours pour exécuter des workflows reproductibles pour vos besoins de calcul scientifique.
+À la fin de cette formation, vous serez bien préparé·e pour aborder les prochaines étapes de votre parcours pour exécuter des workflows reproductibles pour vos besoins de calcul scientifique.
 
-Prêt à suivre la formation ?
+Prêt·e à suivre la formation ?
 
 [Commencer l'apprentissage :material-arrow-right:](00_orientation.md){ .md-button .md-button--primary }

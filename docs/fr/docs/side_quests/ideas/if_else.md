@@ -86,4 +86,4 @@ Vous savez comment utiliser des conteneurs dans Nextflow pour exécuter des proc
 
 Félicitations, prenez une pause pour vous étirer et boire de l'eau !
 
-Lorsque vous êtes prêt, passez à la Partie 3 de cette série de formation pour apprendre à appliquer ce que vous avez appris jusqu'à présent à un cas d'usage d'analyse de données plus réaliste.
+Lorsque vous êtes prêt·e, passez à la Partie 3 de cette série de formation pour apprendre à appliquer ce que vous avez appris jusqu'à présent à un cas d'usage d'analyse de données plus réaliste.

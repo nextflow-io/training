@@ -108,14 +108,14 @@ Ceci représente un modèle bioinformatique courant où vous devez diviser les d
 
 #### Liste de vérification de préparation
 
-Pensez-vous être prêt à vous lancer ?
+Pensez-vous être prêt·e à vous lancer ?
 
 - [ ] Je comprends l'objectif de ce cours et ses prérequis
 - [ ] Mon codespace est opérationnel
 - [ ] J'ai configuré mon répertoire de travail de manière appropriée
 - [ ] Je comprends l'assignation
 
-Si vous pouvez cocher toutes les cases, vous êtes prêt à commencer.
+Si vous pouvez cocher toutes les cases, vous êtes prêt·e à commencer.
 
 ---
 
@@ -366,7 +366,7 @@ Nous avons maintenant séparé les échantillons normaux et tumoraux dans deux c
 
 Dans la section précédente, nous avons séparé les échantillons normaux et tumoraux dans deux canaux différents. Ceux-ci pourraient être traités indépendamment en utilisant des processes ou workflows spécifiques en fonction de leur type. Mais que se passe-t-il lorsque nous voulons comparer les échantillons normaux et tumoraux du même patient ? À ce stade, nous devons les joindre à nouveau en nous assurant de faire correspondre les échantillons en fonction de leur champ `id`.
 
-Nextflow inclut de nombreuses méthodes pour combiner des canaux, mais dans ce cas, l'opérateur le plus approprié est [`join`](https://www.nextflow.io/docs/latest/operator.html#join). Si vous êtes familier avec SQL, il agit comme l'opération `JOIN`, où nous spécifions la clé sur laquelle joindre et le type de jointure à effectuer.
+Nextflow inclut de nombreuses méthodes pour combiner des canaux, mais dans ce cas, l'opérateur le plus approprié est [`join`](https://www.nextflow.io/docs/latest/operator.html#join). Si vous êtes familier·ère avec SQL, il agit comme l'opération `JOIN`, où nous spécifions la clé sur laquelle joindre et le type de jointure à effectuer.
 
 ### 3.1. Utiliser `map` et `join` pour combiner en fonction de l'identifiant patient
 

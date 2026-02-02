@@ -2,7 +2,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Si vous avez une installation Docker locale ou êtes prêt à en installer une, le moyen le plus simple de travailler localement avec ces supports est d'utiliser la fonctionnalité devcontainer de Visual Studio Code. Cette approche fournit tous les outils et dépendances nécessaires sans nécessiter d'installation manuelle.
+Si vous avez une installation Docker locale ou êtes prêt·e à en installer une, le moyen le plus simple de travailler localement avec ces supports est d'utiliser la fonctionnalité devcontainer de Visual Studio Code. Cette approche fournit tous les outils et dépendances nécessaires sans nécessiter d'installation manuelle.
 
 ## Exigences
 
@@ -59,7 +59,7 @@ Si VS Code vous invite à « Reopen in Container », cliquez dessus. Sinon :
 
 - Appuyez sur F1 (ou Ctrl+Shift+P / Cmd+Shift+P sur macOS)
 - Tapez « Dev Containers: Reopen in Container »
-- **Important** : Lorsque vous êtes invité à sélectionner une configuration, choisissez la configuration devcontainer **local-dev**
+- **Important** : Lorsque vous êtes invité·e à sélectionner une configuration, choisissez la configuration devcontainer **local-dev**
 
 ![Invite Rouvrir dans le conteneur](img/reopen_prompt.png)
 

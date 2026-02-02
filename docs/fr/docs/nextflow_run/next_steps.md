@@ -42,7 +42,7 @@ La configuration du workflow prend en charge la fourniture d'entrées et de para
 - Décrire des concepts avancés tels que les opérateurs et les fabriques de channel
 - Configurer des pipelines pour différents environnements de calcul
 
-Vous êtes maintenant équipé des connaissances fondamentales pour commencer à intégrer des pipelines Nextflow existants dans votre propre travail.
+Vous êtes maintenant équipé·e des connaissances fondamentales pour commencer à intégrer des pipelines Nextflow existants dans votre propre travail.
 
 ## Prochaines étapes pour développer vos compétences
 

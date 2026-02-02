@@ -126,12 +126,12 @@ Nous utilisons des sections pliables comme celle-ci pour inclure la sortie de co
 
 ## Liste de vérification de préparation
 
-Vous pensez être prêt à vous lancer ?
+Vous pensez être prêt·e à vous lancer ?
 
 - [ ] Je comprends l'objectif de ce cours et ses prérequis
 - [ ] Mon environnement est opérationnel
 - [ ] J'ai défini mon répertoire de travail de manière appropriée
 
-Si vous pouvez cocher toutes les cases, vous êtes prêt à commencer.
+Si vous pouvez cocher toutes les cases, vous êtes prêt·e à commencer.
 
 **Pour continuer vers la [Partie 1 : Hello World](./01_hello_world.md), cliquez sur la flèche dans le coin inférieur droit de cette page.**

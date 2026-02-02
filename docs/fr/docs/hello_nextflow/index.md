@@ -52,9 +52,9 @@ Afin de ne pas vous submerger de concepts et de code, nous avons divisé cela en
 | [Partie 5 : Hello Containers](./05_hello_containers.md) | Utilisation des conteneurs comme mécanisme de gestion des dépendances logicielles et augmentation de la reproductibilité | 60 min        |
 | [Partie 6 : Hello Config](./06_hello_config.md)         | Personnalisation du comportement du pipeline et optimisation de l'utilisation dans différents environnements de calcul   | 60 min        |
 
-À la fin de ce cours, vous serez bien préparé pour aborder les prochaines étapes de votre parcours pour développer des flux de travail reproductibles pour vos besoins de calcul scientifique.
+À la fin de ce cours, vous serez bien préparé·e pour aborder les prochaines étapes de votre parcours pour développer des flux de travail reproductibles pour vos besoins de calcul scientifique.
 
-Prêt à suivre le cours ?
+Prêt·e à suivre le cours ?
 
 [Commencer :material-arrow-right:](00_orientation.md){ .md-button .md-button--primary }
 

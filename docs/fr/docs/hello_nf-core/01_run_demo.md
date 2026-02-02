@@ -634,11 +634,11 @@ Le schéma est utilisé à diverses fins, notamment la validation automatisée e
 
 ### À retenir
 
-Vous savez quels sont les principaux composants d'un pipeline nf-core et comment le code est organisé ; où se trouvent les principaux éléments de configuration ; et vous êtes conscient de l'utilité de la validation des entrées.
+Vous savez quels sont les principaux composants d'un pipeline nf-core et comment le code est organisé ; où se trouvent les principaux éléments de configuration ; et vous êtes conscient·e de l'utilité de la validation des entrées.
 
 ### Et ensuite ?
 
-Faites une pause ! C'était beaucoup. Lorsque vous vous sentez rafraîchi et prêt, passez à la section suivante pour appliquer ce que vous avez appris afin d'écrire un pipeline compatible nf-core.
+Faites une pause ! C'était beaucoup. Lorsque vous vous sentez rafraîchi·e et prêt·e, passez à la section suivante pour appliquer ce que vous avez appris afin d'écrire un pipeline compatible nf-core.
 
 !!! tip
 

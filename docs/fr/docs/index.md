@@ -53,7 +53,7 @@ hide:
 
     ??? people "Informations pour les formateurs"
 
-        Si vous êtes un formateur qui organise vos propres formations, vous êtes invité à utiliser nos supports directement depuis le portail de formation à condition d'attribuer les crédits appropriés. Voir « Crédits et contributions » ci-dessous pour plus de détails.
+        Si vous êtes un·e formateur·trice qui organise vos propres formations, vous êtes invité·e à utiliser nos supports directement depuis le portail de formation à condition d'attribuer les crédits appropriés. Voir « Crédits et contributions » ci-dessous pour plus de détails.
 
         De plus, nous aimerions avoir de vos nouvelles sur la façon dont nous pourrions mieux soutenir vos efforts de formation ! Veuillez nous contacter à [community@seqera.io](mailto:community@seqera.io) ou sur le forum communautaire (voir la page [Aide](help.md)).
 

@@ -1130,7 +1130,7 @@ Le drapeau `--empty-template` crée un modèle de démarrage propre sans code su
 La commande s'exécute de manière interactive, vous guidant à travers la configuration.
 Elle recherche automatiquement les informations sur l'outil à partir de dépôts de paquets comme Bioconda et bio.tools pour pré-remplir les métadonnées.
 
-Vous serez invité à fournir plusieurs options de configuration :
+Vous serez invité·e à fournir plusieurs options de configuration :
 
 - **Informations sur l'auteur** : Votre nom d'utilisateur GitHub pour l'attribution
 - **Étiquette de ressource** : Un ensemble prédéfini d'exigences de calcul.

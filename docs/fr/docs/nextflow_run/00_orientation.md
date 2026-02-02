@@ -111,12 +111,12 @@ Nous utilisons des sections repliables comme celle-ci pour afficher la sortie at
 
 ## Liste de vérification de préparation
 
-Vous pensez être prêt à plonger ?
+Vous pensez être prêt·e à plonger ?
 
 - [ ] Je comprends l'objectif de cette formation et ses prérequis
 - [ ] Mon environnement est opérationnel
 - [ ] J'ai défini mon répertoire de travail de manière appropriée
 
-Si vous pouvez cocher toutes les cases, vous êtes prêt à commencer.
+Si vous pouvez cocher toutes les cases, vous êtes prêt·e à commencer.
 
 **Pour continuer vers [Partie 1 : Exécuter les opérations de base](./01_basics.md), cliquez sur la flèche en bas à droite de cette page.**

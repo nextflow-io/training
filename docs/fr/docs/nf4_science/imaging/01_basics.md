@@ -407,4 +407,4 @@ Vous savez comment relancer un pipeline sans répéter les étapes qui ont déj�
 
 ### Et ensuite ?
 
-Maintenant que vous comprenez les opérations de base de Nextflow, vous êtes prêt à exécuter un véritable pipeline de bio-imagerie avec nf-core/molkart.
+Maintenant que vous comprenez les opérations de base de Nextflow, vous êtes prêt·e à exécuter un véritable pipeline de bio-imagerie avec nf-core/molkart.

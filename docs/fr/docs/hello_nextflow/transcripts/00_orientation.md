@@ -16,9 +16,9 @@ Bonjour, bienvenue à Hello Nextflow. Je m'appelle Phil Ewels. Je suis Chef de P
 
 Nous allons passer en revue les bases de Nextflow, en expliquant comment écrire et exécuter des pipelines et les configurer.
 
-Et vous allez construire votre propre pipeline simple à plusieurs étapes. Nous couvrirons la terminologie comme les opérateurs et les fabriques de canaux, et à la fin du cours, vous serez prêt à commencer à construire vos propres pipelines bioinformatiques.
+Et vous allez construire votre propre pipeline simple à plusieurs étapes. Nous couvrirons la terminologie comme les opérateurs et les fabriques de canaux, et à la fin du cours, vous serez prêt·e à commencer à construire vos propres pipelines bioinformatiques.
 
-Si vous avez des questions, n'hésitez pas à nous contacter sur community.seqera.io. Nous avons une communauté Nextflow très active, il y a une section dédiée à la formation, alors faites-nous savoir où vous êtes bloqué et quelqu'un pourra vous aider.
+Si vous avez des questions, n'hésitez pas à nous contacter sur community.seqera.io. Nous avons une communauté Nextflow très active, il y a une section dédiée à la formation, alors faites-nous savoir où vous êtes bloqué·e et quelqu'un pourra vous aider.
 
 Très bien. Commençons.
 
@@ -56,7 +56,7 @@ Maintenant je vais cliquer sur créer un codespace. Et il va commencer à config
 
 Maintenant, la première fois que vous faites cela, cela va prendre pas mal de temps, donc c'est le bon moment pour aller prendre une tasse de thé. Installez-vous confortablement, discutez avec la personne assise à côté de vous.
 
-Si vous êtes intéressé, vous pouvez cliquer sur building codespace ici en bas pour voir les logs de la configuration. Et vous pouvez voir ici qu'il télécharge une image Docker avec tout ce dont j'ai besoin et configure l'environnement.
+Si vous êtes intéressé·e, vous pouvez cliquer sur building codespace ici en bas pour voir les logs de la configuration. Et vous pouvez voir ici qu'il télécharge une image Docker avec tout ce dont j'ai besoin et configure l'environnement.
 
 Maintenant, vous devez seulement attendre comme ça la première fois que vous créez un codespace. Si vous allez sur github.com/codespaces ici, vous verrez tous les différents Codespaces que vous avez ouverts. Voici celui que je viens de créer. La prochaine fois que vous faites cela, vous pouvez aller ici et vous pouvez sélectionner le codespace précédent et y revenir directement. Et c'est un processus beaucoup, beaucoup plus rapide pour réchauffer cet environnement existant. Cela conservera également toutes les modifications que vous avez apportées à VS Code et aux fichiers, donc vous ne perdrez pas votre progression si vous partez et revenez.
 
@@ -66,7 +66,7 @@ Vous pouvez cliquer sur les trois points ici pour effectuer d'autres actions. Pa
 
 D'accord, Codespaces a fini de configurer mon environnement et je suis maintenant présenté avec VS Code dans le navigateur web.
 
-Si vous êtes habitué à VS code, cela vous semblera très familier. Si vous ne l'avez pas utilisé auparavant, c'est assez simple. Il y a quelques parties différentes de la page dont vous devez être conscient.
+Si vous êtes habitué·e à VS code, cela vous semblera très familier. Si vous ne l'avez pas utilisé auparavant, c'est assez simple. Il y a quelques parties différentes de la page dont vous devez être conscient.
 
 Ici sur la gauche, nous avons la barre latérale. Vous pouvez voir l'Explorateur configuré avec tous les différents fichiers dans le dépôt GitHub du dépôt de formation.
 

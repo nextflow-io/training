@@ -21,7 +21,7 @@ Si vous ne voyez pas votre domaine représenté par un cas d'usage pertinent, fa
 **[nf-core](https://nf-co.re/)** est un effort collaboratif mondial visant à développer des pipelines open-source standardisés pour un large éventail d'applications de recherche scientifique.
 Le projet comprend [plus de 100 pipelines](https://nf-co.re/pipelines/) disponibles prêts à l'emploi et [bien plus de 1400 modules de processus](https://nf-co.re/modules/) qui peuvent être intégrés dans vos propres projets, ainsi qu'un riche ensemble d'outils de développement.
 
-Le cours de formation **[Hello nf-core](../../hello_nf-core/index.md)** vous présentera les pipelines organisés par la communauté nf-core et le framework de développement, conçu pour vous aider à écrire des workflows reproductibles, évolutifs et standardisés. Vous apprendrez à utiliser les pipelines nf-core existants, à contribuer à leur développement, et même à commencer à construire les vôtres, soutenus par les meilleures pratiques et une communauté dynamique. Si vous êtes prêt à appliquer vos compétences Nextflow dans des projets concrets, c'est l'étape suivante idéale.
+Le cours de formation **[Hello nf-core](../../hello_nf-core/index.md)** vous présentera les pipelines organisés par la communauté nf-core et le framework de développement, conçu pour vous aider à écrire des workflows reproductibles, évolutifs et standardisés. Vous apprendrez à utiliser les pipelines nf-core existants, à contribuer à leur développement, et même à commencer à construire les vôtres, soutenus par les meilleures pratiques et une communauté dynamique. Si vous êtes prêt·e à appliquer vos compétences Nextflow dans des projets concrets, c'est l'étape suivante idéale.
 
 ### 1.3. Maîtriser les fonctionnalités avancées de Nextflow
 

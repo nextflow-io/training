@@ -73,14 +73,14 @@ Votre défi est d'assembler ces modules en deux workflows séparés que nous com
 
 #### Liste de vérification de préparation
 
-Pensez-vous être prêt à vous lancer ?
+Pensez-vous être prêt·e à vous lancer ?
 
 - [ ] Je comprends l'objectif de ce cours et ses prérequis
 - [ ] Mon codespace est opérationnel
 - [ ] J'ai défini mon répertoire de travail de manière appropriée
 - [ ] Je comprends l'exercice
 
-Si vous pouvez cocher toutes les cases, vous êtes prêt à commencer.
+Si vous pouvez cocher toutes les cases, vous êtes prêt·e à commencer.
 
 ---
 

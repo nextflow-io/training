@@ -139,7 +139,7 @@ La sortie finale d'art ASCII est dans le répertoire `results/hello_config/`, so
                           ^^^ ^^ ^^^ ^
     ```
 
-Si cela a fonctionné pour vous, vous êtes prêt à apprendre comment configurer vos pipelines.
+Si cela a fonctionné pour vous, vous êtes prêt·e à apprendre comment configurer vos pipelines.
 
 ---
 

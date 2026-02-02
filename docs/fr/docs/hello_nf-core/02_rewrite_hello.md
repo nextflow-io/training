@@ -81,7 +81,7 @@ Une fois que la TUI se ferme, vous devriez voir la sortie de console suivante.
 
 Il n'y a pas de confirmation explicite dans la sortie de console que la création du pipeline a réussi, mais vous devriez voir un nouveau répertoire appelé `core-hello`.
 
-Visualisez le contenu du nouveau répertoire pour voir combien de travail vous vous êtes épargné en utilisant le modèle.
+Visualisez le contenu du nouveau répertoire pour voir combien de travail vous vous êtes épargné·e en utilisant le modèle.
 
 ```bash
 tree core-hello
@@ -146,7 +146,7 @@ tree core-hello
 Cela fait beaucoup de fichiers !
 
 Vous devriez en reconnaître beaucoup comme étant les mêmes que nous avons rencontrés lorsque nous avons exploré la structure du pipeline `nf-core/demo`.
-Mais ne vous inquiétez pas si vous vous sentez encore un peu perdu ; nous parcourrons ensemble les parties importantes au cours de cette formation.
+Mais ne vous inquiétez pas si vous vous sentez encore un peu perdu·e ; nous parcourrons ensemble les parties importantes au cours de cette formation.
 
 !!! note "Note"
 

@@ -99,7 +99,7 @@ Comme précédemment, vous trouverez les fichiers de sortie dans le répertoire 
     └── UPPER-Holà-output.txt
     ```
 
-Si cela a fonctionné pour vous, vous êtes prêt à apprendre comment utiliser les conteneurs.
+Si cela a fonctionné pour vous, vous êtes prêt·e à apprendre comment utiliser les conteneurs.
 
 ---
 
@@ -415,7 +415,7 @@ Pour démontrer ceci, nous allons ajouter une étape `cowpy` au pipeline que nou
 --8<-- "docs/nextflow_run/img/hello-pipeline-cowpy.svg"
 </figure>
 
-Meuglez si vous êtes prêt à plonger !
+Meuglez si vous êtes prêt·e à plonger !
 
 ### 2.1. Écrire un module `cowpy`
 
@@ -1087,7 +1087,7 @@ Vous savez comment utiliser les conteneurs dans Nextflow pour exécuter des proc
 
 Prenez une pause !
 
-Quand vous êtes prêt, passez à la [**Partie 6 : Hello Config**](./06_hello_config.md) pour apprendre comment configurer l'exécution de votre pipeline pour s'adapter à votre infrastructure ainsi que gérer la configuration des entrées et des paramètres.
+Quand vous êtes prêt·e, passez à la [**Partie 6 : Hello Config**](./06_hello_config.md) pour apprendre comment configurer l'exécution de votre pipeline pour s'adapter à votre infrastructure ainsi que gérer la configuration des entrées et des paramètres.
 
 C'est la toute dernière partie, et ensuite vous aurez terminé ce cours !
 

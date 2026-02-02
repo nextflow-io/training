@@ -30,7 +30,7 @@ Ce guide se concentre sur les **fonctionnalités de productivité de l'IDE** qui
 
 !!! info "Pourquoi les fonctionnalités IDE maintenant ?"
 
-    Vous avez probablement déjà utilisé VS Code pendant le cours [Hello Nextflow](../hello_nextflow/), mais nous avons maintenu l'accent sur l'apprentissage des fondamentaux de Nextflow plutôt que sur les fonctionnalités de l'IDE. Maintenant que vous êtes à l'aise avec les concepts de base de Nextflow comme les processus, workflows, canaux et modules, vous êtes prêt à exploiter les fonctionnalités sophistiquées de l'IDE qui feront de vous un développeur plus efficace.
+    Vous avez probablement déjà utilisé VS Code pendant le cours [Hello Nextflow](../hello_nextflow/), mais nous avons maintenu l'accent sur l'apprentissage des fondamentaux de Nextflow plutôt que sur les fonctionnalités de l'IDE. Maintenant que vous êtes à l'aise avec les concepts de base de Nextflow comme les processus, workflows, canaux et modules, vous êtes prêt·e à exploiter les fonctionnalités sophistiquées de l'IDE qui feront de vous un développeur·se plus efficace.
 
     Considérez cela comme une « montée en compétence » de votre environnement de développement - l'éditeur que vous utilisez déjà possède des capacités bien plus puissantes qui deviennent vraiment précieuses une fois que vous comprenez ce qu'elles vous apportent.
 

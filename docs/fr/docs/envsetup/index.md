@@ -49,5 +49,5 @@ Si aucune des options ci-dessus ne convient à vos besoins, vous pouvez reprodui
     Cependant, les créateurs de Gitpod ont décidé de retirer la fonctionnalité gratuite au profit du système [Gitpod Flex](https://www.gitpod.io/blog/introducing-gitpod-flex).
     Pour cette raison, nous sommes passés à l'utilisation de GitHub Codespaces, qui offre également un environnement de développement en un clic sans configuration préalable.
 
-    Selon le moment où vous vous êtes inscrit à Gitpod et le moment exact où ils retireront le service, vous pourriez encore être en mesure de lancer la formation dans leur ancien IDE cloud, bien que nous ne puissions pas garantir un accès fiable à l'avenir :
+    Selon le moment où vous vous êtes inscrit·e à Gitpod et le moment exact où ils retireront le service, vous pourriez encore être en mesure de lancer la formation dans leur ancien IDE cloud, bien que nous ne puissions pas garantir un accès fiable à l'avenir :
     [Ouvrir dans Gitpod](https://gitpod.io/#https://github.com/nextflow-io/training).

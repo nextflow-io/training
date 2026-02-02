@@ -21,7 +21,7 @@ Pour démontrer comment cela fonctionne, nous remplacerons le module personnalis
     cd core-hello
     ```
 
-    Cela vous donne un pipeline nf-core entièrement fonctionnel prêt pour l'ajout de modules.
+    Cela vous donne un pipeline nf-core entièrement fonctionnel, prêt pour l'ajout de modules.
     Vous pouvez tester qu'il s'exécute avec succès en exécutant la commande suivante :
 
     ```bash

@@ -551,7 +551,7 @@ Cela vous donne un bon aperçu de la façon dont les processes sont connectés e
 Vous voyez qu'en plus du process `sayHello` original, nous avons maintenant aussi `convertToUpper` et `collectGreetings`, qui correspondent aux noms des processes que nous avons vus dans la sortie console.
 Les deux nouvelles définitions de process sont structurées de la même manière que le process `sayHello`, sauf que `collectGreetings` prend un paramètre d'entrée supplémentaire appelé `batch` et produit deux sorties.
 
-Nous n'entrerons pas dans le code de chacun en détail, mais si vous êtes curieux, vous pouvez consulter les détails dans [Partie 2 de Hello Nextflow](../hello_nextflow/03_hello_workflow.md).
+Nous n'entrerons pas dans le code de chacun en détail, mais si vous êtes curieux·se, vous pouvez consulter les détails dans [Partie 2 de Hello Nextflow](../hello_nextflow/03_hello_workflow.md).
 
 Pour l'instant, creusons dans la façon dont les processes sont connectés les uns aux autres.
 

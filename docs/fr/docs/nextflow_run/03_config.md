@@ -1488,7 +1488,7 @@ Vous savez comment exécuter des pipelines directement depuis GitHub et d'autres
 Félicitez-vous bien !
 Vous savez tout ce que vous devez savoir pour commencer à exécuter et gérer des pipelines Nextflow.
 
-Cela conclut cette formation, mais si vous êtes impatient de continuer à apprendre, nous avons deux recommandations principales :
+Cela conclut cette formation, mais si vous êtes impatient·e de continuer à apprendre, nous avons deux recommandations principales :
 
 - Si vous voulez approfondir le développement de vos propres pipelines, consultez [Hello Nextflow](../hello_nextflow/index.md), une formation pour débutants qui couvre la même progression générale que celle-ci mais va beaucoup plus en détail sur les channels et les opérateurs.
 - Si vous souhaitez continuer à apprendre comment exécuter des pipelines Nextflow sans aller plus profondément dans le code, consultez la première partie de [Hello nf-core](../hello_nf-core/index.md), qui introduit les outils pour trouver et exécuter des pipelines du projet très populaire [nf-core](https://nf-co.re/).

@@ -38,7 +38,7 @@ N'hésitez pas à exécuter ce workflow à nouveau et vérifiez qu'il produit le
 
 ## 1. Utiliser un conteneur 'manuellement'
 
-Pour commencer ce chapitre, nous allons faire un petit récapitulatif sur la technologie des conteneurs. Si vous êtes très habitué à docker ou singularity ou d'autres technologies de conteneurs, alors considérez ceci comme un rappel, ou n'hésitez pas à le sauter complètement.
+Pour commencer ce chapitre, nous allons faire un petit récapitulatif sur la technologie des conteneurs. Si vous êtes très habitué·e à docker ou singularity ou d'autres technologies de conteneurs, alors considérez ceci comme un rappel, ou n'hésitez pas à le sauter complètement.
 
 Nextflow supporte de nombreux types différents de technologies de conteneurs. Cela inclut Docker, Singularity, Podman, Shifter, Charliecloud, et plus encore.
 
@@ -60,7 +60,7 @@ Vous pouvez construire des images vous-même. Vous pouvez les trouver sur des re
 
 C'est un service communautaire gratuit que nous avons construit en 2024, que vous pouvez utiliser sans connexion ni rien.
 
-Si vous allez sur seqera.io/containers ou cliquez sur containers en haut ici, vous êtes présenté avec une interface de recherche et vous pouvez taper le nom de n'importe quel outil disponible dans Conda ou sur le Python Package Index.
+Si vous allez sur seqera.io/containers ou cliquez sur containers en haut ici, vous êtes présenté·e avec une interface de recherche et vous pouvez taper le nom de n'importe quel outil disponible dans Conda ou sur le Python Package Index.
 
 Par défaut, il recherche dans les canaux Bioconda et Conda Forge, mais vous pouvez préfixer n'importe quel canal Conda. Je suis ici si vous voulez.
 
@@ -68,7 +68,7 @@ Pour un peu de plaisir, utilisons cowpy. Je vais taper cowpy. Cela me donne des 
 
 Cela construit l'image pour moi à la demande si elle n'a pas déjà été créée, et me donne une URL que je peux copier.
 
-Si vous êtes intéressé, vous pouvez cliquer sur view Build Details, et cela vous amène à une page qui montre le fichier d'environnement conda qui a été utilisé et le journal de construction complet pour la construction, ainsi que les résultats de l'analyse de sécurité.
+Si vous êtes intéressé·e, vous pouvez cliquer sur view Build Details, et cela vous amène à une page qui montre le fichier d'environnement conda qui a été utilisé et le journal de construction complet pour la construction, ainsi que les résultats de l'analyse de sécurité.
 
 Si je retourne à mes code spaces, je peux maintenant coller ce nom de conteneur et appuyer sur entrée.
 
@@ -180,7 +180,7 @@ Il a récupéré l'image et il a exécuté les commandes pour nous.
 
 ## 2.3.4. Inspecter comment Nextflow a lancé la tâche conteneurisée
 
-Si vous êtes curieux, nous pouvons en fait voir exactement ce qu'il a fait en regardant dans le répertoire work. Si je fais code work, puis le hash et ensuite command run, qui si vous vous souvenez est le fichier réel qui est exécuté pour cette tâche, nous pouvons entrer et nous pouvons chercher une fonction appelée NXF launch. Et ici vous pouvez voir la commande docker exacte que Nextflow a utilisée, qui ressemble beaucoup à ce que nous faisions manuellement dans le terminal plus tôt. Docker run. Lier ce répertoire hôte dans le conteneur, puis spécifier l'URL du conteneur.
+Si vous êtes curieux·se, nous pouvons en fait voir exactement ce qu'il a fait en regardant dans le répertoire work. Si je fais code work, puis le hash et ensuite command run, qui si vous vous souvenez est le fichier réel qui est exécuté pour cette tâche, nous pouvons entrer et nous pouvons chercher une fonction appelée NXF launch. Et ici vous pouvez voir la commande docker exacte que Nextflow a utilisée, qui ressemble beaucoup à ce que nous faisions manuellement dans le terminal plus tôt. Docker run. Lier ce répertoire hôte dans le conteneur, puis spécifier l'URL du conteneur.
 
 Donc il n'y a pas de magie ici. C'est juste que Nextflow fait automatiquement le gros du travail pour vous d'une manière qui signifie que vous pouvez facilement spécifier des conteneurs dans votre pipeline, qui sont ensuite facilement disponibles pour quiconque d'autre utilise qui exécute votre workflow. Et ces personnes n'ont plus à penser à gérer les logiciels pour exécuter votre pipeline d'analyse.
 

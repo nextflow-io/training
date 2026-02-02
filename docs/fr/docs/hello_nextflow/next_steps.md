@@ -47,7 +47,7 @@ Grâce à ce cours pratique, vous avez appris à :
 - Trouver et interpréter les sorties (résultats) et les fichiers de log générés par Nextflow
 - Résoudre les problèmes de base
 
-Vous êtes maintenant équipé des connaissances fondamentales pour commencer à développer et exécuter vos propres flux de travail avec Nextflow.
+Vous êtes maintenant équipé·e des connaissances fondamentales pour commencer à développer et exécuter vos propres flux de travail avec Nextflow.
 
 ## Prochaines étapes pour développer vos compétences
 

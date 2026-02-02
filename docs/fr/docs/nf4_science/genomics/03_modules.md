@@ -43,7 +43,7 @@ Il y aura maintenant un répertoire `work` et un répertoire `results_genomics` 
 
 ### À retenir
 
-Vous êtes prêt à commencer la modularisation de votre workflow.
+Vous êtes prêt·e à commencer la modularisation de votre workflow.
 
 ### Et ensuite ?
 
@@ -174,7 +174,7 @@ workflow {
 
 ### À retenir
 
-Vous vous êtes exercé à modulariser un workflow, avec le workflow génomique comme exemple.
+Vous vous êtes exercé·e à modulariser un workflow, avec le workflow génomique comme exemple.
 
 ### Et ensuite ?
 

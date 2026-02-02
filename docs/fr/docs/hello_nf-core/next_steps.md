@@ -32,7 +32,7 @@ Grâce à ce cours pratique, vous avez appris à :
 4. **Créer des modules personnalisés** en suivant les normes nf-core pour le nommage, la structure et les métadonnées
 5. **Mettre en œuvre la validation** en utilisant nf-schema pour détecter les erreurs tôt avec des retours clairs
 
-Vous êtes maintenant équipé des connaissances fondamentales pour construire des pipelines nf-core prêts pour la production qui suivent les meilleures pratiques de la communauté.
+Vous êtes maintenant équipé·e des connaissances fondamentales pour construire des pipelines nf-core prêts pour la production qui suivent les meilleures pratiques de la communauté.
 
 ## Prochaines étapes pour développer vos compétences
 

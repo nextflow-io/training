@@ -193,7 +193,7 @@ Bonne question !
 
 Décomposons ce qui vient de se passer.
 
-Vous avez exécuté le workflow avec les paramètres par défaut, vous avez confirmé qu'il fonctionnait et vous êtes satisfait des résultats. C'est l'essence même des tests. Si vous avez suivi le cours de formation Hello Nextflow, vous aurez remarqué que nous avons toujours commencé chaque section en exécutant le workflow que nous utilisions comme point de départ, pour confirmer que tout était correctement configuré.
+Vous avez exécuté le workflow avec les paramètres par défaut, vous avez confirmé qu'il fonctionnait et vous êtes satisfait·e des résultats. C'est l'essence même des tests. Si vous avez suivi le cours de formation Hello Nextflow, vous aurez remarqué que nous avons toujours commencé chaque section en exécutant le workflow que nous utilisions comme point de départ, pour confirmer que tout était correctement configuré.
 
 Tester un logiciel fait essentiellement ce processus pour nous.
 
@@ -203,7 +203,7 @@ Votre défi est d'ajouter des tests standardisés à ce workflow en utilisant nf
 
 #### Liste de vérification de préparation
 
-Pensez-vous être prêt à vous lancer ?
+Pensez-vous être prêt·e à vous lancer ?
 
 - [ ] Je comprends l'objectif de ce cours et ses prérequis
 - [ ] Mon codespace est opérationnel
@@ -211,7 +211,7 @@ Pensez-vous être prêt à vous lancer ?
 - [ ] J'ai exécuté le workflow avec succès
 - [ ] Je comprends l'exercice
 
-Si vous pouvez cocher toutes les cases, vous êtes prêt à commencer.
+Si vous pouvez cocher toutes les cases, vous êtes prêt·e à commencer.
 
 ---
 
@@ -1152,7 +1152,7 @@ Regardez ça ! Nous avons exécuté 4 tests, 1 pour chaque processus et 2 pour l
 ## Résumé
 
 Dans cette quête secondaire, vous avez appris à exploiter les fonctionnalités de nf-test pour créer et exécuter des tests pour des processus individuels ainsi que des tests de bout en bout pour l'ensemble du pipeline.
-Vous êtes maintenant conscient des deux principales approches de validation de sortie, les snapshots et les assertions de contenu directes, et savez quand utiliser l'une ou l'autre.
+Vous êtes maintenant conscient·e des deux principales approches de validation de sortie, les snapshots et les assertions de contenu directes, et savez quand utiliser l'une ou l'autre.
 Vous savez également comment exécuter des tests un par un ou pour un projet entier.
 
 L'application de ces techniques dans votre propre travail vous permettra de vous assurer que :

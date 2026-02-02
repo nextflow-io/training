@@ -108,13 +108,13 @@ Nous utilisons des sections repliables comme celle-ci pour inclure la sortie de 
 
 ## Liste de vérification de préparation
 
-Pensez-vous être prêt à vous lancer ?
+Pensez-vous être prêt·e à vous lancer ?
 
 - [ ] Je comprends l'objectif de ce cours et ses prérequis
 - [ ] Mon environnement est opérationnel
 - [ ] Je me suis assuré que l'analyseur de syntaxe est défini sur **v1**
 - [ ] J'ai défini mon répertoire de travail de manière appropriée
 
-Si vous pouvez cocher toutes les cases, vous êtes prêt à commencer.
+Si vous pouvez cocher toutes les cases, vous êtes prêt·e à commencer.
 
 **Pour continuer vers la Partie 1, cliquez sur la flèche dans le coin inférieur droit de cette page.**
