@@ -1,5 +1,6 @@
 # Part 3: Hello Workflow
 
+<!--
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/zJP7cUYPEbA?si=Irl9nAQniDyICp2b&amp;list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
@@ -9,6 +10,7 @@
 
 :green_book: The video transcript is available [here](./transcripts/03_hello_workflow.md).
 ///
+-->
 
 Most real-world workflows involve more than one step.
 In this training module, you'll learn how to connect processes together in a multi-step workflow.

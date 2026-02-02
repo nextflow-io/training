@@ -1,5 +1,6 @@
 # Getting started
 
+<!--
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/G3CV-FcV-rc?si=nyLvwhrSB2m1NPc5&amp;list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
@@ -9,6 +10,7 @@
 
 :green_book: The video transcript is available [here](./transcripts/00_orientation.md).
 ///
+-->
 
 !!! tip
 

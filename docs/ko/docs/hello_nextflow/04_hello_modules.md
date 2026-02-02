@@ -2,6 +2,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
+<!--
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/Xxp_menS0E8?si=0AWnXB7xqHAzJdJV&amp;list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
@@ -11,6 +12,7 @@
 
 :green_book: 비디오 스크립트는 [여기](./transcripts/04_hello_modules.md)에서 확인하실 수 있습니다.
 ///
+-->
 
 이 섹션에서는 파이프라인의 개발 및 유지보수를 더 효율적이고 지속 가능하게 만들기 위해 workflow 코드를 구성하는 방법을 다룹니다.
 구체적으로, **모듈**을 사용하는 방법을 시연할 것입니다.

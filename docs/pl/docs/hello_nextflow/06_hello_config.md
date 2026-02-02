@@ -2,6 +2,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
+<!--
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/IuDO2HeKvXk?si=tnXTi6mRkITY0zW_&amp;list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
@@ -11,6 +12,7 @@
 
 :green_book: Transkrypcja wideo jest dostępna [tutaj](./transcripts/06_hello_config.md).
 ///
+-->
 
 Ta sekcja zbada, jak skonfigurować i zarządzać konfiguracją pipeline Nextflow, abyś mógł dostosować jego zachowanie, adaptować go do różnych środowisk i optymalizować wykorzystanie zasobów _bez zmiany ani jednej linii samego kodu workflow_.
 

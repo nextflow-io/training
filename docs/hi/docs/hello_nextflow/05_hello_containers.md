@@ -2,6 +2,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
+<!--
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/5PyOWjKnNmg?si=QinuAnFwFj-Z8CrO&amp;list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
@@ -11,6 +12,7 @@
 
 :green_book: वीडियो transcript [यहाँ](./transcripts/05_hello_containers.md) उपलब्ध है।
 ///
+-->
 
 इस training course के Parts 1-4 में, तुमने सीखा कि कुछ text process करने, multiple inputs होने पर execution parallelize करने, और further processing के लिए results collect करने में सक्षम simple workflow assemble करने के लिए Nextflow के basic building blocks कैसे use करें।
 

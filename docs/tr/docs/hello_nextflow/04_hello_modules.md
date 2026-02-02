@@ -2,6 +2,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
+<!--
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/Xxp_menS0E8?si=0AWnXB7xqHAzJdJV&amp;list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
@@ -11,6 +12,7 @@
 
 :green_book: Video transkripti [burada](./transcripts/04_hello_modules.md) mevcuttur.
 ///
+-->
 
 Bu bölüm, pipeline'ınızın geliştirilmesini ve bakımını daha verimli ve sürdürülebilir hale getirmek için iş akışı kodunuzu nasıl organize edeceğinizi kapsar.
 Özellikle, **modülleri** nasıl kullanacağınızı göstereceğiz.

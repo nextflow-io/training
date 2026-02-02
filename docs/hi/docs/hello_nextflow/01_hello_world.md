@@ -2,6 +2,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
+<!--
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/8X2hHI-9vms?si=F0t9LFYLjAWoyRXj&amp;list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
@@ -11,6 +12,7 @@
 
 :green_book: वीडियो transcript [यहाँ](./transcripts/01_hello_world.md) उपलब्ध है।
 ///
+-->
 
 Hello Nextflow training course के इस पहले भाग में, हम एक बहुत ही बुनियादी domain-agnostic Hello World उदाहरण के साथ topic में आसानी से प्रवेश करते हैं, जिसे हम foundational Nextflow logic और components के उपयोग को demonstrate करने के लिए progressively build up करेंगे।
 

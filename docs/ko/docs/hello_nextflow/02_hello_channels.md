@@ -2,6 +2,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
+<!--
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/lJ41WMMm44M?si=xCItHLiOQWqoqBB9&amp;list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
@@ -11,6 +12,7 @@
 
 :green_book: 비디오 스크립트는 [여기](./transcripts/02_hello_channels.md)에서 확인하실 수 있습니다.
 ///
+-->
 
 이 과정의 파트 1(Hello World)에서는 process 호출에서 직접 입력을 제공하여 process에 변수 입력을 전달하는 방법을 보여드렸습니다: `sayHello(params.input)`.
 이것은 의도적으로 단순화된 접근 방식이었습니다.

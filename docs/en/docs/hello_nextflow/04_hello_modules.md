@@ -1,5 +1,6 @@
 # Part 4: Hello Modules
 
+<!--
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/Xxp_menS0E8?si=0AWnXB7xqHAzJdJV&amp;list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
@@ -9,6 +10,7 @@
 
 :green_book: The video transcript is available [here](./transcripts/04_hello_modules.md).
 ///
+-->
 
 This section covers how to organize your workflow code to make development and maintenance of your pipeline more efficient and sustainable.
 Specifically, we are going to demonstrate how to use [**modules**](https://nextflow.io/docs/latest/module.html).

@@ -4,6 +4,7 @@
 
 Congratulazioni per aver completato il corso di formazione Hello Nextflow! 🎉
 
+<!--
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/xHOcx_4Ancg?si=Lp8hS8RdaMwbp5j5&amp;list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
@@ -13,6 +14,7 @@ Congratulazioni per aver completato il corso di formazione Hello Nextflow! 🎉
 
 :green_book: Potete leggere la [trascrizione del video](./transcripts/07_next_steps.md) insieme al video.
 ///
+-->
 
 ## Il vostro percorso
 
