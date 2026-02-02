@@ -456,6 +456,42 @@ def add_missing(
 
 
 @app.command()
+def update_and_add(
+    language: str = typer.Option(..., "--language", "-l", envvar="LANGUAGE"),
+    include: str = typer.Option(
+        None,
+        "--include",
+        "-i",
+        help="Only translate files matching this pattern (e.g., 'hello_nextflow')",
+    ),
+    verify: bool = typer.Option(
+        False,
+        "--verify",
+        "-v",
+        help="Run verification pass after translation to ensure compliance with prompt guidelines",
+    ),
+    verify_iterations: int = typer.Option(
+        2,
+        "--verify-iterations",
+        help="Number of verification iterations (only used with --verify)",
+    ),
+):
+    """Update outdated translations and add missing ones."""
+    console.print(f"[bold]Updating outdated translations for {language}...[/bold]")
+    update_outdated(
+        language=language, verify=False, verify_iterations=verify_iterations
+    )
+
+    console.print(f"\n[bold]Adding missing translations for {language}...[/bold]")
+    add_missing(
+        language=language,
+        include=include,
+        verify=verify,
+        verify_iterations=verify_iterations,
+    )
+
+
+@app.command()
 def remove_removable(
     language: str = typer.Option(..., "--language", "-l", envvar="LANGUAGE"),
 ):

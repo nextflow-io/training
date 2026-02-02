@@ -1,31 +1,47 @@
 name: Translate
 
 on:
+  # Automatic: when English content or prompts change
+  push:
+    branches:
+      - master
+    paths:
+      - "docs/en/docs/**/*.md"
+      - "docs/*/llm-prompt.md"
+      - "_scripts/general-llm-prompt.md"
+
+  # Manual: run specific commands
   workflow_dispatch:
     inputs:
       language:
-        description: "Language code (any language directory under docs/ except 'en')"
-        required: true
+        description: "Language code (leave empty for all with changes)"
         type: string
       command:
         description: "Command to run"
         required: true
-        default: "list-outdated"
+        default: "auto"
         type: choice
         options:
+          - auto
           - list-outdated
           - list-missing
           - update-outdated
           - add-missing
           - update-and-add
+          - fix-translations
 
 jobs:
-  translate:
+  detect:
     runs-on: ubuntu-latest
+    outputs:
+      languages_outdated: ${{ steps.check.outputs.languages_outdated }}
+      languages_fix: ${{ steps.check.outputs.languages_fix }}
+      command: ${{ steps.check.outputs.command }}
+      has_work: ${{ steps.check.outputs.has_work }}
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # Full history needed for git timestamp comparison
+          fetch-depth: 0
 
       - uses: actions/setup-python@v5
         with:
@@ -33,62 +49,267 @@ jobs:
 
       - uses: astral-sh/setup-uv@v4
 
-      - name: Validate language
+      - name: Detect languages and work needed
+        id: check
+        working-directory: _scripts
         run: |
-          LANG="${{ inputs.language }}"
-          if [ "$LANG" = "en" ]; then
-            echo "Error: Cannot translate English (source language)"
-            exit 1
+          # Discover all translation languages (all language dirs except 'en')
+          all_languages=$(find ../docs -maxdepth 2 -name "mkdocs.yml" -exec dirname {} \; | xargs -n1 basename | sort | grep -v '^en$' | tr '\n' ' ')
+          echo "All translation languages: $all_languages"
+
+          # Determine command to run
+          if [ "${{ github.event_name }}" = "push" ]; then
+            command="auto"
+          else
+            command="${{ inputs.command }}"
           fi
-          if [ ! -d "docs/$LANG" ] || [ ! -f "docs/$LANG/mkdocs.yml" ]; then
-            echo "Error: Language '$LANG' not found. Available languages:"
-            find docs -maxdepth 2 -name "mkdocs.yml" -exec dirname {} \; | xargs -n1 basename | sort | grep -v '^en$'
-            exit 1
+          echo "command=$command" >> $GITHUB_OUTPUT
+
+          # Helper to convert space-separated to JSON array
+          to_json_array() {
+            local input="$1"
+            if [ -z "$input" ]; then
+              echo "[]"
+            else
+              echo "$input" | xargs | sed 's/ /","/g' | sed 's/^/["/' | sed 's/$/"]/'
+            fi
+          }
+
+          # For list-* commands, just pass through the language
+          if [[ "$command" == list-* ]]; then
+            lang="${{ inputs.language }}"
+            if [ -z "$lang" ]; then
+              json_array=$(to_json_array "$all_languages")
+            else
+              if [ ! -d "../docs/$lang" ] || [ ! -f "../docs/$lang/mkdocs.yml" ]; then
+                echo "Error: Language '$lang' not found"
+                exit 1
+              fi
+              json_array="[\"$lang\"]"
+            fi
+            echo "languages_outdated=$json_array" >> $GITHUB_OUTPUT
+            echo "languages_fix=[]" >> $GITHUB_OUTPUT
+            echo "has_work=true" >> $GITHUB_OUTPUT
+            exit 0
           fi
-          echo "Language '$LANG' validated"
+
+          # For fix-translations command (manual)
+          if [ "$command" = "fix-translations" ]; then
+            lang="${{ inputs.language }}"
+            if [ -z "$lang" ]; then
+              json_array=$(to_json_array "$all_languages")
+            else
+              if [ ! -d "../docs/$lang" ] || [ ! -f "../docs/$lang/mkdocs.yml" ]; then
+                echo "Error: Language '$lang' not found"
+                exit 1
+              fi
+              json_array="[\"$lang\"]"
+            fi
+            echo "languages_outdated=[]" >> $GITHUB_OUTPUT
+            echo "languages_fix=$json_array" >> $GITHUB_OUTPUT
+            echo "has_work=true" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          # For specific update/add commands with language specified (including auto with language)
+          if [ -n "${{ inputs.language }}" ]; then
+            lang="${{ inputs.language }}"
+            if [ ! -d "../docs/$lang" ] || [ ! -f "../docs/$lang/mkdocs.yml" ]; then
+              echo "Error: Language '$lang' not found"
+              exit 1
+            fi
+
+            if [ "$command" = "auto" ]; then
+              # Auto with specific language: check if it has outdated files
+              outdated=$(uv run translate.py list-outdated "$lang" 2>/dev/null | grep -c "docs/" || echo "0")
+              if [ "$outdated" -gt 0 ]; then
+                echo "languages_outdated=[\"$lang\"]" >> $GITHUB_OUTPUT
+                echo "has_work=true" >> $GITHUB_OUTPUT
+              else
+                echo "languages_outdated=[]" >> $GITHUB_OUTPUT
+                echo "has_work=false" >> $GITHUB_OUTPUT
+              fi
+              echo "languages_fix=[]" >> $GITHUB_OUTPUT
+            else
+              # Specific command with specific language
+              echo "languages_outdated=[\"$lang\"]" >> $GITHUB_OUTPUT
+              echo "languages_fix=[]" >> $GITHUB_OUTPUT
+              echo "has_work=true" >> $GITHUB_OUTPUT
+            fi
+            exit 0
+          fi
+
+          # Auto-detect mode: separate languages needing update vs fix
+          languages_outdated=""
+          languages_fix=""
+
+          # Check for prompt changes (on push events) - these need fix-translations
+          if [ "${{ github.event_name }}" = "push" ]; then
+            changed_files=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} 2>/dev/null || echo "")
+
+            # Check if general prompt changed (affects all languages)
+            if echo "$changed_files" | grep -q '_scripts/general-llm-prompt.md'; then
+              echo "General prompt changed - all languages need fixing"
+              languages_fix="$all_languages"
+            else
+              # Check which language-specific prompts changed
+              for lang in $all_languages; do
+                if echo "$changed_files" | grep -q "docs/${lang}/llm-prompt.md"; then
+                  echo "Prompt changed for $lang"
+                  languages_fix="$languages_fix $lang"
+                fi
+              done
+            fi
+          fi
+
+          # Check each language for outdated translations (English source newer)
+          for lang in $all_languages; do
+            outdated=$(uv run translate.py list-outdated "$lang" 2>/dev/null | grep -c "docs/" || echo "0")
+            if [ "$outdated" -gt 0 ]; then
+              echo "Found $outdated outdated files for $lang"
+              languages_outdated="$languages_outdated $lang"
+            fi
+          done
+
+          # Clean up
+          languages_outdated=$(echo "$languages_outdated" | xargs)
+          languages_fix=$(echo "$languages_fix" | xargs)
+
+          if [ -z "$languages_outdated" ] && [ -z "$languages_fix" ]; then
+            echo "No languages need updates"
+            echo "has_work=false" >> $GITHUB_OUTPUT
+            echo "languages_outdated=[]" >> $GITHUB_OUTPUT
+            echo "languages_fix=[]" >> $GITHUB_OUTPUT
+          else
+            echo "Languages needing update: $languages_outdated"
+            echo "Languages needing fix: $languages_fix"
+            echo "has_work=true" >> $GITHUB_OUTPUT
+            echo "languages_outdated=$(to_json_array "$languages_outdated")" >> $GITHUB_OUTPUT
+            echo "languages_fix=$(to_json_array "$languages_fix")" >> $GITHUB_OUTPUT
+          fi
+
+  translate:
+    needs: detect
+    if: needs.detect.outputs.has_work == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: astral-sh/setup-uv@v4
+
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
 
       - name: Run translation command
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          LANGUAGE: ${{ inputs.language }}
-          COMMAND: ${{ inputs.command }}
         working-directory: _scripts
         run: |
-          case "$COMMAND" in
-            list-outdated)
-              uv run translate.py list-outdated "$LANGUAGE"
-              ;;
-            list-missing)
-              uv run translate.py list-missing "$LANGUAGE"
-              ;;
-            update-outdated)
-              uv run translate.py update-outdated --language "$LANGUAGE"
-              ;;
-            add-missing)
-              uv run translate.py add-missing --language "$LANGUAGE"
-              ;;
-            update-and-add)
-              uv run translate.py update-and-add --language "$LANGUAGE"
-              ;;
-          esac
+          COMMAND="${{ needs.detect.outputs.command }}"
+          LANGUAGES_OUTDATED='${{ needs.detect.outputs.languages_outdated }}'
+          LANGUAGES_FIX='${{ needs.detect.outputs.languages_fix }}'
 
-      - name: Fix translations
-        if: inputs.command == 'update-outdated' || inputs.command == 'add-missing' || inputs.command == 'update-and-add'
+          echo "Command: $COMMAND"
+          echo "Languages (outdated): $LANGUAGES_OUTDATED"
+          echo "Languages (fix): $LANGUAGES_FIX"
+
+          # Parse JSON arrays to space-separated lists
+          OUTDATED_LIST=$(echo "$LANGUAGES_OUTDATED" | tr -d '[]"' | tr ',' ' ')
+          FIX_LIST=$(echo "$LANGUAGES_FIX" | tr -d '[]"' | tr ',' ' ')
+
+          # Handle explicit commands (non-auto)
+          if [ "$COMMAND" != "auto" ]; then
+            # Use outdated list for most commands, fix list for fix-translations
+            if [ "$COMMAND" = "fix-translations" ]; then
+              LANG_LIST="$FIX_LIST"
+            else
+              LANG_LIST="$OUTDATED_LIST"
+            fi
+
+            for lang in $LANG_LIST; do
+              echo ""
+              echo "=========================================="
+              echo "Processing language: $lang (command: $COMMAND)"
+              echo "=========================================="
+
+              case "$COMMAND" in
+                list-outdated)
+                  uv run translate.py list-outdated "$lang"
+                  ;;
+                list-missing)
+                  uv run translate.py list-missing "$lang"
+                  ;;
+                update-outdated)
+                  uv run translate.py update-outdated --language "$lang"
+                  ;;
+                add-missing)
+                  uv run translate.py add-missing --language "$lang"
+                  ;;
+                update-and-add)
+                  uv run translate.py update-and-add --language "$lang"
+                  ;;
+                fix-translations)
+                  uv run translate.py fix-translations --language "$lang" --max-iterations 8
+                  ;;
+              esac
+            done
+            exit 0
+          fi
+
+          # Auto mode: run appropriate command per language
+          # First, update outdated translations
+          for lang in $OUTDATED_LIST; do
+            echo ""
+            echo "=========================================="
+            echo "Updating outdated translations: $lang"
+            echo "=========================================="
+            uv run translate.py update-outdated --language "$lang"
+          done
+
+          # Then, fix translations for languages with prompt changes
+          for lang in $FIX_LIST; do
+            echo ""
+            echo "=========================================="
+            echo "Fixing translations (prompt changed): $lang"
+            echo "=========================================="
+            uv run translate.py fix-translations --language "$lang" --max-iterations 8
+          done
+
+      - name: Run post-processing fixer
+        if: needs.detect.outputs.command != 'list-outdated' && needs.detect.outputs.command != 'list-missing'
         working-directory: _scripts
-        run: uv run translation_fixer.py fix-all ${{ inputs.language }}
+        run: |
+          LANGUAGES_OUTDATED='${{ needs.detect.outputs.languages_outdated }}'
+          LANGUAGES_FIX='${{ needs.detect.outputs.languages_fix }}'
+
+          # Combine and dedupe language lists
+          ALL_LANGS=$(echo "$LANGUAGES_OUTDATED $LANGUAGES_FIX" | tr -d '[]"' | tr ',' ' ' | xargs -n1 | sort -u | xargs)
+
+          for lang in $ALL_LANGS; do
+            echo "Post-processing $lang..."
+            uv run translation_fixer.py fix-all "$lang"
+          done
 
       - name: Create PR with changes
-        if: inputs.command == 'update-outdated' || inputs.command == 'add-missing' || inputs.command == 'update-and-add'
+        if: needs.detect.outputs.command != 'list-outdated' && needs.detect.outputs.command != 'list-missing'
         env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
-          LANGUAGE: ${{ inputs.language }}
-          COMMAND: ${{ inputs.command }}
         working-directory: _scripts
         run: |
+          COMMAND="${{ needs.detect.outputs.command }}"
+
+          # make-pr handles the case where there are no changes
           uv run translate.py make-pr \
-            --language "$LANGUAGE" \
             --command "$COMMAND" \
             --github-token "$GITHUB_TOKEN" \
             --github-repository "$GITHUB_REPOSITORY"
