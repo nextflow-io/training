@@ -2,21 +2,24 @@
 
 The target language for this translation is **Polish** (`pl`).
 
-## Grammar Preferences
+## 1. Grammar & Tone
 
-- Use informal tone (Ty for one person, Wy for multiple, not Pan/Pani); always capitalize second-person pronouns, including possessives (Twój, Wasz)
+- Use informal tone (Ty for one person, Wy for multiple, not Pan/Pani)
+- Always capitalize second-person pronouns, including possessives (Twój, Wasz)
 - Follow standard Polish spelling conventions
 - Prefer active voice when possible
-- Use natural Polish syntax and sentence structure, feel free to rephrase the English text wherever it improves clarity and naturality
-- Always use correct declension, even with English terms. Use apostrophe endings (e.g. "workflow'u") where necessary, and in particular for terms in the list below.
-- Use inanimate genders when referring to programming terms. Exception: use virile (animate masculine) to refer to Nextflow (i.e. Nextflow'a).
+- Use natural Polish syntax and sentence structure; feel free to rephrase the English text wherever it improves clarity and naturalness
+- Always use correct declension, even with English terms. Use apostrophe endings (e.g. "workflow'u") where necessary
+- Use inanimate genders when referring to programming terms. Exception: use virile (animate masculine) to refer to Nextflow (i.e. Nextflow'a)
 
 ### Terms with apostrophe endings
+
+Some English terms require Polish declension with apostrophe:
 
 - pipeline (pipeline'u, pipeline'owi, etc.)
 - workflow (workflow'u, workflow'owi, etc.)
 
-## Translation Context Rules
+## 2. Translation Context Rules
 
 **Important distinction**: Some technical terms have different translation rules depending on context:
 
@@ -26,177 +29,115 @@ The target language for this translation is **Polish** (`pl`).
 
 For example:
 
-- In prose: "Kanał wejściowy otrzymuje pliki..." (translate "channel" to "kanał"); BUT: "kanały można tworzyć przy pomocy przestrzeni nazw `channel`" (verbatim syntax reference, do not translate)
+- In prose: "Kanał wejściowy otrzymuje pliki..." (translate "channel" to "kanał")
+- In prose with verbatim syntax: "kanały można tworzyć przy pomocy przestrzeni nazw `channel`" (keep `channel` in code formatting)
 - In code: `channel.fromPath('*.fastq')` (keep "channel" in English)
 - In comments: `// emit a greeting` → `// Wyemituj powitanie`
 
-## Glossary
+## 3. Code Comments
 
-### Technical terms (translate in prose if a translation is provided, keep as-is otherwise)
+**Always translate code comments to Polish.** Comments are not executable code and should be in the target language for better comprehension.
 
-If a translation is available, it is written in the same line after a dash. Assume no translation otherwise.
+```groovy
+// English original
+params.greeting = "Hello" // set default greeting
 
-#### Nextflow Core Concepts
+// Polish translation
+params.greeting = "Hello" // ustaw domyślne powitanie
+```
 
-- Nextflow
-- DSL2
-- channel / channels – kanał / kanały
-- process / processes – proces / procesy
-- workflow / workflows – workflow / workflow'y
-- pipeline / pipelines – pipeline / pipeline'y
-- script – skrypt
-- shell – powłoka
-- exec
-- emit
-- take
-- main
-- params – parametry
+## 4. Common Mistakes
 
-#### Channel Types
+Avoid these translation errors specific to Polish:
 
-- queue channel – kanał kolejki
-- value channel – kanał wartości
+### ❌ Translating code syntax
 
-#### Data Types
+```groovy
+// Wrong - translating Nextflow keywords
+Kanał.fromPath('*.fastq')
+proces FOO { }
 
-- val
-- path
-- env
-- stdin
-- stdout
-- tuple
-- file (when referring to Nextflow type)
+// Correct - keep Nextflow keywords in English
+Channel.fromPath('*.fastq')
+process FOO { }
+```
 
-#### Operators
+### ❌ Translating console output
 
-- map
-- filter
-- collect
-- flatten
-- groupTuple
-- join
-- combine
-- mix
-- merge
-- view
-- first
-- last
-- take (operator)
-- branch
-- multiMap
-- splitCsv
-- splitFastq
-- splitFasta
-- splitText
+Console output shows exactly what users will see and must not be translated:
 
-#### Directives
+```console
+// Wrong
+N E X T F L O W  ~  wersja 24.04.0
+wykonawca >  local (3)
 
-- publishDir
-- container
-- conda
-- memory
-- cpus
-- time
-- errorStrategy
-- maxRetries
-- maxErrors
-- queue
-- scratch
-- storeDir
-- tag
-- label
-- cache
-- executor
+// Correct - leave exactly as-is
+N E X T F L O W  ~  version 24.04.0
+executor >  local (3)
+```
 
-#### Execution Concepts
+### ❌ Missing declension on English terms
 
-- resume
-- cache / caching
-- work directory
-- staging
-- unstaging
-- executor / executors
-- job
+```markdown
+// Wrong - no declension
+Zainstaluj workflow na swoim komputerze.
+Pracujemy z pipeline.
 
-#### Tools & Platforms
+// Correct - with proper Polish declension
+Zainstaluj workflow'a na swoim komputerze.
+Pracujemy z pipeline'em.
+```
 
-- Nextflow
-- nf-core
-- Docker
-- Singularity
-- Apptainer
-- Conda
-- Mamba
-- GitHub
-- GitLab
-- Bitbucket
-- Gitpod
-- GitHub Codespaces
-- Seqera Platform
-- Wave
-- Fusion
+### ❌ Using formal Pan/Pani instead of Ty
 
-#### File Formats & Extensions
+```markdown
+// Wrong - too formal
+Proszę uruchomić workflow...
+Pan/Pani zobaczy wyniki...
 
-- `.nf`
-- `nextflow.config`
-- `main.nf`
-- `modules.nf`
-- `workflows.nf`
-- FASTQ
-- FASTA
-- BAM
-- SAM
-- VCF
-- BED
-- GFF
-- GTF
-- CSV
-- TSV
-- JSON
-- YAML
+// Correct - informal Ty form
+Uruchom workflow'a...
+Zobaczysz wyniki...
+```
 
-#### Programming Concepts
+## 5. Terms to Translate
 
-- closure
-- Groovy
-- shebang
-- glob / globbing
-- regex
-- string
-- boolean
-- integer
-- list
-- map (data structure)
-- set
+These terms should be translated in prose (but kept in English in code).
 
-### Terms to Translate
+| English         | Polish                   | Notes                        |
+| --------------- | ------------------------ | ---------------------------- |
+| channel         | kanał / kanały           | In prose                     |
+| process         | proces / procesy         | In prose                     |
+| workflow        | workflow / workflow'y    | Keep English, add declension |
+| pipeline        | pipeline / pipeline'y    | Keep English, add declension |
+| queue channel   | kanał kolejki            |                              |
+| value channel   | kanał wartości           |                              |
+| script          | skrypt                   |                              |
+| shell           | powłoka                  |                              |
+| params          | parametry                | In prose                     |
+| directive       | dyrektywa                |                              |
+| container       | kontener                 |                              |
+| input           | wejście                  |                              |
+| output          | wyjście                  |                              |
+| task            | zadanie                  |                              |
+| tuple           | krotka                   |                              |
+| operator        | operator                 |                              |
+| parameter       | parametr                 |                              |
+| environment     | środowisko               |                              |
+| directory       | katalog                  |                              |
+| file            | plik                     |                              |
+| sample          | próbka                   |                              |
+| alignment       | dopasowanie              |                              |
+| reference       | referencja               |                              |
+| training        | szkolenie                |                              |
+| module          | moduł                    |                              |
+| command         | polecenie                |                              |
+| index           | indeks                   |                              |
+| run             | uruchomić / uruchomienie |                              |
+| parallelization | paralelizacja            |                              |
+| parallelize     | paralelizować            |                              |
 
-| English         | Polish                   |
-| --------------- | ------------------------ |
-| alignment       | dopasowanie              |
-| command         | polecenie                |
-| container       | kontener                 |
-| directive       | dyrektywa                |
-| directory       | katalog                  |
-| environment     | środowisko               |
-| file (general)  | plik                     |
-| index           | indeks                   |
-| input           | wejście                  |
-| module          | moduł                    |
-| operator        | operator                 |
-| output          | wyjście                  |
-| parameter       | parametr                 |
-| reference       | referencja               |
-| run             | uruchomić / uruchomienie |
-| sample          | próbka                   |
-| task            | zadanie                  |
-| training        | szkolenie                |
-| tuple           | krotka                   |
-| parallelization | paralelizacja            |
-| parallelize     | paralelizować            |
-
-### Admonition Titles
+## 6. Admonition Titles
 
 | English  | Polish      |
 | -------- | ----------- |
@@ -206,3 +147,22 @@ If a translation is available, it is written in the same line after a dash. Assu
 | Exercise | Ćwiczenie   |
 | Solution | Rozwiązanie |
 | Example  | Przykład    |
+
+## 7. Section Headers
+
+| English           | Polish                  |
+| ----------------- | ----------------------- |
+| Takeaway          | Podsumowanie            |
+| What's next?      | Co dalej?               |
+| Warmup            | Rozgrzewka              |
+| Environment Setup | Konfiguracja środowiska |
+| Getting Started   | Pierwsze kroki          |
+
+## 8. Tab Labels
+
+| English | Polish   |
+| ------- | -------- |
+| After   | Po       |
+| Before  | Przed    |
+| Gitpod  | Gitpod   |
+| Local   | Lokalnie |

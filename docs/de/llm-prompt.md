@@ -4,24 +4,26 @@ The target language for this translation is **German** (`de`).
 
 **Language name**: Use lowercase "deutsch" (not "Deutsch") in the language selector to match the style of other Romance languages (español, français, italiano, português).
 
-## Grammar Preferences
+## 1. Grammar & Tone
 
 - Use informal tone (du instead of Sie)
 - Use standard German (Hochdeutsch) spelling conventions
 - Prefer active voice when possible
-- Use gender-neutral language where appropriate, including gender stars for gender-specific suffices, e.g. "Entwickler\*innen".
+- Use gender-neutral language where appropriate, including gender stars for gender-specific suffixes, e.g. "Entwickler\*innen"
 
-## Writing Style
+## 2. Writing Style
 
 - Keep sentences short and direct; this is tutorial text, not academic writing
 - Avoid overly formal or dated phrasing (e.g., "wissenschaftliche Rechenanforderungen" sounds archaic)
 - Prefer modern, conversational German that feels natural for technical documentation
 - Break complex sentences into simpler ones rather than using long subordinate clause chains
-- Example:
-  - Avoid: "Am Ende dieses Kurses wirst du gut vorbereitet sein, um die nächsten Schritte auf deiner Reise zur Entwicklung reproduzierbarer Workflows für deine wissenschaftlichen Rechenanforderungen anzugehen."
-  - Better: "Nach Abschluss dieses Kurses bist du bereit, reproduzierbare Workflows für deine eigenen Projekte zu entwickeln."
 
-## Translation Context Rules
+Example:
+
+- Avoid: "Am Ende dieses Kurses wirst du gut vorbereitet sein, um die nächsten Schritte auf deiner Reise zur Entwicklung reproduzierbarer Workflows für deine wissenschaftlichen Rechenanforderungen anzugehen."
+- Better: "Nach Abschluss dieses Kurses bist du bereit, reproduzierbare Workflows für deine eigenen Projekte zu entwickeln."
+
+## 3. Translation Context Rules
 
 **Important distinction**: Some technical terms have different translation rules depending on context:
 
@@ -35,169 +37,99 @@ For example:
 - In code: `channel.fromPath('*.fastq')` (keep "channel" in English)
 - In comments: `// emit a greeting` → `// Eine Begrüßung ausgeben`
 
-## Glossary
+## 4. Code Comments
 
-### Terms to Keep in English (DO NOT TRANSLATE)
+**Always translate code comments to German.** Comments are not executable code and should be in the target language for better comprehension.
 
-#### Nextflow Core Concepts
+```groovy
+// English original
+params.greeting = "Hello" // set default greeting
 
-- Nextflow
-- DSL2
-- channel / channels
-- process / processes
-- workflow / workflows
-- pipeline / pipelines
-- script
-- shell
-- exec
-- emit
-- take
-- main
-- params
+// German translation
+params.greeting = "Hello" // Standard-Begrüßung festlegen
+```
 
-#### Channel Types
+## 5. Common Mistakes
 
-- queue channel
-- value channel
+Avoid these translation errors specific to German:
 
-#### Data Types
+### ❌ Translating code syntax
 
-- val
-- path
-- env
-- stdin
-- stdout
-- tuple
-- file (when referring to Nextflow type)
+```groovy
+// Wrong - translating Nextflow keywords
+Kanal.fromPath('*.fastq')
+Prozess FOO { }
 
-#### Operators
+// Correct - keep Nextflow keywords in English
+Channel.fromPath('*.fastq')
+process FOO { }
+```
 
-- map
-- filter
-- collect
-- flatten
-- groupTuple
-- join
-- combine
-- mix
-- merge
-- view
-- first
-- last
-- take (operator)
-- branch
-- multiMap
-- splitCsv
-- splitFastq
-- splitFasta
-- splitText
+### ❌ Translating console output
 
-#### Directives
+Console output shows exactly what users will see and must not be translated:
 
-- publishDir
-- container
-- conda
-- memory
-- cpus
-- time
-- errorStrategy
-- maxRetries
-- maxErrors
-- queue
-- scratch
-- storeDir
-- tag
-- label
-- cache
-- executor
+```console
+// Wrong
+N E X T F L O W  ~  Version 24.04.0
+Ausführer >  local (3)
 
-#### Execution Concepts
+// Correct - leave exactly as-is
+N E X T F L O W  ~  version 24.04.0
+executor >  local (3)
+```
 
-- resume
-- cache / caching
-- work directory
-- staging
-- unstaging
-- executor / executors
-- job
+### ❌ Overly formal or academic language
 
-#### Tools & Platforms
+```markdown
+// Wrong - too formal/academic
+Sie werden die Möglichkeit haben, wissenschaftliche Rechenanforderungen zu bewältigen...
 
-- Nextflow
-- nf-core
-- Docker
-- Singularity
-- Apptainer
-- Conda
-- Mamba
-- GitHub
-- GitLab
-- Bitbucket
-- Gitpod
-- GitHub Codespaces
-- Seqera Platform
-- Wave
-- Fusion
+// Correct - conversational tutorial style
+Du lernst, wie du Workflows für deine Projekte entwickelst...
+```
 
-#### File Formats & Extensions
+### ❌ Long subordinate clause chains
 
-- `.nf`
-- `nextflow.config`
-- `main.nf`
-- `modules.nf`
-- `workflows.nf`
-- FASTQ
-- FASTA
-- BAM
-- SAM
-- VCF
-- BED
-- GFF
-- GTF
-- CSV
-- TSV
-- JSON
-- YAML
+```markdown
+// Wrong - German "Schachtelsätze"
+Du wirst sehen, dass, wenn du den Workflow ausführst, der, wie wir bereits besprochen haben, mehrere Prozesse enthält, die Ergebnisse im Ausgabeverzeichnis erscheinen.
 
-#### Programming Concepts
+// Correct - break into shorter sentences
+Führe den Workflow aus. Er enthält mehrere Prozesse, wie wir bereits besprochen haben. Die Ergebnisse erscheinen im Ausgabeverzeichnis.
+```
 
-- closure
-- Groovy
-- shebang
-- glob / globbing
-- regex
-- string
-- boolean
-- integer
-- list
-- map (data structure)
-- set
+## 6. Terms to Translate
 
-### Terms to Translate
+These terms should be translated in prose (but kept in English in code):
 
-| English        | German                 |
-| -------------- | ---------------------- |
-| alignment      | Alignment              |
-| command        | Befehl                 |
-| container      | Container              |
-| directive      | Direktive              |
-| directory      | Verzeichnis            |
-| environment    | Umgebung               |
-| file (general) | Datei                  |
-| index          | Index                  |
-| input          | Eingabe                |
-| module         | Modul                  |
-| operator       | Operator               |
-| output         | Ausgabe                |
-| parameter      | Parameter              |
-| reference      | Referenz               |
-| run            | ausführen / Ausführung |
-| sample         | Probe                  |
-| task           | Aufgabe                |
-| training       | Training               |
-| tuple          | Tupel                  |
+| English     | German                 |
+| ----------- | ---------------------- |
+| channel     | Kanal                  |
+| process     | Prozess                |
+| workflow    | Workflow               |
+| pipeline    | Pipeline               |
+| directive   | Direktive              |
+| container   | Container              |
+| input       | Eingabe                |
+| output      | Ausgabe                |
+| task        | Aufgabe                |
+| tuple       | Tupel                  |
+| operator    | Operator               |
+| parameter   | Parameter              |
+| environment | Umgebung               |
+| directory   | Verzeichnis            |
+| file        | Datei                  |
+| sample      | Probe                  |
+| alignment   | Alignment              |
+| reference   | Referenz               |
+| training    | Training               |
+| module      | Modul                  |
+| command     | Befehl                 |
+| index       | Index                  |
+| run         | ausführen / Ausführung |
 
-### Admonition Titles
+## 7. Admonition Titles
 
 | English  | German   |
 | -------- | -------- |
@@ -207,3 +139,24 @@ For example:
 | Exercise | Übung    |
 | Solution | Lösung   |
 | Example  | Beispiel |
+
+## 8. Section Headers
+
+These recurring section headers should be translated consistently:
+
+| English           | German              |
+| ----------------- | ------------------- |
+| Takeaway          | Fazit               |
+| What's next?      | Wie geht es weiter? |
+| Warmup            | Aufwärmen           |
+| Environment Setup | Umgebung einrichten |
+| Getting Started   | Erste Schritte      |
+
+## 9. Tab Labels
+
+| English | German |
+| ------- | ------ |
+| After   | Danach |
+| Before  | Vorher |
+| Gitpod  | Gitpod |
+| Local   | Lokal  |

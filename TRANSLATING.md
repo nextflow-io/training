@@ -94,6 +94,56 @@ If you find errors but can't fix the prompts yourself:
 
 ---
 
+## Understanding the Translation Prompts
+
+The translation system uses two types of prompts:
+
+### General Prompt (`_scripts/general-llm-prompt.md`)
+
+Contains rules that apply to ALL languages:
+
+- What to translate vs keep in English
+- Code block handling (never translate syntax, always translate comments)
+- Formatting preservation (links, anchors, admonitions)
+- Technical term lists (Nextflow keywords, operators, directives)
+- Validation requirements
+
+### Language-Specific Prompts (`docs/<lang>/llm-prompt.md`)
+
+Contains rules specific to each language:
+
+- Grammar and tone (formal/informal)
+- Terms that get translated (with exact translations)
+- Admonition titles
+- Common expressions
+- Language-specific mistakes to avoid
+
+### Prompt Precedence
+
+When prompts conflict, **language-specific rules override general rules**. This allows languages to customize behavior (e.g., French keeps "workflow" in English even though it could theoretically be translated).
+
+### Contributing Prompt Improvements
+
+If you're a native speaker and want to improve translation quality:
+
+1. **Read the current prompt** for your language in `docs/<lang>/llm-prompt.md`
+2. **Identify the issue type**:
+   - Wrong term → Add/update entry in "Terms to Translate"
+   - Wrong tone → Clarify in "Grammar & Tone" section
+   - Repeated error → Add to "Common Mistakes" section
+3. **Provide examples** showing wrong vs correct translations
+4. **Test your change** by running the translation workflow
+5. **Submit a PR** with both prompt change and sample output
+
+Good prompt improvements include:
+
+- Adding missing glossary terms
+- Clarifying ambiguous rules with examples
+- Adding common mistakes that keep occurring
+- Regional spelling/grammar preferences
+
+---
+
 ## How Automatic Translation Updates Work
 
 When English source files are modified, translations are automatically updated via GitHub Actions:

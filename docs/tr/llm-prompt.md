@@ -2,14 +2,14 @@
 
 The target language for this translation is **Turkish** (`tr`).
 
-## Grammar Preferences
+## 1. Grammar & Tone
 
 - Use formal tone (siz instead of sen)
 - Follow Turkish Language Association (TDK) spelling conventions
 - Prefer active voice when possible
 - Pay attention to vowel harmony in suffixes
 
-## Translation Context Rules
+## 2. Translation Context Rules
 
 **Important distinction**: Some technical terms have different translation rules depending on context:
 
@@ -23,169 +23,101 @@ For example:
 - In code: `channel.fromPath('*.fastq')` (keep "channel" in English)
 - In comments: `// emit a greeting` → `// bir selamlama yayınla`
 
-## Glossary
+## 3. Code Comments
 
-### Terms to Keep in English (DO NOT TRANSLATE)
+**Always translate code comments to Turkish.** Comments are not executable code and should be in the target language for better comprehension.
 
-#### Nextflow Core Concepts
+```groovy
+// English original
+params.greeting = "Hello" // set default greeting
 
-- Nextflow
-- DSL2
-- channel / channels
-- process / processes
-- workflow / workflows
-- pipeline / pipelines
-- script
-- shell
-- exec
-- emit
-- take
-- main
-- params
+// Turkish translation
+params.greeting = "Hello" // varsayılan selamlamayı ayarla
+```
 
-#### Channel Types
+## 4. Common Mistakes
 
-- queue channel
-- value channel
+Avoid these translation errors specific to Turkish:
 
-#### Data Types
+### ❌ Translating code syntax
 
-- val
-- path
-- env
-- stdin
-- stdout
-- tuple
-- file (when referring to Nextflow type)
+```groovy
+// Wrong - translating Nextflow keywords
+Kanal.fromPath('*.fastq')
+süreç FOO { }
 
-#### Operators
+// Correct - keep Nextflow keywords in English
+Channel.fromPath('*.fastq')
+process FOO { }
+```
 
-- map
-- filter
-- collect
-- flatten
-- groupTuple
-- join
-- combine
-- mix
-- merge
-- view
-- first
-- last
-- take (operator)
-- branch
-- multiMap
-- splitCsv
-- splitFastq
-- splitFasta
-- splitText
+### ❌ Translating console output
 
-#### Directives
+Console output shows exactly what users will see and must not be translated:
 
-- publishDir
-- container
-- conda
-- memory
-- cpus
-- time
-- errorStrategy
-- maxRetries
-- maxErrors
-- queue
-- scratch
-- storeDir
-- tag
-- label
-- cache
-- executor
+```console
+// Wrong
+N E X T F L O W  ~  sürüm 24.04.0
+yürütücü >  local (3)
 
-#### Execution Concepts
+// Correct - leave exactly as-is
+N E X T F L O W  ~  version 24.04.0
+executor >  local (3)
+```
 
-- resume
-- cache / caching
-- work directory
-- staging
-- unstaging
-- executor / executors
-- job
+### ❌ Incorrect vowel harmony
 
-#### Tools & Platforms
+```markdown
+// Wrong - vowel harmony violation
+workflow'a koşalım
+container'lar
 
-- Nextflow
-- nf-core
-- Docker
-- Singularity
-- Apptainer
-- Conda
-- Mamba
-- GitHub
-- GitLab
-- Bitbucket
-- Gitpod
-- GitHub Codespaces
-- Seqera Platform
-- Wave
-- Fusion
+// Correct - proper vowel harmony
+workflow'u çalıştıralım
+container'lar (or konteynırlar)
+```
 
-#### File Formats & Extensions
+### ❌ Using informal sen instead of siz
 
-- `.nf`
-- `nextflow.config`
-- `main.nf`
-- `modules.nf`
-- `workflows.nf`
-- FASTQ
-- FASTA
-- BAM
-- SAM
-- VCF
-- BED
-- GFF
-- GTF
-- CSV
-- TSV
-- JSON
-- YAML
+```markdown
+// Wrong - too informal
+Workflow'u çalıştır. Sonuçları göreceksin.
 
-#### Programming Concepts
+// Correct - formal siz form
+Workflow'u çalıştırın. Sonuçları göreceksiniz.
+```
 
-- closure
-- Groovy
-- shebang
-- glob / globbing
-- regex
-- string
-- boolean
-- integer
-- list
-- map (data structure)
-- set
+## 5. Terms to Translate
 
-### Terms to Translate
+These terms should be translated in prose (but kept in English in code):
 
-| English        | Turkish                  |
-| -------------- | ------------------------ |
-| alignment      | hizalama                 |
-| command        | komut                    |
-| container      | konteyner                |
-| directive      | yönerge                  |
-| directory      | dizin                    |
-| environment    | ortam                    |
-| file (general) | dosya                    |
-| index          | dizin                    |
-| input          | girdi                    |
-| module         | modül                    |
-| operator       | operatör                 |
-| output         | çıktı                    |
-| parameter      | parametre                |
-| reference      | referans                 |
-| run            | çalıştırmak / çalıştırma |
-| sample         | örnek                    |
-| task           | görev                    |
-| training       | eğitim                   |
-| tuple          | demet                    |
+| English     | Turkish                  |
+| ----------- | ------------------------ |
+| channel     | kanal                    |
+| process     | süreç                    |
+| workflow    | iş akışı                 |
+| pipeline    | boru hattı / pipeline    |
+| directive   | yönerge                  |
+| container   | konteyner                |
+| input       | girdi                    |
+| output      | çıktı                    |
+| task        | görev                    |
+| tuple       | demet                    |
+| operator    | operatör                 |
+| parameter   | parametre                |
+| environment | ortam                    |
+| directory   | dizin                    |
+| file        | dosya                    |
+| sample      | örnek                    |
+| alignment   | hizalama                 |
+| reference   | referans                 |
+| training    | eğitim                   |
+| module      | modül                    |
+| command     | komut                    |
+| index       | dizin (index for files)  |
+| run         | çalıştırmak / çalıştırma |
 
-### Admonition Titles
+## 6. Admonition Titles
 
 | English  | Turkish   |
 | -------- | --------- |
@@ -195,3 +127,22 @@ For example:
 | Exercise | Alıştırma |
 | Solution | Çözüm     |
 | Example  | Örnek     |
+
+## 7. Section Headers
+
+| English           | Turkish        |
+| ----------------- | -------------- |
+| Takeaway          | Özet           |
+| What's next?      | Sırada ne var? |
+| Warmup            | Isınma         |
+| Environment Setup | Ortam Kurulumu |
+| Getting Started   | Başlarken      |
+
+## 8. Tab Labels
+
+| English | Turkish |
+| ------- | ------- |
+| After   | Sonra   |
+| Before  | Önce    |
+| Gitpod  | Gitpod  |
+| Local   | Yerel   |

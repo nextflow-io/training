@@ -2,7 +2,7 @@
 
 The target language for this translation is **Italian** (`it`).
 
-## Grammar Preferences
+## 1. Grammar & Tone
 
 - Use first person plural inclusive (noi/voi) rather than formal Lei - this creates a more collaborative, educational tone
 - Example: "ci addentriamo", "apriamo", "eseguiamo", "vediamo insieme"
@@ -10,7 +10,7 @@ The target language for this translation is **Italian** (`it`).
 - Prefer active voice when possible
 - Use natural Italian expressions (e.g., "Voilà!" is acceptable as it's commonly used in Italian)
 
-## Translation Context Rules
+## 2. Translation Context Rules
 
 **Important distinction**: Some technical terms have different translation rules depending on context:
 
@@ -22,9 +22,9 @@ For example:
 
 - In prose: "Il canale di input riceve i file..." (translate "channel" to "canale")
 - In code: `channel.fromPath('*.fastq')` (keep "channel" in English)
-- In comments: `// emit a greeting` → `// emette un saluto` (already translated in all files)
+- In comments: `// emit a greeting` → `// emette un saluto`
 
-## Code Comments
+## 3. Code Comments
 
 **Always translate code comments to Italian.** Comments are not executable code and should be in the target language for better comprehension.
 
@@ -36,181 +36,100 @@ params.greeting = "Hello" // set default greeting
 params.greeting = "Hello" // imposta il saluto predefinito
 ```
 
-## Glossary
+## 4. Common Mistakes
 
-### Terms to Keep in English (DO NOT TRANSLATE)
+Avoid these translation errors specific to Italian:
 
-Note: Italian tech writing commonly uses English terms. Many of these terms are kept in English even in prose because they are standard in Italian technical documentation.
+### ❌ Translating code syntax
 
-#### Nextflow Core Concepts
+```groovy
+// Wrong - translating Nextflow keywords
+Canale.fromPath('*.fastq')
+processo FOO { }
 
-- Nextflow
-- DSL2
-- pipeline / pipelines
-- script
-- shell
-- exec
-- emit
-- take
-- main
-- params
-- output (commonly kept in English in Italian tech writing)
-- input (can also use "ingresso", but English is common)
-- file (kept in English, not "archivio")
-- directory (kept in English, not "cartella")
+// Correct - keep Nextflow keywords in English
+Channel.fromPath('*.fastq')
+process FOO { }
+```
 
-#### Channel Types
+### ❌ Translating console output
 
-- queue channel
-- value channel
+Console output shows exactly what users will see and must not be translated:
 
-#### Data Types
+```console
+// Wrong
+N E X T F L O W  ~  versione 24.04.0
+esecutore >  local (3)
 
-- val
-- path
-- env
-- stdin
-- stdout
-- tuple
-- file (when referring to Nextflow type)
+// Correct - leave exactly as-is
+N E X T F L O W  ~  version 24.04.0
+executor >  local (3)
+```
 
-#### Operators
+### ❌ Using formal Lei when voi/noi is more appropriate
 
-- map
-- filter
-- collect
-- flatten
-- groupTuple
-- join
-- combine
-- mix
-- merge
-- view
-- first
-- last
-- take (operator)
-- branch
-- multiMap
-- splitCsv
-- splitFastq
-- splitFasta
-- splitText
+```markdown
+// Wrong - too formal for tutorial
+Lei dovrà eseguire il comando seguente...
 
-#### Directives
+// Correct - collaborative, educational tone
+Eseguiamo il comando seguente...
+// or
+Eseguite il comando seguente...
+```
 
-- publishDir
-- container
-- conda
-- memory
-- cpus
-- time
-- errorStrategy
-- maxRetries
-- maxErrors
-- queue
-- scratch
-- storeDir
-- tag
-- label
-- cache
-- executor
+### ❌ Translating English loanwords common in Italian tech
 
-#### Execution Concepts
+Italian tech writing commonly keeps these in English:
 
-- resume
-- cache / caching
-- work directory
-- staging
-- unstaging
-- executor / executors
-- job
+```markdown
+// Acceptable - these are standard in Italian tech docs
+Il file di output...
+La directory di lavoro...
+Il container Docker...
 
-#### Tools & Platforms
+// "Archivio" and "cartella" are NOT preferred
+```
 
-- Nextflow
-- nf-core
-- Docker
-- Singularity
-- Apptainer
-- Conda
-- Mamba
-- GitHub
-- GitLab
-- Bitbucket
-- Gitpod
-- GitHub Codespaces
-- Seqera Platform
-- Wave
-- Fusion
+## 5. Terms to Translate
 
-#### File Formats & Extensions
+These terms should be translated in prose (but kept in English in code).
 
-- `.nf`
-- `nextflow.config`
-- `main.nf`
-- `modules.nf`
-- `workflows.nf`
-- FASTQ
-- FASTA
-- BAM
-- SAM
-- VCF
-- BED
-- GFF
-- GTF
-- CSV
-- TSV
-- JSON
-- YAML
-
-#### Programming Concepts
-
-- closure
-- Groovy
-- shebang
-- glob / globbing
-- regex
-- string
-- boolean
-- integer
-- list
-- map (data structure)
-- set
-
-### Terms to Translate
+Note: Italian tech writing commonly keeps "file", "directory", "output", "input", and "container" in English.
 
 | English         | Italian                          | Notes                                 |
 | --------------- | -------------------------------- | ------------------------------------- |
-| workflow        | flusso di lavoro                 | Always translate in prose             |
-| process         | processo                         | Always translate in prose             |
 | channel         | canale / canali                  | Translate in prose                    |
+| process         | processo                         | Translate in prose                    |
+| workflow        | flusso di lavoro                 | Always translate in prose             |
+| pipeline        | pipeline                         | Keep in English                       |
 | channel factory | fabbrica di canali               |                                       |
 | queue channel   | canale di coda                   |                                       |
 | work directory  | directory di lavoro              | Note: "directory" stays English       |
-| alignment       | allineamento                     |                                       |
-| command         | comando                          |                                       |
-| container       | container                        | Keep in English (standard in Italian) |
 | directive       | direttiva                        |                                       |
-| directory       | directory                        | Keep in English (standard in Italian) |
-| environment     | ambiente                         |                                       |
-| file (general)  | file                             | Keep in English (standard in Italian) |
-| index           | indice                           |                                       |
-| input           | input / ingresso                 | English is common, both acceptable    |
-| module          | modulo                           |                                       |
-| operator        | operatore                        |                                       |
+| container       | container                        | Keep in English (standard in Italian) |
+| input           | input                            | Keep in English (standard in Italian) |
 | output          | output                           | Keep in English (standard in Italian) |
+| file            | file                             | Keep in English (standard in Italian) |
+| directory       | directory                        | Keep in English (standard in Italian) |
+| task            | attività                         |                                       |
+| tuple           | tupla                            |                                       |
+| operator        | operatore                        |                                       |
 | parameter       | parametro                        |                                       |
 | qualifier       | qualificatore                    |                                       |
-| reference       | riferimento                      |                                       |
-| run             | eseguire / esecuzione / lanciare |                                       |
+| environment     | ambiente                         |                                       |
 | sample          | campione                         |                                       |
-| task            | attività                         |                                       |
+| alignment       | allineamento                     |                                       |
+| reference       | riferimento                      |                                       |
 | training        | formazione                       |                                       |
-| tuple           | tupla                            |                                       |
+| module          | modulo                           |                                       |
+| command         | comando                          |                                       |
+| index           | indice                           |                                       |
+| run             | eseguire / esecuzione / lanciare |                                       |
 | greeting        | saluto                           | In context of Hello World examples    |
 | log             | registri / log                   | Both acceptable                       |
 
-### Admonition Titles
+## 6. Admonition Titles
 
 | English  | Italian             |
 | -------- | ------------------- |
@@ -221,19 +140,19 @@ Note: Italian tech writing commonly uses English terms. Many of these terms are 
 | Solution | Soluzione           |
 | Example  | Esempio             |
 
-### Section Headers
+## 7. Section Headers
 
 These recurring section headers should be translated consistently:
 
-| English            | Italian            |
-| ------------------ | ------------------ | --------------------------------------------------------- |
-| Takeaway           | Takeaway           | (Keep in English - common in Italian educational content) |
-| What's next?       | Cosa c'è dopo?     |
-| Warmup             | Riscaldamento      |
-| Directory contents | Directory contents | (Keep in code block titles)                               |
-| Output             | Output             | (Keep in code block titles)                               |
+| English            | Italian            | Notes                                                   |
+| ------------------ | ------------------ | ------------------------------------------------------- |
+| Takeaway           | Takeaway           | Keep in English - common in Italian educational content |
+| What's next?       | Cosa c'è dopo?     |                                                         |
+| Warmup             | Riscaldamento      |                                                         |
+| Directory contents | Directory contents | Keep in code block titles                               |
+| Output             | Output             | Keep in code block titles                               |
 
-### Tab Labels
+## 8. Tab Labels
 
 | English | Italian |
 | ------- | ------- |
@@ -242,7 +161,7 @@ These recurring section headers should be translated consistently:
 | Gitpod  | Gitpod  |
 | Local   | Locale  |
 
-### Common Expressions
+## 9. Common Expressions
 
 | English            | Italian                        |
 | ------------------ | ------------------------------ |

@@ -13,6 +13,14 @@ Your goal is to produce a translation that:
 
 ---
 
+## Prompt Precedence
+
+When this general prompt and the language-specific prompt give conflicting guidance, **the language-specific prompt takes precedence**. Language prompts can override any rule in this general prompt to accommodate language-specific needs.
+
+For example, this prompt says "workflow" can be translated in prose, but the French prompt specifies keeping it in English (common in French tech writing). Follow the French prompt in that case.
+
+---
+
 ## Tone and Style
 
 Each language has specific tone guidance in its `llm-prompt.md` file (formal vs informal, regional variants, etc.). Follow that guidance.
@@ -47,6 +55,54 @@ General principles:
 - File format names (FASTQ, BAM, CSV, etc.)
 - Technical identifiers and variable names
 - Course/module names: "Hello Nextflow", "Hello Channels", "Hello nf-core" - keep as proper nouns
+
+### Technical Terms Reference (Keep in English)
+
+The following technical terms must remain in English across all languages. This is the authoritative list - language-specific prompts should not duplicate it.
+
+#### Nextflow Core Keywords
+
+These appear as syntax and must never be translated in code:
+
+`process`, `workflow`, `channel`, `emit`, `take`, `main`, `input`, `output`, `script`, `shell`, `exec`, `params`, `val`, `path`, `tuple`, `env`, `stdin`, `stdout`, `file`
+
+#### Operators
+
+All operator names remain in English:
+
+`map`, `filter`, `collect`, `flatten`, `groupTuple`, `join`, `combine`, `mix`, `merge`, `view`, `first`, `last`, `take`, `branch`, `multiMap`, `splitCsv`, `splitFastq`, `splitFasta`, `splitText`, `toList`, `toSortedList`, `unique`, `distinct`, `count`, `min`, `max`, `sum`, `buffer`, `collate`, `cross`, `tap`, `set`, `ifEmpty`, `randomSample`
+
+#### Directives
+
+All directive names remain in English:
+
+`publishDir`, `container`, `conda`, `memory`, `cpus`, `time`, `errorStrategy`, `maxRetries`, `maxErrors`, `queue`, `scratch`, `storeDir`, `tag`, `label`, `cache`, `executor`, `disk`, `accelerator`, `arch`, `beforeScript`, `afterScript`, `clusterOptions`, `machineType`, `module`, `penv`, `pod`, `resourceLabels`, `stageInMode`, `stageOutMode`
+
+#### Channel Types
+
+- queue channel
+- value channel
+
+#### Execution Concepts
+
+- resume
+- cache / caching
+- work directory
+- staging / unstaging
+- executor / executors
+- job
+
+#### Tools & Platforms
+
+Nextflow, nf-core, Docker, Singularity, Apptainer, Conda, Mamba, GitHub, GitLab, Bitbucket, Gitpod, GitHub Codespaces, Seqera Platform, Wave, Fusion, Groovy, AWS, GCP, Azure, HPC, SLURM, PBS, LSF, SGE
+
+#### File Formats & Extensions
+
+FASTQ, FASTA, BAM, SAM, VCF, BED, GFF, GTF, CSV, TSV, JSON, YAML, `.nf`, `nextflow.config`, `main.nf`, `modules.nf`, `workflows.nf`
+
+#### Programming Concepts
+
+closure, shebang, glob / globbing, regex, string, boolean, integer, list, map (data structure), set, tuple, DSL2
 
 ---
 
@@ -688,3 +744,25 @@ defaults:
 - Keep the YAML structure and keys unchanged
 - The markdown link in `defaults.technical_requirements` should have translated link text but keep the URL unchanged
 - Follow the same tone guidance as for content translation (formal/informal per language)
+
+---
+
+## Output Validation
+
+After completing a translation, verify the following before submitting:
+
+### Critical Checks (Breaking if Wrong)
+
+1. **Code blocks executable**: All Nextflow/Groovy/Bash code must run unchanged
+2. **Links functional**: All URLs and anchors preserved exactly
+3. **Heading anchors intact**: `{ #anchor-name }` syntax unchanged
+4. **Admonition keywords valid**: Only `note`, `tip`, `warning`, `danger`, `example`, `quote`, `exercise`, `solution` etc.
+5. **Markdown syntax valid**: No broken tables, lists, or code fences
+
+### Quality Checks
+
+1. **No translated Nextflow syntax**: `Channel`, `process`, `workflow` etc. remain English in code
+2. **Console output unchanged**: Nextflow execution output kept exactly as-is
+3. **Consistent terminology**: Same translation for same term throughout
+4. **Natural language**: Reads fluently, not word-for-word translation
+5. **Formatting preserved**: Same line breaks, indentation, spacing as source

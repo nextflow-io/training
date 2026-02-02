@@ -2,7 +2,7 @@
 
 The target language for this translation is **French** (`fr`).
 
-## Grammar Preferences
+## 1. Grammar & Tone
 
 - Use formal tone (vous instead of tu)
 - Follow standard French spelling conventions
@@ -20,7 +20,7 @@ Consider using inclusive writing with middle dots for gender-neutral terms:
 
 This is optional but aligns with modern French writing practices.
 
-## Translation Context Rules
+## 2. Translation Context Rules
 
 **Important distinction**: Some technical terms have different translation rules depending on context:
 
@@ -34,185 +34,110 @@ For example:
 - In code: `channel.fromPath('*.fastq')` (keep "channel" in English)
 - In comments: `// emit a greeting` → `// émet un message de bienvenue`
 
-## Code Comments
+## 3. Code Comments
 
 **Always translate code comments to French.** Comments are not executable code and should be in the target language for better comprehension.
 
-## Glossary
+```groovy
+// English original
+params.greeting = "Hello" // set default greeting
 
-### Terms to Keep in English (DO NOT TRANSLATE)
+// French translation
+params.greeting = "Hello" // définit le message d'accueil par défaut
+```
 
-#### Nextflow Core Concepts
+## 4. Common Mistakes
 
-- Nextflow
-- DSL2
-- channel / channels
-- process / processes
-- workflow / workflows
-- pipeline / pipelines
-- script
-- shell
-- exec
-- emit
-- take
-- main
-- params
+Avoid these translation errors specific to French:
 
-#### Channel Types
+### ❌ Translating code syntax
 
-- queue channel
-- value channel
+```groovy
+// Wrong - translating Nextflow keywords
+Canal.fromPath('*.fastq')
+processus FOO { }
 
-#### Data Types
+// Correct - keep Nextflow keywords in English
+Channel.fromPath('*.fastq')
+process FOO { }
+```
 
-- val
-- path
-- env
-- stdin
-- stdout
-- tuple
-- file (when referring to Nextflow type)
+### ❌ Translating console output
 
-#### Operators
+Console output shows exactly what users will see and must not be translated:
 
-- map
-- filter
-- collect
-- flatten
-- groupTuple
-- join
-- combine
-- mix
-- merge
-- view
-- first
-- last
-- take (operator)
-- branch
-- multiMap
-- splitCsv
-- splitFastq
-- splitFasta
-- splitText
+```console
+// Wrong
+N E X T F L O W  ~  version 24.04.0
+exécuteur >  local (3)
 
-#### Directives
+// Correct - leave exactly as-is
+N E X T F L O W  ~  version 24.04.0
+executor >  local (3)
+```
 
-- publishDir
-- container
-- conda
-- memory
-- cpus
-- time
-- errorStrategy
-- maxRetries
-- maxErrors
-- queue
-- scratch
-- storeDir
-- tag
-- label
-- cache
-- executor
+### ❌ Translating terms commonly kept in English
 
-#### Execution Concepts
+French tech writing commonly keeps these terms in English:
 
-- resume
-- cache / caching
-- work directory
-- staging
-- unstaging
-- executor / executors
-- job
+```markdown
+// Acceptable - these terms are standard in French tech docs
+Le workflow utilise plusieurs pipelines...
+Configurez le container Docker...
 
-#### Tools & Platforms
+// Also acceptable if translating
+Le flux de travail utilise plusieurs pipelines...
+Configurez le conteneur Docker...
+```
 
-- Nextflow
-- nf-core
-- Docker
-- Singularity
-- Apptainer
-- Conda
-- Mamba
-- GitHub
-- GitLab
-- Bitbucket
-- Gitpod
-- GitHub Codespaces
-- Seqera Platform
-- Wave
-- Fusion
+### ❌ Missing spaces before punctuation
 
-#### File Formats & Extensions
+French requires a non-breaking space before `:`, `;`, `!`, and `?`:
 
-- `.nf`
-- `nextflow.config`
-- `main.nf`
-- `modules.nf`
-- `workflows.nf`
-- FASTQ
-- FASTA
-- BAM
-- SAM
-- VCF
-- BED
-- GFF
-- GTF
-- CSV
-- TSV
-- JSON
-- YAML
+```markdown
+// Wrong
+Attention: ceci est important!
 
-#### Programming Concepts
+// Correct (with non-breaking space)
+Attention : ceci est important !
+```
 
-- closure
-- Groovy
-- shebang
-- glob / globbing
-- regex
-- string
-- boolean
-- integer
-- list
-- map (data structure)
-- set
+## 5. Terms to Translate
 
-### Terms to Keep in English
+These terms should be translated in prose (but kept in English in code).
 
-Note: French technical writing commonly keeps certain English terms, especially in software contexts:
+Note: French technical writing commonly keeps "workflow" and "pipeline" in English.
 
-- **workflow** - commonly kept in English in French tech docs (not "flux de travail")
-- **pipeline** - commonly kept in English (not "pipeline de traitement")
+| English         | French               | Notes                              |
+| --------------- | -------------------- | ---------------------------------- |
+| channel         | canal                | In prose; keep English in code     |
+| process         | processus            | In prose; keep English in code     |
+| workflow        | workflow             | Keep in English (common in French) |
+| pipeline        | pipeline             | Keep in English (common in French) |
+| directive       | directive            |                                    |
+| container       | conteneur            |                                    |
+| input           | entrée               |                                    |
+| output          | sortie               |                                    |
+| task            | tâche                |                                    |
+| tuple           | tuple                |                                    |
+| operator        | opérateur            |                                    |
+| parameter       | paramètre            |                                    |
+| environment     | environnement        |                                    |
+| directory       | répertoire           |                                    |
+| file            | fichier              |                                    |
+| sample          | échantillon          |                                    |
+| alignment       | alignement           |                                    |
+| reference       | référence            |                                    |
+| training        | formation            |                                    |
+| workshop        | atelier              |                                    |
+| module          | module               |                                    |
+| command         | commande             |                                    |
+| index           | index                |                                    |
+| run             | exécuter / exécution |                                    |
+| Side Quests     | Quêtes secondaires   | Creative translation, keep theme   |
+| quick reference | référence rapide     |                                    |
 
-### Terms to Translate
-
-| English         | French               | Notes                            |
-| --------------- | -------------------- | -------------------------------- |
-| training        | formation            |                                  |
-| workshop        | atelier              |                                  |
-| Side Quests     | Quêtes secondaires   | Creative translation, keep theme |
-| quick reference | Référence rapide     |                                  |
-| alignment       | alignement           |                                  |
-| command         | commande             |                                  |
-| container       | conteneur            |                                  |
-| directive       | directive            |                                  |
-| directory       | répertoire           |                                  |
-| environment     | environnement        |                                  |
-| file (general)  | fichier              |                                  |
-| index           | index                |                                  |
-| input           | entrée               |                                  |
-| module          | module               |                                  |
-| operator        | opérateur            |                                  |
-| output          | sortie               |                                  |
-| parameter       | paramètre            |                                  |
-| reference       | référence            |                                  |
-| run             | exécuter / exécution |                                  |
-| sample          | échantillon          |                                  |
-| task            | tâche                |                                  |
-| tuple           | tuple                |                                  |
-| channel         | canal                | In prose; keep English in code   |
-| process         | processus            | In prose; keep English in code   |
-
-### Admonition Titles
+## 6. Admonition Titles
 
 | English  | French        |
 | -------- | ------------- |
@@ -223,10 +148,23 @@ Note: French technical writing commonly keeps certain English terms, especially 
 | Solution | Solution      |
 | Example  | Exemple       |
 
-### Section Headers
+## 7. Section Headers
 
-| English           | French                            |
-| ----------------- | --------------------------------- |
-| Environment Setup | Configuration de l'environnement  |
-| Getting Started   | Premiers pas                      |
-| (course titles)   | (keep in English as proper nouns) |
+These recurring section headers should be translated consistently:
+
+| English           | French                           |
+| ----------------- | -------------------------------- |
+| Takeaway          | À retenir                        |
+| What's next?      | Et ensuite ?                     |
+| Warmup            | Échauffement                     |
+| Environment Setup | Configuration de l'environnement |
+| Getting Started   | Premiers pas                     |
+
+## 8. Tab Labels
+
+| English | French |
+| ------- | ------ |
+| After   | Après  |
+| Before  | Avant  |
+| Gitpod  | Gitpod |
+| Local   | Local  |
