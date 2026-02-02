@@ -23,7 +23,7 @@ Diese Fähigkeiten ermöglichen es dir, robuste, skalierbare und wartbare Nextfl
 
 ## Zielgruppe & Voraussetzungen
 
-Diese Sammlung ist für Benutzer konzipiert, die das grundlegende Nextflow-Training abgeschlossen haben und tiefer in fortgeschrittene Workflow-Muster, Teststrategien und Techniken zur Daten- und Metadatenhandhabung einsteigen möchten.
+Diese Sammlung ist für alle konzipiert, die das grundlegende Nextflow-Training abgeschlossen haben und tiefer in fortgeschrittene Workflow-Muster, Teststrategien und Techniken zur Daten- und Metadatenhandhabung einsteigen möchten.
 
 **Voraussetzungen**
 

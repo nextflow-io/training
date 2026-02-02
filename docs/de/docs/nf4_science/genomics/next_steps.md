@@ -19,7 +19,7 @@ Falls du deinen Bereich nicht durch einen passenden Anwendungsfall vertreten sie
 ### 1.2. Starte mit nf-core
 
 **[nf-core](https://nf-co.re/)** ist eine weltweite kollaborative Initiative zur Entwicklung standardisierter Open-Source-Pipelines für eine Vielzahl wissenschaftlicher Forschungsanwendungen.
-Das Projekt umfasst [über 100 Pipelines](https://nf-co.re/pipelines/), die sofort einsatzbereit sind, sowie [weit über 1400 Prozessmodule](https://nf-co.re/modules/), die du in deine eigenen Projekte integrieren kannst, sowie ein umfangreiches Set an Entwicklertools.
+Das Projekt umfasst [über 100 Pipelines](https://nf-co.re/pipelines/), die sofort einsatzbereit sind, sowie [weit über 1400 Prozessmodule](https://nf-co.re/modules/), die du in deine eigenen Projekte integrieren kannst, sowie ein umfangreiches Set an Tools für die Entwicklung.
 
 Der Trainingskurs **[Hello nf-core](../../hello_nf-core/index.md)** führt dich in die von der nf-core-Community betreuten Pipelines und das Entwicklungs-Framework ein, die dir helfen, reproduzierbare, skalierbare und standardisierte Workflows zu schreiben. Du lernst, wie du bestehende nf-core-Pipelines verwendest, zu ihrer Entwicklung beiträgst und sogar beginnst, deine eigenen zu erstellen – unterstützt durch Best Practices und eine lebendige Community. Wenn du bereit bist, deine Nextflow-Kenntnisse in realen Projekten anzuwenden, ist dies der perfekte nächste Schritt.
 
@@ -36,7 +36,7 @@ Zu diesem Zweck arbeiten wir derzeit an einer **Sammlung von [Side Quests](../si
 
 **[Seqera Platform](https://seqera.io/) ist der beste Weg, Nextflow in der Praxis zu nutzen.**
 
-Es ist eine cloudbasierte Plattform, die von den Entwicklern von Nextflow erstellt wurde und die du mit deiner eigenen Compute-Infrastruktur (ob lokal, HPC oder Cloud) verbinden kannst, um das Starten und Verwalten deiner Workflows sowie das Verwalten deiner Daten und das interaktive Ausführen von Analysen in einer Cloud-Umgebung deutlich zu erleichtern.
+Es ist eine cloudbasierte Plattform, die vom Nextflow-Entwicklungsteam erstellt wurde und die du mit deiner eigenen Compute-Infrastruktur (ob lokal, HPC oder Cloud) verbinden kannst, um das Starten und Verwalten deiner Workflows sowie das Verwalten deiner Daten und das interaktive Ausführen von Analysen in einer Cloud-Umgebung deutlich zu erleichtern.
 
 Der Free Tier steht jedem kostenlos zur Verfügung (mit Nutzungskontingenten).
 Qualifizierte Akademiker können kostenlosen Zugang auf Pro-Ebene (ohne Nutzungsbeschränkungen) über das [Academic Program](https://seqera.io/academic/program/) erhalten.

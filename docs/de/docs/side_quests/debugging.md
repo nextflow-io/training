@@ -2,7 +2,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Debugging ist eine kritische Fähigkeit, die dir Stunden der Frustration ersparen und dich zu einem effektiveren Nextflow-Entwickler machen kann. Im Laufe deiner Karriere, besonders wenn du gerade anfängst, wirst du beim Erstellen und Warten deiner Workflows auf Bugs stoßen. Systematische Debugging-Ansätze zu lernen wird dir helfen, Probleme schnell zu identifizieren und zu lösen.
+Debugging ist eine kritische Fähigkeit, die dir Stunden der Frustration ersparen und dich zu einer effektiveren Nextflow-Entwickler\*in machen kann. Im Laufe deiner Karriere, besonders wenn du gerade anfängst, wirst du beim Erstellen und Warten deiner Workflows auf Bugs stoßen. Systematische Debugging-Ansätze zu lernen wird dir helfen, Probleme schnell zu identifizieren und zu lösen.
 
 ### Lernziele
 
@@ -998,7 +998,7 @@ Häufiger als in diesem Beispiel könntest du zusätzliche Eingaben zu einem Pro
 
 ### 2.2. Channel-Erschöpfung (Process läuft weniger oft als erwartet)
 
-Einige Channel-Strukturfehler sind viel subtiler und erzeugen überhaupt keine Fehler. Wahrscheinlich am häufigsten davon reflektiert eine Herausforderung, der neue Nextflow-Nutzer beim Verständnis gegenüberstehen, dass Queue-Channels erschöpft werden und keine Items mehr haben können, was bedeutet, dass der Workflow vorzeitig endet.
+Einige Channel-Strukturfehler sind viel subtiler und erzeugen überhaupt keine Fehler. Wahrscheinlich am häufigsten davon reflektiert eine Herausforderung, der neue Nextflow-Nutzer\*innen beim Verständnis gegenüberstehen, dass Queue-Channels erschöpft werden und keine Items mehr haben können, was bedeutet, dass der Workflow vorzeitig endet.
 
 #### Führe die Pipeline aus
 

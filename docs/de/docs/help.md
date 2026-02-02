@@ -28,7 +28,7 @@ Hier sind die wichtigsten verfügbaren Optionen, je nachdem, wonach du suchst.
 
     ---
 
-    Wenn du auf Slack bist, kannst du uns gerne im Trainingskanal im Nextflow Slack Workspace kontaktieren. Der Nextflow Slack ist ein großartiger Ort, um mit anderen Entwicklern zu chatten und sich mit der Nextflow-Community im Allgemeinen auszutauschen.
+    Wenn du auf Slack bist, kannst du uns gerne im Trainingskanal im Nextflow Slack Workspace kontaktieren. Der Nextflow Slack ist ein großartiger Ort, um mit anderen Entwickler*innen zu chatten und sich mit der Nextflow-Community im Allgemeinen auszutauschen.
 
     [Dem Nextflow Slack beitreten :material-arrow-right:](https://www.nextflow.io/slack-invite.html){ .md-button .md-button--primary .mt-1 }
 

@@ -32,7 +32,7 @@ Diese Fähigkeiten helfen dir, robustere und flexiblere Pipelines zu erstellen, 
 
 Bevor du diese Side Quest angehst, solltest du:
 
-- Das [Hello Nextflow](../hello_nextflow/README.md)-Tutorial oder einen gleichwertigen Anfängerkurs abgeschlossen haben.
+- Das [Hello Nextflow](../hello_nextflow/README.md)-Tutorial oder einen gleichwertigen Einsteigerkurs abgeschlossen haben.
 - Mit grundlegenden Nextflow-Konzepten und -Mechanismen vertraut sein (Prozesse, Channels, Operatoren)
 
 ---

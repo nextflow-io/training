@@ -636,7 +636,7 @@ So bekommen wir alle Grüße zurück in dieselbe Datei.
 
 Es gibt viele andere [Operatoren](https://www.nextflow.io/docs/latest/reference/operator.html#operator-page), die verfügbar sind, um Transformationen auf den Inhalt von channels zwischen process-Aufrufen anzuwenden.
 
-Das gibt Pipeline-Entwicklern viel Flexibilität für die Anpassung der Flusslogik ihrer Pipeline.
+Das gibt bei der Pipeline-Entwicklung viel Flexibilität für die Anpassung der Flusslogik.
 Der Nachteil ist, dass es manchmal schwieriger machen kann, zu entziffern, was die Pipeline tut.
 
 #### 2.3.5. Ein Eingabe-Parameter kann einen Standardwert haben

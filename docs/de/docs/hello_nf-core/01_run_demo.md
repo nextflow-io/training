@@ -387,7 +387,7 @@ Lerne, wie der Pipeline-Code organisiert ist.
 
 ## 3. Die Pipeline-Code-Struktur untersuchen
 
-Nachdem wir die Pipeline erfolgreich als Benutzer ausgeführt haben, lass uns die Perspektive wechseln und schauen, wie nf-core Pipelines intern strukturiert sind.
+Nachdem wir die Pipeline erfolgreich aus Benutzerperspektive ausgeführt haben, lass uns die Perspektive wechseln und schauen, wie nf-core Pipelines intern strukturiert sind.
 
 Das nf-core-Projekt setzt strenge Richtlinien durch, wie Pipelines strukturiert sind und wie der Code organisiert, konfiguriert und dokumentiert wird.
 Zu verstehen, wie dies alles organisiert ist, ist der erste Schritt zur Entwicklung deiner eigenen nf-core-kompatiblen Pipelines, was wir in Teil 2 dieses Kurses angehen werden.

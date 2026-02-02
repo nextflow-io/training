@@ -690,7 +690,7 @@ Dies mag für ein einfaches Tool wie `cowpy` unnötig erscheinen, aber es kann f
 Zusammenfassung der Vorteile dieses Ansatzes:
 
 - **Saubere Schnittstelle**: Das Modul konzentriert sich auf wesentliche Dateneingaben (Metadaten und Dateien)
-- **Flexibilität**: Benutzer können Tool-Argumente über die Konfiguration angeben, einschließlich probenspezifischer Werte
+- **Flexibilität**: Tool-Argumente können über die Konfiguration angegeben werden, einschließlich probenspezifischer Werte
 - **Konsistenz**: Alle nf-core-Module folgen diesem Muster
 - **Portabilität**: Module können ohne fest codierte Tool-Optionen wiederverwendet werden
 - **Keine Workflow-Änderungen**: Das Hinzufügen oder Ändern von Tool-Optionen erfordert keine Aktualisierung des Workflow-Codes
@@ -872,7 +872,7 @@ Dies zeigt, wie `ext.prefix` es dir ermöglicht, deine bevorzugte Benennungskonv
 Zusammenfassung der Vorteile dieses Ansatzes:
 
 - **Standardisierte Benennung**: Ausgabedateien werden typischerweise mit Proben-IDs aus Metadaten benannt
-- **Konfigurierbar**: Benutzer können die Standardbenennung bei Bedarf überschreiben
+- **Konfigurierbar**: Die Standardbenennung kann bei Bedarf überschrieben werden
 - **Konsistent**: Alle nf-core-Module folgen diesem Muster
 - **Vorhersagbar**: Es ist einfach zu wissen, wie Ausgabedateien heißen werden
 

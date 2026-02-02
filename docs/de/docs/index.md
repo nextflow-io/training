@@ -93,7 +93,7 @@ hide:
 
     ??? courses "**Nextflow Run:** Lerne, bestehende Pipelines auszuführen"
 
-        Eine kompakte Einführung in die Ausführung und Konfiguration von Nextflow-Pipelines, basierend auf dem Hello Nextflow-Entwicklerkurs, aber mit weniger Fokus auf Code. Behandelt Ausführung, Ausgaben, grundlegende Codestruktur und Konfiguration für verschiedene Rechenumgebungen.
+        Eine kompakte Einführung in die Ausführung und Konfiguration von Nextflow-Pipelines, basierend auf dem Hello Nextflow-Kurs für Entwickler*innen, aber mit weniger Fokus auf Code. Behandelt Ausführung, Ausgaben, grundlegende Codestruktur und Konfiguration für verschiedene Rechenumgebungen.
 
         [Nextflow Run Training starten :material-arrow-right:](nextflow_run/index.md){ .md-button .md-button--secondary }
 
@@ -105,19 +105,19 @@ hide:
 
     ??? courses "**Nextflow für Genomik** (Variantenanalyse)"
 
-        Für Forscher, die lernen möchten, eigene Genomik-Pipelines zu entwickeln. Der Kurs verwendet einen Anwendungsfall zur Variantenanalyse, um zu demonstrieren, wie man eine einfache, aber funktionale Genomik-Pipeline entwickelt.
+        Für Forschende, die lernen möchten, eigene Genomik-Pipelines zu entwickeln. Der Kurs verwendet einen Anwendungsfall zur Variantenanalyse, um zu demonstrieren, wie man eine einfache, aber funktionale Genomik-Pipeline entwickelt.
 
         [Nextflow für Genomik Training starten :material-arrow-right:](nf4_science/genomics/){ .md-button .md-button--secondary }
 
     ??? courses "**Nextflow für RNAseq** (Bulk-RNAseq)"
 
-        Für Forscher, die lernen möchten, eigene RNAseq-Pipelines zu entwickeln. Der Kurs verwendet einen Bulk-RNAseq-Verarbeitungs-Anwendungsfall, um zu demonstrieren, wie man eine einfache, aber funktionale RNAseq-Pipeline entwickelt.
+        Für Forschende, die lernen möchten, eigene RNAseq-Pipelines zu entwickeln. Der Kurs verwendet einen Bulk-RNAseq-Verarbeitungs-Anwendungsfall, um zu demonstrieren, wie man eine einfache, aber funktionale RNAseq-Pipeline entwickelt.
 
         [Nextflow für RNAseq Training starten :material-arrow-right:](nf4_science/rnaseq/){ .md-button .md-button--secondary }
 
     ??? courses "**Nextflow für Bildgebung** (Spatial Omics)"
 
-        Für Forscher in der Bildgebung und Spatial Omics, die lernen möchten, Analyse-Pipelines auszuführen und anzupassen. Der Kurs verwendet die nf-core/molkart-Pipeline, um eine biologisch relevante Pipeline bereitzustellen und zu demonstrieren, wie man Nextflow-Pipelines und Workflows ausführt, konfiguriert und Eingaben verwaltet.
+        Für Forschende in der Bildgebung und Spatial Omics, die lernen möchten, Analyse-Pipelines auszuführen und anzupassen. Der Kurs verwendet die nf-core/molkart-Pipeline, um eine biologisch relevante Pipeline bereitzustellen und zu demonstrieren, wie man Nextflow-Pipelines und Workflows ausführt, konfiguriert und Eingaben verwaltet.
 
         [Nextflow für Bildgebung Training starten :material-arrow-right:](nf4_science/imaging/){ .md-button .md-button--secondary }
 
@@ -134,7 +134,7 @@ hide:
 
     ??? courses "**Hello nf-core:** Erste Schritte mit nf-core"
 
-        Für Entwickler, die lernen möchten, [nf-core](https://nf-co.re/)-konforme Pipelines auszuführen und zu entwickeln. Der Kurs behandelt die Struktur von nf-core-Pipelines ausführlich genug, um einfache, aber voll funktionsfähige Pipelines zu entwickeln, die dem nf-core-Template und den Entwicklungs-Best-Practices folgen, sowie bestehende nf-core-Module zu verwenden.
+        Für Entwickler*innen, die lernen möchten, [nf-core](https://nf-co.re/)-konforme Pipelines auszuführen und zu entwickeln. Der Kurs behandelt die Struktur von nf-core-Pipelines ausführlich genug, um einfache, aber voll funktionsfähige Pipelines zu entwickeln, die dem nf-core-Template und den Entwicklungs-Best-Practices folgen, sowie bestehende nf-core-Module zu verwenden.
 
         [Hello nf-core Training starten :material-arrow-right:](hello_nf-core/index.md){ .md-button .md-button--secondary }
 
@@ -146,7 +146,7 @@ hide:
 
     ??? courses "**Side Quests:** Vertiefungen zu eigenständigen Themen"
 
-        Eigenständige Minikurse für Nextflow-Entwickler, die ihr Repertoire erweitern und/oder ihre Fähigkeiten zu bestimmten Themen vertiefen möchten. Sie werden linear präsentiert, können aber in beliebiger Reihenfolge absolviert werden (siehe Abhängigkeiten in jeder Minikurs-Übersicht).
+        Eigenständige Minikurse für Nextflow-Entwickler*innen, die ihr Repertoire erweitern und/oder ihre Fähigkeiten zu bestimmten Themen vertiefen möchten. Sie werden linear präsentiert, können aber in beliebiger Reihenfolge absolviert werden (siehe Abhängigkeiten in jeder Minikurs-Übersicht).
 
         [Side Quests durchstöbern :material-arrow-right:](side_quests/){ .md-button .md-button--secondary }
 

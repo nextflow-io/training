@@ -19,7 +19,7 @@ Dieser Leitfaden setzt voraus, dass du den [Hello Nextflow](../hello_nextflow/)-
 
 ## Was du hier lernen wirst
 
-Dieser Leitfaden konzentriert sich auf **IDE-Produktivitätsfeatures**, die dich zu einem effizienteren Nextflow-Entwickler machen werden:
+Dieser Leitfaden konzentriert sich auf **IDE-Produktivitätsfeatures**, die dich zu einer effizienteren Nextflow-Entwickler\*in machen werden:
 
 - **Erweitertes Syntax-Highlighting**: Verstehen, was VS Code dir über deine Codestruktur zeigt
 - **Intelligente Auto-Vervollständigung**: Kontextbezogene Vorschläge für schnelleres Code-Schreiben nutzen
@@ -30,7 +30,7 @@ Dieser Leitfaden konzentriert sich auf **IDE-Produktivitätsfeatures**, die dich
 
 !!! info "Warum IDE-Features jetzt?"
 
-    Du hast wahrscheinlich bereits VS Code während des [Hello Nextflow](../hello_nextflow/)-Kurses verwendet, aber wir haben uns auf das Erlernen der Nextflow-Grundlagen konzentriert anstatt auf IDE-Features. Jetzt, da du mit grundlegenden Nextflow-Konzepten wie Processes, Workflows, Channels und Modulen vertraut bist, bist du bereit, die ausgefeilten IDE-Features zu nutzen, die dich zu einem effizienteren Entwickler machen werden.
+    Du hast wahrscheinlich bereits VS Code während des [Hello Nextflow](../hello_nextflow/)-Kurses verwendet, aber wir haben uns auf das Erlernen der Nextflow-Grundlagen konzentriert anstatt auf IDE-Features. Jetzt, da du mit grundlegenden Nextflow-Konzepten wie Processes, Workflows, Channels und Modulen vertraut bist, bist du bereit, die ausgefeilten IDE-Features zu nutzen, die dich zu einer effizienteren Entwickler*in machen werden.
 
     Denke daran als "Level-up" deiner Entwicklungsumgebung - der gleiche Editor, den du verwendet hast, hat viel leistungsfähigere Funktionen, die wirklich wertvoll werden, sobald du verstehst, wobei sie dir helfen.
 
@@ -625,6 +625,6 @@ Wende diese IDE-Fähigkeiten an, während du andere Trainingsmodule durcharbeite
 
 Die wahre Kraft dieser IDE-Features zeigt sich, wenn du an größeren, komplexeren Projekten arbeitest. Beginne damit, sie schrittweise in deinen Workflow zu integrieren - innerhalb weniger Sessions werden sie zur zweiten Natur werden und transformieren, wie du an Nextflow-Entwicklung herangehst.
 
-Vom Erkennen von Fehlern, bevor sie dich verlangsamen, bis zum einfachen Navigieren in komplexen Codebasen - diese Tools werden dich zu einem selbstbewussteren und effizienteren Entwickler machen.
+Vom Erkennen von Fehlern, bevor sie dich verlangsamen, bis zum einfachen Navigieren in komplexen Codebasen - diese Tools werden dich zu einer selbstbewussteren und effizienteren Entwickler\*in machen.
 
 Frohes Coden!

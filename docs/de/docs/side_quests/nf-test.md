@@ -10,10 +10,10 @@ Dann fügst du vielleicht einen einfachen true- oder false-Parameter wie `--skip
 
 Während du deine Pipeline entwickelst, wird sie schnell so komplex, dass das manuelle Testen jeder Iteration langsam und fehleranfällig ist. Wenn du einen Fehler findest, wird es außerdem sehr schwierig sein, genau zu bestimmen, woher in deiner Pipeline der Fehler kommt. Hier kommt das Testen ins Spiel.
 
-Testen ermöglicht es dir, systematisch zu überprüfen, dass jeder Teil deiner Pipeline wie erwartet funktioniert. Die Vorteile gut geschriebener Tests für einen Entwickler sind enorm:
+Testen ermöglicht es dir, systematisch zu überprüfen, dass jeder Teil deiner Pipeline wie erwartet funktioniert. Die Vorteile gut geschriebener Tests für Entwickler\*innen sind enorm:
 
 - **Vertrauen**: Da die Tests die gesamte Pipeline abdecken, kannst du sicher sein, dass Änderungen nichts anderes beeinflussen
-- **Zuverlässigkeit**: Wenn mehrere Entwickler an der Pipeline arbeiten, wissen sie, dass die anderen Entwickler die Pipeline und jede Komponente nicht kaputt gemacht haben.
+- **Zuverlässigkeit**: Wenn mehrere Entwickler*innen an der Pipeline arbeiten, wissen sie, dass die anderen Entwickler*innen die Pipeline und jede Komponente nicht kaputt gemacht haben.
 - **Transparenz**: Die Tests zeigen, wo eine Pipeline fehlschlägt, und erleichtern es, das Problem aufzuspüren. Sie dienen auch als eine Form der Dokumentation und zeigen, wie man einen Process oder Workflow ausführt.
 - **Geschwindigkeit**: Da die Tests automatisiert sind, können sie sehr schnell und wiederholt ausgeführt werden. Du kannst schnell iterieren mit weniger Angst, neue Fehler einzuführen.
 
@@ -1159,7 +1159,7 @@ Die Anwendung dieser Techniken in deiner eigenen Arbeit wird es dir ermöglichen
 
 - Dein Code wie erwartet funktioniert
 - Änderungen bestehende Funktionalität nicht kaputt machen
-- Andere Entwickler mit Vertrauen beitragen können
+- Andere Entwickler\*innen mit Vertrauen beitragen können
 - Probleme schnell identifiziert und behoben werden können
 - Der Ausgabeinhalt den Erwartungen entspricht
 

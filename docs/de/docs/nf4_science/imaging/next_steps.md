@@ -19,11 +19,11 @@ Hier sind einige empfohlene nächste Schritte, um dein Nextflow-Wissen zu vertie
 Wenn du lernen möchtest, wie man Nextflow Pipelines schreibt:
 
 - **[Hello Nextflow](../../hello_nextflow/)**: Umfassendes Nextflow-Entwicklungstraining
-- **[Side Quests](../../side_quests/)**: Fortgeschrittene Themen für Pipeline-Entwickler
+- **[Side Quests](../../side_quests/)**: Fortgeschrittene Themen für die Pipeline-Entwicklung
 
 ### Der Community beitreten
 
-- **[Nextflow Slack](https://www.nextflow.io/slack-invite.html)**: Hilfe erhalten und mit anderen Nutzern in Kontakt treten
+- **[Nextflow Slack](https://www.nextflow.io/slack-invite.html)**: Hilfe erhalten und sich mit anderen austauschen
 - **[nf-core Slack](https://nf-co.re/join)**: Der nf-core Community beitreten
 - **[Seqera Community Forum](https://community.seqera.io)**: Fragen stellen und Erfahrungen teilen
 

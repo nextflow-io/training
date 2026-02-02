@@ -150,7 +150,7 @@ Da haben wir's. Ich nehme diese Array-Variable und stecke sie in das channel.of 
 
 Jetzt, lass uns sehen, was passiert. Zurück zu meinem Terminal. Ich werde nur all diese temporären Dateien wieder aufräumen. Und lass uns den Workflow ausführen.
 
-Nicht gut. Okay. Es ist kaputt gegangen. Das ist okay. Ich habe erwartet, dass es diesmal kaputt geht. Das Debuggen dessen, was schief läuft, wenn ein Nextflow-Workflow fehlschlägt, ist ein wichtiger Teil davon, ein Nextflow-Entwickler zu sein. Das wird oft passieren, und es ist wichtig zu verstehen, was die Fehlermeldung sagt und wie man damit umgeht.
+Nicht gut. Okay. Es ist kaputt gegangen. Das ist okay. Ich habe erwartet, dass es diesmal kaputt geht. Das Debuggen dessen, was schief läuft, wenn ein Nextflow-Workflow fehlschlägt, ist ein wichtiger Teil davon, Nextflow-Entwickler\*in zu sein. Das wird oft passieren, und es ist wichtig zu verstehen, was die Fehlermeldung sagt und wie man damit umgeht.
 
 Die Nextflow-Fehlermeldungen sind tatsächlich ziemlich strukturiert. Sie sagen uns, welcher process schief gelaufen ist. Sie geben uns eine Fehlermeldung für einen Grund. Sie sagen, was der Befehl war, den es zu führen versuchte innerhalb dieser speziellen Aufgabe, was der Exit-Status war, was die Ausgabe war und wo dieses Aufgaben-work-Verzeichnis war.
 

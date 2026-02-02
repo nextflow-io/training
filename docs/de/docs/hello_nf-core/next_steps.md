@@ -42,7 +42,7 @@ Hier sind unsere Top 3 Vorschläge, was du als Nächstes tun kannst:
 - Erkunde fortgeschrittenere Nextflow-Features mit den [Side Quests](../side_quests/index.md)
 - Beteilige dich, indem du der [nf-core-Community beitrittst](https://nf-co.re/join).
 
-Schließlich empfehlen wir dir, einen Blick auf [**Seqera Platform**](https://seqera.io/) zu werfen, eine cloudbasierte Plattform, die von den Entwicklern von Nextflow entwickelt wurde und es noch einfacher macht, deine Workflows zu starten und zu verwalten, sowie deine Daten zu managen und Analysen interaktiv in jeder Umgebung auszuführen.
+Schließlich empfehlen wir dir, einen Blick auf [**Seqera Platform**](https://seqera.io/) zu werfen, eine cloudbasierte Plattform, die von den Entwickler\*innen von Nextflow entwickelt wurde und es noch einfacher macht, deine Workflows zu starten und zu verwalten, sowie deine Daten zu managen und Analysen interaktiv in jeder Umgebung auszuführen.
 
 ## Feedback-Umfrage
 

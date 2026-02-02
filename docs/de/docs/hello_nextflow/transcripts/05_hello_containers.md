@@ -16,7 +16,7 @@
 
 Hallo, willkommen zu Teil Fünf des Hello Nextflow Trainingskurses.
 
-Dieses Kapitel heißt Hallo Container. Wir werden darüber sprechen, wie Nextflow mit Tools wie Docker und Singularity integriert wird, um Software-Container zu verwenden und Software für die Nutzer deiner Pipeline bereitzustellen.
+Dieses Kapitel heißt Hallo Container. Wir werden darüber sprechen, wie Nextflow mit Tools wie Docker und Singularity integriert wird, um Software-Container zu verwenden und Software für die Nutzenden deiner Pipeline bereitzustellen.
 
 Das bedeutet, dass Leute, die deine Pipeline ausführen, nicht selbst alle verschiedenen Tools installieren müssen. Nextflow erledigt das für sie.
 

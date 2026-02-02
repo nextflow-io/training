@@ -82,7 +82,7 @@ Diese beiden Artikel sind besonders hilfreich für die Migration zur neuesten Ve
 - [Migrating to workflow outputs](https://www.nextflow.io/docs/latest/tutorials/workflow-outputs.html)
 - [Migrating to static types](https://www.nextflow.io/docs/latest/tutorials/static-types.html)
 
-Beide Funktionen werden ab Version 3.0 der Trainingsmaterialien im Anfängertraining behandelt.
+Beide Funktionen werden ab Version 3.0 der Trainingsmaterialien im Einsteiger-Training behandelt.
 
 Je nach Generation des Nextflow-Codes, den du migrieren möchtest, kannst du möglicherweise den größten Teil davon mit dem Nextflow-Linter mithilfe des Befehls `nextflow lint -format` erledigen.
 Weitere Details findest du in der CLI-Referenz für [`lint`](https://www.nextflow.io/docs/latest/reference/cli.html#lint).

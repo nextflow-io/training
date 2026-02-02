@@ -6,10 +6,10 @@
 
 ---
 
-## 1. Lass die Kuh berühmte Wissenschaftler zitieren
+## 1. Lass die Kuh berühmte Wissenschaftler\*innen zitieren
 
 Dieser Abschnitt enthält einige zusätzliche Übungen, um das Gelernte zu vertiefen.
-Diese Übungen sind _nicht erforderlich_, um spätere Teile des Trainings zu verstehen, bieten aber eine unterhaltsame Möglichkeit, deine Kenntnisse zu festigen, indem du herausfindest, wie du die Kuh berühmte Wissenschaftler zitieren lassen kannst.
+Diese Übungen sind _nicht erforderlich_, um spätere Teile des Trainings zu verstehen, bieten aber eine unterhaltsame Möglichkeit, deine Kenntnisse zu festigen, indem du herausfindest, wie du die Kuh berühmte Wissenschaftler\*innen zitieren lassen kannst.
 
 ```console title="cowsay-output-Grace-Hopper.txt"
   _________________________________________________

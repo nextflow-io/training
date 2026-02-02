@@ -29,7 +29,7 @@ In diesem fünften Teil des Hello nf-core Trainingskurses zeigen wir dir, wie du
 
 ### 0.1. Warum Validierung wichtig ist
 
-Stell dir vor, du lässt deine Pipeline zwei Stunden laufen, nur damit sie abstürzt, weil ein Benutzer eine Datei mit der falschen Erweiterung angegeben hat. Oder du verbringst Stunden mit dem Debugging kryptischer Fehlermeldungen, nur um herauszufinden, dass ein Parameter falsch geschrieben wurde. Ohne Eingabevalidierung sind solche Szenarien häufig.
+Stell dir vor, du lässt deine Pipeline zwei Stunden laufen, nur damit sie abstürzt, weil eine Datei mit der falschen Erweiterung angegeben wurde. Oder du verbringst Stunden mit dem Debugging kryptischer Fehlermeldungen, nur um herauszufinden, dass ein Parameter falsch geschrieben wurde. Ohne Eingabevalidierung sind solche Szenarien häufig.
 
 Betrachte dieses Beispiel:
 
@@ -125,7 +125,7 @@ Beide Schemas verwenden das JSON Schema Format, ein weit verbreiteter Standard z
 
 ```mermaid
 graph LR
-    A[Benutzer führt Pipeline aus] --> B[Parametervalidierung]
+    A[Pipeline wird ausgeführt] --> B[Parametervalidierung]
     B -->|✓ Gültig| C[Eingabedatenvalidierung]
     B -->|✗ Ungültig| D[Fehler: Parameter korrigieren]
     C -->|✓ Gültig| E[Pipeline wird ausgeführt]
@@ -177,7 +177,7 @@ Da wir zuerst an der Parametervalidierung arbeiten (dieser Abschnitt) und das Ei
 
 Diese Konfiguration weist nf-schema an:
 
-- **`defaultIgnoreParams`**: Validierung komplexer Parameter wie `genomes` überspringen (von Template-Entwicklern festgelegt)
+- **`defaultIgnoreParams`**: Validierung komplexer Parameter wie `genomes` überspringen (im Template festgelegt)
 - **`ignoreParams`**: Validierung der Dateiinhalte des `input` Parameters überspringen (vorübergehend; wir werden dies in Abschnitt 2 wieder aktivieren)
 - **`monochromeLogs`**: Farbige Ausgabe in Validierungsmeldungen deaktivieren, wenn auf `true` gesetzt (gesteuert durch `params.monochrome_logs`)
 

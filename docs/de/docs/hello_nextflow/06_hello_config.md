@@ -904,7 +904,7 @@ Lass uns jetzt sehen, wie wir eine alternative Software-Paketierungsoption über
 
 ### 3.1. Docker deaktivieren und Conda in der Config-Datei aktivieren
 
-Stellen wir uns vor, wir arbeiten auf einem HPC-Cluster und der Administrator erlaubt die Verwendung von Docker aus Sicherheitsgründen nicht.
+Stellen wir uns vor, wir arbeiten auf einem HPC-Cluster und die Administration erlaubt die Verwendung von Docker aus Sicherheitsgründen nicht.
 Glücklicherweise unterstützt Nextflow mehrere andere Container-Technologien wie Singularity (das auf HPC weiter verbreitet ist) sowie Software-Paketmanager wie Conda.
 
 Wir können unsere Konfigurationsdatei ändern, um Conda anstelle von Docker zu verwenden.

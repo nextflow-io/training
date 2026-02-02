@@ -26,7 +26,7 @@ Wir werden einen einfachen CSV-lesenden Workflow in einen ausgefeilten Bioinform
 
 Bevor du dieses Side Quest angehst, solltest du:
 
-- Das [Hello Nextflow](../hello_nextflow/README.md) Tutorial oder einen gleichwertigen Anfängerkurs abgeschlossen haben.
+- Das [Hello Nextflow](../hello_nextflow/README.md) Tutorial oder einen gleichwertigen Einsteigerkurs abgeschlossen haben.
 - Dich wohl fühlen mit grundlegenden Nextflow-Konzepten und -Mechanismen (Prozesse, Channels, Operatoren, Arbeiten mit Dateien, Metadaten)
 - Grundlegende Vertrautheit mit gängigen Programmierkonstrukten haben (Variablen, Maps, Listen)
 

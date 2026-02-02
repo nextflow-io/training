@@ -1490,7 +1490,7 @@ Du weißt alles, was du wissen musst, um mit dem Ausführen und Verwalten von Ne
 
 Das schließt diesen Kurs ab, aber wenn du eifrig weiterlernen möchtest, haben wir zwei Hauptempfehlungen:
 
-- Wenn du tiefer in die Entwicklung eigener Pipelines eintauchen möchtest, schau dir [Hello Nextflow](../hello_nextflow/index.md) an, einen Kurs für Anfänger, der denselben allgemeinen Verlauf wie dieser abdeckt, aber viel mehr ins Detail über channels und Operatoren geht.
+- Wenn du tiefer in die Entwicklung eigener Pipelines eintauchen möchtest, schau dir [Hello Nextflow](../hello_nextflow/index.md) an, einen Einsteigerkurs, der denselben allgemeinen Verlauf wie dieser abdeckt, aber viel mehr ins Detail über channels und Operatoren geht.
 - Wenn du weiterhin lernen möchtest, wie man Nextflow Pipelines ausführt, ohne tiefer in den Code einzusteigen, schau dir den ersten Teil von [Hello nf-core](../hello_nf-core/index.md) an, der die Tools zum Finden und Ausführen von Pipelines aus dem äußerst beliebten [nf-core](https://nf-co.re/) Projekt vorstellt.
 
 Viel Spaß!

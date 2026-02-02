@@ -108,10 +108,10 @@ Du kannst auch mit einer optionalen Übung fortfahren, um Zitate über Computer-
 
 ---
 
-## 2. Lass die Kuh berühmte Wissenschaftler zitieren
+## 2. Lass die Kuh berühmte Wissenschaftler\*innen zitieren
 
 Dieser Abschnitt enthält einige zusätzliche Übungen, um das bisher Gelernte zu üben.
-Die Durchführung dieser Übungen ist _nicht erforderlich_, um spätere Teile des Trainings zu verstehen, bietet aber eine unterhaltsame Möglichkeit, dein Wissen zu festigen, indem du herausfindest, wie du die Kuh berühmte Wissenschaftler zitieren lassen kannst.
+Die Durchführung dieser Übungen ist _nicht erforderlich_, um spätere Teile des Trainings zu verstehen, bietet aber eine unterhaltsame Möglichkeit, dein Wissen zu festigen, indem du herausfindest, wie du die Kuh berühmte Wissenschaftler\*innen zitieren lassen kannst.
 
 ```console title="cowsay-output-Grace-Hopper.txt"
   _________________________________________________
