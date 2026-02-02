@@ -137,9 +137,9 @@ These terms should be translated in prose (but kept in English in code).
 | index           | indeks                   |                              |
 | run             | uruchomić / uruchomienie |                              |
 | parallelization | paralelizacja            |                              |
-| parallelize     | paralelizować            |  Never "równoleglić"         |
-| domain         | dziedzina                  | domain of knowledge       |
-| journey (fig.) | droga / ścieżka         |                                           |
+| parallelize     | paralelizować            | Never "równoleglić"          |
+| domain          | dziedzina                | domain of knowledge          |
+| journey (fig.)  | droga / ścieżka          |                              |
 
 ## 6. Admonition Titles
 
