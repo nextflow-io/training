@@ -10,7 +10,6 @@
 
 :green_book: The video transcript is available [here](./transcripts/00_orientation.md).
 ///
--->
 
 !!! tip
 
@@ -18,6 +17,8 @@
 
     - :fontawesome-solid-closed-captioning: High quality (manually curated) captions / subtitles. Switch them on with the :material-subtitles: icon
     - :material-bookmark: Video chapters in the timeline that correspond to page headings.
+
+-->
 
 ## Start a training environment
 
