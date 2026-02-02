@@ -1,0 +1,13 @@
+# Conda environment for Nextflow training in Seqera Studios
+name: training
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - nextflow=25.10.2
+  # TODO: nf-test from conda lacks v2 parser support until next release
+  # See: https://github.com/askimed/nf-test/pull/336
+  - nf-test
+  - nf-core
+  - pre-commit
+  - mkdocs-quiz>=1.5.2

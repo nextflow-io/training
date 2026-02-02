@@ -1,0 +1,26 @@
+schemaVersion: "0.0.1"
+kind: "studio-config"
+session:
+  name: "Nextflow Training"
+  description: "Nextflow training materials development environment"
+  template:
+    kind: "registry"
+    registry: "public.cr.seqera.io/platform/data-studio-vscode:1.101.2-0.9"
+  clone:
+    enabled: true
+    path: "/workspace/training"
+  dependencies:
+    condaEnvironmentFile: "environment.yaml"
+  computeRequirements:
+    awsBatch:
+      cpu: 8
+      memory: 32768
+  environmentVariables:
+    - name: NXF_HOME
+      value: "/workspace/.nextflow"
+    - name: NXF_EDGE
+      value: "0"
+    - name: NXF_VER
+      value: "25.10.2"
+    - name: NXF_SYNTAX_PARSER
+      value: "v2"
