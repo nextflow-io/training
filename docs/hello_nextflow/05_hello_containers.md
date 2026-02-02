@@ -21,7 +21,7 @@ That is all very tedious and annoying, so we're going to show you how to use **c
 A **container** is a lightweight, standalone, executable unit of software created from a container **image** that includes everything needed to run an application including code, system libraries and settings.
 As you might imagine, that is a going to be very helpful for making your pipelines more reproducible.
 
-Note that we'll be teaching this using [Docker](https://www.docker.com/get-started/), but keep in mind Nextflow supports [several other container technologies](https://www.nextflow.io/docs/latest/container.html#) as well.
+Note that we'll be teaching this using [Docker](https://www.docker.com/get-started/), but keep in mind Nextflow supports [several other container technologies](https://nextflow.io/docs/latest/container.html) as well.
 
 ??? info "How to begin from this section"
 

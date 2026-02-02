@@ -2,7 +2,7 @@
 
 This section will explore how to manage the configuration of a Nextflow pipeline in order to customize its behavior, adapt it to different environments, and optimize resource usage _without altering a single line of the workflow code itself_.
 
-There are multiple ways to do this, which can be used in combination and are interpreted according to the order of precedence described [here](https://www.nextflow.io/docs/latest/config.html).
+There are multiple ways to do this, which can be used in combination and are interpreted according to the order of precedence described in the [Configuration](https://nextflow.io/docs/latest/config.html) documentation.
 
 In this part of the course, we are going to show you the simplest and most common configuration file mechanism, the `nextflow.config` file, which you already encountered in the section on containers in Part 2.
 
@@ -273,7 +273,7 @@ Now let's look at another useful way to set parameter values.
 The subdirectory approach works great for experimenting, but it does involve a bit of setup and requires that you adapt paths accordingly.
 There's a simpler approach for when you want to run your pipeline with a specific set of values, or enable someone else to do it with minimal effort.
 
-Nextflow allows us to specify parameters via a parameter file in either YAML or JSON format, which makes it very convenient to manage and distribute alternative sets of default values, for example, as well as run-specific parameter values.
+Nextflow allows us to specify parameters via a [parameter file](https://nextflow.io/docs/latest/config.html#parameter-file) in either YAML or JSON format, which makes it very convenient to manage and distribute alternative sets of default values, for example, as well as run-specific parameter values.
 
 #### 1.3.1. Examine the example parameter file
 
@@ -797,7 +797,7 @@ Now let's see how we can configure an alternative software packaging option via 
     You're moving your pipeline to an HPC cluster where Docker isn't allowed for security reasons.
     The cluster supports Singularity and Conda, so you need to switch your configuration accordingly.
 
-Nextflow supports multiple container technologies including Singularity (which is more widely used on HPC), as well as software package managers such as Conda.
+As noted previously, Nextflow supports multiple container technologies including Singularity (which is more widely used on HPC), as well as software package managers such as Conda.
 
 We can change our configuration file to use Conda instead of Docker.
 To do so, let's switch the value of `docker.enabled` to `false`, and add a directive enabling the use of Conda:
@@ -919,7 +919,7 @@ If the resources of the tasks ready to run exceed the available resources, Nextf
 
 The local executor is convenient and efficient, but it is limited to that single machine. For very large workloads, you may discover that your local machine is a bottleneck, either because you have a single task that requires more resources than you have available, or because you have so many tasks that waiting for a single machine to run them would take too long.
 
-Nextflow supports [many different execution backends](https://www.nextflow.io/docs/latest/executor.html), including HPC schedulers (Slurm, LSF, SGE, PBS, Moab, OAR, Bridge, HTCondor and others) as well as cloud execution backends such (AWS Batch, Google Cloud Batch, Azure Batch, Kubernetes and more).
+Nextflow supports [many different execution backends](https://nextflow.io/docs/latest/executor.html), including HPC schedulers (Slurm, LSF, SGE, PBS, Moab, OAR, Bridge, HTCondor and others) as well as cloud execution backends such (AWS Batch, Google Cloud Batch, Azure Batch, Kubernetes and more).
 
 ### 4.1. Targeting a different backend
 
@@ -932,7 +932,7 @@ process {
 }
 ```
 
-To set the executor to target a different backend, you would simply specify the executor you want using similar syntax as described above for resource allocations (see [documentation](https://www.nextflow.io/docs/latest/executor.html) for all options).
+To set the executor to target a different backend, you would simply specify the executor you want using similar syntax as described above for resource allocations (see [Executors](https://nextflow.io/docs/latest/executor.html) for all options).
 
 ```groovy title="nextflow.config"
 process {
@@ -981,7 +981,7 @@ Unfortunately, each of these systems uses different technologies, syntaxes and c
     ```
 
 Fortunately, Nextflow simplifies all of this.
-It provides a standardized syntax so that you can specify the relevant properties such as `cpus`, `memory` and `queue` (see documentation for other properties) just once.
+It provides a standardized syntax so that you can specify the relevant properties such as `cpus`, `memory` and `queue` just once (see [Process directives](https://nextflow.io/docs/latest/reference/process.html#process-directives) for all available options).
 Then, at runtime, Nextflow will use those settings to generate the appropriate backend-specific scripts based on the executor setting.
 
 We'll cover that standardized syntax in the next section.
@@ -1040,7 +1040,8 @@ The report is an html file, which you can download and open in your browser. You
 
 Take a few minutes to look through the report and see if you can identify some opportunities for adjusting resources.
 Make sure to click on the tabs that show the utilization results as a percentage of what was allocated.
-There is some [documentation](https://www.nextflow.io/docs/latest/reports.html) describing all the available features.
+
+See [Reports](https://nextflow.io/docs/latest/reports.html) for documentation on all available features.
 
 ### 5.2. Set resource allocations for all processes
 
@@ -1111,7 +1112,7 @@ It is very useful when your processes have different resource requirements. It e
 !!! tip
 
     This is just a tiny taster of what you can do to optimize your use of resources.
-    Nextflow itself has some really neat [dynamic retry logic](https://www.nextflow.io/docs/latest/process.html#dynamic-task-resources) built in to retry jobs that fail due to resource limitations.
+    Nextflow itself has some really neat [dynamic retry logic](https://nextflow.io/docs/latest/process.html#dynamic-task-resources) built in to retry jobs that fail due to resource limitations.
     Additionally, the Seqera Platform offers AI-driven tooling for optimizing your resource allocations automatically as well.
 
 ### 5.5. Add resource limits
@@ -1163,7 +1164,7 @@ We've shown you a number of ways that you can customize your pipeline configurat
 
 You may want to switch between alternative settings depending on what computing infrastructure you're using. For example, you might want to develop and run small-scale tests locally on your laptop, then run full-scale workloads on HPC or cloud.
 
-Nextflow lets you set up any number of profiles that describe different configurations, which you can then select at runtime using a command-line argument, rather than having to modify the configuration file itself.
+Nextflow lets you set up any number of [**profiles**](https://nextflow.io/docs/latest/config.html#profiles) that describe different configurations, which you can then select at runtime using a command-line argument, rather than having to modify the configuration file itself.
 
 ### 6.1. Create profiles for switching between local development and execution on HPC
 
@@ -1350,7 +1351,7 @@ This means that as long as we distribute any test data files with the workflow c
 As noted above, sometimes the same parameter can be set to different values in profiles that you want to combine.
 And more generally, there are numerous places where elements of configuration can be stored, and sometimes the same properties can be set to different values in different places.
 
-Nextflow applies a set [order of precedence](https://www.nextflow.io/docs/latest/config.html) to resolve any conflicts, but that can be tricky to determine yourself.
+Nextflow applies a set [order of precedence](https://nextflow.io/docs/latest/config.html#configuration-file) to resolve any conflicts, but that can be tricky to determine yourself.
 And even if nothing is conflicting, it can be tedious to look up all the possible places where things could be configured.
 
 Fortunately, Nextflow includes a convenient utility tool called `config` that can automate that whole process for you.

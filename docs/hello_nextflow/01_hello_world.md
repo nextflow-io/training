@@ -120,7 +120,7 @@ You'll find the `hello-world.nf` script in your current directory, which should 
     }
     ```
 
-A Nextflow workflow script typically includes one or more **process** definitions and the **workflow** itself, plus a few optional blocks (not present here) which we'll introduce later on.
+A Nextflow workflow script typically includes one or more [**process**](https://nextflow.io/docs/latest/process.html) definitions and the [**workflow**](https://nextflow.io/docs/latest/workflow.html) itself, plus a few optional blocks (not present here) which we'll introduce later on.
 
 Each **process** describes what operation(s) the corresponding step in the pipeline should accomplish, while the **workflow** describes the dataflow logic that connects the various steps.
 
@@ -388,7 +388,7 @@ As you have just learned, the output produced by our pipeline is buried in a wor
 This is done on purpose; Nextflow is in control of this directory and we are not supposed to interact with it.
 However, that makes it inconvenient to retrieve outputs that we care about.
 
-Fortunately, Nextflow provides a way to publish outputs to a designated directory using [workflow-level output definitions](https://www.nextflow.io/docs/latest/workflow.html#workflow-outputs).
+Fortunately, Nextflow provides a way to publish outputs to a designated directory using [workflow output definitions](https://nextflow.io/docs/latest/workflow.html#workflow-outputs).
 
 ### 2.1. Basic usage
 
@@ -793,7 +793,7 @@ Now that the `sayHello()` process is ready to accept a variable input, we need a
 We could simply hardcode an input directly by making the process call `sayHello('Hello World!')`.
 However, when we're doing real work with our workflow, we're going to want to be able to control its inputs from the command line.
 
-Good news: Nextflow has a built-in workflow parameter system called `params`, which makes it easy to declare and use CLI parameters.
+Good news: Nextflow has a built-in workflow parameter system called [`params`](https://nextflow.io/docs/latest/config.html#params), which makes it easy to declare and use CLI parameters.
 
 The general syntax is to declare `params.<parameter_name>` to tell Nextflow to expect a `--<parameter_name>` parameter on the command line.
 
@@ -972,7 +972,7 @@ Learn how to manage executions more conveniently.
 
 Knowing how to launch workflows and retrieve outputs is great, but you'll quickly find there are a few other aspects of workflow management that will make your life easier, especially if you're developing your own workflows.
 
-Here we show you how to use the `resume` feature for when you need to re-launch the same workflow, how to inspect the log of past executions with `nextflow log`, and how to delete older work directories with `nextflow clean`.
+Here we show you how to use the [`-resume`](https://nextflow.io/docs/latest/cache-and-resume.html) feature for when you need to re-launch the same workflow, how to inspect the log of past executions with [`nextflow log`](https://nextflow.io/docs/latest/reference/cli.html#log), and how to delete older work directories with [`nextflow clean`](https://nextflow.io/docs/latest/reference/cli.html#clean).
 
 <!-- Any other cool options we should include? Added log -->
 
@@ -980,7 +980,7 @@ Here we show you how to use the `resume` feature for when you need to re-launch 
 
 Sometimes, you're going to want to re-run a pipeline that you've already launched previously without redoing any steps that already completed successfully.
 
-Nextflow has an option called `-resume` that allows you to do this.
+Nextflow has an option called [`-resume`](https://nextflow.io/docs/latest/cache-and-resume.html) that allows you to do this.
 Specifically, in this mode, any processes that have already been run with the exact same code, settings and inputs will be skipped.
 This means Nextflow will only run processes that you've added or modified since the last run, or to which you're providing new settings or inputs.
 

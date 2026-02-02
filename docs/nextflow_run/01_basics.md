@@ -80,7 +80,7 @@ We're not going to look at the code yet; first let's see what it looks like to r
 
 ### 2.1. Launch the workflow and monitor execution
 
-In the terminal, run the following command:
+In the terminal, run the following command.
 
 ```bash
 nextflow run 1-hello.nf --input 'Hello World!'
@@ -372,7 +372,7 @@ Let's take a closer look at the **process** block first, then we'll look at the 
 
 ### 3.2. The `process` definition
 
-The first block of code describes a **process**.
+The first block of code describes a [**process**](https://nextflow.io/docs/latest/process.html).
 The process definition starts with the keyword `process`, followed by the process name and finally the process body delimited by curly braces.
 The process body must contain a script block which specifies the command to run, which can be anything you would be able to run in a command line terminal.
 
@@ -409,7 +409,7 @@ The `output` definition includes the `path` qualifier, which tells Nextflow this
 
 ### 3.3. The `workflow` definition
 
-The second block of code describes the **workflow** itself.
+The second block of code describes the [**workflow**](https://nextflow.io/docs/latest/workflow.html) itself.
 The workflow definition starts with the keyword `workflow`, followed by an optional name, then the workflow body delimited by curly braces.
 
 Here we have a **workflow** that consists of a `main:` block and a `publish:` block.
@@ -458,6 +458,7 @@ params {
 ```
 
 Supported types include `String`, `Integer`, `Float`, `Boolean`, and `Path`.
+To learn more, see [Workflow parameters](https://nextflow.io/docs/latest/config.html#workflow-parameters)in the Nextflow reference documentation.
 
 !!! tip
 
@@ -484,6 +485,8 @@ The `mode 'copy'` line overrides the system's default behavior, which is to make
 
 There are more options than displayed here for controlling the publishing behavior; we'll cover a few later on.
 You'll also see that when a workflow generates multiple outputs, each one gets listed this way in the `output` block.
+
+To learn more, see [Publishing outputs](https://nextflow.io/docs/latest/workflow.html#publishing-outputs) in the Nextflow reference documentation.
 
 ??? info "Older syntax for publishing outputs using `publishDir`"
 
@@ -566,6 +569,8 @@ Nextflow is literally pointing you to the previous execution and saying "I alrea
 
     When your re-run a pipeline with `resume`, Nextflow does not overwrite any files published outside of the work directory by any executions that were run successfully previously.
 
+    To learn more, see [Cache and resume](https://nextflow.io/docs/latest/cache-and-resume.html) in the Nextflow reference documentation.
+
 ### 4.2. Inspect the log of past executions
 
 Whenever you launch a nextflow workflow, a line gets written to a log file called `history`, under a hidden directory called `.nextflow` in the current working directory.
@@ -582,7 +587,7 @@ Whenever you launch a nextflow workflow, a line gets written to a log file calle
 
 This file gives you the timestamp, run name, status, revision ID, session ID and full command line for every Nextflow run that has been launched from within the current working directory.
 
-A more convenient way to access this information is to use the `nextflow log` command.
+A more convenient way to access this information is to use the [`nextflow log`](https://nextflow.io/docs/latest/reference/cli.html#log) command.
 
 ```bash
 nextflow log
@@ -611,12 +616,11 @@ Nextflow uses the session ID to group run caching information under the `cache` 
 If you run a lot of pipelines, you may end up accumulating very many files across many subdirectories.
 Since the subdirectories are named randomly, it is difficult to tell from their names what are older vs. more recent runs.
 
-Fortunately Nextflow includes a helpful `clean` subcommand that can automatically delete the work subdirectories for past runs that you no longer care about.
+Fortunately Nextflow includes a helpful command called [`nextflow clean`](https://www.nextflow.io/docs/latest/reference/cli.html#clean) that can automatically delete the work subdirectories for past runs that you no longer care about.
 
 #### 4.3.1. Determine deletion criteria
 
-There are multiple [options](https://www.nextflow.io/docs/latest/reference/cli.html#clean) to determine what to delete.
-
+There are multiple options to determine what to delete, which you can explore in the documentation linked above.
 Here we show you an example that deletes all subdirectories from runs before a given run, specified using its run name.
 
 Look up the most recent successful run where you didn't use `-resume`; in our case the run name was `backstabbing_swartz`.

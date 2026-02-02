@@ -227,7 +227,7 @@ Once again, you don't need to memorize code syntax, but it's good to learn to re
 
 This is the most interesting part: how did we switch from taking a single value from the command-line, to taking a CSV file, parsing it and processing the individual greetings it contains?
 
-In Nextflow, we do that with a **channel**: a construct designed to handle inputs efficiently and shuttle them from one step to another in multi-step workflows, while providing built-in parallelism and many additional benefits.
+In Nextflow, we do that with a [**channel**](https://nextflow.io/docs/latest/channel.html): a queue construct designed to handle inputs efficiently and shuttle them from one step to another in multi-step workflows, while providing built-in parallelism and many additional benefits.
 
 Let's break it down.
 
@@ -632,7 +632,7 @@ In contrast, using `collect()` allows us to take all the separate uppercased gre
 
 That's how we get all the greetings back into the same file.
 
-There are many other [operators](https://www.nextflow.io/docs/latest/reference/operator.html#operator-page) available to apply transformations to the contents of channels between process calls.
+There are many other [operators](https://nextflow.io/docs/latest/reference/operator.html) available to apply transformations to the contents of channels between process calls.
 
 This gives pipeline developers a lot of flexibility for customizing the flow logic of their pipeline.
 The downside is that it can sometimes make it harder to decipher what the pipeline is doing.
@@ -781,7 +781,7 @@ This can make their development and maintenance more efficient and sustainable.
 
 Here we are going to demonstrate the most common form of code modularity in Nextflow, which is the use of **modules**.
 
-In Nextflow, a **module** is a single process definition that is encapsulated by itself in a standalone code file.
+In Nextflow, a [**module**](https://nextflow.io/docs/latest/module.html) is a single process definition that is encapsulated by itself in a standalone code file.
 To use a module in a workflow, you just add a single-line import statement to your workflow code file; then you can integrate the process into the workflow the same way you normally would.
 That makes it possible to reuse process definitions in multiple workflows without producing multiple copies of the code.
 
@@ -965,7 +965,8 @@ A **container** is a lightweight, standalone, executable unit of software create
 
 !!! Tip
 
-    We teach this using the technology [Docker](https://www.docker.com/get-started/), but Nextflow supports [several other container technologies](https://www.nextflow.io/docs/latest/container.html#) as well.
+    We teach this using the technology [Docker](https://www.docker.com/get-started/), but Nextflow supports several other container technologies as well.
+    You can learn more about Nextflow support for containers [here](https://nextflow.io/docs/latest/container.html).
 
 ### 4.1. Use a container directly
 
