@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://training.nextflow.io/0.dev/ko/nf4_science/genomics/03_modules/">
+        <link rel="canonical" href="https://training.nextflow.io/ko/nf4_science/genomics/03_modules/">
       
       
         <link rel="prev" href="../02_joint_calling/">
@@ -18,33 +18,41 @@
       
       
         
-          <link rel="alternate" href="../../../../nf4_science/genomics/03_modules/" hreflang="en">
+          <link rel="alternate" href="/" hreflang="en">
         
-          <link rel="alternate" href="../../../../pt/nf4_science/genomics/03_modules/" hreflang="pt">
+          <link rel="alternate" href="/de/" hreflang="de">
         
-          <link rel="alternate" href="../../../../es/nf4_science/genomics/03_modules/" hreflang="es">
+          <link rel="alternate" href="/es/" hreflang="es">
         
-          <link rel="alternate" href="../../../../fr/nf4_science/genomics/03_modules/" hreflang="fr">
+          <link rel="alternate" href="/fr/" hreflang="fr">
         
-          <link rel="alternate" href="../../../../it/nf4_science/genomics/03_modules/" hreflang="it">
+          <link rel="alternate" href="/hi/" hreflang="hi">
         
-          <link rel="alternate" href="./" hreflang="ko">
+          <link rel="alternate" href="/it/" hreflang="it">
+        
+          <link rel="alternate" href="/ko/" hreflang="ko">
+        
+          <link rel="alternate" href="/pl/" hreflang="pl">
+        
+          <link rel="alternate" href="/pt/" hreflang="pt">
+        
+          <link rel="alternate" href="/tr/" hreflang="tr">
         
       
       
-      <link rel="icon" href="../../../../assets/img/nextflow-icon.png">
+      <link rel="icon" href="../../../assets/img/nextflow-icon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
     
     
       
-        <title>Part 3: Moving code into modules - training.nextflow.io</title>
+        <title>파트 3: 코드를 모듈로 이동하기 - training.nextflow.io</title>
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
   
@@ -108,11 +116,11 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/fonts.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/fonts.css">
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/extra.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/extra.css">
     
-    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
   
@@ -147,7 +155,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#part-3-moving-code-into-modules" class="md-skip">
+        <a href="#3" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -167,9 +175,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="상단/헤더">
-    <a href="../../../" title="training.nextflow.io" class="md-header__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
+    <a href="../../.." title="training.nextflow.io" class="md-header__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
       
-  <img src="../../../../assets/img/nextflow_logo_dark.png" alt="logo">
+  <img src="../../../assets/img/nextflow_logo_dark.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -186,7 +194,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Part 3: Moving code into modules
+              파트 3: 코드를 모듈로 이동하기
             
           </span>
         </div>
@@ -233,38 +241,62 @@
       <ul class="md-select__list">
         
           <li class="md-select__item">
-            <a href="../../../../nf4_science/genomics/03_modules/" hreflang="en" class="md-select__link">
+            <a href="/" hreflang="en" class="md-select__link">
               English
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../../pt/nf4_science/genomics/03_modules/" hreflang="pt" class="md-select__link">
-              Português
+            <a href="/de/" hreflang="de" class="md-select__link">
+              deutsch
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../../es/nf4_science/genomics/03_modules/" hreflang="es" class="md-select__link">
-              Español
+            <a href="/es/" hreflang="es" class="md-select__link">
+              español
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../../fr/nf4_science/genomics/03_modules/" hreflang="fr" class="md-select__link">
-              Français
+            <a href="/fr/" hreflang="fr" class="md-select__link">
+              français
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../../it/nf4_science/genomics/03_modules/" hreflang="it" class="md-select__link">
-              Italiano
+            <a href="/hi/" hreflang="hi" class="md-select__link">
+              हिन्दी
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="./" hreflang="ko" class="md-select__link">
-              Korean
+            <a href="/it/" hreflang="it" class="md-select__link">
+              italiano
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/ko/" hreflang="ko" class="md-select__link">
+              한국어
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/pl/" hreflang="pl" class="md-select__link">
+              Polski
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/pt/" hreflang="pt" class="md-select__link">
+              português
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/tr/" hreflang="tr" class="md-select__link">
+              Türkçe
             </a>
           </li>
         
@@ -384,9 +416,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="네비게이션" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../../" title="training.nextflow.io" class="md-nav__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
+    <a href="../../.." title="training.nextflow.io" class="md-nav__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
       
-  <img src="../../../../assets/img/nextflow_logo_dark.png" alt="logo">
+  <img src="../../../assets/img/nextflow_logo_dark.png" alt="logo">
 
     </a>
     training.nextflow.io
@@ -413,14 +445,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../" class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Home
+    홈
   
 
     
@@ -522,7 +554,7 @@
   <span class="md-ellipsis">
     
   
-    Getting started
+    시작하기
   
 
     
@@ -550,7 +582,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run basic operations
+    파트 1: 기본 작업 실행
   
 
     
@@ -578,7 +610,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Run real pipelines
+    파트 2: 실제 pipeline 실행
   
 
     
@@ -606,7 +638,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Run configuration
+    파트 3: 실행 구성
   
 
     
@@ -634,7 +666,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    과정 요약
   
 
     
@@ -662,7 +694,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    피드백 설문조사
   
 
     
@@ -772,7 +804,7 @@
   <span class="md-ellipsis">
     
   
-    Getting started
+    시작하기
   
 
     
@@ -800,7 +832,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Hello World
+    파트 1: Hello World
   
 
     
@@ -828,7 +860,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Hello Channels
+    파트 2: Hello Channels
   
 
     
@@ -856,7 +888,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Hello Workflow
+    파트 3: Hello Workflow
   
 
     
@@ -884,7 +916,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Hello Modules
+    파트 4: Hello Modules
   
 
     
@@ -912,7 +944,7 @@
   <span class="md-ellipsis">
     
   
-    Part 5: Hello Containers
+    파트 5: Hello Containers
   
 
     
@@ -940,7 +972,7 @@
   <span class="md-ellipsis">
     
   
-    Part 6: Hello Config
+    파트 6: Hello Config
   
 
     
@@ -968,7 +1000,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    과정 요약
   
 
     
@@ -996,7 +1028,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    피드백 설문조사
   
 
     
@@ -1106,7 +1138,7 @@
   <span class="md-ellipsis">
     
   
-    Getting started
+    시작하기
   
 
     
@@ -1134,7 +1166,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run a demo pipeline
+    파트 1: 데모 파이프라인 실행하기
   
 
     
@@ -1162,7 +1194,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Rewrite Hello for nf-core
+    2부: nf-core용 Hello 재작성
   
 
     
@@ -1190,7 +1222,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Use an nf-core module
+    파트 3: nf-core 모듈 사용하기
   
 
     
@@ -1218,7 +1250,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Make an nf-core module
+    파트 4: nf-core 모듈 만들기
   
 
     
@@ -1246,7 +1278,7 @@
   <span class="md-ellipsis">
     
   
-    Part 5: Input validation
+    파트 5: 입력 검증
   
 
     
@@ -1274,7 +1306,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    교육 과정 요약
   
 
     
@@ -1302,7 +1334,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    피드백 설문조사
   
 
     
@@ -1350,7 +1382,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Science
+    과학을 위한 Nextflow
   
 
     
@@ -1366,7 +1398,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Nextflow for Science
+    과학을 위한 Nextflow
   
 
           </label>
@@ -1386,7 +1418,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Science
+    과학을 위한 Nextflow
   
 
     
@@ -1427,7 +1459,7 @@
   <span class="md-ellipsis">
     
   
-    Genomics
+    유전체학을 위한 Nextflow
   
 
     
@@ -1443,7 +1475,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Genomics
+    유전체학을 위한 Nextflow
   
 
           </label>
@@ -1463,7 +1495,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Genomics
+    유전체학을 위한 Nextflow
   
 
     
@@ -1491,7 +1523,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    오리엔테이션
   
 
     
@@ -1519,7 +1551,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Per-sample variant calling
+    파트 1: 샘플별 변이 호출
   
 
     
@@ -1547,7 +1579,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Joint calling on a cohort
+    파트 2: 코호트에 대한 조인트 콜링
   
 
     
@@ -1584,7 +1616,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Moving code into modules
+    파트 3: 코드를 모듈로 이동하기
   
 
     
@@ -1602,7 +1634,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Moving code into modules
+    파트 3: 코드를 모듈로 이동하기
   
 
     
@@ -1622,22 +1654,22 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#0-warmup" class="md-nav__link">
+  <a href="#0" class="md-nav__link">
     <span class="md-ellipsis">
       
-        0. Warmup
+        0. 준비 운동
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="0. Warmup">
+    <nav class="md-nav" aria-label="0. 준비 운동">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#takeaway" class="md-nav__link">
+  <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        요점 정리
       
     </span>
   </a>
@@ -1645,10 +1677,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        다음 단계는?
       
     </span>
   </a>
@@ -1659,22 +1691,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#1-move-processes-into-modules" class="md-nav__link">
+  <a href="#1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Move processes into modules
+        1. 프로세스를 모듈로 이동하기
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Move processes into modules">
+    <nav class="md-nav" aria-label="1. 프로세스를 모듈로 이동하기">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11-create-a-module-for-the-samtools_index-process" class="md-nav__link">
+  <a href="#11-samtools_index" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1. Create a module for the SAMTOOLS_INDEX process
+        1.1. SAMTOOLS_INDEX 프로세스를 위한 모듈 생성하기
       
     </span>
   </a>
@@ -1682,10 +1714,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#12-create-modules-for-the-gatk_haplotypecaller-and-gatk_jointgenotyping-processes" class="md-nav__link">
+  <a href="#12-gatk_haplotypecaller-gatk_jointgenotyping" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2. Create modules for the GATK_HAPLOTYPECALLER and GATK_JOINTGENOTYPING processes
+        1.2. GATK_HAPLOTYPECALLER 및 GATK_JOINTGENOTYPING 프로세스를 위한 모듈 생성하기
       
     </span>
   </a>
@@ -1693,10 +1725,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway_1" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        요점 정리
       
     </span>
   </a>
@@ -1704,10 +1736,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next_1" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        다음 단계는?
       
     </span>
   </a>
@@ -1718,22 +1750,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#2-test-the-modularized-workflow" class="md-nav__link">
+  <a href="#2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Test the modularized workflow
+        2. 모듈화된 워크플로우 테스트하기
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. Test the modularized workflow">
+    <nav class="md-nav" aria-label="2. 모듈화된 워크플로우 테스트하기">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#takeaway_2" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        요점 정리
       
     </span>
   </a>
@@ -1741,10 +1773,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next_2" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        다음 단계는?
       
     </span>
   </a>
@@ -1755,10 +1787,10 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#3-summary" class="md-nav__link">
+  <a href="#3_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Summary
+        3. 요약
       
     </span>
   </a>
@@ -1973,7 +2005,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Adding tests
+    파트 4: 테스트 추가하기
   
 
     
@@ -2001,7 +2033,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    피드백 설문조사
   
 
     
@@ -2029,7 +2061,7 @@
   <span class="md-ellipsis">
     
   
-    Next Steps
+    다음 단계
   
 
     
@@ -2076,7 +2108,7 @@
   <span class="md-ellipsis">
     
   
-    RNAseq
+    RNAseq을 위한 Nextflow
   
 
     
@@ -2092,7 +2124,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    RNAseq
+    RNAseq을 위한 Nextflow
   
 
           </label>
@@ -2112,7 +2144,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for RNAseq
+    RNAseq을 위한 Nextflow
   
 
     
@@ -2140,7 +2172,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    오리엔테이션
   
 
     
@@ -2168,7 +2200,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Method overview and manual testing
+    파트 1: 방법 개요 및 수동 테스트
   
 
     
@@ -2196,7 +2228,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Single-sample implementation
+    파트 2: 단일 샘플 구현
   
 
     
@@ -2224,7 +2256,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Multi-sample paired-end implementation
+    파트 3: 다중 샘플 paired-end 구현
   
 
     
@@ -2252,7 +2284,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    피드백 설문조사
   
 
     
@@ -2280,7 +2312,7 @@
   <span class="md-ellipsis">
     
   
-    Next Steps
+    다음 단계
   
 
     
@@ -2327,7 +2359,7 @@
   <span class="md-ellipsis">
     
   
-    Imaging
+    이미징을 위한 Nextflow 실행
   
 
     
@@ -2343,7 +2375,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Imaging
+    이미징을 위한 Nextflow 실행
   
 
           </label>
@@ -2363,7 +2395,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow run for Imaging
+    이미징을 위한 Nextflow 실행
   
 
     
@@ -2391,7 +2423,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    오리엔테이션
   
 
     
@@ -2419,7 +2451,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run basic operations
+    파트 1: 기본 작업 실행하기
   
 
     
@@ -2447,7 +2479,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Run nf-core/molkart
+    파트 2: nf-core/molkart 실행하기
   
 
     
@@ -2475,7 +2507,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Organizing inputs
+    파트 3: 입력 구성하기
   
 
     
@@ -2503,7 +2535,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Configuration
+    파트 4: 구성
   
 
     
@@ -2531,7 +2563,7 @@
   <span class="md-ellipsis">
     
   
-    Survey
+    설문조사
   
 
     
@@ -2559,7 +2591,7 @@
   <span class="md-ellipsis">
     
   
-    Next steps
+    다음 단계
   
 
     
@@ -2613,7 +2645,7 @@
   <span class="md-ellipsis">
     
   
-    Side Quests
+    사이드 퀘스트
   
 
     
@@ -2629,7 +2661,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Side Quests
+    사이드 퀘스트
   
 
           </label>
@@ -2649,7 +2681,7 @@
   <span class="md-ellipsis">
     
   
-    Side Quests
+    사이드 퀘스트
   
 
     
@@ -2677,7 +2709,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    오리엔테이션
   
 
     
@@ -2705,7 +2737,7 @@
   <span class="md-ellipsis">
     
   
-    Development Environment
+    개발 환경
   
 
     
@@ -2733,7 +2765,7 @@
   <span class="md-ellipsis">
     
   
-    Metadata and meta maps
+    메타데이터와 메타 맵
   
 
     
@@ -2761,7 +2793,7 @@
   <span class="md-ellipsis">
     
   
-    File input processing
+    파일 입력 처리
   
 
     
@@ -2789,7 +2821,7 @@
   <span class="md-ellipsis">
     
   
-    Splitting and Grouping
+    데이터 분할 및 그룹화
   
 
     
@@ -2817,7 +2849,7 @@
   <span class="md-ellipsis">
     
   
-    Workflows of Workflows
+    워크플로우의 워크플로우
   
 
     
@@ -2845,7 +2877,7 @@
   <span class="md-ellipsis">
     
   
-    Debugging Workflows
+    워크플로우 디버깅
   
 
     
@@ -2873,7 +2905,7 @@
   <span class="md-ellipsis">
     
   
-    Essential Nextflow Scripting Patterns
+    필수 Nextflow 스크립팅 패턴
   
 
     
@@ -2901,7 +2933,7 @@
   <span class="md-ellipsis">
     
   
-    Testing with nf-test
+    nf-test로 테스트하기
   
 
     
@@ -2947,7 +2979,7 @@
   <span class="md-ellipsis">
     
   
-    Training Collections
+    교육 컬렉션
   
 
     
@@ -2963,7 +2995,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Training Collections
+    교육 컬렉션
   
 
           </label>
@@ -2983,7 +3015,7 @@
   <span class="md-ellipsis">
     
   
-    Training Collections
+    교육 컬렉션
   
 
     
@@ -3011,7 +3043,7 @@
   <span class="md-ellipsis">
     
   
-    The Architect's Toolkit I
+    Architects toolkit 1
   
 
     
@@ -3093,7 +3125,7 @@
   <span class="md-ellipsis">
     
   
-    Getting help
+    도움말
   
 
     
@@ -3132,7 +3164,7 @@
   <span class="md-ellipsis">
     
   
-    Training environment
+    환경 옵션
   
 
     
@@ -3148,7 +3180,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Training environment
+    환경 옵션
   
 
           </label>
@@ -3168,7 +3200,7 @@
   <span class="md-ellipsis">
     
   
-    환경 설정
+    환경 옵션
   
 
     
@@ -3224,7 +3256,7 @@
   <span class="md-ellipsis">
     
   
-    Local Devcontainers
+    로컬 Devcontainers
   
 
     
@@ -3252,7 +3284,7 @@
   <span class="md-ellipsis">
     
   
-    로컬 설치
+    수동 설치
   
 
     
@@ -3288,7 +3320,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow versions
+    Nextflow 버전
   
 
     
@@ -3316,7 +3348,7 @@
   <span class="md-ellipsis">
     
   
-    The Hello pipeline
+    Hello pipeline
   
 
     
@@ -3358,22 +3390,22 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#0-warmup" class="md-nav__link">
+  <a href="#0" class="md-nav__link">
     <span class="md-ellipsis">
       
-        0. Warmup
+        0. 준비 운동
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="0. Warmup">
+    <nav class="md-nav" aria-label="0. 준비 운동">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#takeaway" class="md-nav__link">
+  <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        요점 정리
       
     </span>
   </a>
@@ -3381,10 +3413,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        다음 단계는?
       
     </span>
   </a>
@@ -3395,22 +3427,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#1-move-processes-into-modules" class="md-nav__link">
+  <a href="#1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Move processes into modules
+        1. 프로세스를 모듈로 이동하기
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Move processes into modules">
+    <nav class="md-nav" aria-label="1. 프로세스를 모듈로 이동하기">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11-create-a-module-for-the-samtools_index-process" class="md-nav__link">
+  <a href="#11-samtools_index" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1. Create a module for the SAMTOOLS_INDEX process
+        1.1. SAMTOOLS_INDEX 프로세스를 위한 모듈 생성하기
       
     </span>
   </a>
@@ -3418,10 +3450,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#12-create-modules-for-the-gatk_haplotypecaller-and-gatk_jointgenotyping-processes" class="md-nav__link">
+  <a href="#12-gatk_haplotypecaller-gatk_jointgenotyping" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2. Create modules for the GATK_HAPLOTYPECALLER and GATK_JOINTGENOTYPING processes
+        1.2. GATK_HAPLOTYPECALLER 및 GATK_JOINTGENOTYPING 프로세스를 위한 모듈 생성하기
       
     </span>
   </a>
@@ -3429,10 +3461,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway_1" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        요점 정리
       
     </span>
   </a>
@@ -3440,10 +3472,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next_1" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        다음 단계는?
       
     </span>
   </a>
@@ -3454,22 +3486,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#2-test-the-modularized-workflow" class="md-nav__link">
+  <a href="#2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Test the modularized workflow
+        2. 모듈화된 워크플로우 테스트하기
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. Test the modularized workflow">
+    <nav class="md-nav" aria-label="2. 모듈화된 워크플로우 테스트하기">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#takeaway_2" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        요점 정리
       
     </span>
   </a>
@@ -3477,10 +3509,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next_2" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        다음 단계는?
       
     </span>
   </a>
@@ -3491,10 +3523,10 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#3-summary" class="md-nav__link">
+  <a href="#3_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Summary
+        3. 요약
       
     </span>
   </a>
@@ -3738,34 +3770,44 @@
                 
                   
 
+ 
+<a
+  href="https://github.com/nextflow-io/training/edit/master/docs/nf4_science/genomics/03_modules.md"
+  title="이 페이지를 편집"
+  class="md-content__button md-icon"
+  rel="edit"
+>
+   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+</a>
+   
+<a
+  href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md"
+  title="Improve translation"
+  class="md-content__button md-icon"
+>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 1H3c-1.1 0-2 .9-2 2v12l3-3h5v-1c0-2.2 1.79-4 4-4V3c0-1.1-.9-2-2-2m0 3H9.5c-.34 1.19-.96 2.3-1.82 3.26l-.02.02 1.26 1.25-.37 1.01L7 8l-2.5 2.5-.69-.73 2.53-2.49A8.6 8.6 0 0 1 4.86 5h.99c.31.6.69 1.17 1.15 1.68A7.7 7.7 0 0 0 8.57 4H3V3h3.5V2h1v1H11zm10 5h-8c-1.1 0-2 .9-2 2v7c0 1.1.9 2 2 2h7l3 3V11c0-1.1-.9-2-2-2m-1.37 10-.85-2.25h-3.56L14.38 19h-1.5l3.37-9h1.5l3.38 9zM17 12l1.22 3.25h-2.43z"/></svg>
+</a>
+ 
 
-  
-    <a href="https://github.com/nextflow-io/training/edit/master/docs/nf4_science/genomics/03_modules.md" title="이 페이지를 편집" class="md-content__button md-icon" rel="edit">
-      
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
-    </a>
-  
-  
-
-
-<h1 id="part-3-moving-code-into-modules">Part 3: Moving code into modules<a class="headerlink" href="#part-3-moving-code-into-modules" title="Permanent link">&para;</a></h1>
-<p>In the first part of this course, you built a variant calling pipeline that was completely linear and processed each sample's data independently of the others.</p>
-<p>In the second part, we showed you how to use channels and channel operators to implement joint variant calling with GATK, building on the pipeline from Part 1.</p>
-<p>In this part, we'll show you how to convert the code in that workflow into modules. To follow this part of the training, you should have completed Part 1 and Part 2, as well as <a href="../../../hello_nextflow/hello_modules.md">Hello Modules</a>, which covers the basics of modules.</p>
+<h1 id="3">파트 3: 코드를 모듈로 이동하기<a class="headerlink" href="#3" title="Permanent link">&para;</a></h1>
+<p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> AI 지원 번역 - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">자세히 알아보기 및 개선 제안</a></span></p>
+<p>이 과정의 첫 번째 부분에서는 완전히 선형적이며 각 샘플의 데이터를 다른 샘플과 독립적으로 처리하는 변이 호출 파이프라인을 구축했습니다.</p>
+<p>두 번째 부분에서는 채널과 채널 연산자를 사용하여 GATK로 공동 변이 호출을 구현하는 방법을 보여드렸으며, Part 1의 파이프라인을 기반으로 했습니다.</p>
+<p>이 부분에서는 해당 워크플로우의 코드를 모듈로 변환하는 방법을 보여드리겠습니다. 이 교육 부분을 따라하려면 Part 1과 Part 2는 물론 모듈의 기본 사항을 다루는 <a href="../../../hello_nextflow/hello_modules.md">Hello Modules</a>를 완료해야 합니다.</p>
 <hr />
-<h2 id="0-warmup">0. Warmup<a class="headerlink" href="#0-warmup" title="Permanent link">&para;</a></h2>
-<p>When we started developing our workflow, we put everything in one single code file.
-Now it's time to tackle <strong>modularizing</strong> our code, <em>i.e.</em> extracting the process definitions into modules.</p>
-<p>We're going to start with the same workflow as in Part 2, which we've provided for you in the file <code>genomics-3.nf</code>.</p>
+<h2 id="0">0. 준비 운동<a class="headerlink" href="#0" title="Permanent link">&para;</a></h2>
+<p>워크플로우 개발을 시작할 때 모든 것을 하나의 코드 파일에 넣었습니다.
+이제 코드를 <strong>모듈화</strong>할 시간입니다. 즉, 프로세스 정의를 모듈로 추출하는 것입니다.</p>
+<p>Part 2와 동일한 워크플로우부터 시작하겠으며, <code>genomics-3.nf</code> 파일에 제공되어 있습니다.</p>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Make sure you're in the correct working directory:
+<p class="admonition-title">참고</p>
+<p>올바른 작업 디렉토리에 있는지 확인하십시오:
  <code>cd /workspaces/training/nf4-science/genomics</code></p>
 </div>
-<p>Run the workflow to verify the starting point:</p>
+<p>시작점을 확인하기 위해 워크플로우를 실행하십시오:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>genomics-3.nf<span class="w"> </span>-resume
 </code></pre></div>
-<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><span class="filename">출력</span><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="go">Launching `genomics-3.nf` [serene_borg] DSL2 - revision: 0cbebb67a1</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
@@ -3774,21 +3816,21 @@ Now it's time to tackle <strong>modularizing</strong> our code, <em>i.e.</em> ex
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="go">[53/b9d342] GATK_HAPLOTYPECALLER (1) | 3 of 3 ✔</span>
 <a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="go">[0c/fa6d15] GATK_JOINTGENOTYPING     | 1 of 1 ✔</span>
 </code></pre></div>
-<p>There will now be a <code>work</code> directory and a <code>results_genomics</code> directory inside your project directory.</p>
-<h3 id="takeaway">Takeaway<a class="headerlink" href="#takeaway" title="Permanent link">&para;</a></h3>
-<p>You're ready to start modularizing your workflow.</p>
-<h3 id="whats-next">What's next?<a class="headerlink" href="#whats-next" title="Permanent link">&para;</a></h3>
-<p>Move the Genomics workflow's processes into modules.</p>
+<p>이제 프로젝트 디렉토리 내에 <code>work</code> 디렉토리와 <code>results_genomics</code> 디렉토리가 생성됩니다.</p>
+<h3 id="_1">요점 정리<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<p>워크플로우를 모듈화할 준비가 되었습니다.</p>
+<h3 id="_2">다음 단계는?<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>Genomics 워크플로우의 프로세스를 모듈로 이동합니다.</p>
 <hr />
-<h2 id="1-move-processes-into-modules">1. Move processes into modules<a class="headerlink" href="#1-move-processes-into-modules" title="Permanent link">&para;</a></h2>
-<p>As you learned in <a href="../../../hello_nextflow/hello_modules.md">Hello Modules</a>, you can create a module simply by copying the process definition into its own file, in any directory, and you can name that file anything you want.</p>
-<p>For reasons that will become clear later (in particular when we come to testing), in this training we'll follow the convention of naming the file <code>main.nf</code>, and placing it in a directory structure named after the tool kit and the command.</p>
-<h3 id="11-create-a-module-for-the-samtools_index-process">1.1. Create a module for the <code>SAMTOOLS_INDEX</code> process<a class="headerlink" href="#11-create-a-module-for-the-samtools_index-process" title="Permanent link">&para;</a></h3>
-<p>In the case of the <code>SAMTOOLS_INDEX</code> process, 'samtools' is the toolkit and 'index' is the command. So, we'll create a directory structure <code>modules/samtools/index</code> and put the <code>SAMTOOLS_INDEX</code> process definition in the <code>main.nf</code> file inside that directory.</p>
+<h2 id="1">1. 프로세스를 모듈로 이동하기<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<p><a href="../../../hello_nextflow/hello_modules.md">Hello Modules</a>에서 배운 것처럼, 프로세스 정의를 임의의 디렉토리에 있는 자체 파일로 복사하기만 하면 모듈을 만들 수 있으며, 해당 파일의 이름은 원하는 대로 지정할 수 있습니다.</p>
+<p>나중에 명확해질 이유로 (특히 테스트를 할 때), 이 교육에서는 파일 이름을 <code>main.nf</code>로 지정하고 툴킷과 명령의 이름을 따서 명명된 디렉토리 구조에 배치하는 관례를 따르겠습니다.</p>
+<h3 id="11-samtools_index">1.1. <code>SAMTOOLS_INDEX</code> 프로세스를 위한 모듈 생성하기<a class="headerlink" href="#11-samtools_index" title="Permanent link">&para;</a></h3>
+<p><code>SAMTOOLS_INDEX</code> 프로세스의 경우, 'samtools'는 툴킷이고 'index'는 명령입니다. 따라서 <code>modules/samtools/index</code> 디렉토리 구조를 만들고 해당 디렉토리 내의 <code>main.nf</code> 파일에 <code>SAMTOOLS_INDEX</code> 프로세스 정의를 넣겠습니다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>modules/samtools/index
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>touch<span class="w"> </span>modules/samtools/index/main.nf
 </code></pre></div>
-<p>Open the <code>main.nf</code> file and copy the <code>SAMTOOLS_INDEX</code> process definition into it.</p>
+<p><code>main.nf</code> 파일을 열고 <code>SAMTOOLS_INDEX</code> 프로세스 정의를 복사합니다.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/samtools/index/main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-3-3"> 3</a></span>
@@ -3807,7 +3849,7 @@ Now it's time to tackle <strong>modularizing</strong> our code, <em>i.e.</em> ex
 <span class="normal"><a href="#__codelineno-3-16">16</a></span>
 <span class="normal"><a href="#__codelineno-3-17">17</a></span>
 <span class="normal"><a href="#__codelineno-3-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="cm">/*</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="cm"> * Generate BAM index file</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="cm"> * BAM 인덱스 파일 생성</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="cm"> */</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="n">process</span><span class="w"> </span><span class="n">SAMTOOLS_INDEX</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-3-5" name="__codelineno-3-5"></a>
@@ -3825,8 +3867,8 @@ Now it's time to tackle <strong>modularizing</strong> our code, <em>i.e.</em> ex
 <a id="__codelineno-3-17" name="__codelineno-3-17"></a><span class="s2">    &quot;&quot;&quot;</span>
 <a id="__codelineno-3-18" name="__codelineno-3-18"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>Then, remove the <code>SAMTOOLS_INDEX</code> process definition from <code>genomics-3.nf</code>, and add an import declaration for the module before the next process definition, like this:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">After</label><label for="__tabbed_1_2">Before</label></div>
+<p>그런 다음 <code>genomics-3.nf</code>에서 <code>SAMTOOLS_INDEX</code> 프로세스 정의를 제거하고, 다음 프로세스 정의 앞에 모듈에 대한 import 선언을 추가합니다:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">변경 후</label><label for="__tabbed_1_2">변경 전</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">genomics-3.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
@@ -3835,11 +3877,11 @@ Now it's time to tackle <strong>modularizing</strong> our code, <em>i.e.</em> ex
 <span class="normal"><a href="#__codelineno-4-4">4</a></span>
 <span class="normal"><a href="#__codelineno-4-5">5</a></span>
 <span class="normal"><a href="#__codelineno-4-6">6</a></span>
-<span class="normal"><a href="#__codelineno-4-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="hll"><span class="c1">// Include modules</span>
+<span class="normal"><a href="#__codelineno-4-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="hll"><span class="c1">// 모듈 포함</span>
 </span><a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="hll"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">SAMTOOLS_INDEX</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/samtools/index/main.nf&#39;</span>
 </span><a id="__codelineno-4-3" name="__codelineno-4-3"></a>
 <a id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="cm">/*</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="cm"> * Call variants with GATK HaplotypeCaller</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="cm"> * GATK HaplotypeCaller로 변이 호출</span>
 <a id="__codelineno-4-6" name="__codelineno-4-6"></a><span class="cm"> */</span>
 <a id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="n">process</span><span class="w"> </span><span class="n">GATK_HAPLOTYPECALLER</span><span class="w"> </span><span class="o">{</span>
 </code></pre></div></td></tr></table></div>
@@ -3849,18 +3891,18 @@ Now it's time to tackle <strong>modularizing</strong> our code, <em>i.e.</em> ex
 <span class="normal"><a href="#__codelineno-5-2">2</a></span>
 <span class="normal"><a href="#__codelineno-5-3">3</a></span>
 <span class="normal"><a href="#__codelineno-5-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="hll"><span class="cm">/*</span>
-</span><a id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="cm"> * Call variants with GATK HaplotypeCaller</span>
+</span><a id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="cm"> * GATK HaplotypeCaller로 변이 호출</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="cm"> */</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="n">process</span><span class="w"> </span><span class="n">GATK_HAPLOTYPECALLER</span><span class="w"> </span><span class="o">{</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
 </div>
-<p>You can now run the workflow again, and it should still work the same way as before. If you supply the <code>-resume</code> flag, no new tasks should even need to be run:</p>
+<p>이제 워크플로우를 다시 실행할 수 있으며, 이전과 동일한 방식으로 작동해야 합니다. <code>-resume</code> 플래그를 제공하면 새 작업을 실행할 필요조차 없어야 합니다:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>genomics-3.nf<span class="w"> </span>-resume
 </code></pre></div>
 <details class="success">
-<summary>Command output</summary>
+<summary>명령 출력</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="go">Launching `genomics-3.nf` [sleepy_snyder] DSL2 - revision: aa68d06c43</span>
@@ -3870,20 +3912,20 @@ Now it's time to tackle <strong>modularizing</strong> our code, <em>i.e.</em> ex
 <a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="go">[0c/fa6d15] GATK_JOINTGENOTYPING     | 1 of 1, cached: 1 ✔</span>
 </code></pre></div>
 </details>
-<h3 id="12-create-modules-for-the-gatk_haplotypecaller-and-gatk_jointgenotyping-processes">1.2. Create modules for the <code>GATK_HAPLOTYPECALLER</code> and <code>GATK_JOINTGENOTYPING</code> processes<a class="headerlink" href="#12-create-modules-for-the-gatk_haplotypecaller-and-gatk_jointgenotyping-processes" title="Permanent link">&para;</a></h3>
-<p>Repeat the same steps for the remaining processes.
-For each process:</p>
+<h3 id="12-gatk_haplotypecaller-gatk_jointgenotyping">1.2. <code>GATK_HAPLOTYPECALLER</code> 및 <code>GATK_JOINTGENOTYPING</code> 프로세스를 위한 모듈 생성하기<a class="headerlink" href="#12-gatk_haplotypecaller-gatk_jointgenotyping" title="Permanent link">&para;</a></h3>
+<p>나머지 프로세스에 대해서도 동일한 단계를 반복합니다.
+각 프로세스에 대해:</p>
 <ol>
-<li>Create the directory structure (<code>modules/gatk/haplotypecaller/</code> and <code>modules/gatk/jointgenotyping/</code>)</li>
-<li>Create a <code>main.nf</code> file containing the process definition</li>
-<li>Remove the process definition from <code>genomics-3.nf</code></li>
-<li>Add an import declaration for the module</li>
+<li>디렉토리 구조 생성 (<code>modules/gatk/haplotypecaller/</code> 및 <code>modules/gatk/jointgenotyping/</code>)</li>
+<li>프로세스 정의를 포함하는 <code>main.nf</code> 파일 생성</li>
+<li><code>genomics-3.nf</code>에서 프로세스 정의 제거</li>
+<li>모듈에 대한 import 선언 추가</li>
 </ol>
-<p>Once you're done, check that your modules directory structure is correct by running:</p>
+<p>완료되면 다음을 실행하여 modules 디렉토리 구조가 올바른지 확인하십시오:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>tree<span class="w"> </span>modules/
 </code></pre></div>
 <details class="abstract">
-<summary>Directory contents</summary>
+<summary>디렉토리 내용</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="go">modules/</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="go">├── gatk</span>
 <a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="go">│   ├── haplotypecaller</span>
@@ -3897,23 +3939,23 @@ For each process:</p>
 <a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="go">5 directories, 3 files</span>
 </code></pre></div>
 </details>
-<p>You should also have something like this in the main workflow file, after the parameters section:</p>
+<p>또한 메인 워크플로우 파일의 매개변수 섹션 다음에 다음과 같은 내용이 있어야 합니다:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>include { SAMTOOLS_INDEX } from &#39;./modules/samtools/index/main.nf&#39;
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>include { GATK_HAPLOTYPECALLER } from &#39;./modules/gatk/haplotypecaller/main.nf&#39;
 <a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>include { GATK_JOINTGENOTYPING } from &#39;./modules/gatk/jointgenotyping/main.nf&#39;
 <a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>
 <a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>workflow {
 </code></pre></div>
-<h3 id="takeaway_1">Takeaway<a class="headerlink" href="#takeaway_1" title="Permanent link">&para;</a></h3>
-<p>You've practiced modularizing a workflow, with the genomics workflow as an example.</p>
-<h3 id="whats-next_1">What's next?<a class="headerlink" href="#whats-next_1" title="Permanent link">&para;</a></h3>
-<p>Test the modularized workflow.</p>
+<h3 id="_3">요점 정리<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>Genomics 워크플로우를 예제로 워크플로우를 모듈화하는 연습을 했습니다.</p>
+<h3 id="_4">다음 단계는?<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>모듈화된 워크플로우를 테스트합니다.</p>
 <hr />
-<h2 id="2-test-the-modularized-workflow">2. Test the modularized workflow<a class="headerlink" href="#2-test-the-modularized-workflow" title="Permanent link">&para;</a></h2>
-<p>Run the modularized workflow to verify everything still works.</p>
+<h2 id="2">2. 모듈화된 워크플로우 테스트하기<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<p>모듈화된 워크플로우를 실행하여 모든 것이 여전히 작동하는지 확인합니다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>genomics-3.nf<span class="w"> </span>-resume
 </code></pre></div>
-<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><span class="filename">출력</span><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
 <a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="go">Launching `genomics-3.nf` [astonishing_venter] DSL2 - revision: ca27264c13</span>
 <a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>
@@ -3921,9 +3963,9 @@ For each process:</p>
 <a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="go">[53/b9d342] GATK_HAPLOTYPECALLER (3) | 3 of 3, cached: 3 ✔</span>
 <a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="go">[0c/fa6d15] GATK_JOINTGENOTYPING     | 1 of 1, cached: 1 ✔</span>
 </code></pre></div>
-<p>Everything still works, including the resumability of the pipeline.
-The results continue to be published to the <code>results_genomics</code> directory.</p>
-<div class="highlight"><span class="filename">Directory contents</span><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="go">results_genomics/</span>
+<p>파이프라인의 재개 가능성을 포함하여 모든 것이 여전히 작동합니다.
+결과는 계속해서 <code>results_genomics</code> 디렉토리에 게시됩니다.</p>
+<div class="highlight"><span class="filename">디렉토리 내용</span><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="go">results_genomics/</span>
 <a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="go">├── family_trio.joint.vcf</span>
 <a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="go">├── family_trio.joint.vcf.idx</span>
 <a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="go">├── gvcf</span>
@@ -3941,19 +3983,19 @@ The results continue to be published to the <code>results_genomics</code> direct
 <a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a><span class="go">    ├── reads_son.bam</span>
 <a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a><span class="go">    └── reads_son.bam.bai</span>
 </code></pre></div>
-<h3 id="takeaway_2">Takeaway<a class="headerlink" href="#takeaway_2" title="Permanent link">&para;</a></h3>
-<p>You've modularized a workflow and verified it still works the same way as before.</p>
-<h3 id="whats-next_2">What's next?<a class="headerlink" href="#whats-next_2" title="Permanent link">&para;</a></h3>
-<p>Review what you've learned and look ahead to testing.</p>
+<h3 id="_5">요점 정리<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>워크플로우를 모듈화했으며 이전과 동일한 방식으로 작동하는지 확인했습니다.</p>
+<h3 id="_6">다음 단계는?<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p>학습한 내용을 검토하고 테스트를 살펴봅니다.</p>
 <hr />
-<h2 id="3-summary">3. Summary<a class="headerlink" href="#3-summary" title="Permanent link">&para;</a></h2>
-<p>You've modularized the workflow, and nothing has changed to how the pipeline works.
-This is intentional: you've restructured the code without impacting its function.</p>
-<p>The modules contain only the process logic, making them clean and reusable.
-The main script controls what gets published and where, while modules remain focused on their computational task.</p>
-<p>You've laid a foundation for things that will make your code easier to maintain.
-For example, you can now add tests to your pipeline using the nf-test framework.
-This is what we'll look at in the next part of this course.</p><style type="text/css">.quiz {
+<h2 id="3_1">3. 요약<a class="headerlink" href="#3_1" title="Permanent link">&para;</a></h2>
+<p>워크플로우를 모듈화했으며 파이프라인 작동 방식에는 아무것도 변경되지 않았습니다.
+이는 의도적인 것입니다: 기능에 영향을 주지 않고 코드를 재구성했습니다.</p>
+<p>모듈은 프로세스 로직만 포함하여 깔끔하고 재사용 가능합니다.
+메인 스크립트는 무엇이 어디에 게시되는지 제어하는 반면, 모듈은 계산 작업에 집중합니다.</p>
+<p>코드를 더 쉽게 유지 관리할 수 있게 하는 기반을 마련했습니다.
+예를 들어, 이제 nf-test 프레임워크를 사용하여 파이프라인에 테스트를 추가할 수 있습니다.
+이것이 이 과정의 다음 부분에서 살펴볼 내용입니다.</p><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
   margin: 1rem 0;
@@ -5470,6 +5512,9 @@ window.mkdocsQuizConfig = {
 
 
 
+  
+  
+
 
 
   
@@ -5500,7 +5545,7 @@ window.mkdocsQuizConfig = {
       <nav class="md-footer__inner md-grid" aria-label="하단/푸터" >
         
           
-          <a href="../02_joint_calling/" class="md-footer__link md-footer__link--prev" aria-label="이전: Part 2: Joint calling on a cohort">
+          <a href="../02_joint_calling/" class="md-footer__link md-footer__link--prev" aria-label="이전: 파트 2: 코호트에 대한 조인트 콜링">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -5510,20 +5555,20 @@ window.mkdocsQuizConfig = {
                 이전
               </span>
               <div class="md-ellipsis">
-                Part 2: Joint calling on a cohort
+                파트 2: 코호트에 대한 조인트 콜링
               </div>
             </div>
           </a>
         
         
           
-          <a href="../04_testing/" class="md-footer__link md-footer__link--next" aria-label="다음: Part 4: Adding tests">
+          <a href="../04_testing/" class="md-footer__link md-footer__link--next" aria-label="다음: 파트 4: 테스트 추가하기">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 다음
               </span>
               <div class="md-ellipsis">
-                Part 4: Adding tests
+                파트 4: 테스트 추가하기
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -5600,8 +5645,8 @@ window.mkdocsQuizConfig = {
   
 
 
-<h4>Cookie consent</h4>
-<p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our training materials better. Find out more on <a href="https://seqera.io/privacy-policy/#cookies" target="_blank" rel="noopener">how we use cookies</a>.</p>
+<h4>쿠키 동의</h4>
+<p>저희는 귀하의 반복 방문과 선호도를 인식하고, 문서의 효과성과 사용자가 원하는 정보를 찾고 있는지 측정하기 위해 쿠키를 사용합니다. 동의해 주시면 교육 자료를 개선하는 데 도움이 됩니다. <a href="https://seqera.io/privacy-policy/#cookies" target="_blank" rel="noopener">쿠키 사용 방법</a>에 대해 자세히 알아보세요.</p>
 <input class="md-toggle" type="checkbox" id="__settings" >
 <div class="md-consent__settings">
   <ul class="task-list">
@@ -5654,7 +5699,7 @@ window.mkdocsQuizConfig = {
     <label class="task-list-control">
       <input type="checkbox" name="posthog" checked>
       <span class="task-list-indicator"></span>
-      PostHog Analytics
+      PostHog 분석
     </label>
   </li>
 
@@ -5685,12 +5730,16 @@ window.mkdocsQuizConfig = {
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": {"alias": true, "provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": {"alias": true, "provider": "mike"}}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
-        <script src="../../../../assets/javascripts/posthog.js"></script>
+        <script src="../../../assets/javascripts/consent-sync.js"></script>
+      
+        <script src="../../../assets/javascripts/posthog.js"></script>
+      
+        <script src="../../../assets/javascripts/language-picker.js"></script>
       
     
   </body>

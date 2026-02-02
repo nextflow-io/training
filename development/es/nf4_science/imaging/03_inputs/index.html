@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://training.nextflow.io/0.dev/es/nf4_science/imaging/03_inputs/">
+        <link rel="canonical" href="https://training.nextflow.io/es/nf4_science/imaging/03_inputs/">
       
       
         <link rel="prev" href="../02_run_molkart/">
@@ -18,33 +18,41 @@
       
       
         
-          <link rel="alternate" href="../../../../nf4_science/imaging/03_inputs/" hreflang="en">
+          <link rel="alternate" href="/" hreflang="en">
         
-          <link rel="alternate" href="../../../../pt/nf4_science/imaging/03_inputs/" hreflang="pt">
+          <link rel="alternate" href="/de/" hreflang="de">
         
-          <link rel="alternate" href="./" hreflang="es">
+          <link rel="alternate" href="/es/" hreflang="es">
         
-          <link rel="alternate" href="../../../../fr/nf4_science/imaging/03_inputs/" hreflang="fr">
+          <link rel="alternate" href="/fr/" hreflang="fr">
         
-          <link rel="alternate" href="../../../../it/nf4_science/imaging/03_inputs/" hreflang="it">
+          <link rel="alternate" href="/hi/" hreflang="hi">
         
-          <link rel="alternate" href="../../../../ko/nf4_science/imaging/03_inputs/" hreflang="ko">
+          <link rel="alternate" href="/it/" hreflang="it">
+        
+          <link rel="alternate" href="/ko/" hreflang="ko">
+        
+          <link rel="alternate" href="/pl/" hreflang="pl">
+        
+          <link rel="alternate" href="/pt/" hreflang="pt">
+        
+          <link rel="alternate" href="/tr/" hreflang="tr">
         
       
       
-      <link rel="icon" href="../../../../assets/img/nextflow-icon.png">
+      <link rel="icon" href="../../../assets/img/nextflow-icon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
     
     
       
-        <title>Part 3: Organizing inputs - training.nextflow.io</title>
+        <title>Parte 3: Organización de entradas - training.nextflow.io</title>
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
   
@@ -108,11 +116,11 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/fonts.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/fonts.css">
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/extra.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/extra.css">
     
-    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
   
@@ -147,7 +155,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#part-3-organizing-inputs" class="md-skip">
+        <a href="#parte-3-organizacion-de-entradas" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -167,9 +175,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Cabecera">
-    <a href="../../../" title="training.nextflow.io" class="md-header__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
+    <a href="../../.." title="training.nextflow.io" class="md-header__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
       
-  <img src="../../../../assets/img/nextflow_logo_dark.png" alt="logo">
+  <img src="../../../assets/img/nextflow_logo_dark.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -186,7 +194,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Part 3: Organizing inputs
+              Parte 3: Organización de entradas
             
           </span>
         </div>
@@ -233,38 +241,62 @@
       <ul class="md-select__list">
         
           <li class="md-select__item">
-            <a href="../../../../nf4_science/imaging/03_inputs/" hreflang="en" class="md-select__link">
+            <a href="/" hreflang="en" class="md-select__link">
               English
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../../pt/nf4_science/imaging/03_inputs/" hreflang="pt" class="md-select__link">
-              Português
+            <a href="/de/" hreflang="de" class="md-select__link">
+              deutsch
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="./" hreflang="es" class="md-select__link">
-              Español
+            <a href="/es/" hreflang="es" class="md-select__link">
+              español
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../../fr/nf4_science/imaging/03_inputs/" hreflang="fr" class="md-select__link">
-              Français
+            <a href="/fr/" hreflang="fr" class="md-select__link">
+              français
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../../it/nf4_science/imaging/03_inputs/" hreflang="it" class="md-select__link">
-              Italiano
+            <a href="/hi/" hreflang="hi" class="md-select__link">
+              हिन्दी
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../../ko/nf4_science/imaging/03_inputs/" hreflang="ko" class="md-select__link">
-              Korean
+            <a href="/it/" hreflang="it" class="md-select__link">
+              italiano
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/ko/" hreflang="ko" class="md-select__link">
+              한국어
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/pl/" hreflang="pl" class="md-select__link">
+              Polski
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/pt/" hreflang="pt" class="md-select__link">
+              português
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/tr/" hreflang="tr" class="md-select__link">
+              Türkçe
             </a>
           </li>
         
@@ -384,9 +416,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../../" title="training.nextflow.io" class="md-nav__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
+    <a href="../../.." title="training.nextflow.io" class="md-nav__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
       
-  <img src="../../../../assets/img/nextflow_logo_dark.png" alt="logo">
+  <img src="../../../assets/img/nextflow_logo_dark.png" alt="logo">
 
     </a>
     training.nextflow.io
@@ -413,14 +445,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../" class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Home
+    Inicio
   
 
     
@@ -522,7 +554,7 @@
   <span class="md-ellipsis">
     
   
-    Getting started
+    Primeros pasos
   
 
     
@@ -550,7 +582,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run basic operations
+    Parte 1: Ejecutar operaciones básicas
   
 
     
@@ -578,7 +610,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Run real pipelines
+    Parte 2: Ejecutar pipelines reales
   
 
     
@@ -606,7 +638,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Run configuration
+    Parte 3: Configuración de ejecución
   
 
     
@@ -634,7 +666,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    Resumen del curso
   
 
     
@@ -662,7 +694,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Encuesta de retroalimentación
   
 
     
@@ -772,7 +804,7 @@
   <span class="md-ellipsis">
     
   
-    Getting started
+    Comenzando
   
 
     
@@ -800,7 +832,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Hello World
+    Parte 1: Hello World
   
 
     
@@ -828,7 +860,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Hello Channels
+    Parte 2: Hello Channels
   
 
     
@@ -856,7 +888,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Hello Workflow
+    Parte 3: Hello Workflow
   
 
     
@@ -884,7 +916,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Hello Modules
+    Parte 4: Hello Modules
   
 
     
@@ -912,7 +944,7 @@
   <span class="md-ellipsis">
     
   
-    Part 5: Hello Containers
+    Parte 5: Hello Containers
   
 
     
@@ -940,7 +972,7 @@
   <span class="md-ellipsis">
     
   
-    Part 6: Hello Config
+    Parte 6: Hello Config
   
 
     
@@ -968,7 +1000,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    Resumen del curso
   
 
     
@@ -996,7 +1028,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Encuesta de retroalimentación
   
 
     
@@ -1106,7 +1138,7 @@
   <span class="md-ellipsis">
     
   
-    Getting started
+    Primeros pasos
   
 
     
@@ -1134,7 +1166,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run a demo pipeline
+    Parte 1: Ejecutar un pipeline de demostración
   
 
     
@@ -1162,7 +1194,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Rewrite Hello for nf-core
+    Parte 2: Reescribir Hello para nf-core
   
 
     
@@ -1190,7 +1222,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Use an nf-core module
+    Parte 3: Usar un módulo nf-core
   
 
     
@@ -1218,7 +1250,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Make an nf-core module
+    Parte 4: Crear un módulo nf-core
   
 
     
@@ -1246,7 +1278,7 @@
   <span class="md-ellipsis">
     
   
-    Part 5: Input validation
+    Parte 5: Validación de entradas
   
 
     
@@ -1274,7 +1306,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    Resumen del curso
   
 
     
@@ -1302,7 +1334,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Encuesta de retroalimentación
   
 
     
@@ -1350,7 +1382,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Science
+    Nextflow para Ciencia
   
 
     
@@ -1366,7 +1398,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Nextflow for Science
+    Nextflow para Ciencia
   
 
           </label>
@@ -1386,7 +1418,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Science
+    Nextflow para Ciencia
   
 
     
@@ -1425,7 +1457,7 @@
   <span class="md-ellipsis">
     
   
-    Genomics
+    Nextflow para Genómica
   
 
     
@@ -1441,7 +1473,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Genomics
+    Nextflow para Genómica
   
 
           </label>
@@ -1461,7 +1493,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Genomics
+    Nextflow para Genómica
   
 
     
@@ -1489,7 +1521,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    Orientación
   
 
     
@@ -1517,7 +1549,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Per-sample variant calling
+    Parte 1: Llamado de variantes por muestra
   
 
     
@@ -1545,7 +1577,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Joint calling on a cohort
+    Parte 2: Llamado conjunto en una cohorte
   
 
     
@@ -1573,7 +1605,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Moving code into modules
+    Parte 3: Mover código a módulos
   
 
     
@@ -1601,7 +1633,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Adding tests
+    Parte 4: Agregando pruebas
   
 
     
@@ -1629,7 +1661,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Encuesta de retroalimentación
   
 
     
@@ -1657,7 +1689,7 @@
   <span class="md-ellipsis">
     
   
-    Next Steps
+    Próximos Pasos
   
 
     
@@ -1704,7 +1736,7 @@
   <span class="md-ellipsis">
     
   
-    RNAseq
+    Nextflow para RNAseq
   
 
     
@@ -1720,7 +1752,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    RNAseq
+    Nextflow para RNAseq
   
 
           </label>
@@ -1740,7 +1772,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for RNAseq
+    Nextflow para RNAseq
   
 
     
@@ -1768,7 +1800,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    Orientación
   
 
     
@@ -1796,7 +1828,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Method overview and manual testing
+    Parte 1: Descripción general del método y pruebas manuales
   
 
     
@@ -1824,7 +1856,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Single-sample implementation
+    Parte 2: Implementación de muestra única
   
 
     
@@ -1852,7 +1884,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Multi-sample paired-end implementation
+    Parte 3: Implementación con múltiples muestras de extremos pareados
   
 
     
@@ -1880,7 +1912,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Encuesta de retroalimentación
   
 
     
@@ -1908,7 +1940,7 @@
   <span class="md-ellipsis">
     
   
-    Next Steps
+    Próximos Pasos
   
 
     
@@ -1957,7 +1989,7 @@
   <span class="md-ellipsis">
     
   
-    Imaging
+    Nextflow run for Imaging
   
 
     
@@ -1973,7 +2005,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Imaging
+    Nextflow run for Imaging
   
 
           </label>
@@ -2021,7 +2053,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    Orientación
   
 
     
@@ -2049,7 +2081,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run basic operations
+    Parte 1: Ejecutar operaciones básicas
   
 
     
@@ -2077,7 +2109,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Run nf-core/molkart
+    Parte 2: Ejecutar nf-core/molkart
   
 
     
@@ -2114,7 +2146,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Organizing inputs
+    Parte 3: Organización de entradas
   
 
     
@@ -2132,7 +2164,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Organizing inputs
+    Parte 3: Organización de entradas
   
 
     
@@ -2152,22 +2184,22 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#1-using-parameter-files" class="md-nav__link">
+  <a href="#1-uso-de-archivos-de-parametros" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Using parameter files
+        1. Uso de archivos de parámetros
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Using parameter files">
+    <nav class="md-nav" aria-label="1. Uso de archivos de parámetros">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11-the-problem-with-long-command-lines" class="md-nav__link">
+  <a href="#11-el-problema-con-lineas-de-comandos-largas" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1. The problem with long command lines
+        1.1. El problema con líneas de comandos largas
       
     </span>
   </a>
@@ -2175,10 +2207,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#12-solution-use-a-parameter-file" class="md-nav__link">
+  <a href="#12-solucion-use-un-archivo-de-parametros" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2. Solution: Use a parameter file
+        1.2. Solución: Use un archivo de parámetros
       
     </span>
   </a>
@@ -2186,10 +2218,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#13-overriding-parameters" class="md-nav__link">
+  <a href="#13-anulacion-de-parametros" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.3. Overriding parameters
+        1.3. Anulación de parámetros
       
     </span>
   </a>
@@ -2197,10 +2229,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway" class="md-nav__link">
+  <a href="#conclusion" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        Conclusión
       
     </span>
   </a>
@@ -2208,10 +2240,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next" class="md-nav__link">
+  <a href="#que-sigue" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        ¿Qué sigue?
       
     </span>
   </a>
@@ -2222,22 +2254,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#2-the-samplesheet-pattern" class="md-nav__link">
+  <a href="#2-el-patron-de-hoja-de-muestras" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. The samplesheet pattern
+        2. El patrón de hoja de muestras
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. The samplesheet pattern">
+    <nav class="md-nav" aria-label="2. El patrón de hoja de muestras">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#21-what-is-a-samplesheet" class="md-nav__link">
+  <a href="#21-que-es-una-hoja-de-muestras" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1. What is a samplesheet?
+        2.1. ¿Qué es una hoja de muestras?
       
     </span>
   </a>
@@ -2245,10 +2277,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#22-file-paths" class="md-nav__link">
+  <a href="#22-rutas-de-archivos" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2. File paths
+        2.2. Rutas de archivos
       
     </span>
   </a>
@@ -2256,10 +2288,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#23-creating-your-own-samplesheet" class="md-nav__link">
+  <a href="#23-creacion-de-su-propia-hoja-de-muestras" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.3. Creating your own samplesheet
+        2.3. Creación de su propia hoja de muestras
       
     </span>
   </a>
@@ -2267,10 +2299,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway_1" class="md-nav__link">
+  <a href="#conclusion_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        Conclusión
       
     </span>
   </a>
@@ -2278,10 +2310,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next_1" class="md-nav__link">
+  <a href="#que-sigue_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        ¿Qué sigue?
       
     </span>
   </a>
@@ -2501,7 +2533,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Configuration
+    Parte 4: Configuración
   
 
     
@@ -2529,7 +2561,7 @@
   <span class="md-ellipsis">
     
   
-    Survey
+    Encuesta
   
 
     
@@ -2557,7 +2589,7 @@
   <span class="md-ellipsis">
     
   
-    Next steps
+    Próximos pasos
   
 
     
@@ -2611,7 +2643,7 @@
   <span class="md-ellipsis">
     
   
-    Side Quests
+    Misiones Secundarias
   
 
     
@@ -2627,7 +2659,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Side Quests
+    Misiones Secundarias
   
 
           </label>
@@ -2647,7 +2679,7 @@
   <span class="md-ellipsis">
     
   
-    Side Quests
+    Misiones Secundarias
   
 
     
@@ -2675,7 +2707,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    Orientación
   
 
     
@@ -2703,7 +2735,7 @@
   <span class="md-ellipsis">
     
   
-    Development Environment
+    Entorno de Desarrollo
   
 
     
@@ -2731,7 +2763,7 @@
   <span class="md-ellipsis">
     
   
-    Metadata and meta maps
+    Metadatos y mapas de metadatos
   
 
     
@@ -2759,7 +2791,7 @@
   <span class="md-ellipsis">
     
   
-    File input processing
+    Procesamiento de archivos de entrada
   
 
     
@@ -2787,7 +2819,7 @@
   <span class="md-ellipsis">
     
   
-    Splitting and Grouping
+    División y Agrupación
   
 
     
@@ -2815,7 +2847,7 @@
   <span class="md-ellipsis">
     
   
-    Workflows of Workflows
+    Flujos de trabajo de flujos de trabajo
   
 
     
@@ -2843,7 +2875,7 @@
   <span class="md-ellipsis">
     
   
-    Debugging Workflows
+    Depuración de Flujos de Trabajo
   
 
     
@@ -2871,7 +2903,7 @@
   <span class="md-ellipsis">
     
   
-    Essential Nextflow Scripting Patterns
+    Patrones Esenciales de Scripting en Nextflow
   
 
     
@@ -2899,7 +2931,7 @@
   <span class="md-ellipsis">
     
   
-    Testing with nf-test
+    Pruebas con nf-test
   
 
     
@@ -2945,7 +2977,7 @@
   <span class="md-ellipsis">
     
   
-    Training Collections
+    Index
   
 
     
@@ -2961,7 +2993,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Training Collections
+    Index
   
 
           </label>
@@ -2981,7 +3013,7 @@
   <span class="md-ellipsis">
     
   
-    Training Collections
+    Index
   
 
     
@@ -3009,7 +3041,7 @@
   <span class="md-ellipsis">
     
   
-    The Architect's Toolkit I
+    Architects toolkit 1
   
 
     
@@ -3091,7 +3123,7 @@
   <span class="md-ellipsis">
     
   
-    Getting help
+    Obtener ayuda
   
 
     
@@ -3130,7 +3162,7 @@
   <span class="md-ellipsis">
     
   
-    Training environment
+    Opciones de entorno
   
 
     
@@ -3146,7 +3178,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Training environment
+    Opciones de entorno
   
 
           </label>
@@ -3166,7 +3198,7 @@
   <span class="md-ellipsis">
     
   
-    Environment options
+    Opciones de entorno
   
 
     
@@ -3222,7 +3254,7 @@
   <span class="md-ellipsis">
     
   
-    Local Devcontainers
+    Devcontainers locales
   
 
     
@@ -3250,7 +3282,7 @@
   <span class="md-ellipsis">
     
   
-    Manual installation
+    Instalación manual
   
 
     
@@ -3286,7 +3318,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow versions
+    Versiones de Nextflow
   
 
     
@@ -3314,7 +3346,7 @@
   <span class="md-ellipsis">
     
   
-    The Hello pipeline
+    El pipeline Hello
   
 
     
@@ -3356,22 +3388,22 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#1-using-parameter-files" class="md-nav__link">
+  <a href="#1-uso-de-archivos-de-parametros" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Using parameter files
+        1. Uso de archivos de parámetros
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Using parameter files">
+    <nav class="md-nav" aria-label="1. Uso de archivos de parámetros">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11-the-problem-with-long-command-lines" class="md-nav__link">
+  <a href="#11-el-problema-con-lineas-de-comandos-largas" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1. The problem with long command lines
+        1.1. El problema con líneas de comandos largas
       
     </span>
   </a>
@@ -3379,10 +3411,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#12-solution-use-a-parameter-file" class="md-nav__link">
+  <a href="#12-solucion-use-un-archivo-de-parametros" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2. Solution: Use a parameter file
+        1.2. Solución: Use un archivo de parámetros
       
     </span>
   </a>
@@ -3390,10 +3422,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#13-overriding-parameters" class="md-nav__link">
+  <a href="#13-anulacion-de-parametros" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.3. Overriding parameters
+        1.3. Anulación de parámetros
       
     </span>
   </a>
@@ -3401,10 +3433,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway" class="md-nav__link">
+  <a href="#conclusion" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        Conclusión
       
     </span>
   </a>
@@ -3412,10 +3444,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next" class="md-nav__link">
+  <a href="#que-sigue" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        ¿Qué sigue?
       
     </span>
   </a>
@@ -3426,22 +3458,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#2-the-samplesheet-pattern" class="md-nav__link">
+  <a href="#2-el-patron-de-hoja-de-muestras" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. The samplesheet pattern
+        2. El patrón de hoja de muestras
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. The samplesheet pattern">
+    <nav class="md-nav" aria-label="2. El patrón de hoja de muestras">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#21-what-is-a-samplesheet" class="md-nav__link">
+  <a href="#21-que-es-una-hoja-de-muestras" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1. What is a samplesheet?
+        2.1. ¿Qué es una hoja de muestras?
       
     </span>
   </a>
@@ -3449,10 +3481,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#22-file-paths" class="md-nav__link">
+  <a href="#22-rutas-de-archivos" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2. File paths
+        2.2. Rutas de archivos
       
     </span>
   </a>
@@ -3460,10 +3492,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#23-creating-your-own-samplesheet" class="md-nav__link">
+  <a href="#23-creacion-de-su-propia-hoja-de-muestras" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.3. Creating your own samplesheet
+        2.3. Creación de su propia hoja de muestras
       
     </span>
   </a>
@@ -3471,10 +3503,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway_1" class="md-nav__link">
+  <a href="#conclusion_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        Conclusión
       
     </span>
   </a>
@@ -3482,10 +3514,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next_1" class="md-nav__link">
+  <a href="#que-sigue_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        ¿Qué sigue?
       
     </span>
   </a>
@@ -3734,22 +3766,32 @@
                 
                   
 
+ 
+<a
+  href="https://github.com/nextflow-io/training/edit/master/docs/nf4_science/imaging/03_inputs.md"
+  title="Editar esta página"
+  class="md-content__button md-icon"
+  rel="edit"
+>
+   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+</a>
+   
+<a
+  href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md"
+  title="Improve translation"
+  class="md-content__button md-icon"
+>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 1H3c-1.1 0-2 .9-2 2v12l3-3h5v-1c0-2.2 1.79-4 4-4V3c0-1.1-.9-2-2-2m0 3H9.5c-.34 1.19-.96 2.3-1.82 3.26l-.02.02 1.26 1.25-.37 1.01L7 8l-2.5 2.5-.69-.73 2.53-2.49A8.6 8.6 0 0 1 4.86 5h.99c.31.6.69 1.17 1.15 1.68A7.7 7.7 0 0 0 8.57 4H3V3h3.5V2h1v1H11zm10 5h-8c-1.1 0-2 .9-2 2v7c0 1.1.9 2 2 2h7l3 3V11c0-1.1-.9-2-2-2m-1.37 10-.85-2.25h-3.56L14.38 19h-1.5l3.37-9h1.5l3.38 9zM17 12l1.22 3.25h-2.43z"/></svg>
+</a>
+ 
 
-  
-    <a href="https://github.com/nextflow-io/training/edit/master/docs/nf4_science/imaging/03_inputs.md" title="Editar esta página" class="md-content__button md-icon" rel="edit">
-      
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
-    </a>
-  
-  
-
-
-<h1 id="part-3-organizing-inputs">Part 3: Organizing inputs<a class="headerlink" href="#part-3-organizing-inputs" title="Permanent link">&para;</a></h1>
-<p>In Part 2, we ran molkart with multiple parameters on the command line.
-Now we'll learn two better approaches for managing inputs: <strong>parameter files</strong> and <strong>samplesheets</strong>.</p>
-<h2 id="1-using-parameter-files">1. Using parameter files<a class="headerlink" href="#1-using-parameter-files" title="Permanent link">&para;</a></h2>
-<h3 id="11-the-problem-with-long-command-lines">1.1. The problem with long command lines<a class="headerlink" href="#11-the-problem-with-long-command-lines" title="Permanent link">&para;</a></h3>
-<p>Recall our command from Part 2:</p>
+<h1 id="parte-3-organizacion-de-entradas">Parte 3: Organización de entradas<a class="headerlink" href="#parte-3-organizacion-de-entradas" title="Permanent link">&para;</a></h1>
+<p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Traducción asistida por IA - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">más información y sugerencias</a></span></p>
+<p>En la Parte 2, ejecutamos molkart con múltiples parámetros en la línea de comandos.
+Ahora aprenderemos dos enfoques mejores para gestionar entradas: <strong>archivos de parámetros</strong> y <strong>hojas de muestras</strong>.</p>
+<h2 id="1-uso-de-archivos-de-parametros">1. Uso de archivos de parámetros<a class="headerlink" href="#1-uso-de-archivos-de-parametros" title="Permanent link">&para;</a></h2>
+<h3 id="11-el-problema-con-lineas-de-comandos-largas">1.1. El problema con líneas de comandos largas<a class="headerlink" href="#11-el-problema-con-lineas-de-comandos-largas" title="Permanent link">&para;</a></h3>
+<p>Recordemos nuestro comando de la Parte 2:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>./molkart<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span>--input<span class="w"> </span><span class="s1">&#39;data/samplesheet.csv&#39;</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span>--mindagap_tilesize<span class="w"> </span><span class="m">90</span><span class="w"> </span><span class="se">\</span>
@@ -3759,11 +3801,11 @@ Now we'll learn two better approaches for managing inputs: <strong>parameter fil
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">  </span>--segmentation_method<span class="w"> </span><span class="s2">&quot;cellpose&quot;</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">  </span>--outdir<span class="w"> </span>results
 </code></pre></div>
-<p>This works, but it's hard to reproduce, share, or modify.
-What if you need to run the same analysis again next month?
-What if a collaborator wants to use your exact settings?</p>
-<h3 id="12-solution-use-a-parameter-file">1.2. Solution: Use a parameter file<a class="headerlink" href="#12-solution-use-a-parameter-file" title="Permanent link">&para;</a></h3>
-<p>Create a file called <code>params.yaml</code>:</p>
+<p>Esto funciona, pero es difícil de reproducir, compartir o modificar.
+¿Qué pasa si necesita ejecutar el mismo análisis nuevamente el próximo mes?
+¿Qué pasa si un colaborador quiere usar exactamente su configuración?</p>
+<h3 id="12-solucion-use-un-archivo-de-parametros">1.2. Solución: Use un archivo de parámetros<a class="headerlink" href="#12-solucion-use-un-archivo-de-parametros" title="Permanent link">&para;</a></h3>
+<p>Cree un archivo llamado <code>params.yaml</code>:</p>
 <div class="highlight"><span class="filename">params.yaml</span><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">input</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;data/samplesheet.csv&quot;</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nt">outdir</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;results&quot;</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nt">mindagap_tilesize</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">90</span>
@@ -3772,72 +3814,72 @@ What if a collaborator wants to use your exact settings?</p>
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="nt">clahe_pyramid_tile</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">368</span>
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="nt">segmentation_method</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;cellpose&quot;</span>
 </code></pre></div>
-<p>Now your command becomes:</p>
+<p>Ahora su comando se convierte en:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>./molkart<span class="w"> </span>-params-file<span class="w"> </span>params.yaml<span class="w"> </span>-resume
 </code></pre></div>
-<p>That's it! The parameter file documents your exact configuration and makes it easy to rerun or share.</p>
-<h3 id="13-overriding-parameters">1.3. Overriding parameters<a class="headerlink" href="#13-overriding-parameters" title="Permanent link">&para;</a></h3>
-<p>You can still override specific parameters from the command line:</p>
+<p>¡Eso es todo! El archivo de parámetros documenta su configuración exacta y facilita la reejecución o el compartir.</p>
+<h3 id="13-anulacion-de-parametros">1.3. Anulación de parámetros<a class="headerlink" href="#13-anulacion-de-parametros" title="Permanent link">&para;</a></h3>
+<p>Todavía puede anular parámetros específicos desde la línea de comandos:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>./molkart<span class="w"> </span>-params-file<span class="w"> </span>params.yaml<span class="w"> </span>--segmentation_method<span class="w"> </span><span class="s2">&quot;stardist&quot;</span><span class="w"> </span>--outdir<span class="w"> </span>stardist_results<span class="w"> </span>-resume
 </code></pre></div>
-<p>The above line changes the <code>segmentation_method</code> to be <code>stardist</code> and the <code>--outdir</code> name to be <code>stardist_results</code> instead of the params in the <code>params.yaml</code> file.
-Additionally, you can see that the <code>-resume</code> flag allowed us to reuse the pre-processing results from the previous run, saving time.
-You can use this pattern to quickly test different variations of the pipeline.</p>
-<h3 id="takeaway">Takeaway<a class="headerlink" href="#takeaway" title="Permanent link">&para;</a></h3>
-<p>Parameter files make your analyses reproducible and easy to share.
-Use them for any real analysis work.</p>
-<h3 id="whats-next">What's next?<a class="headerlink" href="#whats-next" title="Permanent link">&para;</a></h3>
-<p>Learn how samplesheets organize information about multiple samples.</p>
+<p>La línea anterior cambia el <code>segmentation_method</code> a <code>stardist</code> y el nombre de <code>--outdir</code> a <code>stardist_results</code> en lugar de los parámetros en el archivo <code>params.yaml</code>.
+Además, puede ver que la bandera <code>-resume</code> nos permitió reutilizar los resultados de preprocesamiento de la ejecución anterior, ahorrando tiempo.
+Puede usar este patrón para probar rápidamente diferentes variaciones del pipeline.</p>
+<h3 id="conclusion">Conclusión<a class="headerlink" href="#conclusion" title="Permanent link">&para;</a></h3>
+<p>Los archivos de parámetros hacen que sus análisis sean reproducibles y fáciles de compartir.
+Úselos para cualquier trabajo de análisis real.</p>
+<h3 id="que-sigue">¿Qué sigue?<a class="headerlink" href="#que-sigue" title="Permanent link">&para;</a></h3>
+<p>Aprenda cómo las hojas de muestras organizan información sobre múltiples muestras.</p>
 <hr />
-<h2 id="2-the-samplesheet-pattern">2. The samplesheet pattern<a class="headerlink" href="#2-the-samplesheet-pattern" title="Permanent link">&para;</a></h2>
-<h3 id="21-what-is-a-samplesheet">2.1. What is a samplesheet?<a class="headerlink" href="#21-what-is-a-samplesheet" title="Permanent link">&para;</a></h3>
-<p>A samplesheet is a CSV file that describes your input samples.
-Each row is a sample, and columns specify the files and metadata for that sample.</p>
-<p>Let's look at the samplesheet we've been using:</p>
+<h2 id="2-el-patron-de-hoja-de-muestras">2. El patrón de hoja de muestras<a class="headerlink" href="#2-el-patron-de-hoja-de-muestras" title="Permanent link">&para;</a></h2>
+<h3 id="21-que-es-una-hoja-de-muestras">2.1. ¿Qué es una hoja de muestras?<a class="headerlink" href="#21-que-es-una-hoja-de-muestras" title="Permanent link">&para;</a></h3>
+<p>Una hoja de muestras es un archivo CSV que describe sus muestras de entrada.
+Cada fila es una muestra, y las columnas especifican los archivos y metadatos para esa muestra.</p>
+<p>Veamos la hoja de muestras que hemos estado usando:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>cat<span class="w"> </span>data/samplesheet.csv
 </code></pre></div>
 <div class="highlight"><span class="filename">samplesheet.csv</span><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>sample,nuclear_image,spot_table,membrane_image
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>mem_only,https://raw.githubusercontent.com/nf-core/test-datasets/molkart/test_data/input_data/nuclear.tiff,https://raw.githubusercontent.com/nf-core/test-datasets/molkart/test_data/input_data/spots.txt,https://raw.githubusercontent.com/nf-core/test-datasets/molkart/test_data/input_data/membrane.tiff
 </code></pre></div>
-<p>The columns are:</p>
+<p>Las columnas son:</p>
 <ul>
-<li><code>sample</code>: Unique sample identifier</li>
-<li><code>nuclear_image</code>: Nuclear staining image (TIFF)</li>
-<li><code>spot_table</code>: Transcript spots (TXT)</li>
-<li><code>membrane_image</code>: Membrane staining image (TIFF, optional)</li>
+<li><code>sample</code>: Identificador único de la muestra</li>
+<li><code>nuclear_image</code>: Imagen de tinción nuclear (TIFF)</li>
+<li><code>spot_table</code>: Puntos de transcripción (TXT)</li>
+<li><code>membrane_image</code>: Imagen de tinción de membrana (TIFF, opcional)</li>
 </ul>
-<h3 id="22-file-paths">2.2. File paths<a class="headerlink" href="#22-file-paths" title="Permanent link">&para;</a></h3>
-<p>Samplesheets accept multiple path types:</p>
+<h3 id="22-rutas-de-archivos">2.2. Rutas de archivos<a class="headerlink" href="#22-rutas-de-archivos" title="Permanent link">&para;</a></h3>
+<p>Las hojas de muestras aceptan múltiples tipos de rutas:</p>
 <ul>
-<li><strong>URLs</strong>: Nextflow downloads automatically (as shown above)</li>
-<li><strong>Local paths</strong>: <code>data/nuclear.tiff</code> or <code>/absolute/path/to/nuclear.tiff</code></li>
-<li><strong>Cloud storage</strong>: <code>s3://bucket/nuclear.tiff</code>, <code>gs://bucket/nuclear.tiff</code>, <code>az://container/nuclear.tiff</code></li>
+<li><strong>URLs</strong>: Nextflow descarga automáticamente (como se muestra arriba)</li>
+<li><strong>Rutas locales</strong>: <code>data/nuclear.tiff</code> o <code>/absolute/path/to/nuclear.tiff</code></li>
+<li><strong>Almacenamiento en la nube</strong>: <code>s3://bucket/nuclear.tiff</code>, <code>gs://bucket/nuclear.tiff</code>, <code>az://container/nuclear.tiff</code></li>
 </ul>
-<p>You can mix path types in the same samplesheet.</p>
-<h3 id="23-creating-your-own-samplesheet">2.3. Creating your own samplesheet<a class="headerlink" href="#23-creating-your-own-samplesheet" title="Permanent link">&para;</a></h3>
-<p>First, let's download the test data files locally:</p>
+<p>Puede mezclar tipos de rutas en la misma hoja de muestras.</p>
+<h3 id="23-creacion-de-su-propia-hoja-de-muestras">2.3. Creación de su propia hoja de muestras<a class="headerlink" href="#23-creacion-de-su-propia-hoja-de-muestras" title="Permanent link">&para;</a></h3>
+<p>Primero, descarguemos los archivos de datos de prueba localmente:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nb">cd</span><span class="w"> </span>/workspaces/training/nf4-science/imaging/data
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>curl<span class="w"> </span>-O<span class="w"> </span>https://raw.githubusercontent.com/nf-core/test-datasets/molkart/test_data/input_data/nuclear.tiff
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>curl<span class="w"> </span>-O<span class="w"> </span>https://raw.githubusercontent.com/nf-core/test-datasets/molkart/test_data/input_data/spots.txt
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>curl<span class="w"> </span>-O<span class="w"> </span>https://raw.githubusercontent.com/nf-core/test-datasets/molkart/test_data/input_data/membrane.tiff
 <a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="nb">cd</span><span class="w"> </span>..
 </code></pre></div>
-<p>Now let's modify the samplesheet to reference these local files:</p>
+<p>Ahora modifiquemos la hoja de muestras para hacer referencia a estos archivos locales:</p>
 <div class="highlight"><span class="filename">samplesheet.csv</span><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>sample,nuclear_image,spot_table,membrane_image
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>mem_only,data/nuclear.tiff,data/spots.txt,data/membrane.tiff
 </code></pre></div>
 <div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Notice the paths in the samplesheet are relative to where you <strong>run</strong> Nextflow, not where the samplesheet is located.</p>
+<p class="admonition-title">Advertencia</p>
+<p>Observe que las rutas en la hoja de muestras son relativas a donde <strong>ejecuta</strong> Nextflow, no a donde se encuentra la hoja de muestras.</p>
 </div>
-<p>Finally, let's execute nf-core/molkart one more time with the samplesheet with local file paths:</p>
+<p>Finalmente, ejecutemos nf-core/molkart una vez más con la hoja de muestras con rutas de archivos locales:</p>
 <p><code>nextflow run ./molkart -params-file params.yaml -resume</code></p>
-<p>As you can see, Nextflow executes this run similar to when the files were downloaded from Github. This is one of the great features of Nextflow, it stages the data properly for you, regardless of where it is located.</p>
-<h3 id="takeaway_1">Takeaway<a class="headerlink" href="#takeaway_1" title="Permanent link">&para;</a></h3>
-<p>Samplesheets organize multi-sample datasets in a way that allows you to explicitly define your metadata along with the file paths.
-Most nf-core pipelines use this pattern.</p>
-<h3 id="whats-next_1">What's next?<a class="headerlink" href="#whats-next_1" title="Permanent link">&para;</a></h3>
-<p>Now that we've covered inputs, let's explore how to configure Nextflow pipelines for different computing environments.</p><style type="text/css">.quiz {
+<p>Como puede ver, Nextflow ejecuta esta ejecución de manera similar a cuando los archivos se descargaron desde Github. Esta es una de las grandes características de Nextflow, organiza los datos adecuadamente para usted, independientemente de dónde se encuentren.</p>
+<h3 id="conclusion_1">Conclusión<a class="headerlink" href="#conclusion_1" title="Permanent link">&para;</a></h3>
+<p>Las hojas de muestras organizan conjuntos de datos con múltiples muestras de una manera que le permite definir explícitamente sus metadatos junto con las rutas de archivos.
+La mayoría de los pipelines de nf-core usan este patrón.</p>
+<h3 id="que-sigue_1">¿Qué sigue?<a class="headerlink" href="#que-sigue_1" title="Permanent link">&para;</a></h3>
+<p>Ahora que hemos cubierto las entradas, exploremos cómo configurar pipelines de Nextflow para diferentes entornos de cómputo.</p><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
   margin: 1rem 0;
@@ -5354,6 +5396,9 @@ window.mkdocsQuizConfig = {
 
 
 
+  
+  
+
 
 
   
@@ -5384,7 +5429,7 @@ window.mkdocsQuizConfig = {
       <nav class="md-footer__inner md-grid" aria-label="Pie" >
         
           
-          <a href="../02_run_molkart/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Part 2: Run nf-core/molkart">
+          <a href="../02_run_molkart/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Parte 2: Ejecutar nf-core/molkart">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -5394,20 +5439,20 @@ window.mkdocsQuizConfig = {
                 Anterior
               </span>
               <div class="md-ellipsis">
-                Part 2: Run nf-core/molkart
+                Parte 2: Ejecutar nf-core/molkart
               </div>
             </div>
           </a>
         
         
           
-          <a href="../04_config/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Part 4: Configuration">
+          <a href="../04_config/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Parte 4: Configuración">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Siguiente
               </span>
               <div class="md-ellipsis">
-                Part 4: Configuration
+                Parte 4: Configuración
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -5484,8 +5529,8 @@ window.mkdocsQuizConfig = {
   
 
 
-<h4>Cookie consent</h4>
-<p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our training materials better. Find out more on <a href="https://seqera.io/privacy-policy/#cookies" target="_blank" rel="noopener">how we use cookies</a>.</p>
+<h4>Consentimiento de cookies</h4>
+<p>Utilizamos cookies para reconocer tus visitas repetidas y preferencias, así como para medir la efectividad de nuestra documentación y si los usuarios encuentran lo que buscan. Con tu consentimiento, nos ayudas a mejorar nuestros materiales de capacitación. Obtén más información sobre <a href="https://seqera.io/privacy-policy/#cookies" target="_blank" rel="noopener">cómo usamos las cookies</a>.</p>
 <input class="md-toggle" type="checkbox" id="__settings" >
 <div class="md-consent__settings">
   <ul class="task-list">
@@ -5569,12 +5614,16 @@ window.mkdocsQuizConfig = {
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": {"alias": true, "provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": {"alias": true, "provider": "mike"}}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
-        <script src="../../../../assets/javascripts/posthog.js"></script>
+        <script src="../../../assets/javascripts/consent-sync.js"></script>
+      
+        <script src="../../../assets/javascripts/posthog.js"></script>
+      
+        <script src="../../../assets/javascripts/language-picker.js"></script>
       
     
   </body>

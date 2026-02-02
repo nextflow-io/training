@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://training.nextflow.io/0.dev/fr/nextflow_run/01_basics/">
+        <link rel="canonical" href="https://training.nextflow.io/fr/nextflow_run/01_basics/">
       
       
         <link rel="prev" href="../00_orientation/">
@@ -18,33 +18,41 @@
       
       
         
-          <link rel="alternate" href="../../../nextflow_run/01_basics/" hreflang="en">
+          <link rel="alternate" href="/" hreflang="en">
         
-          <link rel="alternate" href="../../../pt/nextflow_run/01_basics/" hreflang="pt">
+          <link rel="alternate" href="/de/" hreflang="de">
         
-          <link rel="alternate" href="../../../es/nextflow_run/01_basics/" hreflang="es">
+          <link rel="alternate" href="/es/" hreflang="es">
         
-          <link rel="alternate" href="./" hreflang="fr">
+          <link rel="alternate" href="/fr/" hreflang="fr">
         
-          <link rel="alternate" href="../../../it/nextflow_run/01_basics/" hreflang="it">
+          <link rel="alternate" href="/hi/" hreflang="hi">
         
-          <link rel="alternate" href="../../../ko/nextflow_run/01_basics/" hreflang="ko">
+          <link rel="alternate" href="/it/" hreflang="it">
+        
+          <link rel="alternate" href="/ko/" hreflang="ko">
+        
+          <link rel="alternate" href="/pl/" hreflang="pl">
+        
+          <link rel="alternate" href="/pt/" hreflang="pt">
+        
+          <link rel="alternate" href="/tr/" hreflang="tr">
         
       
       
-      <link rel="icon" href="../../../assets/img/nextflow-icon.png">
+      <link rel="icon" href="../../assets/img/nextflow-icon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
     
     
       
-        <title>Part 1: Run basic operations - training.nextflow.io</title>
+        <title>Partie 1 : Exécuter les opérations de base - training.nextflow.io</title>
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
   
@@ -108,11 +116,11 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/fonts.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/fonts.css">
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/extra.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/extra.css">
     
-    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
   
@@ -147,7 +155,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#part-1-run-basic-operations" class="md-skip">
+        <a href="#partie-1-executer-les-operations-de-base" class="md-skip">
           Aller au contenu
         </a>
       
@@ -167,9 +175,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="En-tête">
-    <a href="../../" title="training.nextflow.io" class="md-header__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
+    <a href="../.." title="training.nextflow.io" class="md-header__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
       
-  <img src="../../../assets/img/nextflow_logo_dark.png" alt="logo">
+  <img src="../../assets/img/nextflow_logo_dark.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -186,7 +194,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Part 1: Run basic operations
+              Partie 1 : Exécuter les opérations de base
             
           </span>
         </div>
@@ -233,38 +241,62 @@
       <ul class="md-select__list">
         
           <li class="md-select__item">
-            <a href="../../../nextflow_run/01_basics/" hreflang="en" class="md-select__link">
+            <a href="/" hreflang="en" class="md-select__link">
               English
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../pt/nextflow_run/01_basics/" hreflang="pt" class="md-select__link">
-              Português
+            <a href="/de/" hreflang="de" class="md-select__link">
+              deutsch
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../es/nextflow_run/01_basics/" hreflang="es" class="md-select__link">
-              Español
+            <a href="/es/" hreflang="es" class="md-select__link">
+              español
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="./" hreflang="fr" class="md-select__link">
-              Français
+            <a href="/fr/" hreflang="fr" class="md-select__link">
+              français
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../it/nextflow_run/01_basics/" hreflang="it" class="md-select__link">
-              Italiano
+            <a href="/hi/" hreflang="hi" class="md-select__link">
+              हिन्दी
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../ko/nextflow_run/01_basics/" hreflang="ko" class="md-select__link">
-              Korean
+            <a href="/it/" hreflang="it" class="md-select__link">
+              italiano
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/ko/" hreflang="ko" class="md-select__link">
+              한국어
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/pl/" hreflang="pl" class="md-select__link">
+              Polski
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/pt/" hreflang="pt" class="md-select__link">
+              português
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/tr/" hreflang="tr" class="md-select__link">
+              Türkçe
             </a>
           </li>
         
@@ -384,9 +416,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../" title="training.nextflow.io" class="md-nav__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
+    <a href="../.." title="training.nextflow.io" class="md-nav__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
       
-  <img src="../../../assets/img/nextflow_logo_dark.png" alt="logo">
+  <img src="../../assets/img/nextflow_logo_dark.png" alt="logo">
 
     </a>
     training.nextflow.io
@@ -413,14 +445,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../" class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Home
+    Accueil
   
 
     
@@ -524,7 +556,7 @@
   <span class="md-ellipsis">
     
   
-    Getting started
+    Démarrage
   
 
     
@@ -561,7 +593,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run basic operations
+    Partie 1 : Exécuter les opérations de base
   
 
     
@@ -579,7 +611,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run basic operations
+    Partie 1 : Exécuter les opérations de base
   
 
     
@@ -599,22 +631,22 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#1-run-a-hello-world-directly" class="md-nav__link">
+  <a href="#1-executer-un-hello-world-directement" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Run a Hello World directly
+        1. Exécuter un Hello World directement
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Run a Hello World directly">
+    <nav class="md-nav" aria-label="1. Exécuter un Hello World directement">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11-make-the-terminal-say-hello" class="md-nav__link">
+  <a href="#11-faire-dire-bonjour-au-terminal" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1. Make the terminal say hello
+        1.1. Faire dire bonjour au terminal
       
     </span>
   </a>
@@ -622,10 +654,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#12-write-the-output-to-a-file" class="md-nav__link">
+  <a href="#12-ecrire-la-sortie-dans-un-fichier" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2. Write the output to a file
+        1.2. Écrire la sortie dans un fichier
       
     </span>
   </a>
@@ -633,10 +665,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#13-find-the-output" class="md-nav__link">
+  <a href="#13-trouver-la-sortie" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.3. Find the output
+        1.3. Trouver la sortie
       
     </span>
   </a>
@@ -644,10 +676,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway" class="md-nav__link">
+  <a href="#recapitulatif" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        Récapitulatif
       
     </span>
   </a>
@@ -655,10 +687,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next" class="md-nav__link">
+  <a href="#et-ensuite" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        Et ensuite ?
       
     </span>
   </a>
@@ -669,22 +701,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#2-run-the-workflow" class="md-nav__link">
+  <a href="#2-executer-le-workflow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Run the workflow
+        2. Exécuter le workflow
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. Run the workflow">
+    <nav class="md-nav" aria-label="2. Exécuter le workflow">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#21-launch-the-workflow-and-monitor-execution" class="md-nav__link">
+  <a href="#21-lancer-le-workflow-et-surveiller-lexecution" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1. Launch the workflow and monitor execution
+        2.1. Lancer le workflow et surveiller l'exécution
       
     </span>
   </a>
@@ -692,10 +724,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#22-find-the-output-file-in-the-results-directory" class="md-nav__link">
+  <a href="#22-trouver-le-fichier-de-sortie-dans-le-repertoire-results" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2. Find the output file in the results directory
+        2.2. Trouver le fichier de sortie dans le répertoire results
       
     </span>
   </a>
@@ -703,10 +735,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#23-find-the-original-output-and-logs-in-the-work-directory" class="md-nav__link">
+  <a href="#23-trouver-la-sortie-originale-et-les-logs-dans-le-repertoire-work" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.3. Find the original output and logs in the work/ directory
+        2.3. Trouver la sortie originale et les logs dans le répertoire work/
       
     </span>
   </a>
@@ -714,10 +746,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#24-re-run-the-workflow-with-different-greetings" class="md-nav__link">
+  <a href="#24-re-executer-le-workflow-avec-differentes-salutations" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.4. Re-run the workflow with different greetings
+        2.4. Ré-exécuter le workflow avec différentes salutations
       
     </span>
   </a>
@@ -725,10 +757,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway_1" class="md-nav__link">
+  <a href="#recapitulatif_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        Récapitulatif
       
     </span>
   </a>
@@ -736,10 +768,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next_1" class="md-nav__link">
+  <a href="#et-ensuite_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        Et ensuite ?
       
     </span>
   </a>
@@ -750,22 +782,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#3-examine-the-hello-world-workflow-starter-script" class="md-nav__link">
+  <a href="#3-examiner-le-script-de-demarrage-du-workflow-hello-world" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Examine the Hello World workflow starter script
+        3. Examiner le script de démarrage du workflow Hello World
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. Examine the Hello World workflow starter script">
+    <nav class="md-nav" aria-label="3. Examiner le script de démarrage du workflow Hello World">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#31-examine-the-overall-code-structure" class="md-nav__link">
+  <a href="#31-examiner-la-structure-globale-du-code" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1. Examine the overall code structure
+        3.1. Examiner la structure globale du code
       
     </span>
   </a>
@@ -773,10 +805,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#32-the-process-definition" class="md-nav__link">
+  <a href="#32-la-definition-du-process" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.2. The process definition
+        3.2. La définition du process
       
     </span>
   </a>
@@ -784,10 +816,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#33-the-workflow-definition" class="md-nav__link">
+  <a href="#33-la-definition-du-workflow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.3. The workflow definition
+        3.3. La définition du workflow
       
     </span>
   </a>
@@ -795,10 +827,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#34-the-params-system-of-command-line-parameters" class="md-nav__link">
+  <a href="#34-le-systeme-params-de-parametres-de-ligne-de-commande" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.4. The params system of command-line parameters
+        3.4. Le système params de paramètres de ligne de commande
       
     </span>
   </a>
@@ -806,10 +838,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#35-the-publish-directive" class="md-nav__link">
+  <a href="#35-la-directive-publish" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.5. The publish directive
+        3.5. La directive publish
       
     </span>
   </a>
@@ -817,10 +849,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway_2" class="md-nav__link">
+  <a href="#recapitulatif_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        Récapitulatif
       
     </span>
   </a>
@@ -828,10 +860,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next_2" class="md-nav__link">
+  <a href="#et-ensuite_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        Et ensuite ?
       
     </span>
   </a>
@@ -842,22 +874,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#4-manage-workflow-executions" class="md-nav__link">
+  <a href="#4-gerer-les-executions-de-workflow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Manage workflow executions
+        4. Gérer les exécutions de workflow
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="4. Manage workflow executions">
+    <nav class="md-nav" aria-label="4. Gérer les exécutions de workflow">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#41-re-launch-a-workflow-with-resume" class="md-nav__link">
+  <a href="#41-relancer-un-workflow-avec-resume" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.1. Re-launch a workflow with -resume
+        4.1. Relancer un workflow avec -resume
       
     </span>
   </a>
@@ -865,10 +897,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#42-inspect-the-log-of-past-executions" class="md-nav__link">
+  <a href="#42-inspecter-le-log-des-executions-passees" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.2. Inspect the log of past executions
+        4.2. Inspecter le log des exécutions passées
       
     </span>
   </a>
@@ -876,22 +908,22 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#43-delete-older-work-directories" class="md-nav__link">
+  <a href="#43-supprimer-les-anciens-repertoires-de-travail" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.3. Delete older work directories
+        4.3. Supprimer les anciens répertoires de travail
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="4.3. Delete older work directories">
+    <nav class="md-nav" aria-label="4.3. Supprimer les anciens répertoires de travail">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#431-determine-deletion-criteria" class="md-nav__link">
+  <a href="#431-determiner-les-criteres-de-suppression" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.3.1. Determine deletion criteria
+        4.3.1. Déterminer les critères de suppression
       
     </span>
   </a>
@@ -899,10 +931,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#432-do-a-dry-run" class="md-nav__link">
+  <a href="#432-faire-un-test-a-blanc" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.3.2. Do a dry run
+        4.3.2. Faire un test à blanc
       
     </span>
   </a>
@@ -910,10 +942,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#433-proceed-with-deletion" class="md-nav__link">
+  <a href="#433-proceder-a-la-suppression" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.3.3. Proceed with deletion
+        4.3.3. Procéder à la suppression
       
     </span>
   </a>
@@ -926,10 +958,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway_3" class="md-nav__link">
+  <a href="#recapitulatif_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        Récapitulatif
       
     </span>
   </a>
@@ -937,10 +969,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next_3" class="md-nav__link">
+  <a href="#et-ensuite_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        Et ensuite ?
       
     </span>
   </a>
@@ -1169,7 +1201,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Run real pipelines
+    Partie 2 : Exécuter de vrais pipelines
   
 
     
@@ -1197,7 +1229,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Run configuration
+    Partie 3 : Configuration d'exécution
   
 
     
@@ -1225,7 +1257,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    Résumé de la formation
   
 
     
@@ -1253,7 +1285,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Enquête de satisfaction
   
 
     
@@ -1363,7 +1395,7 @@
   <span class="md-ellipsis">
     
   
-    Getting started
+    Premiers pas
   
 
     
@@ -1391,7 +1423,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Hello World
+    Partie 1 : Hello World
   
 
     
@@ -1419,7 +1451,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Hello Channels
+    Partie 2 : Hello Channels
   
 
     
@@ -1447,7 +1479,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Hello Workflow
+    Partie 3 : Hello Workflow
   
 
     
@@ -1475,7 +1507,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Hello Modules
+    Partie 4 : Hello Modules
   
 
     
@@ -1503,7 +1535,7 @@
   <span class="md-ellipsis">
     
   
-    Part 5: Hello Containers
+    Partie 5 : Hello Containers
   
 
     
@@ -1531,7 +1563,7 @@
   <span class="md-ellipsis">
     
   
-    Part 6: Hello Config
+    Partie 6 : Hello Config
   
 
     
@@ -1559,7 +1591,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    Résumé du cours
   
 
     
@@ -1587,7 +1619,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Enquête de satisfaction
   
 
     
@@ -1697,7 +1729,7 @@
   <span class="md-ellipsis">
     
   
-    Getting started
+    Premiers pas
   
 
     
@@ -1725,7 +1757,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run a demo pipeline
+    Partie 1 : Exécuter un pipeline de démonstration
   
 
     
@@ -1753,7 +1785,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Rewrite Hello for nf-core
+    Partie 2 : Réécrire Hello pour nf-core
   
 
     
@@ -1781,7 +1813,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Use an nf-core module
+    Partie 3 : Utiliser un module nf-core
   
 
     
@@ -1809,7 +1841,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Make an nf-core module
+    Partie 4 : Créer un module nf-core
   
 
     
@@ -1837,7 +1869,7 @@
   <span class="md-ellipsis">
     
   
-    Part 5: Input validation
+    Partie 5 : Validation des entrées
   
 
     
@@ -1865,7 +1897,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    Résumé du cours
   
 
     
@@ -1893,7 +1925,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Enquête de retour d'expérience
   
 
     
@@ -1939,7 +1971,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Science
+    Nextflow pour la Science
   
 
     
@@ -1955,7 +1987,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Nextflow for Science
+    Nextflow pour la Science
   
 
           </label>
@@ -1975,7 +2007,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Science
+    Nextflow pour la Science
   
 
     
@@ -2014,7 +2046,7 @@
   <span class="md-ellipsis">
     
   
-    Genomics
+    Nextflow pour la Génomique
   
 
     
@@ -2030,7 +2062,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Genomics
+    Nextflow pour la Génomique
   
 
           </label>
@@ -2050,7 +2082,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Genomics
+    Nextflow pour la Génomique
   
 
     
@@ -2106,7 +2138,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Per-sample variant calling
+    Partie 1 : Appel de variants par échantillon
   
 
     
@@ -2134,7 +2166,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Joint calling on a cohort
+    Partie 2 : Appel conjoint de variants sur une cohorte
   
 
     
@@ -2162,7 +2194,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Moving code into modules
+    Partie 3 : Déplacer le code dans des modules
   
 
     
@@ -2190,7 +2222,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Adding tests
+    Partie 4 : Ajout de tests
   
 
     
@@ -2218,7 +2250,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Questionnaire de retour d'expérience
   
 
     
@@ -2246,7 +2278,7 @@
   <span class="md-ellipsis">
     
   
-    Next Steps
+    Prochaines Étapes
   
 
     
@@ -2293,7 +2325,7 @@
   <span class="md-ellipsis">
     
   
-    RNAseq
+    Nextflow pour l'ARNseq
   
 
     
@@ -2309,7 +2341,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    RNAseq
+    Nextflow pour l'ARNseq
   
 
           </label>
@@ -2329,7 +2361,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for RNAseq
+    Nextflow pour l'ARNseq
   
 
     
@@ -2385,7 +2417,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Method overview and manual testing
+    Partie 1 : Aperçu de la méthode et tests manuels
   
 
     
@@ -2413,7 +2445,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Single-sample implementation
+    Partie 2 : Implémentation pour un seul échantillon
   
 
     
@@ -2441,7 +2473,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Multi-sample paired-end implementation
+    Partie 3 : Implémentation multi-échantillons en lecture appariée
   
 
     
@@ -2469,7 +2501,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Questionnaire de retour d'expérience
   
 
     
@@ -2497,7 +2529,7 @@
   <span class="md-ellipsis">
     
   
-    Next Steps
+    Prochaines Étapes
   
 
     
@@ -2544,7 +2576,7 @@
   <span class="md-ellipsis">
     
   
-    Imaging
+    Nextflow run pour l'imagerie
   
 
     
@@ -2560,7 +2592,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Imaging
+    Nextflow run pour l'imagerie
   
 
           </label>
@@ -2580,7 +2612,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow run for Imaging
+    Nextflow run pour l'imagerie
   
 
     
@@ -2636,7 +2668,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run basic operations
+    Partie 1 : Exécuter des opérations de base
   
 
     
@@ -2664,7 +2696,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Run nf-core/molkart
+    Partie 2 : Exécuter nf-core/molkart
   
 
     
@@ -2692,7 +2724,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Organizing inputs
+    Partie 3 : Organisation des entrées
   
 
     
@@ -2720,7 +2752,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Configuration
+    Partie 4 : Configuration
   
 
     
@@ -2748,7 +2780,7 @@
   <span class="md-ellipsis">
     
   
-    Survey
+    Sondage
   
 
     
@@ -2776,7 +2808,7 @@
   <span class="md-ellipsis">
     
   
-    Next steps
+    Prochaines étapes
   
 
     
@@ -2830,7 +2862,7 @@
   <span class="md-ellipsis">
     
   
-    Side Quests
+    Quêtes secondaires
   
 
     
@@ -2846,7 +2878,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Side Quests
+    Quêtes secondaires
   
 
           </label>
@@ -2866,7 +2898,7 @@
   <span class="md-ellipsis">
     
   
-    Side Quests
+    Quêtes secondaires
   
 
     
@@ -2922,7 +2954,7 @@
   <span class="md-ellipsis">
     
   
-    Development Environment
+    Environnement de Développement
   
 
     
@@ -2950,7 +2982,7 @@
   <span class="md-ellipsis">
     
   
-    Metadata and meta maps
+    Métadonnées et meta maps
   
 
     
@@ -2978,7 +3010,7 @@
   <span class="md-ellipsis">
     
   
-    File input processing
+    Traitement des fichiers en entrée
   
 
     
@@ -3006,7 +3038,7 @@
   <span class="md-ellipsis">
     
   
-    Splitting and Grouping
+    Division et regroupement
   
 
     
@@ -3034,7 +3066,7 @@
   <span class="md-ellipsis">
     
   
-    Workflows of Workflows
+    Workflows de workflows
   
 
     
@@ -3062,7 +3094,7 @@
   <span class="md-ellipsis">
     
   
-    Debugging Workflows
+    Débogage des Workflows
   
 
     
@@ -3090,7 +3122,7 @@
   <span class="md-ellipsis">
     
   
-    Essential Nextflow Scripting Patterns
+    Modèles de Script Nextflow Essentiels
   
 
     
@@ -3118,7 +3150,7 @@
   <span class="md-ellipsis">
     
   
-    Testing with nf-test
+    Tests avec nf-test
   
 
     
@@ -3164,7 +3196,7 @@
   <span class="md-ellipsis">
     
   
-    Training Collections
+    Collections de Formation
   
 
     
@@ -3180,7 +3212,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Training Collections
+    Collections de Formation
   
 
           </label>
@@ -3200,7 +3232,7 @@
   <span class="md-ellipsis">
     
   
-    Training Collections
+    Collections de Formation
   
 
     
@@ -3228,7 +3260,7 @@
   <span class="md-ellipsis">
     
   
-    The Architect's Toolkit I
+    La Boîte à Outils de l'Architecte I
   
 
     
@@ -3349,7 +3381,7 @@
   <span class="md-ellipsis">
     
   
-    Training environment
+    Options d'environnement
   
 
     
@@ -3365,7 +3397,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Training environment
+    Options d'environnement
   
 
           </label>
@@ -3385,7 +3417,7 @@
   <span class="md-ellipsis">
     
   
-    Environment options
+    Options d'environnement
   
 
     
@@ -3441,7 +3473,7 @@
   <span class="md-ellipsis">
     
   
-    Local Devcontainers
+    Devcontainers locaux
   
 
     
@@ -3469,7 +3501,7 @@
   <span class="md-ellipsis">
     
   
-    Manual installation
+    Installation manuelle
   
 
     
@@ -3505,7 +3537,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow versions
+    Versions de Nextflow
   
 
     
@@ -3533,7 +3565,7 @@
   <span class="md-ellipsis">
     
   
-    The Hello pipeline
+    Le pipeline Hello
   
 
     
@@ -3575,22 +3607,22 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#1-run-a-hello-world-directly" class="md-nav__link">
+  <a href="#1-executer-un-hello-world-directement" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Run a Hello World directly
+        1. Exécuter un Hello World directement
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Run a Hello World directly">
+    <nav class="md-nav" aria-label="1. Exécuter un Hello World directement">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11-make-the-terminal-say-hello" class="md-nav__link">
+  <a href="#11-faire-dire-bonjour-au-terminal" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1. Make the terminal say hello
+        1.1. Faire dire bonjour au terminal
       
     </span>
   </a>
@@ -3598,10 +3630,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#12-write-the-output-to-a-file" class="md-nav__link">
+  <a href="#12-ecrire-la-sortie-dans-un-fichier" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2. Write the output to a file
+        1.2. Écrire la sortie dans un fichier
       
     </span>
   </a>
@@ -3609,10 +3641,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#13-find-the-output" class="md-nav__link">
+  <a href="#13-trouver-la-sortie" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.3. Find the output
+        1.3. Trouver la sortie
       
     </span>
   </a>
@@ -3620,10 +3652,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway" class="md-nav__link">
+  <a href="#recapitulatif" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        Récapitulatif
       
     </span>
   </a>
@@ -3631,10 +3663,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next" class="md-nav__link">
+  <a href="#et-ensuite" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        Et ensuite ?
       
     </span>
   </a>
@@ -3645,22 +3677,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#2-run-the-workflow" class="md-nav__link">
+  <a href="#2-executer-le-workflow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Run the workflow
+        2. Exécuter le workflow
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. Run the workflow">
+    <nav class="md-nav" aria-label="2. Exécuter le workflow">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#21-launch-the-workflow-and-monitor-execution" class="md-nav__link">
+  <a href="#21-lancer-le-workflow-et-surveiller-lexecution" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1. Launch the workflow and monitor execution
+        2.1. Lancer le workflow et surveiller l'exécution
       
     </span>
   </a>
@@ -3668,10 +3700,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#22-find-the-output-file-in-the-results-directory" class="md-nav__link">
+  <a href="#22-trouver-le-fichier-de-sortie-dans-le-repertoire-results" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2. Find the output file in the results directory
+        2.2. Trouver le fichier de sortie dans le répertoire results
       
     </span>
   </a>
@@ -3679,10 +3711,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#23-find-the-original-output-and-logs-in-the-work-directory" class="md-nav__link">
+  <a href="#23-trouver-la-sortie-originale-et-les-logs-dans-le-repertoire-work" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.3. Find the original output and logs in the work/ directory
+        2.3. Trouver la sortie originale et les logs dans le répertoire work/
       
     </span>
   </a>
@@ -3690,10 +3722,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#24-re-run-the-workflow-with-different-greetings" class="md-nav__link">
+  <a href="#24-re-executer-le-workflow-avec-differentes-salutations" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.4. Re-run the workflow with different greetings
+        2.4. Ré-exécuter le workflow avec différentes salutations
       
     </span>
   </a>
@@ -3701,10 +3733,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway_1" class="md-nav__link">
+  <a href="#recapitulatif_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        Récapitulatif
       
     </span>
   </a>
@@ -3712,10 +3744,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next_1" class="md-nav__link">
+  <a href="#et-ensuite_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        Et ensuite ?
       
     </span>
   </a>
@@ -3726,22 +3758,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#3-examine-the-hello-world-workflow-starter-script" class="md-nav__link">
+  <a href="#3-examiner-le-script-de-demarrage-du-workflow-hello-world" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Examine the Hello World workflow starter script
+        3. Examiner le script de démarrage du workflow Hello World
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. Examine the Hello World workflow starter script">
+    <nav class="md-nav" aria-label="3. Examiner le script de démarrage du workflow Hello World">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#31-examine-the-overall-code-structure" class="md-nav__link">
+  <a href="#31-examiner-la-structure-globale-du-code" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1. Examine the overall code structure
+        3.1. Examiner la structure globale du code
       
     </span>
   </a>
@@ -3749,10 +3781,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#32-the-process-definition" class="md-nav__link">
+  <a href="#32-la-definition-du-process" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.2. The process definition
+        3.2. La définition du process
       
     </span>
   </a>
@@ -3760,10 +3792,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#33-the-workflow-definition" class="md-nav__link">
+  <a href="#33-la-definition-du-workflow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.3. The workflow definition
+        3.3. La définition du workflow
       
     </span>
   </a>
@@ -3771,10 +3803,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#34-the-params-system-of-command-line-parameters" class="md-nav__link">
+  <a href="#34-le-systeme-params-de-parametres-de-ligne-de-commande" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.4. The params system of command-line parameters
+        3.4. Le système params de paramètres de ligne de commande
       
     </span>
   </a>
@@ -3782,10 +3814,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#35-the-publish-directive" class="md-nav__link">
+  <a href="#35-la-directive-publish" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.5. The publish directive
+        3.5. La directive publish
       
     </span>
   </a>
@@ -3793,10 +3825,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway_2" class="md-nav__link">
+  <a href="#recapitulatif_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        Récapitulatif
       
     </span>
   </a>
@@ -3804,10 +3836,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next_2" class="md-nav__link">
+  <a href="#et-ensuite_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        Et ensuite ?
       
     </span>
   </a>
@@ -3818,22 +3850,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#4-manage-workflow-executions" class="md-nav__link">
+  <a href="#4-gerer-les-executions-de-workflow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Manage workflow executions
+        4. Gérer les exécutions de workflow
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="4. Manage workflow executions">
+    <nav class="md-nav" aria-label="4. Gérer les exécutions de workflow">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#41-re-launch-a-workflow-with-resume" class="md-nav__link">
+  <a href="#41-relancer-un-workflow-avec-resume" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.1. Re-launch a workflow with -resume
+        4.1. Relancer un workflow avec -resume
       
     </span>
   </a>
@@ -3841,10 +3873,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#42-inspect-the-log-of-past-executions" class="md-nav__link">
+  <a href="#42-inspecter-le-log-des-executions-passees" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.2. Inspect the log of past executions
+        4.2. Inspecter le log des exécutions passées
       
     </span>
   </a>
@@ -3852,22 +3884,22 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#43-delete-older-work-directories" class="md-nav__link">
+  <a href="#43-supprimer-les-anciens-repertoires-de-travail" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.3. Delete older work directories
+        4.3. Supprimer les anciens répertoires de travail
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="4.3. Delete older work directories">
+    <nav class="md-nav" aria-label="4.3. Supprimer les anciens répertoires de travail">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#431-determine-deletion-criteria" class="md-nav__link">
+  <a href="#431-determiner-les-criteres-de-suppression" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.3.1. Determine deletion criteria
+        4.3.1. Déterminer les critères de suppression
       
     </span>
   </a>
@@ -3875,10 +3907,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#432-do-a-dry-run" class="md-nav__link">
+  <a href="#432-faire-un-test-a-blanc" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.3.2. Do a dry run
+        4.3.2. Faire un test à blanc
       
     </span>
   </a>
@@ -3886,10 +3918,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#433-proceed-with-deletion" class="md-nav__link">
+  <a href="#433-proceder-a-la-suppression" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.3.3. Proceed with deletion
+        4.3.3. Procéder à la suppression
       
     </span>
   </a>
@@ -3902,10 +3934,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway_3" class="md-nav__link">
+  <a href="#recapitulatif_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        Récapitulatif
       
     </span>
   </a>
@@ -3913,10 +3945,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next_3" class="md-nav__link">
+  <a href="#et-ensuite_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        Et ensuite ?
       
     </span>
   </a>
@@ -4174,73 +4206,83 @@
                 
                   
 
+ 
+<a
+  href="https://github.com/nextflow-io/training/edit/master/docs/nextflow_run/01_basics.md"
+  title="Editer cette page"
+  class="md-content__button md-icon"
+  rel="edit"
+>
+   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+</a>
+   
+<a
+  href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md"
+  title="Improve translation"
+  class="md-content__button md-icon"
+>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 1H3c-1.1 0-2 .9-2 2v12l3-3h5v-1c0-2.2 1.79-4 4-4V3c0-1.1-.9-2-2-2m0 3H9.5c-.34 1.19-.96 2.3-1.82 3.26l-.02.02 1.26 1.25-.37 1.01L7 8l-2.5 2.5-.69-.73 2.53-2.49A8.6 8.6 0 0 1 4.86 5h.99c.31.6.69 1.17 1.15 1.68A7.7 7.7 0 0 0 8.57 4H3V3h3.5V2h1v1H11zm10 5h-8c-1.1 0-2 .9-2 2v7c0 1.1.9 2 2 2h7l3 3V11c0-1.1-.9-2-2-2m-1.37 10-.85-2.25h-3.56L14.38 19h-1.5l3.37-9h1.5l3.38 9zM17 12l1.22 3.25h-2.43z"/></svg>
+</a>
+ 
 
-  
-    <a href="https://github.com/nextflow-io/training/edit/master/docs/nextflow_run/01_basics.md" title="Editer cette page" class="md-content__button md-icon" rel="edit">
-      
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
-    </a>
-  
-  
-
-
-<h1 id="part-1-run-basic-operations">Part 1: Run basic operations<a class="headerlink" href="#part-1-run-basic-operations" title="Permanent link">&para;</a></h1>
-<p>In this first part of the Nextflow Run training course, we ease into the topic with a very basic domain-agnostic Hello World example, which we'll use to demonstrate essential operations and point out the corresponding Nextflow code components.</p>
+<h1 id="partie-1-executer-les-operations-de-base">Partie 1 : Exécuter les opérations de base<a class="headerlink" href="#partie-1-executer-les-operations-de-base" title="Permanent link">&para;</a></h1>
+<p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Traduction assistée par IA - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">en savoir plus et suggérer des améliorations</a></span></p>
+<p>Dans cette première partie de la formation Nextflow Run, nous abordons le sujet avec un exemple Hello World très basique et indépendant du domaine, que nous utiliserons pour démontrer les opérations essentielles et pointer les composants de code Nextflow correspondants.</p>
 <details class="info">
-<summary>What is a Hello World example?</summary>
-<p>A "Hello World!" is a minimalist example that is meant to demonstrate the basic syntax and structure of a programming language or software framework.
-The example typically consists of printing the phrase "Hello, World!" to the output device, such as the console or terminal, or writing it to a file.</p>
+<summary>Qu'est-ce qu'un exemple Hello World ?</summary>
+<p>Un « Hello World! » est un exemple minimaliste destiné à démontrer la syntaxe et la structure de base d'un langage de programmation ou d'un framework logiciel.
+L'exemple consiste généralement à afficher la phrase « Hello, World! » sur le dispositif de sortie, comme la console ou le terminal, ou à l'écrire dans un fichier.</p>
 </details>
 <hr />
-<h2 id="1-run-a-hello-world-directly">1. Run a Hello World directly<a class="headerlink" href="#1-run-a-hello-world-directly" title="Permanent link">&para;</a></h2>
-<p>Let's demonstrate this concept with a simple command that we run directly in the terminal, to show what it does before we wrap it in Nextflow.</p>
+<h2 id="1-executer-un-hello-world-directement">1. Exécuter un Hello World directement<a class="headerlink" href="#1-executer-un-hello-world-directement" title="Permanent link">&para;</a></h2>
+<p>Démontrons ce concept avec une commande simple que nous exécutons directement dans le terminal, pour montrer ce qu'elle fait avant de l'encapsuler dans Nextflow.</p>
 <div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>Remember that you should now be inside the <code>nextflow-run/</code> directory as described on the <a href="../00_orientation/">Getting Started</a> page.</p>
+<p class="admonition-title">Astuce</p>
+<p>N'oubliez pas que vous devriez maintenant être dans le répertoire <code>nextflow-run/</code> comme décrit sur la page <a href="../00_orientation/">Démarrage</a>.</p>
 </div>
-<h3 id="11-make-the-terminal-say-hello">1.1. Make the terminal say hello<a class="headerlink" href="#11-make-the-terminal-say-hello" title="Permanent link">&para;</a></h3>
-<p>Run the following command in your terminal.</p>
+<h3 id="11-faire-dire-bonjour-au-terminal">1.1. Faire dire bonjour au terminal<a class="headerlink" href="#11-faire-dire-bonjour-au-terminal" title="Permanent link">&para;</a></h3>
+<p>Exécutez la commande suivante dans votre terminal.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;Hello World!&#39;</span>
 </code></pre></div>
 <details class="success">
-<summary>Command output</summary>
+<summary>Sortie de la commande</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="go">Hello World!</span>
 </code></pre></div>
 </details>
-<p>This outputs the text 'Hello World' right there in the terminal.</p>
-<h3 id="12-write-the-output-to-a-file">1.2. Write the output to a file<a class="headerlink" href="#12-write-the-output-to-a-file" title="Permanent link">&para;</a></h3>
-<p>Running pipelines mostly involves reading data from files and writing results to other files, so let's modify the command to write the text output to a file to make the example a bit more relevant.</p>
+<p>Cela affiche le texte 'Hello World' directement dans le terminal.</p>
+<h3 id="12-ecrire-la-sortie-dans-un-fichier">1.2. Écrire la sortie dans un fichier<a class="headerlink" href="#12-ecrire-la-sortie-dans-un-fichier" title="Permanent link">&para;</a></h3>
+<p>L'exécution de pipelines implique principalement la lecture de données depuis des fichiers et l'écriture de résultats dans d'autres fichiers, alors modifions la commande pour écrire la sortie texte dans un fichier afin de rendre l'exemple un peu plus pertinent.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;Hello World!&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>output.txt
 </code></pre></div>
 <details class="success">
-<summary>Command output</summary>
+<summary>Sortie de la commande</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>
 </code></pre></div>
 </details>
-<p>This does not output anything to the terminal.</p>
-<h3 id="13-find-the-output">1.3. Find the output<a class="headerlink" href="#13-find-the-output" title="Permanent link">&para;</a></h3>
-<p>The text 'Hello World' should now be in the output file we specified, named <code>output.txt</code>.
-You can open it in the file explorer or from the command line using the <code>cat</code> utility, for example.</p>
+<p>Cela n'affiche rien dans le terminal.</p>
+<h3 id="13-trouver-la-sortie">1.3. Trouver la sortie<a class="headerlink" href="#13-trouver-la-sortie" title="Permanent link">&para;</a></h3>
+<p>Le texte 'Hello World' devrait maintenant être dans le fichier de sortie que nous avons spécifié, nommé <code>output.txt</code>.
+Vous pouvez l'ouvrir dans l'explorateur de fichiers ou depuis la ligne de commande en utilisant l'utilitaire <code>cat</code>, par exemple.</p>
 <details class="abstract">
-<summary>File contents</summary>
+<summary>Contenu du fichier</summary>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">output.txt</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="go">Hello World!</span>
 </code></pre></div></td></tr></table></div>
 </details>
-<p>This is what we're going to try to replicate with our very first Nextflow workflow.</p>
-<h3 id="takeaway">Takeaway<a class="headerlink" href="#takeaway" title="Permanent link">&para;</a></h3>
-<p>You now know how to run a simple command in the terminal that outputs some text, and optionally, how to make it write the output to a file.</p>
-<h3 id="whats-next">What's next?<a class="headerlink" href="#whats-next" title="Permanent link">&para;</a></h3>
-<p>Find out what it takes to run a Nextflow workflow that achieves the same result.</p>
+<p>C'est ce que nous allons essayer de reproduire avec notre tout premier workflow Nextflow.</p>
+<h3 id="recapitulatif">Récapitulatif<a class="headerlink" href="#recapitulatif" title="Permanent link">&para;</a></h3>
+<p>Vous savez maintenant comment exécuter une commande simple dans le terminal qui affiche du texte, et optionnellement, comment lui faire écrire la sortie dans un fichier.</p>
+<h3 id="et-ensuite">Et ensuite ?<a class="headerlink" href="#et-ensuite" title="Permanent link">&para;</a></h3>
+<p>Découvrez ce qu'il faut pour exécuter un workflow Nextflow qui atteint le même résultat.</p>
 <hr />
-<h2 id="2-run-the-workflow">2. Run the workflow<a class="headerlink" href="#2-run-the-workflow" title="Permanent link">&para;</a></h2>
-<p>We provide you with a workflow script named <code>1-hello.nf</code> that takes an input greeting via a command-line argument named <code>--input</code> and produces a text file containing that greeting.</p>
-<p>We're not going to look at the code yet; first let's see what it looks like to run it.</p>
-<h3 id="21-launch-the-workflow-and-monitor-execution">2.1. Launch the workflow and monitor execution<a class="headerlink" href="#21-launch-the-workflow-and-monitor-execution" title="Permanent link">&para;</a></h3>
-<p>In the terminal, run the following command:</p>
+<h2 id="2-executer-le-workflow">2. Exécuter le workflow<a class="headerlink" href="#2-executer-le-workflow" title="Permanent link">&para;</a></h2>
+<p>Nous vous fournissons un script de workflow nommé <code>1-hello.nf</code> qui prend une salutation en entrée via un argument de ligne de commande nommé <code>--input</code> et produit un fichier texte contenant cette salutation.</p>
+<p>Nous n'allons pas regarder le code pour l'instant ; voyons d'abord à quoi ressemble son exécution.</p>
+<h3 id="21-lancer-le-workflow-et-surveiller-lexecution">2.1. Lancer le workflow et surveiller l'exécution<a class="headerlink" href="#21-lancer-le-workflow-et-surveiller-lexecution" title="Permanent link">&para;</a></h3>
+<p>Dans le terminal, exécutez la commande suivante :</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span><span class="m">1</span>-hello.nf<span class="w"> </span>--input<span class="w"> </span><span class="s1">&#39;Hello World!&#39;</span>
 </code></pre></div>
 <details class="success">
-<summary>Command output</summary>
+<summary>Sortie de la commande</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="go">Launching `1-hello.nf` [goofy_torvalds] DSL2 - revision: c33d41f479</span>
@@ -4249,47 +4291,47 @@ You can open it in the file explorer or from the command line using the <code>ca
 <a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="hll"><span class="go">[a3/7be2fa] sayHello | 1 of 1 ✔</span>
 </span></code></pre></div>
 </details>
-<p>If your console output looks something like that, then congratulations, you just ran your first Nextflow workflow!</p>
-<p>The most important output here is the last line, which is highlighted in the output above:</p>
+<p>Si votre sortie console ressemble à cela, alors félicitations, vous venez d'exécuter votre premier workflow Nextflow !</p>
+<p>La sortie la plus importante ici est la dernière ligne, qui est mise en surbrillance dans la sortie ci-dessus :</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="go">[a3/7be2fa] sayHello | 1 of 1 ✔</span>
 </code></pre></div>
-<p>This tells us that the <code>sayHello</code> process was successfully executed once (<code>1 of 1 ✔</code>).</p>
-<p>That's great, but you may be wondering: where is the output?</p>
-<h3 id="22-find-the-output-file-in-the-results-directory">2.2. Find the output file in the <code>results</code> directory<a class="headerlink" href="#22-find-the-output-file-in-the-results-directory" title="Permanent link">&para;</a></h3>
-<p>This workflow is configured to publish its output to a results directory.
-If you look at your current directory, you will see that when you ran the workflow, Nextflow created a new directory called <code>results</code>, as well as a subdirectory called <code>1-hello</code> under that, containing a file called <code>output.txt</code>.</p>
+<p>Cela nous indique que le process <code>sayHello</code> a été exécuté avec succès une fois (<code>1 of 1 ✔</code>).</p>
+<p>C'est bien, mais vous vous demandez peut-être : où est la sortie ?</p>
+<h3 id="22-trouver-le-fichier-de-sortie-dans-le-repertoire-results">2.2. Trouver le fichier de sortie dans le répertoire <code>results</code><a class="headerlink" href="#22-trouver-le-fichier-de-sortie-dans-le-repertoire-results" title="Permanent link">&para;</a></h3>
+<p>Ce workflow est configuré pour publier sa sortie dans un répertoire de résultats.
+Si vous regardez votre répertoire actuel, vous verrez que lorsque vous avez exécuté le workflow, Nextflow a créé un nouveau répertoire appelé <code>results</code>, ainsi qu'un sous-répertoire appelé <code>1-hello</code> en dessous, contenant un fichier appelé <code>output.txt</code>.</p>
 <div class="highlight"><span class="filename">results/</span><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="go">results</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="go">└── 1-hello</span>
 <a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="go">    └── output.txt</span>
 </code></pre></div>
-<p>Open the file; the contents should match the string you specified on the command line.</p>
+<p>Ouvrez le fichier ; le contenu devrait correspondre à la chaîne que vous avez spécifiée sur la ligne de commande.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">results/1-hello/output.txt</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="go">Hello World!</span>
 </code></pre></div></td></tr></table></div>
-<p>That's great, our workflow did what it was supposed to do!</p>
-<p>However, be aware that the 'published' result is a copy (or in some cases a symbolic link) of the actual output produced by Nextflow when it executed the workflow.</p>
-<p>So now, we are going to peek under the hood to see where Nextflow actually executed the work.</p>
+<p>C'est bien, notre workflow a fait ce qu'il était censé faire !</p>
+<p>Cependant, soyez conscient que le résultat « publié » est une copie (ou dans certains cas un lien symbolique) de la sortie réelle produite par Nextflow lors de l'exécution du workflow.</p>
+<p>Alors maintenant, nous allons jeter un coup d'œil sous le capot pour voir où Nextflow a réellement exécuté le travail.</p>
 <div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Not all workflows will be set up to publish outputs to a results directory, and/or the directory names and structure may be different.
-A little further in this section, we will show you how to find out where this behavior is specified.</p>
+<p class="admonition-title">Avertissement</p>
+<p>Tous les workflows ne seront pas configurés pour publier les sorties dans un répertoire de résultats, et/ou les noms de répertoires et la structure peuvent être différents.
+Un peu plus loin dans cette section, nous vous montrerons comment découvrir où ce comportement est spécifié.</p>
 </div>
-<h3 id="23-find-the-original-output-and-logs-in-the-work-directory">2.3. Find the original output and logs in the <code>work/</code> directory<a class="headerlink" href="#23-find-the-original-output-and-logs-in-the-work-directory" title="Permanent link">&para;</a></h3>
-<p>When you run a workflow, Nextflow creates a distinct 'task directory' for every single invocation of each process in the workflow (=every step in the pipeline).
-For each one, it will stage the necessary inputs, execute the relevant instruction(s) and write outputs and log files within that one directory, which is named automatically using a hash in order to make it unique.</p>
-<p>All of these task directories will live under a directory called <code>work</code> within your current directory (where you're running the command).</p>
-<p>That may sound confusing, so let's see what that looks like in practice.</p>
-<p>Going back to the console output for the workflow we ran earlier, we had this line:</p>
+<h3 id="23-trouver-la-sortie-originale-et-les-logs-dans-le-repertoire-work">2.3. Trouver la sortie originale et les logs dans le répertoire <code>work/</code><a class="headerlink" href="#23-trouver-la-sortie-originale-et-les-logs-dans-le-repertoire-work" title="Permanent link">&para;</a></h3>
+<p>Lorsque vous exécutez un workflow, Nextflow crée un « répertoire de tâche » distinct pour chaque invocation de chaque process dans le workflow (= chaque étape du pipeline).
+Pour chacun, il va préparer les entrées nécessaires, exécuter l'instruction ou les instructions pertinentes et écrire les sorties et les fichiers de log dans ce seul répertoire, qui est nommé automatiquement en utilisant un hash afin de le rendre unique.</p>
+<p>Tous ces répertoires de tâches vivront sous un répertoire appelé <code>work</code> dans votre répertoire actuel (où vous exécutez la commande).</p>
+<p>Cela peut sembler confus, alors voyons à quoi cela ressemble en pratique.</p>
+<p>En revenant à la sortie console pour le workflow que nous avons exécuté plus tôt, nous avions cette ligne :</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="go">[a3/7be2fa] sayHello | 1 of 1 ✔</span>
 </code></pre></div>
-<p>See how the line starts with <code>[a3/7be2fa]</code>?
-That is a truncated form of the task directory path for that one process call, and tells you where to find the output of the <code>sayHello</code> process call within the <code>work/</code> directory path.</p>
-<p>You can find the full path by typing the following command (replacing <code>a3/7be2fa</code> with what you see in your own terminal) and pressing the tab key to autocomplete the path or adding an asterisk:</p>
+<p>Vous voyez comment la ligne commence par <code>[a3/7be2fa]</code> ?
+C'est une forme tronquée du chemin du répertoire de tâche pour cet appel de process, et vous indique où trouver la sortie de l'appel au process <code>sayHello</code> dans le chemin du répertoire <code>work/</code>.</p>
+<p>Vous pouvez trouver le chemin complet en tapant la commande suivante (en remplaçant <code>a3/7be2fa</code> par ce que vous voyez dans votre propre terminal) et en appuyant sur la touche tab pour compléter automatiquement le chemin ou en ajoutant un astérisque :</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>ls<span class="w"> </span>work/a3/7be2fa*
 </code></pre></div>
-<p>This should yield the full path directory path: <code>work/a3/7be2fa7be2fad5e71e5f49998f795677fd68</code></p>
-<p>Let's take a look at what's in there.</p>
+<p>Cela devrait donner le chemin complet du répertoire : <code>work/a3/7be2fa7be2fad5e71e5f49998f795677fd68</code></p>
+<p>Jetons un coup d'œil à ce qu'il y a dedans.</p>
 <details class="abstract">
-<summary>Directory contents</summary>
+<summary>Contenu du répertoire</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="go">work</span>
 <a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="go">└── a3</span>
 <a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="go">    └── 7be2fad5e71e5f49998f795677fd68</span>
@@ -4304,38 +4346,38 @@ That is a truncated form of the task directory path for that one process call, a
 </code></pre></div>
 </details>
 <details class="question">
-<summary>Don't see the same thing?</summary>
-<p>The exact subdirectory names will be different on your system.</p>
-<p>If you browse the contents of the task subdirectory in the VSCode file explorer, you'll see all the files right away.
-However, the log files are set to be invisible in the terminal, so if you want to use <code>ls</code> or <code>tree</code> to view them, you'll need to set the relevant option for displaying invisible files.</p>
+<summary>Vous ne voyez pas la même chose ?</summary>
+<p>Les noms exacts des sous-répertoires seront différents sur votre système.</p>
+<p>Si vous parcourez le contenu du sous-répertoire de tâche dans l'explorateur de fichiers VSCode, vous verrez tous les fichiers immédiatement.
+Cependant, les fichiers de log sont définis pour être invisibles dans le terminal, donc si vous voulez utiliser <code>ls</code> ou <code>tree</code> pour les voir, vous devrez définir l'option appropriée pour afficher les fichiers invisibles.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>tree<span class="w"> </span>-a<span class="w"> </span>work
 </code></pre></div>
 </details>
-<p>You should immediately recognize the <code>output.txt</code> file, which is in fact the original output of the <code>sayHello</code> process that got published to the <code>results</code> directory.
-If you open it, you will find the <code>Hello World!</code> greeting again.</p>
+<p>Vous devriez immédiatement reconnaître le fichier <code>output.txt</code>, qui est en fait la sortie originale du process <code>sayHello</code> qui a été publiée dans le répertoire <code>results</code>.
+Si vous l'ouvrez, vous retrouverez la salutation <code>Hello World!</code>.</p>
 <div class="highlight"><span class="filename">work/a3/7be2fa7be2fad5e71e5f49998f795677fd68/output.txt</span><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="go">Hello World!</span>
 </code></pre></div>
-<p>So what about all those other files?</p>
-<p>These are the helper and log files that Nextflow wrote as part of the task execution:</p>
+<p>Alors qu'en est-il de tous ces autres fichiers ?</p>
+<p>Ce sont les fichiers auxiliaires et de log que Nextflow a écrits dans le cadre de l'exécution de la tâche :</p>
 <ul>
-<li><strong><code>.command.begin</code></strong>: Sentinel file created as soon as the task is launched.</li>
-<li><strong><code>.command.err</code></strong>: Error messages (<code>stderr</code>) emitted by the process call</li>
-<li><strong><code>.command.log</code></strong>: Complete log output emitted by the process call</li>
-<li><strong><code>.command.out</code></strong>: Regular output (<code>stdout</code>) by the process call</li>
-<li><strong><code>.command.run</code></strong>: Full script run by Nextflow to execute the process call</li>
-<li><strong><code>.command.sh</code></strong>: The command that was actually run by the process call</li>
-<li><strong><code>.exitcode</code></strong>: The exit code resulting from the command</li>
+<li><strong><code>.command.begin</code></strong> : Fichier sentinelle créé dès que la tâche est lancée.</li>
+<li><strong><code>.command.err</code></strong> : Messages d'erreur (<code>stderr</code>) émis par l'appel du process</li>
+<li><strong><code>.command.log</code></strong> : Sortie de log complète émise par l'appel du process</li>
+<li><strong><code>.command.out</code></strong> : Sortie régulière (<code>stdout</code>) de l'appel du process</li>
+<li><strong><code>.command.run</code></strong> : Script complet exécuté par Nextflow pour exécuter l'appel du process</li>
+<li><strong><code>.command.sh</code></strong> : La commande qui a été réellement exécutée par l'appel du process</li>
+<li><strong><code>.exitcode</code></strong> : Le code de sortie résultant de la commande</li>
 </ul>
-<p>The <code>.command.sh</code> file is especially useful because it shows you the main command Nextflow executed, not including all the bookkeeping and task/environment setup.</p>
+<p>Le fichier <code>.command.sh</code> est particulièrement utile car il vous montre la commande principale que Nextflow a exécutée, sans inclure toute la comptabilité et la configuration de la tâche/environnement.</p>
 <div class="highlight"><span class="filename">work/a3/7be2fa7be2fad5e71e5f49998f795677fd68/command.sh</span><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="gp">#</span>!/bin/bash<span class="w"> </span>-ue
 <a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="go">echo &#39;Hello World!&#39; &gt; output.txt</span>
 </code></pre></div>
-<p>So this confirms that the workflow composed the same command we ran directly on the command-line earlier.</p>
-<p>When something goes wrong and you need to troubleshoot what happened, it can be useful to look at the <code>command.sh</code> script to check exactly what command Nextflow composed based on the workflow instructions, variable interpolation and so on.</p>
-<h3 id="24-re-run-the-workflow-with-different-greetings">2.4. Re-run the workflow with different greetings<a class="headerlink" href="#24-re-run-the-workflow-with-different-greetings" title="Permanent link">&para;</a></h3>
-<p>Try re-running the workflow a few times with different values for the <code>--input</code> argument, then look at the task directories.</p>
+<p>Cela confirme donc que le workflow a composé la même commande que nous avons exécutée directement sur la ligne de commande plus tôt.</p>
+<p>Lorsque quelque chose ne va pas et que vous devez résoudre ce qui s'est passé, il peut être utile de regarder le script <code>command.sh</code> pour vérifier exactement quelle commande Nextflow a composée en fonction des instructions du workflow, de l'interpolation de variables, etc.</p>
+<h3 id="24-re-executer-le-workflow-avec-differentes-salutations">2.4. Ré-exécuter le workflow avec différentes salutations<a class="headerlink" href="#24-re-executer-le-workflow-avec-differentes-salutations" title="Permanent link">&para;</a></h3>
+<p>Essayez de ré-exécuter le workflow quelques fois avec différentes valeurs pour l'argument <code>--input</code>, puis regardez les répertoires de tâches.</p>
 <details class="abstract">
-<summary>Directory contents</summary>
+<summary>Contenu du répertoire</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="go">work</span>
 <a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="go">├── 0f</span>
 <a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="go">│   └── 52b7e07b0e274a80843fca48ed21b8</span>
@@ -4388,29 +4430,29 @@ If you open it, you will find the <code>Hello World!</code> greeting again.</p>
 <a id="__codelineno-16-50" name="__codelineno-16-50" href="#__codelineno-16-50"></a><span class="go">        └── output.txt</span>
 </code></pre></div>
 </details>
-<p>You see that a new subdirectory with a complete set of output and log files has been created for each run.</p>
-<p>In contrast, if you look at the <code>results</code> directory, there is still only one set of results, and the content of the output file corresponds to whatever you ran last.</p>
+<p>Vous voyez qu'un nouveau sous-répertoire avec un ensemble complet de fichiers de sortie et de log a été créé pour chaque exécution.</p>
+<p>En revanche, si vous regardez le répertoire <code>results</code>, il n'y a toujours qu'un seul ensemble de résultats, et le contenu du fichier de sortie correspond à ce que vous avez exécuté en dernier.</p>
 <details class="abstract">
-<summary>Directory contents</summary>
+<summary>Contenu du répertoire</summary>
 <div class="highlight"><span class="filename">results/</span><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="go">results</span>
 <a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="go">└── 1-hello</span>
 <a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="go">    └── output.txt</span>
 </code></pre></div>
 </details>
-<p>This shows you that the published results will get overwritten by subsequent executions, whereas the task directories under <code>work/</code> are preserved.</p>
-<h3 id="takeaway_1">Takeaway<a class="headerlink" href="#takeaway_1" title="Permanent link">&para;</a></h3>
-<p>You know how to run a simple Nextflow script, monitor its execution and find its outputs.</p>
-<h3 id="whats-next_1">What's next?<a class="headerlink" href="#whats-next_1" title="Permanent link">&para;</a></h3>
-<p>Learn how to read a basic Nextflow script and identify how its components relate to its functionality.</p>
+<p>Cela vous montre que les résultats publiés seront écrasés par les exécutions suivantes, alors que les répertoires de tâches sous <code>work/</code> sont préservés.</p>
+<h3 id="recapitulatif_1">Récapitulatif<a class="headerlink" href="#recapitulatif_1" title="Permanent link">&para;</a></h3>
+<p>Vous savez comment exécuter un script Nextflow simple, surveiller son exécution et trouver ses sorties.</p>
+<h3 id="et-ensuite_1">Et ensuite ?<a class="headerlink" href="#et-ensuite_1" title="Permanent link">&para;</a></h3>
+<p>Apprenez à lire un script Nextflow basique et à identifier comment ses composants sont liés à sa fonctionnalité.</p>
 <hr />
-<h2 id="3-examine-the-hello-world-workflow-starter-script">3. Examine the Hello World workflow starter script<a class="headerlink" href="#3-examine-the-hello-world-workflow-starter-script" title="Permanent link">&para;</a></h2>
-<p>What we did there was basically treating the workflow script like a black box.
-Now that we've seen what it does, let's open the box and look inside.</p>
-<p>Our goal here is not to memorize the syntax of Nextflow code, but to form some basic intuition of what are the main components and how they are organized.</p>
-<h3 id="31-examine-the-overall-code-structure">3.1. Examine the overall code structure<a class="headerlink" href="#31-examine-the-overall-code-structure" title="Permanent link">&para;</a></h3>
-<p>You'll find the <code>1-hello.nf</code> script in your current directory, which should be <code>nextflow-run</code>. Open it in the editor pane.</p>
+<h2 id="3-examiner-le-script-de-demarrage-du-workflow-hello-world">3. Examiner le script de démarrage du workflow Hello World<a class="headerlink" href="#3-examiner-le-script-de-demarrage-du-workflow-hello-world" title="Permanent link">&para;</a></h2>
+<p>Ce que nous avons fait là-bas était essentiellement de traiter le script de workflow comme une boîte noire.
+Maintenant que nous avons vu ce qu'il fait, ouvrons la boîte et regardons à l'intérieur.</p>
+<p>Notre objectif ici n'est pas de mémoriser la syntaxe du code Nextflow, mais de former une intuition de base sur les principaux composants et comment ils sont organisés.</p>
+<h3 id="31-examiner-la-structure-globale-du-code">3.1. Examiner la structure globale du code<a class="headerlink" href="#31-examiner-la-structure-globale-du-code" title="Permanent link">&para;</a></h3>
+<p>Vous trouverez le script <code>1-hello.nf</code> dans votre répertoire actuel, qui devrait être <code>nextflow-run</code>. Ouvrez-le dans le panneau de l'éditeur.</p>
 <details class="full-code">
-<summary>Full code file</summary>
+<summary>Fichier de code complet</summary>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">1-hello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-18-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-18-3"> 3</a></span>
@@ -4455,7 +4497,7 @@ Now that we've seen what it does, let's open the box and look inside.</p>
 <span class="normal"><a href="#__codelineno-18-42">42</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
 <a id="__codelineno-18-2" name="__codelineno-18-2"></a>
 <a id="__codelineno-18-3" name="__codelineno-18-3"></a><span class="cm">/*</span>
-<a id="__codelineno-18-4" name="__codelineno-18-4"></a><span class="cm">* Use echo to print &#39;Hello World!&#39; to a file</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4"></a><span class="cm">* Utilise echo pour imprimer &#39;Hello World!&#39; dans un fichier</span>
 <a id="__codelineno-18-5" name="__codelineno-18-5"></a><span class="cm">*/</span>
 <a id="__codelineno-18-6" name="__codelineno-18-6"></a><span class="n">process</span><span class="w"> </span><span class="n">sayHello</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-18-7" name="__codelineno-18-7"></a>
@@ -4472,7 +4514,7 @@ Now that we've seen what it does, let's open the box and look inside.</p>
 <a id="__codelineno-18-18" name="__codelineno-18-18"></a><span class="o">}</span>
 <a id="__codelineno-18-19" name="__codelineno-18-19"></a>
 <a id="__codelineno-18-20" name="__codelineno-18-20"></a><span class="cm">/*</span>
-<a id="__codelineno-18-21" name="__codelineno-18-21"></a><span class="cm">* Pipeline parameters</span>
+<a id="__codelineno-18-21" name="__codelineno-18-21"></a><span class="cm">* Paramètres du pipeline</span>
 <a id="__codelineno-18-22" name="__codelineno-18-22"></a><span class="cm">*/</span>
 <a id="__codelineno-18-23" name="__codelineno-18-23"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-18-24" name="__codelineno-18-24"></a><span class="w">    </span><span class="nl">input:</span><span class="w"> </span><span class="n">String</span>
@@ -4481,7 +4523,7 @@ Now that we've seen what it does, let's open the box and look inside.</p>
 <a id="__codelineno-18-27" name="__codelineno-18-27"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-18-28" name="__codelineno-18-28"></a>
 <a id="__codelineno-18-29" name="__codelineno-18-29"></a><span class="w">    </span><span class="nl">main:</span>
-<a id="__codelineno-18-30" name="__codelineno-18-30"></a><span class="w">    </span><span class="c1">// emit a greeting</span>
+<a id="__codelineno-18-30" name="__codelineno-18-30"></a><span class="w">    </span><span class="c1">// émettre une salutation</span>
 <a id="__codelineno-18-31" name="__codelineno-18-31"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
 <a id="__codelineno-18-32" name="__codelineno-18-32"></a>
 <a id="__codelineno-18-33" name="__codelineno-18-33"></a><span class="w">    </span><span class="nl">publish:</span>
@@ -4496,13 +4538,13 @@ Now that we've seen what it does, let's open the box and look inside.</p>
 <a id="__codelineno-18-42" name="__codelineno-18-42"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </details>
-<p>A Nextflow workflow script typically includes one or more <strong>process</strong> definitions, the <strong>workflow</strong> itself, and a few optional blocks such as <strong>params</strong> and <strong>output</strong>.</p>
-<p>Each <strong>process</strong> describes what operation(s) the corresponding step in the pipeline should accomplish, while the <strong>workflow</strong> describes the dataflow logic that connects the various steps.</p>
-<p>Let's take a closer look at the <strong>process</strong> block first, then we'll look at the <strong>workflow</strong> block.</p>
-<h3 id="32-the-process-definition">3.2. The <code>process</code> definition<a class="headerlink" href="#32-the-process-definition" title="Permanent link">&para;</a></h3>
-<p>The first block of code describes a <strong>process</strong>.
-The process definition starts with the keyword <code>process</code>, followed by the process name and finally the process body delimited by curly braces.
-The process body must contain a script block which specifies the command to run, which can be anything you would be able to run in a command line terminal.</p>
+<p>Un script de workflow Nextflow inclut généralement une ou plusieurs définitions de <strong>process</strong>, le <strong>workflow</strong> lui-même, et quelques blocs optionnels tels que <strong>params</strong> et <strong>output</strong>.</p>
+<p>Chaque <strong>process</strong> décrit quelle(s) opération(s) l'étape correspondante dans le pipeline doit accomplir, tandis que le <strong>workflow</strong> décrit la logique de flux de données qui connecte les différentes étapes.</p>
+<p>Examinons de plus près le bloc <strong>process</strong> d'abord, puis nous regarderons le bloc <strong>workflow</strong>.</p>
+<h3 id="32-la-definition-du-process">3.2. La définition du <code>process</code><a class="headerlink" href="#32-la-definition-du-process" title="Permanent link">&para;</a></h3>
+<p>Le premier bloc de code décrit un <strong>process</strong>.
+La définition du process commence par le mot-clé <code>process</code>, suivi du nom du process et enfin le corps du process délimité par des accolades.
+Le corps du process doit contenir un bloc script qui spécifie la commande à exécuter, qui peut être n'importe quoi que vous pourriez exécuter dans un terminal de ligne de commande.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">1-hello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-3"> 3</a></span>
 <span class="normal"><a href="#__codelineno-19-4"> 4</a></span>
 <span class="normal"><a href="#__codelineno-19-5"> 5</a></span>
@@ -4519,7 +4561,7 @@ The process body must contain a script block which specifies the command to run,
 <span class="normal"><a href="#__codelineno-19-16">16</a></span>
 <span class="normal"><a href="#__codelineno-19-17">17</a></span>
 <span class="normal"><a href="#__codelineno-19-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-19-3" name="__codelineno-19-3"></a><span class="cm">/*</span>
-<a id="__codelineno-19-4" name="__codelineno-19-4"></a><span class="cm">* Use echo to print a greeting to a file</span>
+<a id="__codelineno-19-4" name="__codelineno-19-4"></a><span class="cm">* Utilise echo pour imprimer une salutation dans un fichier</span>
 <a id="__codelineno-19-5" name="__codelineno-19-5"></a><span class="cm">*/</span>
 <a id="__codelineno-19-6" name="__codelineno-19-6"></a><span class="n">process</span><span class="w"> </span><span class="n">sayHello</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-19-7" name="__codelineno-19-7"></a>
@@ -4535,22 +4577,18 @@ The process body must contain a script block which specifies the command to run,
 <a id="__codelineno-19-17" name="__codelineno-19-17"></a><span class="s2">    &quot;&quot;&quot;</span>
 <a id="__codelineno-19-18" name="__codelineno-19-18"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>Here we have a <strong>process</strong> called <code>sayHello</code> that takes an <strong>input</strong> variable called <code>greeting</code> and writes its <strong>output</strong> to a file named <code>output.txt</code>.</p>
+<p>Ici, nous avons un <strong>process</strong> appelé <code>sayHello</code> qui prend une variable d'<strong>entrée</strong> appelée <code>greeting</code> et écrit sa <strong>sortie</strong> dans un fichier nommé <code>output.txt</code>.</p>
 <figure class="excalidraw">
-<?xml version="1.0" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 896.1310767385465 155.27090283070174" width="896.1310767385465" height="155.27090283070174"><!-- svg-source:excalidraw --><metadata></metadata><defs><style class="style-fonts">
-      @font-face { font-family: Excalifont; src: url(data:font/woff2;base64,d09GMgABAAAAAAvUAA4AAAAAFCgAAAuCAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGhwbhC4cNAZgAHwRCAqaMJNFCygAATYCJANMBCAFgxgHIBukD6OipPG1yf4igTejdVqAyaR1wYMGySDfySNh8X20WPDPsliWCFMbbsGmH/ibvY8AbNe6GsQ4VZvv3GAcCIx/vr/RefeXShxYM2ESLOwK7/y3WUKPofUPPwzTyVp0d1ZckYqeeu7hBle4fgkQ2wTJeCWZFZN++K8NMFJSv/8BwvFa/X5qA+zQA7sIHTY+xr28wM6FHKH6LiARWtY1rkahAnJRBefrTZ2s0DXCdB3O0Tzwe7lY50zE3AABQBcDUC7FzQRcyHsBUHmKhJ+6+BSQvg2VxSD9VOYUgfQ3vLoUpHAAMHsUvjmVViLHAjgL6HQikpgMsniILRwgN+KOggX6znssC7v73kIueB09/El9N9N4fs71PU6f51DTdzThmLX1uREEKotEDChzcGtrEMVBQ0VgRQRmAfNFuJ8iHYmDwkAi5pM5gsCIKAhUiXrX8GzDIIFWlvdZjLZE6bzdIh/ExVIssyDhCKxaEmDI80REkUV6itGbty9bESR6S5TuLAWZiIDc6DIAIO5zGeQBb79hOOJKzaVPhIOg0LBq/7sIrz6kVgGwwBP948kqeiHLK/gvQj5aXH5RiG15GJGSO4N0w+UoVq5GQ76yCidxtqlMJejuu3K5O5YkIh0tIT8RsIz0SbsMwAOxvUjshg8UAU/URKL1aWQ64q8E7Mfxi28+//qXP7eAvZ/XQVmdanyx7eCPZ348ZSV9LeQDrbtlqUTRA3ZhOFem+FfyBb/YUls6m5wEvTVId5XlVZ1HO7wZHwCf/ZEsimLIp+Yk74aMizYTmqZ7V+yvDiVvQbBV24gqSakL5/Y8U7GPZX/n8PeHZpBP5DpAyAfZ3qgyq/VL4iIkIZ2DkA6gMxBFpyM6S9W07tsAsZZqY8l7Vn62LYUUctOxb4yn7eLuj3/SRkKz12IAX/VbACEEjKihEBFqHdOZ6ohkSgzvlen0J3hlW/VlGUNIN3At1EIYSp4sY0GYKwizJKotbfi3NLC2bFE8zaFQo5JXxqott9b9VZzXGUBs/n6xWUMVoiQNZXbVhEOAPqwhFBlR3iAkIIEDu/zeHgrvSZ6BYwzkWMYGzuQFWUYIRNsJIYGiBCZjpld9deBRyekqEVsTvZ5fN5yeMdwGUYJcEzk3xpkKS1aJDsIuDLkYVvEN2V+p23qTFQXVy1/IZB+gglu5a95fw04+Nlt3JA9yCyWF/Ciz+vwIt2AqP8lWXmVHo4J7utIUrmYnxmeq6YlUFW5vXcO2MzO3Ygnj2POk9J4Wnq6414e1ouEqZLET9MUBL/X5qlDy6jaWDSz0GBP8rN1WMUDG0+Wbi1MWceAt65bkZYeyjUxHo+ip5XFeIkFAZpW84IIIoCG4XkTNtoAX5Ph7hAghSm46ucO7XBv8dyaVvHJmfNBb7Pgo31+wmcAMvzj80dvAzdmnR6/r/q4b2+If/91z78SzXTOCDYYFN1EKo1ptHqB50FOxj5oIoIJ7d8LsmB0trNJYxliwDYuG8Mk+PB7HzySvSkMlyZXcJLOB0tlzgVte7GHYj9yuuY/RKIoAaso3snom2PrjfPfy78sN8k9Hy1eHU4FyK7kjpe0+kHThnmsnoDi3bUbFmVxOn6Xbto0nhyAaMeBuBXbLl+1pHFcpAPp/VVimWFV7YH74+iQa/e4miUIC0iF9kel0r1lyVwn6ARepKJLVdA7SsVTQrwPzQm8ax1jy1nKr1IVU8iSKY3lm0gYtO/u2XUMGqixqIt1Dz1CukWBWeTgh0rWersZYruOsjiVIeZXO0RR1VYqvFGwfgeEapiPZwGUcs14f2GtIlNTOf0WIW4iGtwF6D6L/XWVRFJeskJfus4LbuGkGzoBrXcmTZ4qo1jP8O2WazoVLMOQaDSmFqeTVZw7qqCkgBlpsI0KoWWwyX9XSy93M8aemrW1K58oLEaErf01skNE6bOsYXTmCj9oGk2R1koopox3PJ5ywuU6d5ry4k9Mu/Z1BRKWKSKBy9Si5EOfmEmaxSDGhsgk8sTXk3hIlW8aXyxZIeGmSjFxnGKNun1+iFMYhDVnP7aeYaEOHHoGNaZ0UsxobZowmNKrO6qh8MjHyYlVEvkrQSch3EZvr2cpB4RketEwkCT2I8Zayv0uKK8lMit7OFtEgjJ1ccrQAfrnLWzCDyGNggVkVkC0RrjmBYGh6mQwxMSlamZOJV71ZAdNp6vAxRp5NQAGeIxxcYOvy3arR+P76ziz2k5h9dYphq43qbk9d8o70cQsmibljzuzvz8mL96ylfnwZof/54qjKNJOBIj4IER7/gwJGtR/ZcVLuwfEOEoNMF2joHxdAeXLx+5F0q0XTNNJ+eCI+wjMwNn7c+zNn4DDxSZTYflzhTVOqwBlx1u5yzVZOMrBMJE7B7MCzgwaOFyWKlAPF45gm/A8Q1lpX6o6ofFcJoxxiKlKiB3NuIM05Bqye5BuL+0zJ2FKOF0hhOdfr1O31v4iWMBLF1NWYSH8U6xiOkbAGEtFTmJ3IZQ9BQ3d+TJLN8AWzml6k6pegihzukS6XRcbavvEj8UveS0pLWXrjkRO+S8u32Yl+pLuGTRMsQvWUlBwfcEg7qsotDLfEiz9nHaywRNjjlkxMKPApvn+KucIa38XrOHEnplKt5D/uNQstJjzaSdN/wOs6QtW3KKoNmvzUZ3yFgH/GO28RdPBEJ+4jLWIGiUo7KUVp510bhPJ+aBsB01MZboxdpGlGBNMqNixhNJ6Au7hzwX7jH7yg0LlgfZTjzIjYkREnfHTrIkpa5N9yyj0VcY5pQmOgjha1MA9Rpri79ju2m5MySUN2cKEh1JKPm4tgbmV5+e20fRwHPXUFGXKlSNIgiqbt4ymelkGaUmPrafhHb31fGq68neQ7D6egvXakwuDsybP8p+8PlQmMBl3KevV3WhxrQQuzESb0n8LU8AmblHSRj5KBLFkoWjZ2YOdQPoEiHWfg01fqW0ZReerRUClkjA0KWfboUhgTM2JCVANRWt41daD3G5ulmyJp8tNT/Grd5idEp0qj/HTWyzJiyYtBqmQCaod98tqiqTUIknoIlo9ba/7cuNrz48OW1E8ZAdFDHpM4FXatrcAPvDRQfXm7mtZkzzekxRy+SbHZZL3zMCaIl0E/GJi3M1+41N0BK89Ve93eFHVp2RroGP5Dx94kGqxjBVJNG6T/c3w9v5i3RHVr6wqa9XgNf/3BS/cskcOaAhLMFYpWuE0nkoKjRr1syxEnoeFNDf0USzf3+vmsnCRGtLRUBtH9O0/p1aHHFO6oSh3skXTB6niEYrM3Nlce6xh4bh0Jw4ctYdp5uNgH4mEM/ee/3EwwhC0yzS7CC+I6TbnRgVMzP+WkPZziJqxLI+MVU9gj14QmD4/EFlYnRQfFTJveIrjG5iQptFx/BEOdNctyB4ZFagVCQyCnQWG96vPbVfrroKVz6oTM6NdsKio8NjomVXzHA+5XKaap7ehDgsavDZt8+aYuyE6SdU02sDhqONUganfk/GjXE10+YsOYrvqLjbMe3kj/G2R6kIdrQsclN4vlyoTG8Arf9wWvXLwxfJ13QDAlPCl14ylC3rEvq808lBV6soS9BAB41OCsAQB4vPhNU1/3/yb8NR4EgAwNwbemuZ2rUP37O3+jeB1vWUE7EwFyUE8VvZUrujAuiyu0SLBvMDglIfMIfMsAT7ouYObyqh/HnCCpqN8ErLi8Y7by3AAiS1+C1CAS3kkyAAbZKABQ7DKQHcG3345i2mjHOOu141SsdoJwKhD52wG06mUZrliBXGVKVXOTJEeeGsWOQqU0OS9UKRnvV/DizlMWQ+jV3Q3K5atyFPvA+wNHIfa+OIBT7F4Us7F1aiTTS4TFoWb5YiViPsVyDQoU+KL8lODoA06fojfPB3wvsCp3FWGR7VsYro47R5QFxWwqPFUZkPMR56CW92Vzh8FIff8RAA==); }</style></defs><rect x="0" y="0" width="896.1310767385465" height="155.27090283070174" fill="#ffffff"></rect><g stroke-linecap="round" transform="translate(272.5221226706244 10) rotate(0 109.333984375 41.830078125)"><path d="M20.92 0 C61.38 -1.66, 97.51 -0.4, 197.75 0 C208.18 2.6, 216.56 6.78, 218.67 20.92 C221.4 32.75, 217.62 42.92, 218.67 62.75 C216.35 76.4, 212.45 82.11, 197.75 83.66 C129.89 84.43, 59.59 79.6, 20.92 83.66 C3.59 82.34, 0.34 77.14, 0 62.75 C-1.83 56.98, 1.76 41.54, 0 20.92 C0.6 8.49, 6.44 -0.87, 20.92 0" stroke="none" stroke-width="0" fill="#ffec99"></path><path d="M20.92 0 C76.76 2.71, 135.89 0.77, 197.75 0 M20.92 0 C73.22 1.56, 127.53 1.41, 197.75 0 M197.75 0 C210.28 1.54, 218.05 5.3, 218.67 20.92 M197.75 0 C211.6 1.44, 219.07 4.78, 218.67 20.92 M218.67 20.92 C219.28 37.45, 219.05 51.82, 218.67 62.75 M218.67 20.92 C219.15 29.75, 218.04 38.78, 218.67 62.75 M218.67 62.75 C217.21 77.94, 211.17 84.82, 197.75 83.66 M218.67 62.75 C220.6 78.38, 212.13 84.32, 197.75 83.66 M197.75 83.66 C128.76 82.41, 61.92 84.21, 20.92 83.66 M197.75 83.66 C129.27 84.31, 61.35 83.67, 20.92 83.66 M20.92 83.66 C8.9 83.38, 0.9 76.97, 0 62.75 M20.92 83.66 C6.24 84.48, 2.11 76.4, 0 62.75 M0 62.75 C0.7 53.46, -0.78 43.74, 0 20.92 M0 62.75 C0.11 47.82, -0.04 32.64, 0 20.92 M0 20.92 C-1.7 7.33, 7.4 0.52, 20.92 0 M0 20.92 C1.97 7.5, 4.9 1.17, 20.92 0" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(328.53014116427676 34.330078125) rotate(0 53.325965881347656 17.5)"><text x="53.325965881347656" y="24.668" font-family="Excalifont, Xiaolai, sans-serif, Segoe UI Emoji" font-size="28px" fill="#1e1e1e" text-anchor="middle" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">sayHello</text></g><g stroke-linecap="round" transform="translate(613.9875537836924 10.234496769468933) rotate(0 111.85377038122097 41.830078125)"><path d="M20.92 0 C55.27 4.46, 94.56 1.66, 202.79 0 C214.94 -3.49, 226.75 10.44, 223.71 20.92 C221.32 34.76, 224.4 47.64, 223.71 62.75 C227.1 78.3, 215.69 85.52, 202.79 83.66 C136.26 79.49, 76.83 81.26, 20.92 83.66 C4.04 80.25, 0.65 74.15, 0 62.75 C0.38 47.8, -0.75 28.94, 0 20.92 C-2.83 6.3, 4 2.13, 20.92 0" stroke="none" stroke-width="0" fill="#a5d8ff"></path><path d="M20.92 0 C88.05 1.91, 153.63 -0.9, 202.79 0 M20.92 0 C78.21 0.71, 136.61 -0.89, 202.79 0 M202.79 0 C216.65 1.25, 224.05 5.06, 223.71 20.92 M202.79 0 C217.84 1.64, 221.89 7.33, 223.71 20.92 M223.71 20.92 C221.8 38.68, 223.11 54.79, 223.71 62.75 M223.71 20.92 C222.62 35.37, 223.09 49.16, 223.71 62.75 M223.71 62.75 C225.39 78.16, 217.11 84.23, 202.79 83.66 M223.71 62.75 C225.58 75.37, 215.17 81.92, 202.79 83.66 M202.79 83.66 C150.37 85.33, 94.67 84.35, 20.92 83.66 M202.79 83.66 C139.25 83.34, 74.22 83.62, 20.92 83.66 M20.92 83.66 C6.34 84.37, 1.84 76.44, 0 62.75 M20.92 83.66 C5.16 82.94, 1.26 77.34, 0 62.75 M0 62.75 C1.38 49.02, -0.42 37.49, 0 20.92 M0 62.75 C-0.73 49.93, 0.34 37, 0 20.92 M0 20.92 C1.72 7.44, 5.17 1.02, 20.92 0 M0 20.92 C-1.98 6.39, 5.79 1.7, 20.92 0" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(651.5013583446009 34.56457489446893) rotate(0 74.3399658203125 17.5)"><text x="74.3399658203125" y="24.668" font-family="Excalifont, Xiaolai, sans-serif, Segoe UI Emoji" font-size="28px" fill="#1e1e1e" text-anchor="middle" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">output.txt</text></g><g stroke-linecap="round"><g transform="translate(181.15862082609556 49.51836933287359) rotate(0 34.83581223040824 0.4487340277877365)"><path d="M-0.84 0.23 C10.77 0.39, 58.88 -0.08, 70.51 0.04 M0.92 -0.7 C12.36 -0.25, 58.2 1.64, 69.95 1.6" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(181.15862082609556 49.51836933287359) rotate(0 34.83581223040824 0.4487340277877365)"><path d="M46.27 9.63 C55.48 8.04, 63.94 2.43, 69.95 1.6 M46.27 9.63 C55.18 7.43, 64.32 2.82, 69.95 1.6" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(181.15862082609556 49.51836933287359) rotate(0 34.83581223040824 0.4487340277877365)"><path d="M46.65 -7.47 C55.59 -2.73, 63.9 -2, 69.95 1.6 M46.65 -7.47 C55.36 -3.23, 64.36 -1.4, 69.95 1.6" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(515.8021711061217 55.357244498881414) rotate(0 36.71671059607485 -0.5825224357699881)"><path d="M-1.17 0.22 C11.1 -0.12, 60.24 -1.27, 72.51 -1.38 M0.42 -0.72 C13.14 -0.97, 62.21 -0.49, 74.6 -0.21" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(515.8021711061217 55.357244498881414) rotate(0 36.71671059607485 -0.5825224357699881)"><path d="M50.99 7.99 C56.16 4.56, 59.5 2.85, 74.6 -0.21 M50.99 7.99 C59.49 5.69, 65.41 1.99, 74.6 -0.21" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(515.8021711061217 55.357244498881414) rotate(0 36.71671059607485 -0.5825224357699881)"><path d="M51.24 -9.11 C56.45 -9.03, 59.74 -7.22, 74.6 -0.21 M51.24 -9.11 C59.69 -5.95, 65.53 -4.19, 74.6 -0.21" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g></g><mask></mask><g transform="translate(10 35.64741244162815) rotate(0 112.18339341245104 14.894153847268399)"><text x="0" y="20.994799263109506" font-family="Excalifont, Xiaolai, sans-serif, Segoe UI Emoji" font-size="23.830646155629402px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">"Hello World!"</text></g><g transform="translate(661.7642899136445 115.48259513616495) rotate(0 112.18339341245105 14.894153847268399)"><text x="0" y="20.994799263109506" font-family="Excalifont, Xiaolai, sans-serif, Segoe UI Emoji" font-size="23.830646155629402px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">Hello World!</text></g></svg>
 </figure>
 
-<p>This is a very minimal process definition that just contains an <code>input</code> definition, an <code>output</code> definition and the <code>script</code> to execute.</p>
-<p>The <code>input</code> definition includes the <code>val</code> qualifier, which tells Nextflow to expect a value of some kind (can be a string, a number, whatever).</p>
-<p>The <code>output</code> definition includes the <code>path</code> qualifier, which tells Nextflow this should be handled as a path (includes both directory paths and files).</p>
-<h3 id="33-the-workflow-definition">3.3. The <code>workflow</code> definition<a class="headerlink" href="#33-the-workflow-definition" title="Permanent link">&para;</a></h3>
-<p>The second block of code describes the <strong>workflow</strong> itself.
-The workflow definition starts with the keyword <code>workflow</code>, followed by an optional name, then the workflow body delimited by curly braces.</p>
-<p>Here we have a <strong>workflow</strong> that consists of a <code>main:</code> block and a <code>publish:</code> block.
-The <code>main:</code> block is the main body of the workflow and the <code>publish:</code> block lists the outputs that should be published to the <code>results</code> directory.</p>
+<p>C'est une définition de process très minimale qui contient juste une définition d'<code>input</code>, une définition d'<code>output</code> et le <code>script</code> à exécuter.</p>
+<p>La définition d'<code>input</code> inclut le qualificateur <code>val</code>, qui indique à Nextflow d'attendre une valeur de quelque type que ce soit (peut être une chaîne, un nombre, peu importe).</p>
+<p>La définition d'<code>output</code> inclut le qualificateur <code>path</code>, qui indique à Nextflow que cela doit être traité comme un chemin (inclut à la fois les chemins de répertoires et les fichiers).</p>
+<h3 id="33-la-definition-du-workflow">3.3. La définition du <code>workflow</code><a class="headerlink" href="#33-la-definition-du-workflow" title="Permanent link">&para;</a></h3>
+<p>Le deuxième bloc de code décrit le <strong>workflow</strong> lui-même.
+La définition du workflow commence par le mot-clé <code>workflow</code>, suivi d'un nom optionnel, puis le corps du workflow délimité par des accolades.</p>
+<p>Ici, nous avons un <strong>workflow</strong> qui consiste en un bloc <code>main:</code> et un bloc <code>publish:</code>.
+Le bloc <code>main:</code> est le corps principal du workflow et le bloc <code>publish:</code> liste les sorties qui doivent être publiées dans le répertoire <code>results</code>.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">1-hello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-27">27</a></span>
 <span class="normal"><a href="#__codelineno-20-28">28</a></span>
 <span class="normal"><a href="#__codelineno-20-29">29</a></span>
@@ -4562,46 +4600,46 @@ The <code>main:</code> block is the main body of the workflow and the <code>publ
 <span class="normal"><a href="#__codelineno-20-35">35</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-20-27" name="__codelineno-20-27"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-20-28" name="__codelineno-20-28"></a>
 <a id="__codelineno-20-29" name="__codelineno-20-29"></a><span class="w">    </span><span class="nl">main:</span>
-<a id="__codelineno-20-30" name="__codelineno-20-30"></a><span class="w">    </span><span class="c1">// emit a greeting</span>
+<a id="__codelineno-20-30" name="__codelineno-20-30"></a><span class="w">    </span><span class="c1">// émettre une salutation</span>
 <a id="__codelineno-20-31" name="__codelineno-20-31"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
 <a id="__codelineno-20-32" name="__codelineno-20-32"></a>
 <a id="__codelineno-20-33" name="__codelineno-20-33"></a><span class="w">    </span><span class="nl">publish:</span>
 <a id="__codelineno-20-34" name="__codelineno-20-34"></a><span class="w">    </span><span class="n">first_output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sayHello</span><span class="o">.</span><span class="na">out</span>
 <a id="__codelineno-20-35" name="__codelineno-20-35"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>In this case the <code>main:</code> block contains a call to the <code>sayHello</code> process and gives it an input called <code>params.input</code> to use as the greeting.</p>
-<p>As we'll discuss in more detail in a moment, <code>params.input</code> holds the value we gave to the <code>--input</code> parameter in our command line.</p>
-<p>The <code>publish:</code> block lists the output of the <code>sayHello()</code> process call, which it refers to as <code>sayHello.out</code> and gives the name <code>first_output</code> (this can be anything the workflow author wants).</p>
-<p>This is a very minimal <strong>workflow</strong> definition.
-In a real-world pipeline, the workflow typically contains multiple calls to <strong>processes</strong> connected by <strong>channels</strong>, and there may be default values set up for the variable inputs.</p>
-<p>We'll get into that in Part 2 of the course.
-For now, let's take a closer look at how our workflow is handling inputs and outputs.</p>
-<h3 id="34-the-params-system-of-command-line-parameters">3.4. The <code>params</code> system of command-line parameters<a class="headerlink" href="#34-the-params-system-of-command-line-parameters" title="Permanent link">&para;</a></h3>
-<p>The <code>params.input</code> we provide to the <code>sayHello()</code> process call is a neat bit of Nextflow code and is worth spending an extra minute on.</p>
-<p>As mentioned above, that's how we pass the value of the <code>--input</code> command-line parameter to the <code>sayHello()</code> process call.
-In fact, simply declaring <code>params.someParameterName</code> is enough to give the workflow a parameter named <code>--someParameterName</code> from the command-line.</p>
-<p>Here we've formalized that parameter declaration by setting up a <code>params</code> block that specifies the type of input the workflow expects (Nextflow 25.10.2 and later).</p>
+<p>Dans ce cas, le bloc <code>main:</code> contient un appel au process <code>sayHello</code> et lui donne une entrée appelée <code>params.input</code> à utiliser comme salutation.</p>
+<p>Comme nous le discuterons plus en détail dans un moment, <code>params.input</code> contient la valeur que nous avons donnée au paramètre <code>--input</code> dans notre ligne de commande.</p>
+<p>Le bloc <code>publish:</code> liste la sortie de l'appel au process <code>sayHello()</code>, qu'il désigne comme <code>sayHello.out</code> et lui donne le nom <code>first_output</code> (cela peut être n'importe quoi que l'auteur du workflow souhaite).</p>
+<p>C'est une définition de <strong>workflow</strong> très minimale.
+Dans un pipeline réel, le workflow contient généralement plusieurs appels à des <strong>processes</strong> connectés par des <strong>channels</strong>, et il peut y avoir des valeurs par défaut configurées pour les entrées variables.</p>
+<p>Nous aborderons cela dans la Partie 2 de la formation.
+Pour l'instant, examinons de plus près comment notre workflow gère les entrées et les sorties.</p>
+<h3 id="34-le-systeme-params-de-parametres-de-ligne-de-commande">3.4. Le système <code>params</code> de paramètres de ligne de commande<a class="headerlink" href="#34-le-systeme-params-de-parametres-de-ligne-de-commande" title="Permanent link">&para;</a></h3>
+<p>Le <code>params.input</code> que nous fournissons à l'appel du process <code>sayHello()</code> est un morceau de code Nextflow intéressant qui mérite qu'on s'y attarde une minute supplémentaire.</p>
+<p>Comme mentionné ci-dessus, c'est ainsi que nous passons la valeur du paramètre de ligne de commande <code>--input</code> à l'appel du process <code>sayHello()</code>.
+En fait, simplement déclarer <code>params.someParameterName</code> est suffisant pour donner au workflow un paramètre nommé <code>--someParameterName</code> depuis la ligne de commande.</p>
+<p>Ici, nous avons formalisé cette déclaration de paramètre en configurant un bloc <code>params</code> qui spécifie le type d'entrée que le workflow attend (Nextflow 25.10.2 et ultérieur).</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">1-hello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-20">20</a></span>
 <span class="normal"><a href="#__codelineno-21-21">21</a></span>
 <span class="normal"><a href="#__codelineno-21-22">22</a></span>
 <span class="normal"><a href="#__codelineno-21-23">23</a></span>
 <span class="normal"><a href="#__codelineno-21-24">24</a></span>
 <span class="normal"><a href="#__codelineno-21-25">25</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-21-20" name="__codelineno-21-20"></a><span class="cm">/*</span>
-<a id="__codelineno-21-21" name="__codelineno-21-21"></a><span class="cm"> * Pipeline parameters</span>
+<a id="__codelineno-21-21" name="__codelineno-21-21"></a><span class="cm"> * Paramètres du pipeline</span>
 <a id="__codelineno-21-22" name="__codelineno-21-22"></a><span class="cm"> */</span>
 <a id="__codelineno-21-23" name="__codelineno-21-23"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-21-24" name="__codelineno-21-24"></a><span class="w">    </span><span class="nl">input:</span><span class="w"> </span><span class="n">String</span>
 <a id="__codelineno-21-25" name="__codelineno-21-25"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>Supported types include <code>String</code>, <code>Integer</code>, <code>Float</code>, <code>Boolean</code>, and <code>Path</code>.</p>
+<p>Les types pris en charge incluent <code>String</code>, <code>Integer</code>, <code>Float</code>, <code>Boolean</code> et <code>Path</code>.</p>
 <div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>Workflow parameters declared using the <code>params</code> system always take two dashes on the command line (<code>--</code>).
-This distinguishes them from Nextflow-level parameters, which only take one dash (<code>-</code>).</p>
+<p class="admonition-title">Astuce</p>
+<p>Les paramètres de workflow déclarés en utilisant le système <code>params</code> prennent toujours deux tirets sur la ligne de commande (<code>--</code>).
+Cela les distingue des paramètres de niveau Nextflow, qui ne prennent qu'un seul tiret (<code>-</code>).</p>
 </div>
-<h3 id="35-the-publish-directive">3.5. The <code>publish</code> directive<a class="headerlink" href="#35-the-publish-directive" title="Permanent link">&para;</a></h3>
-<p>On the other end of the workflow, we've already glanced at the <code>publish:</code> block.
-That's one half of the output handling system; the other half is the <code>output</code> block located below.</p>
+<h3 id="35-la-directive-publish">3.5. La directive <code>publish</code><a class="headerlink" href="#35-la-directive-publish" title="Permanent link">&para;</a></h3>
+<p>À l'autre extrémité du workflow, nous avons déjà jeté un coup d'œil au bloc <code>publish:</code>.
+C'est une moitié du système de gestion des sorties ; l'autre moitié est le bloc <code>output</code> situé en dessous.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">1-hello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-22-37">37</a></span>
 <span class="normal"><a href="#__codelineno-22-38">38</a></span>
 <span class="normal"><a href="#__codelineno-22-39">39</a></span>
@@ -4614,16 +4652,16 @@ That's one half of the output handling system; the other half is the <code>outpu
 <a id="__codelineno-22-41" name="__codelineno-22-41"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-22-42" name="__codelineno-22-42"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>This specifies that the <code>first_output</code> output listed in the <code>publish:</code> block should be copied to a subdirectory called <code>1-hello</code> under the default <code>results</code> output directory.</p>
-<p>The <code>mode 'copy'</code> line overrides the system's default behavior, which is to make a symbolic link (or symlink) to the original file in the <code>work/</code> directory instead of a proper copy.</p>
-<p>There are more options than displayed here for controlling the publishing behavior; we'll cover a few later on.
-You'll also see that when a workflow generates multiple outputs, each one gets listed this way in the <code>output</code> block.</p>
+<p>Cela spécifie que la sortie <code>first_output</code> listée dans le bloc <code>publish:</code> doit être copiée dans un sous-répertoire appelé <code>1-hello</code> sous le répertoire de sortie <code>results</code> par défaut.</p>
+<p>La ligne <code>mode 'copy'</code> remplace le comportement par défaut du système, qui est de faire un lien symbolique (ou symlink) vers le fichier original dans le répertoire <code>work/</code> au lieu d'une copie propre.</p>
+<p>Il y a plus d'options que celles affichées ici pour contrôler le comportement de publication ; nous en couvrirons quelques-unes plus tard.
+Vous verrez également que lorsqu'un workflow génère plusieurs sorties, chacune est listée de cette façon dans le bloc <code>output</code>.</p>
 <details class="info">
-<summary>Older syntax for publishing outputs using <code>publishDir</code></summary>
-<p>Until very recently, the established way to publish outputs was to do it at the level of each individual process using a <code>publishDir</code> directive.</p>
-<p>You will still find this code pattern all over the place in older Nextflow pipelines and process modules, so it's important to be aware of it.</p>
-<p>Instead of having a <code>publish:</code> block in the workflow and an <code>output</code> block at the top level, you would see a <code>publishDir</code> line in the sayHello` process definition:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Syntax example</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1"> 1</a></span>
+<summary>Ancienne syntaxe pour publier les sorties en utilisant <code>publishDir</code></summary>
+<p>Jusqu'à très récemment, la façon établie de publier les sorties était de le faire au niveau de chaque process individuel en utilisant une directive <code>publishDir</code>.</p>
+<p>Vous trouverez encore ce modèle de code partout dans les anciens pipelines Nextflow et les modules de process, il est donc important d'en être conscient.</p>
+<p>Au lieu d'avoir un bloc <code>publish:</code> dans le workflow et un bloc <code>output</code> au niveau supérieur, vous verriez une ligne <code>publishDir</code> dans la définition du process <code>sayHello</code> :</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Exemple de syntaxe</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-23-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-23-3"> 3</a></span>
 <span class="normal"><a href="#__codelineno-23-4"> 4</a></span>
@@ -4647,31 +4685,31 @@ You'll also see that when a workflow generates multiple outputs, each one gets l
 <a id="__codelineno-23-11" name="__codelineno-23-11"></a><span class="s2">    &quot;&quot;&quot;</span>
 <a id="__codelineno-23-12" name="__codelineno-23-12"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>However, we do not recommend using this in any new work as it will eventually be disallowed in future versions of the Nextflow language.</p>
+<p>Cependant, nous ne recommandons pas d'utiliser cela dans tout nouveau travail car cela sera éventuellement interdit dans les futures versions du langage Nextflow.</p>
 </details>
-<h3 id="takeaway_2">Takeaway<a class="headerlink" href="#takeaway_2" title="Permanent link">&para;</a></h3>
-<p>You now know how a simple Nextflow workflow is structured, and how the basic components relate to its functionality.</p>
-<h3 id="whats-next_2">What's next?<a class="headerlink" href="#whats-next_2" title="Permanent link">&para;</a></h3>
-<p>Learn to manage your workflow executions conveniently.</p>
+<h3 id="recapitulatif_2">Récapitulatif<a class="headerlink" href="#recapitulatif_2" title="Permanent link">&para;</a></h3>
+<p>Vous savez maintenant comment un workflow Nextflow simple est structuré, et comment les composants de base sont liés à sa fonctionnalité.</p>
+<h3 id="et-ensuite_2">Et ensuite ?<a class="headerlink" href="#et-ensuite_2" title="Permanent link">&para;</a></h3>
+<p>Apprenez à gérer vos exécutions de workflow de manière pratique.</p>
 <hr />
-<h2 id="4-manage-workflow-executions">4. Manage workflow executions<a class="headerlink" href="#4-manage-workflow-executions" title="Permanent link">&para;</a></h2>
-<p>Knowing how to launch workflows and retrieve outputs is great, but you'll quickly find there are a few other aspects of workflow management that will make your life easier.</p>
-<p>Here we show you how to take advantage of the <code>resume</code> feature for when you need to re-launch the same workflow, how to inspect the execution logs with <code>nextflow log</code>, and how to delete older work directories with <code>nextflow clean</code>.</p>
-<h3 id="41-re-launch-a-workflow-with-resume">4.1. Re-launch a workflow with <code>-resume</code><a class="headerlink" href="#41-re-launch-a-workflow-with-resume" title="Permanent link">&para;</a></h3>
-<p>Sometimes, you're going to want to re-run a pipeline that you've already launched previously without redoing any work that was already completed successfully.</p>
-<p>Nextflow has an option called <code>-resume</code> that allows you to do this.
-Specifically, in this mode, any processes that have already been run with the exact same code, settings and inputs will be skipped.
-This means Nextflow will only run processes that you've added or modified since the last run, or to which you're providing new settings or inputs.</p>
-<p>There are two key advantages to doing this:</p>
+<h2 id="4-gerer-les-executions-de-workflow">4. Gérer les exécutions de workflow<a class="headerlink" href="#4-gerer-les-executions-de-workflow" title="Permanent link">&para;</a></h2>
+<p>Savoir comment lancer des workflows et récupérer les sorties est bien, mais vous trouverez rapidement qu'il y a quelques autres aspects de la gestion des workflows qui vous faciliteront la vie.</p>
+<p>Ici, nous vous montrons comment tirer parti de la fonctionnalité <code>resume</code> lorsque vous devez relancer le même workflow, comment inspecter les logs d'exécution avec <code>nextflow log</code>, et comment supprimer les anciens répertoires de travail avec <code>nextflow clean</code>.</p>
+<h3 id="41-relancer-un-workflow-avec-resume">4.1. Relancer un workflow avec <code>-resume</code><a class="headerlink" href="#41-relancer-un-workflow-avec-resume" title="Permanent link">&para;</a></h3>
+<p>Parfois, vous allez vouloir ré-exécuter un pipeline que vous avez déjà lancé précédemment sans refaire le travail qui a déjà été complété avec succès.</p>
+<p>Nextflow a une option appelée <code>-resume</code> qui vous permet de faire cela.
+Plus précisément, dans ce mode, tout process qui a déjà été exécuté avec exactement le même code, les mêmes paramètres et les mêmes entrées sera ignoré.
+Cela signifie que Nextflow n'exécutera que les processes que vous avez ajoutés ou modifiés depuis la dernière exécution, ou auxquels vous fournissez de nouveaux paramètres ou entrées.</p>
+<p>Il y a deux avantages clés à faire cela :</p>
 <ul>
-<li>If you're in the middle of developing a pipeline, you can iterate more rapidly since you only have to run the process(es) you're actively working on in order to test your changes.</li>
-<li>If you're running a pipeline in production and something goes wrong, in many cases you can fix the issue and relaunch the pipeline, and it will resume running from the point of failure, which can save you a lot of time and compute.</li>
+<li>Si vous êtes en train de développer un pipeline, vous pouvez itérer plus rapidement puisque vous n'avez qu'à exécuter le(s) process(es) sur lesquels vous travaillez activement pour tester vos modifications.</li>
+<li>Si vous exécutez un pipeline en production et que quelque chose ne va pas, dans de nombreux cas, vous pouvez corriger le problème et relancer le pipeline, et il reprendra l'exécution à partir du point d'échec, ce qui peut vous faire gagner beaucoup de temps et de calcul.</li>
 </ul>
-<p>To use it, simply add <code>-resume</code> to your command and run it:</p>
+<p>Pour l'utiliser, ajoutez simplement <code>-resume</code> à votre commande et exécutez-la :</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span><span class="m">1</span>-hello.nf<span class="w"> </span>--input<span class="w"> </span><span class="s1">&#39;Hello World!&#39;</span><span class="w"> </span>-resume
 </code></pre></div>
 <details class="success">
-<summary>Command output</summary>
+<summary>Sortie de la commande</summary>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-1">1</a></span>
 <span class="normal"><a href="#__codelineno-25-2">2</a></span>
 <span class="normal"><a href="#__codelineno-25-3">3</a></span>
@@ -4683,18 +4721,18 @@ This means Nextflow will only run processes that you've added or modified since 
 <a id="__codelineno-25-5" name="__codelineno-25-5"></a><span class="go">[a3/7be2fa] sayHello | 1 of 1, cached: 1 ✔</span>
 </code></pre></div></td></tr></table></div>
 </details>
-<p>The console output should look familiar, but there's one thing that's a little different compared to before.</p>
-<p>Look for the <code>cached:</code> bit that has been added in the process status line (line 5), which means that Nextflow has recognized that it has already done this work and simply reused the result from the previous successful run.</p>
-<p>You can also see that the work subdirectory hash is the same as in the previous run.
-Nextflow is literally pointing you to the previous execution and saying "I already did that over there."</p>
+<p>La sortie console devrait sembler familière, mais il y a une chose qui est un peu différente par rapport à avant.</p>
+<p>Cherchez la partie <code>cached:</code> qui a été ajoutée dans la ligne de statut du process (ligne 5), ce qui signifie que Nextflow a reconnu qu'il a déjà fait ce travail et a simplement réutilisé le résultat de l'exécution réussie précédente.</p>
+<p>Vous pouvez également voir que le hash du sous-répertoire de travail est le même que dans l'exécution précédente.
+Nextflow vous pointe littéralement vers l'exécution précédente et dit « J'ai déjà fait ça là-bas. »</p>
 <div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>When your re-run a pipeline with <code>resume</code>, Nextflow does not overwrite any files published outside of the work directory by any executions that were run successfully previously.</p>
+<p class="admonition-title">Astuce</p>
+<p>Lorsque vous ré-exécutez un pipeline avec <code>resume</code>, Nextflow n'écrase pas les fichiers publiés en dehors du répertoire de travail par les exécutions qui ont été exécutées avec succès précédemment.</p>
 </div>
-<h3 id="42-inspect-the-log-of-past-executions">4.2. Inspect the log of past executions<a class="headerlink" href="#42-inspect-the-log-of-past-executions" title="Permanent link">&para;</a></h3>
-<p>Whenever you launch a nextflow workflow, a line gets written to a log file called <code>history</code>, under a hidden directory called <code>.nextflow</code> in the current working directory.</p>
+<h3 id="42-inspecter-le-log-des-executions-passees">4.2. Inspecter le log des exécutions passées<a class="headerlink" href="#42-inspecter-le-log-des-executions-passees" title="Permanent link">&para;</a></h3>
+<p>Chaque fois que vous lancez un workflow Nextflow, une ligne est écrite dans un fichier de log appelé <code>history</code>, sous un répertoire caché appelé <code>.nextflow</code> dans le répertoire de travail actuel.</p>
 <details class="abstract">
-<summary>File contents</summary>
+<summary>Contenu du fichier</summary>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">.nextflow/history</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-1">1</a></span>
 <span class="normal"><a href="#__codelineno-26-2">2</a></span>
 <span class="normal"><a href="#__codelineno-26-3">3</a></span>
@@ -4706,12 +4744,12 @@ Nextflow is literally pointing you to the previous execution and saying "I alrea
 <a id="__codelineno-26-5" name="__codelineno-26-5"></a>2025-07-04 19:27:57	2.1s	goofy_wilson	OK	3539118582ccde68dde471cc2c66295c	5f4b3269-5b53-404a-956c-cac915fbb74e	nextflow run 1-hello.nf --input Konnichiwa -resume
 </code></pre></div></td></tr></table></div>
 </details>
-<p>This file gives you the timestamp, run name, status, revision ID, session ID and full command line for every Nextflow run that has been launched from within the current working directory.</p>
-<p>A more convenient way to access this information is to use the <code>nextflow log</code> command.</p>
+<p>Ce fichier vous donne l'horodatage, le nom d'exécution, le statut, l'ID de révision, l'ID de session et la ligne de commande complète pour chaque exécution Nextflow qui a été lancée depuis le répertoire de travail actuel.</p>
+<p>Une façon plus pratique d'accéder à ces informations est d'utiliser la commande <code>nextflow log</code>.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>nextflow<span class="w"> </span>log
 </code></pre></div>
 <details class="success">
-<summary>Command output</summary>
+<summary>Sortie de la commande</summary>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-1">1</a></span>
 <span class="normal"><a href="#__codelineno-28-2">2</a></span>
 <span class="normal"><a href="#__codelineno-28-3">3</a></span>
@@ -4725,264 +4763,264 @@ Nextflow is literally pointing you to the previous execution and saying "I alrea
 <a id="__codelineno-28-6" name="__codelineno-28-6"></a><span class="go">2025-07-04 19:27:57     2.1s            goofy_wilson            OK       3539118582     5f4b3269-5b53-404a-956c-cac915fbb74e    nextflow run 1-hello.nf --input Konnichiwa -resume</span>
 </code></pre></div></td></tr></table></div>
 </details>
-<p>This will output the contents of the log file to the terminal, augmented with a header line.</p>
-<p>You'll notice that the session ID changes whenever you run a new <code>nextflow run</code> command, EXCEPT if you're using the <code>-resume</code> option.
-In that case, the session ID stays the same.</p>
-<p>Nextflow uses the session ID to group run caching information under the <code>cache</code> directory, also located under <code>.nextflow</code>.</p>
-<h3 id="43-delete-older-work-directories">4.3. Delete older work directories<a class="headerlink" href="#43-delete-older-work-directories" title="Permanent link">&para;</a></h3>
-<p>If you run a lot of pipelines, you may end up accumulating very many files across many subdirectories.
-Since the subdirectories are named randomly, it is difficult to tell from their names what are older vs. more recent runs.</p>
-<p>Fortunately Nextflow includes a helpful <code>clean</code> subcommand that can automatically delete the work subdirectories for past runs that you no longer care about.</p>
-<h4 id="431-determine-deletion-criteria">4.3.1. Determine deletion criteria<a class="headerlink" href="#431-determine-deletion-criteria" title="Permanent link">&para;</a></h4>
-<p>There are multiple <a href="https://www.nextflow.io/docs/latest/reference/cli.html#clean">options</a> to determine what to delete.</p>
-<p>Here we show you an example that deletes all subdirectories from runs before a given run, specified using its run name.</p>
-<p>Look up the most recent successful run where you didn't use <code>-resume</code>; in our case the run name was <code>backstabbing_swartz</code>.</p>
-<p>The run name is the machine-generated two-part string shown in square brackets in the <code>Launching (...)</code> console output line.
-You can also use the Nextflow log to look up a run based on its timestamp and/or command line.</p>
-<h4 id="432-do-a-dry-run">4.3.2. Do a dry run<a class="headerlink" href="#432-do-a-dry-run" title="Permanent link">&para;</a></h4>
-<p>First we use the dry run flag <code>-n</code> to check what will be deleted given the command:</p>
+<p>Cela affichera le contenu du fichier de log dans le terminal, augmenté d'une ligne d'en-tête.</p>
+<p>Vous remarquerez que l'ID de session change chaque fois que vous exécutez une nouvelle commande <code>nextflow run</code>, SAUF si vous utilisez l'option <code>-resume</code>.
+Dans ce cas, l'ID de session reste le même.</p>
+<p>Nextflow utilise l'ID de session pour regrouper les informations de mise en cache d'exécution sous le répertoire <code>cache</code>, également situé sous <code>.nextflow</code>.</p>
+<h3 id="43-supprimer-les-anciens-repertoires-de-travail">4.3. Supprimer les anciens répertoires de travail<a class="headerlink" href="#43-supprimer-les-anciens-repertoires-de-travail" title="Permanent link">&para;</a></h3>
+<p>Si vous exécutez beaucoup de pipelines, vous pourriez accumuler de très nombreux fichiers dans de nombreux sous-répertoires.
+Puisque les sous-répertoires sont nommés de manière aléatoire, il est difficile de dire d'après leurs noms quelles sont les exécutions plus anciennes par rapport aux plus récentes.</p>
+<p>Heureusement, Nextflow inclut une sous-commande <code>clean</code> utile qui peut automatiquement supprimer les sous-répertoires de travail des exécutions passées dont vous ne vous souciez plus.</p>
+<h4 id="431-determiner-les-criteres-de-suppression">4.3.1. Déterminer les critères de suppression<a class="headerlink" href="#431-determiner-les-criteres-de-suppression" title="Permanent link">&para;</a></h4>
+<p>Il existe plusieurs <a href="https://www.nextflow.io/docs/latest/reference/cli.html#clean">options</a> pour déterminer ce qui doit être supprimé.</p>
+<p>Ici, nous vous montrons un exemple qui supprime tous les sous-répertoires des exécutions avant une exécution donnée, spécifiée en utilisant son nom d'exécution.</p>
+<p>Recherchez l'exécution réussie la plus récente où vous n'avez pas utilisé <code>-resume</code> ; dans notre cas, le nom d'exécution était <code>backstabbing_swartz</code>.</p>
+<p>Le nom d'exécution est la chaîne en deux parties générée par la machine affichée entre crochets dans la ligne de sortie console <code>Launching (...)</code>.
+Vous pouvez également utiliser le log Nextflow pour rechercher une exécution basée sur son horodatage et/ou sa ligne de commande.</p>
+<h4 id="432-faire-un-test-a-blanc">4.3.2. Faire un test à blanc<a class="headerlink" href="#432-faire-un-test-a-blanc" title="Permanent link">&para;</a></h4>
+<p>D'abord, nous utilisons le drapeau de test à blanc <code>-n</code> pour vérifier ce qui sera supprimé avec la commande :</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>nextflow<span class="w"> </span>clean<span class="w"> </span>-before<span class="w"> </span>backstabbing_swartz<span class="w"> </span>-n
 </code></pre></div>
 <details class="success">
-<summary>Command output</summary>
+<summary>Sortie de la commande</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="go">Would remove /workspaces/training/hello-nextflow/work/eb/1a5de36637b475afd88fca7f79e024</span>
 <a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="go">Would remove /workspaces/training/hello-nextflow/work/6b/19b0e002ea13486d3a0344c336c1d0</span>
 <a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a><span class="go">Would remove /workspaces/training/hello-nextflow/work/45/9a6dd7ab771f93003d040956282883</span>
 </code></pre></div>
 </details>
-<p>Your output will have different task directory names and may have a different number of lines, but it should look similar to the example.</p>
-<p>If you don't see any lines output, you either did not provide a valid run name or there are no past runs to delete. Make sure to change <code>backstabbing_swartz</code> in the example command to whatever is the corresponding latest run name in your log.</p>
-<h4 id="433-proceed-with-deletion">4.3.3. Proceed with deletion<a class="headerlink" href="#433-proceed-with-deletion" title="Permanent link">&para;</a></h4>
-<p>If the output looks as expected and you want to proceed with the deletion, re-run the command with the <code>-f</code> flag instead of <code>-n</code>:</p>
+<p>Votre sortie aura des noms de répertoires de tâches différents et peut avoir un nombre de lignes différent, mais elle devrait ressembler à l'exemple.</p>
+<p>Si vous ne voyez aucune ligne en sortie, vous n'avez soit pas fourni un nom d'exécution valide, soit il n'y a pas d'exécutions passées à supprimer. Assurez-vous de changer <code>backstabbing_swartz</code> dans la commande d'exemple par le nom d'exécution le plus récent correspondant dans votre log.</p>
+<h4 id="433-proceder-a-la-suppression">4.3.3. Procéder à la suppression<a class="headerlink" href="#433-proceder-a-la-suppression" title="Permanent link">&para;</a></h4>
+<p>Si la sortie semble comme attendu et que vous voulez procéder à la suppression, ré-exécutez la commande avec le drapeau <code>-f</code> au lieu de <code>-n</code> :</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>nextflow<span class="w"> </span>clean<span class="w"> </span>-before<span class="w"> </span>backstabbing_swartz<span class="w"> </span>-f
 </code></pre></div>
 <details class="success">
-<summary>Command output</summary>
+<summary>Sortie de la commande</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="go">Removed /workspaces/training/hello-nextflow/work/eb/1a5de36637b475afd88fca7f79e024</span>
 <a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a><span class="go">Removed /workspaces/training/hello-nextflow/work/6b/19b0e002ea13486d3a0344c336c1d0</span>
 <a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a><span class="go">Removed /workspaces/training/hello-nextflow/work/45/9a6dd7ab771f93003d040956282883</span>
 </code></pre></div>
 </details>
-<p>The output should be similar to before, but now saying 'Removed' instead of 'Would remove'.
-Note that this does not remove the two-character subdirectories (like <code>eb/</code> above) but it does empty their contents.</p>
+<p>La sortie devrait être similaire à avant, mais maintenant disant 'Removed' au lieu de 'Would remove'.
+Notez que cela ne supprime pas les sous-répertoires de deux caractères (comme <code>eb/</code> ci-dessus) mais vide leur contenu.</p>
 <div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Deleting work subdirectories from past runs removes them from Nextflow's cache and deletes any outputs that were stored in those directories.
-That means it breaks Nextflow's ability to resume execution without re-running the corresponding processes.</p>
-<p>You are responsible for saving any outputs that you care about! That is the main reason we prefer to use the <code>copy</code> mode rather than the <code>symlink</code> mode for the <code>publish</code> directive.</p>
+<p class="admonition-title">Avertissement</p>
+<p>Supprimer les sous-répertoires de travail des exécutions passées les supprime du cache de Nextflow et supprime toutes les sorties qui étaient stockées dans ces répertoires.
+Cela signifie que cela casse la capacité de Nextflow à reprendre l'exécution sans ré-exécuter les processes correspondants.</p>
+<p>Vous êtes responsable de sauvegarder toutes les sorties qui vous importent ! C'est la raison principale pour laquelle nous préférons utiliser le mode <code>copy</code> plutôt que le mode <code>symlink</code> pour la directive <code>publish</code>.</p>
 </div>
-<h3 id="takeaway_3">Takeaway<a class="headerlink" href="#takeaway_3" title="Permanent link">&para;</a></h3>
-<p>You know how to relaunch a pipeline without repeating steps that were already run in an identical way, inspect the execution log, and use the <code>nextflow clean</code> command to clean up old work directories.</p>
-<h3 id="whats-next_3">What's next?<a class="headerlink" href="#whats-next_3" title="Permanent link">&para;</a></h3>
-<p>Take a little break! You've just absorbed the building blocks of Nextflow syntax and basic usage instructions.</p>
-<p>In the next section of this training, we're going to look at four successively more realistic versions of the Hello World pipeline that will demonstrate how Nextflow allows you to process multiple inputs efficiently, run workflows composed of multiple steps connected together, leverage modular code components, and utilize containers for greater reproducibility and portability.</p>
+<h3 id="recapitulatif_3">Récapitulatif<a class="headerlink" href="#recapitulatif_3" title="Permanent link">&para;</a></h3>
+<p>Vous savez comment relancer un pipeline sans répéter les étapes qui ont déjà été exécutées de manière identique, inspecter le log d'exécution, et utiliser la commande <code>nextflow clean</code> pour nettoyer les anciens répertoires de travail.</p>
+<h3 id="et-ensuite_3">Et ensuite ?<a class="headerlink" href="#et-ensuite_3" title="Permanent link">&para;</a></h3>
+<p>Prenez une petite pause ! Vous venez d'absorber les éléments de base de la syntaxe Nextflow et les instructions d'utilisation de base.</p>
+<p>Dans la prochaine section de cette formation, nous allons examiner quatre versions successivement plus réalistes du pipeline Hello World qui démontreront comment Nextflow vous permet de traiter plusieurs entrées efficacement, d'exécuter des workflows composés de plusieurs étapes connectées ensemble, d'exploiter des composants de code modulaires, et d'utiliser des conteneurs pour une plus grande reproductibilité et portabilité.</p>
 <hr />
 <h2 id="quiz">Quiz<a class="headerlink" href="#quiz" title="Permanent link">&para;</a></h2>
 <!-- mkdocs-quiz-source
 <quiz>
-In the console output line `[a3/7be2fa] SAYHELLO | 1 of 1 ✔`, what does `[a3/7be2fa]` represent?
-- [ ] The process version number
-- [ ] A unique run identifier
-- [x] The truncated path to the task's work directory
-- [ ] The checksum of the output file
+Dans la ligne de sortie console `[a3/7be2fa] SAYHELLO | 1 of 1 ✔`, que représente `[a3/7be2fa]` ?
+- [ ] Le numéro de version du process
+- [ ] Un identifiant d'exécution unique
+- [x] Le chemin tronqué vers le répertoire de travail de la tâche
+- [ ] La somme de contrôle du fichier de sortie
 
-Learn more: [2.3. Find the original output and logs in the `work/` directory](#23-find-the-original-output-and-logs-in-the-work-directory)
+En savoir plus : [2.3. Trouver la sortie originale et les logs dans le répertoire `work/`](#23-trouver-la-sortie-originale-et-les-logs-dans-le-repertoire-work)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-0">
     <a href="#quiz-0" class="quiz-header-link">#</a>
 
     <div class="quiz-question">
-        <p>In the console output line <code>[a3/7be2fa] SAYHELLO | 1 of 1 ✔</code>, what does <code>[a3/7be2fa]</code> represent?</p>
+        <p>Dans la ligne de sortie console <code>[a3/7be2fa] SAYHELLO | 1 of 1 ✔</code>, que représente <code>[a3/7be2fa]</code> ?</p>
     </div>
     <form action="javascript:void(0);" onsubmit="return false;">
-        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-0-0" ><label for="quiz-0-0">The process version number</label></div><div><input type="radio" name="answer" value="1" id="quiz-0-1" ><label for="quiz-0-1">A unique run identifier</label></div><div><input type="radio" name="answer" value="2" id="quiz-0-2" correct><label for="quiz-0-2">The truncated path to the task's work directory</label></div><div><input type="radio" name="answer" value="3" id="quiz-0-3" ><label for="quiz-0-3">The checksum of the output file</label></div></fieldset>
+        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-0-0" ><label for="quiz-0-0">Le numéro de version du process</label></div><div><input type="radio" name="answer" value="1" id="quiz-0-1" ><label for="quiz-0-1">Un identifiant d'exécution unique</label></div><div><input type="radio" name="answer" value="2" id="quiz-0-2" correct><label for="quiz-0-2">Le chemin tronqué vers le répertoire de travail de la tâche</label></div><div><input type="radio" name="answer" value="3" id="quiz-0-3" ><label for="quiz-0-3">La somme de contrôle du fichier de sortie</label></div></fieldset>
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Learn more: <a href="#23-find-the-original-output-and-logs-in-the-work-directory">2.3. Find the original output and logs in the <code>work/</code> directory</a></p></section>
+    <section class="content hidden"><p>En savoir plus : <a href="#23-trouver-la-sortie-originale-et-les-logs-dans-le-repertoire-work">2.3. Trouver la sortie originale et les logs dans le répertoire <code>work/</code></a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
 <quiz>
-What is the purpose of the `.command.sh` file in a task directory?
-- [ ] It stores the task's configuration settings
-- [x] It shows the actual command that was executed by the process
-- [ ] It contains error messages from failed tasks
-- [ ] It lists input files staged for the task
+Quel est le but du fichier `.command.sh` dans un répertoire de tâche ?
+- [ ] Il stocke les paramètres de configuration de la tâche
+- [x] Il montre la commande réelle qui a été exécutée par le process
+- [ ] Il contient les messages d'erreur des tâches échouées
+- [ ] Il liste les fichiers d'entrée préparés pour la tâche
 
-Learn more: [2.3. Find the original output and logs in the `work/` directory](#23-find-the-original-output-and-logs-in-the-work-directory)
+En savoir plus : [2.3. Trouver la sortie originale et les logs dans le répertoire `work/`](#23-trouver-la-sortie-originale-et-les-logs-dans-le-repertoire-work)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-1">
     <a href="#quiz-1" class="quiz-header-link">#</a>
 
     <div class="quiz-question">
-        <p>What is the purpose of the <code>.command.sh</code> file in a task directory?</p>
+        <p>Quel est le but du fichier <code>.command.sh</code> dans un répertoire de tâche ?</p>
     </div>
     <form action="javascript:void(0);" onsubmit="return false;">
-        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-1-0" ><label for="quiz-1-0">It stores the task's configuration settings</label></div><div><input type="radio" name="answer" value="1" id="quiz-1-1" correct><label for="quiz-1-1">It shows the actual command that was executed by the process</label></div><div><input type="radio" name="answer" value="2" id="quiz-1-2" ><label for="quiz-1-2">It contains error messages from failed tasks</label></div><div><input type="radio" name="answer" value="3" id="quiz-1-3" ><label for="quiz-1-3">It lists input files staged for the task</label></div></fieldset>
+        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-1-0" ><label for="quiz-1-0">Il stocke les paramètres de configuration de la tâche</label></div><div><input type="radio" name="answer" value="1" id="quiz-1-1" correct><label for="quiz-1-1">Il montre la commande réelle qui a été exécutée par le process</label></div><div><input type="radio" name="answer" value="2" id="quiz-1-2" ><label for="quiz-1-2">Il contient les messages d'erreur des tâches échouées</label></div><div><input type="radio" name="answer" value="3" id="quiz-1-3" ><label for="quiz-1-3">Il liste les fichiers d'entrée préparés pour la tâche</label></div></fieldset>
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Learn more: <a href="#23-find-the-original-output-and-logs-in-the-work-directory">2.3. Find the original output and logs in the <code>work/</code> directory</a></p></section>
+    <section class="content hidden"><p>En savoir plus : <a href="#23-trouver-la-sortie-originale-et-les-logs-dans-le-repertoire-work">2.3. Trouver la sortie originale et les logs dans le répertoire <code>work/</code></a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
 <quiz>
-What happens to published results when you re-run a workflow without `-resume`?
-- [ ] They are preserved in separate timestamped directories
-- [x] They get overwritten by the new execution
-- [ ] Nextflow prevents overwriting and fails
-- [ ] They are automatically backed up
+Qu'arrive-t-il aux résultats publiés lorsque vous ré-exécutez un workflow sans `-resume` ?
+- [ ] Ils sont préservés dans des répertoires horodatés séparés
+- [x] Ils sont écrasés par la nouvelle exécution
+- [ ] Nextflow empêche l'écrasement et échoue
+- [ ] Ils sont automatiquement sauvegardés
 
-Learn more: [2.4. Re-run the workflow with different greetings](#24-re-run-the-workflow-with-different-greetings)
+En savoir plus : [2.4. Ré-exécuter le workflow avec différentes salutations](#24-re-executer-le-workflow-avec-differentes-salutations)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-2">
     <a href="#quiz-2" class="quiz-header-link">#</a>
 
     <div class="quiz-question">
-        <p>What happens to published results when you re-run a workflow without <code>-resume</code>?</p>
+        <p>Qu'arrive-t-il aux résultats publiés lorsque vous ré-exécutez un workflow sans <code>-resume</code> ?</p>
     </div>
     <form action="javascript:void(0);" onsubmit="return false;">
-        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-2-0" ><label for="quiz-2-0">They are preserved in separate timestamped directories</label></div><div><input type="radio" name="answer" value="1" id="quiz-2-1" correct><label for="quiz-2-1">They get overwritten by the new execution</label></div><div><input type="radio" name="answer" value="2" id="quiz-2-2" ><label for="quiz-2-2">Nextflow prevents overwriting and fails</label></div><div><input type="radio" name="answer" value="3" id="quiz-2-3" ><label for="quiz-2-3">They are automatically backed up</label></div></fieldset>
+        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-2-0" ><label for="quiz-2-0">Ils sont préservés dans des répertoires horodatés séparés</label></div><div><input type="radio" name="answer" value="1" id="quiz-2-1" correct><label for="quiz-2-1">Ils sont écrasés par la nouvelle exécution</label></div><div><input type="radio" name="answer" value="2" id="quiz-2-2" ><label for="quiz-2-2">Nextflow empêche l'écrasement et échoue</label></div><div><input type="radio" name="answer" value="3" id="quiz-2-3" ><label for="quiz-2-3">Ils sont automatiquement sauvegardés</label></div></fieldset>
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Learn more: <a href="#24-re-run-the-workflow-with-different-greetings">2.4. Re-run the workflow with different greetings</a></p></section>
+    <section class="content hidden"><p>En savoir plus : <a href="#24-re-executer-le-workflow-avec-differentes-salutations">2.4. Ré-exécuter le workflow avec différentes salutations</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
 <quiz>
-What does this console output indicate?
+Qu'indique cette sortie console ?
 
 ```console
 [skipped  ] process > sayHello (1) [100%] 1 of 1, cached: 1 ✔
 ```
 
-- [ ] The task failed and was skipped
-- [ ] The task is waiting in a queue
-- [x] Nextflow reused results from a previous identical execution
-- [ ] The task was manually cancelled
+- [ ] La tâche a échoué et a été ignorée
+- [ ] La tâche attend dans une file d'attente
+- [x] Nextflow a réutilisé les résultats d'une exécution identique précédente
+- [ ] La tâche a été annulée manuellement
 
-Learn more: [4.1. Re-launch a workflow with `-resume`](#41-re-launch-a-workflow-with--resume)
+En savoir plus : [4.1. Relancer un workflow avec `-resume`](#41-relancer-un-workflow-avec--resume)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-3">
                 <a href="#quiz-3" class="quiz-header-link">#</a>
 
                 <div class="quiz-question">
-                    <p>What does this console output indicate?</p>
+                    <p>Qu'indique cette sortie console ?</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="go">[skipped  ] process &gt; sayHello (1) [100%] 1 of 1, cached: 1 ✔</span>
 </code></pre></div>
                 </div>
                 <form action="javascript:void(0);" onsubmit="return false;">
-                    <fieldset><div><input type="radio" name="answer" value="0" id="quiz-3-0" ><label for="quiz-3-0">The task failed and was skipped</label></div><div><input type="radio" name="answer" value="1" id="quiz-3-1" ><label for="quiz-3-1">The task is waiting in a queue</label></div><div><input type="radio" name="answer" value="2" id="quiz-3-2" correct><label for="quiz-3-2">Nextflow reused results from a previous identical execution</label></div><div><input type="radio" name="answer" value="3" id="quiz-3-3" ><label for="quiz-3-3">The task was manually cancelled</label></div></fieldset>
+                    <fieldset><div><input type="radio" name="answer" value="0" id="quiz-3-0" ><label for="quiz-3-0">La tâche a échoué et a été ignorée</label></div><div><input type="radio" name="answer" value="1" id="quiz-3-1" ><label for="quiz-3-1">La tâche attend dans une file d'attente</label></div><div><input type="radio" name="answer" value="2" id="quiz-3-2" correct><label for="quiz-3-2">Nextflow a réutilisé les résultats d'une exécution identique précédente</label></div><div><input type="radio" name="answer" value="3" id="quiz-3-3" ><label for="quiz-3-3">La tâche a été annulée manuellement</label></div></fieldset>
                     <div class="quiz-feedback hidden"></div>
 
                 </form>
-                <section class="content hidden"><p>Learn more: <a href="#41-re-launch-a-workflow-with--resume">4.1. Re-launch a workflow with <code>-resume</code></a></p></section>
+                <section class="content hidden"><p>En savoir plus : <a href="#41-relancer-un-workflow-avec--resume">4.1. Relancer un workflow avec <code>-resume</code></a></p></section>
             </div>
 
 <!-- mkdocs-quiz-source
 <quiz>
-Where does Nextflow store the execution history that the `nextflow log` command displays?
-- [ ] In the results directory
-- [ ] In the work directory
-- [x] In the `.nextflow/history` file
-- [ ] In `nextflow.config`
+Où Nextflow stocke-t-il l'historique d'exécution que la commande `nextflow log` affiche ?
+- [ ] Dans le répertoire results
+- [ ] Dans le répertoire work
+- [x] Dans le fichier `.nextflow/history`
+- [ ] Dans `nextflow.config`
 
-Learn more: [4.2. Inspect the log of past executions](#42-inspect-the-log-of-past-executions)
+En savoir plus : [4.2. Inspecter le log des exécutions passées](#42-inspecter-le-log-des-executions-passees)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-4">
     <a href="#quiz-4" class="quiz-header-link">#</a>
 
     <div class="quiz-question">
-        <p>Where does Nextflow store the execution history that the <code>nextflow log</code> command displays?</p>
+        <p>Où Nextflow stocke-t-il l'historique d'exécution que la commande <code>nextflow log</code> affiche ?</p>
     </div>
     <form action="javascript:void(0);" onsubmit="return false;">
-        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-4-0" ><label for="quiz-4-0">In the results directory</label></div><div><input type="radio" name="answer" value="1" id="quiz-4-1" ><label for="quiz-4-1">In the work directory</label></div><div><input type="radio" name="answer" value="2" id="quiz-4-2" correct><label for="quiz-4-2">In the <code>.nextflow/history</code> file</label></div><div><input type="radio" name="answer" value="3" id="quiz-4-3" ><label for="quiz-4-3">In <code>nextflow.config</code></label></div></fieldset>
+        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-4-0" ><label for="quiz-4-0">Dans le répertoire results</label></div><div><input type="radio" name="answer" value="1" id="quiz-4-1" ><label for="quiz-4-1">Dans le répertoire work</label></div><div><input type="radio" name="answer" value="2" id="quiz-4-2" correct><label for="quiz-4-2">Dans le fichier <code>.nextflow/history</code></label></div><div><input type="radio" name="answer" value="3" id="quiz-4-3" ><label for="quiz-4-3">Dans <code>nextflow.config</code></label></div></fieldset>
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Learn more: <a href="#42-inspect-the-log-of-past-executions">4.2. Inspect the log of past executions</a></p></section>
+    <section class="content hidden"><p>En savoir plus : <a href="#42-inspecter-le-log-des-executions-passees">4.2. Inspecter le log des exécutions passées</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
 <quiz>
-What is the purpose of the `params` block in a workflow file?
-- [ ] To define process resource requirements
-- [ ] To configure the executor
-- [x] To declare and type workflow input parameters
-- [ ] To specify output publishing options
+Quel est le but du bloc `params` dans un fichier de workflow ?
+- [ ] Définir les exigences de ressources du process
+- [ ] Configurer l'executor
+- [x] Déclarer et typer les paramètres d'entrée du workflow
+- [ ] Spécifier les options de publication des sorties
 
-Learn more: [3.4. The params system of command-line parameters](#34-the-params-system-of-command-line-parameters)
+En savoir plus : [3.4. Le système params de paramètres de ligne de commande](#34-le-systeme-params-de-parametres-de-ligne-de-commande)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-5">
     <a href="#quiz-5" class="quiz-header-link">#</a>
 
     <div class="quiz-question">
-        <p>What is the purpose of the <code>params</code> block in a workflow file?</p>
+        <p>Quel est le but du bloc <code>params</code> dans un fichier de workflow ?</p>
     </div>
     <form action="javascript:void(0);" onsubmit="return false;">
-        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-5-0" ><label for="quiz-5-0">To define process resource requirements</label></div><div><input type="radio" name="answer" value="1" id="quiz-5-1" ><label for="quiz-5-1">To configure the executor</label></div><div><input type="radio" name="answer" value="2" id="quiz-5-2" correct><label for="quiz-5-2">To declare and type workflow input parameters</label></div><div><input type="radio" name="answer" value="3" id="quiz-5-3" ><label for="quiz-5-3">To specify output publishing options</label></div></fieldset>
+        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-5-0" ><label for="quiz-5-0">Définir les exigences de ressources du process</label></div><div><input type="radio" name="answer" value="1" id="quiz-5-1" ><label for="quiz-5-1">Configurer l'executor</label></div><div><input type="radio" name="answer" value="2" id="quiz-5-2" correct><label for="quiz-5-2">Déclarer et typer les paramètres d'entrée du workflow</label></div><div><input type="radio" name="answer" value="3" id="quiz-5-3" ><label for="quiz-5-3">Spécifier les options de publication des sorties</label></div></fieldset>
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Learn more: <a href="#34-the-params-system-of-command-line-parameters">3.4. The params system of command-line parameters</a></p></section>
+    <section class="content hidden"><p>En savoir plus : <a href="#34-le-systeme-params-de-parametres-de-ligne-de-commande">3.4. Le système params de paramètres de ligne de commande</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
 <quiz>
-In the workflow's `output` block, what does `mode 'copy'` do?
-- [ ] Creates a backup of the work directory
-- [x] Makes a full copy of files instead of symbolic links
-- [ ] Copies the workflow script to results
-- [ ] Enables incremental file copying
+Dans le bloc `output` du workflow, que fait `mode 'copy'` ?
+- [ ] Crée une sauvegarde du répertoire de travail
+- [x] Fait une copie complète des fichiers au lieu de liens symboliques
+- [ ] Copie le script du workflow vers les résultats
+- [ ] Active la copie incrémentielle des fichiers
 
-Learn more: [3.5. The publish directive](#35-the-publish-directive)
+En savoir plus : [3.5. La directive publish](#35-la-directive-publish)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-6">
     <a href="#quiz-6" class="quiz-header-link">#</a>
 
     <div class="quiz-question">
-        <p>In the workflow's <code>output</code> block, what does <code>mode 'copy'</code> do?</p>
+        <p>Dans le bloc <code>output</code> du workflow, que fait <code>mode 'copy'</code> ?</p>
     </div>
     <form action="javascript:void(0);" onsubmit="return false;">
-        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-6-0" ><label for="quiz-6-0">Creates a backup of the work directory</label></div><div><input type="radio" name="answer" value="1" id="quiz-6-1" correct><label for="quiz-6-1">Makes a full copy of files instead of symbolic links</label></div><div><input type="radio" name="answer" value="2" id="quiz-6-2" ><label for="quiz-6-2">Copies the workflow script to results</label></div><div><input type="radio" name="answer" value="3" id="quiz-6-3" ><label for="quiz-6-3">Enables incremental file copying</label></div></fieldset>
+        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-6-0" ><label for="quiz-6-0">Crée une sauvegarde du répertoire de travail</label></div><div><input type="radio" name="answer" value="1" id="quiz-6-1" correct><label for="quiz-6-1">Fait une copie complète des fichiers au lieu de liens symboliques</label></div><div><input type="radio" name="answer" value="2" id="quiz-6-2" ><label for="quiz-6-2">Copie le script du workflow vers les résultats</label></div><div><input type="radio" name="answer" value="3" id="quiz-6-3" ><label for="quiz-6-3">Active la copie incrémentielle des fichiers</label></div></fieldset>
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Learn more: <a href="#35-the-publish-directive">3.5. The publish directive</a></p></section>
+    <section class="content hidden"><p>En savoir plus : <a href="#35-la-directive-publish">3.5. La directive publish</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
 <quiz>
-What is the recommended flag to use with the `nextflow clean` command before actually deleting files?
-- [x] `-n` (dry run) to preview what would be deleted
-- [ ] `-v` (verbose) to see detailed output
-- [ ] `-a` (all) to select all directories
-- [ ] `-q` (quiet) to suppress warnings
+Quel est le drapeau recommandé à utiliser avec la commande `nextflow clean` avant de supprimer réellement des fichiers ?
+- [x] `-n` (test à blanc) pour prévisualiser ce qui serait supprimé
+- [ ] `-v` (verbeux) pour voir une sortie détaillée
+- [ ] `-a` (tous) pour sélectionner tous les répertoires
+- [ ] `-q` (silencieux) pour supprimer les avertissements
 
-Learn more: [4.3. Delete older work directories](#43-delete-older-work-directories)
+En savoir plus : [4.3. Supprimer les anciens répertoires de travail](#43-supprimer-les-anciens-repertoires-de-travail)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-7">
     <a href="#quiz-7" class="quiz-header-link">#</a>
 
     <div class="quiz-question">
-        <p>What is the recommended flag to use with the <code>nextflow clean</code> command before actually deleting files?</p>
+        <p>Quel est le drapeau recommandé à utiliser avec la commande <code>nextflow clean</code> avant de supprimer réellement des fichiers ?</p>
     </div>
     <form action="javascript:void(0);" onsubmit="return false;">
-        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-7-0" correct><label for="quiz-7-0"><code>-n</code> (dry run) to preview what would be deleted</label></div><div><input type="radio" name="answer" value="1" id="quiz-7-1" ><label for="quiz-7-1"><code>-v</code> (verbose) to see detailed output</label></div><div><input type="radio" name="answer" value="2" id="quiz-7-2" ><label for="quiz-7-2"><code>-a</code> (all) to select all directories</label></div><div><input type="radio" name="answer" value="3" id="quiz-7-3" ><label for="quiz-7-3"><code>-q</code> (quiet) to suppress warnings</label></div></fieldset>
+        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-7-0" correct><label for="quiz-7-0"><code>-n</code> (test à blanc) pour prévisualiser ce qui serait supprimé</label></div><div><input type="radio" name="answer" value="1" id="quiz-7-1" ><label for="quiz-7-1"><code>-v</code> (verbeux) pour voir une sortie détaillée</label></div><div><input type="radio" name="answer" value="2" id="quiz-7-2" ><label for="quiz-7-2"><code>-a</code> (tous) pour sélectionner tous les répertoires</label></div><div><input type="radio" name="answer" value="3" id="quiz-7-3" ><label for="quiz-7-3"><code>-q</code> (silencieux) pour supprimer les avertissements</label></div></fieldset>
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Learn more: <a href="#43-delete-older-work-directories">4.3. Delete older work directories</a></p></section>
+    <section class="content hidden"><p>En savoir plus : <a href="#43-supprimer-les-anciens-repertoires-de-travail">4.3. Supprimer les anciens répertoires de travail</a></p></section>
 </div><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
@@ -6500,6 +6538,9 @@ window.mkdocsQuizConfig = {
 
 
 
+  
+  
+
 
 
   
@@ -6530,7 +6571,7 @@ window.mkdocsQuizConfig = {
       <nav class="md-footer__inner md-grid" aria-label="Pied de page" >
         
           
-          <a href="../00_orientation/" class="md-footer__link md-footer__link--prev" aria-label="Précédent: Getting started">
+          <a href="../00_orientation/" class="md-footer__link md-footer__link--prev" aria-label="Précédent: Démarrage">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -6540,20 +6581,20 @@ window.mkdocsQuizConfig = {
                 Précédent
               </span>
               <div class="md-ellipsis">
-                Getting started
+                Démarrage
               </div>
             </div>
           </a>
         
         
           
-          <a href="../02_pipeline/" class="md-footer__link md-footer__link--next" aria-label="Suivant: Part 2: Run real pipelines">
+          <a href="../02_pipeline/" class="md-footer__link md-footer__link--next" aria-label="Suivant: Partie 2 : Exécuter de vrais pipelines">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Suivant
               </span>
               <div class="md-ellipsis">
-                Part 2: Run real pipelines
+                Partie 2 : Exécuter de vrais pipelines
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -6630,8 +6671,8 @@ window.mkdocsQuizConfig = {
   
 
 
-<h4>Cookie consent</h4>
-<p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our training materials better. Find out more on <a href="https://seqera.io/privacy-policy/#cookies" target="_blank" rel="noopener">how we use cookies</a>.</p>
+<h4>Consentement aux cookies</h4>
+<p>Nous utilisons des cookies pour reconnaître vos visites répétées et vos préférences, ainsi que pour mesurer l'efficacité de notre documentation et déterminer si les utilisateur·rice·s trouvent ce qu'ils recherchent. Avec votre consentement, vous nous aidez à améliorer nos supports de formation. En savoir plus sur <a href="https://seqera.io/privacy-policy/#cookies" target="_blank" rel="noopener">notre utilisation des cookies</a>.</p>
 <input class="md-toggle" type="checkbox" id="__settings" >
 <div class="md-consent__settings">
   <ul class="task-list">
@@ -6715,12 +6756,16 @@ window.mkdocsQuizConfig = {
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}, "version": {"alias": true, "provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}, "version": {"alias": true, "provider": "mike"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
-        <script src="../../../assets/javascripts/posthog.js"></script>
+        <script src="../../assets/javascripts/consent-sync.js"></script>
+      
+        <script src="../../assets/javascripts/posthog.js"></script>
+      
+        <script src="../../assets/javascripts/language-picker.js"></script>
       
     
   </body>

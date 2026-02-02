@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://training.nextflow.io/0.dev/pt/nf4_science/imaging/04_config/">
+        <link rel="canonical" href="https://training.nextflow.io/pt/nf4_science/imaging/04_config/">
       
       
         <link rel="prev" href="../03_inputs/">
@@ -18,33 +18,41 @@
       
       
         
-          <link rel="alternate" href="../../../../nf4_science/imaging/04_config/" hreflang="en">
+          <link rel="alternate" href="/" hreflang="en">
         
-          <link rel="alternate" href="./" hreflang="pt">
+          <link rel="alternate" href="/de/" hreflang="de">
         
-          <link rel="alternate" href="../../../../es/nf4_science/imaging/04_config/" hreflang="es">
+          <link rel="alternate" href="/es/" hreflang="es">
         
-          <link rel="alternate" href="../../../../fr/nf4_science/imaging/04_config/" hreflang="fr">
+          <link rel="alternate" href="/fr/" hreflang="fr">
         
-          <link rel="alternate" href="../../../../it/nf4_science/imaging/04_config/" hreflang="it">
+          <link rel="alternate" href="/hi/" hreflang="hi">
         
-          <link rel="alternate" href="../../../../ko/nf4_science/imaging/04_config/" hreflang="ko">
+          <link rel="alternate" href="/it/" hreflang="it">
+        
+          <link rel="alternate" href="/ko/" hreflang="ko">
+        
+          <link rel="alternate" href="/pl/" hreflang="pl">
+        
+          <link rel="alternate" href="/pt/" hreflang="pt">
+        
+          <link rel="alternate" href="/tr/" hreflang="tr">
         
       
       
-      <link rel="icon" href="../../../../assets/img/nextflow-icon.png">
+      <link rel="icon" href="../../../assets/img/nextflow-icon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
     
     
       
-        <title>Part 4: Configuration - training.nextflow.io</title>
+        <title>Parte 4: Configuração - training.nextflow.io</title>
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
   
@@ -108,11 +116,11 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/fonts.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/fonts.css">
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/extra.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/extra.css">
     
-    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
   
@@ -147,7 +155,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#part-4-configuration" class="md-skip">
+        <a href="#parte-4-configuracao" class="md-skip">
           Ir para o conteúdo
         </a>
       
@@ -167,9 +175,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
-    <a href="../../../" title="training.nextflow.io" class="md-header__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
+    <a href="../../.." title="training.nextflow.io" class="md-header__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
       
-  <img src="../../../../assets/img/nextflow_logo_dark.png" alt="logo">
+  <img src="../../../assets/img/nextflow_logo_dark.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -186,7 +194,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Part 4: Configuration
+              Parte 4: Configuração
             
           </span>
         </div>
@@ -233,38 +241,62 @@
       <ul class="md-select__list">
         
           <li class="md-select__item">
-            <a href="../../../../nf4_science/imaging/04_config/" hreflang="en" class="md-select__link">
+            <a href="/" hreflang="en" class="md-select__link">
               English
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="./" hreflang="pt" class="md-select__link">
-              Português
+            <a href="/de/" hreflang="de" class="md-select__link">
+              deutsch
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../../es/nf4_science/imaging/04_config/" hreflang="es" class="md-select__link">
-              Español
+            <a href="/es/" hreflang="es" class="md-select__link">
+              español
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../../fr/nf4_science/imaging/04_config/" hreflang="fr" class="md-select__link">
-              Français
+            <a href="/fr/" hreflang="fr" class="md-select__link">
+              français
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../../it/nf4_science/imaging/04_config/" hreflang="it" class="md-select__link">
-              Italiano
+            <a href="/hi/" hreflang="hi" class="md-select__link">
+              हिन्दी
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../../ko/nf4_science/imaging/04_config/" hreflang="ko" class="md-select__link">
-              Korean
+            <a href="/it/" hreflang="it" class="md-select__link">
+              italiano
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/ko/" hreflang="ko" class="md-select__link">
+              한국어
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/pl/" hreflang="pl" class="md-select__link">
+              Polski
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/pt/" hreflang="pt" class="md-select__link">
+              português
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/tr/" hreflang="tr" class="md-select__link">
+              Türkçe
             </a>
           </li>
         
@@ -384,9 +416,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../../" title="training.nextflow.io" class="md-nav__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
+    <a href="../../.." title="training.nextflow.io" class="md-nav__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
       
-  <img src="../../../../assets/img/nextflow_logo_dark.png" alt="logo">
+  <img src="../../../assets/img/nextflow_logo_dark.png" alt="logo">
 
     </a>
     training.nextflow.io
@@ -413,14 +445,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../" class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Home
+    Início
   
 
     
@@ -522,7 +554,7 @@
   <span class="md-ellipsis">
     
   
-    Getting started
+    Primeiros passos
   
 
     
@@ -550,7 +582,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run basic operations
+    Parte 1: Operações básicas de execução
   
 
     
@@ -578,7 +610,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Run real pipelines
+    Parte 2: Executar pipelines reais
   
 
     
@@ -606,7 +638,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Run configuration
+    Parte 3: Configuração de execução
   
 
     
@@ -634,7 +666,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    Resumo do curso
   
 
     
@@ -662,7 +694,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Pesquisa de feedback
   
 
     
@@ -772,7 +804,7 @@
   <span class="md-ellipsis">
     
   
-    Orientação
+    Começando
   
 
     
@@ -800,7 +832,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Hello World
+    Parte 1: Hello World
   
 
     
@@ -828,7 +860,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Hello Channels
+    Parte 2: Hello Channels
   
 
     
@@ -856,7 +888,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Hello Workflow
+    Parte 3: Hello Workflow
   
 
     
@@ -884,7 +916,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Hello Modules
+    Parte 4: Hello Modules
   
 
     
@@ -912,7 +944,7 @@
   <span class="md-ellipsis">
     
   
-    Part 5: Hello Containers
+    Parte 5: Hello Containers
   
 
     
@@ -940,7 +972,7 @@
   <span class="md-ellipsis">
     
   
-    Part 6: Hello Config
+    Parte 6: Hello Config
   
 
     
@@ -968,7 +1000,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    Resumo do curso
   
 
     
@@ -996,7 +1028,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Pesquisa de feedback
   
 
     
@@ -1106,7 +1138,7 @@
   <span class="md-ellipsis">
     
   
-    Getting started
+    Primeiros Passos
   
 
     
@@ -1134,7 +1166,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run a demo pipeline
+    Parte 1: Executar um pipeline de demonstração
   
 
     
@@ -1162,7 +1194,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Rewrite Hello for nf-core
+    Parte 2: Reescrever Hello para nf-core
   
 
     
@@ -1190,7 +1222,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Use an nf-core module
+    Parte 3: Usar um módulo nf-core
   
 
     
@@ -1218,7 +1250,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Make an nf-core module
+    Parte 4: Criar um módulo nf-core
   
 
     
@@ -1246,7 +1278,7 @@
   <span class="md-ellipsis">
     
   
-    Part 5: Input validation
+    Parte 5: Validação de entrada
   
 
     
@@ -1274,7 +1306,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    Resumo do curso
   
 
     
@@ -1302,7 +1334,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Pesquisa de feedback
   
 
     
@@ -1350,7 +1382,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Science
+    Nextflow para Ciência
   
 
     
@@ -1366,7 +1398,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Nextflow for Science
+    Nextflow para Ciência
   
 
           </label>
@@ -1386,7 +1418,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Science
+    Nextflow para Ciência
   
 
     
@@ -1425,7 +1457,7 @@
   <span class="md-ellipsis">
     
   
-    Genomics
+    Nextflow para Genômica
   
 
     
@@ -1441,7 +1473,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Genomics
+    Nextflow para Genômica
   
 
           </label>
@@ -1461,7 +1493,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Genomics
+    Nextflow para Genômica
   
 
     
@@ -1489,7 +1521,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    Orientação
   
 
     
@@ -1517,7 +1549,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Per-sample variant calling
+    Parte 1: Chamada de variantes por amostra
   
 
     
@@ -1545,7 +1577,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Joint calling on a cohort
+    Parte 2: Chamada conjunta em uma coorte
   
 
     
@@ -1573,7 +1605,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Moving code into modules
+    Parte 3: Movendo código para módulos
   
 
     
@@ -1601,7 +1633,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Adding tests
+    Parte 4: Adicionando testes
   
 
     
@@ -1629,7 +1661,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Pesquisa de feedback
   
 
     
@@ -1657,7 +1689,7 @@
   <span class="md-ellipsis">
     
   
-    Next Steps
+    Próximos Passos
   
 
     
@@ -1704,7 +1736,7 @@
   <span class="md-ellipsis">
     
   
-    RNAseq
+    Nextflow para RNAseq
   
 
     
@@ -1720,7 +1752,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    RNAseq
+    Nextflow para RNAseq
   
 
           </label>
@@ -1740,7 +1772,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for RNAseq
+    Nextflow para RNAseq
   
 
     
@@ -1768,7 +1800,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    Orientação
   
 
     
@@ -1796,7 +1828,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Method overview and manual testing
+    Parte 1: Visão geral do método e teste manual
   
 
     
@@ -1824,7 +1856,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Single-sample implementation
+    Parte 2: Implementação de amostra única
   
 
     
@@ -1852,7 +1884,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Multi-sample paired-end implementation
+    Parte 3: Implementação de múltiplas amostras com dados paired-end
   
 
     
@@ -1880,7 +1912,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Pesquisa de feedback
   
 
     
@@ -1908,7 +1940,7 @@
   <span class="md-ellipsis">
     
   
-    Next Steps
+    Próximos Passos
   
 
     
@@ -1957,7 +1989,7 @@
   <span class="md-ellipsis">
     
   
-    Imaging
+    Index
   
 
     
@@ -1973,7 +2005,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Imaging
+    Index
   
 
           </label>
@@ -1993,7 +2025,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow run for Imaging
+    Index
   
 
     
@@ -2021,7 +2053,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    Orientação
   
 
     
@@ -2049,7 +2081,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run basic operations
+    Parte 1: Executar operações básicas
   
 
     
@@ -2077,7 +2109,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Run nf-core/molkart
+    Parte 2: Executar nf-core/molkart
   
 
     
@@ -2105,7 +2137,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Organizing inputs
+    Parte 3: Organizando entradas
   
 
     
@@ -2142,7 +2174,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Configuration
+    Parte 4: Configuração
   
 
     
@@ -2160,7 +2192,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Configuration
+    Parte 4: Configuração
   
 
     
@@ -2180,31 +2212,31 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#learning-objectives" class="md-nav__link">
+  <a href="#objetivos-de-aprendizagem" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Learning objectives
+        Objetivos de aprendizagem
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#1-understanding-nextflow-configuration" class="md-nav__link">
+  <a href="#1-entendendo-a-configuracao-do-nextflow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Understanding Nextflow configuration
+        1. Entendendo a configuração do Nextflow
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Understanding Nextflow configuration">
+    <nav class="md-nav" aria-label="1. Entendendo a configuração do Nextflow">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11-what-is-a-configuration-file" class="md-nav__link">
+  <a href="#11-o-que-e-um-arquivo-de-configuracao" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1. What is a configuration file?
+        1.1. O que é um arquivo de configuração?
       
     </span>
   </a>
@@ -2212,10 +2244,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#12-configuration-precedence" class="md-nav__link">
+  <a href="#12-precedencia-de-configuracao" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2. Configuration precedence
+        1.2. Precedência de configuração
       
     </span>
   </a>
@@ -2223,10 +2255,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#13-our-current-configuration" class="md-nav__link">
+  <a href="#13-nossa-configuracao-atual" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.3. Our current configuration
+        1.3. Nossa configuração atual
       
     </span>
   </a>
@@ -2237,22 +2269,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#2-using-profiles" class="md-nav__link">
+  <a href="#2-usando-profiles" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Using profiles
+        2. Usando profiles
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. Using profiles">
+    <nav class="md-nav" aria-label="2. Usando profiles">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#21-what-are-profiles" class="md-nav__link">
+  <a href="#21-o-que-sao-profiles" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1. What are profiles?
+        2.1. O que são profiles?
       
     </span>
   </a>
@@ -2260,10 +2292,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#22-inspecting-built-in-profiles" class="md-nav__link">
+  <a href="#22-inspecionando-profiles-integrados" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2. Inspecting built-in profiles
+        2.2. Inspecionando profiles integrados
       
     </span>
   </a>
@@ -2271,10 +2303,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#23-re-running-with-profiles-instead-of-nextflowconfig" class="md-nav__link">
+  <a href="#23-re-executando-com-profiles-ao-inves-de-nextflowconfig" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.3. Re-running with profiles instead of nextflow.config
+        2.3. Re-executando com profiles ao invés de nextflow.config
       
     </span>
   </a>
@@ -2282,10 +2314,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#24-test-profiles" class="md-nav__link">
+  <a href="#24-profiles-de-teste" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.4. Test profiles
+        2.4. Profiles de teste
       
     </span>
   </a>
@@ -2293,10 +2325,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway" class="md-nav__link">
+  <a href="#conclusao" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        Conclusão
       
     </span>
   </a>
@@ -2304,10 +2336,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next" class="md-nav__link">
+  <a href="#proximos-passos" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        Próximos passos
       
     </span>
   </a>
@@ -2318,22 +2350,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#3-creating-custom-profiles" class="md-nav__link">
+  <a href="#3-criando-profiles-personalizados" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Creating custom profiles
+        3. Criando profiles personalizados
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. Creating custom profiles">
+    <nav class="md-nav" aria-label="3. Criando profiles personalizados">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#31-create-profiles-for-switching-between-local-development-and-execution-on-hpc" class="md-nav__link">
+  <a href="#31-criar-profiles-para-alternar-entre-desenvolvimento-local-e-execucao-em-hpc" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1. Create profiles for switching between local development and execution on HPC
+        3.1. Criar profiles para alternar entre desenvolvimento local e execução em HPC
       
     </span>
   </a>
@@ -2341,10 +2373,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#32-use-nextflow-config-to-inspect-configuration" class="md-nav__link">
+  <a href="#32-use-nextflow-config-para-inspecionar-a-configuracao" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.2. Use nextflow config to inspect configuration
+        3.2. Use nextflow config para inspecionar a configuração
       
     </span>
   </a>
@@ -2352,10 +2384,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway_1" class="md-nav__link">
+  <a href="#conclusao_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        Conclusão
       
     </span>
   </a>
@@ -2363,10 +2395,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next_1" class="md-nav__link">
+  <a href="#proximos-passos_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        Próximos passos
       
     </span>
   </a>
@@ -2377,22 +2409,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#4-customizing-resource-requests" class="md-nav__link">
+  <a href="#4-personalizando-solicitacoes-de-recursos" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Customizing resource requests
+        4. Personalizando solicitações de recursos
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="4. Customizing resource requests">
+    <nav class="md-nav" aria-label="4. Personalizando solicitações de recursos">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#41-understanding-process-labels-in-nf-core-pipelines" class="md-nav__link">
+  <a href="#41-entendendo-process-labels-em-pipelines-nf-core" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.1. Understanding process labels in nf-core pipelines
+        4.1. Entendendo process labels em pipelines nf-core
       
     </span>
   </a>
@@ -2400,10 +2432,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#42-overriding-resources-for-specific-processes" class="md-nav__link">
+  <a href="#42-sobrescrevendo-recursos-para-processos-especificos" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.2. Overriding resources for specific processes
+        4.2. Sobrescrevendo recursos para processos específicos
       
     </span>
   </a>
@@ -2411,10 +2443,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway_2" class="md-nav__link">
+  <a href="#conclusao_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        Conclusão
       
     </span>
   </a>
@@ -2422,10 +2454,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next_2" class="md-nav__link">
+  <a href="#proximos-passos_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        Próximos passos
       
     </span>
   </a>
@@ -2436,22 +2468,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#5-managing-resources-in-constrained-environments" class="md-nav__link">
+  <a href="#5-gerenciando-recursos-em-ambientes-restritos" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5. Managing resources in constrained environments
+        5. Gerenciando recursos em ambientes restritos
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="5. Managing resources in constrained environments">
+    <nav class="md-nav" aria-label="5. Gerenciando recursos em ambientes restritos">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#51-the-resource-limits-problem" class="md-nav__link">
+  <a href="#51-o-problema-dos-limites-de-recursos" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5.1. The resource limits problem
+        5.1. O problema dos limites de recursos
       
     </span>
   </a>
@@ -2459,10 +2491,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#52-setting-resource-limits" class="md-nav__link">
+  <a href="#52-definindo-limites-de-recursos" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5.2. Setting resource limits
+        5.2. Definindo limites de recursos
       
     </span>
   </a>
@@ -2470,10 +2502,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#53-adding-resource-limits-to-custom-profiles" class="md-nav__link">
+  <a href="#53-adicionando-limites-de-recursos-a-profiles-personalizados" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5.3. Adding resource limits to custom profiles
+        5.3. Adicionando limites de recursos a profiles personalizados
       
     </span>
   </a>
@@ -2481,10 +2513,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway_3" class="md-nav__link">
+  <a href="#conclusao_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        Conclusão
       
     </span>
   </a>
@@ -2492,10 +2524,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next_3" class="md-nav__link">
+  <a href="#proximos-passos_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        Próximos passos
       
     </span>
   </a>
@@ -2506,22 +2538,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#conclusion" class="md-nav__link">
+  <a href="#conclusao_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Conclusion
+        Conclusão
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Conclusion">
+    <nav class="md-nav" aria-label="Conclusão">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#whats-next_4" class="md-nav__link">
+  <a href="#proximos-passos_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        Próximos passos
       
     </span>
   </a>
@@ -2741,7 +2773,7 @@
   <span class="md-ellipsis">
     
   
-    Survey
+    Questionário
   
 
     
@@ -2769,7 +2801,7 @@
   <span class="md-ellipsis">
     
   
-    Next steps
+    Próximos passos
   
 
     
@@ -2823,7 +2855,7 @@
   <span class="md-ellipsis">
     
   
-    Side Quests
+    Missões Secundárias
   
 
     
@@ -2839,7 +2871,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Side Quests
+    Missões Secundárias
   
 
           </label>
@@ -2859,7 +2891,7 @@
   <span class="md-ellipsis">
     
   
-    Side Quests
+    Missões Secundárias
   
 
     
@@ -2887,7 +2919,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    Orientação
   
 
     
@@ -2915,7 +2947,7 @@
   <span class="md-ellipsis">
     
   
-    Development Environment
+    Ambiente de Desenvolvimento
   
 
     
@@ -2943,7 +2975,7 @@
   <span class="md-ellipsis">
     
   
-    Metadata and meta maps
+    Metadados e mapas meta
   
 
     
@@ -2971,7 +3003,7 @@
   <span class="md-ellipsis">
     
   
-    File input processing
+    Processamento de entrada de arquivos
   
 
     
@@ -2999,7 +3031,7 @@
   <span class="md-ellipsis">
     
   
-    Splitting and Grouping
+    Divisão e Agrupamento
   
 
     
@@ -3027,7 +3059,7 @@
   <span class="md-ellipsis">
     
   
-    Workflows of Workflows
+    Fluxos de Trabalho de Fluxos de Trabalho
   
 
     
@@ -3055,7 +3087,7 @@
   <span class="md-ellipsis">
     
   
-    Debugging Workflows
+    Depurando Workflows
   
 
     
@@ -3083,7 +3115,7 @@
   <span class="md-ellipsis">
     
   
-    Essential Nextflow Scripting Patterns
+    Padrões Essenciais de Script em Nextflow
   
 
     
@@ -3111,7 +3143,7 @@
   <span class="md-ellipsis">
     
   
-    Testing with nf-test
+    Testando com nf-test
   
 
     
@@ -3157,7 +3189,7 @@
   <span class="md-ellipsis">
     
   
-    Training Collections
+    Index
   
 
     
@@ -3173,7 +3205,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Training Collections
+    Index
   
 
           </label>
@@ -3193,7 +3225,7 @@
   <span class="md-ellipsis">
     
   
-    Training Collections
+    Index
   
 
     
@@ -3221,7 +3253,7 @@
   <span class="md-ellipsis">
     
   
-    The Architect's Toolkit I
+    Architects toolkit 1
   
 
     
@@ -3303,7 +3335,7 @@
   <span class="md-ellipsis">
     
   
-    Conseguindo ajuda
+    Obtendo ajuda
   
 
     
@@ -3342,7 +3374,7 @@
   <span class="md-ellipsis">
     
   
-    Training environment
+    Opções de ambiente
   
 
     
@@ -3358,7 +3390,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Training environment
+    Opções de ambiente
   
 
           </label>
@@ -3378,7 +3410,7 @@
   <span class="md-ellipsis">
     
   
-    Configuração do ambiente
+    Opções de ambiente
   
 
     
@@ -3406,7 +3438,7 @@
   <span class="md-ellipsis">
     
   
-    Gitpod
+    GitHub Codespaces
   
 
     
@@ -3434,7 +3466,7 @@
   <span class="md-ellipsis">
     
   
-    Local Devcontainers
+    Devcontainers Locais
   
 
     
@@ -3462,7 +3494,7 @@
   <span class="md-ellipsis">
     
   
-    Instalação local
+    Instalação manual
   
 
     
@@ -3498,7 +3530,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow versions
+    Versões do Nextflow
   
 
     
@@ -3526,7 +3558,7 @@
   <span class="md-ellipsis">
     
   
-    The Hello pipeline
+    O pipeline Hello
   
 
     
@@ -3568,31 +3600,31 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#learning-objectives" class="md-nav__link">
+  <a href="#objetivos-de-aprendizagem" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Learning objectives
+        Objetivos de aprendizagem
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#1-understanding-nextflow-configuration" class="md-nav__link">
+  <a href="#1-entendendo-a-configuracao-do-nextflow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Understanding Nextflow configuration
+        1. Entendendo a configuração do Nextflow
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Understanding Nextflow configuration">
+    <nav class="md-nav" aria-label="1. Entendendo a configuração do Nextflow">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11-what-is-a-configuration-file" class="md-nav__link">
+  <a href="#11-o-que-e-um-arquivo-de-configuracao" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1. What is a configuration file?
+        1.1. O que é um arquivo de configuração?
       
     </span>
   </a>
@@ -3600,10 +3632,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#12-configuration-precedence" class="md-nav__link">
+  <a href="#12-precedencia-de-configuracao" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2. Configuration precedence
+        1.2. Precedência de configuração
       
     </span>
   </a>
@@ -3611,10 +3643,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#13-our-current-configuration" class="md-nav__link">
+  <a href="#13-nossa-configuracao-atual" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.3. Our current configuration
+        1.3. Nossa configuração atual
       
     </span>
   </a>
@@ -3625,22 +3657,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#2-using-profiles" class="md-nav__link">
+  <a href="#2-usando-profiles" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Using profiles
+        2. Usando profiles
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. Using profiles">
+    <nav class="md-nav" aria-label="2. Usando profiles">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#21-what-are-profiles" class="md-nav__link">
+  <a href="#21-o-que-sao-profiles" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1. What are profiles?
+        2.1. O que são profiles?
       
     </span>
   </a>
@@ -3648,10 +3680,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#22-inspecting-built-in-profiles" class="md-nav__link">
+  <a href="#22-inspecionando-profiles-integrados" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2. Inspecting built-in profiles
+        2.2. Inspecionando profiles integrados
       
     </span>
   </a>
@@ -3659,10 +3691,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#23-re-running-with-profiles-instead-of-nextflowconfig" class="md-nav__link">
+  <a href="#23-re-executando-com-profiles-ao-inves-de-nextflowconfig" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.3. Re-running with profiles instead of nextflow.config
+        2.3. Re-executando com profiles ao invés de nextflow.config
       
     </span>
   </a>
@@ -3670,10 +3702,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#24-test-profiles" class="md-nav__link">
+  <a href="#24-profiles-de-teste" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.4. Test profiles
+        2.4. Profiles de teste
       
     </span>
   </a>
@@ -3681,10 +3713,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway" class="md-nav__link">
+  <a href="#conclusao" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        Conclusão
       
     </span>
   </a>
@@ -3692,10 +3724,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next" class="md-nav__link">
+  <a href="#proximos-passos" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        Próximos passos
       
     </span>
   </a>
@@ -3706,22 +3738,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#3-creating-custom-profiles" class="md-nav__link">
+  <a href="#3-criando-profiles-personalizados" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Creating custom profiles
+        3. Criando profiles personalizados
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. Creating custom profiles">
+    <nav class="md-nav" aria-label="3. Criando profiles personalizados">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#31-create-profiles-for-switching-between-local-development-and-execution-on-hpc" class="md-nav__link">
+  <a href="#31-criar-profiles-para-alternar-entre-desenvolvimento-local-e-execucao-em-hpc" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1. Create profiles for switching between local development and execution on HPC
+        3.1. Criar profiles para alternar entre desenvolvimento local e execução em HPC
       
     </span>
   </a>
@@ -3729,10 +3761,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#32-use-nextflow-config-to-inspect-configuration" class="md-nav__link">
+  <a href="#32-use-nextflow-config-para-inspecionar-a-configuracao" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.2. Use nextflow config to inspect configuration
+        3.2. Use nextflow config para inspecionar a configuração
       
     </span>
   </a>
@@ -3740,10 +3772,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway_1" class="md-nav__link">
+  <a href="#conclusao_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        Conclusão
       
     </span>
   </a>
@@ -3751,10 +3783,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next_1" class="md-nav__link">
+  <a href="#proximos-passos_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        Próximos passos
       
     </span>
   </a>
@@ -3765,22 +3797,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#4-customizing-resource-requests" class="md-nav__link">
+  <a href="#4-personalizando-solicitacoes-de-recursos" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Customizing resource requests
+        4. Personalizando solicitações de recursos
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="4. Customizing resource requests">
+    <nav class="md-nav" aria-label="4. Personalizando solicitações de recursos">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#41-understanding-process-labels-in-nf-core-pipelines" class="md-nav__link">
+  <a href="#41-entendendo-process-labels-em-pipelines-nf-core" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.1. Understanding process labels in nf-core pipelines
+        4.1. Entendendo process labels em pipelines nf-core
       
     </span>
   </a>
@@ -3788,10 +3820,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#42-overriding-resources-for-specific-processes" class="md-nav__link">
+  <a href="#42-sobrescrevendo-recursos-para-processos-especificos" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.2. Overriding resources for specific processes
+        4.2. Sobrescrevendo recursos para processos específicos
       
     </span>
   </a>
@@ -3799,10 +3831,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway_2" class="md-nav__link">
+  <a href="#conclusao_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        Conclusão
       
     </span>
   </a>
@@ -3810,10 +3842,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next_2" class="md-nav__link">
+  <a href="#proximos-passos_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        Próximos passos
       
     </span>
   </a>
@@ -3824,22 +3856,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#5-managing-resources-in-constrained-environments" class="md-nav__link">
+  <a href="#5-gerenciando-recursos-em-ambientes-restritos" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5. Managing resources in constrained environments
+        5. Gerenciando recursos em ambientes restritos
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="5. Managing resources in constrained environments">
+    <nav class="md-nav" aria-label="5. Gerenciando recursos em ambientes restritos">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#51-the-resource-limits-problem" class="md-nav__link">
+  <a href="#51-o-problema-dos-limites-de-recursos" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5.1. The resource limits problem
+        5.1. O problema dos limites de recursos
       
     </span>
   </a>
@@ -3847,10 +3879,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#52-setting-resource-limits" class="md-nav__link">
+  <a href="#52-definindo-limites-de-recursos" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5.2. Setting resource limits
+        5.2. Definindo limites de recursos
       
     </span>
   </a>
@@ -3858,10 +3890,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#53-adding-resource-limits-to-custom-profiles" class="md-nav__link">
+  <a href="#53-adicionando-limites-de-recursos-a-profiles-personalizados" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5.3. Adding resource limits to custom profiles
+        5.3. Adicionando limites de recursos a profiles personalizados
       
     </span>
   </a>
@@ -3869,10 +3901,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway_3" class="md-nav__link">
+  <a href="#conclusao_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        Conclusão
       
     </span>
   </a>
@@ -3880,10 +3912,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next_3" class="md-nav__link">
+  <a href="#proximos-passos_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        Próximos passos
       
     </span>
   </a>
@@ -3894,22 +3926,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#conclusion" class="md-nav__link">
+  <a href="#conclusao_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Conclusion
+        Conclusão
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Conclusion">
+    <nav class="md-nav" aria-label="Conclusão">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#whats-next_4" class="md-nav__link">
+  <a href="#proximos-passos_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        Próximos passos
       
     </span>
   </a>
@@ -4158,51 +4190,61 @@
                 
                   
 
+ 
+<a
+  href="https://github.com/nextflow-io/training/edit/master/docs/nf4_science/imaging/04_config.md"
+  title="Editar esta página"
+  class="md-content__button md-icon"
+  rel="edit"
+>
+   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+</a>
+   
+<a
+  href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md"
+  title="Improve translation"
+  class="md-content__button md-icon"
+>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 1H3c-1.1 0-2 .9-2 2v12l3-3h5v-1c0-2.2 1.79-4 4-4V3c0-1.1-.9-2-2-2m0 3H9.5c-.34 1.19-.96 2.3-1.82 3.26l-.02.02 1.26 1.25-.37 1.01L7 8l-2.5 2.5-.69-.73 2.53-2.49A8.6 8.6 0 0 1 4.86 5h.99c.31.6.69 1.17 1.15 1.68A7.7 7.7 0 0 0 8.57 4H3V3h3.5V2h1v1H11zm10 5h-8c-1.1 0-2 .9-2 2v7c0 1.1.9 2 2 2h7l3 3V11c0-1.1-.9-2-2-2m-1.37 10-.85-2.25h-3.56L14.38 19h-1.5l3.37-9h1.5l3.38 9zM17 12l1.22 3.25h-2.43z"/></svg>
+</a>
+ 
 
-  
-    <a href="https://github.com/nextflow-io/training/edit/master/docs/nf4_science/imaging/04_config.md" title="Editar esta página" class="md-content__button md-icon" rel="edit">
-      
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
-    </a>
-  
-  
-
-
-<h1 id="part-4-configuration">Part 4: Configuration<a class="headerlink" href="#part-4-configuration" title="Permanent link">&para;</a></h1>
-<p>In Parts 1-3, we learned how to run Nextflow, run an nf-core pipeline, and manage inputs with parameter files and samplesheets.
-Now we'll explore how to configure pipelines for different computing environments using <strong>configuration files</strong> and <strong>profiles</strong>.</p>
-<h2 id="learning-objectives">Learning objectives<a class="headerlink" href="#learning-objectives" title="Permanent link">&para;</a></h2>
-<p>By the end of this part, you'll be able to:</p>
+<h1 id="parte-4-configuracao">Parte 4: Configuração<a class="headerlink" href="#parte-4-configuracao" title="Permanent link">&para;</a></h1>
+<p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Tradução assistida por IA - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">saiba mais e sugira melhorias</a></span></p>
+<p>Nas Partes 1-3, aprendemos como executar Nextflow, executar um pipeline nf-core e gerenciar entradas com arquivos de parâmetros e samplesheets.
+Agora vamos explorar como configurar pipelines para diferentes ambientes de computação usando <strong>arquivos de configuração</strong> e <strong>profiles</strong>.</p>
+<h2 id="objetivos-de-aprendizagem">Objetivos de aprendizagem<a class="headerlink" href="#objetivos-de-aprendizagem" title="Permanent link">&para;</a></h2>
+<p>Ao final desta parte, você será capaz de:</p>
 <ul>
-<li>Understand how Nextflow resolves configuration from multiple sources</li>
-<li>Use nf-core built-in profiles for containers and testing</li>
-<li>Create custom profiles for different computing environments</li>
-<li>Customize resource requests using process labels</li>
-<li>Manage resource limits in constrained environments</li>
-<li>Inspect resolved configuration with <code>nextflow config</code></li>
+<li>Entender como o Nextflow resolve a configuração de múltiplas fontes</li>
+<li>Usar profiles integrados do nf-core para contêineres e testes</li>
+<li>Criar profiles personalizados para diferentes ambientes de computação</li>
+<li>Personalizar solicitações de recursos usando process labels</li>
+<li>Gerenciar limites de recursos em ambientes restritos</li>
+<li>Inspecionar a configuração resolvida com <code>nextflow config</code></li>
 </ul>
 <hr />
-<h2 id="1-understanding-nextflow-configuration">1. Understanding Nextflow configuration<a class="headerlink" href="#1-understanding-nextflow-configuration" title="Permanent link">&para;</a></h2>
-<h3 id="11-what-is-a-configuration-file">1.1. What is a configuration file?<a class="headerlink" href="#11-what-is-a-configuration-file" title="Permanent link">&para;</a></h3>
-<p>Nextflow uses configuration files to separate <strong>workflow logic</strong> (what to do) from <strong>execution settings</strong> (how and where to do it).</p>
-<p>Configuration files control:</p>
+<h2 id="1-entendendo-a-configuracao-do-nextflow">1. Entendendo a configuração do Nextflow<a class="headerlink" href="#1-entendendo-a-configuracao-do-nextflow" title="Permanent link">&para;</a></h2>
+<h3 id="11-o-que-e-um-arquivo-de-configuracao">1.1. O que é um arquivo de configuração?<a class="headerlink" href="#11-o-que-e-um-arquivo-de-configuracao" title="Permanent link">&para;</a></h3>
+<p>O Nextflow usa arquivos de configuração para separar a <strong>lógica do fluxo de trabalho</strong> (o que fazer) das <strong>configurações de execução</strong> (como e onde fazer).</p>
+<p>Arquivos de configuração controlam:</p>
 <ul>
-<li>Container engines (Docker, Singularity, Conda)</li>
-<li>Compute resources (CPUs, memory, time)</li>
-<li>Execution platforms (local, HPC, cloud)</li>
-<li>Pipeline parameters</li>
+<li>Engines de contêineres (Docker, Singularity, Conda)</li>
+<li>Recursos computacionais (CPUs, memória, tempo)</li>
+<li>Plataformas de execução (local, HPC, nuvem)</li>
+<li>Parâmetros do pipeline</li>
 </ul>
-<h3 id="12-configuration-precedence">1.2. Configuration precedence<a class="headerlink" href="#12-configuration-precedence" title="Permanent link">&para;</a></h3>
-<p>Nextflow loads configuration from multiple sources, with later sources overriding earlier ones:</p>
+<h3 id="12-precedencia-de-configuracao">1.2. Precedência de configuração<a class="headerlink" href="#12-precedencia-de-configuracao" title="Permanent link">&para;</a></h3>
+<p>O Nextflow carrega a configuração de múltiplas fontes, com fontes posteriores sobrescrevendo as anteriores:</p>
 <ol>
-<li><strong>Pipeline config</strong>: <code>nextflow.config</code> in the pipeline repository</li>
-<li><strong>Directory config</strong>: <code>nextflow.config</code> in your present working directory</li>
-<li><strong>User config</strong>: <code>~/.nextflow/config</code></li>
-<li><strong>Command-line</strong>: Parameters and options passed directly</li>
+<li><strong>Configuração do pipeline</strong>: <code>nextflow.config</code> no repositório do pipeline</li>
+<li><strong>Configuração do diretório</strong>: <code>nextflow.config</code> no seu diretório de trabalho atual</li>
+<li><strong>Configuração do usuário</strong>: <code>~/.nextflow/config</code></li>
+<li><strong>Linha de comando</strong>: Parâmetros e opções passados diretamente</li>
 </ol>
-<p>This layered approach lets you keep defaults in the pipeline, override with user-specific settings, and make quick adjustments on the command line.</p>
-<h3 id="13-our-current-configuration">1.3. Our current configuration<a class="headerlink" href="#13-our-current-configuration" title="Permanent link">&para;</a></h3>
-<p>Let's look at the configuration we've been using:</p>
+<p>Esta abordagem em camadas permite manter valores padrão no pipeline, sobrescrever com configurações específicas do usuário e fazer ajustes rápidos na linha de comando.</p>
+<h3 id="13-nossa-configuracao-atual">1.3. Nossa configuração atual<a class="headerlink" href="#13-nossa-configuracao-atual" title="Permanent link">&para;</a></h3>
+<p>Vamos olhar a configuração que estivemos usando:</p>
 <div class="highlight"><span class="filename">nextflow.config</span><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">docker</span><span class="o">.</span><span class="na">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">process</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="n">resourceLimits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>
@@ -4211,19 +4253,19 @@ Now we'll explore how to configure pipelines for different computing environment
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="o">]</span>
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="o">}</span>
 </code></pre></div>
-<p>Let's comment out or change back the <code>docker.enabled = true</code> line from Part 2, and figure out how we can achieve the same result using a profile in molkart instead.</p>
+<p>Vamos comentar ou alterar de volta a linha <code>docker.enabled = true</code> da Parte 2, e descobrir como podemos alcançar o mesmo resultado usando um profile no molkart.</p>
 <hr />
-<h2 id="2-using-profiles">2. Using profiles<a class="headerlink" href="#2-using-profiles" title="Permanent link">&para;</a></h2>
-<h3 id="21-what-are-profiles">2.1. What are profiles?<a class="headerlink" href="#21-what-are-profiles" title="Permanent link">&para;</a></h3>
-<p>Profiles are named sets of configuration that can be activated with the <code>-profile</code> flag via the <code>nextflow run</code> command.
-They make it easy to switch between different compute scenarios without editing config files.</p>
-<p>All nf-core pipelines come with a number of default profiles we can take use.</p>
-<h3 id="22-inspecting-built-in-profiles">2.2. Inspecting built-in profiles<a class="headerlink" href="#22-inspecting-built-in-profiles" title="Permanent link">&para;</a></h3>
-<p>Let's inspect them in the <code>molkart/nextflow.config</code> file associated with the pipeline codebase:</p>
+<h2 id="2-usando-profiles">2. Usando profiles<a class="headerlink" href="#2-usando-profiles" title="Permanent link">&para;</a></h2>
+<h3 id="21-o-que-sao-profiles">2.1. O que são profiles?<a class="headerlink" href="#21-o-que-sao-profiles" title="Permanent link">&para;</a></h3>
+<p>Profiles são conjuntos nomeados de configuração que podem ser ativados com a flag <code>-profile</code> via o comando <code>nextflow run</code>.
+Eles facilitam a alternância entre diferentes cenários de computação sem editar arquivos de configuração.</p>
+<p>Todos os pipelines nf-core vêm com diversos profiles padrão que podemos usar.</p>
+<h3 id="22-inspecionando-profiles-integrados">2.2. Inspecionando profiles integrados<a class="headerlink" href="#22-inspecionando-profiles-integrados" title="Permanent link">&para;</a></h3>
+<p>Vamos inspecioná-los no arquivo <code>molkart/nextflow.config</code> associado à base de código do pipeline:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>code<span class="w"> </span>molkart/nextflow.config
 </code></pre></div>
-<p>Search for the <code>profiles</code> block:</p>
-<div class="highlight"><span class="filename">molkart/nextflow.config (excerpt)</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">profiles</span><span class="w"> </span><span class="o">{</span>
+<p>Procure pelo bloco <code>profiles</code>:</p>
+<div class="highlight"><span class="filename">molkart/nextflow.config (trecho)</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">profiles</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="n">docker</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">        </span><span class="n">docker</span><span class="o">.</span><span class="na">enabled</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">        </span><span class="n">singularity</span><span class="o">.</span><span class="na">enabled</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
@@ -4241,53 +4283,53 @@ They make it easy to switch between different compute scenarios without editing 
 <a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="o">}</span>
 </code></pre></div>
-<p>Common container profiles:</p>
+<p>Profiles de contêineres comuns:</p>
 <ul>
-<li><code>docker</code>: Use Docker containers (most common for local development)</li>
-<li><code>singularity</code>: Use Singularity/Apptainer (common on HPC)</li>
-<li><code>conda</code>: Use Conda environments</li>
-<li><code>apptainer</code>: Use Apptainer containers</li>
+<li><code>docker</code>: Usa contêineres Docker (mais comum para desenvolvimento local)</li>
+<li><code>singularity</code>: Usa Singularity/Apptainer (comum em HPC)</li>
+<li><code>conda</code>: Usa ambientes Conda</li>
+<li><code>apptainer</code>: Usa contêineres Apptainer</li>
 </ul>
-<h3 id="23-re-running-with-profiles-instead-of-nextflowconfig">2.3. Re-running with profiles instead of nextflow.config<a class="headerlink" href="#23-re-running-with-profiles-instead-of-nextflowconfig" title="Permanent link">&para;</a></h3>
-<p>Now that we've disabled the docker configuration in our local <code>nextflow.config</code> file and understand profiles, let's re-run the pipeline using the <code>-profile</code> flag.</p>
-<p>Previously in Part 3, we created a <code>params.yaml</code> file with our custom parameters.
-We can now combine that with the built-in Docker profile:</p>
+<h3 id="23-re-executando-com-profiles-ao-inves-de-nextflowconfig">2.3. Re-executando com profiles ao invés de nextflow.config<a class="headerlink" href="#23-re-executando-com-profiles-ao-inves-de-nextflowconfig" title="Permanent link">&para;</a></h3>
+<p>Agora que desabilitamos a configuração do docker no nosso arquivo <code>nextflow.config</code> local e entendemos profiles, vamos re-executar o pipeline usando a flag <code>-profile</code>.</p>
+<p>Anteriormente na Parte 3, criamos um arquivo <code>params.yaml</code> com nossos parâmetros personalizados.
+Agora podemos combinar isso com o profile Docker integrado:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>./molkart<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span>-profile<span class="w"> </span>docker<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span>-params-file<span class="w"> </span>params.yaml<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span>-resume
 </code></pre></div>
-<p>Let's break down what each flag does:</p>
+<p>Vamos detalhar o que cada flag faz:</p>
 <ul>
-<li><code>-profile docker</code>: Activates the Docker profile from molkart's <code>nextflow.config</code>, which sets <code>docker.enabled = true</code></li>
-<li><code>-params-file params.yaml</code>: Loads all pipeline parameters from our YAML file</li>
-<li><code>-resume</code>: Reuses cached results from previous runs</li>
+<li><code>-profile docker</code>: Ativa o profile Docker do <code>nextflow.config</code> do molkart, que define <code>docker.enabled = true</code></li>
+<li><code>-params-file params.yaml</code>: Carrega todos os parâmetros do pipeline do nosso arquivo YAML</li>
+<li><code>-resume</code>: Reutiliza resultados em cache de execuções anteriores</li>
 </ul>
-<p>Because we're using <code>-resume</code>, Nextflow will check if anything changed since the last run.
-If the parameters, inputs, and code are the same, all tasks will be retrieved from cache and the pipeline will complete almost instantly.</p>
-<div class="highlight"><span class="filename">Output (excerpt)</span><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="go">executor &gt;  local (12)</span>
+<p>Como estamos usando <code>-resume</code>, o Nextflow vai verificar se algo mudou desde a última execução.
+Se os parâmetros, entradas e código forem os mesmos, todas as tarefas serão recuperadas do cache e o pipeline será concluído quase instantaneamente.</p>
+<div class="highlight"><span class="filename">Saída (trecho)</span><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="go">executor &gt;  local (12)</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="go">...</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="go">[1a/2b3c4d] NFCORE_MOLKART:MOLKART:MINDAGAP_MINDAGAP (mem_only)   [100%] 2 of 2, cached: 2 ✔</span>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="go">[5e/6f7g8h] NFCORE_MOLKART:MOLKART:CLAHE (mem_only)               [100%] 2 of 2, cached: 2 ✔</span>
 <a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="go">...</span>
 <a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="go">-[nf-core/molkart] Pipeline completed successfully-</span>
 </code></pre></div>
-<p>Notice all processes show <code>cached: 2</code> or <code>cached: 1</code> - nothing was re-executed!</p>
-<h3 id="24-test-profiles">2.4. Test profiles<a class="headerlink" href="#24-test-profiles" title="Permanent link">&para;</a></h3>
-<p>Test profiles provide quick ways to specify default input parameters and datafiles to let you verify the pipeline works.
-nf-core pipelines will always include at least two test profiles:</p>
+<p>Note que todos os processos mostram <code>cached: 2</code> ou <code>cached: 1</code> - nada foi re-executado!</p>
+<h3 id="24-profiles-de-teste">2.4. Profiles de teste<a class="headerlink" href="#24-profiles-de-teste" title="Permanent link">&para;</a></h3>
+<p>Profiles de teste fornecem maneiras rápidas de especificar parâmetros de entrada padrão e arquivos de dados para permitir que você verifique se o pipeline funciona.
+Pipelines nf-core sempre incluirão pelo menos dois profiles de teste:</p>
 <ul>
-<li><code>test</code>: Small dataset with fast parameters for quick testing</li>
-<li><code>test_full</code>: More comprehensive test with larger data</li>
+<li><code>test</code>: Dataset pequeno com parâmetros rápidos para testes rápidos</li>
+<li><code>test_full</code>: Teste mais abrangente com dados maiores</li>
 </ul>
-<p>Let's take a closer look at the <code>test</code> profile in molkart which is included using the <code>includeConfig</code> directive:</p>
-<div class="highlight"><span class="filename">molkart/nextflow.config (excerpt)</span><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">profiles</span><span class="w"> </span><span class="o">{</span>
+<p>Vamos dar uma olhada mais de perto no profile <code>test</code> no molkart que é incluído usando a diretiva <code>includeConfig</code>:</p>
+<div class="highlight"><span class="filename">molkart/nextflow.config (trecho)</span><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">profiles</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="o">...</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="n">test</span><span class="w">      </span><span class="o">{</span><span class="w"> </span><span class="n">includeConfig</span><span class="w"> </span><span class="s1">&#39;conf/test.config&#39;</span><span class="w">      </span><span class="o">}</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="o">}</span>
 </code></pre></div>
-<p>This means whenever we run the pipeline with <code>-profile test</code>, Nextflow will load the configuration from <code>conf/test.config</code>.</p>
-<div class="highlight"><span class="filename">molkart/conf/test.config (excerpt)</span><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
+<p>Isso significa que sempre que executamos o pipeline com <code>-profile test</code>, o Nextflow carregará a configuração de <code>conf/test.config</code>.</p>
+<div class="highlight"><span class="filename">molkart/conf/test.config (trecho)</span><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="n">config_profile_name</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Test profile&#39;</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="n">config_profile_description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Minimal test dataset to check pipeline function&#39;</span>
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
@@ -4307,31 +4349,31 @@ nf-core pipelines will always include at least two test profiles:</p>
 <a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a><span class="w">    </span><span class="o">]</span>
 <a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a><span class="o">}</span>
 </code></pre></div>
-<p>Notice that this profile contains the same parameters we used in our <code>params.yaml</code> file earlier.</p>
-<p>You can activate multiple profiles by separating them with commas.
-Let's use that to test our pipeline without needing our params file:</p>
+<p>Note que este profile contém os mesmos parâmetros que usamos no nosso arquivo <code>params.yaml</code> anteriormente.</p>
+<p>Você pode ativar múltiplos profiles separando-os com vírgulas.
+Vamos usar isso para testar nosso pipeline sem precisar do nosso arquivo params:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>./molkart<span class="w"> </span>-profile<span class="w"> </span>docker,test<span class="w"> </span>--outdir<span class="w"> </span>results<span class="w"> </span>-resume
 </code></pre></div>
-<p>This combines:</p>
+<p>Isso combina:</p>
 <ul>
-<li><code>docker</code>: Enable Docker containers</li>
-<li><code>test</code>: Use test dataset and parameters</li>
+<li><code>docker</code>: Habilita contêineres Docker</li>
+<li><code>test</code>: Usa dataset e parâmetros de teste</li>
 </ul>
-<p>Profiles are applied left to right, so later profiles override earlier ones if they set the same values.</p>
-<h3 id="takeaway">Takeaway<a class="headerlink" href="#takeaway" title="Permanent link">&para;</a></h3>
-<p>nf-core pipelines come with built-in profiles for containers, testing, and special environments.
-You can combine multiple profiles to build the configuration you need.</p>
-<h3 id="whats-next">What's next?<a class="headerlink" href="#whats-next" title="Permanent link">&para;</a></h3>
-<p>Learn how to create your own custom profiles for different computing environments.</p>
+<p>Profiles são aplicados da esquerda para a direita, então profiles posteriores sobrescrevem os anteriores se definirem os mesmos valores.</p>
+<h3 id="conclusao">Conclusão<a class="headerlink" href="#conclusao" title="Permanent link">&para;</a></h3>
+<p>Pipelines nf-core vêm com profiles integrados para contêineres, testes e ambientes especiais.
+Você pode combinar múltiplos profiles para construir a configuração que precisa.</p>
+<h3 id="proximos-passos">Próximos passos<a class="headerlink" href="#proximos-passos" title="Permanent link">&para;</a></h3>
+<p>Aprenda como criar seus próprios profiles personalizados para diferentes ambientes de computação.</p>
 <hr />
-<h2 id="3-creating-custom-profiles">3. Creating custom profiles<a class="headerlink" href="#3-creating-custom-profiles" title="Permanent link">&para;</a></h2>
-<h3 id="31-create-profiles-for-switching-between-local-development-and-execution-on-hpc">3.1. Create profiles for switching between local development and execution on HPC<a class="headerlink" href="#31-create-profiles-for-switching-between-local-development-and-execution-on-hpc" title="Permanent link">&para;</a></h3>
-<p>Let's create custom profiles for two scenarios:</p>
+<h2 id="3-criando-profiles-personalizados">3. Criando profiles personalizados<a class="headerlink" href="#3-criando-profiles-personalizados" title="Permanent link">&para;</a></h2>
+<h3 id="31-criar-profiles-para-alternar-entre-desenvolvimento-local-e-execucao-em-hpc">3.1. Criar profiles para alternar entre desenvolvimento local e execução em HPC<a class="headerlink" href="#31-criar-profiles-para-alternar-entre-desenvolvimento-local-e-execucao-em-hpc" title="Permanent link">&para;</a></h3>
+<p>Vamos criar profiles personalizados para dois cenários:</p>
 <ol>
-<li>Local development with Docker</li>
-<li>University HPC with Slurm scheduler and Singularity</li>
+<li>Desenvolvimento local com Docker</li>
+<li>HPC universitário com agendador Slurm e Singularity</li>
 </ol>
-<p>Add the following to your <code>nextflow.config</code>:</p>
+<p>Adicione o seguinte ao seu <code>nextflow.config</code>:</p>
 <div class="highlight"><span class="filename">nextflow.config</span><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">profiles</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">    </span><span class="n">local_dev</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">        </span><span class="n">docker</span><span class="o">.</span><span class="na">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
@@ -4346,44 +4388,44 @@ You can combine multiple profiles to build the configuration you need.</p>
 <a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="o">}</span>
 </code></pre></div>
-<p>Now you can switch between environments easily:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># For local development</span>
+<p>Agora você pode alternar entre ambientes facilmente:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># Para desenvolvimento local</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>nextflow<span class="w"> </span>run<span class="w"> </span>./molkart<span class="w"> </span>-profile<span class="w"> </span>local_dev<span class="w"> </span>--input<span class="w"> </span>data/samplesheet.csv<span class="w"> </span>--outdir<span class="w"> </span>results
 <a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
-<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="c1"># For HPC (when available)</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="c1"># Para HPC (quando disponível)</span>
 <a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>nextflow<span class="w"> </span>run<span class="w"> </span>./molkart<span class="w"> </span>-profile<span class="w"> </span>hpc_cluster<span class="w"> </span>--input<span class="w"> </span>data/samplesheet.csv<span class="w"> </span>--outdir<span class="w"> </span>results
 </code></pre></div>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>We can't test the HPC profile in this training environment since we don't have access to a Slurm scheduler.
-But this shows how you would configure it for real-world use.</p>
+<p class="admonition-title">Nota</p>
+<p>Não podemos testar o profile HPC neste ambiente de treinamento, já que não temos acesso a um agendador Slurm.
+Mas isso mostra como você configuraria para uso no mundo real.</p>
 </div>
-<h3 id="32-use-nextflow-config-to-inspect-configuration">3.2. Use <code>nextflow config</code> to inspect configuration<a class="headerlink" href="#32-use-nextflow-config-to-inspect-configuration" title="Permanent link">&para;</a></h3>
-<p>The <code>nextflow config</code> command shows the fully resolved configuration without running the pipeline.</p>
-<p>View the default configuration:</p>
+<h3 id="32-use-nextflow-config-para-inspecionar-a-configuracao">3.2. Use <code>nextflow config</code> para inspecionar a configuração<a class="headerlink" href="#32-use-nextflow-config-para-inspecionar-a-configuracao" title="Permanent link">&para;</a></h3>
+<p>O comando <code>nextflow config</code> mostra a configuração totalmente resolvida sem executar o pipeline.</p>
+<p>Visualize a configuração padrão:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>nextflow<span class="w"> </span>config<span class="w"> </span>./molkart
 </code></pre></div>
-<p>View configuration with a specific profile:</p>
+<p>Visualize a configuração com um profile específico:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>nextflow<span class="w"> </span>config<span class="w"> </span>-profile<span class="w"> </span>local_dev<span class="w"> </span>./molkart
 </code></pre></div>
-<p>This is extremely useful for:</p>
+<p>Isso é extremamente útil para:</p>
 <ul>
-<li>Debugging configuration issues</li>
-<li>Understanding what values will actually be used</li>
-<li>Checking how multiple profiles interact</li>
+<li>Depurar problemas de configuração</li>
+<li>Entender quais valores serão realmente usados</li>
+<li>Verificar como múltiplos profiles interagem</li>
 </ul>
-<h3 id="takeaway_1">Takeaway<a class="headerlink" href="#takeaway_1" title="Permanent link">&para;</a></h3>
-<p>Custom profiles let you switch between different computing environments with a single command-line flag.
-Use <code>nextflow config</code> to inspect the resolved configuration before running.</p>
-<h3 id="whats-next_1">What's next?<a class="headerlink" href="#whats-next_1" title="Permanent link">&para;</a></h3>
-<p>Learn how to customize resource requests for individual processes using nf-core's process label system.</p>
+<h3 id="conclusao_1">Conclusão<a class="headerlink" href="#conclusao_1" title="Permanent link">&para;</a></h3>
+<p>Profiles personalizados permitem que você alterne entre diferentes ambientes de computação com uma única flag de linha de comando.
+Use <code>nextflow config</code> para inspecionar a configuração resolvida antes de executar.</p>
+<h3 id="proximos-passos_1">Próximos passos<a class="headerlink" href="#proximos-passos_1" title="Permanent link">&para;</a></h3>
+<p>Aprenda como personalizar solicitações de recursos para processos individuais usando o sistema de process label do nf-core.</p>
 <hr />
-<h2 id="4-customizing-resource-requests">4. Customizing resource requests<a class="headerlink" href="#4-customizing-resource-requests" title="Permanent link">&para;</a></h2>
-<h3 id="41-understanding-process-labels-in-nf-core-pipelines">4.1. Understanding process labels in nf-core pipelines<a class="headerlink" href="#41-understanding-process-labels-in-nf-core-pipelines" title="Permanent link">&para;</a></h3>
-<p>For simplicity, nf-core pipelines use <a href="https://www.nextflow.io/docs/latest/reference/process.html#process-label"><strong>process labels</strong></a> to standardize resource allocation across all pipelines.
-Each process is tagged with a label like <code>process_low</code>, <code>process_medium</code>, or <code>process_high</code> to describe low, medium, or high compute resource requirements, respectively.
-These labels get converted into specific resource requests in one of the configuration files located in the <code>conf/</code> directory of the pipeline.</p>
-<div class="highlight"><span class="filename">molkart/conf/base.config (excerpt)</span><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">process</span><span class="w"> </span><span class="o">{</span>
+<h2 id="4-personalizando-solicitacoes-de-recursos">4. Personalizando solicitações de recursos<a class="headerlink" href="#4-personalizando-solicitacoes-de-recursos" title="Permanent link">&para;</a></h2>
+<h3 id="41-entendendo-process-labels-em-pipelines-nf-core">4.1. Entendendo process labels em pipelines nf-core<a class="headerlink" href="#41-entendendo-process-labels-em-pipelines-nf-core" title="Permanent link">&para;</a></h3>
+<p>Por simplicidade, pipelines nf-core usam <a href="https://www.nextflow.io/docs/latest/reference/process.html#process-label"><strong>process labels</strong></a> para padronizar a alocação de recursos em todos os pipelines.
+Cada processo é marcado com um label como <code>process_low</code>, <code>process_medium</code> ou <code>process_high</code> para descrever requisitos de recursos computacionais baixos, médios ou altos, respectivamente.
+Esses labels são convertidos em solicitações de recursos específicas em um dos arquivos de configuração localizados no diretório <code>conf/</code> do pipeline.</p>
+<div class="highlight"><span class="filename">molkart/conf/base.config (trecho)</span><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">process</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">    </span><span class="n">cpus</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="mi">1</span><span class="w">      </span><span class="o">*</span><span class="w"> </span><span class="n">task</span><span class="o">.</span><span class="na">attempt</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">    </span><span class="n">memory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="mi">6</span><span class="o">.</span><span class="na">GB</span><span class="w">   </span><span class="o">*</span><span class="w"> </span><span class="n">task</span><span class="o">.</span><span class="na">attempt</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">    </span><span class="n">time</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="mi">4</span><span class="o">.</span><span class="na">h</span><span class="w">    </span><span class="o">*</span><span class="w"> </span><span class="n">task</span><span class="o">.</span><span class="na">attempt</span><span class="w"> </span><span class="o">}</span>
@@ -4414,9 +4456,9 @@ These labels get converted into specific resource requests in one of the configu
 <a id="__codelineno-12-29" name="__codelineno-12-29" href="#__codelineno-12-29"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-12-30" name="__codelineno-12-30" href="#__codelineno-12-30"></a><span class="o">}</span>
 </code></pre></div>
-<p>Notice the <code>task.attempt</code> multiplier - this allows subsequent task retries to request more resources, if the pipeline is set with <code>process.maxRetries &gt; 1</code>.</p>
-<h3 id="42-overriding-resources-for-specific-processes">4.2. Overriding resources for specific processes<a class="headerlink" href="#42-overriding-resources-for-specific-processes" title="Permanent link">&para;</a></h3>
-<p>For fine-grained control, target individual processes by name:</p>
+<p>Note o multiplicador <code>task.attempt</code> - isso permite que tentativas subsequentes de tarefas solicitem mais recursos, se o pipeline estiver definido com <code>process.maxRetries &gt; 1</code>.</p>
+<h3 id="42-sobrescrevendo-recursos-para-processos-especificos">4.2. Sobrescrevendo recursos para processos específicos<a class="headerlink" href="#42-sobrescrevendo-recursos-para-processos-especificos" title="Permanent link">&para;</a></h3>
+<p>Para controle refinado, direcione processos individuais pelo nome:</p>
 <div class="highlight"><span class="filename">nextflow.config</span><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">process</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">    </span><span class="nl">withName:</span><span class="w"> </span><span class="s1">&#39;NFCORE_MOLKART:MOLKART:CELLPOSE&#39;</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">        </span><span class="n">cpus</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="mi">16</span>
@@ -4424,34 +4466,34 @@ These labels get converted into specific resource requests in one of the configu
 <a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="o">}</span>
 </code></pre></div>
-<p>If we try to run this pipeline with the above override, the <code>CELLPOSE</code> process will request 16 CPUs and 32 GB memory instead of the default defined by its label.
-This will cause the pipeline to fail in our current environment since we don't have that much RAM available.
-We'll learn how to prevent these types of failures in the next section.</p>
+<p>Se tentarmos executar este pipeline com a sobrescrita acima, o processo <code>CELLPOSE</code> solicitará 16 CPUs e 32 GB de memória ao invés do padrão definido por seu label.
+Isso fará com que o pipeline falhe no nosso ambiente atual, já que não temos essa quantidade de RAM disponível.
+Aprenderemos como prevenir esses tipos de falhas na próxima seção.</p>
 <div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>To find process names, look at the pipeline execution output or check <code>.nextflow.log</code>.
-Process names follow the pattern <code>WORKFLOW:SUBWORKFLOW:PROCESS</code>.</p>
+<p class="admonition-title">Dica</p>
+<p>Para encontrar nomes de processos, olhe a saída de execução do pipeline ou verifique <code>.nextflow.log</code>.
+Nomes de processos seguem o padrão <code>WORKFLOW:SUBWORKFLOW:PROCESS</code>.</p>
 </div>
-<h3 id="takeaway_2">Takeaway<a class="headerlink" href="#takeaway_2" title="Permanent link">&para;</a></h3>
-<p>nf-core pipelines use process labels to standardize resource allocation.
-You can override resources by label (affects multiple processes) or by name (affects one specific process).</p>
-<h3 id="whats-next_2">What's next?<a class="headerlink" href="#whats-next_2" title="Permanent link">&para;</a></h3>
-<p>Learn how to manage resource limits in constrained environments like GitHub Codespaces.</p>
+<h3 id="conclusao_2">Conclusão<a class="headerlink" href="#conclusao_2" title="Permanent link">&para;</a></h3>
+<p>Pipelines nf-core usam process labels para padronizar a alocação de recursos.
+Você pode sobrescrever recursos por label (afeta múltiplos processos) ou por nome (afeta um processo específico).</p>
+<h3 id="proximos-passos_2">Próximos passos<a class="headerlink" href="#proximos-passos_2" title="Permanent link">&para;</a></h3>
+<p>Aprenda como gerenciar limites de recursos em ambientes restritos como GitHub Codespaces.</p>
 <hr />
-<h2 id="5-managing-resources-in-constrained-environments">5. Managing resources in constrained environments<a class="headerlink" href="#5-managing-resources-in-constrained-environments" title="Permanent link">&para;</a></h2>
-<h3 id="51-the-resource-limits-problem">5.1. The resource limits problem<a class="headerlink" href="#51-the-resource-limits-problem" title="Permanent link">&para;</a></h3>
-<p>If we tried to run molkart with a process requesting 16 CPUs and 32 GB memory (as shown in section 4.2), it would fail in our current environment because we don't have that many resources available.
-In a cluster environment with larger nodes, such requests would be submitted to the scheduler.</p>
-<p>In constrained environments like GitHub Codespaces, without limits, Nextflow would refuse to run processes that exceed available resources.</p>
-<h3 id="52-setting-resource-limits">5.2. Setting resource limits<a class="headerlink" href="#52-setting-resource-limits" title="Permanent link">&para;</a></h3>
-<p>The <code>resourceLimits</code> directive caps resource requests at specified values:</p>
+<h2 id="5-gerenciando-recursos-em-ambientes-restritos">5. Gerenciando recursos em ambientes restritos<a class="headerlink" href="#5-gerenciando-recursos-em-ambientes-restritos" title="Permanent link">&para;</a></h2>
+<h3 id="51-o-problema-dos-limites-de-recursos">5.1. O problema dos limites de recursos<a class="headerlink" href="#51-o-problema-dos-limites-de-recursos" title="Permanent link">&para;</a></h3>
+<p>Se tentássemos executar o molkart com um processo solicitando 16 CPUs e 32 GB de memória (como mostrado na seção 4.2), falharia no nosso ambiente atual porque não temos tantos recursos disponíveis.
+Em um ambiente de cluster com nós maiores, tais solicitações seriam submetidas ao agendador.</p>
+<p>Em ambientes restritos como GitHub Codespaces, sem limites, o Nextflow se recusaria a executar processos que excedessem os recursos disponíveis.</p>
+<h3 id="52-definindo-limites-de-recursos">5.2. Definindo limites de recursos<a class="headerlink" href="#52-definindo-limites-de-recursos" title="Permanent link">&para;</a></h3>
+<p>A diretiva <code>resourceLimits</code> limita as solicitações de recursos a valores especificados:</p>
 <div class="highlight"><span class="filename">nextflow.config</span><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="n">process</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">    </span><span class="n">resourceLimits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="nl">cpus:</span><span class="w"> </span><span class="mi">2</span><span class="o">,</span><span class="w"> </span><span class="nl">memory:</span><span class="w"> </span><span class="mi">7</span><span class="o">.</span><span class="na">GB</span><span class="w"> </span><span class="o">]</span>
 <a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="o">}</span>
 </code></pre></div>
-<p>This tells Nextflow: "If any process requests more than 2 CPUs or 7 GB memory, cap it at these limits instead."</p>
-<h3 id="53-adding-resource-limits-to-custom-profiles">5.3. Adding resource limits to custom profiles<a class="headerlink" href="#53-adding-resource-limits-to-custom-profiles" title="Permanent link">&para;</a></h3>
-<p>Update your custom profiles to include appropriate limits:</p>
+<p>Isso diz ao Nextflow: "Se qualquer processo solicitar mais de 2 CPUs ou 7 GB de memória, limite a esses valores."</p>
+<h3 id="53-adicionando-limites-de-recursos-a-profiles-personalizados">5.3. Adicionando limites de recursos a profiles personalizados<a class="headerlink" href="#53-adicionando-limites-de-recursos-a-profiles-personalizados" title="Permanent link">&para;</a></h3>
+<p>Atualize seus profiles personalizados para incluir limites apropriados:</p>
 <div class="highlight"><span class="filename">nextflow.config</span><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="n">profiles</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">    </span><span class="n">local_dev</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">        </span><span class="n">docker</span><span class="o">.</span><span class="na">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
@@ -4475,36 +4517,36 @@ In a cluster environment with larger nodes, such requests would be submitted to 
 <a id="__codelineno-15-21" name="__codelineno-15-21" href="#__codelineno-15-21"></a><span class="o">}</span>
 </code></pre></div>
 <div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Setting resource limits too low may cause processes to fail or run slowly.
-The pipeline may need to use less memory-intensive algorithms or process data in smaller chunks.</p>
+<p class="admonition-title">Aviso</p>
+<p>Definir limites de recursos muito baixos pode causar falhas nos processos ou execução lenta.
+O pipeline pode precisar usar algoritmos menos intensivos em memória ou processar dados em pedaços menores.</p>
 </div>
-<h3 id="takeaway_3">Takeaway<a class="headerlink" href="#takeaway_3" title="Permanent link">&para;</a></h3>
-<p>Use <code>resourceLimits</code> to run pipelines in resource-constrained environments by capping process resource requests.
-Different profiles can have different limits appropriate for their environment.</p>
-<h3 id="whats-next_3">What's next?<a class="headerlink" href="#whats-next_3" title="Permanent link">&para;</a></h3>
-<p>You've completed the core Nextflow for Bioimaging training!</p>
+<h3 id="conclusao_3">Conclusão<a class="headerlink" href="#conclusao_3" title="Permanent link">&para;</a></h3>
+<p>Use <code>resourceLimits</code> para executar pipelines em ambientes com recursos restritos limitando as solicitações de recursos dos processos.
+Diferentes profiles podem ter diferentes limites apropriados para seu ambiente.</p>
+<h3 id="proximos-passos_3">Próximos passos<a class="headerlink" href="#proximos-passos_3" title="Permanent link">&para;</a></h3>
+<p>Você completou o treinamento principal de Nextflow para Bioimagem!</p>
 <hr />
-<h2 id="conclusion">Conclusion<a class="headerlink" href="#conclusion" title="Permanent link">&para;</a></h2>
-<p>You now understand how to configure Nextflow pipelines for different computing environments.</p>
-<p>Key skills you've learned:</p>
+<h2 id="conclusao_4">Conclusão<a class="headerlink" href="#conclusao_4" title="Permanent link">&para;</a></h2>
+<p>Agora você entende como configurar pipelines Nextflow para diferentes ambientes de computação.</p>
+<p>Habilidades principais que você aprendeu:</p>
 <ul>
-<li><strong>Configuration precedence</strong>: How Nextflow resolves settings from multiple sources</li>
-<li><strong>nf-core profiles</strong>: Using built-in profiles for containers, testing, and utilities</li>
-<li><strong>Custom profiles</strong>: Creating your own profiles for different environments</li>
-<li><strong>Process labels</strong>: Understanding and overriding resource requests by label</li>
-<li><strong>Resource limits</strong>: Managing constrained environments with <code>resourceLimits</code></li>
-<li><strong>Configuration inspection</strong>: Using <code>nextflow config</code> to debug and verify settings</li>
+<li><strong>Precedência de configuração</strong>: Como o Nextflow resolve configurações de múltiplas fontes</li>
+<li><strong>Profiles nf-core</strong>: Usando profiles integrados para contêineres, testes e utilitários</li>
+<li><strong>Profiles personalizados</strong>: Criando seus próprios profiles para diferentes ambientes</li>
+<li><strong>Process labels</strong>: Entendendo e sobrescrevendo solicitações de recursos por label</li>
+<li><strong>Limites de recursos</strong>: Gerenciando ambientes restritos com <code>resourceLimits</code></li>
+<li><strong>Inspeção de configuração</strong>: Usando <code>nextflow config</code> para depurar e verificar configurações</li>
 </ul>
-<p>These configuration skills are transferable to any Nextflow pipeline and will help you run workflows efficiently across local machines, HPC clusters, and cloud platforms.</p>
-<h3 id="whats-next_4">What's next?<a class="headerlink" href="#whats-next_4" title="Permanent link">&para;</a></h3>
-<p>Congratulations on completing the Nextflow for Bioimaging course!</p>
-<p>Next steps:</p>
+<p>Essas habilidades de configuração são transferíveis para qualquer pipeline Nextflow e ajudarão você a executar fluxos de trabalho de forma eficiente em máquinas locais, clusters HPC e plataformas de nuvem.</p>
+<h3 id="proximos-passos_4">Próximos passos<a class="headerlink" href="#proximos-passos_4" title="Permanent link">&para;</a></h3>
+<p>Parabéns por completar o curso Nextflow para Bioimagem!</p>
+<p>Próximos passos:</p>
 <ul>
-<li>Fill out the course survey to provide feedback</li>
-<li>Check out <a href="../hello_nextflow/index.md">Hello Nextflow</a> to learn more about developing workflows</li>
-<li>Explore <a href="../hello_nf-core/index.md">Hello nf-core</a> to dive deeper into nf-core tooling</li>
-<li>Browse other courses in the <a href="../training_collections/index.md">training collections</a></li>
+<li>Preencha a pesquisa do curso para fornecer feedback</li>
+<li>Confira <a href="../hello_nextflow/index.md">Hello Nextflow</a> para aprender mais sobre desenvolvimento de fluxos de trabalho</li>
+<li>Explore <a href="../hello_nf-core/index.md">Hello nf-core</a> para mergulhar mais fundo nas ferramentas nf-core</li>
+<li>Navegue por outros cursos nas <a href="../training_collections/index.md">coleções de treinamento</a></li>
 </ul><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
@@ -6022,6 +6064,9 @@ window.mkdocsQuizConfig = {
 
 
 
+  
+  
+
 
 
   
@@ -6052,7 +6097,7 @@ window.mkdocsQuizConfig = {
       <nav class="md-footer__inner md-grid" aria-label="Rodapé" >
         
           
-          <a href="../03_inputs/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Part 3: Organizing inputs">
+          <a href="../03_inputs/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Parte 3: Organizando entradas">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -6062,20 +6107,20 @@ window.mkdocsQuizConfig = {
                 Anterior
               </span>
               <div class="md-ellipsis">
-                Part 3: Organizing inputs
+                Parte 3: Organizando entradas
               </div>
             </div>
           </a>
         
         
           
-          <a href="../survey/" class="md-footer__link md-footer__link--next" aria-label="Próximo: Survey">
+          <a href="../survey/" class="md-footer__link md-footer__link--next" aria-label="Próximo: Questionário">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Próximo
               </span>
               <div class="md-ellipsis">
-                Survey
+                Questionário
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -6152,8 +6197,8 @@ window.mkdocsQuizConfig = {
   
 
 
-<h4>Cookie consent</h4>
-<p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our training materials better. Find out more on <a href="https://seqera.io/privacy-policy/#cookies" target="_blank" rel="noopener">how we use cookies</a>.</p>
+<h4>Consentimento de cookies</h4>
+<p>Usamos cookies para reconhecer suas visitas repetidas e preferências, bem como para medir a eficácia da nossa documentação e se os usuários encontram o que procuram. Com seu consentimento, você nos ajuda a melhorar nossos materiais de treinamento. Saiba mais sobre <a href="https://seqera.io/privacy-policy/#cookies" target="_blank" rel="noopener">como usamos cookies</a>.</p>
 <input class="md-toggle" type="checkbox" id="__settings" >
 <div class="md-consent__settings">
   <ul class="task-list">
@@ -6237,12 +6282,16 @@ window.mkdocsQuizConfig = {
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": {"alias": true, "provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": {"alias": true, "provider": "mike"}}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
-        <script src="../../../../assets/javascripts/posthog.js"></script>
+        <script src="../../../assets/javascripts/consent-sync.js"></script>
+      
+        <script src="../../../assets/javascripts/posthog.js"></script>
+      
+        <script src="../../../assets/javascripts/language-picker.js"></script>
       
     
   </body>

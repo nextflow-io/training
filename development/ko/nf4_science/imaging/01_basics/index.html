@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://training.nextflow.io/0.dev/ko/nf4_science/imaging/01_basics/">
+        <link rel="canonical" href="https://training.nextflow.io/ko/nf4_science/imaging/01_basics/">
       
       
         <link rel="prev" href="../00_orientation/">
@@ -18,33 +18,41 @@
       
       
         
-          <link rel="alternate" href="../../../../nf4_science/imaging/01_basics/" hreflang="en">
+          <link rel="alternate" href="/" hreflang="en">
         
-          <link rel="alternate" href="../../../../pt/nf4_science/imaging/01_basics/" hreflang="pt">
+          <link rel="alternate" href="/de/" hreflang="de">
         
-          <link rel="alternate" href="../../../../es/nf4_science/imaging/01_basics/" hreflang="es">
+          <link rel="alternate" href="/es/" hreflang="es">
         
-          <link rel="alternate" href="../../../../fr/nf4_science/imaging/01_basics/" hreflang="fr">
+          <link rel="alternate" href="/fr/" hreflang="fr">
         
-          <link rel="alternate" href="../../../../it/nf4_science/imaging/01_basics/" hreflang="it">
+          <link rel="alternate" href="/hi/" hreflang="hi">
         
-          <link rel="alternate" href="./" hreflang="ko">
+          <link rel="alternate" href="/it/" hreflang="it">
+        
+          <link rel="alternate" href="/ko/" hreflang="ko">
+        
+          <link rel="alternate" href="/pl/" hreflang="pl">
+        
+          <link rel="alternate" href="/pt/" hreflang="pt">
+        
+          <link rel="alternate" href="/tr/" hreflang="tr">
         
       
       
-      <link rel="icon" href="../../../../assets/img/nextflow-icon.png">
+      <link rel="icon" href="../../../assets/img/nextflow-icon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
     
     
       
-        <title>Part 1: Run basic operations - training.nextflow.io</title>
+        <title>파트 1: 기본 작업 실행하기 - training.nextflow.io</title>
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
   
@@ -108,11 +116,11 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/fonts.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/fonts.css">
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/extra.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/extra.css">
     
-    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
   
@@ -147,7 +155,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#part-1-run-basic-operations" class="md-skip">
+        <a href="#1" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -167,9 +175,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="상단/헤더">
-    <a href="../../../" title="training.nextflow.io" class="md-header__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
+    <a href="../../.." title="training.nextflow.io" class="md-header__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
       
-  <img src="../../../../assets/img/nextflow_logo_dark.png" alt="logo">
+  <img src="../../../assets/img/nextflow_logo_dark.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -186,7 +194,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Part 1: Run basic operations
+              파트 1: 기본 작업 실행하기
             
           </span>
         </div>
@@ -233,38 +241,62 @@
       <ul class="md-select__list">
         
           <li class="md-select__item">
-            <a href="../../../../nf4_science/imaging/01_basics/" hreflang="en" class="md-select__link">
+            <a href="/" hreflang="en" class="md-select__link">
               English
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../../pt/nf4_science/imaging/01_basics/" hreflang="pt" class="md-select__link">
-              Português
+            <a href="/de/" hreflang="de" class="md-select__link">
+              deutsch
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../../es/nf4_science/imaging/01_basics/" hreflang="es" class="md-select__link">
-              Español
+            <a href="/es/" hreflang="es" class="md-select__link">
+              español
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../../fr/nf4_science/imaging/01_basics/" hreflang="fr" class="md-select__link">
-              Français
+            <a href="/fr/" hreflang="fr" class="md-select__link">
+              français
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../../it/nf4_science/imaging/01_basics/" hreflang="it" class="md-select__link">
-              Italiano
+            <a href="/hi/" hreflang="hi" class="md-select__link">
+              हिन्दी
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="./" hreflang="ko" class="md-select__link">
-              Korean
+            <a href="/it/" hreflang="it" class="md-select__link">
+              italiano
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/ko/" hreflang="ko" class="md-select__link">
+              한국어
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/pl/" hreflang="pl" class="md-select__link">
+              Polski
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/pt/" hreflang="pt" class="md-select__link">
+              português
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/tr/" hreflang="tr" class="md-select__link">
+              Türkçe
             </a>
           </li>
         
@@ -384,9 +416,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="네비게이션" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../../" title="training.nextflow.io" class="md-nav__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
+    <a href="../../.." title="training.nextflow.io" class="md-nav__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
       
-  <img src="../../../../assets/img/nextflow_logo_dark.png" alt="logo">
+  <img src="../../../assets/img/nextflow_logo_dark.png" alt="logo">
 
     </a>
     training.nextflow.io
@@ -413,14 +445,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../" class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Home
+    홈
   
 
     
@@ -522,7 +554,7 @@
   <span class="md-ellipsis">
     
   
-    Getting started
+    시작하기
   
 
     
@@ -550,7 +582,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run basic operations
+    파트 1: 기본 작업 실행
   
 
     
@@ -578,7 +610,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Run real pipelines
+    파트 2: 실제 pipeline 실행
   
 
     
@@ -606,7 +638,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Run configuration
+    파트 3: 실행 구성
   
 
     
@@ -634,7 +666,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    과정 요약
   
 
     
@@ -662,7 +694,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    피드백 설문조사
   
 
     
@@ -772,7 +804,7 @@
   <span class="md-ellipsis">
     
   
-    Getting started
+    시작하기
   
 
     
@@ -800,7 +832,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Hello World
+    파트 1: Hello World
   
 
     
@@ -828,7 +860,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Hello Channels
+    파트 2: Hello Channels
   
 
     
@@ -856,7 +888,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Hello Workflow
+    파트 3: Hello Workflow
   
 
     
@@ -884,7 +916,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Hello Modules
+    파트 4: Hello Modules
   
 
     
@@ -912,7 +944,7 @@
   <span class="md-ellipsis">
     
   
-    Part 5: Hello Containers
+    파트 5: Hello Containers
   
 
     
@@ -940,7 +972,7 @@
   <span class="md-ellipsis">
     
   
-    Part 6: Hello Config
+    파트 6: Hello Config
   
 
     
@@ -968,7 +1000,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    과정 요약
   
 
     
@@ -996,7 +1028,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    피드백 설문조사
   
 
     
@@ -1106,7 +1138,7 @@
   <span class="md-ellipsis">
     
   
-    Getting started
+    시작하기
   
 
     
@@ -1134,7 +1166,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run a demo pipeline
+    파트 1: 데모 파이프라인 실행하기
   
 
     
@@ -1162,7 +1194,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Rewrite Hello for nf-core
+    2부: nf-core용 Hello 재작성
   
 
     
@@ -1190,7 +1222,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Use an nf-core module
+    파트 3: nf-core 모듈 사용하기
   
 
     
@@ -1218,7 +1250,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Make an nf-core module
+    파트 4: nf-core 모듈 만들기
   
 
     
@@ -1246,7 +1278,7 @@
   <span class="md-ellipsis">
     
   
-    Part 5: Input validation
+    파트 5: 입력 검증
   
 
     
@@ -1274,7 +1306,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    교육 과정 요약
   
 
     
@@ -1302,7 +1334,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    피드백 설문조사
   
 
     
@@ -1350,7 +1382,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Science
+    과학을 위한 Nextflow
   
 
     
@@ -1366,7 +1398,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Nextflow for Science
+    과학을 위한 Nextflow
   
 
           </label>
@@ -1386,7 +1418,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Science
+    과학을 위한 Nextflow
   
 
     
@@ -1425,7 +1457,7 @@
   <span class="md-ellipsis">
     
   
-    Genomics
+    유전체학을 위한 Nextflow
   
 
     
@@ -1441,7 +1473,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Genomics
+    유전체학을 위한 Nextflow
   
 
           </label>
@@ -1461,7 +1493,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Genomics
+    유전체학을 위한 Nextflow
   
 
     
@@ -1489,7 +1521,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    오리엔테이션
   
 
     
@@ -1517,7 +1549,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Per-sample variant calling
+    파트 1: 샘플별 변이 호출
   
 
     
@@ -1545,7 +1577,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Joint calling on a cohort
+    파트 2: 코호트에 대한 조인트 콜링
   
 
     
@@ -1573,7 +1605,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Moving code into modules
+    파트 3: 코드를 모듈로 이동하기
   
 
     
@@ -1601,7 +1633,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Adding tests
+    파트 4: 테스트 추가하기
   
 
     
@@ -1629,7 +1661,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    피드백 설문조사
   
 
     
@@ -1657,7 +1689,7 @@
   <span class="md-ellipsis">
     
   
-    Next Steps
+    다음 단계
   
 
     
@@ -1704,7 +1736,7 @@
   <span class="md-ellipsis">
     
   
-    RNAseq
+    RNAseq을 위한 Nextflow
   
 
     
@@ -1720,7 +1752,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    RNAseq
+    RNAseq을 위한 Nextflow
   
 
           </label>
@@ -1740,7 +1772,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for RNAseq
+    RNAseq을 위한 Nextflow
   
 
     
@@ -1768,7 +1800,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    오리엔테이션
   
 
     
@@ -1796,7 +1828,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Method overview and manual testing
+    파트 1: 방법 개요 및 수동 테스트
   
 
     
@@ -1824,7 +1856,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Single-sample implementation
+    파트 2: 단일 샘플 구현
   
 
     
@@ -1852,7 +1884,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Multi-sample paired-end implementation
+    파트 3: 다중 샘플 paired-end 구현
   
 
     
@@ -1880,7 +1912,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    피드백 설문조사
   
 
     
@@ -1908,7 +1940,7 @@
   <span class="md-ellipsis">
     
   
-    Next Steps
+    다음 단계
   
 
     
@@ -1957,7 +1989,7 @@
   <span class="md-ellipsis">
     
   
-    Imaging
+    이미징을 위한 Nextflow 실행
   
 
     
@@ -1973,7 +2005,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Imaging
+    이미징을 위한 Nextflow 실행
   
 
           </label>
@@ -1993,7 +2025,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow run for Imaging
+    이미징을 위한 Nextflow 실행
   
 
     
@@ -2021,7 +2053,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    오리엔테이션
   
 
     
@@ -2058,7 +2090,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run basic operations
+    파트 1: 기본 작업 실행하기
   
 
     
@@ -2076,7 +2108,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run basic operations
+    파트 1: 기본 작업 실행하기
   
 
     
@@ -2096,22 +2128,22 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#1-run-the-workflow" class="md-nav__link">
+  <a href="#1_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Run the workflow
+        1. 워크플로우 실행하기
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Run the workflow">
+    <nav class="md-nav" aria-label="1. 워크플로우 실행하기">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11-launch-the-workflow-and-monitor-execution" class="md-nav__link">
+  <a href="#11" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1. Launch the workflow and monitor execution
+        1.1. 워크플로우 시작 및 실행 모니터링하기
       
     </span>
   </a>
@@ -2119,10 +2151,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#12-find-the-output-file-in-the-results-directory" class="md-nav__link">
+  <a href="#12-results" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2. Find the output file in the results directory
+        1.2. results 디렉토리에서 출력 파일 찾기
       
     </span>
   </a>
@@ -2130,10 +2162,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#13-find-the-original-output-and-logs-in-the-work-directory" class="md-nav__link">
+  <a href="#13-work" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.3. Find the original output and logs in the work/ directory
+        1.3. work/ 디렉토리에서 원본 출력 및 로그 찾기
       
     </span>
   </a>
@@ -2141,10 +2173,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#14-optional-exercise-re-run-with-different-greetings" class="md-nav__link">
+  <a href="#14" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.4. Optional exercise: re-run with different greetings
+        1.4. 선택 연습: 다른 인사말로 다시 실행하기
       
     </span>
   </a>
@@ -2152,10 +2184,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway" class="md-nav__link">
+  <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        핵심 사항
       
     </span>
   </a>
@@ -2163,10 +2195,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        다음 단계
       
     </span>
   </a>
@@ -2177,22 +2209,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#2-examine-the-hello-world-workflow-starter-script" class="md-nav__link">
+  <a href="#2-hello-world" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Examine the Hello World workflow starter script
+        2. Hello World 워크플로우 스타터 스크립트 살펴보기
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. Examine the Hello World workflow starter script">
+    <nav class="md-nav" aria-label="2. Hello World 워크플로우 스타터 스크립트 살펴보기">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#21-examine-the-overall-code-structure" class="md-nav__link">
+  <a href="#21" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1. Examine the overall code structure
+        2.1. 전체 코드 구조 살펴보기
       
     </span>
   </a>
@@ -2200,10 +2232,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#22-the-process-definition" class="md-nav__link">
+  <a href="#22-process" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2. The process definition
+        2.2. process 정의
       
     </span>
   </a>
@@ -2211,10 +2243,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#23-the-workflow-definition" class="md-nav__link">
+  <a href="#23-workflow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.3. The workflow definition
+        2.3. workflow 정의
       
     </span>
   </a>
@@ -2222,10 +2254,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#24-the-params-system-of-command-line-parameters" class="md-nav__link">
+  <a href="#24-params" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.4. The params system of command-line parameters
+        2.4. 명령줄 매개변수의 params 시스템
       
     </span>
   </a>
@@ -2233,10 +2265,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway_1" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        핵심 사항
       
     </span>
   </a>
@@ -2244,10 +2276,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next_1" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        다음 단계
       
     </span>
   </a>
@@ -2258,22 +2290,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#3-manage-workflow-executions" class="md-nav__link">
+  <a href="#3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Manage workflow executions
+        3. 워크플로우 실행 관리하기
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. Manage workflow executions">
+    <nav class="md-nav" aria-label="3. 워크플로우 실행 관리하기">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#31-re-launch-a-workflow-with-resume" class="md-nav__link">
+  <a href="#31-resume" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1. Re-launch a workflow with -resume
+        3.1. -resume으로 워크플로우 다시 시작하기
       
     </span>
   </a>
@@ -2281,10 +2313,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#32-inspect-the-log-of-past-executions" class="md-nav__link">
+  <a href="#32" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.2. Inspect the log of past executions
+        3.2. 과거 실행 로그 검사하기
       
     </span>
   </a>
@@ -2292,10 +2324,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#33-delete-older-work-directories" class="md-nav__link">
+  <a href="#33" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.3. Delete older work directories
+        3.3. 이전 작업 디렉토리 삭제하기
       
     </span>
   </a>
@@ -2303,10 +2335,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway_2" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        핵심 사항
       
     </span>
   </a>
@@ -2314,10 +2346,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next_2" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        다음 단계
       
     </span>
   </a>
@@ -2537,7 +2569,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Run nf-core/molkart
+    파트 2: nf-core/molkart 실행하기
   
 
     
@@ -2565,7 +2597,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Organizing inputs
+    파트 3: 입력 구성하기
   
 
     
@@ -2593,7 +2625,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Configuration
+    파트 4: 구성
   
 
     
@@ -2621,7 +2653,7 @@
   <span class="md-ellipsis">
     
   
-    Survey
+    설문조사
   
 
     
@@ -2649,7 +2681,7 @@
   <span class="md-ellipsis">
     
   
-    Next steps
+    다음 단계
   
 
     
@@ -2703,7 +2735,7 @@
   <span class="md-ellipsis">
     
   
-    Side Quests
+    사이드 퀘스트
   
 
     
@@ -2719,7 +2751,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Side Quests
+    사이드 퀘스트
   
 
           </label>
@@ -2739,7 +2771,7 @@
   <span class="md-ellipsis">
     
   
-    Side Quests
+    사이드 퀘스트
   
 
     
@@ -2767,7 +2799,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    오리엔테이션
   
 
     
@@ -2795,7 +2827,7 @@
   <span class="md-ellipsis">
     
   
-    Development Environment
+    개발 환경
   
 
     
@@ -2823,7 +2855,7 @@
   <span class="md-ellipsis">
     
   
-    Metadata and meta maps
+    메타데이터와 메타 맵
   
 
     
@@ -2851,7 +2883,7 @@
   <span class="md-ellipsis">
     
   
-    File input processing
+    파일 입력 처리
   
 
     
@@ -2879,7 +2911,7 @@
   <span class="md-ellipsis">
     
   
-    Splitting and Grouping
+    데이터 분할 및 그룹화
   
 
     
@@ -2907,7 +2939,7 @@
   <span class="md-ellipsis">
     
   
-    Workflows of Workflows
+    워크플로우의 워크플로우
   
 
     
@@ -2935,7 +2967,7 @@
   <span class="md-ellipsis">
     
   
-    Debugging Workflows
+    워크플로우 디버깅
   
 
     
@@ -2963,7 +2995,7 @@
   <span class="md-ellipsis">
     
   
-    Essential Nextflow Scripting Patterns
+    필수 Nextflow 스크립팅 패턴
   
 
     
@@ -2991,7 +3023,7 @@
   <span class="md-ellipsis">
     
   
-    Testing with nf-test
+    nf-test로 테스트하기
   
 
     
@@ -3037,7 +3069,7 @@
   <span class="md-ellipsis">
     
   
-    Training Collections
+    교육 컬렉션
   
 
     
@@ -3053,7 +3085,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Training Collections
+    교육 컬렉션
   
 
           </label>
@@ -3073,7 +3105,7 @@
   <span class="md-ellipsis">
     
   
-    Training Collections
+    교육 컬렉션
   
 
     
@@ -3101,7 +3133,7 @@
   <span class="md-ellipsis">
     
   
-    The Architect's Toolkit I
+    Architects toolkit 1
   
 
     
@@ -3183,7 +3215,7 @@
   <span class="md-ellipsis">
     
   
-    Getting help
+    도움말
   
 
     
@@ -3222,7 +3254,7 @@
   <span class="md-ellipsis">
     
   
-    Training environment
+    환경 옵션
   
 
     
@@ -3238,7 +3270,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Training environment
+    환경 옵션
   
 
           </label>
@@ -3258,7 +3290,7 @@
   <span class="md-ellipsis">
     
   
-    환경 설정
+    환경 옵션
   
 
     
@@ -3314,7 +3346,7 @@
   <span class="md-ellipsis">
     
   
-    Local Devcontainers
+    로컬 Devcontainers
   
 
     
@@ -3342,7 +3374,7 @@
   <span class="md-ellipsis">
     
   
-    로컬 설치
+    수동 설치
   
 
     
@@ -3378,7 +3410,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow versions
+    Nextflow 버전
   
 
     
@@ -3406,7 +3438,7 @@
   <span class="md-ellipsis">
     
   
-    The Hello pipeline
+    Hello pipeline
   
 
     
@@ -3448,22 +3480,22 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#1-run-the-workflow" class="md-nav__link">
+  <a href="#1_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Run the workflow
+        1. 워크플로우 실행하기
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Run the workflow">
+    <nav class="md-nav" aria-label="1. 워크플로우 실행하기">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11-launch-the-workflow-and-monitor-execution" class="md-nav__link">
+  <a href="#11" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1. Launch the workflow and monitor execution
+        1.1. 워크플로우 시작 및 실행 모니터링하기
       
     </span>
   </a>
@@ -3471,10 +3503,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#12-find-the-output-file-in-the-results-directory" class="md-nav__link">
+  <a href="#12-results" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2. Find the output file in the results directory
+        1.2. results 디렉토리에서 출력 파일 찾기
       
     </span>
   </a>
@@ -3482,10 +3514,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#13-find-the-original-output-and-logs-in-the-work-directory" class="md-nav__link">
+  <a href="#13-work" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.3. Find the original output and logs in the work/ directory
+        1.3. work/ 디렉토리에서 원본 출력 및 로그 찾기
       
     </span>
   </a>
@@ -3493,10 +3525,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#14-optional-exercise-re-run-with-different-greetings" class="md-nav__link">
+  <a href="#14" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.4. Optional exercise: re-run with different greetings
+        1.4. 선택 연습: 다른 인사말로 다시 실행하기
       
     </span>
   </a>
@@ -3504,10 +3536,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway" class="md-nav__link">
+  <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        핵심 사항
       
     </span>
   </a>
@@ -3515,10 +3547,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        다음 단계
       
     </span>
   </a>
@@ -3529,22 +3561,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#2-examine-the-hello-world-workflow-starter-script" class="md-nav__link">
+  <a href="#2-hello-world" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Examine the Hello World workflow starter script
+        2. Hello World 워크플로우 스타터 스크립트 살펴보기
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. Examine the Hello World workflow starter script">
+    <nav class="md-nav" aria-label="2. Hello World 워크플로우 스타터 스크립트 살펴보기">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#21-examine-the-overall-code-structure" class="md-nav__link">
+  <a href="#21" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1. Examine the overall code structure
+        2.1. 전체 코드 구조 살펴보기
       
     </span>
   </a>
@@ -3552,10 +3584,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#22-the-process-definition" class="md-nav__link">
+  <a href="#22-process" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2. The process definition
+        2.2. process 정의
       
     </span>
   </a>
@@ -3563,10 +3595,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#23-the-workflow-definition" class="md-nav__link">
+  <a href="#23-workflow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.3. The workflow definition
+        2.3. workflow 정의
       
     </span>
   </a>
@@ -3574,10 +3606,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#24-the-params-system-of-command-line-parameters" class="md-nav__link">
+  <a href="#24-params" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.4. The params system of command-line parameters
+        2.4. 명령줄 매개변수의 params 시스템
       
     </span>
   </a>
@@ -3585,10 +3617,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway_1" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        핵심 사항
       
     </span>
   </a>
@@ -3596,10 +3628,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next_1" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        다음 단계
       
     </span>
   </a>
@@ -3610,22 +3642,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#3-manage-workflow-executions" class="md-nav__link">
+  <a href="#3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Manage workflow executions
+        3. 워크플로우 실행 관리하기
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. Manage workflow executions">
+    <nav class="md-nav" aria-label="3. 워크플로우 실행 관리하기">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#31-re-launch-a-workflow-with-resume" class="md-nav__link">
+  <a href="#31-resume" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1. Re-launch a workflow with -resume
+        3.1. -resume으로 워크플로우 다시 시작하기
       
     </span>
   </a>
@@ -3633,10 +3665,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#32-inspect-the-log-of-past-executions" class="md-nav__link">
+  <a href="#32" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.2. Inspect the log of past executions
+        3.2. 과거 실행 로그 검사하기
       
     </span>
   </a>
@@ -3644,10 +3676,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#33-delete-older-work-directories" class="md-nav__link">
+  <a href="#33" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.3. Delete older work directories
+        3.3. 이전 작업 디렉토리 삭제하기
       
     </span>
   </a>
@@ -3655,10 +3687,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway_2" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        핵심 사항
       
     </span>
   </a>
@@ -3666,10 +3698,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next_2" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        다음 단계
       
     </span>
   </a>
@@ -3918,27 +3950,37 @@
                 
                   
 
+ 
+<a
+  href="https://github.com/nextflow-io/training/edit/master/docs/nf4_science/imaging/01_basics.md"
+  title="이 페이지를 편집"
+  class="md-content__button md-icon"
+  rel="edit"
+>
+   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+</a>
+   
+<a
+  href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md"
+  title="Improve translation"
+  class="md-content__button md-icon"
+>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 1H3c-1.1 0-2 .9-2 2v12l3-3h5v-1c0-2.2 1.79-4 4-4V3c0-1.1-.9-2-2-2m0 3H9.5c-.34 1.19-.96 2.3-1.82 3.26l-.02.02 1.26 1.25-.37 1.01L7 8l-2.5 2.5-.69-.73 2.53-2.49A8.6 8.6 0 0 1 4.86 5h.99c.31.6.69 1.17 1.15 1.68A7.7 7.7 0 0 0 8.57 4H3V3h3.5V2h1v1H11zm10 5h-8c-1.1 0-2 .9-2 2v7c0 1.1.9 2 2 2h7l3 3V11c0-1.1-.9-2-2-2m-1.37 10-.85-2.25h-3.56L14.38 19h-1.5l3.37-9h1.5l3.38 9zM17 12l1.22 3.25h-2.43z"/></svg>
+</a>
+ 
 
-  
-    <a href="https://github.com/nextflow-io/training/edit/master/docs/nf4_science/imaging/01_basics.md" title="이 페이지를 편집" class="md-content__button md-icon" rel="edit">
-      
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
-    </a>
-  
-  
-
-
-<h1 id="part-1-run-basic-operations">Part 1: Run basic operations<a class="headerlink" href="#part-1-run-basic-operations" title="Permanent link">&para;</a></h1>
-<p>In this first part of the Nextflow for Bioimaging training course, we'll use a very basic domain-agnostic Hello World example to demonstrate essential operations and point out the corresponding Nextflow code components.</p>
-<h2 id="1-run-the-workflow">1. Run the workflow<a class="headerlink" href="#1-run-the-workflow" title="Permanent link">&para;</a></h2>
-<p>We provide you with a workflow script named <code>hello-world.nf</code> that takes an input via a command-line argument named <code>--greeting</code> and produces a text file containing that greeting.
-We're not going to look at the code yet; first let's see what it looks like to run it.</p>
-<h3 id="11-launch-the-workflow-and-monitor-execution">1.1. Launch the workflow and monitor execution<a class="headerlink" href="#11-launch-the-workflow-and-monitor-execution" title="Permanent link">&para;</a></h3>
-<p>In the terminal, run the following command:</p>
+<h1 id="1">파트 1: 기본 작업 실행하기<a class="headerlink" href="#1" title="Permanent link">&para;</a></h1>
+<p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> AI 지원 번역 - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">자세히 알아보기 및 개선 제안</a></span></p>
+<p>Nextflow for Bioimaging 교육 과정의 첫 번째 파트에서는 매우 기본적인 도메인 독립적 Hello World 예제를 사용하여 필수 작업을 시연하고 해당하는 Nextflow 코드 구성 요소를 설명하겠습니다.</p>
+<h2 id="1_1">1. 워크플로우 실행하기<a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h2>
+<p><code>--greeting</code>이라는 명령줄 인수를 통해 입력을 받아 해당 인사말이 포함된 텍스트 파일을 생성하는 <code>hello-world.nf</code>라는 워크플로우 스크립트를 제공합니다.
+아직 코드를 살펴보지는 않을 것이며, 먼저 실행하는 것이 어떤 모습인지 확인해 보겠습니다.</p>
+<h3 id="11">1.1. 워크플로우 시작 및 실행 모니터링하기<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
+<p>터미널에서 다음 명령을 실행하십시오:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-world.nf<span class="w"> </span>--greeting<span class="w"> </span><span class="s1">&#39;Hello World!&#39;</span>
 </code></pre></div>
-<p>Your console output should look something like this:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Output</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
+<p>콘솔 출력은 다음과 같이 표시되어야 합니다:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">출력</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
 <span class="normal"><a href="#__codelineno-1-2">2</a></span>
 <span class="normal"><a href="#__codelineno-1-3">3</a></span>
 <span class="normal"><a href="#__codelineno-1-4">4</a></span>
@@ -3950,61 +3992,61 @@ We're not going to look at the code yet; first let's see what it looks like to r
 <a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="go">executor &gt;  local (1)</span>
 <a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="go">[a3/7be2fa] sayHello | 1 of 1 ✔</span>
 </code></pre></div></td></tr></table></div>
-<p>Congratulations, you just ran your first Nextflow workflow!</p>
-<p>The most important output here is the last line (line 6):</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Output</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="go">[a3/7be2fa] sayHello | 1 of 1 ✔</span>
+<p>축하합니다. 첫 번째 Nextflow 워크플로우를 실행하셨습니다!</p>
+<p>여기서 가장 중요한 출력은 마지막 줄(6번 줄)입니다:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">출력</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="go">[a3/7be2fa] sayHello | 1 of 1 ✔</span>
 </code></pre></div></td></tr></table></div>
-<p>This tells us that the <code>sayHello</code> process was successfully executed once (<code>1 of 1 ✔</code>).</p>
-<p>That's great, but you may be wondering: where is the output?</p>
-<h3 id="12-find-the-output-file-in-the-results-directory">1.2. Find the output file in the <code>results</code> directory<a class="headerlink" href="#12-find-the-output-file-in-the-results-directory" title="Permanent link">&para;</a></h3>
-<p>This workflow is configured to publish its output to a directory called <code>results</code>.
-If you look at your current directory, you will see that when you ran the workflow, Nextflow created a new directory called <code>results</code>, which contains a file called <code>output.txt</code>.</p>
+<p>이는 <code>sayHello</code> process가 한 번 성공적으로 실행되었음을 알려줍니다(<code>1 of 1 ✔</code>).</p>
+<p>좋습니다만, 출력이 어디에 있는지 궁금하실 것입니다.</p>
+<h3 id="12-results">1.2. <code>results</code> 디렉토리에서 출력 파일 찾기<a class="headerlink" href="#12-results" title="Permanent link">&para;</a></h3>
+<p>이 워크플로우는 출력을 <code>results</code>라는 디렉토리에 게시하도록 구성되어 있습니다.
+현재 디렉토리를 살펴보면 워크플로우를 실행할 때 Nextflow가 <code>results</code>라는 새 디렉토리를 생성했으며, 이 디렉토리에는 <code>output.txt</code>라는 파일이 포함되어 있습니다.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">results/</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
 <span class="normal"><a href="#__codelineno-3-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="go">results</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="go">└── output.txt</span>
 </code></pre></div></td></tr></table></div>
-<p>Open the file; the contents should match the greeting you specified on the command line.</p>
+<p>파일을 열어보십시오. 내용은 명령줄에서 지정한 인사말과 일치해야 합니다.</p>
 <details>
-  <summary>File contents</summary>
+  <summary>파일 내용</summary>
 
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">results/output.txt</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="go">Hello World!</span>
 </code></pre></div></td></tr></table></div>
 
 </details>
 
-<p>That's great, our workflow did what it was supposed to do!</p>
-<p>However, be aware that the 'published' result is a copy (or in some cases a symlink) of the actual output produced by Nextflow when it executed the workflow.</p>
-<p>So now, we are going to peek under the hood to see where Nextflow actually executed the work.</p>
+<p>훌륭합니다. 워크플로우가 의도한 대로 작동했습니다!</p>
+<p>그러나 '게시된' 결과는 Nextflow가 워크플로우를 실행할 때 생성한 실제 출력의 사본(또는 경우에 따라 심볼릭 링크)이라는 점을 알아두십시오.</p>
+<p>이제 Nextflow가 실제로 작업을 실행한 위치를 확인하기 위해 내부를 살펴보겠습니다.</p>
 <div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Not all workflows will be set up to publish outputs to a results directory, and/or the directory name may be different.
-A little further in this section, we will show you how to find out where this behavior is specified.</p>
+<p class="admonition-title">경고</p>
+<p>모든 워크플로우가 results 디렉토리에 출력을 게시하도록 설정되어 있는 것은 아니며, 디렉토리 이름이 다를 수 있습니다.
+이 섹션 후반부에서 이 동작이 어디에 지정되어 있는지 확인하는 방법을 보여드리겠습니다.</p>
 </div>
-<h3 id="13-find-the-original-output-and-logs-in-the-work-directory">1.3. Find the original output and logs in the <code>work/</code> directory<a class="headerlink" href="#13-find-the-original-output-and-logs-in-the-work-directory" title="Permanent link">&para;</a></h3>
-<p>When you run a workflow, Nextflow creates a distinct 'task directory' for every single invocation of each process in the workflow (=every step in the pipeline).
-For each one, it will stage the necessary inputs, execute the relevant instruction(s) and write outputs and log files within that one directory, which is named automatically using a hash in order to make it unique.</p>
-<p>All of these task directories will live under a directory called <code>work</code> within your current directory (where you're running the command).</p>
-<p>That may sound confusing, so let's see what that looks like in practice.</p>
-<p>Going back to the console output for the workflow we ran earlier, we had this line:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Excerpt of command output</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-6" name="__codelineno-5-6"></a><span class="go">[a3/7be2fa] sayHello | 1 of 1 ✔</span>
+<h3 id="13-work">1.3. <code>work/</code> 디렉토리에서 원본 출력 및 로그 찾기<a class="headerlink" href="#13-work" title="Permanent link">&para;</a></h3>
+<p>워크플로우를 실행하면 Nextflow는 워크플로우의 각 process 호출마다 별도의 'task 디렉토리'를 생성합니다(=파이프라인의 각 단계).
+각각에 대해 필요한 입력을 준비하고, 관련 명령을 실행하며, 해당 디렉토리 내에 출력 및 로그 파일을 작성합니다. 이 디렉토리는 고유성을 위해 해시를 사용하여 자동으로 이름이 지정됩니다.</p>
+<p>이러한 모든 task 디렉토리는 현재 디렉토리(명령을 실행하는 위치) 내의 <code>work</code>라는 디렉토리 아래에 위치합니다.</p>
+<p>혼란스러울 수 있으니 실제로 어떤 모습인지 살펴보겠습니다.</p>
+<p>앞서 실행한 워크플로우의 콘솔 출력으로 돌아가면 다음과 같은 줄이 있었습니다:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">명령 출력 발췌</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-6" name="__codelineno-5-6"></a><span class="go">[a3/7be2fa] sayHello | 1 of 1 ✔</span>
 </code></pre></div></td></tr></table></div>
-<p>See how the line starts with <code>[a3/7be2fa]</code>?
-That is a truncated form of the task directory path for that one process call, and tells you where to find the output of the <code>sayHello</code> process call within the <code>work/</code> directory path.</p>
-<p>You can find the full path by typing the following command (replacing <code>a3/7be2fa</code> with what you see in your own terminal) and pressing the tab key to autocomplete the path or adding an asterisk:</p>
+<p>줄이 <code>[a3/7be2fa]</code>로 시작하는 것이 보이시나요?
+이것은 해당 process 호출에 대한 task 디렉토리 경로의 축약된 형태이며, <code>work/</code> 디렉토리 경로 내에서 <code>sayHello</code> process 호출의 출력을 어디에서 찾을 수 있는지 알려줍니다.</p>
+<p>다음 명령을 입력하고(<code>a3/7be2fa</code>를 터미널에 표시된 것으로 교체) tab 키를 눌러 경로를 자동 완성하거나 별표를 추가하여 전체 경로를 찾을 수 있습니다:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>tree<span class="w"> </span>work/a3/7be2fa*
 </code></pre></div>
-<p>This should yield the full path directory path: <code>work/a3/7be2fa7be2fad5e71e5f49998f795677fd68</code></p>
-<p>Let's take a look at what's in there.</p>
+<p>전체 디렉토리 경로가 표시됩니다: <code>work/a3/7be2fa7be2fad5e71e5f49998f795677fd68</code></p>
+<p>그 안에 무엇이 있는지 살펴보겠습니다.</p>
 <div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>If you browse the contents of the task subdirectory in the VSCode file explorer, you'll see all the files right away.
-However, the log files are set to be invisible in the terminal, so if you want to use <code>ls</code> or <code>tree</code> to view them, you'll need to set the relevant option for displaying invisible files.</p>
+<p class="admonition-title">팁</p>
+<p>VSCode 파일 탐색기에서 task 하위 디렉토리의 내용을 탐색하면 모든 파일을 바로 볼 수 있습니다.
+그러나 로그 파일은 터미널에서 보이지 않도록 설정되어 있으므로 <code>ls</code> 또는 <code>tree</code>를 사용하여 보려면 보이지 않는 파일을 표시하는 관련 옵션을 설정해야 합니다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>tree<span class="w"> </span>-a<span class="w"> </span>work
 </code></pre></div>
 </div>
-<p>The exact subdirectory names will be different on your system.</p>
+<p>시스템에서는 정확한 하위 디렉토리 이름이 다를 것입니다.</p>
 <details>
-  <summary>Directory contents</summary>
+  <summary>디렉토리 내용</summary>
 
 <div class="highlight"><span class="filename">work/</span><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="go">work</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="go">└── a3</span>
@@ -4021,30 +4063,30 @@ However, the log files are set to be invisible in the terminal, so if you want t
 
 </details>
 
-<p>You should immediately recognize the <code>output.txt</code> file, which is in fact the original output of the <code>sayHello</code> process that got published to the <code>results</code> directory.
-If you open it, you will find the <code>Hello World!</code> greeting again.</p>
+<p><code>output.txt</code> 파일을 바로 확인할 수 있을 것입니다. 이것은 실제로 <code>results</code> 디렉토리에 게시된 <code>sayHello</code> process의 원본 출력입니다.
+파일을 열면 다시 <code>Hello World!</code> 인사말을 찾을 수 있습니다.</p>
 <details>
-  <summary>File contents of output.txt</summary>
+  <summary>output.txt의 파일 내용</summary>
 
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">work/a3/7be2fa7be2fad5e71e5f49998f795677fd68/output.txt</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="go">Hello World!</span>
 </code></pre></div></td></tr></table></div>
 
 </details>
 
-<p>So what about all those other files?</p>
-<p>These are the helper and log files that Nextflow wrote as part of the task execution:</p>
+<p>그렇다면 다른 모든 파일은 무엇일까요?</p>
+<p>이것들은 Nextflow가 task 실행의 일부로 작성한 도우미 및 로그 파일입니다:</p>
 <ul>
-<li><strong><code>.command.begin</code></strong>: Sentinel file created as soon as the task is launched.</li>
-<li><strong><code>.command.err</code></strong>: Error messages (<code>stderr</code>) emitted by the process call</li>
-<li><strong><code>.command.log</code></strong>: Complete log output emitted by the process call</li>
-<li><strong><code>.command.out</code></strong>: Regular output (<code>stdout</code>) by the process call</li>
-<li><strong><code>.command.run</code></strong>: Full script run by Nextflow to execute the process call</li>
-<li><strong><code>.command.sh</code></strong>: The command that was actually run by the process call</li>
-<li><strong><code>.exitcode</code></strong>: The exit code resulting from the command</li>
+<li><strong><code>.command.begin</code></strong>: task가 시작되자마자 생성되는 센티넬 파일</li>
+<li><strong><code>.command.err</code></strong>: process 호출에서 발생한 오류 메시지(<code>stderr</code>)</li>
+<li><strong><code>.command.log</code></strong>: process 호출에서 발생한 전체 로그 출력</li>
+<li><strong><code>.command.out</code></strong>: process 호출의 일반 출력(<code>stdout</code>)</li>
+<li><strong><code>.command.run</code></strong>: Nextflow가 process 호출을 실행하기 위해 실행한 전체 스크립트</li>
+<li><strong><code>.command.sh</code></strong>: process 호출에서 실제로 실행된 명령</li>
+<li><strong><code>.exitcode</code></strong>: 명령 실행 결과로 생성된 종료 코드</li>
 </ul>
-<p>The <code>.command.sh</code> file is especially useful because it shows you the main command Nextflow executed not including all the bookkeeping and task/environment setup.</p>
+<p><code>.command.sh</code> 파일은 Nextflow가 모든 장부 처리와 task/환경 설정을 제외하고 실제로 실행한 주요 명령을 보여주기 때문에 특히 유용합니다.</p>
 <details>
-  <summary>File contents</summary>
+  <summary>파일 내용</summary>
 
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">work/a3/7be2fa7be2fad5e71e5f49998f795677fd68/.command.sh</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span>
 <span class="normal"><a href="#__codelineno-10-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="gp">#</span>!/bin/bash<span class="w"> </span>-ue
@@ -4054,25 +4096,25 @@ If you open it, you will find the <code>Hello World!</code> greeting again.</p>
 </details>
 
 <div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>When something goes wrong and you need to troubleshoot what happened, it can be useful to look at the <code>command.sh</code> script to check exactly what command Nextflow composed based on the workflow instructions, variable interpolation and so on.</p>
+<p class="admonition-title">팁</p>
+<p>문제가 발생하여 무엇이 잘못되었는지 문제를 해결해야 할 때, <code>command.sh</code> 스크립트를 살펴보면 워크플로우 지시사항, 변수 보간 등을 기반으로 Nextflow가 구성한 정확한 명령을 확인하는 데 유용할 수 있습니다.</p>
 </div>
-<h3 id="14-optional-exercise-re-run-with-different-greetings">1.4. Optional exercise: re-run with different greetings<a class="headerlink" href="#14-optional-exercise-re-run-with-different-greetings" title="Permanent link">&para;</a></h3>
-<p>Try re-running the workflow a few times with different values for the <code>--greeting</code> argument, then look at both the contents of the <code>results/</code> directory and the task directories.</p>
-<p>Observe how the outputs and logs of isolated task directories are preserved, whereas the contents of the <code>results</code> directory are overwritten by the output of subsequent executions.</p>
-<h3 id="takeaway">Takeaway<a class="headerlink" href="#takeaway" title="Permanent link">&para;</a></h3>
-<p>You know how to run a simple Nextflow script, monitor its execution and find its outputs.</p>
-<h3 id="whats-next">What's next?<a class="headerlink" href="#whats-next" title="Permanent link">&para;</a></h3>
-<p>Learn how to read a basic Nextflow script and identify how its components relate to its functionality.</p>
+<h3 id="14">1.4. 선택 연습: 다른 인사말로 다시 실행하기<a class="headerlink" href="#14" title="Permanent link">&para;</a></h3>
+<p><code>--greeting</code> 인수에 다른 값을 사용하여 워크플로우를 여러 번 다시 실행한 다음 <code>results/</code> 디렉토리와 task 디렉토리의 내용을 모두 살펴보십시오.</p>
+<p>격리된 task 디렉토리의 출력 및 로그가 어떻게 보존되는지 관찰하고, <code>results</code> 디렉토리의 내용은 후속 실행의 출력으로 덮어쓰이는 것을 확인하십시오.</p>
+<h3 id="_1">핵심 사항<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<p>간단한 Nextflow 스크립트를 실행하고, 실행을 모니터링하며, 출력을 찾는 방법을 알게 되었습니다.</p>
+<h3 id="_2">다음 단계<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>기본 Nextflow 스크립트를 읽고 그 구성 요소가 기능과 어떻게 연관되는지 식별하는 방법을 배웁니다.</p>
 <hr />
-<h2 id="2-examine-the-hello-world-workflow-starter-script">2. Examine the Hello World workflow starter script<a class="headerlink" href="#2-examine-the-hello-world-workflow-starter-script" title="Permanent link">&para;</a></h2>
-<p>What we did there was basically treating the workflow script like a black box.
-Now that we've seen what it does, let's open the box and look inside.</p>
-<p><em>The goal here is not to memorize the syntax of Nextflow code, but to form some basic intuition of what are the main components and how they are organized.</em></p>
-<h3 id="21-examine-the-overall-code-structure">2.1. Examine the overall code structure<a class="headerlink" href="#21-examine-the-overall-code-structure" title="Permanent link">&para;</a></h3>
-<p>Let's open the <code>hello-world.nf</code> script in the editor pane.</p>
+<h2 id="2-hello-world">2. Hello World 워크플로우 스타터 스크립트 살펴보기<a class="headerlink" href="#2-hello-world" title="Permanent link">&para;</a></h2>
+<p>앞서 우리가 한 것은 기본적으로 워크플로우 스크립트를 블랙박스처럼 취급한 것입니다.
+이제 무엇을 하는지 확인했으니 상자를 열어 내부를 살펴보겠습니다.</p>
+<p><em>여기서의 목표는 Nextflow 코드의 구문을 암기하는 것이 아니라 주요 구성 요소가 무엇이며 어떻게 구성되는지에 대한 기본적인 직관을 형성하는 것입니다.</em></p>
+<h3 id="21">2.1. 전체 코드 구조 살펴보기<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
+<p>편집기 창에서 <code>hello-world.nf</code> 스크립트를 열어보겠습니다.</p>
 <details>
-  <summary>Code</summary>
+  <summary>코드</summary>
 
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-world.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-11-2"> 2</a></span>
@@ -4122,23 +4164,23 @@ Now that we've seen what it does, let's open the box and look inside.</p>
 <a id="__codelineno-11-21" name="__codelineno-11-21"></a>
 <a id="__codelineno-11-22" name="__codelineno-11-22"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-11-23" name="__codelineno-11-23"></a>
-<a id="__codelineno-11-24" name="__codelineno-11-24"></a><span class="w">    </span><span class="c1">// emit a greeting</span>
+<a id="__codelineno-11-24" name="__codelineno-11-24"></a><span class="w">    </span><span class="c1">// 인사말 출력</span>
 <a id="__codelineno-11-25" name="__codelineno-11-25"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">greeting</span><span class="o">)</span>
 <a id="__codelineno-11-26" name="__codelineno-11-26"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 
 </details>
 
-<p>A Nextflow script involves two main types of core components: one or more <strong>processes</strong>, and the <strong>workflow</strong> itself.
-Each <strong>process</strong> describes what operation(s) the corresponding step in the pipeline should accomplish, while the <strong>workflow</strong> describes the dataflow logic that connects the various steps.</p>
-<p>Let's take a closer look at the <strong>process</strong> block first, then we'll look at the <strong>workflow</strong> block.</p>
-<h3 id="22-the-process-definition">2.2. The <code>process</code> definition<a class="headerlink" href="#22-the-process-definition" title="Permanent link">&para;</a></h3>
-<p>The first block of code describes a <strong>process</strong>.
-The process definition starts with the keyword <code>process</code>, followed by the process name and finally the process body delimited by curly braces.
-The process body must contain a script block which specifies the command to run, which can be anything you would be able to run in a command line terminal.</p>
-<p>Here we have a <strong>process</strong> called <code>sayHello</code> that takes an <strong>input</strong> variable called <code>greeting</code> and writes its <strong>output</strong> to a file named <code>output.txt</code>.</p>
+<p>Nextflow 스크립트는 두 가지 주요 핵심 구성 요소를 포함합니다: 하나 이상의 <strong>process</strong>와 <strong>workflow</strong> 자체입니다.
+각 <strong>process</strong>는 파이프라인의 해당 단계가 수행해야 할 작업을 설명하며, <strong>workflow</strong>는 다양한 단계를 연결하는 데이터 흐름 논리를 설명합니다.</p>
+<p>먼저 <strong>process</strong> 블록을 자세히 살펴본 다음 <strong>workflow</strong> 블록을 살펴보겠습니다.</p>
+<h3 id="22-process">2.2. <code>process</code> 정의<a class="headerlink" href="#22-process" title="Permanent link">&para;</a></h3>
+<p>첫 번째 코드 블록은 <strong>process</strong>를 설명합니다.
+process 정의는 <code>process</code> 키워드로 시작하고 process 이름이 뒤따르며 마지막으로 중괄호로 구분된 process 본문이 옵니다.
+process 본문에는 실행할 명령을 지정하는 script 블록이 포함되어야 하며, 명령줄 터미널에서 실행할 수 있는 모든 것이 가능합니다.</p>
+<p>여기에는 <code>greeting</code>이라는 <strong>input</strong> 변수를 받아 <code>output.txt</code>라는 파일에 <strong>output</strong>을 작성하는 <code>sayHello</code>라는 <strong>process</strong>가 있습니다.</p>
 <details>
-  <summary>Code</summary>
+  <summary>코드</summary>
 
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-world.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-3"> 3</a></span>
 <span class="normal"><a href="#__codelineno-12-4"> 4</a></span>
@@ -4179,66 +4221,66 @@ The process body must contain a script block which specifies the command to run,
 
 </details>
 
-<p>This is a very minimal process definition that just contains an <code>input</code> definition, an <code>output</code> definition and the <code>script</code> to execute.</p>
-<p>The <code>input</code> definition includes the <code>val</code> qualifier, which tells Nextflow to expect a value of some kind (can be a string, a number, whatever).</p>
-<p>The <code>output</code> definition includes the <code>path</code> qualifier, which tells Nextflow this should be handled as a path (includes both directory paths and files).</p>
+<p>이것은 <code>input</code> 정의, <code>output</code> 정의 및 실행할 <code>script</code>만 포함하는 매우 최소한의 process 정의입니다.</p>
+<p><code>input</code> 정의에는 <code>val</code> 한정자가 포함되어 있으며, 이는 Nextflow에게 어떤 종류의 값(문자열, 숫자 등)을 기대하도록 지시합니다.</p>
+<p><code>output</code> 정의에는 <code>path</code> 한정자가 포함되어 있으며, 이는 Nextflow에게 이것을 경로로 처리하도록 지시합니다(디렉토리 경로와 파일 모두 포함).</p>
 <div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>The output definition does not <em>determine</em> what output will be created.
-It simply <em>declares</em> where to find the expected output file(s), so that Nextflow can look for it once execution is complete.</p>
-<p>This is necessary for verifying that the command was executed successfully and for passing the output to downstream processes if needed.
-Output produced that doesn't match what is declared in the output block will not be passed to downstream processes.</p>
+<p class="admonition-title">팁</p>
+<p>output 정의는 어떤 출력이 생성될지 _결정_하지 않습니다.
+단순히 예상되는 출력 파일을 어디에서 찾을 수 있는지 _선언_하므로 Nextflow가 실행이 완료되면 이를 찾을 수 있습니다.</p>
+<p>이는 명령이 성공적으로 실행되었는지 확인하고 필요한 경우 출력을 다운스트림 process에 전달하는 데 필요합니다.
+output 블록에 선언된 것과 일치하지 않는 출력은 다운스트림 process로 전달되지 않습니다.</p>
 </div>
-<p>In a real-world pipeline, a process usually contains additional information such as process directives, which we'll introduce in a little bit.</p>
-<h3 id="23-the-workflow-definition">2.3. The <code>workflow</code> definition<a class="headerlink" href="#23-the-workflow-definition" title="Permanent link">&para;</a></h3>
-<p>The second block of code describes the <strong>workflow</strong> itself.
-The workflow definition starts with the keyword <code>workflow</code>, followed by an optional name, then the workflow body delimited by curly braces.</p>
-<p>Here we have a <strong>workflow</strong> that consists of one call to the <code>sayHello</code> process, which takes an input, <code>params.greeting</code>, which holds the value we gave to the <code>--greeting</code> parameter.</p>
+<p>실제 파이프라인에서 process는 일반적으로 추가 정보(예: process 지시문)를 포함하며, 이는 곧 소개하겠습니다.</p>
+<h3 id="23-workflow">2.3. <code>workflow</code> 정의<a class="headerlink" href="#23-workflow" title="Permanent link">&para;</a></h3>
+<p>두 번째 코드 블록은 <strong>workflow</strong> 자체를 설명합니다.
+workflow 정의는 <code>workflow</code> 키워드로 시작하고 선택적 이름이 뒤따르며 중괄호로 구분된 workflow 본문이 옵니다.</p>
+<p>여기에는 <code>--greeting</code> 매개변수에 제공한 값을 담고 있는 <code>params.greeting</code>이라는 입력을 받는 <code>sayHello</code> process를 한 번 호출하는 <strong>workflow</strong>가 있습니다.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-world.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-22">22</a></span>
 <span class="normal"><a href="#__codelineno-13-23">23</a></span>
 <span class="normal"><a href="#__codelineno-13-24">24</a></span>
 <span class="normal"><a href="#__codelineno-13-25">25</a></span>
 <span class="normal"><a href="#__codelineno-13-26">26</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-13-22" name="__codelineno-13-22"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-13-23" name="__codelineno-13-23"></a>
-<a id="__codelineno-13-24" name="__codelineno-13-24"></a><span class="w">    </span><span class="c1">// emit a greeting</span>
+<a id="__codelineno-13-24" name="__codelineno-13-24"></a><span class="w">    </span><span class="c1">// 인사말 출력</span>
 <a id="__codelineno-13-25" name="__codelineno-13-25"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">greeting</span><span class="o">)</span>
 <a id="__codelineno-13-26" name="__codelineno-13-26"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>This is a very minimal <strong>workflow</strong> definition.
-In a real-world pipeline, the workflow typically contains multiple calls to <strong>processes</strong> connected by <strong>channels</strong>, and there may be default values set up for the variable inputs.</p>
-<p>We'll see this in action when we run nf-core/molkart in Part 2 of the course.</p>
-<h3 id="24-the-params-system-of-command-line-parameters">2.4. The <code>params</code> system of command-line parameters<a class="headerlink" href="#24-the-params-system-of-command-line-parameters" title="Permanent link">&para;</a></h3>
-<p>The <code>params.greeting</code> we provide to the <code>sayHello()</code> process call is a neat bit of Nextflow code and is worth spending an extra minute on.</p>
-<p>As mentioned above, that's how we pass the value of the <code>--greeting</code> command-line parameter to the <code>sayHello()</code> process call.
-In fact, simply declaring <code>params.someParameterName</code> will enable us to give the workflow a parameter named <code>--someParameterName</code> from the command-line.</p>
+<p>이것은 매우 최소한의 <strong>workflow</strong> 정의입니다.
+실제 파이프라인에서 workflow는 일반적으로 <strong>channel</strong>로 연결된 여러 <strong>process</strong> 호출을 포함하며, 변수 입력에 대한 기본값이 설정될 수 있습니다.</p>
+<p>파트 2에서 nf-core/molkart를 실행할 때 이를 실제로 볼 수 있습니다.</p>
+<h3 id="24-params">2.4. 명령줄 매개변수의 <code>params</code> 시스템<a class="headerlink" href="#24-params" title="Permanent link">&para;</a></h3>
+<p><code>sayHello()</code> process 호출에 제공하는 <code>params.greeting</code>은 Nextflow 코드의 깔끔한 부분이며 추가로 1분 정도 시간을 투자할 가치가 있습니다.</p>
+<p>위에서 언급한 것처럼 이것이 <code>--greeting</code> 명령줄 매개변수의 값을 <code>sayHello()</code> process 호출에 전달하는 방법입니다.
+실제로 <code>params.someParameterName</code>을 선언하기만 하면 명령줄에서 <code>--someParameterName</code>이라는 매개변수를 워크플로우에 제공할 수 있게 됩니다.</p>
 <div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>These workflow parameters declared using the <code>params</code> system always take two dashes (<code>--</code>).
-This distinguishes them from Nextflow-level parameters, which only take one dash (<code>-</code>).</p>
+<p class="admonition-title">팁</p>
+<p><code>params</code> 시스템을 사용하여 선언된 이러한 워크플로우 매개변수는 항상 두 개의 대시(<code>--</code>)를 사용합니다.
+이는 한 개의 대시(<code>-</code>)만 사용하는 Nextflow 수준 매개변수와 구별됩니다.</p>
 </div>
-<h3 id="takeaway_1">Takeaway<a class="headerlink" href="#takeaway_1" title="Permanent link">&para;</a></h3>
-<p>You now know how a simple Nextflow workflow is structured, and how the basic components relate to its functionality.</p>
-<h3 id="whats-next_1">What's next?<a class="headerlink" href="#whats-next_1" title="Permanent link">&para;</a></h3>
-<p>Learn to manage your workflow executions conveniently.</p>
+<h3 id="_3">핵심 사항<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>이제 간단한 Nextflow 워크플로우가 어떻게 구조화되어 있으며 기본 구성 요소가 기능과 어떻게 연관되는지 알게 되었습니다.</p>
+<h3 id="_4">다음 단계<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>워크플로우 실행을 편리하게 관리하는 방법을 배웁니다.</p>
 <hr />
-<h2 id="3-manage-workflow-executions">3. Manage workflow executions<a class="headerlink" href="#3-manage-workflow-executions" title="Permanent link">&para;</a></h2>
-<p>Knowing how to launch workflows and retrieve outputs is great, but you'll quickly find there are a few other aspects of workflow management that will make your life easier.</p>
-<p>Here we show you how to take advantage of the <code>resume</code> feature for when you need to re-launch the same workflow, how to inspect the execution logs with <code>nextflow log</code>, and how to delete older work directories with <code>nextflow clean</code>.</p>
-<h3 id="31-re-launch-a-workflow-with-resume">3.1. Re-launch a workflow with <code>-resume</code><a class="headerlink" href="#31-re-launch-a-workflow-with-resume" title="Permanent link">&para;</a></h3>
-<p>Sometimes, you're going to want to re-run a pipeline that you've already launched previously without redoing any work that was already completed successfully.</p>
-<p>Nextflow has an option called <code>-resume</code> that allows you to do this.
-Specifically, in this mode, any processes that have already been run with the exact same code, settings and inputs will be skipped.
-This means Nextflow will only run processes that you've added or modified since the last run, or to which you're providing new settings or inputs.</p>
-<p>There are two key advantages to doing this:</p>
+<h2 id="3">3. 워크플로우 실행 관리하기<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
+<p>워크플로우를 시작하고 출력을 검색하는 방법을 아는 것은 훌륭하지만, 삶을 더 쉽게 만들어줄 워크플로우 관리의 몇 가지 다른 측면이 있다는 것을 곧 알게 될 것입니다.</p>
+<p>여기서는 동일한 워크플로우를 다시 시작해야 할 때 <code>resume</code> 기능을 활용하는 방법, <code>nextflow log</code>로 실행 로그를 검사하는 방법, <code>nextflow clean</code>으로 이전 작업 디렉토리를 삭제하는 방법을 보여드립니다.</p>
+<h3 id="31-resume">3.1. <code>-resume</code>으로 워크플로우 다시 시작하기<a class="headerlink" href="#31-resume" title="Permanent link">&para;</a></h3>
+<p>때때로 이전에 이미 시작한 파이프라인을 성공적으로 완료된 작업을 다시 수행하지 않고 다시 실행하고 싶을 것입니다.</p>
+<p>Nextflow에는 이를 수행할 수 있는 <code>-resume</code>이라는 옵션이 있습니다.
+구체적으로 이 모드에서는 정확히 동일한 코드, 설정 및 입력으로 이미 실행된 process는 건너뜁니다.
+즉, Nextflow는 마지막 실행 이후 추가하거나 수정한 process 또는 새로운 설정이나 입력을 제공하는 process만 실행합니다.</p>
+<p>이렇게 하면 두 가지 주요 이점이 있습니다:</p>
 <ul>
-<li>If you're in the middle of developing a pipeline, you can iterate more rapidly since you only have to run the process(es) you're actively working on in order to test your changes.</li>
-<li>If you're running a pipeline in production and something goes wrong, in many cases you can fix the issue and relaunch the pipeline, and it will resume running from the point of failure, which can save you a lot of time and compute.</li>
+<li>파이프라인을 개발 중인 경우 변경 사항을 테스트하기 위해 작업 중인 process만 실행하면 되므로 더 빠르게 반복할 수 있습니다.</li>
+<li>프로덕션에서 파이프라인을 실행하다가 문제가 발생한 경우 대부분의 경우 문제를 해결하고 파이프라인을 다시 시작할 수 있으며, 실패 지점부터 실행이 재개되므로 많은 시간과 컴퓨팅 리소스를 절약할 수 있습니다.</li>
 </ul>
-<p>To use it, simply add <code>-resume</code> to your command and run it:</p>
+<p>사용하려면 명령에 <code>-resume</code>을 추가하고 실행하십시오:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-world.nf<span class="w"> </span>--greeting<span class="w"> </span><span class="s1">&#39;Hello World!&#39;</span><span class="w"> </span>-resume
 </code></pre></div>
 <details class="success">
-<summary>Command output</summary>
+<summary>명령 출력</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="go">N E X T F L O W   ~  version 25.04.3</span>
 <a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>
 <a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="go">Launching `hello-world.nf` [tiny_noyce] DSL2 - revision: c33d41f479</span>
@@ -4246,34 +4288,34 @@ This means Nextflow will only run processes that you've added or modified since 
 <a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="go">[a3/7be2fa] process &gt; sayHello [100%] 1 of 1, cached: 1 ✔</span>
 </code></pre></div>
 </details>
-<p>Look for the <code>cached:</code> bit that has been added in the process status line (line 5), which means that Nextflow has recognized that it has already done this work and simply reused the result from the previous successful run.</p>
-<p>You can also see that the work subdirectory hash is the same as in the previous run.
-Nextflow is literally pointing you to the previous execution and saying "I already did that over there."</p>
+<p>process 상태 줄(5번 줄)에 추가된 <code>cached:</code> 부분을 찾아보십시오. 이는 Nextflow가 이미 이 작업을 수행했음을 인식하고 이전에 성공한 실행의 결과를 단순히 재사용했음을 의미합니다.</p>
+<p>작업 하위 디렉토리 해시가 이전 실행과 동일하다는 것도 확인할 수 있습니다.
+Nextflow는 말 그대로 이전 실행을 가리키며 "저기에서 이미 했습니다"라고 말하고 있습니다.</p>
 <div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>When your re-run a pipeline with <code>resume</code>, Nextflow does not overwrite any files written to a <code>publishDir</code> directory by any process call that was previously run successfully.</p>
+<p class="admonition-title">팁</p>
+<p><code>resume</code>으로 파이프라인을 다시 실행할 때 Nextflow는 이전에 성공적으로 실행된 process 호출에 의해 <code>publishDir</code> 디렉토리에 작성된 파일을 덮어쓰지 않습니다.</p>
 </div>
-<h3 id="32-inspect-the-log-of-past-executions">3.2. Inspect the log of past executions<a class="headerlink" href="#32-inspect-the-log-of-past-executions" title="Permanent link">&para;</a></h3>
-<p>Whenever you launch a nextflow workflow, a line gets written to a log file called <code>history</code>, under a hidden directory called <code>.nextflow</code> in the current working directory.</p>
-<p>A more convenient way to access this information is to use the <code>nextflow log</code> command.</p>
+<h3 id="32">3.2. 과거 실행 로그 검사하기<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
+<p>nextflow 워크플로우를 시작할 때마다 현재 작업 디렉토리의 <code>.nextflow</code>라는 숨겨진 디렉토리 아래에 있는 <code>history</code>라는 로그 파일에 한 줄이 기록됩니다.</p>
+<p>이 정보에 액세스하는 더 편리한 방법은 <code>nextflow log</code> 명령을 사용하는 것입니다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>nextflow<span class="w"> </span>log
 </code></pre></div>
-<p>This will output the contents of the log file to the terminal, showing you the timestamp, run name, status, and full command line for every Nextflow run that has been launched from within the current working directory.</p>
-<h3 id="33-delete-older-work-directories">3.3. Delete older work directories<a class="headerlink" href="#33-delete-older-work-directories" title="Permanent link">&para;</a></h3>
-<p>During the development process, you'll typically run your draft pipelines a large number of times, which can lead to an accumulation of very many files across many subdirectories.
-Since the subdirectories are named randomly, it is difficult to tell from their names what are older vs. more recent runs.</p>
-<p>Nextflow includes a convenient <code>clean</code> subcommand that can automatically delete the work subdirectories for past runs that you no longer care about, with several <a href="https://www.nextflow.io/docs/latest/reference/cli.html#clean">options</a> to control what will be deleted.</p>
-<p>You can use the Nextflow log to look up a run based on its timestamp and/or command line, then use <code>nextflow clean -before &lt;run_name&gt; -f</code> to delete work directories from earlier runs.</p>
+<p>이렇게 하면 로그 파일의 내용이 터미널에 출력되어 현재 작업 디렉토리 내에서 시작된 모든 Nextflow 실행의 타임스탬프, 실행 이름, 상태 및 전체 명령줄을 보여줍니다.</p>
+<h3 id="33">3.3. 이전 작업 디렉토리 삭제하기<a class="headerlink" href="#33" title="Permanent link">&para;</a></h3>
+<p>개발 프로세스 중에 일반적으로 초안 파이프라인을 여러 번 실행하게 되며, 이로 인해 많은 하위 디렉토리에 걸쳐 매우 많은 파일이 축적될 수 있습니다.
+하위 디렉토리의 이름이 무작위로 지정되므로 이름만으로는 이전 실행과 최근 실행을 구별하기 어렵습니다.</p>
+<p>Nextflow에는 더 이상 필요하지 않은 과거 실행의 작업 하위 디렉토리를 자동으로 삭제할 수 있는 편리한 <code>clean</code> 하위 명령이 포함되어 있으며, 삭제할 항목을 제어하는 여러 <a href="https://www.nextflow.io/docs/latest/reference/cli.html#clean">옵션</a>이 있습니다.</p>
+<p>Nextflow 로그를 사용하여 타임스탬프 및/또는 명령줄을 기반으로 실행을 조회한 다음 <code>nextflow clean -before &lt;run_name&gt; -f</code>를 사용하여 이전 실행의 작업 디렉토리를 삭제할 수 있습니다.</p>
 <div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Deleting work subdirectories from past runs removes them from Nextflow's cache and deletes any outputs that were stored in those directories.
-That means it breaks Nextflow's ability to resume execution without re-running the corresponding processes.</p>
-<p>You are responsible for saving any outputs that you care about or plan to rely on! If you're using the <code>publishDir</code> directive for that purpose, make sure to use the <code>copy</code> mode, not the <code>symlink</code> mode.</p>
+<p class="admonition-title">경고</p>
+<p>과거 실행의 작업 하위 디렉토리를 삭제하면 Nextflow의 캐시에서 제거되고 해당 디렉토리에 저장된 모든 출력이 삭제됩니다.
+즉, 해당 process를 다시 실행하지 않고 Nextflow가 실행을 재개할 수 있는 기능이 손상됩니다.</p>
+<p>보관하거나 의존할 계획인 모든 출력을 저장하는 것은 귀하의 책임입니다! 이 목적으로 <code>publishDir</code> 지시문을 사용하는 경우 <code>symlink</code> 모드가 아닌 <code>copy</code> 모드를 사용해야 합니다.</p>
 </div>
-<h3 id="takeaway_2">Takeaway<a class="headerlink" href="#takeaway_2" title="Permanent link">&para;</a></h3>
-<p>You know how to relaunch a pipeline without repeating steps that were already run in an identical way, inspect the execution log, and use the <code>nextflow clean</code> command to clean up old work directories.</p>
-<h3 id="whats-next_2">What's next?<a class="headerlink" href="#whats-next_2" title="Permanent link">&para;</a></h3>
-<p>Now that you understand basic Nextflow operations, you're ready to run a real bioimaging pipeline with nf-core/molkart.</p><style type="text/css">.quiz {
+<h3 id="_5">핵심 사항<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>이미 동일한 방식으로 실행된 단계를 반복하지 않고 파이프라인을 다시 시작하고, 실행 로그를 검사하며, <code>nextflow clean</code> 명령을 사용하여 이전 작업 디렉토리를 정리하는 방법을 알게 되었습니다.</p>
+<h3 id="_6">다음 단계<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p>이제 기본 Nextflow 작업을 이해했으므로 nf-core/molkart로 실제 생물 이미징 파이프라인을 실행할 준비가 되었습니다.</p><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
   margin: 1rem 0;
@@ -5790,6 +5832,9 @@ window.mkdocsQuizConfig = {
 
 
 
+  
+  
+
 
 
   
@@ -5820,7 +5865,7 @@ window.mkdocsQuizConfig = {
       <nav class="md-footer__inner md-grid" aria-label="하단/푸터" >
         
           
-          <a href="../00_orientation/" class="md-footer__link md-footer__link--prev" aria-label="이전: Orientation">
+          <a href="../00_orientation/" class="md-footer__link md-footer__link--prev" aria-label="이전: 오리엔테이션">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -5830,20 +5875,20 @@ window.mkdocsQuizConfig = {
                 이전
               </span>
               <div class="md-ellipsis">
-                Orientation
+                오리엔테이션
               </div>
             </div>
           </a>
         
         
           
-          <a href="../02_run_molkart/" class="md-footer__link md-footer__link--next" aria-label="다음: Part 2: Run nf-core/molkart">
+          <a href="../02_run_molkart/" class="md-footer__link md-footer__link--next" aria-label="다음: 파트 2: nf-core/molkart 실행하기">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 다음
               </span>
               <div class="md-ellipsis">
-                Part 2: Run nf-core/molkart
+                파트 2: nf-core/molkart 실행하기
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -5920,8 +5965,8 @@ window.mkdocsQuizConfig = {
   
 
 
-<h4>Cookie consent</h4>
-<p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our training materials better. Find out more on <a href="https://seqera.io/privacy-policy/#cookies" target="_blank" rel="noopener">how we use cookies</a>.</p>
+<h4>쿠키 동의</h4>
+<p>저희는 귀하의 반복 방문과 선호도를 인식하고, 문서의 효과성과 사용자가 원하는 정보를 찾고 있는지 측정하기 위해 쿠키를 사용합니다. 동의해 주시면 교육 자료를 개선하는 데 도움이 됩니다. <a href="https://seqera.io/privacy-policy/#cookies" target="_blank" rel="noopener">쿠키 사용 방법</a>에 대해 자세히 알아보세요.</p>
 <input class="md-toggle" type="checkbox" id="__settings" >
 <div class="md-consent__settings">
   <ul class="task-list">
@@ -5974,7 +6019,7 @@ window.mkdocsQuizConfig = {
     <label class="task-list-control">
       <input type="checkbox" name="posthog" checked>
       <span class="task-list-indicator"></span>
-      PostHog Analytics
+      PostHog 분석
     </label>
   </li>
 
@@ -6005,12 +6050,16 @@ window.mkdocsQuizConfig = {
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": {"alias": true, "provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": {"alias": true, "provider": "mike"}}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
-        <script src="../../../../assets/javascripts/posthog.js"></script>
+        <script src="../../../assets/javascripts/consent-sync.js"></script>
+      
+        <script src="../../../assets/javascripts/posthog.js"></script>
+      
+        <script src="../../../assets/javascripts/language-picker.js"></script>
       
     
   </body>

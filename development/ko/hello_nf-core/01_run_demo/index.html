@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://training.nextflow.io/0.dev/ko/hello_nf-core/01_run_demo/">
+        <link rel="canonical" href="https://training.nextflow.io/ko/hello_nf-core/01_run_demo/">
       
       
         <link rel="prev" href="../00_orientation/">
@@ -18,33 +18,41 @@
       
       
         
-          <link rel="alternate" href="../../../hello_nf-core/01_run_demo/" hreflang="en">
+          <link rel="alternate" href="/" hreflang="en">
         
-          <link rel="alternate" href="../../../pt/hello_nf-core/01_run_demo/" hreflang="pt">
+          <link rel="alternate" href="/de/" hreflang="de">
         
-          <link rel="alternate" href="../../../es/hello_nf-core/01_run_demo/" hreflang="es">
+          <link rel="alternate" href="/es/" hreflang="es">
         
-          <link rel="alternate" href="../../../fr/hello_nf-core/01_run_demo/" hreflang="fr">
+          <link rel="alternate" href="/fr/" hreflang="fr">
         
-          <link rel="alternate" href="../../../it/hello_nf-core/01_run_demo/" hreflang="it">
+          <link rel="alternate" href="/hi/" hreflang="hi">
         
-          <link rel="alternate" href="./" hreflang="ko">
+          <link rel="alternate" href="/it/" hreflang="it">
+        
+          <link rel="alternate" href="/ko/" hreflang="ko">
+        
+          <link rel="alternate" href="/pl/" hreflang="pl">
+        
+          <link rel="alternate" href="/pt/" hreflang="pt">
+        
+          <link rel="alternate" href="/tr/" hreflang="tr">
         
       
       
-      <link rel="icon" href="../../../assets/img/nextflow-icon.png">
+      <link rel="icon" href="../../assets/img/nextflow-icon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
     
     
       
-        <title>Part 1: Run a demo pipeline - training.nextflow.io</title>
+        <title>파트 1: 데모 파이프라인 실행하기 - training.nextflow.io</title>
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
   
@@ -108,11 +116,11 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/fonts.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/fonts.css">
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/extra.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/extra.css">
     
-    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
   
@@ -147,7 +155,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#part-1-run-a-demo-pipeline" class="md-skip">
+        <a href="#1" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -167,9 +175,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="상단/헤더">
-    <a href="../../" title="training.nextflow.io" class="md-header__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
+    <a href="../.." title="training.nextflow.io" class="md-header__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
       
-  <img src="../../../assets/img/nextflow_logo_dark.png" alt="logo">
+  <img src="../../assets/img/nextflow_logo_dark.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -186,7 +194,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Part 1: Run a demo pipeline
+              파트 1: 데모 파이프라인 실행하기
             
           </span>
         </div>
@@ -233,38 +241,62 @@
       <ul class="md-select__list">
         
           <li class="md-select__item">
-            <a href="../../../hello_nf-core/01_run_demo/" hreflang="en" class="md-select__link">
+            <a href="/" hreflang="en" class="md-select__link">
               English
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../pt/hello_nf-core/01_run_demo/" hreflang="pt" class="md-select__link">
-              Português
+            <a href="/de/" hreflang="de" class="md-select__link">
+              deutsch
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../es/hello_nf-core/01_run_demo/" hreflang="es" class="md-select__link">
-              Español
+            <a href="/es/" hreflang="es" class="md-select__link">
+              español
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../fr/hello_nf-core/01_run_demo/" hreflang="fr" class="md-select__link">
-              Français
+            <a href="/fr/" hreflang="fr" class="md-select__link">
+              français
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../it/hello_nf-core/01_run_demo/" hreflang="it" class="md-select__link">
-              Italiano
+            <a href="/hi/" hreflang="hi" class="md-select__link">
+              हिन्दी
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="./" hreflang="ko" class="md-select__link">
-              Korean
+            <a href="/it/" hreflang="it" class="md-select__link">
+              italiano
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/ko/" hreflang="ko" class="md-select__link">
+              한국어
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/pl/" hreflang="pl" class="md-select__link">
+              Polski
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/pt/" hreflang="pt" class="md-select__link">
+              português
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/tr/" hreflang="tr" class="md-select__link">
+              Türkçe
             </a>
           </li>
         
@@ -384,9 +416,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="네비게이션" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../" title="training.nextflow.io" class="md-nav__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
+    <a href="../.." title="training.nextflow.io" class="md-nav__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
       
-  <img src="../../../assets/img/nextflow_logo_dark.png" alt="logo">
+  <img src="../../assets/img/nextflow_logo_dark.png" alt="logo">
 
     </a>
     training.nextflow.io
@@ -413,14 +445,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../" class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Home
+    홈
   
 
     
@@ -522,7 +554,7 @@
   <span class="md-ellipsis">
     
   
-    Getting started
+    시작하기
   
 
     
@@ -550,7 +582,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run basic operations
+    파트 1: 기본 작업 실행
   
 
     
@@ -578,7 +610,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Run real pipelines
+    파트 2: 실제 pipeline 실행
   
 
     
@@ -606,7 +638,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Run configuration
+    파트 3: 실행 구성
   
 
     
@@ -634,7 +666,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    과정 요약
   
 
     
@@ -662,7 +694,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    피드백 설문조사
   
 
     
@@ -772,7 +804,7 @@
   <span class="md-ellipsis">
     
   
-    Getting started
+    시작하기
   
 
     
@@ -800,7 +832,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Hello World
+    파트 1: Hello World
   
 
     
@@ -828,7 +860,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Hello Channels
+    파트 2: Hello Channels
   
 
     
@@ -856,7 +888,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Hello Workflow
+    파트 3: Hello Workflow
   
 
     
@@ -884,7 +916,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Hello Modules
+    파트 4: Hello Modules
   
 
     
@@ -912,7 +944,7 @@
   <span class="md-ellipsis">
     
   
-    Part 5: Hello Containers
+    파트 5: Hello Containers
   
 
     
@@ -940,7 +972,7 @@
   <span class="md-ellipsis">
     
   
-    Part 6: Hello Config
+    파트 6: Hello Config
   
 
     
@@ -968,7 +1000,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    과정 요약
   
 
     
@@ -996,7 +1028,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    피드백 설문조사
   
 
     
@@ -1108,7 +1140,7 @@
   <span class="md-ellipsis">
     
   
-    Getting started
+    시작하기
   
 
     
@@ -1145,7 +1177,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run a demo pipeline
+    파트 1: 데모 파이프라인 실행하기
   
 
     
@@ -1163,7 +1195,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run a demo pipeline
+    파트 1: 데모 파이프라인 실행하기
   
 
     
@@ -1183,34 +1215,34 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#1-find-and-retrieve-the-nf-coredemo-pipeline" class="md-nav__link">
+  <a href="#1-nf-coredemo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Find and retrieve the nf-core/demo pipeline
+        1. nf-core/demo 파이프라인 찾기 및 가져오기
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Find and retrieve the nf-core/demo pipeline">
+    <nav class="md-nav" aria-label="1. nf-core/demo 파이프라인 찾기 및 가져오기">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11-find-the-pipeline-on-the-website" class="md-nav__link">
+  <a href="#11" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1. Find the pipeline on the website
+        1.1. 웹사이트에서 파이프라인 찾기
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1.1. Find the pipeline on the website">
+    <nav class="md-nav" aria-label="1.1. 웹사이트에서 파이프라인 찾기">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#111-pipeline-overview" class="md-nav__link">
+  <a href="#111" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1.1. Pipeline overview
+        1.1.1. 파이프라인 개요
       
     </span>
   </a>
@@ -1218,10 +1250,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#112-example-command-line" class="md-nav__link">
+  <a href="#112" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1.2. Example command line
+        1.1.2. 명령줄 예제
       
     </span>
   </a>
@@ -1234,10 +1266,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#12-retrieve-the-pipeline-code" class="md-nav__link">
+  <a href="#12" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2. Retrieve the pipeline code
+        1.2. 파이프라인 코드 가져오기
       
     </span>
   </a>
@@ -1245,10 +1277,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway" class="md-nav__link">
+  <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        요약
       
     </span>
   </a>
@@ -1256,80 +1288,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>  <li class="md-nav__item">
-  <a href="#2-try-out-the-pipeline-with-its-test-profile" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Try out the pipeline with its test profile
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="2. Try out the pipeline with its test profile">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#21-examine-the-test-profile" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.1. Examine the test profile
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#22-run-the-pipeline" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.2. Run the pipeline
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#23-examine-the-pipelines-outputs" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.3. Examine the pipeline's outputs
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#takeaway_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Takeaway
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#whats-next_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        What's next?
+        다음 단계
       
     </span>
   </a>
@@ -1340,34 +1302,104 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#3-examine-the-pipeline-code-structure" class="md-nav__link">
+  <a href="#2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Examine the pipeline code structure
+        2. 테스트 프로파일로 파이프라인 사용해보기
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. Examine the pipeline code structure">
+    <nav class="md-nav" aria-label="2. 테스트 프로파일로 파이프라인 사용해보기">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#31-pipeline-code-components" class="md-nav__link">
+  <a href="#21" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1. Pipeline code components
+        2.1. 테스트 프로파일 살펴보기
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3.1. Pipeline code components">
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. 파이프라인 실행하기
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. 파이프라인 출력 살펴보기
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        요약
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        다음 단계
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>  <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 파이프라인 코드 구조 살펴보기
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 파이프라인 코드 구조 살펴보기">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#311-general-overview" class="md-nav__link">
+  <a href="#31" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1.1. General overview
+        3.1. 파이프라인 코드 구성요소
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1. 파이프라인 코드 구성요소">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#311" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.1. 일반 개요
       
     </span>
   </a>
@@ -1375,10 +1407,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#312-the-entrypoint-script-mainnf" class="md-nav__link">
+  <a href="#312-mainnf" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1.2. The entrypoint script: main.nf
+        3.1.2. 엔트리포인트 스크립트: main.nf
       
     </span>
   </a>
@@ -1386,10 +1418,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#313-the-analysis-script-workflowsdemonf" class="md-nav__link">
+  <a href="#313-workflowsdemonf" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1.3. The analysis script: workflows/demo.nf
+        3.1.3. 분석 스크립트: workflows/demo.nf
       
     </span>
   </a>
@@ -1397,10 +1429,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#314-the-modules" class="md-nav__link">
+  <a href="#314" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1.4. The modules
+        3.1.4. 모듈
       
     </span>
   </a>
@@ -1408,10 +1440,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#315-the-housekeeping-subworkflows" class="md-nav__link">
+  <a href="#315-subworkflow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1.5. The housekeeping subworkflows
+        3.1.5. 관리용 subworkflow
       
     </span>
   </a>
@@ -1424,10 +1456,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#32-pipeline-configuration" class="md-nav__link">
+  <a href="#32" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.2. Pipeline configuration
+        3.2. 파이프라인 구성
       
     </span>
   </a>
@@ -1435,10 +1467,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#33-inputs-and-validation" class="md-nav__link">
+  <a href="#33" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.3. Inputs and validation
+        3.3. 입력 및 검증
       
     </span>
   </a>
@@ -1446,10 +1478,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway_2" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        요약
       
     </span>
   </a>
@@ -1457,10 +1489,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next_2" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        다음 단계
       
     </span>
   </a>
@@ -1680,7 +1712,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Rewrite Hello for nf-core
+    2부: nf-core용 Hello 재작성
   
 
     
@@ -1708,7 +1740,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Use an nf-core module
+    파트 3: nf-core 모듈 사용하기
   
 
     
@@ -1736,7 +1768,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Make an nf-core module
+    파트 4: nf-core 모듈 만들기
   
 
     
@@ -1764,7 +1796,7 @@
   <span class="md-ellipsis">
     
   
-    Part 5: Input validation
+    파트 5: 입력 검증
   
 
     
@@ -1792,7 +1824,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    교육 과정 요약
   
 
     
@@ -1820,7 +1852,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    피드백 설문조사
   
 
     
@@ -1866,7 +1898,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Science
+    과학을 위한 Nextflow
   
 
     
@@ -1882,7 +1914,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Nextflow for Science
+    과학을 위한 Nextflow
   
 
           </label>
@@ -1902,7 +1934,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Science
+    과학을 위한 Nextflow
   
 
     
@@ -1941,7 +1973,7 @@
   <span class="md-ellipsis">
     
   
-    Genomics
+    유전체학을 위한 Nextflow
   
 
     
@@ -1957,7 +1989,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Genomics
+    유전체학을 위한 Nextflow
   
 
           </label>
@@ -1977,7 +2009,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Genomics
+    유전체학을 위한 Nextflow
   
 
     
@@ -2005,7 +2037,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    오리엔테이션
   
 
     
@@ -2033,7 +2065,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Per-sample variant calling
+    파트 1: 샘플별 변이 호출
   
 
     
@@ -2061,7 +2093,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Joint calling on a cohort
+    파트 2: 코호트에 대한 조인트 콜링
   
 
     
@@ -2089,7 +2121,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Moving code into modules
+    파트 3: 코드를 모듈로 이동하기
   
 
     
@@ -2117,7 +2149,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Adding tests
+    파트 4: 테스트 추가하기
   
 
     
@@ -2145,7 +2177,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    피드백 설문조사
   
 
     
@@ -2173,7 +2205,7 @@
   <span class="md-ellipsis">
     
   
-    Next Steps
+    다음 단계
   
 
     
@@ -2220,7 +2252,7 @@
   <span class="md-ellipsis">
     
   
-    RNAseq
+    RNAseq을 위한 Nextflow
   
 
     
@@ -2236,7 +2268,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    RNAseq
+    RNAseq을 위한 Nextflow
   
 
           </label>
@@ -2256,7 +2288,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for RNAseq
+    RNAseq을 위한 Nextflow
   
 
     
@@ -2284,7 +2316,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    오리엔테이션
   
 
     
@@ -2312,7 +2344,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Method overview and manual testing
+    파트 1: 방법 개요 및 수동 테스트
   
 
     
@@ -2340,7 +2372,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Single-sample implementation
+    파트 2: 단일 샘플 구현
   
 
     
@@ -2368,7 +2400,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Multi-sample paired-end implementation
+    파트 3: 다중 샘플 paired-end 구현
   
 
     
@@ -2396,7 +2428,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    피드백 설문조사
   
 
     
@@ -2424,7 +2456,7 @@
   <span class="md-ellipsis">
     
   
-    Next Steps
+    다음 단계
   
 
     
@@ -2471,7 +2503,7 @@
   <span class="md-ellipsis">
     
   
-    Imaging
+    이미징을 위한 Nextflow 실행
   
 
     
@@ -2487,7 +2519,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Imaging
+    이미징을 위한 Nextflow 실행
   
 
           </label>
@@ -2507,7 +2539,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow run for Imaging
+    이미징을 위한 Nextflow 실행
   
 
     
@@ -2535,7 +2567,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    오리엔테이션
   
 
     
@@ -2563,7 +2595,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run basic operations
+    파트 1: 기본 작업 실행하기
   
 
     
@@ -2591,7 +2623,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Run nf-core/molkart
+    파트 2: nf-core/molkart 실행하기
   
 
     
@@ -2619,7 +2651,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Organizing inputs
+    파트 3: 입력 구성하기
   
 
     
@@ -2647,7 +2679,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Configuration
+    파트 4: 구성
   
 
     
@@ -2675,7 +2707,7 @@
   <span class="md-ellipsis">
     
   
-    Survey
+    설문조사
   
 
     
@@ -2703,7 +2735,7 @@
   <span class="md-ellipsis">
     
   
-    Next steps
+    다음 단계
   
 
     
@@ -2757,7 +2789,7 @@
   <span class="md-ellipsis">
     
   
-    Side Quests
+    사이드 퀘스트
   
 
     
@@ -2773,7 +2805,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Side Quests
+    사이드 퀘스트
   
 
           </label>
@@ -2793,7 +2825,7 @@
   <span class="md-ellipsis">
     
   
-    Side Quests
+    사이드 퀘스트
   
 
     
@@ -2821,7 +2853,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    오리엔테이션
   
 
     
@@ -2849,7 +2881,7 @@
   <span class="md-ellipsis">
     
   
-    Development Environment
+    개발 환경
   
 
     
@@ -2877,7 +2909,7 @@
   <span class="md-ellipsis">
     
   
-    Metadata and meta maps
+    메타데이터와 메타 맵
   
 
     
@@ -2905,7 +2937,7 @@
   <span class="md-ellipsis">
     
   
-    File input processing
+    파일 입력 처리
   
 
     
@@ -2933,7 +2965,7 @@
   <span class="md-ellipsis">
     
   
-    Splitting and Grouping
+    데이터 분할 및 그룹화
   
 
     
@@ -2961,7 +2993,7 @@
   <span class="md-ellipsis">
     
   
-    Workflows of Workflows
+    워크플로우의 워크플로우
   
 
     
@@ -2989,7 +3021,7 @@
   <span class="md-ellipsis">
     
   
-    Debugging Workflows
+    워크플로우 디버깅
   
 
     
@@ -3017,7 +3049,7 @@
   <span class="md-ellipsis">
     
   
-    Essential Nextflow Scripting Patterns
+    필수 Nextflow 스크립팅 패턴
   
 
     
@@ -3045,7 +3077,7 @@
   <span class="md-ellipsis">
     
   
-    Testing with nf-test
+    nf-test로 테스트하기
   
 
     
@@ -3091,7 +3123,7 @@
   <span class="md-ellipsis">
     
   
-    Training Collections
+    교육 컬렉션
   
 
     
@@ -3107,7 +3139,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Training Collections
+    교육 컬렉션
   
 
           </label>
@@ -3127,7 +3159,7 @@
   <span class="md-ellipsis">
     
   
-    Training Collections
+    교육 컬렉션
   
 
     
@@ -3155,7 +3187,7 @@
   <span class="md-ellipsis">
     
   
-    The Architect's Toolkit I
+    Architects toolkit 1
   
 
     
@@ -3237,7 +3269,7 @@
   <span class="md-ellipsis">
     
   
-    Getting help
+    도움말
   
 
     
@@ -3276,7 +3308,7 @@
   <span class="md-ellipsis">
     
   
-    Training environment
+    환경 옵션
   
 
     
@@ -3292,7 +3324,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Training environment
+    환경 옵션
   
 
           </label>
@@ -3312,7 +3344,7 @@
   <span class="md-ellipsis">
     
   
-    환경 설정
+    환경 옵션
   
 
     
@@ -3368,7 +3400,7 @@
   <span class="md-ellipsis">
     
   
-    Local Devcontainers
+    로컬 Devcontainers
   
 
     
@@ -3396,7 +3428,7 @@
   <span class="md-ellipsis">
     
   
-    로컬 설치
+    수동 설치
   
 
     
@@ -3432,7 +3464,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow versions
+    Nextflow 버전
   
 
     
@@ -3460,7 +3492,7 @@
   <span class="md-ellipsis">
     
   
-    The Hello pipeline
+    Hello pipeline
   
 
     
@@ -3502,34 +3534,34 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#1-find-and-retrieve-the-nf-coredemo-pipeline" class="md-nav__link">
+  <a href="#1-nf-coredemo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Find and retrieve the nf-core/demo pipeline
+        1. nf-core/demo 파이프라인 찾기 및 가져오기
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Find and retrieve the nf-core/demo pipeline">
+    <nav class="md-nav" aria-label="1. nf-core/demo 파이프라인 찾기 및 가져오기">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11-find-the-pipeline-on-the-website" class="md-nav__link">
+  <a href="#11" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1. Find the pipeline on the website
+        1.1. 웹사이트에서 파이프라인 찾기
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1.1. Find the pipeline on the website">
+    <nav class="md-nav" aria-label="1.1. 웹사이트에서 파이프라인 찾기">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#111-pipeline-overview" class="md-nav__link">
+  <a href="#111" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1.1. Pipeline overview
+        1.1.1. 파이프라인 개요
       
     </span>
   </a>
@@ -3537,10 +3569,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#112-example-command-line" class="md-nav__link">
+  <a href="#112" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1.2. Example command line
+        1.1.2. 명령줄 예제
       
     </span>
   </a>
@@ -3553,10 +3585,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#12-retrieve-the-pipeline-code" class="md-nav__link">
+  <a href="#12" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2. Retrieve the pipeline code
+        1.2. 파이프라인 코드 가져오기
       
     </span>
   </a>
@@ -3564,10 +3596,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway" class="md-nav__link">
+  <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        요약
       
     </span>
   </a>
@@ -3575,80 +3607,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>  <li class="md-nav__item">
-  <a href="#2-try-out-the-pipeline-with-its-test-profile" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Try out the pipeline with its test profile
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="2. Try out the pipeline with its test profile">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#21-examine-the-test-profile" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.1. Examine the test profile
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#22-run-the-pipeline" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.2. Run the pipeline
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#23-examine-the-pipelines-outputs" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.3. Examine the pipeline's outputs
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#takeaway_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Takeaway
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#whats-next_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        What's next?
+        다음 단계
       
     </span>
   </a>
@@ -3659,34 +3621,104 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#3-examine-the-pipeline-code-structure" class="md-nav__link">
+  <a href="#2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Examine the pipeline code structure
+        2. 테스트 프로파일로 파이프라인 사용해보기
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. Examine the pipeline code structure">
+    <nav class="md-nav" aria-label="2. 테스트 프로파일로 파이프라인 사용해보기">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#31-pipeline-code-components" class="md-nav__link">
+  <a href="#21" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1. Pipeline code components
+        2.1. 테스트 프로파일 살펴보기
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3.1. Pipeline code components">
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. 파이프라인 실행하기
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. 파이프라인 출력 살펴보기
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        요약
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        다음 단계
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>  <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 파이프라인 코드 구조 살펴보기
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 파이프라인 코드 구조 살펴보기">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#311-general-overview" class="md-nav__link">
+  <a href="#31" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1.1. General overview
+        3.1. 파이프라인 코드 구성요소
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1. 파이프라인 코드 구성요소">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#311" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.1. 일반 개요
       
     </span>
   </a>
@@ -3694,10 +3726,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#312-the-entrypoint-script-mainnf" class="md-nav__link">
+  <a href="#312-mainnf" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1.2. The entrypoint script: main.nf
+        3.1.2. 엔트리포인트 스크립트: main.nf
       
     </span>
   </a>
@@ -3705,10 +3737,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#313-the-analysis-script-workflowsdemonf" class="md-nav__link">
+  <a href="#313-workflowsdemonf" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1.3. The analysis script: workflows/demo.nf
+        3.1.3. 분석 스크립트: workflows/demo.nf
       
     </span>
   </a>
@@ -3716,10 +3748,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#314-the-modules" class="md-nav__link">
+  <a href="#314" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1.4. The modules
+        3.1.4. 모듈
       
     </span>
   </a>
@@ -3727,10 +3759,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#315-the-housekeeping-subworkflows" class="md-nav__link">
+  <a href="#315-subworkflow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1.5. The housekeeping subworkflows
+        3.1.5. 관리용 subworkflow
       
     </span>
   </a>
@@ -3743,10 +3775,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#32-pipeline-configuration" class="md-nav__link">
+  <a href="#32" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.2. Pipeline configuration
+        3.2. 파이프라인 구성
       
     </span>
   </a>
@@ -3754,10 +3786,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#33-inputs-and-validation" class="md-nav__link">
+  <a href="#33" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.3. Inputs and validation
+        3.3. 입력 및 검증
       
     </span>
   </a>
@@ -3765,10 +3797,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway_2" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        요약
       
     </span>
   </a>
@@ -3776,10 +3808,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next_2" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        다음 단계
       
     </span>
   </a>
@@ -4028,89 +4060,99 @@
                 
                   
 
+ 
+<a
+  href="https://github.com/nextflow-io/training/edit/master/docs/hello_nf-core/01_run_demo.md"
+  title="이 페이지를 편집"
+  class="md-content__button md-icon"
+  rel="edit"
+>
+   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+</a>
+   
+<a
+  href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md"
+  title="Improve translation"
+  class="md-content__button md-icon"
+>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 1H3c-1.1 0-2 .9-2 2v12l3-3h5v-1c0-2.2 1.79-4 4-4V3c0-1.1-.9-2-2-2m0 3H9.5c-.34 1.19-.96 2.3-1.82 3.26l-.02.02 1.26 1.25-.37 1.01L7 8l-2.5 2.5-.69-.73 2.53-2.49A8.6 8.6 0 0 1 4.86 5h.99c.31.6.69 1.17 1.15 1.68A7.7 7.7 0 0 0 8.57 4H3V3h3.5V2h1v1H11zm10 5h-8c-1.1 0-2 .9-2 2v7c0 1.1.9 2 2 2h7l3 3V11c0-1.1-.9-2-2-2m-1.37 10-.85-2.25h-3.56L14.38 19h-1.5l3.37-9h1.5l3.38 9zM17 12l1.22 3.25h-2.43z"/></svg>
+</a>
+ 
 
-  
-    <a href="https://github.com/nextflow-io/training/edit/master/docs/hello_nf-core/01_run_demo.md" title="이 페이지를 편집" class="md-content__button md-icon" rel="edit">
-      
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
-    </a>
-  
-  
-
-
-<h1 id="part-1-run-a-demo-pipeline">Part 1: Run a demo pipeline<a class="headerlink" href="#part-1-run-a-demo-pipeline" title="Permanent link">&para;</a></h1>
-<p>In this first part of the Hello nf-core training course, we show you how to find and try out an nf-core pipeline, understand how the code is organized, and recognize how it differs from plain Nextflow code as shown in <a href="../../hello_nextflow/">Hello Nextflow</a>.</p>
-<p>We are going to use a pipeline called nf-core/demo that is maintained by the nf-core project as part of its inventory of pipelines for demonstrating code structure and tool operations.</p>
-<p>Make sure your working directory is set to <code>hello-nf-core/</code> as instructed on the <a href="../00_orientation/">Getting started</a> page.</p>
+<h1 id="1">파트 1: 데모 파이프라인 실행하기<a class="headerlink" href="#1" title="Permanent link">&para;</a></h1>
+<p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> AI 지원 번역 - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">자세히 알아보기 및 개선 제안</a></span></p>
+<p>Hello nf-core 교육 과정의 첫 번째 파트에서는 nf-core 파이프라인을 찾아서 사용해보고, 코드 구성 방식을 이해하며, <a href="../../hello_nextflow/">Hello Nextflow</a>에서 보여드린 일반 Nextflow 코드와 어떻게 다른지 알아보겠습니다.</p>
+<p>nf-core 프로젝트에서 코드 구조와 도구 작동을 시연하기 위한 파이프라인 모음의 일부로 유지 관리하는 nf-core/demo라는 파이프라인을 사용하겠습니다.</p>
+<p><a href="../00_orientation/">시작하기</a> 페이지의 안내에 따라 작업 디렉토리를 <code>hello-nf-core/</code>로 설정했는지 확인하십시오.</p>
 <hr />
-<h2 id="1-find-and-retrieve-the-nf-coredemo-pipeline">1. Find and retrieve the nf-core/demo pipeline<a class="headerlink" href="#1-find-and-retrieve-the-nf-coredemo-pipeline" title="Permanent link">&para;</a></h2>
-<p>Let's start by locating the nf-core/demo pipeline on the project website at <a href="https://nf-co.re">nf-co.re</a>, which centralizes all information such as: general documentation and help articles, documentation for each of the pipelines, blog posts, event announcements and so forth.</p>
-<h3 id="11-find-the-pipeline-on-the-website">1.1. Find the pipeline on the website<a class="headerlink" href="#11-find-the-pipeline-on-the-website" title="Permanent link">&para;</a></h3>
-<p>In your web browser, go to <a href="https://nf-co.re/pipelines/">https://nf-co.re/pipelines/</a> and type <code>demo</code> in the search bar.</p>
-<p><img alt="search results" src="../../../hello_nf-core/img/search-results.png" /></p>
-<p>Click on the pipeline name, <code>demo</code>, to access the pipeline documentation page.</p>
-<p>Each released pipeline has a dedicated page that includes the following documentation sections:</p>
+<h2 id="1-nf-coredemo">1. nf-core/demo 파이프라인 찾기 및 가져오기<a class="headerlink" href="#1-nf-coredemo" title="Permanent link">&para;</a></h2>
+<p><a href="https://nf-co.re">nf-co.re</a> 프로젝트 웹사이트에서 nf-core/demo 파이프라인을 찾는 것부터 시작하겠습니다. 이 웹사이트는 일반 문서 및 도움말 기사, 각 파이프라인에 대한 문서, 블로그 게시물, 이벤트 공지 등 모든 정보를 중앙에서 관리합니다.</p>
+<h3 id="11">1.1. 웹사이트에서 파이프라인 찾기<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
+<p>웹 브라우저에서 <a href="https://nf-co.re/pipelines/">https://nf-co.re/pipelines/</a>로 이동하여 검색창에 <code>demo</code>를 입력하십시오.</p>
+<p><img alt="검색 결과" src="./img/search-results.png" /></p>
+<p>파이프라인 이름인 <code>demo</code>를 클릭하여 파이프라인 문서 페이지에 접근하십시오.</p>
+<p>릴리스된 각 파이프라인에는 다음 문서 섹션이 포함된 전용 페이지가 있습니다:</p>
 <ul>
-<li><strong>Introduction:</strong> An introduction and overview of the pipeline</li>
-<li><strong>Usage:</strong> Descriptions of how to execute the pipeline</li>
-<li><strong>Parameters:</strong> Grouped pipeline parameters with descriptions</li>
-<li><strong>Output:</strong> Descriptions and examples of the expected output files</li>
-<li><strong>Results:</strong> Example output files generated from the full test dataset</li>
-<li><strong>Releases &amp; Statistics:</strong> Pipeline version history and statistics</li>
+<li><strong>Introduction:</strong> 파이프라인의 소개 및 개요</li>
+<li><strong>Usage:</strong> 파이프라인 실행 방법에 대한 설명</li>
+<li><strong>Parameters:</strong> 설명과 함께 그룹화된 파이프라인 매개변수</li>
+<li><strong>Output:</strong> 예상되는 출력 파일에 대한 설명 및 예제</li>
+<li><strong>Results:</strong> 전체 테스트 데이터셋에서 생성된 출력 파일 예제</li>
+<li><strong>Releases &amp; Statistics:</strong> 파이프라인 버전 기록 및 통계</li>
 </ul>
-<p>Whenever you are considering adopting a new pipeline, you should read the pipeline documentation carefully first to understand what it does and how it should be configured before attempting to run it.</p>
-<p>Have a look now and see if you can find out:</p>
+<p>새로운 파이프라인 도입을 고려할 때는 실행을 시도하기 전에 파이프라인 문서를 주의 깊게 읽어 파이프라인이 무엇을 하는지, 어떻게 구성해야 하는지 이해해야 합니다.</p>
+<p>지금 살펴보시고 다음을 찾을 수 있는지 확인해보십시오:</p>
 <ul>
-<li>Which tools the pipeline will run (Check the tab: <code>Introduction</code>)</li>
-<li>Which inputs and parameters the pipeline accepts or requires (Check the tab: <code>Parameters</code>)</li>
-<li>What are the outputs produced by the pipeline (Check the tab: <code>Output</code>)</li>
+<li>파이프라인이 실행할 도구들 (<code>Introduction</code> 탭 확인)</li>
+<li>파이프라인이 받거나 요구하는 입력 및 매개변수 (<code>Parameters</code> 탭 확인)</li>
+<li>파이프라인이 생성하는 출력 (<code>Output</code> 탭 확인)</li>
 </ul>
-<h4 id="111-pipeline-overview">1.1.1. Pipeline overview<a class="headerlink" href="#111-pipeline-overview" title="Permanent link">&para;</a></h4>
-<p>The <code>Introduction</code> tab provides an overview of the pipeline, including a visual representation (called a subway map) and a list of tools that are run as part of the pipeline.</p>
-<p><img alt="pipeline subway map" src="../../../hello_nf-core/img/nf-core-demo-subway-cropped.png" /></p>
+<h4 id="111">1.1.1. 파이프라인 개요<a class="headerlink" href="#111" title="Permanent link">&para;</a></h4>
+<p><code>Introduction</code> 탭은 시각적 표현(지하철 노선도라고 함)과 파이프라인의 일부로 실행되는 도구 목록을 포함한 파이프라인의 개요를 제공합니다.</p>
+<p><img alt="파이프라인 지하철 노선도" src="./img/nf-core-demo-subway-cropped.png" /></p>
 <ol>
 <li>Read QC (FASTQC)</li>
 <li>Adapter and quality trimming (SEQTK_TRIM)</li>
 <li>Present QC for raw reads (MULTIQC)</li>
 </ol>
-<h4 id="112-example-command-line">1.1.2. Example command line<a class="headerlink" href="#112-example-command-line" title="Permanent link">&para;</a></h4>
-<p>The documentation also provides an example input file (discussed further below) and an example command line.</p>
+<h4 id="112">1.1.2. 명령줄 예제<a class="headerlink" href="#112" title="Permanent link">&para;</a></h4>
+<p>문서는 또한 입력 파일 예제(아래에서 자세히 설명)와 명령줄 예제를 제공합니다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>nf-core/demo<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span>-profile<span class="w"> </span>&lt;docker/singularity/.../institute&gt;<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span>--input<span class="w"> </span>samplesheet.csv<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span>--outdir<span class="w"> </span>&lt;OUTDIR&gt;
 </code></pre></div>
-<p>You'll notice that the example command does NOT specify a workflow file, just the reference to the pipeline repository, <code>nf-core/demo</code>.</p>
-<p>When invoked this way, Nextflow will assume that the code is organized in a certain way.
-Let's retrieve the code so we can examine this structure.</p>
-<h3 id="12-retrieve-the-pipeline-code">1.2. Retrieve the pipeline code<a class="headerlink" href="#12-retrieve-the-pipeline-code" title="Permanent link">&para;</a></h3>
-<p>Once we've determined that the pipeline appears to be suitable for our purposes, let's try it out.
-Fortunately Nextflow makes it easy to retrieve pipelines from correctly-formatted repositories without having to download anything manually.</p>
-<p>Let's return to the terminal and run the following:</p>
+<p>예제 명령이 workflow 파일을 지정하지 않고 파이프라인 저장소에 대한 참조인 <code>nf-core/demo</code>만 지정한다는 것을 알 수 있습니다.</p>
+<p>이런 방식으로 호출되면 Nextflow는 코드가 특정 방식으로 구성되어 있다고 가정합니다.
+이 구조를 살펴볼 수 있도록 코드를 가져오겠습니다.</p>
+<h3 id="12">1.2. 파이프라인 코드 가져오기<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
+<p>파이프라인이 우리의 목적에 적합해 보인다고 판단했다면 사용해보겠습니다.
+다행히 Nextflow는 수동으로 다운로드할 필요 없이 올바르게 형식화된 저장소에서 파이프라인을 쉽게 가져올 수 있게 해줍니다.</p>
+<p>터미널로 돌아가서 다음을 실행하겠습니다:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>nextflow<span class="w"> </span>pull<span class="w"> </span>nf-core/demo
 </code></pre></div>
 <details class="success">
-<summary>Command output</summary>
+<summary>명령 출력</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="go">Checking nf-core/demo ...</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="go">downloaded from https://github.com/nf-core/demo.git - revision: 04060b4644 [master]</span>
 </code></pre></div>
 </details>
-<p>Nextflow does a <code>pull</code> of the pipeline code, meaning it downloads the full repository to your local drive.</p>
-<p>To be clear, you can do this with any Nextflow pipeline that is appropriately set up in GitHub, not just nf-core pipelines.
-However nf-core is the largest open-source collection of Nextflow pipelines.</p>
-<p>You can get Nextflow to give you a list of what pipelines you have retrieved in this way:</p>
+<p>Nextflow는 파이프라인 코드를 <code>pull</code>하여 전체 저장소를 로컬 드라이브에 다운로드합니다.</p>
+<p>명확히 하자면, nf-core 파이프라인뿐만 아니라 GitHub에서 적절하게 설정된 모든 Nextflow 파이프라인에 대해 이 작업을 수행할 수 있습니다.
+그러나 nf-core는 가장 큰 오픈소스 Nextflow 파이프라인 모음입니다.</p>
+<p>Nextflow에게 이런 방식으로 가져온 파이프라인 목록을 제공하도록 할 수 있습니다:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>nextflow<span class="w"> </span>list
 </code></pre></div>
 <details class="success">
-<summary>Command output</summary>
+<summary>명령 출력</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="go">nf-core/demo</span>
 </code></pre></div>
 </details>
-<p>You'll notice that the files are not in your current work directory.
-By default, Nextflow saves them to <code>$NXF_HOME/assets</code>.</p>
+<p>파일들이 현재 작업 디렉토리에 없다는 것을 알 수 있습니다.
+기본적으로 Nextflow는 <code>$NXF_HOME/assets</code>에 저장합니다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>tree<span class="w"> </span>-L<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="nv">$NXF_HOME</span>/assets/
 </code></pre></div>
-<div class="highlight"><span class="filename">Directory contents</span><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="go">/workspaces/.nextflow/assets/</span>
+<div class="highlight"><span class="filename">디렉토리 내용</span><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="go">/workspaces/.nextflow/assets/</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="go">└── nf-core</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="go">    └── demo</span>
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
@@ -4118,41 +4160,41 @@ By default, Nextflow saves them to <code>$NXF_HOME/assets</code>.</p>
 </code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The full path may differ on your system if you're not using our training environment.</p>
+<p>교육 환경을 사용하지 않는 경우 시스템에서 전체 경로가 다를 수 있습니다.</p>
 </div>
-<p>Nextflow keeps the downloaded source code intentionally 'out of the way' on the principle that these pipelines should be used more like libraries than code that you would directly interact with.</p>
-<p>However, for the purposes of this training, we want to be able to poke around and see what's in there.
-So to make that easier, let's create a symbolic link to that location from our current working directory.</p>
+<p>Nextflow는 이러한 파이프라인을 직접 상호작용하는 코드가 아닌 라이브러리처럼 사용해야 한다는 원칙에 따라 다운로드된 소스 코드를 의도적으로 '방해가 되지 않는' 위치에 보관합니다.</p>
+<p>그러나 이 교육의 목적상 내부를 살펴보고 무엇이 있는지 확인하고 싶습니다.
+따라서 쉽게 확인할 수 있도록 현재 작업 디렉토리에서 해당 위치로의 심볼릭 링크를 만들겠습니다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>ln<span class="w"> </span>-s<span class="w"> </span><span class="nv">$NXF_HOME</span>/assets<span class="w"> </span>pipelines
 </code></pre></div>
-<p>This creates a shortcut that makes it easier to explore the code we just downloaded.</p>
+<p>이렇게 하면 방금 다운로드한 코드를 더 쉽게 탐색할 수 있는 바로가기가 만들어집니다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>tree<span class="w"> </span>-L<span class="w"> </span><span class="m">2</span><span class="w"> </span>pipelines
 </code></pre></div>
-<div class="highlight"><span class="filename">Directory contents</span><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="go">pipelines</span>
+<div class="highlight"><span class="filename">디렉토리 내용</span><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="go">pipelines</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="go">└── nf-core</span>
 <a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="go">    └── demo</span>
 <a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>
 <a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="go">2 directories, 0 files</span>
 </code></pre></div>
-<p>Now we can more easily peek into the source code as needed.</p>
-<p>But first, let's try running our first nf-core pipeline!</p>
-<h3 id="takeaway">Takeaway<a class="headerlink" href="#takeaway" title="Permanent link">&para;</a></h3>
-<p>You now know how to find a pipeline via the nf-core website and retrieve a local copy of the source code.</p>
-<h3 id="whats-next">What's next?<a class="headerlink" href="#whats-next" title="Permanent link">&para;</a></h3>
-<p>Learn how to try out an nf-core pipeline with minimal effort.</p>
+<p>이제 필요에 따라 소스 코드를 더 쉽게 살펴볼 수 있습니다.</p>
+<p>하지만 먼저 첫 번째 nf-core 파이프라인을 실행해보겠습니다!</p>
+<h3 id="_1">요약<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<p>이제 nf-core 웹사이트를 통해 파이프라인을 찾고 소스 코드의 로컬 사본을 가져오는 방법을 알게 되었습니다.</p>
+<h3 id="_2">다음 단계<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>최소한의 노력으로 nf-core 파이프라인을 사용해보는 방법을 배워보겠습니다.</p>
 <hr />
-<h2 id="2-try-out-the-pipeline-with-its-test-profile">2. Try out the pipeline with its test profile<a class="headerlink" href="#2-try-out-the-pipeline-with-its-test-profile" title="Permanent link">&para;</a></h2>
-<p>Conveniently, every nf-core pipeline comes with a test profile.
-This is a minimal set of configuration settings for the pipeline to run using a small test dataset hosted in the <a href="https://github.com/nf-core/test-datasets">nf-core/test-datasets</a> repository.
-It's a great way to quickly try out a pipeline at small scale.</p>
+<h2 id="2">2. 테스트 프로파일로 파이프라인 사용해보기<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<p>편리하게도 모든 nf-core 파이프라인에는 test 프로파일이 함께 제공됩니다.
+이것은 <a href="https://github.com/nf-core/test-datasets">nf-core/test-datasets</a> 저장소에서 호스팅되는 작은 테스트 데이터셋을 사용하여 파이프라인을 실행하기 위한 최소한의 구성 설정 모음입니다.
+작은 규모로 파이프라인을 빠르게 사용해볼 수 있는 좋은 방법입니다.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Nextflow's configuration profile system allows you to easily switch between different container engines or execution environments.
-For more details, see <a href="../../hello_nextflow/06_hello_config/">Hello Nextflow Part 6: Configuration</a>.</p>
+<p>Nextflow의 configuration profile 시스템을 사용하면 다양한 컨테이너 엔진이나 실행 환경 간에 쉽게 전환할 수 있습니다.
+자세한 내용은 <a href="../../hello_nextflow/06_hello_config/">Hello Nextflow Part 6: Configuration</a>을 참조하십시오.</p>
 </div>
-<h3 id="21-examine-the-test-profile">2.1. Examine the test profile<a class="headerlink" href="#21-examine-the-test-profile" title="Permanent link">&para;</a></h3>
-<p>It's good practice to check what a pipeline's test profile specifies before running it.
-The <code>test</code> profile for <code>nf-core/demo</code> lives in the configuration file <code>conf/test.config</code> and is shown below.</p>
+<h3 id="21">2.1. 테스트 프로파일 살펴보기<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
+<p>파이프라인을 실행하기 전에 파이프라인의 test 프로파일이 무엇을 지정하는지 확인하는 것이 좋습니다.
+<code>nf-core/demo</code>의 <code>test</code> 프로파일은 구성 파일 <code>conf/test.config</code>에 있으며 아래에 표시되어 있습니다.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">conf/test.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-10-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-10-3"> 3</a></span>
@@ -4204,42 +4246,42 @@ The <code>test</code> profile for <code>nf-core/demo</code> lives in the configu
 <a id="__codelineno-10-22" name="__codelineno-10-22"></a><span class="w">    </span><span class="n">config_profile_name</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Test profile&#39;</span>
 <a id="__codelineno-10-23" name="__codelineno-10-23"></a><span class="w">    </span><span class="n">config_profile_description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Minimal test dataset to check pipeline function&#39;</span>
 <a id="__codelineno-10-24" name="__codelineno-10-24"></a>
-<a id="__codelineno-10-25" name="__codelineno-10-25"></a><span class="w">    </span><span class="c1">// Input data</span>
+<a id="__codelineno-10-25" name="__codelineno-10-25"></a><span class="w">    </span><span class="c1">// 입력 데이터</span>
 <a id="__codelineno-10-26" name="__codelineno-10-26"></a><span class="hll"><span class="w">    </span><span class="n">input</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv&#39;</span>
 </span><a id="__codelineno-10-27" name="__codelineno-10-27"></a>
 <a id="__codelineno-10-28" name="__codelineno-10-28"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>You'll notice right away that the comment block at the top includes a usage example showing how to run the pipeline with this test profile.</p>
+<p>상단의 주석 블록에 이 테스트 프로파일로 파이프라인을 실행하는 방법을 보여주는 사용 예제가 포함되어 있음을 바로 알 수 있습니다.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">conf/test.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-7">7</a></span>
 <span class="normal"><a href="#__codelineno-11-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-7" name="__codelineno-11-7"></a><span class="n">Use</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">follows:</span>
 <a id="__codelineno-11-8" name="__codelineno-11-8"></a><span class="w">        </span><span class="n">nextflow</span><span class="w"> </span><span class="n">run</span><span class="w"> </span><span class="n">nf</span><span class="o">-</span><span class="n">core</span><span class="s">/demo -profile test,&lt;docker/</span><span class="n">singularity</span><span class="o">&gt;</span><span class="w"> </span><span class="o">--</span><span class="n">outdir</span><span class="w"> </span><span class="o">&lt;</span><span class="n">OUTDIR</span><span class="o">&gt;</span>
 </code></pre></div></td></tr></table></div>
-<p>The only things we need to supply are what's shown between carets in the example command: <code>&lt;docker/singularity&gt;</code> and <code>&lt;OUTDIR&gt;</code>.</p>
-<p>As a reminder, <code>&lt;docker/singularity&gt;</code> refers to the choice of container system. All nf-core pipelines are designed to be usable with containers (Docker, Singularity, etc.) to ensure reproducibility and eliminate software installation issues.
-So we'll need to specify whether we want to use Docker or Singularity to test the pipeline.</p>
-<p>The <code>--outdir &lt;OUTDIR&gt;</code> part refers to the directory where Nextflow will write the pipeline's outputs.
-We need to provide a name for it, which we can just make up.
-If it does not exist already, Nextflow will create it for us at runtime.</p>
-<p>Moving on to the section after the comment block, the test profile shows us what has been pre-configured for testing: most notably, the <code>input</code> parameter is already set to point to a test dataset, so we don't need to provide our own data.
-If you follow the link to the pre-configured input, you'll see it is a csv file containing sample identifiers and file paths for several experimental samples.</p>
+<p>제공해야 하는 것은 예제 명령에서 꺾쇠괄호 안에 표시된 것뿐입니다: <code>&lt;docker/singularity&gt;</code>와 <code>&lt;OUTDIR&gt;</code>.</p>
+<p>다시 말하지만, <code>&lt;docker/singularity&gt;</code>는 컨테이너 시스템의 선택을 의미합니다. 모든 nf-core 파이프라인은 재현성을 보장하고 소프트웨어 설치 문제를 제거하기 위해 컨테이너(Docker, Singularity 등)와 함께 사용할 수 있도록 설계되었습니다.
+따라서 파이프라인을 테스트하기 위해 Docker 또는 Singularity를 사용할지 지정해야 합니다.</p>
+<p><code>--outdir &lt;OUTDIR&gt;</code> 부분은 Nextflow가 파이프라인의 출력을 작성할 디렉토리를 의미합니다.
+직접 만들 수 있는 이름을 제공해야 합니다.
+이미 존재하지 않는 경우 Nextflow가 실행 시 생성합니다.</p>
+<p>주석 블록 다음 섹션으로 이동하면, test 프로파일이 테스트를 위해 미리 구성된 내용을 보여줍니다: 가장 주목할 점은 <code>input</code> 매개변수가 이미 테스트 데이터셋을 가리키도록 설정되어 있으므로 자체 데이터를 제공할 필요가 없다는 것입니다.
+미리 구성된 입력 링크를 따라가면 여러 실험 샘플에 대한 샘플 식별자와 파일 경로가 포함된 csv 파일임을 알 수 있습니다.</p>
 <div class="highlight"><span class="filename">samplesheet_test_illumina_amplicon.csv</span><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>sample,fastq_1,fastq_2
 <a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>SAMPLE1_PE,https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/illumina/amplicon/sample1_R1.fastq.gz,https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/illumina/amplicon/sample1_R2.fastq.gz
 <a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>SAMPLE2_PE,https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/illumina/amplicon/sample2_R1.fastq.gz,https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/illumina/amplicon/sample2_R2.fastq.gz
 <a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>SAMPLE3_SE,https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/illumina/amplicon/sample1_R1.fastq.gz,
 <a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>SAMPLE3_SE,https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/illumina/amplicon/sample2_R1.fastq.gz,
 </code></pre></div>
-<p>This is called a samplesheet, and is the most common form of input to nf-core pipelines.</p>
+<p>이것은 샘플시트라고 하며, nf-core 파이프라인에 대한 가장 일반적인 입력 형식입니다.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Don't worry if you're not familiar with the data formats and types, it's not important for what follows.</p>
+<p>데이터 형식과 유형에 익숙하지 않더라도 걱정하지 마십시오. 이후 내용에 중요하지 않습니다.</p>
 </div>
-<p>So this confirms that we have everything we need to try out the pipeline.</p>
-<h3 id="22-run-the-pipeline">2.2. Run the pipeline<a class="headerlink" href="#22-run-the-pipeline" title="Permanent link">&para;</a></h3>
-<p>Let's decide to use Docker for the container system and <code>demo-results</code> as the output directory, and we're ready to run the test command:</p>
+<p>따라서 파이프라인을 사용해보는 데 필요한 모든 것이 있음을 확인했습니다.</p>
+<h3 id="22">2.2. 파이프라인 실행하기<a class="headerlink" href="#22" title="Permanent link">&para;</a></h3>
+<p>컨테이너 시스템으로 Docker를, 출력 디렉토리로 <code>demo-results</code>를 사용하기로 결정했다면, 테스트 명령을 실행할 준비가 된 것입니다:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>nf-core/demo<span class="w"> </span>-profile<span class="w"> </span>docker,test<span class="w"> </span>--outdir<span class="w"> </span>demo-results
 </code></pre></div>
 <details class="success">
-<summary>Command output</summary>
+<summary>명령 출력</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="go"> N E X T F L O W   ~  version 25.04.3</span>
 <a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>
 <a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="go">Launching `https://github.com/nf-core/demo` [magical_pauling] DSL2 - revision: db7f526ce1 [master]</span>
@@ -4294,28 +4336,28 @@ If you follow the link to the pre-configured input, you'll see it is a csv file 
 <a id="__codelineno-14-52" name="__codelineno-14-52" href="#__codelineno-14-52"></a><span class="go">-[nf-core/demo] Pipeline completed successfully-</span>
 </code></pre></div>
 </details>
-<p>If your output matches that, congratulations! You've just run your first nf-core pipeline.</p>
-<p>You'll notice that there is a lot more console output than when you run a basic Nextflow pipeline.
-There's a header that includes a summary of the pipeline's version, inputs and outputs, and a few elements of configuration.</p>
+<p>출력이 일치한다면 축하합니다! 첫 번째 nf-core 파이프라인을 실행했습니다.</p>
+<p>기본 Nextflow 파이프라인을 실행할 때보다 콘솔 출력이 훨씬 많다는 것을 알 수 있습니다.
+파이프라인의 버전, 입력 및 출력, 그리고 몇 가지 구성 요소의 요약이 포함된 헤더가 있습니다.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Your output will show different timestamps, execution names, and file paths, but the overall structure and process execution should be similar.</p>
+<p>출력에는 다른 타임스탬프, 실행 이름 및 파일 경로가 표시되지만 전체 구조와 프로세스 실행은 유사해야 합니다.</p>
 </div>
-<p>Moving on to the execution output, let's have a look at the lines that tell us what processes were run:</p>
+<p>실행 출력으로 이동하여 어떤 프로세스가 실행되었는지 알려주는 줄을 살펴보겠습니다:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="go">    [ff/a6976b] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE)     | 3 of 3 ✔</span>
 <a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="go">    [39/731ab7] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE3_SE) | 3 of 3 ✔</span>
 <a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="go">    [7c/78d96e] NFCORE_DEMO:DEMO:MULTIQC                 | 1 of 1 ✔</span>
 </code></pre></div>
-<p>This tells us that three processes were run, corresponding to the three tools shown in the pipeline documentation page on the nf-core website: FASTQC, SEQTK_TRIM and MULTIQC.</p>
-<p>The full process names as shown here, such as <code>NFCORE_DEMO:DEMO:MULTIQC</code>, are longer than what you may have seen in the introductory Hello Nextflow material.
-These include the names of their parent workflows and reflect the modularity of the pipeline code.
-We'll go into more detail about that in a little bit.</p>
-<h3 id="23-examine-the-pipelines-outputs">2.3. Examine the pipeline's outputs<a class="headerlink" href="#23-examine-the-pipelines-outputs" title="Permanent link">&para;</a></h3>
-<p>Finally, let's have a look at the <code>demo-results</code> directory produced by the pipeline.</p>
+<p>이것은 nf-core 웹사이트의 파이프라인 문서 페이지에 표시된 세 가지 도구에 해당하는 세 개의 프로세스가 실행되었음을 알려줍니다: FASTQC, SEQTK_TRIM 및 MULTIQC.</p>
+<p>여기에 표시된 <code>NFCORE_DEMO:DEMO:MULTIQC</code>와 같은 전체 프로세스 이름은 Hello Nextflow 입문 자료에서 본 것보다 깁니다.
+여기에는 상위 workflow의 이름이 포함되어 있으며 파이프라인 코드의 모듈성을 반영합니다.
+조금 후에 이에 대해 자세히 설명하겠습니다.</p>
+<h3 id="23">2.3. 파이프라인 출력 살펴보기<a class="headerlink" href="#23" title="Permanent link">&para;</a></h3>
+<p>마지막으로 파이프라인이 생성한 <code>demo-results</code> 디렉토리를 살펴보겠습니다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>tree<span class="w"> </span>-L<span class="w"> </span><span class="m">2</span><span class="w"> </span>demo-results
 </code></pre></div>
 <details class="abstract">
-<summary>Directory contents</summary>
+<summary>디렉토리 내용</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="go">demo-results</span>
 <a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="go">├── fastqc</span>
 <a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="go">│   ├── SAMPLE1_PE</span>
@@ -4338,32 +4380,32 @@ We'll go into more detail about that in a little bit.</p>
 <a id="__codelineno-17-20" name="__codelineno-17-20" href="#__codelineno-17-20"></a><span class="go">    └── pipeline_dag_2025-11-21_04-57-41.html</span>
 </code></pre></div>
 </details>
-<p>That might seem like a lot.
-To learn more about the <code>nf-core/demo</code> pipeline's outputs, check out its <a href="https://nf-co.re/demo/1.0.2/docs/output/">documentation page</a>.</p>
-<p>At this stage, what's important to observe is that the results are organized by module, and there is additionally a directory called <code>pipeline_info</code> containing various timestamped reports about the pipeline execution.</p>
-<p>For example, the <code>execution_timeline_*</code> file shows you what processes were run, in what order and how long they took to run:</p>
-<p><img alt="execution timeline report" src="../../../hello_nf-core/img/execution_timeline.png" /></p>
+<p>많아 보일 수 있습니다.
+<code>nf-core/demo</code> 파이프라인의 출력에 대해 자세히 알아보려면 <a href="https://nf-co.re/demo/1.0.2/docs/output/">문서 페이지</a>를 확인하십시오.</p>
+<p>현 단계에서 중요한 것은 결과가 모듈별로 구성되어 있고, 파이프라인 실행에 대한 다양한 타임스탬프가 있는 보고서가 포함된 <code>pipeline_info</code>라는 디렉토리가 추가로 있다는 것입니다.</p>
+<p>예를 들어, <code>execution_timeline_*</code> 파일은 어떤 프로세스가 실행되었는지, 어떤 순서로, 얼마나 오래 실행되었는지 보여줍니다:</p>
+<p><img alt="실행 타임라인 보고서" src="./img/execution_timeline.png" /></p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Here the tasks were not run in parallel because we are running on a minimalist machine in Github Codespaces.
-To see these run in parallel, try increasing the CPU allocation of your codespace and the resource limits in the test configuration.</p>
+<p>여기서 작업이 병렬로 실행되지 않은 이유는 Github Codespaces의 최소 사양 머신에서 실행하고 있기 때문입니다.
+병렬 실행을 보려면 codespace의 CPU 할당과 테스트 구성의 리소스 제한을 늘려보십시오.</p>
 </div>
-<p>These reports are generated automatically for all nf-core pipelines.</p>
-<h3 id="takeaway_1">Takeaway<a class="headerlink" href="#takeaway_1" title="Permanent link">&para;</a></h3>
-<p>You know how to run an nf-core pipeline using its built-in test profile and where to find its outputs.</p>
-<h3 id="whats-next_1">What's next?<a class="headerlink" href="#whats-next_1" title="Permanent link">&para;</a></h3>
-<p>Learn how the pipeline code is organized.</p>
+<p>이러한 보고서는 모든 nf-core 파이프라인에 대해 자동으로 생성됩니다.</p>
+<h3 id="_3">요약<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>내장된 test 프로파일을 사용하여 nf-core 파이프라인을 실행하는 방법과 출력을 찾을 수 있는 위치를 알게 되었습니다.</p>
+<h3 id="_4">다음 단계<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>파이프라인 코드가 어떻게 구성되어 있는지 배워보겠습니다.</p>
 <hr />
-<h2 id="3-examine-the-pipeline-code-structure">3. Examine the pipeline code structure<a class="headerlink" href="#3-examine-the-pipeline-code-structure" title="Permanent link">&para;</a></h2>
-<p>Now that we've successfully run the pipeline as users, let's shift our perspective to look at how nf-core pipelines are structured internally.</p>
-<p>The nf-core project enforces strong guidelines for how pipelines are structured, and for how the code is organized, configured and documented.
-Understanding how this is all organized is the first step toward developing your own nf-core-compatible pipelines, which we will tackle in Part 2 of this course.</p>
-<p>Let's have a look at how the pipeline code is organized in the <code>nf-core/demo</code> repository, using the <code>pipelines</code> symlink we created earlier.</p>
-<p>You can either use <code>tree</code> or use the file explorer to find and open the <code>nf-core/demo</code> directory.</p>
+<h2 id="3">3. 파이프라인 코드 구조 살펴보기<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
+<p>이제 사용자로서 파이프라인을 성공적으로 실행했으니, nf-core 파이프라인이 내부적으로 어떻게 구성되어 있는지 살펴보기 위해 관점을 전환해보겠습니다.</p>
+<p>nf-core 프로젝트는 파이프라인 구조, 코드 구성 방법, 구성 및 문서화에 대한 강력한 가이드라인을 적용합니다.
+이 모든 것이 어떻게 구성되어 있는지 이해하는 것이 이 과정의 Part 2에서 다룰 nf-core 호환 파이프라인을 개발하기 위한 첫 번째 단계입니다.</p>
+<p>앞서 만든 <code>pipelines</code> 심볼릭 링크를 사용하여 <code>nf-core/demo</code> 저장소에서 파이프라인 코드가 어떻게 구성되어 있는지 살펴보겠습니다.</p>
+<p><code>tree</code>를 사용하거나 파일 탐색기를 사용하여 <code>nf-core/demo</code> 디렉토리를 찾아 열 수 있습니다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>tree<span class="w"> </span>-L<span class="w"> </span><span class="m">1</span><span class="w"> </span>pipelines/nf-core/demo
 </code></pre></div>
 <details class="abstract">
-<summary>Directory contents</summary>
+<summary>디렉토리 내용</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="go">pipelines/nf-core/demo</span>
 <a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="go">├── assets</span>
 <a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="go">├── CHANGELOG.md</span>
@@ -4386,73 +4428,68 @@ Understanding how this is all organized is the first step toward developing your
 <a id="__codelineno-19-20" name="__codelineno-19-20" href="#__codelineno-19-20"></a><span class="go">└── workflows</span>
 </code></pre></div>
 </details>
-<p>There's a lot going on in there, so we'll tackle this step by step.</p>
-<p>First, let's note that at the top level, you can find a README file with summary information, as well as accessory files that summarize project information such as licensing, contribution guidelines, citation and code of conduct.
-Detailed pipeline documentation is located in the <code>docs</code> directory.
-All of this content is used to generate the web pages on the nf-core website programmatically, so they're always up to date with the code.</p>
-<p>Now, for the rest, we're going to divide our exploration in three stages:</p>
+<p>여기에는 많은 내용이 있으므로 단계별로 다루겠습니다.</p>
+<p>먼저, 최상위 레벨에서 요약 정보가 있는 README 파일과 라이선싱, 기여 가이드라인, 인용 및 행동 강령과 같은 프로젝트 정보를 요약하는 보조 파일을 찾을 수 있습니다.
+상세한 파이프라인 문서는 <code>docs</code> 디렉토리에 있습니다.
+이 모든 콘텐츠는 nf-core 웹사이트의 웹 페이지를 프로그래밍 방식으로 생성하는 데 사용되므로 항상 코드와 최신 상태를 유지합니다.</p>
+<p>이제 나머지 부분에 대해서는 세 단계로 나누어 살펴보겠습니다:</p>
 <ol>
-<li>Pipeline code components (<code>main.nf</code>, <code>workflows</code>, <code>subworkflows</code>, <code>modules</code>)</li>
-<li>Pipeline configuration</li>
-<li>Inputs and validation</li>
+<li>파이프라인 코드 구성요소 (<code>main.nf</code>, <code>workflows</code>, <code>subworkflows</code>, <code>modules</code>)</li>
+<li>파이프라인 구성</li>
+<li>입력 및 검증</li>
 </ol>
-<p>Let's start with the pipeline code components.
-We're going to focus on the file hierarchy and structural organization, rather than diving into the code within individual files.</p>
-<h3 id="31-pipeline-code-components">3.1. Pipeline code components<a class="headerlink" href="#31-pipeline-code-components" title="Permanent link">&para;</a></h3>
-<p>The standard nf-core pipeline code organization follows a modular structure that is designed to maximize code reuse, as introduced in <a href="../../hello_nextflow/04_hello_modules/">Hello Modules</a>, Part 4 of the <a href="../../hello_nextflow/">Hello Nextflow</a> course, although in true nf-core fashion, this is implemented with a bit of additional complexity.
-Specifically, nf-core pipelines make abundant use of subworkflows, i.e. workflow scripts that are imported by a parent workflow.</p>
-<p>That may sound a bit abstract, so let's take a look how this is used in practice in the <code>nf-core/demo</code> pipeline.</p>
+<p>파이프라인 코드 구성요소부터 시작하겠습니다.
+개별 파일 내의 코드를 자세히 살펴보기보다는 파일 계층 구조와 구조적 구성에 중점을 둘 것입니다.</p>
+<h3 id="31">3.1. 파이프라인 코드 구성요소<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
+<p>표준 nf-core 파이프라인 코드 구성은 <a href="../../hello_nextflow/">Hello Nextflow</a> 과정의 Part 4인 <a href="../../hello_nextflow/04_hello_modules/">Hello Modules</a>에서 소개된 것처럼 코드 재사용을 극대화하도록 설계된 모듈식 구조를 따릅니다. 다만 진정한 nf-core 방식으로 약간의 복잡성이 추가되어 구현됩니다.
+특히, nf-core 파이프라인은 subworkflow, 즉 상위 workflow에서 가져오는 workflow 스크립트를 풍부하게 사용합니다.</p>
+<p>조금 추상적으로 들릴 수 있으므로 <code>nf-core/demo</code> 파이프라인에서 실제로 어떻게 사용되는지 살펴보겠습니다.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>We won't go over the actual code for <em>how</em> these modular components are connected, because there is some additional complexity associated with the use of subworkflows that can be confusing, and understanding that is not necessary at this stage of the training.
-For now, we're going to focus on the overall organization and logic.</p>
+<p>이러한 모듈식 구성요소가 <em>어떻게</em> 연결되는지에 대한 실제 코드는 다루지 않을 것입니다. subworkflow 사용과 관련된 복잡성이 혼란스러울 수 있고, 이를 이해하는 것이 교육의 현 단계에서는 필요하지 않기 때문입니다.
+지금은 전체적인 구성과 논리에 초점을 맞추겠습니다.</p>
 </div>
-<h4 id="311-general-overview">3.1.1. General overview<a class="headerlink" href="#311-general-overview" title="Permanent link">&para;</a></h4>
-<p>Here is what the relationships between the relevant code components look like for the <code>nf-core/demo</code> pipeline:</p>
+<h4 id="311">3.1.1. 일반 개요<a class="headerlink" href="#311" title="Permanent link">&para;</a></h4>
+<p>다음은 <code>nf-core/demo</code> 파이프라인에 대한 관련 코드 구성요소 간의 관계를 나타낸 것입니다:</p>
 <figure class="excalidraw">
-    <?xml version="1.0" standalone="no"?>
-    <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1134.1970541096307 484.2408918006713" width="1134.1970541096307" height="484.2408918006713"><!-- svg-source:excalidraw --><metadata></metadata><defs><style class="style-fonts">
-          @font-face { font-family: Excalifont; src: url(data:font/woff2;base64,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); }
-          @font-face { font-family: Comic Shanns; src: url(data:font/woff2;base64,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); }</style></defs><rect x="0" y="0" width="1134.1970541096307" height="484.2408918006713" fill="#ffffff"></rect><g stroke-linecap="round" transform="translate(11.009968220279916 56.2838775424334) rotate(0 137.76143535565734 201.44854216470776)"><path d="M0.3 -0.19 L275.97 0.41 L276.38 404.15 L-1.35 403.72" stroke="none" stroke-width="0" fill="#ffc9c9"></path><path d="M0 0 C71.03 1.7, 141.85 1.35, 275.52 0 M0 0 C69.63 1.01, 140.27 1.61, 275.52 0 M275.52 0 C274.25 145.18, 275.54 292.03, 275.52 402.9 M275.52 0 C276.03 83.5, 276.18 167.92, 275.52 402.9 M275.52 402.9 C209.76 401.94, 147.59 402.27, 0 402.9 M275.52 402.9 C175.81 402.82, 75.74 403.16, 0 402.9 M0 402.9 C-0.41 295.02, 0.09 188.1, 0 0 M0 402.9 C0.34 287.95, 0.18 172.18, 0 0" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g><g stroke-linecap="round" transform="translate(548.113332400887 315.1745275199937) rotate(0 57.3742056218652 79.5331821403388)"><path d="M0.01 1.81 L116.37 0.15 L115.36 159.34 L-0.67 158.04" stroke="none" stroke-width="0" fill="#ffc9c9"></path><path d="M0 0 C45.95 -2.99, 89.58 -0.8, 114.75 0 M0 0 C35.72 -0.19, 72.22 -0.63, 114.75 0 M114.75 0 C116.33 41.89, 115.36 79.71, 114.75 159.07 M114.75 0 C112.95 50.84, 114.11 101.92, 114.75 159.07 M114.75 159.07 C82.43 157.22, 49.46 157, 0 159.07 M114.75 159.07 C86.28 159.34, 58.04 160.43, 0 159.07 M0 159.07 C-0.1 117.07, -0.55 74.87, 0 0 M0 159.07 C0.69 117.8, 0.16 74.96, 0 0" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g><g stroke-linecap="round" transform="translate(526.7621425645541 293.68811348136387) rotate(0 57.3742056218652 79.5331821403388)"><path d="M-1.41 -1.92 L116.61 -0.62 L114.22 159.95 L-0.77 160.39" stroke="none" stroke-width="0" fill="#ffc9c9"></path><path d="M0 0 C29.38 0.59, 61.29 1.02, 114.75 0 M0 0 C25.44 0.73, 49.71 0.68, 114.75 0 M114.75 0 C112.35 53.62, 115.21 108.19, 114.75 159.07 M114.75 0 C115.02 60.54, 115.94 121.08, 114.75 159.07 M114.75 159.07 C85.93 160.31, 55.41 161.36, 0 159.07 M114.75 159.07 C68.73 160.1, 22.86 159.85, 0 159.07 M0 159.07 C-2.67 98.49, -1.22 36.44, 0 0 M0 159.07 C1.8 103.78, 0.85 45.87, 0 0" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g><g stroke-linecap="round" transform="translate(507.0763455354552 275.6036556899908) rotate(0 57.3742056218652 79.5331821403388)"><path d="M1.22 -1.33 L116.58 1.37 L115.33 160.24 L0.26 160.38" stroke="none" stroke-width="0" fill="#ffc9c9"></path><path d="M0 0 C28.59 1.4, 57.88 -1.37, 114.75 0 M0 0 C41.14 0.84, 84.6 1.01, 114.75 0 M114.75 0 C114.48 36.98, 114.9 72.82, 114.75 159.07 M114.75 0 C112.83 55.32, 113.39 110.08, 114.75 159.07 M114.75 159.07 C70.79 159.22, 27.54 157.98, 0 159.07 M114.75 159.07 C79.66 158.97, 43.24 159.16, 0 159.07 M0 159.07 C1.09 106.02, 0.17 51.16, 0 0 M0 159.07 C-0.66 120.31, -0.39 83.17, 0 0" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g><g stroke-linecap="round" transform="translate(506.8583807468133 56.27766804289786) rotate(0 57.3742056218652 79.5331821403388)"><path d="M1.14 0.09 L116.44 -1.99 L115.53 158.7 L-0.36 159.91" stroke="none" stroke-width="0" fill="#ffec99"></path><path d="M0 0 C28.3 -1.04, 58.04 -0.95, 114.75 0 M0 0 C25.91 1.68, 50.88 0.41, 114.75 0 M114.75 0 C117.8 37.86, 114.62 76.85, 114.75 159.07 M114.75 0 C116.08 55.39, 114.94 109.3, 114.75 159.07 M114.75 159.07 C82.55 159.26, 50.08 160.31, 0 159.07 M114.75 159.07 C71.61 159.03, 29.4 159.67, 0 159.07 M0 159.07 C-2.34 120.01, -0.99 81.82, 0 0 M0 159.07 C-1.7 112.44, -1.61 68.67, 0 0" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g><g stroke-linecap="round" transform="translate(814.0611590633192 153.47950255738397) rotate(0 35.67783821651199 38.82713871737087)"><path d="M-1.08 1.51 L72.26 0.52 L72.48 79.57 L1.18 76.83" stroke="none" stroke-width="0" fill="#ffec99"></path><path d="M0 0 C25.57 1.03, 52.2 -1.62, 71.36 0 M0 0 C20.38 0.22, 41.05 -0.51, 71.36 0 M71.36 0 C73.87 25.88, 74.07 54.31, 71.36 77.65 M71.36 0 C71.37 26.67, 72.38 51.8, 71.36 77.65 M71.36 77.65 C46.09 76.02, 19.14 77.83, 0 77.65 M71.36 77.65 C44.72 77.62, 18.95 76.65, 0 77.65 M0 77.65 C-0.9 50.37, -1.91 22.46, 0 0 M0 77.65 C0.5 59.66, 0.09 42.78, 0 0" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g><g stroke-linecap="round" transform="translate(798.378710128533 139.5549682524561) rotate(0 35.67783821651199 38.82713871737087)"><path d="M-0.92 1.22 L71.94 1.95 L71.76 78.8 L1.02 78.51" stroke="none" stroke-width="0" fill="#ffec99"></path><path d="M0 0 C17.94 0.88, 35.89 1.18, 71.36 0 M0 0 C21.87 0.24, 44.34 0.36, 71.36 0 M71.36 0 C71.87 18.5, 72.54 36.71, 71.36 77.65 M71.36 0 C72.17 25.96, 72.21 50.55, 71.36 77.65 M71.36 77.65 C49.2 77.36, 23.16 75.81, 0 77.65 M71.36 77.65 C47.05 76, 21.44 76.63, 0 77.65 M0 77.65 C-0.01 50, 0.74 23.8, 0 0 M0 77.65 C-0.09 50.61, -0.09 25.05, 0 0" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g><g stroke-linecap="round" transform="translate(781.7461332460299 124.68030599981012) rotate(0 35.67783821651199 38.82713871737087)"><path d="M-1.8 0.73 L70.4 0.22 L72.16 76.67 L1.51 79.38" stroke="none" stroke-width="0" fill="#ffec99"></path><path d="M0 0 C26.69 -1.83, 51.92 -1.39, 71.36 0 M0 0 C23.53 -0.4, 47.58 0.46, 71.36 0 M71.36 0 C70.57 19.46, 72.65 34.85, 71.36 77.65 M71.36 0 C72.78 23.89, 72.53 47.65, 71.36 77.65 M71.36 77.65 C52.95 75.68, 38.36 75.85, 0 77.65 M71.36 77.65 C52.47 76.72, 32.84 76.79, 0 77.65 M0 77.65 C0.4 53.28, -1.49 26.23, 0 0 M0 77.65 C-0.44 49.3, 0.5 21.53, 0 0" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g><g transform="translate(691.0599382486749 315.5400578460267) rotate(0 98.04195404052734 17.5)"><text x="0" y="24.668" font-family="Excalifont, Xiaolai, sans-serif, Segoe UI Emoji" font-size="28px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">subworkflows/</text></g><g transform="translate(507.8413346740314 10) rotate(0 126.12594604492188 17.5)"><text x="0" y="24.668" font-family="Excalifont, Xiaolai, sans-serif, Segoe UI Emoji" font-size="28px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">workflows/demo.nf</text></g><g transform="translate(914.6612787438465 158.3033931071932) rotate(0 90.24991607666016 37.5)"><text x="0" y="17.619999999999997" font-family="Excalifont, Xiaolai, sans-serif, Segoe UI Emoji" font-size="20px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">fastqc/main.nf</text><text x="0" y="42.62" font-family="Excalifont, Xiaolai, sans-serif, Segoe UI Emoji" font-size="20px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">multiqc/main.nf</text><text x="0" y="67.62" font-family="Excalifont, Xiaolai, sans-serif, Segoe UI Emoji" font-size="20px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">seqtk/trim/main.nf</text></g><g transform="translate(10 10) rotate(0 46.28398132324219 17.5)"><text x="0" y="24.668" font-family="Excalifont, Xiaolai, sans-serif, Segoe UI Emoji" font-size="28px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">main.nf</text></g><g stroke-linecap="round"><g transform="translate(441.42658997238937 110.63067651277652) rotate(0 0 105.22511406549984)"><path d="M0 0 C-0.01 48.45, -2.42 97.07, 0 210.45 M0 0 C1.65 64.19, 0.61 127.53, 0 210.45" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(622.6223592555799 148.44746549119463) rotate(0 79.2798935043827 0)"><path d="M0 0 C37.96 1.01, 74.77 -0.38, 158.56 0 M0 0 C36.57 1.98, 71.55 1.56, 158.56 0" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g></g><mask></mask><g transform="translate(310.35554471456396 185.54731559262473) rotate(0 38.5 12.5)"><text x="0" y="17.5" font-family="Comic Shanns, monospace, Segoe UI Emoji" font-size="20px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">include</text></g><g transform="translate(646.2594670204861 117.85982132738536) rotate(0 38.5 12.5)"><text x="0" y="17.5" font-family="Comic Shanns, monospace, Segoe UI Emoji" font-size="20px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">include</text></g><g transform="translate(782.2240313845433 81.97926355788695) rotate(0 116.33995056152344 17.5)"><text x="0" y="24.668" font-family="Excalifont, Xiaolai, sans-serif, Segoe UI Emoji" font-size="28px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">modules/nf-core/</text></g><g transform="translate(733.6173727131462 374.812340213859) rotate(0 195.2898406982422 37.5)"><text x="0" y="17.619999999999997" font-family="Excalifont, Xiaolai, sans-serif, Segoe UI Emoji" font-size="20px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">local/utils_nfcore_demo_pipeline/main.nf</text><text x="0" y="42.62" font-family="Excalifont, Xiaolai, sans-serif, Segoe UI Emoji" font-size="20px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic"></text><text x="0" y="67.62" font-family="Excalifont, Xiaolai, sans-serif, Segoe UI Emoji" font-size="20px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">nf-core/utils_*/main.nf</text></g><g stroke-linecap="round"><g transform="translate(288.68328253393486 213.34429050586186) rotate(0 77.04238836558841 0)"><path d="M0 0 C47.91 -0.38, 98.93 1.59, 154.08 0 M0 0 C48.77 -0.03, 99.16 -0.21, 154.08 0" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(441.58737339681966 109.77591149906493) rotate(0 30.86181148584683 0)"><path d="M0 0 C12.18 1.25, 24.62 1.22, 61.72 0 M0 0 C15.9 0.34, 30.38 0.07, 61.72 0" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(441.2430066852345 320.40906359213204) rotate(0 31.033994841639412 0)"><path d="M0 0 C23.19 1.91, 45.48 -0.03, 62.07 0 M0 0 C14.23 -1.09, 28.41 0.81, 62.07 0" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g></g><mask></mask></svg>
 </figure>
 
-<p>There is a so-called <em>entrypoint</em> script called <code>main.nf</code>, which acts as a wrapper for two kinds of nested workflows: the workflow containing the actual analysis logic, located under <code>workflows/</code> and called <code>demo.nf</code>, and a set of housekeeping workflows located under <code>subworkflows/</code>.
-The <code>demo.nf</code> workflow calls on <strong>modules</strong> located under <code>modules/</code>; these contain the <strong>processes</strong> that will perform the actual analysis steps.</p>
+<p><code>main.nf</code>라는 <em>엔트리포인트</em> 스크립트가 있으며, 이는 두 종류의 중첩된 workflow에 대한 래퍼 역할을 합니다: <code>workflows/</code> 아래에 있고 <code>demo.nf</code>라고 하는 실제 분석 로직을 포함하는 workflow와 <code>subworkflows/</code> 아래에 있는 관리용 workflow 집합입니다.
+<code>demo.nf</code> workflow는 <code>modules/</code> 아래에 있는 <strong>모듈</strong>을 호출하며, 이들은 실제 분석 단계를 수행할 <strong>프로세스</strong>를 포함합니다.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Subworkflows are not limited to housekeeping functions, and they can make use of process modules.</p>
-<p>The <code>nf-core/demo</code> pipeline shown here happens to be on the simpler side on the spectrum, but other nf-core pipelines (such as <code>nf-core/rnaseq</code>) utilize subworkflows that are involved in the actual analysis.</p>
+<p>Subworkflow는 관리 기능에만 국한되지 않으며 프로세스 모듈을 사용할 수 있습니다.</p>
+<p>여기에 표시된 <code>nf-core/demo</code> 파이프라인은 스펙트럼에서 단순한 편에 속하지만, 다른 nf-core 파이프라인(예: <code>nf-core/rnaseq</code>)은 실제 분석에 관여하는 subworkflow를 활용합니다.</p>
 </div>
-<p>Now, let's review these components in turn.</p>
-<h4 id="312-the-entrypoint-script-mainnf">3.1.2. The entrypoint script: <code>main.nf</code><a class="headerlink" href="#312-the-entrypoint-script-mainnf" title="Permanent link">&para;</a></h4>
-<p>The <code>main.nf</code> script is the entrypoint that Nextflow starts from when we execute <code>nextflow run nf-core/demo</code>.
-That means when you run <code>nextflow run nf-core/demo</code> to run the pipeline, Nextflow automatically finds and executes the <code>main.nf</code> script.
-This works for any Nextflow pipeline that follows this conventional naming and structure, not just nf-core pipelines.</p>
-<p>Using an entrypoint script makes it easy to run standardized 'housekeeping' subworkflows before and after the actual analysis script gets run.
-We'll go over those after we've reviewed the actual analysis workflow and its modules.</p>
-<h4 id="313-the-analysis-script-workflowsdemonf">3.1.3. The analysis script: <code>workflows/demo.nf</code><a class="headerlink" href="#313-the-analysis-script-workflowsdemonf" title="Permanent link">&para;</a></h4>
-<p>The <code>workflows/demo.nf</code> workflow is where the central logic of the pipeline is stored.
-It is structured much like a normal Nextflow workflow, except it is designed to be called from a parent workflow, which requires a few extra features.
-We'll cover the relevant differences in the next part of this course, when we tackle the conversion of the simple Hello pipeline from Hello Nextflow into an nf-core-compatible form.</p>
-<p>The <code>demo.nf</code> workflow calls on <strong>modules</strong> located under <code>modules/</code>, which we'll review next.</p>
+<p>이제 이러한 구성요소를 차례로 검토하겠습니다.</p>
+<h4 id="312-mainnf">3.1.2. 엔트리포인트 스크립트: <code>main.nf</code><a class="headerlink" href="#312-mainnf" title="Permanent link">&para;</a></h4>
+<p><code>main.nf</code> 스크립트는 <code>nextflow run nf-core/demo</code>를 실행할 때 Nextflow가 시작하는 엔트리포인트입니다.
+즉, <code>nextflow run nf-core/demo</code>를 실행하여 파이프라인을 실행하면 Nextflow가 자동으로 <code>main.nf</code> 스크립트를 찾아 실행합니다.
+이것은 nf-core 파이프라인뿐만 아니라 이러한 관례적인 명명 및 구조를 따르는 모든 Nextflow 파이프라인에 적용됩니다.</p>
+<p>엔트리포인트 스크립트를 사용하면 실제 분석 스크립트가 실행되기 전후에 표준화된 '관리용' subworkflow를 쉽게 실행할 수 있습니다.
+실제 분석 workflow와 그 모듈을 검토한 후에 이에 대해 살펴보겠습니다.</p>
+<h4 id="313-workflowsdemonf">3.1.3. 분석 스크립트: <code>workflows/demo.nf</code><a class="headerlink" href="#313-workflowsdemonf" title="Permanent link">&para;</a></h4>
+<p><code>workflows/demo.nf</code> workflow는 파이프라인의 핵심 로직이 저장된 곳입니다.
+상위 workflow에서 호출되도록 설계되어 몇 가지 추가 기능이 필요하다는 점을 제외하면 일반 Nextflow workflow와 매우 유사하게 구성됩니다.
+다음 과정 파트에서 Hello Nextflow의 간단한 Hello 파이프라인을 nf-core 호환 형태로 변환할 때 관련 차이점을 다루겠습니다.</p>
+<p><code>demo.nf</code> workflow는 다음에 검토할 <code>modules/</code> 아래에 있는 <strong>모듈</strong>을 호출합니다.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Some nf-core analysis workflows display additional levels of nesting by calling on lower-level subworkflows.
-This is mostly used for wrapping two or more modules that are commonly used together into easily reusable pipeline segments.
-You can see some examples by browsing available <a href="https://nf-co.re/subworkflows/">nf-core subworkflows</a> on the nf-core website.</p>
-<p>When the analysis script uses subworkflows, those are stored under the <code>subworkflows/</code> directory.</p>
+<p>일부 nf-core 분석 workflow는 하위 레벨 subworkflow를 호출하여 추가 중첩 레벨을 표시합니다.
+이것은 주로 일반적으로 함께 사용되는 두 개 이상의 모듈을 쉽게 재사용 가능한 파이프라인 세그먼트로 적용하는 데 사용됩니다.
+nf-core 웹사이트에서 사용 가능한 <a href="https://nf-co.re/subworkflows/">nf-core subworkflows</a>를 탐색하여 몇 가지 예제를 볼 수 있습니다.</p>
+<p>분석 스크립트가 subworkflow를 사용하는 경우 <code>subworkflows/</code> 디렉토리 아래에 저장됩니다.</p>
 </div>
-<h4 id="314-the-modules">3.1.4. The modules<a class="headerlink" href="#314-the-modules" title="Permanent link">&para;</a></h4>
-<p>The modules are where the process code lives, as described in <a href="../../hello_nextflow/04_hello_modules/">Part 4 of the Hello Nextflow training course</a>.</p>
-<p>In the nf-core project, modules are organized using a multi-level nested structure that reflect both their origin and their contents.
-At the top level, modules are differentiated as either <code>nf-core</code> or <code>local</code> (not part of the nf-core project), and then further placed into a directory named after the tool(s) they wrap.
-If the tool belongs to a toolkit (i.e. a package containing multiple tools) then there is an intermediate directory level named after the toolkit.</p>
-<p>You can see this applied in practice to the <code>nf-core/demo</code> pipeline modules:</p>
+<h4 id="314">3.1.4. 모듈<a class="headerlink" href="#314" title="Permanent link">&para;</a></h4>
+<p>모듈은 <a href="../../hello_nextflow/04_hello_modules/">Hello Nextflow 교육 과정의 Part 4</a>에 설명된 대로 프로세스 코드가 있는 곳입니다.</p>
+<p>nf-core 프로젝트에서 모듈은 출처와 내용을 모두 반영하는 다단계 중첩 구조를 사용하여 구성됩니다.
+최상위 레벨에서 모듈은 <code>nf-core</code> 또는 <code>local</code>(nf-core 프로젝트의 일부가 아님)로 구분되며, 그런 다음 적용하는 도구의 이름을 따서 명명된 디렉토리에 배치됩니다.
+도구가 툴킷(즉, 여러 도구를 포함하는 패키지)에 속하는 경우 툴킷 이름을 따서 명명된 중간 디렉토리 레벨이 있습니다.</p>
+<p><code>nf-core/demo</code> 파이프라인 모듈에 실제로 적용된 것을 볼 수 있습니다:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>tree<span class="w"> </span>-L<span class="w"> </span><span class="m">3</span><span class="w"> </span>pipelines/nf-core/demo/modules
 </code></pre></div>
 <details class="abstract">
-<summary>Directory contents</summary>
+<summary>디렉토리 내용</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="go">pipelines/nf-core/demo/modules</span>
 <a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="go">└── nf-core</span>
 <a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="go">    ├── fastqc</span>
@@ -4471,30 +4508,30 @@ If the tool belongs to a toolkit (i.e. a package containing multiple tools) then
 <a id="__codelineno-21-16" name="__codelineno-21-16" href="#__codelineno-21-16"></a><span class="go">7 directories, 6 files</span>
 </code></pre></div>
 </details>
-<p>Here you see that the <code>fastqc</code> and <code>multiqc</code> modules sit at the top level within the <code>nf-core</code> modules, whereas the <code>trim</code> module sits under the toolkit that it belongs to, <code>seqtk</code>.
-In this case there are no <code>local</code> modules.</p>
-<p>The module code file describing the process is always called <code>main.nf</code>, and is accompanied by tests and <code>.yml</code> files which we'll ignore for now.</p>
-<p>Taken together, the entrypoint workflow, analysis workflow and modules are sufficient for running the 'interesting' parts of the pipeline.
-However, we know there are also housekeeping subworkflows in there, so let's look at those now.</p>
-<h4 id="315-the-housekeeping-subworkflows">3.1.5. The housekeeping subworkflows<a class="headerlink" href="#315-the-housekeeping-subworkflows" title="Permanent link">&para;</a></h4>
-<p>Like modules, subworkflows are differentiated into <code>local</code> and <code>nf-core</code> directories, and each subworkflow has its own nested directory structure with its own <code>main.nf</code> script, tests and <code>.yml</code> file.</p>
+<p>여기서 <code>fastqc</code> 및 <code>multiqc</code> 모듈은 <code>nf-core</code> 모듈 내 최상위 레벨에 있는 반면, <code>trim</code> 모듈은 속해 있는 툴킷인 <code>seqtk</code> 아래에 있습니다.
+이 경우 <code>local</code> 모듈은 없습니다.</p>
+<p>프로세스를 설명하는 모듈 코드 파일은 항상 <code>main.nf</code>라고 하며, 지금은 무시할 테스트 및 <code>.yml</code> 파일이 함께 제공됩니다.</p>
+<p>엔트리포인트 workflow, 분석 workflow 및 모듈을 종합하면 파이프라인의 '흥미로운' 부분을 실행하기에 충분합니다.
+그러나 관리용 subworkflow도 있다는 것을 알고 있으므로 이제 살펴보겠습니다.</p>
+<h4 id="315-subworkflow">3.1.5. 관리용 subworkflow<a class="headerlink" href="#315-subworkflow" title="Permanent link">&para;</a></h4>
+<p>모듈과 마찬가지로 subworkflow는 <code>local</code> 및 <code>nf-core</code> 디렉토리로 구분되며, 각 subworkflow에는 자체 <code>main.nf</code> 스크립트, 테스트 및 <code>.yml</code> 파일이 있는 고유한 중첩 디렉토리 구조가 있습니다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>tree<span class="w"> </span>-L<span class="w"> </span><span class="m">3</span><span class="w"> </span>pipelines/nf-core/demo/subworkflows
 </code></pre></div>
 <details class="abstract">
-<summary>Directory contents</summary>
+<summary>디렉토리 내용</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="go">pipelines/nf-core/demo/subworkflows</span>
 <a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="go">├── local</span>
-<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="go">│   └── utils_nfcore_demo_pipeline</span>
-<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="go">│       └── main.nf</span>
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="go">│   └── utils_nfcore_demo_pipeline</span>
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="go">│       └── main.nf</span>
 <a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="go">└── nf-core</span>
 <a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a><span class="go">    ├── utils_nextflow_pipeline</span>
-<a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="go">    │   ├── main.nf</span>
-<a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a><span class="go">    │   ├── meta.yml</span>
-<a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a><span class="go">    │   └── tests</span>
+<a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="go">    │   ├── main.nf</span>
+<a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a><span class="go">    │   ├── meta.yml</span>
+<a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a><span class="go">    │   └── tests</span>
 <a id="__codelineno-23-10" name="__codelineno-23-10" href="#__codelineno-23-10"></a><span class="go">    ├── utils_nfcore_pipeline</span>
-<a id="__codelineno-23-11" name="__codelineno-23-11" href="#__codelineno-23-11"></a><span class="go">    │   ├── main.nf</span>
-<a id="__codelineno-23-12" name="__codelineno-23-12" href="#__codelineno-23-12"></a><span class="go">    │   ├── meta.yml</span>
-<a id="__codelineno-23-13" name="__codelineno-23-13" href="#__codelineno-23-13"></a><span class="go">    │   └── tests</span>
+<a id="__codelineno-23-11" name="__codelineno-23-11" href="#__codelineno-23-11"></a><span class="go">    │   ├── main.nf</span>
+<a id="__codelineno-23-12" name="__codelineno-23-12" href="#__codelineno-23-12"></a><span class="go">    │   ├── meta.yml</span>
+<a id="__codelineno-23-13" name="__codelineno-23-13" href="#__codelineno-23-13"></a><span class="go">    │   └── tests</span>
 <a id="__codelineno-23-14" name="__codelineno-23-14" href="#__codelineno-23-14"></a><span class="go">    └── utils_nfschema_plugin</span>
 <a id="__codelineno-23-15" name="__codelineno-23-15" href="#__codelineno-23-15"></a><span class="go">        ├── main.nf</span>
 <a id="__codelineno-23-16" name="__codelineno-23-16" href="#__codelineno-23-16"></a><span class="go">        ├── meta.yml</span>
@@ -4503,57 +4540,57 @@ However, we know there are also housekeeping subworkflows in there, so let's loo
 <a id="__codelineno-23-19" name="__codelineno-23-19" href="#__codelineno-23-19"></a><span class="go">9 directories, 7 files</span>
 </code></pre></div>
 </details>
-<p>As noted above, the <code>nf-core/demo</code> pipeline does not include any analysis-specific subworkflows, so all the subworkflows we see here are so-called 'housekeeping' or 'utility' workflows, as denoted by the <code>utils_</code> prefix in their names.
-These subworkflows are what produces the fancy nf-core header in the console output, among other accessory functions.</p>
+<p>위에서 언급했듯이 <code>nf-core/demo</code> 파이프라인에는 분석 관련 subworkflow가 포함되어 있지 않으므로 여기에 표시된 모든 subworkflow는 이름의 <code>utils_</code> 접두사로 표시된 것처럼 소위 '관리용' 또는 '유틸리티' workflow입니다.
+이러한 subworkflow는 다른 보조 기능 중에서도 콘솔 출력에 멋진 nf-core 헤더를 생성하는 것입니다.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>Aside from their naming pattern, another indication that these subworkflows do not perform any truly analysis-related function is that they do not call any processes at all.</p>
+<p>명명 패턴 외에도 이러한 subworkflow가 진정한 분석 관련 기능을 수행하지 않는다는 또 다른 표시는 프로세스를 전혀 호출하지 않는다는 것입니다.</p>
 </div>
-<p>This completes the round-up of core code components that constitute the <code>nf-core/demo</code> pipeline.
-Now let's take a look at the remaining elements that you should know a little bit about before diving into development: pipeline configuration and input validation.</p>
-<h3 id="32-pipeline-configuration">3.2. Pipeline configuration<a class="headerlink" href="#32-pipeline-configuration" title="Permanent link">&para;</a></h3>
-<p>You've learned previously that Nextflow offers many options for configuring pipeline execution, be it in terms of inputs and parameters, computing resources, and other aspects of orchestration.
-The nf-core project applies highly standardized guidelines for pipeline configuration that aim to build on Nextflow's flexible customization options in a way that provides greater consistency and maintainability across pipelines.</p>
-<p>The central configuration file <code>nextflow.config</code> is used to set default values for parameters and other configuration options.
-The majority of these configuration options are applied by default while others (e.g., software dependency profiles) are included as optional profiles.</p>
-<p>There are several additional configuration files that are stored in the <code>conf</code> folder and which can be added to the configuration by default or optionally as profiles:</p>
+<p>이것으로 <code>nf-core/demo</code> 파이프라인을 구성하는 핵심 코드 구성요소의 정리가 완료되었습니다.
+이제 개발에 뛰어들기 전에 조금 알아야 할 나머지 요소인 파이프라인 구성과 입력 검증을 살펴보겠습니다.</p>
+<h3 id="32">3.2. 파이프라인 구성<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
+<p>이전에 Nextflow가 입력 및 매개변수, 컴퓨팅 리소스 및 오케스트레이션의 기타 측면과 관련하여 파이프라인 실행을 구성하기 위한 많은 옵션을 제공한다는 것을 배웠습니다.
+nf-core 프로젝트는 파이프라인 간 일관성과 유지 관리성을 제공하는 방식으로 Nextflow의 유연한 사용자 정의 옵션을 기반으로 구축하는 것을 목표로 하는 파이프라인 구성에 대한 고도로 표준화된 가이드라인을 적용합니다.</p>
+<p>중앙 구성 파일 <code>nextflow.config</code>는 매개변수 및 기타 구성 옵션의 기본값을 설정하는 데 사용됩니다.
+이러한 구성 옵션의 대부분은 기본적으로 적용되는 반면 다른 옵션(예: 소프트웨어 의존성 프로파일)은 선택적 프로파일로 포함됩니다.</p>
+<p><code>conf</code> 폴더에 저장된 여러 추가 구성 파일이 있으며, 기본적으로 또는 선택적으로 프로파일로 구성에 추가할 수 있습니다:</p>
 <ul>
-<li><code>base.config</code>: A 'blank slate' config file, appropriate for general use on most high-performance computing environments. This defines broad bins of resource usage, for example, which are convenient to apply to modules.</li>
-<li><code>modules.config</code>: Additional module directives and arguments.</li>
-<li><code>test.config</code>: A profile to run the pipeline with minimal test data, which we used when we ran the demo pipeline.</li>
-<li><code>test_full.config</code>: A profile to run the pipeline with a full-sized test dataset.</li>
+<li><code>base.config</code>: 대부분의 고성능 컴퓨팅 환경에서 일반적으로 사용하기에 적합한 '백지 상태' 구성 파일입니다. 예를 들어 모듈에 적용하기 편리한 광범위한 리소스 사용 구간을 정의합니다.</li>
+<li><code>modules.config</code>: 추가 모듈 지시문 및 인수입니다.</li>
+<li><code>test.config</code>: 데모 파이프라인을 실행할 때 사용한 최소 테스트 데이터로 파이프라인을 실행하기 위한 프로파일입니다.</li>
+<li><code>test_full.config</code>: 전체 크기 테스트 데이터셋으로 파이프라인을 실행하기 위한 프로파일입니다.</li>
 </ul>
-<p>We will touch a few of those files later in the course.</p>
-<h3 id="33-inputs-and-validation">3.3. Inputs and validation<a class="headerlink" href="#33-inputs-and-validation" title="Permanent link">&para;</a></h3>
-<p>As we noted earlier, when we examined the <code>nf-core/demo</code> pipeline's test profile, it is designed to take as input a samplesheet containing file paths and sample identifiers.
-The file paths linked to real data located in the <code>nf-core/test-datasets</code> repository.</p>
-<p>An example samplesheet is also provided under the <code>assets</code> directory, although the paths in this one are not real.</p>
+<p>과정 후반부에서 이러한 파일 중 몇 가지를 다루겠습니다.</p>
+<h3 id="33">3.3. 입력 및 검증<a class="headerlink" href="#33" title="Permanent link">&para;</a></h3>
+<p>앞서 <code>nf-core/demo</code> 파이프라인의 test 프로파일을 살펴보았을 때 언급했듯이, 파일 경로와 샘플 식별자가 포함된 샘플시트를 입력으로 받도록 설계되었습니다.
+파일 경로는 <code>nf-core/test-datasets</code> 저장소에 있는 실제 데이터에 연결되어 있습니다.</p>
+<p>샘플시트 예제도 <code>assets</code> 디렉토리에 제공되지만 이 파일의 경로는 실제가 아닙니다.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">assets/samplesheet.csv</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-1">1</a></span>
 <span class="normal"><a href="#__codelineno-24-2">2</a></span>
 <span class="normal"><a href="#__codelineno-24-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1"></a>sample,fastq_1,fastq_2
 <a id="__codelineno-24-2" name="__codelineno-24-2"></a>SAMPLE_PAIRED_END,/path/to/fastq/files/AEG588A1_S1_L002_R1_001.fastq.gz,/path/to/fastq/files/AEG588A1_S1_L002_R2_001.fastq.gz
 <a id="__codelineno-24-3" name="__codelineno-24-3"></a>SAMPLE_SINGLE_END,/path/to/fastq/files/AEG588A4_S4_L003_R1_001.fastq.gz,
 </code></pre></div></td></tr></table></div>
-<p>This particular samplesheet is fairly simple, but some pipelines run on samplesheets that are more complex, with a lot more metadata associated with the primary inputs.</p>
-<p>Unfortunately, because these files can be difficult to check by eye, improper formatting of input data is a very common source of pipeline failures.
-A related problem is when parameters are provided incorrectly.</p>
-<p>The solution to these problems is to run automated validation checks on all input files to ensure they contain the expected types of information, formatted correctly, and on parameters to ensure they are of the expected type.
-This is called input validation, and should ideally be done <em>before</em> trying to run a pipeline, rather than waiting for the pipeline to fail to find out there was a problem with the inputs.</p>
-<p>Just like for configuration, the nf-core project is very opinionated about input validation, and recommends the use of the <a href="https://nextflow-io.github.io/nf-schema/latest/">nf-schema plugin</a>, a Nextflow plugin that provides comprehensive validation capabilities for Nextflow pipelines.</p>
-<p>We'll cover this topic in more detail in Part 5 of this course.
-For now, just be aware that there are two JSON files provided for that purpose, <code>nextflow_schema.json</code> and <code>assets/schema_input.json</code>.</p>
-<p>The <code>nextflow_schema.json</code> is a file used to store information about the pipeline parameters including type, description and help text in a machine readable format.
-This is used for various purposes, including automated parameter validation, help text generation, and interactive parameter form rendering in UI interfaces.</p>
-<p>The <code>schema_input.json</code> is a file used to define the input samplesheet structure.
-Each column can have a type, pattern, description and help text in a machine readable format.
-The schema is used for various purposes, including automated validation, and providing helpful error messages.</p>
-<h3 id="takeaway_2">Takeaway<a class="headerlink" href="#takeaway_2" title="Permanent link">&para;</a></h3>
-<p>You know what are the main components of an nf-core pipeline and how the code is organized; where the main elements of configuration are located; and you're aware of what input validation is for.</p>
-<h3 id="whats-next_2">What's next?<a class="headerlink" href="#whats-next_2" title="Permanent link">&para;</a></h3>
-<p>Take a break! That was a lot. When you're feeling refreshed and ready, move on to the next section to apply what you've learned to write an nf-core compatible pipeline.</p>
+<p>이 특정 샘플시트는 상당히 간단하지만, 일부 파이프라인은 기본 입력과 관련된 더 많은 메타데이터가 있는 더 복잡한 샘플시트에서 실행됩니다.</p>
+<p>안타깝게도 이러한 파일은 눈으로 확인하기 어려울 수 있으므로 입력 데이터의 부적절한 형식 지정은 파이프라인 실패의 매우 일반적인 원인입니다.
+관련 문제는 매개변수가 잘못 제공되는 경우입니다.</p>
+<p>이러한 문제에 대한 해결책은 모든 입력 파일에 대해 예상되는 정보 유형이 올바르게 형식화되어 포함되어 있는지 확인하기 위해 자동 검증 확인을 실행하고, 매개변수가 예상 유형인지 확인하는 것입니다.
+이것을 입력 검증이라고 하며, 파이프라인이 실패하여 입력에 문제가 있음을 알아낼 때까지 기다리기보다는 파이프라인을 실행하기 <em>전에</em> 이상적으로 수행되어야 합니다.</p>
+<p>구성과 마찬가지로 nf-core 프로젝트는 입력 검증에 대해 매우 의견이 강하며, Nextflow 파이프라인에 포괄적인 검증 기능을 제공하는 Nextflow 플러그인인 <a href="https://nextflow-io.github.io/nf-schema/latest/">nf-schema plugin</a>의 사용을 권장합니다.</p>
+<p>이 주제는 이 과정의 Part 5에서 더 자세히 다루겠습니다.
+지금은 해당 목적으로 <code>nextflow_schema.json</code> 및 <code>assets/schema_input.json</code>이라는 두 개의 JSON 파일이 제공된다는 점만 알아두십시오.</p>
+<p><code>nextflow_schema.json</code>은 유형, 설명 및 도움말 텍스트를 포함한 파이프라인 매개변수에 대한 정보를 기계 판독 가능한 형식으로 저장하는 데 사용되는 파일입니다.
+이것은 자동 매개변수 검증, 도움말 텍스트 생성, UI 인터페이스의 대화형 매개변수 양식 렌더링을 포함한 다양한 목적으로 사용됩니다.</p>
+<p><code>schema_input.json</code>은 입력 샘플시트 구조를 정의하는 데 사용되는 파일입니다.
+각 열은 기계 판독 가능한 형식으로 유형, 패턴, 설명 및 도움말 텍스트를 가질 수 있습니다.
+스키마는 자동 검증 및 유용한 오류 메시지 제공을 포함한 다양한 목적으로 사용됩니다.</p>
+<h3 id="_5">요약<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>이제 nf-core 파이프라인의 주요 구성요소와 코드 구성 방법, 주요 구성 요소가 어디에 있는지, 입력 검증이 무엇을 위한 것인지 알게 되었습니다.</p>
+<h3 id="_6">다음 단계<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p>휴식을 취하십시오! 많은 내용이었습니다. 기분이 상쾌하고 준비가 되었을 때 다음 섹션으로 이동하여 배운 내용을 적용하여 nf-core 호환 파이프라인을 작성하십시오.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>If you would like to learn how to compose workflows with subworkflows before moving on to the next part, check out the <a href="../../side_quests/workflows_of_workflows/">Workflows of Workflows</a> Side Quest.</p>
+<p>다음 파트로 이동하기 전에 subworkflow를 사용하여 workflow를 구성하는 방법을 배우고 싶다면 <a href="../../side_quests/workflows_of_workflows/">Workflows of Workflows</a> Side Quest를 확인하십시오.</p>
 </div><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
@@ -6071,6 +6108,9 @@ window.mkdocsQuizConfig = {
 
 
 
+  
+  
+
 
 
   
@@ -6101,7 +6141,7 @@ window.mkdocsQuizConfig = {
       <nav class="md-footer__inner md-grid" aria-label="하단/푸터" >
         
           
-          <a href="../00_orientation/" class="md-footer__link md-footer__link--prev" aria-label="이전: Getting started">
+          <a href="../00_orientation/" class="md-footer__link md-footer__link--prev" aria-label="이전: 시작하기">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -6111,20 +6151,20 @@ window.mkdocsQuizConfig = {
                 이전
               </span>
               <div class="md-ellipsis">
-                Getting started
+                시작하기
               </div>
             </div>
           </a>
         
         
           
-          <a href="../02_rewrite_hello/" class="md-footer__link md-footer__link--next" aria-label="다음: Part 2: Rewrite Hello for nf-core">
+          <a href="../02_rewrite_hello/" class="md-footer__link md-footer__link--next" aria-label="다음: 2부: nf-core용 Hello 재작성">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 다음
               </span>
               <div class="md-ellipsis">
-                Part 2: Rewrite Hello for nf-core
+                2부: nf-core용 Hello 재작성
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -6201,8 +6241,8 @@ window.mkdocsQuizConfig = {
   
 
 
-<h4>Cookie consent</h4>
-<p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our training materials better. Find out more on <a href="https://seqera.io/privacy-policy/#cookies" target="_blank" rel="noopener">how we use cookies</a>.</p>
+<h4>쿠키 동의</h4>
+<p>저희는 귀하의 반복 방문과 선호도를 인식하고, 문서의 효과성과 사용자가 원하는 정보를 찾고 있는지 측정하기 위해 쿠키를 사용합니다. 동의해 주시면 교육 자료를 개선하는 데 도움이 됩니다. <a href="https://seqera.io/privacy-policy/#cookies" target="_blank" rel="noopener">쿠키 사용 방법</a>에 대해 자세히 알아보세요.</p>
 <input class="md-toggle" type="checkbox" id="__settings" >
 <div class="md-consent__settings">
   <ul class="task-list">
@@ -6255,7 +6295,7 @@ window.mkdocsQuizConfig = {
     <label class="task-list-control">
       <input type="checkbox" name="posthog" checked>
       <span class="task-list-indicator"></span>
-      PostHog Analytics
+      PostHog 분석
     </label>
   </li>
 
@@ -6286,12 +6326,16 @@ window.mkdocsQuizConfig = {
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": {"alias": true, "provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": {"alias": true, "provider": "mike"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
-        <script src="../../../assets/javascripts/posthog.js"></script>
+        <script src="../../assets/javascripts/consent-sync.js"></script>
+      
+        <script src="../../assets/javascripts/posthog.js"></script>
+      
+        <script src="../../assets/javascripts/language-picker.js"></script>
       
     
   </body>

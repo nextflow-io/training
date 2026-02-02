@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://training.nextflow.io/0.dev/ko/hello_nextflow/04_hello_modules/">
+        <link rel="canonical" href="https://training.nextflow.io/ko/hello_nextflow/04_hello_modules/">
       
       
         <link rel="prev" href="../03_hello_workflow/">
@@ -18,33 +18,41 @@
       
       
         
-          <link rel="alternate" href="../../../hello_nextflow/04_hello_modules/" hreflang="en">
+          <link rel="alternate" href="/" hreflang="en">
         
-          <link rel="alternate" href="../../../pt/hello_nextflow/04_hello_modules/" hreflang="pt">
+          <link rel="alternate" href="/de/" hreflang="de">
         
-          <link rel="alternate" href="../../../es/hello_nextflow/04_hello_modules/" hreflang="es">
+          <link rel="alternate" href="/es/" hreflang="es">
         
-          <link rel="alternate" href="../../../fr/hello_nextflow/04_hello_modules/" hreflang="fr">
+          <link rel="alternate" href="/fr/" hreflang="fr">
         
-          <link rel="alternate" href="../../../it/hello_nextflow/04_hello_modules/" hreflang="it">
+          <link rel="alternate" href="/hi/" hreflang="hi">
         
-          <link rel="alternate" href="./" hreflang="ko">
+          <link rel="alternate" href="/it/" hreflang="it">
+        
+          <link rel="alternate" href="/ko/" hreflang="ko">
+        
+          <link rel="alternate" href="/pl/" hreflang="pl">
+        
+          <link rel="alternate" href="/pt/" hreflang="pt">
+        
+          <link rel="alternate" href="/tr/" hreflang="tr">
         
       
       
-      <link rel="icon" href="../../../assets/img/nextflow-icon.png">
+      <link rel="icon" href="../../assets/img/nextflow-icon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
     
     
       
-        <title>Part 4: Hello Modules - training.nextflow.io</title>
+        <title>파트 4: Hello Modules - training.nextflow.io</title>
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
   
@@ -108,11 +116,11 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/fonts.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/fonts.css">
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/extra.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/extra.css">
     
-    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
   
@@ -147,7 +155,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#part-4-hello-modules" class="md-skip">
+        <a href="#4-hello-modules" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -167,9 +175,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="상단/헤더">
-    <a href="../../" title="training.nextflow.io" class="md-header__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
+    <a href="../.." title="training.nextflow.io" class="md-header__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
       
-  <img src="../../../assets/img/nextflow_logo_dark.png" alt="logo">
+  <img src="../../assets/img/nextflow_logo_dark.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -186,7 +194,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Part 4: Hello Modules
+              파트 4: Hello Modules
             
           </span>
         </div>
@@ -233,38 +241,62 @@
       <ul class="md-select__list">
         
           <li class="md-select__item">
-            <a href="../../../hello_nextflow/04_hello_modules/" hreflang="en" class="md-select__link">
+            <a href="/" hreflang="en" class="md-select__link">
               English
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../pt/hello_nextflow/04_hello_modules/" hreflang="pt" class="md-select__link">
-              Português
+            <a href="/de/" hreflang="de" class="md-select__link">
+              deutsch
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../es/hello_nextflow/04_hello_modules/" hreflang="es" class="md-select__link">
-              Español
+            <a href="/es/" hreflang="es" class="md-select__link">
+              español
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../fr/hello_nextflow/04_hello_modules/" hreflang="fr" class="md-select__link">
-              Français
+            <a href="/fr/" hreflang="fr" class="md-select__link">
+              français
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../it/hello_nextflow/04_hello_modules/" hreflang="it" class="md-select__link">
-              Italiano
+            <a href="/hi/" hreflang="hi" class="md-select__link">
+              हिन्दी
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="./" hreflang="ko" class="md-select__link">
-              Korean
+            <a href="/it/" hreflang="it" class="md-select__link">
+              italiano
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/ko/" hreflang="ko" class="md-select__link">
+              한국어
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/pl/" hreflang="pl" class="md-select__link">
+              Polski
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/pt/" hreflang="pt" class="md-select__link">
+              português
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/tr/" hreflang="tr" class="md-select__link">
+              Türkçe
             </a>
           </li>
         
@@ -384,9 +416,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="네비게이션" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../" title="training.nextflow.io" class="md-nav__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
+    <a href="../.." title="training.nextflow.io" class="md-nav__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
       
-  <img src="../../../assets/img/nextflow_logo_dark.png" alt="logo">
+  <img src="../../assets/img/nextflow_logo_dark.png" alt="logo">
 
     </a>
     training.nextflow.io
@@ -413,14 +445,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../" class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Home
+    홈
   
 
     
@@ -522,7 +554,7 @@
   <span class="md-ellipsis">
     
   
-    Getting started
+    시작하기
   
 
     
@@ -550,7 +582,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run basic operations
+    파트 1: 기본 작업 실행
   
 
     
@@ -578,7 +610,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Run real pipelines
+    파트 2: 실제 pipeline 실행
   
 
     
@@ -606,7 +638,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Run configuration
+    파트 3: 실행 구성
   
 
     
@@ -634,7 +666,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    과정 요약
   
 
     
@@ -662,7 +694,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    피드백 설문조사
   
 
     
@@ -774,7 +806,7 @@
   <span class="md-ellipsis">
     
   
-    Getting started
+    시작하기
   
 
     
@@ -802,7 +834,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Hello World
+    파트 1: Hello World
   
 
     
@@ -830,7 +862,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Hello Channels
+    파트 2: Hello Channels
   
 
     
@@ -858,7 +890,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Hello Workflow
+    파트 3: Hello Workflow
   
 
     
@@ -895,7 +927,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Hello Modules
+    파트 4: Hello Modules
   
 
     
@@ -913,7 +945,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Hello Modules
+    파트 4: Hello Modules
   
 
     
@@ -933,40 +965,40 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#0-warmup-run-hello-modulesnf" class="md-nav__link">
+  <a href="#0-hello-modulesnf" class="md-nav__link">
     <span class="md-ellipsis">
       
-        0. Warmup: Run hello-modules.nf
+        0. 워밍업: hello-modules.nf 실행
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#1-create-a-directory-to-store-modules" class="md-nav__link">
+  <a href="#1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Create a directory to store modules
+        1. 모듈을 저장할 디렉토리 생성
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#2-create-a-module-for-sayhello" class="md-nav__link">
+  <a href="#2-sayhello" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Create a module for sayHello()
+        2. sayHello()용 모듈 생성
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. Create a module for sayHello()">
+    <nav class="md-nav" aria-label="2. sayHello()용 모듈 생성">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#21-create-a-file-stub-for-the-new-module" class="md-nav__link">
+  <a href="#21" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1. Create a file stub for the new module
+        2.1. 새 모듈에 대한 파일 스텁 생성
       
     </span>
   </a>
@@ -974,10 +1006,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#22-move-the-sayhello-process-code-to-the-module-file" class="md-nav__link">
+  <a href="#22-sayhello-process" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2. Move the sayHello process code to the module file
+        2.2. sayHello process 코드를 모듈 파일로 이동
       
     </span>
   </a>
@@ -985,10 +1017,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#23-add-an-import-declaration-before-the-workflow-block" class="md-nav__link">
+  <a href="#23-workflow-import" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.3. Add an import declaration before the workflow block
+        2.3. Workflow 블록 전에 import 선언 추가
       
     </span>
   </a>
@@ -996,10 +1028,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#24-run-the-workflow" class="md-nav__link">
+  <a href="#24-workflow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.4. Run the workflow
+        2.4. Workflow 실행
       
     </span>
   </a>
@@ -1007,10 +1039,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway" class="md-nav__link">
+  <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        핵심 내용
       
     </span>
   </a>
@@ -1018,10 +1050,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        다음 단계
       
     </span>
   </a>
@@ -1032,22 +1064,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#3-modularize-the-converttoupper-process" class="md-nav__link">
+  <a href="#3-converttoupper-process" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Modularize the convertToUpper() process
+        3. convertToUpper() process 모듈화
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. Modularize the convertToUpper() process">
+    <nav class="md-nav" aria-label="3. convertToUpper() process 모듈화">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#31-create-a-file-stub-for-the-new-module" class="md-nav__link">
+  <a href="#31" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1. Create a file stub for the new module
+        3.1. 새 모듈에 대한 파일 스텁 생성
       
     </span>
   </a>
@@ -1055,10 +1087,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#32-move-the-converttoupper-process-code-to-the-module-file" class="md-nav__link">
+  <a href="#32-converttoupper-process" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.2. Move the convertToUpper process code to the module file
+        3.2. convertToUpper process 코드를 모듈 파일로 이동
       
     </span>
   </a>
@@ -1066,10 +1098,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#33-add-an-import-declaration-before-the-params-block" class="md-nav__link">
+  <a href="#33-params-import" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.3. Add an import declaration before the params block
+        3.3. params 블록 전에 import 선언 추가
       
     </span>
   </a>
@@ -1077,10 +1109,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#34-run-the-workflow-again" class="md-nav__link">
+  <a href="#34-workflow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.4. Run the workflow again
+        3.4. Workflow 다시 실행
       
     </span>
   </a>
@@ -1091,22 +1123,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#4-modularize-the-collectgreetings-process" class="md-nav__link">
+  <a href="#4-collectgreetings-process" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Modularize the collectGreetings() process
+        4. collectGreetings() process 모듈화
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="4. Modularize the collectGreetings() process">
+    <nav class="md-nav" aria-label="4. collectGreetings() process 모듈화">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#41-create-a-file-stub-for-the-new-module" class="md-nav__link">
+  <a href="#41" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.1. Create a file stub for the new module
+        4.1. 새 모듈에 대한 파일 스텁 생성
       
     </span>
   </a>
@@ -1114,10 +1146,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#42-move-the-collectgreetings-process-code-to-the-module-file" class="md-nav__link">
+  <a href="#42-collectgreetings-process" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.2. Move the collectGreetings process code to the module file
+        4.2. collectGreetings process 코드를 모듈 파일로 이동
       
     </span>
   </a>
@@ -1125,10 +1157,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#43-add-an-import-declaration-before-the-params-block" class="md-nav__link">
+  <a href="#43-params-import" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.3. Add an import declaration before the params block
+        4.3. params 블록 전에 import 선언 추가
       
     </span>
   </a>
@@ -1136,10 +1168,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#44-run-the-workflow" class="md-nav__link">
+  <a href="#44-workflow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.4. Run the workflow
+        4.4. Workflow 실행
       
     </span>
   </a>
@@ -1147,10 +1179,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway_1" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        핵심 내용
       
     </span>
   </a>
@@ -1158,10 +1190,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next_1" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        다음 단계
       
     </span>
   </a>
@@ -1172,10 +1204,10 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#quiz" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Quiz
+        퀴즈
       
     </span>
   </a>
@@ -1390,7 +1422,7 @@
   <span class="md-ellipsis">
     
   
-    Part 5: Hello Containers
+    파트 5: Hello Containers
   
 
     
@@ -1418,7 +1450,7 @@
   <span class="md-ellipsis">
     
   
-    Part 6: Hello Config
+    파트 6: Hello Config
   
 
     
@@ -1446,7 +1478,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    과정 요약
   
 
     
@@ -1474,7 +1506,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    피드백 설문조사
   
 
     
@@ -1584,7 +1616,7 @@
   <span class="md-ellipsis">
     
   
-    Getting started
+    시작하기
   
 
     
@@ -1612,7 +1644,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run a demo pipeline
+    파트 1: 데모 파이프라인 실행하기
   
 
     
@@ -1640,7 +1672,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Rewrite Hello for nf-core
+    2부: nf-core용 Hello 재작성
   
 
     
@@ -1668,7 +1700,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Use an nf-core module
+    파트 3: nf-core 모듈 사용하기
   
 
     
@@ -1696,7 +1728,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Make an nf-core module
+    파트 4: nf-core 모듈 만들기
   
 
     
@@ -1724,7 +1756,7 @@
   <span class="md-ellipsis">
     
   
-    Part 5: Input validation
+    파트 5: 입력 검증
   
 
     
@@ -1752,7 +1784,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    교육 과정 요약
   
 
     
@@ -1780,7 +1812,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    피드백 설문조사
   
 
     
@@ -1826,7 +1858,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Science
+    과학을 위한 Nextflow
   
 
     
@@ -1842,7 +1874,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Nextflow for Science
+    과학을 위한 Nextflow
   
 
           </label>
@@ -1862,7 +1894,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Science
+    과학을 위한 Nextflow
   
 
     
@@ -1901,7 +1933,7 @@
   <span class="md-ellipsis">
     
   
-    Genomics
+    유전체학을 위한 Nextflow
   
 
     
@@ -1917,7 +1949,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Genomics
+    유전체학을 위한 Nextflow
   
 
           </label>
@@ -1937,7 +1969,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Genomics
+    유전체학을 위한 Nextflow
   
 
     
@@ -1965,7 +1997,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    오리엔테이션
   
 
     
@@ -1993,7 +2025,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Per-sample variant calling
+    파트 1: 샘플별 변이 호출
   
 
     
@@ -2021,7 +2053,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Joint calling on a cohort
+    파트 2: 코호트에 대한 조인트 콜링
   
 
     
@@ -2049,7 +2081,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Moving code into modules
+    파트 3: 코드를 모듈로 이동하기
   
 
     
@@ -2077,7 +2109,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Adding tests
+    파트 4: 테스트 추가하기
   
 
     
@@ -2105,7 +2137,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    피드백 설문조사
   
 
     
@@ -2133,7 +2165,7 @@
   <span class="md-ellipsis">
     
   
-    Next Steps
+    다음 단계
   
 
     
@@ -2180,7 +2212,7 @@
   <span class="md-ellipsis">
     
   
-    RNAseq
+    RNAseq을 위한 Nextflow
   
 
     
@@ -2196,7 +2228,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    RNAseq
+    RNAseq을 위한 Nextflow
   
 
           </label>
@@ -2216,7 +2248,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for RNAseq
+    RNAseq을 위한 Nextflow
   
 
     
@@ -2244,7 +2276,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    오리엔테이션
   
 
     
@@ -2272,7 +2304,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Method overview and manual testing
+    파트 1: 방법 개요 및 수동 테스트
   
 
     
@@ -2300,7 +2332,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Single-sample implementation
+    파트 2: 단일 샘플 구현
   
 
     
@@ -2328,7 +2360,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Multi-sample paired-end implementation
+    파트 3: 다중 샘플 paired-end 구현
   
 
     
@@ -2356,7 +2388,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    피드백 설문조사
   
 
     
@@ -2384,7 +2416,7 @@
   <span class="md-ellipsis">
     
   
-    Next Steps
+    다음 단계
   
 
     
@@ -2431,7 +2463,7 @@
   <span class="md-ellipsis">
     
   
-    Imaging
+    이미징을 위한 Nextflow 실행
   
 
     
@@ -2447,7 +2479,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Imaging
+    이미징을 위한 Nextflow 실행
   
 
           </label>
@@ -2467,7 +2499,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow run for Imaging
+    이미징을 위한 Nextflow 실행
   
 
     
@@ -2495,7 +2527,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    오리엔테이션
   
 
     
@@ -2523,7 +2555,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run basic operations
+    파트 1: 기본 작업 실행하기
   
 
     
@@ -2551,7 +2583,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Run nf-core/molkart
+    파트 2: nf-core/molkart 실행하기
   
 
     
@@ -2579,7 +2611,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Organizing inputs
+    파트 3: 입력 구성하기
   
 
     
@@ -2607,7 +2639,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Configuration
+    파트 4: 구성
   
 
     
@@ -2635,7 +2667,7 @@
   <span class="md-ellipsis">
     
   
-    Survey
+    설문조사
   
 
     
@@ -2663,7 +2695,7 @@
   <span class="md-ellipsis">
     
   
-    Next steps
+    다음 단계
   
 
     
@@ -2717,7 +2749,7 @@
   <span class="md-ellipsis">
     
   
-    Side Quests
+    사이드 퀘스트
   
 
     
@@ -2733,7 +2765,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Side Quests
+    사이드 퀘스트
   
 
           </label>
@@ -2753,7 +2785,7 @@
   <span class="md-ellipsis">
     
   
-    Side Quests
+    사이드 퀘스트
   
 
     
@@ -2781,7 +2813,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    오리엔테이션
   
 
     
@@ -2809,7 +2841,7 @@
   <span class="md-ellipsis">
     
   
-    Development Environment
+    개발 환경
   
 
     
@@ -2837,7 +2869,7 @@
   <span class="md-ellipsis">
     
   
-    Metadata and meta maps
+    메타데이터와 메타 맵
   
 
     
@@ -2865,7 +2897,7 @@
   <span class="md-ellipsis">
     
   
-    File input processing
+    파일 입력 처리
   
 
     
@@ -2893,7 +2925,7 @@
   <span class="md-ellipsis">
     
   
-    Splitting and Grouping
+    데이터 분할 및 그룹화
   
 
     
@@ -2921,7 +2953,7 @@
   <span class="md-ellipsis">
     
   
-    Workflows of Workflows
+    워크플로우의 워크플로우
   
 
     
@@ -2949,7 +2981,7 @@
   <span class="md-ellipsis">
     
   
-    Debugging Workflows
+    워크플로우 디버깅
   
 
     
@@ -2977,7 +3009,7 @@
   <span class="md-ellipsis">
     
   
-    Essential Nextflow Scripting Patterns
+    필수 Nextflow 스크립팅 패턴
   
 
     
@@ -3005,7 +3037,7 @@
   <span class="md-ellipsis">
     
   
-    Testing with nf-test
+    nf-test로 테스트하기
   
 
     
@@ -3051,7 +3083,7 @@
   <span class="md-ellipsis">
     
   
-    Training Collections
+    교육 컬렉션
   
 
     
@@ -3067,7 +3099,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Training Collections
+    교육 컬렉션
   
 
           </label>
@@ -3087,7 +3119,7 @@
   <span class="md-ellipsis">
     
   
-    Training Collections
+    교육 컬렉션
   
 
     
@@ -3115,7 +3147,7 @@
   <span class="md-ellipsis">
     
   
-    The Architect's Toolkit I
+    Architects toolkit 1
   
 
     
@@ -3197,7 +3229,7 @@
   <span class="md-ellipsis">
     
   
-    Getting help
+    도움말
   
 
     
@@ -3236,7 +3268,7 @@
   <span class="md-ellipsis">
     
   
-    Training environment
+    환경 옵션
   
 
     
@@ -3252,7 +3284,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Training environment
+    환경 옵션
   
 
           </label>
@@ -3272,7 +3304,7 @@
   <span class="md-ellipsis">
     
   
-    환경 설정
+    환경 옵션
   
 
     
@@ -3328,7 +3360,7 @@
   <span class="md-ellipsis">
     
   
-    Local Devcontainers
+    로컬 Devcontainers
   
 
     
@@ -3356,7 +3388,7 @@
   <span class="md-ellipsis">
     
   
-    로컬 설치
+    수동 설치
   
 
     
@@ -3392,7 +3424,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow versions
+    Nextflow 버전
   
 
     
@@ -3420,7 +3452,7 @@
   <span class="md-ellipsis">
     
   
-    The Hello pipeline
+    Hello pipeline
   
 
     
@@ -3462,40 +3494,40 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#0-warmup-run-hello-modulesnf" class="md-nav__link">
+  <a href="#0-hello-modulesnf" class="md-nav__link">
     <span class="md-ellipsis">
       
-        0. Warmup: Run hello-modules.nf
+        0. 워밍업: hello-modules.nf 실행
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#1-create-a-directory-to-store-modules" class="md-nav__link">
+  <a href="#1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Create a directory to store modules
+        1. 모듈을 저장할 디렉토리 생성
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#2-create-a-module-for-sayhello" class="md-nav__link">
+  <a href="#2-sayhello" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Create a module for sayHello()
+        2. sayHello()용 모듈 생성
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. Create a module for sayHello()">
+    <nav class="md-nav" aria-label="2. sayHello()용 모듈 생성">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#21-create-a-file-stub-for-the-new-module" class="md-nav__link">
+  <a href="#21" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1. Create a file stub for the new module
+        2.1. 새 모듈에 대한 파일 스텁 생성
       
     </span>
   </a>
@@ -3503,10 +3535,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#22-move-the-sayhello-process-code-to-the-module-file" class="md-nav__link">
+  <a href="#22-sayhello-process" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2. Move the sayHello process code to the module file
+        2.2. sayHello process 코드를 모듈 파일로 이동
       
     </span>
   </a>
@@ -3514,10 +3546,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#23-add-an-import-declaration-before-the-workflow-block" class="md-nav__link">
+  <a href="#23-workflow-import" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.3. Add an import declaration before the workflow block
+        2.3. Workflow 블록 전에 import 선언 추가
       
     </span>
   </a>
@@ -3525,10 +3557,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#24-run-the-workflow" class="md-nav__link">
+  <a href="#24-workflow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.4. Run the workflow
+        2.4. Workflow 실행
       
     </span>
   </a>
@@ -3536,10 +3568,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway" class="md-nav__link">
+  <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        핵심 내용
       
     </span>
   </a>
@@ -3547,10 +3579,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        다음 단계
       
     </span>
   </a>
@@ -3561,22 +3593,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#3-modularize-the-converttoupper-process" class="md-nav__link">
+  <a href="#3-converttoupper-process" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Modularize the convertToUpper() process
+        3. convertToUpper() process 모듈화
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. Modularize the convertToUpper() process">
+    <nav class="md-nav" aria-label="3. convertToUpper() process 모듈화">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#31-create-a-file-stub-for-the-new-module" class="md-nav__link">
+  <a href="#31" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1. Create a file stub for the new module
+        3.1. 새 모듈에 대한 파일 스텁 생성
       
     </span>
   </a>
@@ -3584,10 +3616,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#32-move-the-converttoupper-process-code-to-the-module-file" class="md-nav__link">
+  <a href="#32-converttoupper-process" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.2. Move the convertToUpper process code to the module file
+        3.2. convertToUpper process 코드를 모듈 파일로 이동
       
     </span>
   </a>
@@ -3595,10 +3627,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#33-add-an-import-declaration-before-the-params-block" class="md-nav__link">
+  <a href="#33-params-import" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.3. Add an import declaration before the params block
+        3.3. params 블록 전에 import 선언 추가
       
     </span>
   </a>
@@ -3606,10 +3638,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#34-run-the-workflow-again" class="md-nav__link">
+  <a href="#34-workflow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.4. Run the workflow again
+        3.4. Workflow 다시 실행
       
     </span>
   </a>
@@ -3620,22 +3652,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#4-modularize-the-collectgreetings-process" class="md-nav__link">
+  <a href="#4-collectgreetings-process" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Modularize the collectGreetings() process
+        4. collectGreetings() process 모듈화
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="4. Modularize the collectGreetings() process">
+    <nav class="md-nav" aria-label="4. collectGreetings() process 모듈화">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#41-create-a-file-stub-for-the-new-module" class="md-nav__link">
+  <a href="#41" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.1. Create a file stub for the new module
+        4.1. 새 모듈에 대한 파일 스텁 생성
       
     </span>
   </a>
@@ -3643,10 +3675,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#42-move-the-collectgreetings-process-code-to-the-module-file" class="md-nav__link">
+  <a href="#42-collectgreetings-process" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.2. Move the collectGreetings process code to the module file
+        4.2. collectGreetings process 코드를 모듈 파일로 이동
       
     </span>
   </a>
@@ -3654,10 +3686,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#43-add-an-import-declaration-before-the-params-block" class="md-nav__link">
+  <a href="#43-params-import" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.3. Add an import declaration before the params block
+        4.3. params 블록 전에 import 선언 추가
       
     </span>
   </a>
@@ -3665,10 +3697,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#44-run-the-workflow" class="md-nav__link">
+  <a href="#44-workflow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.4. Run the workflow
+        4.4. Workflow 실행
       
     </span>
   </a>
@@ -3676,10 +3708,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway_1" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        핵심 내용
       
     </span>
   </a>
@@ -3687,10 +3719,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next_1" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        다음 단계
       
     </span>
   </a>
@@ -3701,10 +3733,10 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#quiz" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Quiz
+        퀴즈
       
     </span>
   </a>
@@ -3948,51 +3980,58 @@
                 
                   
 
+ 
+<a
+  href="https://github.com/nextflow-io/training/edit/master/docs/hello_nextflow/04_hello_modules.md"
+  title="이 페이지를 편집"
+  class="md-content__button md-icon"
+  rel="edit"
+>
+   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+</a>
+   
+<a
+  href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md"
+  title="Improve translation"
+  class="md-content__button md-icon"
+>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 1H3c-1.1 0-2 .9-2 2v12l3-3h5v-1c0-2.2 1.79-4 4-4V3c0-1.1-.9-2-2-2m0 3H9.5c-.34 1.19-.96 2.3-1.82 3.26l-.02.02 1.26 1.25-.37 1.01L7 8l-2.5 2.5-.69-.73 2.53-2.49A8.6 8.6 0 0 1 4.86 5h.99c.31.6.69 1.17 1.15 1.68A7.7 7.7 0 0 0 8.57 4H3V3h3.5V2h1v1H11zm10 5h-8c-1.1 0-2 .9-2 2v7c0 1.1.9 2 2 2h7l3 3V11c0-1.1-.9-2-2-2m-1.37 10-.85-2.25h-3.56L14.38 19h-1.5l3.37-9h1.5l3.38 9zM17 12l1.22 3.25h-2.43z"/></svg>
+</a>
+ 
 
-  
-    <a href="https://github.com/nextflow-io/training/edit/master/docs/hello_nextflow/04_hello_modules.md" title="이 페이지를 편집" class="md-content__button md-icon" rel="edit">
-      
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
-    </a>
-  
-  
-
-
-<h1 id="part-4-hello-modules">Part 4: Hello Modules<a class="headerlink" href="#part-4-hello-modules" title="Permanent link">&para;</a></h1>
-<figure>
+<h1 id="4-hello-modules">파트 4: Hello Modules<a class="headerlink" href="#4-hello-modules" title="Permanent link">&para;</a></h1>
+<p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> AI 지원 번역 - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">자세히 알아보기 및 개선 제안</a></span></p>
+<!--
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/Xxp_menS0E8?si=0AWnXB7xqHAzJdJV&amp;list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
-<figcaption>
-<p><span class="twemoji youtube"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M549.7 124.1c-6.2-23.7-24.8-42.3-48.3-48.6C458.9 64 288.1 64 288.1 64S117.3 64 74.7 75.5c-23.5 6.3-42 24.9-48.3 48.6C15 167 15 256.4 15 256.4s0 89.4 11.4 132.3c6.3 23.6 24.8 41.5 48.3 47.8C117.3 448 288.1 448 288.1 448s170.8 0 213.4-11.5c23.5-6.3 42-24.2 48.3-47.8 11.4-42.9 11.4-132.3 11.4-132.3s0-89.4-11.4-132.3zM232.2 337.6V175.2l142.7 81.2z"/></svg></span> See <a href="https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik">the whole playlist</a> on the Nextflow YouTube channel.</p>
-<p><img alt="📗" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f4d7.svg" title=":green_book:" /> The video transcript is available <a href="../transcripts/04_hello_modules/">here</a>.</p>
-</figcaption>
-</figure>
-<p>This section covers how to organize your workflow code to make development and maintenance of your pipeline more efficient and sustainable.
-Specifically, we are going to demonstrate how to use <strong>modules</strong>.</p>
-<p>In Nextflow, a <strong>module</strong> is a single process definition that is encapsulated by itself in a standalone code file.
-To use a module in a workflow, you just add a single-line import statement to your workflow code file; then you can integrate the process into the workflow the same way you normally would.
-That makes it possible to reuse process definitions in multiple workflows without producing multiple copies of the code.</p>
-<p>When we started developing our workflow, we wrote everything in one single code file.
-Now we're going to move the processes out into individual modules.</p>
+/// caption
+:fontawesome-brands-youtube:{ .youtube } Nextflow YouTube 채널에서 [전체 재생목록](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik)을 확인하십시오.
+
+:green_book: 비디오 스크립트는 [여기](./transcripts/04_hello_modules.md)에서 확인하실 수 있습니다.
+///
+-->
+
+<p>이 섹션에서는 파이프라인의 개발 및 유지보수를 더 효율적이고 지속 가능하게 만들기 위해 workflow 코드를 구성하는 방법을 다룹니다.
+구체적으로, <strong>모듈</strong>을 사용하는 방법을 시연할 것입니다.</p>
+<p>Nextflow에서 <strong>모듈</strong>은 독립적인 코드 파일에 캡슐화된 단일 process 정의입니다.
+Workflow에서 모듈을 사용하려면 workflow 코드 파일에 한 줄의 import 문만 추가하면 됩니다; 그런 다음 일반적으로 하는 것과 같은 방식으로 process를 workflow에 통합할 수 있습니다.
+이렇게 하면 코드의 여러 복사본을 생성하지 않고도 여러 workflow에서 process 정의를 재사용할 수 있습니다.</p>
+<p>Workflow 개발을 시작했을 때, 우리는 모든 것을 하나의 단일 코드 파일에 작성했습니다.
+이제 process를 개별 모듈로 이동할 것입니다.</p>
 <figure class="excalidraw">
-<?xml version="1.0" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1380.2582667720044 582.8835588489733" width="1380.2582667720044" height="582.8835588489733"><!-- svg-source:excalidraw --><metadata></metadata><defs><style class="style-fonts">
-      @font-face { font-family: Excalifont; src: url(data:font/woff2;base64,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); }
-      @font-face { font-family: Comic Shanns; src: url(data:font/woff2;base64,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); }</style></defs><rect x="0" y="0" width="1380.2582667720044" height="582.8835588489733" fill="#ffffff"></rect><g stroke-linecap="round" transform="translate(26.987968102271225 113.36467738789543) rotate(0 178.53793120120872 229.75944073053893)"><path d="M0 0 C105.55 0.75, 212.69 0.11, 357.08 0 M0 0 C73.14 -1.49, 146.67 -1.14, 357.08 0 M357.08 0 C354.75 172.15, 354.7 344.66, 357.08 459.52 M357.08 0 C355.74 178.81, 356.05 358.4, 357.08 459.52 M357.08 459.52 C221.16 461.93, 86.87 460.66, 0 459.52 M357.08 459.52 C219.04 460.66, 81.01 461.47, 0 459.52 M0 459.52 C1.8 306.86, 1.97 153.38, 0 0 M0 459.52 C-0.73 348.96, -0.59 238.27, 0 0" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g><g stroke-linecap="round" transform="translate(842.6274007008224 345.31724379782304) rotate(0 67.14563183509608 73.07261010898951)"><path d="M1.95 1.83 L134.01 -0.28 L135.05 147.75 L-0.85 147.94" stroke="none" stroke-width="0" fill="#ffec99"></path><path d="M0 0 C43.29 -0.39, 83.64 0.18, 134.29 0 M0 0 C45.67 0.8, 93.45 0.02, 134.29 0 M134.29 0 C133.21 54.67, 135.67 110.87, 134.29 146.15 M134.29 0 C133.14 56.84, 134.01 111.43, 134.29 146.15 M134.29 146.15 C84.5 145.61, 33.57 148.18, 0 146.15 M134.29 146.15 C85.5 146.13, 36.49 144.61, 0 146.15 M0 146.15 C0.4 105.06, -1.34 63.91, 0 0 M0 146.15 C0.14 114.68, -1.3 80.44, 0 0" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g><g stroke-linecap="round" transform="translate(813.1130580420067 319.1112935314435) rotate(0 67.14563183509608 73.07261010898951)"><path d="M-0.28 -0.28 L135.05 1.61 L133.44 147.94 L1.64 147.77" stroke="none" stroke-width="0" fill="#ffec99"></path><path d="M0 0 C50.69 0.85, 106.04 -1.86, 134.29 0 M0 0 C31.28 -0.72, 61.87 -0.04, 134.29 0 M134.29 0 C135.59 35.6, 135.48 71.57, 134.29 146.15 M134.29 0 C134.98 35.83, 135 73.13, 134.29 146.15 M134.29 146.15 C89.86 146.84, 43.26 145.66, 0 146.15 M134.29 146.15 C101.72 146.32, 68.32 147.22, 0 146.15 M0 146.15 C-1.59 95.04, -1.97 42.95, 0 0 M0 146.15 C-1.73 92.24, 0.07 40.91, 0 0" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g><g stroke-linecap="round" transform="translate(781.8105761751376 291.1172040570053) rotate(0 67.14563183509608 73.07261010898951)"><path d="M0.76 1.61 L133.44 1.8 L135.93 147.77 L-0.78 145.99" stroke="none" stroke-width="0" fill="#ffec99"></path><path d="M0 0 C46.8 -2.24, 90.34 -2.31, 134.29 0 M0 0 C38.71 1.01, 75.26 0.95, 134.29 0 M134.29 0 C137.29 33.4, 134.62 69.62, 134.29 146.15 M134.29 0 C136.27 53.66, 135.89 108.59, 134.29 146.15 M134.29 146.15 C102.84 147.39, 67.68 147.68, 0 146.15 M134.29 146.15 C84.15 145.19, 34.89 145.36, 0 146.15 M0 146.15 C-0.7 99.75, 2.12 53.27, 0 0 M0 146.15 C2.18 88.92, 1.06 29.73, 0 0" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g><g transform="translate(10 10) rotate(0 199.79659634928612 32.934970722815734)"><text x="0" y="46.42513473088107" font-family="Excalifont, Xiaolai, sans-serif, Segoe UI Emoji" font-size="52.69595315650518px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">hello-modules.nf</text></g><g transform="translate(1027.2831684882658 354.52707552737) rotate(0 171.4875491418693 70.57493726317658)"><text x="0" y="33.160810522057915" font-family="Excalifont, Xiaolai, sans-serif, Segoe UI Emoji" font-size="37.63996654036085px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">sayHello.nf</text><text x="0" y="80.21076869750898" font-family="Excalifont, Xiaolai, sans-serif, Segoe UI Emoji" font-size="37.63996654036085px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">convertToUpper.nf</text><text x="0" y="127.26072687296005" font-family="Excalifont, Xiaolai, sans-serif, Segoe UI Emoji" font-size="37.63996654036085px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">collectGreetings.nf</text></g><g stroke-linecap="round"><g transform="translate(514.0448956626997 336.84695845776196) rotate(0 133.35212897822385 -0.4361594216201041)"><path d="M0 0 C95.39 -0.9, 192.45 -1.4, 266.7 0" stroke="#1e1e1e" stroke-width="4.5" fill="none" stroke-dasharray="8 12"></path></g></g><mask></mask><g transform="translate(552.3016550299799 278.28106331404973) rotate(0 72.45693559019446 23.524979087725526)"><text x="0" y="32.93497072281575" font-family="Comic Shanns, monospace, Segoe UI Emoji" font-size="37.63996654036085px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">include</text></g><g transform="translate(776.7027082266886 189.5289213263914) rotate(0 112.82197459826875 32.93497072281574)"><text x="0" y="46.42513473088107" font-family="Excalifont, Xiaolai, sans-serif, Segoe UI Emoji" font-size="52.69595315650519px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">modules/</text></g><g stroke-linecap="round" transform="translate(72.4327172687872 164.72366001116058) rotate(0 134.49661576075187 41.830078125)"><path d="M20.92 0 C91.6 4.47, 160.67 3.36, 248.08 0 C265.57 0.53, 266.52 3.54, 268.99 20.92 C267.18 29.58, 270.02 41.51, 268.99 62.75 C265.43 79.82, 259.1 85, 248.08 83.66 C171.34 81.45, 92.07 83.1, 20.92 83.66 C4.34 87.02, 3.46 74.34, 0 62.75 C0.83 49.03, -2.39 43.65, 0 20.92 C-0.68 7.75, 3.92 -0.42, 20.92 0" stroke="none" stroke-width="0" fill="#ffec99"></path><path d="M20.92 0 C93.44 3.12, 166.69 3.2, 248.08 0 M248.08 0 C260.37 0.77, 268.18 5.88, 268.99 20.92 M268.99 20.92 C267.94 30.19, 267.57 44.18, 268.99 62.75 M268.99 62.75 C270.49 75.64, 261.78 83.01, 248.08 83.66 M248.08 83.66 C165.86 83.66, 83.49 85.17, 20.92 83.66 M20.92 83.66 C5.38 84.65, 1.99 78.15, 0 62.75 M0 62.75 C-0.79 52.54, -0.7 39.75, 0 20.92 M0 20.92 C-1.35 7.79, 5.95 -0.96, 20.92 0" stroke="#1e1e1e" stroke-width="2.5" fill="none" stroke-dasharray="8 10"></path></g><g transform="translate(153.60336714819096 189.05373813616058) rotate(0 53.325965881347656 17.5)"><text x="53.325965881347656" y="24.668" font-family="Excalifont, Xiaolai, sans-serif, Segoe UI Emoji" font-size="28px" fill="#1e1e1e" text-anchor="middle" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">sayHello</text></g><g stroke-linecap="round" transform="translate(73.02355655749489 299.18656965070517) rotate(0 137.62803563971693 41.830078125)"><path d="M20.92 0 C109.64 -0.67, 190.27 -4.01, 254.34 0 C266.18 0.14, 273.92 5.13, 275.26 20.92 C271.9 34.92, 272.54 44, 275.26 62.75 C276.69 75.45, 266.51 84.21, 254.34 83.66 C185.79 87.84, 124.61 83.02, 20.92 83.66 C5.65 86.1, -0.71 78.03, 0 62.75 C-0.28 54.12, -2.66 43.52, 0 20.92 C1.56 9.61, 10.29 0.04, 20.92 0" stroke="none" stroke-width="0" fill="#ffec99"></path><path d="M20.92 0 C107.8 -0.98, 196.79 -2.55, 254.34 0 M254.34 0 C267.44 0.13, 273.29 5.89, 275.26 20.92 M275.26 20.92 C276.45 29.26, 274.71 39.05, 275.26 62.75 M275.26 62.75 C276.52 78.03, 268.56 84.06, 254.34 83.66 M254.34 83.66 C186.67 85.93, 123.36 86.33, 20.92 83.66 M20.92 83.66 C6.12 83.91, 0.79 75.96, 0 62.75 M0 62.75 C-1.22 49.81, -0.89 34.28, 0 20.92 M0 20.92 C0.2 5.17, 5.6 0.14, 20.92 0" stroke="#1e1e1e" stroke-width="2.5" fill="none" stroke-dasharray="8 10"></path></g><g transform="translate(101.35364145258336 323.51664777570517) rotate(0 109.2979507446289 17.5)"><text x="109.2979507446289" y="24.668" font-family="Excalifont, Xiaolai, sans-serif, Segoe UI Emoji" font-size="28px" fill="#1e1e1e" text-anchor="middle" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">convertToUpper</text></g><g stroke-linecap="round" transform="translate(71.89588135546273 426.0426076902281) rotate(0 137.05285242018954 41.830078125)"><path d="M20.92 0 C92.21 3.49, 165.93 1.81, 253.19 0 C265.69 1, 274.48 3.41, 274.11 20.92 C274.93 35.87, 271.72 53.84, 274.11 62.75 C273.53 74.82, 268.5 81.03, 253.19 83.66 C160.7 83.42, 69.85 82.49, 20.92 83.66 C4.26 81.78, 2.92 76.01, 0 62.75 C2.2 51.93, 3.95 35.86, 0 20.92 C-2.13 3.68, 4.84 -2.61, 20.92 0" stroke="none" stroke-width="0" fill="#ffec99"></path><path d="M20.92 0 C98.84 1.18, 176.53 0.15, 253.19 0 M253.19 0 C265.62 -1.45, 275.8 8.46, 274.11 20.92 M274.11 20.92 C275.32 32.61, 274.33 42.03, 274.11 62.75 M274.11 62.75 C273.79 77.32, 268.59 82.07, 253.19 83.66 M253.19 83.66 C171.3 85.31, 91.51 84.48, 20.92 83.66 M20.92 83.66 C7.55 83.01, -1.44 75.34, 0 62.75 M0 62.75 C0.42 46.69, -1.16 34.38, 0 20.92 M0 20.92 C1.34 6.2, 7.6 1.97, 20.92 0" stroke="#1e1e1e" stroke-width="2.5" fill="none" stroke-dasharray="8 10"></path></g><g transform="translate(99.53878351930416 450.3726858152281) rotate(0 109.40995025634766 17.5)"><text x="109.40995025634766" y="24.668" font-family="Excalifont, Xiaolai, sans-serif, Segoe UI Emoji" font-size="28px" fill="#1e1e1e" text-anchor="middle" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">collectGreetings</text></g><g stroke-linecap="round"><g transform="translate(341.85415863975595 207.4838003241895) rotate(0 84.90321641884157 64.89228004093751)"><path d="M0 0 C62.19 48.44, 125.89 95.93, 169.81 129.78" stroke="#1e1e1e" stroke-width="4.5" fill="none" stroke-dasharray="8 12"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(508.95315815078266 336.56742091572295) rotate(0 -80.55273254017993 3.063181553935543)"><path d="M0 0 C-56.84 1.04, -109.22 5.48, -161.11 6.13" stroke="#1e1e1e" stroke-width="4.5" fill="none" stroke-dasharray="8 12"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(512.2659228169769 336.7580087989348) rotate(0 -83.44389264909387 66.56178656767824)"><path d="M0 0 C-51.36 41.7, -104.73 83.81, -166.89 133.12" stroke="#1e1e1e" stroke-width="4.5" fill="none" stroke-dasharray="8 12"></path></g></g><mask></mask></svg>
 </figure>
 
-<p>This will make our code more shareable, flexible and maintainable.</p>
+<p>이렇게 하면 코드가 더 공유 가능하고, 유연하며, 유지보수하기 쉬워집니다.</p>
 <details class="info">
-<summary>How to begin from this section</summary>
-<p>This section of the course assumes you have completed Parts 1-3 of the <a href="../">Hello Nextflow</a> course, but if you are comfortable with the basics covered in those sections, you can start from here without doing anything special.</p>
+<summary>이 섹션부터 시작하는 방법</summary>
+<p>이 섹션은 <a href="../">Hello Nextflow</a> 과정의 파트 1-3을 완료했다고 가정하지만, 해당 섹션에서 다룬 기본 사항에 익숙하다면 특별한 준비 없이 여기서 시작할 수 있습니다.</p>
 </details>
 <hr />
-<h2 id="0-warmup-run-hello-modulesnf">0. Warmup: Run <code>hello-modules.nf</code><a class="headerlink" href="#0-warmup-run-hello-modulesnf" title="Permanent link">&para;</a></h2>
-<p>We're going to use the workflow script <code>hello-modules.nf</code> as a starting point.
-It is equivalent to the script produced by working through Part 3 of this training course, except we've changed the output destinations:</p>
+<h2 id="0-hello-modulesnf">0. 워밍업: <code>hello-modules.nf</code> 실행<a class="headerlink" href="#0-hello-modulesnf" title="Permanent link">&para;</a></h2>
+<p>시작점으로 workflow 스크립트 <code>hello-modules.nf</code>를 사용할 것입니다.
+이 스크립트는 이 교육 과정의 파트 3을 완료하여 생성된 스크립트와 동일하지만, 출력 대상을 변경했습니다:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-modules.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-37">37</a></span>
 <span class="normal"><a href="#__codelineno-0-38">38</a></span>
 <span class="normal"><a href="#__codelineno-0-39">39</a></span>
@@ -4029,11 +4068,11 @@ It is equivalent to the script produced by working through Part 3 of this traini
 <a id="__codelineno-0-53" name="__codelineno-0-53"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-0-54" name="__codelineno-0-54"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>Just to make sure everything is working, run the script once before making any changes:</p>
+<p>변경을 시작하기 전에 모든 것이 제대로 작동하는지 확인하기 위해 스크립트를 한 번 실행하십시오:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-modules.nf
 </code></pre></div>
 <details class="success">
-<summary>Command output</summary>
+<summary>명령 출력</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="go">Launching `hello-modules.nf` [hopeful_avogadro] DSL2 - revision: b09af1237d</span>
@@ -4044,9 +4083,9 @@ It is equivalent to the script produced by working through Part 3 of this traini
 <a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="go">[af/479117] collectGreetings   [100%] 1 of 1 ✔</span>
 </code></pre></div>
 </details>
-<p>As previously, you will find the output files in the directory specified in the <code>output</code> block (here, <code>results/hello_modules/</code>).</p>
+<p>이전과 마찬가지로 <code>output</code> 블록에 지정된 디렉토리(여기서는 <code>results/hello_modules/</code>)에서 출력 파일을 찾을 수 있습니다.</p>
 <details class="abstract">
-<summary>Directory contents</summary>
+<summary>디렉토리 내용</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="go">results/hello_modules/</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="go">├── Bonjour-output.txt</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="go">├── COLLECTED-batch-output.txt</span>
@@ -4058,30 +4097,30 @@ It is equivalent to the script produced by working through Part 3 of this traini
 <a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="go">└── UPPER-Holà-output.txt</span>
 </code></pre></div>
 </details>
-<p>If that worked for you, you're ready to learn how to modularize your workflow code.</p>
+<p>이것이 정상적으로 작동했다면 workflow 코드를 모듈화하는 방법을 배울 준비가 되었습니다.</p>
 <hr />
-<h2 id="1-create-a-directory-to-store-modules">1. Create a directory to store modules<a class="headerlink" href="#1-create-a-directory-to-store-modules" title="Permanent link">&para;</a></h2>
-<p>It is best practice to store your modules in a specific directory.
-You can call that directory anything you want, but the convention is to call it <code>modules/</code>.</p>
+<h2 id="1">1. 모듈을 저장할 디렉토리 생성<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<p>모듈을 특정 디렉토리에 저장하는 것이 모범 사례입니다.
+해당 디렉토리의 이름은 원하는 대로 지을 수 있지만, 관례상 <code>modules/</code>라고 부릅니다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>mkdir<span class="w"> </span>modules
 </code></pre></div>
 <div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>Here we are showing you how to use <strong>local modules</strong>, meaning modules stored locally in the same repository as the rest of the workflow code, in contrast to remote modules, which are stored in other (remote) repositories.
-For more information about <strong>remote modules</strong>, see the <a href="https://www.nextflow.io/docs/latest/module.html">documentation</a>.</p>
+<p class="admonition-title">팁</p>
+<p>여기서는 <strong>로컬 모듈</strong>을 사용하는 방법을 보여드리고 있습니다. 이는 workflow 코드의 나머지 부분과 동일한 저장소에 로컬로 저장된 모듈을 의미하며, 다른 (원격) 저장소에 저장된 원격 모듈과 대조됩니다.
+<strong>원격 모듈</strong>에 대한 자세한 내용은 <a href="https://www.nextflow.io/docs/latest/module.html">문서</a>를 참조하십시오.</p>
 </div>
 <hr />
-<h2 id="2-create-a-module-for-sayhello">2. Create a module for <code>sayHello()</code><a class="headerlink" href="#2-create-a-module-for-sayhello" title="Permanent link">&para;</a></h2>
-<p>In its simplest form, turning an existing process into a module is little more than a copy-paste operation.
-We're going to create a file stub for the module, copy the relevant code over then delete it from the main workflow file.</p>
-<p>Then all we'll need to do is add an import statement so that Nextflow will know to pull in the relevant code at runtime.</p>
-<h3 id="21-create-a-file-stub-for-the-new-module">2.1. Create a file stub for the new module<a class="headerlink" href="#21-create-a-file-stub-for-the-new-module" title="Permanent link">&para;</a></h3>
-<p>Let's create an empty file for the module called <code>sayHello.nf</code>.</p>
+<h2 id="2-sayhello">2. <code>sayHello()</code>용 모듈 생성<a class="headerlink" href="#2-sayhello" title="Permanent link">&para;</a></h2>
+<p>가장 간단한 형태에서, 기존 process를 모듈로 전환하는 것은 복사-붙여넣기 작업에 불과합니다.
+모듈에 대한 파일 스텁을 생성하고, 관련 코드를 복사한 다음 메인 workflow 파일에서 삭제할 것입니다.</p>
+<p>그런 다음 import 문만 추가하면 Nextflow가 런타임에 관련 코드를 가져올 것입니다.</p>
+<h3 id="21">2.1. 새 모듈에 대한 파일 스텁 생성<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
+<p><code>sayHello.nf</code>라는 모듈에 대한 빈 파일을 생성합시다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>touch<span class="w"> </span>modules/sayHello.nf
 </code></pre></div>
-<p>This gives us a place to put the process code.</p>
-<h3 id="22-move-the-sayhello-process-code-to-the-module-file">2.2. Move the <code>sayHello</code> process code to the module file<a class="headerlink" href="#22-move-the-sayhello-process-code-to-the-module-file" title="Permanent link">&para;</a></h3>
-<p>Copy the whole process definition over from the workflow file to the module file, making sure to copy over the <code>#!/usr/bin/env nextflow</code> shebang too.</p>
+<p>이것은 process 코드를 넣을 장소를 제공합니다.</p>
+<h3 id="22-sayhello-process">2.2. <code>sayHello</code> process 코드를 모듈 파일로 이동<a class="headerlink" href="#22-sayhello-process" title="Permanent link">&para;</a></h3>
+<p>전체 process 정의를 workflow 파일에서 모듈 파일로 복사하고, <code>#!/usr/bin/env nextflow</code> shebang도 함께 복사해야 합니다.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/sayHello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-6-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-6-3"> 3</a></span>
@@ -4102,7 +4141,7 @@ We're going to create a file stub for the module, copy the relevant code over th
 <span class="normal"><a href="#__codelineno-6-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2"></a>
 <a id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="cm">/*</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4"></a><span class="cm"> * Use echo to print &#39;Hello World!&#39; to a file</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4"></a><span class="cm"> * echo를 사용하여 &#39;Hello World!&#39;를 파일에 출력</span>
 <a id="__codelineno-6-5" name="__codelineno-6-5"></a><span class="cm"> */</span>
 <a id="__codelineno-6-6" name="__codelineno-6-6"></a><span class="n">process</span><span class="w"> </span><span class="n">sayHello</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-6-7" name="__codelineno-6-7"></a>
@@ -4118,13 +4157,13 @@ We're going to create a file stub for the module, copy the relevant code over th
 <a id="__codelineno-6-17" name="__codelineno-6-17"></a><span class="s2">    &quot;&quot;&quot;</span>
 <a id="__codelineno-6-18" name="__codelineno-6-18"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>Once that is done, delete the process definition from the workflow file, but make sure to leave the shebang in place.</p>
-<h3 id="23-add-an-import-declaration-before-the-workflow-block">2.3. Add an import declaration before the workflow block<a class="headerlink" href="#23-add-an-import-declaration-before-the-workflow-block" title="Permanent link">&para;</a></h3>
-<p>The syntax for importing a local module is fairly straightforward:</p>
-<div class="highlight"><span class="filename">Syntax: Import declaration</span><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="o">&lt;</span><span class="n">MODULE_NAME</span><span class="o">&gt;</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;&lt;path_to_module&gt;&#39;</span>
+<p>완료되면 workflow 파일에서 process 정의를 삭제하되, shebang은 그대로 두십시오.</p>
+<h3 id="23-workflow-import">2.3. Workflow 블록 전에 import 선언 추가<a class="headerlink" href="#23-workflow-import" title="Permanent link">&para;</a></h3>
+<p>로컬 모듈을 가져오는 구문은 매우 간단합니다:</p>
+<div class="highlight"><span class="filename">구문: Import 선언</span><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="o">&lt;</span><span class="n">MODULE_NAME</span><span class="o">&gt;</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;&lt;path_to_module&gt;&#39;</span>
 </code></pre></div>
-<p>Let's insert that above the <code>params</code> block and fill it out appropriately.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">After</label><label for="__tabbed_1_2">Before</label></div>
+<p><code>params</code> 블록 위에 이것을 삽입하고 적절하게 채웁시다.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">수정 후</label><label for="__tabbed_1_2">수정 전</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-modules.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-44">44</a></span>
@@ -4136,11 +4175,11 @@ We're going to create a file stub for the module, copy the relevant code over th
 <span class="normal"><a href="#__codelineno-8-50">50</a></span>
 <span class="normal"><a href="#__codelineno-8-51">51</a></span>
 <span class="normal"><a href="#__codelineno-8-52">52</a></span>
-<span class="normal"><a href="#__codelineno-8-53">53</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-44" name="__codelineno-8-44"></a><span class="hll"><span class="c1">// Include modules</span>
+<span class="normal"><a href="#__codelineno-8-53">53</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-44" name="__codelineno-8-44"></a><span class="hll"><span class="c1">// 모듈 포함</span>
 </span><a id="__codelineno-8-45" name="__codelineno-8-45"></a><span class="hll"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">sayHello</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/sayHello.nf&#39;</span>
 </span><a id="__codelineno-8-46" name="__codelineno-8-46"></a>
 <a id="__codelineno-8-47" name="__codelineno-8-47"></a><span class="cm">/*</span>
-<a id="__codelineno-8-48" name="__codelineno-8-48"></a><span class="cm">* Pipeline parameters</span>
+<a id="__codelineno-8-48" name="__codelineno-8-48"></a><span class="cm">* 파이프라인 매개변수</span>
 <a id="__codelineno-8-49" name="__codelineno-8-49"></a><span class="cm">*/</span>
 <a id="__codelineno-8-50" name="__codelineno-8-50"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-8-51" name="__codelineno-8-51"></a><span class="w">    </span><span class="nl">greeting:</span><span class="w"> </span><span class="n">Path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;data/greetings.csv&#39;</span>
@@ -4156,7 +4195,7 @@ We're going to create a file stub for the module, copy the relevant code over th
 <span class="normal"><a href="#__codelineno-9-48">48</a></span>
 <span class="normal"><a href="#__codelineno-9-49">49</a></span>
 <span class="normal"><a href="#__codelineno-9-50">50</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-44" name="__codelineno-9-44"></a><span class="cm">/*</span>
-<a id="__codelineno-9-45" name="__codelineno-9-45"></a><span class="cm">* Pipeline parameters</span>
+<a id="__codelineno-9-45" name="__codelineno-9-45"></a><span class="cm">* 파이프라인 매개변수</span>
 <a id="__codelineno-9-46" name="__codelineno-9-46"></a><span class="cm">*/</span>
 <a id="__codelineno-9-47" name="__codelineno-9-47"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-9-48" name="__codelineno-9-48"></a><span class="w">    </span><span class="nl">greeting:</span><span class="w"> </span><span class="n">Path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;data/greetings.csv&#39;</span>
@@ -4166,13 +4205,13 @@ We're going to create a file stub for the module, copy the relevant code over th
 </div>
 </div>
 </div>
-<p>You see we've filled in the module name, <code>sayHello</code>, and the path to the file containing the module code, <code>./modules/sayHello.nf</code>.</p>
-<h3 id="24-run-the-workflow">2.4. Run the workflow<a class="headerlink" href="#24-run-the-workflow" title="Permanent link">&para;</a></h3>
-<p>We're running the workflow with essentially the same code and inputs as before, so let's run with the <code>-resume</code> flag and see what happens.</p>
+<p>모듈 이름인 <code>sayHello</code>와 모듈 코드가 포함된 파일 경로인 <code>./modules/sayHello.nf</code>를 채웠습니다.</p>
+<h3 id="24-workflow">2.4. Workflow 실행<a class="headerlink" href="#24-workflow" title="Permanent link">&para;</a></h3>
+<p>이전과 본질적으로 동일한 코드와 입력으로 workflow를 실행하고 있으므로, <code>-resume</code> 플래그로 실행하고 어떻게 되는지 살펴봅시다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-modules.nf<span class="w"> </span>-resume
 </code></pre></div>
 <details class="success">
-<summary>Command output</summary>
+<summary>명령 출력</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
 <a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="go">Launching `hello-modules.nf` [romantic_poisson] DSL2 - revision: 96edfa9ad3</span>
@@ -4182,23 +4221,23 @@ We're going to create a file stub for the module, copy the relevant code over th
 <a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="go">[1a/bc5901] collectGreetings   | 1 of 1, cached: 1 ✔</span>
 </code></pre></div>
 </details>
-<p>This should run quickly very quickly because everything is cached.
-Feel free to check the published outputs.</p>
-<p>Nextflow recognized that it's still all the same work to be done, even if the code is split up into multiple files.</p>
-<h3 id="takeaway">Takeaway<a class="headerlink" href="#takeaway" title="Permanent link">&para;</a></h3>
-<p>You know how to extract a process into a local module and you know doing this doesn't break the resumability of the workflow.</p>
-<h3 id="whats-next">What's next?<a class="headerlink" href="#whats-next" title="Permanent link">&para;</a></h3>
-<p>Practice making more modules.
-Once you've done one, you can do a million more...
-But let's just do two more for now.</p>
+<p>모든 것이 캐시되어 있으므로 매우 빠르게 실행되어야 합니다.
+게시된 출력을 자유롭게 확인하십시오.</p>
+<p>Nextflow는 코드가 여러 파일로 분할되어 있더라도 여전히 동일한 작업이 수행되어야 함을 인식했습니다.</p>
+<h3 id="_1">핵심 내용<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<p>Process를 로컬 모듈로 추출하는 방법과 이렇게 해도 workflow의 재개 가능성이 깨지지 않는다는 것을 알게 되었습니다.</p>
+<h3 id="_2">다음 단계<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>더 많은 모듈을 만드는 연습을 합니다.
+하나를 만들면 백만 개 더 만들 수 있습니다...
+하지만 지금은 두 개만 더 만들겠습니다.</p>
 <hr />
-<h2 id="3-modularize-the-converttoupper-process">3. Modularize the <code>convertToUpper()</code> process<a class="headerlink" href="#3-modularize-the-converttoupper-process" title="Permanent link">&para;</a></h2>
-<h3 id="31-create-a-file-stub-for-the-new-module">3.1. Create a file stub for the new module<a class="headerlink" href="#31-create-a-file-stub-for-the-new-module" title="Permanent link">&para;</a></h3>
-<p>Create an empty file for the module called <code>convertToUpper.nf</code>.</p>
+<h2 id="3-converttoupper-process">3. <code>convertToUpper()</code> process 모듈화<a class="headerlink" href="#3-converttoupper-process" title="Permanent link">&para;</a></h2>
+<h3 id="31">3.1. 새 모듈에 대한 파일 스텁 생성<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
+<p><code>convertToUpper.nf</code>라는 모듈에 대한 빈 파일을 생성합니다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>touch<span class="w"> </span>modules/convertToUpper.nf
 </code></pre></div>
-<h3 id="32-move-the-converttoupper-process-code-to-the-module-file">3.2. Move the <code>convertToUpper</code> process code to the module file<a class="headerlink" href="#32-move-the-converttoupper-process-code-to-the-module-file" title="Permanent link">&para;</a></h3>
-<p>Copy the whole process definition over from the workflow file to the module file, making sure to copy over the <code>#!/usr/bin/env nextflow</code> shebang too.</p>
+<h3 id="32-converttoupper-process">3.2. <code>convertToUpper</code> process 코드를 모듈 파일로 이동<a class="headerlink" href="#32-converttoupper-process" title="Permanent link">&para;</a></h3>
+<p>전체 process 정의를 workflow 파일에서 모듈 파일로 복사하고, <code>#!/usr/bin/env nextflow</code> shebang도 함께 복사해야 합니다.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/convertToUpper.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-13-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-13-3"> 3</a></span>
@@ -4219,7 +4258,7 @@ But let's just do two more for now.</p>
 <span class="normal"><a href="#__codelineno-13-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
 <a id="__codelineno-13-2" name="__codelineno-13-2"></a>
 <a id="__codelineno-13-3" name="__codelineno-13-3"></a><span class="cm">/*</span>
-<a id="__codelineno-13-4" name="__codelineno-13-4"></a><span class="cm"> * Use a text replacement tool to convert the greeting to uppercase</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4"></a><span class="cm"> * 텍스트 대체 도구를 사용하여 인사말을 대문자로 변환</span>
 <a id="__codelineno-13-5" name="__codelineno-13-5"></a><span class="cm"> */</span>
 <a id="__codelineno-13-6" name="__codelineno-13-6"></a><span class="n">process</span><span class="w"> </span><span class="n">convertToUpper</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-13-7" name="__codelineno-13-7"></a>
@@ -4235,10 +4274,10 @@ But let's just do two more for now.</p>
 <a id="__codelineno-13-17" name="__codelineno-13-17"></a><span class="s2">    &quot;&quot;&quot;</span>
 <a id="__codelineno-13-18" name="__codelineno-13-18"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>Once that is done, delete the process definition from the workflow file, but make sure to leave the shebang in place.</p>
-<h3 id="33-add-an-import-declaration-before-the-params-block">3.3. Add an import declaration before the <code>params</code> block<a class="headerlink" href="#33-add-an-import-declaration-before-the-params-block" title="Permanent link">&para;</a></h3>
-<p>Insert the import declaration above the <code>params</code> block and fill it out appropriately.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">After</label><label for="__tabbed_2_2">Before</label></div>
+<p>완료되면 workflow 파일에서 process 정의를 삭제하되, shebang은 그대로 두십시오.</p>
+<h3 id="33-params-import">3.3. <code>params</code> 블록 전에 import 선언 추가<a class="headerlink" href="#33-params-import" title="Permanent link">&para;</a></h3>
+<p><code>params</code> 블록 위에 import 선언을 삽입하고 적절하게 채웁니다.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">수정 후</label><label for="__tabbed_2_2">수정 전</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-modules.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-23">23</a></span>
@@ -4251,12 +4290,12 @@ But let's just do two more for now.</p>
 <span class="normal"><a href="#__codelineno-14-30">30</a></span>
 <span class="normal"><a href="#__codelineno-14-31">31</a></span>
 <span class="normal"><a href="#__codelineno-14-32">32</a></span>
-<span class="normal"><a href="#__codelineno-14-33">33</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-14-23" name="__codelineno-14-23"></a><span class="c1">// Include modules</span>
+<span class="normal"><a href="#__codelineno-14-33">33</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-14-23" name="__codelineno-14-23"></a><span class="c1">// 모듈 포함</span>
 <a id="__codelineno-14-24" name="__codelineno-14-24"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">sayHello</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/sayHello.nf&#39;</span>
 <a id="__codelineno-14-25" name="__codelineno-14-25"></a><span class="hll"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">convertToUpper</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/convertToUpper.nf&#39;</span>
 </span><a id="__codelineno-14-26" name="__codelineno-14-26"></a>
 <a id="__codelineno-14-27" name="__codelineno-14-27"></a><span class="cm">/*</span>
-<a id="__codelineno-14-28" name="__codelineno-14-28"></a><span class="cm">* Pipeline parameters</span>
+<a id="__codelineno-14-28" name="__codelineno-14-28"></a><span class="cm">* 파이프라인 매개변수</span>
 <a id="__codelineno-14-29" name="__codelineno-14-29"></a><span class="cm">*/</span>
 <a id="__codelineno-14-30" name="__codelineno-14-30"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-14-31" name="__codelineno-14-31"></a><span class="w">    </span><span class="nl">greeting:</span><span class="w"> </span><span class="n">Path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;data/greetings.csv&#39;</span>
@@ -4274,11 +4313,11 @@ But let's just do two more for now.</p>
 <span class="normal"><a href="#__codelineno-15-29">29</a></span>
 <span class="normal"><a href="#__codelineno-15-30">30</a></span>
 <span class="normal"><a href="#__codelineno-15-31">31</a></span>
-<span class="normal"><a href="#__codelineno-15-32">32</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-15-23" name="__codelineno-15-23"></a><span class="c1">// Include modules</span>
+<span class="normal"><a href="#__codelineno-15-32">32</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-15-23" name="__codelineno-15-23"></a><span class="c1">// 모듈 포함</span>
 <a id="__codelineno-15-24" name="__codelineno-15-24"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">sayHello</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/sayHello.nf&#39;</span>
 <a id="__codelineno-15-25" name="__codelineno-15-25"></a>
 <a id="__codelineno-15-26" name="__codelineno-15-26"></a><span class="cm">/*</span>
-<a id="__codelineno-15-27" name="__codelineno-15-27"></a><span class="cm">* Pipeline parameters</span>
+<a id="__codelineno-15-27" name="__codelineno-15-27"></a><span class="cm">* 파이프라인 매개변수</span>
 <a id="__codelineno-15-28" name="__codelineno-15-28"></a><span class="cm">*/</span>
 <a id="__codelineno-15-29" name="__codelineno-15-29"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-15-30" name="__codelineno-15-30"></a><span class="w">    </span><span class="nl">greeting:</span><span class="w"> </span><span class="n">Path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;data/greetings.csv&#39;</span>
@@ -4288,13 +4327,13 @@ But let's just do two more for now.</p>
 </div>
 </div>
 </div>
-<p>This should start to look very familiar.</p>
-<h3 id="34-run-the-workflow-again">3.4. Run the workflow again<a class="headerlink" href="#34-run-the-workflow-again" title="Permanent link">&para;</a></h3>
-<p>Run this with the <code>-resume</code> flag.</p>
+<p>이것이 매우 익숙해지기 시작해야 합니다.</p>
+<h3 id="34-workflow">3.4. Workflow 다시 실행<a class="headerlink" href="#34-workflow" title="Permanent link">&para;</a></h3>
+<p><code>-resume</code> 플래그로 실행합니다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-modules.nf<span class="w"> </span>-resume
 </code></pre></div>
 <details class="success">
-<summary>Command output</summary>
+<summary>명령 출력</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>
 <a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="go">Launching `hello-modules.nf` [nauseous_heisenberg] DSL2 - revision: a04a9f2da0</span>
@@ -4304,16 +4343,16 @@ But let's just do two more for now.</p>
 <a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="go">[1a/bc5901] collectGreetings   | 1 of 1, cached: 1 ✔</span>
 </code></pre></div>
 </details>
-<p>This should still produce the same output as previously.</p>
-<p>Two done, one more to go!</p>
+<p>이것은 여전히 이전과 동일한 출력을 생성해야 합니다.</p>
+<p>두 개 완료, 하나 더 남았습니다!</p>
 <hr />
-<h2 id="4-modularize-the-collectgreetings-process">4. Modularize the <code>collectGreetings()</code> process<a class="headerlink" href="#4-modularize-the-collectgreetings-process" title="Permanent link">&para;</a></h2>
-<h3 id="41-create-a-file-stub-for-the-new-module">4.1. Create a file stub for the new module<a class="headerlink" href="#41-create-a-file-stub-for-the-new-module" title="Permanent link">&para;</a></h3>
-<p>Create an empty file for the module called <code>collectGreetings.nf</code>.</p>
+<h2 id="4-collectgreetings-process">4. <code>collectGreetings()</code> process 모듈화<a class="headerlink" href="#4-collectgreetings-process" title="Permanent link">&para;</a></h2>
+<h3 id="41">4.1. 새 모듈에 대한 파일 스텁 생성<a class="headerlink" href="#41" title="Permanent link">&para;</a></h3>
+<p><code>collectGreetings.nf</code>라는 모듈에 대한 빈 파일을 생성합니다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>touch<span class="w"> </span>modules/collectGreetings.nf
 </code></pre></div>
-<h3 id="42-move-the-collectgreetings-process-code-to-the-module-file">4.2. Move the <code>collectGreetings</code> process code to the module file<a class="headerlink" href="#42-move-the-collectgreetings-process-code-to-the-module-file" title="Permanent link">&para;</a></h3>
-<p>Copy the whole process definition over from the workflow file to the module file, making sure to copy over the <code>#!/usr/bin/env nextflow</code> shebang too.</p>
+<h3 id="42-collectgreetings-process">4.2. <code>collectGreetings</code> process 코드를 모듈 파일로 이동<a class="headerlink" href="#42-collectgreetings-process" title="Permanent link">&para;</a></h3>
+<p>전체 process 정의를 workflow 파일에서 모듈 파일로 복사하고, <code>#!/usr/bin/env nextflow</code> shebang도 함께 복사해야 합니다.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/collectGreetings.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-19-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-19-3"> 3</a></span>
@@ -4338,7 +4377,7 @@ But let's just do two more for now.</p>
 <span class="normal"><a href="#__codelineno-19-22">22</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
 <a id="__codelineno-19-2" name="__codelineno-19-2"></a>
 <a id="__codelineno-19-3" name="__codelineno-19-3"></a><span class="cm">/*</span>
-<a id="__codelineno-19-4" name="__codelineno-19-4"></a><span class="cm"> * Collect uppercase greetings into a single output file</span>
+<a id="__codelineno-19-4" name="__codelineno-19-4"></a><span class="cm"> * 대문자 인사말을 하나의 출력 파일에 수집</span>
 <a id="__codelineno-19-5" name="__codelineno-19-5"></a><span class="cm"> */</span>
 <a id="__codelineno-19-6" name="__codelineno-19-6"></a><span class="n">process</span><span class="w"> </span><span class="n">collectGreetings</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-19-7" name="__codelineno-19-7"></a>
@@ -4358,10 +4397,10 @@ But let's just do two more for now.</p>
 <a id="__codelineno-19-21" name="__codelineno-19-21"></a><span class="s2">    &quot;&quot;&quot;</span>
 <a id="__codelineno-19-22" name="__codelineno-19-22"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>Once that is done, delete the process definition from the workflow file, but make sure to leave the shebang in place.</p>
-<h3 id="43-add-an-import-declaration-before-the-params-block">4.3. Add an import declaration before the <code>params</code> block<a class="headerlink" href="#43-add-an-import-declaration-before-the-params-block" title="Permanent link">&para;</a></h3>
-<p>Insert the import declaration above the <code>params</code> block and fill it out appropriately.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">After</label><label for="__tabbed_3_2">Before</label></div>
+<p>완료되면 workflow 파일에서 process 정의를 삭제하되, shebang은 그대로 두십시오.</p>
+<h3 id="43-params-import">4.3. <code>params</code> 블록 전에 import 선언 추가<a class="headerlink" href="#43-params-import" title="Permanent link">&para;</a></h3>
+<p><code>params</code> 블록 위에 import 선언을 삽입하고 적절하게 채웁니다.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">수정 후</label><label for="__tabbed_3_2">수정 전</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-modules.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-3"> 3</a></span>
@@ -4375,13 +4414,13 @@ But let's just do two more for now.</p>
 <span class="normal"><a href="#__codelineno-20-11">11</a></span>
 <span class="normal"><a href="#__codelineno-20-12">12</a></span>
 <span class="normal"><a href="#__codelineno-20-13">13</a></span>
-<span class="normal"><a href="#__codelineno-20-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-20-3" name="__codelineno-20-3"></a><span class="c1">// Include modules</span>
+<span class="normal"><a href="#__codelineno-20-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-20-3" name="__codelineno-20-3"></a><span class="c1">// 모듈 포함</span>
 <a id="__codelineno-20-4" name="__codelineno-20-4"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">sayHello</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/sayHello.nf&#39;</span>
 <a id="__codelineno-20-5" name="__codelineno-20-5"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">convertToUpper</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/convertToUpper.nf&#39;</span>
 <a id="__codelineno-20-6" name="__codelineno-20-6"></a><span class="hll"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">collectGreetings</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/collectGreetings.nf&#39;</span>
 </span><a id="__codelineno-20-7" name="__codelineno-20-7"></a>
 <a id="__codelineno-20-8" name="__codelineno-20-8"></a><span class="cm">/*</span>
-<a id="__codelineno-20-9" name="__codelineno-20-9"></a><span class="cm">* Pipeline parameters</span>
+<a id="__codelineno-20-9" name="__codelineno-20-9"></a><span class="cm">* 파이프라인 매개변수</span>
 <a id="__codelineno-20-10" name="__codelineno-20-10"></a><span class="cm">*/</span>
 <a id="__codelineno-20-11" name="__codelineno-20-11"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-20-12" name="__codelineno-20-12"></a><span class="w">    </span><span class="nl">greeting:</span><span class="w"> </span><span class="n">Path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;data/greetings.csv&#39;</span>
@@ -4400,12 +4439,12 @@ But let's just do two more for now.</p>
 <span class="normal"><a href="#__codelineno-21-10">10</a></span>
 <span class="normal"><a href="#__codelineno-21-11">11</a></span>
 <span class="normal"><a href="#__codelineno-21-12">12</a></span>
-<span class="normal"><a href="#__codelineno-21-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-21-3" name="__codelineno-21-3"></a><span class="c1">// Include modules</span>
+<span class="normal"><a href="#__codelineno-21-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-21-3" name="__codelineno-21-3"></a><span class="c1">// 모듈 포함</span>
 <a id="__codelineno-21-4" name="__codelineno-21-4"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">sayHello</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/sayHello.nf&#39;</span>
 <a id="__codelineno-21-5" name="__codelineno-21-5"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">convertToUpper</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/convertToUpper.nf&#39;</span>
 <a id="__codelineno-21-6" name="__codelineno-21-6"></a>
 <a id="__codelineno-21-7" name="__codelineno-21-7"></a><span class="cm">/*</span>
-<a id="__codelineno-21-8" name="__codelineno-21-8"></a><span class="cm">* Pipeline parameters</span>
+<a id="__codelineno-21-8" name="__codelineno-21-8"></a><span class="cm">* 파이프라인 매개변수</span>
 <a id="__codelineno-21-9" name="__codelineno-21-9"></a><span class="cm">*/</span>
 <a id="__codelineno-21-10" name="__codelineno-21-10"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-21-11" name="__codelineno-21-11"></a><span class="w">    </span><span class="nl">greeting:</span><span class="w"> </span><span class="n">Path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;data/greetings.csv&#39;</span>
@@ -4415,13 +4454,13 @@ But let's just do two more for now.</p>
 </div>
 </div>
 </div>
-<p>Last one!</p>
-<h3 id="44-run-the-workflow">4.4. Run the workflow<a class="headerlink" href="#44-run-the-workflow" title="Permanent link">&para;</a></h3>
-<p>Run this with the <code>-resume</code> flag.</p>
+<p>마지막입니다!</p>
+<h3 id="44-workflow">4.4. Workflow 실행<a class="headerlink" href="#44-workflow" title="Permanent link">&para;</a></h3>
+<p><code>-resume</code> 플래그로 실행합니다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-modules.nf<span class="w"> </span>-resume
 </code></pre></div>
 <details class="success">
-<summary>Command output</summary>
+<summary>명령 출력</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>
 <a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="go">Launching `hello-modules.nf` [friendly_coulomb] DSL2 - revision: 7aa2b9bc0f</span>
@@ -4431,45 +4470,45 @@ But let's just do two more for now.</p>
 <a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="go">[1a/bc5901] collectGreetings   | 1 of 1, cached: 1 ✔</span>
 </code></pre></div>
 </details>
-<p>This should still produce the same output as previously.</p>
-<h3 id="takeaway_1">Takeaway<a class="headerlink" href="#takeaway_1" title="Permanent link">&para;</a></h3>
-<p>You know how to modularize multiple processes in a workflow.</p>
-<p>Congratulations, you've done all this work and absolutely nothing has changed to how the pipeline works!</p>
-<p>Jokes aside, now your code is more modular, and if you decide to write another pipeline that calls on one of those processes, you just need to type one short import statement to use the relevant module.
-This is better than copy-pasting the code, because if later you decide to improve the module, all your pipelines will inherit the improvements.</p>
-<h3 id="whats-next_1">What's next?<a class="headerlink" href="#whats-next_1" title="Permanent link">&para;</a></h3>
-<p>Take a short break if you feel like it.</p>
-<p>When you're ready, move on to <a href="../05_hello_containers/"><strong>Part 5: Hello Containers</strong></a> to learn how to use containers to manage software dependencies more conveniently and reproducibly.</p>
+<p>이것은 여전히 이전과 동일한 출력을 생성해야 합니다.</p>
+<h3 id="_3">핵심 내용<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>Workflow에서 여러 process를 모듈화하는 방법을 알게 되었습니다.</p>
+<p>축하합니다, 이 모든 작업을 수행했지만 파이프라인 작동 방식에는 아무것도 변경되지 않았습니다!</p>
+<p>농담은 제쳐두고, 이제 코드가 더 모듈화되었으며, 해당 process 중 하나를 호출하는 다른 파이프라인을 작성하기로 결정하면 관련 모듈을 사용하기 위해 짧은 import 문 하나만 입력하면 됩니다.
+이것은 코드를 복사-붙여넣기하는 것보다 낫습니다. 나중에 모듈을 개선하기로 결정하면 모든 파이프라인이 개선 사항을 상속받기 때문입니다.</p>
+<h3 id="_4">다음 단계<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>원한다면 잠시 휴식을 취하십시오.</p>
+<p>준비가 되면 <a href="../05_hello_containers/"><strong>파트 5: Hello Containers</strong></a>로 이동하여 소프트웨어 의존성을 더 편리하고 재현 가능하게 관리하기 위해 컨테이너를 사용하는 방법을 배우십시오.</p>
 <hr />
-<h2 id="quiz">Quiz<a class="headerlink" href="#quiz" title="Permanent link">&para;</a></h2>
+<h2 id="_5">퀴즈<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <!-- mkdocs-quiz-source
 <quiz>
-What is a module in Nextflow?
-- [ ] A configuration file
-- [x] A standalone file containing a single process definition
-- [ ] A workflow definition
-- [ ] A channel operator
+Nextflow에서 모듈이란 무엇입니까?
+- [ ] 구성 파일
+- [x] 단일 process 정의가 포함된 독립 파일
+- [ ] Workflow 정의
+- [ ] Channel 연산자
 
-Learn more: [2. Create a module for `sayHello()`](#2-create-a-module-for-sayhello)
+자세히 알아보기: [2. `sayHello()`용 모듈 생성](#2-sayhello용-모듈-생성)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-0">
     <a href="#quiz-0" class="quiz-header-link">#</a>
 
     <div class="quiz-question">
-        <p>What is a module in Nextflow?</p>
+        <p>Nextflow에서 모듈이란 무엇입니까?</p>
     </div>
     <form action="javascript:void(0);" onsubmit="return false;">
-        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-0-0" ><label for="quiz-0-0">A configuration file</label></div><div><input type="radio" name="answer" value="1" id="quiz-0-1" correct><label for="quiz-0-1">A standalone file containing a single process definition</label></div><div><input type="radio" name="answer" value="2" id="quiz-0-2" ><label for="quiz-0-2">A workflow definition</label></div><div><input type="radio" name="answer" value="3" id="quiz-0-3" ><label for="quiz-0-3">A channel operator</label></div></fieldset>
+        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-0-0" ><label for="quiz-0-0">구성 파일</label></div><div><input type="radio" name="answer" value="1" id="quiz-0-1" correct><label for="quiz-0-1">단일 process 정의가 포함된 독립 파일</label></div><div><input type="radio" name="answer" value="2" id="quiz-0-2" ><label for="quiz-0-2">Workflow 정의</label></div><div><input type="radio" name="answer" value="3" id="quiz-0-3" ><label for="quiz-0-3">Channel 연산자</label></div></fieldset>
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Learn more: <a href="#2-create-a-module-for-sayhello">2. Create a module for <code>sayHello()</code></a></p></section>
+    <section class="content hidden"><p>자세히 알아보기: <a href="#2-sayhello용-모듈-생성">2. <code>sayHello()</code>용 모듈 생성</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
 <quiz>
-What is the recommended naming convention for module files?
+모듈 파일에 권장되는 명명 규칙은 무엇입니까?
 - [ ] `module_processName.nf`
 - [ ] `processName_module.nf`
 - [x] `processName.nf`
@@ -4480,7 +4519,7 @@ What is the recommended naming convention for module files?
     <a href="#quiz-1" class="quiz-header-link">#</a>
 
     <div class="quiz-question">
-        <p>What is the recommended naming convention for module files?</p>
+        <p>모듈 파일에 권장되는 명명 규칙은 무엇입니까?</p>
     </div>
     <form action="javascript:void(0);" onsubmit="return false;">
         <fieldset><div><input type="radio" name="answer" value="0" id="quiz-1-0" ><label for="quiz-1-0"><code>module_processName.nf</code></label></div><div><input type="radio" name="answer" value="1" id="quiz-1-1" ><label for="quiz-1-1"><code>processName_module.nf</code></label></div><div><input type="radio" name="answer" value="2" id="quiz-1-2" correct><label for="quiz-1-2"><code>processName.nf</code></label></div><div><input type="radio" name="answer" value="3" id="quiz-1-3" ><label for="quiz-1-3"><code>mod_processName.nf</code></label></div></fieldset>
@@ -4492,72 +4531,72 @@ What is the recommended naming convention for module files?
 
 <!-- mkdocs-quiz-source
 <quiz>
-Where should module files be stored?
-- [ ] In the same directory as the workflow
-- [ ] In a `bin/` directory
-- [x] In a `modules/` directory
-- [ ] In a `lib/` directory
+모듈 파일은 어디에 저장해야 합니까?
+- [ ] Workflow와 같은 디렉토리에
+- [ ] `bin/` 디렉토리에
+- [x] `modules/` 디렉토리에
+- [ ] `lib/` 디렉토리에
 
-Learn more: [1. Create a directory to store modules](#1-create-a-directory-to-store-modules)
+자세히 알아보기: [1. 모듈을 저장할 디렉토리 생성](#1-모듈을-저장할-디렉토리-생성)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-2">
     <a href="#quiz-2" class="quiz-header-link">#</a>
 
     <div class="quiz-question">
-        <p>Where should module files be stored?</p>
+        <p>모듈 파일은 어디에 저장해야 합니까?</p>
     </div>
     <form action="javascript:void(0);" onsubmit="return false;">
-        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-2-0" ><label for="quiz-2-0">In the same directory as the workflow</label></div><div><input type="radio" name="answer" value="1" id="quiz-2-1" ><label for="quiz-2-1">In a <code>bin/</code> directory</label></div><div><input type="radio" name="answer" value="2" id="quiz-2-2" correct><label for="quiz-2-2">In a <code>modules/</code> directory</label></div><div><input type="radio" name="answer" value="3" id="quiz-2-3" ><label for="quiz-2-3">In a <code>lib/</code> directory</label></div></fieldset>
+        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-2-0" ><label for="quiz-2-0">Workflow와 같은 디렉토리에</label></div><div><input type="radio" name="answer" value="1" id="quiz-2-1" ><label for="quiz-2-1"><code>bin/</code> 디렉토리에</label></div><div><input type="radio" name="answer" value="2" id="quiz-2-2" correct><label for="quiz-2-2"><code>modules/</code> 디렉토리에</label></div><div><input type="radio" name="answer" value="3" id="quiz-2-3" ><label for="quiz-2-3"><code>lib/</code> 디렉토리에</label></div></fieldset>
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Learn more: <a href="#1-create-a-directory-to-store-modules">1. Create a directory to store modules</a></p></section>
+    <section class="content hidden"><p>자세히 알아보기: <a href="#1-모듈을-저장할-디렉토리-생성">1. 모듈을 저장할 디렉토리 생성</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
 <quiz>
-What is the correct syntax to import a module?
+모듈을 가져오는 올바른 구문은 무엇입니까?
 
 - [ ] `#!groovy import { SAYHELLO } from './modules/sayhello.nf'`
 - [ ] `#!groovy require { SAYHELLO } from './modules/sayhello.nf'`
 - [x] `#!groovy include { SAYHELLO } from './modules/sayhello.nf'`
 - [ ] `#!groovy load { SAYHELLO } from './modules/sayhello.nf'`
 
-Learn more: [2.3. Add an import declaration](#23-add-an-import-declaration-before-the-workflow-block)
+자세히 알아보기: [2.3. import 선언 추가](#23-workflow-블록-전에-import-선언-추가)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-3">
     <a href="#quiz-3" class="quiz-header-link">#</a>
 
     <div class="quiz-question">
-        <p>What is the correct syntax to import a module?</p>
+        <p>모듈을 가져오는 올바른 구문은 무엇입니까?</p>
     </div>
     <form action="javascript:void(0);" onsubmit="return false;">
         <fieldset><div><input type="radio" name="answer" value="0" id="quiz-3-0" ><label for="quiz-3-0"><code class="highlight"><span class="kn">import</span><span class="w"> </span><span class="err">{ </span><span class="nn">SAYHELLO</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/sayhello.nf&#39;</span></code></label></div><div><input type="radio" name="answer" value="1" id="quiz-3-1" ><label for="quiz-3-1"><code class="highlight"><span class="n">require</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">SAYHELLO</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/sayhello.nf&#39;</span></code></label></div><div><input type="radio" name="answer" value="2" id="quiz-3-2" correct><label for="quiz-3-2"><code class="highlight"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">SAYHELLO</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/sayhello.nf&#39;</span></code></label></div><div><input type="radio" name="answer" value="3" id="quiz-3-3" ><label for="quiz-3-3"><code class="highlight"><span class="n">load</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">SAYHELLO</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/sayhello.nf&#39;</span></code></label></div></fieldset>
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Learn more: <a href="#23-add-an-import-declaration-before-the-workflow-block">2.3. Add an import declaration</a></p></section>
+    <section class="content hidden"><p>자세히 알아보기: <a href="#23-workflow-블록-전에-import-선언-추가">2.3. import 선언 추가</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
 <quiz>
-What happens to the `-resume` functionality when using modules?
-- [ ] It no longer works
-- [ ] It requires additional configuration
-- [x] It works the same as before
-- [ ] It only works for local modules
+모듈을 사용할 때 `-resume` 기능은 어떻게 됩니까?
+- [ ] 더 이상 작동하지 않음
+- [ ] 추가 구성이 필요함
+- [x] 이전과 동일하게 작동함
+- [ ] 로컬 모듈에서만 작동함
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-4">
     <a href="#quiz-4" class="quiz-header-link">#</a>
 
     <div class="quiz-question">
-        <p>What happens to the <code>-resume</code> functionality when using modules?</p>
+        <p>모듈을 사용할 때 <code>-resume</code> 기능은 어떻게 됩니까?</p>
     </div>
     <form action="javascript:void(0);" onsubmit="return false;">
-        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-4-0" ><label for="quiz-4-0">It no longer works</label></div><div><input type="radio" name="answer" value="1" id="quiz-4-1" ><label for="quiz-4-1">It requires additional configuration</label></div><div><input type="radio" name="answer" value="2" id="quiz-4-2" correct><label for="quiz-4-2">It works the same as before</label></div><div><input type="radio" name="answer" value="3" id="quiz-4-3" ><label for="quiz-4-3">It only works for local modules</label></div></fieldset>
+        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-4-0" ><label for="quiz-4-0">더 이상 작동하지 않음</label></div><div><input type="radio" name="answer" value="1" id="quiz-4-1" ><label for="quiz-4-1">추가 구성이 필요함</label></div><div><input type="radio" name="answer" value="2" id="quiz-4-2" correct><label for="quiz-4-2">이전과 동일하게 작동함</label></div><div><input type="radio" name="answer" value="3" id="quiz-4-3" ><label for="quiz-4-3">로컬 모듈에서만 작동함</label></div></fieldset>
         <div class="quiz-feedback hidden"></div>
 
     </form>
@@ -4566,21 +4605,21 @@ What happens to the `-resume` functionality when using modules?
 
 <!-- mkdocs-quiz-source
 <quiz>
-What are the benefits of using modules? (Select all that apply)
-- [x] Code reusability across workflows
-- [x] Easier maintenance
-- [x] Better organization of workflow code
-- [ ] Faster execution speed
+모듈 사용의 이점은 무엇입니까? (해당되는 것 모두 선택)
+- [x] Workflow 간 코드 재사용 가능
+- [x] 더 쉬운 유지보수
+- [x] Workflow 코드의 더 나은 구성
+- [ ] 더 빠른 실행 속도
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-5">
     <a href="#quiz-5" class="quiz-header-link">#</a>
 
     <div class="quiz-question">
-        <p>What are the benefits of using modules? (Select all that apply)</p>
+        <p>모듈 사용의 이점은 무엇입니까? (해당되는 것 모두 선택)</p>
     </div>
     <form action="javascript:void(0);" onsubmit="return false;">
-        <fieldset><div><input type="checkbox" name="answer" value="0" id="quiz-5-0" correct><label for="quiz-5-0">Code reusability across workflows</label></div><div><input type="checkbox" name="answer" value="1" id="quiz-5-1" correct><label for="quiz-5-1">Easier maintenance</label></div><div><input type="checkbox" name="answer" value="2" id="quiz-5-2" correct><label for="quiz-5-2">Better organization of workflow code</label></div><div><input type="checkbox" name="answer" value="3" id="quiz-5-3" ><label for="quiz-5-3">Faster execution speed</label></div></fieldset>
+        <fieldset><div><input type="checkbox" name="answer" value="0" id="quiz-5-0" correct><label for="quiz-5-0">Workflow 간 코드 재사용 가능</label></div><div><input type="checkbox" name="answer" value="1" id="quiz-5-1" correct><label for="quiz-5-1">더 쉬운 유지보수</label></div><div><input type="checkbox" name="answer" value="2" id="quiz-5-2" correct><label for="quiz-5-2">Workflow 코드의 더 나은 구성</label></div><div><input type="checkbox" name="answer" value="3" id="quiz-5-3" ><label for="quiz-5-3">더 빠른 실행 속도</label></div></fieldset>
         <div class="quiz-feedback hidden"></div>
         <button type="submit" class="quiz-button">제출</button>
     </form>
@@ -6102,6 +6141,9 @@ window.mkdocsQuizConfig = {
 
 
 
+  
+  
+
 
 
   
@@ -6132,7 +6174,7 @@ window.mkdocsQuizConfig = {
       <nav class="md-footer__inner md-grid" aria-label="하단/푸터" >
         
           
-          <a href="../03_hello_workflow/" class="md-footer__link md-footer__link--prev" aria-label="이전: Part 3: Hello Workflow">
+          <a href="../03_hello_workflow/" class="md-footer__link md-footer__link--prev" aria-label="이전: 파트 3: Hello Workflow">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -6142,20 +6184,20 @@ window.mkdocsQuizConfig = {
                 이전
               </span>
               <div class="md-ellipsis">
-                Part 3: Hello Workflow
+                파트 3: Hello Workflow
               </div>
             </div>
           </a>
         
         
           
-          <a href="../05_hello_containers/" class="md-footer__link md-footer__link--next" aria-label="다음: Part 5: Hello Containers">
+          <a href="../05_hello_containers/" class="md-footer__link md-footer__link--next" aria-label="다음: 파트 5: Hello Containers">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 다음
               </span>
               <div class="md-ellipsis">
-                Part 5: Hello Containers
+                파트 5: Hello Containers
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -6232,8 +6274,8 @@ window.mkdocsQuizConfig = {
   
 
 
-<h4>Cookie consent</h4>
-<p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our training materials better. Find out more on <a href="https://seqera.io/privacy-policy/#cookies" target="_blank" rel="noopener">how we use cookies</a>.</p>
+<h4>쿠키 동의</h4>
+<p>저희는 귀하의 반복 방문과 선호도를 인식하고, 문서의 효과성과 사용자가 원하는 정보를 찾고 있는지 측정하기 위해 쿠키를 사용합니다. 동의해 주시면 교육 자료를 개선하는 데 도움이 됩니다. <a href="https://seqera.io/privacy-policy/#cookies" target="_blank" rel="noopener">쿠키 사용 방법</a>에 대해 자세히 알아보세요.</p>
 <input class="md-toggle" type="checkbox" id="__settings" >
 <div class="md-consent__settings">
   <ul class="task-list">
@@ -6286,7 +6328,7 @@ window.mkdocsQuizConfig = {
     <label class="task-list-control">
       <input type="checkbox" name="posthog" checked>
       <span class="task-list-indicator"></span>
-      PostHog Analytics
+      PostHog 분석
     </label>
   </li>
 
@@ -6317,12 +6359,16 @@ window.mkdocsQuizConfig = {
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": {"alias": true, "provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": {"alias": true, "provider": "mike"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
-        <script src="../../../assets/javascripts/posthog.js"></script>
+        <script src="../../assets/javascripts/consent-sync.js"></script>
+      
+        <script src="../../assets/javascripts/posthog.js"></script>
+      
+        <script src="../../assets/javascripts/language-picker.js"></script>
       
     
   </body>

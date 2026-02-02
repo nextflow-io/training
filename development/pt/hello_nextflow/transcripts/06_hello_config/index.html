@@ -8,39 +8,47 @@
       
       
       
-        <link rel="canonical" href="https://training.nextflow.io/0.dev/pt/hello_nextflow/transcripts/06_hello_config/">
+        <link rel="canonical" href="https://training.nextflow.io/pt/hello_nextflow/transcripts/06_hello_config/">
       
       
       
       
         
-          <link rel="alternate" href="../../../../hello_nextflow/transcripts/06_hello_config/" hreflang="en">
+          <link rel="alternate" href="/" hreflang="en">
         
-          <link rel="alternate" href="./" hreflang="pt">
+          <link rel="alternate" href="/de/" hreflang="de">
         
-          <link rel="alternate" href="../../../../es/hello_nextflow/transcripts/06_hello_config/" hreflang="es">
+          <link rel="alternate" href="/es/" hreflang="es">
         
-          <link rel="alternate" href="../../../../fr/hello_nextflow/transcripts/06_hello_config/" hreflang="fr">
+          <link rel="alternate" href="/fr/" hreflang="fr">
         
-          <link rel="alternate" href="../../../../it/hello_nextflow/transcripts/06_hello_config/" hreflang="it">
+          <link rel="alternate" href="/hi/" hreflang="hi">
         
-          <link rel="alternate" href="../../../../ko/hello_nextflow/transcripts/06_hello_config/" hreflang="ko">
+          <link rel="alternate" href="/it/" hreflang="it">
+        
+          <link rel="alternate" href="/ko/" hreflang="ko">
+        
+          <link rel="alternate" href="/pl/" hreflang="pl">
+        
+          <link rel="alternate" href="/pt/" hreflang="pt">
+        
+          <link rel="alternate" href="/tr/" hreflang="tr">
         
       
       
-      <link rel="icon" href="../../../../assets/img/nextflow-icon.png">
+      <link rel="icon" href="../../../assets/img/nextflow-icon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
     
     
       
-        <title>Part 6: Hello Config - Transcript - training.nextflow.io</title>
+        <title>Parte 6: Hello Config - Transcrição - training.nextflow.io</title>
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
   
@@ -104,11 +112,11 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/fonts.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/fonts.css">
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/extra.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/extra.css">
     
-    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
   
@@ -143,7 +151,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#part-6-hello-config-transcript" class="md-skip">
+        <a href="#parte-6-hello-config-transcricao" class="md-skip">
           Ir para o conteúdo
         </a>
       
@@ -163,9 +171,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
-    <a href="../../../" title="training.nextflow.io" class="md-header__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
+    <a href="../../.." title="training.nextflow.io" class="md-header__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
       
-  <img src="../../../../assets/img/nextflow_logo_dark.png" alt="logo">
+  <img src="../../../assets/img/nextflow_logo_dark.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -182,7 +190,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Part 6: Hello Config - Transcript
+              Parte 6: Hello Config - Transcrição
             
           </span>
         </div>
@@ -229,38 +237,62 @@
       <ul class="md-select__list">
         
           <li class="md-select__item">
-            <a href="../../../../hello_nextflow/transcripts/06_hello_config/" hreflang="en" class="md-select__link">
+            <a href="/" hreflang="en" class="md-select__link">
               English
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="./" hreflang="pt" class="md-select__link">
-              Português
+            <a href="/de/" hreflang="de" class="md-select__link">
+              deutsch
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../../es/hello_nextflow/transcripts/06_hello_config/" hreflang="es" class="md-select__link">
-              Español
+            <a href="/es/" hreflang="es" class="md-select__link">
+              español
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../../fr/hello_nextflow/transcripts/06_hello_config/" hreflang="fr" class="md-select__link">
-              Français
+            <a href="/fr/" hreflang="fr" class="md-select__link">
+              français
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../../it/hello_nextflow/transcripts/06_hello_config/" hreflang="it" class="md-select__link">
-              Italiano
+            <a href="/hi/" hreflang="hi" class="md-select__link">
+              हिन्दी
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../../ko/hello_nextflow/transcripts/06_hello_config/" hreflang="ko" class="md-select__link">
-              Korean
+            <a href="/it/" hreflang="it" class="md-select__link">
+              italiano
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/ko/" hreflang="ko" class="md-select__link">
+              한국어
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/pl/" hreflang="pl" class="md-select__link">
+              Polski
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/pt/" hreflang="pt" class="md-select__link">
+              português
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/tr/" hreflang="tr" class="md-select__link">
+              Türkçe
             </a>
           </li>
         
@@ -380,9 +412,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../../" title="training.nextflow.io" class="md-nav__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
+    <a href="../../.." title="training.nextflow.io" class="md-nav__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
       
-  <img src="../../../../assets/img/nextflow_logo_dark.png" alt="logo">
+  <img src="../../../assets/img/nextflow_logo_dark.png" alt="logo">
 
     </a>
     training.nextflow.io
@@ -409,14 +441,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../" class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Home
+    Início
   
 
     
@@ -518,7 +550,7 @@
   <span class="md-ellipsis">
     
   
-    Getting started
+    Primeiros passos
   
 
     
@@ -546,7 +578,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run basic operations
+    Parte 1: Operações básicas de execução
   
 
     
@@ -574,7 +606,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Run real pipelines
+    Parte 2: Executar pipelines reais
   
 
     
@@ -602,7 +634,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Run configuration
+    Parte 3: Configuração de execução
   
 
     
@@ -630,7 +662,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    Resumo do curso
   
 
     
@@ -658,7 +690,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Pesquisa de feedback
   
 
     
@@ -768,7 +800,7 @@
   <span class="md-ellipsis">
     
   
-    Orientação
+    Começando
   
 
     
@@ -796,7 +828,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Hello World
+    Parte 1: Hello World
   
 
     
@@ -824,7 +856,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Hello Channels
+    Parte 2: Hello Channels
   
 
     
@@ -852,7 +884,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Hello Workflow
+    Parte 3: Hello Workflow
   
 
     
@@ -880,7 +912,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Hello Modules
+    Parte 4: Hello Modules
   
 
     
@@ -908,7 +940,7 @@
   <span class="md-ellipsis">
     
   
-    Part 5: Hello Containers
+    Parte 5: Hello Containers
   
 
     
@@ -936,7 +968,7 @@
   <span class="md-ellipsis">
     
   
-    Part 6: Hello Config
+    Parte 6: Hello Config
   
 
     
@@ -964,7 +996,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    Resumo do curso
   
 
     
@@ -992,7 +1024,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Pesquisa de feedback
   
 
     
@@ -1102,7 +1134,7 @@
   <span class="md-ellipsis">
     
   
-    Getting started
+    Primeiros Passos
   
 
     
@@ -1130,7 +1162,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run a demo pipeline
+    Parte 1: Executar um pipeline de demonstração
   
 
     
@@ -1158,7 +1190,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Rewrite Hello for nf-core
+    Parte 2: Reescrever Hello para nf-core
   
 
     
@@ -1186,7 +1218,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Use an nf-core module
+    Parte 3: Usar um módulo nf-core
   
 
     
@@ -1214,7 +1246,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Make an nf-core module
+    Parte 4: Criar um módulo nf-core
   
 
     
@@ -1242,7 +1274,7 @@
   <span class="md-ellipsis">
     
   
-    Part 5: Input validation
+    Parte 5: Validação de entrada
   
 
     
@@ -1270,7 +1302,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    Resumo do curso
   
 
     
@@ -1298,7 +1330,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Pesquisa de feedback
   
 
     
@@ -1344,7 +1376,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Science
+    Nextflow para Ciência
   
 
     
@@ -1360,7 +1392,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Nextflow for Science
+    Nextflow para Ciência
   
 
           </label>
@@ -1380,7 +1412,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Science
+    Nextflow para Ciência
   
 
     
@@ -1419,7 +1451,7 @@
   <span class="md-ellipsis">
     
   
-    Genomics
+    Nextflow para Genômica
   
 
     
@@ -1435,7 +1467,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Genomics
+    Nextflow para Genômica
   
 
           </label>
@@ -1455,7 +1487,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Genomics
+    Nextflow para Genômica
   
 
     
@@ -1483,7 +1515,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    Orientação
   
 
     
@@ -1511,7 +1543,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Per-sample variant calling
+    Parte 1: Chamada de variantes por amostra
   
 
     
@@ -1539,7 +1571,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Joint calling on a cohort
+    Parte 2: Chamada conjunta em uma coorte
   
 
     
@@ -1567,7 +1599,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Moving code into modules
+    Parte 3: Movendo código para módulos
   
 
     
@@ -1595,7 +1627,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Adding tests
+    Parte 4: Adicionando testes
   
 
     
@@ -1623,7 +1655,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Pesquisa de feedback
   
 
     
@@ -1651,7 +1683,7 @@
   <span class="md-ellipsis">
     
   
-    Next Steps
+    Próximos Passos
   
 
     
@@ -1698,7 +1730,7 @@
   <span class="md-ellipsis">
     
   
-    RNAseq
+    Nextflow para RNAseq
   
 
     
@@ -1714,7 +1746,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    RNAseq
+    Nextflow para RNAseq
   
 
           </label>
@@ -1734,7 +1766,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for RNAseq
+    Nextflow para RNAseq
   
 
     
@@ -1762,7 +1794,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    Orientação
   
 
     
@@ -1790,7 +1822,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Method overview and manual testing
+    Parte 1: Visão geral do método e teste manual
   
 
     
@@ -1818,7 +1850,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Single-sample implementation
+    Parte 2: Implementação de amostra única
   
 
     
@@ -1846,7 +1878,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Multi-sample paired-end implementation
+    Parte 3: Implementação de múltiplas amostras com dados paired-end
   
 
     
@@ -1874,7 +1906,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Pesquisa de feedback
   
 
     
@@ -1902,7 +1934,7 @@
   <span class="md-ellipsis">
     
   
-    Next Steps
+    Próximos Passos
   
 
     
@@ -1949,7 +1981,7 @@
   <span class="md-ellipsis">
     
   
-    Imaging
+    Index
   
 
     
@@ -1965,7 +1997,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Imaging
+    Index
   
 
           </label>
@@ -1985,7 +2017,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow run for Imaging
+    Index
   
 
     
@@ -2013,7 +2045,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    Orientação
   
 
     
@@ -2041,7 +2073,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run basic operations
+    Parte 1: Executar operações básicas
   
 
     
@@ -2069,7 +2101,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Run nf-core/molkart
+    Parte 2: Executar nf-core/molkart
   
 
     
@@ -2097,7 +2129,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Organizing inputs
+    Parte 3: Organizando entradas
   
 
     
@@ -2125,7 +2157,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Configuration
+    Parte 4: Configuração
   
 
     
@@ -2153,7 +2185,7 @@
   <span class="md-ellipsis">
     
   
-    Survey
+    Questionário
   
 
     
@@ -2181,7 +2213,7 @@
   <span class="md-ellipsis">
     
   
-    Next steps
+    Próximos passos
   
 
     
@@ -2235,7 +2267,7 @@
   <span class="md-ellipsis">
     
   
-    Side Quests
+    Missões Secundárias
   
 
     
@@ -2251,7 +2283,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Side Quests
+    Missões Secundárias
   
 
           </label>
@@ -2271,7 +2303,7 @@
   <span class="md-ellipsis">
     
   
-    Side Quests
+    Missões Secundárias
   
 
     
@@ -2299,7 +2331,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    Orientação
   
 
     
@@ -2327,7 +2359,7 @@
   <span class="md-ellipsis">
     
   
-    Development Environment
+    Ambiente de Desenvolvimento
   
 
     
@@ -2355,7 +2387,7 @@
   <span class="md-ellipsis">
     
   
-    Metadata and meta maps
+    Metadados e mapas meta
   
 
     
@@ -2383,7 +2415,7 @@
   <span class="md-ellipsis">
     
   
-    File input processing
+    Processamento de entrada de arquivos
   
 
     
@@ -2411,7 +2443,7 @@
   <span class="md-ellipsis">
     
   
-    Splitting and Grouping
+    Divisão e Agrupamento
   
 
     
@@ -2439,7 +2471,7 @@
   <span class="md-ellipsis">
     
   
-    Workflows of Workflows
+    Fluxos de Trabalho de Fluxos de Trabalho
   
 
     
@@ -2467,7 +2499,7 @@
   <span class="md-ellipsis">
     
   
-    Debugging Workflows
+    Depurando Workflows
   
 
     
@@ -2495,7 +2527,7 @@
   <span class="md-ellipsis">
     
   
-    Essential Nextflow Scripting Patterns
+    Padrões Essenciais de Script em Nextflow
   
 
     
@@ -2523,7 +2555,7 @@
   <span class="md-ellipsis">
     
   
-    Testing with nf-test
+    Testando com nf-test
   
 
     
@@ -2569,7 +2601,7 @@
   <span class="md-ellipsis">
     
   
-    Training Collections
+    Index
   
 
     
@@ -2585,7 +2617,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Training Collections
+    Index
   
 
           </label>
@@ -2605,7 +2637,7 @@
   <span class="md-ellipsis">
     
   
-    Training Collections
+    Index
   
 
     
@@ -2633,7 +2665,7 @@
   <span class="md-ellipsis">
     
   
-    The Architect's Toolkit I
+    Architects toolkit 1
   
 
     
@@ -2715,7 +2747,7 @@
   <span class="md-ellipsis">
     
   
-    Conseguindo ajuda
+    Obtendo ajuda
   
 
     
@@ -2754,7 +2786,7 @@
   <span class="md-ellipsis">
     
   
-    Training environment
+    Opções de ambiente
   
 
     
@@ -2770,7 +2802,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Training environment
+    Opções de ambiente
   
 
           </label>
@@ -2790,7 +2822,7 @@
   <span class="md-ellipsis">
     
   
-    Configuração do ambiente
+    Opções de ambiente
   
 
     
@@ -2818,7 +2850,7 @@
   <span class="md-ellipsis">
     
   
-    Gitpod
+    GitHub Codespaces
   
 
     
@@ -2846,7 +2878,7 @@
   <span class="md-ellipsis">
     
   
-    Local Devcontainers
+    Devcontainers Locais
   
 
     
@@ -2874,7 +2906,7 @@
   <span class="md-ellipsis">
     
   
-    Instalação local
+    Instalação manual
   
 
     
@@ -2910,7 +2942,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow versions
+    Versões do Nextflow
   
 
     
@@ -2938,7 +2970,7 @@
   <span class="md-ellipsis">
     
   
-    The Hello pipeline
+    O pipeline Hello
   
 
     
@@ -2980,172 +3012,172 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#welcome" class="md-nav__link">
+  <a href="#boas-vindas" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Welcome
+        Boas-vindas
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#0-warmup-check-that-docker-is-enabled-and-run-the-hello-config-workflow" class="md-nav__link">
+  <a href="#0-aquecimento-verificar-que-o-docker-esta-habilitado-e-executar-o-fluxo-de-trabalho-hello-config" class="md-nav__link">
     <span class="md-ellipsis">
       
-        0. Warmup: Check that Docker is enabled and run the Hello Config workflow
+        0. Aquecimento: Verificar que o Docker está habilitado e executar o fluxo de trabalho Hello Config
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#1-determine-what-software-packaging-technology-to-use" class="md-nav__link">
+  <a href="#1-determinar-qual-tecnologia-de-empacotamento-de-software-usar" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Determine what software packaging technology to use
+        1. Determinar qual tecnologia de empacotamento de software usar
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#13-run-the-workflow-to-verify-that-it-can-use-conda" class="md-nav__link">
+  <a href="#13-executar-o-fluxo-de-trabalho-para-verificar-que-ele-pode-usar-conda" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.3. Run the workflow to verify that it can use Conda
+        1.3. Executar o fluxo de trabalho para verificar que ele pode usar Conda
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#2-allocate-compute-resources-with-process-directives" class="md-nav__link">
+  <a href="#2-alocar-recursos-computacionais-com-diretivas-de-processo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Allocate compute resources with process directives
+        2. Alocar recursos computacionais com diretivas de processo
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#21-run-the-workflow-to-generate-a-resource-utilization-report" class="md-nav__link">
+  <a href="#21-executar-o-fluxo-de-trabalho-para-gerar-um-relatorio-de-utilizacao-de-recursos" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1. Run the workflow to generate a resource utilization report
+        2.1. Executar o fluxo de trabalho para gerar um relatório de utilização de recursos
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#23-set-resource-allocations-for-an-individual-process" class="md-nav__link">
+  <a href="#23-definir-alocacoes-de-recursos-para-um-processo-individual" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.3. Set resource allocations for an individual process
+        2.3. Definir alocações de recursos para um processo individual
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#24-run-the-workflow-with-the-modified-configuration" class="md-nav__link">
+  <a href="#24-executar-o-fluxo-de-trabalho-com-a-configuracao-modificada" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.4. Run the workflow with the modified configuration
+        2.4. Executar o fluxo de trabalho com a configuração modificada
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#25-add-resource-limits" class="md-nav__link">
+  <a href="#25-adicionar-limites-de-recursos" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.5. Add resource limits
+        2.5. Adicionar limites de recursos
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#3-use-a-parameter-file-to-store-workflow-parameters" class="md-nav__link">
+  <a href="#3-usar-um-arquivo-de-parametros-para-armazenar-parametros-do-fluxo-de-trabalho" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Use a parameter file to store workflow parameters
+        3. Usar um arquivo de parâmetros para armazenar parâmetros do fluxo de trabalho
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#31-run-the-workflow-using-a-parameter-file" class="md-nav__link">
+  <a href="#31-executar-o-fluxo-de-trabalho-usando-um-arquivo-de-parametros" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1. Run the workflow using a parameter file
+        3.1. Executar o fluxo de trabalho usando um arquivo de parâmetros
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#3-determine-what-executors-should-be-used-to-do-the-work" class="md-nav__link">
+  <a href="#3-determinar-qualis-executores-devem-ser-usados-para-fazer-o-trabalho" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Determine what executor(s) should be used to do the work
+        3. Determinar qual(is) executor(es) deve(m) ser usado(s) para fazer o trabalho
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#31-targeting-a-different-backend" class="md-nav__link">
+  <a href="#31-direcionando-para-um-backend-diferente" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1. Targeting a different backend
+        3.1. Direcionando para um backend diferente
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#4-use-profiles-to-select-preset-configurations" class="md-nav__link">
+  <a href="#4-usar-perfis-para-selecionar-configuracoes-predefinidas" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Use profiles to select preset configurations
+        4. Usar perfis para selecionar configurações predefinidas
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#41-create-profiles-for-switching-between-local-development-and-execution-on-hpc" class="md-nav__link">
+  <a href="#41-criar-perfis-para-alternar-entre-desenvolvimento-local-e-execucao-em-hpc" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.1. Create profiles for switching between local development and execution on HPC
+        4.1. Criar perfis para alternar entre desenvolvimento local e execução em HPC
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#42-run-the-workflow-with-a-profile" class="md-nav__link">
+  <a href="#42-executar-o-fluxo-de-trabalho-com-um-perfil" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.2. Run the workflow with a profile
+        4.2. Executar o fluxo de trabalho com um perfil
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#43-create-a-test-profile" class="md-nav__link">
+  <a href="#43-criar-um-perfil-de-teste" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.3. Create a test profile
+        4.3. Criar um perfil de teste
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#44-run-the-workflow-locally-with-the-test-profile" class="md-nav__link">
+  <a href="#44-executar-o-fluxo-de-trabalho-localmente-com-o-perfil-de-teste" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.4. Run the workflow locally with the test profile
+        4.4. Executar o fluxo de trabalho localmente com o perfil de teste
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#wrap-up" class="md-nav__link">
+  <a href="#conclusao" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Wrap up
+        Conclusão
       
     </span>
   </a>
@@ -3389,128 +3421,138 @@
                 
                   
 
+ 
+<a
+  href="https://github.com/nextflow-io/training/edit/master/docs/hello_nextflow/transcripts/06_hello_config.md"
+  title="Editar esta página"
+  class="md-content__button md-icon"
+  rel="edit"
+>
+   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+</a>
+   
+<a
+  href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md"
+  title="Improve translation"
+  class="md-content__button md-icon"
+>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 1H3c-1.1 0-2 .9-2 2v12l3-3h5v-1c0-2.2 1.79-4 4-4V3c0-1.1-.9-2-2-2m0 3H9.5c-.34 1.19-.96 2.3-1.82 3.26l-.02.02 1.26 1.25-.37 1.01L7 8l-2.5 2.5-.69-.73 2.53-2.49A8.6 8.6 0 0 1 4.86 5h.99c.31.6.69 1.17 1.15 1.68A7.7 7.7 0 0 0 8.57 4H3V3h3.5V2h1v1H11zm10 5h-8c-1.1 0-2 .9-2 2v7c0 1.1.9 2 2 2h7l3 3V11c0-1.1-.9-2-2-2m-1.37 10-.85-2.25h-3.56L14.38 19h-1.5l3.37-9h1.5l3.38 9zM17 12l1.22 3.25h-2.43z"/></svg>
+</a>
+ 
 
-  
-    <a href="https://github.com/nextflow-io/training/edit/master/docs/hello_nextflow/transcripts/06_hello_config.md" title="Editar esta página" class="md-content__button md-icon" rel="edit">
-      
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
-    </a>
-  
-  
-
-
-<h1 id="part-6-hello-config-transcript">Part 6: Hello Config - Transcript<a class="headerlink" href="#part-6-hello-config-transcript" title="Permanent link">&para;</a></h1>
+<h1 id="parte-6-hello-config-transcricao">Parte 6: Hello Config - Transcrição<a class="headerlink" href="#parte-6-hello-config-transcricao" title="Permanent link">&para;</a></h1>
+<p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Tradução assistida por IA - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">saiba mais e sugira melhorias</a></span></p>
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/IuDO2HeKvXk?si=tnXTi6mRkITY0zW_&amp;list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 <div class="admonition note">
-<p class="admonition-title">Important notes</p>
-<p>This page shows the transcript only. For full step-by-step instructions, return to the <a href="../../06_hello_config/">course material</a>.</p>
-<p>The section numbers shown in the transcript are provided for indicative purposes only and may not include all section numbers in the materials.</p>
+<p class="admonition-title">Notas importantes</p>
+<p>Esta página mostra apenas a transcrição. Para instruções completas passo a passo, retorne ao <a href="../../06_hello_config/">material do curso</a>.</p>
+<p>Os números das seções mostrados na transcrição são fornecidos apenas para fins indicativos e podem não incluir todos os números de seção nos materiais.</p>
 </div>
-<h2 id="welcome">Welcome<a class="headerlink" href="#welcome" title="Permanent link">&para;</a></h2>
-<p>Hi, welcome to part six of the Hello Nextflow training course.</p>
-<p>This chapter is called Hello Config, and it's the final part of our training course.</p>
-<p>In this chapter, we're going to be talking about Nextflow configuration. Nextflow configuration is really powerful. It allows us to run the same pipeline on multiple different compute infrastructures with different software provisioning. and different options in the pipeline itself.</p>
-<p>This means that you can take Nextflow pipelines built by other people and run them on your system, even though they may have been built for an entirely different infrastructure. This ability to configure Nextflow makes workflows truly portable and shareable.</p>
-<p>In this chapter, we'll be using the workflow we've built in previous parts, but we're not going to edit the workflow code at all. We're just going to look at our Nextflow config file and see how changing the config alters the way that Nextflow runs.</p>
-<p>Okay, let's get started.</p>
-<p>Just as before, let's start off by going to training.nextflow.io. Go over to the left on Hello Nextflow and chapter six. Hello config. I'm now going to go into my GitHub code Spaces environment and double check the script that we'll be using.</p>
-<h2 id="0-warmup-check-that-docker-is-enabled-and-run-the-hello-config-workflow">0. Warmup: Check that Docker is enabled and run the Hello Config workflow<a class="headerlink" href="#0-warmup-check-that-docker-is-enabled-and-run-the-hello-config-workflow" title="Permanent link">&para;</a></h2>
-<p>This one's called Hello Config, and it's starting off from where we were before. So looking exactly the same with our three parameters. Greetings for the CSV file, batch for the output batch name and the character for the cowpy name. We have our four imports of the different processes, and then we have a workflow where we chain them together.</p>
-<p>I am actually going to close this file now because we're not going to touch the Nextflow file at all in this chapter. We're going to work purely within configuration file. If I look into the Nextflow dot config file that we briefly looked at in the previous chapter five, we can see that we have a single statement here: Docker enabled equals true, which which is telling Nextflow to use Docker when it executes this workflow.</p>
-<p>I am using Nextflow dot config in the pipeline root here, which is loaded automatically when I run Nextflow. But remember, Nextflow can load config files from multiple places.</p>
-<p>If I check with Nextflow docs go to Configuration, you can see a list of these places and a priority which they load in.</p>
-<p>Okay. Let's check that our workflow is executing as we expect it to. Bring up a terminal. Do Nextflow. Run. Hello, config. And hit enter. We should have those four processes running, ending up with a cowpy command. Sure enough, this worked properly. I had Docker enabled it, pulled Docker and ran cowpy for me, just as it did at the end of chapter five.</p>
-<h2 id="1-determine-what-software-packaging-technology-to-use">1. Determine what software packaging technology to use<a class="headerlink" href="#1-determine-what-software-packaging-technology-to-use" title="Permanent link">&para;</a></h2>
-<p>Okay. Let's say I'm running on an HPC and I don't have Docker installed. The best thing to do in this scenario would be to use Singularity or Apptainer. If I was going to do that, I'd go into the module cowpy and change this container to use the singularity image like I showed in the previous chapter, with an oras://, which you can also get from Seqera Containers.</p>
-<p>I'd then go to Nextflow dot config set Docker enabled to false and do singularity enabled equals true. Or, if using Apptainer, apptainer enabled equals true and that would work.</p>
-<p>Nextflow, it does support other technologies as well apart from containers though, something you might be familiar with is conda. Here we can do conda enabled equals true and set Docker to false. conda doesn't use the same container directive. Instead, we can add a new one here called conda. We then specify the conda package we want to use. It's good practice to be as specific as possible to try and make the pipeline as reproducible as possible. So I'm going to specify the conda channel, conda- forge, and then cowpy, and the exact version, which was 1.1.5.</p>
-<p>I could also just write cowpy if I wanted, but that might resolve to a different version of cowpy on different executions of the pipeline.</p>
-<p>The nice thing about this is that I haven't touched the docker directive at all. This Docker image is still there. I'm just providing two alternatives now, and these can be switched on or off by using a config file alone.</p>
-<h2 id="13-run-the-workflow-to-verify-that-it-can-use-conda">1.3. Run the workflow to verify that it can use Conda<a class="headerlink" href="#13-run-the-workflow-to-verify-that-it-can-use-conda" title="Permanent link">&para;</a></h2>
-<p>Conda's now enabled, so let's try it out.</p>
-<p>Great. It's running and you can see there's a message from Nextflow here saying that Nextflow is creating a conda environment for me, and it's using this cache location.</p>
-<p>In the background, Nextflow is running "conda create" commands for me to create a new isolated conda environment with just the packages I want, and then installing and fetching those conda packages so that it can run the process.</p>
-<p>You can see it took a little bit of time there because it was creating the environment and installing the software for the first time. However, it's cached this environment, so if I run the same Nextflow command again, it should be a lot quicker because it will reuse the same conda environment.</p>
-<p>One of the cool things about this is that these directives can be specified at process level, not just the entire workflow. So if you want to, you can mix and match what technology is used for different processes.</p>
-<h2 id="2-allocate-compute-resources-with-process-directives">2. Allocate compute resources with process directives<a class="headerlink" href="#2-allocate-compute-resources-with-process-directives" title="Permanent link">&para;</a></h2>
-<p>The Nextflow configuration file can do a lot more than just software packaging. We can also tell Nextflow how to actually run the steps in the pipeline. One example is telling a host system what resources should be made available to each executing task.</p>
-<p>By default, Nextflow doesn't give very much. It gives a single CPU and only two gigabytes of memory to each process.</p>
-<p>This is probably something we'd want to change, so that processes which take a long time to run can have more resources and run more quickly, but it can be difficult to know what to allocate to a process. Nextflow has some nice tricks up its sleeve to help you with this.</p>
-<h2 id="21-run-the-workflow-to-generate-a-resource-utilization-report">2.1. Run the workflow to generate a resource utilization report<a class="headerlink" href="#21-run-the-workflow-to-generate-a-resource-utilization-report" title="Permanent link">&para;</a></h2>
-<p>Let's run the workflow again. This time, I'm going to add an additional argument, which is dash with reports. It's a core Nextflow option, so it's a single hyphen. And then whatever file name I like. In this case, I'm going to call it report config one html.</p>
-<p>I'm going to run the workflow again. It's going to run exactly as before, but it's going to give me an additional helper report, which you can see has now popped up here in the sidebar.</p>
-<p>I am going to right click on this file, click download, which downloads it from GitHub code Spaces to my local system, so that I can easily then view it in the web browser up here.</p>
-<p>This report can be generated for any Nextflow run, and it has a lot of information in. It starts off at the top with some metadata about what command was used, when the workflow ran, how long it took, but as you scroll down, we get more detailed information about the resources, which were used by every step in the pipeline.</p>
-<p>Because each process runs multiple times for different tasks. We have a box plot showing the variation of the resources that we used for each process.</p>
-<p>If I scroll down a bit further, I see similar information about memory used and job duration. Also disk read write.</p>
-<p>You can imagine for a large pipeline with long running tasks, this can be very informative about how to fine tune the configuration of the resources which you're requesting so that you don't over request, but also so that you can provide enough that it runs quickly.</p>
-<p>If I keep scrolling down the report, we also see a task table, which shows us detailed information about every single task that was run in the workflow. This includes information such as the resolved script, which was run.</p>
-<p>Okay, let's go back to our config file. We saw that we really didn't need much for our workflow, so let's tell Nextflow that we only need one gigabyte of memory for every process in the workflow.</p>
-<p>Now when we define it like this at process level, this is applied to every single process in the pipeline.</p>
-<h2 id="23-set-resource-allocations-for-an-individual-process">2.3. Set resource allocations for an individual process<a class="headerlink" href="#23-set-resource-allocations-for-an-individual-process" title="Permanent link">&para;</a></h2>
-<p>For the sake of argument, let's pretend that cowpy is really doing a lot of heavy lifting and it needs more resources than the other tasks. We can define an extra block of config here, which applies to just that process by using, with name cowpy.</p>
-<p>This is called a config selector, and we can define different patterns here to match different processes. For example, I could do cow star. I then follow that with some curly brackets and let's give it two gigabytes of memory instead of one and let's say two CPUs.</p>
-<p>Now Nextflow will be giving every process in the workflow one gigabyte apart from this request, which is more specific. So it overrides it. And just for any processes which are called cowpy, will get two gigs of memory and two CPUs.</p>
-<p>Note that Nextflow is clever about resource utilization. So if you start putting these numbers to higher values, you'll see that Nextflow starts to queue job submissions one after another, rather than running all of them in parallel, so that it doesn't over request the resources which are available.</p>
-<h2 id="24-run-the-workflow-with-the-modified-configuration">2.4. Run the workflow with the modified configuration<a class="headerlink" href="#24-run-the-workflow-with-the-modified-configuration" title="Permanent link">&para;</a></h2>
-<p>Let's try running a workflow again and let's save a new report this time.</p>
-<p>Okay, we can download this file and take a look.</p>
-<p>Yeah, unsurprisingly, it looks basically exactly the same because this is a dummy workflow, which is not doing anything real. But you can imagine how this iterative approach of defining limits and doing real life workflows with this kind of reporting allows you to do an evidence-based approach to setting appropriate configuration and really making the most of the computational resources that you have available to you.</p>
-<p>You can start to be really clever about this. Nextflow has a built-in ability to retry failures, and you can take advantage in your config file by using a closure like this and dynamically setting the resources which are made available. So here I've told Nextflow to multiply that two gigabyte by the retry attempt. So the second retry will get four gigs, the third retry will get six gigs and so on. This is a bit beyond the scope of this training course, but if you're interested, check out the Nextflow docs, which has a nice section about dynamic retry logic.</p>
-<h2 id="25-add-resource-limits">2.5. Add resource limits<a class="headerlink" href="#25-add-resource-limits" title="Permanent link">&para;</a></h2>
-<p>Now, one thing you might notice about this is this kind of thing may make it quite easy to accidentally go beyond the resources available on your system. If you request more resources than are available Nextflow will throw an error about your configuration and halt the run. To avoid that, you can use something called resource limits.</p>
-<p>Under process scope, in our workflow, we can define resource limits like this, which takes an array, and we can specify the maximum memory CPUs and time which are available on this system.</p>
-<p>Setting high values here doesn't increase the amount of resources which are requested. We're still going to be using one gigabyte in our requests, but it means that if any of these requests get to 750, they'll hit that ceiling and nothing more than that will be requested, which means that Nextflow will continue to run and won't crash because of unavailable resources.</p>
-<p>So this is a nice safeguard to use, especially if you're using dynamic logic with your resource allocation.</p>
-<p>The other situation where this is really useful is if you're using pipelines which are public and not controlled by you. They might come with configuration defaults, and Nextflow will automatically take the right approach of thresholding any resource requests to run on your system.</p>
-<p>Okay, great. We've talked about software. We've talked about resource allocation, and we've described different scopes of config, both for all processes and specific processes.</p>
-<h2 id="3-use-a-parameter-file-to-store-workflow-parameters">3. Use a parameter file to store workflow parameters<a class="headerlink" href="#3-use-a-parameter-file-to-store-workflow-parameters" title="Permanent link">&para;</a></h2>
-<p>Okay, next we're going to turn our attention to parameters. We can define parameters in the config file just as we did before in the Nextflow script. So params dot greeting equals hello or or use params scope and set foo equals bar.</p>
-<p>And that's great for setting defaults for your workflow. However, when you're running pipelines, it can be nice to specify parameters in a JSON or a YAML file.</p>
-<p>Using a file like this is much better than specifying command line options with dash dash. As when you run a workflow, you might have to specify many parameters and it can be tedious to write them all on a single CLI and error prone. Also, it is unlikely that you'll remember all the parameters that you used, so if you code that into a file, it's easier to launch the workflow again, using the same parameters in the future.</p>
-<p>We've got an example file here called test params, and you can see this specifies the three parameters we've got in our workflow with three different values. Personally, I find YAML easier to write than JSON. So just to demonstrate that it works, I'm going to create a new file called Test yaml and copy these in, get rid of the quotes. And hit save.</p>
-<p>These JSON and YAML files can be easier to write as they're more familiar syntax. But note that these are only for parameters and they only take key value syntax like this.</p>
-<h2 id="31-run-the-workflow-using-a-parameter-file">3.1. Run the workflow using a parameter file<a class="headerlink" href="#31-run-the-workflow-using-a-parameter-file" title="Permanent link">&para;</a></h2>
-<p>Let's try it out. Do same command as before. Get rid of the report and I'm going to do dash params file test params yaml.</p>
-<p>No, this is a core Nextflow option, so it's a single hyphen.</p>
-<p>Okay. It ran the workflow and it used the parameters in that YAML file instead of me specifying them all on the command line. Might seem like overkill just for this simple example, but you can imagine if you have 10 or 20 different parameters, it can be a pain to type in manually, and this is just much easier to edit in a code editor and keep hold of for reproducibility sake.</p>
-<h2 id="3-determine-what-executors-should-be-used-to-do-the-work">3. Determine what executor(s) should be used to do the work<a class="headerlink" href="#3-determine-what-executors-should-be-used-to-do-the-work" title="Permanent link">&para;</a></h2>
-<p>Okay. We've talked about software packaging with Docker and conda. We've talked about process resource requirements with CPUs and memory. And we talked a little bit about how to specify parameters when running workflows.</p>
-<p>The final parts of the configuration really is the execution, the underlying compute infrastructure itself, and this is the real jewel in the crown of Nextflow: that we can run these same workflow across multiple different compute infrastructures.</p>
-<p>I'm actually going to switch over to the written training material for a second. Under this part of the training, we can see a few different examples of how different executors, in this case, HPC schedulers, define the resource requirements needed to submit a job.</p>
-<p>So for Slurm, you have these SBATCH headers, which define dash dash mem and the CPU number. If you're using PBS, you have different headers, and if you use Grid Engine, you have different headers again.</p>
-<p>You can imagine it's even more different if you want to run on the cloud, be it AWS batch, Google Cloud, Azure, or more.</p>
-<p>Each of these underlying compute infrastructures is called an executor and Nextflow knows how to talk to all of these different executors in order to submit jobs with the correct syntax.</p>
-<p>The good news is you don't have to know about this. All you have to do is tell Nextflow, which executor to use.</p>
-<h2 id="31-targeting-a-different-backend">3.1. Targeting a different backend<a class="headerlink" href="#31-targeting-a-different-backend" title="Permanent link">&para;</a></h2>
-<p>We go back to our config file and the process we do executor, and I'm going to type local.</p>
-<p>Local's actually the default, if you don't specify any other executor, local is what will be used, and that just means your host system, wherever you launched Nextflow,</p>
-<p>I could specify instead, Slurm. And that would submit Slurm jobs, or I could say AWS batch, and that would submit jobs to AWS batch.</p>
-<p>You need some additional configuration in some cases, for example, running on cloud will need certain credentials, but really this is the core of it, and it can be as simple as one or two lines of config to run your workflow in a completely different compute environment.</p>
-<p>Even though we are running on a simple system within code spaces, I can still play around with this a bit and pretend that we're running on Slurm. If I then launch the workflow again, Nextflow run, hello config. It will fail because it won't be able to submit jobs to Slurm. But we can still go into the work directories and see what Nextflow did. So if we go to this work directory and look at Command Run. You can see at the top of this file, we now have these sbatch header lines, which tried to specify the resources needed for the Slurm job.</p>
-<h2 id="4-use-profiles-to-select-preset-configurations">4. Use profiles to select preset configurations<a class="headerlink" href="#4-use-profiles-to-select-preset-configurations" title="Permanent link">&para;</a></h2>
-<p>Okay, we're nearly there. Final part of this chapter is talking about configuration profiles. If you're running your pipeline on several different systems, it could be annoying to have all these different Nextflow config files, which you need to specify every time.</p>
-<p>Instead, you can encode groupings of configuration within your Nextflow config file, and switch those groups on and off by using a profile flag. Let's see how that looks.</p>
-<h2 id="41-create-profiles-for-switching-between-local-development-and-execution-on-hpc">4.1. Create profiles for switching between local development and execution on HPC<a class="headerlink" href="#41-create-profiles-for-switching-between-local-development-and-execution-on-hpc" title="Permanent link">&para;</a></h2>
-<p>We're going to create two profiles in our example here, one for my laptop and one for a heavier HPC system. I'm going to cheat a little bit and just copy the code from the training material and put it in here.</p>
-<p>We have a new scope called profiles, and then we have a name for each profile, which can be anything. And within that we have configuration, which looks exactly the same as the top level config that we already wrote. So again, we have process scope. Docker scope.</p>
-<p>On the profile called my laptop. I'm saying to run using the local executor, so on my host system and to use Docker.</p>
-<p>On the university HPC profile here I'm saying to use Slurm to submit jobs, to use conda instead of Docker, and I'm specifying different resource limits, which may match for system size of a nodes on the HPC I'm using.</p>
-<p>By default, none of this configuration will be used when I run Nextflow, I have to specify that I want to use one of these profiles.</p>
-<h2 id="42-run-the-workflow-with-a-profile">4.2. Run the workflow with a profile<a class="headerlink" href="#42-run-the-workflow-with-a-profile" title="Permanent link">&para;</a></h2>
-<p>Let's do nextflow run hello config. And I'm going to do dash profile, single hyphen because it's a core Nextflow option. And then the name I gave it, which is my laptop. Nextflow should now use the block of config that was specified within that configuration profile, and apply it when it runs Nextflow. If I wanted to use the other config block, I just have to switch that profile name. Much easier to remember. Much easier to use.</p>
-<h2 id="43-create-a-test-profile">4.3. Create a test profile<a class="headerlink" href="#43-create-a-test-profile" title="Permanent link">&para;</a></h2>
-<p>Note, the profiles can have any kind of configuration, so it doesn't have to be related to your execution environment. For example, let's create a new profile here, which has a set of parameters. We can change this to tux and change to my profile, and now when we do profile test, it's going to specify these parameters, which will overwrite the parameters which are specified at the top level of the workflow.</p>
-<p>When you run Nextflow, you can chain multiple profiles and they'll be applied in sequence.</p>
-<h2 id="44-run-the-workflow-locally-with-the-test-profile">4.4. Run the workflow locally with the test profile<a class="headerlink" href="#44-run-the-workflow-locally-with-the-test-profile" title="Permanent link">&para;</a></h2>
-<p>So I can take the previous command and do comma test. That will apply the, my laptop config first, and then it will apply the test config. If there's any overlap, then the profile on the right will overwrite any configuration in previous profiles. If I hit enter, let's see what happens.</p>
-<p>Okay, we've got a new results file here. You can see the My Profile, which I specified as one of the options. And we can also see cowpy, my profile, and sure enough, there's tux. So that's worked.</p>
-<h2 id="wrap-up">Wrap up<a class="headerlink" href="#wrap-up" title="Permanent link">&para;</a></h2>
-<p>Okay! Amazing. That's it. You've made it to the end of the course. You get a little bit of celebration confetti. Well done for finishing this chapter.</p>
-<p><a href="../07_next_steps/">Next video transcript <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.22 19.03a.75.75 0 0 1 0-1.06L18.19 13H3.75a.75.75 0 0 1 0-1.5h14.44l-4.97-4.97a.749.749 0 0 1 .326-1.275.75.75 0 0 1 .734.215l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0"/></svg></span></a></p><style type="text/css">.quiz {
+<h2 id="boas-vindas">Boas-vindas<a class="headerlink" href="#boas-vindas" title="Permanent link">&para;</a></h2>
+<p>Olá, bem-vindo à parte seis do curso de treinamento Hello Nextflow.</p>
+<p>Este capítulo se chama Hello Config, e é a parte final do nosso curso de treinamento.</p>
+<p>Neste capítulo, vamos falar sobre configuração do Nextflow. A configuração do Nextflow é muito poderosa. Ela nos permite executar o mesmo pipeline em múltiplas infraestruturas computacionais diferentes com diferentes provisionamentos de software e diferentes opções no próprio pipeline.</p>
+<p>Isso significa que você pode pegar pipelines Nextflow construídos por outras pessoas e executá-los no seu sistema, mesmo que eles tenham sido construídos para uma infraestrutura completamente diferente. Esta capacidade de configurar o Nextflow torna os fluxos de trabalho verdadeiramente portáteis e compartilháveis.</p>
+<p>Neste capítulo, usaremos o fluxo de trabalho que construímos nas partes anteriores, mas não vamos editar o código do fluxo de trabalho. Vamos apenas olhar nosso arquivo de configuração do Nextflow e ver como alterar a configuração modifica a forma como o Nextflow é executado.</p>
+<p>Ok, vamos começar.</p>
+<p>Assim como antes, vamos começar indo para training.nextflow.io. Vá para o lado esquerdo em Hello Nextflow e capítulo seis. Hello config. Agora vou entrar no meu ambiente GitHub Codespaces e verificar o script que usaremos.</p>
+<h2 id="0-aquecimento-verificar-que-o-docker-esta-habilitado-e-executar-o-fluxo-de-trabalho-hello-config">0. Aquecimento: Verificar que o Docker está habilitado e executar o fluxo de trabalho Hello Config<a class="headerlink" href="#0-aquecimento-verificar-que-o-docker-esta-habilitado-e-executar-o-fluxo-de-trabalho-hello-config" title="Permanent link">&para;</a></h2>
+<p>Este se chama Hello Config, e está começando de onde estávamos antes. Então parecendo exatamente o mesmo com nossos três parâmetros. Greetings para o arquivo CSV, batch para o nome do lote de saída e character para o nome do cowpy. Temos nossas quatro importações dos diferentes processos, e então temos um fluxo de trabalho onde os encadeamos.</p>
+<p>Na verdade, vou fechar este arquivo agora porque não vamos tocar no arquivo Nextflow em absoluto neste capítulo. Vamos trabalhar puramente dentro do arquivo de configuração. Se eu olhar para o arquivo Nextflow dot config que vimos brevemente no capítulo cinco anterior, podemos ver que temos uma única instrução aqui: Docker enabled equals true, que está dizendo ao Nextflow para usar Docker quando executar este fluxo de trabalho.</p>
+<p>Estou usando Nextflow dot config na raiz do pipeline aqui, que é carregado automaticamente quando executo o Nextflow. Mas lembre-se, o Nextflow pode carregar arquivos de configuração de múltiplos lugares.</p>
+<p>Se eu verificar com Nextflow docs vou para Configuration, você pode ver uma lista desses lugares e uma prioridade na qual eles são carregados.</p>
+<p>Ok. Vamos verificar se nosso fluxo de trabalho está executando como esperamos. Abrir um terminal. Fazer Nextflow. Run. Hello, config. E pressionar enter. Devemos ter esses quatro processos executando, terminando com um comando cowpy. Com certeza, isso funcionou corretamente. Eu tinha o Docker habilitado, puxou o Docker e executou o cowpy para mim, exatamente como fez no final do capítulo cinco.</p>
+<h2 id="1-determinar-qual-tecnologia-de-empacotamento-de-software-usar">1. Determinar qual tecnologia de empacotamento de software usar<a class="headerlink" href="#1-determinar-qual-tecnologia-de-empacotamento-de-software-usar" title="Permanent link">&para;</a></h2>
+<p>Ok. Digamos que estou executando em um HPC e não tenho o Docker instalado. A melhor coisa a fazer neste cenário seria usar Singularity ou Apptainer. Se eu fosse fazer isso, iria para o módulo cowpy e mudaria este contêiner para usar a imagem singularity como mostrei no capítulo anterior, com um oras://, que você também pode obter do Seqera Containers.</p>
+<p>Eu então iria para Nextflow dot config definir Docker enabled para false e fazer singularity enabled equals true. Ou, se usar Apptainer, apptainer enabled equals true e isso funcionaria.</p>
+<p>O Nextflow suporta outras tecnologias também, além de contêineres, algo com que você pode estar familiarizado é conda. Aqui podemos fazer conda enabled equals true e definir Docker para false. conda não usa a mesma diretiva container. Em vez disso, podemos adicionar uma nova aqui chamada conda. Então especificamos o pacote conda que queremos usar. É uma boa prática ser o mais específico possível para tentar tornar o pipeline o mais reproduzível possível. Então vou especificar o canal conda, conda-forge, e então cowpy, e a versão exata, que era 1.1.5.</p>
+<p>Eu também poderia apenas escrever cowpy se quisesse, mas isso poderia resolver para uma versão diferente do cowpy em diferentes execuções do pipeline.</p>
+<p>O legal sobre isso é que não toquei na diretiva docker de forma alguma. Esta imagem Docker ainda está lá. Estou apenas fornecendo duas alternativas agora, e estas podem ser ligadas ou desligadas usando apenas um arquivo de configuração.</p>
+<h2 id="13-executar-o-fluxo-de-trabalho-para-verificar-que-ele-pode-usar-conda">1.3. Executar o fluxo de trabalho para verificar que ele pode usar Conda<a class="headerlink" href="#13-executar-o-fluxo-de-trabalho-para-verificar-que-ele-pode-usar-conda" title="Permanent link">&para;</a></h2>
+<p>Conda está agora habilitado, então vamos experimentar.</p>
+<p>Ótimo. Está executando e você pode ver que há uma mensagem do Nextflow aqui dizendo que o Nextflow está criando um ambiente conda para mim, e está usando este local de cache.</p>
+<p>Nos bastidores, o Nextflow está executando comandos "conda create" para mim para criar um novo ambiente conda isolado com apenas os pacotes que eu quero, e então instalando e buscando esses pacotes conda para que possa executar o processo.</p>
+<p>Você pode ver que levou um pouco de tempo porque estava criando o ambiente e instalando o software pela primeira vez. No entanto, ele armazenou em cache este ambiente, então se eu executar o mesmo comando Nextflow novamente, deve ser muito mais rápido porque ele reutilizará o mesmo ambiente conda.</p>
+<p>Uma das coisas legais sobre isso é que essas diretivas podem ser especificadas no nível do processo, não apenas para o fluxo de trabalho inteiro. Então, se você quiser, pode misturar e combinar qual tecnologia é usada para diferentes processos.</p>
+<h2 id="2-alocar-recursos-computacionais-com-diretivas-de-processo">2. Alocar recursos computacionais com diretivas de processo<a class="headerlink" href="#2-alocar-recursos-computacionais-com-diretivas-de-processo" title="Permanent link">&para;</a></h2>
+<p>O arquivo de configuração do Nextflow pode fazer muito mais do que apenas empacotamento de software. Também podemos dizer ao Nextflow como realmente executar os passos no pipeline. Um exemplo é dizer a um sistema host quais recursos devem ser disponibilizados para cada tarefa em execução.</p>
+<p>Por padrão, o Nextflow não dá muito. Ele dá uma única CPU e apenas dois gigabytes de memória para cada processo.</p>
+<p>Isso é provavelmente algo que gostaríamos de mudar, para que processos que demoram muito para executar possam ter mais recursos e executar mais rapidamente, mas pode ser difícil saber o que alocar para um processo. O Nextflow tem alguns truques legais para ajudá-lo com isso.</p>
+<h2 id="21-executar-o-fluxo-de-trabalho-para-gerar-um-relatorio-de-utilizacao-de-recursos">2.1. Executar o fluxo de trabalho para gerar um relatório de utilização de recursos<a class="headerlink" href="#21-executar-o-fluxo-de-trabalho-para-gerar-um-relatorio-de-utilizacao-de-recursos" title="Permanent link">&para;</a></h2>
+<p>Vamos executar o fluxo de trabalho novamente. Desta vez, vou adicionar um argumento adicional, que é dash with reports. É uma opção central do Nextflow, então é um único hífen. E então qualquer nome de arquivo que eu goste. Neste caso, vou chamá-lo de report config one html.</p>
+<p>Vou executar o fluxo de trabalho novamente. Vai executar exatamente como antes, mas vai me dar um relatório auxiliar adicional, que você pode ver que apareceu aqui na barra lateral.</p>
+<p>Vou clicar com o botão direito neste arquivo, clicar em download, que o baixa do GitHub Codespaces para o meu sistema local, para que eu possa visualizá-lo facilmente no navegador da web aqui em cima.</p>
+<p>Este relatório pode ser gerado para qualquer execução do Nextflow, e tem muita informação. Começa no topo com alguns metadados sobre qual comando foi usado, quando o fluxo de trabalho foi executado, quanto tempo levou, mas à medida que você rola para baixo, obtemos informações mais detalhadas sobre os recursos que foram usados por cada passo no pipeline.</p>
+<p>Como cada processo é executado várias vezes para diferentes tarefas, temos um gráfico de caixa mostrando a variação dos recursos que usamos para cada processo.</p>
+<p>Se eu rolar um pouco mais para baixo, vejo informações similares sobre memória usada e duração do job. Também leitura e escrita de disco.</p>
+<p>Você pode imaginar que para um pipeline grande com tarefas de longa execução, isso pode ser muito informativo sobre como ajustar finamente a configuração dos recursos que você está solicitando para que você não solicite em excesso, mas também para que você possa fornecer o suficiente para que execute rapidamente.</p>
+<p>Se eu continuar rolando o relatório para baixo, também vemos uma tabela de tarefas, que nos mostra informações detalhadas sobre cada tarefa individual que foi executada no fluxo de trabalho. Isso inclui informações como o script resolvido, que foi executado.</p>
+<p>Ok, vamos voltar ao nosso arquivo de configuração. Vimos que realmente não precisávamos de muito para nosso fluxo de trabalho, então vamos dizer ao Nextflow que só precisamos de um gigabyte de memória para cada processo no fluxo de trabalho.</p>
+<p>Agora, quando definimos assim no nível de processo, isso é aplicado a cada processo individual no pipeline.</p>
+<h2 id="23-definir-alocacoes-de-recursos-para-um-processo-individual">2.3. Definir alocações de recursos para um processo individual<a class="headerlink" href="#23-definir-alocacoes-de-recursos-para-um-processo-individual" title="Permanent link">&para;</a></h2>
+<p>Para fins de argumento, vamos fingir que cowpy está realmente fazendo muito trabalho pesado e precisa de mais recursos do que as outras tarefas. Podemos definir um bloco extra de configuração aqui, que se aplica apenas a esse processo usando, with name cowpy.</p>
+<p>Isso é chamado de seletor de configuração, e podemos definir diferentes padrões aqui para corresponder a diferentes processos. Por exemplo, eu poderia fazer cow star. Então eu sigo isso com algumas chaves e vamos dar dois gigabytes de memória em vez de um e vamos dizer duas CPUs.</p>
+<p>Agora o Nextflow estará dando a cada processo no fluxo de trabalho um gigabyte, exceto por esta solicitação, que é mais específica. Então ela sobrescreve. E apenas para quaisquer processos que são chamados cowpy, receberão dois gigs de memória e duas CPUs.</p>
+<p>Note que o Nextflow é inteligente sobre a utilização de recursos. Então, se você começar a colocar esses números em valores mais altos, verá que o Nextflow começa a enfileirar submissões de jobs uma após a outra, em vez de executar todas em paralelo, para que não solicite em excesso os recursos que estão disponíveis.</p>
+<h2 id="24-executar-o-fluxo-de-trabalho-com-a-configuracao-modificada">2.4. Executar o fluxo de trabalho com a configuração modificada<a class="headerlink" href="#24-executar-o-fluxo-de-trabalho-com-a-configuracao-modificada" title="Permanent link">&para;</a></h2>
+<p>Vamos tentar executar o fluxo de trabalho novamente e vamos salvar um novo relatório desta vez.</p>
+<p>Ok, podemos baixar este arquivo e dar uma olhada.</p>
+<p>Sim, sem surpresas, parece basicamente exatamente o mesmo porque este é um fluxo de trabalho fictício, que não está fazendo nada real. Mas você pode imaginar como esta abordagem iterativa de definir limites e fazer fluxos de trabalho da vida real com este tipo de relatório permite que você faça uma abordagem baseada em evidências para definir configuração apropriada e realmente aproveitar ao máximo os recursos computacionais que você tem disponíveis.</p>
+<p>Você pode começar a ser realmente inteligente sobre isso. O Nextflow tem uma capacidade embutida para tentar novamente falhas, e você pode aproveitar em seu arquivo de configuração usando um closure como este e definindo dinamicamente os recursos que são disponibilizados. Então aqui eu disse ao Nextflow para multiplicar aqueles dois gigabytes pela tentativa de retry. Então a segunda tentativa receberá quatro gigs, a terceira tentativa receberá seis gigs e assim por diante. Isso está um pouco além do escopo deste curso de treinamento, mas se você estiver interessado, confira a documentação do Nextflow, que tem uma seção legal sobre lógica de retry dinâmica.</p>
+<h2 id="25-adicionar-limites-de-recursos">2.5. Adicionar limites de recursos<a class="headerlink" href="#25-adicionar-limites-de-recursos" title="Permanent link">&para;</a></h2>
+<p>Agora, uma coisa que você pode notar sobre isso é que esse tipo de coisa pode tornar muito fácil acidentalmente ir além dos recursos disponíveis no seu sistema. Se você solicitar mais recursos do que estão disponíveis, o Nextflow lançará um erro sobre sua configuração e interromperá a execução. Para evitar isso, você pode usar algo chamado limites de recursos.</p>
+<p>No escopo de processo, em nosso fluxo de trabalho, podemos definir limites de recursos assim, que recebe um array, e podemos especificar a memória máxima, CPUs e tempo que estão disponíveis neste sistema.</p>
+<p>Definir valores altos aqui não aumenta a quantidade de recursos que são solicitados. Ainda vamos usar um gigabyte em nossas solicitações, mas significa que se qualquer uma dessas solicitações chegar a 750, elas atingirão esse teto e nada mais do que isso será solicitado, o que significa que o Nextflow continuará a executar e não travará por causa de recursos indisponíveis.</p>
+<p>Então, esta é uma boa proteção para usar, especialmente se você estiver usando lógica dinâmica com sua alocação de recursos.</p>
+<p>A outra situação onde isso é realmente útil é se você estiver usando pipelines que são públicos e não controlados por você. Eles podem vir com padrões de configuração, e o Nextflow automaticamente tomará a abordagem correta de limitar quaisquer solicitações de recursos para executar em seu sistema.</p>
+<p>Ok, ótimo. Falamos sobre software. Falamos sobre alocação de recursos, e descrevemos diferentes escopos de configuração, tanto para todos os processos quanto para processos específicos.</p>
+<h2 id="3-usar-um-arquivo-de-parametros-para-armazenar-parametros-do-fluxo-de-trabalho">3. Usar um arquivo de parâmetros para armazenar parâmetros do fluxo de trabalho<a class="headerlink" href="#3-usar-um-arquivo-de-parametros-para-armazenar-parametros-do-fluxo-de-trabalho" title="Permanent link">&para;</a></h2>
+<p>Ok, a seguir vamos voltar nossa atenção para parâmetros. Podemos definir parâmetros no arquivo de configuração assim como fizemos antes no script Nextflow. Então params dot greeting equals hello ou ou usar escopo params e definir foo equals bar.</p>
+<p>E isso é ótimo para definir padrões para seu fluxo de trabalho. No entanto, quando você está executando pipelines, pode ser legal especificar parâmetros em um arquivo JSON ou YAML.</p>
+<p>Usar um arquivo como este é muito melhor do que especificar opções de linha de comando com dash dash. Pois quando você executa um fluxo de trabalho, você pode ter que especificar muitos parâmetros e pode ser tedioso escrevê-los todos em uma única CLI e propenso a erros. Além disso, é improvável que você se lembre de todos os parâmetros que usou, então se você codificar isso em um arquivo, é mais fácil lançar o fluxo de trabalho novamente, usando os mesmos parâmetros no futuro.</p>
+<p>Temos um arquivo de exemplo aqui chamado test params, e você pode ver que isso especifica os três parâmetros que temos em nosso fluxo de trabalho com três valores diferentes. Pessoalmente, acho YAML mais fácil de escrever do que JSON. Então, apenas para demonstrar que funciona, vou criar um novo arquivo chamado Test yaml e copiar estes, me livrar das aspas. E salvar.</p>
+<p>Esses arquivos JSON e YAML podem ser mais fáceis de escrever, pois são sintaxe mais familiar. Mas note que estes são apenas para parâmetros e eles só aceitam sintaxe de chave-valor assim.</p>
+<h2 id="31-executar-o-fluxo-de-trabalho-usando-um-arquivo-de-parametros">3.1. Executar o fluxo de trabalho usando um arquivo de parâmetros<a class="headerlink" href="#31-executar-o-fluxo-de-trabalho-usando-um-arquivo-de-parametros" title="Permanent link">&para;</a></h2>
+<p>Vamos experimentar. Fazer o mesmo comando de antes. Livrar-se do relatório e vou fazer dash params file test params yaml.</p>
+<p>Não, esta é uma opção central do Nextflow, então é um único hífen.</p>
+<p>Ok. Executou o fluxo de trabalho e usou os parâmetros naquele arquivo YAML em vez de eu especificá-los todos na linha de comando. Pode parecer exagero apenas para este exemplo simples, mas você pode imaginar se você tem 10 ou 20 parâmetros diferentes, pode ser um incômodo digitar manualmente, e isso é apenas muito mais fácil de editar em um editor de código e manter para fins de reprodutibilidade.</p>
+<h2 id="3-determinar-qualis-executores-devem-ser-usados-para-fazer-o-trabalho">3. Determinar qual(is) executor(es) deve(m) ser usado(s) para fazer o trabalho<a class="headerlink" href="#3-determinar-qualis-executores-devem-ser-usados-para-fazer-o-trabalho" title="Permanent link">&para;</a></h2>
+<p>Ok. Falamos sobre empacotamento de software com Docker e conda. Falamos sobre requisitos de recursos de processo com CPUs e memória. E falamos um pouco sobre como especificar parâmetros ao executar fluxos de trabalho.</p>
+<p>As partes finais da configuração realmente são a execução, a infraestrutura computacional subjacente em si, e esta é a verdadeira joia da coroa do Nextflow: que podemos executar esses mesmos fluxos de trabalho em múltiplas infraestruturas computacionais diferentes.</p>
+<p>Na verdade, vou mudar para o material de treinamento escrito por um segundo. Nesta parte do treinamento, podemos ver alguns exemplos diferentes de como diferentes executores, neste caso, escalonadores HPC, definem os requisitos de recursos necessários para submeter um job.</p>
+<p>Então para Slurm, você tem esses cabeçalhos SBATCH, que definem dash dash mem e o número de CPU. Se você está usando PBS, você tem cabeçalhos diferentes, e se você usa Grid Engine, você tem cabeçalhos diferentes novamente.</p>
+<p>Você pode imaginar que é ainda mais diferente se você quiser executar na nuvem, seja AWS batch, Google Cloud, Azure, ou mais.</p>
+<p>Cada uma dessas infraestruturas computacionais subjacentes é chamada de executor e o Nextflow sabe como falar com todos esses diferentes executores para submeter jobs com a sintaxe correta.</p>
+<p>A boa notícia é que você não precisa saber sobre isso. Tudo que você tem que fazer é dizer ao Nextflow, qual executor usar.</p>
+<h2 id="31-direcionando-para-um-backend-diferente">3.1. Direcionando para um backend diferente<a class="headerlink" href="#31-direcionando-para-um-backend-diferente" title="Permanent link">&para;</a></h2>
+<p>Voltamos ao nosso arquivo de configuração e ao processo fazemos executor, e vou digitar local.</p>
+<p>Local é na verdade o padrão, se você não especificar nenhum outro executor, local é o que será usado, e isso apenas significa seu sistema host, onde quer que você tenha lançado o Nextflow,</p>
+<p>Eu poderia especificar em vez disso, Slurm. E isso submeteria jobs Slurm, ou eu poderia dizer AWS batch, e isso submeteria jobs para AWS batch.</p>
+<p>Você precisa de alguma configuração adicional em alguns casos, por exemplo, executar na nuvem precisará de certas credenciais, mas realmente este é o núcleo disso, e pode ser tão simples quanto uma ou duas linhas de configuração para executar seu fluxo de trabalho em um ambiente computacional completamente diferente.</p>
+<p>Mesmo que estejamos executando em um sistema simples dentro do Codespaces, ainda posso brincar com isso um pouco e fingir que estamos executando no Slurm. Se eu então lançar o fluxo de trabalho novamente, Nextflow run, hello config. Vai falhar porque não será capaz de submeter jobs para o Slurm. Mas ainda podemos ir para os diretórios de trabalho e ver o que o Nextflow fez. Então, se formos para este diretório de trabalho e olharmos para Command Run. Você pode ver no topo deste arquivo, agora temos essas linhas de cabeçalho sbatch, que tentaram especificar os recursos necessários para o job Slurm.</p>
+<h2 id="4-usar-perfis-para-selecionar-configuracoes-predefinidas">4. Usar perfis para selecionar configurações predefinidas<a class="headerlink" href="#4-usar-perfis-para-selecionar-configuracoes-predefinidas" title="Permanent link">&para;</a></h2>
+<p>Ok, estamos quase lá. A parte final deste capítulo é falar sobre perfis de configuração. Se você está executando seu pipeline em vários sistemas diferentes, pode ser irritante ter todos esses arquivos de configuração Nextflow diferentes, que você precisa especificar toda vez.</p>
+<p>Em vez disso, você pode codificar agrupamentos de configuração dentro do seu arquivo Nextflow config, e ligar e desligar esses grupos usando uma flag de perfil. Vamos ver como isso se parece.</p>
+<h2 id="41-criar-perfis-para-alternar-entre-desenvolvimento-local-e-execucao-em-hpc">4.1. Criar perfis para alternar entre desenvolvimento local e execução em HPC<a class="headerlink" href="#41-criar-perfis-para-alternar-entre-desenvolvimento-local-e-execucao-em-hpc" title="Permanent link">&para;</a></h2>
+<p>Vamos criar dois perfis em nosso exemplo aqui, um para o meu laptop e um para um sistema HPC mais pesado. Vou trapacear um pouco e apenas copiar o código do material de treinamento e colocá-lo aqui.</p>
+<p>Temos um novo escopo chamado profiles, e então temos um nome para cada perfil, que pode ser qualquer coisa. E dentro disso temos configuração, que parece exatamente o mesmo que a configuração de nível superior que já escrevemos. Então, novamente, temos escopo process. Escopo Docker.</p>
+<p>No perfil chamado my laptop. Estou dizendo para executar usando o executor local, então no meu sistema host e usar Docker.</p>
+<p>No perfil university HPC aqui estou dizendo para usar Slurm para submeter jobs, usar conda em vez de Docker, e estou especificando diferentes limites de recursos, que podem corresponder ao tamanho do sistema de nós no HPC que estou usando.</p>
+<p>Por padrão, nenhuma dessas configurações será usada quando eu executar o Nextflow, tenho que especificar que quero usar um desses perfis.</p>
+<h2 id="42-executar-o-fluxo-de-trabalho-com-um-perfil">4.2. Executar o fluxo de trabalho com um perfil<a class="headerlink" href="#42-executar-o-fluxo-de-trabalho-com-um-perfil" title="Permanent link">&para;</a></h2>
+<p>Vamos fazer nextflow run hello config. E vou fazer dash profile, único hífen porque é uma opção central do Nextflow. E então o nome que dei a ele, que é my laptop. O Nextflow deve agora usar o bloco de configuração que foi especificado dentro daquele perfil de configuração, e aplicá-lo quando executar o Nextflow. Se eu quisesse usar o outro bloco de configuração, só tenho que mudar esse nome de perfil. Muito mais fácil de lembrar. Muito mais fácil de usar.</p>
+<h2 id="43-criar-um-perfil-de-teste">4.3. Criar um perfil de teste<a class="headerlink" href="#43-criar-um-perfil-de-teste" title="Permanent link">&para;</a></h2>
+<p>Note, os perfis podem ter qualquer tipo de configuração, então não precisa estar relacionado ao seu ambiente de execução. Por exemplo, vamos criar um novo perfil aqui, que tem um conjunto de parâmetros. Podemos mudar isso para tux e mudar para my profile, e agora quando fazemos profile test, vai especificar esses parâmetros, que sobrescreverão os parâmetros que são especificados no nível superior do fluxo de trabalho.</p>
+<p>Quando você executa o Nextflow, você pode encadear múltiplos perfis e eles serão aplicados em sequência.</p>
+<h2 id="44-executar-o-fluxo-de-trabalho-localmente-com-o-perfil-de-teste">4.4. Executar o fluxo de trabalho localmente com o perfil de teste<a class="headerlink" href="#44-executar-o-fluxo-de-trabalho-localmente-com-o-perfil-de-teste" title="Permanent link">&para;</a></h2>
+<p>Então posso pegar o comando anterior e fazer vírgula test. Isso aplicará o, my laptop config primeiro, e então aplicará o test config. Se houver alguma sobreposição, então o perfil à direita sobrescreverá qualquer configuração em perfis anteriores. Se eu pressionar enter, vamos ver o que acontece.</p>
+<p>Ok, temos um novo arquivo de resultados aqui. Você pode ver o My Profile, que eu especifiquei como uma das opções. E também podemos ver cowpy, my profile, e com certeza, está o tux. Então funcionou.</p>
+<h2 id="conclusao">Conclusão<a class="headerlink" href="#conclusao" title="Permanent link">&para;</a></h2>
+<p>Ok! Incrível. É isso. Você chegou ao final do curso. Você ganha um pouco de confete de celebração. Parabéns por terminar este capítulo.</p>
+<p><a href="../07_next_steps/">Próxima transcrição do vídeo <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.22 19.03a.75.75 0 0 1 0-1.06L18.19 13H3.75a.75.75 0 0 1 0-1.5h14.44l-4.97-4.97a.749.749 0 0 1 .326-1.275.75.75 0 0 1 .734.215l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0"/></svg></span></a></p><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
   margin: 1rem 0;
@@ -5027,6 +5069,9 @@ window.mkdocsQuizConfig = {
 
 
 
+  
+  
+
 
 
   
@@ -5119,8 +5164,8 @@ window.mkdocsQuizConfig = {
   
 
 
-<h4>Cookie consent</h4>
-<p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our training materials better. Find out more on <a href="https://seqera.io/privacy-policy/#cookies" target="_blank" rel="noopener">how we use cookies</a>.</p>
+<h4>Consentimento de cookies</h4>
+<p>Usamos cookies para reconhecer suas visitas repetidas e preferências, bem como para medir a eficácia da nossa documentação e se os usuários encontram o que procuram. Com seu consentimento, você nos ajuda a melhorar nossos materiais de treinamento. Saiba mais sobre <a href="https://seqera.io/privacy-policy/#cookies" target="_blank" rel="noopener">como usamos cookies</a>.</p>
 <input class="md-toggle" type="checkbox" id="__settings" >
 <div class="md-consent__settings">
   <ul class="task-list">
@@ -5204,12 +5249,16 @@ window.mkdocsQuizConfig = {
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": {"alias": true, "provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": {"alias": true, "provider": "mike"}}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
-        <script src="../../../../assets/javascripts/posthog.js"></script>
+        <script src="../../../assets/javascripts/consent-sync.js"></script>
+      
+        <script src="../../../assets/javascripts/posthog.js"></script>
+      
+        <script src="../../../assets/javascripts/language-picker.js"></script>
       
     
   </body>

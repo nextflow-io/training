@@ -8,39 +8,47 @@
       
       
       
-        <link rel="canonical" href="https://training.nextflow.io/0.dev/pt/nf4_science/genomics/05_configuration/">
+        <link rel="canonical" href="https://training.nextflow.io/pt/nf4_science/genomics/05_configuration/">
       
       
       
       
         
-          <link rel="alternate" href="../../../../nf4_science/genomics/05_configuration/" hreflang="en">
+          <link rel="alternate" href="/" hreflang="en">
         
-          <link rel="alternate" href="./" hreflang="pt">
+          <link rel="alternate" href="/de/" hreflang="de">
         
-          <link rel="alternate" href="../../../../es/nf4_science/genomics/05_configuration/" hreflang="es">
+          <link rel="alternate" href="/es/" hreflang="es">
         
-          <link rel="alternate" href="../../../../fr/nf4_science/genomics/05_configuration/" hreflang="fr">
+          <link rel="alternate" href="/fr/" hreflang="fr">
         
-          <link rel="alternate" href="../../../../it/nf4_science/genomics/05_configuration/" hreflang="it">
+          <link rel="alternate" href="/hi/" hreflang="hi">
         
-          <link rel="alternate" href="../../../../ko/nf4_science/genomics/05_configuration/" hreflang="ko">
+          <link rel="alternate" href="/it/" hreflang="it">
+        
+          <link rel="alternate" href="/ko/" hreflang="ko">
+        
+          <link rel="alternate" href="/pl/" hreflang="pl">
+        
+          <link rel="alternate" href="/pt/" hreflang="pt">
+        
+          <link rel="alternate" href="/tr/" hreflang="tr">
         
       
       
-      <link rel="icon" href="../../../../assets/img/nextflow-icon.png">
+      <link rel="icon" href="../../../assets/img/nextflow-icon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
     
     
       
-        <title>Part 3: Resource profiling and optimization - training.nextflow.io</title>
+        <title>Parte 3: Perfil de recursos e otimização - training.nextflow.io</title>
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
   
@@ -104,11 +112,11 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/fonts.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/fonts.css">
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/extra.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/extra.css">
     
-    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
   
@@ -143,7 +151,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#part-3-resource-profiling-and-optimization" class="md-skip">
+        <a href="#parte-3-perfil-de-recursos-e-otimizacao" class="md-skip">
           Ir para o conteúdo
         </a>
       
@@ -163,9 +171,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
-    <a href="../../../" title="training.nextflow.io" class="md-header__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
+    <a href="../../.." title="training.nextflow.io" class="md-header__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
       
-  <img src="../../../../assets/img/nextflow_logo_dark.png" alt="logo">
+  <img src="../../../assets/img/nextflow_logo_dark.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -182,7 +190,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Part 3: Resource profiling and optimization
+              Parte 3: Perfil de recursos e otimização
             
           </span>
         </div>
@@ -229,38 +237,62 @@
       <ul class="md-select__list">
         
           <li class="md-select__item">
-            <a href="../../../../nf4_science/genomics/05_configuration/" hreflang="en" class="md-select__link">
+            <a href="/" hreflang="en" class="md-select__link">
               English
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="./" hreflang="pt" class="md-select__link">
-              Português
+            <a href="/de/" hreflang="de" class="md-select__link">
+              deutsch
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../../es/nf4_science/genomics/05_configuration/" hreflang="es" class="md-select__link">
-              Español
+            <a href="/es/" hreflang="es" class="md-select__link">
+              español
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../../fr/nf4_science/genomics/05_configuration/" hreflang="fr" class="md-select__link">
-              Français
+            <a href="/fr/" hreflang="fr" class="md-select__link">
+              français
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../../it/nf4_science/genomics/05_configuration/" hreflang="it" class="md-select__link">
-              Italiano
+            <a href="/hi/" hreflang="hi" class="md-select__link">
+              हिन्दी
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../../ko/nf4_science/genomics/05_configuration/" hreflang="ko" class="md-select__link">
-              Korean
+            <a href="/it/" hreflang="it" class="md-select__link">
+              italiano
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/ko/" hreflang="ko" class="md-select__link">
+              한국어
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/pl/" hreflang="pl" class="md-select__link">
+              Polski
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/pt/" hreflang="pt" class="md-select__link">
+              português
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/tr/" hreflang="tr" class="md-select__link">
+              Türkçe
             </a>
           </li>
         
@@ -380,9 +412,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../../" title="training.nextflow.io" class="md-nav__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
+    <a href="../../.." title="training.nextflow.io" class="md-nav__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
       
-  <img src="../../../../assets/img/nextflow_logo_dark.png" alt="logo">
+  <img src="../../../assets/img/nextflow_logo_dark.png" alt="logo">
 
     </a>
     training.nextflow.io
@@ -409,14 +441,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../" class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Home
+    Início
   
 
     
@@ -518,7 +550,7 @@
   <span class="md-ellipsis">
     
   
-    Getting started
+    Primeiros passos
   
 
     
@@ -546,7 +578,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run basic operations
+    Parte 1: Operações básicas de execução
   
 
     
@@ -574,7 +606,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Run real pipelines
+    Parte 2: Executar pipelines reais
   
 
     
@@ -602,7 +634,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Run configuration
+    Parte 3: Configuração de execução
   
 
     
@@ -630,7 +662,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    Resumo do curso
   
 
     
@@ -658,7 +690,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Pesquisa de feedback
   
 
     
@@ -768,7 +800,7 @@
   <span class="md-ellipsis">
     
   
-    Orientação
+    Começando
   
 
     
@@ -796,7 +828,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Hello World
+    Parte 1: Hello World
   
 
     
@@ -824,7 +856,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Hello Channels
+    Parte 2: Hello Channels
   
 
     
@@ -852,7 +884,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Hello Workflow
+    Parte 3: Hello Workflow
   
 
     
@@ -880,7 +912,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Hello Modules
+    Parte 4: Hello Modules
   
 
     
@@ -908,7 +940,7 @@
   <span class="md-ellipsis">
     
   
-    Part 5: Hello Containers
+    Parte 5: Hello Containers
   
 
     
@@ -936,7 +968,7 @@
   <span class="md-ellipsis">
     
   
-    Part 6: Hello Config
+    Parte 6: Hello Config
   
 
     
@@ -964,7 +996,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    Resumo do curso
   
 
     
@@ -992,7 +1024,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Pesquisa de feedback
   
 
     
@@ -1102,7 +1134,7 @@
   <span class="md-ellipsis">
     
   
-    Getting started
+    Primeiros Passos
   
 
     
@@ -1130,7 +1162,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run a demo pipeline
+    Parte 1: Executar um pipeline de demonstração
   
 
     
@@ -1158,7 +1190,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Rewrite Hello for nf-core
+    Parte 2: Reescrever Hello para nf-core
   
 
     
@@ -1186,7 +1218,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Use an nf-core module
+    Parte 3: Usar um módulo nf-core
   
 
     
@@ -1214,7 +1246,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Make an nf-core module
+    Parte 4: Criar um módulo nf-core
   
 
     
@@ -1242,7 +1274,7 @@
   <span class="md-ellipsis">
     
   
-    Part 5: Input validation
+    Parte 5: Validação de entrada
   
 
     
@@ -1270,7 +1302,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    Resumo do curso
   
 
     
@@ -1298,7 +1330,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Pesquisa de feedback
   
 
     
@@ -1344,7 +1376,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Science
+    Nextflow para Ciência
   
 
     
@@ -1360,7 +1392,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Nextflow for Science
+    Nextflow para Ciência
   
 
           </label>
@@ -1380,7 +1412,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Science
+    Nextflow para Ciência
   
 
     
@@ -1419,7 +1451,7 @@
   <span class="md-ellipsis">
     
   
-    Genomics
+    Nextflow para Genômica
   
 
     
@@ -1435,7 +1467,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Genomics
+    Nextflow para Genômica
   
 
           </label>
@@ -1455,7 +1487,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Genomics
+    Nextflow para Genômica
   
 
     
@@ -1483,7 +1515,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    Orientação
   
 
     
@@ -1511,7 +1543,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Per-sample variant calling
+    Parte 1: Chamada de variantes por amostra
   
 
     
@@ -1539,7 +1571,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Joint calling on a cohort
+    Parte 2: Chamada conjunta em uma coorte
   
 
     
@@ -1567,7 +1599,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Moving code into modules
+    Parte 3: Movendo código para módulos
   
 
     
@@ -1595,7 +1627,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Adding tests
+    Parte 4: Adicionando testes
   
 
     
@@ -1623,7 +1655,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Pesquisa de feedback
   
 
     
@@ -1651,7 +1683,7 @@
   <span class="md-ellipsis">
     
   
-    Next Steps
+    Próximos Passos
   
 
     
@@ -1698,7 +1730,7 @@
   <span class="md-ellipsis">
     
   
-    RNAseq
+    Nextflow para RNAseq
   
 
     
@@ -1714,7 +1746,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    RNAseq
+    Nextflow para RNAseq
   
 
           </label>
@@ -1734,7 +1766,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for RNAseq
+    Nextflow para RNAseq
   
 
     
@@ -1762,7 +1794,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    Orientação
   
 
     
@@ -1790,7 +1822,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Method overview and manual testing
+    Parte 1: Visão geral do método e teste manual
   
 
     
@@ -1818,7 +1850,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Single-sample implementation
+    Parte 2: Implementação de amostra única
   
 
     
@@ -1846,7 +1878,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Multi-sample paired-end implementation
+    Parte 3: Implementação de múltiplas amostras com dados paired-end
   
 
     
@@ -1874,7 +1906,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Pesquisa de feedback
   
 
     
@@ -1902,7 +1934,7 @@
   <span class="md-ellipsis">
     
   
-    Next Steps
+    Próximos Passos
   
 
     
@@ -1949,7 +1981,7 @@
   <span class="md-ellipsis">
     
   
-    Imaging
+    Index
   
 
     
@@ -1965,7 +1997,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Imaging
+    Index
   
 
           </label>
@@ -1985,7 +2017,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow run for Imaging
+    Index
   
 
     
@@ -2013,7 +2045,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    Orientação
   
 
     
@@ -2041,7 +2073,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run basic operations
+    Parte 1: Executar operações básicas
   
 
     
@@ -2069,7 +2101,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Run nf-core/molkart
+    Parte 2: Executar nf-core/molkart
   
 
     
@@ -2097,7 +2129,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Organizing inputs
+    Parte 3: Organizando entradas
   
 
     
@@ -2125,7 +2157,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Configuration
+    Parte 4: Configuração
   
 
     
@@ -2153,7 +2185,7 @@
   <span class="md-ellipsis">
     
   
-    Survey
+    Questionário
   
 
     
@@ -2181,7 +2213,7 @@
   <span class="md-ellipsis">
     
   
-    Next steps
+    Próximos passos
   
 
     
@@ -2235,7 +2267,7 @@
   <span class="md-ellipsis">
     
   
-    Side Quests
+    Missões Secundárias
   
 
     
@@ -2251,7 +2283,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Side Quests
+    Missões Secundárias
   
 
           </label>
@@ -2271,7 +2303,7 @@
   <span class="md-ellipsis">
     
   
-    Side Quests
+    Missões Secundárias
   
 
     
@@ -2299,7 +2331,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    Orientação
   
 
     
@@ -2327,7 +2359,7 @@
   <span class="md-ellipsis">
     
   
-    Development Environment
+    Ambiente de Desenvolvimento
   
 
     
@@ -2355,7 +2387,7 @@
   <span class="md-ellipsis">
     
   
-    Metadata and meta maps
+    Metadados e mapas meta
   
 
     
@@ -2383,7 +2415,7 @@
   <span class="md-ellipsis">
     
   
-    File input processing
+    Processamento de entrada de arquivos
   
 
     
@@ -2411,7 +2443,7 @@
   <span class="md-ellipsis">
     
   
-    Splitting and Grouping
+    Divisão e Agrupamento
   
 
     
@@ -2439,7 +2471,7 @@
   <span class="md-ellipsis">
     
   
-    Workflows of Workflows
+    Fluxos de Trabalho de Fluxos de Trabalho
   
 
     
@@ -2467,7 +2499,7 @@
   <span class="md-ellipsis">
     
   
-    Debugging Workflows
+    Depurando Workflows
   
 
     
@@ -2495,7 +2527,7 @@
   <span class="md-ellipsis">
     
   
-    Essential Nextflow Scripting Patterns
+    Padrões Essenciais de Script em Nextflow
   
 
     
@@ -2523,7 +2555,7 @@
   <span class="md-ellipsis">
     
   
-    Testing with nf-test
+    Testando com nf-test
   
 
     
@@ -2569,7 +2601,7 @@
   <span class="md-ellipsis">
     
   
-    Training Collections
+    Index
   
 
     
@@ -2585,7 +2617,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Training Collections
+    Index
   
 
           </label>
@@ -2605,7 +2637,7 @@
   <span class="md-ellipsis">
     
   
-    Training Collections
+    Index
   
 
     
@@ -2633,7 +2665,7 @@
   <span class="md-ellipsis">
     
   
-    The Architect's Toolkit I
+    Architects toolkit 1
   
 
     
@@ -2715,7 +2747,7 @@
   <span class="md-ellipsis">
     
   
-    Conseguindo ajuda
+    Obtendo ajuda
   
 
     
@@ -2754,7 +2786,7 @@
   <span class="md-ellipsis">
     
   
-    Training environment
+    Opções de ambiente
   
 
     
@@ -2770,7 +2802,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Training environment
+    Opções de ambiente
   
 
           </label>
@@ -2790,7 +2822,7 @@
   <span class="md-ellipsis">
     
   
-    Configuração do ambiente
+    Opções de ambiente
   
 
     
@@ -2818,7 +2850,7 @@
   <span class="md-ellipsis">
     
   
-    Gitpod
+    GitHub Codespaces
   
 
     
@@ -2846,7 +2878,7 @@
   <span class="md-ellipsis">
     
   
-    Local Devcontainers
+    Devcontainers Locais
   
 
     
@@ -2874,7 +2906,7 @@
   <span class="md-ellipsis">
     
   
-    Instalação local
+    Instalação manual
   
 
     
@@ -2910,7 +2942,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow versions
+    Versões do Nextflow
   
 
     
@@ -2938,7 +2970,7 @@
   <span class="md-ellipsis">
     
   
-    The Hello pipeline
+    O pipeline Hello
   
 
     
@@ -2980,28 +3012,28 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#11-run-the-workflow-to-generate-a-resource-utilization-report" class="md-nav__link">
+  <a href="#11-execute-o-fluxo-de-trabalho-para-gerar-um-relatorio-de-utilizacao-de-recursos" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1. Run the workflow to generate a resource utilization report
+        1.1. Execute o fluxo de trabalho para gerar um relatório de utilização de recursos
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#12-adjust-resource-allocations-for-a-specific-process" class="md-nav__link">
+  <a href="#12-ajuste-as-alocacoes-de-recursos-para-um-processo-especifico" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2. Adjust resource allocations for a specific process
+        1.2. Ajuste as alocações de recursos para um processo específico
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#13-run-again-with-the-modified-configuration" class="md-nav__link">
+  <a href="#13-execute-novamente-com-a-configuracao-modificada" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.3. Run again with the modified configuration
+        1.3. Execute novamente com a configuração modificada
       
     </span>
   </a>
@@ -3245,48 +3277,58 @@
                 
                   
 
+ 
+<a
+  href="https://github.com/nextflow-io/training/edit/master/docs/nf4_science/genomics/05_configuration.md"
+  title="Editar esta página"
+  class="md-content__button md-icon"
+  rel="edit"
+>
+   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+</a>
+   
+<a
+  href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md"
+  title="Improve translation"
+  class="md-content__button md-icon"
+>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 1H3c-1.1 0-2 .9-2 2v12l3-3h5v-1c0-2.2 1.79-4 4-4V3c0-1.1-.9-2-2-2m0 3H9.5c-.34 1.19-.96 2.3-1.82 3.26l-.02.02 1.26 1.25-.37 1.01L7 8l-2.5 2.5-.69-.73 2.53-2.49A8.6 8.6 0 0 1 4.86 5h.99c.31.6.69 1.17 1.15 1.68A7.7 7.7 0 0 0 8.57 4H3V3h3.5V2h1v1H11zm10 5h-8c-1.1 0-2 .9-2 2v7c0 1.1.9 2 2 2h7l3 3V11c0-1.1-.9-2-2-2m-1.37 10-.85-2.25h-3.56L14.38 19h-1.5l3.37-9h1.5l3.38 9zM17 12l1.22 3.25h-2.43z"/></svg>
+</a>
+ 
 
-  
-    <a href="https://github.com/nextflow-io/training/edit/master/docs/nf4_science/genomics/05_configuration.md" title="Editar esta página" class="md-content__button md-icon" rel="edit">
-      
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
-    </a>
-  
-  
-
-
-<h1 id="part-3-resource-profiling-and-optimization">Part 3: Resource profiling and optimization<a class="headerlink" href="#part-3-resource-profiling-and-optimization" title="Permanent link">&para;</a></h1>
-<p>THIS IS A PLACEHOLDER</p>
+<h1 id="parte-3-perfil-de-recursos-e-otimizacao">Parte 3: Perfil de recursos e otimização<a class="headerlink" href="#parte-3-perfil-de-recursos-e-otimizacao" title="Permanent link">&para;</a></h1>
+<p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Tradução assistida por IA - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">saiba mais e sugira melhorias</a></span></p>
+<p>ESTE É UM PLACEHOLDER</p>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This training module is under redevelopment.</p>
+<p class="admonition-title">Nota</p>
+<p>Este módulo de treinamento está sendo refeito.</p>
 </div>
 <hr />
 <p>TODO</p>
-<h3 id="11-run-the-workflow-to-generate-a-resource-utilization-report">1.1. Run the workflow to generate a resource utilization report<a class="headerlink" href="#11-run-the-workflow-to-generate-a-resource-utilization-report" title="Permanent link">&para;</a></h3>
-<p>To have Nextflow generate the report automatically, simply add <code>-with-report &lt;filename&gt;.html</code> to your command line.</p>
+<h3 id="11-execute-o-fluxo-de-trabalho-para-gerar-um-relatorio-de-utilizacao-de-recursos">1.1. Execute o fluxo de trabalho para gerar um relatório de utilização de recursos<a class="headerlink" href="#11-execute-o-fluxo-de-trabalho-para-gerar-um-relatorio-de-utilizacao-de-recursos" title="Permanent link">&para;</a></h3>
+<p>Para que o Nextflow gere o relatório automaticamente, basta adicionar <code>-with-report &lt;nome-do-arquivo&gt;.html</code> à sua linha de comando.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf<span class="w"> </span>-profile<span class="w"> </span>my_laptop<span class="w"> </span>-with-report<span class="w"> </span>report-config-1.html
 </code></pre></div>
-<p>The report is an html file, which you can download and open in your browser. You can also right click it in the file explorer on the left and click on <code>Show preview</code> in order to view it in VS Code.</p>
-<p>Take a few minutes to look through the report and see if you can identify some opportunities for adjusting resources.
-Make sure to click on the tabs that show the utilization results as a percentage of what was allocated.
-There is some <a href="https://www.nextflow.io/docs/latest/reports.html">documentation</a> describing all the available features.</p>
+<p>O relatório é um arquivo html, que você pode baixar e abrir no seu navegador. Você também pode clicar com o botão direito nele no explorador de arquivos à esquerda e clicar em <code>Show preview</code> para visualizá-lo no VS Code.</p>
+<p>Reserve alguns minutos para analisar o relatório e ver se você consegue identificar algumas oportunidades para ajustar recursos.
+Certifique-se de clicar nas abas que mostram os resultados de utilização como uma porcentagem do que foi alocado.
+Há alguma <a href="https://www.nextflow.io/docs/latest/reports.html">documentação</a> descrevendo todos os recursos disponíveis.</p>
 <!-- TODO: insert images -->
 
-<p>One observation is that the <code>GATK_JOINTGENOTYPING</code> seems to be very hungry for CPU, which makes sense since it performs a lot of complex calculations.
-So we could try boosting that and see if it cuts down on runtime.</p>
-<p>However, we seem to have overshot the mark with the memory allocations; all processes are only using a fraction of what we're giving them.
-We should dial that back down and save some resources.</p>
-<h3 id="12-adjust-resource-allocations-for-a-specific-process">1.2. Adjust resource allocations for a specific process<a class="headerlink" href="#12-adjust-resource-allocations-for-a-specific-process" title="Permanent link">&para;</a></h3>
-<p>We can specify resource allocations for a given process using the <code>withName</code> process selector.
-The syntax looks like this when it's by itself in a process block:</p>
-<div class="highlight"><span class="filename">Syntax</span><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">process</span><span class="w"> </span><span class="o">{</span>
+<p>Uma observação é que o <code>GATK_JOINTGENOTYPING</code> parece estar muito faminto por CPU, o que faz sentido já que ele realiza muitos cálculos complexos.
+Então poderíamos tentar aumentar isso e ver se reduz o tempo de execução.</p>
+<p>No entanto, parece que exageramos nas alocações de memória; todos os processos estão usando apenas uma fração do que estamos dando a eles.
+Devemos reduzir isso e economizar alguns recursos.</p>
+<h3 id="12-ajuste-as-alocacoes-de-recursos-para-um-processo-especifico">1.2. Ajuste as alocações de recursos para um processo específico<a class="headerlink" href="#12-ajuste-as-alocacoes-de-recursos-para-um-processo-especifico" title="Permanent link">&para;</a></h3>
+<p>Podemos especificar alocações de recursos para um determinado processo usando o seletor de processo <code>withName</code>.
+A sintaxe fica assim quando está sozinha em um bloco de processo:</p>
+<div class="highlight"><span class="filename">Sintaxe</span><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">process</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="nl">withName:</span><span class="w"> </span><span class="s1">&#39;GATK_JOINTGENOTYPING&#39;</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">        </span><span class="n">cpus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="o">}</span>
 </code></pre></div>
-<p>Let's add that to the existing process block in the <code>nextflow.config</code> file.</p>
+<p>Vamos adicionar isso ao bloco de processo existente no arquivo <code>nextflow.config</code>.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">nextflow.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-11">11</a></span>
 <span class="normal"><a href="#__codelineno-2-12">12</a></span>
 <span class="normal"><a href="#__codelineno-2-13">13</a></span>
@@ -3296,34 +3338,34 @@ The syntax looks like this when it's by itself in a process block:</p>
 <span class="normal"><a href="#__codelineno-2-17">17</a></span>
 <span class="normal"><a href="#__codelineno-2-18">18</a></span>
 <span class="normal"><a href="#__codelineno-2-19">19</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-11" name="__codelineno-2-11"></a><span class="n">process</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-2-12" name="__codelineno-2-12"></a><span class="w">    </span><span class="c1">// defaults for all processes</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12"></a><span class="w">    </span><span class="c1">// padrões para todos os processos</span>
 <a id="__codelineno-2-13" name="__codelineno-2-13"></a><span class="w">    </span><span class="n">cpus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span>
 <a id="__codelineno-2-14" name="__codelineno-2-14"></a><span class="w">    </span><span class="n">memory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="o">.</span><span class="na">GB</span>
-<a id="__codelineno-2-15" name="__codelineno-2-15"></a><span class="w">    </span><span class="c1">// allocations for a specific process</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15"></a><span class="w">    </span><span class="c1">// alocações para um processo específico</span>
 <a id="__codelineno-2-16" name="__codelineno-2-16"></a><span class="w">    </span><span class="nl">withName:</span><span class="w"> </span><span class="s1">&#39;GATK_JOINTGENOTYPING&#39;</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-2-17" name="__codelineno-2-17"></a><span class="w">        </span><span class="n">cpus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span>
 <a id="__codelineno-2-18" name="__codelineno-2-18"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-2-19" name="__codelineno-2-19"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>With that specified, the default settings will apply to all processes <strong>except</strong> the <code>GATK_JOINTGENOTYPING</code> process, which is a special snowflake that gets a lot more CPU.
-Hopefully that should have an effect.</p>
-<h3 id="13-run-again-with-the-modified-configuration">1.3. Run again with the modified configuration<a class="headerlink" href="#13-run-again-with-the-modified-configuration" title="Permanent link">&para;</a></h3>
-<p>Let's run the workflow again with the modified configuration and with the reporting flag turned on, but notice we're giving the report a different name so we can differentiate them.</p>
+<p>Com isso especificado, as configurações padrão se aplicarão a todos os processos <strong>exceto</strong> o processo <code>GATK_JOINTGENOTYPING</code>, que é um floco de neve especial que recebe muito mais CPU.
+Esperamos que isso tenha um efeito.</p>
+<h3 id="13-execute-novamente-com-a-configuracao-modificada">1.3. Execute novamente com a configuração modificada<a class="headerlink" href="#13-execute-novamente-com-a-configuracao-modificada" title="Permanent link">&para;</a></h3>
+<p>Vamos executar o fluxo de trabalho novamente com a configuração modificada e com o sinalizador de relatório ativado, mas observe que estamos dando ao relatório um nome diferente para que possamos diferenciá-los.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf<span class="w"> </span>-profile<span class="w"> </span>my_laptop<span class="w"> </span>-with-report<span class="w"> </span>report-config-2.html
 </code></pre></div>
-<p>Once again, you probably won't notice a substantial difference in runtime, because this is such a small workload and the tools spend more time in ancillary tasks than in performing the 'real' work.</p>
-<p>However, the second report shows that our resource utilization is more balanced now.</p>
+<p>Mais uma vez, você provavelmente não notará uma diferença substancial no tempo de execução, porque esta é uma carga de trabalho muito pequena e as ferramentas gastam mais tempo em tarefas auxiliares do que na execução do trabalho 'real'.</p>
+<p>No entanto, o segundo relatório mostra que nossa utilização de recursos está mais equilibrada agora.</p>
 <!-- **TODO: screenshots?** -->
 
-<p>As you can see, this approach is useful when your processes have different resource requirements. It empowers you to right-size the resource allocations you set up for each process based on actual data, not guesswork.</p>
+<p>Como você pode ver, esta abordagem é útil quando seus processos têm requisitos de recursos diferentes. Ela permite que você dimensione adequadamente as alocações de recursos configuradas para cada processo com base em dados reais, não em suposições.</p>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This is just a tiny taster of what you can do to optimize your use of resources.
-Nextflow itself has some really neat <a href="https://www.nextflow.io/docs/latest/process.html#dynamic-task-resources">dynamic retry logic</a> built in to retry jobs that fail due to resource limitations.
-Additionally, the Seqera Platform offers AI-driven tooling for optimizing your resource allocations automatically as well.</p>
-<p>We'll cover both of those approaches in an upcoming part of this training course.</p>
+<p class="admonition-title">Nota</p>
+<p>Isto é apenas um pequeno aperitivo do que você pode fazer para otimizar o uso de recursos.
+O próprio Nextflow tem uma <a href="https://www.nextflow.io/docs/latest/process.html#dynamic-task-resources">lógica de repetição dinâmica</a> realmente interessante integrada para repetir tarefas que falham devido a limitações de recursos.
+Além disso, a Seqera Platform oferece ferramentas orientadas por IA para otimizar suas alocações de recursos automaticamente também.</p>
+<p>Abordaremos ambas as abordagens em uma parte futura deste curso de treinamento.</p>
 </div>
-<p>That being said, there may be some constraints on what you can (or must) allocate depending on what computing executor and compute infrastructure you're using. For example, your cluster may require you to stay within certain limits that don't apply when you're running elsewhere.</p><style type="text/css">.quiz {
+<p>Dito isso, pode haver algumas restrições sobre o que você pode (ou deve) alocar dependendo de qual executor de computação e infraestrutura de computação você está usando. Por exemplo, seu cluster pode exigir que você permaneça dentro de certos limites que não se aplicam quando você está executando em outro lugar.</p><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
   margin: 1rem 0;
@@ -4840,6 +4882,9 @@ window.mkdocsQuizConfig = {
 
 
 
+  
+  
+
 
 
   
@@ -4932,8 +4977,8 @@ window.mkdocsQuizConfig = {
   
 
 
-<h4>Cookie consent</h4>
-<p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our training materials better. Find out more on <a href="https://seqera.io/privacy-policy/#cookies" target="_blank" rel="noopener">how we use cookies</a>.</p>
+<h4>Consentimento de cookies</h4>
+<p>Usamos cookies para reconhecer suas visitas repetidas e preferências, bem como para medir a eficácia da nossa documentação e se os usuários encontram o que procuram. Com seu consentimento, você nos ajuda a melhorar nossos materiais de treinamento. Saiba mais sobre <a href="https://seqera.io/privacy-policy/#cookies" target="_blank" rel="noopener">como usamos cookies</a>.</p>
 <input class="md-toggle" type="checkbox" id="__settings" >
 <div class="md-consent__settings">
   <ul class="task-list">
@@ -5017,12 +5062,16 @@ window.mkdocsQuizConfig = {
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": {"alias": true, "provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": {"alias": true, "provider": "mike"}}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
-        <script src="../../../../assets/javascripts/posthog.js"></script>
+        <script src="../../../assets/javascripts/consent-sync.js"></script>
+      
+        <script src="../../../assets/javascripts/posthog.js"></script>
+      
+        <script src="../../../assets/javascripts/language-picker.js"></script>
       
     
   </body>

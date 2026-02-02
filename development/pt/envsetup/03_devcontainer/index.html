@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://training.nextflow.io/0.dev/pt/envsetup/03_devcontainer/">
+        <link rel="canonical" href="https://training.nextflow.io/pt/envsetup/03_devcontainer/">
       
       
         <link rel="prev" href="../01_setup/">
@@ -18,33 +18,41 @@
       
       
         
-          <link rel="alternate" href="../../../envsetup/03_devcontainer/" hreflang="en">
+          <link rel="alternate" href="/" hreflang="en">
         
-          <link rel="alternate" href="./" hreflang="pt">
+          <link rel="alternate" href="/de/" hreflang="de">
         
-          <link rel="alternate" href="../../../es/envsetup/03_devcontainer/" hreflang="es">
+          <link rel="alternate" href="/es/" hreflang="es">
         
-          <link rel="alternate" href="../../../fr/envsetup/03_devcontainer/" hreflang="fr">
+          <link rel="alternate" href="/fr/" hreflang="fr">
         
-          <link rel="alternate" href="../../../it/envsetup/03_devcontainer/" hreflang="it">
+          <link rel="alternate" href="/hi/" hreflang="hi">
         
-          <link rel="alternate" href="../../../ko/envsetup/03_devcontainer/" hreflang="ko">
+          <link rel="alternate" href="/it/" hreflang="it">
+        
+          <link rel="alternate" href="/ko/" hreflang="ko">
+        
+          <link rel="alternate" href="/pl/" hreflang="pl">
+        
+          <link rel="alternate" href="/pt/" hreflang="pt">
+        
+          <link rel="alternate" href="/tr/" hreflang="tr">
         
       
       
-      <link rel="icon" href="../../../assets/img/nextflow-icon.png">
+      <link rel="icon" href="../../assets/img/nextflow-icon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
     
     
       
-        <title>Local Devcontainers - training.nextflow.io</title>
+        <title>Devcontainers Locais - training.nextflow.io</title>
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
   
@@ -108,11 +116,11 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/fonts.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/fonts.css">
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/extra.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/extra.css">
     
-    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
   
@@ -147,7 +155,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#local-devcontainers" class="md-skip">
+        <a href="#devcontainers-locais" class="md-skip">
           Ir para o conteúdo
         </a>
       
@@ -167,9 +175,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
-    <a href="../../" title="training.nextflow.io" class="md-header__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
+    <a href="../.." title="training.nextflow.io" class="md-header__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
       
-  <img src="../../../assets/img/nextflow_logo_dark.png" alt="logo">
+  <img src="../../assets/img/nextflow_logo_dark.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -186,7 +194,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Local Devcontainers
+              Devcontainers Locais
             
           </span>
         </div>
@@ -233,38 +241,62 @@
       <ul class="md-select__list">
         
           <li class="md-select__item">
-            <a href="../../../envsetup/03_devcontainer/" hreflang="en" class="md-select__link">
+            <a href="/" hreflang="en" class="md-select__link">
               English
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="./" hreflang="pt" class="md-select__link">
-              Português
+            <a href="/de/" hreflang="de" class="md-select__link">
+              deutsch
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../es/envsetup/03_devcontainer/" hreflang="es" class="md-select__link">
-              Español
+            <a href="/es/" hreflang="es" class="md-select__link">
+              español
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../fr/envsetup/03_devcontainer/" hreflang="fr" class="md-select__link">
-              Français
+            <a href="/fr/" hreflang="fr" class="md-select__link">
+              français
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../it/envsetup/03_devcontainer/" hreflang="it" class="md-select__link">
-              Italiano
+            <a href="/hi/" hreflang="hi" class="md-select__link">
+              हिन्दी
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../ko/envsetup/03_devcontainer/" hreflang="ko" class="md-select__link">
-              Korean
+            <a href="/it/" hreflang="it" class="md-select__link">
+              italiano
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/ko/" hreflang="ko" class="md-select__link">
+              한국어
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/pl/" hreflang="pl" class="md-select__link">
+              Polski
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/pt/" hreflang="pt" class="md-select__link">
+              português
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/tr/" hreflang="tr" class="md-select__link">
+              Türkçe
             </a>
           </li>
         
@@ -384,9 +416,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../" title="training.nextflow.io" class="md-nav__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
+    <a href="../.." title="training.nextflow.io" class="md-nav__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
       
-  <img src="../../../assets/img/nextflow_logo_dark.png" alt="logo">
+  <img src="../../assets/img/nextflow_logo_dark.png" alt="logo">
 
     </a>
     training.nextflow.io
@@ -413,14 +445,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../" class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Home
+    Início
   
 
     
@@ -522,7 +554,7 @@
   <span class="md-ellipsis">
     
   
-    Getting started
+    Primeiros passos
   
 
     
@@ -550,7 +582,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run basic operations
+    Parte 1: Operações básicas de execução
   
 
     
@@ -578,7 +610,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Run real pipelines
+    Parte 2: Executar pipelines reais
   
 
     
@@ -606,7 +638,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Run configuration
+    Parte 3: Configuração de execução
   
 
     
@@ -634,7 +666,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    Resumo do curso
   
 
     
@@ -662,7 +694,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Pesquisa de feedback
   
 
     
@@ -772,7 +804,7 @@
   <span class="md-ellipsis">
     
   
-    Orientação
+    Começando
   
 
     
@@ -800,7 +832,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Hello World
+    Parte 1: Hello World
   
 
     
@@ -828,7 +860,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Hello Channels
+    Parte 2: Hello Channels
   
 
     
@@ -856,7 +888,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Hello Workflow
+    Parte 3: Hello Workflow
   
 
     
@@ -884,7 +916,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Hello Modules
+    Parte 4: Hello Modules
   
 
     
@@ -912,7 +944,7 @@
   <span class="md-ellipsis">
     
   
-    Part 5: Hello Containers
+    Parte 5: Hello Containers
   
 
     
@@ -940,7 +972,7 @@
   <span class="md-ellipsis">
     
   
-    Part 6: Hello Config
+    Parte 6: Hello Config
   
 
     
@@ -968,7 +1000,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    Resumo do curso
   
 
     
@@ -996,7 +1028,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Pesquisa de feedback
   
 
     
@@ -1106,7 +1138,7 @@
   <span class="md-ellipsis">
     
   
-    Getting started
+    Primeiros Passos
   
 
     
@@ -1134,7 +1166,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run a demo pipeline
+    Parte 1: Executar um pipeline de demonstração
   
 
     
@@ -1162,7 +1194,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Rewrite Hello for nf-core
+    Parte 2: Reescrever Hello para nf-core
   
 
     
@@ -1190,7 +1222,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Use an nf-core module
+    Parte 3: Usar um módulo nf-core
   
 
     
@@ -1218,7 +1250,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Make an nf-core module
+    Parte 4: Criar um módulo nf-core
   
 
     
@@ -1246,7 +1278,7 @@
   <span class="md-ellipsis">
     
   
-    Part 5: Input validation
+    Parte 5: Validação de entrada
   
 
     
@@ -1274,7 +1306,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    Resumo do curso
   
 
     
@@ -1302,7 +1334,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Pesquisa de feedback
   
 
     
@@ -1348,7 +1380,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Science
+    Nextflow para Ciência
   
 
     
@@ -1364,7 +1396,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Nextflow for Science
+    Nextflow para Ciência
   
 
           </label>
@@ -1384,7 +1416,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Science
+    Nextflow para Ciência
   
 
     
@@ -1423,7 +1455,7 @@
   <span class="md-ellipsis">
     
   
-    Genomics
+    Nextflow para Genômica
   
 
     
@@ -1439,7 +1471,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Genomics
+    Nextflow para Genômica
   
 
           </label>
@@ -1459,7 +1491,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Genomics
+    Nextflow para Genômica
   
 
     
@@ -1487,7 +1519,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    Orientação
   
 
     
@@ -1515,7 +1547,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Per-sample variant calling
+    Parte 1: Chamada de variantes por amostra
   
 
     
@@ -1543,7 +1575,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Joint calling on a cohort
+    Parte 2: Chamada conjunta em uma coorte
   
 
     
@@ -1571,7 +1603,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Moving code into modules
+    Parte 3: Movendo código para módulos
   
 
     
@@ -1599,7 +1631,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Adding tests
+    Parte 4: Adicionando testes
   
 
     
@@ -1627,7 +1659,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Pesquisa de feedback
   
 
     
@@ -1655,7 +1687,7 @@
   <span class="md-ellipsis">
     
   
-    Next Steps
+    Próximos Passos
   
 
     
@@ -1702,7 +1734,7 @@
   <span class="md-ellipsis">
     
   
-    RNAseq
+    Nextflow para RNAseq
   
 
     
@@ -1718,7 +1750,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    RNAseq
+    Nextflow para RNAseq
   
 
           </label>
@@ -1738,7 +1770,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for RNAseq
+    Nextflow para RNAseq
   
 
     
@@ -1766,7 +1798,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    Orientação
   
 
     
@@ -1794,7 +1826,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Method overview and manual testing
+    Parte 1: Visão geral do método e teste manual
   
 
     
@@ -1822,7 +1854,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Single-sample implementation
+    Parte 2: Implementação de amostra única
   
 
     
@@ -1850,7 +1882,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Multi-sample paired-end implementation
+    Parte 3: Implementação de múltiplas amostras com dados paired-end
   
 
     
@@ -1878,7 +1910,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Pesquisa de feedback
   
 
     
@@ -1906,7 +1938,7 @@
   <span class="md-ellipsis">
     
   
-    Next Steps
+    Próximos Passos
   
 
     
@@ -1953,7 +1985,7 @@
   <span class="md-ellipsis">
     
   
-    Imaging
+    Index
   
 
     
@@ -1969,7 +2001,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Imaging
+    Index
   
 
           </label>
@@ -1989,7 +2021,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow run for Imaging
+    Index
   
 
     
@@ -2017,7 +2049,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    Orientação
   
 
     
@@ -2045,7 +2077,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run basic operations
+    Parte 1: Executar operações básicas
   
 
     
@@ -2073,7 +2105,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Run nf-core/molkart
+    Parte 2: Executar nf-core/molkart
   
 
     
@@ -2101,7 +2133,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Organizing inputs
+    Parte 3: Organizando entradas
   
 
     
@@ -2129,7 +2161,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Configuration
+    Parte 4: Configuração
   
 
     
@@ -2157,7 +2189,7 @@
   <span class="md-ellipsis">
     
   
-    Survey
+    Questionário
   
 
     
@@ -2185,7 +2217,7 @@
   <span class="md-ellipsis">
     
   
-    Next steps
+    Próximos passos
   
 
     
@@ -2239,7 +2271,7 @@
   <span class="md-ellipsis">
     
   
-    Side Quests
+    Missões Secundárias
   
 
     
@@ -2255,7 +2287,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Side Quests
+    Missões Secundárias
   
 
           </label>
@@ -2275,7 +2307,7 @@
   <span class="md-ellipsis">
     
   
-    Side Quests
+    Missões Secundárias
   
 
     
@@ -2303,7 +2335,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    Orientação
   
 
     
@@ -2331,7 +2363,7 @@
   <span class="md-ellipsis">
     
   
-    Development Environment
+    Ambiente de Desenvolvimento
   
 
     
@@ -2359,7 +2391,7 @@
   <span class="md-ellipsis">
     
   
-    Metadata and meta maps
+    Metadados e mapas meta
   
 
     
@@ -2387,7 +2419,7 @@
   <span class="md-ellipsis">
     
   
-    File input processing
+    Processamento de entrada de arquivos
   
 
     
@@ -2415,7 +2447,7 @@
   <span class="md-ellipsis">
     
   
-    Splitting and Grouping
+    Divisão e Agrupamento
   
 
     
@@ -2443,7 +2475,7 @@
   <span class="md-ellipsis">
     
   
-    Workflows of Workflows
+    Fluxos de Trabalho de Fluxos de Trabalho
   
 
     
@@ -2471,7 +2503,7 @@
   <span class="md-ellipsis">
     
   
-    Debugging Workflows
+    Depurando Workflows
   
 
     
@@ -2499,7 +2531,7 @@
   <span class="md-ellipsis">
     
   
-    Essential Nextflow Scripting Patterns
+    Padrões Essenciais de Script em Nextflow
   
 
     
@@ -2527,7 +2559,7 @@
   <span class="md-ellipsis">
     
   
-    Testing with nf-test
+    Testando com nf-test
   
 
     
@@ -2573,7 +2605,7 @@
   <span class="md-ellipsis">
     
   
-    Training Collections
+    Index
   
 
     
@@ -2589,7 +2621,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Training Collections
+    Index
   
 
           </label>
@@ -2609,7 +2641,7 @@
   <span class="md-ellipsis">
     
   
-    Training Collections
+    Index
   
 
     
@@ -2637,7 +2669,7 @@
   <span class="md-ellipsis">
     
   
-    The Architect's Toolkit I
+    Architects toolkit 1
   
 
     
@@ -2721,7 +2753,7 @@
   <span class="md-ellipsis">
     
   
-    Conseguindo ajuda
+    Obtendo ajuda
   
 
     
@@ -2762,7 +2794,7 @@
   <span class="md-ellipsis">
     
   
-    Training environment
+    Opções de ambiente
   
 
     
@@ -2778,7 +2810,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Training environment
+    Opções de ambiente
   
 
           </label>
@@ -2798,7 +2830,7 @@
   <span class="md-ellipsis">
     
   
-    Configuração do ambiente
+    Opções de ambiente
   
 
     
@@ -2826,7 +2858,7 @@
   <span class="md-ellipsis">
     
   
-    Gitpod
+    GitHub Codespaces
   
 
     
@@ -2863,7 +2895,7 @@
   <span class="md-ellipsis">
     
   
-    Local Devcontainers
+    Devcontainers Locais
   
 
     
@@ -2881,7 +2913,7 @@
   <span class="md-ellipsis">
     
   
-    Local Devcontainers
+    Devcontainers Locais
   
 
     
@@ -2901,31 +2933,31 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#requirements" class="md-nav__link">
+  <a href="#requisitos" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Requirements
+        Requisitos
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#setup-instructions" class="md-nav__link">
+  <a href="#instrucoes-de-configuracao" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Setup Instructions
+        Instruções de Configuração
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Setup Instructions">
+    <nav class="md-nav" aria-label="Instruções de Configuração">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#install-the-dev-containers-extension-in-vs-code" class="md-nav__link">
+  <a href="#instalar-a-extensao-dev-containers-no-vs-code" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Install the "Dev Containers" extension in VS Code
+        Instalar a extensão "Dev Containers" no VS Code
       
     </span>
   </a>
@@ -2933,10 +2965,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#clone-the-repository" class="md-nav__link">
+  <a href="#clone-o-repositorio" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Clone the repository:
+        Clone o repositório:
       
     </span>
   </a>
@@ -2944,10 +2976,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#open-the-repository-in-vs-code" class="md-nav__link">
+  <a href="#abra-o-repositorio-no-vs-code" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Open the repository in VS Code:
+        Abra o repositório no VS Code:
       
     </span>
   </a>
@@ -2955,10 +2987,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#reopen-in-container" class="md-nav__link">
+  <a href="#reabrir-no-conteiner" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Reopen in Container
+        Reabrir no Contêiner
       
     </span>
   </a>
@@ -2969,28 +3001,28 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#benefits-of-using-devcontainers" class="md-nav__link">
+  <a href="#beneficios-de-usar-devcontainers" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Benefits of Using Devcontainers
+        Benefícios de Usar Devcontainers
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#checking-your-environment" class="md-nav__link">
+  <a href="#verificando-seu-ambiente" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Checking Your Environment
+        Verificando Seu Ambiente
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#troubleshooting" class="md-nav__link">
+  <a href="#solucao-de-problemas" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Troubleshooting
+        Solução de Problemas
       
     </span>
   </a>
@@ -3205,7 +3237,7 @@
   <span class="md-ellipsis">
     
   
-    Instalação local
+    Instalação manual
   
 
     
@@ -3241,7 +3273,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow versions
+    Versões do Nextflow
   
 
     
@@ -3269,7 +3301,7 @@
   <span class="md-ellipsis">
     
   
-    The Hello pipeline
+    O pipeline Hello
   
 
     
@@ -3311,31 +3343,31 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#requirements" class="md-nav__link">
+  <a href="#requisitos" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Requirements
+        Requisitos
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#setup-instructions" class="md-nav__link">
+  <a href="#instrucoes-de-configuracao" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Setup Instructions
+        Instruções de Configuração
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Setup Instructions">
+    <nav class="md-nav" aria-label="Instruções de Configuração">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#install-the-dev-containers-extension-in-vs-code" class="md-nav__link">
+  <a href="#instalar-a-extensao-dev-containers-no-vs-code" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Install the "Dev Containers" extension in VS Code
+        Instalar a extensão "Dev Containers" no VS Code
       
     </span>
   </a>
@@ -3343,10 +3375,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#clone-the-repository" class="md-nav__link">
+  <a href="#clone-o-repositorio" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Clone the repository:
+        Clone o repositório:
       
     </span>
   </a>
@@ -3354,10 +3386,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#open-the-repository-in-vs-code" class="md-nav__link">
+  <a href="#abra-o-repositorio-no-vs-code" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Open the repository in VS Code:
+        Abra o repositório no VS Code:
       
     </span>
   </a>
@@ -3365,10 +3397,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#reopen-in-container" class="md-nav__link">
+  <a href="#reabrir-no-conteiner" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Reopen in Container
+        Reabrir no Contêiner
       
     </span>
   </a>
@@ -3379,28 +3411,28 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#benefits-of-using-devcontainers" class="md-nav__link">
+  <a href="#beneficios-de-usar-devcontainers" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Benefits of Using Devcontainers
+        Benefícios de Usar Devcontainers
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#checking-your-environment" class="md-nav__link">
+  <a href="#verificando-seu-ambiente" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Checking Your Environment
+        Verificando Seu Ambiente
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#troubleshooting" class="md-nav__link">
+  <a href="#solucao-de-problemas" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Troubleshooting
+        Solução de Problemas
       
     </span>
   </a>
@@ -3644,96 +3676,106 @@
                 
                   
 
+ 
+<a
+  href="https://github.com/nextflow-io/training/edit/master/docs/envsetup/03_devcontainer.md"
+  title="Editar esta página"
+  class="md-content__button md-icon"
+  rel="edit"
+>
+   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+</a>
+   
+<a
+  href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md"
+  title="Improve translation"
+  class="md-content__button md-icon"
+>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 1H3c-1.1 0-2 .9-2 2v12l3-3h5v-1c0-2.2 1.79-4 4-4V3c0-1.1-.9-2-2-2m0 3H9.5c-.34 1.19-.96 2.3-1.82 3.26l-.02.02 1.26 1.25-.37 1.01L7 8l-2.5 2.5-.69-.73 2.53-2.49A8.6 8.6 0 0 1 4.86 5h.99c.31.6.69 1.17 1.15 1.68A7.7 7.7 0 0 0 8.57 4H3V3h3.5V2h1v1H11zm10 5h-8c-1.1 0-2 .9-2 2v7c0 1.1.9 2 2 2h7l3 3V11c0-1.1-.9-2-2-2m-1.37 10-.85-2.25h-3.56L14.38 19h-1.5l3.37-9h1.5l3.38 9zM17 12l1.22 3.25h-2.43z"/></svg>
+</a>
+ 
 
-  
-    <a href="https://github.com/nextflow-io/training/edit/master/docs/envsetup/03_devcontainer.md" title="Editar esta página" class="md-content__button md-icon" rel="edit">
-      
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
-    </a>
-  
-  
-
-
-<h1 id="local-devcontainers">Local Devcontainers<a class="headerlink" href="#local-devcontainers" title="Permanent link">&para;</a></h1>
-<p>If you have a local Docker installation or are happy to install one, the easiest way to work locally with these materials is to use Visual Studio Code's devcontainer feature. This approach provides all the necessary tools and dependencies without requiring manual installation.</p>
-<h2 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h2>
-<p>To use the local devcontainer setup, you'll need:</p>
+<h1 id="devcontainers-locais">Devcontainers Locais<a class="headerlink" href="#devcontainers-locais" title="Permanent link">&para;</a></h1>
+<p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Tradução assistida por IA - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">saiba mais e sugira melhorias</a></span></p>
+<p>Se você tem uma instalação local do Docker ou está disposto a instalar uma, a maneira mais fácil de trabalhar localmente com esses materiais é usar o recurso de devcontainer do Visual Studio Code. Essa abordagem fornece todas as ferramentas e dependências necessárias sem exigir instalação manual.</p>
+<h2 id="requisitos">Requisitos<a class="headerlink" href="#requisitos" title="Permanent link">&para;</a></h2>
+<p>Para usar a configuração de devcontainer local, você precisará de:</p>
 <ul>
 <li><a href="https://code.visualstudio.com/">Visual Studio Code</a></li>
-<li>A local Docker installation, for example:</li>
-<li><a href="https://docs.docker.com/get-docker/">Docker Desktop</a> (for Windows/macOS)</li>
-<li><a href="https://docs.docker.com/engine/install/">Docker Engine</a> (for Linux)</li>
-<li><a href="https://github.com/abiosoft/colima">Colima</a> (alternative for macOS)</li>
-<li><a href="https://docs.docker.com/build/concepts/overview/#install-buildx">Docker Buildx</a> (included in Docker Desktop, but may need separate installation with other Docker setups)</li>
-<li><a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers">Dev Containers extension</a> for VS Code</li>
+<li>Uma instalação local do Docker, por exemplo:</li>
+<li><a href="https://docs.docker.com/get-docker/">Docker Desktop</a> (para Windows/macOS)</li>
+<li><a href="https://docs.docker.com/engine/install/">Docker Engine</a> (para Linux)</li>
+<li><a href="https://github.com/abiosoft/colima">Colima</a> (alternativa para macOS)</li>
+<li><a href="https://docs.docker.com/build/concepts/overview/#install-buildx">Docker Buildx</a> (incluído no Docker Desktop, mas pode precisar de instalação separada com outras configurações do Docker)</li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers">Extensão Dev Containers</a> para VS Code</li>
 </ul>
-<p>Your Docker installation must be running before you attempt to open the devcontainer.</p>
-<p>To verify that Docker buildx is available, run:</p>
+<p>Sua instalação do Docker deve estar em execução antes de você tentar abrir o devcontainer.</p>
+<p>Para verificar se o Docker buildx está disponível, execute:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>docker<span class="w"> </span>buildx<span class="w"> </span>version
 </code></pre></div>
-<p>If this command fails, you'll need to install the buildx extension before proceeding.</p>
-<h2 id="setup-instructions">Setup Instructions<a class="headerlink" href="#setup-instructions" title="Permanent link">&para;</a></h2>
-<p>Follow these steps to set up your local environment using VS Code devcontainers:</p>
-<h3 id="install-the-dev-containers-extension-in-vs-code">Install the "Dev Containers" extension in VS Code<a class="headerlink" href="#install-the-dev-containers-extension-in-vs-code" title="Permanent link">&para;</a></h3>
+<p>Se este comando falhar, você precisará instalar a extensão buildx antes de prosseguir.</p>
+<h2 id="instrucoes-de-configuracao">Instruções de Configuração<a class="headerlink" href="#instrucoes-de-configuracao" title="Permanent link">&para;</a></h2>
+<p>Siga estas etapas para configurar seu ambiente local usando devcontainers do VS Code:</p>
+<h3 id="instalar-a-extensao-dev-containers-no-vs-code">Instalar a extensão "Dev Containers" no VS Code<a class="headerlink" href="#instalar-a-extensao-dev-containers-no-vs-code" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Open VS Code</li>
-<li>Go to Extensions (Ctrl+Shift+X or Cmd+Shift+X on macOS)</li>
-<li>Search for "Dev Containers"</li>
-<li>Click "Install"</li>
+<li>Abra o VS Code</li>
+<li>Vá para Extensões (Ctrl+Shift+X ou Cmd+Shift+X no macOS)</li>
+<li>Pesquise por "Dev Containers"</li>
+<li>Clique em "Install"</li>
 </ul>
-<p><img alt="Installing Dev Containers extension in VS Code" src="../../../envsetup/img/install_extension.png" /></p>
-<h3 id="clone-the-repository">Clone the repository:<a class="headerlink" href="#clone-the-repository" title="Permanent link">&para;</a></h3>
+<p><img alt="Instalando a extensão Dev Containers no VS Code" src="img/install_extension.png" /></p>
+<h3 id="clone-o-repositorio">Clone o repositório:<a class="headerlink" href="#clone-o-repositorio" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/nextflow-io/training.git
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">cd</span><span class="w"> </span>training
 </code></pre></div>
-<h3 id="open-the-repository-in-vs-code">Open the repository in VS Code:<a class="headerlink" href="#open-the-repository-in-vs-code" title="Permanent link">&para;</a></h3>
+<h3 id="abra-o-repositorio-no-vs-code">Abra o repositório no VS Code:<a class="headerlink" href="#abra-o-repositorio-no-vs-code" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Launch VS Code</li>
-<li>Select <strong>File -&gt; Open Folder</strong> from the menu</li>
-<li>Navigate to and select the training repository folder you just cloned</li>
-<li>Click <strong>Open</strong></li>
+<li>Inicie o VS Code</li>
+<li>Selecione <strong>File -&gt; Open Folder</strong> no menu</li>
+<li>Navegue até e selecione a pasta do repositório de treinamento que você acabou de clonar</li>
+<li>Clique em <strong>Open</strong></li>
 </ul>
-<h3 id="reopen-in-container">Reopen in Container<a class="headerlink" href="#reopen-in-container" title="Permanent link">&para;</a></h3>
-<p>If prompted by VS Code to "Reopen in Container", click on it. Alternatively:</p>
+<h3 id="reabrir-no-conteiner">Reabrir no Contêiner<a class="headerlink" href="#reabrir-no-conteiner" title="Permanent link">&para;</a></h3>
+<p>Se solicitado pelo VS Code para "Reopen in Container", clique nele. Alternativamente:</p>
 <ul>
-<li>Press F1 (or Ctrl+Shift+P / Cmd+Shift+P on macOS)</li>
-<li>Type "Dev Containers: Reopen in Container"</li>
-<li><strong>Important</strong>: When prompted to select a configuration, choose the <strong>local-dev</strong> devcontainer configuration</li>
+<li>Pressione F1 (ou Ctrl+Shift+P / Cmd+Shift+P no macOS)</li>
+<li>Digite "Dev Containers: Reopen in Container"</li>
+<li><strong>Importante</strong>: Quando solicitado a selecionar uma configuração, escolha a configuração de devcontainer <strong>local-dev</strong></li>
 </ul>
-<p><img alt="Reopen in Container prompt" src="../../../envsetup/img/reopen_prompt.png" /></p>
-<p><img alt="Selecting local configuration" src="../../../envsetup/img/select_local_config.png" /></p>
-<p>Wait for the container to build. This may take a few minutes the first time as it downloads and sets up all the necessary components.</p>
-<p>Once the container is built and running, you'll have a fully configured environment with all the necessary tools installed, including:</p>
+<p><img alt="Prompt Reopen in Container" src="img/reopen_prompt.png" /></p>
+<p><img alt="Selecionando configuração local" src="img/select_local_config.png" /></p>
+<p>Aguarde a construção do contêiner. Isso pode levar alguns minutos na primeira vez, pois ele baixa e configura todos os componentes necessários.</p>
+<p>Uma vez que o contêiner esteja construído e em execução, você terá um ambiente totalmente configurado com todas as ferramentas necessárias instaladas, incluindo:</p>
 <ul>
 <li>Java</li>
 <li>Nextflow</li>
 <li>Docker</li>
 <li>Git</li>
-<li>And all other dependencies required for the training</li>
+<li>E todas as outras dependências necessárias para o treinamento</li>
 </ul>
-<p><img alt="VS Code with devcontainer running" src="../../../envsetup/img/running_container.png" /></p>
-<h2 id="benefits-of-using-devcontainers">Benefits of Using Devcontainers<a class="headerlink" href="#benefits-of-using-devcontainers" title="Permanent link">&para;</a></h2>
-<p>Using the devcontainer approach offers several advantages:</p>
+<p><img alt="VS Code com devcontainer em execução" src="img/running_container.png" /></p>
+<h2 id="beneficios-de-usar-devcontainers">Benefícios de Usar Devcontainers<a class="headerlink" href="#beneficios-de-usar-devcontainers" title="Permanent link">&para;</a></h2>
+<p>Usar a abordagem de devcontainer oferece várias vantagens:</p>
 <ul>
-<li><strong>Consistency</strong>: Ensures a consistent development environment across different machines</li>
-<li><strong>Simplicity</strong>: All dependencies are pre-installed and configured</li>
-<li><strong>Isolation</strong>: The development environment is isolated from your local system</li>
-<li><strong>Reproducibility</strong>: Everyone using the devcontainer gets the same setup</li>
-<li><strong>No manual installation</strong>: No need to manually install Java, Nextflow, and other tools</li>
+<li><strong>Consistência</strong>: Garante um ambiente de desenvolvimento consistente em diferentes máquinas</li>
+<li><strong>Simplicidade</strong>: Todas as dependências são pré-instaladas e configuradas</li>
+<li><strong>Isolamento</strong>: O ambiente de desenvolvimento é isolado do seu sistema local</li>
+<li><strong>Reprodutibilidade</strong>: Todos que usam o devcontainer obtêm a mesma configuração</li>
+<li><strong>Sem instalação manual</strong>: Não é necessário instalar manualmente Java, Nextflow e outras ferramentas</li>
 </ul>
-<h2 id="checking-your-environment">Checking Your Environment<a class="headerlink" href="#checking-your-environment" title="Permanent link">&para;</a></h2>
-<p>Once your devcontainer is running, you can verify that everything is set up correctly by running:</p>
+<h2 id="verificando-seu-ambiente">Verificando Seu Ambiente<a class="headerlink" href="#verificando-seu-ambiente" title="Permanent link">&para;</a></h2>
+<p>Uma vez que seu devcontainer esteja em execução, você pode verificar se tudo está configurado corretamente executando:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>nextflow<span class="w"> </span>info
 </code></pre></div>
-<p>This should display the Nextflow version and runtime information, confirming that your environment is properly configured.</p>
-<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
-<p>If you encounter issues with the devcontainer setup:</p>
+<p>Isso deve exibir a versão do Nextflow e informações de tempo de execução, confirmando que seu ambiente está configurado corretamente.</p>
+<h2 id="solucao-de-problemas">Solução de Problemas<a class="headerlink" href="#solucao-de-problemas" title="Permanent link">&para;</a></h2>
+<p>Se você encontrar problemas com a configuração do devcontainer:</p>
 <ol>
-<li>Ensure your Docker installation (Docker Desktop, Colima, Docker Engine, etc.) is running before opening the devcontainer</li>
-<li>Check that you've selected the <strong>local-dev</strong> configuration when prompted</li>
-<li>Verify that Docker buildx is installed and working by running <code>docker buildx version</code></li>
-<li>If the container fails to build, try rebuilding it by running the "Dev Containers: Rebuild Container" command</li>
-<li>For persistent issues, refer to the <a href="https://code.visualstudio.com/docs/devcontainers/troubleshooting">VS Code Dev Containers troubleshooting guide</a></li>
+<li>Certifique-se de que sua instalação do Docker (Docker Desktop, Colima, Docker Engine, etc.) está em execução antes de abrir o devcontainer</li>
+<li>Verifique se você selecionou a configuração <strong>local-dev</strong> quando solicitado</li>
+<li>Verifique se o Docker buildx está instalado e funcionando executando <code>docker buildx version</code></li>
+<li>Se o contêiner falhar ao construir, tente reconstruí-lo executando o comando "Dev Containers: Rebuild Container"</li>
+<li>Para problemas persistentes, consulte o <a href="https://code.visualstudio.com/docs/devcontainers/troubleshooting">guia de solução de problemas do VS Code Dev Containers</a></li>
 </ol><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
@@ -5251,6 +5293,9 @@ window.mkdocsQuizConfig = {
 
 
 
+  
+  
+
 
 
   
@@ -5281,7 +5326,7 @@ window.mkdocsQuizConfig = {
       <nav class="md-footer__inner md-grid" aria-label="Rodapé" >
         
           
-          <a href="../01_setup/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Gitpod">
+          <a href="../01_setup/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: GitHub Codespaces">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -5291,20 +5336,20 @@ window.mkdocsQuizConfig = {
                 Anterior
               </span>
               <div class="md-ellipsis">
-                Gitpod
+                GitHub Codespaces
               </div>
             </div>
           </a>
         
         
           
-          <a href="../02_local/" class="md-footer__link md-footer__link--next" aria-label="Próximo: Instalação local">
+          <a href="../02_local/" class="md-footer__link md-footer__link--next" aria-label="Próximo: Instalação manual">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Próximo
               </span>
               <div class="md-ellipsis">
-                Instalação local
+                Instalação manual
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -5381,8 +5426,8 @@ window.mkdocsQuizConfig = {
   
 
 
-<h4>Cookie consent</h4>
-<p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our training materials better. Find out more on <a href="https://seqera.io/privacy-policy/#cookies" target="_blank" rel="noopener">how we use cookies</a>.</p>
+<h4>Consentimento de cookies</h4>
+<p>Usamos cookies para reconhecer suas visitas repetidas e preferências, bem como para medir a eficácia da nossa documentação e se os usuários encontram o que procuram. Com seu consentimento, você nos ajuda a melhorar nossos materiais de treinamento. Saiba mais sobre <a href="https://seqera.io/privacy-policy/#cookies" target="_blank" rel="noopener">como usamos cookies</a>.</p>
 <input class="md-toggle" type="checkbox" id="__settings" >
 <div class="md-consent__settings">
   <ul class="task-list">
@@ -5466,12 +5511,16 @@ window.mkdocsQuizConfig = {
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": {"alias": true, "provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": {"alias": true, "provider": "mike"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
-        <script src="../../../assets/javascripts/posthog.js"></script>
+        <script src="../../assets/javascripts/consent-sync.js"></script>
+      
+        <script src="../../assets/javascripts/posthog.js"></script>
+      
+        <script src="../../assets/javascripts/language-picker.js"></script>
       
     
   </body>

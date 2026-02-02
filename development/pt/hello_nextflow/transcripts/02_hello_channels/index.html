@@ -8,39 +8,47 @@
       
       
       
-        <link rel="canonical" href="https://training.nextflow.io/0.dev/pt/hello_nextflow/transcripts/02_hello_channels/">
+        <link rel="canonical" href="https://training.nextflow.io/pt/hello_nextflow/transcripts/02_hello_channels/">
       
       
       
       
         
-          <link rel="alternate" href="../../../../hello_nextflow/transcripts/02_hello_channels/" hreflang="en">
+          <link rel="alternate" href="/" hreflang="en">
         
-          <link rel="alternate" href="./" hreflang="pt">
+          <link rel="alternate" href="/de/" hreflang="de">
         
-          <link rel="alternate" href="../../../../es/hello_nextflow/transcripts/02_hello_channels/" hreflang="es">
+          <link rel="alternate" href="/es/" hreflang="es">
         
-          <link rel="alternate" href="../../../../fr/hello_nextflow/transcripts/02_hello_channels/" hreflang="fr">
+          <link rel="alternate" href="/fr/" hreflang="fr">
         
-          <link rel="alternate" href="../../../../it/hello_nextflow/transcripts/02_hello_channels/" hreflang="it">
+          <link rel="alternate" href="/hi/" hreflang="hi">
         
-          <link rel="alternate" href="../../../../ko/hello_nextflow/transcripts/02_hello_channels/" hreflang="ko">
+          <link rel="alternate" href="/it/" hreflang="it">
+        
+          <link rel="alternate" href="/ko/" hreflang="ko">
+        
+          <link rel="alternate" href="/pl/" hreflang="pl">
+        
+          <link rel="alternate" href="/pt/" hreflang="pt">
+        
+          <link rel="alternate" href="/tr/" hreflang="tr">
         
       
       
-      <link rel="icon" href="../../../../assets/img/nextflow-icon.png">
+      <link rel="icon" href="../../../assets/img/nextflow-icon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
     
     
       
-        <title>Part 2: Hello Channels - Transcript - training.nextflow.io</title>
+        <title>Parte 2: Hello Channels - Transcrição - training.nextflow.io</title>
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
   
@@ -104,11 +112,11 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/fonts.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/fonts.css">
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/extra.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/extra.css">
     
-    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
   
@@ -143,7 +151,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#part-2-hello-channels-transcript" class="md-skip">
+        <a href="#parte-2-hello-channels-transcricao" class="md-skip">
           Ir para o conteúdo
         </a>
       
@@ -163,9 +171,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
-    <a href="../../../" title="training.nextflow.io" class="md-header__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
+    <a href="../../.." title="training.nextflow.io" class="md-header__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
       
-  <img src="../../../../assets/img/nextflow_logo_dark.png" alt="logo">
+  <img src="../../../assets/img/nextflow_logo_dark.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -182,7 +190,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Part 2: Hello Channels - Transcript
+              Parte 2: Hello Channels - Transcrição
             
           </span>
         </div>
@@ -229,38 +237,62 @@
       <ul class="md-select__list">
         
           <li class="md-select__item">
-            <a href="../../../../hello_nextflow/transcripts/02_hello_channels/" hreflang="en" class="md-select__link">
+            <a href="/" hreflang="en" class="md-select__link">
               English
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="./" hreflang="pt" class="md-select__link">
-              Português
+            <a href="/de/" hreflang="de" class="md-select__link">
+              deutsch
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../../es/hello_nextflow/transcripts/02_hello_channels/" hreflang="es" class="md-select__link">
-              Español
+            <a href="/es/" hreflang="es" class="md-select__link">
+              español
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../../fr/hello_nextflow/transcripts/02_hello_channels/" hreflang="fr" class="md-select__link">
-              Français
+            <a href="/fr/" hreflang="fr" class="md-select__link">
+              français
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../../it/hello_nextflow/transcripts/02_hello_channels/" hreflang="it" class="md-select__link">
-              Italiano
+            <a href="/hi/" hreflang="hi" class="md-select__link">
+              हिन्दी
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../../ko/hello_nextflow/transcripts/02_hello_channels/" hreflang="ko" class="md-select__link">
-              Korean
+            <a href="/it/" hreflang="it" class="md-select__link">
+              italiano
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/ko/" hreflang="ko" class="md-select__link">
+              한국어
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/pl/" hreflang="pl" class="md-select__link">
+              Polski
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/pt/" hreflang="pt" class="md-select__link">
+              português
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/tr/" hreflang="tr" class="md-select__link">
+              Türkçe
             </a>
           </li>
         
@@ -380,9 +412,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../../" title="training.nextflow.io" class="md-nav__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
+    <a href="../../.." title="training.nextflow.io" class="md-nav__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
       
-  <img src="../../../../assets/img/nextflow_logo_dark.png" alt="logo">
+  <img src="../../../assets/img/nextflow_logo_dark.png" alt="logo">
 
     </a>
     training.nextflow.io
@@ -409,14 +441,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../" class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Home
+    Início
   
 
     
@@ -518,7 +550,7 @@
   <span class="md-ellipsis">
     
   
-    Getting started
+    Primeiros passos
   
 
     
@@ -546,7 +578,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run basic operations
+    Parte 1: Operações básicas de execução
   
 
     
@@ -574,7 +606,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Run real pipelines
+    Parte 2: Executar pipelines reais
   
 
     
@@ -602,7 +634,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Run configuration
+    Parte 3: Configuração de execução
   
 
     
@@ -630,7 +662,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    Resumo do curso
   
 
     
@@ -658,7 +690,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Pesquisa de feedback
   
 
     
@@ -768,7 +800,7 @@
   <span class="md-ellipsis">
     
   
-    Orientação
+    Começando
   
 
     
@@ -796,7 +828,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Hello World
+    Parte 1: Hello World
   
 
     
@@ -824,7 +856,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Hello Channels
+    Parte 2: Hello Channels
   
 
     
@@ -852,7 +884,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Hello Workflow
+    Parte 3: Hello Workflow
   
 
     
@@ -880,7 +912,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Hello Modules
+    Parte 4: Hello Modules
   
 
     
@@ -908,7 +940,7 @@
   <span class="md-ellipsis">
     
   
-    Part 5: Hello Containers
+    Parte 5: Hello Containers
   
 
     
@@ -936,7 +968,7 @@
   <span class="md-ellipsis">
     
   
-    Part 6: Hello Config
+    Parte 6: Hello Config
   
 
     
@@ -964,7 +996,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    Resumo do curso
   
 
     
@@ -992,7 +1024,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Pesquisa de feedback
   
 
     
@@ -1102,7 +1134,7 @@
   <span class="md-ellipsis">
     
   
-    Getting started
+    Primeiros Passos
   
 
     
@@ -1130,7 +1162,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run a demo pipeline
+    Parte 1: Executar um pipeline de demonstração
   
 
     
@@ -1158,7 +1190,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Rewrite Hello for nf-core
+    Parte 2: Reescrever Hello para nf-core
   
 
     
@@ -1186,7 +1218,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Use an nf-core module
+    Parte 3: Usar um módulo nf-core
   
 
     
@@ -1214,7 +1246,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Make an nf-core module
+    Parte 4: Criar um módulo nf-core
   
 
     
@@ -1242,7 +1274,7 @@
   <span class="md-ellipsis">
     
   
-    Part 5: Input validation
+    Parte 5: Validação de entrada
   
 
     
@@ -1270,7 +1302,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    Resumo do curso
   
 
     
@@ -1298,7 +1330,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Pesquisa de feedback
   
 
     
@@ -1344,7 +1376,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Science
+    Nextflow para Ciência
   
 
     
@@ -1360,7 +1392,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Nextflow for Science
+    Nextflow para Ciência
   
 
           </label>
@@ -1380,7 +1412,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Science
+    Nextflow para Ciência
   
 
     
@@ -1419,7 +1451,7 @@
   <span class="md-ellipsis">
     
   
-    Genomics
+    Nextflow para Genômica
   
 
     
@@ -1435,7 +1467,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Genomics
+    Nextflow para Genômica
   
 
           </label>
@@ -1455,7 +1487,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Genomics
+    Nextflow para Genômica
   
 
     
@@ -1483,7 +1515,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    Orientação
   
 
     
@@ -1511,7 +1543,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Per-sample variant calling
+    Parte 1: Chamada de variantes por amostra
   
 
     
@@ -1539,7 +1571,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Joint calling on a cohort
+    Parte 2: Chamada conjunta em uma coorte
   
 
     
@@ -1567,7 +1599,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Moving code into modules
+    Parte 3: Movendo código para módulos
   
 
     
@@ -1595,7 +1627,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Adding tests
+    Parte 4: Adicionando testes
   
 
     
@@ -1623,7 +1655,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Pesquisa de feedback
   
 
     
@@ -1651,7 +1683,7 @@
   <span class="md-ellipsis">
     
   
-    Next Steps
+    Próximos Passos
   
 
     
@@ -1698,7 +1730,7 @@
   <span class="md-ellipsis">
     
   
-    RNAseq
+    Nextflow para RNAseq
   
 
     
@@ -1714,7 +1746,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    RNAseq
+    Nextflow para RNAseq
   
 
           </label>
@@ -1734,7 +1766,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for RNAseq
+    Nextflow para RNAseq
   
 
     
@@ -1762,7 +1794,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    Orientação
   
 
     
@@ -1790,7 +1822,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Method overview and manual testing
+    Parte 1: Visão geral do método e teste manual
   
 
     
@@ -1818,7 +1850,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Single-sample implementation
+    Parte 2: Implementação de amostra única
   
 
     
@@ -1846,7 +1878,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Multi-sample paired-end implementation
+    Parte 3: Implementação de múltiplas amostras com dados paired-end
   
 
     
@@ -1874,7 +1906,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Pesquisa de feedback
   
 
     
@@ -1902,7 +1934,7 @@
   <span class="md-ellipsis">
     
   
-    Next Steps
+    Próximos Passos
   
 
     
@@ -1949,7 +1981,7 @@
   <span class="md-ellipsis">
     
   
-    Imaging
+    Index
   
 
     
@@ -1965,7 +1997,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Imaging
+    Index
   
 
           </label>
@@ -1985,7 +2017,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow run for Imaging
+    Index
   
 
     
@@ -2013,7 +2045,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    Orientação
   
 
     
@@ -2041,7 +2073,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run basic operations
+    Parte 1: Executar operações básicas
   
 
     
@@ -2069,7 +2101,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Run nf-core/molkart
+    Parte 2: Executar nf-core/molkart
   
 
     
@@ -2097,7 +2129,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Organizing inputs
+    Parte 3: Organizando entradas
   
 
     
@@ -2125,7 +2157,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Configuration
+    Parte 4: Configuração
   
 
     
@@ -2153,7 +2185,7 @@
   <span class="md-ellipsis">
     
   
-    Survey
+    Questionário
   
 
     
@@ -2181,7 +2213,7 @@
   <span class="md-ellipsis">
     
   
-    Next steps
+    Próximos passos
   
 
     
@@ -2235,7 +2267,7 @@
   <span class="md-ellipsis">
     
   
-    Side Quests
+    Missões Secundárias
   
 
     
@@ -2251,7 +2283,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Side Quests
+    Missões Secundárias
   
 
           </label>
@@ -2271,7 +2303,7 @@
   <span class="md-ellipsis">
     
   
-    Side Quests
+    Missões Secundárias
   
 
     
@@ -2299,7 +2331,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    Orientação
   
 
     
@@ -2327,7 +2359,7 @@
   <span class="md-ellipsis">
     
   
-    Development Environment
+    Ambiente de Desenvolvimento
   
 
     
@@ -2355,7 +2387,7 @@
   <span class="md-ellipsis">
     
   
-    Metadata and meta maps
+    Metadados e mapas meta
   
 
     
@@ -2383,7 +2415,7 @@
   <span class="md-ellipsis">
     
   
-    File input processing
+    Processamento de entrada de arquivos
   
 
     
@@ -2411,7 +2443,7 @@
   <span class="md-ellipsis">
     
   
-    Splitting and Grouping
+    Divisão e Agrupamento
   
 
     
@@ -2439,7 +2471,7 @@
   <span class="md-ellipsis">
     
   
-    Workflows of Workflows
+    Fluxos de Trabalho de Fluxos de Trabalho
   
 
     
@@ -2467,7 +2499,7 @@
   <span class="md-ellipsis">
     
   
-    Debugging Workflows
+    Depurando Workflows
   
 
     
@@ -2495,7 +2527,7 @@
   <span class="md-ellipsis">
     
   
-    Essential Nextflow Scripting Patterns
+    Padrões Essenciais de Script em Nextflow
   
 
     
@@ -2523,7 +2555,7 @@
   <span class="md-ellipsis">
     
   
-    Testing with nf-test
+    Testando com nf-test
   
 
     
@@ -2569,7 +2601,7 @@
   <span class="md-ellipsis">
     
   
-    Training Collections
+    Index
   
 
     
@@ -2585,7 +2617,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Training Collections
+    Index
   
 
           </label>
@@ -2605,7 +2637,7 @@
   <span class="md-ellipsis">
     
   
-    Training Collections
+    Index
   
 
     
@@ -2633,7 +2665,7 @@
   <span class="md-ellipsis">
     
   
-    The Architect's Toolkit I
+    Architects toolkit 1
   
 
     
@@ -2715,7 +2747,7 @@
   <span class="md-ellipsis">
     
   
-    Conseguindo ajuda
+    Obtendo ajuda
   
 
     
@@ -2754,7 +2786,7 @@
   <span class="md-ellipsis">
     
   
-    Training environment
+    Opções de ambiente
   
 
     
@@ -2770,7 +2802,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Training environment
+    Opções de ambiente
   
 
           </label>
@@ -2790,7 +2822,7 @@
   <span class="md-ellipsis">
     
   
-    Configuração do ambiente
+    Opções de ambiente
   
 
     
@@ -2818,7 +2850,7 @@
   <span class="md-ellipsis">
     
   
-    Gitpod
+    GitHub Codespaces
   
 
     
@@ -2846,7 +2878,7 @@
   <span class="md-ellipsis">
     
   
-    Local Devcontainers
+    Devcontainers Locais
   
 
     
@@ -2874,7 +2906,7 @@
   <span class="md-ellipsis">
     
   
-    Instalação local
+    Instalação manual
   
 
     
@@ -2910,7 +2942,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow versions
+    Versões do Nextflow
   
 
     
@@ -2938,7 +2970,7 @@
   <span class="md-ellipsis">
     
   
-    The Hello pipeline
+    O pipeline Hello
   
 
     
@@ -2980,289 +3012,289 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#welcome" class="md-nav__link">
+  <a href="#boas-vindas" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Welcome
+        Boas-vindas
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#0-warmup-run-hello-channelsnf" class="md-nav__link">
+  <a href="#0-aquecimento-execute-hello-channelsnf" class="md-nav__link">
     <span class="md-ellipsis">
       
-        0. Warmup: Run hello-channels.nf
+        0. Aquecimento: Execute hello-channels.nf
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#1-provide-variable-inputs-via-a-channel-explicitly" class="md-nav__link">
+  <a href="#1-forneca-entradas-variaveis-atraves-de-um-canal-explicitamente" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Provide variable inputs via a channel explicitly
+        1. Forneça entradas variáveis através de um canal explicitamente
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#11-create-an-input-channel" class="md-nav__link">
+  <a href="#11-crie-um-canal-de-entrada" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1. Create an input channel
+        1.1. Crie um canal de entrada
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#12-add-the-channel-as-input-to-the-process-call" class="md-nav__link">
+  <a href="#12-adicione-o-canal-como-entrada-para-a-chamada-do-processo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2. Add the channel as input to the process call
+        1.2. Adicione o canal como entrada para a chamada do processo
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#13-run-the-workflow-command-again" class="md-nav__link">
+  <a href="#13-execute-o-comando-workflow-novamente" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.3. Run the workflow command again
+        1.3. Execute o comando workflow novamente
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#2-modify-the-workflow-to-run-on-multiple-input-values" class="md-nav__link">
+  <a href="#2-modifique-o-fluxo-de-trabalho-para-executar-em-multiplos-valores-de-entrada" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Modify the workflow to run on multiple input values
+        2. Modifique o fluxo de trabalho para executar em múltiplos valores de entrada
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#21-load-multiple-greetings-into-the-input-channel" class="md-nav__link">
+  <a href="#21-carregue-multiplas-saudacoes-no-canal-de-entrada" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1. Load multiple greetings into the input channel
+        2.1. Carregue múltiplas saudações no canal de entrada
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#212-run-the-command-and-look-at-the-log-output" class="md-nav__link">
+  <a href="#212-execute-o-comando-e-observe-a-saida-do-log" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1.2. Run the command and look at the log output
+        2.1.2. Execute o comando e observe a saída do log
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#213-run-the-command-again-with-the-ansi-log-false-option" class="md-nav__link">
+  <a href="#213-execute-o-comando-novamente-com-a-opcao-ansi-log-false" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1.3. Run the command again with the -ansi-log false option
+        2.1.3. Execute o comando novamente com a opção -ansi-log false
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#22-ensure-the-output-file-names-will-be-unique" class="md-nav__link">
+  <a href="#22-certifique-se-de-que-os-nomes-dos-arquivos-de-saida-serao-unicos" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2. Ensure the output file names will be unique
+        2.2. Certifique-se de que os nomes dos arquivos de saída serão únicos
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#221-construct-a-dynamic-output-file-name" class="md-nav__link">
+  <a href="#221-construa-um-nome-de-arquivo-de-saida-dinamico" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2.1. Construct a dynamic output file name
+        2.2.1. Construa um nome de arquivo de saída dinâmico
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#222-run-the-workflow" class="md-nav__link">
+  <a href="#222-execute-o-fluxo-de-trabalho" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2.2. Run the workflow
+        2.2.2. Execute o fluxo de trabalho
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#3-use-an-operator-to-transform-the-contents-of-a-channel" class="md-nav__link">
+  <a href="#3-use-um-operador-para-transformar-o-conteudo-de-um-canal" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Use an operator to transform the contents of a channel
+        3. Use um operador para transformar o conteúdo de um canal
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#31-provide-an-array-of-values-as-input-to-the-channel" class="md-nav__link">
+  <a href="#31-forneca-um-array-de-valores-como-entrada-para-o-canal" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1. Provide an array of values as input to the channel
+        3.1. Forneça um array de valores como entrada para o canal
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#311-set-up-the-input-variable" class="md-nav__link">
+  <a href="#311-configure-a-variavel-de-entrada" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1.1. Set up the input variable
+        3.1.1. Configure a variável de entrada
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#313-run-the-workflow" class="md-nav__link">
+  <a href="#313-execute-o-fluxo-de-trabalho" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1.3. Run the workflow
+        3.1.3. Execute o fluxo de trabalho
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#32-use-an-operator-to-transform-channel-contents" class="md-nav__link">
+  <a href="#32-use-um-operador-para-transformar-o-conteudo-do-canal" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.2. Use an operator to transform channel contents
+        3.2. Use um operador para transformar o conteúdo do canal
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#321-add-the-flatten-operator" class="md-nav__link">
+  <a href="#321-adicione-o-operador-flatten" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.2.1. Add the flatten() operator
+        3.2.1. Adicione o operador flatten()
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#322-add-view-to-inspect-channel-contents" class="md-nav__link">
+  <a href="#322-adicione-view-para-inspecionar-o-conteudo-do-canal" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.2.2. Add view() to inspect channel contents
+        3.2.2. Adicione view() para inspecionar o conteúdo do canal
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#323-run-the-workflow" class="md-nav__link">
+  <a href="#323-execute-o-fluxo-de-trabalho" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.2.3. Run the workflow
+        3.2.3. Execute o fluxo de trabalho
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#4-use-an-operator-to-parse-input-values-from-a-csv-file" class="md-nav__link">
+  <a href="#4-use-um-operador-para-analisar-valores-de-entrada-de-um-arquivo-csv" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Use an operator to parse input values from a CSV file
+        4. Use um operador para analisar valores de entrada de um arquivo CSV
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#41-modify-the-script-to-expect-a-csv-file-as-the-source-of-greetings" class="md-nav__link">
+  <a href="#41-modifique-o-script-para-esperar-um-arquivo-csv-como-fonte-de-saudacoes" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.1. Modify the script to expect a CSV file as the source of greetings
+        4.1. Modifique o script para esperar um arquivo CSV como fonte de saudações
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#411-switch-the-input-parameter-to-point-to-the-csv-file" class="md-nav__link">
+  <a href="#411-altere-o-parametro-de-entrada-para-apontar-para-o-arquivo-csv" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.1.1. Switch the input parameter to point to the CSV file
+        4.1.1. Altere o parâmetro de entrada para apontar para o arquivo CSV
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#412-switch-to-a-channel-factory-designed-to-handle-a-file" class="md-nav__link">
+  <a href="#412-mude-para-uma-fabrica-de-canais-projetada-para-lidar-com-um-arquivo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.1.2. Switch to a channel factory designed to handle a file
+        4.1.2. Mude para uma fábrica de canais projetada para lidar com um arquivo
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#413-run-the-workflow" class="md-nav__link">
+  <a href="#413-execute-o-fluxo-de-trabalho" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.1.3. Run the workflow
+        4.1.3. Execute o fluxo de trabalho
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#42-use-the-splitcsv-operator-to-parse-the-file" class="md-nav__link">
+  <a href="#42-use-o-operador-splitcsv-para-analisar-o-arquivo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.2. Use the splitCsv() operator to parse the file
+        4.2. Use o operador splitCsv() para analisar o arquivo
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#421-apply-splitcsv-to-the-channel" class="md-nav__link">
+  <a href="#421-aplique-splitcsv-ao-canal" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.2.1. Apply splitCsv() to the channel
+        4.2.1. Aplique splitCsv() ao canal
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#422-run-the-workflow-again" class="md-nav__link">
+  <a href="#422-execute-o-fluxo-de-trabalho-novamente" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.2.2. Run the workflow again
+        4.2.2. Execute o fluxo de trabalho novamente
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#43-use-the-map-operator-to-extract-the-greetings" class="md-nav__link">
+  <a href="#43-use-o-operador-map-para-extrair-as-saudacoes" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.3. Use the map() operator to extract the greetings
+        4.3. Use o operador map() para extrair as saudações
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#431-apply-map-to-the-channel" class="md-nav__link">
+  <a href="#431-aplique-map-ao-canal" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.3.1. Apply map() to the channel
+        4.3.1. Aplique map() ao canal
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#432-run-the-workflow-one-more-time" class="md-nav__link">
+  <a href="#432-execute-o-fluxo-de-trabalho-mais-uma-vez" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.3.2. Run the workflow one more time
+        4.3.2. Execute o fluxo de trabalho mais uma vez
       
     </span>
   </a>
@@ -3506,159 +3538,169 @@
                 
                   
 
+ 
+<a
+  href="https://github.com/nextflow-io/training/edit/master/docs/hello_nextflow/transcripts/02_hello_channels.md"
+  title="Editar esta página"
+  class="md-content__button md-icon"
+  rel="edit"
+>
+   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+</a>
+   
+<a
+  href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md"
+  title="Improve translation"
+  class="md-content__button md-icon"
+>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 1H3c-1.1 0-2 .9-2 2v12l3-3h5v-1c0-2.2 1.79-4 4-4V3c0-1.1-.9-2-2-2m0 3H9.5c-.34 1.19-.96 2.3-1.82 3.26l-.02.02 1.26 1.25-.37 1.01L7 8l-2.5 2.5-.69-.73 2.53-2.49A8.6 8.6 0 0 1 4.86 5h.99c.31.6.69 1.17 1.15 1.68A7.7 7.7 0 0 0 8.57 4H3V3h3.5V2h1v1H11zm10 5h-8c-1.1 0-2 .9-2 2v7c0 1.1.9 2 2 2h7l3 3V11c0-1.1-.9-2-2-2m-1.37 10-.85-2.25h-3.56L14.38 19h-1.5l3.37-9h1.5l3.38 9zM17 12l1.22 3.25h-2.43z"/></svg>
+</a>
+ 
 
-  
-    <a href="https://github.com/nextflow-io/training/edit/master/docs/hello_nextflow/transcripts/02_hello_channels.md" title="Editar esta página" class="md-content__button md-icon" rel="edit">
-      
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
-    </a>
-  
-  
-
-
-<h1 id="part-2-hello-channels-transcript">Part 2: Hello Channels - Transcript<a class="headerlink" href="#part-2-hello-channels-transcript" title="Permanent link">&para;</a></h1>
+<h1 id="parte-2-hello-channels-transcricao">Parte 2: Hello Channels - Transcrição<a class="headerlink" href="#parte-2-hello-channels-transcricao" title="Permanent link">&para;</a></h1>
+<p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Tradução assistida por IA - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">saiba mais e sugira melhorias</a></span></p>
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/lJ41WMMm44M?si=xCItHLiOQWqoqBB9&amp;list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 <div class="admonition note">
-<p class="admonition-title">Important notes</p>
-<p>This page shows the transcript only. For full step-by-step instructions, return to the <a href="../../02_hello_channels/">course material</a>.</p>
-<p>The section numbers shown in the transcript are provided for indicative purposes only and may not include all section numbers in the materials.</p>
+<p class="admonition-title">Notas importantes</p>
+<p>Esta página mostra apenas a transcrição. Para instruções passo a passo completas, retorne ao <a href="../../02_hello_channels/">material do curso</a>.</p>
+<p>Os números de seção mostrados na transcrição são fornecidos apenas para fins indicativos e podem não incluir todos os números de seção dos materiais.</p>
 </div>
-<h2 id="welcome">Welcome<a class="headerlink" href="#welcome" title="Permanent link">&para;</a></h2>
-<p>Hi, welcome to part two of Hello Nextflow.</p>
-<p>This chapter is called Hello Channels. We're gonna be talking all about this fundamental part of Nextflow.</p>
-<p>Channels are the things which connect with different steps in your pipeline, the way that your data and logic flows through your workflow.</p>
-<p>Okay, let's dig in.</p>
-<p>Let's start off by going to training.nextflow.io</p>
-<p>Hello Nextflow in the sidebar and clicking part two. Hello Channels.</p>
-<p>All of the material is written down here so you can follow at your own pace and catch anything that you might have missed.</p>
-<p>Once you've got the website open, you can load up Codespaces and we'll continue from where we were at the end of the last chapter.</p>
-<h2 id="0-warmup-run-hello-channelsnf">0. Warmup: Run hello-channels.nf<a class="headerlink" href="#0-warmup-run-hello-channelsnf" title="Permanent link">&para;</a></h2>
-<p>For this chapter, we're going to be editing a different file. This one's called Hello Channels, so you can find that in a side bar, double click it to open.</p>
-<p>Now if you've just come from chapter one, this file will look very familiar. The starting point here is basically where we finish chapter one, with our process called sayHello, our input, output, our publishDir and our params.greeting, and our simple workflow.</p>
-<p>We're starting with a new file, so it's a level playing ground for everybody, but you can continue with your previous file if you prefer.</p>
-<p>Note, I've also deleted all of the .nextflow* files and the work directories here, just so it's a clean starting point. It doesn't matter if you do that or not, it's up to you.</p>
-<p>Okay. Let's start off by checking that this pipeline still works as we expect. I'm going to bring up the terminal here.</p>
-<p>Do "nextflow run hello-channels.nf" and hit enter.</p>
-<p>It's going to run that little workflow, runs our sayHello step, generates a work directory with that hash, and here's our results folder and there's our output file, just as we expected from our default params.greeting.</p>
-<p>So that's great. Exactly the same as chapter one, working as we expect.</p>
-<h2 id="1-provide-variable-inputs-via-a-channel-explicitly">1. Provide variable inputs via a channel explicitly<a class="headerlink" href="#1-provide-variable-inputs-via-a-channel-explicitly" title="Permanent link">&para;</a></h2>
-<p>In chapter one, you were actually already using channels, you just didn't realize it. When we specified a string here, Nextflow automatically created a channel around that string for us, just because it knew that we were calling a process, so we needed an input channel.</p>
-<p>The first thing we're going to do is make it explicit by actually typing out the channel itself.</p>
-<h2 id="11-create-an-input-channel">1.1. Create an input channel<a class="headerlink" href="#11-create-an-input-channel" title="Permanent link">&para;</a></h2>
-<p>So I'm going to go to the workflow here at the bottom of the script, and I'm going to say greeting_ch. This is a convention we often use in Nextflow code to have a underscore ch at the end of a variable name when it's a channel, just so it's easy to identify that it is a channel, but you don't have to do that. Equals channel of Hello Channels.</p>
-<p>What we've just used is something called a "Channel Factory" in Nextflow language. This is this thing here, we're setting this variable to a new channel, and this channel factory here is creating a channel for us in a particular way.</p>
-<p>There are a handful of different channel factories that Nextflow has, to create channels from different types of inputs. Dot of is the simplest one, and just takes any strings that we give it.</p>
-<p>Notice that when I hover over these words in VS Code, the Nextflow extension is giving me a popup explaining what this syntax does, and there's also a read more text at the bottom of that popup window.</p>
-<p>If I click that, it'll open the Nextflow docs. In a new tab and take me straight to the documentation for this specific thing. In this case for channel.of.</p>
-<h2 id="12-add-the-channel-as-input-to-the-process-call">1.2. Add the channel as input to the process call<a class="headerlink" href="#12-add-the-channel-as-input-to-the-process-call" title="Permanent link">&para;</a></h2>
-<p>Note that the extension is also giving us a warning, saying that we've created a new channel here, but it's not being used by anything.</p>
-<p>So, let's fix that. I'm going to take the new channel name and I'm going to replace this params.greeting with our new channel.</p>
-<p>Note that we're no longer using the command line flag --greeting now, params.greeting isn't being used, we're going back to hard coding this string. That's okay. I'm just trying to keep things simple. We'll come back later and use the params again.</p>
-<h2 id="13-run-the-workflow-command-again">1.3. Run the workflow command again<a class="headerlink" href="#13-run-the-workflow-command-again" title="Permanent link">&para;</a></h2>
-<p>Okay, let's just double check this works. Bring up the terminal and note again. Nextflow run hello channels. Check output.txt, and there it is.</p>
-<p>Great bit of a boring example, doing exactly the same thing as we did before, but now at least the logic is a bit clearer. We're being explicit about writing a new channel.</p>
-<p>We've effectively just written more code to do the same thing. But this will start to make more sense as we become a bit more complicated with how we create our channels.</p>
-<h2 id="2-modify-the-workflow-to-run-on-multiple-input-values">2. Modify the workflow to run on multiple input values<a class="headerlink" href="#2-modify-the-workflow-to-run-on-multiple-input-values" title="Permanent link">&para;</a></h2>
-<p>Okay, let's make this a bit more interesting. It's very rare that you want to run a Nextflow pipeline on a single input, so let's give it several inputs.</p>
-<h2 id="21-load-multiple-greetings-into-the-input-channel">2.1. Load multiple greetings into the input channel<a class="headerlink" href="#21-load-multiple-greetings-into-the-input-channel" title="Permanent link">&para;</a></h2>
-<p>From the docs here. I'm going to copy in these different strings, three of them. Hello, Bonjour, Olà. Oh, get Hope. Copilot is suggesting a couple of others. So let's tab enter those.</p>
-<p>The Nextflow docs here tells us that we can give multiple values to this operator, so it should work, but let's try it out and see what happens.</p>
-<h2 id="212-run-the-command-and-look-at-the-log-output">2.1.2. Run the command and look at the log output<a class="headerlink" href="#212-run-the-command-and-look-at-the-log-output" title="Permanent link">&para;</a></h2>
-<p>Well. Yes and no. Let's see. It says that five of five tasks have run here, but it only shows us one hash, which is a bit odd. That's okay. Everything is it's expected here. By default. Nextflow uses a special type of output to a terminal called ANSI control codes, which means it overwrites the certain lines to give a nice compressed view of all the different processes which are being run.</p>
-<p>This makes much more sense when you have larger workflows and are running hundreds or thousands of different samples. You can just generate so much output on the terminal, it's impossible to look at, whereas this updating view gives you a real time progress for you.</p>
-<h2 id="213-run-the-command-again-with-the-ansi-log-false-option">2.1.3. Run the command again with the -ansi-log false option<a class="headerlink" href="#213-run-the-command-again-with-the-ansi-log-false-option" title="Permanent link">&para;</a></h2>
-<p>If you want, you can run it again, and this time I'm going to use an additional Nextflow core argument with a single hyphen saying, "-ansi-log false". This uses the previous version of the Nextflow log output. And here you can see all the individual processes which have been launched.</p>
-<p>It's up to you whether you do this or not. The output from Nextflow is exactly the same in both cases.</p>
-<h2 id="22-ensure-the-output-file-names-will-be-unique">2.2. Ensure the output file names will be unique<a class="headerlink" href="#22-ensure-the-output-file-names-will-be-unique" title="Permanent link">&para;</a></h2>
-<p>Okay, let's have a look at the output files, then we'll go to results. But there's only a single output file. What's happened? We saw that the process had run lots of times. We can go into the work directory and see all of the different hashes, all the tasks were executed properly. But if you remember in our process here, we're saving everything to an output.txt file and then publishing that to this directory.</p>
-<p>So the same file was created five times, and then it was overwritten five times. And we just have whichever task happen to execute last.</p>
-<h2 id="221-construct-a-dynamic-output-file-name">2.2.1. Construct a dynamic output file name<a class="headerlink" href="#221-construct-a-dynamic-output-file-name" title="Permanent link">&para;</a></h2>
-<p>The way we fix this is by using a dynamic output file name. Here we already have a variable called greeting within the process, so we can use that in the output file name. I copy that and I do $greeting-output.txt.</p>
-<p>I am going to surround this in quotes, just so that bash doesn't get confused by any spaces which might creep in here. And then I'm going to take the same file name and update the output here.</p>
-<p>It's really important that the output matches this, because otherwise, this file won't be found and Nextflow will crash.</p>
-<p>I'm going to make one more really important edit, which is I'm going to change these single quotes for double quotes. Note that the color of the code changed when I did that. This variable is only expanded if we use double quotes. If I use single quotes here, it's used as a literal value, and I'd get a single file called $greeting-output, which is not what I want.</p>
-<h2 id="222-run-the-workflow">2.2.2. Run the workflow<a class="headerlink" href="#222-run-the-workflow" title="Permanent link">&para;</a></h2>
-<p>So let's put the double quotes back and give it a try.</p>
-<p>I am just going to clear up my directory before I start, so it's easy to see the new files. I'm going to delete anything called .nextflow, work, and results.</p>
-<p>And I'm going to run that Nextflow command again and let's see what files are created. So it runs the five processes there. If you were watching very closely, you might have seen that line update as it was running.</p>
-<p>And now we can go into the results directory, and sure enough, we have five different outputs, and they're all prefixed with the different greeting.</p>
-<p>If I open each of these, we'll see that they each contain the corresponding greeting. Fantastic. That's what we want.</p>
-<h2 id="3-use-an-operator-to-transform-the-contents-of-a-channel">3. Use an operator to transform the contents of a channel<a class="headerlink" href="#3-use-an-operator-to-transform-the-contents-of-a-channel" title="Permanent link">&para;</a></h2>
-<p>Okay, so now we know what channels are and we know what channel factories are. What about operators? This is another term for part of the Nextflow language, which is a series of functions which allow us to operate on channels to do certain things to them. Nextflow, comes with a suite of operators, which allow us to manipulate channels in a variety of different ways.</p>
-<h2 id="31-provide-an-array-of-values-as-input-to-the-channel">3.1. Provide an array of values as input to the channel<a class="headerlink" href="#31-provide-an-array-of-values-as-input-to-the-channel" title="Permanent link">&para;</a></h2>
-<p>Let's work through this with an example. Let's say that we want to take these input strings, but instead of just putting them directly into a channel factory, we want to define them as an array.</p>
-<h2 id="311-set-up-the-input-variable">3.1.1. Set up the input variable<a class="headerlink" href="#311-set-up-the-input-variable" title="Permanent link">&para;</a></h2>
-<p>So I'm going to take these and do that as a new line above and say, greetings, array.</p>
-<p>There we go. I'm going to take that array variable and put it into the channel.of, and hit save.</p>
-<h2 id="313-run-the-workflow">3.1.3. Run the workflow<a class="headerlink" href="#313-run-the-workflow" title="Permanent link">&para;</a></h2>
-<p>Now, let's see what happens. Go back to my terminal. I'm just going to clear up all those temporary files again. And let's run the workflow.</p>
-<p>Not good. Okay. It broke. That's okay. I expected it to break this time. Debugging what goes wrong when an Nextflow workflow fails is a key part of being an Nextflow developer. This will happen a lot and it's important to understand what the error message says and how to deal with it.</p>
-<p>The Nextflow, error messages are actually quite structured. It tells us which process went wrong. It gives us an error message for a reason. It says what the command was that it tried to run within that particular task, what the exit status was, what the output was on where that task work directory was.</p>
-<p>Note that I can option, click this in VS Code and it opens it in a sidebar so I can go straight there and view all of these hidden files, which we talked about in the previous chapter, including the .command.sh file. This you can see is the same as the commands which was executed here.</p>
-<p>By looking at this file, we can get a feel for what might have gone wrong here instead of running a single task for each element in the array as it did last time, it just provided the entire array in one go as a string. So we need to unpack that array into individual values before we pass it into the channel. Let's go back and see if we can do that using an operator.</p>
-<h2 id="32-use-an-operator-to-transform-channel-contents">3.2. Use an operator to transform channel contents<a class="headerlink" href="#32-use-an-operator-to-transform-channel-contents" title="Permanent link">&para;</a></h2>
-<p>In this case, we're not going to change the array before we pass it into the channel. We're going to adjust the channel so that it behaves in the way we expect. We're going to do that by using the flatten operator can do dot start typing and we can see that VS Code extension starts suggesting all the different operators we have available.</p>
-<h2 id="321-add-the-flatten-operator">3.2.1. Add the flatten() operator<a class="headerlink" href="#321-add-the-flatten-operator" title="Permanent link">&para;</a></h2>
-<p>And I'm going to select flatten. Note that white space doesn't matter in this context for Nextflow. So you can put these operators on a new line if you want to. So I can drop this down here and indent it so it sits underneath ".of" and you'll see that people often chain lots of operators like this onto a channel and indent it in this way so that it is easier to read.</p>
-<p>You can also see, like before I can hover over this and read what the flatten operator's doing, and also follow a link to the documentation if I want to.</p>
-<p>So this operator is taking this channel, which has a single array within it, and separating out the array values.</p>
-<h2 id="322-add-view-to-inspect-channel-contents">3.2.2. Add view() to inspect channel contents<a class="headerlink" href="#322-add-view-to-inspect-channel-contents" title="Permanent link">&para;</a></h2>
-<p>We can peek into the channels by using the special view operator, and I'm going to add a couple of them here. This is a bit like using print statements in other languages. So I'm going to do dot view and then I'm going to use these squiggly brackets.</p>
-<p>This is called a closure. This basically gives additional code to the view operator, which it will execute on each item within the channel. In this case, I'm going to say greeting before flatten. Greeting.</p>
-<p>I'm defining a variable here, which is just within the scope of this closure. So this variable is only used here and I could call it whatever I wanted. It doesn't really matter. I'm just using greeting to make it easy to read.</p>
-<p>In some Nextflow pipelines, you might see people use a special implicit variable called "$it". Like that. This is a special variable within Nextflow code, which is a shorthand so that you don't have to do the little definition of a variable. However, over time we're thinking, this is not very clear to people who are new to Nextflow, and we discourage usage of "$it" now.</p>
-<p>So I'm going to stick with the previous behavior of greeting and using it like this because that's more explicit and it's clearer on what's going on.</p>
-<p>I'm going to then copy this line and do exactly the same thing again after the flatten arguments. The view operator's a bit special because it does something on the elements, but it also just continues passing them onto the next operator so we can chain it in the middle of a chain of operations like this, and it will print the status there and keep going. So hopefully this will show us what the channel looks like before and after the flatten operator.</p>
-<h2 id="323-run-the-workflow">3.2.3. Run the workflow<a class="headerlink" href="#323-run-the-workflow" title="Permanent link">&para;</a></h2>
-<p>Let's try it out. Clean. Clean everything up in the workspace. Run the pipeline again.</p>
-<p>Okay, so we can see it ran our five processes. Again, it didn't crash with an error, so that's definitely good. And now we have the before flatten and it sure enough we have our array and we have after flatten, printed five times once for each elements of the array. That's exactly what we were hoping for. So that's really good news. And that fits exactly with what we'd expect from the code.</p>
-<p>We don't need these debug statements anymore, so I can either comment them out or delete them. I'm going to delete them just to keep my code nice and clean. Okay, great. This example is now working nicely and we can start to see how channels can do a bit more complicated logic.</p>
-<h2 id="4-use-an-operator-to-parse-input-values-from-a-csv-file">4. Use an operator to parse input values from a CSV file<a class="headerlink" href="#4-use-an-operator-to-parse-input-values-from-a-csv-file" title="Permanent link">&para;</a></h2>
-<p>Now we're going to try and do this using a file with a series of inputs instead. This is a very common way to write Nextflow pipelines using a sample sheet or a CSV of metadata.</p>
-<h2 id="41-modify-the-script-to-expect-a-csv-file-as-the-source-of-greetings">4.1. Modify the script to expect a CSV file as the source of greetings<a class="headerlink" href="#41-modify-the-script-to-expect-a-csv-file-as-the-source-of-greetings" title="Permanent link">&para;</a></h2>
-<p>If I go over to the sidebar, you can see greetings.csv in the example repository, and this is a very, very simple CSV file that just contains three lines with three different greetings. Let's see if we can use this CSV file within our workflow.</p>
-<p>I'm now going to go back to using params like we did in chapter one, so that we can have a command line input.</p>
-<p>I'm going to delete this greetings array.</p>
-<h2 id="411-switch-the-input-parameter-to-point-to-the-csv-file">4.1.1. Switch the input parameter to point to the CSV file<a class="headerlink" href="#411-switch-the-input-parameter-to-point-to-the-csv-file" title="Permanent link">&para;</a></h2>
-<p>I'm going to set params greeting to the file name, which is greetings.csv, and I'm going to use this special variable to generate the channel. I'm going to put that in there, and the errors go away. Remember that this is setting this variable by default now. So if I run the pipeline without any arguments, it'll use greetings.csv, but I could do --greeting to overwrite this variable if I wanted to.</p>
-<h2 id="412-switch-to-a-channel-factory-designed-to-handle-a-file">4.1.2. Switch to a channel factory designed to handle a file<a class="headerlink" href="#412-switch-to-a-channel-factory-designed-to-handle-a-file" title="Permanent link">&para;</a></h2>
-<p>Okay, we're passing a file now rather than a string or an array of strings, so we probably need a different channel factory.</p>
-<p>We're going to get rid of "of" which we've been using so far, and instead use .fromPath. This does exactly what it sounds like. It creates a channel with paths instead of values, using a string file name or glob. I am also going to remove the flatten operator as we no longer need this, now that we're passing a file.</p>
-<h2 id="413-run-the-workflow">4.1.3. Run the workflow<a class="headerlink" href="#413-run-the-workflow" title="Permanent link">&para;</a></h2>
-<p>I'm going to hit save, open up the terminal, run the workflow, and then see what happens.</p>
-<p>Okay. It crashed again. Don't worry. I was expecting this one as well. Let's have a look at the error message and see if we can figure out what's going wrong. Here we can see the command executed, and a bit like before where we had the whole array printed. Now we have the file path being echoed into the command, rather than going through the contents of the file.</p>
-<h2 id="42-use-the-splitcsv-operator-to-parse-the-file">4.2. Use the splitCsv() operator to parse the file<a class="headerlink" href="#42-use-the-splitcsv-operator-to-parse-the-file" title="Permanent link">&para;</a></h2>
-<p>So to use the contents of the file instead, we need another operator. The operator we're going to use for this one is called splitCsv. Makes sense, because it's a CSV file we're loading.</p>
-<h2 id="421-apply-splitcsv-to-the-channel">4.2.1. Apply splitCsv() to the channel<a class="headerlink" href="#421-apply-splitcsv-to-the-channel" title="Permanent link">&para;</a></h2>
-<p>Ok, so splitCsv. Close bracket. We don't need any arguments here. And again, I'm going to use some view operators to give some insight as to what's going on here.</p>
-<p>.view csv after splitCsv. Before split Cv.s</p>
-<h2 id="422-run-the-workflow-again">4.2.2. Run the workflow again<a class="headerlink" href="#422-run-the-workflow-again" title="Permanent link">&para;</a></h2>
-<p>Okay, let's try running this and seeing what happens.</p>
-<p>Okay, we've got a bit more output this time, but it still failed. We can look at the view statements, and here you can see before split CSV, and we have a file path as we saw in the previous error message. After split CSV, we now have three values corresponding to the three lines in the CSV file.</p>
-<p>However, you can see that each of these values is surrounded by square brackets. So each one of those was an array in its own right, and that's given us the same area that we had before where it's trying to echo an array rather than just a single string.</p>
-<p>If we think about a CSV file, this kind of makes sense. Typically, a CSV file will have rows and columns, so split CSV does two dimensional array. The first dimension of the array is each row, and then there's a second dimension, which is each column for each row.</p>
-<p>So here we only have a single value on each line, so we have a single column, so we have a one element array for each line of the file.</p>
-<p>That's fine. We just need another operator to collapse that array for each line of the parsed CSV file. Let's clean this up. Get rid of a terminal and see what we can do.</p>
-<h2 id="43-use-the-map-operator-to-extract-the-greetings">4.3. Use the map() operator to extract the greetings<a class="headerlink" href="#43-use-the-map-operator-to-extract-the-greetings" title="Permanent link">&para;</a></h2>
-<p>Now we could use the flatten operator again, which we used before. We've seen how that can collapse an array into a series of values, which would work very well here. But I'm going to use the opportunity to demonstrate another operator, which is very common within workflows called the map operator.</p>
-<h2 id="431-apply-map-to-the-channel">4.3.1. Apply map() to the channel<a class="headerlink" href="#431-apply-map-to-the-channel" title="Permanent link">&para;</a></h2>
-<p>I'm going to do dot map and I'm going to do item item[0].</p>
-<p>If you write a lot of other code languages, you might be familiar with the map operator already. It takes an iterable, such as an array or a channel, and it does some operation on each value of that.</p>
-<p>Here we're saying that we should define a variable called item within the scope of this closure, and then we want to return, just the first value in that array. So item index zero.</p>
-<p>This is effectively flattening the array. You can see how we could extend this to be more complex, though: if our CSV file had six columns, but we're only interested in the fourth column, we could access a specific index here. Or do any other kind of operation on the value before we pass it onto downstream processing.</p>
-<p>So the map operator is extremely flexible and very powerful for modifying channels in flight. Let's put in another view statement just so we can see what it's doing in our execution. Can adjudicate that line and move it down. And after map.</p>
-<h2 id="432-run-the-workflow-one-more-time">4.3.2. Run the workflow one more time<a class="headerlink" href="#432-run-the-workflow-one-more-time" title="Permanent link">&para;</a></h2>
-<p>Let's bring up the terminal and try running the workflow.</p>
-<p>Okay, no errors this time. That's a good sign. We can now go through all these different outputs from the view statements. Before split CSV, we had a single path. After split CSV, we had the single value arrays, and then after map, we have just the values without any array syntax. Let's go up to the results directory, and here are our output files behaving exactly as we wanted them to.</p>
-<p>There's a little bonus here. You can actually see that the view operators are slightly mixed up in the order that they've done the output. This is because Nextflow is doing parallelization of these different tasks. So after it split the CSV, there are three elements in this channel, and it's handling the processing of those three elements in parallel automatically. That means that the order of the outputs is stochastic and can vary. In this case, it just happened that some of the view operators returned after the subsequent step had been completed, and so it came in this order.</p>
-<p>If I run the same workflow again. Then sure enough, it's come in a different order and this time we've got the split CSVs and the maps in the order we'd expect.</p>
-<p>So just bear in mind, you cannot rely on the order of outputs from a process task because Nextflow's handling this parallelization for you automatically. Nextflow does that for you with its data flow logic, and that's the real power of Nextflow.</p>
-<p>Okay, this is probably one of the most important chapters of the whole training. Once you understand channels, channel factories and operators, you start to key into the strength of Nextflow and what makes it unique as a programming language. This functionality allows Nextflow to parallelize all of your workflows for you and generate extremely complex workflow logic with a very clean syntax and a push data flow model. It can be a bit of a strange concept at first, but once you get used to writing code like this, it will quickly feel natural and before you know it, you'll be writing fantastic workflows.</p>
-<p>Have a break, cup of tea, walk around and let's move on to chapter three, where we start to extend these concepts into more complex workflows. See you in the next video.</p>
-<p><a href="../03_hello_workflow/">Next video transcript <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.22 19.03a.75.75 0 0 1 0-1.06L18.19 13H3.75a.75.75 0 0 1 0-1.5h14.44l-4.97-4.97a.749.749 0 0 1 .326-1.275.75.75 0 0 1 .734.215l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0"/></svg></span></a></p><style type="text/css">.quiz {
+<h2 id="boas-vindas">Boas-vindas<a class="headerlink" href="#boas-vindas" title="Permanent link">&para;</a></h2>
+<p>Olá, bem-vindo à parte dois do Hello Nextflow.</p>
+<p>Este capítulo é chamado Hello Channels. Vamos falar tudo sobre esta parte fundamental do Nextflow.</p>
+<p>Canais são as coisas que conectam as diferentes etapas do seu pipeline, a maneira como seus dados e lógica fluem através do seu fluxo de trabalho.</p>
+<p>Ok, vamos começar.</p>
+<p>Vamos começar indo para training.nextflow.io</p>
+<p>Hello Nextflow na barra lateral e clicando na parte dois. Hello Channels.</p>
+<p>Todo o material está escrito aqui, então você pode seguir no seu próprio ritmo e revisar qualquer coisa que possa ter perdido.</p>
+<p>Depois de abrir o site, você pode carregar o Codespaces e continuaremos de onde paramos no final do último capítulo.</p>
+<h2 id="0-aquecimento-execute-hello-channelsnf">0. Aquecimento: Execute hello-channels.nf<a class="headerlink" href="#0-aquecimento-execute-hello-channelsnf" title="Permanent link">&para;</a></h2>
+<p>Para este capítulo, vamos editar um arquivo diferente. Este se chama Hello Channels, então você pode encontrá-lo na barra lateral, clique duas vezes para abrir.</p>
+<p>Agora, se você acabou de vir do capítulo um, este arquivo parecerá muito familiar. O ponto de partida aqui é basicamente onde terminamos o capítulo um, com nosso processo chamado sayHello, nossa entrada, saída, nosso publishDir e nosso params.greeting, e nosso fluxo de trabalho simples.</p>
+<p>Estamos começando com um novo arquivo, então é um terreno nivelado para todos, mas você pode continuar com seu arquivo anterior se preferir.</p>
+<p>Observe, eu também deletei todos os arquivos .nextflow* e os diretórios work aqui, apenas para que seja um ponto de partida limpo. Não importa se você faz isso ou não, fica a seu critério.</p>
+<p>Ok. Vamos começar verificando se este pipeline ainda funciona como esperamos. Vou abrir o terminal aqui.</p>
+<p>Faço "nextflow run hello-channels.nf" e aperto enter.</p>
+<p>Vai executar aquele pequeno fluxo de trabalho, executa nossa etapa sayHello, gera um diretório work com aquele hash, e aqui está nossa pasta results e lá está nosso arquivo de saída, exatamente como esperávamos do nosso params.greeting padrão.</p>
+<p>Então isso é ótimo. Exatamente o mesmo que o capítulo um, funcionando como esperávamos.</p>
+<h2 id="1-forneca-entradas-variaveis-atraves-de-um-canal-explicitamente">1. Forneça entradas variáveis através de um canal explicitamente<a class="headerlink" href="#1-forneca-entradas-variaveis-atraves-de-um-canal-explicitamente" title="Permanent link">&para;</a></h2>
+<p>No capítulo um, você na verdade já estava usando canais, você só não percebeu. Quando especificamos uma string aqui, o Nextflow automaticamente criou um canal em torno dessa string para nós, apenas porque sabia que estávamos chamando um processo, então precisávamos de um canal de entrada.</p>
+<p>A primeira coisa que vamos fazer é torná-lo explícito, escrevendo realmente o canal em si.</p>
+<h2 id="11-crie-um-canal-de-entrada">1.1. Crie um canal de entrada<a class="headerlink" href="#11-crie-um-canal-de-entrada" title="Permanent link">&para;</a></h2>
+<p>Então vou ir para o fluxo de trabalho aqui no final do script, e vou dizer greeting_ch. Esta é uma convenção que frequentemente usamos no código Nextflow de ter um underscore ch no final de um nome de variável quando é um canal, apenas para que seja fácil identificar que é um canal, mas você não precisa fazer isso. Igual a channel of Hello Channels.</p>
+<p>O que acabamos de usar é algo chamado "Channel Factory" na linguagem do Nextflow. É essa coisa aqui, estamos definindo esta variável para um novo canal, e esta fábrica de canais aqui está criando um canal para nós de uma maneira particular.</p>
+<p>Existem um punhado de diferentes fábricas de canais que o Nextflow tem, para criar canais de diferentes tipos de entradas. Dot of é a mais simples, e apenas recebe quaisquer strings que fornecemos.</p>
+<p>Observe que quando passo o mouse sobre essas palavras no VS Code, a extensão Nextflow está me dando um popup explicando o que esta sintaxe faz, e também há um texto de ler mais na parte inferior dessa janela popup.</p>
+<p>Se eu clicar nisso, vai abrir os documentos do Nextflow. Em uma nova aba e me levar direto para a documentação deste item específico. Neste caso para channel.of.</p>
+<h2 id="12-adicione-o-canal-como-entrada-para-a-chamada-do-processo">1.2. Adicione o canal como entrada para a chamada do processo<a class="headerlink" href="#12-adicione-o-canal-como-entrada-para-a-chamada-do-processo" title="Permanent link">&para;</a></h2>
+<p>Observe que a extensão também está nos dando um aviso, dizendo que criamos um novo canal aqui, mas ele não está sendo usado por nada.</p>
+<p>Então, vamos corrigir isso. Vou pegar o novo nome do canal e vou substituir este params.greeting pelo nosso novo canal.</p>
+<p>Observe que não estamos mais usando o sinalizador de linha de comando --greeting agora, params.greeting não está sendo usado, estamos voltando a codificar esta string diretamente. Tudo bem. Estou apenas tentando manter as coisas simples. Voltaremos mais tarde e usaremos os params novamente.</p>
+<h2 id="13-execute-o-comando-workflow-novamente">1.3. Execute o comando workflow novamente<a class="headerlink" href="#13-execute-o-comando-workflow-novamente" title="Permanent link">&para;</a></h2>
+<p>Ok, vamos apenas verificar se isso funciona. Abra o terminal e observe novamente. Nextflow run hello channels. Verifique output.txt, e lá está.</p>
+<p>Ótimo, um exemplo meio chato, fazendo exatamente a mesma coisa que fizemos antes, mas agora pelo menos a lógica está um pouco mais clara. Estamos sendo explícitos sobre escrever um novo canal.</p>
+<p>Efetivamente acabamos de escrever mais código para fazer a mesma coisa. Mas isso começará a fazer mais sentido conforme nos tornarmos um pouco mais complicados com a forma como criamos nossos canais.</p>
+<h2 id="2-modifique-o-fluxo-de-trabalho-para-executar-em-multiplos-valores-de-entrada">2. Modifique o fluxo de trabalho para executar em múltiplos valores de entrada<a class="headerlink" href="#2-modifique-o-fluxo-de-trabalho-para-executar-em-multiplos-valores-de-entrada" title="Permanent link">&para;</a></h2>
+<p>Ok, vamos tornar isso um pouco mais interessante. É muito raro que você queira executar um pipeline Nextflow em uma única entrada, então vamos dar várias entradas a ele.</p>
+<h2 id="21-carregue-multiplas-saudacoes-no-canal-de-entrada">2.1. Carregue múltiplas saudações no canal de entrada<a class="headerlink" href="#21-carregue-multiplas-saudacoes-no-canal-de-entrada" title="Permanent link">&para;</a></h2>
+<p>Da documentação aqui. Vou copiar essas diferentes strings, três delas. Hello, Bonjour, Olà. Oh, espere. O Copilot está sugerindo algumas outras. Então vamos apertar tab e digitar essas.</p>
+<p>A documentação do Nextflow aqui nos diz que podemos dar múltiplos valores para este operador, então deve funcionar, mas vamos tentar e ver o que acontece.</p>
+<h2 id="212-execute-o-comando-e-observe-a-saida-do-log">2.1.2. Execute o comando e observe a saída do log<a class="headerlink" href="#212-execute-o-comando-e-observe-a-saida-do-log" title="Permanent link">&para;</a></h2>
+<p>Bem. Sim e não. Vamos ver. Diz que cinco de cinco tarefas foram executadas aqui, mas mostra apenas um hash, o que é um pouco estranho. Tudo bem. Tudo está como esperado aqui. Por padrão. O Nextflow usa um tipo especial de saída para um terminal chamado códigos de controle ANSI, o que significa que sobrescreve certas linhas para dar uma visão comprimida agradável de todos os diferentes processos que estão sendo executados.</p>
+<p>Isso faz muito mais sentido quando você tem fluxos de trabalho maiores e está executando centenas ou milhares de diferentes amostras. Você pode simplesmente gerar tanta saída no terminal que é impossível de ver, enquanto esta visão de atualização lhe dá um progresso em tempo real para você.</p>
+<h2 id="213-execute-o-comando-novamente-com-a-opcao-ansi-log-false">2.1.3. Execute o comando novamente com a opção -ansi-log false<a class="headerlink" href="#213-execute-o-comando-novamente-com-a-opcao-ansi-log-false" title="Permanent link">&para;</a></h2>
+<p>Se você quiser, pode executá-lo novamente, e desta vez vou usar um argumento central adicional do Nextflow com um único hífen dizendo, "-ansi-log false". Isso usa a versão anterior da saída de log do Nextflow. E aqui você pode ver todos os processos individuais que foram lançados.</p>
+<p>Fica a seu critério fazer isso ou não. A saída do Nextflow é exatamente a mesma em ambos os casos.</p>
+<h2 id="22-certifique-se-de-que-os-nomes-dos-arquivos-de-saida-serao-unicos">2.2. Certifique-se de que os nomes dos arquivos de saída serão únicos<a class="headerlink" href="#22-certifique-se-de-que-os-nomes-dos-arquivos-de-saida-serao-unicos" title="Permanent link">&para;</a></h2>
+<p>Ok, vamos dar uma olhada nos arquivos de saída, então iremos para results. Mas há apenas um único arquivo de saída. O que aconteceu? Vimos que o processo havia sido executado várias vezes. Podemos ir ao diretório work e ver todos os diferentes hashes, todas as tarefas foram executadas corretamente. Mas se você se lembrar no nosso processo aqui, estamos salvando tudo em um arquivo output.txt e depois publicando isso para este diretório.</p>
+<p>Então o mesmo arquivo foi criado cinco vezes, e então foi sobrescrito cinco vezes. E temos apenas qualquer tarefa que tenha sido executada por último.</p>
+<h2 id="221-construa-um-nome-de-arquivo-de-saida-dinamico">2.2.1. Construa um nome de arquivo de saída dinâmico<a class="headerlink" href="#221-construa-um-nome-de-arquivo-de-saida-dinamico" title="Permanent link">&para;</a></h2>
+<p>A maneira como corrigimos isso é usando um nome de arquivo de saída dinâmico. Aqui já temos uma variável chamada greeting dentro do processo, então podemos usar isso no nome do arquivo de saída. Copio isso e faço $greeting-output.txt.</p>
+<p>Vou cercar isso com aspas, apenas para que o bash não fique confuso com quaisquer espaços que possam aparecer aqui. E então vou pegar o mesmo nome de arquivo e atualizar a saída aqui.</p>
+<p>É realmente importante que a saída corresponda a isso, porque caso contrário, este arquivo não será encontrado e o Nextflow vai travar.</p>
+<p>Vou fazer mais uma edição realmente importante, que é mudar essas aspas simples por aspas duplas. Observe que a cor do código mudou quando fiz isso. Esta variável só é expandida se usarmos aspas duplas. Se eu usar aspas simples aqui, é usado como um valor literal, e eu teria um único arquivo chamado $greeting-output, o que não é o que eu quero.</p>
+<h2 id="222-execute-o-fluxo-de-trabalho">2.2.2. Execute o fluxo de trabalho<a class="headerlink" href="#222-execute-o-fluxo-de-trabalho" title="Permanent link">&para;</a></h2>
+<p>Então vamos colocar as aspas duplas de volta e tentar.</p>
+<p>Vou apenas limpar meu diretório antes de começar, para que seja fácil ver os novos arquivos. Vou deletar qualquer coisa chamada .nextflow, work e results.</p>
+<p>E vou executar aquele comando Nextflow novamente e vamos ver quais arquivos são criados. Então ele executa os cinco processos ali. Se você estivesse assistindo muito atentamente, pode ter visto aquela linha atualizar enquanto estava executando.</p>
+<p>E agora podemos ir ao diretório results, e com certeza, temos cinco saídas diferentes, e todas elas são prefixadas com a saudação diferente.</p>
+<p>Se eu abrir cada uma delas, veremos que cada uma contém a saudação correspondente. Fantástico. É isso que queremos.</p>
+<h2 id="3-use-um-operador-para-transformar-o-conteudo-de-um-canal">3. Use um operador para transformar o conteúdo de um canal<a class="headerlink" href="#3-use-um-operador-para-transformar-o-conteudo-de-um-canal" title="Permanent link">&para;</a></h2>
+<p>Ok, então agora sabemos o que são canais e sabemos o que são fábricas de canais. E quanto aos operadores? Este é outro termo para parte da linguagem Nextflow, que é uma série de funções que nos permitem operar em canais para fazer certas coisas com eles. Nextflow, vem com um conjunto de operadores, que nos permitem manipular canais de várias maneiras diferentes.</p>
+<h2 id="31-forneca-um-array-de-valores-como-entrada-para-o-canal">3.1. Forneça um array de valores como entrada para o canal<a class="headerlink" href="#31-forneca-um-array-de-valores-como-entrada-para-o-canal" title="Permanent link">&para;</a></h2>
+<p>Vamos trabalhar nisso com um exemplo. Digamos que queremos pegar essas strings de entrada, mas em vez de apenas colocá-las diretamente em uma fábrica de canais, queremos defini-las como um array.</p>
+<h2 id="311-configure-a-variavel-de-entrada">3.1.1. Configure a variável de entrada<a class="headerlink" href="#311-configure-a-variavel-de-entrada" title="Permanent link">&para;</a></h2>
+<p>Então vou pegar isso e fazer isso como uma nova linha acima e dizer, greetings, array.</p>
+<p>Pronto. Vou pegar aquela variável array e colocá-la no channel.of, e salvar.</p>
+<h2 id="313-execute-o-fluxo-de-trabalho">3.1.3. Execute o fluxo de trabalho<a class="headerlink" href="#313-execute-o-fluxo-de-trabalho" title="Permanent link">&para;</a></h2>
+<p>Agora, vamos ver o que acontece. Volto ao meu terminal. Vou apenas limpar todos aqueles arquivos temporários novamente. E vamos executar o fluxo de trabalho.</p>
+<p>Nada bom. Ok. Quebrou. Tudo bem. Eu estava esperando que quebrasse desta vez. Depurar o que dá errado quando um fluxo de trabalho Nextflow falha é uma parte fundamental de ser um desenvolvedor Nextflow. Isso vai acontecer muito e é importante entender o que a mensagem de erro diz e como lidar com isso.</p>
+<p>As mensagens de erro do Nextflow são na verdade bastante estruturadas. Nos diz qual processo deu errado. Nos dá uma mensagem de erro por uma razão. Diz qual foi o comando que tentou executar dentro daquela tarefa particular, qual foi o status de saída, qual foi a saída e onde estava o diretório work daquela tarefa.</p>
+<p>Observe que posso clicar com option nisto no VS Code e ele abre em uma barra lateral para que eu possa ir direto lá e visualizar todos esses arquivos ocultos, sobre os quais falamos no capítulo anterior, incluindo o arquivo .command.sh. Você pode ver que este é o mesmo que os comandos que foi executado aqui.</p>
+<p>Ao olhar para este arquivo, podemos ter uma ideia do que pode ter dado errado aqui em vez de executar uma única tarefa para cada elemento no array como fez da última vez, ele apenas forneceu o array inteiro de uma vez como uma string. Então precisamos desempacotar aquele array em valores individuais antes de passá-lo para o canal. Vamos voltar e ver se podemos fazer isso usando um operador.</p>
+<h2 id="32-use-um-operador-para-transformar-o-conteudo-do-canal">3.2. Use um operador para transformar o conteúdo do canal<a class="headerlink" href="#32-use-um-operador-para-transformar-o-conteudo-do-canal" title="Permanent link">&para;</a></h2>
+<p>Neste caso, não vamos alterar o array antes de passá-lo para o canal. Vamos ajustar o canal para que ele se comporte da maneira que esperamos. Vamos fazer isso usando o operador flatten pode fazer dot começar a digitar e podemos ver que a extensão do VS Code começa a sugerir todos os diferentes operadores que temos disponíveis.</p>
+<h2 id="321-adicione-o-operador-flatten">3.2.1. Adicione o operador flatten()<a class="headerlink" href="#321-adicione-o-operador-flatten" title="Permanent link">&para;</a></h2>
+<p>E vou selecionar flatten. Observe que o espaço em branco não importa neste contexto para o Nextflow. Então você pode colocar esses operadores em uma nova linha se quiser. Então posso soltar isso aqui e indentar para que fique embaixo de ".of" e você verá que as pessoas frequentemente encadeiam muitos operadores assim em um canal e indentam desta forma para que seja mais fácil de ler.</p>
+<p>Você também pode ver, como antes, posso passar o mouse sobre isso e ler o que o operador flatten está fazendo, e também seguir um link para a documentação se eu quiser.</p>
+<p>Então este operador está pegando este canal, que tem um único array dentro dele, e separando os valores do array.</p>
+<h2 id="322-adicione-view-para-inspecionar-o-conteudo-do-canal">3.2.2. Adicione view() para inspecionar o conteúdo do canal<a class="headerlink" href="#322-adicione-view-para-inspecionar-o-conteudo-do-canal" title="Permanent link">&para;</a></h2>
+<p>Podemos espiar dentro dos canais usando o operador especial view, e vou adicionar alguns deles aqui. Isso é um pouco como usar instruções print em outras linguagens. Então vou fazer dot view e então vou usar esses colchetes ondulados.</p>
+<p>Isso é chamado de closure. Isso basicamente fornece código adicional para o operador view, que ele executará em cada item dentro do canal. Neste caso, vou dizer greeting before flatten. Greeting.</p>
+<p>Estou definindo uma variável aqui, que está apenas dentro do escopo deste closure. Então esta variável é usada apenas aqui e eu poderia chamá-la como quisesse. Não importa muito. Estou apenas usando greeting para tornar mais fácil de ler.</p>
+<p>Em alguns pipelines Nextflow, você pode ver pessoas usando uma variável implícita especial chamada "$it". Assim. Esta é uma variável especial dentro do código Nextflow, que é um atalho para que você não precise fazer a pequena definição de uma variável. No entanto, ao longo do tempo estamos pensando, isso não é muito claro para pessoas que são novas no Nextflow, e desencorajamos o uso de "$it" agora.</p>
+<p>Então vou ficar com o comportamento anterior de greeting e usá-lo assim porque isso é mais explícito e é mais claro sobre o que está acontecendo.</p>
+<p>Vou então copiar esta linha e fazer exatamente a mesma coisa novamente após os argumentos flatten. O operador view é um pouco especial porque faz algo nos elementos, mas também apenas continua passando-os para o próximo operador, então podemos encadeá-lo no meio de uma cadeia de operações assim, e ele imprimirá o status lá e continuará. Então, esperançosamente, isso nos mostrará como o canal se parece antes e depois do operador flatten.</p>
+<h2 id="323-execute-o-fluxo-de-trabalho">3.2.3. Execute o fluxo de trabalho<a class="headerlink" href="#323-execute-o-fluxo-de-trabalho" title="Permanent link">&para;</a></h2>
+<p>Vamos tentar. Limpar. Limpar tudo no espaço de trabalho. Execute o pipeline novamente.</p>
+<p>Ok, então podemos ver que executou nossos cinco processos. Novamente, não travou com um erro, então isso é definitivamente bom. E agora temos o before flatten e com certeza temos nosso array e temos after flatten, impresso cinco vezes uma vez para cada elemento do array. Isso é exatamente o que esperávamos. Então isso é realmente uma boa notícia. E isso se encaixa exatamente com o que esperaríamos do código.</p>
+<p>Não precisamos mais dessas instruções de depuração, então posso comentá-las ou deletá-las. Vou deletá-las apenas para manter meu código limpo e organizado. Ok, ótimo. Este exemplo agora está funcionando bem e podemos começar a ver como os canais podem fazer uma lógica um pouco mais complicada.</p>
+<h2 id="4-use-um-operador-para-analisar-valores-de-entrada-de-um-arquivo-csv">4. Use um operador para analisar valores de entrada de um arquivo CSV<a class="headerlink" href="#4-use-um-operador-para-analisar-valores-de-entrada-de-um-arquivo-csv" title="Permanent link">&para;</a></h2>
+<p>Agora vamos tentar fazer isso usando um arquivo com uma série de entradas. Esta é uma maneira muito comum de escrever pipelines Nextflow usando uma planilha de amostras ou um CSV de metadados.</p>
+<h2 id="41-modifique-o-script-para-esperar-um-arquivo-csv-como-fonte-de-saudacoes">4.1. Modifique o script para esperar um arquivo CSV como fonte de saudações<a class="headerlink" href="#41-modifique-o-script-para-esperar-um-arquivo-csv-como-fonte-de-saudacoes" title="Permanent link">&para;</a></h2>
+<p>Se eu for à barra lateral, você pode ver greetings.csv no repositório de exemplo, e este é um arquivo CSV muito, muito simples que apenas contém três linhas com três saudações diferentes. Vamos ver se podemos usar este arquivo CSV dentro do nosso fluxo de trabalho.</p>
+<p>Agora vou voltar a usar params como fizemos no capítulo um, para que possamos ter uma entrada de linha de comando.</p>
+<p>Vou deletar este array greetings.</p>
+<h2 id="411-altere-o-parametro-de-entrada-para-apontar-para-o-arquivo-csv">4.1.1. Altere o parâmetro de entrada para apontar para o arquivo CSV<a class="headerlink" href="#411-altere-o-parametro-de-entrada-para-apontar-para-o-arquivo-csv" title="Permanent link">&para;</a></h2>
+<p>Vou definir params greeting para o nome do arquivo, que é greetings.csv, e vou usar esta variável especial para gerar o canal. Vou colocar isso aí, e os erros desaparecem. Lembre-se de que isso está definindo esta variável por padrão agora. Então, se eu executar o pipeline sem nenhum argumento, ele usará greetings.csv, mas eu poderia fazer --greeting para sobrescrever esta variável se quisesse.</p>
+<h2 id="412-mude-para-uma-fabrica-de-canais-projetada-para-lidar-com-um-arquivo">4.1.2. Mude para uma fábrica de canais projetada para lidar com um arquivo<a class="headerlink" href="#412-mude-para-uma-fabrica-de-canais-projetada-para-lidar-com-um-arquivo" title="Permanent link">&para;</a></h2>
+<p>Ok, estamos passando um arquivo agora em vez de uma string ou um array de strings, então provavelmente precisamos de uma fábrica de canais diferente.</p>
+<p>Vamos nos livrar de "of" que estamos usando até agora, e em vez disso usar .fromPath. Isso faz exatamente o que parece. Cria um canal com caminhos em vez de valores, usando um nome de arquivo ou glob string. Também vou remover o operador flatten, pois não precisamos mais disso, agora que estamos passando um arquivo.</p>
+<h2 id="413-execute-o-fluxo-de-trabalho">4.1.3. Execute o fluxo de trabalho<a class="headerlink" href="#413-execute-o-fluxo-de-trabalho" title="Permanent link">&para;</a></h2>
+<p>Vou salvar, abrir o terminal, executar o fluxo de trabalho e então ver o que acontece.</p>
+<p>Ok. Travou novamente. Não se preocupe. Eu estava esperando este também. Vamos dar uma olhada na mensagem de erro e ver se conseguimos descobrir o que está dando errado. Aqui podemos ver o comando executado, e um pouco como antes onde tínhamos todo o array impresso. Agora temos o caminho do arquivo sendo ecoado no comando, em vez de passar pelo conteúdo do arquivo.</p>
+<h2 id="42-use-o-operador-splitcsv-para-analisar-o-arquivo">4.2. Use o operador splitCsv() para analisar o arquivo<a class="headerlink" href="#42-use-o-operador-splitcsv-para-analisar-o-arquivo" title="Permanent link">&para;</a></h2>
+<p>Então, para usar o conteúdo do arquivo em vez disso, precisamos de outro operador. O operador que vamos usar para este é chamado splitCsv. Faz sentido, porque é um arquivo CSV que estamos carregando.</p>
+<h2 id="421-aplique-splitcsv-ao-canal">4.2.1. Aplique splitCsv() ao canal<a class="headerlink" href="#421-aplique-splitcsv-ao-canal" title="Permanent link">&para;</a></h2>
+<p>Ok, então splitCsv. Fecha parêntese. Não precisamos de nenhum argumento aqui. E novamente, vou usar alguns operadores view para dar uma visão do que está acontecendo aqui.</p>
+<p>.view csv after splitCsv. Before split Csv.s</p>
+<h2 id="422-execute-o-fluxo-de-trabalho-novamente">4.2.2. Execute o fluxo de trabalho novamente<a class="headerlink" href="#422-execute-o-fluxo-de-trabalho-novamente" title="Permanent link">&para;</a></h2>
+<p>Ok, vamos tentar executar isso e ver o que acontece.</p>
+<p>Ok, temos um pouco mais de saída desta vez, mas ainda falhou. Podemos olhar as instruções view, e aqui você pode ver before split CSV, e temos um caminho de arquivo como vimos na mensagem de erro anterior. After split CSV, agora temos três valores correspondentes às três linhas no arquivo CSV.</p>
+<p>No entanto, você pode ver que cada um desses valores está cercado por colchetes. Então cada um deles era um array por si só, e isso nos deu a mesma área que tínhamos antes, onde está tentando ecoar um array em vez de apenas uma única string.</p>
+<p>Se pensarmos sobre um arquivo CSV, isso meio que faz sentido. Normalmente, um arquivo CSV terá linhas e colunas, então split CSV faz array bidimensional. A primeira dimensão do array é cada linha, e então há uma segunda dimensão, que é cada coluna para cada linha.</p>
+<p>Então aqui temos apenas um único valor em cada linha, então temos uma única coluna, então temos um array de um elemento para cada linha do arquivo.</p>
+<p>Tudo bem. Precisamos apenas de outro operador para colapsar aquele array para cada linha do arquivo CSV analisado. Vamos limpar isso. Livrar-se de um terminal e ver o que podemos fazer.</p>
+<h2 id="43-use-o-operador-map-para-extrair-as-saudacoes">4.3. Use o operador map() para extrair as saudações<a class="headerlink" href="#43-use-o-operador-map-para-extrair-as-saudacoes" title="Permanent link">&para;</a></h2>
+<p>Agora poderíamos usar o operador flatten novamente, que usamos antes. Vimos como ele pode colapsar um array em uma série de valores, o que funcionaria muito bem aqui. Mas vou usar a oportunidade para demonstrar outro operador, que é muito comum dentro de fluxos de trabalho chamado operador map.</p>
+<h2 id="431-aplique-map-ao-canal">4.3.1. Aplique map() ao canal<a class="headerlink" href="#431-aplique-map-ao-canal" title="Permanent link">&para;</a></h2>
+<p>Vou fazer dot map e vou fazer item item[0].</p>
+<p>Se você escreve muito código em outras linguagens, pode já estar familiarizado com o operador map. Ele pega um iterável, como um array ou um canal, e faz alguma operação em cada valor dele.</p>
+<p>Aqui estamos dizendo que devemos definir uma variável chamada item dentro do escopo deste closure, e então queremos retornar, apenas o primeiro valor naquele array. Então item índice zero.</p>
+<p>Isso está efetivamente achatando o array. Você pode ver como poderíamos estender isso para ser mais complexo, no entanto: se nosso arquivo CSV tivesse seis colunas, mas estivéssemos apenas interessados na quarta coluna, poderíamos acessar um índice específico aqui. Ou fazer qualquer outro tipo de operação no valor antes de passá-lo para processamento downstream.</p>
+<p>Então o operador map é extremamente flexível e muito poderoso para modificar canais em tempo de execução. Vamos colocar outra instrução view apenas para que possamos ver o que está fazendo em nossa execução. Pode adjudicar aquela linha e movê-la para baixo. E after map.</p>
+<h2 id="432-execute-o-fluxo-de-trabalho-mais-uma-vez">4.3.2. Execute o fluxo de trabalho mais uma vez<a class="headerlink" href="#432-execute-o-fluxo-de-trabalho-mais-uma-vez" title="Permanent link">&para;</a></h2>
+<p>Vamos abrir o terminal e tentar executar o fluxo de trabalho.</p>
+<p>Ok, sem erros desta vez. Isso é um bom sinal. Agora podemos passar por todas essas diferentes saídas das instruções view. Before split CSV, tínhamos um único caminho. After split CSV, tínhamos os arrays de valor único, e então after map, temos apenas os valores sem nenhuma sintaxe de array. Vamos até o diretório results, e aqui estão nossos arquivos de saída se comportando exatamente como queríamos.</p>
+<p>Há um pequeno bônus aqui. Você pode realmente ver que os operadores view estão ligeiramente misturados na ordem em que fizeram a saída. Isso é porque o Nextflow está fazendo paralelização dessas diferentes tarefas. Então, depois que dividiu o CSV, há três elementos neste canal, e está lidando com o processamento desses três elementos em paralelo automaticamente. Isso significa que a ordem das saídas é estocástica e pode variar. Neste caso, apenas aconteceu que alguns dos operadores view retornaram depois que a etapa subsequente havia sido concluída, e então veio nesta ordem.</p>
+<p>Se eu executar o mesmo fluxo de trabalho novamente. Então com certeza, veio em uma ordem diferente e desta vez temos os split CSVs e os maps na ordem que esperaríamos.</p>
+<p>Então apenas tenha em mente, você não pode confiar na ordem das saídas de uma tarefa de processo porque o Nextflow está lidando com essa paralelização para você automaticamente. O Nextflow faz isso para você com sua lógica de fluxo de dados, e esse é o verdadeiro poder do Nextflow.</p>
+<p>Ok, este é provavelmente um dos capítulos mais importantes de todo o treinamento. Uma vez que você entende canais, fábricas de canais e operadores, você começa a entrar na força do Nextflow e no que o torna único como linguagem de programação. Esta funcionalidade permite ao Nextflow paralelizar todos os seus fluxos de trabalho para você e gerar lógica de fluxo de trabalho extremamente complexa com uma sintaxe muito limpa e um modelo de fluxo de dados push. Pode ser um conceito um pouco estranho no início, mas uma vez que você se acostuma a escrever código assim, rapidamente se sentirá natural e antes que você perceba, estará escrevendo fluxos de trabalho fantásticos.</p>
+<p>Faça uma pausa, uma xícara de chá, dê uma volta e vamos para o capítulo três, onde começamos a estender esses conceitos para fluxos de trabalho mais complexos. Vejo você no próximo vídeo.</p>
+<p><a href="../03_hello_workflow/">Próxima transcrição de vídeo <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.22 19.03a.75.75 0 0 1 0-1.06L18.19 13H3.75a.75.75 0 0 1 0-1.5h14.44l-4.97-4.97a.749.749 0 0 1 .326-1.275.75.75 0 0 1 .734.215l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0"/></svg></span></a></p><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
   margin: 1rem 0;
@@ -5175,6 +5217,9 @@ window.mkdocsQuizConfig = {
 
 
 
+  
+  
+
 
 
   
@@ -5267,8 +5312,8 @@ window.mkdocsQuizConfig = {
   
 
 
-<h4>Cookie consent</h4>
-<p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our training materials better. Find out more on <a href="https://seqera.io/privacy-policy/#cookies" target="_blank" rel="noopener">how we use cookies</a>.</p>
+<h4>Consentimento de cookies</h4>
+<p>Usamos cookies para reconhecer suas visitas repetidas e preferências, bem como para medir a eficácia da nossa documentação e se os usuários encontram o que procuram. Com seu consentimento, você nos ajuda a melhorar nossos materiais de treinamento. Saiba mais sobre <a href="https://seqera.io/privacy-policy/#cookies" target="_blank" rel="noopener">como usamos cookies</a>.</p>
 <input class="md-toggle" type="checkbox" id="__settings" >
 <div class="md-consent__settings">
   <ul class="task-list">
@@ -5352,12 +5397,16 @@ window.mkdocsQuizConfig = {
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": {"alias": true, "provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": {"alias": true, "provider": "mike"}}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
-        <script src="../../../../assets/javascripts/posthog.js"></script>
+        <script src="../../../assets/javascripts/consent-sync.js"></script>
+      
+        <script src="../../../assets/javascripts/posthog.js"></script>
+      
+        <script src="../../../assets/javascripts/language-picker.js"></script>
       
     
   </body>

@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://training.nextflow.io/0.dev/pt/nf4_science/rnaseq/02_single-sample/">
+        <link rel="canonical" href="https://training.nextflow.io/pt/nf4_science/rnaseq/02_single-sample/">
       
       
         <link rel="prev" href="../01_method/">
@@ -18,33 +18,41 @@
       
       
         
-          <link rel="alternate" href="../../../../nf4_science/rnaseq/02_single-sample/" hreflang="en">
+          <link rel="alternate" href="/" hreflang="en">
         
-          <link rel="alternate" href="./" hreflang="pt">
+          <link rel="alternate" href="/de/" hreflang="de">
         
-          <link rel="alternate" href="../../../../es/nf4_science/rnaseq/02_single-sample/" hreflang="es">
+          <link rel="alternate" href="/es/" hreflang="es">
         
-          <link rel="alternate" href="../../../../fr/nf4_science/rnaseq/02_single-sample/" hreflang="fr">
+          <link rel="alternate" href="/fr/" hreflang="fr">
         
-          <link rel="alternate" href="../../../../it/nf4_science/rnaseq/02_single-sample/" hreflang="it">
+          <link rel="alternate" href="/hi/" hreflang="hi">
         
-          <link rel="alternate" href="../../../../ko/nf4_science/rnaseq/02_single-sample/" hreflang="ko">
+          <link rel="alternate" href="/it/" hreflang="it">
+        
+          <link rel="alternate" href="/ko/" hreflang="ko">
+        
+          <link rel="alternate" href="/pl/" hreflang="pl">
+        
+          <link rel="alternate" href="/pt/" hreflang="pt">
+        
+          <link rel="alternate" href="/tr/" hreflang="tr">
         
       
       
-      <link rel="icon" href="../../../../assets/img/nextflow-icon.png">
+      <link rel="icon" href="../../../assets/img/nextflow-icon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
     
     
       
-        <title>Part 2: Single-sample implementation - training.nextflow.io</title>
+        <title>Parte 2: Implementação de amostra única - training.nextflow.io</title>
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
   
@@ -108,11 +116,11 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/fonts.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/fonts.css">
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/extra.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/extra.css">
     
-    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
   
@@ -147,7 +155,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#part-2-single-sample-implementation" class="md-skip">
+        <a href="#parte-2-implementacao-de-amostra-unica" class="md-skip">
           Ir para o conteúdo
         </a>
       
@@ -167,9 +175,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
-    <a href="../../../" title="training.nextflow.io" class="md-header__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
+    <a href="../../.." title="training.nextflow.io" class="md-header__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
       
-  <img src="../../../../assets/img/nextflow_logo_dark.png" alt="logo">
+  <img src="../../../assets/img/nextflow_logo_dark.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -186,7 +194,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Part 2: Single-sample implementation
+              Parte 2: Implementação de amostra única
             
           </span>
         </div>
@@ -233,38 +241,62 @@
       <ul class="md-select__list">
         
           <li class="md-select__item">
-            <a href="../../../../nf4_science/rnaseq/02_single-sample/" hreflang="en" class="md-select__link">
+            <a href="/" hreflang="en" class="md-select__link">
               English
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="./" hreflang="pt" class="md-select__link">
-              Português
+            <a href="/de/" hreflang="de" class="md-select__link">
+              deutsch
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../../es/nf4_science/rnaseq/02_single-sample/" hreflang="es" class="md-select__link">
-              Español
+            <a href="/es/" hreflang="es" class="md-select__link">
+              español
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../../fr/nf4_science/rnaseq/02_single-sample/" hreflang="fr" class="md-select__link">
-              Français
+            <a href="/fr/" hreflang="fr" class="md-select__link">
+              français
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../../it/nf4_science/rnaseq/02_single-sample/" hreflang="it" class="md-select__link">
-              Italiano
+            <a href="/hi/" hreflang="hi" class="md-select__link">
+              हिन्दी
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../../ko/nf4_science/rnaseq/02_single-sample/" hreflang="ko" class="md-select__link">
-              Korean
+            <a href="/it/" hreflang="it" class="md-select__link">
+              italiano
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/ko/" hreflang="ko" class="md-select__link">
+              한국어
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/pl/" hreflang="pl" class="md-select__link">
+              Polski
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/pt/" hreflang="pt" class="md-select__link">
+              português
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/tr/" hreflang="tr" class="md-select__link">
+              Türkçe
             </a>
           </li>
         
@@ -384,9 +416,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../../" title="training.nextflow.io" class="md-nav__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
+    <a href="../../.." title="training.nextflow.io" class="md-nav__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
       
-  <img src="../../../../assets/img/nextflow_logo_dark.png" alt="logo">
+  <img src="../../../assets/img/nextflow_logo_dark.png" alt="logo">
 
     </a>
     training.nextflow.io
@@ -413,14 +445,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../" class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Home
+    Início
   
 
     
@@ -522,7 +554,7 @@
   <span class="md-ellipsis">
     
   
-    Getting started
+    Primeiros passos
   
 
     
@@ -550,7 +582,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run basic operations
+    Parte 1: Operações básicas de execução
   
 
     
@@ -578,7 +610,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Run real pipelines
+    Parte 2: Executar pipelines reais
   
 
     
@@ -606,7 +638,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Run configuration
+    Parte 3: Configuração de execução
   
 
     
@@ -634,7 +666,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    Resumo do curso
   
 
     
@@ -662,7 +694,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Pesquisa de feedback
   
 
     
@@ -772,7 +804,7 @@
   <span class="md-ellipsis">
     
   
-    Orientação
+    Começando
   
 
     
@@ -800,7 +832,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Hello World
+    Parte 1: Hello World
   
 
     
@@ -828,7 +860,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Hello Channels
+    Parte 2: Hello Channels
   
 
     
@@ -856,7 +888,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Hello Workflow
+    Parte 3: Hello Workflow
   
 
     
@@ -884,7 +916,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Hello Modules
+    Parte 4: Hello Modules
   
 
     
@@ -912,7 +944,7 @@
   <span class="md-ellipsis">
     
   
-    Part 5: Hello Containers
+    Parte 5: Hello Containers
   
 
     
@@ -940,7 +972,7 @@
   <span class="md-ellipsis">
     
   
-    Part 6: Hello Config
+    Parte 6: Hello Config
   
 
     
@@ -968,7 +1000,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    Resumo do curso
   
 
     
@@ -996,7 +1028,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Pesquisa de feedback
   
 
     
@@ -1106,7 +1138,7 @@
   <span class="md-ellipsis">
     
   
-    Getting started
+    Primeiros Passos
   
 
     
@@ -1134,7 +1166,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run a demo pipeline
+    Parte 1: Executar um pipeline de demonstração
   
 
     
@@ -1162,7 +1194,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Rewrite Hello for nf-core
+    Parte 2: Reescrever Hello para nf-core
   
 
     
@@ -1190,7 +1222,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Use an nf-core module
+    Parte 3: Usar um módulo nf-core
   
 
     
@@ -1218,7 +1250,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Make an nf-core module
+    Parte 4: Criar um módulo nf-core
   
 
     
@@ -1246,7 +1278,7 @@
   <span class="md-ellipsis">
     
   
-    Part 5: Input validation
+    Parte 5: Validação de entrada
   
 
     
@@ -1274,7 +1306,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    Resumo do curso
   
 
     
@@ -1302,7 +1334,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Pesquisa de feedback
   
 
     
@@ -1350,7 +1382,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Science
+    Nextflow para Ciência
   
 
     
@@ -1366,7 +1398,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Nextflow for Science
+    Nextflow para Ciência
   
 
           </label>
@@ -1386,7 +1418,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Science
+    Nextflow para Ciência
   
 
     
@@ -1425,7 +1457,7 @@
   <span class="md-ellipsis">
     
   
-    Genomics
+    Nextflow para Genômica
   
 
     
@@ -1441,7 +1473,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Genomics
+    Nextflow para Genômica
   
 
           </label>
@@ -1461,7 +1493,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Genomics
+    Nextflow para Genômica
   
 
     
@@ -1489,7 +1521,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    Orientação
   
 
     
@@ -1517,7 +1549,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Per-sample variant calling
+    Parte 1: Chamada de variantes por amostra
   
 
     
@@ -1545,7 +1577,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Joint calling on a cohort
+    Parte 2: Chamada conjunta em uma coorte
   
 
     
@@ -1573,7 +1605,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Moving code into modules
+    Parte 3: Movendo código para módulos
   
 
     
@@ -1601,7 +1633,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Adding tests
+    Parte 4: Adicionando testes
   
 
     
@@ -1629,7 +1661,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Pesquisa de feedback
   
 
     
@@ -1657,7 +1689,7 @@
   <span class="md-ellipsis">
     
   
-    Next Steps
+    Próximos Passos
   
 
     
@@ -1706,7 +1738,7 @@
   <span class="md-ellipsis">
     
   
-    RNAseq
+    Nextflow para RNAseq
   
 
     
@@ -1722,7 +1754,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    RNAseq
+    Nextflow para RNAseq
   
 
           </label>
@@ -1742,7 +1774,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for RNAseq
+    Nextflow para RNAseq
   
 
     
@@ -1770,7 +1802,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    Orientação
   
 
     
@@ -1798,7 +1830,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Method overview and manual testing
+    Parte 1: Visão geral do método e teste manual
   
 
     
@@ -1835,7 +1867,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Single-sample implementation
+    Parte 2: Implementação de amostra única
   
 
     
@@ -1853,7 +1885,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Single-sample implementation
+    Parte 2: Implementação de amostra única
   
 
     
@@ -1873,22 +1905,22 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#1-write-a-single-stage-workflow-that-runs-the-initial-qc" class="md-nav__link">
+  <a href="#1-escrever-um-fluxo-de-trabalho-de-estagio-unico-que-executa-o-qc-inicial" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Write a single-stage workflow that runs the initial QC
+        1. Escrever um fluxo de trabalho de estágio único que executa o QC inicial
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Write a single-stage workflow that runs the initial QC">
+    <nav class="md-nav" aria-label="1. Escrever um fluxo de trabalho de estágio único que executa o QC inicial">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11-create-a-directory-to-store-modules" class="md-nav__link">
+  <a href="#11-criar-um-diretorio-para-armazenar-modulos" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1. Create a directory to store modules
+        1.1. Criar um diretório para armazenar módulos
       
     </span>
   </a>
@@ -1896,10 +1928,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#12-create-a-module-for-the-qc-metrics-collection-process" class="md-nav__link">
+  <a href="#12-criar-um-modulo-para-o-processo-de-coleta-de-metricas-de-qc" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2. Create a module for the QC metrics collection process
+        1.2. Criar um módulo para o processo de coleta de métricas de QC
       
     </span>
   </a>
@@ -1907,10 +1939,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#13-import-the-module-into-the-workflow-file" class="md-nav__link">
+  <a href="#13-importar-o-modulo-para-o-arquivo-de-fluxo-de-trabalho" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.3. Import the module into the workflow file
+        1.3. Importar o módulo para o arquivo de fluxo de trabalho
       
     </span>
   </a>
@@ -1918,10 +1950,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#14-add-an-input-declaration" class="md-nav__link">
+  <a href="#14-adicionar-uma-declaracao-de-entrada" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.4. Add an input declaration
+        1.4. Adicionar uma declaração de entrada
       
     </span>
   </a>
@@ -1929,10 +1961,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#15-create-an-input-channel-in-the-workflow-block" class="md-nav__link">
+  <a href="#15-criar-um-canal-de-entrada-no-bloco-workflow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.5. Create an input channel in the workflow block
+        1.5. Criar um canal de entrada no bloco workflow
       
     </span>
   </a>
@@ -1940,10 +1972,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#16-call-the-fastqc-process-on-the-input-channel" class="md-nav__link">
+  <a href="#16-chamar-o-processo-fastqc-no-canal-de-entrada" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.6. Call the FASTQC process on the input channel
+        1.6. Chamar o processo FASTQC no canal de entrada
       
     </span>
   </a>
@@ -1951,10 +1983,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#17-run-the-workflow-to-test-that-it-works" class="md-nav__link">
+  <a href="#17-executar-o-fluxo-de-trabalho-para-testar-se-funciona" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.7. Run the workflow to test that it works
+        1.7. Executar o fluxo de trabalho para testar se funciona
       
     </span>
   </a>
@@ -1965,22 +1997,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#2-add-adapter-trimming-and-post-trimming-quality-control" class="md-nav__link">
+  <a href="#2-adicionar-remocao-de-adaptadores-e-controle-de-qualidade-pos-remocao" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Add adapter trimming and post-trimming quality control
+        2. Adicionar remoção de adaptadores e controle de qualidade pós-remoção
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. Add adapter trimming and post-trimming quality control">
+    <nav class="md-nav" aria-label="2. Adicionar remoção de adaptadores e controle de qualidade pós-remoção">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#21-create-a-module-for-the-trimming-and-qc-process" class="md-nav__link">
+  <a href="#21-criar-um-modulo-para-o-processo-de-remocao-e-qc" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1. Create a module for the trimming and QC process
+        2.1. Criar um módulo para o processo de remoção e QC
       
     </span>
   </a>
@@ -1988,10 +2020,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#22-import-the-module-into-the-workflow-file" class="md-nav__link">
+  <a href="#22-importar-o-modulo-para-o-arquivo-de-fluxo-de-trabalho" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2. Import the module into the workflow file
+        2.2. Importar o módulo para o arquivo de fluxo de trabalho
       
     </span>
   </a>
@@ -1999,10 +2031,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#23-call-the-process-on-the-input-channel" class="md-nav__link">
+  <a href="#23-chamar-o-processo-no-canal-de-entrada" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.3. Call the process on the input channel
+        2.3. Chamar o processo no canal de entrada
       
     </span>
   </a>
@@ -2010,10 +2042,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#24-run-the-workflow-to-test-that-it-works" class="md-nav__link">
+  <a href="#24-executar-o-fluxo-de-trabalho-para-testar-se-funciona" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.4. Run the workflow to test that it works
+        2.4. Executar o fluxo de trabalho para testar se funciona
       
     </span>
   </a>
@@ -2024,22 +2056,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#3-align-the-reads-to-the-reference-genome" class="md-nav__link">
+  <a href="#3-alinhar-os-reads-ao-genoma-de-referencia" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Align the reads to the reference genome
+        3. Alinhar os reads ao genoma de referência
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. Align the reads to the reference genome">
+    <nav class="md-nav" aria-label="3. Alinhar os reads ao genoma de referência">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#31-create-a-module-for-the-hisat2-process" class="md-nav__link">
+  <a href="#31-criar-um-modulo-para-o-processo-hisat2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1. Create a module for the HiSat2 process
+        3.1. Criar um módulo para o processo HiSat2
       
     </span>
   </a>
@@ -2047,10 +2079,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#32-import-the-module-into-the-workflow-file" class="md-nav__link">
+  <a href="#32-importar-o-modulo-para-o-arquivo-de-fluxo-de-trabalho" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.2. Import the module into the workflow file
+        3.2. Importar o módulo para o arquivo de fluxo de trabalho
       
     </span>
   </a>
@@ -2058,10 +2090,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#33-add-a-parameter-declaration-to-provide-the-genome-index" class="md-nav__link">
+  <a href="#33-adicionar-uma-declaracao-de-parametro-para-fornecer-o-indice-do-genoma" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.3. Add a parameter declaration to provide the genome index
+        3.3. Adicionar uma declaração de parâmetro para fornecer o índice do genoma
       
     </span>
   </a>
@@ -2069,10 +2101,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#34-call-the-hisat2_align-process-on-the-trimmed-reads-output-by-trim_galore" class="md-nav__link">
+  <a href="#34-chamar-o-processo-hisat2_align-nos-reads-processados-pela-saida-de-trim_galore" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.4. Call the HISAT2_ALIGN process on the trimmed reads output by TRIM_GALORE
+        3.4. Chamar o processo HISAT2_ALIGN nos reads processados pela saída de TRIM_GALORE
       
     </span>
   </a>
@@ -2080,10 +2112,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#35-run-the-workflow-to-test-that-it-works" class="md-nav__link">
+  <a href="#35-executar-o-fluxo-de-trabalho-para-testar-se-funciona" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.5. Run the workflow to test that it works
+        3.5. Executar o fluxo de trabalho para testar se funciona
       
     </span>
   </a>
@@ -2091,10 +2123,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway" class="md-nav__link">
+  <a href="#conclusao" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        Conclusão
       
     </span>
   </a>
@@ -2102,10 +2134,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next" class="md-nav__link">
+  <a href="#o-que-vem-a-seguir" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        O que vem a seguir?
       
     </span>
   </a>
@@ -2325,7 +2357,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Multi-sample paired-end implementation
+    Parte 3: Implementação de múltiplas amostras com dados paired-end
   
 
     
@@ -2353,7 +2385,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Pesquisa de feedback
   
 
     
@@ -2381,7 +2413,7 @@
   <span class="md-ellipsis">
     
   
-    Next Steps
+    Próximos Passos
   
 
     
@@ -2428,7 +2460,7 @@
   <span class="md-ellipsis">
     
   
-    Imaging
+    Index
   
 
     
@@ -2444,7 +2476,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Imaging
+    Index
   
 
           </label>
@@ -2464,7 +2496,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow run for Imaging
+    Index
   
 
     
@@ -2492,7 +2524,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    Orientação
   
 
     
@@ -2520,7 +2552,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run basic operations
+    Parte 1: Executar operações básicas
   
 
     
@@ -2548,7 +2580,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Run nf-core/molkart
+    Parte 2: Executar nf-core/molkart
   
 
     
@@ -2576,7 +2608,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Organizing inputs
+    Parte 3: Organizando entradas
   
 
     
@@ -2604,7 +2636,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Configuration
+    Parte 4: Configuração
   
 
     
@@ -2632,7 +2664,7 @@
   <span class="md-ellipsis">
     
   
-    Survey
+    Questionário
   
 
     
@@ -2660,7 +2692,7 @@
   <span class="md-ellipsis">
     
   
-    Next steps
+    Próximos passos
   
 
     
@@ -2714,7 +2746,7 @@
   <span class="md-ellipsis">
     
   
-    Side Quests
+    Missões Secundárias
   
 
     
@@ -2730,7 +2762,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Side Quests
+    Missões Secundárias
   
 
           </label>
@@ -2750,7 +2782,7 @@
   <span class="md-ellipsis">
     
   
-    Side Quests
+    Missões Secundárias
   
 
     
@@ -2778,7 +2810,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    Orientação
   
 
     
@@ -2806,7 +2838,7 @@
   <span class="md-ellipsis">
     
   
-    Development Environment
+    Ambiente de Desenvolvimento
   
 
     
@@ -2834,7 +2866,7 @@
   <span class="md-ellipsis">
     
   
-    Metadata and meta maps
+    Metadados e mapas meta
   
 
     
@@ -2862,7 +2894,7 @@
   <span class="md-ellipsis">
     
   
-    File input processing
+    Processamento de entrada de arquivos
   
 
     
@@ -2890,7 +2922,7 @@
   <span class="md-ellipsis">
     
   
-    Splitting and Grouping
+    Divisão e Agrupamento
   
 
     
@@ -2918,7 +2950,7 @@
   <span class="md-ellipsis">
     
   
-    Workflows of Workflows
+    Fluxos de Trabalho de Fluxos de Trabalho
   
 
     
@@ -2946,7 +2978,7 @@
   <span class="md-ellipsis">
     
   
-    Debugging Workflows
+    Depurando Workflows
   
 
     
@@ -2974,7 +3006,7 @@
   <span class="md-ellipsis">
     
   
-    Essential Nextflow Scripting Patterns
+    Padrões Essenciais de Script em Nextflow
   
 
     
@@ -3002,7 +3034,7 @@
   <span class="md-ellipsis">
     
   
-    Testing with nf-test
+    Testando com nf-test
   
 
     
@@ -3048,7 +3080,7 @@
   <span class="md-ellipsis">
     
   
-    Training Collections
+    Index
   
 
     
@@ -3064,7 +3096,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Training Collections
+    Index
   
 
           </label>
@@ -3084,7 +3116,7 @@
   <span class="md-ellipsis">
     
   
-    Training Collections
+    Index
   
 
     
@@ -3112,7 +3144,7 @@
   <span class="md-ellipsis">
     
   
-    The Architect's Toolkit I
+    Architects toolkit 1
   
 
     
@@ -3194,7 +3226,7 @@
   <span class="md-ellipsis">
     
   
-    Conseguindo ajuda
+    Obtendo ajuda
   
 
     
@@ -3233,7 +3265,7 @@
   <span class="md-ellipsis">
     
   
-    Training environment
+    Opções de ambiente
   
 
     
@@ -3249,7 +3281,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Training environment
+    Opções de ambiente
   
 
           </label>
@@ -3269,7 +3301,7 @@
   <span class="md-ellipsis">
     
   
-    Configuração do ambiente
+    Opções de ambiente
   
 
     
@@ -3297,7 +3329,7 @@
   <span class="md-ellipsis">
     
   
-    Gitpod
+    GitHub Codespaces
   
 
     
@@ -3325,7 +3357,7 @@
   <span class="md-ellipsis">
     
   
-    Local Devcontainers
+    Devcontainers Locais
   
 
     
@@ -3353,7 +3385,7 @@
   <span class="md-ellipsis">
     
   
-    Instalação local
+    Instalação manual
   
 
     
@@ -3389,7 +3421,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow versions
+    Versões do Nextflow
   
 
     
@@ -3417,7 +3449,7 @@
   <span class="md-ellipsis">
     
   
-    The Hello pipeline
+    O pipeline Hello
   
 
     
@@ -3459,22 +3491,22 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#1-write-a-single-stage-workflow-that-runs-the-initial-qc" class="md-nav__link">
+  <a href="#1-escrever-um-fluxo-de-trabalho-de-estagio-unico-que-executa-o-qc-inicial" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Write a single-stage workflow that runs the initial QC
+        1. Escrever um fluxo de trabalho de estágio único que executa o QC inicial
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Write a single-stage workflow that runs the initial QC">
+    <nav class="md-nav" aria-label="1. Escrever um fluxo de trabalho de estágio único que executa o QC inicial">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11-create-a-directory-to-store-modules" class="md-nav__link">
+  <a href="#11-criar-um-diretorio-para-armazenar-modulos" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1. Create a directory to store modules
+        1.1. Criar um diretório para armazenar módulos
       
     </span>
   </a>
@@ -3482,10 +3514,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#12-create-a-module-for-the-qc-metrics-collection-process" class="md-nav__link">
+  <a href="#12-criar-um-modulo-para-o-processo-de-coleta-de-metricas-de-qc" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2. Create a module for the QC metrics collection process
+        1.2. Criar um módulo para o processo de coleta de métricas de QC
       
     </span>
   </a>
@@ -3493,10 +3525,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#13-import-the-module-into-the-workflow-file" class="md-nav__link">
+  <a href="#13-importar-o-modulo-para-o-arquivo-de-fluxo-de-trabalho" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.3. Import the module into the workflow file
+        1.3. Importar o módulo para o arquivo de fluxo de trabalho
       
     </span>
   </a>
@@ -3504,10 +3536,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#14-add-an-input-declaration" class="md-nav__link">
+  <a href="#14-adicionar-uma-declaracao-de-entrada" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.4. Add an input declaration
+        1.4. Adicionar uma declaração de entrada
       
     </span>
   </a>
@@ -3515,10 +3547,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#15-create-an-input-channel-in-the-workflow-block" class="md-nav__link">
+  <a href="#15-criar-um-canal-de-entrada-no-bloco-workflow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.5. Create an input channel in the workflow block
+        1.5. Criar um canal de entrada no bloco workflow
       
     </span>
   </a>
@@ -3526,10 +3558,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#16-call-the-fastqc-process-on-the-input-channel" class="md-nav__link">
+  <a href="#16-chamar-o-processo-fastqc-no-canal-de-entrada" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.6. Call the FASTQC process on the input channel
+        1.6. Chamar o processo FASTQC no canal de entrada
       
     </span>
   </a>
@@ -3537,10 +3569,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#17-run-the-workflow-to-test-that-it-works" class="md-nav__link">
+  <a href="#17-executar-o-fluxo-de-trabalho-para-testar-se-funciona" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.7. Run the workflow to test that it works
+        1.7. Executar o fluxo de trabalho para testar se funciona
       
     </span>
   </a>
@@ -3551,22 +3583,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#2-add-adapter-trimming-and-post-trimming-quality-control" class="md-nav__link">
+  <a href="#2-adicionar-remocao-de-adaptadores-e-controle-de-qualidade-pos-remocao" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Add adapter trimming and post-trimming quality control
+        2. Adicionar remoção de adaptadores e controle de qualidade pós-remoção
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. Add adapter trimming and post-trimming quality control">
+    <nav class="md-nav" aria-label="2. Adicionar remoção de adaptadores e controle de qualidade pós-remoção">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#21-create-a-module-for-the-trimming-and-qc-process" class="md-nav__link">
+  <a href="#21-criar-um-modulo-para-o-processo-de-remocao-e-qc" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1. Create a module for the trimming and QC process
+        2.1. Criar um módulo para o processo de remoção e QC
       
     </span>
   </a>
@@ -3574,10 +3606,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#22-import-the-module-into-the-workflow-file" class="md-nav__link">
+  <a href="#22-importar-o-modulo-para-o-arquivo-de-fluxo-de-trabalho" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2. Import the module into the workflow file
+        2.2. Importar o módulo para o arquivo de fluxo de trabalho
       
     </span>
   </a>
@@ -3585,10 +3617,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#23-call-the-process-on-the-input-channel" class="md-nav__link">
+  <a href="#23-chamar-o-processo-no-canal-de-entrada" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.3. Call the process on the input channel
+        2.3. Chamar o processo no canal de entrada
       
     </span>
   </a>
@@ -3596,10 +3628,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#24-run-the-workflow-to-test-that-it-works" class="md-nav__link">
+  <a href="#24-executar-o-fluxo-de-trabalho-para-testar-se-funciona" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.4. Run the workflow to test that it works
+        2.4. Executar o fluxo de trabalho para testar se funciona
       
     </span>
   </a>
@@ -3610,22 +3642,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#3-align-the-reads-to-the-reference-genome" class="md-nav__link">
+  <a href="#3-alinhar-os-reads-ao-genoma-de-referencia" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Align the reads to the reference genome
+        3. Alinhar os reads ao genoma de referência
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. Align the reads to the reference genome">
+    <nav class="md-nav" aria-label="3. Alinhar os reads ao genoma de referência">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#31-create-a-module-for-the-hisat2-process" class="md-nav__link">
+  <a href="#31-criar-um-modulo-para-o-processo-hisat2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1. Create a module for the HiSat2 process
+        3.1. Criar um módulo para o processo HiSat2
       
     </span>
   </a>
@@ -3633,10 +3665,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#32-import-the-module-into-the-workflow-file" class="md-nav__link">
+  <a href="#32-importar-o-modulo-para-o-arquivo-de-fluxo-de-trabalho" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.2. Import the module into the workflow file
+        3.2. Importar o módulo para o arquivo de fluxo de trabalho
       
     </span>
   </a>
@@ -3644,10 +3676,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#33-add-a-parameter-declaration-to-provide-the-genome-index" class="md-nav__link">
+  <a href="#33-adicionar-uma-declaracao-de-parametro-para-fornecer-o-indice-do-genoma" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.3. Add a parameter declaration to provide the genome index
+        3.3. Adicionar uma declaração de parâmetro para fornecer o índice do genoma
       
     </span>
   </a>
@@ -3655,10 +3687,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#34-call-the-hisat2_align-process-on-the-trimmed-reads-output-by-trim_galore" class="md-nav__link">
+  <a href="#34-chamar-o-processo-hisat2_align-nos-reads-processados-pela-saida-de-trim_galore" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.4. Call the HISAT2_ALIGN process on the trimmed reads output by TRIM_GALORE
+        3.4. Chamar o processo HISAT2_ALIGN nos reads processados pela saída de TRIM_GALORE
       
     </span>
   </a>
@@ -3666,10 +3698,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#35-run-the-workflow-to-test-that-it-works" class="md-nav__link">
+  <a href="#35-executar-o-fluxo-de-trabalho-para-testar-se-funciona" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.5. Run the workflow to test that it works
+        3.5. Executar o fluxo de trabalho para testar se funciona
       
     </span>
   </a>
@@ -3677,10 +3709,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway" class="md-nav__link">
+  <a href="#conclusao" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        Conclusão
       
     </span>
   </a>
@@ -3688,10 +3720,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next" class="md-nav__link">
+  <a href="#o-que-vem-a-seguir" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        O que vem a seguir?
       
     </span>
   </a>
@@ -3940,33 +3972,43 @@
                 
                   
 
+ 
+<a
+  href="https://github.com/nextflow-io/training/edit/master/docs/nf4_science/rnaseq/02_single-sample.md"
+  title="Editar esta página"
+  class="md-content__button md-icon"
+  rel="edit"
+>
+   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+</a>
+   
+<a
+  href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md"
+  title="Improve translation"
+  class="md-content__button md-icon"
+>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 1H3c-1.1 0-2 .9-2 2v12l3-3h5v-1c0-2.2 1.79-4 4-4V3c0-1.1-.9-2-2-2m0 3H9.5c-.34 1.19-.96 2.3-1.82 3.26l-.02.02 1.26 1.25-.37 1.01L7 8l-2.5 2.5-.69-.73 2.53-2.49A8.6 8.6 0 0 1 4.86 5h.99c.31.6.69 1.17 1.15 1.68A7.7 7.7 0 0 0 8.57 4H3V3h3.5V2h1v1H11zm10 5h-8c-1.1 0-2 .9-2 2v7c0 1.1.9 2 2 2h7l3 3V11c0-1.1-.9-2-2-2m-1.37 10-.85-2.25h-3.56L14.38 19h-1.5l3.37-9h1.5l3.38 9zM17 12l1.22 3.25h-2.43z"/></svg>
+</a>
+ 
 
-  
-    <a href="https://github.com/nextflow-io/training/edit/master/docs/nf4_science/rnaseq/02_single-sample.md" title="Editar esta página" class="md-content__button md-icon" rel="edit">
-      
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
-    </a>
-  
-  
-
-
-<h1 id="part-2-single-sample-implementation">Part 2: Single-sample implementation<a class="headerlink" href="#part-2-single-sample-implementation" title="Permanent link">&para;</a></h1>
-<p>In this part of the course, we're going to write the simplest possible workflow that wraps all the commands we ran in Part 1 to automate running them, and we'll just aim to process one sample at a time.</p>
-<p>We'll do this in three stages:</p>
+<h1 id="parte-2-implementacao-de-amostra-unica">Parte 2: Implementação de amostra única<a class="headerlink" href="#parte-2-implementacao-de-amostra-unica" title="Permanent link">&para;</a></h1>
+<p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Tradução assistida por IA - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">saiba mais e sugira melhorias</a></span></p>
+<p>Nesta parte do curso, vamos escrever o fluxo de trabalho mais simples possível que envolve todos os comandos que executamos na Parte 1 para automatizar sua execução, e vamos processar apenas uma amostra por vez.</p>
+<p>Faremos isso em três etapas:</p>
 <ol>
-<li>Write a single-stage workflow that runs the initial QC step</li>
-<li>Add adapter trimming and post-trimming QC</li>
-<li>Add alignment to the reference genome</li>
+<li>Escrever um fluxo de trabalho de estágio único que executa a etapa de QC inicial</li>
+<li>Adicionar a remoção de adaptadores e QC pós-remoção</li>
+<li>Adicionar o alinhamento ao genoma de referência</li>
 </ol>
 <div class="admonition warning">
-<p class="admonition-title">Prerequisite</p>
-<p>You must work through Part 1 of the course before starting this lesson.
-Specifically, working through sections 2.1-3 creates the genome index file (<code>data/genome_index.tar.gz</code>) required for the alignment step in this lesson.</p>
+<p class="admonition-title">Pré-requisito</p>
+<p>Você deve trabalhar na Parte 1 do curso antes de iniciar esta lição.
+Especificamente, trabalhar nas seções 2.1-3 cria o arquivo de índice do genoma (<code>data/genome_index.tar.gz</code>) necessário para a etapa de alinhamento nesta lição.</p>
 </div>
 <hr />
-<h2 id="1-write-a-single-stage-workflow-that-runs-the-initial-qc">1. Write a single-stage workflow that runs the initial QC<a class="headerlink" href="#1-write-a-single-stage-workflow-that-runs-the-initial-qc" title="Permanent link">&para;</a></h2>
-<p>Let's start by writing a simple workflow that runs the FastQC tool on a FASTQ file containing single-end RNAseq reads.</p>
-<p>We provide you with a workflow file, <code>rnaseq.nf</code>, that outlines the main parts of the workflow.</p>
+<h2 id="1-escrever-um-fluxo-de-trabalho-de-estagio-unico-que-executa-o-qc-inicial">1. Escrever um fluxo de trabalho de estágio único que executa o QC inicial<a class="headerlink" href="#1-escrever-um-fluxo-de-trabalho-de-estagio-unico-que-executa-o-qc-inicial" title="Permanent link">&para;</a></h2>
+<p>Vamos começar escrevendo um fluxo de trabalho simples que executa a ferramenta FastQC em um arquivo FASTQ contendo reads de RNAseq single-end.</p>
+<p>Fornecemos um arquivo de fluxo de trabalho, <code>rnaseq.nf</code>, que descreve as principais partes do fluxo de trabalho.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">rnaseq.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-0-3"> 3</a></span>
@@ -3985,32 +4027,32 @@ Specifically, working through sections 2.1-3 creates the genome index file (<cod
 <span class="normal"><a href="#__codelineno-0-16">16</a></span>
 <span class="normal"><a href="#__codelineno-0-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2"></a>
-<a id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="c1">// Module INCLUDE statements</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="c1">// Declarações de INCLUDE de módulo</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4"></a>
 <a id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="cm">/*</span>
 <a id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="cm"> * Pipeline parameters</span>
 <a id="__codelineno-0-7" name="__codelineno-0-7"></a><span class="cm"> */</span>
 <a id="__codelineno-0-8" name="__codelineno-0-8"></a>
-<a id="__codelineno-0-9" name="__codelineno-0-9"></a><span class="c1">// Primary input</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9"></a><span class="c1">// Entrada primária</span>
 <a id="__codelineno-0-10" name="__codelineno-0-10"></a>
 <a id="__codelineno-0-11" name="__codelineno-0-11"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-0-12" name="__codelineno-0-12"></a>
-<a id="__codelineno-0-13" name="__codelineno-0-13"></a><span class="w">    </span><span class="c1">// Create input channel</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13"></a><span class="w">    </span><span class="c1">// Cria canal de entrada</span>
 <a id="__codelineno-0-14" name="__codelineno-0-14"></a>
-<a id="__codelineno-0-15" name="__codelineno-0-15"></a><span class="w">    </span><span class="c1">// Call processes</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15"></a><span class="w">    </span><span class="c1">// Chama processos</span>
 <a id="__codelineno-0-16" name="__codelineno-0-16"></a>
 <a id="__codelineno-0-17" name="__codelineno-0-17"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>Keep in mind this workflow code is correct but it's not functional; its purpose is just to serve as a skeleton that you'll use to write the actual workflow.</p>
-<h3 id="11-create-a-directory-to-store-modules">1.1. Create a directory to store modules<a class="headerlink" href="#11-create-a-directory-to-store-modules" title="Permanent link">&para;</a></h3>
-<p>We'll create standalone modules for each process to make it easier to manage and reuse them, so let's create a directory to store them.</p>
+<p>Tenha em mente que este código de fluxo de trabalho está correto, mas não é funcional; seu propósito é apenas servir como um esqueleto que você usará para escrever o fluxo de trabalho real.</p>
+<h3 id="11-criar-um-diretorio-para-armazenar-modulos">1.1. Criar um diretório para armazenar módulos<a class="headerlink" href="#11-criar-um-diretorio-para-armazenar-modulos" title="Permanent link">&para;</a></h3>
+<p>Vamos criar módulos independentes para cada processo para facilitar o gerenciamento e reutilização, então vamos criar um diretório para armazená-los.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>mkdir<span class="w"> </span>modules
 </code></pre></div>
-<h3 id="12-create-a-module-for-the-qc-metrics-collection-process">1.2. Create a module for the QC metrics collection process<a class="headerlink" href="#12-create-a-module-for-the-qc-metrics-collection-process" title="Permanent link">&para;</a></h3>
-<p>Let's create a module file called <code>modules/fastqc.nf</code> to house the <code>FASTQC</code> process:</p>
+<h3 id="12-criar-um-modulo-para-o-processo-de-coleta-de-metricas-de-qc">1.2. Criar um módulo para o processo de coleta de métricas de QC<a class="headerlink" href="#12-criar-um-modulo-para-o-processo-de-coleta-de-metricas-de-qc" title="Permanent link">&para;</a></h3>
+<p>Vamos criar um arquivo de módulo chamado <code>modules/fastqc.nf</code> para abrigar o processo <code>FASTQC</code>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>touch<span class="w"> </span>modules/fastqc.nf
 </code></pre></div>
-<p>Open the file in the code editor and copy the following code into it:</p>
+<p>Abra o arquivo no editor de código e copie o seguinte código nele:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/fastqc.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-3-3"> 3</a></span>
@@ -4049,29 +4091,29 @@ Specifically, working through sections 2.1-3 creates the genome index file (<cod
 <a id="__codelineno-3-18" name="__codelineno-3-18"></a><span class="s2">    &quot;&quot;&quot;</span>
 <a id="__codelineno-3-19" name="__codelineno-3-19"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>You should recognize all the pieces from what you learned in Part 1 &amp; Part 2 of this training series; the only notable change is that this time we're using <code>mode: symlink</code> for the <code>publishDir</code> directive, and we're using a parameter to define the <code>publishDir</code>.</p>
+<p>Você deve reconhecer todas as peças do que aprendeu na Parte 1 e Parte 2 desta série de treinamento; a única mudança notável é que desta vez estamos usando <code>mode: symlink</code> para a diretiva <code>publishDir</code>, e estamos usando um parâmetro para definir o <code>publishDir</code>.</p>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Even though the data files we're using here are very small, in genomics they can get very large. For the purposes of demonstration in the teaching environment, we're using the 'symlink' publishing mode to avoid unnecessary file copies. You shouldn't do this in your final workflows, since you'll lose results when you clean up your <code>work</code> directory.</p>
+<p class="admonition-title">Nota</p>
+<p>Embora os arquivos de dados que estamos usando aqui sejam muito pequenos, em genômica eles podem ficar muito grandes. Para fins de demonstração no ambiente de ensino, estamos usando o modo de publicação 'symlink' para evitar cópias desnecessárias de arquivos. Você não deve fazer isso em seus fluxos de trabalho finais, pois perderá resultados quando limpar seu diretório <code>work</code>.</p>
 </div>
-<h3 id="13-import-the-module-into-the-workflow-file">1.3. Import the module into the workflow file<a class="headerlink" href="#13-import-the-module-into-the-workflow-file" title="Permanent link">&para;</a></h3>
-<p>Add the statement <code>include { FASTQC } from './modules/fastqc.nf'</code> to the <code>rnaseq.nf</code> file:</p>
+<h3 id="13-importar-o-modulo-para-o-arquivo-de-fluxo-de-trabalho">1.3. Importar o módulo para o arquivo de fluxo de trabalho<a class="headerlink" href="#13-importar-o-modulo-para-o-arquivo-de-fluxo-de-trabalho" title="Permanent link">&para;</a></h3>
+<p>Adicione a instrução <code>include { FASTQC } from './modules/fastqc.nf'</code> ao arquivo <code>rnaseq.nf</code>:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">rnaseq.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-3">3</a></span>
-<span class="normal"><a href="#__codelineno-4-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="c1">// Module INCLUDE statements</span>
+<span class="normal"><a href="#__codelineno-4-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="c1">// Declarações de INCLUDE de módulo</span>
 <a id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">FASTQC</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/fastqc.nf&#39;</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="14-add-an-input-declaration">1.4. Add an input declaration<a class="headerlink" href="#14-add-an-input-declaration" title="Permanent link">&para;</a></h3>
-<p>Declare an input parameter with a default value:</p>
+<h3 id="14-adicionar-uma-declaracao-de-entrada">1.4. Adicionar uma declaração de entrada<a class="headerlink" href="#14-adicionar-uma-declaracao-de-entrada" title="Permanent link">&para;</a></h3>
+<p>Declare um parâmetro de entrada com um valor padrão:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">rnaseq.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-10">10</a></span>
 <span class="normal"><a href="#__codelineno-5-11">11</a></span>
 <span class="normal"><a href="#__codelineno-5-12">12</a></span>
 <span class="normal"><a href="#__codelineno-5-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-10" name="__codelineno-5-10"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-5-11" name="__codelineno-5-11"></a><span class="w">    </span><span class="c1">// Primary input</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11"></a><span class="w">    </span><span class="c1">// Entrada primária</span>
 <a id="__codelineno-5-12" name="__codelineno-5-12"></a><span class="w">    </span><span class="nl">reads:</span><span class="w"> </span><span class="n">Path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;data/reads/ENCSR000COQ1_1.fastq.gz&quot;</span>
 <a id="__codelineno-5-13" name="__codelineno-5-13"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="15-create-an-input-channel-in-the-workflow-block">1.5. Create an input channel in the workflow block<a class="headerlink" href="#15-create-an-input-channel-in-the-workflow-block" title="Permanent link">&para;</a></h3>
-<p>Use a basic <code>.fromPath()</code> channel factory to create the input channel:</p>
+<h3 id="15-criar-um-canal-de-entrada-no-bloco-workflow">1.5. Criar um canal de entrada no bloco workflow<a class="headerlink" href="#15-criar-um-canal-de-entrada-no-bloco-workflow" title="Permanent link">&para;</a></h3>
+<p>Use uma factory de canal básica <code>.fromPath()</code> para criar o canal de entrada:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">rnaseq.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-13">13</a></span>
 <span class="normal"><a href="#__codelineno-6-14">14</a></span>
 <span class="normal"><a href="#__codelineno-6-15">15</a></span>
@@ -4081,14 +4123,14 @@ Specifically, working through sections 2.1-3 creates the genome index file (<cod
 <span class="normal"><a href="#__codelineno-6-19">19</a></span>
 <span class="normal"><a href="#__codelineno-6-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-13" name="__codelineno-6-13"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-6-14" name="__codelineno-6-14"></a>
-<a id="__codelineno-6-15" name="__codelineno-6-15"></a><span class="w">    </span><span class="c1">// Create input channel from a file path</span>
+<a id="__codelineno-6-15" name="__codelineno-6-15"></a><span class="w">    </span><span class="c1">// Cria canal de entrada a partir de um caminho de arquivo</span>
 <a id="__codelineno-6-16" name="__codelineno-6-16"></a><span class="w">    </span><span class="n">read_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads</span><span class="o">)</span>
 <a id="__codelineno-6-17" name="__codelineno-6-17"></a>
-<a id="__codelineno-6-18" name="__codelineno-6-18"></a><span class="w">    </span><span class="c1">// Call processes</span>
+<a id="__codelineno-6-18" name="__codelineno-6-18"></a><span class="w">    </span><span class="c1">// Chama processos</span>
 <a id="__codelineno-6-19" name="__codelineno-6-19"></a>
 <a id="__codelineno-6-20" name="__codelineno-6-20"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="16-call-the-fastqc-process-on-the-input-channel">1.6. Call the <code>FASTQC</code> process on the input channel<a class="headerlink" href="#16-call-the-fastqc-process-on-the-input-channel" title="Permanent link">&para;</a></h3>
+<h3 id="16-chamar-o-processo-fastqc-no-canal-de-entrada">1.6. Chamar o processo <code>FASTQC</code> no canal de entrada<a class="headerlink" href="#16-chamar-o-processo-fastqc-no-canal-de-entrada" title="Permanent link">&para;</a></h3>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">rnaseq.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-13">13</a></span>
 <span class="normal"><a href="#__codelineno-7-14">14</a></span>
 <span class="normal"><a href="#__codelineno-7-15">15</a></span>
@@ -4099,20 +4141,20 @@ Specifically, working through sections 2.1-3 creates the genome index file (<cod
 <span class="normal"><a href="#__codelineno-7-20">20</a></span>
 <span class="normal"><a href="#__codelineno-7-21">21</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-13" name="__codelineno-7-13"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-7-14" name="__codelineno-7-14"></a>
-<a id="__codelineno-7-15" name="__codelineno-7-15"></a><span class="w">    </span><span class="c1">// Create input channel from a file path</span>
+<a id="__codelineno-7-15" name="__codelineno-7-15"></a><span class="w">    </span><span class="c1">// Cria canal de entrada a partir de um caminho de arquivo</span>
 <a id="__codelineno-7-16" name="__codelineno-7-16"></a><span class="w">    </span><span class="n">read_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads</span><span class="o">)</span>
 <a id="__codelineno-7-17" name="__codelineno-7-17"></a>
-<a id="__codelineno-7-18" name="__codelineno-7-18"></a><span class="w">    </span><span class="c1">// Initial quality control</span>
+<a id="__codelineno-7-18" name="__codelineno-7-18"></a><span class="w">    </span><span class="c1">// Controle de qualidade inicial</span>
 <a id="__codelineno-7-19" name="__codelineno-7-19"></a><span class="w">    </span><span class="n">FASTQC</span><span class="o">(</span><span class="n">read_ch</span><span class="o">)</span>
 <a id="__codelineno-7-20" name="__codelineno-7-20"></a>
 <a id="__codelineno-7-21" name="__codelineno-7-21"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="17-run-the-workflow-to-test-that-it-works">1.7. Run the workflow to test that it works<a class="headerlink" href="#17-run-the-workflow-to-test-that-it-works" title="Permanent link">&para;</a></h3>
-<p>We could use the <code>--reads</code> parameter to specify an input from command line, but during development we can be lazy and just use the test default we set up.</p>
+<h3 id="17-executar-o-fluxo-de-trabalho-para-testar-se-funciona">1.7. Executar o fluxo de trabalho para testar se funciona<a class="headerlink" href="#17-executar-o-fluxo-de-trabalho-para-testar-se-funciona" title="Permanent link">&para;</a></h3>
+<p>Poderíamos usar o parâmetro <code>--reads</code> para especificar uma entrada da linha de comando, mas durante o desenvolvimento podemos ser preguiçosos e apenas usar o padrão de teste que configuramos.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>rnaseq.nf
 </code></pre></div>
 <details class="success">
-<summary>Command output</summary>
+<summary>Saída do comando</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="go">N E X T F L O W   ~  version 24.10.0</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
 <a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="go">Launching `rnaseq.nf` [fabulous_snyder] DSL2 - revision: 3394c725ee</span>
@@ -4121,21 +4163,21 @@ Specifically, working through sections 2.1-3 creates the genome index file (<cod
 <a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="go">[d6/d94c3a] FASTQC (1) [100%] 1 of 1 ✔</span>
 </code></pre></div>
 </details>
-<p>This should run very quickly if you worked through Part 1 and have already pulled the container.
-If you skipped it, Nextflow will pull the container for you; you don't have to do anything for it to happen, but you may need to wait up to a minute.</p>
-<p>You can find the outputs under <code>results/fastqc</code> as specified in the <code>FASTQC</code> process by the <code>publishDir</code> directive.</p>
+<p>Isso deve executar muito rapidamente se você trabalhou na Parte 1 e já baixou o contêiner.
+Se você pulou essa parte, o Nextflow baixará o contêiner para você; você não precisa fazer nada para que isso aconteça, mas pode precisar esperar até um minuto.</p>
+<p>Você pode encontrar as saídas em <code>results/fastqc</code> conforme especificado no processo <code>FASTQC</code> pela diretiva <code>publishDir</code>.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>ls<span class="w"> </span>results/fastqc
 </code></pre></div>
-<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="go">ENCSR000COQ1_1_fastqc.html  ENCSR000COQ1_1_fastqc.zip</span>
+<div class="highlight"><span class="filename">Saída</span><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="go">ENCSR000COQ1_1_fastqc.html  ENCSR000COQ1_1_fastqc.zip</span>
 </code></pre></div>
 <hr />
-<h2 id="2-add-adapter-trimming-and-post-trimming-quality-control">2. Add adapter trimming and post-trimming quality control<a class="headerlink" href="#2-add-adapter-trimming-and-post-trimming-quality-control" title="Permanent link">&para;</a></h2>
-<p>We're going to use the Trim_Galore wrapper, which bundles Cutadapt for the trimming itself and FastQC for the post-trimming quality control.</p>
-<h3 id="21-create-a-module-for-the-trimming-and-qc-process">2.1. Create a module for the trimming and QC process<a class="headerlink" href="#21-create-a-module-for-the-trimming-and-qc-process" title="Permanent link">&para;</a></h3>
-<p>Let's create a module file called <code>modules/trim_galore.nf</code> to house the <code>TRIM_GALORE</code> process:</p>
+<h2 id="2-adicionar-remocao-de-adaptadores-e-controle-de-qualidade-pos-remocao">2. Adicionar remoção de adaptadores e controle de qualidade pós-remoção<a class="headerlink" href="#2-adicionar-remocao-de-adaptadores-e-controle-de-qualidade-pos-remocao" title="Permanent link">&para;</a></h2>
+<p>Vamos usar o wrapper Trim_Galore, que agrupa o Cutadapt para a remoção em si e o FastQC para o controle de qualidade pós-remoção.</p>
+<h3 id="21-criar-um-modulo-para-o-processo-de-remocao-e-qc">2.1. Criar um módulo para o processo de remoção e QC<a class="headerlink" href="#21-criar-um-modulo-para-o-processo-de-remocao-e-qc" title="Permanent link">&para;</a></h3>
+<p>Vamos criar um arquivo de módulo chamado <code>modules/trim_galore.nf</code> para abrigar o processo <code>TRIM_GALORE</code>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>touch<span class="w"> </span>modules/trim_galore.nf
 </code></pre></div>
-<p>Open the file in the code editor and copy the following code into it:</p>
+<p>Abra o arquivo no editor de código e copie o seguinte código nele:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/trim_galore.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-13-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-13-3"> 3</a></span>
@@ -4176,15 +4218,15 @@ If you skipped it, Nextflow will pull the container for you; you don't have to d
 <a id="__codelineno-13-19" name="__codelineno-13-19"></a><span class="s2">    &quot;&quot;&quot;</span>
 <a id="__codelineno-13-20" name="__codelineno-13-20"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="22-import-the-module-into-the-workflow-file">2.2. Import the module into the workflow file<a class="headerlink" href="#22-import-the-module-into-the-workflow-file" title="Permanent link">&para;</a></h3>
-<p>Add the statement <code>include { TRIM_GALORE } from './modules/trim_galore.nf'</code> to the <code>rnaseq.nf</code> file:</p>
+<h3 id="22-importar-o-modulo-para-o-arquivo-de-fluxo-de-trabalho">2.2. Importar o módulo para o arquivo de fluxo de trabalho<a class="headerlink" href="#22-importar-o-modulo-para-o-arquivo-de-fluxo-de-trabalho" title="Permanent link">&para;</a></h3>
+<p>Adicione a instrução <code>include { TRIM_GALORE } from './modules/trim_galore.nf'</code> ao arquivo <code>rnaseq.nf</code>:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">rnaseq.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-3">3</a></span>
 <span class="normal"><a href="#__codelineno-14-4">4</a></span>
-<span class="normal"><a href="#__codelineno-14-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-14-3" name="__codelineno-14-3"></a><span class="c1">// Module INCLUDE statements</span>
+<span class="normal"><a href="#__codelineno-14-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-14-3" name="__codelineno-14-3"></a><span class="c1">// Declarações de INCLUDE de módulo</span>
 <a id="__codelineno-14-4" name="__codelineno-14-4"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">FASTQC</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/fastqc.nf&#39;</span>
 <a id="__codelineno-14-5" name="__codelineno-14-5"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">TRIM_GALORE</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/trim_galore.nf&#39;</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="23-call-the-process-on-the-input-channel">2.3. Call the process on the input channel<a class="headerlink" href="#23-call-the-process-on-the-input-channel" title="Permanent link">&para;</a></h3>
+<h3 id="23-chamar-o-processo-no-canal-de-entrada">2.3. Chamar o processo no canal de entrada<a class="headerlink" href="#23-chamar-o-processo-no-canal-de-entrada" title="Permanent link">&para;</a></h3>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">rnaseq.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-14">14</a></span>
 <span class="normal"><a href="#__codelineno-15-15">15</a></span>
 <span class="normal"><a href="#__codelineno-15-16">16</a></span>
@@ -4197,21 +4239,21 @@ If you skipped it, Nextflow will pull the container for you; you don't have to d
 <span class="normal"><a href="#__codelineno-15-23">23</a></span>
 <span class="normal"><a href="#__codelineno-15-24">24</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-15-14" name="__codelineno-15-14"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-15-15" name="__codelineno-15-15"></a>
-<a id="__codelineno-15-16" name="__codelineno-15-16"></a><span class="w">    </span><span class="c1">// Create input channel from a file path</span>
+<a id="__codelineno-15-16" name="__codelineno-15-16"></a><span class="w">    </span><span class="c1">// Cria canal de entrada a partir de um caminho de arquivo</span>
 <a id="__codelineno-15-17" name="__codelineno-15-17"></a><span class="w">    </span><span class="n">read_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads</span><span class="o">)</span>
 <a id="__codelineno-15-18" name="__codelineno-15-18"></a>
-<a id="__codelineno-15-19" name="__codelineno-15-19"></a><span class="w">    </span><span class="c1">// Initial quality control</span>
+<a id="__codelineno-15-19" name="__codelineno-15-19"></a><span class="w">    </span><span class="c1">// Controle de qualidade inicial</span>
 <a id="__codelineno-15-20" name="__codelineno-15-20"></a><span class="w">    </span><span class="n">FASTQC</span><span class="o">(</span><span class="n">read_ch</span><span class="o">)</span>
 <a id="__codelineno-15-21" name="__codelineno-15-21"></a>
-<a id="__codelineno-15-22" name="__codelineno-15-22"></a><span class="w">    </span><span class="c1">// Adapter trimming and post-trimming QC</span>
+<a id="__codelineno-15-22" name="__codelineno-15-22"></a><span class="w">    </span><span class="c1">// Corte de adaptador e QC pós-corte</span>
 <a id="__codelineno-15-23" name="__codelineno-15-23"></a><span class="w">    </span><span class="n">TRIM_GALORE</span><span class="o">(</span><span class="n">read_ch</span><span class="o">)</span>
 <a id="__codelineno-15-24" name="__codelineno-15-24"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="24-run-the-workflow-to-test-that-it-works">2.4. Run the workflow to test that it works<a class="headerlink" href="#24-run-the-workflow-to-test-that-it-works" title="Permanent link">&para;</a></h3>
+<h3 id="24-executar-o-fluxo-de-trabalho-para-testar-se-funciona">2.4. Executar o fluxo de trabalho para testar se funciona<a class="headerlink" href="#24-executar-o-fluxo-de-trabalho-para-testar-se-funciona" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>rnaseq.nf
 </code></pre></div>
 <details class="success">
-<summary>Command output</summary>
+<summary>Saída do comando</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="go">N E X T F L O W   ~  version 24.10.0</span>
 <a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>
 <a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="go">Launching `rnaseq.nf` [fabulous_snyder] DSL2 - revision: 3394c725ee</span>
@@ -4221,21 +4263,21 @@ If you skipped it, Nextflow will pull the container for you; you don't have to d
 <a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="go">[c2/e4a9bb] TRIM_GALORE (1)  [100%] 1 of 1 ✔</span>
 </code></pre></div>
 </details>
-<p>This should run very quickly too, since we're running on such a small input file.</p>
-<p>You can find the outputs under <code>results/trimming</code> as specified in the <code>TRIM_GALORE</code> process by the <code>publishDir</code> directive.</p>
+<p>Isso também deve executar muito rapidamente, já que estamos executando em um arquivo de entrada tão pequeno.</p>
+<p>Você pode encontrar as saídas em <code>results/trimming</code> conforme especificado no processo <code>TRIM_GALORE</code> pela diretiva <code>publishDir</code>.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>ls<span class="w"> </span>results/trimming
 </code></pre></div>
-<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="go">ENCSR000COQ1_1.fastq.gz_trimming_report.txt  ENCSR000COQ1_1_trimmed_fastqc.zip</span>
+<div class="highlight"><span class="filename">Saída</span><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="go">ENCSR000COQ1_1.fastq.gz_trimming_report.txt  ENCSR000COQ1_1_trimmed_fastqc.zip</span>
 <a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="go">ENCSR000COQ1_1_trimmed_fastqc.html           ENCSR000COQ1_1_trimmed.fq.gz</span>
 </code></pre></div>
 <hr />
-<h2 id="3-align-the-reads-to-the-reference-genome">3. Align the reads to the reference genome<a class="headerlink" href="#3-align-the-reads-to-the-reference-genome" title="Permanent link">&para;</a></h2>
-<p>Finally we can run the genome alignment step using Hisat2, which will also emit FastQC-style quality control metrics.</p>
-<h3 id="31-create-a-module-for-the-hisat2-process">3.1. Create a module for the HiSat2 process<a class="headerlink" href="#31-create-a-module-for-the-hisat2-process" title="Permanent link">&para;</a></h3>
-<p>Let's create a module file called <code>modules/hisat2_align.nf</code> to house the <code>HISAT2_ALIGN</code> process:</p>
+<h2 id="3-alinhar-os-reads-ao-genoma-de-referencia">3. Alinhar os reads ao genoma de referência<a class="headerlink" href="#3-alinhar-os-reads-ao-genoma-de-referencia" title="Permanent link">&para;</a></h2>
+<p>Finalmente podemos executar a etapa de alinhamento do genoma usando o Hisat2, que também emitirá métricas de controle de qualidade no estilo FastQC.</p>
+<h3 id="31-criar-um-modulo-para-o-processo-hisat2">3.1. Criar um módulo para o processo HiSat2<a class="headerlink" href="#31-criar-um-modulo-para-o-processo-hisat2" title="Permanent link">&para;</a></h3>
+<p>Vamos criar um arquivo de módulo chamado <code>modules/hisat2_align.nf</code> para abrigar o processo <code>HISAT2_ALIGN</code>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>touch<span class="w"> </span>modules/hisat2_align.nf
 </code></pre></div>
-<p>Open the file in the code editor and copy the following code into it:</p>
+<p>Abra o arquivo no editor de código e copie o seguinte código nele:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/hisat2_align.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-21-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-21-3"> 3</a></span>
@@ -4282,18 +4324,18 @@ If you skipped it, Nextflow will pull the container for you; you don't have to d
 <a id="__codelineno-21-22" name="__codelineno-21-22"></a><span class="s2">    &quot;&quot;&quot;</span>
 <a id="__codelineno-21-23" name="__codelineno-21-23"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="32-import-the-module-into-the-workflow-file">3.2. Import the module into the workflow file<a class="headerlink" href="#32-import-the-module-into-the-workflow-file" title="Permanent link">&para;</a></h3>
-<p>Add the statement <code>include { HISAT2_ALIGN } from './modules/hisat2_align.nf'</code> to the <code>rnaseq.nf</code> file:</p>
+<h3 id="32-importar-o-modulo-para-o-arquivo-de-fluxo-de-trabalho">3.2. Importar o módulo para o arquivo de fluxo de trabalho<a class="headerlink" href="#32-importar-o-modulo-para-o-arquivo-de-fluxo-de-trabalho" title="Permanent link">&para;</a></h3>
+<p>Adicione a instrução <code>include { HISAT2_ALIGN } from './modules/hisat2_align.nf'</code> ao arquivo <code>rnaseq.nf</code>:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">rnaseq.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-22-3">3</a></span>
 <span class="normal"><a href="#__codelineno-22-4">4</a></span>
 <span class="normal"><a href="#__codelineno-22-5">5</a></span>
-<span class="normal"><a href="#__codelineno-22-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-22-3" name="__codelineno-22-3"></a><span class="c1">// Module INCLUDE statements</span>
+<span class="normal"><a href="#__codelineno-22-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-22-3" name="__codelineno-22-3"></a><span class="c1">// Declarações de INCLUDE de módulo</span>
 <a id="__codelineno-22-4" name="__codelineno-22-4"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">FASTQC</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/fastqc.nf&#39;</span>
 <a id="__codelineno-22-5" name="__codelineno-22-5"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">TRIM_GALORE</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/trim_galore.nf&#39;</span>
 <a id="__codelineno-22-6" name="__codelineno-22-6"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">HISAT2_ALIGN</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/hisat2_align.nf&#39;</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="33-add-a-parameter-declaration-to-provide-the-genome-index">3.3. Add a parameter declaration to provide the genome index<a class="headerlink" href="#33-add-a-parameter-declaration-to-provide-the-genome-index" title="Permanent link">&para;</a></h3>
-<p>Declare an input parameter with a default value:</p>
+<h3 id="33-adicionar-uma-declaracao-de-parametro-para-fornecer-o-indice-do-genoma">3.3. Adicionar uma declaração de parâmetro para fornecer o índice do genoma<a class="headerlink" href="#33-adicionar-uma-declaracao-de-parametro-para-fornecer-o-indice-do-genoma" title="Permanent link">&para;</a></h3>
+<p>Declare um parâmetro de entrada com um valor padrão:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">rnaseq.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-8"> 8</a></span>
 <span class="normal"><a href="#__codelineno-23-9"> 9</a></span>
 <span class="normal"><a href="#__codelineno-23-10">10</a></span>
@@ -4301,16 +4343,16 @@ If you skipped it, Nextflow will pull the container for you; you don't have to d
 <span class="normal"><a href="#__codelineno-23-12">12</a></span>
 <span class="normal"><a href="#__codelineno-23-13">13</a></span>
 <span class="normal"><a href="#__codelineno-23-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-23-8" name="__codelineno-23-8"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-23-9" name="__codelineno-23-9"></a><span class="w">    </span><span class="c1">// Primary input</span>
+<a id="__codelineno-23-9" name="__codelineno-23-9"></a><span class="w">    </span><span class="c1">// Entrada primária</span>
 <a id="__codelineno-23-10" name="__codelineno-23-10"></a><span class="w">    </span><span class="nl">reads:</span><span class="w"> </span><span class="n">Path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;data/reads/ENCSR000COQ1_1.fastq.gz&quot;</span>
 <a id="__codelineno-23-11" name="__codelineno-23-11"></a>
-<a id="__codelineno-23-12" name="__codelineno-23-12"></a><span class="w">    </span><span class="c1">// Reference genome archive</span>
+<a id="__codelineno-23-12" name="__codelineno-23-12"></a><span class="w">    </span><span class="c1">// Arquivo do genoma de referência</span>
 <a id="__codelineno-23-13" name="__codelineno-23-13"></a><span class="w">    </span><span class="nl">hisat2_index_zip:</span><span class="w"> </span><span class="n">Path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;data/genome_index.tar.gz&quot;</span>
 <a id="__codelineno-23-14" name="__codelineno-23-14"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="34-call-the-hisat2_align-process-on-the-trimmed-reads-output-by-trim_galore">3.4. Call the <code>HISAT2_ALIGN</code> process on the trimmed reads output by <code>TRIM_GALORE</code><a class="headerlink" href="#34-call-the-hisat2_align-process-on-the-trimmed-reads-output-by-trim_galore" title="Permanent link">&para;</a></h3>
-<p>The trimmed reads are in the <code>TRIM_GALORE.out.trimmed_reads</code> channel output by the previous step.</p>
-<p>In addition, we use <code>file (params.hisat2_index_zip)</code> to provide the Hisat2 tool with the gzipped genome index tarball.</p>
+<h3 id="34-chamar-o-processo-hisat2_align-nos-reads-processados-pela-saida-de-trim_galore">3.4. Chamar o processo <code>HISAT2_ALIGN</code> nos reads processados pela saída de <code>TRIM_GALORE</code><a class="headerlink" href="#34-chamar-o-processo-hisat2_align-nos-reads-processados-pela-saida-de-trim_galore" title="Permanent link">&para;</a></h3>
+<p>Os reads processados estão no canal de saída <code>TRIM_GALORE.out.trimmed_reads</code> produzido pela etapa anterior.</p>
+<p>Além disso, usamos <code>file (params.hisat2_index_zip)</code> para fornecer à ferramenta Hisat2 o arquivo tarball compactado do índice do genoma.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">rnaseq.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-16">16</a></span>
 <span class="normal"><a href="#__codelineno-24-17">17</a></span>
 <span class="normal"><a href="#__codelineno-24-18">18</a></span>
@@ -4326,24 +4368,24 @@ If you skipped it, Nextflow will pull the container for you; you don't have to d
 <span class="normal"><a href="#__codelineno-24-28">28</a></span>
 <span class="normal"><a href="#__codelineno-24-29">29</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-24-16" name="__codelineno-24-16"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-24-17" name="__codelineno-24-17"></a>
-<a id="__codelineno-24-18" name="__codelineno-24-18"></a><span class="w">    </span><span class="c1">// Create input channel from a file path</span>
+<a id="__codelineno-24-18" name="__codelineno-24-18"></a><span class="w">    </span><span class="c1">// Cria canal de entrada a partir de um caminho de arquivo</span>
 <a id="__codelineno-24-19" name="__codelineno-24-19"></a><span class="w">    </span><span class="n">read_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads</span><span class="o">)</span>
 <a id="__codelineno-24-20" name="__codelineno-24-20"></a>
-<a id="__codelineno-24-21" name="__codelineno-24-21"></a><span class="w">    </span><span class="c1">// Initial quality control</span>
+<a id="__codelineno-24-21" name="__codelineno-24-21"></a><span class="w">    </span><span class="c1">// Controle de qualidade inicial</span>
 <a id="__codelineno-24-22" name="__codelineno-24-22"></a><span class="w">    </span><span class="n">FASTQC</span><span class="o">(</span><span class="n">read_ch</span><span class="o">)</span>
 <a id="__codelineno-24-23" name="__codelineno-24-23"></a>
-<a id="__codelineno-24-24" name="__codelineno-24-24"></a><span class="w">    </span><span class="c1">// Adapter trimming and post-trimming QC</span>
+<a id="__codelineno-24-24" name="__codelineno-24-24"></a><span class="w">    </span><span class="c1">// Corte de adaptador e QC pós-corte</span>
 <a id="__codelineno-24-25" name="__codelineno-24-25"></a><span class="w">    </span><span class="n">TRIM_GALORE</span><span class="o">(</span><span class="n">read_ch</span><span class="o">)</span>
 <a id="__codelineno-24-26" name="__codelineno-24-26"></a>
-<a id="__codelineno-24-27" name="__codelineno-24-27"></a><span class="w">    </span><span class="c1">// Alignment to a reference genome</span>
+<a id="__codelineno-24-27" name="__codelineno-24-27"></a><span class="w">    </span><span class="c1">// Alinhamento a um genoma de referência</span>
 <a id="__codelineno-24-28" name="__codelineno-24-28"></a><span class="w">    </span><span class="n">HISAT2_ALIGN</span><span class="o">(</span><span class="n">TRIM_GALORE</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">trimmed_reads</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">hisat2_index_zip</span><span class="o">))</span>
 <a id="__codelineno-24-29" name="__codelineno-24-29"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="35-run-the-workflow-to-test-that-it-works">3.5. Run the workflow to test that it works<a class="headerlink" href="#35-run-the-workflow-to-test-that-it-works" title="Permanent link">&para;</a></h3>
+<h3 id="35-executar-o-fluxo-de-trabalho-para-testar-se-funciona">3.5. Executar o fluxo de trabalho para testar se funciona<a class="headerlink" href="#35-executar-o-fluxo-de-trabalho-para-testar-se-funciona" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>rnaseq.nf
 </code></pre></div>
 <details class="success">
-<summary>Command output</summary>
+<summary>Saída do comando</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="go">N E X T F L O W   ~  version 24.10.0</span>
 <a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>
 <a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="go">Launching `rnaseq.nf` [extravagant_khorana] DSL2 - revision: 701b41bd16</span>
@@ -4354,18 +4396,18 @@ If you skipped it, Nextflow will pull the container for you; you don't have to d
 <a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a><span class="go">[c6/7a9f13] HISAT2_ALIGN (1) [100%] 1 of 1 ✔</span>
 </code></pre></div>
 </details>
-<p>You can find the outputs under <code>results/align</code> as specified in the <code>HISAT2_ALIGN</code> process by the <code>publishDir</code> directive.</p>
+<p>Você pode encontrar as saídas em <code>results/align</code> conforme especificado no processo <code>HISAT2_ALIGN</code> pela diretiva <code>publishDir</code>.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>ls<span class="w"> </span>results/align
 </code></pre></div>
-<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="go">ENCSR000COQ1_1_trimmed.bam  ENCSR000COQ1_1_trimmed.hisat2.log</span>
+<div class="highlight"><span class="filename">Saída</span><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="go">ENCSR000COQ1_1_trimmed.bam  ENCSR000COQ1_1_trimmed.hisat2.log</span>
 </code></pre></div>
-<p>This completes the basic processing we need to apply to each sample.</p>
-<p><em>We'll add MultiQC report aggregation in Part 2, after we've made the workflow accept multiple samples at a time.</em></p>
+<p>Isso completa o processamento básico que precisamos aplicar a cada amostra.</p>
+<p><em>Vamos adicionar a agregação de relatórios MultiQC na Parte 2, depois de fazer o fluxo de trabalho aceitar várias amostras de uma vez.</em></p>
 <hr />
-<h3 id="takeaway">Takeaway<a class="headerlink" href="#takeaway" title="Permanent link">&para;</a></h3>
-<p>You know how to wrap all the core steps to process single-end RNAseq samples individually.</p>
-<h3 id="whats-next">What's next?<a class="headerlink" href="#whats-next" title="Permanent link">&para;</a></h3>
-<p>Learn how to modify the workflow to process multiple samples in parallel, aggregate QC reports across all steps for all samples, and enable running the workflow on paired-end RNAseq data.</p><style type="text/css">.quiz {
+<h3 id="conclusao">Conclusão<a class="headerlink" href="#conclusao" title="Permanent link">&para;</a></h3>
+<p>Você sabe como envolver todas as etapas principais para processar amostras de RNAseq single-end individualmente.</p>
+<h3 id="o-que-vem-a-seguir">O que vem a seguir?<a class="headerlink" href="#o-que-vem-a-seguir" title="Permanent link">&para;</a></h3>
+<p>Aprenda como modificar o fluxo de trabalho para processar várias amostras em paralelo, agregar relatórios de QC em todas as etapas para todas as amostras e permitir a execução do fluxo de trabalho em dados de RNAseq paired-end.</p><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
   margin: 1rem 0;
@@ -5882,6 +5924,9 @@ window.mkdocsQuizConfig = {
 
 
 
+  
+  
+
 
 
   
@@ -5912,7 +5957,7 @@ window.mkdocsQuizConfig = {
       <nav class="md-footer__inner md-grid" aria-label="Rodapé" >
         
           
-          <a href="../01_method/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Part 1: Method overview and manual testing">
+          <a href="../01_method/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Parte 1: Visão geral do método e teste manual">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -5922,20 +5967,20 @@ window.mkdocsQuizConfig = {
                 Anterior
               </span>
               <div class="md-ellipsis">
-                Part 1: Method overview and manual testing
+                Parte 1: Visão geral do método e teste manual
               </div>
             </div>
           </a>
         
         
           
-          <a href="../03_multi-sample/" class="md-footer__link md-footer__link--next" aria-label="Próximo: Part 3: Multi-sample paired-end implementation">
+          <a href="../03_multi-sample/" class="md-footer__link md-footer__link--next" aria-label="Próximo: Parte 3: Implementação de múltiplas amostras com dados paired-end">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Próximo
               </span>
               <div class="md-ellipsis">
-                Part 3: Multi-sample paired-end implementation
+                Parte 3: Implementação de múltiplas amostras com dados paired-end
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -6012,8 +6057,8 @@ window.mkdocsQuizConfig = {
   
 
 
-<h4>Cookie consent</h4>
-<p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our training materials better. Find out more on <a href="https://seqera.io/privacy-policy/#cookies" target="_blank" rel="noopener">how we use cookies</a>.</p>
+<h4>Consentimento de cookies</h4>
+<p>Usamos cookies para reconhecer suas visitas repetidas e preferências, bem como para medir a eficácia da nossa documentação e se os usuários encontram o que procuram. Com seu consentimento, você nos ajuda a melhorar nossos materiais de treinamento. Saiba mais sobre <a href="https://seqera.io/privacy-policy/#cookies" target="_blank" rel="noopener">como usamos cookies</a>.</p>
 <input class="md-toggle" type="checkbox" id="__settings" >
 <div class="md-consent__settings">
   <ul class="task-list">
@@ -6097,12 +6142,16 @@ window.mkdocsQuizConfig = {
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": {"alias": true, "provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": {"alias": true, "provider": "mike"}}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
-        <script src="../../../../assets/javascripts/posthog.js"></script>
+        <script src="../../../assets/javascripts/consent-sync.js"></script>
+      
+        <script src="../../../assets/javascripts/posthog.js"></script>
+      
+        <script src="../../../assets/javascripts/language-picker.js"></script>
       
     
   </body>

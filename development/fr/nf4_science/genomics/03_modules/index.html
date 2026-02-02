@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://training.nextflow.io/0.dev/fr/nf4_science/genomics/03_modules/">
+        <link rel="canonical" href="https://training.nextflow.io/fr/nf4_science/genomics/03_modules/">
       
       
         <link rel="prev" href="../02_joint_calling/">
@@ -18,33 +18,41 @@
       
       
         
-          <link rel="alternate" href="../../../../nf4_science/genomics/03_modules/" hreflang="en">
+          <link rel="alternate" href="/" hreflang="en">
         
-          <link rel="alternate" href="../../../../pt/nf4_science/genomics/03_modules/" hreflang="pt">
+          <link rel="alternate" href="/de/" hreflang="de">
         
-          <link rel="alternate" href="../../../../es/nf4_science/genomics/03_modules/" hreflang="es">
+          <link rel="alternate" href="/es/" hreflang="es">
         
-          <link rel="alternate" href="./" hreflang="fr">
+          <link rel="alternate" href="/fr/" hreflang="fr">
         
-          <link rel="alternate" href="../../../../it/nf4_science/genomics/03_modules/" hreflang="it">
+          <link rel="alternate" href="/hi/" hreflang="hi">
         
-          <link rel="alternate" href="../../../../ko/nf4_science/genomics/03_modules/" hreflang="ko">
+          <link rel="alternate" href="/it/" hreflang="it">
+        
+          <link rel="alternate" href="/ko/" hreflang="ko">
+        
+          <link rel="alternate" href="/pl/" hreflang="pl">
+        
+          <link rel="alternate" href="/pt/" hreflang="pt">
+        
+          <link rel="alternate" href="/tr/" hreflang="tr">
         
       
       
-      <link rel="icon" href="../../../../assets/img/nextflow-icon.png">
+      <link rel="icon" href="../../../assets/img/nextflow-icon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
     
     
       
-        <title>Part 3: Moving code into modules - training.nextflow.io</title>
+        <title>Partie 3 : Déplacer le code dans des modules - training.nextflow.io</title>
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
   
@@ -108,11 +116,11 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/fonts.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/fonts.css">
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/extra.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/extra.css">
     
-    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
   
@@ -147,7 +155,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#part-3-moving-code-into-modules" class="md-skip">
+        <a href="#partie-3-deplacer-le-code-dans-des-modules" class="md-skip">
           Aller au contenu
         </a>
       
@@ -167,9 +175,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="En-tête">
-    <a href="../../../" title="training.nextflow.io" class="md-header__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
+    <a href="../../.." title="training.nextflow.io" class="md-header__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
       
-  <img src="../../../../assets/img/nextflow_logo_dark.png" alt="logo">
+  <img src="../../../assets/img/nextflow_logo_dark.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -186,7 +194,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Part 3: Moving code into modules
+              Partie 3 : Déplacer le code dans des modules
             
           </span>
         </div>
@@ -233,38 +241,62 @@
       <ul class="md-select__list">
         
           <li class="md-select__item">
-            <a href="../../../../nf4_science/genomics/03_modules/" hreflang="en" class="md-select__link">
+            <a href="/" hreflang="en" class="md-select__link">
               English
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../../pt/nf4_science/genomics/03_modules/" hreflang="pt" class="md-select__link">
-              Português
+            <a href="/de/" hreflang="de" class="md-select__link">
+              deutsch
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../../es/nf4_science/genomics/03_modules/" hreflang="es" class="md-select__link">
-              Español
+            <a href="/es/" hreflang="es" class="md-select__link">
+              español
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="./" hreflang="fr" class="md-select__link">
-              Français
+            <a href="/fr/" hreflang="fr" class="md-select__link">
+              français
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../../it/nf4_science/genomics/03_modules/" hreflang="it" class="md-select__link">
-              Italiano
+            <a href="/hi/" hreflang="hi" class="md-select__link">
+              हिन्दी
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../../ko/nf4_science/genomics/03_modules/" hreflang="ko" class="md-select__link">
-              Korean
+            <a href="/it/" hreflang="it" class="md-select__link">
+              italiano
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/ko/" hreflang="ko" class="md-select__link">
+              한국어
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/pl/" hreflang="pl" class="md-select__link">
+              Polski
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/pt/" hreflang="pt" class="md-select__link">
+              português
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/tr/" hreflang="tr" class="md-select__link">
+              Türkçe
             </a>
           </li>
         
@@ -384,9 +416,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../../" title="training.nextflow.io" class="md-nav__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
+    <a href="../../.." title="training.nextflow.io" class="md-nav__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
       
-  <img src="../../../../assets/img/nextflow_logo_dark.png" alt="logo">
+  <img src="../../../assets/img/nextflow_logo_dark.png" alt="logo">
 
     </a>
     training.nextflow.io
@@ -413,14 +445,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../" class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Home
+    Accueil
   
 
     
@@ -522,7 +554,7 @@
   <span class="md-ellipsis">
     
   
-    Getting started
+    Démarrage
   
 
     
@@ -550,7 +582,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run basic operations
+    Partie 1 : Exécuter les opérations de base
   
 
     
@@ -578,7 +610,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Run real pipelines
+    Partie 2 : Exécuter de vrais pipelines
   
 
     
@@ -606,7 +638,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Run configuration
+    Partie 3 : Configuration d'exécution
   
 
     
@@ -634,7 +666,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    Résumé de la formation
   
 
     
@@ -662,7 +694,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Enquête de satisfaction
   
 
     
@@ -772,7 +804,7 @@
   <span class="md-ellipsis">
     
   
-    Getting started
+    Premiers pas
   
 
     
@@ -800,7 +832,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Hello World
+    Partie 1 : Hello World
   
 
     
@@ -828,7 +860,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Hello Channels
+    Partie 2 : Hello Channels
   
 
     
@@ -856,7 +888,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Hello Workflow
+    Partie 3 : Hello Workflow
   
 
     
@@ -884,7 +916,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Hello Modules
+    Partie 4 : Hello Modules
   
 
     
@@ -912,7 +944,7 @@
   <span class="md-ellipsis">
     
   
-    Part 5: Hello Containers
+    Partie 5 : Hello Containers
   
 
     
@@ -940,7 +972,7 @@
   <span class="md-ellipsis">
     
   
-    Part 6: Hello Config
+    Partie 6 : Hello Config
   
 
     
@@ -968,7 +1000,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    Résumé du cours
   
 
     
@@ -996,7 +1028,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Enquête de satisfaction
   
 
     
@@ -1106,7 +1138,7 @@
   <span class="md-ellipsis">
     
   
-    Getting started
+    Premiers pas
   
 
     
@@ -1134,7 +1166,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run a demo pipeline
+    Partie 1 : Exécuter un pipeline de démonstration
   
 
     
@@ -1162,7 +1194,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Rewrite Hello for nf-core
+    Partie 2 : Réécrire Hello pour nf-core
   
 
     
@@ -1190,7 +1222,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Use an nf-core module
+    Partie 3 : Utiliser un module nf-core
   
 
     
@@ -1218,7 +1250,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Make an nf-core module
+    Partie 4 : Créer un module nf-core
   
 
     
@@ -1246,7 +1278,7 @@
   <span class="md-ellipsis">
     
   
-    Part 5: Input validation
+    Partie 5 : Validation des entrées
   
 
     
@@ -1274,7 +1306,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    Résumé du cours
   
 
     
@@ -1302,7 +1334,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Enquête de retour d'expérience
   
 
     
@@ -1350,7 +1382,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Science
+    Nextflow pour la Science
   
 
     
@@ -1366,7 +1398,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Nextflow for Science
+    Nextflow pour la Science
   
 
           </label>
@@ -1386,7 +1418,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Science
+    Nextflow pour la Science
   
 
     
@@ -1427,7 +1459,7 @@
   <span class="md-ellipsis">
     
   
-    Genomics
+    Nextflow pour la Génomique
   
 
     
@@ -1443,7 +1475,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Genomics
+    Nextflow pour la Génomique
   
 
           </label>
@@ -1463,7 +1495,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Genomics
+    Nextflow pour la Génomique
   
 
     
@@ -1519,7 +1551,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Per-sample variant calling
+    Partie 1 : Appel de variants par échantillon
   
 
     
@@ -1547,7 +1579,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Joint calling on a cohort
+    Partie 2 : Appel conjoint de variants sur une cohorte
   
 
     
@@ -1584,7 +1616,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Moving code into modules
+    Partie 3 : Déplacer le code dans des modules
   
 
     
@@ -1602,7 +1634,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Moving code into modules
+    Partie 3 : Déplacer le code dans des modules
   
 
     
@@ -1622,22 +1654,22 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#0-warmup" class="md-nav__link">
+  <a href="#0-echauffement" class="md-nav__link">
     <span class="md-ellipsis">
       
-        0. Warmup
+        0. Échauffement
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="0. Warmup">
+    <nav class="md-nav" aria-label="0. Échauffement">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#takeaway" class="md-nav__link">
+  <a href="#a-retenir" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        À retenir
       
     </span>
   </a>
@@ -1645,10 +1677,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next" class="md-nav__link">
+  <a href="#et-ensuite" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        Et ensuite ?
       
     </span>
   </a>
@@ -1659,22 +1691,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#1-move-processes-into-modules" class="md-nav__link">
+  <a href="#1-deplacer-les-processus-dans-des-modules" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Move processes into modules
+        1. Déplacer les processus dans des modules
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Move processes into modules">
+    <nav class="md-nav" aria-label="1. Déplacer les processus dans des modules">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11-create-a-module-for-the-samtools_index-process" class="md-nav__link">
+  <a href="#11-creer-un-module-pour-le-processus-samtools_index" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1. Create a module for the SAMTOOLS_INDEX process
+        1.1. Créer un module pour le processus SAMTOOLS_INDEX
       
     </span>
   </a>
@@ -1682,10 +1714,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#12-create-modules-for-the-gatk_haplotypecaller-and-gatk_jointgenotyping-processes" class="md-nav__link">
+  <a href="#12-creer-des-modules-pour-les-processus-gatk_haplotypecaller-et-gatk_jointgenotyping" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2. Create modules for the GATK_HAPLOTYPECALLER and GATK_JOINTGENOTYPING processes
+        1.2. Créer des modules pour les processus GATK_HAPLOTYPECALLER et GATK_JOINTGENOTYPING
       
     </span>
   </a>
@@ -1693,10 +1725,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway_1" class="md-nav__link">
+  <a href="#a-retenir_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        À retenir
       
     </span>
   </a>
@@ -1704,10 +1736,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next_1" class="md-nav__link">
+  <a href="#et-ensuite_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        Et ensuite ?
       
     </span>
   </a>
@@ -1718,22 +1750,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#2-test-the-modularized-workflow" class="md-nav__link">
+  <a href="#2-tester-le-workflow-modularise" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Test the modularized workflow
+        2. Tester le workflow modularisé
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. Test the modularized workflow">
+    <nav class="md-nav" aria-label="2. Tester le workflow modularisé">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#takeaway_2" class="md-nav__link">
+  <a href="#a-retenir_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        À retenir
       
     </span>
   </a>
@@ -1741,10 +1773,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next_2" class="md-nav__link">
+  <a href="#et-ensuite_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        Et ensuite ?
       
     </span>
   </a>
@@ -1755,10 +1787,10 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#3-summary" class="md-nav__link">
+  <a href="#3-resume" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Summary
+        3. Résumé
       
     </span>
   </a>
@@ -1973,7 +2005,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Adding tests
+    Partie 4 : Ajout de tests
   
 
     
@@ -2001,7 +2033,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Questionnaire de retour d'expérience
   
 
     
@@ -2029,7 +2061,7 @@
   <span class="md-ellipsis">
     
   
-    Next Steps
+    Prochaines Étapes
   
 
     
@@ -2076,7 +2108,7 @@
   <span class="md-ellipsis">
     
   
-    RNAseq
+    Nextflow pour l'ARNseq
   
 
     
@@ -2092,7 +2124,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    RNAseq
+    Nextflow pour l'ARNseq
   
 
           </label>
@@ -2112,7 +2144,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for RNAseq
+    Nextflow pour l'ARNseq
   
 
     
@@ -2168,7 +2200,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Method overview and manual testing
+    Partie 1 : Aperçu de la méthode et tests manuels
   
 
     
@@ -2196,7 +2228,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Single-sample implementation
+    Partie 2 : Implémentation pour un seul échantillon
   
 
     
@@ -2224,7 +2256,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Multi-sample paired-end implementation
+    Partie 3 : Implémentation multi-échantillons en lecture appariée
   
 
     
@@ -2252,7 +2284,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Questionnaire de retour d'expérience
   
 
     
@@ -2280,7 +2312,7 @@
   <span class="md-ellipsis">
     
   
-    Next Steps
+    Prochaines Étapes
   
 
     
@@ -2327,7 +2359,7 @@
   <span class="md-ellipsis">
     
   
-    Imaging
+    Nextflow run pour l'imagerie
   
 
     
@@ -2343,7 +2375,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Imaging
+    Nextflow run pour l'imagerie
   
 
           </label>
@@ -2363,7 +2395,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow run for Imaging
+    Nextflow run pour l'imagerie
   
 
     
@@ -2419,7 +2451,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run basic operations
+    Partie 1 : Exécuter des opérations de base
   
 
     
@@ -2447,7 +2479,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Run nf-core/molkart
+    Partie 2 : Exécuter nf-core/molkart
   
 
     
@@ -2475,7 +2507,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Organizing inputs
+    Partie 3 : Organisation des entrées
   
 
     
@@ -2503,7 +2535,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Configuration
+    Partie 4 : Configuration
   
 
     
@@ -2531,7 +2563,7 @@
   <span class="md-ellipsis">
     
   
-    Survey
+    Sondage
   
 
     
@@ -2559,7 +2591,7 @@
   <span class="md-ellipsis">
     
   
-    Next steps
+    Prochaines étapes
   
 
     
@@ -2613,7 +2645,7 @@
   <span class="md-ellipsis">
     
   
-    Side Quests
+    Quêtes secondaires
   
 
     
@@ -2629,7 +2661,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Side Quests
+    Quêtes secondaires
   
 
           </label>
@@ -2649,7 +2681,7 @@
   <span class="md-ellipsis">
     
   
-    Side Quests
+    Quêtes secondaires
   
 
     
@@ -2705,7 +2737,7 @@
   <span class="md-ellipsis">
     
   
-    Development Environment
+    Environnement de Développement
   
 
     
@@ -2733,7 +2765,7 @@
   <span class="md-ellipsis">
     
   
-    Metadata and meta maps
+    Métadonnées et meta maps
   
 
     
@@ -2761,7 +2793,7 @@
   <span class="md-ellipsis">
     
   
-    File input processing
+    Traitement des fichiers en entrée
   
 
     
@@ -2789,7 +2821,7 @@
   <span class="md-ellipsis">
     
   
-    Splitting and Grouping
+    Division et regroupement
   
 
     
@@ -2817,7 +2849,7 @@
   <span class="md-ellipsis">
     
   
-    Workflows of Workflows
+    Workflows de workflows
   
 
     
@@ -2845,7 +2877,7 @@
   <span class="md-ellipsis">
     
   
-    Debugging Workflows
+    Débogage des Workflows
   
 
     
@@ -2873,7 +2905,7 @@
   <span class="md-ellipsis">
     
   
-    Essential Nextflow Scripting Patterns
+    Modèles de Script Nextflow Essentiels
   
 
     
@@ -2901,7 +2933,7 @@
   <span class="md-ellipsis">
     
   
-    Testing with nf-test
+    Tests avec nf-test
   
 
     
@@ -2947,7 +2979,7 @@
   <span class="md-ellipsis">
     
   
-    Training Collections
+    Collections de Formation
   
 
     
@@ -2963,7 +2995,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Training Collections
+    Collections de Formation
   
 
           </label>
@@ -2983,7 +3015,7 @@
   <span class="md-ellipsis">
     
   
-    Training Collections
+    Collections de Formation
   
 
     
@@ -3011,7 +3043,7 @@
   <span class="md-ellipsis">
     
   
-    The Architect's Toolkit I
+    La Boîte à Outils de l'Architecte I
   
 
     
@@ -3132,7 +3164,7 @@
   <span class="md-ellipsis">
     
   
-    Training environment
+    Options d'environnement
   
 
     
@@ -3148,7 +3180,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Training environment
+    Options d'environnement
   
 
           </label>
@@ -3168,7 +3200,7 @@
   <span class="md-ellipsis">
     
   
-    Environment options
+    Options d'environnement
   
 
     
@@ -3224,7 +3256,7 @@
   <span class="md-ellipsis">
     
   
-    Local Devcontainers
+    Devcontainers locaux
   
 
     
@@ -3252,7 +3284,7 @@
   <span class="md-ellipsis">
     
   
-    Manual installation
+    Installation manuelle
   
 
     
@@ -3288,7 +3320,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow versions
+    Versions de Nextflow
   
 
     
@@ -3316,7 +3348,7 @@
   <span class="md-ellipsis">
     
   
-    The Hello pipeline
+    Le pipeline Hello
   
 
     
@@ -3358,22 +3390,22 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#0-warmup" class="md-nav__link">
+  <a href="#0-echauffement" class="md-nav__link">
     <span class="md-ellipsis">
       
-        0. Warmup
+        0. Échauffement
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="0. Warmup">
+    <nav class="md-nav" aria-label="0. Échauffement">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#takeaway" class="md-nav__link">
+  <a href="#a-retenir" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        À retenir
       
     </span>
   </a>
@@ -3381,10 +3413,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next" class="md-nav__link">
+  <a href="#et-ensuite" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        Et ensuite ?
       
     </span>
   </a>
@@ -3395,22 +3427,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#1-move-processes-into-modules" class="md-nav__link">
+  <a href="#1-deplacer-les-processus-dans-des-modules" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Move processes into modules
+        1. Déplacer les processus dans des modules
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Move processes into modules">
+    <nav class="md-nav" aria-label="1. Déplacer les processus dans des modules">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11-create-a-module-for-the-samtools_index-process" class="md-nav__link">
+  <a href="#11-creer-un-module-pour-le-processus-samtools_index" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1. Create a module for the SAMTOOLS_INDEX process
+        1.1. Créer un module pour le processus SAMTOOLS_INDEX
       
     </span>
   </a>
@@ -3418,10 +3450,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#12-create-modules-for-the-gatk_haplotypecaller-and-gatk_jointgenotyping-processes" class="md-nav__link">
+  <a href="#12-creer-des-modules-pour-les-processus-gatk_haplotypecaller-et-gatk_jointgenotyping" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2. Create modules for the GATK_HAPLOTYPECALLER and GATK_JOINTGENOTYPING processes
+        1.2. Créer des modules pour les processus GATK_HAPLOTYPECALLER et GATK_JOINTGENOTYPING
       
     </span>
   </a>
@@ -3429,10 +3461,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway_1" class="md-nav__link">
+  <a href="#a-retenir_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        À retenir
       
     </span>
   </a>
@@ -3440,10 +3472,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next_1" class="md-nav__link">
+  <a href="#et-ensuite_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        Et ensuite ?
       
     </span>
   </a>
@@ -3454,22 +3486,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#2-test-the-modularized-workflow" class="md-nav__link">
+  <a href="#2-tester-le-workflow-modularise" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Test the modularized workflow
+        2. Tester le workflow modularisé
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. Test the modularized workflow">
+    <nav class="md-nav" aria-label="2. Tester le workflow modularisé">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#takeaway_2" class="md-nav__link">
+  <a href="#a-retenir_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        À retenir
       
     </span>
   </a>
@@ -3477,10 +3509,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next_2" class="md-nav__link">
+  <a href="#et-ensuite_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        Et ensuite ?
       
     </span>
   </a>
@@ -3491,10 +3523,10 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#3-summary" class="md-nav__link">
+  <a href="#3-resume" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Summary
+        3. Résumé
       
     </span>
   </a>
@@ -3738,34 +3770,44 @@
                 
                   
 
+ 
+<a
+  href="https://github.com/nextflow-io/training/edit/master/docs/nf4_science/genomics/03_modules.md"
+  title="Editer cette page"
+  class="md-content__button md-icon"
+  rel="edit"
+>
+   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+</a>
+   
+<a
+  href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md"
+  title="Improve translation"
+  class="md-content__button md-icon"
+>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 1H3c-1.1 0-2 .9-2 2v12l3-3h5v-1c0-2.2 1.79-4 4-4V3c0-1.1-.9-2-2-2m0 3H9.5c-.34 1.19-.96 2.3-1.82 3.26l-.02.02 1.26 1.25-.37 1.01L7 8l-2.5 2.5-.69-.73 2.53-2.49A8.6 8.6 0 0 1 4.86 5h.99c.31.6.69 1.17 1.15 1.68A7.7 7.7 0 0 0 8.57 4H3V3h3.5V2h1v1H11zm10 5h-8c-1.1 0-2 .9-2 2v7c0 1.1.9 2 2 2h7l3 3V11c0-1.1-.9-2-2-2m-1.37 10-.85-2.25h-3.56L14.38 19h-1.5l3.37-9h1.5l3.38 9zM17 12l1.22 3.25h-2.43z"/></svg>
+</a>
+ 
 
-  
-    <a href="https://github.com/nextflow-io/training/edit/master/docs/nf4_science/genomics/03_modules.md" title="Editer cette page" class="md-content__button md-icon" rel="edit">
-      
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
-    </a>
-  
-  
-
-
-<h1 id="part-3-moving-code-into-modules">Part 3: Moving code into modules<a class="headerlink" href="#part-3-moving-code-into-modules" title="Permanent link">&para;</a></h1>
-<p>In the first part of this course, you built a variant calling pipeline that was completely linear and processed each sample's data independently of the others.</p>
-<p>In the second part, we showed you how to use channels and channel operators to implement joint variant calling with GATK, building on the pipeline from Part 1.</p>
-<p>In this part, we'll show you how to convert the code in that workflow into modules. To follow this part of the training, you should have completed Part 1 and Part 2, as well as <a href="../../../hello_nextflow/hello_modules.md">Hello Modules</a>, which covers the basics of modules.</p>
+<h1 id="partie-3-deplacer-le-code-dans-des-modules">Partie 3 : Déplacer le code dans des modules<a class="headerlink" href="#partie-3-deplacer-le-code-dans-des-modules" title="Permanent link">&para;</a></h1>
+<p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Traduction assistée par IA - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">en savoir plus et suggérer des améliorations</a></span></p>
+<p>Dans la première partie de cette formation, vous avez construit un pipeline d'appel de variants complètement linéaire qui traitait les données de chaque échantillon indépendamment des autres.</p>
+<p>Dans la deuxième partie, nous vous avons montré comment utiliser les canaux et les opérateurs de canaux pour implémenter l'appel de variants joint avec GATK, en vous appuyant sur le pipeline de la Partie 1.</p>
+<p>Dans cette partie, nous allons vous montrer comment convertir le code de ce workflow en modules. Pour suivre cette partie de la formation, vous devriez avoir terminé la Partie 1 et la Partie 2, ainsi que <a href="../../../hello_nextflow/hello_modules.md">Hello Modules</a>, qui couvre les bases des modules.</p>
 <hr />
-<h2 id="0-warmup">0. Warmup<a class="headerlink" href="#0-warmup" title="Permanent link">&para;</a></h2>
-<p>When we started developing our workflow, we put everything in one single code file.
-Now it's time to tackle <strong>modularizing</strong> our code, <em>i.e.</em> extracting the process definitions into modules.</p>
-<p>We're going to start with the same workflow as in Part 2, which we've provided for you in the file <code>genomics-3.nf</code>.</p>
+<h2 id="0-echauffement">0. Échauffement<a class="headerlink" href="#0-echauffement" title="Permanent link">&para;</a></h2>
+<p>Lorsque nous avons commencé à développer notre workflow, nous avons tout mis dans un seul fichier de code.
+Il est maintenant temps de s'attaquer à la <strong>modularisation</strong> de notre code, <em>c'est-à-dire</em> extraire les définitions de processus dans des modules.</p>
+<p>Nous allons commencer avec le même workflow que dans la Partie 2, que nous vous avons fourni dans le fichier <code>genomics-3.nf</code>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Make sure you're in the correct working directory:
+<p>Assurez-vous d'être dans le bon répertoire de travail :
  <code>cd /workspaces/training/nf4-science/genomics</code></p>
 </div>
-<p>Run the workflow to verify the starting point:</p>
+<p>Exécutez le workflow pour vérifier le point de départ :</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>genomics-3.nf<span class="w"> </span>-resume
 </code></pre></div>
-<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><span class="filename">Sortie</span><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="go">Launching `genomics-3.nf` [serene_borg] DSL2 - revision: 0cbebb67a1</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
@@ -3774,21 +3816,21 @@ Now it's time to tackle <strong>modularizing</strong> our code, <em>i.e.</em> ex
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="go">[53/b9d342] GATK_HAPLOTYPECALLER (1) | 3 of 3 ✔</span>
 <a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="go">[0c/fa6d15] GATK_JOINTGENOTYPING     | 1 of 1 ✔</span>
 </code></pre></div>
-<p>There will now be a <code>work</code> directory and a <code>results_genomics</code> directory inside your project directory.</p>
-<h3 id="takeaway">Takeaway<a class="headerlink" href="#takeaway" title="Permanent link">&para;</a></h3>
-<p>You're ready to start modularizing your workflow.</p>
-<h3 id="whats-next">What's next?<a class="headerlink" href="#whats-next" title="Permanent link">&para;</a></h3>
-<p>Move the Genomics workflow's processes into modules.</p>
+<p>Il y aura maintenant un répertoire <code>work</code> et un répertoire <code>results_genomics</code> à l'intérieur de votre répertoire de projet.</p>
+<h3 id="a-retenir">À retenir<a class="headerlink" href="#a-retenir" title="Permanent link">&para;</a></h3>
+<p>Vous êtes prêt·e à commencer la modularisation de votre workflow.</p>
+<h3 id="et-ensuite">Et ensuite ?<a class="headerlink" href="#et-ensuite" title="Permanent link">&para;</a></h3>
+<p>Déplacer les processus du workflow Genomics dans des modules.</p>
 <hr />
-<h2 id="1-move-processes-into-modules">1. Move processes into modules<a class="headerlink" href="#1-move-processes-into-modules" title="Permanent link">&para;</a></h2>
-<p>As you learned in <a href="../../../hello_nextflow/hello_modules.md">Hello Modules</a>, you can create a module simply by copying the process definition into its own file, in any directory, and you can name that file anything you want.</p>
-<p>For reasons that will become clear later (in particular when we come to testing), in this training we'll follow the convention of naming the file <code>main.nf</code>, and placing it in a directory structure named after the tool kit and the command.</p>
-<h3 id="11-create-a-module-for-the-samtools_index-process">1.1. Create a module for the <code>SAMTOOLS_INDEX</code> process<a class="headerlink" href="#11-create-a-module-for-the-samtools_index-process" title="Permanent link">&para;</a></h3>
-<p>In the case of the <code>SAMTOOLS_INDEX</code> process, 'samtools' is the toolkit and 'index' is the command. So, we'll create a directory structure <code>modules/samtools/index</code> and put the <code>SAMTOOLS_INDEX</code> process definition in the <code>main.nf</code> file inside that directory.</p>
+<h2 id="1-deplacer-les-processus-dans-des-modules">1. Déplacer les processus dans des modules<a class="headerlink" href="#1-deplacer-les-processus-dans-des-modules" title="Permanent link">&para;</a></h2>
+<p>Comme vous l'avez appris dans <a href="../../../hello_nextflow/hello_modules.md">Hello Modules</a>, vous pouvez créer un module simplement en copiant la définition du processus dans son propre fichier, dans n'importe quel répertoire, et vous pouvez nommer ce fichier comme vous le souhaitez.</p>
+<p>Pour des raisons qui deviendront claires plus tard (en particulier lorsque nous aborderons les tests), dans cette formation nous suivrons la convention de nommer le fichier <code>main.nf</code>, et de le placer dans une structure de répertoires nommée d'après la boîte à outils et la commande.</p>
+<h3 id="11-creer-un-module-pour-le-processus-samtools_index">1.1. Créer un module pour le processus <code>SAMTOOLS_INDEX</code><a class="headerlink" href="#11-creer-un-module-pour-le-processus-samtools_index" title="Permanent link">&para;</a></h3>
+<p>Dans le cas du processus <code>SAMTOOLS_INDEX</code>, 'samtools' est la boîte à outils et 'index' est la commande. Nous allons donc créer une structure de répertoires <code>modules/samtools/index</code> et placer la définition du processus <code>SAMTOOLS_INDEX</code> dans le fichier <code>main.nf</code> à l'intérieur de ce répertoire.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>modules/samtools/index
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>touch<span class="w"> </span>modules/samtools/index/main.nf
 </code></pre></div>
-<p>Open the <code>main.nf</code> file and copy the <code>SAMTOOLS_INDEX</code> process definition into it.</p>
+<p>Ouvrez le fichier <code>main.nf</code> et copiez-y la définition du processus <code>SAMTOOLS_INDEX</code>.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/samtools/index/main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-3-3"> 3</a></span>
@@ -3807,7 +3849,7 @@ Now it's time to tackle <strong>modularizing</strong> our code, <em>i.e.</em> ex
 <span class="normal"><a href="#__codelineno-3-16">16</a></span>
 <span class="normal"><a href="#__codelineno-3-17">17</a></span>
 <span class="normal"><a href="#__codelineno-3-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="cm">/*</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="cm"> * Generate BAM index file</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="cm"> * Générer le fichier d&#39;index BAM</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="cm"> */</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="n">process</span><span class="w"> </span><span class="n">SAMTOOLS_INDEX</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-3-5" name="__codelineno-3-5"></a>
@@ -3825,8 +3867,8 @@ Now it's time to tackle <strong>modularizing</strong> our code, <em>i.e.</em> ex
 <a id="__codelineno-3-17" name="__codelineno-3-17"></a><span class="s2">    &quot;&quot;&quot;</span>
 <a id="__codelineno-3-18" name="__codelineno-3-18"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>Then, remove the <code>SAMTOOLS_INDEX</code> process definition from <code>genomics-3.nf</code>, and add an import declaration for the module before the next process definition, like this:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">After</label><label for="__tabbed_1_2">Before</label></div>
+<p>Ensuite, supprimez la définition du processus <code>SAMTOOLS_INDEX</code> de <code>genomics-3.nf</code>, et ajoutez une déclaration d'import pour le module avant la définition du processus suivant, comme ceci :</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Après</label><label for="__tabbed_1_2">Avant</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">genomics-3.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
@@ -3835,11 +3877,11 @@ Now it's time to tackle <strong>modularizing</strong> our code, <em>i.e.</em> ex
 <span class="normal"><a href="#__codelineno-4-4">4</a></span>
 <span class="normal"><a href="#__codelineno-4-5">5</a></span>
 <span class="normal"><a href="#__codelineno-4-6">6</a></span>
-<span class="normal"><a href="#__codelineno-4-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="hll"><span class="c1">// Include modules</span>
+<span class="normal"><a href="#__codelineno-4-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="hll"><span class="c1">// Inclure les modules</span>
 </span><a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="hll"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">SAMTOOLS_INDEX</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/samtools/index/main.nf&#39;</span>
 </span><a id="__codelineno-4-3" name="__codelineno-4-3"></a>
 <a id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="cm">/*</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="cm"> * Call variants with GATK HaplotypeCaller</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="cm"> * Appeler les variants avec GATK HaplotypeCaller</span>
 <a id="__codelineno-4-6" name="__codelineno-4-6"></a><span class="cm"> */</span>
 <a id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="n">process</span><span class="w"> </span><span class="n">GATK_HAPLOTYPECALLER</span><span class="w"> </span><span class="o">{</span>
 </code></pre></div></td></tr></table></div>
@@ -3849,18 +3891,18 @@ Now it's time to tackle <strong>modularizing</strong> our code, <em>i.e.</em> ex
 <span class="normal"><a href="#__codelineno-5-2">2</a></span>
 <span class="normal"><a href="#__codelineno-5-3">3</a></span>
 <span class="normal"><a href="#__codelineno-5-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="hll"><span class="cm">/*</span>
-</span><a id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="cm"> * Call variants with GATK HaplotypeCaller</span>
+</span><a id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="cm"> * Appeler les variants avec GATK HaplotypeCaller</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="cm"> */</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="n">process</span><span class="w"> </span><span class="n">GATK_HAPLOTYPECALLER</span><span class="w"> </span><span class="o">{</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
 </div>
-<p>You can now run the workflow again, and it should still work the same way as before. If you supply the <code>-resume</code> flag, no new tasks should even need to be run:</p>
+<p>Vous pouvez maintenant exécuter à nouveau le workflow, et il devrait fonctionner de la même manière qu'auparavant. Si vous fournissez l'option <code>-resume</code>, aucune nouvelle tâche ne devrait même avoir besoin d'être exécutée :</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>genomics-3.nf<span class="w"> </span>-resume
 </code></pre></div>
 <details class="success">
-<summary>Command output</summary>
+<summary>Sortie de la commande</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="go">Launching `genomics-3.nf` [sleepy_snyder] DSL2 - revision: aa68d06c43</span>
@@ -3870,20 +3912,20 @@ Now it's time to tackle <strong>modularizing</strong> our code, <em>i.e.</em> ex
 <a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="go">[0c/fa6d15] GATK_JOINTGENOTYPING     | 1 of 1, cached: 1 ✔</span>
 </code></pre></div>
 </details>
-<h3 id="12-create-modules-for-the-gatk_haplotypecaller-and-gatk_jointgenotyping-processes">1.2. Create modules for the <code>GATK_HAPLOTYPECALLER</code> and <code>GATK_JOINTGENOTYPING</code> processes<a class="headerlink" href="#12-create-modules-for-the-gatk_haplotypecaller-and-gatk_jointgenotyping-processes" title="Permanent link">&para;</a></h3>
-<p>Repeat the same steps for the remaining processes.
-For each process:</p>
+<h3 id="12-creer-des-modules-pour-les-processus-gatk_haplotypecaller-et-gatk_jointgenotyping">1.2. Créer des modules pour les processus <code>GATK_HAPLOTYPECALLER</code> et <code>GATK_JOINTGENOTYPING</code><a class="headerlink" href="#12-creer-des-modules-pour-les-processus-gatk_haplotypecaller-et-gatk_jointgenotyping" title="Permanent link">&para;</a></h3>
+<p>Répétez les mêmes étapes pour les processus restants.
+Pour chaque processus :</p>
 <ol>
-<li>Create the directory structure (<code>modules/gatk/haplotypecaller/</code> and <code>modules/gatk/jointgenotyping/</code>)</li>
-<li>Create a <code>main.nf</code> file containing the process definition</li>
-<li>Remove the process definition from <code>genomics-3.nf</code></li>
-<li>Add an import declaration for the module</li>
+<li>Créez la structure de répertoires (<code>modules/gatk/haplotypecaller/</code> et <code>modules/gatk/jointgenotyping/</code>)</li>
+<li>Créez un fichier <code>main.nf</code> contenant la définition du processus</li>
+<li>Supprimez la définition du processus de <code>genomics-3.nf</code></li>
+<li>Ajoutez une déclaration d'import pour le module</li>
 </ol>
-<p>Once you're done, check that your modules directory structure is correct by running:</p>
+<p>Une fois terminé, vérifiez que la structure de votre répertoire modules est correcte en exécutant :</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>tree<span class="w"> </span>modules/
 </code></pre></div>
 <details class="abstract">
-<summary>Directory contents</summary>
+<summary>Contenu du répertoire</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="go">modules/</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="go">├── gatk</span>
 <a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="go">│   ├── haplotypecaller</span>
@@ -3897,23 +3939,23 @@ For each process:</p>
 <a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="go">5 directories, 3 files</span>
 </code></pre></div>
 </details>
-<p>You should also have something like this in the main workflow file, after the parameters section:</p>
+<p>Vous devriez également avoir quelque chose comme ceci dans le fichier workflow principal, après la section des paramètres :</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>include { SAMTOOLS_INDEX } from &#39;./modules/samtools/index/main.nf&#39;
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>include { GATK_HAPLOTYPECALLER } from &#39;./modules/gatk/haplotypecaller/main.nf&#39;
 <a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>include { GATK_JOINTGENOTYPING } from &#39;./modules/gatk/jointgenotyping/main.nf&#39;
 <a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>
 <a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>workflow {
 </code></pre></div>
-<h3 id="takeaway_1">Takeaway<a class="headerlink" href="#takeaway_1" title="Permanent link">&para;</a></h3>
-<p>You've practiced modularizing a workflow, with the genomics workflow as an example.</p>
-<h3 id="whats-next_1">What's next?<a class="headerlink" href="#whats-next_1" title="Permanent link">&para;</a></h3>
-<p>Test the modularized workflow.</p>
+<h3 id="a-retenir_1">À retenir<a class="headerlink" href="#a-retenir_1" title="Permanent link">&para;</a></h3>
+<p>Vous vous êtes exercé·e à modulariser un workflow, avec le workflow génomique comme exemple.</p>
+<h3 id="et-ensuite_1">Et ensuite ?<a class="headerlink" href="#et-ensuite_1" title="Permanent link">&para;</a></h3>
+<p>Tester le workflow modularisé.</p>
 <hr />
-<h2 id="2-test-the-modularized-workflow">2. Test the modularized workflow<a class="headerlink" href="#2-test-the-modularized-workflow" title="Permanent link">&para;</a></h2>
-<p>Run the modularized workflow to verify everything still works.</p>
+<h2 id="2-tester-le-workflow-modularise">2. Tester le workflow modularisé<a class="headerlink" href="#2-tester-le-workflow-modularise" title="Permanent link">&para;</a></h2>
+<p>Exécutez le workflow modularisé pour vérifier que tout fonctionne toujours.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>genomics-3.nf<span class="w"> </span>-resume
 </code></pre></div>
-<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><span class="filename">Sortie</span><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
 <a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="go">Launching `genomics-3.nf` [astonishing_venter] DSL2 - revision: ca27264c13</span>
 <a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>
@@ -3921,9 +3963,9 @@ For each process:</p>
 <a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="go">[53/b9d342] GATK_HAPLOTYPECALLER (3) | 3 of 3, cached: 3 ✔</span>
 <a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="go">[0c/fa6d15] GATK_JOINTGENOTYPING     | 1 of 1, cached: 1 ✔</span>
 </code></pre></div>
-<p>Everything still works, including the resumability of the pipeline.
-The results continue to be published to the <code>results_genomics</code> directory.</p>
-<div class="highlight"><span class="filename">Directory contents</span><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="go">results_genomics/</span>
+<p>Tout fonctionne toujours, y compris la capacité de reprise du pipeline.
+Les résultats continuent d'être publiés dans le répertoire <code>results_genomics</code>.</p>
+<div class="highlight"><span class="filename">Contenu du répertoire</span><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="go">results_genomics/</span>
 <a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="go">├── family_trio.joint.vcf</span>
 <a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="go">├── family_trio.joint.vcf.idx</span>
 <a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="go">├── gvcf</span>
@@ -3941,19 +3983,19 @@ The results continue to be published to the <code>results_genomics</code> direct
 <a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a><span class="go">    ├── reads_son.bam</span>
 <a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a><span class="go">    └── reads_son.bam.bai</span>
 </code></pre></div>
-<h3 id="takeaway_2">Takeaway<a class="headerlink" href="#takeaway_2" title="Permanent link">&para;</a></h3>
-<p>You've modularized a workflow and verified it still works the same way as before.</p>
-<h3 id="whats-next_2">What's next?<a class="headerlink" href="#whats-next_2" title="Permanent link">&para;</a></h3>
-<p>Review what you've learned and look ahead to testing.</p>
+<h3 id="a-retenir_2">À retenir<a class="headerlink" href="#a-retenir_2" title="Permanent link">&para;</a></h3>
+<p>Vous avez modularisé un workflow et vérifié qu'il fonctionne toujours de la même manière qu'auparavant.</p>
+<h3 id="et-ensuite_2">Et ensuite ?<a class="headerlink" href="#et-ensuite_2" title="Permanent link">&para;</a></h3>
+<p>Examiner ce que vous avez appris et anticiper les tests.</p>
 <hr />
-<h2 id="3-summary">3. Summary<a class="headerlink" href="#3-summary" title="Permanent link">&para;</a></h2>
-<p>You've modularized the workflow, and nothing has changed to how the pipeline works.
-This is intentional: you've restructured the code without impacting its function.</p>
-<p>The modules contain only the process logic, making them clean and reusable.
-The main script controls what gets published and where, while modules remain focused on their computational task.</p>
-<p>You've laid a foundation for things that will make your code easier to maintain.
-For example, you can now add tests to your pipeline using the nf-test framework.
-This is what we'll look at in the next part of this course.</p><style type="text/css">.quiz {
+<h2 id="3-resume">3. Résumé<a class="headerlink" href="#3-resume" title="Permanent link">&para;</a></h2>
+<p>Vous avez modularisé le workflow, et rien n'a changé dans le fonctionnement du pipeline.
+C'est intentionnel : vous avez restructuré le code sans impacter sa fonction.</p>
+<p>Les modules contiennent uniquement la logique des processus, les rendant propres et réutilisables.
+Le script principal contrôle ce qui est publié et où, tandis que les modules restent concentrés sur leur tâche de calcul.</p>
+<p>Vous avez posé les bases de choses qui rendront votre code plus facile à maintenir.
+Par exemple, vous pouvez maintenant ajouter des tests à votre pipeline en utilisant le framework nf-test.
+C'est ce que nous examinerons dans la prochaine partie de cette formation.</p><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
   margin: 1rem 0;
@@ -5470,6 +5512,9 @@ window.mkdocsQuizConfig = {
 
 
 
+  
+  
+
 
 
   
@@ -5500,7 +5545,7 @@ window.mkdocsQuizConfig = {
       <nav class="md-footer__inner md-grid" aria-label="Pied de page" >
         
           
-          <a href="../02_joint_calling/" class="md-footer__link md-footer__link--prev" aria-label="Précédent: Part 2: Joint calling on a cohort">
+          <a href="../02_joint_calling/" class="md-footer__link md-footer__link--prev" aria-label="Précédent: Partie 2 : Appel conjoint de variants sur une cohorte">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -5510,20 +5555,20 @@ window.mkdocsQuizConfig = {
                 Précédent
               </span>
               <div class="md-ellipsis">
-                Part 2: Joint calling on a cohort
+                Partie 2 : Appel conjoint de variants sur une cohorte
               </div>
             </div>
           </a>
         
         
           
-          <a href="../04_testing/" class="md-footer__link md-footer__link--next" aria-label="Suivant: Part 4: Adding tests">
+          <a href="../04_testing/" class="md-footer__link md-footer__link--next" aria-label="Suivant: Partie 4 : Ajout de tests">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Suivant
               </span>
               <div class="md-ellipsis">
-                Part 4: Adding tests
+                Partie 4 : Ajout de tests
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -5600,8 +5645,8 @@ window.mkdocsQuizConfig = {
   
 
 
-<h4>Cookie consent</h4>
-<p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our training materials better. Find out more on <a href="https://seqera.io/privacy-policy/#cookies" target="_blank" rel="noopener">how we use cookies</a>.</p>
+<h4>Consentement aux cookies</h4>
+<p>Nous utilisons des cookies pour reconnaître vos visites répétées et vos préférences, ainsi que pour mesurer l'efficacité de notre documentation et déterminer si les utilisateur·rice·s trouvent ce qu'ils recherchent. Avec votre consentement, vous nous aidez à améliorer nos supports de formation. En savoir plus sur <a href="https://seqera.io/privacy-policy/#cookies" target="_blank" rel="noopener">notre utilisation des cookies</a>.</p>
 <input class="md-toggle" type="checkbox" id="__settings" >
 <div class="md-consent__settings">
   <ul class="task-list">
@@ -5685,12 +5730,16 @@ window.mkdocsQuizConfig = {
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}, "version": {"alias": true, "provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}, "version": {"alias": true, "provider": "mike"}}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
-        <script src="../../../../assets/javascripts/posthog.js"></script>
+        <script src="../../../assets/javascripts/consent-sync.js"></script>
+      
+        <script src="../../../assets/javascripts/posthog.js"></script>
+      
+        <script src="../../../assets/javascripts/language-picker.js"></script>
       
     
   </body>

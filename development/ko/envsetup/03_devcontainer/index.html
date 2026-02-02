@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://training.nextflow.io/0.dev/ko/envsetup/03_devcontainer/">
+        <link rel="canonical" href="https://training.nextflow.io/ko/envsetup/03_devcontainer/">
       
       
         <link rel="prev" href="../01_setup/">
@@ -18,33 +18,41 @@
       
       
         
-          <link rel="alternate" href="../../../envsetup/03_devcontainer/" hreflang="en">
+          <link rel="alternate" href="/" hreflang="en">
         
-          <link rel="alternate" href="../../../pt/envsetup/03_devcontainer/" hreflang="pt">
+          <link rel="alternate" href="/de/" hreflang="de">
         
-          <link rel="alternate" href="../../../es/envsetup/03_devcontainer/" hreflang="es">
+          <link rel="alternate" href="/es/" hreflang="es">
         
-          <link rel="alternate" href="../../../fr/envsetup/03_devcontainer/" hreflang="fr">
+          <link rel="alternate" href="/fr/" hreflang="fr">
         
-          <link rel="alternate" href="../../../it/envsetup/03_devcontainer/" hreflang="it">
+          <link rel="alternate" href="/hi/" hreflang="hi">
         
-          <link rel="alternate" href="./" hreflang="ko">
+          <link rel="alternate" href="/it/" hreflang="it">
+        
+          <link rel="alternate" href="/ko/" hreflang="ko">
+        
+          <link rel="alternate" href="/pl/" hreflang="pl">
+        
+          <link rel="alternate" href="/pt/" hreflang="pt">
+        
+          <link rel="alternate" href="/tr/" hreflang="tr">
         
       
       
-      <link rel="icon" href="../../../assets/img/nextflow-icon.png">
+      <link rel="icon" href="../../assets/img/nextflow-icon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
     
     
       
-        <title>Local Devcontainers - training.nextflow.io</title>
+        <title>로컬 Devcontainers - training.nextflow.io</title>
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
   
@@ -108,11 +116,11 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/fonts.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/fonts.css">
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/extra.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/extra.css">
     
-    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
   
@@ -147,7 +155,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#local-devcontainers" class="md-skip">
+        <a href="#devcontainers" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -167,9 +175,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="상단/헤더">
-    <a href="../../" title="training.nextflow.io" class="md-header__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
+    <a href="../.." title="training.nextflow.io" class="md-header__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
       
-  <img src="../../../assets/img/nextflow_logo_dark.png" alt="logo">
+  <img src="../../assets/img/nextflow_logo_dark.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -186,7 +194,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Local Devcontainers
+              로컬 Devcontainers
             
           </span>
         </div>
@@ -233,38 +241,62 @@
       <ul class="md-select__list">
         
           <li class="md-select__item">
-            <a href="../../../envsetup/03_devcontainer/" hreflang="en" class="md-select__link">
+            <a href="/" hreflang="en" class="md-select__link">
               English
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../pt/envsetup/03_devcontainer/" hreflang="pt" class="md-select__link">
-              Português
+            <a href="/de/" hreflang="de" class="md-select__link">
+              deutsch
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../es/envsetup/03_devcontainer/" hreflang="es" class="md-select__link">
-              Español
+            <a href="/es/" hreflang="es" class="md-select__link">
+              español
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../fr/envsetup/03_devcontainer/" hreflang="fr" class="md-select__link">
-              Français
+            <a href="/fr/" hreflang="fr" class="md-select__link">
+              français
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../it/envsetup/03_devcontainer/" hreflang="it" class="md-select__link">
-              Italiano
+            <a href="/hi/" hreflang="hi" class="md-select__link">
+              हिन्दी
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="./" hreflang="ko" class="md-select__link">
-              Korean
+            <a href="/it/" hreflang="it" class="md-select__link">
+              italiano
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/ko/" hreflang="ko" class="md-select__link">
+              한국어
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/pl/" hreflang="pl" class="md-select__link">
+              Polski
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/pt/" hreflang="pt" class="md-select__link">
+              português
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/tr/" hreflang="tr" class="md-select__link">
+              Türkçe
             </a>
           </li>
         
@@ -384,9 +416,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="네비게이션" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../" title="training.nextflow.io" class="md-nav__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
+    <a href="../.." title="training.nextflow.io" class="md-nav__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
       
-  <img src="../../../assets/img/nextflow_logo_dark.png" alt="logo">
+  <img src="../../assets/img/nextflow_logo_dark.png" alt="logo">
 
     </a>
     training.nextflow.io
@@ -413,14 +445,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../" class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Home
+    홈
   
 
     
@@ -522,7 +554,7 @@
   <span class="md-ellipsis">
     
   
-    Getting started
+    시작하기
   
 
     
@@ -550,7 +582,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run basic operations
+    파트 1: 기본 작업 실행
   
 
     
@@ -578,7 +610,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Run real pipelines
+    파트 2: 실제 pipeline 실행
   
 
     
@@ -606,7 +638,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Run configuration
+    파트 3: 실행 구성
   
 
     
@@ -634,7 +666,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    과정 요약
   
 
     
@@ -662,7 +694,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    피드백 설문조사
   
 
     
@@ -772,7 +804,7 @@
   <span class="md-ellipsis">
     
   
-    Getting started
+    시작하기
   
 
     
@@ -800,7 +832,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Hello World
+    파트 1: Hello World
   
 
     
@@ -828,7 +860,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Hello Channels
+    파트 2: Hello Channels
   
 
     
@@ -856,7 +888,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Hello Workflow
+    파트 3: Hello Workflow
   
 
     
@@ -884,7 +916,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Hello Modules
+    파트 4: Hello Modules
   
 
     
@@ -912,7 +944,7 @@
   <span class="md-ellipsis">
     
   
-    Part 5: Hello Containers
+    파트 5: Hello Containers
   
 
     
@@ -940,7 +972,7 @@
   <span class="md-ellipsis">
     
   
-    Part 6: Hello Config
+    파트 6: Hello Config
   
 
     
@@ -968,7 +1000,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    과정 요약
   
 
     
@@ -996,7 +1028,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    피드백 설문조사
   
 
     
@@ -1106,7 +1138,7 @@
   <span class="md-ellipsis">
     
   
-    Getting started
+    시작하기
   
 
     
@@ -1134,7 +1166,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run a demo pipeline
+    파트 1: 데모 파이프라인 실행하기
   
 
     
@@ -1162,7 +1194,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Rewrite Hello for nf-core
+    2부: nf-core용 Hello 재작성
   
 
     
@@ -1190,7 +1222,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Use an nf-core module
+    파트 3: nf-core 모듈 사용하기
   
 
     
@@ -1218,7 +1250,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Make an nf-core module
+    파트 4: nf-core 모듈 만들기
   
 
     
@@ -1246,7 +1278,7 @@
   <span class="md-ellipsis">
     
   
-    Part 5: Input validation
+    파트 5: 입력 검증
   
 
     
@@ -1274,7 +1306,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    교육 과정 요약
   
 
     
@@ -1302,7 +1334,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    피드백 설문조사
   
 
     
@@ -1348,7 +1380,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Science
+    과학을 위한 Nextflow
   
 
     
@@ -1364,7 +1396,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Nextflow for Science
+    과학을 위한 Nextflow
   
 
           </label>
@@ -1384,7 +1416,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Science
+    과학을 위한 Nextflow
   
 
     
@@ -1423,7 +1455,7 @@
   <span class="md-ellipsis">
     
   
-    Genomics
+    유전체학을 위한 Nextflow
   
 
     
@@ -1439,7 +1471,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Genomics
+    유전체학을 위한 Nextflow
   
 
           </label>
@@ -1459,7 +1491,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Genomics
+    유전체학을 위한 Nextflow
   
 
     
@@ -1487,7 +1519,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    오리엔테이션
   
 
     
@@ -1515,7 +1547,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Per-sample variant calling
+    파트 1: 샘플별 변이 호출
   
 
     
@@ -1543,7 +1575,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Joint calling on a cohort
+    파트 2: 코호트에 대한 조인트 콜링
   
 
     
@@ -1571,7 +1603,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Moving code into modules
+    파트 3: 코드를 모듈로 이동하기
   
 
     
@@ -1599,7 +1631,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Adding tests
+    파트 4: 테스트 추가하기
   
 
     
@@ -1627,7 +1659,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    피드백 설문조사
   
 
     
@@ -1655,7 +1687,7 @@
   <span class="md-ellipsis">
     
   
-    Next Steps
+    다음 단계
   
 
     
@@ -1702,7 +1734,7 @@
   <span class="md-ellipsis">
     
   
-    RNAseq
+    RNAseq을 위한 Nextflow
   
 
     
@@ -1718,7 +1750,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    RNAseq
+    RNAseq을 위한 Nextflow
   
 
           </label>
@@ -1738,7 +1770,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for RNAseq
+    RNAseq을 위한 Nextflow
   
 
     
@@ -1766,7 +1798,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    오리엔테이션
   
 
     
@@ -1794,7 +1826,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Method overview and manual testing
+    파트 1: 방법 개요 및 수동 테스트
   
 
     
@@ -1822,7 +1854,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Single-sample implementation
+    파트 2: 단일 샘플 구현
   
 
     
@@ -1850,7 +1882,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Multi-sample paired-end implementation
+    파트 3: 다중 샘플 paired-end 구현
   
 
     
@@ -1878,7 +1910,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    피드백 설문조사
   
 
     
@@ -1906,7 +1938,7 @@
   <span class="md-ellipsis">
     
   
-    Next Steps
+    다음 단계
   
 
     
@@ -1953,7 +1985,7 @@
   <span class="md-ellipsis">
     
   
-    Imaging
+    이미징을 위한 Nextflow 실행
   
 
     
@@ -1969,7 +2001,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Imaging
+    이미징을 위한 Nextflow 실행
   
 
           </label>
@@ -1989,7 +2021,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow run for Imaging
+    이미징을 위한 Nextflow 실행
   
 
     
@@ -2017,7 +2049,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    오리엔테이션
   
 
     
@@ -2045,7 +2077,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run basic operations
+    파트 1: 기본 작업 실행하기
   
 
     
@@ -2073,7 +2105,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Run nf-core/molkart
+    파트 2: nf-core/molkart 실행하기
   
 
     
@@ -2101,7 +2133,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Organizing inputs
+    파트 3: 입력 구성하기
   
 
     
@@ -2129,7 +2161,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Configuration
+    파트 4: 구성
   
 
     
@@ -2157,7 +2189,7 @@
   <span class="md-ellipsis">
     
   
-    Survey
+    설문조사
   
 
     
@@ -2185,7 +2217,7 @@
   <span class="md-ellipsis">
     
   
-    Next steps
+    다음 단계
   
 
     
@@ -2239,7 +2271,7 @@
   <span class="md-ellipsis">
     
   
-    Side Quests
+    사이드 퀘스트
   
 
     
@@ -2255,7 +2287,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Side Quests
+    사이드 퀘스트
   
 
           </label>
@@ -2275,7 +2307,7 @@
   <span class="md-ellipsis">
     
   
-    Side Quests
+    사이드 퀘스트
   
 
     
@@ -2303,7 +2335,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    오리엔테이션
   
 
     
@@ -2331,7 +2363,7 @@
   <span class="md-ellipsis">
     
   
-    Development Environment
+    개발 환경
   
 
     
@@ -2359,7 +2391,7 @@
   <span class="md-ellipsis">
     
   
-    Metadata and meta maps
+    메타데이터와 메타 맵
   
 
     
@@ -2387,7 +2419,7 @@
   <span class="md-ellipsis">
     
   
-    File input processing
+    파일 입력 처리
   
 
     
@@ -2415,7 +2447,7 @@
   <span class="md-ellipsis">
     
   
-    Splitting and Grouping
+    데이터 분할 및 그룹화
   
 
     
@@ -2443,7 +2475,7 @@
   <span class="md-ellipsis">
     
   
-    Workflows of Workflows
+    워크플로우의 워크플로우
   
 
     
@@ -2471,7 +2503,7 @@
   <span class="md-ellipsis">
     
   
-    Debugging Workflows
+    워크플로우 디버깅
   
 
     
@@ -2499,7 +2531,7 @@
   <span class="md-ellipsis">
     
   
-    Essential Nextflow Scripting Patterns
+    필수 Nextflow 스크립팅 패턴
   
 
     
@@ -2527,7 +2559,7 @@
   <span class="md-ellipsis">
     
   
-    Testing with nf-test
+    nf-test로 테스트하기
   
 
     
@@ -2573,7 +2605,7 @@
   <span class="md-ellipsis">
     
   
-    Training Collections
+    교육 컬렉션
   
 
     
@@ -2589,7 +2621,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Training Collections
+    교육 컬렉션
   
 
           </label>
@@ -2609,7 +2641,7 @@
   <span class="md-ellipsis">
     
   
-    Training Collections
+    교육 컬렉션
   
 
     
@@ -2637,7 +2669,7 @@
   <span class="md-ellipsis">
     
   
-    The Architect's Toolkit I
+    Architects toolkit 1
   
 
     
@@ -2721,7 +2753,7 @@
   <span class="md-ellipsis">
     
   
-    Getting help
+    도움말
   
 
     
@@ -2762,7 +2794,7 @@
   <span class="md-ellipsis">
     
   
-    Training environment
+    환경 옵션
   
 
     
@@ -2778,7 +2810,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Training environment
+    환경 옵션
   
 
           </label>
@@ -2798,7 +2830,7 @@
   <span class="md-ellipsis">
     
   
-    환경 설정
+    환경 옵션
   
 
     
@@ -2863,7 +2895,7 @@
   <span class="md-ellipsis">
     
   
-    Local Devcontainers
+    로컬 Devcontainers
   
 
     
@@ -2881,7 +2913,7 @@
   <span class="md-ellipsis">
     
   
-    Local Devcontainers
+    로컬 Devcontainers
   
 
     
@@ -2901,31 +2933,31 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#requirements" class="md-nav__link">
+  <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Requirements
+        요구 사항
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#setup-instructions" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Setup Instructions
+        설정 지침
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Setup Instructions">
+    <nav class="md-nav" aria-label="설정 지침">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#install-the-dev-containers-extension-in-vs-code" class="md-nav__link">
+  <a href="#vs-code-dev-containers" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Install the "Dev Containers" extension in VS Code
+        VS Code에 "Dev Containers" 확장 설치
       
     </span>
   </a>
@@ -2933,10 +2965,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#clone-the-repository" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Clone the repository:
+        저장소 복제:
       
     </span>
   </a>
@@ -2944,10 +2976,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#open-the-repository-in-vs-code" class="md-nav__link">
+  <a href="#vs-code" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Open the repository in VS Code:
+        VS Code에서 저장소 열기:
       
     </span>
   </a>
@@ -2955,10 +2987,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#reopen-in-container" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Reopen in Container
+        컨테이너에서 다시 열기
       
     </span>
   </a>
@@ -2969,28 +3001,28 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#benefits-of-using-devcontainers" class="md-nav__link">
+  <a href="#devcontainers_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Benefits of Using Devcontainers
+        Devcontainers 사용의 이점
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#checking-your-environment" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Checking Your Environment
+        환경 확인
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#troubleshooting" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Troubleshooting
+        문제 해결
       
     </span>
   </a>
@@ -3205,7 +3237,7 @@
   <span class="md-ellipsis">
     
   
-    로컬 설치
+    수동 설치
   
 
     
@@ -3241,7 +3273,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow versions
+    Nextflow 버전
   
 
     
@@ -3269,7 +3301,7 @@
   <span class="md-ellipsis">
     
   
-    The Hello pipeline
+    Hello pipeline
   
 
     
@@ -3311,31 +3343,31 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#requirements" class="md-nav__link">
+  <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Requirements
+        요구 사항
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#setup-instructions" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Setup Instructions
+        설정 지침
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Setup Instructions">
+    <nav class="md-nav" aria-label="설정 지침">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#install-the-dev-containers-extension-in-vs-code" class="md-nav__link">
+  <a href="#vs-code-dev-containers" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Install the "Dev Containers" extension in VS Code
+        VS Code에 "Dev Containers" 확장 설치
       
     </span>
   </a>
@@ -3343,10 +3375,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#clone-the-repository" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Clone the repository:
+        저장소 복제:
       
     </span>
   </a>
@@ -3354,10 +3386,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#open-the-repository-in-vs-code" class="md-nav__link">
+  <a href="#vs-code" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Open the repository in VS Code:
+        VS Code에서 저장소 열기:
       
     </span>
   </a>
@@ -3365,10 +3397,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#reopen-in-container" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Reopen in Container
+        컨테이너에서 다시 열기
       
     </span>
   </a>
@@ -3379,28 +3411,28 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#benefits-of-using-devcontainers" class="md-nav__link">
+  <a href="#devcontainers_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Benefits of Using Devcontainers
+        Devcontainers 사용의 이점
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#checking-your-environment" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Checking Your Environment
+        환경 확인
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#troubleshooting" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Troubleshooting
+        문제 해결
       
     </span>
   </a>
@@ -3644,96 +3676,106 @@
                 
                   
 
+ 
+<a
+  href="https://github.com/nextflow-io/training/edit/master/docs/envsetup/03_devcontainer.md"
+  title="이 페이지를 편집"
+  class="md-content__button md-icon"
+  rel="edit"
+>
+   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+</a>
+   
+<a
+  href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md"
+  title="Improve translation"
+  class="md-content__button md-icon"
+>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 1H3c-1.1 0-2 .9-2 2v12l3-3h5v-1c0-2.2 1.79-4 4-4V3c0-1.1-.9-2-2-2m0 3H9.5c-.34 1.19-.96 2.3-1.82 3.26l-.02.02 1.26 1.25-.37 1.01L7 8l-2.5 2.5-.69-.73 2.53-2.49A8.6 8.6 0 0 1 4.86 5h.99c.31.6.69 1.17 1.15 1.68A7.7 7.7 0 0 0 8.57 4H3V3h3.5V2h1v1H11zm10 5h-8c-1.1 0-2 .9-2 2v7c0 1.1.9 2 2 2h7l3 3V11c0-1.1-.9-2-2-2m-1.37 10-.85-2.25h-3.56L14.38 19h-1.5l3.37-9h1.5l3.38 9zM17 12l1.22 3.25h-2.43z"/></svg>
+</a>
+ 
 
-  
-    <a href="https://github.com/nextflow-io/training/edit/master/docs/envsetup/03_devcontainer.md" title="이 페이지를 편집" class="md-content__button md-icon" rel="edit">
-      
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
-    </a>
-  
-  
-
-
-<h1 id="local-devcontainers">Local Devcontainers<a class="headerlink" href="#local-devcontainers" title="Permanent link">&para;</a></h1>
-<p>If you have a local Docker installation or are happy to install one, the easiest way to work locally with these materials is to use Visual Studio Code's devcontainer feature. This approach provides all the necessary tools and dependencies without requiring manual installation.</p>
-<h2 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h2>
-<p>To use the local devcontainer setup, you'll need:</p>
+<h1 id="devcontainers">로컬 Devcontainers<a class="headerlink" href="#devcontainers" title="Permanent link">&para;</a></h1>
+<p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> AI 지원 번역 - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">자세히 알아보기 및 개선 제안</a></span></p>
+<p>로컬 Docker 설치가 있거나 설치할 의향이 있다면, 이 자료로 로컬에서 작업하는 가장 쉬운 방법은 Visual Studio Code의 devcontainer 기능을 사용하는 것입니다. 이 방식은 수동 설치 없이 필요한 모든 도구와 의존성을 제공합니다.</p>
+<h2 id="_1">요구 사항<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>로컬 devcontainer 설정을 사용하려면 다음이 필요합니다:</p>
 <ul>
 <li><a href="https://code.visualstudio.com/">Visual Studio Code</a></li>
-<li>A local Docker installation, for example:</li>
-<li><a href="https://docs.docker.com/get-docker/">Docker Desktop</a> (for Windows/macOS)</li>
-<li><a href="https://docs.docker.com/engine/install/">Docker Engine</a> (for Linux)</li>
-<li><a href="https://github.com/abiosoft/colima">Colima</a> (alternative for macOS)</li>
-<li><a href="https://docs.docker.com/build/concepts/overview/#install-buildx">Docker Buildx</a> (included in Docker Desktop, but may need separate installation with other Docker setups)</li>
-<li><a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers">Dev Containers extension</a> for VS Code</li>
+<li>로컬 Docker 설치, 예:</li>
+<li><a href="https://docs.docker.com/get-docker/">Docker Desktop</a> (Windows/macOS용)</li>
+<li><a href="https://docs.docker.com/engine/install/">Docker Engine</a> (Linux용)</li>
+<li><a href="https://github.com/abiosoft/colima">Colima</a> (macOS 대안)</li>
+<li><a href="https://docs.docker.com/build/concepts/overview/#install-buildx">Docker Buildx</a> (Docker Desktop에 포함되어 있지만 다른 Docker 설정에서는 별도 설치가 필요할 수 있음)</li>
+<li>VS Code용 <a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers">Dev Containers 확장</a></li>
 </ul>
-<p>Your Docker installation must be running before you attempt to open the devcontainer.</p>
-<p>To verify that Docker buildx is available, run:</p>
+<p>devcontainer를 열기 전에 Docker 설치가 실행 중이어야 합니다.</p>
+<p>Docker buildx가 사용 가능한지 확인하려면 다음을 실행하십시오:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>docker<span class="w"> </span>buildx<span class="w"> </span>version
 </code></pre></div>
-<p>If this command fails, you'll need to install the buildx extension before proceeding.</p>
-<h2 id="setup-instructions">Setup Instructions<a class="headerlink" href="#setup-instructions" title="Permanent link">&para;</a></h2>
-<p>Follow these steps to set up your local environment using VS Code devcontainers:</p>
-<h3 id="install-the-dev-containers-extension-in-vs-code">Install the "Dev Containers" extension in VS Code<a class="headerlink" href="#install-the-dev-containers-extension-in-vs-code" title="Permanent link">&para;</a></h3>
+<p>이 명령이 실패하면 진행하기 전에 buildx 확장을 설치해야 합니다.</p>
+<h2 id="_2">설정 지침<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>VS Code devcontainers를 사용하여 로컬 환경을 설정하려면 다음 단계를 따르십시오:</p>
+<h3 id="vs-code-dev-containers">VS Code에 "Dev Containers" 확장 설치<a class="headerlink" href="#vs-code-dev-containers" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Open VS Code</li>
-<li>Go to Extensions (Ctrl+Shift+X or Cmd+Shift+X on macOS)</li>
-<li>Search for "Dev Containers"</li>
-<li>Click "Install"</li>
+<li>VS Code 열기</li>
+<li>Extensions로 이동 (Ctrl+Shift+X 또는 macOS에서 Cmd+Shift+X)</li>
+<li>"Dev Containers" 검색</li>
+<li>"Install" 클릭</li>
 </ul>
-<p><img alt="Installing Dev Containers extension in VS Code" src="../../../envsetup/img/install_extension.png" /></p>
-<h3 id="clone-the-repository">Clone the repository:<a class="headerlink" href="#clone-the-repository" title="Permanent link">&para;</a></h3>
+<p><img alt="VS Code에서 Dev Containers 확장 프로그램 설치" src="img/install_extension.png" /></p>
+<h3 id="_3">저장소 복제:<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/nextflow-io/training.git
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">cd</span><span class="w"> </span>training
 </code></pre></div>
-<h3 id="open-the-repository-in-vs-code">Open the repository in VS Code:<a class="headerlink" href="#open-the-repository-in-vs-code" title="Permanent link">&para;</a></h3>
+<h3 id="vs-code">VS Code에서 저장소 열기:<a class="headerlink" href="#vs-code" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Launch VS Code</li>
-<li>Select <strong>File -&gt; Open Folder</strong> from the menu</li>
-<li>Navigate to and select the training repository folder you just cloned</li>
-<li>Click <strong>Open</strong></li>
+<li>VS Code 실행</li>
+<li>메뉴에서 <strong>File -&gt; Open Folder</strong> 선택</li>
+<li>방금 복제한 training 저장소 폴더로 이동하여 선택</li>
+<li><strong>Open</strong> 클릭</li>
 </ul>
-<h3 id="reopen-in-container">Reopen in Container<a class="headerlink" href="#reopen-in-container" title="Permanent link">&para;</a></h3>
-<p>If prompted by VS Code to "Reopen in Container", click on it. Alternatively:</p>
+<h3 id="_4">컨테이너에서 다시 열기<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>VS Code에서 "Reopen in Container"라는 메시지가 표시되면 클릭합니다. 또는:</p>
 <ul>
-<li>Press F1 (or Ctrl+Shift+P / Cmd+Shift+P on macOS)</li>
-<li>Type "Dev Containers: Reopen in Container"</li>
-<li><strong>Important</strong>: When prompted to select a configuration, choose the <strong>local-dev</strong> devcontainer configuration</li>
+<li>F1 누르기 (또는 macOS에서 Ctrl+Shift+P / Cmd+Shift+P)</li>
+<li>"Dev Containers: Reopen in Container" 입력</li>
+<li><strong>중요</strong>: 구성을 선택하라는 메시지가 표시되면 <strong>local-dev</strong> devcontainer 구성을 선택합니다</li>
 </ul>
-<p><img alt="Reopen in Container prompt" src="../../../envsetup/img/reopen_prompt.png" /></p>
-<p><img alt="Selecting local configuration" src="../../../envsetup/img/select_local_config.png" /></p>
-<p>Wait for the container to build. This may take a few minutes the first time as it downloads and sets up all the necessary components.</p>
-<p>Once the container is built and running, you'll have a fully configured environment with all the necessary tools installed, including:</p>
+<p><img alt="컨테이너에서 다시 열기 프롬프트" src="img/reopen_prompt.png" /></p>
+<p><img alt="로컬 구성 선택" src="img/select_local_config.png" /></p>
+<p>컨테이너가 빌드될 때까지 기다립니다. 처음에는 필요한 모든 구성 요소를 다운로드하고 설정해야 하므로 몇 분이 걸릴 수 있습니다.</p>
+<p>컨테이너가 빌드되고 실행되면 다음을 포함한 필요한 모든 도구가 설치된 완전히 구성된 환경이 제공됩니다:</p>
 <ul>
 <li>Java</li>
 <li>Nextflow</li>
 <li>Docker</li>
 <li>Git</li>
-<li>And all other dependencies required for the training</li>
+<li>교육에 필요한 기타 모든 의존성</li>
 </ul>
-<p><img alt="VS Code with devcontainer running" src="../../../envsetup/img/running_container.png" /></p>
-<h2 id="benefits-of-using-devcontainers">Benefits of Using Devcontainers<a class="headerlink" href="#benefits-of-using-devcontainers" title="Permanent link">&para;</a></h2>
-<p>Using the devcontainer approach offers several advantages:</p>
+<p><img alt="devcontainer가 실행 중인 VS Code" src="img/running_container.png" /></p>
+<h2 id="devcontainers_1">Devcontainers 사용의 이점<a class="headerlink" href="#devcontainers_1" title="Permanent link">&para;</a></h2>
+<p>devcontainer 방식을 사용하면 여러 가지 이점이 있습니다:</p>
 <ul>
-<li><strong>Consistency</strong>: Ensures a consistent development environment across different machines</li>
-<li><strong>Simplicity</strong>: All dependencies are pre-installed and configured</li>
-<li><strong>Isolation</strong>: The development environment is isolated from your local system</li>
-<li><strong>Reproducibility</strong>: Everyone using the devcontainer gets the same setup</li>
-<li><strong>No manual installation</strong>: No need to manually install Java, Nextflow, and other tools</li>
+<li><strong>일관성</strong>: 다른 머신에서도 일관된 개발 환경 보장</li>
+<li><strong>단순성</strong>: 모든 의존성이 사전 설치되고 구성됨</li>
+<li><strong>격리</strong>: 개발 환경이 로컬 시스템과 격리됨</li>
+<li><strong>재현성</strong>: devcontainer를 사용하는 모든 사람이 동일한 설정을 얻음</li>
+<li><strong>수동 설치 불필요</strong>: Java, Nextflow 및 기타 도구를 수동으로 설치할 필요 없음</li>
 </ul>
-<h2 id="checking-your-environment">Checking Your Environment<a class="headerlink" href="#checking-your-environment" title="Permanent link">&para;</a></h2>
-<p>Once your devcontainer is running, you can verify that everything is set up correctly by running:</p>
+<h2 id="_5">환경 확인<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<p>devcontainer가 실행되면 다음을 실행하여 모든 것이 올바르게 설정되었는지 확인할 수 있습니다:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>nextflow<span class="w"> </span>info
 </code></pre></div>
-<p>This should display the Nextflow version and runtime information, confirming that your environment is properly configured.</p>
-<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
-<p>If you encounter issues with the devcontainer setup:</p>
+<p>Nextflow 버전 및 런타임 정보가 표시되어 환경이 올바르게 구성되었음을 확인할 수 있습니다.</p>
+<h2 id="_6">문제 해결<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<p>devcontainer 설정에 문제가 발생하면:</p>
 <ol>
-<li>Ensure your Docker installation (Docker Desktop, Colima, Docker Engine, etc.) is running before opening the devcontainer</li>
-<li>Check that you've selected the <strong>local-dev</strong> configuration when prompted</li>
-<li>Verify that Docker buildx is installed and working by running <code>docker buildx version</code></li>
-<li>If the container fails to build, try rebuilding it by running the "Dev Containers: Rebuild Container" command</li>
-<li>For persistent issues, refer to the <a href="https://code.visualstudio.com/docs/devcontainers/troubleshooting">VS Code Dev Containers troubleshooting guide</a></li>
+<li>devcontainer를 열기 전에 Docker 설치(Docker Desktop, Colima, Docker Engine 등)가 실행 중인지 확인하십시오</li>
+<li>메시지가 표시되면 <strong>local-dev</strong> 구성을 선택했는지 확인하십시오</li>
+<li><code>docker buildx version</code>을 실행하여 Docker buildx가 설치되어 있고 작동하는지 확인하십시오</li>
+<li>컨테이너 빌드가 실패하면 "Dev Containers: Rebuild Container" 명령을 실행하여 다시 빌드해 보십시오</li>
+<li>지속적인 문제의 경우 <a href="https://code.visualstudio.com/docs/devcontainers/troubleshooting">VS Code Dev Containers 문제 해결 가이드</a>를 참조하십시오</li>
 </ol><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
@@ -5251,6 +5293,9 @@ window.mkdocsQuizConfig = {
 
 
 
+  
+  
+
 
 
   
@@ -5298,13 +5343,13 @@ window.mkdocsQuizConfig = {
         
         
           
-          <a href="../02_local/" class="md-footer__link md-footer__link--next" aria-label="다음: 로컬 설치">
+          <a href="../02_local/" class="md-footer__link md-footer__link--next" aria-label="다음: 수동 설치">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 다음
               </span>
               <div class="md-ellipsis">
-                로컬 설치
+                수동 설치
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -5381,8 +5426,8 @@ window.mkdocsQuizConfig = {
   
 
 
-<h4>Cookie consent</h4>
-<p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our training materials better. Find out more on <a href="https://seqera.io/privacy-policy/#cookies" target="_blank" rel="noopener">how we use cookies</a>.</p>
+<h4>쿠키 동의</h4>
+<p>저희는 귀하의 반복 방문과 선호도를 인식하고, 문서의 효과성과 사용자가 원하는 정보를 찾고 있는지 측정하기 위해 쿠키를 사용합니다. 동의해 주시면 교육 자료를 개선하는 데 도움이 됩니다. <a href="https://seqera.io/privacy-policy/#cookies" target="_blank" rel="noopener">쿠키 사용 방법</a>에 대해 자세히 알아보세요.</p>
 <input class="md-toggle" type="checkbox" id="__settings" >
 <div class="md-consent__settings">
   <ul class="task-list">
@@ -5435,7 +5480,7 @@ window.mkdocsQuizConfig = {
     <label class="task-list-control">
       <input type="checkbox" name="posthog" checked>
       <span class="task-list-indicator"></span>
-      PostHog Analytics
+      PostHog 분석
     </label>
   </li>
 
@@ -5466,12 +5511,16 @@ window.mkdocsQuizConfig = {
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": {"alias": true, "provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": {"alias": true, "provider": "mike"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
-        <script src="../../../assets/javascripts/posthog.js"></script>
+        <script src="../../assets/javascripts/consent-sync.js"></script>
+      
+        <script src="../../assets/javascripts/posthog.js"></script>
+      
+        <script src="../../assets/javascripts/language-picker.js"></script>
       
     
   </body>

@@ -5,27 +5,31 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<link href="https://training.nextflow.io/0.dev/it/training_collections/architects_toolkit_1/" rel="canonical"/>
+<link href="https://training.nextflow.io/it/training_collections/architects_toolkit_1/" rel="canonical"/>
 <link href="../" rel="prev"/>
 <link href="../../help/" rel="next"/>
-<link href="../../../training_collections/architects_toolkit_1/" hreflang="en" rel="alternate"/>
-<link href="../../../pt/training_collections/architects_toolkit_1/" hreflang="pt" rel="alternate"/>
-<link href="../../../es/training_collections/architects_toolkit_1/" hreflang="es" rel="alternate"/>
-<link href="../../../fr/training_collections/architects_toolkit_1/" hreflang="fr" rel="alternate"/>
-<link href="./" hreflang="it" rel="alternate"/>
-<link href="../../../ko/training_collections/architects_toolkit_1/" hreflang="ko" rel="alternate"/>
-<link href="../../../assets/img/nextflow-icon.png" rel="icon"/>
+<link href="/" hreflang="en" rel="alternate"/>
+<link href="/de/" hreflang="de" rel="alternate"/>
+<link href="/es/" hreflang="es" rel="alternate"/>
+<link href="/fr/" hreflang="fr" rel="alternate"/>
+<link href="/hi/" hreflang="hi" rel="alternate"/>
+<link href="/it/" hreflang="it" rel="alternate"/>
+<link href="/ko/" hreflang="ko" rel="alternate"/>
+<link href="/pl/" hreflang="pl" rel="alternate"/>
+<link href="/pt/" hreflang="pt" rel="alternate"/>
+<link href="/tr/" hreflang="tr" rel="alternate"/>
+<link href="../../assets/img/nextflow-icon.png" rel="icon"/>
 <meta content="mkdocs-1.6.1, mkdocs-material-9.7.1" name="generator"/>
-<title>The Architect's Toolkit I - training.nextflow.io</title>
-<link href="../../../assets/stylesheets/main.484c7ddc.min.css" rel="stylesheet"/>
-<link href="../../../assets/stylesheets/palette.ab4e12ef.min.css" rel="stylesheet"/>
+<title>Il Toolkit dell'Architetto I - training.nextflow.io</title>
+<link href="../../assets/stylesheets/main.484c7ddc.min.css" rel="stylesheet"/>
+<link href="../../assets/stylesheets/palette.ab4e12ef.min.css" rel="stylesheet"/>
 <style>:root{--md-admonition-icon--catalog:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M2%202.5A2.5%202.5%200%200%201%204.5%200h8.75a.75.75%200%200%201%20.75.75v12.5a.75.75%200%200%201-.75.75h-2.5a.75.75%200%200%201%200-1.5h1.75v-2h-8a1%201%200%200%200-.714%201.7.75.75%200%201%201-1.072%201.05A2.5%202.5%200%200%201%202%2011.5Zm10.5-1h-8a1%201%200%200%200-1%201v6.708A2.5%202.5%200%200%201%204.5%209h8ZM5%2012.25a.25.25%200%200%201%20.25-.25h3.5a.25.25%200%200%201%20.25.25v3.25a.25.25%200%200%201-.4.2l-1.45-1.087a.25.25%200%200%200-.3%200L5.4%2015.7a.25.25%200%200%201-.4-.2Z%22/%3E%3C/svg%3E');--md-admonition-icon--courses:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M5%208.25a.75.75%200%200%201%20.75-.75h4a.75.75%200%200%201%200%201.5h-4A.75.75%200%200%201%205%208.25M4%2010.5A.75.75%200%200%200%204%2012h4a.75.75%200%200%200%200-1.5z%22/%3E%3Cpath%20d%3D%22M13-.005c1.654%200%203%201.328%203%203%200%20.982-.338%201.933-.783%202.818-.443.879-1.028%201.758-1.582%202.588l-.011.017c-.568.853-1.104%201.659-1.501%202.446-.398.789-.623%201.494-.623%202.136a1.5%201.5%200%201%200%202.333-1.248.75.75%200%200%201%20.834-1.246A3%203%200%200%201%2013%2016H3a3%203%200%200%201-3-3c0-1.582.891-3.135%201.777-4.506q.315-.483.623-.946c.473-.709.923-1.386%201.287-2.048H2.51c-.576%200-1.381-.133-1.907-.783A2.68%202.68%200%200%201%200%202.995a3%203%200%200%201%203-3Zm0%201.5a1.5%201.5%200%200%200-1.5%201.5c0%20.476.223.834.667%201.132A.75.75%200%200%201%2011.75%205.5H5.368c-.467%201.003-1.141%202.015-1.773%202.963-.192.289-.381.571-.558.845C2.13%2010.711%201.5%2011.916%201.5%2013A1.5%201.5%200%200%200%203%2014.5h7.401A3%203%200%200%201%2010%2013c0-.979.338-1.928.784-2.812.441-.874%201.023-1.748%201.575-2.576l.017-.026c.568-.853%201.103-1.658%201.501-2.448s.623-1.497.623-2.143c0-.838-.669-1.5-1.5-1.5m-10%200a1.5%201.5%200%200%200-1.5%201.5c0%20.321.1.569.27.778.097.12.325.227.74.227h7.674A2.7%202.7%200%200%201%2010%202.995c0-.546.146-1.059.401-1.5Z%22/%3E%3C/svg%3E');--md-admonition-icon--terminal:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M0%202.75C0%201.784.784%201%201.75%201h12.5c.966%200%201.75.784%201.75%201.75v10.5A1.75%201.75%200%200%201%2014.25%2015H1.75A1.75%201.75%200%200%201%200%2013.25Zm1.75-.25a.25.25%200%200%200-.25.25v10.5c0%20.138.112.25.25.25h12.5a.25.25%200%200%200%20.25-.25V2.75a.25.25%200%200%200-.25-.25ZM7.25%208a.75.75%200%200%201-.22.53l-2.25%202.25a.749.749%200%200%201-1.275-.326.75.75%200%200%201%20.215-.734L5.44%208%203.72%206.28a.749.749%200%200%201%20.326-1.275.75.75%200%200%201%20.734.215l2.25%202.25c.141.14.22.331.22.53m1.5%201.5h3a.75.75%200%200%201%200%201.5h-3a.75.75%200%200%201%200-1.5%22/%3E%3C/svg%3E');--md-admonition-icon--full-code:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M5%203c-1.1%200-2%20.9-2%202s-.9%202-2%202v2c1.1%200%202%20.9%202%202s.9%202%202%202h2v-2H5v-1c0-1.1-.9-2-2-2%201.1%200%202-.9%202-2V5h2V3m4%200c1.1%200%202%20.9%202%202s.9%202%202%202v2c-1.1%200-2%20.9-2%202s-.9%202-2%202H9v-2h2v-1c0-1.1.9-2%202-2-1.1%200-2-.9-2-2V5H9V3zm11%203v12c0%201.11-.89%202-2%202H4a2%202%200%200%201-2-2v-3h2v3h16V6h-2.97V4H20c1.11%200%202%20.89%202%202%22/%3E%3C/svg%3E');--md-admonition-icon--learning:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M7.693%201.066a.75.75%200%200%201%20.614%200l7.25%203.25a.75.75%200%200%201%200%201.368L13%206.831v2.794c0%201.024-.81%201.749-1.66%202.173-.893.447-2.075.702-3.34.702q-.417%200-.816-.036a.75.75%200%200%201%20.133-1.494Q7.649%2011%208%2011c1.082%200%202.025-.221%202.67-.543.69-.345.83-.682.83-.832V7.503L8.307%208.934a.75.75%200%200%201-.614%200L4%207.28v1.663c.296.105.575.275.812.512.438.438.688%201.059.688%201.796v3a.75.75%200%200%201-.75.75h-3a.75.75%200%200%201-.75-.75v-3c0-.737.25-1.358.688-1.796.237-.237.516-.407.812-.512V6.606L.443%205.684a.75.75%200%200%201%200-1.368ZM2.583%205%208%207.428%2013.416%205%208%202.572ZM2.5%2011.25v2.25H4v-2.25c0-.388-.125-.611-.25-.735a.7.7%200%200%200-.5-.203.7.7%200%200%200-.5.203c-.125.124-.25.347-.25.735%22/%3E%3C/svg%3E');--md-admonition-icon--people:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M2%205.5a3.5%203.5%200%201%201%205.898%202.549%205.51%205.51%200%200%201%203.034%204.084.75.75%200%201%201-1.482.235%204%204%200%200%200-7.9%200%20.75.75%200%200%201-1.482-.236A5.5%205.5%200%200%201%203.102%208.05%203.5%203.5%200%200%201%202%205.5M11%204a3.001%203.001%200%200%201%202.22%205.018%205%205%200%200%201%202.56%203.012.749.749%200%200%201-.885.954.75.75%200%200%201-.549-.514%203.51%203.51%200%200%200-2.522-2.372.75.75%200%200%201-.574-.73v-.352a.75.75%200%200%201%20.416-.672A1.5%201.5%200%200%200%2011%205.5.75.75%200%200%201%2011%204m-5.5-.5a2%202%200%201%200-.001%203.999A2%202%200%200%200%205.5%203.5%22/%3E%3C/svg%3E');--md-admonition-icon--licensing:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M8.75.75V2h.985c.304%200%20.603.08.867.231l1.29.736q.058.033.124.033h2.234a.75.75%200%200%201%200%201.5h-.427l2.111%204.692a.75.75%200%200%201-.154.838l-.53-.53.529.531-.001.002-.002.002-.006.006-.006.005-.01.01-.045.04q-.317.265-.686.45C14.556%2010.78%2013.88%2011%2013%2011a4.5%204.5%200%200%201-2.023-.454%203.5%203.5%200%200%201-.686-.45l-.045-.04-.016-.015-.006-.006-.004-.004v-.001a.75.75%200%200%201-.154-.838L12.178%204.5h-.162c-.305%200-.604-.079-.868-.231l-1.29-.736a.25.25%200%200%200-.124-.033H8.75V13h2.5a.75.75%200%200%201%200%201.5h-6.5a.75.75%200%200%201%200-1.5h2.5V3.5h-.984a.25.25%200%200%200-.124.033l-1.289.737c-.265.15-.564.23-.869.23h-.162l2.112%204.692a.75.75%200%200%201-.154.838l-.53-.53.529.531-.001.002-.002.002-.006.006-.016.015-.045.04q-.317.265-.686.45C4.556%2010.78%203.88%2011%203%2011a4.5%204.5%200%200%201-2.023-.454%203.5%203.5%200%200%201-.686-.45l-.045-.04-.016-.015-.006-.006-.004-.004v-.001a.75.75%200%200%201-.154-.838L2.178%204.5H1.75a.75.75%200%200%201%200-1.5h2.234a.25.25%200%200%200%20.125-.033l1.288-.737c.265-.15.564-.23.869-.23h.984V.75a.75.75%200%200%201%201.5%200m2.945%208.477c.285.135.718.273%201.305.273s1.02-.138%201.305-.273L13%206.327Zm-10%200c.285.135.718.273%201.305.273s1.02-.138%201.305-.273L3%206.327Z%22/%3E%3C/svg%3E');--md-admonition-icon--videos:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M0%203.75C0%202.784.784%202%201.75%202h12.5c.966%200%201.75.784%201.75%201.75v8.5A1.75%201.75%200%200%201%2014.25%2014H1.75A1.75%201.75%200%200%201%200%2012.25Zm1.75-.25a.25.25%200%200%200-.25.25v8.5c0%20.138.112.25.25.25h12.5a.25.25%200%200%200%20.25-.25v-8.5a.25.25%200%200%200-.25-.25Z%22/%3E%3Cpath%20d%3D%22M6%2010.559V5.442a.25.25%200%200%201%20.379-.215l4.264%202.559a.25.25%200%200%201%200%20.428l-4.264%202.559A.25.25%200%200%201%206%2010.559%22/%3E%3C/svg%3E');}</style>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
 <style>:root{--md-text-font:"Inter";--md-code-font:"Roboto Mono"}</style>
-<link href="../../../assets/stylesheets/fonts.css" rel="stylesheet"/>
-<link href="../../../assets/stylesheets/extra.css" rel="stylesheet"/>
-<script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+<link href="../../assets/stylesheets/fonts.css" rel="stylesheet"/>
+<link href="../../assets/stylesheets/extra.css" rel="stylesheet"/>
+<script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
 <script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-244N3GEN75"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-244N3GEN75",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-244N3GEN75",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
 <script>if("undefined"!=typeof __md_analytics){var consent=__md_get("__consent");consent&&consent.analytics&&__md_analytics()}</script>
 </head>
@@ -34,7 +38,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#the-architects-toolkit-i">
+<a class="md-skip" href="#il-toolkit-dellarchitetto-i">
           Vai al contenuto
         </a>
 </div>
@@ -44,8 +48,8 @@
 </div>
 <header class="md-header md-header--shadow" data-md-component="header">
 <nav aria-label="Intestazione" class="md-header__inner md-grid">
-<a aria-label="training.nextflow.io" class="md-header__button md-logo" data-md-component="logo" href="../../" title="training.nextflow.io">
-<img alt="logo" src="../../../assets/img/nextflow_logo_dark.png"/>
+<a aria-label="training.nextflow.io" class="md-header__button md-logo" data-md-component="logo" href="../.." title="training.nextflow.io">
+<img alt="logo" src="../../assets/img/nextflow_logo_dark.png"/>
 </a>
 <label class="md-header__button md-icon" for="__drawer">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
@@ -60,7 +64,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              The Architect's Toolkit I
+              Il Toolkit dell'Architetto I
             
           </span>
 </div>
@@ -85,33 +89,53 @@
 <div class="md-select__inner">
 <ul class="md-select__list">
 <li class="md-select__item">
-<a class="md-select__link" href="../../../training_collections/architects_toolkit_1/" hreflang="en">
+<a class="md-select__link" href="/" hreflang="en">
               English
             </a>
 </li>
 <li class="md-select__item">
-<a class="md-select__link" href="../../../pt/training_collections/architects_toolkit_1/" hreflang="pt">
-              Português
+<a class="md-select__link" href="/de/" hreflang="de">
+              deutsch
             </a>
 </li>
 <li class="md-select__item">
-<a class="md-select__link" href="../../../es/training_collections/architects_toolkit_1/" hreflang="es">
-              Español
+<a class="md-select__link" href="/es/" hreflang="es">
+              español
             </a>
 </li>
 <li class="md-select__item">
-<a class="md-select__link" href="../../../fr/training_collections/architects_toolkit_1/" hreflang="fr">
-              Français
+<a class="md-select__link" href="/fr/" hreflang="fr">
+              français
             </a>
 </li>
 <li class="md-select__item">
-<a class="md-select__link" href="./" hreflang="it">
-              Italiano
+<a class="md-select__link" href="/hi/" hreflang="hi">
+              हिन्दी
             </a>
 </li>
 <li class="md-select__item">
-<a class="md-select__link" href="../../../ko/training_collections/architects_toolkit_1/" hreflang="ko">
-              Korean
+<a class="md-select__link" href="/it/" hreflang="it">
+              italiano
+            </a>
+</li>
+<li class="md-select__item">
+<a class="md-select__link" href="/ko/" hreflang="ko">
+              한국어
+            </a>
+</li>
+<li class="md-select__item">
+<a class="md-select__link" href="/pl/" hreflang="pl">
+              Polski
+            </a>
+</li>
+<li class="md-select__item">
+<a class="md-select__link" href="/pt/" hreflang="pt">
+              português
+            </a>
+</li>
+<li class="md-select__item">
+<a class="md-select__link" href="/tr/" hreflang="tr">
+              Türkçe
             </a>
 </li>
 </ul>
@@ -191,8 +215,8 @@
 <div class="md-sidebar__inner">
 <nav aria-label="Navigazione" class="md-nav md-nav--primary" data-md-level="0">
 <label class="md-nav__title" for="__drawer">
-<a aria-label="training.nextflow.io" class="md-nav__button md-logo" data-md-component="logo" href="../../" title="training.nextflow.io">
-<img alt="logo" src="../../../assets/img/nextflow_logo_dark.png"/>
+<a aria-label="training.nextflow.io" class="md-nav__button md-logo" data-md-component="logo" href="../.." title="training.nextflow.io">
+<img alt="logo" src="../../assets/img/nextflow_logo_dark.png"/>
 </a>
     training.nextflow.io
   </label>
@@ -208,7 +232,7 @@
 </div>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../">
+<a class="md-nav__link" href="../..">
 <span class="md-ellipsis">
     
   
@@ -259,7 +283,7 @@
 <span class="md-ellipsis">
     
   
-    Getting started
+    Per iniziare
   
 
     
@@ -271,7 +295,7 @@
 <span class="md-ellipsis">
     
   
-    Part 1: Run basic operations
+    Parte 1: Operazioni base
   
 
     
@@ -283,7 +307,7 @@
 <span class="md-ellipsis">
     
   
-    Part 2: Run real pipelines
+    Parte 2: Eseguire pipeline reali
   
 
     
@@ -295,7 +319,7 @@
 <span class="md-ellipsis">
     
   
-    Part 3: Run configuration
+    Parte 3: Configurazione
   
 
     
@@ -307,7 +331,7 @@
 <span class="md-ellipsis">
     
   
-    Course summary
+    Riepilogo del corso
   
 
     
@@ -319,7 +343,7 @@
 <span class="md-ellipsis">
     
   
-    Feedback survey
+    Sondaggio di feedback
   
 
     
@@ -369,7 +393,7 @@
 <span class="md-ellipsis">
     
   
-    Orientation
+    Per iniziare
   
 
     
@@ -453,7 +477,7 @@
 <span class="md-ellipsis">
     
   
-    Course summary
+    Riepilogo del corso
   
 
     
@@ -465,7 +489,7 @@
 <span class="md-ellipsis">
     
   
-    Feedback survey
+    Sondaggio di feedback
   
 
     
@@ -515,7 +539,7 @@
 <span class="md-ellipsis">
     
   
-    Getting started
+    Iniziare
   
 
     
@@ -527,7 +551,7 @@
 <span class="md-ellipsis">
     
   
-    Part 1: Run a demo pipeline
+    Parte 1: Eseguire una pipeline demo
   
 
     
@@ -539,7 +563,7 @@
 <span class="md-ellipsis">
     
   
-    Part 2: Rewrite Hello for nf-core
+    Parte 2: Riscrivere Hello per nf-core
   
 
     
@@ -551,7 +575,7 @@
 <span class="md-ellipsis">
     
   
-    Part 3: Use an nf-core module
+    Parte 3: Usare un modulo nf-core
   
 
     
@@ -563,7 +587,7 @@
 <span class="md-ellipsis">
     
   
-    Part 4: Make an nf-core module
+    Parte 4: Creare un modulo nf-core
   
 
     
@@ -575,7 +599,7 @@
 <span class="md-ellipsis">
     
   
-    Part 5: Input validation
+    Parte 5: Validazione degli input
   
 
     
@@ -587,7 +611,7 @@
 <span class="md-ellipsis">
     
   
-    Course summary
+    Riepilogo del corso
   
 
     
@@ -599,7 +623,7 @@
 <span class="md-ellipsis">
     
   
-    Feedback survey
+    Questionario di feedback
   
 
     
@@ -615,7 +639,7 @@
 <span class="md-ellipsis">
     
   
-    Nextflow for Science
+    Nextflow per la Scienza
   
 
     
@@ -627,7 +651,7 @@
 <span class="md-nav__icon md-icon"></span>
             
   
-    Nextflow for Science
+    Nextflow per la Scienza
   
 
           </label>
@@ -637,7 +661,7 @@
 <span class="md-ellipsis">
     
   
-    Nextflow for Science
+    Nextflow per la Scienza
   
 
     
@@ -650,7 +674,7 @@
 <span class="md-ellipsis">
     
   
-    Genomics
+    Nextflow per la Genomica
   
 
     
@@ -662,7 +686,7 @@
 <span class="md-nav__icon md-icon"></span>
             
   
-    Genomics
+    Nextflow per la Genomica
   
 
           </label>
@@ -672,7 +696,7 @@
 <span class="md-ellipsis">
     
   
-    Nextflow for Genomics
+    Nextflow per la Genomica
   
 
     
@@ -684,7 +708,7 @@
 <span class="md-ellipsis">
     
   
-    Orientation
+    Orientamento
   
 
     
@@ -696,7 +720,7 @@
 <span class="md-ellipsis">
     
   
-    Part 1: Per-sample variant calling
+    Parte 1: Chiamata di varianti per campione
   
 
     
@@ -708,7 +732,7 @@
 <span class="md-ellipsis">
     
   
-    Part 2: Joint calling on a cohort
+    Parte 2: Chiamata congiunta su una coorte
   
 
     
@@ -720,7 +744,7 @@
 <span class="md-ellipsis">
     
   
-    Part 3: Moving code into modules
+    Parte 3: Spostare il codice in moduli
   
 
     
@@ -732,7 +756,7 @@
 <span class="md-ellipsis">
     
   
-    Part 4: Adding tests
+    Parte 4: Aggiunta di test
   
 
     
@@ -744,7 +768,7 @@
 <span class="md-ellipsis">
     
   
-    Feedback survey
+    Sondaggio di feedback
   
 
     
@@ -756,7 +780,7 @@
 <span class="md-ellipsis">
     
   
-    Next Steps
+    Prossimi Passi
   
 
     
@@ -772,7 +796,7 @@
 <span class="md-ellipsis">
     
   
-    RNAseq
+    Nextflow per RNAseq
   
 
     
@@ -784,7 +808,7 @@
 <span class="md-nav__icon md-icon"></span>
             
   
-    RNAseq
+    Nextflow per RNAseq
   
 
           </label>
@@ -794,7 +818,7 @@
 <span class="md-ellipsis">
     
   
-    Nextflow for RNAseq
+    Nextflow per RNAseq
   
 
     
@@ -806,7 +830,7 @@
 <span class="md-ellipsis">
     
   
-    Orientation
+    Orientamento
   
 
     
@@ -818,7 +842,7 @@
 <span class="md-ellipsis">
     
   
-    Part 1: Method overview and manual testing
+    Parte 1: Panoramica del metodo e test manuali
   
 
     
@@ -830,7 +854,7 @@
 <span class="md-ellipsis">
     
   
-    Part 2: Single-sample implementation
+    Parte 2: Implementazione per singolo campione
   
 
     
@@ -842,7 +866,7 @@
 <span class="md-ellipsis">
     
   
-    Part 3: Multi-sample paired-end implementation
+    Parte 3: Implementazione con campioni multipli paired-end
   
 
     
@@ -854,7 +878,7 @@
 <span class="md-ellipsis">
     
   
-    Feedback survey
+    Sondaggio di feedback
   
 
     
@@ -866,7 +890,7 @@
 <span class="md-ellipsis">
     
   
-    Next Steps
+    Prossimi Passi
   
 
     
@@ -882,7 +906,7 @@
 <span class="md-ellipsis">
     
   
-    Imaging
+    Nextflow run per l'Imaging
   
 
     
@@ -894,7 +918,7 @@
 <span class="md-nav__icon md-icon"></span>
             
   
-    Imaging
+    Nextflow run per l'Imaging
   
 
           </label>
@@ -904,7 +928,7 @@
 <span class="md-ellipsis">
     
   
-    Nextflow run for Imaging
+    Nextflow run per l'Imaging
   
 
     
@@ -916,7 +940,7 @@
 <span class="md-ellipsis">
     
   
-    Orientation
+    Orientamento
   
 
     
@@ -928,7 +952,7 @@
 <span class="md-ellipsis">
     
   
-    Part 1: Run basic operations
+    Parte 1: Eseguire operazioni di base
   
 
     
@@ -940,7 +964,7 @@
 <span class="md-ellipsis">
     
   
-    Part 2: Run nf-core/molkart
+    Parte 2: Eseguire nf-core/molkart
   
 
     
@@ -952,7 +976,7 @@
 <span class="md-ellipsis">
     
   
-    Part 3: Organizing inputs
+    Parte 3: Organizzazione degli input
   
 
     
@@ -964,7 +988,7 @@
 <span class="md-ellipsis">
     
   
-    Part 4: Configuration
+    Parte 4: Configurazione
   
 
     
@@ -976,7 +1000,7 @@
 <span class="md-ellipsis">
     
   
-    Survey
+    Sondaggio
   
 
     
@@ -988,7 +1012,7 @@
 <span class="md-ellipsis">
     
   
-    Next steps
+    Prossimi passi
   
 
     
@@ -1007,7 +1031,7 @@
 <span class="md-ellipsis">
     
   
-    Side Quests
+    Missioni Secondarie
   
 
     
@@ -1019,7 +1043,7 @@
 <span class="md-nav__icon md-icon"></span>
             
   
-    Side Quests
+    Missioni Secondarie
   
 
           </label>
@@ -1029,7 +1053,7 @@
 <span class="md-ellipsis">
     
   
-    Side Quests
+    Missioni Secondarie
   
 
     
@@ -1041,7 +1065,7 @@
 <span class="md-ellipsis">
     
   
-    Orientation
+    Orientamento
   
 
     
@@ -1053,7 +1077,7 @@
 <span class="md-ellipsis">
     
   
-    Development Environment
+    Ambiente di Sviluppo
   
 
     
@@ -1065,7 +1089,7 @@
 <span class="md-ellipsis">
     
   
-    Metadata and meta maps
+    Metadati e meta map
   
 
     
@@ -1077,7 +1101,7 @@
 <span class="md-ellipsis">
     
   
-    File input processing
+    Elaborazione di file in input
   
 
     
@@ -1089,7 +1113,7 @@
 <span class="md-ellipsis">
     
   
-    Splitting and Grouping
+    Divisione e Raggruppamento
   
 
     
@@ -1101,7 +1125,7 @@
 <span class="md-ellipsis">
     
   
-    Workflows of Workflows
+    Workflows di Workflows
   
 
     
@@ -1113,7 +1137,7 @@
 <span class="md-ellipsis">
     
   
-    Debugging Workflows
+    Debug dei Workflow
   
 
     
@@ -1125,7 +1149,7 @@
 <span class="md-ellipsis">
     
   
-    Essential Nextflow Scripting Patterns
+    Pattern di Scripting Essenziali in Nextflow
   
 
     
@@ -1137,7 +1161,7 @@
 <span class="md-ellipsis">
     
   
-    Testing with nf-test
+    Testing con nf-test
   
 
     
@@ -1153,7 +1177,7 @@
 <span class="md-ellipsis">
     
   
-    Training Collections
+    Collezioni di Formazione
   
 
     
@@ -1165,7 +1189,7 @@
 <span class="md-nav__icon md-icon"></span>
             
   
-    Training Collections
+    Collezioni di Formazione
   
 
           </label>
@@ -1175,7 +1199,7 @@
 <span class="md-ellipsis">
     
   
-    Training Collections
+    Collezioni di Formazione
   
 
     
@@ -1188,7 +1212,7 @@
 <span class="md-ellipsis">
     
   
-    The Architect's Toolkit I
+    Il Toolkit dell'Architetto I
   
 
     
@@ -1199,7 +1223,7 @@
 <span class="md-ellipsis">
     
   
-    The Architect's Toolkit I
+    Il Toolkit dell'Architetto I
   
 
     
@@ -1212,34 +1236,34 @@
   </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#learning-objectives">
+<a class="md-nav__link" href="#obiettivi-di-apprendimento">
 <span class="md-ellipsis">
       
-        Learning objectives
+        Obiettivi di apprendimento
       
     </span>
 </a>
 </li> <li class="md-nav__item">
-<a class="md-nav__link" href="#audience-prerequisites">
+<a class="md-nav__link" href="#pubblico-e-prerequisiti">
 <span class="md-ellipsis">
       
-        Audience &amp; prerequisites
+        Pubblico e prerequisiti
       
     </span>
 </a>
 </li> <li class="md-nav__item">
-<a class="md-nav__link" href="#collection-contents">
+<a class="md-nav__link" href="#contenuti-della-raccolta">
 <span class="md-ellipsis">
       
-        Collection contents
+        Contenuti della raccolta
       
     </span>
 </a>
 </li> <li class="md-nav__item">
-<a class="md-nav__link" href="#how-to-use-this-collection">
+<a class="md-nav__link" href="#come-utilizzare-questa-raccolta">
 <span class="md-ellipsis">
       
-        How to use this collection
+        Come utilizzare questa raccolta
       
     </span>
 </a>
@@ -1405,7 +1429,7 @@
 <span class="md-ellipsis">
     
   
-    Getting help
+    Ottenere aiuto
   
 
     
@@ -1418,7 +1442,7 @@
 <span class="md-ellipsis">
     
   
-    Training environment
+    Opzioni per l'ambiente
   
 
     
@@ -1430,7 +1454,7 @@
 <span class="md-nav__icon md-icon"></span>
             
   
-    Training environment
+    Opzioni per l'ambiente
   
 
           </label>
@@ -1440,7 +1464,7 @@
 <span class="md-ellipsis">
     
   
-    Environment options
+    Opzioni per l'ambiente
   
 
     
@@ -1464,7 +1488,7 @@
 <span class="md-ellipsis">
     
   
-    Local Devcontainers
+    Devcontainers Locali
   
 
     
@@ -1476,7 +1500,7 @@
 <span class="md-ellipsis">
     
   
-    Manual installation
+    Installazione manuale
   
 
     
@@ -1491,7 +1515,7 @@
 <span class="md-ellipsis">
     
   
-    Nextflow versions
+    Versioni di Nextflow
   
 
     
@@ -1503,7 +1527,7 @@
 <span class="md-ellipsis">
     
   
-    The Hello pipeline
+    La pipeline Hello
   
 
     
@@ -1528,34 +1552,34 @@
   </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#learning-objectives">
+<a class="md-nav__link" href="#obiettivi-di-apprendimento">
 <span class="md-ellipsis">
       
-        Learning objectives
+        Obiettivi di apprendimento
       
     </span>
 </a>
 </li> <li class="md-nav__item">
-<a class="md-nav__link" href="#audience-prerequisites">
+<a class="md-nav__link" href="#pubblico-e-prerequisiti">
 <span class="md-ellipsis">
       
-        Audience &amp; prerequisites
+        Pubblico e prerequisiti
       
     </span>
 </a>
 </li> <li class="md-nav__item">
-<a class="md-nav__link" href="#collection-contents">
+<a class="md-nav__link" href="#contenuti-della-raccolta">
 <span class="md-ellipsis">
       
-        Collection contents
+        Contenuti della raccolta
       
     </span>
 </a>
 </li> <li class="md-nav__item">
-<a class="md-nav__link" href="#how-to-use-this-collection">
+<a class="md-nav__link" href="#come-utilizzare-questa-raccolta">
 <span class="md-ellipsis">
       
-        How to use this collection
+        Come utilizzare questa raccolta
       
     </span>
 </a>
@@ -1731,47 +1755,51 @@
 <a class="md-content__button md-icon" href="https://github.com/nextflow-io/training/edit/master/docs/training_collections/architects_toolkit_1.md" rel="edit" title="Modifica">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"></path></svg>
 </a>
-<h1 id="the-architects-toolkit-i"><span class="enumerate-headings-plugin enumerate-heading-plugin">2.</span> The Architect's Toolkit I<a class="headerlink" href="#the-architects-toolkit-i" title="Permanent link">¶</a></h1>
-<p>Our Training Collections provide curated learning paths through our advanced training materials (called <a href="../../side_quests">Side Quests</a>). This collection covers four essential topics that are frequently used together for building robust and scalable workflows.</p>
-<h2 id="learning-objectives"><span class="enumerate-headings-plugin enumerate-heading-plugin">2.1</span> Learning objectives<a class="headerlink" href="#learning-objectives" title="Permanent link">¶</a></h2>
-<p>By the end of this collection, you'll have experience with:</p>
+<a class="md-content__button md-icon" href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md" title="Improve translation">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M11 1H3c-1.1 0-2 .9-2 2v12l3-3h5v-1c0-2.2 1.79-4 4-4V3c0-1.1-.9-2-2-2m0 3H9.5c-.34 1.19-.96 2.3-1.82 3.26l-.02.02 1.26 1.25-.37 1.01L7 8l-2.5 2.5-.69-.73 2.53-2.49A8.6 8.6 0 0 1 4.86 5h.99c.31.6.69 1.17 1.15 1.68A7.7 7.7 0 0 0 8.57 4H3V3h3.5V2h1v1H11zm10 5h-8c-1.1 0-2 .9-2 2v7c0 1.1.9 2 2 2h7l3 3V11c0-1.1-.9-2-2-2m-1.37 10-.85-2.25h-3.56L14.38 19h-1.5l3.37-9h1.5l3.38 9zM17 12l1.22 3.25h-2.43z"></path></svg>
+</a>
+<h1 id="il-toolkit-dellarchitetto-i"><span class="enumerate-headings-plugin enumerate-heading-plugin">2.</span> Il Toolkit dell'Architetto I<a class="headerlink" href="#il-toolkit-dellarchitetto-i" title="Permanent link">¶</a></h1>
+<p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"></path></svg></span> Traduzione assistita da IA - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">scopri di più e suggerisci miglioramenti</a></span></p>
+<p>Le nostre Raccolte di Formazione forniscono percorsi di apprendimento curati attraverso i nostri materiali di formazione avanzati (chiamati <a href="../../side_quests">Side Quests</a>). Questa raccolta copre quattro argomenti essenziali che vengono frequentemente utilizzati insieme per costruire workflow robusti e scalabili.</p>
+<h2 id="obiettivi-di-apprendimento"><span class="enumerate-headings-plugin enumerate-heading-plugin">2.1</span> Obiettivi di apprendimento<a class="headerlink" href="#obiettivi-di-apprendimento" title="Permanent link">¶</a></h2>
+<p>Al termine di questa raccolta, avrete esperienza con:</p>
 <ul>
-<li><strong>Complex modular workflow architectures</strong> - Combining multiple workflows into cohesive pipelines</li>
-<li><strong>Comprehensive testing strategies</strong> - Ensuring your workflows are reliable and maintainable</li>
-<li><strong>Metadata management</strong> - Handling sample-specific metadata throughout your workflows effectively</li>
-<li><strong>Advanced data processing</strong> - Implementing efficient data splitting and grouping patterns</li>
+<li><strong>Architetture di workflow modulari complesse</strong> - Combinare più workflow in pipeline coese</li>
+<li><strong>Strategie di testing complete</strong> - Assicurare che i vostri workflow siano affidabili e manutenibili</li>
+<li><strong>Gestione dei metadata</strong> - Gestire i metadata specifici dei campioni in modo efficace durante i vostri workflow</li>
+<li><strong>Elaborazione avanzata dei dati</strong> - Implementare pattern efficienti di suddivisione e raggruppamento dei dati</li>
 </ul>
-<p>These skills will enable you to build robust, scalable, and maintainable Nextflow workflows for real-world applications.</p>
-<h2 id="audience-prerequisites"><span class="enumerate-headings-plugin enumerate-heading-plugin">2.2</span> Audience &amp; prerequisites<a class="headerlink" href="#audience-prerequisites" title="Permanent link">¶</a></h2>
-<p>This collection is designed for users who have completed the basic Nextflow training and want to dive deeper into advanced workflow patterns, testing strategies, and data and metadata handling techniques.</p>
-<p><strong>Prerequisites</strong></p>
+<p>Queste competenze vi permetteranno di costruire workflow Nextflow robusti, scalabili e manutenibili per applicazioni reali.</p>
+<h2 id="pubblico-e-prerequisiti"><span class="enumerate-headings-plugin enumerate-heading-plugin">2.2</span> Pubblico e prerequisiti<a class="headerlink" href="#pubblico-e-prerequisiti" title="Permanent link">¶</a></h2>
+<p>Questa raccolta è progettata per utenti che hanno completato la formazione base di Nextflow e desiderano approfondire i pattern avanzati dei workflow, le strategie di testing e le tecniche di gestione dei dati e metadata.</p>
+<p><strong>Prerequisiti</strong></p>
 <ul>
-<li>Completion of <a href="../../hello_nextflow/">Hello Nextflow</a> training or equivalent experience</li>
-<li>Basic familiarity with Nextflow syntax and concepts</li>
-<li>Understanding of basic workflow development patterns</li>
-<li>Experience with command-line tools</li>
+<li>Completamento della formazione <a href="../../hello_nextflow/">Hello Nextflow</a> o esperienza equivalente</li>
+<li>Familiarità di base con la sintassi e i concetti di Nextflow</li>
+<li>Comprensione dei pattern di base per lo sviluppo di workflow</li>
+<li>Esperienza con strumenti da riga di comando</li>
 </ul>
-<h2 id="collection-contents"><span class="enumerate-headings-plugin enumerate-heading-plugin">2.3</span> Collection contents<a class="headerlink" href="#collection-contents" title="Permanent link">¶</a></h2>
-<p>This collection consists of four Side Quests that cover complementary workflow engineering topics:</p>
+<h2 id="contenuti-della-raccolta"><span class="enumerate-headings-plugin enumerate-heading-plugin">2.3</span> Contenuti della raccolta<a class="headerlink" href="#contenuti-della-raccolta" title="Permanent link">¶</a></h2>
+<p>Questa raccolta consiste di quattro Side Quests che coprono argomenti complementari di ingegneria dei workflow:</p>
 <ol>
-<li><strong><a href="../../side_quests/workflows_of_workflows">Workflows of Workflows</a></strong> - Complex workflow architecture and composition</li>
-<li><strong><a href="../../side_quests/nf-test">Testing with nf-test</a></strong> - Testing strategies for Nextflow workflows</li>
-<li><strong><a href="../../side_quests/metadata">Metadata</a></strong> - Handling metadata for items in Nextflow channels</li>
-<li><strong><a href="../../side_quests/splitting_and_grouping">Splitting and Grouping</a></strong> - Advanced data processing patterns</li>
+<li><strong><a href="../../side_quests/workflows_of_workflows">Workflows of Workflows</a></strong> - Architettura e composizione complessa di workflow</li>
+<li><strong><a href="../../side_quests/nf-test">Testing with nf-test</a></strong> - Strategie di testing per workflow Nextflow</li>
+<li><strong><a href="../../side_quests/metadata">Metadata</a></strong> - Gestione dei metadata per elementi nei channel Nextflow</li>
+<li><strong><a href="../../side_quests/splitting_and_grouping">Splitting and Grouping</a></strong> - Pattern avanzati di elaborazione dati</li>
 </ol>
-<p>Each Side Quest is self-contained and covers independent concepts, but we recommend completing them in the order listed above for a logical progression through the topics.</p>
-<h2 id="how-to-use-this-collection"><span class="enumerate-headings-plugin enumerate-heading-plugin">2.4</span> How to use this collection<a class="headerlink" href="#how-to-use-this-collection" title="Permanent link">¶</a></h2>
-<p>First, command-click on the "Open in GitHub Codespaces" button below to launch the training environment in a separate tab, then read on while it loads.</p>
+<p>Ogni Side Quest è autonomo e copre concetti indipendenti, ma raccomandiamo di completarli nell'ordine elencato sopra per una progressione logica attraverso gli argomenti.</p>
+<h2 id="come-utilizzare-questa-raccolta"><span class="enumerate-headings-plugin enumerate-heading-plugin">2.4</span> Come utilizzare questa raccolta<a class="headerlink" href="#come-utilizzare-questa-raccolta" title="Permanent link">¶</a></h2>
+<p>Per prima cosa, fate command-clic sul pulsante "Open in GitHub Codespaces" qui sotto per avviare l'ambiente di formazione in una scheda separata, poi continuate a leggere mentre si carica.</p>
 <p><a href="https://codespaces.new/nextflow-io/training?quickstart=1&amp;ref=master"><img alt="Open in GitHub Codespaces" src="https://github.com/codespaces/badge.svg"/></a></p>
-<p>Once your environment is running, work through the collection as follows:</p>
+<p>Una volta che il vostro ambiente è in esecuzione, procedete con la raccolta come segue:</p>
 <ol>
-<li>In this tab: Navigate to the first Side Quest listed above, which describes step-by-step development exercises.</li>
-<li>In your Codespaces tab: Work through the exercises for the Side Quest.</li>
-<li>When you complete a Side Quest, return to this page and navigate to the next one in the list above.</li>
-<li>When you have completed the collection, click the button below to fill out a very short survey. Your feedback allows us to continue improving the training materials for everyone.</li>
+<li>In questa scheda: Navigate al primo Side Quest elencato sopra, che descrive esercizi di sviluppo passo dopo passo.</li>
+<li>Nella vostra scheda Codespaces: Lavorate attraverso gli esercizi del Side Quest.</li>
+<li>Quando completate un Side Quest, tornate a questa pagina e navigate al successivo nell'elenco sopra.</li>
+<li>Quando avete completato la raccolta, fate clic sul pulsante qui sotto per compilare un breve questionario. Il vostro feedback ci permette di continuare a migliorare i materiali di formazione per tutti.</li>
 </ol>
 <p><a href="https://seqera.typeform.com/to/Q9pc2YKw"><img alt="Take the survey" src="https://img.shields.io/badge/Take%20the-Survey-blue?style=flat-square"/></a></p>
-<p>Ready to begin? Start with the first module above!</p><style type="text/css">.quiz {
+<p>Pronti per iniziare? Cominciate con il primo modulo sopra!</p><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
   margin: 1rem 0;
@@ -3292,7 +3320,7 @@ window.mkdocsQuizConfig = {
 </main>
 <footer class="md-footer">
 <nav aria-label="Piede" class="md-footer__inner md-grid">
-<a aria-label="Precedente: Training Collections" class="md-footer__link md-footer__link--prev" href="../">
+<a aria-label="Precedente: Collezioni di Formazione" class="md-footer__link md-footer__link--prev" href="../">
 <div class="md-footer__button md-icon">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
 </div>
@@ -3301,17 +3329,17 @@ window.mkdocsQuizConfig = {
                 Precedente
               </span>
 <div class="md-ellipsis">
-                Training Collections
+                Collezioni di Formazione
               </div>
 </div>
 </a>
-<a aria-label="Successivo: Getting help" class="md-footer__link md-footer__link--next" href="../../help/">
+<a aria-label="Successivo: Ottenere aiuto" class="md-footer__link md-footer__link--next" href="../../help/">
 <div class="md-footer__title">
 <span class="md-footer__direction">
                 Successivo
               </span>
 <div class="md-ellipsis">
-                Getting help
+                Ottenere aiuto
               </div>
 </div>
 <div class="md-footer__button md-icon">
@@ -3355,8 +3383,8 @@ window.mkdocsQuizConfig = {
 <div class="md-consent__overlay"></div>
 <aside class="md-consent__inner">
 <form class="md-consent__form md-grid md-typeset" name="consent">
-<h4><span class="enumerate-headings-plugin enumerate-heading-plugin">2.4.0.1</span> Cookie consent</h4>
-<p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our training materials better. Find out more on <a href="https://seqera.io/privacy-policy/#cookies" rel="noopener" target="_blank">how we use cookies</a>.</p>
+<h4><span class="enumerate-headings-plugin enumerate-heading-plugin">2.4.0.1</span> Consenso ai cookie</h4>
+<p>Utilizziamo i cookie per riconoscere le tue visite ripetute e le tue preferenze, nonché per misurare l'efficacia della nostra documentazione e se gli utenti trovano ciò che cercano. Con il tuo consenso, ci aiuti a migliorare i nostri materiali di formazione. Scopri di più su <a href="https://seqera.io/privacy-policy/#cookies" rel="noopener" target="_blank">come utilizziamo i cookie</a>.</p>
 <input class="md-toggle" id="__settings" type="checkbox"/>
 <div class="md-consent__settings">
 <ul class="task-list">
@@ -3391,8 +3419,10 @@ window.mkdocsQuizConfig = {
 </aside>
 </div>
 <script>var consent=__md_get("__consent");if(consent)for(var input of document.forms.consent.elements)input.name&&(input.checked=consent[input.name]||!1);else"file:"!==location.protocol&&setTimeout((function(){document.querySelector("[data-md-component=consent]").hidden=!1}),250);var form=document.forms.consent;for(var action of["submit","reset"])form.addEventListener(action,(function(e){if(e.preventDefault(),"reset"===e.type)for(var n of document.forms.consent.elements)n.name&&(n.checked=!1);__md_set("__consent",Object.fromEntries(Array.from(new FormData(form).keys()).map((function(e){return[e,!0]})))),location.hash="",location.reload()}))</script>
-<script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiato", "clipboard.copy": "Copia", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.term.missing": "Non presente", "select.version": "Seleziona la versione"}, "version": {"alias": true, "provider": "mike"}}</script>
-<script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
-<script src="../../../assets/javascripts/posthog.js"></script>
+<script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiato", "clipboard.copy": "Copia", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.term.missing": "Non presente", "select.version": "Seleziona la versione"}, "version": {"alias": true, "provider": "mike"}}</script>
+<script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+<script src="../../assets/javascripts/consent-sync.js"></script>
+<script src="../../assets/javascripts/posthog.js"></script>
+<script src="../../assets/javascripts/language-picker.js"></script>
 </body>
 </html>

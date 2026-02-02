@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://training.nextflow.io/0.dev/it/nf4_science/rnaseq/01_method/">
+        <link rel="canonical" href="https://training.nextflow.io/it/nf4_science/rnaseq/01_method/">
       
       
         <link rel="prev" href="../00_orientation/">
@@ -18,33 +18,41 @@
       
       
         
-          <link rel="alternate" href="../../../../nf4_science/rnaseq/01_method/" hreflang="en">
+          <link rel="alternate" href="/" hreflang="en">
         
-          <link rel="alternate" href="../../../../pt/nf4_science/rnaseq/01_method/" hreflang="pt">
+          <link rel="alternate" href="/de/" hreflang="de">
         
-          <link rel="alternate" href="../../../../es/nf4_science/rnaseq/01_method/" hreflang="es">
+          <link rel="alternate" href="/es/" hreflang="es">
         
-          <link rel="alternate" href="../../../../fr/nf4_science/rnaseq/01_method/" hreflang="fr">
+          <link rel="alternate" href="/fr/" hreflang="fr">
         
-          <link rel="alternate" href="./" hreflang="it">
+          <link rel="alternate" href="/hi/" hreflang="hi">
         
-          <link rel="alternate" href="../../../../ko/nf4_science/rnaseq/01_method/" hreflang="ko">
+          <link rel="alternate" href="/it/" hreflang="it">
+        
+          <link rel="alternate" href="/ko/" hreflang="ko">
+        
+          <link rel="alternate" href="/pl/" hreflang="pl">
+        
+          <link rel="alternate" href="/pt/" hreflang="pt">
+        
+          <link rel="alternate" href="/tr/" hreflang="tr">
         
       
       
-      <link rel="icon" href="../../../../assets/img/nextflow-icon.png">
+      <link rel="icon" href="../../../assets/img/nextflow-icon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
     
     
       
-        <title>Part 1: Method overview and manual testing - training.nextflow.io</title>
+        <title>Parte 1: Panoramica del metodo e test manuali - training.nextflow.io</title>
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
   
@@ -108,11 +116,11 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/fonts.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/fonts.css">
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/extra.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/extra.css">
     
-    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
   
@@ -147,7 +155,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#part-1-method-overview-and-manual-testing" class="md-skip">
+        <a href="#parte-1-panoramica-del-metodo-e-test-manuali" class="md-skip">
           Vai al contenuto
         </a>
       
@@ -167,9 +175,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Intestazione">
-    <a href="../../../" title="training.nextflow.io" class="md-header__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
+    <a href="../../.." title="training.nextflow.io" class="md-header__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
       
-  <img src="../../../../assets/img/nextflow_logo_dark.png" alt="logo">
+  <img src="../../../assets/img/nextflow_logo_dark.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -186,7 +194,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Part 1: Method overview and manual testing
+              Parte 1: Panoramica del metodo e test manuali
             
           </span>
         </div>
@@ -233,38 +241,62 @@
       <ul class="md-select__list">
         
           <li class="md-select__item">
-            <a href="../../../../nf4_science/rnaseq/01_method/" hreflang="en" class="md-select__link">
+            <a href="/" hreflang="en" class="md-select__link">
               English
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../../pt/nf4_science/rnaseq/01_method/" hreflang="pt" class="md-select__link">
-              Português
+            <a href="/de/" hreflang="de" class="md-select__link">
+              deutsch
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../../es/nf4_science/rnaseq/01_method/" hreflang="es" class="md-select__link">
-              Español
+            <a href="/es/" hreflang="es" class="md-select__link">
+              español
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../../fr/nf4_science/rnaseq/01_method/" hreflang="fr" class="md-select__link">
-              Français
+            <a href="/fr/" hreflang="fr" class="md-select__link">
+              français
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="./" hreflang="it" class="md-select__link">
-              Italiano
+            <a href="/hi/" hreflang="hi" class="md-select__link">
+              हिन्दी
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../../ko/nf4_science/rnaseq/01_method/" hreflang="ko" class="md-select__link">
-              Korean
+            <a href="/it/" hreflang="it" class="md-select__link">
+              italiano
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/ko/" hreflang="ko" class="md-select__link">
+              한국어
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/pl/" hreflang="pl" class="md-select__link">
+              Polski
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/pt/" hreflang="pt" class="md-select__link">
+              português
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/tr/" hreflang="tr" class="md-select__link">
+              Türkçe
             </a>
           </li>
         
@@ -384,9 +416,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigazione" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../../" title="training.nextflow.io" class="md-nav__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
+    <a href="../../.." title="training.nextflow.io" class="md-nav__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
       
-  <img src="../../../../assets/img/nextflow_logo_dark.png" alt="logo">
+  <img src="../../../assets/img/nextflow_logo_dark.png" alt="logo">
 
     </a>
     training.nextflow.io
@@ -413,7 +445,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../" class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         
   
   
@@ -522,7 +554,7 @@
   <span class="md-ellipsis">
     
   
-    Getting started
+    Per iniziare
   
 
     
@@ -550,7 +582,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run basic operations
+    Parte 1: Operazioni base
   
 
     
@@ -578,7 +610,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Run real pipelines
+    Parte 2: Eseguire pipeline reali
   
 
     
@@ -606,7 +638,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Run configuration
+    Parte 3: Configurazione
   
 
     
@@ -634,7 +666,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    Riepilogo del corso
   
 
     
@@ -662,7 +694,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Sondaggio di feedback
   
 
     
@@ -772,7 +804,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    Per iniziare
   
 
     
@@ -968,7 +1000,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    Riepilogo del corso
   
 
     
@@ -996,7 +1028,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Sondaggio di feedback
   
 
     
@@ -1106,7 +1138,7 @@
   <span class="md-ellipsis">
     
   
-    Getting started
+    Iniziare
   
 
     
@@ -1134,7 +1166,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run a demo pipeline
+    Parte 1: Eseguire una pipeline demo
   
 
     
@@ -1162,7 +1194,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Rewrite Hello for nf-core
+    Parte 2: Riscrivere Hello per nf-core
   
 
     
@@ -1190,7 +1222,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Use an nf-core module
+    Parte 3: Usare un modulo nf-core
   
 
     
@@ -1218,7 +1250,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Make an nf-core module
+    Parte 4: Creare un modulo nf-core
   
 
     
@@ -1246,7 +1278,7 @@
   <span class="md-ellipsis">
     
   
-    Part 5: Input validation
+    Parte 5: Validazione degli input
   
 
     
@@ -1274,7 +1306,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    Riepilogo del corso
   
 
     
@@ -1302,7 +1334,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Questionario di feedback
   
 
     
@@ -1350,7 +1382,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Science
+    Nextflow per la Scienza
   
 
     
@@ -1366,7 +1398,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Nextflow for Science
+    Nextflow per la Scienza
   
 
           </label>
@@ -1386,7 +1418,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Science
+    Nextflow per la Scienza
   
 
     
@@ -1425,7 +1457,7 @@
   <span class="md-ellipsis">
     
   
-    Genomics
+    Nextflow per la Genomica
   
 
     
@@ -1441,7 +1473,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Genomics
+    Nextflow per la Genomica
   
 
           </label>
@@ -1461,7 +1493,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Genomics
+    Nextflow per la Genomica
   
 
     
@@ -1489,7 +1521,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    Orientamento
   
 
     
@@ -1517,7 +1549,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Per-sample variant calling
+    Parte 1: Chiamata di varianti per campione
   
 
     
@@ -1545,7 +1577,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Joint calling on a cohort
+    Parte 2: Chiamata congiunta su una coorte
   
 
     
@@ -1573,7 +1605,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Moving code into modules
+    Parte 3: Spostare il codice in moduli
   
 
     
@@ -1601,7 +1633,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Adding tests
+    Parte 4: Aggiunta di test
   
 
     
@@ -1629,7 +1661,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Sondaggio di feedback
   
 
     
@@ -1657,7 +1689,7 @@
   <span class="md-ellipsis">
     
   
-    Next Steps
+    Prossimi Passi
   
 
     
@@ -1706,7 +1738,7 @@
   <span class="md-ellipsis">
     
   
-    RNAseq
+    Nextflow per RNAseq
   
 
     
@@ -1722,7 +1754,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    RNAseq
+    Nextflow per RNAseq
   
 
           </label>
@@ -1742,7 +1774,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for RNAseq
+    Nextflow per RNAseq
   
 
     
@@ -1770,7 +1802,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    Orientamento
   
 
     
@@ -1807,7 +1839,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Method overview and manual testing
+    Parte 1: Panoramica del metodo e test manuali
   
 
     
@@ -1825,7 +1857,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Method overview and manual testing
+    Parte 1: Panoramica del metodo e test manuali
   
 
     
@@ -1845,22 +1877,22 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#1-initial-qc-and-adapter-trimming" class="md-nav__link">
+  <a href="#1-qc-iniziale-e-rimozione-degli-adapter" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Initial QC and adapter trimming
+        1. QC iniziale e rimozione degli adapter
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Initial QC and adapter trimming">
+    <nav class="md-nav" aria-label="1. QC iniziale e rimozione degli adapter">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11-pull-the-container" class="md-nav__link">
+  <a href="#11-ottenere-il-container" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1. Pull the container
+        1.1. Ottenere il container
       
     </span>
   </a>
@@ -1868,10 +1900,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#12-spin-up-the-container-interactively" class="md-nav__link">
+  <a href="#12-avviare-il-container-in-modo-interattivo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2. Spin up the container interactively
+        1.2. Avviare il container in modo interattivo
       
     </span>
   </a>
@@ -1879,10 +1911,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#13-run-the-first-fastqc-command" class="md-nav__link">
+  <a href="#13-eseguire-il-primo-comando-fastqc" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.3. Run the first fastqc command
+        1.3. Eseguire il primo comando fastqc
       
     </span>
   </a>
@@ -1890,10 +1922,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#14-trim-adapter-sequences-with-trim_galore" class="md-nav__link">
+  <a href="#14-rimuovere-le-sequenze-degli-adapter-con-trim_galore" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.4. Trim adapter sequences with trim_galore
+        1.4. Rimuovere le sequenze degli adapter con trim_galore
       
     </span>
   </a>
@@ -1901,10 +1933,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#15-move-the-output-files-to-the-filesystem-outside-the-container" class="md-nav__link">
+  <a href="#15-spostare-i-file-di-output-nel-filesystem-esterno-al-container" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.5. Move the output files to the filesystem outside the container
+        1.5. Spostare i file di output nel filesystem esterno al container
       
     </span>
   </a>
@@ -1912,10 +1944,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#16-exit-the-container" class="md-nav__link">
+  <a href="#16-uscire-dal-container" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.6. Exit the container
+        1.6. Uscire dal container
       
     </span>
   </a>
@@ -1926,22 +1958,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#2-align-the-reads-to-the-reference-genome" class="md-nav__link">
+  <a href="#2-allineare-le-read-al-genoma-di-riferimento" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Align the reads to the reference genome
+        2. Allineare le read al genoma di riferimento
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. Align the reads to the reference genome">
+    <nav class="md-nav" aria-label="2. Allineare le read al genoma di riferimento">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#21-pull-the-hisat2-container" class="md-nav__link">
+  <a href="#21-ottenere-il-container-hisat2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1. Pull the hisat2 container
+        2.1. Ottenere il container hisat2
       
     </span>
   </a>
@@ -1949,10 +1981,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#22-spin-up-the-hisat2-container-interactively" class="md-nav__link">
+  <a href="#22-avviare-il-container-hisat2-in-modo-interattivo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2. Spin up the hisat2 container interactively
+        2.2. Avviare il container hisat2 in modo interattivo
       
     </span>
   </a>
@@ -1960,10 +1992,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#23-create-the-hisat2-genome-index-files" class="md-nav__link">
+  <a href="#23-creare-i-file-di-indice-del-genoma-per-hisat2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.3. Create the Hisat2 genome index files
+        2.3. Creare i file di indice del genoma per Hisat2
       
     </span>
   </a>
@@ -1971,10 +2003,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#24-run-the-hisat2-command" class="md-nav__link">
+  <a href="#24-eseguire-il-comando-hisat2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.4. Run the hisat2 command
+        2.4. Eseguire il comando hisat2
       
     </span>
   </a>
@@ -1982,10 +2014,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#25-move-the-output-files-to-the-filesystem-outside-the-container" class="md-nav__link">
+  <a href="#25-spostare-i-file-di-output-nel-filesystem-esterno-al-container" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.5. Move the output files to the filesystem outside the container
+        2.5. Spostare i file di output nel filesystem esterno al container
       
     </span>
   </a>
@@ -1993,10 +2025,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#26-exit-the-container" class="md-nav__link">
+  <a href="#26-uscire-dal-container" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.6. Exit the container
+        2.6. Uscire dal container
       
     </span>
   </a>
@@ -2007,22 +2039,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#3-generate-a-comprehensive-qc-report" class="md-nav__link">
+  <a href="#3-generare-un-report-qc-completo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Generate a comprehensive QC report
+        3. Generare un report QC completo
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. Generate a comprehensive QC report">
+    <nav class="md-nav" aria-label="3. Generare un report QC completo">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#31-pull-the-multiqc-container" class="md-nav__link">
+  <a href="#31-ottenere-il-container-multiqc" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1. Pull the multiqc container
+        3.1. Ottenere il container multiqc
       
     </span>
   </a>
@@ -2030,10 +2062,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#32-spin-up-the-multiqc-container-interactively" class="md-nav__link">
+  <a href="#32-avviare-il-container-multiqc-in-modo-interattivo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.2. Spin up the multiqc container interactively
+        3.2. Avviare il container multiqc in modo interattivo
       
     </span>
   </a>
@@ -2041,10 +2073,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#33-run-the-multiqc-command" class="md-nav__link">
+  <a href="#33-eseguire-il-comando-multiqc" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.3. Run the multiqc command
+        3.3. Eseguire il comando multiqc
       
     </span>
   </a>
@@ -2052,10 +2084,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#34-move-the-output-files-to-the-filesystem-outside-the-container" class="md-nav__link">
+  <a href="#34-spostare-i-file-di-output-nel-filesystem-esterno-al-container" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.4. Move the output files to the filesystem outside the container
+        3.4. Spostare i file di output nel filesystem esterno al container
       
     </span>
   </a>
@@ -2063,10 +2095,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#35-exit-the-container" class="md-nav__link">
+  <a href="#35-uscire-dal-container" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.5. Exit the container
+        3.5. Uscire dal container
       
     </span>
   </a>
@@ -2085,10 +2117,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next" class="md-nav__link">
+  <a href="#passi-successivi" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        Passi successivi
       
     </span>
   </a>
@@ -2308,7 +2340,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Single-sample implementation
+    Parte 2: Implementazione per singolo campione
   
 
     
@@ -2336,7 +2368,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Multi-sample paired-end implementation
+    Parte 3: Implementazione con campioni multipli paired-end
   
 
     
@@ -2364,7 +2396,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Sondaggio di feedback
   
 
     
@@ -2392,7 +2424,7 @@
   <span class="md-ellipsis">
     
   
-    Next Steps
+    Prossimi Passi
   
 
     
@@ -2439,7 +2471,7 @@
   <span class="md-ellipsis">
     
   
-    Imaging
+    Nextflow run per l'Imaging
   
 
     
@@ -2455,7 +2487,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Imaging
+    Nextflow run per l'Imaging
   
 
           </label>
@@ -2475,7 +2507,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow run for Imaging
+    Nextflow run per l'Imaging
   
 
     
@@ -2503,7 +2535,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    Orientamento
   
 
     
@@ -2531,7 +2563,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run basic operations
+    Parte 1: Eseguire operazioni di base
   
 
     
@@ -2559,7 +2591,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Run nf-core/molkart
+    Parte 2: Eseguire nf-core/molkart
   
 
     
@@ -2587,7 +2619,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Organizing inputs
+    Parte 3: Organizzazione degli input
   
 
     
@@ -2615,7 +2647,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Configuration
+    Parte 4: Configurazione
   
 
     
@@ -2643,7 +2675,7 @@
   <span class="md-ellipsis">
     
   
-    Survey
+    Sondaggio
   
 
     
@@ -2671,7 +2703,7 @@
   <span class="md-ellipsis">
     
   
-    Next steps
+    Prossimi passi
   
 
     
@@ -2725,7 +2757,7 @@
   <span class="md-ellipsis">
     
   
-    Side Quests
+    Missioni Secondarie
   
 
     
@@ -2741,7 +2773,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Side Quests
+    Missioni Secondarie
   
 
           </label>
@@ -2761,7 +2793,7 @@
   <span class="md-ellipsis">
     
   
-    Side Quests
+    Missioni Secondarie
   
 
     
@@ -2789,7 +2821,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    Orientamento
   
 
     
@@ -2817,7 +2849,7 @@
   <span class="md-ellipsis">
     
   
-    Development Environment
+    Ambiente di Sviluppo
   
 
     
@@ -2845,7 +2877,7 @@
   <span class="md-ellipsis">
     
   
-    Metadata and meta maps
+    Metadati e meta map
   
 
     
@@ -2873,7 +2905,7 @@
   <span class="md-ellipsis">
     
   
-    File input processing
+    Elaborazione di file in input
   
 
     
@@ -2901,7 +2933,7 @@
   <span class="md-ellipsis">
     
   
-    Splitting and Grouping
+    Divisione e Raggruppamento
   
 
     
@@ -2929,7 +2961,7 @@
   <span class="md-ellipsis">
     
   
-    Workflows of Workflows
+    Workflows di Workflows
   
 
     
@@ -2957,7 +2989,7 @@
   <span class="md-ellipsis">
     
   
-    Debugging Workflows
+    Debug dei Workflow
   
 
     
@@ -2985,7 +3017,7 @@
   <span class="md-ellipsis">
     
   
-    Essential Nextflow Scripting Patterns
+    Pattern di Scripting Essenziali in Nextflow
   
 
     
@@ -3013,7 +3045,7 @@
   <span class="md-ellipsis">
     
   
-    Testing with nf-test
+    Testing con nf-test
   
 
     
@@ -3059,7 +3091,7 @@
   <span class="md-ellipsis">
     
   
-    Training Collections
+    Collezioni di Formazione
   
 
     
@@ -3075,7 +3107,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Training Collections
+    Collezioni di Formazione
   
 
           </label>
@@ -3095,7 +3127,7 @@
   <span class="md-ellipsis">
     
   
-    Training Collections
+    Collezioni di Formazione
   
 
     
@@ -3123,7 +3155,7 @@
   <span class="md-ellipsis">
     
   
-    The Architect's Toolkit I
+    Il Toolkit dell'Architetto I
   
 
     
@@ -3205,7 +3237,7 @@
   <span class="md-ellipsis">
     
   
-    Getting help
+    Ottenere aiuto
   
 
     
@@ -3244,7 +3276,7 @@
   <span class="md-ellipsis">
     
   
-    Training environment
+    Opzioni per l'ambiente
   
 
     
@@ -3260,7 +3292,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Training environment
+    Opzioni per l'ambiente
   
 
           </label>
@@ -3280,7 +3312,7 @@
   <span class="md-ellipsis">
     
   
-    Environment options
+    Opzioni per l'ambiente
   
 
     
@@ -3336,7 +3368,7 @@
   <span class="md-ellipsis">
     
   
-    Local Devcontainers
+    Devcontainers Locali
   
 
     
@@ -3364,7 +3396,7 @@
   <span class="md-ellipsis">
     
   
-    Manual installation
+    Installazione manuale
   
 
     
@@ -3400,7 +3432,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow versions
+    Versioni di Nextflow
   
 
     
@@ -3428,7 +3460,7 @@
   <span class="md-ellipsis">
     
   
-    The Hello pipeline
+    La pipeline Hello
   
 
     
@@ -3470,22 +3502,22 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#1-initial-qc-and-adapter-trimming" class="md-nav__link">
+  <a href="#1-qc-iniziale-e-rimozione-degli-adapter" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Initial QC and adapter trimming
+        1. QC iniziale e rimozione degli adapter
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Initial QC and adapter trimming">
+    <nav class="md-nav" aria-label="1. QC iniziale e rimozione degli adapter">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11-pull-the-container" class="md-nav__link">
+  <a href="#11-ottenere-il-container" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1. Pull the container
+        1.1. Ottenere il container
       
     </span>
   </a>
@@ -3493,10 +3525,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#12-spin-up-the-container-interactively" class="md-nav__link">
+  <a href="#12-avviare-il-container-in-modo-interattivo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2. Spin up the container interactively
+        1.2. Avviare il container in modo interattivo
       
     </span>
   </a>
@@ -3504,10 +3536,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#13-run-the-first-fastqc-command" class="md-nav__link">
+  <a href="#13-eseguire-il-primo-comando-fastqc" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.3. Run the first fastqc command
+        1.3. Eseguire il primo comando fastqc
       
     </span>
   </a>
@@ -3515,10 +3547,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#14-trim-adapter-sequences-with-trim_galore" class="md-nav__link">
+  <a href="#14-rimuovere-le-sequenze-degli-adapter-con-trim_galore" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.4. Trim adapter sequences with trim_galore
+        1.4. Rimuovere le sequenze degli adapter con trim_galore
       
     </span>
   </a>
@@ -3526,10 +3558,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#15-move-the-output-files-to-the-filesystem-outside-the-container" class="md-nav__link">
+  <a href="#15-spostare-i-file-di-output-nel-filesystem-esterno-al-container" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.5. Move the output files to the filesystem outside the container
+        1.5. Spostare i file di output nel filesystem esterno al container
       
     </span>
   </a>
@@ -3537,10 +3569,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#16-exit-the-container" class="md-nav__link">
+  <a href="#16-uscire-dal-container" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.6. Exit the container
+        1.6. Uscire dal container
       
     </span>
   </a>
@@ -3551,22 +3583,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#2-align-the-reads-to-the-reference-genome" class="md-nav__link">
+  <a href="#2-allineare-le-read-al-genoma-di-riferimento" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Align the reads to the reference genome
+        2. Allineare le read al genoma di riferimento
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. Align the reads to the reference genome">
+    <nav class="md-nav" aria-label="2. Allineare le read al genoma di riferimento">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#21-pull-the-hisat2-container" class="md-nav__link">
+  <a href="#21-ottenere-il-container-hisat2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1. Pull the hisat2 container
+        2.1. Ottenere il container hisat2
       
     </span>
   </a>
@@ -3574,10 +3606,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#22-spin-up-the-hisat2-container-interactively" class="md-nav__link">
+  <a href="#22-avviare-il-container-hisat2-in-modo-interattivo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2. Spin up the hisat2 container interactively
+        2.2. Avviare il container hisat2 in modo interattivo
       
     </span>
   </a>
@@ -3585,10 +3617,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#23-create-the-hisat2-genome-index-files" class="md-nav__link">
+  <a href="#23-creare-i-file-di-indice-del-genoma-per-hisat2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.3. Create the Hisat2 genome index files
+        2.3. Creare i file di indice del genoma per Hisat2
       
     </span>
   </a>
@@ -3596,10 +3628,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#24-run-the-hisat2-command" class="md-nav__link">
+  <a href="#24-eseguire-il-comando-hisat2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.4. Run the hisat2 command
+        2.4. Eseguire il comando hisat2
       
     </span>
   </a>
@@ -3607,10 +3639,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#25-move-the-output-files-to-the-filesystem-outside-the-container" class="md-nav__link">
+  <a href="#25-spostare-i-file-di-output-nel-filesystem-esterno-al-container" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.5. Move the output files to the filesystem outside the container
+        2.5. Spostare i file di output nel filesystem esterno al container
       
     </span>
   </a>
@@ -3618,10 +3650,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#26-exit-the-container" class="md-nav__link">
+  <a href="#26-uscire-dal-container" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.6. Exit the container
+        2.6. Uscire dal container
       
     </span>
   </a>
@@ -3632,22 +3664,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#3-generate-a-comprehensive-qc-report" class="md-nav__link">
+  <a href="#3-generare-un-report-qc-completo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Generate a comprehensive QC report
+        3. Generare un report QC completo
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. Generate a comprehensive QC report">
+    <nav class="md-nav" aria-label="3. Generare un report QC completo">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#31-pull-the-multiqc-container" class="md-nav__link">
+  <a href="#31-ottenere-il-container-multiqc" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1. Pull the multiqc container
+        3.1. Ottenere il container multiqc
       
     </span>
   </a>
@@ -3655,10 +3687,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#32-spin-up-the-multiqc-container-interactively" class="md-nav__link">
+  <a href="#32-avviare-il-container-multiqc-in-modo-interattivo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.2. Spin up the multiqc container interactively
+        3.2. Avviare il container multiqc in modo interattivo
       
     </span>
   </a>
@@ -3666,10 +3698,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#33-run-the-multiqc-command" class="md-nav__link">
+  <a href="#33-eseguire-il-comando-multiqc" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.3. Run the multiqc command
+        3.3. Eseguire il comando multiqc
       
     </span>
   </a>
@@ -3677,10 +3709,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#34-move-the-output-files-to-the-filesystem-outside-the-container" class="md-nav__link">
+  <a href="#34-spostare-i-file-di-output-nel-filesystem-esterno-al-container" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.4. Move the output files to the filesystem outside the container
+        3.4. Spostare i file di output nel filesystem esterno al container
       
     </span>
   </a>
@@ -3688,10 +3720,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#35-exit-the-container" class="md-nav__link">
+  <a href="#35-uscire-dal-container" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.5. Exit the container
+        3.5. Uscire dal container
       
     </span>
   </a>
@@ -3710,10 +3742,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next" class="md-nav__link">
+  <a href="#passi-successivi" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        Passi successivi
       
     </span>
   </a>
@@ -3962,44 +3994,54 @@
                 
                   
 
+ 
+<a
+  href="https://github.com/nextflow-io/training/edit/master/docs/nf4_science/rnaseq/01_method.md"
+  title="Modifica"
+  class="md-content__button md-icon"
+  rel="edit"
+>
+   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+</a>
+   
+<a
+  href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md"
+  title="Improve translation"
+  class="md-content__button md-icon"
+>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 1H3c-1.1 0-2 .9-2 2v12l3-3h5v-1c0-2.2 1.79-4 4-4V3c0-1.1-.9-2-2-2m0 3H9.5c-.34 1.19-.96 2.3-1.82 3.26l-.02.02 1.26 1.25-.37 1.01L7 8l-2.5 2.5-.69-.73 2.53-2.49A8.6 8.6 0 0 1 4.86 5h.99c.31.6.69 1.17 1.15 1.68A7.7 7.7 0 0 0 8.57 4H3V3h3.5V2h1v1H11zm10 5h-8c-1.1 0-2 .9-2 2v7c0 1.1.9 2 2 2h7l3 3V11c0-1.1-.9-2-2-2m-1.37 10-.85-2.25h-3.56L14.38 19h-1.5l3.37-9h1.5l3.38 9zM17 12l1.22 3.25h-2.43z"/></svg>
+</a>
+ 
 
-  
-    <a href="https://github.com/nextflow-io/training/edit/master/docs/nf4_science/rnaseq/01_method.md" title="Modifica" class="md-content__button md-icon" rel="edit">
-      
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
-    </a>
-  
-  
-
-
-<h1 id="part-1-method-overview-and-manual-testing">Part 1: Method overview and manual testing<a class="headerlink" href="#part-1-method-overview-and-manual-testing" title="Permanent link">&para;</a></h1>
-<p>There are multiple valid methods for processing and analyzing bulk RNAseq data.
-For this course, we are following the method described <a href="https://www.bioinformatics.babraham.ac.uk/training/RNASeq_Course/Analysing%20RNA-Seq%20data%20Exercise.pdf">here</a> by Drs. Simon Andrews and Laura Biggins at the <a href="https://www.babraham.ac.uk/">Babraham Institute</a>.</p>
-<p>Our goal is to develop a workflow that implements the following processing steps: run initial quality control on reads in a bulk RNAseq sample, trim adapter sequences from the reads, align the reads to a reference genome, and produce a comprehensive quality control (QC) report.</p>
+<h1 id="parte-1-panoramica-del-metodo-e-test-manuali">Parte 1: Panoramica del metodo e test manuali<a class="headerlink" href="#parte-1-panoramica-del-metodo-e-test-manuali" title="Permanent link">&para;</a></h1>
+<p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Traduzione assistita da IA - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">scopri di più e suggerisci miglioramenti</a></span></p>
+<p>Esistono molteplici metodi validi per elaborare e analizzare dati RNAseq in bulk.
+Per questo corso, seguiamo il metodo descritto <a href="https://www.bioinformatics.babraham.ac.uk/training/RNASeq_Course/Analysing%20RNA-Seq%20data%20Exercise.pdf">qui</a> dai Dott. Simon Andrews e Laura Biggins presso il <a href="https://www.babraham.ac.uk/">Babraham Institute</a>.</p>
+<p>Il nostro obiettivo è sviluppare un workflow che implementi le seguenti fasi di elaborazione: eseguire il controllo qualità iniziale sulle read in un campione RNAseq in bulk, rimuovere le sequenze degli adapter dalle read, allineare le read a un genoma di riferimento e produrre un report completo di controllo qualità (QC).</p>
 <figure class="excalidraw">
 </figure>
 
 <ul>
-<li><strong>FASTQC:</strong> Perform QC on the read data before trimming using FastQC</li>
-<li><strong>TRIM_GALORE:</strong> Trim adapter sequences and perform QC after trimming using Trim Galore (bundles Cutadapt and FastQC)</li>
-<li><strong>HISAT2_ALIGN:</strong> Align reads to the reference genome using Hisat2</li>
-<li><strong>MULTIQC:</strong> Generate a comprehensive QC report using MultiQC</li>
+<li><strong>FASTQC:</strong> Eseguire il QC sui dati delle read prima del trimming utilizzando FastQC</li>
+<li><strong>TRIM_GALORE:</strong> Rimuovere le sequenze degli adapter ed eseguire il QC dopo il trimming utilizzando Trim Galore (che include Cutadapt e FastQC)</li>
+<li><strong>HISAT2_ALIGN:</strong> Allineare le read al genoma di riferimento utilizzando Hisat2</li>
+<li><strong>MULTIQC:</strong> Generare un report QC completo utilizzando MultiQC</li>
 </ul>
-<p>However, before we dive into writing any workflow code, we are going to try out the commands manually on some test data.
-The tools we need are not installed in the GitHub Codespaces environment, so we'll use them via containers (see <a href="../../../hello_nextflow/05_hello_containers/">Hello Containers</a>).</p>
+<p>Tuttavia, prima di iniziare a scrivere qualsiasi codice del workflow, proveremo i comandi manualmente su alcuni dati di test.
+Gli strumenti necessari non sono installati nell'ambiente GitHub Codespaces, quindi li utilizzeremo tramite container (vedere <a href="../../../hello_nextflow/05_hello_containers/">Hello Containers</a>).</p>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Make sure you're in the <code>nf4-science/rnaseq</code> directory. The last part of the path shown when you type <code>pwd</code> should be <code>rnaseq</code>.</p>
+<p class="admonition-title">Nota</p>
+<p>Verificare di trovarsi nella directory <code>nf4-science/rnaseq</code>. L'ultima parte del percorso mostrato quando si digita <code>pwd</code> dovrebbe essere <code>rnaseq</code>.</p>
 </div>
 <hr />
-<h2 id="1-initial-qc-and-adapter-trimming">1. Initial QC and adapter trimming<a class="headerlink" href="#1-initial-qc-and-adapter-trimming" title="Permanent link">&para;</a></h2>
-<p>We're going to pull a container image that has both <code>fastqc</code> and <code>trim_galore</code> installed, spin it up interactively and run the trimming and QC commands on one of the example data files.</p>
-<h3 id="11-pull-the-container">1.1. Pull the container<a class="headerlink" href="#11-pull-the-container" title="Permanent link">&para;</a></h3>
+<h2 id="1-qc-iniziale-e-rimozione-degli-adapter">1. QC iniziale e rimozione degli adapter<a class="headerlink" href="#1-qc-iniziale-e-rimozione-degli-adapter" title="Permanent link">&para;</a></h2>
+<p>Otterremo un'immagine container che ha sia <code>fastqc</code> che <code>trim_galore</code> installati, la avvieremo in modo interattivo ed eseguiremo i comandi di trimming e QC su uno dei file di dati di esempio.</p>
+<h3 id="11-ottenere-il-container">1.1. Ottenere il container<a class="headerlink" href="#11-ottenere-il-container" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>docker<span class="w"> </span>pull<span class="w"> </span>community.wave.seqera.io/library/trim-galore:0.6.10--1bf8ca4e1967cd18
 </code></pre></div>
-<p>This gives you the following console output as the system downloads the image:</p>
+<p>Questo produce il seguente output della console mentre il sistema scarica l'immagine:</p>
 <details class="success">
-<summary>Command output</summary>
+<summary>Output del comando</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="go">0.6.10--1bf8ca4e1967cd18: Pulling from library/trim-galore</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="go">dafa2b0c44d2: Pull complete</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="go">dec6b097362e: Pull complete</span>
@@ -4019,33 +4061,33 @@ The tools we need are not installed in the GitHub Codespaces environment, so we'
 <a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="go">community.wave.seqera.io/library/trim-galore:0.6.10--1bf8ca4e1967cd18</span>
 </code></pre></div>
 </details>
-<h3 id="12-spin-up-the-container-interactively">1.2. Spin up the container interactively<a class="headerlink" href="#12-spin-up-the-container-interactively" title="Permanent link">&para;</a></h3>
+<h3 id="12-avviare-il-container-in-modo-interattivo">1.2. Avviare il container in modo interattivo<a class="headerlink" href="#12-avviare-il-container-in-modo-interattivo" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>-v<span class="w"> </span>./data:/data<span class="w"> </span>community.wave.seqera.io/library/trim-galore:0.6.10--1bf8ca4e1967cd18
 </code></pre></div>
 <!--
-??? success "Command output"
+??? success "Output del comando"
 
     <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>
 </code></pre></div>
 -->
 
-<p>Your prompt will change to something like <code>(base) root@b645838b3314:/tmp#</code>, which indicates that you are now inside the container.</p>
-<p>The <code>-v ./data:/data</code> part of the command will enable us to access the contents of the <code>data/</code> directory from inside the container.</p>
+<p>Il prompt cambierà in qualcosa come <code>(base) root@b645838b3314:/tmp#</code>, il che indica che ci si trova all'interno del container.</p>
+<p>La parte <code>-v ./data:/data</code> del comando consentirà di accedere ai contenuti della directory <code>data/</code> dall'interno del container.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>ls<span class="w"> </span>/data/reads
 </code></pre></div>
 <details class="success">
-<summary>Command output</summary>
+<summary>Output del comando</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="go">ENCSR000COQ1_1.fastq.gz  ENCSR000COQ2_2.fastq.gz  ENCSR000COR2_1.fastq.gz  ENCSR000CPO1_2.fastq.gz</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="go">ENCSR000COQ1_2.fastq.gz  ENCSR000COR1_1.fastq.gz  ENCSR000COR2_2.fastq.gz  ENCSR000CPO2_1.fastq.gz</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="go">ENCSR000COQ2_1.fastq.gz  ENCSR000COR1_2.fastq.gz  ENCSR000CPO1_1.fastq.gz  ENCSR000CPO2_2.fastq.gzO</span>
 </code></pre></div>
 </details>
-<h3 id="13-run-the-first-fastqc-command">1.3. Run the first <code>fastqc</code> command<a class="headerlink" href="#13-run-the-first-fastqc-command" title="Permanent link">&para;</a></h3>
-<p>Let's run <code>fastqc</code> to collect quality control metrics on the read data.</p>
+<h3 id="13-eseguire-il-primo-comando-fastqc">1.3. Eseguire il primo comando <code>fastqc</code><a class="headerlink" href="#13-eseguire-il-primo-comando-fastqc" title="Permanent link">&para;</a></h3>
+<p>Eseguiamo <code>fastqc</code> per raccogliere le metriche di controllo qualità sui dati delle read.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>fastqc<span class="w"> </span>/data/reads/ENCSR000COQ1_1.fastq.gz
 </code></pre></div>
 <details class="success">
-<summary>Command output</summary>
+<summary>Output del comando</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="go">application/gzip</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="go">Started analysis of ENCSR000COQ1_1.fastq.gz</span>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="go">Approx 5% complete for ENCSR000COQ1_1.fastq.gz</span>
@@ -4070,22 +4112,22 @@ The tools we need are not installed in the GitHub Codespaces environment, so we'
 <a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a><span class="go">Analysis complete for ENCSR000COQ1_1.fastq.gz</span>
 </code></pre></div>
 </details>
-<p>This should run very quickly.
-You can find the output files in the same directory as the original data:</p>
+<p>Questo dovrebbe essere eseguito molto rapidamente.
+È possibile trovare i file di output nella stessa directory dei dati originali:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>ls<span class="w"> </span>/data/reads/ENCSR000COQ1_1_fastqc*
 </code></pre></div>
 <!-- switch to tree -->
 
 <div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="go">/data/reads/ENCSR000COQ1_1_fastqc.html  /data/reads/ENCSR000COQ1_1_fastqc.zip</span>
 </code></pre></div>
-<h3 id="14-trim-adapter-sequences-with-trim_galore">1.4. Trim adapter sequences with <code>trim_galore</code><a class="headerlink" href="#14-trim-adapter-sequences-with-trim_galore" title="Permanent link">&para;</a></h3>
-<p>Now let's run <code>trim_galore</code>, which bundles Cutadapt and FastQC, to trim the adapter sequences and collect post-trimming QC metrics.</p>
+<h3 id="14-rimuovere-le-sequenze-degli-adapter-con-trim_galore">1.4. Rimuovere le sequenze degli adapter con <code>trim_galore</code><a class="headerlink" href="#14-rimuovere-le-sequenze-degli-adapter-con-trim_galore" title="Permanent link">&para;</a></h3>
+<p>Ora eseguiamo <code>trim_galore</code>, che include Cutadapt e FastQC, per rimuovere le sequenze degli adapter e raccogliere le metriche QC post-trimming.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>trim_galore<span class="w"> </span>--fastqc<span class="w"> </span>/data/reads/ENCSR000COQ1_1.fastq.gz
 </code></pre></div>
-<p>The <code>--fastqc</code> flag causes the command to automatically run a QC collection step after trimming is complete.</p>
-<p><em>The output is very verbose so what follows is abbreviated.</em></p>
+<p>Il flag <code>--fastqc</code> fa sì che il comando esegua automaticamente una fase di raccolta QC dopo il completamento del trimming.</p>
+<p><em>L'output è molto dettagliato, quindi quanto segue è abbreviato.</em></p>
 <details class="success">
-<summary>Command output</summary>
+<summary>Output del comando</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="go">Multicore support not enabled. Proceeding with single-core trimming.</span>
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="go">Path to Cutadapt set as: &#39;cutadapt&#39; (default)</span>
 <a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="go">Cutadapt seems to be working fine (tested command &#39;cutadapt --version&#39;)</span>
@@ -4099,28 +4141,28 @@ You can find the output files in the same directory as the original data:</p>
 <a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="go">Analysis complete for ENCSR000COQ1_1_trimmed.fq.gz</span>
 </code></pre></div>
 </details>
-<p>You can find the output files in the working directory:</p>
+<p>È possibile trovare i file di output nella directory di lavoro:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>ls<span class="w"> </span>ENCSR000COQ1_1*
 </code></pre></div>
 <div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="go">ENCSR000COQ1_1.fastq.gz_trimming_report.txt  ENCSR000COQ1_1_trimmed_fastqc.html</span>
 <a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="go">ENCSR000COQ1_1_trimmed.fq.gz                 ENCSR000COQ1_1_trimmed_fastqc.zip</span>
 </code></pre></div>
-<h3 id="15-move-the-output-files-to-the-filesystem-outside-the-container">1.5. Move the output files to the filesystem outside the container<a class="headerlink" href="#15-move-the-output-files-to-the-filesystem-outside-the-container" title="Permanent link">&para;</a></h3>
-<p>Anything that remains inside the container will be inaccessible to future work so let's move these to a new directory.</p>
+<h3 id="15-spostare-i-file-di-output-nel-filesystem-esterno-al-container">1.5. Spostare i file di output nel filesystem esterno al container<a class="headerlink" href="#15-spostare-i-file-di-output-nel-filesystem-esterno-al-container" title="Permanent link">&para;</a></h3>
+<p>Tutto ciò che rimane all'interno del container sarà inaccessibile per il lavoro futuro, quindi spostiamo questi file in una nuova directory.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>mkdir<span class="w"> </span>/data/trimmed
 <a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>mv<span class="w"> </span>ENCSR000COQ1_1*<span class="w"> </span>/data/trimmed
 </code></pre></div>
-<h3 id="16-exit-the-container">1.6. Exit the container<a class="headerlink" href="#16-exit-the-container" title="Permanent link">&para;</a></h3>
+<h3 id="16-uscire-dal-container">1.6. Uscire dal container<a class="headerlink" href="#16-uscire-dal-container" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="nb">exit</span>
 </code></pre></div>
 <hr />
-<h2 id="2-align-the-reads-to-the-reference-genome">2. Align the reads to the reference genome<a class="headerlink" href="#2-align-the-reads-to-the-reference-genome" title="Permanent link">&para;</a></h2>
-<p>We're going to pull a container image that has <code>hisat2</code> installed, spin it up interactively and run the alignment command to align the RNAseq data to a reference genome.</p>
-<h3 id="21-pull-the-hisat2-container">2.1. Pull the <code>hisat2</code> container<a class="headerlink" href="#21-pull-the-hisat2-container" title="Permanent link">&para;</a></h3>
+<h2 id="2-allineare-le-read-al-genoma-di-riferimento">2. Allineare le read al genoma di riferimento<a class="headerlink" href="#2-allineare-le-read-al-genoma-di-riferimento" title="Permanent link">&para;</a></h2>
+<p>Otterremo un'immagine container che ha <code>hisat2</code> installato, la avvieremo in modo interattivo ed eseguiremo il comando di allineamento per allineare i dati RNAseq a un genoma di riferimento.</p>
+<h3 id="21-ottenere-il-container-hisat2">2.1. Ottenere il container <code>hisat2</code><a class="headerlink" href="#21-ottenere-il-container-hisat2" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>docker<span class="w"> </span>pull<span class="w"> </span>community.wave.seqera.io/library/hisat2_samtools:5e49f68a37dc010e
 </code></pre></div>
 <details class="success">
-<summary>Command output</summary>
+<summary>Output del comando</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="go">Unable to find image &#39;community.wave.seqera.io/library/hisat2_samtools:5e49f68a37dc010e&#39; locally</span>
 <a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="go">5e49f68a37dc010e: Pulling from library/hisat2_samtools</span>
 <a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="go">dafa2b0c44d2: Already exists</span>
@@ -4140,44 +4182,44 @@ You can find the output files in the same directory as the original data:</p>
 <a id="__codelineno-17-17" name="__codelineno-17-17" href="#__codelineno-17-17"></a><span class="go">Status: Downloaded newer image for community.wave.seqera.io/library/hisat2_samtools:5e49f68a37dc010e</span>
 </code></pre></div>
 </details>
-<h3 id="22-spin-up-the-hisat2-container-interactively">2.2. Spin up the <code>hisat2</code> container interactively<a class="headerlink" href="#22-spin-up-the-hisat2-container-interactively" title="Permanent link">&para;</a></h3>
+<h3 id="22-avviare-il-container-hisat2-in-modo-interattivo">2.2. Avviare il container <code>hisat2</code> in modo interattivo<a class="headerlink" href="#22-avviare-il-container-hisat2-in-modo-interattivo" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>-v<span class="w"> </span>./data:/data<span class="w"> </span>community.wave.seqera.io/library/hisat2_samtools:5e49f68a37dc010e
 </code></pre></div>
-<p>The command is the same as before, with the relevant container URI swapped in.</p>
-<h3 id="23-create-the-hisat2-genome-index-files">2.3. Create the Hisat2 genome index files<a class="headerlink" href="#23-create-the-hisat2-genome-index-files" title="Permanent link">&para;</a></h3>
-<p>Hisat2 requires the genome reference to be provided in a very specific format, and can't just consume the <code>genome.fa</code> FASTA file that we provide, so we're going to take this opportunity to create the relevant resources.</p>
+<p>Il comando è lo stesso di prima, con l'URI del container pertinente sostituito.</p>
+<h3 id="23-creare-i-file-di-indice-del-genoma-per-hisat2">2.3. Creare i file di indice del genoma per Hisat2<a class="headerlink" href="#23-creare-i-file-di-indice-del-genoma-per-hisat2" title="Permanent link">&para;</a></h3>
+<p>Hisat2 richiede che il riferimento del genoma sia fornito in un formato molto specifico e non può semplicemente utilizzare il file FASTA <code>genome.fa</code> che forniamo, quindi coglieremo questa opportunità per creare le risorse pertinenti.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>hisat2-build<span class="w"> </span>/data/genome.fa<span class="w"> </span>genome_index
 </code></pre></div>
-<p>The output is very verbose so the following is abbreviated:</p>
+<p>L'output è molto dettagliato, quindi quanto segue è abbreviato:</p>
 <!-- TODO: switch to full output -->
 
 <details class="success">
-<summary>Command output</summary>
+<summary>Output del comando</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="go">Settings:</span>
 <a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="go">  Output files: &quot;genome_index.*.ht2&quot;</span>
 <a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="go">&lt;...&gt;</span>
 <a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="go">Total time for call to driver() for forward index: 00:00:16</span>
 </code></pre></div>
 </details>
-<p>This creates multiple genome index files, which you can find in the working directory.</p>
+<p>Questo crea molteplici file di indice del genoma, che è possibile trovare nella directory di lavoro.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>ls<span class="w"> </span>genome_index.*
 </code></pre></div>
 <div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="go">genome_index.1.ht2  genome_index.3.ht2  genome_index.5.ht2  genome_index.7.ht2</span>
 <a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="go">genome_index.2.ht2  genome_index.4.ht2  genome_index.6.ht2  genome_index.8.ht2</span>
 </code></pre></div>
-<p>We'll use these in a moment, but first let's generate a gzipped tarball with these genome index files; we'll need them later and generating these is not typically something we want to do as part of a workflow.</p>
+<p>Li utilizzeremo tra un momento, ma prima generiamo un tarball compresso con questi file di indice del genoma; ne avremo bisogno più avanti e generarli non è tipicamente qualcosa che vogliamo fare come parte di un workflow.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>tar<span class="w"> </span>-czvf<span class="w"> </span>/data/genome_index.tar.gz<span class="w"> </span>genome_index.*
 </code></pre></div>
-<p>This stores a <code>genome_index.tar.gz</code> tarball containing the genome index files in the <code>data/</code> directory on our filesystem, which will come in handy in Part 2 of this course.</p>
-<h3 id="24-run-the-hisat2-command">2.4. Run the <code>hisat2</code> command<a class="headerlink" href="#24-run-the-hisat2-command" title="Permanent link">&para;</a></h3>
-<p>Now we can run the alignment command, which performs the alignment step with <code>hisat2</code> then pipes the output to <code>samtools</code> to write the output out as a BAM file.</p>
-<p>The read data input is the <code>/data/trimmed/ENCSR000COQ1_1_trimmed.fq.gz</code> file we generated with <code>trim_galore</code> in the previous step.</p>
+<p>Questo memorizza un tarball <code>genome_index.tar.gz</code> contenente i file di indice del genoma nella directory <code>data/</code> sul nostro filesystem, il che tornerà utile nella Parte 2 di questo corso.</p>
+<h3 id="24-eseguire-il-comando-hisat2">2.4. Eseguire il comando <code>hisat2</code><a class="headerlink" href="#24-eseguire-il-comando-hisat2" title="Permanent link">&para;</a></h3>
+<p>Ora possiamo eseguire il comando di allineamento, che esegue la fase di allineamento con <code>hisat2</code> e poi invia l'output a <code>samtools</code> per scrivere l'output come file BAM.</p>
+<p>L'input dei dati delle read è il file <code>/data/trimmed/ENCSR000COQ1_1_trimmed.fq.gz</code> che abbiamo generato con <code>trim_galore</code> nella fase precedente.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>hisat2<span class="w"> </span>-x<span class="w"> </span>genome_index<span class="w"> </span>-U<span class="w"> </span>/data/trimmed/ENCSR000COQ1_1_trimmed.fq.gz<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="w">    </span>--new-summary<span class="w"> </span>--summary-file<span class="w"> </span>ENCSR000COQ1_1_trimmed.hisat2.log<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="w">    </span>samtools<span class="w"> </span>view<span class="w"> </span>-bS<span class="w"> </span>-o<span class="w"> </span>ENCSR000COQ1_1_trimmed.bam
 </code></pre></div>
 <details class="success">
-<summary>Command output</summary>
+<summary>Output del comando</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="go">HISAT2 summary stats:</span>
 <a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="go">        Total reads: 27816</span>
 <a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="go">                Aligned 0 time: 1550 (5.57%)</span>
@@ -4186,28 +4228,28 @@ You can find the output files in the same directory as the original data:</p>
 <a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a><span class="go">        Overall alignment rate: 94.43%</span>
 </code></pre></div>
 </details>
-<p>This runs almost instantly because it's a very small test file.
-At real scale this could take a lot longer.</p>
-<p>Once again you can find the output files in the working directory:</p>
+<p>Questo viene eseguito quasi istantaneamente perché è un file di test molto piccolo.
+Su scala reale potrebbe richiedere molto più tempo.</p>
+<p>Ancora una volta è possibile trovare i file di output nella directory di lavoro:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>ls<span class="w"> </span>ENCSR000COQ1_1*
 </code></pre></div>
 <div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="go">ENCSR000COQ1_1_trimmed.bam  ENCSR000COQ1_1_trimmed.hisat2.log</span>
 </code></pre></div>
-<h3 id="25-move-the-output-files-to-the-filesystem-outside-the-container">2.5. Move the output files to the filesystem outside the container<a class="headerlink" href="#25-move-the-output-files-to-the-filesystem-outside-the-container" title="Permanent link">&para;</a></h3>
+<h3 id="25-spostare-i-file-di-output-nel-filesystem-esterno-al-container">2.5. Spostare i file di output nel filesystem esterno al container<a class="headerlink" href="#25-spostare-i-file-di-output-nel-filesystem-esterno-al-container" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>mkdir<span class="w"> </span>/data/aligned
 <a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>mv<span class="w"> </span>ENCSR000COQ1_1*<span class="w"> </span>/data/aligned
 </code></pre></div>
-<h3 id="26-exit-the-container">2.6. Exit the container<a class="headerlink" href="#26-exit-the-container" title="Permanent link">&para;</a></h3>
+<h3 id="26-uscire-dal-container">2.6. Uscire dal container<a class="headerlink" href="#26-uscire-dal-container" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="nb">exit</span>
 </code></pre></div>
 <hr />
-<h2 id="3-generate-a-comprehensive-qc-report">3. Generate a comprehensive QC report<a class="headerlink" href="#3-generate-a-comprehensive-qc-report" title="Permanent link">&para;</a></h2>
-<p>We're going to pull a container image that has <code>multiqc</code> installed, spin it up interactively and run a report generation command on the before/after FastQC report files.</p>
-<h3 id="31-pull-the-multiqc-container">3.1. Pull the <code>multiqc</code> container<a class="headerlink" href="#31-pull-the-multiqc-container" title="Permanent link">&para;</a></h3>
+<h2 id="3-generare-un-report-qc-completo">3. Generare un report QC completo<a class="headerlink" href="#3-generare-un-report-qc-completo" title="Permanent link">&para;</a></h2>
+<p>Otterremo un'immagine container che ha <code>multiqc</code> installato, la avvieremo in modo interattivo ed eseguiremo un comando di generazione del report sui file di report FastQC prima/dopo.</p>
+<h3 id="31-ottenere-il-container-multiqc">3.1. Ottenere il container <code>multiqc</code><a class="headerlink" href="#31-ottenere-il-container-multiqc" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>docker<span class="w"> </span>pull<span class="w"> </span>community.wave.seqera.io/library/pip_multiqc:a3c26f6199d64b7c
 </code></pre></div>
 <details class="success">
-<summary>Command output</summary>
+<summary>Output del comando</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="go">ad8f247edb55897c: Pulling from library/pip_multiqc</span>
 <a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a><span class="go">dafa2b0c44d2: Already exists</span>
 <a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="go">dec6b097362e: Already exists</span>
@@ -4227,14 +4269,14 @@ At real scale this could take a lot longer.</p>
 <a id="__codelineno-31-17" name="__codelineno-31-17" href="#__codelineno-31-17"></a><span class="go">community.wave.seqera.io/library/pip_multiqc:a3c26f6199d64b7c</span>
 </code></pre></div>
 </details>
-<h3 id="32-spin-up-the-multiqc-container-interactively">3.2. Spin up the <code>multiqc</code> container interactively<a class="headerlink" href="#32-spin-up-the-multiqc-container-interactively" title="Permanent link">&para;</a></h3>
+<h3 id="32-avviare-il-container-multiqc-in-modo-interattivo">3.2. Avviare il container <code>multiqc</code> in modo interattivo<a class="headerlink" href="#32-avviare-il-container-multiqc-in-modo-interattivo" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>-v<span class="w"> </span>./data:/data<span class="w"> </span>community.wave.seqera.io/library/pip_multiqc:a3c26f6199d64b7c
 </code></pre></div>
-<h3 id="33-run-the-multiqc-command">3.3. Run the <code>multiqc</code> command<a class="headerlink" href="#33-run-the-multiqc-command" title="Permanent link">&para;</a></h3>
+<h3 id="33-eseguire-il-comando-multiqc">3.3. Eseguire il comando <code>multiqc</code><a class="headerlink" href="#33-eseguire-il-comando-multiqc" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>multiqc<span class="w"> </span>/data/reads<span class="w"> </span>/data/trimmed<span class="w"> </span>/data/aligned<span class="w"> </span>-n<span class="w"> </span>ENCSR000COQ1_1_QC
 </code></pre></div>
 <details class="success">
-<summary>Command output</summary>
+<summary>Output del comando</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="go">/// MultiQC 🔍 v1.27.1</span>
 <a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a>
 <a id="__codelineno-34-3" name="__codelineno-34-3" href="#__codelineno-34-3"></a><span class="go">      file_search | Search path: /data/reads</span>
@@ -4249,9 +4291,9 @@ At real scale this could take a lot longer.</p>
 <a id="__codelineno-34-12" name="__codelineno-34-12" href="#__codelineno-34-12"></a><span class="go">          multiqc | MultiQC complete</span>
 </code></pre></div>
 </details>
-<p>MultiQC is able to search through directories for compatible QC reports and will aggregate everything it finds.</p>
-<p>Here we see the tool found all three QC reports we generated: the initial QC we did with <code>fastqc</code>, the post-trimming report from <code>cutadapt</code> (made via <code>trim_galore</code>) and the post-alignment QC produced by <code>hisat2</code>.</p>
-<p>The output files are once again in the working directory:</p>
+<p>MultiQC è in grado di cercare nelle directory i report QC compatibili e aggrega tutto ciò che trova.</p>
+<p>Qui vediamo che lo strumento ha trovato tutti e tre i report QC che abbiamo generato: il QC iniziale eseguito con <code>fastqc</code>, il report post-trimming da <code>cutadapt</code> (prodotto tramite <code>trim_galore</code>) e il QC post-allineamento prodotto da <code>hisat2</code>.</p>
+<p>I file di output sono ancora una volta nella directory di lavoro:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>ls<span class="w"> </span>ENCSR000COQ1_1_QC*
 </code></pre></div>
 <div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="go">ENCSR000COQ1_1_QC.html</span>
@@ -4270,18 +4312,18 @@ At real scale this could take a lot longer.</p>
 <a id="__codelineno-36-14" name="__codelineno-36-14" href="#__codelineno-36-14"></a><span class="go">fastqc_sequence_counts_plot.txt                      multiqc_sources.txt</span>
 <a id="__codelineno-36-15" name="__codelineno-36-15" href="#__codelineno-36-15"></a><span class="go">fastqc_sequence_duplication_levels_plot.txt</span>
 </code></pre></div>
-<h3 id="34-move-the-output-files-to-the-filesystem-outside-the-container">3.4. Move the output files to the filesystem outside the container<a class="headerlink" href="#34-move-the-output-files-to-the-filesystem-outside-the-container" title="Permanent link">&para;</a></h3>
+<h3 id="34-spostare-i-file-di-output-nel-filesystem-esterno-al-container">3.4. Spostare i file di output nel filesystem esterno al container<a class="headerlink" href="#34-spostare-i-file-di-output-nel-filesystem-esterno-al-container" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>mkdir<span class="w"> </span>/data/final_qc
 <a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a>mv<span class="w"> </span>ENCSR000COQ1_1_QC**<span class="w"> </span>/data/final_qc
 </code></pre></div>
-<h3 id="35-exit-the-container">3.5. Exit the container<a class="headerlink" href="#35-exit-the-container" title="Permanent link">&para;</a></h3>
+<h3 id="35-uscire-dal-container">3.5. Uscire dal container<a class="headerlink" href="#35-uscire-dal-container" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="nb">exit</span>
 </code></pre></div>
 <hr />
 <h3 id="takeaway">Takeaway<a class="headerlink" href="#takeaway" title="Permanent link">&para;</a></h3>
-<p>You have tested all the individual commands interactively in the relevant containers.</p>
-<h3 id="whats-next">What's next?<a class="headerlink" href="#whats-next" title="Permanent link">&para;</a></h3>
-<p>Learn how to wrap those same commands into a multi-step workflow that uses containers to execute the work.</p><style type="text/css">.quiz {
+<p>Sono stati testati tutti i comandi individuali in modo interattivo nei container pertinenti.</p>
+<h3 id="passi-successivi">Passi successivi<a class="headerlink" href="#passi-successivi" title="Permanent link">&para;</a></h3>
+<p>Imparare come inserire gli stessi comandi in un workflow multi-fase che utilizza container per eseguire il lavoro.</p><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
   margin: 1rem 0;
@@ -5798,6 +5840,9 @@ window.mkdocsQuizConfig = {
 
 
 
+  
+  
+
 
 
   
@@ -5828,7 +5873,7 @@ window.mkdocsQuizConfig = {
       <nav class="md-footer__inner md-grid" aria-label="Piede" >
         
           
-          <a href="../00_orientation/" class="md-footer__link md-footer__link--prev" aria-label="Precedente: Orientation">
+          <a href="../00_orientation/" class="md-footer__link md-footer__link--prev" aria-label="Precedente: Orientamento">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -5838,20 +5883,20 @@ window.mkdocsQuizConfig = {
                 Precedente
               </span>
               <div class="md-ellipsis">
-                Orientation
+                Orientamento
               </div>
             </div>
           </a>
         
         
           
-          <a href="../02_single-sample/" class="md-footer__link md-footer__link--next" aria-label="Successivo: Part 2: Single-sample implementation">
+          <a href="../02_single-sample/" class="md-footer__link md-footer__link--next" aria-label="Successivo: Parte 2: Implementazione per singolo campione">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Successivo
               </span>
               <div class="md-ellipsis">
-                Part 2: Single-sample implementation
+                Parte 2: Implementazione per singolo campione
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -5928,8 +5973,8 @@ window.mkdocsQuizConfig = {
   
 
 
-<h4>Cookie consent</h4>
-<p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our training materials better. Find out more on <a href="https://seqera.io/privacy-policy/#cookies" target="_blank" rel="noopener">how we use cookies</a>.</p>
+<h4>Consenso ai cookie</h4>
+<p>Utilizziamo i cookie per riconoscere le tue visite ripetute e le tue preferenze, nonché per misurare l'efficacia della nostra documentazione e se gli utenti trovano ciò che cercano. Con il tuo consenso, ci aiuti a migliorare i nostri materiali di formazione. Scopri di più su <a href="https://seqera.io/privacy-policy/#cookies" target="_blank" rel="noopener">come utilizziamo i cookie</a>.</p>
 <input class="md-toggle" type="checkbox" id="__settings" >
 <div class="md-consent__settings">
   <ul class="task-list">
@@ -6013,12 +6058,16 @@ window.mkdocsQuizConfig = {
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiato", "clipboard.copy": "Copia", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.term.missing": "Non presente", "select.version": "Seleziona la versione"}, "version": {"alias": true, "provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiato", "clipboard.copy": "Copia", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.term.missing": "Non presente", "select.version": "Seleziona la versione"}, "version": {"alias": true, "provider": "mike"}}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
-        <script src="../../../../assets/javascripts/posthog.js"></script>
+        <script src="../../../assets/javascripts/consent-sync.js"></script>
+      
+        <script src="../../../assets/javascripts/posthog.js"></script>
+      
+        <script src="../../../assets/javascripts/language-picker.js"></script>
       
     
   </body>

@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://training.nextflow.io/0.dev/ko/nf4_science/imaging/02_run_molkart/">
+        <link rel="canonical" href="https://training.nextflow.io/ko/nf4_science/imaging/02_run_molkart/">
       
       
         <link rel="prev" href="../01_basics/">
@@ -18,33 +18,41 @@
       
       
         
-          <link rel="alternate" href="../../../../nf4_science/imaging/02_run_molkart/" hreflang="en">
+          <link rel="alternate" href="/" hreflang="en">
         
-          <link rel="alternate" href="../../../../pt/nf4_science/imaging/02_run_molkart/" hreflang="pt">
+          <link rel="alternate" href="/de/" hreflang="de">
         
-          <link rel="alternate" href="../../../../es/nf4_science/imaging/02_run_molkart/" hreflang="es">
+          <link rel="alternate" href="/es/" hreflang="es">
         
-          <link rel="alternate" href="../../../../fr/nf4_science/imaging/02_run_molkart/" hreflang="fr">
+          <link rel="alternate" href="/fr/" hreflang="fr">
         
-          <link rel="alternate" href="../../../../it/nf4_science/imaging/02_run_molkart/" hreflang="it">
+          <link rel="alternate" href="/hi/" hreflang="hi">
         
-          <link rel="alternate" href="./" hreflang="ko">
+          <link rel="alternate" href="/it/" hreflang="it">
+        
+          <link rel="alternate" href="/ko/" hreflang="ko">
+        
+          <link rel="alternate" href="/pl/" hreflang="pl">
+        
+          <link rel="alternate" href="/pt/" hreflang="pt">
+        
+          <link rel="alternate" href="/tr/" hreflang="tr">
         
       
       
-      <link rel="icon" href="../../../../assets/img/nextflow-icon.png">
+      <link rel="icon" href="../../../assets/img/nextflow-icon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
     
     
       
-        <title>Part 2: Run nf-core/molkart - training.nextflow.io</title>
+        <title>파트 2: nf-core/molkart 실행하기 - training.nextflow.io</title>
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
   
@@ -108,11 +116,11 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/fonts.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/fonts.css">
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/extra.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/extra.css">
     
-    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
   
@@ -147,7 +155,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#part-2-run-nf-coremolkart" class="md-skip">
+        <a href="#2-nf-coremolkart" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -167,9 +175,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="상단/헤더">
-    <a href="../../../" title="training.nextflow.io" class="md-header__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
+    <a href="../../.." title="training.nextflow.io" class="md-header__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
       
-  <img src="../../../../assets/img/nextflow_logo_dark.png" alt="logo">
+  <img src="../../../assets/img/nextflow_logo_dark.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -186,7 +194,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Part 2: Run nf-core/molkart
+              파트 2: nf-core/molkart 실행하기
             
           </span>
         </div>
@@ -233,38 +241,62 @@
       <ul class="md-select__list">
         
           <li class="md-select__item">
-            <a href="../../../../nf4_science/imaging/02_run_molkart/" hreflang="en" class="md-select__link">
+            <a href="/" hreflang="en" class="md-select__link">
               English
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../../pt/nf4_science/imaging/02_run_molkart/" hreflang="pt" class="md-select__link">
-              Português
+            <a href="/de/" hreflang="de" class="md-select__link">
+              deutsch
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../../es/nf4_science/imaging/02_run_molkart/" hreflang="es" class="md-select__link">
-              Español
+            <a href="/es/" hreflang="es" class="md-select__link">
+              español
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../../fr/nf4_science/imaging/02_run_molkart/" hreflang="fr" class="md-select__link">
-              Français
+            <a href="/fr/" hreflang="fr" class="md-select__link">
+              français
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../../it/nf4_science/imaging/02_run_molkart/" hreflang="it" class="md-select__link">
-              Italiano
+            <a href="/hi/" hreflang="hi" class="md-select__link">
+              हिन्दी
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="./" hreflang="ko" class="md-select__link">
-              Korean
+            <a href="/it/" hreflang="it" class="md-select__link">
+              italiano
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/ko/" hreflang="ko" class="md-select__link">
+              한국어
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/pl/" hreflang="pl" class="md-select__link">
+              Polski
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/pt/" hreflang="pt" class="md-select__link">
+              português
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/tr/" hreflang="tr" class="md-select__link">
+              Türkçe
             </a>
           </li>
         
@@ -384,9 +416,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="네비게이션" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../../" title="training.nextflow.io" class="md-nav__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
+    <a href="../../.." title="training.nextflow.io" class="md-nav__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
       
-  <img src="../../../../assets/img/nextflow_logo_dark.png" alt="logo">
+  <img src="../../../assets/img/nextflow_logo_dark.png" alt="logo">
 
     </a>
     training.nextflow.io
@@ -413,14 +445,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../" class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Home
+    홈
   
 
     
@@ -522,7 +554,7 @@
   <span class="md-ellipsis">
     
   
-    Getting started
+    시작하기
   
 
     
@@ -550,7 +582,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run basic operations
+    파트 1: 기본 작업 실행
   
 
     
@@ -578,7 +610,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Run real pipelines
+    파트 2: 실제 pipeline 실행
   
 
     
@@ -606,7 +638,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Run configuration
+    파트 3: 실행 구성
   
 
     
@@ -634,7 +666,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    과정 요약
   
 
     
@@ -662,7 +694,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    피드백 설문조사
   
 
     
@@ -772,7 +804,7 @@
   <span class="md-ellipsis">
     
   
-    Getting started
+    시작하기
   
 
     
@@ -800,7 +832,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Hello World
+    파트 1: Hello World
   
 
     
@@ -828,7 +860,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Hello Channels
+    파트 2: Hello Channels
   
 
     
@@ -856,7 +888,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Hello Workflow
+    파트 3: Hello Workflow
   
 
     
@@ -884,7 +916,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Hello Modules
+    파트 4: Hello Modules
   
 
     
@@ -912,7 +944,7 @@
   <span class="md-ellipsis">
     
   
-    Part 5: Hello Containers
+    파트 5: Hello Containers
   
 
     
@@ -940,7 +972,7 @@
   <span class="md-ellipsis">
     
   
-    Part 6: Hello Config
+    파트 6: Hello Config
   
 
     
@@ -968,7 +1000,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    과정 요약
   
 
     
@@ -996,7 +1028,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    피드백 설문조사
   
 
     
@@ -1106,7 +1138,7 @@
   <span class="md-ellipsis">
     
   
-    Getting started
+    시작하기
   
 
     
@@ -1134,7 +1166,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run a demo pipeline
+    파트 1: 데모 파이프라인 실행하기
   
 
     
@@ -1162,7 +1194,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Rewrite Hello for nf-core
+    2부: nf-core용 Hello 재작성
   
 
     
@@ -1190,7 +1222,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Use an nf-core module
+    파트 3: nf-core 모듈 사용하기
   
 
     
@@ -1218,7 +1250,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Make an nf-core module
+    파트 4: nf-core 모듈 만들기
   
 
     
@@ -1246,7 +1278,7 @@
   <span class="md-ellipsis">
     
   
-    Part 5: Input validation
+    파트 5: 입력 검증
   
 
     
@@ -1274,7 +1306,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    교육 과정 요약
   
 
     
@@ -1302,7 +1334,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    피드백 설문조사
   
 
     
@@ -1350,7 +1382,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Science
+    과학을 위한 Nextflow
   
 
     
@@ -1366,7 +1398,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Nextflow for Science
+    과학을 위한 Nextflow
   
 
           </label>
@@ -1386,7 +1418,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Science
+    과학을 위한 Nextflow
   
 
     
@@ -1425,7 +1457,7 @@
   <span class="md-ellipsis">
     
   
-    Genomics
+    유전체학을 위한 Nextflow
   
 
     
@@ -1441,7 +1473,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Genomics
+    유전체학을 위한 Nextflow
   
 
           </label>
@@ -1461,7 +1493,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Genomics
+    유전체학을 위한 Nextflow
   
 
     
@@ -1489,7 +1521,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    오리엔테이션
   
 
     
@@ -1517,7 +1549,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Per-sample variant calling
+    파트 1: 샘플별 변이 호출
   
 
     
@@ -1545,7 +1577,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Joint calling on a cohort
+    파트 2: 코호트에 대한 조인트 콜링
   
 
     
@@ -1573,7 +1605,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Moving code into modules
+    파트 3: 코드를 모듈로 이동하기
   
 
     
@@ -1601,7 +1633,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Adding tests
+    파트 4: 테스트 추가하기
   
 
     
@@ -1629,7 +1661,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    피드백 설문조사
   
 
     
@@ -1657,7 +1689,7 @@
   <span class="md-ellipsis">
     
   
-    Next Steps
+    다음 단계
   
 
     
@@ -1704,7 +1736,7 @@
   <span class="md-ellipsis">
     
   
-    RNAseq
+    RNAseq을 위한 Nextflow
   
 
     
@@ -1720,7 +1752,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    RNAseq
+    RNAseq을 위한 Nextflow
   
 
           </label>
@@ -1740,7 +1772,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for RNAseq
+    RNAseq을 위한 Nextflow
   
 
     
@@ -1768,7 +1800,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    오리엔테이션
   
 
     
@@ -1796,7 +1828,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Method overview and manual testing
+    파트 1: 방법 개요 및 수동 테스트
   
 
     
@@ -1824,7 +1856,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Single-sample implementation
+    파트 2: 단일 샘플 구현
   
 
     
@@ -1852,7 +1884,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Multi-sample paired-end implementation
+    파트 3: 다중 샘플 paired-end 구현
   
 
     
@@ -1880,7 +1912,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    피드백 설문조사
   
 
     
@@ -1908,7 +1940,7 @@
   <span class="md-ellipsis">
     
   
-    Next Steps
+    다음 단계
   
 
     
@@ -1957,7 +1989,7 @@
   <span class="md-ellipsis">
     
   
-    Imaging
+    이미징을 위한 Nextflow 실행
   
 
     
@@ -1973,7 +2005,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Imaging
+    이미징을 위한 Nextflow 실행
   
 
           </label>
@@ -1993,7 +2025,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow run for Imaging
+    이미징을 위한 Nextflow 실행
   
 
     
@@ -2021,7 +2053,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    오리엔테이션
   
 
     
@@ -2049,7 +2081,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run basic operations
+    파트 1: 기본 작업 실행하기
   
 
     
@@ -2086,7 +2118,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Run nf-core/molkart
+    파트 2: nf-core/molkart 실행하기
   
 
     
@@ -2104,7 +2136,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Run nf-core/molkart
+    파트 2: nf-core/molkart 실행하기
   
 
     
@@ -2124,22 +2156,22 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#1-understanding-nf-core-pipelines" class="md-nav__link">
+  <a href="#1-nf-core" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Understanding nf-core pipelines
+        1. nf-core 파이프라인 이해하기
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Understanding nf-core pipelines">
+    <nav class="md-nav" aria-label="1. nf-core 파이프라인 이해하기">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11-what-is-nf-core" class="md-nav__link">
+  <a href="#11-nf-core" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1. What is nf-core?
+        1.1. nf-core란 무엇인가?
       
     </span>
   </a>
@@ -2147,10 +2179,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#12-the-molkart-pipeline" class="md-nav__link">
+  <a href="#12-molkart" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2. The molkart pipeline
+        1.2. molkart 파이프라인
       
     </span>
   </a>
@@ -2161,22 +2193,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#2-run-molkart-with-test-data" class="md-nav__link">
+  <a href="#2-molkart" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Run molkart with test data
+        2. 테스트 데이터로 molkart 실행하기
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. Run molkart with test data">
+    <nav class="md-nav" aria-label="2. 테스트 데이터로 molkart 실행하기">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#21-understanding-container-requirements" class="md-nav__link">
+  <a href="#21" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1. Understanding container requirements
+        2.1. 컨테이너 요구사항 이해하기
       
     </span>
   </a>
@@ -2184,10 +2216,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#22-configure-docker-and-launch-the-pipeline" class="md-nav__link">
+  <a href="#22-docker" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2. Configure Docker and launch the pipeline
+        2.2. Docker 구성 및 파이프라인 실행
       
     </span>
   </a>
@@ -2195,10 +2227,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#23-monitor-execution" class="md-nav__link">
+  <a href="#23" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.3. Monitor execution
+        2.3. 실행 모니터링
       
     </span>
   </a>
@@ -2206,10 +2238,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#24-understanding-process-execution" class="md-nav__link">
+  <a href="#24" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.4. Understanding process execution
+        2.4. 프로세스 실행 이해하기
       
     </span>
   </a>
@@ -2217,10 +2249,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway" class="md-nav__link">
+  <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        핵심 사항
       
     </span>
   </a>
@@ -2228,10 +2260,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        다음 단계
       
     </span>
   </a>
@@ -2242,22 +2274,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#3-find-and-examine-the-outputs" class="md-nav__link">
+  <a href="#3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Find and examine the outputs
+        3. 출력물 찾기 및 검사하기
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. Find and examine the outputs">
+    <nav class="md-nav" aria-label="3. 출력물 찾기 및 검사하기">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#31-locate-the-results-directory" class="md-nav__link">
+  <a href="#31" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1. Locate the results directory
+        3.1. 결과 디렉토리 찾기
       
     </span>
   </a>
@@ -2265,10 +2297,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#32-examine-the-multiqc-report" class="md-nav__link">
+  <a href="#32-multiqc" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.2. Examine the MultiQC report
+        3.2. MultiQC 보고서 검사하기
       
     </span>
   </a>
@@ -2276,10 +2308,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#33-examine-the-cell-by-transcript-tables" class="md-nav__link">
+  <a href="#33" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.3. Examine the cell-by-transcript tables
+        3.3. 세포별 전사체 테이블 검사하기
       
     </span>
   </a>
@@ -2287,10 +2319,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#34-view-execution-reports" class="md-nav__link">
+  <a href="#34" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.4. View execution reports
+        3.4. 실행 보고서 보기
       
     </span>
   </a>
@@ -2298,10 +2330,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway_1" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        핵심 사항
       
     </span>
   </a>
@@ -2309,10 +2341,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next_1" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        다음 단계
       
     </span>
   </a>
@@ -2323,22 +2355,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#4-explore-the-work-directory" class="md-nav__link">
+  <a href="#4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Explore the work directory
+        4. 작업 디렉토리 탐색하기
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="4. Explore the work directory">
+    <nav class="md-nav" aria-label="4. 작업 디렉토리 탐색하기">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#41-understanding-work-directory-structure" class="md-nav__link">
+  <a href="#41" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.1. Understanding work directory structure
+        4.1. 작업 디렉토리 구조 이해하기
       
     </span>
   </a>
@@ -2346,10 +2378,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#42-inspect-a-task-directory" class="md-nav__link">
+  <a href="#42" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.2. Inspect a task directory
+        4.2. 작업 디렉토리 검사하기
       
     </span>
   </a>
@@ -2357,10 +2389,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#43-work-directory-cleanup" class="md-nav__link">
+  <a href="#43" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.3. Work directory cleanup
+        4.3. 작업 디렉토리 정리
       
     </span>
   </a>
@@ -2368,10 +2400,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway_2" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        핵심 사항
       
     </span>
   </a>
@@ -2379,10 +2411,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next_2" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        다음 단계
       
     </span>
   </a>
@@ -2393,22 +2425,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#5-resume-a-pipeline-run" class="md-nav__link">
+  <a href="#5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5. Resume a pipeline run
+        5. 파이프라인 실행 재개하기
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="5. Resume a pipeline run">
+    <nav class="md-nav" aria-label="5. 파이프라인 실행 재개하기">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#51-the-cache-mechanism" class="md-nav__link">
+  <a href="#51" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5.1. The cache mechanism
+        5.1. 캐시 메커니즘
       
     </span>
   </a>
@@ -2416,10 +2448,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#52-try-resume-with-molkart" class="md-nav__link">
+  <a href="#52-molkart" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5.2. Try resume with molkart
+        5.2. molkart로 재개 시도하기
       
     </span>
   </a>
@@ -2427,10 +2459,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#53-when-resume-is-useful" class="md-nav__link">
+  <a href="#53" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5.3. When resume is useful
+        5.3. 재개가 유용한 경우
       
     </span>
   </a>
@@ -2438,10 +2470,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway_3" class="md-nav__link">
+  <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        핵심 사항
       
     </span>
   </a>
@@ -2449,10 +2481,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next_3" class="md-nav__link">
+  <a href="#_8" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        다음 단계
       
     </span>
   </a>
@@ -2672,7 +2704,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Organizing inputs
+    파트 3: 입력 구성하기
   
 
     
@@ -2700,7 +2732,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Configuration
+    파트 4: 구성
   
 
     
@@ -2728,7 +2760,7 @@
   <span class="md-ellipsis">
     
   
-    Survey
+    설문조사
   
 
     
@@ -2756,7 +2788,7 @@
   <span class="md-ellipsis">
     
   
-    Next steps
+    다음 단계
   
 
     
@@ -2810,7 +2842,7 @@
   <span class="md-ellipsis">
     
   
-    Side Quests
+    사이드 퀘스트
   
 
     
@@ -2826,7 +2858,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Side Quests
+    사이드 퀘스트
   
 
           </label>
@@ -2846,7 +2878,7 @@
   <span class="md-ellipsis">
     
   
-    Side Quests
+    사이드 퀘스트
   
 
     
@@ -2874,7 +2906,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    오리엔테이션
   
 
     
@@ -2902,7 +2934,7 @@
   <span class="md-ellipsis">
     
   
-    Development Environment
+    개발 환경
   
 
     
@@ -2930,7 +2962,7 @@
   <span class="md-ellipsis">
     
   
-    Metadata and meta maps
+    메타데이터와 메타 맵
   
 
     
@@ -2958,7 +2990,7 @@
   <span class="md-ellipsis">
     
   
-    File input processing
+    파일 입력 처리
   
 
     
@@ -2986,7 +3018,7 @@
   <span class="md-ellipsis">
     
   
-    Splitting and Grouping
+    데이터 분할 및 그룹화
   
 
     
@@ -3014,7 +3046,7 @@
   <span class="md-ellipsis">
     
   
-    Workflows of Workflows
+    워크플로우의 워크플로우
   
 
     
@@ -3042,7 +3074,7 @@
   <span class="md-ellipsis">
     
   
-    Debugging Workflows
+    워크플로우 디버깅
   
 
     
@@ -3070,7 +3102,7 @@
   <span class="md-ellipsis">
     
   
-    Essential Nextflow Scripting Patterns
+    필수 Nextflow 스크립팅 패턴
   
 
     
@@ -3098,7 +3130,7 @@
   <span class="md-ellipsis">
     
   
-    Testing with nf-test
+    nf-test로 테스트하기
   
 
     
@@ -3144,7 +3176,7 @@
   <span class="md-ellipsis">
     
   
-    Training Collections
+    교육 컬렉션
   
 
     
@@ -3160,7 +3192,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Training Collections
+    교육 컬렉션
   
 
           </label>
@@ -3180,7 +3212,7 @@
   <span class="md-ellipsis">
     
   
-    Training Collections
+    교육 컬렉션
   
 
     
@@ -3208,7 +3240,7 @@
   <span class="md-ellipsis">
     
   
-    The Architect's Toolkit I
+    Architects toolkit 1
   
 
     
@@ -3290,7 +3322,7 @@
   <span class="md-ellipsis">
     
   
-    Getting help
+    도움말
   
 
     
@@ -3329,7 +3361,7 @@
   <span class="md-ellipsis">
     
   
-    Training environment
+    환경 옵션
   
 
     
@@ -3345,7 +3377,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Training environment
+    환경 옵션
   
 
           </label>
@@ -3365,7 +3397,7 @@
   <span class="md-ellipsis">
     
   
-    환경 설정
+    환경 옵션
   
 
     
@@ -3421,7 +3453,7 @@
   <span class="md-ellipsis">
     
   
-    Local Devcontainers
+    로컬 Devcontainers
   
 
     
@@ -3449,7 +3481,7 @@
   <span class="md-ellipsis">
     
   
-    로컬 설치
+    수동 설치
   
 
     
@@ -3485,7 +3517,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow versions
+    Nextflow 버전
   
 
     
@@ -3513,7 +3545,7 @@
   <span class="md-ellipsis">
     
   
-    The Hello pipeline
+    Hello pipeline
   
 
     
@@ -3555,22 +3587,22 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#1-understanding-nf-core-pipelines" class="md-nav__link">
+  <a href="#1-nf-core" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Understanding nf-core pipelines
+        1. nf-core 파이프라인 이해하기
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Understanding nf-core pipelines">
+    <nav class="md-nav" aria-label="1. nf-core 파이프라인 이해하기">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11-what-is-nf-core" class="md-nav__link">
+  <a href="#11-nf-core" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1. What is nf-core?
+        1.1. nf-core란 무엇인가?
       
     </span>
   </a>
@@ -3578,10 +3610,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#12-the-molkart-pipeline" class="md-nav__link">
+  <a href="#12-molkart" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2. The molkart pipeline
+        1.2. molkart 파이프라인
       
     </span>
   </a>
@@ -3592,22 +3624,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#2-run-molkart-with-test-data" class="md-nav__link">
+  <a href="#2-molkart" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Run molkart with test data
+        2. 테스트 데이터로 molkart 실행하기
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. Run molkart with test data">
+    <nav class="md-nav" aria-label="2. 테스트 데이터로 molkart 실행하기">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#21-understanding-container-requirements" class="md-nav__link">
+  <a href="#21" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1. Understanding container requirements
+        2.1. 컨테이너 요구사항 이해하기
       
     </span>
   </a>
@@ -3615,10 +3647,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#22-configure-docker-and-launch-the-pipeline" class="md-nav__link">
+  <a href="#22-docker" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2. Configure Docker and launch the pipeline
+        2.2. Docker 구성 및 파이프라인 실행
       
     </span>
   </a>
@@ -3626,10 +3658,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#23-monitor-execution" class="md-nav__link">
+  <a href="#23" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.3. Monitor execution
+        2.3. 실행 모니터링
       
     </span>
   </a>
@@ -3637,10 +3669,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#24-understanding-process-execution" class="md-nav__link">
+  <a href="#24" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.4. Understanding process execution
+        2.4. 프로세스 실행 이해하기
       
     </span>
   </a>
@@ -3648,10 +3680,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway" class="md-nav__link">
+  <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        핵심 사항
       
     </span>
   </a>
@@ -3659,10 +3691,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        다음 단계
       
     </span>
   </a>
@@ -3673,22 +3705,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#3-find-and-examine-the-outputs" class="md-nav__link">
+  <a href="#3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Find and examine the outputs
+        3. 출력물 찾기 및 검사하기
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. Find and examine the outputs">
+    <nav class="md-nav" aria-label="3. 출력물 찾기 및 검사하기">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#31-locate-the-results-directory" class="md-nav__link">
+  <a href="#31" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1. Locate the results directory
+        3.1. 결과 디렉토리 찾기
       
     </span>
   </a>
@@ -3696,10 +3728,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#32-examine-the-multiqc-report" class="md-nav__link">
+  <a href="#32-multiqc" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.2. Examine the MultiQC report
+        3.2. MultiQC 보고서 검사하기
       
     </span>
   </a>
@@ -3707,10 +3739,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#33-examine-the-cell-by-transcript-tables" class="md-nav__link">
+  <a href="#33" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.3. Examine the cell-by-transcript tables
+        3.3. 세포별 전사체 테이블 검사하기
       
     </span>
   </a>
@@ -3718,10 +3750,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#34-view-execution-reports" class="md-nav__link">
+  <a href="#34" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.4. View execution reports
+        3.4. 실행 보고서 보기
       
     </span>
   </a>
@@ -3729,10 +3761,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway_1" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        핵심 사항
       
     </span>
   </a>
@@ -3740,10 +3772,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next_1" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        다음 단계
       
     </span>
   </a>
@@ -3754,22 +3786,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#4-explore-the-work-directory" class="md-nav__link">
+  <a href="#4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Explore the work directory
+        4. 작업 디렉토리 탐색하기
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="4. Explore the work directory">
+    <nav class="md-nav" aria-label="4. 작업 디렉토리 탐색하기">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#41-understanding-work-directory-structure" class="md-nav__link">
+  <a href="#41" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.1. Understanding work directory structure
+        4.1. 작업 디렉토리 구조 이해하기
       
     </span>
   </a>
@@ -3777,10 +3809,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#42-inspect-a-task-directory" class="md-nav__link">
+  <a href="#42" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.2. Inspect a task directory
+        4.2. 작업 디렉토리 검사하기
       
     </span>
   </a>
@@ -3788,10 +3820,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#43-work-directory-cleanup" class="md-nav__link">
+  <a href="#43" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.3. Work directory cleanup
+        4.3. 작업 디렉토리 정리
       
     </span>
   </a>
@@ -3799,10 +3831,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway_2" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        핵심 사항
       
     </span>
   </a>
@@ -3810,10 +3842,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next_2" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        다음 단계
       
     </span>
   </a>
@@ -3824,22 +3856,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#5-resume-a-pipeline-run" class="md-nav__link">
+  <a href="#5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5. Resume a pipeline run
+        5. 파이프라인 실행 재개하기
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="5. Resume a pipeline run">
+    <nav class="md-nav" aria-label="5. 파이프라인 실행 재개하기">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#51-the-cache-mechanism" class="md-nav__link">
+  <a href="#51" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5.1. The cache mechanism
+        5.1. 캐시 메커니즘
       
     </span>
   </a>
@@ -3847,10 +3879,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#52-try-resume-with-molkart" class="md-nav__link">
+  <a href="#52-molkart" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5.2. Try resume with molkart
+        5.2. molkart로 재개 시도하기
       
     </span>
   </a>
@@ -3858,10 +3890,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#53-when-resume-is-useful" class="md-nav__link">
+  <a href="#53" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5.3. When resume is useful
+        5.3. 재개가 유용한 경우
       
     </span>
   </a>
@@ -3869,10 +3901,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway_3" class="md-nav__link">
+  <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        핵심 사항
       
     </span>
   </a>
@@ -3880,10 +3912,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next_3" class="md-nav__link">
+  <a href="#_8" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        다음 단계
       
     </span>
   </a>
@@ -4132,70 +4164,80 @@
                 
                   
 
+ 
+<a
+  href="https://github.com/nextflow-io/training/edit/master/docs/nf4_science/imaging/02_run_molkart.md"
+  title="이 페이지를 편집"
+  class="md-content__button md-icon"
+  rel="edit"
+>
+   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+</a>
+   
+<a
+  href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md"
+  title="Improve translation"
+  class="md-content__button md-icon"
+>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 1H3c-1.1 0-2 .9-2 2v12l3-3h5v-1c0-2.2 1.79-4 4-4V3c0-1.1-.9-2-2-2m0 3H9.5c-.34 1.19-.96 2.3-1.82 3.26l-.02.02 1.26 1.25-.37 1.01L7 8l-2.5 2.5-.69-.73 2.53-2.49A8.6 8.6 0 0 1 4.86 5h.99c.31.6.69 1.17 1.15 1.68A7.7 7.7 0 0 0 8.57 4H3V3h3.5V2h1v1H11zm10 5h-8c-1.1 0-2 .9-2 2v7c0 1.1.9 2 2 2h7l3 3V11c0-1.1-.9-2-2-2m-1.37 10-.85-2.25h-3.56L14.38 19h-1.5l3.37-9h1.5l3.38 9zM17 12l1.22 3.25h-2.43z"/></svg>
+</a>
+ 
 
-  
-    <a href="https://github.com/nextflow-io/training/edit/master/docs/nf4_science/imaging/02_run_molkart.md" title="이 페이지를 편집" class="md-content__button md-icon" rel="edit">
-      
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
-    </a>
-  
-  
-
-
-<h1 id="part-2-run-nf-coremolkart">Part 2: Run nf-core/molkart<a class="headerlink" href="#part-2-run-nf-coremolkart" title="Permanent link">&para;</a></h1>
-<p>In Part 1, we ran a simple Hello World workflow to understand the basics of Nextflow execution.
-Now we're going to run a real-world bioimaging pipeline: <strong>nf-core/molkart</strong>.</p>
-<p>This pipeline processes Molecular Cartography spatial transcriptomics data from Resolve Bioscience.
-However, the Nextflow patterns you'll learn here apply to any nf-core pipeline or production workflow.</p>
-<h2 id="1-understanding-nf-core-pipelines">1. Understanding nf-core pipelines<a class="headerlink" href="#1-understanding-nf-core-pipelines" title="Permanent link">&para;</a></h2>
-<p>Before we run the pipeline, let's understand what nf-core is and why it matters for running workflows.</p>
-<h3 id="11-what-is-nf-core">1.1. What is nf-core?<a class="headerlink" href="#11-what-is-nf-core" title="Permanent link">&para;</a></h3>
-<p><a href="https://nf-co.re/">nf-core</a> is a community-driven collection of high-quality Nextflow pipelines.
-All nf-core pipelines follow the same structure and conventions, which means once you learn to run one, you can run any of them.</p>
-<p>Key features of nf-core pipelines:</p>
+<h1 id="2-nf-coremolkart">파트 2: nf-core/molkart 실행하기<a class="headerlink" href="#2-nf-coremolkart" title="Permanent link">&para;</a></h1>
+<p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> AI 지원 번역 - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">자세히 알아보기 및 개선 제안</a></span></p>
+<p>Part 1에서는 간단한 Hello World 워크플로를 실행하여 Nextflow 실행의 기본 사항을 이해했습니다.
+이제 실제 바이오이미징 파이프라인인 <strong>nf-core/molkart</strong>를 실행하겠습니다.</p>
+<p>이 파이프라인은 Resolve Bioscience의 Molecular Cartography 공간 전사체학 데이터를 처리합니다.
+하지만 여기서 배우는 Nextflow 패턴은 모든 nf-core 파이프라인이나 프로덕션 워크플로에 적용됩니다.</p>
+<h2 id="1-nf-core">1. nf-core 파이프라인 이해하기<a class="headerlink" href="#1-nf-core" title="Permanent link">&para;</a></h2>
+<p>파이프라인을 실행하기 전에 nf-core가 무엇이며 워크플로 실행에 왜 중요한지 이해하겠습니다.</p>
+<h3 id="11-nf-core">1.1. nf-core란 무엇인가?<a class="headerlink" href="#11-nf-core" title="Permanent link">&para;</a></h3>
+<p><a href="https://nf-co.re/">nf-core</a>는 고품질 Nextflow 파이프라인의 커뮤니티 기반 컬렉션입니다.
+모든 nf-core 파이프라인은 동일한 구조와 규칙을 따르므로, 하나를 실행하는 방법을 배우면 모든 파이프라인을 실행할 수 있습니다.</p>
+<p>nf-core 파이프라인의 주요 특징:</p>
 <ul>
-<li><strong>Standardized structure</strong>: All pipelines have consistent parameter names and usage patterns</li>
-<li><strong>Built-in test data</strong>: Every pipeline includes test profiles for quick validation</li>
-<li><strong>Comprehensive documentation</strong>: Detailed usage instructions and parameter descriptions</li>
-<li><strong>Quality control</strong>: Automated QC reports using MultiQC</li>
-<li><strong>Container support</strong>: Pre-built containers for reproducibility</li>
+<li><strong>표준화된 구조</strong>: 모든 파이프라인이 일관된 매개변수 이름과 사용 패턴을 가짐</li>
+<li><strong>내장된 테스트 데이터</strong>: 모든 파이프라인에 빠른 검증을 위한 테스트 프로파일 포함</li>
+<li><strong>포괄적인 문서</strong>: 상세한 사용 지침 및 매개변수 설명</li>
+<li><strong>품질 관리</strong>: MultiQC를 사용한 자동 QC 보고서</li>
+<li><strong>컨테이너 지원</strong>: 재현성을 위해 미리 빌드된 컨테이너 제공</li>
 </ul>
 <div class="admonition tip">
-<p class="admonition-title">Want to learn more about nf-core?</p>
-<p>For an in-depth introduction to nf-core pipeline development, check out the <a href="../../../hello_nf-core/">Hello nf-core</a> training course.
-It covers how to create and customize nf-core pipelines from scratch.</p>
+<p class="admonition-title">nf-core에 대해 더 알고 싶으신가요?</p>
+<p>nf-core 파이프라인 개발에 대한 심층적인 소개를 보려면 <a href="../../../hello_nf-core/">Hello nf-core</a> 교육 과정을 확인하세요.
+처음부터 nf-core 파이프라인을 생성하고 사용자 정의하는 방법을 다룹니다.</p>
 </div>
-<h3 id="12-the-molkart-pipeline">1.2. The molkart pipeline<a class="headerlink" href="#12-the-molkart-pipeline" title="Permanent link">&para;</a></h3>
-<p><img alt="nf-core/molkart pipeline" src="../../../../nf4_science/imaging/img/molkart.png" /></p>
-<p>The <a href="https://nf-co.re/molkart">nf-core/molkart</a> pipeline processes spatial transcriptomics imaging data through several stages:</p>
+<h3 id="12-molkart">1.2. molkart 파이프라인<a class="headerlink" href="#12-molkart" title="Permanent link">&para;</a></h3>
+<p><img alt="nf-core/molkart 파이프라인" src="img/molkart.png" /></p>
+<p><a href="https://nf-co.re/molkart">nf-core/molkart</a> 파이프라인은 공간 전사체학 이미징 데이터를 여러 단계로 처리합니다:</p>
 <ol>
-<li><strong>Image preprocessing</strong>: Grid pattern filling and optional contrast enhancement</li>
-<li><strong>Cell segmentation</strong>: Multiple algorithm options (Cellpose, Mesmer, ilastik, Stardist)</li>
-<li><strong>Spot assignment</strong>: Assign transcript spots to segmented cells</li>
-<li><strong>Quality control</strong>: Generate comprehensive QC reports</li>
+<li><strong>이미지 전처리</strong>: 그리드 패턴 채우기 및 선택적 대비 향상</li>
+<li><strong>세포 분할</strong>: 다중 알고리즘 옵션 (Cellpose, Mesmer, ilastik, Stardist)</li>
+<li><strong>스팟 할당</strong>: 전사체 스팟을 분할된 세포에 할당</li>
+<li><strong>품질 관리</strong>: 포괄적인 QC 보고서 생성</li>
 </ol>
-<p>The key outputs are:</p>
+<p>주요 출력물:</p>
 <ul>
-<li>Cell-by-transcript count tables</li>
-<li>Segmentation masks</li>
-<li>MultiQC quality control report</li>
+<li>세포별 전사체 카운트 테이블</li>
+<li>분할 마스크</li>
+<li>MultiQC 품질 관리 보고서</li>
 </ul>
 <hr />
-<h2 id="2-run-molkart-with-test-data">2. Run molkart with test data<a class="headerlink" href="#2-run-molkart-with-test-data" title="Permanent link">&para;</a></h2>
-<p>Before we begin, let's clone the molkart repository locally so we can inspect its code:</p>
+<h2 id="2-molkart">2. 테스트 데이터로 molkart 실행하기<a class="headerlink" href="#2-molkart" title="Permanent link">&para;</a></h2>
+<p>시작하기 전에 molkart 저장소를 로컬에 클론하여 코드를 검사할 수 있도록 하겠습니다:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">cd</span><span class="w"> </span>/workspaces/training/nf4-science/imaging
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>git<span class="w"> </span>clone<span class="w"> </span>--branch<span class="w"> </span><span class="m">1</span>.2.0<span class="w"> </span>--depth<span class="w"> </span><span class="m">1</span><span class="w"> </span>https://github.com/nf-core/molkart
 </code></pre></div>
-<p>This creates a <code>molkart/</code> directory containing the complete pipeline source code.</p>
+<p>이렇게 하면 전체 파이프라인 소스 코드가 포함된 <code>molkart/</code> 디렉토리가 생성됩니다.</p>
 <div class="admonition note">
-<p class="admonition-title">Why are we cloning locally?</p>
-<p>Typically, you would run nf-core pipelines directly from GitHub using <code>nextflow run nf-core/molkart -r 1.2.0</code>.
-Nextflow automatically downloads the requested pipeline version for you to <code>$HOME/.nextflow/assets/nf-core/molkart</code> and runs it from there.
-However, for this training, we're cloning the pipeline to a different local directory so we can more easily inspect the code.</p>
+<p class="admonition-title">왜 로컬에 클론하나요?</p>
+<p>일반적으로 <code>nextflow run nf-core/molkart -r 1.2.0</code>을 사용하여 GitHub에서 직접 nf-core 파이프라인을 실행합니다.
+Nextflow는 요청된 파이프라인 버전을 자동으로 <code>$HOME/.nextflow/assets/nf-core/molkart</code>에 다운로드하고 거기서 실행합니다.
+하지만 이 교육에서는 코드를 더 쉽게 검사할 수 있도록 파이프라인을 다른 로컬 디렉토리에 클론하고 있습니다.</p>
 </div>
-<h3 id="21-understanding-container-requirements">2.1. Understanding container requirements<a class="headerlink" href="#21-understanding-container-requirements" title="Permanent link">&para;</a></h3>
-<p>Before running the full pipeline, let's learn why containers are essential for nf-core pipelines.</p>
-<p>Let's try running the pipeline using the test dataset and parameters from the molkart test configuration:</p>
+<h3 id="21">2.1. 컨테이너 요구사항 이해하기<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
+<p>전체 파이프라인을 실행하기 전에 컨테이너가 nf-core 파이프라인에 왜 필수적인지 알아보겠습니다.</p>
+<p>molkart 테스트 구성의 테스트 데이터셋과 매개변수를 사용하여 파이프라인을 실행해 보겠습니다:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>./molkart<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span>--input<span class="w"> </span><span class="s1">&#39;data/samplesheet.csv&#39;</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span>--mindagap_tilesize<span class="w"> </span><span class="m">90</span><span class="w"> </span><span class="se">\</span>
@@ -4205,21 +4247,21 @@ However, for this training, we're cloning the pipeline to a different local dire
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">  </span>--segmentation_method<span class="w"> </span><span class="s2">&quot;mesmer,cellpose,stardist&quot;</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">  </span>--outdir<span class="w"> </span>results
 </code></pre></div>
-<p>Let's break down these parameters:</p>
+<p>이 매개변수들을 분석해 보겠습니다:</p>
 <ul>
-<li><code>--input</code>: Path to the samplesheet containing sample metadata</li>
-<li><code>--mindagap_tilesize</code>, <code>--mindagap_boxsize</code>, <code>--mindagap_loopnum</code>: Parameters for grid pattern filling</li>
-<li><code>--clahe_pyramid_tile</code>: Kernel size for contrast enhancement</li>
-<li><code>--segmentation_method</code>: Which algorithm(s) to use for cell segmentation</li>
-<li><code>--outdir</code>: Where to save the results</li>
+<li><code>--input</code>: 샘플 메타데이터가 포함된 샘플시트 경로</li>
+<li><code>--mindagap_tilesize</code>, <code>--mindagap_boxsize</code>, <code>--mindagap_loopnum</code>: 그리드 패턴 채우기를 위한 매개변수</li>
+<li><code>--clahe_pyramid_tile</code>: 대비 향상을 위한 커널 크기</li>
+<li><code>--segmentation_method</code>: 세포 분할에 사용할 알고리즘</li>
+<li><code>--outdir</code>: 결과를 저장할 위치</li>
 </ul>
 <div class="admonition warning">
-<p class="admonition-title">This command will fail - that's intentional!</p>
-<p>We're deliberately running this without containers to demonstrate why they're needed.</p>
+<p class="admonition-title">이 명령은 실패할 것입니다 - 의도적입니다!</p>
+<p>컨테이너가 필요한 이유를 보여주기 위해 의도적으로 컨테이너 없이 실행하고 있습니다.</p>
 </div>
-<p>After a few moments, you'll see an error like this:</p>
+<p>잠시 후 다음과 같은 오류가 표시됩니다:</p>
 <details class="failure">
-<summary>Command output</summary>
+<summary>명령 출력</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="go">ERROR ~ Error executing process &gt; &#39;NFCORE_MOLKART:MOLKART:MINDAGAP_DUPLICATEFINDER (mem_only)&#39;</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="go">Caused by:</span>
@@ -4238,32 +4280,32 @@ However, for this training, we're cloning the pipeline to a different local dire
 <a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="go">  .command.sh: line 3: duplicate_finder.py: command not found</span>
 </code></pre></div>
 </details>
-<p><strong>What's happening here?</strong></p>
-<p>The error <code>command not found</code> (exit status 127) means Nextflow tried to run <code>duplicate_finder.py</code> but couldn't find it on your system.
-This is because:</p>
+<p><strong>무슨 일이 일어나고 있나요?</strong></p>
+<p><code>command not found</code> 오류 (종료 상태 127)는 Nextflow가 <code>duplicate_finder.py</code>를 실행하려고 했지만 시스템에서 찾을 수 없다는 의미입니다.
+이는 다음과 같은 이유 때문입니다:</p>
 <ol>
-<li>The pipeline expects specialized bioinformatics software to be installed</li>
-<li>These tools (like <code>duplicate_finder.py</code>, <code>apply_clahe.dask.py</code>, etc.) are not part of standard Linux distributions</li>
-<li>Without containers, Nextflow tries to run commands directly on your local machine</li>
+<li>파이프라인이 특수한 바이오인포매틱스 소프트웨어가 설치되어 있을 것으로 예상합니다</li>
+<li>이러한 도구들 (예: <code>duplicate_finder.py</code>, <code>apply_clahe.dask.py</code> 등)은 표준 Linux 배포판에 포함되어 있지 않습니다</li>
+<li>컨테이너 없이 Nextflow는 로컬 머신에서 직접 명령을 실행하려고 합니다</li>
 </ol>
-<p><strong>Where are these tools supposed to come from?</strong></p>
-<p>Let's inspect one of the process modules to see how it declares its software requirements.</p>
-<p>Open the CLAHE preprocessing module:</p>
+<p><strong>이 도구들은 어디서 와야 하나요?</strong></p>
+<p>프로세스 모듈 중 하나를 검사하여 소프트웨어 요구사항을 어떻게 선언하는지 살펴보겠습니다.</p>
+<p>CLAHE 전처리 모듈을 열어보세요:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>code<span class="w"> </span>molkart/modules/local/clahe/main.nf
 </code></pre></div>
-<p>Look at line 5 - you'll see:</p>
+<p>5번째 줄을 보면 다음과 같이 표시됩니다:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">container</span><span class="w"> </span><span class="s1">&#39;ghcr.io/schapirolabor/molkart-local:v0.0.4&#39;</span>
 </code></pre></div>
-<p>This line tells Nextflow: "To run this process, use the Docker image <code>ghcr.io/schapirolabor/molkart-local:v0.0.4</code>, which contains all the required software."</p>
-<p>Each process declares which container image provides its required tools.
-However, Nextflow only uses these containers if you tell it to!</p>
-<p><strong>The solution: Enable Docker in the configuration</strong></p>
-<h3 id="22-configure-docker-and-launch-the-pipeline">2.2. Configure Docker and launch the pipeline<a class="headerlink" href="#22-configure-docker-and-launch-the-pipeline" title="Permanent link">&para;</a></h3>
-<p>To enable Docker, we need to change <code>docker.enabled</code> from <code>false</code> to <code>true</code> in the <code>nextflow.config</code> file.</p>
-<p>Open the config file:</p>
+<p>이 줄은 Nextflow에게 다음과 같이 알려줍니다: "이 프로세스를 실행하려면 필요한 모든 소프트웨어가 포함된 Docker 이미지 <code>ghcr.io/schapirolabor/molkart-local:v0.0.4</code>를 사용하세요."</p>
+<p>각 프로세스는 필요한 도구를 제공하는 컨테이너 이미지를 선언합니다.
+하지만 Nextflow는 사용자가 지시할 때만 이러한 컨테이너를 사용합니다!</p>
+<p><strong>해결책: 구성에서 Docker 활성화</strong></p>
+<h3 id="22-docker">2.2. Docker 구성 및 파이프라인 실행<a class="headerlink" href="#22-docker" title="Permanent link">&para;</a></h3>
+<p>Docker를 활성화하려면 <code>nextflow.config</code> 파일에서 <code>docker.enabled</code>를 <code>false</code>에서 <code>true</code>로 변경해야 합니다.</p>
+<p>구성 파일을 여세요:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>code<span class="w"> </span>nextflow.config
 </code></pre></div>
-<p>Change <code>docker.enabled = false</code> to <code>docker.enabled = true</code>:</p>
+<p><code>docker.enabled = false</code>를 <code>docker.enabled = true</code>로 변경하세요:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">docker</span><span class="o">.</span><span class="na">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">process</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="n">resourceLimits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>
@@ -4272,7 +4314,7 @@ However, Nextflow only uses these containers if you tell it to!</p>
 <a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">    </span><span class="o">]</span>
 <a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="o">}</span>
 </code></pre></div>
-<p>Now run the pipeline again with the same command:</p>
+<p>이제 동일한 명령으로 파이프라인을 다시 실행하세요:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>./molkart<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span>--input<span class="w"> </span><span class="s1">&#39;data/samplesheet.csv&#39;</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span>--mindagap_tilesize<span class="w"> </span><span class="m">90</span><span class="w"> </span><span class="se">\</span>
@@ -4282,27 +4324,27 @@ However, Nextflow only uses these containers if you tell it to!</p>
 <a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">  </span>--segmentation_method<span class="w"> </span><span class="s2">&quot;cellpose,mesmer,stardist&quot;</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">  </span>--outdir<span class="w"> </span>results
 </code></pre></div>
-<p>This time, Nextflow will:</p>
+<p>이번에는 Nextflow가:</p>
 <ol>
-<li>Read the <code>docker.enabled = true</code> setting from the config</li>
-<li>Pull the required Docker images (first time only)</li>
-<li>Run each process inside its specified container</li>
-<li>Execute successfully because all tools are available inside the containers</li>
+<li>구성에서 <code>docker.enabled = true</code> 설정을 읽습니다</li>
+<li>필요한 Docker 이미지를 가져옵니다 (처음만)</li>
+<li>각 프로세스를 지정된 컨테이너 내에서 실행합니다</li>
+<li>모든 도구가 컨테이너 내에서 사용 가능하므로 성공적으로 실행됩니다</li>
 </ol>
 <div class="admonition tip">
-<p class="admonition-title">Why containers matter</p>
-<p>Most nf-core pipelines <strong>require</strong> containerization (Docker, Singularity, Podman, etc.) because:</p>
+<p class="admonition-title">컨테이너가 중요한 이유</p>
+<p>대부분의 nf-core 파이프라인은 컨테이너화 (Docker, Singularity, Podman 등)를 <strong>필요로</strong> 합니다. 왜냐하면:</p>
 <ul>
-<li>They use specialized bioinformatics software not available in standard environments</li>
-<li>Containers ensure reproducibility - the exact same software versions run everywhere</li>
-<li>You don't need to manually install dozens of tools and their dependencies</li>
+<li>표준 환경에서 사용할 수 없는 특수한 바이오인포매틱스 소프트웨어를 사용합니다</li>
+<li>컨테이너는 재현성을 보장합니다 - 정확히 동일한 소프트웨어 버전이 모든 곳에서 실행됩니다</li>
+<li>수십 개의 도구와 그 의존성을 수동으로 설치할 필요가 없습니다</li>
 </ul>
-<p>For more details about containers in Nextflow, see <a href="../../../hello_nextflow/05_hello_containers/">Hello Containers</a> from the Hello Nextflow training.</p>
+<p>Nextflow의 컨테이너에 대한 자세한 내용은 Hello Nextflow 교육의 <a href="../../../hello_nextflow/05_hello_containers/">Hello Containers</a>를 참조하세요.</p>
 </div>
-<h3 id="23-monitor-execution">2.3. Monitor execution<a class="headerlink" href="#23-monitor-execution" title="Permanent link">&para;</a></h3>
-<p>As the pipeline runs, you'll see output similar to this:</p>
+<h3 id="23">2.3. 실행 모니터링<a class="headerlink" href="#23" title="Permanent link">&para;</a></h3>
+<p>파이프라인이 실행되는 동안 다음과 유사한 출력이 표시됩니다:</p>
 <details class="success">
-<summary>Command output</summary>
+<summary>명령 출력</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="go">Nextflow 25.04.8 is available - Please consider updating your version to it</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
 <a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="go">N E X T F L O W   ~  version 25.04.3</span>
@@ -4381,39 +4423,39 @@ However, Nextflow only uses these containers if you tell it to!</p>
 <a id="__codelineno-8-76" name="__codelineno-8-76" href="#__codelineno-8-76"></a><span class="go">Succeeded   : 22</span>
 </code></pre></div>
 </details>
-<p>Notice how this output is more detailed than our Hello World example because of the nf-core conventions the pipeline follows:</p>
+<p>파이프라인이 따르는 nf-core 규칙 때문에 이 출력이 Hello World 예제보다 더 상세하다는 것을 알 수 있습니다:</p>
 <ul>
-<li>Pipeline shows its version and logo</li>
-<li>Configuration parameters are displayed</li>
-<li>Multiple processes run in parallel (indicated by multiple process lines)</li>
-<li>Process names include the full module path (e.g., <code>NFCORE_MOLKART:MOLKART:MINDAGAP_MINDAGAP</code>)</li>
+<li>파이프라인이 버전과 로고를 표시합니다</li>
+<li>구성 매개변수가 표시됩니다</li>
+<li>여러 프로세스가 병렬로 실행됩니다 (여러 프로세스 라인으로 표시)</li>
+<li>프로세스 이름에는 전체 모듈 경로가 포함됩니다 (예: <code>NFCORE_MOLKART:MOLKART:MINDAGAP_MINDAGAP</code>)</li>
 </ul>
-<h3 id="24-understanding-process-execution">2.4. Understanding process execution<a class="headerlink" href="#24-understanding-process-execution" title="Permanent link">&para;</a></h3>
-<p>The executor line <code>executor &gt; local (22)</code> tells you:</p>
+<h3 id="24">2.4. 프로세스 실행 이해하기<a class="headerlink" href="#24" title="Permanent link">&para;</a></h3>
+<p>executor 라인 <code>executor &gt; local (22)</code>는 다음을 알려줍니다:</p>
 <ul>
-<li><strong>executor</strong>: Which compute environment is being used (<code>local</code> = your machine)</li>
-<li><strong>(22)</strong>: Total number of tasks launched</li>
+<li><strong>executor</strong>: 사용 중인 컴퓨팅 환경 (<code>local</code> = 사용자의 머신)</li>
+<li><strong>(22)</strong>: 실행된 총 작업 수</li>
 </ul>
-<p>Each process line shows:</p>
+<p>각 프로세스 라인은 다음을 보여줍니다:</p>
 <ul>
-<li><strong>Hash</strong> (<code>[1a/2b3c4d]</code>): Work directory identifier (like before)</li>
-<li><strong>Process name</strong>: Full module path and process name</li>
-<li><strong>Input identifier</strong>: Sample name in parentheses</li>
-<li><strong>Progress</strong>: Percentage complete and count (e.g., <code>1 of 1 ✔</code>)</li>
+<li><strong>해시</strong> (<code>[1a/2b3c4d]</code>): 작업 디렉토리 식별자 (이전과 같음)</li>
+<li><strong>프로세스 이름</strong>: 전체 모듈 경로 및 프로세스 이름</li>
+<li><strong>입력 식별자</strong>: 괄호 안의 샘플 이름</li>
+<li><strong>진행률</strong>: 완료 백분율 및 개수 (예: <code>1 of 1 ✔</code>)</li>
 </ul>
-<h3 id="takeaway">Takeaway<a class="headerlink" href="#takeaway" title="Permanent link">&para;</a></h3>
-<p>You know how to launch an nf-core pipeline with test data and interpret its execution output.</p>
-<h3 id="whats-next">What's next?<a class="headerlink" href="#whats-next" title="Permanent link">&para;</a></h3>
-<p>Learn where to find the results and how to interpret them.</p>
+<h3 id="_1">핵심 사항<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<p>테스트 데이터로 nf-core 파이프라인을 실행하고 실행 출력을 해석하는 방법을 알게 되었습니다.</p>
+<h3 id="_2">다음 단계<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>결과를 찾는 위치와 해석하는 방법을 배웁니다.</p>
 <hr />
-<h2 id="3-find-and-examine-the-outputs">3. Find and examine the outputs<a class="headerlink" href="#3-find-and-examine-the-outputs" title="Permanent link">&para;</a></h2>
-<p>When the pipeline completes successfully, you'll see a completion message and execution summary.</p>
-<h3 id="31-locate-the-results-directory">3.1. Locate the results directory<a class="headerlink" href="#31-locate-the-results-directory" title="Permanent link">&para;</a></h3>
-<p>By default, nf-core pipelines write outputs to a directory specified by the <code>outdir</code> parameter, which we set to <code>results/</code>.</p>
-<p>List the contents:</p>
+<h2 id="3">3. 출력물 찾기 및 검사하기<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
+<p>파이프라인이 성공적으로 완료되면 완료 메시지와 실행 요약이 표시됩니다.</p>
+<h3 id="31">3.1. 결과 디렉토리 찾기<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
+<p>기본적으로 nf-core 파이프라인은 <code>outdir</code> 매개변수로 지정된 디렉토리에 출력을 작성하며, 우리는 이를 <code>results/</code>로 설정했습니다.</p>
+<p>내용을 나열하세요:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>tree<span class="w"> </span>results/
 </code></pre></div>
-<p>You should see several subdirectories:</p>
+<p>여러 하위 디렉토리가 표시됩니다:</p>
 <div class="highlight"><span class="filename">results/</span><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="go">results/</span>
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="go">├── anndata/</span>
 <a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="go">├── clahe/</span>
@@ -4425,127 +4467,127 @@ However, Nextflow only uses these containers if you tell it to!</p>
 <a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="go">├── spot2cell/</span>
 <a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="go">└── stack/</span>
 </code></pre></div>
-<p>Each subdirectory contains outputs from a specific stage of the pipeline:</p>
+<p>각 하위 디렉토리에는 파이프라인의 특정 단계에서 나온 출력물이 포함되어 있습니다:</p>
 <ul>
-<li><strong>mindagap/</strong>: Grid-filled images from the MindaGap preprocessing step</li>
-<li><strong>clahe/</strong>: Contrast-enhanced images from CLAHE preprocessing</li>
-<li><strong>stack/</strong>: Multi-channel image stacks created for segmentation</li>
-<li><strong>segmentation/</strong>: Segmentation results from different algorithms (cellpose/, mesmer/, stardist/, filtered_masks/)</li>
-<li><strong>spot2cell/</strong>: Cell-by-transcript count tables</li>
-<li><strong>anndata/</strong>: AnnData objects containing cell-by-transcript matrices and spatial coordinates</li>
-<li><strong>molkartqc/</strong>: Quality control metrics for spot assignment</li>
-<li><strong>multiqc/</strong>: Comprehensive quality control report</li>
-<li><strong>pipeline_info/</strong>: Execution reports and logs</li>
+<li><strong>mindagap/</strong>: MindaGap 전처리 단계의 그리드 채워진 이미지</li>
+<li><strong>clahe/</strong>: CLAHE 전처리의 대비 향상된 이미지</li>
+<li><strong>stack/</strong>: 분할을 위해 생성된 다중 채널 이미지 스택</li>
+<li><strong>segmentation/</strong>: 다양한 알고리즘의 분할 결과 (cellpose/, mesmer/, stardist/, filtered_masks/)</li>
+<li><strong>spot2cell/</strong>: 세포별 전사체 카운트 테이블</li>
+<li><strong>anndata/</strong>: 세포별 전사체 매트릭스 및 공간 좌표를 포함하는 AnnData 객체</li>
+<li><strong>molkartqc/</strong>: 스팟 할당을 위한 품질 관리 메트릭</li>
+<li><strong>multiqc/</strong>: 포괄적인 품질 관리 보고서</li>
+<li><strong>pipeline_info/</strong>: 실행 보고서 및 로그</li>
 </ul>
-<h3 id="32-examine-the-multiqc-report">3.2. Examine the MultiQC report<a class="headerlink" href="#32-examine-the-multiqc-report" title="Permanent link">&para;</a></h3>
-<p>The MultiQC report is a comprehensive HTML file that aggregates quality metrics from all pipeline steps.</p>
-<p>Open the report in the file browser and then click the "Show Preview" button to see it rendered directly in VS Code.</p>
-<p>The report includes:</p>
+<h3 id="32-multiqc">3.2. MultiQC 보고서 검사하기<a class="headerlink" href="#32-multiqc" title="Permanent link">&para;</a></h3>
+<p>MultiQC 보고서는 모든 파이프라인 단계의 품질 메트릭을 집계하는 포괄적인 HTML 파일입니다.</p>
+<p>파일 브라우저에서 보고서를 연 다음 "Show Preview" 버튼을 클릭하여 VS Code에서 직접 렌더링된 내용을 확인하세요.</p>
+<p>보고서에는 다음이 포함됩니다:</p>
 <ul>
-<li>General statistics for all samples</li>
-<li>Preprocessing metrics</li>
-<li>Segmentation quality metrics</li>
-<li>Number of cells and spots detected</li>
+<li>모든 샘플에 대한 일반 통계</li>
+<li>전처리 메트릭</li>
+<li>분할 품질 메트릭</li>
+<li>감지된 세포 및 스팟 수</li>
 </ul>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>MultiQC reports are typically included in all nf-core pipelines.
-They always provide a high-level overview of pipeline execution and data quality.</p>
+<p>MultiQC 보고서는 일반적으로 모든 nf-core 파이프라인에 포함됩니다.
+항상 파이프라인 실행 및 데이터 품질에 대한 높은 수준의 개요를 제공합니다.</p>
 </div>
-<h3 id="33-examine-the-cell-by-transcript-tables">3.3. Examine the cell-by-transcript tables<a class="headerlink" href="#33-examine-the-cell-by-transcript-tables" title="Permanent link">&para;</a></h3>
-<p>The most important scientific output is the cell-by-transcript count table.
-This tells you how many of each transcript was detected in each cell.</p>
-<p>Navigate to the spot2cell directory:</p>
+<h3 id="33">3.3. 세포별 전사체 테이블 검사하기<a class="headerlink" href="#33" title="Permanent link">&para;</a></h3>
+<p>가장 중요한 과학적 출력물은 세포별 전사체 카운트 테이블입니다.
+이는 각 세포에서 각 전사체가 몇 개 감지되었는지 알려줍니다.</p>
+<p>spot2cell 디렉토리로 이동하세요:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>ls<span class="w"> </span>results/spot2cell/
 </code></pre></div>
-<p>You'll find files like:</p>
+<p>다음과 같은 파일들을 찾을 수 있습니다:</p>
 <ul>
-<li><code>cellxgene_mem_only_cellpose.csv</code>: Cell-by-transcript table using Cellpose segmentation</li>
-<li><code>cellxgene_mem_only_mesmer.csv</code>: Cell-by-transcript table using Mesmer segmentation</li>
-<li><code>cellxgene_mem_only_stardist.csv</code>: Cell-by-transcript table using Stardist segmentation</li>
+<li><code>cellxgene_mem_only_cellpose.csv</code>: Cellpose 분할을 사용한 세포별 전사체 테이블</li>
+<li><code>cellxgene_mem_only_mesmer.csv</code>: Mesmer 분할을 사용한 세포별 전사체 테이블</li>
+<li><code>cellxgene_mem_only_stardist.csv</code>: Stardist 분할을 사용한 세포별 전사체 테이블</li>
 </ul>
-<p>We only ran 1 sample in this test dataset, but in a real experiment we would have these tables for each sample.
-Notice how Nextflow is able to process multiple segmentation methods in parallel, making it easy to compare results.</p>
-<h3 id="34-view-execution-reports">3.4. View execution reports<a class="headerlink" href="#34-view-execution-reports" title="Permanent link">&para;</a></h3>
-<p>Nextflow generates several execution reports automatically.</p>
-<p>Check the pipeline_info directory:</p>
+<p>이 테스트 데이터셋에서는 1개의 샘플만 실행했지만, 실제 실험에서는 각 샘플에 대해 이러한 테이블이 있을 것입니다.
+Nextflow가 여러 분할 방법을 병렬로 처리하여 결과를 쉽게 비교할 수 있도록 하는 방법을 주목하세요.</p>
+<h3 id="34">3.4. 실행 보고서 보기<a class="headerlink" href="#34" title="Permanent link">&para;</a></h3>
+<p>Nextflow는 여러 실행 보고서를 자동으로 생성합니다.</p>
+<p>pipeline_info 디렉토리를 확인하세요:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>ls<span class="w"> </span>results/pipeline_info/
 </code></pre></div>
-<p>Key files:</p>
+<p>주요 파일:</p>
 <ul>
-<li><strong>execution_report.html</strong>: Timeline and resource usage visualization</li>
-<li><strong>execution_timeline.html</strong>: Gantt chart of process execution</li>
-<li><strong>execution_trace.txt</strong>: Detailed task execution metrics</li>
-<li><strong>pipeline_dag.html</strong>: Directed acyclic graph showing workflow structure</li>
+<li><strong>execution_report.html</strong>: 타임라인 및 리소스 사용량 시각화</li>
+<li><strong>execution_timeline.html</strong>: 프로세스 실행의 Gantt 차트</li>
+<li><strong>execution_trace.txt</strong>: 상세한 작업 실행 메트릭</li>
+<li><strong>pipeline_dag.html</strong>: 워크플로 구조를 보여주는 방향성 비순환 그래프</li>
 </ul>
-<p>Open the execution report to see resource usage:</p>
+<p>실행 보고서를 열어 리소스 사용량을 확인하세요:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>code<span class="w"> </span>results/pipeline_info/execution_report.html
 </code></pre></div>
-<p>This shows:</p>
+<p>다음을 보여줍니다:</p>
 <ul>
-<li>How long each process took</li>
-<li>CPU and memory usage</li>
-<li>Which tasks were cached vs. executed</li>
+<li>각 프로세스가 소요된 시간</li>
+<li>CPU 및 메모리 사용량</li>
+<li>캐시된 작업과 실행된 작업</li>
 </ul>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>These reports are incredibly useful for optimizing resource allocation and troubleshooting performance issues.</p>
+<p>이러한 보고서는 리소스 할당을 최적화하고 성능 문제를 해결하는 데 매우 유용합니다.</p>
 </div>
-<h3 id="takeaway_1">Takeaway<a class="headerlink" href="#takeaway_1" title="Permanent link">&para;</a></h3>
-<p>You know how to locate pipeline outputs, examine quality control reports, and access execution metrics.</p>
-<h3 id="whats-next_1">What's next?<a class="headerlink" href="#whats-next_1" title="Permanent link">&para;</a></h3>
-<p>Learn about the work directory and how Nextflow manages intermediate files.</p>
+<h3 id="_3">핵심 사항<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>파이프라인 출력물을 찾고, 품질 관리 보고서를 검사하고, 실행 메트릭에 액세스하는 방법을 알게 되었습니다.</p>
+<h3 id="_4">다음 단계<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>작업 디렉토리와 Nextflow가 중간 파일을 관리하는 방법에 대해 배웁니다.</p>
 <hr />
-<h2 id="4-explore-the-work-directory">4. Explore the work directory<a class="headerlink" href="#4-explore-the-work-directory" title="Permanent link">&para;</a></h2>
-<p>Just like with our Hello World example, all the actual work happens in the <code>work/</code> directory.</p>
-<h3 id="41-understanding-work-directory-structure">4.1. Understanding work directory structure<a class="headerlink" href="#41-understanding-work-directory-structure" title="Permanent link">&para;</a></h3>
-<p>The work directory contains a subdirectory for each task that was executed.
-For this pipeline with 12 tasks, there will be 12 work subdirectories.</p>
-<p>List the work directory:</p>
+<h2 id="4">4. 작업 디렉토리 탐색하기<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
+<p>Hello World 예제와 마찬가지로 모든 실제 작업은 <code>work/</code> 디렉토리에서 발생합니다.</p>
+<h3 id="41">4.1. 작업 디렉토리 구조 이해하기<a class="headerlink" href="#41" title="Permanent link">&para;</a></h3>
+<p>작업 디렉토리에는 실행된 각 작업에 대한 하위 디렉토리가 포함됩니다.
+22개의 작업이 있는 이 파이프라인의 경우 22개의 작업 하위 디렉토리가 있습니다.</p>
+<p>작업 디렉토리를 나열하세요:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>ls<span class="w"> </span>-d<span class="w"> </span>work/*/*/<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-5
 </code></pre></div>
-<p>This shows the first 5 task directories.</p>
-<h3 id="42-inspect-a-task-directory">4.2. Inspect a task directory<a class="headerlink" href="#42-inspect-a-task-directory" title="Permanent link">&para;</a></h3>
-<p>Pick one of the segmentation process hashes from the console output (e.g., <code>[3m/4n5o6p]</code>) and look inside:</p>
+<p>처음 5개의 작업 디렉토리가 표시됩니다.</p>
+<h3 id="42">4.2. 작업 디렉토리 검사하기<a class="headerlink" href="#42" title="Permanent link">&para;</a></h3>
+<p>콘솔 출력의 분할 프로세스 해시 중 하나를 선택하고 (예: <code>[3m/4n5o6p]</code>) 내부를 살펴보세요:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>ls<span class="w"> </span>-la<span class="w"> </span>work/3m/4n5o6p*/
 </code></pre></div>
-<p>You'll see:</p>
+<p>다음을 볼 수 있습니다:</p>
 <ul>
-<li><strong>.command.*</strong> files**: Nextflow execution scripts and logs (like before)</li>
-<li><strong>Staged input files</strong>: Symlinks to the actual input files</li>
-<li><strong>Output files</strong>: Segmentation masks, intermediate results, etc.</li>
+<li><strong>.command.* 파일</strong>: Nextflow 실행 스크립트 및 로그 (이전과 같음)</li>
+<li><strong>스테이징된 입력 파일</strong>: 실제 입력 파일에 대한 심볼릭 링크</li>
+<li><strong>출력 파일</strong>: 분할 마스크, 중간 결과 등</li>
 </ul>
-<p>The key difference from Hello World:</p>
+<p>Hello World와의 주요 차이점:</p>
 <ul>
-<li>Real pipelines stage large input files (images, reference data)</li>
-<li>Output files can be quite large (segmentation masks, processed images)</li>
-<li>Multiple input and output files per task</li>
+<li>실제 파이프라인은 대용량 입력 파일 (이미지, 참조 데이터)을 스테이징합니다</li>
+<li>출력 파일이 상당히 클 수 있습니다 (분할 마스크, 처리된 이미지)</li>
+<li>작업당 여러 입력 및 출력 파일</li>
 </ul>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>If a process fails, you can navigate to its work directory, examine <code>.command.err</code> for error messages, and even re-run <code>.command.sh</code> manually to debug the issue.</p>
+<p>프로세스가 실패하면 해당 작업 디렉토리로 이동하여 <code>.command.err</code>에서 오류 메시지를 검사하고, 문제를 디버그하기 위해 <code>.command.sh</code>를 수동으로 다시 실행할 수도 있습니다.</p>
 </div>
-<h3 id="43-work-directory-cleanup">4.3. Work directory cleanup<a class="headerlink" href="#43-work-directory-cleanup" title="Permanent link">&para;</a></h3>
-<p>The work directory can become quite large over multiple pipeline runs.
-As we learned in Part 1, you can use <code>nextflow clean</code> to remove work directories from old runs.</p>
-<p>However, for nf-core pipelines with large intermediate files, it's especially important to clean up regularly.</p>
-<h3 id="takeaway_2">Takeaway<a class="headerlink" href="#takeaway_2" title="Permanent link">&para;</a></h3>
-<p>You understand how nf-core pipelines organize their work directories and how to inspect individual tasks for debugging.</p>
-<h3 id="whats-next_2">What's next?<a class="headerlink" href="#whats-next_2" title="Permanent link">&para;</a></h3>
-<p>Learn about the Nextflow cache and how to resume failed pipeline runs.</p>
+<h3 id="43">4.3. 작업 디렉토리 정리<a class="headerlink" href="#43" title="Permanent link">&para;</a></h3>
+<p>여러 파이프라인 실행을 거치면서 작업 디렉토리가 상당히 커질 수 있습니다.
+Part 1에서 배운 것처럼 <code>nextflow clean</code>을 사용하여 이전 실행의 작업 디렉토리를 제거할 수 있습니다.</p>
+<p>하지만 대용량 중간 파일이 있는 nf-core 파이프라인의 경우 정기적으로 정리하는 것이 특히 중요합니다.</p>
+<h3 id="_5">핵심 사항<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>nf-core 파이프라인이 작업 디렉토리를 구성하는 방법과 디버깅을 위해 개별 작업을 검사하는 방법을 이해했습니다.</p>
+<h3 id="_6">다음 단계<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p>Nextflow 캐시와 실패한 파이프라인 실행을 재개하는 방법에 대해 배웁니다.</p>
 <hr />
-<h2 id="5-resume-a-pipeline-run">5. Resume a pipeline run<a class="headerlink" href="#5-resume-a-pipeline-run" title="Permanent link">&para;</a></h2>
-<p>One of Nextflow's most powerful features is the ability to resume a pipeline from the point of failure.</p>
-<h3 id="51-the-cache-mechanism">5.1. The cache mechanism<a class="headerlink" href="#51-the-cache-mechanism" title="Permanent link">&para;</a></h3>
-<p>When you run a pipeline with <code>-resume</code>, Nextflow:</p>
+<h2 id="5">5. 파이프라인 실행 재개하기<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
+<p>Nextflow의 가장 강력한 기능 중 하나는 실패 지점부터 파이프라인을 재개할 수 있는 능력입니다.</p>
+<h3 id="51">5.1. 캐시 메커니즘<a class="headerlink" href="#51" title="Permanent link">&para;</a></h3>
+<p><code>-resume</code>으로 파이프라인을 실행하면 Nextflow는:</p>
 <ol>
-<li>Checks the cache for each task</li>
-<li>If inputs, code, and parameters are identical, reuses the cached result</li>
-<li>Only re-runs tasks that changed or failed</li>
+<li>각 작업에 대해 캐시를 확인합니다</li>
+<li>입력, 코드 및 매개변수가 동일하면 캐시된 결과를 재사용합니다</li>
+<li>변경되거나 실패한 작업만 다시 실행합니다</li>
 </ol>
-<p>This is essential for long-running pipelines where failures might occur late in execution.</p>
-<h3 id="52-try-resume-with-molkart">5.2. Try resume with molkart<a class="headerlink" href="#52-try-resume-with-molkart" title="Permanent link">&para;</a></h3>
-<p>Run the same command again, but add <code>-resume</code>:</p>
+<p>이는 실행 후반에 실패가 발생할 수 있는 장시간 실행 파이프라인에 필수적입니다.</p>
+<h3 id="52-molkart">5.2. molkart로 재개 시도하기<a class="headerlink" href="#52-molkart" title="Permanent link">&para;</a></h3>
+<p>동일한 명령을 다시 실행하되 <code>-resume</code>을 추가하세요:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>./molkart<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="w">  </span>--input<span class="w"> </span><span class="s1">&#39;data/samplesheet.csv&#39;</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="w">  </span>--mindagap_tilesize<span class="w"> </span><span class="m">90</span><span class="w"> </span><span class="se">\</span>
@@ -4556,7 +4598,7 @@ As we learned in Part 1, you can use <code>nextflow clean</code> to remove work 
 <a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="w">  </span>--outdir<span class="w"> </span>results<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="w">  </span>-resume
 </code></pre></div>
-<p>You should see output like: <!-- TODO: full output --></p>
+<p>다음과 같은 출력이 표시됩니다: <!-- TODO: full output --></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="go">executor &gt;  local (0)</span>
 <a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="go">[1a/2b3c4d] NFCORE_MOLKART:MOLKART:MINDAGAP_MINDAGAP (mem_only)        [100%] 2 of 2, cached: 2 ✔</span>
 <a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="go">[5e/6f7g8h] NFCORE_MOLKART:MOLKART:CLAHE (mem_only)                    [100%] 2 of 2, cached: 2 ✔</span>
@@ -4565,24 +4607,24 @@ As we learned in Part 1, you can use <code>nextflow clean</code> to remove work 
 <a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="go">[2k/3l4m5n] NFCORE_MOLKART:MOLKART:CELLPOSE (mem_only)                 [100%] 1 of 1, cached: 1 ✔</span>
 <a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="go">...</span>
 </code></pre></div>
-<p>Notice <code>cached: 2</code> or <code>cached: 1</code> for each process - nothing was re-executed!</p>
-<h3 id="53-when-resume-is-useful">5.3. When resume is useful<a class="headerlink" href="#53-when-resume-is-useful" title="Permanent link">&para;</a></h3>
-<p>Resume is particularly valuable when:</p>
+<p>각 프로세스에 대해 <code>cached: 2</code> 또는 <code>cached: 1</code>이 표시되는 것을 주목하세요 - 아무것도 다시 실행되지 않았습니다!</p>
+<h3 id="53">5.3. 재개가 유용한 경우<a class="headerlink" href="#53" title="Permanent link">&para;</a></h3>
+<p>재개는 다음과 같은 경우에 특히 유용합니다:</p>
 <ul>
-<li>A pipeline fails due to resource limits (out of memory, time limit exceeded)</li>
-<li>You need to modify downstream processes without re-running upstream steps</li>
-<li>Your network connection drops during data download</li>
-<li>You want to add additional outputs without redoing computation</li>
+<li>리소스 제한으로 인해 파이프라인이 실패한 경우 (메모리 부족, 시간 제한 초과)</li>
+<li>업스트림 단계를 다시 실행하지 않고 다운스트림 프로세스를 수정해야 하는 경우</li>
+<li>데이터 다운로드 중 네트워크 연결이 끊긴 경우</li>
+<li>계산을 다시 하지 않고 추가 출력물을 추가하려는 경우</li>
 </ul>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Resume only works if you haven't changed the input data, pipeline code, or parameters.
-If you change any of these, Nextflow will correctly re-run affected tasks.</p>
+<p>입력 데이터, 파이프라인 코드 또는 매개변수를 변경하지 않은 경우에만 재개가 작동합니다.
+이 중 하나를 변경하면 Nextflow는 영향을 받는 작업을 올바르게 다시 실행합니다.</p>
 </div>
-<h3 id="takeaway_3">Takeaway<a class="headerlink" href="#takeaway_3" title="Permanent link">&para;</a></h3>
-<p>You know how to use <code>-resume</code> to efficiently re-run pipelines without repeating successful tasks.</p>
-<h3 id="whats-next_3">What's next?<a class="headerlink" href="#whats-next_3" title="Permanent link">&para;</a></h3>
-<p>Now that you can run nf-core/molkart with test data, you're ready to learn how to configure it for your own datasets.</p><style type="text/css">.quiz {
+<h3 id="_7">핵심 사항<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>성공한 작업을 반복하지 않고 파이프라인을 효율적으로 다시 실행하기 위해 <code>-resume</code>을 사용하는 방법을 알게 되었습니다.</p>
+<h3 id="_8">다음 단계<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p>이제 테스트 데이터로 nf-core/molkart를 실행할 수 있으므로 자신의 데이터셋에 맞게 구성하는 방법을 배울 준비가 되었습니다.</p><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
   margin: 1rem 0;
@@ -6099,6 +6141,9 @@ window.mkdocsQuizConfig = {
 
 
 
+  
+  
+
 
 
   
@@ -6129,7 +6174,7 @@ window.mkdocsQuizConfig = {
       <nav class="md-footer__inner md-grid" aria-label="하단/푸터" >
         
           
-          <a href="../01_basics/" class="md-footer__link md-footer__link--prev" aria-label="이전: Part 1: Run basic operations">
+          <a href="../01_basics/" class="md-footer__link md-footer__link--prev" aria-label="이전: 파트 1: 기본 작업 실행하기">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -6139,20 +6184,20 @@ window.mkdocsQuizConfig = {
                 이전
               </span>
               <div class="md-ellipsis">
-                Part 1: Run basic operations
+                파트 1: 기본 작업 실행하기
               </div>
             </div>
           </a>
         
         
           
-          <a href="../03_inputs/" class="md-footer__link md-footer__link--next" aria-label="다음: Part 3: Organizing inputs">
+          <a href="../03_inputs/" class="md-footer__link md-footer__link--next" aria-label="다음: 파트 3: 입력 구성하기">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 다음
               </span>
               <div class="md-ellipsis">
-                Part 3: Organizing inputs
+                파트 3: 입력 구성하기
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -6229,8 +6274,8 @@ window.mkdocsQuizConfig = {
   
 
 
-<h4>Cookie consent</h4>
-<p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our training materials better. Find out more on <a href="https://seqera.io/privacy-policy/#cookies" target="_blank" rel="noopener">how we use cookies</a>.</p>
+<h4>쿠키 동의</h4>
+<p>저희는 귀하의 반복 방문과 선호도를 인식하고, 문서의 효과성과 사용자가 원하는 정보를 찾고 있는지 측정하기 위해 쿠키를 사용합니다. 동의해 주시면 교육 자료를 개선하는 데 도움이 됩니다. <a href="https://seqera.io/privacy-policy/#cookies" target="_blank" rel="noopener">쿠키 사용 방법</a>에 대해 자세히 알아보세요.</p>
 <input class="md-toggle" type="checkbox" id="__settings" >
 <div class="md-consent__settings">
   <ul class="task-list">
@@ -6283,7 +6328,7 @@ window.mkdocsQuizConfig = {
     <label class="task-list-control">
       <input type="checkbox" name="posthog" checked>
       <span class="task-list-indicator"></span>
-      PostHog Analytics
+      PostHog 분석
     </label>
   </li>
 
@@ -6314,12 +6359,16 @@ window.mkdocsQuizConfig = {
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": {"alias": true, "provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": {"alias": true, "provider": "mike"}}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
-        <script src="../../../../assets/javascripts/posthog.js"></script>
+        <script src="../../../assets/javascripts/consent-sync.js"></script>
+      
+        <script src="../../../assets/javascripts/posthog.js"></script>
+      
+        <script src="../../../assets/javascripts/language-picker.js"></script>
       
     
   </body>

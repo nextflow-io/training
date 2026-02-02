@@ -6,11 +6,11 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Understanding and managing the evolution of Nextflow's syntax versions">
+        <meta name="description" content="Comprendere e gestire l'evoluzione delle versioni della sintassi di Nextflow">
       
       
       
-        <link rel="canonical" href="https://training.nextflow.io/0.dev/it/info/nxf_versions/">
+        <link rel="canonical" href="https://training.nextflow.io/it/info/nxf_versions/">
       
       
         <link rel="prev" href="../../envsetup/02_local/">
@@ -20,33 +20,41 @@
       
       
         
-          <link rel="alternate" href="../../../info/nxf_versions/" hreflang="en">
+          <link rel="alternate" href="/" hreflang="en">
         
-          <link rel="alternate" href="../../../pt/info/nxf_versions/" hreflang="pt">
+          <link rel="alternate" href="/de/" hreflang="de">
         
-          <link rel="alternate" href="../../../es/info/nxf_versions/" hreflang="es">
+          <link rel="alternate" href="/es/" hreflang="es">
         
-          <link rel="alternate" href="../../../fr/info/nxf_versions/" hreflang="fr">
+          <link rel="alternate" href="/fr/" hreflang="fr">
         
-          <link rel="alternate" href="./" hreflang="it">
+          <link rel="alternate" href="/hi/" hreflang="hi">
         
-          <link rel="alternate" href="../../../ko/info/nxf_versions/" hreflang="ko">
+          <link rel="alternate" href="/it/" hreflang="it">
+        
+          <link rel="alternate" href="/ko/" hreflang="ko">
+        
+          <link rel="alternate" href="/pl/" hreflang="pl">
+        
+          <link rel="alternate" href="/pt/" hreflang="pt">
+        
+          <link rel="alternate" href="/tr/" hreflang="tr">
         
       
       
-      <link rel="icon" href="../../../assets/img/nextflow-icon.png">
+      <link rel="icon" href="../../assets/img/nextflow-icon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
     
     
       
-        <title>Nextflow versions - training.nextflow.io</title>
+        <title>Versioni di Nextflow - training.nextflow.io</title>
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
   
@@ -110,11 +118,11 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/fonts.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/fonts.css">
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/extra.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/extra.css">
     
-    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
   
@@ -149,7 +157,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#current-supported-nextflow-syntax-version-requirements" class="md-skip">
+        <a href="#versione-attuale-della-sintassi-nextflow-supportata-e-requisiti" class="md-skip">
           Vai al contenuto
         </a>
       
@@ -169,9 +177,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Intestazione">
-    <a href="../../" title="training.nextflow.io" class="md-header__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
+    <a href="../.." title="training.nextflow.io" class="md-header__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
       
-  <img src="../../../assets/img/nextflow_logo_dark.png" alt="logo">
+  <img src="../../assets/img/nextflow_logo_dark.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -188,7 +196,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Nextflow versions
+              Versioni di Nextflow
             
           </span>
         </div>
@@ -235,38 +243,62 @@
       <ul class="md-select__list">
         
           <li class="md-select__item">
-            <a href="../../../info/nxf_versions/" hreflang="en" class="md-select__link">
+            <a href="/" hreflang="en" class="md-select__link">
               English
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../pt/info/nxf_versions/" hreflang="pt" class="md-select__link">
-              Português
+            <a href="/de/" hreflang="de" class="md-select__link">
+              deutsch
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../es/info/nxf_versions/" hreflang="es" class="md-select__link">
-              Español
+            <a href="/es/" hreflang="es" class="md-select__link">
+              español
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../fr/info/nxf_versions/" hreflang="fr" class="md-select__link">
-              Français
+            <a href="/fr/" hreflang="fr" class="md-select__link">
+              français
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="./" hreflang="it" class="md-select__link">
-              Italiano
+            <a href="/hi/" hreflang="hi" class="md-select__link">
+              हिन्दी
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../ko/info/nxf_versions/" hreflang="ko" class="md-select__link">
-              Korean
+            <a href="/it/" hreflang="it" class="md-select__link">
+              italiano
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/ko/" hreflang="ko" class="md-select__link">
+              한국어
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/pl/" hreflang="pl" class="md-select__link">
+              Polski
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/pt/" hreflang="pt" class="md-select__link">
+              português
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/tr/" hreflang="tr" class="md-select__link">
+              Türkçe
             </a>
           </li>
         
@@ -388,9 +420,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigazione" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../" title="training.nextflow.io" class="md-nav__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
+    <a href="../.." title="training.nextflow.io" class="md-nav__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
       
-  <img src="../../../assets/img/nextflow_logo_dark.png" alt="logo">
+  <img src="../../assets/img/nextflow_logo_dark.png" alt="logo">
 
     </a>
     training.nextflow.io
@@ -417,7 +449,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../" class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -526,7 +558,7 @@
   <span class="md-ellipsis">
     
   
-    Getting started
+    Per iniziare
   
 
     
@@ -554,7 +586,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run basic operations
+    Parte 1: Operazioni base
   
 
     
@@ -582,7 +614,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Run real pipelines
+    Parte 2: Eseguire pipeline reali
   
 
     
@@ -610,7 +642,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Run configuration
+    Parte 3: Configurazione
   
 
     
@@ -638,7 +670,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    Riepilogo del corso
   
 
     
@@ -666,7 +698,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Sondaggio di feedback
   
 
     
@@ -776,7 +808,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    Per iniziare
   
 
     
@@ -972,7 +1004,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    Riepilogo del corso
   
 
     
@@ -1000,7 +1032,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Sondaggio di feedback
   
 
     
@@ -1110,7 +1142,7 @@
   <span class="md-ellipsis">
     
   
-    Getting started
+    Iniziare
   
 
     
@@ -1138,7 +1170,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run a demo pipeline
+    Parte 1: Eseguire una pipeline demo
   
 
     
@@ -1166,7 +1198,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Rewrite Hello for nf-core
+    Parte 2: Riscrivere Hello per nf-core
   
 
     
@@ -1194,7 +1226,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Use an nf-core module
+    Parte 3: Usare un modulo nf-core
   
 
     
@@ -1222,7 +1254,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Make an nf-core module
+    Parte 4: Creare un modulo nf-core
   
 
     
@@ -1250,7 +1282,7 @@
   <span class="md-ellipsis">
     
   
-    Part 5: Input validation
+    Parte 5: Validazione degli input
   
 
     
@@ -1278,7 +1310,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    Riepilogo del corso
   
 
     
@@ -1306,7 +1338,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Questionario di feedback
   
 
     
@@ -1352,7 +1384,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Science
+    Nextflow per la Scienza
   
 
     
@@ -1368,7 +1400,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Nextflow for Science
+    Nextflow per la Scienza
   
 
           </label>
@@ -1388,7 +1420,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Science
+    Nextflow per la Scienza
   
 
     
@@ -1427,7 +1459,7 @@
   <span class="md-ellipsis">
     
   
-    Genomics
+    Nextflow per la Genomica
   
 
     
@@ -1443,7 +1475,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Genomics
+    Nextflow per la Genomica
   
 
           </label>
@@ -1463,7 +1495,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Genomics
+    Nextflow per la Genomica
   
 
     
@@ -1491,7 +1523,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    Orientamento
   
 
     
@@ -1519,7 +1551,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Per-sample variant calling
+    Parte 1: Chiamata di varianti per campione
   
 
     
@@ -1547,7 +1579,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Joint calling on a cohort
+    Parte 2: Chiamata congiunta su una coorte
   
 
     
@@ -1575,7 +1607,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Moving code into modules
+    Parte 3: Spostare il codice in moduli
   
 
     
@@ -1603,7 +1635,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Adding tests
+    Parte 4: Aggiunta di test
   
 
     
@@ -1631,7 +1663,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Sondaggio di feedback
   
 
     
@@ -1659,7 +1691,7 @@
   <span class="md-ellipsis">
     
   
-    Next Steps
+    Prossimi Passi
   
 
     
@@ -1706,7 +1738,7 @@
   <span class="md-ellipsis">
     
   
-    RNAseq
+    Nextflow per RNAseq
   
 
     
@@ -1722,7 +1754,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    RNAseq
+    Nextflow per RNAseq
   
 
           </label>
@@ -1742,7 +1774,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for RNAseq
+    Nextflow per RNAseq
   
 
     
@@ -1770,7 +1802,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    Orientamento
   
 
     
@@ -1798,7 +1830,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Method overview and manual testing
+    Parte 1: Panoramica del metodo e test manuali
   
 
     
@@ -1826,7 +1858,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Single-sample implementation
+    Parte 2: Implementazione per singolo campione
   
 
     
@@ -1854,7 +1886,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Multi-sample paired-end implementation
+    Parte 3: Implementazione con campioni multipli paired-end
   
 
     
@@ -1882,7 +1914,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Sondaggio di feedback
   
 
     
@@ -1910,7 +1942,7 @@
   <span class="md-ellipsis">
     
   
-    Next Steps
+    Prossimi Passi
   
 
     
@@ -1957,7 +1989,7 @@
   <span class="md-ellipsis">
     
   
-    Imaging
+    Nextflow run per l'Imaging
   
 
     
@@ -1973,7 +2005,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Imaging
+    Nextflow run per l'Imaging
   
 
           </label>
@@ -1993,7 +2025,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow run for Imaging
+    Nextflow run per l'Imaging
   
 
     
@@ -2021,7 +2053,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    Orientamento
   
 
     
@@ -2049,7 +2081,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run basic operations
+    Parte 1: Eseguire operazioni di base
   
 
     
@@ -2077,7 +2109,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Run nf-core/molkart
+    Parte 2: Eseguire nf-core/molkart
   
 
     
@@ -2105,7 +2137,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Organizing inputs
+    Parte 3: Organizzazione degli input
   
 
     
@@ -2133,7 +2165,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Configuration
+    Parte 4: Configurazione
   
 
     
@@ -2161,7 +2193,7 @@
   <span class="md-ellipsis">
     
   
-    Survey
+    Sondaggio
   
 
     
@@ -2189,7 +2221,7 @@
   <span class="md-ellipsis">
     
   
-    Next steps
+    Prossimi passi
   
 
     
@@ -2243,7 +2275,7 @@
   <span class="md-ellipsis">
     
   
-    Side Quests
+    Missioni Secondarie
   
 
     
@@ -2259,7 +2291,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Side Quests
+    Missioni Secondarie
   
 
           </label>
@@ -2279,7 +2311,7 @@
   <span class="md-ellipsis">
     
   
-    Side Quests
+    Missioni Secondarie
   
 
     
@@ -2307,7 +2339,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    Orientamento
   
 
     
@@ -2335,7 +2367,7 @@
   <span class="md-ellipsis">
     
   
-    Development Environment
+    Ambiente di Sviluppo
   
 
     
@@ -2363,7 +2395,7 @@
   <span class="md-ellipsis">
     
   
-    Metadata and meta maps
+    Metadati e meta map
   
 
     
@@ -2391,7 +2423,7 @@
   <span class="md-ellipsis">
     
   
-    File input processing
+    Elaborazione di file in input
   
 
     
@@ -2419,7 +2451,7 @@
   <span class="md-ellipsis">
     
   
-    Splitting and Grouping
+    Divisione e Raggruppamento
   
 
     
@@ -2447,7 +2479,7 @@
   <span class="md-ellipsis">
     
   
-    Workflows of Workflows
+    Workflows di Workflows
   
 
     
@@ -2475,7 +2507,7 @@
   <span class="md-ellipsis">
     
   
-    Debugging Workflows
+    Debug dei Workflow
   
 
     
@@ -2503,7 +2535,7 @@
   <span class="md-ellipsis">
     
   
-    Essential Nextflow Scripting Patterns
+    Pattern di Scripting Essenziali in Nextflow
   
 
     
@@ -2531,7 +2563,7 @@
   <span class="md-ellipsis">
     
   
-    Testing with nf-test
+    Testing con nf-test
   
 
     
@@ -2577,7 +2609,7 @@
   <span class="md-ellipsis">
     
   
-    Training Collections
+    Collezioni di Formazione
   
 
     
@@ -2593,7 +2625,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Training Collections
+    Collezioni di Formazione
   
 
           </label>
@@ -2613,7 +2645,7 @@
   <span class="md-ellipsis">
     
   
-    Training Collections
+    Collezioni di Formazione
   
 
     
@@ -2641,7 +2673,7 @@
   <span class="md-ellipsis">
     
   
-    The Architect's Toolkit I
+    Il Toolkit dell'Architetto I
   
 
     
@@ -2725,7 +2757,7 @@
   <span class="md-ellipsis">
     
   
-    Getting help
+    Ottenere aiuto
   
 
     
@@ -2764,7 +2796,7 @@
   <span class="md-ellipsis">
     
   
-    Training environment
+    Opzioni per l'ambiente
   
 
     
@@ -2780,7 +2812,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Training environment
+    Opzioni per l'ambiente
   
 
           </label>
@@ -2800,7 +2832,7 @@
   <span class="md-ellipsis">
     
   
-    Environment options
+    Opzioni per l'ambiente
   
 
     
@@ -2856,7 +2888,7 @@
   <span class="md-ellipsis">
     
   
-    Local Devcontainers
+    Devcontainers Locali
   
 
     
@@ -2884,7 +2916,7 @@
   <span class="md-ellipsis">
     
   
-    Manual installation
+    Installazione manuale
   
 
     
@@ -2927,7 +2959,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow versions
+    Versioni di Nextflow
   
 
     
@@ -2945,7 +2977,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow versions
+    Versioni di Nextflow
   
 
     
@@ -2965,40 +2997,40 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#current-supported-nextflow-syntax-version-requirements" class="md-nav__link">
+  <a href="#versione-attuale-della-sintassi-nextflow-supportata-e-requisiti" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Current supported Nextflow syntax version &amp; requirements
+        Versione attuale della sintassi Nextflow supportata e requisiti
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#older-versions-of-the-training-materials" class="md-nav__link">
+  <a href="#versioni-precedenti-dei-materiali-di-formazione" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Older versions of the training materials
+        Versioni precedenti dei materiali di formazione
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#other-information-about-nextflow-syntax-versions" class="md-nav__link">
+  <a href="#altre-informazioni-sulle-versioni-della-sintassi-nextflow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Other information about Nextflow syntax versions
+        Altre informazioni sulle versioni della sintassi Nextflow
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Other information about Nextflow syntax versions">
+    <nav class="md-nav" aria-label="Altre informazioni sulle versioni della sintassi Nextflow">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#checking-and-setting-the-nextflow-version" class="md-nav__link">
+  <a href="#controllare-e-impostare-la-versione-di-nextflow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Checking and setting the Nextflow version
+        Controllare e impostare la versione di Nextflow
       
     </span>
   </a>
@@ -3006,10 +3038,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#enabling-the-v2-syntax-parser" class="md-nav__link">
+  <a href="#abilitare-il-parser-di-sintassi-v2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Enabling the v2 syntax parser
+        Abilitare il parser di sintassi v2
       
     </span>
   </a>
@@ -3017,10 +3049,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#disabling-the-v2-syntax-parser" class="md-nav__link">
+  <a href="#disabilitare-il-parser-di-sintassi-v2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Disabling the v2 syntax parser
+        Disabilitare il parser di sintassi v2
       
     </span>
   </a>
@@ -3028,10 +3060,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#migrating-existing-code" class="md-nav__link">
+  <a href="#migrazione-del-codice-esistente" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Migrating existing code
+        Migrazione del codice esistente
       
     </span>
   </a>
@@ -3251,7 +3283,7 @@
   <span class="md-ellipsis">
     
   
-    The Hello pipeline
+    La pipeline Hello
   
 
     
@@ -3295,40 +3327,40 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#current-supported-nextflow-syntax-version-requirements" class="md-nav__link">
+  <a href="#versione-attuale-della-sintassi-nextflow-supportata-e-requisiti" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Current supported Nextflow syntax version &amp; requirements
+        Versione attuale della sintassi Nextflow supportata e requisiti
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#older-versions-of-the-training-materials" class="md-nav__link">
+  <a href="#versioni-precedenti-dei-materiali-di-formazione" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Older versions of the training materials
+        Versioni precedenti dei materiali di formazione
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#other-information-about-nextflow-syntax-versions" class="md-nav__link">
+  <a href="#altre-informazioni-sulle-versioni-della-sintassi-nextflow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Other information about Nextflow syntax versions
+        Altre informazioni sulle versioni della sintassi Nextflow
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Other information about Nextflow syntax versions">
+    <nav class="md-nav" aria-label="Altre informazioni sulle versioni della sintassi Nextflow">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#checking-and-setting-the-nextflow-version" class="md-nav__link">
+  <a href="#controllare-e-impostare-la-versione-di-nextflow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Checking and setting the Nextflow version
+        Controllare e impostare la versione di Nextflow
       
     </span>
   </a>
@@ -3336,10 +3368,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#enabling-the-v2-syntax-parser" class="md-nav__link">
+  <a href="#abilitare-il-parser-di-sintassi-v2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Enabling the v2 syntax parser
+        Abilitare il parser di sintassi v2
       
     </span>
   </a>
@@ -3347,10 +3379,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#disabling-the-v2-syntax-parser" class="md-nav__link">
+  <a href="#disabilitare-il-parser-di-sintassi-v2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Disabling the v2 syntax parser
+        Disabilitare il parser di sintassi v2
       
     </span>
   </a>
@@ -3358,10 +3390,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#migrating-existing-code" class="md-nav__link">
+  <a href="#migrazione-del-codice-esistente" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Migrating existing code
+        Migrazione del codice esistente
       
     </span>
   </a>
@@ -3612,75 +3644,84 @@
   
 
 
+ 
+<a
+  href="https://github.com/nextflow-io/training/edit/master/docs/info/nxf_versions.md"
+  title="Modifica"
+  class="md-content__button md-icon"
+  rel="edit"
+>
+   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+</a>
+   
+<a
+  href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md"
+  title="Improve translation"
+  class="md-content__button md-icon"
+>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 1H3c-1.1 0-2 .9-2 2v12l3-3h5v-1c0-2.2 1.79-4 4-4V3c0-1.1-.9-2-2-2m0 3H9.5c-.34 1.19-.96 2.3-1.82 3.26l-.02.02 1.26 1.25-.37 1.01L7 8l-2.5 2.5-.69-.73 2.53-2.49A8.6 8.6 0 0 1 4.86 5h.99c.31.6.69 1.17 1.15 1.68A7.7 7.7 0 0 0 8.57 4H3V3h3.5V2h1v1H11zm10 5h-8c-1.1 0-2 .9-2 2v7c0 1.1.9 2 2 2h7l3 3V11c0-1.1-.9-2-2-2m-1.37 10-.85-2.25h-3.56L14.38 19h-1.5l3.37-9h1.5l3.38 9zM17 12l1.22 3.25h-2.43z"/></svg>
+</a>
+ 
 
-  
-    <a href="https://github.com/nextflow-io/training/edit/master/docs/info/nxf_versions.md" title="Modifica" class="md-content__button md-icon" rel="edit">
-      
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
-    </a>
-  
-  
+  <h1>Versioni di Nextflow</h1>
 
-
-  <h1>Nextflow versions</h1>
-
-<h2 id="current-supported-nextflow-syntax-version-requirements">Current supported Nextflow syntax version &amp; requirements<a class="headerlink" href="#current-supported-nextflow-syntax-version-requirements" title="Permanent link">&para;</a></h2>
-<p>As of version 3.0 of the training portal, all our training courses are based on the 25.10.2 version release of Nextflow unless otherwise specified on the course index page (except deprecated or otherwise archived materials which may not include a version notice).</p>
-<p>Because the courses now use typed inputs at the workflow level as well as workflow-level output directives, they require the use of the V2 syntax parser.
-If you plan to use the environment we provide through <a href="../../envsetup/01_setup/">Github Codespaces</a> or <a href="../../envsetup/03_devcontainer/">local devcontainers</a>, you don't need to do anything unless specifically noted in the course instructions.
-However, if you are planning to work through the trainings in your own environment (<a href="../../envsetup/02_local/">Manual install</a>), you will need to make sure to use Nextflow version 25.10.2 or later with the v2 syntax parser enabled.</p>
-<h2 id="older-versions-of-the-training-materials">Older versions of the training materials<a class="headerlink" href="#older-versions-of-the-training-materials" title="Permanent link">&para;</a></h2>
-<p>Our training materials have been versioned since February 2025.</p>
-<p>You can access older version of the training materials that work with versions of Nextflow <strong>before 25.10.2</strong> via the dropdown menu item at the top of every page that shows the numbered version of the training materials.
-When you select an older version of the training materials, links to the training environment will automatically specify the corresponding version of the environment.</p>
-<h2 id="other-information-about-nextflow-syntax-versions">Other information about Nextflow syntax versions<a class="headerlink" href="#other-information-about-nextflow-syntax-versions" title="Permanent link">&para;</a></h2>
-<p>Nextflow has two distinct versioning concepts that are sometimes confused: <strong>DSL versions</strong> and <strong>syntax parser versions</strong>.</p>
-<p><strong>DSL1 vs DSL2</strong> refers to fundamentally different ways of writing Nextflow pipelines.
-DSL1 was the original syntax where processes were implicitly connected through channels.
-DSL2, introduced in Nextflow 20.07, added modularity features: the ability to import processes and workflows from other files, explicit <code>workflow</code> blocks, and named process outputs.
-DSL1 was deprecated in Nextflow 22.03 and removed in 22.12.
-All modern Nextflow code uses DSL2.</p>
-<p><strong>Syntax parser v1 vs v2</strong> refers to different parsers that both work with DSL2 code.
-The v1 parser is the original, more permissive parser.
-The v2 parser is stricter and enables new language features such as static typing (typed inputs and outputs) and workflow-level output directives.
-The v2 parser also provides better error messages and catches more errors at parse time rather than at runtime.
-The v2 parser will become the default in Nextflow 26.04.</p>
-<p>In summary: DSL2 is the language you write; the syntax parser version determines how strictly that language is interpreted and what advanced features are available.</p>
-<h3 id="checking-and-setting-the-nextflow-version">Checking and setting the Nextflow version<a class="headerlink" href="#checking-and-setting-the-nextflow-version" title="Permanent link">&para;</a></h3>
-<p>You can check what version of Nextflow is installed on your system using the command <code>nextflow --version</code>.</p>
-<p>For more information about how to update your version of Nextflow, please see the reference documentation on <a href="https://www.nextflow.io/docs/latest/updating-nextflow.html">Updating Nextflow</a>.</p>
-<h3 id="enabling-the-v2-syntax-parser">Enabling the v2 syntax parser<a class="headerlink" href="#enabling-the-v2-syntax-parser" title="Permanent link">&para;</a></h3>
-<p>To <strong>enable</strong> the v2 syntax parser for your current session, run the following command in your terminal:</p>
+<h2 id="versione-attuale-della-sintassi-nextflow-supportata-e-requisiti">Versione attuale della sintassi Nextflow supportata e requisiti<a class="headerlink" href="#versione-attuale-della-sintassi-nextflow-supportata-e-requisiti" title="Permanent link">&para;</a></h2>
+<p>A partire dalla versione 3.0 del portale di formazione, tutti i nostri corsi di formazione sono basati sulla versione 25.10.2 di Nextflow, salvo diversa indicazione nella pagina indice del corso (ad eccezione dei materiali deprecati o archiviati che potrebbero non includere un avviso di versione).</p>
+<p>Poiché i corsi ora utilizzano input tipizzati a livello di workflow così come direttive di output a livello di workflow, richiedono l'uso del parser di sintassi V2.
+Se prevede di utilizzare l'ambiente che forniamo attraverso <a href="../../envsetup/01_setup/">Github Codespaces</a> o <a href="../../envsetup/03_devcontainer/">devcontainer locali</a>, non è necessario fare nulla a meno che non sia specificatamente indicato nelle istruzioni del corso.
+Tuttavia, se prevede di seguire le formazioni nel proprio ambiente (<a href="../../envsetup/02_local/">Installazione manuale</a>), dovrà assicurarsi di utilizzare Nextflow versione 25.10.2 o successiva con il parser di sintassi v2 abilitato.</p>
+<h2 id="versioni-precedenti-dei-materiali-di-formazione">Versioni precedenti dei materiali di formazione<a class="headerlink" href="#versioni-precedenti-dei-materiali-di-formazione" title="Permanent link">&para;</a></h2>
+<p>I nostri materiali di formazione sono versionati da febbraio 2025.</p>
+<p>Può accedere alle versioni precedenti dei materiali di formazione che funzionano con versioni di Nextflow <strong>precedenti alla 25.10.2</strong> tramite il menu a discesa in cima a ogni pagina che mostra la versione numerata dei materiali di formazione.
+Quando seleziona una versione precedente dei materiali di formazione, i link all'ambiente di formazione specificheranno automaticamente la versione corrispondente dell'ambiente.</p>
+<h2 id="altre-informazioni-sulle-versioni-della-sintassi-nextflow">Altre informazioni sulle versioni della sintassi Nextflow<a class="headerlink" href="#altre-informazioni-sulle-versioni-della-sintassi-nextflow" title="Permanent link">&para;</a></h2>
+<p>Nextflow ha due concetti di versionamento distinti che vengono talvolta confusi: <strong>versioni DSL</strong> e <strong>versioni del parser di sintassi</strong>.</p>
+<p><strong>DSL1 vs DSL2</strong> si riferisce a modi fondamentalmente diversi di scrivere pipeline Nextflow.
+DSL1 era la sintassi originale dove i process erano implicitamente connessi attraverso i channel.
+DSL2, introdotto in Nextflow 20.07, ha aggiunto funzionalità di modularità: la capacità di importare process e workflow da altri file, blocchi <code>workflow</code> espliciti e output dei process nominati.
+DSL1 è stato deprecato in Nextflow 22.03 e rimosso in 22.12.
+Tutto il codice Nextflow moderno utilizza DSL2.</p>
+<p><strong>Parser di sintassi v1 vs v2</strong> si riferisce a parser diversi che funzionano entrambi con codice DSL2.
+Il parser v1 è quello originale, più permissivo.
+Il parser v2 è più rigoroso e abilita nuove funzionalità del linguaggio come la tipizzazione statica (input e output tipizzati) e direttive di output a livello di workflow.
+Il parser v2 fornisce anche messaggi di errore migliori e rileva più errori in fase di parsing piuttosto che a runtime.
+Il parser v2 diventerà predefinito in Nextflow 26.04.</p>
+<p>In sintesi: DSL2 è il linguaggio che si scrive; la versione del parser di sintassi determina con quanta rigidità viene interpretato quel linguaggio e quali funzionalità avanzate sono disponibili.</p>
+<h3 id="controllare-e-impostare-la-versione-di-nextflow">Controllare e impostare la versione di Nextflow<a class="headerlink" href="#controllare-e-impostare-la-versione-di-nextflow" title="Permanent link">&para;</a></h3>
+<p>Può verificare quale versione di Nextflow è installata sul sistema utilizzando il comando <code>nextflow --version</code>.</p>
+<p>Per maggiori informazioni su come aggiornare la versione di Nextflow, consulti la documentazione di riferimento su <a href="https://www.nextflow.io/docs/latest/updating-nextflow.html">Aggiornamento di Nextflow</a>.</p>
+<h3 id="abilitare-il-parser-di-sintassi-v2">Abilitare il parser di sintassi v2<a class="headerlink" href="#abilitare-il-parser-di-sintassi-v2" title="Permanent link">&para;</a></h3>
+<p>Per <strong>abilitare</strong> il parser di sintassi v2 per la sessione corrente, eseguite il seguente comando nel terminale:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">NXF_SYNTAX_PARSER</span><span class="o">=</span>v2
 </code></pre></div>
-<p>To make this permanent (pending v2 becoming the default in Nextflow 26.04), add the export command to your shell profile (<code>~/.bashrc</code>, <code>~/.zshrc</code>, etc.):</p>
+<p>Per rendere questa impostazione permanente (in attesa che v2 diventi predefinito in Nextflow 26.04), aggiunga il comando export al profilo della shell (<code>~/.bashrc</code>, <code>~/.zshrc</code>, ecc.):</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;export NXF_SYNTAX_PARSER=v2&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.bashrc
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">source</span><span class="w"> </span>~/.bashrc
 </code></pre></div>
-<p>Note that the <code>NXF_SYNTAX_PARSER=v2</code> environment variable is a temporary requirement.
-From Nextflow 26.04 onward, the v2 parser will become the default and this setting will no longer be needed.</p>
-<h3 id="disabling-the-v2-syntax-parser">Disabling the v2 syntax parser<a class="headerlink" href="#disabling-the-v2-syntax-parser" title="Permanent link">&para;</a></h3>
-<p>To <strong>disable</strong> the v2 syntax parser for your current session, run the following command in your terminal:</p>
+<p>Si noti che la variabile d'ambiente <code>NXF_SYNTAX_PARSER=v2</code> è un requisito temporaneo.
+Da Nextflow 26.04 in poi, il parser v2 diventerà predefinito e questa impostazione non sarà più necessaria.</p>
+<h3 id="disabilitare-il-parser-di-sintassi-v2">Disabilitare il parser di sintassi v2<a class="headerlink" href="#disabilitare-il-parser-di-sintassi-v2" title="Permanent link">&para;</a></h3>
+<p>Per <strong>disabilitare</strong> il parser di sintassi v2 per la sessione corrente, eseguite il seguente comando nel terminale:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">NXF_SYNTAX_PARSER</span><span class="o">=</span>v1
 </code></pre></div>
 <!-- Will it be possible to disable it in versions after 26.04? -->
 
-<h3 id="migrating-existing-code">Migrating existing code<a class="headerlink" href="#migrating-existing-code" title="Permanent link">&para;</a></h3>
-<p>For guidance regarding the migration of existing code to comply with more recent versions of Nextflow, please see the <a href="https://www.nextflow.io/docs/latest/migrations/index.html">Migration Notes</a> in the reference documentation.</p>
-<p>These two articles are particularly helpful for migrating to the most recent release:</p>
+<h3 id="migrazione-del-codice-esistente">Migrazione del codice esistente<a class="headerlink" href="#migrazione-del-codice-esistente" title="Permanent link">&para;</a></h3>
+<p>Per una guida sulla migrazione del codice esistente per conformarsi alle versioni più recenti di Nextflow, consulti le <a href="https://www.nextflow.io/docs/latest/migrations/index.html">Note di migrazione</a> nella documentazione di riferimento.</p>
+<p>Questi due articoli sono particolarmente utili per la migrazione alla release più recente:</p>
 <ul>
-<li><a href="https://www.nextflow.io/docs/latest/tutorials/workflow-outputs.html">Migrating to workflow outputs</a></li>
-<li><a href="https://www.nextflow.io/docs/latest/tutorials/static-types.html">Migrating to static types</a></li>
+<li><a href="https://www.nextflow.io/docs/latest/tutorials/workflow-outputs.html">Migrazione agli output del workflow</a></li>
+<li><a href="https://www.nextflow.io/docs/latest/tutorials/static-types.html">Migrazione ai tipi statici</a></li>
 </ul>
-<p>Both of these features are covered as part of the beginner training starting in version 3.0 of the training materials.</p>
-<p>Depending on the generation of Nextflow code you intend to migrate, you may be able to get most of it done by the Nextflow linter using the <code>nextflow lint -format</code> command.
-See the CLI reference for <a href="https://www.nextflow.io/docs/latest/reference/cli.html#lint"><code>lint</code></a> for more details.</p>
-<p>We hope this will be helpful.
-If you need help, reach out on Slack or on the forum.</p>
+<p>Entrambe queste funzionalità sono trattate come parte della formazione per principianti a partire dalla versione 3.0 dei materiali di formazione.</p>
+<p>A seconda della generazione di codice Nextflow che intende migrare, potrebbe essere in grado di completare la maggior parte del lavoro tramite il linter di Nextflow utilizzando il comando <code>nextflow lint -format</code>.
+Consulti il riferimento CLI per <a href="https://www.nextflow.io/docs/latest/reference/cli.html#lint"><code>lint</code></a> per maggiori dettagli.</p>
+<p>Speriamo che questo sia utile.
+Se avete bisogno di aiuto, ci contatti su Slack o sul forum.</p>
 <hr />
 <div class="homepage_logos">
-<p><img alt="Seqera" src="../../../assets/img/seqera_logo.png#only-light" /></p>
-<p><img alt="Seqera" src="../../../assets/img/seqera_logo_dark.png#only-dark" /></p>
+<p><img alt="Seqera" src="../assets/img/seqera_logo.png#only-light" /></p>
+<p><img alt="Seqera" src="../assets/img/seqera_logo_dark.png#only-dark" /></p>
 </div><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
@@ -5235,7 +5276,7 @@ window.mkdocsQuizConfig = {
       <nav class="md-footer__inner md-grid" aria-label="Piede" hidden>
         
           
-          <a href="../../envsetup/02_local/" class="md-footer__link md-footer__link--prev" aria-label="Precedente: Manual installation">
+          <a href="../../envsetup/02_local/" class="md-footer__link md-footer__link--prev" aria-label="Precedente: Installazione manuale">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -5245,20 +5286,20 @@ window.mkdocsQuizConfig = {
                 Precedente
               </span>
               <div class="md-ellipsis">
-                Manual installation
+                Installazione manuale
               </div>
             </div>
           </a>
         
         
           
-          <a href="../hello_pipeline/" class="md-footer__link md-footer__link--next" aria-label="Successivo: The Hello pipeline">
+          <a href="../hello_pipeline/" class="md-footer__link md-footer__link--next" aria-label="Successivo: La pipeline Hello">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Successivo
               </span>
               <div class="md-ellipsis">
-                The Hello pipeline
+                La pipeline Hello
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -5335,8 +5376,8 @@ window.mkdocsQuizConfig = {
   
 
 
-<h4>Cookie consent</h4>
-<p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our training materials better. Find out more on <a href="https://seqera.io/privacy-policy/#cookies" target="_blank" rel="noopener">how we use cookies</a>.</p>
+<h4>Consenso ai cookie</h4>
+<p>Utilizziamo i cookie per riconoscere le tue visite ripetute e le tue preferenze, nonché per misurare l'efficacia della nostra documentazione e se gli utenti trovano ciò che cercano. Con il tuo consenso, ci aiuti a migliorare i nostri materiali di formazione. Scopri di più su <a href="https://seqera.io/privacy-policy/#cookies" target="_blank" rel="noopener">come utilizziamo i cookie</a>.</p>
 <input class="md-toggle" type="checkbox" id="__settings" >
 <div class="md-consent__settings">
   <ul class="task-list">
@@ -5420,12 +5461,16 @@ window.mkdocsQuizConfig = {
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiato", "clipboard.copy": "Copia", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.term.missing": "Non presente", "select.version": "Seleziona la versione"}, "version": {"alias": true, "provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiato", "clipboard.copy": "Copia", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.term.missing": "Non presente", "select.version": "Seleziona la versione"}, "version": {"alias": true, "provider": "mike"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
-        <script src="../../../assets/javascripts/posthog.js"></script>
+        <script src="../../assets/javascripts/consent-sync.js"></script>
+      
+        <script src="../../assets/javascripts/posthog.js"></script>
+      
+        <script src="../../assets/javascripts/language-picker.js"></script>
       
     
   </body>

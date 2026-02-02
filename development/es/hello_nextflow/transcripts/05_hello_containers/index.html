@@ -8,39 +8,47 @@
       
       
       
-        <link rel="canonical" href="https://training.nextflow.io/0.dev/es/hello_nextflow/transcripts/05_hello_containers/">
+        <link rel="canonical" href="https://training.nextflow.io/es/hello_nextflow/transcripts/05_hello_containers/">
       
       
       
       
         
-          <link rel="alternate" href="../../../../hello_nextflow/transcripts/05_hello_containers/" hreflang="en">
+          <link rel="alternate" href="/" hreflang="en">
         
-          <link rel="alternate" href="../../../../pt/hello_nextflow/transcripts/05_hello_containers/" hreflang="pt">
+          <link rel="alternate" href="/de/" hreflang="de">
         
-          <link rel="alternate" href="./" hreflang="es">
+          <link rel="alternate" href="/es/" hreflang="es">
         
-          <link rel="alternate" href="../../../../fr/hello_nextflow/transcripts/05_hello_containers/" hreflang="fr">
+          <link rel="alternate" href="/fr/" hreflang="fr">
         
-          <link rel="alternate" href="../../../../it/hello_nextflow/transcripts/05_hello_containers/" hreflang="it">
+          <link rel="alternate" href="/hi/" hreflang="hi">
         
-          <link rel="alternate" href="../../../../ko/hello_nextflow/transcripts/05_hello_containers/" hreflang="ko">
+          <link rel="alternate" href="/it/" hreflang="it">
+        
+          <link rel="alternate" href="/ko/" hreflang="ko">
+        
+          <link rel="alternate" href="/pl/" hreflang="pl">
+        
+          <link rel="alternate" href="/pt/" hreflang="pt">
+        
+          <link rel="alternate" href="/tr/" hreflang="tr">
         
       
       
-      <link rel="icon" href="../../../../assets/img/nextflow-icon.png">
+      <link rel="icon" href="../../../assets/img/nextflow-icon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
     
     
       
-        <title>Part 5: Hello Containers - Transcript - training.nextflow.io</title>
+        <title>Parte 5: Hola Contenedores - Transcripción - training.nextflow.io</title>
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
   
@@ -104,11 +112,11 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/fonts.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/fonts.css">
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/extra.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/extra.css">
     
-    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
   
@@ -143,7 +151,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#part-5-hello-containers-transcript" class="md-skip">
+        <a href="#parte-5-hola-contenedores-transcripcion" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -163,9 +171,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Cabecera">
-    <a href="../../../" title="training.nextflow.io" class="md-header__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
+    <a href="../../.." title="training.nextflow.io" class="md-header__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
       
-  <img src="../../../../assets/img/nextflow_logo_dark.png" alt="logo">
+  <img src="../../../assets/img/nextflow_logo_dark.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -182,7 +190,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Part 5: Hello Containers - Transcript
+              Parte 5: Hola Contenedores - Transcripción
             
           </span>
         </div>
@@ -229,38 +237,62 @@
       <ul class="md-select__list">
         
           <li class="md-select__item">
-            <a href="../../../../hello_nextflow/transcripts/05_hello_containers/" hreflang="en" class="md-select__link">
+            <a href="/" hreflang="en" class="md-select__link">
               English
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../../pt/hello_nextflow/transcripts/05_hello_containers/" hreflang="pt" class="md-select__link">
-              Português
+            <a href="/de/" hreflang="de" class="md-select__link">
+              deutsch
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="./" hreflang="es" class="md-select__link">
-              Español
+            <a href="/es/" hreflang="es" class="md-select__link">
+              español
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../../fr/hello_nextflow/transcripts/05_hello_containers/" hreflang="fr" class="md-select__link">
-              Français
+            <a href="/fr/" hreflang="fr" class="md-select__link">
+              français
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../../it/hello_nextflow/transcripts/05_hello_containers/" hreflang="it" class="md-select__link">
-              Italiano
+            <a href="/hi/" hreflang="hi" class="md-select__link">
+              हिन्दी
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../../ko/hello_nextflow/transcripts/05_hello_containers/" hreflang="ko" class="md-select__link">
-              Korean
+            <a href="/it/" hreflang="it" class="md-select__link">
+              italiano
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/ko/" hreflang="ko" class="md-select__link">
+              한국어
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/pl/" hreflang="pl" class="md-select__link">
+              Polski
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/pt/" hreflang="pt" class="md-select__link">
+              português
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/tr/" hreflang="tr" class="md-select__link">
+              Türkçe
             </a>
           </li>
         
@@ -380,9 +412,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../../" title="training.nextflow.io" class="md-nav__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
+    <a href="../../.." title="training.nextflow.io" class="md-nav__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
       
-  <img src="../../../../assets/img/nextflow_logo_dark.png" alt="logo">
+  <img src="../../../assets/img/nextflow_logo_dark.png" alt="logo">
 
     </a>
     training.nextflow.io
@@ -409,14 +441,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../" class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Home
+    Inicio
   
 
     
@@ -518,7 +550,7 @@
   <span class="md-ellipsis">
     
   
-    Getting started
+    Primeros pasos
   
 
     
@@ -546,7 +578,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run basic operations
+    Parte 1: Ejecutar operaciones básicas
   
 
     
@@ -574,7 +606,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Run real pipelines
+    Parte 2: Ejecutar pipelines reales
   
 
     
@@ -602,7 +634,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Run configuration
+    Parte 3: Configuración de ejecución
   
 
     
@@ -630,7 +662,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    Resumen del curso
   
 
     
@@ -658,7 +690,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Encuesta de retroalimentación
   
 
     
@@ -768,7 +800,7 @@
   <span class="md-ellipsis">
     
   
-    Getting started
+    Comenzando
   
 
     
@@ -796,7 +828,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Hello World
+    Parte 1: Hello World
   
 
     
@@ -824,7 +856,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Hello Channels
+    Parte 2: Hello Channels
   
 
     
@@ -852,7 +884,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Hello Workflow
+    Parte 3: Hello Workflow
   
 
     
@@ -880,7 +912,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Hello Modules
+    Parte 4: Hello Modules
   
 
     
@@ -908,7 +940,7 @@
   <span class="md-ellipsis">
     
   
-    Part 5: Hello Containers
+    Parte 5: Hello Containers
   
 
     
@@ -936,7 +968,7 @@
   <span class="md-ellipsis">
     
   
-    Part 6: Hello Config
+    Parte 6: Hello Config
   
 
     
@@ -964,7 +996,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    Resumen del curso
   
 
     
@@ -992,7 +1024,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Encuesta de retroalimentación
   
 
     
@@ -1102,7 +1134,7 @@
   <span class="md-ellipsis">
     
   
-    Getting started
+    Primeros pasos
   
 
     
@@ -1130,7 +1162,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run a demo pipeline
+    Parte 1: Ejecutar un pipeline de demostración
   
 
     
@@ -1158,7 +1190,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Rewrite Hello for nf-core
+    Parte 2: Reescribir Hello para nf-core
   
 
     
@@ -1186,7 +1218,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Use an nf-core module
+    Parte 3: Usar un módulo nf-core
   
 
     
@@ -1214,7 +1246,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Make an nf-core module
+    Parte 4: Crear un módulo nf-core
   
 
     
@@ -1242,7 +1274,7 @@
   <span class="md-ellipsis">
     
   
-    Part 5: Input validation
+    Parte 5: Validación de entradas
   
 
     
@@ -1270,7 +1302,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    Resumen del curso
   
 
     
@@ -1298,7 +1330,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Encuesta de retroalimentación
   
 
     
@@ -1344,7 +1376,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Science
+    Nextflow para Ciencia
   
 
     
@@ -1360,7 +1392,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Nextflow for Science
+    Nextflow para Ciencia
   
 
           </label>
@@ -1380,7 +1412,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Science
+    Nextflow para Ciencia
   
 
     
@@ -1419,7 +1451,7 @@
   <span class="md-ellipsis">
     
   
-    Genomics
+    Nextflow para Genómica
   
 
     
@@ -1435,7 +1467,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Genomics
+    Nextflow para Genómica
   
 
           </label>
@@ -1455,7 +1487,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Genomics
+    Nextflow para Genómica
   
 
     
@@ -1483,7 +1515,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    Orientación
   
 
     
@@ -1511,7 +1543,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Per-sample variant calling
+    Parte 1: Llamado de variantes por muestra
   
 
     
@@ -1539,7 +1571,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Joint calling on a cohort
+    Parte 2: Llamado conjunto en una cohorte
   
 
     
@@ -1567,7 +1599,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Moving code into modules
+    Parte 3: Mover código a módulos
   
 
     
@@ -1595,7 +1627,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Adding tests
+    Parte 4: Agregando pruebas
   
 
     
@@ -1623,7 +1655,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Encuesta de retroalimentación
   
 
     
@@ -1651,7 +1683,7 @@
   <span class="md-ellipsis">
     
   
-    Next Steps
+    Próximos Pasos
   
 
     
@@ -1698,7 +1730,7 @@
   <span class="md-ellipsis">
     
   
-    RNAseq
+    Nextflow para RNAseq
   
 
     
@@ -1714,7 +1746,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    RNAseq
+    Nextflow para RNAseq
   
 
           </label>
@@ -1734,7 +1766,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for RNAseq
+    Nextflow para RNAseq
   
 
     
@@ -1762,7 +1794,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    Orientación
   
 
     
@@ -1790,7 +1822,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Method overview and manual testing
+    Parte 1: Descripción general del método y pruebas manuales
   
 
     
@@ -1818,7 +1850,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Single-sample implementation
+    Parte 2: Implementación de muestra única
   
 
     
@@ -1846,7 +1878,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Multi-sample paired-end implementation
+    Parte 3: Implementación con múltiples muestras de extremos pareados
   
 
     
@@ -1874,7 +1906,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Encuesta de retroalimentación
   
 
     
@@ -1902,7 +1934,7 @@
   <span class="md-ellipsis">
     
   
-    Next Steps
+    Próximos Pasos
   
 
     
@@ -1949,7 +1981,7 @@
   <span class="md-ellipsis">
     
   
-    Imaging
+    Nextflow run for Imaging
   
 
     
@@ -1965,7 +1997,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Imaging
+    Nextflow run for Imaging
   
 
           </label>
@@ -2013,7 +2045,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    Orientación
   
 
     
@@ -2041,7 +2073,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run basic operations
+    Parte 1: Ejecutar operaciones básicas
   
 
     
@@ -2069,7 +2101,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Run nf-core/molkart
+    Parte 2: Ejecutar nf-core/molkart
   
 
     
@@ -2097,7 +2129,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Organizing inputs
+    Parte 3: Organización de entradas
   
 
     
@@ -2125,7 +2157,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Configuration
+    Parte 4: Configuración
   
 
     
@@ -2153,7 +2185,7 @@
   <span class="md-ellipsis">
     
   
-    Survey
+    Encuesta
   
 
     
@@ -2181,7 +2213,7 @@
   <span class="md-ellipsis">
     
   
-    Next steps
+    Próximos pasos
   
 
     
@@ -2235,7 +2267,7 @@
   <span class="md-ellipsis">
     
   
-    Side Quests
+    Misiones Secundarias
   
 
     
@@ -2251,7 +2283,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Side Quests
+    Misiones Secundarias
   
 
           </label>
@@ -2271,7 +2303,7 @@
   <span class="md-ellipsis">
     
   
-    Side Quests
+    Misiones Secundarias
   
 
     
@@ -2299,7 +2331,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    Orientación
   
 
     
@@ -2327,7 +2359,7 @@
   <span class="md-ellipsis">
     
   
-    Development Environment
+    Entorno de Desarrollo
   
 
     
@@ -2355,7 +2387,7 @@
   <span class="md-ellipsis">
     
   
-    Metadata and meta maps
+    Metadatos y mapas de metadatos
   
 
     
@@ -2383,7 +2415,7 @@
   <span class="md-ellipsis">
     
   
-    File input processing
+    Procesamiento de archivos de entrada
   
 
     
@@ -2411,7 +2443,7 @@
   <span class="md-ellipsis">
     
   
-    Splitting and Grouping
+    División y Agrupación
   
 
     
@@ -2439,7 +2471,7 @@
   <span class="md-ellipsis">
     
   
-    Workflows of Workflows
+    Flujos de trabajo de flujos de trabajo
   
 
     
@@ -2467,7 +2499,7 @@
   <span class="md-ellipsis">
     
   
-    Debugging Workflows
+    Depuración de Flujos de Trabajo
   
 
     
@@ -2495,7 +2527,7 @@
   <span class="md-ellipsis">
     
   
-    Essential Nextflow Scripting Patterns
+    Patrones Esenciales de Scripting en Nextflow
   
 
     
@@ -2523,7 +2555,7 @@
   <span class="md-ellipsis">
     
   
-    Testing with nf-test
+    Pruebas con nf-test
   
 
     
@@ -2569,7 +2601,7 @@
   <span class="md-ellipsis">
     
   
-    Training Collections
+    Index
   
 
     
@@ -2585,7 +2617,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Training Collections
+    Index
   
 
           </label>
@@ -2605,7 +2637,7 @@
   <span class="md-ellipsis">
     
   
-    Training Collections
+    Index
   
 
     
@@ -2633,7 +2665,7 @@
   <span class="md-ellipsis">
     
   
-    The Architect's Toolkit I
+    Architects toolkit 1
   
 
     
@@ -2715,7 +2747,7 @@
   <span class="md-ellipsis">
     
   
-    Getting help
+    Obtener ayuda
   
 
     
@@ -2754,7 +2786,7 @@
   <span class="md-ellipsis">
     
   
-    Training environment
+    Opciones de entorno
   
 
     
@@ -2770,7 +2802,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Training environment
+    Opciones de entorno
   
 
           </label>
@@ -2790,7 +2822,7 @@
   <span class="md-ellipsis">
     
   
-    Environment options
+    Opciones de entorno
   
 
     
@@ -2846,7 +2878,7 @@
   <span class="md-ellipsis">
     
   
-    Local Devcontainers
+    Devcontainers locales
   
 
     
@@ -2874,7 +2906,7 @@
   <span class="md-ellipsis">
     
   
-    Manual installation
+    Instalación manual
   
 
     
@@ -2910,7 +2942,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow versions
+    Versiones de Nextflow
   
 
     
@@ -2938,7 +2970,7 @@
   <span class="md-ellipsis">
     
   
-    The Hello pipeline
+    El pipeline Hello
   
 
     
@@ -2980,172 +3012,172 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#welcome" class="md-nav__link">
+  <a href="#bienvenida" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Welcome
+        Bienvenida
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#0-warmup-run-hello-containersnf" class="md-nav__link">
+  <a href="#0-calentamiento-ejecute-hello-containersnf" class="md-nav__link">
     <span class="md-ellipsis">
       
-        0. Warmup: Run hello-containers.nf
+        0. Calentamiento: Ejecute hello-containers.nf
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#1-use-a-container-manually" class="md-nav__link">
+  <a href="#1-use-un-contenedor-manualmente" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Use a container 'manually'
+        1. Use un contenedor 'manualmente'
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#11-pull-the-container-image" class="md-nav__link">
+  <a href="#11-descargue-la-imagen-del-contenedor" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1. Pull the container image
+        1.1. Descargue la imagen del contenedor
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#pulling-a-singularity-image" class="md-nav__link">
+  <a href="#descargando-una-imagen-de-singularity" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Pulling a Singularity image
+        Descargando una imagen de Singularity
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#12-use-the-container-to-run-cowpy-as-a-one-off-command" class="md-nav__link">
+  <a href="#12-use-el-contenedor-para-ejecutar-cowpy-como-un-comando-unico" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2. Use the container to run cowpy as a one-off command
+        1.2. Use el contenedor para ejecutar cowpy como un comando único
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#13-use-the-container-to-run-cowpy-interactively" class="md-nav__link">
+  <a href="#13-use-el-contenedor-para-ejecutar-cowpy-interactivamente" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.3. Use the container to run cowpy interactively
+        1.3. Use el contenedor para ejecutar cowpy interactivamente
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#132-run-the-desired-tool-commands" class="md-nav__link">
+  <a href="#132-ejecute-ellos-comandos-de-la-herramienta-deseada" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.3.2. Run the desired tool command(s)
+        1.3.2. Ejecute el(los) comando(s) de la herramienta deseada
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#133-exit-the-container" class="md-nav__link">
+  <a href="#133-salga-del-contenedor" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.3.3. Exit the container
+        1.3.3. Salga del contenedor
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#134-mount-data-into-the-container" class="md-nav__link">
+  <a href="#134-monte-datos-en-el-contenedor" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.3.4. Mount data into the container
+        1.3.4. Monte datos en el contenedor
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#135-use-the-mounted-data" class="md-nav__link">
+  <a href="#135-use-los-datos-montados" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.3.5. Use the mounted data
+        1.3.5. Use los datos montados
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#2-use-containers-in-nextflow" class="md-nav__link">
+  <a href="#2-use-contenedores-en-nextflow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Use containers in Nextflow
+        2. Use contenedores en Nextflow
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#21-write-a-cowpy-module" class="md-nav__link">
+  <a href="#21-escriba-un-modulo-cowpy" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1. Write a cowpy module
+        2.1. Escriba un módulo cowpy
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#22-add-cowpy-to-the-workflow" class="md-nav__link">
+  <a href="#22-agregue-cowpy-al-workflow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2. Add cowpy to the workflow
+        2.2. Agregue cowpy al workflow
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#224-run-the-workflow-to-verify-that-it-works" class="md-nav__link">
+  <a href="#224-ejecute-el-workflow-para-verificar-que-funciona" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2.4. Run the workflow to verify that it works
+        2.2.4. Ejecute el workflow para verificar que funciona
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#23-use-a-container-to-run-it" class="md-nav__link">
+  <a href="#23-use-un-contenedor-para-ejecutarlo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.3. Use a container to run it
+        2.3. Use un contenedor para ejecutarlo
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#232-enable-use-of-docker-via-the-nextflowconfig-file" class="md-nav__link">
+  <a href="#232-habilite-el-uso-de-docker-a-traves-del-archivo-nextflowconfig" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.3.2. Enable use of Docker via the nextflow.config file
+        2.3.2. Habilite el uso de Docker a través del archivo nextflow.config
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#233-run-the-workflow-with-docker-enabled" class="md-nav__link">
+  <a href="#233-ejecute-el-workflow-con-docker-habilitado" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.3.3. Run the workflow with Docker enabled
+        2.3.3. Ejecute el workflow con Docker habilitado
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#234-inspect-how-nextflow-launched-the-containerized-task" class="md-nav__link">
+  <a href="#234-inspeccione-como-nextflow-lanzo-la-tarea-contenerizada" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.3.4. Inspect how Nextflow launched the containerized task
+        2.3.4. Inspeccione cómo Nextflow lanzó la tarea contenerizada
       
     </span>
   </a>
@@ -3389,116 +3421,126 @@
                 
                   
 
+ 
+<a
+  href="https://github.com/nextflow-io/training/edit/master/docs/hello_nextflow/transcripts/05_hello_containers.md"
+  title="Editar esta página"
+  class="md-content__button md-icon"
+  rel="edit"
+>
+   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+</a>
+   
+<a
+  href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md"
+  title="Improve translation"
+  class="md-content__button md-icon"
+>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 1H3c-1.1 0-2 .9-2 2v12l3-3h5v-1c0-2.2 1.79-4 4-4V3c0-1.1-.9-2-2-2m0 3H9.5c-.34 1.19-.96 2.3-1.82 3.26l-.02.02 1.26 1.25-.37 1.01L7 8l-2.5 2.5-.69-.73 2.53-2.49A8.6 8.6 0 0 1 4.86 5h.99c.31.6.69 1.17 1.15 1.68A7.7 7.7 0 0 0 8.57 4H3V3h3.5V2h1v1H11zm10 5h-8c-1.1 0-2 .9-2 2v7c0 1.1.9 2 2 2h7l3 3V11c0-1.1-.9-2-2-2m-1.37 10-.85-2.25h-3.56L14.38 19h-1.5l3.37-9h1.5l3.38 9zM17 12l1.22 3.25h-2.43z"/></svg>
+</a>
+ 
 
-  
-    <a href="https://github.com/nextflow-io/training/edit/master/docs/hello_nextflow/transcripts/05_hello_containers.md" title="Editar esta página" class="md-content__button md-icon" rel="edit">
-      
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
-    </a>
-  
-  
-
-
-<h1 id="part-5-hello-containers-transcript">Part 5: Hello Containers - Transcript<a class="headerlink" href="#part-5-hello-containers-transcript" title="Permanent link">&para;</a></h1>
+<h1 id="parte-5-hola-contenedores-transcripcion">Parte 5: Hola Contenedores - Transcripción<a class="headerlink" href="#parte-5-hola-contenedores-transcripcion" title="Permanent link">&para;</a></h1>
+<p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Traducción asistida por IA - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">más información y sugerencias</a></span></p>
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/5PyOWjKnNmg?si=QinuAnFwFj-Z8CrO&amp;list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 <div class="admonition note">
-<p class="admonition-title">Important notes</p>
-<p>This page shows the transcript only. For full step-by-step instructions, return to the <a href="../../05_hello_containers/">course material</a>.</p>
-<p>The section numbers shown in the transcript are provided for indicative purposes only and may not include all section numbers in the materials.</p>
+<p class="admonition-title">Notas importantes</p>
+<p>Esta página muestra únicamente la transcripción. Para instrucciones completas paso a paso, regrese al <a href="../../05_hello_containers/">material del curso</a>.</p>
+<p>Los números de sección mostrados en la transcripción se proporcionan únicamente con fines indicativos y pueden no incluir todos los números de sección en los materiales.</p>
 </div>
-<h2 id="welcome">Welcome<a class="headerlink" href="#welcome" title="Permanent link">&para;</a></h2>
-<p>Hi, welcome to Part Five of the Hello Nextflow training course.</p>
-<p>This chapter's called Hello Containers. We're going to talk about how Nextflow integrates with tools such as Docker and Singularity to use software containers to provision software to the users of your pipeline.</p>
-<p>This means that when people run your pipeline, they don't have to go and install all the different tools themselves. Nextflow will do it for them.</p>
-<p>Containers are an extremely powerful technology and crucial in reproducibility and ease of use. We're going to start off by doing a brief introduction to containers themselves, running some docker commands manually, and then we'll take those same containers and put them into our Nextflow pipeline.</p>
-<p>Okay. Let's get started.</p>
-<p>So just as before, let's start off by loading up the training material. Go to training.nextflow.io. Hello Nextflow, Chapter Five, Hello Containers.</p>
-<p>I'm going to jump into my Codespaces environment and on the left here we see hello containers dot nf.</p>
-<p>Just as before, this is the same script that we finished previous chapter four on, so it should look familiar.</p>
-<p>We've got our command line parameters to specify the input file and the batch name. We are including our three modules, and we have our workflow where we run the three processes.</p>
-<h2 id="0-warmup-run-hello-containersnf">0. Warmup: Run hello-containers.nf<a class="headerlink" href="#0-warmup-run-hello-containersnf" title="Permanent link">&para;</a></h2>
-<p>Feel free to run this workflow again and double check that it is producing the outputs that you expect. For now, I'm actually going to close it and dive into the terminal.</p>
-<h2 id="1-use-a-container-manually">1. Use a container 'manually'<a class="headerlink" href="#1-use-a-container-manually" title="Permanent link">&para;</a></h2>
-<p>To start off this chapter, we're going to do a bit of a recap over container technology. If you're very used to docker or singularity or other container techs, then treat this as a refresher , or feel free to skip over it completely.</p>
-<p>Nextflow supports many different types of container technologies. That includes Docker, Singularity, Podman, Shifter, Charliecloud, and more.</p>
-<p>In this training, we're going to be focusing on Docker. That comes pre-installed in the code spaces and is one of the most popular container technologies, especially if you're developing on your own computer or your own laptop.</p>
-<p>If you're working in an academic environment on a shared HPC, you might find that Singularity is available and not Docker. That's fine. All of the concepts are exactly the same. A few of the manual commands are different, but if you understand Docker, you'll also understand singularity.</p>
-<p>In fact, Singularity is also installed in the Code Spaces environment. So if you like, you can try and do the same tasks using Singularity instead of Docker.</p>
-<p>Okay, so what is container technology? The idea behind Docker is that it can fetch an image from a remote source. Pull it to your local machine and then create a container based on that image.</p>
-<p>This running container is a little bit like a virtual machine running on your computer. It's isolated from your environment, and it comes prepackaged with an operating system and a set of available software.</p>
-<h2 id="11-pull-the-container-image">1.1. Pull the container image<a class="headerlink" href="#11-pull-the-container-image" title="Permanent link">&para;</a></h2>
-<p>The syntax that we need to fetch a preexisting image is "docker pull". So I'm going to type that into my terminal, but now we need an image to play with.</p>
-<p>You can build images yourself. You can find them on public registries like Docker Hub or quay.io. But a really good way to get images quickly is using Seqera Containers.</p>
-<p>This is a free to use community service that we've built in 2024, which you can use without login or anything.</p>
-<p>If you go to seqera.io/containers or click containers at the top here, you're presented with a search interface and you can type in the name of any tool available in Conda or on the Python package Index.</p>
-<p>By default, it searches the Bioconda and Conda Forge channels, but you can prefix any Conda channel. I'm here if you want to.</p>
-<p>For a bit of fun, let's use cowpy. I'm going to type in cowpy. It gives me results from Python Package Index and Conda Forge. I'm going to click that to add it to my container. I could add multiple packages here if I wanted to. Select Docker, select linux/amd64, and click Get Container.</p>
-<p>This builds the image for me on demand if it hasn't already been created, and gives me a URL that I can copy.</p>
-<p>If you're interested, you can click view Build Details, and that takes you to a page, which shows the conda environment file that was used and the complete build log for the build, along with the security scan results.</p>
-<p>If I go back to my code spaces, I can now paste this container name and hit enter.</p>
-<p>Docker now downloads all the different layers within this container image, and now tells us that this image is available to use.</p>
-<h2 id="pulling-a-singularity-image">Pulling a Singularity image<a class="headerlink" href="#pulling-a-singularity-image" title="Permanent link">&para;</a></h2>
-<p>If you are using singularity, the process is basically the same. We select our image packages, select cowpy. Now we choose Singularity instead of Docker and click Get Container. That gives us an image URL using oras://. Or if you prefer, you can use https:// by checking that box. Copy that URL. Now go to Code Spaces. We actually have Apptainer installed in this space, which is the same as Singularity, but they're aliased to one another. So I'm going to do apptainer pull and then I'm going to call it cowpy sif, but you can call it whatever you want. Paste URL. And that's going to download that image for me.</p>
-<p>I could do ls -lh and see cowpy.sif</p>
-<p>Singularity is different to Docker, that singularity stores all images in flat files, whereas Docker has a registry where it keeps all the layers separately on your host machine, and it has a running demon to keep track of all of that.</p>
-<h2 id="12-use-the-container-to-run-cowpy-as-a-one-off-command">1.2. Use the container to run cowpy as a one-off command<a class="headerlink" href="#12-use-the-container-to-run-cowpy-as-a-one-off-command" title="Permanent link">&para;</a></h2>
-<p>Okay, let's go back to Docker. We can now try running this image that we created by doing docker run.</p>
-<p>I'm going to do dash dash rm, which just does a one-off execution of the image. And I'm going to paste the image URL. And then finally, you finish this with a command that you want to run.</p>
-<p>The image we generated had cowpy installed, so let's try cowpy.</p>
-<p>There you go. It ran our command. I don't have cowpy installed locally. You can see if I try and run it, it doesn't exist. However, in this command, I ran it using Docker and it correctly generated this output.</p>
-<h2 id="13-use-the-container-to-run-cowpy-interactively">1.3. Use the container to run cowpy interactively<a class="headerlink" href="#13-use-the-container-to-run-cowpy-interactively" title="Permanent link">&para;</a></h2>
-<p>We can go further than this if we like and spin up a container interactively and look around inside. Again, I do "docker run dash dash rm". Now I'm going to do dash it, which tells Docker that we want an interactive terminal. I do the image URL again, and this time, instead of doing cowpy, I'm going to do bin bash because the command that we want to run is bash.</p>
-<p>This takes us into this running container and you can see that the prompt has changed now.</p>
-<p>If I do LS slash you can see the directories here are different.</p>
-<p>If I open a second terminal here on the right hand side, which is just running in GitHub Code Spaces and do LS slash, you see we have directories like workspaces and temp, whereas over here in Docker it's different.</p>
-<p>So this environment is completely separate within Docker and isolated from my host environment. That's a good thing, because that isolates the execution of this command into the Docker image and keeps it reproducible between different people on different host systems.</p>
-<p>If you want to use data from your host system within the Docker image, you have to explicitly mount that into the container.</p>
-<p>We're going to do that in a second.</p>
-<h2 id="132-run-the-desired-tool-commands">1.3.2. Run the desired tool command(s)<a class="headerlink" href="#132-run-the-desired-tool-commands" title="Permanent link">&para;</a></h2>
-<p>First though, let's see if we can run cowpy. There again, the command is available now directly on the command line, and we can start to do more complex things and pass arguments. Hello containers and instead of the cow, let's do the tux penguin. Let's see what else we have.</p>
-<p>Let's do cheese. Wonderful. How about Dragon and Cow? Pretty good.</p>
-<h2 id="133-exit-the-container">1.3.3. Exit the container<a class="headerlink" href="#133-exit-the-container" title="Permanent link">&para;</a></h2>
-<p>Okay. I can't do much more because I don't have any data in this container. So let's exit out this running image and see if we can mount some data into the container. I can do that by doing control D or typing exit. Okay, I am now back in my regular GitHub code space.</p>
-<h2 id="134-mount-data-into-the-container">1.3.4. Mount data into the container<a class="headerlink" href="#134-mount-data-into-the-container" title="Permanent link">&para;</a></h2>
-<p>In order to mount some data into the Docker container, I need to use dash V. So I'm going to take my previous docker command, go back to the start do dash v. I'm going to do "." for the current local working directory, and then a colon to say where that should be mounted in the host directory and do slash data. So that's mounting this particular directory into the container at slash data.</p>
-<p>Now if I do LS slash we can see we have a new directory called data, and if I do LS data, you can see all of the files that we have in the sidebar here. Fantastic.</p>
-<h2 id="135-use-the-mounted-data">1.3.5. Use the mounted data<a class="headerlink" href="#135-use-the-mounted-data" title="Permanent link">&para;</a></h2>
-<p>Now we can start to use some of the files which are on the host system within the Docker image. So I can say cat data greetings csv. If you remember, this is our CSV file with our different greetings from before, and I can pipe that to cowpy. Fantastic. Now we're getting somewhere.</p>
-<p>Okay. That's enough for running Docker interactively. Hopefully you now have a feel for roughly what Docker is and how to use it both to run a command in a one-off way, and also to use an image interactively. If you are using singularity. The commands are all very similar except you do things like apptainer exec or apptainer run, or singularity exec or singularity run.</p>
-<h2 id="2-use-containers-in-nextflow">2. Use containers in Nextflow<a class="headerlink" href="#2-use-containers-in-nextflow" title="Permanent link">&para;</a></h2>
-<p>Next we're going to go back to our Nextflow workflow and see how to use this technology within the Nextflow pipeline.</p>
-<p>Let's close the terminal and open up Hello Containers again.</p>
-<h2 id="21-write-a-cowpy-module">2.1. Write a cowpy module<a class="headerlink" href="#21-write-a-cowpy-module" title="Permanent link">&para;</a></h2>
-<p>To stick with our cowpy example, let's create a new process in our workflow, which uses cowpy. Let's go up to modules, create a new file and call it cowpy nf. I'm now going to cheat a little bit and copy in the code from the training material and hit save. And let's have a look.</p>
-<p>So this is a simple process. Hopefully now you understand what the building blocks of a process look like. We've got our publishDir again, going to results. We have two inputs, an input file and a string called character. We have an output cowpy input file, and we have a script which looks exactly the same as what we ran manually inside our docker image a second ago: cat to print a file, piping it onto cowpy, saying which type of cowpy character we want to use, and outputting that to the output file, which we pass as the output here.</p>
-<h2 id="22-add-cowpy-to-the-workflow">2.2. Add cowpy to the workflow<a class="headerlink" href="#22-add-cowpy-to-the-workflow" title="Permanent link">&para;</a></h2>
-<p>Okay, let's go back to our workflow, import this new process. So cowpy from modules cowpy nf. Let's create a new parameter so that we can specify which character we wanted. Let's say Turkey by default. And then let's call this new process at the end of the workflow,</p>
-<p>cowpy. And let's use the output here from Collect Greetings. So collect greetings out, out file here. And then we need a second argument, which is the new params that we've just made. params dot character.</p>
-<h2 id="224-run-the-workflow-to-verify-that-it-works">2.2.4. Run the workflow to verify that it works<a class="headerlink" href="#224-run-the-workflow-to-verify-that-it-works" title="Permanent link">&para;</a></h2>
-<p>Okay, let's see if our new process works. Nextflow run hello containers. This should run those first three processes and then try and run cowpy at the end.</p>
-<p>We've got an error. What it's saying here, cowpy had an error and it had an exit status 127 and sure enough, command sh cowpy command not found.</p>
-<p>We didn't tell Nextflow that we have a Docker image available for cowpy, so it tried to run it on our host system and we don't have cowpy installed on our host system, so it triggered an error.</p>
-<h2 id="23-use-a-container-to-run-it">2.3. Use a container to run it<a class="headerlink" href="#23-use-a-container-to-run-it" title="Permanent link">&para;</a></h2>
-<p>So what we need to do is we need to tell Nextflow that we have a container available. Let's go to our cowpy process and we're going to add a new directive at the top of the process called container.</p>
-<p>We then find our image, copy the URL, and put that in a string.</p>
-<p>This isn't enough by itself because an X Flow pipeline can have several ways to specify software. I could also do conda conda-forge cowpy, for example. And Nextflow needs to know which of these technologies you want to use.</p>
-<h2 id="232-enable-use-of-docker-via-the-nextflowconfig-file">2.3.2. Enable use of Docker via the nextflow.config file<a class="headerlink" href="#232-enable-use-of-docker-via-the-nextflowconfig-file" title="Permanent link">&para;</a></h2>
-<p>So in order to run with Docker enabled, we're going to get ahead of ourselves slightly and use the Nextflow config file, which is something we're going to cover in more detail in the next chapter. You can see in this directory that we have a file called Nextflow Config, and in here you already have docker.enabled False.</p>
-<p>We're going to change that to True to enable Docker, and then we can try and run the workflow again.</p>
-<h2 id="233-run-the-workflow-with-docker-enabled">2.3.3. Run the workflow with Docker enabled<a class="headerlink" href="#233-run-the-workflow-with-docker-enabled" title="Permanent link">&para;</a></h2>
-<p>Nextflow run hello containers nf and this time cowpy ran successfully. Let's look in Results. cowpy collected test and there's our Turkey. Wonderful.</p>
-<p>So in the background there, Nextflow knew that it had a container available for that process.</p>
-<p>It fetched the image and it ran the commands for us.</p>
-<h2 id="234-inspect-how-nextflow-launched-the-containerized-task">2.3.4. Inspect how Nextflow launched the containerized task<a class="headerlink" href="#234-inspect-how-nextflow-launched-the-containerized-task" title="Permanent link">&para;</a></h2>
-<p>If you're curious, we can actually see exactly what it did by looking in the work directory. If I do code work, and then the hash and then command run, which if you remember is the actual file that's executed for that task, we can go in and we can look for a function called NXF launch. And here you can see the exact docker command that Nextflow used, which looks a lot like what we were doing manually in the terminal earlier. Docker run. Binding this host directory into the container, and then specifying the container URL.</p>
-<p>So there's no magic here. It's just that Nextflow is automatically doing the heavy lifting for you in a way that means you can easily specify containers in your pipeline, which are then readily available for anyone else to use who runs your workflow. And those people no longer have to think about managing software to run your analysis pipeline.</p>
-<p>Very, very simple, very convenient, and also really reproducible. Good all around.</p>
-<p>Okay, great work. That's the end of Chapter Five. Join us in the next video for part six, which is the final part of this Hello Nextflow training, where we'll talk about Nextflow configuration in more detail.</p>
-<p>See you in the next video.</p>
-<p><a href="../06_hello_config/">Next video transcript <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.22 19.03a.75.75 0 0 1 0-1.06L18.19 13H3.75a.75.75 0 0 1 0-1.5h14.44l-4.97-4.97a.749.749 0 0 1 .326-1.275.75.75 0 0 1 .734.215l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0"/></svg></span></a></p><style type="text/css">.quiz {
+<h2 id="bienvenida">Bienvenida<a class="headerlink" href="#bienvenida" title="Permanent link">&para;</a></h2>
+<p>Hola, bienvenido a la Parte Cinco del curso de entrenamiento Hello Nextflow.</p>
+<p>Este capítulo se llama Hola Contenedores. Vamos a hablar sobre cómo Nextflow se integra con herramientas como Docker y Singularity para usar contenedores de software para proporcionar software a los usuarios de su pipeline.</p>
+<p>Esto significa que cuando las personas ejecutan su pipeline, no tienen que ir e instalar todas las diferentes herramientas ellos mismos. Nextflow lo hará por ellos.</p>
+<p>Los contenedores son una tecnología extremadamente poderosa y crucial en reproducibilidad y facilidad de uso. Vamos a comenzar haciendo una breve introducción a los contenedores mismos, ejecutando algunos comandos de docker manualmente, y luego tomaremos esos mismos contenedores y los pondremos en nuestro pipeline de Nextflow.</p>
+<p>Muy bien. Empecemos.</p>
+<p>Entonces, como antes, comencemos cargando el material de entrenamiento. Vaya a training.nextflow.io. Hello Nextflow, Capítulo Cinco, Hola Contenedores.</p>
+<p>Voy a entrar en mi entorno de Codespaces y a la izquierda aquí vemos hello containers punto nf.</p>
+<p>Como antes, este es el mismo script con el que terminamos el capítulo cuatro anterior, así que debería verse familiar.</p>
+<p>Tenemos nuestros parámetros de línea de comandos para especificar el archivo de entrada y el nombre del lote. Estamos incluyendo nuestros tres módulos, y tenemos nuestro workflow donde ejecutamos los tres procesos.</p>
+<h2 id="0-calentamiento-ejecute-hello-containersnf">0. Calentamiento: Ejecute hello-containers.nf<a class="headerlink" href="#0-calentamiento-ejecute-hello-containersnf" title="Permanent link">&para;</a></h2>
+<p>Siéntase libre de ejecutar este workflow nuevamente y verificar que está produciendo las salidas que espera. Por ahora, en realidad voy a cerrarlo y sumergirme en la terminal.</p>
+<h2 id="1-use-un-contenedor-manualmente">1. Use un contenedor 'manualmente'<a class="headerlink" href="#1-use-un-contenedor-manualmente" title="Permanent link">&para;</a></h2>
+<p>Para comenzar este capítulo, vamos a hacer un poco de recapitulación sobre la tecnología de contenedores. Si está muy acostumbrado a docker o singularity u otras tecnologías de contenedores, entonces trate esto como un repaso, o siéntase libre de omitirlo completamente.</p>
+<p>Nextflow soporta muchos tipos diferentes de tecnologías de contenedores. Eso incluye Docker, Singularity, Podman, Shifter, Charliecloud, y más.</p>
+<p>En este entrenamiento, vamos a enfocarnos en Docker. Ese viene preinstalado en los code spaces y es una de las tecnologías de contenedores más populares, especialmente si está desarrollando en su propia computadora o en su propia laptop.</p>
+<p>Si está trabajando en un entorno académico en un HPC compartido, puede que encuentre que Singularity está disponible y no Docker. Está bien. Todos los conceptos son exactamente los mismos. Algunos de los comandos manuales son diferentes, pero si entiende Docker, también entenderá singularity.</p>
+<p>De hecho, Singularity también está instalado en el entorno de Code Spaces. Entonces si gusta, puede intentar hacer las mismas tareas usando Singularity en lugar de Docker.</p>
+<p>Bien, entonces ¿qué es la tecnología de contenedores? La idea detrás de Docker es que puede obtener una imagen de una fuente remota. Descargarla a su máquina local y luego crear un contenedor basado en esa imagen.</p>
+<p>Este contenedor en ejecución es un poco como una máquina virtual ejecutándose en su computadora. Está aislado de su entorno, y viene preempaquetado con un sistema operativo y un conjunto de software disponible.</p>
+<h2 id="11-descargue-la-imagen-del-contenedor">1.1. Descargue la imagen del contenedor<a class="headerlink" href="#11-descargue-la-imagen-del-contenedor" title="Permanent link">&para;</a></h2>
+<p>La sintaxis que necesitamos para obtener una imagen preexistente es "docker pull". Entonces voy a escribir eso en mi terminal, pero ahora necesitamos una imagen con la cual jugar.</p>
+<p>Puede construir imágenes usted mismo. Puede encontrarlas en registros públicos como Docker Hub o quay.io. Pero una forma realmente buena de obtener imágenes rápidamente es usando Seqera Containers.</p>
+<p>Este es un servicio comunitario gratuito que hemos construido en 2024, que puede usar sin inicio de sesión ni nada.</p>
+<p>Si va a seqera.io/containers o hace clic en containers en la parte superior aquí, se le presenta una interfaz de búsqueda y puede escribir el nombre de cualquier herramienta disponible en Conda o en el Python package Index.</p>
+<p>Por defecto, busca en los canales de Bioconda y Conda Forge, pero puede prefijar cualquier canal de Conda. Estoy aquí si lo desea.</p>
+<p>Por diversión, usemos cowpy. Voy a escribir cowpy. Me da resultados de Python Package Index y Conda Forge. Voy a hacer clic en eso para agregarlo a mi contenedor. Podría agregar múltiples paquetes aquí si quisiera. Selecciono Docker, selecciono linux/amd64, y hago clic en Get Container.</p>
+<p>Esto construye la imagen para mí bajo demanda si no ha sido creada ya, y me da una URL que puedo copiar.</p>
+<p>Si está interesado, puede hacer clic en view Build Details, y eso lo lleva a una página que muestra el archivo de entorno conda que fue usado y el registro completo de construcción para la construcción, junto con los resultados del escaneo de seguridad.</p>
+<p>Si regreso a mis code spaces, ahora puedo pegar este nombre de contenedor y presionar enter.</p>
+<p>Docker ahora descarga todas las diferentes capas dentro de esta imagen de contenedor, y ahora nos dice que esta imagen está disponible para usar.</p>
+<h2 id="descargando-una-imagen-de-singularity">Descargando una imagen de Singularity<a class="headerlink" href="#descargando-una-imagen-de-singularity" title="Permanent link">&para;</a></h2>
+<p>Si está usando singularity, el proceso es básicamente el mismo. Seleccionamos nuestros paquetes de imagen, seleccionamos cowpy. Ahora elegimos Singularity en lugar de Docker y hacemos clic en Get Container. Eso nos da una URL de imagen usando oras://. O si prefiere, puede usar https:// marcando esa casilla. Copie esa URL. Ahora vaya a Code Spaces. En realidad tenemos Apptainer instalado en este espacio, que es lo mismo que Singularity, pero están aliados entre sí. Entonces voy a hacer apptainer pull y luego voy a llamarlo cowpy sif, pero puede llamarlo como quiera. Pegue la URL. Y eso va a descargar esa imagen para mí.</p>
+<p>Podría hacer ls -lh y ver cowpy.sif</p>
+<p>Singularity es diferente a Docker, en que singularity almacena todas las imágenes en archivos planos, mientras que Docker tiene un registro donde mantiene todas las capas por separado en su máquina host, y tiene un demonio ejecutándose para hacer seguimiento de todo eso.</p>
+<h2 id="12-use-el-contenedor-para-ejecutar-cowpy-como-un-comando-unico">1.2. Use el contenedor para ejecutar cowpy como un comando único<a class="headerlink" href="#12-use-el-contenedor-para-ejecutar-cowpy-como-un-comando-unico" title="Permanent link">&para;</a></h2>
+<p>Bien, volvamos a Docker. Ahora podemos intentar ejecutar esta imagen que creamos haciendo docker run.</p>
+<p>Voy a hacer dash dash rm, que simplemente hace una ejecución única de la imagen. Y voy a pegar la URL de la imagen. Y luego finalmente, termina esto con un comando que desea ejecutar.</p>
+<p>La imagen que generamos tenía cowpy instalado, así que intentemos cowpy.</p>
+<p>Ahí está. Ejecutó nuestro comando. No tengo cowpy instalado localmente. Puede ver que si intento ejecutarlo, no existe. Sin embargo, en este comando, lo ejecuté usando Docker y correctamente generó esta salida.</p>
+<h2 id="13-use-el-contenedor-para-ejecutar-cowpy-interactivamente">1.3. Use el contenedor para ejecutar cowpy interactivamente<a class="headerlink" href="#13-use-el-contenedor-para-ejecutar-cowpy-interactivamente" title="Permanent link">&para;</a></h2>
+<p>Podemos ir más allá de esto si queremos y activar un contenedor interactivamente y mirar alrededor adentro. Nuevamente, hago "docker run dash dash rm". Ahora voy a hacer dash it, que le dice a Docker que queremos una terminal interactiva. Hago la URL de la imagen nuevamente, y esta vez, en lugar de hacer cowpy, voy a hacer bin bash porque el comando que queremos ejecutar es bash.</p>
+<p>Esto nos lleva dentro de este contenedor en ejecución y puede ver que el prompt ha cambiado ahora.</p>
+<p>Si hago LS slash puede ver que los directorios aquí son diferentes.</p>
+<p>Si abro una segunda terminal aquí a la derecha, que simplemente está ejecutándose en GitHub Code Spaces y hago LS slash, ve que tenemos directorios como workspaces y temp, mientras que aquí en Docker es diferente.</p>
+<p>Entonces este entorno está completamente separado dentro de Docker y aislado de mi entorno host. Eso es algo bueno, porque eso aísla la ejecución de este comando en la imagen de Docker y lo mantiene reproducible entre diferentes personas en diferentes sistemas host.</p>
+<p>Si desea usar datos de su sistema host dentro de la imagen de Docker, tiene que montar eso explícitamente en el contenedor.</p>
+<p>Vamos a hacer eso en un segundo.</p>
+<h2 id="132-ejecute-ellos-comandos-de-la-herramienta-deseada">1.3.2. Ejecute el(los) comando(s) de la herramienta deseada<a class="headerlink" href="#132-ejecute-ellos-comandos-de-la-herramienta-deseada" title="Permanent link">&para;</a></h2>
+<p>Primero, sin embargo, veamos si podemos ejecutar cowpy. Ahí nuevamente, el comando está disponible ahora directamente en la línea de comandos, y podemos comenzar a hacer cosas más complejas y pasar argumentos. Hello containers y en lugar de la vaca, hagamos el pingüino tux. Veamos qué más tenemos.</p>
+<p>Hagamos cheese. Maravilloso. ¿Qué tal Dragon y Cow? Bastante bien.</p>
+<h2 id="133-salga-del-contenedor">1.3.3. Salga del contenedor<a class="headerlink" href="#133-salga-del-contenedor" title="Permanent link">&para;</a></h2>
+<p>Bien. No puedo hacer mucho más porque no tengo ningún dato en este contenedor. Así que salgamos de esta imagen en ejecución y veamos si podemos montar algunos datos en el contenedor. Puedo hacer eso haciendo control D o escribiendo exit. Bien, ahora estoy de vuelta en mi code space regular de GitHub.</p>
+<h2 id="134-monte-datos-en-el-contenedor">1.3.4. Monte datos en el contenedor<a class="headerlink" href="#134-monte-datos-en-el-contenedor" title="Permanent link">&para;</a></h2>
+<p>Para montar algunos datos en el contenedor de Docker, necesito usar dash V. Entonces voy a tomar mi comando docker anterior, ir al inicio hacer dash v. Voy a hacer "." para el directorio de trabajo local actual, y luego dos puntos para decir dónde debería montarse eso en el directorio host y hacer slash data. Entonces eso está montando este directorio particular en el contenedor en slash data.</p>
+<p>Ahora si hago LS slash podemos ver que tenemos un nuevo directorio llamado data, y si hago LS data, puede ver todos los archivos que tenemos en la barra lateral aquí. Fantástico.</p>
+<h2 id="135-use-los-datos-montados">1.3.5. Use los datos montados<a class="headerlink" href="#135-use-los-datos-montados" title="Permanent link">&para;</a></h2>
+<p>Ahora podemos comenzar a usar algunos de los archivos que están en el sistema host dentro de la imagen de Docker. Entonces puedo decir cat data greetings csv. Si recuerda, este es nuestro archivo CSV con nuestros diferentes saludos de antes, y puedo canalizarlo a cowpy. Fantástico. Ahora estamos llegando a algún lado.</p>
+<p>Bien. Eso es suficiente para ejecutar Docker interactivamente. Esperamos que ahora tenga una idea de aproximadamente qué es Docker y cómo usarlo tanto para ejecutar un comando de manera única, como también para usar una imagen interactivamente. Si está usando singularity. Los comandos son todos muy similares excepto que hace cosas como apptainer exec o apptainer run, o singularity exec o singularity run.</p>
+<h2 id="2-use-contenedores-en-nextflow">2. Use contenedores en Nextflow<a class="headerlink" href="#2-use-contenedores-en-nextflow" title="Permanent link">&para;</a></h2>
+<p>A continuación vamos a volver a nuestro workflow de Nextflow y ver cómo usar esta tecnología dentro del pipeline de Nextflow.</p>
+<p>Cerremos la terminal y abramos Hello Containers nuevamente.</p>
+<h2 id="21-escriba-un-modulo-cowpy">2.1. Escriba un módulo cowpy<a class="headerlink" href="#21-escriba-un-modulo-cowpy" title="Permanent link">&para;</a></h2>
+<p>Para continuar con nuestro ejemplo de cowpy, creemos un nuevo proceso en nuestro workflow, que use cowpy. Vayamos a modules, creemos un nuevo archivo y llamémoslo cowpy nf. Ahora voy a hacer trampa un poco y copiar el código del material de entrenamiento y presionar guardar. Y echemos un vistazo.</p>
+<p>Entonces este es un proceso simple. Esperamos que ahora entienda cómo lucen los bloques de construcción de un proceso. Tenemos nuestro publishDir nuevamente, yendo a results. Tenemos dos entradas, un archivo de entrada y un string llamado character. Tenemos una salida cowpy input file, y tenemos un script que se ve exactamente igual a lo que ejecutamos manualmente dentro de nuestra imagen de docker hace un segundo: cat para imprimir un archivo, canalizándolo a cowpy, diciendo qué tipo de carácter de cowpy queremos usar, y enviando eso al archivo de salida, que pasamos como la salida aquí.</p>
+<h2 id="22-agregue-cowpy-al-workflow">2.2. Agregue cowpy al workflow<a class="headerlink" href="#22-agregue-cowpy-al-workflow" title="Permanent link">&para;</a></h2>
+<p>Bien, volvamos a nuestro workflow, importemos este nuevo proceso. Entonces cowpy from modules cowpy nf. Creemos un nuevo parámetro para que podamos especificar qué carácter queríamos. Digamos Turkey por defecto. Y luego llamemos a este nuevo proceso al final del workflow,</p>
+<p>cowpy. Y usemos la salida aquí de Collect Greetings. Entonces collect greetings out, out file aquí. Y luego necesitamos un segundo argumento, que es el nuevo params que acabamos de hacer. params dot character.</p>
+<h2 id="224-ejecute-el-workflow-para-verificar-que-funciona">2.2.4. Ejecute el workflow para verificar que funciona<a class="headerlink" href="#224-ejecute-el-workflow-para-verificar-que-funciona" title="Permanent link">&para;</a></h2>
+<p>Bien, veamos si nuestro nuevo proceso funciona. Nextflow run hello containers. Esto debería ejecutar esos primeros tres procesos y luego intentar ejecutar cowpy al final.</p>
+<p>Tuvimos un error. Lo que está diciendo aquí, cowpy tuvo un error y tuvo un estado de salida 127 y efectivamente, comando sh cowpy comando no encontrado.</p>
+<p>No le dijimos a Nextflow que tenemos una imagen de Docker disponible para cowpy, así que intentó ejecutarlo en nuestro sistema host y no tenemos cowpy instalado en nuestro sistema host, así que desencadenó un error.</p>
+<h2 id="23-use-un-contenedor-para-ejecutarlo">2.3. Use un contenedor para ejecutarlo<a class="headerlink" href="#23-use-un-contenedor-para-ejecutarlo" title="Permanent link">&para;</a></h2>
+<p>Entonces lo que necesitamos hacer es que necesitamos decirle a Nextflow que tenemos un contenedor disponible. Vayamos a nuestro proceso cowpy y vamos a agregar una nueva directiva en la parte superior del proceso llamada container.</p>
+<p>Luego encontramos nuestra imagen, copiamos la URL, y la ponemos en un string.</p>
+<p>Esto no es suficiente por sí mismo porque un pipeline de Nextflow puede tener varias formas de especificar software. También podría hacer conda conda-forge cowpy, por ejemplo. Y Nextflow necesita saber cuál de estas tecnologías desea usar.</p>
+<h2 id="232-habilite-el-uso-de-docker-a-traves-del-archivo-nextflowconfig">2.3.2. Habilite el uso de Docker a través del archivo nextflow.config<a class="headerlink" href="#232-habilite-el-uso-de-docker-a-traves-del-archivo-nextflowconfig" title="Permanent link">&para;</a></h2>
+<p>Entonces para ejecutar con Docker habilitado, vamos a adelantarnos un poco y usar el archivo Nextflow config, que es algo que vamos a cubrir con más detalle en el próximo capítulo. Puede ver en este directorio que tenemos un archivo llamado Nextflow Config, y aquí ya tiene docker.enabled False.</p>
+<p>Vamos a cambiar eso a True para habilitar Docker, y luego podemos intentar ejecutar el workflow nuevamente.</p>
+<h2 id="233-ejecute-el-workflow-con-docker-habilitado">2.3.3. Ejecute el workflow con Docker habilitado<a class="headerlink" href="#233-ejecute-el-workflow-con-docker-habilitado" title="Permanent link">&para;</a></h2>
+<p>Nextflow run hello containers nf y esta vez cowpy se ejecutó exitosamente. Miremos en Results. cowpy collected test y ahí está nuestro Turkey. Maravilloso.</p>
+<p>Entonces en segundo plano ahí, Nextflow sabía que tenía un contenedor disponible para ese proceso.</p>
+<p>Obtuvo la imagen y ejecutó los comandos por nosotros.</p>
+<h2 id="234-inspeccione-como-nextflow-lanzo-la-tarea-contenerizada">2.3.4. Inspeccione cómo Nextflow lanzó la tarea contenerizada<a class="headerlink" href="#234-inspeccione-como-nextflow-lanzo-la-tarea-contenerizada" title="Permanent link">&para;</a></h2>
+<p>Si tiene curiosidad, en realidad podemos ver exactamente qué hizo mirando en el directorio de trabajo. Si hago code work, y luego el hash y luego command run, que si recuerda es el archivo real que se ejecuta para esa tarea, podemos entrar y podemos buscar una función llamada NXF launch. Y aquí puede ver el comando docker exacto que Nextflow usó, que se parece mucho a lo que estábamos haciendo manualmente en la terminal antes. Docker run. Vinculando este directorio host en el contenedor, y luego especificando la URL del contenedor.</p>
+<p>Entonces no hay magia aquí. Es solo que Nextflow está haciendo automáticamente el trabajo pesado por usted de una manera que significa que puede especificar fácilmente contenedores en su pipeline, que luego están fácilmente disponibles para cualquier otra persona que ejecute su workflow. Y esas personas ya no tienen que pensar en gestionar software para ejecutar su pipeline de análisis.</p>
+<p>Muy, muy simple, muy conveniente, y también realmente reproducible. Bueno en general.</p>
+<p>Bien, buen trabajo. Ese es el final del Capítulo Cinco. Únase a nosotros en el próximo video para la parte seis, que es la parte final de este entrenamiento Hello Nextflow, donde hablaremos sobre la configuración de Nextflow con más detalle.</p>
+<p>Nos vemos en el próximo video.</p>
+<p><a href="../06_hello_config/">Transcripción del próximo video <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.22 19.03a.75.75 0 0 1 0-1.06L18.19 13H3.75a.75.75 0 0 1 0-1.5h14.44l-4.97-4.97a.749.749 0 0 1 .326-1.275.75.75 0 0 1 .734.215l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0"/></svg></span></a></p><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
   margin: 1rem 0;
@@ -5015,6 +5057,9 @@ window.mkdocsQuizConfig = {
 
 
 
+  
+  
+
 
 
   
@@ -5107,8 +5152,8 @@ window.mkdocsQuizConfig = {
   
 
 
-<h4>Cookie consent</h4>
-<p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our training materials better. Find out more on <a href="https://seqera.io/privacy-policy/#cookies" target="_blank" rel="noopener">how we use cookies</a>.</p>
+<h4>Consentimiento de cookies</h4>
+<p>Utilizamos cookies para reconocer tus visitas repetidas y preferencias, así como para medir la efectividad de nuestra documentación y si los usuarios encuentran lo que buscan. Con tu consentimiento, nos ayudas a mejorar nuestros materiales de capacitación. Obtén más información sobre <a href="https://seqera.io/privacy-policy/#cookies" target="_blank" rel="noopener">cómo usamos las cookies</a>.</p>
 <input class="md-toggle" type="checkbox" id="__settings" >
 <div class="md-consent__settings">
   <ul class="task-list">
@@ -5192,12 +5237,16 @@ window.mkdocsQuizConfig = {
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": {"alias": true, "provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": {"alias": true, "provider": "mike"}}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
-        <script src="../../../../assets/javascripts/posthog.js"></script>
+        <script src="../../../assets/javascripts/consent-sync.js"></script>
+      
+        <script src="../../../assets/javascripts/posthog.js"></script>
+      
+        <script src="../../../assets/javascripts/language-picker.js"></script>
       
     
   </body>

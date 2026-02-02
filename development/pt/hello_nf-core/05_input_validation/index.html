@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://training.nextflow.io/0.dev/pt/hello_nf-core/05_input_validation/">
+        <link rel="canonical" href="https://training.nextflow.io/pt/hello_nf-core/05_input_validation/">
       
       
         <link rel="prev" href="../04_make_module/">
@@ -18,33 +18,41 @@
       
       
         
-          <link rel="alternate" href="../../../hello_nf-core/05_input_validation/" hreflang="en">
+          <link rel="alternate" href="/" hreflang="en">
         
-          <link rel="alternate" href="./" hreflang="pt">
+          <link rel="alternate" href="/de/" hreflang="de">
         
-          <link rel="alternate" href="../../../es/hello_nf-core/05_input_validation/" hreflang="es">
+          <link rel="alternate" href="/es/" hreflang="es">
         
-          <link rel="alternate" href="../../../fr/hello_nf-core/05_input_validation/" hreflang="fr">
+          <link rel="alternate" href="/fr/" hreflang="fr">
         
-          <link rel="alternate" href="../../../it/hello_nf-core/05_input_validation/" hreflang="it">
+          <link rel="alternate" href="/hi/" hreflang="hi">
         
-          <link rel="alternate" href="../../../ko/hello_nf-core/05_input_validation/" hreflang="ko">
+          <link rel="alternate" href="/it/" hreflang="it">
+        
+          <link rel="alternate" href="/ko/" hreflang="ko">
+        
+          <link rel="alternate" href="/pl/" hreflang="pl">
+        
+          <link rel="alternate" href="/pt/" hreflang="pt">
+        
+          <link rel="alternate" href="/tr/" hreflang="tr">
         
       
       
-      <link rel="icon" href="../../../assets/img/nextflow-icon.png">
+      <link rel="icon" href="../../assets/img/nextflow-icon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
     
     
       
-        <title>Part 5: Input validation - training.nextflow.io</title>
+        <title>Parte 5: Validação de entrada - training.nextflow.io</title>
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
   
@@ -108,11 +116,11 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/fonts.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/fonts.css">
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/extra.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/extra.css">
     
-    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
   
@@ -147,7 +155,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#part-5-input-validation" class="md-skip">
+        <a href="#parte-5-validacao-de-entrada" class="md-skip">
           Ir para o conteúdo
         </a>
       
@@ -167,9 +175,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
-    <a href="../../" title="training.nextflow.io" class="md-header__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
+    <a href="../.." title="training.nextflow.io" class="md-header__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
       
-  <img src="../../../assets/img/nextflow_logo_dark.png" alt="logo">
+  <img src="../../assets/img/nextflow_logo_dark.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -186,7 +194,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Part 5: Input validation
+              Parte 5: Validação de entrada
             
           </span>
         </div>
@@ -233,38 +241,62 @@
       <ul class="md-select__list">
         
           <li class="md-select__item">
-            <a href="../../../hello_nf-core/05_input_validation/" hreflang="en" class="md-select__link">
+            <a href="/" hreflang="en" class="md-select__link">
               English
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="./" hreflang="pt" class="md-select__link">
-              Português
+            <a href="/de/" hreflang="de" class="md-select__link">
+              deutsch
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../es/hello_nf-core/05_input_validation/" hreflang="es" class="md-select__link">
-              Español
+            <a href="/es/" hreflang="es" class="md-select__link">
+              español
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../fr/hello_nf-core/05_input_validation/" hreflang="fr" class="md-select__link">
-              Français
+            <a href="/fr/" hreflang="fr" class="md-select__link">
+              français
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../it/hello_nf-core/05_input_validation/" hreflang="it" class="md-select__link">
-              Italiano
+            <a href="/hi/" hreflang="hi" class="md-select__link">
+              हिन्दी
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../ko/hello_nf-core/05_input_validation/" hreflang="ko" class="md-select__link">
-              Korean
+            <a href="/it/" hreflang="it" class="md-select__link">
+              italiano
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/ko/" hreflang="ko" class="md-select__link">
+              한국어
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/pl/" hreflang="pl" class="md-select__link">
+              Polski
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/pt/" hreflang="pt" class="md-select__link">
+              português
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/tr/" hreflang="tr" class="md-select__link">
+              Türkçe
             </a>
           </li>
         
@@ -384,9 +416,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../" title="training.nextflow.io" class="md-nav__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
+    <a href="../.." title="training.nextflow.io" class="md-nav__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
       
-  <img src="../../../assets/img/nextflow_logo_dark.png" alt="logo">
+  <img src="../../assets/img/nextflow_logo_dark.png" alt="logo">
 
     </a>
     training.nextflow.io
@@ -413,14 +445,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../" class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Home
+    Início
   
 
     
@@ -522,7 +554,7 @@
   <span class="md-ellipsis">
     
   
-    Getting started
+    Primeiros passos
   
 
     
@@ -550,7 +582,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run basic operations
+    Parte 1: Operações básicas de execução
   
 
     
@@ -578,7 +610,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Run real pipelines
+    Parte 2: Executar pipelines reais
   
 
     
@@ -606,7 +638,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Run configuration
+    Parte 3: Configuração de execução
   
 
     
@@ -634,7 +666,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    Resumo do curso
   
 
     
@@ -662,7 +694,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Pesquisa de feedback
   
 
     
@@ -772,7 +804,7 @@
   <span class="md-ellipsis">
     
   
-    Orientação
+    Começando
   
 
     
@@ -800,7 +832,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Hello World
+    Parte 1: Hello World
   
 
     
@@ -828,7 +860,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Hello Channels
+    Parte 2: Hello Channels
   
 
     
@@ -856,7 +888,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Hello Workflow
+    Parte 3: Hello Workflow
   
 
     
@@ -884,7 +916,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Hello Modules
+    Parte 4: Hello Modules
   
 
     
@@ -912,7 +944,7 @@
   <span class="md-ellipsis">
     
   
-    Part 5: Hello Containers
+    Parte 5: Hello Containers
   
 
     
@@ -940,7 +972,7 @@
   <span class="md-ellipsis">
     
   
-    Part 6: Hello Config
+    Parte 6: Hello Config
   
 
     
@@ -968,7 +1000,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    Resumo do curso
   
 
     
@@ -996,7 +1028,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Pesquisa de feedback
   
 
     
@@ -1108,7 +1140,7 @@
   <span class="md-ellipsis">
     
   
-    Getting started
+    Primeiros Passos
   
 
     
@@ -1136,7 +1168,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run a demo pipeline
+    Parte 1: Executar um pipeline de demonstração
   
 
     
@@ -1164,7 +1196,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Rewrite Hello for nf-core
+    Parte 2: Reescrever Hello para nf-core
   
 
     
@@ -1192,7 +1224,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Use an nf-core module
+    Parte 3: Usar um módulo nf-core
   
 
     
@@ -1220,7 +1252,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Make an nf-core module
+    Parte 4: Criar um módulo nf-core
   
 
     
@@ -1257,7 +1289,7 @@
   <span class="md-ellipsis">
     
   
-    Part 5: Input validation
+    Parte 5: Validação de entrada
   
 
     
@@ -1275,7 +1307,7 @@
   <span class="md-ellipsis">
     
   
-    Part 5: Input validation
+    Parte 5: Validação de entrada
   
 
     
@@ -1295,22 +1327,22 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#0-warmup-a-bit-of-background" class="md-nav__link">
+  <a href="#0-aquecimento-um-pouco-de-contexto" class="md-nav__link">
     <span class="md-ellipsis">
       
-        0. Warmup: A bit of background
+        0. Aquecimento: Um pouco de contexto
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="0. Warmup: A bit of background">
+    <nav class="md-nav" aria-label="0. Aquecimento: Um pouco de contexto">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#01-why-validation-matters" class="md-nav__link">
+  <a href="#01-por-que-a-validacao-e-importante" class="md-nav__link">
     <span class="md-ellipsis">
       
-        0.1. Why validation matters
+        0.1. Por que a validação é importante
       
     </span>
   </a>
@@ -1318,10 +1350,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#02-the-nf-schema-plugin" class="md-nav__link">
+  <a href="#02-o-plugin-nf-schema" class="md-nav__link">
     <span class="md-ellipsis">
       
-        0.2. The nf-schema plugin
+        0.2. O plugin nf-schema
       
     </span>
   </a>
@@ -1329,10 +1361,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#03-two-schema-files-for-two-types-of-validation" class="md-nav__link">
+  <a href="#03-dois-arquivos-de-schema-para-dois-tipos-de-validacao" class="md-nav__link">
     <span class="md-ellipsis">
       
-        0.3. Two schema files for two types of validation
+        0.3. Dois arquivos de schema para dois tipos de validação
       
     </span>
   </a>
@@ -1340,10 +1372,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#04-when-should-validation-occur" class="md-nav__link">
+  <a href="#04-quando-a-validacao-deve-ocorrer" class="md-nav__link">
     <span class="md-ellipsis">
       
-        0.4. When should validation occur?
+        0.4. Quando a validação deve ocorrer?
       
     </span>
   </a>
@@ -1354,22 +1386,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#1-parameter-validation-nextflow_schemajson" class="md-nav__link">
+  <a href="#1-validacao-de-parametros-nextflow_schemajson" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Parameter validation (nextflow_schema.json)
+        1. Validação de parâmetros (nextflow_schema.json)
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Parameter validation (nextflow_schema.json)">
+    <nav class="md-nav" aria-label="1. Validação de parâmetros (nextflow_schema.json)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11-configure-validation-to-skip-input-file-validation" class="md-nav__link">
+  <a href="#11-configurar-a-validacao-para-ignorar-validacao-de-arquivo-de-entrada" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1. Configure validation to skip input file validation
+        1.1. Configurar a validação para ignorar validação de arquivo de entrada
       
     </span>
   </a>
@@ -1377,10 +1409,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#12-examine-the-parameter-schema" class="md-nav__link">
+  <a href="#12-examinar-o-schema-de-parametros" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2. Examine the parameter schema
+        1.2. Examinar o schema de parâmetros
       
     </span>
   </a>
@@ -1388,10 +1420,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#13-add-the-batch-parameter" class="md-nav__link">
+  <a href="#13-adicionar-o-parametro-batch" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.3. Add the batch parameter
+        1.3. Adicionar o parâmetro batch
       
     </span>
   </a>
@@ -1399,10 +1431,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#14-verify-the-changes" class="md-nav__link">
+  <a href="#14-verificar-as-alteracoes" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.4. Verify the changes
+        1.4. Verificar as alterações
       
     </span>
   </a>
@@ -1410,10 +1442,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#15-test-parameter-validation" class="md-nav__link">
+  <a href="#15-testar-a-validacao-de-parametros" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.5. Test parameter validation
+        1.5. Testar a validação de parâmetros
       
     </span>
   </a>
@@ -1421,10 +1453,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway" class="md-nav__link">
+  <a href="#conclusao" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        Conclusão
       
     </span>
   </a>
@@ -1432,10 +1464,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next" class="md-nav__link">
+  <a href="#proximos-passos" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        Próximos passos
       
     </span>
   </a>
@@ -1446,22 +1478,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#2-input-data-validation-schema_inputjson" class="md-nav__link">
+  <a href="#2-validacao-de-dados-de-entrada-schema_inputjson" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Input data validation (schema_input.json)
+        2. Validação de dados de entrada (schema_input.json)
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. Input data validation (schema_input.json)">
+    <nav class="md-nav" aria-label="2. Validação de dados de entrada (schema_input.json)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#21-understand-the-greetingscsv-format" class="md-nav__link">
+  <a href="#21-entender-o-formato-greetingscsv" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1. Understand the greetings.csv format
+        2.1. Entender o formato greetings.csv
       
     </span>
   </a>
@@ -1469,10 +1501,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#22-design-the-schema-structure" class="md-nav__link">
+  <a href="#22-projetar-a-estrutura-do-schema" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2. Design the schema structure
+        2.2. Projetar a estrutura do schema
       
     </span>
   </a>
@@ -1480,10 +1512,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#23-update-the-schema-file" class="md-nav__link">
+  <a href="#23-atualizar-o-arquivo-de-schema" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.3. Update the schema file
+        2.3. Atualizar o arquivo de schema
       
     </span>
   </a>
@@ -1491,10 +1523,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#24-add-a-header-to-the-greetingscsv-file" class="md-nav__link">
+  <a href="#24-adicionar-um-cabecalho-ao-arquivo-greetingscsv" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.4. Add a header to the greetings.csv file
+        2.4. Adicionar um cabeçalho ao arquivo greetings.csv
       
     </span>
   </a>
@@ -1502,10 +1534,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#25-implement-validation-in-the-pipeline" class="md-nav__link">
+  <a href="#25-implementar-validacao-no-pipeline" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.5. Implement validation in the pipeline
+        2.5. Implementar validação no pipeline
       
     </span>
   </a>
@@ -1513,10 +1545,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#26-re-enable-input-validation" class="md-nav__link">
+  <a href="#26-reabilitar-validacao-de-entrada" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.6. Re-enable input validation
+        2.6. Reabilitar validação de entrada
       
     </span>
   </a>
@@ -1524,22 +1556,22 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#27-test-input-validation" class="md-nav__link">
+  <a href="#27-testar-validacao-de-entrada" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.7. Test input validation
+        2.7. Testar validação de entrada
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2.7. Test input validation">
+    <nav class="md-nav" aria-label="2.7. Testar validação de entrada">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#271-test-with-valid-input" class="md-nav__link">
+  <a href="#271-testar-com-entrada-valida" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.7.1. Test with valid input
+        2.7.1. Testar com entrada válida
       
     </span>
   </a>
@@ -1547,10 +1579,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#272-test-with-invalid-input" class="md-nav__link">
+  <a href="#272-testar-com-entrada-invalida" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.7.2. Test with invalid input
+        2.7.2. Testar com entrada inválida
       
     </span>
   </a>
@@ -1563,10 +1595,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway_1" class="md-nav__link">
+  <a href="#conclusao_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        Conclusão
       
     </span>
   </a>
@@ -1574,10 +1606,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next_1" class="md-nav__link">
+  <a href="#proximos-passos_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        Próximos passos
       
     </span>
   </a>
@@ -1797,7 +1829,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    Resumo do curso
   
 
     
@@ -1825,7 +1857,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Pesquisa de feedback
   
 
     
@@ -1871,7 +1903,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Science
+    Nextflow para Ciência
   
 
     
@@ -1887,7 +1919,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Nextflow for Science
+    Nextflow para Ciência
   
 
           </label>
@@ -1907,7 +1939,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Science
+    Nextflow para Ciência
   
 
     
@@ -1946,7 +1978,7 @@
   <span class="md-ellipsis">
     
   
-    Genomics
+    Nextflow para Genômica
   
 
     
@@ -1962,7 +1994,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Genomics
+    Nextflow para Genômica
   
 
           </label>
@@ -1982,7 +2014,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Genomics
+    Nextflow para Genômica
   
 
     
@@ -2010,7 +2042,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    Orientação
   
 
     
@@ -2038,7 +2070,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Per-sample variant calling
+    Parte 1: Chamada de variantes por amostra
   
 
     
@@ -2066,7 +2098,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Joint calling on a cohort
+    Parte 2: Chamada conjunta em uma coorte
   
 
     
@@ -2094,7 +2126,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Moving code into modules
+    Parte 3: Movendo código para módulos
   
 
     
@@ -2122,7 +2154,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Adding tests
+    Parte 4: Adicionando testes
   
 
     
@@ -2150,7 +2182,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Pesquisa de feedback
   
 
     
@@ -2178,7 +2210,7 @@
   <span class="md-ellipsis">
     
   
-    Next Steps
+    Próximos Passos
   
 
     
@@ -2225,7 +2257,7 @@
   <span class="md-ellipsis">
     
   
-    RNAseq
+    Nextflow para RNAseq
   
 
     
@@ -2241,7 +2273,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    RNAseq
+    Nextflow para RNAseq
   
 
           </label>
@@ -2261,7 +2293,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for RNAseq
+    Nextflow para RNAseq
   
 
     
@@ -2289,7 +2321,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    Orientação
   
 
     
@@ -2317,7 +2349,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Method overview and manual testing
+    Parte 1: Visão geral do método e teste manual
   
 
     
@@ -2345,7 +2377,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Single-sample implementation
+    Parte 2: Implementação de amostra única
   
 
     
@@ -2373,7 +2405,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Multi-sample paired-end implementation
+    Parte 3: Implementação de múltiplas amostras com dados paired-end
   
 
     
@@ -2401,7 +2433,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Pesquisa de feedback
   
 
     
@@ -2429,7 +2461,7 @@
   <span class="md-ellipsis">
     
   
-    Next Steps
+    Próximos Passos
   
 
     
@@ -2476,7 +2508,7 @@
   <span class="md-ellipsis">
     
   
-    Imaging
+    Index
   
 
     
@@ -2492,7 +2524,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Imaging
+    Index
   
 
           </label>
@@ -2512,7 +2544,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow run for Imaging
+    Index
   
 
     
@@ -2540,7 +2572,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    Orientação
   
 
     
@@ -2568,7 +2600,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run basic operations
+    Parte 1: Executar operações básicas
   
 
     
@@ -2596,7 +2628,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Run nf-core/molkart
+    Parte 2: Executar nf-core/molkart
   
 
     
@@ -2624,7 +2656,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Organizing inputs
+    Parte 3: Organizando entradas
   
 
     
@@ -2652,7 +2684,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Configuration
+    Parte 4: Configuração
   
 
     
@@ -2680,7 +2712,7 @@
   <span class="md-ellipsis">
     
   
-    Survey
+    Questionário
   
 
     
@@ -2708,7 +2740,7 @@
   <span class="md-ellipsis">
     
   
-    Next steps
+    Próximos passos
   
 
     
@@ -2762,7 +2794,7 @@
   <span class="md-ellipsis">
     
   
-    Side Quests
+    Missões Secundárias
   
 
     
@@ -2778,7 +2810,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Side Quests
+    Missões Secundárias
   
 
           </label>
@@ -2798,7 +2830,7 @@
   <span class="md-ellipsis">
     
   
-    Side Quests
+    Missões Secundárias
   
 
     
@@ -2826,7 +2858,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    Orientação
   
 
     
@@ -2854,7 +2886,7 @@
   <span class="md-ellipsis">
     
   
-    Development Environment
+    Ambiente de Desenvolvimento
   
 
     
@@ -2882,7 +2914,7 @@
   <span class="md-ellipsis">
     
   
-    Metadata and meta maps
+    Metadados e mapas meta
   
 
     
@@ -2910,7 +2942,7 @@
   <span class="md-ellipsis">
     
   
-    File input processing
+    Processamento de entrada de arquivos
   
 
     
@@ -2938,7 +2970,7 @@
   <span class="md-ellipsis">
     
   
-    Splitting and Grouping
+    Divisão e Agrupamento
   
 
     
@@ -2966,7 +2998,7 @@
   <span class="md-ellipsis">
     
   
-    Workflows of Workflows
+    Fluxos de Trabalho de Fluxos de Trabalho
   
 
     
@@ -2994,7 +3026,7 @@
   <span class="md-ellipsis">
     
   
-    Debugging Workflows
+    Depurando Workflows
   
 
     
@@ -3022,7 +3054,7 @@
   <span class="md-ellipsis">
     
   
-    Essential Nextflow Scripting Patterns
+    Padrões Essenciais de Script em Nextflow
   
 
     
@@ -3050,7 +3082,7 @@
   <span class="md-ellipsis">
     
   
-    Testing with nf-test
+    Testando com nf-test
   
 
     
@@ -3096,7 +3128,7 @@
   <span class="md-ellipsis">
     
   
-    Training Collections
+    Index
   
 
     
@@ -3112,7 +3144,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Training Collections
+    Index
   
 
           </label>
@@ -3132,7 +3164,7 @@
   <span class="md-ellipsis">
     
   
-    Training Collections
+    Index
   
 
     
@@ -3160,7 +3192,7 @@
   <span class="md-ellipsis">
     
   
-    The Architect's Toolkit I
+    Architects toolkit 1
   
 
     
@@ -3242,7 +3274,7 @@
   <span class="md-ellipsis">
     
   
-    Conseguindo ajuda
+    Obtendo ajuda
   
 
     
@@ -3281,7 +3313,7 @@
   <span class="md-ellipsis">
     
   
-    Training environment
+    Opções de ambiente
   
 
     
@@ -3297,7 +3329,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Training environment
+    Opções de ambiente
   
 
           </label>
@@ -3317,7 +3349,7 @@
   <span class="md-ellipsis">
     
   
-    Configuração do ambiente
+    Opções de ambiente
   
 
     
@@ -3345,7 +3377,7 @@
   <span class="md-ellipsis">
     
   
-    Gitpod
+    GitHub Codespaces
   
 
     
@@ -3373,7 +3405,7 @@
   <span class="md-ellipsis">
     
   
-    Local Devcontainers
+    Devcontainers Locais
   
 
     
@@ -3401,7 +3433,7 @@
   <span class="md-ellipsis">
     
   
-    Instalação local
+    Instalação manual
   
 
     
@@ -3437,7 +3469,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow versions
+    Versões do Nextflow
   
 
     
@@ -3465,7 +3497,7 @@
   <span class="md-ellipsis">
     
   
-    The Hello pipeline
+    O pipeline Hello
   
 
     
@@ -3507,22 +3539,22 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#0-warmup-a-bit-of-background" class="md-nav__link">
+  <a href="#0-aquecimento-um-pouco-de-contexto" class="md-nav__link">
     <span class="md-ellipsis">
       
-        0. Warmup: A bit of background
+        0. Aquecimento: Um pouco de contexto
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="0. Warmup: A bit of background">
+    <nav class="md-nav" aria-label="0. Aquecimento: Um pouco de contexto">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#01-why-validation-matters" class="md-nav__link">
+  <a href="#01-por-que-a-validacao-e-importante" class="md-nav__link">
     <span class="md-ellipsis">
       
-        0.1. Why validation matters
+        0.1. Por que a validação é importante
       
     </span>
   </a>
@@ -3530,10 +3562,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#02-the-nf-schema-plugin" class="md-nav__link">
+  <a href="#02-o-plugin-nf-schema" class="md-nav__link">
     <span class="md-ellipsis">
       
-        0.2. The nf-schema plugin
+        0.2. O plugin nf-schema
       
     </span>
   </a>
@@ -3541,10 +3573,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#03-two-schema-files-for-two-types-of-validation" class="md-nav__link">
+  <a href="#03-dois-arquivos-de-schema-para-dois-tipos-de-validacao" class="md-nav__link">
     <span class="md-ellipsis">
       
-        0.3. Two schema files for two types of validation
+        0.3. Dois arquivos de schema para dois tipos de validação
       
     </span>
   </a>
@@ -3552,10 +3584,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#04-when-should-validation-occur" class="md-nav__link">
+  <a href="#04-quando-a-validacao-deve-ocorrer" class="md-nav__link">
     <span class="md-ellipsis">
       
-        0.4. When should validation occur?
+        0.4. Quando a validação deve ocorrer?
       
     </span>
   </a>
@@ -3566,22 +3598,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#1-parameter-validation-nextflow_schemajson" class="md-nav__link">
+  <a href="#1-validacao-de-parametros-nextflow_schemajson" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Parameter validation (nextflow_schema.json)
+        1. Validação de parâmetros (nextflow_schema.json)
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Parameter validation (nextflow_schema.json)">
+    <nav class="md-nav" aria-label="1. Validação de parâmetros (nextflow_schema.json)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11-configure-validation-to-skip-input-file-validation" class="md-nav__link">
+  <a href="#11-configurar-a-validacao-para-ignorar-validacao-de-arquivo-de-entrada" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1. Configure validation to skip input file validation
+        1.1. Configurar a validação para ignorar validação de arquivo de entrada
       
     </span>
   </a>
@@ -3589,10 +3621,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#12-examine-the-parameter-schema" class="md-nav__link">
+  <a href="#12-examinar-o-schema-de-parametros" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2. Examine the parameter schema
+        1.2. Examinar o schema de parâmetros
       
     </span>
   </a>
@@ -3600,10 +3632,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#13-add-the-batch-parameter" class="md-nav__link">
+  <a href="#13-adicionar-o-parametro-batch" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.3. Add the batch parameter
+        1.3. Adicionar o parâmetro batch
       
     </span>
   </a>
@@ -3611,10 +3643,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#14-verify-the-changes" class="md-nav__link">
+  <a href="#14-verificar-as-alteracoes" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.4. Verify the changes
+        1.4. Verificar as alterações
       
     </span>
   </a>
@@ -3622,10 +3654,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#15-test-parameter-validation" class="md-nav__link">
+  <a href="#15-testar-a-validacao-de-parametros" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.5. Test parameter validation
+        1.5. Testar a validação de parâmetros
       
     </span>
   </a>
@@ -3633,10 +3665,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway" class="md-nav__link">
+  <a href="#conclusao" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        Conclusão
       
     </span>
   </a>
@@ -3644,10 +3676,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next" class="md-nav__link">
+  <a href="#proximos-passos" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        Próximos passos
       
     </span>
   </a>
@@ -3658,22 +3690,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#2-input-data-validation-schema_inputjson" class="md-nav__link">
+  <a href="#2-validacao-de-dados-de-entrada-schema_inputjson" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Input data validation (schema_input.json)
+        2. Validação de dados de entrada (schema_input.json)
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. Input data validation (schema_input.json)">
+    <nav class="md-nav" aria-label="2. Validação de dados de entrada (schema_input.json)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#21-understand-the-greetingscsv-format" class="md-nav__link">
+  <a href="#21-entender-o-formato-greetingscsv" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1. Understand the greetings.csv format
+        2.1. Entender o formato greetings.csv
       
     </span>
   </a>
@@ -3681,10 +3713,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#22-design-the-schema-structure" class="md-nav__link">
+  <a href="#22-projetar-a-estrutura-do-schema" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2. Design the schema structure
+        2.2. Projetar a estrutura do schema
       
     </span>
   </a>
@@ -3692,10 +3724,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#23-update-the-schema-file" class="md-nav__link">
+  <a href="#23-atualizar-o-arquivo-de-schema" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.3. Update the schema file
+        2.3. Atualizar o arquivo de schema
       
     </span>
   </a>
@@ -3703,10 +3735,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#24-add-a-header-to-the-greetingscsv-file" class="md-nav__link">
+  <a href="#24-adicionar-um-cabecalho-ao-arquivo-greetingscsv" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.4. Add a header to the greetings.csv file
+        2.4. Adicionar um cabeçalho ao arquivo greetings.csv
       
     </span>
   </a>
@@ -3714,10 +3746,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#25-implement-validation-in-the-pipeline" class="md-nav__link">
+  <a href="#25-implementar-validacao-no-pipeline" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.5. Implement validation in the pipeline
+        2.5. Implementar validação no pipeline
       
     </span>
   </a>
@@ -3725,10 +3757,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#26-re-enable-input-validation" class="md-nav__link">
+  <a href="#26-reabilitar-validacao-de-entrada" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.6. Re-enable input validation
+        2.6. Reabilitar validação de entrada
       
     </span>
   </a>
@@ -3736,22 +3768,22 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#27-test-input-validation" class="md-nav__link">
+  <a href="#27-testar-validacao-de-entrada" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.7. Test input validation
+        2.7. Testar validação de entrada
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2.7. Test input validation">
+    <nav class="md-nav" aria-label="2.7. Testar validação de entrada">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#271-test-with-valid-input" class="md-nav__link">
+  <a href="#271-testar-com-entrada-valida" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.7.1. Test with valid input
+        2.7.1. Testar com entrada válida
       
     </span>
   </a>
@@ -3759,10 +3791,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#272-test-with-invalid-input" class="md-nav__link">
+  <a href="#272-testar-com-entrada-invalida" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.7.2. Test with invalid input
+        2.7.2. Testar com entrada inválida
       
     </span>
   </a>
@@ -3775,10 +3807,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway_1" class="md-nav__link">
+  <a href="#conclusao_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        Conclusão
       
     </span>
   </a>
@@ -3786,10 +3818,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next_1" class="md-nav__link">
+  <a href="#proximos-passos_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        Próximos passos
       
     </span>
   </a>
@@ -4038,45 +4070,55 @@
                 
                   
 
+ 
+<a
+  href="https://github.com/nextflow-io/training/edit/master/docs/hello_nf-core/05_input_validation.md"
+  title="Editar esta página"
+  class="md-content__button md-icon"
+  rel="edit"
+>
+   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+</a>
+   
+<a
+  href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md"
+  title="Improve translation"
+  class="md-content__button md-icon"
+>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 1H3c-1.1 0-2 .9-2 2v12l3-3h5v-1c0-2.2 1.79-4 4-4V3c0-1.1-.9-2-2-2m0 3H9.5c-.34 1.19-.96 2.3-1.82 3.26l-.02.02 1.26 1.25-.37 1.01L7 8l-2.5 2.5-.69-.73 2.53-2.49A8.6 8.6 0 0 1 4.86 5h.99c.31.6.69 1.17 1.15 1.68A7.7 7.7 0 0 0 8.57 4H3V3h3.5V2h1v1H11zm10 5h-8c-1.1 0-2 .9-2 2v7c0 1.1.9 2 2 2h7l3 3V11c0-1.1-.9-2-2-2m-1.37 10-.85-2.25h-3.56L14.38 19h-1.5l3.37-9h1.5l3.38 9zM17 12l1.22 3.25h-2.43z"/></svg>
+</a>
+ 
 
-  
-    <a href="https://github.com/nextflow-io/training/edit/master/docs/hello_nf-core/05_input_validation.md" title="Editar esta página" class="md-content__button md-icon" rel="edit">
-      
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
-    </a>
-  
-  
-
-
-<h1 id="part-5-input-validation">Part 5: Input validation<a class="headerlink" href="#part-5-input-validation" title="Permanent link">&para;</a></h1>
-<p>In this fifth part of the Hello nf-core training course, we show you how to use the nf-schema plugin to validate pipeline inputs and parameters.</p>
+<h1 id="parte-5-validacao-de-entrada">Parte 5: Validação de entrada<a class="headerlink" href="#parte-5-validacao-de-entrada" title="Permanent link">&para;</a></h1>
+<p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Tradução assistida por IA - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">saiba mais e sugira melhorias</a></span></p>
+<p>Na quinta parte do curso de treinamento Hello nf-core, mostramos como usar o plugin nf-schema para validar entradas e parâmetros do pipeline.</p>
 <details class="info">
-<summary>How to begin from this section</summary>
-<p>This section assumes you have completed <a href="../04_make_module/">Part 4: Make an nf-core module</a> and have updated the <code>COWPY</code> process module to nf-core standards in your pipeline.</p>
-<p>If you did not complete Part 4 or want to start fresh for this part, you can use the <code>core-hello-part4</code> solution as your starting point.
-Run these commands from inside the <code>hello-nf-core/</code> directory:</p>
+<summary>Como começar a partir desta seção</summary>
+<p>Esta seção assume que você completou a <a href="../04_make_module/">Parte 4: Criar um módulo nf-core</a> e atualizou o módulo de processo <code>COWPY</code> para os padrões nf-core em seu pipeline.</p>
+<p>Se você não completou a Parte 4 ou quer começar do zero para esta parte, pode usar a solução <code>core-hello-part4</code> como ponto de partida.
+Execute estes comandos de dentro do diretório <code>hello-nf-core/</code>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>cp<span class="w"> </span>-r<span class="w"> </span>solutions/core-hello-part4<span class="w"> </span>core-hello
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">cd</span><span class="w"> </span>core-hello
 </code></pre></div>
-<p>This gives you a pipeline with the <code>COWPY</code> module already upgraded to follow nf-core standards.
-You can test that it runs successfully by running the following command:</p>
+<p>Isso fornece um pipeline com o módulo <code>COWPY</code> já atualizado para seguir os padrões nf-core.
+Você pode testar se ele executa com sucesso executando o seguinte comando:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>.<span class="w"> </span>--outdir<span class="w"> </span>core-hello-results<span class="w"> </span>-profile<span class="w"> </span>test,docker<span class="w"> </span>--validate_params<span class="w"> </span><span class="nb">false</span>
 </code></pre></div>
 </details>
 <hr />
-<h2 id="0-warmup-a-bit-of-background">0. Warmup: A bit of background<a class="headerlink" href="#0-warmup-a-bit-of-background" title="Permanent link">&para;</a></h2>
-<h3 id="01-why-validation-matters">0.1. Why validation matters<a class="headerlink" href="#01-why-validation-matters" title="Permanent link">&para;</a></h3>
-<p>Imagine running your pipeline for two hours, only to have it crash because a user provided a file with the wrong extension. Or spending hours debugging cryptic errors, only to discover that a parameter was misspelled. Without input validation, these scenarios are common.</p>
-<p>Consider this example:</p>
-<div class="highlight"><span class="filename">Without validation</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="gp">$ </span>nextflow<span class="w"> </span>run<span class="w"> </span>my-pipeline<span class="w"> </span>--input<span class="w"> </span>data.txt<span class="w"> </span>--output<span class="w"> </span>results
+<h2 id="0-aquecimento-um-pouco-de-contexto">0. Aquecimento: Um pouco de contexto<a class="headerlink" href="#0-aquecimento-um-pouco-de-contexto" title="Permanent link">&para;</a></h2>
+<h3 id="01-por-que-a-validacao-e-importante">0.1. Por que a validação é importante<a class="headerlink" href="#01-por-que-a-validacao-e-importante" title="Permanent link">&para;</a></h3>
+<p>Imagine executar seu pipeline por duas horas, apenas para ele falhar porque um usuário forneceu um arquivo com a extensão errada. Ou passar horas depurando erros enigmáticos, apenas para descobrir que um parâmetro foi escrito incorretamente. Sem validação de entrada, esses cenários são comuns.</p>
+<p>Considere este exemplo:</p>
+<div class="highlight"><span class="filename">Sem validação</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="gp">$ </span>nextflow<span class="w"> </span>run<span class="w"> </span>my-pipeline<span class="w"> </span>--input<span class="w"> </span>data.txt<span class="w"> </span>--output<span class="w"> </span>results
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="go">...2 hours later...</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="go">...2 horas depois...</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
 <a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="go">ERROR ~ No such file: &#39;data.fq.gz&#39;</span>
 <a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="go">  Expected FASTQ format but received TXT</span>
 </code></pre></div>
-<p>The pipeline accepted invalid inputs and ran for hours before failing. With proper validation:</p>
-<div class="highlight"><span class="filename">With validation</span><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="gp">$ </span>nextflow<span class="w"> </span>run<span class="w"> </span>my-pipeline<span class="w"> </span>--input<span class="w"> </span>data.txt<span class="w"> </span>--output<span class="w"> </span>results
+<p>O pipeline aceitou entradas inválidas e executou por horas antes de falhar. Com validação adequada:</p>
+<div class="highlight"><span class="filename">Com validação</span><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="gp">$ </span>nextflow<span class="w"> </span>run<span class="w"> </span>my-pipeline<span class="w"> </span>--input<span class="w"> </span>data.txt<span class="w"> </span>--output<span class="w"> </span>results
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="go">ERROR ~ Validation of pipeline parameters failed!</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
@@ -4085,100 +4127,100 @@ You can test that it runs successfully by running the following command:</p>
 <a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>
 <a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="go">Pipeline failed before execution - please fix the errors above</span>
 </code></pre></div>
-<p>The pipeline fails immediately with clear, actionable error messages. This saves time, compute resources, and frustration.</p>
-<h3 id="02-the-nf-schema-plugin">0.2. The nf-schema plugin<a class="headerlink" href="#02-the-nf-schema-plugin" title="Permanent link">&para;</a></h3>
-<p>The <a href="https://nextflow-io.github.io/nf-schema/latest/">nf-schema plugin</a> is a Nextflow plugin that provides comprehensive validation capabilities for Nextflow pipelines.
-While nf-schema works with any Nextflow workflow, it's the standard validation solution for all nf-core pipelines.</p>
-<p>nf-schema provides several key functions:</p>
+<p>O pipeline falha imediatamente com mensagens de erro claras e acionáveis. Isso economiza tempo, recursos computacionais e frustração.</p>
+<h3 id="02-o-plugin-nf-schema">0.2. O plugin nf-schema<a class="headerlink" href="#02-o-plugin-nf-schema" title="Permanent link">&para;</a></h3>
+<p>O <a href="https://nextflow-io.github.io/nf-schema/latest/">plugin nf-schema</a> é um plugin Nextflow que fornece capacidades abrangentes de validação para pipelines Nextflow.
+Embora o nf-schema funcione com qualquer fluxo de trabalho Nextflow, é a solução de validação padrão para todos os pipelines nf-core.</p>
+<p>O nf-schema fornece várias funções principais:</p>
 <ul>
-<li><strong>Parameter validation</strong>: Validates pipeline parameters against <code>nextflow_schema.json</code></li>
-<li><strong>Sample sheet validation</strong>: Validates input files against <code>assets/schema_input.json</code></li>
-<li><strong>Channel conversion</strong>: Converts validated sample sheets to Nextflow channels</li>
-<li><strong>Help text generation</strong>: Automatically generates <code>--help</code> output from schema definitions</li>
-<li><strong>Parameter summary</strong>: Displays which parameters differ from defaults</li>
+<li><strong>Validação de parâmetros</strong>: Valida parâmetros do pipeline contra <code>nextflow_schema.json</code></li>
+<li><strong>Validação de planilha de amostras</strong>: Valida arquivos de entrada contra <code>assets/schema_input.json</code></li>
+<li><strong>Conversão de canal</strong>: Converte planilhas de amostras validadas em canais Nextflow</li>
+<li><strong>Geração de texto de ajuda</strong>: Gera automaticamente saída <code>--help</code> a partir de definições de schema</li>
+<li><strong>Resumo de parâmetros</strong>: Exibe quais parâmetros diferem dos padrões</li>
 </ul>
-<p>nf-schema is the successor to the deprecated nf-validation plugin and uses standard <a href="https://json-schema.org/">JSON Schema Draft 2020-12</a> for validation.</p>
+<p>O nf-schema é o sucessor do plugin nf-validation descontinuado e usa o padrão <a href="https://json-schema.org/">JSON Schema Draft 2020-12</a> para validação.</p>
 <details class="info">
-<summary>What are Nextflow plugins?</summary>
-<p>Plugins are extensions that add new functionality to the Nextflow language itself. They're installed via a <code>plugins{}</code> block in <code>nextflow.config</code> and can provide:</p>
+<summary>O que são plugins Nextflow?</summary>
+<p>Plugins são extensões que adicionam novas funcionalidades à própria linguagem Nextflow. Eles são instalados via um bloco <code>plugins{}</code> em <code>nextflow.config</code> e podem fornecer:</p>
 <ul>
-<li>New functions and classes that can be imported (like <code>samplesheetToList</code>)</li>
-<li>New DSL features and operators</li>
-<li>Integration with external services</li>
+<li>Novas funções e classes que podem ser importadas (como <code>samplesheetToList</code>)</li>
+<li>Novos recursos DSL e operadores</li>
+<li>Integração com serviços externos</li>
 </ul>
-<p>The nf-schema plugin is specified in <code>nextflow.config</code>:</p>
+<p>O plugin nf-schema é especificado em <code>nextflow.config</code>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">plugins</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">&#39;nf-schema@2.1.1&#39;</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="o">}</span>
 </code></pre></div>
-<p>Once installed, you can import functions from plugins using <code>include { functionName } from 'plugin/plugin-name'</code> syntax.</p>
+<p>Uma vez instalado, você pode importar funções de plugins usando a sintaxe <code>include { functionName } from 'plugin/plugin-name'</code>.</p>
 </details>
-<h3 id="03-two-schema-files-for-two-types-of-validation">0.3. Two schema files for two types of validation<a class="headerlink" href="#03-two-schema-files-for-two-types-of-validation" title="Permanent link">&para;</a></h3>
-<p>An nf-core pipeline will utilize two separate schema files, which correspond to two types of validation:</p>
+<h3 id="03-dois-arquivos-de-schema-para-dois-tipos-de-validacao">0.3. Dois arquivos de schema para dois tipos de validação<a class="headerlink" href="#03-dois-arquivos-de-schema-para-dois-tipos-de-validacao" title="Permanent link">&para;</a></h3>
+<p>Um pipeline nf-core utilizará dois arquivos de schema separados, que correspondem a dois tipos de validação:</p>
 <table>
 <thead>
 <tr>
-<th>Schema File</th>
-<th>Purpose</th>
-<th>Validates</th>
+<th>Arquivo de Schema</th>
+<th>Propósito</th>
+<th>Valida</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>nextflow_schema.json</code></td>
-<td>Parameter validation</td>
-<td>Command-line flags: <code>--input</code>, <code>--outdir</code>, <code>--batch</code></td>
+<td>Validação de parâmetros</td>
+<td>Flags de linha de comando: <code>--input</code>, <code>--outdir</code>, <code>--batch</code></td>
 </tr>
 <tr>
 <td><code>assets/schema_input.json</code></td>
-<td>Input data validation</td>
-<td>Contents of sample sheets and input files</td>
+<td>Validação de dados de entrada</td>
+<td>Conteúdo de planilhas de amostras e arquivos de entrada</td>
 </tr>
 </tbody>
 </table>
-<p>Both schemas use the JSON Schema format, a widely-adopted standard for describing and validating data structures.</p>
-<p><strong>Parameter validation</strong> validates command-line parameters (flags like <code>--outdir</code>, <code>--batch</code>, <code>--input</code>):</p>
+<p>Ambos os schemas usam o formato JSON Schema, um padrão amplamente adotado para descrever e validar estruturas de dados.</p>
+<p><strong>Validação de parâmetros</strong> valida parâmetros de linha de comando (flags como <code>--outdir</code>, <code>--batch</code>, <code>--input</code>):</p>
 <ul>
-<li>Checks parameter types, ranges, and formats</li>
-<li>Ensures required parameters are provided</li>
-<li>Validates file paths exist</li>
-<li>Defined in <code>nextflow_schema.json</code></li>
+<li>Verifica tipos, intervalos e formatos de parâmetros</li>
+<li>Garante que parâmetros obrigatórios sejam fornecidos</li>
+<li>Valida se os caminhos de arquivo existem</li>
+<li>Definida em <code>nextflow_schema.json</code></li>
 </ul>
-<p><strong>Input data validation</strong> validates the structure of sample sheets and manifest files (CSV/TSV files that describe your data):</p>
+<p><strong>Validação de dados de entrada</strong> valida a estrutura de planilhas de amostras e arquivos de manifesto (arquivos CSV/TSV que descrevem seus dados):</p>
 <ul>
-<li>Checks column structure and data types</li>
-<li>Validates that file paths referenced in the sample sheet exist</li>
-<li>Ensures required fields are present</li>
-<li>Defined in <code>assets/schema_input.json</code></li>
+<li>Verifica estrutura de colunas e tipos de dados</li>
+<li>Valida se os caminhos de arquivo referenciados na planilha de amostras existem</li>
+<li>Garante que campos obrigatórios estejam presentes</li>
+<li>Definida em <code>assets/schema_input.json</code></li>
 </ul>
 <div class="admonition warning">
-<p class="admonition-title">What input data validation does NOT do</p>
-<p>Input data validation checks the structure of <em>manifest files</em> (sample sheets, CSV files), NOT the contents of your actual data files (FASTQ, BAM, VCF, etc.).</p>
-<p>For large-scale data, validating file contents (like checking BAM integrity) should happen in pipeline processes running on worker nodes, not during the validation stage on the orchestrating machine.</p>
+<p class="admonition-title">O que a validação de dados de entrada NÃO faz</p>
+<p>A validação de dados de entrada verifica a estrutura de <em>arquivos de manifesto</em> (planilhas de amostras, arquivos CSV), NÃO o conteúdo dos seus arquivos de dados reais (FASTQ, BAM, VCF, etc.).</p>
+<p>Para dados em larga escala, validar o conteúdo dos arquivos (como verificar a integridade de BAM) deve acontecer em processos do pipeline executando em nós de trabalho, não durante a etapa de validação na máquina de orquestração.</p>
 </div>
-<h3 id="04-when-should-validation-occur">0.4. When should validation occur?<a class="headerlink" href="#04-when-should-validation-occur" title="Permanent link">&para;</a></h3>
+<h3 id="04-quando-a-validacao-deve-ocorrer">0.4. Quando a validação deve ocorrer?<a class="headerlink" href="#04-quando-a-validacao-deve-ocorrer" title="Permanent link">&para;</a></h3>
 <pre class="mermaid"><code>graph LR
-    A[User runs pipeline] --&gt; B[Parameter validation]
-    B --&gt;|✓ Valid| C[Input data validation]
-    B --&gt;|✗ Invalid| D[Error: Fix parameters]
-    C --&gt;|✓ Valid| E[Pipeline executes]
-    C --&gt;|✗ Invalid| F[Error: Fix input data]</code></pre>
-<p>Validation should happen <strong>before</strong> any pipeline processes run, to provide fast feedback and prevent wasted compute time.</p>
-<p>Now let's apply these principles in practice, starting with parameter validation.</p>
+    A[Usuário executa o pipeline] --&gt; B[Validação de parâmetros]
+    B --&gt;|✓ Válido| C[Validação de dados de entrada]
+    B --&gt;|✗ Inválido| D[Erro: Corrigir parâmetros]
+    C --&gt;|✓ Válido| E[Pipeline executa]
+    C --&gt;|✗ Inválido| F[Erro: Corrigir dados de entrada]</code></pre>
+<p>A validação deve acontecer <strong>antes</strong> de qualquer processo do pipeline executar, para fornecer feedback rápido e evitar tempo de computação desperdiçado.</p>
+<p>Agora vamos aplicar esses princípios na prática, começando com a validação de parâmetros.</p>
 <hr />
-<h2 id="1-parameter-validation-nextflow_schemajson">1. Parameter validation (nextflow_schema.json)<a class="headerlink" href="#1-parameter-validation-nextflow_schemajson" title="Permanent link">&para;</a></h2>
-<p>Let's start by adding parameter validation to our pipeline. This validates command-line flags like <code>--input</code>, <code>--outdir</code>, and <code>--batch</code>.</p>
-<h3 id="11-configure-validation-to-skip-input-file-validation">1.1. Configure validation to skip input file validation<a class="headerlink" href="#11-configure-validation-to-skip-input-file-validation" title="Permanent link">&para;</a></h3>
-<p>The nf-core pipeline template comes with nf-schema already installed and configured:</p>
+<h2 id="1-validacao-de-parametros-nextflow_schemajson">1. Validação de parâmetros (nextflow_schema.json)<a class="headerlink" href="#1-validacao-de-parametros-nextflow_schemajson" title="Permanent link">&para;</a></h2>
+<p>Vamos começar adicionando validação de parâmetros ao nosso pipeline. Isso valida flags de linha de comando como <code>--input</code>, <code>--outdir</code> e <code>--batch</code>.</p>
+<h3 id="11-configurar-a-validacao-para-ignorar-validacao-de-arquivo-de-entrada">1.1. Configurar a validação para ignorar validação de arquivo de entrada<a class="headerlink" href="#11-configurar-a-validacao-para-ignorar-validacao-de-arquivo-de-entrada" title="Permanent link">&para;</a></h3>
+<p>O template de pipeline nf-core vem com o nf-schema já instalado e configurado:</p>
 <ul>
-<li>The nf-schema plugin is installed via the <code>plugins{}</code> block in <code>nextflow.config</code></li>
-<li>Parameter validation is enabled by default via <code>params.validate_params = true</code></li>
-<li>The validation is performed by the <code>UTILS_NFSCHEMA_PLUGIN</code> subworkflow during pipeline initialization</li>
+<li>O plugin nf-schema é instalado via o bloco <code>plugins{}</code> em <code>nextflow.config</code></li>
+<li>A validação de parâmetros é habilitada por padrão via <code>params.validate_params = true</code></li>
+<li>A validação é realizada pelo subworkflow <code>UTILS_NFSCHEMA_PLUGIN</code> durante a inicialização do pipeline</li>
 </ul>
-<p>The validation behavior is controlled through the <code>validation{}</code> scope in <code>nextflow.config</code>.</p>
-<p>Since we'll be working on parameter validation first (this section) and won't configure the input data schema until section 2, we need to temporarily tell nf-schema to skip validating the <code>input</code> parameter's file contents.</p>
-<p>Open <code>nextflow.config</code> and find the <code>validation</code> block (around line 246). Add <code>ignoreParams</code> to skip input file validation:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">After</label><label for="__tabbed_1_2">Before</label></div>
+<p>O comportamento de validação é controlado através do escopo <code>validation{}</code> em <code>nextflow.config</code>.</p>
+<p>Como estaremos trabalhando na validação de parâmetros primeiro (esta seção) e não configuraremos o schema de dados de entrada até a seção 2, precisamos temporariamente dizer ao nf-schema para ignorar a validação do conteúdo do arquivo do parâmetro <code>input</code>.</p>
+<p>Abra <code>nextflow.config</code> e encontre o bloco <code>validation</code> (por volta da linha 246). Adicione <code>ignoreParams</code> para ignorar a validação de arquivo de entrada:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Depois</label><label for="__tabbed_1_2">Antes</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">nextflow.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-246">246</a></span>
@@ -4204,24 +4246,24 @@ While nf-schema works with any Nextflow workflow, it's the standard validation s
 </div>
 </div>
 </div>
-<p>This configuration tells nf-schema to:</p>
+<p>Esta configuração diz ao nf-schema para:</p>
 <ul>
-<li><strong><code>defaultIgnoreParams</code></strong>: Skip validation of complex parameters like <code>genomes</code> (set by template developers)</li>
-<li><strong><code>ignoreParams</code></strong>: Skip validation of the <code>input</code> parameter's file contents (temporary; we'll re-enable this in section 2)</li>
-<li><strong><code>monochromeLogs</code></strong>: Disable colored output in validation messages when set to <code>true</code> (controlled by <code>params.monochrome_logs</code>)</li>
+<li><strong><code>defaultIgnoreParams</code></strong>: Ignorar validação de parâmetros complexos como <code>genomes</code> (definido pelos desenvolvedores do template)</li>
+<li><strong><code>ignoreParams</code></strong>: Ignorar validação do conteúdo do arquivo do parâmetro <code>input</code> (temporário; vamos reabilitar isso na seção 2)</li>
+<li><strong><code>monochromeLogs</code></strong>: Desabilitar saída colorida em mensagens de validação quando definido como <code>true</code> (controlado por <code>params.monochrome_logs</code>)</li>
 </ul>
 <div class="admonition note">
-<p class="admonition-title">Why ignore the input parameter?</p>
-<p>The <code>input</code> parameter in <code>nextflow_schema.json</code> has <code>"schema": "assets/schema_input.json"</code> which tells nf-schema to validate the <em>contents</em> of the input CSV file against that schema.
-Since we haven't configured that schema yet, we temporarily ignore this validation.
-We'll remove this setting in section 2 after configuring the input data schema.</p>
+<p class="admonition-title">Por que ignorar o parâmetro input?</p>
+<p>O parâmetro <code>input</code> em <code>nextflow_schema.json</code> tem <code>"schema": "assets/schema_input.json"</code> que diz ao nf-schema para validar o <em>conteúdo</em> do arquivo CSV de entrada contra esse schema.
+Como ainda não configuramos esse schema, temporariamente ignoramos essa validação.
+Removeremos essa configuração na seção 2 após configurar o schema de dados de entrada.</p>
 </div>
-<h3 id="12-examine-the-parameter-schema">1.2. Examine the parameter schema<a class="headerlink" href="#12-examine-the-parameter-schema" title="Permanent link">&para;</a></h3>
-<p>Let's look at a section of the <code>nextflow_schema.json</code> file that came with our pipeline template:</p>
+<h3 id="12-examinar-o-schema-de-parametros">1.2. Examinar o schema de parâmetros<a class="headerlink" href="#12-examinar-o-schema-de-parametros" title="Permanent link">&para;</a></h3>
+<p>Vamos olhar uma seção do arquivo <code>nextflow_schema.json</code> que veio com nosso template de pipeline:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>grep<span class="w"> </span>-A<span class="w"> </span><span class="m">25</span><span class="w"> </span><span class="s1">&#39;&quot;input_output_options&quot;&#39;</span><span class="w"> </span>nextflow_schema.json
 </code></pre></div>
-<p>The parameter schema is organized into groups. Here's the <code>input_output_options</code> group:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/nextflow_schema.json (excerpt)</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-8"> 8</a></span>
+<p>O schema de parâmetros é organizado em grupos. Aqui está o grupo <code>input_output_options</code>:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/nextflow_schema.json (trecho)</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-8"> 8</a></span>
 <span class="normal"><a href="#__codelineno-8-9"> 9</a></span>
 <span class="normal"><a href="#__codelineno-8-10">10</a></span>
 <span class="normal"><a href="#__codelineno-8-11">11</a></span>
@@ -4273,29 +4315,29 @@ We'll remove this setting in section 2 after configuring the input data schema.<
 <a id="__codelineno-8-32" name="__codelineno-8-32"></a><span class="w">            </span><span class="p">}</span>
 <a id="__codelineno-8-33" name="__codelineno-8-33"></a><span class="w">        </span><span class="p">},</span>
 </code></pre></div></td></tr></table></div>
-<p>Each input described here has the following key properties that can be validated:</p>
+<p>Cada entrada descrita aqui tem as seguintes propriedades principais que podem ser validadas:</p>
 <ul>
-<li><strong><code>type</code></strong>: Data type (string, integer, boolean, number)</li>
-<li><strong><code>format</code></strong>: Special formats like <code>file-path</code> or <code>directory-path</code></li>
-<li><strong><code>exists</code></strong>: For file paths, check if the file exists</li>
-<li><strong><code>pattern</code></strong>: Regular expression the value must match</li>
-<li><strong><code>required</code></strong>: Array of parameter names that must be provided</li>
-<li><strong><code>mimetype</code></strong>: Expected file mimetype for validation</li>
+<li><strong><code>type</code></strong>: Tipo de dado (string, integer, boolean, number)</li>
+<li><strong><code>format</code></strong>: Formatos especiais como <code>file-path</code> ou <code>directory-path</code></li>
+<li><strong><code>exists</code></strong>: Para caminhos de arquivo, verifica se o arquivo existe</li>
+<li><strong><code>pattern</code></strong>: Expressão regular que o valor deve corresponder</li>
+<li><strong><code>required</code></strong>: Array de nomes de parâmetros que devem ser fornecidos</li>
+<li><strong><code>mimetype</code></strong>: Mimetype de arquivo esperado para validação</li>
 </ul>
-<p>If you've got a sharp eye, you might notice that the <code>batch</code> input parameter we've been using isn't defined yet in the schema.
-We're going to add it in the next section.</p>
+<p>Se você tem olhar afiado, pode perceber que o parâmetro de entrada <code>batch</code> que temos usado ainda não está definido no schema.
+Vamos adicioná-lo na próxima seção.</p>
 <details class="info">
-<summary>Where do schema parameters come from?</summary>
-<p>The schema validation uses <code>nextflow.config</code> as the base for parameter definitions.
-Parameters declared elsewhere in your workflow scripts (like in <code>main.nf</code> or module files) are <strong>not</strong> automatically picked up by the schema validator.</p>
-<p>This means you should always declare your pipeline parameters in <code>nextflow.config</code>, and then define their validation rules in <code>nextflow_schema.json</code>.</p>
+<summary>De onde vêm os parâmetros do schema?</summary>
+<p>A validação do schema usa <code>nextflow.config</code> como base para definições de parâmetros.
+Parâmetros declarados em outros lugares nos seus scripts de fluxo de trabalho (como em <code>main.nf</code> ou arquivos de módulo) <strong>não</strong> são automaticamente capturados pelo validador de schema.</p>
+<p>Isso significa que você deve sempre declarar seus parâmetros de pipeline em <code>nextflow.config</code>, e então definir suas regras de validação em <code>nextflow_schema.json</code>.</p>
 </details>
-<h3 id="13-add-the-batch-parameter">1.3. Add the batch parameter<a class="headerlink" href="#13-add-the-batch-parameter" title="Permanent link">&para;</a></h3>
-<p>While the schema is a JSON file that can be edited manually, <strong>manual editing is error-prone and not recommended</strong>.
-Instead, nf-core provides an interactive GUI tool that handles the JSON Schema syntax for you and validates your changes:</p>
+<h3 id="13-adicionar-o-parametro-batch">1.3. Adicionar o parâmetro batch<a class="headerlink" href="#13-adicionar-o-parametro-batch" title="Permanent link">&para;</a></h3>
+<p>Embora o schema seja um arquivo JSON que possa ser editado manualmente, <strong>a edição manual é propensa a erros e não é recomendada</strong>.
+Em vez disso, o nf-core fornece uma ferramenta GUI interativa que manipula a sintaxe JSON Schema para você e valida suas alterações:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>nf-core<span class="w"> </span>pipelines<span class="w"> </span>schema<span class="w"> </span>build
 </code></pre></div>
-<p>You should see something like this:</p>
+<p>Você deve ver algo assim:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="go">                                      ,--./,-.</span>
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="go">      ___     __   __   __   ___     /,-._.--\</span>
 <a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="go">|\ | |__  __ /  ` /  \ |__) |__         }  {</span>
@@ -4309,32 +4351,32 @@ Instead, nf-core provides an interactive GUI tool that handles the JSON Schema s
 <a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="go">INFO     Writing schema with 17 params: &#39;nextflow_schema.json&#39;</span>
 <a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="go">🚀  Launch web builder for customisation and editing? [y/n]:</span>
 </code></pre></div>
-<p>Type <code>y</code> and press Enter to launch the interactive web interface.</p>
-<p>Your browser will open showing the Parameter schema builder:</p>
-<p><img alt="Schema builder interface" src="../../../hello_nf-core/img/schema_build.png" /></p>
-<p>To add the <code>batch</code> parameter:</p>
+<p>Digite <code>y</code> e pressione Enter para iniciar a interface web interativa.</p>
+<p>Seu navegador abrirá mostrando o construtor de schema de parâmetros:</p>
+<p><img alt="Interface do construtor de schema" src="./img/schema_build.png" /></p>
+<p>Para adicionar o parâmetro <code>batch</code>:</p>
 <ol>
-<li>Click the <strong>"Add parameter"</strong> button at the top</li>
-<li>Use the drag handle (⋮⋮) to move the new parameter up into the "Input/output options" group, below the <code>input</code> parameter</li>
-<li>Fill in the parameter details:</li>
+<li>Clique no botão <strong>"Add parameter"</strong> no topo</li>
+<li>Use a alça de arrastar (⋮⋮) para mover o novo parâmetro para cima no grupo "Input/output options", abaixo do parâmetro <code>input</code></li>
+<li>Preencha os detalhes do parâmetro:</li>
 <li><strong>ID</strong>: <code>batch</code></li>
 <li><strong>Description</strong>: <code>Name for this batch of greetings</code></li>
 <li><strong>Type</strong>: <code>string</code></li>
-<li><strong>Required</strong>: tick the checkbox</li>
-<li>Optionally, select an icon from the icon picker (e.g., <code>fas fa-layer-group</code>)</li>
+<li><strong>Required</strong>: marque a caixa de seleção</li>
+<li>Opcionalmente, selecione um ícone do seletor de ícones (ex: <code>fas fa-layer-group</code>)</li>
 </ol>
-<p><img alt="Adding the batch parameter" src="../../../hello_nf-core/img/schema_add.png" /></p>
-<p>When you're done, click the <strong>"Finished"</strong> button at the top right.</p>
-<p>Back in your terminal, you'll see:</p>
+<p><img alt="Adicionando o parâmetro batch" src="./img/schema_add.png" /></p>
+<p>Quando terminar, clique no botão <strong>"Finished"</strong> no canto superior direito.</p>
+<p>De volta ao seu terminal, você verá:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="go">INFO     Writing schema with 18 params: &#39;nextflow_schema.json&#39;</span>
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="go">⣾ Use ctrl+c to stop waiting and force exit.</span>
 </code></pre></div>
-<p>Press <code>Ctrl+C</code> to exit the schema builder.</p>
-<p>The tool has now updated your <code>nextflow_schema.json</code> file with the new <code>batch</code> parameter, handling all the JSON Schema syntax correctly.</p>
-<h3 id="14-verify-the-changes">1.4. Verify the changes<a class="headerlink" href="#14-verify-the-changes" title="Permanent link">&para;</a></h3>
+<p>Pressione <code>Ctrl+C</code> para sair do construtor de schema.</p>
+<p>A ferramenta agora atualizou seu arquivo <code>nextflow_schema.json</code> com o novo parâmetro <code>batch</code>, manipulando toda a sintaxe JSON Schema corretamente.</p>
+<h3 id="14-verificar-as-alteracoes">1.4. Verificar as alterações<a class="headerlink" href="#14-verificar-as-alteracoes" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>grep<span class="w"> </span>-A<span class="w"> </span><span class="m">25</span><span class="w"> </span><span class="s1">&#39;&quot;input_output_options&quot;&#39;</span><span class="w"> </span>nextflow_schema.json
 </code></pre></div>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/nextflow_schema.json (excerpt)</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-8"> 8</a></span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/nextflow_schema.json (trecho)</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-8"> 8</a></span>
 <span class="normal"><a href="#__codelineno-13-9"> 9</a></span>
 <span class="normal"><a href="#__codelineno-13-10">10</a></span>
 <span class="normal"><a href="#__codelineno-13-11">11</a></span>
@@ -4380,14 +4422,14 @@ Instead, nf-core provides an interactive GUI tool that handles the JSON Schema s
 </span><a id="__codelineno-13-29" name="__codelineno-13-29"></a><span class="hll"><span class="w">          </span><span class="nt">&quot;fa_icon&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fas fa-layer-group&quot;</span>
 </span><a id="__codelineno-13-30" name="__codelineno-13-30"></a><span class="hll"><span class="w">        </span><span class="p">},</span>
 </span></code></pre></div></td></tr></table></div>
-<p>You should see that the <code>batch</code> parameter has been added to the schema with the "required" field now showing <code>["input", "outdir", "batch"]</code>.</p>
-<h3 id="15-test-parameter-validation">1.5. Test parameter validation<a class="headerlink" href="#15-test-parameter-validation" title="Permanent link">&para;</a></h3>
-<p>Now let's test that parameter validation works correctly.</p>
-<p>First, try running without the required <code>input</code> parameter:</p>
+<p>Você deve ver que o parâmetro <code>batch</code> foi adicionado ao schema com o campo "required" agora mostrando <code>["input", "outdir", "batch"]</code>.</p>
+<h3 id="15-testar-a-validacao-de-parametros">1.5. Testar a validação de parâmetros<a class="headerlink" href="#15-testar-a-validacao-de-parametros" title="Permanent link">&para;</a></h3>
+<p>Agora vamos testar que a validação de parâmetros funciona corretamente.</p>
+<p>Primeiro, tente executar sem o parâmetro obrigatório <code>input</code>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>.<span class="w"> </span>--outdir<span class="w"> </span>test-results<span class="w"> </span>-profile<span class="w"> </span>docker
 </code></pre></div>
 <details class="warning">
-<summary>Command output</summary>
+<summary>Saída do comando</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="go">ERROR ~ Validation of pipeline parameters failed!</span>
 <a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>
 <a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="go">-- Check &#39;.nextflow.log&#39; file for details</span>
@@ -4396,12 +4438,12 @@ Instead, nf-core provides an interactive GUI tool that handles the JSON Schema s
 <a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="go">* Missing required parameter(s): input, batch</span>
 </code></pre></div>
 </details>
-<p>Perfect! The validation catches the missing required parameter before the pipeline runs.</p>
-<p>Now try with a valid set of parameters:</p>
+<p>Perfeito! A validação captura o parâmetro obrigatório faltante antes do pipeline executar.</p>
+<p>Agora tente com um conjunto válido de parâmetros:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>.<span class="w"> </span>--input<span class="w"> </span>assets/greetings.csv<span class="w"> </span>--outdir<span class="w"> </span>results<span class="w"> </span>--batch<span class="w"> </span>my-batch<span class="w"> </span>-profile<span class="w"> </span>test,docker
 </code></pre></div>
 <details class="success">
-<summary>Command output</summary>
+<summary>Saída do comando</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="go"> N E X T F L O W   ~  version 25.04.3</span>
 <a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>
 <a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="go">Launching `./main.nf` [peaceful_wozniak] DSL2 - revision: b9e9b3b8de</span>
@@ -4414,47 +4456,47 @@ Instead, nf-core provides an interactive GUI tool that handles the JSON Schema s
 <a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a><span class="go">-[core/hello] Pipeline completed successfully-</span>
 </code></pre></div>
 </details>
-<p>The pipeline should run successfully, and the <code>batch</code> parameter is now validated.</p>
-<h3 id="takeaway">Takeaway<a class="headerlink" href="#takeaway" title="Permanent link">&para;</a></h3>
-<p>You've learned how to use the interactive <code>nf-core pipelines schema build</code> tool to add parameters to <code>nextflow_schema.json</code> and seen parameter validation in action.
-The web interface handles all the JSON Schema syntax for you, making it easy to manage complex parameter schemas without error-prone manual JSON editing.</p>
-<h3 id="whats-next">What's next?<a class="headerlink" href="#whats-next" title="Permanent link">&para;</a></h3>
-<p>Now that parameter validation is working, let's add validation for the input data file contents.</p>
+<p>O pipeline deve executar com sucesso, e o parâmetro <code>batch</code> agora está validado.</p>
+<h3 id="conclusao">Conclusão<a class="headerlink" href="#conclusao" title="Permanent link">&para;</a></h3>
+<p>Você aprendeu como usar a ferramenta interativa <code>nf-core pipelines schema build</code> para adicionar parâmetros ao <code>nextflow_schema.json</code> e viu a validação de parâmetros em ação.
+A interface web manipula toda a sintaxe JSON Schema para você, facilitando o gerenciamento de schemas de parâmetros complexos sem edição JSON manual propensa a erros.</p>
+<h3 id="proximos-passos">Próximos passos<a class="headerlink" href="#proximos-passos" title="Permanent link">&para;</a></h3>
+<p>Agora que a validação de parâmetros está funcionando, vamos adicionar validação para o conteúdo do arquivo de dados de entrada.</p>
 <hr />
-<h2 id="2-input-data-validation-schema_inputjson">2. Input data validation (schema_input.json)<a class="headerlink" href="#2-input-data-validation-schema_inputjson" title="Permanent link">&para;</a></h2>
-<p>We're going to add validation for the contents of our input CSV file.
-Whereas parameter validation checks command-line flags, input data validation ensures the data inside the CSV file is structured correctly.</p>
-<h3 id="21-understand-the-greetingscsv-format">2.1. Understand the greetings.csv format<a class="headerlink" href="#21-understand-the-greetingscsv-format" title="Permanent link">&para;</a></h3>
-<p>Let's remind ourselves what our input looks like:</p>
+<h2 id="2-validacao-de-dados-de-entrada-schema_inputjson">2. Validação de dados de entrada (schema_input.json)<a class="headerlink" href="#2-validacao-de-dados-de-entrada-schema_inputjson" title="Permanent link">&para;</a></h2>
+<p>Vamos adicionar validação para o conteúdo do nosso arquivo CSV de entrada.
+Enquanto a validação de parâmetros verifica flags de linha de comando, a validação de dados de entrada garante que os dados dentro do arquivo CSV estejam estruturados corretamente.</p>
+<h3 id="21-entender-o-formato-greetingscsv">2.1. Entender o formato greetings.csv<a class="headerlink" href="#21-entender-o-formato-greetingscsv" title="Permanent link">&para;</a></h3>
+<p>Vamos relembrar como nossa entrada se parece:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>cat<span class="w"> </span>assets/greetings.csv
 </code></pre></div>
 <div class="highlight"><span class="filename">assets/greetings.csv</span><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>Hello,en,87
 <a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>Bonjour,fr,96
 <a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>Holà,es,98
 </code></pre></div>
-<p>This is a simple CSV with:</p>
+<p>Este é um CSV simples com:</p>
 <ul>
-<li>Three columns (no header)</li>
-<li>On each line: a greeting, a language, and a score</li>
-<li>The first two columns are text strings with no special format requirements</li>
-<li>The third column is an integer</li>
+<li>Três colunas (sem cabeçalho)</li>
+<li>Em cada linha: uma saudação, um idioma e uma pontuação</li>
+<li>As duas primeiras colunas são strings de texto sem requisitos de formato especiais</li>
+<li>A terceira coluna é um inteiro</li>
 </ul>
-<p>For our pipeline, only the first column is required.</p>
-<h3 id="22-design-the-schema-structure">2.2. Design the schema structure<a class="headerlink" href="#22-design-the-schema-structure" title="Permanent link">&para;</a></h3>
-<p>For our use case, we want to:</p>
+<p>Para nosso pipeline, apenas a primeira coluna é obrigatória.</p>
+<h3 id="22-projetar-a-estrutura-do-schema">2.2. Projetar a estrutura do schema<a class="headerlink" href="#22-projetar-a-estrutura-do-schema" title="Permanent link">&para;</a></h3>
+<p>Para nosso caso de uso, queremos:</p>
 <ol>
-<li>Accept CSV input with at least one column</li>
-<li>Treat the first element of each row as a greeting string</li>
-<li>Ensure greetings are not empty and do not start with whitespace</li>
-<li>Ensure the language field matches one of the supported language codes (en, fr, es, it, de)</li>
-<li>Ensure the score field is an integer with a value between 0 and 100</li>
+<li>Aceitar entrada CSV com pelo menos uma coluna</li>
+<li>Tratar o primeiro elemento de cada linha como uma string de saudação</li>
+<li>Garantir que as saudações não estejam vazias e não comecem com espaço em branco</li>
+<li>Garantir que o campo de idioma corresponda a um dos códigos de idioma suportados (en, fr, es, it, de)</li>
+<li>Garantir que o campo de pontuação seja um inteiro com valor entre 0 e 100</li>
 </ol>
-<p>We'll structure this as an array of objects, where each object has at least a <code>greeting</code> field.</p>
-<h3 id="23-update-the-schema-file">2.3. Update the schema file<a class="headerlink" href="#23-update-the-schema-file" title="Permanent link">&para;</a></h3>
-<p>The nf-core pipeline template includes a default <code>assets/schema_input.json</code> designed for paired-end sequencing data.
-We need to replace it with a simpler schema for our greetings use case.</p>
-<p>Open <code>assets/schema_input.json</code> and replace the <code>properties</code> and <code>required</code> sections:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">After</label><label for="__tabbed_2_2">Before</label></div>
+<p>Vamos estruturar isso como um array de objetos, onde cada objeto tem pelo menos um campo <code>greeting</code>.</p>
+<h3 id="23-atualizar-o-arquivo-de-schema">2.3. Atualizar o arquivo de schema<a class="headerlink" href="#23-atualizar-o-arquivo-de-schema" title="Permanent link">&para;</a></h3>
+<p>O template de pipeline nf-core inclui um <code>assets/schema_input.json</code> padrão projetado para dados de sequenciamento paired-end.
+Precisamos substituí-lo por um schema mais simples para nosso caso de uso de saudações.</p>
+<p>Abra <code>assets/schema_input.json</code> e substitua as seções <code>properties</code> e <code>required</code>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Depois</label><label for="__tabbed_2_2">Antes</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">assets/schema_input.json</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1"> 1</a></span>
@@ -4586,21 +4628,21 @@ We need to replace it with a simpler schema for our greetings use case.</p>
 </div>
 </div>
 </div>
-<p>The key changes:</p>
+<p>As principais mudanças:</p>
 <ul>
-<li><strong><code>description</code></strong>: Updated to mention "greetings file"</li>
-<li><strong><code>properties</code></strong>: Replaced <code>sample</code>, <code>fastq_1</code>, and <code>fastq_2</code> with <code>greeting</code>, <code>language</code>, and <code>score</code></li>
-<li><strong><code>type:</code></strong> Enforce either string (<code>greeting</code>, <code>language</code>) or integer (<code>score</code>)</li>
-<li><strong><code>pattern: "^\\S.*$"</code></strong>: Greeting must start with a non-whitespace character (but can contain spaces after that)</li>
-<li><strong><code>"enum": ["en", "fr", "es", "it", "de"]</code></strong>: Language code must be in the supported set</li>
-<li><strong><code>"minimum": 0</code> and <code>"maximum": 100</code></strong>: Score value must be between 0 and 100</li>
-<li><strong><code>errorMessage</code></strong>: Custom error message shown if validation fails</li>
-<li><strong><code>required</code></strong>: Changed from <code>["sample", "fastq_1"]</code> to <code>["greeting"]</code></li>
+<li><strong><code>description</code></strong>: Atualizada para mencionar "greetings file"</li>
+<li><strong><code>properties</code></strong>: Substituídas <code>sample</code>, <code>fastq_1</code> e <code>fastq_2</code> por <code>greeting</code>, <code>language</code> e <code>score</code></li>
+<li><strong><code>type:</code></strong> Impõe string (<code>greeting</code>, <code>language</code>) ou integer (<code>score</code>)</li>
+<li><strong><code>pattern: "^\\S.*$"</code></strong>: A saudação deve começar com um caractere que não seja espaço em branco (mas pode conter espaços depois disso)</li>
+<li><strong><code>"enum": ["en", "fr", "es", "it", "de"]</code></strong>: O código de idioma deve estar no conjunto suportado</li>
+<li><strong><code>"minimum": 0</code> e <code>"maximum": 100</code></strong>: O valor da pontuação deve estar entre 0 e 100</li>
+<li><strong><code>errorMessage</code></strong>: Mensagem de erro personalizada mostrada se a validação falhar</li>
+<li><strong><code>required</code></strong>: Alterado de <code>["sample", "fastq_1"]</code> para <code>["greeting"]</code></li>
 </ul>
-<h3 id="24-add-a-header-to-the-greetingscsv-file">2.4. Add a header to the greetings.csv file<a class="headerlink" href="#24-add-a-header-to-the-greetingscsv-file" title="Permanent link">&para;</a></h3>
-<p>When nf-schema reads a CSV file, it expects the first row to contain column headers that match the field names in the schema.</p>
-<p>For our simple case, we need to add a header line to our greetings file:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">After</label><label for="__tabbed_3_2">Before</label></div>
+<h3 id="24-adicionar-um-cabecalho-ao-arquivo-greetingscsv">2.4. Adicionar um cabeçalho ao arquivo greetings.csv<a class="headerlink" href="#24-adicionar-um-cabecalho-ao-arquivo-greetingscsv" title="Permanent link">&para;</a></h3>
+<p>Quando o nf-schema lê um arquivo CSV, ele espera que a primeira linha contenha cabeçalhos de colunas que correspondam aos nomes de campos no schema.</p>
+<p>Para nosso caso simples, precisamos adicionar uma linha de cabeçalho ao nosso arquivo de saudações:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Depois</label><label for="__tabbed_3_2">Antes</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">assets/greetings.csv</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-22-1">1</a></span>
@@ -4622,26 +4664,26 @@ We need to replace it with a simpler schema for our greetings use case.</p>
 </div>
 </div>
 </div>
-<p>Now the CSV file has a header line that matches the field names in our schema.</p>
-<p>The final step is to implement the validation in the pipeline code using <code>samplesheetToList</code>.</p>
-<h3 id="25-implement-validation-in-the-pipeline">2.5. Implement validation in the pipeline<a class="headerlink" href="#25-implement-validation-in-the-pipeline" title="Permanent link">&para;</a></h3>
-<p>Now we need to replace our simple CSV parsing with nf-schema's <code>samplesheetToList</code> function, which will validate and parse the samplesheet.</p>
-<p>The <code>samplesheetToList</code> function:</p>
+<p>Agora o arquivo CSV tem uma linha de cabeçalho que corresponde aos nomes de campos em nosso schema.</p>
+<p>O passo final é implementar a validação no código do pipeline usando <code>samplesheetToList</code>.</p>
+<h3 id="25-implementar-validacao-no-pipeline">2.5. Implementar validação no pipeline<a class="headerlink" href="#25-implementar-validacao-no-pipeline" title="Permanent link">&para;</a></h3>
+<p>Agora precisamos substituir nossa análise CSV simples pela função <code>samplesheetToList</code> do nf-schema, que validará e analisará a planilha de amostras.</p>
+<p>A função <code>samplesheetToList</code>:</p>
 <ol>
-<li>Reads the input sample sheet (CSV, TSV, JSON, or YAML)</li>
-<li>Validates it against the provided JSON schema</li>
-<li>Returns a Groovy list where each entry corresponds to a row</li>
-<li>Throws helpful error messages if validation fails</li>
+<li>Lê a planilha de amostras de entrada (CSV, TSV, JSON ou YAML)</li>
+<li>Valida contra o schema JSON fornecido</li>
+<li>Retorna uma lista Groovy onde cada entrada corresponde a uma linha</li>
+<li>Lança mensagens de erro úteis se a validação falhar</li>
 </ol>
-<p>Let's update the input handling code:</p>
-<p>Open <code>subworkflows/local/utils_nfcore_hello_pipeline/main.nf</code> and locate the section where we create the input channel (around line 80).</p>
-<p>We need to:</p>
+<p>Vamos atualizar o código de manipulação de entrada:</p>
+<p>Abra <code>subworkflows/local/utils_nfcore_hello_pipeline/main.nf</code> e localize a seção onde criamos o canal de entrada (por volta da linha 80).</p>
+<p>Precisamos:</p>
 <ol>
-<li>Use the <code>samplesheetToList</code> function (already imported in the template)</li>
-<li>Validate and parse the input</li>
-<li>Extract just the greeting strings for our workflow</li>
+<li>Usar a função <code>samplesheetToList</code> (já importada no template)</li>
+<li>Validar e analisar a entrada</li>
+<li>Extrair apenas as strings de saudação para nosso fluxo de trabalho</li>
 </ol>
-<p>First, note that the <code>samplesheetToList</code> function is already imported at the top of the file (the nf-core template includes this by default):</p>
+<p>Primeiro, note que a função <code>samplesheetToList</code> já está importada no topo do arquivo (o template nf-core inclui isso por padrão):</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-24-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-24-3"> 3</a></span>
@@ -4659,7 +4701,7 @@ We need to replace it with a simpler schema for our greetings use case.</p>
 <span class="normal"><a href="#__codelineno-24-15">15</a></span>
 <span class="normal"><a href="#__codelineno-24-16">16</a></span>
 <span class="normal"><a href="#__codelineno-24-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1"></a><span class="c1">//</span>
-<a id="__codelineno-24-2" name="__codelineno-24-2"></a><span class="c1">// Subworkflow with functionality specific to the core/hello pipeline</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2"></a><span class="c1">// Subfluxo de trabalho com funcionalidade específica para o pipeline core/hello</span>
 <a id="__codelineno-24-3" name="__codelineno-24-3"></a><span class="c1">//</span>
 <a id="__codelineno-24-4" name="__codelineno-24-4"></a>
 <a id="__codelineno-24-5" name="__codelineno-24-5"></a><span class="cm">/*</span>
@@ -4676,8 +4718,8 @@ We need to replace it with a simpler schema for our greetings use case.</p>
 <a id="__codelineno-24-16" name="__codelineno-24-16"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">UTILS_NFCORE_PIPELINE</span><span class="w">     </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../../nf-core/utils_nfcore_pipeline&#39;</span>
 <a id="__codelineno-24-17" name="__codelineno-24-17"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">UTILS_NEXTFLOW_PIPELINE</span><span class="w">   </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../../nf-core/utils_nextflow_pipeline&#39;</span>
 </code></pre></div></td></tr></table></div>
-<p>Now update the channel creation code:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">After</label><label for="__tabbed_4_2">Before</label></div>
+<p>Agora atualize o código de criação do canal:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Depois</label><label for="__tabbed_4_2">Antes</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-80">80</a></span>
@@ -4689,7 +4731,7 @@ We need to replace it with a simpler schema for our greetings use case.</p>
 <span class="normal"><a href="#__codelineno-25-86">86</a></span>
 <span class="normal"><a href="#__codelineno-25-87">87</a></span>
 <span class="normal"><a href="#__codelineno-25-88">88</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-25-80" name="__codelineno-25-80"></a><span class="w">    </span><span class="c1">//</span>
-<a id="__codelineno-25-81" name="__codelineno-25-81"></a><span class="w">    </span><span class="c1">// Create channel from input file provided through params.input</span>
+<a id="__codelineno-25-81" name="__codelineno-25-81"></a><span class="w">    </span><span class="c1">// Cria canal a partir do arquivo de entrada fornecido através de params.input</span>
 <a id="__codelineno-25-82" name="__codelineno-25-82"></a><span class="w">    </span><span class="c1">//</span>
 <a id="__codelineno-25-83" name="__codelineno-25-83"></a><span class="hll"><span class="w">    </span><span class="n">ch_samplesheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromList</span><span class="o">(</span><span class="n">samplesheetToList</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">,</span><span class="w"> </span><span class="s2">&quot;${projectDir}/assets/schema_input.json&quot;</span><span class="o">))</span>
 </span><a id="__codelineno-25-84" name="__codelineno-25-84"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">line</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
@@ -4710,7 +4752,7 @@ We need to replace it with a simpler schema for our greetings use case.</p>
 <span class="normal"><a href="#__codelineno-26-87">87</a></span>
 <span class="normal"><a href="#__codelineno-26-88">88</a></span>
 <span class="normal"><a href="#__codelineno-26-89">89</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-26-80" name="__codelineno-26-80"></a><span class="w">    </span><span class="c1">//</span>
-<a id="__codelineno-26-81" name="__codelineno-26-81"></a><span class="w">    </span><span class="c1">// Create channel from input file provided through params.input</span>
+<a id="__codelineno-26-81" name="__codelineno-26-81"></a><span class="w">    </span><span class="c1">// Cria canal a partir do arquivo de entrada fornecido através de params.input</span>
 <a id="__codelineno-26-82" name="__codelineno-26-82"></a><span class="w">    </span><span class="c1">//</span>
 <a id="__codelineno-26-83" name="__codelineno-26-83"></a><span class="hll"><span class="w">    </span><span class="n">ch_samplesheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
 </span><a id="__codelineno-26-84" name="__codelineno-26-84"></a><span class="hll"><span class="w">        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">()</span>
@@ -4723,16 +4765,16 @@ We need to replace it with a simpler schema for our greetings use case.</p>
 </div>
 </div>
 </div>
-<p>Let's break down what changed:</p>
+<p>Vamos detalhar o que mudou:</p>
 <ol>
-<li><strong><code>samplesheetToList(params.input, "${projectDir}/assets/schema_input.json")</code></strong>: Validates the input file against our schema and returns a list</li>
-<li><strong><code>Channel.fromList(...)</code></strong>: Converts the list into a Nextflow channel</li>
+<li><strong><code>samplesheetToList(params.input, "${projectDir}/assets/schema_input.json")</code></strong>: Valida o arquivo de entrada contra nosso schema e retorna uma lista</li>
+<li><strong><code>Channel.fromList(...)</code></strong>: Converte a lista em um canal Nextflow</li>
 </ol>
-<p>This completes the implementation of input data validation using <code>samplesheetToList</code> and JSON schemas.</p>
-<p>Now that we've configured the input data schema, we can remove the temporary ignore setting we added earlier.</p>
-<h3 id="26-re-enable-input-validation">2.6. Re-enable input validation<a class="headerlink" href="#26-re-enable-input-validation" title="Permanent link">&para;</a></h3>
-<p>Open <code>nextflow.config</code> and remove the <code>ignoreParams</code> line from the <code>validation</code> block:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">After</label><label for="__tabbed_5_2">Before</label></div>
+<p>Isso completa a implementação da validação de dados de entrada usando <code>samplesheetToList</code> e schemas JSON.</p>
+<p>Agora que configuramos o schema de dados de entrada, podemos remover a configuração de ignorar temporária que adicionamos anteriormente.</p>
+<h3 id="26-reabilitar-validacao-de-entrada">2.6. Reabilitar validação de entrada<a class="headerlink" href="#26-reabilitar-validacao-de-entrada" title="Permanent link">&para;</a></h3>
+<p>Abra <code>nextflow.config</code> e remova a linha <code>ignoreParams</code> do bloco <code>validation</code>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">Depois</label><label for="__tabbed_5_2">Antes</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">nextflow.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-27-246">246</a></span>
@@ -4758,16 +4800,16 @@ We need to replace it with a simpler schema for our greetings use case.</p>
 </div>
 </div>
 </div>
-<p>Now nf-schema will validate both parameter types AND the input file contents.</p>
-<h3 id="27-test-input-validation">2.7. Test input validation<a class="headerlink" href="#27-test-input-validation" title="Permanent link">&para;</a></h3>
-<p>Let's verify that our validation works by testing both valid and invalid inputs.</p>
-<h4 id="271-test-with-valid-input">2.7.1. Test with valid input<a class="headerlink" href="#271-test-with-valid-input" title="Permanent link">&para;</a></h4>
-<p>First, confirm the pipeline runs successfully with valid input.
-Note that we no longer need <code>--validate_params false</code> since validation is working!</p>
+<p>Agora o nf-schema validará tanto os tipos de parâmetros QUANTO o conteúdo do arquivo de entrada.</p>
+<h3 id="27-testar-validacao-de-entrada">2.7. Testar validação de entrada<a class="headerlink" href="#27-testar-validacao-de-entrada" title="Permanent link">&para;</a></h3>
+<p>Vamos verificar que nossa validação funciona testando entradas válidas e inválidas.</p>
+<h4 id="271-testar-com-entrada-valida">2.7.1. Testar com entrada válida<a class="headerlink" href="#271-testar-com-entrada-valida" title="Permanent link">&para;</a></h4>
+<p>Primeiro, confirme que o pipeline executa com sucesso com entrada válida.
+Note que não precisamos mais de <code>--validate_params false</code> já que a validação está funcionando!</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>.<span class="w"> </span>--outdir<span class="w"> </span>core-hello-results<span class="w"> </span>-profile<span class="w"> </span>test,docker
 </code></pre></div>
 <details class="success">
-<summary>Command output</summary>
+<summary>Saída do comando</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="go">------------------------------------------------------</span>
 <a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="go">WARN: The following invalid input values have been detected:</span>
 <a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a>
@@ -4782,16 +4824,16 @@ Note that we no longer need <code>--validate_params false</code> since validatio
 <a id="__codelineno-30-12" name="__codelineno-30-12" href="#__codelineno-30-12"></a><span class="go">-[core/hello] Pipeline completed successfully-</span>
 </code></pre></div>
 </details>
-<p>Great! The pipeline runs successfully and validation passes silently.
-The warning about <code>--character</code> is just informational since it's not defined in the schema.
-If you want, use what you've learned to add validation for that parameter too!</p>
-<h4 id="272-test-with-invalid-input">2.7.2. Test with invalid input<a class="headerlink" href="#272-test-with-invalid-input" title="Permanent link">&para;</a></h4>
-<p>Passing validation is always a good feeling, but let's make sure that the validation will actually catch errors.</p>
-<p>To create a test file with an invalid column name, start by making a copy of the <code>greetings.csv</code> file:</p>
+<p>Ótimo! O pipeline executa com sucesso e a validação passa silenciosamente.
+O aviso sobre <code>--character</code> é apenas informativo já que não está definido no schema.
+Se quiser, use o que aprendeu para adicionar validação para esse parâmetro também!</p>
+<h4 id="272-testar-com-entrada-invalida">2.7.2. Testar com entrada inválida<a class="headerlink" href="#272-testar-com-entrada-invalida" title="Permanent link">&para;</a></h4>
+<p>Passar na validação é sempre uma boa sensação, mas vamos garantir que a validação realmente capturará erros.</p>
+<p>Para criar um arquivo de teste com um nome de coluna inválido, comece fazendo uma cópia do arquivo <code>greetings.csv</code>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>cp<span class="w"> </span>assets/greetings.csv<span class="w"> </span>assets/invalid_greetings.csv
 </code></pre></div>
-<p>Now open the file and change the name of the first column, in the header line, from <code>greeting</code> to <code>message</code>:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">After</label><label for="__tabbed_6_2">Before</label></div>
+<p>Agora abra o arquivo e mude o nome da primeira coluna, na linha de cabeçalho, de <code>greeting</code> para <code>message</code>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">Depois</label><label for="__tabbed_6_2">Antes</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">tmp_invalid_greetings.csv</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-32-1">1</a></span>
@@ -4815,12 +4857,12 @@ If you want, use what you've learned to add validation for that parameter too!</
 </div>
 </div>
 </div>
-<p>This doesn't match our schema, so the validation should throw an error.</p>
-<p>Try running the pipeline with this invalid input:</p>
+<p>Isso não corresponde ao nosso schema, então a validação deve lançar um erro.</p>
+<p>Tente executar o pipeline com esta entrada inválida:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>.<span class="w"> </span>--input<span class="w"> </span>assets/invalid_greetings.csv<span class="w"> </span>--outdir<span class="w"> </span>test-results<span class="w"> </span>-profile<span class="w"> </span>docker
 </code></pre></div>
 <details class="failure">
-<summary>Command output</summary>
+<summary>Saída do comando</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="go">N E X T F L O W   ~  version 24.10.4</span>
 <a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>
 <a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a><span class="go">Launching `./main.nf` [trusting_ochoa] DSL2 - revision: b9e9b3b8de</span>
@@ -4858,23 +4900,23 @@ If you want, use what you've learned to add validation for that parameter too!</
 <a id="__codelineno-35-35" name="__codelineno-35-35" href="#__codelineno-35-35"></a><span class="go"> -- Check script &#39;subworkflows/nf-core/utils_nfschema_plugin/main.nf&#39; at line: 68 or see &#39;.nextflow.log&#39; file for more details</span>
 </code></pre></div>
 </details>
-<p>Perfect! The validation caught the error and provided a clear, helpful error message pointing to:</p>
+<p>Perfeito! A validação capturou o erro e forneceu uma mensagem de erro clara e útil apontando para:</p>
 <ul>
-<li>Which file failed validation</li>
-<li>Which entry (row 1, the first data row) has the problem</li>
-<li>What the specific problem is (missing required field <code>greeting</code>)</li>
+<li>Qual arquivo falhou na validação</li>
+<li>Qual entrada (linha 1, a primeira linha de dados) tem o problema</li>
+<li>Qual é o problema específico (campo obrigatório <code>greeting</code> ausente)</li>
 </ul>
-<p>The schema validation ensures that input files have the correct structure before the pipeline runs, saving time and preventing confusing errors later in execution.</p>
-<p>If you'd like to practice this, feel free to create other greetings input files that violate the schema in other fun ways.</p>
-<h3 id="takeaway_1">Takeaway<a class="headerlink" href="#takeaway_1" title="Permanent link">&para;</a></h3>
-<p>You've implemented and tested both parameter validation and input data validation. Your pipeline now validates inputs before execution, providing fast feedback and clear error messages.</p>
+<p>A validação do schema garante que os arquivos de entrada tenham a estrutura correta antes do pipeline executar, economizando tempo e prevenindo erros confusos mais tarde na execução.</p>
+<p>Se quiser praticar isso, sinta-se livre para criar outros arquivos de entrada de saudações que violem o schema de outras maneiras divertidas.</p>
+<h3 id="conclusao_1">Conclusão<a class="headerlink" href="#conclusao_1" title="Permanent link">&para;</a></h3>
+<p>Você implementou e testou tanto a validação de parâmetros quanto a validação de dados de entrada. Seu pipeline agora valida entradas antes da execução, fornecendo feedback rápido e mensagens de erro claras.</p>
 <div class="admonition tip">
-<p class="admonition-title">Further reading</p>
-<p>To learn more about advanced validation features and patterns, check out the <a href="https://nextflow-io.github.io/nf-schema/latest/">nf-schema documentation</a>. The <code>nf-core pipelines schema build</code> command provides an interactive GUI for managing complex schemas.</p>
+<p class="admonition-title">Leitura adicional</p>
+<p>Para aprender mais sobre recursos e padrões avançados de validação, consulte a <a href="https://nextflow-io.github.io/nf-schema/latest/">documentação do nf-schema</a>. O comando <code>nf-core pipelines schema build</code> fornece uma GUI interativa para gerenciar schemas complexos.</p>
 </div>
-<h3 id="whats-next_1">What's next?<a class="headerlink" href="#whats-next_1" title="Permanent link">&para;</a></h3>
-<p>You've completed all five parts of the Hello nf-core training course!</p>
-<p>Continue to the <a href="summary.md">Summary</a> to reflect on what you've built and learned.</p><style type="text/css">.quiz {
+<h3 id="proximos-passos_1">Próximos passos<a class="headerlink" href="#proximos-passos_1" title="Permanent link">&para;</a></h3>
+<p>Você completou todas as cinco partes do curso de treinamento Hello nf-core!</p>
+<p>Continue para o <a href="summary.md">Resumo</a> para refletir sobre o que você construiu e aprendeu.</p><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
   margin: 1rem 0;
@@ -6391,6 +6433,9 @@ window.mkdocsQuizConfig = {
 
 
 
+  
+  
+
 
 
   
@@ -6421,7 +6466,7 @@ window.mkdocsQuizConfig = {
       <nav class="md-footer__inner md-grid" aria-label="Rodapé" >
         
           
-          <a href="../04_make_module/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Part 4: Make an nf-core module">
+          <a href="../04_make_module/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Parte 4: Criar um módulo nf-core">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -6431,20 +6476,20 @@ window.mkdocsQuizConfig = {
                 Anterior
               </span>
               <div class="md-ellipsis">
-                Part 4: Make an nf-core module
+                Parte 4: Criar um módulo nf-core
               </div>
             </div>
           </a>
         
         
           
-          <a href="../next_steps/" class="md-footer__link md-footer__link--next" aria-label="Próximo: Course summary">
+          <a href="../next_steps/" class="md-footer__link md-footer__link--next" aria-label="Próximo: Resumo do curso">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Próximo
               </span>
               <div class="md-ellipsis">
-                Course summary
+                Resumo do curso
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -6521,8 +6566,8 @@ window.mkdocsQuizConfig = {
   
 
 
-<h4>Cookie consent</h4>
-<p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our training materials better. Find out more on <a href="https://seqera.io/privacy-policy/#cookies" target="_blank" rel="noopener">how we use cookies</a>.</p>
+<h4>Consentimento de cookies</h4>
+<p>Usamos cookies para reconhecer suas visitas repetidas e preferências, bem como para medir a eficácia da nossa documentação e se os usuários encontram o que procuram. Com seu consentimento, você nos ajuda a melhorar nossos materiais de treinamento. Saiba mais sobre <a href="https://seqera.io/privacy-policy/#cookies" target="_blank" rel="noopener">como usamos cookies</a>.</p>
 <input class="md-toggle" type="checkbox" id="__settings" >
 <div class="md-consent__settings">
   <ul class="task-list">
@@ -6606,12 +6651,16 @@ window.mkdocsQuizConfig = {
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": {"alias": true, "provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": {"alias": true, "provider": "mike"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
-        <script src="../../../assets/javascripts/posthog.js"></script>
+        <script src="../../assets/javascripts/consent-sync.js"></script>
+      
+        <script src="../../assets/javascripts/posthog.js"></script>
+      
+        <script src="../../assets/javascripts/language-picker.js"></script>
       
     
   </body>

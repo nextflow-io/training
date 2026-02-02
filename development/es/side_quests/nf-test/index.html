@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://training.nextflow.io/0.dev/es/side_quests/nf-test/">
+        <link rel="canonical" href="https://training.nextflow.io/es/side_quests/nf-test/">
       
       
         <link rel="prev" href="../essential_scripting_patterns/">
@@ -18,33 +18,41 @@
       
       
         
-          <link rel="alternate" href="../../../side_quests/nf-test/" hreflang="en">
+          <link rel="alternate" href="/" hreflang="en">
         
-          <link rel="alternate" href="../../../pt/side_quests/nf-test/" hreflang="pt">
+          <link rel="alternate" href="/de/" hreflang="de">
         
-          <link rel="alternate" href="./" hreflang="es">
+          <link rel="alternate" href="/es/" hreflang="es">
         
-          <link rel="alternate" href="../../../fr/side_quests/nf-test/" hreflang="fr">
+          <link rel="alternate" href="/fr/" hreflang="fr">
         
-          <link rel="alternate" href="../../../it/side_quests/nf-test/" hreflang="it">
+          <link rel="alternate" href="/hi/" hreflang="hi">
         
-          <link rel="alternate" href="../../../ko/side_quests/nf-test/" hreflang="ko">
+          <link rel="alternate" href="/it/" hreflang="it">
+        
+          <link rel="alternate" href="/ko/" hreflang="ko">
+        
+          <link rel="alternate" href="/pl/" hreflang="pl">
+        
+          <link rel="alternate" href="/pt/" hreflang="pt">
+        
+          <link rel="alternate" href="/tr/" hreflang="tr">
         
       
       
-      <link rel="icon" href="../../../assets/img/nextflow-icon.png">
+      <link rel="icon" href="../../assets/img/nextflow-icon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
     
     
       
-        <title>Testing with nf-test - training.nextflow.io</title>
+        <title>Pruebas con nf-test - training.nextflow.io</title>
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
   
@@ -108,11 +116,11 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/fonts.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/fonts.css">
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/extra.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/extra.css">
     
-    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
   
@@ -147,7 +155,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#testing-with-nf-test" class="md-skip">
+        <a href="#pruebas-con-nf-test" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -167,9 +175,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Cabecera">
-    <a href="../../" title="training.nextflow.io" class="md-header__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
+    <a href="../.." title="training.nextflow.io" class="md-header__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
       
-  <img src="../../../assets/img/nextflow_logo_dark.png" alt="logo">
+  <img src="../../assets/img/nextflow_logo_dark.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -186,7 +194,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Testing with nf-test
+              Pruebas con nf-test
             
           </span>
         </div>
@@ -233,38 +241,62 @@
       <ul class="md-select__list">
         
           <li class="md-select__item">
-            <a href="../../../side_quests/nf-test/" hreflang="en" class="md-select__link">
+            <a href="/" hreflang="en" class="md-select__link">
               English
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../pt/side_quests/nf-test/" hreflang="pt" class="md-select__link">
-              Português
+            <a href="/de/" hreflang="de" class="md-select__link">
+              deutsch
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="./" hreflang="es" class="md-select__link">
-              Español
+            <a href="/es/" hreflang="es" class="md-select__link">
+              español
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../fr/side_quests/nf-test/" hreflang="fr" class="md-select__link">
-              Français
+            <a href="/fr/" hreflang="fr" class="md-select__link">
+              français
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../it/side_quests/nf-test/" hreflang="it" class="md-select__link">
-              Italiano
+            <a href="/hi/" hreflang="hi" class="md-select__link">
+              हिन्दी
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../ko/side_quests/nf-test/" hreflang="ko" class="md-select__link">
-              Korean
+            <a href="/it/" hreflang="it" class="md-select__link">
+              italiano
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/ko/" hreflang="ko" class="md-select__link">
+              한국어
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/pl/" hreflang="pl" class="md-select__link">
+              Polski
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/pt/" hreflang="pt" class="md-select__link">
+              português
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/tr/" hreflang="tr" class="md-select__link">
+              Türkçe
             </a>
           </li>
         
@@ -384,9 +416,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../" title="training.nextflow.io" class="md-nav__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
+    <a href="../.." title="training.nextflow.io" class="md-nav__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
       
-  <img src="../../../assets/img/nextflow_logo_dark.png" alt="logo">
+  <img src="../../assets/img/nextflow_logo_dark.png" alt="logo">
 
     </a>
     training.nextflow.io
@@ -413,14 +445,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../" class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Home
+    Inicio
   
 
     
@@ -522,7 +554,7 @@
   <span class="md-ellipsis">
     
   
-    Getting started
+    Primeros pasos
   
 
     
@@ -550,7 +582,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run basic operations
+    Parte 1: Ejecutar operaciones básicas
   
 
     
@@ -578,7 +610,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Run real pipelines
+    Parte 2: Ejecutar pipelines reales
   
 
     
@@ -606,7 +638,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Run configuration
+    Parte 3: Configuración de ejecución
   
 
     
@@ -634,7 +666,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    Resumen del curso
   
 
     
@@ -662,7 +694,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Encuesta de retroalimentación
   
 
     
@@ -772,7 +804,7 @@
   <span class="md-ellipsis">
     
   
-    Getting started
+    Comenzando
   
 
     
@@ -800,7 +832,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Hello World
+    Parte 1: Hello World
   
 
     
@@ -828,7 +860,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Hello Channels
+    Parte 2: Hello Channels
   
 
     
@@ -856,7 +888,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Hello Workflow
+    Parte 3: Hello Workflow
   
 
     
@@ -884,7 +916,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Hello Modules
+    Parte 4: Hello Modules
   
 
     
@@ -912,7 +944,7 @@
   <span class="md-ellipsis">
     
   
-    Part 5: Hello Containers
+    Parte 5: Hello Containers
   
 
     
@@ -940,7 +972,7 @@
   <span class="md-ellipsis">
     
   
-    Part 6: Hello Config
+    Parte 6: Hello Config
   
 
     
@@ -968,7 +1000,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    Resumen del curso
   
 
     
@@ -996,7 +1028,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Encuesta de retroalimentación
   
 
     
@@ -1106,7 +1138,7 @@
   <span class="md-ellipsis">
     
   
-    Getting started
+    Primeros pasos
   
 
     
@@ -1134,7 +1166,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run a demo pipeline
+    Parte 1: Ejecutar un pipeline de demostración
   
 
     
@@ -1162,7 +1194,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Rewrite Hello for nf-core
+    Parte 2: Reescribir Hello para nf-core
   
 
     
@@ -1190,7 +1222,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Use an nf-core module
+    Parte 3: Usar un módulo nf-core
   
 
     
@@ -1218,7 +1250,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Make an nf-core module
+    Parte 4: Crear un módulo nf-core
   
 
     
@@ -1246,7 +1278,7 @@
   <span class="md-ellipsis">
     
   
-    Part 5: Input validation
+    Parte 5: Validación de entradas
   
 
     
@@ -1274,7 +1306,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    Resumen del curso
   
 
     
@@ -1302,7 +1334,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Encuesta de retroalimentación
   
 
     
@@ -1348,7 +1380,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Science
+    Nextflow para Ciencia
   
 
     
@@ -1364,7 +1396,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Nextflow for Science
+    Nextflow para Ciencia
   
 
           </label>
@@ -1384,7 +1416,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Science
+    Nextflow para Ciencia
   
 
     
@@ -1423,7 +1455,7 @@
   <span class="md-ellipsis">
     
   
-    Genomics
+    Nextflow para Genómica
   
 
     
@@ -1439,7 +1471,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Genomics
+    Nextflow para Genómica
   
 
           </label>
@@ -1459,7 +1491,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Genomics
+    Nextflow para Genómica
   
 
     
@@ -1487,7 +1519,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    Orientación
   
 
     
@@ -1515,7 +1547,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Per-sample variant calling
+    Parte 1: Llamado de variantes por muestra
   
 
     
@@ -1543,7 +1575,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Joint calling on a cohort
+    Parte 2: Llamado conjunto en una cohorte
   
 
     
@@ -1571,7 +1603,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Moving code into modules
+    Parte 3: Mover código a módulos
   
 
     
@@ -1599,7 +1631,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Adding tests
+    Parte 4: Agregando pruebas
   
 
     
@@ -1627,7 +1659,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Encuesta de retroalimentación
   
 
     
@@ -1655,7 +1687,7 @@
   <span class="md-ellipsis">
     
   
-    Next Steps
+    Próximos Pasos
   
 
     
@@ -1702,7 +1734,7 @@
   <span class="md-ellipsis">
     
   
-    RNAseq
+    Nextflow para RNAseq
   
 
     
@@ -1718,7 +1750,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    RNAseq
+    Nextflow para RNAseq
   
 
           </label>
@@ -1738,7 +1770,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for RNAseq
+    Nextflow para RNAseq
   
 
     
@@ -1766,7 +1798,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    Orientación
   
 
     
@@ -1794,7 +1826,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Method overview and manual testing
+    Parte 1: Descripción general del método y pruebas manuales
   
 
     
@@ -1822,7 +1854,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Single-sample implementation
+    Parte 2: Implementación de muestra única
   
 
     
@@ -1850,7 +1882,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Multi-sample paired-end implementation
+    Parte 3: Implementación con múltiples muestras de extremos pareados
   
 
     
@@ -1878,7 +1910,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Encuesta de retroalimentación
   
 
     
@@ -1906,7 +1938,7 @@
   <span class="md-ellipsis">
     
   
-    Next Steps
+    Próximos Pasos
   
 
     
@@ -1953,7 +1985,7 @@
   <span class="md-ellipsis">
     
   
-    Imaging
+    Nextflow run for Imaging
   
 
     
@@ -1969,7 +2001,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Imaging
+    Nextflow run for Imaging
   
 
           </label>
@@ -2017,7 +2049,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    Orientación
   
 
     
@@ -2045,7 +2077,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run basic operations
+    Parte 1: Ejecutar operaciones básicas
   
 
     
@@ -2073,7 +2105,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Run nf-core/molkart
+    Parte 2: Ejecutar nf-core/molkart
   
 
     
@@ -2101,7 +2133,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Organizing inputs
+    Parte 3: Organización de entradas
   
 
     
@@ -2129,7 +2161,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Configuration
+    Parte 4: Configuración
   
 
     
@@ -2157,7 +2189,7 @@
   <span class="md-ellipsis">
     
   
-    Survey
+    Encuesta
   
 
     
@@ -2185,7 +2217,7 @@
   <span class="md-ellipsis">
     
   
-    Next steps
+    Próximos pasos
   
 
     
@@ -2241,7 +2273,7 @@
   <span class="md-ellipsis">
     
   
-    Side Quests
+    Misiones Secundarias
   
 
     
@@ -2257,7 +2289,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Side Quests
+    Misiones Secundarias
   
 
           </label>
@@ -2277,7 +2309,7 @@
   <span class="md-ellipsis">
     
   
-    Side Quests
+    Misiones Secundarias
   
 
     
@@ -2305,7 +2337,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    Orientación
   
 
     
@@ -2333,7 +2365,7 @@
   <span class="md-ellipsis">
     
   
-    Development Environment
+    Entorno de Desarrollo
   
 
     
@@ -2361,7 +2393,7 @@
   <span class="md-ellipsis">
     
   
-    Metadata and meta maps
+    Metadatos y mapas de metadatos
   
 
     
@@ -2389,7 +2421,7 @@
   <span class="md-ellipsis">
     
   
-    File input processing
+    Procesamiento de archivos de entrada
   
 
     
@@ -2417,7 +2449,7 @@
   <span class="md-ellipsis">
     
   
-    Splitting and Grouping
+    División y Agrupación
   
 
     
@@ -2445,7 +2477,7 @@
   <span class="md-ellipsis">
     
   
-    Workflows of Workflows
+    Flujos de trabajo de flujos de trabajo
   
 
     
@@ -2473,7 +2505,7 @@
   <span class="md-ellipsis">
     
   
-    Debugging Workflows
+    Depuración de Flujos de Trabajo
   
 
     
@@ -2501,7 +2533,7 @@
   <span class="md-ellipsis">
     
   
-    Essential Nextflow Scripting Patterns
+    Patrones Esenciales de Scripting en Nextflow
   
 
     
@@ -2538,7 +2570,7 @@
   <span class="md-ellipsis">
     
   
-    Testing with nf-test
+    Pruebas con nf-test
   
 
     
@@ -2556,7 +2588,7 @@
   <span class="md-ellipsis">
     
   
-    Testing with nf-test
+    Pruebas con nf-test
   
 
     
@@ -2576,40 +2608,40 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#learning-goals" class="md-nav__link">
+  <a href="#objetivos-de-aprendizaje" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Learning goals
+        Objetivos de aprendizaje
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#prerequisites" class="md-nav__link">
+  <a href="#requisitos-previos" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Prerequisites
+        Requisitos previos
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#0-get-started" class="md-nav__link">
+  <a href="#0-comenzar" class="md-nav__link">
     <span class="md-ellipsis">
       
-        0. Get started
+        0. Comenzar
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="0. Get started">
+    <nav class="md-nav" aria-label="0. Comenzar">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#open-the-training-codespace" class="md-nav__link">
+  <a href="#abrir-el-codespace-de-entrenamiento" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Open the training codespace
+        Abrir el codespace de entrenamiento
       
     </span>
   </a>
@@ -2617,10 +2649,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#move-into-the-project-directory" class="md-nav__link">
+  <a href="#moverse-al-directorio-del-proyecto" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Move into the project directory
+        Moverse al directorio del proyecto
       
     </span>
   </a>
@@ -2628,10 +2660,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#review-the-materials" class="md-nav__link">
+  <a href="#revisar-los-materiales" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Review the materials
+        Revisar los materiales
       
     </span>
   </a>
@@ -2639,10 +2671,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#run-the-workflow" class="md-nav__link">
+  <a href="#ejecutar-el-flujo-de-trabajo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Run the workflow
+        Ejecutar el flujo de trabajo
       
     </span>
   </a>
@@ -2650,10 +2682,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#review-the-assignment" class="md-nav__link">
+  <a href="#revisar-la-asignacion" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Review the assignment
+        Revisar la asignación
       
     </span>
   </a>
@@ -2661,10 +2693,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#readiness-checklist" class="md-nav__link">
+  <a href="#lista-de-verificacion-de-preparacion" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Readiness checklist
+        Lista de verificación de preparación
       
     </span>
   </a>
@@ -2675,22 +2707,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#1-initialize-nf-test" class="md-nav__link">
+  <a href="#1-inicializar-nf-test" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Initialize nf-test
+        1. Inicializar nf-test
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Initialize nf-test">
+    <nav class="md-nav" aria-label="1. Inicializar nf-test">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11-generate-an-nf-test" class="md-nav__link">
+  <a href="#11-generar-un-nf-test" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1. Generate an nf-test
+        1.1. Generar un nf-test
       
     </span>
   </a>
@@ -2698,10 +2730,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#a-note-on-test-names" class="md-nav__link">
+  <a href="#una-nota-sobre-los-nombres-de-las-pruebas" class="md-nav__link">
     <span class="md-ellipsis">
       
-        A Note on Test Names
+        Una nota sobre los nombres de las pruebas
       
     </span>
   </a>
@@ -2709,10 +2741,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#12-run-the-test" class="md-nav__link">
+  <a href="#12-ejecutar-la-prueba" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2. Run the test
+        1.2. Ejecutar la prueba
       
     </span>
   </a>
@@ -2720,10 +2752,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#13-add-assertions" class="md-nav__link">
+  <a href="#13-agregar-aserciones" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.3. Add assertions
+        1.3. Agregar aserciones
       
     </span>
   </a>
@@ -2731,10 +2763,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#14-test-the-output" class="md-nav__link">
+  <a href="#14-probar-la-salida" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.4. Test the output
+        1.4. Probar la salida
       
     </span>
   </a>
@@ -2742,10 +2774,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway" class="md-nav__link">
+  <a href="#conclusion" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        Conclusión
       
     </span>
   </a>
@@ -2753,10 +2785,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next" class="md-nav__link">
+  <a href="#que-sigue" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        ¿Qué sigue?
       
     </span>
   </a>
@@ -2767,22 +2799,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#2-test-a-nextflow-process" class="md-nav__link">
+  <a href="#2-probar-un-proceso-de-nextflow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Test a Nextflow process
+        2. Probar un proceso de Nextflow
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. Test a Nextflow process">
+    <nav class="md-nav" aria-label="2. Probar un proceso de Nextflow">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#21-test-the-sayhello-process" class="md-nav__link">
+  <a href="#21-probar-el-proceso-sayhello" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1. Test the sayHello process
+        2.1. Probar el proceso sayHello
       
     </span>
   </a>
@@ -2790,10 +2822,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#22-check-out-the-snapshot-created-by-the-test" class="md-nav__link">
+  <a href="#22-revisar-la-instantanea-creada-por-la-prueba" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2. Check out the snapshot created by the test
+        2.2. Revisar la instantánea creada por la prueba
       
     </span>
   </a>
@@ -2801,10 +2833,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#23-alternative-to-snapshots-direct-content-assertions" class="md-nav__link">
+  <a href="#23-alternativa-a-las-instantaneas-aserciones-de-contenido-directo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.3. Alternative to Snapshots: Direct Content Assertions
+        2.3. Alternativa a las instantáneas: aserciones de contenido directo
       
     </span>
   </a>
@@ -2812,10 +2844,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#24-test-the-converttoupper-process" class="md-nav__link">
+  <a href="#24-probar-el-proceso-converttoupper" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.4. Test the convertToUpper process
+        2.4. Probar el proceso convertToUpper
       
     </span>
   </a>
@@ -2823,10 +2855,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway_1" class="md-nav__link">
+  <a href="#conclusion_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        Conclusión
       
     </span>
   </a>
@@ -2834,10 +2866,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next_1" class="md-nav__link">
+  <a href="#que-sigue_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        ¿Qué sigue?
       
     </span>
   </a>
@@ -2848,22 +2880,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#3-run-tests-for-the-entire-repository" class="md-nav__link">
+  <a href="#3-ejecutar-pruebas-para-todo-el-repositorio" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Run tests for the entire repository
+        3. Ejecutar pruebas para todo el repositorio
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. Run tests for the entire repository">
+    <nav class="md-nav" aria-label="3. Ejecutar pruebas para todo el repositorio">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#31-run-nf-test-on-the-entire-repo" class="md-nav__link">
+  <a href="#31-ejecutar-nf-test-en-todo-el-repositorio" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1. Run nf-test on the entire repo
+        3.1. Ejecutar nf-test en todo el repositorio
       
     </span>
   </a>
@@ -2874,22 +2906,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#summary" class="md-nav__link">
+  <a href="#resumen" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Summary
+        Resumen
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Summary">
+    <nav class="md-nav" aria-label="Resumen">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#key-patterns" class="md-nav__link">
+  <a href="#patrones-clave" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Key patterns
+        Patrones clave
       
     </span>
   </a>
@@ -2897,10 +2929,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#additional-resources" class="md-nav__link">
+  <a href="#recursos-adicionales" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Additional resources
+        Recursos adicionales
       
     </span>
   </a>
@@ -2911,10 +2943,10 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#whats-next_2" class="md-nav__link">
+  <a href="#que-sigue_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        ¿Qué sigue?
       
     </span>
   </a>
@@ -3147,7 +3179,7 @@
   <span class="md-ellipsis">
     
   
-    Training Collections
+    Index
   
 
     
@@ -3163,7 +3195,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Training Collections
+    Index
   
 
           </label>
@@ -3183,7 +3215,7 @@
   <span class="md-ellipsis">
     
   
-    Training Collections
+    Index
   
 
     
@@ -3211,7 +3243,7 @@
   <span class="md-ellipsis">
     
   
-    The Architect's Toolkit I
+    Architects toolkit 1
   
 
     
@@ -3293,7 +3325,7 @@
   <span class="md-ellipsis">
     
   
-    Getting help
+    Obtener ayuda
   
 
     
@@ -3332,7 +3364,7 @@
   <span class="md-ellipsis">
     
   
-    Training environment
+    Opciones de entorno
   
 
     
@@ -3348,7 +3380,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Training environment
+    Opciones de entorno
   
 
           </label>
@@ -3368,7 +3400,7 @@
   <span class="md-ellipsis">
     
   
-    Environment options
+    Opciones de entorno
   
 
     
@@ -3424,7 +3456,7 @@
   <span class="md-ellipsis">
     
   
-    Local Devcontainers
+    Devcontainers locales
   
 
     
@@ -3452,7 +3484,7 @@
   <span class="md-ellipsis">
     
   
-    Manual installation
+    Instalación manual
   
 
     
@@ -3488,7 +3520,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow versions
+    Versiones de Nextflow
   
 
     
@@ -3516,7 +3548,7 @@
   <span class="md-ellipsis">
     
   
-    The Hello pipeline
+    El pipeline Hello
   
 
     
@@ -3558,40 +3590,40 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#learning-goals" class="md-nav__link">
+  <a href="#objetivos-de-aprendizaje" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Learning goals
+        Objetivos de aprendizaje
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#prerequisites" class="md-nav__link">
+  <a href="#requisitos-previos" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Prerequisites
+        Requisitos previos
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#0-get-started" class="md-nav__link">
+  <a href="#0-comenzar" class="md-nav__link">
     <span class="md-ellipsis">
       
-        0. Get started
+        0. Comenzar
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="0. Get started">
+    <nav class="md-nav" aria-label="0. Comenzar">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#open-the-training-codespace" class="md-nav__link">
+  <a href="#abrir-el-codespace-de-entrenamiento" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Open the training codespace
+        Abrir el codespace de entrenamiento
       
     </span>
   </a>
@@ -3599,10 +3631,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#move-into-the-project-directory" class="md-nav__link">
+  <a href="#moverse-al-directorio-del-proyecto" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Move into the project directory
+        Moverse al directorio del proyecto
       
     </span>
   </a>
@@ -3610,10 +3642,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#review-the-materials" class="md-nav__link">
+  <a href="#revisar-los-materiales" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Review the materials
+        Revisar los materiales
       
     </span>
   </a>
@@ -3621,10 +3653,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#run-the-workflow" class="md-nav__link">
+  <a href="#ejecutar-el-flujo-de-trabajo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Run the workflow
+        Ejecutar el flujo de trabajo
       
     </span>
   </a>
@@ -3632,10 +3664,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#review-the-assignment" class="md-nav__link">
+  <a href="#revisar-la-asignacion" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Review the assignment
+        Revisar la asignación
       
     </span>
   </a>
@@ -3643,10 +3675,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#readiness-checklist" class="md-nav__link">
+  <a href="#lista-de-verificacion-de-preparacion" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Readiness checklist
+        Lista de verificación de preparación
       
     </span>
   </a>
@@ -3657,22 +3689,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#1-initialize-nf-test" class="md-nav__link">
+  <a href="#1-inicializar-nf-test" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Initialize nf-test
+        1. Inicializar nf-test
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Initialize nf-test">
+    <nav class="md-nav" aria-label="1. Inicializar nf-test">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11-generate-an-nf-test" class="md-nav__link">
+  <a href="#11-generar-un-nf-test" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1. Generate an nf-test
+        1.1. Generar un nf-test
       
     </span>
   </a>
@@ -3680,10 +3712,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#a-note-on-test-names" class="md-nav__link">
+  <a href="#una-nota-sobre-los-nombres-de-las-pruebas" class="md-nav__link">
     <span class="md-ellipsis">
       
-        A Note on Test Names
+        Una nota sobre los nombres de las pruebas
       
     </span>
   </a>
@@ -3691,10 +3723,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#12-run-the-test" class="md-nav__link">
+  <a href="#12-ejecutar-la-prueba" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2. Run the test
+        1.2. Ejecutar la prueba
       
     </span>
   </a>
@@ -3702,10 +3734,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#13-add-assertions" class="md-nav__link">
+  <a href="#13-agregar-aserciones" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.3. Add assertions
+        1.3. Agregar aserciones
       
     </span>
   </a>
@@ -3713,10 +3745,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#14-test-the-output" class="md-nav__link">
+  <a href="#14-probar-la-salida" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.4. Test the output
+        1.4. Probar la salida
       
     </span>
   </a>
@@ -3724,10 +3756,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway" class="md-nav__link">
+  <a href="#conclusion" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        Conclusión
       
     </span>
   </a>
@@ -3735,10 +3767,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next" class="md-nav__link">
+  <a href="#que-sigue" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        ¿Qué sigue?
       
     </span>
   </a>
@@ -3749,22 +3781,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#2-test-a-nextflow-process" class="md-nav__link">
+  <a href="#2-probar-un-proceso-de-nextflow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Test a Nextflow process
+        2. Probar un proceso de Nextflow
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. Test a Nextflow process">
+    <nav class="md-nav" aria-label="2. Probar un proceso de Nextflow">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#21-test-the-sayhello-process" class="md-nav__link">
+  <a href="#21-probar-el-proceso-sayhello" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1. Test the sayHello process
+        2.1. Probar el proceso sayHello
       
     </span>
   </a>
@@ -3772,10 +3804,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#22-check-out-the-snapshot-created-by-the-test" class="md-nav__link">
+  <a href="#22-revisar-la-instantanea-creada-por-la-prueba" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2. Check out the snapshot created by the test
+        2.2. Revisar la instantánea creada por la prueba
       
     </span>
   </a>
@@ -3783,10 +3815,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#23-alternative-to-snapshots-direct-content-assertions" class="md-nav__link">
+  <a href="#23-alternativa-a-las-instantaneas-aserciones-de-contenido-directo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.3. Alternative to Snapshots: Direct Content Assertions
+        2.3. Alternativa a las instantáneas: aserciones de contenido directo
       
     </span>
   </a>
@@ -3794,10 +3826,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#24-test-the-converttoupper-process" class="md-nav__link">
+  <a href="#24-probar-el-proceso-converttoupper" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.4. Test the convertToUpper process
+        2.4. Probar el proceso convertToUpper
       
     </span>
   </a>
@@ -3805,10 +3837,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway_1" class="md-nav__link">
+  <a href="#conclusion_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        Conclusión
       
     </span>
   </a>
@@ -3816,10 +3848,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next_1" class="md-nav__link">
+  <a href="#que-sigue_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        ¿Qué sigue?
       
     </span>
   </a>
@@ -3830,22 +3862,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#3-run-tests-for-the-entire-repository" class="md-nav__link">
+  <a href="#3-ejecutar-pruebas-para-todo-el-repositorio" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Run tests for the entire repository
+        3. Ejecutar pruebas para todo el repositorio
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. Run tests for the entire repository">
+    <nav class="md-nav" aria-label="3. Ejecutar pruebas para todo el repositorio">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#31-run-nf-test-on-the-entire-repo" class="md-nav__link">
+  <a href="#31-ejecutar-nf-test-en-todo-el-repositorio" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1. Run nf-test on the entire repo
+        3.1. Ejecutar nf-test en todo el repositorio
       
     </span>
   </a>
@@ -3856,22 +3888,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#summary" class="md-nav__link">
+  <a href="#resumen" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Summary
+        Resumen
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Summary">
+    <nav class="md-nav" aria-label="Resumen">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#key-patterns" class="md-nav__link">
+  <a href="#patrones-clave" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Key patterns
+        Patrones clave
       
     </span>
   </a>
@@ -3879,10 +3911,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#additional-resources" class="md-nav__link">
+  <a href="#recursos-adicionales" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Additional resources
+        Recursos adicionales
       
     </span>
   </a>
@@ -3893,10 +3925,10 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#whats-next_2" class="md-nav__link">
+  <a href="#que-sigue_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        ¿Qué sigue?
       
     </span>
   </a>
@@ -4140,100 +4172,110 @@
                 
                   
 
+ 
+<a
+  href="https://github.com/nextflow-io/training/edit/master/docs/side_quests/nf-test.md"
+  title="Editar esta página"
+  class="md-content__button md-icon"
+  rel="edit"
+>
+   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+</a>
+   
+<a
+  href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md"
+  title="Improve translation"
+  class="md-content__button md-icon"
+>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 1H3c-1.1 0-2 .9-2 2v12l3-3h5v-1c0-2.2 1.79-4 4-4V3c0-1.1-.9-2-2-2m0 3H9.5c-.34 1.19-.96 2.3-1.82 3.26l-.02.02 1.26 1.25-.37 1.01L7 8l-2.5 2.5-.69-.73 2.53-2.49A8.6 8.6 0 0 1 4.86 5h.99c.31.6.69 1.17 1.15 1.68A7.7 7.7 0 0 0 8.57 4H3V3h3.5V2h1v1H11zm10 5h-8c-1.1 0-2 .9-2 2v7c0 1.1.9 2 2 2h7l3 3V11c0-1.1-.9-2-2-2m-1.37 10-.85-2.25h-3.56L14.38 19h-1.5l3.37-9h1.5l3.38 9zM17 12l1.22 3.25h-2.43z"/></svg>
+</a>
+ 
 
-  
-    <a href="https://github.com/nextflow-io/training/edit/master/docs/side_quests/nf-test.md" title="Editar esta página" class="md-content__button md-icon" rel="edit">
-      
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
-    </a>
-  
-  
-
-
-<h1 id="testing-with-nf-test">Testing with nf-test<a class="headerlink" href="#testing-with-nf-test" title="Permanent link">&para;</a></h1>
-<p>Being able to systematically test that every part of your workflow is doing what it's supposed to do is critical for reproducibility and long-term maintenance, and can be a huge help during the development process.</p>
-<p>Let's take a minute to talk about why testing is so important. If you're developing a workflow, one of the first things you will do is grab some test data that you know is valid and should produce a result. You add the first process to the pipeline and wire it up to your inputs to make it work. Then, to check it's all working, so you run it on the test data. Assuming that works, you move on to the next process and run the test data again. You repeat this process until you have a pipeline that you're happy with.</p>
-<p>Then, maybe you add a simple true or false parameter such as <code>--skip_process</code>. Now you must run the pipeline twice, once with each parameter to make sure it works as expected. But wait, how do we check if the <code>--skip_process</code> actually skips the process? We have to dig into the outputs or check the log files! This is a pain and prone to error.</p>
-<p>As you develop your pipeline, it will quickly become so complex that manually testing every iteration is slow and error prone. Furthermore, if you do find an error it will be very difficult to pin down exactly where in your pipeline the error is coming from. This is where testing comes in.</p>
-<p>Testing allows you to systematically check that every part of your pipeline is working as expected. The benefits to a developer of well written tests are huge:</p>
+<h1 id="pruebas-con-nf-test">Pruebas con nf-test<a class="headerlink" href="#pruebas-con-nf-test" title="Permanent link">&para;</a></h1>
+<p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Traducción asistida por IA - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">más información y sugerencias</a></span></p>
+<p>Poder probar sistemáticamente que cada parte de su flujo de trabajo está haciendo lo que se supone que debe hacer es fundamental para la reproducibilidad y el mantenimiento a largo plazo, y puede ser de gran ayuda durante el proceso de desarrollo.</p>
+<p>Tomemos un minuto para hablar sobre por qué las pruebas son tan importantes. Si está desarrollando un flujo de trabajo, una de las primeras cosas que hará es tomar algunos datos de prueba que sabe que son válidos y que deberían producir un resultado. Agrega el primer proceso al pipeline y lo conecta a sus entradas para que funcione. Luego, para verificar que todo funciona, lo ejecuta con los datos de prueba. Suponiendo que funcione, pasa al siguiente proceso y ejecuta los datos de prueba nuevamente. Repite este proceso hasta que tiene un pipeline con el que está satisfecho.</p>
+<p>Luego, tal vez agregue un parámetro simple de verdadero o falso como <code>--skip_process</code>. Ahora debe ejecutar el pipeline dos veces, una con cada parámetro para asegurarse de que funcione como se espera. Pero espere, ¿cómo verificamos si <code>--skip_process</code> realmente omite el proceso? ¡Tenemos que revisar las salidas o verificar los archivos de registro! Esto es tedioso y propenso a errores.</p>
+<p>A medida que desarrolla su pipeline, rápidamente se volverá tan complejo que probar manualmente cada iteración es lento y propenso a errores. Además, si encuentra un error, será muy difícil identificar exactamente de dónde proviene el error en su pipeline. Aquí es donde entran las pruebas.</p>
+<p>Las pruebas le permiten verificar sistemáticamente que cada parte de su pipeline está funcionando como se espera. Los beneficios para un desarrollador de pruebas bien escritas son enormes:</p>
 <ul>
-<li><strong>Confidence</strong>: Because the tests cover the entire pipeline, you can be be confident changing something doesn't affect anything else</li>
-<li><strong>Trust</strong>: When multiple developers work on the pipeline, they know the other developers haven't broken the pipeline and every component.</li>
-<li><strong>Transparency</strong>: The tests show where a pipeline is failing and make it easier to track down the problem. They also function as a form of documentation, showing how to run a process or workflow.</li>
-<li><strong>Speed</strong>: Because the tests are automated, they can be run very quickly and repeatedly. You can iterate quickly with less fear of introducing new bugs.</li>
+<li><strong>Confianza</strong>: Debido a que las pruebas cubren todo el pipeline, puede estar seguro de que cambiar algo no afecta nada más</li>
+<li><strong>Confiabilidad</strong>: Cuando múltiples desarrolladores trabajan en el pipeline, saben que los otros desarrolladores no han roto el pipeline ni ningún componente.</li>
+<li><strong>Transparencia</strong>: Las pruebas muestran dónde está fallando un pipeline y facilitan el rastreo del problema. También funcionan como una forma de documentación, mostrando cómo ejecutar un proceso o flujo de trabajo.</li>
+<li><strong>Velocidad</strong>: Debido a que las pruebas están automatizadas, pueden ejecutarse muy rápidamente y repetidamente. Puede iterar rápidamente con menos temor de introducir nuevos errores.</li>
 </ul>
-<p>There are lots of different types of tests we can write:</p>
+<p>Hay muchos tipos diferentes de pruebas que podemos escribir:</p>
 <ol>
-<li><strong>Module-level tests</strong>: For individual processes</li>
-<li><strong>Workflow-level tests</strong>: For a single workflow</li>
-<li><strong>Pipeline-level tests</strong>: For the pipeline as a whole</li>
-<li><strong>Performance tests</strong>: For the speed and efficiency of the pipeline</li>
-<li><strong>Stress tests</strong>: Assessing the pipeline's performance under extreme conditions to determine its limits</li>
+<li><strong>Pruebas a nivel de módulo</strong>: Para procesos individuales</li>
+<li><strong>Pruebas a nivel de flujo de trabajo</strong>: Para un solo flujo de trabajo</li>
+<li><strong>Pruebas a nivel de pipeline</strong>: Para el pipeline en su conjunto</li>
+<li><strong>Pruebas de rendimiento</strong>: Para la velocidad y eficiencia del pipeline</li>
+<li><strong>Pruebas de estrés</strong>: Evaluar el rendimiento del pipeline bajo condiciones extremas para determinar sus límites</li>
 </ol>
-<p>Testing individual processes is analogous to unit tests in other languages. Testing the workflow or the entire pipeline is analogous to what's called integration tests in other languages, where we test the interactions of the components.</p>
-<p><a href="https://www.nf-test.com/"><strong>nf-test</strong></a> is a tool that allows you to write module, workflow and pipeline level test. In short, it allows you to systematically check every individual part of the pipeline is working as expected, <em>in isolation</em>.</p>
-<h3 id="learning-goals">Learning goals<a class="headerlink" href="#learning-goals" title="Permanent link">&para;</a></h3>
-<p>In this side quest, you'll learn to use nf-test to write a workflow-level test for the pipeline as well as module-level tests for the three processes it calls on.</p>
-<p>By the end of this side quest, you'll be able to use the following techniques effectively:</p>
+<p>Probar procesos individuales es análogo a las pruebas unitarias en otros lenguajes. Probar el flujo de trabajo o el pipeline completo es análogo a lo que se llama pruebas de integración en otros lenguajes, donde probamos las interacciones de los componentes.</p>
+<p><a href="https://www.nf-test.com/"><strong>nf-test</strong></a> es una herramienta que le permite escribir pruebas a nivel de módulo, flujo de trabajo y pipeline. En resumen, le permite verificar sistemáticamente que cada parte individual del pipeline está funcionando como se espera, <em>de forma aislada</em>.</p>
+<h3 id="objetivos-de-aprendizaje">Objetivos de aprendizaje<a class="headerlink" href="#objetivos-de-aprendizaje" title="Permanent link">&para;</a></h3>
+<p>En esta misión secundaria, aprenderá a usar nf-test para escribir una prueba a nivel de flujo de trabajo para el pipeline, así como pruebas a nivel de módulo para los tres procesos que llama.</p>
+<p>Al final de esta misión secundaria, podrá usar las siguientes técnicas de manera efectiva:</p>
 <ul>
-<li>Initialize nf-test in your project</li>
-<li>Generate module-level and workflow-level tests</li>
-<li>Add common types of assertions</li>
-<li>Understand when to use snapshots vs. content assertions</li>
-<li>Run tests for an entire project</li>
+<li>Inicializar nf-test en su proyecto</li>
+<li>Generar pruebas a nivel de módulo y flujo de trabajo</li>
+<li>Agregar tipos comunes de aserciones</li>
+<li>Comprender cuándo usar instantáneas vs. aserciones de contenido</li>
+<li>Ejecutar pruebas para un proyecto completo</li>
 </ul>
-<p>These skills will help you implement a comprehensive testing strategy in your pipeline projects, ensuring they are more robust and maintainable.</p>
-<h3 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h3>
-<p>Before taking on this side quest, you should:</p>
+<p>Estas habilidades le ayudarán a implementar una estrategia de pruebas integral en sus proyectos de pipeline, asegurando que sean más robustos y mantenibles.</p>
+<h3 id="requisitos-previos">Requisitos previos<a class="headerlink" href="#requisitos-previos" title="Permanent link">&para;</a></h3>
+<p>Antes de emprender esta misión secundaria, debe:</p>
 <ul>
-<li>Have completed the <a href="../hello_nextflow/README.md">Hello Nextflow</a> tutorial or equivalent beginner's course.</li>
-<li>Be comfortable using basic Nextflow concepts and mechanisms (processes, channels, operators, working with files, meta data)</li>
+<li>Haber completado el tutorial <a href="../hello_nextflow/README.md">Hello Nextflow</a> o un curso equivalente para principiantes.</li>
+<li>Sentirse cómodo usando conceptos y mecanismos básicos de Nextflow (procesos, canales, operadores, trabajo con archivos, metadatos)</li>
 </ul>
 <hr />
-<h2 id="0-get-started">0. Get started<a class="headerlink" href="#0-get-started" title="Permanent link">&para;</a></h2>
-<h4 id="open-the-training-codespace">Open the training codespace<a class="headerlink" href="#open-the-training-codespace" title="Permanent link">&para;</a></h4>
-<p>If you haven't yet done so, make sure to open the training environment as described in the <a href="../../envsetup/">Environment Setup</a>.</p>
+<h2 id="0-comenzar">0. Comenzar<a class="headerlink" href="#0-comenzar" title="Permanent link">&para;</a></h2>
+<h4 id="abrir-el-codespace-de-entrenamiento">Abrir el codespace de entrenamiento<a class="headerlink" href="#abrir-el-codespace-de-entrenamiento" title="Permanent link">&para;</a></h4>
+<p>Si aún no lo ha hecho, asegúrese de abrir el entorno de entrenamiento como se describe en la <a href="../../envsetup/">Configuración del Entorno</a>.</p>
 <p><a href="https://codespaces.new/nextflow-io/training?quickstart=1&amp;ref=master"><img alt="Open in GitHub Codespaces" src="https://github.com/codespaces/badge.svg" /></a></p>
-<h4 id="move-into-the-project-directory">Move into the project directory<a class="headerlink" href="#move-into-the-project-directory" title="Permanent link">&para;</a></h4>
-<p>Let's move into the directory where the files for this tutorial are located.</p>
+<h4 id="moverse-al-directorio-del-proyecto">Moverse al directorio del proyecto<a class="headerlink" href="#moverse-al-directorio-del-proyecto" title="Permanent link">&para;</a></h4>
+<p>Vamos a movernos al directorio donde se encuentran los archivos para este tutorial.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">cd</span><span class="w"> </span>side-quests/nf-test
 </code></pre></div>
-<p>You can set VSCode to focus on this directory:</p>
+<p>Puede configurar VSCode para enfocarse en este directorio:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>code<span class="w"> </span>.
 </code></pre></div>
-<h4 id="review-the-materials">Review the materials<a class="headerlink" href="#review-the-materials" title="Permanent link">&para;</a></h4>
-<p>You'll find a main workflow file and a CSV file called <code>greetings.csv</code> that contains the input to the pipeline.</p>
-<div class="highlight"><span class="filename">Directory contents</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="go">.</span>
+<h4 id="revisar-los-materiales">Revisar los materiales<a class="headerlink" href="#revisar-los-materiales" title="Permanent link">&para;</a></h4>
+<p>Encontrará un archivo de flujo de trabajo principal y un archivo CSV llamado <code>greetings.csv</code> que contiene la entrada al pipeline.</p>
+<div class="highlight"><span class="filename">Contenidos del directorio</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="go">.</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="go">├── greetings.csv</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="go">└── main.nf</span>
 </code></pre></div>
-<p>For a detailed description of the files, see the <a href="../../hello_nextflow/00_orientation/">warmup from Hello Nextflow</a>.</p>
-<p>The workflow we'll be testing is a subset of the Hello workflow built in <a href="../../hello_nextflow/03_hello_workflow/">Hello Workflow</a>.</p>
+<p>Para una descripción detallada de los archivos, consulte el <a href="../../hello_nextflow/00_orientation/">calentamiento de Hello Nextflow</a>.</p>
+<p>El flujo de trabajo que probaremos es un subconjunto del flujo de trabajo Hello construido en <a href="../../hello_nextflow/03_hello_workflow/">Hello Workflow</a>.</p>
 <details class="example">
-<summary>What does the Hello Nextflow workflow do?</summary>
-<p>If you haven't done the <a href="../../hello_nextflow/">Hello Nextflow</a> training, here's a quick overview of what this simple workflow does.</p>
-<p>The workflow takes a CSV file containing greetings, runs four consecutive transformation steps on them, and outputs a single text file containing an ASCII picture of a fun character saying the greetings.</p>
-<p>The four steps are implemented as Nextflow processes (<code>sayHello</code>, <code>convertToUpper</code>, <code>collectGreetings</code>, and <code>cowpy</code>) stored in separate module files.</p>
+<summary>¿Qué hace el flujo de trabajo Hello Nextflow?</summary>
+<p>Si no ha realizado el entrenamiento de <a href="../../hello_nextflow/">Hello Nextflow</a>, aquí hay una descripción rápida de lo que hace este flujo de trabajo simple.</p>
+<p>El flujo de trabajo toma un archivo CSV que contiene saludos, ejecuta cuatro pasos de transformación consecutivos sobre ellos y produce un solo archivo de texto que contiene una imagen ASCII de un personaje divertido diciendo los saludos.</p>
+<p>Los cuatro pasos se implementan como procesos de Nextflow (<code>sayHello</code>, <code>convertToUpper</code>, <code>collectGreetings</code> y <code>cowpy</code>) almacenados en archivos de módulos separados.</p>
 <ol>
-<li><strong><code>sayHello</code>:</strong> Writes each greeting to its own output file (e.g., "Hello-output.txt")</li>
-<li><strong><code>convertToUpper</code>:</strong> Converts each greeting to uppercase (e.g., "HELLO")</li>
-<li><strong><code>collectGreetings</code>:</strong> Collects all uppercase greetings into a single batch file</li>
-<li><strong><code>cowpy</code>:</strong> Generates ASCII art using the <code>cowpy</code> tool</li>
+<li><strong><code>sayHello</code>:</strong> Escribe cada saludo en su propio archivo de salida (por ejemplo, "Hello-output.txt")</li>
+<li><strong><code>convertToUpper</code>:</strong> Convierte cada saludo a mayúsculas (por ejemplo, "HELLO")</li>
+<li><strong><code>collectGreetings</code>:</strong> Recopila todos los saludos en mayúsculas en un solo archivo por lotes</li>
+<li><strong><code>cowpy</code>:</strong> Genera arte ASCII usando la herramienta <code>cowpy</code></li>
 </ol>
-<p>The results are published to a directory called <code>results/</code>, and the final output of the pipeline (when run with default parameters) is a plain text file containing ASCII art of a character saying the uppercased greetings.</p>
-<p>In this side quest, we use an intermediate form of the Hello workflow that only contains the first two processes. <!-- TODO: change this to use the full finished workflow as suggested in https://github.com/nextflow-io/training/issues/735 --></p>
+<p>Los resultados se publican en un directorio llamado <code>results/</code>, y la salida final del pipeline (cuando se ejecuta con parámetros predeterminados) es un archivo de texto plano que contiene arte ASCII de un personaje diciendo los saludos en mayúsculas.</p>
+<p>En esta misión secundaria, utilizamos una forma intermedia del flujo de trabajo Hello que solo contiene los primeros dos procesos. <!-- TODO: change this to use the full finished workflow as suggested in https://github.com/nextflow-io/training/issues/735 --></p>
 </details>
-<p>The subset we'll be working with is composed of two processes: <code>sayHello</code> and <code>convertToUpper</code>.
-You can see the full workflow code below.</p>
+<p>El subconjunto con el que trabajaremos está compuesto por dos procesos: <code>sayHello</code> y <code>convertToUpper</code>.
+Puede ver el código completo del flujo de trabajo a continuación.</p>
 <details class="example">
-<summary>Workflow code</summary>
+<summary>Código del flujo de trabajo</summary>
 <div class="highlight"><span class="filename">main.nf</span><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="cm">/*</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="cm">* Pipeline parameters</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="cm">*/</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="n">params</span><span class="o">.</span><span class="na">input_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;greetings.csv&quot;</span>
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
 <a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="cm">/*</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="cm">* Use echo to print &#39;Hello World!&#39; to standard out</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="cm">* Usar echo para imprimir &#39;Hello World!&#39; a la salida estándar</span>
 <a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="cm">*/</span>
 <a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="n">process</span><span class="w"> </span><span class="n">sayHello</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>
@@ -4252,7 +4294,7 @@ You can see the full workflow code below.</p>
 <a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="o">}</span>
 <a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a>
 <a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a><span class="cm">/*</span>
-<a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a><span class="cm">* Use a text replace utility to convert the greeting to uppercase</span>
+<a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a><span class="cm">* Usar una utilidad de reemplazo de texto para convertir el saludo a mayúsculas</span>
 <a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a><span class="cm">*/</span>
 <a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a><span class="n">process</span><span class="w"> </span><span class="n">convertToUpper</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a>
@@ -4272,22 +4314,22 @@ You can see the full workflow code below.</p>
 <a id="__codelineno-3-43" name="__codelineno-3-43" href="#__codelineno-3-43"></a>
 <a id="__codelineno-3-44" name="__codelineno-3-44" href="#__codelineno-3-44"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-3-45" name="__codelineno-3-45" href="#__codelineno-3-45"></a>
-<a id="__codelineno-3-46" name="__codelineno-3-46" href="#__codelineno-3-46"></a><span class="w">    </span><span class="c1">// create a channel for inputs from a CSV file</span>
+<a id="__codelineno-3-46" name="__codelineno-3-46" href="#__codelineno-3-46"></a><span class="w">    </span><span class="c1">// crear un canal para entradas desde un archivo CSV</span>
 <a id="__codelineno-3-47" name="__codelineno-3-47" href="#__codelineno-3-47"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input_file</span><span class="o">).</span><span class="na">splitCsv</span><span class="o">().</span><span class="na">flatten</span><span class="o">()</span>
 <a id="__codelineno-3-48" name="__codelineno-3-48" href="#__codelineno-3-48"></a>
-<a id="__codelineno-3-49" name="__codelineno-3-49" href="#__codelineno-3-49"></a><span class="w">    </span><span class="c1">// emit a greeting</span>
+<a id="__codelineno-3-49" name="__codelineno-3-49" href="#__codelineno-3-49"></a><span class="w">    </span><span class="c1">// emitir un saludo</span>
 <a id="__codelineno-3-50" name="__codelineno-3-50" href="#__codelineno-3-50"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
 <a id="__codelineno-3-51" name="__codelineno-3-51" href="#__codelineno-3-51"></a>
-<a id="__codelineno-3-52" name="__codelineno-3-52" href="#__codelineno-3-52"></a><span class="w">    </span><span class="c1">// convert the greeting to uppercase</span>
+<a id="__codelineno-3-52" name="__codelineno-3-52" href="#__codelineno-3-52"></a><span class="w">    </span><span class="c1">// convertir el saludo a mayúsculas</span>
 <a id="__codelineno-3-53" name="__codelineno-3-53" href="#__codelineno-3-53"></a><span class="w">    </span><span class="n">convertToUpper</span><span class="o">(</span><span class="n">sayHello</span><span class="o">.</span><span class="na">out</span><span class="o">)</span>
 <a id="__codelineno-3-54" name="__codelineno-3-54" href="#__codelineno-3-54"></a><span class="o">}</span>
 </code></pre></div>
 </details>
-<h4 id="run-the-workflow">Run the workflow<a class="headerlink" href="#run-the-workflow" title="Permanent link">&para;</a></h4>
-<p>Let's run the workflow to make sure it's working as expected.</p>
+<h4 id="ejecutar-el-flujo-de-trabajo">Ejecutar el flujo de trabajo<a class="headerlink" href="#ejecutar-el-flujo-de-trabajo" title="Permanent link">&para;</a></h4>
+<p>Ejecutemos el flujo de trabajo para asegurarnos de que funcione como se espera.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
-<div class="highlight"><span class="filename">Result of running the workflow</span><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="go"> N E X T F L O W   ~  version 24.10.2</span>
+<div class="highlight"><span class="filename">Resultado de ejecutar el flujo de trabajo</span><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="go"> N E X T F L O W   ~  version 24.10.2</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="go">Launching `main.nf` [soggy_linnaeus] DSL2 - revision: bbf79d5c31</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
@@ -4295,56 +4337,56 @@ You can see the full workflow code below.</p>
 <a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="go">[f7/c3be66] sayHello (3)       | 3 of 3 ✔</span>
 <a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="go">[cd/e15303] convertToUpper (3) | 3 of 3 ✔</span>
 </code></pre></div>
-<p>CONGRATULATIONS! You just ran a test!</p>
-<p>"Wait, what? I just ran the workflow and it worked! How is that a test?"</p>
-<p>Good question!</p>
-<p>Let's break down what just happened.</p>
-<p>You ran the workflow with the default parameters, you confirmed it worked and you're happy with the results. This is the essence of testing. If you worked through the Hello Nextflow training course, you'll have noticed we always started every section by running the workflow we were using as a starting point, to confirm everything is set up correctly.</p>
-<p>Testing software essentially does this process for us.</p>
-<h4 id="review-the-assignment">Review the assignment<a class="headerlink" href="#review-the-assignment" title="Permanent link">&para;</a></h4>
-<p>Your challenge is to add standardized tests to this workflow using nf-test, in order to make it easy to verify that every part continues to work as expected in case any further changes are made.</p>
+<p>¡FELICITACIONES! ¡Acaba de ejecutar una prueba!</p>
+<p>"Espere, ¿qué? ¡Solo ejecuté el flujo de trabajo y funcionó! ¿Cómo es eso una prueba?"</p>
+<p>¡Buena pregunta!</p>
+<p>Analicemos lo que acaba de suceder.</p>
+<p>Ejecutó el flujo de trabajo con los parámetros predeterminados, confirmó que funcionó y está satisfecho con los resultados. Esta es la esencia de las pruebas. Si trabajó en el curso de entrenamiento Hello Nextflow, habrá notado que siempre comenzamos cada sección ejecutando el flujo de trabajo que estábamos usando como punto de partida, para confirmar que todo está configurado correctamente.</p>
+<p>Las pruebas de software esencialmente hacen este proceso por nosotros.</p>
+<h4 id="revisar-la-asignacion">Revisar la asignación<a class="headerlink" href="#revisar-la-asignacion" title="Permanent link">&para;</a></h4>
+<p>Su desafío es agregar pruebas estandarizadas a este flujo de trabajo usando nf-test, con el fin de facilitar la verificación de que cada parte continúa funcionando como se espera en caso de que se realicen cambios adicionales.</p>
 <!-- TODO: give a bit more details, similar to how it's done in the Metadata side quest -->
 
-<h4 id="readiness-checklist">Readiness checklist<a class="headerlink" href="#readiness-checklist" title="Permanent link">&para;</a></h4>
-<p>Think you're ready to dive in?</p>
+<h4 id="lista-de-verificacion-de-preparacion">Lista de verificación de preparación<a class="headerlink" href="#lista-de-verificacion-de-preparacion" title="Permanent link">&para;</a></h4>
+<p>¿Cree que está listo para comenzar?</p>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> I understand the goal of this course and its prerequisites</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> My codespace is up and running</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> I've set my working directory appropriately</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> I've run the workflow successfully</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> I understand the assignment</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Entiendo el objetivo de este curso y sus requisitos previos</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Mi codespace está en funcionamiento</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> He configurado mi directorio de trabajo adecuadamente</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> He ejecutado el flujo de trabajo exitosamente</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Entiendo la asignación</li>
 </ul>
-<p>If you can check all the boxes, you're good to go.</p>
+<p>Si puede marcar todas las casillas, está listo para comenzar.</p>
 <hr />
-<h2 id="1-initialize-nf-test">1. Initialize <code>nf-test</code><a class="headerlink" href="#1-initialize-nf-test" title="Permanent link">&para;</a></h2>
-<p>The <code>nf-test</code> package provides an initialization command that sets up a few things in order for us to start developing tests for our project.</p>
+<h2 id="1-inicializar-nf-test">1. Inicializar <code>nf-test</code><a class="headerlink" href="#1-inicializar-nf-test" title="Permanent link">&para;</a></h2>
+<p>El paquete <code>nf-test</code> proporciona un comando de inicialización que configura algunas cosas para que podamos comenzar a desarrollar pruebas para nuestro proyecto.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>nf-test<span class="w"> </span>init
 </code></pre></div>
-<p>This should produce the following output:</p>
+<p>Esto debería producir la siguiente salida:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>🚀<span class="w"> </span>nf-test<span class="w"> </span><span class="m">0</span>.9.3
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>https://www.nf-test.com
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="o">(</span>c<span class="o">)</span><span class="w"> </span><span class="m">2021</span><span class="w"> </span>-<span class="w"> </span><span class="m">2024</span><span class="w"> </span>Lukas<span class="w"> </span>Forer<span class="w"> </span>and<span class="w"> </span>Sebastian<span class="w"> </span>Schoenherr
 <a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>
 <a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>Project<span class="w"> </span>configured.<span class="w"> </span>Configuration<span class="w"> </span>is<span class="w"> </span>stored<span class="w"> </span><span class="k">in</span><span class="w"> </span>nf-test.config
 </code></pre></div>
-<p>It also creates a <code>tests</code> directory containing a configuration file stub.</p>
-<h3 id="11-generate-an-nf-test">1.1. Generate an nf-test<a class="headerlink" href="#11-generate-an-nf-test" title="Permanent link">&para;</a></h3>
-<p><code>nf-test</code> comes with a set of tools for building nf-test files, saving us the majority of the work. These come under the subcommand <code>generate</code>. Let's generate a test for the pipeline:</p>
+<p>También crea un directorio <code>tests</code> que contiene un esquema de archivo de configuración.</p>
+<h3 id="11-generar-un-nf-test">1.1. Generar un nf-test<a class="headerlink" href="#11-generar-un-nf-test" title="Permanent link">&para;</a></h3>
+<p><code>nf-test</code> viene con un conjunto de herramientas para construir archivos nf-test, ahorrándonos la mayor parte del trabajo. Estos vienen bajo el subcomando <code>generate</code>. Generemos una prueba para el pipeline:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>nf-test<span class="w"> </span>generate<span class="w"> </span>pipeline<span class="w"> </span>main.nf
 </code></pre></div>
-<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="go">&gt; nf-test generate pipeline main.nf</span>
+<div class="highlight"><span class="filename">Salida</span><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="go">&gt; nf-test generate pipeline main.nf</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
 <a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="go">Load source file &#39;/workspaces/training/side-quests/nf-test/main.nf&#39;</span>
 <a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="go">Wrote pipeline test file &#39;/workspaces/training/side-quests/nf-test/tests/main.nf.test</span>
 <a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>
 <a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="go">SUCCESS: Generated 1 test files.</span>
 </code></pre></div>
-<p>This will create a <code>main.nf.test</code> file within the <code>tests</code> directory. This is our pipeline level test file. If you run <code>tree tests/</code> you should see something like this:</p>
-<div class="highlight"><span class="filename">Test directory contents</span><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="go">tests/</span>
+<p>Esto creará un archivo <code>main.nf.test</code> dentro del directorio <code>tests</code>. Este es nuestro archivo de prueba a nivel de pipeline. Si ejecuta <code>tree tests/</code> debería ver algo como esto:</p>
+<div class="highlight"><span class="filename">Contenidos del directorio de pruebas</span><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="go">tests/</span>
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="go">├── main.nf.test</span>
 <a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="go">└── nextflow.config</span>
 </code></pre></div>
-<p>The <code>main.nf.test</code> file is our pipeline level test file. Let's open it up and take a look at the contents.</p>
+<p>El archivo <code>main.nf.test</code> es nuestro archivo de prueba a nivel de pipeline. Abramos y veamos el contenido.</p>
 <div class="highlight"><span class="filename">tests/main.nf.test</span><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">nextflow_pipeline</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
 <a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="s2">&quot;Test Workflow main.nf&quot;</span>
@@ -4367,40 +4409,40 @@ You can see the full workflow code below.</p>
 <a id="__codelineno-11-20" name="__codelineno-11-20" href="#__codelineno-11-20"></a>
 <a id="__codelineno-11-21" name="__codelineno-11-21" href="#__codelineno-11-21"></a><span class="o">}</span>
 </code></pre></div>
-<p>We'll take a second to understand the structure of the test file.</p>
-<p>The <code>nextflow_pipeline</code> block is the entry point for all pipeline level tests. It contains the following:</p>
+<p>Tomaremos un segundo para entender la estructura del archivo de prueba.</p>
+<p>El bloque <code>nextflow_pipeline</code> es el punto de entrada para todas las pruebas a nivel de pipeline. Contiene lo siguiente:</p>
 <ul>
-<li><code>name</code>: The name of the test.</li>
-<li><code>script</code>: The path to the pipeline script.</li>
+<li><code>name</code>: El nombre de la prueba.</li>
+<li><code>script</code>: La ruta al script del pipeline.</li>
 </ul>
-<p>The <code>test</code> block is the actual test. It contains the following:</p>
+<p>El bloque <code>test</code> es la prueba real. Contiene lo siguiente:</p>
 <ul>
-<li><code>when</code>: The conditions under which the test should be run. This includes the parameters that will be used to run the pipeline.</li>
-<li><code>then</code>: The assertions that should be made. This includes the expected outcomes of the pipeline.</li>
+<li><code>when</code>: Las condiciones bajo las cuales se debe ejecutar la prueba. Esto incluye los parámetros que se utilizarán para ejecutar el pipeline.</li>
+<li><code>then</code>: Las aserciones que se deben hacer. Esto incluye los resultados esperados del pipeline.</li>
 </ul>
-<p>In plain English, the logic of the test reads as follows:
-"<strong>When</strong> these <em>parameters</em> are provided to this <em>pipeline</em>, <strong>then</strong> we expect to see these results."</p>
-<p>This isn't a functional test, we will demonstrate how to turn it into one in the next section.</p>
-<h3 id="a-note-on-test-names">A Note on Test Names<a class="headerlink" href="#a-note-on-test-names" title="Permanent link">&para;</a></h3>
-<p>In the example above, we used the default name "Should run without failures" which is appropriate for a basic test that just checks if the pipeline runs successfully. However, as we add more specific test cases, we should use more descriptive names that indicate what we're actually testing. For example:</p>
+<p>En español claro, la lógica de la prueba se lee de la siguiente manera:
+"<strong>Cuando</strong> se proporcionan estos <em>parámetros</em> a este <em>pipeline</em>, <strong>entonces</strong> esperamos ver estos resultados."</p>
+<p>Esta no es una prueba funcional, demostraremos cómo convertirla en una en la siguiente sección.</p>
+<h3 id="una-nota-sobre-los-nombres-de-las-pruebas">Una nota sobre los nombres de las pruebas<a class="headerlink" href="#una-nota-sobre-los-nombres-de-las-pruebas" title="Permanent link">&para;</a></h3>
+<p>En el ejemplo anterior, utilizamos el nombre predeterminado "Should run without failures" (Debería ejecutarse sin fallos) que es apropiado para una prueba básica que solo verifica si el pipeline se ejecuta correctamente. Sin embargo, a medida que agregamos casos de prueba más específicos, debemos usar nombres más descriptivos que indiquen lo que realmente estamos probando. Por ejemplo:</p>
 <ul>
-<li>"Should convert input to uppercase" - when testing specific functionality</li>
-<li>"Should handle empty input gracefully" - when testing edge cases</li>
-<li>"Should respect max memory parameter" - when testing resource constraints</li>
-<li>"Should create expected output files" - when testing file generation</li>
+<li>"Should convert input to uppercase" - cuando se prueba funcionalidad específica</li>
+<li>"Should handle empty input gracefully" - cuando se prueban casos extremos</li>
+<li>"Should respect max memory parameter" - cuando se prueban restricciones de recursos</li>
+<li>"Should create expected output files" - cuando se prueba la generación de archivos</li>
 </ul>
-<p>Good test names should:</p>
+<p>Los buenos nombres de prueba deben:</p>
 <ol>
-<li>Start with "Should" to make it clear what the expected behavior is</li>
-<li>Describe the specific functionality or scenario being tested</li>
-<li>Be clear enough that if the test fails, you know what functionality is broken</li>
+<li>Comenzar con "Should" para dejar claro cuál es el comportamiento esperado</li>
+<li>Describir la funcionalidad específica o el escenario que se está probando</li>
+<li>Ser lo suficientemente claros como para que si la prueba falla, sepa qué funcionalidad está rota</li>
 </ol>
-<p>As we add more assertions and specific test cases later, we'll use these more descriptive names to make it clear what each test is verifying.</p>
-<h3 id="12-run-the-test">1.2. Run the test<a class="headerlink" href="#12-run-the-test" title="Permanent link">&para;</a></h3>
-<p>Let's run the test to see what happens.</p>
+<p>A medida que agreguemos más aserciones y casos de prueba específicos más adelante, usaremos estos nombres más descriptivos para dejar claro qué está verificando cada prueba.</p>
+<h3 id="12-ejecutar-la-prueba">1.2. Ejecutar la prueba<a class="headerlink" href="#12-ejecutar-la-prueba" title="Permanent link">&para;</a></h3>
+<p>Ejecutemos la prueba para ver qué sucede.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>nf-test<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tests/main.nf.test
 </code></pre></div>
-<div class="highlight"><span class="filename">nf-test pipeline fail</span><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="go">&gt; nf-test test tests/main.nf.test</span>
+<div class="highlight"><span class="filename">fallo de pipeline nf-test</span><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="go">&gt; nf-test test tests/main.nf.test</span>
 <a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>
 <a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="go">🚀 nf-test 0.9.3</span>
 <a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="go">https://www.nf-test.com</span>
@@ -4426,9 +4468,9 @@ You can see the full workflow code below.</p>
 <a id="__codelineno-13-24" name="__codelineno-13-24" href="#__codelineno-13-24"></a>
 <a id="__codelineno-13-25" name="__codelineno-13-25" href="#__codelineno-13-25"></a><span class="go">FAILURE: Executed 1 tests in 4.679s (1 failed)</span>
 </code></pre></div>
-<p>The test fails! What happened?</p>
+<p>¡La prueba falla! ¿Qué sucedió?</p>
 <ol>
-<li>nf-test tried to run the pipeline as is, using the settings in the <code>when</code> block:</li>
+<li>nf-test intentó ejecutar el pipeline tal como está, usando la configuración en el bloque <code>when</code>:</li>
 </ol>
 <div class="highlight"><span class="filename">tests/main.nf.test</span><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="n">when</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">    </span><span class="n">params</span><span class="w"> </span><span class="o">{</span>
@@ -4438,19 +4480,18 @@ You can see the full workflow code below.</p>
 <a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="o">}</span>
 </code></pre></div>
 <ol>
-<li>nf-test checked the status of the pipeline and compared it to the <code>when</code> block:</li>
+<li>nf-test verificó el estado del pipeline y lo comparó con el bloque <code>when</code>:</li>
 </ol>
 <div class="highlight"><span class="filename">tests/main.nf.test</span><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="n">then</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">    </span><span class="k">assert</span><span class="w"> </span><span class="n">workflow</span><span class="o">.</span><span class="na">success</span>
 <a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="o">}</span>
 </code></pre></div>
-<p>Note how nf-test has reported the pipeline failed and provided the error message from Nextflow:</p>
+<p>Observe cómo nf-test ha reportado que el pipeline falló y proporcionó el mensaje de error de Nextflow:</p>
 <div class="highlight"><span class="filename">Error</span><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="go">ERROR ~ No such file or directory: /workspaces/training/side-quests/nf-test/.nf-test/tests/693ba951a20fec36a5a9292ed1cc8a9f/greetings.csv</span>
 </code></pre></div>
-<p>So what was the issue? Remember the pipeline has a greetings.csv file in the project directory. When nf-test runs the pipeline, it will look for this file, but it can't find it. The file is there, what's happening? Well, if we look at the path we can see the test is occurring in the path <code>./nf-test/tests/longHashString/</code>. Just like Nextflow, nf-test creates a new directory for each test to keep everything isolated. The data file is not located in there so we must correct the path to the file in the original test.</p>
-<p>Let's go back to the test file and change the path to the file in the <code>when</code> block.</p>
-<p>You may be wondering how we're going to point to the root of the pipeline in the test. Since this is a common situation, nf-test has a range of global variables that we can use to make our lives easier. You can find the full list <a href="https://www.nf-test.com/docs/testcases/global_variables/">here</a> but in the meantime we'll use the <code>projectDir</code> variable, which means the root of the pipeline project.</p>
-<p><em>Before:</em></p>
+<p>Entonces, ¿cuál fue el problema? Recuerde que el pipeline tiene un archivo greetings.csv en el directorio del proyecto. Cuando nf-test ejecuta el pipeline, buscará este archivo, pero no puede encontrarlo. El archivo está ahí, ¿qué está pasando? Bueno, si miramos la ruta, podemos ver que la prueba está ocurriendo en la ruta <code>./nf-test/tests/longHashString/</code>. Al igual que Nextflow, nf-test crea un nuevo directorio para cada prueba para mantener todo aislado. El archivo de datos no se encuentra allí, por lo que debemos corregir la ruta al archivo en la prueba original.</p>
+<p>Puede estar preguntándose cómo vamos a apuntar a la raíz del pipeline en la prueba. Dado que esta es una situación común, nf-test tiene una gama de variables globales que podemos usar para facilitarnos la vida. Puede encontrar la lista completa <a href="https://www.nf-test.com/docs/testcases/global_variables/">aquí</a> pero mientras tanto usaremos la variable <code>projectDir</code>, que significa la raíz del proyecto del pipeline.</p>
+<p><em>Antes:</em></p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">tests/main.nf.test</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1">1</a></span>
 <span class="normal"><a href="#__codelineno-17-2">2</a></span>
 <span class="normal"><a href="#__codelineno-17-3">3</a></span>
@@ -4463,7 +4504,7 @@ You can see the full workflow code below.</p>
 </span><a id="__codelineno-17-5" name="__codelineno-17-5"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-17-6" name="__codelineno-17-6"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p><em>After:</em></p>
+<p><em>Después:</em></p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">tests/main.nf.test</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1">1</a></span>
 <span class="normal"><a href="#__codelineno-18-2">2</a></span>
 <span class="normal"><a href="#__codelineno-18-3">3</a></span>
@@ -4474,10 +4515,10 @@ You can see the full workflow code below.</p>
 </span><a id="__codelineno-18-4" name="__codelineno-18-4"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-18-5" name="__codelineno-18-5"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>Let's run the test again to see if it works.</p>
-<div class="highlight"><span class="filename">nf-test pipeline pass</span><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>nf-test<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tests/main.nf.test
+<p>Ejecutemos la prueba nuevamente para ver si funciona.</p>
+<div class="highlight"><span class="filename">pasa pipeline nf-test</span><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>nf-test<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tests/main.nf.test
 </code></pre></div>
-<div class="highlight"><span class="filename">Pipeline passes</span><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="go">&gt; nf-test test tests/main.nf.test</span>
+<div class="highlight"><span class="filename">El pipeline pasa</span><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="go">&gt; nf-test test tests/main.nf.test</span>
 <a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>
 <a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="go">🚀 nf-test 0.9.3</span>
 <a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="go">https://www.nf-test.com</span>
@@ -4491,11 +4532,11 @@ You can see the full workflow code below.</p>
 <a id="__codelineno-20-12" name="__codelineno-20-12" href="#__codelineno-20-12"></a>
 <a id="__codelineno-20-13" name="__codelineno-20-13" href="#__codelineno-20-13"></a><span class="go">SUCCESS: Executed 1 tests in 1.626s</span>
 </code></pre></div>
-<p>Success! The pipeline runs successfully and the test passes. Run it as many times as you like and you will always get the same result!</p>
-<p>By default, the Nextflow output is hidden, but to convince yourself that nf-test is definitely running the workflow, you can use the <code>--verbose</code> flag:</p>
+<p>¡Éxito! El pipeline se ejecuta correctamente y la prueba pasa. ¡Ejecútelo tantas veces como desee y siempre obtendrá el mismo resultado!</p>
+<p>Por defecto, la salida de Nextflow está oculta, pero para convencerse de que nf-test definitivamente está ejecutando el flujo de trabajo, puede usar la bandera <code>--verbose</code>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>nf-test<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tests/main.nf.test<span class="w"> </span>--verbose
 </code></pre></div>
-<div class="highlight"><span class="filename">Pipeline runs all processes</span><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="go">&gt; nf-test test tests/main.nf.test</span>
+<div class="highlight"><span class="filename">El pipeline ejecuta todos los procesos</span><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="go">&gt; nf-test test tests/main.nf.test</span>
 <a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>
 <a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="go">🚀 nf-test 0.9.3</span>
 <a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="go">https://www.nf-test.com</span>
@@ -4519,10 +4560,10 @@ You can see the full workflow code below.</p>
 <a id="__codelineno-22-22" name="__codelineno-22-22" href="#__codelineno-22-22"></a>
 <a id="__codelineno-22-23" name="__codelineno-22-23" href="#__codelineno-22-23"></a><span class="go">SUCCESS: Executed 1 tests in 5.239s</span>
 </code></pre></div>
-<h3 id="13-add-assertions">1.3. Add assertions<a class="headerlink" href="#13-add-assertions" title="Permanent link">&para;</a></h3>
-<p>A simple check is to ensure our pipeline is running all the processes we expect and not skipping any silently. Remember our pipeline runs 6 processes, one called <code>sayHello</code> and one called <code>convertToUpper</code> for each of the 3 greetings.</p>
-<p>Let's add an assertion to our test to check the pipeline runs the expected number of processes. We'll also update our test name to better reflect what we're testing.</p>
-<p><strong>Before:</strong></p>
+<h3 id="13-agregar-aserciones">1.3. Agregar aserciones<a class="headerlink" href="#13-agregar-aserciones" title="Permanent link">&para;</a></h3>
+<p>Una verificación simple es asegurarse de que nuestro pipeline esté ejecutando todos los procesos que esperamos y no omitiendo ninguno silenciosamente. Recuerde que nuestro pipeline ejecuta 6 procesos, uno llamado <code>sayHello</code> y uno llamado <code>convertToUpper</code> para cada uno de los 3 saludos.</p>
+<p>Agreguemos una aserción a nuestra prueba para verificar que el pipeline ejecute el número esperado de procesos. También actualizaremos el nombre de nuestra prueba para reflejar mejor lo que estamos probando.</p>
+<p><strong>Antes:</strong></p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">tests/main.nf.test</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-23-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-23-3"> 3</a></span>
@@ -4549,7 +4590,7 @@ You can see the full workflow code below.</p>
 <a id="__codelineno-23-12" name="__codelineno-23-12"></a>
 <a id="__codelineno-23-13" name="__codelineno-23-13"></a><span class="w">    </span><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p><strong>After:</strong></p>
+<p><strong>Después:</strong></p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">tests/main.nf.test</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-24-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-24-3"> 3</a></span>
@@ -4578,11 +4619,11 @@ You can see the full workflow code below.</p>
 <a id="__codelineno-24-13" name="__codelineno-24-13"></a>
 <a id="__codelineno-24-14" name="__codelineno-24-14"></a><span class="w">    </span><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>The test name now better reflects what we're actually verifying - not just that the pipeline runs without failing, but that it runs the expected number of processes.</p>
-<p>Let's run the test again to see if it works.</p>
-<div class="highlight"><span class="filename">nf-test pipeline pass</span><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>nf-test<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tests/main.nf.test
+<p>El nombre de la prueba ahora refleja mejor lo que realmente estamos verificando: no solo que el pipeline se ejecute sin fallar, sino que ejecute el número esperado de procesos.</p>
+<p>Ejecutemos la prueba nuevamente para ver si funciona.</p>
+<div class="highlight"><span class="filename">pasa pipeline nf-test</span><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>nf-test<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tests/main.nf.test
 </code></pre></div>
-<div class="highlight"><span class="filename">Pipeline passes with assertions</span><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="go">🚀 nf-test 0.9.3</span>
+<div class="highlight"><span class="filename">El pipeline pasa con aserciones</span><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="go">🚀 nf-test 0.9.3</span>
 <a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="go">https://www.nf-test.com</span>
 <a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="gp gp-VirtualEnv">(c)</span> <span class="go">2021 - 2024 Lukas Forer and Sebastian Schoenherr</span>
 <a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a>
@@ -4594,10 +4635,10 @@ You can see the full workflow code below.</p>
 <a id="__codelineno-26-10" name="__codelineno-26-10" href="#__codelineno-26-10"></a>
 <a id="__codelineno-26-11" name="__codelineno-26-11" href="#__codelineno-26-11"></a><span class="go">SUCCESS: Executed 1 tests in 1.588s</span>
 </code></pre></div>
-<p>Success! The pipeline runs successfully and the test passes. Now we have began to test the details of the pipeline, as well as the overall status.</p>
-<h3 id="14-test-the-output">1.4. Test the output<a class="headerlink" href="#14-test-the-output" title="Permanent link">&para;</a></h3>
-<p>Let's add an assertion to our test to check the output file was created. We'll add it as a separate test, with an informative name, to make the results easier to interpret.</p>
-<p><strong>Before:</strong></p>
+<p>¡Éxito! El pipeline se ejecuta correctamente y la prueba pasa. Ahora hemos comenzado a probar los detalles del pipeline, así como el estado general.</p>
+<h3 id="14-probar-la-salida">1.4. Probar la salida<a class="headerlink" href="#14-probar-la-salida" title="Permanent link">&para;</a></h3>
+<p>Agreguemos una aserción a nuestra prueba para verificar que se creó el archivo de salida. Lo agregaremos como una prueba separada, con un nombre informativo, para que los resultados sean más fáciles de interpretar.</p>
+<p><strong>Antes:</strong></p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">tests/main.nf.test</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-27-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-27-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-27-3"> 3</a></span>
@@ -4626,7 +4667,7 @@ You can see the full workflow code below.</p>
 <a id="__codelineno-27-13" name="__codelineno-27-13"></a>
 <a id="__codelineno-27-14" name="__codelineno-27-14"></a><span class="hll"><span class="w">    </span><span class="o">}</span>
 </span></code></pre></div></td></tr></table></div>
-<p><strong>After:</strong></p>
+<p><strong>Después:</strong></p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">tests/main.nf.test</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-28-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-28-3"> 3</a></span>
@@ -4693,10 +4734,10 @@ You can see the full workflow code below.</p>
 </span><a id="__codelineno-28-32" name="__codelineno-28-32"></a><span class="hll">
 </span><a id="__codelineno-28-33" name="__codelineno-28-33"></a><span class="hll"><span class="w">    </span><span class="o">}</span>
 </span></code></pre></div></td></tr></table></div>
-<p>Run the test again to see if it works.</p>
-<div class="highlight"><span class="filename">nf-test pipeline pass</span><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>nf-test<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tests/main.nf.test
+<p>Ejecute la prueba nuevamente para ver si funciona.</p>
+<div class="highlight"><span class="filename">pasa pipeline nf-test</span><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>nf-test<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tests/main.nf.test
 </code></pre></div>
-<div class="highlight"><span class="filename">Pipeline passes with file assertions</span><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="go">&gt; nf-test test tests/main.nf.test</span>
+<div class="highlight"><span class="filename">El pipeline pasa con aserciones de archivos</span><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="go">&gt; nf-test test tests/main.nf.test</span>
 <a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a>
 <a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a><span class="go">🚀 nf-test 0.9.3</span>
 <a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a><span class="go">https://www.nf-test.com</span>
@@ -4711,21 +4752,21 @@ You can see the full workflow code below.</p>
 <a id="__codelineno-30-13" name="__codelineno-30-13" href="#__codelineno-30-13"></a>
 <a id="__codelineno-30-14" name="__codelineno-30-14" href="#__codelineno-30-14"></a><span class="go">SUCCESS: Executed 2 tests in 15.165s</span>
 </code></pre></div>
-<p>Success! The tests pass because the pipeline completed successfully, the correct number of processes ran and the output files were created. This should also show you how useful it is to provide those informative names for your tests.</p>
-<p>This is just the surface, we can keep writing assertions to check the details of the pipeline, but for now let's move on to testing the internals of the pipeline.</p>
-<h3 id="takeaway">Takeaway<a class="headerlink" href="#takeaway" title="Permanent link">&para;</a></h3>
-<p>You know how to write an nf-test for a pipeline.</p>
-<h3 id="whats-next">What's next?<a class="headerlink" href="#whats-next" title="Permanent link">&para;</a></h3>
-<p>Learn how to test a Nextflow process.</p>
+<p>¡Éxito! Las pruebas pasan porque el pipeline se completó correctamente, se ejecutó el número correcto de procesos y se crearon los archivos de salida. Esto también debería mostrarle lo útil que es proporcionar esos nombres informativos para sus pruebas.</p>
+<p>Esto es solo la superficie, podemos seguir escribiendo aserciones para verificar los detalles del pipeline, pero por ahora pasemos a probar los componentes internos del pipeline.</p>
+<h3 id="conclusion">Conclusión<a class="headerlink" href="#conclusion" title="Permanent link">&para;</a></h3>
+<p>Sabe cómo escribir un nf-test para un pipeline.</p>
+<h3 id="que-sigue">¿Qué sigue?<a class="headerlink" href="#que-sigue" title="Permanent link">&para;</a></h3>
+<p>Aprenda cómo probar un proceso de Nextflow.</p>
 <hr />
-<h2 id="2-test-a-nextflow-process">2. Test a Nextflow process<a class="headerlink" href="#2-test-a-nextflow-process" title="Permanent link">&para;</a></h2>
-<p>We don't have to write tests for every part of the pipeline, but the more tests we have the more comprehensive we can be about the pipeline and the more confident we can be that it's working as expected. In this section we're going to test both processes in the pipeline as individual units.</p>
-<h3 id="21-test-the-sayhello-process">2.1. Test the <code>sayHello</code> process<a class="headerlink" href="#21-test-the-sayhello-process" title="Permanent link">&para;</a></h3>
-<p>Let's start with the <code>sayHello</code> process.</p>
-<p>Let's use the <code>nf-test generate</code> command again to generate tests for the process.</p>
+<h2 id="2-probar-un-proceso-de-nextflow">2. Probar un proceso de Nextflow<a class="headerlink" href="#2-probar-un-proceso-de-nextflow" title="Permanent link">&para;</a></h2>
+<p>No tenemos que escribir pruebas para cada parte del pipeline, pero cuantas más pruebas tengamos, más integrales podemos ser sobre el pipeline y más confiados podemos estar de que está funcionando como se espera. En esta sección vamos a probar ambos procesos en el pipeline como unidades individuales.</p>
+<h3 id="21-probar-el-proceso-sayhello">2.1. Probar el proceso <code>sayHello</code><a class="headerlink" href="#21-probar-el-proceso-sayhello" title="Permanent link">&para;</a></h3>
+<p>Comencemos con el proceso <code>sayHello</code>.</p>
+<p>Usemos el comando <code>nf-test generate</code> nuevamente para generar pruebas para el proceso.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>nf-test<span class="w"> </span>generate<span class="w"> </span>process<span class="w"> </span>main.nf
 </code></pre></div>
-<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="go">&gt; nf-test generate process main.nf</span>
+<div class="highlight"><span class="filename">Salida</span><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="go">&gt; nf-test generate process main.nf</span>
 <a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a>
 <a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a><span class="go">Load source file &#39;/workspaces/training/side-quests/nf-test/main.nf&#39;</span>
 <a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a><span class="go">Wrote process test file &#39;/workspaces/training/side-quests/nf-test/tests/main.sayhello.nf.test</span>
@@ -4733,8 +4774,8 @@ You can see the full workflow code below.</p>
 <a id="__codelineno-32-6" name="__codelineno-32-6" href="#__codelineno-32-6"></a>
 <a id="__codelineno-32-7" name="__codelineno-32-7" href="#__codelineno-32-7"></a><span class="go">SUCCESS: Generated 2 test files.</span>
 </code></pre></div>
-<p>Let's focus for now on the <code>sayhello</code> process in the <code>main.sayhello.nf.test</code> file.</p>
-<p>Let's open the file and take a look at the contents.</p>
+<p>Centrémonos por ahora en el proceso <code>sayhello</code> en el archivo <code>main.sayhello.nf.test</code>.</p>
+<p>Abramos el archivo y veamos el contenido.</p>
 <div class="highlight"><span class="filename">tests/main.sayhello.nf.test</span><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="n">nextflow_process</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a>
 <a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a><span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="s2">&quot;Test Process sayHello&quot;</span>
@@ -4765,11 +4806,11 @@ You can see the full workflow code below.</p>
 <a id="__codelineno-33-28" name="__codelineno-33-28" href="#__codelineno-33-28"></a>
 <a id="__codelineno-33-29" name="__codelineno-33-29" href="#__codelineno-33-29"></a><span class="o">}</span>
 </code></pre></div>
-<p>As before, we start with the test details, followed by the <code>when</code> and <code>then</code> blocks. However, we also have an additional <code>process</code> block which allows us to define the inputs to the process.</p>
-<p>Let's run the test to see if it works.</p>
-<div class="highlight"><span class="filename">nf-test pipeline pass</span><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>nf-test<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tests/main.sayhello.nf.test
+<p>Como antes, comenzamos con los detalles de la prueba, seguidos de los bloques <code>when</code> y <code>then</code>. Sin embargo, también tenemos un bloque <code>process</code> adicional que nos permite definir las entradas al proceso.</p>
+<p>Ejecutemos la prueba para ver si funciona.</p>
+<div class="highlight"><span class="filename">pasa pipeline nf-test</span><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>nf-test<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tests/main.sayhello.nf.test
 </code></pre></div>
-<div class="highlight"><span class="filename">Process test fails</span><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="go">&gt; nf-test test tests/main.sayhello.nf.test</span>
+<div class="highlight"><span class="filename">Falla la prueba del proceso</span><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="go">&gt; nf-test test tests/main.sayhello.nf.test</span>
 <a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>
 <a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a><span class="go">🚀 nf-test 0.9.3</span>
 <a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a><span class="go">https://www.nf-test.com</span>
@@ -4794,8 +4835,8 @@ You can see the full workflow code below.</p>
 <a id="__codelineno-35-23" name="__codelineno-35-23" href="#__codelineno-35-23"></a>
 <a id="__codelineno-35-24" name="__codelineno-35-24" href="#__codelineno-35-24"></a><span class="go">FAILURE: Executed 1 tests in 4.884s (1 failed)</span>
 </code></pre></div>
-<p>The test fails because the <code>sayHello</code> process declares 1 input but was called with 0 arguments. Let's fix that by adding an input to the process. Remember from <a href="../../hello_nextflow/03_hello_workflow/">Hello Workflow</a> (and the warmup section above) that our <code>sayHello</code> process takes a single value input, which we will need to provide. We should also fix the test name to better reflect what we're testing.</p>
-<p><strong>Before:</strong></p>
+<p>La prueba falla porque el proceso <code>sayHello</code> declara 1 entrada pero fue llamado con 0 argumentos. Arreglemos eso agregando una entrada al proceso. Recuerde de <a href="../../hello_nextflow/03_hello_workflow/">Hello Workflow</a> (y la sección de calentamiento anterior) que nuestro proceso <code>sayHello</code> toma una sola entrada de valor, que necesitaremos proporcionar. También deberíamos corregir el nombre de la prueba para reflejar mejor lo que estamos probando.</p>
+<p><strong>Antes:</strong></p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">tests/main.sayhello.nf.test</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-36-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-36-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-36-3"> 3</a></span>
@@ -4838,7 +4879,7 @@ You can see the full workflow code below.</p>
 <a id="__codelineno-36-20" name="__codelineno-36-20"></a>
 <a id="__codelineno-36-21" name="__codelineno-36-21"></a><span class="w">    </span><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p><strong>After:</strong></p>
+<p><strong>Después:</strong></p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">tests/main.sayhello.nf.test</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-37-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-37-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-37-3"> 3</a></span>
@@ -4879,8 +4920,8 @@ You can see the full workflow code below.</p>
 <a id="__codelineno-37-19" name="__codelineno-37-19"></a>
 <a id="__codelineno-37-20" name="__codelineno-37-20"></a><span class="w">    </span><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>Let's run the test again to see if it works.</p>
-<div class="highlight"><span class="filename">nf-test pipeline pass</span><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="go">&gt; nf-test test tests/main.sayhello.nf.test</span>
+<p>Ejecutemos la prueba nuevamente para ver si funciona.</p>
+<div class="highlight"><span class="filename">pasa pipeline nf-test</span><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="go">&gt; nf-test test tests/main.sayhello.nf.test</span>
 <a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a>
 <a id="__codelineno-38-3" name="__codelineno-38-3" href="#__codelineno-38-3"></a><span class="go">🚀 nf-test 0.9.3</span>
 <a id="__codelineno-38-4" name="__codelineno-38-4" href="#__codelineno-38-4"></a><span class="go">https://www.nf-test.com</span>
@@ -4899,31 +4940,31 @@ You can see the full workflow code below.</p>
 <a id="__codelineno-38-17" name="__codelineno-38-17" href="#__codelineno-38-17"></a>
 <a id="__codelineno-38-18" name="__codelineno-38-18" href="#__codelineno-38-18"></a><span class="go">SUCCESS: Executed 1 tests in 1.611s</span>
 </code></pre></div>
-<p>Success! The test passes because the <code>sayHello</code> process ran successfully and the output was created.</p>
-<h3 id="22-check-out-the-snapshot-created-by-the-test">2.2. Check out the snapshot created by the test<a class="headerlink" href="#22-check-out-the-snapshot-created-by-the-test" title="Permanent link">&para;</a></h3>
-<p>If we look at the <code>tests/main.sayhello.nf.test</code> file, we can see it uses a method <code>snapshot()</code> in the assertion block:</p>
+<p>¡Éxito! La prueba pasa porque el proceso <code>sayHello</code> se ejecutó correctamente y se creó la salida.</p>
+<h3 id="22-revisar-la-instantanea-creada-por-la-prueba">2.2. Revisar la instantánea creada por la prueba<a class="headerlink" href="#22-revisar-la-instantanea-creada-por-la-prueba" title="Permanent link">&para;</a></h3>
+<p>Si miramos el archivo <code>tests/main.sayhello.nf.test</code>, podemos ver que usa un método <code>snapshot()</code> en el bloque de aserción:</p>
 <div class="highlight"><span class="filename">tests/main.sayhello.nf.test</span><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="k">assert</span><span class="w"> </span><span class="n">snapshot</span><span class="o">(</span><span class="n">process</span><span class="o">.</span><span class="na">out</span><span class="o">).</span><span class="na">match</span><span class="o">()</span>
 </code></pre></div>
-<p>This is telling nf-test to create a snapshot of the output of the <code>sayHello</code> process. Let's take a look at the contents of the snapshot file.</p>
-<div class="highlight"><span class="filename">Snapshot file contents</span><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="go">code tests/main.sayhello.nf.test.snap</span>
+<p>Esto le está diciendo a nf-test que cree una instantánea de la salida del proceso <code>sayHello</code>. Echemos un vistazo al contenido del archivo de instantánea.</p>
+<div class="highlight"><span class="filename">Contenido del archivo de instantánea</span><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="go">code tests/main.sayhello.nf.test.snap</span>
 </code></pre></div>
-<p>We won't print it here, but you should see a JSON file containing details of the process and process outputs. In particular, we can see a line that looks like this:</p>
-<div class="highlight"><span class="filename">Snapshot file contents</span><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a><span class="nt">&quot;0&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<p>No lo imprimiremos aquí, pero debería ver un archivo JSON que contiene detalles del proceso y las salidas del proceso. En particular, podemos ver una línea que se ve así:</p>
+<div class="highlight"><span class="filename">Contenido del archivo de instantánea</span><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a><span class="nt">&quot;0&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a><span class="w">    </span><span class="s2">&quot;hello-output.txt:md5,b1946ac92492d2347c6235b4d2611184&quot;</span>
 <a id="__codelineno-41-3" name="__codelineno-41-3" href="#__codelineno-41-3"></a><span class="p">]</span>
 </code></pre></div>
-<p>This represents the outputs created by the <code>sayHello</code> process, which we are testing explicitly. If we re-run the test, the program will check that the new output matches the output that was originally recorded. This is a quick, simple way of testing that process outputs don't change, which is why nf-test provides it as a default.</p>
+<p>Esto representa las salidas creadas por el proceso <code>sayHello</code>, que estamos probando explícitamente. Si volvemos a ejecutar la prueba, el programa verificará que la nueva salida coincida con la salida que se registró originalmente. Esta es una forma rápida y simple de probar que las salidas del proceso no cambien, por lo que nf-test la proporciona como predeterminada.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>That means we have to be sure that the output we record in the original run is correct!</p>
+<p>¡Eso significa que debemos estar seguros de que la salida que registramos en la ejecución original es correcta!</p>
 </div>
-<p>If, in the course of future development, something in the code changes that causes the output to be different, the test will fail and we will have to determine whether the change is expected or not.</p>
+<p>Si, en el curso del desarrollo futuro, algo en el código cambia que hace que la salida sea diferente, la prueba fallará y tendremos que determinar si el cambio es esperado o no.</p>
 <ul>
-<li>If it turns out that something in the code broke, we will have to fix it, with the expectation that the fixed code will pass the test.</li>
-<li>If it is an expected change (e.g., the tool has been improved and the results are better) then we will need to update the snapshot to accept the new output as the reference to match. nf-test has a parameter <code>--update-snapshot</code> for this purpose.</li>
+<li>Si resulta que algo en el código se rompió, tendremos que arreglarlo, con la expectativa de que el código corregido pasará la prueba.</li>
+<li>Si es un cambio esperado (por ejemplo, la herramienta se ha mejorado y los resultados son mejores) entonces necesitaremos actualizar la instantánea para aceptar la nueva salida como referencia para coincidir. nf-test tiene un parámetro <code>--update-snapshot</code> para este propósito.</li>
 </ul>
-<p>We can run the test again and see the test should pass:</p>
-<div class="highlight"><span class="filename">nf-test process pass with snapshot</span><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a><span class="go">&gt; nf-test test tests/main.sayhello.nf.test</span>
+<p>Podemos ejecutar la prueba nuevamente y ver que la prueba debería pasar:</p>
+<div class="highlight"><span class="filename">pasa proceso nf-test con instantánea</span><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a><span class="go">&gt; nf-test test tests/main.sayhello.nf.test</span>
 <a id="__codelineno-42-2" name="__codelineno-42-2" href="#__codelineno-42-2"></a>
 <a id="__codelineno-42-3" name="__codelineno-42-3" href="#__codelineno-42-3"></a><span class="go">🚀 nf-test 0.9.3</span>
 <a id="__codelineno-42-4" name="__codelineno-42-4" href="#__codelineno-42-4"></a><span class="go">https://www.nf-test.com</span>
@@ -4937,16 +4978,16 @@ You can see the full workflow code below.</p>
 <a id="__codelineno-42-12" name="__codelineno-42-12" href="#__codelineno-42-12"></a>
 <a id="__codelineno-42-13" name="__codelineno-42-13" href="#__codelineno-42-13"></a><span class="go">SUCCESS: Executed 1 tests in 1.685s</span>
 </code></pre></div>
-<p>Success! The test passes because the <code>sayHello</code> process ran successfully and the output matched the snapshot.</p>
-<h3 id="23-alternative-to-snapshots-direct-content-assertions">2.3. Alternative to Snapshots: Direct Content Assertions<a class="headerlink" href="#23-alternative-to-snapshots-direct-content-assertions" title="Permanent link">&para;</a></h3>
-<p>While snapshots are great for catching any changes in output, sometimes you want to verify specific content without being so strict about the entire file matching. For example:</p>
+<p>¡Éxito! La prueba pasa porque el proceso <code>sayHello</code> se ejecutó correctamente y la salida coincidió con la instantánea.</p>
+<h3 id="23-alternativa-a-las-instantaneas-aserciones-de-contenido-directo">2.3. Alternativa a las instantáneas: aserciones de contenido directo<a class="headerlink" href="#23-alternativa-a-las-instantaneas-aserciones-de-contenido-directo" title="Permanent link">&para;</a></h3>
+<p>Si bien las instantáneas son excelentes para detectar cualquier cambio en la salida, a veces desea verificar contenido específico sin ser tan estricto sobre que todo el archivo coincida. Por ejemplo:</p>
 <ul>
-<li>When parts of the output might change (timestamps, random IDs, etc.) but certain key content must be present</li>
-<li>When you want to check for specific patterns or values in the output</li>
-<li>When you want to make the test more explicit about what constitutes success</li>
+<li>Cuando partes de la salida pueden cambiar (marcas de tiempo, IDs aleatorios, etc.) pero cierto contenido clave debe estar presente</li>
+<li>Cuando desea verificar patrones o valores específicos en la salida</li>
+<li>Cuando desea hacer que la prueba sea más explícita sobre qué constituye el éxito</li>
 </ul>
-<p>Here's how we could modify our test to check specific content:</p>
-<p><strong>Before:</strong></p>
+<p>Aquí está cómo podríamos modificar nuestra prueba para verificar contenido específico:</p>
+<p><strong>Antes:</strong></p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">tests/main.sayhello.nf.test</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-43-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-43-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-43-3"> 3</a></span>
@@ -4987,7 +5028,7 @@ You can see the full workflow code below.</p>
 <a id="__codelineno-43-19" name="__codelineno-43-19"></a>
 <a id="__codelineno-43-20" name="__codelineno-43-20"></a><span class="w">    </span><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p><strong>After:</strong></p>
+<p><strong>Después:</strong></p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">tests/main.sayhello.nf.test</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-44-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-44-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-44-3"> 3</a></span>
@@ -5028,18 +5069,18 @@ You can see the full workflow code below.</p>
 <a id="__codelineno-44-19" name="__codelineno-44-19"></a>
 <a id="__codelineno-44-20" name="__codelineno-44-20"></a><span class="w">    </span><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>Note that nf-test sees the process outputs as a list of lists, so <code>process.out[0][0]</code> is fetching the first part of the first channel item (or 'emission') from this process.</p>
-<p>This approach:</p>
+<p>Tenga en cuenta que nf-test ve las salidas del proceso como una lista de listas, por lo que <code>process.out[0][0]</code> está obteniendo la primera parte del primer elemento del canal (o 'emisión') de este proceso.</p>
+<p>Este enfoque:</p>
 <ul>
-<li>Makes it clear exactly what we expect in the output</li>
-<li>Is more resilient to irrelevant changes in the output</li>
-<li>Provides better error messages when tests fail</li>
-<li>Allows for more complex validations (regex patterns, numerical comparisons, etc.)</li>
+<li>Deja claro exactamente qué esperamos en la salida</li>
+<li>Es más resistente a cambios irrelevantes en la salida</li>
+<li>Proporciona mejores mensajes de error cuando las pruebas fallan</li>
+<li>Permite validaciones más complejas (patrones regex, comparaciones numéricas, etc.)</li>
 </ul>
-<p>Let's run the test to see if it works.</p>
-<div class="highlight"><span class="filename">nf-test pipeline pass</span><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a>nf-test<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tests/main.sayhello.nf.test
+<p>Ejecutemos la prueba para ver si funciona.</p>
+<div class="highlight"><span class="filename">pasa pipeline nf-test</span><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a>nf-test<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tests/main.sayhello.nf.test
 </code></pre></div>
-<div class="highlight"><span class="filename">Process test fails</span><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a><span class="go">&gt; nf-test test tests/main.sayhello.nf.test</span>
+<div class="highlight"><span class="filename">Falla la prueba del proceso</span><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a><span class="go">&gt; nf-test test tests/main.sayhello.nf.test</span>
 <a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a>
 <a id="__codelineno-46-3" name="__codelineno-46-3" href="#__codelineno-46-3"></a><span class="go">🚀 nf-test 0.9.3</span>
 <a id="__codelineno-46-4" name="__codelineno-46-4" href="#__codelineno-46-4"></a><span class="go">https://www.nf-test.com</span>
@@ -5053,8 +5094,8 @@ You can see the full workflow code below.</p>
 <a id="__codelineno-46-12" name="__codelineno-46-12" href="#__codelineno-46-12"></a>
 <a id="__codelineno-46-13" name="__codelineno-46-13" href="#__codelineno-46-13"></a><span class="go">SUCCESS: Executed 1 tests in 7.208s</span>
 </code></pre></div>
-<h3 id="24-test-the-converttoupper-process">2.4. Test the <code>convertToUpper</code> process<a class="headerlink" href="#24-test-the-converttoupper-process" title="Permanent link">&para;</a></h3>
-<p>Let's open the <code>tests/main.converttoupper.nf.test</code> file and take a look at the contents:</p>
+<h3 id="24-probar-el-proceso-converttoupper">2.4. Probar el proceso <code>convertToUpper</code><a class="headerlink" href="#24-probar-el-proceso-converttoupper" title="Permanent link">&para;</a></h3>
+<p>Abramos el archivo <code>tests/main.converttoupper.nf.test</code> y veamos el contenido:</p>
 <div class="highlight"><span class="filename">tests/main.converttoupper.nf.test</span><pre><span></span><code><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a><span class="n">nextflow_process</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-47-2" name="__codelineno-47-2" href="#__codelineno-47-2"></a>
 <a id="__codelineno-47-3" name="__codelineno-47-3" href="#__codelineno-47-3"></a><span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="s2">&quot;Test Process convertToUpper&quot;</span>
@@ -5085,15 +5126,15 @@ You can see the full workflow code below.</p>
 <a id="__codelineno-47-28" name="__codelineno-47-28" href="#__codelineno-47-28"></a>
 <a id="__codelineno-47-29" name="__codelineno-47-29" href="#__codelineno-47-29"></a><span class="o">}</span>
 </code></pre></div>
-<p>This is a similar test to the <code>sayHello</code> process, but it's testing the <code>convertToUpper</code> process. We know this one will fail because just like with <code>sayHello</code>, the <code>convertToUpper</code> process takes a single path input, but we haven't specified one.</p>
-<p>We now need to supply a single input file to the convertToUpper process, which includes some text that we want to convert to uppercase. There are lots of ways we could do this:</p>
+<p>Esta es una prueba similar al proceso <code>sayHello</code>, pero está probando el proceso <code>convertToUpper</code>. Sabemos que este fallará porque al igual que con <code>sayHello</code>, el proceso <code>convertToUpper</code> toma una sola entrada de ruta, pero no hemos especificado una.</p>
+<p>Ahora necesitamos proporcionar un solo archivo de entrada al proceso convertToUpper, que incluye algo de texto que queremos convertir a mayúsculas. Hay muchas formas en que podríamos hacer esto:</p>
 <ul>
-<li>We could create a dedicated file to test</li>
-<li>We could re-use the existing data/greetings.csv file</li>
-<li>We could create it on the fly within the test</li>
+<li>Podríamos crear un archivo dedicado para probar</li>
+<li>Podríamos reutilizar el archivo data/greetings.csv existente</li>
+<li>Podríamos crearlo sobre la marcha dentro de la prueba</li>
 </ul>
-<p>For now, let's re-use the existing data/greetings.csv file using the example we used with the pipeline level test. As before, we can name the test to better reflect what we're testing, but this time let's leave it to 'snapshot' the content rather than checking for specific strings (as we did in the other process).</p>
-<p><strong>Before:</strong></p>
+<p>Por ahora, reutilicemos el archivo data/greetings.csv existente usando el ejemplo que usamos con la prueba a nivel de pipeline. Como antes, podemos nombrar la prueba para reflejar mejor lo que estamos probando, pero esta vez dejemos que tome una 'instantánea' del contenido en lugar de verificar cadenas específicas (como hicimos en el otro proceso).</p>
+<p><strong>Antes:</strong></p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">tests/main.converttoupper.nf.test</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-48-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-48-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-48-3"> 3</a></span>
@@ -5136,7 +5177,7 @@ You can see the full workflow code below.</p>
 <a id="__codelineno-48-20" name="__codelineno-48-20"></a>
 <a id="__codelineno-48-21" name="__codelineno-48-21"></a><span class="w">    </span><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p><strong>After:</strong></p>
+<p><strong>Después:</strong></p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">tests/main.converttoupper.nf.test</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-49-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-49-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-49-3"> 3</a></span>
@@ -5177,10 +5218,10 @@ You can see the full workflow code below.</p>
 <a id="__codelineno-49-19" name="__codelineno-49-19"></a>
 <a id="__codelineno-49-20" name="__codelineno-49-20"></a><span class="w">    </span><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>And run the test!</p>
-<div class="highlight"><span class="filename">nf-test pipeline pass</span><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a>nf-test<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tests/main.converttoupper.nf.test
+<p>¡Y ejecutar la prueba!</p>
+<div class="highlight"><span class="filename">pasa pipeline nf-test</span><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a>nf-test<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tests/main.converttoupper.nf.test
 </code></pre></div>
-<div class="highlight"><span class="filename">nf-test process convertToUpper pass</span><pre><span></span><code><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a><span class="go">&gt; nf-test test tests/main.converttoupper.nf.test</span>
+<div class="highlight"><span class="filename">pasa proceso convertToUpper nf-test</span><pre><span></span><code><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a><span class="go">&gt; nf-test test tests/main.converttoupper.nf.test</span>
 <a id="__codelineno-51-2" name="__codelineno-51-2" href="#__codelineno-51-2"></a>
 <a id="__codelineno-51-3" name="__codelineno-51-3" href="#__codelineno-51-3"></a><span class="go">🚀 nf-test 0.9.3</span>
 <a id="__codelineno-51-4" name="__codelineno-51-4" href="#__codelineno-51-4"></a><span class="go">https://www.nf-test.com</span>
@@ -5199,10 +5240,10 @@ You can see the full workflow code below.</p>
 <a id="__codelineno-51-17" name="__codelineno-51-17" href="#__codelineno-51-17"></a>
 <a id="__codelineno-51-18" name="__codelineno-51-18" href="#__codelineno-51-18"></a><span class="go">SUCCESS: Executed 1 tests in 1.764s</span>
 </code></pre></div>
-<p>Note, we have created a snapshot file for the <code>convertToUpper</code> process at <code>tests/main.converttoupper.nf.test.snap</code>. If we run the test again, we should see the nf-test passes again.</p>
-<div class="highlight"><span class="filename">nf-test process convertToUpper pass</span><pre><span></span><code><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a>nf-test<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tests/main.converttoupper.nf.test
+<p>Tenga en cuenta que hemos creado un archivo de instantánea para el proceso <code>convertToUpper</code> en <code>tests/main.converttoupper.nf.test.snap</code>. Si ejecutamos la prueba nuevamente, deberíamos ver que nf-test pasa nuevamente.</p>
+<div class="highlight"><span class="filename">pasa proceso convertToUpper nf-test</span><pre><span></span><code><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a>nf-test<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tests/main.converttoupper.nf.test
 </code></pre></div>
-<div class="highlight"><span class="filename">nf-test process convertToUpper pass</span><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a><span class="go">&gt; nf-test test tests/main.converttoupper.nf.test</span>
+<div class="highlight"><span class="filename">pasa proceso convertToUpper nf-test</span><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a><span class="go">&gt; nf-test test tests/main.converttoupper.nf.test</span>
 <a id="__codelineno-53-2" name="__codelineno-53-2" href="#__codelineno-53-2"></a>
 <a id="__codelineno-53-3" name="__codelineno-53-3" href="#__codelineno-53-3"></a><span class="go">🚀 nf-test 0.9.3</span>
 <a id="__codelineno-53-4" name="__codelineno-53-4" href="#__codelineno-53-4"></a><span class="go">https://www.nf-test.com</span>
@@ -5216,20 +5257,20 @@ You can see the full workflow code below.</p>
 <a id="__codelineno-53-12" name="__codelineno-53-12" href="#__codelineno-53-12"></a>
 <a id="__codelineno-53-13" name="__codelineno-53-13" href="#__codelineno-53-13"></a><span class="go">SUCCESS: Executed 1 tests in 1.811s</span>
 </code></pre></div>
-<h3 id="takeaway_1">Takeaway<a class="headerlink" href="#takeaway_1" title="Permanent link">&para;</a></h3>
-<p>You know how to write tests for a Nextflow process and run them.</p>
-<h3 id="whats-next_1">What's next?<a class="headerlink" href="#whats-next_1" title="Permanent link">&para;</a></h3>
-<p>Learn how to run tests for everything at once!</p>
-<h2 id="3-run-tests-for-the-entire-repository">3. Run tests for the entire repository<a class="headerlink" href="#3-run-tests-for-the-entire-repository" title="Permanent link">&para;</a></h2>
-<p>Running nf-test on each component is fine, but laborious and error prone. Can't we just test everything at once?</p>
-<p>Yes we can!</p>
-<p>Let's run nf-test on the entire repo.</p>
-<h3 id="31-run-nf-test-on-the-entire-repo">3.1. Run nf-test on the entire repo<a class="headerlink" href="#31-run-nf-test-on-the-entire-repo" title="Permanent link">&para;</a></h3>
-<p>We can run nf-test on the entire repo by running the <code>nf-test test</code> command.</p>
+<h3 id="conclusion_1">Conclusión<a class="headerlink" href="#conclusion_1" title="Permanent link">&para;</a></h3>
+<p>Sabe cómo escribir pruebas para un proceso de Nextflow y ejecutarlas.</p>
+<h3 id="que-sigue_1">¿Qué sigue?<a class="headerlink" href="#que-sigue_1" title="Permanent link">&para;</a></h3>
+<p>¡Aprenda cómo ejecutar pruebas para todo a la vez!</p>
+<h2 id="3-ejecutar-pruebas-para-todo-el-repositorio">3. Ejecutar pruebas para todo el repositorio<a class="headerlink" href="#3-ejecutar-pruebas-para-todo-el-repositorio" title="Permanent link">&para;</a></h2>
+<p>Ejecutar nf-test en cada componente está bien, pero es laborioso y propenso a errores. ¿No podemos simplemente probar todo a la vez?</p>
+<p>¡Sí podemos!</p>
+<p>Ejecutemos nf-test en todo el repositorio.</p>
+<h3 id="31-ejecutar-nf-test-en-todo-el-repositorio">3.1. Ejecutar nf-test en todo el repositorio<a class="headerlink" href="#31-ejecutar-nf-test-en-todo-el-repositorio" title="Permanent link">&para;</a></h3>
+<p>Podemos ejecutar nf-test en todo el repositorio ejecutando el comando <code>nf-test test</code>.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1" href="#__codelineno-54-1"></a>nf-test<span class="w"> </span><span class="nb">test</span><span class="w"> </span>.
 </code></pre></div>
-<p>Note, we are just using the <code>.</code> to run everything from our current directory. This will include every test!</p>
-<div class="highlight"><span class="filename">nf-test repo pass</span><pre><span></span><code><a id="__codelineno-55-1" name="__codelineno-55-1" href="#__codelineno-55-1"></a><span class="go">&gt; nf-test test .</span>
+<p>Tenga en cuenta que solo estamos usando el <code>.</code> para ejecutar todo desde nuestro directorio actual. ¡Esto incluirá cada prueba!</p>
+<div class="highlight"><span class="filename">pasa repositorio nf-test</span><pre><span></span><code><a id="__codelineno-55-1" name="__codelineno-55-1" href="#__codelineno-55-1"></a><span class="go">&gt; nf-test test .</span>
 <a id="__codelineno-55-2" name="__codelineno-55-2" href="#__codelineno-55-2"></a>
 <a id="__codelineno-55-3" name="__codelineno-55-3" href="#__codelineno-55-3"></a><span class="go">🚀 nf-test 0.9.3</span>
 <a id="__codelineno-55-4" name="__codelineno-55-4" href="#__codelineno-55-4"></a><span class="go">https://www.nf-test.com</span>
@@ -5252,47 +5293,47 @@ You can see the full workflow code below.</p>
 <a id="__codelineno-55-21" name="__codelineno-55-21" href="#__codelineno-55-21"></a>
 <a id="__codelineno-55-22" name="__codelineno-55-22" href="#__codelineno-55-22"></a><span class="go">SUCCESS: Executed 4 tests in 13.481s</span>
 </code></pre></div>
-<p>Check that out! We ran 4 tests, 1 for each process and 2 for the whole pipeline with a single command. Imagine how powerful this is on a large codebase!</p>
+<p>¡Mire eso! Ejecutamos 4 pruebas, 1 para cada proceso y 2 para todo el pipeline con un solo comando. ¡Imagine lo poderoso que es esto en una base de código grande!</p>
 <hr />
-<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
-<p>In this side quest, you've learned to leverage nf-test's features to create and run tests for individual processes as well as end-to-end tests for the entire pipeline.
-You're now aware of the main two approaches to output validation, snapshots and direct content assertions, and and when to use either one.
-You also know how to run tests either one by one or for an entire project.</p>
-<p>Applying these techniques in your own work will enable you to ensure that:</p>
+<h2 id="resumen">Resumen<a class="headerlink" href="#resumen" title="Permanent link">&para;</a></h2>
+<p>En esta misión secundaria, ha aprendido a aprovechar las características de nf-test para crear y ejecutar pruebas para procesos individuales, así como pruebas de extremo a extremo para todo el pipeline.
+Ahora conoce los dos enfoques principales para la validación de salida, instantáneas y aserciones de contenido directo, y cuándo usar cada uno.
+También sabe cómo ejecutar pruebas ya sea una por una o para un proyecto completo.</p>
+<p>Aplicar estas técnicas en su propio trabajo le permitirá asegurarse de que:</p>
 <ul>
-<li>Your code works as expected</li>
-<li>Changes don't break existing functionality</li>
-<li>Other developers can contribute with confidence</li>
-<li>Problems can be identified and fixed quickly</li>
-<li>Output content matches expectations</li>
+<li>Su código funcione como se espera</li>
+<li>Los cambios no rompan la funcionalidad existente</li>
+<li>Otros desarrolladores puedan contribuir con confianza</li>
+<li>Los problemas puedan identificarse y solucionarse rápidamente</li>
+<li>El contenido de salida coincida con las expectativas</li>
 </ul>
-<h3 id="key-patterns">Key patterns<a class="headerlink" href="#key-patterns" title="Permanent link">&para;</a></h3>
+<h3 id="patrones-clave">Patrones clave<a class="headerlink" href="#patrones-clave" title="Permanent link">&para;</a></h3>
 <!-- TODO: Can we add snippets of code below to illustrate? -->
 
 <ol>
-<li>Pipeline-level tests:</li>
-<li>Basic success testing</li>
-<li>Process count verification</li>
-<li>Output file existence checks</li>
-<li>Process-level tests</li>
-<li>Two approaches to output validation:</li>
-<li>Using snapshots for complete output verification</li>
-<li>Using direct content assertions for specific content checks</li>
-<li>Running all tests in a repository with a single command</li>
+<li>Pruebas a nivel de pipeline:</li>
+<li>Pruebas básicas de éxito</li>
+<li>Verificación del conteo de procesos</li>
+<li>Verificaciones de existencia de archivos de salida</li>
+<li>Pruebas a nivel de proceso</li>
+<li>Dos enfoques para la validación de salida:</li>
+<li>Usar instantáneas para verificación completa de salida</li>
+<li>Usar aserciones de contenido directo para verificaciones de contenido específico</li>
+<li>Ejecutar todas las pruebas en un repositorio con un solo comando</li>
 </ol>
-<h3 id="additional-resources">Additional resources<a class="headerlink" href="#additional-resources" title="Permanent link">&para;</a></h3>
-<p>Check out the <a href="https://www.nf-test.com/">nf-test documentation</a> for more advanced testing features and best practices. You might want to:</p>
+<h3 id="recursos-adicionales">Recursos adicionales<a class="headerlink" href="#recursos-adicionales" title="Permanent link">&para;</a></h3>
+<p>Consulte la <a href="https://www.nf-test.com/">documentación de nf-test</a> para características de prueba más avanzadas y mejores prácticas. Puede que desee:</p>
 <ul>
-<li>Add more comprehensive assertions to your tests</li>
-<li>Write tests for edge cases and error conditions</li>
-<li>Set up continuous integration to run tests automatically</li>
-<li>Learn about other types of tests like workflow and module tests</li>
-<li>Explore more advanced content validation techniques</li>
+<li>Agregar aserciones más completas a sus pruebas</li>
+<li>Escribir pruebas para casos extremos y condiciones de error</li>
+<li>Configurar integración continua para ejecutar pruebas automáticamente</li>
+<li>Aprender sobre otros tipos de pruebas como pruebas de flujo de trabajo y módulo</li>
+<li>Explorar técnicas más avanzadas de validación de contenido</li>
 </ul>
-<p><strong>Remember:</strong> Tests are living documentation of how your code should behave. The more tests you write, and the more specific your assertions are, the more confident you can be in your pipeline's reliability.</p>
+<p><strong>Recuerde:</strong> Las pruebas son documentación viva de cómo debería comportarse su código. Cuantas más pruebas escriba, y cuanto más específicas sean sus aserciones, más confiado puede estar en la confiabilidad de su pipeline.</p>
 <hr />
-<h2 id="whats-next_2">What's next?<a class="headerlink" href="#whats-next_2" title="Permanent link">&para;</a></h2>
-<p>Return to the <a href="../">menu of Side Quests</a> or click the button in the bottom right of the page to move on to the next topic in the list.</p><style type="text/css">.quiz {
+<h2 id="que-sigue_2">¿Qué sigue?<a class="headerlink" href="#que-sigue_2" title="Permanent link">&para;</a></h2>
+<p>Regrese al <a href="../">menú de Misiones Secundarias</a> o haga clic en el botón en la parte inferior derecha de la página para pasar al siguiente tema de la lista.</p><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
   margin: 1rem 0;
@@ -6809,6 +6850,9 @@ window.mkdocsQuizConfig = {
 
 
 
+  
+  
+
 
 
   
@@ -6839,7 +6883,7 @@ window.mkdocsQuizConfig = {
       <nav class="md-footer__inner md-grid" aria-label="Pie" >
         
           
-          <a href="../essential_scripting_patterns/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Essential Nextflow Scripting Patterns">
+          <a href="../essential_scripting_patterns/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Patrones Esenciales de Scripting en Nextflow">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -6849,20 +6893,20 @@ window.mkdocsQuizConfig = {
                 Anterior
               </span>
               <div class="md-ellipsis">
-                Essential Nextflow Scripting Patterns
+                Patrones Esenciales de Scripting en Nextflow
               </div>
             </div>
           </a>
         
         
           
-          <a href="../../training_collections/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Training Collections">
+          <a href="../../training_collections/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Index">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Siguiente
               </span>
               <div class="md-ellipsis">
-                Training Collections
+                Index
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -6939,8 +6983,8 @@ window.mkdocsQuizConfig = {
   
 
 
-<h4>Cookie consent</h4>
-<p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our training materials better. Find out more on <a href="https://seqera.io/privacy-policy/#cookies" target="_blank" rel="noopener">how we use cookies</a>.</p>
+<h4>Consentimiento de cookies</h4>
+<p>Utilizamos cookies para reconocer tus visitas repetidas y preferencias, así como para medir la efectividad de nuestra documentación y si los usuarios encuentran lo que buscan. Con tu consentimiento, nos ayudas a mejorar nuestros materiales de capacitación. Obtén más información sobre <a href="https://seqera.io/privacy-policy/#cookies" target="_blank" rel="noopener">cómo usamos las cookies</a>.</p>
 <input class="md-toggle" type="checkbox" id="__settings" >
 <div class="md-consent__settings">
   <ul class="task-list">
@@ -7024,12 +7068,16 @@ window.mkdocsQuizConfig = {
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": {"alias": true, "provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": {"alias": true, "provider": "mike"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
-        <script src="../../../assets/javascripts/posthog.js"></script>
+        <script src="../../assets/javascripts/consent-sync.js"></script>
+      
+        <script src="../../assets/javascripts/posthog.js"></script>
+      
+        <script src="../../assets/javascripts/language-picker.js"></script>
       
     
   </body>

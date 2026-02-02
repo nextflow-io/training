@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://training.nextflow.io/0.dev/es/nf4_science/imaging/02_run_molkart/">
+        <link rel="canonical" href="https://training.nextflow.io/es/nf4_science/imaging/02_run_molkart/">
       
       
         <link rel="prev" href="../01_basics/">
@@ -18,33 +18,41 @@
       
       
         
-          <link rel="alternate" href="../../../../nf4_science/imaging/02_run_molkart/" hreflang="en">
+          <link rel="alternate" href="/" hreflang="en">
         
-          <link rel="alternate" href="../../../../pt/nf4_science/imaging/02_run_molkart/" hreflang="pt">
+          <link rel="alternate" href="/de/" hreflang="de">
         
-          <link rel="alternate" href="./" hreflang="es">
+          <link rel="alternate" href="/es/" hreflang="es">
         
-          <link rel="alternate" href="../../../../fr/nf4_science/imaging/02_run_molkart/" hreflang="fr">
+          <link rel="alternate" href="/fr/" hreflang="fr">
         
-          <link rel="alternate" href="../../../../it/nf4_science/imaging/02_run_molkart/" hreflang="it">
+          <link rel="alternate" href="/hi/" hreflang="hi">
         
-          <link rel="alternate" href="../../../../ko/nf4_science/imaging/02_run_molkart/" hreflang="ko">
+          <link rel="alternate" href="/it/" hreflang="it">
+        
+          <link rel="alternate" href="/ko/" hreflang="ko">
+        
+          <link rel="alternate" href="/pl/" hreflang="pl">
+        
+          <link rel="alternate" href="/pt/" hreflang="pt">
+        
+          <link rel="alternate" href="/tr/" hreflang="tr">
         
       
       
-      <link rel="icon" href="../../../../assets/img/nextflow-icon.png">
+      <link rel="icon" href="../../../assets/img/nextflow-icon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
     
     
       
-        <title>Part 2: Run nf-core/molkart - training.nextflow.io</title>
+        <title>Parte 2: Ejecutar nf-core/molkart - training.nextflow.io</title>
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
   
@@ -108,11 +116,11 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/fonts.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/fonts.css">
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/extra.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/extra.css">
     
-    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
   
@@ -147,7 +155,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#part-2-run-nf-coremolkart" class="md-skip">
+        <a href="#parte-2-ejecutar-nf-coremolkart" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -167,9 +175,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Cabecera">
-    <a href="../../../" title="training.nextflow.io" class="md-header__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
+    <a href="../../.." title="training.nextflow.io" class="md-header__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
       
-  <img src="../../../../assets/img/nextflow_logo_dark.png" alt="logo">
+  <img src="../../../assets/img/nextflow_logo_dark.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -186,7 +194,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Part 2: Run nf-core/molkart
+              Parte 2: Ejecutar nf-core/molkart
             
           </span>
         </div>
@@ -233,38 +241,62 @@
       <ul class="md-select__list">
         
           <li class="md-select__item">
-            <a href="../../../../nf4_science/imaging/02_run_molkart/" hreflang="en" class="md-select__link">
+            <a href="/" hreflang="en" class="md-select__link">
               English
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../../pt/nf4_science/imaging/02_run_molkart/" hreflang="pt" class="md-select__link">
-              Português
+            <a href="/de/" hreflang="de" class="md-select__link">
+              deutsch
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="./" hreflang="es" class="md-select__link">
-              Español
+            <a href="/es/" hreflang="es" class="md-select__link">
+              español
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../../fr/nf4_science/imaging/02_run_molkart/" hreflang="fr" class="md-select__link">
-              Français
+            <a href="/fr/" hreflang="fr" class="md-select__link">
+              français
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../../it/nf4_science/imaging/02_run_molkart/" hreflang="it" class="md-select__link">
-              Italiano
+            <a href="/hi/" hreflang="hi" class="md-select__link">
+              हिन्दी
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../../ko/nf4_science/imaging/02_run_molkart/" hreflang="ko" class="md-select__link">
-              Korean
+            <a href="/it/" hreflang="it" class="md-select__link">
+              italiano
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/ko/" hreflang="ko" class="md-select__link">
+              한국어
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/pl/" hreflang="pl" class="md-select__link">
+              Polski
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/pt/" hreflang="pt" class="md-select__link">
+              português
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/tr/" hreflang="tr" class="md-select__link">
+              Türkçe
             </a>
           </li>
         
@@ -384,9 +416,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../../" title="training.nextflow.io" class="md-nav__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
+    <a href="../../.." title="training.nextflow.io" class="md-nav__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
       
-  <img src="../../../../assets/img/nextflow_logo_dark.png" alt="logo">
+  <img src="../../../assets/img/nextflow_logo_dark.png" alt="logo">
 
     </a>
     training.nextflow.io
@@ -413,14 +445,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../" class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Home
+    Inicio
   
 
     
@@ -522,7 +554,7 @@
   <span class="md-ellipsis">
     
   
-    Getting started
+    Primeros pasos
   
 
     
@@ -550,7 +582,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run basic operations
+    Parte 1: Ejecutar operaciones básicas
   
 
     
@@ -578,7 +610,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Run real pipelines
+    Parte 2: Ejecutar pipelines reales
   
 
     
@@ -606,7 +638,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Run configuration
+    Parte 3: Configuración de ejecución
   
 
     
@@ -634,7 +666,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    Resumen del curso
   
 
     
@@ -662,7 +694,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Encuesta de retroalimentación
   
 
     
@@ -772,7 +804,7 @@
   <span class="md-ellipsis">
     
   
-    Getting started
+    Comenzando
   
 
     
@@ -800,7 +832,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Hello World
+    Parte 1: Hello World
   
 
     
@@ -828,7 +860,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Hello Channels
+    Parte 2: Hello Channels
   
 
     
@@ -856,7 +888,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Hello Workflow
+    Parte 3: Hello Workflow
   
 
     
@@ -884,7 +916,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Hello Modules
+    Parte 4: Hello Modules
   
 
     
@@ -912,7 +944,7 @@
   <span class="md-ellipsis">
     
   
-    Part 5: Hello Containers
+    Parte 5: Hello Containers
   
 
     
@@ -940,7 +972,7 @@
   <span class="md-ellipsis">
     
   
-    Part 6: Hello Config
+    Parte 6: Hello Config
   
 
     
@@ -968,7 +1000,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    Resumen del curso
   
 
     
@@ -996,7 +1028,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Encuesta de retroalimentación
   
 
     
@@ -1106,7 +1138,7 @@
   <span class="md-ellipsis">
     
   
-    Getting started
+    Primeros pasos
   
 
     
@@ -1134,7 +1166,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run a demo pipeline
+    Parte 1: Ejecutar un pipeline de demostración
   
 
     
@@ -1162,7 +1194,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Rewrite Hello for nf-core
+    Parte 2: Reescribir Hello para nf-core
   
 
     
@@ -1190,7 +1222,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Use an nf-core module
+    Parte 3: Usar un módulo nf-core
   
 
     
@@ -1218,7 +1250,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Make an nf-core module
+    Parte 4: Crear un módulo nf-core
   
 
     
@@ -1246,7 +1278,7 @@
   <span class="md-ellipsis">
     
   
-    Part 5: Input validation
+    Parte 5: Validación de entradas
   
 
     
@@ -1274,7 +1306,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    Resumen del curso
   
 
     
@@ -1302,7 +1334,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Encuesta de retroalimentación
   
 
     
@@ -1350,7 +1382,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Science
+    Nextflow para Ciencia
   
 
     
@@ -1366,7 +1398,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Nextflow for Science
+    Nextflow para Ciencia
   
 
           </label>
@@ -1386,7 +1418,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Science
+    Nextflow para Ciencia
   
 
     
@@ -1425,7 +1457,7 @@
   <span class="md-ellipsis">
     
   
-    Genomics
+    Nextflow para Genómica
   
 
     
@@ -1441,7 +1473,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Genomics
+    Nextflow para Genómica
   
 
           </label>
@@ -1461,7 +1493,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Genomics
+    Nextflow para Genómica
   
 
     
@@ -1489,7 +1521,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    Orientación
   
 
     
@@ -1517,7 +1549,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Per-sample variant calling
+    Parte 1: Llamado de variantes por muestra
   
 
     
@@ -1545,7 +1577,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Joint calling on a cohort
+    Parte 2: Llamado conjunto en una cohorte
   
 
     
@@ -1573,7 +1605,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Moving code into modules
+    Parte 3: Mover código a módulos
   
 
     
@@ -1601,7 +1633,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Adding tests
+    Parte 4: Agregando pruebas
   
 
     
@@ -1629,7 +1661,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Encuesta de retroalimentación
   
 
     
@@ -1657,7 +1689,7 @@
   <span class="md-ellipsis">
     
   
-    Next Steps
+    Próximos Pasos
   
 
     
@@ -1704,7 +1736,7 @@
   <span class="md-ellipsis">
     
   
-    RNAseq
+    Nextflow para RNAseq
   
 
     
@@ -1720,7 +1752,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    RNAseq
+    Nextflow para RNAseq
   
 
           </label>
@@ -1740,7 +1772,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for RNAseq
+    Nextflow para RNAseq
   
 
     
@@ -1768,7 +1800,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    Orientación
   
 
     
@@ -1796,7 +1828,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Method overview and manual testing
+    Parte 1: Descripción general del método y pruebas manuales
   
 
     
@@ -1824,7 +1856,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Single-sample implementation
+    Parte 2: Implementación de muestra única
   
 
     
@@ -1852,7 +1884,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Multi-sample paired-end implementation
+    Parte 3: Implementación con múltiples muestras de extremos pareados
   
 
     
@@ -1880,7 +1912,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    Encuesta de retroalimentación
   
 
     
@@ -1908,7 +1940,7 @@
   <span class="md-ellipsis">
     
   
-    Next Steps
+    Próximos Pasos
   
 
     
@@ -1957,7 +1989,7 @@
   <span class="md-ellipsis">
     
   
-    Imaging
+    Nextflow run for Imaging
   
 
     
@@ -1973,7 +2005,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Imaging
+    Nextflow run for Imaging
   
 
           </label>
@@ -2021,7 +2053,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    Orientación
   
 
     
@@ -2049,7 +2081,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run basic operations
+    Parte 1: Ejecutar operaciones básicas
   
 
     
@@ -2086,7 +2118,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Run nf-core/molkart
+    Parte 2: Ejecutar nf-core/molkart
   
 
     
@@ -2104,7 +2136,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Run nf-core/molkart
+    Parte 2: Ejecutar nf-core/molkart
   
 
     
@@ -2124,22 +2156,22 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#1-understanding-nf-core-pipelines" class="md-nav__link">
+  <a href="#1-comprender-los-pipelines-de-nf-core" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Understanding nf-core pipelines
+        1. Comprender los pipelines de nf-core
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Understanding nf-core pipelines">
+    <nav class="md-nav" aria-label="1. Comprender los pipelines de nf-core">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11-what-is-nf-core" class="md-nav__link">
+  <a href="#11-que-es-nf-core" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1. What is nf-core?
+        1.1. ¿Qué es nf-core?
       
     </span>
   </a>
@@ -2147,10 +2179,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#12-the-molkart-pipeline" class="md-nav__link">
+  <a href="#12-el-pipeline-molkart" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2. The molkart pipeline
+        1.2. El pipeline molkart
       
     </span>
   </a>
@@ -2161,22 +2193,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#2-run-molkart-with-test-data" class="md-nav__link">
+  <a href="#2-ejecutar-molkart-con-datos-de-prueba" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Run molkart with test data
+        2. Ejecutar molkart con datos de prueba
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. Run molkart with test data">
+    <nav class="md-nav" aria-label="2. Ejecutar molkart con datos de prueba">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#21-understanding-container-requirements" class="md-nav__link">
+  <a href="#21-comprender-los-requisitos-de-contenedores" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1. Understanding container requirements
+        2.1. Comprender los requisitos de contenedores
       
     </span>
   </a>
@@ -2184,10 +2216,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#22-configure-docker-and-launch-the-pipeline" class="md-nav__link">
+  <a href="#22-configurar-docker-e-iniciar-el-pipeline" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2. Configure Docker and launch the pipeline
+        2.2. Configurar Docker e iniciar el pipeline
       
     </span>
   </a>
@@ -2195,10 +2227,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#23-monitor-execution" class="md-nav__link">
+  <a href="#23-monitorear-la-ejecucion" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.3. Monitor execution
+        2.3. Monitorear la ejecución
       
     </span>
   </a>
@@ -2206,10 +2238,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#24-understanding-process-execution" class="md-nav__link">
+  <a href="#24-comprender-la-ejecucion-de-procesos" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.4. Understanding process execution
+        2.4. Comprender la ejecución de procesos
       
     </span>
   </a>
@@ -2217,10 +2249,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway" class="md-nav__link">
+  <a href="#conclusion" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        Conclusión
       
     </span>
   </a>
@@ -2228,10 +2260,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next" class="md-nav__link">
+  <a href="#que-sigue" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        ¿Qué sigue?
       
     </span>
   </a>
@@ -2242,22 +2274,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#3-find-and-examine-the-outputs" class="md-nav__link">
+  <a href="#3-encontrar-y-examinar-las-salidas" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Find and examine the outputs
+        3. Encontrar y examinar las salidas
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. Find and examine the outputs">
+    <nav class="md-nav" aria-label="3. Encontrar y examinar las salidas">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#31-locate-the-results-directory" class="md-nav__link">
+  <a href="#31-localizar-el-directorio-de-resultados" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1. Locate the results directory
+        3.1. Localizar el directorio de resultados
       
     </span>
   </a>
@@ -2265,10 +2297,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#32-examine-the-multiqc-report" class="md-nav__link">
+  <a href="#32-examinar-el-informe-multiqc" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.2. Examine the MultiQC report
+        3.2. Examinar el informe MultiQC
       
     </span>
   </a>
@@ -2276,10 +2308,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#33-examine-the-cell-by-transcript-tables" class="md-nav__link">
+  <a href="#33-examinar-las-tablas-de-celulas-por-transcripcion" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.3. Examine the cell-by-transcript tables
+        3.3. Examinar las tablas de células por transcripción
       
     </span>
   </a>
@@ -2287,10 +2319,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#34-view-execution-reports" class="md-nav__link">
+  <a href="#34-ver-informes-de-ejecucion" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.4. View execution reports
+        3.4. Ver informes de ejecución
       
     </span>
   </a>
@@ -2298,10 +2330,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway_1" class="md-nav__link">
+  <a href="#conclusion_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        Conclusión
       
     </span>
   </a>
@@ -2309,10 +2341,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next_1" class="md-nav__link">
+  <a href="#que-sigue_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        ¿Qué sigue?
       
     </span>
   </a>
@@ -2323,22 +2355,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#4-explore-the-work-directory" class="md-nav__link">
+  <a href="#4-explorar-el-directorio-de-trabajo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Explore the work directory
+        4. Explorar el directorio de trabajo
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="4. Explore the work directory">
+    <nav class="md-nav" aria-label="4. Explorar el directorio de trabajo">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#41-understanding-work-directory-structure" class="md-nav__link">
+  <a href="#41-comprender-la-estructura-del-directorio-de-trabajo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.1. Understanding work directory structure
+        4.1. Comprender la estructura del directorio de trabajo
       
     </span>
   </a>
@@ -2346,10 +2378,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#42-inspect-a-task-directory" class="md-nav__link">
+  <a href="#42-inspeccionar-un-directorio-de-tareas" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.2. Inspect a task directory
+        4.2. Inspeccionar un directorio de tareas
       
     </span>
   </a>
@@ -2357,10 +2389,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#43-work-directory-cleanup" class="md-nav__link">
+  <a href="#43-limpieza-del-directorio-de-trabajo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.3. Work directory cleanup
+        4.3. Limpieza del directorio de trabajo
       
     </span>
   </a>
@@ -2368,10 +2400,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway_2" class="md-nav__link">
+  <a href="#conclusion_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        Conclusión
       
     </span>
   </a>
@@ -2379,10 +2411,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next_2" class="md-nav__link">
+  <a href="#que-sigue_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        ¿Qué sigue?
       
     </span>
   </a>
@@ -2393,22 +2425,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#5-resume-a-pipeline-run" class="md-nav__link">
+  <a href="#5-reanudar-una-ejecucion-de-pipeline" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5. Resume a pipeline run
+        5. Reanudar una ejecución de pipeline
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="5. Resume a pipeline run">
+    <nav class="md-nav" aria-label="5. Reanudar una ejecución de pipeline">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#51-the-cache-mechanism" class="md-nav__link">
+  <a href="#51-el-mecanismo-de-cache" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5.1. The cache mechanism
+        5.1. El mecanismo de caché
       
     </span>
   </a>
@@ -2416,10 +2448,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#52-try-resume-with-molkart" class="md-nav__link">
+  <a href="#52-probar-resume-con-molkart" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5.2. Try resume with molkart
+        5.2. Probar resume con molkart
       
     </span>
   </a>
@@ -2427,10 +2459,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#53-when-resume-is-useful" class="md-nav__link">
+  <a href="#53-cuando-resume-es-util" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5.3. When resume is useful
+        5.3. Cuándo resume es útil
       
     </span>
   </a>
@@ -2438,10 +2470,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway_3" class="md-nav__link">
+  <a href="#conclusion_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        Conclusión
       
     </span>
   </a>
@@ -2449,10 +2481,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next_3" class="md-nav__link">
+  <a href="#que-sigue_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        ¿Qué sigue?
       
     </span>
   </a>
@@ -2672,7 +2704,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Organizing inputs
+    Parte 3: Organización de entradas
   
 
     
@@ -2700,7 +2732,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Configuration
+    Parte 4: Configuración
   
 
     
@@ -2728,7 +2760,7 @@
   <span class="md-ellipsis">
     
   
-    Survey
+    Encuesta
   
 
     
@@ -2756,7 +2788,7 @@
   <span class="md-ellipsis">
     
   
-    Next steps
+    Próximos pasos
   
 
     
@@ -2810,7 +2842,7 @@
   <span class="md-ellipsis">
     
   
-    Side Quests
+    Misiones Secundarias
   
 
     
@@ -2826,7 +2858,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Side Quests
+    Misiones Secundarias
   
 
           </label>
@@ -2846,7 +2878,7 @@
   <span class="md-ellipsis">
     
   
-    Side Quests
+    Misiones Secundarias
   
 
     
@@ -2874,7 +2906,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    Orientación
   
 
     
@@ -2902,7 +2934,7 @@
   <span class="md-ellipsis">
     
   
-    Development Environment
+    Entorno de Desarrollo
   
 
     
@@ -2930,7 +2962,7 @@
   <span class="md-ellipsis">
     
   
-    Metadata and meta maps
+    Metadatos y mapas de metadatos
   
 
     
@@ -2958,7 +2990,7 @@
   <span class="md-ellipsis">
     
   
-    File input processing
+    Procesamiento de archivos de entrada
   
 
     
@@ -2986,7 +3018,7 @@
   <span class="md-ellipsis">
     
   
-    Splitting and Grouping
+    División y Agrupación
   
 
     
@@ -3014,7 +3046,7 @@
   <span class="md-ellipsis">
     
   
-    Workflows of Workflows
+    Flujos de trabajo de flujos de trabajo
   
 
     
@@ -3042,7 +3074,7 @@
   <span class="md-ellipsis">
     
   
-    Debugging Workflows
+    Depuración de Flujos de Trabajo
   
 
     
@@ -3070,7 +3102,7 @@
   <span class="md-ellipsis">
     
   
-    Essential Nextflow Scripting Patterns
+    Patrones Esenciales de Scripting en Nextflow
   
 
     
@@ -3098,7 +3130,7 @@
   <span class="md-ellipsis">
     
   
-    Testing with nf-test
+    Pruebas con nf-test
   
 
     
@@ -3144,7 +3176,7 @@
   <span class="md-ellipsis">
     
   
-    Training Collections
+    Index
   
 
     
@@ -3160,7 +3192,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Training Collections
+    Index
   
 
           </label>
@@ -3180,7 +3212,7 @@
   <span class="md-ellipsis">
     
   
-    Training Collections
+    Index
   
 
     
@@ -3208,7 +3240,7 @@
   <span class="md-ellipsis">
     
   
-    The Architect's Toolkit I
+    Architects toolkit 1
   
 
     
@@ -3290,7 +3322,7 @@
   <span class="md-ellipsis">
     
   
-    Getting help
+    Obtener ayuda
   
 
     
@@ -3329,7 +3361,7 @@
   <span class="md-ellipsis">
     
   
-    Training environment
+    Opciones de entorno
   
 
     
@@ -3345,7 +3377,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Training environment
+    Opciones de entorno
   
 
           </label>
@@ -3365,7 +3397,7 @@
   <span class="md-ellipsis">
     
   
-    Environment options
+    Opciones de entorno
   
 
     
@@ -3421,7 +3453,7 @@
   <span class="md-ellipsis">
     
   
-    Local Devcontainers
+    Devcontainers locales
   
 
     
@@ -3449,7 +3481,7 @@
   <span class="md-ellipsis">
     
   
-    Manual installation
+    Instalación manual
   
 
     
@@ -3485,7 +3517,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow versions
+    Versiones de Nextflow
   
 
     
@@ -3513,7 +3545,7 @@
   <span class="md-ellipsis">
     
   
-    The Hello pipeline
+    El pipeline Hello
   
 
     
@@ -3555,22 +3587,22 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#1-understanding-nf-core-pipelines" class="md-nav__link">
+  <a href="#1-comprender-los-pipelines-de-nf-core" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Understanding nf-core pipelines
+        1. Comprender los pipelines de nf-core
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Understanding nf-core pipelines">
+    <nav class="md-nav" aria-label="1. Comprender los pipelines de nf-core">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11-what-is-nf-core" class="md-nav__link">
+  <a href="#11-que-es-nf-core" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1. What is nf-core?
+        1.1. ¿Qué es nf-core?
       
     </span>
   </a>
@@ -3578,10 +3610,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#12-the-molkart-pipeline" class="md-nav__link">
+  <a href="#12-el-pipeline-molkart" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2. The molkart pipeline
+        1.2. El pipeline molkart
       
     </span>
   </a>
@@ -3592,22 +3624,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#2-run-molkart-with-test-data" class="md-nav__link">
+  <a href="#2-ejecutar-molkart-con-datos-de-prueba" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Run molkart with test data
+        2. Ejecutar molkart con datos de prueba
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. Run molkart with test data">
+    <nav class="md-nav" aria-label="2. Ejecutar molkart con datos de prueba">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#21-understanding-container-requirements" class="md-nav__link">
+  <a href="#21-comprender-los-requisitos-de-contenedores" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1. Understanding container requirements
+        2.1. Comprender los requisitos de contenedores
       
     </span>
   </a>
@@ -3615,10 +3647,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#22-configure-docker-and-launch-the-pipeline" class="md-nav__link">
+  <a href="#22-configurar-docker-e-iniciar-el-pipeline" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2. Configure Docker and launch the pipeline
+        2.2. Configurar Docker e iniciar el pipeline
       
     </span>
   </a>
@@ -3626,10 +3658,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#23-monitor-execution" class="md-nav__link">
+  <a href="#23-monitorear-la-ejecucion" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.3. Monitor execution
+        2.3. Monitorear la ejecución
       
     </span>
   </a>
@@ -3637,10 +3669,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#24-understanding-process-execution" class="md-nav__link">
+  <a href="#24-comprender-la-ejecucion-de-procesos" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.4. Understanding process execution
+        2.4. Comprender la ejecución de procesos
       
     </span>
   </a>
@@ -3648,10 +3680,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway" class="md-nav__link">
+  <a href="#conclusion" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        Conclusión
       
     </span>
   </a>
@@ -3659,10 +3691,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next" class="md-nav__link">
+  <a href="#que-sigue" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        ¿Qué sigue?
       
     </span>
   </a>
@@ -3673,22 +3705,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#3-find-and-examine-the-outputs" class="md-nav__link">
+  <a href="#3-encontrar-y-examinar-las-salidas" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Find and examine the outputs
+        3. Encontrar y examinar las salidas
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. Find and examine the outputs">
+    <nav class="md-nav" aria-label="3. Encontrar y examinar las salidas">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#31-locate-the-results-directory" class="md-nav__link">
+  <a href="#31-localizar-el-directorio-de-resultados" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1. Locate the results directory
+        3.1. Localizar el directorio de resultados
       
     </span>
   </a>
@@ -3696,10 +3728,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#32-examine-the-multiqc-report" class="md-nav__link">
+  <a href="#32-examinar-el-informe-multiqc" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.2. Examine the MultiQC report
+        3.2. Examinar el informe MultiQC
       
     </span>
   </a>
@@ -3707,10 +3739,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#33-examine-the-cell-by-transcript-tables" class="md-nav__link">
+  <a href="#33-examinar-las-tablas-de-celulas-por-transcripcion" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.3. Examine the cell-by-transcript tables
+        3.3. Examinar las tablas de células por transcripción
       
     </span>
   </a>
@@ -3718,10 +3750,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#34-view-execution-reports" class="md-nav__link">
+  <a href="#34-ver-informes-de-ejecucion" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.4. View execution reports
+        3.4. Ver informes de ejecución
       
     </span>
   </a>
@@ -3729,10 +3761,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway_1" class="md-nav__link">
+  <a href="#conclusion_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        Conclusión
       
     </span>
   </a>
@@ -3740,10 +3772,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next_1" class="md-nav__link">
+  <a href="#que-sigue_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        ¿Qué sigue?
       
     </span>
   </a>
@@ -3754,22 +3786,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#4-explore-the-work-directory" class="md-nav__link">
+  <a href="#4-explorar-el-directorio-de-trabajo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Explore the work directory
+        4. Explorar el directorio de trabajo
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="4. Explore the work directory">
+    <nav class="md-nav" aria-label="4. Explorar el directorio de trabajo">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#41-understanding-work-directory-structure" class="md-nav__link">
+  <a href="#41-comprender-la-estructura-del-directorio-de-trabajo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.1. Understanding work directory structure
+        4.1. Comprender la estructura del directorio de trabajo
       
     </span>
   </a>
@@ -3777,10 +3809,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#42-inspect-a-task-directory" class="md-nav__link">
+  <a href="#42-inspeccionar-un-directorio-de-tareas" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.2. Inspect a task directory
+        4.2. Inspeccionar un directorio de tareas
       
     </span>
   </a>
@@ -3788,10 +3820,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#43-work-directory-cleanup" class="md-nav__link">
+  <a href="#43-limpieza-del-directorio-de-trabajo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.3. Work directory cleanup
+        4.3. Limpieza del directorio de trabajo
       
     </span>
   </a>
@@ -3799,10 +3831,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway_2" class="md-nav__link">
+  <a href="#conclusion_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        Conclusión
       
     </span>
   </a>
@@ -3810,10 +3842,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next_2" class="md-nav__link">
+  <a href="#que-sigue_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        ¿Qué sigue?
       
     </span>
   </a>
@@ -3824,22 +3856,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#5-resume-a-pipeline-run" class="md-nav__link">
+  <a href="#5-reanudar-una-ejecucion-de-pipeline" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5. Resume a pipeline run
+        5. Reanudar una ejecución de pipeline
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="5. Resume a pipeline run">
+    <nav class="md-nav" aria-label="5. Reanudar una ejecución de pipeline">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#51-the-cache-mechanism" class="md-nav__link">
+  <a href="#51-el-mecanismo-de-cache" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5.1. The cache mechanism
+        5.1. El mecanismo de caché
       
     </span>
   </a>
@@ -3847,10 +3879,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#52-try-resume-with-molkart" class="md-nav__link">
+  <a href="#52-probar-resume-con-molkart" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5.2. Try resume with molkart
+        5.2. Probar resume con molkart
       
     </span>
   </a>
@@ -3858,10 +3890,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#53-when-resume-is-useful" class="md-nav__link">
+  <a href="#53-cuando-resume-es-util" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5.3. When resume is useful
+        5.3. Cuándo resume es útil
       
     </span>
   </a>
@@ -3869,10 +3901,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway_3" class="md-nav__link">
+  <a href="#conclusion_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        Conclusión
       
     </span>
   </a>
@@ -3880,10 +3912,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next_3" class="md-nav__link">
+  <a href="#que-sigue_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        ¿Qué sigue?
       
     </span>
   </a>
@@ -4132,70 +4164,80 @@
                 
                   
 
+ 
+<a
+  href="https://github.com/nextflow-io/training/edit/master/docs/nf4_science/imaging/02_run_molkart.md"
+  title="Editar esta página"
+  class="md-content__button md-icon"
+  rel="edit"
+>
+   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+</a>
+   
+<a
+  href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md"
+  title="Improve translation"
+  class="md-content__button md-icon"
+>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 1H3c-1.1 0-2 .9-2 2v12l3-3h5v-1c0-2.2 1.79-4 4-4V3c0-1.1-.9-2-2-2m0 3H9.5c-.34 1.19-.96 2.3-1.82 3.26l-.02.02 1.26 1.25-.37 1.01L7 8l-2.5 2.5-.69-.73 2.53-2.49A8.6 8.6 0 0 1 4.86 5h.99c.31.6.69 1.17 1.15 1.68A7.7 7.7 0 0 0 8.57 4H3V3h3.5V2h1v1H11zm10 5h-8c-1.1 0-2 .9-2 2v7c0 1.1.9 2 2 2h7l3 3V11c0-1.1-.9-2-2-2m-1.37 10-.85-2.25h-3.56L14.38 19h-1.5l3.37-9h1.5l3.38 9zM17 12l1.22 3.25h-2.43z"/></svg>
+</a>
+ 
 
-  
-    <a href="https://github.com/nextflow-io/training/edit/master/docs/nf4_science/imaging/02_run_molkart.md" title="Editar esta página" class="md-content__button md-icon" rel="edit">
-      
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
-    </a>
-  
-  
-
-
-<h1 id="part-2-run-nf-coremolkart">Part 2: Run nf-core/molkart<a class="headerlink" href="#part-2-run-nf-coremolkart" title="Permanent link">&para;</a></h1>
-<p>In Part 1, we ran a simple Hello World workflow to understand the basics of Nextflow execution.
-Now we're going to run a real-world bioimaging pipeline: <strong>nf-core/molkart</strong>.</p>
-<p>This pipeline processes Molecular Cartography spatial transcriptomics data from Resolve Bioscience.
-However, the Nextflow patterns you'll learn here apply to any nf-core pipeline or production workflow.</p>
-<h2 id="1-understanding-nf-core-pipelines">1. Understanding nf-core pipelines<a class="headerlink" href="#1-understanding-nf-core-pipelines" title="Permanent link">&para;</a></h2>
-<p>Before we run the pipeline, let's understand what nf-core is and why it matters for running workflows.</p>
-<h3 id="11-what-is-nf-core">1.1. What is nf-core?<a class="headerlink" href="#11-what-is-nf-core" title="Permanent link">&para;</a></h3>
-<p><a href="https://nf-co.re/">nf-core</a> is a community-driven collection of high-quality Nextflow pipelines.
-All nf-core pipelines follow the same structure and conventions, which means once you learn to run one, you can run any of them.</p>
-<p>Key features of nf-core pipelines:</p>
+<h1 id="parte-2-ejecutar-nf-coremolkart">Parte 2: Ejecutar nf-core/molkart<a class="headerlink" href="#parte-2-ejecutar-nf-coremolkart" title="Permanent link">&para;</a></h1>
+<p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Traducción asistida por IA - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">más información y sugerencias</a></span></p>
+<p>En la Parte 1, ejecutamos un flujo de trabajo simple de Hello World para comprender los conceptos básicos de la ejecución de Nextflow.
+Ahora vamos a ejecutar un pipeline de bioimagen del mundo real: <strong>nf-core/molkart</strong>.</p>
+<p>Este pipeline procesa datos de transcriptómica espacial de Molecular Cartography de Resolve Bioscience.
+Sin embargo, los patrones de Nextflow que aprenderá aquí se aplican a cualquier pipeline de nf-core o flujo de trabajo de producción.</p>
+<h2 id="1-comprender-los-pipelines-de-nf-core">1. Comprender los pipelines de nf-core<a class="headerlink" href="#1-comprender-los-pipelines-de-nf-core" title="Permanent link">&para;</a></h2>
+<p>Antes de ejecutar el pipeline, entendamos qué es nf-core y por qué es importante para ejecutar flujos de trabajo.</p>
+<h3 id="11-que-es-nf-core">1.1. ¿Qué es nf-core?<a class="headerlink" href="#11-que-es-nf-core" title="Permanent link">&para;</a></h3>
+<p><a href="https://nf-co.re/">nf-core</a> es una colección impulsada por la comunidad de pipelines de Nextflow de alta calidad.
+Todos los pipelines de nf-core siguen la misma estructura y convenciones, lo que significa que una vez que aprende a ejecutar uno, puede ejecutar cualquiera de ellos.</p>
+<p>Características clave de los pipelines de nf-core:</p>
 <ul>
-<li><strong>Standardized structure</strong>: All pipelines have consistent parameter names and usage patterns</li>
-<li><strong>Built-in test data</strong>: Every pipeline includes test profiles for quick validation</li>
-<li><strong>Comprehensive documentation</strong>: Detailed usage instructions and parameter descriptions</li>
-<li><strong>Quality control</strong>: Automated QC reports using MultiQC</li>
-<li><strong>Container support</strong>: Pre-built containers for reproducibility</li>
+<li><strong>Estructura estandarizada</strong>: Todos los pipelines tienen nombres de parámetros y patrones de uso consistentes</li>
+<li><strong>Datos de prueba integrados</strong>: Cada pipeline incluye perfiles de prueba para validación rápida</li>
+<li><strong>Documentación completa</strong>: Instrucciones de uso detalladas y descripciones de parámetros</li>
+<li><strong>Control de calidad</strong>: Informes de QC automatizados usando MultiQC</li>
+<li><strong>Soporte de contenedores</strong>: Contenedores pre-construidos para reproducibilidad</li>
 </ul>
 <div class="admonition tip">
-<p class="admonition-title">Want to learn more about nf-core?</p>
-<p>For an in-depth introduction to nf-core pipeline development, check out the <a href="../../../hello_nf-core/">Hello nf-core</a> training course.
-It covers how to create and customize nf-core pipelines from scratch.</p>
+<p class="admonition-title">¿Quiere aprender más sobre nf-core?</p>
+<p>Para una introducción detallada al desarrollo de pipelines de nf-core, consulte el curso de entrenamiento <a href="../../../hello_nf-core/">Hello nf-core</a>.
+Cubre cómo crear y personalizar pipelines de nf-core desde cero.</p>
 </div>
-<h3 id="12-the-molkart-pipeline">1.2. The molkart pipeline<a class="headerlink" href="#12-the-molkart-pipeline" title="Permanent link">&para;</a></h3>
-<p><img alt="nf-core/molkart pipeline" src="../../../../nf4_science/imaging/img/molkart.png" /></p>
-<p>The <a href="https://nf-co.re/molkart">nf-core/molkart</a> pipeline processes spatial transcriptomics imaging data through several stages:</p>
+<h3 id="12-el-pipeline-molkart">1.2. El pipeline molkart<a class="headerlink" href="#12-el-pipeline-molkart" title="Permanent link">&para;</a></h3>
+<p><img alt="Pipeline nf-core/molkart" src="img/molkart.png" /></p>
+<p>El pipeline <a href="https://nf-co.re/molkart">nf-core/molkart</a> procesa datos de imágenes de transcriptómica espacial a través de varias etapas:</p>
 <ol>
-<li><strong>Image preprocessing</strong>: Grid pattern filling and optional contrast enhancement</li>
-<li><strong>Cell segmentation</strong>: Multiple algorithm options (Cellpose, Mesmer, ilastik, Stardist)</li>
-<li><strong>Spot assignment</strong>: Assign transcript spots to segmented cells</li>
-<li><strong>Quality control</strong>: Generate comprehensive QC reports</li>
+<li><strong>Preprocesamiento de imágenes</strong>: Relleno de patrón de cuadrícula y mejora de contraste opcional</li>
+<li><strong>Segmentación celular</strong>: Múltiples opciones de algoritmos (Cellpose, Mesmer, ilastik, Stardist)</li>
+<li><strong>Asignación de puntos</strong>: Asignar puntos de transcripción a células segmentadas</li>
+<li><strong>Control de calidad</strong>: Generar informes de QC completos</li>
 </ol>
-<p>The key outputs are:</p>
+<p>Las salidas clave son:</p>
 <ul>
-<li>Cell-by-transcript count tables</li>
-<li>Segmentation masks</li>
-<li>MultiQC quality control report</li>
+<li>Tablas de conteo de células por transcripción</li>
+<li>Máscaras de segmentación</li>
+<li>Informe de control de calidad MultiQC</li>
 </ul>
 <hr />
-<h2 id="2-run-molkart-with-test-data">2. Run molkart with test data<a class="headerlink" href="#2-run-molkart-with-test-data" title="Permanent link">&para;</a></h2>
-<p>Before we begin, let's clone the molkart repository locally so we can inspect its code:</p>
+<h2 id="2-ejecutar-molkart-con-datos-de-prueba">2. Ejecutar molkart con datos de prueba<a class="headerlink" href="#2-ejecutar-molkart-con-datos-de-prueba" title="Permanent link">&para;</a></h2>
+<p>Antes de comenzar, clonemos el repositorio de molkart localmente para que podamos inspeccionar su código:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">cd</span><span class="w"> </span>/workspaces/training/nf4-science/imaging
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>git<span class="w"> </span>clone<span class="w"> </span>--branch<span class="w"> </span><span class="m">1</span>.2.0<span class="w"> </span>--depth<span class="w"> </span><span class="m">1</span><span class="w"> </span>https://github.com/nf-core/molkart
 </code></pre></div>
-<p>This creates a <code>molkart/</code> directory containing the complete pipeline source code.</p>
+<p>Esto crea un directorio <code>molkart/</code> que contiene el código fuente completo del pipeline.</p>
 <div class="admonition note">
-<p class="admonition-title">Why are we cloning locally?</p>
-<p>Typically, you would run nf-core pipelines directly from GitHub using <code>nextflow run nf-core/molkart -r 1.2.0</code>.
-Nextflow automatically downloads the requested pipeline version for you to <code>$HOME/.nextflow/assets/nf-core/molkart</code> and runs it from there.
-However, for this training, we're cloning the pipeline to a different local directory so we can more easily inspect the code.</p>
+<p class="admonition-title">¿Por qué estamos clonando localmente?</p>
+<p>Típicamente, ejecutaría pipelines de nf-core directamente desde GitHub usando <code>nextflow run nf-core/molkart -r 1.2.0</code>.
+Nextflow descarga automáticamente la versión del pipeline solicitada para usted en <code>$HOME/.nextflow/assets/nf-core/molkart</code> y lo ejecuta desde allí.
+Sin embargo, para este entrenamiento, estamos clonando el pipeline a un directorio local diferente para que podamos inspeccionar el código más fácilmente.</p>
 </div>
-<h3 id="21-understanding-container-requirements">2.1. Understanding container requirements<a class="headerlink" href="#21-understanding-container-requirements" title="Permanent link">&para;</a></h3>
-<p>Before running the full pipeline, let's learn why containers are essential for nf-core pipelines.</p>
-<p>Let's try running the pipeline using the test dataset and parameters from the molkart test configuration:</p>
+<h3 id="21-comprender-los-requisitos-de-contenedores">2.1. Comprender los requisitos de contenedores<a class="headerlink" href="#21-comprender-los-requisitos-de-contenedores" title="Permanent link">&para;</a></h3>
+<p>Antes de ejecutar el pipeline completo, aprendamos por qué los contenedores son esenciales para los pipelines de nf-core.</p>
+<p>Intentemos ejecutar el pipeline usando el conjunto de datos de prueba y los parámetros de la configuración de prueba de molkart:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>./molkart<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span>--input<span class="w"> </span><span class="s1">&#39;data/samplesheet.csv&#39;</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span>--mindagap_tilesize<span class="w"> </span><span class="m">90</span><span class="w"> </span><span class="se">\</span>
@@ -4205,21 +4247,21 @@ However, for this training, we're cloning the pipeline to a different local dire
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">  </span>--segmentation_method<span class="w"> </span><span class="s2">&quot;mesmer,cellpose,stardist&quot;</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">  </span>--outdir<span class="w"> </span>results
 </code></pre></div>
-<p>Let's break down these parameters:</p>
+<p>Desglosemos estos parámetros:</p>
 <ul>
-<li><code>--input</code>: Path to the samplesheet containing sample metadata</li>
-<li><code>--mindagap_tilesize</code>, <code>--mindagap_boxsize</code>, <code>--mindagap_loopnum</code>: Parameters for grid pattern filling</li>
-<li><code>--clahe_pyramid_tile</code>: Kernel size for contrast enhancement</li>
-<li><code>--segmentation_method</code>: Which algorithm(s) to use for cell segmentation</li>
-<li><code>--outdir</code>: Where to save the results</li>
+<li><code>--input</code>: Ruta a la hoja de muestras que contiene metadatos de muestras</li>
+<li><code>--mindagap_tilesize</code>, <code>--mindagap_boxsize</code>, <code>--mindagap_loopnum</code>: Parámetros para el relleno de patrón de cuadrícula</li>
+<li><code>--clahe_pyramid_tile</code>: Tamaño del kernel para mejora de contraste</li>
+<li><code>--segmentation_method</code>: Qué algoritmo(s) usar para la segmentación celular</li>
+<li><code>--outdir</code>: Dónde guardar los resultados</li>
 </ul>
 <div class="admonition warning">
-<p class="admonition-title">This command will fail - that's intentional!</p>
-<p>We're deliberately running this without containers to demonstrate why they're needed.</p>
+<p class="admonition-title">¡Este comando fallará - eso es intencional!</p>
+<p>Estamos ejecutando esto deliberadamente sin contenedores para demostrar por qué son necesarios.</p>
 </div>
-<p>After a few moments, you'll see an error like this:</p>
+<p>Después de unos momentos, verá un error como este:</p>
 <details class="failure">
-<summary>Command output</summary>
+<summary>Salida del comando</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="go">ERROR ~ Error executing process &gt; &#39;NFCORE_MOLKART:MOLKART:MINDAGAP_DUPLICATEFINDER (mem_only)&#39;</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="go">Caused by:</span>
@@ -4238,32 +4280,32 @@ However, for this training, we're cloning the pipeline to a different local dire
 <a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="go">  .command.sh: line 3: duplicate_finder.py: command not found</span>
 </code></pre></div>
 </details>
-<p><strong>What's happening here?</strong></p>
-<p>The error <code>command not found</code> (exit status 127) means Nextflow tried to run <code>duplicate_finder.py</code> but couldn't find it on your system.
-This is because:</p>
+<p><strong>¿Qué está sucediendo aquí?</strong></p>
+<p>El error <code>command not found</code> (estado de salida 127) significa que Nextflow intentó ejecutar <code>duplicate_finder.py</code> pero no pudo encontrarlo en su sistema.
+Esto se debe a que:</p>
 <ol>
-<li>The pipeline expects specialized bioinformatics software to be installed</li>
-<li>These tools (like <code>duplicate_finder.py</code>, <code>apply_clahe.dask.py</code>, etc.) are not part of standard Linux distributions</li>
-<li>Without containers, Nextflow tries to run commands directly on your local machine</li>
+<li>El pipeline espera que el software de bioinformática especializado esté instalado</li>
+<li>Estas herramientas (como <code>duplicate_finder.py</code>, <code>apply_clahe.dask.py</code>, etc.) no son parte de las distribuciones estándar de Linux</li>
+<li>Sin contenedores, Nextflow intenta ejecutar comandos directamente en su máquina local</li>
 </ol>
-<p><strong>Where are these tools supposed to come from?</strong></p>
-<p>Let's inspect one of the process modules to see how it declares its software requirements.</p>
-<p>Open the CLAHE preprocessing module:</p>
+<p><strong>¿De dónde se supone que vienen estas herramientas?</strong></p>
+<p>Inspeccionemos uno de los módulos de proceso para ver cómo declara sus requisitos de software.</p>
+<p>Abra el módulo de preprocesamiento CLAHE:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>code<span class="w"> </span>molkart/modules/local/clahe/main.nf
 </code></pre></div>
-<p>Look at line 5 - you'll see:</p>
+<p>Mire la línea 5 - verá:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">container</span><span class="w"> </span><span class="s1">&#39;ghcr.io/schapirolabor/molkart-local:v0.0.4&#39;</span>
 </code></pre></div>
-<p>This line tells Nextflow: "To run this process, use the Docker image <code>ghcr.io/schapirolabor/molkart-local:v0.0.4</code>, which contains all the required software."</p>
-<p>Each process declares which container image provides its required tools.
-However, Nextflow only uses these containers if you tell it to!</p>
-<p><strong>The solution: Enable Docker in the configuration</strong></p>
-<h3 id="22-configure-docker-and-launch-the-pipeline">2.2. Configure Docker and launch the pipeline<a class="headerlink" href="#22-configure-docker-and-launch-the-pipeline" title="Permanent link">&para;</a></h3>
-<p>To enable Docker, we need to change <code>docker.enabled</code> from <code>false</code> to <code>true</code> in the <code>nextflow.config</code> file.</p>
-<p>Open the config file:</p>
+<p>Esta línea le dice a Nextflow: "Para ejecutar este proceso, use la imagen de Docker <code>ghcr.io/schapirolabor/molkart-local:v0.0.4</code>, que contiene todo el software requerido."</p>
+<p>Cada proceso declara qué imagen de contenedor proporciona sus herramientas requeridas.
+¡Sin embargo, Nextflow solo usa estos contenedores si usted se lo indica!</p>
+<p><strong>La solución: Habilitar Docker en la configuración</strong></p>
+<h3 id="22-configurar-docker-e-iniciar-el-pipeline">2.2. Configurar Docker e iniciar el pipeline<a class="headerlink" href="#22-configurar-docker-e-iniciar-el-pipeline" title="Permanent link">&para;</a></h3>
+<p>Para habilitar Docker, necesitamos cambiar <code>docker.enabled</code> de <code>false</code> a <code>true</code> en el archivo <code>nextflow.config</code>.</p>
+<p>Abra el archivo de configuración:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>code<span class="w"> </span>nextflow.config
 </code></pre></div>
-<p>Change <code>docker.enabled = false</code> to <code>docker.enabled = true</code>:</p>
+<p>Cambie <code>docker.enabled = false</code> a <code>docker.enabled = true</code>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">docker</span><span class="o">.</span><span class="na">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">process</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="n">resourceLimits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>
@@ -4272,7 +4314,7 @@ However, Nextflow only uses these containers if you tell it to!</p>
 <a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">    </span><span class="o">]</span>
 <a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="o">}</span>
 </code></pre></div>
-<p>Now run the pipeline again with the same command:</p>
+<p>Ahora ejecute el pipeline nuevamente con el mismo comando:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>./molkart<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span>--input<span class="w"> </span><span class="s1">&#39;data/samplesheet.csv&#39;</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span>--mindagap_tilesize<span class="w"> </span><span class="m">90</span><span class="w"> </span><span class="se">\</span>
@@ -4282,27 +4324,27 @@ However, Nextflow only uses these containers if you tell it to!</p>
 <a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">  </span>--segmentation_method<span class="w"> </span><span class="s2">&quot;cellpose,mesmer,stardist&quot;</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">  </span>--outdir<span class="w"> </span>results
 </code></pre></div>
-<p>This time, Nextflow will:</p>
+<p>Esta vez, Nextflow:</p>
 <ol>
-<li>Read the <code>docker.enabled = true</code> setting from the config</li>
-<li>Pull the required Docker images (first time only)</li>
-<li>Run each process inside its specified container</li>
-<li>Execute successfully because all tools are available inside the containers</li>
+<li>Leerá la configuración <code>docker.enabled = true</code> del config</li>
+<li>Descargará las imágenes de Docker requeridas (solo la primera vez)</li>
+<li>Ejecutará cada proceso dentro de su contenedor especificado</li>
+<li>Se ejecutará exitosamente porque todas las herramientas están disponibles dentro de los contenedores</li>
 </ol>
 <div class="admonition tip">
-<p class="admonition-title">Why containers matter</p>
-<p>Most nf-core pipelines <strong>require</strong> containerization (Docker, Singularity, Podman, etc.) because:</p>
+<p class="admonition-title">Por qué importan los contenedores</p>
+<p>La mayoría de los pipelines de nf-core <strong>requieren</strong> contenedorización (Docker, Singularity, Podman, etc.) porque:</p>
 <ul>
-<li>They use specialized bioinformatics software not available in standard environments</li>
-<li>Containers ensure reproducibility - the exact same software versions run everywhere</li>
-<li>You don't need to manually install dozens of tools and their dependencies</li>
+<li>Utilizan software de bioinformática especializado no disponible en entornos estándar</li>
+<li>Los contenedores aseguran reproducibilidad - las mismas versiones exactas de software se ejecutan en todas partes</li>
+<li>No necesita instalar manualmente docenas de herramientas y sus dependencias</li>
 </ul>
-<p>For more details about containers in Nextflow, see <a href="../../../hello_nextflow/05_hello_containers/">Hello Containers</a> from the Hello Nextflow training.</p>
+<p>Para más detalles sobre contenedores en Nextflow, consulte <a href="../../../hello_nextflow/05_hello_containers/">Hello Containers</a> del entrenamiento Hello Nextflow.</p>
 </div>
-<h3 id="23-monitor-execution">2.3. Monitor execution<a class="headerlink" href="#23-monitor-execution" title="Permanent link">&para;</a></h3>
-<p>As the pipeline runs, you'll see output similar to this:</p>
+<h3 id="23-monitorear-la-ejecucion">2.3. Monitorear la ejecución<a class="headerlink" href="#23-monitorear-la-ejecucion" title="Permanent link">&para;</a></h3>
+<p>Mientras se ejecuta el pipeline, verá una salida similar a esta:</p>
 <details class="success">
-<summary>Command output</summary>
+<summary>Salida del comando</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="go">Nextflow 25.04.8 is available - Please consider updating your version to it</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
 <a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="go">N E X T F L O W   ~  version 25.04.3</span>
@@ -4381,39 +4423,39 @@ However, Nextflow only uses these containers if you tell it to!</p>
 <a id="__codelineno-8-76" name="__codelineno-8-76" href="#__codelineno-8-76"></a><span class="go">Succeeded   : 22</span>
 </code></pre></div>
 </details>
-<p>Notice how this output is more detailed than our Hello World example because of the nf-core conventions the pipeline follows:</p>
+<p>Note cómo esta salida es más detallada que nuestro ejemplo de Hello World debido a las convenciones de nf-core que sigue el pipeline:</p>
 <ul>
-<li>Pipeline shows its version and logo</li>
-<li>Configuration parameters are displayed</li>
-<li>Multiple processes run in parallel (indicated by multiple process lines)</li>
-<li>Process names include the full module path (e.g., <code>NFCORE_MOLKART:MOLKART:MINDAGAP_MINDAGAP</code>)</li>
+<li>El pipeline muestra su versión y logo</li>
+<li>Se muestran los parámetros de configuración</li>
+<li>Múltiples procesos se ejecutan en paralelo (indicado por múltiples líneas de proceso)</li>
+<li>Los nombres de proceso incluyen la ruta completa del módulo (por ejemplo, <code>NFCORE_MOLKART:MOLKART:MINDAGAP_MINDAGAP</code>)</li>
 </ul>
-<h3 id="24-understanding-process-execution">2.4. Understanding process execution<a class="headerlink" href="#24-understanding-process-execution" title="Permanent link">&para;</a></h3>
-<p>The executor line <code>executor &gt; local (22)</code> tells you:</p>
+<h3 id="24-comprender-la-ejecucion-de-procesos">2.4. Comprender la ejecución de procesos<a class="headerlink" href="#24-comprender-la-ejecucion-de-procesos" title="Permanent link">&para;</a></h3>
+<p>La línea del executor <code>executor &gt; local (22)</code> le dice:</p>
 <ul>
-<li><strong>executor</strong>: Which compute environment is being used (<code>local</code> = your machine)</li>
-<li><strong>(22)</strong>: Total number of tasks launched</li>
+<li><strong>executor</strong>: Qué entorno de cómputo se está usando (<code>local</code> = su máquina)</li>
+<li><strong>(22)</strong>: Número total de tareas lanzadas</li>
 </ul>
-<p>Each process line shows:</p>
+<p>Cada línea de proceso muestra:</p>
 <ul>
-<li><strong>Hash</strong> (<code>[1a/2b3c4d]</code>): Work directory identifier (like before)</li>
-<li><strong>Process name</strong>: Full module path and process name</li>
-<li><strong>Input identifier</strong>: Sample name in parentheses</li>
-<li><strong>Progress</strong>: Percentage complete and count (e.g., <code>1 of 1 ✔</code>)</li>
+<li><strong>Hash</strong> (<code>[1a/2b3c4d]</code>): Identificador del directorio de trabajo (como antes)</li>
+<li><strong>Nombre del proceso</strong>: Ruta completa del módulo y nombre del proceso</li>
+<li><strong>Identificador de entrada</strong>: Nombre de muestra entre paréntesis</li>
+<li><strong>Progreso</strong>: Porcentaje completo y conteo (por ejemplo, <code>1 of 1 ✔</code>)</li>
 </ul>
-<h3 id="takeaway">Takeaway<a class="headerlink" href="#takeaway" title="Permanent link">&para;</a></h3>
-<p>You know how to launch an nf-core pipeline with test data and interpret its execution output.</p>
-<h3 id="whats-next">What's next?<a class="headerlink" href="#whats-next" title="Permanent link">&para;</a></h3>
-<p>Learn where to find the results and how to interpret them.</p>
+<h3 id="conclusion">Conclusión<a class="headerlink" href="#conclusion" title="Permanent link">&para;</a></h3>
+<p>Sabe cómo lanzar un pipeline de nf-core con datos de prueba e interpretar su salida de ejecución.</p>
+<h3 id="que-sigue">¿Qué sigue?<a class="headerlink" href="#que-sigue" title="Permanent link">&para;</a></h3>
+<p>Aprenda dónde encontrar los resultados y cómo interpretarlos.</p>
 <hr />
-<h2 id="3-find-and-examine-the-outputs">3. Find and examine the outputs<a class="headerlink" href="#3-find-and-examine-the-outputs" title="Permanent link">&para;</a></h2>
-<p>When the pipeline completes successfully, you'll see a completion message and execution summary.</p>
-<h3 id="31-locate-the-results-directory">3.1. Locate the results directory<a class="headerlink" href="#31-locate-the-results-directory" title="Permanent link">&para;</a></h3>
-<p>By default, nf-core pipelines write outputs to a directory specified by the <code>outdir</code> parameter, which we set to <code>results/</code>.</p>
-<p>List the contents:</p>
+<h2 id="3-encontrar-y-examinar-las-salidas">3. Encontrar y examinar las salidas<a class="headerlink" href="#3-encontrar-y-examinar-las-salidas" title="Permanent link">&para;</a></h2>
+<p>Cuando el pipeline se complete exitosamente, verá un mensaje de finalización y un resumen de ejecución.</p>
+<h3 id="31-localizar-el-directorio-de-resultados">3.1. Localizar el directorio de resultados<a class="headerlink" href="#31-localizar-el-directorio-de-resultados" title="Permanent link">&para;</a></h3>
+<p>Por defecto, los pipelines de nf-core escriben las salidas en un directorio especificado por el parámetro <code>outdir</code>, que establecimos en <code>results/</code>.</p>
+<p>Liste el contenido:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>tree<span class="w"> </span>results/
 </code></pre></div>
-<p>You should see several subdirectories:</p>
+<p>Debería ver varios subdirectorios:</p>
 <div class="highlight"><span class="filename">results/</span><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="go">results/</span>
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="go">├── anndata/</span>
 <a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="go">├── clahe/</span>
@@ -4425,127 +4467,127 @@ However, Nextflow only uses these containers if you tell it to!</p>
 <a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="go">├── spot2cell/</span>
 <a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="go">└── stack/</span>
 </code></pre></div>
-<p>Each subdirectory contains outputs from a specific stage of the pipeline:</p>
+<p>Cada subdirectorio contiene salidas de una etapa específica del pipeline:</p>
 <ul>
-<li><strong>mindagap/</strong>: Grid-filled images from the MindaGap preprocessing step</li>
-<li><strong>clahe/</strong>: Contrast-enhanced images from CLAHE preprocessing</li>
-<li><strong>stack/</strong>: Multi-channel image stacks created for segmentation</li>
-<li><strong>segmentation/</strong>: Segmentation results from different algorithms (cellpose/, mesmer/, stardist/, filtered_masks/)</li>
-<li><strong>spot2cell/</strong>: Cell-by-transcript count tables</li>
-<li><strong>anndata/</strong>: AnnData objects containing cell-by-transcript matrices and spatial coordinates</li>
-<li><strong>molkartqc/</strong>: Quality control metrics for spot assignment</li>
-<li><strong>multiqc/</strong>: Comprehensive quality control report</li>
-<li><strong>pipeline_info/</strong>: Execution reports and logs</li>
+<li><strong>mindagap/</strong>: Imágenes con cuadrícula rellenada del paso de preprocesamiento MindaGap</li>
+<li><strong>clahe/</strong>: Imágenes con contraste mejorado del preprocesamiento CLAHE</li>
+<li><strong>stack/</strong>: Pilas de imágenes multicanal creadas para segmentación</li>
+<li><strong>segmentation/</strong>: Resultados de segmentación de diferentes algoritmos (cellpose/, mesmer/, stardist/, filtered_masks/)</li>
+<li><strong>spot2cell/</strong>: Tablas de conteo de células por transcripción</li>
+<li><strong>anndata/</strong>: Objetos AnnData que contienen matrices de células por transcripción y coordenadas espaciales</li>
+<li><strong>molkartqc/</strong>: Métricas de control de calidad para asignación de puntos</li>
+<li><strong>multiqc/</strong>: Informe de control de calidad completo</li>
+<li><strong>pipeline_info/</strong>: Informes de ejecución y logs</li>
 </ul>
-<h3 id="32-examine-the-multiqc-report">3.2. Examine the MultiQC report<a class="headerlink" href="#32-examine-the-multiqc-report" title="Permanent link">&para;</a></h3>
-<p>The MultiQC report is a comprehensive HTML file that aggregates quality metrics from all pipeline steps.</p>
-<p>Open the report in the file browser and then click the "Show Preview" button to see it rendered directly in VS Code.</p>
-<p>The report includes:</p>
+<h3 id="32-examinar-el-informe-multiqc">3.2. Examinar el informe MultiQC<a class="headerlink" href="#32-examinar-el-informe-multiqc" title="Permanent link">&para;</a></h3>
+<p>El informe MultiQC es un archivo HTML completo que agrega métricas de calidad de todos los pasos del pipeline.</p>
+<p>Abra el informe en el explorador de archivos y luego haga clic en el botón "Show Preview" para verlo renderizado directamente en VS Code.</p>
+<p>El informe incluye:</p>
 <ul>
-<li>General statistics for all samples</li>
-<li>Preprocessing metrics</li>
-<li>Segmentation quality metrics</li>
-<li>Number of cells and spots detected</li>
+<li>Estadísticas generales para todas las muestras</li>
+<li>Métricas de preprocesamiento</li>
+<li>Métricas de calidad de segmentación</li>
+<li>Número de células y puntos detectados</li>
 </ul>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>MultiQC reports are typically included in all nf-core pipelines.
-They always provide a high-level overview of pipeline execution and data quality.</p>
+<p>Los informes MultiQC se incluyen típicamente en todos los pipelines de nf-core.
+Siempre proporcionan una visión general de alto nivel de la ejecución del pipeline y la calidad de los datos.</p>
 </div>
-<h3 id="33-examine-the-cell-by-transcript-tables">3.3. Examine the cell-by-transcript tables<a class="headerlink" href="#33-examine-the-cell-by-transcript-tables" title="Permanent link">&para;</a></h3>
-<p>The most important scientific output is the cell-by-transcript count table.
-This tells you how many of each transcript was detected in each cell.</p>
-<p>Navigate to the spot2cell directory:</p>
+<h3 id="33-examinar-las-tablas-de-celulas-por-transcripcion">3.3. Examinar las tablas de células por transcripción<a class="headerlink" href="#33-examinar-las-tablas-de-celulas-por-transcripcion" title="Permanent link">&para;</a></h3>
+<p>La salida científica más importante es la tabla de conteo de células por transcripción.
+Esto le dice cuántos de cada transcripción se detectaron en cada célula.</p>
+<p>Navegue al directorio spot2cell:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>ls<span class="w"> </span>results/spot2cell/
 </code></pre></div>
-<p>You'll find files like:</p>
+<p>Encontrará archivos como:</p>
 <ul>
-<li><code>cellxgene_mem_only_cellpose.csv</code>: Cell-by-transcript table using Cellpose segmentation</li>
-<li><code>cellxgene_mem_only_mesmer.csv</code>: Cell-by-transcript table using Mesmer segmentation</li>
-<li><code>cellxgene_mem_only_stardist.csv</code>: Cell-by-transcript table using Stardist segmentation</li>
+<li><code>cellxgene_mem_only_cellpose.csv</code>: Tabla de células por transcripción usando segmentación Cellpose</li>
+<li><code>cellxgene_mem_only_mesmer.csv</code>: Tabla de células por transcripción usando segmentación Mesmer</li>
+<li><code>cellxgene_mem_only_stardist.csv</code>: Tabla de células por transcripción usando segmentación Stardist</li>
 </ul>
-<p>We only ran 1 sample in this test dataset, but in a real experiment we would have these tables for each sample.
-Notice how Nextflow is able to process multiple segmentation methods in parallel, making it easy to compare results.</p>
-<h3 id="34-view-execution-reports">3.4. View execution reports<a class="headerlink" href="#34-view-execution-reports" title="Permanent link">&para;</a></h3>
-<p>Nextflow generates several execution reports automatically.</p>
-<p>Check the pipeline_info directory:</p>
+<p>Solo ejecutamos 1 muestra en este conjunto de datos de prueba, pero en un experimento real tendríamos estas tablas para cada muestra.
+Note cómo Nextflow puede procesar múltiples métodos de segmentación en paralelo, haciendo fácil comparar resultados.</p>
+<h3 id="34-ver-informes-de-ejecucion">3.4. Ver informes de ejecución<a class="headerlink" href="#34-ver-informes-de-ejecucion" title="Permanent link">&para;</a></h3>
+<p>Nextflow genera varios informes de ejecución automáticamente.</p>
+<p>Verifique el directorio pipeline_info:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>ls<span class="w"> </span>results/pipeline_info/
 </code></pre></div>
-<p>Key files:</p>
+<p>Archivos clave:</p>
 <ul>
-<li><strong>execution_report.html</strong>: Timeline and resource usage visualization</li>
-<li><strong>execution_timeline.html</strong>: Gantt chart of process execution</li>
-<li><strong>execution_trace.txt</strong>: Detailed task execution metrics</li>
-<li><strong>pipeline_dag.html</strong>: Directed acyclic graph showing workflow structure</li>
+<li><strong>execution_report.html</strong>: Visualización de línea de tiempo y uso de recursos</li>
+<li><strong>execution_timeline.html</strong>: Gráfico de Gantt de ejecución de procesos</li>
+<li><strong>execution_trace.txt</strong>: Métricas detalladas de ejecución de tareas</li>
+<li><strong>pipeline_dag.html</strong>: Grafo acíclico dirigido que muestra la estructura del flujo de trabajo</li>
 </ul>
-<p>Open the execution report to see resource usage:</p>
+<p>Abra el informe de ejecución para ver el uso de recursos:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>code<span class="w"> </span>results/pipeline_info/execution_report.html
 </code></pre></div>
-<p>This shows:</p>
+<p>Esto muestra:</p>
 <ul>
-<li>How long each process took</li>
-<li>CPU and memory usage</li>
-<li>Which tasks were cached vs. executed</li>
+<li>Cuánto tiempo tomó cada proceso</li>
+<li>Uso de CPU y memoria</li>
+<li>Qué tareas fueron cacheadas vs. ejecutadas</li>
 </ul>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>These reports are incredibly useful for optimizing resource allocation and troubleshooting performance issues.</p>
+<p>Estos informes son increíblemente útiles para optimizar la asignación de recursos y solucionar problemas de rendimiento.</p>
 </div>
-<h3 id="takeaway_1">Takeaway<a class="headerlink" href="#takeaway_1" title="Permanent link">&para;</a></h3>
-<p>You know how to locate pipeline outputs, examine quality control reports, and access execution metrics.</p>
-<h3 id="whats-next_1">What's next?<a class="headerlink" href="#whats-next_1" title="Permanent link">&para;</a></h3>
-<p>Learn about the work directory and how Nextflow manages intermediate files.</p>
+<h3 id="conclusion_1">Conclusión<a class="headerlink" href="#conclusion_1" title="Permanent link">&para;</a></h3>
+<p>Sabe cómo localizar las salidas del pipeline, examinar informes de control de calidad y acceder a métricas de ejecución.</p>
+<h3 id="que-sigue_1">¿Qué sigue?<a class="headerlink" href="#que-sigue_1" title="Permanent link">&para;</a></h3>
+<p>Aprenda sobre el directorio de trabajo y cómo Nextflow gestiona los archivos intermedios.</p>
 <hr />
-<h2 id="4-explore-the-work-directory">4. Explore the work directory<a class="headerlink" href="#4-explore-the-work-directory" title="Permanent link">&para;</a></h2>
-<p>Just like with our Hello World example, all the actual work happens in the <code>work/</code> directory.</p>
-<h3 id="41-understanding-work-directory-structure">4.1. Understanding work directory structure<a class="headerlink" href="#41-understanding-work-directory-structure" title="Permanent link">&para;</a></h3>
-<p>The work directory contains a subdirectory for each task that was executed.
-For this pipeline with 12 tasks, there will be 12 work subdirectories.</p>
-<p>List the work directory:</p>
+<h2 id="4-explorar-el-directorio-de-trabajo">4. Explorar el directorio de trabajo<a class="headerlink" href="#4-explorar-el-directorio-de-trabajo" title="Permanent link">&para;</a></h2>
+<p>Al igual que con nuestro ejemplo de Hello World, todo el trabajo real ocurre en el directorio <code>work/</code>.</p>
+<h3 id="41-comprender-la-estructura-del-directorio-de-trabajo">4.1. Comprender la estructura del directorio de trabajo<a class="headerlink" href="#41-comprender-la-estructura-del-directorio-de-trabajo" title="Permanent link">&para;</a></h3>
+<p>El directorio de trabajo contiene un subdirectorio para cada tarea que fue ejecutada.
+Para este pipeline con 12 tareas, habrá 12 subdirectorios de trabajo.</p>
+<p>Liste el directorio de trabajo:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>ls<span class="w"> </span>-d<span class="w"> </span>work/*/*/<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-5
 </code></pre></div>
-<p>This shows the first 5 task directories.</p>
-<h3 id="42-inspect-a-task-directory">4.2. Inspect a task directory<a class="headerlink" href="#42-inspect-a-task-directory" title="Permanent link">&para;</a></h3>
-<p>Pick one of the segmentation process hashes from the console output (e.g., <code>[3m/4n5o6p]</code>) and look inside:</p>
+<p>Esto muestra los primeros 5 directorios de tareas.</p>
+<h3 id="42-inspeccionar-un-directorio-de-tareas">4.2. Inspeccionar un directorio de tareas<a class="headerlink" href="#42-inspeccionar-un-directorio-de-tareas" title="Permanent link">&para;</a></h3>
+<p>Elija uno de los hashes de proceso de segmentación de la salida de consola (por ejemplo, <code>[3m/4n5o6p]</code>) y mire dentro:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>ls<span class="w"> </span>-la<span class="w"> </span>work/3m/4n5o6p*/
 </code></pre></div>
-<p>You'll see:</p>
+<p>Verá:</p>
 <ul>
-<li><strong>.command.*</strong> files**: Nextflow execution scripts and logs (like before)</li>
-<li><strong>Staged input files</strong>: Symlinks to the actual input files</li>
-<li><strong>Output files</strong>: Segmentation masks, intermediate results, etc.</li>
+<li><strong>Archivos .command.*</strong>: Scripts de ejecución de Nextflow y logs (como antes)</li>
+<li><strong>Archivos de entrada preparados</strong>: Enlaces simbólicos a los archivos de entrada reales</li>
+<li><strong>Archivos de salida</strong>: Máscaras de segmentación, resultados intermedios, etc.</li>
 </ul>
-<p>The key difference from Hello World:</p>
+<p>La diferencia clave con Hello World:</p>
 <ul>
-<li>Real pipelines stage large input files (images, reference data)</li>
-<li>Output files can be quite large (segmentation masks, processed images)</li>
-<li>Multiple input and output files per task</li>
+<li>Los pipelines reales preparan archivos de entrada grandes (imágenes, datos de referencia)</li>
+<li>Los archivos de salida pueden ser bastante grandes (máscaras de segmentación, imágenes procesadas)</li>
+<li>Múltiples archivos de entrada y salida por tarea</li>
 </ul>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>If a process fails, you can navigate to its work directory, examine <code>.command.err</code> for error messages, and even re-run <code>.command.sh</code> manually to debug the issue.</p>
+<p>Si un proceso falla, puede navegar a su directorio de trabajo, examinar <code>.command.err</code> para mensajes de error e incluso re-ejecutar <code>.command.sh</code> manualmente para depurar el problema.</p>
 </div>
-<h3 id="43-work-directory-cleanup">4.3. Work directory cleanup<a class="headerlink" href="#43-work-directory-cleanup" title="Permanent link">&para;</a></h3>
-<p>The work directory can become quite large over multiple pipeline runs.
-As we learned in Part 1, you can use <code>nextflow clean</code> to remove work directories from old runs.</p>
-<p>However, for nf-core pipelines with large intermediate files, it's especially important to clean up regularly.</p>
-<h3 id="takeaway_2">Takeaway<a class="headerlink" href="#takeaway_2" title="Permanent link">&para;</a></h3>
-<p>You understand how nf-core pipelines organize their work directories and how to inspect individual tasks for debugging.</p>
-<h3 id="whats-next_2">What's next?<a class="headerlink" href="#whats-next_2" title="Permanent link">&para;</a></h3>
-<p>Learn about the Nextflow cache and how to resume failed pipeline runs.</p>
+<h3 id="43-limpieza-del-directorio-de-trabajo">4.3. Limpieza del directorio de trabajo<a class="headerlink" href="#43-limpieza-del-directorio-de-trabajo" title="Permanent link">&para;</a></h3>
+<p>El directorio de trabajo puede volverse bastante grande con múltiples ejecuciones de pipeline.
+Como aprendimos en la Parte 1, puede usar <code>nextflow clean</code> para eliminar directorios de trabajo de ejecuciones antiguas.</p>
+<p>Sin embargo, para pipelines de nf-core con archivos intermedios grandes, es especialmente importante limpiar regularmente.</p>
+<h3 id="conclusion_2">Conclusión<a class="headerlink" href="#conclusion_2" title="Permanent link">&para;</a></h3>
+<p>Comprende cómo los pipelines de nf-core organizan sus directorios de trabajo y cómo inspeccionar tareas individuales para depuración.</p>
+<h3 id="que-sigue_2">¿Qué sigue?<a class="headerlink" href="#que-sigue_2" title="Permanent link">&para;</a></h3>
+<p>Aprenda sobre el caché de Nextflow y cómo reanudar ejecuciones de pipeline fallidas.</p>
 <hr />
-<h2 id="5-resume-a-pipeline-run">5. Resume a pipeline run<a class="headerlink" href="#5-resume-a-pipeline-run" title="Permanent link">&para;</a></h2>
-<p>One of Nextflow's most powerful features is the ability to resume a pipeline from the point of failure.</p>
-<h3 id="51-the-cache-mechanism">5.1. The cache mechanism<a class="headerlink" href="#51-the-cache-mechanism" title="Permanent link">&para;</a></h3>
-<p>When you run a pipeline with <code>-resume</code>, Nextflow:</p>
+<h2 id="5-reanudar-una-ejecucion-de-pipeline">5. Reanudar una ejecución de pipeline<a class="headerlink" href="#5-reanudar-una-ejecucion-de-pipeline" title="Permanent link">&para;</a></h2>
+<p>Una de las características más poderosas de Nextflow es la capacidad de reanudar un pipeline desde el punto de falla.</p>
+<h3 id="51-el-mecanismo-de-cache">5.1. El mecanismo de caché<a class="headerlink" href="#51-el-mecanismo-de-cache" title="Permanent link">&para;</a></h3>
+<p>Cuando ejecuta un pipeline con <code>-resume</code>, Nextflow:</p>
 <ol>
-<li>Checks the cache for each task</li>
-<li>If inputs, code, and parameters are identical, reuses the cached result</li>
-<li>Only re-runs tasks that changed or failed</li>
+<li>Verifica el caché para cada tarea</li>
+<li>Si las entradas, código y parámetros son idénticos, reutiliza el resultado cacheado</li>
+<li>Solo re-ejecuta tareas que cambiaron o fallaron</li>
 </ol>
-<p>This is essential for long-running pipelines where failures might occur late in execution.</p>
-<h3 id="52-try-resume-with-molkart">5.2. Try resume with molkart<a class="headerlink" href="#52-try-resume-with-molkart" title="Permanent link">&para;</a></h3>
-<p>Run the same command again, but add <code>-resume</code>:</p>
+<p>Esto es esencial para pipelines de larga ejecución donde las fallas pueden ocurrir tarde en la ejecución.</p>
+<h3 id="52-probar-resume-con-molkart">5.2. Probar resume con molkart<a class="headerlink" href="#52-probar-resume-con-molkart" title="Permanent link">&para;</a></h3>
+<p>Ejecute el mismo comando nuevamente, pero agregue <code>-resume</code>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>./molkart<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="w">  </span>--input<span class="w"> </span><span class="s1">&#39;data/samplesheet.csv&#39;</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="w">  </span>--mindagap_tilesize<span class="w"> </span><span class="m">90</span><span class="w"> </span><span class="se">\</span>
@@ -4556,7 +4598,7 @@ As we learned in Part 1, you can use <code>nextflow clean</code> to remove work 
 <a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="w">  </span>--outdir<span class="w"> </span>results<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="w">  </span>-resume
 </code></pre></div>
-<p>You should see output like: <!-- TODO: full output --></p>
+<p>Debería ver una salida como: <!-- TODO: full output --></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="go">executor &gt;  local (0)</span>
 <a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="go">[1a/2b3c4d] NFCORE_MOLKART:MOLKART:MINDAGAP_MINDAGAP (mem_only)        [100%] 2 of 2, cached: 2 ✔</span>
 <a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="go">[5e/6f7g8h] NFCORE_MOLKART:MOLKART:CLAHE (mem_only)                    [100%] 2 of 2, cached: 2 ✔</span>
@@ -4565,24 +4607,24 @@ As we learned in Part 1, you can use <code>nextflow clean</code> to remove work 
 <a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="go">[2k/3l4m5n] NFCORE_MOLKART:MOLKART:CELLPOSE (mem_only)                 [100%] 1 of 1, cached: 1 ✔</span>
 <a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="go">...</span>
 </code></pre></div>
-<p>Notice <code>cached: 2</code> or <code>cached: 1</code> for each process - nothing was re-executed!</p>
-<h3 id="53-when-resume-is-useful">5.3. When resume is useful<a class="headerlink" href="#53-when-resume-is-useful" title="Permanent link">&para;</a></h3>
-<p>Resume is particularly valuable when:</p>
+<p>Note <code>cached: 2</code> o <code>cached: 1</code> para cada proceso - ¡nada fue re-ejecutado!</p>
+<h3 id="53-cuando-resume-es-util">5.3. Cuándo resume es útil<a class="headerlink" href="#53-cuando-resume-es-util" title="Permanent link">&para;</a></h3>
+<p>Resume es particularmente valioso cuando:</p>
 <ul>
-<li>A pipeline fails due to resource limits (out of memory, time limit exceeded)</li>
-<li>You need to modify downstream processes without re-running upstream steps</li>
-<li>Your network connection drops during data download</li>
-<li>You want to add additional outputs without redoing computation</li>
+<li>Un pipeline falla debido a límites de recursos (memoria insuficiente, límite de tiempo excedido)</li>
+<li>Necesita modificar procesos posteriores sin re-ejecutar pasos anteriores</li>
+<li>Su conexión de red se interrumpe durante la descarga de datos</li>
+<li>Desea agregar salidas adicionales sin rehacer el cómputo</li>
 </ul>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Resume only works if you haven't changed the input data, pipeline code, or parameters.
-If you change any of these, Nextflow will correctly re-run affected tasks.</p>
+<p>Resume solo funciona si no ha cambiado los datos de entrada, el código del pipeline o los parámetros.
+Si cambia cualquiera de estos, Nextflow correctamente re-ejecutará las tareas afectadas.</p>
 </div>
-<h3 id="takeaway_3">Takeaway<a class="headerlink" href="#takeaway_3" title="Permanent link">&para;</a></h3>
-<p>You know how to use <code>-resume</code> to efficiently re-run pipelines without repeating successful tasks.</p>
-<h3 id="whats-next_3">What's next?<a class="headerlink" href="#whats-next_3" title="Permanent link">&para;</a></h3>
-<p>Now that you can run nf-core/molkart with test data, you're ready to learn how to configure it for your own datasets.</p><style type="text/css">.quiz {
+<h3 id="conclusion_3">Conclusión<a class="headerlink" href="#conclusion_3" title="Permanent link">&para;</a></h3>
+<p>Sabe cómo usar <code>-resume</code> para re-ejecutar pipelines eficientemente sin repetir tareas exitosas.</p>
+<h3 id="que-sigue_3">¿Qué sigue?<a class="headerlink" href="#que-sigue_3" title="Permanent link">&para;</a></h3>
+<p>Ahora que puede ejecutar nf-core/molkart con datos de prueba, está listo para aprender cómo configurarlo para sus propios conjuntos de datos.</p><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
   margin: 1rem 0;
@@ -6099,6 +6141,9 @@ window.mkdocsQuizConfig = {
 
 
 
+  
+  
+
 
 
   
@@ -6129,7 +6174,7 @@ window.mkdocsQuizConfig = {
       <nav class="md-footer__inner md-grid" aria-label="Pie" >
         
           
-          <a href="../01_basics/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Part 1: Run basic operations">
+          <a href="../01_basics/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Parte 1: Ejecutar operaciones básicas">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -6139,20 +6184,20 @@ window.mkdocsQuizConfig = {
                 Anterior
               </span>
               <div class="md-ellipsis">
-                Part 1: Run basic operations
+                Parte 1: Ejecutar operaciones básicas
               </div>
             </div>
           </a>
         
         
           
-          <a href="../03_inputs/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Part 3: Organizing inputs">
+          <a href="../03_inputs/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Parte 3: Organización de entradas">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Siguiente
               </span>
               <div class="md-ellipsis">
-                Part 3: Organizing inputs
+                Parte 3: Organización de entradas
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -6229,8 +6274,8 @@ window.mkdocsQuizConfig = {
   
 
 
-<h4>Cookie consent</h4>
-<p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our training materials better. Find out more on <a href="https://seqera.io/privacy-policy/#cookies" target="_blank" rel="noopener">how we use cookies</a>.</p>
+<h4>Consentimiento de cookies</h4>
+<p>Utilizamos cookies para reconocer tus visitas repetidas y preferencias, así como para medir la efectividad de nuestra documentación y si los usuarios encuentran lo que buscan. Con tu consentimiento, nos ayudas a mejorar nuestros materiales de capacitación. Obtén más información sobre <a href="https://seqera.io/privacy-policy/#cookies" target="_blank" rel="noopener">cómo usamos las cookies</a>.</p>
 <input class="md-toggle" type="checkbox" id="__settings" >
 <div class="md-consent__settings">
   <ul class="task-list">
@@ -6314,12 +6359,16 @@ window.mkdocsQuizConfig = {
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": {"alias": true, "provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": {"alias": true, "provider": "mike"}}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
-        <script src="../../../../assets/javascripts/posthog.js"></script>
+        <script src="../../../assets/javascripts/consent-sync.js"></script>
+      
+        <script src="../../../assets/javascripts/posthog.js"></script>
+      
+        <script src="../../../assets/javascripts/language-picker.js"></script>
       
     
   </body>

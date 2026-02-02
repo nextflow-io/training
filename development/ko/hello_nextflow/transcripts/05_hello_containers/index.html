@@ -8,39 +8,47 @@
       
       
       
-        <link rel="canonical" href="https://training.nextflow.io/0.dev/ko/hello_nextflow/transcripts/05_hello_containers/">
+        <link rel="canonical" href="https://training.nextflow.io/ko/hello_nextflow/transcripts/05_hello_containers/">
       
       
       
       
         
-          <link rel="alternate" href="../../../../hello_nextflow/transcripts/05_hello_containers/" hreflang="en">
+          <link rel="alternate" href="/" hreflang="en">
         
-          <link rel="alternate" href="../../../../pt/hello_nextflow/transcripts/05_hello_containers/" hreflang="pt">
+          <link rel="alternate" href="/de/" hreflang="de">
         
-          <link rel="alternate" href="../../../../es/hello_nextflow/transcripts/05_hello_containers/" hreflang="es">
+          <link rel="alternate" href="/es/" hreflang="es">
         
-          <link rel="alternate" href="../../../../fr/hello_nextflow/transcripts/05_hello_containers/" hreflang="fr">
+          <link rel="alternate" href="/fr/" hreflang="fr">
         
-          <link rel="alternate" href="../../../../it/hello_nextflow/transcripts/05_hello_containers/" hreflang="it">
+          <link rel="alternate" href="/hi/" hreflang="hi">
         
-          <link rel="alternate" href="./" hreflang="ko">
+          <link rel="alternate" href="/it/" hreflang="it">
+        
+          <link rel="alternate" href="/ko/" hreflang="ko">
+        
+          <link rel="alternate" href="/pl/" hreflang="pl">
+        
+          <link rel="alternate" href="/pt/" hreflang="pt">
+        
+          <link rel="alternate" href="/tr/" hreflang="tr">
         
       
       
-      <link rel="icon" href="../../../../assets/img/nextflow-icon.png">
+      <link rel="icon" href="../../../assets/img/nextflow-icon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
     
     
       
-        <title>Part 5: Hello Containers - Transcript - training.nextflow.io</title>
+        <title>Part 5: Hello Containers - 스크립트 - training.nextflow.io</title>
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
   
@@ -104,11 +112,11 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/fonts.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/fonts.css">
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/extra.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/extra.css">
     
-    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
   
@@ -143,7 +151,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#part-5-hello-containers-transcript" class="md-skip">
+        <a href="#part-5-hello-containers-" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -163,9 +171,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="상단/헤더">
-    <a href="../../../" title="training.nextflow.io" class="md-header__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
+    <a href="../../.." title="training.nextflow.io" class="md-header__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
       
-  <img src="../../../../assets/img/nextflow_logo_dark.png" alt="logo">
+  <img src="../../../assets/img/nextflow_logo_dark.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -182,7 +190,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Part 5: Hello Containers - Transcript
+              Part 5: Hello Containers - 스크립트
             
           </span>
         </div>
@@ -229,38 +237,62 @@
       <ul class="md-select__list">
         
           <li class="md-select__item">
-            <a href="../../../../hello_nextflow/transcripts/05_hello_containers/" hreflang="en" class="md-select__link">
+            <a href="/" hreflang="en" class="md-select__link">
               English
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../../pt/hello_nextflow/transcripts/05_hello_containers/" hreflang="pt" class="md-select__link">
-              Português
+            <a href="/de/" hreflang="de" class="md-select__link">
+              deutsch
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../../es/hello_nextflow/transcripts/05_hello_containers/" hreflang="es" class="md-select__link">
-              Español
+            <a href="/es/" hreflang="es" class="md-select__link">
+              español
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../../fr/hello_nextflow/transcripts/05_hello_containers/" hreflang="fr" class="md-select__link">
-              Français
+            <a href="/fr/" hreflang="fr" class="md-select__link">
+              français
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../../it/hello_nextflow/transcripts/05_hello_containers/" hreflang="it" class="md-select__link">
-              Italiano
+            <a href="/hi/" hreflang="hi" class="md-select__link">
+              हिन्दी
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="./" hreflang="ko" class="md-select__link">
-              Korean
+            <a href="/it/" hreflang="it" class="md-select__link">
+              italiano
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/ko/" hreflang="ko" class="md-select__link">
+              한국어
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/pl/" hreflang="pl" class="md-select__link">
+              Polski
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/pt/" hreflang="pt" class="md-select__link">
+              português
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/tr/" hreflang="tr" class="md-select__link">
+              Türkçe
             </a>
           </li>
         
@@ -380,9 +412,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="네비게이션" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../../" title="training.nextflow.io" class="md-nav__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
+    <a href="../../.." title="training.nextflow.io" class="md-nav__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
       
-  <img src="../../../../assets/img/nextflow_logo_dark.png" alt="logo">
+  <img src="../../../assets/img/nextflow_logo_dark.png" alt="logo">
 
     </a>
     training.nextflow.io
@@ -409,14 +441,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../" class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Home
+    홈
   
 
     
@@ -518,7 +550,7 @@
   <span class="md-ellipsis">
     
   
-    Getting started
+    시작하기
   
 
     
@@ -546,7 +578,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run basic operations
+    파트 1: 기본 작업 실행
   
 
     
@@ -574,7 +606,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Run real pipelines
+    파트 2: 실제 pipeline 실행
   
 
     
@@ -602,7 +634,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Run configuration
+    파트 3: 실행 구성
   
 
     
@@ -630,7 +662,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    과정 요약
   
 
     
@@ -658,7 +690,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    피드백 설문조사
   
 
     
@@ -768,7 +800,7 @@
   <span class="md-ellipsis">
     
   
-    Getting started
+    시작하기
   
 
     
@@ -796,7 +828,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Hello World
+    파트 1: Hello World
   
 
     
@@ -824,7 +856,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Hello Channels
+    파트 2: Hello Channels
   
 
     
@@ -852,7 +884,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Hello Workflow
+    파트 3: Hello Workflow
   
 
     
@@ -880,7 +912,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Hello Modules
+    파트 4: Hello Modules
   
 
     
@@ -908,7 +940,7 @@
   <span class="md-ellipsis">
     
   
-    Part 5: Hello Containers
+    파트 5: Hello Containers
   
 
     
@@ -936,7 +968,7 @@
   <span class="md-ellipsis">
     
   
-    Part 6: Hello Config
+    파트 6: Hello Config
   
 
     
@@ -964,7 +996,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    과정 요약
   
 
     
@@ -992,7 +1024,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    피드백 설문조사
   
 
     
@@ -1102,7 +1134,7 @@
   <span class="md-ellipsis">
     
   
-    Getting started
+    시작하기
   
 
     
@@ -1130,7 +1162,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run a demo pipeline
+    파트 1: 데모 파이프라인 실행하기
   
 
     
@@ -1158,7 +1190,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Rewrite Hello for nf-core
+    2부: nf-core용 Hello 재작성
   
 
     
@@ -1186,7 +1218,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Use an nf-core module
+    파트 3: nf-core 모듈 사용하기
   
 
     
@@ -1214,7 +1246,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Make an nf-core module
+    파트 4: nf-core 모듈 만들기
   
 
     
@@ -1242,7 +1274,7 @@
   <span class="md-ellipsis">
     
   
-    Part 5: Input validation
+    파트 5: 입력 검증
   
 
     
@@ -1270,7 +1302,7 @@
   <span class="md-ellipsis">
     
   
-    Course summary
+    교육 과정 요약
   
 
     
@@ -1298,7 +1330,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    피드백 설문조사
   
 
     
@@ -1344,7 +1376,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Science
+    과학을 위한 Nextflow
   
 
     
@@ -1360,7 +1392,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Nextflow for Science
+    과학을 위한 Nextflow
   
 
           </label>
@@ -1380,7 +1412,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Science
+    과학을 위한 Nextflow
   
 
     
@@ -1419,7 +1451,7 @@
   <span class="md-ellipsis">
     
   
-    Genomics
+    유전체학을 위한 Nextflow
   
 
     
@@ -1435,7 +1467,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Genomics
+    유전체학을 위한 Nextflow
   
 
           </label>
@@ -1455,7 +1487,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Genomics
+    유전체학을 위한 Nextflow
   
 
     
@@ -1483,7 +1515,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    오리엔테이션
   
 
     
@@ -1511,7 +1543,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Per-sample variant calling
+    파트 1: 샘플별 변이 호출
   
 
     
@@ -1539,7 +1571,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Joint calling on a cohort
+    파트 2: 코호트에 대한 조인트 콜링
   
 
     
@@ -1567,7 +1599,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Moving code into modules
+    파트 3: 코드를 모듈로 이동하기
   
 
     
@@ -1595,7 +1627,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Adding tests
+    파트 4: 테스트 추가하기
   
 
     
@@ -1623,7 +1655,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    피드백 설문조사
   
 
     
@@ -1651,7 +1683,7 @@
   <span class="md-ellipsis">
     
   
-    Next Steps
+    다음 단계
   
 
     
@@ -1698,7 +1730,7 @@
   <span class="md-ellipsis">
     
   
-    RNAseq
+    RNAseq을 위한 Nextflow
   
 
     
@@ -1714,7 +1746,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    RNAseq
+    RNAseq을 위한 Nextflow
   
 
           </label>
@@ -1734,7 +1766,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for RNAseq
+    RNAseq을 위한 Nextflow
   
 
     
@@ -1762,7 +1794,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    오리엔테이션
   
 
     
@@ -1790,7 +1822,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Method overview and manual testing
+    파트 1: 방법 개요 및 수동 테스트
   
 
     
@@ -1818,7 +1850,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Single-sample implementation
+    파트 2: 단일 샘플 구현
   
 
     
@@ -1846,7 +1878,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Multi-sample paired-end implementation
+    파트 3: 다중 샘플 paired-end 구현
   
 
     
@@ -1874,7 +1906,7 @@
   <span class="md-ellipsis">
     
   
-    Feedback survey
+    피드백 설문조사
   
 
     
@@ -1902,7 +1934,7 @@
   <span class="md-ellipsis">
     
   
-    Next Steps
+    다음 단계
   
 
     
@@ -1949,7 +1981,7 @@
   <span class="md-ellipsis">
     
   
-    Imaging
+    이미징을 위한 Nextflow 실행
   
 
     
@@ -1965,7 +1997,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Imaging
+    이미징을 위한 Nextflow 실행
   
 
           </label>
@@ -1985,7 +2017,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow run for Imaging
+    이미징을 위한 Nextflow 실행
   
 
     
@@ -2013,7 +2045,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    오리엔테이션
   
 
     
@@ -2041,7 +2073,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Run basic operations
+    파트 1: 기본 작업 실행하기
   
 
     
@@ -2069,7 +2101,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Run nf-core/molkart
+    파트 2: nf-core/molkart 실행하기
   
 
     
@@ -2097,7 +2129,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Organizing inputs
+    파트 3: 입력 구성하기
   
 
     
@@ -2125,7 +2157,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Configuration
+    파트 4: 구성
   
 
     
@@ -2153,7 +2185,7 @@
   <span class="md-ellipsis">
     
   
-    Survey
+    설문조사
   
 
     
@@ -2181,7 +2213,7 @@
   <span class="md-ellipsis">
     
   
-    Next steps
+    다음 단계
   
 
     
@@ -2235,7 +2267,7 @@
   <span class="md-ellipsis">
     
   
-    Side Quests
+    사이드 퀘스트
   
 
     
@@ -2251,7 +2283,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Side Quests
+    사이드 퀘스트
   
 
           </label>
@@ -2271,7 +2303,7 @@
   <span class="md-ellipsis">
     
   
-    Side Quests
+    사이드 퀘스트
   
 
     
@@ -2299,7 +2331,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    오리엔테이션
   
 
     
@@ -2327,7 +2359,7 @@
   <span class="md-ellipsis">
     
   
-    Development Environment
+    개발 환경
   
 
     
@@ -2355,7 +2387,7 @@
   <span class="md-ellipsis">
     
   
-    Metadata and meta maps
+    메타데이터와 메타 맵
   
 
     
@@ -2383,7 +2415,7 @@
   <span class="md-ellipsis">
     
   
-    File input processing
+    파일 입력 처리
   
 
     
@@ -2411,7 +2443,7 @@
   <span class="md-ellipsis">
     
   
-    Splitting and Grouping
+    데이터 분할 및 그룹화
   
 
     
@@ -2439,7 +2471,7 @@
   <span class="md-ellipsis">
     
   
-    Workflows of Workflows
+    워크플로우의 워크플로우
   
 
     
@@ -2467,7 +2499,7 @@
   <span class="md-ellipsis">
     
   
-    Debugging Workflows
+    워크플로우 디버깅
   
 
     
@@ -2495,7 +2527,7 @@
   <span class="md-ellipsis">
     
   
-    Essential Nextflow Scripting Patterns
+    필수 Nextflow 스크립팅 패턴
   
 
     
@@ -2523,7 +2555,7 @@
   <span class="md-ellipsis">
     
   
-    Testing with nf-test
+    nf-test로 테스트하기
   
 
     
@@ -2569,7 +2601,7 @@
   <span class="md-ellipsis">
     
   
-    Training Collections
+    교육 컬렉션
   
 
     
@@ -2585,7 +2617,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Training Collections
+    교육 컬렉션
   
 
           </label>
@@ -2605,7 +2637,7 @@
   <span class="md-ellipsis">
     
   
-    Training Collections
+    교육 컬렉션
   
 
     
@@ -2633,7 +2665,7 @@
   <span class="md-ellipsis">
     
   
-    The Architect's Toolkit I
+    Architects toolkit 1
   
 
     
@@ -2715,7 +2747,7 @@
   <span class="md-ellipsis">
     
   
-    Getting help
+    도움말
   
 
     
@@ -2754,7 +2786,7 @@
   <span class="md-ellipsis">
     
   
-    Training environment
+    환경 옵션
   
 
     
@@ -2770,7 +2802,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Training environment
+    환경 옵션
   
 
           </label>
@@ -2790,7 +2822,7 @@
   <span class="md-ellipsis">
     
   
-    환경 설정
+    환경 옵션
   
 
     
@@ -2846,7 +2878,7 @@
   <span class="md-ellipsis">
     
   
-    Local Devcontainers
+    로컬 Devcontainers
   
 
     
@@ -2874,7 +2906,7 @@
   <span class="md-ellipsis">
     
   
-    로컬 설치
+    수동 설치
   
 
     
@@ -2910,7 +2942,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow versions
+    Nextflow 버전
   
 
     
@@ -2938,7 +2970,7 @@
   <span class="md-ellipsis">
     
   
-    The Hello pipeline
+    Hello pipeline
   
 
     
@@ -2980,172 +3012,172 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#welcome" class="md-nav__link">
+  <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Welcome
+        환영합니다
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#0-warmup-run-hello-containersnf" class="md-nav__link">
+  <a href="#0-hello-containersnf" class="md-nav__link">
     <span class="md-ellipsis">
       
-        0. Warmup: Run hello-containers.nf
+        0. 워밍업: hello-containers.nf 실행
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#1-use-a-container-manually" class="md-nav__link">
+  <a href="#1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Use a container 'manually'
+        1. 컨테이너를 '수동으로' 사용
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#11-pull-the-container-image" class="md-nav__link">
+  <a href="#11" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1. Pull the container image
+        1.1. 컨테이너 이미지 가져오기
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#pulling-a-singularity-image" class="md-nav__link">
+  <a href="#singularity" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Pulling a Singularity image
+        Singularity 이미지 가져오기
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#12-use-the-container-to-run-cowpy-as-a-one-off-command" class="md-nav__link">
+  <a href="#12-cowpy" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2. Use the container to run cowpy as a one-off command
+        1.2. 컨테이너를 사용하여 cowpy를 일회성 명령으로 실행
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#13-use-the-container-to-run-cowpy-interactively" class="md-nav__link">
+  <a href="#13-cowpy" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.3. Use the container to run cowpy interactively
+        1.3. 컨테이너를 사용하여 cowpy를 대화식으로 실행
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#132-run-the-desired-tool-commands" class="md-nav__link">
+  <a href="#132" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.3.2. Run the desired tool command(s)
+        1.3.2. 원하는 도구 명령 실행
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#133-exit-the-container" class="md-nav__link">
+  <a href="#133" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.3.3. Exit the container
+        1.3.3. 컨테이너 종료
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#134-mount-data-into-the-container" class="md-nav__link">
+  <a href="#134" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.3.4. Mount data into the container
+        1.3.4. 컨테이너에 데이터 마운트
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#135-use-the-mounted-data" class="md-nav__link">
+  <a href="#135" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.3.5. Use the mounted data
+        1.3.5. 마운트된 데이터 사용
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#2-use-containers-in-nextflow" class="md-nav__link">
+  <a href="#2-nextflow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Use containers in Nextflow
+        2. Nextflow에서 컨테이너 사용
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#21-write-a-cowpy-module" class="md-nav__link">
+  <a href="#21-cowpy" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1. Write a cowpy module
+        2.1. cowpy 모듈 작성
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#22-add-cowpy-to-the-workflow" class="md-nav__link">
+  <a href="#22-cowpy" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2. Add cowpy to the workflow
+        2.2. 워크플로우에 cowpy 추가
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#224-run-the-workflow-to-verify-that-it-works" class="md-nav__link">
+  <a href="#224" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2.4. Run the workflow to verify that it works
+        2.2.4. 워크플로우를 실행하여 작동하는지 확인
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#23-use-a-container-to-run-it" class="md-nav__link">
+  <a href="#23" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.3. Use a container to run it
+        2.3. 컨테이너를 사용하여 실행
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#232-enable-use-of-docker-via-the-nextflowconfig-file" class="md-nav__link">
+  <a href="#232-nextflowconfig-docker" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.3.2. Enable use of Docker via the nextflow.config file
+        2.3.2. nextflow.config 파일을 통해 Docker 사용 활성화
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#233-run-the-workflow-with-docker-enabled" class="md-nav__link">
+  <a href="#233-docker" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.3.3. Run the workflow with Docker enabled
+        2.3.3. Docker가 활성화된 상태로 워크플로우 실행
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#234-inspect-how-nextflow-launched-the-containerized-task" class="md-nav__link">
+  <a href="#234-nextflow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.3.4. Inspect how Nextflow launched the containerized task
+        2.3.4. Nextflow가 컨테이너화된 작업을 시작한 방법 검사
       
     </span>
   </a>
@@ -3389,116 +3421,126 @@
                 
                   
 
+ 
+<a
+  href="https://github.com/nextflow-io/training/edit/master/docs/hello_nextflow/transcripts/05_hello_containers.md"
+  title="이 페이지를 편집"
+  class="md-content__button md-icon"
+  rel="edit"
+>
+   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+</a>
+   
+<a
+  href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md"
+  title="Improve translation"
+  class="md-content__button md-icon"
+>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 1H3c-1.1 0-2 .9-2 2v12l3-3h5v-1c0-2.2 1.79-4 4-4V3c0-1.1-.9-2-2-2m0 3H9.5c-.34 1.19-.96 2.3-1.82 3.26l-.02.02 1.26 1.25-.37 1.01L7 8l-2.5 2.5-.69-.73 2.53-2.49A8.6 8.6 0 0 1 4.86 5h.99c.31.6.69 1.17 1.15 1.68A7.7 7.7 0 0 0 8.57 4H3V3h3.5V2h1v1H11zm10 5h-8c-1.1 0-2 .9-2 2v7c0 1.1.9 2 2 2h7l3 3V11c0-1.1-.9-2-2-2m-1.37 10-.85-2.25h-3.56L14.38 19h-1.5l3.37-9h1.5l3.38 9zM17 12l1.22 3.25h-2.43z"/></svg>
+</a>
+ 
 
-  
-    <a href="https://github.com/nextflow-io/training/edit/master/docs/hello_nextflow/transcripts/05_hello_containers.md" title="이 페이지를 편집" class="md-content__button md-icon" rel="edit">
-      
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
-    </a>
-  
-  
-
-
-<h1 id="part-5-hello-containers-transcript">Part 5: Hello Containers - Transcript<a class="headerlink" href="#part-5-hello-containers-transcript" title="Permanent link">&para;</a></h1>
+<h1 id="part-5-hello-containers-">Part 5: Hello Containers - 스크립트<a class="headerlink" href="#part-5-hello-containers-" title="Permanent link">&para;</a></h1>
+<p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> AI 지원 번역 - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">자세히 알아보기 및 개선 제안</a></span></p>
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/5PyOWjKnNmg?si=QinuAnFwFj-Z8CrO&amp;list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 <div class="admonition note">
-<p class="admonition-title">Important notes</p>
-<p>This page shows the transcript only. For full step-by-step instructions, return to the <a href="../../05_hello_containers/">course material</a>.</p>
-<p>The section numbers shown in the transcript are provided for indicative purposes only and may not include all section numbers in the materials.</p>
+<p class="admonition-title">중요 사항</p>
+<p>이 페이지는 스크립트만 표시합니다. 전체 단계별 지침은 <a href="../../05_hello_containers/">교육 자료</a>로 돌아가십시오.</p>
+<p>스크립트에 표시된 섹션 번호는 참고용으로만 제공되며 자료의 모든 섹션 번호를 포함하지 않을 수 있습니다.</p>
 </div>
-<h2 id="welcome">Welcome<a class="headerlink" href="#welcome" title="Permanent link">&para;</a></h2>
-<p>Hi, welcome to Part Five of the Hello Nextflow training course.</p>
-<p>This chapter's called Hello Containers. We're going to talk about how Nextflow integrates with tools such as Docker and Singularity to use software containers to provision software to the users of your pipeline.</p>
-<p>This means that when people run your pipeline, they don't have to go and install all the different tools themselves. Nextflow will do it for them.</p>
-<p>Containers are an extremely powerful technology and crucial in reproducibility and ease of use. We're going to start off by doing a brief introduction to containers themselves, running some docker commands manually, and then we'll take those same containers and put them into our Nextflow pipeline.</p>
-<p>Okay. Let's get started.</p>
-<p>So just as before, let's start off by loading up the training material. Go to training.nextflow.io. Hello Nextflow, Chapter Five, Hello Containers.</p>
-<p>I'm going to jump into my Codespaces environment and on the left here we see hello containers dot nf.</p>
-<p>Just as before, this is the same script that we finished previous chapter four on, so it should look familiar.</p>
-<p>We've got our command line parameters to specify the input file and the batch name. We are including our three modules, and we have our workflow where we run the three processes.</p>
-<h2 id="0-warmup-run-hello-containersnf">0. Warmup: Run hello-containers.nf<a class="headerlink" href="#0-warmup-run-hello-containersnf" title="Permanent link">&para;</a></h2>
-<p>Feel free to run this workflow again and double check that it is producing the outputs that you expect. For now, I'm actually going to close it and dive into the terminal.</p>
-<h2 id="1-use-a-container-manually">1. Use a container 'manually'<a class="headerlink" href="#1-use-a-container-manually" title="Permanent link">&para;</a></h2>
-<p>To start off this chapter, we're going to do a bit of a recap over container technology. If you're very used to docker or singularity or other container techs, then treat this as a refresher , or feel free to skip over it completely.</p>
-<p>Nextflow supports many different types of container technologies. That includes Docker, Singularity, Podman, Shifter, Charliecloud, and more.</p>
-<p>In this training, we're going to be focusing on Docker. That comes pre-installed in the code spaces and is one of the most popular container technologies, especially if you're developing on your own computer or your own laptop.</p>
-<p>If you're working in an academic environment on a shared HPC, you might find that Singularity is available and not Docker. That's fine. All of the concepts are exactly the same. A few of the manual commands are different, but if you understand Docker, you'll also understand singularity.</p>
-<p>In fact, Singularity is also installed in the Code Spaces environment. So if you like, you can try and do the same tasks using Singularity instead of Docker.</p>
-<p>Okay, so what is container technology? The idea behind Docker is that it can fetch an image from a remote source. Pull it to your local machine and then create a container based on that image.</p>
-<p>This running container is a little bit like a virtual machine running on your computer. It's isolated from your environment, and it comes prepackaged with an operating system and a set of available software.</p>
-<h2 id="11-pull-the-container-image">1.1. Pull the container image<a class="headerlink" href="#11-pull-the-container-image" title="Permanent link">&para;</a></h2>
-<p>The syntax that we need to fetch a preexisting image is "docker pull". So I'm going to type that into my terminal, but now we need an image to play with.</p>
-<p>You can build images yourself. You can find them on public registries like Docker Hub or quay.io. But a really good way to get images quickly is using Seqera Containers.</p>
-<p>This is a free to use community service that we've built in 2024, which you can use without login or anything.</p>
-<p>If you go to seqera.io/containers or click containers at the top here, you're presented with a search interface and you can type in the name of any tool available in Conda or on the Python package Index.</p>
-<p>By default, it searches the Bioconda and Conda Forge channels, but you can prefix any Conda channel. I'm here if you want to.</p>
-<p>For a bit of fun, let's use cowpy. I'm going to type in cowpy. It gives me results from Python Package Index and Conda Forge. I'm going to click that to add it to my container. I could add multiple packages here if I wanted to. Select Docker, select linux/amd64, and click Get Container.</p>
-<p>This builds the image for me on demand if it hasn't already been created, and gives me a URL that I can copy.</p>
-<p>If you're interested, you can click view Build Details, and that takes you to a page, which shows the conda environment file that was used and the complete build log for the build, along with the security scan results.</p>
-<p>If I go back to my code spaces, I can now paste this container name and hit enter.</p>
-<p>Docker now downloads all the different layers within this container image, and now tells us that this image is available to use.</p>
-<h2 id="pulling-a-singularity-image">Pulling a Singularity image<a class="headerlink" href="#pulling-a-singularity-image" title="Permanent link">&para;</a></h2>
-<p>If you are using singularity, the process is basically the same. We select our image packages, select cowpy. Now we choose Singularity instead of Docker and click Get Container. That gives us an image URL using oras://. Or if you prefer, you can use https:// by checking that box. Copy that URL. Now go to Code Spaces. We actually have Apptainer installed in this space, which is the same as Singularity, but they're aliased to one another. So I'm going to do apptainer pull and then I'm going to call it cowpy sif, but you can call it whatever you want. Paste URL. And that's going to download that image for me.</p>
-<p>I could do ls -lh and see cowpy.sif</p>
-<p>Singularity is different to Docker, that singularity stores all images in flat files, whereas Docker has a registry where it keeps all the layers separately on your host machine, and it has a running demon to keep track of all of that.</p>
-<h2 id="12-use-the-container-to-run-cowpy-as-a-one-off-command">1.2. Use the container to run cowpy as a one-off command<a class="headerlink" href="#12-use-the-container-to-run-cowpy-as-a-one-off-command" title="Permanent link">&para;</a></h2>
-<p>Okay, let's go back to Docker. We can now try running this image that we created by doing docker run.</p>
-<p>I'm going to do dash dash rm, which just does a one-off execution of the image. And I'm going to paste the image URL. And then finally, you finish this with a command that you want to run.</p>
-<p>The image we generated had cowpy installed, so let's try cowpy.</p>
-<p>There you go. It ran our command. I don't have cowpy installed locally. You can see if I try and run it, it doesn't exist. However, in this command, I ran it using Docker and it correctly generated this output.</p>
-<h2 id="13-use-the-container-to-run-cowpy-interactively">1.3. Use the container to run cowpy interactively<a class="headerlink" href="#13-use-the-container-to-run-cowpy-interactively" title="Permanent link">&para;</a></h2>
-<p>We can go further than this if we like and spin up a container interactively and look around inside. Again, I do "docker run dash dash rm". Now I'm going to do dash it, which tells Docker that we want an interactive terminal. I do the image URL again, and this time, instead of doing cowpy, I'm going to do bin bash because the command that we want to run is bash.</p>
-<p>This takes us into this running container and you can see that the prompt has changed now.</p>
-<p>If I do LS slash you can see the directories here are different.</p>
-<p>If I open a second terminal here on the right hand side, which is just running in GitHub Code Spaces and do LS slash, you see we have directories like workspaces and temp, whereas over here in Docker it's different.</p>
-<p>So this environment is completely separate within Docker and isolated from my host environment. That's a good thing, because that isolates the execution of this command into the Docker image and keeps it reproducible between different people on different host systems.</p>
-<p>If you want to use data from your host system within the Docker image, you have to explicitly mount that into the container.</p>
-<p>We're going to do that in a second.</p>
-<h2 id="132-run-the-desired-tool-commands">1.3.2. Run the desired tool command(s)<a class="headerlink" href="#132-run-the-desired-tool-commands" title="Permanent link">&para;</a></h2>
-<p>First though, let's see if we can run cowpy. There again, the command is available now directly on the command line, and we can start to do more complex things and pass arguments. Hello containers and instead of the cow, let's do the tux penguin. Let's see what else we have.</p>
-<p>Let's do cheese. Wonderful. How about Dragon and Cow? Pretty good.</p>
-<h2 id="133-exit-the-container">1.3.3. Exit the container<a class="headerlink" href="#133-exit-the-container" title="Permanent link">&para;</a></h2>
-<p>Okay. I can't do much more because I don't have any data in this container. So let's exit out this running image and see if we can mount some data into the container. I can do that by doing control D or typing exit. Okay, I am now back in my regular GitHub code space.</p>
-<h2 id="134-mount-data-into-the-container">1.3.4. Mount data into the container<a class="headerlink" href="#134-mount-data-into-the-container" title="Permanent link">&para;</a></h2>
-<p>In order to mount some data into the Docker container, I need to use dash V. So I'm going to take my previous docker command, go back to the start do dash v. I'm going to do "." for the current local working directory, and then a colon to say where that should be mounted in the host directory and do slash data. So that's mounting this particular directory into the container at slash data.</p>
-<p>Now if I do LS slash we can see we have a new directory called data, and if I do LS data, you can see all of the files that we have in the sidebar here. Fantastic.</p>
-<h2 id="135-use-the-mounted-data">1.3.5. Use the mounted data<a class="headerlink" href="#135-use-the-mounted-data" title="Permanent link">&para;</a></h2>
-<p>Now we can start to use some of the files which are on the host system within the Docker image. So I can say cat data greetings csv. If you remember, this is our CSV file with our different greetings from before, and I can pipe that to cowpy. Fantastic. Now we're getting somewhere.</p>
-<p>Okay. That's enough for running Docker interactively. Hopefully you now have a feel for roughly what Docker is and how to use it both to run a command in a one-off way, and also to use an image interactively. If you are using singularity. The commands are all very similar except you do things like apptainer exec or apptainer run, or singularity exec or singularity run.</p>
-<h2 id="2-use-containers-in-nextflow">2. Use containers in Nextflow<a class="headerlink" href="#2-use-containers-in-nextflow" title="Permanent link">&para;</a></h2>
-<p>Next we're going to go back to our Nextflow workflow and see how to use this technology within the Nextflow pipeline.</p>
-<p>Let's close the terminal and open up Hello Containers again.</p>
-<h2 id="21-write-a-cowpy-module">2.1. Write a cowpy module<a class="headerlink" href="#21-write-a-cowpy-module" title="Permanent link">&para;</a></h2>
-<p>To stick with our cowpy example, let's create a new process in our workflow, which uses cowpy. Let's go up to modules, create a new file and call it cowpy nf. I'm now going to cheat a little bit and copy in the code from the training material and hit save. And let's have a look.</p>
-<p>So this is a simple process. Hopefully now you understand what the building blocks of a process look like. We've got our publishDir again, going to results. We have two inputs, an input file and a string called character. We have an output cowpy input file, and we have a script which looks exactly the same as what we ran manually inside our docker image a second ago: cat to print a file, piping it onto cowpy, saying which type of cowpy character we want to use, and outputting that to the output file, which we pass as the output here.</p>
-<h2 id="22-add-cowpy-to-the-workflow">2.2. Add cowpy to the workflow<a class="headerlink" href="#22-add-cowpy-to-the-workflow" title="Permanent link">&para;</a></h2>
-<p>Okay, let's go back to our workflow, import this new process. So cowpy from modules cowpy nf. Let's create a new parameter so that we can specify which character we wanted. Let's say Turkey by default. And then let's call this new process at the end of the workflow,</p>
-<p>cowpy. And let's use the output here from Collect Greetings. So collect greetings out, out file here. And then we need a second argument, which is the new params that we've just made. params dot character.</p>
-<h2 id="224-run-the-workflow-to-verify-that-it-works">2.2.4. Run the workflow to verify that it works<a class="headerlink" href="#224-run-the-workflow-to-verify-that-it-works" title="Permanent link">&para;</a></h2>
-<p>Okay, let's see if our new process works. Nextflow run hello containers. This should run those first three processes and then try and run cowpy at the end.</p>
-<p>We've got an error. What it's saying here, cowpy had an error and it had an exit status 127 and sure enough, command sh cowpy command not found.</p>
-<p>We didn't tell Nextflow that we have a Docker image available for cowpy, so it tried to run it on our host system and we don't have cowpy installed on our host system, so it triggered an error.</p>
-<h2 id="23-use-a-container-to-run-it">2.3. Use a container to run it<a class="headerlink" href="#23-use-a-container-to-run-it" title="Permanent link">&para;</a></h2>
-<p>So what we need to do is we need to tell Nextflow that we have a container available. Let's go to our cowpy process and we're going to add a new directive at the top of the process called container.</p>
-<p>We then find our image, copy the URL, and put that in a string.</p>
-<p>This isn't enough by itself because an X Flow pipeline can have several ways to specify software. I could also do conda conda-forge cowpy, for example. And Nextflow needs to know which of these technologies you want to use.</p>
-<h2 id="232-enable-use-of-docker-via-the-nextflowconfig-file">2.3.2. Enable use of Docker via the nextflow.config file<a class="headerlink" href="#232-enable-use-of-docker-via-the-nextflowconfig-file" title="Permanent link">&para;</a></h2>
-<p>So in order to run with Docker enabled, we're going to get ahead of ourselves slightly and use the Nextflow config file, which is something we're going to cover in more detail in the next chapter. You can see in this directory that we have a file called Nextflow Config, and in here you already have docker.enabled False.</p>
-<p>We're going to change that to True to enable Docker, and then we can try and run the workflow again.</p>
-<h2 id="233-run-the-workflow-with-docker-enabled">2.3.3. Run the workflow with Docker enabled<a class="headerlink" href="#233-run-the-workflow-with-docker-enabled" title="Permanent link">&para;</a></h2>
-<p>Nextflow run hello containers nf and this time cowpy ran successfully. Let's look in Results. cowpy collected test and there's our Turkey. Wonderful.</p>
-<p>So in the background there, Nextflow knew that it had a container available for that process.</p>
-<p>It fetched the image and it ran the commands for us.</p>
-<h2 id="234-inspect-how-nextflow-launched-the-containerized-task">2.3.4. Inspect how Nextflow launched the containerized task<a class="headerlink" href="#234-inspect-how-nextflow-launched-the-containerized-task" title="Permanent link">&para;</a></h2>
-<p>If you're curious, we can actually see exactly what it did by looking in the work directory. If I do code work, and then the hash and then command run, which if you remember is the actual file that's executed for that task, we can go in and we can look for a function called NXF launch. And here you can see the exact docker command that Nextflow used, which looks a lot like what we were doing manually in the terminal earlier. Docker run. Binding this host directory into the container, and then specifying the container URL.</p>
-<p>So there's no magic here. It's just that Nextflow is automatically doing the heavy lifting for you in a way that means you can easily specify containers in your pipeline, which are then readily available for anyone else to use who runs your workflow. And those people no longer have to think about managing software to run your analysis pipeline.</p>
-<p>Very, very simple, very convenient, and also really reproducible. Good all around.</p>
-<p>Okay, great work. That's the end of Chapter Five. Join us in the next video for part six, which is the final part of this Hello Nextflow training, where we'll talk about Nextflow configuration in more detail.</p>
-<p>See you in the next video.</p>
-<p><a href="../06_hello_config/">Next video transcript <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.22 19.03a.75.75 0 0 1 0-1.06L18.19 13H3.75a.75.75 0 0 1 0-1.5h14.44l-4.97-4.97a.749.749 0 0 1 .326-1.275.75.75 0 0 1 .734.215l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0"/></svg></span></a></p><style type="text/css">.quiz {
+<h2 id="_1">환영합니다<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>안녕하세요, Hello Nextflow 교육 과정의 Part Five에 오신 것을 환영합니다.</p>
+<p>이 장의 제목은 Hello Containers입니다. Nextflow가 Docker 및 Singularity와 같은 도구와 통합되어 소프트웨어 컨테이너를 사용하여 파이프라인 사용자에게 소프트웨어를 제공하는 방법에 대해 이야기하겠습니다.</p>
+<p>이는 사람들이 파이프라인을 실행할 때 모든 다양한 도구를 직접 설치할 필요가 없다는 것을 의미합니다. Nextflow가 대신 해줄 것입니다.</p>
+<p>컨테이너는 매우 강력한 기술이며 재현성과 사용 편의성에 매우 중요합니다. 먼저 컨테이너 자체에 대한 간략한 소개로 시작하여 몇 가지 docker 명령을 수동으로 실행한 다음, 동일한 컨테이너를 Nextflow 파이프라인에 넣을 것입니다.</p>
+<p>좋습니다. 시작하겠습니다.</p>
+<p>이전과 마찬가지로 교육 자료를 로드하는 것으로 시작하겠습니다. training.nextflow.io로 이동하십시오. Hello Nextflow, Chapter Five, Hello Containers.</p>
+<p>Codespaces 환경으로 이동하여 왼쪽에서 hello containers dot nf를 볼 수 있습니다.</p>
+<p>이전과 마찬가지로 이것은 이전 4장에서 완료한 것과 동일한 스크립트이므로 익숙할 것입니다.</p>
+<p>입력 파일과 배치 이름을 지정하는 명령줄 매개변수가 있습니다. 세 개의 모듈을 포함하고 있으며, 세 개의 프로세스를 실행하는 워크플로우가 있습니다.</p>
+<h2 id="0-hello-containersnf">0. 워밍업: hello-containers.nf 실행<a class="headerlink" href="#0-hello-containersnf" title="Permanent link">&para;</a></h2>
+<p>이 워크플로우를 다시 실행하고 예상한 출력을 생성하는지 다시 확인하십시오. 지금은 실제로 닫고 터미널로 들어가겠습니다.</p>
+<h2 id="1">1. 컨테이너를 '수동으로' 사용<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<p>이 장을 시작하기 위해 컨테이너 기술에 대해 조금 복습하겠습니다. docker나 singularity 또는 다른 컨테이너 기술에 매우 익숙하다면 이것을 복습으로 간주하거나 완전히 건너뛰어도 됩니다.</p>
+<p>Nextflow는 다양한 유형의 컨테이너 기술을 지원합니다. 여기에는 Docker, Singularity, Podman, Shifter, Charliecloud 등이 포함됩니다.</p>
+<p>이 교육에서는 Docker에 중점을 둘 것입니다. 이는 code spaces에 사전 설치되어 있으며 특히 자신의 컴퓨터나 노트북에서 개발하는 경우 가장 인기 있는 컨테이너 기술 중 하나입니다.</p>
+<p>공유 HPC의 학술 환경에서 작업하는 경우 Singularity를 사용할 수 있고 Docker는 사용할 수 없을 수 있습니다. 괜찮습니다. 모든 개념은 정확히 동일합니다. 몇 가지 수동 명령은 다르지만 Docker를 이해하면 singularity도 이해할 수 있습니다.</p>
+<p>실제로 Singularity도 Code Spaces 환경에 설치되어 있습니다. 원한다면 Docker 대신 Singularity를 사용하여 동일한 작업을 시도할 수 있습니다.</p>
+<p>좋습니다, 컨테이너 기술이란 무엇입니까? Docker의 아이디어는 원격 소스에서 이미지를 가져올 수 있다는 것입니다. 로컬 머신으로 가져온 다음 해당 이미지를 기반으로 컨테이너를 생성합니다.</p>
+<p>이 실행 중인 컨테이너는 컴퓨터에서 실행되는 가상 머신과 비슷합니다. 환경에서 격리되어 있으며 운영 체제 및 사용 가능한 소프트웨어 세트와 함께 사전 패키지되어 있습니다.</p>
+<h2 id="11">1.1. 컨테이너 이미지 가져오기<a class="headerlink" href="#11" title="Permanent link">&para;</a></h2>
+<p>기존 이미지를 가져오는 데 필요한 구문은 "docker pull"입니다. 터미널에 입력하겠지만 이제 작업할 이미지가 필요합니다.</p>
+<p>이미지를 직접 빌드할 수 있습니다. Docker Hub 또는 quay.io와 같은 공개 레지스트리에서 찾을 수 있습니다. 그러나 이미지를 빠르게 얻는 정말 좋은 방법은 Seqera Containers를 사용하는 것입니다.</p>
+<p>이것은 2024년에 구축한 무료 커뮤니티 서비스로 로그인 없이 사용할 수 있습니다.</p>
+<p>seqera.io/containers로 이동하거나 여기 상단에서 containers를 클릭하면 검색 인터페이스가 나타나며 Conda 또는 Python 패키지 인덱스에서 사용 가능한 도구의 이름을 입력할 수 있습니다.</p>
+<p>기본적으로 Bioconda 및 Conda Forge 채널을 검색하지만 원하는 경우 Conda 채널 앞에 접두사를 붙일 수 있습니다.</p>
+<p>재미를 위해 cowpy를 사용하겠습니다. cowpy를 입력하겠습니다. Python Package Index 및 Conda Forge에서 결과를 제공합니다. 컨테이너에 추가하기 위해 클릭하겠습니다. 원한다면 여기에 여러 패키지를 추가할 수 있습니다. Docker를 선택하고 linux/amd64를 선택한 다음 Get Container를 클릭합니다.</p>
+<p>이것은 아직 생성되지 않은 경우 요청 시 이미지를 빌드하고 복사할 수 있는 URL을 제공합니다.</p>
+<p>관심이 있으시면 view Build Details를 클릭하면 사용된 conda 환경 파일과 빌드에 대한 전체 빌드 로그 및 보안 스캔 결과를 보여주는 페이지로 이동합니다.</p>
+<p>code spaces로 돌아가면 이제 이 컨테이너 이름을 붙여넣고 엔터를 칠 수 있습니다.</p>
+<p>Docker는 이제 이 컨테이너 이미지 내의 모든 다른 레이어를 다운로드하고 이제 이 이미지를 사용할 수 있다고 알려줍니다.</p>
+<h2 id="singularity">Singularity 이미지 가져오기<a class="headerlink" href="#singularity" title="Permanent link">&para;</a></h2>
+<p>singularity를 사용하는 경우 프로세스는 기본적으로 동일합니다. 이미지 패키지를 선택하고 cowpy를 선택합니다. 이제 Docker 대신 Singularity를 선택하고 Get Container를 클릭합니다. oras://를 사용하는 이미지 URL을 제공합니다. 또는 원하는 경우 해당 상자를 선택하여 https://를 사용할 수 있습니다. 해당 URL을 복사합니다. 이제 Code Spaces로 이동합니다. 실제로 이 공간에 Apptainer가 설치되어 있는데, 이는 Singularity와 동일하지만 서로 별칭이 지정되어 있습니다. 따라서 apptainer pull을 수행한 다음 cowpy sif라고 부르겠지만 원하는 대로 부를 수 있습니다. URL을 붙여넣습니다. 그러면 해당 이미지를 다운로드합니다.</p>
+<p>ls -lh를 수행하면 cowpy.sif를 볼 수 있습니다.</p>
+<p>Singularity는 Docker와 다릅니다. singularity는 모든 이미지를 플랫 파일에 저장하는 반면 Docker는 호스트 머신에 모든 레이어를 별도로 보관하는 레지스트리가 있으며 이 모든 것을 추적하기 위해 실행 중인 데몬이 있습니다.</p>
+<h2 id="12-cowpy">1.2. 컨테이너를 사용하여 cowpy를 일회성 명령으로 실행<a class="headerlink" href="#12-cowpy" title="Permanent link">&para;</a></h2>
+<p>좋습니다, Docker로 돌아가겠습니다. 이제 docker run을 수행하여 생성한 이 이미지를 실행해 볼 수 있습니다.</p>
+<p>dash dash rm을 수행하겠습니다. 이것은 이미지의 일회성 실행만 수행합니다. 그리고 이미지 URL을 붙여넣겠습니다. 그런 다음 마지막으로 실행하려는 명령으로 완료합니다.</p>
+<p>생성한 이미지에는 cowpy가 설치되어 있으므로 cowpy를 시도해 보겠습니다.</p>
+<p>됩니다. 명령이 실행되었습니다. cowpy가 로컬에 설치되어 있지 않습니다. 실행하려고 하면 존재하지 않는 것을 볼 수 있습니다. 그러나 이 명령에서는 Docker를 사용하여 실행했으며 이 출력을 올바르게 생성했습니다.</p>
+<h2 id="13-cowpy">1.3. 컨테이너를 사용하여 cowpy를 대화식으로 실행<a class="headerlink" href="#13-cowpy" title="Permanent link">&para;</a></h2>
+<p>원한다면 더 나아가 컨테이너를 대화식으로 실행하고 내부를 둘러볼 수 있습니다. 다시 "docker run dash dash rm"을 수행합니다. 이제 대화형 터미널을 원한다고 Docker에 알리는 dash it를 수행하겠습니다. 이미지 URL을 다시 수행하고 이번에는 cowpy 대신 bin bash를 수행하겠습니다. 왜냐하면 실행하려는 명령이 bash이기 때문입니다.</p>
+<p>이것은 실행 중인 컨테이너로 이동하며 이제 프롬프트가 변경된 것을 볼 수 있습니다.</p>
+<p>LS slash를 수행하면 여기의 디렉토리가 다른 것을 볼 수 있습니다.</p>
+<p>GitHub Code Spaces에서 실행 중인 오른쪽에 두 번째 터미널을 열고 LS slash를 수행하면 workspaces 및 temp와 같은 디렉토리가 있는 것을 볼 수 있지만 Docker의 여기는 다릅니다.</p>
+<p>따라서 이 환경은 Docker 내에서 완전히 분리되어 있으며 호스트 환경에서 격리되어 있습니다. 이것은 좋은 일입니다. 왜냐하면 이 명령의 실행을 Docker 이미지로 격리하고 다른 호스트 시스템의 다른 사람들 사이에서 재현 가능하게 유지하기 때문입니다.</p>
+<p>Docker 이미지 내에서 호스트 시스템의 데이터를 사용하려면 명시적으로 컨테이너에 마운트해야 합니다.</p>
+<p>잠시 후에 그렇게 하겠습니다.</p>
+<h2 id="132">1.3.2. 원하는 도구 명령 실행<a class="headerlink" href="#132" title="Permanent link">&para;</a></h2>
+<p>먼저 cowpy를 실행할 수 있는지 확인해 보겠습니다. 다시 명령줄에서 직접 사용할 수 있으며 더 복잡한 작업을 시작하고 인수를 전달할 수 있습니다. Hello containers 그리고 소 대신 tux 펭귄을 수행하겠습니다. 다른 무엇이 있는지 보겠습니다.</p>
+<p>cheese를 수행하겠습니다. 훌륭합니다. Dragon과 Cow는 어떻습니까? 꽤 좋습니다.</p>
+<h2 id="133">1.3.3. 컨테이너 종료<a class="headerlink" href="#133" title="Permanent link">&para;</a></h2>
+<p>좋습니다. 이 컨테이너에 데이터가 없기 때문에 더 이상 할 수 없습니다. 그래서 이 실행 중인 이미지를 종료하고 컨테이너에 일부 데이터를 마운트할 수 있는지 확인하겠습니다. control D를 수행하거나 exit를 입력하여 수행할 수 있습니다. 좋습니다, 이제 일반 GitHub code space로 돌아왔습니다.</p>
+<h2 id="134">1.3.4. 컨테이너에 데이터 마운트<a class="headerlink" href="#134" title="Permanent link">&para;</a></h2>
+<p>Docker 컨테이너에 일부 데이터를 마운트하려면 dash V를 사용해야 합니다. 이전 docker 명령을 가져와서 시작 부분으로 이동하여 dash v를 수행하겠습니다. 현재 로컬 작업 디렉토리에 대해 "."를 수행한 다음 콜론을 사용하여 호스트 디렉토리에서 마운트될 위치를 지정하고 slash data를 수행합니다. 따라서 이것은 이 특정 디렉토리를 slash data의 컨테이너에 마운트합니다.</p>
+<p>이제 LS slash를 수행하면 data라는 새 디렉토리가 있는 것을 볼 수 있으며 LS data를 수행하면 사이드바에 있는 모든 파일을 볼 수 있습니다. 훌륭합니다.</p>
+<h2 id="135">1.3.5. 마운트된 데이터 사용<a class="headerlink" href="#135" title="Permanent link">&para;</a></h2>
+<p>이제 Docker 이미지 내의 호스트 시스템에 있는 일부 파일을 사용할 수 있습니다. cat data greetings csv라고 말할 수 있습니다. 기억하시다시피 이것은 이전의 다양한 인사말이 포함된 CSV 파일이며 cowpy로 파이프할 수 있습니다. 훌륭합니다. 이제 진전이 있습니다.</p>
+<p>좋습니다. Docker를 대화식으로 실행하는 것은 충분합니다. Docker가 무엇인지, 일회성 방식으로 명령을 실행하는 방법과 이미지를 대화식으로 사용하는 방법에 대해 대략적으로 느끼셨기를 바랍니다. singularity를 사용하는 경우 apptainer exec 또는 apptainer run 또는 singularity exec 또는 singularity run과 같은 작업을 수행한다는 점을 제외하고 명령은 모두 매우 유사합니다.</p>
+<h2 id="2-nextflow">2. Nextflow에서 컨테이너 사용<a class="headerlink" href="#2-nextflow" title="Permanent link">&para;</a></h2>
+<p>다음으로 Nextflow 워크플로우로 돌아가서 Nextflow 파이프라인 내에서 이 기술을 사용하는 방법을 살펴보겠습니다.</p>
+<p>터미널을 닫고 Hello Containers를 다시 열겠습니다.</p>
+<h2 id="21-cowpy">2.1. cowpy 모듈 작성<a class="headerlink" href="#21-cowpy" title="Permanent link">&para;</a></h2>
+<p>cowpy 예제를 고수하기 위해 cowpy를 사용하는 워크플로우에 새 프로세스를 생성하겠습니다. 모듈로 이동하여 새 파일을 생성하고 cowpy nf라고 부르겠습니다. 이제 조금 속임수를 쓰고 교육 자료에서 코드를 복사하여 저장을 누르겠습니다. 그리고 살펴보겠습니다.</p>
+<p>이것은 간단한 프로세스입니다. 이제 프로세스의 구성 요소가 어떻게 생겼는지 이해하기를 바랍니다. 다시 결과로 이동하는 publishDir이 있습니다. 입력 파일과 character라는 문자열의 두 가지 입력이 있습니다. cowpy 입력 파일의 출력이 있으며 잠시 전에 docker 이미지 내에서 수동으로 실행한 것과 정확히 동일하게 보이는 스크립트가 있습니다: 파일을 인쇄하는 cat, cowpy에 파이프하고 사용하려는 cowpy 문자 유형을 지정하고 여기에서 출력으로 전달하는 출력 파일로 출력합니다.</p>
+<h2 id="22-cowpy">2.2. 워크플로우에 cowpy 추가<a class="headerlink" href="#22-cowpy" title="Permanent link">&para;</a></h2>
+<p>좋습니다, 워크플로우로 돌아가서 이 새 프로세스를 가져오겠습니다. 그래서 modules cowpy nf에서 cowpy. 원하는 문자를 지정할 수 있도록 새 매개변수를 생성하겠습니다. 기본적으로 Turkey라고 하겠습니다. 그런 다음 워크플로우 끝에서 이 새 프로세스를 호출하겠습니다.</p>
+<p>cowpy. 그리고 Collect Greetings의 출력을 사용하겠습니다. 따라서 collect greetings out, out file입니다. 그런 다음 방금 만든 새 params인 두 번째 인수가 필요합니다. params dot character.</p>
+<h2 id="224">2.2.4. 워크플로우를 실행하여 작동하는지 확인<a class="headerlink" href="#224" title="Permanent link">&para;</a></h2>
+<p>좋습니다, 새 프로세스가 작동하는지 확인하겠습니다. Nextflow run hello containers. 이것은 처음 세 개의 프로세스를 실행한 다음 끝에 cowpy를 실행하려고 시도해야 합니다.</p>
+<p>오류가 발생했습니다. 여기서 말하는 것은 cowpy에 오류가 있었고 종료 상태 127이 있었으며 확실히 command sh cowpy command not found입니다.</p>
+<p>cowpy에 사용할 수 있는 Docker 이미지가 있다고 Nextflow에 알리지 않았으므로 호스트 시스템에서 실행하려고 시도했으며 호스트 시스템에 cowpy가 설치되어 있지 않아 오류가 발생했습니다.</p>
+<h2 id="23">2.3. 컨테이너를 사용하여 실행<a class="headerlink" href="#23" title="Permanent link">&para;</a></h2>
+<p>따라서 해야 할 일은 사용 가능한 컨테이너가 있다고 Nextflow에 알려야 하는 것입니다. cowpy 프로세스로 이동하여 프로세스 상단에 container라는 새 지시문을 추가하겠습니다.</p>
+<p>그런 다음 이미지를 찾아 URL을 복사하고 문자열에 넣습니다.</p>
+<p>이것만으로는 충분하지 않습니다. X Flow 파이프라인에는 소프트웨어를 지정하는 여러 가지 방법이 있을 수 있기 때문입니다. 예를 들어 conda conda-forge cowpy도 수행할 수 있습니다. 그리고 Nextflow는 사용하려는 기술을 알아야 합니다.</p>
+<h2 id="232-nextflowconfig-docker">2.3.2. nextflow.config 파일을 통해 Docker 사용 활성화<a class="headerlink" href="#232-nextflowconfig-docker" title="Permanent link">&para;</a></h2>
+<p>따라서 Docker가 활성화된 상태로 실행하려면 다음 장에서 더 자세히 다룰 내용인 Nextflow config 파일을 사용하여 약간 앞서나가겠습니다. 이 디렉토리에 Nextflow Config라는 파일이 있으며 여기에 이미 docker.enabled False가 있습니다.</p>
+<p>Docker를 활성화하기 위해 True로 변경한 다음 워크플로우를 다시 실행할 수 있습니다.</p>
+<h2 id="233-docker">2.3.3. Docker가 활성화된 상태로 워크플로우 실행<a class="headerlink" href="#233-docker" title="Permanent link">&para;</a></h2>
+<p>Nextflow run hello containers nf 이번에는 cowpy가 성공적으로 실행되었습니다. Results를 살펴보겠습니다. cowpy collected test 그리고 우리의 Turkey가 있습니다. 훌륭합니다.</p>
+<p>따라서 백그라운드에서 Nextflow는 해당 프로세스에 사용 가능한 컨테이너가 있다는 것을 알았습니다.</p>
+<p>이미지를 가져와서 명령을 실행했습니다.</p>
+<h2 id="234-nextflow">2.3.4. Nextflow가 컨테이너화된 작업을 시작한 방법 검사<a class="headerlink" href="#234-nextflow" title="Permanent link">&para;</a></h2>
+<p>궁금하시다면 work 디렉토리를 살펴봄으로써 실제로 수행한 작업을 정확히 볼 수 있습니다. code work를 수행한 다음 해시를 수행하고 command run을 수행합니다. 기억하시다시피 이것은 해당 작업에 대해 실제로 실행되는 파일입니다. NXF launch라는 함수를 찾을 수 있습니다. 그리고 여기에서 Nextflow가 사용한 정확한 docker 명령을 볼 수 있습니다. 이것은 이전에 터미널에서 수동으로 수행한 것과 매우 유사합니다. Docker run. 이 호스트 디렉토리를 컨테이너에 바인딩한 다음 컨테이너 URL을 지정합니다.</p>
+<p>따라서 여기에는 마법이 없습니다. Nextflow가 파이프라인에서 컨테이너를 쉽게 지정할 수 있는 방식으로 자동으로 무거운 작업을 수행하고 있을 뿐이며, 워크플로우를 실행하는 다른 사람들이 쉽게 사용할 수 있습니다. 그리고 그 사람들은 더 이상 분석 파이프라인을 실행하기 위해 소프트웨어 관리에 대해 생각할 필요가 없습니다.</p>
+<p>매우 매우 간단하고 매우 편리하며 재현성도 뛰어납니다. 전반적으로 좋습니다.</p>
+<p>좋습니다, 수고하셨습니다. Chapter Five의 끝입니다. 다음 비디오에서 Hello Nextflow 교육의 마지막 부분인 part six에 참여하여 Nextflow 구성에 대해 더 자세히 이야기하겠습니다.</p>
+<p>다음 비디오에서 뵙겠습니다.</p>
+<p><a href="../06_hello_config/">다음 비디오 스크립트 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.22 19.03a.75.75 0 0 1 0-1.06L18.19 13H3.75a.75.75 0 0 1 0-1.5h14.44l-4.97-4.97a.749.749 0 0 1 .326-1.275.75.75 0 0 1 .734.215l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0"/></svg></span></a></p><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
   margin: 1rem 0;
@@ -5015,6 +5057,9 @@ window.mkdocsQuizConfig = {
 
 
 
+  
+  
+
 
 
   
@@ -5107,8 +5152,8 @@ window.mkdocsQuizConfig = {
   
 
 
-<h4>Cookie consent</h4>
-<p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our training materials better. Find out more on <a href="https://seqera.io/privacy-policy/#cookies" target="_blank" rel="noopener">how we use cookies</a>.</p>
+<h4>쿠키 동의</h4>
+<p>저희는 귀하의 반복 방문과 선호도를 인식하고, 문서의 효과성과 사용자가 원하는 정보를 찾고 있는지 측정하기 위해 쿠키를 사용합니다. 동의해 주시면 교육 자료를 개선하는 데 도움이 됩니다. <a href="https://seqera.io/privacy-policy/#cookies" target="_blank" rel="noopener">쿠키 사용 방법</a>에 대해 자세히 알아보세요.</p>
 <input class="md-toggle" type="checkbox" id="__settings" >
 <div class="md-consent__settings">
   <ul class="task-list">
@@ -5161,7 +5206,7 @@ window.mkdocsQuizConfig = {
     <label class="task-list-control">
       <input type="checkbox" name="posthog" checked>
       <span class="task-list-indicator"></span>
-      PostHog Analytics
+      PostHog 분석
     </label>
   </li>
 
@@ -5192,12 +5237,16 @@ window.mkdocsQuizConfig = {
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": {"alias": true, "provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": {"alias": true, "provider": "mike"}}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
-        <script src="../../../../assets/javascripts/posthog.js"></script>
+        <script src="../../../assets/javascripts/consent-sync.js"></script>
+      
+        <script src="../../../assets/javascripts/posthog.js"></script>
+      
+        <script src="../../../assets/javascripts/language-picker.js"></script>
       
     
   </body>
