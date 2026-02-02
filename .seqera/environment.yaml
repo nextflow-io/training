@@ -4,7 +4,6 @@ channels:
   - conda-forge
   - bioconda
 dependencies:
-  - python=3.13
   - openjdk=21
   - nextflow=25.10.2
   # TODO: nf-test from conda lacks v2 parser support until next release
