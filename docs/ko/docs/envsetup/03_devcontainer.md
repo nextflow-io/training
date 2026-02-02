@@ -2,7 +2,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-로컬 Docker 설치가 있거나 설치할 의향이 있다면, 이 자료로 로컬에서 작업하는 가장 쉬운 방법은 Visual Studio Code의 devcontainer 기능을 사용하는 것입니다. 이 방식은 수동 설치 없이 필요한 모든 도구와 종속성을 제공합니다.
+로컬 Docker 설치가 있거나 설치할 의향이 있다면, 이 자료로 로컬에서 작업하는 가장 쉬운 방법은 Visual Studio Code의 devcontainer 기능을 사용하는 것입니다. 이 방식은 수동 설치 없이 필요한 모든 도구와 의존성을 제공합니다.
 
 ## 요구 사항
 
@@ -73,7 +73,7 @@ VS Code에서 "Reopen in Container"라는 메시지가 표시되면 클릭합니
 - Nextflow
 - Docker
 - Git
-- 교육에 필요한 기타 모든 종속성
+- 교육에 필요한 기타 모든 의존성
 
 ![devcontainer가 실행 중인 VS Code](img/running_container.png)
 
@@ -82,7 +82,7 @@ VS Code에서 "Reopen in Container"라는 메시지가 표시되면 클릭합니
 devcontainer 방식을 사용하면 여러 가지 이점이 있습니다:
 
 - **일관성**: 다른 머신에서도 일관된 개발 환경 보장
-- **단순성**: 모든 종속성이 사전 설치되고 구성됨
+- **단순성**: 모든 의존성이 사전 설치되고 구성됨
 - **격리**: 개발 환경이 로컬 시스템과 격리됨
 - **재현성**: devcontainer를 사용하는 모든 사람이 동일한 설정을 얻음
 - **수동 설치 불필요**: Java, Nextflow 및 기타 도구를 수동으로 설치할 필요 없음

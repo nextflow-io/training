@@ -10,7 +10,7 @@ Hello nf-core 교육 과정을 완료하신 것을 축하드립니다! 🎉
 
 데모 pipeline을 가져와서 실행하는 방법을 배우는 것으로 시작하여, 간단한 Nextflow workflow를 nf-core pipeline으로 변환하는 작업을 수행하셨습니다.
 template을 사용하여 pipeline scaffold를 생성하는 방법을 배우고 기존 pipeline을 해당 scaffold에 접목시켰습니다.
-그런 다음 local module 중 하나를 nf-core module로 교체하고, 다른 local module을 nf-core 표준에 맞게 변환하며, 입력 검증을 추가하여 pipeline을 점진적으로 개선하셨습니다.
+그런 다음 local module 중 하나를 nf-core module로 교체하고, 다른 local module을 nf-core 표준에 맞게 변환하며, 입력 검증을 추가하여 pipeline을 단계적으로 개선하셨습니다.
 
 ### 구축한 결과물
 

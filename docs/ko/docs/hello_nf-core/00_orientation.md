@@ -57,7 +57,7 @@ cd hello-nf-core/
 
 !!! tip "팁"
 
-    어떤 이유로든 이 디렉토리를 벗어나는 경우(예: codespace가 절전 모드로 전환됨) Github Codespaces 교육 환경 내에서 실행하는 경우 전체 경로를 사용하여 언제든지 돌아갈 수 있습니다:
+    어떤 이유로든 이 디렉토리를 벗어나는 경우(예: codespace가 중지 모드로 전환됨) Github Codespaces 교육 환경 내에서 실행하는 경우 전체 경로를 사용하여 언제든지 돌아갈 수 있습니다:
 
     ```bash
     cd /workspaces/training/hello-nf-core

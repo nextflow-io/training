@@ -9,6 +9,8 @@ The target language for this translation is **Korean** (`ko`).
 - Maintain consistent honorific usage throughout
 - Follow standard Korean spelling conventions (한글 맞춤법)
 - Preserve personality and humor where present (e.g., "그동안 차 한 잔을 준비하거나" for suggesting a tea break)
+- **Avoid run-on sentences**: Split long, complex sentences into shorter ones or use commas (,) appropriately to improve readability
+- **Natural phrasing**: When translating "introduce information", prefer "학습하다" (learn) or "다루다" (cover) instead of direct translation like "소개하다"
 
 ## 2. Translation Context Rules
 
@@ -133,31 +135,40 @@ Note: Some terms use transliteration (음차) while others use actual Korean tra
 
 ### Actual Translations
 
-| English       | Korean      | Notes                                         |
-| ------------- | ----------- | --------------------------------------------- |
-| channel       | 채널        | Transliteration but treated as translation    |
-| process       | 프로세스    | Transliteration but treated as translation    |
-| standalone    | 단독        | Not 독립 (political independence)             |
-| mini-course   | 단기 과정   | Not 미니 과정 (too casual)                    |
-| wrap          | 적용하다    | Not 래핑하다 (sounds like physical packaging) |
-| training      | 교육        | Actual translation                            |
-| environment   | 환경        | Actual translation                            |
-| repository    | 저장소      | Actual translation                            |
-| file explorer | 파일 탐색기 | Mixed                                         |
-| main editor   | 메인 편집기 | Mixed                                         |
-| alignment     | 정렬        | Actual translation                            |
-| command       | 명령        | Actual translation                            |
-| directive     | 지시문      | Actual translation                            |
-| input         | 입력        | Actual translation                            |
-| output        | 출력        | Actual translation                            |
-| operator      | 연산자      | Actual translation                            |
-| parameter     | 매개변수    | Actual translation                            |
-| reference     | 참조        | Actual translation                            |
-| run           | 실행        | Actual translation                            |
-| task          | 작업        | Actual translation                            |
-| lowercase     | 소문자      | Actual translation                            |
-| materials     | 자료        | Actual translation                            |
-| course        | 과정        | Actual translation                            |
+| English       | Korean      | Notes                                                                   |
+| ------------- | ----------- | ----------------------------------------------------------------------- |
+| archived      | 아카이브된  | Transliteration, not 보관된 (standard for tech contexts)                |
+| channel       | 채널        | Transliteration but treated as translation                              |
+| dependency    | 의존성      | Not 종속성 (의존성 is standard in Korean tech community)                |
+| gradually     | 단계적으로  | Not 점진적으로 (단계적으로 = step-by-step, better for tutorials)        |
+| parser        | 분석기      | Not 파서 (more formal, e.g., AWS uses 로그 분석기 for "Log parser")     |
+| process       | 프로세스    | Transliteration but treated as translation                              |
+| sleep         | 중지(sleep) | Not 절전 (power saving). Context: "Codespace goes to sleep" = 중지 상태 |
+| standalone    | 단독        | Not 독립 (political independence)                                       |
+| mini-course   | 단기 과정   | Not 미니 과정 (too casual)                                              |
+| wrap          | 적용하다    | Not 래핑하다 (sounds like physical packaging)                           |
+| training      | 교육        | Actual translation                                                      |
+| environment   | 환경        | Actual translation                                                      |
+| repository    | 저장소      | Actual translation                                                      |
+| file explorer | 파일 탐색기 | Mixed                                                                   |
+| main editor   | 메인 편집기 | Mixed                                                                   |
+| alignment     | 정렬        | Actual translation                                                      |
+| command       | 명령        | Actual translation                                                      |
+| directive     | 지시문      | Actual translation                                                      |
+| input         | 입력        | Actual translation                                                      |
+| output        | 출력        | Actual translation                                                      |
+| operator      | 연산자      | Actual translation                                                      |
+| parameter     | 매개변수    | Actual translation                                                      |
+| reference     | 참조        | Actual translation                                                      |
+| run           | 실행        | Actual translation                                                      |
+| task          | 작업        | Actual translation                                                      |
+| lowercase     | 소문자      | Actual translation                                                      |
+| materials     | 자료        | Actual translation                                                      |
+| course        | 과정        | Actual translation                                                      |
+
+### Parsing Note
+
+Note: "parser" is translated as 분석기, but "parsing" is typically transliterated as 파싱.
 
 ## 9. Admonition Titles
 

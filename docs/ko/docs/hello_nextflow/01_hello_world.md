@@ -12,7 +12,7 @@
 :green_book: 비디오 스크립트는 [여기](./transcripts/01_hello_world.md)에서 확인할 수 있습니다.
 ///
 
-Hello Nextflow 교육 과정의 첫 번째 부분에서는 매우 기본적인 도메인에 구애받지 않는 Hello World 예제로 주제에 쉽게 접근합니다. 이 예제를 점진적으로 구축하여 기본 Nextflow 로직과 구성 요소의 사용법을 시연합니다.
+Hello Nextflow 교육 과정의 첫 번째 부분에서는 매우 기본적인 도메인에 구애받지 않는 Hello World 예제로 주제에 쉽게 접근합니다. 이 예제를 단계적으로 구축하여 기본 Nextflow 로직과 구성 요소의 사용법을 시연합니다.
 
 ??? info "Hello World 예제란 무엇인가요?"
 

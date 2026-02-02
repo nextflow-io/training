@@ -1106,7 +1106,7 @@ Workflow 블록에서 process의 출력에 어떻게 액세스합니까?
 Nextflow에서 process 실행 순서를 결정하는 것은 무엇입니까?
 - [ ] Workflow 블록에서 process가 작성된 순서
 - [ ] Process 이름의 알파벳 순서
-- [x] Process 간의 데이터 종속성
+- [x] Process 간의 데이터 의존성
 - [ ] 병렬 실행을 위한 무작위 순서
 
 자세히 알아보기: [1.4. 첫 번째 process의 출력을 두 번째 process로 전달](#14-첫-번째-process의-출력을-두-번째-process로-전달)

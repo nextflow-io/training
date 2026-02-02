@@ -198,7 +198,7 @@ nextflow run ./molkart \
 
     - 표준 환경에서 사용할 수 없는 특수한 바이오인포매틱스 소프트웨어를 사용합니다
     - 컨테이너는 재현성을 보장합니다 - 정확히 동일한 소프트웨어 버전이 모든 곳에서 실행됩니다
-    - 수십 개의 도구와 그 종속성을 수동으로 설치할 필요가 없습니다
+    - 수십 개의 도구와 그 의존성을 수동으로 설치할 필요가 없습니다
 
     Nextflow의 컨테이너에 대한 자세한 내용은 Hello Nextflow 교육의 [Hello Containers](../../hello_nextflow/05_hello_containers.md)를 참조하세요.
 

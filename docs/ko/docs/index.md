@@ -83,7 +83,7 @@ hide:
 
     ### :material-compass:{.nextflow-primary} Nextflow 입문자를 위한 과정 {.mt-1}
 
-    Nextflow를 처음 접하는 분들을 위한 도메인에 구애받지 않는 과정입니다. 각 과정은 학습자가 점진적으로 기술을 쌓을 수 있도록 설계된 일련의 교육 모듈로 구성되어 있습니다.
+    Nextflow를 처음 접하는 분들을 위한 도메인에 구애받지 않는 과정입니다. 각 과정은 학습자가 단계적으로 기술을 쌓을 수 있도록 설계된 일련의 교육 모듈로 구성되어 있습니다.
 
     ??? courses "**Hello Nextflow:** 자신만의 파이프라인 개발 배우기"
 
@@ -158,7 +158,7 @@ hide:
 
 </div>
 
-!!! info "보관된 교육 자료를 찾고 계신가요?"
+!!! info "아카이브된 교육 자료를 찾고 계신가요?"
 
     이전 교육 자료(Fundamentals Training, Advanced Training 및 기타 실험적 과정)는 Nextflow 3.0 strict 구문과 호환되지 않아 교육 포털에서 제거되었습니다.
     이러한 자료가 필요한 경우 2026년 1월 이전의 [git 기록](https://github.com/nextflow-io/training)에서 확인할 수 있습니다.

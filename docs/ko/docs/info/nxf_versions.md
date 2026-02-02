@@ -8,7 +8,7 @@ hide:
 
 ## 현재 지원되는 Nextflow 문법 버전 및 요구 사항
 
-교육 포털 버전 3.0부터 모든 교육 과정은 과정 인덱스 페이지에 별도로 명시되지 않는 한 Nextflow 25.10.2 버전 릴리스를 기반으로 합니다(버전 공지가 포함되지 않을 수 있는 더 이상 사용되지 않거나 보관된 자료 제외).
+교육 포털 버전 3.0부터 모든 교육 과정은 과정 인덱스 페이지에 별도로 명시되지 않는 한 Nextflow 25.10.2 버전 릴리스를 기반으로 합니다(버전 공지가 포함되지 않을 수 있는 더 이상 사용되지 않거나 아카이브된 자료 제외).
 
 과정에서 이제 workflow 수준의 typed inputs과 workflow 수준 output directives를 사용하기 때문에 V2 syntax parser를 사용해야 합니다.
 [Github Codespaces](../envsetup/01_setup.md) 또는 [로컬 devcontainer](../envsetup/03_devcontainer.md)를 통해 제공하는 환경을 사용할 계획이라면 과정 지침에 특별히 명시되지 않는 한 별도의 작업이 필요하지 않습니다.

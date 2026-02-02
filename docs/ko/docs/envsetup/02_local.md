@@ -10,7 +10,7 @@
 !!! tip
 
     진행하기 전에 [Devcontainers 방식](03_devcontainer.md)을 고려해 보셨나요?
-    수동 설치 없이 필요한 모든 도구와 종속성을 제공합니다.
+    수동 설치 없이 필요한 모든 도구와 의존성을 제공합니다.
 
 ## 일반 소프트웨어 요구 사항
 
@@ -28,7 +28,7 @@ Nextflow는 Java가 설치된 모든 POSIX 호환 시스템(Linux, macOS, Window
 
 VSCode 애플리케이션은 기술적으로 선택 사항이지만 과정을 진행하는 데뿐만 아니라 일반적인 Nextflow 개발 작업에도 사용하는 것을 강력히 권장합니다.
 
-Nextflow 문서 매뉴얼에서는 [환경 설정](https://www.nextflow.io/docs/latest/developer-env.html)에서 이러한 종속성 설치에 대한 지침을 제공합니다.
+Nextflow 문서 매뉴얼에서는 [환경 설정](https://www.nextflow.io/docs/latest/developer-env.html)에서 이러한 의존성 설치에 대한 지침을 제공합니다.
 
 ## Nextflow 및 nf-core 도구
 
