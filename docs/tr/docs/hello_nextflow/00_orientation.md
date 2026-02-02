@@ -12,7 +12,6 @@
 
 :green_book: Video transkripti [burada](./transcripts/00_orientation.md) mevcuttur.
 ///
--->
 
 !!! tip "İpucu"
 
@@ -20,6 +19,8 @@
 
     - :fontawesome-solid-closed-captioning: Yüksek kaliteli (manuel olarak düzenlenmiş) altyazılar. :material-subtitles: simgesi ile açabilirsiniz
     - :material-bookmark: Sayfa başlıklarına karşılık gelen zaman çizelgesinde video bölümleri.
+
+-->
 
 ## Eğitim ortamı başlatma
 

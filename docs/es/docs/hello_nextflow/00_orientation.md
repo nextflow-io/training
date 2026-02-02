@@ -12,7 +12,6 @@
 
 :green_book: La transcripción del video está disponible [aquí](./transcripts/00_orientation.md).
 ///
--->
 
 !!! tip "Consejo"
 
@@ -20,6 +19,8 @@
 
     - :fontawesome-solid-closed-captioning: Subtítulos de alta calidad (curados manualmente). Actívelos con el ícono :material-subtitles:
     - :material-bookmark: Capítulos de video en la línea de tiempo que corresponden a los encabezados de la página.
+
+-->
 
 ## Iniciar un entorno de entrenamiento
 

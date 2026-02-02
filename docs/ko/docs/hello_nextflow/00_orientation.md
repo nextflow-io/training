@@ -12,7 +12,6 @@
 
 :green_book: 비디오 스크립트는 [여기](./transcripts/00_orientation.md)에서 확인할 수 있습니다.
 ///
--->
 
 !!! tip
 
@@ -20,6 +19,8 @@
 
     - :fontawesome-solid-closed-captioning: 고품질(수동 큐레이팅된) 자막. :material-subtitles: 아이콘으로 켤 수 있습니다
     - :material-bookmark: 페이지 제목에 해당하는 타임라인의 비디오 챕터
+
+-->
 
 ## 교육 환경 시작
 

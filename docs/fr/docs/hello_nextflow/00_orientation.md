@@ -12,7 +12,6 @@
 
 :green_book: La transcription de la vidéo est disponible [ici](./transcripts/00_orientation.md).
 ///
--->
 
 !!! tip "Astuce"
 
@@ -20,6 +19,8 @@
 
     - :fontawesome-solid-closed-captioning: Sous-titres de haute qualité (révisés manuellement). Activez-les avec l'icône :material-subtitles:
     - :material-bookmark: Chapitres vidéo dans la timeline qui correspondent aux titres de la page.
+
+-->
 
 ## Démarrer un environnement de formation
 

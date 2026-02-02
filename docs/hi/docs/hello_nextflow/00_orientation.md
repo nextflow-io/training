@@ -12,7 +12,6 @@
 
 :green_book: वीडियो transcript [यहाँ](./transcripts/00_orientation.md) उपलब्ध है।
 ///
--->
 
 !!! tip "सुझाव"
 
@@ -20,6 +19,8 @@
 
     - :fontawesome-solid-closed-captioning: उच्च गुणवत्ता (manually curated) captions / subtitles। इन्हें :material-subtitles: icon से चालू करो
     - :material-bookmark: Timeline में video chapters जो page headings से मेल खाते हैं।
+
+-->
 
 ## Training environment शुरू करें
 

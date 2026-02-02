@@ -12,7 +12,6 @@
 
 :green_book: Transkrypcja wideo jest dostępna [tutaj](./transcripts/00_orientation.md).
 ///
--->
 
 !!! tip "Wskazówka"
 
@@ -20,6 +19,8 @@
 
     - :fontawesome-solid-closed-captioning: Wysokiej jakości (ręcznie przygotowane) napisy. Włącz je ikoną :material-subtitles:
     - :material-bookmark: Rozdziały wideo na osi czasu odpowiadające nagłówkom strony.
+
+-->
 
 ## Uruchom środowisko szkoleniowe
 

@@ -12,7 +12,6 @@
 
 :green_book: Das Videotranskript ist [hier](./transcripts/00_orientation.md) verfügbar.
 ///
--->
 
 !!! tip "Tipp"
 
@@ -20,6 +19,8 @@
 
     - :fontawesome-solid-closed-captioning: Hochwertige (manuell kuratierte) Untertitel. Schalte sie mit dem :material-subtitles: Symbol ein
     - :material-bookmark: Videokapitel in der Zeitleiste, die den Seitenüberschriften entsprechen.
+
+-->
 
 ## Trainingsumgebung starten
 

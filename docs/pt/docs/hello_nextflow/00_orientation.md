@@ -12,7 +12,6 @@
 
 :green_book: A transcrição do vídeo está disponível [aqui](./transcripts/00_orientation.md).
 ///
--->
 
 !!! tip "Dica"
 
@@ -20,6 +19,8 @@
 
     - :fontawesome-solid-closed-captioning: Legendas de alta qualidade (manualmente curadas). Ative-as com o ícone :material-subtitles:
     - :material-bookmark: Capítulos de vídeo na linha do tempo que correspondem aos títulos das páginas.
+
+-->
 
 ## Inicie um ambiente de treinamento
 
