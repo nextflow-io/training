@@ -7,7 +7,9 @@ set -e
 VERSION="${1:-latest}"
 OUTPUT_DIR="${2:-/tmp/multilang-build}"
 DOCS_DIR="$(cd "$(dirname "$0")/../docs" && pwd)"
-LANGUAGES=(en pt)  # Add more as needed: es fr it ko pl tr
+
+# Dynamically discover languages from docs/ directories containing mkdocs.yml
+LANGUAGES=($(find "$DOCS_DIR" -maxdepth 2 -name "mkdocs.yml" -exec dirname {} \; | xargs -n1 basename | sort))
 
 echo "Building multilingual site for version: $VERSION"
 echo "Output directory: $OUTPUT_DIR"

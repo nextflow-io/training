@@ -53,12 +53,20 @@ def get_supported_langs() -> set[str]:
 
     This is the single source of truth for which languages are supported.
     """
+    return set(get_language_names().keys())
+
+
+def get_language_names() -> dict[str, str]:
+    """
+    Load language code to native name mapping from language_names.yml.
+
+    This is the single source of truth for which languages are supported.
+    """
     lang_file = DOCS_PATH / "language_names.yml"
     if not lang_file.exists():
         console.print(f"[red]Error:[/red] Language file not found: {lang_file}")
         raise typer.Exit(code=1)
-    langs = yaml.safe_load(lang_file.read_text(encoding="utf-8"))
-    return set(langs.keys())
+    return yaml.safe_load(lang_file.read_text(encoding="utf-8"))
 
 
 def get_lang_paths() -> list[Path]:
@@ -124,7 +132,9 @@ def new_lang(lang: str):
     console.print(f"  2. Translate {new_path}/ui-strings.yml")
     console.print(f"  3. Translate extra.consent in {new_path}/mkdocs.yml")
     console.print(f"  4. Add '{lang}: <native name>' to docs/language_names.yml")
-    console.print(f"  5. Add language to extra.alternate in docs/en/mkdocs.yml")
+    console.print(
+        "  5. Run 'uv run docs.py sync-language-picker' to update language picker"
+    )
 
 
 @app.command()
@@ -239,6 +249,51 @@ def check_config(lang: str):
         raise typer.Exit(code=1)
 
     console.print(f"[green]OK:[/green] {config_path}")
+
+
+@app.command()
+def sync_language_picker():
+    """Update the language picker in docs/en/mkdocs.yml from language_names.yml."""
+    import re
+
+    mkdocs_path = EN_DOCS_PATH / "mkdocs.yml"
+    if not mkdocs_path.exists():
+        console.print(f"[red]Error:[/red] mkdocs.yml not found: {mkdocs_path}")
+        raise typer.Exit(code=1)
+
+    lang_names = get_language_names()
+    content = mkdocs_path.read_text(encoding="utf-8")
+
+    # Build the new alternate section
+    alternate_lines = ["  alternate:"]
+    for lang_code in sorted(lang_names.keys()):
+        name = lang_names[lang_code]
+        # English goes to root, others to /{lang}/
+        link = "/" if lang_code == "en" else f"/{lang_code}/"
+        alternate_lines.append(f"    - name: {name}")
+        alternate_lines.append(f"      link: {link}")
+        alternate_lines.append(f"      lang: {lang_code}")
+    new_alternate = "\n".join(alternate_lines)
+
+    # Pattern to match the existing alternate section
+    # Matches from "  alternate:" to the next unindented or less-indented line
+    pattern = r"(  alternate:\n(?:    .*\n)+)"
+
+    if not re.search(pattern, content):
+        console.print(
+            "[red]Error:[/red] Could not find alternate section in mkdocs.yml"
+        )
+        raise typer.Exit(code=1)
+
+    new_content = re.sub(pattern, new_alternate + "\n", content)
+
+    if new_content == content:
+        console.print("[green]Language picker already up to date[/green]")
+        return
+
+    mkdocs_path.write_text(new_content, encoding="utf-8")
+    console.print(f"[green]Updated:[/green] {mkdocs_path}")
+    console.print(f"Languages: {', '.join(sorted(lang_names.keys()))}")
 
 
 if __name__ == "__main__":
