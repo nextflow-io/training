@@ -113,6 +113,8 @@ Then use the GitHub Actions workflow to regenerate:
 2. Select the language and `translate-page` command
 3. The workflow will regenerate the translation with your prompt changes
 
+When prompts are merged to master, GitHub Actions automatically runs `fix-translations` to update all existing translations to comply with the new guidelines.
+
 ### Why AI-Only?
 
 Manual translations don't scale and aren't maintainable:

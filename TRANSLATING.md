@@ -146,22 +146,30 @@ Good prompt improvements include:
 
 ## How Automatic Translation Updates Work
 
-When English source files are modified, translations are automatically updated via GitHub Actions:
+Translations are automatically updated via GitHub Actions when:
+
+1. **English source files change** → Outdated translations are updated
+2. **Translation prompts change** → Existing translations are fixed to comply with new guidelines
 
 ```mermaid
 flowchart TD
-    A[English file changed] --> B[GitHub Actions triggered]
-    B --> C[Detect outdated translations]
-    C --> D{Any outdated?}
-    D -->|No| E[Done]
-    D -->|Yes| F[AI updates changed sections]
-    F --> G[Create PR for each language]
-    G --> H[Human review]
-    H --> I{Approved?}
-    I -->|Yes| J[Merge PR]
-    I -->|No| K[Update llm-prompt.md]
-    K --> L[Re-run translation]
-    L --> H
+    A[Change detected] --> B{What changed?}
+    B -->|English content| C[Detect outdated translations]
+    B -->|Language prompt| D[Fix that language's translations]
+    B -->|General prompt| E[Fix ALL languages]
+    C --> F{Any outdated?}
+    F -->|No| G[Done]
+    F -->|Yes| H[AI updates changed sections]
+    D --> I[AI reviews & fixes translations]
+    E --> I
+    H --> J[Create PR for each language]
+    I --> J
+    J --> K[Human review]
+    K --> L{Approved?}
+    L -->|Yes| M[Merge PR]
+    L -->|No| N[Update llm-prompt.md]
+    N --> O[Re-run translation]
+    O --> K
 ```
 
 ### Key Points
@@ -170,6 +178,7 @@ flowchart TD
 - Translations preserve line-by-line structure for easy diff review
 - Each language gets a separate PR for independent review/merge
 - The system uses git commit timestamps to detect outdated files
+- **Prompt changes trigger automatic fixes** with multi-pass verification (up to 8 iterations) until all translations comply
 
 ---
 
@@ -425,9 +434,37 @@ uv run python translate.py add-missing -l <lang> --include hello_nextflow
 # Update outdated translations (smart minimal diff)
 uv run python translate.py update-outdated -l <lang>
 
+# Update with verification pass (recommended)
+uv run python translate.py update-outdated -l <lang> --verify
+
 # Remove orphaned translations
 uv run python translate.py remove-removable -l <lang>
 ```
+
+### Fix Commands (For Prompt Updates)
+
+When translation prompts are updated, use these commands to fix existing translations:
+
+```bash
+# Fix all translations for a language (multi-pass until compliant)
+uv run python translate.py fix-translations -l <lang>
+
+# Preview what would be checked (no API calls)
+uv run python translate.py fix-translations -l <lang> --dry-run
+
+# Fix specific files only
+uv run python translate.py fix-translations -l <lang> --files hello_nextflow/index.md
+
+# Customize max iterations (default: 8)
+uv run python translate.py fix-translations -l <lang> --max-iterations 5
+```
+
+The `fix-translations` command:
+
+- Reviews each translation against current prompt guidelines
+- Makes minimal changes to fix violations
+- Loops until no more changes needed (or max iterations reached)
+- Runs automatically via GitHub Actions when prompts change
 
 ### Preview Commands (No API key required)
 
