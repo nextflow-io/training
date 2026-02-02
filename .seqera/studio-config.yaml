@@ -10,7 +10,7 @@ session:
     enabled: true
     path: "/workspace/training"
   dependencies:
-    condaEnvironmentFile: ".seqera/environment.yaml"
+    condaEnvironmentFile: "environment.yaml"
   computeRequirements:
     awsBatch:
       cpu: 8
