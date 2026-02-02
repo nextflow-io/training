@@ -5,12 +5,14 @@ The target language for this translation is **Polish** (`pl`).
 ## 1. Grammar & Tone
 
 - Use informal tone (Ty for one person, Wy for multiple, not Pan/Pani)
-- Always capitalize second-person pronouns, including possessives (Twój, Wasz)
+- Always capitalize second-person pronouns, including possessives (Twój, Wasz); do not capitalize other pronouns
 - Follow standard Polish spelling conventions
 - Prefer active voice when possible
 - Use natural Polish syntax and sentence structure; feel free to rephrase the English text wherever it improves clarity and naturalness
 - Always use correct declension, even with English terms. Use apostrophe endings (e.g. "workflow'u") where necessary
 - Use inanimate genders when referring to programming terms. Exception: use virile (animate masculine) to refer to Nextflow (i.e. Nextflow'a)
+- Avoid repeating nouns, verbs, adjectives, and adverbs within a sentence or in two consecutive sentences wherever possible.
+- Avoid sentences with more than 3 verbs. Split long sentences as required.
 
 ### Terms with apostrophe endings
 
@@ -135,7 +137,9 @@ These terms should be translated in prose (but kept in English in code).
 | index           | indeks                   |                              |
 | run             | uruchomić / uruchomienie |                              |
 | parallelization | paralelizacja            |                              |
-| parallelize     | paralelizować            |                              |
+| parallelize     | paralelizować            |  Never "równoleglić"         |
+| domain         | dziedzina                  | domain of knowledge       |
+| journey (fig.) | droga / ścieżka         |                                           |
 
 ## 6. Admonition Titles
 
