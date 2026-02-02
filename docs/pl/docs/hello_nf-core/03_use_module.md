@@ -2,12 +2,12 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-W trzeciej części kursu szkoleniowego Hello nf-core pokażemy, jak znaleźć, zainstalować i użyć istniejącego modułu nf-core w swoim pipeline.
+W trzeciej części kursu szkoleniowego Hello nf-core pokażemy, jak znaleźć, zainstalować i użyć istniejącego modułu nf-core w Swoim pipeline'ie.
 
 Jedną z głównych korzyści pracy z nf-core jest możliwość wykorzystania wcześniej przygotowanych, przetestowanych modułów z repozytorium [nf-core/modules](https://github.com/nf-core/modules).
 Zamiast pisać każdy proces od podstaw, możesz zainstalować i używać modułów utrzymywanych przez społeczność, które przestrzegają najlepszych praktyk.
 
-Aby pokazać, jak to działa, zastąpimy niestandardowy moduł `collectGreetings` modułem `cat/cat` z nf-core/modules w pipeline `core-hello`.
+Aby pokazać, jak to działa, zastąpimy niestandardowy moduł `collectGreetings` modułem `cat/cat` z nf-core/modules w pipeline'ie `core-hello`.
 
 ??? info "Jak zacząć od tej sekcji"
 
@@ -32,7 +32,7 @@ Aby pokazać, jak to działa, zastąpimy niestandardowy moduł `collectGreetings
 
 ## 1. Znajdź i zainstaluj odpowiedni moduł nf-core
 
-Najpierw nauczmy się, jak znaleźć istniejący moduł nf-core i zainstalować go w naszym pipeline.
+Najpierw nauczmy się, jak znaleźć istniejący moduł nf-core i zainstalować go w naszym pipeline'ie.
 
 Będziemy dążyć do zastąpienia procesu `collectGreetings`, który używa polecenia Unix `cat` do łączenia wielu plików z powitaniami w jeden.
 Łączenie plików jest bardzo powszechną operacją, więc jest prawdopodobne, że może już istnieć moduł w nf-core zaprojektowany do tego celu.
@@ -43,7 +43,7 @@ Zagłębmy się w to.
 
 Projekt nf-core utrzymuje scentralizowany katalog modułów pod adresem [https://nf-co.re/modules](https://nf-co.re/modules).
 
-Przejdź do strony modułów w swojej przeglądarce internetowej i użyj paska wyszukiwania, aby wyszukać 'concatenate'.
+Przejdź do strony modułów w Swojej przeglądarce internetowej i użyj paska wyszukiwania, aby wyszukać 'concatenate'.
 
 ![wyniki wyszukiwania modułów](./img/module-search-results.png)
 
@@ -158,7 +158,7 @@ Teraz, gdy znaleźliśmy moduł, którego chcemy, musimy dodać go do kodu źró
 Dobra wiadomość jest taka, że projekt nf-core zawiera narzędzia, które ułatwiają tę część.
 Konkretnie, polecenie `nf-core modules install` umożliwia zautomatyzowanie pobierania kodu i udostępnienia go projektowi w jednym kroku.
 
-Przejdź do katalogu swojego pipeline i uruchom polecenie instalacji:
+Przejdź do katalogu Swojego pipeline i uruchom polecenie instalacji:
 
 ```bash
 cd core-hello
@@ -218,7 +218,7 @@ Polecenie automatycznie:
 
 - Pobiera pliki modułu do `modules/nf-core/cat/cat/`
 - Aktualizuje `modules.json`, aby śledzić zainstalowany moduł
-- Dostarcza Ci prawidłową instrukcję `include` do użycia w swoim workflow
+- Dostarcza Ci prawidłową instrukcję `include` do użycia w Swoim workflow'ie
 
 !!! tip
 
@@ -344,11 +344,11 @@ Zajmiemy się tym jako osobną sekcją, ponieważ obejmuje to nowy mechanizm, kt
 
 ### Podsumowanie
 
-Wiesz, jak znaleźć moduł nf-core i udostępnić go swojemu projektowi.
+Wiesz, jak znaleźć moduł nf-core i udostępnić go Swojemu projektowi.
 
 ### Co dalej?
 
-Oceń, czego wymaga nowy moduł i zidentyfikuj wszelkie ważne zmiany potrzebne do zintegrowania go z pipeline.
+Oceń, czego wymaga nowy moduł i zidentyfikuj wszelkie ważne zmiany potrzebne do zintegrowania go z pipeline'em.
 
 ---
 
@@ -434,7 +434,7 @@ Jednak aby zrozumieć część z metamapą, musimy przedstawić Ci dodatkowy kon
 
 ### 2.2. Zrozumienie metamap
 
-Właśnie powiedzieliśmy, że moduł CAT_CAT oczekuje mapy metadanych jako części swojej krotki wejściowej.
+Właśnie powiedzieliśmy, że moduł CAT_CAT oczekuje mapy metadanych jako części Swojej krotki wejściowej.
 Poświęćmy kilka minut na bliższe przyjrzenie się temu, czym to jest.
 
 **Mapa metadanych**, często nazywana w skrócie **metamapą**, to mapa w stylu Groovy zawierająca informacje o jednostkach danych.
@@ -499,11 +499,11 @@ Nie tylko pozwala to nazwać wyjścia na podstawie metadanych, ale możesz równ
 
 !!! note "Dowiedz się więcej o metadanych"
 
-    Aby uzyskać kompleksowe wprowadzenie do pracy z metadanymi w workflow Nextflow, w tym jak odczytywać metadane z arkuszy próbek i używać ich do dostosowywania przetwarzania, zobacz side quest [Metadane w workflow](../side_quests/metadata).
+    Aby uzyskać kompleksowe wprowadzenie do pracy z metadanymi w workflow'ach Nextflow, w tym jak odczytywać metadane z arkuszy próbek i używać ich do dostosowywania przetwarzania, zobacz side quest [Metadane w workflow'ach](../side_quests/metadata).
 
 ### 2.3. Podsumowanie zmian do wprowadzenia
 
-Na podstawie tego, co przejrzeliśmy, oto główne zmiany, które musimy wprowadzić w naszym pipeline, aby wykorzystać moduł `cat/cat`:
+Na podstawie tego, co przejrzeliśmy, oto główne zmiany, które musimy wprowadzić w naszym pipeline'ie, aby wykorzystać moduł `cat/cat`:
 
 - Utworzyć metamapę zawierającą nazwę partii;
 - Zapakować metamapę w krotkę z zestawem plików wejściowych do połączenia (wychodzących z `convertToUpper`);
@@ -514,15 +514,15 @@ To powinno załatwić sprawę! Teraz, gdy mamy plan, jesteśmy gotowi do działa
 
 ### Podsumowanie
 
-Wiesz, jak ocenić interfejs wejściowy i wyjściowy nowego modułu, aby zidentyfikować jego wymagania, i nauczyłeś się, jak metamapy są używane przez pipeline nf-core do utrzymywania metadanych ściśle powiązanych z danymi, gdy przepływają przez pipeline.
+Wiesz, jak ocenić interfejs wejściowy i wyjściowy nowego modułu, aby zidentyfikować jego wymagania, i nauczyłeś się, jak metamapy są używane przez pipeline'y nf-core do utrzymywania metadanych ściśle powiązanych z danymi, gdy przepływają przez pipeline.
 
 ### Co dalej?
 
-Zintegrować nowy moduł z workflow.
+Zintegrować nowy moduł z workflow'iem.
 
 ---
 
-## 3. Integracja CAT_CAT z workflow `hello.nf`
+## 3. Integracja CAT_CAT z workflow'iem `hello.nf`
 
 Teraz, gdy wiesz wszystko o metamapach (lub wystarczająco dużo dla celów tego kursu), nadszedł czas, aby faktycznie zaimplementować zmiany, które opisaliśmy powyżej.
 
@@ -530,7 +530,7 @@ Dla jasności podzielimy to i omówimy każdy krok osobno.
 
 !!! note
 
-    Wszystkie zmiany pokazane poniżej są dokonywane w logice workflow w bloku `main` w pliku workflow `core-hello/workflows/hello.nf`.
+    Wszystkie zmiany pokazane poniżej są dokonywane w logice workflow'u w bloku `main` w pliku workflow'u `core-hello/workflows/hello.nf`.
 
 ### 3.1. Utworzenie mapy metadanych
 
@@ -793,7 +793,7 @@ To powinno działać dość szybko.
 
 Zauważ, że `CAT_CAT` pojawia się teraz na liście wykonywanych procesów zamiast `collectGreetings`.
 
-I to wszystko! Teraz używamy solidnego, utrzymywanego przez społeczność modułu zamiast niestandardowego kodu na poziomie prototypu dla tego kroku w pipeline.
+I to wszystko! Teraz używamy solidnego, utrzymywanego przez społeczność modułu zamiast niestandardowego kodu na poziomie prototypu dla tego kroku w pipeline'ie.
 
 ### Podsumowanie
 
@@ -802,9 +802,9 @@ Teraz wiesz, jak:
 - Znaleźć i zainstalować moduły nf-core
 - Ocenić wymagania modułu nf-core
 - Utworzyć prostą mapę metadanych do użycia z modułem nf-core
-- Zintegrować moduł nf-core ze swoim workflow
+- Zintegrować moduł nf-core ze Swoim workflow'em
 
 ### Co dalej?
 
-Naucz się dostosowywać swoje moduły lokalne, aby przestrzegały konwencji nf-core.
+Naucz się dostosowywać Swoje moduły lokalne, aby przestrzegały konwencji nf-core.
 Pokażemy Ci również, jak tworzyć nowe moduły nf-core z szablonu za pomocą narzędzi nf-core.

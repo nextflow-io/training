@@ -14,19 +14,19 @@ Oto nasze trzy najlepsze rekomendacje dotyczące kolejnych kroków, oparte na ku
 
 **Sprawdź stronę [Nextflow for Science](../index.md)**, aby zobaczyć listę innych krótkich, samodzielnych kursów, które pokazują, jak zastosować podstawowe koncepcje i mechanizmy przedstawione w Hello Nextflow do typowych przypadków użycia w analizie naukowej.
 
-Jeśli nie widzisz swojej dziedziny reprezentowanej przez odpowiedni przypadek użycia, daj nam znać na [forum społeczności](https://community.seqera.io/), abyśmy mogli dodać ją do naszej listy rozwojowej.
+Jeśli nie widzisz Swojej dziedziny reprezentowanej przez odpowiedni przypadek użycia, daj nam znać na [forum społeczności](https://community.seqera.io/), abyśmy mogli dodać ją do naszej listy rozwojowej.
 
 ### 1.2. Zacznij pracę z nf-core
 
 **[nf-core](https://nf-co.re/)** to ogólnoświatowy wysiłek współpracy mający na celu opracowanie standaryzowanych pipeline'ów open-source dla szerokiego zakresu zastosowań w badaniach naukowych.
 Projekt obejmuje [ponad 100 pipeline'ów](https://nf-co.re/pipelines/), które są dostępne do użycia od razu, oraz [ponad 1400 modułów procesów](https://nf-co.re/modules/), które można zintegrować z własnymi projektami, a także bogaty zestaw narzędzi deweloperskich.
 
-Kurs szkoleniowy **[Hello nf-core](../../hello_nf-core/index.md)** wprowadzi Cię w pipeline'y kuratorowane przez społeczność nf-core oraz framework deweloperski, zaprojektowane, aby pomóc Ci pisać powtarzalne, skalowalne i standaryzowane workflow. Nauczysz się, jak używać istniejących pipeline'ów nf-core, przyczyniać się do ich rozwoju, a nawet rozpocząć budowanie własnych, wspieranych przez najlepsze praktyki i żywą społeczność. Jeśli jesteś gotowy, aby zastosować swoje umiejętności Nextflow w rzeczywistych projektach, to jest idealny następny krok.
+Kurs szkoleniowy **[Hello nf-core](../../hello_nf-core/index.md)** wprowadzi Cię w pipeline'y kuratorowane przez społeczność nf-core oraz framework deweloperski, zaprojektowane, aby pomóc Ci pisać powtarzalne, skalowalne i standaryzowane workflow. Nauczysz się, jak używać istniejących pipeline'ów nf-core, przyczyniać się do ich rozwoju, a nawet rozpocząć budowanie własnych, wspieranych przez najlepsze praktyki i żywą społeczność. Jeśli jesteś gotowy, aby zastosować Swoje umiejętności Nextflow w rzeczywistych projektach, to jest idealny następny krok.
 
 ### 1.3. Opanuj bardziej zaawansowane funkcje Nextflow
 
 W kursach Hello celowo utrzymujemy niski poziom złożoności technicznej, aby nie przeciążać Cię informacjami, których nie potrzebujesz, aby rozpocząć pracę z Nextflow.
-Kontynuując swoją pracę, będziesz chciał nauczyć się, jak wykorzystać pełny zestaw funkcji i moc Nextflow.
+Kontynuując Swoją pracę, będziesz chciał nauczyć się, jak wykorzystać pełny zestaw funkcji i moc Nextflow.
 
 W tym celu obecnie pracujemy nad **kolekcją [Side Quests](../side_quests/index.md)**, które mają być krótkimi, samodzielnymi kursami zagłębiającymi się w konkretne tematy, takie jak testowanie i zarządzanie metadanymi.
 

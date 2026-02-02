@@ -2,15 +2,15 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-W Części 1 uruchomiliśmy prosty przepływ pracy Hello World, aby zrozumieć podstawy wykonywania Nextflow.
+W Części 1 uruchomiliśmy prosty workflow Hello World, aby zrozumieć podstawy wykonywania Nextflow.
 Teraz uruchomimy rzeczywisty pipeline do bioobrażowania: **nf-core/molkart**.
 
 Ten pipeline przetwarza dane transkryptomiki przestrzennej Molecular Cartography z Resolve Bioscience.
-Jednak wzorce Nextflow, których się tutaj nauczysz, mają zastosowanie do każdego pipeline'u nf-core lub produkcyjnego przepływu pracy.
+Jednak wzorce Nextflow, których się tutaj nauczysz, mają zastosowanie do każdego pipeline'u nf-core lub produkcyjnego workflow'u.
 
 ## 1. Zrozumienie pipeline'ów nf-core
 
-Zanim uruchomimy pipeline, zrozummy czym jest nf-core i dlaczego ma znaczenie przy uruchamianiu przepływów pracy.
+Zanim uruchomimy pipeline, zrozummy czym jest nf-core i dlaczego ma znaczenie przy uruchamianiu workflow'ów.
 
 ### 1.1. Czym jest nf-core?
 
@@ -125,11 +125,11 @@ Dzieje się tak, ponieważ:
 
 1. Pipeline oczekuje zainstalowanego specjalistycznego oprogramowania bioinformatycznego
 2. Te narzędzia (takie jak `duplicate_finder.py`, `apply_clahe.dask.py`, itp.) nie są częścią standardowych dystrybucji Linux
-3. Bez kontenerów, Nextflow próbuje uruchomić polecenia bezpośrednio na twojej lokalnej maszynie
+3. Bez kontenerów, Nextflow próbuje uruchomić polecenia bezpośrednio na Twojej lokalnej maszynie
 
 **Skąd mają pochodzić te narzędzia?**
 
-Sprawdźmy jeden z modułów procesu, aby zobaczyć jak deklaruje swoje wymagania dotyczące oprogramowania.
+Sprawdźmy jeden z modułów procesu, aby zobaczyć jak deklaruje Swoje wymagania dotyczące oprogramowania.
 
 Otwórz moduł przetwarzania wstępnego CLAHE:
 
@@ -289,14 +289,14 @@ Podczas działania pipeline'u zobaczysz wyjście podobne do tego:
 
 Zauważ, jak to wyjście jest bardziej szczegółowe niż nasz przykład Hello World z powodu konwencji nf-core, których przestrzega pipeline:
 
-- Pipeline pokazuje swoją wersję i logo
+- Pipeline pokazuje Swoją wersję i logo
 - Wyświetlane są parametry konfiguracji
 - Wiele procesów działa równolegle (wskazane przez wiele linii procesów)
 - Nazwy procesów zawierają pełną ścieżkę modułu (np. `NFCORE_MOLKART:MOLKART:MINDAGAP_MINDAGAP`)
 
 ### 2.4. Zrozumienie wykonania procesu
 
-Linia executor `executor > local (22)` informuje cię:
+Linia executor `executor > local (22)` informuje Cię:
 
 - **executor**: Które środowisko obliczeniowe jest używane (`local` = Twoja maszyna)
 - **(22)**: Całkowita liczba uruchomionych zadań
@@ -412,7 +412,7 @@ Kluczowe pliki:
 - **execution_report.html**: Oś czasu i wizualizacja użycia zasobów
 - **execution_timeline.html**: Wykres Gantta wykonania procesu
 - **execution_trace.txt**: Szczegółowe metryki wykonania zadań
-- **pipeline_dag.html**: Skierowany graf acykliczny pokazujący strukturę przepływu pracy
+- **pipeline_dag.html**: Skierowany graf acykliczny pokazujący strukturę workflow'u
 
 Otwórz raport wykonania, aby zobaczyć użycie zasobów:
 
@@ -490,7 +490,7 @@ Jednak dla pipeline'ów nf-core z dużymi plikami pośrednimi szczególnie ważn
 
 ### Podsumowanie
 
-Rozumiesz jak pipeline'y nf-core organizują swoje katalogi robocze i jak sprawdzać poszczególne zadania w celu debugowania.
+Rozumiesz jak pipeline'y nf-core organizują Swoje katalogi robocze i jak sprawdzać poszczególne zadania w celu debugowania.
 
 ### Co dalej?
 
@@ -562,4 +562,4 @@ Wiesz jak używać `-resume`, aby efektywnie ponownie uruchamiać pipeline'y bez
 
 ### Co dalej?
 
-Teraz gdy możesz uruchomić nf-core/molkart z danymi testowymi, jesteś gotowy nauczyć się jak skonfigurować go dla własnych zestawów danych.
+Teraz gdy możesz uruchomić nf-core/molkart z danymi testowymi, jesteś gotowy nauczyć się jak skonfigurować go dla Swoich własnych zestawów danych.

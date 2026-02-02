@@ -2,10 +2,10 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Ten kurs szkoleniowy jest przeznaczony dla badaczy w dziedzinie genomiki i pokrewnych obszarów, którzy są zainteresowani tworzeniem lub dostosowywaniem potoków analizy danych.
-Opiera się na [Hello Nextflow](../../hello_nextflow/) – szkoleniu dla początkujących i демонструje, jak używać Nextflow w specyficznym kontekście dziedziny genomiki.
+Ten kurs szkoleniowy jest przeznaczony dla badaczy w dziedzinie genomiki i pokrewnych obszarów, którzy są zainteresowani tworzeniem lub dostosowywaniem pipeline'ów analizy danych.
+Opiera się na [Hello Nextflow](../../hello_nextflow/) – szkoleniu dla początkujących i demonstruje, jak używać Nextflow w specyficznym kontekście dziedziny genomiki.
 
-W szczególności, ten kurs демонструje, jak zaimplementować prosty potok wykrywania wariantów z [GATK](https://gatk.broadinstitute.org/) (Genome Analysis Toolkit), szeroko stosowanym pakietem oprogramowania do analizy danych z sekwencjonowania wysokoprzepustowego.
+W szczególności, ten kurs demonstruje, jak zaimplementować prosty pipeline wykrywania wariantów z [GATK](https://gatk.broadinstitute.org/) (Genome Analysis Toolkit), szeroko stosowanym pakietem oprogramowania do analizy danych z sekwencjonowania wysokoprzepustowego.
 
 Zaczynajmy! Kliknij przycisk "Open in GitHub Codespaces" poniżej, aby uruchomić środowisko szkoleniowe (najlepiej w oddzielnej karcie), a następnie czytaj dalej, podczas gdy się ładuje.
 
@@ -17,11 +17,11 @@ Przechodząc przez ten kurs, nauczysz się, jak stosować podstawowe koncepcje i
 
 Pod koniec tego warsztatu będziesz w stanie:
 
-- Napisać liniowy workflow do zastosowania wykrywania wariantów dla pojedynczej próbki
+- Napisać liniowy workflow do wykrywania wariantów dla pojedynczej próbki
 - Odpowiednio obsługiwać pliki pomocnicze, takie jak pliki indeksów i zasoby genomu referencyjnego
 - Wykorzystać paradygmat przepływu danych Nextflow do zrównoleglenia wykrywania wariantów dla poszczególnych próbek
 - Zaimplementować wykrywanie wariantów dla wielu próbek, używając odpowiednich operatorów kanałów
-- Zaimplementować testy potoku dla poszczególnych kroków i całościowe, które odpowiednio obsługują specyficzne dla genomiki osobliwości
+- Zaimplementować testy pipeline'u dla poszczególnych kroków i całościowe, które odpowiednio obsługują specyficzne dla genomiki osobliwości
 
 <!-- TODO for future expansion: add metadata/samplesheet handling -->
 

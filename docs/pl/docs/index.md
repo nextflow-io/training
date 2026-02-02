@@ -61,7 +61,7 @@ hide:
 
         [![Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)](assets/img/cc_by-nc-sa.svg){ align=right }](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
-        Te materiały szkoleniowe są tworzone i utrzymywane przez [Seqera](https://seqera.io) i udostępniane na licencji open-source ([CC BY-NC-SA](https://creativecommons.org/licenses/by-nc-sa/4.0/)) dla dobra społeczności. Jeśli chcesz wykorzystać te materiały w sposób wykraczający poza zakres licencji (zwróć uwagę na ograniczenia dotyczące użytku komercyjnego i redystrybucji), skontaktuj się z nami pod adresem [community@seqera.io](mailto:community@seqera.io), aby omówić swoją prośbę.
+        Te materiały szkoleniowe są tworzone i utrzymywane przez [Seqera](https://seqera.io) i udostępniane na licencji open-source ([CC BY-NC-SA](https://creativecommons.org/licenses/by-nc-sa/4.0/)) dla dobra społeczności. Jeśli chcesz wykorzystać te materiały w sposób wykraczający poza zakres licencji (zwróć uwagę na ograniczenia dotyczące użytku komercyjnego i redystrybucji),         skontaktuj się z nami pod adresem [community@seqera.io](mailto:community@seqera.io), aby omówić Swoją prośbę.
 
         Z przyjemnością przyjmujemy ulepszenia, poprawki i zgłoszenia błędów od społeczności. Każda strona ma ikonę :material-file-edit-outline: w prawym górnym rogu, która prowadzi do repozytorium kodu, gdzie możesz zgłaszać problemy lub proponować zmiany w materiałach szkoleniowych poprzez pull request. Więcej szczegółów znajdziesz w pliku `README.md` w repozytorium.
 

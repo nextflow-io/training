@@ -2,46 +2,46 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Możliwość systematycznego testowania, czy każda część przepływu pracy działa zgodnie z założeniami, jest kluczowa dla odtwarzalności i długoterminowej konserwacji, a także może być ogromną pomocą podczas procesu twórczego.
+Możliwość systematycznego testowania, czy każda część workflow działa zgodnie z założeniami, jest kluczowa dla odtwarzalności i długoterminowej konserwacji, a także może być ogromną pomocą podczas procesu twórczego.
 
-Poświęćmy chwilę na omówienie, dlaczego testowanie jest tak ważne. Jeśli tworzysz przepływ pracy, jedną z pierwszych rzeczy, które zrobisz, jest pobranie danych testowych, o których wiesz, że są poprawne i powinny dać wynik. Dodajesz pierwszy proces do potoku i podłączasz go do swoich danych wejściowych, aby działał. Następnie, aby sprawdzić, czy wszystko działa, uruchamiasz go na danych testowych. Zakładając, że działa, przechodzisz do następnego procesu i ponownie uruchamiasz dane testowe. Powtarzasz ten proces, aż otrzymasz potok, z którego jesteś zadowolony.
+Poświęćmy chwilę na omówienie, dlaczego testowanie jest tak ważne. Jeśli tworzysz workflow, jedną z pierwszych rzeczy, które zrobisz, jest pobranie danych testowych, o których wiesz, że są poprawne i powinny dać wynik. Dodajesz pierwszy proces do pipeline'u i podłączasz go do Swoich danych wejściowych, aby działał. Następnie, aby sprawdzić, czy wszystko działa, uruchamiasz go na danych testowych. Zakładając, że działa, przechodzisz do następnego procesu i ponownie uruchamiasz dane testowe. Powtarzasz ten proces, aż otrzymasz pipeline, z którego jesteś zadowolony.
 
-Następnie, być może dodajesz prosty parametr prawda lub fałsz, taki jak `--skip_process`. Teraz musisz uruchomić potok dwa razy, raz z każdym parametrem, aby upewnić się, że działa zgodnie z oczekiwaniami. Ale czekaj, jak sprawdzić, czy `--skip_process` faktycznie pomija proces? Musimy przejrzeć wyniki lub sprawdzić pliki logów! To jest uciążliwe i podatne na błędy.
+Następnie, być może dodajesz prosty parametr prawda lub fałsz, taki jak `--skip_process`. Teraz musisz uruchomić pipeline dwa razy, raz z każdym parametrem, aby upewnić się, że działa zgodnie z oczekiwaniami. Ale czekaj, jak sprawdzić, czy `--skip_process` faktycznie pomija proces? Musimy przejrzeć wyniki lub sprawdzić pliki logów! To jest uciążliwe i podatne na błędy.
 
-W miarę rozwoju potoku szybko stanie się on tak złożony, że ręczne testowanie każdej iteracji będzie wolne i podatne na błędy. Co więcej, jeśli znajdziesz błąd, bardzo trudno będzie dokładnie określić, skąd w potoku pochodzi błąd. Właśnie tutaj przydaje się testowanie.
+W miarę rozwoju pipeline'u szybko stanie się on tak złożony, że ręczne testowanie każdej iteracji będzie wolne i podatne na błędy. Co więcej, jeśli znajdziesz błąd, bardzo trudno będzie dokładnie określić, skąd w pipeline'u pochodzi błąd. Właśnie tutaj przydaje się testowanie.
 
-Testowanie pozwala systematycznie sprawdzać, czy każda część potoku działa zgodnie z oczekiwaniami. Korzyści dla programisty z dobrze napisanych testów są ogromne:
+Testowanie pozwala systematycznie sprawdzać, czy każda część pipeline'u działa zgodnie z oczekiwaniami. Korzyści dla programisty z dobrze napisanych testów są ogromne:
 
-- **Pewność**: Ponieważ testy obejmują cały potok, możesz być pewny, że zmiana czegoś nie wpłynie na nic innego
-- **Zaufanie**: Kiedy wielu programistów pracuje nad potokiem, wiedzą, że inni programiści nie zepsuli potoku ani żadnego komponentu.
-- **Przejrzystość**: Testy pokazują, gdzie potok zawodzi i ułatwiają wyśledzenie problemu. Działają również jako forma dokumentacji, pokazując, jak uruchomić proces lub przepływ pracy.
-- **Szybkość**: Ponieważ testy są zautomatyzowane, można je uruchamiać bardzo szybko i wielokrotnie. Możesz szybko iterować z mniejszą obawy o wprowadzenie nowych błędów.
+- **Pewność**: Ponieważ testy obejmują cały pipeline, możesz być pewny, że zmiana czegoś nie wpłynie na nic innego
+- **Zaufanie**: Kiedy wielu programistów pracuje nad pipeline'em, wiedzą, że inni programiści nie zepsuli pipeline'u ani żadnego komponentu.
+- **Przejrzystość**: Testy pokazują, gdzie pipeline zawodzi i ułatwiają wyśledzenie problemu. Działają również jako forma dokumentacji, pokazując, jak uruchomić proces lub workflow.
+- **Szybkość**: Ponieważ testy są zautomatyzowane, można je uruchamiać bardzo szybko i wielokrotnie. Możesz szybko iterować z mniejszą obawą o wprowadzenie nowych błędów.
 
 Możemy napisać wiele różnych rodzajów testów:
 
 1. **Testy na poziomie modułu**: Dla pojedynczych procesów
-2. **Testy na poziomie przepływu pracy**: Dla pojedynczego przepływu pracy
-3. **Testy na poziomie potoku**: Dla potoku jako całości
-4. **Testy wydajnościowe**: Dla szybkości i wydajności potoku
-5. **Testy obciążeniowe**: Ocena wydajności potoku w ekstremalnych warunkach w celu określenia jego granic
+2. **Testy na poziomie workflow**: Dla pojedynczego workflow
+3. **Testy na poziomie pipeline'u**: Dla pipeline'u jako całości
+4. **Testy wydajnościowe**: Dla szybkości i wydajności pipeline'u
+5. **Testy obciążeniowe**: Ocena wydajności pipeline'u w ekstremalnych warunkach w celu określenia jego granic
 
-Testowanie pojedynczych procesów jest analogiczne do testów jednostkowych w innych językach. Testowanie przepływu pracy lub całego potoku jest analogiczne do tego, co nazywa się testami integracyjnymi w innych językach, gdzie testujemy interakcje komponentów.
+Testowanie pojedynczych procesów jest analogiczne do testów jednostkowych w innych językach. Testowanie workflow lub całego pipeline'u jest analogiczne do tego, co nazywa się testami integracyjnymi w innych językach, gdzie testujemy interakcje komponentów.
 
-[**nf-test**](https://www.nf-test.com/) to narzędzie, które pozwala pisać testy na poziomie modułu, przepływu pracy i potoku. Krótko mówiąc, pozwala systematycznie sprawdzać, czy każda pojedyncza część potoku działa zgodnie z oczekiwaniami, _w izolacji_.
+[**nf-test**](https://www.nf-test.com/) to narzędzie, które pozwala pisać testy na poziomie modułu, workflow i pipeline'u. Krótko mówiąc, pozwala systematycznie sprawdzać, czy każda pojedyncza część pipeline'u działa zgodnie z oczekiwaniami, _w izolacji_.
 
 ### Cele nauki
 
-W tym side queście nauczysz się używać nf-test do pisania testów na poziomie przepływu pracy dla potoku, a także testów na poziomie modułu dla trzech procesów, które wywołuje.
+W tym side queście nauczysz się używać nf-test do pisania testów na poziomie workflow dla pipeline'u, a także testów na poziomie modułu dla trzech procesów, które wywołuje.
 
 Pod koniec tego side questa będziesz w stanie efektywnie używać następujących technik:
 
 - Inicjalizowanie nf-test w projekcie
-- Generowanie testów na poziomie modułu i przepływu pracy
+- Generowanie testów na poziomie modułu i workflow'u
 - Dodawanie typowych rodzajów asercji
 - Rozumienie, kiedy używać migawek a asercji zawartości
 - Uruchamianie testów dla całego projektu
 
-Te umiejętności pomogą Ci wdrożyć kompleksową strategię testowania w projektach potoków, zapewniając, że są bardziej solidne i łatwe w utrzymaniu.
+Te umiejętności pomogą Ci wdrożyć kompleksową strategię testowania w projektach pipeline'ów, zapewniając, że są bardziej solidne i łatwe w utrzymaniu.
 
 ### Wymagania wstępne
 
@@ -76,7 +76,7 @@ code .
 
 #### Przejrzyj materiały
 
-Znajdziesz główny plik przepływu pracy i plik CSV o nazwie `greetings.csv`, który zawiera dane wejściowe do potoku.
+Znajdziesz główny plik workflow i plik CSV o nazwie `greetings.csv`, który zawiera dane wejściowe do pipeline'u.
 
 ```console title="Zawartość katalogu"
 .
@@ -86,13 +86,13 @@ Znajdziesz główny plik przepływu pracy i plik CSV o nazwie `greetings.csv`, k
 
 Aby uzyskać szczegółowy opis plików, zobacz [rozgrzewkę z Hello Nextflow](../hello_nextflow/00_orientation.md).
 
-Przepływ pracy, który będziemy testować, jest podzbiorem przepływu pracy Hello zbudowanego w [Hello Workflow](../hello_nextflow/03_hello_workflow.md).
+Workflow, który będziemy testować, jest podzbiorem workflow Hello zbudowanego w [Hello Workflow](../hello_nextflow/03_hello_workflow.md).
 
-??? example "Co robi przepływ pracy Hello Nextflow?"
+??? example "Co robi workflow Hello Nextflow?"
 
-    Jeśli nie ukończyłeś szkolenia [Hello Nextflow](../hello_nextflow/index.md), oto krótki przegląd tego, co robi ten prosty przepływ pracy.
+    Jeśli nie ukończyłeś szkolenia [Hello Nextflow](../hello_nextflow/index.md), oto krótki przegląd tego, co robi ten prosty workflow.
 
-    Przepływ pracy pobiera plik CSV zawierający pozdrowienia, przeprowadza na nich cztery kolejne kroki transformacji i wyprowadza pojedynczy plik tekstowy zawierający obraz ASCII zabawnej postaci wypowiadającej pozdrowienia.
+    Workflow pobiera plik CSV zawierający pozdrowienia, przeprowadza na nich cztery kolejne kroki transformacji i wyprowadza pojedynczy plik tekstowy zawierający obraz ASCII zabawnej postaci wypowiadającej pozdrowienia.
 
     Cztery kroki są zaimplementowane jako procesy Nextflow (`sayHello`, `convertToUpper`, `collectGreetings` i `cowpy`) przechowywane w oddzielnych plikach modułów.
 
@@ -101,14 +101,14 @@ Przepływ pracy, który będziemy testować, jest podzbiorem przepływu pracy He
     3. **`collectGreetings`:** Zbiera wszystkie pozdrowienia z wielkimi literami do jednego pliku wsadowego
     4. **`cowpy`:** Generuje grafikę ASCII za pomocą narzędzia `cowpy`
 
-    Wyniki są publikowane w katalogu o nazwie `results/`, a końcowe wyjście potoku (po uruchomieniu z domyślnymi parametrami) to zwykły plik tekstowy zawierający grafikę ASCII postaci wypowiadającej pozdrowienia z wielkimi literami.
+    Wyniki są publikowane w katalogu o nazwie `results/`, a końcowe wyjście pipeline'u (po uruchomieniu z domyślnymi parametrami) to zwykły plik tekstowy zawierający grafikę ASCII postaci wypowiadającej pozdrowienia z wielkimi literami.
 
-    W tym side queście używamy pośredniej formy przepływu pracy Hello, która zawiera tylko dwa pierwsze procesy.
+    W tym side queście używamy pośredniej formy workflow Hello, która zawiera tylko dwa pierwsze procesy.
 
 Podzbiór, z którym będziemy pracować, składa się z dwóch procesów: `sayHello` i `convertToUpper`.
-Pełny kod przepływu pracy możesz zobaczyć poniżej.
+Pełny kod workflow możesz zobaczyć poniżej.
 
-??? example "Kod przepływu pracy"
+??? example "Kod workflow"
 
     ```groovy title="main.nf"
     /*
@@ -167,15 +167,15 @@ Pełny kod przepływu pracy możesz zobaczyć poniżej.
     }
     ```
 
-#### Uruchom przepływ pracy
+#### Uruchom workflow
 
-Uruchommy przepływ pracy, aby upewnić się, że działa zgodnie z oczekiwaniami.
+Uruchommy workflow, aby upewnić się, że działa zgodnie z oczekiwaniami.
 
 ```bash
 nextflow run main.nf
 ```
 
-```console title="Wynik uruchomienia przepływu pracy"
+```console title="Wynik uruchomienia workflow"
  N E X T F L O W   ~  version 24.10.2
 
 Launching `main.nf` [soggy_linnaeus] DSL2 - revision: bbf79d5c31
@@ -187,19 +187,19 @@ executor >  local (6)
 
 GRATULACJE! Właśnie uruchomiłeś test!
 
-"Czekaj, co? Po prostu uruchomiłem przepływ pracy i zadziałał! Jak to jest test?"
+"Czekaj, co? Po prostu uruchomiłem workflow i zadziałał! Jak to jest test?"
 
 Dobre pytanie!
 
 Rozłóżmy to na czynniki pierwsze.
 
-Uruchomiłeś przepływ pracy z domyślnymi parametrami, potwierdziłeś, że działa i jesteś zadowolony z wyników. To jest istota testowania. Jeśli pracowałeś przez kurs szkoleniowy Hello Nextflow, zauważysz, że zawsze zaczynaliśmy każdą sekcję od uruchomienia przepływu pracy, którego używaliśmy jako punktu wyjścia, aby potwierdzić, że wszystko jest poprawnie skonfigurowane.
+Uruchomiłeś workflow z domyślnymi parametrami, potwierdziłeś, że działa i jesteś zadowolony z wyników. To jest istota testowania. Jeśli pracowałeś przez kurs szkoleniowy Hello Nextflow, zauważysz, że zawsze zaczynaliśmy każdą sekcję od uruchomienia workflow, którego używaliśmy jako punktu wyjścia, aby potwierdzić, że wszystko jest poprawnie skonfigurowane.
 
 Testowanie oprogramowania zasadniczo wykonuje ten proces za nas.
 
 #### Przejrzyj zadanie
 
-Twoim wyzwaniem jest dodanie standardowych testów do tego przepływu pracy za pomocą nf-test, aby ułatwić weryfikację, że każda część nadal działa zgodnie z oczekiwaniami w przypadku wprowadzenia jakichkolwiek dalszych zmian.
+Twoim wyzwaniem jest dodanie standardowych testów do tego workflow za pomocą nf-test, aby ułatwić weryfikację, że każda część nadal działa zgodnie z oczekiwaniami w przypadku wprowadzenia jakichkolwiek dalszych zmian.
 
 #### Lista kontrolna gotowości
 
@@ -208,7 +208,7 @@ Myślisz, że jesteś gotowy, aby się zanurzyć?
 - [ ] Rozumiem cel tego kursu i jego wymagania wstępne
 - [ ] Mój codespace jest uruchomiony
 - [ ] Odpowiednio ustawiłem katalog roboczy
-- [ ] Pomyślnie uruchomiłem przepływ pracy
+- [ ] Pomyślnie uruchomiłem workflow
 - [ ] Rozumiem zadanie
 
 Jeśli możesz zaznaczyć wszystkie pola, możesz rozpocząć.
@@ -237,7 +237,7 @@ Tworzy również katalog `tests` zawierający szkielet pliku konfiguracyjnego.
 
 ### 1.1. Wygeneruj nf-test
 
-`nf-test` zawiera zestaw narzędzi do budowania plików nf-test, oszczędzając nam większość pracy. Są one dostępne pod podpoleceniem `generate`. Wygenerujmy test dla potoku:
+`nf-test` zawiera zestaw narzędzi do budowania plików nf-test, oszczędzając nam większość pracy. Są one dostępne pod podpoleceniem `generate`. Wygenerujmy test dla pipeline'u:
 
 ```bash
 nf-test generate pipeline main.nf
@@ -252,7 +252,7 @@ Wrote pipeline test file '/workspaces/training/side-quests/nf-test/tests/main.nf
 SUCCESS: Generated 1 test files.
 ```
 
-To utworzy plik `main.nf.test` w katalogu `tests`. To jest nasz plik testowy na poziomie potoku. Jeśli uruchomisz `tree tests/`, powinieneś zobaczyć coś takiego:
+To utworzy plik `main.nf.test` w katalogu `tests`. To jest nasz plik testowy na poziomie pipeline'u. Jeśli uruchomisz `tree tests/`, powinieneś zobaczyć coś takiego:
 
 ```console title="Zawartość katalogu testów"
 tests/
@@ -260,7 +260,7 @@ tests/
 └── nextflow.config
 ```
 
-Plik `main.nf.test` to nasz plik testowy na poziomie potoku. Otwórzmy go i przyjrzyjmy się zawartości.
+Plik `main.nf.test` to nasz plik testowy na poziomie pipeline'u. Otwórzmy go i przyjrzyjmy się zawartości.
 
 ```groovy title="tests/main.nf.test"
 nextflow_pipeline {
@@ -288,24 +288,24 @@ nextflow_pipeline {
 
 Poświęćmy chwilę na zrozumienie struktury pliku testowego.
 
-Blok `nextflow_pipeline` jest punktem wejścia dla wszystkich testów na poziomie potoku. Zawiera następujące elementy:
+Blok `nextflow_pipeline` jest punktem wejścia dla wszystkich testów na poziomie pipeline'u. Zawiera następujące elementy:
 
 - `name`: Nazwa testu.
-- `script`: Ścieżka do skryptu potoku.
+- `script`: Ścieżka do skryptu pipeline'u.
 
 Blok `test` to rzeczywisty test. Zawiera następujące elementy:
 
-- `when`: Warunki, w których test powinien być uruchomiony. Obejmuje to parametry, które będą używane do uruchomienia potoku.
-- `then`: Asercje, które powinny być wykonane. Obejmuje to oczekiwane wyniki potoku.
+- `when`: Warunki, w których test powinien być uruchomiony. Obejmuje to parametry, które będą używane do uruchomienia pipeline'u.
+- `then`: Asercje, które powinny być wykonane. Obejmuje to oczekiwane wyniki pipeline'u.
 
 Mówiąc prostym językiem, logika testu brzmi następująco:
-"**Gdy** te _parametry_ są dostarczane do tego _potoku_, **wtedy** oczekujemy zobaczyć te wyniki."
+"**Gdy** te _parametry_ są dostarczane do tego _pipeline'u_, **wtedy** oczekujemy zobaczyć te wyniki."
 
 To nie jest test funkcjonalny, pokażemy, jak go przekształcić w taki w następnej sekcji.
 
 ### Uwaga o nazewnictwie testów
 
-W powyższym przykładzie użyliśmy domyślnej nazwy "Should run without failures", która jest odpowiednia dla podstawowego testu, który tylko sprawdza, czy potok działa pomyślnie. Jednak gdy dodajemy bardziej szczegółowe przypadki testowe, powinniśmy używać bardziej opisowych nazw, które wskazują, co faktycznie testujemy. Na przykład:
+W powyższym przykładzie użyliśmy domyślnej nazwy "Should run without failures", która jest odpowiednia dla podstawowego testu, który tylko sprawdza, czy pipeline działa pomyślnie. Jednak gdy dodajemy bardziej szczegółowe przypadki testowe, powinniśmy używać bardziej opisowych nazw, które wskazują, co faktycznie testujemy. Na przykład:
 
 - "Should convert input to uppercase" - podczas testowania konkretnej funkcjonalności
 - "Should handle empty input gracefully" - podczas testowania przypadków brzegowych
@@ -358,7 +358,7 @@ FAILURE: Executed 1 tests in 4.679s (1 failed)
 
 Test nie powiódł się! Co się stało?
 
-1. nf-test próbował uruchomić potok w obecnej postaci, używając ustawień w bloku `when`:
+1. nf-test próbował uruchomić pipeline w obecnej postaci, używając ustawień w bloku `when`:
 
 ```groovy title="tests/main.nf.test"
 when {
@@ -369,7 +369,7 @@ when {
 }
 ```
 
-2. nf-test sprawdził status potoku i porównał go z blokiem `when`:
+2. nf-test sprawdził status pipeline'u i porównał go z blokiem `when`:
 
 ```groovy title="tests/main.nf.test"
 then {
@@ -377,17 +377,17 @@ then {
 }
 ```
 
-Zauważ, jak nf-test zgłosił, że potok nie powiódł się i dostarczył komunikat o błędzie z Nextflow:
+Zauważ, jak nf-test zgłosił, że pipeline nie powiódł się i dostarczył komunikat o błędzie z Nextflow:
 
 ```console title="Błąd"
 ERROR ~ No such file or directory: /workspaces/training/side-quests/nf-test/.nf-test/tests/693ba951a20fec36a5a9292ed1cc8a9f/greetings.csv
 ```
 
-Jaki był więc problem? Pamiętaj, że potok ma plik greetings.csv w katalogu projektu. Gdy nf-test uruchamia potok, będzie szukał tego pliku, ale nie może go znaleźć. Plik jest tam, co się dzieje? Cóż, jeśli spojrzymy na ścieżkę, możemy zobaczyć, że test odbywa się w ścieżce `./nf-test/tests/longHashString/`. Podobnie jak Nextflow, nf-test tworzy nowy katalog dla każdego testu, aby wszystko było izolowane. Plik danych nie znajduje się tam, więc musimy poprawić ścieżkę do pliku w oryginalnym teście.
+Jaki był więc problem? Pamiętaj, że pipeline ma plik greetings.csv w katalogu projektu. Gdy nf-test uruchamia pipeline, będzie szukał tego pliku, ale nie może go znaleźć. Plik jest tam, co się dzieje? Cóż, jeśli spojrzymy na ścieżkę, możemy zobaczyć, że test odbywa się w ścieżce `./nf-test/tests/longHashString/`. Podobnie jak Nextflow, nf-test tworzy nowy katalog dla każdego testu, aby wszystko było izolowane. Plik danych nie znajduje się tam, więc musimy poprawić ścieżkę do pliku w oryginalnym teście.
 
 Wróćmy do pliku testowego i zmieńmy ścieżkę do pliku w bloku `when`.
 
-Możesz się zastanawiać, jak będziemy wskazywać na katalog główny potoku w teście. Ponieważ jest to powszechna sytuacja, nf-test ma szereg zmiennych globalnych, których możemy użyć, aby ułatwić sobie życie. Pełną listę znajdziesz [tutaj](https://www.nf-test.com/docs/testcases/global_variables/), ale tymczasem użyjemy zmiennej `projectDir`, co oznacza katalog główny projektu potoku.
+Możesz się zastanawiać, jak będziemy wskazywać na katalog główny pipeline'u w teście. Ponieważ jest to powszechna sytuacja, nf-test ma szereg zmiennych globalnych, których możemy użyć, aby ułatwić sobie życie. Pełną listę znajdziesz [tutaj](https://www.nf-test.com/docs/testcases/global_variables/), ale tymczasem użyjemy zmiennej `projectDir`, co oznacza katalog główny projektu pipeline'u.
 
 _Przed:_
 
@@ -416,7 +416,7 @@ Uruchommy test ponownie, aby zobaczyć, czy działa.
 nf-test test tests/main.nf.test
 ```
 
-```console title="Potok przechodzi"
+```console title="Pipeline przechodzi"
 > nf-test test tests/main.nf.test
 
 🚀 nf-test 0.9.3
@@ -432,15 +432,15 @@ Test Workflow main.nf
 SUCCESS: Executed 1 tests in 1.626s
 ```
 
-Sukces! Potok działa pomyślnie i test przechodzi. Uruchom go tyle razy, ile chcesz, a zawsze otrzymasz ten sam wynik!
+Sukces! Pipeline działa pomyślnie i test przechodzi. Uruchom go tyle razy, ile chcesz, a zawsze otrzymasz ten sam wynik!
 
-Domyślnie wyjście Nextflow jest ukryte, ale aby przekonać się, że nf-test na pewno uruchamia przepływ pracy, możesz użyć flagi `--verbose`:
+Domyślnie wyjście Nextflow jest ukryte, ale aby przekonać się, że nf-test na pewno uruchamia workflow, możesz użyć flagi `--verbose`:
 
 ```bash
 nf-test test tests/main.nf.test --verbose
 ```
 
-```console title="Potok uruchamia wszystkie procesy"
+```console title="Pipeline uruchamia wszystkie procesy"
 > nf-test test tests/main.nf.test
 
 🚀 nf-test 0.9.3
@@ -468,9 +468,9 @@ SUCCESS: Executed 1 tests in 5.239s
 
 ### 1.3. Dodaj asercje
 
-Prostym sprawdzeniem jest upewnienie się, że nasz potok uruchamia wszystkie oczekiwane procesy i nie pomija żadnego w sposób cichy. Pamiętaj, że nasz potok uruchamia 6 procesów, jeden o nazwie `sayHello` i jeden o nazwie `convertToUpper` dla każdego z 3 pozdrowień.
+Prostym sprawdzeniem jest upewnienie się, że nasz pipeline uruchamia wszystkie oczekiwane procesy i nie pomija żadnego w sposób cichy. Pamiętaj, że nasz pipeline uruchamia 6 procesów, jeden o nazwie `sayHello` i jeden o nazwie `convertToUpper` dla każdego z 3 pozdrowień.
 
-Dodajmy asercję do naszego testu, aby sprawdzić, czy potok uruchamia oczekiwaną liczbę procesów. Zaktualizujemy również nazwę naszego testu, aby lepiej odzwierciedlała to, co testujemy.
+Dodajmy asercję do naszego testu, aby sprawdzić, czy pipeline uruchamia oczekiwaną liczbę procesów. Zaktualizujemy również nazwę naszego testu, aby lepiej odzwierciedlała to, co testujemy.
 
 **Przed:**
 
@@ -509,7 +509,7 @@ Dodajmy asercję do naszego testu, aby sprawdzić, czy potok uruchamia oczekiwan
     }
 ```
 
-Nazwa testu teraz lepiej odzwierciedla to, co faktycznie weryfikujemy - nie tylko to, że potok działa bez awarii, ale że uruchamia oczekiwaną liczbę procesów.
+Nazwa testu teraz lepiej odzwierciedla to, co faktycznie weryfikujemy - nie tylko to, że pipeline działa bez awarii, ale że uruchamia oczekiwaną liczbę procesów.
 
 Uruchommy test ponownie, aby zobaczyć, czy działa.
 
@@ -517,7 +517,7 @@ Uruchommy test ponownie, aby zobaczyć, czy działa.
 nf-test test tests/main.nf.test
 ```
 
-```console title="Potok przechodzi z asercjami"
+```console title="Pipeline przechodzi z asercjami"
 🚀 nf-test 0.9.3
 https://www.nf-test.com
 (c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
@@ -531,7 +531,7 @@ Test Workflow main.nf
 SUCCESS: Executed 1 tests in 1.588s
 ```
 
-Sukces! Potok działa pomyślnie i test przechodzi. Teraz zaczęliśmy testować szczegóły potoku, a także ogólny status.
+Sukces! Pipeline działa pomyślnie i test przechodzi. Teraz zaczęliśmy testować szczegóły pipeline'u, a także ogólny status.
 
 ### 1.4. Testowanie wyjścia
 
@@ -600,7 +600,7 @@ Uruchom test ponownie, aby zobaczyć, czy działa.
 nf-test test tests/main.nf.test
 ```
 
-```console title="Potok przechodzi z asercjami plików"
+```console title="Pipeline przechodzi z asercjami plików"
 > nf-test test tests/main.nf.test
 
 🚀 nf-test 0.9.3
@@ -617,13 +617,13 @@ Test Workflow main.nf
 SUCCESS: Executed 2 tests in 15.165s
 ```
 
-Sukces! Testy przechodzą, ponieważ potok zakończył się pomyślnie, uruchomiona została prawidłowa liczba procesów, a pliki wyjściowe zostały utworzone. Powinno to również pokazać, jak przydatne jest dostarczanie tych informacyjnych nazw dla testów.
+Sukces! Testy przechodzą, ponieważ pipeline zakończył się pomyślnie, uruchomiona została prawidłowa liczba procesów, a pliki wyjściowe zostały utworzone. Powinno to również pokazać, jak przydatne jest dostarczanie tych informacyjnych nazw dla testów.
 
-To tylko powierzchnia, możemy dalej pisać asercje, aby sprawdzić szczegóły potoku, ale na razie przejdźmy do testowania wewnętrznych elementów potoku.
+To tylko powierzchnia, możemy dalej pisać asercje, aby sprawdzić szczegóły pipeline'u, ale na razie przejdźmy do testowania wewnętrznych elementów pipeline'u.
 
 ### Wnioski
 
-Wiesz, jak napisać nf-test dla potoku.
+Wiesz, jak napisać nf-test dla pipeline'u.
 
 ### Co dalej?
 
@@ -633,7 +633,7 @@ Naucz się testować proces Nextflow.
 
 ## 2. Testowanie procesu Nextflow
 
-Nie musimy pisać testów dla każdej części potoku, ale im więcej testów mamy, tym bardziej kompleksowo możemy ocenić potok i tym bardziej możemy być pewni, że działa zgodnie z oczekiwaniami. W tej sekcji będziemy testować oba procesy w potoku jako pojedyncze jednostki.
+Nie musimy pisać testów dla każdej części pipeline'u, ale im więcej testów mamy, tym bardziej kompleksowo możemy ocenić pipeline i tym bardziej możemy być pewni, że działa zgodnie z oczekiwaniami. W tej sekcji będziemy testować oba procesy w pipeline'u jako pojedyncze jednostki.
 
 ### 2.1. Testowanie procesu `sayHello`
 
@@ -992,7 +992,7 @@ Teraz musimy dostarczyć pojedynczy plik wejściowy do procesu convertToUpper, k
 - Moglibyśmy ponownie użyć istniejącego pliku data/greetings.csv
 - Moglibyśmy utworzyć go w locie w teście
 
-Na razie ponownie użyjmy istniejącego pliku data/greetings.csv, używając przykładu, którego użyliśmy w teście na poziomie potoku. Jak poprzednio, możemy nazwać test, aby lepiej odzwierciedlał to, co testujemy, ale tym razem pozostawmy "migawkę" zawartości zamiast sprawdzania konkretnych ciągów (jak zrobiliśmy w innym procesie).
+Na razie ponownie użyjmy istniejącego pliku data/greetings.csv, używając przykładu, którego użyliśmy w teście na poziomie pipeline'u. Jak poprzednio, możemy nazwać test, aby lepiej odzwierciedlał to, co testujemy, ale tym razem pozostawmy "migawkę" zawartości zamiast sprawdzania konkretnych ciągów (jak zrobiliśmy w innym procesie).
 
 **Przed:**
 
@@ -1145,13 +1145,13 @@ Test Process sayHello
 SUCCESS: Executed 4 tests in 13.481s
 ```
 
-Spójrz na to! Uruchomiliśmy 4 testy, 1 dla każdego procesu i 2 dla całego potoku za pomocą jednego polecenia. Wyobraź sobie, jak potężne jest to w dużej bazie kodu!
+Spójrz na to! Uruchomiliśmy 4 testy, 1 dla każdego procesu i 2 dla całego pipeline'u za pomocą jednego polecenia. Wyobraź sobie, jak potężne jest to w dużej bazie kodu!
 
 ---
 
 ## Podsumowanie
 
-W tym side queście nauczyłeś się wykorzystywać funkcje nf-test do tworzenia i uruchamiania testów dla pojedynczych procesów, a także testów end-to-end dla całego potoku.
+W tym side queście nauczyłeś się wykorzystywać funkcje nf-test do tworzenia i uruchamiania testów dla pojedynczych procesów, a także testów end-to-end dla całego pipeline'u.
 Jesteś teraz świadomy dwóch głównych podejść do walidacji wyjścia, migawek i bezpośrednich asercji zawartości, oraz kiedy używać któregokolwiek z nich.
 Wiesz również, jak uruchamiać testy pojedynczo lub dla całego projektu.
 
@@ -1165,7 +1165,7 @@ Zastosowanie tych technik we własnej pracy pozwoli Ci zapewnić, że:
 
 ### Kluczowe wzorce
 
-1. Testy na poziomie potoku:
+1. Testy na poziomie pipeline'u:
    - Podstawowe testowanie sukcesu
    - Weryfikacja liczby procesów
    - Sprawdzanie istnienia plików wyjściowych
@@ -1179,13 +1179,13 @@ Zastosowanie tych technik we własnej pracy pozwoli Ci zapewnić, że:
 
 Sprawdź [dokumentację nf-test](https://www.nf-test.com/), aby poznać bardziej zaawansowane funkcje testowania i najlepsze praktyki. Możesz chcieć:
 
-- Dodać bardziej kompleksowe asercje do swoich testów
+- Dodać bardziej kompleksowe asercje do Swoich testów
 - Napisać testy dla przypadków brzegowych i warunków błędów
 - Skonfigurować ciągłą integrację do automatycznego uruchamiania testów
-- Dowiedzieć się więcej o innych typach testów, takich jak testy przepływów pracy i modułów
+- Dowiedzieć się więcej o innych typach testów, takich jak testy workflow'ów i modułów
 - Zbadać bardziej zaawansowane techniki walidacji zawartości
 
-**Pamiętaj:** Testy są żywą dokumentacją tego, jak powinien zachowywać się Twój kod. Im więcej testów napiszesz i im bardziej szczegółowe będą Twoje asercje, tym bardziej możesz być pewny niezawodności swojego potoku.
+**Pamiętaj:** Testy są żywą dokumentacją tego, jak powinien zachowywać się Twój kod. Im więcej testów napiszesz i im bardziej szczegółowe będą Twoje asercje, tym bardziej możesz być pewny niezawodności Swojego pipeline'u.
 
 ---
 

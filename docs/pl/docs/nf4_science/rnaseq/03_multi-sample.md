@@ -2,18 +2,18 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-W tej ostatniej części kursu zamienimy nasz prosty przepływ pracy w potężne narzędzie do automatyzacji wsadowej, które obsłuży dowolną liczbę próbek.
+W tej ostatniej części kursu zamienimy nasz prosty workflow w potężne narzędzie do automatyzacji wsadowej, które obsłuży dowolną liczbę próbek.
 Przy okazji przełączymy go również na obsługę danych paired-end, które są bardziej powszechne w nowszych badaniach.
 
 Zrobimy to w trzech etapach:
 
-1. Dostosujemy przepływ pracy do akceptowania wielu próbek wejściowych i zrównoleglenia wykonania
+1. Dostosujemy workflow do akceptowania wielu próbek wejściowych i zrównoleglenia wykonania
 2. Dodamy kompleksowe generowanie raportów QC
 3. Przełączymy się na dane RNAseq paired-end
 
 ---
 
-## 1. Dostosowanie przepływu pracy do akceptowania wielu próbek wejściowych i zrównoleglenia wykonania
+## 1. Dostosowanie workflow'u do akceptowania wielu próbek wejściowych i zrównoleglenia wykonania
 
 Musimy zmienić sposób zarządzania danymi wejściowymi.
 
@@ -56,7 +56,7 @@ Chcemy wczytać zawartość pliku do kanału zamiast samej ścieżki pliku, wię
         .map { row -> file(row.fastq_path) }
 ```
 
-### 1.3. Uruchomienie przepływu pracy w celu sprawdzenia, czy działa
+### 1.3. Uruchomienie workflow'u w celu sprawdzenia, czy działa
 
 ```bash
 nextflow run rnaseq.nf
@@ -77,7 +77,7 @@ nextflow run rnaseq.nf
 
 Tym razem widzimy, że każdy krok jest uruchamiany 6 razy, na każdym z 6 dostarczonych plików danych.
 
-To wszystko, czego potrzeba, aby przepływ pracy uruchamiał się na wielu plikach!
+To wszystko, czego potrzeba, aby workflow uruchamiał się na wielu plikach!
 Nextflow obsługuje całą równoległość za nas.
 
 ---
@@ -120,7 +120,7 @@ process MULTIQC {
 }
 ```
 
-### 2.2. Zaimportowanie modułu do pliku przepływu pracy
+### 2.2. Zaimportowanie modułu do pliku workflow'u
 
 Dodaj instrukcję `include { MULTIQC } from './modules/multiqc.nf'` do pliku `rnaseq.nf`:
 
@@ -155,7 +155,7 @@ W tym celu użyjemy operatora `.mix()`, który agreguje wiele kanałów w jeden.
 
 Gdybyśmy mieli cztery procesy nazwane A, B, C i D, każdy z prostym kanałem `.out`, składnia wyglądałaby następująco: `A.out.mix( B.out, C.out, D.out )`. Jak widać, stosujesz go do pierwszego z kanałów, które chcesz połączyć (nie ma znaczenia którego) i po prostu dodajesz wszystkie pozostałe, oddzielone przecinkami, w nawiasie, który następuje.
 
-W przypadku naszego przepływu pracy mamy następujące wyjścia do agregacji:
+W przypadku naszego workflow'u mamy następujące wyjścia do agregacji:
 
 - `FASTQC.out.zip`
 - `FASTQC.out.html`
@@ -193,7 +193,7 @@ Daje nam to następujący kod:
     )
 ```
 
-W kontekście pełnego bloku przepływu pracy wygląda to tak:
+W kontekście pełnego bloku workflow'u wygląda to tak:
 
 ```groovy title="rnaseq.nf" linenums="18"
 workflow {
@@ -224,7 +224,7 @@ workflow {
 }
 ```
 
-### 2.5. Uruchomienie przepływu pracy w celu sprawdzenia, czy działa
+### 2.5. Uruchomienie workflow'u w celu sprawdzenia, czy działa
 
 ```bash
 nextflow run rnaseq.nf -resume
@@ -246,7 +246,7 @@ nextflow run rnaseq.nf -resume
 
 Tym razem widzimy pojedyncze wywołanie MULTIQC dodane po zbuforowanych wywołaniach procesów:
 
-Wyniki możesz znaleźć w katalogu `results/trimming`, jak określono w procesie `TRIM_GALORE` przez dyrektywę `publishDir`.
+Wyniki możesz znaleźć w katalogu `results/multiqc`, jak określono w procesie `MULTIQC` przez dyrektywę `publishDir`.
 
 ```bash
 tree -L 2 results/multiqc
@@ -289,12 +289,12 @@ Ten ostatni plik `all_single-end.html` to pełny zagregowany raport, wygodnie za
 
 ## 3. Umożliwienie przetwarzania danych RNAseq paired-end
 
-Obecnie nasz przepływ pracy obsługuje tylko dane RNAseq single-end.
+Obecnie nasz workflow obsługuje tylko dane RNAseq single-end.
 Coraz częściej spotyka się dane RNAseq paired-end, więc chcemy móc je obsługiwać.
 
-Uczynienie przepływu pracy całkowicie niezależnym od typu danych wymagałoby użycia nieco bardziej zaawansowanych funkcji języka Nextflow, więc nie zrobimy tego tutaj, ale możemy stworzyć wersję do przetwarzania paired-end, aby zademonstrować, co należy dostosować.
+Uczynienie workflow'u całkowicie niezależnym od typu danych wymagałoby użycia nieco bardziej zaawansowanych funkcji języka Nextflow, więc nie zrobimy tego tutaj, ale możemy stworzyć wersję do przetwarzania paired-end, aby zademonstrować, co należy dostosować.
 
-### 3.1. Utworzenie kopii przepływu pracy o nazwie `rnaseq_pe.nf`
+### 3.1. Utworzenie kopii workflow'u o nazwie `rnaseq_pe.nf`
 
 ```bash
 cp rnaseq.nf rnaseq_pe.nf
@@ -486,7 +486,7 @@ Na koniec zaktualizuj instrukcję importu modułu, aby używała wersji paired-e
 include { HISAT2_ALIGN } from './modules/hisat2_align_pe.nf'
 ```
 
-### 3.8. Uruchomienie przepływu pracy w celu sprawdzenia, czy działa
+### 3.8. Uruchomienie workflow'u w celu sprawdzenia, czy działa
 
 Nie używamy `-resume`, ponieważ to nie zostałoby zbuforowane, a jest dwa razy więcej danych do przetworzenia niż wcześniej, ale i tak powinno zakończyć się w mniej niż minutę.
 
@@ -508,17 +508,17 @@ nextflow run rnaseq_pe.nf
     [e6/a3ccd9] MULTIQC          [100%] 1 of 1 ✔
     ```
 
-I to wszystko! Teraz mamy dwie nieco rozbieżne wersje naszego przepływu pracy, jedną dla danych single-end i jedną dla danych paired-end.
-Następnym logicznym krokiem byłoby sprawienie, aby przepływ pracy akceptował którykolwiek typ danych w locie, co wykracza poza zakres tego kursu, ale możemy się tym zająć w kontynuacji.
+I to wszystko! Teraz mamy dwie nieco rozbieżne wersje naszego workflow'u, jedną dla danych single-end i jedną dla danych paired-end.
+Następnym logicznym krokiem byłoby sprawienie, aby workflow akceptował którykolwiek typ danych w locie, co wykracza poza zakres tego kursu, ale możemy się tym zająć w kontynuacji.
 
 ---
 
 ### Podsumowanie
 
-Wiesz, jak dostosować przepływ pracy dla pojedynczej próbki, aby zrównoleglić przetwarzanie wielu próbek, wygenerować kompleksowy raport QC i dostosować przepływ pracy do używania danych paired-end, jeśli jest to potrzebne.
+Wiesz, jak dostosować workflow dla pojedynczej próbki, aby zrównoleglić przetwarzanie wielu próbek, wygenerować kompleksowy raport QC i dostosować workflow do używania danych paired-end, jeśli jest to potrzebne.
 
 ### Co dalej?
 
-Gratulacje, ukończyłeś mini-kurs Nextflow dla RNAseq! Świętuj swój sukces i weź zasłużoną przerwę!
+Gratulacje, ukończyłeś mini-kurs Nextflow dla RNAseq! Świętuj Swój sukces i weź zasłużoną przerwę!
 
 Następnie prosimy o wypełnienie bardzo krótkiej ankiety dotyczącej Twoich doświadczeń z tym kursem szkoleniowym, a następnie przekierujemy Cię na stronę z linkami do dalszych materiałów szkoleniowych i pomocnych odnośników.

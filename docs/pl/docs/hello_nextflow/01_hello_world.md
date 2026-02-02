@@ -93,7 +93,7 @@ Następnie uruchomimy go i poszukamy jego wyjść.
 
 ### 1.1. Przeanalizuj kod
 
-Skrypt `hello-world.nf` znajdziesz w swoim bieżącym katalogu, którym powinien być `hello-nextflow`. Otwórz go w panelu edytora.
+Skrypt `hello-world.nf` znajdziesz w Swoim bieżącym katalogu, którym powinien być `hello-nextflow`. Otwórz go w panelu edytora.
 
 ??? full-code "Pełny plik kodu"
 
@@ -133,7 +133,7 @@ Najpierw przyjrzymy się bliżej blokowi **process**, a następnie blokowi **wor
 Pierwszy blok kodu opisuje **process**.
 
 Definicja procesu zaczyna się od słowa kluczowego `process`, po którym następuje nazwa procesu i wreszcie ciało procesu ograniczone nawiasami klamrowymi.
-Ciało procesu musi zawierać blok script, który określa polecenie do uruchomienia, które może być wszystkim, co mógłbyś uruchomić w terminalu wiersza poleceń.
+Ciało procesu musi zawierać blok skryptu, który określa polecenie do uruchomienia, które może być wszystkim, co mógłbyś uruchomić w terminalu wiersza poleceń.
 
 ```groovy title="hello-world.nf" linenums="3"
 /*
@@ -157,7 +157,7 @@ Tutaj mamy **process** o nazwie `sayHello`, który zapisuje swoje **wyjście** d
 --8<-- "docs/hello_nextflow/img/hello_world.svg"
 </figure>
 
-To jest bardzo minimalna definicja procesu, która zawiera tylko definicję `output` i `script` do wykonania.
+To jest bardzo minimalna definicja procesu, która zawiera tylko definicję `output` i blok `script` do wykonania.
 
 Definicja `output` zawiera kwalifikator `path`, który mówi Nextflow, że powinien to traktować jako ścieżkę (obejmuje zarówno ścieżki katalogów, jak i pliki).
 Innym popularnym kwalifikatorem jest `val`.
@@ -168,7 +168,7 @@ Jest to konieczne do weryfikacji, czy polecenie zostało wykonane pomyślnie i d
 
 !!! warning "Ostrzeżenie"
 
-    Ten przykład jest kruchy, ponieważ zakodowaliśmy na sztywno nazwę pliku wyjściowego w dwóch oddzielnych miejscach (bloki script i output).
+    Ten przykład jest kruchy, ponieważ zakodowaliśmy na sztywno nazwę pliku wyjściowego w dwóch oddzielnych miejscach (bloki `script` i `output`).
     Jeśli zmienimy jedno, a nie drugie, skrypt się zepsuje.
     Później nauczysz się sposobów na użycie zmiennych, aby złagodzić ten problem.
 
@@ -223,7 +223,7 @@ nextflow run hello-world.nf
     [65/7be2fa] sayHello | 1 of 1 ✔
     ```
 
-Jeśli Twoje wyjście konsoli wygląda mniej więcej tak, to gratulacje, właśnie uruchomiłeś swój pierwszy workflow Nextflow!
+Jeśli Twoje wyjście konsoli wygląda mniej więcej tak, to gratulacje, właśnie uruchomiłeś Swój pierwszy workflow Nextflow!
 
 Najważniejszym wyjściem tutaj jest ostatnia linia, która jest podświetlona w wyjściu powyżej:
 
@@ -561,7 +561,7 @@ Aby ustawić niestandardową lokalizację, po prostu edytuj `path` odpowiednio:
     }
     ```
 
-Ponieważ jest to ustawiane na poziomie pojedynczego wyjścia, możesz określić różne lokalizacje i podkatalogi, aby dopasować się do swoich potrzeb.
+Ponieważ jest to ustawiane na poziomie pojedynczego wyjścia, możesz określić różne lokalizacje i podkatalogi, aby dopasować się do Swoich potrzeb.
 
 #### 2.2.2. Uruchom workflow ponownie
 
@@ -892,7 +892,7 @@ Obsługiwane typy to `String`, `Integer`, `Float`, `Boolean` i `Path`.
 
     W starszych workflow'ach możesz zobaczyć, że cały blok `params` jest zapisany po prostu jako `input = 'Holà mundo!'`.
 
-Gdy dodajesz więcej parametrów do swojego pipeline'u, powinieneś dodawać je wszystkie do tego bloku, niezależnie od tego, czy musisz nadać im wartość domyślną.
+Gdy dodajesz więcej parametrów do Swojego pipeline'u, powinieneś dodawać je wszystkie do tego bloku, niezależnie od tego, czy musisz nadać im wartość domyślną.
 To ułatwi znalezienie wszystkich konfigurowalnych parametrów na pierwszy rzut oka.
 
 #### 3.4.2. Uruchom workflow ponownie bez określania parametru
@@ -945,7 +945,7 @@ nextflow run hello-world.nf --input 'Konnichiwa!'
     [6f/a12a91] sayHello | 1 of 1 ✔
     ```
 
-Po raz kolejny powinieneś znaleźć odpowiednie zaktualizowane wyjście w swoim katalogu wyników.
+Po raz kolejny powinieneś znaleźć odpowiednie zaktualizowane wyjście w Swoim katalogu wyników.
 
 ??? abstract "Zawartość pliku"
 
@@ -988,10 +988,10 @@ Oznacza to, że Nextflow uruchomi tylko procesy, które dodałeś lub zmodyfikow
 
 Są dwie kluczowe zalety takiego postępowania:
 
-- Jeśli jesteś w trakcie tworzenia swojego pipeline'u, możesz szybciej iterować, ponieważ musisz uruchamiać tylko proces(y), nad którymi aktywnie pracujesz, aby przetestować swoje zmiany.
+- Jeśli jesteś w trakcie tworzenia Swojego pipeline'u, możesz szybciej iterować, ponieważ musisz uruchamiać tylko proces(y), nad którymi aktywnie pracujesz, aby przetestować Swoje zmiany.
 - Jeśli uruchamiasz pipeline w produkcji i coś pójdzie nie tak, w wielu przypadkach możesz naprawić problem i ponownie uruchomić pipeline, a on wznowi działanie od punktu awarii, co może zaoszczędzić Ci dużo czasu i zasobów obliczeniowych.
 
-Aby jej użyć, po prostu dodaj `-resume` do swojego polecenia i uruchom go:
+Aby jej użyć, po prostu dodaj `-resume` do Swojego polecenia i uruchom go:
 
 ```bash
 nextflow run hello-world.nf -resume
@@ -1063,7 +1063,7 @@ Nextflow używa ID sesji do grupowania informacji o cache'owaniu uruchomień w k
 
 ### 4.3. Usuń starsze katalogi work
 
-Podczas procesu tworzenia zazwyczaj uruchomisz swój szkic pipeline'u wiele razy, co może prowadzić do nagromadzenia wielu plików w wielu podkatalogach.
+Podczas procesu tworzenia zazwyczaj uruchomisz Swój szkic pipeline'u wiele razy, co może prowadzić do nagromadzenia wielu plików w wielu podkatalogach.
 
 Na szczęście Nextflow zawiera pomocne podpolecenie `clean`, które może automatycznie usunąć podkatalogi work dla poprzednich uruchomień, które już Cię nie interesują.
 
@@ -1139,9 +1139,9 @@ Gdy będziesz gotowy, przejdź do [**Części 2: Hello Channels**](./02_hello_ch
 <quiz>
 Jakie są minimalne wymagane komponenty procesu Nextflow?
 - [ ] Tylko bloki wejścia i wyjścia
-- [x] Bloki wyjścia i script
-- [ ] Bloki wejścia, wyjścia i script
-- [ ] Tylko blok script
+- [x] Bloki wyjścia i skryptu
+- [ ] Bloki wejścia, wyjścia i skryptu
+- [ ] Tylko blok skryptu
 
 Dowiedz się więcej: [1.1.1. Definicja process](#111-definicja-process)
 </quiz>
@@ -1218,7 +1218,7 @@ Dowiedz się więcej: [3.2. Skonfiguruj parametr wiersza poleceń do przechwytyw
 </quiz>
 
 <quiz>
-Jak odwołujesz się do zmiennej wewnątrz bloku script w Nextflow?
+Jak odwołujesz się do zmiennej wewnątrz bloku skryptu w Nextflow?
 - [ ] Używa składni `%variable%`
 - [x] Używa składni `#!groovy ${variable}`
 - [ ] Używa składni `{{variable}}`

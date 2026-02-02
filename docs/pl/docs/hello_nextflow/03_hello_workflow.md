@@ -200,8 +200,8 @@ To jeszcze nie jest funkcjonalne, ponieważ nie określiliśmy, co powinno być 
 
 Teraz musimy sprawić, aby wyjście procesu `sayHello()` trafiało do procesu `convertToUpper()`.
 
-Wygodnie jest to, że Nextflow automatycznie pakuje wyjście procesu do channel o nazwie `<process>.out`.
-Więc wyjście procesu `sayHello` to channel o nazwie `sayHello.out`, który możemy bezpośrednio podłączyć do wywołania `convertToUpper()`.
+Wygodnie jest to, że Nextflow automatycznie pakuje wyjście procesu do kanału o nazwie `<process>.out`.
+Więc wyjście procesu `sayHello` to kanał o nazwie `sayHello.out`, który możemy bezpośrednio podłączyć do wywołania `convertToUpper()`.
 
 W bloku workflow wprowadź następującą zmianę w kodzie:
 
@@ -342,7 +342,7 @@ Domyślnie, podczas uruchamiania na pojedynczej maszynie, jak to robimy tutaj, N
 Teraz, zanim przejdziemy dalej, pomyśl o tym, jak wszystko, co zrobiliśmy, to połączenie wyjścia `sayHello` z wejściem `convertToUpper` i dwa procesy mogły być uruchomione szeregowo.
 Nextflow wykonał za nas ciężką pracę związaną z obsługą poszczególnych plików wejściowych i wyjściowych oraz przekazywaniem ich między dwoma poleceniami.
 
-To jeden z powodów, dla których channels w Nextflow są tak potężne: zajmują się rutynową pracą związaną z łączeniem kroków workflow.
+To jeden z powodów, dla których kanały w Nextflow są tak potężne: zajmują się rutynową pracą związaną z łączeniem kroków workflow'u.
 
 ### Podsumowanie
 
@@ -356,7 +356,7 @@ Dowiedz się, jak zbierać wyjścia z wielu wywołań procesu i przekazywać je 
 
 ## 2. Dodaj trzeci krok do zbierania wszystkich pozdrowień
 
-Gdy używamy procesu do zastosowania transformacji na każdym z elementów w channel, jak to robimy tutaj z wieloma pozdrowieni, czasami chcemy zebrać elementy z channel wyjściowego tego procesu i przekazać je do innego procesu, który wykonuje jakąś analizę lub podsumowanie.
+Gdy używamy procesu do zastosowania transformacji na każdym z elementów w kanale, jak to robimy tutaj z wieloma pozdrowieniami, czasami chcemy zebrać elementy z kanału wyjściowego tego procesu i przekazać je do innego procesu, który wykonuje jakąś analizę lub podsumowanie.
 
 Dla demonstracji dodamy nowy krok do naszego pipeline, który zbiera wszystkie pozdrowienia zapisane wielkimi literami, wyprodukowane przez proces `convertToUpper`, i zapisuje je do pojedynczego pliku.
 
@@ -456,7 +456,7 @@ Zauważ, że używamy przedrostka `path`, mimo że oczekujemy, że będzie to za
 Tu sprawa może być nieco trudniejsza, ponieważ musimy być w stanie obsłużyć dowolną liczbę plików wejściowych.
 Konkretnie, nie możemy napisać polecenia z góry, więc musimy powiedzieć Nextflow, jak je skomponować w czasie wykonania na podstawie tego, jakie wejścia trafią do procesu.
 
-Innymi słowy, jeśli mamy channel wejściowy zawierający element `[file1.txt, file2.txt, file3.txt]`, potrzebujemy, aby Nextflow zamienił to na `cat file1.txt file2.txt file3.txt`.
+Innymi słowy, jeśli mamy kanał wejściowy zawierający element `[file1.txt, file2.txt, file3.txt]`, potrzebujemy, aby Nextflow zamienił to na `cat file1.txt file2.txt file3.txt`.
 
 Na szczęście Nextflow z przyjemnością zrobi to za nas, jeśli po prostu napiszemy `cat ${input_files}` w poleceniu skryptu.
 
@@ -553,7 +553,7 @@ Teraz spójrz na zawartość końcowego pliku wyjściowego.
 
 O nie. Krok zbierania został uruchomiony indywidualnie dla każdego pozdrowienia, co NIE jest tym, czego chcieliśmy.
 
-Musimy coś zrobić, aby wyraźnie powiedzieć Nextflow, że chcemy, aby ten trzeci krok działał na wszystkich elementach w channel wyprodukowanym przez `convertToUpper()`.
+Musimy coś zrobić, aby wyraźnie powiedzieć Nextflow, że chcemy, aby ten trzeci krok działał na wszystkich elementach w kanale wyprodukowanym przez `convertToUpper()`.
 
 ### 2.4. Użyj operatora do zebrania pozdrowień w pojedyncze wejście
 
@@ -563,7 +563,7 @@ Konkretnie użyjemy trafnie nazwanego operatora [`collect()`](https://www.nextfl
 
 #### 2.4.1. Dodaj operator `collect()`
 
-Tym razem będzie to wyglądać nieco inaczej, ponieważ nie dodajemy operatora w kontekście channel factory; dodajemy go do channel wyjściowego.
+Tym razem będzie to wyglądać nieco inaczej, ponieważ nie dodajemy operatora w kontekście fabryki kanałów; dodajemy go do kanału wyjściowego.
 
 Bierzemy `convertToUpper.out` i dołączamy operator `collect()`, co daje nam `convertToUpper.out.collect()`.
 Możemy to bezpośrednio podłączyć do wywołania procesu `collectGreetings()`.
@@ -588,7 +588,7 @@ W bloku workflow wprowadź następującą zmianę w kodzie:
 
 #### 2.4.2. Dodaj instrukcje `view()`
 
-Dodajmy również kilka instrukcji `view()`, aby zwizualizować stany channel przed i po.
+Dodajmy również kilka instrukcji `view()`, aby zwizualizować stany kanału przed i po.
 
 === "Po"
 
@@ -642,7 +642,7 @@ Tym razem trzeci krok został wywołany tylko raz!
 
 Patrząc na wynik instrukcji `view()`, widzimy:
 
-- Trzy instrukcje `Before collect:`, po jednej dla każdego pozdrowienia: w tym momencie ścieżki plików są indywidualnymi elementami w channel.
+- Trzy instrukcje `Before collect:`, po jednej dla każdego pozdrowienia: w tym momencie ścieżki plików są indywidualnymi elementami w kanale.
 - Pojedyncza instrukcja `After collect:`: trzy ścieżki plików są teraz spakowane w pojedynczy element.
 
 Spójrz na zawartość końcowego pliku wyjściowego.
@@ -734,7 +734,7 @@ W bloku procesu wprowadź następującą zmianę w kodzie:
 Możesz skonfigurować procesy tak, aby oczekiwały tylu wejść, ile chcesz.
 W tej chwili wszystkie są ustawione jako wymagane wejścia; _musisz_ podać wartość, aby workflow działał.
 
-Dowiesz się, jak zarządzać wymaganymi i opcjonalnymi wejściami później w swojej podróży z Nextflow.
+Dowiesz się, jak zarządzać wymaganymi i opcjonalnymi wejściami później w Swojej podróży z Nextflow.
 
 #### 3.1.2. Użyj zmiennej `batch_name` w nazwie pliku wyjściowego
 
@@ -884,8 +884,8 @@ Czy możemy wybrać i użyć konkretnego wyjścia?
 
 Wszystko to doskonałe pytania, a krótka odpowiedź brzmi: tak, możemy!
 
-Wiele wyjść zostanie spakowanych w oddzielne channels.
-Możemy albo zdecydować się nadać tym channel wyjściowym nazwy, co ułatwia późniejsze odnoszenie się do nich indywidualnie, albo możemy się do nich odnosić przez indeks.
+Wiele wyjść zostanie spakowanych w oddzielne kanały.
+Możemy albo zdecydować się nadać tym kanałom wyjściowym nazwy, co ułatwia późniejsze odnoszenie się do nich indywidualnie, albo możemy się do nich odnosić przez indeks.
 
 Zagłębmy się w przykład.
 
@@ -897,7 +897,7 @@ To będzie wymagało dwóch kluczowych zmian w definicji procesu: potrzebujemy s
 
 #### 4.1.1. Policz liczbę zebranych pozdrowień
 
-Wygodnie jest to, że Nextflow pozwala nam dodawać dowolny kod w bloku `script:` definicji procesu, co jest bardzo przydatne do robienia takich rzeczy jak ta.
+Wygodnie jest to, że Nextflow pozwala nam dodawać dowolny kod w bloku skryptu (`script:`) definicji procesu, co jest bardzo przydatne do robienia takich rzeczy jak ta.
 
 Oznacza to, że możemy użyć wbudowanej funkcji Nextflow `size()`, aby uzyskać liczbę plików w tablicy `input_files`, i zapisać wynik do pliku za pomocą polecenia `echo`.
 
@@ -960,7 +960,7 @@ Ale jak mówi powiedzenie, czemu nie obu?
 
 ### 4.2. Zaktualizuj wyjścia workflow
 
-Teraz, gdy mamy dwa wyjścia z procesu `collectGreetings`, wyjście `collectGreetings.out` zawiera dwa channels:
+Teraz, gdy mamy dwa wyjścia z procesu `collectGreetings`, wyjście `collectGreetings.out` zawiera dwa kanały:
 
 - `collectGreetings.out.outfile` zawiera końcowy plik wyjściowy
 - `collectGreetings.out.report` zawiera plik raportu
@@ -1086,7 +1086,7 @@ Ogólnie rzecz biorąc, rozumiesz kluczowe zasady związane z łączeniem proces
 
 Weź dodatkową długą przerwę, zasłużyłeś na to.
 
-Gdy będziesz gotowy, przejdź do [**Część 4: Hello Modules**](./04_hello_modules.md), aby dowiedzieć się, jak modularyzować swój kod dla lepszej utrzymywalności i efektywności.
+Gdy będziesz gotowy, przejdź do [**Część 4: Hello Modules**](./04_hello_modules.md), aby dowiedzieć się, jak modularyzować Swój kod dla lepszej utrzymywalności i efektywności.
 
 ---
 
@@ -1134,7 +1134,7 @@ Dowiedz się więcej: [2.4. Użyj operatora do zebrania pozdrowień w pojedyncze
 <quiz>
 Kiedy należy używać operatora `collect()`?
 - [ ] Gdy chcesz przetwarzać elementy równolegle
-- [ ] Gdy potrzebujesz filtrować zawartość channel
+- [ ] Gdy potrzebujesz filtrować zawartość kanału
 - [x] Gdy proces następczy potrzebuje wszystkich elementów z procesu poprzedzającego
 - [ ] Gdy chcesz rozdzielić dane między wiele procesów
 

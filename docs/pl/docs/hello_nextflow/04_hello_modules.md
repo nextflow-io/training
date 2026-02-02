@@ -461,7 +461,7 @@ Czym jest moduł w Nextflow?
 - [ ] Plik konfiguracyjny
 - [x] Samodzielny plik zawierający pojedynczą definicję procesu
 - [ ] Definicja workflow
-- [ ] Operator channel
+- [ ] Operator kanału
 
 Dowiedz się więcej: [2. Utwórz moduł dla `sayHello()`](#2-utworz-modul-dla-sayhello)
 </quiz>

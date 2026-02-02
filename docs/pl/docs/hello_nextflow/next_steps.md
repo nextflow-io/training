@@ -42,7 +42,7 @@ Konfiguracja workflow'u wspiera dostarczanie wejść i parametrów w elastyczny,
 Przez ten praktyczny kurs nauczyłeś się:
 
 - Opisywać i wykorzystywać podstawowe komponenty Nextflow wystarczające do budowania prostego, wieloetapowego workflow'u
-- Opisywać koncepcje kolejnego kroku, takie jak operatory i channel factories
+- Opisywać koncepcje kolejnego kroku, takie jak operatory i fabryki kanałów
 - Uruchamiać workflow Nextflow lokalnie
 - Znajdować i interpretować wyjścia (wyniki) i pliki dziennika generowane przez Nextflow
 - Rozwiązywać podstawowe problemy

@@ -122,7 +122,7 @@ Używamy takich rozwijanych sekcji, aby zwięźle włączać oczekiwane wyjście
 - **Pliki `test-params.*`** to pliki konfiguracyjne, których użyjemy w Części 6 (Configuration). Na razie możesz je zignorować.
 
 - **Katalog `solutions`** zawiera ukończone skrypty workflow'ów, które są wynikiem każdego etapu kursu.
-  Są przeznaczone do użycia jako odniesienie do sprawdzenia swojej pracy i rozwiązywania problemów.
+  Są przeznaczone do użycia jako odniesienie do sprawdzenia Swojej pracy i rozwiązywania problemów.
 
 ## Lista kontrolna gotowości
 
@@ -130,7 +130,7 @@ Myślisz, że jesteś gotowy do zanurzenia się?
 
 - [ ] Rozumiem cel tego kursu i jego wymagania wstępne
 - [ ] Moje środowisko jest uruchomione
-- [ ] Ustawiłem odpowiednio swój katalog roboczy
+- [ ] Ustawiłem odpowiednio Swój katalog roboczy
 
 Jeśli możesz zaznaczyć wszystkie pola, możesz zaczynać.
 

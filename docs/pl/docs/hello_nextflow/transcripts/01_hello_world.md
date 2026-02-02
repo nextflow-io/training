@@ -92,7 +92,7 @@ Ta część tutaj to hash dla tego konkretnego zadania workflow. Każdy process 
 
 ## 2.2. Znajdź wyjście i logi w katalogu work
 
-Każde zadanie ma swój własny izolowany katalog, w którym działa, więc jest oddzielony od reszty wykonania workflow. Ten hash odpowiada strukturze plików w katalogu work. Jeśli zrobię "tree work", możemy zobaczyć a0, a następnie dłuższą wersję krótkiego hasha, a następnie nasz plik output.txt. Możesz również zobaczyć to na pasku bocznym.
+Każde zadanie ma Swój własny izolowany katalog, w którym działa, więc jest oddzielony od reszty wykonania workflow. Ten hash odpowiada strukturze plików w katalogu work. Jeśli zrobię "tree work", możemy zobaczyć a0, a następnie dłuższą wersję krótkiego hasha, a następnie nasz plik output.txt. Możesz również zobaczyć to na pasku bocznym.
 
 Możesz zobaczyć na pasku bocznym, że jest tu kilka dodatkowych plików. Powodem, dla którego nie pojawiły się one w terminalu, jest to, że są to ukryte pliki, zaczynają się od kropki. I rzeczywiście, jeśli zrobię "tree -a" dla wszystkich i "work", możemy je tutaj zobaczyć.
 
@@ -110,7 +110,7 @@ Następnie przejdziemy do tego, jak zrobić to trochę wygodniej, żebyśmy nie 
 
 ## 3. Zarządzaj wykonaniami workflow
 
-Ta struktura katalogów jest świetna do utrzymywania wszystkich zadań oddzielonych i wszystkiego uporządkowanego, ale oczywiście nie jest zbyt wygodne znalezienie plików wyjściowych. Nie chcesz przeszukiwać mnóstwa zagnieżdżonych katalogów, próbując znaleźć wyniki swojego pipeline.
+Ta struktura katalogów jest świetna do utrzymywania wszystkich zadań oddzielonych i wszystkiego uporządkowanego, ale oczywiście nie jest zbyt wygodne znalezienie plików wyjściowych. Nie chcesz przeszukiwać mnóstwa zagnieżdżonych katalogów, próbując znaleźć wyniki Swojego pipeline.
 
 ## 3.1. Publikuj wyjścia
 
@@ -138,7 +138,7 @@ Krótka uwaga tutaj. Jest nowa składnia Nextflow, która nadchodzi, nazywana de
 
 Dobra. Wspomniałem, że katalog work ma teraz dwa zestawy wyników z innym hashem z każdego uruchomienia workflow. To dobrze. Jednak czasami nie chcemy ponownie obliczać kroków za każdym razem, jeśli nie musimy.
 
-Może budujesz iteracyjnie swój workflow i dodajesz kroki i chcesz, aby pierwsze kroki po prostu użyły wersji z cache. Lub może coś poszło nie tak w twoim systemie obliczeniowym w połowie workflow i chcesz, aby kontynuował od miejsca, w którym przerwał, ale pominął kroki, które już wykonał.
+Może budujesz iteracyjnie Swój workflow i dodajesz kroki i chcesz, aby pierwsze kroki po prostu użyły wersji z cache. Lub może coś poszło nie tak w Twoim systemie obliczeniowym w połowie workflow i chcesz, aby kontynuował od miejsca, w którym przerwał, ale pominął kroki, które już wykonał.
 
 Nextflow ma wbudowaną funkcjonalność do tego, zwaną resume. Wypróbujmy to. Więc przede wszystkim, po prostu spojrzę na katalog work, żebyśmy mogli pamiętać, co tam było.
 
@@ -164,13 +164,13 @@ Uruchomię to ponownie, ale teraz zamiast "-n" dla próbnego uruchomienia, zrobi
 
 Świetnie. Więc udało nam się wyczyścić sporo miejsca na dysku.
 
-Kilka rzeczy do zauważenia podczas usuwania katalogów work, jeśli stworzyłeś dowiązanie symboliczne do swojego katalogu wyników, te źródła dowiązań symbolicznych zostaną teraz usunięte i twoje wyniki znikną na zawsze. Dlatego użycie trybu copy jest bezpieczniejsze i ogólnie to zalecamy.
+Kilka rzeczy do zauważenia podczas usuwania katalogów work, jeśli stworzyłeś dowiązanie symboliczne do Swojego katalogu wyników, te źródła dowiązań symbolicznych zostaną teraz usunięte i Twoje wyniki znikną na zawsze. Dlatego użycie trybu copy jest bezpieczniejsze i ogólnie to zalecamy.
 
-Po drugie, funkcjonalność resume Nextflow opiera się na tych katalogach work. Więc jeśli je usuniesz i uruchomisz Nextflow ponownie, funkcjonalność resume nie będzie już działać. Więc to do ciebie należy śledzenie, których rzeczy możesz potrzebować lub nie, i usuwaj rzeczy tylko wtedy, gdy masz pewność, że jest to bezpieczne.
+Po drugie, funkcjonalność resume Nextflow opiera się na tych katalogach work. Więc jeśli je usuniesz i uruchomisz Nextflow ponownie, funkcjonalność resume nie będzie już działać. Więc to do Ciebie należy śledzenie, których rzeczy możesz potrzebować lub nie, i usuwaj rzeczy tylko wtedy, gdy masz pewność, że jest to bezpieczne.
 
 Inna rzecz, którą możemy zrobić, to możemy po prostu usunąć cały katalog work, jeśli skończyliśmy uruchamianie workflow i mamy pewność, że już go nie potrzebujemy.
 
-Więc mogę zrobić "rm -r work". Wiem, że nie było tam nic ważnego. Mam swoje wyniki, na których mi zależy, w katalogu results, gdzie je skopiowaliśmy. I więc było bezpiecznie usunąć katalog work. To do ciebie należy, które z tych podejść zastosujesz.
+Więc mogę zrobić "rm -r work". Wiem, że nie było tam nic ważnego. Mam Swoje wyniki, na których mi zależy, w katalogu results, gdzie je skopiowaliśmy. I więc było bezpiecznie usunąć katalog work. To do Ciebie należy, które z tych podejść zastosujesz.
 
 ## 4. Użyj zmiennego wejścia przekazanego z linii poleceń
 
@@ -214,7 +214,7 @@ Mogę teraz zrobić "code results/output.txt" i rzeczywiście, nasze wyjście zo
 
 ## 4.2. Użyj wartości domyślnych dla parametrów linii poleceń
 
-Dobra, to świetnie. Ale problem polega teraz na tym, że nasz workflow polega na tym, że zawsze definiujemy ten parametr, i miło jest mieć rozsądne wartości domyślne, aby rzeczy działały w rozsądny sposób dla twojego workflow, chyba że nadpiszesz domyślne.
+Dobra, to świetnie. Ale problem polega teraz na tym, że nasz workflow polega na tym, że zawsze definiujemy ten parametr, i miło jest mieć rozsądne wartości domyślne, aby rzeczy działały w rozsądny sposób dla Twojego workflow, chyba że nadpiszesz domyślne.
 
 Więc sposób, w jaki to robimy, to ustawienie wartości domyślnej dla parametru w naszym skrypcie workflow.
 
@@ -234,11 +234,11 @@ Ponownie uruchamia workflow i rzeczywiście, nasz plik wyjściowy na górze zost
 
 Świetnie. To jest naprawdę centralny aspekt pisania dowolnego workflow Nextflow. Definiowanie rozsądnych wartości domyślnych w kodzie pipeline, ale ułatwianie konfiguracji użytkownikowi końcowemu poprzez posiadanie argumentów linii poleceń w terminalu.
 
-Zauważ, że użytkownik końcowy może nadpisać konfigurację w wielu różnych miejscach. Możesz mieć plik konfiguracyjny w swoim katalogu domowym, który jest stosowany do każdego pojedynczego uruchomienia Nextflow, które robisz. Możesz mieć plik konfiguracyjny w katalogu startowym. Możesz mieć plik konfiguracyjny w katalogu pipeline. Wszystkie te różne lokalizacje konfiguracji są ładowane w określonej kolejności, która jest opisana w dokumentacji Nextflow.
+Zauważ, że użytkownik końcowy może nadpisać konfigurację w wielu różnych miejscach. Możesz mieć plik konfiguracyjny w Swoim katalogu domowym, który jest stosowany do każdego pojedynczego uruchomienia Nextflow, które robisz. Możesz mieć plik konfiguracyjny w katalogu startowym. Możesz mieć plik konfiguracyjny w katalogu pipeline. Wszystkie te różne lokalizacje konfiguracji są ładowane w określonej kolejności, która jest opisana w dokumentacji Nextflow.
 
 Dobra, to koniec sekcji pierwszej. Mieliśmy nasz pierwszy skrypt workflow w Nextflow z processem i workflow. Przyjrzeliśmy się wejściom, wyjściom, skryptom i publikowaniu oraz jak podłączyć parametry i kanał wejściowy do naszego procesu.
 
-Gratulacje, twój pierwszy krok w kierunku pisania kodu Nextflow jest ukończony.
+Gratulacje, Twój pierwszy krok w kierunku pisania kodu Nextflow jest ukończony.
 
 Zrób sobie małą przerwę, a zobaczę cię za kilka minut w rozdziale drugim.
 

@@ -2,11 +2,11 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-W pierwszej części tego kursu zbudowałeś pipeline do wywoływania wariantów, który był całkowicie liniowy i przetwarzał dane każdej próbki niezależnie od innych.
+W pierwszej części tego kursu zbudowałeś pipeline do wykrywania wariantów, który był całkowicie liniowy i przetwarzał dane każdej próbki niezależnie od innych.
 
-W drugiej części pokazaliśmy, jak używać kanałów i operatorów kanałów do implementacji wspólnego wywoływania wariantów za pomocą GATK, rozbudowując pipeline z Części 1.
+W drugiej części pokazaliśmy, jak używać kanałów i operatorów kanałów do implementacji wspólnego wykrywania wariantów za pomocą GATK, rozbudowując pipeline z Części 1.
 
-W tej części pokażemy, jak przekonwertować kod z tego workflow na moduły. Aby przejść tę część szkolenia, powinieneś ukończyć Część 1 i Część 2, a także [Hello Modules](../../../hello_nextflow/hello_modules.md), które omawia podstawy modułów.
+W tej części pokażemy, jak przekonwertować kod z tego workflow'u na moduły. Aby przejść tę część szkolenia, musisz ukończyć Część 1 i Część 2, a także [Hello Modules](../../../hello_nextflow/hello_modules.md), które omawia podstawy modułów.
 
 ---
 
@@ -43,11 +43,11 @@ W katalogu projektu pojawi się teraz katalog `work` oraz katalog `results_genom
 
 ### Podsumowanie
 
-Jesteś gotowy, aby rozpocząć modularyzację swojego workflow.
+Jesteś gotowy, aby rozpocząć modularyzację Swojego workflow'u.
 
 ### Co dalej?
 
-Przenieś procesy workflow Genomics do modułów.
+Przenieś procesy workflow'u Genomics do modułów.
 
 ---
 
@@ -162,7 +162,7 @@ tree modules/
     5 directories, 3 files
     ```
 
-Powinieneś również mieć coś takiego w głównym pliku workflow, po sekcji parametrów:
+Będziesz również mieć coś takiego w głównym pliku workflow'u, po sekcji parametrów:
 
 ```
 include { SAMTOOLS_INDEX } from './modules/samtools/index/main.nf'
@@ -174,7 +174,7 @@ workflow {
 
 ### Podsumowanie
 
-Przećwiczyłeś modularyzację workflow na przykładzie workflow genomiki.
+Przećwiczyłeś modularyzację workflow'u na przykładzie workflow'u genomiki.
 
 ### Co dalej?
 
@@ -235,12 +235,12 @@ Przejrzyj to, czego się nauczyłeś i spójrz na testowanie.
 
 ## 3. Podsumowanie
 
-Zmodularyzowałeś workflow i nic nie zmieniło się w sposobie działania pipeline.
+Zmodularyzowałeś workflow i nic nie zmieniło się w sposobie działania pipeline'u.
 To jest zamierzone: zrestrukturyzowałeś kod bez wpływu na jego funkcjonalność.
 
 Moduły zawierają tylko logikę procesu, co czyni je czystymi i wielokrotnego użytku.
-Główny skrypt kontroluje, co jest publikowane i gdzie, podczas gdy moduły pozostają skoncentrowane na swoim zadaniu obliczeniowym.
+Główny skrypt kontroluje, co jest publikowane i gdzie, podczas gdy moduły pozostają skoncentrowane na Swoim zadaniu obliczeniowym.
 
 Położyłeś fundamenty pod rzeczy, które ułatwią utrzymanie kodu.
-Na przykład możesz teraz dodać testy do swojego pipeline używając frameworka nf-test.
+Na przykład możesz teraz dodać testy do Swojego pipeline'u używając frameworka nf-test.
 To właśnie przyjrzymy się w następnej części tego kursu.

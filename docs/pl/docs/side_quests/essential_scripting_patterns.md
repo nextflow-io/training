@@ -961,7 +961,7 @@ nextflow run main.nf
     [31/a8ad4d] process > FASTP (3) [100%] 3 of 3 ✔
     ```
 
-Wygląda dobrze! Jeśli sprawdzimy faktyczne polecenia, które zostały uruchomione (dostosuj dla swojego hasha zadania):
+Wygląda dobrze! Jeśli sprawdzimy faktyczne polecenia, które zostały uruchomione (dostosuj dla Swojego hasha zadania):
 
 ```console title="Sprawdź wykonane polecenia"
 cat work/31/a8ad4d95749e685a6d842d3007957f/.command.sh
@@ -1021,7 +1021,7 @@ process GENERATE_REPORT {
 
 Ten proces zapisuje prosty raport z ID próbki i nazwą pliku. Teraz uruchommy go, aby zobaczyć, co się dzieje, gdy musimy mieszać różne typy zmiennych.
 
-Dołącz proces w swoim `main.nf` i dodaj go do workflow:
+Dołącz proces w Swoim `main.nf` i dodaj go do workflow:
 
 === "Po"
 

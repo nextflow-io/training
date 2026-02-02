@@ -20,7 +20,7 @@ Ten rozdział nazywa się Hello Config i jest ostatnią częścią naszego kursu
 
 W tym rozdziale będziemy mówić o konfiguracji Nextflow. Konfiguracja Nextflow jest naprawdę potężna. Pozwala nam uruchamiać ten sam pipeline na wielu różnych infrastrukturach obliczeniowych z różnym dostarczaniem oprogramowania i różnymi opcjami w samym pipeline.
 
-Oznacza to, że możecie wziąć pipeline Nextflow zbudowane przez inne osoby i uruchomić je na swoim systemie, nawet jeśli mogły być zbudowane dla zupełnie innej infrastruktury. Ta możliwość konfigurowania Nextflow sprawia, że workflow są naprawdę przenośne i możliwe do udostępniania.
+Oznacza to, że możecie wziąć pipeline Nextflow zbudowane przez inne osoby i uruchomić je na Swoim systemie, nawet jeśli mogły być zbudowane dla zupełnie innej infrastruktury. Ta możliwość konfigurowania Nextflow sprawia, że workflow są naprawdę przenośne i możliwe do udostępniania.
 
 W tym rozdziale będziemy używać workflow, który zbudowaliśmy w poprzednich częściach, ale nie będziemy w ogóle edytować kodu workflow. Przyjrzymy się tylko naszemu plikowi konfiguracyjnemu Nextflow i zobaczymy, jak zmiana konfiguracji zmienia sposób działania Nextflow.
 
@@ -112,7 +112,7 @@ Dobrze, możemy pobrać ten plik i rzucić okiem.
 
 Tak, nic dziwnego, wygląda to zasadniczo dokładnie tak samo, ponieważ to jest fikcyjne workflow, które nic prawdziwego nie robi. Ale możecie sobie wyobrazić, jak to iteracyjne podejście do definiowania limitów i wykonywania prawdziwych workflow z tego rodzaju raportowaniem pozwala na podejście oparte na dowodach do ustalania odpowiedniej konfiguracji i naprawdę maksymalne wykorzystanie dostępnych dla was zasobów obliczeniowych.
 
-Możecie zacząć być naprawdę sprytni w tej kwestii. Nextflow ma wbudowaną zdolność do ponawiania prób w przypadku awarii i możecie to wykorzystać w swoim pliku konfiguracyjnym, używając domknięcia takiego jak to i dynamicznie ustawiając dostępne zasoby. Więc tutaj powiedziałem Nextflow, aby pomnożył te dwa gigabajty przez próbę ponowienia. Więc druga próba otrzyma cztery gigabajty, trzecia próba otrzyma sześć gigabajtów i tak dalej. To trochę wykracza poza zakres tego kursu szkoleniowego, ale jeśli jesteście zainteresowani, sprawdźcie dokumentację Nextflow, która ma fajną sekcję o dynamicznej logice ponownych prób.
+Możecie zacząć być naprawdę sprytni w tej kwestii. Nextflow ma wbudowaną zdolność do ponawiania prób w przypadku awarii i możecie to wykorzystać w Swoim pliku konfiguracyjnym, używając domknięcia takiego jak to i dynamicznie ustawiając dostępne zasoby. Więc tutaj powiedziałem Nextflow, aby pomnożył te dwa gigabajty przez próbę ponowienia. Więc druga próba otrzyma cztery gigabajty, trzecia próba otrzyma sześć gigabajtów i tak dalej. To trochę wykracza poza zakres tego kursu szkoleniowego, ale jeśli jesteście zainteresowani, sprawdźcie dokumentację Nextflow, która ma fajną sekcję o dynamicznej logice ponownych prób.
 
 ## 2.5. Dodaj limity zasobów
 
@@ -178,7 +178,7 @@ Mimo że działamy na prostym systemie w Codespaces, nadal mogę trochę się z 
 
 ## 4. Użyj profili do wyboru wstępnie ustawionych konfiguracji
 
-Dobrze, prawie jesteśmy na miejscu. Ostatnia część tego rozdziału to mówienie o profilach konfiguracyjnych. Jeśli uruchamiacie swój pipeline na kilku różnych systemach, mogłoby być irytujące mieć wszystkie te różne pliki konfiguracyjne Nextflow, które musicie określać za każdym razem.
+Dobrze, prawie jesteśmy na miejscu. Ostatnia część tego rozdziału to mówienie o profilach konfiguracyjnych. Jeśli uruchamiacie Swój pipeline na kilku różnych systemach, mogłoby być irytujące mieć wszystkie te różne pliki konfiguracyjne Nextflow, które musicie określać za każdym razem.
 
 Zamiast tego możecie zakodować grupowania konfiguracji w waszym pliku konfiguracyjnym Nextflow i włączać i wyłączać te grupy, używając flagi profile. Zobaczmy, jak to wygląda.
 

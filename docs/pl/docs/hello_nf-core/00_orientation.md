@@ -103,7 +103,7 @@ Używamy zwijanych sekcji w ten sposób, aby w zwięzły sposób uwzględnić oc
 
 - **Katalog `original-hello`** zawiera kopię kodu źródłowego powstałego w wyniku przejścia przez kompletną serię szkoleń Hello Nextflow (z włączonym Docker).
 
-- **Katalog `solutions`** zawiera ukończone skrypty workflow powstałe w wyniku każdego kroku kursu.
+- **Katalog `solutions`** zawiera ukończone skrypty workflow'u powstałe w wyniku każdego kroku kursu.
   Są one przeznaczone do użycia jako punkt odniesienia do sprawdzenia Twojej pracy i rozwiązywania problemów.
 
 ## Lista gotowości

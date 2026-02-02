@@ -2,7 +2,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Debugowanie to kluczowa umiejętność, która może zaoszczędzić Ci godzin frustracji i pomóc Ci stać się bardziej efektywnym programistą Nextflow. Przez całą swoją karierę, szczególnie na początku, będziesz napotykać błędy podczas budowania i utrzymywania swoich workflow. Nauka systematycznych podejść do debugowania pomoże Ci szybko identyfikować i rozwiązywać problemy.
+Debugowanie to kluczowa umiejętność, która może zaoszczędzić Ci godzin frustracji i pomóc Ci stać się bardziej efektywnym programistą Nextflow. Przez całą Swoją karierę, szczególnie na początku, będziesz napotykać błędy podczas budowania i utrzymywania Swoich workflow. Nauka systematycznych podejść do debugowania pomoże Ci szybko identyfikować i rozwiązywać problemy.
 
 ### Cele nauczania
 
@@ -830,11 +830,11 @@ nextflow run badpractice_syntax.nf
     [6a/84a608] PROCESS_FILES (2) | 3 of 3 ✔
     ```
 
-Trzymaj swoje kanały wejściowe zdefiniowane w bloku workflow i ogólnie postępuj zgodnie z wszelkimi innymi zaleceniami, które daje rozszerzenie.
+Trzymaj Swoje kanały wejściowe zdefiniowane w bloku workflow i ogólnie postępuj zgodnie z wszelkimi innymi zaleceniami, które daje rozszerzenie.
 
 ### Wnioski
 
-Możesz systematycznie identyfikować i naprawiać błędy składni używając komunikatów błędów Nextflow i wizualnych wskaźników IDE. Typowe błędy składni obejmują brakujące nawiasy klamrowe, nieprawidłowe słowa kluczowe procesów, niezdefiniowane zmienne i niewłaściwe użycie zmiennych Bash vs. Nextflow. Rozszerzenie VSCode pomaga wychwycić wiele z nich przed uruchomieniem. Mając te umiejętności debugowania składni w swoim zestawie narzędzi, będziesz w stanie szybko rozwiązywać najczęstsze błędy składni Nextflow i przejść do rozwiązywania bardziej złożonych problemów w czasie wykonania.
+Możesz systematycznie identyfikować i naprawiać błędy składni używając komunikatów błędów Nextflow i wizualnych wskaźników IDE. Typowe błędy składni obejmują brakujące nawiasy klamrowe, nieprawidłowe słowa kluczowe procesów, niezdefiniowane zmienne i niewłaściwe użycie zmiennych Bash vs. Nextflow. Rozszerzenie VSCode pomaga wychwycić wiele z nich przed uruchomieniem. Mając te umiejętności debugowania składni w Swoim zestawie narzędzi, będziesz w stanie szybko rozwiązywać najczęstsze błędy składni Nextflow i przejść do rozwiązywania bardziej złożonych problemów w czasie wykonania.
 
 ### Co dalej?
 
@@ -848,7 +848,7 @@ Błędy struktury kanałów są bardziej subtelne niż błędy składni, poniewa
 
 !!! tip "Debugowanie kanałów za pomocą `.view()`"
 
-    W tej sekcji pamiętaj, że możesz używać operatora `.view()` do inspekcji zawartości kanału w dowolnym momencie w swoim workflow. Jest to jedno z najpotężniejszych narzędzi debugowania do zrozumienia problemów ze strukturą kanałów. Zbadamy tę technikę szczegółowo w sekcji 2.4, ale śmiało używaj jej podczas pracy nad przykładami.
+    W tej sekcji pamiętaj, że możesz używać operatora `.view()` do inspekcji zawartości kanału w dowolnym momencie w Swoim workflow. Jest to jedno z najpotężniejszych narzędzi debugowania do zrozumienia problemów ze strukturą kanałów. Zbadamy tę technikę szczegółowo w sekcji 2.4, ale śmiało używaj jej podczas pracy nad przykładami.
 
     ```groovy
     my_channel.view()  // Pokazuje, co przepływa przez kanał
@@ -1340,7 +1340,7 @@ nextflow run bad_channel_shape.nf
 
 #### Używanie `.view()` do inspekcji kanałów
 
-Najpotężniejszym narzędziem debugowania dla kanałów jest operator `.view()`. Dzięki `.view()` możesz zrozumieć kształt swoich kanałów na wszystkich etapach, aby pomóc w debugowaniu.
+Najpotężniejszym narzędziem debugowania dla kanałów jest operator `.view()`. Dzięki `.view()` możesz zrozumieć kształt Swoich kanałów na wszystkich etapach, aby pomóc w debugowaniu.
 
 #### Uruchom pipeline
 

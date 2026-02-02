@@ -19,7 +19,7 @@ Najpierw stworzymy szkielet dla nowego pipeline'u.
 
 !!! note "Uwaga"
 
-    Upewnij się, że znajdujesz się w katalogu `hello-nf-core` w swoim terminalu.
+    Upewnij się, że znajdujesz się w katalogu `hello-nf-core` w Swoim terminalu.
 
 ### 1.1. Uruchomienie narzędzia do tworzenia pipeline'u opartego na szablonie
 
@@ -40,7 +40,7 @@ Ten TUI poprosi Cię o podanie podstawowych informacji o pipeline'ie i pozwoli w
 
 - Na ekranie powitalnym kliknij **Let's go!**.
 - Na ekranie `Choose pipeline type` kliknij **Custom**.
-- Wprowadź szczegóły swojego pipeline'u w następujący sposób (zastępując `< TWOJE IMIĘ >` swoim imieniem), następnie kliknij **Next**.
+- Wprowadź szczegóły Swojego pipeline'u w następujący sposób (zastępując `< TWOJE IMIĘ >` Swoim imieniem), następnie kliknij **Next**.
 
 ```
 [ ] GitHub organisation: core
@@ -49,7 +49,7 @@ Ten TUI poprosi Cię o podanie podstawowych informacji o pipeline'ie i pozwoli w
 [ ] Name of the main author(s): < TWOJE IMIĘ >
 ```
 
-- Na ekranie Template features ustaw `Toggle all features` na **off**, następnie selektywnie **włącz** następujące opcje. Sprawdź swoje wybory i kliknij **Continue**.
+- Na ekranie Template features ustaw `Toggle all features` na **off**, następnie selektywnie **włącz** następujące opcje. Sprawdź Swoje wybory i kliknij **Continue**.
 
 ```
 [ ] Add testing profiles
@@ -280,19 +280,19 @@ workflow HELLO {
 
 W porównaniu do podstawowego workflow Nextflow, takiego jak ten opracowany w [Hello Nextflow](../hello_nextflow/index.md), zauważysz kilka nowych rzeczy (podświetlone linie powyżej):
 
-- Blok workflow ma nazwę
-- Wejścia workflow są deklarowane za pomocą słowa kluczowego `take:`, a konstrukcja kanału jest przenoszona do workflow nadrzędnego
-- Zawartość workflow jest umieszczona w bloku `main:`
+- Blok workflow'u ma nazwę
+- Wejścia workflow'u są deklarowane za pomocą słowa kluczowego `take:`, a konstrukcja kanału jest przenoszona do workflow'u nadrzędnego
+- Zawartość workflow'u jest umieszczona w bloku `main:`
 - Wyjścia są deklarowane za pomocą słowa kluczowego `emit:`
 
 Są to opcjonalne funkcje Nextflow, które sprawiają, że workflow jest **kompozycyjny**, co oznacza, że może być wywoływany z innego workflow.
 
 !!! note "Kompozycyjne workflow w szczegółach"
 
-    [Side Quest Workflows of Workflows](../side_quests/workflows_of_workflows.md) bada kompozycję workflow znacznie głębiej, w tym jak komponować wiele workflow razem i zarządzać złożonymi przepływami danych między nimi. Wprowadzamy kompozycyjność tutaj, ponieważ jest to podstawowy wymóg architektury szablonu nf-core, która wykorzystuje zagnieżdżone workflow do organizowania inicjalizacji pipeline'u, głównego workflow analizy i zadań zakończenia w oddzielne, wielokrotnego użytku komponenty.
+    [Side Quest Workflows of Workflows](../side_quests/workflows_of_workflows.md) bada kompozycję workflow'ów znacznie głębiej, w tym jak komponować wiele workflow'ów razem i zarządzać złożonymi przepływami danych między nimi. Wprowadzamy kompozycyjność tutaj, ponieważ jest to podstawowy wymóg architektury szablonu nf-core, która wykorzystuje zagnieżdżone workflow'y do organizowania inicjalizacji pipeline'u, głównego workflow'u analizy i zadań zakończenia w oddzielne, wielokrotnego użytku komponenty.
 
-Będziemy musieli podłączyć odpowiednią logikę z naszego workflow do tej struktury.
-Pierwszym krokiem jest uczynienie naszego oryginalnego workflow kompozycyjnym.
+Będziemy musieli podłączyć odpowiednią logikę z naszego workflow'u do tej struktury.
+Pierwszym krokiem jest uczynienie naszego oryginalnego workflow'u kompozycyjnym.
 
 ### Podsumowanie
 
@@ -300,14 +300,14 @@ Teraz wiesz, jak stworzyć szkielet pipeline'u używając narzędzi nf-core.
 
 ### Co dalej?
 
-Naucz się, jak uczynić prosty workflow kompozycyjnym jako preludium do uczynienia go kompatybilnym z nf-core.
+Naucz się, jak uczynić prosty workflow kompozycyjnym jako wstęp do uczynienia go kompatybilnym z nf-core.
 
 ---
 
 ## 2. Uczynienie oryginalnego workflow Hello Nextflow kompozycyjnym
 
-Teraz czas rozpocząć pracę nad integracją naszego workflow do szkieletu nf-core.
-Przypominamy, że pracujemy z workflow przedstawionym w naszym kursie szkoleniowym [Hello Nextflow](../hello_nextflow/index.md).
+Teraz czas rozpocząć pracę nad integracją naszego workflow'u do szkieletu nf-core.
+Przypominamy, że pracujemy z workflow'em przedstawionym w naszym kursie szkoleniowym [Hello Nextflow](../hello_nextflow/index.md).
 
 !!! tip "Wskazówka"
 
@@ -394,13 +394,13 @@ workflow {
 ```
 
 Jak widać, ten workflow został napisany jako prosty nienazwany workflow, który może być uruchomiony samodzielnie.
-Aby uczynić go możliwym do uruchomienia z workflow nadrzędnego, jak wymaga szablon nf-core, musimy uczynić go **kompozycyjnym**.
+Aby uczynić go możliwym do uruchomienia z workflow'u nadrzędnego, jak wymaga szablon nf-core, musimy uczynić go **kompozycyjnym**.
 
 Przejdźmy przez niezbędne zmiany jedna po drugiej.
 
 ### 2.1. Nazwanie workflow
 
-Najpierw nadajmy workflow nazwę, abyśmy mogli się do niego odwoływać z workflow nadrzędnego.
+Najpierw nadajmy workflow'owi nazwę, abyśmy mogli się do niego odwoływać z workflow'u nadrzędnego.
 
 === "Po"
 
@@ -437,7 +437,7 @@ Teraz zastąp konstrukcję kanału prostą instrukcją `take` deklarującą ocze
                             .map { line -> line[0] }
     ```
 
-To pozostawia szczegóły sposobu dostarczania wejść workflow nadrzędnemu.
+To pozostawia szczegóły sposobu dostarczania wejść workflow'owi nadrzędnemu.
 
 Skoro już przy tym jesteśmy, możemy również zakomentować linię `params.greeting = 'greetings.csv'`
 
@@ -470,7 +470,7 @@ Skoro już przy tym jesteśmy, możemy również zakomentować linię `params.gr
 
     Dodamy to w następnym kroku.
 
-### 2.3. Poprzedzenie operacji workflow instrukcją `main`
+### 2.3. Poprzedzenie operacji workflow'u instrukcją `main`
 
 Następnie dodaj instrukcję `main` przed pozostałymi operacjami wywoływanymi w ciele workflow.
 
@@ -567,9 +567,9 @@ workflow HELLO {
 ```
 
 To opisuje wszystko, czego Nextflow potrzebuje, Z WYJĄTKIEM tego, co podać do kanału wejściowego.
-To będzie zdefiniowane w workflow nadrzędnym, nazywanym również workflow **punktem wejścia**.
+To będzie zdefiniowane w workflow'ie nadrzędnym, nazywanym również workflow'em **punktu wejścia**.
 
-### 2.6. Stworzenie fikcyjnego workflow punktu wejścia
+### 2.6. Stworzenie fikcyjnego workflow'u punktu wejścia
 
 Zanim zintegrujemy nasz kompozycyjny workflow do złożonego szkieletu nf-core, sprawdźmy, czy działa poprawnie.
 Możemy stworzyć prosty fikcyjny workflow punktu wejścia, aby przetestować kompozycyjny workflow w izolacji.
@@ -585,7 +585,7 @@ Skopiuj następujący kod do pliku `main.nf`.
 ```groovy title="original-hello/main.nf" linenums="1"
 #!/usr/bin/env nextflow
 
-// importuj kod workflow z pliku hello.nf
+// importuj kod workflow'u z pliku hello.nf
 include { HELLO } from './hello.nf'
 
 // zadeklaruj parametr wejściowy
@@ -607,18 +607,18 @@ workflow {
 
 Są tutaj dwie ważne obserwacje:
 
-- Składnia wywoływania zaimportowanego workflow jest zasadniczo taka sama jak składnia wywoływania modułów.
-- Wszystko, co jest związane z wprowadzaniem wejść do workflow (parametr wejściowy i konstrukcja kanału) jest teraz zadeklarowane w tym workflow nadrzędnym.
+- Składnia wywoływania zaimportowanego workflow'u jest zasadniczo taka sama jak składnia wywoływania modułów.
+- Wszystko, co jest związane z wprowadzaniem wejść do workflow'u (parametr wejściowy i konstrukcja kanału) jest teraz zadeklarowane w tym workflow'ie nadrzędnym.
 
 !!! note "Uwaga"
 
-    Nazwanie pliku workflow punktu wejścia `main.nf` jest konwencją, a nie wymogiem.
+    Nazwanie pliku workflow'u punktu wejścia `main.nf` jest konwencją, a nie wymogiem.
 
-    Jeśli zastosujesz się do tej konwencji, możesz pominąć podanie nazwy pliku workflow w poleceniu `nextflow run`.
+    Jeśli zastosujesz się do tej konwencji, możesz pominąć podanie nazwy pliku workflow'u w poleceniu `nextflow run`.
     Nextflow automatycznie poszuka pliku o nazwie `main.nf` w katalogu wykonania.
 
-    Możesz jednak nazwać plik workflow punktu wejścia inaczej, jeśli wolisz.
-    W takim przypadku pamiętaj, aby określić nazwę pliku workflow w poleceniu `nextflow run`.
+    Możesz jednak nazwać plik workflow'u punktu wejścia inaczej, jeśli wolisz.
+    W takim przypadku pamiętaj, aby określić nazwę pliku workflow'u w poleceniu `nextflow run`.
 
 ### 2.7. Sprawdzenie, czy workflow działa
 
@@ -653,7 +653,7 @@ To oznacza, że pomyślnie zaktualizowaliśmy nasz workflow HELLO, aby był komp
 
 ### Podsumowanie
 
-Wiesz, jak uczynić workflow kompozycyjnym, nadając mu nazwę i dodając instrukcje `take`, `main` i `emit`, oraz jak wywoływać go z workflow punktu wejścia.
+Wiesz, jak uczynić workflow kompozycyjnym, nadając mu nazwę i dodając instrukcje `take`, `main` i `emit`, oraz jak wywoływać go z workflow'u punktu wejścia.
 
 ### Co dalej?
 
@@ -727,7 +727,7 @@ Zamierzamy zająć się tym w następujących etapach:
 
 1. Skopiowanie modułów i ustawienie importów modułów
 2. Pozostawienie deklaracji `take` bez zmian
-3. Dodanie logiki workflow do bloku `main`
+3. Dodanie logiki workflow'u do bloku `main`
 4. Aktualizacja bloku `emit`
 
 !!! note "Uwaga"
@@ -737,7 +737,7 @@ Zamierzamy zająć się tym w następujących etapach:
 ### 3.1. Skopiowanie modułów i ustawienie importów modułów
 
 Cztery procesy z naszego workflow Hello Nextflow są przechowywane jako moduły w `original-hello/modules/`.
-Musimy skopiować te moduły do struktury projektu nf-core (pod `core-hello/modules/local/`) i dodać instrukcje importu do pliku workflow nf-core.
+Musimy skopiować te moduły do struktury projektu nf-core (pod `core-hello/modules/local/`) i dodać instrukcje importu do pliku workflow'u nf-core.
 
 Najpierw skopiujmy pliki modułów z `original-hello/` do `core-hello/`:
 
@@ -767,7 +767,7 @@ tree core-hello/modules
 
 Teraz skonfigurujmy instrukcje importu modułów.
 
-To były instrukcje importu w workflow `original-hello/hello.nf`:
+To były instrukcje importu w workflow'ie `original-hello/hello.nf`:
 
 ```groovy title="original-hello/hello.nf" linenums="9"
 // Dołącz moduły
@@ -822,11 +822,11 @@ Ponieważ to jest zasadniczo tym, czym jest nasz plik `greetings.csv`, zachowamy
     ch_samplesheet // channel: samplesheet read in from --input
 ```
 
-Obsługa wejścia będzie wykonywana przed tym workflow (nie w tym pliku kodu).
+Obsługa wejścia będzie wykonywana przed tym workflow'iem (nie w tym pliku kodu).
 
-### 3.3. Dodanie logiki workflow do bloku `main`
+### 3.3. Dodanie logiki workflow'u do bloku `main`
 
-Teraz, gdy nasze moduły są dostępne dla workflow, możemy podłączyć logikę workflow do bloku `main`.
+Teraz, gdy nasze moduły są dostępne dla workflow'u, możemy podłączyć logikę workflow'u do bloku `main`.
 
 Przypominamy, że to jest odpowiedni kod w oryginalnym workflow, który nie zmienił się zbytnio, gdy uczyniliśmy go kompozycyjnym (dodaliśmy tylko linię `main:`):
 
@@ -941,7 +941,7 @@ To wygląda świetnie, ale nadal musimy zaktualizować nazwę kanału, który pr
         sayHello(greeting_ch)
     ```
 
-Teraz logika workflow jest poprawnie podłączona.
+Teraz logika workflow'u jest poprawnie podłączona.
 
 ### 3.4. Aktualizacja bloku `emit`
 
@@ -977,14 +977,14 @@ Naucz się, jak dostosować sposób obsługi wejść w szkielecie pipeline'u nf-
 
 ## 4. Dostosowanie obsługi wejść
 
-Teraz, gdy pomyślnie zintegrowaliśmy logikę workflow do szkieletu nf-core, musimy zająć się jeszcze jednym krytycznym elementem: zapewnieniem, że nasze dane wejściowe są prawidłowo przetwarzane.
+Teraz, gdy pomyślnie zintegrowaliśmy logikę workflow'u do szkieletu nf-core, musimy zająć się jeszcze jednym krytycznym elementem: zapewnieniem, że nasze dane wejściowe są prawidłowo przetwarzane.
 Szablon nf-core jest wyposażony w zaawansowaną obsługę wejść zaprojektowaną dla złożonych zestawów danych genomicznych, więc musimy ją dostosować do pracy z naszym prostszym plikiem `greetings.csv`.
 
 ### 4.1. Identyfikacja miejsca obsługi wejść
 
 Pierwszym krokiem jest ustalenie, gdzie odbywa się obsługa wejść.
 
-Możesz sobie przypomnieć, że kiedy przepisaliśmy workflow Hello Nextflow, aby był kompozycyjny, przenieśliśmy deklarację parametru wejściowego o jeden poziom wyżej, do workflow punktu wejścia `main.nf`.
+Możesz sobie przypomnieć, że kiedy przepisaliśmy workflow Hello Nextflow, aby był kompozycyjny, przenieśliśmy deklarację parametru wejściowego o jeden poziom wyżej, do workflow'u punktu wejścia `main.nf`.
 Spójrzmy więc na workflow punktu wejścia najwyższego poziomu `main.nf`, który został utworzony jako część szkieletu pipeline'u:
 
 ```groovy title="core-hello/main.nf" linenums="1"
@@ -1072,12 +1072,12 @@ workflow {
 */
 ```
 
-Projekt nf-core intensywnie wykorzystuje zagnieżdżone subworkflow, więc ta część może być na początku trochę myląca.
+Projekt nf-core intensywnie wykorzystuje zagnieżdżone subworkflow'y, więc ta część może być na początku trochę myląca.
 
 To, co tutaj ma znaczenie, to fakt, że zdefiniowane są dwa workflow:
 
 - `CORE_HELLO` to cienka otoczka do uruchamiania workflow HELLO, który właśnie zakończyliśmy adaptować w `core-hello/workflows/hello.nf`.
-- Nienazwany workflow, który wywołuje `CORE_HELLO` oraz dwa inne subworkflow, `PIPELINE_INITIALISATION` i `PIPELINE_COMPLETION`.
+- Nienazwany workflow, który wywołuje `CORE_HELLO` oraz dwa inne subworkflow'y, `PIPELINE_INITIALISATION` i `PIPELINE_COMPLETION`.
 
 Oto diagram pokazujący, jak się do siebie odnoszą:
 
@@ -1152,7 +1152,7 @@ Przypominamy, że konstrukcja kanału wyglądała tak (jak widać w katalogu roz
         .map { line -> line[0] }
 ```
 
-Musimy więc po prostu podłączyć to do workflow inicjalizacji, z drobnymi zmianami: aktualizujemy nazwę kanału z `greeting_ch` na `ch_samplesheet` i nazwę parametru z `params.greeting` na `params.input` (zobacz podświetloną linię).
+Musimy więc po prostu podłączyć to do workflow'u inicjalizacji, z drobnymi zmianami: aktualizujemy nazwę kanału z `greeting_ch` na `ch_samplesheet` i nazwę parametru z `params.greeting` na `params.input` (zobacz podświetloną linię).
 
 === "Po"
 
@@ -1254,7 +1254,7 @@ Teraz możemy zaktualizować plik `test.config` w następujący sposób:
         config_profile_description = 'Minimal test dataset to check pipeline function'
 
         // Dane wejściowe
-        // TODO nf-core: Określ ścieżki do swoich danych testowych w nf-core/test-datasets
+        // TODO nf-core: Określ ścieżki do Swoich danych testowych w nf-core/test-datasets
         // TODO nf-core: Podaj wszystkie wymagane parametry dla testu, aby nie były potrzebne flagi linii poleceń
         input  = params.pipelines_testdata_base_path + 'viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv'
     }
@@ -1351,7 +1351,7 @@ Jak widać, wygenerowało to typowe podsumowanie nf-core na początku dzięki su
 Pytanie brzmi teraz: gdzie są wyniki pipeline'u?
 A odpowiedź jest dość interesująca: są teraz dwa różne miejsca, w których należy szukać wyników.
 
-Jak możesz sobie przypomnieć z wcześniejszych sekcji, nasze pierwsze uruchomienie nowo utworzonego workflow wytworzyło katalog o nazwie `core-hello-results/`, który zawierał różne raporty wykonania i metadane.
+Jak możesz sobie przypomnieć z wcześniejszych sekcji, nasze pierwsze uruchomienie nowo utworzonego workflow'u wytworzyło katalog o nazwie `core-hello-results/`, który zawierał różne raporty wykonania i metadane.
 
 ```bash
 tree core-hello-results
@@ -1377,7 +1377,7 @@ tree core-hello-results
     1 directory, 12 files
     ```
 
-Widzisz, że otrzymaliśmy kolejny zestaw raportów wykonania oprócz tych, które otrzymaliśmy z pierwszego uruchomienia, gdy workflow był jeszcze tylko zastępczym.
+Widzisz, że otrzymaliśmy kolejny zestaw raportów wykonania oprócz tych, które otrzymaliśmy z pierwszego uruchomienia, gdy workflow był jeszcze tylko zastępczy.
 Tym razem widzisz wszystkie zadania, które zostały uruchomione zgodnie z oczekiwaniami.
 
 ![raport osi czasu wykonania dla pipeline'u Hello](./img/execution_timeline_hello.png)
@@ -1385,7 +1385,7 @@ Tym razem widzisz wszystkie zadania, które zostały uruchomione zgodnie z oczek
 !!! note "Uwaga"
 
     Ponownie zadania nie były uruchamiane równolegle, ponieważ działamy na minimalistycznej maszynie w Github Codespaces.
-    Aby zobaczyć, jak te uruchamiają się równolegle, spróbuj zwiększyć alokację CPU swojego codespace oraz limity zasobów w konfiguracji testowej.
+    Aby zobaczyć, jak te uruchamiają się równolegle, spróbuj zwiększyć alokację CPU Swojego codespace oraz limity zasobów w konfiguracji testowej.
 
 To świetnie, ale nasze rzeczywiste wyniki pipeline'u tam nie są!
 

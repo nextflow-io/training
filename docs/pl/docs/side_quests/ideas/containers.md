@@ -9,7 +9,7 @@
 ## 1. Jak znaleźć lub stworzyć obrazy kontenerów
 
 Niektórzy twórcy oprogramowania udostępniają obrazy kontenerów dla swojego oprogramowania w rejestrach kontenerów, takich jak Docker Hub, ale wielu tego nie robi.
-W tej opcjonalnej sekcji pokażemy Ci dwa sposoby na uzyskanie obrazu kontenera dla narzędzi, których chcesz użyć w swoich potokach Nextflow: za pomocą Seqera Containers oraz samodzielne budowanie obrazu kontenera.
+W tej opcjonalnej sekcji pokażemy Ci dwa sposoby na uzyskanie obrazu kontenera dla narzędzi, których chcesz użyć w Swoich pipeline'ach Nextflow: za pomocą Seqera Containers oraz samodzielne budowanie obrazu kontenera.
 
 Będziesz uzyskiwać/budować obraz kontenera dla pakietu pip `quote`, który zostanie użyty w ćwiczeniu na końcu tej sekcji.
 
@@ -99,7 +99,7 @@ docker run --rm quote:latest quote "Margaret Oakley Dayhoff"
 
 ### Podsumowanie
 
-Nauczyłeś się dwóch różnych sposobów uzyskiwania obrazu kontenera dla narzędzia, którego chcesz użyć w swoich potokach Nextflow: za pomocą Seqera Containers oraz samodzielnego budowania obrazu kontenera.
+Nauczyłeś się dwóch różnych sposobów uzyskiwania obrazu kontenera dla narzędzia, którego chcesz użyć w Swoich pipeline'ach Nextflow: za pomocą Seqera Containers oraz samodzielnego budowania obrazu kontenera.
 
 ### Co dalej?
 
@@ -111,7 +111,7 @@ Możesz również kontynuować opcjonalne ćwiczenie, aby pobierać cytaty pioni
 ## 2. Spraw, aby krowa cytowała słynnych naukowców
 
 Ta sekcja zawiera dodatkowe ćwiczenia, aby przećwiczyć to, czego się dotychczas nauczyłeś.
-Wykonanie tych ćwiczeń _nie jest wymagane_ do zrozumienia późniejszych części szkolenia, ale stanowi zabawny sposób na utrwalenie swojej wiedzy poprzez wymyślenie, jak sprawić, aby krowa cytowała słynnych naukowców.
+Wykonanie tych ćwiczeń _nie jest wymagane_ do zrozumienia późniejszych części szkolenia, ale stanowi zabawny sposób na utrwalenie Swojej wiedzy poprzez wymyślenie, jak sprawić, aby krowa cytowała słynnych naukowców.
 
 ```console title="cowsay-output-Grace-Hopper.txt"
   _________________________________________________
@@ -157,9 +157,9 @@ Dla obrazu kontenera `quote` możesz użyć tego, który zbudowałeś samodzieln
 
 Rozwiązanie tego ćwiczenia znajdziesz w pliku `containers/solutions/hello-containers-4.1.nf`.
 
-### 2.2. Zmodyfikuj swój potok Nextflow, aby umożliwić jego wykonanie w trybach `quote` i `sayHello`.
+### 2.2. Zmodyfikuj Swój pipeline Nextflow, aby umożliwić jego wykonanie w trybach `quote` i `sayHello`.
 
-Dodaj logikę rozgałęzienia do swojego potoku, aby umożliwić mu akceptowanie wejść przeznaczonych zarówno dla `quote`, jak i `sayHello`.
+Dodaj logikę rozgałęzienia do Swojego pipeline'u, aby umożliwić mu akceptowanie wejść przeznaczonych zarówno dla `quote`, jak i `sayHello`.
 Oto przykład użycia instrukcji `if` w workflow Nextflow:
 
 ```groovy title="hello-containers.nf"
@@ -182,7 +182,7 @@ Rozwiązanie tego ćwiczenia znajdziesz w pliku `containers/solutions/hello-cont
 
 ### Podsumowanie
 
-Wiesz już, jak używać kontenerów w Nextflow do uruchamiania procesów oraz jak zbudować logikę rozgałęzienia w swoich potokach!
+Wiesz już, jak używać kontenerów w Nextflow do uruchamiania procesów oraz jak zbudować logikę rozgałęzienia w Swoich pipeline'ach!
 
 ### Co dalej?
 

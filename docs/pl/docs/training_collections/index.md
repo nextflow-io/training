@@ -1,4 +1,3 @@
-```markdown
 ---
 title: Kolekcje Szkoleń
 hide:
@@ -28,4 +27,3 @@ Wymagania techniczne i konfigurację środowiska można znaleźć w mini-kursie 
 
 Aktywnie pracujemy nad rozwojem dodatkowych Side Quests i Kolekcji.
 Prosimy o sugerowanie tematów, które Twoim zdaniem warto byłoby uwzględnić w Kolekcji, poprzez publikację na [forum społeczności w sekcji Szkolenia](https://community.seqera.io/c/training/).
-```

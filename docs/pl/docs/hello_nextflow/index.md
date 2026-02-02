@@ -11,7 +11,7 @@ additional_information:
     - Znajdowanie i interpretowanie wyjść (wyników) i plików dziennika generowanych przez Nextflow
     - Rozwiązywanie podstawowych problemów
     - Budowanie prostego wieloetapowego workflow'u z podstawowych komponentów Nextflow
-    - Rozróżnianie między podstawowymi typami channel factories i operatorów oraz efektywne ich wykorzystywanie w prostym workflow'ie
+    - Rozróżnianie między podstawowymi typami fabryk kanałów i operatorów oraz efektywne ich wykorzystywanie w prostym workflow'ie
     - Konfigurowanie wykonywania pipeline'u do uruchamiania na popularnych platformach obliczeniowych, w tym HPC i chmurze
     - Stosowanie najlepszych praktyk dotyczących powtarzalności, przenośności i ponownego wykorzystania kodu, które czynią pipeline'y FAIR, w tym modularność kodu i kontenery oprogramowania
   audience_prerequisites:
@@ -52,7 +52,7 @@ Aby uniknąć przytłoczenia Cię koncepcjami i kodem, podzieliliśmy to na sze�
 | [Część 5: Hello Containers](./05_hello_containers.md) | Używanie kontenerów jako mechanizmu zarządzania zależnościami oprogramowania i zwiększenia powtarzalności                   | 60 min         |
 | [Część 6: Hello Config](./06_hello_config.md)         | Dostosowywanie zachowania pipeline'u i optymalizacja użycia w różnych środowiskach obliczeniowych                           | 60 min         |
 
-Pod koniec tego kursu będziesz dobrze przygotowany do podjęcia kolejnych kroków w swojej drodze do tworzenia powtarzalnych workflow'ów dla Twoich potrzeb obliczeniowych w nauce.
+Pod koniec tego kursu będziesz dobrze przygotowany do podjęcia kolejnych kroków w Swojej drodze do tworzenia powtarzalnych workflow'ów dla Twoich potrzeb obliczeniowych w nauce.
 
 Gotowy do rozpoczęcia kursu?
 

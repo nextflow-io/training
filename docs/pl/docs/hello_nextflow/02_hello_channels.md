@@ -89,8 +89,8 @@ Zamierzamy utworzyć **kanał** do przekazania zmiennego wejścia do procesu `sa
 
 ### 1.1. Utwórz kanał wejściowy
 
-Istnieje wiele **channel factories**, których możemy użyć do skonfigurowania kanału.
-Aby na razie zachować prostotę, użyjemy najbardziej podstawowej channel factory o nazwie `channel.of`, która utworzy kanał zawierający pojedynczą wartość.
+Istnieje wiele **fabryk kanałów**, których możemy użyć do skonfigurowania kanału.
+Aby na razie zachować prostotę, użyjemy najbardziej podstawowej fabryki kanałów o nazwie `channel.of`, która utworzy kanał zawierający pojedynczą wartość.
 Funkcjonalnie będzie to podobne do tego, jak mieliśmy to skonfigurowane wcześniej, ale zamiast tego, żeby Nextflow tworzył kanał niejawnie, robimy to teraz jawnie.
 
 Oto linia kodu, której użyjemy:
@@ -99,7 +99,7 @@ Oto linia kodu, której użyjemy:
 greeting_ch = channel.of('Hello Channels!')
 ```
 
-To tworzy kanał o nazwie `greeting_ch` używając channel factory `channel.of()`, która konfiguruje prosty kanał kolejki, i ładuje ciąg `'Hello Channels!'` jako wartość pozdrowienia.
+To tworzy kanał o nazwie `greeting_ch` używając fabryki kanałów `channel.of()`, która konfiguruje prosty kanał kolejki, i ładuje ciąg `'Hello Channels!'` jako wartość pozdrowienia.
 
 <figure class="excalidraw">
 --8<-- "docs/hello_nextflow/img/hello-pipeline-channel.svg"
@@ -109,7 +109,7 @@ To tworzy kanał o nazwie `greeting_ch` używając channel factory `channel.of()
 
     Tymczasowo wracamy do zakodowanych na sztywno ciągów zamiast używać parametru CLI ze względu na czytelność. Wrócimy do używania parametrów CLI, gdy omówimy, co dzieje się na poziomie kanału.
 
-W bloku workflow dodaj kod channel factory:
+W bloku workflow dodaj kod fabryki kanałów:
 
 === "Po"
 
@@ -285,7 +285,7 @@ Tutaj mamy tylko jeden element, ale gdy zaczniemy ładować wiele wartości do k
 
 ### Podsumowanie
 
-Wiesz, jak używać podstawowej channel factory do dostarczenia wejścia do procesu.
+Wiesz, jak używać podstawowej fabryki kanałów do dostarczenia wejścia do procesu.
 
 ### Co dalej?
 
@@ -299,7 +299,7 @@ Workflow'y zazwyczaj działają na partiach wejść, które mają być przetwarz
 
 ### 2.1. Załaduj wiele pozdrowień do kanału wejściowego
 
-Dogodnie, channel factory `channel.of()`, której używamy, chętnie przyjmuje więcej niż jedną wartość, więc nie musimy jej w ogóle modyfikować.
+Dogodnie, fabryka kanałów `channel.of()`, której używamy, chętnie przyjmuje więcej niż jedną wartość, więc nie musimy jej w ogóle modyfikować.
 Możemy po prostu załadować wiele wartości do kanału.
 
 Niech to będą `'Hello'`, `'Bonjour'` i `'Holà'`.
@@ -554,7 +554,7 @@ W bloku procesu wprowadź następujące zmiany kodu:
     }
     ```
 
-Upewnij się, że zastąpisz `output.txt` zarówno w definicji output, jak i w bloku polecenia `script:`.
+Upewnij się, że zastąpisz `output.txt` zarówno w definicji `output`, jak i w bloku polecenia `script:`.
 
 !!! tip "Wskazówka"
 
@@ -620,7 +620,7 @@ Sukces! Teraz możemy dodawać tyle pozdrowień, ile chcemy, bez martwienia się
     W praktyce nazywanie plików na podstawie samych danych wejściowych jest prawie zawsze niepraktyczne.
     Lepszym sposobem na generowanie dynamicznych nazw plików jest przekazywanie metadanych do procesu wraz z plikami wejściowymi.
     Metadane są zazwyczaj dostarczane przez 'arkusz próbek' lub odpowiedniki.
-    Nauczysz się, jak to zrobić później w swoim szkoleniu Nextflow (zobacz [Side quest dotyczący metadanych](../side_quests/metadata.md)).
+    Nauczysz się, jak to zrobić później w Swoim szkoleniu Nextflow (zobacz [Side quest dotyczący metadanych](../side_quests/metadata.md)).
 
 ### Podsumowanie
 
@@ -634,7 +634,7 @@ Naucz się używać operatora do transformowania zawartości kanału.
 
 ## 3. Dostarcz wiele wejść przez tablicę
 
-Właśnie pokazaliśmy Ci, jak obsługiwać wiele elementów wejściowych, które były zakodowane na sztywno bezpośrednio w channel factory.
+Właśnie pokazaliśmy Ci, jak obsługiwać wiele elementów wejściowych, które były zakodowane na sztywno bezpośrednio w fabryce kanałów.
 Co jeśli chcielibyśmy dostarczyć te wiele wejść w inny sposób?
 
 Na przykład, wyobraź sobie, że skonfigurowaliśmy zmienną wejściową zawierającą tablicę elementów w ten sposób:
@@ -652,7 +652,7 @@ Dowiedzmy się.
 ### 3.1. Dostarcz tablicę wartości jako wejście do kanału
 
 Zdrowy rozsądek sugeruje, że powinniśmy móc po prostu przekazać tablicę wartości zamiast pojedynczej wartości.
-Spróbujmy; będziemy musieli skonfigurować zmienną wejściową i załadować ją do channel factory.
+Spróbujmy; będziemy musieli skonfigurować zmienną wejściową i załadować ją do fabryki kanałów.
 
 #### 3.1.1. Skonfiguruj zmienną wejściową
 
@@ -696,9 +696,9 @@ Weźmy zmienną `greetings_array`, którą właśnie sobie wyobraziłeś, i uczy
 
 To jeszcze nie jest funkcjonalne, dodaliśmy tylko deklarację tablicy.
 
-#### 3.1.2. Ustaw tablicę pozdrowień jako wejście do channel factory
+#### 3.1.2. Ustaw tablicę pozdrowień jako wejście do fabryki kanałów
 
-Teraz zamierzamy zastąpić wartości `'Hello','Bonjour','Holà'` aktualnie zakodowane na sztywno w channel factory tablicą `greetings_array`, którą właśnie utworzyliśmy.
+Teraz zamierzamy zastąpić wartości `'Hello','Bonjour','Holà'` aktualnie zakodowane na sztywno w fabryce kanałów tablicą `greetings_array`, którą właśnie utworzyliśmy.
 
 W bloku workflow wprowadź następującą zmianę:
 
@@ -803,7 +803,7 @@ Jeśli przejrzysz [listę operatorów](https://www.nextflow.io/docs/latest/refer
 
 #### 3.2.1. Dodaj operator `flatten()`
 
-Aby zastosować operator `flatten()` do naszego kanału wejściowego, dodajemy go do deklaracji channel factory.
+Aby zastosować operator `flatten()` do naszego kanału wejściowego, dodajemy go do deklaracji fabryki kanałów.
 
 W bloku workflow wprowadź następującą zmianę kodu:
 
@@ -846,7 +846,7 @@ W bloku workflow wprowadź następującą zmianę kodu:
     }
     ```
 
-Tutaj dodaliśmy operator w następnej linii dla czytelności, ale możesz dodać operatory w tej samej linii co channel factory, jeśli wolisz, w ten sposób:
+Tutaj dodaliśmy operator w następnej linii dla czytelności, ale możesz dodać operatory w tej samej linii co fabryka kanałów, jeśli wolisz, w ten sposób:
 `greeting_ch = channel.of(greetings_array).view().flatten()`
 
 #### 3.2.2. Doprecyzuj instrukcje `view()`
@@ -946,7 +946,7 @@ Co ważne, oznacza to, że każdy element może być teraz przetwarzany osobno p
 
 !!! tip "Wskazówka"
 
-    Technicznie możliwe jest osiągnięcie tych samych wyników przez użycie innej channel factory, [`channel.fromList`](https://nextflow.io/docs/latest/reference/channel.html#fromlist), która zawiera niejawny krok mapowania w swojej operacji.
+    Technicznie możliwe jest osiągnięcie tych samych wyników przez użycie innej fabryki kanałów, [`channel.fromList`](https://nextflow.io/docs/latest/reference/channel.html#fromlist), która zawiera niejawny krok mapowania w Swojej operacji.
     Tutaj zdecydowaliśmy się tego nie używać, aby zademonstrować użycie operatora na prostym przypadku użycia.
 
 ### Podsumowanie
@@ -986,7 +986,7 @@ Zobaczmy, jak możemy to zrobić.
 Aby zacząć, musimy wprowadzić dwie kluczowe zmiany w skrypcie:
 
 - Przełączyć parametr wejściowy, aby wskazywał na plik CSV
-- Przełączyć channel factory na taką, która jest zaprojektowana do obsługi pliku
+- Przełączyć fabrykę kanałów na taką, która jest zaprojektowana do obsługi pliku
 
 #### 4.1.1. Przełącz parametr wejściowy, aby wskazywał na plik CSV
 
@@ -1016,12 +1016,12 @@ Wprowadź następującą edycję deklaracji parametru:
     ```
 
 To zakłada, że plik jest współlokalizowany z kodem workflow'u.
-Nauczysz się, jak radzić sobie z innymi lokalizacjami danych później w swojej podróży z Nextflow.
+Nauczysz się, jak radzić sobie z innymi lokalizacjami danych później w Swojej podróży z Nextflow.
 
-#### 4.1.2. Przełącz na channel factory zaprojektowaną do obsługi pliku
+#### 4.1.2. Przełącz na fabrykę kanałów zaprojektowaną do obsługi pliku
 
-Ponieważ teraz chcemy użyć pliku zamiast prostych ciągów jako wejścia, nie możemy użyć channel factory `channel.of()` z poprzedniego.
-Musimy przełączyć się na użycie nowej channel factory, [`channel.fromPath()`](https://www.nextflow.io/docs/latest/reference/channel.html#channel-path), która ma wbudowaną funkcjonalność do obsługi ścieżek plików.
+Ponieważ teraz chcemy użyć pliku zamiast prostych ciągów jako wejścia, nie możemy użyć fabryki kanałów `channel.of()` z poprzedniego.
+Musimy przełączyć się na użycie nowej fabryki kanałów, [`channel.fromPath()`](https://www.nextflow.io/docs/latest/reference/channel.html#channel-path), która ma wbudowaną funkcjonalność do obsługi ścieżek plików.
 
 W bloku workflow wprowadź następującą zmianę kodu:
 
@@ -1070,7 +1070,7 @@ Zakomentowaliśmy też `flatten()` i drugą instrukcję `view()`.
 
 #### 4.1.3. Uruchom workflow
 
-Spróbujmy uruchomić workflow z nową channel factory i plikiem wejściowym.
+Spróbujmy uruchomić workflow z nową fabryką kanałów i plikiem wejściowym.
 
 ```bash
 nextflow run hello-channels.nf
@@ -1126,7 +1126,7 @@ Przeglądając ponownie listę operatorów, znajdujemy [`splitCsv()`](https://ww
 
 #### 4.2.1. Zastosuj `splitCsv()` do kanału
 
-Aby zastosować operator, dodajemy go do linii channel factory, jak poprzednio.
+Aby zastosować operator, dodajemy go do linii fabryki kanałów, jak poprzednio.
 
 W bloku workflow wprowadź następującą zmianę kodu, aby zastąpić `flatten()` (zakomentowane) przez `splitCsv()`:
 
@@ -1349,7 +1349,7 @@ Czym jest kanał w Nextflow?
 - [ ] Specyfikacją ścieżki pliku
 - [ ] Definicją procesu
 - [x] Strukturą podobną do kolejki do przekazywania danych między procesami
-- [ ] Ustawieniem konfiguracji
+- [ ] Ustawieniem konfiguracyjnym
 
 Dowiedz się więcej: [1.1. Utwórz kanał wejściowy](#11-utworz-kanal-wejsciowy)
 </quiz>

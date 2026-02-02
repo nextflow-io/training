@@ -9,7 +9,7 @@ Jeśli jeszcze tego nie zrobiłeś, zrób to teraz, najlepiej w drugim oknie lub
 
 !!!warning "Wymagania dotyczące rozmiaru maszyny"
 
-    Upewnij się, że wybierasz **maszynę 8-rdzeniową** podczas tworzenia Codespace dla tego kursu szkoleniowego. Przepływy pracy bioimagingu wymagają dodatkowych zasobów obliczeniowych.
+    Upewnij się, że wybierasz **maszynę 8-rdzeniową** podczas tworzenia Codespace dla tego kursu szkoleniowego. Workflow'e bioimagingu wymagają dodatkowych zasobów obliczeniowych.
 
 ## GitHub Codespaces
 
@@ -18,8 +18,8 @@ Jednak potrzebujesz (bezpłatnego) konta GitHub, aby się zalogować, a jeśli n
 
 ## Wstępne pobieranie obrazów Docker
 
-Gdy już otworzysz swój Codespace, pobierzmy wstępnie wszystkie obrazy Docker, których będziemy potrzebować do tego kursu szkoleniowego.
-Zaoszczędzi to czas później i zapewni płynne wykonywanie przepływów pracy.
+Gdy już otworzysz Swój Codespace, pobierzmy wstępnie wszystkie obrazy Docker, których będziemy potrzebować do tego kursu szkoleniowego.
+Zaoszczędzi to czas później i zapewni płynne wykonywanie workflow'ów.
 
 Otwórz nową kartę terminala i uruchom następujące polecenie:
 
@@ -32,7 +32,7 @@ Możesz kontynuować resztę orientacji, podczas gdy to się wykonuje.
 
 !!!tip
 
-    Flaga `-stub` pozwala na szybkie uruchomienie pipeline bez przetwarzania rzeczywistych danych, co jest idealne do pobierania obrazów. Możesz monitorować postęp w karcie terminala.
+    Flaga `-stub` pozwala na szybkie uruchomienie pipeline'u bez przetwarzania rzeczywistych danych, co jest idealne do pobierania obrazów. Możesz monitorować postęp w karcie terminala.
 
 ## Katalog roboczy
 

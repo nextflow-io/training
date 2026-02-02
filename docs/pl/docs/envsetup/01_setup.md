@@ -86,7 +86,7 @@ Kliknij sesję, aby ją wznowić.
 
 ![List GitHub Codespace sessions](img/codespaces_list.png)
 
-Jeśli zapisałeś URL swojego poprzedniego środowiska GitHub Codespaces, możesz po prostu otworzyć go w przeglądarce.
+Jeśli zapisałeś URL Swojego poprzedniego środowiska GitHub Codespaces, możesz po prostu otworzyć go w przeglądarce.
 Alternatywnie kliknij ten sam przycisk, którego użyłeś do jego utworzenia:
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)

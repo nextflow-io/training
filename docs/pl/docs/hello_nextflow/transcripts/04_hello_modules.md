@@ -18,9 +18,9 @@ Cześć, witamy w czwartej części szkolenia Hello Nextflow.
 
 Ten rozdział nazywa się Hello Modules i będziemy mówić o tym, jak modularyzować kod Nextflow. Zamierzamy wziąć nasz jeden skrypt i podzielić go na osobne pliki.
 
-To sprawia, że kod jest łatwiejszy w nawigacji i utrzymaniu, gdy Twój przepływ pracy się powiększa, a także umożliwia udostępnianie modułów między pipelinami, dzięki czemu jeśli masz wiele pipelinów używających tego samego narzędzia, musisz napisać ten proces tylko raz.
+To sprawia, że kod jest łatwiejszy w nawigacji i utrzymaniu, gdy Twój workflow się powiększa, a także umożliwia udostępnianie modułów między pipeline'ami, dzięki czemu jeśli masz wiele pipeline'ów używających tego samego narzędzia, musisz napisać ten proces tylko raz.
 
-Klasycznym przykładem tego jest repozytorium nf-core modules, które zawiera tysiące różnych gotowych do użycia narzędzi w modułach, które możesz zainstalować i użyć w swoim przepływie pracy.
+Klasycznym przykładem tego jest repozytorium nf-core modules, które zawiera tysiące różnych gotowych do użycia narzędzi w modułach, które możesz zainstalować i użyć w Swoim workflow.
 
 Nextflow może również pracować z sub workflows, które są jak moduły, ale mają wiele procesów. To wykracza poza zakres tego szkolenia, ale działa to w zasadzie w ten sam sposób.
 
@@ -70,7 +70,7 @@ Kilka sztuczek tutaj. Rozszerzenie VS Code jest w tym mądre. Rozpoznaje tę śc
 
 Ta nazwa procesu jest teraz używana przez workflow poniżej i możemy zrobić to samo tutaj. Pokazuje nam trochę informacji o tym procesie i znowu, mogę przytrzymać option, kliknąć na to i otworzy się w edytorze.
 
-Więc to naprawdę szybki sposób, gdy masz wiele plików dla swoich różnych procesów, aby szybko nawigować po bazie kodu w VS Code.
+Więc to naprawdę szybki sposób, gdy masz wiele plików dla Swoich różnych procesów, aby szybko nawigować po bazie kodu w VS Code.
 
 Dobrze. To w zasadzie wszystko w tym rozdziale. Teraz po prostu robimy to samo dla innych procesów.
 

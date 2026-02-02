@@ -5,7 +5,7 @@
 Środowisko szkoleniowe zawiera wszystkie oprogramowanie, kod i dane niezbędne do pracy z tym kursem szkoleniowym, więc nie musisz niczego instalować samodzielnie.
 Jednak potrzebujesz (darmowego) konta, aby się zalogować, i powinieneś poświęcić kilka minut na zapoznanie się z interfejsem.
 
-Jeśli jeszcze tego nie zrobiłeś, ukończ mini-kurs [Konfiguracja środowiska](../../envsetup/) przed dalszym postępowaniem.
+Jeśli jeszcze tego nie zrobiłeś, ukończ mini-kurs [Konfiguracja środowiska](../../envsetup/) przed dalszą pracą.
 
 ## Dostarczone materiały
 
@@ -69,7 +69,7 @@ tree . -L 3
 
 **Oto podsumowanie tego, co powinieneś wiedzieć, aby zacząć:**
 
-- **Plik `rnaseq.nf`** to zarys skryptu workflow, który będziemy rozwijać.
+- **Plik `rnaseq.nf`** to zarys skryptu workflow'u, który będziemy rozwijać.
 
 - **Plik `nextflow.config`** to plik konfiguracyjny, który ustawia minimalne właściwości środowiska. Na razie możesz go zignorować.
 
@@ -79,7 +79,7 @@ tree . -L 3
   - _Dane RNAseq_, które zostały ograniczone do małego regionu, aby zmniejszyć rozmiar plików, w katalogu `reads/`.
   - _Pliki CSV_ zawierające identyfikatory i ścieżki przykładowych plików danych, do przetwarzania wsadowego.
 
-- **Katalog `solutions`** zawiera ukończone skrypty workflow i moduły, które są wynikiem każdego etapu kursu.
+- **Katalog `solutions`** zawiera ukończone skrypty workflow'ów i moduły, które są wynikiem każdego etapu kursu.
   Mają one służyć jako punkt odniesienia do sprawdzenia Twojej pracy i rozwiązywania ewentualnych problemów.
   Numer w nazwie pliku odpowiada etapowi odpowiedniej części kursu.
 

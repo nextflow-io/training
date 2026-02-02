@@ -396,7 +396,7 @@ Wrócisz do normalnej powłoki.
 
 ### Podsumowanie
 
-Wiesz już, jak pobrać kontener i uruchomić go jednorazowo lub interaktywnie. Wiesz również, jak udostępnić swoje dane z wnętrza kontenera, co pozwala wypróbować każde interesujące Cię narzędzie na prawdziwych danych bez konieczności instalowania oprogramowania na swoim systemie.
+Wiesz już, jak pobrać kontener i uruchomić go jednorazowo lub interaktywnie. Wiesz również, jak udostępnić Swoje dane z wnętrza kontenera, co pozwala wypróbować każde interesujące Cię narzędzie na prawdziwych danych bez konieczności instalowania oprogramowania na Swoim systemie.
 
 ### Co dalej?
 
@@ -406,7 +406,7 @@ Naucz się używać kontenerów do wykonywania procesów Nextflow.
 
 ## 2. Używaj kontenerów w Nextflow
 
-Nextflow ma wbudowaną obsługę uruchamiania procesów wewnątrz kontenerów, co pozwala uruchamiać narzędzia, których nie masz zainstalowanych w swoim środowisku obliczeniowym.
+Nextflow ma wbudowaną obsługę uruchamiania procesów wewnątrz kontenerów, co pozwala uruchamiać narzędzia, których nie masz zainstalowanych w Swoim środowisku obliczeniowym.
 Oznacza to, że możesz użyć dowolnego obrazu kontenera do uruchamiania procesów, a Nextflow zajmie się pobieraniem obrazu, montowaniem danych i uruchamianiem procesu wewnątrz.
 
 Aby to zademonstrować, dodamy krok `cowpy` do pipeline, który rozwijaliśmy, po kroku `collectGreetings`.

@@ -2,11 +2,11 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Nextflow zapewnia potężne narzędzia do elastycznej pracy z danymi. Kluczową możliwością jest dzielenie danych na różne strumienie, a następnie grupowanie powiązanych elementów z powrotem. Jest to szczególnie cenne w przepływach pracy bioinformatycznych, gdzie trzeba przetwarzać różne typy próbek oddzielnie, a następnie łączyć wyniki do analizy.
+Nextflow zapewnia potężne narzędzia do elastycznej pracy z danymi. Kluczową możliwością jest dzielenie danych na różne strumienie, a następnie grupowanie powiązanych elementów z powrotem. Jest to szczególnie cenne w workflow'ach bioinformatycznych, gdzie trzeba przetwarzać różne typy próbek oddzielnie, a następnie łączyć wyniki do analizy.
 
-Pomyśl o tym jak o sortowaniu poczty: oddzielasz listy według miejsca przeznaczenia, przetwarzasz każdy stos inaczej, a następnie łączysz ponownie elementy idące do tej samej osoby. Nextflow używa specjalnych operatorów do wykonania tego z danymi naukowymi. To podejście jest również powszechnie znane jako wzorzec **scatter/gather** w obliczeniach rozproszonych i przepływach pracy bioinformatycznych.
+Pomyśl o tym jak o sortowaniu poczty: oddzielasz listy według miejsca przeznaczenia, przetwarzasz każdy stos inaczej, a następnie łączysz ponownie elementy idące do tej samej osoby. Nextflow używa specjalnych operatorów do wykonania tego z danymi naukowymi. To podejście jest również powszechnie znane jako wzorzec **scatter/gather** w obliczeniach rozproszonych i workflow'ach bioinformatycznych.
 
-System kanałów Nextflow jest sercem tej elastyczności. Kanały łączą różne części przepływu pracy, umożliwiając przepływ danych przez analizę. Możesz utworzyć wiele kanałów z jednego źródła danych, przetwarzać każdy kanał inaczej, a następnie scalać kanały z powrotem, gdy jest to potrzebne. To podejście pozwala projektować przepływy pracy, które naturalnie odzwierciedlają rozgałęziające się i zbiegające się ścieżki złożonych analiz bioinformatycznych.
+System kanałów Nextflow jest sercem tej elastyczności. Kanały łączą różne części workflow'u, umożliwiając przepływ danych przez analizę. Możesz utworzyć wiele kanałów z jednego źródła danych, przetwarzać każdy kanał inaczej, a następnie scalać kanały z powrotem, gdy jest to potrzebne. To podejście pozwala projektować workflow'y, które naturalnie odzwierciedlają rozgałęziające się i zbiegające się ścieżki złożonych analiz bioinformatycznych.
 
 ### Cele szkolenia
 
@@ -22,7 +22,7 @@ Pod koniec tej misji pobocznej będziesz w stanie efektywnie rozdzielać i łąc
 - Optymalizacja struktury danych za pomocą `subMap` i strategii deduplikacji
 - Budowanie funkcji wielokrotnego użytku z nazwanymi domknięciami, które pomogą Ci manipulować strukturami kanałów
 
-Te umiejętności pomogą Ci budować przepływy pracy, które mogą efektywnie obsługiwać wiele plików wejściowych i różne typy danych, zachowując czystą, łatwą w utrzymaniu strukturę kodu.
+Te umiejętności pomogą Ci budować workflow'y, które mogą efektywnie obsługiwać wiele plików wejściowych i różne typy danych, zachowując czystą, łatwą w utrzymaniu strukturę kodu.
 
 ### Wymagania wstępne
 
@@ -31,7 +31,7 @@ Przed podjęciem się tej misji pobocznej powinieneś:
 - Ukończyć tutorial [Hello Nextflow](../hello_nextflow/README.md) lub równoważny kurs dla początkujących.
 - Swobodnie posługiwać się podstawowymi koncepcjami i mechanizmami Nextflow (procesy, kanały, operatory, praca z plikami, metadane)
 
-**Opcjonalnie:** Zalecamy najpierw ukończenie misji pobocznej [Metadane w przepływach pracy](./metadata.md).
+**Opcjonalnie:** Zalecamy najpierw ukończenie misji pobocznej [Metadane w workflow'ach](./metadata.md).
 Obejmuje ona podstawy odczytu plików CSV za pomocą `splitCsv` i tworzenia map meta, których będziemy tu intensywnie używać.
 
 ---
@@ -60,7 +60,7 @@ code .
 
 #### Przejrzyj materiały
 
-Znajdziesz główny plik przepływu pracy i katalog `data` zawierający arkusz próbek o nazwie `samplesheet.csv`.
+Znajdziesz główny plik workflow'u i katalog `data` zawierający arkusz próbek o nazwie `samplesheet.csv`.
 
 ```console title="Zawartość katalogu"
 .
@@ -96,7 +96,7 @@ Dla pacjenta A mamy konkretnie dwa zestawy replikatów technicznych (powtórzeń
 
 #### Przejrzyj zadanie
 
-Twoim wyzwaniem jest napisanie przepływu pracy Nextflow, który:
+Twoim wyzwaniem jest napisanie workflow'u Nextflow, który:
 
 1. **Odczyta** dane próbek z pliku CSV i ustrukturyzuje je za pomocą map meta
 2. **Rozdzieli** próbki na różne kanały na podstawie typu (normalny vs nowotworowy)
@@ -123,7 +123,7 @@ Jeśli możesz zaznaczyć wszystkie pola, jesteś gotowy do działania.
 
 ### 1.1. Odczytanie danych próbek za pomocą `splitCsv` i utworzenie map meta
 
-Zacznijmy od odczytania danych próbek za pomocą `splitCsv` i uporządkowania ich w wzorzec mapy meta. W pliku `main.nf` zobaczysz, że już zaczęliśmy przepływ pracy.
+Zacznijmy od odczytania danych próbek za pomocą `splitCsv` i uporządkowania ich w wzorzec mapy meta. W pliku `main.nf` zobaczysz, że już zaczęliśmy workflow.
 
 ```groovy title="main.nf" linenums="1" hl_lines="2"
 workflow {
@@ -135,7 +135,7 @@ workflow {
 
     W całym tym tutorialu będziemy używać prefiksu `ch_` dla wszystkich zmiennych kanałów, aby wyraźnie wskazać, że są to kanały Nextflow.
 
-Jeśli ukończyłeś misję poboczną [Metadane w przepływach pracy](./metadata.md), rozpoznasz ten wzorzec. Użyjemy `splitCsv` do odczytu CSV i natychmiastowego ustrukturyzowania danych za pomocą mapy meta, aby oddzielić metadane od ścieżek plików.
+Jeśli ukończyłeś misję poboczną [Metadane w workflow'ach](./metadata.md), rozpoznasz ten wzorzec. Użyjemy `splitCsv` do odczytu CSV i natychmiastowego ustrukturyzowania danych za pomocą mapy meta, aby oddzielić metadane od ścieżek plików.
 
 !!! info
 
@@ -221,7 +221,7 @@ Możemy użyć [operatora `filter`](https://www.nextflow.io/docs/latest/operator
             .view()
     ```
 
-Uruchom przepływ pracy ponownie, aby zobaczyć przefiltrowany wynik:
+Uruchom workflow ponownie, aby zobaczyć przefiltrowany wynik:
 
 ```bash
 nextflow run main.nf
@@ -364,7 +364,7 @@ Rozdzieliliśmy teraz próbki normalne i nowotworowe na dwa różne kanały. Nas
 
 ## 3. Łączenie kanałów według identyfikatorów
 
-W poprzedniej sekcji rozdzieliliśmy próbki normalne i nowotworowe na dwa różne kanały. Mogą one być przetwarzane niezależnie przy użyciu określonych procesów lub przepływów pracy na podstawie ich typu. Ale co się dzieje, gdy chcemy porównać próbki normalne i nowotworowe tego samego pacjenta? W tym momencie musimy połączyć je z powrotem, upewniając się, że dopasowujemy próbki na podstawie ich pola `id`.
+W poprzedniej sekcji rozdzieliliśmy próbki normalne i nowotworowe na dwa różne kanały. Mogą one być przetwarzane niezależnie przy użyciu określonych procesów lub workflow'ów na podstawie ich typu. Ale co się dzieje, gdy chcemy porównać próbki normalne i nowotworowe tego samego pacjenta? W tym momencie musimy połączyć je z powrotem, upewniając się, że dopasowujemy próbki na podstawie ich pola `id`.
 
 Nextflow zawiera wiele metod łączenia kanałów, ale w tym przypadku najbardziej odpowiednim operatorem jest [`join`](https://www.nextflow.io/docs/latest/operator.html#join). Jeśli znasz SQL, działa podobnie do operacji `JOIN`, gdzie określamy klucz, według którego łączymy, i typ łączenia do wykonania.
 
@@ -553,7 +553,7 @@ Zacznijmy od utworzenia nowego klucza łączącego. Możemy to zrobić w ten sam
             .map { meta, file -> [meta.id, meta, file] }
     ```
 
-Teraz powinniśmy zobaczyć, że łączenie odbywa się, ale przy użyciu zarówno pól `id`, jak i `repeat`. Uruchom przepływ pracy:
+Teraz powinniśmy zobaczyć, że łączenie odbywa się, ale przy użyciu zarówno pól `id`, jak i `repeat`. Uruchom workflow:
 
 ```bash
 nextflow run main.nf
@@ -660,7 +660,7 @@ Zdefiniowaliśmy transformację map jako nazwaną zmienną, którą możemy pono
 
 Zauważ, że również konwertujemy ścieżkę pliku na obiekt Path za pomocą `file()`, aby każdy proces otrzymujący ten kanał mógł prawidłowo obsłużyć plik (po więcej informacji zobacz [Praca z plikami](./working_with_files.md)).
 
-Zaimplementujmy domknięcie w naszym przepływie pracy:
+Zaimplementujmy domknięcie w naszym workflow'u:
 
 === "Po"
 
@@ -689,7 +689,7 @@ Zaimplementujmy domknięcie w naszym przepływie pracy:
 
     Operator `map` zmienił się z używania `{ }` na używanie `( )` do przekazania domknięcia jako argumentu. Dzieje się tak, ponieważ operator `map` oczekuje domknięcia jako argumentu, a `{ }` jest używane do definiowania anonimowego domknięcia. Podczas wywoływania nazwanego domknięcia użyj składni `( )`.
 
-Uruchom przepływ pracy jeszcze raz, aby sprawdzić, czy wszystko nadal działa:
+Uruchom workflow jeszcze raz, aby sprawdzić, czy wszystko nadal działa:
 
 ```bash
 nextflow run main.nf
@@ -712,7 +712,7 @@ Używanie nazwanego domknięcia pozwala nam ponownie wykorzystać tę samą tran
 
 ### 3.5. Zmniejszenie duplikacji danych
 
-Mamy dużo zduplikowanych danych w naszym przepływie pracy. Każdy element w połączonych próbkach powtarza pola `id` i `repeat`. Ponieważ ta informacja jest już dostępna w kluczu grupującym, możemy uniknąć tej redundancji. Jako przypomnienie, nasza obecna struktura danych wygląda tak:
+Mamy dużo zduplikowanych danych w naszym workflow'u. Każdy element w połączonych próbkach powtarza pola `id` i `repeat`. Ponieważ ta informacja jest już dostępna w kluczu grupującym, możemy uniknąć tej redundancji. Jako przypomnienie, nasza obecna struktura danych wygląda tak:
 
 ```groovy
 [
@@ -751,7 +751,7 @@ Ponieważ pola `id` i `repeat` są dostępne w kluczu grupującym, usuńmy je z 
 
 Teraz domknięcie zwraca krotkę, gdzie pierwszy element zawiera pola `id` i `repeat`, a drugi element zawiera tylko pole `type`. To eliminuje redundancję, przechowując informacje `id` i `repeat` raz w kluczu grupującym, zachowując jednocześnie wszystkie niezbędne informacje.
 
-Uruchom przepływ pracy, aby zobaczyć, jak to wygląda:
+Uruchom workflow, aby zobaczyć, jak to wygląda:
 
 ```bash
 nextflow run main.nf
@@ -818,19 +818,19 @@ W tej sekcji nauczyłeś się:
 - **Łączenia na wielu polach**: Jak łączyć na wielu polach dla bardziej precyzyjnego dopasowania
 - **Optymalizacji struktury danych**: Jak usprawnić strukturę kanału, usuwając zbędne informacje
 
-Masz teraz przepływ pracy, który może podzielić arkusz próbek, przefiltrować próbki normalne i nowotworowe, połączyć je według identyfikatora próbki i numeru replikatu, a następnie wydrukować wyniki.
+Masz teraz workflow, który może podzielić arkusz próbek, przefiltrować próbki normalne i nowotworowe, połączyć je według identyfikatora próbki i numeru replikatu, a następnie wydrukować wyniki.
 
-Jest to powszechny wzorzec w przepływach pracy bioinformatycznych, gdzie musisz dopasować próbki lub inne typy danych po przetworzeniu niezależnie, więc jest to przydatna umiejętność. Następnie przyjrzymy się powtarzaniu próbki wielokrotnie.
+Jest to powszechny wzorzec w workflow'ach bioinformatycznych, gdzie musisz dopasować próbki lub inne typy danych po przetworzeniu niezależnie, więc jest to przydatna umiejętność. Następnie przyjrzymy się powtarzaniu próbki wielokrotnie.
 
 ## 4. Rozpraszanie próbek na interwały
 
-Kluczowym wzorcem w przepływach pracy bioinformatycznych jest dystrybucja analizy na regiony genomowe. Na przykład wywoływanie wariantów może być zrównoleglone poprzez podzielenie genomu na interwały (jak chromosomy lub mniejsze regiony). Ta strategia zrównoleglenia znacząco poprawia wydajność pipeline poprzez dystrybucję obciążenia obliczeniowego na wiele rdzeni lub węzłów, zmniejszając całkowity czas wykonania.
+Kluczowym wzorcem w workflow'ach bioinformatycznych jest dystrybucja analizy na regiony genomowe. Na przykład wywoływanie wariantów może być zrównoleglone poprzez podzielenie genomu na interwały (jak chromosomy lub mniejsze regiony). Ta strategia zrównoleglenia znacząco poprawia wydajność pipeline'u poprzez dystrybucję obciążenia obliczeniowego na wiele rdzeni lub węzłów, zmniejszając całkowity czas wykonania.
 
 W następnej sekcji pokażemy, jak rozdzielić nasze dane próbek na wiele interwałów genomowych. Sparujemy każdą próbkę z każdym interwałem, umożliwiając równoległe przetwarzanie różnych regionów genomowych. To pomnoży rozmiar naszego zbioru danych przez liczbę interwałów, tworząc wiele niezależnych jednostek analizy, które można później połączyć z powrotem.
 
 ### 4.1. Rozproszenie próbek na interwały za pomocą `combine`
 
-Zacznijmy od utworzenia kanału interwałów. Aby zachować prostotę, użyjemy tylko 3 interwałów, które zdefiniujemy ręcznie. W rzeczywistym przepływie pracy możesz je odczytać z pliku wejściowego lub nawet utworzyć kanał z wieloma plikami interwałów.
+Zacznijmy od utworzenia kanału interwałów. Aby zachować prostotę, użyjemy tylko 3 interwałów, które zdefiniujemy ręcznie. W rzeczywistym workflow'u możesz je odczytać z pliku wejściowego lub nawet utworzyć kanał z wieloma plikami interwałów.
 
 === "Po"
 
@@ -846,7 +846,7 @@ Zacznijmy od utworzenia kanału interwałów. Aby zachować prostotę, użyjemy 
         ch_joined_samples.view()
     ```
 
-Teraz pamiętaj, chcemy powtórzyć każdą próbkę dla każdego interwału. Jest to czasami określane jako iloczyn kartezjański próbek i interwałów. Możemy to osiągnąć za pomocą [operatora `combine`](https://www.nextflow.io/docs/latest/operator.html#combine). Weźmie każdy element z kanału 1 i powtórzy go dla każdego elementu w kanale 2. Dodajmy operator combine do naszego przepływu pracy:
+Teraz pamiętaj, chcemy powtórzyć każdą próbkę dla każdego interwału. Jest to czasami określane jako iloczyn kartezjański próbek i interwałów. Możemy to osiągnąć za pomocą [operatora `combine`](https://www.nextflow.io/docs/latest/operator.html#combine). Weźmie każdy element z kanału 1 i powtórzy go dla każdego elementu w kanale 2. Dodajmy operator combine do naszego workflow'u:
 
 === "Po"
 

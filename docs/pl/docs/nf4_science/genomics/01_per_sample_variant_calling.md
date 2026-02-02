@@ -2,7 +2,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-W pierwszej części tego kursu pokażemy, jak zbudować prosty pipeline do wykrywania wariantów, który aplikuje narzędzie GATK do wykrywania wariantów w indywidualnych próbkach sekwencjonowania.
+W pierwszej części tego kursu pokażemy, jak zbudować prosty pipeline do wykrywania wariantów, który stosuje narzędzie GATK do wykrywania wariantów w indywidualnych próbkach sekwencjonowania.
 
 ### Przegląd metody
 
@@ -11,7 +11,7 @@ Tutaj użyjemy narzędzi i metod zaprojektowanych do wykrywania krótkich warian
 
 ![GATK pipeline](img/gatk-pipeline.png)
 
-Pełny pipeline do wykrywania wariantów zazwyczaj obejmuje wiele kroków, w tym mapowanie do referencji (czasami nazywane dopasowaniem genomu) oraz filtrowanie i priorytetyzację wariantów.
+Pełny pipeline do wykrywania wariantów zazwyczaj obejmuje wiele kroków, w tym mapowanie do referencji (czasami nazywane wyrównaniem do genomu) oraz filtrowanie i priorytetyzację wariantów.
 Dla uproszczenia, w tej części kursu skupimy się tylko na części wykrywania wariantów.
 
 ### Zestaw danych
@@ -25,7 +25,7 @@ Udostępniamy następujące dane i powiązane zasoby:
 
 ### Workflow
 
-W tej części kursu opracujemy workflow, który wykonuje następujące czynności:
+W tej części kursu opracujesz workflow, który wykonuje następujące czynności:
 
 1. Generuje plik indeksu dla każdego pliku wejściowego BAM używając [Samtools](https://www.htslib.org/)
 2. Uruchamia GATK HaplotypeCaller na każdym pliku wejściowym BAM, aby wygenerować wykrycia wariantów dla pojedynczych próbek w formacie VCF (Variant Call Format)
@@ -43,7 +43,7 @@ W tej części kursu opracujemy workflow, który wykonuje następujące czynnoś
 
 ## 0. Rozgrzewka: Przetestuj polecenia Samtools i GATK interaktywnie
 
-Najpierw chcemy wypróbować polecenia ręcznie, zanim spróbujemy umieścić je w workflow.
+Najpierw chcemy wypróbować polecenia ręcznie, zanim spróbujemy umieścić je w workflow'ie.
 Narzędzia, których potrzebujemy (Samtools i GATK) nie są zainstalowane w środowisku GitHub Codespaces, więc użyjemy ich przez kontenery (zobacz [Hello Containers](../../hello_nextflow/05_hello_containers.md)).
 
 !!! note "Uwaga"
@@ -191,7 +191,7 @@ exit
 
 ### Podsumowanie
 
-Wiesz, jak przetestować polecenia indeksowania Samtools i wykrywania wariantów GATK w ich odpowiednich kontenerach.
+Wiesz już, jak przetestować polecenia indeksowania Samtools i wykrywania wariantów GATK w ich odpowiednich kontenerach.
 
 ### Co dalej?
 
@@ -201,8 +201,8 @@ Naucz się, jak opakować te same polecenia w dwuetapowy workflow, który używa
 
 ## 1. Napisz jednoetapowy workflow, który uruchamia Samtools index na pliku BAM
 
-Udostępniamy plik workflow, `genomics-1.nf`, który przedstawia główne części workflow.
-Nie jest funkcjonalny; jego celem jest tylko służenie jako szkielet, którego użyjesz do napisania rzeczywistego workflow.
+Udostępniamy plik workflow'u, `genomics-1.nf`, który przedstawia główne części workflow'u.
+Nie jest funkcjonalny; jego celem jest tylko służenie jako szkielet, którego użyjesz do napisania rzeczywistego workflow'u.
 
 ### 1.1. Zdefiniuj proces indeksowania
 
@@ -229,14 +229,14 @@ process SAMTOOLS_INDEX {
 }
 ```
 
-Powinieneś rozpoznać wszystkie elementy z tego, czego nauczyłeś się w Części 1 i Części 2 tej serii szkoleń.
+Rozpoznasz wszystkie elementy z tego, czego nauczyłeś się w Części 1 i Części 2 tej serii szkoleń.
 
-Ten proces będzie wymagał od nas przekazania ścieżki pliku przez wejście `input_bam`, więc skonfigurujmy to następnie.
+Ten proces będzie wymagał od nas przekazania ścieżki pliku przez wejście `input_bam`, więc skonfiguruj to następnie.
 
 ### 1.2. Dodaj deklarację parametru wejściowego
 
 Na górze pliku, w sekcji `Pipeline parameters`, deklarujemy parametr CLI o nazwie `reads_bam` i nadajemy mu wartość domyślną.
-W ten sposób możemy być leniwi i nie podawać wejścia podczas wpisywania polecenia uruchamiającego pipeline (w celach deweloperskich).
+W ten sposób możesz być leniwy i nie podawać wejścia podczas wpisywania polecenia uruchamiającego pipeline (w celach deweloperskich).
 
 ```groovy title="genomics-1.nf" linenums="3"
 /*
@@ -248,17 +248,17 @@ params {
 }
 ```
 
-Teraz mamy gotowy proces, a także parametr do podania mu wejścia do przetworzenia, więc połączmy te rzeczy razem.
+Teraz masz gotowy proces, a także parametr do podania mu wejścia do przetworzenia, więc połącz te rzeczy razem.
 
 !!! note "Uwaga"
 
     `${projectDir}` to wbudowana zmienna Nextflow, która wskazuje na katalog, w którym znajduje się obecny skrypt workflow Nextflow (`genomics-1.nf`).
 
-    To ułatwia odwoływanie się do plików, katalogów danych i innych zasobów zawartych w repozytorium workflow bez kodowania ścieżek bezwzględnych.
+    To ułatwia odwoływanie się do plików, katalogów danych i innych zasobów zawartych w repozytorium workflow'u bez kodowania ścieżek bezwzględnych.
 
 ### 1.3. Dodaj blok workflow, aby uruchomić SAMTOOLS_INDEX
 
-W bloku `workflow` musimy skonfigurować **kanał**, aby przekazać wejście do procesu `SAMTOOLS_INDEX`; następnie możemy wywołać sam proces, aby uruchomić go na zawartości tego kanału.
+W bloku `workflow` musisz skonfigurować **kanał**, aby przekazać wejście do procesu `SAMTOOLS_INDEX`; następnie możesz wywołać sam proces, aby uruchomić go na zawartości tego kanału.
 
 ```groovy title="genomics-1.nf" linenums="24"
 workflow {
@@ -275,18 +275,18 @@ workflow {
 }
 ```
 
-Blok workflow ma dwie sekcje:
+Blok workflow'u ma dwie sekcje:
 
 - `main:` zawiera operacje na kanałach i wywołania procesów
 - `publish:` deklaruje, które wyjścia powinny być opublikowane, przypisując je do nazwanych celów
 
-Zauważysz, że używamy tej samej fabryki kanałów `.fromPath`, której używaliśmy w [Hello Channels](../../hello_nextflow/02_hello_channels.md).
+Zauważ, że używamy tej samej fabryki kanałów `.fromPath`, której używaliśmy w [Hello Channels](../../hello_nextflow/02_hello_channels.md).
 Rzeczywiście, robimy coś bardzo podobnego.
 Różnica polega na tym, że mówimy Nextflow, aby po prostu załadował samą ścieżkę pliku do kanału jako element wejściowy, zamiast czytać jego zawartość.
 
 ### 1.4. Dodaj blok output, aby zdefiniować, gdzie publikowane są wyniki
 
-Po bloku workflow dodajemy blok `output`, który określa, gdzie publikować wyjścia workflow.
+Po bloku workflow'u dodajemy blok `output`, który określa, gdzie publikować wyjścia workflow'u.
 
 ```groovy title="genomics-1.nf" linenums="37"
 output {
@@ -296,14 +296,14 @@ output {
 }
 ```
 
-Każdy nazwany cel z sekcji `publish:` (jak `bam_index`) otrzymuje swój własny blok, w którym można skonfigurować ścieżkę wyjściową względem bazowego katalogu wyjściowego.
+Każdy nazwany cel z sekcji `publish:` (jak `bam_index`) otrzymuje Swój własny blok, w którym można skonfigurować ścieżkę wyjściową względem bazowego katalogu wyjściowego.
 
 !!! note "Uwaga"
 
     Mimo że pliki danych, których używamy tutaj, są bardzo małe, w genomice mogą być bardzo duże.
     Domyślnie Nextflow tworzy dowiązania symboliczne do plików wyjściowych w katalogu publikacji, co pozwala uniknąć niepotrzebnych kopii plików.
     Możesz zmienić to zachowanie używając opcji `mode` (np. `mode 'copy'`), aby utworzyć rzeczywiste kopie.
-    Należy pamiętać, że dowiązania symboliczne przestaną działać po wyczyszczeniu katalogu `work`, więc dla produkcyjnych workflow możesz chcieć użyć `mode 'copy'`.
+    Należy pamiętać, że dowiązania symboliczne przestaną działać po wyczyszczeniu katalogu `work`, więc dla produkcyjnych workflow'ów możesz chcieć użyć `mode 'copy'`.
 
 ### 1.5. Skonfiguruj katalog wyjściowy
 
@@ -324,7 +324,7 @@ Bazowy katalog wyjściowy jest ustawiany przez opcję konfiguracyjną `outputDir
 
 ### 1.6. Uruchom workflow, aby zweryfikować, że krok indeksowania działa
 
-Uruchommy workflow! Przypominamy, że nie musimy podawać wejścia w linii poleceń, ponieważ ustawiliśmy wartość domyślną dla wejścia podczas deklarowania parametru wejściowego.
+Uruchom workflow! Przypominamy, że nie musisz podawać wejścia w linii poleceń, ponieważ ustawiłeś wartość domyślną dla wejścia podczas deklarowania parametru wejściowego.
 
 ```bash
 nextflow run genomics-1.nf
@@ -362,7 +362,7 @@ Oto jest!
 
 ### Podsumowanie
 
-Wiesz, jak opakować narzędzie genomiczne w jednoetapowy workflow Nextflow i uruchomić je używając kontenera.
+Wiesz już, jak opakować narzędzie genomiczne w jednoetapowy workflow Nextflow i uruchomić je używając kontenera.
 
 ### Co dalej?
 
@@ -372,7 +372,7 @@ Dodaj drugi krok, który wykorzystuje wyjście pierwszego.
 
 ## 2. Dodaj drugi proces, aby uruchomić GATK HaplotypeCaller na zaindeksowanym pliku BAM
 
-Teraz, gdy mamy indeks dla naszego pliku wejściowego, możemy przejść do skonfigurowania kroku wykrywania wariantów, który jest interesującą częścią workflow.
+Teraz, gdy masz indeks dla pliku wejściowego, możesz przejść do skonfigurowania kroku wykrywania wariantów, który jest interesującą częścią workflow'u.
 
 ### 2.1. Zdefiniuj proces wykrywania wariantów
 
@@ -409,23 +409,23 @@ process GATK_HAPLOTYPECALLER {
 }
 ```
 
-Zauważysz, że wprowadziliśmy tutaj nową składnię (`emit:`), aby jednoznacznie nazwać każdy z naszych kanałów wyjściowych, a powody tego staną się wkrótce jasne.
+Zauważ, że wprowadziliśmy tutaj nową składnię (`emit:`), aby jednoznacznie nazwać każdy z naszych kanałów wyjściowych, a powody tego staną się wkrótce jasne.
 
 To polecenie przyjmuje znacznie więcej wejść, ponieważ GATK potrzebuje więcej informacji do wykonania analizy w porównaniu do prostego zadania indeksowania.
-Ale zauważysz, że jest jeszcze więcej wejść zdefiniowanych w bloku wejść niż jest wymienionych w poleceniu GATK. Dlaczego?
+Ale zauważ, że jest jeszcze więcej wejść zdefiniowanych w bloku wejść niż jest wymienionych w poleceniu GATK. Dlaczego?
 
 !!! note "Uwaga"
 
     GATK wie, gdzie szukać pliku indeksu BAM i plików pomocniczych genomu referencyjnego, ponieważ zna konwencje związane z tymi plikami.
     Jednak Nextflow jest zaprojektowany jako niezależny od domeny i nie wie nic o wymaganiach formatów plików bioinformatycznych.
 
-Musimy powiedzieć Nextflow wyraźnie, że musi umieścić te pliki w katalogu roboczym w czasie wykonywania; w przeciwnym razie tego nie zrobi, a GATK (prawidłowo) zgłosi błąd dotyczący brakujących plików indeksów.
+Musisz powiedzieć Nextflow wyraźnie, że musi umieścić te pliki w katalogu roboczym w czasie wykonywania; w przeciwnym razie tego nie zrobi, a GATK (prawidłowo) zgłosi błąd dotyczący brakujących plików indeksów.
 
 Podobnie musimy wyraźnie wymienić plik indeksu wyjściowego VCF (plik `"${input_bam}.vcf.idx"`), aby Nextflow wiedział, że ma śledzić ten plik na wypadek, gdyby był potrzebny w kolejnych krokach.
 
 ### 2.2. Dodaj definicje dla wejść pomocniczych
 
-Ponieważ nasz nowy proces oczekuje kilku dodatkowych plików, ustawiamy dla nich parametry CLI w sekcji `Pipeline parameters`, wraz z wartościami domyślnymi (z tych samych powodów co wcześniej).
+Ponieważ Twój nowy proces oczekuje kilku dodatkowych plików, ustaw dla nich parametry CLI w sekcji `Pipeline parameters`, wraz z wartościami domyślnymi (z tych samych powodów co wcześniej).
 
 ```groovy title="genomics-1.nf" linenums="8"
     // Pliki pomocnicze
@@ -439,7 +439,7 @@ Ponieważ nasz nowy proces oczekuje kilku dodatkowych plików, ustawiamy dla nic
 
 Podczas gdy główne wejścia danych są przesyłane dynamicznie przez kanały, istnieją dwa podejścia do obsługi plików pomocniczych. Zalecanym podejściem jest tworzenie jawnych kanałów, co sprawia, że przepływ danych jest bardziej przejrzysty i spójny. Alternatywnie, funkcja file() może być użyta do tworzenia zmiennych w prostszych przypadkach, szczególnie gdy musisz odwołać się do tego samego pliku w wielu procesach - chociaż pamiętaj, że nadal tworzy to kanały niejawnie. <!-- TODO: Wyjaśnić: czy to jest nadal konieczne z typowanymi wejściami? -->
 
-Dodaj to do bloku workflow (po utworzeniu `reads_ch`, wewnątrz sekcji `main:`):
+Dodaj to do bloku workflow'u (po utworzeniu `reads_ch`, wewnątrz sekcji `main:`):
 
 ```groovy title="genomics-1.nf" linenums="79"
     // Załaduj ścieżki plików dla plików pomocniczych (referencja i przedziały)
@@ -453,7 +453,7 @@ To sprawi, że ścieżki plików pomocniczych będą dostępne do dostarczenia j
 
 ### 2.4. Dodaj wywołanie do bloku workflow, aby uruchomić GATK_HAPLOTYPECALLER
 
-Teraz, gdy mamy skonfigurowany nasz drugi proces i wszystkie wejścia oraz pliki pomocnicze są gotowe i dostępne, możemy dodać wywołanie procesu `GATK_HAPLOTYPECALLER` w ciele workflow.
+Teraz, gdy masz skonfigurowany drugi proces i wszystkie wejścia oraz pliki pomocnicze są gotowe i dostępne, możesz dodać wywołanie procesu `GATK_HAPLOTYPECALLER` w ciele workflow'u.
 
 ```groovy title="genomics-1.nf" linenums="88"
     // Wykryj warianty z zaindeksowanego pliku BAM
@@ -467,16 +467,16 @@ Teraz, gdy mamy skonfigurowany nasz drugi proces i wszystkie wejścia oraz pliki
     )
 ```
 
-Powinieneś rozpoznać składnię `*.out` z Części 1 tej serii szkoleń; mówimy Nextflow, aby wziął kanał wyjściowy z `SAMTOOLS_INDEX` i podłączył go do wywołania procesu `GATK_HAPLOTYPECALLER`.
+Rozpoznasz składnię `*.out` z Części 1 tej serii szkoleń; mówimy Nextflow, aby wziął kanał wyjściowy z `SAMTOOLS_INDEX` i podłączył go do wywołania procesu `GATK_HAPLOTYPECALLER`.
 
 !!! note "Uwaga"
 
-    Zauważysz, że wejścia są podawane w dokładnie tej samej kolejności w wywołaniu procesu, jak są wymienione w bloku wejść procesu.
+    Zauważ, że wejścia są podawane w dokładnie tej samej kolejności w wywołaniu procesu, jak są wymienione w bloku wejść procesu.
     W Nextflow wejścia są pozycyjne, co oznacza, że _musisz_ zachować tę samą kolejność; i oczywiście musi być taka sama liczba elementów.
 
 ### 2.5. Zaktualizuj sekcję publish i blok output
 
-Musimy zaktualizować sekcję `publish:`, aby uwzględnić wyjścia VCF, i dodać odpowiadające cele w bloku `output`.
+Musisz zaktualizować sekcję `publish:`, aby uwzględnić wyjścia VCF, i dodać odpowiadające cele w bloku `output`.
 
 ```groovy title="genomics-1.nf" linenums="99"
     publish:
@@ -500,7 +500,7 @@ output {
 
 ### 2.6. Uruchom workflow, aby zweryfikować, że krok wykrywania wariantów działa
 
-Uruchommy rozszerzony workflow z `-resume`, aby nie musieć ponownie uruchamiać kroku indeksowania.
+Uruchom rozszerzony workflow z `-resume`, aby nie musieć ponownie uruchamiać kroku indeksowania.
 
 ```bash
 nextflow run genomics-1.nf -resume
@@ -518,7 +518,7 @@ nextflow run genomics-1.nf -resume
     [53/e18e98] GATK_HAPLOTYPECALLER (1) | 1 of 1 ✔
     ```
 
-Teraz, jeśli spojrzymy na wyjście konsoli, zobaczymy wymienione dwa procesy.
+Teraz, jeśli spojrzysz na wyjście konsoli, zobaczysz wymienione dwa procesy.
 
 Pierwszy proces został pominięty dzięki cache'owaniu, zgodnie z oczekiwaniami, podczas gdy drugi proces został uruchomiony, ponieważ jest zupełnie nowy.
 
@@ -533,7 +533,7 @@ Pliki wyjściowe znajdziesz w katalogu wyników (jako dowiązania symboliczne do
     └── reads_mother.bam.vcf.idx -> */cf/36f756*/reads_mother.bam.vcf.idx
     ```
 
-Jeśli otworzysz plik VCF, powinieneś zobaczyć tę samą zawartość co w pliku wygenerowanym przez uruchomienie polecenia GATK bezpośrednio w kontenerze.
+Jeśli otworzysz plik VCF, zobaczysz tę samą zawartość co w pliku wygenerowanym przez uruchomienie polecenia GATK bezpośrednio w kontenerze.
 
 ```console title="reads_mother.bam.vcf" linenums="26"
 #CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	reads_mother
@@ -542,15 +542,15 @@ Jeśli otworzysz plik VCF, powinieneś zobaczyć tę samą zawartość co w plik
 20_10037292_10066351	3529	.	T	A	155.64	.	AC=1;AF=0.500;AN=2;BaseQRankSum=-0.544;DP=21;ExcessHet=0.0000;FS=1.871;MLEAC=1;MLEAF=0.500;MQ=60.00;MQRankSum=0.000;QD=7.78;ReadPosRankSum=-1.158;SOR=1.034	GT:AD:DP:GQ:PL	0/1:12,8:20:99:163,0,328
 ```
 
-To jest wyjście, które zależy nam na wygenerowaniu dla każdej próbki w naszym badaniu.
+To jest wyjście, które zależy Ci na wygenerowaniu dla każdej próbki w Twoim badaniu.
 
 ### Podsumowanie
 
-Wiesz, jak zrobić bardzo prosty dwuetapowy workflow, który wykonuje prawdziwą pracę analityczną i jest w stanie radzić sobie z osobliwościami formatów plików genomicznych, takimi jak pliki pomocnicze.
+Wiesz już, jak zrobić bardzo prosty dwuetapowy workflow, który wykonuje prawdziwą pracę analityczną i jest w stanie radzić sobie z osobliwościami formatów plików genomicznych, takimi jak pliki pomocnicze.
 
 ### Co dalej?
 
-Spraw, aby workflow obsługiwał wiele próbek zbiorczo.
+Spraw, aby workflow obsługiwał wiele próbek naraz.
 
 ---
 
@@ -559,11 +559,11 @@ Spraw, aby workflow obsługiwał wiele próbek zbiorczo.
 Dobrze jest mieć workflow, który może zautomatyzować przetwarzanie pojedynczej próbki, ale co jeśli masz 1000 próbek?
 Czy musisz napisać skrypt bash, który przechodzi przez wszystkie Twoje próbki w pętli?
 
-Nie, dzięki Bogu! Wystarczy dokonać drobnej zmiany w kodzie, a Nextflow również to dla Ciebie obsłuży.
+Nie! Wystarczy dokonać drobnej zmiany w kodzie, a Nextflow również to dla Ciebie obsłuży.
 
 ### 3.1. Przekształć deklarację parametru wejściowego w tablicę wymieniającą trzy próbki
 
-Przekształćmy tę domyślną ścieżkę pliku w deklaracji wejściowego pliku BAM w tablicę wymieniającą ścieżki plików dla naszych trzech próbek testowych, w górze w sekcji `Pipeline parameters`.
+Przekształć tę domyślną ścieżkę pliku w deklaracji wejściowego pliku BAM w tablicę wymieniającą ścieżki plików dla trzech próbek testowych, w górze w sekcji `Pipeline parameters`.
 
 === "Po"
 
@@ -588,16 +588,16 @@ Przekształćmy tę domyślną ścieżkę pliku w deklaracji wejściowego pliku 
     Używając typowanych deklaracji parametrów (jak `reads_bam: Path`), nie można przypisać wartości tablicowej.
     Dla tablic pomiń adnotację typu.
 
-I to właściwie wszystko, co musimy zrobić, ponieważ fabryka kanałów, której używamy w ciele workflow (`.fromPath`), jest równie chętna do zaakceptowania wielu ścieżek plików do załadowania do kanału wejściowego, jak była do załadowania jednej.
+I to właściwie wszystko, co musimy zrobić, ponieważ fabryka kanałów, której używamy w ciele workflow'u (`.fromPath`), jest równie chętna do zaakceptowania wielu ścieżek plików do załadowania do kanału wejściowego, jak była do załadowania jednej.
 
 !!! note "Uwaga"
 
-    Normalnie nie chciałbyś umieszczać listy próbek bezpośrednio w pliku workflow, ale robimy to tutaj, aby zachować prostotę.
+    Normalnie nie chciałbyś umieszczać listy próbek bezpośrednio w pliku workflow'u, ale robimy to tutaj, aby zachować prostotę.
     Przedstawimy bardziej eleganckie sposoby obsługi wejść później w tej serii szkoleń.
 
 ### 3.2. Uruchom workflow, aby zweryfikować, że działa na wszystkich trzech próbkach
 
-Spróbujmy teraz uruchomić workflow, gdy połączenia są skonfigurowane do pracy na wszystkich trzech próbkach testowych.
+Spróbuj teraz uruchomić workflow, gdy połączenia są skonfigurowane do pracy na wszystkich trzech próbkach testowych.
 
 ```bash
 nextflow run genomics-1.nf -resume
@@ -617,7 +617,7 @@ Ciekawa rzecz: to _może zadziałać_, LUB _może zawieść_. Na przykład, oto 
     [7a/89bc43] GATK_HAPLOTYPECALLER (2) | 3 of 3, cached: 1 ✔
     ```
 
-Jeśli Twoje uruchomienie workflow zakończyło się sukcesem, uruchom je ponownie, aż otrzymasz błąd taki jak ten:
+Jeśli Twoje uruchomienie workflow'u zakończyło się sukcesem, uruchom je ponownie, aż otrzymasz błąd taki jak ten:
 
 ??? failure "Wyjście polecenia"
 
@@ -653,11 +653,11 @@ Jeśli spojrzysz na wyjście błędu polecenia GATK, będzie tam linia taka jak 
 A USER ERROR has occurred: Traversal by intervals was requested but some input files are not indexed.
 ```
 
-Cóż, to dziwne, biorąc pod uwagę, że wyraźnie zaindeksowaliśmy pliki BAM w pierwszym kroku workflow. Czy może być coś nie tak z połączeniami?
+Cóż, to dziwne, biorąc pod uwagę, że wyraźnie zaindeksowałeś pliki BAM w pierwszym kroku workflow'u. Czy może być coś nie tak z połączeniami?
 
 #### 3.2.1. Sprawdź katalogi robocze dla odpowiednich wywołań
 
-Spójrzmy do środka katalogu roboczego dla nieudanego wywołania procesu `GATK_HAPLOTYPECALLER` wymienionego w wyjściu konsoli.
+Spójrz do środka katalogu roboczego dla nieudanego wywołania procesu `GATK_HAPLOTYPECALLER` wymienionego w wyjściu konsoli.
 
 ??? abstract "Zawartość katalogu"
 
@@ -679,7 +679,7 @@ Co do cholery? Nextflow umieścił plik indeksu w katalogu roboczym tego wywoła
 
 #### 3.2.2. Użyj [operatora view()](https://www.nextflow.io/docs/latest/reference/operator.html#view), aby sprawdzić zawartość kanału
 
-Dodaj te dwie linie w ciele workflow przed wywołaniem procesu `GATK_HAPLOTYPER`:
+Dodaj te dwie linie w ciele workflow'u przed wywołaniem procesu `GATK_HAPLOTYPER`:
 
 ```groovy title="genomics-1.nf" linenums="84"
     // tymczasowa diagnostyka
@@ -757,14 +757,14 @@ Widać, że pliki BAM i pliki indeksów dla trzech próbek nie są wymienione w 
     Gdy wywołujesz proces Nextflow na kanale zawierającym wiele elementów, Nextflow będzie próbował zrównoleglić wykonywanie tak bardzo, jak to możliwe, i będzie zbierał wyjścia w jakiejkolwiek kolejności, w jakiej staną się dostępne.
     Konsekwencją jest to, że odpowiadające im wyjścia mogą być zebrane w innej kolejności niż oryginalne wejścia zostały podane.
 
-Zgodnie z obecnym zapisem, nasz skrypt workflow zakłada, że pliki indeksów wyjdą z kroku indeksowania wymienione w tej samej kolejności matka/ojciec/syn, jak podano wejścia.
+Zgodnie z obecnym zapisem, nasz skrypt workflow'u zakłada, że pliki indeksów wyjdą z kroku indeksowania wymienione w tej samej kolejności matka/ojciec/syn, jak podano wejścia.
 Ale nie jest to gwarantowane, dlatego czasami (choć nie zawsze) złe pliki zostają sparowane w drugim kroku.
 
-Aby to naprawić, musimy upewnić się, że pliki BAM i ich pliki indeksów podróżują razem przez kanały.
+Aby to naprawić, musisz upewnić się, że pliki BAM i ich pliki indeksów podróżują razem przez kanały.
 
 !!! tip "Wskazówka"
 
-    Instrukcje `view()` w kodzie workflow nic nie robią, więc nie ma problemu, aby je zostawić.
+    Instrukcje `view()` w kodzie workflow'u nic nie robią, więc nie ma problemu, aby je zostawić.
     Jednak będą zaśmiecać Twoje wyjście konsoli, więc zalecamy ich usunięcie, gdy zakończysz rozwiązywanie problemu.
 
 ### 3.3. Zmień wyjście procesu SAMTOOLS_INDEX na krotkę, która trzyma plik wejściowy i jego indeks razem
@@ -775,7 +775,7 @@ Najprostszym sposobem, aby upewnić się, że plik BAM i jego indeks pozostają 
 
     **Krotka** to skończona, uporządkowana lista elementów, która jest powszechnie używana do zwracania wielu wartości z funkcji. Krotki są szczególnie przydatne do przekazywania wielu wejść lub wyjść między procesami przy zachowaniu ich powiązania i kolejności.
 
-Najpierw zmieńmy wyjście procesu `SAMTOOLS_INDEX`, aby uwzględnić plik BAM w swojej deklaracji wyjściowej.
+Najpierw zmień wyjście procesu `SAMTOOLS_INDEX`, aby uwzględnić plik BAM w Swojej deklaracji wyjściowej.
 
 === "Po"
 
@@ -795,7 +795,7 @@ W ten sposób każdy plik indeksu będzie ściśle połączony z jego oryginalny
 
 ### 3.4. Zmień wejście do procesu GATK_HAPLOTYPECALLER na krotkę
 
-Ponieważ zmieniliśmy "kształt" wyjścia pierwszego procesu w workflow, musimy zaktualizować definicję wejścia drugiego procesu, aby pasowała.
+Ponieważ zmieniłeś "kształt" wyjścia pierwszego procesu w workflow'u, musisz zaktualizować definicję wejścia drugiego procesu, aby pasowała.
 
 Konkretnie, tam gdzie wcześniej deklarowaliśmy dwie oddzielne ścieżki wejściowe w bloku wejść procesu `GATK_HAPLOTYPECALLER`, teraz deklarujemy pojedyncze wejście pasujące do struktury krotki emitowanej przez `SAMTOOLS_INDEX`.
 
@@ -814,13 +814,13 @@ Konkretnie, tam gdzie wcześniej deklarowaliśmy dwie oddzielne ścieżki wejśc
         path input_bam_index
     ```
 
-Oczywiście, ponieważ zmieniliśmy teraz kształt wejść, których oczekuje `GATK_HAPLOTYPECALLER`, musimy odpowiednio zaktualizować wywołanie procesu w ciele workflow.
+Ponieważ zmieniłeś teraz kształt wejść, których oczekuje `GATK_HAPLOTYPECALLER`, musisz odpowiednio zaktualizować wywołanie procesu w ciele workflow'u.
 
 ### 3.5. Zaktualizuj wywołanie GATK_HAPLOTYPECALLER w bloku workflow
 
-Nie musimy już dostarczać oryginalnego `reads_ch` do procesu `GATK_HAPLOTYPECALLER`, ponieważ plik BAM jest teraz spakowany w kanał wyjściowy przez `SAMTOOLS_INDEX`.
+Nie musisz już dostarczać oryginalnego `reads_ch` do procesu `GATK_HAPLOTYPECALLER`, ponieważ plik BAM jest teraz spakowany w kanał wyjściowy przez `SAMTOOLS_INDEX`.
 
-W rezultacie możemy po prostu usunąć tę linię.
+W rezultacie możesz po prostu usunąć tę linię.
 
 === "Po"
 
@@ -842,7 +842,7 @@ To wszystkie zmiany w połączeniach, które są konieczne do rozwiązania probl
 ### 3.6. Zaktualizuj sekcję publish i blok output dla krotki
 
 Ponieważ `SAMTOOLS_INDEX.out` jest teraz krotką zawierającą zarówno BAM, jak i jego indeks, oba pliki będą publikowane razem.
-Zmieniamy nazwę celu z `bam_index` na `indexed_bam`, aby odzwierciedlić, że teraz zawiera oba pliki.
+Zmień nazwę celu z `bam_index` na `indexed_bam`, aby odzwierciedlić, że teraz zawiera oba pliki.
 
 === "Po"
 
@@ -858,7 +858,7 @@ Zmieniamy nazwę celu z `bam_index` na `indexed_bam`, aby odzwierciedlić, że t
         bam_index = SAMTOOLS_INDEX.out
     ```
 
-Musimy również zaktualizować blok output, aby używał nowej nazwy celu:
+Musisz również zaktualizować blok output, aby używał nowej nazwy celu:
 
 === "Po"
 
@@ -880,7 +880,7 @@ Musimy również zaktualizować blok output, aby używał nowej nazwy celu:
 
 ### 3.7. Uruchom workflow, aby zweryfikować, że działa poprawnie na wszystkich trzech próbkach za każdym razem
 
-Oczywiście, dowód jest w rezultacie, więc uruchommy workflow ponownie kilka razy, aby upewnić się, że będzie to działać niezawodnie w przyszłości.
+Oczywiście, dowód jest w rezultacie, więc uruchom workflow ponownie kilka razy, aby upewnić się, że będzie to działać niezawodnie w przyszłości.
 
 ```bash
 nextflow run genomics-1.nf
@@ -938,24 +938,24 @@ To będzie znacznie bezpieczniejsze w przyszłości.
 
 ### Podsumowanie
 
-Wiesz, jak sprawić, aby Twój workflow działał na wielu próbkach (niezależnie).
+Wiesz już, jak sprawić, aby Twój workflow działał na wielu próbkach (niezależnie).
 
 ### Co dalej?
 
-Ułatw obsługę próbek zbiorczo.
+Ułatw obsługę wielu próbek naraz.
 
 ---
 
 ## 4. Spraw, aby workflow akceptował plik tekstowy zawierający zestaw plików wejściowych
 
-Bardzo powszechnym sposobem dostarczania wielu plików danych wejściowych do workflow jest zrobienie tego za pomocą pliku tekstowego zawierającego ścieżki plików.
+Bardzo powszechnym sposobem dostarczania wielu plików danych wejściowych do workflow'u jest zrobienie tego za pomocą pliku tekstowego zawierającego ścieżki plików.
 Może to być tak proste, jak plik tekstowy wymieniający jedną ścieżkę pliku na linię i nic więcej, lub plik może zawierać dodatkowe metadane, w którym to przypadku jest często nazywany arkuszem próbek.
 
-Tutaj pokażemy Ci, jak zrobić prosty przypadek.
+Tutaj pokażemy, jak zrobić prosty przypadek.
 
 ### 4.1. Sprawdź dostarczony plik tekstowy wymieniający ścieżki plików wejściowych
 
-Już utworzyliśmy plik tekstowy wymieniający ścieżki plików wejściowych, nazwany `sample_bams.txt`, który możesz znaleźć w katalogu `data/`.
+Przygotowaliśmy plik tekstowy wymieniający ścieżki plików wejściowych, nazwany `sample_bams.txt`, który możesz znaleźć w katalogu `data/`.
 
 ```txt title="sample_bams.txt"
 /workspaces/training/nf4-science/genomics/data/bam/reads_mother.bam
@@ -971,7 +971,7 @@ Jak widać, wymieniliśmy jedną ścieżkę pliku na linię, i są to ścieżki 
 
 ### 4.2. Zaktualizuj wartość domyślną parametru
 
-Zmieńmy wartość domyślną dla naszego parametru wejściowego `reads_bam`, aby wskazywał na plik `sample_bams.txt`.
+Zmień wartość domyślną dla parametru wejściowego `reads_bam`, aby wskazywał na plik `sample_bams.txt`.
 
 === "Po"
 
@@ -991,12 +991,12 @@ Zmieńmy wartość domyślną dla naszego parametru wejściowego `reads_bam`, ab
         ]
     ```
 
-W ten sposób możemy nadal być leniwi, ale lista plików nie znajduje się już w samym kodzie workflow, co jest dużym krokiem we właściwym kierunku.
+W ten sposób możesz nadal być leniwy, ale lista plików nie znajduje się już w samym kodzie workflow'u, co jest dużym krokiem we właściwym kierunku.
 
 ### 4.3. Zaktualizuj fabrykę kanałów, aby czytała linie z pliku
 
-Obecnie nasza fabryka kanałów wejściowych traktuje wszystkie pliki, które jej dajemy, jako dane wejściowe, które chcemy przekazać do procesu indeksowania.
-Ponieważ teraz podajemy jej plik, który wymienia ścieżki plików wejściowych, musimy zmienić jej zachowanie, aby parsował plik i traktował ścieżki plików, które zawiera, jako dane wejściowe.
+Obecnie Twoja fabryka kanałów wejściowych traktuje wszystkie pliki, które jej dajesz, jako dane wejściowe, które chcesz przekazać do procesu indeksowania.
+Ponieważ teraz podajesz jej plik, który wymienia ścieżki plików wejściowych, musisz zmienić jej zachowanie, aby parsował plik i traktował ścieżki plików, które zawiera, jako dane wejściowe.
 
 Na szczęście możemy to zrobić bardzo prosto, po prostu dodając [operator `.splitText()`](https://www.nextflow.io/docs/latest/reference/operator.html#operator-splittext) do kroku konstrukcji kanału.
 
@@ -1020,7 +1020,7 @@ Na szczęście możemy to zrobić bardzo prosto, po prostu dodając [operator `.
 
 ### 4.4. Uruchom workflow, aby zweryfikować, że działa poprawnie
 
-Uruchommy workflow jeszcze raz. To powinno dać ten sam rezultat co wcześniej, prawda?
+Uruchom workflow jeszcze raz. Powinno to dać ten sam rezultat co wcześniej, prawda?
 
 ```bash
 nextflow run genomics-1.nf -resume
@@ -1039,16 +1039,16 @@ nextflow run genomics-1.nf -resume
 
 Tak! W rzeczywistości Nextflow poprawnie wykrywa, że wywołania procesów są dokładnie takie same, i nawet nie zadaje sobie trudu ponownego uruchomienia wszystkiego, ponieważ uruchamialiśmy z `-resume`.
 
-I to wszystko! Nasz prosty workflow do wykrywania wariantów ma wszystkie podstawowe funkcje, których chcieliśmy.
+I to wszystko! Twój prosty workflow do wykrywania wariantów ma wszystkie podstawowe funkcje, których potrzebowałeś.
 
 ### Podsumowanie
 
 Wiesz, jak stworzyć wieloetapowy liniowy workflow do indeksowania pliku BAM i aplikowania wykrywania wariantów dla pojedynczych próbek używając GATK.
 
-Ogólnie rzecz biorąc, nauczyłeś się używać podstawowych komponentów i logiki Nextflow do budowy prostego pipeline genomicznego, który wykonuje prawdziwą pracę, biorąc pod uwagę osobliwości formatów plików genomicznych i wymagania narzędzi.
+Ogólnie rzecz biorąc, nauczyłeś się używać podstawowych komponentów i logiki Nextflow do budowy prostego pipeline'u genomicznego, który wykonuje prawdziwą pracę, biorąc pod uwagę osobliwości formatów plików genomicznych i wymagania narzędzi.
 
 ### Co dalej?
 
-Świętuj swój sukces i weź ekstra długą przerwę!
+Świętuj Swój sukces i weź ekstra długą przerwę!
 
 W następnej części tego kursu nauczysz się używać kilku dodatkowych funkcji Nextflow (w tym więcej operatorów kanałów), aby zastosować wspólne wykrywanie wariantów do danych.

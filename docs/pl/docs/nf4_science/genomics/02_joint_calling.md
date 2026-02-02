@@ -2,10 +2,10 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-W pierwszej części tego kursu zbudowałeś pipeline do wywoływania wariantów, który był całkowicie liniowy i przetwarzał dane każdej próbki niezależnie od innych.
+W pierwszej części tego kursu zbudowałeś pipeline do wykrywania wariantów, który był całkowicie liniowy i przetwarzał dane każdej próbki niezależnie od innych.
 Jednak w rzeczywistym przypadku użycia genomiki zazwyczaj będziesz musiał spojrzeć na wywołania wariantów wielu próbek razem.
 
-W tej drugiej części pokażemy Ci, jak używać kanałów i operatorów kanałów do implementacji wspólnego wywoływania wariantów za pomocą GATK, budując na pipeline z Części 1.
+W tej drugiej części pokażemy Ci, jak używać kanałów i operatorów kanałów do implementacji wspólnego wykrywania wariantów za pomocą GATK, budując na pipeline'ie z Części 1.
 
 ### Przegląd metody
 
@@ -42,7 +42,7 @@ Zastosujemy to do tego samego zestawu danych, co w Części 1.
 
 ## 0. Rozgrzewka: Uruchom Samtools i GATK bezpośrednio
 
-Tak jak wcześniej, chcemy wypróbować polecenia ręcznie, zanim spróbujemy opakować je w workflow.
+Tak jak wcześniej, chcemy wypróbować polecenia ręcznie, zanim spróbujemy opakować je w workflow'ie.
 
 !!! note
 
@@ -55,7 +55,7 @@ Ten pierwszy krok jest taki sam jak w Części 1, więc powinien być bardzo zna
 
 !!! note
 
-    Technicznie już wygenerowaliśmy pliki indeksu dla trzech próbek przez nasz pipeline, więc moglibyśmy pójść je wydobyć z katalogu wyników. Jednak czystsze jest po prostu powtórzenie tego ręcznie, a zajmie to tylko minutę.
+    Technicznie już wygenerowaliśmy pliki indeksu dla trzech próbek przez nasz pipeline, więc moglibyśmy je wydobyć z katalogu wyników. Jednak czystsze jest po prostu powtórzenie tego ręcznie, a zajmie to tylko minutę.
 
 #### 0.1.1. Uruchom kontener Samtools interaktywnie
 
@@ -205,7 +205,7 @@ gatk HaplotypeCaller \
     ```
 -->
 
-Po zakończeniu powinieneś mieć trzy pliki kończące się na `.g.vcf` w swoim bieżącym katalogu (jeden na próbkę) i ich odpowiednie pliki indeksu kończące się na `.g.vcf.idx`.
+Po zakończeniu będziesz mieć trzy pliki kończące się na `.g.vcf` w Swoim bieżącym katalogu (jeden na próbkę) i ich odpowiednie pliki indeksu kończące się na `.g.vcf.idx`.
 
 ### 0.3. Uruchom wspólne genotypowanie
 
@@ -300,7 +300,7 @@ Więc musimy zacząć od włączenia trybu wywoływania wariantów GVCF i zaktua
 
 !!! note
 
-    Dla wygody będziemy pracować z nową kopią workflow GATK, jak stoi na końcu Części 1, ale pod inną nazwą: `genomics-2.nf`.
+    Dla wygody będziemy pracować z nową kopią workflow'u GATK, jak stoi na końcu Części 1, ale pod inną nazwą: `genomics-2.nf`.
 
 ### 1.1. Powiedz HaplotypeCaller, aby emitował GVCF i zaktualizuj rozszerzenie wyjściowe
 
@@ -343,8 +343,8 @@ I to wszystko, czego potrzeba, aby przełączyć HaplotypeCaller na generowanie 
 
 ### 1.2. Uruchom pipeline, aby sprawdzić, czy możesz generować GVCF
 
-Polecenie wykonania Nextflow jest takie samo jak wcześniej, z wyjątkiem samej nazwy pliku workflow.
-Upewnij się, że odpowiednio to zaktualizowałeś.
+Polecenie wykonania Nextflow jest takie samo jak wcześniej, z wyjątkiem samej nazwy pliku workflow'u.
+Upewnij się, że odpowiednio zaktualizowałeś nazwę pliku.
 
 ```bash
 nextflow run genomics-2.nf
@@ -399,7 +399,7 @@ Ponieważ nie wystarczy po prostu zmienić rozszerzenie pliku w samym poleceniu 
 
 ### 1.4. Zaktualizuj cele publikacji dla nowych wyjść GVCF
 
-Ponieważ teraz produkujemy GVCF zamiast VCF, powinniśmy zaktualizować sekcję `publish:` workflow, aby używać bardziej opisowych nazw.
+Ponieważ teraz produkujemy GVCF zamiast VCF, powinniśmy zaktualizować sekcję `publish:` workflow'u, aby używać bardziej opisowych nazw.
 Zorganizujemy również pliki GVCF w ich własnym podkatalogu dla jasności.
 
 === "Po"
@@ -735,7 +735,7 @@ To powinno być wszystko, czego potrzeba, aby prawidłowo dostarczyć wejścia d
 
 !!! tip
 
-    Kiedy aktualizujesz polecenie `gatk GenomicsDBImport`, upewnij się, że usunąłeś prefiks `-V `, gdy zamieniasz na zmienną `${gvcfs_line}`.
+    Kiedy aktualizujesz polecenie `gatk GenomicsDBImport`, upewnij się, że usuniesz prefiks `-V `, gdy zamieniasz na zmienną `${gvcfs_line}`.
 
 ### 2.7. Uruchom workflow, aby sprawdzić, czy generuje wyjście GenomicsDB zgodnie z oczekiwaniami
 
@@ -894,7 +894,7 @@ Prawie skończyliśmy!
 
 ### 3.5. Zaktualizuj wywołanie procesu z GATK_GENOMICSDB na GATK_JOINTGENOTYPING
 
-Nie zapomnijmy zmienić nazwy wywołania procesu w ciele workflow z GATK_GENOMICSDB na GATK_JOINTGENOTYPING. A skoro już przy tym jesteśmy, powinniśmy również dodać pliki genomu referencyjnego jako wejścia, ponieważ musimy je dostarczyć do narzędzia wspólnego genotypowania.
+Nie zapomnijmy zmienić nazwy wywołania procesu w ciele workflow'u z GATK_GENOMICSDB na GATK_JOINTGENOTYPING. A skoro już przy tym jesteśmy, powinniśmy również dodać pliki genomu referencyjnego jako wejścia, ponieważ musimy je dostarczyć do narzędzia wspólnego genotypowania.
 
 === "Po"
 
@@ -928,7 +928,7 @@ Teraz proces jest całkowicie podłączony.
 ### 3.6. Dodaj wspólny VCF do sekcji publikacji
 
 Musimy opublikować wspólne wyjścia VCF z nowego procesu.
-Dodaj te linie do sekcji `publish:` workflow:
+Dodaj te linie do sekcji `publish:` workflow'u:
 
 ```groovy title="genomics-2.nf" linenums="145"
     joint_vcf = GATK_JOINTGENOTYPING.out.vcf
@@ -1017,10 +1017,10 @@ Masz teraz zautomatyzowany, w pełni odtwarzalny workflow wspólnego wywoływani
 
 ### Wnioski
 
-Wiesz, jak używać niektórych typowych operatorów, a także domknięć Groovy do kontrolowania przepływu danych w Twoim workflow.
+Wiesz, jak używać niektórych typowych operatorów, a także domknięć Groovy do kontrolowania przepływu danych w Twoim workflow'ie.
 
 ### Co dalej?
 
-Świętuj swój sukces i weź zasłużoną przerwę.
+Świętuj Swój sukces i weź zasłużoną przerwę.
 
-W następnej części tego kursu nauczysz się, jak modularyzować swój workflow, wyodrębniając definicje procesów do modułów wielokrotnego użytku.
+W następnej części tego kursu nauczysz się, jak modularyzować Swój workflow, wyodrębniając definicje procesów do modułów wielokrotnego użytku.

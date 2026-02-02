@@ -270,7 +270,7 @@ Jest mały bonus tutaj. Możesz faktycznie zobaczyć, że operatory view są nie
 
 Jeśli uruchomię ten sam workflow ponownie. To rzeczywiście, przyszło w innej kolejności i tym razem mamy split CSV i mapy w kolejności, jakiej byśmy oczekiwali.
 
-Więc po prostu pamiętaj, nie możesz polegać na kolejności wyjść z zadania procesu, ponieważ Nextflow obsługuje tę równoległość dla Ciebie automatycznie. Nextflow robi to dla Ciebie swoją logiką przepływu danych, i to jest prawdziwa moc Nextflow.
+Więc po prostu pamiętaj, nie możesz polegać na kolejności wyjść z zadania procesu, ponieważ Nextflow obsługuje tę równoległość dla Ciebie automatycznie. Nextflow robi to dla Ciebie Swoją logiką przepływu danych, i to jest prawdziwa moc Nextflow.
 
 Dobra, to prawdopodobnie jeden z najważniejszych rozdziałów całego szkolenia. Gdy zrozumiesz channels, fabryki channel i operatory, zaczniesz włączać się w siłę Nextflow i to, co czyni go wyjątkowym jako język programowania. Ta funkcjonalność pozwala Nextflow zrównoleglać wszystkie Twoje workflows dla Ciebie i generować niezwykle złożoną logikę workflow z bardzo czystą składnią i modelem przepływu danych push. To może być na początku trochę dziwna koncepcja, ale gdy już przyzwyczaisz się do pisania kodu w ten sposób, szybko poczuje się to naturalne i zanim się zorientujesz, będziesz pisać fantastyczne workflows.
 

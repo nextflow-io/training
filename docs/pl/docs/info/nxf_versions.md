@@ -26,7 +26,7 @@ Gdy wybierzesz starszą wersję materiałów szkoleniowych, linki do środowiska
 Nextflow ma dwie odrębne koncepcje wersjonowania, które są czasami mylone: **wersje DSL** i **wersje parsera składni**.
 
 **DSL1 vs DSL2** odnosi się do zasadniczo różnych sposobów pisania pipeline'ów Nextflow.
-DSL1 był oryginalną składnią, gdzie procesy były niejawnie połączone przez channels.
+DSL1 był oryginalną składnią, gdzie procesy były niejawnie połączone przez kanały.
 DSL2, wprowadzony w Nextflow 20.07, dodał funkcje modularności: możliwość importowania procesów i workflows z innych plików, jawne bloki `workflow` oraz nazwane wyjścia procesów.
 DSL1 został oznaczony jako przestarzały w Nextflow 22.03 i usunięty w 22.12.
 Cały nowoczesny kod Nextflow używa DSL2.
@@ -53,7 +53,7 @@ Aby **włączyć** parser składni v2 dla bieżącej sesji, uruchom następując
 export NXF_SYNTAX_PARSER=v2
 ```
 
-Aby ustawić to na stałe (do czasu, gdy v2 stanie się domyślny w Nextflow 26.04), dodaj polecenie export do profilu swojej powłoki (`~/.bashrc`, `~/.zshrc`, itp.):
+Aby ustawić to na stałe (do czasu, gdy v2 stanie się domyślny w Nextflow 26.04), dodaj polecenie export do profilu Swojej powłoki (`~/.bashrc`, `~/.zshrc`, itp.):
 
 ```bash
 echo 'export NXF_SYNTAX_PARSER=v2' >> ~/.bashrc

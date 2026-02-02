@@ -3,9 +3,9 @@
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Środowisko szkoleniowe zawiera wszystkie oprogramowanie, kod i dane niezbędne do pracy z tym kursem szkoleniowym, więc nie musisz niczego instalować samodzielnie.
-Jednakże potrzebujesz (bezpłatnego) konta, aby się zalogować, i powinieneś poświęcić kilka minut na zapoznanie się z interfejsem.
+Jednakże potrzebujesz (bezpłatnego) konta, aby się zalogować, i powinieneś/powinnaś poświęcić kilka minut na zapoznanie się z interfejsem.
 
-Jeśli jeszcze tego nie zrobiłeś, proszę skorzystaj z [tego linku](../../../envsetup/) przed dalszym przejściem.
+Jeśli jeszcze tego nie zrobiłeś/zrobiłaś, skorzystaj z [tego linku](../../../envsetup/) przed dalszym przejściem.
 
 ## Dostarczone materiały
 
@@ -22,7 +22,7 @@ Tutaj generujemy spis treści do drugiego poziomu w dół:
 tree . -L 2
 ```
 
-Jeśli uruchomisz to wewnątrz `nf4-science/genomics`, powinieneś zobaczyć następujące wyjście:
+Jeśli uruchomisz to wewnątrz `nf4-science/genomics`, powinieneś/powinnaś zobaczyć następujące wyjście:
 
 ```console title="Zawartość katalogu"
 
@@ -53,7 +53,7 @@ Jeśli uruchomisz to wewnątrz `nf4-science/genomics`, powinieneś zobaczyć nas
 
 **Oto podsumowanie tego, co powinieneś wiedzieć, aby rozpocząć:**
 
-- **Pliki `.nf`** to skrypty workflow, które są nazwane na podstawie tego, w jakiej części kursu są używane.
+- **Pliki `.nf`** to skrypty workflow'u, które są nazwane na podstawie tego, w jakiej części kursu są używane.
 
 - **Plik `nextflow.config`** to plik konfiguracyjny, który ustawia minimalne właściwości środowiska.
   Na razie możesz go zignorować.
@@ -61,7 +61,7 @@ Jeśli uruchomisz to wewnątrz `nf4-science/genomics`, powinieneś zobaczyć nas
 - **Katalog `data`** zawiera dane wejściowe i powiązane zasoby, opisane później w kursie.
 
 - **Katalog `solutions`** zawiera pliki modułów i konfiguracje testów, które są wynikiem części 3 i 4 kursu.
-  Są przeznaczone do użycia jako punkt odniesienia do sprawdzenia twojej pracy i rozwiązywania problemów.
+  Są przeznaczone do użycia jako punkt odniesienia do sprawdzenia Twojej pracy i rozwiązywania problemów.
 
 !!!tip "Wskazówka"
 

@@ -8,7 +8,7 @@ Posiadasz teraz podstawowe umiejętności do uruchamiania i konfigurowania pipel
 
 ## Kontynuuj naukę
 
-Oto kilka zalecanych następnych kroków, aby pogłębić swoją wiedzę o Nextflow:
+Oto kilka zalecanych następnych kroków, aby pogłębić Swoją wiedzę o Nextflow:
 
 ### Odkryj więcej pipeline'ów nf-core
 
@@ -35,7 +35,7 @@ Jeśli chcesz nauczyć się pisać pipeline'y Nextflow:
 ## Zaangażuj się
 
 - **Wnieś wkład do nf-core**: Pomóż ulepszyć pipeline'y lub dokumentację
-- **Udostępnij swoje workflow'y**: Przekaż własne pipeline'y społeczności
+- **Udostępnij Swoje workflow'y**: Przekaż własne pipeline'y społeczności
 - **Weź udział w wydarzeniach**: Dołącz do Nextflow Summit i sesji szkoleniowych społeczności
 
 Dziękujemy za naukę z nami!

@@ -22,7 +22,7 @@ Pod koniec tej części będziesz potrafić:
 
 ### 1.1. Czym jest plik konfiguracyjny?
 
-Nextflow używa plików konfiguracyjnych do oddzielenia **logiki workflow** (co robić) od **ustawień wykonania** (jak i gdzie to robić).
+Nextflow używa plików konfiguracyjnych do oddzielenia **logiki workflow'u** (co robić) od **ustawień wykonania** (jak i gdzie to robić).
 
 Pliki konfiguracyjne kontrolują:
 
@@ -218,7 +218,7 @@ Stwórzmy własne profile dla dwóch scenariuszy:
 1. Lokalny rozwój z Docker
 2. Uniwersytecki HPC zeSchedulerem Slurm i Singularity
 
-Dodaj następujący kod do swojego `nextflow.config`:
+Dodaj następujący kod do Swojego `nextflow.config`:
 
 ```groovy title="nextflow.config"
 profiles {
@@ -383,7 +383,7 @@ Mówi to Nextflow: "Jeśli jakikolwiek proces zażąda więcej niż 2 CPU lub 7 
 
 ### 5.3. Dodawanie limitów zasobów do własnych profili
 
-Zaktualizuj swoje własne profile, aby zawierały odpowiednie limity:
+Zaktualizuj Swoje własne profile, aby zawierały odpowiednie limity:
 
 ```groovy title="nextflow.config"
 profiles {
@@ -417,7 +417,7 @@ profiles {
 ### Podsumowanie
 
 Użyj `resourceLimits`, aby uruchamiać pipeline'y w środowiskach z ograniczonymi zasobami poprzez ograniczenie żądań zasobów procesów.
-Różne profile mogą mieć różne limity odpowiednie dla swojego środowiska.
+Różne profile mogą mieć różne limity odpowiednie dla Swojego środowiska.
 
 ### Co dalej?
 
@@ -438,7 +438,7 @@ Kluczowe umiejętności, których się nauczyłeś:
 - **Limity zasobów**: Zarządzanie ograniczonymi środowiskami za pomocą `resourceLimits`
 - **Sprawdzanie konfiguracji**: Używanie `nextflow config` do debugowania i weryfikacji ustawień
 
-Te umiejętności konfiguracyjne są przydatne dla każdego pipeline'u Nextflow i pomogą Ci efektywnie uruchamiać przepływy pracy na lokalnych maszynach, klastrach HPC i platformach chmurowych.
+Te umiejętności konfiguracyjne są przydatne dla każdego pipeline'u Nextflow i pomogą Ci efektywnie uruchamiać workflow'e na lokalnych maszynach, klastrach HPC i platformach chmurowych.
 
 ### Co dalej?
 
@@ -447,6 +447,6 @@ Gratulacje ukończenia kursu Nextflow for Bioimaging!
 Następne kroki:
 
 - Wypełnij ankietę kursu, aby przekazać informację zwrotną
-- Sprawdź [Hello Nextflow](../hello_nextflow/index.md), aby dowiedzieć się więcej o tworzeniu przepływów pracy
+- Sprawdź [Hello Nextflow](../hello_nextflow/index.md), aby dowiedzieć się więcej o tworzeniu workflow'ów
 - Poznaj [Hello nf-core](../hello_nf-core/index.md), aby zgłębić narzędzia nf-core
 - Przeglądaj inne kursy w [kolekcjach szkoleniowych](../training_collections/index.md)

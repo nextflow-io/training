@@ -182,7 +182,7 @@ Pobrał obraz i uruchomił dla nas polecenia.
 
 Jeśli jesteś ciekawy, możemy faktycznie zobaczyć dokładnie, co to zrobiło, patrząc w katalog work. Jeśli zrobię code work, a następnie hash i następnie command run, który jeśli pamiętasz, to faktyczny plik, który jest wykonywany dla tego zadania, możemy wejść i możemy poszukać funkcji o nazwie NXF launch. I tutaj możesz zobaczyć dokładne polecenie docker, którego użył Nextflow, które wygląda podobnie do tego, co robiliśmy ręcznie w terminalu wcześniej. Docker run. Wiązanie tego katalogu hosta w kontenerze, a następnie określanie URL kontenera.
 
-Więc nie ma tu magii. Po prostu Nextflow automatycznie robi ciężką pracę za Ciebie w sposób, który oznacza, że możesz łatwo określić kontenery w swoim pipeline'ie, które są następnie łatwo dostępne dla każdego innego, kto uruchamia Twój workflow. I ci ludzie nie muszą już myśleć o zarządzaniu oprogramowaniem, aby uruchomić Twój pipeline analizy.
+Więc nie ma tu magii. Po prostu Nextflow automatycznie robi ciężką pracę za Ciebie w sposób, który oznacza, że możesz łatwo określić kontenery w Swoim pipeline'ie, które są następnie łatwo dostępne dla każdego innego, kto uruchamia Twój workflow. I ci ludzie nie muszą już myśleć o zarządzaniu oprogramowaniem, aby uruchomić Twój pipeline analizy.
 
 Bardzo, bardzo proste, bardzo wygodne, a także naprawdę powtarzalne. Dobre ze wszystkich stron.
 

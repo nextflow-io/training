@@ -461,7 +461,7 @@ Jak widać, definicja wejściowa używa tej samej struktury `tuple val(meta), pa
 Definicja wyjściowa jest zbudowana jako krotka o podobnej strukturze do wejścia, z wyjątkiem tego, że zawiera również `stdout` jako trzeci element.
 Ten wzorzec `tuple val(meta), path(file), <output>` utrzymuje metadane powiązane zarówno z danymi wejściowymi, jak i wyjściowymi w miarę przepływu przez pipeline.
 
-Zauważ, że używamy tu kwalifikatora wyjściowego [`stdout`](https://www.nextflow.io/docs/latest/process.html#outputs) Nextflow, ponieważ narzędzie drukuje swoje wyjście bezpośrednio do konsoli zamiast zapisywać plik; i używamy `sed` w wierszu poleceń, aby usunąć wynik prawdopodobieństwa, oczyścić ciąg znaków poprzez usunięcie znaków nowej linii i zwrócić tylko przewidywanie języka.
+Zauważ, że używamy tu kwalifikatora wyjściowego [`stdout`](https://www.nextflow.io/docs/latest/process.html#outputs) Nextflow, ponieważ narzędzie drukuje Swoje wyjście bezpośrednio do konsoli zamiast zapisywać plik; i używamy `sed` w wierszu poleceń, aby usunąć wynik prawdopodobieństwa, oczyścić ciąg znaków poprzez usunięcie znaków nowej linii i zwrócić tylko przewidywanie języka.
 
 ### 2.2. Dodaj wywołanie `IDENTIFY_LANGUAGE`
 
@@ -595,7 +595,7 @@ Jeśli nie jesteś jeszcze zaznajomiony z operatorem `+`, lub jeśli wydaje się
 
     **Ale co jeśli musisz dodać pole, które nie jest jeszcze częścią mapy?**
 
-    Powiedzmy, że zaczynasz ponownie od `map1`, ale przewidywanie języka nie jest w swojej własnej mapie (nie ma `map2`).
+    Powiedzmy, że zaczynasz ponownie od `map1`, ale przewidywanie języka nie jest w Swojej własnej mapie (nie ma `map2`).
     Zamiast tego jest przechowywane w zmiennej o nazwie `lang_id` i wiesz, że chcesz przechować jej wartość (`'fr'`) z kluczem `lang`.
 
     Możesz faktycznie zrobić następująco:
@@ -785,14 +785,14 @@ nextflow run main.nf -resume
     [[id:sampleG, character:turtle, lang:it, lang_group:romance], /workspaces/training/side-quests/metadata/data/ciao.txt]
     ```
 
-Jak widać, elementy kanału utrzymują swoją strukturę `[meta, file]`, ale mapa meta zawiera teraz tę nową klasyfikację.
+Jak widać, elementy kanału utrzymują Swoją strukturę `[meta, file]`, ale mapa meta zawiera teraz tę nową klasyfikację.
 
 ### Wnioski
 
 W tej sekcji nauczyłeś się, jak:
 
 - **Stosować metadane wejściowe do kanałów wyjściowych**: Kopiowanie metadanych w ten sposób pozwala nam później kojarzyć wyniki na podstawie zawartości metadanych.
-- **Tworzyć niestandardowe klucze**: Utworzyłeś dwa nowe klucze w swojej mapie meta, scalając je za pomocą `meta + [new_key:value]` z istniejącą mapą meta. Jeden oparty na obliczonej wartości z procesu, a drugi oparty na warunku ustawionym w operatorze `map`.
+- **Tworzyć niestandardowe klucze**: Utworzyłeś dwa nowe klucze w Swojej mapie meta, scalając je za pomocą `meta + [new_key:value]` z istniejącą mapą meta. Jeden oparty na obliczonej wartości z procesu, a drugi oparty na warunku ustawionym w operatorze `map`.
 
 Pozwalają one kojarzyć nowe i istniejące metadane z plikami w miarę postępu w pipeline.
 Nawet jeśli nie używasz metadanych jako części procesu, utrzymywanie mapy meta powiązanej z danymi w ten sposób ułatwia utrzymanie wszystkich istotnych informacji razem.

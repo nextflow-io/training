@@ -2,11 +2,11 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-W tej piątej części kursu szkoleniowego Hello nf-core pokażemy, jak używać wtyczki nf-schema do walidacji danych wejściowych i parametrów potoku.
+W tej piątej części kursu szkoleniowego Hello nf-core pokażemy, jak używać wtyczki nf-schema do walidacji danych wejściowych i parametrów pipeline'u.
 
 ??? info "Jak rozpocząć od tej sekcji"
 
-    Ta sekcja zakłada, że ukończyłeś [Część 4: Tworzenie modułu nf-core](./04_make_module.md) i zaktualizowałeś moduł procesu `COWPY` do standardów nf-core w swoim potoku.
+    Ta sekcja zakłada, że ukończyłeś [Część 4: Tworzenie modułu nf-core](./04_make_module.md) i zaktualizowałeś moduł procesu `COWPY` do standardów nf-core w Swoim pipeline'ie.
 
     Jeśli nie ukończyłeś Części 4 lub chcesz zacząć od nowa w tej części, możesz użyć rozwiązania `core-hello-part4` jako punktu wyjścia.
     Uruchom te polecenia z wnętrza katalogu `hello-nf-core/`:
@@ -16,7 +16,7 @@ W tej piątej części kursu szkoleniowego Hello nf-core pokażemy, jak używać
     cd core-hello
     ```
 
-    To da Ci potok z modułem `COWPY` już zaktualizowanym zgodnie ze standardami nf-core.
+    To da Ci pipeline z modułem `COWPY` już zaktualizowanym zgodnie ze standardami nf-core.
     Możesz przetestować, czy działa poprawnie, uruchamiając następujące polecenie:
 
     ```bash
@@ -29,7 +29,7 @@ W tej piątej części kursu szkoleniowego Hello nf-core pokażemy, jak używać
 
 ### 0.1. Dlaczego walidacja ma znaczenie
 
-Wyobraź sobie, że uruchamiasz swój potok przez dwie godziny, tylko po to, by się zawiesił, ponieważ użytkownik podał plik z niewłaściwym rozszerzeniem. Lub spędzasz godziny na debugowaniu tajemniczych błędów, tylko po to, by odkryć, że parametr był błędnie napisany. Bez walidacji danych wejściowych takie scenariusze są powszechne.
+Wyobraź sobie, że uruchamiasz Swój pipeline przez dwie godziny, tylko po to, by się zawiesił, ponieważ użytkownik podał plik z niewłaściwym rozszerzeniem. Lub spędzasz godziny na debugowaniu tajemniczych błędów, tylko po to, by odkryć, że parametr był błędnie napisany. Bez walidacji danych wejściowych takie scenariusze są powszechne.
 
 Rozważ ten przykład:
 
@@ -42,7 +42,7 @@ ERROR ~ No such file: 'data.fq.gz'
   Expected FASTQ format but received TXT
 ```
 
-Potok zaakceptował nieprawidłowe dane wejściowe i działał przez godziny przed awarią. Z odpowiednią walidacją:
+Pipeline zaakceptował nieprawidłowe dane wejściowe i działał przez godziny przed awarią. Z odpowiednią walidacją:
 
 ```console title="Z walidacją"
 $ nextflow run my-pipeline --input data.txt --output results
@@ -55,16 +55,16 @@ ERROR ~ Validation of pipeline parameters failed!
 Pipeline failed before execution - please fix the errors above
 ```
 
-Potok zawodzi natychmiast z jasnymi, działającymi komunikatami o błędach. To oszczędza czas, zasoby obliczeniowe i frustrację.
+Pipeline zawodzi natychmiast z jasnymi, działającymi komunikatami o błędach. To oszczędza czas, zasoby obliczeniowe i frustrację.
 
 ### 0.2. Wtyczka nf-schema
 
-[Wtyczka nf-schema](https://nextflow-io.github.io/nf-schema/latest/) to wtyczka Nextflow, która zapewnia kompleksowe możliwości walidacji dla potoków Nextflow.
-Chociaż nf-schema działa z dowolnym przepływem pracy Nextflow, jest to standardowe rozwiązanie walidacyjne dla wszystkich potoków nf-core.
+[Wtyczka nf-schema](https://nextflow-io.github.io/nf-schema/latest/) to wtyczka Nextflow, która zapewnia kompleksowe możliwości walidacji dla pipeline'ów Nextflow.
+Chociaż nf-schema działa z dowolnym workflow'em Nextflow, jest to standardowe rozwiązanie walidacyjne dla wszystkich pipeline'ów nf-core.
 
 nf-schema zapewnia kilka kluczowych funkcji:
 
-- **Walidacja parametrów**: Waliduje parametry potoku względem `nextflow_schema.json`
+- **Walidacja parametrów**: Waliduje parametry pipeline'u względem `nextflow_schema.json`
 - **Walidacja arkuszy próbek**: Waliduje pliki wejściowe względem `assets/schema_input.json`
 - **Konwersja kanałów**: Konwertuje zwalidowane arkusze próbek na kanały Nextflow
 - **Generowanie tekstu pomocy**: Automatycznie generuje wyjście `--help` z definicji schematu
@@ -92,7 +92,7 @@ nf-schema jest następcą przestarzałej wtyczki nf-validation i używa standard
 
 ### 0.3. Dwa pliki schematu dla dwóch typów walidacji
 
-Potok nf-core będzie wykorzystywał dwa oddzielne pliki schematu, które odpowiadają dwóm typom walidacji:
+Pipeline nf-core będzie wykorzystywał dwa oddzielne pliki schematu, które odpowiadają dwóm typom walidacji:
 
 | Plik schematu              | Cel                          | Waliduje                                              |
 | -------------------------- | ---------------------------- | ----------------------------------------------------- |
@@ -119,20 +119,20 @@ Oba schematy używają formatu JSON Schema, szeroko przyjętego standardu do opi
 
     Walidacja danych wejściowych sprawdza strukturę *plików manifestu* (arkusze próbek, pliki CSV), NIE zawartość rzeczywistych plików danych (FASTQ, BAM, VCF, itp.).
 
-    Dla danych na dużą skalę walidacja zawartości plików (jak sprawdzanie integralności BAM) powinna odbywać się w procesach potoku działających na węzłach roboczych, a nie podczas etapu walidacji na maszynie orkiestrującej.
+    Dla danych na dużą skalę walidacja zawartości plików (jak sprawdzanie integralności BAM) powinna odbywać się w procesach pipeline'u działających na węzłach roboczych, a nie podczas etapu walidacji na maszynie orkiestrującej.
 
 ### 0.4. Kiedy powinna nastąpić walidacja?
 
 ```mermaid
 graph LR
-    A[Użytkownik uruchamia potok] --> B[Walidacja parametrów]
+    A[Użytkownik uruchamia pipeline] --> B[Walidacja parametrów]
     B -->|✓ Poprawne| C[Walidacja danych wejściowych]
     B -->|✗ Niepoprawne| D[Błąd: Napraw parametry]
-    C -->|✓ Poprawne| E[Potok wykonuje się]
+    C -->|✓ Poprawne| E[Pipeline wykonuje się]
     C -->|✗ Niepoprawne| F[Błąd: Napraw dane wejściowe]
 ```
 
-Walidacja powinna nastąpić **przed** uruchomieniem jakichkolwiek procesów potoku, aby zapewnić szybkie informacje zwrotne i zapobiec marnowaniu czasu obliczeniowego.
+Walidacja powinna nastąpić **przed** uruchomieniem jakichkolwiek procesów pipeline'u, aby zapewnić szybkie informacje zwrotne i zapobiec marnowaniu czasu obliczeniowego.
 
 Teraz zastosujmy te zasady w praktyce, zaczynając od walidacji parametrów.
 
@@ -140,15 +140,15 @@ Teraz zastosujmy te zasady w praktyce, zaczynając od walidacji parametrów.
 
 ## 1. Walidacja parametrów (nextflow_schema.json)
 
-Zacznijmy od dodania walidacji parametrów do naszego potoku. To waliduje flagi linii poleceń, takie jak `--input`, `--outdir` i `--batch`.
+Zacznijmy od dodania walidacji parametrów do naszego pipeline'u. To waliduje flagi linii poleceń, takie jak `--input`, `--outdir` i `--batch`.
 
 ### 1.1. Skonfiguruj walidację, aby pominąć walidację pliku wejściowego
 
-Szablon potoku nf-core jest dostarczany z już zainstalowanym i skonfigurowanym nf-schema:
+Szablon pipeline'u nf-core jest dostarczany z już zainstalowanym i skonfigurowanym nf-schema:
 
 - Wtyczka nf-schema jest instalowana przez blok `plugins{}` w `nextflow.config`
 - Walidacja parametrów jest domyślnie włączona przez `params.validate_params = true`
-- Walidacja jest wykonywana przez podprzepływ pracy `UTILS_NFSCHEMA_PLUGIN` podczas inicjalizacji potoku
+- Walidacja jest wykonywana przez subworkflow `UTILS_NFSCHEMA_PLUGIN` podczas inicjalizacji pipeline'u
 
 Zachowanie walidacji jest kontrolowane przez zakres `validation{}` w `nextflow.config`.
 
@@ -189,7 +189,7 @@ Ta konfiguracja mówi nf-schema, aby:
 
 ### 1.2. Zbadaj schemat parametrów
 
-Spójrzmy na sekcję pliku `nextflow_schema.json`, który był dołączony do naszego szablonu potoku:
+Spójrzmy na sekcję pliku `nextflow_schema.json`, który był dołączony do naszego szablonu pipeline'u:
 
 ```bash
 grep -A 25 '"input_output_options"' nextflow_schema.json
@@ -241,14 +241,14 @@ Dodamy go w następnej sekcji.
 ??? info "Skąd pochodzą parametry schematu?"
 
     Walidacja schematu używa `nextflow.config` jako bazy dla definicji parametrów.
-    Parametry zadeklarowane gdzie indziej w skryptach przepływu pracy (jak w `main.nf` lub plikach modułów) **nie** są automatycznie przechwytywane przez walidator schematu.
+    Parametry zadeklarowane gdzie indziej w skryptach workflow'u (jak w `main.nf` lub plikach modułów) **nie** są automatycznie przechwytywane przez walidator schematu.
 
-    To oznacza, że zawsze powinieneś deklarować parametry potoku w `nextflow.config`, a następnie definiować ich reguły walidacji w `nextflow_schema.json`.
+    To oznacza, że zawsze powinieneś deklarować parametry pipeline'u w `nextflow.config`, a następnie definiować ich reguły walidacji w `nextflow_schema.json`.
 
 ### 1.3. Dodaj parametr batch
 
 Chociaż schemat jest plikiem JSON, który można edytować ręcznie, **ręczna edycja jest podatna na błędy i nie jest zalecana**.
-Zamiast tego nf-core zapewnia interaktywne narzędzie GUI, które obsługuje składnię JSON Schema za ciebie i waliduje Twoje zmiany:
+Zamiast tego nf-core zapewnia interaktywne narzędzie GUI, które obsługuje składnię JSON Schema za Ciebie i waliduje Twoje zmiany:
 
 ```bash
 nf-core pipelines schema build
@@ -358,7 +358,7 @@ nextflow run . --outdir test-results -profile docker
     * Missing required parameter(s): input, batch
     ```
 
-Doskonale! Walidacja wychwytuje brakujący wymagany parametr, zanim potok się uruchomi.
+Doskonale! Walidacja wychwytuje brakujący wymagany parametr, zanim pipeline się uruchomi.
 
 Teraz spróbuj z poprawnym zestawem parametrów:
 
@@ -381,12 +381,12 @@ nextflow run . --input assets/greetings.csv --outdir results --batch my-batch -p
     -[core/hello] Pipeline completed successfully-
     ```
 
-Potok powinien uruchomić się pomyślnie, a parametr `batch` jest teraz walidowany.
+Pipeline powinien uruchomić się pomyślnie, a parametr `batch` jest teraz walidowany.
 
 ### Wnioski
 
 Nauczyłeś się, jak używać interaktywnego narzędzia `nf-core pipelines schema build` do dodawania parametrów do `nextflow_schema.json` i widziałeś walidację parametrów w akcji.
-Interfejs webowy obsługuje całą składnię JSON Schema za ciebie, ułatwiając zarządzanie złożonymi schematami parametrów bez podatnej na błędy ręcznej edycji JSON.
+Interfejs webowy obsługuje całą składnię JSON Schema za Ciebie, ułatwiając zarządzanie złożonymi schematami parametrów bez podatnej na błędy ręcznej edycji JSON.
 
 ### Co dalej?
 
@@ -420,7 +420,7 @@ To prosty CSV z:
 - Pierwsze dwie kolumny to ciągi tekstowe bez specjalnych wymagań formatowania
 - Trzecia kolumna to liczba całkowita
 
-Dla naszego potoku wymagana jest tylko pierwsza kolumna.
+Dla naszego pipeline'u wymagana jest tylko pierwsza kolumna.
 
 ### 2.2. Zaprojektuj strukturę schematu
 
@@ -436,7 +436,7 @@ Ustrukturyzujemy to jako tablicę obiektów, gdzie każdy obiekt ma co najmniej 
 
 ### 2.3. Zaktualizuj plik schematu
 
-Szablon potoku nf-core zawiera domyślny `assets/schema_input.json` zaprojektowany dla danych sekwencjonowania parami końcowymi.
+Szablon pipeline'u nf-core zawiera domyślny `assets/schema_input.json` zaprojektowany dla danych sekwencjonowania parami końcowymi.
 Musimy zastąpić go prostszym schematem dla naszego przypadku użycia powitań.
 
 Otwórz `assets/schema_input.json` i zastąp sekcje `properties` i `required`:
@@ -549,9 +549,9 @@ W naszym prostym przypadku musimy dodać linię nagłówka do naszego pliku powi
 
 Teraz plik CSV ma linię nagłówka, która pasuje do nazw pól w naszym schemacie.
 
-Ostatnim krokiem jest wdrożenie walidacji w kodzie potoku używając `samplesheetToList`.
+Ostatnim krokiem jest wdrożenie walidacji w kodzie pipeline'u używając `samplesheetToList`.
 
-### 2.5. Wdróż walidację w potoku
+### 2.5. Wdróż walidację w pipeline'ie
 
 Teraz musimy zastąpić nasze proste parsowanie CSV funkcją `samplesheetToList` z nf-schema, która zwaliduje i sparsuje arkusz próbek.
 
@@ -570,7 +570,7 @@ Musimy:
 
 1. Użyć funkcji `samplesheetToList` (już zaimportowana w szablonie)
 2. Zwalidować i sparsować wejście
-3. Wyodrębnić tylko ciągi powitań dla naszego przepływu pracy
+3. Wyodrębnić tylko ciągi powitań dla naszego workflow'u
 
 Najpierw zauważ, że funkcja `samplesheetToList` jest już zaimportowana na górze pliku (szablon nf-core zawiera to domyślnie):
 
@@ -665,7 +665,7 @@ Zweryfikujmy, że nasza walidacja działa, testując zarówno poprawne, jak i ni
 
 #### 2.7.1. Przetestuj z poprawnym wejściem
 
-Najpierw potwierdź, że potok uruchamia się pomyślnie z poprawnym wejściem.
+Najpierw potwierdź, że pipeline uruchamia się pomyślnie z poprawnym wejściem.
 Zauważ, że nie potrzebujemy już `--validate_params false`, ponieważ walidacja działa!
 
 ```bash
@@ -689,7 +689,7 @@ nextflow run . --outdir core-hello-results -profile test,docker
     -[core/hello] Pipeline completed successfully-
     ```
 
-Świetnie! Potok uruchamia się pomyślnie, a walidacja przechodzi po cichu.
+Świetnie! Pipeline uruchamia się pomyślnie, a walidacja przechodzi po cichu.
 Ostrzeżenie o `--character` jest tylko informacyjne, ponieważ nie jest zdefiniowane w schemacie.
 Jeśli chcesz, użyj tego, czego się nauczyłeś, aby dodać walidację również dla tego parametru!
 
@@ -725,7 +725,7 @@ Teraz otwórz plik i zmień nazwę pierwszej kolumny, w linii nagłówka, z `gre
 
 To nie pasuje do naszego schematu, więc walidacja powinna zgłosić błąd.
 
-Spróbuj uruchomić potok z tym niepoprawnym wejściem:
+Spróbuj uruchomić pipeline z tym niepoprawnym wejściem:
 
 ```bash
 nextflow run . --input assets/invalid_greetings.csv --outdir test-results -profile docker
@@ -777,13 +777,13 @@ Doskonale! Walidacja wykryła błąd i dostarczyła jasny, pomocny komunikat o b
 - Który wpis (wiersz 1, pierwszy wiersz danych) ma problem
 - Jaki jest konkretny problem (brakujące wymagane pole `greeting`)
 
-Walidacja schematu zapewnia, że pliki wejściowe mają poprawną strukturę, zanim potok się uruchomi, oszczędzając czas i zapobiegając mylącym błędom później podczas wykonywania.
+Walidacja schematu zapewnia, że pliki wejściowe mają poprawną strukturę, zanim pipeline się uruchomi, oszczędzając czas i zapobiegając mylącym błędom później podczas wykonywania.
 
 Jeśli chcesz to przećwiczyć, śmiało twórz inne pliki wejściowe powitań, które naruszają schemat na inne zabawne sposoby.
 
 ### Wnioski
 
-Zaimplementowałeś i przetestowałeś zarówno walidację parametrów, jak i walidację danych wejściowych. Twój potok waliduje teraz wejścia przed wykonaniem, zapewniając szybkie informacje zwrotne i jasne komunikaty o błędach.
+Zaimplementowałeś i przetestowałeś zarówno walidację parametrów, jak i walidację danych wejściowych. Twój pipeline waliduje teraz wejścia przed wykonaniem, zapewniając szybkie informacje zwrotne i jasne komunikaty o błędach.
 
 !!! tip "Dalsze czytanie"
 

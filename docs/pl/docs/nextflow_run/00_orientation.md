@@ -97,17 +97,17 @@ tree . -L 2
 Kliknij na kolorowe pole, aby rozwinąć sekcję i zobaczyć jej zawartość.
 Używamy zwijanych sekcji takich jak ta do wyświetlania oczekiwanego wyjścia poleceń oraz zawartości katalogów i plików w zwięzły sposób.
 
-- **Pliki `.nf`** to skrypty workflow ponumerowane według części kursu, w której są używane.
+- **Pliki `.nf`** to skrypty workflow'ów ponumerowane według części kursu, w której są używane.
 
 - **Plik `nextflow.config`** to plik konfiguracyjny, który ustawia minimalne właściwości środowiska.
   Na razie możesz go zignorować.
 
-- **Plik `greetings.csv`** w katalogu `data/` zawiera dane wejściowe, których użyjemy w większości kursu. Jest opisany w Części 2 (Uruchamianie pipeline), kiedy wprowadzamy go po raz pierwszy.
+- **Plik `greetings.csv`** w katalogu `data/` zawiera dane wejściowe, których użyjemy w większości kursu. Jest opisany w Części 2 (Uruchamianie pipeline'ów), kiedy wprowadzamy go po raz pierwszy.
 
 - **Pliki `test-params.*`** to pliki konfiguracyjne, których użyjemy w Części 3 (Konfiguracja). Na razie możesz je zignorować.
 
-- **Katalog `solutions`** zawiera końcowy stan workflow i jego plików pomocniczych (config i moduły), które są wynikiem ukończenia kursu.
-  Są przeznaczone do użycia jako odniesienie do sprawdzenia swojej pracy i rozwiązywania problemów.
+- **Katalog `solutions`** zawiera końcowy stan workflow'u i jego plików pomocniczych (config i moduły), które są wynikiem ukończenia kursu.
+  Są przeznaczone do użycia jako odniesienie do sprawdzenia Twojej pracy i rozwiązywania problemów.
 
 ## Lista kontrolna gotowości
 
@@ -115,7 +115,7 @@ Myślisz, że jesteś gotowy do rozpoczęcia?
 
 - [ ] Rozumiem cel tego kursu i jego wymagania wstępne
 - [ ] Moje środowisko jest uruchomione i działa
-- [ ] Ustawiłem odpowiednio swój katalog roboczy
+- [ ] Ustawiłem odpowiednio Swój katalog roboczy
 
 Jeśli możesz zaznaczyć wszystkie pola, jesteś gotowy do działania.
 

@@ -303,7 +303,7 @@ nextflow run nf-core/demo -profile docker,test --outdir demo-results
     -[nf-core/demo] Pipeline completed successfully-
     ```
 
-Jeśli Twoje wyjście pasuje do tego, gratulacje! Właśnie uruchomiłeś swój pierwszy pipeline nf-core.
+Jeśli Twoje wyjście pasuje do tego, gratulacje! Właśnie uruchomiłeś Swój pierwszy pipeline nf-core.
 
 Zauważysz, że jest znacznie więcej wyjścia konsoli niż podczas uruchamiania podstawowego pipeline'a Nextflow.
 Jest nagłówek, który zawiera podsumowanie wersji pipeline'a, wejść i wyjść oraz kilka elementów konfiguracji.
@@ -323,7 +323,7 @@ Przechodząc do wyjścia wykonania, spójrzmy na linie, które mówią nam, jaki
 To mówi nam, że zostały uruchomione trzy procesy, odpowiadające trzem narzędziom pokazanym na stronie dokumentacji pipeline'a na stronie nf-core: FASTQC, SEQTK_TRIM i MULTIQC.
 
 Pełne nazwy procesów, jak pokazano tutaj, takie jak `NFCORE_DEMO:DEMO:MULTIQC`, są dłuższe niż to, co mogłeś zobaczyć w wstępnym materiale Hello Nextflow.
-Zawierają one nazwy ich workflow nadrzędnych i odzwierciedlają modularność kodu pipeline'a.
+Zawierają one nazwy ich workflow'ów nadrzędnych i odzwierciedlają modularność kodu pipeline'a.
 Zajmiemy się tym bardziej szczegółowo za chwilę.
 
 ### 2.3. Zbadaj wyjścia pipeline'a
@@ -371,7 +371,7 @@ Na przykład plik `execution_timeline_*` pokazuje, jakie procesy zostały urucho
 !!! note
 
     Tutaj zadania nie zostały uruchomione równolegle, ponieważ działamy na minimalistycznej maszynie w Github Codespaces.
-    Aby zobaczyć ich równoległe uruchomienie, spróbuj zwiększyć alokację CPU swojego codespace i limity zasobów w konfiguracji testowej.
+    Aby zobaczyć ich równoległe uruchomienie, spróbuj zwiększyć alokację CPU Swojego codespace i limity zasobów w konfiguracji testowej.
 
 Te raporty są generowane automatycznie dla wszystkich pipeline'ów nf-core.
 
@@ -443,13 +443,13 @@ Skoncentrujemy się na hierarchii plików i organizacji strukturalnej, zamiast z
 ### 3.1. Komponenty kodu pipeline'a
 
 Standardowa organizacja kodu pipeline'a nf-core podąża za modularną strukturą, która jest zaprojektowana tak, aby maksymalizować ponowne użycie kodu, jak wprowadzono w [Hello Modules](../hello_nextflow/04_hello_modules.md), Części 4 kursu [Hello Nextflow](../hello_nextflow/index.md), chociaż w prawdziwie nf-core'owym stylu, jest to zaimplementowane z odrobiną dodatkowej złożoności.
-Konkretnie, pipeline'y nf-core obficie wykorzystują subworkflows, tj. skrypty workflow, które są importowane przez workflow nadrzędny.
+Konkretnie, pipeline'y nf-core obficie wykorzystują subworkflow'y, tj. skrypty workflow'u, które są importowane przez workflow nadrzędny.
 
 To może brzmieć trochę abstrakcyjnie, więc spójrzmy, jak jest to używane w praktyce w pipeline'ie `nf-core/demo`.
 
 !!! note
 
-    Nie przejdziemy przez faktyczny kod dla _sposobu_, w jaki te komponenty modułowe są połączone, ponieważ istnieje pewna dodatkowa złożoność związana z użyciem subworkflows, która może być myląca, a zrozumienie tego nie jest konieczne na tym etapie szkolenia.
+    Nie przejdziemy przez faktyczny kod dla _sposobu_, w jaki te komponenty modułowe są połączone, ponieważ istnieje pewna dodatkowa złożoność związana z użyciem subworkflow'ów, która może być myląca, a zrozumienie tego nie jest konieczne na tym etapie szkolenia.
     Na razie skoncentrujemy się na ogólnej organizacji i logice.
 
 #### 3.1.1. Ogólny przegląd
@@ -460,14 +460,14 @@ Oto jak wyglądają relacje między odpowiednimi komponentami kodu dla pipeline'
     --8<-- "docs/hello_nf-core/img/nf-core_demo_code_organization.svg"
 </figure>
 
-Istnieje tak zwany skrypt _entrypoint_ o nazwie `main.nf`, który działa jako wrapper dla dwóch rodzajów zagnieżdżonych workflow: workflow zawierającego rzeczywistą logikę analizy, zlokalizowanego w `workflows/` i nazwanego `demo.nf`, oraz zestawu workflow housekeepingowych zlokalizowanych w `subworkflows/`.
+Istnieje tak zwany skrypt _entrypoint_ o nazwie `main.nf`, który działa jako wrapper dla dwóch rodzajów zagnieżdżonych workflow'ów: workflow'u zawierającego rzeczywistą logikę analizy, zlokalizowanego w `workflows/` i nazwanego `demo.nf`, oraz zestawu workflow'ów housekeepingowych zlokalizowanych w `subworkflows/`.
 Workflow `demo.nf` wywołuje **moduły** zlokalizowane w `modules/`; zawierają one **procesy**, które będą wykonywać rzeczywiste kroki analizy.
 
 !!! note
 
     Subworkflows nie są ograniczone do funkcji housekeepingowych i mogą wykorzystywać moduły procesów.
 
-    Pipeline `nf-core/demo` pokazany tutaj jest po prostszej stronie spektrum, ale inne pipeline'y nf-core (takie jak `nf-core/rnaseq`) wykorzystują subworkflows, które są zaangażowane w rzeczywistą analizę.
+    Pipeline `nf-core/demo` pokazany tutaj jest po prostszej stronie spektrum, ale inne pipeline'y nf-core (takie jak `nf-core/rnaseq`) wykorzystują subworkflow'y, które są zaangażowane w rzeczywistą analizę.
 
 Teraz przejrzyjmy te komponenty po kolei.
 
@@ -477,24 +477,24 @@ Skrypt `main.nf` jest punktem wejścia, od którego Nextflow rozpoczyna, gdy wyk
 Oznacza to, że gdy uruchamiasz `nextflow run nf-core/demo` aby uruchomić pipeline, Nextflow automatycznie znajduje i wykonuje skrypt `main.nf`.
 Działa to dla każdego pipeline'a Nextflow, który podąża za tą konwencjonalną nazwą i strukturą, nie tylko dla pipeline'ów nf-core.
 
-Użycie skryptu entrypoint ułatwia uruchamianie ustandaryzowanych subworkflows 'housekeepingowych' przed i po uruchomieniu właściwego skryptu analizy.
+Użycie skryptu entrypoint ułatwia uruchamianie ustandaryzowanych subworkflow'ów 'housekeepingowych' przed i po uruchomieniu właściwego skryptu analizy.
 Przejdziemy przez nie po tym, jak przejrzymy rzeczywisty workflow analizy i jego moduły.
 
 #### 3.1.3. Skrypt analizy: `workflows/demo.nf`
 
 Workflow `workflows/demo.nf` to miejsce, w którym przechowywana jest centralna logika pipeline'a.
-Jest on ustrukturyzowany podobnie jak normalny workflow Nextflow, z wyjątkiem tego, że jest zaprojektowany tak, aby być wywoływanym z workflow nadrzędnego, co wymaga kilku dodatkowych funkcji.
+Jest on ustrukturyzowany podobnie jak normalny workflow Nextflow, z wyjątkiem tego, że jest zaprojektowany tak, aby być wywoływanym z workflow'u nadrzędnego, co wymaga kilku dodatkowych funkcji.
 Omówimy odpowiednie różnice w następnej części tego kursu, gdy zajmiemy się konwersją prostego pipeline'a Hello z Hello Nextflow do formy kompatybilnej z nf-core.
 
 Workflow `demo.nf` wywołuje **moduły** zlokalizowane w `modules/`, które przejrzymy w następnej kolejności.
 
 !!! note
 
-    Niektóre workflow analizy nf-core wyświetlają dodatkowe poziomy zagnieżdżenia poprzez wywoływanie subworkflows niższego poziomu.
+    Niektóre workflow'y analizy nf-core wyświetlają dodatkowe poziomy zagnieżdżenia poprzez wywoływanie subworkflow'ów niższego poziomu.
     Jest to głównie używane do opakowywania dwóch lub więcej modułów, które są powszechnie używane razem, w łatwe do ponownego użycia segmenty pipeline'a.
-    Możesz zobaczyć kilka przykładów, przeglądając dostępne [subworkflows nf-core](https://nf-co.re/subworkflows/) na stronie nf-core.
+    Możesz zobaczyć kilka przykładów, przeglądając dostępne [subworkflow'y nf-core](https://nf-co.re/subworkflows/) na stronie nf-core.
 
-    Gdy skrypt analizy używa subworkflows, są one przechowywane w katalogu `subworkflows/`.
+    Gdy skrypt analizy używa subworkflow'ów, są one przechowywane w katalogu `subworkflows/`.
 
 #### 3.1.4. Moduły
 
@@ -536,12 +536,12 @@ W tym przypadku nie ma żadnych modułów `local`.
 
 Plik kodu modułu opisujący proces zawsze nazywa się `main.nf` i jest accompanied by testami i plikami `.yml`, które na razie zignorujem.
 
-Razem wzięte, workflow entrypoint, workflow analizy i moduły są wystarczające do uruchomienia 'interesujących' części pipeline'a.
-Jednak wiemy, że są tam również subworkflows housekeepingowe, więc spójrzmy na nie teraz.
+Razem wzięte, workflow punktu wejścia, workflow analizy i moduły są wystarczające do uruchomienia 'interesujących' części pipeline'a.
+Jednak wiemy, że są tam również subworkflow'y housekeepingowe, więc spójrzmy na nie teraz.
 
 #### 3.1.5. Subworkflows housekeepingowe
 
-Podobnie jak moduły, subworkflows są różnicowane na katalogi `local` i `nf-core`, a każdy subworkflow ma swoją własną zagnieżdżoną strukturę katalogów ze swoim własnym skryptem `main.nf`, testami i plikiem `.yml`.
+Podobnie jak moduły, subworkflow'y są różnicowane na katalogi `local` i `nf-core`, a każdy subworkflow ma Swoją własną zagnieżdżoną strukturę katalogów ze Swoim własnym skryptem `main.nf`, testami i plikiem `.yml`.
 
 ```bash
 tree -L 3 pipelines/nf-core/demo/subworkflows
@@ -571,12 +571,12 @@ tree -L 3 pipelines/nf-core/demo/subworkflows
     9 directories, 7 files
     ```
 
-Jak zauważono powyżej, pipeline `nf-core/demo` nie zawiera żadnych subworkflows specyficznych dla analizy, więc wszystkie subworkflows, które tutaj widzimy, są tak zwanymi workflow 'housekeepingowymi' lub 'użytkowymi', jak wskazuje prefiks `utils_` w ich nazwach.
-Te subworkflows to te, które produkują wymyślny nagłówek nf-core w wyjściu konsoli, między innymi funkcjami akcesoriów.
+Jak zauważono powyżej, pipeline `nf-core/demo` nie zawiera żadnych subworkflow'ów specyficznych dla analizy, więc wszystkie subworkflow'y, które tutaj widzimy, są tak zwanymi workflow'ami 'housekeepingowymi' lub 'użytkowymi', jak wskazuje prefiks `utils_` w ich nazwach.
+Te subworkflow'y to te, które produkują wymyślny nagłówek nf-core w wyjściu konsoli, między innymi funkcjami akcesoriów.
 
 !!! tip
 
-    Poza ich wzorcem nazewnictwa, inną wskazówką, że te subworkflows nie wykonują żadnej naprawdę związanej z analizą funkcji, jest to, że nie wywołują żadnych procesów w ogóle.
+    Poza ich wzorcem nazewnictwa, inną wskazówką, że te subworkflow'y nie wykonują żadnej naprawdę związanej z analizą funkcji, jest to, że nie wywołują żadnych procesów w ogóle.
 
 To kończy zestawienie podstawowych komponentów kodu, które stanowią pipeline `nf-core/demo`.
 Teraz spójrzmy na pozostałe elementy, o których powinieneś wiedzieć trochę przed zagłębieniem się w rozwój: konfigurację pipeline'a i walidację wejścia.
@@ -642,4 +642,4 @@ Zrób sobie przerwę! To było dużo. Gdy poczujesz się odświeżony i gotowy, 
 
 !!! tip
 
-    Jeśli chciałbyś dowiedzieć się, jak komponować workflow z subworkflows przed przejściem do następnej części, sprawdź [Workflows of Workflows](../side_quests/workflows_of_workflows.md) Side Quest.
+    Jeśli chciałbyś dowiedzieć się, jak komponować workflow z subworkflow'ów przed przejściem do następnej części, sprawdź [Workflows of Workflows](../side_quests/workflows_of_workflows.md) Side Quest.

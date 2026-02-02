@@ -24,7 +24,7 @@ Dobrze. Zaczynajmy.
 
 ## Strona Szkoleniowa
 
-Wszystkie materiały szkoleniowe dla kursów Nextflow znajdują się na training.nextflow.io. Możesz przejść do niej w swojej przeglądarce internetowej. Uruchom ją teraz i możemy się rozejrzeć.
+Wszystkie materiały szkoleniowe dla kursów Nextflow znajdują się na training.nextflow.io. Możesz przejść do niej w Swojej przeglądarce internetowej. Uruchom ją teraz i możemy się rozejrzeć.
 
 Będę korzystał z wersji 2.1.1. Wprowadzamy małe aktualizacje i poprawki co jakiś czas, więc nie martw się, jeśli będzie trochę inne, ale jeśli materiały zbyt bardzo się rozjechały, zawsze możesz użyć tego selektora wersji na górze, aby wybrać dokładną wersję materiałów, którą będę omawiał.
 
@@ -40,7 +40,7 @@ Strona główna tutaj wymienia wszystkie różne kursy materiałów szkoleniowyc
 
 Tak naprawdę zamierzam zacząć od tego pierwszego na górze, który jest wspólny dla wszystkich kursów szkoleniowych i dotyczy konkretnie konfigurowania naszego środowiska.
 
-Klikam go, przenosi mnie do tej sekcji i widzimy instrukcje dotyczące lokalnego programowania. Jeśli chcesz użyć swojego własnego laptopa z własną kopią VS Code i własnymi instalacjami oprogramowania, lub tego, czego oczekujemy od większości ludzi, czyli użycia czegoś, co nazywa się GitHub Codespaces.
+Klikam go, przenosi mnie do tej sekcji i widzimy instrukcje dotyczące lokalnego programowania. Jeśli chcesz użyć Swojego własnego laptopa z własną kopią VS Code i własnymi instalacjami oprogramowania, lub tego, czego oczekujemy od większości ludzi, czyli użycia czegoś, co nazywa się GitHub Codespaces.
 
 Codespaces to usługa świadczona przez GitHub, w której uruchamiają serwer WWW w chmurze, z którym możesz się połączyć. Ten serwer ma zainstalowany VS Code, gdzie możesz go uruchomić w przeglądarce internetowej, lub jeśli wolisz, połączyć go z lokalną instalacją VS Code. Wszystkie obliczenia, wszystkie pliki, cała edycja odbywa się zdalnie, co oznacza, że wszystkie potrzebne oprogramowanie jest preinstalowane i jest takie samo dla wszystkich.
 
@@ -72,7 +72,7 @@ Tutaj po lewej stronie mamy pasek boczny. Widzisz Eksplorator ustawiony ze wszys
 
 Te przyciski na dole po lewej stronie mogą być różnymi narzędziami. W pasku bocznym mogę przeszukiwać wszystkie pliki we wszystkich projektach. Mogę pracować z Git, mogę pracować z GitHub, wszystkimi różnymi rzeczami tego typu.
 
-Na górze tutaj jest główne menu. Eksplorator plików jest tym, który będziemy mieć najczęściej tutaj, i możesz kliknąć prawym przyciskiem myszy dowolny z tych plików i zrobić normalne rzeczy, których oczekujesz. Może być konieczne kliknięcie przez niektóre ostrzeżenia takie jak to, gdzie wytnij, kopiuj i możesz również pobrać na swoją lokalną maszynę.
+Na górze tutaj jest główne menu. Eksplorator plików jest tym, który będziemy mieć najczęściej tutaj, i możesz kliknąć prawym przyciskiem myszy dowolny z tych plików i zrobić normalne rzeczy, których oczekujesz. Może być konieczne kliknięcie przez niektóre ostrzeżenia takie jak to, gdzie wytnij, kopiuj i możesz również pobrać na Swoją lokalną maszynę.
 
 Gdy codespace się ładuje, daje nam podgląd pliku markdown w tym głównym obszarze tutaj. To jest dokładnie to samo, co renderuje się na github.com. Mogę to zamknąć, a jeśli kliknę dwukrotnie ten plik Readme, zobaczysz, że otwiera go jako kod w edytorze kodu i tak jak z każdym innym plikiem, możemy edytować ten kod bezpośrednio.
 

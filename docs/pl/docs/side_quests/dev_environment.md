@@ -114,7 +114,7 @@ Ponieważ używałeś VS Code podczas całego kursu Hello Nextflow, jesteś już
 - **Zintegrowany terminal** (`Ctrl+Shift+` backtick dla Windows i MacOS): Terminal do interakcji z komputerem u dołu. Użyj tego do uruchamiania Nextflow lub innych poleceń.
 - **Panel problemów** (`Ctrl+Shift+M`): VS Code pokaże tutaj wszelkie wykryte błędy i problemy. Jest to przydatne do szybkiego podświetlenia problemów.
 
-Możesz przeciągać panele lub je ukrywać (`Ctrl/Cmd+B`, aby przełączyć pasek boczny), aby dostosować swój layout podczas pracy z przykładami.
+Możesz przeciągać panele lub je ukrywać (`Ctrl/Cmd+B`, aby przełączyć pasek boczny), aby dostosować Swój layout podczas pracy z przykładami.
 
 ### Podsumowanie
 
@@ -468,7 +468,7 @@ Obecnie nie ma ścisłego wymuszania stylu dla Nextflow, więc serwer języka of
 
 #### Szybkie komentowanie
 
-Zaznacz blok kodu w swoim workflow i naciśnij **Ctrl+/** (lub **Cmd+/**), aby go zakomentować:
+Zaznacz blok kodu w Swoim workflow i naciśnij **Ctrl+/** (lub **Cmd+/**), aby go zakomentować:
 
 ```groovy
 // workflow {
@@ -529,9 +529,9 @@ Dowiedz się, jak VS Code integruje się z Twoim szerszym procesem programistycz
 
 ---
 
-## 7. Integracja przepływu pracy programistycznej
+## 7. Integracja workflow programistycznego
 
-VS Code dobrze integruje się z przepływem pracy programistycznej poza samą edycją kodu.
+VS Code dobrze integruje się z workflow programistycznym poza samą edycją kodu.
 
 ### 7.1. Integracja kontroli wersji
 
@@ -573,7 +573,7 @@ Możesz zintegrować VS Code z kontrolą wersji i wykonywaniem workflow, aby zar
 
 ### Co dalej?
 
-Zobacz, jak wszystkie te funkcje IDE współpracują w codziennym przepływie pracy programistycznej.
+Zobacz, jak wszystkie te funkcje IDE współpracują w codziennym workflow programistycznym.
 
 ---
 
@@ -620,10 +620,10 @@ Nie oczekujemy, że zapamiętasz wszystko, ale teraz wiesz, że te funkcje istni
 
 Zastosuj te umiejętności IDE podczas pracy z innymi modułami szkoleniowymi, na przykład:
 
-- **[nf-test](nf-test.md)**: Twórz kompleksowe zestawy testów dla swoich workflow
+- **[nf-test](nf-test.md)**: Twórz kompleksowe zestawy testów dla Swoich workflow
 - **[Hello nf-core](../../hello_nf-core/)**: Buduj pipeline gotowe do produkcji ze standardami społeczności
 
-Prawdziwa siła tych funkcji IDE ujawnia się, gdy pracujesz nad większymi, bardziej złożonymi projektami. Zacznij stopniowo włączać je do swojego przepływu pracy - w ciągu kilku sesji staną się drugą naturą i zmienią sposób, w jaki podchodzisz do programowania Nextflow.
+Prawdziwa siła tych funkcji IDE ujawnia się, gdy pracujesz nad większymi, bardziej złożonymi projektami. Zacznij stopniowo włączać je do Swojego workflow - w ciągu kilku sesji staną się drugą naturą i zmienią sposób, w jaki podchodzisz do programowania Nextflow.
 
 Od wychwytywania błędów, zanim Cię spowolnią, po łatwą nawigację po złożonych bazach kodu, te narzędzia uczynią Cię bardziej pewnym i efektywnym programistą.
 

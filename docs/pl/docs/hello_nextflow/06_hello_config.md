@@ -19,7 +19,7 @@ Istnieje wiele sposobów, aby to zrobić, które mogą być używane w kombinacj
 W tej części kursu pokażemy Ci najprostszy i najczęściej używany mechanizm pliku konfiguracyjnego, plik `nextflow.config`, który już spotkałeś w Części 5: Hello Containers.
 
 Omówimy podstawowe komponenty konfiguracji Nextflow, takie jak dyrektywy procesów, executory, profile i pliki parametrów.
-Ucząc się efektywnego wykorzystania tych opcji konfiguracyjnych, możesz zwiększyć elastyczność, skalowalność i wydajność swoich pipeline.
+Ucząc się efektywnego wykorzystania tych opcji konfiguracyjnych, możesz zwiększyć elastyczność, skalowalność i wydajność Swoich pipeline.
 
 ??? info "Jak zacząć od tej sekcji"
 
@@ -288,7 +288,7 @@ Funkcjonalnie ta zmiana niczego nie zmieniła, ale koncepcyjnie jest nieco czyst
 ### 1.2. Użyj pliku konfiguracyjnego specyficznego dla uruchomienia
 
 To świetnie, ale czasami możesz chcieć przeprowadzić tymczasowe eksperymenty z innymi domyślnymi wartościami bez ingerowania w główny plik konfiguracyjny.
-Możesz to zrobić, tworząc nowy plik `nextflow.config` w podkatalogu, którego użyjesz jako katalogu roboczego dla swoich eksperymentów.
+Możesz to zrobić, tworząc nowy plik `nextflow.config` w podkatalogu, którego użyjesz jako katalogu roboczego dla Swoich eksperymentów.
 
 #### 1.2.1. Utwórz katalog roboczy z pustą konfiguracją
 
@@ -370,7 +370,7 @@ Końcowy plik wyjściowy powinien zawierać postać tux wypowiadającą pozdrowi
 
     ```
 
-To wszystko; teraz masz przestrzeń do eksperymentowania bez modyfikowania swojej 'normalnej' konfiguracji.
+To wszystko; teraz masz przestrzeń do eksperymentowania bez modyfikowania Swojej 'normalnej' konfiguracji.
 
 !!! warning "Ostrzeżenie"
 
@@ -1234,7 +1234,7 @@ Jednak gdybyś spróbował uruchomić workflow z alokacjami zasobów przekraczaj
 
     Projekt nf-core skompilował [zbiór plików konfiguracyjnych](https://nf-co.re/configs/) udostępnionych przez różne instytucje na całym świecie, obejmujących szeroki zakres executorów HPC i chmurowych.
 
-    Te współdzielone konfiguracje są wartościowe zarówno dla osób, które tam pracują i mogą zatem po prostu wykorzystać konfigurację swojej instytucji od razu, jak i jako model dla osób, które chcą opracować konfigurację dla własnej infrastruktury.
+    Te współdzielone konfiguracje są wartościowe zarówno dla osób, które tam pracują i mogą zatem po prostu wykorzystać konfigurację Swojej instytucji od razu, jak i jako model dla osób, które chcą opracować konfigurację dla własnej infrastruktury.
 
 ### Podsumowanie
 
@@ -1523,7 +1523,7 @@ Bardziej ogólnie, wiesz, jak konfigurować wykonania workflow, aby pasowały do
 
 ### Co dalej?
 
-Świętuj i pogratuluj sobie! Ukończyłeś swój pierwszy kurs dla deweloperów Nextflow.
+Świętuj i pogratuluj sobie! Ukończyłeś Swój pierwszy kurs dla deweloperów Nextflow.
 
 Przejdź do końcowego [podsumowania kursu](./next_steps.md), aby przejrzeć, czego się nauczyłeś i dowiedzieć się, co dalej.
 

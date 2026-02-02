@@ -8,36 +8,36 @@ hide:
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Nasze Kolekcje Szkoleniowe dostarczają wyselekcjonowane ścieżki uczenia się poprzez nasze zaawansowane materiały szkoleniowe (zwane [Side Quests](../../side_quests)). Ta kolekcja obejmuje cztery kluczowe tematy, które są często używane razem do budowania solidnych i skalowalnych przepływów pracy.
+Nasze Kolekcje Szkoleniowe dostarczają wyselekcjonowane ścieżki uczenia się poprzez nasze zaawansowane materiały szkoleniowe (zwane [Side Quests](../../side_quests)). Ta kolekcja obejmuje cztery kluczowe tematy, które są często używane razem do budowania solidnych i skalowalnych workflow'ów.
 
 ## Cele szkolenia
 
 Po ukończeniu tej kolekcji zdobędziesz doświadczenie z:
 
-- **Złożonymi modułowymi architekturami przepływów pracy** - Łączenie wielu przepływów pracy w spójne pipeline'y
-- **Kompleksowymi strategiami testowania** - Zapewnianie, że Twoje przepływy pracy są niezawodne i łatwe w utrzymaniu
-- **Zarządzaniem metadanymi** - Efektywne przetwarzanie metadanych specyficznych dla próbek w całym przepływie pracy
+- **Złożonymi modułowymi architekturami workflow'ów** - Łączenie wielu workflow'ów w spójne pipeline'y
+- **Kompleksowymi strategiami testowania** - Zapewnianie, że Twoje workflow'y są niezawodne i łatwe w utrzymaniu
+- **Zarządzaniem metadanymi** - Efektywne przetwarzanie metadanych specyficznych dla próbek w całym workflow'ie
 - **Zaawansowanym przetwarzaniem danych** - Wdrażanie wydajnych wzorców dzielenia i grupowania danych
 
-Te umiejętności pozwolą Ci budować solidne, skalowalne i łatwe w utrzymaniu przepływy pracy Nextflow dla rzeczywistych zastosowań.
+Te umiejętności pozwolą Ci budować solidne, skalowalne i łatwe w utrzymaniu workflow'y Nextflow dla rzeczywistych zastosowań.
 
 ## Odbiorcy i wymagania wstępne
 
-Ta kolekcja jest przeznaczona dla użytkowników, którzy ukończyli podstawowe szkolenie Nextflow i chcą zagłębić się w zaawansowane wzorce przepływów pracy, strategie testowania oraz techniki obsługi danych i metadanych.
+Ta kolekcja jest przeznaczona dla użytkowników, którzy ukończyli podstawowe szkolenie Nextflow i chcą zagłębić się w zaawansowane wzorce workflow'ów, strategie testowania oraz techniki obsługi danych i metadanych.
 
 **Wymagania wstępne**
 
 - Ukończenie szkolenia [Hello Nextflow](../../hello_nextflow/) lub równoważne doświadczenie
 - Podstawowa znajomość składni i koncepcji Nextflow
-- Zrozumienie podstawowych wzorców tworzenia przepływów pracy
+- Zrozumienie podstawowych wzorców tworzenia workflow'ów
 - Doświadczenie z narzędziami wiersza poleceń
 
 ## Zawartość kolekcji
 
-Ta kolekcja składa się z czterech Side Quests, które obejmują uzupełniające się tematy inżynierii przepływów pracy:
+Ta kolekcja składa się z czterech Side Quests, które obejmują uzupełniające się tematy inżynierii workflow'ów:
 
-1. **[Workflows of Workflows](../../side_quests/workflows_of_workflows)** - Złożona architektura i kompozycja przepływów pracy
-2. **[Testing with nf-test](../../side_quests/nf-test)** - Strategie testowania przepływów pracy Nextflow
+1. **[Workflows of Workflows](../../side_quests/workflows_of_workflows)** - Złożona architektura i kompozycja workflow'ów
+2. **[Testing with nf-test](../../side_quests/nf-test)** - Strategie testowania workflow'ów Nextflow
 3. **[Metadata](../../side_quests/metadata)** - Obsługa metadanych dla elementów w kanałach Nextflow
 4. **[Splitting and Grouping](../../side_quests/splitting_and_grouping)** - Zaawansowane wzorce przetwarzania danych
 

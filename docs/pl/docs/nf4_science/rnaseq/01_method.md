@@ -5,7 +5,7 @@
 Istnieje wiele prawidłowych metod przetwarzania i analizy danych bulk RNAseq.
 W tym szkoleniu stosujemy metodę opisaną [tutaj](https://www.bioinformatics.babraham.ac.uk/training/RNASeq_Course/Analysing%20RNA-Seq%20data%20Exercise.pdf) przez dr Simon Andrews i dr Laurę Biggins z [Babraham Institute](https://www.babraham.ac.uk/).
 
-Naszym celem jest opracowanie przepływu pracy, który implementuje następujące etapy przetwarzania: przeprowadzenie wstępnej kontroli jakości odczytów w próbce bulk RNAseq, usunięcie sekwencji adapterów z odczytów, dopasowanie odczytów do genomu referencyjnego oraz wygenerowanie kompleksowego raportu kontroli jakości (QC).
+Naszym celem jest opracowanie workflow'u, który implementuje następujące etapy przetwarzania: przeprowadzenie wstępnej kontroli jakości odczytów w próbce bulk RNAseq, usunięcie sekwencji adapterów z odczytów, dopasowanie odczytów do genomu referencyjnego oraz wygenerowanie kompleksowego raportu kontroli jakości (QC).
 
 <figure class="excalidraw">
 --8<-- "docs/nf4_science/rnaseq/img/preprocess.svg"
@@ -16,7 +16,7 @@ Naszym celem jest opracowanie przepływu pracy, który implementuje następując
 - **HISAT2_ALIGN:** Dopasowanie odczytów do genomu referencyjnego przy użyciu Hisat2
 - **MULTIQC:** Wygenerowanie kompleksowego raportu QC przy użyciu MultiQC
 
-Jednak zanim przejdziemy do pisania jakiegokolwiek kodu przepływu pracy, wypróbujemy polecenia ręcznie na danych testowych.
+Jednak zanim przejdziemy do pisania jakiegokolwiek kodu workflow'u, wypróbujemy polecenia ręcznie na danych testowych.
 Narzędzia, których potrzebujemy, nie są zainstalowane w środowisku GitHub Codespaces, więc użyjemy ich za pośrednictwem kontenerów (zobacz [Hello Containers](../../hello_nextflow/05_hello_containers.md)).
 
 !!! note "Uwaga"
@@ -265,7 +265,7 @@ genome_index.1.ht2  genome_index.3.ht2  genome_index.5.ht2  genome_index.7.ht2
 genome_index.2.ht2  genome_index.4.ht2  genome_index.6.ht2  genome_index.8.ht2
 ```
 
-Użyjemy ich za chwilę, ale najpierw wygenerujmy skompresowany tarball z tymi plikami indeksu genomu; będziemy ich potrzebować później, a generowanie ich nie jest zazwyczaj czymś, co chcemy robić w ramach przepływu pracy.
+Użyjemy ich za chwilę, ale najpierw wygenerujmy skompresowany tarball z tymi plikami indeksu genomu; będziemy ich potrzebować później, a generowanie ich nie jest zazwyczaj czymś, co chcemy robić w ramach workflow'u.
 
 ```bash
 tar -czvf /data/genome_index.tar.gz genome_index.*
@@ -435,4 +435,4 @@ Przetestowałeś wszystkie poszczególne polecenia interaktywnie w odpowiednich 
 
 ### Co dalej?
 
-Dowiedz się, jak opakować te same polecenia w wieloetapowy przepływ pracy, który używa kontenerów do wykonywania zadań.
+Dowiedz się, jak opakować te same polecenia w wieloetapowy workflow, który używa kontenerów do wykonywania zadań.

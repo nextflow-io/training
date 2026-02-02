@@ -8,7 +8,7 @@ hide:
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-To zbiór samodzielnych mini-kursów szkoleniowych, które zagłębiają się w konkretne tematy. Możesz przejść przez nie w dowolnej kolejności.
+To zbiór samodzielnych mini-kursów szkoleniowych, które zagłębiają się w konkretne tematy. Możesz przez nie przechodzić w dowolnej kolejności.
 
 Zaczynajmy! Kliknij przycisk "Open in GitHub Codespaces" poniżej, aby uruchomić środowisko szkoleniowe (najlepiej w osobnej karcie), a następnie czytaj dalej, podczas gdy się ładuje.
 
@@ -34,11 +34,11 @@ W przeciwnym razie wybierz zadanie poboczne z poniższej tabeli.
 | ------------------------------------------------------------------------------ | ------------------------ |
 | [Przegląd środowiska programistycznego Nextflow](./ide_features.md)            | 45 min                   |
 | [Podstawowe Wzorce Skryptowania w Nextflow](./essential_scripting_patterns.md) | 90 min                   |
-| [Metadane w przepływach pracy](./metadata.md)                                  | 45 min                   |
+| [Metadane w workflow'ach](./metadata.md)                                       | 45 min                   |
 | [Dzielenie i Grupowanie](./splitting_and_grouping.md)                          | 45 min                   |
 | [Testowanie za pomocą nf-test](./nf-test.md)                                   | 1 godzina                |
-| [Przepływy pracy złożone z przepływów pracy](./workflows_of_workflows.md)      | 30 min                   |
+| [Workflow'y złożone z workflow'ów](./workflows_of_workflows.md)                | 30 min                   |
 | [Praca z plikami](./working_with_files.md)                                     | 45 min                   |
-| [Debugowanie przepływów pracy](./debugging.md)                                 | 1 godzina                |
+| [Debugowanie workflow'ów](./debugging.md)                                      | 1 godzina                |
 
 Daj nam znać, jakie inne dziedziny i przypadki użycia chciałbyś zobaczyć tutaj, publikując post w [sekcji Szkolenia](https://community.seqera.io/c/training/) na forum społeczności.

@@ -47,7 +47,7 @@ Jeśli żadna z powyższych opcji nie odpowiada Twoim potrzebom, możesz odtworz
 
     Szkolenie Nextflow korzystało z [Gitpod](https://gitpod.io) do lutego 2025 roku.
     Jednak twórcy Gitpod zdecydowali się wycofać darmową funkcjonalność na rzecz systemu [Gitpod Flex](https://www.gitpod.io/blog/introducing-gitpod-flex).
-    Z tego powodu przeszliśmy na GitHub Codespaces, które również oferują jednoklkowe środowisko deweloperskie bez wcześniejszej konfiguracji.
+    Z tego powodu przeszliśmy na GitHub Codespaces, które również oferują jednoklikowe środowisko deweloperskie bez wcześniejszej konfiguracji.
 
     W zależności od tego, kiedy zarejestrowałeś się w Gitpod i kiedy dokładnie wycofają usługę, możesz nadal być w stanie uruchomić szkolenie w ich starym IDE chmurowym, choć nie możemy zagwarantować niezawodnego dostępu w przyszłości:
     [Otwórz w Gitpod](https://gitpod.io/#https://github.com/nextflow-io/training).
