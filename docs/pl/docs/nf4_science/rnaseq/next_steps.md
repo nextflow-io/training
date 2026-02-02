@@ -21,7 +21,10 @@ Jeśli nie widzisz Swojej dziedziny reprezentowanej przez odpowiedni przypadek u
 **[nf-core](https://nf-co.re/)** to światowa inicjatywa współpracy mająca na celu opracowanie znormalizowanych pipeline'ów open-source dla szerokiego zakresu zastosowań w badaniach naukowych.
 Projekt obejmuje [ponad 100 pipeline'ów](https://nf-co.re/pipelines/) dostępnych do użycia od razu oraz [znacznie ponad 1400 modułów procesów](https://nf-co.re/modules/), które można zintegrować z własnymi projektami, a także bogaty zestaw narzędzi deweloperskich.
 
-Kurs szkoleniowy **[Hello nf-core](../../hello_nf-core/index.md)** wprowadzi Cię w pipeline'y kuratorowane przez społeczność nf-core oraz framework deweloperski, zaprojektowany, aby pomóc Ci pisać powtarzalne, skalowalne i znormalizowane workflow'y. Nauczysz się, jak używać istniejących pipeline'ów nf-core, przyczyniać się do ich rozwoju, a nawet rozpocząć budowanie własnych, wspieranych przez najlepsze praktyki i prężną społeczność. Jeśli jesteś gotowy, aby zastosować Swoje umiejętności Nextflow w rzeczywistych projektach, to idealny następny krok.
+Kurs szkoleniowy **[Hello nf-core](../../hello_nf-core/index.md)** wprowadzi Cię w pipeline'y kuratorowane przez społeczność nf-core oraz framework deweloperski.
+Narzędzia te pomagają tworzyć powtarzalne, skalowalne i znormalizowane workflow'y.
+Nauczysz się używać istniejących pipeline'ów nf-core, przyczyniać się do ich rozwoju, a nawet budować własne, wspierane przez najlepsze praktyki i prężną społeczność.
+Jeśli jesteś gotowy, aby zastosować Swoje umiejętności Nextflow w rzeczywistych projektach, to idealny następny krok.
 
 ### 1.3. Opanuj bardziej zaawansowane funkcje Nextflow
 
@@ -47,4 +50,4 @@ Zapoznaj się z [tutorialami Seqera Platform](https://docs.seqera.io/platform/la
 
 ### To wszystko na razie!
 
-**Powodzenia w Twojej podróży z Nextflow i nie wahaj się dać nam znać na [forum społeczności](https://community.seqera.io/), co jeszcze moglibyśmy zrobić, aby pomóc.**
+**Powodzenia na Twojej drodze z Nextflow i nie wahaj się dać nam znać na [forum społeczności](https://community.seqera.io/), co jeszcze moglibyśmy zrobić, aby pomóc.**

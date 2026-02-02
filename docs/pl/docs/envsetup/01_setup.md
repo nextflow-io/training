@@ -47,8 +47,7 @@ Jednak możliwe jest dostosowanie środowiska, klikając przycisk "Change option
 
     Pozwala dostosować maszynę wirtualną, której będziesz używać do pracy ze szkoleniem.
 
-    Używanie maszyny z większą liczbą rdzeni pozwala lepiej wykorzystać zdolność Nextflow do równoległego wykonywania workflow'ów.
-    Jednak zużyje to szybciej Twój darmowy limit, więc nie zalecamy zmiany tego ustawienia, chyba że jest to zalecane w instrukcjach kursu, który planujesz realizować.
+    Używanie maszyny z większą liczbą rdzeni pozwala lepiej wykorzystać zdolność Nextflow do równoległego wykonywania workflow'ów. Jednak zużyje to szybciej Twój darmowy limit. Nie zalecamy zmiany tego ustawienia, chyba że wymaga tego kurs, który zamierzasz realizować.
 
     Zobacz 'Limity GitHub Codespaces' poniżej, aby uzyskać więcej szczegółów o limitach.
 
@@ -77,8 +76,8 @@ Możesz dostosować względne proporcje paneli okna według własnych upodobań.
 
 ### Wznawianie sesji
 
-Po utworzeniu środowiska możesz je łatwo wznowić lub uruchomić ponownie i kontynuować od miejsca, w którym skończyłeś.
-Twoje środowisko automatycznie zakończy sesję po 30 minutach bezczynności i zachowa Twoje zmiany przez maksymalnie 2 tygodnie.
+Po utworzeniu codespace możesz je łatwo wznowić lub uruchomić ponownie i kontynuować od miejsca, w którym skończyłeś.
+Sesja automatycznie zakończy się po 30 minutach bezczynności i zachowa Twoje zmiany przez maksymalnie 2 tygodnie.
 
 Możesz ponownie otworzyć środowisko z <https://github.com/codespaces/>.
 Poprzednie środowiska będą wyświetlone na liście.

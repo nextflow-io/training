@@ -24,7 +24,7 @@ Przechodząc przez ten kurs, nauczysz się, jak zastosować podstawowe koncepcje
 Pod koniec tego warsztatu będziesz w stanie:
 
 - Napisać liniowy workflow do zastosowania podstawowych metod przetwarzania i QC dla RNAseq
-- Odpowiednio obsługiwać pliki specyficzne dla domeny, takie jak FASTQ i zasoby genomu referencyjnego
+- Odpowiednio obsługiwać pliki specyficzne dla dziedziny, takie jak FASTQ i zasoby genomu referencyjnego
 - Obsługiwać dane sekwencjonowania single-end i paired-end
 - Wykorzystać paradygmat przepływu danych Nextflow do zrównoleglenia przetwarzania RNAseq na poziomie próbek
 - Agregować raporty QC z wielu etapów i próbek przy użyciu odpowiednich operatorów kanałów

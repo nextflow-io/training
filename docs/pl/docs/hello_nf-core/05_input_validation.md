@@ -29,7 +29,7 @@ W tej piątej części kursu szkoleniowego Hello nf-core pokażemy, jak używać
 
 ### 0.1. Dlaczego walidacja ma znaczenie
 
-Wyobraź sobie, że uruchamiasz Swój pipeline przez dwie godziny, tylko po to, by się zawiesił, ponieważ użytkownik podał plik z niewłaściwym rozszerzeniem. Lub spędzasz godziny na debugowaniu tajemniczych błędów, tylko po to, by odkryć, że parametr był błędnie napisany. Bez walidacji danych wejściowych takie scenariusze są powszechne.
+Wyobraź sobie, że uruchamiasz Swój pipeline przez dwie godziny, tylko po to, by się zawiesił, ponieważ użytkownik podał plik z niewłaściwym rozszerzeniem. Lub spędzasz długie chwile na debugowaniu tajemniczych błędów, aby ostatecznie odkryć, że parametr był błędnie napisany. Bez walidacji danych wejściowych takie scenariusze są powszechne.
 
 Rozważ ten przykład:
 
@@ -101,17 +101,17 @@ Pipeline nf-core będzie wykorzystywał dwa oddzielne pliki schematu, które odp
 
 Oba schematy używają formatu JSON Schema, szeroko przyjętego standardu do opisywania i walidacji struktur danych.
 
-**Walidacja parametrów** waliduje parametry linii poleceń (flagi takie jak `--outdir`, `--batch`, `--input`):
+**Walidacja parametrów** sprawdza argumenty linii poleceń (flagi takie jak `--outdir`, `--batch`, `--input`):
 
-- Sprawdza typy parametrów, zakresy i formaty
-- Zapewnia, że wymagane parametry są podane
-- Waliduje, czy ścieżki plików istnieją
+- Kontroluje typy wartości, zakresy i formaty
+- Zapewnia, że wymagane opcje są podane
+- Weryfikuje, czy ścieżki plików istnieją
 - Zdefiniowana w `nextflow_schema.json`
 
-**Walidacja danych wejściowych** waliduje strukturę arkuszy próbek i plików manifestu (pliki CSV/TSV, które opisują Twoje dane):
+**Walidacja danych wejściowych** sprawdza strukturę arkuszy próbek i manifestów (pliki CSV/TSV opisujące Twoje dane):
 
-- Sprawdza strukturę kolumn i typy danych
-- Waliduje, czy ścieżki plików wymienione w arkuszu próbek istnieją
+- Kontroluje strukturę kolumn i typy danych
+- Weryfikuje, czy ścieżki wymienione w arkuszu próbek istnieją
 - Zapewnia obecność wymaganych pól
 - Zdefiniowana w `assets/schema_input.json`
 
@@ -240,8 +240,8 @@ Dodamy go w następnej sekcji.
 
 ??? info "Skąd pochodzą parametry schematu?"
 
-    Walidacja schematu używa `nextflow.config` jako bazy dla definicji parametrów.
-    Parametry zadeklarowane gdzie indziej w skryptach workflow'u (jak w `main.nf` lub plikach modułów) **nie** są automatycznie przechwytywane przez walidator schematu.
+    Walidacja schematu używa `nextflow.config` jako bazy dla definicji opcji konfiguracyjnych.
+    Wartości zadeklarowane gdzie indziej w skryptach workflow'u (jak w `main.nf` lub plikach modułów) **nie** są automatycznie przechwytywane przez walidator schematu.
 
     To oznacza, że zawsze powinieneś deklarować parametry pipeline'u w `nextflow.config`, a następnie definiować ich reguły walidacji w `nextflow_schema.json`.
 

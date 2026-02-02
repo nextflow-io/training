@@ -46,11 +46,11 @@ Jeśli używasz lokalnego lub niestandardowego środowiska, upewnij się, że u�
 
 ## Przygotuj się do pracy
 
-Po uruchomieniu codespace są dwie rzeczy, które musisz zrobić przed zanurzeniem się w szkoleniu: ustawić katalog roboczy dla tego konkretnego kursu i przejrzeć dostarczone materiały.
+Po uruchomieniu codespace musisz wykonać dwie czynności: ustawić katalog roboczy dla tego konkretnego kursu i przejrzeć dostarczone materiały.
 
 ### Ustaw katalog roboczy
 
-Domyślnie codespace otwiera się z katalogiem roboczym ustawionym na główny katalog wszystkich kursów szkoleniowych, ale dla tego kursu będziemy pracować w katalogu `hello-nextflow/`.
+Domyślnie codespace otwiera się z główną lokalizacją wszystkich kursów szkoleniowych jako katalogiem roboczym, ale tym razem będziemy pracować w `hello-nextflow/`.
 
 Zmień teraz katalog, uruchamiając to polecenie w terminalu:
 
@@ -124,7 +124,7 @@ Używamy takich rozwijanych sekcji, aby zwięźle włączać oczekiwane wyjście
 - **Pliki `test-params.*`** to pliki konfiguracyjne, których użyjemy w Części 6 (Configuration). Na razie możesz je zignorować.
 
 - **Katalog `solutions`** zawiera ukończone skrypty workflow'ów, które są wynikiem każdego etapu kursu.
-  Są przeznaczone do użycia jako odniesienie do sprawdzenia Swojej pracy i rozwiązywania problemów.
+  Służą jako odniesienie do weryfikacji Swojej pracy i rozwiązywania problemów.
 
 ## Lista kontrolna gotowości
 

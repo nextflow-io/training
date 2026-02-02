@@ -16,10 +16,10 @@ Gratulacje z okazji ukończenia kursu szkoleniowego Hello Nextflow! 🎉
 ///
 -->
 
-## Twoja podróż
+## Twoja droga
 
-Zacząłeś od bardzo podstawowego workflow'u, który uruchamiał zakodowane na sztywno polecenie.
-W ciągu sześciu części przekształciłeś ten podstawowy workflow w modularny, wieloetapowy pipeline, który wykorzystuje kluczowe funkcje Nextflow, w tym kanały, operatory, wbudowaną obsługę kontenerów i opcje konfiguracji.
+Zacząłeś od bardzo prostego workflow'u, który uruchamiał zakodowane na sztywno polecenie.
+W ciągu sześciu części przekształciłeś go w modularny, wieloetapowy pipeline, który wykorzystuje kluczowe funkcje Nextflow, w tym kanały, operatory, wbudowaną obsługę kontenerów i opcje konfiguracji.
 
 ### Co zbudowałeś
 

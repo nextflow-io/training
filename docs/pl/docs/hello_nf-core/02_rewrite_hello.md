@@ -2,12 +2,12 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-W tej drugiej części kursu szkoleniowego Hello nf-core pokażemy, jak stworzyć wersję pipeline'u kompatybilną z nf-core, opartą na pipeline'ie stworzonym w kursie dla początkujących [Hello Nextflow](../hello_nextflow/index.md).
+W tej drugiej części kursu szkoleniowego Hello nf-core pokażemy, jak utworzyć wersję workflow'u kompatybilną z nf-core, opartą na projekcie z kursu dla początkujących [Hello Nextflow](../hello_nextflow/index.md).
 
-Zauważyłeś w pierwszej sekcji szkolenia, że pipeline'y nf-core mają dość rozbudowaną strukturę z wieloma plikami pomocniczymi.
-Tworzenie tego wszystkiego od zera byłoby bardzo żmudne, dlatego społeczność nf-core opracowała narzędzia, które wykorzystują szablon do stworzenia podstawowej struktury projektu.
+Zauważyłeś w pierwszej sekcji szkolenia, że workflow'y nf-core mają dość rozbudowaną strukturę z wieloma plikami pomocniczymi.
+Tworzenie tego wszystkiego od zera byłoby bardzo żmudne, dlatego społeczność opracowała narzędzia, które wykorzystują szablon do wygenerowania podstawowej struktury projektu.
 
-Pokażemy, jak użyć tych narzędzi do stworzenia szkieletu pipeline'u, a następnie zaadaptować istniejący kod 'zwykłego' pipeline'u na szkielet nf-core.
+Pokażemy, jak użyć tych narzędzi do wygenerowania szkieletu projektu, a następnie zaadaptować istniejący kod 'zwykłego' workflow'u do struktury nf-core.
 
 Jeśli nie znasz pipeline'u Hello lub potrzebujesz przypomnienia, zobacz [tę stronę informacyjną](../info/hello_pipeline.md).
 
@@ -229,7 +229,7 @@ Spójrzmy, co faktycznie znajduje się w kodzie.
 
 Jeśli zajrzysz do pliku `main.nf`, zobaczysz, że importuje on workflow o nazwie `HELLO` z `workflows/hello`.
 
-Jest to odpowiednik workflow `workflows/demo.nf`, który napotkaliśmy w Części 1, i służy jako zastępczy workflow dla naszego workflow, z niektórymi funkcjami nf-core już na miejscu.
+Jest to odpowiednik pliku `workflows/demo.nf`, który napotkaliśmy w Części 1, i służy jako tymczasowa struktura dla naszego przepływu pracy, z niektórymi funkcjami nf-core już na miejscu.
 
 ```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="15 17 19 35"
 /*
@@ -306,8 +306,8 @@ Naucz się, jak uczynić prosty workflow kompozycyjnym jako wstęp do uczynienia
 
 ## 2. Uczynienie oryginalnego workflow Hello Nextflow kompozycyjnym
 
-Teraz czas rozpocząć pracę nad integracją naszego workflow'u do szkieletu nf-core.
-Przypominamy, że pracujemy z workflow'em przedstawionym w naszym kursie szkoleniowym [Hello Nextflow](../hello_nextflow/index.md).
+Teraz czas rozpocząć pracę nad integracją naszego przepływu pracy do szkieletu nf-core.
+Przypominamy, że pracujemy z kodem przedstawionym w kursie szkoleniowym [Hello Nextflow](../hello_nextflow/index.md).
 
 !!! tip "Wskazówka"
 
@@ -607,8 +607,8 @@ workflow {
 
 Są tutaj dwie ważne obserwacje:
 
-- Składnia wywoływania zaimportowanego workflow'u jest zasadniczo taka sama jak składnia wywoływania modułów.
-- Wszystko, co jest związane z wprowadzaniem wejść do workflow'u (parametr wejściowy i konstrukcja kanału) jest teraz zadeklarowane w tym workflow'ie nadrzędnym.
+- Sposób wywoływania zaimportowanego przepływu pracy jest zasadniczo taki sam jak w przypadku modułów.
+- Wszystko, co jest związane z wprowadzaniem wejść (parametr wejściowy i konstrukcja kanału) jest teraz zadeklarowane w nadrzędnym skrypcie.
 
 !!! note "Uwaga"
 
@@ -663,8 +663,8 @@ Naucz się, jak przeszczepić podstawowy kompozycyjny workflow na szkielet nf-co
 
 ## 3. Dopasowanie zaktualizowanej logiki workflow do zastępczego workflow
 
-Teraz, gdy zweryfikowaliśmy, że nasz kompozycyjny workflow działa poprawnie, wróćmy do szkieletu pipeline'u nf-core, który stworzyliśmy w sekcji 1.
-Chcemy zintegrować kompozycyjny workflow, który właśnie opracowaliśmy, ze strukturą szablonu nf-core, więc wynik końcowy powinien wyglądać mniej więcej tak.
+Teraz, gdy zweryfikowaliśmy poprawność naszego kompozycyjnego przepływu pracy, wróćmy do szkieletu nf-core, który utworzyliśmy w sekcji 1.
+Chcemy zintegrować opracowany właśnie kod ze strukturą szablonu, więc wynik końcowy powinien wyglądać mniej więcej tak.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nf-core/img/core-hello.svg"
@@ -719,9 +719,9 @@ workflow HELLO {
 */
 ```
 
-Ogólnie rzecz biorąc, ten kod robi bardzo niewiele poza pewnymi czynnościami porządkowymi związanymi z przechwytywaniem wersji wszelkich narzędzi, które są uruchamiane w pipeline'ie.
+Ogólnie rzecz biorąc, ten fragment robi bardzo niewiele poza pewnymi czynnościami porządkowymi związanymi z przechwytywaniem wersji uruchamianych narzędzi.
 
-Musimy dodać odpowiedni kod z kompozycyjnej wersji oryginalnego workflow, który opracowaliśmy w sekcji 2.
+Musimy dodać odpowiednią logikę z kompozycyjnej wersji oryginalnego workflow, który opracowaliśmy w sekcji 2.
 
 Zamierzamy zająć się tym w następujących etapach:
 
@@ -848,9 +848,9 @@ Przypominamy, że to jest odpowiedni kod w oryginalnym workflow, który nie zmie
 
 Musimy skopiować kod, który następuje po `main:` do nowej wersji workflow.
 
-Jest tam już jakiś kod związany z przechwytywaniem wersji narzędzi, które są uruchamiane przez workflow. Na razie zostawimy to w spokoju (zajmiemy się wersjami narzędzi później).
-Zachowamy inicjalizację `ch_versions = channel.empty()` na górze, następnie wstawimy naszą logikę workflow, zachowując kod zestawiania wersji na końcu.
-Ta kolejność ma sens, ponieważ w prawdziwym pipeline'ie procesy emitowałyby informacje o wersji, które byłyby dodawane do kanału `ch_versions` podczas uruchamiania workflow.
+Jest tam już fragment związany z przechwytywaniem wersji uruchamianych narzędzi. Na razie zostawimy to w spokoju (zajmiemy się tym później).
+Zachowamy inicjalizację `ch_versions = channel.empty()` na górze, następnie wstawimy naszą logikę, zachowując zestawianie wersji na końcu.
+Ta kolejność ma sens, ponieważ w prawdziwym projekcie procesy emitowałyby informacje o wersjach, które byłyby dodawane do kanału `ch_versions` podczas uruchamiania.
 
 === "Po"
 

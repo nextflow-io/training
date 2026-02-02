@@ -17,9 +17,9 @@
 Ta sekcja opisuje, jak organizować kod workflow, aby rozwój i utrzymanie pipeline było bardziej efektywne i zrównoważone.
 W szczególności pokażemy, jak używać **modułów**.
 
-W Nextflow **moduł** to pojedyncza definicja procesu, która jest zamknięta w samodzielnym pliku kodu.
-Aby użyć modułu w workflow, wystarczy dodać jednoliniową instrukcję importu do pliku kodu workflow; następnie możesz zintegrować proces z workflow w taki sam sposób, jak normalnie.
-To umożliwia ponowne wykorzystanie definicji procesów w wielu workflow bez tworzenia wielu kopii kodu.
+W Nextflow **moduł** to pojedyncza definicja procesu zamknięta w samodzielnym pliku kodu.
+Aby go użyć w pipeline, wystarczy dodać jednoliniową instrukcję importu; następnie można zintegrować dany proces ze strukturą workflow w standardowy sposób.
+Umożliwia to ponowne wykorzystanie definicji w wielu pipeline'ach bez tworzenia wielu kopii kodu.
 
 Kiedy zaczęliśmy rozwijać nasz workflow, napisaliśmy wszystko w jednym pliku kodu.
 Teraz przeniesiemy procesy do indywidualnych modułów.
@@ -446,7 +446,7 @@ Wiesz już, jak modularyzować wiele procesów w workflow.
 Gratulacje, wykonałeś całą tę pracę i absolutnie nic się nie zmieniło w działaniu pipeline!
 
 Żarty na bok, teraz Twój kod jest bardziej modularny, a jeśli zdecydujesz się napisać inny pipeline, który wywołuje jeden z tych procesów, wystarczy wpisać jedną krótką instrukcję importu, aby użyć odpowiedniego modułu.
-To jest lepsze niż kopiowanie-wklejanie kodu, ponieważ jeśli później zdecydujesz się ulepszyć moduł, wszystkie Twoje pipeline odziedziczą te ulepszenia.
+Jest to lepsze niż kopiowanie-wklejanie kodu, ponieważ jeśli później zdecydujesz się ulepszyć moduł, wszystkie Twoje projekty odziedziczą te ulepszenia.
 
 ### Co dalej?
 

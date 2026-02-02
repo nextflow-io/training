@@ -5,7 +5,7 @@
 W trzeciej części kursu szkoleniowego Hello nf-core pokażemy, jak znaleźć, zainstalować i użyć istniejącego modułu nf-core w Swoim pipeline'ie.
 
 Jedną z głównych korzyści pracy z nf-core jest możliwość wykorzystania wcześniej przygotowanych, przetestowanych modułów z repozytorium [nf-core/modules](https://github.com/nf-core/modules).
-Zamiast pisać każdy proces od podstaw, możesz zainstalować i używać modułów utrzymywanych przez społeczność, które przestrzegają najlepszych praktyk.
+Zamiast pisać każdy proces od podstaw, możesz zainstalować i używać gotowych komponentów utrzymywanych przez społeczność, które przestrzegają najlepszych praktyk.
 
 Aby pokazać, jak to działa, zastąpimy niestandardowy moduł `collectGreetings` modułem `cat/cat` z nf-core/modules w pipeline'ie `core-hello`.
 
@@ -35,7 +35,7 @@ Aby pokazać, jak to działa, zastąpimy niestandardowy moduł `collectGreetings
 Najpierw nauczmy się, jak znaleźć istniejący moduł nf-core i zainstalować go w naszym pipeline'ie.
 
 Będziemy dążyć do zastąpienia procesu `collectGreetings`, który używa polecenia Unix `cat` do łączenia wielu plików z powitaniami w jeden.
-Łączenie plików jest bardzo powszechną operacją, więc jest prawdopodobne, że może już istnieć moduł w nf-core zaprojektowany do tego celu.
+Ta operacja jest bardzo powszechna, więc prawdopodobnie istnieje już moduł w nf-core zaprojektowany do tego celu.
 
 Zagłębmy się w to.
 
@@ -319,12 +319,12 @@ Otwórz [core-hello/workflows/hello.nf](core-hello/workflows/hello.nf) i dokonaj
     include { cowpy                  } from '../modules/local/cowpy.nf'
     ```
 
-Zauważ, jak ścieżka dla modułu nf-core różni się od modułów lokalnych:
+Zauważ, jak ścieżka dla modułu nf-core różni się od komponentów lokalnych:
 
-- **Moduł nf-core**: `'../modules/nf-core/cat/cat/main'` (odniesienie do `main.nf`)
-- **Moduł lokalny**: `'../modules/local/collectGreetings.nf'` (odniesienie do pojedynczego pliku)
+- **Komponent nf-core**: `'../modules/nf-core/cat/cat/main'` (odniesienie do `main.nf`)
+- **Komponent lokalny**: `'../modules/local/collectGreetings.nf'` (odniesienie do pojedynczego pliku)
 
-Moduł jest teraz dostępny dla workflow, więc wszystko, co musimy zrobić, to zamienić wywołanie `collectGreetings` na użycie `CAT_CAT`. Prawda?
+CAT_CAT jest teraz dostępny dla workflow, więc wszystko, co musimy zrobić, to zamienić wywołanie `collectGreetings` na jego użycie. Prawda?
 
 Nie tak szybko.
 
@@ -408,10 +408,10 @@ process CAT_CAT {
     path "versions.yml"               , emit: versions
 ```
 
-Moduł CAT_CAT przyjmuje pojedyncze wejście, ale to wejście jest krotką zawierającą dwie rzeczy:
+CAT_CAT przyjmuje pojedyncze wejście, ale jest to krotka składająca się z dwóch elementów:
 
-- `meta` to struktura zawierająca metadane, nazywana metamapą;
-- `files_in` zawiera jeden lub więcej plików wejściowych do przetworzenia, równoważne `input_files` z `collectGreetings`.
+- `meta` to struktura przechowująca metadane, nazywana metamapą;
+- `files_in` to jeden lub więcej plików do przetworzenia, równoważne `input_files` z `collectGreetings`.
 
 Po zakończeniu CAT_CAT dostarcza swoje wyjścia w dwóch częściach:
 
@@ -514,7 +514,7 @@ To powinno załatwić sprawę! Teraz, gdy mamy plan, jesteśmy gotowi do działa
 
 ### Podsumowanie
 
-Wiesz, jak ocenić interfejs wejściowy i wyjściowy nowego modułu, aby zidentyfikować jego wymagania, i nauczyłeś się, jak metamapy są używane przez pipeline'y nf-core do utrzymywania metadanych ściśle powiązanych z danymi, gdy przepływają przez pipeline.
+Wiesz, jak ocenić interfejs wejściowy i wyjściowy nowego modułu, aby zidentyfikować jego wymagania. Nauczyłeś się również, jak metamapy są używane przez nf-core do utrzymywania informacji kontekstowych ściśle powiązanych z danymi podczas ich przepływu przez workflow.
 
 ### Co dalej?
 
@@ -628,10 +628,10 @@ Następnie przekształć kanał plików w kanał krotek zawierających metadane 
 
 Linia, którą dodaliśmy, osiąga dwie rzeczy:
 
-- `.collect()` zbiera wszystkie pliki z wyjścia `convertToUpper` w jedną listę
+- `.collect()` zbiera wszystkie elementy z wyjścia `convertToUpper` w jedną listę
 - `.map { files -> tuple(cat_meta, files) }` tworzy krotkę `[metadata, files]` w formacie oczekiwanym przez `CAT_CAT`
 
-To wszystko, co musimy zrobić, aby przygotować krotkę wejściową dla `CAT_CAT`.
+To wszystko, co musimy zrobić, aby przygotować dane wejściowe dla `CAT_CAT`.
 
 ### 3.3. Wywołanie modułu CAT_CAT
 

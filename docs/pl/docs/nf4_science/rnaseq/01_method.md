@@ -5,7 +5,12 @@
 Istnieje wiele prawidłowych metod przetwarzania i analizy danych bulk RNAseq.
 W tym szkoleniu stosujemy metodę opisaną [tutaj](https://www.bioinformatics.babraham.ac.uk/training/RNASeq_Course/Analysing%20RNA-Seq%20data%20Exercise.pdf) przez dr Simon Andrews i dr Laurę Biggins z [Babraham Institute](https://www.babraham.ac.uk/).
 
-Naszym celem jest opracowanie workflow'u, który implementuje następujące etapy przetwarzania: przeprowadzenie wstępnej kontroli jakości odczytów w próbce bulk RNAseq, usunięcie sekwencji adapterów z odczytów, dopasowanie odczytów do genomu referencyjnego oraz wygenerowanie kompleksowego raportu kontroli jakości (QC).
+Naszym celem jest opracowanie workflow'u implementującego następujące etapy przetwarzania:
+
+- Przeprowadzenie wstępnej kontroli jakości odczytów w próbce bulk RNAseq
+- Usunięcie sekwencji adapterów
+- Dopasowanie do genomu referencyjnego
+- Wygenerowanie kompleksowego raportu QC
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/nf4_science/rnaseq/img/preprocess.svg"
@@ -195,7 +200,7 @@ exit
 
 ## 2. Dopasowanie odczytów do genomu referencyjnego
 
-Pobierzemy obraz kontenera, który ma zainstalowany `hisat2`, uruchomimy go interaktywnie i wykonamy polecenie dopasowania, aby dopasować dane RNAseq do genomu referencyjnego.
+Pobierzemy obraz kontenera, który ma zainstalowany `hisat2`, uruchomimy go interaktywnie i wykonamy polecenie wyrównania danych RNAseq do genomu referencyjnego.
 
 ### 2.1. Pobranie kontenera `hisat2`
 

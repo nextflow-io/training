@@ -2,10 +2,10 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-W czwartej części kursu szkoleniowego Hello nf-core pokażemy, jak utworzyć moduł nf-core, stosując kluczowe konwencje, które czynią moduły przenośnymi i łatwymi w utrzymaniu.
+W czwartej części kursu szkoleniowego Hello nf-core pokażemy, jak utworzyć moduł nf-core, stosując kluczowe konwencje, które czynią takie komponenty przenośnymi i łatwymi w utrzymaniu.
 
-Projekt nf-core udostępnia polecenie (`nf-core modules create`), które automatycznie generuje prawidłowo ustrukturyzowane szablony modułów, podobnie jak to, czego użyliśmy dla workflow'u w Części 2.
-Jednak w celach edukacyjnych zaczniemy od wykonania tego ręcznie: przekształcenia lokalnego modułu `cowpy` w Twoim pipeline'ie `core-hello` w moduł w stylu nf-core krok po kroku.
+Projekt nf-core udostępnia polecenie (`nf-core modules create`), które automatycznie generuje prawidłowo ustrukturyzowane szablony, podobnie jak to, czego użyliśmy dla workflow'u w Części 2.
+Jednak w celach edukacyjnych zaczniemy od wykonania tego ręcznie: przekształcenia lokalnego komponentu `cowpy` w Twoim pipeline'ie `core-hello` w moduł w stylu nf-core krok po kroku.
 Następnie pokażemy, jak korzystać z tworzenia modułów opartych na szablonach, aby pracować wydajniej w przyszłości.
 
 ??? info "Jak rozpocząć od tej sekcji"
@@ -84,9 +84,9 @@ To jest czysto stylistyczna konwencja (nie ma technicznego uzasadnienia), ale po
 
 Musimy wprowadzić trzy zestawy zmian:
 
-1. Zaktualizować nazwę procesu w module
-2. Zaktualizować instrukcję importu modułu w nagłówku workflow
-3. Zaktualizować wywołanie procesu i deklarację emit w treści workflow
+1. Zmienić nazwę procesu w module
+2. Poprawić instrukcję importu modułu w nagłówku workflow
+3. Dostosować wywołanie procesu i deklarację emit w treści workflow
 
 Zaczynajmy!
 
@@ -263,9 +263,9 @@ Lepiej byłoby, gdyby `COWPY` akceptował krotki metadanych bezpośrednio, umoż
 
 W tym celu będziemy musieli wprowadzić następujące zmiany:
 
-1. Zaktualizować definicje wejścia i wyjścia
-2. Zaktualizować wywołanie procesu w workflow
-3. Zaktualizować blok emit w workflow
+1. Zmienić definicje wejścia i wyjścia
+2. Poprawić wywołanie procesu w workflow
+3. Dostosować blok emit w workflow
 
 Po wykonaniu wszystkich tych czynności uruchomimy pipeline, aby sprawdzić, czy wszystko nadal działa jak wcześniej.
 
@@ -407,9 +407,9 @@ Teraz spójrzmy, co jeszcze możemy zrobić, aby wykorzystać wzorce modułów n
 
 W obecnym stanie proces `COWPY` oczekuje otrzymania wartości dla parametru `character`.
 W rezultacie musimy podać wartość za każdym razem, gdy wywołujemy proces, nawet jeśli bylibyśmy zadowoleni z wartości domyślnych ustawionych przez narzędzie.
-Dla `COWPY` nie jest to wprawdzie duży problem, ale dla narzędzi z wieloma opcjonalnymi parametrami może to być dość uciążliwe.
+Dla `COWPY` nie jest to wprawdzie duży problem, ale dla programów z wieloma opcjonalnymi parametrami może to być dość uciążliwe.
 
-Projekt nf-core zaleca używanie funkcji Nextflow zwanej [`ext.args`](https://www.nextflow.io/docs/latest/reference/process.html#ext) do wygodniejszego zarządzania argumentami narzędzia poprzez pliki konfiguracyjne.
+Projekt nf-core zaleca używanie funkcji Nextflow zwanej [`ext.args`](https://www.nextflow.io/docs/latest/reference/process.html#ext) do wygodniejszego zarządzania argumentami poprzez pliki konfiguracyjne.
 
 Zamiast deklarować wejścia procesu dla każdej opcji narzędzia, piszesz moduł tak, aby odwoływał się do `ext.args` w konstrukcji Swojej linii poleceń.
 Następnie wystarczy skonfigurować zmienną `ext.args` tak, aby zawierała argumenty i wartości, których chcesz użyć w pliku `modules.config`, który konsoliduje szczegóły konfiguracji dla wszystkich modułów.
@@ -418,9 +418,9 @@ Nextflow doda te argumenty z ich wartościami do linii poleceń narzędzia w cza
 Zastosujmy to podejście do modułu `COWPY`.
 Będziemy musieli wprowadzić następujące zmiany:
 
-1. Zaktualizować moduł `COWPY`
+1. Zmodyfikować moduł `COWPY`
 2. Skonfigurować `ext.args` w pliku `modules.config`
-3. Zaktualizować workflow `hello.nf`
+3. Dostosować workflow `hello.nf`
 
 Po wykonaniu wszystkich tych czynności uruchomimy pipeline, aby sprawdzić, czy wszystko nadal działa jak wcześniej.
 
@@ -548,14 +548,14 @@ Otwórz `conf/modules.config` i dodaj kod konfiguracyjny wewnątrz bloku `proces
     }
     ```
 
-Miejmy nadzieję, że możesz sobie wyobrazić, że wszystkie moduły w pipeline'ie mają swoje `ext.args` określone w tym pliku, z następującymi korzyściami:
+Miejmy nadzieję, że możesz sobie wyobrazić, że wszystkie komponenty w pipeline'ie mają swoje `ext.args` określone w tym pliku, z następującymi korzyściami:
 
-- **Interfejs modułu pozostaje prosty** - Akceptuje tylko podstawowe metadane i wejścia plikowe
+- **Interfejs pozostaje prosty** - Akceptuje tylko podstawowe metadane i wejścia plikowe
 - **Pipeline nadal udostępnia `params.character`** - Użytkownicy końcowi nadal mogą go konfigurować jak wcześniej
-- **Moduł jest teraz przenośny** - Może być ponownie użyty w innych pipeline bez oczekiwania konkretnej nazwy parametru
+- **Komponent jest teraz przenośny** - Może być ponownie użyty w innych pipeline bez oczekiwania konkretnej nazwy parametru
 - Konfiguracja jest **scentralizowana** w `modules.config`, utrzymując logikę workflow'u czystą
 
-Używając pliku `modules.config` jako miejsca, w którym wszystkie pipeline centralizują konfigurację dla poszczególnych modułów, sprawiamy, że nasze moduły są bardziej wielokrotnego użytku w różnych pipeline.
+Używając pliku `modules.config` jako miejsca, w którym wszystkie pipeline centralizują konfigurację dla poszczególnych komponentów, sprawiamy, że nasze moduły są bardziej wielokrotnego użytku w różnych środowiskach.
 
 #### 1.3.3. Aktualizacja workflow `hello.nf`
 
@@ -881,10 +881,10 @@ Cóż, jest jeszcze jedna ważna zmiana, którą musimy wprowadzić, aby ulepszy
 
 ### 1.5. Centralizacja konfiguracji publikowania
 
-Mogłeś zauważyć, że publikowaliśmy wyjścia do dwóch różnych katalogów:
+Mogłeś zauważyć, że publikowaliśmy wyjścia do dwóch różnych lokalizacji:
 
-- **`results`** — Oryginalny katalog wyjściowy, którego używaliśmy od początku dla naszych lokalnych modułów, ustawiony indywidualnie za pomocą dyrektyw `publishDir` dla każdego modułu;
-- **`core-hello-results`** — Katalog wyjściowy ustawiony za pomocą `--outdir` w linii poleceń, który otrzymywał logi nf-core i wyniki publikowane przez `CAT_CAT`.
+- **`results`** — Oryginalny katalog wyjściowy, którego używaliśmy od początku dla naszych lokalnych modułów, ustawiony indywidualnie za pomocą dyrektyw `publishDir` dla każdego z nich;
+- **`core-hello-results`** — Ścieżka wyjściowa ustawiona za pomocą `--outdir` w linii poleceń, która otrzymywała logi nf-core i wyniki publikowane przez `CAT_CAT`.
 
 To jest nieuporządkowane i nieoptymalne; lepiej byłoby mieć jedną lokalizację dla wszystkiego.
 Oczywiście moglibyśmy wejść do każdego z naszych lokalnych modułów i ręcznie zaktualizować dyrektywę `publishDir`, aby używała katalogu `core-hello-results`, ale co z następnym razem, gdy zdecydujemy się zmienić katalog wyjściowy?

@@ -2,7 +2,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-W tej pierwszej części kursu szkoleniowego Nextflow dla Bioimagingu użyjemy bardzo prostego, niezależnego od domeny przykładu Hello World, aby zademonstrować podstawowe operacje i wskazać odpowiednie komponenty kodu Nextflow.
+W tej pierwszej części kursu szkoleniowego Nextflow dla Bioimagingu użyjemy bardzo prostego, niezależnego od dziedziny przykładu Hello World, aby zademonstrować podstawowe operacje i wskazać odpowiednie komponenty kodu Nextflow.
 
 ## 1. Uruchomienie workflow'u
 
@@ -74,8 +74,9 @@ Teraz zajrzymy pod maskę, aby zobaczyć, gdzie Nextflow faktycznie wykonał pra
 
 ### 1.3. Znalezienie oryginalnego wyjścia i logów w katalogu `work/`
 
-Kiedy uruchamiasz workflow, Nextflow tworzy odrębny 'katalog zadania' dla każdego pojedynczego wywołania każdego procesu w workflow'u (=każdego kroku w pipeline'ie).
-Dla każdego z nich przygotuje niezbędne wejścia, wykona odpowiednie instrukcje i zapisze wyjścia oraz pliki logów w tym jednym katalogu, który jest automatycznie nazwany przy użyciu hasha w celu zapewnienia unikalności.
+Kiedy uruchamiasz workflow, Nextflow tworzy odrębny 'katalog zadania' dla każdego pojedynczego wywołania procesu (czyli każdego kroku w pipeline'ie).
+Dla każdego z nich przygotuje niezbędne wejścia i wykona odpowiednie instrukcje.
+Wyjścia oraz pliki logów trafiają do tego samego katalogu, automatycznie nazwanego przy użyciu hasha w celu zapewnienia unikalności.
 
 Wszystkie te katalogi zadań będą znajdować się w katalogu o nazwie `work` w Twoim bieżącym katalogu (gdzie uruchamiasz polecenie).
 
@@ -233,7 +234,7 @@ workflow {
 </details>
 
 Skrypt Nextflow obejmuje dwa główne typy podstawowych komponentów: jeden lub więcej **procesów** oraz sam **workflow**.
-Każdy **proces** opisuje, jakie operacje odpowiedni krok w pipeline'ie powinien wykonać, podczas gdy **workflow** opisuje logikę przepływu danych, która łączy różne kroki.
+Każdy **proces** definiuje operacje danego kroku w pipeline'ie, natomiast **workflow** określa logikę przepływu danych łączącą poszczególne kroki.
 
 Przyjrzyjmy się najpierw bliżej blokowi **process**, a następnie przyjrzymy się blokowi **workflow**.
 

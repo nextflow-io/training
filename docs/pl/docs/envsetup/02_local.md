@@ -56,7 +56,7 @@ Najprostszym sposobem pobrania materiałów szkoleniowych jest sklonowanie całe
 git clone https://github.com/nextflow-io/training.git
 ```
 
-Każdy kurs ma Swój własny katalog.
-Aby pracować z kursem, otwórz okno terminala (najlepiej z poziomu aplikacji VSCode) i przejdź za pomocą `cd` do odpowiedniego katalogu.
+Każdy kurs ma swój własny katalog.
+Aby rozpocząć pracę, otwórz okno terminala (najlepiej z poziomu aplikacji VSCode) i przejdź za pomocą `cd` do odpowiedniego katalogu.
 
 Następnie możesz postępować zgodnie z instrukcjami kursu dostarczonymi na stronie internetowej.

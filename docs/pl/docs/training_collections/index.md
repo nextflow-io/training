@@ -12,7 +12,7 @@ Ta sekcja zawiera wyselekcjonowane kolekcje modułów szkoleniowych zwanych [Sid
 
 ## Wymagania wstępne
 
-Każda kolekcja ma określone wymagania wstępne udokumentowane na swojej stronie indeksu. Jednak większość kolekcji zakłada:
+Każda z nich ma określone wymagania wstępne udokumentowane na swojej stronie indeksu. Jednak większość kolekcji zakłada:
 
 - Doświadczenie z linią poleceń
 - Podstawowe koncepcje Nextflow i narzędzia omówione w kursie szkoleniowym dla początkujących [Hello Nextflow](../../hello_nextflow/)

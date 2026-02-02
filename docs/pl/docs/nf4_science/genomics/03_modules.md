@@ -53,9 +53,9 @@ Przenieś procesy workflow'u Genomics do modułów.
 
 ## 1. Przeniesienie procesów do modułów
 
-Jak nauczyłeś się w [Hello Modules](../../../hello_nextflow/hello_modules.md), możesz utworzyć moduł po prostu kopiując definicję procesu do własnego pliku, w dowolnym katalogu, i możesz nazwać ten plik dowolnie.
+Jak nauczyłeś się w [Hello Modules](../../../hello_nextflow/hello_modules.md), tworzenie modułu polega na skopiowaniu definicji procesu do osobnego pliku. Plik może znajdować się w wybranym katalogu i mieć wybraną nazwę.
 
-Z powodów, które staną się jasne później (w szczególności gdy przejdziemy do testowania), w tym szkoleniu będziemy stosować konwencję nazewnictwa pliku `main.nf` i umieszczania go w strukturze katalogów nazwanej według zestawu narzędzi i polecenia.
+Z powodów, które staną się jasne później (w szczególności przy testowaniu), w tym szkoleniu stosujemy konwencję nazewnictwa pliku `main.nf` i umieszczania go w strukturze katalogów nazwanej według zestawu narzędzi i polecenia.
 
 ### 1.1. Utwórz moduł dla procesu `SAMTOOLS_INDEX`
 

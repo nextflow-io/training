@@ -223,7 +223,7 @@ Jak zobaczymy później, pliki zdalne będą miały inne nazwy klas (takie jak `
     - **Ciąg ścieżki**: Tylko tekst, który Nextflow traktuje jako znaki
     - **Obiekt Path**: Inteligentne odniesienie do pliku, z którym Nextflow może pracować
 
-    Pomyśl o tym w ten sposób: ciąg ścieżki jest jak napisanie adresu na papierze, podczas gdy obiekt Path jest jak załadowanie adresu w urządzeniu GPS, które wie, jak tam dotrzeć i może podać szczegóły dotyczące podróży.
+    Pomyśl o tym w ten sposób: ciąg ścieżki jest jak napisanie adresu na papierze, podczas gdy obiekt Path jest jak załadowanie adresu w urządzeniu GPS, które wie, jak tam dotrzeć i może podać szczegóły dotyczące trasy.
 
 ### 1.3. Dostęp do atrybutów pliku
 

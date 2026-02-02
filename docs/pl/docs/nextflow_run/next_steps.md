@@ -6,10 +6,10 @@ Gratulacje z okazji ukończenia kursu szkoleniowego Nextflow Run!
 
 <!-- placeholder for video -->
 
-## Twoja podróż
+## Twoja droga
 
-Zacząłeś od bardzo podstawowego workflow'u i nauczyłeś się go uruchamiać, znajdować wyjścia i zarządzać jego wykonaniem.
-Następnie pracowałeś przez coraz bardziej złożone wersje tego workflow'u i nauczyłeś się rozpoznawać podstawowe koncepcje i mechanizmy, które napędzają pipeline'y Nextflow, w tym kanały i operatory, modularyzację kodu i kontenery.
+Zacząłeś od bardzo prostego workflow'u, ucząc się go uruchamiać, znajdować wyjścia i zarządzać wykonaniem.
+Następnie pracowałeś przez coraz bardziej złożone warianty i poznałeś kluczowe koncepcje oraz mechanizmy napędzające pipeline'y Nextflow, w tym kanały i operatory, modularyzację kodu oraz kontenery.
 Na koniec nauczyłeś się, jak dostosować konfigurację pipeline'u do swoich preferencji i infrastruktury obliczeniowej.
 
 ### Czego się nauczyłeś

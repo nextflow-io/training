@@ -25,7 +25,7 @@ Poznasz następujące techniki Nextflow:
 4. Obsługa wielu wyjść z procesu
 
 Dla demonstracji będziemy kontynuować rozbudowę domenowo-agnostycznego przykładu Hello World z Części 1 i 2.
-Tym razem wprowadzimy następujące zmiany w naszym workflow, aby lepiej odzwierciedlić sposób budowania rzeczywistych workflow:
+Tym razem wprowadzimy następujące zmiany w naszym workflow, aby lepiej odzwierciedlić sposób budowania rzeczywistych pipeline'ów:
 
 1. Dodamy drugi krok, który konwertuje pozdrowienie na wielkie litery.
 2. Dodamy trzeci krok, który zbiera wszystkie przekształcone pozdrowienia i zapisuje je do pojedynczego pliku.
@@ -341,7 +341,7 @@ Wyjście pierwszego procesu znajduje się tam, ponieważ Nextflow **przygotował
 Jednak w rzeczywistości jest to dowiązanie symboliczne wskazujące na oryginalny plik w podkatalogu wywołania pierwszego procesu.
 Domyślnie, podczas uruchamiania na pojedynczej maszynie, jak to robimy tutaj, Nextflow używa dowiązań symbolicznych zamiast kopii do przygotowywania plików wejściowych i pośrednich.
 
-Teraz, zanim przejdziemy dalej, pomyśl o tym, jak wszystko, co zrobiliśmy, to połączenie wyjścia `sayHello` z wejściem `convertToUpper` i dwa procesy mogły być uruchomione szeregowo.
+Teraz, zanim przejdziemy dalej, pomyśl o tym, jak wszystko, co zrobiliśmy, to połączenie wyjścia `sayHello` z wejściem `convertToUpper`. Dzięki temu dwa procesy mogły być uruchomione szeregowo.
 Nextflow wykonał za nas ciężką pracę związaną z obsługą poszczególnych plików wejściowych i wyjściowych oraz przekazywaniem ich między dwoma poleceniami.
 
 To jeden z powodów, dla których kanały w Nextflow są tak potężne: zajmują się rutynową pracą związaną z łączeniem kroków workflow'u.
@@ -358,7 +358,7 @@ Dowiedz się, jak zbierać wyjścia z wielu wywołań procesu i przekazywać je 
 
 ## 2. Dodaj trzeci krok do zbierania wszystkich pozdrowień
 
-Gdy używamy procesu do zastosowania transformacji na każdym z elementów w kanale, jak to robimy tutaj z wieloma pozdrowieniami, czasami chcemy zebrać elementy z kanału wyjściowego tego procesu i przekazać je do innego procesu, który wykonuje jakąś analizę lub podsumowanie.
+Gdy używamy procesu do zastosowania transformacji na każdym z elementów w kanale, jak tutaj z wieloma pozdrowieniami, czasami zachodzi potrzeba zebrania elementów z kanału wyjściowego. Następnie można je przekazać do innego procesu wykonującego analizę lub podsumowanie.
 
 Dla demonstracji dodamy nowy krok do naszego pipeline, który zbiera wszystkie pozdrowienia zapisane wielkimi literami, wyprodukowane przez proces `convertToUpper`, i zapisuje je do pojedynczego pliku.
 
@@ -700,7 +700,7 @@ Dowiedz się, jak przekazać więcej niż jedno wejście do procesu.
 
 ## 3. Przekaż więcej niż jedno wejście do procesu
 
-Chcemy mieć możliwość nazwania końcowego pliku wyjściowego konkretną nazwą, aby móc przetwarzać kolejne partie pozdrowień bez nadpisywania końcowych wyników.
+Chcemy mieć możliwość nazwania końcowego pliku wyjściowego konkretną nazwą, aby móc przetwarzać kolejne partie pozdrowień bez nadpisywania poprzednich rezultatów.
 
 W tym celu wprowadzimy następujące udoskonalenia do workflow:
 
@@ -736,7 +736,7 @@ W bloku procesu wprowadź następującą zmianę w kodzie:
 Możesz skonfigurować procesy tak, aby oczekiwały tylu wejść, ile chcesz.
 W tej chwili wszystkie są ustawione jako wymagane wejścia; _musisz_ podać wartość, aby workflow działał.
 
-Dowiesz się, jak zarządzać wymaganymi i opcjonalnymi wejściami później w Swojej podróży z Nextflow.
+Dowiesz się, jak zarządzać wymaganymi i opcjonalnymi wejściami później na swojej drodze z Nextflow.
 
 #### 3.1.2. Użyj zmiennej `batch_name` w nazwie pliku wyjściowego
 
@@ -887,7 +887,7 @@ Czy możemy wybrać i użyć konkretnego wyjścia?
 Wszystko to doskonałe pytania, a krótka odpowiedź brzmi: tak, możemy!
 
 Wiele wyjść zostanie spakowanych w oddzielne kanały.
-Możemy albo zdecydować się nadać tym kanałom wyjściowym nazwy, co ułatwia późniejsze odnoszenie się do nich indywidualnie, albo możemy się do nich odnosić przez indeks.
+Tym strumieniom wyjściowym można nadać nazwy, co ułatwia późniejsze odwoływanie się do nich indywidualnie, albo uzyskać do nich dostęp przez indeks.
 
 Zagłębmy się w przykład.
 

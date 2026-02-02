@@ -6,10 +6,10 @@ Gratulacje ukończenia kursu szkoleniowego Hello nf-core! 🎉
 
 <!-- placeholder for video -->
 
-## Twoja podróż
+## Twoja droga
 
-Zacząłeś od nauki pobierania i uruchamiania demonstracyjnego pipeline'a, a następnie zajęłeś się konwersją prostego workflow'u Nextflow na pipeline nf-core.
-Nauczyłeś się tworzyć szkielet pipeline przy użyciu szablonu i przeszczepiać istniejący pipeline na ten szkielet.
+Zacząłeś od nauki pobierania i uruchamiania demonstracyjnego pipeline'a, a następnie zajęłeś się konwersją prostego workflow'u Nextflow na projekt nf-core.
+Nauczyłeś się tworzyć szkielet przy użyciu szablonu i przeszczepiać istniejący kod na tę strukturę.
 Następnie stopniowo udoskonalałeś pipeline, zastępując jeden z lokalnych modułów modułem nf-core, przekształcając kolejny z lokalnych modułów tak, aby odpowiadał standardom nf-core, i dodając walidację wejścia.
 
 ### Co zbudowałeś

@@ -47,7 +47,7 @@ Pamiętaj, że ten kod workflow'u jest poprawny, ale nie jest funkcjonalny; jego
 
 ### 1.1. Utworzenie katalogu do przechowywania modułów
 
-Utworzymy samodzielne moduły dla każdego procesu, aby ułatwić zarządzanie nimi i ich ponowne wykorzystanie, więc stwórzmy katalog do ich przechowywania.
+Utworzymy samodzielne moduły dla każdego procesu. Ułatwi to zarządzanie i ponowne wykorzystanie, więc stwórzmy katalog do przechowywania modułów.
 
 ```bash
 mkdir modules

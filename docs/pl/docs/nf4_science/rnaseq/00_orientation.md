@@ -14,7 +14,8 @@ Ten katalog zawiera wszystkie pliki kodu, dane testowe i pliki pomocnicze, któr
 
 Możesz swobodnie eksplorować zawartość tego katalogu; najłatwiejszym sposobem jest użycie eksploratora plików po lewej stronie obszaru roboczego szkolenia w interfejsie VSCode.
 Alternatywnie możesz użyć polecenia `tree`.
-W trakcie kursu używamy wyjścia `tree` do przedstawienia struktury katalogów i zawartości w czytelnej formie, czasami z drobnymi modyfikacjami dla przejrzystości.
+W trakcie kursu używamy wyjścia `tree` do przedstawienia struktury katalogów i zawartości w czytelnej formie.
+Czasami wprowadzamy drobne modyfikacje dla przejrzystości.
 
 Tutaj generujemy spis treści do drugiego poziomu:
 

@@ -10,8 +10,8 @@ hide:
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Naszym celem jest zapewnienie spójnego i dokładnie przetestowanego środowiska, które pozwala uczącym się skupić się na nauce Nextflow bez konieczności poświęcania czasu i wysiłku na zarządzanie oprogramowaniem.
-W tym celu opracowaliśmy skonteneryzowane środowisko zawierające całe niezbędne oprogramowanie, pliki kodu i przykładowe dane do pracy ze wszystkimi naszymi kursami.
+Naszym celem jest zapewnienie spójnego i dokładnie przetestowanego środowiska pracy, które pozwala uczącym się skupić się na nauce Nextflow bez konieczności poświęcania czasu i wysiłku na zarządzanie oprogramowaniem.
+W tym celu opracowaliśmy skonteneryzowaną platformę zawierającą całe niezbędne oprogramowanie, pliki kodu i przykładowe dane do pracy ze wszystkimi naszymi kursami.
 
 To skonteneryzowane środowisko można uruchomić bezpośrednio w GitHub Codespaces lub lokalnie w VS Code z rozszerzeniem Devcontainers.
 
@@ -49,5 +49,5 @@ Jeśli żadna z powyższych opcji nie odpowiada Twoim potrzebom, możesz odtworz
     Jednak twórcy Gitpod zdecydowali się wycofać darmową funkcjonalność na rzecz systemu [Gitpod Flex](https://www.gitpod.io/blog/introducing-gitpod-flex).
     Z tego powodu przeszliśmy na GitHub Codespaces, które również oferują jednoklikowe środowisko deweloperskie bez wcześniejszej konfiguracji.
 
-    W zależności od tego, kiedy zarejestrowałeś się w Gitpod i kiedy dokładnie wycofają usługę, możesz nadal być w stanie uruchomić szkolenie w ich starym IDE chmurowym, choć nie możemy zagwarantować niezawodnego dostępu w przyszłości:
+    W zależności od daty rejestracji w Gitpod i terminu wycofania usługi, możesz nadal mieć dostęp do ich starego IDE chmurowego. Nie możemy jednak zagwarantować niezawodnego dostępu w przyszłości:
     [Otwórz w Gitpod](https://gitpod.io/#https://github.com/nextflow-io/training).

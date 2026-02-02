@@ -41,7 +41,7 @@ Ta kolekcja składa się z czterech Side Quests, które obejmują uzupełniając
 3. **[Metadata](../../side_quests/metadata)** - Obsługa metadanych dla elementów w kanałach Nextflow
 4. **[Splitting and Grouping](../../side_quests/splitting_and_grouping)** - Zaawansowane wzorce przetwarzania danych
 
-Każdy Side Quest jest samodzielny i obejmuje niezależne koncepcje, ale zalecamy ukończenie ich w kolejności wymienionej powyżej, aby zapewnić logiczną progresję przez tematy.
+Każdy Side Quest jest samodzielny i obejmuje niezależne koncepcje. Zalecamy jednak ukończenie ich w kolejności wymienionej powyżej, aby zapewnić logiczną progresję przez tematy.
 
 ## Jak korzystać z tej kolekcji
 

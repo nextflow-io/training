@@ -149,15 +149,15 @@ Jeśli to zadziałało, jesteś gotowy do nauki konfigurowania pipeline.
 
 Zaczniemy od aspektu konfiguracji, który jest po prostu rozszerzeniem tego, nad czym pracowaliśmy do tej pory: zarządzanie parametrami wejściowymi.
 
-Obecnie nasz workflow jest skonfigurowany do przyjmowania wartości parametrów przez wiersz poleceń, z domyślnymi wartościami ustawionymi w bloku `params` w samym skrypcie workflow.
-Jednak możesz chcieć nadpisać te wartości domyślne bez konieczności określania parametrów w wierszu poleceń lub modyfikowania oryginalnego pliku skryptu.
+Obecnie nasz workflow jest skonfigurowany do przyjmowania parametrów przez wiersz poleceń, z domyślnymi ustawieniami w bloku `params` w samym skrypcie.
+Jednak możesz chcieć nadpisać te wartości domyślne bez konieczności określania argumentów w terminalu lub modyfikowania oryginalnego pliku.
 
 Istnieje wiele sposobów, aby to zrobić; pokażemy Ci trzy podstawowe sposoby, które są bardzo często używane.
 
 ### 1.1. Przenieś domyślne wartości do `nextflow.config`
 
 To najprostsze podejście, choć prawdopodobnie najmniej elastyczne, ponieważ główny plik `nextflow.config` nie jest czymś, co chcesz edytować przy każdym uruchomieniu.
-Ale ma tę zaletę, że oddziela kwestie _deklarowania_ parametrów w workflow (co zdecydowanie tam należy) od dostarczania _domyślnych wartości_, które bardziej pasują do pliku konfiguracyjnego.
+Ma jednak tę zaletę, że oddziela _deklarowanie_ parametrów w workflow (co zdecydowanie tam należy) od dostarczania _domyślnych wartości_, które bardziej pasują do pliku konfiguracyjnego.
 
 Zróbmy to w dwóch krokach.
 
@@ -478,7 +478,7 @@ Dowiedz się, jak zarządzać tym, gdzie i jak publikowane są wyjścia workflow
 
 ## 2. Zarządzanie wyjściami workflow
 
-Do tej pory kodowaliśmy na sztywno wszystkie ścieżki dla deklaracji wyjść na poziomie workflow i, jak zauważyliśmy, gdy zaczęliśmy dodawać wiele wyjść, może to powodować pewne powtórzenia.
+Do tej pory kodowaliśmy na sztywno wszystkie ścieżki dla deklaracji na poziomie workflow i, jak zauważyliśmy, gdy zaczęliśmy dodawać wiele rezultatów, może to powodować pewne powtórzenia.
 
 Przyjrzyjmy się kilku typowym sposobom konfiguracji, aby było to bardziej elastyczne.
 
@@ -1018,11 +1018,11 @@ Dowiedz się, jak zmienić platformę wykonawczą używaną przez Nextflow do fa
 ## 4. Wybierz platformę wykonawczą
 
 Do tej pory uruchamialiśmy nasz pipeline z lokalnym executorem.
-Wykonuje on każde zadanie na maszynie, na której działa Nextflow.
+Wykonuje on każde zadanie na komputerze, na którym działa Nextflow.
 Gdy Nextflow startuje, sprawdza dostępne procesory i pamięć.
-Jeśli zasoby zadań gotowych do uruchomienia przekraczają dostępne zasoby, Nextflow wstrzyma ostatnie zadania przed wykonaniem, dopóki jedno lub więcej wcześniejszych zadań nie zakończy się, zwalniając niezbędne zasoby.
+Jeśli zasoby zadań gotowych do uruchomienia przekraczają dostępne zasoby, Nextflow wstrzyma ostatnie zadania przed wykonaniem, dopóki jedno lub więcej wcześniejszych nie zakończy się, zwalniając niezbędne zasoby.
 
-Lokalny executor jest wygodny i wydajny, ale jest ograniczony do tej pojedynczej maszyny. Przy bardzo dużych obciążeniach możesz odkryć, że Twoja lokalna maszyna jest wąskim gardłem, albo dlatego, że masz pojedyncze zadanie wymagające więcej zasobów niż masz dostępne, albo dlatego, że masz tak wiele zadań, że czekanie na pojedynczą maszynę, aby je uruchomić, trwałoby zbyt długo.
+Lokalny executor jest wygodny i wydajny, ale pozostaje ograniczony do pojedynczego komputera. Przy bardzo dużych obciążeniach możesz odkryć, że Twoja lokalna infrastruktura stanowi wąskie gardło. Może to wynikać z pojedynczego zadania wymagającego więcej zasobów niż masz dostępne, albo z tak wielu zadań, że czekanie na pojedynczy komputer trwałoby zbyt długo.
 
 Nextflow obsługuje [wiele różnych backendów wykonawczych](https://www.nextflow.io/docs/latest/executor.html), w tym harmonogramy HPC (Slurm, LSF, SGE, PBS, Moab, OAR, Bridge, HTCondor i inne), a także backenty wykonawcze w chmurze (AWS Batch, Google Cloud Batch, Azure Batch, Kubernetes i więcej).
 
@@ -1250,9 +1250,9 @@ Dowiedz się, jak skonfigurować predefiniowane profile konfiguracji i przełąc
 
 ## 6. Używaj profili do przełączania między predefiniowanymi konfiguracjami
 
-Pokazaliśmy Ci wiele sposobów dostosowywania konfiguracji pipeline w zależności od projektu, nad którym pracujesz, lub środowiska obliczeniowego, którego używasz.
+Pokazaliśmy Ci wiele sposobów dostosowywania konfiguracji pipeline w zależności od projektu, nad którym pracujesz, lub środowiska, w którym wykonujesz obliczenia.
 
-Możesz chcieć przełączać się między alternatywnymi ustawieniami w zależności od tego, jakiej infrastruktury obliczeniowej używasz. Na przykład możesz chcieć rozwijać i uruchamiać małe testy lokalnie na laptopie, a następnie uruchamiać pełnoskalowe obciążenia na HPC lub w chmurze.
+Możesz chcieć przełączać się między alternatywnymi ustawieniami dla różnych infrastruktur. Na przykład możesz chcieć rozwijać i testować małe próbki lokalnie na laptopie, a następnie uruchamiać pełnoskalowe obciążenia na HPC lub w chmurze.
 
 Nextflow pozwala skonfigurować dowolną liczbę profili opisujących różne konfiguracje, które możesz następnie wybrać w czasie wykonania używając argumentu wiersza poleceń, zamiast modyfikować sam plik konfiguracyjny.
 

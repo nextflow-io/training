@@ -18,14 +18,14 @@ Ta strona podsumowuje stan pipeline'u po ukończeniu kursu Hello Nextflow.
 
 ### Krótki opis
 
-Workflow Hello przyjmuje plik CSV zawierający pozdrowienia, zapisuje je do oddzielnych plików, konwertuje każde na wielkie litery, zbiera je z powrotem razem i generuje pojedynczy plik tekstowy zawierający obrazek ASCII zabawnej postaci wypowiadającej pozdrowienia.
+Workflow Hello przyjmuje plik CSV zawierający teksty powitalne. Zapisuje je do oddzielnych plików i konwertuje na wielkie litery. Następnie zbiera je z powrotem razem i generuje pojedynczy plik tekstowy z obrazkiem ASCII zabawnej postaci wypowiadającej te teksty.
 
 ### Kroki workflow (procesy)
 
 Cztery kroki są zaimplementowane jako procesy Nextflow (`sayHello`, `convertToUpper`, `collectGreetings` i `cowpy`) przechowywane w oddzielnych plikach modułów.
 
-1. **`sayHello`:** Zapisuje każde pozdrowienie do własnego pliku wyjściowego (np. "Hello-output.txt")
-2. **`convertToUpper`:** Konwertuje każde pozdrowienie na wielkie litery (np. "HELLO")
+1. **`sayHello`:** Zapisuje każdy tekst powitalny do własnego pliku wyjściowego (np. "Hello-output.txt")
+2. **`convertToUpper`:** Konwertuje każdy wpis na wielkie litery (np. "HELLO")
 3. **`collectGreetings`:** Zbiera wszystkie pozdrowienia wielkimi literami do pojedynczego pliku wsadowego
 4. **`cowpy`:** Generuje grafikę ASCII za pomocą narzędzia `cowpy`
 

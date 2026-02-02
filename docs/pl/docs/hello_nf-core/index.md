@@ -42,7 +42,7 @@ Ten kurs został zaprojektowany jako praktyczny, z ćwiczeniami zorientowanymi n
 Zostaniesz zapoznany z [**nf-core**](https://nf-co.re/), inicjatywą społeczności mającą na celu rozwój i utrzymanie wyselekcjonowanego zestawu naukowych pipeline'ów zbudowanych przy użyciu Nextflow, a także odpowiednich narzędzi i wytycznych promujących otwartą współpracę, testowanie i przeglądy kodu ([Nat Biotechnol 38, 276–278 (2020)](https://www.nature.com/articles/s41587-020-0439-x), [Genome Biol 26, 228 (2025)](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-025-03673-9)).
 
 Pipeline'y opracowane przez społeczność nf-core zostały zaprojektowane jako modułowe, skalowalne i przenośne, pozwalając badaczom na łatwe dostosowanie i wykonanie ich przy użyciu własnych danych i zasobów obliczeniowych.
-Wytyczne dotyczące najlepszych praktyk egzekwowane przez projekt dodatkowo zapewniają, że pipeline'y są niezawodne, dobrze udokumentowane i zwalidowane na rzeczywistych zestawach danych.
+Wytyczne dotyczące najlepszych praktyk egzekwowane przez projekt dodatkowo zapewniają, że te rozwiązania są niezawodne, dobrze udokumentowane i zwalidowane na rzeczywistych zestawach danych.
 Pomaga to zwiększyć niezawodność i odtwarzalność analiz naukowych i ostatecznie umożliwia badaczom przyspieszenie ich odkryć naukowych.
 
 Nie omówimy wszystkiego, co można wiedzieć o pipeline'ach nf-core w tym kursie, ponieważ nf-core obejmuje wiele funkcji i konwencji opracowanych przez społeczność przez lata.

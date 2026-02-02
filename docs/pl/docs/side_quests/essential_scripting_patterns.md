@@ -10,7 +10,7 @@ Jednak gdy trzeba manipulować danymi, parsować złożone nazwy plików, implem
 
 ### Cele szkolenia
 
-Ten side quest zabiera Cię w praktyczną podróż od podstawowych konceptów do wzorców gotowych do produkcji.
+Ten side quest zabiera Cię w praktyczną drogę od podstawowych konceptów do wzorców gotowych do produkcji.
 Przekształcimy prosty workflow odczytujący CSV w zaawansowany pipeline bioinformatyczny, rozwijając go krok po kroku przez realistyczne wyzwania:
 
 - **Zrozumienie granic:** Rozróżnienie między operacjami przepływu danych a skryptowaniem i zrozumienie, jak współpracują

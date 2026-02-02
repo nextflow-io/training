@@ -11,8 +11,8 @@ hide:
 Od wersji 3.0 portalu szkoleniowego wszystkie nasze kursy opierają się na wersji 25.10.2 Nextflow, chyba że na stronie indeksu kursu podano inaczej (z wyjątkiem przestarzałych lub zarchiwizowanych materiałów, które mogą nie zawierać informacji o wersji).
 
 Ponieważ kursy używają teraz typowanych wejść na poziomie workflow oraz dyrektyw wyjściowych na poziomie workflow, wymagają użycia parsera składni V2.
-Jeśli planujesz korzystać ze środowiska, które udostępniamy poprzez [Github Codespaces](../envsetup/01_setup.md) lub [lokalne devcontainers](../envsetup/03_devcontainer.md), nie musisz nic robić, chyba że w instrukcjach kursu zaznaczono inaczej.
-Jednak jeśli planujesz pracować przez szkolenia we własnym środowisku ([Instalacja ręczna](../envsetup/02_local.md)), musisz upewnić się, że używasz Nextflow w wersji 25.10.2 lub nowszej z włączonym parserem składni v2.
+Jeśli zamierzasz korzystać ze środowiska, które udostępniamy poprzez [Github Codespaces](../envsetup/01_setup.md) lub [lokalne devcontainers](../envsetup/03_devcontainer.md), nie musisz nic robić, chyba że w instrukcjach kursu zaznaczono inaczej.
+Jednak jeśli wolisz pracować przez szkolenia we własnym środowisku ([Instalacja ręczna](../envsetup/02_local.md)), musisz upewnić się, że używasz Nextflow w wersji 25.10.2 lub nowszej z włączonym parserem składni v2.
 
 ## Starsze wersje materiałów szkoleniowych
 
@@ -23,7 +23,7 @@ Gdy wybierzesz starszą wersję materiałów szkoleniowych, linki do środowiska
 
 ## Inne informacje o wersjach składni Nextflow
 
-Nextflow ma dwie odrębne koncepcje wersjonowania, które są czasami mylone: **wersje DSL** i **wersje parsera składni**.
+Nextflow ma dwie odrębne koncepcje wersjonowania, które są czasami mylone: **warianty DSL** i **warianty parsera składni**.
 
 **DSL1 vs DSL2** odnosi się do zasadniczo różnych sposobów pisania pipeline'ów Nextflow.
 DSL1 był oryginalną składnią, gdzie procesy były niejawnie połączone przez kanały.
@@ -37,7 +37,7 @@ Parser v2 jest bardziej rygorystyczny i umożliwia nowe funkcje języka, takie j
 Parser v2 zapewnia również lepsze komunikaty o błędach i wykrywa więcej błędów podczas parsowania, a nie w czasie wykonywania.
 Parser v2 stanie się domyślny w Nextflow 26.04.
 
-Podsumowując: DSL2 to język, który piszesz; wersja parsera składni określa, jak ściśle ten język jest interpretowany i jakie zaawansowane funkcje są dostępne.
+Podsumowując: DSL2 to język, który piszesz. Wariant parsera składni określa, jak ściśle ten język jest interpretowany i jakie zaawansowane funkcje są dostępne.
 
 ### Sprawdzanie i ustawianie wersji Nextflow
 
@@ -84,8 +84,7 @@ Te dwa artykuły są szczególnie pomocne przy migracji do najnowszej wersji:
 
 Obie te funkcje są omówione w ramach szkolenia dla początkujących, począwszy od wersji 3.0 materiałów szkoleniowych.
 
-W zależności od generacji kodu Nextflow, który zamierzasz migrować, możesz być w stanie wykonać większość pracy za pomocą lintera Nextflow używając polecenia `nextflow lint -format`.
-Zobacz dokumentację CLI dla [`lint`](https://www.nextflow.io/docs/latest/reference/cli.html#lint), aby uzyskać więcej szczegółów.
+W zależności od generacji kodu Nextflow, który zamierzasz migrować, możesz być w stanie wykonać większość pracy za pomocą lintera. Użyj polecenia `nextflow lint -format`. Zobacz dokumentację CLI dla [`lint`](https://www.nextflow.io/docs/latest/reference/cli.html#lint), aby uzyskać więcej szczegółów.
 
 Mamy nadzieję, że będzie to pomocne.
 Jeśli potrzebujesz pomocy, skontaktuj się na Slacku lub na forum.

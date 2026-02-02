@@ -9,9 +9,9 @@ W tej drugiej części pokażemy Ci, jak używać kanałów i operatorów kanał
 
 ### Przegląd metody
 
-Metoda wywoływania wariantów GATK, której użyliśmy w pierwszej części tego kursu, po prostu generowała wywołania wariantów dla każdej próbki.
-To jest w porządku, jeśli chcesz tylko spojrzeć na warianty z każdej próbki osobno, ale to daje ograniczone informacje.
-Często bardziej interesujące jest spojrzenie na to, jak wywołania wariantów różnią się między wieloma próbkami, a aby to zrobić, GATK oferuje alternatywną metodę zwaną wspólnym wywoływaniem wariantów, którą tutaj demonstrujemy.
+Metoda GATK, której użyliśmy w pierwszej części tego kursu, generowała wyniki dla każdej próbki osobno.
+Jest to w porządku, jeśli chcesz analizować warianty z każdej próbki indywidualnie, ale daje ograniczone informacje.
+Często bardziej interesujące jest porównanie wyników między wieloma próbkami, a GATK oferuje do tego alternatywną metodę zwaną wspólnym genotypowaniem, którą tutaj demonstrujemy.
 
 Wspólne wywoływanie wariantów polega na wygenerowaniu specjalnego rodzaju wyjścia wariantów zwanego GVCF (Genomic VCF) dla każdej próbki, następnie połączeniu danych GVCF ze wszystkich próbek i wreszcie uruchomieniu statystycznej analizy 'wspólnego genotypowania'.
 

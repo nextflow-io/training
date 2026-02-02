@@ -2,7 +2,8 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-W tej pierwszej części kursu szkoleniowego Nextflow Run, łagodnie wprowadzamy temat za pomocą bardzo podstawowego, niezależnego od domeny przykładu Hello World, którego użyjemy do zademonstrowania podstawowych operacji i wskazania odpowiednich komponentów kodu Nextflow.
+W tej pierwszej części kursu szkoleniowego Nextflow Run łagodnie wprowadzamy temat za pomocą bardzo prostego przykładu Hello World.
+Ten niezależny od dziedziny przykład posłuży do zademonstrowania podstawowych operacji i wskazania odpowiednich komponentów kodu Nextflow.
 
 ??? info "Czym jest przykład Hello World?"
 
@@ -114,7 +115,8 @@ To mówi nam, że proces `sayHello` został pomyślnie wykonany raz (`1 of 1 ✔
 ### 2.2. Znajdź plik wyjściowy w katalogu `results`
 
 Ten workflow jest skonfigurowany do publikowania Swojego wyjścia w katalogu results.
-Jeśli spojrzysz na Swój bieżący katalog, zobaczysz, że gdy uruchomiłeś workflow, Nextflow utworzył nowy katalog o nazwie `results`, a także podkatalog o nazwie `1-hello` pod nim, zawierający plik o nazwie `output.txt`.
+Jeśli spojrzysz na Swój bieżący folder, zobaczysz nowo utworzony katalog `results`.
+Wewnątrz znajduje się podkatalog `1-hello` zawierający plik `output.txt`.
 
 ```console title="results/"
 results
@@ -142,7 +144,8 @@ Więc teraz zajrzymy pod maskę, aby zobaczyć, gdzie Nextflow faktycznie wykona
 ### 2.3. Znajdź oryginalne wyjście i logi w katalogu `work/`
 
 Gdy uruchamiasz workflow, Nextflow tworzy odrębny 'katalog zadania' dla każdego pojedynczego wywołania każdego procesu w workflow'ie (=każdego kroku w pipeline'ie).
-Dla każdego z nich przygotowuje niezbędne dane wejściowe, wykonuje odpowiednie instrukcje i zapisuje wyjścia i pliki dziennika w tym jednym katalogu, który jest automatycznie nazywany przy użyciu skrótu hash, aby uczynić go unikalnym.
+Dla każdego z nich przygotowuje niezbędne dane wejściowe i wykonuje odpowiednie instrukcje.
+Wyjścia i pliki dziennika są zapisywane w tym jednym folderze, który jest automatycznie nazywany przy użyciu skrótu hash, aby uczynić go unikalnym.
 
 Wszystkie te katalogi zadań będą znajdować się w katalogu o nazwie `work` w bieżącym katalogu (skąd uruchamiasz polecenie).
 
@@ -223,7 +226,8 @@ echo 'Hello World!' > output.txt
 
 To potwierdza, że workflow złożył to samo polecenie, które uruchomiliśmy bezpośrednio w wierszu poleceń wcześniej.
 
-Gdy coś pójdzie nie tak i musisz rozwiązać problem, przydatne może być spojrzenie na skrypt `command.sh`, aby sprawdzić dokładnie, jakie polecenie Nextflow złożył na podstawie instrukcji workflow'u, interpolacji zmiennych itd.
+Gdy coś pójdzie nie tak, przydatne może być spojrzenie na skrypt `command.sh`.
+Pozwala on sprawdzić dokładnie, jakie polecenie Nextflow złożył na podstawie instrukcji workflow'u, interpolacji zmiennych itd.
 
 ### 2.4. Uruchom ponownie workflow z różnymi powitaniami
 
@@ -533,13 +537,13 @@ Tutaj pokażemy, jak wykorzystać funkcję `resume`, gdy musisz ponownie uruchom
 Czasami będziesz chciał ponownie uruchomić pipeline, który już wcześniej uruchomiłeś, bez powtarzania pracy, która została już pomyślnie ukończona.
 
 Nextflow ma opcję o nazwie `-resume`, która pozwala to zrobić.
-Konkretnie, w tym trybie wszelkie procesy, które zostały już uruchomione z dokładnie tym samym kodem, ustawieniami i danymi wejściowymi, zostaną pominięte.
-To oznacza, że Nextflow uruchomi tylko procesy, które dodałeś lub zmodyfikowałeś od ostatniego uruchomienia, lub do których przekazujesz nowe ustawienia lub dane wejściowe.
+Konkretnie, w tym trybie wszelkie zadania wykonane wcześniej z identycznym kodem, konfiguracją i wejściem zostaną pominięte.
+Nextflow uruchomi tylko te, które dodałeś lub zmodyfikowałeś od ostatniego wykonania, lub do których przekazujesz nowe parametry.
 
 Są dwie kluczowe zalety robienia tego:
 
-- Jeśli jesteś w trakcie rozwijania pipeline'u, możesz iterować szybciej, ponieważ musisz uruchomić tylko proces(y), nad którymi aktywnie pracujesz, aby przetestować Swoje zmiany.
-- Jeśli uruchamiasz pipeline w produkcji i coś pójdzie nie tak, w wielu przypadkach możesz naprawić problem i ponownie uruchomić pipeline, a on wznowi działanie od punktu awarii, co może zaoszczędzić dużo czasu i zasobów obliczeniowych.
+- Jeśli jesteś w trakcie rozwijania pipeline'u, iteracja jest szybsza. Wystarczy przetestować tylko te procesy, nad którymi aktywnie pracujesz.
+- Jeśli wykonujesz pipeline produkcyjnie i coś pójdzie nie tak, w wielu przypadkach wystarczy naprawić problem i wznowić wykonanie. Pipeline kontynuuje od punktu awarii, co oszczędza czas i zasoby obliczeniowe.
 
 Aby go użyć, po prostu dodaj `-resume` do polecenia i uruchom je:
 

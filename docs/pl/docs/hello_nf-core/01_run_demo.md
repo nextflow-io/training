@@ -2,7 +2,8 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-W tej pierwszej części szkolenia Hello nf-core pokażemy Ci, jak znaleźć i wypróbować pipeline nf-core, zrozumieć, jak kod jest zorganizowany, oraz rozpoznać, czym różni się on od zwykłego kodu Nextflow przedstawionego w [Hello Nextflow](../hello_nextflow/index.md).
+W tej pierwszej części szkolenia Hello nf-core pokażemy Ci, jak znaleźć i wypróbować pipeline nf-core.
+Dowiesz się również, jak zorganizowany jest kod oraz czym różni się on od zwykłego kodu Nextflow przedstawionego w [Hello Nextflow](../hello_nextflow/index.md).
 
 Będziemy używać pipeline'a o nazwie nf-core/demo, który jest utrzymywany przez projekt nf-core jako część jego inwentarza pipeline'ów służących do demonstracji struktury kodu i operacji narzędzi.
 
@@ -12,7 +13,7 @@ Upewnij się, że Twój katalog roboczy jest ustawiony na `hello-nf-core/`, jak 
 
 ## 1. Znajdź i pobierz pipeline nf-core/demo
 
-Zacznijmy od zlokalizowania pipeline'a nf-core/demo na stronie projektu pod adresem [nf-co.re](https://nf-co.re), która centralizuje wszystkie informacje takie jak: ogólna dokumentacja i artykuły pomocy, dokumentacja dla każdego z pipeline'ów, wpisy na blogu, ogłoszenia wydarzeń i tak dalej.
+Zacznijmy od zlokalizowania nf-core/demo na stronie projektu pod adresem [nf-co.re](https://nf-co.re), która centralizuje wszystkie informacje: ogólne artykuły pomocy, opisy poszczególnych workflow'ów, wpisy na blogu, ogłoszenia wydarzeń i tak dalej.
 
 ### 1.1. Znajdź pipeline na stronie internetowej
 
@@ -31,7 +32,7 @@ Każdy wydany pipeline ma dedykowaną stronę, która zawiera następujące sekc
 - **Results:** Przykładowe pliki wyjściowe wygenerowane z pełnego zestawu danych testowych
 - **Releases & Statistics:** Historia wersji pipeline'a i statystyki
 
-Za każdym razem, gdy rozważasz przyjęcie nowego pipeline'a, powinieneś najpierw uważnie przeczytać dokumentację pipeline'a, aby zrozumieć, co robi i jak powinien być skonfigurowany przed próbą jego uruchomienia.
+Za każdym razem, gdy rozważasz użycie nowego workflow'u, powinieneś najpierw uważnie przeczytać dokumentację, aby zrozumieć, co robi i jak powinien być skonfigurowany.
 
 Spójrz teraz i zobacz, czy możesz dowiedzieć się:
 
@@ -41,7 +42,7 @@ Spójrz teraz i zobacz, czy możesz dowiedzieć się:
 
 #### 1.1.1. Przegląd pipeline'a
 
-Zakładka `Introduction` dostarcza przegląd pipeline'a, w tym wizualną reprezentację (zwaną mapą metra) i listę narzędzi, które są uruchamiane jako część pipeline'a.
+Zakładka `Introduction` dostarcza przegląd workflow'u, w tym wizualną reprezentację (zwaną mapą metra) i listę narzędzi, które są uruchamiane jako jego część.
 
 ![mapa metra pipeline'a](./img/nf-core-demo-subway-cropped.png)
 
@@ -85,8 +86,8 @@ nextflow pull nf-core/demo
 
 Nextflow wykonuje `pull` kodu pipeline'a, co oznacza, że pobiera całe repozytorium na Twój dysk lokalny.
 
-Wyjaśnijmy, że możesz to zrobić z każdym pipeline'em Nextflow, który jest odpowiednio ustawiony w GitHub, nie tylko z pipeline'ami nf-core.
-Jednak nf-core to największa otwarta kolekcja pipeline'ów Nextflow.
+Wyjaśnijmy, że możesz to zrobić z każdym workflow'em Nextflow, który jest odpowiednio skonfigurowany w GitHub, nie tylko z projektami nf-core.
+Jednak nf-core to największa otwarta kolekcja workflow'ów Nextflow.
 
 Możesz uzyskać od Nextflow listę pipeline'ów, które pobrałeś w ten sposób:
 
@@ -119,7 +120,7 @@ tree -L 2 $NXF_HOME/assets/
 
     Pełna ścieżka może się różnić w Twoim systemie, jeśli nie używasz naszego środowiska szkoleniowego.
 
-Nextflow celowo trzyma pobrany kod źródłowy 'z dala od drogi' w oparciu o zasadę, że te pipeline'y powinny być używane bardziej jak biblioteki niż kod, z którym bezpośrednio współdziałasz.
+Nextflow celowo trzyma pobrane źródła 'z dala od drogi' w oparciu o zasadę, że te workflow'y powinny być używane bardziej jak biblioteki niż pliki, z którymi bezpośrednio współdziałasz.
 
 Jednak dla celów tego szkolenia chcemy móc zagłębiać się i zobaczyć, co tam jest.
 Więc aby to ułatwić, stwórzmy dowiązanie symboliczne do tej lokalizacji z naszego bieżącego katalogu roboczego.
@@ -320,7 +321,7 @@ Przechodząc do wyjścia wykonania, spójrzmy na linie, które mówią nam, jaki
     [7c/78d96e] NFCORE_DEMO:DEMO:MULTIQC                 | 1 of 1 ✔
 ```
 
-To mówi nam, że zostały uruchomione trzy procesy, odpowiadające trzem narzędziom pokazanym na stronie dokumentacji pipeline'a na stronie nf-core: FASTQC, SEQTK_TRIM i MULTIQC.
+To mówi nam, że zostały uruchomione trzy procesy, odpowiadające trzem narzędziom pokazanym w dokumentacji na stronie nf-core: FASTQC, SEQTK_TRIM i MULTIQC.
 
 Pełne nazwy procesów, jak pokazano tutaj, takie jak `NFCORE_DEMO:DEMO:MULTIQC`, są dłuższe niż to, co mogłeś zobaczyć w wstępnym materiale Hello Nextflow.
 Zawierają one nazwy ich workflow'ów nadrzędnych i odzwierciedlają modularność kodu pipeline'a.
@@ -387,9 +388,9 @@ Dowiedz się, jak kod pipeline'a jest zorganizowany.
 
 ## 3. Zbadaj strukturę kodu pipeline'a
 
-Teraz, gdy pomyślnie uruchomiliśmy pipeline jako użytkownicy, zmieńmy naszą perspektywę, aby przyjrzeć się, jak pipeline'y nf-core są wewnętrznie ustrukturyzowane.
+Teraz, gdy pomyślnie uruchomiliśmy workflow jako użytkownicy, zmieńmy naszą perspektywę, aby przyjrzeć się wewnętrznej organizacji projektów nf-core.
 
-Projekt nf-core egzekwuje silne wytyczne dotyczące tego, jak pipeline'y są ustrukturyzowane oraz jak kod jest zorganizowany, skonfigurowany i udokumentowany.
+Społeczność egzekwuje silne wytyczne dotyczące struktury workflow'ów oraz sposobu organizacji, konfiguracji i dokumentowania kodu.
 Zrozumienie, jak to wszystko jest zorganizowane, jest pierwszym krokiem w kierunku tworzenia własnych pipeline'ów kompatybilnych z nf-core, co podejmiemy w Części 2 tego kursu.
 
 Spójrzmy, jak kod pipeline'a jest zorganizowany w repozytorium `nf-core/demo`, używając dowiązania symbolicznego `pipelines`, które utworzyliśmy wcześniej.
@@ -442,8 +443,8 @@ Skoncentrujemy się na hierarchii plików i organizacji strukturalnej, zamiast z
 
 ### 3.1. Komponenty kodu pipeline'a
 
-Standardowa organizacja kodu pipeline'a nf-core podąża za modularną strukturą, która jest zaprojektowana tak, aby maksymalizować ponowne użycie kodu, jak wprowadzono w [Hello Modules](../hello_nextflow/04_hello_modules.md), Części 4 kursu [Hello Nextflow](../hello_nextflow/index.md), chociaż w prawdziwie nf-core'owym stylu, jest to zaimplementowane z odrobiną dodatkowej złożoności.
-Konkretnie, pipeline'y nf-core obficie wykorzystują subworkflow'y, tj. skrypty workflow'u, które są importowane przez workflow nadrzędny.
+Standardowa organizacja projektu nf-core podąża za modularną strukturą, która jest zaprojektowana tak, aby maksymalizować ponowne użycie, jak wprowadzono w [Hello Modules](../hello_nextflow/04_hello_modules.md), Części 4 kursu [Hello Nextflow](../hello_nextflow/index.md), chociaż w prawdziwie nf-core'owym stylu, jest to zaimplementowane z odrobiną dodatkowej złożoności.
+Konkretnie, workflow'y nf-core obficie wykorzystują subworkflow'y, tj. skrypty importowane przez nadrzędny przepływ pracy.
 
 To może brzmieć trochę abstrakcyjnie, więc spójrzmy, jak jest to używane w praktyce w pipeline'ie `nf-core/demo`.
 
@@ -474,7 +475,7 @@ Teraz przejrzyjmy te komponenty po kolei.
 #### 3.1.2. Skrypt entrypoint: `main.nf`
 
 Skrypt `main.nf` jest punktem wejścia, od którego Nextflow rozpoczyna, gdy wykonujemy `nextflow run nf-core/demo`.
-Oznacza to, że gdy uruchamiasz `nextflow run nf-core/demo` aby uruchomić pipeline, Nextflow automatycznie znajduje i wykonuje skrypt `main.nf`.
+Oznacza to, że gdy wywołujesz to polecenie, Nextflow automatycznie znajduje i wykonuje plik `main.nf`.
 Działa to dla każdego pipeline'a Nextflow, który podąża za tą konwencjonalną nazwą i strukturą, nie tylko dla pipeline'ów nf-core.
 
 Użycie skryptu entrypoint ułatwia uruchamianie ustandaryzowanych subworkflow'ów 'housekeepingowych' przed i po uruchomieniu właściwego skryptu analizy.
@@ -583,8 +584,8 @@ Teraz spójrzmy na pozostałe elementy, o których powinieneś wiedzieć trochę
 
 ### 3.2. Konfiguracja pipeline'a
 
-Nauczyłeś się wcześniej, że Nextflow oferuje wiele opcji konfigurowania wykonania pipeline'a, czy to w zakresie wejść i parametrów, zasobów obliczeniowych i innych aspektów orkiestracji.
-Projekt nf-core stosuje wysoce ustandaryzowane wytyczne dotyczące konfiguracji pipeline'a, które mają na celu oparcie się na elastycznych opcjach dostosowywania Nextflow w sposób, który zapewnia większą spójność i łatwość konserwacji w pipeline'ach.
+Nauczyłeś się wcześniej, że Nextflow oferuje wiele opcji zarządzania wykonaniem workflow'u, czy to w zakresie wejść i parametrów, zasobów obliczeniowych i innych aspektów orkiestracji.
+Projekt nf-core stosuje wysoce ustandaryzowane wytyczne oparte na elastycznych możliwościach dostosowywania Nextflow, co zapewnia większą spójność i łatwość konserwacji między różnymi workflow'ami.
 
 Centralny plik konfiguracyjny `nextflow.config` jest używany do ustawiania domyślnych wartości dla parametrów i innych opcji konfiguracyjnych.
 Większość tych opcji konfiguracyjnych jest stosowana domyślnie, podczas gdy inne (np. profile zależności oprogramowania) są włączone jako opcjonalne profile.

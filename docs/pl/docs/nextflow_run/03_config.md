@@ -4,7 +4,7 @@
 
 Ta sekcja zbada, jak zarządzać konfiguracją pipeline'u Nextflow, aby dostosować jego zachowanie, zaadaptować go do różnych środowisk i zoptymalizować wykorzystanie zasobów _bez zmieniania ani jednej linii samego kodu workflow'u_.
 
-Istnieje wiele sposobów, aby to zrobić, które można łączyć i które są interpretowane zgodnie z kolejnością pierwszeństwa opisaną [tutaj](https://www.nextflow.io/docs/latest/config.html).
+Istnieje wiele sposobów, aby to osiągnąć. Można je łączyć, a są one interpretowane zgodnie z kolejnością pierwszeństwa opisaną [tutaj](https://www.nextflow.io/docs/latest/config.html).
 
 W tej części kursu pokażemy najprosts i najpopularniejszy mechanizm pliku konfiguracyjnego, plik `nextflow.config`, z którym już się spotkałeś w sekcji o kontenerach w Części 2.
 
@@ -29,7 +29,7 @@ Zaczniemy od aspektu konfiguracji, który jest po prostu rozszerzeniem tego, nad
 Obecnie nasz workflow jest skonfigurowany do przyjmowania kilku wartości parametrów przez wiersz poleceń, zadeklarowanych w bloku `params` w samym skrypcie workflow'u.
 Jeden ma wartość domyślną ustawioną jako część swojej deklaracji.
 
-Jednak możesz chcieć ustawić wartości domyślne dla wszystkich z nich lub nadpisać istniejącą wartość domyślną bez konieczności określania parametrów w wierszu poleceń lub modyfikowania oryginalnego pliku skryptu.
+Jednak możesz chcieć ustawić wartości bazowe dla wszystkich z nich lub nadpisać istniejące ustawienie bez konieczności określania parametrów w wierszu poleceń lub modyfikowania oryginalnego pliku skryptu.
 
 Istnieje wiele sposobów, aby to zrobić; pokażemy trzy podstawowe sposoby, które są bardzo powszechnie używane.
 
@@ -917,9 +917,11 @@ Dowiedz się, jak zmienić platformę wykonawczą używaną przez Nextflow do fa
 Do tej pory uruchamialiśmy nasz pipeline z lokalnym executorem.
 Ten wykonuje każde zadanie na maszynie, na której działa Nextflow.
 Gdy Nextflow się uruchamia, sprawdza dostępne procesory i pamięć.
-Jeśli zasoby zadań gotowych do uruchomienia przekraczają dostępne zasoby, Nextflow wstrzyma ostatnie zadania przed wykonaniem, dopóki jedno lub więcej wcześniejszych zadań nie zakończy się, zwalniając niezbędne zasoby.
+Jeśli wymagania zadań gotowych do uruchomienia przekraczają to, co jest dostępne, Nextflow wstrzyma ostatnie z nich, dopóki jedno lub więcej wcześniejszych nie zakończy się, zwalniając niezbędne moce obliczeniowe.
 
-Lokalny executor jest wygodny i wydajny, ale jest ograniczony do tej jednej maszyny. Dla bardzo dużych obciążeń możesz odkryć, że Twoja lokalna maszyna jest wąskim gardłem, albo dlatego, że masz pojedyncze zadanie wymagające więcej zasobów niż masz dostępne, albo dlatego, że masz tak wiele zadań, że czekanie, aż pojedyncza maszyna je uruchomi, zajęłoby zbyt długo.
+Lokalny executor jest wygodny i wydajny, ale ograniczony do jednej maszyny.
+Dla bardzo dużych obciążeń możesz odkryć, że Twój komputer jest wąskim gardłem.
+Może to wynikać z pojedynczego zadania wymagającego więcej mocy niż masz do dyspozycji, albo z tak wielu zadań, że oczekiwanie na ich wykonanie zajęłoby zbyt długo.
 
 Nextflow obsługuje [wiele różnych backendów wykonawczych](https://www.nextflow.io/docs/latest/executor.html), w tym harmonogramy HPC (Slurm, LSF, SGE, PBS, Moab, OAR, Bridge, HTCondor i inne), a także backendy wykonywania w chmurze, takie jak (AWS Batch, Google Cloud Batch, Azure Batch, Kubernetes i więcej).
 
@@ -950,7 +952,7 @@ process {
 
 Większość platform obliczeniowych o wysokiej wydajności pozwala (a czasami wymaga), abyś określił pewne parametry, takie jak żądania alokacji zasobów i ograniczenia (np. liczba procesorów i pamięć) oraz nazwę kolejki zadań do użycia.
 
-Niestety, każdy z tych systemów używa różnych technologii, składni i konfiguracji do definiowania, jak zadanie powinno być zdefiniowane i przesłane do odpowiedniego harmonogramu.
+Niestety, każdy z tych systemów używa różnych technologii, składni i konfiguracji do określania, jak zadanie powinno być opisane i przesłane do odpowiedniego harmonogramu.
 
 ??? abstract "Przykłady"
 
@@ -1028,7 +1030,9 @@ Ale skąd wiesz, jakich wartości użyć?
 
     Nie wiesz, ile pamięci lub CPU potrzebują Twoje procesy i chcesz uniknąć marnowania zasobów lub zabijania zadań.
 
-Jeśli nie wiesz z góry, ile CPU i pamięci prawdopodobnie będą potrzebować Twoje procesy, możesz przeprowadzić profilowanie zasobów, co oznacza, że uruchamiasz workflow z pewnymi domyślnymi alokacjami, rejestrujesz, ile każdy proces użył, i na tej podstawie szacujesz, jak dostosować bazowe alokacje.
+Jeśli nie wiesz z góry, ile CPU i pamięci prawdopodobnie będą potrzebować Twoje procesy, możesz przeprowadzić profilowanie.
+Oznacza to uruchomienie workflow z pewnymi domyślnymi alokacjami i zarejestrowanie, ile każdy proces zużył.
+Na tej podstawie możesz oszacować, jak dostosować bazowe ustawienia.
 
 Wygodnie, Nextflow zawiera wbudowane narzędzia do tego i chętnie wygeneruje dla Ciebie raport na żądanie.
 
@@ -1161,9 +1165,10 @@ Dowiedz się, jak skonfigurować predefiniowane profile konfiguracji i przełąc
     Regularnie przełączasz się między uruchamianiem pipeline na laptopie do rozwoju i na HPC Swojej instytucji do uruchomień produkcyjnych.
     Masz dość ręcznego zmieniania ustawień konfiguracji za każdym razem, gdy zmieniasz środowiska.
 
-Pokazaliśmy Ci wiele sposobów, w jakie możesz dostosować konfigurację pipeline w zależności od projektu, nad którym pracujesz, lub środowiska obliczeniowego, którego używasz.
+Pokazaliśmy Ci wiele sposobów, w jakie możesz dostosować konfigurację pipeline w zależności od projektu, nad którym pracujesz, lub platformy obliczeniowej, której używasz.
 
-Możesz chcieć przełączać się między alternatywnymi ustawieniami w zależności od tego, jakiej infrastruktury obliczeniowej używasz. Na przykład możesz chcieć rozwijać i uruchamiać małe testy lokalnie na laptopie, a następnie uruchamiać pełnoskalowe obciążenia na HPC lub w chmurze.
+Być może zechcesz przełączać się między alternatywnymi ustawieniami w zależności od tego, jakiej infrastruktury używasz.
+Na przykład możesz rozwijać i testować lokalnie na laptopie, a następnie wykonywać pełnoskalowe obciążenia na HPC lub w chmurze.
 
 Nextflow pozwala Ci skonfigurować dowolną liczbę profili, które opisują różne konfiguracje, które możesz następnie wybrać w czasie wykonania używając argumentu wiersza poleceń, zamiast modyfikować sam plik konfiguracyjny.
 

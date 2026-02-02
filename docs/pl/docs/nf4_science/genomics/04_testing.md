@@ -425,9 +425,9 @@ Dowiedz się, jak pisać testy dla innych procesów w naszym workflow'ie genomik
 
 ## 2. Dodaj testy do połączonego procesu i testuj zawartość
 
-Aby przetestować `GATK_HAPLOTYPECALLER`, musimy dostarczyć procesowi wyjście `SAMTOOLS_INDEX` jako wejście. Moglibyśmy to zrobić, uruchamiając `SAMTOOLS_INDEX`, pobierając jego wyjścia i przechowując je z danymi testowymi workflow'u. To faktycznie jest zalecanym podejściem dla dopracowanego pipeline'u, ale nf-test zapewnia alternatywne podejście, używając metody `setup`.
+Aby przetestować `GATK_HAPLOTYPECALLER`, musimy dostarczyć procesowi dane z `SAMTOOLS_INDEX`. Moglibyśmy uruchomić `SAMTOOLS_INDEX`, pobrać wyniki i przechowywać je z danymi testowymi workflow'u. To faktycznie jest zalecanym podejściem dla dopracowanego pipeline'u, ale nf-test zapewnia alternatywne podejście, używając metody `setup`.
 
-Dzięki metodzie setup możemy wywołać proces `SAMTOOLS_INDEX` jako część konfiguracji testu, a następnie użyć jego wyjścia jako wejścia dla `GATK_HAPLOTYPECALLER`. Ma to koszt: będziemy musieli uruchamiać proces `SAMTOOLS_INDEX` za każdym razem, gdy uruchamiamy test dla `GATK_HAPLOTYPECALLER`. Jednak może nadal rozwijamy workflow i nie chcemy wstępnie generować danych testowych, które możemy później musieć zmienić. Proces `SAMTOOLS_INDEX` jest również bardzo szybki, więc może korzyści z wstępnego generowania i przechowywania jego wyjść są pomijalne. Oto jak działa metoda setup.
+Metoda setup pozwala wywołać proces `SAMTOOLS_INDEX` jako część konfiguracji testu, a jego wynik wykorzystać jako dane wejściowe dla `GATK_HAPLOTYPECALLER`. Ma to koszt: `SAMTOOLS_INDEX` będzie uruchamiany przy każdym teście. Jednak może nadal rozwijamy workflow i nie chcemy wstępnie generować danych testowych, które możemy później zmienić. `SAMTOOLS_INDEX` jest również bardzo szybki, więc korzyści z wstępnego generowania mogą być pomijalne. Oto jak działa metoda setup.
 
 ### 2.1. Wygeneruj i umieść plik testowy
 

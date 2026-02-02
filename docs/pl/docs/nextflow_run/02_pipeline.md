@@ -5,7 +5,7 @@
 W Części 1 tego kursu (Podstawowe operacje) zaczęliśmy od przykładowego workflow'u, który miał tylko minimalne funkcje, aby utrzymać niską złożoność kodu.
 Na przykład `1-hello.nf` używał parametru wiersza poleceń (`--input`) do przekazywania pojedynczej wartości na raz.
 
-Jednak większość rzeczywistych pipeline'ów wykorzystuje bardziej zaawansowane funkcje, aby umożliwić efektywne przetwarzanie dużych ilości danych na skalę i stosowanie wielu kroków przetwarzania połączonych czasami złożoną logiką.
+Jednak większość rzeczywistych pipeline'ów wykorzystuje bardziej zaawansowane funkcje, aby umożliwić efektywną obróbkę dużych ilości danych na skalę i stosowanie wielu kroków transformacji połączonych czasami złożoną logiką.
 
 W tej części szkolenia demonstrujemy kluczowe funkcje rzeczywistych pipeline'ów, wypróbowując rozszerzone wersje oryginalnego pipeline'u Hello World.
 
@@ -227,9 +227,10 @@ Ponownie, nie musisz zapamiętywać składni kodu, ale dobrze jest nauczyć się
 
 #### 1.4.1. Ładowanie danych wejściowych z CSV
 
-To jest najciekawsza część: jak przeszliśmy od przyjmowania pojedynczej wartości z wiersza poleceń do przyjmowania pliku CSV, parsowania go i przetwarzania zawartych w nim pojedynczych powitań?
+To jest najciekawsza część: jak przeszliśmy od pobierania pojedynczej wartości z wiersza poleceń do wczytywania pliku CSV, parsowania go i obsługi zawartych w nim pojedynczych powitań?
 
-W Nextflow robimy to za pomocą **kanału**: konstrukcji zaprojektowanej do efektywnego obsługiwania danych wejściowych i przekazywania ich z jednego kroku do drugiego w wieloetapowych workflow'ach, zapewniając jednocześnie wbudowaną równoległość i wiele dodatkowych korzyści.
+W Nextflow robimy to za pomocą **kanału**.
+Jest to konstrukcja zaprojektowana do efektywnego zarządzania danymi wejściowymi i przekazywania ich z jednego kroku do drugiego w wieloetapowych workflow'ach, zapewniając jednocześnie wbudowaną równoległość i wiele dodatkowych korzyści.
 
 Rozłóżmy to na czynniki.
 
@@ -616,9 +617,9 @@ Co to jest ten fragment `collect()` i co robi?
 To oczywiście operator. Tak jak operatory `splitCsv` i `map`, które napotkaliśmy wcześniej.
 Tym razem operator nazywa się `collect` i jest stosowany do kanału wyjściowego produkowanego przez `convertToUpper`.
 
-Operator `collect` służy do zbierania wyjść z wielu wywołań tego samego procesu i pakowania ich w pojedynczy element kanału.
+Operator `collect` służy do agregowania wyjść z wielu wywołań tego samego procesu i pakowania ich w pojedynczy element kanału.
 
-W kontekście tego workflow'u bierze trzy powitania wielkimi literami w kanale `convertToUpper.out` --które są trzema oddzielnymi elementami kanału i normalnie byłyby obsługiwane w oddzielnych wywołaniach przez następny proces-- i pakuje je w jeden element.
+W kontekście tego workflow'u pobiera trzy powitania wielkimi literami z `convertToUpper.out` --które są trzema oddzielnymi elementami i normalnie byłyby obsługiwane w oddzielnych wykonaniach przez następny proces-- i łączy je w jeden element.
 
 Bardziej praktycznie: gdybyśmy nie zastosowali `collect()` do wyjścia `convertToUpper()` przed przekazaniem go do `collectGreetings()`, Nextflow po prostu uruchomiłby `collectGreetings()` niezależnie na każdym powitaniu, co nie osiągnęłoby naszego celu.
 
@@ -781,11 +782,11 @@ Jak dotąd wszystkie workflow'y, które oglądaliśmy, składały się z jednego
 Jednak rzeczywiste pipeline'y zazwyczaj korzystają z _modularyzacji_, co oznacza, że kod jest podzielony na różne pliki.
 To może uczynić ich rozwój i konserwację bardziej efektywnymi i zrównoważonymi.
 
-Tutaj zademonstrujemy najpopularniejszą formę modułowości kodu w Nextflow, czyli użycie **modułów**.
+Tutaj zademonstrujemy najpopularniejszą formę modułowości w Nextflow, czyli użycie **modułów**.
 
-W Nextflow **moduł** to pojedyncza definicja procesu, która jest zamknięta sama w sobie w samodzielnym pliku kodu.
-Aby użyć modułu w workflow'ie, wystarczy dodać jednoliniową instrukcję importu do pliku kodu workflow'u; następnie możesz zintegrować proces z workflow'em w normalny sposób.
-To umożliwia ponowne wykorzystanie definicji procesu w wielu workflow'ach bez tworzenia wielu kopii kodu.
+W Nextflow **moduł** to pojedyncza definicja procesu zamknięta w samodzielnym pliku.
+Aby go użyć w workflow'ie, wystarczy dodać jednoliniową instrukcję importu do głównego pliku; następnie można zintegrować funkcjonalność w normalny sposób.
+To umożliwia ponowne wykorzystanie definicji w wielu pipeline'ach bez tworzenia wielu kopii.
 
 Do tej pory uruchamialiśmy workflow'y, które miały wszystkie swoje procesy zawarte w monolitycznym pliku kodu.
 Teraz zobaczymy, jak to wygląda, gdy procesy są przechowywane w indywidualnych modułach.
@@ -1026,7 +1027,8 @@ Po zakończeniu pobierania masz lokalną kopię obrazu kontenera.
 
 #### 4.1.2. Uruchom kontener
 
-Kontenery można uruchamiać jako jednorazowe polecenie, ale można ich również używać interaktywnie, co daje Ci wiersz poleceń wewnątrz kontenera i pozwala bawić się poleceniem.
+Kontenery można uruchamiać jako jednorazowe polecenie.
+Można ich również używać interaktywnie, co daje Ci wiersz poleceń wewnątrz kontenera i pozwala eksperymentować.
 
 Ogólna składnia jest następująca:
 
@@ -1140,7 +1142,8 @@ Znajdziesz się z powrotem w normalnej powłoce.
 
 ### 4.2. Użyj kontenera w workflow
 
-Gdy uruchamiamy pipeline, chcemy mieć możliwość powiedzenia Nextflow, jakiego kontenera użyć w każdym kroku, i co ważne, chcemy, aby obsłużył całą tę pracę, którą właśnie wykonaliśmy: pobrał kontener, uruchomił go, wykonał polecenie i usunął kontener, gdy skończy.
+Gdy uruchamiamy pipeline, chcemy wskazać Nextflow, jakiego obrazu użyć w każdym kroku.
+Co ważne, oczekujemy też, że automatycznie obsłuży całą tę pracę: pobierze obraz, uruchomi instancję, wykona polecenie i usunie ją po zakończeniu.
 
 Dobra wiadomość: to dokładnie to, co Nextflow zrobi za nas.
 Musimy tylko określić kontener dla każdego procesu.

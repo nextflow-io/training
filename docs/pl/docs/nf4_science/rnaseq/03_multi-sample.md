@@ -344,7 +344,7 @@ Więc `row -> file(row.fastq_path)` staje się `row -> [file(row.fastq_1), file(
 
 ### 3.4. Utworzenie wersji paired-end procesu FASTQC
 
-Stwórzmy kopię modułu, abyśmy mieli obie wersje pod ręką.
+Utwórzmy kopię modułu, aby zachować obie wersje.
 
 ```bash
 cp modules/fastqc.nf modules/fastqc_pe.nf
@@ -379,7 +379,7 @@ include { FASTQC } from './modules/fastqc_pe.nf'
 
 ### 3.5. Utworzenie wersji paired-end procesu TRIM_GALORE
 
-Stwórz kopię modułu, abyśmy mieli obie wersje pod ręką.
+Utwórz kopię modułu, aby zachować obie wersje.
 
 ```bash
 cp modules/trim_galore.nf modules/trim_galore_pe.nf
@@ -515,7 +515,7 @@ Następnym logicznym krokiem byłoby sprawienie, aby workflow akceptował który
 
 ### Podsumowanie
 
-Wiesz, jak dostosować workflow dla pojedynczej próbki, aby zrównoleglić przetwarzanie wielu próbek, wygenerować kompleksowy raport QC i dostosować workflow do używania danych paired-end, jeśli jest to potrzebne.
+Wiesz, jak dostosować workflow dla pojedynczej próbki, aby sparalelizować przetwarzanie wielu próbek, wygenerować kompleksowy raport QC i dostosować workflow do używania danych paired-end, jeśli jest to potrzebne.
 
 ### Co dalej?
 

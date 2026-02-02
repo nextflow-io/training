@@ -47,7 +47,7 @@ Gdy Twój codespace już działa, musisz wykonać dwie rzeczy przed rozpoczęcie
 
 ### Ustawienie katalogu roboczego
 
-Domyślnie codespace otwiera się z katalogiem roboczym ustawionym w katalogu głównym wszystkich kursów szkoleniowych, ale w tym kursie będziemy pracować w katalogu `hello-nf-core/`.
+Domyślnie codespace otwiera się z lokalizacją główną wszystkich kursów szkoleniowych, ale w tym module będziemy pracować w folderze `hello-nf-core/`.
 
 Zmień teraz katalog, uruchamiając to polecenie w terminalu:
 
@@ -70,7 +70,7 @@ Teraz przyjrzyjmy się zawartości tego katalogu.
 Możesz przeglądać zawartość tego katalogu używając eksploratora plików po lewej stronie obszaru roboczego szkolenia.
 Alternatywnie możesz użyć polecenia `tree`.
 
-W trakcie kursu używamy wyjścia `tree` do przedstawienia struktury katalogów i zawartości w czytelnej formie, czasami z drobnymi modyfikacjami dla przejrzystości.
+W trakcie kursu używamy wyjścia `tree` do przedstawienia struktury folderów i ich zawartości w czytelnej formie, czasami z drobnymi modyfikacjami dla przejrzystości.
 
 Tutaj generujemy spis treści do drugiego poziomu w dół:
 

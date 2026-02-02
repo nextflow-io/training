@@ -22,7 +22,7 @@ Zazwyczaj musiałbyś zainstalować te narzędzia, zarządzać ich zależnościa
 
 To wszystko jest bardzo nużące i irytujące, więc pokażemy Ci, jak używać **kontenerów**, aby rozwiązać ten problem znacznie wygodniej.
 
-**Kontener** to lekka, samodzielna, wykonywalna jednostka oprogramowania utworzona z **obrazu** kontenera, która zawiera wszystko potrzebne do uruchomienia aplikacji, w tym kod, biblioteki systemowe i ustawienia.
+**Kontener** to lekka, samodzielna, wykonywalna jednostka oprogramowania utworzona z **obrazu**, która zawiera wszystko potrzebne do uruchomienia aplikacji, w tym kod, biblioteki systemowe i ustawienia.
 Jak można się domyślić, będzie to bardzo pomocne w zwiększeniu powtarzalności Twoich pipeline.
 
 Zauważ, że będziemy tego uczyć używając [Docker](https://www.docker.com/get-started/), ale pamiętaj, że Nextflow obsługuje również [kilka innych technologii kontenerowych](https://www.nextflow.io/docs/latest/container.html#).
@@ -113,7 +113,7 @@ Jednak najpierw omówimy podstawowe koncepcje i operacje, aby utrwalić Twoje zr
 
 ### 1.1. Pobierz obraz kontenera
 
-Aby użyć kontenera, zazwyczaj pobierasz lub _ściągasz_ obraz kontenera z rejestru kontenerów, a następnie uruchamiasz obraz kontenera, aby utworzyć instancję kontenera.
+Aby użyć kontenera, zazwyczaj pobierasz lub _ściągasz_ obraz z rejestru, a następnie uruchamiasz go, aby utworzyć działającą instancję.
 
 Ogólna składnia jest następująca:
 
@@ -193,8 +193,8 @@ Ogólna składnia jest następująca:
 docker run --rm '<kontener>' [polecenie narzędzia]
 ```
 
-Część `docker run --rm '<kontener>'` to instrukcja dla systemu kontenerowego, aby uruchomił instancję kontenera z obrazu kontenera i wykonał w nim polecenie.
-Flaga `--rm` mówi systemowi, aby wyłączył instancję kontenera po zakończeniu polecenia.
+Część `docker run --rm '<kontener>'` to instrukcja dla systemu, aby uruchomił instancję z obrazu i wykonał w niej polecenie.
+Flaga `--rm` mówi systemowi, aby usunął instancję po zakończeniu polecenia.
 
 Składnia `[polecenie narzędzia]` zależy od używanego narzędzia i konfiguracji kontenera.
 Zacznijmy po prostu od `cowpy`.
@@ -408,8 +408,8 @@ Naucz się używać kontenerów do wykonywania procesów Nextflow.
 
 ## 2. Używaj kontenerów w Nextflow
 
-Nextflow ma wbudowaną obsługę uruchamiania procesów wewnątrz kontenerów, co pozwala uruchamiać narzędzia, których nie masz zainstalowanych w Swoim środowisku obliczeniowym.
-Oznacza to, że możesz użyć dowolnego obrazu kontenera do uruchamiania procesów, a Nextflow zajmie się pobieraniem obrazu, montowaniem danych i uruchamianiem procesu wewnątrz.
+Nextflow ma wbudowaną obsługę uruchamiania procesów wewnątrz kontenerów, co pozwala korzystać z narzędzi, których nie masz zainstalowanych w swoim środowisku obliczeniowym.
+Oznacza to, że możesz użyć dowolnego obrazu do wykonywania zadań, a Nextflow zajmie się pobieraniem obrazu, montowaniem danych i obsługą całego cyklu życia kontenera.
 
 Aby to zademonstrować, dodamy krok `cowpy` do pipeline, który rozwijaliśmy, po kroku `collectGreetings`.
 
@@ -776,7 +776,7 @@ To mówi Nextflow, że _jeśli użycie Docker jest włączone_, powinien użyć 
 
 #### 2.3.2. Włącz użycie Docker przez plik `nextflow.config`
 
-Zauważ, że powiedzieliśmy _'jeśli użycie Docker jest włączone'_. Domyślnie nie jest, więc musimy powiedzieć Nextflow, że może używać Docker.
+Zauważ, że wspomnieliśmy _'jeśli użycie Docker jest włączone'_. Domyślnie nie jest, więc musimy włączyć tę opcję w Nextflow.
 W tym celu nieco uprzedzamy temat następnej i ostatniej części tego kursu (Część 6), która obejmuje konfigurację.
 
 Jednym z głównych sposobów konfigurowania wykonywania workflow, które oferuje Nextflow, jest użycie pliku `nextflow.config`.

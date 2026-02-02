@@ -47,4 +47,4 @@ Zapoznaj się z [samouczkami Seqera Platform](https://docs.seqera.io/platform/la
 
 ### To wszystko na razie!
 
-**Powodzenia w Twojej podróży z Nextflow i nie wahaj się dać nam znać na [forum społeczności](https://community.seqera.io/), co jeszcze możemy zrobić, aby pomóc.**
+**Powodzenia na Twojej drodze z Nextflow i nie wahaj się dać nam znać na [forum społeczności](https://community.seqera.io/), co jeszcze możemy zrobić, aby pomóc.**

@@ -6,8 +6,8 @@
 
 Aby skorzystać z gotowego środowiska, które udostępniamy na GitHub Codespaces, kliknij przycisk "Open in GitHub Codespaces" poniżej. Inne opcje znajdziesz w sekcji [Opcje środowiska](../envsetup/index.md).
 
-Zalecamy otwarcie środowiska szkoleniowego w nowej karcie lub oknie przeglądarki (użyj prawego przycisku myszy, ctrl-click lub cmd-click w zależności od sprzętu), aby móc czytać instrukcje podczas ładowania środowiska.
-Będziesz musiał mieć te instrukcje otwarte równolegle, aby przejść przez kurs.
+Zalecamy otwarcie środowiska szkoleniowego w nowej karcie lub oknie przeglądarki (użyj prawego przycisku myszy, ctrl-click lub cmd-click w zależności od sprzętu), aby móc czytać wskazówki podczas ładowania środowiska.
+Będziesz musiał mieć te informacje otwarte równolegle, aby przejść przez kurs.
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
@@ -31,7 +31,7 @@ Po uruchomieniu codespace są dwie rzeczy, które musisz zrobić przed rozpoczę
 
 ### Ustaw katalog roboczy
 
-Domyślnie codespace otwiera się z katalogiem roboczym ustawionym na katalog główny wszystkich kursów szkoleniowych, ale dla tego kursu będziemy pracować w katalogu `nextflow-run/`.
+Domyślnie codespace otwiera się z głównym folderem wszystkich materiałów szkoleniowych, ale dla tego modułu będziemy pracować w podkatalogu `nextflow-run/`.
 
 Zmień katalog teraz, uruchamiając to polecenie w terminalu:
 

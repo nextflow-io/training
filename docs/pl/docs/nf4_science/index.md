@@ -8,7 +8,7 @@ hide:
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-To są kursy, które pokazują, jak zastosować koncepcje i komponenty przedstawione w kursie dla początkujących [Hello Nextflow](../hello_nextflow/) do konkretnych przypadków użycia naukowego. Każdy kurs składa się z serii modułów szkoleniowych zaprojektowanych, aby pomóc Ci stopniowo rozwijać Swoje umiejętności.
+To są szkolenia, które pokazują, jak zastosować koncepcje i komponenty przedstawione w kursie dla początkujących [Hello Nextflow](../hello_nextflow/) do konkretnych przypadków użycia naukowego. Każde szkolenie składa się z serii modułów zaprojektowanych, aby pomóc Ci stopniowo rozwijać Swoje umiejętności.
 
 !!! exercise "Ćwiczenie"
 
@@ -16,7 +16,7 @@ To są kursy, które pokazują, jak zastosować koncepcje i komponenty przedstaw
 
         :material-run-fast: Naucz się opracowywać pipeline'y dla genomiki w Nextflow.
 
-    To jest kurs dla badaczy, którzy chcą nauczyć się, jak opracowywać własne pipeline'y genomiczne. Kurs wykorzystuje przypadek użycia wykrywania wariantów, aby zademonstrować, jak opracować prosty, ale funkcjonalny pipeline genomiczny.
+    Szkolenie przeznaczone dla badaczy, którzy chcą nauczyć się opracowywać własne pipeline'y genomiczne. Materiał wykorzystuje przypadek użycia wykrywania wariantów, aby zademonstrować tworzenie prostego, ale funkcjonalnego pipeline'u genomicznego.
 
     [Rozpocznij szkolenie Nextflow dla Genomiki :material-arrow-right:](genomics/){ .md-button .md-button--primary }
 
@@ -26,7 +26,7 @@ To są kursy, które pokazują, jak zastosować koncepcje i komponenty przedstaw
 
         :material-run-fast: Naucz się opracowywać pipeline'y do przetwarzania danych RNAseq w Nextflow.
 
-    To jest kurs dla badaczy, którzy chcą nauczyć się, jak opracowywać własne pipeline'y RNAseq. Kurs wykorzystuje przypadek użycia przetwarzania bulk RNAseq, aby zademonstrować, jak opracować prosty, ale funkcjonalny pipeline RNAseq.
+    Szkolenie przeznaczone dla badaczy zainteresowanych tworzeniem własnych pipeline'ów RNAseq. Materiał wykorzystuje przypadek użycia przetwarzania bulk RNAseq, aby zademonstrować budowanie prostego, ale funkcjonalnego pipeline'u RNAseq.
 
     [Rozpocznij szkolenie Nextflow dla RNAseq :material-arrow-right:](rnaseq/){ .md-button .md-button--primary }
 
