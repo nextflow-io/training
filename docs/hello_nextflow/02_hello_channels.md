@@ -500,6 +500,10 @@ That being said, we still have the problem that there is only one output file in
 
 You may recall that we hardcoded the output file name for the `sayHello` process, so all three calls produced a file called `output.txt`.
 
+<figure class="excalidraw">
+--8<-- "docs/hello_nextflow/img/hello-channels-task-dirs.svg"
+</figure>
+
 As long as the output files stay in the work subdirectories, isolated from the other processes, that is okay.
 But when they are published to the same results directory, whichever got copied there first gets overwritten by the next one, and so on.
 
@@ -511,6 +515,10 @@ Specifically, we need to modify the first process to generate a file name dynami
 So how do we make the file names unique?
 A common way to do that is to use some unique piece of metadata from the inputs (received from the input channel) as part of the output file name.
 Here, for convenience, we'll just use the greeting itself since it's just a short string, and prepend it to the base output filename.
+
+<figure class="excalidraw">
+--8<-- "docs/hello_nextflow/img/hello-pipeline-channel-multi-unique.svg"
+</figure>
 
 #### 2.2.1. Construct a dynamic output file name
 
@@ -786,7 +794,11 @@ Oh no! There's an error!
 
 Look at the output of `view()` and the error messages.
 
-It looks like Nextflow tried to run a single process call, using `[Hello, Bonjour, Holà]` as a string value, instead of using the three strings in the array as separate values.
+It looks like Nextflow tried to run a single process call, using `[Hello, Bonjour, Holà]` as a single string value, instead of using the three strings in the array as separate values.
+
+<figure class="excalidraw">
+--8<-- "docs/hello_nextflow/img/hello-channels-array-fail.svg"
+</figure>
 
 So it's the 'packaging' that is causing the problem.
 How do we get Nextflow to unpack the array and load the individual strings into the channel?
@@ -846,6 +858,10 @@ In the workflow block, make the following code change:
 
 Here we added the operator on the next line for readability, but you can add operators on the same line as the channel factory if you prefer, like this:
 `greeting_ch = channel.of(greetings_array).view().flatten()`
+
+<figure class="excalidraw">
+--8<-- "docs/hello_nextflow/img/hello-channels-array-success.svg"
+</figure>
 
 #### 3.2.2. Refine the `view()` statement(s)
 
@@ -937,8 +953,8 @@ nextflow run hello-channels.nf
 
 This time it works AND gives us the additional insight into what the contents of the channel look like before and after we run the `flatten()` operator.
 
-- - You see that we get a single `Before flatten:` statement because at that point the channel contains one item, the original array.
-    Then we get three separate `After flatten:` statements, one for each greeting, which are now individual items in the channel.
+- A single `Before flatten:` statement because at that point the channel contains one item, the original array.
+- Three separate `After flatten:` statements, one for each greeting, which are now individual items in the channel.
 
 Importantly, this means each item can now be processed separately by the workflow.
 
@@ -1236,6 +1252,10 @@ This is what the syntax looks like:
 ```
 
 This means 'for each row in the channel, take the 0th (first) item it contains'.
+
+<figure class="excalidraw">
+--8<-- "docs/hello_nextflow/img/hello-channels-split-and-map.svg"
+</figure>
 
 So let's apply that to our CSV parsing.
 
