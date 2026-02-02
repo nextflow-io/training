@@ -457,7 +457,7 @@ tree -L 1 pipelines/nf-core/demo
 다음은 `nf-core/demo` 파이프라인에 대한 관련 코드 구성요소 간의 관계를 나타낸 것입니다:
 
 <figure class="excalidraw">
-    --8<-- "docs/hello_nf-core/img/nf-core_demo_code_organization.svg"
+    --8<-- "docs/en/docs/hello_nf-core/img/nf-core_demo_code_organization.svg"
 </figure>
 
 `main.nf`라는 _엔트리포인트_ 스크립트가 있으며, 이는 두 종류의 중첩된 workflow에 대한 래퍼 역할을 합니다: `workflows/` 아래에 있고 `demo.nf`라고 하는 실제 분석 로직을 포함하는 workflow와 `subworkflows/` 아래에 있는 관리용 workflow 집합입니다.

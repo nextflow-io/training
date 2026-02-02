@@ -154,7 +154,7 @@ process sayHello {
 Hier haben wir einen **process** namens `sayHello`, der seine **output** in eine Datei namens `output.txt` schreibt.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello_world.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello_world.svg"
 </figure>
 
 Dies ist eine sehr minimale Prozessdefinition, die nur eine `output`-Definition und das auszuführende `script` enthält.
@@ -596,7 +596,7 @@ Diesmal wird das Ergebnis in das angegebene Unterverzeichnis geschrieben.
 Du siehst, dass das Ergebnis der vorherigen Ausführung immer noch da ist.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello_world_output.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello_world_output.svg"
 </figure>
 
 Du kannst so viele Verschachtelungsebenen verwenden, wie du möchtest.
@@ -854,7 +854,7 @@ Wenn du alle diese Änderungen richtig gemacht hast, solltest du eine weitere er
 Voilà!
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello_world_input.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello_world_input.svg"
 </figure>
 
 Beachte, dass die neue Ausführung die im `results`-Verzeichnis veröffentlichte Ausgabedatei überschrieben hat.

@@ -88,7 +88,7 @@ Bu sizin için çalıştıysa, çok adımlı bir iş akışı oluşturmayı öğ
 Her selamlamayı büyük harfe dönüştürmek için bir adım ekleyeceğiz.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello-multistep.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello-multistep.svg"
 </figure>
 
 Bu amaçla, üç şey yapmamız gerekiyor:
@@ -361,7 +361,7 @@ Burada birden fazla selamlamaya yaptığımız gibi, bir kanaldaki öğelerin he
 Göstermek için, pipeline'ımıza `convertToUpper` süreci tarafından üretilen tüm büyük harf selamlamaları toplayan ve bunları tek bir dosyaya yazan yeni bir adım ekleyeceğiz.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello-collect.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect.svg"
 </figure>
 
 Sürprizi bozmak istemiyoruz, ama bu çok kullanışlı bir operatör içerecek.

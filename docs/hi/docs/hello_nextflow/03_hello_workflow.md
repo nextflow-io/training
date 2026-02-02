@@ -88,7 +88,7 @@ nextflow run hello-workflow.nf
 हम प्रत्येक greeting को uppercase में convert करने के लिए एक step add करेंगे।
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello-multistep.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello-multistep.svg"
 </figure>
 
 इसके लिए, हमें तीन चीजें करनी होंगी:
@@ -333,7 +333,7 @@ Console output में अब एक extra line है जो हमने अ
 Demonstrate करने के लिए, हम अपनी pipeline में एक new step add करेंगे जो `convertToUpper` process द्वारा produce किए गए सभी uppercase greetings collect करता है और उन्हें एक single file में लिखता है।
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello-collect.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect.svg"
 </figure>
 
 Surprise spoil नहीं करना, लेकिन इसमें एक बहुत useful operator शामिल होगा।

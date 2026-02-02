@@ -8,7 +8,7 @@ Bu kurs için, [Babraham Enstitüsü](https://www.babraham.ac.uk/)'nden Dr. Simo
 Amacımız, aşağıdaki işleme adımlarını uygulayan bir iş akışı geliştirmektir: toplu RNAseq örneğindeki okumalar üzerinde ilk kalite kontrolünü çalıştırmak, okumalardan adaptör dizilerini kırpmak, okumaları referans genoma hizalamak ve kapsamlı bir kalite kontrol (QC) raporu oluşturmak.
 
 <figure class="excalidraw">
---8<-- "docs/nf4_science/rnaseq/img/preprocess.svg"
+--8<-- "docs/en/docs/nf4_science/rnaseq/img/preprocess.svg"
 </figure>
 
 - **FASTQC:** Kırpma öncesi okuma verileri üzerinde FastQC kullanarak QC gerçekleştirin

@@ -88,7 +88,7 @@ Wenn das bei dir funktioniert hat, bist du bereit zu lernen, wie man einen mehrs
 Wir werden einen Schritt hinzufügen, um jede Begrüßung in Großbuchstaben umzuwandeln.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello-multistep.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello-multistep.svg"
 </figure>
 
 Dazu müssen wir drei Dinge tun:
@@ -361,7 +361,7 @@ Wenn wir einen process verwenden, um eine Transformation auf jedes der Elemente 
 Zur Demonstration werden wir einen neuen Schritt zu unserer Pipeline hinzufügen, der alle vom `convertToUpper`-process produzierten Großbuchstaben-Begrüßungen sammelt und sie in eine einzelne Datei schreibt.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello-collect.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect.svg"
 </figure>
 
 Um die Überraschung nicht zu verderben, aber das wird einen sehr nützlichen Operator beinhalten.

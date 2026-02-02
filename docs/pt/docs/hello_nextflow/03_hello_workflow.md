@@ -88,7 +88,7 @@ Se isso funcionou para você, você está pronto para aprender como montar um fl
 Vamos adicionar uma etapa para converter cada saudação para maiúsculas.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello-multistep.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello-multistep.svg"
 </figure>
 
 Para isso, precisamos fazer três coisas:
@@ -361,7 +361,7 @@ Quando usamos um processo para aplicar uma transformação a cada um dos element
 Para demonstrar, adicionaremos uma nova etapa ao nosso pipeline que coleta todas as saudações em maiúsculas produzidas pelo processo `convertToUpper` e as escreve em um único arquivo.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello-collect.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect.svg"
 </figure>
 
 Sem estragar a surpresa, mas isso vai envolver um operador muito útil.

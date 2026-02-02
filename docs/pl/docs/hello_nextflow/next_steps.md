@@ -27,7 +27,7 @@ W ciągu sześciu części przekształciłeś ten podstawowy workflow w modularn
 - Końcowe wyjście pipeline'u to plik tekstowy zawierający grafikę ASCII postaci wypowiadającej pozdrowienia zapisane wielkimi literami.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello_pipeline_complete.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello_pipeline_complete.svg"
 </figure>
 
 1. **`sayHello`:** Zapisuje każde pozdrowienie do własnego pliku wyjściowego (_np._ "Hello-output.txt")

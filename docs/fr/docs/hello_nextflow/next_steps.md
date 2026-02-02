@@ -27,7 +27,7 @@ Au cours des six parties, vous avez transformé ce flux de travail basique en un
 - La sortie finale du pipeline est un fichier texte brut contenant de l'art ASCII d'un personnage prononçant les salutations en majuscules.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello_pipeline_complete.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello_pipeline_complete.svg"
 </figure>
 
 1. **`sayHello` :** Écrit chaque salutation dans son propre fichier de sortie (_par ex._ « Hello-output.txt »)

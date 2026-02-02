@@ -20,7 +20,7 @@ You are now able to manage the execution of the Hello pipeline, describe how it 
 - The final output of the pipeline is a plain text file containing ASCII art of a character saying the uppercased greetings.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello_pipeline_complete.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello_pipeline_complete.svg"
 </figure>
 
 1. **`sayHello`:** Writes each greeting to its own output file (_e.g._ "Hello-output.txt")

@@ -154,7 +154,7 @@ process sayHello {
 여기에 `output.txt`라는 파일에 **출력**을 쓰는 `sayHello`라는 **프로세스**가 있습니다.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello_world.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello_world.svg"
 </figure>
 
 이것은 `output` 정의와 실행할 `script`만 포함하는 매우 최소한의 프로세스 정의입니다.
@@ -596,7 +596,7 @@ nextflow run hello-world.nf
 이전 실행의 결과도 여전히 있습니다.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello_world_output.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello_world_output.svg"
 </figure>
 
 원하는 만큼 중첩 수준을 사용할 수 있습니다.
@@ -854,7 +854,7 @@ nextflow run hello-world.nf --input 'Bonjour le monde!'
 Voilà!
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello_world_input.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello_world_input.svg"
 </figure>
 
 새 실행이 `results` 디렉토리에 게시된 출력 파일을 덮어썼습니다.

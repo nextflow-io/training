@@ -27,7 +27,7 @@ Altı bölüm boyunca, bu basit iş akışını kanallar, operatörler, konteyne
 - İş akışının son çıktısı, büyük harfli selamlamaları söyleyen bir karakterin ASCII sanatını içeren düz metin dosyasıdır.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello_pipeline_complete.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello_pipeline_complete.svg"
 </figure>
 
 1. **`sayHello`:** Her selamlamayı kendi çıktı dosyasına yazar (örn. "Hello-output.txt")

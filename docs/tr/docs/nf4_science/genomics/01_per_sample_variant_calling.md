@@ -31,7 +31,7 @@ Bu kurs bölümünde, aşağıdakileri yapan bir iş akışı geliştireceğiz:
 2. Her BAM girdi dosyası üzerinde GATK HaplotypeCaller'ı çalıştırarak örnek başına varyant çağrılarını VCF (Variant Call Format) formatında oluşturun
 
 <figure class="excalidraw">
---8<-- "docs/nf4_science/genomics/img/hello-gatk-1.svg"
+--8<-- "docs/en/docs/nf4_science/genomics/img/hello-gatk-1.svg"
 </figure>
 
 !!! note

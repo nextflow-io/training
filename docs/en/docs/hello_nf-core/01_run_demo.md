@@ -455,7 +455,7 @@ That may sound a bit abstract, so let's take a look how this is used in practice
 Here is what the relationships between the relevant code components look like for the `nf-core/demo` pipeline:
 
 <figure class="excalidraw">
-    --8<-- "docs/hello_nf-core/img/nf-core_demo_code_organization.svg"
+    --8<-- "docs/en/docs/hello_nf-core/img/nf-core_demo_code_organization.svg"
 </figure>
 
 There is a so-called _entrypoint_ script called `main.nf`, which acts as a wrapper for two kinds of nested workflows: the workflow containing the actual analysis logic, located under `workflows/` and called `demo.nf`, and a set of housekeeping workflows located under `subworkflows/`.

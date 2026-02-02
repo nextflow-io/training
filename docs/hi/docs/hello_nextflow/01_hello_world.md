@@ -154,7 +154,7 @@ process sayHello {
 यहाँ हमारे पास `sayHello` नामक एक **process** है जो अपना **output** `output.txt` नामक एक file में लिखता है।
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello_world.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello_world.svg"
 </figure>
 
 यह एक बहुत ही minimal process definition है जिसमें बस एक `output` definition और execute करने के लिए `script` है।
@@ -596,7 +596,7 @@ nextflow run hello-world.nf
 तुम देखोगे कि previous execution का result अभी भी वहाँ है।
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello_world_output.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello_world_output.svg"
 </figure>
 
 तुम जितने चाहो उतने levels of nesting का उपयोग कर सकते हो।
@@ -854,7 +854,7 @@ nextflow run hello-world.nf --input 'Bonjour le monde!'
 Voilà!
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello_world_input.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello_world_input.svg"
 </figure>
 
 Note करो कि new execution ने `results` directory में publish की गई output file को overwrite कर दिया है।

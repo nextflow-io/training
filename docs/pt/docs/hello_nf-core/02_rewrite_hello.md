@@ -667,7 +667,7 @@ Agora que verificamos que nosso fluxo de trabalho componível funciona corretame
 Queremos integrar o fluxo de trabalho componível que acabamos de desenvolver na estrutura do template nf-core, então o resultado final deve se parecer com isto.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nf-core/img/core-hello.svg"
+--8<-- "docs/en/docs/hello_nf-core/img/core-hello.svg"
 </figure>
 
 Então como fazemos isso acontecer? Vamos dar uma olhada no conteúdo atual do fluxo de trabalho `HELLO` em `core-hello/workflows/hello.nf` (a estrutura nf-core).
@@ -1082,7 +1082,7 @@ O que importa aqui é que existem dois fluxos de trabalho definidos:
 Aqui está um diagrama de como eles se relacionam:
 
 <figure class="excalidraw">
---8<-- "docs/hello_nf-core/img/hello-nested-workflows.svg"
+--8<-- "docs/en/docs/hello_nf-core/img/hello-nested-workflows.svg"
 </figure>
 
 Importante, não podemos encontrar nenhum código construindo um canal de entrada neste nível, apenas referências a uma samplesheet fornecida via parâmetro `--input`.

@@ -421,7 +421,7 @@ Note also that by default, the output file will be named based on an identifier 
 This may seem like a lot to keep track of just looking at the code, so here's a diagram to help you visualize how everything fits together.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nf-core/img/module_comparison.svg"
+--8<-- "docs/en/docs/hello_nf-core/img/module_comparison.svg"
 </figure>
 
 You can see that the two modules have similar input requirements in terms of content (a set of input files plus some metadata) but very different expectations for how that content is packaged.

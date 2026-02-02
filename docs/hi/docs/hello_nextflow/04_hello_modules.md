@@ -23,7 +23,7 @@ Workflow में module use करने के लिए, तुम बस �
 अब हम processes को individual modules में move करेंगे।
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/modules.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/modules.svg"
 </figure>
 
 यह हमारे code को अधिक shareable, flexible और maintainable बनाएगा।

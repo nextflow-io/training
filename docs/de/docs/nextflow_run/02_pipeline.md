@@ -26,7 +26,7 @@ Holà,Spanish,789
 Wir haben auch eine verbesserte Version des ursprünglichen Workflows geschrieben, jetzt `2a-inputs.nf` genannt, die die CSV-Datei einliest, die Grüße extrahiert und jeden davon in eine separate Datei schreibt.
 
 <figure class="excalidraw">
---8<-- "docs/nextflow_run/img/hello-pipeline-multi-inputs.svg"
+--8<-- "docs/en/docs/nextflow_run/img/hello-pipeline-multi-inputs.svg"
 </figure>
 
 Lass uns zuerst den Workflow ausführen, und wir werden uns den relevanten Nextflow-Code danach ansehen.
@@ -346,7 +346,7 @@ Zu diesem Zweck stellen wir dir einen Beispiel-Workflow zur Verfügung, der drei
 Konkret haben wir eine erweiterte Version des Workflows namens `2b-multistep.nf` erstellt, die jeden Eingabe-Gruß nimmt, ihn in Großbuchstaben umwandelt und dann alle großgeschriebenen Grüße in einer einzigen Ausgabedatei sammelt.
 
 <figure class="excalidraw">
---8<-- "docs/nextflow_run/img/hello-pipeline-multi-steps.svg"
+--8<-- "docs/en/docs/nextflow_run/img/hello-pipeline-multi-steps.svg"
 </figure>
 
 Wie zuvor werden wir den Workflow zuerst ausführen und dann den Code ansehen, um zu sehen, was neu ist.
@@ -543,7 +543,7 @@ Schauen wir uns das genauer an und sehen, ob wir die interessantesten Teile iden
 Wenn du VSCode mit der Nextflow-Erweiterung verwendest, kannst du ein hilfreiches Diagramm bekommen, das zeigt, wie die processes verbunden sind, indem du auf den kleinen `DAG preview`-Link klickst, der direkt über dem workflow-Block in jedem Nextflow-Script angezeigt wird.
 
 <figure class="excalidraw">
---8<-- "docs/nextflow_run/img/DAG-multistep.svg"
+--8<-- "docs/en/docs/nextflow_run/img/DAG-multistep.svg"
 </figure>
 
 Das gibt dir einen schönen Überblick darüber, wie die processes verbunden sind und was sie produzieren.
@@ -623,13 +623,13 @@ Im Kontext dieses Workflows nimmt er die drei großgeschriebenen Grüße im `con
 In praktischeren Begriffen: Wenn wir `collect()` nicht auf die Ausgabe von `convertToUpper()` anwenden würden, bevor wir sie an `collectGreetings()` füttern, würde Nextflow einfach `collectGreetings()` unabhängig auf jeden Gruß ausführen, was unser Ziel nicht erreichen würde.
 
 <figure class="excalidraw">
---8<-- "docs/nextflow_run/img/without-collect-operator.svg"
+--8<-- "docs/en/docs/nextflow_run/img/without-collect-operator.svg"
 </figure>
 
 Im Gegensatz dazu erlaubt uns die Verwendung von `collect()`, alle separaten großgeschriebenen Grüße, die vom zweiten Schritt des Workflows produziert wurden, zu nehmen und sie alle zusammen einem einzigen Aufruf im dritten Schritt der Pipeline zuzuführen.
 
 <figure class="excalidraw">
---8<-- "docs/nextflow_run/img/with-collect-operator.svg"
+--8<-- "docs/en/docs/nextflow_run/img/with-collect-operator.svg"
 </figure>
 
 So bekommen wir alle Grüße zurück in dieselbe Datei.
@@ -793,7 +793,7 @@ Jetzt werden wir sehen, wie es aussieht, wenn die processes in einzelnen Modulen
 Wir haben natürlich wieder einen geeigneten Workflow für Demonstrationszwecke vorbereitet, genannt `2c-modules.nf`, zusammen mit einer Reihe von Modulen, die sich im `modules/`-Verzeichnis befinden.
 
 <figure class="excalidraw">
---8<-- "docs/nextflow_run/img/modules.svg"
+--8<-- "docs/en/docs/nextflow_run/img/modules.svg"
 </figure>
 
 ??? abstract "Verzeichnisinhalte"
@@ -1148,7 +1148,7 @@ Wir müssen nur einen Container für jeden process angeben.
 Um zu demonstrieren, wie das funktioniert, haben wir eine weitere Version unseres Workflows erstellt, die `cowpy` auf der Datei mit den gesammelten Grüßen ausführt, die im dritten Schritt produziert wurde.
 
 <figure class="excalidraw">
---8<-- "docs/nextflow_run/img/hello-pipeline-cowpy.svg"
+--8<-- "docs/en/docs/nextflow_run/img/hello-pipeline-cowpy.svg"
 </figure>
 
 Das sollte eine Datei ausgeben, die die ASCII-Kunst mit den drei Grüßen in der Sprechblase enthält.
@@ -1286,7 +1286,7 @@ Diese Konfiguration sagt Nextflow, Docker für jeden process zu verwenden, der e
 Nur zur Rekapitulation, das ist, was wir gleich ausführen werden:
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello_pipeline_complete.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello_pipeline_complete.svg"
 </figure>
 
 Denkst du, es wird funktionieren?

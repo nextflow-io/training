@@ -256,7 +256,7 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
 현재 버전의 `core-hello` 파이프라인에서는 아래 다이어그램의 상단에 표시된 것처럼 `CAT_CAT`의 출력 튜플에서 파일을 추출하여 `COWPY`에 전달하고 있습니다.
 
 <figure class="excalidraw">
-    --8<-- "docs/hello_nf-core/img/cowpy-inputs.svg"
+    --8<-- "docs/en/docs/hello_nf-core/img/cowpy-inputs.svg"
 </figure>
 
 다이어그램의 하단에 표시된 것처럼 `COWPY`가 메타데이터 튜플을 직접 받아들이도록 하여 워크플로를 통해 메타데이터가 계속 흐르도록 하는 것이 더 좋습니다.

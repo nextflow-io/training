@@ -27,7 +27,7 @@ Nel corso delle sei parti, avete trasformato quel workflow di base in una pipeli
 - L'output finale della pipeline è un file di testo semplice contenente arte ASCII di un personaggio che dice i saluti in maiuscolo.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello_pipeline_complete.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello_pipeline_complete.svg"
 </figure>
 
 1. **`sayHello`:** Scrive ogni saluto nel proprio file di output (ad es. "Hello-output.txt")

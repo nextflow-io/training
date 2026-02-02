@@ -31,7 +31,7 @@ In diesem Teil des Kurses werden wir einen Workflow entwickeln, der Folgendes tu
 2. Führe GATK HaplotypeCaller auf jeder BAM-Eingabedatei aus, um Variantenaufrufe pro Probe im VCF-Format (Variant Call Format) zu generieren
 
 <figure class="excalidraw">
---8<-- "docs/nf4_science/genomics/img/hello-gatk-1.svg"
+--8<-- "docs/en/docs/nf4_science/genomics/img/hello-gatk-1.svg"
 </figure>
 
 !!! note "Hinweis"

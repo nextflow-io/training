@@ -154,7 +154,7 @@ process sayHello {
 Qui abbiamo un **process** chiamato `sayHello` che scrive il suo **output** su un file chiamato `output.txt`.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello_world.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello_world.svg"
 </figure>
 
 Questa è una definizione di process molto minimale che contiene solo una definizione di `output` e lo `script` da eseguire.
@@ -596,7 +596,7 @@ Questa volta il risultato viene scritto nella sottodirectory specificata.
 Vedete che il risultato dell'esecuzione precedente è ancora lì.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello_world_output.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello_world_output.svg"
 </figure>
 
 Potete usare quanti livelli di nidificazione desiderate.
@@ -854,7 +854,7 @@ Assicuratevi di aprire il file di output per verificare che ora abbiate la nuova
 Voilà!
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello_world_input.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello_world_input.svg"
 </figure>
 
 Noti come la nuova esecuzione ha sovrascritto il file di output pubblicato nella directory `results`.

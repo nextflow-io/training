@@ -23,7 +23,7 @@ Bu, kodun birden fazla kopyasını üretmeden süreç tanımlarını birden fazl
 Şimdi süreçleri bireysel modüllere taşıyacağız.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/modules.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/modules.svg"
 </figure>
 
 Bu, kodumuzu daha paylaşılabilir, esnek ve bakımı kolay hale getirecek.

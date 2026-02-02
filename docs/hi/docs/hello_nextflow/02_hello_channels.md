@@ -102,7 +102,7 @@ greeting_ch = channel.of('Hello Channels!')
 यह `channel.of()` channel factory का उपयोग करके `greeting_ch` नामक एक channel बनाता है, जो एक simple queue channel set up करता है, और greeting value के रूप में use करने के लिए string `'Hello Channels!'` load करता है।
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello-pipeline-channel.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-channel.svg"
 </figure>
 
 !!! note "नोट"
@@ -305,7 +305,7 @@ Conveniently, `channel.of()` channel factory जो हम use कर रहे 
 चलो उन्हें `'Hello'`, `'Bonjour'` और `'Holà'` बनाते हैं।
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello-pipeline-channel-multi.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-channel-multi.svg"
 </figure>
 
 _Diagram में, channel को green में represent किया गया है, और elements का order pipe में marbles की तरह represent किया गया है: पहले load किया गया right पर है, फिर दूसरा middle में है, फिर तीसरा left पर है।_
@@ -644,7 +644,7 @@ Success! अब हम जितनी चाहें उतनी greetings ad
 क्या हम उसे अपने output channel में load कर सकते हैं और expect कर सकते हैं कि यह काम करे?
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello-pipeline-multi-inputs-array.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-multi-inputs-array.svg"
 </figure>
 
 चलो पता लगाते हैं।
@@ -976,7 +976,7 @@ Holà,Spanish,789
 हमारा next task अपने workflow को इस file से values पढ़ने के लिए adapt करना है।
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello-pipeline-multi-inputs-csv.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-multi-inputs-csv.svg"
 </figure>
 
 चलो देखते हैं कि हम यह कैसे कर सकते हैं।

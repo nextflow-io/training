@@ -8,7 +8,7 @@
 우리의 목표는 다음 처리 단계를 구현하는 워크플로우를 개발하는 것입니다: 대량 RNAseq 샘플의 리드에 대한 초기 품질 관리 실행, 리드에서 어댑터 서열 트리밍, 참조 게놈에 리드 정렬, 그리고 포괄적인 품질 관리(QC) 보고서 생성.
 
 <figure class="excalidraw">
---8<-- "docs/nf4_science/rnaseq/img/preprocess.svg"
+--8<-- "docs/en/docs/nf4_science/rnaseq/img/preprocess.svg"
 </figure>
 
 - **FASTQC:** FastQC를 사용하여 트리밍 전 리드 데이터에 대한 QC 수행

@@ -86,7 +86,7 @@ If that worked for you, you're ready to learn how to assemble a multi-step workf
 We're going to add a step to convert each greeting to uppercase.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello-multistep.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello-multistep.svg"
 </figure>
 
 To that end, we need to do three things:
@@ -359,7 +359,7 @@ When we use a process to apply a transformation to each of the elements in a cha
 To demonstrate, we'll add a new step to our pipeline that collects all the uppercase greetings produced by the `convertToUpper` process and write them out to a single file.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello-collect.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect.svg"
 </figure>
 
 Not to spoil the surprise, but this is going to involve a very useful operator.

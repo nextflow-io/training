@@ -256,7 +256,7 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
 En la versión actual del pipeline `core-hello`, estamos extrayendo el archivo de la tupla de salida de `CAT_CAT` para pasarlo a `COWPY`, como se muestra en la mitad superior del diagrama a continuación.
 
 <figure class="excalidraw">
-    --8<-- "docs/hello_nf-core/img/cowpy-inputs.svg"
+    --8<-- "docs/en/docs/hello_nf-core/img/cowpy-inputs.svg"
 </figure>
 
 Sería mejor que `COWPY` aceptara tuplas de metadatos directamente, permitiendo que los metadatos fluyan a través del flujo de trabajo, como se muestra en la mitad inferior del diagrama.

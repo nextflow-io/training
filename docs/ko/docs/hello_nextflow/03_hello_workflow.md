@@ -88,7 +88,7 @@ nextflow run hello-workflow.nf
 각 인사말을 대문자로 변환하는 단계를 추가할 것입니다.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello-multistep.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello-multistep.svg"
 </figure>
 
 이를 위해 세 가지를 수행해야 합니다:
@@ -361,7 +361,7 @@ Nextflow가 개별 입력 및 출력 파일을 처리하고 두 명령 사이에
 시연을 위해, `convertToUpper` process에서 생성된 모든 대문자 인사말을 수집하여 단일 파일에 기록하는 새 단계를 파이프라인에 추가할 것입니다.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello-collect.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect.svg"
 </figure>
 
 미리 스포일러를 하자면, 이것은 매우 유용한 연산자를 포함할 것입니다.

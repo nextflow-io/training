@@ -26,7 +26,7 @@ Holà,Spanish,789
 Nous avons également écrit une version améliorée du workflow original, maintenant appelée `2a-inputs.nf`, qui lira le fichier CSV, extraira les salutations et écrira chacune d'elles dans un fichier séparé.
 
 <figure class="excalidraw">
---8<-- "docs/nextflow_run/img/hello-pipeline-multi-inputs.svg"
+--8<-- "docs/en/docs/nextflow_run/img/hello-pipeline-multi-inputs.svg"
 </figure>
 
 Exécutons d'abord le workflow, et nous examinerons le code Nextflow pertinent ensuite.
@@ -346,7 +346,7 @@ Construisons sur ce que nous venons d'apprendre sur les channels, et regardons c
 Plus précisément, nous avons fait une version étendue du workflow appelée `2b-multistep.nf` qui prend chaque salutation d'entrée, la convertit en majuscules, puis collecte toutes les salutations en majuscules dans un seul fichier de sortie.
 
 <figure class="excalidraw">
---8<-- "docs/nextflow_run/img/hello-pipeline-multi-steps.svg"
+--8<-- "docs/en/docs/nextflow_run/img/hello-pipeline-multi-steps.svg"
 </figure>
 
 Comme précédemment, nous exécuterons d'abord le workflow puis regarderons le code pour voir ce qui est nouveau.
@@ -543,7 +543,7 @@ Regardons de plus près et voyons si nous pouvons identifier les pièces les plu
 Si vous utilisez VSCode avec l'extension Nextflow, vous pouvez obtenir un diagramme utile montrant comment les processes sont connectés en cliquant sur le petit lien `DAG preview` affiché juste au-dessus du bloc workflow dans n'importe quel script Nextflow.
 
 <figure class="excalidraw">
---8<-- "docs/nextflow_run/img/DAG-multistep.svg"
+--8<-- "docs/en/docs/nextflow_run/img/DAG-multistep.svg"
 </figure>
 
 Cela vous donne un bon aperçu de la façon dont les processes sont connectés et ce qu'ils produisent.
@@ -623,13 +623,13 @@ Dans le contexte de ce workflow, il prend les trois salutations en majuscules da
 En termes plus pratiques : si nous n'appliquions pas `collect()` à la sortie de `convertToUpper()` avant de la passer à `collectGreetings()`, Nextflow exécuterait simplement `collectGreetings()` indépendamment sur chaque salutation, ce qui n'atteindrait pas notre objectif.
 
 <figure class="excalidraw">
---8<-- "docs/nextflow_run/img/without-collect-operator.svg"
+--8<-- "docs/en/docs/nextflow_run/img/without-collect-operator.svg"
 </figure>
 
 En revanche, utiliser `collect()` nous permet de prendre toutes les salutations en majuscules séparées produites par la deuxième étape du workflow et de les passer toutes ensemble à un seul appel dans la troisième étape du pipeline.
 
 <figure class="excalidraw">
---8<-- "docs/nextflow_run/img/with-collect-operator.svg"
+--8<-- "docs/en/docs/nextflow_run/img/with-collect-operator.svg"
 </figure>
 
 C'est ainsi que nous récupérons toutes les salutations dans le même fichier.
@@ -793,7 +793,7 @@ Maintenant, nous allons voir à quoi cela ressemble lorsque les processes sont s
 Nous avons bien sûr encore une fois préparé un workflow approprié pour la démonstration, appelé `2c-modules.nf`, ainsi qu'un ensemble de modules situés dans le répertoire `modules/`.
 
 <figure class="excalidraw">
---8<-- "docs/nextflow_run/img/modules.svg"
+--8<-- "docs/en/docs/nextflow_run/img/modules.svg"
 </figure>
 
 ??? abstract "Contenu du répertoire"
@@ -1148,7 +1148,7 @@ Nous avons juste besoin de spécifier un conteneur pour chaque process.
 Pour démontrer comment cela fonctionne, nous avons fait une autre version de notre workflow qui exécute `cowpy` sur le fichier de salutations collectées produit à la troisième étape.
 
 <figure class="excalidraw">
---8<-- "docs/nextflow_run/img/hello-pipeline-cowpy.svg"
+--8<-- "docs/en/docs/nextflow_run/img/hello-pipeline-cowpy.svg"
 </figure>
 
 Cela devrait produire un fichier contenant l'art ASCII avec les trois salutations dans la bulle de dialogue.
@@ -1286,7 +1286,7 @@ Cette configuration indique à Nextflow d'utiliser Docker pour tout process qui 
 Juste pour récapituler, voici ce que nous sommes sur le point d'exécuter :
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello_pipeline_complete.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello_pipeline_complete.svg"
 </figure>
 
 Pensez-vous que cela va fonctionner ?

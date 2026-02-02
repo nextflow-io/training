@@ -154,7 +154,7 @@ process sayHello {
 Burada **çıktısını** `output.txt` adlı bir dosyaya yazan `sayHello` adında bir **process** var.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello_world.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello_world.svg"
 </figure>
 
 Bu, yalnızca bir `output` tanımı ve yürütülecek `script`'i içeren çok minimal bir süreç tanımıdır.
@@ -596,7 +596,7 @@ Bu sefer sonuç belirtilen alt dizine yazılır.
 Önceki yürütmenin sonucunun hâlâ orada olduğunu görüyorsunuz.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello_world_output.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello_world_output.svg"
 </figure>
 
 İstediğiniz kadar iç içe geçme seviyesi kullanabilirsiniz.
@@ -854,7 +854,7 @@ Artık selamlamanın yeni sürümüne sahip olduğunuzdan emin olmak için çık
 Voilà!
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello_world_input.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello_world_input.svg"
 </figure>
 
 Yeni yürütmenin `results` dizinine yayınlanan çıktı dosyasını nasıl üzerine yazdığına dikkat edin.

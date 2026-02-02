@@ -410,7 +410,7 @@ This means that you can use any container image you like to run your processes, 
 To demonstrate this, we are going to add a `cowpy` step to the pipeline we've been developing, after the `collectGreetings` step.
 
 <figure class="excalidraw">
---8<-- "docs/nextflow_run/img/hello-pipeline-cowpy.svg"
+--8<-- "docs/en/docs/nextflow_run/img/hello-pipeline-cowpy.svg"
 </figure>
 
 Moo if you're ready to dive in!
@@ -659,7 +659,7 @@ Now the published outputs will be a bit more organized.
 Just to recap, this is what we are aiming for:
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello_pipeline_complete.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello_pipeline_complete.svg"
 </figure>
 
 Do you think it's going to work?

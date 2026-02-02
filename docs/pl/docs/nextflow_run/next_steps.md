@@ -22,7 +22,7 @@ Jesteś teraz w stanie zarządzać wykonaniem pipeline'u Hello, opisać, jak jes
 - Końcowym wyjściem pipeline'u jest plik tekstowy zawierający grafikę ASCII postaci mówiącej powitania wielkimi literami.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello_pipeline_complete.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello_pipeline_complete.svg"
 </figure>
 
 1. **`sayHello`:** Zapisuje każde powitanie do własnego pliku wyjściowego (_np._ "Hello-output.txt")

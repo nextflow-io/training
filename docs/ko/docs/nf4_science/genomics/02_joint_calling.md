@@ -28,7 +28,7 @@ GVCF를 결합하는 작업은 GATK GenomicsDBImport로 수행되며, 이는 샘
 요약하자면, 이 과정의 이 파트에서는 다음을 수행하는 워크플로를 개발할 것입니다:
 
 <figure class="excalidraw">
---8<-- "docs/nf4_science/genomics/img/hello-gatk-2.svg"
+--8<-- "docs/en/docs/nf4_science/genomics/img/hello-gatk-2.svg"
 </figure>
 
 1. Samtools를 사용하여 각 BAM 입력 파일에 대한 인덱스 파일 생성

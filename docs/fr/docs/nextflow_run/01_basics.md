@@ -400,7 +400,7 @@ process sayHello {
 Ici, nous avons un **process** appelé `sayHello` qui prend une variable d'**entrée** appelée `greeting` et écrit sa **sortie** dans un fichier nommé `output.txt`.
 
 <figure class="excalidraw">
---8<-- "docs/nextflow_run/img/sayhello_with_input.svg"
+--8<-- "docs/en/docs/nextflow_run/img/sayhello_with_input.svg"
 </figure>
 
 C'est une définition de process très minimale qui contient juste une définition d'`input`, une définition d'`output` et le `script` à exécuter.

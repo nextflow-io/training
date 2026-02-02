@@ -667,7 +667,7 @@ Teraz, gdy zweryfikowaliśmy, że nasz kompozycyjny workflow działa poprawnie, 
 Chcemy zintegrować kompozycyjny workflow, który właśnie opracowaliśmy, ze strukturą szablonu nf-core, więc wynik końcowy powinien wyglądać mniej więcej tak.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nf-core/img/core-hello.svg"
+--8<-- "docs/en/docs/hello_nf-core/img/core-hello.svg"
 </figure>
 
 Jak więc to osiągnąć? Spójrzmy na obecną zawartość workflow `HELLO` w `core-hello/workflows/hello.nf` (szkielet nf-core).
@@ -1082,7 +1082,7 @@ To, co tutaj ma znaczenie, to fakt, że zdefiniowane są dwa workflow:
 Oto diagram pokazujący, jak się do siebie odnoszą:
 
 <figure class="excalidraw">
---8<-- "docs/hello_nf-core/img/hello-nested-workflows.svg"
+--8<-- "docs/en/docs/hello_nf-core/img/hello-nested-workflows.svg"
 </figure>
 
 Co ważne, nie możemy znaleźć na tym poziomie żadnego kodu konstruującego kanał wejściowy, tylko odniesienia do samplesheet dostarczonego przez parametr `--input`.

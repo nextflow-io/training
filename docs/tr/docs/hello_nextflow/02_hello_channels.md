@@ -102,7 +102,7 @@ greeting_ch = channel.of('Hello Channels!')
 Bu, `channel.of()` kanal fabrikasını kullanarak `greeting_ch` adında bir kanal oluşturur; bu fabrika basit bir kuyruk kanalı kurar ve selamlama değeri olarak kullanılmak üzere `'Hello Channels!'` dizesini yükler.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello-pipeline-channel.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-channel.svg"
 </figure>
 
 !!! note "Not"
@@ -305,7 +305,7 @@ Sadece kanala birden fazla değer yükleyebiliriz.
 Bunları `'Hello'`, `'Bonjour'` ve `'Holà'` yapalım.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello-pipeline-channel-multi.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-channel-multi.svg"
 </figure>
 
 _Diyagramda, kanal yeşil renkte temsil edilmektedir ve öğelerin sırası bir borudaki misketler gibi temsil edilmektedir: ilk yüklenen sağda, sonra ikincisi ortada, sonra üçüncüsü soldadır._
@@ -644,7 +644,7 @@ Ya bu birden fazla girdiyi farklı bir şekilde sağlamak istersek?
 Bunu çıktı kanalımıza yükleyip çalışmasını bekleyebilir miyiz?
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello-pipeline-multi-inputs-array.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-multi-inputs-array.svg"
 </figure>
 
 Hadi öğrenelim.
@@ -975,7 +975,7 @@ Holà,Spanish,789
 Bir sonraki görevimiz, bu dosyadan değerleri okumak için iş akışımızı uyarlamak.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello-pipeline-multi-inputs-csv.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-multi-inputs-csv.svg"
 </figure>
 
 Bunu nasıl gerçekleştirebileceğimizi görelim.

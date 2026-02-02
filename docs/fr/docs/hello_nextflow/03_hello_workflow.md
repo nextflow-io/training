@@ -88,7 +88,7 @@ Si cela a fonctionné pour vous, vous êtes prêt·e à apprendre comment assemb
 Nous allons ajouter une étape pour convertir chaque message de bienvenue en majuscules.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello-multistep.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello-multistep.svg"
 </figure>
 
 Pour ce faire, nous devons accomplir trois choses :
@@ -361,7 +361,7 @@ Lorsque nous utilisons un processus pour appliquer une transformation à chacun 
 Pour illustrer, nous allons ajouter une nouvelle étape à notre pipeline qui collecte tous les messages de bienvenue en majuscules produits par le processus `convertToUpper` et les écrit dans un seul fichier.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello-collect.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect.svg"
 </figure>
 
 Sans vouloir gâcher la surprise, cela va impliquer un opérateur très utile.

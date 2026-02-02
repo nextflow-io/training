@@ -32,7 +32,7 @@ Cztery kroki są zaimplementowane jako procesy Nextflow (`sayHello`, `convertToU
 ### Diagram
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello_pipeline_complete.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello_pipeline_complete.svg"
 </figure>
 
 ### Wyniki

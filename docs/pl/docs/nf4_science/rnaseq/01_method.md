@@ -8,7 +8,7 @@ W tym szkoleniu stosujemy metodę opisaną [tutaj](https://www.bioinformatics.ba
 Naszym celem jest opracowanie workflow'u, który implementuje następujące etapy przetwarzania: przeprowadzenie wstępnej kontroli jakości odczytów w próbce bulk RNAseq, usunięcie sekwencji adapterów z odczytów, dopasowanie odczytów do genomu referencyjnego oraz wygenerowanie kompleksowego raportu kontroli jakości (QC).
 
 <figure class="excalidraw">
---8<-- "docs/nf4_science/rnaseq/img/preprocess.svg"
+--8<-- "docs/en/docs/nf4_science/rnaseq/img/preprocess.svg"
 </figure>
 
 - **FASTQC:** Przeprowadzenie QC na danych odczytów przed przycinaniem przy użyciu FastQC

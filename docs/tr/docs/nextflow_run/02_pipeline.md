@@ -26,7 +26,7 @@ Holà,Spanish,789
 Ayrıca, CSV dosyasını okuyacak, selamlamaları çıkaracak ve her birini ayrı bir dosyaya yazacak olan `2a-inputs.nf` adlı orijinal workflow'un geliştirilmiş bir versiyonunu yazdık.
 
 <figure class="excalidraw">
---8<-- "docs/nextflow_run/img/hello-pipeline-multi-inputs.svg"
+--8<-- "docs/en/docs/nextflow_run/img/hello-pipeline-multi-inputs.svg"
 </figure>
 
 Önce workflow'u çalıştıralım ve ardından ilgili Nextflow koduna bakacağız.
@@ -346,7 +346,7 @@ Bu amaçla, aşağıdakileri gösteren, üç ayrı adımı birbirine zincirleyen
 Özellikle, her girdi selamlamasını alan, büyük harfe dönüştüren ve ardından tüm büyük harfli selamlamaları tek bir çıktı dosyasında toplayan `2b-multistep.nf` adlı genişletilmiş bir workflow versiyonu yaptık.
 
 <figure class="excalidraw">
---8<-- "docs/nextflow_run/img/hello-pipeline-multi-steps.svg"
+--8<-- "docs/en/docs/nextflow_run/img/hello-pipeline-multi-steps.svg"
 </figure>
 
 Daha önce olduğu gibi, önce workflow'u çalıştıracağız, ardından yeni olan şeyi görmek için koda bakacağız.
@@ -543,7 +543,7 @@ Daha yakından bakalım ve en ilginç parçaları tanımlayabilecek miyiz görel
 Nextflow uzantısıyla VSCode kullanıyorsanız, herhangi bir Nextflow betiğinde workflow bloğunun hemen üzerinde görüntülenen küçük `DAG preview` bağlantısına tıklayarak process'lerin nasıl bağlandığına dair yararlı bir diyagram alabilirsiniz.
 
 <figure class="excalidraw">
---8<-- "docs/nextflow_run/img/DAG-multistep.svg"
+--8<-- "docs/en/docs/nextflow_run/img/DAG-multistep.svg"
 </figure>
 
 Bu size process'lerin nasıl bağlandığına ve ne ürettiklerine dair güzel bir genel bakış sunar.
@@ -623,13 +623,13 @@ Bu workflow bağlamında, `convertToUpper.out` channel'ındaki üç büyük harf
 Daha pratik terimlerle: `collectGreetings()`'e beslemeden önce `convertToUpper()`'ın çıktısına `collect()` uygulamasaydık, Nextflow basitçe `collectGreetings()`'i her selamlamada bağımsız olarak çalıştırırdı, bu da amacımıza ulaşmazdı.
 
 <figure class="excalidraw">
---8<-- "docs/nextflow_run/img/without-collect-operator.svg"
+--8<-- "docs/en/docs/nextflow_run/img/without-collect-operator.svg"
 </figure>
 
 Buna karşılık, `collect()` kullanmak, workflow'un ikinci adımı tarafından üretilen tüm ayrı büyük harfli selamlamaları almamıza ve pipeline'ın üçüncü adımında tek bir çağrıya hepsini birlikte beslememize olanak tanır.
 
 <figure class="excalidraw">
---8<-- "docs/nextflow_run/img/with-collect-operator.svg"
+--8<-- "docs/en/docs/nextflow_run/img/with-collect-operator.svg"
 </figure>
 
 Tüm selamlamaları aynı dosyaya bu şekilde geri alıyoruz.
@@ -793,7 +793,7 @@ Bu, kodun birden fazla kopyasını üretmeden birden fazla workflow'da process t
 Elbette yine gösterim amacıyla uygun bir workflow, `2c-modules.nf` adlı, `modules/` dizininde bulunan bir modül setiyle birlikte hazırladık.
 
 <figure class="excalidraw">
---8<-- "docs/nextflow_run/img/modules.svg"
+--8<-- "docs/en/docs/nextflow_run/img/modules.svg"
 </figure>
 
 ??? abstract "Dizin içeriği"
@@ -1148,7 +1148,7 @@ Sadece her process için bir konteyner belirtmemiz gerekiyor.
 Bunun nasıl çalıştığını göstermek için, üçüncü adımda üretilen toplanan selamlamalar dosyasında `cowpy` çalıştıran workflow'umuzun başka bir versiyonunu yaptık.
 
 <figure class="excalidraw">
---8<-- "docs/nextflow_run/img/hello-pipeline-cowpy.svg"
+--8<-- "docs/en/docs/nextflow_run/img/hello-pipeline-cowpy.svg"
 </figure>
 
 Bu, konuşma balonunda üç selamlama içeren ASCII art içeren bir dosya çıktısı vermelidir.
@@ -1286,7 +1286,7 @@ Bu yapılandırma, Nextflow'a uyumlu bir konteyner belirten herhangi bir process
 Özetlemek gerekirse, çalıştırmak üzere olduğumuz şey:
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello_pipeline_complete.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello_pipeline_complete.svg"
 </figure>
 
 Çalışacak mı sizce?

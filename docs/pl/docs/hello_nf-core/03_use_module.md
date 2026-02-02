@@ -423,7 +423,7 @@ Zauważ również, że domyślnie plik wyjściowy będzie nazwany na podstawie i
 Może to wydawać się dużo do śledzenia, patrząc tylko na kod, więc oto diagram, który pomoże Ci zwizualizować, jak wszystko do siebie pasuje.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nf-core/img/module_comparison.svg"
+--8<-- "docs/en/docs/hello_nf-core/img/module_comparison.svg"
 </figure>
 
 Widać, że oba moduły mają podobne wymagania wejściowe pod względem zawartości (zestaw plików wejściowych plus niektóre metadane), ale bardzo różne oczekiwania co do sposobu pakowania tej zawartości.

@@ -6,7 +6,7 @@ For this course, we are following the method described [here](https://www.bioinf
 Our goal is to develop a workflow that implements the following processing steps: run initial quality control on reads in a bulk RNAseq sample, trim adapter sequences from the reads, align the reads to a reference genome, and produce a comprehensive quality control (QC) report.
 
 <figure class="excalidraw">
---8<-- "docs/nf4_science/rnaseq/img/preprocess.svg"
+--8<-- "docs/en/docs/nf4_science/rnaseq/img/preprocess.svg"
 </figure>
 
 - **FASTQC:** Perform QC on the read data before trimming using FastQC

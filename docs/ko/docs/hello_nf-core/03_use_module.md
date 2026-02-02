@@ -423,7 +423,7 @@ CAT_CAT 모듈은 단일 입력을 받지만, 그 입력은 두 가지를 포함
 코드만 보면 추적해야 할 것이 많아 보일 수 있으므로, 모든 것이 어떻게 함께 맞춰지는지 시각화하는 데 도움이 되는 다이어그램이 있습니다.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nf-core/img/module_comparison.svg"
+--8<-- "docs/en/docs/hello_nf-core/img/module_comparison.svg"
 </figure>
 
 두 모듈이 콘텐츠 측면에서(입력 파일 세트와 일부 메타데이터) 유사한 입력 요구 사항을 가지고 있지만 해당 콘텐츠가 패키징되는 방식에 대한 기대가 매우 다르다는 것을 알 수 있습니다.

@@ -400,7 +400,7 @@ process sayHello {
 여기서는 `greeting`이라는 **input** 변수를 받아 `output.txt`라는 파일에 **output**을 쓰는 `sayHello`라는 **process**가 있습니다.
 
 <figure class="excalidraw">
---8<-- "docs/nextflow_run/img/sayhello_with_input.svg"
+--8<-- "docs/en/docs/nextflow_run/img/sayhello_with_input.svg"
 </figure>
 
 이것은 `input` 정의, `output` 정의 및 실행할 `script`만 포함하는 매우 최소한의 process 정의입니다.

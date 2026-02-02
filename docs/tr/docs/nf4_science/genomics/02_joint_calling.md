@@ -28,7 +28,7 @@ GVCF'leri birleştirmek, örnek başına çağrıları bir veri deposuna (bir ve
 Özetlemek gerekirse, kursun bu bölümünde aşağıdakileri yapan bir iş akışı geliştireceğiz:
 
 <figure class="excalidraw">
---8<-- "docs/nf4_science/genomics/img/hello-gatk-2.svg"
+--8<-- "docs/en/docs/nf4_science/genomics/img/hello-gatk-2.svg"
 </figure>
 
 1. Samtools kullanarak her BAM girdi dosyası için bir dizin dosyası oluşturma

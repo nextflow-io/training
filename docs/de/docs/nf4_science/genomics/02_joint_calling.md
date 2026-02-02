@@ -28,7 +28,7 @@ Die Kombination der GVCFs erfolgt mit GATK GenomicsDBImport, das die Calls pro P
 Um zusammenzufassen, in diesem Teil des Kurses werden wir einen Workflow entwickeln, der Folgendes tut:
 
 <figure class="excalidraw">
---8<-- "docs/nf4_science/genomics/img/hello-gatk-2.svg"
+--8<-- "docs/en/docs/nf4_science/genomics/img/hello-gatk-2.svg"
 </figure>
 
 1. Generiere eine Indexdatei für jede BAM-Eingabedatei mit Samtools

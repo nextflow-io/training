@@ -256,7 +256,7 @@ Pekala, bu çalışıyor! Şimdi daha önemli değişiklikler yapmaya geçelim.
 `core-hello` iş hattının mevcut versiyonunda, aşağıdaki diyagramın üst yarısında gösterildiği gibi, `CAT_CAT`'in çıktı demetinden dosyayı çıkarıp `COWPY`'ye aktarıyoruz.
 
 <figure class="excalidraw">
-    --8<-- "docs/hello_nf-core/img/cowpy-inputs.svg"
+    --8<-- "docs/en/docs/hello_nf-core/img/cowpy-inputs.svg"
 </figure>
 
 `COWPY`'nin metadata demetlerini doğrudan kabul etmesi daha iyi olurdu, bu da metadatanın diyagramın alt yarısında gösterildiği gibi iş akışı boyunca akmasına izin verir.

@@ -457,7 +457,7 @@ Bu biraz soyut gelebilir, bu yüzden bunun pratikte `nf-core/demo` pipeline'ınd
 `nf-core/demo` pipeline'ı için ilgili kod bileşenleri arasındaki ilişkiler şöyle görünür:
 
 <figure class="excalidraw">
-    --8<-- "docs/hello_nf-core/img/nf-core_demo_code_organization.svg"
+    --8<-- "docs/en/docs/hello_nf-core/img/nf-core_demo_code_organization.svg"
 </figure>
 
 `main.nf` adlı, iki tür iç içe workflow için sarmalayıcı görevi gören bir _giriş noktası_ betiği vardır: `workflows/` altında bulunan ve `demo.nf` olarak adlandırılan gerçek analiz mantığını içeren workflow ve `subworkflows/` altında bulunan bir dizi bakım workflow'u.

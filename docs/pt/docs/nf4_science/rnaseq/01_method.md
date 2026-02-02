@@ -8,7 +8,7 @@ Para este curso, estamos seguindo o método descrito [aqui](https://www.bioinfor
 Nosso objetivo é desenvolver um fluxo de trabalho que implementa as seguintes etapas de processamento: executar controle de qualidade inicial nas leituras de uma amostra de RNAseq em bulk, remover sequências de adaptadores das leituras, alinhar as leituras a um genoma de referência e produzir um relatório abrangente de controle de qualidade (QC).
 
 <figure class="excalidraw">
---8<-- "docs/nf4_science/rnaseq/img/preprocess.svg"
+--8<-- "docs/en/docs/nf4_science/rnaseq/img/preprocess.svg"
 </figure>
 
 - **FASTQC:** Realizar QC nos dados de leitura antes da remoção usando FastQC

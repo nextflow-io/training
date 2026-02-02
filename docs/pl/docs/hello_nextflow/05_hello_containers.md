@@ -412,7 +412,7 @@ Oznacza to, że możesz użyć dowolnego obrazu kontenera do uruchamiania proces
 Aby to zademonstrować, dodamy krok `cowpy` do pipeline, który rozwijaliśmy, po kroku `collectGreetings`.
 
 <figure class="excalidraw">
---8<-- "docs/nextflow_run/img/hello-pipeline-cowpy.svg"
+--8<-- "docs/en/docs/nextflow_run/img/hello-pipeline-cowpy.svg"
 </figure>
 
 Zamuucz, jeśli jesteś gotowy!
@@ -661,7 +661,7 @@ Teraz opublikowane wyjścia będą nieco lepiej zorganizowane.
 Podsumowując, oto co chcemy osiągnąć:
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello_pipeline_complete.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello_pipeline_complete.svg"
 </figure>
 
 Myślisz, że zadziała?

@@ -423,7 +423,7 @@ CAT_CAT मॉड्यूल एक एकल input लेता है, ले
 केवल code को देखते हुए यह बहुत कुछ ट्रैक करने के लिए लग सकता है, इसलिए यहां एक diagram है जो आपको सब कुछ एक साथ कैसे फिट होता है यह visualize करने में मदद करने के लिए है।
 
 <figure class="excalidraw">
---8<-- "docs/hello_nf-core/img/module_comparison.svg"
+--8<-- "docs/en/docs/hello_nf-core/img/module_comparison.svg"
 </figure>
 
 आप देख सकते हैं कि दोनों मॉड्यूल की सामग्री के संदर्भ में समान input आवश्यकताएं हैं (input फ़ाइलों का एक सेट प्लस कुछ metadata) लेकिन उस सामग्री को कैसे package किया जाता है, इसके लिए बहुत अलग अपेक्षाएं हैं।

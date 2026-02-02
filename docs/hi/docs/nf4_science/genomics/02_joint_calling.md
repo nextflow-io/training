@@ -28,7 +28,7 @@ GVCFs को जोड़ना GATK GenomicsDBImport के साथ किय
 तो संक्षेप में, कोर्स के इस भाग में, हम एक वर्कफ़्लो विकसित करने जा रहे हैं जो निम्नलिखित करता है:
 
 <figure class="excalidraw">
---8<-- "docs/nf4_science/genomics/img/hello-gatk-2.svg"
+--8<-- "docs/en/docs/nf4_science/genomics/img/hello-gatk-2.svg"
 </figure>
 
 1. Samtools का उपयोग करके प्रत्येक BAM इनपुट फ़ाइल के लिए एक इंडेक्स फ़ाइल उत्पन्न करें

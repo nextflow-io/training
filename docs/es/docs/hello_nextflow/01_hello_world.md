@@ -154,7 +154,7 @@ process sayHello {
 Aquí tenemos un **process** llamado `sayHello` que escribe su **output** en un archivo llamado `output.txt`.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello_world.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello_world.svg"
 </figure>
 
 Esta es una definición de proceso muy mínima que solo contiene una definición de `output` y el `script` a ejecutar.
@@ -596,7 +596,7 @@ Esta vez el resultado se escribe bajo el subdirectorio especificado.
 Ve que el resultado de la ejecución anterior todavía está ahí.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello_world_output.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello_world_output.svg"
 </figure>
 
 Puede usar tantos niveles de anidamiento como desee.
@@ -854,7 +854,7 @@ Asegúrese de abrir el archivo de salida para verificar que ahora tiene la nueva
 ¡Voilà!
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello_world_input.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello_world_input.svg"
 </figure>
 
 Note cómo la nueva ejecución ha sobrescrito el archivo de salida publicado en el directorio `results`.

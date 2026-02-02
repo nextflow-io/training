@@ -400,7 +400,7 @@ process sayHello {
 Burada `greeting` adlı bir **input** değişkeni alan ve **output**'unu `output.txt` adlı bir dosyaya yazan `sayHello` adlı bir **process**'imiz var.
 
 <figure class="excalidraw">
---8<-- "docs/nextflow_run/img/sayhello_with_input.svg"
+--8<-- "docs/en/docs/nextflow_run/img/sayhello_with_input.svg"
 </figure>
 
 Bu, yalnızca bir `input` tanımı, bir `output` tanımı ve yürütülecek `script`'i içeren çok minimal bir process tanımıdır.

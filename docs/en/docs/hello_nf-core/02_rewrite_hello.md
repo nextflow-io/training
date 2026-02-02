@@ -665,7 +665,7 @@ Now that we've verified our composable workflow works correctly, let's return to
 We want to integrate the composable workflow we just developed into the nf-core template structure, so the end result should look something like this.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nf-core/img/core-hello.svg"
+--8<-- "docs/en/docs/hello_nf-core/img/core-hello.svg"
 </figure>
 
 So how do we make that happen? Let's have a look at the current content of the `HELLO` workflow in `core-hello/workflows/hello.nf` (the nf-core scaffold).
@@ -1080,7 +1080,7 @@ What matters here is that there are two workflows defined:
 Here is a diagram of how they relate to each other:
 
 <figure class="excalidraw">
---8<-- "docs/hello_nf-core/img/hello-nested-workflows.svg"
+--8<-- "docs/en/docs/hello_nf-core/img/hello-nested-workflows.svg"
 </figure>
 
 Importantly, we cannot find any code constructing an input channel at this level, only references to a samplesheet provided via the `--input` parameter.

@@ -412,7 +412,7 @@ Bu, süreçlerinizi çalıştırmak için istediğiniz herhangi bir konteyner im
 Bunu göstermek için, geliştirdiğimiz pipeline'a `collectGreetings` adımından sonra bir `cowpy` adımı ekleyeceğiz.
 
 <figure class="excalidraw">
---8<-- "docs/nextflow_run/img/hello-pipeline-cowpy.svg"
+--8<-- "docs/en/docs/nextflow_run/img/hello-pipeline-cowpy.svg"
 </figure>
 
 Dalmaya hazırsanız möö deyin!
@@ -661,7 +661,7 @@ Artık yayınlanan çıktılar biraz daha düzenli olacak.
 Özetlemek gerekirse, hedeflediğimiz şey şu:
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello_pipeline_complete.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello_pipeline_complete.svg"
 </figure>
 
 Çalışacağını düşünüyor musunuz?

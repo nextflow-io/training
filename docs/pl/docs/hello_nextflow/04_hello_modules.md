@@ -23,7 +23,7 @@ Kiedy zaczęliśmy rozwijać nasz workflow, napisaliśmy wszystko w jednym pliku
 Teraz przeniesiemy procesy do indywidualnych modułów.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/modules.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/modules.svg"
 </figure>
 
 To sprawi, że nasz kod będzie bardziej współdzielny, elastyczny i łatwy w utrzymaniu.

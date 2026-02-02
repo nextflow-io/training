@@ -423,7 +423,7 @@ Observe también que, por defecto, el archivo de salida se nombrará en base a u
 Esto puede parecer mucho para llevar un registro solo mirando el código, así que aquí hay un diagrama para ayudarlo a visualizar cómo todo encaja.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nf-core/img/module_comparison.svg"
+--8<-- "docs/en/docs/hello_nf-core/img/module_comparison.svg"
 </figure>
 
 Puede ver que los dos módulos tienen requisitos de entrada similares en términos de contenido (un conjunto de archivos de entrada más algunos metadatos) pero expectativas muy diferentes sobre cómo se empaqueta ese contenido.

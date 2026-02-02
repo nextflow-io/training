@@ -31,7 +31,7 @@
 2. 각 BAM 입력 파일에 대해 GATK HaplotypeCaller를 실행하여 VCF(Variant Call Format)로 샘플별 변이 호출 생성
 
 <figure class="excalidraw">
---8<-- "docs/nf4_science/genomics/img/hello-gatk-1.svg"
+--8<-- "docs/en/docs/nf4_science/genomics/img/hello-gatk-1.svg"
 </figure>
 
 !!! note "참고"

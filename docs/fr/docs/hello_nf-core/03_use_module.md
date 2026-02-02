@@ -423,7 +423,7 @@ Notez également que par défaut, le fichier de sortie sera nommé en fonction d
 Cela peut sembler beaucoup à retenir en regardant simplement le code, voici donc un diagramme pour vous aider à visualiser comment tout s'articule.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nf-core/img/module_comparison.svg"
+--8<-- "docs/en/docs/hello_nf-core/img/module_comparison.svg"
 </figure>
 
 Vous pouvez voir que les deux modules ont des exigences d'entrée similaires en termes de contenu (un ensemble de fichiers d'entrée plus quelques métadonnées) mais des attentes très différentes quant à la façon dont ce contenu est empaqueté.

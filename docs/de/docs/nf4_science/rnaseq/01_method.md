@@ -8,7 +8,7 @@ Für diesen Kurs folgen wir der Methode, die [hier](https://www.bioinformatics.b
 Unser Ziel ist es, einen Workflow zu entwickeln, der die folgenden Verarbeitungsschritte implementiert: initiale Qualitätskontrolle der Reads in einer Bulk-RNAseq-Probe durchführen, Adaptersequenzen aus den Reads trimmen, die Reads auf ein Referenzgenom alignieren und einen umfassenden Qualitätskontroll-Bericht (QC) erstellen.
 
 <figure class="excalidraw">
---8<-- "docs/nf4_science/rnaseq/img/preprocess.svg"
+--8<-- "docs/en/docs/nf4_science/rnaseq/img/preprocess.svg"
 </figure>
 
 - **FASTQC:** QC der Read-Daten vor dem Trimmen mit FastQC durchführen

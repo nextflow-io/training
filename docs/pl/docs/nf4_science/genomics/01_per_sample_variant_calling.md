@@ -31,7 +31,7 @@ W tej części kursu opracujesz workflow, który wykonuje następujące czynnoś
 2. Uruchamia GATK HaplotypeCaller na każdym pliku wejściowym BAM, aby wygenerować wykrycia wariantów dla pojedynczych próbek w formacie VCF (Variant Call Format)
 
 <figure class="excalidraw">
---8<-- "docs/nf4_science/genomics/img/hello-gatk-1.svg"
+--8<-- "docs/en/docs/nf4_science/genomics/img/hello-gatk-1.svg"
 </figure>
 
 !!! note "Uwaga"

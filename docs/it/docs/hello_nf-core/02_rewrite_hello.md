@@ -667,7 +667,7 @@ Ora che abbiamo verificato che il nostro workflow componibile funziona correttam
 Vogliamo integrare il workflow componibile che abbiamo appena sviluppato nella struttura del template nf-core, quindi il risultato finale dovrebbe apparire così.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nf-core/img/core-hello.svg"
+--8<-- "docs/en/docs/hello_nf-core/img/core-hello.svg"
 </figure>
 
 Quindi come facciamo a farlo accadere? Diamo un'occhiata al contenuto attuale del workflow `HELLO` in `core-hello/workflows/hello.nf` (lo scaffold nf-core).
@@ -1082,7 +1082,7 @@ Ciò che conta qui è che ci sono due workflow definiti:
 Ecco un diagramma di come si relazionano tra loro:
 
 <figure class="excalidraw">
---8<-- "docs/hello_nf-core/img/hello-nested-workflows.svg"
+--8<-- "docs/en/docs/hello_nf-core/img/hello-nested-workflows.svg"
 </figure>
 
 Importante, non possiamo trovare alcun codice che costruisce un canale di input a questo livello, solo riferimenti a un samplesheet fornito tramite il parametro `--input`.

@@ -8,7 +8,7 @@
 हमारा लक्ष्य एक workflow विकसित करना है जो निम्नलिखित प्रोसेसिंग चरणों को लागू करता है: बल्क RNAseq नमूने में reads पर प्रारंभिक गुणवत्ता नियंत्रण चलाना, reads से adapter अनुक्रम ट्रिम करना, reads को reference genome के साथ संरेखित करना, और एक व्यापक गुणवत्ता नियंत्रण (QC) रिपोर्ट तैयार करना।
 
 <figure class="excalidraw">
---8<-- "docs/nf4_science/rnaseq/img/preprocess.svg"
+--8<-- "docs/en/docs/nf4_science/rnaseq/img/preprocess.svg"
 </figure>
 
 - **FASTQC:** ट्रिमिंग से पहले FastQC का उपयोग करके read डेटा पर QC करें

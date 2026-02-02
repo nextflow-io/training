@@ -8,7 +8,7 @@ Pour cette formation, nous suivons la méthode décrite [ici](https://www.bioinf
 Notre objectif est de développer un workflow qui implémente les étapes de traitement suivantes : exécuter un contrôle qualité initial sur les lectures dans un échantillon RNAseq en vrac, couper les séquences d'adaptateurs des lectures, aligner les lectures sur un génome de référence et produire un rapport de contrôle qualité (QC) complet.
 
 <figure class="excalidraw">
---8<-- "docs/nf4_science/rnaseq/img/preprocess.svg"
+--8<-- "docs/en/docs/nf4_science/rnaseq/img/preprocess.svg"
 </figure>
 
 - **FASTQC :** Effectuer le QC sur les données de lecture avant la coupe en utilisant FastQC

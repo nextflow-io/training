@@ -425,7 +425,7 @@ Si noti anche che per impostazione predefinita, il file di output sarà denomina
 Questo potrebbe sembrare molto da tenere a mente guardando solo il codice, quindi ecco un diagramma per aiutare a visualizzare come tutto si integra.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nf-core/img/module_comparison.svg"
+--8<-- "docs/en/docs/hello_nf-core/img/module_comparison.svg"
 </figure>
 
 Potete vedere che i due moduli hanno requisiti di input simili in termini di contenuto (un insieme di file di input più alcuni metadati) ma aspettative molto diverse per come quel contenuto è confezionato.

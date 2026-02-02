@@ -23,7 +23,7 @@ Als wir anfingen, unseren Workflow zu entwickeln, haben wir alles in einer einzi
 Jetzt werden wir die processes in einzelne Module auslagern.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/modules.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/modules.svg"
 </figure>
 
 Dies wird unseren Code besser teilbar, flexibler und wartbarer machen.

@@ -88,7 +88,7 @@ Jeśli to zadziałało, jesteś gotowy do nauki składania wieloetapowego workfl
 Dodamy krok konwertujący każde pozdrowienie na wielkie litery.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello-multistep.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello-multistep.svg"
 </figure>
 
 W tym celu musimy wykonać trzy rzeczy:
@@ -361,7 +361,7 @@ Gdy używamy procesu do zastosowania transformacji na każdym z elementów w kan
 Dla demonstracji dodamy nowy krok do naszego pipeline, który zbiera wszystkie pozdrowienia zapisane wielkimi literami, wyprodukowane przez proces `convertToUpper`, i zapisuje je do pojedynczego pliku.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello-collect.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect.svg"
 </figure>
 
 Nie zdradzając niespodzianki, ale będzie to wymagało użycia bardzo przydatnego operatora.

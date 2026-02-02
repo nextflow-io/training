@@ -457,7 +457,7 @@ Eso puede sonar un poco abstracto, así que echemos un vistazo a cómo se usa es
 Así es como se ven las relaciones entre los componentes de código relevantes para el pipeline `nf-core/demo`:
 
 <figure class="excalidraw">
-    --8<-- "docs/hello_nf-core/img/nf-core_demo_code_organization.svg"
+    --8<-- "docs/en/docs/hello_nf-core/img/nf-core_demo_code_organization.svg"
 </figure>
 
 Hay un script llamado _punto de entrada_ llamado `main.nf`, que actúa como un contenedor para dos tipos de workflows anidados: el workflow que contiene la lógica de análisis real, ubicado en `workflows/` y llamado `demo.nf`, y un conjunto de workflows de mantenimiento ubicados en `subworkflows/`.

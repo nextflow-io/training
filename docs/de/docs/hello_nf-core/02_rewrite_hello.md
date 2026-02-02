@@ -667,7 +667,7 @@ Nachdem wir überprüft haben, dass unser komponierbarer Workflow korrekt funkti
 Wir wollen den komponierbaren Workflow, den wir gerade entwickelt haben, in die nf-core-Template-Struktur integrieren, sodass das Endergebnis ungefähr so aussehen sollte.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nf-core/img/core-hello.svg"
+--8<-- "docs/en/docs/hello_nf-core/img/core-hello.svg"
 </figure>
 
 Wie machen wir das? Werfen wir einen Blick auf den aktuellen Inhalt des `HELLO`-Workflows in `core-hello/workflows/hello.nf` (das nf-core-Gerüst).
@@ -1082,7 +1082,7 @@ Was hier wichtig ist, ist, dass zwei Workflows definiert sind:
 Hier ist ein Diagramm, wie sie zueinander in Beziehung stehen:
 
 <figure class="excalidraw">
---8<-- "docs/hello_nf-core/img/hello-nested-workflows.svg"
+--8<-- "docs/en/docs/hello_nf-core/img/hello-nested-workflows.svg"
 </figure>
 
 Wichtig ist, dass wir auf dieser Ebene keinen Code finden können, der einen Eingabekanal konstruiert, nur Verweise auf ein Samplesheet, das über den Parameter `--input` bereitgestellt wird.

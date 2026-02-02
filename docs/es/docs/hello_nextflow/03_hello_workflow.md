@@ -88,7 +88,7 @@ Si eso funcionó para usted, está listo para aprender cómo ensamblar un flujo 
 Vamos a agregar un paso para convertir cada saludo a mayúsculas.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello-multistep.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello-multistep.svg"
 </figure>
 
 Para ese fin, necesitamos hacer tres cosas:
@@ -361,7 +361,7 @@ Cuando usamos un proceso para aplicar una transformación a cada uno de los elem
 Para demostrar, agregaremos un nuevo paso a nuestro pipeline que recopila todos los saludos en mayúsculas producidos por el proceso `convertToUpper` y los escribe en un único archivo.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello-collect.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect.svg"
 </figure>
 
 Sin arruinar la sorpresa, esto va a involucrar un operador muy útil.

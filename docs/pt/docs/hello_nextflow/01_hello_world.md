@@ -154,7 +154,7 @@ process sayHello {
 Aqui temos um **processo** chamado `sayHello` que escreve sua **saída** em um arquivo chamado `output.txt`.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello_world.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello_world.svg"
 </figure>
 
 Esta é uma definição de processo muito mínima que contém apenas uma definição de `output` e o `script` a ser executado.
@@ -596,7 +596,7 @@ Desta vez o resultado é escrito no subdiretório especificado.
 Você vê que o resultado da execução anterior ainda está lá.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello_world_output.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello_world_output.svg"
 </figure>
 
 Você pode usar quantos níveis de aninhamento desejar.
@@ -854,7 +854,7 @@ Certifique-se de abrir o arquivo de saída para verificar se você agora tem a n
 Voilà!
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello_world_input.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello_world_input.svg"
 </figure>
 
 Note como a nova execução sobrescreveu o arquivo de saída publicado no diretório `results`.

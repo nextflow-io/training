@@ -27,7 +27,7 @@ Im Laufe von sechs Teilen hast du diesen einfachen Workflow in eine modulare meh
 - Die endgültige Ausgabe der Pipeline ist eine einfache Textdatei mit ASCII-Kunst einer Figur, die die in Großbuchstaben konvertierten Begrüßungen sagt.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello_pipeline_complete.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello_pipeline_complete.svg"
 </figure>
 
 1. **`sayHello`:** Schreibt jede Begrüßung in ihre eigene Ausgabedatei (_z.B._ "Hello-output.txt")

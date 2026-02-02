@@ -28,7 +28,7 @@ La combinaison des GVCFs est effectuée avec GATK GenomicsDBImport, qui combine 
 Donc, pour récapituler, dans cette partie du cours, nous allons développer un workflow qui fait ce qui suit :
 
 <figure class="excalidraw">
---8<-- "docs/nf4_science/genomics/img/hello-gatk-2.svg"
+--8<-- "docs/en/docs/nf4_science/genomics/img/hello-gatk-2.svg"
 </figure>
 
 1. Générer un fichier d'index pour chaque fichier BAM d'entrée en utilisant Samtools

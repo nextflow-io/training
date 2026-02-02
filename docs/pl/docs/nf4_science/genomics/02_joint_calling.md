@@ -28,7 +28,7 @@ GVCF jest produkowany przez GATK HaplotypeCaller, to samo narzędzie, którego u
 Podsumowując, w tej części kursu zamierzamy rozwinąć workflow, który wykonuje następujące czynności:
 
 <figure class="excalidraw">
---8<-- "docs/nf4_science/genomics/img/hello-gatk-2.svg"
+--8<-- "docs/en/docs/nf4_science/genomics/img/hello-gatk-2.svg"
 </figure>
 
 1. Wygenerować plik indeksu dla każdego pliku BAM wejściowego za pomocą Samtools

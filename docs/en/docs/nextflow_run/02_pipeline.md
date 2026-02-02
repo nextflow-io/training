@@ -24,7 +24,7 @@ Holà,Spanish,789
 We've also written an improved version of the original workflow, now called `2a-inputs.nf`, that will read in the CSV file, extract the greetings and write each of them to a separate file.
 
 <figure class="excalidraw">
---8<-- "docs/nextflow_run/img/hello-pipeline-multi-inputs.svg"
+--8<-- "docs/en/docs/nextflow_run/img/hello-pipeline-multi-inputs.svg"
 </figure>
 
 Let's run the workflow first, and we'll take a look at the relevant Nextflow code afterward.
@@ -344,7 +344,7 @@ To that end, we provide you with an example workflow that chains together three 
 Specifically, we made an expanded version of the workflow called `2b-multistep.nf` that takes each input greeting, converts it to uppercase, then collects all the uppercased greetings into a single output file.
 
 <figure class="excalidraw">
---8<-- "docs/nextflow_run/img/hello-pipeline-multi-steps.svg"
+--8<-- "docs/en/docs/nextflow_run/img/hello-pipeline-multi-steps.svg"
 </figure>
 
 As previously, we'll run the workflow first then look at the code to see what is new.
@@ -541,7 +541,7 @@ Let's take a closer look and see if we can identify the most interesting pieces.
 If you're using VSCode with the Nextflow extension, you can get a helpful diagram of how the processes are connected by clicking on the small `DAG preview` link displayed just above the workflow block in any Nextflow script.
 
 <figure class="excalidraw">
---8<-- "docs/nextflow_run/img/DAG-multistep.svg"
+--8<-- "docs/en/docs/nextflow_run/img/DAG-multistep.svg"
 </figure>
 
 This gives you a nice overview of how the processes are connected and what they produce.
@@ -621,13 +621,13 @@ In the context of this workflow, it's taking the three uppercased greetings in t
 In more practical terms: if we didn't apply `collect()` to the output of `convertToUpper()` before feeding it to `collectGreetings()`, Nextflow would simply run `collectGreetings()` independently on each greeting, which would not achieve our goal.
 
 <figure class="excalidraw">
---8<-- "docs/nextflow_run/img/without-collect-operator.svg"
+--8<-- "docs/en/docs/nextflow_run/img/without-collect-operator.svg"
 </figure>
 
 In contrast, using `collect()` allows us to take all the separate uppercased greetings produced by the second step of the workflow and feed them all together to a single call in the third step of the pipeline.
 
 <figure class="excalidraw">
---8<-- "docs/nextflow_run/img/with-collect-operator.svg"
+--8<-- "docs/en/docs/nextflow_run/img/with-collect-operator.svg"
 </figure>
 
 That's how we get all the greetings back into the same file.
@@ -791,7 +791,7 @@ Now we're going to see what it looks like when the processes are stored in indiv
 We have of course once again prepared a suitable workflow for demonstration purposes, called `2c-modules.nf`, along with a set of modules located in the `modules/` directory.
 
 <figure class="excalidraw">
---8<-- "docs/nextflow_run/img/modules.svg"
+--8<-- "docs/en/docs/nextflow_run/img/modules.svg"
 </figure>
 
 ??? abstract "Directory contents"
@@ -1147,7 +1147,7 @@ We just need to specify a container for each process.
 To demonstrate how this work, we made another version of our workflow that runs `cowpy` on the file of collected greetings produced in the third step.
 
 <figure class="excalidraw">
---8<-- "docs/nextflow_run/img/hello-pipeline-cowpy.svg"
+--8<-- "docs/en/docs/nextflow_run/img/hello-pipeline-cowpy.svg"
 </figure>
 
 This should output a file containing the ASCII art with the three greetings in the speech bubble.
@@ -1285,7 +1285,7 @@ This configuration tells Nextflow to use Docker for any process that specifies a
 Just to recap, this is what we are about to run:
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello_pipeline_complete.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello_pipeline_complete.svg"
 </figure>
 
 Do you think it's going to work?

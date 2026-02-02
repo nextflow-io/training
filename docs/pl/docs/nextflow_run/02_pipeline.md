@@ -26,7 +26,7 @@ Holà,Spanish,789
 Napisaliśmy również ulepszoną wersję oryginalnego workflow'u, teraz o nazwie `2a-inputs.nf`, która odczyta plik CSV, wyodrębni powitania i zapisze każde z nich do oddzielnego pliku.
 
 <figure class="excalidraw">
---8<-- "docs/nextflow_run/img/hello-pipeline-multi-inputs.svg"
+--8<-- "docs/en/docs/nextflow_run/img/hello-pipeline-multi-inputs.svg"
 </figure>
 
 Uruchommy najpierw workflow, a potem przyjrzymy się odpowiedniemu kodowi Nextflow.
@@ -346,7 +346,7 @@ W tym celu dostarczamy przykładowy workflow, który łączy trzy oddzielne krok
 Konkretnie, stworzyliśmy rozszerzoną wersję workflow'u o nazwie `2b-multistep.nf`, która przyjmuje każde powitanie wejściowe, konwertuje je na wielkie litery, a następnie zbiera wszystkie powitania wielkimi literami do jednego pliku wyjściowego.
 
 <figure class="excalidraw">
---8<-- "docs/nextflow_run/img/hello-pipeline-multi-steps.svg"
+--8<-- "docs/en/docs/nextflow_run/img/hello-pipeline-multi-steps.svg"
 </figure>
 
 Jak poprzednio, najpierw uruchomimy workflow, a potem przyjrzymy się kodowi, aby zobaczyć, co jest nowe.
@@ -543,7 +543,7 @@ Przyjrzyjmy się bliżej i zobaczmy, czy możemy zidentyfikować najciekawsze el
 Jeśli używasz VSCode z rozszerzeniem Nextflow, możesz uzyskać pomocny diagram pokazujący, jak procesy są połączone, klikając mały link `DAG preview` wyświetlany tuż nad blokiem workflow w dowolnym skrypcie Nextflow.
 
 <figure class="excalidraw">
---8<-- "docs/nextflow_run/img/DAG-multistep.svg"
+--8<-- "docs/en/docs/nextflow_run/img/DAG-multistep.svg"
 </figure>
 
 To daje ładny przegląd tego, jak procesy są połączone i co produkują.
@@ -623,13 +623,13 @@ W kontekście tego workflow'u bierze trzy powitania wielkimi literami w kanale `
 Bardziej praktycznie: gdybyśmy nie zastosowali `collect()` do wyjścia `convertToUpper()` przed przekazaniem go do `collectGreetings()`, Nextflow po prostu uruchomiłby `collectGreetings()` niezależnie na każdym powitaniu, co nie osiągnęłoby naszego celu.
 
 <figure class="excalidraw">
---8<-- "docs/nextflow_run/img/without-collect-operator.svg"
+--8<-- "docs/en/docs/nextflow_run/img/without-collect-operator.svg"
 </figure>
 
 W przeciwieństwie do tego, użycie `collect()` pozwala nam wziąć wszystkie oddzielne powitania wielkimi literami wyprodukowane przez drugi krok workflow'u i przekazać je wszystkie razem do jednego wywołania w trzecim kroku pipeline'u.
 
 <figure class="excalidraw">
---8<-- "docs/nextflow_run/img/with-collect-operator.svg"
+--8<-- "docs/en/docs/nextflow_run/img/with-collect-operator.svg"
 </figure>
 
 W ten sposób otrzymujemy wszystkie powitania z powrotem do tego samego pliku.
@@ -793,7 +793,7 @@ Teraz zobaczymy, jak to wygląda, gdy procesy są przechowywane w indywidualnych
 Oczywiście znowu przygotowaliśmy odpowiedni workflow do celów demonstracyjnych, o nazwie `2c-modules.nf`, wraz z zestawem modułów znajdujących się w katalogu `modules/`.
 
 <figure class="excalidraw">
---8<-- "docs/nextflow_run/img/modules.svg"
+--8<-- "docs/en/docs/nextflow_run/img/modules.svg"
 </figure>
 
 ??? abstract "Zawartość katalogu"
@@ -1148,7 +1148,7 @@ Musimy tylko określić kontener dla każdego procesu.
 Aby zademonstrować, jak to działa, stworzyliśmy kolejną wersję naszego workflow'u, która uruchamia `cowpy` na pliku zebranych powitań wyprodukowanych w trzecim kroku.
 
 <figure class="excalidraw">
---8<-- "docs/nextflow_run/img/hello-pipeline-cowpy.svg"
+--8<-- "docs/en/docs/nextflow_run/img/hello-pipeline-cowpy.svg"
 </figure>
 
 To powinno wyprodukować plik zawierający grafikę ASCII z trzema powitaniami w dymku mowy.
@@ -1286,7 +1286,7 @@ Ta konfiguracja mówi Nextflow, aby używał Docker dla każdego procesu, który
 Podsumowując, oto co zamierzamy uruchomić:
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello_pipeline_complete.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello_pipeline_complete.svg"
 </figure>
 
 Myślisz, że zadziała?

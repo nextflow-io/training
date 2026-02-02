@@ -152,7 +152,7 @@ process sayHello {
 Here we have a **process** called `sayHello` that writes its **output** to a file named `output.txt`.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello_world.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello_world.svg"
 </figure>
 
 This is a very minimal process definition that just contains an `output` definition and the `script` to execute.
@@ -594,7 +594,7 @@ This time the result gets written under the specified subdirectory.
 You see the result from the previous execution is still there.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello_world_output.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello_world_output.svg"
 </figure>
 
 You can use as many levels of nesting as you'd like.
@@ -852,7 +852,7 @@ Be sure to open up the output file to check that you now have the new version of
 Voilà!
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello_world_input.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello_world_input.svg"
 </figure>
 
 Note how the new execution has overwritten the output file published to the `results` directory.

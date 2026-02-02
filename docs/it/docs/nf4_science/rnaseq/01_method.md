@@ -8,7 +8,7 @@ Per questo corso, seguiamo il metodo descritto [qui](https://www.bioinformatics.
 Il nostro obiettivo è sviluppare un workflow che implementi le seguenti fasi di elaborazione: eseguire il controllo qualità iniziale sulle read in un campione RNAseq in bulk, rimuovere le sequenze degli adapter dalle read, allineare le read a un genoma di riferimento e produrre un report completo di controllo qualità (QC).
 
 <figure class="excalidraw">
---8<-- "docs/nf4_science/rnaseq/img/preprocess.svg"
+--8<-- "docs/en/docs/nf4_science/rnaseq/img/preprocess.svg"
 </figure>
 
 - **FASTQC:** Eseguire il QC sui dati delle read prima del trimming utilizzando FastQC

@@ -457,7 +457,7 @@ tree -L 1 pipelines/nf-core/demo
 यहाँ `nf-core/demo` pipeline के लिए प्रासंगिक कोड घटकों के बीच संबंध कैसा दिखता है:
 
 <figure class="excalidraw">
-    --8<-- "docs/hello_nf-core/img/nf-core_demo_code_organization.svg"
+    --8<-- "docs/en/docs/hello_nf-core/img/nf-core_demo_code_organization.svg"
 </figure>
 
 एक तथाकथित _entrypoint_ स्क्रिप्ट है जिसे `main.nf` कहा जाता है, जो दो प्रकार के nested workflows के लिए एक wrapper के रूप में कार्य करता है: वास्तविक विश्लेषण तर्क वाली workflow, जो `workflows/` के तहत स्थित है और `demo.nf` कहलाती है, और housekeeping workflows का एक सेट `subworkflows/` के तहत स्थित है।

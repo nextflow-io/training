@@ -31,7 +31,7 @@
 2. प्रत्येक BAM इनपुट फ़ाइल पर GATK HaplotypeCaller चलाएं ताकि VCF (Variant Call Format) में प्रति-नमूना वेरिएंट कॉल उत्पन्न हो सकें
 
 <figure class="excalidraw">
---8<-- "docs/nf4_science/genomics/img/hello-gatk-1.svg"
+--8<-- "docs/en/docs/nf4_science/genomics/img/hello-gatk-1.svg"
 </figure>
 
 !!! note

@@ -256,7 +256,7 @@ Gut, das funktioniert! Lass uns nun zu substanzielleren Änderungen übergehen.
 In der aktuellen Version der `core-hello`-Pipeline extrahieren wir die Datei aus dem Ausgabe-Tupel von `CAT_CAT`, um sie an `COWPY` zu übergeben, wie in der oberen Hälfte des Diagramms unten gezeigt.
 
 <figure class="excalidraw">
-    --8<-- "docs/hello_nf-core/img/cowpy-inputs.svg"
+    --8<-- "docs/en/docs/hello_nf-core/img/cowpy-inputs.svg"
 </figure>
 
 Es wäre besser, wenn `COWPY` Metadaten-Tupel direkt akzeptieren würde, sodass Metadaten durch den Workflow fließen können, wie in der unteren Hälfte des Diagramms gezeigt.

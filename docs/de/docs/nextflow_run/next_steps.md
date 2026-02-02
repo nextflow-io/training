@@ -22,7 +22,7 @@ Du bist jetzt in der Lage, die Ausführung der Hello-Pipeline zu verwalten, zu b
 - Die finale Ausgabe der Pipeline ist eine einfache Textdatei, die ASCII-Kunst eines Charakters enthält, der die großgeschriebenen Grüße sagt.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello_pipeline_complete.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello_pipeline_complete.svg"
 </figure>
 
 1. **`sayHello`:** Schreibt jeden Gruß in seine eigene Ausgabedatei (_z.B._ "Hello-output.txt")

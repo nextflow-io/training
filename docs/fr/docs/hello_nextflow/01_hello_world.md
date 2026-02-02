@@ -154,7 +154,7 @@ process sayHello {
 Ici, nous avons un **processus** appelé `sayHello` qui écrit sa **sortie** dans un fichier nommé `output.txt`.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello_world.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello_world.svg"
 </figure>
 
 C'est une définition de processus très minimale qui contient juste une définition de `output` et le `script` à exécuter.
@@ -596,7 +596,7 @@ Cette fois, le résultat est écrit sous le sous-répertoire spécifié.
 Vous voyez que le résultat de l'exécution précédente est toujours là.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello_world_output.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello_world_output.svg"
 </figure>
 
 Vous pouvez utiliser autant de niveaux d'imbrication que vous le souhaitez.
@@ -854,7 +854,7 @@ Assurez-vous d'ouvrir le fichier de sortie pour vérifier que vous avez maintena
 Voilà !
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello_world_input.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello_world_input.svg"
 </figure>
 
 Notez comment la nouvelle exécution a écrasé le fichier de sortie publié dans le répertoire `results`.

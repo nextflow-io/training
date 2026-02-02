@@ -423,7 +423,7 @@ Ayrıca varsayılan olarak çıktı dosyasının metadata'nın bir parçası ola
 Sadece koda bakarak bunları takip etmek çok fazla gibi görünebilir, bu yüzden her şeyin nasıl bir araya geldiğini görselleştirmenize yardımcı olacak bir diyagram burada:
 
 <figure class="excalidraw">
---8<-- "docs/hello_nf-core/img/module_comparison.svg"
+--8<-- "docs/en/docs/hello_nf-core/img/module_comparison.svg"
 </figure>
 
 İki modülün içerik açısından benzer girdi gereksinimlerine sahip olduğunu (bir dizi girdi dosyası artı bazı metadata) ancak bu içeriğin nasıl paketleneceği konusunda çok farklı beklentileri olduğunu görebilirsiniz.

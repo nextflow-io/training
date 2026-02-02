@@ -412,7 +412,7 @@ Esto significa que puede usar cualquier imagen de contenedor que desee para ejec
 Para demostrar esto, vamos a agregar un paso `cowpy` al pipeline que hemos estado desarrollando, después del paso `collectGreetings`.
 
 <figure class="excalidraw">
---8<-- "docs/nextflow_run/img/hello-pipeline-cowpy.svg"
+--8<-- "docs/en/docs/nextflow_run/img/hello-pipeline-cowpy.svg"
 </figure>
 
 ¡Muu si está listo para sumergirse!
@@ -661,7 +661,7 @@ Ahora las salidas publicadas estarán un poco más organizadas.
 Solo para recapitular, esto es lo que estamos buscando:
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello_pipeline_complete.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello_pipeline_complete.svg"
 </figure>
 
 ¿Cree que va a funcionar?

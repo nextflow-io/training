@@ -27,7 +27,7 @@ Hello Nextflow 교육 과정을 완료하신 것을 축하드립니다! 🎉
 - 파이프라인의 최종 출력은 대문자로 변환된 인사말을 말하는 캐릭터의 ASCII 아트가 포함된 일반 텍스트 파일입니다.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello_pipeline_complete.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello_pipeline_complete.svg"
 </figure>
 
 1. **`sayHello`:** 각 인사말을 자체 출력 파일에 씁니다 (예: "Hello-output.txt")

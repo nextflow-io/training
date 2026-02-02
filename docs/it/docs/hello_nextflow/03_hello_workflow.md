@@ -88,7 +88,7 @@ Se tutto ha funzionato, siete pronti a imparare come assemblare un workflow mult
 Aggiungeremo un passaggio per convertire ogni saluto in maiuscolo.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello-multistep.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello-multistep.svg"
 </figure>
 
 A tal fine, dobbiamo fare tre cose:
@@ -361,7 +361,7 @@ Quando usiamo un processo per applicare una trasformazione a ciascuno degli elem
 Per dimostrare, aggiungeremo un nuovo passaggio alla nostra pipeline che raccoglie tutti i saluti maiuscoli prodotti dal processo `convertToUpper` e li scrive in un singolo file.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello-collect.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect.svg"
 </figure>
 
 Senza rovinare la sorpresa, questo coinvolgerà un operatore molto utile.

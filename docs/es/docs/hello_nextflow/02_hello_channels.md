@@ -102,7 +102,7 @@ greeting_ch = channel.of('Hello Channels!')
 Esto crea un channel llamado `greeting_ch` usando la channel factory `channel.of()`, que configura un simple queue channel, y carga la cadena `'Hello Channels!'` para usar como valor de saludo.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello-pipeline-channel.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-channel.svg"
 </figure>
 
 !!! note "Nota"
@@ -305,7 +305,7 @@ Simplemente podemos cargar múltiples valores en el channel.
 Hagámoslos `'Hello'`, `'Bonjour'` y `'Holà'`.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello-pipeline-channel-multi.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-channel-multi.svg"
 </figure>
 
 _En el diagrama, el channel se representa en verde, y el orden de los elementos se representa como canicas en una tubería: el primero cargado está a la derecha, luego el segundo en el medio, luego el tercero está a la izquierda._
@@ -644,7 +644,7 @@ Por ejemplo, imagine que configuramos una variable de entrada que contiene un ar
 ¿Podemos cargar eso en nuestro channel de salida y esperar que funcione?
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello-pipeline-multi-inputs-array.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-multi-inputs-array.svg"
 </figure>
 
 Averigüémoslo.
@@ -976,7 +976,7 @@ Holà,Spanish,789
 Nuestra próxima tarea es adaptar nuestro flujo de trabajo para leer los valores de este archivo.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello-pipeline-multi-inputs-csv.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-multi-inputs-csv.svg"
 </figure>
 
 Veamos cómo podemos hacer que eso suceda.

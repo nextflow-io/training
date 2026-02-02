@@ -256,7 +256,7 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
 `core-hello` पाइपलाइन के वर्तमान संस्करण में, हम `COWPY` को पास करने के लिए `CAT_CAT` के आउटपुट टपल से फ़ाइल निकाल रहे हैं, जैसा कि नीचे दिए गए आरेख के ऊपरी भाग में दिखाया गया है।
 
 <figure class="excalidraw">
-    --8<-- "docs/hello_nf-core/img/cowpy-inputs.svg"
+    --8<-- "docs/en/docs/hello_nf-core/img/cowpy-inputs.svg"
 </figure>
 
 यह बेहतर होगा कि `COWPY` सीधे मेटाडेटा टपल स्वीकार करे, जिससे मेटाडेटा workflow के माध्यम से प्रवाहित हो सके, जैसा कि आरेख के निचले भाग में दिखाया गया है।

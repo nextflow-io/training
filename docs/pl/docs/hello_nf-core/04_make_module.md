@@ -256,7 +256,7 @@ Dobrze, to działa! Teraz przejdźmy do wprowadzania bardziej znaczących zmian.
 W obecnej wersji pipeline `core-hello` wyodrębniamy plik z krotki wyjściowej `CAT_CAT`, aby przekazać go do `COWPY`, jak pokazano w górnej części diagramu poniżej.
 
 <figure class="excalidraw">
-    --8<-- "docs/hello_nf-core/img/cowpy-inputs.svg"
+    --8<-- "docs/en/docs/hello_nf-core/img/cowpy-inputs.svg"
 </figure>
 
 Lepiej byłoby, gdyby `COWPY` akceptował krotki metadanych bezpośrednio, umożliwiając przepływ metadanych przez workflow, jak pokazano w dolnej części diagramu.

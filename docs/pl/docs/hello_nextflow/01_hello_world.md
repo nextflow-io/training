@@ -154,7 +154,7 @@ process sayHello {
 Tutaj mamy **process** o nazwie `sayHello`, który zapisuje swoje **wyjście** do pliku o nazwie `output.txt`.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello_world.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello_world.svg"
 </figure>
 
 To jest bardzo minimalna definicja procesu, która zawiera tylko definicję `output` i blok `script` do wykonania.
@@ -596,7 +596,7 @@ Tym razem wynik jest zapisywany w określonym podkatalogu.
 Widzisz, że wynik z poprzedniego wykonania nadal tam jest.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello_world_output.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello_world_output.svg"
 </figure>
 
 Możesz użyć tylu poziomów zagnieżdżenia, ile chcesz.
@@ -854,7 +854,7 @@ Koniecznie otwórz plik wyjściowy, aby sprawdzić, czy masz teraz nową wersję
 Voilà!
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello_world_input.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello_world_input.svg"
 </figure>
 
 Zauważ, że nowe wykonanie nadpisało plik wyjściowy opublikowany w katalogu `results`.

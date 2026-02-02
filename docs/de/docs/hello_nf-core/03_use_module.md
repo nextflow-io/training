@@ -423,7 +423,7 @@ Beachte auch, dass die Ausgabedatei standardmäßig basierend auf einem Identifi
 Das mag wie viel erscheinen, wenn man nur den Code betrachtet, daher hier ein Diagramm, das dir hilft zu visualisieren, wie alles zusammenpasst.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nf-core/img/module_comparison.svg"
+--8<-- "docs/en/docs/hello_nf-core/img/module_comparison.svg"
 </figure>
 
 Du kannst sehen, dass die beiden Module ähnliche Eingabeanforderungen in Bezug auf den Inhalt haben (eine Menge von Eingabedateien plus einige Metadaten), aber sehr unterschiedliche Erwartungen dafür, wie dieser Inhalt verpackt ist.

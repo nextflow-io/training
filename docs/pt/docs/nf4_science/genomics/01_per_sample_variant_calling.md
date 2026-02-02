@@ -31,7 +31,7 @@ Nesta parte do curso, vamos desenvolver um fluxo de trabalho que faz o seguinte:
 2. Executar o GATK HaplotypeCaller em cada arquivo BAM de entrada para gerar chamadas de variantes por amostra em VCF (Variant Call Format)
 
 <figure class="excalidraw">
---8<-- "docs/nf4_science/genomics/img/hello-gatk-1.svg"
+--8<-- "docs/en/docs/nf4_science/genomics/img/hello-gatk-1.svg"
 </figure>
 
 !!! note "Nota"
