@@ -551,7 +551,7 @@ Ouvrez `conf/modules.config` et ajoutez le code de configuration à l'intérieur
 Vous pouvez probablement imaginer avoir tous les modules d'un pipeline avec leur `ext.args` spécifié dans ce fichier, avec les avantages suivants :
 
 - L'**interface du module reste simple** - Elle n'accepte que les entrées essentielles de métadonnées et de fichiers
-- Le **pipeline expose toujours `params.character`** - Les utilisateurs finaux peuvent toujours le configurer comme avant
+- Le **pipeline expose toujours `params.character`** - Les utilisateur·trices final·es peuvent toujours le configurer comme avant
 - Le **module est maintenant portable** - Il peut être réutilisé dans d'autres pipelines sans attendre un nom de paramètre spécifique
 - La configuration est **centralisée** dans `modules.config`, gardant la logique du workflow propre
 
@@ -690,7 +690,7 @@ Cela peut sembler inutile pour un outil simple comme `cowpy`, mais cela peut fai
 Pour résumer les avantages de cette approche :
 
 - **Interface propre** : Le module se concentre sur les entrées de données essentielles (métadonnées et fichiers)
-- **Flexibilité** : Les utilisateurs peuvent spécifier les arguments de l'outil via la configuration, y compris des valeurs spécifiques aux échantillons
+- **Flexibilité** : Les utilisateur·trices peuvent spécifier les arguments de l'outil via la configuration, y compris des valeurs spécifiques aux échantillons
 - **Cohérence** : Tous les modules nf-core suivent ce modèle
 - **Portabilité** : Les modules peuvent être réutilisés sans options d'outils codées en dur
 - **Pas de changements de workflow** : L'ajout ou la modification d'options d'outils ne nécessite pas de mise à jour du code du workflow
@@ -872,7 +872,7 @@ Cela démontre comment `ext.prefix` vous permet de maintenir votre convention de
 Pour résumer les avantages de cette approche :
 
 - **Dénomination standardisée** : Les fichiers de sortie sont généralement nommés en utilisant les identifiants d'échantillon des métadonnées
-- **Configurable** : Les utilisateurs peuvent remplacer la dénomination par défaut si nécessaire
+- **Configurable** : Les utilisateur·trices peuvent remplacer la dénomination par défaut si nécessaire
 - **Cohérent** : Tous les modules nf-core suivent ce modèle
 - **Prévisible** : Facile de savoir comment les fichiers de sortie seront appelés
 

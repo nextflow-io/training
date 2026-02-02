@@ -10,10 +10,10 @@ Ensuite, vous ajoutez peut-être un simple paramètre vrai ou faux comme `--skip
 
 Au fur et à mesure que vous développez votre pipeline, il deviendra rapidement si complexe que tester manuellement chaque itération sera lent et sujet aux erreurs. De plus, si vous trouvez une erreur, il sera très difficile de déterminer exactement d'où provient l'erreur dans votre pipeline. C'est là que les tests interviennent.
 
-Les tests permettent de vérifier systématiquement que chaque partie de votre pipeline fonctionne comme prévu. Les avantages pour un développeur de tests bien écrits sont énormes :
+Les tests permettent de vérifier systématiquement que chaque partie de votre pipeline fonctionne comme prévu. Les avantages pour un·e développeur·se de tests bien écrits sont énormes :
 
 - **Confiance** : Parce que les tests couvrent l'ensemble du pipeline, vous pouvez être sûr que modifier quelque chose n'affecte rien d'autre
-- **Fiabilité** : Lorsque plusieurs développeurs travaillent sur le pipeline, ils savent que les autres développeurs n'ont pas cassé le pipeline et chaque composant.
+- **Fiabilité** : Lorsque plusieurs développeur·ses travaillent sur le pipeline, ils et elles savent que les autres développeur·ses n'ont pas cassé le pipeline et chaque composant.
 - **Transparence** : Les tests montrent où un pipeline échoue et facilitent le suivi du problème. Ils fonctionnent également comme une forme de documentation, montrant comment exécuter un processus ou un workflow.
 - **Rapidité** : Parce que les tests sont automatisés, ils peuvent être exécutés très rapidement et de manière répétée. Vous pouvez itérer rapidement avec moins de crainte d'introduire de nouveaux bugs.
 
@@ -1159,7 +1159,7 @@ L'application de ces techniques dans votre propre travail vous permettra de vous
 
 - Votre code fonctionne comme prévu
 - Les modifications ne cassent pas les fonctionnalités existantes
-- D'autres développeurs peuvent contribuer en toute confiance
+- D'autres développeur·ses peuvent contribuer en toute confiance
 - Les problèmes peuvent être identifiés et corrigés rapidement
 - Le contenu de sortie correspond aux attentes
 

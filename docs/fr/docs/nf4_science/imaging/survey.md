@@ -10,6 +10,6 @@ Veuillez prendre quelques minutes pour remplir notre court sondage :
 
 <div data-tf-live="01K8GYZC9RJ7ASGKJYVG5ZETQW"></div><script src="//embed.typeform.com/next/embed.js"></script>
 
-Vos réponses nous aideront à comprendre ce qui a bien fonctionné et ce que nous pouvons améliorer pour les futurs apprenants.
+Vos réponses nous aideront à comprendre ce qui a bien fonctionné et ce que nous pouvons améliorer pour les futur·es apprenant·es.
 
 Merci pour votre temps et votre participation !

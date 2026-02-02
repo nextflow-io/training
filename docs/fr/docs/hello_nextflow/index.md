@@ -15,7 +15,7 @@ additional_information:
     - Configurer l'exécution du pipeline pour s'exécuter sur des plateformes de calcul courantes, y compris HPC et cloud
     - Appliquer les bonnes pratiques de reproductibilité, portabilité et réutilisation du code qui rendent les pipelines FAIR, y compris la modularité du code et les conteneurs logiciels
   audience_prerequisites:
-    - "**Public :** Ce cours est conçu pour les apprenants qui découvrent complètement Nextflow et souhaitent développer leurs propres pipelines."
+    - "**Public :** Ce cours est conçu pour les apprenant·es qui découvrent complètement Nextflow et souhaitent développer leurs propres pipelines."
     - "**Compétences :** Une certaine familiarité avec la ligne de commande, les concepts de base des scripts et les formats de fichiers courants est supposée."
     - "**Domaine :** Les exercices sont tous indépendants du domaine, aucune connaissance scientifique préalable n'est donc requise."
   videos_playlist: https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik

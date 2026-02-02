@@ -16,7 +16,7 @@
 
 Bonjour, bienvenue dans la Partie Cinq de la formation Hello Nextflow.
 
-Ce chapitre s'intitule Hello Containers. Nous allons parler de la façon dont Nextflow s'intègre avec des outils tels que Docker et Singularity pour utiliser des conteneurs logiciels afin de fournir des logiciels aux utilisateurs de votre pipeline.
+Ce chapitre s'intitule Hello Containers. Nous allons parler de la façon dont Nextflow s'intègre avec des outils tels que Docker et Singularity pour utiliser des conteneurs logiciels afin de fournir des logiciels aux utilisateur·trices de votre pipeline.
 
 Cela signifie que lorsque les personnes exécutent votre pipeline, elles n'ont pas besoin d'aller installer tous les différents outils elles-mêmes. Nextflow le fera pour elles.
 

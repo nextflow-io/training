@@ -2,7 +2,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Le débogage est une compétence essentielle qui peut vous faire gagner des heures de frustration et vous aider à devenir un développeur Nextflow plus efficace. Tout au long de votre carrière, en particulier lorsque vous débutez, vous rencontrerez des bugs lors de la construction et de la maintenance de vos workflows. L'apprentissage d'approches de débogage systématiques vous aidera à identifier et à résoudre les problèmes rapidement.
+Le débogage est une compétence essentielle qui peut vous faire gagner des heures de frustration et vous aider à devenir un·e développeur·se Nextflow plus efficace. Tout au long de votre carrière, en particulier lorsque vous débutez, vous rencontrerez des bugs lors de la construction et de la maintenance de vos workflows. L'apprentissage d'approches de débogage systématiques vous aidera à identifier et à résoudre les problèmes rapidement.
 
 ### Objectifs d'apprentissage
 
@@ -998,7 +998,7 @@ Plus couramment que dans cet exemple, vous pourriez ajouter des entrées supplé
 
 ### 2.2. Épuisement des Canaux (Le Processus S'Exécute Moins de Fois Que Prévu)
 
-Certaines erreurs de structure de canal sont beaucoup plus subtiles et ne produisent aucune erreur du tout. Probablement la plus courante de celles-ci reflète un défi auquel les nouveaux utilisateurs de Nextflow sont confrontés en comprenant que les canaux de file peuvent être épuisés et manquer d'éléments, ce qui signifie que le workflow se termine prématurément.
+Certaines erreurs de structure de canal sont beaucoup plus subtiles et ne produisent aucune erreur du tout. Probablement la plus courante de celles-ci reflète un défi auquel les nouveaux·elles utilisateur·trices de Nextflow sont confronté·es en comprenant que les canaux de file peuvent être épuisés et manquer d'éléments, ce qui signifie que le workflow se termine prématurément.
 
 #### Exécuter le pipeline
 

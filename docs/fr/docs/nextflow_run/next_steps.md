@@ -48,7 +48,7 @@ Vous êtes maintenant équipé·e des connaissances fondamentales pour commencer
 
 Voici nos principales suggestions pour la suite :
 
-- Ne vous contentez pas d'exécuter Nextflow, écrivez-le ! Devenez un développeur Nextflow avec [Hello Nextflow](../hello_nextflow/index.md)
+- Ne vous contentez pas d'exécuter Nextflow, écrivez-le ! Devenez un·e développeur·se Nextflow avec [Hello Nextflow](../hello_nextflow/index.md)
 - Appliquez Nextflow à un cas d'utilisation d'analyse scientifique avec [Nextflow for Science](../nf4_science/index.md)
 - Commencez avec nf-core avec [Hello nf-core](../hello_nf-core/index.md)
 - Apprenez les techniques de dépannage avec le [Debugging Side Quest](../side_quests/debugging.md)

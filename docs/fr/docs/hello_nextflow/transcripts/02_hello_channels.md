@@ -150,7 +150,7 @@ Voilà. Je vais prendre cette variable de tableau et la mettre dans le channel.o
 
 Maintenant, voyons ce qui se passe. Retournons à mon terminal. Je vais juste nettoyer tous ces fichiers temporaires à nouveau. Et exécutons le workflow.
 
-Pas bon. D'accord. Il a planté. Ce n'est pas grave. Je m'attendais à ce qu'il plante cette fois. Déboguer ce qui ne va pas lorsqu'un workflow Nextflow échoue est une partie clé d'être un développeur Nextflow. Cela arrivera beaucoup et il est important de comprendre ce que dit le message d'erreur et comment y faire face.
+Pas bon. D'accord. Il a planté. Ce n'est pas grave. Je m'attendais à ce qu'il plante cette fois. Déboguer ce qui ne va pas lorsqu'un workflow Nextflow échoue est une partie clé d'être un·e développeur·se Nextflow. Cela arrivera beaucoup et il est important de comprendre ce que dit le message d'erreur et comment y faire face.
 
 Les messages d'erreur Nextflow sont en fait assez structurés. Il nous dit quel process s'est mal passé. Il nous donne un message d'erreur pour une raison. Il dit quelle était la commande qu'il a essayé d'exécuter dans cette tâche particulière, quel était le statut de sortie, quelle était la sortie et où était le répertoire work de cette tâche.
 

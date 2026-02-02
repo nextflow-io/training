@@ -83,7 +83,7 @@ hide:
 
     ### :material-compass:{.nextflow-primary} Nextflow pour les débutants {.mt-1}
 
-    Cours indépendants du domaine destinés à ceux qui découvrent complètement Nextflow. Chaque cours se compose d'une série de modules de formation conçus pour aider les apprenants à développer progressivement leurs compétences.
+    Cours indépendants du domaine destinés à ceux qui découvrent complètement Nextflow. Chaque cours se compose d'une série de modules de formation conçus pour aider les apprenant·es à développer progressivement leurs compétences.
 
     ??? courses "**Hello Nextflow :** Apprenez à développer vos propres pipelines"
 
@@ -93,7 +93,7 @@ hide:
 
     ??? courses "**Nextflow Run :** Apprenez à exécuter des pipelines existants"
 
-        Une introduction concise à l'exécution et à la configuration des pipelines Nextflow, basée sur le cours Hello Nextflow pour développeurs mais avec moins d'accent sur le code. Couvre l'exécution, les sorties, la structure de base du code et la configuration pour différents environnements de calcul.
+        Une introduction concise à l'exécution et à la configuration des pipelines Nextflow, basée sur le cours Hello Nextflow pour développeur·ses mais avec moins d'accent sur le code. Couvre l'exécution, les sorties, la structure de base du code et la configuration pour différents environnements de calcul.
 
         [Commencer la formation Nextflow Run :material-arrow-right:](nextflow_run/index.md){ .md-button .md-button--secondary }
 
@@ -105,19 +105,19 @@ hide:
 
     ??? courses "**Nextflow pour la génomique** (appel de variants)"
 
-        Pour les chercheurs qui souhaitent apprendre à développer leurs propres pipelines génomiques. Ce cours utilise un cas d'utilisation d'appel de variants pour démontrer comment développer un pipeline génomique simple mais fonctionnel.
+        Pour les chercheur·euses qui souhaitent apprendre à développer leurs propres pipelines génomiques. Ce cours utilise un cas d'utilisation d'appel de variants pour démontrer comment développer un pipeline génomique simple mais fonctionnel.
 
         [Commencer la formation Nextflow pour la génomique :material-arrow-right:](nf4_science/genomics/){ .md-button .md-button--secondary }
 
     ??? courses "**Nextflow pour RNAseq** (RNAseq en vrac)"
 
-        Pour les chercheurs qui souhaitent apprendre à développer leurs propres pipelines RNAseq. Ce cours utilise un cas d'utilisation de traitement RNAseq en vrac pour démontrer comment développer un pipeline RNAseq simple mais fonctionnel.
+        Pour les chercheur·euses qui souhaitent apprendre à développer leurs propres pipelines RNAseq. Ce cours utilise un cas d'utilisation de traitement RNAseq en vrac pour démontrer comment développer un pipeline RNAseq simple mais fonctionnel.
 
         [Commencer la formation Nextflow pour RNAseq :material-arrow-right:](nf4_science/rnaseq/){ .md-button .md-button--secondary }
 
     ??? courses "**Nextflow pour l'imagerie** (omiques spatiales)"
 
-        Pour les chercheurs en imagerie et omiques spatiales qui souhaitent apprendre à exécuter et personnaliser des pipelines d'analyse. Ce cours utilise le pipeline nf-core/molkart pour fournir un pipeline biologiquement pertinent et démontrer comment exécuter, configurer et gérer les entrées pour les flux de travail Nextflow.
+        Pour les chercheur·euses en imagerie et omiques spatiales qui souhaitent apprendre à exécuter et personnaliser des pipelines d'analyse. Ce cours utilise le pipeline nf-core/molkart pour fournir un pipeline biologiquement pertinent et démontrer comment exécuter, configurer et gérer les entrées pour les flux de travail Nextflow.
 
         [Commencer la formation Nextflow pour l'imagerie :material-arrow-right:](nf4_science/imaging/){ .md-button .md-button--secondary }
 
@@ -134,7 +134,7 @@ hide:
 
     ??? courses "**Hello nf-core :** Démarrer avec nf-core"
 
-        Pour les développeurs qui souhaitent apprendre à exécuter et développer des pipelines conformes à [nf-core](https://nf-co.re/). Ce cours couvre la structure des pipelines nf-core avec suffisamment de détails pour permettre le développement de pipelines simples mais pleinement fonctionnels qui suivent le modèle nf-core et les bonnes pratiques de développement, ainsi que l'utilisation des modules nf-core existants.
+        Pour les développeur·ses qui souhaitent apprendre à exécuter et développer des pipelines conformes à [nf-core](https://nf-co.re/). Ce cours couvre la structure des pipelines nf-core avec suffisamment de détails pour permettre le développement de pipelines simples mais pleinement fonctionnels qui suivent le modèle nf-core et les bonnes pratiques de développement, ainsi que l'utilisation des modules nf-core existants.
 
         [Commencer la formation Hello nf-core :material-arrow-right:](hello_nf-core/index.md){ .md-button .md-button--secondary }
 
@@ -146,7 +146,7 @@ hide:
 
     ??? courses "**Quêtes annexes :** Approfondissements sur des sujets autonomes"
 
-        Mini-cours autonomes destinés aux développeurs Nextflow qui souhaitent élargir leur éventail de compétences et/ou approfondir leurs connaissances sur des sujets particuliers. Ils sont présentés de manière linéaire mais peuvent être suivis dans n'importe quel ordre (voir les dépendances dans chaque aperçu de mini-cours).
+        Mini-cours autonomes destinés aux développeur·ses Nextflow qui souhaitent élargir leur éventail de compétences et/ou approfondir leurs connaissances sur des sujets particuliers. Ils sont présentés de manière linéaire mais peuvent être suivis dans n'importe quel ordre (voir les dépendances dans chaque aperçu de mini-cours).
 
         [Parcourir les quêtes annexes :material-arrow-right:](side_quests/){ .md-button .md-button--secondary }
 

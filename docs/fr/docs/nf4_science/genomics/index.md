@@ -2,7 +2,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Cette formation est destinée aux chercheurs en génomique et domaines connexes qui souhaitent développer ou personnaliser des pipelines d'analyse de données.
+Cette formation est destinée aux chercheur·euses en génomique et domaines connexes qui souhaitent développer ou personnaliser des pipelines d'analyse de données.
 Elle s'appuie sur la formation pour débutants [Hello Nextflow](../../hello_nextflow/) et démontre comment utiliser Nextflow dans le contexte spécifique du domaine de la génomique.
 
 Plus précisément, ce cours démontre comment implémenter un pipeline simple d'appel de variants avec [GATK](https://gatk.broadinstitute.org/) (Genome Analysis Toolkit), un ensemble logiciel largement utilisé pour l'analyse de données de séquençage à haut débit.

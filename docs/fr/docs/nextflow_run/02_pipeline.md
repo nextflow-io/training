@@ -636,7 +636,7 @@ C'est ainsi que nous récupérons toutes les salutations dans le même fichier.
 
 Il existe de nombreux autres [opérateurs](https://www.nextflow.io/docs/latest/reference/operator.html#operator-page) disponibles pour appliquer des transformations au contenu des channels entre les appels de process.
 
-Cela donne aux développeurs de pipelines beaucoup de flexibilité pour personnaliser la logique de flux de leur pipeline.
+Cela donne aux développeur·ses de pipelines beaucoup de flexibilité pour personnaliser la logique de flux de leur pipeline.
 L'inconvénient est que cela peut parfois rendre plus difficile le déchiffrage de ce que fait le pipeline.
 
 #### 2.3.5. Un paramètre d'entrée peut avoir une valeur par défaut

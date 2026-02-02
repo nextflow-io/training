@@ -29,7 +29,7 @@ Dans cette cinquième partie du cours de formation Hello nf-core, nous vous mont
 
 ### 0.1. Pourquoi la validation est importante
 
-Imaginez exécuter votre pipeline pendant deux heures, pour qu'il plante parce qu'un utilisateur a fourni un fichier avec la mauvaise extension. Ou passer des heures à déboguer des erreurs cryptiques, pour découvrir qu'un paramètre était mal orthographié. Sans validation des entrées, ces scénarios sont courants.
+Imaginez exécuter votre pipeline pendant deux heures, pour qu'il plante parce qu'un·e utilisateur·trice a fourni un fichier avec la mauvaise extension. Ou passer des heures à déboguer des erreurs cryptiques, pour découvrir qu'un paramètre était mal orthographié. Sans validation des entrées, ces scénarios sont courants.
 
 Considérez cet exemple :
 
@@ -177,7 +177,7 @@ Ouvrez `nextflow.config` et trouvez le bloc `validation` (autour de la ligne 246
 
 Cette configuration indique à nf-schema de :
 
-- **`defaultIgnoreParams`** : Ignorer la validation des paramètres complexes comme `genomes` (défini par les développeurs du modèle)
+- **`defaultIgnoreParams`** : Ignorer la validation des paramètres complexes comme `genomes` (défini par les développeur·ses du modèle)
 - **`ignoreParams`** : Ignorer la validation du contenu du fichier du paramètre `input` (temporaire ; nous réactiverons cela dans la section 2)
 - **`monochromeLogs`** : Désactiver la sortie colorée dans les messages de validation lorsque défini sur `true` (contrôlé par `params.monochrome_logs`)
 

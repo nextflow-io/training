@@ -10,7 +10,7 @@ hide:
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Nous visons à fournir un environnement cohérent et minutieusement testé qui permet aux apprenants de se concentrer sur l'apprentissage de Nextflow sans avoir à consacrer du temps et des efforts à la gestion des logiciels.
+Nous visons à fournir un environnement cohérent et minutieusement testé qui permet aux apprenant·es de se concentrer sur l'apprentissage de Nextflow sans avoir à consacrer du temps et des efforts à la gestion des logiciels.
 À cette fin, nous avons développé un environnement conteneurisé qui contient tous les logiciels, fichiers de code et données d'exemple nécessaires pour suivre tous nos cours.
 
 Cet environnement conteneurisé peut être exécuté directement sur GitHub Codespaces ou localement dans VS Code avec l'extension Devcontainers.

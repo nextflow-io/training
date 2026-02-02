@@ -19,7 +19,7 @@ Ce guide suppose que vous avez terminé le cours de formation [Hello Nextflow](.
 
 ## Ce que vous apprendrez ici
 
-Ce guide se concentre sur les **fonctionnalités de productivité de l'IDE** qui feront de vous un développeur Nextflow plus efficace :
+Ce guide se concentre sur les **fonctionnalités de productivité de l'IDE** qui feront de vous un·e développeur·se Nextflow plus efficace :
 
 - **Coloration syntaxique avancée** : Comprendre ce que VS Code vous montre sur la structure de votre code
 - **Auto-complétion intelligente** : Exploiter les suggestions contextuelles pour écrire du code plus rapidement
@@ -625,6 +625,6 @@ Appliquez ces compétences IDE en travaillant sur d'autres modules de formation,
 
 Le véritable pouvoir de ces fonctionnalités IDE émerge à mesure que vous travaillez sur des projets plus grands et plus complexes. Commencez à les incorporer progressivement dans votre workflow - en quelques sessions, elles deviendront une seconde nature et transformeront votre approche du développement Nextflow.
 
-De la détection d'erreurs avant qu'elles ne vous ralentissent à la navigation dans des bases de code complexes avec facilité, ces outils feront de vous un développeur plus confiant et efficace.
+De la détection d'erreurs avant qu'elles ne vous ralentissent à la navigation dans des bases de code complexes avec facilité, ces outils feront de vous un·e développeur·se plus confiant·e et efficace.
 
 Bon codage !

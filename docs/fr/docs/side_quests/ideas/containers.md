@@ -8,7 +8,7 @@
 
 ## 1. Comment trouver ou créer des images de conteneurs
 
-Certains développeurs de logiciels fournissent des images de conteneurs pour leurs logiciels disponibles sur des registres de conteneurs comme Docker Hub, mais beaucoup ne le font pas.
+Certain·es développeur·ses de logiciels fournissent des images de conteneurs pour leurs logiciels disponibles sur des registres de conteneurs comme Docker Hub, mais beaucoup ne le font pas.
 Dans cette section optionnelle, nous vous montrerons deux façons d'obtenir une image de conteneur pour les outils que vous souhaitez utiliser dans vos pipelines Nextflow : en utilisant Seqera Containers et en construisant vous-même l'image de conteneur.
 
 Vous allez obtenir/construire une image de conteneur pour le package pip `quote`, qui sera utilisé dans l'exercice à la fin de cette section.

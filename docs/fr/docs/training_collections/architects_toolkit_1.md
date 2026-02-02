@@ -23,7 +23,7 @@ Ces compétences vous permettront de construire des workflows Nextflow robustes,
 
 ## Public et prérequis
 
-Cette collection est conçue pour les utilisateurs qui ont terminé la formation Nextflow de base et souhaitent approfondir les modèles de workflows avancés, les stratégies de test, et les techniques de gestion des données et métadonnées.
+Cette collection est conçue pour les utilisateur·trices qui ont terminé la formation Nextflow de base et souhaitent approfondir les modèles de workflows avancés, les stratégies de test, et les techniques de gestion des données et métadonnées.
 
 **Prérequis**
 
