@@ -48,6 +48,14 @@ output {
 }
 ```
 
+This diagram summarizes the current operation of the workflow.
+It should look familiar, except now we're explicitly showing that the outputs of the process are packaged in a channel, just like the inputs were.
+We're going to put that output channel to good use in a minute.
+
+<figure class="excalidraw">
+--8<-- "docs/hello_nextflow/img/hello-channels-parallel.svg"
+</figure>
+
 Just to make sure everything is working, run the script once before making any changes:
 
 ```bash
@@ -198,7 +206,9 @@ This is not yet functional because we have not specified what should be input to
 
 Now we need to make the output of the `sayHello()` process flow into the `convertToUpper()` process.
 
-Conveniently, Nextflow automatically packages the output of a process into a channel called `<process>.out`.
+Conveniently, Nextflow automatically packages the output of a process into a channel, as shown in the diagram above.
+We can refer to the output channel pf a process as `<process>.out`.
+
 So the output of the `sayHello` process is a channel called `sayHello.out`, which we can plug straight into the call to `convertToUpper()`.
 
 In the workflow block, make the following code change:
