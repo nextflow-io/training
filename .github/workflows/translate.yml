@@ -50,28 +50,83 @@ jobs:
     needs: detect
     if: needs.detect.outputs.has_work == 'true'
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false # Continue other languages if one fails
+      matrix:
+        language: ${{ fromJson(needs.detect.outputs.languages) }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: astral-sh/setup-uv@v4
+
+      - name: Translate ${{ matrix.language }}
+        if: ${{ !inputs.dry_run }}
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        working-directory: _scripts
+        run: uv run translate.py sync ${{ matrix.language }}
+
+      - name: Dry run ${{ matrix.language }}
+        if: ${{ inputs.dry_run }}
+        working-directory: _scripts
+        run: uv run translate.py sync ${{ matrix.language }} --dry-run
+
+      - name: Upload translation artifacts
+        if: ${{ !inputs.dry_run && success() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: translation-${{ matrix.language }}
+          path: docs/${{ matrix.language }}/docs/
+          retention-days: 1
+          if-no-files-found: ignore
+
+  merge:
+    needs: [detect, translate]
+    if: always() && needs.detect.outputs.has_work == 'true' && !inputs.dry_run && !cancelled()
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - uses: astral-sh/setup-uv@v4
+      - name: Download all translation artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: translation-*
+          path: artifacts/
 
-      - name: Run translation
-        env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        working-directory: _scripts
+      - name: Check for artifacts
+        id: check
         run: |
-          uv run translate.py ci-run \
-            --languages '${{ needs.detect.outputs.languages }}' \
-            ${{ inputs.dry_run && '--dry-run' || '' }}
+          if [ -z "$(ls -A artifacts/ 2>/dev/null)" ]; then
+            echo "has_artifacts=false" >> $GITHUB_OUTPUT
+            echo "No translation artifacts found"
+          else
+            echo "has_artifacts=true" >> $GITHUB_OUTPUT
+            echo "Found translations for:"
+            ls artifacts/ | sed 's/translation-/  - /'
+          fi
+
+      - name: Merge translations
+        if: steps.check.outputs.has_artifacts == 'true'
+        run: |
+          for dir in artifacts/translation-*/; do
+            lang=$(basename "$dir" | sed 's/translation-//')
+            echo "Merging $lang..."
+            mkdir -p "docs/$lang/docs/"
+            cp -r "$dir"* "docs/$lang/docs/"
+          done
+
+      - uses: astral-sh/setup-uv@v4
+        if: steps.check.outputs.has_artifacts == 'true'
 
       - name: Create PR
-        if: ${{ !inputs.dry_run }}
+        if: steps.check.outputs.has_artifacts == 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
         working-directory: _scripts
-        run: |
-          uv run translate.py ci-pr
+        run: uv run translate.py ci-pr

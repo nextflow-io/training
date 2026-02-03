@@ -32,6 +32,8 @@ from functools import lru_cache
 from pathlib import Path
 from typing import NamedTuple
 
+import time
+
 import anthropic
 import git
 import typer
@@ -49,6 +51,11 @@ SCRIPTS_DIR = REPO_ROOT / "_scripts"
 
 MODEL = "claude-sonnet-4-5"
 MAX_TOKENS = 16384
+REQUEST_TIMEOUT = 600.0  # 10 minute timeout per API request
+
+# Retry configuration for transient API errors
+MAX_RETRIES = 8
+BASE_DELAY = 2.0  # seconds, doubles each retry: 2, 4, 8, 16, 32, 64, 128, 256
 
 PRIORITY_DIRS = ["hello_nextflow", "hello_nf-core", "nf4_science", "envsetup"]
 
@@ -302,15 +309,40 @@ def check_api_key() -> None:
         )
 
 
-def call_claude(prompt: str) -> str:
-    """Call Claude API and return the response text."""
+def call_claude(prompt: str, console: Console | None = None) -> str:
+    """Call Claude API with retry logic and exponential backoff.
+
+    Retries on transient errors (connection, timeout, rate limit, server errors)
+    with exponential backoff: 2s, 4s, 8s, 16s, 32s, 64s, 128s, 256s (~8.5 min total).
+    """
     client = anthropic.Anthropic()
-    message = client.messages.create(
-        model=MODEL,
-        max_tokens=MAX_TOKENS,
-        messages=[{"role": "user", "content": prompt}],
-    )
-    return message.content[0].text.strip()
+
+    for attempt in range(MAX_RETRIES + 1):
+        try:
+            message = client.messages.create(
+                model=MODEL,
+                max_tokens=MAX_TOKENS,
+                timeout=REQUEST_TIMEOUT,
+                messages=[{"role": "user", "content": prompt}],
+            )
+            return message.content[0].text.strip()
+        except (
+            anthropic.APIConnectionError,
+            anthropic.APITimeoutError,
+            anthropic.RateLimitError,
+            anthropic.InternalServerError,
+        ) as e:
+            if attempt == MAX_RETRIES:
+                raise
+            delay = BASE_DELAY * (2**attempt)
+            if console:
+                console.print(
+                    f"    [yellow]Retry {attempt + 1}/{MAX_RETRIES} "
+                    f"after {delay:.0f}s: {type(e).__name__}[/yellow]"
+                )
+            time.sleep(delay)
+
+    raise RuntimeError("Unreachable")
 
 
 def translate_file(tf: TranslationFile, console: Console) -> None:
@@ -328,7 +360,7 @@ def translate_file(tf: TranslationFile, console: Console) -> None:
     prompt = build_translation_prompt(
         tf.language, langs[tf.language], en_content, existing
     )
-    result = call_claude(prompt)
+    result = call_claude(prompt, console)
 
     tf.lang_path.parent.mkdir(parents=True, exist_ok=True)
     tf.lang_path.write_text(f"{result}\n", encoding="utf-8", newline="\n")
