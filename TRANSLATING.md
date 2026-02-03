@@ -419,25 +419,6 @@ uv run translate.py sync <lang> --include hello_nextflow
 uv run translate.py translate <path> --lang <lang>
 ```
 
-### Post-Processing Commands
-
-Post-processing fixes common LLM mistakes (links, anchors, code blocks) without re-translating:
-
-```bash
-# Fix all translations for a language
-uv run translate.py post-process <lang>
-
-# Fix specific files
-uv run translate.py post-process <lang> --file docs/pt/docs/index.md
-```
-
-The `post-process` command:
-
-- Preserves URLs and link attributes from English source
-- Preserves header anchors (permalinks)
-- Preserves code syntax while keeping translated comments
-- Runs automatically after each translation
-
 ### Preview Commands (No API key required)
 
 ```bash
