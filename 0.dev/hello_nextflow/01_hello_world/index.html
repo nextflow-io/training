@@ -5510,8 +5510,11 @@ We want to add some flexibility by using an input variable, so that we can more 
 <p>Now that the <code>sayHello()</code> process is ready to accept a variable input, we need a way to provide an input value to the process call at the workflow level.</p>
 <h3 id="32-set-up-a-command-line-parameter-to-capture-user-input">3.2. Set up a command-line parameter to capture user input<a class="headerlink" href="#32-set-up-a-command-line-parameter-to-capture-user-input" title="Permanent link">&para;</a></h3>
 <p>We could simply hardcode an input directly by making the process call <code>sayHello('Hello World!')</code>.
-However, when we're doing real work with our workflow, we're going to want to be able to control its inputs from the command line.</p>
-<p>Good news: Nextflow has a built-in workflow parameter system called <a href="https://nextflow.io/docs/latest/config.html#params"><code>params</code></a>, which makes it easy to declare and use CLI parameters.</p>
+However, when we're doing real work with our workflow, we're going to want to be able to control its inputs from the command line, so we can do something like this:</p>
+<figure class="excalidraw">
+</figure>
+
+<p>Fortunately, Nextflow has a built-in workflow parameter system called <a href="https://nextflow.io/docs/latest/config.html#params"><code>params</code></a> that makes it easy to declare and use CLI parameters.</p>
 <p>The general syntax is to declare <code>params.&lt;parameter_name&gt;</code> to tell Nextflow to expect a <code>--&lt;parameter_name&gt;</code> parameter on the command line.</p>
 <p>Here, we want to create a parameter called <code>--input</code>, so we need to declare <code>params.input</code> somewhere in the workflow.
 In principle we can write it anywhere; but since we're going to want to give it to the <code>sayHello()</code> process call, we can plug it in there directly by writing <code>sayHello(params.input)</code>.</p>
@@ -5555,10 +5558,7 @@ In principle we can write it anywhere; but since we're going to want to give it 
 <div class="highlight"><span class="filename">results/hello_world/output.txt</span><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a><span class="go">Bonjour le monde!</span>
 </code></pre></div>
 </details>
-<p>Voilà!</p>
-<figure class="excalidraw">
-</figure>
-
+<p>Et voilà!</p>
 <p>Note how the new execution has overwritten the output file published to the <code>results</code> directory.
 However, the results of the previous runs are still preserved in the task directories under <code>work</code>.</p>
 <div class="admonition tip">

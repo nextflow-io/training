@@ -4856,10 +4856,6 @@ Here we only have one element, but when we start loading multiple values into th
 <p>Conveniently, the <code>channel.of()</code> channel factory we've been using is quite happy to accept more than one value, so we don't need to modify that at all.
 We can just load multiple values into the channel.</p>
 <p>Let's make them <code>'Hello'</code>, <code>'Bonjour'</code> and <code>'Holà'</code>.</p>
-<figure class="excalidraw">
-</figure>
-
-<p><em>In the diagram, the channel is represented in green, and the order of elements is represented like marbles in a pipe: the first one loaded is on the right, then the second one in the middle, then the third is on the left.</em></p>
 <h4 id="211-add-more-greetings">2.1.1. Add more greetings<a class="headerlink" href="#211-add-more-greetings" title="Permanent link">&para;</a></h4>
 <p>Before the workflow block, make the following code change:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">After</label><label for="__tabbed_4_2">Before</label></div>
@@ -4918,8 +4914,12 @@ The execution monitor shows that <code>3 of 3</code> calls were made for the <co
 <div class="highlight"><span class="filename">results/hello_channels/output.txt</span><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="go">Holà</span>
 </code></pre></div>
 </details>
-<p>You should see one of the three greetings in there, but the one you got might be different from what is shown here.
+<p>You should see one of the three greetings in there, though the one you got might be different from what is shown here.
 Can you think of why that might be?</p>
+<figure class="excalidraw">
+</figure>
+
+<p><em>In the diagram, the channel is represented in green, and the order of elements is represented like marbles in a pipe: the first one loaded is on the right, then the second one in the middle, then the third is on the left.</em></p>
 <p>Looking back at the execution monitor, it gave us only one subdirectory path (<code>f4/c9962c</code>).
 Let's have a look in there.</p>
 <details class="abstract">
@@ -5016,6 +5016,9 @@ In this expanded mode, it only reports that they were submitted.</p>
 <p>This shows that all three processes ran successfully (yay).</p>
 <p>That being said, we still have the problem that there is only one output file in the results directory.</p>
 <p>You may recall that we hardcoded the output file name for the <code>sayHello</code> process, so all three calls produced a file called <code>output.txt</code>.</p>
+<figure class="excalidraw">
+</figure>
+
 <p>As long as the output files stay in the work subdirectories, isolated from the other processes, that is okay.
 But when they are published to the same results directory, whichever got copied there first gets overwritten by the next one, and so on.</p>
 <h3 id="22-ensure-the-output-file-names-will-be-unique">2.2. Ensure the output file names will be unique<a class="headerlink" href="#22-ensure-the-output-file-names-will-be-unique" title="Permanent link">&para;</a></h3>
@@ -5024,6 +5027,9 @@ Specifically, we need to modify the first process to generate a file name dynami
 <p>So how do we make the file names unique?
 A common way to do that is to use some unique piece of metadata from the inputs (received from the input channel) as part of the output file name.
 Here, for convenience, we'll just use the greeting itself since it's just a short string, and prepend it to the base output filename.</p>
+<figure class="excalidraw">
+</figure>
+
 <h4 id="221-construct-a-dynamic-output-file-name">2.2.1. Construct a dynamic output file name<a class="headerlink" href="#221-construct-a-dynamic-output-file-name" title="Permanent link">&para;</a></h4>
 <p>In the process block, make the following code changes:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">After</label><label for="__tabbed_5_2">Before</label></div>
@@ -5326,7 +5332,10 @@ Let's try it; we'll need to set up the input variable and load it into the chann
 </details>
 <p>Oh no! There's an error!</p>
 <p>Look at the output of <code>view()</code> and the error messages.</p>
-<p>It looks like Nextflow tried to run a single process call, using <code>[Hello, Bonjour, Holà]</code> as a string value, instead of using the three strings in the array as separate values.</p>
+<p>It looks like Nextflow tried to run a single process call, using <code>[Hello, Bonjour, Holà]</code> as a single string value, instead of using the three strings in the array as separate values.</p>
+<figure class="excalidraw">
+</figure>
+
 <p>So it's the 'packaging' that is causing the problem.
 How do we get Nextflow to unpack the array and load the individual strings into the channel?</p>
 <h3 id="32-use-an-operator-to-transform-channel-contents">3.2. Use an operator to transform channel contents<a class="headerlink" href="#32-use-an-operator-to-transform-channel-contents" title="Permanent link">&para;</a></h3>
@@ -5405,6 +5414,9 @@ Now we're going to look at operators that allow us to act on the contents of a c
 </div>
 <p>Here we added the operator on the next line for readability, but you can add operators on the same line as the channel factory if you prefer, like this:
 <code>greeting_ch = channel.of(greetings_array).view().flatten()</code></p>
+<figure class="excalidraw">
+</figure>
+
 <h4 id="322-refine-the-view-statements">3.2.2. Refine the <code>view()</code> statement(s)<a class="headerlink" href="#322-refine-the-view-statements" title="Permanent link">&para;</a></h4>
 <p>We could run this right away to test if it works, but while we're at it, we're going to refine how we inspect the channel contents.</p>
 <p>We want to be able to contrast what the contents look like before and after the <code>flatten()</code> operator is applied, so we're going to add a second one, AND we're going to add a bit of code to get them labeled more clearly in the output.</p>
@@ -5511,12 +5523,8 @@ without needing to define it with a <code>-&gt;</code>.</p>
 </details>
 <p>This time it works AND gives us the additional insight into what the contents of the channel look like before and after we run the <code>flatten()</code> operator.</p>
 <ul>
-<li>
-<ul>
-<li>You see that we get a single <code>Before flatten:</code> statement because at that point the channel contains one item, the original array.
-    Then we get three separate <code>After flatten:</code> statements, one for each greeting, which are now individual items in the channel.</li>
-</ul>
-</li>
+<li>A single <code>Before flatten:</code> statement because at that point the channel contains one item, the original array.</li>
+<li>Three separate <code>After flatten:</code> statements, one for each greeting, which are now individual items in the channel.</li>
 </ul>
 <p>Importantly, this means each item can now be processed separately by the workflow.</p>
 <div class="admonition tip">
@@ -5815,6 +5823,9 @@ Technically we could have used the same variable name (<code>greeting</code>) bu
 </details>
 <p>Interestingly, this fails too, but with a different error.
 This time Nextflow has parsed the contents of the file (yay!) but it has loaded each row as an array, and each array is an element in the channel.</p>
+<figure class="excalidraw">
+</figure>
+
 <p>We need to tell it to only take the first column in each row.
 So how do we unpack this?</p>
 <p>We've previously used <code>flatten()</code> to unpack the contents of a channel, but that wouldn't work here because flatten unpacks <em>everything</em> (feel free to try it if you want to see for yourself).</p>
@@ -5926,13 +5937,20 @@ This is what the syntax looks like:</p>
 <li>Three separate <code>After splitCsv:</code> statements: one for each greeting, but each is contained within an array that corresponds to that line in the file.</li>
 <li>Three separate <code>After map:</code> statements: one for each greeting, which are now individual elements in the channel.</li>
 </ul>
-<p>Note that the lines may appear in a different order in your output.</p>
+<p><em>Note that the lines may appear in a different order in your output.</em></p>
+<figure class="excalidraw">
+</figure>
+
 <p>You can also look at the output files to verify that each greeting was correctly extracted and processed through the workflow.</p>
 <p>We've achieved the same result as previously, but now we have a lot more flexibility to add more elements to the channel of greetings we want to process by modifying an input file, without modifying any code.
 You'll learn learn more sophisticated approaches for handling complex inputs in a later training.</p>
 <h3 id="takeaway_3">Takeaway<a class="headerlink" href="#takeaway_3" title="Permanent link">&para;</a></h3>
 <p>You know how to use the <code>.fromPath()</code> channel constructor and the operators <code>splitCsv()</code> and <code>map()</code> to read in a file of input values and handle them appropriately.</p>
-<p>More generally, you have a basic understanding of how Nextflow uses <strong>channels</strong> to manage inputs to processes and <strong>operators</strong> to transform their contents.</p>
+<p>More generally, you have a basic understanding of how Nextflow uses <strong>channels</strong> to manage inputs to processes and <strong>operators</strong> to transform their contents.
+You've also seen how channels handle parallel execution implicitly.</p>
+<figure class="excalidraw">
+</figure>
+
 <h3 id="whats-next_3">What's next?<a class="headerlink" href="#whats-next_3" title="Permanent link">&para;</a></h3>
 <p>Take a big break, you worked hard in this one!</p>
 <p>When you're ready, move on to <a href="../03_hello_workflow/"><strong>Part 3: Hello Workflow</strong></a> to learn how to add more steps and connect them together into a proper workflow.</p>

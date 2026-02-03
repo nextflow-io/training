@@ -1275,15 +1275,15 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#3-pass-more-than-one-input-to-a-process" class="md-nav__link">
+  <a href="#3-pass-additional-parameters-to-a-process" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Pass more than one input to a process
+        3. Pass additional parameters to a process
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. Pass more than one input to a process">
+    <nav class="md-nav" aria-label="3. Pass additional parameters to a process">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -4183,15 +4183,15 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#3-pass-more-than-one-input-to-a-process" class="md-nav__link">
+  <a href="#3-pass-additional-parameters-to-a-process" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Pass more than one input to a process
+        3. Pass additional parameters to a process
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. Pass more than one input to a process">
+    <nav class="md-nav" aria-label="3. Pass additional parameters to a process">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -4712,7 +4712,7 @@ In this training module, you'll learn how to connect processes together in a mul
 <ol>
 <li>Making data flow from one process to the next</li>
 <li>Collecting outputs from multiple process calls into a single process call</li>
-<li>Passing more than one input to a process</li>
+<li>Passing additional parameters to a process</li>
 <li>Handling multiple outputs coming out of a process</li>
 </ol>
 <p>To demonstrate, we will continue building on the domain-agnostic Hello World example from Parts 1 and 2.
@@ -4743,6 +4743,12 @@ It is equivalent to the script produced by working through Part 2 of this traini
 <a id="__codelineno-0-41" name="__codelineno-0-41"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-0-42" name="__codelineno-0-42"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
+<p>This diagram summarizes the current operation of the workflow.
+It should look familiar, except now we're explicitly showing that the outputs of the process are packaged in a channel, just like the inputs were.
+We're going to put that output channel to good use in a minute.</p>
+<figure class="excalidraw">
+</figure>
+
 <p>Just to make sure everything is working, run the script once before making any changes:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-workflow.nf
 </code></pre></div>
@@ -4900,8 +4906,12 @@ For this chapter, it's under <code>results/hello_workflow/</code>.</p>
 <p>This is not yet functional because we have not specified what should be input to the <code>convertToUpper()</code> process.</p>
 <h3 id="14-pass-the-output-of-the-first-process-to-the-second-process">1.4. Pass the output of the first process to the second process<a class="headerlink" href="#14-pass-the-output-of-the-first-process-to-the-second-process" title="Permanent link">&para;</a></h3>
 <p>Now we need to make the output of the <code>sayHello()</code> process flow into the <code>convertToUpper()</code> process.</p>
-<p>Conveniently, Nextflow automatically packages the output of a process into a channel called <code>&lt;process&gt;.out</code>.
-So the output of the <code>sayHello</code> process is a channel called <code>sayHello.out</code>, which we can plug straight into the call to <code>convertToUpper()</code>.</p>
+<p>Conveniently, Nextflow automatically packages the output of a process into a channel, as shown in the diagram in the warmup section.
+We can refer to the output channel of a process as <code>&lt;process&gt;.out</code>.</p>
+<p>So the output of the <code>sayHello</code> process is a channel called <code>sayHello.out</code>, which we can plug straight into the call to <code>convertToUpper()</code>.</p>
+<figure class="excalidraw">
+</figure>
+
 <p>In the workflow block, make the following code change:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">After</label><label for="__tabbed_2_2">Before</label></div>
 <div class="tabbed-content">
@@ -5168,7 +5178,11 @@ In that case, we would have to do a little bit of extra work to compose the comm
 You can see an example of this in the <a href="../../nf4_science/genomics/">Nextflow for Genomics</a> training course.</p>
 </div>
 <h3 id="23-add-the-collection-step-to-the-workflow">2.3. Add the collection step to the workflow<a class="headerlink" href="#23-add-the-collection-step-to-the-workflow" title="Permanent link">&para;</a></h3>
-<p>Now we should just need to call the collection process on the output of the uppercasing step.</p>
+<p>Now we should just need to call the collection process on the output of the uppercasing step.
+That is also a channel, called <code>convertToUpper.out</code>.</p>
+<figure class="excalidraw">
+</figure>
+
 <h4 id="231-connect-the-process-calls">2.3.1. Connect the process calls<a class="headerlink" href="#231-connect-the-process-calls" title="Permanent link">&para;</a></h4>
 <p>In the workflow block, make the following code change:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">After</label><label for="__tabbed_7_2">Before</label></div>
@@ -5224,6 +5238,9 @@ We were only expecting one, but there are three.</p>
 </code></pre></div>
 </details>
 <p>Oh no. The collection step was run individually on each greeting, which is NOT what we wanted.</p>
+<figure class="excalidraw">
+</figure>
+
 <p>We need to do something to tell Nextflow explicitly that we want that third step to run on all the elements in the channel output by <code>convertToUpper()</code>.</p>
 <h3 id="24-use-an-operator-to-collect-the-greetings-into-a-single-input">2.4. Use an operator to collect the greetings into a single input<a class="headerlink" href="#24-use-an-operator-to-collect-the-greetings-into-a-single-input" title="Permanent link">&para;</a></h3>
 <p>Yes, once again the answer to our problem is an operator.</p>
@@ -5304,13 +5321,17 @@ We can plug that directly into the <code>collectGreetings()</code> process call.
 </code></pre></div>
 </details>
 <p>It runs successfully, although the log output may look a little messier than this (we cleaned it up for readability).</p>
-<p>This time the third step was only called once!</p>
-<p>Looking at the output of the <code>view()</code> statements, we see the following:</p>
+<p>This time the third step was only called once!
+Looking at the output of the <code>view()</code> statements, we see the following:</p>
 <ul>
 <li>Three <code>Before collect:</code> statements, one for each greeting: at that point the file paths are individual items in the channel.</li>
 <li>A single <code>After collect:</code> statement: the three file paths are now packaged into a single element.</li>
 </ul>
-<p>Have a look at the contents of the final output file.</p>
+<p>We can summarize that with the following diagram:</p>
+<figure class="excalidraw">
+</figure>
+
+<p>Finally, you can have a look at the contents of the output file to satisfy yourself that everything worked correctly.</p>
 <details class="abstract">
 <summary>File contents</summary>
 <div class="highlight"><span class="filename">results/COLLECTED-output.txt</span><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="go">BONJOUR</span>
@@ -5353,16 +5374,23 @@ This shows you that the order in which elements flow through process calls is no
 <p>This is basically the reverse operation from point 2.4.2.</p>
 <h3 id="takeaway_1">Takeaway<a class="headerlink" href="#takeaway_1" title="Permanent link">&para;</a></h3>
 <p>You know how to collect outputs from a batch of process calls and feed them into a joint analysis or summation step.</p>
+<p>To recap, this is what you've built so far:</p>
+<figure class="excalidraw">
+</figure>
+
 <h3 id="whats-next_1">What's next?<a class="headerlink" href="#whats-next_1" title="Permanent link">&para;</a></h3>
 <p>Learn how to pass more than one input to a process.</p>
 <hr />
-<h2 id="3-pass-more-than-one-input-to-a-process">3. Pass more than one input to a process<a class="headerlink" href="#3-pass-more-than-one-input-to-a-process" title="Permanent link">&para;</a></h2>
+<h2 id="3-pass-additional-parameters-to-a-process">3. Pass additional parameters to a process<a class="headerlink" href="#3-pass-additional-parameters-to-a-process" title="Permanent link">&para;</a></h2>
 <p>We want to be able to name the final output file something specific in order to process subsequent batches of greetings without overwriting the final results.</p>
 <p>To that end, we're going to make the following refinements to the workflow:</p>
 <ul>
-<li>Modify the collector process to accept a user-defined name for the output file</li>
-<li>Add a command-line parameter to the workflow and pass it to the collector process</li>
+<li>Modify the collector process to accept a user-defined name for the output file (<code>batch_name</code>)</li>
+<li>Add a command-line parameter to the workflow (<code>--batch</code>) and pass it to the collector process</li>
 </ul>
+<figure class="excalidraw">
+</figure>
+
 <h3 id="31-modify-the-collector-process">3.1. Modify the collector process<a class="headerlink" href="#31-modify-the-collector-process" title="Permanent link">&para;</a></h3>
 <p>We're going to need to declare the additional input and integrate it into the output file name.</p>
 <h4 id="311-declare-the-additional-input">3.1.1. Declare the additional input<a class="headerlink" href="#311-declare-the-additional-input" title="Permanent link">&para;</a></h4>
@@ -5534,7 +5562,6 @@ Can we select and use a specific output?</p>
 <p>All excellent questions, and the short answer is yes we can!</p>
 <p>Multiple outputs will be packaged into separate channels.
 We can either choose to give those output channels names, which makes it easy to refer to them individually later on, or we can refer to them by index.</p>
-<p>Let's dig in with an example.</p>
 <p>For demonstration purposes, let's say we want to count the number of greetings that are being collected for a given batch of inputs and report it in a file.</p>
 <h3 id="41-modify-the-process-to-count-and-output-the-number-of-greetings">4.1. Modify the process to count and output the number of greetings<a class="headerlink" href="#41-modify-the-process-to-count-and-output-the-number-of-greetings" title="Permanent link">&para;</a></h3>
 <p>This will require two key changes to the process definition: we need a way to count the greetings and write a report file, then we need to add that report file to the <code>output</code> block of the process.</p>
@@ -5607,6 +5634,9 @@ For example, you would use <code>&lt;process&gt;.out[0]</code> to get the first 
 <li><code>collectGreetings.out.outfile</code> contains the final output file</li>
 <li><code>collectGreetings.out.report</code> contains the report file</li>
 </ul>
+<figure class="excalidraw">
+</figure>
+
 <p>We need to update the workflow outputs accordingly.</p>
 <h4 id="421-update-the-publish-section">4.2.1. Update the <code>publish:</code> section<a class="headerlink" href="#421-update-the-publish-section" title="Permanent link">&para;</a></h4>
 <p>In the <code>workflow block</code>, make the following code change:</p>
@@ -5738,6 +5768,9 @@ Open it to verify that the workflow correctly reported the count of greetings th
 <div class="highlight"><span class="filename">trio-report.txt</span><pre><span></span><code><a id="__codelineno-62-1" name="__codelineno-62-1" href="#__codelineno-62-1"></a>There were 3 greetings in this batch.
 </code></pre></div>
 </details>
+<figure class="excalidraw">
+</figure>
+
 <p>Feel free to add more greetings to the CSV and test what happens.</p>
 <h3 id="takeaway_3">Takeaway<a class="headerlink" href="#takeaway_3" title="Permanent link">&para;</a></h3>
 <p>You know how to make a process emit multiple named outputs and how to handle them appropriately at the workflow level.</p>

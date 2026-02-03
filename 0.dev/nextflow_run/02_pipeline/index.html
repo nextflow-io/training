@@ -5225,16 +5225,15 @@ Ignoring the <code>.collect()</code> bit for now, we can generalize this as <cod
 <p>It's an operator, of course. Just like the <code>splitCsv</code> and <code>map</code> operators we encountered earlier.
 This time the operator is called <code>collect</code>, and is applied to the output channel produced by <code>convertToUpper</code>.</p>
 <p>The <code>collect</code> operator is used to collect the outputs from multiple calls to the same process and package them into a single channel element.</p>
-<p>In the context of this workflow, it's taking the three uppercased greetings in the <code>convertToUpper.out</code> channel --which are three separate channel items, and would normally be handled in separate calls by the next process-- and packaging them into a single item.</p>
-<p>In more practical terms: if we didn't apply <code>collect()</code> to the output of <code>convertToUpper()</code> before feeding it to <code>collectGreetings()</code>, Nextflow would simply run <code>collectGreetings()</code> independently on each greeting, which would not achieve our goal.</p>
+<p>In the context of this workflow, it's taking the three uppercased greetings in the <code>convertToUpper.out</code> channel (which are three separate channel items, and would normally be handled in separate calls by the next process) and packaging them into a single item.
+That's how we get all the greetings back into the same file.</p>
 <figure class="excalidraw">
 </figure>
 
-<p>In contrast, using <code>collect()</code> allows us to take all the separate uppercased greetings produced by the second step of the workflow and feed them all together to a single call in the third step of the pipeline.</p>
+<p>In contrast, if we didn't apply <code>collect()</code> to the output of <code>convertToUpper()</code> before feeding it to <code>collectGreetings()</code>, Nextflow would simply run <code>collectGreetings()</code> independently on each greeting, which would not achieve our goal.</p>
 <figure class="excalidraw">
 </figure>
 
-<p>That's how we get all the greetings back into the same file.</p>
 <p>There are many other <a href="https://nextflow.io/docs/latest/reference/operator.html">operators</a> available to apply transformations to the contents of channels between process calls.</p>
 <p>This gives pipeline developers a lot of flexibility for customizing the flow logic of their pipeline.
 The downside is that it can sometimes make it harder to decipher what the pipeline is doing.</p>

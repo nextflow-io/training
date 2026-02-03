@@ -1,6 +1,7 @@
 :root,
 [data-md-color-scheme="default"],
 [data-md-color-scheme="slate"] {
+  --md-typeset-a-color: #5488e8;
   --md-primary-fg-color: #58bd9f;
   --md-primary-fg-color--light: #c3ead3;
   --md-primary-fg-color--dark: #087f68;
