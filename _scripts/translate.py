@@ -355,8 +355,8 @@ def translate_file(tf: TranslationFile, console: Console) -> None:
     en_content = tf.en_path.read_text(encoding="utf-8")
     existing = tf.lang_path.read_text(encoding="utf-8") if tf.exists else None
 
-    action = "Updating" if existing else "Translating"
-    console.print(f"  {action} [cyan]{tf.relative_path}[/cyan]")
+    action = "[yellow]Updating[/yellow]" if existing else "[green]Translating[/green]"
+    console.print(f"  {action} [magenta]{tf.relative_path}[/magenta]")
 
     prompt = build_translation_prompt(
         tf.language, langs[tf.language], en_content, existing
@@ -715,7 +715,7 @@ def sync(
     if outdated:
         console.print(f"[bold]Updating {len(outdated)} outdated...[/bold]")
         for i, tf in enumerate(outdated, 1):
-            console.print(f"[{i}/{len(outdated)}]", end="")
+            console.print(f"[{i}/{len(outdated)}]", end="", style="blue")
             translate_file(tf, console)
             post_process_file(tf.lang_path, lang)
 
@@ -727,7 +727,7 @@ def sync(
             translate_file(tf, console)
             post_process_file(tf.lang_path, lang)
 
-    console.print("[green]Sync complete[/green]")
+    console.print("[green]:white_check_mark: Sync complete[/green]")
 
 
 # =============================================================================
@@ -738,6 +738,7 @@ def sync(
 @app.command("ci-detect")
 def ci_detect(language: str | None = typer.Option(None, "--language")):
     """Detect languages needing sync (GitHub Actions output)."""
+    console = Console(force_terminal=True if os.getenv("GITHUB_ACTIONS") else None)
     all_langs = get_translation_languages()
 
     if language:
@@ -747,14 +748,28 @@ def ci_detect(language: str | None = typer.Option(None, "--language")):
     else:
         langs = all_langs
 
-    # Check which have work
-    need_sync = [
-        lang
-        for lang in langs
-        if get_missing_files(lang)
-        or get_outdated_files(lang)
-        or get_orphaned_files(lang)
-    ]
+    # Check which have work and collect details
+    need_sync = []
+    for lang in langs:
+        missing = get_missing_files(lang)
+        outdated = get_outdated_files(lang)
+        orphaned = get_orphaned_files(lang)
+
+        if missing or outdated or orphaned:
+            need_sync.append(lang)
+            console.print(f"[bold cyan]{lang}[/bold cyan]:")
+            if outdated:
+                console.print(f"  [yellow]Outdated:[/yellow] {len(outdated)}")
+                for f in outdated:
+                    console.print(f"    {f}")
+            if missing:
+                console.print(f"  [green]Missing:[/green] {len(missing)}")
+                for f in missing:
+                    console.print(f"    {f}")
+            if orphaned:
+                console.print(f"  [red]Orphaned:[/red] {len(orphaned)}")
+                for f in orphaned:
+                    console.print(f"    {f}")
 
     print(f"languages={json.dumps(need_sync)}")
     print(f"has_work={'true' if need_sync else 'false'}")
