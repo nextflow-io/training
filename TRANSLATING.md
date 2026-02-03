@@ -289,13 +289,13 @@ For maintainers with `ANTHROPIC_API_KEY` access:
 ```bash
 cd _scripts
 
-# Check what's missing
-uv run translate.py list-missing pt
+# Preview what needs translating
+uv run translate.py sync pt --dry-run
 
-# Translate one file at a time (recommended for large files)
-uv run translate.py translate docs/en/docs/nf4_science/index.md --lang pt
+# Translate one file at a time
+uv run translate.py translate nf4_science/index.md --lang pt
 
-# Or translate all missing files for a language
+# Or sync all (update outdated + add missing + remove orphaned)
 uv run translate.py sync pt
 ```
 
