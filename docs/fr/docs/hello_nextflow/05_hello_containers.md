@@ -16,7 +16,7 @@
 
 Dans les Parties 1-4 de ce cours de formation, vous avez appris comment utiliser les blocs de construction de base de Nextflow pour assembler un workflow simple capable de traiter du texte, de paralléliser l'exécution s'il y avait plusieurs entrées, et de collecter les résultats pour un traitement ultérieur.
 
-Cependant, vous étiez limité aux outils UNIX de base disponibles dans votre environnement.
+Cependant, vous étiez limité·e aux outils UNIX de base disponibles dans votre environnement.
 Les tâches du monde réel nécessitent souvent divers outils et paquets non inclus par défaut.
 Typiquement, vous auriez besoin d'installer ces outils, de gérer leurs dépendances et de résoudre les conflits éventuels.
 
@@ -25,7 +25,7 @@ Tout cela est très fastidieux et ennuyeux, donc nous allons vous montrer commen
 Un **conteneur** est une unité logicielle légère, autonome et exécutable créée à partir d'une **image** de conteneur qui inclut tout ce qui est nécessaire pour exécuter une application, y compris le code, les bibliothèques système et les paramètres.
 Comme vous pouvez l'imaginer, cela va être très utile pour rendre vos pipelines plus reproductibles.
 
-Notez que nous enseignerons ceci en utilisant [Docker](https://www.docker.com/get-started/), mais gardez à l'esprit que Nextflow prend en charge [plusieurs autres technologies de conteneurs](https://www.nextflow.io/docs/latest/container.html#) également.
+Notez que nous enseignerons ceci en utilisant [Docker](https://www.docker.com/get-started/), mais gardez à l'esprit que Nextflow prend en charge [plusieurs autres technologies de conteneurs](https://www.nextflow.io/docs/latest/container.html) également.
 
 ??? info "Comment commencer à partir de cette section"
 
@@ -414,10 +414,8 @@ Cela signifie que vous pouvez utiliser n'importe quelle image de conteneur que v
 Pour démontrer ceci, nous allons ajouter une étape `cowpy` au pipeline que nous avons développé, après l'étape `collectGreetings`.
 
 <figure class="excalidraw">
---8<-- "docs/en/docs/nextflow_run/img/hello-pipeline-cowpy.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-cowpy.svg"
 </figure>
-
-Meuglez si vous êtes prêt·e à plonger !
 
 ### 2.1. Écrire un module `cowpy`
 
@@ -565,7 +563,7 @@ C'est techniquement optionnel mais c'est la pratique recommandée et c'est une o
     }
     ```
 
-Maintenant nous pouvons être paresseux et éviter de taper le paramètre character dans nos lignes de commande.
+Maintenant nous pouvons être paresseux·ses et éviter de taper le paramètre character dans nos lignes de commande.
 
 #### 2.2.4. Mettre à jour les sorties du workflow
 

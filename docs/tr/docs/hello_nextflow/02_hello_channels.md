@@ -19,11 +19,11 @@ Bu kasıtlı olarak basitleştirilmiş bir yaklaşımdı.
 Pratikte, bu yaklaşımın önemli sınırlamaları vardır; yani yalnızca süreci tek bir değer üzerinde yalnızca bir kez çalıştırmak istediğimiz çok basit durumlar için çalışır.
 Çoğu gerçekçi iş akışı kullanım durumunda, birden fazla değeri işlemek istiyoruz (örneğin, birden fazla örnek için deneysel veriler), bu nedenle girdileri işlemek için daha sofistike bir yönteme ihtiyacımız var.
 
-Nextflow **kanalları** tam da bunun için var.
+Nextflow [**kanalları**](https://nextflow.io/docs/latest/channel.html) tam da bunun için var.
 Kanallar, girdileri verimli bir şekilde işlemek ve çok adımlı iş akışlarında bir adımdan diğerine taşımak için tasarlanmış kuyruklardır; yerleşik paralellik ve birçok ek avantaj sağlarlar.
 
 Bu kursun bu bölümünde, çeşitli farklı kaynaklardan gelen birden fazla girdiyi işlemek için bir kanalı nasıl kullanacağınızı öğreneceksiniz.
-Ayrıca kanal içeriklerini gerektiği gibi dönüştürmek için **operatörleri** nasıl kullanacağınızı da öğreneceksiniz.
+Ayrıca kanal içeriklerini gerektiği gibi dönüştürmek için [**operatörleri**](https://nextflow.io/docs/latest/reference/operator.html) nasıl kullanacağınızı da öğreneceksiniz.
 
 ??? info "Bu bölümden nasıl başlanır"
 
@@ -91,8 +91,8 @@ Bu sizin için çalıştıysa, kanallar hakkında öğrenmeye hazırsınız.
 
 ### 1.1. Bir girdi kanalı oluşturun
 
-Bir kanal kurmak için kullanabileceğimiz çeşitli **kanal fabrikaları** vardır.
-Şimdilik işleri basit tutmak için, tek bir değer içeren bir kanal oluşturacak olan `channel.of` adlı en temel kanal fabrikasını kullanacağız.
+Bir kanal kurmak için kullanabileceğimiz çeşitli [**kanal fabrikaları**](https://nextflow.io/docs/latest/reference/channel.html) vardır.
+Şimdilik işleri basit tutmak için, tek bir değer içeren bir kanal oluşturacak olan [`channel.of`](https://nextflow.io/docs/latest/reference/channel.html#of) adlı en temel kanal fabrikasını kullanacağız.
 İşlevsel olarak bu, daha önce kurduğumuz yönteme benzer olacak, ancak Nextflow'un örtük olarak bir kanal oluşturmasına izin vermek yerine, bunu artık açıkça yapıyoruz.
 
 Kullanacağımız kod satırı şu:
@@ -306,12 +306,6 @@ Sadece kanala birden fazla değer yükleyebiliriz.
 
 Bunları `'Hello'`, `'Bonjour'` ve `'Holà'` yapalım.
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-channel-multi.svg"
-</figure>
-
-_Diyagramda, kanal yeşil renkte temsil edilmektedir ve öğelerin sırası bir borudaki misketler gibi temsil edilmektedir: ilk yüklenen sağda, sonra ikincisi ortada, sonra üçüncüsü soldadır._
-
 #### 2.1.1. Daha fazla selamlama ekleyin
 
 İş akışı bloğundan önce, aşağıdaki kod değişikliğini yapın:
@@ -380,6 +374,12 @@ Ancak, results dizininde hâlâ yalnızca bir çıktı var:
 
 Orada üç selamlamadan birini görmelisiniz, ancak aldığınız burada gösterilenden farklı olabilir.
 Bunun neden olabileceğini düşünebilir misiniz?
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-channel-multi.svg"
+</figure>
+
+_Diyagramda, kanal yeşil renkte temsil edilmektedir ve öğelerin sırası bir borudaki misketler gibi temsil edilmektedir: ilk yüklenen sağda, sonra ikincisi ortada, sonra üçüncüsü soldadır._
 
 Yürütme monitörüne geri baktığımızda, bize yalnızca bir alt dizin yolu verdi (`f4/c9962c`).
 Hadi oraya bir göz atalım.
@@ -500,6 +500,10 @@ Her neyse, artık her süreç çağrısının alt dizinlerine sahip olduğumuza 
 
 Bu, üç sürecin de başarıyla çalıştığını gösteriyor (yaşasın).
 
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-channels-task-dirs.svg"
+</figure>
+
 Bununla birlikte, results dizininde hâlâ yalnızca bir çıktı dosyası olması sorunu var.
 
 `sayHello` süreci için çıktı dosya adını sabit kodladığımızı hatırlayabilirsiniz, bu nedenle üç çağrının tümü `output.txt` adlı bir dosya üretti.
@@ -515,6 +519,10 @@ Tüm çıktıları aynı results dizinine yayınlamaya devam edebiliriz, ancak b
 Peki dosya adlarını nasıl benzersiz yaparız?
 Bunu yapmanın yaygın bir yolu, girdilerden (girdi kanalından alınan) bazı benzersiz meta verileri çıktı dosya adının bir parçası olarak kullanmaktır.
 Burada, kolaylık olsun diye, yalnızca kısa bir dize olduğu için selamlamanın kendisini kullanacağız ve bunu temel çıktı dosya adının önüne ekleyeceğiz.
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-channel-multi-unique.svg"
+</figure>
 
 #### 2.2.1. Dinamik bir çıktı dosya adı oluşturun
 
@@ -792,16 +800,20 @@ Hay aksi! Bir hata var!
 
 Görünüşe göre Nextflow, dizideki üç dizeyi ayrı değerler olarak kullanmak yerine, `[Hello, Bonjour, Holà]`'yı bir dize değeri olarak kullanarak tek bir süreç çağrısı çalıştırmaya çalıştı.
 
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-channels-array-fail.svg"
+</figure>
+
 Yani soruna neden olan "paketleme".
 Nextflow'un diziyi açmasını ve bireysel dizeleri kanala yüklemesini nasıl sağlarız?
 
 ### 3.2. Kanal içeriklerini dönüştürmek için bir operatör kullanın
 
-İşte **[operatörler](https://www.nextflow.io/docs/latest/reference/operator.html)** burada devreye giriyor.
+İşte [**operatörler**](https://nextflow.io/docs/latest/reference/operator.html) burada devreye giriyor.
 Zaten `.view()` operatörünü kullandınız, bu sadece içinde ne olduğuna bakar.
 Şimdi bir kanalın içerikleri üzerinde işlem yapmamıza olanak tanıyan operatörlere bakacağız.
 
-Nextflow belgelerindeki [operatör listesine](https://www.nextflow.io/docs/latest/reference/operator.html) göz atarsanız, tam olarak ihtiyacımız olanı yapan [`flatten()`](https://www.nextflow.io/docs/latest/reference/operator.html#flatten) operatörünü bulacaksınız: bir dizinin içeriğini açar ve bunları ayrı öğeler olarak yayınlar.
+Nextflow belgelerindeki [operatör listesine](https://nextflow.io/docs/latest/reference/operator.html) göz atarsanız, tam olarak ihtiyacımız olanı yapan [`flatten()`](https://nextflow.io/docs/latest/reference/operator.html#flatten) operatörünü bulacaksınız: bir dizinin içeriğini açar ve bunları ayrı öğeler olarak yayınlar.
 
 #### 3.2.1. `flatten()` operatörünü ekleyin
 
@@ -850,6 +862,10 @@ Nextflow belgelerindeki [operatör listesine](https://www.nextflow.io/docs/lates
 
 Burada okunabilirlik için operatörü bir sonraki satıra ekledik, ancak tercih ederseniz operatörleri kanal fabrikasıyla aynı satıra ekleyebilirsiniz, şöyle:
 `greeting_ch = channel.of(greetings_array).view().flatten()`
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-channels-array-success.svg"
+</figure>
 
 #### 3.2.2. `view()` ifadesini/ifadelerini iyileştirin
 
@@ -941,7 +957,7 @@ nextflow run hello-channels.nf
 Bu sefer çalışıyor VE `flatten()` operatörünü çalıştırmadan önce ve sonra kanal içeriklerinin nasıl göründüğüne dair ek bilgi veriyor.
 
 - Tek bir `flatten öncesi:` ifadesi görüyorsunuz çünkü o noktada kanal bir öğe içeriyor, orijinal dizi.
-  Sonra, artık kanalda bireysel öğeler olan her selamlama için bir tane olmak üzere üç ayrı `flatten sonrası:` ifadesi görüyorsunuz.
+- Sonra, artık kanalda bireysel öğeler olan her selamlama için bir tane olmak üzere üç ayrı `flatten sonrası:` ifadesi görüyorsunuz.
 
 Önemli olarak, bu her öğenin artık iş akışı tarafından ayrı ayrı işlenebileceği anlamına gelir.
 
@@ -992,7 +1008,7 @@ Başlamak için, betikte iki önemli değişiklik yapmamız gerekecek:
 #### 4.1.1. Girdi parametresini CSV dosyasına işaret edecek şekilde değiştirin
 
 1. Bölümde kurduğumuz `params.input` parametresini hatırlıyor musunuz?
-   Selamlamalarımızı içeren CSV dosyasına işaret edecek şekilde güncelleyeceğiz.
+Selamlamalarımızı içeren CSV dosyasına işaret edecek şekilde güncelleyeceğiz.
 
 Parametre tanımlamasında aşağıdaki düzenlemeyi yapın:
 
@@ -1022,7 +1038,7 @@ Diğer veri konumlarıyla nasıl başa çıkacağınızı Nextflow yolculuğunuz
 #### 4.1.2. Bir dosyayı işlemek için tasarlanmış bir kanal fabrikasına geçin
 
 Artık girdi olarak basit dizeler yerine bir dosya kullanmak istediğimiz için, önceki `channel.of()` kanal fabrikasını kullanamayız.
-Dosya yollarını işlemek için yerleşik işlevselliğe sahip yeni bir kanal fabrikası olan [`channel.fromPath()`](https://www.nextflow.io/docs/latest/reference/channel.html#channel-path) kullanmaya geçmemiz gerekiyor.
+Dosya yollarını işlemek için yerleşik işlevselliğe sahip yeni bir kanal fabrikası olan [`channel.fromPath()`](https://www.nextflow.io/docs/latest/reference/channel.html#frompath) kullanmaya geçmemiz gerekiyor.
 
 İş akışı bloğunda, aşağıdaki kod değişikliğini yapın:
 
@@ -1119,11 +1135,11 @@ Dosya yolunu doğru şekilde çözümledi, ancak istediğimiz şey olan içeriğ
 
 Nextflow'un dosyayı açmasını ve içeriğini kanala yüklemesini nasıl sağlarız?
 
-Görünüşe göre başka bir [operatöre](https://www.nextflow.io/docs/latest/reference/operator.html) ihtiyacımız var!
+Görünüşe göre başka bir [operatöre](https://nextflow.io/docs/latest/reference/operator.html) ihtiyacımız var!
 
 ### 4.2. Dosyayı ayrıştırmak için `splitCsv()` operatörünü kullanın
 
-Operatör listesine tekrar baktığımızda, CSV formatındaki metni ayrıştırmak ve bölmek için tasarlanmış [`splitCsv()`](https://www.nextflow.io/docs/latest/reference/operator.html#splitCsv) operatörünü buluyoruz.
+Operatör listesine tekrar baktığımızda, CSV formatındaki metni ayrıştırmak ve bölmek için tasarlanmış [`splitCsv()`](https://nextflow.io/docs/latest/reference/operator.html#splitcsv) operatörünü buluyoruz.
 
 #### 4.2.1. `splitCsv()`'yi kanala uygulayın
 
@@ -1220,6 +1236,10 @@ nextflow run hello-channels.nf
 İlginç bir şekilde, bu da başarısız oluyor, ancak farklı bir hatayla.
 Bu sefer Nextflow dosyanın içeriğini ayrıştırdı (yaşasın!) ama her satırı bir dizi olarak yükledi ve her dizi kanalda bir öğe.
 
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-channels-split-fail.svg"
+</figure>
+
 Ona her satırdaki yalnızca ilk sütunu almasını söylememiz gerekiyor.
 Peki bunu nasıl açarız?
 
@@ -1229,204 +1249,6 @@ Bunun yerine, Nextflow pipeline'larında gerçekten faydalı olan ve sık sık k
 
 ### 4.3. Selamlamaları çıkarmak için `map()` operatörünü kullanın
 
-[`map()`](https://www.nextflow.io/docs/latest/reference/operator.html#map) operatörü, bir kanalın içeriklerine her türlü eşlemeyi yapmamıza olanak tanıyan çok kullanışlı küçük bir araçtır.
+[`map()`](https://nextflow.io/docs/latest/reference/operator.html#map) operatörü, bir kanalın içeriklerine her türlü eşlemeyi yapmamıza olanak tanıyan çok kullanışlı küçük bir araçtır.
 
-Bu durumda, veri dosyamızdaki her satırdan istediğimiz o tek öğeyi çıkarmak için kullanacağız.
-Sözdizimi şöyle görünüyor:
-
-```groovy title="Sözdizimi"
-.map { row -> row[0] }
-```
-
-Bu, 'kanaldaki her satır için, içerdiği 0. (birinci) öğeyi al' anlamına gelir.
-
-Şimdi bunu CSV ayrıştırmamıza uygulayalım.
-
-#### 4.3.1. `map()`'i kanala uygulayın
-
-İş akışı bloğunda, aşağıdaki kod değişikliğini yapın:
-
-=== "Sonra"
-
-    ```groovy title="hello-channels.nf" linenums="27" hl_lines="9 10"
-    workflow {
-
-        main:
-        // bir CSV dosyasından girdiler için bir kanal oluştur
-        greeting_ch = channel.fromPath(params.input)
-                             .view { csv -> "splitCsv öncesi: $csv" }
-                             .splitCsv()
-                             .view { csv -> "splitCsv sonrası: $csv" }
-                             .map { item -> item[0] }
-                             .view { csv -> "map sonrası: $csv" }
-        // bir selamlama yayınla
-        sayHello(greeting_ch)
-
-        publish:
-        first_output = sayHello.out
-    }
-    ```
-
-=== "Önce"
-
-    ```groovy title="hello-channels.nf" linenums="27"
-    workflow {
-
-        main:
-        // bir CSV dosyasından girdiler için bir kanal oluştur
-        greeting_ch = channel.fromPath(params.input)
-                             .view { csv -> "splitCsv öncesi: $csv" }
-                             .splitCsv()
-                             .view { csv -> "splitCsv sonrası: $csv" }
-        // bir selamlama yayınla
-        sayHello(greeting_ch)
-
-        publish:
-        first_output = sayHello.out
-    }
-    ```
-
-Operatörün beklediğimizi yaptığını doğrulamak için başka bir `view()` çağrısı eklediğimizi görüyorsunuz.
-
-#### 4.3.2. İş akışını çalıştırın
-
-Bunu bir kez daha çalıştıralım:
-
-```bash
-nextflow run hello-channels.nf
-```
-
-??? success "Komut çıktısı"
-
-    ```console
-     N E X T F L O W   ~  version 25.10.2
-
-    Launching `hello-channels.nf` [focused_volhard] DSL2 - revision: de435e45be
-
-    executor >  local (3)
-    [54/6eebe3] sayHello (3) [100%] 3 of 3 ✔
-    splitCsv öncesi: /workspaces/training/hello-nextflow/data/greetings.csv
-    splitCsv sonrası: [Hello, English, 123]
-    splitCsv sonrası: [Bonjour, French, 456]
-    splitCsv sonrası: [Holà, Spanish, 789]
-    map sonrası: Hello
-    map sonrası: Bonjour
-    map sonrası: Holà
-    ```
-
-Bu sefer hatasız çalışmalı.
-
-`view()` ifadelerinin çıktısına bakarak şunları görüyorsunuz:
-
-- Tek bir `splitCsv öncesi:` ifadesi: o noktada kanal bir öğe içeriyor, orijinal dosya yolu.
-- Üç ayrı `splitCsv sonrası:` ifadesi: her selamlama için bir tane, ama her biri dosyadaki o satıra karşılık gelen bir dizi içinde bulunuyor.
-- Üç ayrı `map sonrası:` ifadesi: her selamlama için bir tane, bunlar artık kanalda bireysel öğeler.
-
-Satırların çıktınızda farklı bir sırada görünebileceğini unutmayın.
-
-Her selamlamanın doğru şekilde çıkarıldığını ve iş akışı boyunca işlendiğini doğrulamak için çıktı dosyalarına da bakabilirsiniz.
-
-Daha önce olduğu gibi aynı sonuca ulaştık, ancak şimdi herhangi bir kodu değiştirmeden bir girdi dosyasını değiştirerek işlemek istediğimiz selamlama kanalına daha fazla öğe ekleme konusunda çok daha fazla esnekliğe sahibiz.
-Karmaşık girdileri işlemek için daha sofistike yaklaşımları daha sonraki bir eğitimde öğreneceksiniz.
-
-### Özet
-
-Bir girdi değerleri dosyasını okumak ve bunları uygun şekilde işlemek için `.fromPath()` kanal yapıcısını ve `splitCsv()` ile `map()` operatörlerini nasıl kullanacağınızı biliyorsunuz.
-
-Daha genel olarak, Nextflow'un süreçlere girdileri yönetmek için **kanalları** ve içeriklerini dönüştürmek için **operatörleri** nasıl kullandığına dair temel bir anlayışa sahipsiniz.
-
-### Sırada ne var?
-
-Büyük bir mola verin, bu bölümde çok çalıştınız!
-
-Hazır olduğunuzda, daha fazla adım eklemeyi ve bunları düzgün bir iş akışına bağlamayı öğrenmek için [**Bölüm 3: Merhaba İş Akışı**](./03_hello_workflow.md)'na geçin.
-
----
-
-## Quiz
-
-<quiz>
-Nextflow'da kanal nedir?
-- [ ] Bir dosya yolu belirtimi
-- [ ] Bir süreç tanımı
-- [x] Süreçler arasında veri iletmek için kuyruk benzeri bir yapı
-- [ ] Bir yapılandırma ayarı
-
-Daha fazla bilgi: [1.1. Bir girdi kanalı oluşturun](#11-bir-girdi-kanali-olusturun)
-</quiz>
-
-<quiz>
-Bu kod ne çıktı verecek?
-
-```groovy
-channel.of('Hello', 'Bonjour', 'Hola')
-    .view()
-```
-
-- [ ] `['Hello', 'Bonjour', 'Hola']` (tek bir liste)
-- [x] Her öğe ayrı bir satırda: `Hello`, `Bonjour`, `Hola`
-- [ ] Hiçbir şey (kanallar varsayılan olarak yazdırmaz)
-- [ ] Bir hata (geçersiz sözdizimi)
-
-Daha fazla bilgi: [1.1. Bir girdi kanalı oluşturun](#11-bir-girdi-kanali-olusturun)
-</quiz>
-
-<quiz>
-Bir kanal birden fazla değer içerdiğinde, Nextflow süreç yürütmesini nasıl işler?
-- [ ] Süreç tüm değerlerle bir kez çalışır
-- [x] Süreç kanaldaki her değer için bir kez çalışır
-- [ ] Süreç yalnızca ilk değerle çalışır
-- [ ] Süreç yalnızca son değerle çalışır
-
-Daha fazla bilgi: [2. İş akışını birden fazla girdi değeri üzerinde çalışacak şekilde değiştirin](#2-is-akisini-birden-fazla-girdi-degeri-uzerinde-calisacak-sekilde-degistirin)
-</quiz>
-
-<quiz>
-`flatten()` operatörü ne yapar?
-- [ ] Birden fazla kanalı bir araya getirir
-- [ ] Kanal öğelerini sıralar
-- [x] Dizileri bireysel öğelere açar
-- [ ] Yinelenen öğeleri kaldırır
-
-Daha fazla bilgi: [3.2.1. `flatten()` operatörünü ekleyin](#321-flatten-operatorunu-ekleyin)
-</quiz>
-
-<quiz>
-`view()` operatörünün amacı nedir?
-- [ ] Kanal içeriklerini filtrelemek
-- [ ] Kanal öğelerini dönüştürmek
-- [x] Kanal içeriklerini incelemek ve hata ayıklamak
-- [ ] Kanal içeriklerini bir dosyaya kaydetmek
-
-Daha fazla bilgi: [1.4. Kanal içeriklerini incelemek için `view()` kullanın](#14-kanal-iceriklerini-incelemek-icin-view-kullanin)
-</quiz>
-
-<quiz>
-`splitCsv()` ne yapar?
-- [ ] Kanal içeriklerinden bir CSV dosyası oluşturur
-- [ ] Bir dizeyi virgüllerle böler
-- [x] Bir CSV dosyasını her satırı temsil eden dizilere ayrıştırır
-- [ ] Birden fazla CSV dosyasını birleştirir
-
-Daha fazla bilgi: [4.2. Dosyayı ayrıştırmak için `splitCsv()` operatörünü kullanın](#42-dosyayi-ayristirmak-icin-splitcsv-operatorunu-kullanin)
-</quiz>
-
-<quiz>
-`map()` operatörünün amacı nedir?
-- [ ] Bir kanaldan öğeleri filtrelemek
-- [ ] Birden fazla kanalı birleştirmek
-- [x] Bir kanaldaki her öğeyi dönüştürmek
-- [ ] Bir kanaldaki öğeleri saymak
-
-Daha fazla bilgi: [4.3. Selamlamaları çıkarmak için `map()` operatörünü kullanın](#43-selamlamalari-cikarmak-icin-map-operatorunu-kullanin)
-</quiz>
-
-<quiz>
-Birden fazla girdiyi işlerken dinamik çıktı dosya adları kullanmak neden önemlidir?
-- [ ] Performansı iyileştirmek için
-- [ ] Disk alanını azaltmak için
-- [x] Çıktı dosyalarının birbirinin üzerine yazmasını önlemek için
-- [ ] Devam etme işlevselliğini etkinleştirmek için
-
-Daha fazla bilgi: [2.2. Çıktı dosya adlarının benzersiz olmasını sağlayın](#22-cikti-dosya-adlarinin-benzersiz-olmasini-saglayin)
-</quiz>
+Bu durumda, veri dosyamızdaki her satırdan istediğimiz o tek öğ

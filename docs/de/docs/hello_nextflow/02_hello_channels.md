@@ -14,16 +14,16 @@
 ///
 -->
 
-In Teil 1 dieses Kurses (Hello World) haben wir dir gezeigt, wie du einem process eine variable Eingabe übergibst, indem du die Eingabe direkt im process-Aufruf angibst: `sayHello(params.input)`.
+In Teil 1 dieses Kurses (Hello World) haben wir dir gezeigt, wie du eine variable Eingabe an einen process übergibst, indem du sie direkt im process-Aufruf angibst: `sayHello(params.input)`.
 Das war ein bewusst vereinfachter Ansatz.
 In der Praxis hat dieser Ansatz wesentliche Einschränkungen; er funktioniert nämlich nur für sehr einfache Fälle, bei denen wir den process nur einmal mit einem einzelnen Wert ausführen möchten.
 In den meisten realistischen Workflow-Anwendungsfällen wollen wir mehrere Werte verarbeiten (z.B. experimentelle Daten für mehrere Proben), daher brauchen wir einen ausgefeilteren Weg, um Eingaben zu handhaben.
 
-Dafür sind Nextflow **channels** da.
-Channels sind Warteschlangen, die entwickelt wurden, um Eingaben effizient zu handhaben und sie von einem Schritt zum nächsten in mehrstufigen Workflows zu transportieren, während sie eingebaute Parallelität und viele zusätzliche Vorteile bieten.
+Dafür sind Nextflow [**Kanäle**](https://nextflow.io/docs/latest/channel.html) da.
+Kanäle sind Warteschlangen, die entwickelt wurden, um Eingaben effizient zu handhaben und sie von einem Schritt zum nächsten in mehrstufigen Workflows zu transportieren, während sie eingebaute Parallelität und viele zusätzliche Vorteile bieten.
 
-In diesem Teil des Kurses lernst du, wie du einen channel verwendest, um mehrere Eingaben aus verschiedenen Quellen zu handhaben.
-Du lernst auch, **Operatoren** zu verwenden, um channel-Inhalte nach Bedarf zu transformieren.
+In diesem Teil des Kurses lernst du, wie du einen Kanal verwendest, um mehrere Eingaben aus verschiedenen Quellen zu handhaben.
+Du lernst auch, [**Operatoren**](https://nextflow.io/docs/latest/reference/operator.html) zu verwenden, um Kanal-Inhalte nach Bedarf zu transformieren.
 
 ??? info "Wie du von diesem Abschnitt aus beginnen kannst"
 
@@ -31,7 +31,7 @@ Du lernst auch, **Operatoren** zu verwenden, um channel-Inhalte nach Bedarf zu t
 
 ---
 
-## 0. Aufwärmübung: `hello-channels.nf` ausführen
+## 0. Aufwärmen: `hello-channels.nf` ausführen
 
 Wir werden das Workflow-Skript `hello-channels.nf` als Ausgangspunkt verwenden.
 Es entspricht dem Skript, das durch das Durcharbeiten von Teil 1 dieses Trainingskurses erstellt wurde, außer dass wir das Ausgabeziel geändert haben:
@@ -81,19 +81,19 @@ Wie zuvor findest du die Ausgabedatei `output.txt` im Verzeichnis `results/hello
     Hello Channels!
     ```
 
-Wenn das bei dir funktioniert hat, bist du bereit, etwas über channels zu lernen.
+Wenn das bei dir funktioniert hat, bist du bereit, etwas über Kanäle zu lernen.
 
 ---
 
-## 1. Variable Eingaben explizit über einen channel bereitstellen
+## 1. Variable Eingaben explizit über einen Kanal bereitstellen
 
-Wir werden einen **channel** erstellen, um die variable Eingabe an den `sayHello()`-process zu übergeben, anstatt uns auf die implizite Handhabung zu verlassen, die gewisse Einschränkungen hat.
+Wir werden einen **Kanal** erstellen, um die variable Eingabe an den `sayHello()`-process zu übergeben, anstatt uns auf die implizite Handhabung zu verlassen, die gewisse Einschränkungen hat.
 
-### 1.1. Einen Eingabe-channel erstellen
+### 1.1. Einen Eingabe-Kanal erstellen
 
-Es gibt verschiedene **channel factories**, die wir verwenden können, um einen channel einzurichten.
-Um die Dinge vorerst einfach zu halten, werden wir die grundlegendste channel factory namens `channel.of` verwenden, die einen channel mit einem einzelnen Wert erstellt.
-Funktional wird dies ähnlich sein wie zuvor, aber anstatt Nextflow einen channel implizit erstellen zu lassen, tun wir dies jetzt explizit.
+Es gibt verschiedene [**channel factories**](https://nextflow.io/docs/latest/reference/channel.html), die wir verwenden können, um einen Kanal einzurichten.
+Um die Dinge vorerst einfach zu halten, werden wir die grundlegendste channel factory namens [`channel.of`](https://nextflow.io/docs/latest/reference/channel.html#of) verwenden, die einen Kanal mit einem einzelnen Wert erstellt.
+Funktional wird dies ähnlich sein wie zuvor, aber anstatt Nextflow einen Kanal implizit erstellen zu lassen, tun wir dies jetzt explizit.
 
 Dies ist die Codezeile, die wir verwenden werden:
 
@@ -101,7 +101,7 @@ Dies ist die Codezeile, die wir verwenden werden:
 greeting_ch = channel.of('Hello Channels!')
 ```
 
-Dies erstellt einen channel namens `greeting_ch` unter Verwendung der `channel.of()` channel factory, die einen einfachen queue channel einrichtet, und lädt den String `'Hello Channels!'` als Begrüßungswert.
+Dies erstellt einen Kanal namens `greeting_ch` unter Verwendung der `channel.of()` channel factory, die einen einfachen queue channel einrichtet, und lädt den String `'Hello Channels!'` als Begrüßungswert.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-channel.svg"
@@ -109,17 +109,17 @@ Dies erstellt einen channel namens `greeting_ch` unter Verwendung der `channel.o
 
 !!! note "Hinweis"
 
-    Wir wechseln vorübergehend zurück zu fest codierten Strings, anstatt einen CLI-Parameter zu verwenden, um die Lesbarkeit zu verbessern. Wir werden zurück zu CLI-Parametern wechseln, sobald wir behandelt haben, was auf Ebene des channels passiert.
+    Wir wechseln vorübergehend zurück zu fest codierten Strings, anstatt einen CLI-Parameter zu verwenden, um die Lesbarkeit zu verbessern. Wir werden zurück zu CLI-Parametern wechseln, sobald wir behandelt haben, was auf Ebene des Kanals passiert.
 
 Füge im workflow-Block den channel factory-Code hinzu:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-channels.nf" linenums="27" hl_lines="4 5"
     workflow {
 
         main:
-        // Einen Channel für Eingaben erstellen
+        // Einen Kanal für Eingaben erstellen
         greeting_ch = channel.of('Hello Channels!')
         // Eine Begrüßung ausgeben
         sayHello(params.input)
@@ -145,19 +145,19 @@ Füge im workflow-Block den channel factory-Code hinzu:
 
 Dies ist noch nicht funktionsfähig, da wir die Eingabe für den process-Aufruf noch nicht umgestellt haben.
 
-### 1.2. Den channel als Eingabe zum process-Aufruf hinzufügen
+### 1.2. Den Kanal als Eingabe zum process-Aufruf hinzufügen
 
-Jetzt müssen wir unseren neu erstellten channel tatsächlich in den `sayHello()`-process-Aufruf einbinden und den CLI-Parameter ersetzen, den wir zuvor direkt bereitgestellt haben.
+Jetzt müssen wir unseren neu erstellten Kanal tatsächlich in den `sayHello()`-process-Aufruf einbinden und den CLI-Parameter ersetzen, den wir zuvor direkt bereitgestellt haben.
 
 Nimm im workflow-Block die folgende Codeänderung vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-channels.nf" linenums="27" hl_lines="7"
     workflow {
 
         main:
-        // Einen Channel für Eingaben erstellen
+        // Einen Kanal für Eingaben erstellen
         greeting_ch = channel.of('Hello Channels!')
         // Eine Begrüßung ausgeben
         sayHello(greeting_ch)
@@ -173,7 +173,7 @@ Nimm im workflow-Block die folgende Codeänderung vor:
     workflow {
 
         main:
-        // Einen Channel für Eingaben erstellen
+        // Einen Kanal für Eingaben erstellen
         greeting_ch = channel.of('Hello Channels!')
         // Eine Begrüßung ausgeben
         sayHello(params.input)
@@ -183,7 +183,7 @@ Nimm im workflow-Block die folgende Codeänderung vor:
     }
     ```
 
-Dies sagt Nextflow, den `sayHello`-process auf den Inhalt des `greeting_ch`-channels auszuführen.
+Dies sagt Nextflow, den `sayHello`-process auf den Inhalt des `greeting_ch`-Kanals auszuführen.
 
 Jetzt ist unser Workflow richtig funktionsfähig; es ist das explizite Äquivalent zum Schreiben von `sayHello('Hello Channels!')`.
 
@@ -218,24 +218,24 @@ Du kannst das Ergebnisverzeichnis überprüfen, um dich zu vergewissern, dass da
 Wir haben also die Flexibilität unseres Workflows erhöht, während wir dasselbe Endergebnis erzielen.
 Das mag so erscheinen, als würden wir mehr Code für keinen greifbaren Nutzen schreiben, aber der Wert wird deutlich, sobald wir anfangen, mehr Eingaben zu handhaben.
 
-Als Vorschau darauf schauen wir uns noch eine Sache an, bevor wir weitermachen: einen kleinen, aber praktischen Vorteil der Verwendung eines expliziten channels zur Verwaltung von Dateneingaben.
+Als Vorschau darauf schauen wir uns noch eine Sache an, bevor wir weitermachen: einen kleinen, aber praktischen Vorteil der Verwendung eines expliziten Kanals zur Verwaltung von Dateneingaben.
 
-### 1.4. `view()` verwenden, um channel-Inhalte zu inspizieren
+### 1.4. `view()` verwenden, um Kanal-Inhalte zu inspizieren
 
-Nextflow channels sind so aufgebaut, dass wir mit Operatoren auf ihre Inhalte einwirken können, was wir später in diesem Kapitel ausführlich behandeln werden.
+Nextflow-Kanäle sind so aufgebaut, dass wir mit Operatoren auf ihre Inhalte einwirken können, was wir später in diesem Kapitel ausführlich behandeln werden.
 
-Vorerst zeigen wir dir nur, wie du einen super einfachen Operator namens [`view()`](https://www.nextflow.io/docs/latest/reference/operator.html#view) verwendest, um die Inhalte eines channels zu inspizieren.
+Vorerst zeigen wir dir nur, wie du einen super einfachen Operator namens [`view()`](https://www.nextflow.io/docs/latest/reference/operator.html#view) verwendest, um die Inhalte eines Kanals zu inspizieren.
 Du kannst `view()` als Debugging-Werkzeug betrachten, wie eine `print()`-Anweisung in Python oder deren Äquivalent in anderen Sprachen.
 
 Füge diese kleine Zeile zum workflow-Block hinzu:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-channels.nf" linenums="27" hl_lines="7"
     workflow {
 
         main:
-        // Einen Channel für Eingaben erstellen
+        // Einen Kanal für Eingaben erstellen
         greeting_ch = channel.of('Hello Channels!')
                              .view()
         // Eine Begrüßung ausgeben
@@ -252,7 +252,7 @@ Füge diese kleine Zeile zum workflow-Block hinzu:
     workflow {
 
         main:
-        // Einen Channel für Eingaben erstellen
+        // Einen Kanal für Eingaben erstellen
         greeting_ch = channel.of('Hello Channels!')
         // Eine Begrüßung ausgeben
         sayHello(greeting_ch)
@@ -262,7 +262,7 @@ Füge diese kleine Zeile zum workflow-Block hinzu:
     }
     ```
 
-Die genaue Anzahl der Leerzeichen spielt keine Rolle, solange es ein Vielfaches von 4 ist; wir zielen nur darauf ab, den Anfang der `.view()`-Anweisung mit dem `.of()`-Teil der channel-Konstruktion auszurichten.
+Die genaue Anzahl der Leerzeichen spielt keine Rolle, solange es ein Vielfaches von 4 ist; wir zielen nur darauf ab, den Anfang der `.view()`-Anweisung mit dem `.of()`-Teil der Kanal-Konstruktion auszurichten.
 
 Führe jetzt den Workflow erneut aus:
 
@@ -282,16 +282,16 @@ nextflow run hello-channels.nf
     Hello Channels!
     ```
 
-Wie du sehen kannst, gibt dies die channel-Inhalte in der Konsole aus.
-Hier haben wir nur ein Element, aber wenn wir im nächsten Abschnitt anfangen, mehrere Werte in den channel zu laden, wirst du sehen, dass dies so eingestellt ist, dass ein Element pro Zeile ausgegeben wird.
+Wie du sehen kannst, gibt dies die Kanal-Inhalte in der Konsole aus.
+Hier haben wir nur ein Element, aber wenn wir im nächsten Abschnitt anfangen, mehrere Werte in den Kanal zu laden, wirst du sehen, dass dies so eingestellt ist, dass ein Element pro Zeile ausgegeben wird.
 
-### Zusammenfassung
+### Fazit
 
 Du weißt, wie du eine grundlegende channel factory verwendest, um eine Eingabe an einen process zu übergeben.
 
-### Was kommt als Nächstes?
+### Wie geht es weiter?
 
-Lerne, wie du channels verwendest, damit der Workflow über mehrere Eingabewerte iteriert.
+Lerne, wie du Kanäle verwendest, damit der Workflow über mehrere Eingabewerte iteriert.
 
 ---
 
@@ -299,38 +299,32 @@ Lerne, wie du channels verwendest, damit der Workflow über mehrere Eingabewerte
 
 Workflows werden typischerweise auf Stapel von Eingaben ausgeführt, die in großen Mengen verarbeitet werden sollen, daher wollen wir den Workflow aufrüsten, um mehrere Eingabewerte zu akzeptieren.
 
-### 2.1. Mehrere Begrüßungen in den Eingabe-channel laden
+### 2.1. Mehrere Begrüßungen in den Eingabe-Kanal laden
 
 Praktischerweise ist die `channel.of()` channel factory, die wir verwendet haben, durchaus bereit, mehr als einen Wert zu akzeptieren, daher müssen wir das überhaupt nicht ändern.
-Wir können einfach mehrere Werte in den channel laden.
+Wir können einfach mehrere Werte in den Kanal laden.
 
 Machen wir sie zu `'Hello'`, `'Bonjour'` und `'Holà'`.
-
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-channel-multi.svg"
-</figure>
-
-_Im Diagramm wird der channel in Grün dargestellt, und die Reihenfolge der Elemente wird wie Murmeln in einer Röhre dargestellt: das zuerst geladene ist rechts, dann das zweite in der Mitte, dann das dritte links._
 
 #### 2.1.1. Weitere Begrüßungen hinzufügen
 
 Nimm vor dem workflow-Block die folgende Codeänderung vor:
 
-=== "Nachher"
+=== "Danach"
 
-```groovy title="hello-channels.nf" linenums="30" hl_lines="2"
-// Einen Channel für Eingaben erstellen
-greeting_ch = channel.of('Hello','Bonjour','Holà')
-                     .view()
-```
+    ```groovy title="hello-channels.nf" linenums="30" hl_lines="2"
+    // Einen Kanal für Eingaben erstellen
+    greeting_ch = channel.of('Hello','Bonjour','Holà')
+                         .view()
+    ```
 
 === "Vorher"
 
-```groovy title="hello-channels.nf" linenums="30" hl_lines="2"
-// Einen Channel für Eingaben erstellen
-greeting_ch = channel.of('Hello Channels')
-                     .view()
-```
+    ```groovy title="hello-channels.nf" linenums="30" hl_lines="2"
+    // Einen Kanal für Eingaben erstellen
+    greeting_ch = channel.of('Hello Channels')
+                         .view()
+    ```
 
 Die Dokumentation sagt uns, dass das funktionieren sollte. Kann es wirklich so einfach sein?
 
@@ -380,6 +374,12 @@ Allerdings gibt es im Ergebnisverzeichnis immer noch nur eine Ausgabe:
 
 Du solltest eine der drei Begrüßungen darin sehen, aber die, die du bekommen hast, könnte anders sein als hier gezeigt.
 Kannst du dir vorstellen, warum das so sein könnte?
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-channel-multi.svg"
+</figure>
+
+_Im Diagramm wird der Kanal in Grün dargestellt, und die Reihenfolge der Elemente wird wie Murmeln in einer Röhre dargestellt: das zuerst geladene ist rechts, dann das zweite in der Mitte, dann das dritte links._
 
 Wenn wir zurück auf den Ausführungsmonitor schauen, hat er uns nur einen Unterverzeichnispfad gegeben (`f4/c9962c`).
 Lass uns dort hineinschauen.
@@ -504,6 +504,10 @@ Allerdings haben wir immer noch das Problem, dass es nur eine Ausgabedatei im Er
 
 Du erinnerst dich vielleicht, dass wir den Ausgabedateinamen für den `sayHello`-process fest codiert haben, sodass alle drei Aufrufe eine Datei namens `output.txt` produziert haben.
 
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-channels-task-dirs.svg"
+</figure>
+
 Solange die Ausgabedateien in den work-Unterverzeichnissen bleiben, isoliert von den anderen processes, ist das in Ordnung.
 Aber wenn sie in dasselbe Ergebnisverzeichnis veröffentlicht werden, wird die, die zuerst dort kopiert wurde, von der nächsten überschrieben, und so weiter.
 
@@ -513,14 +517,18 @@ Wir können weiterhin alle Ausgaben in dasselbe Ergebnisverzeichnis veröffentli
 Genauer gesagt müssen wir den ersten process so modifizieren, dass er einen Dateinamen dynamisch generiert, sodass die endgültigen Dateinamen eindeutig sein werden.
 
 Wie machen wir also die Dateinamen eindeutig?
-Ein gängiger Weg, das zu tun, ist, ein eindeutiges Stück Metadaten aus den Eingaben (die vom Eingabe-channel empfangen wurden) als Teil des Ausgabedateinamens zu verwenden.
+Ein gängiger Weg, das zu tun, ist, ein eindeutiges Stück Metadaten aus den Eingaben (die vom Eingabe-Kanal empfangen wurden) als Teil des Ausgabedateinamens zu verwenden.
 Hier werden wir der Einfachheit halber nur die Begrüßung selbst verwenden, da sie nur ein kurzer String ist, und sie dem Basis-Ausgabedateinamen voranstellen.
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-channel-multi-unique.svg"
+</figure>
 
 #### 2.2.1. Einen dynamischen Ausgabedateinamen konstruieren
 
 Nimm im process-Block die folgenden Codeänderungen vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-channels.nf" linenums="6" hl_lines="7 11"
     process sayHello {
@@ -624,13 +632,13 @@ Erfolg! Jetzt können wir so viele Begrüßungen hinzufügen, wie wir möchten, 
     Die Metadaten werden typischerweise über ein 'Sample Sheet' oder Äquivalente bereitgestellt.
     Du wirst später in deinem Nextflow-Training lernen, wie du das machst (siehe [Metadaten-Side Quest](../side_quests/metadata.md)).
 
-### Zusammenfassung
+### Fazit
 
-Du weißt, wie du mehrere Eingabeelemente durch einen channel führst.
+Du weißt, wie du mehrere Eingabeelemente durch einen Kanal führst.
 
-### Was kommt als Nächstes?
+### Wie geht es weiter?
 
-Lerne, einen Operator zu verwenden, um die Inhalte eines channels zu transformieren.
+Lerne, einen Operator zu verwenden, um die Inhalte eines Kanals zu transformieren.
 
 ---
 
@@ -643,7 +651,7 @@ Stell dir zum Beispiel vor, wir richten eine Eingabevariable ein, die ein Array 
 
 `greetings_array = ['Hello','Bonjour','Holà']`
 
-Können wir das in unseren Ausgabe-channel laden und erwarten, dass es funktioniert?
+Können wir das in unseren Ausgabe-Kanal laden und erwarten, dass es funktioniert?
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-multi-inputs-array.svg"
@@ -651,7 +659,7 @@ Können wir das in unseren Ausgabe-channel laden und erwarten, dass es funktioni
 
 Lass uns das herausfinden.
 
-### 3.1. Ein Array von Werten als Eingabe für den channel bereitstellen
+### 3.1. Ein Array von Werten als Eingabe für den Kanal bereitstellen
 
 Der gesunde Menschenverstand legt nahe, dass wir einfach ein Array von Werten anstelle eines einzelnen Wertes übergeben können sollten.
 Lass uns es versuchen; wir müssen die Eingabevariable einrichten und sie in die channel factory laden.
@@ -660,7 +668,7 @@ Lass uns es versuchen; wir müssen die Eingabevariable einrichten und sie in die
 
 Lass uns die `greetings_array`-Variable, die wir uns gerade vorgestellt haben, Realität werden lassen, indem wir sie zum workflow-Block hinzufügen:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-channels.nf" linenums="27" hl_lines="4 5"
     workflow {
@@ -668,7 +676,7 @@ Lass uns die `greetings_array`-Variable, die wir uns gerade vorgestellt haben, R
         main:
         // Ein Array von Eingabe-Begrüßungen deklarieren
         greetings_array = ['Hello','Bonjour','Holà']
-        // Einen Channel für Eingaben erstellen
+        // Einen Kanal für Eingaben erstellen
         greeting_ch = channel.of('Hello','Bonjour','Holà')
                              .view()
         // Eine Begrüßung ausgeben
@@ -685,7 +693,7 @@ Lass uns die `greetings_array`-Variable, die wir uns gerade vorgestellt haben, R
     workflow {
 
         main:
-        // Einen Channel für Eingaben erstellen
+        // Einen Kanal für Eingaben erstellen
         greeting_ch = channel.of('Hello','Bonjour','Holà')
                              .view()
         // Eine Begrüßung ausgeben
@@ -704,7 +712,7 @@ Jetzt werden wir die Werte `'Hello','Bonjour','Holà'`, die derzeit in der chann
 
 Nimm im workflow-Block die folgende Änderung vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-channels.nf" linenums="27" hl_lines="7"
     workflow {
@@ -712,7 +720,7 @@ Nimm im workflow-Block die folgende Änderung vor:
         main:
         // Ein Array von Eingabe-Begrüßungen deklarieren
         greetings_array = ['Hello','Bonjour','Holà']
-        // Einen Channel für Eingaben erstellen
+        // Einen Kanal für Eingaben erstellen
         greeting_ch = channel.of(greetings_array)
                              .view()
         // Eine Begrüßung ausgeben
@@ -731,7 +739,7 @@ Nimm im workflow-Block die folgende Änderung vor:
         main:
         // Ein Array von Eingabe-Begrüßungen deklarieren
         greetings_array = ['Hello','Bonjour','Holà']
-        // Einen Channel für Eingaben erstellen
+        // Einen Kanal für Eingaben erstellen
         greeting_ch = channel.of('Hello','Bonjour','Holà')
                              .view()
         // Eine Begrüßung ausgeben
@@ -792,24 +800,28 @@ Schau dir die Ausgabe von `view()` und die Fehlermeldungen an.
 
 Es sieht so aus, als hätte Nextflow versucht, einen einzelnen process-Aufruf auszuführen, wobei `[Hello, Bonjour, Holà]` als Stringwert verwendet wurde, anstatt die drei Strings im Array als separate Werte zu verwenden.
 
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-channels-array-fail.svg"
+</figure>
+
 Es ist also die 'Verpackung', die das Problem verursacht.
-Wie bringen wir Nextflow dazu, das Array zu entpacken und die einzelnen Strings in den channel zu laden?
+Wie bringen wir Nextflow dazu, das Array zu entpacken und die einzelnen Strings in den Kanal zu laden?
 
-### 3.2. Einen Operator verwenden, um channel-Inhalte zu transformieren
+### 3.2. Einen Operator verwenden, um Kanal-Inhalte zu transformieren
 
-Hier kommen **[Operatoren](https://www.nextflow.io/docs/latest/reference/operator.html)** ins Spiel.
+Hier kommen [**Operatoren**](https://www.nextflow.io/docs/latest/reference/operator.html) ins Spiel.
 Du hast bereits den `.view()`-Operator verwendet, der nur hineinschaut, was drin ist.
-Jetzt werden wir uns Operatoren ansehen, die es uns ermöglichen, auf die Inhalte eines channels einzuwirken.
+Jetzt werden wir uns Operatoren ansehen, die es uns ermöglichen, auf die Inhalte eines Kanals einzuwirken.
 
 Wenn du durch die [Liste der Operatoren](https://www.nextflow.io/docs/latest/reference/operator.html) in der Nextflow-Dokumentation blätterst, wirst du [`flatten()`](https://www.nextflow.io/docs/latest/reference/operator.html#flatten) finden, das genau das tut, was wir brauchen: den Inhalt eines Arrays entpacken und sie als einzelne Elemente ausgeben.
 
 #### 3.2.1. Den `flatten()`-Operator hinzufügen
 
-Um den `flatten()`-Operator auf unseren Eingabe-channel anzuwenden, hängen wir ihn an die channel factory-Deklaration an.
+Um den `flatten()`-Operator auf unseren Eingabe-Kanal anzuwenden, hängen wir ihn an die channel factory-Deklaration an.
 
 Nimm im workflow-Block die folgende Codeänderung vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-channels.nf" linenums="27" hl_lines="9"
     workflow {
@@ -817,7 +829,7 @@ Nimm im workflow-Block die folgende Codeänderung vor:
         main:
         // Ein Array von Eingabe-Begrüßungen deklarieren
         greetings_array = ['Hello','Bonjour','Holà']
-        // Einen Channel für Eingaben erstellen
+        // Einen Kanal für Eingaben erstellen
         greeting_ch = channel.of(greetings_array)
                              .view()
                              .flatten()
@@ -837,7 +849,7 @@ Nimm im workflow-Block die folgende Codeänderung vor:
         main:
         // Ein Array von Eingabe-Begrüßungen deklarieren
         greetings_array = ['Hello','Bonjour','Holà']
-        // Einen Channel für Eingaben erstellen
+        // Einen Kanal für Eingaben erstellen
         greeting_ch = channel.of(greetings_array)
                              .view()
         // Eine Begrüßung ausgeben
@@ -851,15 +863,19 @@ Nimm im workflow-Block die folgende Codeänderung vor:
 Hier haben wir den Operator für die Lesbarkeit in der nächsten Zeile hinzugefügt, aber du kannst Operatoren auch auf derselben Zeile wie die channel factory hinzufügen, wenn du möchtest, so:
 `greeting_ch = channel.of(greetings_array).view().flatten()`
 
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-channels-array-success.svg"
+</figure>
+
 #### 3.2.2. Die `view()`-Anweisung(en) verfeinern
 
-Wir könnten dies jetzt sofort ausführen, um zu testen, ob es funktioniert, aber während wir dabei sind, werden wir verfeinern, wie wir die channel-Inhalte inspizieren.
+Wir könnten dies jetzt sofort ausführen, um zu testen, ob es funktioniert, aber während wir dabei sind, werden wir verfeinern, wie wir die Kanal-Inhalte inspizieren.
 
 Wir wollen den Inhalt vor und nach der Anwendung des `flatten()`-Operators vergleichen können, also werden wir ein zweites hinzufügen, UND wir werden etwas Code hinzufügen, um sie in der Ausgabe deutlicher zu beschriften.
 
 Nimm im workflow-Block die folgende Codeänderung vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-channels.nf" linenums="27" hl_lines="8-10"
     workflow {
@@ -867,11 +883,11 @@ Nimm im workflow-Block die folgende Codeänderung vor:
         main:
         // Ein Array von Eingabe-Begrüßungen deklarieren
         greetings_array = ['Hello','Bonjour','Holà']
-        // Einen Channel für Eingaben erstellen
+        // Einen Kanal für Eingaben erstellen
         greeting_ch = channel.of(greetings_array)
-                             .view { greeting -> "Before flatten: $greeting" }
+                             .view { greeting -> "Vor flatten: $greeting" }
                              .flatten()
-                             .view { greeting -> "After flatten: $greeting" }
+                             .view { greeting -> "Nach flatten: $greeting" }
         // Eine Begrüßung ausgeben
         sayHello(greeting_ch)
 
@@ -888,7 +904,7 @@ Nimm im workflow-Block die folgende Codeänderung vor:
         main:
         // Ein Array von Eingabe-Begrüßungen deklarieren
         greetings_array = ['Hello','Bonjour','Holà']
-        // Einen Channel für Eingaben erstellen
+        // Einen Kanal für Eingaben erstellen
         greeting_ch = channel.of(greetings_array)
                              .view()
                              .flatten()
@@ -900,12 +916,12 @@ Nimm im workflow-Block die folgende Codeänderung vor:
     }
     ```
 
-Du siehst, wir haben eine zweite `.view`-Anweisung hinzugefügt, und für jede von ihnen haben wir die leeren Klammern (`()`) durch geschweifte Klammern mit etwas Code ersetzt, wie `{ greeting -> "Before flatten: $greeting" }`.
+Du siehst, wir haben eine zweite `.view`-Anweisung hinzugefügt, und für jede von ihnen haben wir die leeren Klammern (`()`) durch geschweifte Klammern mit etwas Code ersetzt, wie `{ greeting -> "Vor flatten: $greeting" }`.
 
-Diese werden _closures_ genannt. Der Code, den sie enthalten, wird für jedes Element im channel ausgeführt.
+Diese werden _closures_ genannt. Der Code, den sie enthalten, wird für jedes Element im Kanal ausgeführt.
 Wir definieren eine temporäre Variable für den inneren Wert, hier `greeting` genannt (aber es könnte ein beliebiger Name sein), die nur innerhalb des Gültigkeitsbereichs dieser closure verwendet wird.
 
-In diesem Beispiel repräsentiert `$greeting` jedes einzelne Element, das in den channel geladen wurde.
+In diesem Beispiel repräsentiert `$greeting` jedes einzelne Element, das in den Kanal geladen wurde.
 Dies führt zu sauber beschrifteter Konsolenausgabe.
 
 !!! info
@@ -933,16 +949,16 @@ nextflow run hello-channels.nf
 
     executor >  local (3)
     [b1/6a1e15] sayHello (2) [100%] 3 of 3 ✔
-    Before flatten: [Hello, Bonjour, Holà]
-    After flatten: Hello
-    After flatten: Bonjour
-    After flatten: Holà
+    Vor flatten: [Hello, Bonjour, Holà]
+    Nach flatten: Hello
+    Nach flatten: Bonjour
+    Nach flatten: Holà
     ```
 
-Diesmal funktioniert es UND gibt uns den zusätzlichen Einblick, wie die Inhalte des channels vor und nach der Ausführung des `flatten()`-Operators aussehen.
+Diesmal funktioniert es UND gibt uns den zusätzlichen Einblick, wie die Inhalte des Kanals vor und nach der Ausführung des `flatten()`-Operators aussehen.
 
-- Du siehst, dass wir eine einzelne `Before flatten:`-Anweisung bekommen, weil zu diesem Zeitpunkt der channel ein Element enthält, das ursprüngliche Array.
-  Dann bekommen wir drei separate `After flatten:`-Anweisungen, eine für jede Begrüßung, die jetzt einzelne Elemente im channel sind.
+- Eine einzelne `Vor flatten:`-Anweisung, weil zu diesem Zeitpunkt der Kanal ein Element enthält, das ursprüngliche Array.
+- Drei separate `Nach flatten:`-Anweisungen, eine für jede Begrüßung, die jetzt einzelne Elemente im Kanal sind.
 
 Wichtig ist, dass dies bedeutet, dass jedes Element jetzt separat vom Workflow verarbeitet werden kann.
 
@@ -951,11 +967,11 @@ Wichtig ist, dass dies bedeutet, dass jedes Element jetzt separat vom Workflow v
     Es ist technisch möglich, dieselben Ergebnisse zu erzielen, indem man eine andere channel factory verwendet, [`channel.fromList`](https://nextflow.io/docs/latest/reference/channel.html#fromlist), die einen impliziten Mapping-Schritt in ihrer Operation enthält.
     Hier haben wir uns entschieden, das nicht zu verwenden, um die Verwendung eines Operators an einem einfachen Anwendungsfall zu demonstrieren.
 
-### Zusammenfassung
+### Fazit
 
-Du weißt, wie du einen Operator wie `flatten()` verwendest, um die Inhalte eines channels zu transformieren, und wie du den `view()`-Operator verwendest, um channel-Inhalte vor und nach der Anwendung eines Operators zu inspizieren.
+Du weißt, wie du einen Operator wie `flatten()` verwendest, um die Inhalte eines Kanals zu transformieren, und wie du den `view()`-Operator verwendest, um Kanal-Inhalte vor und nach der Anwendung eines Operators zu inspizieren.
 
-### Was kommt als Nächstes?
+### Wie geht es weiter?
 
 Lerne, wie du den Workflow so einrichtest, dass er eine Datei als Quelle von Eingabewerten verwendet.
 
@@ -997,7 +1013,7 @@ Wir werden ihn aktualisieren, um auf die CSV-Datei zu zeigen, die unsere Begrü�
 
 Nimm die folgende Änderung an der Parameterdeklaration vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-channels.nf" linenums="20" hl_lines="5"
     /*
@@ -1023,21 +1039,21 @@ Wie du mit anderen Datenspeicherorten umgehst, lernst du in späteren Kursen.
 #### 4.1.2. Zu einer channel factory wechseln, die für das Handhaben einer Datei ausgelegt ist
 
 Da wir jetzt eine Datei anstelle von einfachen Strings als Eingabe verwenden wollen, können wir die `channel.of()` channel factory von vorher nicht verwenden.
-Wir müssen zu einer neuen channel factory wechseln, [`channel.fromPath()`](https://www.nextflow.io/docs/latest/reference/channel.html#channel-path), die einige eingebaute Funktionalitäten für das Handhaben von Dateipfaden hat.
+Wir müssen zu einer neuen channel factory wechseln, [`channel.fromPath()`](https://nextflow.io/docs/latest/reference/channel.html#frompath), die einige eingebaute Funktionalitäten für das Handhaben von Dateipfaden hat.
 
 Nimm im workflow-Block die folgende Codeänderung vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-channels.nf" linenums="27" hl_lines="4-8"
     workflow {
 
         main:
-        // Einen Channel für Eingaben aus einer CSV-Datei erstellen
+        // Einen Kanal für Eingaben aus einer CSV-Datei erstellen
         greeting_ch = channel.fromPath(params.input)
-                             .view { greeting -> "Before flatten: $greeting" }
+                             .view { greeting -> "Vor flatten: $greeting" }
                              // .flatten()
-                             // .view { greeting -> "After flatten: $greeting" }
+                             // .view { greeting -> "Nach flatten: $greeting" }
         // Eine Begrüßung ausgeben
         sayHello(greeting_ch)
 
@@ -1054,11 +1070,11 @@ Nimm im workflow-Block die folgende Codeänderung vor:
         main:
         // Ein Array von Eingabe-Begrüßungen deklarieren
         greetings_array = ['Hello','Bonjour','Holà']
-        // Einen Channel für Eingaben erstellen
+        // Einen Kanal für Eingaben erstellen
         greeting_ch = channel.of(greetings_array)
-                             .view { greeting -> "Before flatten: $greeting" }
+                             .view { greeting -> "Vor flatten: $greeting" }
                              .flatten()
-                             .view { greeting -> "After flatten: $greeting" }
+                             .view { greeting -> "Nach flatten: $greeting" }
         // Eine Begrüßung ausgeben
         sayHello(greeting_ch)
 
@@ -1067,7 +1083,7 @@ Nimm im workflow-Block die folgende Codeänderung vor:
     }
     ```
 
-Du wirst bemerken, dass wir die channel-Eingabe zurück zu `param.input` gewechselt und die `greetings_array`-Deklaration gelöscht haben, da wir sie nicht mehr brauchen werden.
+Du wirst bemerken, dass wir die Kanal-Eingabe zurück zu `param.input` gewechselt und die `greetings_array`-Deklaration gelöscht haben, da wir sie nicht mehr brauchen werden.
 Wir haben auch `flatten()` und die zweite `view()`-Anweisung auskommentiert.
 
 #### 4.1.3. Den Workflow ausführen
@@ -1086,7 +1102,7 @@ nextflow run hello-channels.nf
     Launching `hello-channels.nf` [peaceful_poisson] DSL2 - revision: a286c08ad5
 
     [-        ] sayHello [  0%] 0 of 1
-    Before flatten: /workspaces/training/hello-nextflow/data/greetings.csv
+    Vor flatten: /workspaces/training/hello-nextflow/data/greetings.csv
     ERROR ~ Error executing process > 'sayHello (1)'
 
     Caused by:
@@ -1118,31 +1134,31 @@ Das sieht vielleicht ein bisschen vertraut aus.
 Es sieht so aus, als hätte Nextflow versucht, einen einzelnen process-Aufruf auszuführen, wobei der Dateipfad selbst als Stringwert verwendet wurde.
 Also hat es den Dateipfad korrekt aufgelöst, aber es hat nicht wirklich seinen Inhalt geparst, was wir wollten.
 
-Wie bringen wir Nextflow dazu, die Datei zu öffnen und ihren Inhalt in den channel zu laden?
+Wie bringen wir Nextflow dazu, die Datei zu öffnen und ihren Inhalt in den Kanal zu laden?
 
 Klingt so, als bräuchten wir einen weiteren [Operator](https://www.nextflow.io/docs/latest/reference/operator.html)!
 
 ### 4.2. Den `splitCsv()`-Operator verwenden, um die Datei zu parsen
 
-Wenn wir wieder durch die Liste der Operatoren schauen, finden wir [`splitCsv()`](https://www.nextflow.io/docs/latest/reference/operator.html#splitCsv), das dafür ausgelegt ist, CSV-formatierten Text zu parsen und zu teilen.
+Wenn wir wieder durch die Liste der Operatoren schauen, finden wir [`splitCsv()`](https://www.nextflow.io/docs/latest/reference/operator.html#splitcsv), das dafür ausgelegt ist, CSV-formatierten Text zu parsen und zu teilen.
 
-#### 4.2.1. `splitCsv()` auf den channel anwenden
+#### 4.2.1. `splitCsv()` auf den Kanal anwenden
 
 Um den Operator anzuwenden, hängen wir ihn wie zuvor an die channel factory-Zeile an.
 
 Nimm im workflow-Block die folgende Codeänderung vor, um `flatten()` durch `splitcsv()` zu ersetzen (nicht auskommentiert):
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-channels.nf" linenums="27" hl_lines="6-8"
     workflow {
 
         main:
-        // Einen Channel für Eingaben aus einer CSV-Datei erstellen
+        // Einen Kanal für Eingaben aus einer CSV-Datei erstellen
         greeting_ch = channel.fromPath(params.input)
-                             .view { csv -> "Before splitCsv: $csv" }
+                             .view { csv -> "Vor splitCsv: $csv" }
                              .splitCsv()
-                             .view { csv -> "After splitCsv: $csv" }
+                             .view { csv -> "Nach splitCsv: $csv" }
         // Eine Begrüßung ausgeben
         sayHello(greeting_ch)
 
@@ -1157,11 +1173,11 @@ Nimm im workflow-Block die folgende Codeänderung vor, um `flatten()` durch `spl
     workflow {
 
         main:
-        // Einen Channel für Eingaben aus einer CSV-Datei erstellen
+        // Einen Kanal für Eingaben aus einer CSV-Datei erstellen
         greeting_ch = channel.fromPath(params.input)
-                             .view { greeting -> "Before flatten: $greeting" }
+                             .view { greeting -> "Vor flatten: $greeting" }
                              // .flatten()
-                             // .view { greeting -> "After flatten: $greeting" }
+                             // .view { greeting -> "Nach flatten: $greeting" }
         // Eine Begrüßung ausgeben
         sayHello(greeting_ch)
 
@@ -1190,10 +1206,10 @@ nextflow run hello-channels.nf
 
     executor >  local (3)
     [24/76da2f] sayHello (2) [  0%] 0 of 3 ✘
-    Before splitCsv: /workspaces/training/hello-nextflow/data/greetings.csv
-    After splitCsv: [Hello, English, 123]
-    After splitCsv: [Bonjour, French, 456]
-    After splitCsv: [Holà, Spanish, 789]
+    Vor splitCsv: /workspaces/training/hello-nextflow/data/greetings.csv
+    Nach splitCsv: [Hello, English, 123]
+    Nach splitCsv: [Bonjour, French, 456]
+    Nach splitCsv: [Holà, Spanish, 789]
     ERROR ~ Error executing process > 'sayHello (2)'
 
     Caused by:
@@ -1219,18 +1235,22 @@ nextflow run hello-channels.nf
     ```
 
 Interessanterweise schlägt dies auch fehl, aber mit einem anderen Fehler.
-Diesmal hat Nextflow den Inhalt der Datei geparst (juhu!), aber es hat jede Zeile als Array geladen, und jedes Array ist ein Element im channel.
+Diesmal hat Nextflow den Inhalt der Datei geparst (juhu!), aber es hat jede Zeile als Array geladen, und jedes Array ist ein Element im Kanal.
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-channels-split-fail.svg"
+</figure>
 
 Wir müssen ihm sagen, dass es nur die erste Spalte in jeder Zeile nehmen soll.
 Wie entpacken wir das also?
 
-Wir haben zuvor `flatten()` verwendet, um die Inhalte eines channels zu entpacken, aber das würde hier nicht funktionieren, weil flatten _alles_ entpackt (versuche es gerne, wenn du es selbst sehen möchtest).
+Wir haben zuvor `flatten()` verwendet, um die Inhalte eines Kanals zu entpacken, aber das würde hier nicht funktionieren, weil flatten _alles_ entpackt (versuche es gerne, wenn du es selbst sehen möchtest).
 
 Stattdessen werden wir einen anderen Operator namens `map()` verwenden, der wirklich nützlich ist und in Nextflow-Pipelines häufig vorkommt.
 
 ### 4.3. Den `map()`-Operator verwenden, um die Begrüßungen zu extrahieren
 
-Der [`map()`](https://www.nextflow.io/docs/latest/reference/operator.html#map)-Operator ist ein sehr praktisches kleines Werkzeug, das es uns ermöglicht, alle Arten von Mappings auf die Inhalte eines channels durchzuführen.
+Der [`map()`](https://www.nextflow.io/docs/latest/reference/operator.html#map)-Operator ist ein sehr praktisches kleines Werkzeug, das es uns ermöglicht, alle Arten von Mappings auf die Inhalte eines Kanals durchzuführen.
 
 In diesem Fall werden wir ihn verwenden, um das eine Element zu extrahieren, das wir aus jeder Zeile in unserer Datendatei wollen.
 So sieht die Syntax aus:
@@ -1239,27 +1259,27 @@ So sieht die Syntax aus:
 .map { row -> row[0] }
 ```
 
-Das bedeutet 'für jede Zeile im channel, nimm das 0. (erste) Element, das sie enthält'.
+Das bedeutet 'für jede Zeile im Kanal, nimm das 0. (erste) Element, das sie enthält'.
 
 Also wenden wir das auf unser CSV-Parsing an.
 
-#### 4.3.1. `map()` auf den channel anwenden
+#### 4.3.1. `map()` auf den Kanal anwenden
 
 Nimm im workflow-Block die folgende Codeänderung vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-channels.nf" linenums="27" hl_lines="9 10"
     workflow {
 
         main:
-        // Einen Channel für Eingaben aus einer CSV-Datei erstellen
+        // Einen Kanal für Eingaben aus einer CSV-Datei erstellen
         greeting_ch = channel.fromPath(params.input)
-                             .view { csv -> "Before splitCsv: $csv" }
+                             .view { csv -> "Vor splitCsv: $csv" }
                              .splitCsv()
-                             .view { csv -> "After splitCsv: $csv" }
+                             .view { csv -> "Nach splitCsv: $csv" }
                              .map { item -> item[0] }
-                             .view { csv -> "After map: $csv" }
+                             .view { csv -> "Nach map: $csv" }
         // Eine Begrüßung ausgeben
         sayHello(greeting_ch)
 
@@ -1274,11 +1294,11 @@ Nimm im workflow-Block die folgende Codeänderung vor:
     workflow {
 
         main:
-        // Einen Channel für Eingaben aus einer CSV-Datei erstellen
+        // Einen Kanal für Eingaben aus einer CSV-Datei erstellen
         greeting_ch = channel.fromPath(params.input)
-                             .view { csv -> "Before splitCsv: $csv" }
+                             .view { csv -> "Vor splitCsv: $csv" }
                              .splitCsv()
-                             .view { csv -> "After splitCsv: $csv" }
+                             .view { csv -> "Nach splitCsv: $csv" }
         // Eine Begrüßung ausgeben
         sayHello(greeting_ch)
 
@@ -1306,128 +1326,15 @@ nextflow run hello-channels.nf
 
     executor >  local (3)
     [54/6eebe3] sayHello (3) [100%] 3 of 3 ✔
-    Before splitCsv: /workspaces/training/hello-nextflow/data/greetings.csv
-    After splitCsv: [Hello, English, 123]
-    After splitCsv: [Bonjour, French, 456]
-    After splitCsv: [Holà, Spanish, 789]
-    After map: Hello
-    After map: Bonjour
-    After map: Holà
+    Vor splitCsv: /workspaces/training/hello-nextflow/data/greetings.csv
+    Nach splitCsv: [Hello, English, 123]
+    Nach splitCsv: [Bonjour, French, 456]
+    Nach splitCsv: [Holà, Spanish, 789]
+    Nach map: Hello
+    Nach map: Bonjour
+    Nach map: Holà
     ```
 
 Diesmal sollte es ohne Fehler laufen.
 
-Wenn du dir die Ausgabe der `view()`-Anweisungen anschaust, siehst du Folgendes:
-
-- Eine einzelne `Before splitCsv:`-Anweisung: zu diesem Zeitpunkt enthält der channel ein Element, den ursprünglichen Dateipfad.
-- Drei separate `After splitCsv:`-Anweisungen: eine für jede Begrüßung, aber jede ist in einem Array enthalten, das dieser Zeile in der Datei entspricht.
-- Drei separate `After map:`-Anweisungen: eine für jede Begrüßung, die jetzt einzelne Elemente im channel sind.
-
-Beachte, dass die Zeilen in deiner Ausgabe in einer anderen Reihenfolge erscheinen können.
-
-Du kannst auch die Ausgabedateien ansehen, um zu überprüfen, dass jede Begrüßung korrekt extrahiert und durch den Workflow verarbeitet wurde.
-
-Wir haben dasselbe Ergebnis wie zuvor erzielt, aber jetzt haben wir viel mehr Flexibilität, um weitere Elemente zum channel von Begrüßungen hinzuzufügen, die wir verarbeiten möchten, indem wir eine Eingabedatei modifizieren, ohne Code zu ändern.
-Du wirst in einem späteren Training anspruchsvollere Ansätze für das Handhaben komplexer Eingaben lernen.
-
-### Zusammenfassung
-
-Du weißt, wie du den `.fromPath()` channel-Konstruktor und die Operatoren `splitCsv()` und `map()` verwendest, um eine Datei mit Eingabewerten einzulesen und sie angemessen zu handhaben.
-
-Allgemeiner hast du ein grundlegendes Verständnis davon, wie Nextflow **channels** verwendet, um Eingaben für processes zu verwalten, und **Operatoren**, um ihre Inhalte zu transformieren.
-
-### Was kommt als Nächstes?
-
-Mach eine große Pause, du hast in diesem Teil hart gearbeitet!
-
-Wenn du bereit bist, gehe zu [**Teil 3: Hallo Workflow**](./03_hello_workflow.md), um zu lernen, wie du weitere Schritte hinzufügst und sie zu einem richtigen Workflow verbindest.
-
----
-
-## Quiz
-
-<quiz>
-Was ist ein channel in Nextflow?
-- [ ] Eine Dateipfadspezifikation
-- [ ] Eine process-Definition
-- [x] Eine warteschlangenartige Struktur zum Übergeben von Daten zwischen processes
-- [ ] Eine Konfigurationseinstellung
-
-Mehr erfahren: [1.1. Einen Eingabe-channel erstellen](#11-einen-eingabe-channel-erstellen)
-</quiz>
-
-<quiz>
-Was wird dieser Code ausgeben?
-
-```groovy
-channel.of('Hello', 'Bonjour', 'Hola')
-    .view()
-```
-
-- [ ] `['Hello', 'Bonjour', 'Hola']` (eine einzelne Liste)
-- [x] Jedes Element in einer separaten Zeile: `Hello`, `Bonjour`, `Hola`
-- [ ] Nichts (channels drucken standardmäßig nicht)
-- [ ] Einen Fehler (ungültige Syntax)
-
-Mehr erfahren: [1.1. Einen Eingabe-channel erstellen](#11-einen-eingabe-channel-erstellen)
-</quiz>
-
-<quiz>
-Wenn ein channel mehrere Werte enthält, wie handhabt Nextflow die process-Ausführung?
-- [ ] Der process läuft einmal mit allen Werten
-- [x] Der process läuft einmal für jeden Wert im channel
-- [ ] Der process läuft nur mit dem ersten Wert
-- [ ] Der process läuft nur mit dem letzten Wert
-
-Mehr erfahren: [2. Den Workflow so modifizieren, dass er mit mehreren Eingabewerten läuft](#2-den-workflow-so-modifizieren-dass-er-mit-mehreren-eingabewerten-lauft)
-</quiz>
-
-<quiz>
-Was macht der `flatten()`-Operator?
-- [ ] Kombiniert mehrere channels zu einem
-- [ ] Sortiert channel-Elemente
-- [x] Entpackt Arrays in einzelne Elemente
-- [ ] Entfernt doppelte Elemente
-
-Mehr erfahren: [3.2.1. Den `flatten()`-Operator hinzufügen](#321-den-flatten-operator-hinzufugen)
-</quiz>
-
-<quiz>
-Was ist der Zweck des `view()`-Operators?
-- [ ] Channel-Inhalte zu filtern
-- [ ] Channel-Elemente zu transformieren
-- [x] Channel-Inhalte zu inspizieren und zu debuggen
-- [ ] Channel-Inhalte in eine Datei zu speichern
-
-Mehr erfahren: [1.4. `view()` verwenden, um channel-Inhalte zu inspizieren](#14-view-verwenden-um-channel-inhalte-zu-inspizieren)
-</quiz>
-
-<quiz>
-Was macht `splitCsv()`?
-- [ ] Erstellt eine CSV-Datei aus channel-Inhalten
-- [ ] Teilt einen String durch Kommas
-- [x] Parst eine CSV-Datei in Arrays, die jede Zeile repräsentieren
-- [ ] Führt mehrere CSV-Dateien zusammen
-
-Mehr erfahren: [4.2. Den `splitCsv()`-Operator verwenden, um die Datei zu parsen](#42-den-splitcsv-operator-verwenden-um-die-datei-zu-parsen)
-</quiz>
-
-<quiz>
-Was ist der Zweck des `map()`-Operators?
-- [ ] Elemente aus einem channel zu filtern
-- [ ] Mehrere channels zu kombinieren
-- [x] Jedes Element in einem channel zu transformieren
-- [ ] Elemente in einem channel zu zählen
-
-Mehr erfahren: [4.3. Den `map()`-Operator verwenden, um die Begrüßungen zu extrahieren](#43-den-map-operator-verwenden-um-die-begrussungen-zu-extrahieren)
-</quiz>
-
-<quiz>
-Warum ist es wichtig, dynamische Ausgabedateinamen zu verwenden, wenn mehrere Eingaben verarbeitet werden?
-- [ ] Um die Leistung zu verbessern
-- [ ] Um Speicherplatz zu reduzieren
-- [x] Um zu verhindern, dass sich Ausgabedateien gegenseitig überschreiben
-- [ ] Um die resume-Funktionalität zu aktivieren
-
-Mehr erfahren: [2.2. Sicherstellen, dass die Ausgabedateinamen eindeutig sind](#22-sicherstellen-dass-die-ausgabedateinamen-eindeutig-sind)
-</quiz>
+Wenn du dir die Ausgabe der `view()`-Anweisungen anschaust, siehst

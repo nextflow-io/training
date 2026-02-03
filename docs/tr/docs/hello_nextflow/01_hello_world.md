@@ -124,7 +124,7 @@ Sonra çalıştırıp çıktılarını arayacağız.
     }
     ```
 
-Bir Nextflow iş akışı betiği genellikle bir veya daha fazla **process** tanımı ve **workflow**'un kendisini, ayrıca daha sonra tanıtacağımız birkaç isteğe bağlı blok (burada mevcut değil) içerir.
+Bir Nextflow iş akışı betiği genellikle bir veya daha fazla [**process**](https://nextflow.io/docs/latest/process.html) tanımı ve [**workflow**](https://nextflow.io/docs/latest/workflow.html)'un kendisini, ayrıca daha sonra tanıtacağımız birkaç isteğe bağlı blok (burada mevcut değil) içerir.
 
 Her **process**, iş akışındaki karşılık gelen adımın hangi işlem(ler)i gerçekleştirmesi gerektiğini açıklarken, **workflow** çeşitli adımları birbirine bağlayan veri akışı mantığını tanımlar.
 
@@ -795,9 +795,13 @@ Artık `sayHello()` süreci değişken girdi kabul etmeye hazır olduğuna göre
 ### 3.2. Kullanıcı girdisini yakalamak için komut satırı parametresi ayarlayın
 
 Girdiyi doğrudan süreç çağrısını `sayHello('Hello World!')` yaparak sabit kodlayabiliriz.
-Ancak, iş akışımızla gerçek iş yaptığımızda, girdilerini komut satırından kontrol edebilmek isteyeceğiz.
+Ancak, iş akışımızla gerçek iş yaptığımızda, girdilerini komut satırından kontrol edebilmek isteyeceğiz, böylece şöyle bir şey yapabiliriz:
 
-İyi haber: Nextflow'un `params` adlı yerleşik iş akışı parametre sistemi vardır ve bu, CLI parametrelerini bildirmeyi ve kullanmayı kolaylaştırır.
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello_world_input.svg"
+</figure>
+
+Neyse ki, Nextflow'un CLI parametrelerini bildirmeyi ve kullanmayı kolaylaştıran [`params`](https://nextflow.io/docs/latest/config.html#params) adlı yerleşik bir iş akışı parametre sistemi vardır.
 
 Genel söz dizimi, komut satırında bir `--<parametre_adı>` parametresi beklemek için `params.<parametre_adı>` bildirmektir.
 
@@ -855,10 +859,6 @@ Artık selamlamanın yeni sürümüne sahip olduğunuzdan emin olmak için çık
 
 Voilà!
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello_world_input.svg"
-</figure>
-
 Yeni yürütmenin `results` dizinine yayınlanan çıktı dosyasını nasıl üzerine yazdığına dikkat edin.
 Ancak, önceki çalıştırmaların sonuçları `work` altındaki görev dizinlerinde hâlâ korunmaktadır.
 
@@ -879,7 +879,7 @@ Tamam, bu uygundu, ancak birçok durumda, her çalıştırma için belirtmek zor
 
 ```groovy title="hello-world.nf" linenums="20"
 /*
- * Pipeline parametreleri
+ * İş akışı parametreleri
  */
 params {
     input: String = 'Holà mundo!'
@@ -976,13 +976,13 @@ Komut satırı parametresi aracılığıyla çalışma zamanında sağlanan basi
 
 İş akışlarını nasıl başlatacağınızı ve çıktıları nasıl alacağınızı bilmek harikadır, ancak özellikle kendi iş akışlarınızı geliştiriyorsanız, hayatınızı kolaylaştıracak iş akışı yönetiminin birkaç diğer yönü olduğunu çabucak göreceksiniz.
 
-Burada, aynı iş akışını yeniden başlatmanız gerektiğinde `resume` özelliğini nasıl kullanacağınızı, `nextflow log` ile geçmiş yürütmelerin günlüğünü nasıl inceleyeceğinizi ve `nextflow clean` ile eski work dizinlerini nasıl sileceğinizi gösteriyoruz.
+Burada, aynı iş akışını yeniden başlatmanız gerektiğinde [`-resume`](https://nextflow.io/docs/latest/cache-and-resume.html) özelliğini nasıl kullanacağınızı, [`nextflow log`](https://nextflow.io/docs/latest/reference/cli.html#log) ile geçmiş yürütmelerin günlüğünü nasıl inceleyeceğinizi ve [`nextflow clean`](https://nextflow.io/docs/latest/reference/cli.html#clean) ile eski work dizinlerini nasıl sileceğinizi gösteriyoruz.
 
 ### 4.1. `-resume` ile bir iş akışını yeniden başlatın
 
 Bazen, daha önce başlattığınız bir iş akışını, zaten başarıyla tamamlanmış adımları tekrarlamadan yeniden çalıştırmak isteyeceksiniz.
 
-Nextflow'un bunu yapmanızı sağlayan `-resume` adlı bir seçeneği vardır.
+Nextflow'un bunu yapmanızı sağlayan [`-resume`](https://nextflow.io/docs/latest/cache-and-resume.html) adlı bir seçeneği vardır.
 Özellikle, bu modda, zaten tam olarak aynı kod, ayarlar ve girdilerle çalıştırılmış olan tüm süreçler atlanacaktır.
 Bu, Nextflow'un yalnızca son çalıştırmadan bu yana eklediğiniz veya değiştirdiğiniz süreçleri veya yeni ayarlar veya girdiler sağladığınız süreçleri çalıştıracağı anlamına gelir.
 
@@ -1075,152 +1075,4 @@ Burada, çalıştırma adı kullanılarak belirtilen belirli bir çalıştırmad
 
 `-resume` kullanmadığınız en son başarılı çalıştırmaya bakın; bizim durumumuzda çalıştırma adı `golden_cantor` idi.
 
-Çalıştırma adı, `Launching (...)` konsol çıktı satırında köşeli parantez içinde gösterilen makine tarafından oluşturulan iki parçalı dizedir.
-Zaman damgası ve/veya komut satırına göre bir çalıştırmayı aramak için Nextflow günlüğünü de kullanabilirsiniz.
-
-#### 4.3.2. Kuru çalıştırma yapın
-
-Önce komut verildiğinde nelerin silineceğini kontrol etmek için kuru çalıştırma bayrağı `-n`'yi kullanıyoruz:
-
-```bash
-nextflow clean -before golden_cantor -n
-```
-
-??? success "Komut çıktısı"
-
-    ```console
-    Would remove /workspaces/training/hello-nextflow/work/a3/7be2fad5e71e5f49998f795677fd68
-    ```
-
-Çıktınız farklı görev dizini adlarına sahip olacak ve farklı sayıda satır olabilir, ancak örneğe benzer görünmelidir.
-
-Herhangi bir satır çıktısı görmüyorsanız, ya geçerli bir çalıştırma adı sağlamadınız ya da silinecek geçmiş çalıştırma yok. Örnek komuttaki `golden_cantor`'u günlüğünüzdeki karşılık gelen en son çalıştırma adına değiştirdiğinizden emin olun.
-
-#### 4.3.3. Silme işlemine devam edin
-
-Çıktı beklendiği gibi görünüyorsa ve silme işlemine devam etmek istiyorsanız, `-n` yerine `-f` bayrağıyla komutu yeniden çalıştırın:
-
-```bash
-nextflow clean -before golden_cantor -f
-```
-
-??? success "Komut çıktısı"
-
-    ```console
-    Removed /workspaces/training/hello-nextflow/work/a3/7be2fad5e71e5f49998f795677fd68
-    ```
-
-Çıktı daha öncekine benzer olmalı, ancak şimdi 'Would remove' yerine 'Removed' diyor.
-Bunun iki karakterlik alt dizinleri (yukarıdaki `a3/` gibi) kaldırmadığını, ancak içeriklerini boşalttığını unutmayın.
-
-!!! Warning "Uyarı"
-
-    Geçmiş çalıştırmalardan work alt dizinlerini silmek onları Nextflow'un önbelleğinden kaldırır ve bu dizinlerde depolanan tüm çıktıları siler.
-    Bu, Nextflow'un karşılık gelen süreçleri yeniden çalıştırmadan yürütmeyi sürdürme yeteneğini bozar.
-
-    Umursadığınız veya güvenmeyi planladığınız çıktıları kaydetmekten siz sorumlusunuz! Bu, `publish` yönergesi için `symlink` modu yerine `copy` modunu tercih etmemizin ana nedenidir.
-
-### Özet
-
-Çıktıları belirli bir dizine nasıl yayınlayacağınızı, zaten aynı şekilde çalıştırılmış adımları tekrarlamadan bir iş akışını nasıl yeniden başlatacağınızı ve eski work dizinlerini temizlemek için `nextflow clean` komutunu nasıl kullanacağınızı biliyorsunuz.
-
-Daha genel olarak, basit bir Nextflow iş akışını nasıl yorumlayacağınızı, yürütmesini nasıl yöneteceğinizi ve çıktıları nasıl alacağınızı biliyorsunuz.
-
-### Sırada ne var?
-
-Küçük bir mola verin, hak ettiniz!
-
-Hazır olduğunuzda, iş akışınıza girdileri beslemek için kanalları nasıl kullanacağınızı öğrenmek için [**Bölüm 2: Hello Channels**](./02_hello_channels.md)'a geçin; bu, Nextflow'un yerleşik veri akışı paralelliğinden ve diğer güçlü özelliklerden yararlanmanızı sağlayacaktır.
-
----
-
-## Quiz
-
-<quiz>
-Bir Nextflow sürecinin minimum gerekli bileşenleri nelerdir?
-- [ ] Yalnızca input ve output blokları
-- [x] Output ve script blokları
-- [ ] Input, output ve script blokları
-- [ ] Yalnızca script bloğu
-
-Daha fazla bilgi: [1.1.1. Süreç tanımı](#111-process-tanımı)
-</quiz>
-
-<quiz>
-Bir süreçteki output bloğunun amacı nedir?
-- [ ] Sonuçları konsola yazdırmak
-- [ ] Dosyaları work dizinine kaydetmek
-- [x] Süreçten beklenen çıktıları bildirmek
-- [ ] Ortam değişkenlerini tanımlamak
-
-Daha fazla bilgi: [1.1.1. Süreç tanımı](#111-process-tanımı)
-</quiz>
-
-<quiz>
-Bir Nextflow iş akışını çalıştırmak için hangi komut kullanılır?
-- [ ] `nextflow start`
-- [ ] `nextflow execute`
-- [x] `nextflow run`
-- [ ] `nextflow launch`
-</quiz>
-
-<quiz>
-Bir görevin work dizinine bakıldığında, hangi dosya gerçekte yürütülen komutu içerir?
-
-```
-work/a3/7be2fa.../
-├── .command.begin
-├── .command.err
-├── .command.log
-├── .command.out
-├── .command.run
-├── .command.sh
-├── .exitcode
-└── output.txt
-```
-
-- [ ] `.command.run`
-- [x] `.command.sh`
-- [ ] `.command.log`
-- [ ] `.command.out`
-
-Daha fazla bilgi: [1.2.2. `work` dizininde çıktıyı ve günlükleri bulun](#122-work-dizininde-çıktıyı-ve-günlükleri-bulun)
-</quiz>
-
-<quiz>
-`-resume` bayrağı ne yapar?
-- [ ] İş akışını baştan başlatır
-- [ ] İş akışını duraklatır
-- [x] Zaten başarıyla tamamlanmış süreçleri atlar
-- [ ] İş akışının yedeğini oluşturur
-
-Daha fazla bilgi: [4.1. `-resume` ile bir iş akışını yeniden başlatın](#41--resume-ile-bir-iş-akışını-yeniden-başlatın)
-</quiz>
-
-<quiz>
-İş akışı çıktılarını yayınlamak için varsayılan mod nedir?
-- [ ] Dosyaları çıktı dizinine kopyala
-- [x] Çıktı dizininde sembolik bağlantılar oluştur
-- [ ] Dosyaları çıktı dizinine taşı
-- [ ] Dosyaları çıktı dizininde sıkıştır
-
-Daha fazla bilgi: [2.3. Yayınlama modunu kopyalamaya ayarlayın](#23-yayınlama-modunu-kopyalamaya-ayarlayın)
-</quiz>
-
-<quiz>
-Komut satırından bir Nextflow iş akışına parametre değeri nasıl iletilir?
-- [ ] `-parameter değer`
-- [ ] `--parameter:değer`
-- [x] `--parameter değer`
-- [ ] `-p parameter=değer`
-
-Daha fazla bilgi: [3.2. Kullanıcı girdisini yakalamak için komut satırı parametresi ayarlayın](#32-kullanıcı-girdisini-yakalamak-için-komut-satırı-parametresi-ayarlayın)
-</quiz>
-
-<quiz>
-Nextflow script bloğu içinde bir değişkene nasıl başvurulur?
-- [ ] `%değişken%` söz dizimini kullan
-- [x] `#!groovy ${değişken}` söz dizimini kullan
-- [ ] `{{değişken}}` söz dizimini kullan
-- [ ] `[değişken]` söz dizimini kullan
-</quiz>
+Çalıştırma adı, `Launching

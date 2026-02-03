@@ -229,7 +229,7 @@ Auch hier musst du die Code-Syntax nicht auswendig lernen, aber es ist gut zu le
 
 Dies ist der interessanteste Teil: Wie haben wir von der Übernahme eines einzelnen Wertes von der Kommandozeile auf eine CSV-Datei umgestellt, sie geparst und die einzelnen Grüße verarbeitet, die sie enthält?
 
-In Nextflow machen wir das mit einem **channel**: einem Konstrukt, das entwickelt wurde, um Eingaben effizient zu handhaben und sie von einem Schritt zum nächsten in mehrstufigen Workflows zu transportieren, während es eingebaute Parallelität und viele zusätzliche Vorteile bietet.
+In Nextflow machen wir das mit einem [**channel**](https://nextflow.io/docs/latest/channel.html): einem Konstrukt, das entwickelt wurde, um Eingaben effizient zu handhaben und sie von einem Schritt zum nächsten in mehrstufigen Workflows zu transportieren, während es eingebaute Parallelität und viele zusätzliche Vorteile bietet.
 
 Lass es uns aufschlüsseln.
 
@@ -323,11 +323,11 @@ Dies ist eine Möglichkeit sicherzustellen, dass die Ausgabedateinamen nicht kol
 
 Und das ist die einzige Änderung, die wir innerhalb der process-Deklaration vornehmen mussten!
 
-### Zusammenfassung
+### Fazit
 
 Du verstehst auf einem grundlegenden Niveau, wie channels und Operatoren uns ermöglichen, mehrere Eingaben effizient zu verarbeiten.
 
-### Was kommt als Nächstes?
+### Wie geht es weiter?
 
 Entdecke, wie mehrstufige Workflows aufgebaut sind und wie sie funktionieren.
 
@@ -448,7 +448,7 @@ Schauen wir uns den Code an und identifizieren die Schlüsselmuster für mehrstu
     }
 
     /*
-    * Use a text replacement tool to convert the greeting to uppercase
+    * Verwende ein Textersetzungs-Tool, um den Gruß in Großbuchstaben umzuwandeln
     */
     process convertToUpper {
 
@@ -465,7 +465,7 @@ Schauen wir uns den Code an und identifizieren die Schlüsselmuster für mehrstu
     }
 
     /*
-    * Collect uppercase greetings into a single output file
+    * Großgeschriebene Grüße in einer einzigen Ausgabedatei sammeln
     */
     process collectGreetings {
 
@@ -618,21 +618,17 @@ Diesmal heißt der Operator `collect` und wird auf den Ausgabe-channel angewende
 
 Der `collect`-Operator wird verwendet, um die Ausgaben von mehreren Aufrufen desselben process zu sammeln und sie in ein einzelnes channel-Element zu verpacken.
 
-Im Kontext dieses Workflows nimmt er die drei großgeschriebenen Grüße im `convertToUpper.out` channel --die drei separate channel-Elemente sind und normalerweise in separaten Aufrufen vom nächsten process behandelt würden-- und verpackt sie in ein einzelnes Element.
-
-In praktischeren Begriffen: Wenn wir `collect()` nicht auf die Ausgabe von `convertToUpper()` anwenden würden, bevor wir sie an `collectGreetings()` füttern, würde Nextflow einfach `collectGreetings()` unabhängig auf jeden Gruß ausführen, was unser Ziel nicht erreichen würde.
-
-<figure class="excalidraw">
---8<-- "docs/en/docs/nextflow_run/img/without-collect-operator.svg"
-</figure>
-
-Im Gegensatz dazu erlaubt uns die Verwendung von `collect()`, alle separaten großgeschriebenen Grüße, die vom zweiten Schritt des Workflows produziert wurden, zu nehmen und sie alle zusammen einem einzigen Aufruf im dritten Schritt der Pipeline zuzuführen.
+Im Kontext dieses Workflows nimmt er die drei großgeschriebenen Grüße im `convertToUpper.out` channel (die drei separate channel-Elemente sind und normalerweise in separaten Aufrufen vom nächsten process behandelt würden) und verpackt sie in ein einzelnes Element.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/nextflow_run/img/with-collect-operator.svg"
 </figure>
 
-So bekommen wir alle Grüße zurück in dieselbe Datei.
+Im Gegensatz dazu, wenn wir `collect()` nicht auf die Ausgabe von `convertToUpper()` anwenden würden, bevor wir sie an `collectGreetings()` füttern, würde Nextflow einfach `collectGreetings()` unabhängig auf jeden Gruß ausführen, was unser Ziel nicht erreichen würde.
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/nextflow_run/img/without-collect-operator.svg"
+</figure>
 
 Es gibt viele andere [Operatoren](https://www.nextflow.io/docs/latest/reference/operator.html#operator-page), die verfügbar sind, um Transformationen auf den Inhalt von channels zwischen process-Aufrufen anzuwenden.
 
@@ -763,12 +759,12 @@ Es gibt anspruchsvollere Möglichkeiten, veröffentlichte Ausgaben zu organisier
 
     Für eine detaillierte Behandlung des Aufbaus mehrstufiger Workflows, siehe [Hello Nextflow Teil 3: Hello Workflow](../hello_nextflow/03_hello_workflow.md).
 
-### Zusammenfassung
+### Fazit
 
 Du verstehst auf einem grundlegenden Niveau, wie mehrstufige Workflows unter Verwendung von channels und Operatoren aufgebaut werden und wie sie funktionieren.
 Du hast auch gesehen, dass processes mehrere Eingaben nehmen und mehrere Ausgaben produzieren können, und dass diese auf strukturierte Weise veröffentlicht werden können.
 
-### Was kommt als Nächstes?
+### Wie geht es weiter?
 
 Lerne, wie Nextflow Pipelines modularisiert werden können, um Code-Wiederverwendung und Wartbarkeit zu fördern.
 
@@ -783,7 +779,7 @@ Das kann ihre Entwicklung und Wartung effizienter und nachhaltiger machen.
 
 Hier werden wir die häufigste Form der Code-Modularität in Nextflow demonstrieren, nämlich die Verwendung von **Modulen**.
 
-In Nextflow ist ein **Modul** eine einzelne process-Definition, die für sich allein in einer eigenständigen Code-Datei gekapselt ist.
+In Nextflow ist ein [**Modul**](https://nextflow.io/docs/latest/module.html) eine einzelne process-Definition, die für sich allein in einer eigenständigen Code-Datei gekapselt ist.
 Um ein Modul in einem Workflow zu verwenden, fügst du einfach eine einzeilige import-Anweisung zu deiner Workflow-Code-Datei hinzu; dann kannst du den process genauso in den Workflow integrieren, wie du es normalerweise tun würdest.
 Das macht es möglich, process-Definitionen in mehreren Workflows wiederzuverwenden, ohne mehrere Kopien des Codes zu erzeugen.
 
@@ -943,11 +939,11 @@ Nichts davon ist für Nextflow wichtig; was zählt, ist das Job-Script, das gene
 
     Du kannst mehr über die Entwicklung zusammensetzbarer Workflows in der Side Quest über [Workflows of Workflows](https://training.nextflow.io/latest/side_quests/workflows_of_workflows/) erfahren.
 
-### Zusammenfassung
+### Fazit
 
 Du weißt, wie processes in eigenständigen Modulen gespeichert werden können, um Code-Wiederverwendung zu fördern und die Wartbarkeit zu verbessern.
 
-### Was kommt als Nächstes?
+### Wie geht es weiter?
 
 Lerne, Container für die Verwaltung von Software-Abhängigkeiten zu verwenden.
 
@@ -967,7 +963,8 @@ Ein **Container** ist eine leichtgewichtige, eigenständige, ausführbare Einhei
 
 !!! tip "Tipp"
 
-    Wir vermitteln dies mit der Technologie [Docker](https://www.docker.com/get-started/), aber Nextflow unterstützt auch [mehrere andere Container-Technologien](https://www.nextflow.io/docs/latest/container.html#).
+    Wir vermitteln dies mit der Technologie [Docker](https://www.docker.com/get-started/), aber Nextflow unterstützt auch mehrere andere Container-Technologien.
+    Du kannst mehr über die Nextflow-Unterstützung für Container [hier](https://nextflow.io/docs/latest/container.html) erfahren.
 
 ### 4.1. Einen Container direkt verwenden
 
@@ -1148,7 +1145,7 @@ Wir müssen nur einen Container für jeden process angeben.
 Um zu demonstrieren, wie das funktioniert, haben wir eine weitere Version unseres Workflows erstellt, die `cowpy` auf der Datei mit den gesammelten Grüßen ausführt, die im dritten Schritt produziert wurde.
 
 <figure class="excalidraw">
---8<-- "docs/en/docs/nextflow_run/img/hello-pipeline-cowpy.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-cowpy.svg"
 </figure>
 
 Das sollte eine Datei ausgeben, die die ASCII-Kunst mit den drei Grüßen in der Sprechblase enthält.
@@ -1239,7 +1236,7 @@ Der `cowpy` process, der den cowpy-Befehl zum Generieren von ASCII-Kunst umhüll
     ```groovy title="modules/cowpy.nf" linenums="1"
     #!/usr/bin/env nextflow
 
-    // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
+    // ASCII-Kunst mit cowpy generieren (https://github.com/jeffbuttars/cowpy)
     process cowpy {
 
         container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
@@ -1260,157 +1257,4 @@ Der `cowpy` process, der den cowpy-Befehl zum Generieren von ASCII-Kunst umhüll
 
 Der `cowpy` process erfordert zwei Eingaben: den Pfad zu einer Eingabedatei, die den Text enthält, der in die Sprechblase kommt (`input_file`), und einen Wert für die character-Variable.
 
-Wichtig ist, dass er auch die Zeile `container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'` enthält, die auf die Container-URI verweist, die wir vorher verwendet haben.
-
-#### 4.2.2. Überprüfen, dass Docker in der Konfiguration aktiviert ist
-
-Wir werden Teil 3 dieses Trainingskurses etwas vorwegnehmen, indem wir die `nextflow.config` Konfigurationsdatei vorstellen, die eine der Hauptmöglichkeiten ist, die Nextflow bietet, um die Workflow-Ausführung zu konfigurieren.
-Wenn eine Datei namens `nextflow.config` im aktuellen Verzeichnis vorhanden ist, wird Nextflow sie automatisch laden und jede darin enthaltene Konfiguration anwenden.
-
-Zu diesem Zweck haben wir eine `nextflow.config`-Datei mit einer einzigen Codezeile eingefügt, die Docker aktiviert.
-
-```groovy title="nextflow.config" linenums="1"
-docker.enabled = true
-```
-
-Diese Konfiguration sagt Nextflow, Docker für jeden process zu verwenden, der einen kompatiblen Container angibt.
-
-!!! tip "Tipp"
-
-    Es ist technisch möglich, die Docker-Ausführung von der Kommandozeile aus zu aktivieren, auf Basis jeder Ausführung, unter Verwendung des Parameters `-with-docker <container>`.
-    Allerdings erlaubt uns das nur, einen Container für den gesamten Workflow anzugeben, während der Ansatz, den wir dir gerade gezeigt haben, es uns ermöglicht, einen anderen Container pro process anzugeben.
-    Letzteres ist viel besser für Modularität, Code-Wartung und Reproduzierbarkeit.
-
-#### 4.2.3. Den Workflow ausführen
-
-Nur zur Rekapitulation, das ist, was wir gleich ausführen werden:
-
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello_pipeline_complete.svg"
-</figure>
-
-Denkst du, es wird funktionieren?
-
-Lass uns den Workflow mit dem `-resume`-Flag ausführen und angeben, dass wir den Charakter als turkey haben wollen.
-
-```bash
-nextflow run 2d-container.nf --input data/greetings.csv --character turkey -resume
-```
-
-??? success "Befehlsausgabe"
-
-    ```console
-    N E X T F L O W   ~  version 25.10.2
-
-    Launching `2d-container.nf` [elegant_brattain] DSL2 - revision: 028a841db1
-
-    executor >  local (1)
-    [95/fa0bac] sayHello (3)       | 3 of 3, cached: 3 ✔
-    [92/32533f] convertToUpper (3) | 3 of 3, cached: 3 ✔
-    [aa/e697a2] collectGreetings   | 1 of 1, cached: 1 ✔
-    [7f/caf718] cowpy              | 1 of 1 ✔
-    ```
-
-Die ersten drei Schritte wurden aus dem cache geladen, da wir sie zuvor schon ausgeführt haben, aber der `cowpy` process ist neu, also wird der tatsächlich ausgeführt.
-
-Du kannst die Ausgabe des `cowpy`-Schritts im `results`-Verzeichnis finden.
-
-??? abstract "Dateiinhalte"
-
-    ```console title="results/2d-container/cowpy-COLLECTED-batch-output.txt"
-    _________
-    / HOLà    \
-    | HELLO   |
-    \ BONJOUR /
-    ---------
-      \                                  ,+*^^*+___+++_
-      \                           ,*^^^^              )
-        \                       _+*                     ^**+_
-        \                    +^       _ _++*+_+++_,         )
-                  _+^^*+_    (     ,+*^ ^          \+_        )
-                {       )  (    ,(    ,_+--+--,      ^)      ^\
-                { (\@)    } f   ,(  ,+-^ __*_*_  ^^\_   ^\       )
-              {:;-/    (_+*-+^^^^^+*+*<_ _++_)_    )    )      /
-              ( /  (    (        ,___    ^*+_+* )   <    <      \
-              U _/     )    *--<  ) ^\-----++__)   )    )       )
-                (      )  _(^)^^))  )  )\^^^^^))^*+/    /       /
-              (      /  (_))_^)) )  )  ))^^^^^))^^^)__/     +^^
-            (     ,/    (^))^))  )  ) ))^^^^^^^))^^)       _)
-              *+__+*       (_))^)  ) ) ))^^^^^^))^^^^^)____*^
-              \             \_)^)_)) ))^^^^^^^^^^))^^^^)
-              (_             ^\__^^^^^^^^^^^^))^^^^^^^)
-                ^\___            ^\__^^^^^^))^^^^^^^^)\\
-                      ^^^^^\uuu/^^\uuu/^^^^\^\^\^\^\^\^\^\
-                        ___) >____) >___   ^\_\_\_\_\_\_\)
-                        ^^^//\\_^^//\\_^       ^(\_\_\_\)
-                          ^^^ ^^ ^^^ ^
-    ```
-
-Du siehst, dass der Charakter alle Grüße sagt, da er auf der Datei mit den gesammelten großgeschriebenen Grüßen ausgeführt wurde.
-
-Noch wichtiger ist, dass wir das als Teil unserer Pipeline ausführen konnten, ohne eine richtige Installation von cowpy und all seinen Abhängigkeiten machen zu müssen.
-Und wir können jetzt die Pipeline mit Mitarbeitern teilen und sie auf ihrer Infrastruktur ausführen lassen, ohne dass sie etwas installieren müssen, abgesehen von Docker oder einer seiner Alternativen (wie Singularity/Apptainer), wie oben erwähnt.
-
-#### 4.2.4. Untersuchen, wie Nextflow die containerisierte Aufgabe gestartet hat
-
-Als abschließende Coda zu diesem Abschnitt, schauen wir uns das work-Unterverzeichnis für einen der `cowpy` process-Aufrufe an, um etwas mehr Einblick zu bekommen, wie Nextflow mit Containern unter der Haube arbeitet.
-
-Überprüfe die Ausgabe deines `nextflow run`-Befehls, um den Pfad zum work-Unterverzeichnis für den `cowpy` process zu finden.
-Wenn wir uns ansehen, was wir für den oben gezeigten Lauf bekommen haben, beginnt die Konsolen-Log-Zeile für den `cowpy` process mit `[7f/caf718]`.
-Das entspricht dem folgenden abgekürzten Verzeichnispfad: `work/7f/caf718`.
-
-In diesem Verzeichnis findest du die `.command.run`-Datei, die alle Befehle enthält, die Nextflow in deinem Namen im Verlauf der Pipeline-Ausführung ausgeführt hat.
-
-??? abstract "Dateiinhalte"
-
-    ```console title="work/7f/caf71890cce1667c094d880f4b6dcc/.command.run"
-    #!/bin/bash
-    ### ---
-    ### name: 'cowpy'
-    ### container: 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
-    ### outputs:
-    ### - 'cowpy-COLLECTED-batch-output.txt'
-    ### ...
-    set -e
-    set -u
-    NXF_DEBUG=${NXF_DEBUG:=0}; [[ $NXF_DEBUG > 1 ]] && set -x
-    NXF_ENTRY=${1:-nxf_main}
-
-
-    nxf_sleep() {
-      sleep $1 2>/dev/null || sleep 1;
-    }
-
-    nxf_date() {
-        local ts=$(date +%s%3N);
-        if [[ ${#ts} == 10 ]]; then echo ${ts}000
-        elif [[ $ts == *%3N ]]; then echo ${ts/\%3N/000}
-        elif [[ $ts == *3N ]]; then echo ${ts/3N/000}
-        elif [[ ${#ts} == 13 ]]; then echo $ts
-        else echo "Unexpected timestamp value: $ts"; exit 1
-        fi
-    }
-
-    nxf_env() {
-        echo '============= task environment ============='
-        env | sort | sed "s/\(.*\)AWS\(.*\)=\(.\{6\}\).*/\1AWS\2=\3xxxxxxxxxxxxx/"
-        echo '============= task output =================='
-    }
-
-    nxf_kill() {
-        declare -a children
-        while read P PP;do
-            children[$PP]+=" $P"
-        done < <(ps -e -o pid= -o ppid=)
-
-        kill_all() {
-    ...
-    ```
-
-### Zusammenfassung
-
-Du weißt, wie man Containern für die Verwaltung von Software-Abhängigkeiten in Nextflow Pipelines verwendet, und wie man sie sowohl direkt als auch innerhalb eines Workflows ausführt.
-
-### Was kommt als Nächstes?
-
-Lerne, wie du die Konfiguration deiner Workflow-Ausführungen anpassen kannst, um verschiedene Rechen-Plattformen zu unterstützen und die Reproduzierbarkeit deiner Analysen zu verbessern.
+Wichtig ist, dass er auch die Zeile `container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'` enthält, die auf die Container-URI ver

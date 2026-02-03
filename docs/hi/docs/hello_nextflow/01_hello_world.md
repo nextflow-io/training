@@ -124,7 +124,7 @@ echo 'Hello World!' > output.txt
     }
     ```
 
-एक Nextflow workflow script में आमतौर पर एक या अधिक **process** definitions और **workflow** itself शामिल होते हैं, साथ ही कुछ optional blocks (यहाँ मौजूद नहीं) जिन्हें हम बाद में introduce करेंगे।
+एक Nextflow workflow script में आमतौर पर एक या अधिक [**process**](https://nextflow.io/docs/latest/process.html) definitions और [**workflow**](https://nextflow.io/docs/latest/workflow.html) itself शामिल होते हैं, साथ ही कुछ optional blocks (यहाँ मौजूद नहीं) जिन्हें हम बाद में introduce करेंगे।
 
 प्रत्येक **process** describe करता है कि pipeline में corresponding step को क्या operation(s) accomplish करने चाहिए, जबकि **workflow** dataflow logic describe करता है जो विभिन्न steps को connect करता है।
 
@@ -392,7 +392,7 @@ Workflow को कुछ बार फिर से चलाने का try 
 यह जानबूझकर किया गया है; Nextflow इस directory का control में है और हमें इसके साथ interact नहीं करना चाहिए।
 हालाँकि, यह उन outputs को retrieve करने में असुविधाजनक बनाता है जिनकी हमें care है।
 
-सौभाग्य से, Nextflow [workflow-level output definitions](https://www.nextflow.io/docs/latest/workflow.html#workflow-outputs) का उपयोग करके outputs को एक designated directory में publish करने का एक तरीका प्रदान करता है।
+सौभाग्य से, Nextflow [workflow output definitions](https://nextflow.io/docs/latest/workflow.html#workflow-outputs) का उपयोग करके outputs को एक designated directory में publish करने का एक तरीका प्रदान करता है।
 
 ### 2.1. Basic usage
 
@@ -407,7 +407,7 @@ Workflow को कुछ बार फिर से चलाने का try 
 
 Workflow script file `hello-world.nf` में, code की निम्नलिखित lines जोड़ो:
 
-=== "After"
+=== "बाद में"
 
     ```groovy title="hello-world.nf" linenums="17" hl_lines="7-8"
     workflow {
@@ -421,7 +421,7 @@ Workflow script file `hello-world.nf` में, code की निम्नल�
     }
     ```
 
-=== "Before"
+=== "पहले"
 
     ```groovy title="hello-world.nf" linenums="17"
     workflow {
@@ -440,7 +440,7 @@ Workflow script file `hello-world.nf` में, code की निम्नल�
 
 Workflow script file `hello-world.nf` में, code की निम्नलिखित lines जोड़ो:
 
-=== "After"
+=== "बाद में"
 
     ```groovy title="hello-world.nf" linenums="17" hl_lines="11-15"
     workflow {
@@ -460,7 +460,7 @@ Workflow script file `hello-world.nf` में, code की निम्नल�
     }
     ```
 
-=== "Before"
+=== "पहले"
 
     ```groovy title="hello-world.nf" linenums="17"
     workflow {
@@ -543,7 +543,7 @@ Default location होना great है, लेकिन तुम customize 
 एक बार फिर, specific output के लिए publish behavior modify करना वास्तव में straightforward है।
 Custom location set करने के लिए, बस `path` को accordingly edit करो:
 
-=== "After"
+=== "बाद में"
 
     ```groovy title="hello-world.nf" linenums="27" hl_lines="3"
     output {
@@ -553,7 +553,7 @@ Custom location set करने के लिए, बस `path` को accordin
     }
     ```
 
-=== "Before"
+=== "पहले"
 
     ```groovy title="hello-world.nf" linenums="27" hl_lines="3"
     output {
@@ -621,7 +621,7 @@ Default रूप से, outputs `work` directory से symbolic links के 
 यह bit वास्तव में straightforward है।
 बस relevant workflow-level output definition में `mode 'copy'` जोड़ो:
 
-=== "After"
+=== "बाद में"
 
     ```groovy title="hello-world.nf" linenums="27" hl_lines="4"
     output {
@@ -632,7 +632,7 @@ Default रूप से, outputs `work` directory से symbolic links के 
     }
     ```
 
-=== "Before"
+=== "पहले"
 
     ```groovy title="hello-world.nf" linenums="27"
     output {
@@ -737,7 +737,7 @@ process sayHello {
 
 Process block में, निम्नलिखित code change करो:
 
-=== "After"
+=== "बाद में"
 
     ```groovy title="hello-world.nf" linenums="6" hl_lines="3-4"
     process sayHello {
@@ -749,7 +749,7 @@ Process block में, निम्नलिखित code change करो:
         path 'output.txt'
     ```
 
-=== "Before"
+=== "पहले"
 
     ```groovy title="hello-world.nf" linenums="6"
     process sayHello {
@@ -766,7 +766,7 @@ Process block में, निम्नलिखित code change करो:
 
 Process block में, निम्नलिखित code change करो:
 
-=== "After"
+=== "बाद में"
 
     ```groovy title="hello-world.nf" linenums="14" hl_lines="3"
     script:
@@ -775,7 +775,7 @@ Process block में, निम्नलिखित code change करो:
     """
     ```
 
-=== "Before"
+=== "पहले"
 
     ```groovy title="hello-world.nf" linenums="14" hl_lines="3"
     script:
@@ -795,9 +795,13 @@ Process block में, निम्नलिखित code change करो:
 ### 3.2. User input capture करने के लिए command-line parameter set up करें
 
 हम simply एक input को directly hardcode कर सकते हैं process call `sayHello('Hello World!')` बनाकर।
-हालाँकि, जब हम अपने workflow के साथ real work कर रहे होते हैं, तो हम command line से इसके inputs को control करने में सक्षम होना चाहेंगे।
+हालाँकि, जब हम अपने workflow के साथ real work कर रहे होते हैं, तो हम command line से इसके inputs को control करने में सक्षम होना चाहेंगे, ताकि हम कुछ ऐसा कर सकें:
 
-अच्छी खबर: Nextflow में `params` नामक एक built-in workflow parameter system है, जो CLI parameters को declare और use करना आसान बनाता है।
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello_world_input.svg"
+</figure>
+
+सौभाग्य से, Nextflow में [`params`](https://nextflow.io/docs/latest/config.html#params) नामक एक built-in workflow parameter system है, जो CLI parameters को declare और use करना आसान बनाता है।
 
 General syntax है `params.<parameter_name>` declare करना Nextflow को बताने के लिए कि command line पर एक `--<parameter_name>` parameter expect करें।
 
@@ -806,14 +810,14 @@ General syntax है `params.<parameter_name>` declare करना Nextflow �
 
 Workflow block में, निम्नलिखित code change करो:
 
-=== "After"
+=== "बाद में"
 
     ```groovy title="hello-world.nf" linenums="23" hl_lines="2"
     // एक अभिवादन emit करें
     sayHello(params.input)
     ```
 
-=== "Before"
+=== "पहले"
 
     ```groovy title="hello-world.nf" linenums="23" hl_lines="2"
     // एक अभिवादन emit करें
@@ -854,10 +858,6 @@ nextflow run hello-world.nf --input 'Bonjour le monde!'
     ```
 
 Voilà!
-
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello_world_input.svg"
-</figure>
 
 Note करो कि new execution ने `results` directory में publish की गई output file को overwrite कर दिया है।
 हालाँकि, previous runs के results अभी भी `work` के तहत task directories में preserved हैं।
@@ -976,13 +976,13 @@ nextflow run hello-world.nf --input 'Konnichiwa!'
 
 Workflows launch करना और outputs retrieve करना जानना great है, लेकिन तुम जल्दी ही पाओगे कि workflow management के कुछ अन्य aspects हैं जो तुम्हारी life आसान बना देंगे, खासकर यदि तुम अपने खुद के workflows develop कर रहे हो।
 
-यहाँ हम तुम्हें दिखाते हैं कि जब तुम्हें same workflow re-launch करना हो तो `resume` feature कैसे use करें, `nextflow log` के साथ past executions का log कैसे inspect करें, और `nextflow clean` के साथ older work directories कैसे delete करें।
+यहाँ हम तुम्हें दिखाते हैं कि जब तुम्हें same workflow re-launch करना हो तो [`-resume`](https://nextflow.io/docs/latest/cache-and-resume.html) feature कैसे use करें, [`nextflow log`](https://nextflow.io/docs/latest/reference/cli.html#log) के साथ past executions का log कैसे inspect करें, और [`nextflow clean`](https://nextflow.io/docs/latest/reference/cli.html#clean) के साथ older work directories कैसे delete करें।
 
 ### 4.1. `-resume` के साथ workflow re-launch करें
 
 कभी-कभी, तुम एक pipeline को re-run करना चाहोगे जो तुम पहले launch कर चुके हो बिना उन steps को redo किए जो पहले से successfully complete हो चुके हैं।
 
-Nextflow में `-resume` नामक एक option है जो तुम्हें ऐसा करने की अनुमति देता है।
+Nextflow में [`-resume`](https://nextflow.io/docs/latest/cache-and-resume.html) नामक एक option है जो तुम्हें ऐसा करने की अनुमति देता है।
 Specifically, इस mode में, कोई भी processes जो पहले से exact same code, settings और inputs के साथ run हो चुके हैं, skip हो जाएंगे।
 इसका मतलब है Nextflow केवल वे processes run करेगा जो तुमने last run के बाद से add या modify किए हैं, या जिन्हें तुम new settings या inputs provide कर रहे हो।
 
@@ -1069,7 +1069,7 @@ Development process के दौरान, तुम typically अपनी dra
 
 #### 4.3.1. Deletion criteria determine करें
 
-यह determine करने के लिए कई [options](https://www.nextflow.io/docs/latest/reference/cli.html#clean) हैं कि क्या delete करना है।
+यह determine करने के लिए कई [options](https://nextflow.io/docs/latest/reference/cli.html#clean) हैं कि क्या delete करना है।
 
 यहाँ हम तुम्हें एक example दिखाते हैं जो given run से पहले के runs की सभी subdirectories delete करता है, इसके run name का उपयोग करके specified।
 
@@ -1089,138 +1089,4 @@ nextflow clean -before golden_cantor -n
 ??? success "Command output"
 
     ```console
-    Would remove /workspaces/training/hello-nextflow/work/a3/7be2fad5e71e5f49998f795677fd68
-    ```
-
-तुम्हारे output में different task directory names होंगे और lines की different number हो सकती है, लेकिन यह example के समान दिखना चाहिए।
-
-यदि तुम कोई lines output नहीं देखते, तो या तो तुमने valid run name provide नहीं किया या delete करने के लिए कोई past runs नहीं हैं। Example command में `golden_cantor` को तुम्हारे log में जो भी corresponding latest run name है उसमें change करना sure करो।
-
-#### 4.3.3. Deletion के साथ proceed करें
-
-यदि output expected दिखता है और तुम deletion के साथ proceed करना चाहते हो, तो `-n` के बजाय `-f` flag के साथ command re-run करो:
-
-```bash
-nextflow clean -before golden_cantor -f
-```
-
-??? success "Command output"
-
-    ```console
-    Removed /workspaces/training/hello-nextflow/work/a3/7be2fad5e71e5f49998f795677fd68
-    ```
-
-Output पहले जैसा similar होना चाहिए, लेकिन अब 'Would remove' के बजाय 'Removed' कह रहा है।
-Note करो कि यह two-character subdirectories (जैसे ऊपर `a3/`) को remove नहीं करता लेकिन यह उनकी contents को empty कर देता है।
-
-!!! warning "चेतावनी"
-
-    Past runs की work subdirectories delete करना उन्हें Nextflow के cache से remove करता है और उन directories में stored किसी भी outputs को delete करता है।
-    इसका मतलब है कि यह corresponding processes को re-run किए बिना execution resume करने की Nextflow की ability break करता है।
-
-    तुम किसी भी outputs को save करने के लिए responsible हो जिनकी तुम care करते हो या जिन पर rely करने की plan है! यही main reason है कि हम `publish` directive के लिए `symlink` mode के बजाय `copy` mode use करना prefer करते हैं।
-
-### सीख
-
-तुम जानते हो कि outputs को एक specific directory में कैसे publish करें, पहले से identical way में run हो चुके steps को repeat किए बिना pipeline कैसे relaunch करें, और old work directories को clean up करने के लिए `nextflow clean` command कैसे use करें।
-
-अधिक generally, तुम जानते हो कि एक simple Nextflow workflow को कैसे interpret करें, इसके execution को manage करें, और outputs retrieve करें।
-
-### आगे क्या?
-
-थोड़ा break लो, तुमने इसे earn किया है!
-
-जब तुम ready हो, तो [**Part 2: Hello Channels**](./02_hello_channels.md) पर move करो यह सीखने के लिए कि अपने workflow में inputs feed करने के लिए channels कैसे use करें, जो तुम्हें Nextflow के built-in dataflow parallelism और अन्य powerful features का लाभ उठाने की अनुमति देगा।
-
----
-
-## Quiz
-
-<quiz>
-Nextflow process के minimum required components क्या हैं?
-- [ ] केवल Input और output blocks
-- [x] Output और script blocks
-- [ ] Input, output, और script blocks
-- [ ] केवल एक script block
-
-और जानें: [1.1.1. The process definition](#111-the-process-definition)
-</quiz>
-
-<quiz>
-Process में output block का purpose क्या है?
-- [ ] Console पर results print करना
-- [ ] Files को work directory में save करना
-- [x] Process से expected outputs declare करना
-- [ ] Environment variables define करना
-
-और जानें: [1.1.1. The process definition](#111-the-process-definition)
-</quiz>
-
-<quiz>
-Nextflow workflow run करने के लिए कौन सा command use होता है?
-- [ ] `nextflow start`
-- [ ] `nextflow execute`
-- [x] `nextflow run`
-- [ ] `nextflow launch`
-</quiz>
-
-<quiz>
-Task की work directory देखते हुए, कौन सी file वह actual command contain करती है जो execute हुई थी?
-
-```
-work/a3/7be2fa.../
-├── .command.begin
-├── .command.err
-├── .command.log
-├── .command.out
-├── .command.run
-├── .command.sh
-├── .exitcode
-└── output.txt
-```
-
-- [ ] `.command.run`
-- [x] `.command.sh`
-- [ ] `.command.log`
-- [ ] `.command.out`
-
-और जानें: [1.2.2. Find the output and logs in the `work` directory](#122-find-the-output-and-logs-in-the-work-directory)
-</quiz>
-
-<quiz>
-`-resume` flag क्या करता है?
-- [ ] Workflow को beginning से restart करता है
-- [ ] Workflow को pause करता है
-- [x] उन processes को skip करता है जो पहले से successfully complete हो चुके हैं
-- [ ] Workflow का backup बनाता है
-
-और जानें: [4.1. Re-launch a workflow with `-resume`](#41-re-launch-a-workflow-with--resume)
-</quiz>
-
-<quiz>
-Workflow outputs publish करने के लिए default mode क्या है?
-- [ ] Files को output directory में copy करना
-- [x] Output directory में symbolic links बनाना
-- [ ] Files को output directory में move करना
-- [ ] Output directory में files compress करना
-
-और जानें: [2.3. Set the publish mode to copy](#23-set-the-publish-mode-to-copy)
-</quiz>
-
-<quiz>
-Command line से Nextflow workflow को parameter value कैसे pass करते हो?
-- [ ] `-parameter value`
-- [ ] `--parameter:value`
-- [x] `--parameter value`
-- [ ] `-p parameter=value`
-
-और जानें: [3.2. Set up a command-line parameter to capture user input](#32-set-up-a-command-line-parameter-to-capture-user-input)
-</quiz>
-
-<quiz>
-Nextflow script block के अंदर variable कैसे reference करते हो?
-- [ ] `%variable%` syntax use करें
-- [x] `#!groovy ${variable}` syntax use करें
-- [ ] `{{variable}}` syntax use करें
-- [ ] `[variable]` syntax use करें
-</quiz>
+    Would remove /workspaces/training/hello-nextflow/work/a3/7be2fad5e71e5f49998f795677

@@ -5,7 +5,7 @@
 W Części 1 tego kursu (Podstawowe operacje) zaczęliśmy od przykładowego workflow'u, który miał tylko minimalne funkcje, aby utrzymać niską złożoność kodu.
 Na przykład `1-hello.nf` używał parametru wiersza poleceń (`--input`) do przekazywania pojedynczej wartości na raz.
 
-Jednak większość rzeczywistych pipeline'ów wykorzystuje bardziej zaawansowane funkcje, aby umożliwić efektywną obróbkę dużych ilości danych na skalę i stosowanie wielu kroków transformacji połączonych czasami złożoną logiką.
+Jednak większość rzeczywistych pipeline'ów wykorzystuje bardziej zaawansowane funkcje, aby umożliwić efektywne przetwarzanie dużych ilości danych na skalę i stosowanie wielu kroków transformacji połączonych czasami złożoną logiką.
 
 W tej części szkolenia demonstrujemy kluczowe funkcje rzeczywistych pipeline'ów, wypróbowując rozszerzone wersje oryginalnego pipeline'u Hello World.
 
@@ -208,7 +208,7 @@ Przyjrzyjmy się, co to umożliwia w kodzie workflow'u.
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
-        // wyemituj pozdrowienie
+        // wyemituj powitanie
         sayHello(greeting_ch)
 
         publish:
@@ -229,8 +229,7 @@ Ponownie, nie musisz zapamiętywać składni kodu, ale dobrze jest nauczyć się
 
 To jest najciekawsza część: jak przeszliśmy od pobierania pojedynczej wartości z wiersza poleceń do wczytywania pliku CSV, parsowania go i obsługi zawartych w nim pojedynczych powitań?
 
-W Nextflow robimy to za pomocą **kanału**.
-Jest to konstrukcja zaprojektowana do efektywnego zarządzania danymi wejściowymi i przekazywania ich z jednego kroku do drugiego w wieloetapowych workflow'ach, zapewniając jednocześnie wbudowaną równoległość i wiele dodatkowych korzyści.
+W Nextflow robimy to za pomocą [**kanału**](https://nextflow.io/docs/latest/channel.html): konstrukcji zaprojektowanej do efektywnego zarządzania danymi wejściowymi i przekazywania ich z jednego kroku do drugiego w wieloetapowych workflow'ach, zapewniając jednocześnie wbudowaną równoległość i wiele dodatkowych korzyści.
 
 Rozłóżmy to na czynniki.
 
@@ -240,7 +239,7 @@ Rozłóżmy to na czynniki.
     greeting_ch = channel.fromPath(params.input)
                         .splitCsv()
                         .map { line -> line[0] }
-    // wyemituj pozdrowienie
+    // wyemituj powitanie
     sayHello(greeting_ch)
 ```
 
@@ -279,7 +278,7 @@ Wynikiem jest kanał zawierający `Hello`, `Bonjour` i `Holà`.
 
     Jeśli chcesz zrozumieć kanały i operatory dogłębnie, w tym jak je samodzielnie pisać, zobacz [Hello Nextflow Część 2: Hello Channels](../hello_nextflow/02_hello_channels.md#4-read-input-values-from-a-csv-file).
 
-#### 1.4.2. Wywołaj process na każdym powitaniu
+#### 1.4.2. Wywołaj proces na każdym powitaniu
 
 Następnie, w ostatniej linii bloku `main:` workflow'u, przekazujemy załadowany kanał `greeting_ch` jako dane wejściowe do procesu `sayHello()`.
 
@@ -289,7 +288,7 @@ Następnie, w ostatniej linii bloku `main:` workflow'u, przekazujemy załadowany
     greeting_ch = channel.fromPath(params.input)
                         .splitCsv()
                         .map { line -> line[0] }
-    // wyemituj pozdrowienie
+    // wyemituj powitanie
     sayHello(greeting_ch)
 ```
 
@@ -449,7 +448,7 @@ Przyjrzyjmy się kodowi i zidentyfikujmy kluczowe wzorce dla wieloetapowych work
     }
 
     /*
-    * Użyj narzędzia zamiany tekstu do przekształcenia pozdrowienia na wielkie litery
+    * Użyj narzędzia zamiany tekstu do przekształcenia powitania na wielkie litery
     */
     process convertToUpper {
 
@@ -466,7 +465,7 @@ Przyjrzyjmy się kodowi i zidentyfikujmy kluczowe wzorce dla wieloetapowych work
     }
 
     /*
-    * Zbierz pozdrowienia pisane wielkimi literami do jednego pliku wyjściowego
+    * Zbierz powitania pisane wielkimi literami do jednego pliku wyjściowego
     */
     process collectGreetings {
 
@@ -501,11 +500,11 @@ Przyjrzyjmy się kodowi i zidentyfikujmy kluczowe wzorce dla wieloetapowych work
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
-        // wyemituj pozdrowienie
+        // wyemituj powitanie
         sayHello(greeting_ch)
-        // przekształć pozdrowienie na wielkie litery
+        // przekształć powitanie na wielkie litery
         convertToUpper(sayHello.out)
-        // zbierz wszystkie pozdrowienia do jednego pliku
+        // zbierz wszystkie powitania do jednego pliku
         collectGreetings(convertToUpper.out.collect(), params.batch)
 
         publish:
@@ -566,11 +565,11 @@ Naprawdę interesującą rzeczą do przyjrzenia się jest to, jak wywołania pro
     greeting_ch = channel.fromPath(params.input)
                         .splitCsv()
                         .map { line -> line[0] }
-    // wyemituj pozdrowienie
+    // wyemituj powitanie
     sayHello(greeting_ch)
-    // przekształć pozdrowienie na wielkie litery
+    // przekształć powitanie na wielkie litery
     convertToUpper(sayHello.out)
-    // zbierz wszystkie pozdrowienia do jednego pliku
+    // zbierz wszystkie powitania do jednego pliku
     collectGreetings(convertToUpper.out.collect(), params.batch)
 ```
 
@@ -585,7 +584,7 @@ W ten sposób przekazujemy dane z jednego kroku do następnego w Nextflow.
 Trzecie wywołanie procesu, do `collectGreetings`, jest nieco inne.
 
 ```groovy title="2b-multistep.nf" linenums="77"
-    // zbierz wszystkie pozdrowienia do jednego pliku
+    // zbierz wszystkie powitania do jednego pliku
     collectGreetings(convertToUpper.out.collect(), params.batch)
 ```
 
@@ -621,21 +620,19 @@ Operator `collect` służy do agregowania wyjść z wielu wywołań tego samego 
 
 W kontekście tego workflow'u pobiera trzy powitania wielkimi literami z `convertToUpper.out` --które są trzema oddzielnymi elementami i normalnie byłyby obsługiwane w oddzielnych wykonaniach przez następny proces-- i łączy je w jeden element.
 
-Bardziej praktycznie: gdybyśmy nie zastosowali `collect()` do wyjścia `convertToUpper()` przed przekazaniem go do `collectGreetings()`, Nextflow po prostu uruchomiłby `collectGreetings()` niezależnie na każdym powitaniu, co nie osiągnęłoby naszego celu.
-
-<figure class="excalidraw">
---8<-- "docs/en/docs/nextflow_run/img/without-collect-operator.svg"
-</figure>
-
-W przeciwieństwie do tego, użycie `collect()` pozwala nam wziąć wszystkie oddzielne powitania wielkimi literami wyprodukowane przez drugi krok workflow'u i przekazać je wszystkie razem do jednego wywołania w trzecim kroku pipeline'u.
+W ten sposób otrzymujemy wszystkie powitania z powrotem do tego samego pliku.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/nextflow_run/img/with-collect-operator.svg"
 </figure>
 
-W ten sposób otrzymujemy wszystkie powitania z powrotem do tego samego pliku.
+W przeciwieństwie do tego, gdybyśmy nie zastosowali `collect()` do wyjścia `convertToUpper()` przed przekazaniem go do `collectGreetings()`, Nextflow po prostu uruchomiłby `collectGreetings()` niezależnie na każdym powitaniu, co nie osiągnęłoby naszego celu.
 
-Jest wiele innych [operatorów](https://www.nextflow.io/docs/latest/reference/operator.html#operator-page) dostępnych do stosowania transformacji na zawartości kanału między wywołaniami procesów.
+<figure class="excalidraw">
+--8<-- "docs/en/docs/nextflow_run/img/without-collect-operator.svg"
+</figure>
+
+Jest wiele innych [operatorów](https://nextflow.io/docs/latest/reference/operator.html) dostępnych do stosowania transformacji na zawartości kanału między wywołaniami procesów.
 
 To daje twórcom pipeline'ów dużo elastyczności w dostosowywaniu logiki przepływu ich pipeline'u.
 Wadą jest to, że czasami może to utrudnić rozszyfrowanie tego, co pipeline robi.
@@ -645,7 +642,7 @@ Wadą jest to, że czasami może to utrudnić rozszyfrowanie tego, co pipeline r
 Być może zauważyłeś, że `collectGreetings` przyjmuje drugie wejście, `params.batch`:
 
 ```groovy title="2b-multistep.nf" linenums="77"
-    // zbierz wszystkie pozdrowienia do jednego pliku
+    // zbierz wszystkie powitania do jednego pliku
     collectGreetings(convertToUpper.out.collect(), params.batch)
 ```
 
@@ -784,9 +781,9 @@ To może uczynić ich rozwój i konserwację bardziej efektywnymi i zrównoważo
 
 Tutaj zademonstrujemy najpopularniejszą formę modułowości w Nextflow, czyli użycie **modułów**.
 
-W Nextflow **moduł** to pojedyncza definicja procesu zamknięta w samodzielnym pliku.
-Aby go użyć w workflow'ie, wystarczy dodać jednoliniową instrukcję importu do głównego pliku; następnie można zintegrować funkcjonalność w normalny sposób.
-To umożliwia ponowne wykorzystanie definicji w wielu pipeline'ach bez tworzenia wielu kopii.
+W Nextflow [**moduł**](https://nextflow.io/docs/latest/module.html) to pojedyncza definicja procesu zamknięta w samodzielnym pliku kodu.
+Aby go użyć w workflow'ie, wystarczy dodać jednoliniową instrukcję importu do głównego pliku kodu workflow; następnie można zintegrować proces w normalny sposób.
+To umożliwia ponowne wykorzystanie definicji procesu w wielu pipeline'ach bez tworzenia wielu kopii kodu.
 
 Do tej pory uruchamialiśmy workflow'y, które miały wszystkie swoje procesy zawarte w monolitycznym pliku kodu.
 Teraz zobaczymy, jak to wygląda, gdy procesy są przechowywane w indywidualnych modułach.
@@ -840,11 +837,11 @@ Zacznij od otwarcia pliku workflow `2c-modules.nf`.
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
-        // wyemituj pozdrowienie
+        // wyemituj powitanie
         sayHello(greeting_ch)
-        // przekształć pozdrowienie na wielkie litery
+        // przekształć powitanie na wielkie litery
         convertToUpper(sayHello.out)
-        // zbierz wszystkie pozdrowienia do jednego pliku
+        // zbierz wszystkie powitania do jednego pliku
         collectGreetings(convertToUpper.out.collect(), params.batch)
 
         publish:
@@ -966,9 +963,10 @@ Znacznie lepszym sposobem rozwiązania tego problemu jest użycie **kontenerów*
 
 **Kontener** to lekka, samodzielna, wykonywalna jednostka oprogramowania utworzona z **obrazu** kontenera, która zawiera wszystko, co potrzebne do uruchomienia aplikacji, w tym kod, biblioteki systemowe i ustawienia.
 
-!!! tip "Wskazówka"
+!!! Tip "Wskazówka"
 
-    Uczymy tego przy użyciu technologii [Docker](https://www.docker.com/get-started/), ale Nextflow obsługuje również [kilka innych technologii kontenerowych](https://www.nextflow.io/docs/latest/container.html#).
+    Uczymy tego przy użyciu technologii [Docker](https://www.docker.com/get-started/), ale Nextflow obsługuje również kilka innych technologii kontenerowych.
+    Możesz dowiedzieć się więcej o obsłudze kontenerów w Nextflow [tutaj](https://nextflow.io/docs/latest/container.html).
 
 ### 4.1. Użyj kontenera bezpośrednio
 
@@ -1027,8 +1025,7 @@ Po zakończeniu pobierania masz lokalną kopię obrazu kontenera.
 
 #### 4.1.2. Uruchom kontener
 
-Kontenery można uruchamiać jako jednorazowe polecenie.
-Można ich również używać interaktywnie, co daje Ci wiersz poleceń wewnątrz kontenera i pozwala eksperymentować.
+Kontenery można uruchamiać jako jednorazowe polecenie, ale można ich również używać interaktywnie, co daje Ci wiersz poleceń wewnątrz kontenera i pozwala eksperymentować z poleceniem.
 
 Ogólna składnia jest następująca:
 
@@ -1061,7 +1058,7 @@ ls /
 
 Widzisz, że system plików wewnątrz kontenera jest inny niż system plików na Twoim systemie hosta.
 
-!!! tip "Wskazówka"
+!!! Tip "Wskazówka"
 
     Gdy uruchamiasz kontener, jest on domyślnie odizolowany od systemu hosta.
     To oznacza, że kontener nie może uzyskać dostępu do żadnych plików w systemie hosta, chyba że wyraźnie na to pozwolisz, określając, że chcesz zamontować wolumin jako część polecenia `docker run` używając następującej składni:
@@ -1142,8 +1139,7 @@ Znajdziesz się z powrotem w normalnej powłoce.
 
 ### 4.2. Użyj kontenera w workflow
 
-Gdy uruchamiamy pipeline, chcemy wskazać Nextflow, jakiego obrazu użyć w każdym kroku.
-Co ważne, oczekujemy też, że automatycznie obsłuży całą tę pracę: pobierze obraz, uruchomi instancję, wykona polecenie i usunie ją po zakończeniu.
+Gdy uruchamiamy pipeline, chcemy wskazać Nextflow, jakiego obrazu użyć w każdym kroku, a co ważne, oczekujemy, że automatycznie obsłuży całą tę pracę, którą właśnie wykonaliśmy: pobierze obraz, uruchomi instancję, wykona polecenie i usunie ją po zakończeniu.
 
 Dobra wiadomość: to dokładnie to, co Nextflow zrobi za nas.
 Musimy tylko określić kontener dla każdego procesu.
@@ -1151,7 +1147,7 @@ Musimy tylko określić kontener dla każdego procesu.
 Aby zademonstrować, jak to działa, stworzyliśmy kolejną wersję naszego workflow'u, która uruchamia `cowpy` na pliku zebranych powitań wyprodukowanych w trzecim kroku.
 
 <figure class="excalidraw">
---8<-- "docs/en/docs/nextflow_run/img/hello-pipeline-cowpy.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-cowpy.svg"
 </figure>
 
 To powinno wyprodukować plik zawierający grafikę ASCII z trzema powitaniami w dymku mowy.
@@ -1187,11 +1183,11 @@ Workflow jest bardzo podobny do poprzedniego, plus dodatkowy krok do uruchomieni
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
-        // wyemituj pozdrowienie
+        // wyemituj powitanie
         sayHello(greeting_ch)
-        // przekształć pozdrowienie na wielkie litery
+        // przekształć powitanie na wielkie litery
         convertToUpper(sayHello.out)
-        // zbierz wszystkie pozdrowienia do jednego pliku
+        // zbierz wszystkie powitania do jednego pliku
         collectGreetings(convertToUpper.out.collect(), params.batch)
         // wygeneruj grafikę ASCII powitań za pomocą cowpy
         cowpy(collectGreetings.out.outfile, params.character)
@@ -1270,118 +1266,4 @@ Co ważne, zawiera również linię `container 'community.wave.seqera.io/library
 Trochę wyprzedzimy Część 3 tego kursu szkoleniowego, wprowadzając plik konfiguracyjny `nextflow.config`, który jest jednym z głównych sposobów, jakie Nextflow oferuje do konfigurowania wykonywania workflow'u.
 Gdy plik o nazwie `nextflow.config` jest obecny w bieżącym katalogu, Nextflow automatycznie go załaduje i zastosuje zawartą w nim konfigurację.
 
-W tym celu dołączyliśmy plik `nextflow.config` z pojedynczą linią kodu, która włącza Docker.
-
-```groovy title="nextflow.config" linenums="1"
-docker.enabled = true
-```
-
-Ta konfiguracja mówi Nextflow, aby używał Docker dla każdego procesu, który określa kompatybilny kontener.
-
-!!! tip "Wskazówka"
-
-    Technicznie możliwe jest włączenie wykonywania Docker z wiersza poleceń, na podstawie pojedynczego uruchomienia, używając parametru `-with-docker <container>`.
-    Jednak to pozwala nam określić tylko jeden kontener dla całego workflow'u, podczas gdy podejście, które właśnie pokazaliśmy, pozwala nam określić inny kontener dla każdego procesu.
-    To drugie jest znacznie lepsze dla modułowości, konserwacji kodu i odtwarzalności.
-
-#### 4.2.3. Uruchom workflow
-
-Podsumowując, oto co zamierzamy uruchomić:
-
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello_pipeline_complete.svg"
-</figure>
-
-Myślisz, że zadziała?
-
-Uruchommy workflow z flagą `-resume` i określmy, że chcemy, aby postacią był indyk.
-
-```bash
-nextflow run 2d-container.nf --input data/greetings.csv --character turkey -resume
-```
-
-??? success "Wyjście polecenia"
-
-    ```console
-    N E X T F L O W   ~  version 25.10.2
-
-    Launching `2d-container.nf` [elegant_brattain] DSL2 - revision: 028a841db1
-
-    executor >  local (1)
-    [95/fa0bac] sayHello (3)       | 3 of 3, cached: 3 ✔
-    [92/32533f] convertToUpper (3) | 3 of 3, cached: 3 ✔
-    [aa/e697a2] collectGreetings   | 1 of 1, cached: 1 ✔
-    [7f/caf718] cowpy              | 1 of 1 ✔
-    ```
-
-Pierwsze trzy kroki użyły pamięci podręcznej, ponieważ już je wcześniej uruchomiliśmy, ale proces `cowpy` jest nowy, więc faktycznie zostaje uruchomiony.
-
-Możesz znaleźć wyjście kroku `cowpy` w katalogu `results`.
-
-??? abstract "Zawartość pliku"
-
-    ```console title="results/2d-container/cowpy-COLLECTED-batch-output.txt"
-    _________
-    / HOLà    \
-    | HELLO   |
-    \ BONJOUR /
-    ---------
-      \                                  ,+*^^*+___+++_
-      \                           ,*^^^^              )
-        \                       _+*                     ^**+_
-        \                    +^       _ _++*+_+++_,         )
-                  _+^^*+_    (     ,+*^ ^          \+_        )
-                {       )  (    ,(    ,_+--+--,      ^)      ^\
-                { (\@)    } f   ,(  ,+-^ __*_*_  ^^\_   ^\       )
-              {:;-/    (_+*-+^^^^^+*+*<_ _++_)_    )    )      /
-              ( /  (    (        ,___    ^*+_+* )   <    <      \
-              U _/     )    *--<  ) ^\-----++__)   )    )       )
-                (      )  _(^)^^))  )  )\^^^^^))^*+/    /       /
-              (      /  (_))_^)) )  )  ))^^^^^))^^^)__/     +^^
-            (     ,/    (^))^))  )  ) ))^^^^^^^))^^)       _)
-              *+__+*       (_))^)  ) ) ))^^^^^^))^^^^^)____*^
-              \             \_)^)_)) ))^^^^^^^^^^))^^^^)
-              (_             ^\__^^^^^^^^^^^^))^^^^^^^)
-                ^\___            ^\__^^^^^^))^^^^^^^^)\\
-                      ^^^^^\uuu/^^\uuu/^^^^\^\^\^\^\^\^\^\
-                        ___) >____) >___   ^\_\_\_\_\_\_\)
-                        ^^^//\\_^^//\\_^       ^(\_\_\_\)
-                          ^^^ ^^ ^^^ ^
-    ```
-
-Widzisz, że postać mówi wszystkie powitania, ponieważ uruchomiła się na pliku zebranych powitań wielkimi literami.
-
-Co ważniejsze, mogliśmy to uruchomić jako część naszego pipeline bez konieczności prawidłowej instalacji cowpy i wszystkich jego zależności.
-I teraz możemy udostępnić pipeline współpracownikom i sprawić, że uruchomią go na swojej infrastrukturze bez konieczności instalowania czegokolwiek, poza Docker lub jedną z jego alternatyw (taką jak Singularity/Apptainer) jak wspomniano powyżej.
-
-#### 4.2.4. Sprawdź, jak Nextflow uruchomił konteneryzowane zadanie
-
-Na zakończenie tej sekcji przyjrzyjmy się podkatalogowi roboczemu dla jednego z wywołań process `cowpy`, aby uzyskać nieco więcej wglądu w to, jak Nextflow pracuje z kontenerami pod maską.
-
-Sprawdź wyjście z polecenia `nextflow run`, aby znaleźć ścieżkę do podkatalogu roboczego dla process `cowpy`.
-Patrząc na to, co otrzymaliśmy dla uruchomienia pokazanego powyżej, linia dziennika konsoli dla process `cowpy` zaczyna się od `[7f/caf718]`.
-To odpowiada następującej skróconej ścieżce katalogu: `work/7f/caf718`.
-
-W tym katalogu znajdziesz plik `.command.run`, który zawiera wszystkie polecenia, które Nextflow uruchomił w Twoim imieniu w trakcie wykonywania pipeline.
-
-??? abstract "Zawartość pliku"
-
-    ```console title="work/7f/caf71890cce1667c094d880f4b6dcc/.command.run"
-    #!/bin/bash
-    ### ---
-    ### name: 'cowpy'
-    ### container: 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
-    ### outputs:
-    ### - 'cowpy-COLLECTED-batch-output.txt'
-    ### ...
-    ```
-
-Są tam polecenia `docker`, które Nextflow składa na podstawie URI obrazu kontenera podanego w definicji process, a także innych ustawień, które możemy określić za pomocą konfiguracji. Domyślnie Nextflow montuje katalog roboczy wewnątrz kontenera, co sprawia, że wszystkie pliki wejściowe i wyjściowe są dostępne bez dodatkowych czynności z naszej strony. Całkiem sprytne!
-
-### Podsumowanie
-
-Wiesz, jak określić kontener dla process i jak Nextflow obsługuje go pod maską, aby uczynić Twój kod przenośnym i odtwarzalnym.
-
-### Co dalej?
-
-W następnej części kursu dowiesz się, jak dostosować konfigurację workflow do swoich preferencji i środowiska obliczeniowego.
+W tym celu dołączyliśmy plik `nextflow.config` z pojedynczą linią kodu, która włąc

@@ -21,7 +21,7 @@ Cela vous enseignera la méthode Nextflow pour accomplir les tâches suivantes :
 
 1. Faire circuler les données d'un processus à l'autre
 2. Collecter les sorties de plusieurs appels de processus dans un seul appel de processus
-3. Passer plus d'une entrée à un processus
+3. Passer des paramètres supplémentaires à un processus
 4. Gérer plusieurs sorties provenant d'un processus
 
 Pour illustrer, nous continuerons à construire sur l'exemple Hello World indépendant du domaine des Parties 1 et 2.
@@ -51,6 +51,14 @@ output {
     }
 }
 ```
+
+Ce diagramme résume le fonctionnement actuel du workflow.
+Il devrait vous sembler familier, sauf que maintenant nous montrons explicitement que les sorties du processus sont empaquetées dans un canal, tout comme les entrées.
+Nous allons utiliser ce canal de sortie sous peu.
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-workflow-channels.svg"
+</figure>
 
 Juste pour s'assurer que tout fonctionne, exécutez le script une fois avant d'effectuer des modifications :
 
@@ -202,8 +210,14 @@ Ceci n'est pas encore fonctionnel car nous n'avons pas spécifié ce qui doit ê
 
 Maintenant, nous devons faire en sorte que la sortie du processus `sayHello()` circule vers le processus `convertToUpper()`.
 
-De manière pratique, Nextflow empaquette automatiquement la sortie d'un processus dans un canal appelé `<process>.out`.
+De manière pratique, Nextflow empaquette automatiquement la sortie d'un processus dans un canal, comme le montre le diagramme de la section échauffement.
+Nous pouvons faire référence au canal de sortie d'un processus avec `<process>.out`.
+
 Ainsi, la sortie du processus `sayHello` est un canal appelé `sayHello.out`, que nous pouvons brancher directement dans l'appel à `convertToUpper()`.
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-multistep-connector.svg"
+</figure>
 
 Dans le bloc workflow, effectuez la modification de code suivante :
 
@@ -493,6 +507,11 @@ En théorie, cela devrait gérer n'importe quel nombre arbitraire de fichiers d'
 ### 2.3. Ajouter l'étape de collecte au workflow
 
 Maintenant, nous devrions juste avoir besoin d'appeler le processus de collecte sur la sortie de l'étape de mise en majuscules.
+C'est aussi un canal, appelé `convertToUpper.out`.
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect-connector.svg"
+</figure>
 
 #### 2.3.1. Connecter les appels de processus
 
@@ -554,6 +573,10 @@ Maintenant, regardez le contenu du fichier de sortie final.
     ```
 
 Oh non. L'étape de collecte a été exécutée individuellement sur chaque message de bienvenue, ce qui N'EST PAS ce que nous voulions.
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect-no-operator.svg"
+</figure>
 
 Nous devons faire quelque chose pour dire explicitement à Nextflow que nous voulons que cette troisième étape s'exécute sur tous les éléments du canal sorti par `convertToUpper()`.
 
@@ -641,13 +664,18 @@ nextflow run hello-workflow.nf -resume
 Il s'exécute avec succès, bien que la sortie du journal puisse sembler un peu plus désordonnée que ceci (nous l'avons nettoyée pour la lisibilité).
 
 Cette fois, la troisième étape n'a été appelée qu'une seule fois !
-
 En regardant la sortie des instructions `view()`, nous voyons ce qui suit :
 
 - Trois instructions `Before collect:`, une pour chaque message de bienvenue : à ce stade, les chemins de fichiers sont des éléments individuels dans le canal.
 - Une seule instruction `After collect:` : les trois chemins de fichiers sont maintenant empaquetés dans un seul élément.
 
-Regardez le contenu du fichier de sortie final.
+Nous pouvons résumer cela avec le diagramme suivant :
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect-WITH-operator.svg"
+</figure>
+
+Enfin, vous pouvez regarder le contenu du fichier de sortie pour vous assurer que tout a fonctionné correctement.
 
 ??? abstract "Contenu du fichier"
 
@@ -692,20 +720,30 @@ C'est essentiellement l'opération inverse du point 2.4.2.
 
 Vous savez comment collecter les sorties d'un lot d'appels de processus et les alimenter dans une étape d'analyse ou de sommation conjointe.
 
+Pour récapituler, voici ce que vous avez construit jusqu'à présent :
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect.svg"
+</figure>
+
 ### Et ensuite ?
 
 Apprenez à passer plus d'une entrée à un processus.
 
 ---
 
-## 3. Passer plus d'une entrée à un processus
+## 3. Passer des paramètres supplémentaires à un processus
 
 Nous voulons pouvoir nommer le fichier de sortie final avec un nom spécifique afin de traiter des lots ultérieurs de messages de bienvenue sans écraser les résultats finaux.
 
 Pour ce faire, nous allons apporter les améliorations suivantes au workflow :
 
-- Modifier le processus collecteur pour accepter un nom défini par l'utilisateur pour le fichier de sortie
-- Ajouter un paramètre de ligne de commande au workflow et le passer au processus collecteur
+- Modifier le processus collecteur pour accepter un nom défini par l'utilisateur pour le fichier de sortie (`batch_name`)
+- Ajouter un paramètre de ligne de commande au workflow (`--batch`) et le passer au processus collecteur
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect-batch.svg"
+</figure>
 
 ### 3.1. Modifier le processus collecteur
 
@@ -889,8 +927,6 @@ Toutes d'excellentes questions, et la réponse courte est oui, nous le pouvons !
 Les sorties multiples seront empaquetées dans des canaux séparés.
 Nous pouvons soit choisir de donner des noms à ces canaux de sortie, ce qui facilite la référence individuelle plus tard, soit nous y référer par index.
 
-Explorons avec un exemple.
-
 À des fins de démonstration, disons que nous voulons compter le nombre de messages de bienvenue qui sont collectés pour un lot donné d'entrées et le rapporter dans un fichier.
 
 ### 4.1. Modifier le processus pour compter et sortir le nombre de messages de bienvenue
@@ -966,6 +1002,10 @@ Maintenant que nous avons deux sorties provenant du processus `collectGreetings`
 
 - `collectGreetings.out.outfile` contient le fichier de sortie final
 - `collectGreetings.out.report` contient le fichier de rapport
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect-report.svg"
+</figure>
 
 Nous devons mettre à jour les sorties du workflow en conséquence.
 
@@ -1076,6 +1116,10 @@ Ouvrez-le pour vérifier que le workflow a correctement rapporté le nombre de m
     There were 3 greetings in this batch.
     ```
 
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect-4-way.svg"
+</figure>
+
 N'hésitez pas à ajouter plus de messages de bienvenue au CSV et tester ce qui se passe.
 
 ### À retenir
@@ -1170,5 +1214,5 @@ Lors de la fourniture de plusieurs entrées à un processus, qu'est-ce qui doit 
 - [x] L'ordre des entrées doit correspondre à l'ordre défini dans le bloc d'entrée
 - [ ] Seules deux entrées peuvent être fournies à la fois
 
-En savoir plus : [3. Passer plus d'une entrée à un processus](#3-passer-plus-dune-entree-a-un-processus)
+En savoir plus : [3. Passer des paramètres supplémentaires à un processus](#3-passer-des-parametres-supplementaires-a-un-processus)
 </quiz>

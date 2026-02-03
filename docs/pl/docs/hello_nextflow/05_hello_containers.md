@@ -14,7 +14,7 @@
 ///
 -->
 
-W Częściach 1-4 tego kursu nauczyłeś się używać podstawowych elementów budulcowych Nextflow do składania prostego workflow zdolnego do przetwarzania tekstu, równoległego wykonywania wielu wejść i zbierania wyników do dalszego przetwarzania.
+W Częściach 1-4 tego kursu nauczyłeś się, jak używać podstawowych elementów budulcowych Nextflow do składania prostego workflow zdolnego do przetwarzania tekstu, równoległego wykonywania wielu wejść i zbierania wyników do dalszego przetwarzania.
 
 Jednak byłeś ograniczony do podstawowych narzędzi UNIX dostępnych w Twoim środowisku.
 Rzeczywiste zadania często wymagają różnych narzędzi i pakietów, które nie są domyślnie dołączone.
@@ -22,8 +22,8 @@ Zazwyczaj musiałbyś zainstalować te narzędzia, zarządzać ich zależnościa
 
 To wszystko jest bardzo nużące i irytujące, więc pokażemy Ci, jak używać **kontenerów**, aby rozwiązać ten problem znacznie wygodniej.
 
-**Kontener** to lekka, samodzielna, wykonywalna jednostka oprogramowania utworzona z **obrazu**, która zawiera wszystko potrzebne do uruchomienia aplikacji, w tym kod, biblioteki systemowe i ustawienia.
-Jak można się domyślić, będzie to bardzo pomocne w zwiększeniu powtarzalności Twoich pipeline.
+**Kontener** to lekka, samodzielna, wykonywalna jednostka oprogramowania utworzona z **obrazu** kontenera, która zawiera wszystko potrzebne do uruchomienia aplikacji, w tym kod, biblioteki systemowe i ustawienia.
+Jak można się domyślić, będzie to bardzo pomocne w zwiększeniu powtarzalności Twoich pipeline'ów.
 
 Zauważ, że będziemy tego uczyć używając [Docker](https://www.docker.com/get-started/), ale pamiętaj, że Nextflow obsługuje również [kilka innych technologii kontenerowych](https://www.nextflow.io/docs/latest/container.html#).
 
@@ -113,7 +113,7 @@ Jednak najpierw omówimy podstawowe koncepcje i operacje, aby utrwalić Twoje zr
 
 ### 1.1. Pobierz obraz kontenera
 
-Aby użyć kontenera, zazwyczaj pobierasz lub _ściągasz_ obraz z rejestru, a następnie uruchamiasz go, aby utworzyć działającą instancję.
+Aby użyć kontenera, zazwyczaj pobierasz lub _ściągasz_ obraz kontenera z rejestru kontenerów, a następnie uruchamiasz go, aby utworzyć działającą instancję kontenera.
 
 Ogólna składnia jest następująca:
 
@@ -193,8 +193,8 @@ Ogólna składnia jest następująca:
 docker run --rm '<kontener>' [polecenie narzędzia]
 ```
 
-Część `docker run --rm '<kontener>'` to instrukcja dla systemu, aby uruchomił instancję z obrazu i wykonał w niej polecenie.
-Flaga `--rm` mówi systemowi, aby usunął instancję po zakończeniu polecenia.
+Część `docker run --rm '<kontener>'` to instrukcja dla systemu, aby uruchomił instancję kontenera z obrazu kontenera i wykonał w niej polecenie.
+Flaga `--rm` mówi systemowi, aby usunął instancję kontenera po zakończeniu polecenia.
 
 Składnia `[polecenie narzędzia]` zależy od używanego narzędzia i konfiguracji kontenera.
 Zacznijmy po prostu od `cowpy`.
@@ -371,7 +371,7 @@ cat /my_project/data/greetings.csv | cowpy -c turkey
               ( /  (    (        ,___    ^*+_+* )   <    <      \
               U _/     )    *--<  ) ^\-----++__)   )    )       )
                 (      )  _(^)^^))  )  )\^^^^^))^*+/    /       /
-              (      /  (_))_^)) )  )  ))^^^^^))^^^)__/     +^^
+              (      /  (_))^)) )  )  ))^^^^^))^^^)__/     +^^
             (     ,/    (^))^))  )  ) ))^^^^^^^))^^)       _)
               *+__+*       (_))^)  ) ) ))^^^^^^))^^^^^)____*^
               \             \_)^)_)) ))^^^^^^^^^^))^^^^)
@@ -409,15 +409,13 @@ Naucz się używać kontenerów do wykonywania procesów Nextflow.
 ## 2. Używaj kontenerów w Nextflow
 
 Nextflow ma wbudowaną obsługę uruchamiania procesów wewnątrz kontenerów, co pozwala korzystać z narzędzi, których nie masz zainstalowanych w swoim środowisku obliczeniowym.
-Oznacza to, że możesz użyć dowolnego obrazu do wykonywania zadań, a Nextflow zajmie się pobieraniem obrazu, montowaniem danych i obsługą całego cyklu życia kontenera.
+Oznacza to, że możesz użyć dowolnego obrazu kontenera do wykonywania zadań, a Nextflow zajmie się pobieraniem obrazu, montowaniem danych i obsługą całego cyklu życia kontenera.
 
-Aby to zademonstrować, dodamy krok `cowpy` do pipeline, który rozwijaliśmy, po kroku `collectGreetings`.
+Aby to zademonstrować, dodamy krok `cowpy` do pipeline'u, który rozwijaliśmy, po kroku `collectGreetings`.
 
 <figure class="excalidraw">
---8<-- "docs/en/docs/nextflow_run/img/hello-pipeline-cowpy.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-cowpy.svg"
 </figure>
-
-Zamuucz, jeśli jesteś gotowy!
 
 ### 2.1. Napisz moduł `cowpy`
 
@@ -544,7 +542,7 @@ To technicznie jest opcjonalne, ale jest to zalecana praktyka i okazja do ustawi
 
     ```groovy title="hello-containers.nf" linenums="9" hl_lines="7"
     /*
-    * Pipeline parameters
+    * Parametry pipeline'u
     */
     params {
         input: Path = 'data/greetings.csv'
@@ -557,7 +555,7 @@ To technicznie jest opcjonalne, ale jest to zalecana praktyka i okazja do ustawi
 
     ```groovy title="hello-containers.nf" linenums="9"
     /*
-    * Pipeline parameters
+    * Parametry pipeline'u
     */
     params {
         input: Path = 'data/greetings.csv'
@@ -772,7 +770,7 @@ Edytuj moduł `cowpy.nf`, aby dodać dyrektywę `container` do definicji procesu
     }
     ```
 
-To mówi Nextflow, że _jeśli użycie Docker jest włączone_, powinien użyć określonego tutaj obrazu kontenera do wykonania procesu.
+To mówi Nextflow'owi, że _jeśli użycie Docker jest włączone_, powinien użyć określonego tutaj obrazu kontenera do wykonania procesu.
 
 #### 2.3.2. Włącz użycie Docker przez plik `nextflow.config`
 
@@ -866,7 +864,7 @@ Końcowa grafika ASCII znajduje się w katalogu `results/hello_containers/`, pod
               ( /  (    (        ,___    ^*+_+* )   <    <      \
               U _/     )    *--<  ) ^\-----++__)   )    )       )
                 (      )  _(^)^^))  )  )\^^^^^))^*+/    /       /
-              (      /  (_))_^)) )  )  ))^^^^^))^^^)__/     +^^
+              (      /  (_))^)) )  )  ))^^^^^))^^^)__/     +^^
             (     ,/    (^))^))  )  ) ))^^^^^^^))^^)       _)
               *+__+*       (_))^)  ) ) ))^^^^^^))^^^^^)____*^
               \             \_)^)_)) ))^^^^^^^^^^))^^^^)
@@ -1089,7 +1087,7 @@ Wiesz już, jak używać kontenerów w Nextflow do uruchamiania procesów.
 
 Zrób przerwę!
 
-Gdy będziesz gotowy, przejdź do [**Część 6: Hello Config**](./06_hello_config.md), aby dowiedzieć się, jak konfigurować wykonywanie pipeline, aby dopasować go do Twojej infrastruktury, a także zarządzać konfiguracją wejść i parametrów.
+Gdy będziesz gotowy, przejdź do [**Część 6: Hello Config**](./06_hello_config.md), aby dowiedzieć się, jak konfigurować wykonywanie pipeline'u, aby dopasować go do Twojej infrastruktury, a także zarządzać konfiguracją wejść i parametrów.
 
 To ostatnia część i potem ukończysz ten kurs!
 

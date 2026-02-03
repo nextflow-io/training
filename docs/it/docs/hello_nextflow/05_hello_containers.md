@@ -14,7 +14,7 @@
 ///
 -->
 
-Nelle Parti 1-4 di questo corso di formazione, avete imparato come usare i blocchi di costruzione di base di Nextflow per assemblare un semplice workflow capace di elaborare del testo, parallelizzare l'esecuzione se ci sono più input, e raccogliere i risultati per ulteriori elaborazioni.
+Nelle Parti 1-4 di questo corso di formazione, avete imparato come usare i blocchi di costruzione di base di Nextflow per assemblare un semplice flusso di lavoro capace di elaborare del testo, parallelizzare l'esecuzione se ci sono più input, e raccogliere i risultati per ulteriori elaborazioni.
 
 Tuttavia, eravate limitati agli strumenti UNIX di base disponibili nel vostro ambiente.
 Le attività del mondo reale spesso richiedono vari strumenti e pacchetti non inclusi di default.
@@ -41,7 +41,7 @@ Nota che insegneremo questo usando [Docker](https://www.docker.com/get-started/)
 
 ## 0. Riscaldamento: Eseguire `hello-containers.nf`
 
-Useremo lo script del workflow `hello-containers.nf` come punto di partenza.
+Useremo lo script del flusso di lavoro `hello-containers.nf` come punto di partenza.
 È equivalente allo script prodotto seguendo la Parte 4 di questo corso di formazione, tranne che abbiamo cambiato le destinazioni dell'output:
 
 ```groovy title="hello-containers.nf" linenums="37" hl_lines="3 7 11 15"
@@ -65,7 +65,7 @@ output {
 }
 ```
 
-Solo per assicurarci che tutto funzioni, eseguite lo script una volta prima di apportare modifiche:
+Solo per assicurarci che tutto funzioni, eseguiamo lo script una volta prima di apportare modifiche:
 
 ```bash
 nextflow run hello-containers.nf
@@ -87,7 +87,7 @@ nextflow run hello-containers.nf
 
 Come in precedenza, troverete i file di output nella directory specificata nel blocco `output` (`results/hello_containers/`).
 
-??? abstract "Contenuti della directory"
+??? abstract "Directory contents"
 
     ```console
     results/hello_containers/
@@ -107,7 +107,7 @@ Se tutto ha funzionato, siete pronti a imparare come usare i container.
 
 ## 1. Usare un container 'manualmente'
 
-Quello che vogliamo fare è aggiungere un passaggio al nostro workflow che userà un container per l'esecuzione.
+Quello che vogliamo fare è aggiungere un passaggio al nostro flusso di lavoro che userà un container per l'esecuzione.
 
 Tuttavia, prima esamineremo alcuni concetti e operazioni di base per consolidare la vostra comprensione di cosa sono i container prima di iniziare a usarli in Nextflow.
 
@@ -151,7 +151,7 @@ Come esempio, scarichiamo un'immagine container che contiene [cowpy](https://git
 Ci sono vari repository dove potete trovare container pubblicati.
 Abbiamo usato il servizio [Seqera Containers](https://seqera.io/containers/) per generare questa immagine Docker container dal pacchetto Conda `cowpy`: `'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'`.
 
-Eseguite il comando pull completo:
+Eseguiamo il comando pull completo:
 
 ```bash
 docker pull 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
@@ -199,7 +199,7 @@ Il flag `--rm` dice al sistema di spegnere l'istanza container dopo che il coman
 La sintassi `[tool command]` dipende dallo strumento che state usando e da come è configurato il container.
 Iniziamo semplicemente con `cowpy`.
 
-Completamente assemblato, il comando di esecuzione del container appare così; procedete ed eseguitelo.
+Completamente assemblato, il comando di esecuzione del container appare così; procediamo ed eseguiamolo.
 
 ```bash
 docker run --rm 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273' cowpy
@@ -233,7 +233,7 @@ Opzionalmente, possiamo specificare la shell che vogliamo usare all'interno del 
 docker run --rm -it 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273' /bin/bash
 ```
 
-Nota che il vostro prompt cambia in qualcosa come `(base) root@b645838b3314:/tmp#`, che indica che ora siete all'interno del container.
+Notate che il vostro prompt cambia in qualcosa come `(base) root@b645838b3314:/tmp#`, che indica che ora siete all'interno del container.
 
 Potete verificarlo eseguendo `ls /` per elencare i contenuti della directory dalla radice del filesystem:
 
@@ -385,7 +385,7 @@ cat /my_project/data/greetings.csv | cowpy -c turkey
 
 Questo produce l'ASCII art desiderata di un tacchino che recita i nostri saluti di esempio!
 Tranne che qui il tacchino sta ripetendo le righe complete invece di solo i saluti.
-Sappiamo già che il nostro workflow Nextflow farà un lavoro migliore!
+Sappiamo già che il nostro flusso di lavoro Nextflow farà un lavoro migliore!
 
 Sentitevi liberi di giocare con questo comando.
 Quando avete finito, uscite dal container come in precedenza:
@@ -417,15 +417,13 @@ Per dimostrare questo, aggiungeremo un passaggio `cowpy` alla pipeline che abbia
 --8<-- "docs/en/docs/nextflow_run/img/hello-pipeline-cowpy.svg"
 </figure>
 
-Muggite se siete pronti a tuffarvi!
-
 ### 2.1. Scrivere un modulo `cowpy`
 
 Prima, creiamo il modulo del processo `cowpy`.
 
 #### 2.1.1. Creare uno stub di file per il nuovo modulo
 
-Create un file vuoto per il modulo chiamato `cowpy.nf`.
+Creiamo un file vuoto per il modulo chiamato `cowpy.nf`.
 
 ```bash
 touch modules/cowpy.nf
@@ -440,7 +438,7 @@ Possiamo modellare il nostro processo `cowpy` sugli altri processi che abbiamo s
 ```groovy title="modules/cowpy.nf" linenums="1"
 #!/usr/bin/env nextflow
 
-// Generate ASCII art with cowpy
+// Genera arte ASCII con cowpy
 process cowpy {
 
     input:
@@ -462,13 +460,13 @@ Il processo si aspetta un `input_file` contenente i saluti così come un valore 
 
 L'output sarà un nuovo file di testo contenente l'ASCII art generata dallo strumento `cowpy`.
 
-### 2.2. Aggiungere cowpy al workflow
+### 2.2. Aggiungere cowpy al flusso di lavoro
 
 Ora dobbiamo importare il modulo e chiamare il processo.
 
 #### 2.2.1. Importare il processo `cowpy` in `hello-containers.nf`
 
-Inserite la dichiarazione di import sopra il blocco workflow e compilatela appropriatamente.
+Inseriamo la dichiarazione di import sopra il blocco workflow e compiliamola appropriatamente.
 
 === "Dopo"
 
@@ -489,16 +487,16 @@ Inserite la dichiarazione di import sopra il blocco workflow e compilatela appro
     include { collectGreetings } from './modules/collectGreetings.nf'
     ```
 
-Ora il modulo `cowpy` è disponibile per l'uso nel workflow.
+Ora il modulo `cowpy` è disponibile per l'uso nel flusso di lavoro.
 
-#### 2.2.2. Aggiungere una chiamata al processo `cowpy` nel workflow
+#### 2.2.2. Aggiungere una chiamata al processo `cowpy` nel flusso di lavoro
 
 Connettiamo il processo `cowpy()` all'output del processo `collectGreetings()`, che come potete ricordare produce due output:
 
 - `collectGreetings.out.outfile` contiene il file di output <--_quello che vogliamo_
 - `collectGreetings.out.report` contiene il file di report con il conteggio dei saluti per batch
 
-Nel blocco workflow, effettuate la seguente modifica al codice:
+Nel blocco workflow, effettuiamo la seguente modifica al codice:
 
 === "Dopo"
 
@@ -534,7 +532,7 @@ Nel blocco workflow, effettuate la seguente modifica al codice:
         collectGreetings(convertToUpper.out.collect(), params.batch)
     ```
 
-Nota che abbiamo dichiarato un nuovo parametro CLI, `params.character`, per specificare quale personaggio vogliamo che dica i saluti.
+Notate che abbiamo dichiarato un nuovo parametro CLI, `params.character`, per specificare quale personaggio vogliamo che dica i saluti.
 
 #### 2.2.3. Aggiungere il parametro `character` al blocco `params`
 
@@ -544,7 +542,7 @@ Questo è tecnicamente opzionale ma è la pratica raccomandata ed è un'opportun
 
     ```groovy title="hello-containers.nf" linenums="9" hl_lines="7"
     /*
-    * Pipeline parameters
+    * Parametri della pipeline
     */
     params {
         input: Path = 'data/greetings.csv'
@@ -557,7 +555,7 @@ Questo è tecnicamente opzionale ma è la pratica raccomandata ed è un'opportun
 
     ```groovy title="hello-containers.nf" linenums="9"
     /*
-    * Pipeline parameters
+    * Parametri della pipeline
     */
     params {
         input: Path = 'data/greetings.csv'
@@ -567,13 +565,13 @@ Questo è tecnicamente opzionale ma è la pratica raccomandata ed è un'opportun
 
 Ora possiamo essere pigri e saltare la digitazione del parametro character nelle nostre righe di comando.
 
-#### 2.2.4. Aggiornare gli output del workflow
+#### 2.2.4. Aggiornare gli output del flusso di lavoro
 
-Dobbiamo aggiornare gli output del workflow per pubblicare l'output del processo `cowpy`.
+Dobbiamo aggiornare gli output del flusso di lavoro per pubblicare l'output del processo `cowpy`.
 
 ##### 2.2.4.1. Aggiornare la sezione `publish:`
 
-Nel `blocco workflow`, effettuate la seguente modifica al codice:
+Nel `blocco workflow`, effettuiamo la seguente modifica al codice:
 
 === "Dopo"
 
@@ -598,13 +596,13 @@ Nel `blocco workflow`, effettuate la seguente modifica al codice:
 
 Il processo `cowpy` produce solo un output quindi possiamo riferirci ad esso nel modo usuale aggiungendo `.out`.
 
-Ma per ora, finiamo di aggiornare gli output a livello di workflow.
+Ma per ora, finiamo di aggiornare gli output a livello di flusso di lavoro.
 
 ##### 2.2.4.2. Aggiornare il blocco `output`
 
 Dobbiamo aggiungere l'output finale `cowpy_art` al blocco `output`. Già che ci siamo, modifichiamo anche le destinazioni di pubblicazione dato che ora la nostra pipeline è completa e sappiamo quali output ci interessano davvero.
 
-Nel blocco `output`, effettuate le seguenti modifiche al codice:
+Nel blocco `output`, effettuiamo le seguenti modifiche al codice:
 
 === "Dopo"
 
@@ -658,7 +656,7 @@ Nel blocco `output`, effettuate le seguenti modifiche al codice:
 
 Ora gli output pubblicati saranno un po' più organizzati.
 
-#### 2.2.5. Eseguire il workflow
+#### 2.2.5. Eseguire il flusso di lavoro
 
 Per ricapitolare, questo è quello a cui miriamo:
 
@@ -668,7 +666,7 @@ Per ricapitolare, questo è quello a cui miriamo:
 
 Pensate che funzionerà?
 
-Cancelliamo gli output pubblicati precedenti per avere una lavagna pulita, ed eseguiamo il workflow con il flag `-resume`.
+Cancelliamo gli output pubblicati precedenti per avere una lavagna pulita, ed eseguiamo il flusso di lavoro con il flag `-resume`.
 
 ```bash
 rm -r hello_containers/
@@ -730,7 +728,7 @@ Dobbiamo specificare un container e dire a Nextflow di usarlo per il processo `c
 
 Possiamo usare la stessa immagine che stavamo usando direttamente nella prima sezione di questo tutorial.
 
-Modificate il modulo `cowpy.nf` per aggiungere la direttiva `container` alla definizione del processo come segue:
+Modifichiamo il modulo `cowpy.nf` per aggiungere la direttiva `container` alla definizione del processo come segue:
 
 === "Dopo"
 
@@ -776,10 +774,10 @@ Questo dice a Nextflow che _se l'uso di Docker è abilitato_, dovrebbe usare l'i
 
 #### 2.3.2. Abilitare l'uso di Docker tramite il file `nextflow.config`
 
-Nota che abbiamo detto _'se l'uso di Docker è abilitato'_. Per impostazione predefinita, non lo è, quindi dobbiamo dire a Nextflow che è autorizzato a usare Docker.
+Notate che abbiamo detto _'se l'uso di Docker è abilitato'_. Per impostazione predefinita, non lo è, quindi dobbiamo dire a Nextflow che è autorizzato a usare Docker.
 A tal fine, anticiperemo leggermente l'argomento della prossima e ultima parte di questo corso (Parte 6), che tratta la configurazione.
 
-Uno dei modi principali che Nextflow offre per configurare l'esecuzione del workflow è usare un file `nextflow.config`.
+Uno dei modi principali che Nextflow offre per configurare l'esecuzione del flusso di lavoro è usare un file `nextflow.config`.
 Quando tale file è presente nella directory corrente, Nextflow lo caricherà automaticamente e applicherà qualsiasi configurazione contenga.
 
 Abbiamo fornito un file `nextflow.config` con una singola riga di codice che disabilita esplicitamente Docker: `docker.enabled = false`.
@@ -801,12 +799,12 @@ Ora, cambiamo quello a `true` per abilitare Docker:
 !!! tip "Suggerimento"
 
     È possibile abilitare l'esecuzione Docker dalla riga di comando, su base per esecuzione, usando il parametro `-with-docker <container>`.
-    Tuttavia, questo ci permette solo di specificare un container per l'intero workflow, mentre l'approccio che Le abbiamo appena mostrato ci permette di specificare un container diverso per processo.
+    Tuttavia, questo ci permette solo di specificare un container per l'intero flusso di lavoro, mentre l'approccio che vi abbiamo appena mostrato ci permette di specificare un container diverso per processo.
     Questo è meglio per modularità, manutenzione del codice e riproducibilità.
 
-#### 2.3.3. Eseguire il workflow con Docker abilitato
+#### 2.3.3. Eseguire il flusso di lavoro con Docker abilitato
 
-Eseguite il workflow con il flag `-resume`:
+Eseguiamo il flusso di lavoro con il flag `-resume`:
 
 ```bash
 nextflow run hello-containers.nf -resume
@@ -827,9 +825,9 @@ nextflow run hello-containers.nf -resume
     ```
 
 Questa volta funziona davvero!
-Come al solito potete trovare gli output del workflow nella directory dei risultati corrispondente, anche se questa volta sono un po' più ordinatamente organizzati, con solo il report e l'output finale al livello superiore, e tutti i file intermedi spostati in una sottodirectory.
+Come al solito potete trovare gli output del flusso di lavoro nella directory dei risultati corrispondente, anche se questa volta sono un po' più ordinatamente organizzati, con solo il report e l'output finale al livello superiore, e tutti i file intermedi spostati in una sottodirectory.
 
-??? abstract "Contenuti della directory"
+??? abstract "Directory contents"
 
     ```console
     results/hello_containers/
@@ -847,7 +845,7 @@ Come al solito potete trovare gli output del workflow nella directory dei risult
 
 L'output ASCII art finale è nella directory `results/hello_containers/`, sotto il nome `cowpy-COLLECTED-batch-output.txt`.
 
-??? abstract "Contenuti del file"
+??? abstract "File contents"
 
     ```console title="results/hello_containers/cowpy-COLLECTED-batch-output.txt"
     _________
@@ -878,19 +876,19 @@ L'output ASCII art finale è nella directory `results/hello_containers/`, sotto 
                           ^^^ ^^ ^^^ ^
     ```
 
-Ed eccolo, il nostro bellissimo tacchino che dice i saluti come desiderateto.
+Ed eccolo, il nostro bellissimo tacchino che dice i saluti come desiderato.
 
-#### 2.3.4. Ispezionare come Nextflow ha lanciato il task containerizzato
+#### 2.3.4. Ispezionare come Nextflow ha lanciato l'attività containerizzata
 
 Come coda finale a questa sezione, diamo un'occhiata alla sottodirectory di lavoro per una delle chiamate del processo `cowpy` per ottenere un po' più di comprensione su come Nextflow lavora con i container sotto il cofano.
 
-Controllate l'output dal vostro comando `nextflow run` per trovare il percorso alla sottodirectory di lavoro per il processo `cowpy`.
+Controlliamo l'output dal vostro comando `nextflow run` per trovare il percorso alla sottodirectory di lavoro per il processo `cowpy`.
 Guardando quello che abbiamo ottenuto per l'esecuzione mostrata sopra, la riga del log della console per il processo `cowpy` inizia con `[98/656c6c]`.
 Questo corrisponde al seguente percorso di directory troncato: `work/98/656c6c`.
 
 In quella directory, troverete il file `.command.run` che contiene tutti i comandi che Nextflow ha eseguito per vostro conto nel corso dell'esecuzione della pipeline.
 
-??? abstract "Contenuti del file"
+??? abstract "File contents"
 
     ```console title="work/98/656c6c90cce1667c094d880f4b6dcc/.command.run"
     #!/bin/bash
@@ -1087,11 +1085,11 @@ Sapete come usare i container in Nextflow per eseguire processi.
 
 ### Cosa c'è dopo?
 
-Prendetevi una pausa!
+Prendetevi una piccola pausa!
 
 Quando siete pronti, passate alla [**Parte 6: Hello Config**](./06_hello_config.md) per imparare come configurare l'esecuzione della vostra pipeline per adattarla alla vostra infrastruttura e gestire la configurazione di input e parametri.
 
-È l'ultima parte, e poi avrà finito con questo corso!
+È l'ultima parte, e poi avrete finito con questo corso!
 
 ---
 
@@ -1144,7 +1142,7 @@ Per approfondire: [2.3.1. Specificare un container per cowpy](#231-specificare-u
 </quiz>
 
 <quiz>
-Quale impostazione `nextflow.config` abilita Docker per il vostro workflow?
+Quale impostazione `nextflow.config` abilita Docker per il vostro flusso di lavoro?
 - [ ] `#!groovy process.docker = true`
 - [x] `#!groovy docker.enabled = true`
 - [ ] `#!groovy container.engine = 'docker'`
@@ -1154,11 +1152,11 @@ Per approfondire: [2.3.2. Abilitare l'uso di Docker tramite il file `nextflow.co
 </quiz>
 
 <quiz>
-Cosa gestisce automaticamente Nextflow quando esegue un processo in un container? (Selezioni tutte le risposte applicabili)
+Cosa gestisce automaticamente Nextflow quando esegue un processo in un container? (Selezionate tutte le risposte applicabili)
 - [x] Scaricare l'immagine container se necessario
 - [x] Montare la directory di lavoro
 - [x] Eseguire lo script del processo all'interno del container
 - [x] Pulire l'istanza container dopo l'esecuzione
 
-Per approfondire: [2.3.4. Ispezionare come Nextflow ha lanciato il task containerizzato](#234-ispezionare-come-nextflow-ha-lanciato-il-task-containerizzato)
+Per approfondire: [2.3.4. Ispezionare come Nextflow ha lanciato l'attività containerizzata](#234-ispezionare-come-nextflow-ha-lanciato-lattività-containerizzata)
 </quiz>

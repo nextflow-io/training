@@ -14,7 +14,7 @@
 ///
 -->
 
-In den Teilen 1-4 dieses Kurses hast du gelernt, wie du die grundlegenden Bausteine von Nextflow verwendest, um einen einfachen Workflow zu erstellen, der Text verarbeiten, die Ausführung bei mehreren Eingaben parallelisieren und die Ergebnisse zur weiteren Verarbeitung sammeln kann.
+In den Teilen 1-4 dieses Trainingskurses hast du gelernt, wie du die grundlegenden Bausteine von Nextflow verwendest, um einen einfachen Workflow zu erstellen, der Text verarbeitet, die Ausführung bei mehreren Eingaben parallelisiert und die Ergebnisse zur weiteren Verarbeitung sammelt.
 
 Du warst jedoch auf grundlegende UNIX-Tools beschränkt, die in deiner Umgebung verfügbar sind.
 Reale Aufgaben erfordern oft verschiedene Tools und Pakete, die standardmäßig nicht enthalten sind.
@@ -25,7 +25,7 @@ Das ist alles sehr mühsam und nervig, daher zeigen wir dir, wie du **Container*
 Ein **Container** ist eine leichtgewichtige, eigenständige, ausführbare Softwareeinheit, die aus einem Container-**Image** erstellt wird und alles enthält, was zum Ausführen einer Anwendung benötigt wird, einschließlich Code, Systembibliotheken und Einstellungen.
 Wie du dir vorstellen kannst, wird das sehr hilfreich sein, um deine Pipelines reproduzierbarer zu machen.
 
-Beachte, dass wir dies mit [Docker](https://www.docker.com/get-started/) lehren, aber Nextflow unterstützt auch [mehrere andere Container-Technologien](https://www.nextflow.io/docs/latest/container.html#).
+Beachte, dass wir dies mit [Docker](https://www.docker.com/get-started/) lehren, aber Nextflow unterstützt auch [mehrere andere Container-Technologien](https://nextflow.io/docs/latest/container.html).
 
 ??? info "Wie du von diesem Abschnitt aus beginnst"
 
@@ -42,7 +42,7 @@ Beachte, dass wir dies mit [Docker](https://www.docker.com/get-started/) lehren,
 ## 0. Aufwärmen: `hello-containers.nf` ausführen
 
 Wir werden das Workflow-Script `hello-containers.nf` als Ausgangspunkt verwenden.
-Es entspricht dem Script, das durch Durcharbeiten von Teil 4 dieses Kurses entstanden ist, außer dass wir die Ausgabeziele geändert haben:
+Es entspricht dem Script, das durch Durcharbeiten von Teil 4 dieses Trainingskurses entstanden ist, außer dass wir die Ausgabeziele geändert haben:
 
 ```groovy title="hello-containers.nf" linenums="37" hl_lines="3 7 11 15"
 output {
@@ -396,11 +396,11 @@ exit
 
 Du befindest dich wieder in deiner normalen Shell.
 
-### Erkenntnisse
+### Fazit
 
-Du kannst Container pullen und einmalig oder interaktiv ausführen. Du kannst Daten im Container zugänglich machen und Tools mit echten Daten testen, ohne lokale Installationen.
+Du weißt, wie man einen Container pullt und ihn entweder einmalig oder interaktiv ausführt. Du weißt auch, wie man Daten im Container zugänglich macht, sodass du jedes Tool mit echten Daten testen kannst, ohne Software auf deinem System zu installieren.
 
-### Was kommt als Nächstes?
+### Wie geht es weiter?
 
 Lerne, wie man Container für die Ausführung von Nextflow-Prozessen verwendet.
 
@@ -414,10 +414,8 @@ Das bedeutet, dass du jedes beliebige Container-Image verwenden kannst, um deine
 Um dies zu demonstrieren, werden wir einen `cowpy`-Schritt zur Pipeline hinzufügen, die wir entwickelt haben, nach dem `collectGreetings`-Schritt.
 
 <figure class="excalidraw">
---8<-- "docs/en/docs/nextflow_run/img/hello-pipeline-cowpy.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-cowpy.svg"
 </figure>
-
-Muh, wenn du bereit bist einzutauchen!
 
 ### 2.1. Ein `cowpy`-Modul schreiben
 
@@ -949,11 +947,11 @@ All die harte Arbeit, die wir im ersten Abschnitt manuell erledigen mussten? Nex
        ||     ||          i_____;----\.____i""\____\
 ```
 
-### Erkenntnisse
+### Fazit
 
 Du weißt, wie man Container in Nextflow verwendet, um Prozesse auszuführen.
 
-### Was kommt als Nächstes?
+### Wie geht es weiter?
 
 Mach eine Pause!
 

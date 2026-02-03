@@ -229,7 +229,7 @@ Novamente, você não precisa memorizar sintaxe de código, mas é bom aprender 
 
 Esta é a parte mais interessante: como mudamos de receber um único valor da linha de comando para receber um arquivo CSV, analisá-lo e processar as saudações individuais que ele contém?
 
-No Nextflow, fazemos isso com um **canal**: uma construção projetada para lidar com entradas eficientemente e transportá-las de uma etapa para outra em fluxos de trabalho de múltiplas etapas, enquanto fornece paralelismo embutido e muitos benefícios adicionais.
+No Nextflow, fazemos isso com um [**canal**](https://nextflow.io/docs/latest/channel.html): uma construção de fila projetada para lidar com entradas eficientemente e transportá-las de uma etapa para outra em fluxos de trabalho de múltiplas etapas, enquanto fornece paralelismo embutido e muitos benefícios adicionais.
 
 Vamos analisar.
 
@@ -618,23 +618,20 @@ Desta vez o operador é chamado `collect`, e é aplicado ao canal de saída prod
 
 O operador `collect` é usado para coletar as saídas de múltiplas chamadas ao mesmo processo e empacotá-las em um único elemento de canal.
 
-No contexto deste fluxo de trabalho, ele está pegando as três saudações em maiúsculas no canal `convertToUpper.out` --que são três itens de canal separados, e normalmente seriam tratados em chamadas separadas pelo próximo processo-- e empacotando-os em um único item.
-
-Em termos mais práticos: se não aplicássemos `collect()` à saída de `convertToUpper()` antes de alimentá-la para `collectGreetings()`, o Nextflow simplesmente executaria `collectGreetings()` independentemente em cada saudação, o que não alcançaria nosso objetivo.
-
-<figure class="excalidraw">
---8<-- "docs/en/docs/nextflow_run/img/without-collect-operator.svg"
-</figure>
-
-Em contraste, usar `collect()` nos permite pegar todas as saudações em maiúsculas separadas produzidas pela segunda etapa do fluxo de trabalho e alimentá-las todas juntas para uma única chamada na terceira etapa do pipeline.
+No contexto deste fluxo de trabalho, ele está pegando as três saudações em maiúsculas no canal `convertToUpper.out` (que são três itens de canal separados, e normalmente seriam tratados em chamadas separadas pelo próximo processo) e empacotando-os em um único item.
+É assim que colocamos todas as saudações de volta no mesmo arquivo.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/nextflow_run/img/with-collect-operator.svg"
 </figure>
 
-É assim que colocamos todas as saudações de volta no mesmo arquivo.
+Em contraste, se não aplicássemos `collect()` à saída de `convertToUpper()` antes de alimentá-la para `collectGreetings()`, o Nextflow simplesmente executaria `collectGreetings()` independentemente em cada saudação, o que não alcançaria nosso objetivo.
 
-Há muitos outros [operadores](https://www.nextflow.io/docs/latest/reference/operator.html#operator-page) disponíveis para aplicar transformações ao conteúdo de canais entre chamadas de processo.
+<figure class="excalidraw">
+--8<-- "docs/en/docs/nextflow_run/img/without-collect-operator.svg"
+</figure>
+
+Há muitos outros [operadores](https://nextflow.io/docs/latest/reference/operator.html) disponíveis para aplicar transformações ao conteúdo de canais entre chamadas de processo.
 
 Isso dá aos desenvolvedores de pipeline muita flexibilidade para personalizar a lógica de fluxo de seu pipeline.
 A desvantagem é que às vezes pode tornar mais difícil decifrar o que o pipeline está fazendo.
@@ -783,7 +780,7 @@ Isso pode tornar seu desenvolvimento e manutenção mais eficientes e sustentáv
 
 Aqui vamos demonstrar a forma mais comum de modularidade de código no Nextflow, que é o uso de **módulos**.
 
-No Nextflow, um **módulo** é uma única definição de processo que é encapsulada sozinha em um arquivo de código autônomo.
+No Nextflow, um [**módulo**](https://nextflow.io/docs/latest/module.html) é uma única definição de processo que é encapsulada sozinha em um arquivo de código autônomo.
 Para usar um módulo em um fluxo de trabalho, você apenas adiciona uma declaração de importação de uma linha ao seu arquivo de código de fluxo de trabalho; então você pode integrar o processo no fluxo de trabalho da mesma forma que normalmente faria.
 Isso torna possível reutilizar definições de processo em múltiplos fluxos de trabalho sem produzir múltiplas cópias do código.
 
@@ -967,7 +964,8 @@ Um **contêiner** é uma unidade leve, autônoma e executável de software criad
 
 !!! Tip "Dica"
 
-    Ensinamos isso usando a tecnologia [Docker](https://www.docker.com/get-started/), mas o Nextflow suporta [várias outras tecnologias de contêiner](https://www.nextflow.io/docs/latest/container.html#) também.
+    Ensinamos isso usando a tecnologia [Docker](https://www.docker.com/get-started/), mas o Nextflow suporta várias outras tecnologias de contêiner também.
+    Você pode aprender mais sobre o suporte do Nextflow para contêineres [aqui](https://nextflow.io/docs/latest/container.html).
 
 ### 4.1. Use um contêiner diretamente
 
@@ -1148,7 +1146,7 @@ Nós só precisamos especificar um contêiner para cada processo.
 Para demonstrar como isso funciona, fizemos outra versão do nosso fluxo de trabalho que executa `cowpy` no arquivo de saudações coletadas produzido na terceira etapa.
 
 <figure class="excalidraw">
---8<-- "docs/en/docs/nextflow_run/img/hello-pipeline-cowpy.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-cowpy.svg"
 </figure>
 
 Isso deve produzir um arquivo contendo a arte ASCII com as três saudações no balão de fala.
@@ -1277,7 +1275,7 @@ Esta configuração diz ao Nextflow para usar Docker para qualquer processo que 
 
 !!! tip "Dica"
 
-    É tecnicamente possível habilitar a execução Docker da linha de comando, por execução, usando o parâmetro `-with-docker <container>` no seu comando.
+    É tecnicamente possível habilitar a execução Docker da linha de comando, por execução, usando o parâmetro `-with-docker <container>`.
     No entanto, isso só nos permite especificar um contêiner para todo o fluxo de trabalho, enquanto a abordagem que acabamos de mostrar permite especificar um contêiner diferente por processo.
     Este último é muito melhor para modularidade, manutenção de código e reprodutibilidade.
 
@@ -1349,168 +1347,4 @@ Você pode encontrar a saída da etapa `cowpy` no diretório `results`.
 Você vê que o personagem está dizendo todas as saudações, já que ele executou no arquivo de saudações em maiúsculas coletadas.
 
 Mais ao ponto, conseguimos executar isso como parte do nosso pipeline sem ter que fazer uma instalação apropriada do cowpy e todas as suas dependências.
-E agora podemos compartilhar o pipeline com colaboradores e fazer com que eles o executem em sua infraestrutura sem que precisem instalar nada também, além do Docker ou uma de suas alternativas (como Singularity/Apptainer) conforme mencionado acima.
-
-#### 4.2.4. Inspecione como o Nextflow lançou a tarefa em contêiner
-
-Como uma coda final para esta seção, vamos dar uma olhada no subdiretório de trabalho para uma das chamadas de processo `cowpy` para ter um pouco mais de visão sobre como o Nextflow funciona com contêineres por baixo dos panos.
-
-Verifique a saída do seu comando `nextflow run` para encontrar o caminho para o subdiretório de trabalho do processo `cowpy`.
-Olhando o que obtivemos para a execução mostrada acima, a linha de log do console para o processo `cowpy` começa com `[7f/caf718]`.
-Isso corresponde ao seguinte caminho de diretório truncado: `work/7f/caf718`.
-
-Naquele diretório, você encontrará o arquivo `.command.run` que contém todos os comandos que o Nextflow executou em seu nome durante a execução do pipeline.
-
-??? abstract "Conteúdo do arquivo"
-
-    ```console title="work/7f/caf71890cce1667c094d880f4b6dcc/.command.run"
-    #!/bin/bash
-    ### ---
-    ### name: 'cowpy'
-    ### container: 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
-    ### outputs:
-    ### - 'cowpy-COLLECTED-batch-output.txt'
-    ### ...
-    set -e
-    set -u
-    NXF_DEBUG=${NXF_DEBUG:=0}; [[ $NXF_DEBUG > 1 ]] && set -x
-    NXF_ENTRY=${1:-nxf_main}
-
-    ...
-
-    nxf_launch() {
-        docker run -i --cpu-shares 1024 -e "NXF_TASK_WORKDIR" -v /workspaces/training/nextflow-run/work:/workspaces/training/nextflow-run/work -w "$NXF_TASK_WORKDIR" --name $NXF_BOXID community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273 /bin/bash -ue /workspaces/training/nextflow-run/work/7f/caf71890cce1667c094d880f4b6dcc/.command.sh
-    }
-
-    ...
-    ```
-
-Se você procurar por `nxf_launch` neste arquivo, você deve ver algo assim:
-
-```console
-nxf_launch() {
-    docker run -i --cpu-shares 1024 -e "NXF_TASK_WORKDIR" -v /workspaces/training/nextflow-run/work:/workspaces/training/nextflow-run/work -w "$NXF_TASK_WORKDIR" --name $NXF_BOXID community.wave.seqera.io/library/pip_cowpy:131d6a1b707a8e65 /bin/bash -ue /workspaces/training/nextflow-run/work/7f/caf7189fca6c56ba627b75749edcb3/.command.sh
-}
-```
-
-Este comando de lançamento mostra que o Nextflow está usando um comando `docker run` muito similar para lançar a chamada de processo como fizemos quando o executamos manualmente.
-Ele também monta o subdiretório de trabalho correspondente no contêiner, define o diretório de trabalho dentro do contêiner de acordo, e executa nosso script bash modelado no arquivo `.command.sh`.
-
-Isso confirma que todo o trabalho duro que tivemos que fazer manualmente na seção anterior agora é feito para nós pelo Nextflow!
-
-### Conclusão
-
-Você entende qual papel os contêineres desempenham no gerenciamento de versões de ferramentas de software e garantindo reprodutibilidade.
-
-Mais geralmente, você tem uma compreensão básica de quais são os componentes principais de pipelines Nextflow do mundo real e como eles estão organizados.
-Você conhece os fundamentos de como o Nextflow pode processar múltiplas entradas eficientemente, executar fluxos de trabalho compostos de múltiplas etapas conectadas, aproveitar componentes de código modulares e utilizar contêineres para maior reprodutibilidade e portabilidade.
-
-### O que vem a seguir?
-
-Faça outra pausa! Essa foi uma grande pilha de informações sobre como pipelines Nextflow funcionam.
-
-Na última seção deste treinamento, vamos mergulhar mais profundamente no tópico de configuração.
-Você aprenderá como configurar a execução do seu pipeline para se adequar à sua infraestrutura, bem como gerenciar a configuração de entradas e parâmetros.
-
----
-
-## Quiz
-
-<quiz>
-Por que o Nextflow cria um diretório de tarefa separado para cada chamada de processo?
-- [ ] Para melhorar a velocidade de execução
-- [ ] Para reduzir o uso de memória
-- [x] Para isolar execuções e evitar colisões entre saídas
-- [ ] Para habilitar compressão paralela de arquivos
-
-Saiba mais: [1.3. Encontre as saídas originais e os logs](#13-encontre-as-saidas-originais-e-os-logs)
-</quiz>
-
-<quiz>
-O que a opção `-ansi-log false` faz ao executar um fluxo de trabalho?
-- [ ] Desabilita toda saída do console
-- [x] Remove cores da saída
-- [x] Mostra todos os caminhos de diretório de tarefa em vez de condensá-los em uma linha
-- [ ] Habilita modo de depuração verboso
-
-Saiba mais: [1.3.2. Faça o terminal mostrar mais detalhes](#132-faca-o-terminal-mostrar-mais-detalhes)
-
-Você também pode usar qualquer uma das seguintes variáveis de ambiente se preferir este estilo:
-
-```bash
-export NXF_ANSI_LOG=0
-# ou
-export NO_COLOR=1
-```
-
-</quiz>
-
-<quiz>
-No código `#!groovy channel.fromPath(params.input).splitCsv().map { line -> line[0] }`, o que `#!groovy .map { line -> line[0] }` faz?
-- [ ] Filtra linhas vazias
-- [ ] Ordena as linhas alfabeticamente
-- [x] Extrai a primeira coluna de cada linha CSV
-- [ ] Conta o número de linhas
-
-Saiba mais: [1.4.1. Carregando os dados de entrada do CSV](#141-carregando-os-dados-de-entrada-do-csv)
-</quiz>
-
-<quiz>
-Por que é importante incluir o valor de entrada nos nomes de arquivos de saída (ex., `#!groovy "${greeting}-output.txt"`)?
-- [ ] Para melhorar a velocidade de processamento
-- [ ] Para habilitar funcionalidade de resume
-- [x] Para evitar que arquivos de saída sobrescrevam uns aos outros ao processar múltiplas entradas
-- [ ] Para tornar arquivos mais fáceis de comprimir
-
-Saiba mais: [1.4.3. Como as saídas são nomeadas](#143-como-as-saidas-sao-nomeadas)
-</quiz>
-
-<quiz>
-Qual é o propósito da declaração `include` em um fluxo de trabalho modularizado?
-- [ ] Copiar código de processo para o arquivo de fluxo de trabalho
-- [x] Importar uma definição de processo de um arquivo de módulo externo
-- [ ] Incluir configurações de configuração
-- [ ] Adicionar comentários de documentação
-
-Saiba mais: [3. Executando pipelines modularizados](#3-executando-pipelines-modularizados)
-</quiz>
-
-<quiz>
-Quando você modulariza um fluxo de trabalho e o executa com `-resume`, o que acontece?
-- [ ] Caching é desabilitado para processos modulares
-- [ ] Todas as tarefas devem ser re-executadas
-- [x] Caching funciona normalmente baseado nos scripts de job gerados
-- [ ] Apenas o arquivo de fluxo de trabalho principal é cacheado
-
-Saiba mais: [3.2. Execute o fluxo de trabalho](#32-execute-o-fluxo-de-trabalho)
-</quiz>
-
-<quiz>
-O que a diretiva `container` em uma definição de processo especifica?
-- [ ] O diretório de trabalho para o processo
-- [ ] A alocação máxima de memória
-- [x] O URI da imagem de contêiner para usar na execução do processo
-- [ ] O formato do arquivo de saída
-
-Saiba mais: [4.2. Use um contêiner em um fluxo de trabalho](#42-use-um-conteiner-em-um-fluxo-de-trabalho)
-</quiz>
-
-<quiz>
-No arquivo `.command.run`, o que a função `nxf_launch` contém?
-- [ ] A informação de versão do Nextflow
-- [ ] Os parâmetros do fluxo de trabalho
-- [x] O comando `docker run` com montagens de volume e configurações de contêiner
-- [ ] As declarações de entrada do processo
-
-Saiba mais: [4.2.4. Inspecione como o Nextflow lançou a tarefa em contêiner](#424-inspecione-como-o-nextflow-lancou-a-tarefa-em-conteiner)
-</quiz>
-
-<quiz>
-O que o Nextflow automaticamente lida ao executar um processo em contêiner? (Selecione todos que se aplicam)
-- [x] Puxar a imagem do contêiner se necessário
-- [x] Montar o diretório de trabalho no contêiner
-- [x] Executar o script do processo dentro do contêiner
-- [x] Limpar a instância do contêiner após a execução
-
-Saiba mais: [4. Usando software em contêiner](#4-usando-software-em-conteiner)
-</quiz>
+E agora

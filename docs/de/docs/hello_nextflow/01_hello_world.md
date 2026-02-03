@@ -76,11 +76,11 @@ Du kannst sie im Datei-Explorer öffnen oder zum Beispiel mit dem Dienstprogramm
 
 Dies werden wir mit unserem allerersten Nextflow-Workflow zu replizieren versuchen.
 
-### Zusammenfassung
+### Fazit
 
 Du weißt jetzt, wie man einen einfachen Befehl im Terminal ausführt, der etwas Text ausgibt, und optional, wie man ihn dazu bringt, die Ausgabe in eine Datei zu schreiben.
 
-### Was kommt als Nächstes?
+### Wie geht es weiter?
 
 Finde heraus, wie das als Nextflow-Workflow aussehen würde.
 
@@ -124,7 +124,7 @@ Du findest das Skript `hello-world.nf` in deinem aktuellen Verzeichnis, das `hel
     }
     ```
 
-Ein Nextflow-Workflow-Skript enthält typischerweise eine oder mehrere **process**-Definitionen und den **workflow** selbst, plus einige optionale Blöcke (hier nicht vorhanden), die wir später einführen werden.
+Ein Nextflow-Workflow-Skript enthält typischerweise eine oder mehrere [**process**](https://nextflow.io/docs/latest/process.html)-Definitionen und den [**workflow**](https://nextflow.io/docs/latest/workflow.html) selbst, plus einige optionale Blöcke (hier nicht vorhanden), die wir später einführen werden.
 
 Jeder **process** beschreibt, welche Operation(en) der entsprechende Schritt in der Pipeline ausführen soll, während der **workflow** die Datenflusslogik beschreibt, die die verschiedenen Schritte verbindet.
 
@@ -376,11 +376,11 @@ Versuche, den Workflow ein paar Mal erneut auszuführen, und sieh dir dann die T
 Du siehst, dass für jeden Lauf ein neues Unterverzeichnis mit einem vollständigen Satz von Ausgabe- und Logdateien erstellt wurde.
 Dies zeigt dir, dass das mehrmalige Ausführen desselben Workflows die Ergebnisse vorheriger Läufe nicht überschreibt.
 
-### Zusammenfassung
+### Fazit
 
 Du weißt, wie man ein einfaches Nextflow-Skript entschlüsselt, es ausführt und die Ausgabe sowie die relevanten Logdateien im work-Verzeichnis findet.
 
-### Was kommt als Nächstes?
+### Wie geht es weiter?
 
 Lerne, wie du die Workflow-Ausgaben an einen bequemeren Ort veröffentlichen kannst.
 
@@ -704,11 +704,11 @@ process sayHello {
 Du wirst dieses Codemuster immer noch überall in älteren Nextflow-Pipelines und Prozessmodulen finden, daher ist es wichtig, es zu kennen.
 Wir empfehlen jedoch nicht, es in neuer Arbeit zu verwenden, da es in zukünftigen Versionen der Nextflow-Sprache eventuell nicht mehr erlaubt sein wird.
 
-### Zusammenfassung
+### Fazit
 
 Du weißt, wie man Workflow-Ausgaben an einen bequemeren Ort veröffentlicht.
 
-### Was kommt als Nächstes?
+### Wie geht es weiter?
 
 Lerne, wie du eine variable Eingabe über einen Befehlszeilenparameter bereitstellst und Standardwerte effektiv nutzt.
 
@@ -795,9 +795,13 @@ Jetzt, da der `sayHello()`-Prozess bereit ist, eine variable Eingabe zu akzeptie
 ### 3.2. Einen Befehlszeilenparameter einrichten, um Benutzereingaben zu erfassen
 
 Wir könnten einfach eine Eingabe direkt fest eincodieren, indem wir den Prozessaufruf `sayHello('Hello World!')` machen.
-Wenn wir jedoch echte Arbeit mit unserem Workflow erledigen, werden wir seine Eingaben von der Befehlszeile aus steuern wollen.
+Wenn wir jedoch echte Arbeit mit unserem Workflow erledigen, werden wir seine Eingaben von der Befehlszeile aus steuern wollen, sodass wir etwa Folgendes tun können:
 
-Gute Nachricht: Nextflow hat ein eingebautes Workflow-Parameter-System namens `params`, das es einfach macht, CLI-Parameter zu deklarieren und zu verwenden.
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello_world_input.svg"
+</figure>
+
+Gute Nachricht: Nextflow hat ein eingebautes Workflow-Parameter-System namens [`params`](https://nextflow.io/docs/latest/config.html#params), das es einfach macht, CLI-Parameter zu deklarieren und zu verwenden.
 
 Die allgemeine Syntax ist, `params.<parameter_name>` zu deklarieren, um Nextflow mitzuteilen, dass es einen `--<parameter_name>`-Parameter auf der Befehlszeile erwartet.
 
@@ -854,10 +858,6 @@ Wenn du alle diese Änderungen richtig gemacht hast, solltest du eine weitere er
     ```
 
 Voilà!
-
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello_world_input.svg"
-</figure>
 
 Beachte, dass die neue Ausführung die im `results`-Verzeichnis veröffentlichte Ausgabedatei überschrieben hat.
 Die Ergebnisse der vorherigen Läufe sind jedoch immer noch in den Task-Verzeichnissen unter `work` erhalten.
@@ -962,11 +962,11 @@ Auch hier solltest du die entsprechend aktualisierte Ausgabe in deinem results-V
 
     Wir werden dies in Teil 6 (Konfiguration) ausführlicher behandeln.
 
-### Zusammenfassung
+### Fazit
 
 Du weißt, wie man eine einfache variable Eingabe verwendet, die zur Laufzeit über einen Befehlszeilenparameter bereitgestellt wird, sowie wie man Standardwerte einrichtet, verwendet und überschreibt.
 
-### Was kommt als Nächstes?
+### Wie geht es weiter?
 
 Lerne, wie du Ausführungen bequemer verwalten kannst.
 
@@ -976,7 +976,7 @@ Lerne, wie du Ausführungen bequemer verwalten kannst.
 
 Zu wissen, wie man Workflows startet und Ausgaben abruft, ist großartig, aber du wirst schnell feststellen, dass es einige andere Aspekte der Workflow-Verwaltung gibt, die dein Leben einfacher machen werden, besonders wenn du deine eigenen Workflows entwickelst.
 
-Hier zeigen wir dir, wie du die `resume`-Funktion verwendest, wenn du denselben Workflow erneut starten musst, wie du das Log vergangener Ausführungen mit `nextflow log` inspizierst und wie du ältere work-Verzeichnisse mit `nextflow clean` löschst.
+Hier zeigen wir dir, wie du die [`-resume`](https://nextflow.io/docs/latest/cache-and-resume.html)-Funktion verwendest, wenn du denselben Workflow erneut starten musst, wie du das Log vergangener Ausführungen mit [`nextflow log`](https://nextflow.io/docs/latest/reference/cli.html#log) inspizierst und wie du ältere work-Verzeichnisse mit [`nextflow clean`](https://nextflow.io/docs/latest/reference/cli.html#clean) löschst.
 
 <!-- Any other cool options we should include? Added log -->
 
@@ -984,7 +984,7 @@ Hier zeigen wir dir, wie du die `resume`-Funktion verwendest, wenn du denselben 
 
 Manchmal möchtest du eine Pipeline, die du bereits zuvor gestartet hast, erneut ausführen, ohne Schritte zu wiederholen, die bereits erfolgreich abgeschlossen wurden.
 
-Nextflow hat eine Option namens `-resume`, die dir dies ermöglicht.
+Nextflow hat eine Option namens [`-resume`](https://nextflow.io/docs/latest/cache-and-resume.html), die dir dies ermöglicht.
 Konkret werden in diesem Modus alle Prozesse, die bereits mit genau demselben Code, denselben Einstellungen und Eingaben ausgeführt wurden, übersprungen.
 Das bedeutet, dass Nextflow nur Prozesse ausführt, die du seit dem letzten Lauf hinzugefügt oder geändert hast, oder denen du neue Einstellungen oder Eingaben bereitstellst.
 
@@ -1122,13 +1122,13 @@ Beachte, dass dies nicht die zweistelligen Unterverzeichnisse (wie `a3/` oben) e
 
     Du bist verantwortlich für das Speichern aller Ausgaben, die dir wichtig sind oder auf die du dich verlassen willst! Das ist der Hauptgrund, warum wir den `copy`-Modus anstelle des `symlink`-Modus für die `publish`-Direktive bevorzugen.
 
-### Zusammenfassung
+### Fazit
 
 Du weißt, wie man Ausgaben in ein bestimmtes Verzeichnis veröffentlicht, eine Pipeline erneut startet, ohne Schritte zu wiederholen, die bereits auf identische Weise ausgeführt wurden, und den `nextflow clean`-Befehl verwendet, um alte work-Verzeichnisse zu bereinigen.
 
 Allgemeiner gesagt, weißt du, wie man einen einfachen Nextflow-Workflow interpretiert, seine Ausführung verwaltet und Ausgaben abruft.
 
-### Was kommt als Nächstes?
+### Wie geht es weiter?
 
 Mach eine kleine Pause, du hast sie dir verdient!
 
@@ -1149,80 +1149,4 @@ Mehr erfahren: [1.1.1. Die process-Definition](#111-die-process-definition)
 </quiz>
 
 <quiz>
-Was ist der Zweck des output-Blocks in einem Prozess?
-- [ ] Ergebnisse auf der Konsole ausgeben
-- [ ] Dateien im work-Verzeichnis speichern
-- [x] Erwartete Ausgaben des Prozesses deklarieren
-- [ ] Umgebungsvariablen definieren
-
-Mehr erfahren: [1.1.1. Die process-Definition](#111-die-process-definition)
-</quiz>
-
-<quiz>
-Welcher Befehl wird verwendet, um einen Nextflow-Workflow auszuführen?
-- [ ] `nextflow start`
-- [ ] `nextflow execute`
-- [x] `nextflow run`
-- [ ] `nextflow launch`
-</quiz>
-
-<quiz>
-Welche Datei im work-Verzeichnis eines Tasks enthält den tatsächlich ausgeführten Befehl?
-
-```
-work/a3/7be2fa.../
-├── .command.begin
-├── .command.err
-├── .command.log
-├── .command.out
-├── .command.run
-├── .command.sh
-├── .exitcode
-└── output.txt
-```
-
-- [ ] `.command.run`
-- [x] `.command.sh`
-- [ ] `.command.log`
-- [ ] `.command.out`
-
-Mehr erfahren: [1.2.2. Die Ausgabe und Logs im `work`-Verzeichnis finden](#122-die-ausgabe-und-logs-im-work-verzeichnis-finden)
-</quiz>
-
-<quiz>
-Was macht das `-resume`-Flag?
-- [ ] Startet den Workflow von Anfang an neu
-- [ ] Pausiert den Workflow
-- [x] Überspringt Prozesse, die bereits erfolgreich abgeschlossen wurden
-- [ ] Erstellt ein Backup des Workflows
-
-Mehr erfahren: [4.1. Einen Workflow mit `-resume` erneut starten](#41-einen-workflow-mit--resume-erneut-starten)
-</quiz>
-
-<quiz>
-Was ist der Standardmodus für die Veröffentlichung von Workflow-Ausgaben?
-- [ ] Dateien in das Ausgabeverzeichnis kopieren
-- [x] Symbolische Links im Ausgabeverzeichnis erstellen
-- [ ] Dateien in das Ausgabeverzeichnis verschieben
-- [ ] Dateien im Ausgabeverzeichnis komprimieren
-
-Mehr erfahren: [2.3. Den Veröffentlichungsmodus auf Kopieren setzen](#23-den-veröffentlichungsmodus-auf-kopieren-setzen)
-</quiz>
-
-<quiz>
-Wie übergibst du einen Parameterwert an einen Nextflow-Workflow von der Befehlszeile?
-- [ ] `-parameter value`
-- [ ] `--parameter:value`
-- [x] `--parameter value`
-- [ ] `-p parameter=value`
-
-Mehr erfahren: [3.2. Einen Befehlszeilenparameter einrichten, um Benutzereingaben zu erfassen](#32-einen-befehlszeilenparameter-einrichten-um-benutzereingaben-zu-erfassen)
-</quiz>
-
-<quiz>
-Wie referenzierst du eine Variable innerhalb eines Nextflow-script-Blocks?
-- [ ] Mit `%variable%`-Syntax
-- [x] Mit `#!groovy ${variable}`-Syntax
-- [ ] Mit `{{variable}}`-Syntax
-- [ ] Mit `[variable]`-Syntax
-</quiz>
+Was
