@@ -93,6 +93,10 @@ jobs:
           VERSION="0.dev"
           ALIAS="development"
 
+          # Move build artifacts out of the way before checkout
+          mv artifacts /tmp/artifacts
+          mv combined /tmp/combined
+
           # Fetch gh-pages if it exists
           git fetch origin gh-pages:gh-pages 2>/dev/null || true
 
@@ -107,8 +111,8 @@ jobs:
           fi
 
           # Copy combined site to version directory
-          cp -r combined "$VERSION"
-          cp -r combined "$ALIAS"
+          cp -r /tmp/combined "$VERSION"
+          cp -r /tmp/combined "$ALIAS"
 
           # Update versions.json for mike compatibility
           python3 << 'EOF'
