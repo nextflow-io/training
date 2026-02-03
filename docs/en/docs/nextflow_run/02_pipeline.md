@@ -1144,7 +1144,7 @@ We just need to specify a container for each process.
 To demonstrate how this work, we made another version of our workflow that runs `cowpy` on the file of collected greetings produced in the third step.
 
 <figure class="excalidraw">
---8<-- "docs/en/docs/nextflow_run/img/hello-pipeline-cowpy.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-cowpy.svg"
 </figure>
 
 This should output a file containing the ASCII art with the three greetings in the speech bubble.
