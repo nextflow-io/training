@@ -304,12 +304,6 @@ We can just load multiple values into the channel.
 
 Let's make them `'Hello'`, `'Bonjour'` and `'Holà'`.
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-channel-multi.svg"
-</figure>
-
-_In the diagram, the channel is represented in green, and the order of elements is represented like marbles in a pipe: the first one loaded is on the right, then the second one in the middle, then the third is on the left._
-
 #### 2.1.1. Add more greetings
 
 Before the workflow block, make the following code change:
@@ -376,8 +370,14 @@ However, there is still only one output in the results directory:
     Holà
     ```
 
-You should see one of the three greetings in there, but the one you got might be different from what is shown here.
+You should see one of the three greetings in there, though the one you got might be different from what is shown here.
 Can you think of why that might be?
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-channel-multi.svg"
+</figure>
+
+_In the diagram, the channel is represented in green, and the order of elements is represented like marbles in a pipe: the first one loaded is on the right, then the second one in the middle, then the third is on the left._
 
 Looking back at the execution monitor, it gave us only one subdirectory path (`f4/c9962c`).
 Let's have a look in there.
@@ -503,7 +503,7 @@ That being said, we still have the problem that there is only one output file in
 You may recall that we hardcoded the output file name for the `sayHello` process, so all three calls produced a file called `output.txt`.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello-channels-task-dirs.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello-channels-task-dirs.svg"
 </figure>
 
 As long as the output files stay in the work subdirectories, isolated from the other processes, that is okay.
@@ -519,7 +519,7 @@ A common way to do that is to use some unique piece of metadata from the inputs 
 Here, for convenience, we'll just use the greeting itself since it's just a short string, and prepend it to the base output filename.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello-pipeline-channel-multi-unique.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-channel-multi-unique.svg"
 </figure>
 
 #### 2.2.1. Construct a dynamic output file name
@@ -799,7 +799,7 @@ Look at the output of `view()` and the error messages.
 It looks like Nextflow tried to run a single process call, using `[Hello, Bonjour, Holà]` as a single string value, instead of using the three strings in the array as separate values.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello-channels-array-fail.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello-channels-array-fail.svg"
 </figure>
 
 So it's the 'packaging' that is causing the problem.
@@ -862,7 +862,7 @@ Here we added the operator on the next line for readability, but you can add ope
 `greeting_ch = channel.of(greetings_array).view().flatten()`
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello-channels-array-success.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello-channels-array-success.svg"
 </figure>
 
 #### 3.2.2. Refine the `view()` statement(s)
@@ -1236,7 +1236,7 @@ Interestingly, this fails too, but with a different error.
 This time Nextflow has parsed the contents of the file (yay!) but it has loaded each row as an array, and each array is an element in the channel.
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello-channels-split-fail.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello-channels-split-fail.svg"
 </figure>
 
 We need to tell it to only take the first column in each row.
@@ -1344,7 +1344,7 @@ Looking at the output of the `view()` statements, you see the following:
 _Note that the lines may appear in a different order in your output._
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello-channels-split-and-map.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello-channels-split-and-map.svg"
 </figure>
 
 You can also look at the output files to verify that each greeting was correctly extracted and processed through the workflow.
@@ -1357,6 +1357,11 @@ You'll learn learn more sophisticated approaches for handling complex inputs in 
 You know how to use the `.fromPath()` channel constructor and the operators `splitCsv()` and `map()` to read in a file of input values and handle them appropriately.
 
 More generally, you have a basic understanding of how Nextflow uses **channels** to manage inputs to processes and **operators** to transform their contents.
+You've also seen how channels handle parallel execution implicitly.
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-channels-parallel.svg"
+</figure>
 
 ### What's next?
 
