@@ -11,6 +11,10 @@ on:
         type: string
         description: "Docs version (leave empty for dev build)"
         required: false
+      latest:
+        type: boolean
+        description: "Set as 'latest' alias (for republishing old versions, uncheck this)"
+        default: true
 
 permissions:
   contents: write
@@ -72,7 +76,12 @@ jobs:
             IS_RELEASE="true"
           elif [ -n "${{ github.event.inputs.version }}" ]; then
             VERSION="${{ github.event.inputs.version }}"
-            ALIAS="latest"
+            # Check if this should be set as latest (default true for releases)
+            if [ "${{ github.event.inputs.latest }}" = "false" ]; then
+              ALIAS=""
+            else
+              ALIAS="latest"
+            fi
             IS_RELEASE="true"
           else
             VERSION="0.dev"
@@ -128,7 +137,8 @@ jobs:
           if git show-ref --verify --quiet refs/heads/gh-pages; then
             git checkout gh-pages
             # Remove old version directories
-            rm -rf "$VERSION" "$ALIAS"
+            rm -rf "$VERSION"
+            [ -n "$ALIAS" ] && rm -rf "$ALIAS"
           else
             git checkout --orphan gh-pages
             git rm -rf . 2>/dev/null || true
@@ -136,7 +146,7 @@ jobs:
 
           # Copy combined site to version directory
           cp -r /tmp/combined "$VERSION"
-          cp -r /tmp/combined "$ALIAS"
+          [ -n "$ALIAS" ] && cp -r /tmp/combined "$ALIAS"
 
           # Update versions.json for mike compatibility
           python3 << 'EOF'
@@ -145,7 +155,7 @@ jobs:
           from pathlib import Path
 
           version = os.environ["VERSION"]
-          alias = os.environ["ALIAS"]
+          alias = os.environ.get("ALIAS", "")
           is_release = os.environ["IS_RELEASE"] == "true"
 
           versions_file = Path("versions.json")
@@ -157,8 +167,8 @@ jobs:
           # Remove existing entry for this version
           versions = [v for v in versions if v.get("version") != version]
 
-          if is_release:
-              # Remove 'latest' alias from other versions
+          if alias == "latest":
+              # Remove 'latest' alias from other versions (only when setting new latest)
               for v in versions:
                   if "aliases" in v:
                       v["aliases"] = [a for a in v["aliases"] if a != "latest"]
@@ -167,7 +177,7 @@ jobs:
           new_entry = {
               "version": version,
               "title": version,
-              "aliases": [alias]
+              "aliases": [alias] if alias else []
           }
 
           if is_release:
@@ -201,9 +211,11 @@ jobs:
         run: |
           # Update Codespaces links to use the release version
           find "$VERSION" -type f -exec sed -i "s|ref=master|ref=$VERSION|g" {} +
-          find latest -type f -exec sed -i "s|ref=master|ref=$VERSION|g" {} +
-          # Only add the specific directories we modified (not any stray files)
-          git add "$VERSION" latest
+          git add "$VERSION"
+          if [ -n "$ALIAS" ]; then
+            find "$ALIAS" -type f -exec sed -i "s|ref=master|ref=$VERSION|g" {} +
+            git add "$ALIAS"
+          fi
           git status
           git commit -m "[automated] Pin GitHub Codespaces link versions" || true
           git push origin gh-pages
