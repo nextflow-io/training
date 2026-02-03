@@ -8,50 +8,7 @@ permissions:
   contents: write
 
 jobs:
-  discover-languages:
-    runs-on: ubuntu-latest
-    outputs:
-      languages: ${{ steps.find.outputs.languages }}
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          sparse-checkout: docs
-
-      - name: Find language directories
-        id: find
-        run: |
-          # Find all directories under docs/ that contain mkdocs.yml
-          langs=$(find docs -maxdepth 2 -name "mkdocs.yml" -exec dirname {} \; | xargs -n1 basename | sort | jq -R -s -c 'split("\n") | map(select(length > 0))')
-          echo "languages=$langs" >> $GITHUB_OUTPUT
-          echo "Found languages: $langs"
-
-  build:
-    needs: discover-languages
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        lang: ${{ fromJson(needs.discover-languages.outputs.languages) }}
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-
-      - name: Install Dependencies
-        run: pip install mkdocs-material mkdocs-enumerate-headings-plugin mkdocs-quiz
-
-      - name: Build ${{ matrix.lang }} docs
-        run: mkdocs build -f docs/${{ matrix.lang }}/mkdocs.yml -d ${{ github.workspace }}/site-${{ matrix.lang }}
-
-      - uses: actions/upload-artifact@v4
-        with:
-          name: site-${{ matrix.lang }}
-          path: site-${{ matrix.lang }}/
-
-  deploy:
-    needs: build
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -65,21 +22,20 @@ jobs:
       - name: Install Dependencies
         run: pip install mkdocs-material mkdocs-enumerate-headings-plugin mkdocs-quiz
 
-      - uses: actions/download-artifact@v4
-        with:
-          path: artifacts
-
-      - name: Combine language builds
+      - name: Build all languages
         run: |
           mkdir -p combined
-          # English goes to root
-          cp -r artifacts/site-en/* combined/
-          # Other languages go to subdirectories (discover from artifacts)
-          for dir in artifacts/site-*; do
-            lang=$(basename "$dir" | sed 's/site-//')
-            if [ "$lang" != "en" ] && [ -d "$dir" ]; then
+
+          for mkdocs_file in docs/*/mkdocs.yml; do
+            lang=$(basename $(dirname "$mkdocs_file"))
+            echo "Building $lang..."
+            mkdocs build -f "$mkdocs_file" -d "$GITHUB_WORKSPACE/site-$lang"
+
+            if [ "$lang" = "en" ]; then
+              cp -r "site-$lang"/* combined/
+            else
               mkdir -p "combined/$lang"
-              cp -r "$dir"/* "combined/$lang/"
+              cp -r "site-$lang"/* "combined/$lang/"
             fi
           done
 
@@ -93,22 +49,26 @@ jobs:
           VERSION="0.dev"
           ALIAS="development"
 
+          # Move combined site out of the way before checkout
+          mv combined /tmp/combined
+
           # Fetch gh-pages if it exists
           git fetch origin gh-pages:gh-pages 2>/dev/null || true
 
           # Check if gh-pages exists
           if git show-ref --verify --quiet refs/heads/gh-pages; then
             git checkout gh-pages
-            # Remove old version directories
             rm -rf "$VERSION" "$ALIAS"
           else
             git checkout --orphan gh-pages
             git rm -rf . 2>/dev/null || true
           fi
 
-          # Copy combined site to version directory
+          # Move combined back and copy to version directories
+          mv /tmp/combined combined
           cp -r combined "$VERSION"
           cp -r combined "$ALIAS"
+          rm -rf combined
 
           # Update versions.json for mike compatibility
           python3 << 'EOF'
