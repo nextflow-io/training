@@ -21,7 +21,7 @@ Bu, aşağıdakileri başarmanın Nextflow yolunu size öğretecek:
 
 1. Verilerin bir süreçten diğerine akmasını sağlamak
 2. Birden fazla süreç çağrısından gelen çıktıları tek bir süreç çağrısına toplamak
-3. Bir sürece birden fazla girdi iletmek
+3. Bir sürece ek parametreler iletmek
 4. Bir süreçten çıkan birden fazla çıktıyı işlemek
 
 Göstermek için, 1. ve 2. Bölümlerden alan-bağımsız Hello World örneği üzerinde geliştirmeye devam edeceğiz.
@@ -51,6 +51,14 @@ output {
     }
 }
 ```
+
+Bu diyagram, iş akışının mevcut işleyişini özetlemektedir.
+Tanıdık gelmeli, ancak şimdi süreç çıktılarının bir kanala paketlendiğini, tıpkı girdiler gibi, açıkça gösteriyoruz.
+Bu çıktı kanalını birazdan iyi bir şekilde kullanacağız.
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-workflow-channels.svg"
+</figure>
 
 Her şeyin çalıştığından emin olmak için, herhangi bir değişiklik yapmadan önce betiği bir kez çalıştırın:
 
@@ -202,8 +210,14 @@ Bu henüz işlevsel değil çünkü `convertToUpper()` sürecine ne girilmesi ge
 
 Şimdi `sayHello()` sürecinin çıktısını `convertToUpper()` sürecine akıtmamız gerekiyor.
 
-Kullanışlı bir şekilde, Nextflow bir sürecin çıktısını otomatik olarak `<process>.out` adlı bir kanala paketler.
+Kullanışlı bir şekilde, Nextflow bir sürecin çıktısını otomatik olarak bir kanala paketler; bunu ısınma bölümündeki diyagramda gösterildiği gibi.
+Bir sürecin çıktı kanalına `<process>.out` olarak atıfta bulunabiliriz.
+
 Dolayısıyla `sayHello` sürecinin çıktısı `sayHello.out` adlı bir kanaldır ve bunu doğrudan `convertToUpper()` çağrısına bağlayabiliriz.
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-multistep-connector.svg"
+</figure>
 
 İş akışı bloğunda, aşağıdaki kod değişikliğini yapın:
 
@@ -493,6 +507,11 @@ Teoride bu, rastgele sayıda girdi dosyasını işlemelidir.
 ### 2.3. Toplama adımını iş akışına ekleyin
 
 Şimdi büyük harf dönüşümü adımının çıktısı üzerinde toplama sürecini çağırmamız yeterli olmalı.
+Bu da `convertToUpper.out` adlı bir kanaldır.
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect-connector.svg"
+</figure>
 
 #### 2.3.1. Süreç çağrılarını bağlayın
 
@@ -555,13 +574,17 @@ Yalnızca bir tane bekliyorduk, ama üç tane var.
 
 Hay aksi. Toplama adımı her selamlama için ayrı ayrı çalıştırıldı, bu istediğimiz şey DEĞİLDİ.
 
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect-no-operator.svg"
+</figure>
+
 Nextflow'a, o üçüncü adımın `convertToUpper()` tarafından çıktı olarak verilen kanaldaki tüm öğeler üzerinde çalışmasını istediğimizi açıkça söylemek için bir şey yapmamız gerekiyor.
 
 ### 2.4. Selamlamaları tek bir girdide toplamak için bir operatör kullanın
 
 Evet, bir kez daha sorunumuzun cevabı bir operatör.
 
-Özellikle, uygun bir şekilde adlandırılmış [`collect()`](https://www.nextflow.io/docs/latest/reference/operator.html#collect) operatörünü kullanacağız.
+Özellikle, uygun bir şekilde adlandırılmış [`collect()`](https://nextflow.io/docs/latest/reference/operator.html#collect) operatörünü kullanacağız.
 
 #### 2.4.1. `collect()` operatörünü ekleyin
 
@@ -641,13 +664,18 @@ nextflow run hello-workflow.nf -resume
 Başarıyla çalışıyor, ancak log çıktısı bundan biraz daha dağınık görünebilir (okunabilirlik için temizledik).
 
 Bu sefer üçüncü adım yalnızca bir kez çağrıldı!
-
 `view()` ifadelerinin çıktısına bakarak şunları görüyoruz:
 
 - Her selamlama için bir tane olmak üzere üç `collect öncesi:` ifadesi: o noktada dosya yolları kanalda bireysel öğeler.
 - Tek bir `collect sonrası:` ifadesi: üç dosya yolu artık tek bir öğe içinde paketlenmiş.
 
-Son çıktı dosyasının içeriğine bakın.
+Bunu şu diyagramla özetleyebiliriz:
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect-WITH-operator.svg"
+</figure>
+
+Son olarak, her şeyin doğru çalıştığından emin olmak için çıktı dosyasının içeriğine bakabilirsiniz.
 
 ??? abstract "Dosya içerikleri"
 
@@ -692,20 +720,30 @@ Bu temelde 2.4.2 noktasının ters işlemidir.
 
 Toplu süreç çağrılarından çıktıları nasıl toplayıp ortak bir analiz veya özetleme adımına besleyeceğinizi biliyorsunuz.
 
+Özetlemek gerekirse, şu ana kadar oluşturduğunuz şey bu:
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect.svg"
+</figure>
+
 ### Sırada ne var?
 
 Bir sürece birden fazla girdiyi nasıl ileteceğinizi öğrenin.
 
 ---
 
-## 3. Bir sürece birden fazla girdi iletin
+## 3. Bir sürece ek parametreler iletin
 
-Önceki sonuçların üzerine yazmadan sonraki selamlama gruplarını işleyebilmek için son çıktı dosyasına belirli bir ad verebilmek istiyoruz.
+Son çıktı dosyasına belirli bir şey vermek istiyoruz ki sonraki selamlama gruplarını son sonuçların üzerine yazmadan işleyebilelim.
 
 Bu amaçla, iş akışında aşağıdaki iyileştirmeleri yapacağız:
 
-- Toplayıcı süreci, çıktı dosyası için kullanıcı tanımlı bir ad kabul edecek şekilde değiştirmek
-- İş akışına bir komut satırı parametresi eklemek ve bunu toplayıcı sürece iletmek
+- Toplayıcı süreci, çıktı dosyası için kullanıcı tanımlı bir ad kabul edecek şekilde değiştirmek (`batch_name`)
+- İş akışına bir komut satırı parametresi eklemek (`--batch`) ve bunu toplayıcı sürece iletmek
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect-batch.svg"
+</figure>
 
 ### 3.1. Toplayıcı sürecini değiştirin
 
@@ -967,6 +1005,10 @@ Ama deyişte olduğu gibi, neden ikisi de olmasın?
 - `collectGreetings.out.outfile` son çıktı dosyasını içerir
 - `collectGreetings.out.report` rapor dosyasını içerir
 
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect-report.svg"
+</figure>
+
 İş akışı çıktılarını buna göre güncellememiz gerekiyor.
 
 #### 4.2.1. `publish:` bölümünü güncelleyin
@@ -1076,6 +1118,10 @@ nextflow run hello-workflow.nf -resume --batch trio
     Bu grupta 3 selamlama vardı.
     ```
 
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect-4-way.svg"
+</figure>
+
 CSV'ye daha fazla selamlama eklemekten ve ne olduğunu test etmekten çekinmeyin.
 
 ### Özet
@@ -1088,7 +1134,7 @@ Daha genel olarak, süreçleri yaygın yollarla birbirine bağlamayla ilgili tem
 
 Ekstra uzun bir mola verin, bunu hak ettiniz.
 
-Hazır olduğunuzda, kodunuzu daha iyi sürdürülebilirlik ve kod verimliliği için nasıl modülerleştireceğinizi öğrenmek için [**Bölüm 4: Merhaba Modüller**](./04_hello_modules.md)'e geçin.
+Hazır olduğunuzda, kodunuzu daha iyi sürdürülebilirlik ve kod verimliliği için nasıl modülerleştireceğinizi öğrenmek için [**Bölüm 4: Hello Modules**](./04_hello_modules.md)'e geçin.
 
 ---
 

@@ -25,7 +25,7 @@ Tutto ciò è molto tedioso e fastidioso, quindi vi mostreremo come usare i **co
 Un **container** è un'unità di software leggera, autonoma ed eseguibile creata da un'**immagine** container che include tutto il necessario per eseguire un'applicazione, incluso codice, librerie di sistema e impostazioni.
 Come potete immaginare, questo sarà molto utile per rendere le vostre pipeline più riproducibili.
 
-Nota che insegneremo questo usando [Docker](https://www.docker.com/get-started/), ma tenete presente che Nextflow supporta anche [diverse altre tecnologie container](https://www.nextflow.io/docs/latest/container.html#).
+Nota che insegneremo questo usando [Docker](https://www.docker.com/get-started/), ma tenete presente che Nextflow supporta anche [diverse altre tecnologie container](https://nextflow.io/docs/latest/container.html).
 
 ??? info "Come iniziare da questa sezione"
 
@@ -65,7 +65,7 @@ output {
 }
 ```
 
-Solo per assicurarci che tutto funzioni, eseguite lo script una volta prima di apportare modifiche:
+Solo per assicurarci che tutto funzioni, eseguiamo lo script una volta prima di apportare modifiche:
 
 ```bash
 nextflow run hello-containers.nf
@@ -87,7 +87,7 @@ nextflow run hello-containers.nf
 
 Come in precedenza, troverete i file di output nella directory specificata nel blocco `output` (`results/hello_containers/`).
 
-??? abstract "Contenuti della directory"
+??? abstract "Directory contents"
 
     ```console
     results/hello_containers/
@@ -414,10 +414,8 @@ Questo significa che potete usare qualsiasi immagine container che desiderate pe
 Per dimostrare questo, aggiungeremo un passaggio `cowpy` alla pipeline che abbiamo sviluppato, dopo il passaggio `collectGreetings`.
 
 <figure class="excalidraw">
---8<-- "docs/en/docs/nextflow_run/img/hello-pipeline-cowpy.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-cowpy.svg"
 </figure>
-
-Muggite se siete pronti a tuffarvi!
 
 ### 2.1. Scrivere un modulo `cowpy`
 
@@ -440,7 +438,7 @@ Possiamo modellare il nostro processo `cowpy` sugli altri processi che abbiamo s
 ```groovy title="modules/cowpy.nf" linenums="1"
 #!/usr/bin/env nextflow
 
-// Generate ASCII art with cowpy
+// Genera arte ASCII con cowpy
 process cowpy {
 
     input:
@@ -544,7 +542,7 @@ Questo è tecnicamente opzionale ma è la pratica raccomandata ed è un'opportun
 
     ```groovy title="hello-containers.nf" linenums="9" hl_lines="7"
     /*
-    * Pipeline parameters
+    * Parametri della pipeline
     */
     params {
         input: Path = 'data/greetings.csv'
@@ -557,7 +555,7 @@ Questo è tecnicamente opzionale ma è la pratica raccomandata ed è un'opportun
 
     ```groovy title="hello-containers.nf" linenums="9"
     /*
-    * Pipeline parameters
+    * Parametri della pipeline
     */
     params {
         input: Path = 'data/greetings.csv'
@@ -801,7 +799,7 @@ Ora, cambiamo quello a `true` per abilitare Docker:
 !!! tip "Suggerimento"
 
     È possibile abilitare l'esecuzione Docker dalla riga di comando, su base per esecuzione, usando il parametro `-with-docker <container>`.
-    Tuttavia, questo ci permette solo di specificare un container per l'intero workflow, mentre l'approccio che Le abbiamo appena mostrato ci permette di specificare un container diverso per processo.
+    Tuttavia, questo ci permette solo di specificare un container per l'intero workflow, mentre l'approccio che vi abbiamo appena mostrato ci permette di specificare un container diverso per processo.
     Questo è meglio per modularità, manutenzione del codice e riproducibilità.
 
 #### 2.3.3. Eseguire il workflow con Docker abilitato
@@ -829,7 +827,7 @@ nextflow run hello-containers.nf -resume
 Questa volta funziona davvero!
 Come al solito potete trovare gli output del workflow nella directory dei risultati corrispondente, anche se questa volta sono un po' più ordinatamente organizzati, con solo il report e l'output finale al livello superiore, e tutti i file intermedi spostati in una sottodirectory.
 
-??? abstract "Contenuti della directory"
+??? abstract "Directory contents"
 
     ```console
     results/hello_containers/
@@ -847,7 +845,7 @@ Come al solito potete trovare gli output del workflow nella directory dei risult
 
 L'output ASCII art finale è nella directory `results/hello_containers/`, sotto il nome `cowpy-COLLECTED-batch-output.txt`.
 
-??? abstract "Contenuti del file"
+??? abstract "File contents"
 
     ```console title="results/hello_containers/cowpy-COLLECTED-batch-output.txt"
     _________
@@ -878,9 +876,9 @@ L'output ASCII art finale è nella directory `results/hello_containers/`, sotto 
                           ^^^ ^^ ^^^ ^
     ```
 
-Ed eccolo, il nostro bellissimo tacchino che dice i saluti come desiderateto.
+Ed eccolo, il nostro bellissimo tacchino che dice i saluti come desiderato.
 
-#### 2.3.4. Ispezionare come Nextflow ha lanciato il task containerizzato
+#### 2.3.4. Ispezionare come Nextflow ha lanciato l'attività containerizzata
 
 Come coda finale a questa sezione, diamo un'occhiata alla sottodirectory di lavoro per una delle chiamate del processo `cowpy` per ottenere un po' più di comprensione su come Nextflow lavora con i container sotto il cofano.
 
@@ -890,7 +888,7 @@ Questo corrisponde al seguente percorso di directory troncato: `work/98/656c6c`.
 
 In quella directory, troverete il file `.command.run` che contiene tutti i comandi che Nextflow ha eseguito per vostro conto nel corso dell'esecuzione della pipeline.
 
-??? abstract "Contenuti del file"
+??? abstract "File contents"
 
     ```console title="work/98/656c6c90cce1667c094d880f4b6dcc/.command.run"
     #!/bin/bash
@@ -1087,11 +1085,11 @@ Sapete come usare i container in Nextflow per eseguire processi.
 
 ### Cosa c'è dopo?
 
-Prendetevi una pausa!
+Prendetevi una piccola pausa!
 
 Quando siete pronti, passate alla [**Parte 6: Hello Config**](./06_hello_config.md) per imparare come configurare l'esecuzione della vostra pipeline per adattarla alla vostra infrastruttura e gestire la configurazione di input e parametri.
 
-È l'ultima parte, e poi avrà finito con questo corso!
+È l'ultima parte, e poi avrete finito con questo corso!
 
 ---
 
@@ -1154,11 +1152,11 @@ Per approfondire: [2.3.2. Abilitare l'uso di Docker tramite il file `nextflow.co
 </quiz>
 
 <quiz>
-Cosa gestisce automaticamente Nextflow quando esegue un processo in un container? (Selezioni tutte le risposte applicabili)
+Cosa gestisce automaticamente Nextflow quando esegue un processo in un container? (Selezionate tutte le risposte applicabili)
 - [x] Scaricare l'immagine container se necessario
 - [x] Montare la directory di lavoro
 - [x] Eseguire lo script del processo all'interno del container
 - [x] Pulire l'istanza container dopo l'esecuzione
 
-Per approfondire: [2.3.4. Ispezionare come Nextflow ha lanciato il task containerizzato](#234-ispezionare-come-nextflow-ha-lanciato-il-task-containerizzato)
+Per approfondire: [2.3.4. Ispezionare come Nextflow ha lanciato l'attività containerizzata](#234-ispezionare-come-nextflow-ha-lanciato-lattivita-containerizzata)
 </quiz>

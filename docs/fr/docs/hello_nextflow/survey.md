@@ -4,6 +4,6 @@
 
 Avant de passer à la suite, veuillez remplir cette courte enquête en 5 questions pour évaluer la formation, partager vos commentaires sur votre expérience et nous faire savoir ce que nous pourrions faire d'autre pour vous aider dans votre parcours Nextflow.
 
-Cela devrait vous prendre moins d'une minute à compléter. Merci de nous aider à améliorer nos supports de formation pour tout le monde !
+Cela ne devrait vous prendre qu'une ou deux minutes. Merci de nous aider à améliorer nos supports de formation pour tout le monde !
 
-<div data-tf-live="01JMHYE82Z92J2Q6Q3Z7QJ1BFW"></div><script src="//embed.typeform.com/next/embed.js"></script>
+<div data-tf-live="01KGH8MQ30SAHP9H50GVJBQW4S"></div><script src="//embed.typeform.com/next/embed.js"></script>

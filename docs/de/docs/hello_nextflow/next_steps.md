@@ -1,8 +1,8 @@
 # Kurszusammenfassung
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-notice-icon:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Herzlichen Glückwunsch zum Abschluss des Hello Nextflow-Trainingskurses!
+Herzlichen Glückwunsch zum Abschluss des Hello Nextflow-Trainingskurses! 🎉
 
 <!--
 <div class="video-wrapper">
@@ -24,7 +24,7 @@ Im Laufe von sechs Teilen hast du diesen einfachen Workflow in eine modulare meh
 ### Was du gebaut hast
 
 - Die endgültige Form des Hello-Workflows nimmt als Eingabe eine CSV-Datei mit Textbegrüßungen.
-- Die vier Schritte sind als Nextflow-Prozesse implementiert (`sayHello`, `convertToUpper`, `collectGreetings` und `cowpy`), die in separaten Moduldateien gespeichert sind.
+- Die vier Schritte sind als Nextflow-Prozesse (`sayHello`, `convertToUpper`, `collectGreetings` und `cowpy`) implementiert, die in separaten Moduldateien gespeichert sind.
 - Die Ergebnisse werden in einem Verzeichnis namens `results/` veröffentlicht.
 - Die endgültige Ausgabe der Pipeline ist eine einfache Textdatei mit ASCII-Kunst einer Figur, die die in Großbuchstaben konvertierten Begrüßungen sagt.
 
@@ -56,7 +56,7 @@ Du bist jetzt mit dem Grundwissen ausgestattet, um eigene Pipelines in Nextflow 
 Hier sind unsere Top-3-Vorschläge, was du als Nächstes tun solltest:
 
 - Wende Nextflow auf einen wissenschaftlichen Analyse-Anwendungsfall an mit [Nextflow für die Wissenschaft](../nf4_science/index.md)
-- Starte mit nf-core mit [Hello nf-core](../../hello_nf-core/index.md)
+- Starte mit nf-core mit [Hello nf-core](../hello_nf-core/index.md)
 - Erkunde fortgeschrittenere Nextflow-Funktionen mit den [Side Quests](../side_quests/index.md)
 
 Schließlich empfehlen wir dir, einen Blick auf [**Seqera Platform**](https://seqera.io/) zu werfen, eine Cloud-basierte Plattform, die von den Entwickler\*innen von Nextflow entwickelt wurde und es noch einfacher macht, deine Workflows zu starten und zu verwalten, sowie deine Daten zu verwalten und Analysen interaktiv in jeder Umgebung auszuführen.

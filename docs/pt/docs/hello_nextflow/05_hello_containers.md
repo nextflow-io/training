@@ -25,7 +25,7 @@ Tudo isso é muito tedioso e irritante, então vamos mostrar como usar **contêi
 Um **contêiner** é uma unidade leve, autônoma e executável de software criada a partir de uma **imagem** de contêiner que inclui tudo o que é necessário para executar uma aplicação, incluindo código, bibliotecas do sistema e configurações.
 Como você pode imaginar, isso será muito útil para tornar seus pipelines mais reproduzíveis.
 
-Note que ensinaremos isso usando [Docker](https://www.docker.com/get-started/), mas tenha em mente que o Nextflow suporta [várias outras tecnologias de contêiner](https://www.nextflow.io/docs/latest/container.html#) também.
+Note que ensinaremos isso usando [Docker](https://www.docker.com/get-started/), mas tenha em mente que o Nextflow suporta [várias outras tecnologias de contêiner](https://nextflow.io/docs/latest/container.html) também.
 
 ??? info "Como começar a partir desta seção"
 
@@ -414,7 +414,7 @@ Isso significa que você pode usar qualquer imagem de contêiner que desejar par
 Para demonstrar isso, vamos adicionar uma etapa `cowpy` ao pipeline que estamos desenvolvendo, após a etapa `collectGreetings`.
 
 <figure class="excalidraw">
---8<-- "docs/en/docs/nextflow_run/img/hello-pipeline-cowpy.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-cowpy.svg"
 </figure>
 
 Muu se você está pronto para mergulhar!
@@ -1089,7 +1089,7 @@ Você sabe como usar contêineres no Nextflow para executar processos.
 
 Faça uma pausa!
 
-Quando estiver pronto, siga para [**Parte 6: Olá Configuração**](./06_hello_config.md) para aprender como configurar a execução do seu pipeline para se adequar à sua infraestrutura, bem como gerenciar configuração de entradas e parâmetros.
+Quando estiver pronto, siga para [**Parte 6: Hello Config**](./06_hello_config.md) para aprender como configurar a execução do seu pipeline para se adequar à sua infraestrutura, bem como gerenciar configuração de entradas e parâmetros.
 
 É a última parte, e então você terá terminado este curso!
 

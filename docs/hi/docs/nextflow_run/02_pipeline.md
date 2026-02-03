@@ -229,7 +229,7 @@ Condensed mode में, Nextflow report करता है कि calls स�
 
 यह सबसे interesting भाग है: हमने कमांड-लाइन से single value लेने से, CSV फ़ाइल लेने, इसे parse करने और इसमें contained individual greetings को process करने में कैसे switch किया?
 
-Nextflow में, हम यह एक **channel** के साथ करते हैं: inputs को कुशलता से handle करने और उन्हें multi-step workflows में एक step से दूसरे में shuttle करने के लिए डिज़ाइन किया गया एक construct, जो built-in parallelism और कई अतिरिक्त benefits प्रदान करता है।
+Nextflow में, हम यह एक [**channel**](https://nextflow.io/docs/latest/channel.html) के साथ करते हैं: inputs को कुशलता से handle करने और उन्हें multi-step workflows में एक step से दूसरे में shuttle करने के लिए डिज़ाइन किया गया एक queue construct, जो built-in parallelism और कई अतिरिक्त benefits प्रदान करता है।
 
 आइए इसे break down करें।
 
@@ -618,21 +618,17 @@ process collectGreetings {
 
 `collect` operator का उपयोग एक ही process के कई calls से outputs को collect करने और उन्हें एक single channel element में package करने के लिए किया जाता है।
 
-इस workflow के context में, यह `convertToUpper.out` channel में तीन uppercased greetings ले रहा है --जो तीन अलग-अलग channel items हैं, और normally अगले process द्वारा अलग-अलग calls में handle की जाएंगी-- और उन्हें एक single item में package कर रहा है।
-
-अधिक practical terms में: यदि हम `collectGreetings()` को feed करने से पहले `convertToUpper()` के output पर `collect()` apply नहीं करते, Nextflow simply प्रत्येक greeting पर independently `collectGreetings()` run करेगा, जो हमारे goal को achieve नहीं करेगा।
-
-<figure class="excalidraw">
---8<-- "docs/en/docs/nextflow_run/img/without-collect-operator.svg"
-</figure>
-
-इसके विपरीत, `collect()` का उपयोग करना हमें workflow के दूसरे step द्वारा produced सभी अलग-अलग uppercased greetings लेने और उन्हें सब एक साथ pipeline के तीसरे step में एक single call को feed करने की अनुमति देता है।
+इस workflow के context में, यह `convertToUpper.out` channel में तीन uppercased greetings ले रहा है (जो तीन अलग-अलग channel items हैं, और normally अगले process द्वारा अलग-अलग calls में handle की जाएंगी) और उन्हें एक single item में package कर रहा है।
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/nextflow_run/img/with-collect-operator.svg"
 </figure>
 
-इस तरह हम सभी greetings को वापस एक ही फ़ाइल में लाते हैं।
+इसके विपरीत, यदि हम `collectGreetings()` को feed करने से पहले `convertToUpper()` के output पर `collect()` apply नहीं करते, Nextflow simply प्रत्येक greeting पर independently `collectGreetings()` run करेगा, जो हमारे goal को achieve नहीं करेगा।
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/nextflow_run/img/without-collect-operator.svg"
+</figure>
 
 Process calls के बीच channels की contents पर transformations apply करने के लिए कई अन्य [operators](https://www.nextflow.io/docs/latest/reference/operator.html#operator-page) उपलब्ध हैं।
 
@@ -783,7 +779,7 @@ Published outputs को organize करने के और भी sophisticate
 
 यहां हम Nextflow में code modularity के सबसे common form को demonstrate करने जा रहे हैं, जो **modules** का उपयोग है।
 
-Nextflow में, एक **module** एक single process definition है जो एक standalone code फ़ाइल में अपने आप में encapsulated है।
+Nextflow में, एक [**module**](https://nextflow.io/docs/latest/module.html) एक single process definition है जो एक standalone code फ़ाइल में अपने आप में encapsulated है।
 Workflow में module use करने के लिए, तुम बस अपनी workflow code फ़ाइल में एक single-line import statement जोड़ते हो; फिर तुम process को workflow में normally integrate कर सकते हो।
 यह workflow code की multiple copies produce किए बिना process definitions को multiple workflows में reuse करना possible बनाता है।
 
@@ -820,10 +816,9 @@ Workflow में module use करने के लिए, तुम बस �
     #!/usr/bin/env nextflow
 
     // Modules को include करें
-
-include { sayHello } from './modules/sayHello.nf'
-include { convertToUpper } from './modules/convertToUpper.nf'
-include { collectGreetings } from './modules/collectGreetings.nf'
+    include { sayHello } from './modules/sayHello.nf'
+    include { convertToUpper } from './modules/convertToUpper.nf'
+    include { collectGreetings } from './modules/collectGreetings.nf'
 
     /*
     * Pipeline पैरामीटर
@@ -1149,7 +1144,7 @@ exit
 यह काम कैसे करता है demonstrate करने के लिए, हमने अपनी workflow का एक और version बनाया है जो तीसरे step में produced collected greetings की फ़ाइल पर `cowpy` run करता है।
 
 <figure class="excalidraw">
---8<-- "docs/en/docs/nextflow_run/img/hello-pipeline-cowpy.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-cowpy.svg"
 </figure>
 
 इसे speech bubble में तीन greetings के साथ ASCII art containing एक फ़ाइल output करनी चाहिए।
@@ -1164,11 +1159,10 @@ Workflow पिछले वाले के बहुत similar है, plus `
     #!/usr/bin/env nextflow
 
     // Modules को include करें
-
-include { sayHello } from './modules/sayHello.nf'
-include { convertToUpper } from './modules/convertToUpper.nf'
-include { collectGreetings } from './modules/collectGreetings.nf'
-include { cowpy } from './modules/cowpy.nf'
+    include { sayHello } from './modules/sayHello.nf'
+    include { convertToUpper } from './modules/convertToUpper.nf'
+    include { collectGreetings } from './modules/collectGreetings.nf'
+    include { cowpy } from './modules/cowpy.nf'
 
     /*
     * Pipeline पैरामीटर
@@ -1380,15 +1374,132 @@ nextflow run 2d-container.nf --input data/greetings.csv --character turkey -resu
     ...
     ```
 
-तुम देख सकते हो कि इसमें container को pull और mount करने के लिए setup instructions शामिल हैं, साथ ही script अंदर चलाने के instructions।
+यदि तुम इस फ़ाइल में `nxf_launch` search करते हो, तो तुम्हें कुछ इस तरह देखना चाहिए:
+
+```console
+nxf_launch() {
+    docker run -i --cpu-shares 1024 -e "NXF_TASK_WORKDIR" -v /workspaces/training/nextflow-run/work:/workspaces/training/nextflow-run/work -w "$NXF_TASK_WORKDIR" --name $NXF_BOXID community.wave.seqera.io/library/pip_cowpy:131d6a1b707a8e65 /bin/bash -ue /workspaces/training/nextflow-run/work/7f/caf7189fca6c56ba627b75749edcb3/.command.sh
+}
+```
+
+यह launch कमांड दिखाती है कि Nextflow process call launch करने के लिए एक बहुत similar `docker run` कमांड का उपयोग कर रहा है जैसा हमने manually run किया था।
+यह corresponding work subdirectory को container में mount भी करता है, container के अंदर working directory accordingly set करता है, और हमारे templated bash script को `.command.sh` फ़ाइल में run करता है।
+
+यह confirm करता है कि वह सारा hard work जो हमें previous section में manually करना पड़ा अब Nextflow द्वारा हमारे लिए किया जा रहा है!
 
 ### सीख
 
-तुम जानते हो कि Nextflow processes को container images specify करके software dependencies provide करना कैसे संभव बनाता है।
+तुम समझते हो कि containers software tool versions manage करने और reproducibility ensure करने में क्या role play करते हैं।
+
+अधिक generally, तुम्हें real-world Nextflow pipelines के core components क्या हैं और वे कैसे organized हैं इसकी basic understanding है।
+तुम जानते हो कि Nextflow कैसे कई inputs को efficiently process कर सकता है, कई steps से composed workflows run कर सकता है जो एक साथ connected हैं, modular code components leverage कर सकता है, और अधिक reproducibility और portability के लिए containers utilize कर सकता है।
 
 ### आगे क्या?
 
-यह Part 2 के अंत को mark करता है।
-अगले part में, तुम workflow execution को configure करना सीखोगे जैसे inputs और outputs manage करना, software packaging technologies के बीच switch करना, और HPC या cloud जैसे different execution platforms पर run करना।
+एक और break लो! वह Nextflow pipelines कैसे काम करती हैं इसके बारे में information का एक बड़ा pile था।
 
-[Part 3: Run configuration](./03_config.md) पर जारी रखो।
+इस training के अंतिम section में, हम configuration के topic में गहराई से जाने वाले हैं।
+तुम सीखोगे कि अपनी pipeline के execution को अपने infrastructure के हिसाब से configure कैसे करें साथ ही inputs और parameters का configuration manage कैसे करें।
+
+---
+
+## Quiz
+
+<quiz>
+Nextflow प्रत्येक process call के लिए एक अलग task directory क्यों बनाता है?
+- [ ] Execution speed improve करने के लिए
+- [ ] Memory usage reduce करने के लिए
+- [x] Executions को isolate करने और outputs के बीच collisions से बचने के लिए
+- [ ] Parallel file compression enable करने के लिए
+
+अधिक जानें: [1.3. Original outputs और logs खोजो](#13-original-outputs-और-logs-खोजो)
+</quiz>
+
+<quiz>
+Workflow run करते समय `-ansi-log false` option क्या करता है?
+- [ ] सभी console output disable करता है
+- [x] Output से color remove करता है
+- [x] सभी task directory paths दिखाता है उन्हें एक line पर condense करने के बजाय
+- [ ] Verbose debugging mode enable करता है
+
+अधिक जानें: [1.3.2. Terminal को अधिक details दिखाने दो](#132-terminal-को-अधिक-details-दिखाने-दो)
+
+यदि तुम इस style को prefer करते हो तो तुम निम्नलिखित environment variables में से किसी एक का भी उपयोग कर सकते हो:
+
+```bash
+export NXF_ANSI_LOG=0
+# या
+export NO_COLOR=1
+```
+
+</quiz>
+
+<quiz>
+Code `#!groovy channel.fromPath(params.input).splitCsv().map { line -> line[0] }` में, `#!groovy .map { line -> line[0] }` क्या करता है?
+- [ ] Empty lines को filter करता है
+- [ ] Lines को alphabetically sort करता है
+- [x] प्रत्येक CSV row से पहला column extract करता है
+- [ ] Lines की संख्या count करता है
+
+अधिक जानें: [1.4.1. CSV से इनपुट डेटा load करना](#141-csv-से-इनपुट-डेटा-load-करना)
+</quiz>
+
+<quiz>
+Output filenames में input value शामिल करना (जैसे, `#!groovy "${greeting}-output.txt"`) क्यों important है?
+- [ ] Processing speed improve करने के लिए
+- [ ] Resume functionality enable करने के लिए
+- [x] कई inputs process करते समय output files को एक दूसरे को overwrite करने से रोकने के लिए
+- [ ] Files को compress करना आसान बनाने के लिए
+
+अधिक जानें: [1.4.3. Outputs को कैसे नाम दिया जाता है](#143-outputs-को-कैसे-नाम-दिया-जाता-है)
+</quiz>
+
+<quiz>
+एक modularized workflow में `include` statement का purpose क्या है?
+- [ ] Process code को workflow फ़ाइल में copy करना
+- [x] एक external module फ़ाइल से एक process definition import करना
+- [ ] Configuration settings शामिल करना
+- [ ] Documentation comments जोड़ना
+
+अधिक जानें: [3. Modularized pipelines चलाना](#3-modularized-pipelines-चलाना)
+</quiz>
+
+<quiz>
+जब तुम एक workflow modularize करते हो और इसे `-resume` के साथ run करते हो, तो क्या होता है?
+- [ ] Modular processes के लिए caching disable हो जाती है
+- [ ] सभी tasks को फिर से execute करना होगा
+- [x] Generated job scripts के आधार पर caching normally काम करती है
+- [ ] केवल main workflow फ़ाइल cached होती है
+
+अधिक जानें: [3.2. Workflow चलाओ](#32-workflow-चलाओ)
+</quiz>
+
+<quiz>
+Process definition में `container` directive क्या specify करता है?
+- [ ] Process के लिए working directory
+- [ ] Maximum memory allocation
+- [x] Process run करने के लिए use होने वाला container image URI
+- [ ] Output file format
+
+अधिक जानें: [4.2. Workflow में container use करो](#42-workflow-में-container-use-करो)
+</quiz>
+
+<quiz>
+`.command.run` फ़ाइल में, `nxf_launch` function में क्या contain होता है?
+- [ ] Nextflow version information
+- [ ] Workflow parameters
+- [x] Volume mounts और container settings के साथ `docker run` कमांड
+- [ ] Process input declarations
+
+अधिक जानें: [4.2.4. Inspect करो कि Nextflow ने containerized task कैसे launch किया](#424-inspect-करो-कि-nextflow-ने-containerized-task-कैसे-launch-किया)
+</quiz>
+
+<quiz>
+एक containerized process run करते समय Nextflow automatically क्या handle करता है? (सभी लागू चुनें)
+- [x] जरूरत होने पर container image pull करना
+- [x] Work directory को container में mount करना
+- [x] Container के अंदर process script run करना
+- [x] Execution के बाद container instance cleanup करना
+
+अधिक जानें: [4. Containerized software का उपयोग करना](#4-containerized-software-का-उपयोग-करना)
+</quiz>

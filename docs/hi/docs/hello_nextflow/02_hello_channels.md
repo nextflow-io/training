@@ -19,11 +19,11 @@
 Practice में, उस approach की major limitations हैं; namely कि यह केवल बहुत simple cases के लिए काम करता है जहाँ हम process को केवल एक बार, single value पर run करना चाहते हैं।
 अधिकांश realistic workflow use cases में, हम multiple values (उदाहरण के लिए, multiple samples के लिए experimental data) process करना चाहते हैं, इसलिए हमें inputs handle करने का एक अधिक sophisticated तरीका चाहिए।
 
-इसके लिए Nextflow **channels** हैं।
+इसके लिए Nextflow [**channels**](https://nextflow.io/docs/latest/channel.html) हैं।
 Channels ऐसी queues हैं जो inputs को efficiently handle करने और उन्हें multi-step workflows में एक step से दूसरे में shuttle करने के लिए designed हैं, जबकि built-in parallelism और कई additional benefits provide करते हैं।
 
 इस course के इस भाग में, तुम सीखोगे कि विभिन्न स्रोतों से multiple inputs handle करने के लिए channel कैसे use करें।
-तुम channel contents को आवश्यकतानुसार transform करने के लिए **operators** use करना भी सीखोगे।
+तुम channel contents को आवश्यकतानुसार transform करने के लिए [**operators**](https://nextflow.io/docs/latest/reference/operator.html) use करना भी सीखोगे।
 
 ??? info "इस section से कैसे शुरू करें"
 
@@ -91,8 +91,8 @@ nextflow run hello-channels.nf --input 'Hello Channels!'
 
 ### 1.1. Input channel बनाएं
 
-Channel set up करने के लिए हम विभिन्न प्रकार के **channel factories** use कर सकते हैं।
-अभी के लिए चीजों को simple रखने के लिए, हम सबसे basic channel factory use करेंगे, जिसे `channel.of` कहते हैं, जो single value वाला channel बनाएगा।
+Channel set up करने के लिए हम विभिन्न प्रकार के [**channel factories**](https://nextflow.io/docs/latest/reference/channel.html) use कर सकते हैं।
+अभी के लिए चीजों को simple रखने के लिए, हम सबसे basic channel factory use करेंगे, जिसे [`channel.of`](https://nextflow.io/docs/latest/reference/channel.html#of) कहते हैं, जो single value वाला channel बनाएगा।
 Functionally यह पहले जैसे set up के similar होगा, लेकिन Nextflow को implicitly channel बनाने देने के बजाय, अब हम यह explicitly कर रहे हैं।
 
 यह code की वह line है जिसे हम use करेंगे:
@@ -306,12 +306,6 @@ Conveniently, `channel.of()` channel factory जो हम use कर रहे 
 
 चलो उन्हें `'Hello'`, `'Bonjour'` और `'Holà'` बनाते हैं।
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-channel-multi.svg"
-</figure>
-
-_Diagram में, channel को green में represent किया गया है, और elements का order pipe में marbles की तरह represent किया गया है: पहले load किया गया right पर है, फिर दूसरा middle में है, फिर तीसरा left पर है।_
-
 #### 2.1.1. More greetings add करें
 
 Workflow block से पहले, निम्नलिखित code change करो:
@@ -380,6 +374,12 @@ Execution monitor दिखाता है कि `sayHello` process के ल
 
 तुम्हें वहाँ तीन greetings में से एक दिखनी चाहिए, लेकिन जो तुम्हें मिली वह यहाँ दिखाई गई से different हो सकती है।
 क्या तुम सोच सकते हो कि ऐसा क्यों हो सकता है?
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-channel-multi.svg"
+</figure>
+
+_Diagram में, channel को green में represent किया गया है, और elements का order pipe में marbles की तरह represent किया गया है: पहले load किया गया right पर है, फिर दूसरा middle में है, फिर तीसरा left पर है।_
 
 Execution monitor को वापस देखते हुए, इसने हमें केवल एक subdirectory path (`f4/c9962c`) दी।
 चलो वहाँ देखते हैं।
@@ -500,6 +500,10 @@ Anyway, अब जबकि हमारे पास प्रत्येक p
 
 यह दिखाता है कि तीनों processes successfully run हुईं (yay)।
 
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-channels-task-dirs.svg"
+</figure>
+
 उस ने कहा, हमारे पास अभी भी problem है कि results directory में केवल एक output file है।
 
 तुम्हें याद होगा कि हमने `sayHello` process के लिए output file name hardcode किया था, इसलिए तीनों calls ने `output.txt` नामक file produce की।
@@ -515,6 +519,10 @@ Specifically, हमें first process को dynamically file name generate �
 तो हम file names को unique कैसे बनाएं?
 ऐसा करने का एक common तरीका output file name के भाग के रूप में inputs (input channel से received) से कुछ unique metadata use करना है।
 यहाँ, convenience के लिए, हम greeting itself use करेंगे क्योंकि यह बस एक short string है, और इसे base output filename से पहले prepend करेंगे।
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-channel-multi-unique.svg"
+</figure>
 
 #### 2.2.1. Dynamic output file name construct करें
 
@@ -792,12 +800,16 @@ nextflow run hello-channels.nf
 
 ऐसा लगता है Nextflow ने single process call run करने की कोशिश की, `[Hello, Bonjour, Holà]` को string value के रूप में use करते हुए, array में तीन strings को separate values के रूप में use करने के बजाय।
 
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-channels-array-fail.svg"
+</figure>
+
 तो यह 'packaging' है जो problem cause कर रही है।
 हम Nextflow को array unpack करवाकर individual strings को channel में load कैसे करवाएं?
 
 ### 3.2. Channel contents transform करने के लिए operator use करें
 
-यहीं **[operators](https://www.nextflow.io/docs/latest/reference/operator.html)** play में आते हैं।
+यहीं [**operators**](https://nextflow.io/docs/latest/reference/operator.html) play में आते हैं।
 तुम पहले से `.view()` operator use कर चुके हो, जो बस देखता है कि वहाँ क्या है।
 अब हम उन operators को देखेंगे जो हमें channel की contents पर act करने की अनुमति देते हैं।
 
@@ -850,6 +862,10 @@ Workflow block में, निम्नलिखित code change करो:
 
 यहाँ हमने readability के लिए operator को next line पर add किया, लेकिन तुम prefer करो तो operators को channel factory के same line पर add कर सकते हो, इस तरह:
 `greeting_ch = channel.of(greetings_array).view().flatten()`
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-channels-array-success.svg"
+</figure>
 
 #### 3.2.2. `view()` statement(s) refine करें
 
@@ -941,8 +957,8 @@ nextflow run hello-channels.nf
 
 इस बार यह काम करता है AND हमें `flatten()` operator run करने से पहले और बाद में channel की contents कैसी दिखती हैं इसकी additional insight देता है।
 
-- तुम देखोगे कि हमें एक single `Before flatten:` statement मिलता है क्योंकि उस point पर channel में एक item है, original array।
-  फिर हमें तीन separate `After flatten:` statements मिलते हैं, प्रत्येक greeting के लिए एक, जो अब channel में individual items हैं।
+- एक single `Before flatten:` statement क्योंकि उस point पर channel में एक item है, original array।
+- तीन separate `After flatten:` statements, प्रत्येक greeting के लिए एक, जो अब channel में individual items हैं।
 
 महत्वपूर्ण रूप से, इसका मतलब है कि प्रत्येक item अब workflow द्वारा separately process किया जा सकता है।
 
@@ -1023,7 +1039,7 @@ Parameter declaration में निम्नलिखित edit करो:
 #### 4.1.2. File handle करने के लिए designed channel factory में switch करें
 
 चूंकि अब हम simple strings के बजाय file को input के रूप में use करना चाहते हैं, हम पहले वाली `channel.of()` channel factory use नहीं कर सकते।
-हमें एक new channel factory, [`channel.fromPath()`](https://www.nextflow.io/docs/latest/reference/channel.html#channel-path) use करने में switch करना होगा, जिसमें file paths handle करने के लिए कुछ built-in functionality है।
+हमें एक new channel factory, [`channel.fromPath()`](https://nextflow.io/docs/latest/reference/channel.html#frompath) use करने में switch करना होगा, जिसमें file paths handle करने के लिए कुछ built-in functionality है।
 
 Workflow block में, निम्नलिखित code change करो:
 
@@ -1124,7 +1140,7 @@ Sounds like हमें एक और [operator](https://www.nextflow.io/docs/l
 
 ### 4.2. File parse करने के लिए `splitCsv()` operator use करें
 
-Operators की list को फिर से देखते हुए, हमें [`splitCsv()`](https://www.nextflow.io/docs/latest/reference/operator.html#splitCsv) मिलता है, जो CSV-formatted text को parse और split करने के लिए designed है।
+Operators की list को फिर से देखते हुए, हमें [`splitCsv()`](https://www.nextflow.io/docs/latest/reference/operator.html#splitcsv) मिलता है, जो CSV-formatted text को parse और split करने के लिए designed है।
 
 #### 4.2.1. Channel पर `splitCsv()` apply करें
 
@@ -1220,6 +1236,10 @@ nextflow run hello-channels.nf
 
 Interestingly, यह भी fail होता है, लेकिन एक different error के साथ।
 इस बार Nextflow ने file की contents parse की हैं (yay!) लेकिन इसने प्रत्येक row को एक array के रूप में load किया है, और प्रत्येक array channel में एक element है।
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-channels-split-fail.svg"
+</figure>
 
 हमें इसे बताना होगा कि प्रत्येक row में केवल first column ले।
 तो हम इसे कैसे unpack करें?
@@ -1323,7 +1343,11 @@ nextflow run hello-channels.nf
 - तीन separate `After splitCsv:` statements: प्रत्येक greeting के लिए एक, लेकिन प्रत्येक एक array के भीतर contained है जो file में उस line से correspond करता है।
 - तीन separate `After map:` statements: प्रत्येक greeting के लिए एक, जो अब channel में individual elements हैं।
 
-Note करो कि lines तुम्हारे output में different order में appear हो सकती हैं।
+_Note करो कि lines तुम्हारे output में different order में appear हो सकती हैं।_
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-channels-split-and-map.svg"
+</figure>
 
 तुम यह verify करने के लिए output files भी देख सकते हो कि प्रत्येक greeting correctly extract और workflow के माध्यम से process हुई।
 
@@ -1335,6 +1359,11 @@ Note करो कि lines तुम्हारे output में different 
 तुम जानते हो कि `.fromPath()` channel constructor और operators `splitCsv()` और `map()` का उपयोग करके input values की file पढ़ना और उन्हें appropriately handle करना।
 
 अधिक generally, तुम्हारे पास basic understanding है कि Nextflow कैसे processes को inputs manage करने के लिए **channels** और उनकी contents transform करने के लिए **operators** use करता है।
+तुमने यह भी देखा है कि channels कैसे parallel execution को implicitly handle करते हैं।
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-channels-parallel.svg"
+</figure>
 
 ### आगे क्या?
 

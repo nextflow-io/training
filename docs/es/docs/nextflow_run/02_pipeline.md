@@ -229,7 +229,7 @@ Una vez más, no necesita memorizar la sintaxis del código, pero es bueno apren
 
 Esta es la parte más interesante: ¿cómo cambiamos de tomar un único valor desde la línea de comandos, a tomar un archivo CSV, analizarlo y procesar los saludos individuales que contiene?
 
-En Nextflow, hacemos eso con un **channel**: una estructura diseñada para manejar entradas eficientemente y transportarlas de un paso a otro en workflows de múltiples pasos, mientras proporciona paralelismo incorporado y muchos beneficios adicionales.
+En Nextflow, hacemos eso con un [**channel**](https://nextflow.io/docs/latest/channel.html): una estructura de cola diseñada para manejar entradas eficientemente y transportarlas de un paso a otro en workflows de múltiples pasos, mientras proporciona paralelismo incorporado y muchos beneficios adicionales.
 
 Desglosémoslo.
 
@@ -465,7 +465,7 @@ Veamos el código e identifiquemos los patrones clave para workflows de múltipl
     }
 
     /*
-    * Collect uppercase greetings into a single output file
+    * Recopilar saludos en mayúsculas en un único archivo de salida
     */
     process collectGreetings {
 
@@ -618,23 +618,20 @@ Esta vez el operador se llama `collect`, y se aplica al channel de salida produc
 
 El operador `collect` se usa para recolectar las salidas de múltiples llamadas al mismo process y empaquetarlas en un único elemento de channel.
 
-En el contexto de este workflow, está tomando los tres saludos en mayúsculas en el channel `convertToUpper.out` --que son tres elementos de channel separados, y normalmente serían manejados en llamadas separadas por el siguiente process-- y empaquetándolos en un único elemento.
-
-En términos más prácticos: si no aplicáramos `collect()` a la salida de `convertToUpper()` antes de alimentarla a `collectGreetings()`, Nextflow simplemente ejecutaría `collectGreetings()` independientemente en cada saludo, lo cual no lograría nuestro objetivo.
-
-<figure class="excalidraw">
---8<-- "docs/en/docs/nextflow_run/img/without-collect-operator.svg"
-</figure>
-
-En contraste, usar `collect()` nos permite tomar todos los saludos en mayúsculas separados producidos por el segundo paso del workflow y alimentarlos todos juntos a una única llamada en el tercer paso del pipeline.
+En el contexto de este workflow, está tomando los tres saludos en mayúsculas en el channel `convertToUpper.out` (que son tres elementos de channel separados, y normalmente serían manejados en llamadas separadas por el siguiente process) y empaquetándolos en un único elemento.
+Así es como obtenemos todos los saludos de vuelta en el mismo archivo.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/nextflow_run/img/with-collect-operator.svg"
 </figure>
 
-Así es como obtenemos todos los saludos de vuelta en el mismo archivo.
+En contraste, si no aplicáramos `collect()` a la salida de `convertToUpper()` antes de alimentarla a `collectGreetings()`, Nextflow simplemente ejecutaría `collectGreetings()` independientemente en cada saludo, lo cual no lograría nuestro objetivo.
 
-Hay muchos otros [operadores](https://www.nextflow.io/docs/latest/reference/operator.html#operator-page) disponibles para aplicar transformaciones al contenido de los channels entre llamadas de process.
+<figure class="excalidraw">
+--8<-- "docs/en/docs/nextflow_run/img/without-collect-operator.svg"
+</figure>
+
+Hay muchos otros [operadores](https://nextflow.io/docs/latest/reference/operator.html) disponibles para aplicar transformaciones al contenido de los channels entre llamadas de process.
 
 Esto le da a los desarrolladores de pipelines mucha flexibilidad para personalizar la lógica de flujo de su pipeline.
 La desventaja es que a veces puede hacer más difícil descifrar lo que está haciendo el pipeline.
@@ -783,7 +780,7 @@ Esto puede hacer su desarrollo y mantenimiento más eficiente y sostenible.
 
 Aquí vamos a demostrar la forma más común de modularidad de código en Nextflow, que es el uso de **módulos**.
 
-En Nextflow, un **módulo** es una definición de process única que se encapsula por sí misma en un archivo de código independiente.
+En Nextflow, un [**módulo**](https://nextflow.io/docs/latest/module.html) es una definición de process única que se encapsula por sí misma en un archivo de código independiente.
 Para usar un módulo en un workflow, simplemente agrega una declaración de importación de una sola línea a su archivo de código de workflow; luego puede integrar el process en el workflow de la misma manera que normalmente lo haría.
 Eso hace posible reutilizar definiciones de process en múltiples workflows sin producir múltiples copias del código.
 
@@ -965,9 +962,10 @@ Una manera mucho mejor de abordar este problema es usar **contenedores**.
 
 Un **contenedor** es una unidad de software ligera, independiente y ejecutable creada a partir de una **imagen** de contenedor que incluye todo lo necesario para ejecutar una aplicación incluyendo código, bibliotecas del sistema y configuraciones.
 
-!!! tip "Consejo"
+!!! Tip "Consejo"
 
-    Enseñamos esto usando la tecnología [Docker](https://www.docker.com/get-started/), pero Nextflow soporta [varias otras tecnologías de contenedores](https://www.nextflow.io/docs/latest/container.html#) también.
+    Enseñamos esto usando la tecnología [Docker](https://www.docker.com/get-started/), pero Nextflow soporta varias otras tecnologías de contenedores también.
+    Puede aprender más sobre el soporte de Nextflow para contenedores [aquí](https://nextflow.io/docs/latest/container.html).
 
 ### 4.1. Usar un contenedor directamente
 
@@ -1059,7 +1057,7 @@ ls /
 
 Puede ver que el sistema de archivos dentro del contenedor es diferente del sistema de archivos en su sistema host.
 
-!!! tip "Consejo"
+!!! Tip "Consejo"
 
     Cuando ejecuta un contenedor, está aislado del sistema host por defecto.
     Esto significa que el contenedor no puede acceder a ningún archivo en el sistema host a menos que explícitamente lo permita especificando que quiere montar un volumen como parte del comando `docker run` usando la siguiente sintaxis:
@@ -1148,7 +1146,7 @@ Solo necesitamos especificar un contenedor para cada process.
 Para demostrar cómo funciona esto, hicimos otra versión de nuestro workflow que ejecuta `cowpy` en el archivo de saludos recolectados producido en el tercer paso.
 
 <figure class="excalidraw">
---8<-- "docs/en/docs/nextflow_run/img/hello-pipeline-cowpy.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-cowpy.svg"
 </figure>
 
 Esto debería producir un archivo que contiene el arte ASCII con los tres saludos en el globo de diálogo.
@@ -1239,7 +1237,7 @@ El process `cowpy`, que envuelve el comando cowpy para generar arte ASCII, está
     ```groovy title="modules/cowpy.nf" linenums="1"
     #!/usr/bin/env nextflow
 
-    // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
+    // Generar arte ASCII con cowpy (https://github.com/jeffbuttars/cowpy)
     process cowpy {
 
         container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
@@ -1291,7 +1289,7 @@ Solo para recapitular, esto es lo que estamos a punto de ejecutar:
 
 ¿Cree que va a funcionar?
 
-Ejecutemos el workflow con la bandera `-resume`, y especifiquemos que queremos que el personaje sea el turkey.
+Ejecutemos el workflow con la bandera `-resume`, y especifiquemos que queremos que el personaje sea el pavo (turkey).
 
 ```bash
 nextflow run 2d-container.nf --input data/greetings.csv --character turkey -resume

@@ -14,7 +14,7 @@
 ///
 -->
 
-이 교육 과정의 파트 1-4에서는 Nextflow의 기본 구성 요소를 사용하여 텍스트를 처리하고, 여러 입력이 있는 경우 실행을 병렬화하며, 추가 처리를 위해 결과를 수집할 수 있는 간단한 workflow를 조립하는 방법을 배웠습니다.
+이 교육 과정의 파트 1-4에서는 Nextflow의 기본 구성 요소를 사용하여 텍스트를 처리하고, 여러 입력이 있는 경우 실행을 병렬화하며, 추가 처리를 위해 결과를 수집할 수 있는 간단한 워크플로우를 조립하는 방법을 배웠습니다.
 
 그러나 환경에서 사용할 수 있는 기본 UNIX 도구로 제한되었습니다.
 실제 작업에는 기본적으로 포함되지 않은 다양한 도구와 패키지가 필요한 경우가 많습니다.
@@ -22,10 +22,10 @@
 
 이 모든 것이 매우 지루하고 귀찮으므로, 이 문제를 훨씬 더 편리하게 해결하기 위해 **컨테이너**를 사용하는 방법을 보여드리겠습니다.
 
-**컨테이너**는 코드, 시스템 라이브러리 및 설정을 포함하여 애플리케이션을 실행하는 데 필요한 모든 것이 포함된 컨테이너 **이미지**에서 생성된 경량의 독립 실행형 소프트웨어 단위입니다.
+**컨테이너**는 코드, 시스템 라이브러리 및 설정을 포함하여 애플리케이션을 실행하는 데 필요한 모든 것이 포함된 컨테이너 **이미지**에서 생성된 경량의 단독 실행형 소프트웨어 단위입니다.
 예상하시다시피, 이것은 파이프라인을 더 재현 가능하게 만드는 데 매우 도움이 될 것입니다.
 
-여기서는 [Docker](https://www.docker.com/get-started/)를 사용하여 이를 가르치지만, Nextflow가 [여러 다른 컨테이너 기술](https://www.nextflow.io/docs/latest/container.html#)도 지원한다는 점을 유의하십시오.
+여기서는 [Docker](https://www.docker.com/get-started/)를 사용하여 이를 다루지만, Nextflow가 [여러 다른 컨테이너 기술](https://www.nextflow.io/docs/latest/container.html#)도 지원한다는 점을 유의하십시오.
 
 ??? info "이 섹션부터 시작하는 방법"
 
@@ -39,9 +39,9 @@
 
 ---
 
-## 0. 워밍업: `hello-containers.nf` 실행
+## 0. 준비 운동: `hello-containers.nf` 실행
 
-시작점으로 workflow 스크립트 `hello-containers.nf`를 사용할 것입니다.
+시작점으로 워크플로우 스크립트 `hello-containers.nf`를 사용할 것입니다.
 이 스크립트는 이 교육 과정의 파트 4를 완료하여 생성된 스크립트와 동일하지만, 출력 대상을 변경했습니다:
 
 ```groovy title="hello-containers.nf" linenums="37" hl_lines="3 7 11 15"
@@ -107,7 +107,7 @@ nextflow run hello-containers.nf
 
 ## 1. 컨테이너를 '수동으로' 사용
 
-우리가 하고자 하는 것은 실행에 컨테이너를 사용하는 단계를 workflow에 추가하는 것입니다.
+우리가 하고자 하는 것은 실행에 컨테이너를 사용하는 단계를 워크플로우에 추가하는 것입니다.
 
 그러나 먼저 Nextflow에서 컨테이너를 사용하기 전에 컨테이너가 무엇인지에 대한 이해를 확고히 하기 위해 몇 가지 기본 개념과 작업을 살펴볼 것입니다.
 
@@ -199,7 +199,7 @@ docker run --rm '<container>' [tool command]
 `[tool command]` 구문은 사용 중인 도구와 컨테이너 설정 방식에 따라 다릅니다.
 `cowpy`로 시작해 봅시다.
 
-완전히 조립된 컨테이너 실행 명령은 다음과 같습니다; 계속 진행하여 실행하십시오.
+완전히 조립된 컨테이너 실행 명령은 다음과 같습니다. 계속 진행하여 실행하십시오.
 
 ```bash
 docker run --rm 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273' cowpy
@@ -315,7 +315,7 @@ exit
 -v <outside_path>:<inside_path>
 ```
 
-우리의 경우 `<outside_path>`는 현재 작업 디렉토리이므로 점(`.`)만 사용할 수 있고, `<inside_path>`는 우리가 만든 별칭일 뿐입니다; `/my_project`라고 부르겠습니다(내부 경로는 절대 경로여야 함).
+우리의 경우 `<outside_path>`는 현재 작업 디렉토리이므로 점(`.`)만 사용할 수 있고, `<inside_path>`는 우리가 만든 별칭일 뿐입니다. `/my_project`라고 부르겠습니다(내부 경로는 절대 경로여야 함).
 
 볼륨을 마운트하려면 경로를 교체하고 다음과 같이 docker run 명령에 볼륨 마운트 인수를 추가합니다:
 
@@ -385,7 +385,7 @@ cat /my_project/data/greetings.csv | cowpy -c turkey
 
 이것은 예제 인사말을 읊는 칠면조의 ASCII 아트를 생성합니다!
 단, 여기서 칠면조는 인사말만이 아닌 전체 행을 반복하고 있습니다.
-우리는 Nextflow workflow가 더 잘할 것이라는 것을 이미 알고 있습니다!
+우리는 Nextflow 워크플로우가 더 잘할 것이라는 것을 이미 알고 있습니다!
 
 이 명령으로 자유롭게 작업해 보십시오.
 완료되면 이전처럼 컨테이너를 종료하십시오:
@@ -396,20 +396,20 @@ exit
 
 일반 셸로 돌아갑니다.
 
-### 핵심 내용
+### 핵심 정리
 
 컨테이너를 풀하고 일회성 또는 대화식으로 실행하는 방법을 알게 되었습니다. 또한 컨테이너 내부에서 데이터에 액세스할 수 있도록 하는 방법을 알게 되었으며, 이를 통해 시스템에 소프트웨어를 설치하지 않고도 관심 있는 도구를 실제 데이터로 시험해 볼 수 있습니다.
 
 ### 다음 단계
 
-Nextflow process 실행에 컨테이너를 사용하는 방법을 배웁니다.
+Nextflow 프로세스 실행에 컨테이너를 사용하는 방법을 배웁니다.
 
 ---
 
 ## 2. Nextflow에서 컨테이너 사용
 
-Nextflow는 컴퓨팅 환경에 설치되지 않은 도구를 실행할 수 있도록 컨테이너 내부에서 process를 실행하는 기능을 기본적으로 지원합니다.
-즉, process를 실행하는 데 원하는 컨테이너 이미지를 사용할 수 있으며, Nextflow가 이미지 풀, 데이터 마운트 및 그 안에서 process 실행을 처리합니다.
+Nextflow는 컴퓨팅 환경에 설치되지 않은 도구를 실행할 수 있도록 컨테이너 내부에서 프로세스를 실행하는 기능을 기본적으로 지원합니다.
+즉, 프로세스를 실행하는 데 원하는 컨테이너 이미지를 사용할 수 있으며, Nextflow가 이미지 풀, 데이터 마운트 및 그 안에서 프로세스 실행을 처리합니다.
 
 이를 시연하기 위해 개발해 온 파이프라인에 `collectGreetings` 단계 이후에 `cowpy` 단계를 추가할 것입니다.
 
@@ -417,11 +417,9 @@ Nextflow는 컴퓨팅 환경에 설치되지 않은 도구를 실행할 수 있�
 --8<-- "docs/en/docs/nextflow_run/img/hello-pipeline-cowpy.svg"
 </figure>
 
-시작할 준비가 되었으면 Moo!
-
 ### 2.1. `cowpy` 모듈 작성
 
-먼저 `cowpy` process 모듈을 생성합시다.
+먼저 `cowpy` 프로세스 모듈을 생성합시다.
 
 #### 2.1.1. 새 모듈에 대한 파일 스텁 생성
 
@@ -431,11 +429,11 @@ Nextflow는 컴퓨팅 환경에 설치되지 않은 도구를 실행할 수 있�
 touch modules/cowpy.nf
 ```
 
-이것은 process 코드를 넣을 장소를 제공합니다.
+이것은 프로세스 코드를 넣을 장소를 제공합니다.
 
-#### 2.1.2. 모듈 파일에 `cowpy` process 코드 복사
+#### 2.1.2. 모듈 파일에 `cowpy` 프로세스 코드 복사
 
-이전에 작성한 다른 process를 모델로 `cowpy` process를 만들 수 있습니다.
+이전에 작성한 다른 프로세스를 모델로 `cowpy` 프로세스를 만들 수 있습니다.
 
 ```groovy title="modules/cowpy.nf" linenums="1"
 #!/usr/bin/env nextflow
@@ -458,17 +456,17 @@ process cowpy {
 }
 ```
 
-Process는 인사말이 포함된 `input_file`과 `character` 값을 예상합니다.
+프로세스는 인사말이 포함된 `input_file`과 `character` 값을 예상합니다.
 
 출력은 `cowpy` 도구에서 생성된 ASCII 아트가 포함된 새 텍스트 파일입니다.
 
-### 2.2. Workflow에 cowpy 추가
+### 2.2. 워크플로우에 cowpy 추가
 
-이제 모듈을 가져오고 process를 호출해야 합니다.
+이제 모듈을 가져오고 프로세스를 호출해야 합니다.
 
-#### 2.2.1. `hello-containers.nf`에 `cowpy` process 가져오기
+#### 2.2.1. `hello-containers.nf`에 `cowpy` 프로세스 가져오기
 
-workflow 블록 위에 import 선언을 삽입하고 적절하게 채웁니다.
+워크플로우 블록 위에 import 선언을 삽입하고 적절하게 채웁니다.
 
 === "수정 후"
 
@@ -489,22 +487,22 @@ workflow 블록 위에 import 선언을 삽입하고 적절하게 채웁니다.
     include { collectGreetings } from './modules/collectGreetings.nf'
     ```
 
-이제 `cowpy` 모듈을 workflow에서 사용할 수 있습니다.
+이제 `cowpy` 모듈을 워크플로우에서 사용할 수 있습니다.
 
-#### 2.2.2. Workflow에 `cowpy` process 호출 추가
+#### 2.2.2. 워크플로우에 `cowpy` 프로세스 호출 추가
 
-기억하시다시피 두 개의 출력을 생성하는 `collectGreetings()` process의 출력에 `cowpy()` process를 연결합시다:
+기억하시다시피 두 개의 출력을 생성하는 `collectGreetings()` 프로세스의 출력에 `cowpy()` 프로세스를 연결합시다:
 
 - `collectGreetings.out.outfile`에는 출력 파일이 포함됩니다 <--_우리가 원하는 것_
 - `collectGreetings.out.report`에는 배치당 인사말 수가 포함된 보고 파일이 포함됩니다
 
-workflow 블록에서 다음 코드 변경을 수행하십시오:
+워크플로우 블록에서 다음 코드 변경을 수행하십시오:
 
 === "수정 후"
 
     ```groovy title="hello-containers.nf" linenums="19" hl_lines="12-13"
         main:
-        // CSV 파일에서 입력용 channel 생성
+        // CSV 파일에서 입력용 채널 생성
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
@@ -522,7 +520,7 @@ workflow 블록에서 다음 코드 변경을 수행하십시오:
 
     ```groovy title="hello-containers.nf" linenums="19"
         main:
-        // CSV 파일에서 입력용 channel 생성
+        // CSV 파일에서 입력용 채널 생성
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
@@ -567,9 +565,9 @@ workflow 블록에서 다음 코드 변경을 수행하십시오:
 
 이제 게으르게 명령줄에서 캐릭터 매개변수 입력을 건너뛸 수 있습니다.
 
-#### 2.2.4. Workflow 출력 업데이트
+#### 2.2.4. 워크플로우 출력 업데이트
 
-`cowpy` process의 출력을 게시하도록 workflow 출력을 업데이트해야 합니다.
+`cowpy` 프로세스의 출력을 게시하도록 워크플로우 출력을 업데이트해야 합니다.
 
 ##### 2.2.4.1. `publish:` 섹션 업데이트
 
@@ -596,9 +594,9 @@ workflow 블록에서 다음 코드 변경을 수행하십시오:
         batch_report = collectGreetings.out.report
     ```
 
-`cowpy` process는 하나의 출력만 생성하므로 `.out`을 추가하여 일반적인 방식으로 참조할 수 있습니다.
+`cowpy` 프로세스는 하나의 출력만 생성하므로 `.out`을 추가하여 일반적인 방식으로 참조할 수 있습니다.
 
-하지만 지금은 workflow 수준 출력 업데이트를 마무리합시다.
+하지만 지금은 워크플로우 수준 출력 업데이트를 마무리합시다.
 
 ##### 2.2.4.2. `output` 블록 업데이트
 
@@ -658,7 +656,7 @@ workflow 블록에서 다음 코드 변경을 수행하십시오:
 
 이제 게시된 출력이 약간 더 정리됩니다.
 
-#### 2.2.5. Workflow 실행
+#### 2.2.5. 워크플로우 실행
 
 요약하자면, 우리가 목표로 하는 것은 다음과 같습니다:
 
@@ -668,7 +666,7 @@ workflow 블록에서 다음 코드 변경을 수행하십시오:
 
 작동할 것 같습니까?
 
-이전에 게시된 출력을 삭제하여 깨끗한 상태로 만들고 `-resume` 플래그로 workflow를 실행합시다.
+이전에 게시된 출력을 삭제하여 깨끗한 상태로 만들고 `-resume` 플래그로 워크플로우를 실행합시다.
 
 ```bash
 rm -r hello_containers/
@@ -722,15 +720,15 @@ nextflow run hello-containers.nf -resume
 
 `cowpy` 도구를 호출하고 있지만 아직 컨테이너를 지정하지 않았기 때문에(이런) 당연히 그렇습니다.
 
-### 2.3. 컨테이너를 사용하여 `cowpy` process 실행
+### 2.3. 컨테이너를 사용하여 `cowpy` 프로세스 실행
 
-컨테이너를 지정하고 Nextflow에게 `cowpy()` process에 사용하도록 지시해야 합니다.
+컨테이너를 지정하고 Nextflow에게 `cowpy()` 프로세스에 사용하도록 지시해야 합니다.
 
 #### 2.3.1. `cowpy`에 대한 컨테이너 지정
 
 이 튜토리얼의 첫 번째 섹션에서 직접 사용했던 동일한 이미지를 사용할 수 있습니다.
 
-다음과 같이 process 정의에 `container` 지시문을 추가하도록 `cowpy.nf` 모듈을 편집하십시오:
+다음과 같이 프로세스 정의에 `container` 지시문을 추가하도록 `cowpy.nf` 모듈을 편집하십시오:
 
 === "수정 후"
 
@@ -772,14 +770,14 @@ nextflow run hello-containers.nf -resume
     }
     ```
 
-이것은 _Docker 사용이 활성화된 경우_, Nextflow가 여기에 지정된 컨테이너 이미지를 사용하여 process를 실행해야 함을 알려줍니다.
+이것은 _Docker 사용이 활성화된 경우_, Nextflow가 여기에 지정된 컨테이너 이미지를 사용하여 프로세스를 실행해야 함을 알려줍니다.
 
 #### 2.3.2. `nextflow.config` 파일을 통해 Docker 사용 활성화
 
 *'Docker 사용이 활성화된 경우'*라고 말했다는 것을 주목하십시오. 기본적으로 활성화되어 있지 않으므로 Nextflow에게 Docker를 사용할 수 있도록 허용해야 합니다.
 이를 위해 구성을 다루는 이 과정의 다음이자 마지막 파트(파트 6)의 주제를 약간 앞당기겠습니다.
 
-Nextflow가 workflow 실행을 구성하기 위해 제공하는 주요 방법 중 하나는 `nextflow.config` 파일을 사용하는 것입니다.
+Nextflow가 워크플로우 실행을 구성하기 위해 제공하는 주요 방법 중 하나는 `nextflow.config` 파일을 사용하는 것입니다.
 현재 디렉토리에 이러한 파일이 있으면 Nextflow가 자동으로 로드하고 포함된 모든 구성을 적용합니다.
 
 Docker를 명시적으로 비활성화하는 한 줄의 코드가 포함된 `nextflow.config` 파일을 제공했습니다: `docker.enabled = false`.
@@ -801,12 +799,12 @@ Docker를 명시적으로 비활성화하는 한 줄의 코드가 포함된 `nex
 !!! tip "팁"
 
     `-with-docker <container>` 매개변수를 사용하여 명령줄에서 실행별로 Docker 실행을 활성화할 수 있습니다.
-    그러나 이것은 전체 workflow에 대해 하나의 컨테이너만 지정할 수 있는 반면, 방금 보여드린 접근 방식은 process당 다른 컨테이너를 지정할 수 있습니다.
+    그러나 이것은 전체 워크플로우에 대해 하나의 컨테이너만 지정할 수 있는 반면, 방금 보여드린 접근 방식은 프로세스당 다른 컨테이너를 지정할 수 있습니다.
     이것은 모듈성, 코드 유지보수 및 재현성에 더 좋습니다.
 
-#### 2.3.3. Docker가 활성화된 상태로 workflow 실행
+#### 2.3.3. Docker가 활성화된 상태로 워크플로우 실행
 
-`-resume` 플래그로 workflow를 실행하십시오:
+`-resume` 플래그로 워크플로우를 실행하십시오:
 
 ```bash
 nextflow run hello-containers.nf -resume
@@ -827,7 +825,7 @@ nextflow run hello-containers.nf -resume
     ```
 
 이번에는 정말로 작동합니다!
-평소와 같이 해당 results 디렉토리에서 workflow 출력을 찾을 수 있지만, 이번에는 보고서와 최종 출력만 최상위 수준에 있고 모든 중간 파일은 하위 디렉토리로 이동되어 약간 더 깔끔하게 정리되어 있습니다.
+평소와 같이 해당 results 디렉토리에서 워크플로우 출력을 찾을 수 있지만, 이번에는 보고서와 최종 출력만 최상위 수준에 있고 모든 중간 파일은 하위 디렉토리로 이동되어 약간 더 깔끔하게 정리되어 있습니다.
 
 ??? abstract "디렉토리 내용"
 
@@ -882,10 +880,10 @@ nextflow run hello-containers.nf -resume
 
 #### 2.3.4. Nextflow가 컨테이너화된 작업을 시작한 방법 검사
 
-이 섹션의 마지막 코다로, Nextflow가 내부적으로 컨테이너와 어떻게 작동하는지에 대해 조금 더 통찰력을 얻기 위해 `cowpy` process 호출 중 하나의 작업 하위 디렉토리를 살펴봅시다.
+이 섹션의 마지막 코다로, Nextflow가 내부적으로 컨테이너와 어떻게 작동하는지에 대해 조금 더 통찰력을 얻기 위해 `cowpy` 프로세스 호출 중 하나의 작업 하위 디렉토리를 살펴봅시다.
 
-`nextflow run` 명령의 출력을 확인하여 `cowpy` process의 작업 하위 디렉토리 경로를 찾으십시오.
-위에 표시된 실행에서 얻은 것을 보면, `cowpy` process의 콘솔 로그 라인은 `[98/656c6c]`로 시작합니다.
+`nextflow run` 명령의 출력을 확인하여 `cowpy` 프로세스의 작업 하위 디렉토리 경로를 찾으십시오.
+위에 표시된 실행에서 얻은 것을 보면, `cowpy` 프로세스의 콘솔 로그 라인은 `[98/656c6c]`로 시작합니다.
 이것은 다음 잘린 디렉토리 경로에 해당합니다: `work/98/656c6c`.
 
 해당 디렉토리에서 파이프라인을 실행하는 과정에서 Nextflow가 대신 실행한 모든 명령이 포함된 `.command.run` 파일을 찾을 수 있습니다.
@@ -1054,7 +1052,7 @@ nxf_launch() {
 }
 ```
 
-보시다시피, Nextflow는 `docker run` 명령을 사용하여 process 호출을 시작합니다.
+보시다시피, Nextflow는 `docker run` 명령을 사용하여 프로세스 호출을 시작합니다.
 또한 해당 작업 하위 디렉토리를 컨테이너에 마운트하고, 컨테이너 내부의 작업 디렉토리를 적절하게 설정하고, `.command.sh` 파일에서 템플릿된 bash 스크립트를 실행합니다.
 
 첫 번째 섹션에서 수동으로 해야 했던 모든 어려운 작업? Nextflow가 백그라운드에서 우리를 위해 해줍니다!
@@ -1081,9 +1079,9 @@ nxf_launch() {
        ||     ||          i_____;----\.____i""\____\
 ```
 
-### 핵심 내용
+### 핵심 정리
 
-Process를 실행하기 위해 Nextflow에서 컨테이너를 사용하는 방법을 알게 되었습니다.
+프로세스를 실행하기 위해 Nextflow에서 컨테이너를 사용하는 방법을 알게 되었습니다.
 
 ### 다음 단계
 
@@ -1101,7 +1099,7 @@ Process를 실행하기 위해 Nextflow에서 컨테이너를 사용하는 방�
 컨테이너란 무엇입니까?
 - [ ] 가상 머신의 일종
 - [ ] 파일 압축 형식
-- [x] 애플리케이션 실행에 필요한 모든 것이 포함된 경량의 독립 실행형 단위
+- [x] 애플리케이션 실행에 필요한 모든 것이 포함된 경량의 단독 실행형 단위
 - [ ] 네트워크 프로토콜
 </quiz>
 
@@ -1134,7 +1132,7 @@ Process를 실행하기 위해 Nextflow에서 컨테이너를 사용하는 방�
 </quiz>
 
 <quiz>
-Nextflow process에 컨테이너를 어떻게 지정합니까?
+Nextflow 프로세스에 컨테이너를 어떻게 지정합니까?
 - [ ] `docker 'container-uri'`
 - [ ] `image 'container-uri'`
 - [x] `container 'container-uri'`
@@ -1144,7 +1142,7 @@ Nextflow process에 컨테이너를 어떻게 지정합니까?
 </quiz>
 
 <quiz>
-어떤 `nextflow.config` 설정이 workflow에 대해 Docker를 활성화합니까?
+어떤 `nextflow.config` 설정이 워크플로우에 대해 Docker를 활성화합니까?
 - [ ] `#!groovy process.docker = true`
 - [x] `#!groovy docker.enabled = true`
 - [ ] `#!groovy container.engine = 'docker'`
@@ -1154,10 +1152,10 @@ Nextflow process에 컨테이너를 어떻게 지정합니까?
 </quiz>
 
 <quiz>
-컨테이너에서 process를 실행할 때 Nextflow가 자동으로 처리하는 것은 무엇입니까? (해당되는 것 모두 선택)
+컨테이너에서 프로세스를 실행할 때 Nextflow가 자동으로 처리하는 것은 무엇입니까? (해당되는 것 모두 선택)
 - [x] 필요한 경우 컨테이너 이미지 풀
 - [x] 작업 디렉토리 마운트
-- [x] 컨테이너 내부에서 process 스크립트 실행
+- [x] 컨테이너 내부에서 프로세스 스크립트 실행
 - [x] 실행 후 컨테이너 인스턴스 정리
 
 자세히 알아보기: [2.3.4. Nextflow가 컨테이너화된 작업을 시작한 방법 검사](#234-nextflow가-컨테이너화된-작업을-시작한-방법-검사)

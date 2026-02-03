@@ -15,14 +15,14 @@
 -->
 
 Die meisten realen Workflows umfassen mehr als einen Schritt.
-In diesem Trainingsmodul lernst du, wie du processes in einem mehrstufigen Workflow verbindest.
+In diesem Trainingsmodul lernst du, wie du Processes in einem mehrstufigen Workflow verbindest.
 
 Dies wird dir den Nextflow-Weg beibringen, um Folgendes zu erreichen:
 
-1. Daten von einem process zum nächsten fließen lassen
-2. Ausgaben von mehreren process-Aufrufen in einen einzelnen process-Aufruf sammeln
-3. Mehr als eine Eingabe an einen process übergeben
-4. Mehrere Ausgaben aus einem process handhaben
+1. Daten von einem Process zum nächsten fließen lassen
+2. Ausgaben von mehreren Process-Aufrufen in einen einzelnen Process-Aufruf sammeln
+3. Zusätzliche Parameter an einen Process übergeben
+4. Mehrere Ausgaben aus einem Process handhaben
 
 Zur Demonstration werden wir weiterhin auf dem domänenunabhängigen Hello World-Beispiel aus den Teilen 1 und 2 aufbauen.
 Diesmal werden wir die folgenden Änderungen an unserem Workflow vornehmen, um besser widerzuspiegeln, wie Leute tatsächliche Workflows erstellen:
@@ -38,7 +38,7 @@ Diesmal werden wir die folgenden Änderungen an unserem Workflow vornehmen, um b
 
 ---
 
-## 0. Aufwärmübung: `hello-workflow.nf` ausführen
+## 0. Aufwärmen: `hello-workflow.nf` ausführen
 
 Wir werden das Workflow-Skript `hello-workflow.nf` als Ausgangspunkt verwenden.
 Es entspricht dem Skript, das durch das Durcharbeiten von Teil 2 dieses Trainingskurses erstellt wurde, außer dass wir die `view()`-Anweisungen entfernt und das Ausgabeziel geändert haben:
@@ -51,6 +51,14 @@ output {
     }
 }
 ```
+
+Dieses Diagramm fasst die aktuelle Funktionsweise des Workflows zusammen.
+Es sollte vertraut aussehen, außer dass wir jetzt explizit zeigen, dass die Ausgaben des Process in einem Kanal verpackt werden, genau wie die Eingaben.
+Wir werden diesen Ausgabekanal gleich gut nutzen.
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-workflow-channels.svg"
+</figure>
 
 Um sicherzustellen, dass alles funktioniert, führe das Skript einmal aus, bevor du Änderungen vornimmst:
 
@@ -96,8 +104,8 @@ Wir werden einen Schritt hinzufügen, um jede Begrüßung in Großbuchstaben umz
 Dazu müssen wir drei Dinge tun:
 
 - Den Befehl definieren, den wir für die Großbuchstaben-Umwandlung verwenden werden.
-- Einen neuen process schreiben, der den Großbuchstaben-Befehl umhüllt.
-- Den neuen process im workflow-Block aufrufen und so einrichten, dass er die Ausgabe des `sayHello()`-process als Eingabe nimmt.
+- Einen neuen Process schreiben, der den Großbuchstaben-Befehl umhüllt.
+- Den neuen Process im Workflow-Block aufrufen und so einrichten, dass er die Ausgabe des `sayHello()`-Process als Eingabe nimmt.
 
 ### 1.1. Den Großbuchstaben-Befehl definieren und im Terminal testen
 
@@ -125,11 +133,11 @@ Die Ausgabe ist eine Textdatei namens `UPPER-output.txt`, die die Großbuchstabe
 
 Das ist im Grunde das, was wir mit unserem Workflow versuchen werden zu tun.
 
-### 1.2. Den Großbuchstaben-Schritt als Nextflow process schreiben
+### 1.2. Den Großbuchstaben-Schritt als Nextflow Process schreiben
 
-Wir können unseren neuen process nach dem ersten modellieren, da wir alle dieselben Komponenten verwenden wollen.
+Wir können unseren neuen Process nach dem ersten modellieren, da wir alle dieselben Komponenten verwenden wollen.
 
-Füge die folgende process-Definition zum Workflow-Skript hinzu, direkt unter dem ersten:
+Füge die folgende Process-Definition zum Workflow-Skript hinzu, direkt unter dem ersten:
 
 ```groovy title="hello-workflow.nf" linenums="20"
 /*
@@ -150,13 +158,13 @@ process convertToUpper {
 }
 ```
 
-In diesem Fall setzen wir den zweiten Ausgabedateinamen basierend auf dem Eingabedateinamen zusammen, ähnlich wie wir es ursprünglich für die Ausgabe des ersten process getan haben.
+In diesem Fall setzen wir den zweiten Ausgabedateinamen basierend auf dem Eingabedateinamen zusammen, ähnlich wie wir es ursprünglich für die Ausgabe des ersten Process getan haben.
 
-### 1.3. Einen Aufruf des neuen process im workflow-Block hinzufügen
+### 1.3. Einen Aufruf des neuen Process im Workflow-Block hinzufügen
 
-Jetzt müssen wir Nextflow sagen, dass es den process, den wir gerade definiert haben, tatsächlich aufrufen soll.
+Jetzt müssen wir Nextflow sagen, dass es den Process, den wir gerade definiert haben, tatsächlich aufrufen soll.
 
-Nimm im workflow-Block die folgende Codeänderung vor:
+Nimm im Workflow-Block die folgende Codeänderung vor:
 
 === "Nachher"
 
@@ -164,7 +172,7 @@ Nimm im workflow-Block die folgende Codeänderung vor:
     workflow {
 
         main:
-        // Einen Channel für Eingaben aus einer CSV-Datei erstellen
+        // Einen Kanal für Eingaben aus einer CSV-Datei erstellen
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
@@ -184,7 +192,7 @@ Nimm im workflow-Block die folgende Codeänderung vor:
     workflow {
 
         main:
-        // Einen Channel für Eingaben aus einer CSV-Datei erstellen
+        // Einen Kanal für Eingaben aus einer CSV-Datei erstellen
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
@@ -196,16 +204,22 @@ Nimm im workflow-Block die folgende Codeänderung vor:
     }
     ```
 
-Dies ist noch nicht funktionsfähig, weil wir nicht angegeben haben, was in den `convertToUpper()`-process eingegeben werden soll.
+Dies ist noch nicht funktionsfähig, weil wir nicht angegeben haben, was in den `convertToUpper()`-Process eingegeben werden soll.
 
-### 1.4. Die Ausgabe des ersten process an den zweiten process übergeben
+### 1.4. Die Ausgabe des ersten Process an den zweiten Process übergeben
 
-Jetzt müssen wir die Ausgabe des `sayHello()`-process in den `convertToUpper()`-process fließen lassen.
+Jetzt müssen wir die Ausgabe des `sayHello()`-Process in den `convertToUpper()`-Process fließen lassen.
 
-Praktischerweise verpackt Nextflow automatisch die Ausgabe eines process in einen channel namens `<process>.out`.
-Also ist die Ausgabe des `sayHello`-process ein channel namens `sayHello.out`, den wir direkt in den Aufruf von `convertToUpper()` einstecken können.
+Praktischerweise verpackt Nextflow automatisch die Ausgabe eines Process in einen Kanal, wie im Diagramm im Aufwärmabschnitt gezeigt.
+Wir können auf den Ausgabekanal eines Process als `<process>.out` verweisen.
 
-Nimm im workflow-Block die folgende Codeänderung vor:
+Also ist die Ausgabe des `sayHello`-Process ein Kanal namens `sayHello.out`, den wir direkt in den Aufruf von `convertToUpper()` einstecken können.
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-multistep-connector.svg"
+</figure>
+
+Nimm im Workflow-Block die folgende Codeänderung vor:
 
 === "Nachher"
 
@@ -221,11 +235,11 @@ Nimm im workflow-Block die folgende Codeänderung vor:
         convertToUpper()
     ```
 
-Für einen einfachen Fall wie diesen (eine Ausgabe zu einer Eingabe) ist das alles, was wir tun müssen, um zwei processes zu verbinden!
+Für einen einfachen Fall wie diesen (eine Ausgabe zu einer Eingabe) ist das alles, was wir tun müssen, um zwei Processes zu verbinden!
 
 ### 1.5. Die Workflow-Ausgabeveröffentlichung einrichten
 
-Zum Schluss aktualisieren wir die Workflow-Ausgaben, um auch die Ergebnisse des zweiten process zu veröffentlichen.
+Zum Schluss aktualisieren wir die Workflow-Ausgaben, um auch die Ergebnisse des zweiten Process zu veröffentlichen.
 
 #### 1.5.1. Den `publish:`-Abschnitt des `workflow`-Blocks aktualisieren
 
@@ -283,7 +297,7 @@ Nimm im `output`-Block die folgende Codeänderung vor:
 Wieder ist die Logik dieselbe wie zuvor.
 
 Dies zeigt dir, dass du die Ausgabeeinstellungen auf einer sehr granularen Ebene kontrollieren kannst, für jede einzelne Ausgabe.
-Versuche gerne, die Pfade oder den Veröffentlichungsmodus für einen der processes zu ändern, um zu sehen, was passiert.
+Versuche gerne, die Pfade oder den Veröffentlichungsmodus für einen der Processes zu ändern, um zu sehen, was passiert.
 
 Natürlich bedeutet das, dass wir hier einige Informationen wiederholen, was unpraktisch werden könnte, wenn wir den Speicherort für alle Ausgaben auf dieselbe Weise aktualisieren wollten.
 Später im Kurs lernst du, wie du diese Einstellungen für mehrere Ausgaben auf strukturierte Weise konfigurierst.
@@ -308,7 +322,7 @@ nextflow run hello-workflow.nf -resume
     [e0/ecf81b] process > convertToUpper (3) [100%] 3 of 3 ✔
     ```
 
-In der Konsolenausgabe gibt es jetzt eine zusätzliche Zeile, die dem neuen process entspricht, den wir gerade hinzugefügt haben.
+In der Konsolenausgabe gibt es jetzt eine zusätzliche Zeile, die dem neuen Process entspricht, den wir gerade hinzugefügt haben.
 
 Du findest die Ausgaben im Verzeichnis `results/hello_workflow`, wie im `output`-Block festgelegt.
 
@@ -324,7 +338,7 @@ Du findest die Ausgaben im Verzeichnis `results/hello_workflow`, wie im `output`
     └── UPPER-Holà-output.txt
     ```
 
-Das ist praktisch! Aber es lohnt sich trotzdem, einen Blick in das work-Verzeichnis eines der Aufrufe des zweiten process zu werfen.
+Das ist praktisch! Aber es lohnt sich trotzdem, einen Blick in das Work-Verzeichnis eines der Aufrufe des zweiten Process zu werfen.
 
 ??? abstract "Verzeichnisinhalte"
 
@@ -334,33 +348,33 @@ Das ist praktisch! Aber es lohnt sich trotzdem, einen Blick in das work-Verzeich
     └── UPPER-Holà-output.txt
     ```
 
-Beachte, dass es zwei `*-output`-Dateien gibt: die Ausgabe des ersten process sowie die Ausgabe des zweiten.
+Beachte, dass es zwei `*-output`-Dateien gibt: die Ausgabe des ersten Process sowie die Ausgabe des zweiten.
 
-Die Ausgabe des ersten process ist dort, weil Nextflow sie dort **gestageed** hat, um alles Notwendige für die Ausführung innerhalb desselben Unterverzeichnisses zu haben.
+Die Ausgabe des ersten Process ist dort, weil Nextflow sie dort **gestageed** hat, um alles Notwendige für die Ausführung innerhalb desselben Unterverzeichnisses zu haben.
 
-Es handelt sich jedoch tatsächlich um einen symbolischen Link, der auf die Originaldatei im Unterverzeichnis des ersten process-Aufrufs zeigt.
+Es handelt sich jedoch tatsächlich um einen symbolischen Link, der auf die Originaldatei im Unterverzeichnis des ersten Process-Aufrufs zeigt.
 Standardmäßig verwendet Nextflow, wenn es auf einer einzelnen Maschine wie hier ausgeführt wird, symbolische Links anstelle von Kopien, um Eingabe- und Zwischendateien zu stagen.
 
-Bevor du weitermachst, denke darüber nach, wie wir nur die Ausgabe von `sayHello` mit der Eingabe von `convertToUpper` verbunden haben und die beiden processes nacheinander ausgeführt werden konnten.
+Bevor du weitermachst, denke darüber nach, wie wir nur die Ausgabe von `sayHello` mit der Eingabe von `convertToUpper` verbunden haben und die beiden Processes nacheinander ausgeführt werden konnten.
 Nextflow hat die harte Arbeit erledigt, einzelne Eingabe- und Ausgabedateien zu handhaben und sie zwischen den beiden Befehlen für uns weiterzugeben.
 
-Das ist einer der Gründe, warum Nextflow channels so mächtig sind: Sie kümmern sich um die Routinearbeit, die beim Verbinden von Workflow-Schritten anfällt.
+Das ist einer der Gründe, warum Nextflow Kanäle so mächtig sind: Sie kümmern sich um die Routinearbeit, die beim Verbinden von Workflow-Schritten anfällt.
 
-### Zusammenfassung
+### Fazit
 
-Du weißt, wie du processes verketten kannst, indem du die Ausgabe eines Schritts als Eingabe für den nächsten Schritt bereitstellst.
+Du weißt, wie du Processes verketten kannst, indem du die Ausgabe eines Schritts als Eingabe für den nächsten Schritt bereitstellst.
 
-### Was kommt als Nächstes?
+### Wie geht es weiter?
 
-Lerne, wie du Ausgaben von gestapelten process-Aufrufen sammelst und sie in einen einzelnen process einspeist.
+Lerne, wie du Ausgaben von gestapelten Process-Aufrufen sammelst und sie in einen einzelnen Process einspeist.
 
 ---
 
 ## 2. Einen dritten Schritt hinzufügen, um alle Begrüßungen zu sammeln
 
-Wenn wir einen process verwenden, um eine Transformation auf jedes der Elemente in einem channel anzuwenden, wie wir es hier mit den mehreren Begrüßungen tun, wollen wir manchmal Elemente aus dem Ausgabe-channel dieses process sammeln und sie in einen anderen process einspeisen, der eine Art Analyse oder Zusammenfassung durchführt.
+Wenn wir einen Process verwenden, um eine Transformation auf jedes der Elemente in einem Kanal anzuwenden, wie wir es hier mit den mehreren Begrüßungen tun, wollen wir manchmal Elemente aus dem Ausgabekanal dieses Process sammeln und sie in einen anderen Process einspeisen, der eine Art Analyse oder Zusammenfassung durchführt.
 
-Zur Demonstration werden wir einen neuen Schritt zu unserer Pipeline hinzufügen, der alle vom `convertToUpper`-process produzierten Großbuchstaben-Begrüßungen sammelt und sie in eine einzelne Datei schreibt.
+Zur Demonstration werden wir einen neuen Schritt zu unserer Pipeline hinzufügen, der alle vom `convertToUpper`-Process produzierten Großbuchstaben-Begrüßungen sammelt und sie in eine einzelne Datei schreibt.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nextflow/img/hello-collect.svg"
@@ -395,14 +409,14 @@ Die Ausgabe ist eine Textdatei namens `COLLECTED-output.txt`, die die Großbuchs
 
 Das ist das Ergebnis, das wir mit unserem Workflow erreichen wollen.
 
-### 2.2. Einen neuen process für den Sammelschritt erstellen
+### 2.2. Einen neuen Process für den Sammelschritt erstellen
 
-Lass uns einen neuen process erstellen und ihn `collectGreetings()` nennen.
+Lass uns einen neuen Process erstellen und ihn `collectGreetings()` nennen.
 Wir können beginnen, ihn basierend auf dem zu schreiben, was wir bisher gesehen haben.
 
-#### 2.2.1. Die 'offensichtlichen' Teile des process schreiben
+#### 2.2.1. Die 'offensichtlichen' Teile des Process schreiben
 
-Füge die folgende process-Definition zum Workflow-Skript hinzu:
+Füge die folgende Process-Definition zum Workflow-Skript hinzu:
 
 ```groovy title="hello-workflow.nf" linenums="37"
 /*
@@ -429,13 +443,13 @@ Es lässt die Eingabedefinition(en) und die erste Hälfte des Skriptbefehls aus,
 
 #### 2.2.2. Eingaben für `collectGreetings()` definieren
 
-Wir müssen die Begrüßungen von allen Aufrufen des `convertToUpper()`-process sammeln.
+Wir müssen die Begrüßungen von allen Aufrufen des `convertToUpper()`-Process sammeln.
 Was wissen wir, dass wir vom vorherigen Schritt im Workflow bekommen können?
 
-Der von `convertToUpper()` ausgegebene channel wird die Pfade zu den einzelnen Dateien enthalten, die die Großbuchstaben-Begrüßungen enthalten.
+Der von `convertToUpper()` ausgegebene Kanal wird die Pfade zu den einzelnen Dateien enthalten, die die Großbuchstaben-Begrüßungen enthalten.
 Das entspricht einem Eingabeslot; nennen wir ihn der Einfachheit halber `input_files`.
 
-Nimm im process-Block die folgende Codeänderung vor:
+Nimm im Process-Block die folgende Codeänderung vor:
 
 === "Nachher"
 
@@ -456,13 +470,13 @@ Beachte, dass wir das `path`-Präfix verwenden, obwohl wir erwarten, dass dies m
 #### 2.2.3. Den Verkettungsbefehl zusammenstellen
 
 Hier könnten die Dinge etwas knifflig werden, weil wir in der Lage sein müssen, eine beliebige Anzahl von Eingabedateien zu handhaben.
-Konkret können wir den Befehl nicht im Voraus schreiben, also müssen wir Nextflow sagen, wie es ihn zur Laufzeit basierend auf den Eingaben, die in den process fließen, zusammenstellen soll.
+Konkret können wir den Befehl nicht im Voraus schreiben, also müssen wir Nextflow sagen, wie es ihn zur Laufzeit basierend auf den Eingaben, die in den Process fließen, zusammenstellen soll.
 
-Mit anderen Worten, wenn wir einen Eingabe-channel haben, der das Element `[file1.txt, file2.txt, file3.txt]` enthält, brauchen wir Nextflow, um das in `cat file1.txt file2.txt file3.txt` umzuwandeln.
+Mit anderen Worten, wenn wir einen Eingabekanal haben, der das Element `[file1.txt, file2.txt, file3.txt]` enthält, brauchen wir Nextflow, um das in `cat file1.txt file2.txt file3.txt` umzuwandeln.
 
 Glücklicherweise macht Nextflow das gerne für uns, wenn wir einfach `cat ${input_files}` in den Skriptbefehl schreiben.
 
-Nimm im process-Block die folgende Codeänderung vor:
+Nimm im Process-Block die folgende Codeänderung vor:
 
 === "Nachher"
 
@@ -492,11 +506,16 @@ Theoretisch sollte dies jede beliebige Anzahl von Eingabedateien handhaben könn
 
 ### 2.3. Den Sammelschritt zum Workflow hinzufügen
 
-Jetzt sollten wir nur noch den Sammel-process auf der Ausgabe des Großbuchstaben-Schritts aufrufen müssen.
+Jetzt sollten wir nur noch den Sammel-Process auf der Ausgabe des Großbuchstaben-Schritts aufrufen müssen.
+Das ist auch ein Kanal, genannt `convertToUpper.out`.
 
-#### 2.3.1. Die process-Aufrufe verbinden
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect-connector.svg"
+</figure>
 
-Nimm im workflow-Block die folgende Codeänderung vor:
+#### 2.3.1. Die Process-Aufrufe verbinden
+
+Nimm im Workflow-Block die folgende Codeänderung vor:
 
 === "Nachher"
 
@@ -555,22 +574,26 @@ Schau dir jetzt den Inhalt der endgültigen Ausgabedatei an.
 
 Oh nein. Der Sammelschritt wurde einzeln auf jede Begrüßung ausgeführt, was NICHT das ist, was wir wollten.
 
-Wir müssen etwas tun, um Nextflow explizit zu sagen, dass wir wollen, dass dieser dritte Schritt auf allen Elementen im vom `convertToUpper()` ausgegebenen channel läuft.
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect-no-operator.svg"
+</figure>
+
+Wir müssen etwas tun, um Nextflow explizit zu sagen, dass wir wollen, dass dieser dritte Schritt auf allen Elementen im vom `convertToUpper()` ausgegebenen Kanal läuft.
 
 ### 2.4. Einen Operator verwenden, um die Begrüßungen in eine einzelne Eingabe zu sammeln
 
 Ja, wieder einmal ist die Antwort auf unser Problem ein Operator.
 
-Konkret werden wir den treffend benannten [`collect()`](https://www.nextflow.io/docs/latest/reference/operator.html#collect)-Operator verwenden.
+Konkret werden wir den treffend benannten [`collect()`](https://nextflow.io/docs/latest/reference/operator.html#collect)-Operator verwenden.
 
 #### 2.4.1. Den `collect()`-Operator hinzufügen
 
-Diesmal wird es etwas anders aussehen, weil wir den Operator nicht im Kontext einer channel factory hinzufügen; wir fügen ihn zu einem Ausgabe-channel hinzu.
+Diesmal wird es etwas anders aussehen, weil wir den Operator nicht im Kontext einer Channel Factory hinzufügen; wir fügen ihn zu einem Ausgabekanal hinzu.
 
 Wir nehmen das `convertToUpper.out` und hängen den `collect()`-Operator an, was uns `convertToUpper.out.collect()` gibt.
-Wir können das direkt in den `collectGreetings()`-process-Aufruf einstecken.
+Wir können das direkt in den `collectGreetings()`-Process-Aufruf einstecken.
 
-Nimm im workflow-Block die folgende Codeänderung vor:
+Nimm im Workflow-Block die folgende Codeänderung vor:
 
 === "Nachher"
 
@@ -590,7 +613,7 @@ Nimm im workflow-Block die folgende Codeänderung vor:
 
 #### 2.4.2. Einige `view()`-Anweisungen hinzufügen
 
-Lass uns auch ein paar `view()`-Anweisungen einfügen, um die Zustände des channel-Inhalts vor und nach zu visualisieren.
+Lass uns auch ein paar `view()`-Anweisungen einfügen, um die Zustände des Kanal-Inhalts vor und nach zu visualisieren.
 
 === "Nachher"
 
@@ -641,13 +664,18 @@ nextflow run hello-workflow.nf -resume
 Es läuft erfolgreich, obwohl die Log-Ausgabe möglicherweise etwas unordentlicher aussieht als dies (wir haben es für die Lesbarkeit aufgeräumt).
 
 Diesmal wurde der dritte Schritt nur einmal aufgerufen!
-
 Wenn du dir die Ausgabe der `view()`-Anweisungen anschaust, siehst du Folgendes:
 
-- Drei `Before collect:`-Anweisungen, eine für jede Begrüßung: zu diesem Zeitpunkt sind die Dateipfade einzelne Elemente im channel.
+- Drei `Before collect:`-Anweisungen, eine für jede Begrüßung: zu diesem Zeitpunkt sind die Dateipfade einzelne Elemente im Kanal.
 - Eine einzelne `After collect:`-Anweisung: die drei Dateipfade sind jetzt in ein einzelnes Element verpackt.
 
-Schau dir den Inhalt der endgültigen Ausgabedatei an.
+Wir können das mit dem folgenden Diagramm zusammenfassen:
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect-WITH-operator.svg"
+</figure>
+
+Zum Schluss kannst du dir den Inhalt der Ausgabedatei anschauen, um dich selbst davon zu überzeugen, dass alles korrekt funktioniert hat.
 
 ??? abstract "Dateiinhalte"
 
@@ -662,7 +690,7 @@ Diesmal haben wir alle drei Begrüßungen in der endgültigen Ausgabedatei. Erfo
 !!! note "Hinweis"
 
     Wenn du dies mehrmals ohne `-resume` ausführst, wirst du sehen, dass sich die Reihenfolge der Begrüßungen von einem Lauf zum nächsten ändert.
-    Dies zeigt dir, dass die Reihenfolge, in der Elemente durch process-Aufrufe fließen, nicht garantiert konsistent ist.
+    Dies zeigt dir, dass die Reihenfolge, in der Elemente durch Process-Aufrufe fließen, nicht garantiert konsistent ist.
 
 #### 2.4.4. `view()`-Anweisungen für die Lesbarkeit entfernen
 
@@ -688,35 +716,45 @@ Bevor du zum nächsten Abschnitt übergehst, empfehlen wir, die `view()`-Anweisu
 
 Dies ist im Grunde die umgekehrte Operation von Punkt 2.4.2.
 
-### Zusammenfassung
+### Fazit
 
-Du weißt, wie du Ausgaben aus einem Stapel von process-Aufrufen sammelst und sie in einen gemeinsamen Analyse- oder Zusammenfassungsschritt einspeist.
+Du weißt, wie du Ausgaben aus einem Stapel von Process-Aufrufen sammelst und sie in einen gemeinsamen Analyse- oder Zusammenfassungsschritt einspeist.
 
-### Was kommt als Nächstes?
+Zur Wiederholung, das ist, was du bisher erstellt hast:
 
-Lerne, wie du mehr als eine Eingabe an einen process übergibst.
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect.svg"
+</figure>
+
+### Wie geht es weiter?
+
+Lerne, wie du zusätzliche Parameter an einen Process übergibst.
 
 ---
 
-## 3. Mehr als eine Eingabe an einen process übergeben
+## 3. Zusätzliche Parameter an einen Process übergeben
 
 Wir wollen in der Lage sein, der endgültigen Ausgabedatei einen bestimmten Namen zu geben, um nachfolgende Stapel von Begrüßungen verarbeiten zu können, ohne die endgültigen Ergebnisse zu überschreiben.
 
 Zu diesem Zweck werden wir die folgenden Verfeinerungen am Workflow vornehmen:
 
-- Den Sammel-process so modifizieren, dass er einen benutzerdefinierten Namen für die Ausgabedatei akzeptiert
-- Einen Kommandozeilenparameter zum Workflow hinzufügen und ihn an den Sammel-process übergeben
+- Den Sammel-Process so modifizieren, dass er einen benutzerdefinierten Namen für die Ausgabedatei akzeptiert (`batch_name`)
+- Einen Kommandozeilenparameter zum Workflow hinzufügen (`--batch`) und ihn an den Sammel-Process übergeben
 
-### 3.1. Den Sammel-process modifizieren
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect-batch.svg"
+</figure>
+
+### 3.1. Den Sammel-Process modifizieren
 
 Wir müssen die zusätzliche Eingabe deklarieren und sie in den Ausgabedateinamen integrieren.
 
 #### 3.1.1. Die zusätzliche Eingabe deklarieren
 
-Gute Nachricht: Wir können so viele Eingabevariablen deklarieren, wie wir wollen, in der process-Definition.
+Gute Nachricht: Wir können so viele Eingabevariablen deklarieren, wie wir wollen, in der Process-Definition.
 Nennen wir diese `batch_name`.
 
-Nimm im process-Block die folgende Codeänderung vor:
+Nimm im Process-Block die folgende Codeänderung vor:
 
 === "Nachher"
 
@@ -733,16 +771,16 @@ Nimm im process-Block die folgende Codeänderung vor:
         path input_files
     ```
 
-Du kannst deine processes so einrichten, dass sie so viele Eingaben erwarten, wie du möchtest.
+Du kannst deine Processes so einrichten, dass sie so viele Eingaben erwarten, wie du möchtest.
 Im Moment sind diese alle als erforderliche Eingaben eingerichtet; du _musst_ einen Wert angeben, damit der Workflow funktioniert.
 
-Die Handhabung erforderlicher und optionaler Eingaben behandeln fortgeschrittene Kurse.
+Wie man erforderliche und optionale Eingaben handhabt, lernst du später auf deiner Nextflow-Reise.
 
 #### 3.1.2. Die `batch_name`-Variable im Ausgabedateinamen verwenden
 
 Wir können die Variable auf dieselbe Weise in den Ausgabedateinamen einfügen, wie wir zuvor dynamische Dateinamen zusammengestellt haben.
 
-Nimm im process-Block die folgende Codeänderung vor:
+Nimm im Process-Block die folgende Codeänderung vor:
 
 === "Nachher"
 
@@ -768,11 +806,11 @@ Nimm im process-Block die folgende Codeänderung vor:
         """
     ```
 
-Dies richtet den process ein, den `batch_name`-Wert zu verwenden, um einen spezifischen Dateinamen für die endgültige Ausgabe des Workflows zu generieren.
+Dies richtet den Process ein, den `batch_name`-Wert zu verwenden, um einen spezifischen Dateinamen für die endgültige Ausgabe des Workflows zu generieren.
 
 ### 3.2. Einen `batch`-Kommandozeilenparameter hinzufügen
 
-Jetzt brauchen wir einen Weg, den Wert für `batch_name` zu liefern und ihn an den process-Aufruf zu übergeben.
+Jetzt brauchen wir einen Weg, den Wert für `batch_name` zu liefern und ihn an den Process-Aufruf zu übergeben.
 
 #### 3.2.1. `params` verwenden, um den Parameter einzurichten
 
@@ -806,11 +844,11 @@ Nimm im Abschnitt für Pipeline-Parameter die folgenden Codeänderungen vor:
 
 Genau wie wir es für `--input` demonstriert haben, kannst du diesen Standardwert überschreiben, indem du einen Wert mit `--batch` auf der Kommandozeile angibst.
 
-#### 3.2.2. Den `batch`-Parameter an den process übergeben
+#### 3.2.2. Den `batch`-Parameter an den Process übergeben
 
-Um den Wert des Parameters an den process zu übergeben, müssen wir ihn im process-Aufruf hinzufügen.
+Um den Wert des Parameters an den Process zu übergeben, müssen wir ihn im Process-Aufruf hinzufügen.
 
-Nimm im workflow-Block die folgende Codeänderung vor:
+Nimm im Workflow-Block die folgende Codeänderung vor:
 
 === "Nachher"
 
@@ -826,11 +864,11 @@ Nimm im workflow-Block die folgende Codeänderung vor:
         collectGreetings(convertToUpper.out.collect())
     ```
 
-Du siehst, dass um mehrere Eingaben an einen process zu übergeben, du sie einfach in den Aufruf-Klammern auflistest, durch Kommas getrennt.
+Du siehst, dass um mehrere Eingaben an einen Process zu übergeben, du sie einfach in den Aufruf-Klammern auflistest, durch Kommas getrennt.
 
 !!! warning "Warnung"
 
-    Du MUSST die Eingaben an den process in der EXAKT GLEICHEN REIHENFOLGE übergeben, wie sie im Eingabedefinitionsblock des process aufgelistet sind.
+    Du MUSST die Eingaben an den Process in der EXAKT GLEICHEN REIHENFOLGE übergeben, wie sie im Eingabedefinitionsblock des Process aufgelistet sind.
 
 ### 3.3. Den Workflow ausführen
 
@@ -865,11 +903,11 @@ Es läuft erfolgreich und produziert die gewünschte Ausgabe:
 
 Solange wir den Parameter entsprechend angeben, werden nachfolgende Läufe auf anderen Eingabestapeln keine vorherigen Ergebnisse überschreiben.
 
-### Zusammenfassung
+### Fazit
 
-Du weißt, wie du mehr als eine Eingabe an einen process übergibst.
+Du weißt, wie du mehr als eine Eingabe an einen Process übergibst.
 
-### Was kommt als Nächstes?
+### Wie geht es weiter?
 
 Lerne, wie du mehrere Ausgaben ausgibst und sie bequem handhabst.
 
@@ -877,33 +915,31 @@ Lerne, wie du mehrere Ausgaben ausgibst und sie bequem handhabst.
 
 ## 4. Eine Ausgabe zum Sammelschritt hinzufügen
 
-Bisher haben wir processes verwendet, die jeweils nur eine Ausgabe produzierten.
-Wir konnten auf ihre jeweiligen Ausgaben sehr bequem mit der `<process>.out`-Syntax zugreifen, die wir sowohl im Kontext der Übergabe einer Ausgabe an den nächsten process (z.B. `convertToUpper(sayHello.out)`) als auch im Kontext des `publish:`-Abschnitts (z.B. `first_output = sayHello.out`) verwendet haben.
+Bisher haben wir Processes verwendet, die jeweils nur eine Ausgabe produzierten.
+Wir konnten auf ihre jeweiligen Ausgaben sehr bequem mit der `<process>.out`-Syntax zugreifen, die wir sowohl im Kontext der Übergabe einer Ausgabe an den nächsten Process (z.B. `convertToUpper(sayHello.out)`) als auch im Kontext des `publish:`-Abschnitts (z.B. `first_output = sayHello.out`) verwendet haben.
 
-Was passiert, wenn ein process mehr als eine Ausgabe produziert?
+Was passiert, wenn ein Process mehr als eine Ausgabe produziert?
 Wie handhaben wir die mehreren Ausgaben?
 Können wir eine bestimmte Ausgabe auswählen und verwenden?
 
 Alles ausgezeichnete Fragen, und die kurze Antwort ist ja, das können wir!
 
-Mehrere Ausgaben werden in separate channels verpackt.
-Wir können entweder wählen, diesen Ausgabe-channels Namen zu geben, was es einfach macht, sie später einzeln zu referenzieren, oder wir können sie per Index referenzieren.
-
-Lass uns mit einem Beispiel eintauchen.
+Mehrere Ausgaben werden in separate Kanäle verpackt.
+Wir können entweder wählen, diesen Ausgabekanälen Namen zu geben, was es einfach macht, sie später einzeln zu referenzieren, oder wir können sie per Index referenzieren.
 
 Zur Demonstration sagen wir, dass wir die Anzahl der Begrüßungen zählen wollen, die für einen gegebenen Eingabestapel gesammelt werden, und sie in einer Datei berichten wollen.
 
-### 4.1. Den process so modifizieren, dass er die Anzahl der Begrüßungen zählt und ausgibt
+### 4.1. Den Process so modifizieren, dass er die Anzahl der Begrüßungen zählt und ausgibt
 
-Dies erfordert zwei wichtige Änderungen an der process-Definition: wir brauchen einen Weg, die Begrüßungen zu zählen und eine Berichtsdatei zu schreiben, dann müssen wir diese Berichtsdatei zum `output`-Block des process hinzufügen.
+Dies erfordert zwei wichtige Änderungen an der Process-Definition: wir brauchen einen Weg, die Begrüßungen zu zählen und eine Berichtsdatei zu schreiben, dann müssen wir diese Berichtsdatei zum `output`-Block des Process hinzufügen.
 
 #### 4.1.1. Die Anzahl der gesammelten Begrüßungen zählen
 
-Praktischerweise erlaubt Nextflow uns, beliebigen Code im `script:`-Block der process-Definition hinzuzufügen, was wirklich praktisch ist, um solche Dinge zu tun.
+Praktischerweise erlaubt Nextflow uns, beliebigen Code im `script:`-Block der Process-Definition hinzuzufügen, was wirklich praktisch ist, um solche Dinge zu tun.
 
 Das bedeutet, wir können Nextflows eingebaute `size()`-Funktion verwenden, um die Anzahl der Dateien im `input_files`-Array zu erhalten, und das Ergebnis mit einem `echo`-Befehl in eine Datei schreiben.
 
-Nimm im `collectGreetings`-process-Block die folgenden Codeänderungen vor:
+Nimm im `collectGreetings`-Process-Block die folgenden Codeänderungen vor:
 
 === "Nachher"
 
@@ -933,7 +969,7 @@ Im Prinzip müssen wir nur die Berichtsdatei zum `output:`-Block hinzufügen.
 
 Aber während wir dabei sind, werden wir auch einige `emit:`-Tags zu unseren Ausgabedeklarationen hinzufügen. Diese werden es uns ermöglichen, die Ausgaben per Namen auszuwählen, anstatt Positionsindizes verwenden zu müssen.
 
-Nimm im process-Block die folgende Codeänderung vor:
+Nimm im Process-Block die folgende Codeänderung vor:
 
 === "Nachher"
 
@@ -955,17 +991,21 @@ Aber wie das Sprichwort sagt, warum nicht beides?
 
 !!! tip "Tipp"
 
-    Wenn du die Ausgaben eines process nicht mit `emit:` benennst, kannst du trotzdem einzeln auf sie zugreifen, indem du ihren jeweiligen (nullbasierten) Index verwendest.
+    Wenn du die Ausgaben eines Process nicht mit `emit:` benennst, kannst du trotzdem einzeln auf sie zugreifen, indem du ihren jeweiligen (nullbasierten) Index verwendest.
     Zum Beispiel würdest du `<process>.out[0]` verwenden, um die erste Ausgabe zu bekommen, `<process>.out[1]` für die zweite Ausgabe, und so weiter.
 
-    Wir bevorzugen es, Ausgaben zu benennen, weil es sonst zu einfach ist, versehentlich den falschen Index zu greifen, besonders wenn der process viele Ausgaben produziert.
+    Wir bevorzugen es, Ausgaben zu benennen, weil es sonst zu einfach ist, versehentlich den falschen Index zu greifen, besonders wenn der Process viele Ausgaben produziert.
 
 ### 4.2. Die Workflow-Ausgaben aktualisieren
 
-Jetzt, da wir zwei Ausgaben aus dem `collectGreetings`-process haben, enthält die `collectGreetings.out`-Ausgabe zwei channels:
+Jetzt, da wir zwei Ausgaben aus dem `collectGreetings`-Process haben, enthält die `collectGreetings.out`-Ausgabe zwei Kanäle:
 
 - `collectGreetings.out.outfile` enthält die endgültige Ausgabedatei
 - `collectGreetings.out.report` enthält die Berichtsdatei
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect-report.svg"
+</figure>
 
 Wir müssen die Workflow-Ausgaben entsprechend aktualisieren.
 
@@ -992,8 +1032,8 @@ Nimm im `workflow`-Block die folgende Codeänderung vor:
         collected = collectGreetings.out
     ```
 
-Wie du sehen kannst, ist das Referenzieren spezifischer process-Ausgaben jetzt trivial.
-Wenn wir in Teil 5 (Containers) einen weiteren Schritt zu unserer Pipeline hinzufügen, werden wir in der Lage sein, leicht auf `collectGreetings.out.outfile` zu verweisen und es dem neuen process zu übergeben (Spoiler: der neue process heißt `cowpy`).
+Wie du sehen kannst, ist das Referenzieren spezifischer Process-Ausgaben jetzt trivial.
+Wenn wir in Teil 5 (Containers) einen weiteren Schritt zu unserer Pipeline hinzufügen, werden wir in der Lage sein, leicht auf `collectGreetings.out.outfile` zu verweisen und es dem neuen Process zu übergeben (Spoiler: der neue Process heißt `cowpy`).
 
 Aber für jetzt aktualisieren wir die Workflow-Level-Ausgaben fertig.
 
@@ -1076,46 +1116,50 @@ Wenn du ins Verzeichnis `results/hello_workflow/` schaust, findest du die neue B
     There were 3 greetings in this batch.
     ```
 
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect-4-way.svg"
+</figure>
+
 Du kannst gerne weitere Begrüßungen zur CSV hinzufügen und testen, was passiert.
 
-### Zusammenfassung
+### Fazit
 
-Du weißt, wie du einen process mehrere benannte Ausgaben ausgeben lässt und wie du sie auf Workflow-Ebene angemessen handhabst.
+Du weißt, wie du einen Process mehrere benannte Ausgaben ausgeben lässt und wie du sie auf Workflow-Ebene angemessen handhabst.
 
-Allgemeiner verstehst du die wichtigsten Prinzipien, die beim Verbinden von processes auf gängige Weise involviert sind.
+Allgemeiner verstehst du die wichtigsten Prinzipien, die beim Verbinden von Processes auf gängige Weise involviert sind.
 
-### Was kommt als Nächstes?
+### Wie geht es weiter?
 
 Mach eine extra lange Pause, du hast sie verdient.
 
-Wenn du bereit bist, gehe zu [**Teil 4: Hallo Module**](./04_hello_modules.md), um zu lernen, wie du deinen Code für bessere Wartbarkeit und Code-Effizienz modularisierst.
+Wenn du bereit bist, gehe zu [**Teil 4: Hello Modules**](./04_hello_modules.md), um zu lernen, wie du deinen Code für bessere Wartbarkeit und Code-Effizienz modularisierst.
 
 ---
 
 ## Quiz
 
 <quiz>
-Wie greifst du auf die Ausgabe eines process im workflow-Block zu?
+Wie greifst du auf die Ausgabe eines Process im Workflow-Block zu?
 - [ ] `process.output`
 - [ ] `output.processName`
 - [x] `processName.out`
 - [ ] `get(processName)`
 
-Mehr erfahren: [1.4. Die Ausgabe des ersten process an den zweiten process übergeben](#14-die-ausgabe-des-ersten-process-an-den-zweiten-process-ubergeben)
+Mehr erfahren: [1.4. Die Ausgabe des ersten Process an den zweiten Process übergeben](#14-die-ausgabe-des-ersten-process-an-den-zweiten-process-ubergeben)
 </quiz>
 
 <quiz>
-Was bestimmt die Reihenfolge der process-Ausführung in Nextflow?
-- [ ] Die Reihenfolge, in der processes im workflow-Block geschrieben sind
-- [ ] Alphabetische Reihenfolge nach process-Namen
-- [x] Datenabhängigkeiten zwischen processes
+Was bestimmt die Reihenfolge der Process-Ausführung in Nextflow?
+- [ ] Die Reihenfolge, in der Processes im Workflow-Block geschrieben sind
+- [ ] Alphabetische Reihenfolge nach Process-Namen
+- [x] Datenabhängigkeiten zwischen Processes
 - [ ] Zufällige Reihenfolge für parallele Ausführung
 
-Mehr erfahren: [1.4. Die Ausgabe des ersten process an den zweiten process übergeben](#14-die-ausgabe-des-ersten-process-an-den-zweiten-process-ubergeben)
+Mehr erfahren: [1.4. Die Ausgabe des ersten Process an den zweiten Process übergeben](#14-die-ausgabe-des-ersten-process-an-den-zweiten-process-ubergeben)
 </quiz>
 
 <quiz>
-Welcher Operator sollte `???` ersetzen, um alle Ausgaben in eine einzelne Liste für den nachfolgenden process zu sammeln?
+Welcher Operator sollte `???` ersetzen, um alle Ausgaben in eine einzelne Liste für den nachfolgenden Process zu sammeln?
 
 ```groovy hl_lines="4"
 workflow {
@@ -1136,15 +1180,15 @@ Mehr erfahren: [2.4. Einen Operator verwenden, um die Begrüßungen in eine einz
 <quiz>
 Wann solltest du den `collect()`-Operator verwenden?
 - [ ] Wenn du Elemente parallel verarbeiten möchtest
-- [ ] Wenn du channel-Inhalte filtern musst
-- [x] Wenn ein nachfolgender process alle Elemente von einem vorgelagerten process benötigt
-- [ ] Wenn du Daten auf mehrere processes aufteilen möchtest
+- [ ] Wenn du Kanal-Inhalte filtern musst
+- [x] Wenn ein nachfolgender Process alle Elemente von einem vorgelagerten Process benötigt
+- [ ] Wenn du Daten auf mehrere Processes aufteilen möchtest
 
 Mehr erfahren: [2.4. Einen Operator verwenden, um die Begrüßungen in eine einzelne Eingabe zu sammeln](#24-einen-operator-verwenden-um-die-begrussungen-in-eine-einzelne-eingabe-zu-sammeln)
 </quiz>
 
 <quiz>
-Wie greifst du auf eine benannte Ausgabe von einem process zu?
+Wie greifst du auf eine benannte Ausgabe von einem Process zu?
 - [ ] `processName.outputName`
 - [ ] `processName.get(outputName)`
 - [x] `processName.out.outputName`
@@ -1154,7 +1198,7 @@ Mehr erfahren: [4.1.2. Die Berichtsdatei ausgeben und Ausgaben benennen](#412-di
 </quiz>
 
 <quiz>
-Was ist die korrekte Syntax, um eine Ausgabe in einem process zu benennen?
+Was ist die korrekte Syntax, um eine Ausgabe in einem Process zu benennen?
 - [ ] `name: outputName`
 - [ ] `output: outputName`
 - [x] `emit: outputName`
@@ -1164,11 +1208,11 @@ Mehr erfahren: [4.1.2. Die Berichtsdatei ausgeben und Ausgaben benennen](#412-di
 </quiz>
 
 <quiz>
-Was muss bei der Übergabe mehrerer Eingaben an einen process zutreffen?
+Was muss bei der Übergabe mehrerer Eingaben an einen Process zutreffen?
 - [ ] Alle Eingaben müssen vom gleichen Typ sein
 - [ ] Eingaben müssen in alphabetischer Reihenfolge übergeben werden
 - [x] Die Reihenfolge der Eingaben muss mit der im Eingabeblock definierten Reihenfolge übereinstimmen
 - [ ] Nur zwei Eingaben können gleichzeitig übergeben werden
 
-Mehr erfahren: [3. Mehr als eine Eingabe an einen process übergeben](#3-mehr-als-eine-eingabe-an-einen-process-ubergeben)
+Mehr erfahren: [3. Zusätzliche Parameter an einen Process übergeben](#3-zusatzliche-parameter-an-einen-process-ubergeben)
 </quiz>

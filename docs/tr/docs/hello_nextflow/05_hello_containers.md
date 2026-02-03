@@ -1,4 +1,4 @@
-# Bölüm 5: Hello Containers
+# Bölüm 5: Merhaba Konteynerlar
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
@@ -78,7 +78,7 @@ nextflow run hello-containers.nf
 
     Launching `hello-containers.nf` [nice_escher] DSL2 - revision: d5dfdc9872
 
-    executor > local (7)
+    executor >  local (7)
     [5a/ec1fa1] sayHello (2) [100%] 3 of 3 ✔
     [30/32b5b8] convertToUpper (3) [100%] 3 of 3 ✔
     [d3/be01bc] collectGreetings [100%] 1 of 1 ✔
@@ -371,7 +371,7 @@ cat /my_project/data/greetings.csv | cowpy -c turkey
               ( /  (    (        ,___    ^*+_+* )   <    <      \
               U _/     )    *--<  ) ^\-----++__)   )    )       )
                 (      )  _(^)^^))  )  )\^^^^^))^*+/    /       /
-              (      /  (_))_^)) )  )  ))^^^^^))^^^)__/     +^^
+              (      /  (_))^)) )  )  ))^^^^^))^^^)__/     +^^
             (     ,/    (^))^))  )  ) ))^^^^^^^))^^)       _)
               *+__+*       (_))^)  ) ) ))^^^^^^))^^^^^)____*^
               \             \_)^)_)) ))^^^^^^^^^^))^^^^)
@@ -416,8 +416,6 @@ Bunu göstermek için, geliştirdiğimiz pipeline'a `collectGreetings` adımınd
 <figure class="excalidraw">
 --8<-- "docs/en/docs/nextflow_run/img/hello-pipeline-cowpy.svg"
 </figure>
-
-Dalmaya hazırsanız möö deyin!
 
 ### 2.1. Bir `cowpy` modülü yazın
 
@@ -468,7 +466,7 @@ Süreç, selamlamaları içeren bir `input_file` ve bir `character` değeri bekl
 
 #### 2.2.1. `cowpy` sürecini `hello-containers.nf`'ye içe aktarın
 
-Import tanımını workflow bloğunun üstüne ekleyin ve uygun şekilde doldurun.
+İmport tanımını workflow bloğunun üstüne ekleyin ve uygun şekilde doldurun.
 
 === "Sonra"
 
@@ -573,7 +571,7 @@ Artık tembel olabilir ve komut satırlarımızda karakter parametresini yazmay�
 
 ##### 2.2.4.1. `publish:` bölümünü güncelleyin
 
-`workflow bloğunda`, aşağıdaki kod değişikliğini yapın:
+`workflow` bloğunda, aşağıdaki kod değişikliğini yapın:
 
 === "Sonra"
 
@@ -827,7 +825,7 @@ nextflow run hello-containers.nf -resume
     ```
 
 Bu sefer gerçekten çalışıyor!
-Her zamanki gibi iş akışı çıktılarını ilgili results dizininde bulabilirsiniz, ancak bu sefer biraz daha düzgün organize edilmiş; yalnızca rapor ve son çıktı üst düzeyde, tüm ara dosyalar bir alt dizine taşınmış.
+Her zamanki gibi iş akışı çıktılarını ilgili sonuçlar dizininde bulabilirsiniz, ancak bu sefer biraz daha düzgün organize edilmiş; yalnızca rapor ve son çıktı üst düzeyde, tüm ara dosyalar bir alt dizine taşınmış.
 
 ??? abstract "Dizin içerikleri"
 
@@ -866,7 +864,7 @@ Son ASCII sanat çıktısı `results/hello_containers/` dizininde, `cowpy-COLLEC
               ( /  (    (        ,___    ^*+_+* )   <    <      \
               U _/     )    *--<  ) ^\-----++__)   )    )       )
                 (      )  _(^)^^))  )  )\^^^^^))^*+/    /       /
-              (      /  (_))_^)) )  )  ))^^^^^))^^^)__/     +^^
+              (      /  (_))^)) )  )  ))^^^^^))^^^)__/     +^^
             (     ,/    (^))^))  )  ) ))^^^^^^^))^^)       _)
               *+__+*       (_))^)  ) ) ))^^^^^^))^^^^^)____*^
               \             \_)^)_)) ))^^^^^^^^^^))^^^^)

@@ -2,7 +2,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tradução assistida por IA - [saiba mais e sugira melhorias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Na Parte 1 deste curso (Operações Básicas de Execução), começamos com um fluxo de trabalho de exemplo que tinha apenas recursos mínimos para manter a complexidade do código baixa.
+Na Parte 1 deste curso (Executar Operações Básicas), começamos com um fluxo de trabalho de exemplo que tinha apenas recursos mínimos para manter a complexidade do código baixa.
 Por exemplo, `1-hello.nf` usou um parâmetro de linha de comando (`--input`) para fornecer um único valor por vez.
 
 No entanto, a maioria dos pipelines do mundo real usa recursos mais sofisticados para permitir o processamento eficiente de grandes quantidades de dados em escala e aplicar múltiplas etapas de processamento encadeadas por lógica às vezes complexa.
@@ -229,7 +229,7 @@ Novamente, você não precisa memorizar sintaxe de código, mas é bom aprender 
 
 Esta é a parte mais interessante: como mudamos de receber um único valor da linha de comando para receber um arquivo CSV, analisá-lo e processar as saudações individuais que ele contém?
 
-No Nextflow, fazemos isso com um **canal**: uma construção projetada para lidar com entradas eficientemente e transportá-las de uma etapa para outra em fluxos de trabalho de múltiplas etapas, enquanto fornece paralelismo embutido e muitos benefícios adicionais.
+No Nextflow, fazemos isso com um [**canal**](https://nextflow.io/docs/latest/channel.html): uma construção de fila projetada para lidar com entradas eficientemente e transportá-las de uma etapa para outra em fluxos de trabalho de múltiplas etapas, enquanto fornece paralelismo embutido e muitos benefícios adicionais.
 
 Vamos analisar.
 
@@ -618,21 +618,18 @@ Desta vez o operador é chamado `collect`, e é aplicado ao canal de saída prod
 
 O operador `collect` é usado para coletar as saídas de múltiplas chamadas ao mesmo processo e empacotá-las em um único elemento de canal.
 
-No contexto deste fluxo de trabalho, ele está pegando as três saudações em maiúsculas no canal `convertToUpper.out` --que são três itens de canal separados, e normalmente seriam tratados em chamadas separadas pelo próximo processo-- e empacotando-os em um único item.
-
-Em termos mais práticos: se não aplicássemos `collect()` à saída de `convertToUpper()` antes de alimentá-la para `collectGreetings()`, o Nextflow simplesmente executaria `collectGreetings()` independentemente em cada saudação, o que não alcançaria nosso objetivo.
-
-<figure class="excalidraw">
---8<-- "docs/en/docs/nextflow_run/img/without-collect-operator.svg"
-</figure>
-
-Em contraste, usar `collect()` nos permite pegar todas as saudações em maiúsculas separadas produzidas pela segunda etapa do fluxo de trabalho e alimentá-las todas juntas para uma única chamada na terceira etapa do pipeline.
+No contexto deste fluxo de trabalho, ele está pegando as três saudações em maiúsculas no canal `convertToUpper.out` (que são três itens de canal separados, e normalmente seriam tratados em chamadas separadas pelo próximo processo) e empacotando-os em um único item.
+É assim que colocamos todas as saudações de volta no mesmo arquivo.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/nextflow_run/img/with-collect-operator.svg"
 </figure>
 
-É assim que colocamos todas as saudações de volta no mesmo arquivo.
+Em contraste, se não aplicássemos `collect()` à saída de `convertToUpper()` antes de alimentá-la para `collectGreetings()`, o Nextflow simplesmente executaria `collectGreetings()` independentemente em cada saudação, o que não alcançaria nosso objetivo.
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/nextflow_run/img/without-collect-operator.svg"
+</figure>
 
 Há muitos outros [operadores](https://www.nextflow.io/docs/latest/reference/operator.html#operator-page) disponíveis para aplicar transformações ao conteúdo de canais entre chamadas de processo.
 
@@ -783,7 +780,7 @@ Isso pode tornar seu desenvolvimento e manutenção mais eficientes e sustentáv
 
 Aqui vamos demonstrar a forma mais comum de modularidade de código no Nextflow, que é o uso de **módulos**.
 
-No Nextflow, um **módulo** é uma única definição de processo que é encapsulada sozinha em um arquivo de código autônomo.
+No Nextflow, um [**módulo**](https://nextflow.io/docs/latest/module.html) é uma única definição de processo que é encapsulada sozinha em um arquivo de código autônomo.
 Para usar um módulo em um fluxo de trabalho, você apenas adiciona uma declaração de importação de uma linha ao seu arquivo de código de fluxo de trabalho; então você pode integrar o processo no fluxo de trabalho da mesma forma que normalmente faria.
 Isso torna possível reutilizar definições de processo em múltiplos fluxos de trabalho sem produzir múltiplas cópias do código.
 
@@ -967,7 +964,8 @@ Um **contêiner** é uma unidade leve, autônoma e executável de software criad
 
 !!! Tip "Dica"
 
-    Ensinamos isso usando a tecnologia [Docker](https://www.docker.com/get-started/), mas o Nextflow suporta [várias outras tecnologias de contêiner](https://www.nextflow.io/docs/latest/container.html#) também.
+    Ensinamos isso usando a tecnologia [Docker](https://www.docker.com/get-started/), mas o Nextflow suporta várias outras tecnologias de contêiner também.
+    Você pode aprender mais sobre o suporte do Nextflow para contêineres [aqui](https://www.nextflow.io/docs/latest/container.html#).
 
 ### 4.1. Use um contêiner diretamente
 
@@ -1148,7 +1146,7 @@ Nós só precisamos especificar um contêiner para cada processo.
 Para demonstrar como isso funciona, fizemos outra versão do nosso fluxo de trabalho que executa `cowpy` no arquivo de saudações coletadas produzido na terceira etapa.
 
 <figure class="excalidraw">
---8<-- "docs/en/docs/nextflow_run/img/hello-pipeline-cowpy.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-cowpy.svg"
 </figure>
 
 Isso deve produzir um arquivo contendo a arte ASCII com as três saudações no balão de fala.

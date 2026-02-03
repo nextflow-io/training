@@ -19,7 +19,7 @@ Gratulacje z okazji ukończenia kursu szkoleniowego Hello Nextflow! 🎉
 ## Twoja droga
 
 Zacząłeś od bardzo prostego workflow'u, który uruchamiał zakodowane na sztywno polecenie.
-W ciągu sześciu części przekształciłeś go w modularny, wieloetapowy pipeline, który wykorzystuje kluczowe funkcje Nextflow, w tym kanały, operatory, wbudowaną obsługę kontenerów i opcje konfiguracji.
+W ciągu sześciu części przekształciłeś ten podstawowy workflow w modularny, wieloetapowy pipeline wykorzystujący kluczowe funkcje Nextflow, w tym kanały, operatory, wbudowaną obsługę kontenerów i opcje konfiguracji.
 
 ### Co zbudowałeś
 
@@ -41,7 +41,7 @@ Konfiguracja workflow'u wspiera dostarczanie wejść i parametrów w elastyczny,
 
 ### Nabyte umiejętności
 
-Przez ten praktyczny kurs nauczyłeś się:
+Dzięki temu praktycznemu kursowi nauczyłeś się:
 
 - Opisywać i wykorzystywać podstawowe komponenty Nextflow wystarczające do budowania prostego, wieloetapowego workflow'u
 - Opisywać koncepcje kolejnego kroku, takie jak operatory i fabryki kanałów
@@ -56,10 +56,10 @@ Jesteś teraz wyposażony w fundamentalną wiedzę, aby zacząć tworzyć własn
 Oto nasze 3 najlepsze sugestie, co robić dalej:
 
 - Zastosuj Nextflow do naukowego przypadku analizy z [Nextflow dla nauki](../nf4_science/index.md)
-- Rozpocznij pracę z nf-core z [Hello nf-core](../../hello_nf-core/index.md)
+- Rozpocznij pracę z nf-core z [Hello nf-core](../hello_nf-core/index.md)
 - Odkryj bardziej zaawansowane funkcje Nextflow z [Side Quests](../side_quests/index.md)
 
-Na koniec polecamy zapoznać się z [**Seqera Platform**](https://seqera.io/), platformą chmurową opracowaną przez twórców Nextflow, która jeszcze bardziej ułatwia uruchamianie i zarządzanie workflow'ami, a także zarządzanie danymi i interaktywne uruchamianie analiz w dowolnym środowisku.
+Na koniec polecamy zapoznać się z [**Seqera Platform**](https://seqera.io/), platformą chmurową opracowaną przez twórców Nextflow, która jeszcze bardziej ułatwia uruchamianie workflow'ów i zarządzanie nimi, a także zarządzanie danymi i interaktywne uruchamianie analiz w dowolnym środowisku.
 
 ## Ankieta zwrotna
 

@@ -124,7 +124,7 @@ echo 'Hello World!' > output.txt
     }
     ```
 
-एक Nextflow workflow script में आमतौर पर एक या अधिक **process** definitions और **workflow** itself शामिल होते हैं, साथ ही कुछ optional blocks (यहाँ मौजूद नहीं) जिन्हें हम बाद में introduce करेंगे।
+एक Nextflow workflow script में आमतौर पर एक या अधिक [**process**](https://nextflow.io/docs/latest/process.html) definitions और [**workflow**](https://nextflow.io/docs/latest/workflow.html) itself शामिल होते हैं, साथ ही कुछ optional blocks (यहाँ मौजूद नहीं) जिन्हें हम बाद में introduce करेंगे।
 
 प्रत्येक **process** describe करता है कि pipeline में corresponding step को क्या operation(s) accomplish करने चाहिए, जबकि **workflow** dataflow logic describe करता है जो विभिन्न steps को connect करता है।
 
@@ -246,7 +246,7 @@ nextflow run hello-world.nf
 प्रत्येक process call के लिए, Nextflow एक nested subdirectory बनाता है, जिसे unique बनाने के लिए hash के साथ named किया जाता है, जहाँ यह सभी आवश्यक inputs को stage करेगा (default रूप से symlinks का उपयोग करके), helper files लिखेगा, और logs और process के किसी भी outputs को लिखेगा।
 
 उस subdirectory का path console output में square brackets में truncated form में दिखाया जाता है।
-ऊपर दिखाए गए run के लिए हमें जो मिला उसे देखते हुए, sayHello process के लिए console log line `[65/7be2fa]` से शुरू होती है। यह निम्नलिखित directory path से correspond करता है: `work/65/7be2fa7be2fad5e71e5f49998f795677fd68`
+ऊपर दिखाए गए run के लिए हमें जो मिला उसे देखते हुए, sayHello process के लिए console log line `[65/7be2fa]` से शुरू होती है। यह निम्नलिखित directory path से correspond करता है: `work/65/7be2fad5e71e5f49998f795677fd68`
 
 चलो देखते हैं कि वहाँ क्या है।
 
@@ -392,7 +392,7 @@ Workflow को कुछ बार फिर से चलाने का try 
 यह जानबूझकर किया गया है; Nextflow इस directory का control में है और हमें इसके साथ interact नहीं करना चाहिए।
 हालाँकि, यह उन outputs को retrieve करने में असुविधाजनक बनाता है जिनकी हमें care है।
 
-सौभाग्य से, Nextflow [workflow-level output definitions](https://www.nextflow.io/docs/latest/workflow.html#workflow-outputs) का उपयोग करके outputs को एक designated directory में publish करने का एक तरीका प्रदान करता है।
+सौभाग्य से, Nextflow [workflow output definitions](https://nextflow.io/docs/latest/workflow.html#workflow-outputs) का उपयोग करके outputs को एक designated directory में publish करने का एक तरीका प्रदान करता है।
 
 ### 2.1. Basic usage
 
@@ -795,9 +795,13 @@ Process block में, निम्नलिखित code change करो:
 ### 3.2. User input capture करने के लिए command-line parameter set up करें
 
 हम simply एक input को directly hardcode कर सकते हैं process call `sayHello('Hello World!')` बनाकर।
-हालाँकि, जब हम अपने workflow के साथ real work कर रहे होते हैं, तो हम command line से इसके inputs को control करने में सक्षम होना चाहेंगे।
+हालाँकि, जब हम अपने workflow के साथ real work कर रहे होते हैं, तो हम command line से इसके inputs को control करने में सक्षम होना चाहेंगे, ताकि हम कुछ ऐसा कर सकें:
 
-अच्छी खबर: Nextflow में `params` नामक एक built-in workflow parameter system है, जो CLI parameters को declare और use करना आसान बनाता है।
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello_world_input.svg"
+</figure>
+
+सौभाग्य से, Nextflow में [`params`](https://nextflow.io/docs/latest/config.html#params) नामक एक built-in workflow parameter system है, जो CLI parameters को declare और use करना आसान बनाता है।
 
 General syntax है `params.<parameter_name>` declare करना Nextflow को बताने के लिए कि command line पर एक `--<parameter_name>` parameter expect करें।
 
@@ -853,11 +857,7 @@ nextflow run hello-world.nf --input 'Bonjour le monde!'
     Bonjour le monde!
     ```
 
-Voilà!
-
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello_world_input.svg"
-</figure>
+Et voilà!
 
 Note करो कि new execution ने `results` directory में publish की गई output file को overwrite कर दिया है।
 हालाँकि, previous runs के results अभी भी `work` के तहत task directories में preserved हैं।
@@ -976,13 +976,13 @@ nextflow run hello-world.nf --input 'Konnichiwa!'
 
 Workflows launch करना और outputs retrieve करना जानना great है, लेकिन तुम जल्दी ही पाओगे कि workflow management के कुछ अन्य aspects हैं जो तुम्हारी life आसान बना देंगे, खासकर यदि तुम अपने खुद के workflows develop कर रहे हो।
 
-यहाँ हम तुम्हें दिखाते हैं कि जब तुम्हें same workflow re-launch करना हो तो `resume` feature कैसे use करें, `nextflow log` के साथ past executions का log कैसे inspect करें, और `nextflow clean` के साथ older work directories कैसे delete करें।
+यहाँ हम तुम्हें दिखाते हैं कि जब तुम्हें same workflow re-launch करना हो तो [`-resume`](https://nextflow.io/docs/latest/cache-and-resume.html) feature कैसे use करें, [`nextflow log`](https://nextflow.io/docs/latest/reference/cli.html#log) के साथ past executions का log कैसे inspect करें, और [`nextflow clean`](https://nextflow.io/docs/latest/reference/cli.html#clean) के साथ older work directories कैसे delete करें।
 
 ### 4.1. `-resume` के साथ workflow re-launch करें
 
 कभी-कभी, तुम एक pipeline को re-run करना चाहोगे जो तुम पहले launch कर चुके हो बिना उन steps को redo किए जो पहले से successfully complete हो चुके हैं।
 
-Nextflow में `-resume` नामक एक option है जो तुम्हें ऐसा करने की अनुमति देता है।
+Nextflow में [`-resume`](https://nextflow.io/docs/latest/cache-and-resume.html) नामक एक option है जो तुम्हें ऐसा करने की अनुमति देता है।
 Specifically, इस mode में, कोई भी processes जो पहले से exact same code, settings और inputs के साथ run हो चुके हैं, skip हो जाएंगे।
 इसका मतलब है Nextflow केवल वे processes run करेगा जो तुमने last run के बाद से add या modify किए हैं, या जिन्हें तुम new settings या inputs provide कर रहे हो।
 
@@ -1069,7 +1069,7 @@ Development process के दौरान, तुम typically अपनी dra
 
 #### 4.3.1. Deletion criteria determine करें
 
-यह determine करने के लिए कई [options](https://www.nextflow.io/docs/latest/reference/cli.html#clean) हैं कि क्या delete करना है।
+यह determine करने के लिए कई [options](https://nextflow.io/docs/latest/reference/cli.html#clean) हैं कि क्या delete करना है।
 
 यहाँ हम तुम्हें एक example दिखाते हैं जो given run से पहले के runs की सभी subdirectories delete करता है, इसके run name का उपयोग करके specified।
 

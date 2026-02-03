@@ -56,7 +56,7 @@ Hello Nextflow 교육 과정을 완료하신 것을 축하드립니다! 🎉
 다음에 할 일에 대한 상위 3가지 제안입니다:
 
 - [과학을 위한 Nextflow](../nf4_science/index.md)로 과학적 분석 사용 사례에 Nextflow 적용
-- [Hello nf-core](../../hello_nf-core/index.md)로 nf-core 시작하기
+- [Hello nf-core](../hello_nf-core/index.md)로 nf-core 시작하기
 - [Side Quests](../side_quests/index.md)로 더 고급 Nextflow 기능 탐색
 
 마지막으로, Nextflow 제작자가 개발한 클라우드 기반 플랫폼인 [**Seqera Platform**](https://seqera.io/)을 살펴보시기 바랍니다. 이 플랫폼은 워크플로우 시작 및 관리, 데이터 관리, 모든 환경에서 대화형 분석 실행을 더욱 쉽게 해줍니다.

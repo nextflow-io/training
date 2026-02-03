@@ -229,7 +229,7 @@ Ancora una volta, non devi memorizzare la sintassi del codice, ma è bene impara
 
 Questa è la parte più interessante: come siamo passati dal prendere un singolo valore dalla riga di comando, al prendere un file CSV, analizzarlo ed elaborare i singoli saluti che contiene?
 
-In Nextflow, lo facciamo con un **channel**: un costrutto progettato per gestire gli input efficientemente e trasferirli da uno step all'altro in workflow multi-step, fornendo al contempo parallelismo integrato e molti altri benefici.
+In Nextflow, lo facciamo con un [**canale**](https://nextflow.io/docs/latest/channel.html): un costrutto progettato per gestire gli input efficientemente e trasferirli da uno step all'altro in workflow multi-step, fornendo al contempo parallelismo integrato e molti altri benefici.
 
 Analizziamolo.
 
@@ -243,14 +243,14 @@ Analizziamolo.
     sayHello(greeting_ch)
 ```
 
-Questo codice crea un channel chiamato `greeting_ch` che legge il file CSV, lo analizza, e estrae la prima colonna da ogni riga.
-Il risultato è un channel contenente `Hello`, `Bonjour`, e `Holà`.
+Questo codice crea un canale chiamato `greeting_ch` che legge il file CSV, lo analizza, e estrae la prima colonna da ogni riga.
+Il risultato è un canale contenente `Hello`, `Bonjour`, e `Holà`.
 
 ??? tip "Come funziona?"
 
     Ecco cosa significa quella riga in italiano semplice:
 
-    - `channel.fromPath` è una **channel factory** che crea un channel da percorsi di file
+    - `channel.fromPath` è una **fabbrica di canali** che crea un canale da percorsi di file
     - `(params.input)` specifica che il percorso del file è fornito da `--input` sulla riga di comando
 
     In altre parole, quella riga dice a Nextflow: prendi il percorso del file dato con `--input` e preparati a trattare i suoi contenuti come dati di input.
@@ -274,13 +274,13 @@ Il risultato è un channel contenente `Hello`, `Bonjour`, e `Holà`.
     [[Hello,English,123],[Bonjour,French,456],[Holà,Spanish,789]]
     ```
 
-    E poi abbiamo preso il primo elemento da ciascuna delle tre righe e li abbiamo caricati in un channel Nextflow che ora contiene: `Hello`, `Bonjour`, e `Holà`.
+    E poi abbiamo preso il primo elemento da ciascuna delle tre righe e li abbiamo caricati in un canale Nextflow che ora contiene: `Hello`, `Bonjour`, e `Holà`.
 
-    Se vuoi capire i channel e gli operatori in profondità, incluso come scriverli tu stesso, vedi [Hello Nextflow Parte 2: Hello Channels](../hello_nextflow/02_hello_channels.md#4-read-input-values-from-a-csv-file).
+    Se vuoi capire i canali e gli operatori in profondità, incluso come scriverli tu stesso, vedi [Hello Nextflow Parte 2: Hello Channels](../hello_nextflow/02_hello_channels.md#4-read-input-values-from-a-csv-file).
 
 #### 1.4.2. Chiama il process su ogni saluto
 
-Successivamente, nell'ultima riga del blocco `main:` del workflow, forniamo il channel `greeting_ch` caricato come input al process `sayHello()`.
+Successivamente, nell'ultima riga del blocco `main:` del workflow, forniamo il canale `greeting_ch` caricato come input al process `sayHello()`.
 
 ```groovy title="2a-inputs.nf" linenums="29" hl_lines="7"
     main:
@@ -292,7 +292,7 @@ Successivamente, nell'ultima riga del blocco `main:` del workflow, forniamo il c
     sayHello(greeting_ch)
 ```
 
-Questo dice a Nextflow di eseguire il process individualmente su ogni elemento nel channel, _cioè_ su ogni saluto.
+Questo dice a Nextflow di eseguire il process individualmente su ogni elemento nel canale, _cioè_ su ogni saluto.
 E poiché Nextflow è intelligente così, eseguirà queste chiamate al process in parallelo se possibile, a seconda dell'infrastruttura di calcolo disponibile.
 
 È così che puoi ottenere un'elaborazione efficiente e scalabile di molti dati (molti campioni, o punti dati, qualunque sia la tua unità di ricerca) con relativamente pochissimo codice.
@@ -325,7 +325,7 @@ E questa è l'unica modifica che abbiamo dovuto fare dentro la dichiarazione del
 
 ### Riepilogo
 
-Capisci a livello base come i channel e gli operatori ci permettono di elaborare input multipli efficientemente.
+Capisci a livello base come i canali e gli operatori ci permettono di elaborare input multipli efficientemente.
 
 ### Cosa c'è dopo?
 
@@ -336,7 +336,7 @@ Scopri come sono costruiti i workflow multi-step e come operano.
 ## 2. Eseguire workflow multi-step
 
 La maggior parte dei workflow del mondo reale coinvolge più di uno step.
-Costruiamo su ciò che abbiamo appena imparato sui channel, e guardiamo come Nextflow usa channel e operatori per connettere i process insieme in un workflow multi-step.
+Costruiamo su ciò che abbiamo appena imparato sui canali, e guardiamo come Nextflow usa canali e operatori per connettere i process insieme in un workflow multi-step.
 
 A tal fine, ti forniamo un workflow di esempio che concatena tre step separati e dimostra quanto segue:
 
@@ -576,7 +576,7 @@ La cosa veramente interessante da guardare qui è come le chiamate ai process so
 Puoi vedere che la prima chiamata al process, `sayHello(greeting_ch)`, è invariata.
 Poi la chiamata successiva al process, a `convertToUpper`, si riferisce all'output di `sayHello` come `sayHello.out`.
 
-Il pattern è semplice: `processName.out` si riferisce al channel di output di un process, che può essere passato direttamente al process successivo.
+Il pattern è semplice: `processName.out` si riferisce al canale di output di un process, che può essere passato direttamente al process successivo.
 È così che trasferiamo i dati da uno step al successivo in Nextflow.
 
 #### 2.3.3. Un process può prendere input multipli
@@ -609,32 +609,29 @@ Ora diamo uno sguardo più da vicino a quel primo input, `convertToUpper.out.col
 
 #### 2.3.4. Cosa fa `collect()` nella chiamata `collectGreetings`
 
-Per passare l'output di `sayHello` a `convertToUpper`, abbiamo semplicemente fatto riferimento al channel di output di `sayHello` come `sayHello.out`. Ma per lo step successivo, stiamo vedendo un riferimento a `convertToUpper.out.collect()`.
+Per passare l'output di `sayHello` a `convertToUpper`, abbiamo semplicemente fatto riferimento al canale di output di `sayHello` come `sayHello.out`. Ma per lo step successivo, stiamo vedendo un riferimento a `convertToUpper.out.collect()`.
 
 Cos'è questa parte `collect()` e cosa fa?
 
 È un operatore, naturalmente. Proprio come gli operatori `splitCsv` e `map` che abbiamo incontrato prima.
-Questa volta l'operatore si chiama `collect`, ed è applicato al channel di output prodotto da `convertToUpper`.
+Questa volta l'operatore si chiama `collect`, ed è applicato al canale di output prodotto da `convertToUpper`.
 
-L'operatore `collect` è usato per raccogliere gli output da chiamate multiple allo stesso process e impacchettarli in un singolo elemento del channel.
+L'operatore `collect` è usato per raccogliere gli output da chiamate multiple allo stesso process e impacchettarli in un singolo elemento del canale.
 
-Nel contesto di questo workflow, sta prendendo i tre saluti maiuscoli nel channel `convertToUpper.out` --che sono tre elementi separati del channel, e normalmente verrebbero gestiti in chiamate separate dal process successivo-- e li impacchetta in un singolo elemento.
-
-In termini più pratici: se non applicassimo `collect()` all'output di `convertToUpper()` prima di passarlo a `collectGreetings()`, Nextflow eseguirebbe semplicemente `collectGreetings()` indipendentemente su ogni saluto, il che non raggiungerebbe il nostro obiettivo.
-
-<figure class="excalidraw">
---8<-- "docs/en/docs/nextflow_run/img/without-collect-operator.svg"
-</figure>
-
-Al contrario, usare `collect()` ci permette di prendere tutti i saluti maiuscoli separati prodotti dal secondo step del workflow e passarli tutti insieme a una singola chiamata nel terzo step della pipeline.
+Nel contesto di questo workflow, sta prendendo i tre saluti maiuscoli nel canale `convertToUpper.out` --che sono tre elementi separati del canale, e normalmente verrebbero gestiti in chiamate separate dal process successivo-- e li impacchetta in un singolo elemento.
+È così che otteniamo tutti i saluti di nuovo nello stesso file.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/nextflow_run/img/with-collect-operator.svg"
 </figure>
 
-È così che otteniamo tutti i saluti di nuovo nello stesso file.
+Al contrario, se non applicassimo `collect()` all'output di `convertToUpper()` prima di passarlo a `collectGreetings()`, Nextflow eseguirebbe semplicemente `collectGreetings()` indipendentemente su ogni saluto, il che non raggiungerebbe il nostro obiettivo.
 
-Ci sono molti altri [operatori](https://www.nextflow.io/docs/latest/reference/operator.html#operator-page) disponibili per applicare trasformazioni ai contenuti dei channel tra le chiamate ai process.
+<figure class="excalidraw">
+--8<-- "docs/en/docs/nextflow_run/img/without-collect-operator.svg"
+</figure>
+
+Ci sono molti altri [operatori](https://www.nextflow.io/docs/latest/reference/operator.html#operator-page) disponibili per applicare trasformazioni ai contenuti dei canali tra le chiamate ai process.
 
 Questo dà agli sviluppatori di pipeline molta flessibilità per personalizzare la logica di flusso della loro pipeline.
 Il lato negativo è che a volte può rendere più difficile decifrare cosa sta facendo la pipeline.
@@ -765,7 +762,7 @@ Ci sono modi più sofisticati per organizzare gli output pubblicati; ne tocchere
 
 ### Riepilogo
 
-Capisci a livello base come i workflow multi-step sono costruiti usando channel e operatori e come operano.
+Capisci a livello base come i workflow multi-step sono costruiti usando canali e operatori e come operano.
 Hai anche visto che i process possono prendere input multipli e produrre output multipli, e che questi possono essere pubblicati in modo strutturato.
 
 ### Cosa c'è dopo?
@@ -783,7 +780,7 @@ Questo può rendere il loro sviluppo e manutenzione più efficienti e sostenibil
 
 Qui dimostreremo la forma più comune di modularità del codice in Nextflow, che è l'uso dei **moduli**.
 
-In Nextflow, un **modulo** è una singola definizione di process che è incapsulata da sola in un file di codice standalone.
+In Nextflow, un [**modulo**](https://nextflow.io/docs/latest/module.html) è una singola definizione di process che è incapsulata da sola in un file di codice standalone.
 Per usare un modulo in un workflow, aggiungi semplicemente una dichiarazione import di una riga al tuo file di codice del workflow; poi puoi integrare il process nel workflow nello stesso modo in cui lo faresti normalmente.
 Questo rende possibile riutilizzare le definizioni dei process in workflow multipli senza produrre copie multiple del codice.
 
@@ -967,7 +964,8 @@ Un **container** è un'unità software leggera, standalone ed eseguibile creata 
 
 !!! Tip "Suggerimento"
 
-    Insegniamo questo usando la tecnologia [Docker](https://www.docker.com/get-started/), ma Nextflow supporta [diverse altre tecnologie container](https://www.nextflow.io/docs/latest/container.html#) altrettanto bene.
+    Insegniamo questo usando la tecnologia [Docker](https://www.docker.com/get-started/), ma Nextflow supporta diverse altre tecnologie container altrettanto bene.
+    Puoi saperne di più sul supporto di Nextflow per i container [qui](https://www.nextflow.io/docs/latest/container.html#).
 
 ### 4.1. Usa un container direttamente
 
@@ -1148,7 +1146,7 @@ Dobbiamo solo specificare un container per ogni process.
 Per dimostrare come funziona, abbiamo fatto un'altra versione del nostro workflow che esegue `cowpy` sul file di saluti raccolti prodotto nel terzo step.
 
 <figure class="excalidraw">
---8<-- "docs/en/docs/nextflow_run/img/hello-pipeline-cowpy.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-cowpy.svg"
 </figure>
 
 Questo dovrebbe produrre un file contenente l'arte ASCII con i tre saluti nel fumetto.

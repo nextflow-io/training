@@ -14,7 +14,7 @@
 ///
 -->
 
-In den Teilen 1-4 dieses Kurses hast du gelernt, wie du die grundlegenden Bausteine von Nextflow verwendest, um einen einfachen Workflow zu erstellen, der Text verarbeiten, die Ausführung bei mehreren Eingaben parallelisieren und die Ergebnisse zur weiteren Verarbeitung sammeln kann.
+In den Teilen 1-4 dieses Trainings hast du gelernt, wie du die grundlegenden Bausteine von Nextflow verwendest, um einen einfachen Workflow zu erstellen, der Text verarbeiten, die Ausführung bei mehreren Eingaben parallelisieren und die Ergebnisse zur weiteren Verarbeitung sammeln kann.
 
 Du warst jedoch auf grundlegende UNIX-Tools beschränkt, die in deiner Umgebung verfügbar sind.
 Reale Aufgaben erfordern oft verschiedene Tools und Pakete, die standardmäßig nicht enthalten sind.
@@ -42,7 +42,7 @@ Beachte, dass wir dies mit [Docker](https://www.docker.com/get-started/) lehren,
 ## 0. Aufwärmen: `hello-containers.nf` ausführen
 
 Wir werden das Workflow-Script `hello-containers.nf` als Ausgangspunkt verwenden.
-Es entspricht dem Script, das durch Durcharbeiten von Teil 4 dieses Kurses entstanden ist, außer dass wir die Ausgabeziele geändert haben:
+Es entspricht dem Script, das durch Durcharbeiten von Teil 4 dieses Trainings entstanden ist, außer dass wir die Ausgabeziele geändert haben:
 
 ```groovy title="hello-containers.nf" linenums="37" hl_lines="3 7 11 15"
 output {
@@ -371,7 +371,7 @@ cat /my_project/data/greetings.csv | cowpy -c turkey
               ( /  (    (        ,___    ^*+_+* )   <    <      \
               U _/     )    *--<  ) ^\-----++__)   )    )       )
                 (      )  _(^)^^))  )  )\^^^^^))^*+/    /       /
-              (      /  (_))_^)) )  )  ))^^^^^))^^^)__/     +^^
+              (      /  (_))^^)) )  )  ))^^^^^))^^^)__/     +^^
             (     ,/    (^))^))  )  ) ))^^^^^^^))^^)       _)
               *+__+*       (_))^)  ) ) ))^^^^^^))^^^^^)____*^
               \             \_)^)_)) ))^^^^^^^^^^))^^^^)
@@ -396,11 +396,11 @@ exit
 
 Du befindest dich wieder in deiner normalen Shell.
 
-### Erkenntnisse
+### Fazit
 
-Du kannst Container pullen und einmalig oder interaktiv ausführen. Du kannst Daten im Container zugänglich machen und Tools mit echten Daten testen, ohne lokale Installationen.
+Du weißt, wie man Container pullt und entweder einmalig oder interaktiv ausführt. Du weißt auch, wie du deine Daten im Container zugänglich machst, was dich beliebige Tools mit echten Daten ausprobieren lässt, ohne Software auf deinem System installieren zu müssen.
 
-### Was kommt als Nächstes?
+### Wie geht es weiter?
 
 Lerne, wie man Container für die Ausführung von Nextflow-Prozessen verwendet.
 
@@ -414,10 +414,8 @@ Das bedeutet, dass du jedes beliebige Container-Image verwenden kannst, um deine
 Um dies zu demonstrieren, werden wir einen `cowpy`-Schritt zur Pipeline hinzufügen, die wir entwickelt haben, nach dem `collectGreetings`-Schritt.
 
 <figure class="excalidraw">
---8<-- "docs/en/docs/nextflow_run/img/hello-pipeline-cowpy.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-cowpy.svg"
 </figure>
-
-Muh, wenn du bereit bist einzutauchen!
 
 ### 2.1. Ein `cowpy`-Modul schreiben
 
@@ -866,7 +864,7 @@ Die finale ASCII-Kunst-Ausgabe befindet sich im Verzeichnis `results/hello_conta
               ( /  (    (        ,___    ^*+_+* )   <    <      \
               U _/     )    *--<  ) ^\-----++__)   )    )       )
                 (      )  _(^)^^))  )  )\^^^^^))^*+/    /       /
-              (      /  (_))_^)) )  )  ))^^^^^))^^^)__/     +^^
+              (      /  (_))^^)) )  )  ))^^^^^))^^^)__/     +^^
             (     ,/    (^))^))  )  ) ))^^^^^^^))^^)       _)
               *+__+*       (_))^)  ) ) ))^^^^^^))^^^^^)____*^
               \             \_)^)_)) ))^^^^^^^^^^))^^^^)
@@ -949,11 +947,11 @@ All die harte Arbeit, die wir im ersten Abschnitt manuell erledigen mussten? Nex
        ||     ||          i_____;----\.____i""\____\
 ```
 
-### Erkenntnisse
+### Fazit
 
 Du weißt, wie man Container in Nextflow verwendet, um Prozesse auszuführen.
 
-### Was kommt als Nächstes?
+### Wie geht es weiter?
 
 Mach eine Pause!
 

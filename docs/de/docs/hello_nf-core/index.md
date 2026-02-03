@@ -27,7 +27,8 @@ additional_information:
 
 **Hello nf-core ist eine praktische Einführung in die Nutzung von nf-core Ressourcen und Best Practices.**
 
-![nf-core logo](./img/nf-core-logo.png)
+![nf-core logo](./img/nf-core-logo.png#only-light)
+![nf-core logo](./img/nf-core-logo-darkbg.png#only-dark)
 
 Durch praktische Beispiele und angeleitete Übungen lernst du, nf-core kompatible Module und Pipelines zu nutzen und zu entwickeln sowie nf-core Tooling effektiv einzusetzen.
 
@@ -41,7 +42,9 @@ Dieser Kurs ist darauf ausgelegt, praktisch zu sein, mit zielorientierten Übung
 
 Du wirst in [**nf-core**](https://nf-co.re/) eingeführt, eine Community-Initiative zur Entwicklung und Pflege einer kuratierten Sammlung wissenschaftlicher Pipelines, die mit Nextflow erstellt wurden, sowie relevantes Tooling und Richtlinien, die offene Entwicklung, Testing und Peer Review fördern ([Nat Biotechnol 38, 276–278 (2020)](https://www.nature.com/articles/s41587-020-0439-x), [Genome Biol 26, 228 (2025)](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-025-03673-9)).
 
-nf-core Pipelines sind modular, skalierbar und portabel. So lassen sie sich leicht anpassen und mit eigenen Daten ausführen. Die Best-Practice-Richtlinien sorgen für robuste, gut dokumentierte und validierte Pipelines. Das verbessert die Reproduzierbarkeit wissenschaftlicher Analysen.
+Die Pipelines der nf-core Community sind modular, skalierbar und portabel konzipiert. Dadurch können Forscher\*innen sie einfach anpassen und mit eigenen Daten und Rechenressourcen ausführen.
+Die Best-Practice-Richtlinien des Projekts stellen zusätzlich sicher, dass die Pipelines robust, gut dokumentiert und gegen reale Datensätze validiert sind.
+Das erhöht die Verlässlichkeit und Reproduzierbarkeit wissenschaftlicher Analysen und ermöglicht es Forscher\*innen letztlich, ihre wissenschaftlichen Entdeckungen zu beschleunigen.
 
 Wir werden in diesem Kurs nicht alles abdecken, was es über nf-core Pipelines zu wissen gibt, denn nf-core umfasst viele Features und Konventionen, die die Community über Jahre entwickelt hat.
 Stattdessen konzentrieren wir uns auf die wesentlichen Konzepte, die dir helfen werden, loszulegen und zu verstehen, wie nf-core funktioniert.

@@ -27,7 +27,8 @@ additional_information:
 
 **Hello nf-core è un'introduzione pratica all'uso delle risorse e delle best practice di nf-core.**
 
-![nf-core logo](./img/nf-core-logo.png)
+![nf-core logo](./img/nf-core-logo.png#only-light)
+![nf-core logo](./img/nf-core-logo-darkbg.png#only-dark)
 
 Attraverso esempi pratici ed esercizi guidati, imparerete a utilizzare e sviluppare moduli e pipeline compatibili con nf-core, e a utilizzare efficacemente gli strumenti nf-core.
 
@@ -46,7 +47,7 @@ Le linee guida sulle best practice applicate dal progetto garantiscono inoltre c
 Questo aiuta ad aumentare l'affidabilità e la riproducibilità delle analisi scientifiche e, in definitiva, consente ai ricercatori di accelerare le proprie scoperte scientifiche.
 
 Non copriremo tutto ciò che c'è da sapere sulle pipeline nf-core in questo corso, perché nf-core comprende molte funzionalità e convenzioni sviluppate dalla comunità nel corso degli anni.
-Ci concentreremo invece sui concetti essenziali che La aiuteranno a iniziare e a capire come funziona nf-core.
+Ci concentreremo invece sui concetti essenziali che vi aiuteranno a iniziare e a capire come funziona nf-core.
 
 ### Piano delle lezioni
 
@@ -60,8 +61,8 @@ Abbiamo suddiviso il corso in cinque parti, ciascuna focalizzata su aspetti spec
 | [Parte 4: Creare un modulo nf-core](./04_make_module.md)                  | Creare il proprio modulo in stile nf-core utilizzando la struttura specifica, le convenzioni di denominazione e i requisiti di metadati stabiliti da nf-core      | 30 minuti      |
 | [Parte 5: Aggiungere la validazione dell'input](./05_input_validation.md) | Implementare la validazione dell'input sia per i parametri da riga di comando che per i file di dati di input utilizzando nf-schema                               | 30 minuti      |
 
-Al termine di questo corso, sarà in grado di sfruttare l'enorme ricchezza di risorse offerte dal progetto nf-core.
+Al termine di questo corso, sarete in grado di sfruttare l'enorme ricchezza di risorse offerte dal progetto nf-core.
 
-Pronto a iniziare il corso?
+Pronti a iniziare il corso?
 
 [Inizia a imparare :material-arrow-right:](00_orientation.md){ .md-button .md-button--primary }

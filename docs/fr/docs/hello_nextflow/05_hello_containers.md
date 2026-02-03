@@ -16,7 +16,7 @@
 
 Dans les Parties 1-4 de ce cours de formation, vous avez appris comment utiliser les blocs de construction de base de Nextflow pour assembler un workflow simple capable de traiter du texte, de paralléliser l'exécution s'il y avait plusieurs entrées, et de collecter les résultats pour un traitement ultérieur.
 
-Cependant, vous étiez limité aux outils UNIX de base disponibles dans votre environnement.
+Cependant, vous étiez limité·e aux outils UNIX de base disponibles dans votre environnement.
 Les tâches du monde réel nécessitent souvent divers outils et paquets non inclus par défaut.
 Typiquement, vous auriez besoin d'installer ces outils, de gérer leurs dépendances et de résoudre les conflits éventuels.
 
@@ -414,10 +414,8 @@ Cela signifie que vous pouvez utiliser n'importe quelle image de conteneur que v
 Pour démontrer ceci, nous allons ajouter une étape `cowpy` au pipeline que nous avons développé, après l'étape `collectGreetings`.
 
 <figure class="excalidraw">
---8<-- "docs/en/docs/nextflow_run/img/hello-pipeline-cowpy.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-cowpy.svg"
 </figure>
-
-Meuglez si vous êtes prêt·e à plonger !
 
 ### 2.1. Écrire un module `cowpy`
 

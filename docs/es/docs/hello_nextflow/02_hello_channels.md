@@ -19,11 +19,11 @@ Ese fue un enfoque deliberadamente simplificado.
 En la práctica, ese enfoque tiene limitaciones importantes; a saber, que solo funciona para casos muy simples donde solo queremos ejecutar el proceso una vez, con un único valor.
 En la mayoría de los casos de uso reales de flujos de trabajo, queremos procesar múltiples valores (datos experimentales para múltiples muestras, por ejemplo), por lo que necesitamos una forma más sofisticada de manejar las entradas.
 
-Para eso sirven los **channels** de Nextflow.
+Para eso sirven los [**channels**](https://nextflow.io/docs/latest/channel.html) de Nextflow.
 Los channels son colas diseñadas para manejar entradas de manera eficiente y transportarlas de un paso a otro en flujos de trabajo de múltiples pasos, mientras proporcionan paralelismo integrado y muchos beneficios adicionales.
 
 En esta parte del curso, aprenderá cómo usar un channel para manejar múltiples entradas de una variedad de fuentes diferentes.
-También aprenderá a usar **operadores** para transformar el contenido de los channels según sea necesario.
+También aprenderá a usar [**operadores**](https://nextflow.io/docs/latest/reference/operator.html) para transformar el contenido de los channels según sea necesario.
 
 ??? info "Cómo comenzar desde esta sección"
 
@@ -34,7 +34,7 @@ También aprenderá a usar **operadores** para transformar el contenido de los c
 ## 0. Calentamiento: Ejecutar `hello-channels.nf`
 
 Vamos a usar el script de workflow `hello-channels.nf` como punto de partida.
-Es equivalente al script producido al trabajar en la Parte 1 de este curso de entrenamiento, excepto que hemos cambiado el destino de salida:
+Es equivalente al script producido al trabajar en la Parte 1 de este curso de capacitación, excepto que hemos cambiado el destino de salida:
 
 ```groovy title="hello-channels.nf" linenums="37" hl_lines="3"
 output {
@@ -91,8 +91,8 @@ Vamos a crear un **channel** para pasar la entrada variable al proceso `sayHello
 
 ### 1.1. Crear un channel de entrada
 
-Hay una variedad de **channel factories** que podemos usar para configurar un channel.
-Para mantener las cosas simples por ahora, vamos a usar la channel factory más básica, llamada `channel.of`, que creará un channel que contiene un único valor.
+Hay una variedad de [**channel factories**](https://nextflow.io/docs/latest/reference/channel.html) que podemos usar para configurar un channel.
+Para mantener las cosas simples por ahora, vamos a usar la channel factory más básica, llamada [`channel.of`](https://nextflow.io/docs/latest/reference/channel.html#of), que creará un channel que contiene un único valor.
 Funcionalmente esto será similar a cómo lo teníamos configurado antes, pero en lugar de que Nextflow cree un channel implícitamente, ahora lo estamos haciendo explícitamente.
 
 Esta es la línea de código que vamos a usar:
@@ -306,12 +306,6 @@ Simplemente podemos cargar múltiples valores en el channel.
 
 Hagámoslos `'Hello'`, `'Bonjour'` y `'Holà'`.
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-channel-multi.svg"
-</figure>
-
-_En el diagrama, el channel se representa en verde, y el orden de los elementos se representa como canicas en una tubería: el primero cargado está a la derecha, luego el segundo en el medio, luego el tercero está a la izquierda._
-
 #### 2.1.1. Agregar más saludos
 
 Antes del bloque workflow, haga el siguiente cambio de código:
@@ -380,6 +374,12 @@ Sin embargo, todavía hay solo una salida en el directorio de resultados:
 
 Debería ver uno de los tres saludos allí, pero el que obtuvo podría ser diferente de lo que se muestra aquí.
 ¿Puede pensar por qué podría ser así?
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-channel-multi.svg"
+</figure>
+
+_En el diagrama, el channel se representa en verde, y el orden de los elementos se representa como canicas en una tubería: el primero cargado está a la derecha, luego el segundo en el medio, luego el tercero está a la izquierda._
 
 Mirando hacia atrás en el monitor de ejecución, nos dio solo una ruta de subdirectorio (`f4/c9962c`).
 Echemos un vistazo allí.
@@ -504,6 +504,10 @@ Dicho esto, todavía tenemos el problema de que solo hay un archivo de salida en
 
 Puede recordar que codificamos el nombre del archivo de salida para el proceso `sayHello`, por lo que las tres llamadas produjeron un archivo llamado `output.txt`.
 
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-channels-task-dirs.svg"
+</figure>
+
 Mientras los archivos de salida permanezcan en los subdirectorios de trabajo, aislados de los otros procesos, eso está bien.
 Pero cuando se publican en el mismo directorio de resultados, el que se copió allí primero es sobrescrito por el siguiente, y así sucesivamente.
 
@@ -515,6 +519,10 @@ Específicamente, necesitamos modificar el primer proceso para generar un nombre
 Entonces, ¿cómo hacemos que los nombres de archivo sean únicos?
 Una forma común de hacer esto es usar alguna pieza única de metadatos de las entradas (recibida del channel de entrada) como parte del nombre del archivo de salida.
 Aquí, por conveniencia, simplemente usaremos el saludo mismo ya que es solo una cadena corta, y lo antepondremos al nombre base del archivo de salida.
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-channel-multi-unique.svg"
+</figure>
 
 #### 2.2.1. Construir un nombre de archivo de salida dinámico
 
@@ -622,7 +630,7 @@ Eche un vistazo al directorio `results` para ver si todos los saludos de salida 
     En la práctica, nombrar archivos basándose en los datos de entrada mismos es casi siempre poco práctico.
     La mejor manera de generar nombres de archivo dinámicos es pasar metadatos a un proceso junto con los archivos de entrada.
     Los metadatos típicamente se proporcionan a través de una 'hoja de muestras' o equivalentes.
-    Aprenderá cómo hacer eso más adelante en su entrenamiento de Nextflow (vea [Misión secundaria de Metadatos](../side_quests/metadata.md)).
+    Aprenderá cómo hacer eso más adelante en su capacitación de Nextflow (vea [Misión secundaria de Metadatos](../side_quests/metadata.md)).
 
 ### Conclusión
 
@@ -792,16 +800,20 @@ Mire la salida de `view()` y los mensajes de error.
 
 Parece que Nextflow intentó ejecutar una única llamada de proceso, usando `[Hello, Bonjour, Holà]` como un valor de cadena, en lugar de usar las tres cadenas en el array como valores separados.
 
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-channels-array-fail.svg"
+</figure>
+
 Entonces es el 'empaquetado' lo que está causando el problema.
 ¿Cómo hacemos que Nextflow desempaque el array y cargue las cadenas individuales en el channel?
 
 ### 3.2. Usar un operador para transformar el contenido del channel
 
-Aquí es donde los **[operadores](https://www.nextflow.io/docs/latest/reference/operator.html)** entran en juego.
+Aquí es donde los [**operadores**](https://nextflow.io/docs/latest/reference/operator.html) entran en juego.
 Ya ha usado el operador `.view()`, que solo mira lo que hay allí.
 Ahora vamos a ver operadores que nos permiten actuar sobre el contenido de un channel.
 
-Si revisa la [lista de operadores](https://www.nextflow.io/docs/latest/reference/operator.html) en la documentación de Nextflow, encontrará [`flatten()`](https://www.nextflow.io/docs/latest/reference/operator.html#flatten), que hace exactamente lo que necesitamos: desempacar el contenido de un array y emitirlos como elementos individuales.
+Si revisa la [lista de operadores](https://nextflow.io/docs/latest/reference/operator.html) en la documentación de Nextflow, encontrará [`flatten()`](https://www.nextflow.io/docs/latest/reference/operator.html#flatten), que hace exactamente lo que necesitamos: desempacar el contenido de un array y emitirlos como elementos individuales.
 
 #### 3.2.1. Agregar el operador `flatten()`
 
@@ -850,6 +862,10 @@ En el bloque workflow, haga el siguiente cambio de código:
 
 Aquí agregamos el operador en la siguiente línea para legibilidad, pero puede agregar operadores en la misma línea que la channel factory si lo prefiere, así:
 `greeting_ch = channel.of(greetings_array).view().flatten()`
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-channels-array-success.svg"
+</figure>
 
 #### 3.2.2. Refinar la(s) declaración(es) `view()`
 
@@ -941,8 +957,8 @@ nextflow run hello-channels.nf
 
 Esta vez funciona Y nos da la información adicional sobre cómo se ve el contenido del channel antes y después de ejecutar el operador `flatten()`.
 
-- - Verá que obtenemos una única declaración `Before flatten:` porque en ese punto el channel contiene un elemento, el array original.
-    Luego obtenemos tres declaraciones `After flatten:` separadas, una para cada saludo, que ahora son elementos individuales en el channel.
+- Una única declaración `Before flatten:` porque en ese punto el channel contiene un elemento, el array original.
+- Tres declaraciones `After flatten:` separadas, una para cada saludo, que ahora son elementos individuales en el channel.
 
 Importante, esto significa que cada elemento ahora puede ser procesado por separado por el flujo de trabajo.
 
@@ -1023,7 +1039,7 @@ Aprenderá cómo lidiar con otras ubicaciones de datos más adelante en su viaje
 #### 4.1.2. Cambiar a una channel factory diseñada para manejar un archivo
 
 Ya que ahora queremos usar un archivo en lugar de cadenas simples como entrada, no podemos usar la channel factory `channel.of()` de antes.
-Necesitamos cambiar a usar una nueva channel factory, [`channel.fromPath()`](https://www.nextflow.io/docs/latest/reference/channel.html#channel-path), que tiene alguna funcionalidad integrada para manejar rutas de archivos.
+Necesitamos cambiar a usar una nueva channel factory, [`channel.fromPath()`](https://nextflow.io/docs/latest/reference/channel.html#frompath), que tiene alguna funcionalidad integrada para manejar rutas de archivos.
 
 En el bloque workflow, haga el siguiente cambio de código:
 
@@ -1033,7 +1049,7 @@ En el bloque workflow, haga el siguiente cambio de código:
     workflow {
 
         main:
-        // crear un canal para entradas from a CSV file
+        // crear un canal para entradas desde un archivo CSV
         greeting_ch = channel.fromPath(params.input)
                              .view { greeting -> "Before flatten: $greeting" }
                              // .flatten()
@@ -1120,11 +1136,11 @@ Así que ha resuelto la ruta del archivo correctamente, pero en realidad no anal
 
 ¿Cómo hacemos que Nextflow abra el archivo y cargue su contenido en el channel?
 
-¡Parece que necesitamos otro [operador](https://www.nextflow.io/docs/latest/reference/operator.html)!
+¡Parece que necesitamos otro [operador](https://nextflow.io/docs/latest/reference/operator.html)!
 
 ### 4.2. Usar el operador `splitCsv()` para analizar el archivo
 
-Revisando la lista de operadores nuevamente, encontramos [`splitCsv()`](https://www.nextflow.io/docs/latest/reference/operator.html#splitCsv), que está diseñado para analizar y dividir texto con formato CSV.
+Revisando la lista de operadores nuevamente, encontramos [`splitCsv()`](https://nextflow.io/docs/latest/reference/operator.html#splitcsv), que está diseñado para analizar y dividir texto con formato CSV.
 
 #### 4.2.1. Aplicar `splitCsv()` al channel
 
@@ -1138,7 +1154,7 @@ En el bloque workflow, haga el siguiente cambio de código para reemplazar `flat
     workflow {
 
         main:
-        // crear un canal para entradas from a CSV file
+        // crear un canal para entradas desde un archivo CSV
         greeting_ch = channel.fromPath(params.input)
                              .view { csv -> "Before splitCsv: $csv" }
                              .splitCsv()
@@ -1157,7 +1173,7 @@ En el bloque workflow, haga el siguiente cambio de código para reemplazar `flat
     workflow {
 
         main:
-        // crear un canal para entradas from a CSV file
+        // crear un canal para entradas desde un archivo CSV
         greeting_ch = channel.fromPath(params.input)
                              .view { greeting -> "Before flatten: $greeting" }
                              // .flatten()
@@ -1221,6 +1237,10 @@ nextflow run hello-channels.nf
 Interesantemente, esto también falla, pero con un error diferente.
 Esta vez Nextflow ha analizado el contenido del archivo (¡yay!) pero ha cargado cada fila como un array, y cada array es un elemento en el channel.
 
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-channels-split-fail.svg"
+</figure>
+
 Necesitamos decirle que solo tome la primera columna en cada fila.
 Entonces, ¿cómo desempacamos esto?
 
@@ -1230,7 +1250,7 @@ En cambio, usaremos otro operador llamado `map()` que es realmente útil y apare
 
 ### 4.3. Usar el operador `map()` para extraer los saludos
 
-El operador [`map()`](https://www.nextflow.io/docs/latest/reference/operator.html#map) es una pequeña herramienta muy práctica que nos permite hacer todo tipo de mapeos al contenido de un channel.
+El operador [`map()`](https://nextflow.io/docs/latest/reference/operator.html#map) es una pequeña herramienta muy práctica que nos permite hacer todo tipo de mapeos al contenido de un channel.
 
 En este caso, vamos a usarlo para extraer ese único elemento que queremos de cada fila en nuestro archivo de datos.
 Así es como se ve la sintaxis:
@@ -1253,7 +1273,7 @@ En el bloque workflow, haga el siguiente cambio de código:
     workflow {
 
         main:
-        // crear un canal para entradas from a CSV file
+        // crear un canal para entradas desde un archivo CSV
         greeting_ch = channel.fromPath(params.input)
                              .view { csv -> "Before splitCsv: $csv" }
                              .splitCsv()
@@ -1274,7 +1294,7 @@ En el bloque workflow, haga el siguiente cambio de código:
     workflow {
 
         main:
-        // crear un canal para entradas from a CSV file
+        // crear un canal para entradas desde un archivo CSV
         greeting_ch = channel.fromPath(params.input)
                              .view { csv -> "Before splitCsv: $csv" }
                              .splitCsv()
@@ -1323,24 +1343,33 @@ Mirando la salida de las declaraciones `view()`, verá lo siguiente:
 - Tres declaraciones `After splitCsv:` separadas: una para cada saludo, pero cada una está contenida dentro de un array que corresponde a esa línea en el archivo.
 - Tres declaraciones `After map:` separadas: una para cada saludo, que ahora son elementos individuales en el channel.
 
-Note que las líneas pueden aparecer en un orden diferente en su salida.
+_Note que las líneas pueden aparecer en un orden diferente en su salida._
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-channels-split-and-map.svg"
+</figure>
 
 También puede mirar los archivos de salida para verificar que cada saludo fue correctamente extraído y procesado a través del flujo de trabajo.
 
 Hemos logrado el mismo resultado que antes, pero ahora tenemos mucha más flexibilidad para agregar más elementos al channel de saludos que queremos procesar modificando un archivo de entrada, sin modificar ningún código.
-Aprenderá enfoques más sofisticados para manejar entradas complejas en un entrenamiento posterior.
+Aprenderá enfoques más sofisticados para manejar entradas complejas en una capacitación posterior.
 
 ### Conclusión
 
 Sabe cómo usar el constructor de channel `.fromPath()` y los operadores `splitCsv()` y `map()` para leer un archivo de valores de entrada y manejarlos apropiadamente.
 
 Más generalmente, tiene una comprensión básica de cómo Nextflow usa **channels** para gestionar entradas a procesos y **operadores** para transformar su contenido.
+También ha visto cómo los channels manejan la ejecución paralela implícitamente.
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-channels-parallel.svg"
+</figure>
 
 ### ¿Qué sigue?
 
 ¡Tome un gran descanso, trabajó duro en este!
 
-Cuando esté listo, continúe con [**Parte 3: Hola Workflow**](./03_hello_workflow.md) para aprender cómo agregar más pasos y conectarlos en un flujo de trabajo completo.
+Cuando esté listo, continúe con [**Parte 3: Hello Workflow**](./03_hello_workflow.md) para aprender cómo agregar más pasos y conectarlos en un flujo de trabajo completo.
 
 ---
 

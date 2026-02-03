@@ -229,7 +229,7 @@ Yine, kod sözdizimini ezberlememeniz gerekmez, ancak önemli işlevsellik sağl
 
 En ilginç kısım şudur: komut satırından tek bir değer almaktan, bir CSV dosyası almaya, ayrıştırmaya ve içerdiği bireysel selamlamaları işlemeye nasıl geçtik?
 
-Nextflow'da bunu bir **channel** ile yapıyoruz: girdileri verimli bir şekilde işlemek ve çok adımlı workflow'larda bir adımdan diğerine taşımak için tasarlanmış, yerleşik paralellik ve birçok ek avantaj sağlayan bir yapı.
+Nextflow'da bunu bir [**channel**](https://nextflow.io/docs/latest/channel.html) ile yapıyoruz: girdileri verimli bir şekilde işlemek ve çok adımlı workflow'larda bir adımdan diğerine taşımak için tasarlanmış, yerleşik paralellik ve birçok ek avantaj sağlayan bir yapı.
 
 Parçalayalım.
 
@@ -248,7 +248,7 @@ Sonuç, `Hello`, `Bonjour` ve `Holà` içeren bir channel'dır.
 
 ??? tip "Bu nasıl çalışır?"
 
-    Bu satırın düz İngilizce'de anlamı şudur:
+    Bu satırın düz Türkçe'de anlamı şudur:
 
     - `channel.fromPath`, dosya yollarından bir channel oluşturan bir **channel factory**'dir
     - `(params.input)`, dosya yolunun komut satırında `--input` ile sağlandığını belirtir
@@ -448,7 +448,7 @@ Koda bakalım ve çok adımlı workflow'lar için temel kalıpları tanımlayal�
     }
 
     /*
-    * Use a text replacement tool to convert the greeting to uppercase
+    * Selamlamayı büyük harfe dönüştürmek için bir metin değiştirme aracı kullan
     */
     process convertToUpper {
 
@@ -465,7 +465,7 @@ Koda bakalım ve çok adımlı workflow'lar için temel kalıpları tanımlayal�
     }
 
     /*
-    * Collect uppercase greetings into a single output file
+    * Büyük harfli selamlamaları tek bir çıktı dosyasında topla
     */
     process collectGreetings {
 
@@ -551,7 +551,7 @@ Bu size process'lerin nasıl bağlandığına ve ne ürettiklerine dair güzel b
 Orijinal `sayHello` process'ine ek olarak, şimdi konsol çıktısında gördüğümüz process'lerin adlarıyla eşleşen `convertToUpper` ve `collectGreetings`'in de olduğunu görüyorsunuz.
 İki yeni process tanımı, `sayHello` process'i ile aynı şekilde yapılandırılmıştır, ancak `collectGreetings` `batch` adlı ek bir girdi parametresi alır ve iki çıktı üretir.
 
-Her birinin koduna ayrıntılı olarak girmeyeceğiz, ancak merak ediyorsanız, ayrıntıları [Hello Nextflow Bölüm 2](../hello_nextflow/03_hello_workflow.md)'de bulabilirsiniz.
+Her birinin koduna ayrıntılı olarak girmeyeceğiz, ancak merak ediyorsanız, ayrıntıları [Hello Nextflow Bölüm 3](../hello_nextflow/03_hello_workflow.md)'te bulabilirsiniz.
 
 Şimdilik, process'lerin birbirine nasıl bağlandığını inceleyelim.
 
@@ -783,7 +783,7 @@ Bu, geliştirmelerini ve bakımlarını daha verimli ve sürdürülebilir hale g
 
 Burada Nextflow'da en yaygın kod modülerlik biçimini göstereceğiz, bu da **modül** kullanımıdır.
 
-Nextflow'da bir **modül**, bağımsız bir kod dosyasında kendi başına kapsüllenmiş tek bir process tanımıdır.
+Nextflow'da bir [**modül**](https://nextflow.io/docs/latest/module.html), bağımsız bir kod dosyasında kendi başına kapsüllenmiş tek bir process tanımıdır.
 Bir workflow'da modül kullanmak için, workflow kod dosyanıza tek satırlık bir import ifadesi eklemeniz yeterlidir; ardından process'i normalde yapacağınız şekilde workflow'a entegre edebilirsiniz.
 Bu, kodun birden fazla kopyasını üretmeden birden fazla workflow'da process tanımlarını yeniden kullanmayı mümkün kılar.
 
@@ -967,7 +967,8 @@ Bir **konteyner**, kod, sistem kütüphaneleri ve ayarlar dahil bir uygulamayı 
 
 !!! Tip "İpucu"
 
-    Bunu [Docker](https://www.docker.com/get-started/) teknolojisini kullanarak öğretiyoruz, ancak Nextflow [birkaç başka konteyner teknolojisini](https://www.nextflow.io/docs/latest/container.html#) de destekler.
+    Bunu [Docker](https://www.docker.com/get-started/) teknolojisini kullanarak öğretiyoruz, ancak Nextflow birkaç başka konteyner teknolojisini de destekler.
+    Nextflow'un konteynerler için desteği hakkında daha fazla bilgiyi [buradan](https://nextflow.io/docs/latest/container.html) öğrenebilirsiniz.
 
 ### 4.1. Bir konteyneri doğrudan kullanın
 
@@ -1148,7 +1149,7 @@ Sadece her process için bir konteyner belirtmemiz gerekiyor.
 Bunun nasıl çalıştığını göstermek için, üçüncü adımda üretilen toplanan selamlamalar dosyasında `cowpy` çalıştıran workflow'umuzun başka bir versiyonunu yaptık.
 
 <figure class="excalidraw">
---8<-- "docs/en/docs/nextflow_run/img/hello-pipeline-cowpy.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-cowpy.svg"
 </figure>
 
 Bu, konuşma balonunda üç selamlama içeren ASCII art içeren bir dosya çıktısı vermelidir.
@@ -1239,7 +1240,7 @@ ASCII art oluşturmak için cowpy komutunu saran `cowpy` process'i, `cowpy.nf` m
     ```groovy title="modules/cowpy.nf" linenums="1"
     #!/usr/bin/env nextflow
 
-    // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
+    // cowpy ile ASCII sanatı oluştur (https://github.com/jeffbuttars/cowpy)
     process cowpy {
 
         container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
@@ -1390,15 +1391,258 @@ Bu dizinde, Nextflow'un pipeline'ı yürütme sürecinde sizin adınıza çalı�
         else echo "Unexpected timestamp value: $ts"; exit 1
         fi
     }
-    ...
+
+    nxf_env() {
+        echo '============= task environment ============='
+        env | sort | sed "s/\(.*\)AWS\(.*\)=\(.\{6\}\).*/\1AWS\2=\3xxxxxxxxxxxxx/"
+        echo '============= task output =================='
+    }
+
+    nxf_kill() {
+        declare -a children
+        while read P PP;do
+            children[$PP]+=" $P"
+        done < <(ps -e -o pid= -o ppid=)
+
+        kill_all() {
+            [[ $1 != $$ ]] && kill $1 2>/dev/null || true
+            for i in ${children[$1]:=}; do kill_all $i; done
+        }
+
+        kill_all $1
+    }
+
+    nxf_mktemp() {
+        local base=${1:-/tmp}
+        mkdir -p "$base"
+        if [[ $(uname) = Darwin ]]; then mktemp -d $base/nxf.XXXXXXXXXX
+        else TMPDIR="$base" mktemp -d -t nxf.XXXXXXXXXX
+        fi
+    }
+
+    nxf_fs_copy() {
+      local source=$1
+      local target=$2
+      local basedir=$(dirname $1)
+      mkdir -p $target/$basedir
+      cp -fRL $source $target/$basedir
+    }
+
+    nxf_fs_move() {
+      local source=$1
+      local target=$2
+      local basedir=$(dirname $1)
+      mkdir -p $target/$basedir
+      mv -f $source $target/$basedir
+    }
+
+    nxf_fs_rsync() {
+      rsync -rRl $1 $2
+    }
+
+    nxf_fs_rclone() {
+      rclone copyto $1 $2/$1
+    }
+
+    nxf_fs_fcp() {
+      fcp $1 $2/$1
+    }
+
+    on_exit() {
+        local last_err=$?
+        local exit_status=${nxf_main_ret:=0}
+        [[ ${exit_status} -eq 0 && ${nxf_unstage_ret:=0} -ne 0 ]] && exit_status=${nxf_unstage_ret:=0}
+        [[ ${exit_status} -eq 0 && ${last_err} -ne 0 ]] && exit_status=${last_err}
+        printf -- $exit_status > /workspaces/training/nextflow-run/work/7f/caf71890cce1667c094d880f4b6dcc/.exitcode
+        set +u
+        docker rm $NXF_BOXID &>/dev/null || true
+        exit $exit_status
+    }
+
+    on_term() {
+        set +e
+        docker stop $NXF_BOXID
+    }
+
+    nxf_launch() {
+        docker run -i --cpu-shares 1024 -e "NXF_TASK_WORKDIR" -v /workspaces/training/nextflow-run/work:/workspaces/training/nextflow-run/work -w "$NXF_TASK_WORKDIR" --name $NXF_BOXID community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273 /bin/bash -ue /workspaces/training/nextflow-run/work/7f/caf71890cce1667c094d880f4b6dcc/.command.sh
+    }
+
+    nxf_stage() {
+        true
+        # girdi dosyalarını hazırla
+        rm -f COLLECTED-batch-output.txt
+        ln -s /workspaces/training/nextflow-run/work/7f/f435e3f2cf95979b5f3d7647ae6696/COLLECTED-batch-output.txt COLLECTED-batch-output.txt
+    }
+
+    nxf_unstage_outputs() {
+        true
+    }
+
+    nxf_unstage_controls() {
+        true
+    }
+
+    nxf_unstage() {
+        if [[ ${nxf_main_ret:=0} == 0 ]]; then
+            (set -e -o pipefail; (nxf_unstage_outputs | tee -a .command.out) 3>&1 1>&2 2>&3 | tee -a .command.err)
+            nxf_unstage_ret=$?
+        fi
+        nxf_unstage_controls
+    }
+
+    nxf_main() {
+        trap on_exit EXIT
+        trap on_term TERM INT USR2
+        trap '' USR1
+
+        [[ "${NXF_CHDIR:-}" ]] && cd "$NXF_CHDIR"
+        export NXF_BOXID="nxf-$(dd bs=18 count=1 if=/dev/urandom 2>/dev/null | base64 | tr +/ 0A | tr -d '\r\n')"
+        NXF_SCRATCH=''
+        [[ $NXF_DEBUG > 0 ]] && nxf_env
+        touch /workspaces/training/nextflow-run/work/7f/caf71890cce1667c094d880f4b6dcc/.command.begin
+        set +u
+        set -u
+        [[ $NXF_SCRATCH ]] && cd $NXF_SCRATCH
+        export NXF_TASK_WORKDIR="$PWD"
+        nxf_stage
+
+        set +e
+        (set -o pipefail; (nxf_launch | tee .command.out) 3>&1 1>&2 2>&3 | tee .command.err) &
+        pid=$!
+        wait $pid || nxf_main_ret=$?
+        nxf_unstage
+    }
+
+    $NXF_ENTRY
     ```
 
-Bu dosyada ilerlerseniz, her şeyin nasıl kurulduğunu ve konteynerin nasıl başlatıldığını görebilirsiniz; bu epey bir iş ki biz hiç yapmak zorunda kalmadık!
+Bu dosyada `nxf_launch` için arama yaparsanız, şuna benzer bir şey görmelisiniz:
+
+```console
+nxf_launch() {
+    docker run -i --cpu-shares 1024 -e "NXF_TASK_WORKDIR" -v /workspaces/training/nextflow-run/work:/workspaces/training/nextflow-run/work -w "$NXF_TASK_WORKDIR" --name $NXF_BOXID community.wave.seqera.io/library/pip_cowpy:131d6a1b707a8e65 /bin/bash -ue /workspaces/training/nextflow-run/work/7f/caf7189fca6c56ba627b75749edcb3/.command.sh
+}
+```
+
+Bu başlatma komutu, Nextflow'un process çağrısını başlatmak için manuel olarak yaptığımıza çok benzer bir `docker run` komutu kullandığını gösterir.
+Ayrıca ilgili çalışma alt dizinini konteynere bağlar, konteyner içindeki çalışma dizinini buna göre ayarlar ve `.command.sh` dosyasındaki şablonlu bash betiğimizi çalıştırır.
+
+Bu, önceki bölümde manuel olarak yapmak zorunda kaldığımız tüm zor işlerin şimdi Nextflow tarafından bizim için yapıldığını doğrular!
 
 ### Özet
 
-Bir workflow'da konteynerleştirilmiş araçların nasıl kullanılacağını ve bir process modülünde konteyner direktifinin nasıl belirtileceğini biliyorsunuz.
+Konteynerlerin araç sürümlerini yönetmede ve tekrar üretilebilirliği sağlamada ne gibi bir rol oynadığını anlıyorsunuz.
+
+Daha genel olarak, gerçek dünya Nextflow pipeline'larının temel bileşenlerinin neler olduğu ve nasıl organize edildikleri hakkında temel bir anlayışa sahipsiniz.
+Nextflow'un birden fazla girdiyi verimli bir şekilde nasıl işleyebileceğinin, birbirine bağlı birden fazla adımdan oluşan workflow'ları nasıl çalıştırabileceğinin, modüler kod bileşenlerinden nasıl yararlanabileceğinin ve daha fazla tekrar üretilebilirlik ve taşınabilirlik için konteynerleri nasıl kullanabileceğinin temellerini biliyorsunuz.
 
 ### Sırada ne var?
 
-Çalıştırma yapılandırmasıyla pipeline'ı nasıl özelleştireceğinizi öğrenin.
+Bir mola daha verin! Bu, Nextflow pipeline'larının nasıl çalıştığına dair büyük bir bilgi yığınıydı.
+
+Bu eğitimin son bölümünde, yapılandırma konusunu daha derinlemesine inceleyeceğiz.
+Pipeline'ınızın yürütülmesini altyapınıza uyacak şekilde nasıl yapılandıracağınızı ve girdilerin ve parametrelerin yapılandırmasını nasıl yöneteceğinizi öğreneceksiniz.
+
+---
+
+## Kısa sınav
+
+<quiz>
+Nextflow neden her process çağrısı için ayrı bir görev dizini oluşturur?
+- [ ] Yürütme hızını artırmak için
+- [ ] Bellek kullanımını azaltmak için
+- [x] Yürütmeleri izole etmek ve çıktılar arasındaki çakışmaları önlemek için
+- [ ] Paralel dosya sıkıştırmayı etkinleştirmek için
+
+Daha fazla bilgi: [1.3. Orijinal çıktıları ve logları bulun](#13-orijinal-çıktıları-ve-logları-bulun)
+</quiz>
+
+<quiz>
+Bir workflow çalıştırılırken `-ansi-log false` seçeneği ne yapar?
+- [ ] Tüm konsol çıktısını devre dışı bırakır
+- [x] Çıktıdan rengi kaldırır
+- [x] Tüm görev dizini yollarını tek bir satırda yoğunlaştırmak yerine gösterir
+- [ ] Ayrıntılı hata ayıklama modunu etkinleştirir
+
+Daha fazla bilgi: [1.3.2. Terminalin daha fazla ayrıntı göstermesini sağlayın](#132-terminalin-daha-fazla-ayrıntı-göstermesini-sağlayın)
+
+Alternatif olarak, bu stili tercih ediyorsanız aşağıdaki ortam değişkenlerinden birini de kullanabilirsiniz:
+
+```bash
+export NXF_ANSI_LOG=0
+# veya
+export NO_COLOR=1
+```
+
+</quiz>
+
+<quiz>
+`#!groovy channel.fromPath(params.input).splitCsv().map { line -> line[0] }` kodunda, `#!groovy .map { line -> line[0] }` ne yapar?
+- [ ] Boş satırları filtreler
+- [ ] Satırları alfabetik olarak sıralar
+- [x] Her CSV satırından ilk sütunu çıkarır
+- [ ] Satır sayısını sayar
+
+Daha fazla bilgi: [1.4.1. CSV'den girdi verilerini yükleme](#141-csvden-girdi-verilerini-yükleme)
+</quiz>
+
+<quiz>
+Çıktı dosya adlarına girdi değerini dahil etmek neden önemlidir (örn. `#!groovy "${greeting}-output.txt"`)?
+- [ ] İşleme hızını artırmak için
+- [ ] Resume işlevselliğini etkinleştirmek için
+- [x] Birden fazla girdi işlenirken çıktı dosyalarının birbirinin üzerine yazılmasını önlemek için
+- [ ] Dosyaların sıkıştırılmasını kolaylaştırmak için
+
+Daha fazla bilgi: [1.4.3. Çıktılar nasıl adlandırılır](#143-çıktılar-nasıl-adlandırılır)
+</quiz>
+
+<quiz>
+Modülerleştirilmiş bir workflow'da `include` ifadesinin amacı nedir?
+- [ ] Process kodunu workflow dosyasına kopyalamak için
+- [x] Harici bir modül dosyasından bir process tanımını içe aktarmak için
+- [ ] Yapılandırma ayarlarını dahil etmek için
+- [ ] Belge açıklamaları eklemek için
+
+Daha fazla bilgi: [3. Modülerleştirilmiş pipeline'ları çalıştırma](#3-modülerleştirilmiş-pipelineları-çalıştırma)
+</quiz>
+
+<quiz>
+Bir workflow'u modülerleştirdiğinizde ve `-resume` ile çalıştırdığınızda ne olur?
+- [ ] Modüler process'ler için önbellekleme devre dışı bırakılır
+- [ ] Tüm görevler yeniden yürütülmelidir
+- [x] Önbellekleme, oluşturulan iş betiklerine göre normal şekilde çalışır
+- [ ] Yalnızca ana workflow dosyası önbelleğe alınır
+
+Daha fazla bilgi: [3.2. Workflow'u çalıştırın](#32-workflowu-çalıştırın)
+</quiz>
+
+<quiz>
+Bir process tanımındaki `container` yönergesi neyi belirtir?
+- [ ] Process için çalışma dizini
+- [ ] Maksimum bellek tahsisi
+- [x] Process'i çalıştırmak için kullanılacak konteyner imajı URI'si
+- [ ] Çıktı dosya formatı
+
+Daha fazla bilgi: [4.2. Bir workflow'da konteyner kullanın](#42-bir-workflowda-konteyner-kullanın)
+</quiz>
+
+<quiz>
+`.command.run` dosyasında, `nxf_launch` fonksiyonu ne içerir?
+- [ ] Nextflow sürüm bilgisi
+- [ ] Workflow parametreleri
+- [x] Birim bağlantıları ve konteyner ayarları içeren `docker run` komutu
+- [ ] Process girdi bildirimleri
+
+Daha fazla bilgi: [4.2.4. Nextflow'un konteynerleştirilmiş görevi nasıl başlattığını inceleyin](#424-nextflowun-konteynerleştirilmiş-görevi-nasıl-başlattığını-inceleyin)
+</quiz>
+
+<quiz>
+Nextflow, konteynerleştirilmiş bir process çalıştırırken otomatik olarak ne halleder? (Tümünü seçin)
+- [x] Gerekirse konteyner imajını çekme
+- [x] Çalışma dizinini konteynere bağlama
+- [x] Process betiğini konteyner içinde çalıştırma
+- [x] Yürütme sonrasında konteyner örneğini temizleme
+
+Daha fazla bilgi: [4. Konteynerleştirilmiş yazılım kullanma](#4-konteynerleştirilmiş-yazılım-kullanma)
+</quiz>

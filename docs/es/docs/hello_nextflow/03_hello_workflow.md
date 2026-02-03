@@ -21,7 +21,7 @@ Esto le enseñará la manera de Nextflow de lograr lo siguiente:
 
 1. Hacer que los datos fluyan de un proceso al siguiente
 2. Recopilar salidas de múltiples llamadas de proceso en una única llamada de proceso
-3. Pasar más de una entrada a un proceso
+3. Pasar parámetros adicionales a un proceso
 4. Manejar múltiples salidas que salen de un proceso
 
 Para demostrar, continuaremos construyendo sobre el ejemplo Hello World agnóstico de dominio de las Partes 1 y 2.
@@ -51,6 +51,14 @@ output {
     }
 }
 ```
+
+Este diagrama resume la operación actual del flujo de trabajo.
+Debería verse familiar, excepto que ahora estamos mostrando explícitamente que las salidas del proceso están empaquetadas en un canal, al igual que las entradas.
+Vamos a poner ese canal de salida a buen uso en un minuto.
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-workflow-channels.svg"
+</figure>
 
 Solo para asegurarse de que todo funciona, ejecute el script una vez antes de hacer cualquier cambio:
 
@@ -202,8 +210,14 @@ Esto aún no es funcional porque no hemos especificado qué debe ser la entrada 
 
 Ahora necesitamos hacer que la salida del proceso `sayHello()` fluya hacia el proceso `convertToUpper()`.
 
-Convenientemente, Nextflow empaqueta automáticamente la salida de un proceso en un channel llamado `<process>.out`.
-Así que la salida del proceso `sayHello` es un channel llamado `sayHello.out`, que podemos conectar directamente a la llamada a `convertToUpper()`.
+Convenientemente, Nextflow empaqueta automáticamente la salida de un proceso en un canal, como se muestra en el diagrama en la sección de calentamiento.
+Podemos referirnos al canal de salida de un proceso como `<process>.out`.
+
+Así que la salida del proceso `sayHello` es un canal llamado `sayHello.out`, que podemos conectar directamente a la llamada a `convertToUpper()`.
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-multistep-connector.svg"
+</figure>
 
 En el bloque workflow, haga el siguiente cambio de código:
 
@@ -344,7 +358,7 @@ Por defecto, cuando se ejecuta en una sola máquina como estamos haciendo aquí,
 Ahora, antes de continuar, piense en cómo todo lo que hicimos fue conectar la salida de `sayHello` a la entrada de `convertToUpper` y los dos procesos pudieron ejecutarse en serie.
 Nextflow hizo el trabajo duro de manejar archivos de entrada y salida individuales y pasarlos entre los dos comandos por nosotros.
 
-Esta es una de las razones por las que los channels de Nextflow son tan poderosos: se encargan del trabajo tedioso involucrado en conectar pasos del flujo de trabajo.
+Esta es una de las razones por las que los canales de Nextflow son tan poderosos: se encargan del trabajo tedioso involucrado en conectar pasos del flujo de trabajo.
 
 ### Conclusión
 
@@ -358,7 +372,7 @@ Aprender cómo recopilar salidas de llamadas de proceso por lotes y alimentarlas
 
 ## 2. Agregar un tercer paso para recopilar todos los saludos
 
-Cuando usamos un proceso para aplicar una transformación a cada uno de los elementos en un channel, como estamos haciendo aquí con los múltiples saludos, a veces queremos recopilar elementos del channel de salida de ese proceso y alimentarlos en otro proceso que realiza algún tipo de análisis o suma.
+Cuando usamos un proceso para aplicar una transformación a cada uno de los elementos en un canal, como estamos haciendo aquí con los múltiples saludos, a veces queremos recopilar elementos del canal de salida de ese proceso y alimentarlos en otro proceso que realiza algún tipo de análisis o suma.
 
 Para demostrar, agregaremos un nuevo paso a nuestro pipeline que recopila todos los saludos en mayúsculas producidos por el proceso `convertToUpper` y los escribe en un único archivo.
 
@@ -432,7 +446,7 @@ Deja fuera la(s) definición(es) de entrada y la primera mitad del comando scrip
 Necesitamos recopilar los saludos de todas las llamadas al proceso `convertToUpper()`.
 ¿Qué sabemos que podemos obtener del paso anterior en el flujo de trabajo?
 
-El channel producido por `convertToUpper()` contendrá las rutas a los archivos individuales que contienen los saludos en mayúsculas.
+El canal producido por `convertToUpper()` contendrá las rutas a los archivos individuales que contienen los saludos en mayúsculas.
 Eso equivale a un slot de entrada; llamémoslo `input_files` por simplicidad.
 
 En el bloque process, haga el siguiente cambio de código:
@@ -458,7 +472,7 @@ Note que usamos el prefijo `path` aunque esperamos que esto contenga múltiples 
 Aquí es donde las cosas podrían ponerse un poco complicadas, porque necesitamos poder manejar un número arbitrario de archivos de entrada.
 Específicamente, no podemos escribir el comando por adelantado, así que necesitamos decirle a Nextflow cómo componerlo en tiempo de ejecución basándose en qué entradas fluyen hacia el proceso.
 
-En otras palabras, si tenemos un channel de entrada que contiene el elemento `[file1.txt, file2.txt, file3.txt]`, necesitamos que Nextflow lo convierta en `cat file1.txt file2.txt file3.txt`.
+En otras palabras, si tenemos un canal de entrada que contiene el elemento `[file1.txt, file2.txt, file3.txt]`, necesitamos que Nextflow lo convierta en `cat file1.txt file2.txt file3.txt`.
 
 Afortunadamente, Nextflow está bastante feliz de hacer eso por nosotros si simplemente escribimos `cat ${input_files}` en el comando script.
 
@@ -493,6 +507,11 @@ En teoría esto debería manejar cualquier número arbitrario de archivos de ent
 ### 2.3. Agregar el paso de recopilación al flujo de trabajo
 
 Ahora deberíamos solo necesitar llamar al proceso de recopilación sobre la salida del paso de mayúsculas.
+Ese también es un canal, llamado `convertToUpper.out`.
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect-connector.svg"
+</figure>
 
 #### 2.3.1. Conectar las llamadas de proceso
 
@@ -555,17 +574,21 @@ Ahora eche un vistazo al contenido del archivo de salida final.
 
 Oh no. El paso de recopilación se ejecutó individualmente en cada saludo, lo cual NO es lo que queríamos.
 
-Necesitamos hacer algo para decirle a Nextflow explícitamente que queremos que ese tercer paso se ejecute en todos los elementos en el channel producido por `convertToUpper()`.
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect-no-operator.svg"
+</figure>
+
+Necesitamos hacer algo para decirle a Nextflow explícitamente que queremos que ese tercer paso se ejecute en todos los elementos en el canal producido por `convertToUpper()`.
 
 ### 2.4. Usar un operador para recopilar los saludos en una única entrada
 
 Sí, una vez más la respuesta a nuestro problema es un operador.
 
-Específicamente, vamos a usar el operador aptamente llamado [`collect()`](https://www.nextflow.io/docs/latest/reference/operator.html#collect).
+Específicamente, vamos a usar el operador aptamente llamado [`collect()`](https://nextflow.io/docs/latest/reference/operator.html#collect).
 
 #### 2.4.1. Agregar el operador `collect()`
 
-Esta vez va a verse un poco diferente porque no estamos agregando el operador en el contexto de una channel factory; lo estamos agregando a un channel de salida.
+Esta vez va a verse un poco diferente porque no estamos agregando el operador en el contexto de una channel factory; lo estamos agregando a un canal de salida.
 
 Tomamos el `convertToUpper.out` y agregamos el operador `collect()`, lo que nos da `convertToUpper.out.collect()`.
 Podemos conectar eso directamente a la llamada del proceso `collectGreetings()`.
@@ -590,7 +613,7 @@ En el bloque workflow, haga el siguiente cambio de código:
 
 #### 2.4.2. Agregar algunas declaraciones `view()`
 
-También incluyamos un par de declaraciones `view()` para visualizar los estados antes y después del contenido del channel.
+También incluyamos un par de declaraciones `view()` para visualizar los estados antes y después del contenido del canal.
 
 === "Después"
 
@@ -641,13 +664,18 @@ nextflow run hello-workflow.nf -resume
 Se ejecuta exitosamente, aunque la salida del log puede verse un poco más desordenada que esto (la limpiamos para legibilidad).
 
 ¡Esta vez el tercer paso solo fue llamado una vez!
-
 Mirando la salida de las declaraciones `view()`, vemos lo siguiente:
 
-- Tres declaraciones `Before collect:`, una para cada saludo: en ese punto las rutas de archivo son elementos individuales en el channel.
+- Tres declaraciones `Before collect:`, una para cada saludo: en ese punto las rutas de archivo son elementos individuales en el canal.
 - Una única declaración `After collect:`: las tres rutas de archivo ahora están empaquetadas en un único elemento.
 
-Eche un vistazo al contenido del archivo de salida final.
+Podemos resumir eso con el siguiente diagrama:
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect-WITH-operator.svg"
+</figure>
+
+Finalmente, puede echar un vistazo al contenido del archivo de salida para satisfacerse de que todo funcionó correctamente.
 
 ??? abstract "Contenido del archivo"
 
@@ -692,20 +720,30 @@ Esto es básicamente la operación inversa del punto 2.4.2.
 
 Sabe cómo recopilar salidas de un lote de llamadas de proceso y alimentarlas en un análisis conjunto o paso de suma.
 
+Para recapitular, esto es lo que ha construido hasta ahora:
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect.svg"
+</figure>
+
 ### ¿Qué sigue?
 
 Aprender cómo pasar más de una entrada a un proceso.
 
 ---
 
-## 3. Pasar más de una entrada a un proceso
+## 3. Pasar parámetros adicionales a un proceso
 
 Queremos poder nombrar el archivo de salida final con algo específico para poder procesar lotes subsiguientes de saludos sin sobrescribir los resultados finales.
 
 Para ese fin, vamos a hacer los siguientes refinamientos al flujo de trabajo:
 
-- Modificar el proceso recopilador para aceptar un nombre definido por el usuario para el archivo de salida
-- Agregar un parámetro de línea de comandos al flujo de trabajo y pasarlo al proceso recopilador
+- Modificar el proceso recopilador para aceptar un nombre definido por el usuario para el archivo de salida (`batch_name`)
+- Agregar un parámetro de línea de comandos al flujo de trabajo (`--batch`) y pasarlo al proceso recopilador
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect-batch.svg"
+</figure>
 
 ### 3.1. Modificar el proceso recopilador
 
@@ -886,10 +924,8 @@ Pudimos acceder a sus salidas respectivas muy convenientemente usando la sintaxi
 
 ¡Todas excelentes preguntas, y la respuesta corta es sí podemos!
 
-Las múltiples salidas serán empaquetadas en channels separados.
-Podemos elegir dar nombres a esos channels de salida, lo que hace fácil referirnos a ellos individualmente más tarde, o podemos referirnos a ellos por índice.
-
-Profundicemos con un ejemplo.
+Las múltiples salidas serán empaquetadas en canales separados.
+Podemos elegir dar nombres a esos canales de salida, lo que hace fácil referirnos a ellos individualmente más tarde, o podemos referirnos a ellos por índice.
 
 Para propósitos de demostración, digamos que queremos contar el número de saludos que se están recopilando para un lote dado de entradas y reportarlo en un archivo.
 
@@ -962,10 +998,14 @@ Pero como dice el dicho, ¿por qué no ambas?
 
 ### 4.2. Actualizar las salidas del flujo de trabajo
 
-Ahora que tenemos dos salidas saliendo del proceso `collectGreetings`, la salida `collectGreetings.out` contiene dos channels:
+Ahora que tenemos dos salidas saliendo del proceso `collectGreetings`, la salida `collectGreetings.out` contiene dos canales:
 
 - `collectGreetings.out.outfile` contiene el archivo de salida final
 - `collectGreetings.out.report` contiene el archivo de reporte
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect-report.svg"
+</figure>
 
 Necesitamos actualizar las salidas del flujo de trabajo en consecuencia.
 
@@ -1076,6 +1116,10 @@ Si mira en el directorio `results/hello_workflow/`, encontrará el nuevo archivo
     There were 3 greetings in this batch.
     ```
 
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect-4-way.svg"
+</figure>
+
 Siéntase libre de agregar más saludos al CSV y probar qué sucede.
 
 ### Conclusión
@@ -1136,7 +1180,7 @@ Aprenda más: [2.4. Usar un operador para recopilar los saludos en una única en
 <quiz>
 ¿Cuándo debería usar el operador `collect()`?
 - [ ] Cuando quiere procesar elementos en paralelo
-- [ ] Cuando necesita filtrar el contenido del channel
+- [ ] Cuando necesita filtrar el contenido del canal
 - [x] Cuando un proceso downstream necesita todos los elementos de un proceso upstream
 - [ ] Cuando quiere dividir datos a través de múltiples procesos
 
@@ -1170,5 +1214,5 @@ Cuando proporciona múltiples entradas a un proceso, ¿qué debe ser verdad?
 - [x] El orden de las entradas debe coincidir con el orden definido en el bloque input
 - [ ] Solo se pueden proporcionar dos entradas a la vez
 
-Aprenda más: [3. Pasar más de una entrada a un proceso](#3-pasar-mas-de-una-entrada-a-un-proceso)
+Aprenda más: [3. Pasar parámetros adicionales a un proceso](#3-pasar-parametros-adicionales-a-un-proceso)
 </quiz>

@@ -27,7 +27,8 @@ additional_information:
 
 **Hello nf-core est une introduction pratique à l'utilisation des ressources et des bonnes pratiques nf-core.**
 
-![logo nf-core](./img/nf-core-logo.png)
+![logo nf-core](./img/nf-core-logo.png#only-light)
+![logo nf-core](./img/nf-core-logo-darkbg.png#only-dark)
 
 En travaillant sur des exemples pratiques et des exercices guidés, vous apprendrez à utiliser et développer des modules et pipelines compatibles nf-core, et à utiliser efficacement les outils nf-core.
 
@@ -62,6 +63,6 @@ Nous avons divisé cela en cinq parties qui se concentreront chacune sur des asp
 
 À la fin de ce cours, vous serez capable de tirer parti de l'énorme richesse de ressources offertes par le projet nf-core.
 
-Prêt à commencer le cours ?
+Prêt·e à commencer le cours ?
 
 [Commencer l'apprentissage :material-arrow-right:](00_orientation.md){ .md-button .md-button--primary }

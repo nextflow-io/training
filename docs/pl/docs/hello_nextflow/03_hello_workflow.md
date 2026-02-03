@@ -17,15 +17,15 @@
 Większość rzeczywistych workflow składa się z więcej niż jednego kroku.
 W tym module szkoleniowym nauczysz się łączyć procesy w wieloetapowy workflow.
 
-Poznasz następujące techniki Nextflow:
+Poznasz następujące techniki Nextflow'a:
 
 1. Przekazywanie danych z jednego procesu do następnego
 2. Zbieranie wyjść z wielu wywołań procesu do pojedynczego wywołania
-3. Przekazywanie więcej niż jednego wejścia do procesu
-4. Obsługa wielu wyjść z procesu
+3. Przekazywanie dodatkowych parametrów do procesu
+4. Obsługę wielu wyjść pochodzących z procesu
 
 Dla demonstracji będziemy kontynuować rozbudowę domenowo-agnostycznego przykładu Hello World z Części 1 i 2.
-Tym razem wprowadzimy następujące zmiany w naszym workflow, aby lepiej odzwierciedlić sposób budowania rzeczywistych pipeline'ów:
+Tym razem wprowadzimy następujące zmiany w naszym workflow, aby lepiej odzwierciedlić sposób budowania rzeczywistych workflow:
 
 1. Dodamy drugi krok, który konwertuje pozdrowienie na wielkie litery.
 2. Dodamy trzeci krok, który zbiera wszystkie przekształcone pozdrowienia i zapisuje je do pojedynczego pliku.
@@ -34,7 +34,7 @@ Tym razem wprowadzimy następujące zmiany w naszym workflow, aby lepiej odzwier
 
 ??? info "Jak zacząć od tej sekcji"
 
-    Ta sekcja kursu zakłada, że ukończyłeś Części 1-2 kursu [Hello Nextflow](./index.md), ale jeśli znasz podstawy omówione w tych sekcjach, możesz zacząć od tego miejsca bez żadnych dodatkowych przygotowań.
+    Ta sekcja kursu zakłada, że ukończyłeś Części 1-2 kursu [Hello Nextflow](./index.md), ale jeśli znasz podstawy omówione w tych sekcjach, możesz zacząć od tego miejsca bez dodatkowych przygotowań.
 
 ---
 
@@ -52,7 +52,15 @@ output {
 }
 ```
 
-Aby upewnić się, że wszystko działa, uruchom skrypt raz przed wprowadzeniem jakichkolwiek zmian:
+Ten diagram podsumowuje obecne działanie workflow'a.
+Powinien wyglądać znajomo, z tą różnicą, że teraz wyraźnie pokazujemy, że wyjścia procesu są pakowane w kanał, podobnie jak wejścia.
+Za chwilę wykorzystamy ten kanał wyjściowy.
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-workflow-channels.svg"
+</figure>
+
+Aby upewnić się, że wszystko działa, uruchom skrypt raz przed wprowadzeniem zmian:
 
 ```bash
 nextflow run hello-workflow.nf
@@ -81,11 +89,11 @@ W tym rozdziale jest to katalog `results/hello_workflow/`.
     └── Holà-output.txt
     ```
 
-Jeśli to zadziałało, jesteś gotowy do nauki składania wieloetapowego workflow.
+Jeśli to zadziałało, jesteś gotowy do nauki składania wieloetapowego workflow'a.
 
 ---
 
-## 1. Dodaj drugi krok do workflow
+## 1. Dodaj drugi krok do workflow'a
 
 Dodamy krok konwertujący każde pozdrowienie na wielkie litery.
 
@@ -107,7 +115,7 @@ Do konwersji pozdrowień na wielkie litery użyjemy klasycznego narzędzia UNIX 
 tr '[a-z]' '[A-Z]'
 ```
 
-Jest to bardzo prosty one-liner do zamiany tekstu, który nie uwzględnia liter z akcentami, więc na przykład 'Holà' zostanie zamienione na 'HOLà', ale wystarczająco dobrze posłuży do demonstracji koncepcji Nextflow i to jest najważniejsze.
+Jest to bardzo prosty one-liner do zamiany tekstu, który nie uwzględnia liter z akcentami, więc na przykład 'Holà' zostanie zamienione na 'HOLà', ale wystarczająco dobrze posłuży do demonstracji koncepcji Nextflow'a i to jest najważniejsze.
 
 Aby to przetestować, możemy uruchomić polecenie `echo 'Hello World'` i przekierować jego wyjście do polecenia `tr`:
 
@@ -123,9 +131,9 @@ Wyjściem jest plik tekstowy o nazwie `UPPER-output.txt`, który zawiera wersję
     HELLO WORLD
     ```
 
-To właśnie zamierzamy zrobić w naszym workflow.
+To właśnie zamierzamy osiągnąć za pomocą naszego workflow'a.
 
-### 1.2. Napisz krok konwersji jako proces Nextflow
+### 1.2. Napisz krok konwersji jako proces Nextflow'a
 
 Możemy wzorować nasz nowy proces na pierwszym, ponieważ chcemy użyć wszystkich tych samych komponentów.
 
@@ -154,7 +162,7 @@ W tym procesie komponujemy nazwę drugiego pliku wyjściowego na podstawie nazwy
 
 ### 1.3. Dodaj wywołanie nowego procesu w bloku workflow
 
-Teraz musimy powiedzieć Nextflow, aby faktycznie wywołał proces, który właśnie zdefiniowaliśmy.
+Teraz musimy powiedzieć Nextflow'owi, aby faktycznie wywołał proces, który właśnie zdefiniowaliśmy.
 
 W bloku workflow wprowadź następującą zmianę w kodzie:
 
@@ -202,8 +210,14 @@ To jeszcze nie jest funkcjonalne, ponieważ nie określiliśmy, co powinno być 
 
 Teraz musimy sprawić, aby wyjście procesu `sayHello()` trafiało do procesu `convertToUpper()`.
 
-Wygodnie jest to, że Nextflow automatycznie pakuje wyjście procesu do kanału o nazwie `<process>.out`.
+Wygodnie jest to, że Nextflow automatycznie pakuje wyjście procesu do kanału, jak pokazano na diagramie w sekcji rozgrzewki.
+Możemy odnieść się do kanału wyjściowego procesu jako `<process>.out`.
+
 Więc wyjście procesu `sayHello` to kanał o nazwie `sayHello.out`, który możemy bezpośrednio podłączyć do wywołania `convertToUpper()`.
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-multistep-connector.svg"
+</figure>
 
 W bloku workflow wprowadź następującą zmianę w kodzie:
 
@@ -223,9 +237,9 @@ W bloku workflow wprowadź następującą zmianę w kodzie:
 
 Dla prostego przypadku takiego jak ten (jedno wyjście do jednego wejścia), to wszystko, co musimy zrobić, aby połączyć dwa procesy!
 
-### 1.5. Skonfiguruj publikowanie wyjść workflow
+### 1.5. Skonfiguruj publikowanie wyjść workflow'a
 
-Na koniec zaktualizujmy wyjścia workflow, aby publikować również wyniki z drugiego procesu.
+Na koniec zaktualizujmy wyjścia workflow'a, aby publikować również wyniki z drugiego procesu.
 
 #### 1.5.1. Zaktualizuj sekcję `publish:` bloku `workflow`
 
@@ -290,7 +304,7 @@ Później w kursie dowiesz się, jak konfigurować te ustawienia dla wielu wyjś
 
 ### 1.6. Uruchom workflow z `-resume`
 
-Przetestujmy to używając flagi `-resume`, ponieważ już pomyślnie uruchomiliśmy pierwszy krok workflow.
+Przetestujmy to używając flagi `-resume`, ponieważ już pomyślnie uruchomiliśmy pierwszy krok workflow'a.
 
 ```bash
 nextflow run hello-workflow.nf -resume
@@ -336,15 +350,15 @@ To wygodne! Ale warto też zajrzeć do katalogu roboczego jednego z wywołań dr
 
 Zauważ, że są tam dwa pliki `*-output`: wyjście pierwszego procesu oraz wyjście drugiego.
 
-Wyjście pierwszego procesu znajduje się tam, ponieważ Nextflow **przygotował** (ang. _staged_) je tam, aby mieć wszystko potrzebne do wykonania w tym samym podkatalogu.
+Wyjście pierwszego procesu znajduje się tam, ponieważ Nextflow **przygotował** je tam, aby mieć wszystko potrzebne do wykonania w tym samym podkatalogu.
 
 Jednak w rzeczywistości jest to dowiązanie symboliczne wskazujące na oryginalny plik w podkatalogu wywołania pierwszego procesu.
 Domyślnie, podczas uruchamiania na pojedynczej maszynie, jak to robimy tutaj, Nextflow używa dowiązań symbolicznych zamiast kopii do przygotowywania plików wejściowych i pośrednich.
 
-Teraz, zanim przejdziemy dalej, pomyśl o tym, jak wszystko, co zrobiliśmy, to połączenie wyjścia `sayHello` z wejściem `convertToUpper`. Dzięki temu dwa procesy mogły być uruchomione szeregowo.
+Teraz, zanim przejdziemy dalej, pomyśl o tym, że wszystko, co zrobiliśmy, to połączenie wyjścia `sayHello` z wejściem `convertToUpper`, dzięki czemu dwa procesy mogły być uruchomione szeregowo.
 Nextflow wykonał za nas ciężką pracę związaną z obsługą poszczególnych plików wejściowych i wyjściowych oraz przekazywaniem ich między dwoma poleceniami.
 
-To jeden z powodów, dla których kanały w Nextflow są tak potężne: zajmują się rutynową pracą związaną z łączeniem kroków workflow'u.
+To jeden z powodów, dla których kanały w Nextflow są tak potężne: zajmują się rutynową pracą związaną z łączeniem kroków workflow'a.
 
 ### Podsumowanie
 
@@ -352,15 +366,15 @@ Wiesz już, jak łączyć procesy w łańcuch, przekazując wyjście jednego kro
 
 ### Co dalej?
 
-Dowiedz się, jak zbierać wyjścia z wielu wywołań procesu i przekazywać je do pojedynczego procesu.
+Dowiedz się, jak zbierać wyjścia z przetwarzanych partiami wywołań procesu i przekazywać je do pojedynczego procesu.
 
 ---
 
 ## 2. Dodaj trzeci krok do zbierania wszystkich pozdrowień
 
-Gdy używamy procesu do zastosowania transformacji na każdym z elementów w kanale, jak tutaj z wieloma pozdrowieniami, czasami zachodzi potrzeba zebrania elementów z kanału wyjściowego. Następnie można je przekazać do innego procesu wykonującego analizę lub podsumowanie.
+Gdy używamy procesu do zastosowania transformacji na każdym z elementów w kanale, jak tutaj z wieloma pozdrowieniami, czasami zachodzi potrzeba zebrania elementów z kanału wyjściowego tego procesu i przekazania ich do innego procesu wykonującego analizę lub podsumowanie.
 
-Dla demonstracji dodamy nowy krok do naszego pipeline, który zbiera wszystkie pozdrowienia zapisane wielkimi literami, wyprodukowane przez proces `convertToUpper`, i zapisuje je do pojedynczego pliku.
+Dla demonstracji dodamy nowy krok do naszego pipeline'u, który zbiera wszystkie pozdrowienia zapisane wielkimi literami, wyprodukowane przez proces `convertToUpper`, i zapisuje je do pojedynczego pliku.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nextflow/img/hello-collect.svg"
@@ -370,7 +384,7 @@ Nie zdradzając niespodzianki, ale będzie to wymagało użycia bardzo przydatne
 
 ### 2.1. Zdefiniuj polecenie zbierania i przetestuj je w terminalu
 
-Krok zbierania, który chcemy dodać do naszego workflow, użyje polecenia `cat` do połączenia wielu pozdrowień zapisanych wielkimi literami w pojedynczy plik.
+Krok zbierania, który chcemy dodać do naszego workflow'a, użyje polecenia `cat` do połączenia wielu pozdrowień zapisanych wielkimi literami w pojedynczy plik.
 
 Uruchommy polecenie samodzielnie w terminalu, aby sprawdzić, czy działa zgodnie z oczekiwaniami, tak jak robiliśmy to wcześniej.
 
@@ -393,7 +407,7 @@ Wyjściem jest plik tekstowy o nazwie `COLLECTED-output.txt`, który zawiera wer
     HOLà
     ```
 
-To jest wynik, który chcemy osiągnąć za pomocą naszego workflow.
+To jest wynik, który chcemy osiągnąć za pomocą naszego workflow'a.
 
 ### 2.2. Utwórz nowy proces do kroku zbierania
 
@@ -430,9 +444,9 @@ Brakuje definicji wejść i pierwszej połowy polecenia skryptu, ponieważ musim
 #### 2.2.2. Zdefiniuj wejścia do `collectGreetings()`
 
 Musimy zebrać pozdrowienia ze wszystkich wywołań procesu `convertToUpper()`.
-Co wiemy, że możemy uzyskać z poprzedniego kroku workflow?
+Co wiemy, że możemy uzyskać z poprzedniego kroku workflow'a?
 
-Channel wyprodukowany przez `convertToUpper()` będzie zawierał ścieżki do poszczególnych plików zawierających pozdrowienia zapisane wielkimi literami.
+Kanał wyprodukowany przez `convertToUpper()` będzie zawierał ścieżki do poszczególnych plików zawierających pozdrowienia zapisane wielkimi literami.
 To odpowiada jednemu slotowi wejściowemu; nazwijmy go `input_files` dla uproszczenia.
 
 W bloku procesu wprowadź następującą zmianę w kodzie:
@@ -456,7 +470,7 @@ Zauważ, że używamy przedrostka `path`, mimo że oczekujemy, że będzie to za
 #### 2.2.3. Skomponuj polecenie konkatenacji
 
 Tu sprawa może być nieco trudniejsza, ponieważ musimy być w stanie obsłużyć dowolną liczbę plików wejściowych.
-Konkretnie, nie możemy napisać polecenia z góry, więc musimy powiedzieć Nextflow, jak je skomponować w czasie wykonania na podstawie tego, jakie wejścia trafią do procesu.
+Konkretnie, nie możemy napisać polecenia z góry, więc musimy powiedzieć Nextflow'owi, jak je skomponować w czasie wykonania na podstawie tego, jakie wejścia trafią do procesu.
 
 Innymi słowy, jeśli mamy kanał wejściowy zawierający element `[file1.txt, file2.txt, file3.txt]`, potrzebujemy, aby Nextflow zamienił to na `cat file1.txt file2.txt file3.txt`.
 
@@ -490,9 +504,14 @@ W teorii powinno to obsłużyć dowolną liczbę plików wejściowych.
     W takim przypadku musielibyśmy wykonać trochę dodatkowej pracy, aby skomponować polecenie.
     Przykład tego możesz zobaczyć w kursie [Nextflow dla genomiki](../../nf4_science/genomics/).
 
-### 2.3. Dodaj krok zbierania do workflow
+### 2.3. Dodaj krok zbierania do workflow'a
 
 Teraz powinniśmy tylko wywołać proces zbierania na wyjściu kroku konwersji na wielkie litery.
+To również jest kanał, o nazwie `convertToUpper.out`.
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect-connector.svg"
+</figure>
 
 #### 2.3.1. Połącz wywołania procesów
 
@@ -555,13 +574,17 @@ Teraz spójrz na zawartość końcowego pliku wyjściowego.
 
 O nie. Krok zbierania został uruchomiony indywidualnie dla każdego pozdrowienia, co NIE jest tym, czego chcieliśmy.
 
-Musimy coś zrobić, aby wyraźnie powiedzieć Nextflow, że chcemy, aby ten trzeci krok działał na wszystkich elementach w kanale wyprodukowanym przez `convertToUpper()`.
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect-no-operator.svg"
+</figure>
+
+Musimy coś zrobić, aby wyraźnie powiedzieć Nextflow'owi, że chcemy, aby ten trzeci krok działał na wszystkich elementach w kanale wyprodukowanym przez `convertToUpper()`.
 
 ### 2.4. Użyj operatora do zebrania pozdrowień w pojedyncze wejście
 
 Tak, ponownie odpowiedzią na nasz problem jest operator.
 
-Konkretnie użyjemy trafnie nazwanego operatora [`collect()`](https://www.nextflow.io/docs/latest/reference/operator.html#collect).
+Konkretnie użyjemy trafnie nazwanego operatora [`collect()`](https://nextflow.io/docs/latest/reference/operator.html#collect).
 
 #### 2.4.1. Dodaj operator `collect()`
 
@@ -590,7 +613,7 @@ W bloku workflow wprowadź następującą zmianę w kodzie:
 
 #### 2.4.2. Dodaj instrukcje `view()`
 
-Dodajmy również kilka instrukcji `view()`, aby zwizualizować stany kanału przed i po.
+Dodajmy również kilka instrukcji `view()`, aby zwizualizować stany kanału przed i po zastosowaniu operatora.
 
 === "Po"
 
@@ -641,13 +664,18 @@ nextflow run hello-workflow.nf -resume
 Uruchomienie zakończyło się pomyślnie, chociaż wynik w logu może wyglądać nieco bardziej chaotycznie (uporządkowaliśmy go dla czytelności).
 
 Tym razem trzeci krok został wywołany tylko raz!
-
 Patrząc na wynik instrukcji `view()`, widzimy:
 
 - Trzy instrukcje `Before collect:`, po jednej dla każdego pozdrowienia: w tym momencie ścieżki plików są indywidualnymi elementami w kanale.
 - Pojedyncza instrukcja `After collect:`: trzy ścieżki plików są teraz spakowane w pojedynczy element.
 
-Spójrz na zawartość końcowego pliku wyjściowego.
+Możemy to podsumować następującym diagramem:
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect-WITH-operator.svg"
+</figure>
+
+Na koniec możesz zajrzeć do zawartości pliku wyjściowego, aby upewnić się, że wszystko zadziałało poprawnie.
 
 ??? abstract "Zawartość pliku"
 
@@ -690,7 +718,13 @@ To jest zasadniczo odwrotna operacja od punktu 2.4.2.
 
 ### Podsumowanie
 
-Wiesz już, jak zbierać wyjścia z wielu wywołań procesu i przekazywać je do wspólnego kroku analizy lub podsumowania.
+Wiesz już, jak zbierać wyjścia z partii wywołań procesu i przekazywać je do wspólnego kroku analizy lub podsumowania.
+
+Podsumowując, oto co zbudowałeś do tej pory:
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect.svg"
+</figure>
 
 ### Co dalej?
 
@@ -698,14 +732,18 @@ Dowiedz się, jak przekazać więcej niż jedno wejście do procesu.
 
 ---
 
-## 3. Przekaż więcej niż jedno wejście do procesu
+## 3. Przekaż dodatkowe parametry do procesu
 
 Chcemy mieć możliwość nazwania końcowego pliku wyjściowego konkretną nazwą, aby móc przetwarzać kolejne partie pozdrowień bez nadpisywania poprzednich rezultatów.
 
-W tym celu wprowadzimy następujące udoskonalenia do workflow:
+W tym celu wprowadzimy następujące udoskonalenia do workflow'a:
 
-- Zmodyfikujemy proces zbierający, aby akceptował zdefiniowaną przez użytkownika nazwę pliku wyjściowego
-- Dodamy parametr wiersza poleceń do workflow i przekażemy go do procesu zbierającego
+- Zmodyfikujemy proces zbierający, aby akceptował zdefiniowaną przez użytkownika nazwę pliku wyjściowego (`batch_name`)
+- Dodamy parametr wiersza poleceń do workflow'a (`--batch`) i przekażemy go do procesu zbierającego
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect-batch.svg"
+</figure>
 
 ### 3.1. Zmodyfikuj proces zbierający
 
@@ -768,7 +806,7 @@ W bloku procesu wprowadź następującą zmianę w kodzie:
         """
     ```
 
-To konfiguruje proces do używania wartości `batch_name` do generowania konkretnej nazwy pliku dla końcowego wyjścia workflow.
+To konfiguruje proces do używania wartości `batch_name` do generowania konkretnej nazwy pliku dla końcowego wyjścia workflow'a.
 
 ### 3.2. Dodaj parametr wiersza poleceń `batch`
 
@@ -779,7 +817,7 @@ Teraz potrzebujemy sposobu na dostarczenie wartości dla `batch_name` i przekaza
 Wiesz już, jak używać systemu `params` do deklarowania parametrów CLI.
 Użyjmy tego do zadeklarowania parametru `batch` (z domyślną wartością, bo jesteśmy leniwi).
 
-W sekcji parametrów pipeline wprowadź następujące zmiany w kodzie:
+W sekcji parametrów pipeline'u wprowadź następujące zmiany w kodzie:
 
 === "Po"
 
@@ -899,9 +937,9 @@ To będzie wymagało dwóch kluczowych zmian w definicji procesu: potrzebujemy s
 
 #### 4.1.1. Policz liczbę zebranych pozdrowień
 
-Wygodnie jest to, że Nextflow pozwala nam dodawać dowolny kod w bloku skryptu (`script:`) definicji procesu, co jest bardzo przydatne do robienia takich rzeczy jak ta.
+Wygodnie jest to, że Nextflow pozwala nam dodawać dowolny kod w bloku `script:` definicji procesu, co jest bardzo przydatne do robienia takich rzeczy jak ta.
 
-Oznacza to, że możemy użyć wbudowanej funkcji Nextflow `size()`, aby uzyskać liczbę plików w tablicy `input_files`, i zapisać wynik do pliku za pomocą polecenia `echo`.
+Oznacza to, że możemy użyć wbudowanej funkcji Nextflow'a `size()`, aby uzyskać liczbę plików w tablicy `input_files`, i zapisać wynik do pliku za pomocą polecenia `echo`.
 
 W bloku procesu `collectGreetings` wprowadź następujące zmiany w kodzie:
 
@@ -951,7 +989,7 @@ W bloku procesu wprowadź następującą zmianę w kodzie:
     ```
 
 Tagi `emit:` są opcjonalne i mogliśmy dodać tag tylko do jednego z wyjść.
-Ale jak mówi powiedzenie, czemu nie obu?
+Ale czemu nie obu?
 
 !!! tip "Wskazówka"
 
@@ -960,14 +998,18 @@ Ale jak mówi powiedzenie, czemu nie obu?
 
     Preferujemy nazywanie wyjść, ponieważ w przeciwnym razie zbyt łatwo jest przez pomyłkę użyć złego indeksu, szczególnie gdy proces produkuje wiele wyjść.
 
-### 4.2. Zaktualizuj wyjścia workflow
+### 4.2. Zaktualizuj wyjścia workflow'a
 
 Teraz, gdy mamy dwa wyjścia z procesu `collectGreetings`, wyjście `collectGreetings.out` zawiera dwa kanały:
 
 - `collectGreetings.out.outfile` zawiera końcowy plik wyjściowy
 - `collectGreetings.out.report` zawiera plik raportu
 
-Musimy odpowiednio zaktualizować wyjścia workflow.
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect-report.svg"
+</figure>
+
+Musimy odpowiednio zaktualizować wyjścia workflow'a.
 
 #### 4.2.1. Zaktualizuj sekcję `publish:`
 
@@ -993,9 +1035,9 @@ W bloku `workflow` wprowadź następującą zmianę w kodzie:
     ```
 
 Jak widać, odnoszenie się do konkretnych wyjść procesu jest teraz trywialne.
-Gdy dodamy jeszcze jeden krok do naszego pipeline w Części 5 (Kontenery), będziemy mogli łatwo odnieść się do `collectGreetings.out.outfile` i przekazać go do nowego procesu (spoiler: nowy proces nazywa się `cowpy`).
+Gdy dodamy jeszcze jeden krok do naszego pipeline'u w Części 5 (Kontenery), będziemy mogli łatwo odnieść się do `collectGreetings.out.outfile` i przekazać go do nowego procesu (spoiler: nowy proces nazywa się `cowpy`).
 
-Ale na razie dokończmy aktualizację wyjść na poziomie workflow.
+Ale na razie dokończmy aktualizację wyjść na poziomie workflow'a.
 
 #### 4.2.2. Zaktualizuj blok `output`
 
@@ -1076,11 +1118,15 @@ Otwórz go, aby sprawdzić, czy workflow poprawnie zaraportował liczbę przetwo
     There were 3 greetings in this batch.
     ```
 
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect-4-way.svg"
+</figure>
+
 Możesz dodać więcej pozdrowień do pliku CSV i przetestować, co się stanie.
 
 ### Podsumowanie
 
-Wiesz już, jak sprawić, aby proces emitował wiele nazwanych wyjść i jak odpowiednio obsługiwać je na poziomie workflow.
+Wiesz już, jak sprawić, aby proces emitował wiele nazwanych wyjść i jak odpowiednio obsługiwać je na poziomie workflow'a.
 
 Ogólnie rzecz biorąc, rozumiesz kluczowe zasady związane z łączeniem procesów na typowe sposoby.
 

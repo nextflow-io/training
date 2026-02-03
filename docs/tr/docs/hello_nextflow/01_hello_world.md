@@ -124,7 +124,7 @@ Sonra çalıştırıp çıktılarını arayacağız.
     }
     ```
 
-Bir Nextflow iş akışı betiği genellikle bir veya daha fazla **process** tanımı ve **workflow**'un kendisini, ayrıca daha sonra tanıtacağımız birkaç isteğe bağlı blok (burada mevcut değil) içerir.
+Bir Nextflow iş akışı betiği genellikle bir veya daha fazla [**process**](https://nextflow.io/docs/latest/process.html) tanımı ve [**workflow**](https://nextflow.io/docs/latest/workflow.html)'un kendisini, ayrıca daha sonra tanıtacağımız birkaç isteğe bağlı blok (burada mevcut değil) içerir.
 
 Her **process**, iş akışındaki karşılık gelen adımın hangi işlem(ler)i gerçekleştirmesi gerektiğini açıklarken, **workflow** çeşitli adımları birbirine bağlayan veri akışı mantığını tanımlar.
 
@@ -795,9 +795,13 @@ Artık `sayHello()` süreci değişken girdi kabul etmeye hazır olduğuna göre
 ### 3.2. Kullanıcı girdisini yakalamak için komut satırı parametresi ayarlayın
 
 Girdiyi doğrudan süreç çağrısını `sayHello('Hello World!')` yaparak sabit kodlayabiliriz.
-Ancak, iş akışımızla gerçek iş yaptığımızda, girdilerini komut satırından kontrol edebilmek isteyeceğiz.
+Ancak, iş akışımızla gerçek iş yaptığımızda, girdilerini komut satırından kontrol edebilmek isteyeceğiz, böylece şöyle bir şey yapabiliriz:
 
-İyi haber: Nextflow'un `params` adlı yerleşik iş akışı parametre sistemi vardır ve bu, CLI parametrelerini bildirmeyi ve kullanmayı kolaylaştırır.
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello_world_input.svg"
+</figure>
+
+Neyse ki, Nextflow'un [yerleşik](https://nextflow.io/docs/latest/config.html#params) iş akışı parametre sistemi `params` vardır ve bu, CLI parametrelerini bildirmeyi ve kullanmayı kolaylaştırır.
 
 Genel söz dizimi, komut satırında bir `--<parametre_adı>` parametresi beklemek için `params.<parametre_adı>` bildirmektir.
 
@@ -854,10 +858,6 @@ Artık selamlamanın yeni sürümüne sahip olduğunuzdan emin olmak için çık
     ```
 
 Voilà!
-
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello_world_input.svg"
-</figure>
 
 Yeni yürütmenin `results` dizinine yayınlanan çıktı dosyasını nasıl üzerine yazdığına dikkat edin.
 Ancak, önceki çalıştırmaların sonuçları `work` altındaki görev dizinlerinde hâlâ korunmaktadır.
@@ -976,13 +976,13 @@ Komut satırı parametresi aracılığıyla çalışma zamanında sağlanan basi
 
 İş akışlarını nasıl başlatacağınızı ve çıktıları nasıl alacağınızı bilmek harikadır, ancak özellikle kendi iş akışlarınızı geliştiriyorsanız, hayatınızı kolaylaştıracak iş akışı yönetiminin birkaç diğer yönü olduğunu çabucak göreceksiniz.
 
-Burada, aynı iş akışını yeniden başlatmanız gerektiğinde `resume` özelliğini nasıl kullanacağınızı, `nextflow log` ile geçmiş yürütmelerin günlüğünü nasıl inceleyeceğinizi ve `nextflow clean` ile eski work dizinlerini nasıl sileceğinizi gösteriyoruz.
+Burada, aynı iş akışını yeniden başlatmanız gerektiğinde [`-resume`](https://nextflow.io/docs/latest/cache-and-resume.html) özelliğini nasıl kullanacağınızı, [`nextflow log`](https://nextflow.io/docs/latest/reference/cli.html#log) ile geçmiş yürütmelerin günlüğünü nasıl inceleyeceğinizi ve [`nextflow clean`](https://nextflow.io/docs/latest/reference/cli.html#clean) ile eski work dizinlerini nasıl sileceğinizi gösteriyoruz.
 
 ### 4.1. `-resume` ile bir iş akışını yeniden başlatın
 
 Bazen, daha önce başlattığınız bir iş akışını, zaten başarıyla tamamlanmış adımları tekrarlamadan yeniden çalıştırmak isteyeceksiniz.
 
-Nextflow'un bunu yapmanızı sağlayan `-resume` adlı bir seçeneği vardır.
+Nextflow'un bunu yapmanızı sağlayan [`-resume`](https://nextflow.io/docs/latest/cache-and-resume.html) adlı bir seçeneği vardır.
 Özellikle, bu modda, zaten tam olarak aynı kod, ayarlar ve girdilerle çalıştırılmış olan tüm süreçler atlanacaktır.
 Bu, Nextflow'un yalnızca son çalıştırmadan bu yana eklediğiniz veya değiştirdiğiniz süreçleri veya yeni ayarlar veya girdiler sağladığınız süreçleri çalıştıracağı anlamına gelir.
 

@@ -14,7 +14,7 @@
 ///
 -->
 
-Hello Nextflow 교육 과정의 첫 번째 부분에서는 매우 기본적인 도메인에 구애받지 않는 Hello World 예제로 주제에 쉽게 접근합니다. 이 예제를 단계적으로 구축하여 기본 Nextflow 로직과 구성 요소의 사용법을 시연합니다.
+Hello Nextflow 교육 과정의 첫 번째 파트에서는 매우 기본적인 도메인에 구애받지 않는 Hello World 예제로 주제에 쉽게 접근합니다. 이 예제를 단계적으로 구축하여 기본 Nextflow 로직과 구성 요소의 사용법을 시연합니다.
 
 ??? info "Hello World 예제란 무엇인가요?"
 
@@ -23,9 +23,9 @@ Hello Nextflow 교육 과정의 첫 번째 부분에서는 매우 기본적인 �
 
 ---
 
-## 0. 워밍업: Hello World 예제 직접 실행
+## 0. 준비 운동: Hello World 예제 직접 실행
 
-Nextflow로 감싸기 전에 터미널에서 직접 실행하는 간단한 명령으로 시작하여 무엇을 하는지 보여드리겠습니다.
+Nextflow로 감싸기 전에, 터미널에서 직접 실행하는 간단한 명령으로 시작하여 무엇을 하는지 보여드리겠습니다.
 
 !!! tip
 
@@ -76,7 +76,7 @@ echo 'Hello World!' > output.txt
 
 이것이 첫 번째 Nextflow 워크플로우로 복제하려는 것입니다.
 
-### 요약
+### 핵심 정리
 
 터미널에서 텍스트를 출력하는 간단한 명령을 실행하는 방법과 선택적으로 출력을 파일에 쓰는 방법을 알게 되었습니다.
 
@@ -90,7 +90,7 @@ Nextflow 워크플로우로 작성하면 어떻게 보이는지 알아보세요.
 
 이전과 동일한 작업('Hello World!' 출력)을 수행하지만 Nextflow로 수행하는 완전히 기능적이지만 최소한의 워크플로우 스크립트 `hello-world.nf`를 제공합니다.
 
-시작하기 위해 워크플로우 스크립트를 열어 구조를 파악해 보겠습니다.
+시작하기 위해, 워크플로우 스크립트를 열어 구조를 파악해 보겠습니다.
 그런 다음 실행하고 출력을 찾아봅니다.
 
 ### 1.1. 코드 검토
@@ -124,7 +124,7 @@ Nextflow 워크플로우로 작성하면 어떻게 보이는지 알아보세요.
     }
     ```
 
-Nextflow 워크플로우 스크립트는 일반적으로 하나 이상의 **process** 정의와 **workflow** 자체, 그리고 나중에 소개할 몇 가지 선택적 블록(여기에는 없음)을 포함합니다.
+Nextflow 워크플로우 스크립트는 일반적으로 하나 이상의 [**process**](https://nextflow.io/docs/latest/process.html) 정의와 [**workflow**](https://nextflow.io/docs/latest/workflow.html) 자체, 그리고 나중에 소개할 몇 가지 선택적 블록(여기에는 없음)을 포함합니다.
 
 각 **process**는 파이프라인의 해당 단계가 수행해야 할 작업을 설명하고, **workflow**는 다양한 단계를 연결하는 데이터 흐름 로직을 설명합니다.
 
@@ -376,7 +376,7 @@ nextflow run hello-world.nf
 각 실행에 대해 완전한 출력 및 로그 파일 세트가 있는 새 하위 디렉토리가 생성된 것을 볼 수 있습니다.
 이것은 동일한 워크플로우를 여러 번 실행해도 이전 실행의 결과를 덮어쓰지 않는다는 것을 보여줍니다.
 
-### 요약
+### 핵심 정리
 
 간단한 Nextflow 스크립트를 해독하고 실행하며 작업 디렉토리에서 출력 및 관련 로그 파일을 찾는 방법을 알게 되었습니다.
 
@@ -407,7 +407,7 @@ nextflow run hello-world.nf
 
 워크플로우 스크립트 파일 `hello-world.nf`에 다음 코드 줄을 추가하십시오:
 
-=== "이후"
+=== "후"
 
     ```groovy title="hello-world.nf" linenums="17" hl_lines="7-8"
     workflow {
@@ -421,7 +421,7 @@ nextflow run hello-world.nf
     }
     ```
 
-=== "이전"
+=== "전"
 
     ```groovy title="hello-world.nf" linenums="17"
     workflow {
@@ -440,7 +440,7 @@ nextflow run hello-world.nf
 
 워크플로우 스크립트 파일 `hello-world.nf`에 다음 코드 줄을 추가하십시오:
 
-=== "이후"
+=== "후"
 
     ```groovy title="hello-world.nf" linenums="17" hl_lines="11-15"
     workflow {
@@ -460,7 +460,7 @@ nextflow run hello-world.nf
     }
     ```
 
-=== "이전"
+=== "전"
 
     ```groovy title="hello-world.nf" linenums="17"
     workflow {
@@ -543,7 +543,7 @@ nextflow run hello-world.nf
 특정 출력의 게시 동작을 수정하는 것은 정말 간단합니다.
 사용자 정의 위치를 설정하려면 `path`를 적절하게 편집하기만 하면 됩니다:
 
-=== "이후"
+=== "후"
 
     ```groovy title="hello-world.nf" linenums="27" hl_lines="3"
     output {
@@ -553,7 +553,7 @@ nextflow run hello-world.nf
     }
     ```
 
-=== "이전"
+=== "전"
 
     ```groovy title="hello-world.nf" linenums="27" hl_lines="3"
     output {
@@ -621,7 +621,7 @@ nextflow run hello-world.nf
 이 부분은 정말 간단합니다.
 관련 워크플로우 수준 출력 정의에 `mode 'copy'`를 추가하기만 하면 됩니다:
 
-=== "이후"
+=== "후"
 
     ```groovy title="hello-world.nf" linenums="27" hl_lines="4"
     output {
@@ -632,7 +632,7 @@ nextflow run hello-world.nf
     }
     ```
 
-=== "이전"
+=== "전"
 
     ```groovy title="hello-world.nf" linenums="27"
     output {
@@ -704,7 +704,7 @@ process sayHello {
 이 코드 패턴은 이전 Nextflow 파이프라인과 프로세스 모듈 전반에 걸쳐 여전히 발견되므로 알아두는 것이 중요합니다.
 그러나 향후 버전의 Nextflow 언어에서는 결국 허용되지 않을 것이므로 새 작업에서는 사용하지 않는 것이 좋습니다.
 
-### 요약
+### 핵심 정리
 
 워크플로우 출력을 더 편리한 위치에 게시하는 방법을 알게 되었습니다.
 
@@ -737,7 +737,7 @@ process sayHello {
 
 프로세스 블록에서 다음 코드 변경을 수행하십시오:
 
-=== "이후"
+=== "후"
 
     ```groovy title="hello-world.nf" linenums="6" hl_lines="3-4"
     process sayHello {
@@ -749,7 +749,7 @@ process sayHello {
         path 'output.txt'
     ```
 
-=== "이전"
+=== "전"
 
     ```groovy title="hello-world.nf" linenums="6"
     process sayHello {
@@ -766,7 +766,7 @@ process sayHello {
 
 프로세스 블록에서 다음 코드 변경을 수행하십시오:
 
-=== "이후"
+=== "후"
 
     ```groovy title="hello-world.nf" linenums="14" hl_lines="3"
     script:
@@ -775,7 +775,7 @@ process sayHello {
     """
     ```
 
-=== "이전"
+=== "전"
 
     ```groovy title="hello-world.nf" linenums="14" hl_lines="3"
     script:
@@ -795,9 +795,13 @@ process sayHello {
 ### 3.2. 사용자 입력을 캡처하기 위한 명령줄 매개변수 설정
 
 `sayHello('Hello World!')`를 프로세스 호출로 만들어 입력을 직접 하드코딩할 수 있습니다.
-그러나 워크플로우로 실제 작업을 수행할 때는 명령줄에서 입력을 제어할 수 있어야 합니다.
+그러나 워크플로우로 실제 작업을 수행할 때는 명령줄에서 입력을 제어할 수 있어야 합니다. 예를 들어 다음과 같이 할 수 있습니다:
 
-좋은 소식: Nextflow에는 CLI 매개변수를 쉽게 선언하고 사용할 수 있는 `params`라는 내장 워크플로우 매개변수 시스템이 있습니다.
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello_world_input.svg"
+</figure>
+
+좋은 소식은 Nextflow에는 CLI 매개변수를 쉽게 선언하고 사용할 수 있는 [`params`](https://nextflow.io/docs/latest/config.html#params)라는 내장 워크플로우 매개변수 시스템이 있다는 것입니다.
 
 일반적인 구문은 `params.<parameter_name>`을 선언하여 Nextflow에게 명령줄에서 `--<parameter_name>` 매개변수를 기대하도록 알리는 것입니다.
 
@@ -806,14 +810,14 @@ process sayHello {
 
 워크플로우 블록에서 다음 코드 변경을 수행하십시오:
 
-=== "이후"
+=== "후"
 
     ```groovy title="hello-world.nf" linenums="23" hl_lines="2"
     // 인사말을 내보냅니다
     sayHello(params.input)
     ```
 
-=== "이전"
+=== "전"
 
     ```groovy title="hello-world.nf" linenums="23" hl_lines="2"
     // 인사말을 내보냅니다
@@ -854,10 +858,6 @@ nextflow run hello-world.nf --input 'Bonjour le monde!'
     ```
 
 Voilà!
-
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello_world_input.svg"
-</figure>
 
 새 실행이 `results` 디렉토리에 게시된 출력 파일을 덮어썼습니다.
 그러나 이전 실행의 결과는 여전히 `work` 아래의 작업 디렉토리에 보존되어 있습니다.
@@ -962,7 +962,7 @@ nextflow run hello-world.nf --input 'Konnichiwa!'
 
     Part 6(Configuration)에서 이에 대해 더 자세히 다룹니다.
 
-### 요약
+### 핵심 정리
 
 명령줄 매개변수를 통해 런타임에 제공되는 간단한 변수 입력을 사용하는 방법과 기본값을 설정, 사용 및 재정의하는 방법을 알게 되었습니다.
 
@@ -976,7 +976,7 @@ nextflow run hello-world.nf --input 'Konnichiwa!'
 
 워크플로우를 시작하고 출력을 검색하는 방법을 아는 것은 좋지만, 특히 자체 워크플로우를 개발하는 경우 워크플로우 관리의 몇 가지 다른 측면이 생활을 더 쉽게 만들어 줄 것입니다.
 
-여기서는 동일한 워크플로우를 다시 실행해야 할 때 `resume` 기능을 사용하는 방법, `nextflow log`로 과거 실행 로그를 검사하는 방법, `nextflow clean`으로 이전 작업 디렉토리를 삭제하는 방법을 보여드립니다.
+여기서는 동일한 워크플로우를 다시 실행해야 할 때 [`-resume`](https://nextflow.io/docs/latest/cache-and-resume.html) 기능을 사용하는 방법, [`nextflow log`](https://nextflow.io/docs/latest/reference/cli.html#log)로 과거 실행 로그를 검사하는 방법, [`nextflow clean`](https://nextflow.io/docs/latest/reference/cli.html#clean)으로 이전 작업 디렉토리를 삭제하는 방법을 보여드립니다.
 
 <!-- Any other cool options we should include? Added log -->
 
@@ -984,7 +984,7 @@ nextflow run hello-world.nf --input 'Konnichiwa!'
 
 때로는 이전에 이미 실행한 파이프라인을 이미 성공적으로 완료된 단계를 다시 수행하지 않고 다시 실행하고 싶을 것입니다.
 
-Nextflow에는 이를 수행할 수 있는 `-resume`이라는 옵션이 있습니다.
+Nextflow에는 이를 수행할 수 있는 [`-resume`](https://nextflow.io/docs/latest/cache-and-resume.html)이라는 옵션이 있습니다.
 구체적으로 이 모드에서는 정확히 동일한 코드, 설정 및 입력으로 이미 실행된 프로세스가 건너뛰어집니다.
 이것은 Nextflow가 마지막 실행 이후 추가하거나 수정한 프로세스 또는 새 설정이나 입력을 제공하는 프로세스만 실행한다는 것을 의미합니다.
 
@@ -1122,7 +1122,7 @@ nextflow clean -before golden_cantor -f
 
     관심 있거나 의존하려는 출력을 저장하는 것은 귀하의 책임입니다! 이것이 `publish` 지시문에 `symlink` 모드보다 `copy` 모드를 선호하는 주된 이유입니다.
 
-### 요약
+### 핵심 정리
 
 특정 디렉토리에 출력을 게시하고, 이미 동일한 방식으로 실행된 단계를 반복하지 않고 파이프라인을 다시 실행하고, `nextflow clean` 명령을 사용하여 이전 작업 디렉토리를 정리하는 방법을 알게 되었습니다.
 

@@ -229,7 +229,7 @@ Auch hier musst du die Code-Syntax nicht auswendig lernen, aber es ist gut zu le
 
 Dies ist der interessanteste Teil: Wie haben wir von der Übernahme eines einzelnen Wertes von der Kommandozeile auf eine CSV-Datei umgestellt, sie geparst und die einzelnen Grüße verarbeitet, die sie enthält?
 
-In Nextflow machen wir das mit einem **channel**: einem Konstrukt, das entwickelt wurde, um Eingaben effizient zu handhaben und sie von einem Schritt zum nächsten in mehrstufigen Workflows zu transportieren, während es eingebaute Parallelität und viele zusätzliche Vorteile bietet.
+In Nextflow machen wir das mit einem [**channel**](https://nextflow.io/docs/latest/channel.html): einem Konstrukt, das entwickelt wurde, um Eingaben effizient zu handhaben und sie von einem Schritt zum nächsten in mehrstufigen Workflows zu transportieren, während es eingebaute Parallelität und viele zusätzliche Vorteile bietet.
 
 Lass es uns aufschlüsseln.
 
@@ -323,11 +323,11 @@ Dies ist eine Möglichkeit sicherzustellen, dass die Ausgabedateinamen nicht kol
 
 Und das ist die einzige Änderung, die wir innerhalb der process-Deklaration vornehmen mussten!
 
-### Zusammenfassung
+### Fazit
 
 Du verstehst auf einem grundlegenden Niveau, wie channels und Operatoren uns ermöglichen, mehrere Eingaben effizient zu verarbeiten.
 
-### Was kommt als Nächstes?
+### Wie geht es weiter?
 
 Entdecke, wie mehrstufige Workflows aufgebaut sind und wie sie funktionieren.
 
@@ -448,7 +448,7 @@ Schauen wir uns den Code an und identifizieren die Schlüsselmuster für mehrstu
     }
 
     /*
-    * Use a text replacement tool to convert the greeting to uppercase
+    * Verwende ein Textersetzungswerkzeug, um die Begrüßung in Großbuchstaben umzuwandeln
     */
     process convertToUpper {
 
@@ -465,7 +465,7 @@ Schauen wir uns den Code an und identifizieren die Schlüsselmuster für mehrstu
     }
 
     /*
-    * Collect uppercase greetings into a single output file
+    * Sammle großgeschriebene Begrüßungen in einer einzigen Ausgabedatei
     */
     process collectGreetings {
 
@@ -618,18 +618,16 @@ Diesmal heißt der Operator `collect` und wird auf den Ausgabe-channel angewende
 
 Der `collect`-Operator wird verwendet, um die Ausgaben von mehreren Aufrufen desselben process zu sammeln und sie in ein einzelnes channel-Element zu verpacken.
 
-Im Kontext dieses Workflows nimmt er die drei großgeschriebenen Grüße im `convertToUpper.out` channel --die drei separate channel-Elemente sind und normalerweise in separaten Aufrufen vom nächsten process behandelt würden-- und verpackt sie in ein einzelnes Element.
-
-In praktischeren Begriffen: Wenn wir `collect()` nicht auf die Ausgabe von `convertToUpper()` anwenden würden, bevor wir sie an `collectGreetings()` füttern, würde Nextflow einfach `collectGreetings()` unabhängig auf jeden Gruß ausführen, was unser Ziel nicht erreichen würde.
-
-<figure class="excalidraw">
---8<-- "docs/en/docs/nextflow_run/img/without-collect-operator.svg"
-</figure>
-
-Im Gegensatz dazu erlaubt uns die Verwendung von `collect()`, alle separaten großgeschriebenen Grüße, die vom zweiten Schritt des Workflows produziert wurden, zu nehmen und sie alle zusammen einem einzigen Aufruf im dritten Schritt der Pipeline zuzuführen.
+Im Kontext dieses Workflows nimmt er die drei großgeschriebenen Grüße im `convertToUpper.out` channel (die drei separate channel-Elemente sind und normalerweise in separaten Aufrufen vom nächsten process behandelt würden) und verpackt sie in ein einzelnes Element.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/nextflow_run/img/with-collect-operator.svg"
+</figure>
+
+Im Gegensatz dazu würde Nextflow, wenn wir `collect()` nicht auf die Ausgabe von `convertToUpper()` anwenden würden, bevor wir sie an `collectGreetings()` füttern, einfach `collectGreetings()` unabhängig auf jeden Gruß ausführen, was unser Ziel nicht erreichen würde.
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/nextflow_run/img/without-collect-operator.svg"
 </figure>
 
 So bekommen wir alle Grüße zurück in dieselbe Datei.
@@ -763,12 +761,12 @@ Es gibt anspruchsvollere Möglichkeiten, veröffentlichte Ausgaben zu organisier
 
     Für eine detaillierte Behandlung des Aufbaus mehrstufiger Workflows, siehe [Hello Nextflow Teil 3: Hello Workflow](../hello_nextflow/03_hello_workflow.md).
 
-### Zusammenfassung
+### Fazit
 
 Du verstehst auf einem grundlegenden Niveau, wie mehrstufige Workflows unter Verwendung von channels und Operatoren aufgebaut werden und wie sie funktionieren.
 Du hast auch gesehen, dass processes mehrere Eingaben nehmen und mehrere Ausgaben produzieren können, und dass diese auf strukturierte Weise veröffentlicht werden können.
 
-### Was kommt als Nächstes?
+### Wie geht es weiter?
 
 Lerne, wie Nextflow Pipelines modularisiert werden können, um Code-Wiederverwendung und Wartbarkeit zu fördern.
 
@@ -783,7 +781,7 @@ Das kann ihre Entwicklung und Wartung effizienter und nachhaltiger machen.
 
 Hier werden wir die häufigste Form der Code-Modularität in Nextflow demonstrieren, nämlich die Verwendung von **Modulen**.
 
-In Nextflow ist ein **Modul** eine einzelne process-Definition, die für sich allein in einer eigenständigen Code-Datei gekapselt ist.
+In Nextflow ist ein [**Modul**](https://nextflow.io/docs/latest/module.html) eine einzelne process-Definition, die für sich allein in einer eigenständigen Code-Datei gekapselt ist.
 Um ein Modul in einem Workflow zu verwenden, fügst du einfach eine einzeilige import-Anweisung zu deiner Workflow-Code-Datei hinzu; dann kannst du den process genauso in den Workflow integrieren, wie du es normalerweise tun würdest.
 Das macht es möglich, process-Definitionen in mehreren Workflows wiederzuverwenden, ohne mehrere Kopien des Codes zu erzeugen.
 
@@ -943,11 +941,11 @@ Nichts davon ist für Nextflow wichtig; was zählt, ist das Job-Script, das gene
 
     Du kannst mehr über die Entwicklung zusammensetzbarer Workflows in der Side Quest über [Workflows of Workflows](https://training.nextflow.io/latest/side_quests/workflows_of_workflows/) erfahren.
 
-### Zusammenfassung
+### Fazit
 
 Du weißt, wie processes in eigenständigen Modulen gespeichert werden können, um Code-Wiederverwendung zu fördern und die Wartbarkeit zu verbessern.
 
-### Was kommt als Nächstes?
+### Wie geht es weiter?
 
 Lerne, Container für die Verwaltung von Software-Abhängigkeiten zu verwenden.
 
@@ -967,7 +965,8 @@ Ein **Container** ist eine leichtgewichtige, eigenständige, ausführbare Einhei
 
 !!! tip "Tipp"
 
-    Wir vermitteln dies mit der Technologie [Docker](https://www.docker.com/get-started/), aber Nextflow unterstützt auch [mehrere andere Container-Technologien](https://www.nextflow.io/docs/latest/container.html#).
+    Wir vermitteln dies mit der Technologie [Docker](https://www.docker.com/get-started/), aber Nextflow unterstützt auch mehrere andere Container-Technologien.
+    Du kannst mehr über Nextflow-Unterstützung für Container [hier](https://nextflow.io/docs/latest/container.html) erfahren.
 
 ### 4.1. Einen Container direkt verwenden
 
@@ -1148,7 +1147,7 @@ Wir müssen nur einen Container für jeden process angeben.
 Um zu demonstrieren, wie das funktioniert, haben wir eine weitere Version unseres Workflows erstellt, die `cowpy` auf der Datei mit den gesammelten Grüßen ausführt, die im dritten Schritt produziert wurde.
 
 <figure class="excalidraw">
---8<-- "docs/en/docs/nextflow_run/img/hello-pipeline-cowpy.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-cowpy.svg"
 </figure>
 
 Das sollte eine Datei ausgeben, die die ASCII-Kunst mit den drei Grüßen in der Sprechblase enthält.
@@ -1239,7 +1238,7 @@ Der `cowpy` process, der den cowpy-Befehl zum Generieren von ASCII-Kunst umhüll
     ```groovy title="modules/cowpy.nf" linenums="1"
     #!/usr/bin/env nextflow
 
-    // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
+    // ASCII-Kunst mit cowpy generieren (https://github.com/jeffbuttars/cowpy)
     process cowpy {
 
         container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
@@ -1404,13 +1403,244 @@ In diesem Verzeichnis findest du die `.command.run`-Datei, die alle Befehle enth
         done < <(ps -e -o pid= -o ppid=)
 
         kill_all() {
-    ...
+            [[ $1 != $$ ]] && kill $1 2>/dev/null || true
+            for i in ${children[$1]:=}; do kill_all $i; done
+        }
+
+        kill_all $1
+    }
+
+    nxf_mktemp() {
+        local base=${1:-/tmp}
+        mkdir -p "$base"
+        if [[ $(uname) = Darwin ]]; then mktemp -d $base/nxf.XXXXXXXXXX
+        else TMPDIR="$base" mktemp -d -t nxf.XXXXXXXXXX
+        fi
+    }
+
+    nxf_fs_copy() {
+      local source=$1
+      local target=$2
+      local basedir=$(dirname $1)
+      mkdir -p $target/$basedir
+      cp -fRL $source $target/$basedir
+    }
+
+    nxf_fs_move() {
+      local source=$1
+      local target=$2
+      local basedir=$(dirname $1)
+      mkdir -p $target/$basedir
+      mv -f $source $target/$basedir
+    }
+
+    nxf_fs_rsync() {
+      rsync -rRl $1 $2
+    }
+
+    nxf_fs_rclone() {
+      rclone copyto $1 $2/$1
+    }
+
+    nxf_fs_fcp() {
+      fcp $1 $2/$1
+    }
+
+    on_exit() {
+        local last_err=$?
+        local exit_status=${nxf_main_ret:=0}
+        [[ ${exit_status} -eq 0 && ${nxf_unstage_ret:=0} -ne 0 ]] && exit_status=${nxf_unstage_ret:=0}
+        [[ ${exit_status} -eq 0 && ${last_err} -ne 0 ]] && exit_status=${last_err}
+        printf -- $exit_status > /workspaces/training/nextflow-run/work/7f/caf71890cce1667c094d880f4b6dcc/.exitcode
+        set +u
+        docker rm $NXF_BOXID &>/dev/null || true
+        exit $exit_status
+    }
+
+    on_term() {
+        set +e
+        docker stop $NXF_BOXID
+    }
+
+    nxf_launch() {
+        docker run -i --cpu-shares 1024 -e "NXF_TASK_WORKDIR" -v /workspaces/training/nextflow-run/work:/workspaces/training/nextflow-run/work -w "$NXF_TASK_WORKDIR" --name $NXF_BOXID community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273 /bin/bash -ue /workspaces/training/nextflow-run/work/7f/caf71890cce1667c094d880f4b6dcc/.command.sh
+    }
+
+    nxf_stage() {
+        true
+        # Eingabedateien staging
+        rm -f COLLECTED-batch-output.txt
+        ln -s /workspaces/training/nextflow-run/work/7f/f435e3f2cf95979b5f3d7647ae6696/COLLECTED-batch-output.txt COLLECTED-batch-output.txt
+    }
+
+    nxf_unstage_outputs() {
+        true
+    }
+
+    nxf_unstage_controls() {
+        true
+    }
+
+    nxf_unstage() {
+        if [[ ${nxf_main_ret:=0} == 0 ]]; then
+            (set -e -o pipefail; (nxf_unstage_outputs | tee -a .command.out) 3>&1 1>&2 2>&3 | tee -a .command.err)
+            nxf_unstage_ret=$?
+        fi
+        nxf_unstage_controls
+    }
+
+    nxf_main() {
+        trap on_exit EXIT
+        trap on_term TERM INT USR2
+        trap '' USR1
+
+        [[ "${NXF_CHDIR:-}" ]] && cd "$NXF_CHDIR"
+        export NXF_BOXID="nxf-$(dd bs=18 count=1 if=/dev/urandom 2>/dev/null | base64 | tr +/ 0A | tr -d '\r\n')"
+        NXF_SCRATCH=''
+        [[ $NXF_DEBUG > 0 ]] && nxf_env
+        touch /workspaces/training/nextflow-run/work/7f/caf71890cce1667c094d880f4b6dcc/.command.begin
+        set +u
+        set -u
+        [[ $NXF_SCRATCH ]] && cd $NXF_SCRATCH
+        export NXF_TASK_WORKDIR="$PWD"
+        nxf_stage
+
+        set +e
+        (set -o pipefail; (nxf_launch | tee .command.out) 3>&1 1>&2 2>&3 | tee .command.err) &
+        pid=$!
+        wait $pid || nxf_main_ret=$?
+        nxf_unstage
+    }
+
+    $NXF_ENTRY
     ```
 
-### Zusammenfassung
+Wenn du in dieser Datei nach `nxf_launch` suchst, solltest du so etwas sehen:
 
-Du weißt, wie man Containern für die Verwaltung von Software-Abhängigkeiten in Nextflow Pipelines verwendet, und wie man sie sowohl direkt als auch innerhalb eines Workflows ausführt.
+```console
+nxf_launch() {
+    docker run -i --cpu-shares 1024 -e "NXF_TASK_WORKDIR" -v /workspaces/training/nextflow-run/work:/workspaces/training/nextflow-run/work -w "$NXF_TASK_WORKDIR" --name $NXF_BOXID community.wave.seqera.io/library/pip_cowpy:131d6a1b707a8e65 /bin/bash -ue /workspaces/training/nextflow-run/work/7f/caf7189fca6c56ba627b75749edcb3/.command.sh
+}
+```
 
-### Was kommt als Nächstes?
+Dieser launch-Befehl zeigt, dass Nextflow einen sehr ähnlichen `docker run`-Befehl verwendet, um den process-Aufruf zu starten, wie wir es getan haben, als wir es manuell ausgeführt haben.
+Er mountet auch das entsprechende work-Unterverzeichnis in den Container, setzt das Arbeitsverzeichnis innerhalb des Containers entsprechend und führt unser templated Bash-Script in der `.command.sh`-Datei aus.
 
-Lerne, wie du die Konfiguration deiner Workflow-Ausführungen anpassen kannst, um verschiedene Rechen-Plattformen zu unterstützen und die Reproduzierbarkeit deiner Analysen zu verbessern.
+Dies bestätigt, dass all die harte Arbeit, die wir im vorherigen Abschnitt manuell machen mussten, jetzt von Nextflow für uns erledigt wird!
+
+### Fazit
+
+Du verstehst, welche Rolle Container bei der Verwaltung von Software-Tool-Versionen und der Sicherstellung der Reproduzierbarkeit spielen.
+
+Allgemeiner gesagt hast du ein grundlegendes Verständnis davon, was die Kernkomponenten realer Nextflow Pipelines sind und wie sie organisiert sind.
+Du kennst die Grundlagen, wie Nextflow mehrere Eingaben effizient verarbeiten kann, Workflows ausführen kann, die aus mehreren miteinander verbundenen Schritten bestehen, modulare Code-Komponenten nutzen kann und Container für größere Reproduzierbarkeit und Portabilität verwenden kann.
+
+### Wie geht es weiter?
+
+Mach eine weitere Pause! Das war ein großer Haufen Informationen darüber, wie Nextflow Pipelines funktionieren.
+
+Im letzten Abschnitt dieses Trainings werden wir tiefer in das Thema Konfiguration eintauchen.
+Du wirst lernen, wie du die Ausführung deiner Pipeline so konfigurierst, dass sie zu deiner Infrastruktur passt, sowie wie du die Konfiguration von Eingaben und Parametern verwaltest.
+
+---
+
+## Quiz
+
+<quiz>
+Warum erstellt Nextflow für jeden process-Aufruf ein separates task-Verzeichnis?
+- [ ] Um die Ausführungsgeschwindigkeit zu verbessern
+- [ ] Um die Speichernutzung zu reduzieren
+- [x] Um Ausführungen zu isolieren und Kollisionen zwischen Ausgaben zu vermeiden
+- [ ] Um parallele Dateikompression zu ermöglichen
+
+Mehr erfahren: [1.3. Die ursprünglichen Ausgaben und Logs finden](#13-die-ursprunglichen-ausgaben-und-logs-finden)
+</quiz>
+
+<quiz>
+Was bewirkt die Option `-ansi-log false` beim Ausführen eines Workflows?
+- [ ] Deaktiviert alle Konsolenausgaben
+- [x] Entfernt Farbe aus der Ausgabe
+- [x] Zeigt alle task-Verzeichnispfade anstatt sie auf einer Zeile zu komprimieren
+- [ ] Aktiviert den ausführlichen Debug-Modus
+
+Mehr erfahren: [1.3.2. Das Terminal mehr Details anzeigen lassen](#132-das-terminal-mehr-details-anzeigen-lassen)
+
+Du kannst auch eine der folgenden Umgebungsvariablen verwenden, wenn du diesen Stil bevorzugst:
+
+```bash
+export NXF_ANSI_LOG=0
+# oder
+export NO_COLOR=1
+```
+
+</quiz>
+
+<quiz>
+Was macht im Code `#!groovy channel.fromPath(params.input).splitCsv().map { line -> line[0] }` der Teil `#!groovy .map { line -> line[0] }`?
+- [ ] Filtert leere Zeilen heraus
+- [ ] Sortiert die Zeilen alphabetisch
+- [x] Extrahiert die erste Spalte aus jeder CSV-Zeile
+- [ ] Zählt die Anzahl der Zeilen
+
+Mehr erfahren: [1.4.1. Die Eingabedaten aus der CSV laden](#141-die-eingabedaten-aus-der-csv-laden)
+</quiz>
+
+<quiz>
+Warum ist es wichtig, den Eingabewert in Ausgabedateinamen aufzunehmen (z.B. `#!groovy "${greeting}-output.txt"`)?
+- [ ] Um die Verarbeitungsgeschwindigkeit zu verbessern
+- [ ] Um die Resume-Funktionalität zu ermöglichen
+- [x] Um zu verhindern, dass sich Ausgabedateien beim Verarbeiten mehrerer Eingaben gegenseitig überschreiben
+- [ ] Um Dateien einfacher komprimieren zu können
+
+Mehr erfahren: [1.4.3. Wie die Ausgaben benannt werden](#143-wie-die-ausgaben-benannt-werden)
+</quiz>
+
+<quiz>
+Was ist der Zweck der `include`-Anweisung in einem modularisierten Workflow?
+- [ ] Process-Code in die Workflow-Datei zu kopieren
+- [x] Eine process-Definition aus einer externen Modul-Datei zu importieren
+- [ ] Konfigurationseinstellungen einzubinden
+- [ ] Dokumentationskommentare hinzuzufügen
+
+Mehr erfahren: [3. Modularisierte Pipelines ausführen](#3-modularisierte-pipelines-ausfuhren)
+</quiz>
+
+<quiz>
+Was passiert, wenn du einen modularisierten Workflow mit `-resume` ausführst?
+- [ ] Caching wird für modulare processes deaktiviert
+- [ ] Alle Aufgaben müssen neu ausgeführt werden
+- [x] Caching funktioniert normal basierend auf den generierten Job-Scripts
+- [ ] Nur die Haupt-Workflow-Datei wird gecacht
+
+Mehr erfahren: [3.2. Den Workflow ausführen](#32-den-workflow-ausfuhren)
+</quiz>
+
+<quiz>
+Was gibt die `container`-Direktive in einer process-Definition an?
+- [ ] Das Arbeitsverzeichnis für den process
+- [ ] Die maximale Speicherzuweisung
+- [x] Die Container-Image-URI, die für die Ausführung des process verwendet werden soll
+- [ ] Das Ausgabedateiformat
+
+Mehr erfahren: [4.2. Einen Container in einem Workflow verwenden](#42-einen-container-in-einem-workflow-verwenden)
+</quiz>
+
+<quiz>
+Was enthält die Funktion `nxf_launch` in der `.command.run`-Datei?
+- [ ] Die Nextflow-Versionsinformationen
+- [ ] Die Workflow-Parameter
+- [x] Den `docker run`-Befehl mit Volume-Mounts und Container-Einstellungen
+- [ ] Die process-Eingabe-Deklarationen
+
+Mehr erfahren: [4.2.4. Untersuchen, wie Nextflow die containerisierte Aufgabe gestartet hat](#424-untersuchen-wie-nextflow-die-containerisierte-aufgabe-gestartet-hat)
+</quiz>
+
+<quiz>
+Was handhabt Nextflow automatisch beim Ausführen eines containerisierten process? (Wähle alle zutreffenden aus)
+- [x] Das Container-Image bei Bedarf pullen
+- [x] Das work-Verzeichnis in den Container mounten
+- [x] Das process-Script innerhalb des Containers ausführen
+- [x] Die Container-Instanz nach der Ausführung aufräumen
+
+Mehr erfahren: [4. Containerisierte Software verwenden](#4-containerisierte-software-verwenden)
+</quiz>

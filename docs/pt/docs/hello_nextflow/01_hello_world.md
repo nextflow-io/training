@@ -124,7 +124,7 @@ Você encontrará o script `hello-world.nf` no seu diretório atual, que deve se
     }
     ```
 
-Um script de fluxo de trabalho Nextflow normalmente inclui uma ou mais definições de **processo** e o **fluxo de trabalho** em si, além de alguns blocos opcionais (não presentes aqui) que apresentaremos mais tarde.
+Um script de fluxo de trabalho Nextflow normalmente inclui uma ou mais definições de [**processo**](https://nextflow.io/docs/latest/process.html) e o [**fluxo de trabalho**](https://nextflow.io/docs/latest/workflow.html) em si, além de alguns blocos opcionais (não presentes aqui) que apresentaremos mais tarde.
 
 Cada **processo** descreve quais operações a etapa correspondente no pipeline deve realizar, enquanto o **fluxo de trabalho** descreve a lógica de fluxo de dados que conecta as várias etapas.
 
@@ -795,9 +795,13 @@ Agora que o processo `sayHello()` está pronto para aceitar uma entrada variáve
 ### 3.2. Configure um parâmetro de linha de comando para capturar a entrada do usuário
 
 Poderíamos simplesmente codificar uma entrada diretamente fazendo a chamada do processo `sayHello('Hello World!')`.
-No entanto, quando estivermos fazendo trabalho real com nosso fluxo de trabalho, vamos querer ser capazes de controlar suas entradas a partir da linha de comando.
+No entanto, quando estivermos fazendo trabalho real com nosso fluxo de trabalho, vamos querer ser capazes de controlar suas entradas a partir da linha de comando, para que possamos fazer algo assim:
 
-Boa notícia: o Nextflow tem um sistema de parâmetros de fluxo de trabalho integrado chamado `params`, que facilita declarar e usar parâmetros CLI.
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello_world_input.svg"
+</figure>
+
+Felizmente, o Nextflow tem um sistema de parâmetros de fluxo de trabalho integrado chamado [`params`](https://nextflow.io/docs/latest/config.html#params), que facilita declarar e usar parâmetros CLI.
 
 A sintaxe geral é declarar `params.<nome_do_parâmetro>` para dizer ao Nextflow para esperar um parâmetro `--<nome_do_parâmetro>` na linha de comando.
 
@@ -854,10 +858,6 @@ Certifique-se de abrir o arquivo de saída para verificar se você agora tem a n
     ```
 
 Voilà!
-
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello_world_input.svg"
-</figure>
 
 Note como a nova execução sobrescreveu o arquivo de saída publicado no diretório `results`.
 No entanto, os resultados das execuções anteriores ainda estão preservados nos diretórios de tarefa em `work`.
@@ -976,7 +976,7 @@ Aprenda como gerenciar execuções de forma mais conveniente.
 
 Saber como lançar fluxos de trabalho e recuperar saídas é ótimo, mas você rapidamente descobrirá que há alguns outros aspectos do gerenciamento de fluxo de trabalho que tornarão sua vida mais fácil, especialmente se você estiver desenvolvendo seus próprios fluxos de trabalho.
 
-Aqui mostramos como usar o recurso `resume` para quando você precisar relançar o mesmo fluxo de trabalho, como inspecionar o log de execuções passadas com `nextflow log`, e como excluir diretórios work mais antigos com `nextflow clean`.
+Aqui mostramos como usar o recurso [`-resume`](https://nextflow.io/docs/latest/cache-and-resume.html) para quando você precisar relançar o mesmo fluxo de trabalho, como inspecionar o log de execuções passadas com [`nextflow log`](https://nextflow.io/docs/latest/reference/cli.html#log), e como excluir diretórios work mais antigos com [`nextflow clean`](https://nextflow.io/docs/latest/reference/cli.html#clean).
 
 <!-- Any other cool options we should include? Added log -->
 
@@ -984,7 +984,7 @@ Aqui mostramos como usar o recurso `resume` para quando você precisar relançar
 
 Às vezes, você vai querer executar novamente um pipeline que já lançou anteriormente sem refazer nenhuma etapa que já foi concluída com sucesso.
 
-O Nextflow tem uma opção chamada `-resume` que permite fazer isso.
+O Nextflow tem uma opção chamada [`-resume`](https://nextflow.io/docs/latest/cache-and-resume.html) que permite fazer isso.
 Especificamente, neste modo, quaisquer processos que já foram executados com exatamente o mesmo código, configurações e entradas serão ignorados.
 Isso significa que o Nextflow só executará processos que você adicionou ou modificou desde a última execução, ou aos quais você está fornecendo novas configurações ou entradas.
 
