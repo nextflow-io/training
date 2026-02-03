@@ -450,6 +450,7 @@ h3 .enumerate-headings-plugin {
 }
 
 /* Language selector dropdown - allow dynamic height */
-.md-select__inner {
+.md-select:focus-within .md-select__inner,
+.md-select:hover .md-select__inner {
   max-height: min(80vh, 30rem) !important;
 }
