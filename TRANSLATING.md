@@ -387,7 +387,6 @@ docs/
 
 _scripts/
 ├── translate.py            # Translation CLI
-├── translation_fixer.py    # Post-processing fixes
 ├── general-llm-prompt.md   # Shared translation rules
 └── docs.py                 # Build/serve CLI
 ```

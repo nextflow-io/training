@@ -14,31 +14,29 @@
 LLM-powered translation CLI for Nextflow training docs.
 
 Usage:
-    uv run translate.py list-missing pt
-    uv run translate.py translate docs/en/docs/index.md --lang pt
+    uv run translate.py sync pt --dry-run
     uv run translate.py sync pt
+    uv run translate.py translate docs/en/docs/index.md --lang pt
 """
 
 from __future__ import annotations
 
 import json
 import os
+import re
 import secrets
 import subprocess
 import sys
 from dataclasses import dataclass
 from functools import lru_cache
 from pathlib import Path
-from typing import TYPE_CHECKING
+from typing import NamedTuple
 
 import anthropic
 import git
 import typer
 import yaml
 from rich.console import Console
-
-if TYPE_CHECKING:
-    from github import Github
 
 # =============================================================================
 # Configuration
@@ -67,6 +65,10 @@ class TranslationError(Exception):
 
 class ConfigError(TranslationError):
     """Configuration or setup error."""
+
+
+class StructureMismatchError(TranslationError):
+    """Translation structure doesn't match source."""
 
 
 # =============================================================================
@@ -203,7 +205,7 @@ def build_translation_prompt(
 
     parts.extend(
         [
-            f"## Task",
+            "## Task",
             f"Translate to {lang} ({lang_name}).",
             f"Original content:\n%%%\n{en_content}%%%",
         ]
@@ -270,16 +272,6 @@ def get_orphaned_files(lang: str) -> list[Path]:
     return [p for p in lang_docs.rglob("*.md") if not lang_to_en_path(p, lang).exists()]
 
 
-def get_changed_files(before_sha: str, after_sha: str) -> list[str]:
-    """Get files changed between two commits."""
-    repo = git.Repo(REPO_ROOT)
-    try:
-        diff = repo.git.diff("--name-only", before_sha, after_sha)
-        return diff.split("\n") if diff else []
-    except git.GitCommandError:
-        return []
-
-
 # =============================================================================
 # Translation API
 # =============================================================================
@@ -326,19 +318,295 @@ def translate_file(tf: TranslationFile, console: Console) -> None:
 
 
 # =============================================================================
-# Post-processing
+# Post-processing (fix common LLM mistakes)
 # =============================================================================
+
+# Regex patterns
+HEADER_RE = re.compile(r"^(#{1,6})\s+(.+?)(\s*\{#[^}]+\})?\s*$")
+MARKDOWN_LINK_RE = re.compile(
+    r"(?<!!)"  # not preceded by ! (not an image)
+    r"\[(?P<text>[^\]]*)\]"
+    r"\((?P<url>[^)\s]+)"
+    r'(?:\s+"(?P<title>[^"]*)")?'
+    r"\)"
+    r"(?:\{(?P<attrs>[^}]*)\})?"
+)
+HTML_LINK_RE = re.compile(r"<a\s+([^>]*)>(.*?)</a>", re.DOTALL)
+CODE_FENCE_RE = re.compile(r"^(`{3,4})([\w-]*)")
+HASH_COMMENT_RE = re.compile(r"^(.*?)((?:\s+#|^#)\s.*)$")
+SLASH_COMMENT_RE = re.compile(r"^(.*?)((?:\s+//|^//)\s.*)$")
+BLOCK_COMMENT_START = re.compile(r"^\s*/\*")
+BLOCK_COMMENT_END = re.compile(r"\*/\s*$")
+
+
+class Header(NamedTuple):
+    line_no: int
+    level: str
+    title: str
+    anchor: str
+
+
+class Link(NamedTuple):
+    line_no: int
+    start: int
+    end: int
+    text: str
+    url: str
+    title: str | None
+    attrs: str | None
+
+
+class HtmlLink(NamedTuple):
+    line_no: int
+    start: int
+    end: int
+    attrs: str
+    text: str
+
+
+@dataclass
+class CodeBlock:
+    start_line: int
+    end_line: int
+    lang: str
+    lines: list[str]
+
+
+def _in_code_block(lines: list[str]):
+    """Generator that yields (line_no, line, in_code) for each line."""
+    in_code = False
+    fence = ""
+    for i, line in enumerate(lines):
+        stripped = line.lstrip()
+        if not in_code:
+            if m := CODE_FENCE_RE.match(stripped):
+                in_code = True
+                fence = m.group(1)
+                yield i, line, True
+                continue
+        else:
+            if stripped.startswith(fence) and stripped.strip() == fence:
+                in_code = False
+                fence = ""
+                yield i, line, True
+                continue
+        yield i, line, in_code
+
+
+def extract_headers(lines: list[str]) -> list[Header]:
+    """Extract headers, skipping those inside code blocks."""
+    headers = []
+    for i, line, in_code in _in_code_block(lines):
+        if in_code:
+            continue
+        if m := HEADER_RE.match(line):
+            headers.append(Header(i, m.group(1), m.group(2).strip(), m.group(3) or ""))
+    return headers
+
+
+def extract_links(lines: list[str]) -> list[Link]:
+    """Extract markdown links, skipping those inside code blocks."""
+    links = []
+    for i, line, in_code in _in_code_block(lines):
+        if in_code:
+            continue
+        for m in MARKDOWN_LINK_RE.finditer(line):
+            links.append(
+                Link(
+                    i,
+                    m.start(),
+                    m.end(),
+                    m.group("text"),
+                    m.group("url"),
+                    m.group("title"),
+                    m.group("attrs"),
+                )
+            )
+    return links
+
+
+def extract_html_links(lines: list[str]) -> list[HtmlLink]:
+    """Extract HTML <a> links, skipping those inside code blocks."""
+    links = []
+    for i, line, in_code in _in_code_block(lines):
+        if in_code:
+            continue
+        for m in HTML_LINK_RE.finditer(line):
+            links.append(HtmlLink(i, m.start(), m.end(), m.group(1), m.group(2)))
+    return links
+
+
+def extract_code_blocks(lines: list[str]) -> list[CodeBlock]:
+    """Extract code blocks with their content."""
+    blocks = []
+    in_code = False
+    fence = ""
+    start = 0
+    lang = ""
+    block_lines: list[str] = []
+
+    for i, line in enumerate(lines):
+        stripped = line.lstrip()
+        if not in_code:
+            if m := CODE_FENCE_RE.match(stripped):
+                in_code, fence, lang, start = True, m.group(1), m.group(2), i
+                block_lines = [line]
+        else:
+            block_lines.append(line)
+            if stripped.startswith(fence) and stripped.strip() == fence:
+                blocks.append(CodeBlock(start, i, lang, block_lines))
+                in_code, fence, block_lines = False, "", []
+    return blocks
+
+
+def fix_headers(trans: list[str], source_headers: list[Header]) -> list[str]:
+    """Replace header anchors with those from source."""
+    trans_headers = extract_headers(trans)
+    if len(trans_headers) != len(source_headers):
+        raise StructureMismatchError(
+            f"Header count: {len(trans_headers)} vs {len(source_headers)}"
+        )
+
+    result = trans.copy()
+    for th, sh in zip(trans_headers, source_headers):
+        if th.level != sh.level:
+            raise StructureMismatchError(f"Header level mismatch at line {th.line_no}")
+        result[th.line_no] = f"{th.level} {th.title}{sh.anchor}"
+    return result
+
+
+def fix_links(trans: list[str], source_links: list[Link]) -> list[str]:
+    """Replace link URLs/attrs with source, keeping translated text."""
+    trans_links = extract_links(trans)
+    if len(trans_links) != len(source_links):
+        raise StructureMismatchError(
+            f"Link count: {len(trans_links)} vs {len(source_links)}"
+        )
+
+    result = trans.copy()
+    for tl, sl in reversed(list(zip(trans_links, source_links))):
+        new = f"[{tl.text}]({sl.url}"
+        if tl.title:
+            new += f' "{tl.title}"'
+        new += ")"
+        if sl.attrs:
+            new += f"{{{sl.attrs}}}"
+        result[tl.line_no] = (
+            result[tl.line_no][: tl.start] + new + result[tl.line_no][tl.end :]
+        )
+    return result
+
+
+def fix_html_links(trans: list[str], source_links: list[HtmlLink]) -> list[str]:
+    """Replace HTML link attributes with source, keeping translated text."""
+    trans_links = extract_html_links(trans)
+    if len(trans_links) != len(source_links):
+        raise StructureMismatchError(
+            f"HTML link count: {len(trans_links)} vs {len(source_links)}"
+        )
+
+    result = trans.copy()
+    for tl, sl in reversed(list(zip(trans_links, source_links))):
+        new = f"<a {sl.attrs}>{tl.text}</a>"
+        result[tl.line_no] = (
+            result[tl.line_no][: tl.start] + new + result[tl.line_no][tl.end :]
+        )
+    return result
+
+
+def fix_code_block(trans_block: CodeBlock, src_block: CodeBlock) -> list[str]:
+    """Fix a code block: use source code, keep translated comments."""
+    if trans_block.lang != src_block.lang:
+        raise StructureMismatchError(
+            f"Code lang mismatch at line {trans_block.start_line}"
+        )
+    if len(trans_block.lines) != len(src_block.lines):
+        raise StructureMismatchError(
+            f"Code line count mismatch at line {trans_block.start_line}"
+        )
+
+    lang = trans_block.lang.lower()
+    if lang == "mermaid":
+        return src_block.lines.copy()
+
+    hash_langs = {"python", "py", "sh", "bash", "dockerfile", "yaml", "yml", "toml"}
+    slash_langs = {"console", "json"}
+    mixed_langs = {"nextflow", "groovy", "nf", "java", "kotlin"}
+
+    result = []
+    in_block_comment = False
+
+    for trans_line, src_line in zip(trans_block.lines, src_block.lines):
+        if trans_line.lstrip().startswith("```"):
+            result.append(src_line)
+            continue
+
+        if lang in mixed_langs:
+            if BLOCK_COMMENT_START.match(trans_line):
+                in_block_comment = True
+                result.append(trans_line)
+                continue
+            if in_block_comment:
+                if BLOCK_COMMENT_END.search(trans_line):
+                    in_block_comment = False
+                result.append(trans_line)
+                continue
+
+        trans_comment = None
+        if lang in hash_langs or lang in mixed_langs:
+            if m := HASH_COMMENT_RE.match(trans_line):
+                trans_comment = m.group(2)
+        elif lang in slash_langs:
+            if m := SLASH_COMMENT_RE.match(trans_line):
+                trans_comment = m.group(2)
+
+        if trans_comment:
+            src_comment = None
+            if lang in hash_langs or lang in mixed_langs:
+                if m := HASH_COMMENT_RE.match(src_line):
+                    src_comment = m.group(2)
+            elif lang in slash_langs:
+                if m := SLASH_COMMENT_RE.match(src_line):
+                    src_comment = m.group(2)
+            result.append(
+                src_line.replace(src_comment, trans_comment)
+                if src_comment
+                else src_line
+            )
+        else:
+            result.append(src_line)
+
+    return result
+
+
+def fix_code_blocks(trans: list[str], source_blocks: list[CodeBlock]) -> list[str]:
+    """Fix all code blocks in translation."""
+    trans_blocks = extract_code_blocks(trans)
+    if len(trans_blocks) != len(source_blocks):
+        raise StructureMismatchError(
+            f"Code block count: {len(trans_blocks)} vs {len(source_blocks)}"
+        )
+
+    result = trans.copy()
+    for tb, sb in zip(trans_blocks, source_blocks):
+        fixed = fix_code_block(tb, sb)
+        for i, line in enumerate(fixed):
+            result[tb.start_line + i] = line
+    return result
+
+
+def fix_translation(translation: list[str], source: list[str]) -> list[str]:
+    """Fix a translation against its English source."""
+    result = translation.copy()
+    result = fix_headers(result, extract_headers(source))
+    result = fix_links(result, extract_links(source))
+    result = fix_html_links(result, extract_html_links(source))
+    result = fix_code_blocks(result, extract_code_blocks(source))
+    return result
 
 
 def post_process_file(lang_path: Path, lang: str) -> bool:
-    """
-    Post-process a translation to fix common LLM mistakes.
-
-    Fixes: links, header anchors, code blocks.
-    Returns True if changes were made.
-    """
-    from translation_fixer import StructureMismatchError, fix_translation
-
+    """Post-process a translation to fix common LLM mistakes."""
     en_path = lang_to_en_path(lang_path, lang)
     if not en_path.exists():
         return False
@@ -347,12 +615,8 @@ def post_process_file(lang_path: Path, lang: str) -> bool:
     en_content = en_path.read_text(encoding="utf-8")
 
     try:
-        fixed = fix_translation(
-            translation=original.splitlines(),
-            source=en_content.splitlines(),
-        )
+        fixed = fix_translation(original.splitlines(), en_content.splitlines())
     except StructureMismatchError:
-        # Structure mismatch is not fatal - just skip post-processing
         return False
 
     fixed_text = "\n".join(fixed) + "\n"
@@ -377,9 +641,8 @@ def post_process_language(lang: str, console: Console) -> int:
 
 
 def get_languages_needing_sync(language: str | None = None) -> list[str]:
-    """Get languages that have work to do (missing, outdated, or orphaned files)."""
+    """Get languages that have work to do."""
     all_langs = get_translation_languages()
-
     if language:
         if language not in all_langs:
             raise ConfigError(f"Unknown language: {language}. Available: {all_langs}")
@@ -416,11 +679,7 @@ def translate(
         raise typer.Exit("Cannot translate to English (source language)")
 
     en_path = resolve_path(path)
-    tf = TranslationFile(
-        en_path=en_path,
-        lang_path=en_to_lang_path(en_path, lang),
-        language=lang,
-    )
+    tf = TranslationFile(en_path, en_to_lang_path(en_path, lang), lang)
 
     translate_file(tf, console)
     post_process_file(tf.lang_path, lang)
@@ -436,59 +695,50 @@ def sync(
     ),
 ):
     """Sync translations: update outdated, add missing, remove orphaned."""
-    orphaned_files = get_orphaned_files(lang)
-    outdated_files = get_outdated_files(lang)
-    missing_files = get_missing_files(lang)
+    orphaned = get_orphaned_files(lang)
+    outdated = get_outdated_files(lang)
+    missing = get_missing_files(lang)
 
     if include:
-        outdated_files = [tf for tf in outdated_files if include in str(tf.en_path)]
-        missing_files = [tf for tf in missing_files if include in str(tf.en_path)]
+        outdated = [tf for tf in outdated if include in str(tf.en_path)]
+        missing = [tf for tf in missing if include in str(tf.en_path)]
 
     if dry_run:
-        if orphaned_files:
-            console.print(f"[red]Would remove {len(orphaned_files)} orphaned:[/red]")
-            for p in orphaned_files:
+        if orphaned:
+            console.print(f"[red]Would remove {len(orphaned)} orphaned:[/red]")
+            for p in orphaned:
                 console.print(f"  {p.relative_to(REPO_ROOT)}")
-        if outdated_files:
-            console.print(
-                f"[yellow]Would update {len(outdated_files)} outdated:[/yellow]"
-            )
-            for tf in outdated_files:
+        if outdated:
+            console.print(f"[yellow]Would update {len(outdated)} outdated:[/yellow]")
+            for tf in outdated:
                 console.print(f"  {tf.relative_path}")
-        if missing_files:
-            console.print(f"[blue]Would add {len(missing_files)} missing:[/blue]")
-            for tf in missing_files:
+        if missing:
+            console.print(f"[blue]Would add {len(missing)} missing:[/blue]")
+            for tf in missing:
                 console.print(f"  {tf.relative_path}")
-        if not (orphaned_files or outdated_files or missing_files):
+        if not (orphaned or outdated or missing):
             console.print(f"[green]Nothing to do for {lang}[/green]")
         return
 
     check_api_key()
 
-    # Remove orphaned
-    if orphaned_files:
-        console.print(f"[bold]Removing {len(orphaned_files)} orphaned files...[/bold]")
-        for p in orphaned_files:
+    if orphaned:
+        console.print(f"[bold]Removing {len(orphaned)} orphaned files...[/bold]")
+        for p in orphaned:
             p.unlink()
             console.print(f"  [red]Removed:[/red] {p.relative_to(REPO_ROOT)}")
 
-    # Update outdated
-    if outdated_files:
-        console.print(
-            f"[bold]Updating {len(outdated_files)} outdated translations...[/bold]"
-        )
-        for i, tf in enumerate(outdated_files, 1):
-            console.print(f"[{i}/{len(outdated_files)}]", end="")
+    if outdated:
+        console.print(f"[bold]Updating {len(outdated)} outdated translations...[/bold]")
+        for i, tf in enumerate(outdated, 1):
+            console.print(f"[{i}/{len(outdated)}]", end="")
             translate_file(tf, console)
             post_process_file(tf.lang_path, lang)
 
-    # Add missing
-    if missing_files:
-        console.print(
-            f"[bold]Adding {len(missing_files)} missing translations...[/bold]"
-        )
-        for i, tf in enumerate(missing_files, 1):
-            console.print(f"[{i}/{len(missing_files)}]", end="")
+    if missing:
+        console.print(f"[bold]Adding {len(missing)} missing translations...[/bold]")
+        for i, tf in enumerate(missing, 1):
+            console.print(f"[{i}/{len(missing)}]", end="")
             translate_file(tf, console)
             post_process_file(tf.lang_path, lang)
 
@@ -522,9 +772,7 @@ def post_process_cmd(
 
 
 @app.command("ci-detect")
-def ci_detect(
-    language: str | None = typer.Option(None, "--language"),
-):
+def ci_detect(language: str | None = typer.Option(None, "--language")):
     """Detect languages needing sync (outputs GitHub Actions format)."""
     langs = get_languages_needing_sync(language)
     print(f"languages={json.dumps(langs)}")
@@ -537,9 +785,7 @@ def ci_run(
     dry_run: bool = typer.Option(False, "--dry-run"),
 ):
     """Run translation sync for CI."""
-    langs: list[str] = json.loads(languages)
-
-    for lang in langs:
+    for lang in json.loads(languages):
         console.rule(f"[bold]{lang}[/bold]")
         sync(lang, include=None, dry_run=dry_run)
 
@@ -557,11 +803,8 @@ def ci_pr(
         console.print("[yellow]No changes to commit[/yellow]")
         return
 
-    # Configure git
     subprocess.run(
-        ["git", "config", "user.name", "github-actions[bot]"],
-        check=True,
-        cwd=REPO_ROOT,
+        ["git", "config", "user.name", "github-actions[bot]"], check=True, cwd=REPO_ROOT
     )
     subprocess.run(
         ["git", "config", "user.email", "github-actions[bot]@users.noreply.github.com"],
@@ -569,28 +812,29 @@ def ci_pr(
         cwd=REPO_ROOT,
     )
 
-    # Create branch and commit
     branch = f"translate-{secrets.token_hex(4)}"
     subprocess.run(["git", "checkout", "-b", branch], check=True, cwd=REPO_ROOT)
     subprocess.run(["git", "add", "docs/"], check=True, cwd=REPO_ROOT)
-
-    msg = "Update translations"
-    subprocess.run(["git", "commit", "-m", msg], check=True, cwd=REPO_ROOT)
+    subprocess.run(
+        ["git", "commit", "-m", "Update translations"], check=True, cwd=REPO_ROOT
+    )
     subprocess.run(["git", "push", "origin", branch], check=True, cwd=REPO_ROOT)
 
-    # Create PR
-    g = Github(github_token)
-    gh_repo = g.get_repo(github_repository)
-    body = """Update translations
+    gh = Github(github_token)
+    gh_repo = gh.get_repo(github_repository)
+    pr = gh_repo.create_pull(
+        title="Update translations",
+        body="""Update translations
 
 This PR was created automatically using LLM translation.
 
 To improve translations, edit the prompt files rather than individual translations:
 - General: `_scripts/general-llm-prompt.md`
 - Language-specific: `docs/*/llm-prompt.md`
-"""
-
-    pr = gh_repo.create_pull(title=msg, body=body, base="master", head=branch)
+""",
+        base="master",
+        head=branch,
+    )
     console.print(f"[green]Created PR:[/green] {pr.html_url}")
 
 
