@@ -738,7 +738,9 @@ def sync(
 @app.command("ci-detect")
 def ci_detect(language: str | None = typer.Option(None, "--language")):
     """Detect languages needing sync (GitHub Actions output)."""
-    console = Console(force_terminal=True if os.getenv("GITHUB_ACTIONS") else None)
+    console = Console(
+        stderr=True, force_terminal=True if os.getenv("GITHUB_ACTIONS") else None
+    )
     all_langs = get_translation_languages()
 
     if language:
