@@ -1,8 +1,16 @@
-name: Publish docs [dev]
+name: Publish docs
 
 on:
   push:
     branches: [master]
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      version:
+        type: string
+        description: "Docs version (leave empty for dev build)"
+        required: false
 
 permissions:
   contents: write
@@ -54,6 +62,28 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - name: Set version and alias
+        id: version
+        run: |
+          # Determine version based on trigger
+          if [ "${{ github.event_name }}" = "release" ]; then
+            VERSION="${{ github.event.release.tag_name }}"
+            ALIAS="latest"
+            IS_RELEASE="true"
+          elif [ -n "${{ github.event.inputs.version }}" ]; then
+            VERSION="${{ github.event.inputs.version }}"
+            ALIAS="latest"
+            IS_RELEASE="true"
+          else
+            VERSION="0.dev"
+            ALIAS="development"
+            IS_RELEASE="false"
+          fi
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+          echo "ALIAS=$ALIAS" >> $GITHUB_ENV
+          echo "IS_RELEASE=$IS_RELEASE" >> $GITHUB_ENV
+          echo "Building docs version: $VERSION (alias: $ALIAS, is_release: $IS_RELEASE)"
+
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -61,9 +91,6 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-
-      - name: Install Dependencies
-        run: pip install mkdocs-material mkdocs-enumerate-headings-plugin mkdocs-quiz
 
       - uses: actions/download-artifact@v4
         with:
@@ -90,9 +117,6 @@ jobs:
 
       - name: Deploy to gh-pages
         run: |
-          VERSION="0.dev"
-          ALIAS="development"
-
           # Move build artifacts out of the way before checkout
           mv artifacts /tmp/artifacts
           mv combined /tmp/combined
@@ -117,7 +141,12 @@ jobs:
           # Update versions.json for mike compatibility
           python3 << 'EOF'
           import json
+          import os
           from pathlib import Path
+
+          version = os.environ["VERSION"]
+          alias = os.environ["ALIAS"]
+          is_release = os.environ["IS_RELEASE"] == "true"
 
           versions_file = Path("versions.json")
           if versions_file.exists():
@@ -126,19 +155,55 @@ jobs:
               versions = []
 
           # Remove existing entry for this version
-          versions = [v for v in versions if v.get("version") != "0.dev"]
+          versions = [v for v in versions if v.get("version") != version]
 
-          # Add new entry at the beginning
-          versions.insert(0, {
-              "version": "0.dev",
-              "title": "0.dev",
-              "aliases": ["development"]
-          })
+          if is_release:
+              # Remove 'latest' alias from other versions
+              for v in versions:
+                  if "aliases" in v:
+                      v["aliases"] = [a for a in v["aliases"] if a != "latest"]
+
+          # Create new entry
+          new_entry = {
+              "version": version,
+              "title": version,
+              "aliases": [alias]
+          }
+
+          if is_release:
+              # Insert after any dev versions
+              insert_idx = 0
+              for i, v in enumerate(versions):
+                  if v.get("version", "").endswith(".dev"):
+                      insert_idx = i + 1
+                  else:
+                      break
+              versions.insert(insert_idx, new_entry)
+          else:
+              # Dev version goes at the beginning
+              versions.insert(0, new_entry)
 
           versions_file.write_text(json.dumps(versions, indent=2))
           EOF
 
           # Commit and push
           git add -A
-          git commit -m "Deploy development docs" --allow-empty
-          git push origin gh-pages --force
+          git commit -m "Deploy $VERSION docs" --allow-empty
+          # Use --force for dev builds to handle any conflicts
+          if [ "$IS_RELEASE" = "true" ]; then
+            git push origin gh-pages
+          else
+            git push origin gh-pages --force
+          fi
+
+      - name: Pin GitHub Codespaces version
+        if: env.IS_RELEASE == 'true'
+        run: |
+          # Update Codespaces links to use the release version
+          find "$VERSION" -type f -exec sed -i "s|ref=master|ref=$VERSION|g" {} +
+          find latest -type f -exec sed -i "s|ref=master|ref=$VERSION|g" {} +
+          # Only add the specific directories we modified (not any stray files)
+          git add "$VERSION" latest
+          git status
+          git commit -m "[automated] Pin GitHub Codespaces link versions" || true
+          git push origin gh-pages
