@@ -37,7 +37,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: astral-sh/setup-uv@v4
+      - uses: astral-sh/setup-uv@v7
 
       - name: Detect work
         id: detect
@@ -60,7 +60,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: astral-sh/setup-uv@v4
+      - uses: astral-sh/setup-uv@v7
 
       - name: Translate ${{ matrix.language }}
         if: ${{ !inputs.dry_run }}
@@ -121,7 +121,7 @@ jobs:
             cp -r "$dir"* "docs/$lang/docs/"
           done
 
-      - uses: astral-sh/setup-uv@v4
+      - uses: astral-sh/setup-uv@v7
         if: steps.check.outputs.has_artifacts == 'true'
 
       - name: Create PR
