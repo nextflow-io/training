@@ -110,10 +110,10 @@ To improve translations, update the LLM prompts - not the translated files direc
 Then use the GitHub Actions workflow to regenerate:
 
 1. Go to **Actions** → **Translate** → **Run workflow**
-2. Select the language and `translate-page` command
+2. Select the language and `sync` command
 3. The workflow will regenerate the translation with your prompt changes
 
-When prompts are merged to master, GitHub Actions automatically runs `fix-translations` to update all existing translations to comply with the new guidelines.
+When prompts are merged to master, GitHub Actions automatically re-translates affected files to comply with the new guidelines.
 
 ### Why AI-Only?
 
