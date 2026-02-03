@@ -412,10 +412,8 @@ This means that you can use any container image you like to run your processes, 
 To demonstrate this, we are going to add a `cowpy` step to the pipeline we've been developing, after the `collectGreetings` step.
 
 <figure class="excalidraw">
---8<-- "docs/en/docs/nextflow_run/img/hello-pipeline-cowpy.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-cowpy.svg"
 </figure>
-
-Moo if you're ready to dive in!
 
 ### 2.1. Write a `cowpy` module
 

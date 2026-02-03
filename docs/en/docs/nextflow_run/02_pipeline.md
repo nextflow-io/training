@@ -616,21 +616,18 @@ This time the operator is called `collect`, and is applied to the output channel
 
 The `collect` operator is used to collect the outputs from multiple calls to the same process and package them into a single channel element.
 
-In the context of this workflow, it's taking the three uppercased greetings in the `convertToUpper.out` channel --which are three separate channel items, and would normally be handled in separate calls by the next process-- and packaging them into a single item.
-
-In more practical terms: if we didn't apply `collect()` to the output of `convertToUpper()` before feeding it to `collectGreetings()`, Nextflow would simply run `collectGreetings()` independently on each greeting, which would not achieve our goal.
-
-<figure class="excalidraw">
---8<-- "docs/en/docs/nextflow_run/img/without-collect-operator.svg"
-</figure>
-
-In contrast, using `collect()` allows us to take all the separate uppercased greetings produced by the second step of the workflow and feed them all together to a single call in the third step of the pipeline.
+In the context of this workflow, it's taking the three uppercased greetings in the `convertToUpper.out` channel (which are three separate channel items, and would normally be handled in separate calls by the next process) and packaging them into a single item.
+That's how we get all the greetings back into the same file.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/nextflow_run/img/with-collect-operator.svg"
 </figure>
 
-That's how we get all the greetings back into the same file.
+In contrast, if we didn't apply `collect()` to the output of `convertToUpper()` before feeding it to `collectGreetings()`, Nextflow would simply run `collectGreetings()` independently on each greeting, which would not achieve our goal.
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/nextflow_run/img/without-collect-operator.svg"
+</figure>
 
 There are many other [operators](https://nextflow.io/docs/latest/reference/operator.html) available to apply transformations to the contents of channels between process calls.
 
@@ -1147,7 +1144,7 @@ We just need to specify a container for each process.
 To demonstrate how this work, we made another version of our workflow that runs `cowpy` on the file of collected greetings produced in the third step.
 
 <figure class="excalidraw">
---8<-- "docs/en/docs/nextflow_run/img/hello-pipeline-cowpy.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-cowpy.svg"
 </figure>
 
 This should output a file containing the ASCII art with the three greetings in the speech bubble.

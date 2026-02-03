@@ -19,7 +19,7 @@ This will teach you the Nextflow way of achieving the following:
 
 1. Making data flow from one process to the next
 2. Collecting outputs from multiple process calls into a single process call
-3. Passing more than one input to a process
+3. Passing additional parameters to a process
 4. Handling multiple outputs coming out of a process
 
 To demonstrate, we will continue building on the domain-agnostic Hello World example from Parts 1 and 2.
@@ -49,6 +49,14 @@ output {
     }
 }
 ```
+
+This diagram summarizes the current operation of the workflow.
+It should look familiar, except now we're explicitly showing that the outputs of the process are packaged in a channel, just like the inputs were.
+We're going to put that output channel to good use in a minute.
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-workflow-channels.svg"
+</figure>
 
 Just to make sure everything is working, run the script once before making any changes:
 
@@ -200,8 +208,14 @@ This is not yet functional because we have not specified what should be input to
 
 Now we need to make the output of the `sayHello()` process flow into the `convertToUpper()` process.
 
-Conveniently, Nextflow automatically packages the output of a process into a channel called `<process>.out`.
+Conveniently, Nextflow automatically packages the output of a process into a channel, as shown in the diagram in the warmup section.
+We can refer to the output channel of a process as `<process>.out`.
+
 So the output of the `sayHello` process is a channel called `sayHello.out`, which we can plug straight into the call to `convertToUpper()`.
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-multistep-connector.svg"
+</figure>
 
 In the workflow block, make the following code change:
 
@@ -491,6 +505,11 @@ In theory this should handle any arbitrary number of input files.
 ### 2.3. Add the collection step to the workflow
 
 Now we should just need to call the collection process on the output of the uppercasing step.
+That is also a channel, called `convertToUpper.out`.
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect-connector.svg"
+</figure>
 
 #### 2.3.1. Connect the process calls
 
@@ -552,6 +571,10 @@ Now have a look at the contents of the final output file.
     ```
 
 Oh no. The collection step was run individually on each greeting, which is NOT what we wanted.
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect-no-operator.svg"
+</figure>
 
 We need to do something to tell Nextflow explicitly that we want that third step to run on all the elements in the channel output by `convertToUpper()`.
 
@@ -639,13 +662,18 @@ nextflow run hello-workflow.nf -resume
 It runs successfully, although the log output may look a little messier than this (we cleaned it up for readability).
 
 This time the third step was only called once!
-
 Looking at the output of the `view()` statements, we see the following:
 
 - Three `Before collect:` statements, one for each greeting: at that point the file paths are individual items in the channel.
 - A single `After collect:` statement: the three file paths are now packaged into a single element.
 
-Have a look at the contents of the final output file.
+We can summarize that with the following diagram:
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect-WITH-operator.svg"
+</figure>
+
+Finally, you can have a look at the contents of the output file to satisfy yourself that everything worked correctly.
 
 ??? abstract "File contents"
 
@@ -690,20 +718,30 @@ This is basically the reverse operation from point 2.4.2.
 
 You know how to collect outputs from a batch of process calls and feed them into a joint analysis or summation step.
 
+To recap, this is what you've built so far:
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect.svg"
+</figure>
+
 ### What's next?
 
 Learn how to pass more than one input to a process.
 
 ---
 
-## 3. Pass more than one input to a process
+## 3. Pass additional parameters to a process
 
 We want to be able to name the final output file something specific in order to process subsequent batches of greetings without overwriting the final results.
 
 To that end, we're going to make the following refinements to the workflow:
 
-- Modify the collector process to accept a user-defined name for the output file
-- Add a command-line parameter to the workflow and pass it to the collector process
+- Modify the collector process to accept a user-defined name for the output file (`batch_name`)
+- Add a command-line parameter to the workflow (`--batch`) and pass it to the collector process
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect-batch.svg"
+</figure>
 
 ### 3.1. Modify the collector process
 
@@ -887,8 +925,6 @@ All excellent questions, and the short answer is yes we can!
 Multiple outputs will be packaged into separate channels.
 We can either choose to give those output channels names, which makes it easy to refer to them individually later on, or we can refer to them by index.
 
-Let's dig in with an example.
-
 For demonstration purposes, let's say we want to count the number of greetings that are being collected for a given batch of inputs and report it in a file.
 
 ### 4.1. Modify the process to count and output the number of greetings
@@ -964,6 +1000,10 @@ Now that we have two outputs coming out of the `collectGreetings` process, the `
 
 - `collectGreetings.out.outfile` contains the final output file
 - `collectGreetings.out.report` contains the report file
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect-report.svg"
+</figure>
 
 We need to update the workflow outputs accordingly.
 
@@ -1073,6 +1113,10 @@ Open it to verify that the workflow correctly reported the count of greetings th
     ```txt title="trio-report.txt"
     There were 3 greetings in this batch.
     ```
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect-4-way.svg"
+</figure>
 
 Feel free to add more greetings to the CSV and test what happens.
 
