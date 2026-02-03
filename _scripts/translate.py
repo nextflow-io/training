@@ -40,6 +40,7 @@ import typer
 import yaml
 from rich.console import Console
 
+
 # =============================================================================
 # Configuration
 # =============================================================================
@@ -652,7 +653,7 @@ def translate(
 ):
     """Translate a single file."""
     check_api_key()
-    console = Console()
+    console = Console(force_terminal=True if os.getenv("GITHUB_ACTIONS") else None)
 
     if lang == "en":
         raise typer.Exit("Cannot translate to English")
@@ -672,7 +673,7 @@ def sync(
     dry_run: bool = typer.Option(False, "--dry-run", "-n", help="Preview only"),
 ):
     """Sync translations: update outdated, add missing, remove orphaned."""
-    console = Console()
+    console = Console(force_terminal=True if os.getenv("GITHUB_ACTIONS") else None)
 
     # Gather work
     orphaned = get_orphaned_files(lang)
@@ -765,7 +766,7 @@ def ci_run(
     dry_run: bool = typer.Option(False, "--dry-run"),
 ):
     """Run sync for multiple languages (CI)."""
-    console = Console()
+    console = Console(force_terminal=True if os.getenv("GITHUB_ACTIONS") else None)
     for lang in json.loads(languages):
         console.rule(f"[bold]{lang}[/bold]")
         sync(lang, include=None, dry_run=dry_run)

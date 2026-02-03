@@ -23,7 +23,7 @@ jobs:
 
       - name: Run check_headings.py
         if: steps.changed-files.outputs.any_changed == 'true'
-        run: uv run .github/check_headings.py ${{ steps.changed-files.outputs.all_changed_files }}
+        run: uv run -q .github/check_headings.py ${{ steps.changed-files.outputs.all_changed_files }}
 
       - name: Skip check (no markdown files changed)
         if: steps.changed-files.outputs.any_changed != 'true'

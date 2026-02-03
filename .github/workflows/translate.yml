@@ -42,7 +42,7 @@ jobs:
         id: detect
         working-directory: _scripts
         run: |
-          uv run translate.py ci-detect \
+          uv run -q translate.py ci-detect \
             ${{ inputs.language && format('--language "{0}"', inputs.language) || '' }} \
             >> $GITHUB_OUTPUT
 
@@ -66,12 +66,12 @@ jobs:
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         working-directory: _scripts
-        run: uv run translate.py sync ${{ matrix.language }}
+        run: uv run -q translate.py sync ${{ matrix.language }}
 
       - name: Dry run ${{ matrix.language }}
         if: ${{ inputs.dry_run }}
         working-directory: _scripts
-        run: uv run translate.py sync ${{ matrix.language }} --dry-run
+        run: uv run -q translate.py sync ${{ matrix.language }} --dry-run
 
       - name: Upload translation artifacts
         if: ${{ !inputs.dry_run && success() }}
@@ -129,4 +129,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
         working-directory: _scripts
-        run: uv run translate.py ci-pr
+        run: uv run -q translate.py ci-pr
