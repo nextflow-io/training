@@ -24,7 +24,6 @@ on:
 permissions:
   contents: write
   pull-requests: write
-  workflows: write
 
 jobs:
   detect:
@@ -91,6 +90,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          ref: ${{ github.sha }} # Use trigger SHA, not latest master (avoids workflow file conflicts)
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Download all translation artifacts
