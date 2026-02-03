@@ -14,7 +14,50 @@ permissions:
   contents: write
 
 jobs:
+  discover-languages:
+    runs-on: ubuntu-latest
+    outputs:
+      languages: ${{ steps.find.outputs.languages }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: docs
+
+      - name: Find language directories
+        id: find
+        run: |
+          # Find all directories under docs/ that contain mkdocs.yml
+          langs=$(find docs -maxdepth 2 -name "mkdocs.yml" -exec dirname {} \; | xargs -n1 basename | sort | jq -R -s -c 'split("\n") | map(select(length > 0))')
+          echo "languages=$langs" >> $GITHUB_OUTPUT
+          echo "Found languages: $langs"
+
+  build:
+    needs: discover-languages
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        lang: ${{ fromJson(needs.discover-languages.outputs.languages) }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Dependencies
+        run: pip install mkdocs-material mkdocs-enumerate-headings-plugin mkdocs-quiz
+
+      - name: Build ${{ matrix.lang }} docs
+        run: mkdocs build -f docs/${{ matrix.lang }}/mkdocs.yml -d site-${{ matrix.lang }}
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: site-${{ matrix.lang }}
+          path: site-${{ matrix.lang }}/
+
   deploy:
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Set version variable
@@ -26,25 +69,103 @@ jobs:
 
       - uses: actions/setup-python@v5
         with:
-          python-version: 3.10.6
+          python-version: "3.12"
 
-      - name: Install Dependencies
-        run: pip install -r requirements.txt
+      - uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: Combine language builds
+        run: |
+          mkdir -p combined
+          # English goes to root
+          cp -r artifacts/site-en/* combined/
+          # Other languages go to subdirectories (discover from artifacts)
+          for dir in artifacts/site-*; do
+            lang=$(basename "$dir" | sed 's/site-//')
+            if [ "$lang" != "en" ] && [ -d "$dir" ]; then
+              mkdir -p "combined/$lang"
+              cp -r "$dir"/* "combined/$lang/"
+            fi
+          done
 
       - name: Configure git
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-      - name: Build Docs Website
-        run: mike deploy --alias-type copy --update-aliases $VERSION latest
+      - name: Deploy to gh-pages
+        run: |
+          ALIAS="latest"
+
+          # Fetch gh-pages if it exists
+          git fetch origin gh-pages:gh-pages 2>/dev/null || true
+
+          # Check if gh-pages exists
+          if git show-ref --verify --quiet refs/heads/gh-pages; then
+            git checkout gh-pages
+            # Remove old version directories (but keep other versions)
+            rm -rf "$VERSION" "$ALIAS"
+          else
+            git checkout --orphan gh-pages
+            git rm -rf . 2>/dev/null || true
+          fi
+
+          # Copy combined site to version directory
+          cp -r combined "$VERSION"
+          cp -r combined "$ALIAS"
+
+          # Update versions.json for mike compatibility
+          python3 << 'EOF'
+          import json
+          import os
+          from pathlib import Path
+
+          version = os.environ["VERSION"]
+          versions_file = Path("versions.json")
+          if versions_file.exists():
+              versions = json.loads(versions_file.read_text())
+          else:
+              versions = []
+
+          # Remove existing entry for this version
+          versions = [v for v in versions if v.get("version") != version]
+
+          # Remove 'latest' alias from other versions
+          for v in versions:
+              if "aliases" in v:
+                  v["aliases"] = [a for a in v["aliases"] if a != "latest"]
+
+          # Add new entry at the beginning (after dev versions)
+          new_entry = {
+              "version": version,
+              "title": version,
+              "aliases": ["latest"]
+          }
+
+          # Insert after any dev versions
+          insert_idx = 0
+          for i, v in enumerate(versions):
+              if v.get("version", "").endswith(".dev"):
+                  insert_idx = i + 1
+              else:
+                  break
+          versions.insert(insert_idx, new_entry)
+
+          versions_file.write_text(json.dumps(versions, indent=2))
+          EOF
+
+          # Commit and push
+          git add -A
+          git commit -m "Deploy $VERSION docs"
+          git push origin gh-pages
 
       - name: Pin GitHub Codespaces version
         run: |
-          git checkout gh-pages
+          # Update Codespaces links to use the release version
           find "$VERSION" -type f -exec sed -i "s|ref=master|ref=$VERSION|g" {} +
           find latest -type f -exec sed -i "s|ref=master|ref=$VERSION|g" {} +
           git add .
           git status
-          git commit -m "[automated] Pin GitHub Codespaces link versions"
-          git push --set-upstream origin gh-pages
+          git commit -m "[automated] Pin GitHub Codespaces link versions" || true
+          git push origin gh-pages

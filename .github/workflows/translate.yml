@@ -1,0 +1,124 @@
+name: Translate
+
+on:
+  # Automatic: when English content or prompts change
+  push:
+    branches:
+      - master
+    paths:
+      - "docs/en/docs/**/*.md"
+      - "docs/*/llm-prompt.md"
+      - "_scripts/general-llm-prompt.md"
+
+  # Manual: run specific commands
+  workflow_dispatch:
+    inputs:
+      language:
+        description: "Language code (leave empty for all with changes)"
+        type: string
+      command:
+        description: "Command to run"
+        required: true
+        default: "auto"
+        type: choice
+        options:
+          - auto
+          - list-outdated
+          - list-missing
+          - update-outdated
+          - add-missing
+          - update-and-add
+          - fix-translations
+
+jobs:
+  detect:
+    runs-on: ubuntu-latest
+    outputs:
+      languages_outdated: ${{ steps.check.outputs.languages_outdated }}
+      languages_fix: ${{ steps.check.outputs.languages_fix }}
+      command: ${{ steps.check.outputs.command }}
+      has_work: ${{ steps.check.outputs.has_work }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: astral-sh/setup-uv@v4
+
+      - name: Detect languages and work needed
+        id: check
+        working-directory: _scripts
+        run: |
+          # Determine command (push events always use 'auto')
+          if [ "${{ github.event_name }}" = "push" ]; then
+            COMMAND="auto"
+          else
+            COMMAND="${{ inputs.command }}"
+          fi
+
+          # Run detection and capture output to GITHUB_OUTPUT
+          uv run translate.py detect-work \
+            --event-name "${{ github.event_name }}" \
+            --command "$COMMAND" \
+            ${{ inputs.language && format('--language "{0}"', inputs.language) || '' }} \
+            ${{ github.event.before && format('--before-sha "{0}"', github.event.before) || '' }} \
+            ${{ github.event.sha && format('--after-sha "{0}"', github.event.sha) || '' }} \
+            >> $GITHUB_OUTPUT
+
+  translate:
+    needs: detect
+    if: needs.detect.outputs.has_work == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: astral-sh/setup-uv@v4
+
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Run translation command
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        working-directory: _scripts
+        run: |
+          uv run translate.py run-batch \
+            --command "${{ needs.detect.outputs.command }}" \
+            --languages-outdated '${{ needs.detect.outputs.languages_outdated }}' \
+            --languages-fix '${{ needs.detect.outputs.languages_fix }}'
+
+      - name: Run post-processing fixer
+        if: needs.detect.outputs.command != 'list-outdated' && needs.detect.outputs.command != 'list-missing'
+        working-directory: _scripts
+        run: |
+          uv run translate.py run-post-fix \
+            --languages-outdated '${{ needs.detect.outputs.languages_outdated }}' \
+            --languages-fix '${{ needs.detect.outputs.languages_fix }}'
+
+      - name: Create PR with changes
+        if: needs.detect.outputs.command != 'list-outdated' && needs.detect.outputs.command != 'list-missing'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        working-directory: _scripts
+        run: |
+          COMMAND="${{ needs.detect.outputs.command }}"
+
+          # make-pr handles the case where there are no changes
+          uv run translate.py make-pr \
+            --command "$COMMAND" \
+            --github-token "$GITHUB_TOKEN" \
+            --github-repository "$GITHUB_REPOSITORY"

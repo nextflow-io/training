@@ -1,0 +1,15 @@
+INHERIT: ../en/mkdocs.yml
+theme:
+  language: tr
+  custom_dir: ../en/overrides
+extra:
+  consent:
+    title: "Çerez Onayı"
+    description: >-
+      Tekrarlayan ziyaretlerinizi ve tercihlerinizi tanımak, dokümantasyonumuzun
+      etkinliğini ölçmek ve kullanıcıların aradıklarını bulup bulmadığını belirlemek
+      için çerezler kullanıyoruz. Onayınızla eğitim materyallerimizi geliştirmemize
+      yardımcı oluyorsunuz.
+      <a href="https://seqera.io/privacy-policy/#cookies" target="_blank" rel="noopener">Çerezleri nasıl kullandığımız</a> hakkında daha fazla bilgi edinin.
+    cookies:
+      posthog: "PostHog Analytics"

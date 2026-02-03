@@ -1,4 +1,5 @@
 FROM squidfunk/mkdocs-material
 
-COPY requirements.txt .
-RUN pip install -r requirements.txt
+RUN pip install \
+    mkdocs-enumerate-headings-plugin>=0.6.0 \
+    mkdocs-quiz>=1.5.0

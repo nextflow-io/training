@@ -1,0 +1,14 @@
+# Default owners for everything
+* @nextflow-io/training
+
+# Translations - per-language teams
+/docs/pt/ @nextflow-io/training-lang-pt
+/docs/es/ @nextflow-io/training-lang-es
+/docs/fr/ @nextflow-io/training-lang-fr
+/docs/it/ @nextflow-io/training-lang-it
+/docs/ko/ @nextflow-io/training-lang-ko
+/docs/pl/ @nextflow-io/training-lang-pl
+/docs/tr/ @nextflow-io/training-lang-tr
+
+# Translation scripts
+/_scripts/ @nextflow-io/training

@@ -1,0 +1,16 @@
+INHERIT: ../en/mkdocs.yml
+theme:
+  language: es
+  custom_dir: ../en/overrides
+extra:
+  consent:
+    title: "Consentimiento de cookies"
+    description: >-
+      Utilizamos cookies para reconocer tus visitas repetidas y preferencias,
+      así como para medir la efectividad de nuestra documentación y si los usuarios
+      encuentran lo que buscan. Con tu consentimiento, nos ayudas a mejorar
+      nuestros materiales de capacitación.
+      Obtén más información sobre
+      <a href="https://seqera.io/privacy-policy/#cookies" target="_blank" rel="noopener">cómo usamos las cookies</a>.
+    cookies:
+      posthog: "PostHog Analytics"

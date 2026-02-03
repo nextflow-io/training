@@ -200,7 +200,7 @@ docker stop nf-training && docker rm nf-training
 
 ## Notes
 
-- Always verify you're in the repository root before starting (check for `mkdocs.yml`)
+- Always verify you're in the repository root before starting (check for `docs/en/mkdocs.yml`)
 - The container uses `sleep infinity` so it persists across multiple command executions
 - Symlink must be recreated each time the container restarts
 - For long sessions, periodically check container is still running: `docker ps | grep nf-training`

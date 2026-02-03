@@ -1,5 +1,5 @@
 # ONLY USED FOR DEPLOYMENT PREVIEWS
 #  production deploys go from gh-pages and are pre-built using Mike, for versioning
 [build]
-    command = "pip install -r requirements.txt && mkdocs build"
+    command = "curl -LsSf https://astral.sh/uv/install.sh | sh && export PATH=$HOME/.local/bin:$PATH && uv run _scripts/docs.py build-all"
     publish = "site/"

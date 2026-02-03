@@ -7,7 +7,6 @@ on:
     paths:
       - ".github/mkdocs.Dockerfile"
       - ".github/workflows/docker-mkdocs.yml"
-      - "requirements.txt"
   push:
     branches: [master]
 

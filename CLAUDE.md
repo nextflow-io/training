@@ -6,7 +6,7 @@ This repository contains training materials for Nextflow, built with Material fo
 
 - **Purpose**: Educational materials teaching Nextflow workflow development
 - **Build system**: MkDocs with Material theme and custom plugins
-- **Languages**: Multiple (en, pt, es, fr, it, ko) - be aware when editing
+- **Languages**: Multiple (en, pt, es, fr, it, ko, pl, tr) - translations are AI-generated, see TRANSLATING.md
 - **Target audience**: Scientists and developers learning Nextflow
 
 ## Common Commands
@@ -14,7 +14,7 @@ This repository contains training materials for Nextflow, built with Material fo
 ### Preview locally
 
 ```bash
-docker run --rm -it -p 8000:8000 -v ${PWD}:/docs ghcr.io/nextflow-io/training-mkdocs:latest
+docker run --rm -it -p 8000:8000 -v ${PWD}:/docs -w /docs/docs/en ghcr.io/nextflow-io/training-mkdocs:latest
 # View at http://0.0.0.0:8000/
 ```
 
@@ -33,13 +33,16 @@ prettier --write docs/**/*.md
 
 ## Repository Structure
 
-- `docs/` - All training content (markdown)
-  - `hello_nextflow/` - Basic Nextflow introduction
-  - `hello_nf-core/` - nf-core framework training
-  - `nf4_science/` - Domain-specific training (genomics, RNAseq)
-  - `side_quests/` - Advanced topics
+- `docs/en/` - English training content (source)
+  - `docs/` - Markdown content
+    - `hello_nextflow/` - Basic Nextflow introduction
+    - `hello_nf-core/` - nf-core framework training
+    - `nf4_science/` - Domain-specific training (genomics, RNAseq)
+    - `side_quests/` - Advanced topics
+  - `mkdocs.yml` - Site navigation and configuration
+- `docs/{lang}/` - Translated content (pt, es, fr, it, ko, pl, tr)
+- `_scripts/` - Translation and build scripts
 - `hello-nextflow/`, `nf4-science/`, etc. - Example Nextflow scripts for lessons
-- `mkdocs.yml` - Site navigation and configuration
 - `.github/check_headings.py` - Validates heading numbering
 
 ## Important Conventions
@@ -157,11 +160,10 @@ module_name/
 
 ## Gotchas
 
-1. **Social cards are slow**: If preview is slow, disable with `CARDS=false`
-2. **Multilingual builds**: Initial build takes minutes due to multiple languages
-3. **Heading validation**: Auto-runs on commit via pre-commit hook
-4. **Excalidraw diagrams**: Must use `.excalidraw.svg` extension for editability
-5. **Module vs Lesson**: Module = entire course (e.g. "Hello Nextflow"), Lesson = single page (e.g. "01_hello_world.md")
+1. **Multilingual builds**: Initial build takes minutes due to multiple languages
+2. **Heading validation**: Auto-runs on commit via pre-commit hook
+3. **Excalidraw diagrams**: Must use `.excalidraw.svg` extension for editability
+4. **Module vs Lesson**: Module = entire course (e.g. "Hello Nextflow"), Lesson = single page (e.g. "01_hello_world.md")
 
 ## Testing Nextflow Examples
 
@@ -192,6 +194,7 @@ nextflow run example.nf -resume  # verify caching works
 ## Resources
 
 - **Full contribution guide**: See CONTRIBUTING.md
+- **Translation guide**: See TRANSLATING.md (all translations are AI-generated)
 - **Training site**: https://training.nextflow.io
 - **Nextflow docs**: https://nextflow.io/docs/latest/
 - **MkDocs Material**: https://squidfunk.github.io/mkdocs-material/

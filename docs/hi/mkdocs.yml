@@ -1,0 +1,15 @@
+INHERIT: ../en/mkdocs.yml
+theme:
+  language: hi
+  custom_dir: ../en/overrides
+extra:
+  consent:
+    title: "कुकी सहमति"
+    description: >-
+      हम आपकी बार-बार की विज़िट और प्राथमिकताओं को पहचानने के लिए, साथ ही
+      हमारे दस्तावेज़ों की प्रभावशीलता और उपयोगकर्ताओं को उनकी खोज में मदद
+      मिल रही है या नहीं, यह मापने के लिए कुकीज़ का उपयोग करते हैं। आपकी
+      सहमति से, आप हमारी प्रशिक्षण सामग्री को बेहतर बनाने में मदद कर रहे हैं।
+      <a href="https://seqera.io/privacy-policy/#cookies" target="_blank" rel="noopener">हम कुकीज़ का उपयोग कैसे करते हैं</a> इसके बारे में अधिक जानें।
+    cookies:
+      posthog: "PostHog Analytics"

@@ -1,0 +1,14 @@
+INHERIT: ../en/mkdocs.yml
+theme:
+  language: ko
+  custom_dir: ../en/overrides
+extra:
+  consent:
+    title: "쿠키 동의"
+    description: >-
+      저희는 귀하의 반복 방문과 선호도를 인식하고, 문서의 효과성과 사용자가
+      원하는 정보를 찾고 있는지 측정하기 위해 쿠키를 사용합니다. 동의해 주시면
+      교육 자료를 개선하는 데 도움이 됩니다.
+      <a href="https://seqera.io/privacy-policy/#cookies" target="_blank" rel="noopener">쿠키 사용 방법</a>에 대해 자세히 알아보세요.
+    cookies:
+      posthog: "PostHog 분석"

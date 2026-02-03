@@ -1,103 +1,484 @@
-# 🌐 Translation Guide
+# Translation Guide
 
-## Contribution model
+This document describes how translations work for the Nextflow training materials.
 
-The typical workflow for contributing with translation is as follows:
+<!-- prettier-ignore-start -->
+> [!WARNING]
+> **All translations are generated and maintained by AI.**
+> Do not submit manual translations - they will be overwritten by automated updates.
+> Instead, improve the translation prompts to fix issues permanently.
+<!-- prettier-ignore-end -->
 
-1. Make a _fork_ of the GitHub repository to your own account
-2. Work locally (see below) and make your changes
-   - Check if the language you want to translate to is already enabled in the `mkdocs.yml` file. If it isn't do it according to [this](https://github.com/nextflow-io/training/pull/163/files#diff-98d0f806abc9af24e6a7c545d3d77e8f9ad57643e27211d7a7b896113e420ed2) example.
-   - If you want to improve an already existing translation, the file already exists and the language is already set up. Simply open the file and work on it. Otherwise, create the new file with the following pattern: If the original file in English is `filename.md`, you will create in the same folder a new file named `filename.language_code.md`, where `language_code` is the language code that you can find [here](https://en.wikipedia.org/wiki/ISO_639-1), for the language you wish to translate to. Pay attention to the language code, as it has to be the same that is specified in the `mkdocs.yml` file for that language.
-   - Ideally, for new files, copy-paste the original English contents into the new file and commit _before_ starting to translate. This way, it's easier to review your pull request by seeing the original file in English vs the translated changes you did.
-3. Commit and push to your forked repository
-4. Open a pull-request against the main repo, which can be reviewed and merged
-5. Tag other contributors with @ requesting a review. Pull Requests should only be merged if they have at least a single review.
+## Overview
 
-**Important**: Avoid making changes to both the original files in English and in their respective translated versions in the **same commit**. This breaks GitLocalize, which is the system that monitors what files need to be synced.
+Translations are managed through a combination of:
 
-The training website is built using [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/).
-It's a static site generator designed for documentation websites which is fast and lightweight and comes with a lot of nice features.
-We use the open-source version of the tool (not any of the "insiders" features, currently).
+1. **LLM prompts** that define translation rules and glossaries
+2. **GitHub Actions** that automatically regenerate translations
+3. **Human review** to catch errors and improve prompts
 
-To make changes, you should run the website locally so that you can preview changes.
+The key insight: **to fix a translation, fix the prompt** - not the translated file.
 
-## Preview
+### Contents
 
-See the [mkdocs material docs](https://squidfunk.github.io/mkdocs-material/getting-started/) for full installation instructions in order to see the preview of the training material with your changes/translations. A short version for this training site is below.
+- [How to Improve Existing Translations](#how-to-improve-existing-translations)
+- [How Automatic Translation Updates Work](#how-automatic-translation-updates-work)
+- [Reviewing Translation PRs](#reviewing-translation-prs)
+- [How to Add a Missing Course](#how-to-add-a-missing-course)
+- [How to Add a New Language](#how-to-add-a-new-language)
+- [Directory Structure](#directory-structure)
+- [CLI Reference (For Maintainers)](#cli-reference-for-maintainers)
 
-### Docker
+---
 
-If you are used to using Docker and don't want to mess around with Python, you can run the following command to preview the site:
+## How to Improve Existing Translations
+
+Found a translation error or want to suggest an improvement? Here's how to fix it the right way.
+
+```mermaid
+flowchart TD
+    A[Find translation error] --> B{Type of issue?}
+    B -->|Wrong term| C[Update glossary in<br>docs/LANG/llm-prompt.md]
+    B -->|Wrong style/tone| D[Update grammar rules in<br>docs/LANG/llm-prompt.md]
+    B -->|Structural issue| E[Update rules in<br>_scripts/general-llm-prompt.md]
+    C --> F[Open PR with prompt change]
+    D --> F
+    E --> F
+    F --> G[Trigger translation workflow<br>on PR branch]
+    G --> H[Review updated translation]
+    H --> I{Correct?}
+    I -->|Yes| J[Merge PR]
+    I -->|No| B
+```
+
+> [!NOTE]
+> The translation workflow can only run on branches in the main repository, not on forks.
+> If you'd like to contribute translation improvements and need write access, please open an issue to request it.
+
+### The Right Way: Update the Prompt
+
+The **only** sustainable way to fix translations is to improve the LLM prompts:
+
+1. **For language-specific issues** (terminology, tone, grammar):
+
+   - Edit `docs/<lang>/llm-prompt.md`
+   - Add glossary terms, clarify rules, provide examples
+
+2. **For structural issues** (code blocks, formatting, links):
+
+   - Edit `_scripts/general-llm-prompt.md`
+   - Add rules with before/after examples
+
+3. **Re-run the translation** via GitHub Actions:
+
+   - Go to **Actions** → **Translate** → **Run workflow**
+   - Select language and command (`translate-page` or `update-outdated`)
+
+4. **Submit a PR** with both the prompt change and regenerated translation
+
+### Why Not Edit Translations Directly?
+
+- Direct edits are **overwritten** when English content changes
+- There's no way to track why a translation differs from the AI output
+- Future maintainers won't know which changes were intentional
+- The same error will reappear in new content
+
+### Reporting Issues
+
+If you find errors but can't fix the prompts yourself:
+
+1. Open a GitHub issue
+2. Include: language, file path, current text, expected text
+3. Explain why the current translation is wrong
+4. A maintainer will update the prompt and re-run
+
+---
+
+## Understanding the Translation Prompts
+
+The translation system uses two types of prompts:
+
+### General Prompt (`_scripts/general-llm-prompt.md`)
+
+Contains rules that apply to ALL languages:
+
+- What to translate vs keep in English
+- Code block handling (never translate syntax, always translate comments)
+- Formatting preservation (links, anchors, admonitions)
+- Technical term lists (Nextflow keywords, operators, directives)
+- Validation requirements
+
+### Language-Specific Prompts (`docs/<lang>/llm-prompt.md`)
+
+Contains rules specific to each language:
+
+- Grammar and tone (formal/informal)
+- Terms that get translated (with exact translations)
+- Admonition titles
+- Common expressions
+- Language-specific mistakes to avoid
+
+### Prompt Precedence
+
+When prompts conflict, **language-specific rules override general rules**. This allows languages to customize behavior (e.g., French keeps "workflow" in English even though it could theoretically be translated).
+
+### Contributing Prompt Improvements
+
+If you're a native speaker and want to improve translation quality:
+
+1. **Read the current prompt** for your language in `docs/<lang>/llm-prompt.md`
+2. **Identify the issue type**:
+   - Wrong term → Add/update entry in "Terms to Translate"
+   - Wrong tone → Clarify in "Grammar & Tone" section
+   - Repeated error → Add to "Common Mistakes" section
+3. **Provide examples** showing wrong vs correct translations
+4. **Test your change** by running the translation workflow
+5. **Submit a PR** with both prompt change and sample output
+
+Good prompt improvements include:
+
+- Adding missing glossary terms
+- Clarifying ambiguous rules with examples
+- Adding common mistakes that keep occurring
+- Regional spelling/grammar preferences
+
+---
+
+## How Automatic Translation Updates Work
+
+Translations are automatically updated via GitHub Actions when:
+
+1. **English source files change** → Outdated translations are updated
+2. **Translation prompts change** → Existing translations are fixed to comply with new guidelines
+
+```mermaid
+flowchart TD
+    A[Change detected] --> B{What changed?}
+    B -->|English content| C[Detect outdated translations]
+    B -->|Language prompt| D[Fix that language's translations]
+    B -->|General prompt| E[Fix ALL languages]
+    C --> F{Any outdated?}
+    F -->|No| G[Done]
+    F -->|Yes| H[AI updates changed sections]
+    D --> I[AI reviews & fixes translations]
+    E --> I
+    H --> J[Create PR for each language]
+    I --> J
+    J --> K[Human review]
+    K --> L{Approved?}
+    L -->|Yes| M[Merge PR]
+    L -->|No| N[Update llm-prompt.md]
+    N --> O[Re-run translation]
+    O --> K
+```
+
+### Key Points
+
+- The AI makes **minimal changes**, updating only sections that changed in English
+- Translations preserve line-by-line structure for easy diff review
+- Each language gets a separate PR for independent review/merge
+- The system uses git commit timestamps to detect outdated files
+- **Prompt changes trigger automatic fixes** with multi-pass verification (up to 8 iterations) until all translations comply
+
+---
+
+## Reviewing Translation PRs
+
+When reviewing a translation PR (whether automatic or triggered manually), follow these guidelines:
+
+### What to Check
+
+1. **Technical accuracy**
+
+   - Are Nextflow concepts correctly explained?
+   - Are code examples unchanged (only comments translated)?
+   - Are technical terms used consistently with the glossary?
+
+2. **Formatting preservation**
+
+   - Are code blocks intact and properly formatted?
+   - Are admonitions (note, tip, warning) correctly structured?
+   - Are heading anchors preserved (`{ #anchor-name }`)?
+   - Are links working (URLs unchanged, only link text translated)?
+
+3. **Language quality**
+   - Is the tone appropriate (formal/informal per language)?
+   - Are translations natural and readable?
+   - Are there any obvious errors or awkward phrasings?
+
+### How to Handle Issues
+
+<!-- prettier-ignore-start -->
+> [!CAUTION]
+> **Do NOT suggest changes directly to translation PRs.**
+> Direct edits will be overwritten on the next automatic update.
+> Instead, update the translation prompts and re-run the translation.
+<!-- prettier-ignore-end -->
+
+When you find an issue during review:
+
+```mermaid
+flowchart TD
+    A[Find translation error] --> B{Type of issue?}
+    B -->|Wrong term| C[Update glossary in<br>docs/LANG/llm-prompt.md]
+    B -->|Wrong style/tone| D[Update grammar rules in<br>docs/LANG/llm-prompt.md]
+    B -->|Structural issue| E[Update rules in<br>_scripts/general-llm-prompt.md]
+    C --> F[Commit prompt change to same PR]
+    D --> F
+    E --> F
+    F --> G[Trigger translation workflow]
+    G --> H[Review updated translation]
+```
+
+#### Workflow for Fixing Issues
+
+1. **Edit the appropriate prompt file** in the same PR branch:
+
+   - Language-specific issues → `docs/<lang>/llm-prompt.md`
+   - General formatting issues → `_scripts/general-llm-prompt.md`
+
+2. **Trigger the translation workflow** to regenerate:
+
+   - Go to **Actions** → **Translate** → **Run workflow**
+   - Select the language and `translate-page` or `update-outdated`
+   - Target the PR branch (not `master`)
+
+3. **Review the updated translation** to verify the fix
+
+4. **Approve and merge** once the translation is correct
+
+#### Example: Fixing a Wrong Term
+
+If "workflow" is incorrectly translated as "flujo" instead of "flujo de trabajo" in Spanish:
+
+1. In the PR branch, edit `docs/es/llm-prompt.md`
+2. Add or update the glossary entry:
+
+   | English  | Spanish                        |
+   | -------- | ------------------------------ |
+   | workflow | flujo de trabajo (NOT "flujo") |
+
+3. Run the translation workflow targeting this branch
+4. Verify the fix in the updated PR
+
+### Approving PRs
+
+Once you've verified the translation quality:
+
+1. Check that CI passes (build succeeds)
+2. Approve the PR
+3. Merge (squash merge recommended)
+
+---
+
+## How to Add a Missing Course
+
+If a language exists but is missing content (e.g., Portuguese has `hello_nextflow/` but not `nf4_science/`):
+
+### Using GitHub Actions (Recommended)
+
+1. Go to **Actions** → **Translate** → **Run workflow**
+2. Select language (e.g., `pt`)
+3. Select command: `add-missing`
+4. Optionally specify a filter (e.g., `nf4_science`)
+5. The workflow creates a PR with translations
+
+### Using the CLI (Requires API Key)
+
+For maintainers with `ANTHROPIC_API_KEY` access:
 
 ```bash
-docker run --rm -it -p 8000:8000 -v ${PWD}:/docs ghcr.io/nextflow-io/training-mkdocs:latest
+cd _scripts
+
+# Check what's missing
+uv run python translate.py list-missing pt
+
+# Translate one file at a time (recommended for large files)
+uv run python translate.py translate-page -l pt -p nf4_science/index.md
+
+# Or translate all missing with a filter
+uv run python translate.py add-missing -l pt --include nf4_science
 ```
 
-This uses a custom image with all required mkdocs plugins.
-You should get some output that looks like this:
+### After Translation
 
-```console
-INFO     -  Documentation built in 27.56 seconds
-INFO     -  [21:52:17] Watching paths for changes: 'docs', 'mkdocs.yml'
-INFO     -  [21:52:17] Serving on http://0.0.0.0:8000/
-```
+1. Review the generated translations
+2. Check if any prompt updates are needed
+3. Submit a PR
 
-Visit <http://0.0.0.0:8000/> in your web browser to view the site.
-Pages will automatically refresh when you save changes in your editor.
+---
 
-### Python
+## How to Add a New Language
 
-If you have a recent version of Python installed, then local installation should be as simple as:
+### Step 1: Create Language Structure
+
+Use the GitHub Actions workflow or CLI:
 
 ```bash
-pip install -r requirements.txt
+cd _scripts
+uv run python docs.py new-lang <lang-code>
 ```
 
-Once installed, you can view the site by running:
+This creates:
+
+- `docs/<lang>/mkdocs.yml` - MkDocs config
+- `docs/<lang>/llm-prompt.md` - Translation prompt (requires customization)
+- `docs/<lang>/docs/.gitkeep` - Placeholder
+
+### Step 2: Customize the Translation Prompt
+
+Edit `docs/<lang>/llm-prompt.md` to define:
+
+1. **Grammar preferences**
+
+   - Formal or informal tone
+   - Regional spelling conventions
+   - Specific grammar rules
+
+2. **Glossary**
+
+   - Terms to keep in English
+   - Terms to translate (with exact translations)
+   - Common mistakes to avoid
+
+3. **Admonition titles**
+   - Translations for Note, Tip, Warning, Exercise, Solution
+
+See existing language prompts for examples (e.g., `docs/pt/llm-prompt.md`).
+
+### Step 3: Register the Language
+
+Add the language code to:
+
+1. `_scripts/docs.py` - `SUPPORTED_LANGS` list
+2. `docs/en/mkdocs.yml` - `extra.alternate` for language switcher
+3. `.github/workflows/translate.yml` - language dropdown options
+
+### Step 4: Generate Initial Translations
+
+Use GitHub Actions:
+
+1. Go to **Actions** → **Translate** → **Run workflow**
+2. Select the new language
+3. Select command: `add-missing`
+4. Filter to `hello_nextflow` for initial testing
+
+### Step 5: Review and Iterate
+
+1. Review the PR with generated translations
+2. Update `llm-prompt.md` to fix any issues
+3. Re-run translations as needed
+4. Merge when satisfied
+
+---
+
+## Directory Structure
+
+```
+docs/
+├── en/                     # English (source)
+│   ├── mkdocs.yml          # Main config
+│   ├── overrides/          # Theme customization
+│   └── docs/               # English content
+├── pt/                     # Portuguese
+│   ├── mkdocs.yml          # Inherits from en
+│   ├── llm-prompt.md       # Translation rules
+│   └── docs/               # Translated content
+├── es/                     # Spanish
+│   └── ...
+└── ...
+
+_scripts/
+├── translate.py            # Translation CLI
+├── general-llm-prompt.md   # Shared translation rules
+└── docs.py                 # Build/serve CLI
+```
+
+## CLI Reference (For Maintainers)
+
+> [!NOTE]
+> The CLI requires `ANTHROPIC_API_KEY` for translation commands.
+> Community contributors should use GitHub Actions instead.
+
+All commands run from `_scripts/` directory:
 
 ```bash
-mkdocs serve
+cd _scripts
 ```
 
-The log output will show a URL, probably <http://127.0.0.1:8000/> - open this in your browser to view the site.
-Pages will automatically refresh when you save changes in your editor.
+### List Commands (No API key required)
 
-Even though it's required that you read this document in order to contribute with translations, it's really important that you also check the [CONTRIBUTING.md](https://github.com/nextflow-io/training/blob/master/CONTRIBUTING.md) file.
+```bash
+# List files that need translation
+uv run python translate.py list-missing <lang>
 
-## Translation Glossaries
+# List translations older than English source
+uv run python translate.py list-outdated <lang>
 
-In order to keep consistency in translations, every language should have a translation glossary where common technical terms and terms related to Nextflow have an official translation to be followed by future translators. Ideally, these links should point to an online spreadsheet where anyone can comment and make suggestions, but not edit.
-
-- [Portuguese](https://docs.google.com/spreadsheets/d/1HUa3BO2kwukhX4EXQ-1blXeP5iueUdM23OwDRpfarDg/edit?usp=sharing)
-
-## Merging
-
-Aiming at a more comprehensive git history, pull request commits will be [squashed](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/about-pull-request-merges#squash-and-merge-your-commits) with a commit message outlining:
-
-- What file(s)/page(s) the PR translated (preferably, 1 PR per file)
-- What training material the translated file(s)/page(s) is/are part of
-- What language it was translated into
-
-The squashing is done by the maintainers of the GitHub repository, so if you're doing a contribution, you don't have to worry about that. This practice gives more freedom/space for contributors to get into more detail in their commit title/message without having to add the info outlined above. For example:
-
-PR: Translate to Brazilian Portuguese the Seqera Platform section of the basic training
-
-- Commit #1: Add missing translations to sections 1 and 2
-- Commit #2: Add translated image to section 3
-- Commit #3: Translate sections 4, 5 and 6
-
-Squashed commit to merge:
-
-```
-Translate to Brazilian Portuguese the Seqera Platform section of the Basic Training
-
-  - Add missing translations to sections 1 and 2
-  - Add translated image to section 3
-  - Translate sections 4, 5 and 6
+# List translated files with no English source (orphans)
+uv run python translate.py list-removable <lang>
 ```
 
-It doesn't have to explicitly state every single commit in the PR.
+### Translation Commands (Require ANTHROPIC_API_KEY)
 
-## Notes
+```bash
+# Translate a single file
+uv run python translate.py translate-page -l <lang> -p <path>
 
-In the original version in English, it happens that many keywords are written just like the words in English (`value` channel factory for value channels). When translating to other languages, it doesn't make sense to use the back ticks for the translated word, _valor_, for example, as _valor_ is not a Nextflow keyword. In such circumstances, the keyword should be placed between parenthesis with the back ticks, or the back ticks should be simply ignored for the translation.
+# Translate all missing files
+uv run python translate.py add-missing -l <lang>
+
+# Translate missing files matching pattern
+uv run python translate.py add-missing -l <lang> --include hello_nextflow
+
+# Update outdated translations (smart minimal diff)
+uv run python translate.py update-outdated -l <lang>
+
+# Update with verification pass (recommended)
+uv run python translate.py update-outdated -l <lang> --verify
+
+# Remove orphaned translations
+uv run python translate.py remove-removable -l <lang>
+```
+
+### Fix Commands (For Prompt Updates)
+
+When translation prompts are updated, use these commands to fix existing translations:
+
+```bash
+# Fix all translations for a language (multi-pass until compliant)
+uv run python translate.py fix-translations -l <lang>
+
+# Preview what would be checked (no API calls)
+uv run python translate.py fix-translations -l <lang> --dry-run
+
+# Fix specific files only
+uv run python translate.py fix-translations -l <lang> --files hello_nextflow/index.md
+
+# Customize max iterations (default: 8)
+uv run python translate.py fix-translations -l <lang> --max-iterations 5
+```
+
+The `fix-translations` command:
+
+- Reviews each translation against current prompt guidelines
+- Makes minimal changes to fix violations
+- Loops until no more changes needed (or max iterations reached)
+- Runs automatically via GitHub Actions when prompts change
+
+### Preview Commands (No API key required)
+
+```bash
+# Serve docs locally
+uv run python docs.py serve <lang>
+
+# Build docs
+uv run python docs.py build-lang <lang>
+```
+
+---
+
+## References
+
+- [FastAPI Translation System](https://github.com/fastapi/fastapi/tree/master/scripts) - Inspiration for this implementation
+- [Portuguese Glossary](https://docs.google.com/spreadsheets/d/1HUa3BO2kwukhX4EXQ-1blXeP5iueUdM23OwDRpfarDg/edit)

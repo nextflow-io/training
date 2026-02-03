@@ -58,8 +58,20 @@ def check_heading_numbering(content: str, fix: bool = False) -> Tuple[List[tuple
     fixed_lines = []
     last_depth_nums = {}
     last_level_depth = 0
+    in_code_block = False
 
     for i, line in enumerate(lines):
+        # Track code block state (``` or ~~~)
+        if line.strip().startswith("```") or line.strip().startswith("~~~"):
+            in_code_block = not in_code_block
+            fixed_lines.append(line)
+            continue
+
+        # Skip lines inside code blocks
+        if in_code_block:
+            fixed_lines.append(line)
+            continue
+
         if not is_heading(line):
             fixed_lines.append(line)
             continue

@@ -46,7 +46,9 @@ A short version for this training site is below.
 If you are used to using Docker and don't want to mess around with Python, you can run the following command to preview the site:
 
 ```bash
-docker run --rm -it -p 8000:8000 -v ${PWD}:/docs ghcr.io/nextflow-io/training-mkdocs:latest
+docker run --rm -it -p 8000:8000 -v ${PWD}:/docs \
+  -w /docs/docs/en \
+  ghcr.io/nextflow-io/training-mkdocs:latest
 ```
 
 This uses a custom image with all required mkdocs plugins.
@@ -58,41 +60,82 @@ INFO     -  [21:52:17] Watching paths for changes: 'docs', 'mkdocs.yml'
 INFO     -  [21:52:17] Serving on http://0.0.0.0:8000/
 ```
 
+> Note: The working directory is `docs/en` so paths are relative to that.
+
 Visit <http://0.0.0.0:8000/> in your web browser to view the site.
 Pages will automatically refresh when you save changes in your editor.
 
-### Python
+### Python (uv)
 
-If you have a recent version of Python installed, then local installation should be as simple as:
-
-```bash
-pip install -r requirements.txt
-```
-
-Once installed, you can view the site by running:
+If you have Python installed, we recommend using [uv](https://docs.astral.sh/uv/) to manage dependencies.
+Install uv, then run:
 
 ```bash
-mkdocs serve
+uv run _scripts/docs.py live
 ```
 
-The log output will show a URL, probably <http://127.0.0.1:8000/> - open this in your browser to view the site.
+This will automatically install all dependencies and start a local preview server.
+The log output will show a URL, probably <http://127.0.0.1:8008/> - open this in your browser to view the site.
 Pages will automatically refresh when you save changes in your editor.
 
-### Social cards
-
-If you're having trouble with the social sharing card images, set the environment variable `CARDS` to `false`:
+To build all languages:
 
 ```bash
-CARDS=false mkdocs serve
+uv run _scripts/docs.py build-all
 ```
 
-```bash
-docker run --rm -it -p 8000:8000 -e 'CARDS=false' -v ${PWD}:/docs ghcr.io/nextflow-io/training-mkdocs:latest
-```
+## Translations
+
+Training materials are available in multiple languages.
+
+> [!WARNING]
+> All translations are **generated and maintained by AI**.
+> Do not submit manual translations - they will be overwritten by automated updates.
+
+### For Readers
+
+If you find a translation error:
+
+1. Check if it's a glossary issue (wrong term used consistently)
+2. Open an issue describing: language, file, current text, expected text
+3. A maintainer will update the translation prompt and regenerate
+
+### For Contributors
+
+To improve translations, update the LLM prompts - not the translated files directly:
+
+- **Language-specific rules**: Edit `docs/<lang>/llm-prompt.md`
+- **General formatting rules**: Edit `_scripts/general-llm-prompt.md`
+
+Then use the GitHub Actions workflow to regenerate:
+
+1. Go to **Actions** → **Translate** → **Run workflow**
+2. Select the language and `translate-page` command
+3. The workflow will regenerate the translation with your prompt changes
+
+When prompts are merged to master, GitHub Actions automatically runs `fix-translations` to update all existing translations to comply with the new guidelines.
+
+### Why AI-Only?
+
+Manual translations don't scale and aren't maintainable:
+
+- They get overwritten when English content changes
+- There's no way to track intentional vs accidental differences
+- The same errors reappear in new content
+- Quality varies between contributors
+
+By using AI with carefully tuned prompts, we ensure:
+
+- Consistent terminology across all pages
+- Automatic updates when English changes
+- Reproducible, auditable translations
+- Easy fixes via prompt improvements
+
+For detailed information, see [TRANSLATING.md](TRANSLATING.md).
 
 ## Announcement banner
 
-If there is an announcement banner, you can enable and customise it using the following config in `mkdocs.yml`:
+If there is an announcement banner, you can enable and customise it using the following config in `docs/en/mkdocs.yml`:
 
 ```yaml
 extra:
@@ -103,7 +146,7 @@ extra:
     register_url: https://nf-co.re/events/2024/training-foundational-march
 ```
 
-If you need more customisation, edit `docs/assets/overrides/main.html`
+If you need more customisation, edit `docs/en/overrides/main.html`
 
 ## Figures & diagrams
 
@@ -116,7 +159,7 @@ Excalidraw SVGs should be embedded as follows:
 <!-- prettier-ignore-start -->
 ```html
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello-pipeline-channel.excalidraw.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-channel.excalidraw.svg"
 </figure>
 ```
 <!-- prettier-ignore-end -->
@@ -173,7 +216,7 @@ uv run .github/check_headings.py docs/**/*.md
 uv run .github/check_headings.py --fix docs/**/*.md
 ```
 
-Otherwise, run `pip install typer rich` then `python .github/check_headings.py`.
+Otherwise, run `uv run .github/check_headings.py` which handles dependencies automatically.
 
 The script runs automatically in CI on markdown file changes via GitHub Actions,
 and will cause a CI failure if any incorrect headings are found.
@@ -293,7 +336,7 @@ I recommend the [Todo Tree VSCode extension](https://marketplace.visualstudio.co
 
 A list of key ones also included here:
 
-- Remove plugin install from Phil's GitHub fork in `requirements.txt` and `.github/mkdocs.Dockerfile` when [this PR](https://github.com/timvink/mkdocs-enumerate-headings-plugin/pull/33) is merged
+- Remove plugin install from Phil's GitHub fork in `.github/mkdocs.Dockerfile` and `_scripts/docs.py` when [this PR](https://github.com/timvink/mkdocs-enumerate-headings-plugin/pull/33) is merged
 
 ## Preview Release
 
@@ -349,7 +392,7 @@ The script caches:
 - Built docs for your version
 - Generated TLS certificates
 
-A hash of source files (`docs/`, `mkdocs.yml`) is computed to detect changes.
+A hash of source files (`docs/en/`) is computed to detect changes.
 If you modify source files, the docs will be rebuilt automatically on the next run.
 
 Use `--clean` to delete the work directory on exit, or manually remove `.preview-release/` to force a fresh build.
