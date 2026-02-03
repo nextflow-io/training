@@ -1233,6 +1233,10 @@ nextflow run hello-channels.nf
 Interestingly, this fails too, but with a different error.
 This time Nextflow has parsed the contents of the file (yay!) but it has loaded each row as an array, and each array is an element in the channel.
 
+<figure class="excalidraw">
+--8<-- "docs/hello_nextflow/img/hello-channels-split-fail.svg"
+</figure>
+
 We need to tell it to only take the first column in each row.
 So how do we unpack this?
 
@@ -1252,10 +1256,6 @@ This is what the syntax looks like:
 ```
 
 This means 'for each row in the channel, take the 0th (first) item it contains'.
-
-<figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello-channels-split-and-map.svg"
-</figure>
 
 So let's apply that to our CSV parsing.
 
@@ -1339,7 +1339,11 @@ Looking at the output of the `view()` statements, you see the following:
 - Three separate `After splitCsv:` statements: one for each greeting, but each is contained within an array that corresponds to that line in the file.
 - Three separate `After map:` statements: one for each greeting, which are now individual elements in the channel.
 
-Note that the lines may appear in a different order in your output.
+_Note that the lines may appear in a different order in your output._
+
+<figure class="excalidraw">
+--8<-- "docs/hello_nextflow/img/hello-channels-split-and-map.svg"
+</figure>
 
 You can also look at the output files to verify that each greeting was correctly extracted and processed through the workflow.
 
