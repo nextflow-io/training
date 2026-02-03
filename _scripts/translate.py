@@ -763,15 +763,15 @@ def ci_detect(language: str | None = typer.Option(None, "--language")):
             if outdated:
                 console.print(f"  [yellow]Outdated:[/yellow] {len(outdated)}")
                 for f in outdated:
-                    console.print(f"    {f}")
+                    console.print(f"    {f.relative_path}")
             if missing:
                 console.print(f"  [green]Missing:[/green] {len(missing)}")
                 for f in missing:
-                    console.print(f"    {f}")
+                    console.print(f"    {f.relative_path}")
             if orphaned:
                 console.print(f"  [red]Orphaned:[/red] {len(orphaned)}")
                 for f in orphaned:
-                    console.print(f"    {f}")
+                    console.print(f"    {f.relative_path}")
 
     print(f"languages={json.dumps(need_sync)}")
     print(f"has_work={'true' if need_sync else 'false'}")
