@@ -793,9 +793,13 @@ Now that the `sayHello()` process is ready to accept a variable input, we need a
 ### 3.2. Set up a command-line parameter to capture user input
 
 We could simply hardcode an input directly by making the process call `sayHello('Hello World!')`.
-However, when we're doing real work with our workflow, we're going to want to be able to control its inputs from the command line.
+However, when we're doing real work with our workflow, we're going to want to be able to control its inputs from the command line, so we can do something like this:
 
-Good news: Nextflow has a built-in workflow parameter system called [`params`](https://nextflow.io/docs/latest/config.html#params), which makes it easy to declare and use CLI parameters.
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello_world_input.svg"
+</figure>
+
+Fortunately, Nextflow has a built-in workflow parameter system called [`params`](https://nextflow.io/docs/latest/config.html#params) that makes it easy to declare and use CLI parameters.
 
 The general syntax is to declare `params.<parameter_name>` to tell Nextflow to expect a `--<parameter_name>` parameter on the command line.
 
@@ -851,11 +855,7 @@ Be sure to open up the output file to check that you now have the new version of
     Bonjour le monde!
     ```
 
-Voilà!
-
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello_world_input.svg"
-</figure>
+Et voilà!
 
 Note how the new execution has overwritten the output file published to the `results` directory.
 However, the results of the previous runs are still preserved in the task directories under `work`.

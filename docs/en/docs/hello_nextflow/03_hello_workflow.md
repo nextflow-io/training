@@ -662,17 +662,18 @@ nextflow run hello-workflow.nf -resume
 It runs successfully, although the log output may look a little messier than this (we cleaned it up for readability).
 
 This time the third step was only called once!
-
 Looking at the output of the `view()` statements, we see the following:
 
 - Three `Before collect:` statements, one for each greeting: at that point the file paths are individual items in the channel.
 - A single `After collect:` statement: the three file paths are now packaged into a single element.
 
+We can summarize that with the following diagram:
+
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nextflow/img/hello-collect-WITH-operator.svg"
 </figure>
 
-Have a look at the contents of the final output file.
+Finally, you can have a look at the contents of the output file to satisfy yourself that everything worked correctly.
 
 ??? abstract "File contents"
 
@@ -683,12 +684,6 @@ Have a look at the contents of the final output file.
     ```
 
 This time we have all three greetings in the final output file. Success!
-
-To recap, this is what we've built so far:
-
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-collect.svg"
-</figure>
 
 !!! note
 
@@ -722,6 +717,12 @@ This is basically the reverse operation from point 2.4.2.
 ### Takeaway
 
 You know how to collect outputs from a batch of process calls and feed them into a joint analysis or summation step.
+
+To recap, this is what you've built so far:
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect.svg"
+</figure>
 
 ### What's next?
 
