@@ -91,22 +91,6 @@ class TranslationFile:
         return self.en_path.relative_to(EN_DOCS)
 
 
-@dataclass
-class WorkPlan:
-    """Work to be done for translation."""
-
-    outdated: dict[str, list[TranslationFile]]  # lang -> files
-    fix_prompts: list[str]  # languages needing fix due to prompt changes
-
-    @property
-    def has_work(self) -> bool:
-        return bool(self.outdated) or bool(self.fix_prompts)
-
-    @property
-    def all_languages(self) -> set[str]:
-        return set(self.outdated.keys()) | set(self.fix_prompts)
-
-
 # =============================================================================
 # Path utilities
 # =============================================================================
@@ -392,51 +376,24 @@ def post_process_language(lang: str, console: Console) -> int:
     return fixed
 
 
-# =============================================================================
-# Work detection (for CI)
-# =============================================================================
-
-
-def detect_work(
-    event_name: str,
-    command: str = "auto",
-    language: str | None = None,
-    before_sha: str | None = None,
-    after_sha: str | None = None,
-) -> WorkPlan:
-    """Detect what translation work needs to be done."""
+def get_languages_needing_sync(language: str | None = None) -> list[str]:
+    """Get languages that have work to do (missing, outdated, or orphaned files)."""
     all_langs = get_translation_languages()
 
-    if language and language not in all_langs:
-        raise ConfigError(f"Unknown language: {language}. Available: {all_langs}")
+    if language:
+        if language not in all_langs:
+            raise ConfigError(f"Unknown language: {language}. Available: {all_langs}")
+        langs = [language]
+    else:
+        langs = all_langs
 
-    # For explicit commands, just return the requested scope
-    if command != "auto":
-        langs = [language] if language else all_langs
-        return WorkPlan(outdated={lang: [] for lang in langs}, fix_prompts=[])
-
-    # Auto mode: detect what's needed
-    outdated: dict[str, list[TranslationFile]] = {}
-    fix_prompts: list[str] = []
-
-    # Check for prompt changes on push
-    if event_name == "push" and before_sha and after_sha:
-        changed = get_changed_files(before_sha, after_sha)
-        if "_scripts/general-llm-prompt.md" in changed:
-            fix_prompts = all_langs
-        else:
-            for lang in all_langs:
-                if f"docs/{lang}/llm-prompt.md" in changed:
-                    fix_prompts.append(lang)
-
-    # Check for outdated files
-    check_langs = [language] if language else all_langs
-    for lang in check_langs:
-        files = get_outdated_files(lang)
-        if files:
-            outdated[lang] = files
-
-    return WorkPlan(outdated=outdated, fix_prompts=fix_prompts)
+    return [
+        lang
+        for lang in langs
+        if get_missing_files(lang)
+        or get_outdated_files(lang)
+        or get_orphaned_files(lang)
+    ]
 
 
 # =============================================================================
@@ -470,92 +427,70 @@ def translate(
     console.print(f"[green]Done:[/green] {tf.lang_path}")
 
 
-@app.command("list-missing")
-def list_missing(lang: str = typer.Argument(..., help="Language code")):
-    """List files missing translations."""
-    missing = get_missing_files(lang)
-    if not missing:
-        console.print(f"[green]All files translated for {lang}[/green]")
-        return
-
-    console.print(f"[yellow]Missing {len(missing)} translations for {lang}:[/yellow]")
-    for tf in missing:
-        console.print(f"  {tf.relative_path}")
-
-
-@app.command("list-outdated")
-def list_outdated(lang: str = typer.Argument(..., help="Language code")):
-    """List translations older than their English source."""
-    outdated = get_outdated_files(lang)
-    if not outdated:
-        console.print(f"[green]All translations up-to-date for {lang}[/green]")
-        return
-
-    console.print(f"[yellow]Outdated {len(outdated)} translations for {lang}:[/yellow]")
-    for tf in outdated:
-        console.print(f"  {tf.relative_path}")
-
-
-@app.command("list-orphaned")
-def list_orphaned(lang: str = typer.Argument(..., help="Language code")):
-    """List translation files without English source."""
-    orphaned = get_orphaned_files(lang)
-    if not orphaned:
-        console.print(f"[green]No orphaned files for {lang}[/green]")
-        return
-
-    console.print(f"[yellow]Orphaned {len(orphaned)} files for {lang}:[/yellow]")
-    for p in orphaned:
-        console.print(f"  {p.relative_to(REPO_ROOT)}")
-
-
 @app.command()
 def sync(
     lang: str = typer.Argument(..., help="Language code"),
     include: str | None = typer.Option(None, "--include", "-i", help="Filter pattern"),
-    missing: bool = typer.Option(True, help="Add missing translations"),
-    outdated: bool = typer.Option(True, help="Update outdated translations"),
-    remove_orphaned: bool = typer.Option(
-        False, "--remove-orphaned", help="Remove orphaned files"
+    dry_run: bool = typer.Option(
+        False, "--dry-run", "-n", help="Show what would be done"
     ),
 ):
-    """Sync translations: update outdated, add missing, optionally remove orphaned."""
+    """Sync translations: update outdated, add missing, remove orphaned."""
+    orphaned_files = get_orphaned_files(lang)
+    outdated_files = get_outdated_files(lang)
+    missing_files = get_missing_files(lang)
+
+    if include:
+        outdated_files = [tf for tf in outdated_files if include in str(tf.en_path)]
+        missing_files = [tf for tf in missing_files if include in str(tf.en_path)]
+
+    if dry_run:
+        if orphaned_files:
+            console.print(f"[red]Would remove {len(orphaned_files)} orphaned:[/red]")
+            for p in orphaned_files:
+                console.print(f"  {p.relative_to(REPO_ROOT)}")
+        if outdated_files:
+            console.print(
+                f"[yellow]Would update {len(outdated_files)} outdated:[/yellow]"
+            )
+            for tf in outdated_files:
+                console.print(f"  {tf.relative_path}")
+        if missing_files:
+            console.print(f"[blue]Would add {len(missing_files)} missing:[/blue]")
+            for tf in missing_files:
+                console.print(f"  {tf.relative_path}")
+        if not (orphaned_files or outdated_files or missing_files):
+            console.print(f"[green]Nothing to do for {lang}[/green]")
+        return
+
     check_api_key()
 
+    # Remove orphaned
+    if orphaned_files:
+        console.print(f"[bold]Removing {len(orphaned_files)} orphaned files...[/bold]")
+        for p in orphaned_files:
+            p.unlink()
+            console.print(f"  [red]Removed:[/red] {p.relative_to(REPO_ROOT)}")
+
     # Update outdated
-    if outdated:
-        files = get_outdated_files(lang)
-        if include:
-            files = [tf for tf in files if include in str(tf.en_path)]
-        if files:
-            console.print(
-                f"[bold]Updating {len(files)} outdated translations...[/bold]"
-            )
-            for i, tf in enumerate(files, 1):
-                console.print(f"[{i}/{len(files)}]", end="")
-                translate_file(tf, console)
-                post_process_file(tf.lang_path, lang)
+    if outdated_files:
+        console.print(
+            f"[bold]Updating {len(outdated_files)} outdated translations...[/bold]"
+        )
+        for i, tf in enumerate(outdated_files, 1):
+            console.print(f"[{i}/{len(outdated_files)}]", end="")
+            translate_file(tf, console)
+            post_process_file(tf.lang_path, lang)
 
     # Add missing
-    if missing:
-        files = get_missing_files(lang)
-        if include:
-            files = [tf for tf in files if include in str(tf.en_path)]
-        if files:
-            console.print(f"[bold]Adding {len(files)} missing translations...[/bold]")
-            for i, tf in enumerate(files, 1):
-                console.print(f"[{i}/{len(files)}]", end="")
-                translate_file(tf, console)
-                post_process_file(tf.lang_path, lang)
-
-    # Remove orphaned
-    if remove_orphaned:
-        orphaned = get_orphaned_files(lang)
-        if orphaned:
-            console.print(f"[bold]Removing {len(orphaned)} orphaned files...[/bold]")
-            for p in orphaned:
-                p.unlink()
-                console.print(f"  [red]Removed:[/red] {p.relative_to(REPO_ROOT)}")
+    if missing_files:
+        console.print(
+            f"[bold]Adding {len(missing_files)} missing translations...[/bold]"
+        )
+        for i, tf in enumerate(missing_files, 1):
+            console.print(f"[{i}/{len(missing_files)}]", end="")
+            translate_file(tf, console)
+            post_process_file(tf.lang_path, lang)
 
     console.print("[green]Sync complete[/green]")
 
@@ -588,82 +523,29 @@ def post_process_cmd(
 
 @app.command("ci-detect")
 def ci_detect(
-    event_name: str = typer.Option(..., "--event-name"),
-    command: str = typer.Option("auto", "--command"),
     language: str | None = typer.Option(None, "--language"),
-    before_sha: str | None = typer.Option(None, "--before-sha"),
-    after_sha: str | None = typer.Option(None, "--after-sha"),
 ):
-    """Detect work needed (outputs GitHub Actions format)."""
-    plan = detect_work(event_name, command, language, before_sha, after_sha)
-
-    # Output for GitHub Actions
-    outdated_langs = list(plan.outdated.keys())
-    print(f"languages_outdated={json.dumps(outdated_langs)}")
-    print(f"languages_fix={json.dumps(plan.fix_prompts)}")
-    print(f"has_work={'true' if plan.has_work else 'false'}")
-    print(f"command={command}")
+    """Detect languages needing sync (outputs GitHub Actions format)."""
+    langs = get_languages_needing_sync(language)
+    print(f"languages={json.dumps(langs)}")
+    print(f"has_work={'true' if langs else 'false'}")
 
 
 @app.command("ci-run")
 def ci_run(
-    command: str = typer.Option("auto", "--command"),
-    languages_outdated: str = typer.Option("[]", "--languages-outdated"),
-    languages_fix: str = typer.Option("[]", "--languages-fix"),
+    languages: str = typer.Option("[]", "--languages"),
+    dry_run: bool = typer.Option(False, "--dry-run"),
 ):
-    """Run translation batch (for CI)."""
-    check_api_key()
+    """Run translation sync for CI."""
+    langs: list[str] = json.loads(languages)
 
-    outdated_langs: list[str] = json.loads(languages_outdated)
-    fix_langs: list[str] = json.loads(languages_fix)
-
-    console.print(f"Command: {command}")
-    console.print(f"Outdated languages: {outdated_langs}")
-    console.print(f"Fix languages: {fix_langs}")
-
-    # Handle list commands (no API needed)
-    if command.startswith("list-"):
-        for lang in outdated_langs or fix_langs:
-            console.rule(f"[bold]{lang}[/bold]")
-            if command == "list-outdated":
-                list_outdated(lang)
-            elif command == "list-missing":
-                list_missing(lang)
-            elif command == "list-orphaned":
-                list_orphaned(lang)
-        return
-
-    # Process outdated translations
-    for lang in outdated_langs:
-        console.rule(f"[bold]Updating {lang}[/bold]")
-        if command in ("auto", "sync"):
-            for tf in get_outdated_files(lang):
-                translate_file(tf, console)
-            for tf in get_missing_files(lang):
-                translate_file(tf, console)
-
-    # Fix translations for languages with prompt changes
-    for lang in fix_langs:
-        console.rule(f"[bold]Fixing {lang}[/bold]")
-        # Re-translate all files when prompts change
-        for tf in [
-            TranslationFile(en, en_to_lang_path(en, lang), lang)
-            for en in iter_en_docs()
-            if en_to_lang_path(en, lang).exists()
-        ]:
-            translate_file(tf, console)
-
-    # Post-process all affected languages
-    all_langs = set(outdated_langs) | set(fix_langs)
-    for lang in all_langs:
-        console.rule(f"[bold]Post-processing {lang}[/bold]")
-        post_process_language(lang, console)
+    for lang in langs:
+        console.rule(f"[bold]{lang}[/bold]")
+        sync(lang, include=None, dry_run=dry_run)
 
 
 @app.command("ci-pr")
 def ci_pr(
-    command: str | None = typer.Option(None, "--command"),
-    language: str | None = typer.Option(None, "--language"),
     github_token: str = typer.Option(..., envvar="GITHUB_TOKEN"),
     github_repository: str = typer.Option(..., envvar="GITHUB_REPOSITORY"),
 ):
@@ -688,29 +570,24 @@ def ci_pr(
     )
 
     # Create branch and commit
-    branch = f"translate-{language or 'all'}-{command or 'sync'}-{secrets.token_hex(4)}"
+    branch = f"translate-{secrets.token_hex(4)}"
     subprocess.run(["git", "checkout", "-b", branch], check=True, cwd=REPO_ROOT)
     subprocess.run(["git", "add", "docs/"], check=True, cwd=REPO_ROOT)
 
     msg = "Update translations"
-    if language:
-        msg += f" for {language}"
-    if command:
-        msg += f" ({command})"
-
     subprocess.run(["git", "commit", "-m", msg], check=True, cwd=REPO_ROOT)
     subprocess.run(["git", "push", "origin", branch], check=True, cwd=REPO_ROOT)
 
     # Create PR
     g = Github(github_token)
     gh_repo = g.get_repo(github_repository)
-    body = f"""{msg}
+    body = """Update translations
 
 This PR was created automatically using LLM translation.
 
 To improve translations, edit the prompt files rather than individual translations:
 - General: `_scripts/general-llm-prompt.md`
-- Language-specific: `docs/{language or "*"}/llm-prompt.md`
+- Language-specific: `docs/*/llm-prompt.md`
 """
 
     pr = gh_repo.create_pull(title=msg, body=body, base="master", head=branch)

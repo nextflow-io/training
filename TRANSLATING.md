@@ -404,39 +404,20 @@ All commands run from `_scripts/` directory:
 cd _scripts
 ```
 
-### List Commands (No API key required)
+### Translation Commands
 
 ```bash
-# List files that need translation
-uv run translate.py list-missing <lang>
+# Preview what sync would do (no API key required)
+uv run translate.py sync <lang> --dry-run
 
-# List translations older than English source
-uv run translate.py list-outdated <lang>
-
-# List translated files with no English source (orphans)
-uv run translate.py list-orphaned <lang>
-```
-
-### Translation Commands (Require ANTHROPIC_API_KEY)
-
-```bash
-# Translate a single file
-uv run translate.py translate <path> --lang <lang>
-
-# Sync all translations (update outdated + add missing)
+# Sync all translations (update outdated + add missing + remove orphaned)
 uv run translate.py sync <lang>
 
 # Sync with filter pattern
 uv run translate.py sync <lang> --include hello_nextflow
 
-# Only update outdated (skip missing)
-uv run translate.py sync <lang> --no-missing
-
-# Only add missing (skip outdated)
-uv run translate.py sync <lang> --no-outdated
-
-# Remove orphaned translations during sync
-uv run translate.py sync <lang> --remove-orphaned
+# Translate a single file
+uv run translate.py translate <path> --lang <lang>
 ```
 
 ### Post-Processing Commands

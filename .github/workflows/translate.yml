@@ -14,27 +14,18 @@ on:
   workflow_dispatch:
     inputs:
       language:
-        description: "Language code (empty = all with changes)"
+        description: "Language code (empty = all)"
         type: string
-      command:
-        description: "Command"
-        required: true
-        default: "auto"
-        type: choice
-        options:
-          - auto
-          - list-outdated
-          - list-missing
-          - list-orphaned
-          - sync
+      dry_run:
+        description: "Dry run (preview only)"
+        type: boolean
+        default: false
 
 jobs:
   detect:
     runs-on: ubuntu-latest
     outputs:
-      languages_outdated: ${{ steps.detect.outputs.languages_outdated }}
-      languages_fix: ${{ steps.detect.outputs.languages_fix }}
-      command: ${{ steps.detect.outputs.command }}
+      languages: ${{ steps.detect.outputs.languages }}
       has_work: ${{ steps.detect.outputs.has_work }}
     steps:
       - uses: actions/checkout@v4
@@ -47,13 +38,8 @@ jobs:
         id: detect
         working-directory: _scripts
         run: |
-          COMMAND="${{ github.event_name == 'push' && 'auto' || inputs.command }}"
           uv run translate.py ci-detect \
-            --event-name "${{ github.event_name }}" \
-            --command "$COMMAND" \
             ${{ inputs.language && format('--language "{0}"', inputs.language) || '' }} \
-            ${{ github.event.before && format('--before-sha "{0}"', github.event.before) || '' }} \
-            ${{ github.event.sha && format('--after-sha "{0}"', github.event.sha) || '' }} \
             >> $GITHUB_OUTPUT
 
   translate:
@@ -74,15 +60,14 @@ jobs:
         working-directory: _scripts
         run: |
           uv run translate.py ci-run \
-            --command "${{ needs.detect.outputs.command }}" \
-            --languages-outdated '${{ needs.detect.outputs.languages_outdated }}' \
-            --languages-fix '${{ needs.detect.outputs.languages_fix }}'
+            --languages '${{ needs.detect.outputs.languages }}' \
+            ${{ inputs.dry_run && '--dry-run' || '' }}
 
       - name: Create PR
-        if: ${{ !startsWith(needs.detect.outputs.command, 'list-') }}
+        if: ${{ !inputs.dry_run }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
         working-directory: _scripts
         run: |
-          uv run translate.py ci-pr --command "${{ needs.detect.outputs.command }}"
+          uv run translate.py ci-pr
